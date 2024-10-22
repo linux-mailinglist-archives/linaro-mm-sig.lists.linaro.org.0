@@ -2,318 +2,125 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 87C599A98D4
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 22 Oct 2024 07:45:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DFFD89AB3B1
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 22 Oct 2024 18:19:25 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9406444B41
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 22 Oct 2024 05:45:05 +0000 (UTC)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id B191F3F638
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 22 Oct 2024 05:44:58 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D337A44A3D
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 22 Oct 2024 16:19:24 +0000 (UTC)
+Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com [209.85.218.52])
+	by lists.linaro.org (Postfix) with ESMTPS id 32ABE3F56A
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 22 Oct 2024 16:19:18 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=CljLVCBW;
-	spf=pass (lists.linaro.org: domain of krzk@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=krzk@kernel.org;
-	dmarc=pass (policy=quarantine) header.from=kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by dfw.source.kernel.org (Postfix) with ESMTP id A29475C5CFD;
-	Tue, 22 Oct 2024 05:44:53 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 31C3BC4CEC3;
-	Tue, 22 Oct 2024 05:44:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1729575897;
-	bh=fwAB4lN4ySrOldfC1ebFo4dTdh5jfFE8TRdPDvEge3c=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=CljLVCBW6toX501JM+W1HWb2ASiYzOPDhD/rRsnvm8K34UG3L+yaqi01WA/z50xhM
-	 kiW/qPCE2Eb03IeWidN8/x1fDherJd5Cme0SNchukqpmJ9P0G1BX/IKwrsaB11Ia7d
-	 Ximv4EwHSc+EKTK+kyO+SagGOQ9iXAJN2PTTwVvTcUFZFidTv03YMk2xO53tbA0apt
-	 v0ayYAhO4kEP42Y/IILYSy9o4QSJCw0GpL5C5dAH/h2+K3s2f02RFtVdxtUqUV4N04
-	 eMTs6m0Vts6swSoN0zPtI/rLsZ0Im4irMhll5A30f3U5rh+3zD1eSWK3bQ5eIqcb1y
-	 sSXxgLpGQXNyg==
-Message-ID: <abe77aed-c777-4892-9fce-aaad508700f6@kernel.org>
-Date: Tue, 22 Oct 2024 07:44:46 +0200
+	dkim=pass header.d=google.com header.s=20230601 header.b=kD4wAZ0x;
+	spf=pass (lists.linaro.org: domain of jstultz@google.com designates 209.85.218.52 as permitted sender) smtp.mailfrom=jstultz@google.com;
+	dmarc=pass (policy=reject) header.from=google.com
+Received: by mail-ej1-f52.google.com with SMTP id a640c23a62f3a-a99ebb390a5so1256660566b.1
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 22 Oct 2024 09:19:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1729613957; x=1730218757; darn=lists.linaro.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=O010jrXbVVYc/oBTmTv82BWnbf0mEg5IgHol5Aj0+vg=;
+        b=kD4wAZ0xn/olbujBvSTRtHpUn6BtETRIqhj+ItArxCaSJjPLzS8DFiMbh0knCwoD3I
+         gfyCZlLBylPyW9dsW0lFhf7wGPF8y/G0WI47nLo5OHC3F9nK0NnaJZCcI0M8IIJfq9xg
+         n+sq/UhACNc2npGXS03b9nnvwuixk3GEcOD46LKeG4Sw/pjR8Nf+dLDopszaQd9UGFzZ
+         uvCaK2OAqxTRX67x2LoF5AvRygcNZYZjksi3/gwuCCb7chHhUT9cdl3dymV8FKTXPU+d
+         w8ztApX7JFeAE5QWPyTPocvzlLlZE2K4XpA/F5pgfchQn8Y6pCZY/6+sntZueWu4dvrR
+         sSFw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1729613957; x=1730218757;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=O010jrXbVVYc/oBTmTv82BWnbf0mEg5IgHol5Aj0+vg=;
+        b=pVT1eY0GpSp7iEj59cx0k57I/wuz+ZV/pdc1S3yuuci1W03gjCTPEuyEJVoGJrsztx
+         +17mKtZwoaCulAMZB5bg3xbjl7yiySQ1t3eWyj2pzimlj/lk63ofJXfFoNjVxmvmjnwi
+         V+8oW2gvowZKhJBdkZZaAexvEHovfpK65w4L9jzfUfiP+HcMUJ5DdFkvU2Gxqb9TShqr
+         A04S6NDTrbZET/uS24z9WmTp2IZXc9VJ7wcEInXLRe3odapl2APi0LwLKhyj3c+KKfU3
+         oF/TvKm2CQpQThv4J9Q4DslHNJTj6QQcD2rVYYRlKerNzoilTzmahEOhd1ISvIYabawT
+         za4g==
+X-Forwarded-Encrypted: i=1; AJvYcCUpaz9VeqXu6lsjG3BhETxCVVFrVA3FSAZM3VtcEkl2Ms6AM0rFwAXsZzN8LeVLYZfZriossnN0kFjEcW1q@lists.linaro.org
+X-Gm-Message-State: AOJu0YyoYU3cK9s9Org50ku93QdXIw1OZiqgmX46p1f5juuiK4Db8Eu/
+	63tyfEa8BS9CSnnkE21IZFt5GllQUB9MbSB3kq/bFV873IYB6c7jysF8axDcs2se3Eg8EhFQyaW
+	6p1IjyBrTc5sNHh4vmn38L7W8h5fBkuGtsnQ=
+X-Google-Smtp-Source: AGHT+IE2UWF9akIjKN3CLcsBih/tjrcN+DK2fnaCGfTRq+l4mjlUsUQFO0mOXVfH5O+jRzv/E6HKLsTurAdaP0J2Ixw=
+X-Received: by 2002:a17:907:6096:b0:a9a:4b51:9e7 with SMTP id
+ a640c23a62f3a-a9aaa53a59amr424231966b.16.1729613956687; Tue, 22 Oct 2024
+ 09:19:16 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Shu-hsiang Yang <Shu-hsiang.Yang@mediatek.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Matthias Brugger <matthias.bgg@gmail.com>,
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
- Sumit Semwal <sumit.semwal@linaro.org>,
- Christian Konig <christian.koenig@amd.com>
-References: <20241009111551.27052-1-Shu-hsiang.Yang@mediatek.com>
- <20241009111551.27052-6-Shu-hsiang.Yang@mediatek.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- xsFNBFVDQq4BEAC6KeLOfFsAvFMBsrCrJ2bCalhPv5+KQF2PS2+iwZI8BpRZoV+Bd5kWvN79
- cFgcqTTuNHjAvxtUG8pQgGTHAObYs6xeYJtjUH0ZX6ndJ33FJYf5V3yXqqjcZ30FgHzJCFUu
- JMp7PSyMPzpUXfU12yfcRYVEMQrmplNZssmYhiTeVicuOOypWugZKVLGNm0IweVCaZ/DJDIH
- gNbpvVwjcKYrx85m9cBVEBUGaQP6AT7qlVCkrf50v8bofSIyVa2xmubbAwwFA1oxoOusjPIE
- J3iadrwpFvsZjF5uHAKS+7wHLoW9hVzOnLbX6ajk5Hf8Pb1m+VH/E8bPBNNYKkfTtypTDUCj
- NYcd27tjnXfG+SDs/EXNUAIRefCyvaRG7oRYF3Ec+2RgQDRnmmjCjoQNbFrJvJkFHlPeHaeS
- BosGY+XWKydnmsfY7SSnjAzLUGAFhLd/XDVpb1Een2XucPpKvt9ORF+48gy12FA5GduRLhQU
- vK4tU7ojoem/G23PcowM1CwPurC8sAVsQb9KmwTGh7rVz3ks3w/zfGBy3+WmLg++C2Wct6nM
- Pd8/6CBVjEWqD06/RjI2AnjIq5fSEH/BIfXXfC68nMp9BZoy3So4ZsbOlBmtAPvMYX6U8VwD
- TNeBxJu5Ex0Izf1NV9CzC3nNaFUYOY8KfN01X5SExAoVTr09ewARAQABzSVLcnp5c3p0b2Yg
- S296bG93c2tpIDxrcnprQGtlcm5lbC5vcmc+wsGVBBMBCgA/AhsDBgsJCAcDAgYVCAIJCgsE
- FgIDAQIeAQIXgBYhBJvQfg4MUfjVlne3VBuTQ307QWKbBQJgPO8PBQkUX63hAAoJEBuTQ307
- QWKbBn8P+QFxwl7pDsAKR1InemMAmuykCHl+XgC0LDqrsWhAH5TYeTVXGSyDsuZjHvj+FRP+
- gZaEIYSw2Yf0e91U9HXo3RYhEwSmxUQ4Fjhc9qAwGKVPQf6YuQ5yy6pzI8brcKmHHOGrB3tP
- /MODPt81M1zpograAC2WTDzkICfHKj8LpXp45PylD99J9q0Y+gb04CG5/wXs+1hJy/dz0tYy
- iua4nCuSRbxnSHKBS5vvjosWWjWQXsRKd+zzXp6kfRHHpzJkhRwF6ArXi4XnQ+REnoTfM5Fk
- VmVmSQ3yFKKePEzoIriT1b2sXO0g5QXOAvFqB65LZjXG9jGJoVG6ZJrUV1MVK8vamKoVbUEe
- 0NlLl/tX96HLowHHoKhxEsbFzGzKiFLh7hyboTpy2whdonkDxpnv/H8wE9M3VW/fPgnL2nPe
- xaBLqyHxy9hA9JrZvxg3IQ61x7rtBWBUQPmEaK0azW+l3ysiNpBhISkZrsW3ZUdknWu87nh6
- eTB7mR7xBcVxnomxWwJI4B0wuMwCPdgbV6YDUKCuSgRMUEiVry10xd9KLypR9Vfyn1AhROrq
- AubRPVeJBf9zR5UW1trJNfwVt3XmbHX50HCcHdEdCKiT9O+FiEcahIaWh9lihvO0ci0TtVGZ
- MCEtaCE80Q3Ma9RdHYB3uVF930jwquplFLNF+IBCn5JRzsFNBFVDXDQBEADNkrQYSREUL4D3
- Gws46JEoZ9HEQOKtkrwjrzlw/tCmqVzERRPvz2Xg8n7+HRCrgqnodIYoUh5WsU84N03KlLue
- MNsWLJBvBaubYN4JuJIdRr4dS4oyF1/fQAQPHh8Thpiz0SAZFx6iWKB7Qrz3OrGCjTPcW6ei
- OMheesVS5hxietSmlin+SilmIAPZHx7n242u6kdHOh+/SyLImKn/dh9RzatVpUKbv34eP1wA
- GldWsRxbf3WP9pFNObSzI/Bo3kA89Xx2rO2roC+Gq4LeHvo7ptzcLcrqaHUAcZ3CgFG88CnA
- 6z6lBZn0WyewEcPOPdcUB2Q7D/NiUY+HDiV99rAYPJztjeTrBSTnHeSBPb+qn5ZZGQwIdUW9
- YegxWKvXXHTwB5eMzo/RB6vffwqcnHDoe0q7VgzRRZJwpi6aMIXLfeWZ5Wrwaw2zldFuO4Dt
- 91pFzBSOIpeMtfgb/Pfe/a1WJ/GgaIRIBE+NUqckM+3zJHGmVPqJP/h2Iwv6nw8U+7Yyl6gU
- BLHFTg2hYnLFJI4Xjg+AX1hHFVKmvl3VBHIsBv0oDcsQWXqY+NaFahT0lRPjYtrTa1v3tem/
- JoFzZ4B0p27K+qQCF2R96hVvuEyjzBmdq2esyE6zIqftdo4MOJho8uctOiWbwNNq2U9pPWmu
- 4vXVFBYIGmpyNPYzRm0QPwARAQABwsF8BBgBCgAmAhsMFiEEm9B+DgxR+NWWd7dUG5NDfTtB
- YpsFAmA872oFCRRflLYACgkQG5NDfTtBYpvScw/9GrqBrVLuJoJ52qBBKUBDo4E+5fU1bjt0
- Gv0nh/hNJuecuRY6aemU6HOPNc2t8QHMSvwbSF+Vp9ZkOvrM36yUOufctoqON+wXrliEY0J4
- ksR89ZILRRAold9Mh0YDqEJc1HmuxYLJ7lnbLYH1oui8bLbMBM8S2Uo9RKqV2GROLi44enVt
- vdrDvo+CxKj2K+d4cleCNiz5qbTxPUW/cgkwG0lJc4I4sso7l4XMDKn95c7JtNsuzqKvhEVS
- oic5by3fbUnuI0cemeizF4QdtX2uQxrP7RwHFBd+YUia7zCcz0//rv6FZmAxWZGy5arNl6Vm
- lQqNo7/Poh8WWfRS+xegBxc6hBXahpyUKphAKYkah+m+I0QToCfnGKnPqyYIMDEHCS/RfqA5
- t8F+O56+oyLBAeWX7XcmyM6TGeVfb+OZVMJnZzK0s2VYAuI0Rl87FBFYgULdgqKV7R7WHzwD
- uZwJCLykjad45hsWcOGk3OcaAGQS6NDlfhM6O9aYNwGL6tGt/6BkRikNOs7VDEa4/HlbaSJo
- 7FgndGw1kWmkeL6oQh7wBvYll2buKod4qYntmNKEicoHGU+x91Gcan8mCoqhJkbqrL7+nXG2
- 5Q/GS5M9RFWS+nYyJh+c3OcfKqVcZQNANItt7+ULzdNJuhvTRRdC3g9hmCEuNSr+CLMdnRBY fv0=
-In-Reply-To: <20241009111551.27052-6-Shu-hsiang.Yang@mediatek.com>
-X-Spamd-Result: default: False [-3.50 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	RBL_SENDERSCORE_REPUT_9(-1.00)[139.178.84.217:from];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+References: <20241022-macaw-of-spectacular-joy-8dcefa@houat>
+In-Reply-To: <20241022-macaw-of-spectacular-joy-8dcefa@houat>
+From: John Stultz <jstultz@google.com>
+Date: Tue, 22 Oct 2024 09:19:05 -0700
+Message-ID: <CANDhNCoLgzy=CPBWjBKLiJzRdnf=SS3AgtFJNB-CBYAo=UEQJA@mail.gmail.com>
+To: Maxime Ripard <mripard@redhat.com>
+X-Spamd-Result: default: False [-2.55 / 15.00];
+	BAYES_HAM(-2.95)[99.78%];
+	RBL_SENDERSCORE_REPUT_7(0.50)[209.85.218.52:from];
+	BAD_REP_POLICIES(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[22];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.218.52:from];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_RCPT(0.00)[dt];
-	MID_RHS_MATCH_FROM(0.00)[];
+	MISSING_XM_UA(0.00)[];
 	TO_DN_SOME(0.00)[];
+	ARC_NA(0.00)[];
+	RCVD_COUNT_ONE(0.00)[1];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	R_SPF_ALLOW(0.00)[+ip4:209.85.128.0/17];
+	DMARC_POLICY_ALLOW(0.00)[google.com,reject];
+	R_DKIM_ALLOW(0.00)[google.com:s=20230601];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FREEMAIL_TO(0.00)[mediatek.com,kernel.org,gmail.com,collabora.com,linaro.org,amd.com];
+	RCPT_COUNT_SEVEN(0.00)[10];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	DKIM_TRACE(0.00)[kernel.org:+]
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	DKIM_TRACE(0.00)[google.com:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: B191F3F638
-X-Spamd-Bar: ---
-Message-ID-Hash: I6RSSG2RCJ7DGGBB2WO5CGV2QW26W46V
-X-Message-ID-Hash: I6RSSG2RCJ7DGGBB2WO5CGV2QW26W46V
-X-MailFrom: krzk@kernel.org
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: linux-media@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Project_Global_Chrome_Upstream_Group@mediatek.com, yaya.chang@mediatek.com, teddy.chen@mediatek.com, hidenorik@chromium.org, yunkec@chromium.org, shun-yi.wang@mediatek.com
+X-Rspamd-Queue-Id: 32ABE3F56A
+X-Spamd-Bar: --
+Message-ID-Hash: 6SRT3CTIXGHNKYZQVPKHXW4R475RDOJL
+X-Message-ID-Hash: 6SRT3CTIXGHNKYZQVPKHXW4R475RDOJL
+X-MailFrom: jstultz@google.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, "T.J. Mercier" <tjmercier@google.com>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v1 05/10] media: platform: mediatek: add isp_7x camsys unit
+Subject: [Linaro-mm-sig] Re: Requirements to merge new heaps in the kernel
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/I6RSSG2RCJ7DGGBB2WO5CGV2QW26W46V/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6SRT3CTIXGHNKYZQVPKHXW4R475RDOJL/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On 09/10/2024 13:15, Shu-hsiang Yang wrote:
-> Introduces the top media device driver for the MediaTek ISP7X CAMSYS.
-> The driver maintains the camera system, including sub-device management,
-> DMA operations, and integration with the V4L2 framework. It handles
-> request stream data, buffer management, and MediaTek-specific features,
-> and pipeline management, streaming control, error handling mechanism.
-> Additionally, it aggregates sub-drivers for the camera interface, raw
-> and yuv pipelines.
-> 
-> Signed-off-by: Shu-hsiang Yang <Shu-hsiang.Yang@mediatek.com>
-
-...
-
-> +
-> +static int mtk_cam_probe(struct platform_device *pdev)
-> +{
-> +	struct mtk_cam_device *cam_dev;
-> +	struct device *dev = &pdev->dev;
-> +	struct resource *res;
-> +	int ret;
-> +	unsigned int i;
-> +
-> +	dev_dbg(dev, "camsys | start %s\n", __func__);
-
-NAK. Same issues.
-
-> +
-> +	/* initialize structure */
-> +	cam_dev = devm_kzalloc(dev, sizeof(*cam_dev), GFP_KERNEL);
-> +	if (!cam_dev)
-> +		return -ENOMEM;
-> +
-> +	if (dma_set_mask_and_coherent(dev, DMA_BIT_MASK(34))) {
-> +		dev_err(dev, "%s: No suitable DMA available\n", __func__);
-> +		return -EIO;
-> +	}
-> +
-> +	if (!dev->dma_parms) {
-> +		dev->dma_parms =
-> +			devm_kzalloc(dev, sizeof(*dev->dma_parms), GFP_KERNEL);
-> +		if (!dev->dma_parms)
-> +			return -ENOMEM;
-> +	}
-> +
-> +	dma_set_max_seg_size(dev, UINT_MAX);
-> +
-> +	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
-> +	if (!res) {
-> +		dev_err(dev, "failed to get mem\n");
-> +		return -ENODEV;
-> +	}
-> +
-> +	cam_dev->base = devm_ioremap_resource(dev, res);
-> +	if (IS_ERR(cam_dev->base)) {
-> +		dev_err(dev, "failed to map register base\n");
-> +		return PTR_ERR(cam_dev->base);
-> +	}
-> +
-> +	cam_dev->dev = dev;
-> +	dev_set_drvdata(dev, cam_dev);
-> +
-> +	cam_dev->composer_cnt = 0;
-> +	cam_dev->num_seninf_devices = 0;
-> +
-> +	cam_dev->max_stream_num = MTKCAM_SUBDEV_MAX;
-> +	cam_dev->ctxs = devm_kcalloc(dev, cam_dev->max_stream_num,
-> +				     sizeof(*cam_dev->ctxs), GFP_KERNEL);
-> +	if (!cam_dev->ctxs)
-> +		return -ENOMEM;
-> +
-> +	cam_dev->streaming_ctx = 0;
-> +	for (i = 0; i < cam_dev->max_stream_num; i++)
-> +		mtk_cam_ctx_init(cam_dev->ctxs + i, cam_dev, i);
-> +
-> +	cam_dev->running_job_count = 0;
-> +	spin_lock_init(&cam_dev->pending_job_lock);
-> +	spin_lock_init(&cam_dev->running_job_lock);
-> +	INIT_LIST_HEAD(&cam_dev->pending_job_list);
-> +	INIT_LIST_HEAD(&cam_dev->running_job_list);
-> +
-> +	cam_dev->dma_processing_count = 0;
-> +	spin_lock_init(&cam_dev->dma_pending_lock);
-> +	spin_lock_init(&cam_dev->dma_processing_lock);
-> +	INIT_LIST_HEAD(&cam_dev->dma_pending);
-> +	INIT_LIST_HEAD(&cam_dev->dma_processing);
-> +
-> +	mutex_init(&cam_dev->queue_lock);
-> +
-> +	pm_runtime_enable(dev);
-> +
-> +	ret = mtk_cam_of_rproc(cam_dev, pdev);
-> +	if (ret)
-> +		goto fail_destroy_mutex;
-> +
-> +	ret = register_sub_drivers(dev);
-> +	if (ret) {
-> +		dev_err(dev, "fail to register_sub_drivers\n");
-> +		goto fail_destroy_mutex;
-> +	}
-> +
-> +	/* register mtk_cam as all isp subdev async parent */
-> +	cam_dev->notifier.ops = &mtk_cam_async_nf_ops;
-> +	v4l2_async_nf_init(&cam_dev->notifier, &cam_dev->v4l2_dev);
-> +	ret = mtk_cam_async_subdev_add(dev); /* wait all isp sub drivers */
-> +	if (ret) {
-> +		dev_err(dev, "%s failed mtk_cam_async_subdev_add\n", __func__);
-> +		goto fail_unregister_sub_drivers;
-> +	}
-> +
-> +	ret = v4l2_async_nf_register(&cam_dev->notifier);
-> +	if (ret) {
-> +		dev_err(dev, "%s async_nf_register ret:%d\n", __func__, ret);
-> +		v4l2_async_nf_cleanup(&cam_dev->notifier);
-> +		goto fail_unregister_sub_drivers;
-> +	}
-> +
-> +	ret = mtk_cam_debug_fs_init(cam_dev);
-> +	if (ret < 0)
-> +		goto fail_unregister_async_nf;
-> +
-> +	dev_info(dev, "camsys | [%s] success\n", __func__);
-
-NAK. Same issues.
-
-> +
-> +	return 0;
-> +
-> +fail_unregister_async_nf:
-> +	v4l2_async_nf_unregister(&cam_dev->notifier);
-> +
-> +fail_unregister_sub_drivers:
-> +	unregister_sub_drivers(dev);
-> +
-> +fail_destroy_mutex:
-> +	mutex_destroy(&cam_dev->queue_lock);
-> +
-> +	return ret;
-> +}
-> +
-> +static void mtk_cam_remove(struct platform_device *pdev)
-> +{
-> +	struct device *dev = &pdev->dev;
-> +	struct mtk_cam_device *cam_dev = dev_get_drvdata(dev);
-> +
-> +	pm_runtime_disable(dev);
-> +
-> +	mtk_cam_debug_fs_deinit(cam_dev);
-> +
-> +	v4l2_async_nf_unregister(&cam_dev->notifier);
-> +
-> +	unregister_sub_drivers(dev);
-> +
-> +	mutex_destroy(&cam_dev->queue_lock);
-> +}
-> +
-> +static const struct dev_pm_ops mtk_cam_pm_ops = {
-> +	SET_RUNTIME_PM_OPS(mtk_cam_runtime_suspend, mtk_cam_runtime_resume,
-> +			   NULL)
-> +};
-> +
-> +static struct platform_driver mtk_cam_driver = {
-> +	.probe   = mtk_cam_probe,
-> +	.remove  = mtk_cam_remove,
-> +	.driver  = {
-> +		.name  = "mtk-cam",
-> +		.of_match_table = of_match_ptr(mtk_cam_of_ids),
-
-Same issues as in previous patch.
-
-All my comments apply to all your patches in this thread.
-
-> +		.pm     = &mtk_cam_pm_ops,
-> +	}
-> +};
-
-
-
-Best regards,
-Krzysztof
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gVHVlLCBPY3QgMjIsIDIwMjQgYXQgMTozOOKAr0FNIE1heGltZSBSaXBhcmQgPG1yaXBhcmRA
+cmVkaGF0LmNvbT4gd3JvdGU6DQo+DQo+IEkgd2FudGVkIHRvIGZvbGxvdy11cCBvbiB0aGUgZGlz
+Y3Vzc2lvbiB3ZSBoYWQgYXQgUGx1bWJlcnMgd2l0aCBKb2huIGFuZA0KPiBULkouIGFib3V0IChh
+bW9uZyBvdGhlciB0aGluZ3MpIGFkZGluZyBuZXcgaGVhcHMgdG8gdGhlIGtlcm5lbC4NCj4NCj4g
+SSdtIHN0aWxsIGludGVyZXN0ZWQgaW4gbWVyZ2luZyBhIGNhcnZlLW91dCBkcml2ZXJbMV0sIHNp
+bmNlIGl0IHNlZW1zIHRvIGJlDQo+IGluIGV2ZXJ5IHZlbmRvciBCU1AgYW5kIGdvdCBhc2tlZCBh
+Z2FpbiBsYXN0IHdlZWsuDQo+DQo+IEkgcmVtZW1iZXIgZnJvbSBvdXIgZGlzY3Vzc2lvbiB0aGF0
+IGZvciBuZXcgaGVhcCB0eXBlcyB0byBiZSBtZXJnZWQsIHdlDQo+IG5lZWRlZCBhIGtlcm5lbCB1
+c2UtY2FzZS4gTG9va2luZyBiYWNrLCBJJ20gbm90IGVudGlyZWx5IHN1cmUgaG93IG9uZQ0KPiBj
+YW4gcHJvdmlkZSB0aGF0IGdpdmVuIHRoYXQgaGVhcHMgYXJlIGVzc2VudGlhbGx5IGZhY2lsaXRp
+ZXMgZm9yDQo+IHVzZXItc3BhY2UuDQo+DQo+IEFtIEkgbWlzcmVtZW1iZXJpbmcgb3IgbWlzc2lu
+ZyBzb21ldGhpbmc/IFdoYXQgYXJlIHRoZSByZXF1aXJlbWVudHMgZm9yDQo+IHlvdSB0byBjb25z
+aWRlciBhZGRpbmcgYSBuZXcgaGVhcCBkcml2ZXI/DQoNCkl0J3MgYmFzaWNhbGx5IHRoZSBzYW1l
+IGFzIHRoZSBEUk0gc3Vic3lzdGVtIHJ1bGVzLg0KaHR0cHM6Ly9kb2NzLmtlcm5lbC5vcmcvZ3B1
+L2RybS11YXBpLmh0bWwjb3Blbi1zb3VyY2UtdXNlcnNwYWNlLXJlcXVpcmVtZW50cw0KaWU6IFRo
+ZXJlIGhhcyB0byBiZSBvcGVuc291cmNlIHVzZXIgZm9yIGl0LCBhbmQgdGhlIHVzZXIgaGFzIHRv
+IGJlDQptb3JlIHNpZ25pZmljYW50IHRoYW4gYSAidG95IiBpbXBsZW1lbnRhdGlvbiAod2hpY2gg
+Y2FuIGJlIGEgYml0DQpzdWJqZWN0aXZlIGFuZCBjb250ZW50aW91cyB3aGVuIHRyeWluZyB0byBn
+ZXQgb3V0IG9mIGEgY2hpY2tlbiBhbmQgZWdnDQpsb29wKS4NCg0KdGhhbmtzDQotam9obg0KX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNp
+ZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vi
+c2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8u
+b3JnCg==
