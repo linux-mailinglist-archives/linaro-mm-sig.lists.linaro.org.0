@@ -2,85 +2,102 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 02DE99AE082
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 24 Oct 2024 11:23:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7F5CD9AE531
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 24 Oct 2024 14:42:14 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id AAFBE44B56
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 24 Oct 2024 09:23:32 +0000 (UTC)
-Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
-	by lists.linaro.org (Postfix) with ESMTPS id 4299140A8E
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 24 Oct 2024 09:23:26 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D916F45404
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 24 Oct 2024 12:42:12 +0000 (UTC)
+Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
+	by lists.linaro.org (Postfix) with ESMTPS id 2C0BC40A8F
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 24 Oct 2024 12:42:05 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=infradead.org header.s=bombadil.20210309 header.b=iZx25NEm;
-	spf=none (lists.linaro.org: domain of BATV+7e647dc4d1739dd50153+7732+infradead.org+hch@bombadil.srs.infradead.org has no SPF policy when checking 198.137.202.133) smtp.mailfrom=BATV+7e647dc4d1739dd50153+7732+infradead.org+hch@bombadil.srs.infradead.org;
-	dmarc=none
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
-	:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=cNG1v54GZGBbvGCSwdr00JWJ070P99babx+9AJaD/EE=; b=iZx25NEmGfWGdU9TR3Z7lOIlHN
-	860ZRDCDc6MYSxH7C5rCboTyY85io1hD4DTH0VXgePsuLBj85GxVdINRL9ppqAvtsgmMAUE7fEf64
-	EiLE1vLnrU4rtgqQQRTS04uthFrfHrUh3o9R0IG9D3r+wbQSklLnEQ6Bw5OlCkJ121+y6yVT7R6Gw
-	KMIXnizp6B2d1oEgi4CEc8K7ioDkoqgkT4clBkF9oNXaTrERX7OjPreJ0BNDBZDOgs89pEzvDOoVD
-	/PO6+d+ouDQCbsKm0+tEZn1M4l3+Kgpmf7XZn2I+JBlqidrQk5y9hpIHddEvSu0I08GukpFt0fYO6
-	ozhOLphA==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.98 #2 (Red Hat Linux))
-	id 1t3u3q-0000000HRLl-3drM;
-	Thu, 24 Oct 2024 09:23:18 +0000
-Date: Thu, 24 Oct 2024 02:23:18 -0700
-From: Christoph Hellwig <hch@infradead.org>
-To: Pavel Begunkov <asml.silence@gmail.com>
-Message-ID: <ZxoSBhC6sMEbXQi8@infradead.org>
-References: <20241016185252.3746190-1-dw@davidwei.uk>
- <20241016185252.3746190-3-dw@davidwei.uk>
- <ZxijxiqNGONin3IY@infradead.org>
- <264c8f95-2a69-4d49-8af6-d035fa890ef1@gmail.com>
+	dkim=pass header.d=gmail.com header.s=20230601 header.b=ezNYBwPE;
+	spf=pass (lists.linaro.org: domain of ckoenig.leichtzumerken@gmail.com designates 209.85.218.46 as permitted sender) smtp.mailfrom=ckoenig.leichtzumerken@gmail.com;
+	dmarc=pass (policy=none) header.from=gmail.com
+Received: by mail-ej1-f46.google.com with SMTP id a640c23a62f3a-a99ea294480so56671666b.2
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 24 Oct 2024 05:42:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1729773724; x=1730378524; darn=lists.linaro.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=y3NK5f7I3T0kVap6zRG0XmzzEF76zGfHonnvdBs/CS8=;
+        b=ezNYBwPEOFFi1ftZ8jSbIoVihLFk9bOyjOml5xt+MgdCJCE9+K5d9aguFjYgosqFuA
+         iuV0j1UpLuWliJxT0wyxrylOylpyJ4FigJ3VWeGrmOWHT2/YJsjYT3LI0oTOccAutL7E
+         wjpebK6E5kFEgXsoNsE5sCPD84V/WS6GsOWYTFNl/0BacpNRqz+Qi0sApsnkthGM6q+d
+         odDW7jbKT78plXZYoMEPWQdzk3PNJ8UbU/dtJ6hizIuCq0vPgz1DfhO7Y6IeTrlSuABA
+         knV+Xe+U/gvVuvkdLpT0lSfKgx+/ZDlBoYLUlBe6abKtWuGm8jKI5NuZ098c9On2HPQW
+         3+VQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1729773724; x=1730378524;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=y3NK5f7I3T0kVap6zRG0XmzzEF76zGfHonnvdBs/CS8=;
+        b=Pt3+EvM+jaWrpCxFURWLN+xKLPD5yz5YOzVB3wxCotKj+k58Wff/kSy5PxhwS44m2W
+         m7oY5moWjYr601zqTbK3bWmMXrRcvgkaAYUM2tCcYANcU92ODkTX57Mrmr7XJypgdjSh
+         Vgv3037h63YePkULswpp0vVLcPeQyfwqXGbMJsS7vSbuLYYjyQ6+E2Oduu/RXC/aO2iZ
+         1g86SG6CbW5BGvGT3wFPx9Ft/I+gQZJ7fVs3jMgieSP5ed/Sz38devfHPu3Y60QG8iI4
+         UNBuNcXVR5wIWc1eL9OzsSY83k4MCzD4jSmXWPt6JAa71KziQHdUG2Q5LIhNp4FBAcEG
+         TSIQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVYagGRgaCtRA0pHDGjeII1RkzXwkOdbdiUKuIhM6UTXEZZeyo8LUOMmoIz0jtf3/PNqBl9F/15KXdvPhyf@lists.linaro.org
+X-Gm-Message-State: AOJu0YyMngo92YiK620C/ySUjEn5h0ufaLQs8/BpRR1FDB7OqXoCgSOI
+	ylGzpQzdHd0PmIVgKItYkTpf4JJlwV/MZS10jf0YDZZnTjyDvPm2
+X-Google-Smtp-Source: AGHT+IGYhPceDBeo5lcWr74EsEhCqtuA1jD2BNecETU1tSRZBIpXXOXBfTqLCvZ2KaTfgEA0kZVi8A==
+X-Received: by 2002:a05:6402:2b91:b0:5c7:202f:ec9b with SMTP id 4fb4d7f45d1cf-5cb8b1c125dmr6392590a12.16.1729773723848;
+        Thu, 24 Oct 2024 05:42:03 -0700 (PDT)
+Received: from able.fritz.box ([2a00:e180:1550:4200:da3c:7fbc:c60c:ca4b])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-5cb66a65419sm5623026a12.25.2024.10.24.05.42.02
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 24 Oct 2024 05:42:02 -0700 (PDT)
+From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
+X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
+To: friedrich.vock@gmx.de,
+	Richardqi.Liang@amd.com,
+	dri-devel@lists.freedesktop.org,
+	linux-media@vger.kernel.org,
+	linaro-mm-sig@lists.linaro.org
+Date: Thu, 24 Oct 2024 14:41:56 +0200
+Message-Id: <20241024124159.4519-1-christian.koenig@amd.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <264c8f95-2a69-4d49-8af6-d035fa890ef1@gmail.com>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Spamd-Result: default: False [-1.18 / 15.00];
-	BAYES_HAM(-2.88)[99.48%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	FORGED_SENDER(0.30)[hch@infradead.org,BATV@bombadil.srs.infradead.org];
-	ONCE_RECEIVED(0.20)[];
-	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
+X-Spamd-Result: default: False [-1.46 / 15.00];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	BAYES_HAM(-0.36)[76.75%];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	MIME_GOOD(-0.10)[text/plain];
-	TAGGED_FROM(0.00)[7e647dc4d1739dd50153,7732,infradead.org,hch];
-	RCVD_TLS_LAST(0.00)[];
-	R_SPF_NA(0.00)[no SPF record];
-	DMARC_NA(0.00)[infradead.org];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.218.46:from];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	ARC_NA(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[infradead.org,davidwei.uk,vger.kernel.org,kernel.dk,kernel.org,redhat.com,davemloft.net,google.com,gmail.com,fastly.com,mojatatu.com,linaro.org,amd.com,lists.freedesktop.org,lists.linaro.org];
-	DKIM_TRACE(0.00)[infradead.org:+];
-	MISSING_XM_UA(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	FROM_NEQ_ENVFROM(0.00)[hch@infradead.org,BATV@bombadil.srs.infradead.org];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RBL_SENDERSCORE_REPUT_8(0.00)[209.85.218.46:from];
+	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	TAGGED_FROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[21];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RBL_SENDERSCORE_REPUT_8(0.00)[198.137.202.133:from];
-	TAGGED_RCPT(0.00)[];
-	RCVD_COUNT_ONE(0.00)[1];
-	ASN(0.00)[asn:7247, ipnet:198.137.202.0/24, country:US];
-	TO_DN_SOME(0.00)[]
+	FREEMAIL_TO(0.00)[gmx.de,amd.com,lists.freedesktop.org,vger.kernel.org,lists.linaro.org];
+	TO_DN_NONE(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	RCVD_TLS_LAST(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_FIVE(0.00)[5];
+	DKIM_TRACE(0.00)[gmail.com:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 4299140A8E
+X-Rspamd-Queue-Id: 2C0BC40A8F
 X-Spamd-Bar: -
-Message-ID-Hash: BUN6IR3Y2X2HBAVPBMS5O7HWH6PNR2AX
-X-Message-ID-Hash: BUN6IR3Y2X2HBAVPBMS5O7HWH6PNR2AX
-X-MailFrom: BATV+7e647dc4d1739dd50153+7732+infradead.org+hch@bombadil.srs.infradead.org
+Message-ID-Hash: YU7LBHVRTHA4LIKKLGXOXB7V5SK2DRIO
+X-Message-ID-Hash: YU7LBHVRTHA4LIKKLGXOXB7V5SK2DRIO
+X-MailFrom: ckoenig.leichtzumerken@gmail.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Christoph Hellwig <hch@infradead.org>, David Wei <dw@davidwei.uk>, io-uring@vger.kernel.org, netdev@vger.kernel.org, Jens Axboe <axboe@kernel.dk>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jesper Dangaard Brouer <hawk@kernel.org>, David Ahern <dsahern@kernel.org>, Mina Almasry <almasrymina@google.com>, Stanislav Fomichev <stfomichev@gmail.com>, Joe Damato <jdamato@fastly.com>, Pedro Tammela <pctammela@mojatatu.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v6 02/15] net: generalise net_iov chunk owners
+Subject: [Linaro-mm-sig] Fix Fix fence merge handling
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/BUN6IR3Y2X2HBAVPBMS5O7HWH6PNR2AX/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YU7LBHVRTHA4LIKKLGXOXB7V5SK2DRIO/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -90,25 +107,18 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Wed, Oct 23, 2024 at 03:34:53PM +0100, Pavel Begunkov wrote:
-> It doesn't care much what kind of memory it is, nor it's important
-> for internals how it's imported, it's user addresses -> pages for
-> user convenience sake. All the net_iov setup code is in the page pool
-> core code. What it does, however, is implementing the user API, so
+Hi guys,
 
-That's not what this series does.  It adds the new memory_provider_ops
-set of hooks, with once implementation for dmabufs, and one for
-io_uring zero copy.
+turned out that userspace can also merge dma_fence_chain contains
+which can result in really huge arrays.
 
-So you are precluding zero copy RX into anything but your magic
-io_uring buffers, and using an odd abstraction for that.
+Fix those merges to sort the arrays and remove the duplicates.
+Additional to that start to use kvzalloc() for dma_fence_array
+containers so that can handle much larger arrays if necessary.
 
-The right way would be to support zero copy RX into every
-designated dmabuf, and make io_uring work with udmabuf or if
-absolutely needed it's own kind of dmabuf.  Instead we create
-a maze of incompatible abstractions here.  The use case of e.g.
-doing zero copy receive into a NVMe CMB using PCIe P2P transactions
-is every but made up, so this does create a problem.
+Please review and comment,
+Christian.
+
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
