@@ -2,217 +2,151 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 780289B2F84
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 28 Oct 2024 13:01:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 552AC9B2FDD
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 28 Oct 2024 13:12:09 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 87A684125A
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 28 Oct 2024 12:01:16 +0000 (UTC)
-Received: from mail.pontaicland.com (mail.pontaicland.com [193.42.61.147])
-	by lists.linaro.org (Postfix) with ESMTPS id 2128040F95
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 28 Oct 2024 12:01:07 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5830644620
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 28 Oct 2024 12:12:08 +0000 (UTC)
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+	by lists.linaro.org (Postfix) with ESMTPS id 76BE340F95
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 28 Oct 2024 12:12:01 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=none;
-	spf=softfail (lists.linaro.org: 193.42.61.147 is neither permitted nor denied by domain of noreply@lists.linaro.org) smtp.mailfrom=noreply@lists.linaro.org;
-	dmarc=fail reason="No valid SPF, No valid DKIM" header.from=linaro.org (policy=none)
-From: Server Administrator lists.linaro.org <noreply@lists.linaro.org>
-To: linaro-mm-sig@lists.linaro.org
-Date: 28 Oct 2024 11:27:56 +0000
-Message-ID: <20241028112756.3FCC72B5DA6851E8@lists.linaro.org>
+	dkim=pass header.d=infradead.org header.s=bombadil.20210309 header.b="nbYSSs/T";
+	spf=none (lists.linaro.org: domain of BATV+fde6398cdc6fa6cab30f+7736+infradead.org+hch@bombadil.srs.infradead.org has no SPF policy when checking 198.137.202.133) smtp.mailfrom=BATV+fde6398cdc6fa6cab30f+7736+infradead.org+hch@bombadil.srs.infradead.org;
+	dmarc=none
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
+	:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=GANchaQxtsQUXPkHXZjcwxb7mo3qTTIUVflFphrpMRQ=; b=nbYSSs/TLdUtkkX49MCiEy49wQ
+	JhQCqc+9shj6l/rWgmHUh3vHb2TelgkWvfsR9RiPKwCbTJ9cyV3FGFLc3ToTBKOJK9g98c4rckiQX
+	hRSSQ0KcerCRxh+w6FDY+2FM2FkkgMlqfZitM1S7Kzqrdl6dF3iXXi78VvTpy3i7gzKON2oNwBl/g
+	bKPKa26ZTjFUTDKupOhE3BJLM1zzAGN9G7crkz4vsMfOQ01twKvtXUGBeoVWFwzAObWfEFBoM3QhG
+	6aCaKdem/ibNjvj0PlV+fK3MH6K73fRd48XjwIpj++F7ehMjqiHmOqRXaPY4OkF4b5izBQAY5/IQO
+	b/dE4d4g==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.98 #2 (Red Hat Linux))
+	id 1t5ObB-0000000AhRn-0J2V;
+	Mon, 28 Oct 2024 12:11:53 +0000
+Date: Mon, 28 Oct 2024 05:11:53 -0700
+From: Christoph Hellwig <hch@infradead.org>
+To: Pavel Begunkov <asml.silence@gmail.com>
+Message-ID: <Zx9_iYLVnkyE05Hh@infradead.org>
+References: <20241016185252.3746190-1-dw@davidwei.uk>
+ <20241016185252.3746190-3-dw@davidwei.uk>
+ <ZxijxiqNGONin3IY@infradead.org>
+ <264c8f95-2a69-4d49-8af6-d035fa890ef1@gmail.com>
+ <ZxoSBhC6sMEbXQi8@infradead.org>
+ <a6864bf1-dd88-4ae0-bc67-b88bb4c17b44@gmail.com>
+ <ZxpwgLRNsrTBmJEr@infradead.org>
+ <de9ae678-258d-4f68-86e1-59d5eb4b70a4@gmail.com>
 MIME-Version: 1.0
-X-Spamd-Result: default: False [4.44 / 15.00];
-	VIOLATED_DIRECT_SPF(3.50)[];
-	RBL_SENDERSCORE_REPUT_7(0.50)[193.42.61.147:from];
-	MIME_HTML_ONLY(0.20)[];
-	BAYES_SPAM(0.14)[63.94%];
-	DMARC_POLICY_SOFTFAIL(0.10)[linaro.org : No valid SPF, No valid DKIM,none];
-	ASN(0.00)[asn:29066, ipnet:193.42.60.0/22, country:DE];
-	MISSING_XM_UA(0.00)[];
-	SUBJECT_ENDS_EXCLAIM(0.00)[];
-	FROM_HAS_DN(0.00)[];
+Content-Disposition: inline
+In-Reply-To: <de9ae678-258d-4f68-86e1-59d5eb4b70a4@gmail.com>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
+X-Spamd-Result: default: False [-2.30 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
+	SUSPICIOUS_RECIPS(1.50)[];
+	RBL_SENDERSCORE_REPUT_9(-1.00)[198.137.202.133:from];
+	FORGED_SENDER(0.30)[hch@infradead.org,BATV@bombadil.srs.infradead.org];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
+	ONCE_RECEIVED(0.20)[];
+	MIME_GOOD(-0.10)[text/plain];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[fde6398cdc6fa6cab30f,7736,infradead.org,hch];
+	R_SPF_NA(0.00)[no SPF record];
+	FREEMAIL_TO(0.00)[gmail.com];
+	DMARC_NA(0.00)[infradead.org];
+	MIME_TRACE(0.00)[0:+];
 	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:~];
-	NEURAL_SPAM(0.00)[1.000];
-	RCPT_COUNT_ONE(0.00)[1];
-	RCVD_COUNT_ZERO(0.00)[0];
+	FREEMAIL_CC(0.00)[infradead.org,davidwei.uk,vger.kernel.org,kernel.dk,kernel.org,redhat.com,davemloft.net,google.com,gmail.com,fastly.com,mojatatu.com,linaro.org,amd.com,lists.freedesktop.org,lists.linaro.org];
+	DKIM_TRACE(0.00)[infradead.org:+];
+	MISSING_XM_UA(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[hch@infradead.org,BATV@bombadil.srs.infradead.org];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[21];
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
-	R_SPF_SOFTFAIL(0.00)[~all];
-	FROM_EQ_ENVFROM(0.00)[];
-	TO_DOM_EQ_FROM_DOM(0.00)[];
-	TO_DN_NONE(0.00)[];
-	R_DKIM_NA(0.00)[];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	GREYLIST(0.00)[pass,body]
-X-Rspamd-Action: add header
+	RCVD_COUNT_ONE(0.00)[1];
+	ASN(0.00)[asn:7247, ipnet:198.137.202.0/24, country:US];
+	TO_DN_SOME(0.00)[]
+X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Spam-Level: ****
-X-Rspamd-Queue-Id: 2128040F95
-X-Spamd-Bar: ++++
-Message-ID-Hash: DH67S3NML45NLV2BUSDAUKLRIPG6IQTI
-X-Message-ID-Hash: DH67S3NML45NLV2BUSDAUKLRIPG6IQTI
-X-MailFrom: noreply@lists.linaro.org
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+X-Rspamd-Queue-Id: 76BE340F95
+X-Spamd-Bar: --
+Message-ID-Hash: VKPVQWJ2QK4CUMBKYRRZECMQZS6BKEBY
+X-Message-ID-Hash: VKPVQWJ2QK4CUMBKYRRZECMQZS6BKEBY
+X-MailFrom: BATV+fde6398cdc6fa6cab30f+7736+infradead.org+hch@bombadil.srs.infradead.org
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Christoph Hellwig <hch@infradead.org>, David Wei <dw@davidwei.uk>, io-uring@vger.kernel.org, netdev@vger.kernel.org, Jens Axboe <axboe@kernel.dk>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jesper Dangaard Brouer <hawk@kernel.org>, David Ahern <dsahern@kernel.org>, Mina Almasry <almasrymina@google.com>, Stanislav Fomichev <stfomichev@gmail.com>, Joe Damato <jdamato@fastly.com>, Pedro Tammela <pctammela@mojatatu.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Important Message: Incoming mails have been suspended in your email server !!!
+Subject: [Linaro-mm-sig] Re: [PATCH v6 02/15] net: generalise net_iov chunk owners
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DH67S3NML45NLV2BUSDAUKLRIPG6IQTI/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VKPVQWJ2QK4CUMBKYRRZECMQZS6BKEBY/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============9077031996804902031=="
-X-Spam: Yes
-
---===============9077031996804902031==
-Content-Type: text/html;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-<html><head>
-<meta http-equiv=3D"X-UA-Compatible" content=3D"IE=3Dedge">
-<meta name=3D"GENERATOR" content=3D"MSHTML 11.00.10570.1001"></head>
-<body style=3D"margin: 0.5em;">
-<p>
-<table style=3D"width: 1113px; color: rgb(0, 0, 0); text-transform: none; l=
-etter-spacing: normal; font-family: roboto, robotodraft, helvetica, arial, =
-sans-serif; font-size: 16px; font-style: normal; font-weight: 400; word-spa=
-cing: 0px; white-space: normal; border-collapse: collapse; min-width: 600px=
-; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant=
--ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0=
-px; text-decoration-thickness: initial;=20
-text-decoration-style: initial; text-decoration-color: initial;" border=3D"=
-0" cellspacing=3D"0" cellpadding=3D"0">
-<tbody style=3D"box-sizing: border-box;">
-<tr style=3D"box-sizing: border-box;">
-<td style=3D"margin: 0px; box-sizing: border-box;">
-<table style=3D"border-width: 0px 1px 1px; width: 898px; border-right-color=
-: rgb(240, 240, 240); border-bottom-color: rgb(192, 192, 192); border-left-=
-color: rgb(240, 240, 240); border-right-style: solid; border-bottom-style: =
-solid; border-left-style: solid; border-collapse: collapse; min-width: 600p=
-x; max-width: 900px; border-bottom-right-radius: 3px; border-bottom-left-ra=
-dius: 3px;" bgcolor=3D"#fafafa" border=3D"0" cellspacing=3D"0" cellpadding=
-=3D"0">
-<tbody style=3D"box-sizing: border-box;">
-<tr style=3D"box-sizing: border-box;">
-<td style=3D"margin: 0px; box-sizing: border-box;">
-<table style=3D"border-collapse: collapse; min-width: 300px;" border=3D"0" =
-cellspacing=3D"0" cellpadding=3D"0">
-<tbody style=3D"box-sizing: border-box;">
-<tr style=3D"box-sizing: border-box;">
-<td style=3D"margin: 0px; color: rgb(32, 32, 32); line-height: 1.5; font-fa=
-mily: roboto-regular, helvetica, arial, sans-serif; font-size: 13px; box-si=
-zing: border-box;">
-<p style=3D"margin-top: 0px; box-sizing: border-box;"></p></td></tr>
-<tr style=3D"box-sizing: border-box;">
-<td style=3D"margin: 0px; box-sizing: border-box;">
-<table style=3D"border-width: 1px 1px 0px; width: 898px; border-top-color: =
-rgb(224, 224, 224); border-right-color: rgb(224, 224, 224); border-left-col=
-or: rgb(224, 224, 224); border-top-style: solid; border-right-style: solid;=
- border-left-style: solid; border-collapse: collapse; min-width: 600px; max=
--width: 900px; border-top-left-radius: 3px; border-top-right-radius: 3px;" =
-bgcolor=3D"#003d8f" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
-<tbody style=3D"box-sizing: border-box;">
-<tr style=3D"box-sizing: border-box;">
-<td style=3D"margin: 0px; text-align: center; color: rgb(255, 255, 255); li=
-ne-height: 1.25; font-family: roboto-regular, helvetica, arial, sans-serif;=
- font-size: 32px; box-sizing: border-box;">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Notice&nbsp;For linar=
-o-mm-sig@lists.linaro.org&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; <br style=3D"box-sizing: border-box;">
-<a style=3D"color: rgb(0, 172, 255); box-sizing: border-box; background-col=
-or: transparent; text-decoration-line: none;" href=3D"http://gerrysdnata.co=
-m.pk/" target=3D"_blank" rel=3D"noreferrer"></a></td>
-<td width=3D"32" style=3D"margin: 0px; box-sizing: border-box;"><br style=
-=3D"box-sizing: border-box;"></td></tr>
-<tr style=3D"box-sizing: border-box;">
-<td height=3D"18" style=3D"margin: 0px; box-sizing: border-box;" colspan=3D=
-"3"><br style=3D"box-sizing: border-box;"></td></tr></tbody></table></td></=
-tr>
-<tr style=3D"box-sizing: border-box;">
-<td style=3D"margin: 0px; box-sizing: border-box;">
-<table style=3D"border-width: 0px 1px 1px; width: 898px; border-right-color=
-: rgb(240, 240, 240); border-bottom-color: rgb(192, 192, 192); border-left-=
-color: rgb(240, 240, 240); border-right-style: solid; border-bottom-style: =
-solid; border-left-style: solid; border-collapse: collapse; min-width: 600p=
-x; max-width: 900px; border-bottom-right-radius: 3px; border-bottom-left-ra=
-dius: 3px;" bgcolor=3D"#fafafa" border=3D"0" cellspacing=3D"0" cellpadding=
-=3D"0">
-<tbody style=3D"box-sizing: border-box;">
-<tr style=3D"box-sizing: border-box;">
-<td width=3D"32" style=3D"margin: 0px; box-sizing: border-box;" rowspan=3D"=
-3"><br style=3D"box-sizing: border-box;"></td>
-<td style=3D"margin: 0px; box-sizing: border-box;"><br style=3D"box-sizing:=
- border-box;"></td>
-<td width=3D"32" style=3D"margin: 0px; box-sizing: border-box;" rowspan=3D"=
-3"><br style=3D"box-sizing: border-box;"></td></tr>
-<tr style=3D"box-sizing: border-box;">
-<td style=3D"margin: 0px; box-sizing: border-box;">
-<table style=3D"border-collapse: collapse; min-width: 300px;" border=3D"0" =
-cellspacing=3D"0" cellpadding=3D"0">
-<tbody style=3D"box-sizing: border-box;">
-<tr style=3D"box-sizing: border-box;">
-<td style=3D"margin: 0px; width: 885px; color: rgb(32, 32, 32); line-height=
-: 1.5; font-family: roboto-regular, helvetica, arial, sans-serif; font-size=
-: 13px; box-sizing: border-box;"><span style=3D"color: rgb(0, 0, 0); box-si=
-zing: border-box;">&nbsp;Dear linaro-mm-sig</span><span style=3D"color: rgb=
-(0, 0, 0); box-sizing: border-box;"><br style=3D"box-sizing: border-box;"><=
-br style=3D"box-sizing: border-box;"><font color=3D"#202020" face=3D"Arial"=
- style=3D"box-sizing: border-box;">
-Some of your incoming mails have been&nbsp;suspended in<font color=3D"#0000=
-00" face=3D"Helvetica" style=3D"box-sizing: border-box;">&nbsp;the email</f=
-ont></font>&nbsp;<span style=3D"color: rgb(34, 34, 34); box-sizing: border-=
-box; background-color: rgb(255, 255, 255);">server database.<br style=3D"bo=
-x-sizing: border-box;">This was caused by a server glitch. P<font color=3D"=
-#000000" style=3D"box-sizing: border-box;">roceed below&nbsp;</font>
-to receive&nbsp;<span style=3D"color: rgb(0, 0, 0); box-sizing: border-box;=
-"><span>
-&nbsp;</span><span style=3D"color: rgb(34, 34, 34); box-sizing: border-box;=
-">your&nbsp;</span></span>pending mail on<br style=3D"box-sizing: border-bo=
-x;">this account<br style=3D"box-sizing: border-box;"></span><br style=3D"b=
-ox-sizing: border-box;"><span style=3D"color: rgb(32, 32, 32); font-family:=
- Roboto-Regular, Helvetica, Arial, sans-serif; box-sizing: border-box;">.<b=
-r style=3D"box-sizing: border-box;"></span></span><br style=3D"box-sizing: =
-border-box;">
-<a id=3D"v1gmail-v1m_92090209719703104m_-7385093351772727994m_7839810288629=
-758597m_-6003391105895555607ext-gen1635" style=3D"background: rgb(0, 61, 14=
-3); margin: 2px; padding: 10px; color: rgb(255, 255, 255); font-size: 12px;=
- float: left; box-sizing: border-box; text-decoration-line: none;" href=3D"=
-https://ishort.ink/4Efa#linaro-mm-sig@lists.linaro.org" target=3D"_blank" r=
-el=3D"noreferrer">RECEIVE MAILS</a>
-<p style=3D"margin-top: 0px; box-sizing: border-box;"><br style=3D"box-sizi=
-ng: border-box;"></p><br style=3D"box-sizing: border-box;">
-<hr width=3D"100%" align=3D"left" style=3D"border-style: solid none none; h=
-eight: 0px; overflow: visible; border-right-color: currentColor; border-bot=
-tom-color: currentColor; border-left-color: currentColor; border-right-widt=
-h: 0px; border-bottom-width: 0px; border-left-width: 0px; box-sizing: conte=
-nt-box;">
-
-<hr width=3D"100%" align=3D"left" style=3D"border-style: solid none none; h=
-eight: 0px; overflow: visible; border-right-color: currentColor; border-bot=
-tom-color: currentColor; border-left-color: currentColor; border-right-widt=
-h: 0px; border-bottom-width: 0px; border-left-width: 0px; box-sizing: conte=
-nt-box;">
-This email was generated from&nbsp;lists.linaro.org<font face=3D"georgia, s=
-erif" style=3D"box-sizing: border-box;"><em style=3D"box-sizing: border-box=
-;"> email support,</em></font><br style=3D"box-sizing: border-box;"><font f=
-ace=3D"georgia, serif" style=3D"box-sizing: border-box;"><em style=3D"box-s=
-izing: border-box;">All rights reserved.</em>&nbsp;@ 2024</font></td></tr><=
-/tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></t=
-r></tbody></table></td></tr></tbody></table><p></p></body></html>
-
---===============9077031996804902031==
 Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+
+On Thu, Oct 24, 2024 at 05:40:02PM +0100, Pavel Begunkov wrote:
+> On 10/24/24 17:06, Christoph Hellwig wrote:
+> > On Thu, Oct 24, 2024 at 03:23:06PM +0100, Pavel Begunkov wrote:
+> > > > That's not what this series does.  It adds the new memory_provider_ops
+> > > > set of hooks, with once implementation for dmabufs, and one for
+> > > > io_uring zero copy.
+> > > 
+> > > First, it's not a _new_ abstraction over a buffer as you called it
+> > > before, the abstraction (net_iov) is already merged.
+> > 
+> > Umm, it is a new ops vector.
+> 
+> I don't understand what you mean. Callback?
+
+struct memory_provider_ops.  It's a method table or ops vetor, no
+callbacks involved.
+
+> Then please go ahead and take a look at the patchset in question
+> and see how much of dmabuf handling is there comparing to pure
+> networking changes. The point that it's a new set of API and lots
+> of changes not related directly to dmabufs stand. dmabufs is useful
+> there as an abstraction there, but it's a very long stretch saying
+> that the series is all about it.
+
+I did take a look, that's why I replied.
+
+> > > on an existing network specific abstraction, which are not restricted to
+> > > pages or anything specific in the long run, but the flow of which from
+> > > net stack to user and back is controlled by io_uring. If you worry about
+> > > abuse, io_uring can't even sanely initialise those buffers itself and
+> > > therefore asking the page pool code to do that.
+> > 
+> > No, I worry about trying to io_uring for not good reason. This
+> 
+> It sounds that the argument is that you just don't want any
+> io_uring APIs, I don't think you'd be able to help you with
+> that.
+
+No, that's complete misinterpreting what I'm saying.  Of course an
+io_uring API is fine.  But tying low-level implementation details to
+to is not.
+
+> > pre-cludes in-kernel uses which would be extremly useful for
+> 
+> Uses of what? devmem TCP is merged, I'm not removing it,
+> and the net_iov abstraction is in there, which can be potentially
+> be reused by other in-kernel users if that'd even make sense.
+
+How when you are hardcoding io uring memory registrations instead
+of making them a generic dmabuf?  Which btw would also really help
+with pre-registering the memry with the iommu to get good performance
+in IOMMU-enabled setups.
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============9077031996804902031==--
