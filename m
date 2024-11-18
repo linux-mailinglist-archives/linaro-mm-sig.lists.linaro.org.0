@@ -2,145 +2,245 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id AAE989D0DA0
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 Nov 2024 10:59:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 955839D0DA6
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 Nov 2024 11:00:59 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 632933ECD3
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 Nov 2024 09:59:14 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B6DE53F56F
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 Nov 2024 10:00:58 +0000 (UTC)
 Received: from perceval.ideasonboard.com (perceval.ideasonboard.com [213.167.242.64])
-	by lists.linaro.org (Postfix) with ESMTPS id B9DAD3ECD3
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 18 Nov 2024 09:59:01 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 217693F56F
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 18 Nov 2024 10:00:50 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=ideasonboard.com header.s=mail header.b=pe+JC0uw;
+	dkim=pass header.d=ideasonboard.com header.s=mail header.b=vMqNyWbz;
 	spf=pass (lists.linaro.org: domain of laurent.pinchart@ideasonboard.com designates 213.167.242.64 as permitted sender) smtp.mailfrom=laurent.pinchart@ideasonboard.com;
 	dmarc=none
 Received: from pendragon.ideasonboard.com (81-175-209-231.bb.dnainternet.fi [81.175.209.231])
-	by perceval.ideasonboard.com (Postfix) with ESMTPSA id 31B645B3;
-	Mon, 18 Nov 2024 10:58:43 +0100 (CET)
+	by perceval.ideasonboard.com (Postfix) with ESMTPSA id C333B5B3;
+	Mon, 18 Nov 2024 11:00:31 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
-	s=mail; t=1731923923;
-	bh=qN1yEu+NGkQCj48gFcQZwFz/XJ1FgWBwwPxbDANCw9w=;
+	s=mail; t=1731924032;
+	bh=jkPR4Kt9JiPbGFeygxRhst2pg8qwoxgS332CjCC2qS4=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=pe+JC0uwHPx+KOIPFxnimZbp3cuJ5ps5rS7lyqpoJtge1Iqdqikxwb+BSL28geDV+
-	 IaKD8BXbVEoGzjYZ+p2+/8KNA4EziQkPFZuU+fx8vLVpU8J+6LLtZlRGQ2w444o2vV
-	 hH0A5MAAgtUWa4DitvxCT3NmVJhbzlfOJwCxgFzI=
-Date: Mon, 18 Nov 2024 11:58:50 +0200
+	b=vMqNyWbzBKi1a1biVT1taieKIO9CoVgiOXzX2QqeM3IoMu0YU8dTopXPfgmwORWQA
+	 rvfDbWCSgD91xxwU4AQeNtK0O063Ko8+LJMshfd94zJa70hg/JzZmY7iiM+nXD+RtR
+	 O/Z+oAAExLkYDV4JbQvjq9/RWOligt6bHfjeouIk=
+Date: Mon, 18 Nov 2024 12:00:39 +0200
 From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-To: CK Hu =?utf-8?B?KOiDoeS/iuWFiSk=?= <ck.hu@mediatek.com>
-Message-ID: <20241118095850.GA30268@pendragon.ideasonboard.com>
+To: Shu-hsiang Yang <Shu-hsiang.Yang@mediatek.com>
+Message-ID: <20241118100039.GB30268@pendragon.ideasonboard.com>
 References: <20241009111551.27052-1-Shu-hsiang.Yang@mediatek.com>
- <20241009111551.27052-11-Shu-hsiang.Yang@mediatek.com>
- <ff96b314cdd3d52a14a5e91f79ec3097d04c4380.camel@mediatek.com>
- <20241106130437.GA16791@pendragon.ideasonboard.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20241106130437.GA16791@pendragon.ideasonboard.com>
-X-Rspamd-Queue-Id: B9DAD3ECD3
+In-Reply-To: <20241009111551.27052-1-Shu-hsiang.Yang@mediatek.com>
+X-Rspamd-Queue-Id: 217693F56F
 X-Spamd-Bar: -
-X-Spamd-Result: default: False [-1.74 / 15.00];
-	BAYES_HAM(-2.94)[99.76%];
+X-Spamd-Result: default: False [-1.80 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	R_SPF_ALLOW(-0.20)[+mx];
 	ONCE_RECEIVED(0.20)[];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	R_DKIM_ALLOW(-0.20)[ideasonboard.com:s=mail];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_TRACE(0.00)[0:+];
-	DMARC_NA(0.00)[ideasonboard.com];
-	FREEMAIL_CC(0.00)[linaro.org,amd.com,kernel.org,gmail.com,collabora.com,mediatek.com,vger.kernel.org,lists.infradead.org,chromium.org,lists.linaro.org,lists.freedesktop.org];
 	ARC_NA(0.00)[];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	RCVD_TLS_ALL(0.00)[];
-	URIBL_BLOCKED(0.00)[perceval.ideasonboard.com:rdns,perceval.ideasonboard.com:helo,ideasonboard.com:dkim,pendragon.ideasonboard.com:mid];
-	DKIM_TRACE(0.00)[ideasonboard.com:+];
-	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[dt];
-	RCVD_COUNT_ONE(0.00)[1];
 	ASN(0.00)[asn:29169, ipnet:213.167.240.0/20, country:FR];
-	TO_DN_SOME(0.00)[]
+	RCVD_COUNT_ONE(0.00)[1];
+	RCPT_COUNT_TWELVE(0.00)[22];
+	MIME_TRACE(0.00)[0:+];
+	TO_DN_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCVD_TLS_ALL(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	MISSING_XM_UA(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[kernel.org,gmail.com,collabora.com,linaro.org,amd.com,vger.kernel.org,lists.infradead.org,lists.freedesktop.org,lists.linaro.org,mediatek.com,chromium.org];
+	TAGGED_RCPT(0.00)[dt];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	URIBL_BLOCKED(0.00)[perceval.ideasonboard.com:rdns,perceval.ideasonboard.com:helo,pendragon.ideasonboard.com:mid,ideasonboard.com:dkim];
+	DMARC_NA(0.00)[ideasonboard.com];
+	DKIM_TRACE(0.00)[ideasonboard.com:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: LNFDJ2BW5SLOK4M53KFI4GYN7BHQVL3S
-X-Message-ID-Hash: LNFDJ2BW5SLOK4M53KFI4GYN7BHQVL3S
+Message-ID-Hash: BQSM4D2LHYBZZTTDZSOML6AANTYBG2DA
+X-Message-ID-Hash: BQSM4D2LHYBZZTTDZSOML6AANTYBG2DA
 X-MailFrom: laurent.pinchart@ideasonboard.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: "sumit.semwal@linaro.org" <sumit.semwal@linaro.org>, "christian.koenig@amd.com" <christian.koenig@amd.com>, "mchehab@kernel.org" <mchehab@kernel.org>, "conor+dt@kernel.org" <conor+dt@kernel.org>, "robh@kernel.org" <robh@kernel.org>, "matthias.bgg@gmail.com" <matthias.bgg@gmail.com>, "krzk+dt@kernel.org" <krzk+dt@kernel.org>, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Shu-hsiang Yang =?utf-8?B?KOaliuiIkue/lCk=?= <Shu-hsiang.Yang@mediatek.com>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "linux-mediatek@lists.infradead.org" <linux-mediatek@lists.infradead.org>, "yunkec@chromium.org" <yunkec@chromium.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>, Yaya Chang =?utf-8?B?KOW8tembhea4hSk=?= <Yaya.Chang@mediatek.com>, Project_Global_Chrome_Upstream_Group <Project_Global_Chrome_Upstream_Group@mediatek
- .com>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, Teddy Chen =?utf-8?B?KOmZs+S5vuWFgyk=?= <Teddy.Chen@mediatek.com>, "linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>, "hidenorik@chromium.org" <hidenorik@chromium.org>, Shun-Yi Wang =?utf-8?B?KOeOi+mghuWEhCk=?= <Shun-Yi.Wang@mediatek.com>
+CC: Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Matthias Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian Konig <christian.koenig@amd.com>, linux-media@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Project_Global_Chrome_Upstream_Group@mediatek.com, yaya.chang@mediatek.com, teddy.chen@mediatek.com, hidenorik@chromium.org, yunkec@chromium.org, shun-yi.wang@mediatek.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v1 10/10] uapi: linux: add mediatek isp_7x camsys user api
+Subject: [Linaro-mm-sig] Re: [PATCH v1 00/10] Add MediaTek ISP7 camera system driver
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LNFDJ2BW5SLOK4M53KFI4GYN7BHQVL3S/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/BQSM4D2LHYBZZTTDZSOML6AANTYBG2DA/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-T24gV2VkLCBOb3YgMDYsIDIwMjQgYXQgMDM6MDQ6MzdQTSArMDIwMCwgTGF1cmVudCBQaW5jaGFy
-dCB3cm90ZToNCj4gT24gTW9uLCBPY3QgMTQsIDIwMjQgYXQgMDU6NTY6NDBBTSArMDAwMCwgQ0sg
-SHUgKOiDoeS/iuWFiSkgd3JvdGU6DQo+ID4gSGksIFNodS1oc2lhbmc6DQo+ID4gDQo+ID4gT24g
-V2VkLCAyMDI0LTEwLTA5IGF0IDE5OjE1ICswODAwLCBTaHUtaHNpYW5nIFlhbmcgd3JvdGU6DQo+
-ID4gPiBBZGQgVUFQSSBmb3IgTWVkaWFUZWsgSVNQIHBsYXRmb3JtLCBwcm92aWRpbmcgdXNlci1z
-cGFjZQ0KPiA+ID4gaW50ZXJmYWNlcyBmb3IgdGhlIG5ldyBjYW1zeXMgZHJpdmVyLg0KPiA+ID4g
-DQo+ID4gPiBTaWduZWQtb2ZmLWJ5OiBTaHUtaHNpYW5nIFlhbmcgPFNodS1oc2lhbmcuWWFuZ0Bt
-ZWRpYXRlay5jb20+DQo+ID4gPiAtLS0NCj4gPiANCj4gPiBbc25pcF0NCj4gPiANCj4gPiA+ICsN
-Cj4gPiA+ICsvKiBNVEsgSVNQIGNhbXN5cyBjb250cm9scyAqLw0KPiA+ID4gKyNkZWZpbmUgVjRM
-Ml9DSURfTVRLX0NBTV9VU0VEX0VOR0lORV9MSU1JVAkoVjRMMl9DSURfVVNFUl9NVEtfQ0FNX0JB
-U0UgKyAxKQ0KPiA+ID4gKyNkZWZpbmUgVjRMMl9DSURfTVRLX0NBTV9CSU5fTElNSVQJCShWNEwy
-X0NJRF9VU0VSX01US19DQU1fQkFTRSArIDIpDQo+ID4gPiArI2RlZmluZSBWNEwyX0NJRF9NVEtf
-Q0FNX0ZSWl9MSU1JVAkJKFY0TDJfQ0lEX1VTRVJfTVRLX0NBTV9CQVNFICsgMykNCj4gPiA+ICsj
-ZGVmaW5lIFY0TDJfQ0lEX01US19DQU1fUkVTT1VSQ0VfUExBTl9QT0xJQ1kJKFY0TDJfQ0lEX1VT
-RVJfTVRLX0NBTV9CQVNFICsgNCkNCj4gPiA+ICsjZGVmaW5lIFY0TDJfQ0lEX01US19DQU1fVVNF
-RF9FTkdJTkUJCShWNEwyX0NJRF9VU0VSX01US19DQU1fQkFTRSArIDUpDQo+ID4gPiArI2RlZmlu
-ZSBWNEwyX0NJRF9NVEtfQ0FNX0JJTgkJCShWNEwyX0NJRF9VU0VSX01US19DQU1fQkFTRSArIDYp
-DQo+ID4gPiArI2RlZmluZSBWNEwyX0NJRF9NVEtfQ0FNX0ZSWgkJCShWNEwyX0NJRF9VU0VSX01U
-S19DQU1fQkFTRSArIDcpDQo+ID4gPiArI2RlZmluZSBWNEwyX0NJRF9NVEtfQ0FNX1VTRURfRU5H
-SU5FX1RSWQkoVjRMMl9DSURfVVNFUl9NVEtfQ0FNX0JBU0UgKyA4KQ0KPiA+ID4gKyNkZWZpbmUg
-VjRMMl9DSURfTVRLX0NBTV9CSU5fVFJZCQkoVjRMMl9DSURfVVNFUl9NVEtfQ0FNX0JBU0UgKyA5
-KQ0KPiA+ID4gKyNkZWZpbmUgVjRMMl9DSURfTVRLX0NBTV9GUlpfVFJZCQkoVjRMMl9DSURfVVNF
-Ul9NVEtfQ0FNX0JBU0UgKyAxMCkNCj4gPiA+ICsjZGVmaW5lIFY0TDJfQ0lEX01US19DQU1fUElY
-RUxfUkFURQkJKFY0TDJfQ0lEX1VTRVJfTVRLX0NBTV9CQVNFICsgMTEpDQo+ID4gPiArI2RlZmlu
-ZSBWNEwyX0NJRF9NVEtfQ0FNX0ZFQVRVUkUJCShWNEwyX0NJRF9VU0VSX01US19DQU1fQkFTRSAr
-IDEyKQ0KPiA+ID4gKyNkZWZpbmUgVjRMMl9DSURfTVRLX0NBTV9TWU5DX0lECQkoVjRMMl9DSURf
-VVNFUl9NVEtfQ0FNX0JBU0UgKyAxMykNCj4gPiA+ICsjZGVmaW5lIFY0TDJfQ0lEX01US19DQU1f
-UkFXX1BBVEhfU0VMRUNUCShWNEwyX0NJRF9VU0VSX01US19DQU1fQkFTRSArIDE0KQ0KPiA+ID4g
-KyNkZWZpbmUgVjRMMl9DSURfTVRLX0NBTV9IU0ZfRU4JCQkoVjRMMl9DSURfVVNFUl9NVEtfQ0FN
-X0JBU0UgKyAxNSkNCj4gPiA+ICsjZGVmaW5lIFY0TDJfQ0lEX01US19DQU1fUERFX0lORk8JCShW
-NEwyX0NJRF9VU0VSX01US19DQU1fQkFTRSArIDE2KQ0KPiA+ID4gKyNkZWZpbmUgVjRMMl9DSURf
-TVRLX0NBTV9NU1RSRUFNX0VYUE9TVVJFCShWNEwyX0NJRF9VU0VSX01US19DQU1fQkFTRSArIDE3
-KQ0KPiA+ID4gKyNkZWZpbmUgVjRMMl9DSURfTVRLX0NBTV9SQVdfUkVTT1VSQ0VfQ0FMQwkoVjRM
-Ml9DSURfVVNFUl9NVEtfQ0FNX0JBU0UgKyAxOCkNCj4gPiA+ICsjZGVmaW5lIFY0TDJfQ0lEX01U
-S19DQU1fVEdfRkxBU0hfQ0ZHCQkoVjRMMl9DSURfVVNFUl9NVEtfQ0FNX0JBU0UgKyAxOSkNCj4g
-PiA+ICsjZGVmaW5lIFY0TDJfQ0lEX01US19DQU1fUkFXX1JFU09VUkNFX1VQREFURQkoVjRMMl9D
-SURfVVNFUl9NVEtfQ0FNX0JBU0UgKyAyMCkNCj4gPiA+ICsjZGVmaW5lIFY0TDJfQ0lEX01US19D
-QU1fQ0FNU1lTX0hXX01PREUJCShWNEwyX0NJRF9VU0VSX01US19DQU1fQkFTRSArIDIxKQ0KPiA+
-ID4gKw0KPiA+IA0KPiA+IFBsZWFzZSBnaXZlIGludHJvZHVjdGlvbiBvZiBob3cgdG8gdXNlIHRo
-ZXNlIHVzZXIgc3BhY2UgaW50ZXJmYWNlLg0KPiANCj4gSSdtIHZlcnksIHZlcnkgKm5vdCogdGhy
-aWxsZWQgYnkgYWxsIHRoaXMuIEl0IGxvb2tzIGxpa2UgYSBiaWcgcGlsZSBvZg0KPiBoYWNrcyBy
-ZWFsbHkuIEV2ZXJ5IHNpbmdsZSBwYXJhbWV0ZXIgdXNlZCBieSB0aG9zZSBjb250cm9scyBuZWVk
-cyB0byBiZQ0KPiBjbGVhcmx5IGRvY3VtZW50ZWQsIGluY2x1ZGluZyBleHBsYWluaW5nIGhvdyB0
-aGV5IGFyZSB1c2VkLCBpbiBvcmRlciBmb3INCj4gdXMgdG8gcmV2aWV3IHRoZSBBUEkuIEkgc3Vz
-cGVjdCB0aGF0IG1hbnkgb2YgdGhlIHBhcmFtZXRlcnMgc2hvdWxkDQo+IGluc3RlYWQgYmUgaGFu
-ZGxlZCB0aHJvdWdoIHRoZSBJU1AgcGFyYW1ldGVycyBidWZmZXJzLCBvciBiZSBjb250cm9sbGVk
-DQo+IGZyb20gc3RhbmRhcmQgVjRMMiBBUElzLg0KDQpXaGlsZSBvbiB0aGUgdG9waWMgb2YgZG9j
-dW1lbnRhdGlvbiwgd2UgYWxzbyBuZWVkIGEgaGlnaC1sZXZlbA0KYXJjaGl0ZWN0dXJlIGRvY3Vt
-ZW50LiBUaGlzIHBhdGNoIHNlcmllcyBhZGRzIDMwMDAwIGxpbmVzIG9mIGNvZGUsIGl0J3MNCnZl
-cnkgaGFyZCBmb3IgcmV2aWV3ZXJzIHRvIHVuZGVyc3RhbmQgdGhlIGFyY2hpdGVjdHVyZSBvZiB0
-aGUgZHJpdmVyDQpqdXN0IGJ5IGxvb2tpbmcgYXQgdGhlIGNvZGUuIEF0IHRoZSB2ZXJ5IGxlYXN0
-LCBhIGhpZ2gtbGV2ZWwgZGVzY3JpcHRpb24NCm9mIHRoZSBoYXJkd2FyZSAoYXQgbGVhc3QgZnJv
-bSB0aGUgdmlldyBwb2ludCBvZiB0aGUgaW50ZXJmYWNlIHRoZQ0KZmlybXdhcmUgZXhwb3Nlcykg
-aXMgbmVlZGVkLg0KDQotLSANClJlZ2FyZHMsDQoNCkxhdXJlbnQgUGluY2hhcnQNCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFp
-bGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmli
-ZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+Hi Shu-hsiang,
+
+On Wed, Oct 09, 2024 at 07:15:41PM +0800, Shu-hsiang Yang wrote:
+> Based on linux-next/master, tag: next-20241008
+> 
+> The patch set adds the MediaTek ISP7.x camera system hardware driver.
+> 
+> This driver sets up ISP hardware, handles interrupts, and initializes
+> V4L2 device nodes and functions. Moreover, implement V4L2 standard
+> video driver that utilizes media framework APIs. It also connects
+> the sensors and ISP, bridging with the seninf interface. Communicate
+> with SCP co-processor to compose ISP registers in the firmware.
+> 
+> These patches include CSI received data from sensors, sensor interface
+> bridge, raw/YUV image pre-processing, ISP utility and ISP control parts.
+> 
+> Thank you for reviewing these patches.
+
+Could you please include the v4l2-compliance report for the driver in
+the cover letter of the next version ? This is required for all new
+drivers. Please use the very latest version of v4l2-compliance, compiled
+from the master branch of v4l-utils.
+
+> Shu-hsiang Yang (10):
+>   dt-bindings: media: mediatek: add camsys device
+>   media: platform: mediatek: add seninf controller
+>   media: platform: mediatek: add isp_7x seninf unit
+>   media: platform: mediatek: add isp_7x cam-raw unit
+>   media: platform: mediatek: add isp_7x camsys unit
+>   media: platform: mediatek: add isp_7x utility
+>   media: platform: mediatek: add isp_7x video ops
+>   media: platform: mediatek: add isp_7x state ctrl
+>   media: platform: mediatek: add isp_7x build config
+>   uapi: linux: add mediatek isp_7x camsys user api
+> 
+>  .../media/mediatek/mediatek,cam-raw.yaml      |  169 +
+>  .../media/mediatek/mediatek,cam-yuv.yaml      |  148 +
+>  .../media/mediatek/mediatek,camisp.yaml       |   71 +
+>  .../media/mediatek/mediatek,seninf-core.yaml  |  106 +
+>  .../media/mediatek/mediatek,seninf.yaml       |   88 +
+>  drivers/media/platform/mediatek/Kconfig       |    1 +
+>  drivers/media/platform/mediatek/Makefile      |    2 +
+>  drivers/media/platform/mediatek/isp/Kconfig   |   21 +
+>  .../platform/mediatek/isp/isp_7x/Makefile     |    7 +
+>  .../mediatek/isp/isp_7x/camsys/Makefile       |   16 +
+>  .../isp_7x/camsys/kd_imgsensor_define_v4l2.h  |   87 +
+>  .../mediatek/isp/isp_7x/camsys/mtk_cam-ctrl.c | 1797 ++++++
+>  .../mediatek/isp/isp_7x/camsys/mtk_cam-ctrl.h |  140 +
+>  .../isp/isp_7x/camsys/mtk_cam-debug.c         | 1271 ++++
+>  .../isp/isp_7x/camsys/mtk_cam-debug.h         |  273 +
+>  .../mediatek/isp/isp_7x/camsys/mtk_cam-defs.h |  168 +
+>  .../isp/isp_7x/camsys/mtk_cam-dmadbg.h        |  721 +++
+>  .../isp/isp_7x/camsys/mtk_cam-feature.c       |   40 +
+>  .../isp/isp_7x/camsys/mtk_cam-feature.h       |   26 +
+>  .../mediatek/isp/isp_7x/camsys/mtk_cam-fmt.h  |   87 +
+>  .../mediatek/isp/isp_7x/camsys/mtk_cam-ipi.h  |  233 +
+>  .../isp/isp_7x/camsys/mtk_cam-meta-mt8188.h   | 2436 ++++++++
+>  .../isp/isp_7x/camsys/mtk_cam-plat-util.c     |  207 +
+>  .../isp/isp_7x/camsys/mtk_cam-plat-util.h     |   16 +
+>  .../mediatek/isp/isp_7x/camsys/mtk_cam-pool.c |  393 ++
+>  .../mediatek/isp/isp_7x/camsys/mtk_cam-pool.h |   28 +
+>  .../mediatek/isp/isp_7x/camsys/mtk_cam-raw.c  | 5359 +++++++++++++++++
+>  .../mediatek/isp/isp_7x/camsys/mtk_cam-raw.h  |  325 +
+>  .../isp/isp_7x/camsys/mtk_cam-raw_debug.c     |  403 ++
+>  .../isp/isp_7x/camsys/mtk_cam-raw_debug.h     |   39 +
+>  .../isp/isp_7x/camsys/mtk_cam-regs-mt8188.h   |  382 ++
+>  .../isp/isp_7x/camsys/mtk_cam-seninf-def.h    |  193 +
+>  .../isp/isp_7x/camsys/mtk_cam-seninf-drv.c    | 1741 ++++++
+>  .../isp/isp_7x/camsys/mtk_cam-seninf-drv.h    |   16 +
+>  .../isp/isp_7x/camsys/mtk_cam-seninf-hw.h     |  120 +
+>  .../isp/isp_7x/camsys/mtk_cam-seninf-if.h     |   28 +
+>  .../isp/isp_7x/camsys/mtk_cam-seninf-regs.h   |   40 +
+>  .../isp/isp_7x/camsys/mtk_cam-seninf-route.c  |  356 ++
+>  .../isp/isp_7x/camsys/mtk_cam-seninf-route.h  |   23 +
+>  .../isp/isp_7x/camsys/mtk_cam-seninf.h        |  170 +
+>  .../isp/isp_7x/camsys/mtk_cam-timesync.c      |  125 +
+>  .../isp/isp_7x/camsys/mtk_cam-timesync.h      |   12 +
+>  .../isp/isp_7x/camsys/mtk_cam-ufbc-def.h      |   59 +
+>  .../isp/isp_7x/camsys/mtk_cam-video.c         | 1817 ++++++
+>  .../isp/isp_7x/camsys/mtk_cam-video.h         |  224 +
+>  .../mediatek/isp/isp_7x/camsys/mtk_cam.c      | 4168 +++++++++++++
+>  .../mediatek/isp/isp_7x/camsys/mtk_cam.h      |  733 +++
+>  .../isp_7x/camsys/mtk_camera-v4l2-controls.h  |   65 +
+>  .../isp_7x/camsys/mtk_csi_phy_2_0/Makefile    |    5 +
+>  .../mtk_csi_phy_2_0/mtk_cam-seninf-cammux.h   |  911 +++
+>  .../mtk_cam-seninf-csi0-cphy.h                |   69 +
+>  .../mtk_cam-seninf-csi0-dphy.h                |  139 +
+>  .../mtk_cam-seninf-hw_phy_2_0.c               | 2879 +++++++++
+>  .../mtk_cam-seninf-mipi-rx-ana-cdphy-csi0a.h  |  257 +
+>  .../mtk_cam-seninf-seninf1-csi2.h             |  415 ++
+>  .../mtk_cam-seninf-seninf1-mux.h              |  147 +
+>  .../mtk_csi_phy_2_0/mtk_cam-seninf-seninf1.h  |   47 +
+>  .../mtk_csi_phy_2_0/mtk_cam-seninf-tg1.h      |   49 +
+>  .../mtk_csi_phy_2_0/mtk_cam-seninf-top-ctrl.h |   99 +
+>  include/uapi/linux/mtkisp_camsys.h            |  227 +
+>  60 files changed, 30194 insertions(+)
+>  create mode 100644 Documentation/devicetree/bindings/media/mediatek/mediatek,cam-raw.yaml
+>  create mode 100644 Documentation/devicetree/bindings/media/mediatek/mediatek,cam-yuv.yaml
+>  create mode 100644 Documentation/devicetree/bindings/media/mediatek/mediatek,camisp.yaml
+>  create mode 100644 Documentation/devicetree/bindings/media/mediatek/mediatek,seninf-core.yaml
+>  create mode 100644 Documentation/devicetree/bindings/media/mediatek/mediatek,seninf.yaml
+>  create mode 100644 drivers/media/platform/mediatek/isp/Kconfig
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/Makefile
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/Makefile
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/kd_imgsensor_define_v4l2.h
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-ctrl.c
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-ctrl.h
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-debug.c
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-debug.h
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-defs.h
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-dmadbg.h
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-feature.c
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-feature.h
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-fmt.h
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-ipi.h
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-meta-mt8188.h
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-plat-util.c
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-plat-util.h
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-pool.c
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-pool.h
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-raw.c
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-raw.h
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-raw_debug.c
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-raw_debug.h
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-regs-mt8188.h
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-seninf-def.h
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-seninf-drv.c
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-seninf-drv.h
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-seninf-hw.h
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-seninf-if.h
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-seninf-regs.h
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-seninf-route.c
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-seninf-route.h
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-seninf.h
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-timesync.c
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-timesync.h
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-ufbc-def.h
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-video.c
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-video.h
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam.c
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam.h
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_camera-v4l2-controls.h
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_csi_phy_2_0/Makefile
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_csi_phy_2_0/mtk_cam-seninf-cammux.h
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_csi_phy_2_0/mtk_cam-seninf-csi0-cphy.h
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_csi_phy_2_0/mtk_cam-seninf-csi0-dphy.h
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_csi_phy_2_0/mtk_cam-seninf-hw_phy_2_0.c
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_csi_phy_2_0/mtk_cam-seninf-mipi-rx-ana-cdphy-csi0a.h
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_csi_phy_2_0/mtk_cam-seninf-seninf1-csi2.h
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_csi_phy_2_0/mtk_cam-seninf-seninf1-mux.h
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_csi_phy_2_0/mtk_cam-seninf-seninf1.h
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_csi_phy_2_0/mtk_cam-seninf-tg1.h
+>  create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_csi_phy_2_0/mtk_cam-seninf-top-ctrl.h
+>  create mode 100644 include/uapi/linux/mtkisp_camsys.h
+
+-- 
+Regards,
+
+Laurent Pinchart
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
