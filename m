@@ -2,153 +2,160 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 598EB9D1522
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 Nov 2024 17:14:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 380639D5536
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 21 Nov 2024 23:10:49 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4824743F47
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 Nov 2024 16:14:14 +0000 (UTC)
-Received: from mail-qt1-f171.google.com (mail-qt1-f171.google.com [209.85.160.171])
-	by lists.linaro.org (Postfix) with ESMTPS id 5FEC43ECD3
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 18 Nov 2024 16:14:06 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E63B144262
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 21 Nov 2024 22:10:47 +0000 (UTC)
+Received: from mail-lj1-f172.google.com (mail-lj1-f172.google.com [209.85.208.172])
+	by lists.linaro.org (Postfix) with ESMTPS id 379A940F7F
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 21 Nov 2024 22:10:41 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=google.com header.s=20230601 header.b="U/DNLwE7";
-	spf=pass (lists.linaro.org: domain of tjmercier@google.com designates 209.85.160.171 as permitted sender) smtp.mailfrom=tjmercier@google.com;
-	dmarc=pass (policy=reject) header.from=google.com
-Received: by mail-qt1-f171.google.com with SMTP id d75a77b69052e-460969c49f2so516591cf.0
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 18 Nov 2024 08:14:06 -0800 (PST)
+	dkim=pass header.d=linaro.org header.s=google header.b=xJOhCFZA;
+	spf=pass (lists.linaro.org: domain of dmitry.baryshkov@linaro.org designates 209.85.208.172 as permitted sender) smtp.mailfrom=dmitry.baryshkov@linaro.org;
+	dmarc=pass (policy=none) header.from=linaro.org
+Received: by mail-lj1-f172.google.com with SMTP id 38308e7fff4ca-2f7657f9f62so15520361fa.3
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 21 Nov 2024 14:10:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1731946446; x=1732551246; darn=lists.linaro.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=KgQtX3b2sNjnE8zCLQLIEHU/IGPvSB2hdJmfWtj8vrk=;
-        b=U/DNLwE70Gy9QEF/dcf0hVUKex8TuYSpb95QYG+r1CFLfho30SDV7Mmih0E02jYJGm
-         0Ie1zbqhVBw6DyswIDBIik9ANVXpHHJAnTXGWsChDmAZm9zqaJlGX1HkATqIju7g01V3
-         FiRIjYHnZZN/Z0bB+3A1cgX/3sNHrJ8f6FCbqFHalyClgCefkL9p22Z4xIT5g63LUzRZ
-         8AndRFG/sXEpTmIGzxKmJk2Tv5SX1QTgbcuc1CgIEJ9mQs7sgrX1zXKxPkKna85mk+t0
-         tZyoEu+pYiIUlSaDQjMGIrfv1p2vjiwX8K+JwRGGmPxM27auNx2dCt5Wx2GLcEi9CNMX
-         3YHA==
+        d=linaro.org; s=google; t=1732227040; x=1732831840; darn=lists.linaro.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=gFDuP7IjDwDMv6NR+DnprUqGpxBiP59fQ/sq6qPsJrg=;
+        b=xJOhCFZA5HP0ogoXZwwd5huKThberZ6v7o1YeIwhfu5UU8rFowSZb3/UfjAVjt+y0H
+         0m009syIGNEuuO0/hH8uKwNeecoK3jcZJYfh1hd6c54RYH9boEY0QxtCzNy56fMfjFMO
+         XDHgW+oRGG4EAzJK6ofc9ciXDNOOJtQDefoCF+Lt5mzBgVTD9rdAzZVDdvdYioG362hI
+         AeVt3SDOi3KIv+Jpok5Qu8O5xqKQfGBvGaqpkVMC3TDaujEBU2SwbJyQBzlpiB/RRIxe
+         a0ufsjsWtxWmeNBTPMWhAXGPmiXiMqeVObC1tMeTVUUCeeRXhNBziuZ9CVLz9fqL5YjD
+         kHhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1731946446; x=1732551246;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=KgQtX3b2sNjnE8zCLQLIEHU/IGPvSB2hdJmfWtj8vrk=;
-        b=Pyi8eOZe9JVyUCeAiknSf5UEYUaPRABRVvtgz8w75tAeZ8EvR/IfjMuUndc0/7Fk1H
-         epYorJeoqANHerRJk3GRhS8Tc/Zqnh40iC6M/ndTHHtGxKCC9vKfkgQV5v4M/1Zw8Owd
-         vbJcPouI7wPmekpbnSiF7P13VraDUwokYDeSbLkp5UbttsUkokA9BGihI5WhNQNfnq4Y
-         eJSWGgUWy/5GFlEDxfhrnja9V30fWz3oMg5HuNykjfVvtT1aDDzwQJDPzCXnN9AClK3z
-         NYda7q23s6FoLVX327G06k33PDiCTsyfhZcFieAQi0Y0FBiKshIhOP0484VxQqLomW38
-         hsOQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWIxnrt3470MCIwZ5gXSbdNOG9X/iUpkICm98u/C9mpyK9zxqF5cBau4v88FG3W5vsPmDDyM3cLc4yax3Uu@lists.linaro.org
-X-Gm-Message-State: AOJu0Yx3Y6wO/4hDAHKj+NMB/DYaXnq/JuapokiAKrSpTRCU4L9TLtj8
-	2Sj4+b9503lthlCUSJv1CYgsOBLSMutmP11Ej8d/mauQUmf3HMlPxABCfIVr3FivPxy/3IOE7CR
-	uSr+T/V2FJ5UBBq2AOq9y6jDxUInVMnsEjaxl
-X-Gm-Gg: ASbGncuURvzJvoxWxyw8dh4lx3NXXz/a61ZUNDqj/dV7j5Ktu6HYRRGhoofs5MPXCIw
-	t+3919vdDdQAbqvmZ6XsQDfzmeNDhGw==
-X-Google-Smtp-Source: AGHT+IHoE7/aCHotukRoUu4H4VbQ1/F4lGejyuSD3dcDuVxfpACZZ6+M09T7GFjLtVDZR877r1fa0KWxO45WSo9TeDk=
-X-Received: by 2002:a05:622a:2988:b0:462:c158:9f5b with SMTP id
- d75a77b69052e-4637156d12fmr5824231cf.19.1731946445606; Mon, 18 Nov 2024
- 08:14:05 -0800 (PST)
+        d=1e100.net; s=20230601; t=1732227040; x=1732831840;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=gFDuP7IjDwDMv6NR+DnprUqGpxBiP59fQ/sq6qPsJrg=;
+        b=R/wETDNMR4QJVEauWTN86CKBp4kV51DYcxbHKYGSBPtcQ+isssoR7emFeGVYom6q/I
+         S5MIONaDXUIeAdEUylY8JwY+Z6gf82ukFh/MQKFVns9pNjk3g6qU8GFU+ihv6gIAKi37
+         6xQ+3WicvKEGvgWn2U/3TE5z5gYWFBPHysQXAvsgI6Sk1bl8fPgpXuXzIgDBKAQdXj8M
+         R6Gulme8tkrgF3H7Zp0vfcBnq19cOLzKfd51to9UU2hO5fDi4zOIrU+7GI2DJb6V2bBp
+         9PqeN313nJqlUs8ionkHVLXEc85BmhUktqbhGuT9AtsT23w8RYaBpKMtq8KSFFSMcc1C
+         gz2w==
+X-Forwarded-Encrypted: i=1; AJvYcCXeV7dUDqbQlJ/QSDI5/7CGhi8xtgqC1Ol5kYC+CoEHs+OAZ/RghtCuM+cTIWAJasMDLIbWQas91XSmJMXd@lists.linaro.org
+X-Gm-Message-State: AOJu0YzWdBlv3bb+Hl0OR8i9vmbN0l37jp0ZIafxY9iDUO3mBbNRYAC8
+	cuWYltv5kAWYX9vMtb50Eh6k6tVi8Dt0xXz+DpyIlmpEWH/DCPPKacCzUIBtpHIaJA==
+X-Gm-Gg: ASbGncufDPFvQuJiDWQaUzuQsilPGKX62rguEnDwr/KL1ANBd2m02pwx4CaWNCxjde2
+	gxlnBx8BCOcQLkJe2MCZVBPH43zhq3uL1zFkE9tWsXbD6sJQ+997HYV8TtPqT5sFbGilDwV8H5I
+	9AIOPuPXcOaDSzl3MoLQO0AWd2mC1zTWob5eGAwRB62ep1Dfj9/uQ46/Kmy/2pYGIYwcpV/2m+f
+	xk5W4exHtJMzuNCe767e5iLiczzpyad7tOxJ8E1qXTiAxAexMwMi3jzpkBKOjBWXlkJuVinfU9V
+	D22k6h3NqQSGkV2yTvCNnTu86WwaHA==
+X-Google-Smtp-Source: AGHT+IF5UEvVH8EwlVFvDbA8yqDXP2EnIvz85XTHp+jyVxMS03tfkpla0bwll8dc1ETCUfCWi+KKfg==
+X-Received: by 2002:a05:651c:2208:b0:2f4:3de7:ac4c with SMTP id 38308e7fff4ca-2ffa70f0968mr1996351fa.8.1732227039935;
+        Thu, 21 Nov 2024 14:10:39 -0800 (PST)
+Received: from eriador.lumag.spb.ru (2001-14ba-a0c3-3a00--b8c.rev.dnainternet.fi. [2001:14ba:a0c3:3a00::b8c])
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-2ffa538f100sm593151fa.103.2024.11.21.14.10.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 21 Nov 2024 14:10:38 -0800 (PST)
+Date: Fri, 22 Nov 2024 00:10:36 +0200
+From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+To: Jyothi Kumar Seerapu <quic_jseerapu@quicinc.com>
+Message-ID: <zfkhbjm6wrmcocqcvluov3nbrpb2ozbo52c6nlwxro44gublcw@5645ksz4cfm2>
+References: <20241121130134.29408-1-quic_jseerapu@quicinc.com>
+ <20241121130134.29408-4-quic_jseerapu@quicinc.com>
 MIME-Version: 1.0
-References: <20241117170326.1971113-1-tjmercier@google.com> <468d41ad-9f89-4a83-8eb1-9bd7efaf1367@ursulin.net>
-In-Reply-To: <468d41ad-9f89-4a83-8eb1-9bd7efaf1367@ursulin.net>
-From: "T.J. Mercier" <tjmercier@google.com>
-Date: Mon, 18 Nov 2024 08:13:54 -0800
-Message-ID: <CABdmKX2203KMx5P2x02C=YFCtiR6b5u2JzLS9SbPRh08FzqAKw@mail.gmail.com>
-To: Tvrtko Ursulin <tursulin@ursulin.net>
-X-Rspamd-Queue-Id: 5FEC43ECD3
+Content-Disposition: inline
+In-Reply-To: <20241121130134.29408-4-quic_jseerapu@quicinc.com>
+X-Rspamd-Queue-Id: 379A940F7F
 X-Spamd-Bar: ----
-X-Spamd-Result: default: False [-5.00 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
-	RBL_SENDERSCORE_REPUT_9(-1.00)[209.85.160.171:from];
-	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	R_DKIM_ALLOW(-0.20)[google.com:s=20230601];
+X-Spamd-Result: default: False [-4.50 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
+	RBL_SENDERSCORE_REPUT_9(-1.00)[209.85.208.172:from];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
+	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
 	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	MIME_GOOD(-0.10)[text/plain];
-	ARC_NA(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.208.172:from];
+	RCPT_COUNT_TWELVE(0.00)[14];
 	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	RCVD_COUNT_ONE(0.00)[1];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.160.171:from];
-	TO_DN_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_SEVEN(0.00)[8];
-	URIBL_BLOCKED(0.00)[ursulin.net:email,igalia.com:email,mail-qt1-f171.google.com:rdns,mail-qt1-f171.google.com:helo,kernelci.org:url,googlesource.com:url];
-	SUBJECT_HAS_EXCLAIM(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	ARC_NA(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_TLS_LAST(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	TO_DN_SOME(0.00)[];
+	URIBL_BLOCKED(0.00)[quicinc.com:email];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	NEURAL_HAM(-0.00)[-1.000];
-	DKIM_TRACE(0.00)[google.com:+]
+	DKIM_TRACE(0.00)[linaro.org:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: 7VZVWZWE6LEYHPZVZ74EDEJJAZDD5YMJ
-X-Message-ID-Hash: 7VZVWZWE6LEYHPZVZ74EDEJJAZDD5YMJ
-X-MailFrom: tjmercier@google.com
+Message-ID-Hash: VUG4QH7T33X2PT2FEUXCEOUNLQ4SLMYF
+X-Message-ID-Hash: VUG4QH7T33X2PT2FEUXCEOUNLQ4SLMYF
+X-MailFrom: dmitry.baryshkov@linaro.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, =?UTF-8?B?TWHDrXJhIENhbmFs?= <mcanal@igalia.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
+CC: Vinod Koul <vkoul@kernel.org>, Andi Shyti <andi.shyti@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, linux-arm-msm@vger.kernel.org, dmaengine@vger.kernel.org, linux-kernel@vger.kernel.org, linux-i2c@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, quic_msavaliy@quicinc.com, quic_vtanuku@quicinc.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf: Fix __dma_buf_debugfs_list_del argument for !CONFIG_DEBUG_FS
+Subject: [Linaro-mm-sig] Re: [PATCH v3 3/3] i2c: i2c-qcom-geni: Update compile dependenices for I2C GENI driver
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7VZVWZWE6LEYHPZVZ74EDEJJAZDD5YMJ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VUG4QH7T33X2PT2FEUXCEOUNLQ4SLMYF/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-T24gTW9uLCBOb3YgMTgsIDIwMjQgYXQgMToxNeKAr0FNIFR2cnRrbyBVcnN1bGluIDx0dXJzdWxp
-bkB1cnN1bGluLm5ldD4gd3JvdGU6DQo+DQo+DQo+IE9uIDE3LzExLzIwMjQgMTc6MDMsIFQuSi4g
-TWVyY2llciB3cm90ZToNCj4gPiBUaGUgYXJndW1lbnRzIGZvciBfX2RtYV9idWZfZGVidWdmc19s
-aXN0X2RlbCBkbyBub3QgbWF0Y2ggZm9yIGJvdGggdGhlDQo+ID4gQ09ORklHX0RFQlVHX0ZTIGNh
-c2UgYW5kIHRoZSAhQ09ORklHX0RFQlVHX0ZTIGNhc2UuIFRoZSAhQ09ORklHX0RFQlVHX0ZTDQo+
-ID4gY2FzZSBzaG91bGQgdGFrZSBhIHN0cnVjdCBkbWFfYnVmICosIGJ1dCBpdCdzIGN1cnJlbnRs
-eSBzdHJ1Y3QgZmlsZSAqLg0KPiA+IFRoaXMgY2FuIGxlYWQgdG8gdGhlIGJ1aWxkIGVycm9yOg0K
-PiA+DQo+ID4gZXJyb3I6IHBhc3NpbmcgYXJndW1lbnQgMSBvZiDigJhfX2RtYV9idWZfZGVidWdm
-c19saXN0X2RlbOKAmSBmcm9tDQo+ID4gaW5jb21wYXRpYmxlIHBvaW50ZXIgdHlwZSBbLVdlcnJv
-cj1pbmNvbXBhdGlibGUtcG9pbnRlci10eXBlc10NCj4gPg0KPiA+IGRtYS1idWYuYzo2Mzo1Mzog
-bm90ZTogZXhwZWN0ZWQg4oCYc3RydWN0IGZpbGUgKuKAmSBidXQgYXJndW1lbnQgaXMgb2YNCj4g
-PiB0eXBlIOKAmHN0cnVjdCBkbWFfYnVmICrigJkNCj4gPiAgICAgNjMgfCBzdGF0aWMgdm9pZCBf
-X2RtYV9idWZfZGVidWdmc19saXN0X2RlbChzdHJ1Y3QgZmlsZSAqZmlsZSkNCj4gPg0KPiA+IEZp
-eGVzOiBiZmM3YmM1MzkzOTIgKCJkbWEtYnVmOiBEbyBub3QgYnVpbGQgZGVidWdmcyByZWxhdGVk
-IGNvZGUgd2hlbiAhQ09ORklHX0RFQlVHX0ZTIikNCj4gPiBTaWduZWQtb2ZmLWJ5OiBULkouIE1l
-cmNpZXIgPHRqbWVyY2llckBnb29nbGUuY29tPg0KPiA+IC0tLQ0KPiA+ICAgZHJpdmVycy9kbWEt
-YnVmL2RtYS1idWYuYyB8IDIgKy0NCj4gPiAgIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigr
-KSwgMSBkZWxldGlvbigtKQ0KPiA+DQo+ID4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZG1hLWJ1Zi9k
-bWEtYnVmLmMgYi9kcml2ZXJzL2RtYS1idWYvZG1hLWJ1Zi5jDQo+ID4gaW5kZXggODg5MmJjNzAx
-YTY2Li5hZmI4YzFjNTAxMDcgMTAwNjQ0DQo+ID4gLS0tIGEvZHJpdmVycy9kbWEtYnVmL2RtYS1i
-dWYuYw0KPiA+ICsrKyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtYnVmLmMNCj4gPiBAQCAtNjAsNyAr
-NjAsNyBAQCBzdGF0aWMgdm9pZCBfX2RtYV9idWZfZGVidWdmc19saXN0X2FkZChzdHJ1Y3QgZG1h
-X2J1ZiAqZG1hYnVmKQ0KPiA+ICAgew0KPiA+ICAgfQ0KPiA+DQo+ID4gLXN0YXRpYyB2b2lkIF9f
-ZG1hX2J1Zl9kZWJ1Z2ZzX2xpc3RfZGVsKHN0cnVjdCBmaWxlICpmaWxlKQ0KPiA+ICtzdGF0aWMg
-dm9pZCBfX2RtYV9idWZfZGVidWdmc19saXN0X2RlbChzdHJ1Y3QgZG1hX2J1ZiAqZG1hYnVmKQ0K
-PiA+ICAgew0KPiA+ICAgfQ0KPiA+ICAgI2VuZGlmDQo+DQo+IEh1aCBJIHdvbmRlciBob3cgdGhp
-cyBzbmVha2VkIGJ5IHVudGlsIG5vdy4uIHRoYW5rcyBmb3IgZml4aW5nIQ0KPg0KPiBSZXZpZXdl
-ZC1ieTogVHZydGtvIFVyc3VsaW4gPHR2cnRrby51cnN1bGluQGlnYWxpYS5jb20+DQo+DQo+IFJl
-Z2FyZHMsDQo+DQo+IFR2cnRrbw0KDQpUaGFua3MgVHZydGtvLiBVcHN0cmVhbSB0aGVyZSBpcyBj
-dXJyZW50bHkgb25seSB0aGUgb25lIHVzZSB3aGVyZSBpdCdzDQpjYWxsZWQgd2l0aCBhIHZvaWQg
-cG9pbnRlciB3aGljaCBkb2Vzbid0IGdlbmVyYXRlIHRoZSBlcnJvciwgYnV0DQpLZXJuZWxDSSBj
-YXVnaHQgdGhlIHByb2JsZW0gb24gYW4gQW5kcm9pZCBicmFuY2ggd2hlcmUgaXQncyBhbHNvDQpj
-YWxsZWQgd2l0aCBhIGRtYV9idWYgcG9pbnRlcjoNCg0KaHR0cHM6Ly9kYXNoYm9hcmQua2VybmVs
-Y2kub3JnL3RyZWUvNWE0YzkzZTJmNzk0MDAxYTVlZmExM2MwZGVjOTMxMjM1MjQwZDM4NC9idWls
-ZC9tYWVzdHJvOjY3MzdlNjBkMWE0OGU3ODIxOTMwMzQ1ZD90YWJsZUZpbHRlcj0lN0IlMjJidWls
-ZHNUYWJsZSUyMiUzQSUyMmludmFsaWQlMjIlMkMlMjJib290c1RhYmxlJTIyJTNBJTIyYWxsJTIy
-JTJDJTIydGVzdHNUYWJsZSUyMiUzQSUyMmFsbCUyMiU3RCZvcmlnaW49bWFlc3RybyZjdXJyZW50
-UGFnZVRhYj10cmVlRGV0YWlscy5idWlsZHMmZGlmZkZpbHRlcj0lN0IlN0QmdHJlZUluZm89JTdC
-JTIyZ2l0QnJhbmNoJTIyJTNBJTIyYW5kcm9pZDE2LTYuMTIlMjIlMkMlMjJnaXRVcmwlMjIlM0El
-MjJodHRwcyUzQSUyRiUyRmFuZHJvaWQuZ29vZ2xlc291cmNlLmNvbSUyRmtlcm5lbCUyRmNvbW1v
-biUyMiUyQyUyMnRyZWVOYW1lJTIyJTNBJTIyYW5kcm9pZCUyMiUyQyUyMmNvbW1pdE5hbWUlMjIl
-M0ElMjJBU0ItMjAyNC0xMS0wNV8xNi02LjEyLTM3MC1nNWE0YzkzZTJmNzk0MCUyMiUyQyUyMmhl
-YWRDb21taXRIYXNoJTIyJTNBJTIyNWE0YzkzZTJmNzk0MDAxYTVlZmExM2MwZGVjOTMxMjM1MjQw
-ZDM4NCUyMiU3RCZpbnRlcnZhbEluRGF5cz03DQpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8t
-bW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBs
-aW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+On Thu, Nov 21, 2024 at 06:31:34PM +0530, Jyothi Kumar Seerapu wrote:
+> I2C functionality has dependencies on the GPI driver.
+> Ensure that the GPI driver is enabled when using the I2C
+> driver functionality.
+> Therefore, update the I2C GENI driver to depend on the GPI driver.
+> 
+> Signed-off-by: Jyothi Kumar Seerapu <quic_jseerapu@quicinc.com>
+> ---
+> v2 -> v3:
+>    - Moved this change to patch3.
+>    - Updated commit description.
+> 
+> v1 -> v2:
+>    -  This patch is added in v2 to address the kernel test robot
+>       reported compilation error.
+>       ERROR: modpost: "gpi_multi_desc_process" [drivers/i2c/busses/i2c-qcom-geni.ko] undefined!
+> 
+>  drivers/i2c/busses/Kconfig | 1 +
+>  1 file changed, 1 insertion(+)
+> 
+> diff --git a/drivers/i2c/busses/Kconfig b/drivers/i2c/busses/Kconfig
+> index 0aa948014008..87634a682855 100644
+> --- a/drivers/i2c/busses/Kconfig
+> +++ b/drivers/i2c/busses/Kconfig
+> @@ -1049,6 +1049,7 @@ config I2C_QCOM_GENI
+>  	tristate "Qualcomm Technologies Inc.'s GENI based I2C controller"
+>  	depends on ARCH_QCOM || COMPILE_TEST
+>  	depends on QCOM_GENI_SE
+> +	depends on QCOM_GPI_DMA
+
+So... without this change the previous patch is broken, which is a
+no-go. And anyway, adding dependency onto a particular DMA driver is a
+bad idea. Please make use of the DMA API instead.
+
+>  	help
+>  	  This driver supports GENI serial engine based I2C controller in
+>  	  master mode on the Qualcomm Technologies Inc.'s SoCs. If you say
+> -- 
+> 2.17.1
+> 
+
+-- 
+With best wishes
+Dmitry
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
