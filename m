@@ -2,46 +2,46 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 871AF9D705F
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 24 Nov 2024 14:33:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6F5519D70DF
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 24 Nov 2024 14:41:30 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 490D144037
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 24 Nov 2024 13:33:29 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5552F3F56F
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 24 Nov 2024 13:41:29 +0000 (UTC)
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id 822FC3F575
-	for <linaro-mm-sig@lists.linaro.org>; Sun, 24 Nov 2024 13:33:20 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id C72A73F56F
+	for <linaro-mm-sig@lists.linaro.org>; Sun, 24 Nov 2024 13:41:20 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=RsrOZnBe;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=bL+1RWdN;
 	spf=pass (lists.linaro.org: domain of sashal@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=sashal@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by dfw.source.kernel.org (Postfix) with ESMTP id 6D0EF5C4ABA;
-	Sun, 24 Nov 2024 13:32:36 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8C0D4C4CECC;
-	Sun, 24 Nov 2024 13:33:18 +0000 (UTC)
+	by dfw.source.kernel.org (Postfix) with ESMTP id C4E625C04E5;
+	Sun, 24 Nov 2024 13:40:36 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 93B1CC4CED3;
+	Sun, 24 Nov 2024 13:41:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1732455199;
+	s=k20201202; t=1732455680;
 	bh=jVug0B5z0yu25jHuiw9klU8LOF+X8Zb4FdA8H54E8Dc=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=RsrOZnBeQW5ERhpJCn/6DTSPjiY4ilCYZfTJTzB5OLal/tSzON11x/CyRrOQxfjza
-	 7V7r4fF95KHSTD6Hngaq6s5urabUaBJ05Oq1wirrZNUCmOA0Gxo+ftfl5lLfPTK1hW
-	 Q6fjUweKwuS6trfHRqh4bw7DNZh0MexswIvdc9KFyVq9ufCmZmSZUFYDsytrxhRbOA
-	 URsGpjawer8oMTlTKTMXKibTwFO9Gtltq+IjAaYR0yfygpE0GaUyLJwTS7S850WbXo
-	 WI7lN3/JzmScwSi0XRvmxABihL9HGMStxpH5z1YFHqXLP2epDVILqw653RTYO8pof1
-	 VZqgAUmYGqDKw==
+	b=bL+1RWdN3Y9oXYTlDtUjDEgmYO4eAGq7GBu3qDJRIdTm5z8JqSRl6I/cOqdYYHDOc
+	 zkOfs7p4plmhag+C7lq2TcFUCk9o3/b1st7Gk1gz1ut6JlyLNgLcjS6h5yGX9VcRPv
+	 UaqshYRyOarDZpujr+3Gn7Oo6yqINARSzvcwiiH2PV9TVeTR54B3GToWN/Yaw7OaPK
+	 vvWKwzfS1w4YHszfErygysk3b1LYAPndmM4AeIKsu9L5D58bQEXsO7PwsxQb3b5aJL
+	 U8ljr66JSLLAr5ARerM1w8ObuhyzoyrqI+cOdDlvalBYobN53RNVIV3bTfnMoYyawA
+	 q31Ir1SmSdMJg==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Sun, 24 Nov 2024 08:28:29 -0500
-Message-ID: <20241124133301.3341829-9-sashal@kernel.org>
+Date: Sun, 24 Nov 2024 08:37:46 -0500
+Message-ID: <20241124134102.3344326-8-sashal@kernel.org>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241124133301.3341829-1-sashal@kernel.org>
-References: <20241124133301.3341829-1-sashal@kernel.org>
+In-Reply-To: <20241124134102.3344326-1-sashal@kernel.org>
+References: <20241124134102.3344326-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-X-stable-base: Linux 6.12.1
-X-Rspamd-Queue-Id: 822FC3F575
+X-stable-base: Linux 6.11.10
+X-Rspamd-Queue-Id: C72A73F56F
 X-Spamd-Bar: ----
 X-Spamd-Result: default: False [-4.00 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
@@ -66,16 +66,16 @@ X-Spamd-Result: default: False [-4.00 / 15.00];
 	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: LU3LCTD3SERN2UXZ7NS2RUCY3IHSIRQL
-X-Message-ID-Hash: LU3LCTD3SERN2UXZ7NS2RUCY3IHSIRQL
+Message-ID-Hash: TPNIPXGAKUHGZB3O4FGTDAFFAHQI76DK
+X-Message-ID-Hash: TPNIPXGAKUHGZB3O4FGTDAFFAHQI76DK
 X-MailFrom: sashal@kernel.org
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: Huan Yang <link@vivo.com>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, Sasha Levin <sashal@kernel.org>, kraxel@redhat.com, sumit.semwal@linaro.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH AUTOSEL 6.12 009/107] udmabuf: change folios array from kmalloc to kvmalloc
+Subject: [Linaro-mm-sig] [PATCH AUTOSEL 6.11 08/87] udmabuf: change folios array from kmalloc to kvmalloc
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LU3LCTD3SERN2UXZ7NS2RUCY3IHSIRQL/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TPNIPXGAKUHGZB3O4FGTDAFFAHQI76DK/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
