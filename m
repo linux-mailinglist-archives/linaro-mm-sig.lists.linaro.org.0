@@ -2,93 +2,97 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 524A69E15AB
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  3 Dec 2024 09:27:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 557D89E193D
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  3 Dec 2024 11:28:24 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5792944643
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  3 Dec 2024 08:27:31 +0000 (UTC)
-Received: from mail-vs1-f45.google.com (mail-vs1-f45.google.com [209.85.217.45])
-	by lists.linaro.org (Postfix) with ESMTPS id 81B4841090
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  3 Dec 2024 08:27:22 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 423B7448DB
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  3 Dec 2024 10:28:23 +0000 (UTC)
+Received: from mail-oa1-f47.google.com (mail-oa1-f47.google.com [209.85.160.47])
+	by lists.linaro.org (Postfix) with ESMTPS id 799FC40D0F
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  3 Dec 2024 10:28:14 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=linaro.org header.s=google header.b=LlCh2d+9;
-	spf=pass (lists.linaro.org: domain of sumit.garg@linaro.org designates 209.85.217.45 as permitted sender) smtp.mailfrom=sumit.garg@linaro.org;
+	dkim=pass header.d=linaro.org header.s=google header.b=K6lyFdX6;
+	spf=pass (lists.linaro.org: domain of jens.wiklander@linaro.org designates 209.85.160.47 as permitted sender) smtp.mailfrom=jens.wiklander@linaro.org;
 	dmarc=pass (policy=none) header.from=linaro.org
-Received: by mail-vs1-f45.google.com with SMTP id ada2fe7eead31-4af40cf7fadso1538563137.3
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 03 Dec 2024 00:27:22 -0800 (PST)
+Received: by mail-oa1-f47.google.com with SMTP id 586e51a60fabf-29e8a0323c5so253762fac.0
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 03 Dec 2024 02:28:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1733214442; x=1733819242; darn=lists.linaro.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=Xg+F5KKw2r0vQLOAe4QkycJMBq/a07Abzd6JRFG4e9A=;
-        b=LlCh2d+9Ilk0aMfdIvNSom4jSLXN0/GaYxNS+CqQYGxQhl3YjOWqqm8/gAGunQYD3J
-         7IgLDXfUvj5uFMNMoaEc5DB3WcdvXRpUqIwfgSdZ98hkVYd2Puq8/9yXbcTCBt0/WOqc
-         rEELByk+sOdkr+hPOxnx1/b/rxAUG6x1azPavGxWqvYbGalMVX1u5JbohjqP3Xo3X2bM
-         Nie0+0QJNnLAuxXDcsIh7bbnn4PeF7KCjUfp54aEXNPzg2m9ycYOl5CRg0XTKGO12AFi
-         LBOyD8fBpsBBf3XDbmLPl7ouWpXtNDkSDw5j3U633UUZK9hmjoFMXs/LA3cRvWThaOGg
-         +3cA==
+        d=linaro.org; s=google; t=1733221694; x=1733826494; darn=lists.linaro.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=szMjYhLmvnOIq7UYWf9U8DwVenX7Tbf0SvMgbRmyvkA=;
+        b=K6lyFdX6ktbEYwpC7JcWsGeWj8WdYDwEmgvLElLqEITwPxvYVTfrAgaoLQISRVirEr
+         BEKthEHMLR0Jta0wX1iKnS8FuWDtX3HW1gbGwRwf7zqFYaZSbLza4eC+pDYbzcijB3mO
+         Mg6cJ3ZzwpEqB8ZkhMidjLlkNyu1MNt/C2qNN13MnZ6PEYIRsdpbLhLxZJjCED8/rSOA
+         reEsg8dg2Owz2HeQlVuavfTkfGb+ZwTA9c4c2+QLjQDISi/cQxJ61y7K62PP5Q98Ffqk
+         upoYLPx5Uwupt7M7aN0CSUGIT+JoMttHnYQUHhYfraiwd5kjPDGW/AbuJmL6fauNBb74
+         lJIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1733214442; x=1733819242;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Xg+F5KKw2r0vQLOAe4QkycJMBq/a07Abzd6JRFG4e9A=;
-        b=NL51OJlE/JyfDaBkQuj7g5CJq+M/jtsFH1Eu5N7iSUg8cRynIGRm7F+qEt4gnvNMaG
-         rqP2fNY0wMbanWUv7EMGmv7JwOfiYQfUKbRfq2gvazsgzJJI43Pvf9skcqDcaL2JiBg3
-         JoysX6b8a29azx7p0Z4KCmsgaU7dB9rcDxyZkGdWAKRN4viBMWbSjvfWxhQKpiaPRHWq
-         x5glnmwkTd2+hfk7UNlzZXFvvBIZ2A/hq/FbK1Ny8yvFbpwqUZmCHgYpK8yWMYnxcd0R
-         T3hHLcm/ycoF1Heo9gxJSNTrZgtgYBf3rqlxop7gTya4licF8VGM4/8g8NMxyLczMrOA
-         OFUQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWG8hfUAYi8ZqFYHk1NdPSQxVQt/OUqA26Jx37vlbUuYd11lVx0T830HsnIy0fPHoUZK+nX56zURkN9Nkrw@lists.linaro.org
-X-Gm-Message-State: AOJu0YzhkbPUqGkgGfmkUEXO/aeJUY5VK/ct9wwBsr2xTZuwSDXyQ63F
-	XvSvcVVV7gWa17Cz7/W2IsFo4PXZW9TnD2LaGNurNuIh8sOOCIz/ijRCDw4EmZCaBh4qv0+j7Ji
-	05CJLJ7bpGEzgAEeHBEsEvcVNd7Bo6onQBdY9PtKw
-X-Gm-Gg: ASbGncsCQ2P9RxPQCCxHANO0TQflGI8dB3g1p7d/ue9C0q7OnByaLesioad7i/io5y6
-	JFfOUFnp7rWvQglaABYuWVoDzhgxKSs9SBw==
-X-Google-Smtp-Source: AGHT+IGaTN/p8BULgFdyOAJGuWzvkuLZQWmA9o3EM8C85tJ7kIMh9XKXlTdWPk7y0YLXtY2NHUh28nknRnSVJahtofg=
-X-Received: by 2002:a05:6102:d87:b0:4af:58f7:15ed with SMTP id
- ada2fe7eead31-4af971838d3mr2334917137.1.1733214441776; Tue, 03 Dec 2024
- 00:27:21 -0800 (PST)
+        d=1e100.net; s=20230601; t=1733221694; x=1733826494;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=szMjYhLmvnOIq7UYWf9U8DwVenX7Tbf0SvMgbRmyvkA=;
+        b=PvA9zsXciSWJNMGESAWY0rrVBxWKhbbZaEUcuhUCMIrMmuhrgt9mGaj8SfuzNA6qsG
+         CGVO4exB4+gFHohFYyWKsKKbrPa8NIP/ouIdTbuasoWP7ULbJJgjZuY4xRwc61Se04Tm
+         aVvnSplNo1e/dPxnSXbgfAQFGEMbnknO9Q999ZtZ8Lb+eqEhUzEnP72cEw8tCSKqrsQc
+         CGwi0SY5Q/kaJkjitaNDH08ffietYkh2/DrAUzkZomFsJhkP25Qb35K/wTenRpOdVR8N
+         5dsyi3Hs1WIG3+2VKX+pwAQd4jqZaV/dCKfDJ5LOqfGf5PuAk4/bJS+Dx6R1/U22E03i
+         FFgA==
+X-Forwarded-Encrypted: i=1; AJvYcCXRN37bqGUp+M8Gwd96GbY2red5pGtMWYvCZxdXHLg+Nyt9yvl8RIBhkJAKdP9idhNoKNDulHeMABmUwce3@lists.linaro.org
+X-Gm-Message-State: AOJu0YzifzhYqlhqV/SzTUwy19LkLuu7L956xuG7agIX0aELxUQfYIBG
+	nKBRjFhlP39zITWV2IJ4pbrRotDD6EFI11THDwzjlW/EucghLHwSW6USqlpJxNkU/4s95JUhltV
+	NnW0Y+ZSukBCU4jOHxYIuEG0yzevCVicOZrDHjLVY
+X-Gm-Gg: ASbGnctG6xH+nHjaWJJGaH0CTm9zgrJLZrYpFpMXwwFB6xgVVmqT7nALgeX9Ukc8D8o
+	dFU4psI7QceC0ECIwYXQo6Sr8eGgAVQw=
+X-Google-Smtp-Source: AGHT+IH4Z/Nd6XxWJTdvWTolxxpEx7k3XcaTpE98NMTucqyi2Iro+vI+jzcfIHfBqQMGKA94ELysqamKdvo9Qm/nYEo=
+X-Received: by 2002:a05:6870:d205:b0:29e:3132:5897 with SMTP id
+ 586e51a60fabf-29e885a9493mr1779432fac.5.1733221693704; Tue, 03 Dec 2024
+ 02:28:13 -0800 (PST)
 MIME-Version: 1.0
-References: <20241128150927.1377981-1-jens.wiklander@linaro.org> <20241128150927.1377981-3-jens.wiklander@linaro.org>
-In-Reply-To: <20241128150927.1377981-3-jens.wiklander@linaro.org>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Tue, 3 Dec 2024 13:57:10 +0530
-Message-ID: <CAFA6WYPEqCWyvD=pCj6DEkZWN9SCfXMnq4tKbSx1-e8UmgXb=Q@mail.gmail.com>
-To: Jens Wiklander <jens.wiklander@linaro.org>
-X-Rspamd-Queue-Id: 81B4841090
-X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.50 / 15.00];
+References: <20241128150927.1377981-1-jens.wiklander@linaro.org>
+ <20241128150927.1377981-3-jens.wiklander@linaro.org> <CAFA6WYPEqCWyvD=pCj6DEkZWN9SCfXMnq4tKbSx1-e8UmgXb=Q@mail.gmail.com>
+In-Reply-To: <CAFA6WYPEqCWyvD=pCj6DEkZWN9SCfXMnq4tKbSx1-e8UmgXb=Q@mail.gmail.com>
+From: Jens Wiklander <jens.wiklander@linaro.org>
+Date: Tue, 3 Dec 2024 11:28:02 +0100
+Message-ID: <CAHUa44H0go3fSMt_jreWz4EQgYvo8GOZ5woc-x5Cyi680oWZWw@mail.gmail.com>
+To: Sumit Garg <sumit.garg@linaro.org>
+X-Rspamd-Queue-Id: 799FC40D0F
+X-Spamd-Bar: -
+X-Spamd-Result: default: False [-1.50 / 15.00];
+	RBL_NIXSPAM(4.00)[209.85.160.47:from];
+	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
-	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	MIME_GOOD(-0.10)[text/plain];
-	ARC_NA(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[19];
-	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	TO_DN_SOME(0.00)[];
-	RBL_SENDERSCORE_REPUT_8(0.00)[209.85.217.45:from];
-	RCVD_COUNT_ONE(0.00)[1];
-	TAGGED_RCPT(0.00)[];
-	RCVD_IN_DNSWL_NONE(0.00)[209.85.217.45:from];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	BAD_REP_POLICIES(0.10)[];
+	DKIM_TRACE(0.00)[linaro.org:+];
 	FREEMAIL_CC(0.00)[vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.trustedfirmware.org,lists.infradead.org,nxp.com,gmail.com,mediatek.com,linaro.org,collabora.com,arm.com,google.com,amd.com,qti.qualcomm.com];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.217.45:from];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	DMARC_POLICY_ALLOW(0.00)[linaro.org,none];
+	R_DKIM_ALLOW(0.00)[linaro.org:s=google];
+	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
+	ARC_NA(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	RCVD_COUNT_ONE(0.00)[1];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	NEURAL_HAM(-0.00)[-1.000];
-	DKIM_TRACE(0.00)[linaro.org:+]
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[19];
+	TAGGED_RCPT(0.00)[];
+	RBL_SENDERSCORE_REPUT_8(0.00)[209.85.160.47:from];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.160.47:from];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	R_SPF_ALLOW(0.00)[+ip4:209.85.128.0/17];
+	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: LD6EXZ5PJS6YMSCATWCWTUEMTCUDETH4
-X-Message-ID-Hash: LD6EXZ5PJS6YMSCATWCWTUEMTCUDETH4
-X-MailFrom: sumit.garg@linaro.org
+Message-ID-Hash: 2LL2FRWV2ETYNEXRS4KTZJMLHCXDVEAY
+X-Message-ID-Hash: 2LL2FRWV2ETYNEXRS4KTZJMLHCXDVEAY
+X-MailFrom: jens.wiklander@linaro.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, op-tee@lists.trustedfirmware.org, linux-arm-kernel@lists.infradead.org, Olivier Masse <olivier.masse@nxp.com>, Thierry Reding <thierry.reding@gmail.com>, Yong Wu <yong.wu@mediatek.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T . J . Mercier" <tjmercier@google.com>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Matthias Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, azarrabi@qti.qualcomm.com
@@ -96,637 +100,547 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH v3 2/4] optee: account for direction while converting parameters
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LD6EXZ5PJS6YMSCATWCWTUEMTCUDETH4/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2LL2FRWV2ETYNEXRS4KTZJMLHCXDVEAY/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Hi Jens,
-
-On Thu, 28 Nov 2024 at 20:39, Jens Wiklander <jens.wiklander@linaro.org> wrote:
->
-> The OP-TEE backend driver has two internal function pointers to convert
-> between the subsystem type struct tee_param and the OP-TEE type struct
-> optee_msg_param.
->
-> The conversion is done from one of the types to the other, which is then
-> involved in some operation and finally converted back to the original
-> type. When converting to prepare the parameters for the operation, all
-> fields must be taken into account, but then converting back, it's enough
-> to update only out-values and out-sizes. So, an update_out parameter is
-> added to the conversion functions to tell if all or only some fields
-> must be copied.
-
-Is this patch just a refactoring of TEE params handling? Or are we
-fixing a real ABI issue here? Also, is this required for restricted
-shared memory support to work? Just asking if we want to consider it
-as a fix for backporting or if we can handle this refactoring patch
-independently of this series?
-
--Sumit
-
->
-> Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
-> ---
->  drivers/tee/optee/call.c          | 10 ++--
->  drivers/tee/optee/ffa_abi.c       | 43 +++++++++++++----
->  drivers/tee/optee/optee_private.h | 42 +++++++++++------
->  drivers/tee/optee/rpc.c           | 31 +++++++++----
->  drivers/tee/optee/smc_abi.c       | 76 +++++++++++++++++++++++--------
->  5 files changed, 144 insertions(+), 58 deletions(-)
->
-> diff --git a/drivers/tee/optee/call.c b/drivers/tee/optee/call.c
-> index 16eb953e14bb..f1533b894726 100644
-> --- a/drivers/tee/optee/call.c
-> +++ b/drivers/tee/optee/call.c
-> @@ -400,7 +400,8 @@ int optee_open_session(struct tee_context *ctx,
->         export_uuid(msg_arg->params[1].u.octets, &client_uuid);
->
->         rc = optee->ops->to_msg_param(optee, msg_arg->params + 2,
-> -                                     arg->num_params, param);
-> +                                     arg->num_params, param,
-> +                                     false /*!update_out*/);
->         if (rc)
->                 goto out;
->
-> @@ -427,7 +428,8 @@ int optee_open_session(struct tee_context *ctx,
->         }
->
->         if (optee->ops->from_msg_param(optee, param, arg->num_params,
-> -                                      msg_arg->params + 2)) {
-> +                                      msg_arg->params + 2,
-> +                                      true /*update_out*/)) {
->                 arg->ret = TEEC_ERROR_COMMUNICATION;
->                 arg->ret_origin = TEEC_ORIGIN_COMMS;
->                 /* Close session again to avoid leakage */
-> @@ -541,7 +543,7 @@ int optee_invoke_func(struct tee_context *ctx, struct tee_ioctl_invoke_arg *arg,
->         msg_arg->cancel_id = arg->cancel_id;
->
->         rc = optee->ops->to_msg_param(optee, msg_arg->params, arg->num_params,
-> -                                     param);
-> +                                     param, false /*!update_out*/);
->         if (rc)
->                 goto out;
->
-> @@ -551,7 +553,7 @@ int optee_invoke_func(struct tee_context *ctx, struct tee_ioctl_invoke_arg *arg,
->         }
->
->         if (optee->ops->from_msg_param(optee, param, arg->num_params,
-> -                                      msg_arg->params)) {
-> +                                      msg_arg->params, true /*update_out*/)) {
->                 msg_arg->ret = TEEC_ERROR_COMMUNICATION;
->                 msg_arg->ret_origin = TEEC_ORIGIN_COMMS;
->         }
-> diff --git a/drivers/tee/optee/ffa_abi.c b/drivers/tee/optee/ffa_abi.c
-> index f3af5666bb11..02e6175ac5f0 100644
-> --- a/drivers/tee/optee/ffa_abi.c
-> +++ b/drivers/tee/optee/ffa_abi.c
-> @@ -122,15 +122,21 @@ static int optee_shm_rem_ffa_handle(struct optee *optee, u64 global_id)
->   */
->
->  static void from_msg_param_ffa_mem(struct optee *optee, struct tee_param *p,
-> -                                  u32 attr, const struct optee_msg_param *mp)
-> +                                  u32 attr, const struct optee_msg_param *mp,
-> +                                  bool update_out)
->  {
->         struct tee_shm *shm = NULL;
->         u64 offs_high = 0;
->         u64 offs_low = 0;
->
-> +       if (update_out) {
-> +               if (attr == OPTEE_MSG_ATTR_TYPE_FMEM_INPUT)
-> +                       return;
-> +               goto out;
-> +       }
-> +
->         p->attr = TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_INPUT +
->                   attr - OPTEE_MSG_ATTR_TYPE_FMEM_INPUT;
-> -       p->u.memref.size = mp->u.fmem.size;
->
->         if (mp->u.fmem.global_id != OPTEE_MSG_FMEM_INVALID_GLOBAL_ID)
->                 shm = optee_shm_from_ffa_handle(optee, mp->u.fmem.global_id);
-> @@ -141,6 +147,8 @@ static void from_msg_param_ffa_mem(struct optee *optee, struct tee_param *p,
->                 offs_high = mp->u.fmem.offs_high;
->         }
->         p->u.memref.shm_offs = offs_low | offs_high << 32;
-> +out:
-> +       p->u.memref.size = mp->u.fmem.size;
->  }
->
->  /**
-> @@ -150,12 +158,14 @@ static void from_msg_param_ffa_mem(struct optee *optee, struct tee_param *p,
->   * @params:    subsystem internal parameter representation
->   * @num_params:        number of elements in the parameter arrays
->   * @msg_params:        OPTEE_MSG parameters
-> + * @update_out: update parameter for output only
->   *
->   * Returns 0 on success or <0 on failure
->   */
->  static int optee_ffa_from_msg_param(struct optee *optee,
->                                     struct tee_param *params, size_t num_params,
-> -                                   const struct optee_msg_param *msg_params)
-> +                                   const struct optee_msg_param *msg_params,
-> +                                   bool update_out)
->  {
->         size_t n;
->
-> @@ -166,18 +176,20 @@ static int optee_ffa_from_msg_param(struct optee *optee,
->
->                 switch (attr) {
->                 case OPTEE_MSG_ATTR_TYPE_NONE:
-> +                       if (update_out)
-> +                               break;
->                         p->attr = TEE_IOCTL_PARAM_ATTR_TYPE_NONE;
->                         memset(&p->u, 0, sizeof(p->u));
->                         break;
->                 case OPTEE_MSG_ATTR_TYPE_VALUE_INPUT:
->                 case OPTEE_MSG_ATTR_TYPE_VALUE_OUTPUT:
->                 case OPTEE_MSG_ATTR_TYPE_VALUE_INOUT:
-> -                       optee_from_msg_param_value(p, attr, mp);
-> +                       optee_from_msg_param_value(p, attr, mp, update_out);
->                         break;
->                 case OPTEE_MSG_ATTR_TYPE_FMEM_INPUT:
->                 case OPTEE_MSG_ATTR_TYPE_FMEM_OUTPUT:
->                 case OPTEE_MSG_ATTR_TYPE_FMEM_INOUT:
-> -                       from_msg_param_ffa_mem(optee, p, attr, mp);
-> +                       from_msg_param_ffa_mem(optee, p, attr, mp, update_out);
->                         break;
->                 default:
->                         return -EINVAL;
-> @@ -188,10 +200,16 @@ static int optee_ffa_from_msg_param(struct optee *optee,
->  }
->
->  static int to_msg_param_ffa_mem(struct optee_msg_param *mp,
-> -                               const struct tee_param *p)
-> +                               const struct tee_param *p, bool update_out)
->  {
->         struct tee_shm *shm = p->u.memref.shm;
->
-> +       if (update_out) {
-> +               if (p->attr == TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_INPUT)
-> +                       return 0;
-> +               goto out;
-> +       }
-> +
->         mp->attr = OPTEE_MSG_ATTR_TYPE_FMEM_INPUT + p->attr -
->                    TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_INPUT;
->
-> @@ -211,6 +229,7 @@ static int to_msg_param_ffa_mem(struct optee_msg_param *mp,
->                 memset(&mp->u, 0, sizeof(mp->u));
->                 mp->u.fmem.global_id = OPTEE_MSG_FMEM_INVALID_GLOBAL_ID;
->         }
-> +out:
->         mp->u.fmem.size = p->u.memref.size;
->
->         return 0;
-> @@ -222,13 +241,15 @@ static int to_msg_param_ffa_mem(struct optee_msg_param *mp,
->   * @optee:     main service struct
->   * @msg_params:        OPTEE_MSG parameters
->   * @num_params:        number of elements in the parameter arrays
-> - * @params:    subsystem itnernal parameter representation
-> + * @params:    subsystem internal parameter representation
-> + * @update_out: update parameter for output only
->   * Returns 0 on success or <0 on failure
->   */
->  static int optee_ffa_to_msg_param(struct optee *optee,
->                                   struct optee_msg_param *msg_params,
->                                   size_t num_params,
-> -                                 const struct tee_param *params)
-> +                                 const struct tee_param *params,
-> +                                 bool update_out)
->  {
->         size_t n;
->
-> @@ -238,18 +259,20 @@ static int optee_ffa_to_msg_param(struct optee *optee,
->
->                 switch (p->attr) {
->                 case TEE_IOCTL_PARAM_ATTR_TYPE_NONE:
-> +                       if (update_out)
-> +                               break;
->                         mp->attr = TEE_IOCTL_PARAM_ATTR_TYPE_NONE;
->                         memset(&mp->u, 0, sizeof(mp->u));
->                         break;
->                 case TEE_IOCTL_PARAM_ATTR_TYPE_VALUE_INPUT:
->                 case TEE_IOCTL_PARAM_ATTR_TYPE_VALUE_OUTPUT:
->                 case TEE_IOCTL_PARAM_ATTR_TYPE_VALUE_INOUT:
-> -                       optee_to_msg_param_value(mp, p);
-> +                       optee_to_msg_param_value(mp, p, update_out);
->                         break;
->                 case TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_INPUT:
->                 case TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_OUTPUT:
->                 case TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_INOUT:
-> -                       if (to_msg_param_ffa_mem(mp, p))
-> +                       if (to_msg_param_ffa_mem(mp, p, update_out))
->                                 return -EINVAL;
->                         break;
->                 default:
-> diff --git a/drivers/tee/optee/optee_private.h b/drivers/tee/optee/optee_private.h
-> index dc0f355ef72a..20eda508dbac 100644
-> --- a/drivers/tee/optee/optee_private.h
-> +++ b/drivers/tee/optee/optee_private.h
-> @@ -185,10 +185,12 @@ struct optee_ops {
->                                 bool system_thread);
->         int (*to_msg_param)(struct optee *optee,
->                             struct optee_msg_param *msg_params,
-> -                           size_t num_params, const struct tee_param *params);
-> +                           size_t num_params, const struct tee_param *params,
-> +                           bool update_out);
->         int (*from_msg_param)(struct optee *optee, struct tee_param *params,
->                               size_t num_params,
-> -                             const struct optee_msg_param *msg_params);
-> +                             const struct optee_msg_param *msg_params,
-> +                             bool update_out);
->  };
->
->  /**
-> @@ -316,23 +318,35 @@ void optee_release(struct tee_context *ctx);
->  void optee_release_supp(struct tee_context *ctx);
->
->  static inline void optee_from_msg_param_value(struct tee_param *p, u32 attr,
-> -                                             const struct optee_msg_param *mp)
-> +                                             const struct optee_msg_param *mp,
-> +                                             bool update_out)
->  {
-> -       p->attr = TEE_IOCTL_PARAM_ATTR_TYPE_VALUE_INPUT +
-> -                 attr - OPTEE_MSG_ATTR_TYPE_VALUE_INPUT;
-> -       p->u.value.a = mp->u.value.a;
-> -       p->u.value.b = mp->u.value.b;
-> -       p->u.value.c = mp->u.value.c;
-> +       if (!update_out)
-> +               p->attr = TEE_IOCTL_PARAM_ATTR_TYPE_VALUE_INPUT +
-> +                         attr - OPTEE_MSG_ATTR_TYPE_VALUE_INPUT;
-> +
-> +       if (attr == OPTEE_MSG_ATTR_TYPE_VALUE_OUTPUT ||
-> +           attr == OPTEE_MSG_ATTR_TYPE_VALUE_INOUT || !update_out) {
-> +               p->u.value.a = mp->u.value.a;
-> +               p->u.value.b = mp->u.value.b;
-> +               p->u.value.c = mp->u.value.c;
-> +       }
->  }
->
->  static inline void optee_to_msg_param_value(struct optee_msg_param *mp,
-> -                                           const struct tee_param *p)
-> +                                           const struct tee_param *p,
-> +                                           bool update_out)
->  {
-> -       mp->attr = OPTEE_MSG_ATTR_TYPE_VALUE_INPUT + p->attr -
-> -                  TEE_IOCTL_PARAM_ATTR_TYPE_VALUE_INPUT;
-> -       mp->u.value.a = p->u.value.a;
-> -       mp->u.value.b = p->u.value.b;
-> -       mp->u.value.c = p->u.value.c;
-> +       if (!update_out)
-> +               mp->attr = OPTEE_MSG_ATTR_TYPE_VALUE_INPUT + p->attr -
-> +                          TEE_IOCTL_PARAM_ATTR_TYPE_VALUE_INPUT;
-> +
-> +       if (p->attr == TEE_IOCTL_PARAM_ATTR_TYPE_VALUE_OUTPUT ||
-> +           p->attr == TEE_IOCTL_PARAM_ATTR_TYPE_VALUE_INOUT || !update_out) {
-> +               mp->u.value.a = p->u.value.a;
-> +               mp->u.value.b = p->u.value.b;
-> +               mp->u.value.c = p->u.value.c;
-> +       }
->  }
->
->  void optee_cq_init(struct optee_call_queue *cq, int thread_count);
-> diff --git a/drivers/tee/optee/rpc.c b/drivers/tee/optee/rpc.c
-> index ebbbd42b0e3e..580e6b9b0606 100644
-> --- a/drivers/tee/optee/rpc.c
-> +++ b/drivers/tee/optee/rpc.c
-> @@ -63,7 +63,7 @@ static void handle_rpc_func_cmd_i2c_transfer(struct tee_context *ctx,
->         }
->
->         if (optee->ops->from_msg_param(optee, params, arg->num_params,
-> -                                      arg->params))
-> +                                      arg->params, false /*!update_out*/))
->                 goto bad;
->
->         for (i = 0; i < arg->num_params; i++) {
-> @@ -107,7 +107,8 @@ static void handle_rpc_func_cmd_i2c_transfer(struct tee_context *ctx,
->         } else {
->                 params[3].u.value.a = msg.len;
->                 if (optee->ops->to_msg_param(optee, arg->params,
-> -                                            arg->num_params, params))
-> +                                            arg->num_params, params,
-> +                                            true /*update_out*/))
->                         arg->ret = TEEC_ERROR_BAD_PARAMETERS;
->                 else
->                         arg->ret = TEEC_SUCCESS;
-> @@ -188,6 +189,7 @@ static void handle_rpc_func_cmd_wait(struct optee_msg_arg *arg)
->  static void handle_rpc_supp_cmd(struct tee_context *ctx, struct optee *optee,
->                                 struct optee_msg_arg *arg)
->  {
-> +       bool update_out = false;
->         struct tee_param *params;
->
->         arg->ret_origin = TEEC_ORIGIN_COMMS;
-> @@ -200,15 +202,21 @@ static void handle_rpc_supp_cmd(struct tee_context *ctx, struct optee *optee,
->         }
->
->         if (optee->ops->from_msg_param(optee, params, arg->num_params,
-> -                                      arg->params)) {
-> +                                      arg->params, update_out)) {
->                 arg->ret = TEEC_ERROR_BAD_PARAMETERS;
->                 goto out;
->         }
->
->         arg->ret = optee_supp_thrd_req(ctx, arg->cmd, arg->num_params, params);
->
-> +       /*
-> +        * Special treatment for OPTEE_RPC_CMD_SHM_ALLOC since input is a
-> +        * value type, but the output is a memref type.
-> +        */
-> +       if (arg->cmd != OPTEE_RPC_CMD_SHM_ALLOC)
-> +               update_out = true;
->         if (optee->ops->to_msg_param(optee, arg->params, arg->num_params,
-> -                                    params))
-> +                                    params, update_out))
->                 arg->ret = TEEC_ERROR_BAD_PARAMETERS;
->  out:
->         kfree(params);
-> @@ -270,7 +278,7 @@ static void handle_rpc_func_rpmb_probe_reset(struct tee_context *ctx,
->
->         if (arg->num_params != ARRAY_SIZE(params) ||
->             optee->ops->from_msg_param(optee, params, arg->num_params,
-> -                                      arg->params) ||
-> +                                      arg->params, false /*!update_out*/) ||
->             params[0].attr != TEE_IOCTL_PARAM_ATTR_TYPE_VALUE_OUTPUT) {
->                 arg->ret = TEEC_ERROR_BAD_PARAMETERS;
->                 return;
-> @@ -280,7 +288,8 @@ static void handle_rpc_func_rpmb_probe_reset(struct tee_context *ctx,
->         params[0].u.value.b = 0;
->         params[0].u.value.c = 0;
->         if (optee->ops->to_msg_param(optee, arg->params,
-> -                                    arg->num_params, params)) {
-> +                                    arg->num_params, params,
-> +                                    true /*update_out*/)) {
->                 arg->ret = TEEC_ERROR_BAD_PARAMETERS;
->                 return;
->         }
-> @@ -324,7 +333,7 @@ static void handle_rpc_func_rpmb_probe_next(struct tee_context *ctx,
->
->         if (arg->num_params != ARRAY_SIZE(params) ||
->             optee->ops->from_msg_param(optee, params, arg->num_params,
-> -                                      arg->params) ||
-> +                                      arg->params, false /*!update_out*/) ||
->             params[0].attr != TEE_IOCTL_PARAM_ATTR_TYPE_VALUE_OUTPUT ||
->             params[1].attr != TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_OUTPUT) {
->                 arg->ret = TEEC_ERROR_BAD_PARAMETERS;
-> @@ -358,7 +367,8 @@ static void handle_rpc_func_rpmb_probe_next(struct tee_context *ctx,
->         params[0].u.value.b = rdev->descr.capacity;
->         params[0].u.value.c = rdev->descr.reliable_wr_count;
->         if (optee->ops->to_msg_param(optee, arg->params,
-> -                                    arg->num_params, params)) {
-> +                                    arg->num_params, params,
-> +                                    true /*update_out*/)) {
->                 arg->ret = TEEC_ERROR_BAD_PARAMETERS;
->                 return;
->         }
-> @@ -384,7 +394,7 @@ static void handle_rpc_func_rpmb_frames(struct tee_context *ctx,
->
->         if (arg->num_params != ARRAY_SIZE(params) ||
->             optee->ops->from_msg_param(optee, params, arg->num_params,
-> -                                      arg->params) ||
-> +                                      arg->params, false /*!update_out*/) ||
->             params[0].attr != TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_INPUT ||
->             params[1].attr != TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_OUTPUT) {
->                 arg->ret = TEEC_ERROR_BAD_PARAMETERS;
-> @@ -401,7 +411,8 @@ static void handle_rpc_func_rpmb_frames(struct tee_context *ctx,
->                 goto out;
->         }
->         if (optee->ops->to_msg_param(optee, arg->params,
-> -                                    arg->num_params, params)) {
-> +                                    arg->num_params, params,
-> +                                    true /*update_out*/)) {
->                 arg->ret = TEEC_ERROR_BAD_PARAMETERS;
->                 goto out;
->         }
-> diff --git a/drivers/tee/optee/smc_abi.c b/drivers/tee/optee/smc_abi.c
-> index e9456e3e74cc..d1f79947f58a 100644
-> --- a/drivers/tee/optee/smc_abi.c
-> +++ b/drivers/tee/optee/smc_abi.c
-> @@ -81,20 +81,26 @@ static int optee_cpuhp_disable_pcpu_irq(unsigned int cpu)
->   */
->
->  static int from_msg_param_tmp_mem(struct tee_param *p, u32 attr,
-> -                                 const struct optee_msg_param *mp)
-> +                                 const struct optee_msg_param *mp,
-> +                                 bool update_out)
->  {
->         struct tee_shm *shm;
->         phys_addr_t pa;
->         int rc;
->
-> +       if (update_out) {
-> +               if (attr == OPTEE_MSG_ATTR_TYPE_TMEM_INPUT)
-> +                       return 0;
-> +               goto out;
-> +       }
-> +
->         p->attr = TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_INPUT +
->                   attr - OPTEE_MSG_ATTR_TYPE_TMEM_INPUT;
-> -       p->u.memref.size = mp->u.tmem.size;
->         shm = (struct tee_shm *)(unsigned long)mp->u.tmem.shm_ref;
->         if (!shm) {
->                 p->u.memref.shm_offs = 0;
->                 p->u.memref.shm = NULL;
-> -               return 0;
-> +               goto out;
->         }
->
->         rc = tee_shm_get_pa(shm, 0, &pa);
-> @@ -103,18 +109,25 @@ static int from_msg_param_tmp_mem(struct tee_param *p, u32 attr,
->
->         p->u.memref.shm_offs = mp->u.tmem.buf_ptr - pa;
->         p->u.memref.shm = shm;
-> -
-> +out:
-> +       p->u.memref.size = mp->u.tmem.size;
->         return 0;
->  }
->
->  static void from_msg_param_reg_mem(struct tee_param *p, u32 attr,
-> -                                  const struct optee_msg_param *mp)
-> +                                  const struct optee_msg_param *mp,
-> +                                  bool update_out)
->  {
->         struct tee_shm *shm;
->
-> +       if (update_out) {
-> +               if (attr == OPTEE_MSG_ATTR_TYPE_RMEM_INPUT)
-> +                       return;
-> +               goto out;
-> +       }
-> +
->         p->attr = TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_INPUT +
->                   attr - OPTEE_MSG_ATTR_TYPE_RMEM_INPUT;
-> -       p->u.memref.size = mp->u.rmem.size;
->         shm = (struct tee_shm *)(unsigned long)mp->u.rmem.shm_ref;
->
->         if (shm) {
-> @@ -124,6 +137,8 @@ static void from_msg_param_reg_mem(struct tee_param *p, u32 attr,
->                 p->u.memref.shm_offs = 0;
->                 p->u.memref.shm = NULL;
->         }
-> +out:
-> +       p->u.memref.size = mp->u.rmem.size;
->  }
->
->  /**
-> @@ -133,11 +148,13 @@ static void from_msg_param_reg_mem(struct tee_param *p, u32 attr,
->   * @params:    subsystem internal parameter representation
->   * @num_params:        number of elements in the parameter arrays
->   * @msg_params:        OPTEE_MSG parameters
-> + * @update_out:        update parameter for output only
->   * Returns 0 on success or <0 on failure
->   */
->  static int optee_from_msg_param(struct optee *optee, struct tee_param *params,
->                                 size_t num_params,
-> -                               const struct optee_msg_param *msg_params)
-> +                               const struct optee_msg_param *msg_params,
-> +                               bool update_out)
->  {
->         int rc;
->         size_t n;
-> @@ -149,25 +166,27 @@ static int optee_from_msg_param(struct optee *optee, struct tee_param *params,
->
->                 switch (attr) {
->                 case OPTEE_MSG_ATTR_TYPE_NONE:
-> +                       if (update_out)
-> +                               break;
->                         p->attr = TEE_IOCTL_PARAM_ATTR_TYPE_NONE;
->                         memset(&p->u, 0, sizeof(p->u));
->                         break;
->                 case OPTEE_MSG_ATTR_TYPE_VALUE_INPUT:
->                 case OPTEE_MSG_ATTR_TYPE_VALUE_OUTPUT:
->                 case OPTEE_MSG_ATTR_TYPE_VALUE_INOUT:
-> -                       optee_from_msg_param_value(p, attr, mp);
-> +                       optee_from_msg_param_value(p, attr, mp, update_out);
->                         break;
->                 case OPTEE_MSG_ATTR_TYPE_TMEM_INPUT:
->                 case OPTEE_MSG_ATTR_TYPE_TMEM_OUTPUT:
->                 case OPTEE_MSG_ATTR_TYPE_TMEM_INOUT:
-> -                       rc = from_msg_param_tmp_mem(p, attr, mp);
-> +                       rc = from_msg_param_tmp_mem(p, attr, mp, update_out);
->                         if (rc)
->                                 return rc;
->                         break;
->                 case OPTEE_MSG_ATTR_TYPE_RMEM_INPUT:
->                 case OPTEE_MSG_ATTR_TYPE_RMEM_OUTPUT:
->                 case OPTEE_MSG_ATTR_TYPE_RMEM_INOUT:
-> -                       from_msg_param_reg_mem(p, attr, mp);
-> +                       from_msg_param_reg_mem(p, attr, mp, update_out);
->                         break;
->
->                 default:
-> @@ -178,20 +197,25 @@ static int optee_from_msg_param(struct optee *optee, struct tee_param *params,
->  }
->
->  static int to_msg_param_tmp_mem(struct optee_msg_param *mp,
-> -                               const struct tee_param *p)
-> +                               const struct tee_param *p, bool update_out)
->  {
->         int rc;
->         phys_addr_t pa;
->
-> +       if (update_out) {
-> +               if (p->attr == TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_INPUT)
-> +                       return 0;
-> +               goto out;
-> +       }
-> +
->         mp->attr = OPTEE_MSG_ATTR_TYPE_TMEM_INPUT + p->attr -
->                    TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_INPUT;
->
->         mp->u.tmem.shm_ref = (unsigned long)p->u.memref.shm;
-> -       mp->u.tmem.size = p->u.memref.size;
->
->         if (!p->u.memref.shm) {
->                 mp->u.tmem.buf_ptr = 0;
-> -               return 0;
-> +               goto out;
->         }
->
->         rc = tee_shm_get_pa(p->u.memref.shm, p->u.memref.shm_offs, &pa);
-> @@ -201,19 +225,27 @@ static int to_msg_param_tmp_mem(struct optee_msg_param *mp,
->         mp->u.tmem.buf_ptr = pa;
->         mp->attr |= OPTEE_MSG_ATTR_CACHE_PREDEFINED <<
->                     OPTEE_MSG_ATTR_CACHE_SHIFT;
-> -
-> +out:
-> +       mp->u.tmem.size = p->u.memref.size;
->         return 0;
->  }
->
->  static int to_msg_param_reg_mem(struct optee_msg_param *mp,
-> -                               const struct tee_param *p)
-> +                               const struct tee_param *p, bool update_out)
->  {
-> +       if (update_out) {
-> +               if (p->attr == TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_INPUT)
-> +                       return 0;
-> +               goto out;
-> +       }
-> +
->         mp->attr = OPTEE_MSG_ATTR_TYPE_RMEM_INPUT + p->attr -
->                    TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_INPUT;
->
->         mp->u.rmem.shm_ref = (unsigned long)p->u.memref.shm;
-> -       mp->u.rmem.size = p->u.memref.size;
->         mp->u.rmem.offs = p->u.memref.shm_offs;
-> +out:
-> +       mp->u.rmem.size = p->u.memref.size;
->         return 0;
->  }
->
-> @@ -223,11 +255,13 @@ static int to_msg_param_reg_mem(struct optee_msg_param *mp,
->   * @msg_params:        OPTEE_MSG parameters
->   * @num_params:        number of elements in the parameter arrays
->   * @params:    subsystem itnernal parameter representation
-> + * @update_out:        update parameter for output only
->   * Returns 0 on success or <0 on failure
->   */
->  static int optee_to_msg_param(struct optee *optee,
->                               struct optee_msg_param *msg_params,
-> -                             size_t num_params, const struct tee_param *params)
-> +                             size_t num_params, const struct tee_param *params,
-> +                             bool update_out)
->  {
->         int rc;
->         size_t n;
-> @@ -238,21 +272,23 @@ static int optee_to_msg_param(struct optee *optee,
->
->                 switch (p->attr) {
->                 case TEE_IOCTL_PARAM_ATTR_TYPE_NONE:
-> +                       if (update_out)
-> +                               break;
->                         mp->attr = TEE_IOCTL_PARAM_ATTR_TYPE_NONE;
->                         memset(&mp->u, 0, sizeof(mp->u));
->                         break;
->                 case TEE_IOCTL_PARAM_ATTR_TYPE_VALUE_INPUT:
->                 case TEE_IOCTL_PARAM_ATTR_TYPE_VALUE_OUTPUT:
->                 case TEE_IOCTL_PARAM_ATTR_TYPE_VALUE_INOUT:
-> -                       optee_to_msg_param_value(mp, p);
-> +                       optee_to_msg_param_value(mp, p, update_out);
->                         break;
->                 case TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_INPUT:
->                 case TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_OUTPUT:
->                 case TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_INOUT:
->                         if (tee_shm_is_dynamic(p->u.memref.shm))
-> -                               rc = to_msg_param_reg_mem(mp, p);
-> +                               rc = to_msg_param_reg_mem(mp, p, update_out);
->                         else
-> -                               rc = to_msg_param_tmp_mem(mp, p);
-> +                               rc = to_msg_param_tmp_mem(mp, p, update_out);
->                         if (rc)
->                                 return rc;
->                         break;
-> --
-> 2.43.0
->
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+SGkgU3VtaXQsDQoNCk9uIFR1ZSwgRGVjIDMsIDIwMjQgYXQgOToyN+KAr0FNIFN1bWl0IEdhcmcg
+PHN1bWl0LmdhcmdAbGluYXJvLm9yZz4gd3JvdGU6DQo+DQo+IEhpIEplbnMsDQo+DQo+IE9uIFRo
+dSwgMjggTm92IDIwMjQgYXQgMjA6MzksIEplbnMgV2lrbGFuZGVyIDxqZW5zLndpa2xhbmRlckBs
+aW5hcm8ub3JnPiB3cm90ZToNCj4gPg0KPiA+IFRoZSBPUC1URUUgYmFja2VuZCBkcml2ZXIgaGFz
+IHR3byBpbnRlcm5hbCBmdW5jdGlvbiBwb2ludGVycyB0byBjb252ZXJ0DQo+ID4gYmV0d2VlbiB0
+aGUgc3Vic3lzdGVtIHR5cGUgc3RydWN0IHRlZV9wYXJhbSBhbmQgdGhlIE9QLVRFRSB0eXBlIHN0
+cnVjdA0KPiA+IG9wdGVlX21zZ19wYXJhbS4NCj4gPg0KPiA+IFRoZSBjb252ZXJzaW9uIGlzIGRv
+bmUgZnJvbSBvbmUgb2YgdGhlIHR5cGVzIHRvIHRoZSBvdGhlciwgd2hpY2ggaXMgdGhlbg0KPiA+
+IGludm9sdmVkIGluIHNvbWUgb3BlcmF0aW9uIGFuZCBmaW5hbGx5IGNvbnZlcnRlZCBiYWNrIHRv
+IHRoZSBvcmlnaW5hbA0KPiA+IHR5cGUuIFdoZW4gY29udmVydGluZyB0byBwcmVwYXJlIHRoZSBw
+YXJhbWV0ZXJzIGZvciB0aGUgb3BlcmF0aW9uLCBhbGwNCj4gPiBmaWVsZHMgbXVzdCBiZSB0YWtl
+biBpbnRvIGFjY291bnQsIGJ1dCB0aGVuIGNvbnZlcnRpbmcgYmFjaywgaXQncyBlbm91Z2gNCj4g
+PiB0byB1cGRhdGUgb25seSBvdXQtdmFsdWVzIGFuZCBvdXQtc2l6ZXMuIFNvLCBhbiB1cGRhdGVf
+b3V0IHBhcmFtZXRlciBpcw0KPiA+IGFkZGVkIHRvIHRoZSBjb252ZXJzaW9uIGZ1bmN0aW9ucyB0
+byB0ZWxsIGlmIGFsbCBvciBvbmx5IHNvbWUgZmllbGRzDQo+ID4gbXVzdCBiZSBjb3BpZWQuDQo+
+DQo+IElzIHRoaXMgcGF0Y2gganVzdCBhIHJlZmFjdG9yaW5nIG9mIFRFRSBwYXJhbXMgaGFuZGxp
+bmc/IE9yIGFyZSB3ZQ0KPiBmaXhpbmcgYSByZWFsIEFCSSBpc3N1ZSBoZXJlPyBBbHNvLCBpcyB0
+aGlzIHJlcXVpcmVkIGZvciByZXN0cmljdGVkDQo+IHNoYXJlZCBtZW1vcnkgc3VwcG9ydCB0byB3
+b3JrPyBKdXN0IGFza2luZyBpZiB3ZSB3YW50IHRvIGNvbnNpZGVyIGl0DQo+IGFzIGEgZml4IGZv
+ciBiYWNrcG9ydGluZyBvciBpZiB3ZSBjYW4gaGFuZGxlIHRoaXMgcmVmYWN0b3JpbmcgcGF0Y2gN
+Cj4gaW5kZXBlbmRlbnRseSBvZiB0aGlzIHNlcmllcz8NCg0KVGhpcyBpcyBuZWVkZWQgaW4gdGhp
+cyBzZXJpZXMuIFdpdGhvdXQgdGhpcyBwYXRjaCwgaXQgbWlnaHQgZ2V0DQpjb25mdXNpbmcgd2hl
+biBjb252ZXJ0aW5nIGJhY2sgaW4gZnJvbV9tc2dfcGFyYW0oKSBjYWxsYmFjayBzaW5jZSBhbg0K
+YWxsb2NhdGVkIHJlc3RyaWN0ZWQgU0hNIGNhbiBiZSB1c2luZyB0aGUgc2VjX3dvcmxkX2lkIG9m
+IHRoZSBwb29sIGFuZA0KdGhhdCBkb2Vzbid0IHRyYW5zbGF0ZSBiYWNrIHdlbGwuIHBhcmFtc190
+b191c2VyKCkgaW4NCmRyaXZlcnMvdGVlL3RlZV9jb3JlLmMgYWxyZWFkeSB0YWtlcyB0aGUgZGly
+ZWN0aW9uIGludG8gYWNjb3VudCBzbyBpdA0Kd291bGRuJ3Qgc3ByZWFkIHRvIHVzZXItc3BhY2Uu
+DQoNCkNoZWVycywNCkplbnMNCg0KPg0KPiAtU3VtaXQNCj4NCj4gPg0KPiA+IFNpZ25lZC1vZmYt
+Ynk6IEplbnMgV2lrbGFuZGVyIDxqZW5zLndpa2xhbmRlckBsaW5hcm8ub3JnPg0KPiA+IC0tLQ0K
+PiA+ICBkcml2ZXJzL3RlZS9vcHRlZS9jYWxsLmMgICAgICAgICAgfCAxMCArKy0tDQo+ID4gIGRy
+aXZlcnMvdGVlL29wdGVlL2ZmYV9hYmkuYyAgICAgICB8IDQzICsrKysrKysrKysrKystLS0tDQo+
+ID4gIGRyaXZlcnMvdGVlL29wdGVlL29wdGVlX3ByaXZhdGUuaCB8IDQyICsrKysrKysrKysrLS0t
+LS0tDQo+ID4gIGRyaXZlcnMvdGVlL29wdGVlL3JwYy5jICAgICAgICAgICB8IDMxICsrKysrKysr
+Ky0tLS0NCj4gPiAgZHJpdmVycy90ZWUvb3B0ZWUvc21jX2FiaS5jICAgICAgIHwgNzYgKysrKysr
+KysrKysrKysrKysrKysrKystLS0tLS0tLQ0KPiA+ICA1IGZpbGVzIGNoYW5nZWQsIDE0NCBpbnNl
+cnRpb25zKCspLCA1OCBkZWxldGlvbnMoLSkNCj4gPg0KPiA+IGRpZmYgLS1naXQgYS9kcml2ZXJz
+L3RlZS9vcHRlZS9jYWxsLmMgYi9kcml2ZXJzL3RlZS9vcHRlZS9jYWxsLmMNCj4gPiBpbmRleCAx
+NmViOTUzZTE0YmIuLmYxNTMzYjg5NDcyNiAxMDA2NDQNCj4gPiAtLS0gYS9kcml2ZXJzL3RlZS9v
+cHRlZS9jYWxsLmMNCj4gPiArKysgYi9kcml2ZXJzL3RlZS9vcHRlZS9jYWxsLmMNCj4gPiBAQCAt
+NDAwLDcgKzQwMCw4IEBAIGludCBvcHRlZV9vcGVuX3Nlc3Npb24oc3RydWN0IHRlZV9jb250ZXh0
+ICpjdHgsDQo+ID4gICAgICAgICBleHBvcnRfdXVpZChtc2dfYXJnLT5wYXJhbXNbMV0udS5vY3Rl
+dHMsICZjbGllbnRfdXVpZCk7DQo+ID4NCj4gPiAgICAgICAgIHJjID0gb3B0ZWUtPm9wcy0+dG9f
+bXNnX3BhcmFtKG9wdGVlLCBtc2dfYXJnLT5wYXJhbXMgKyAyLA0KPiA+IC0gICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgYXJnLT5udW1fcGFyYW1zLCBwYXJhbSk7DQo+ID4gKyAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBhcmctPm51bV9wYXJhbXMsIHBhcmFt
+LA0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFsc2UgLyohdXBk
+YXRlX291dCovKTsNCj4gPiAgICAgICAgIGlmIChyYykNCj4gPiAgICAgICAgICAgICAgICAgZ290
+byBvdXQ7DQo+ID4NCj4gPiBAQCAtNDI3LDcgKzQyOCw4IEBAIGludCBvcHRlZV9vcGVuX3Nlc3Np
+b24oc3RydWN0IHRlZV9jb250ZXh0ICpjdHgsDQo+ID4gICAgICAgICB9DQo+ID4NCj4gPiAgICAg
+ICAgIGlmIChvcHRlZS0+b3BzLT5mcm9tX21zZ19wYXJhbShvcHRlZSwgcGFyYW0sIGFyZy0+bnVt
+X3BhcmFtcywNCj4gPiAtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBtc2df
+YXJnLT5wYXJhbXMgKyAyKSkgew0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIG1zZ19hcmctPnBhcmFtcyArIDIsDQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgdHJ1ZSAvKnVwZGF0ZV9vdXQqLykpIHsNCj4gPiAgICAgICAgICAgICAg
+ICAgYXJnLT5yZXQgPSBURUVDX0VSUk9SX0NPTU1VTklDQVRJT047DQo+ID4gICAgICAgICAgICAg
+ICAgIGFyZy0+cmV0X29yaWdpbiA9IFRFRUNfT1JJR0lOX0NPTU1TOw0KPiA+ICAgICAgICAgICAg
+ICAgICAvKiBDbG9zZSBzZXNzaW9uIGFnYWluIHRvIGF2b2lkIGxlYWthZ2UgKi8NCj4gPiBAQCAt
+NTQxLDcgKzU0Myw3IEBAIGludCBvcHRlZV9pbnZva2VfZnVuYyhzdHJ1Y3QgdGVlX2NvbnRleHQg
+KmN0eCwgc3RydWN0IHRlZV9pb2N0bF9pbnZva2VfYXJnICphcmcsDQo+ID4gICAgICAgICBtc2df
+YXJnLT5jYW5jZWxfaWQgPSBhcmctPmNhbmNlbF9pZDsNCj4gPg0KPiA+ICAgICAgICAgcmMgPSBv
+cHRlZS0+b3BzLT50b19tc2dfcGFyYW0ob3B0ZWUsIG1zZ19hcmctPnBhcmFtcywgYXJnLT5udW1f
+cGFyYW1zLA0KPiA+IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFyYW0p
+Ow0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFyYW0sIGZhbHNl
+IC8qIXVwZGF0ZV9vdXQqLyk7DQo+ID4gICAgICAgICBpZiAocmMpDQo+ID4gICAgICAgICAgICAg
+ICAgIGdvdG8gb3V0Ow0KPiA+DQo+ID4gQEAgLTU1MSw3ICs1NTMsNyBAQCBpbnQgb3B0ZWVfaW52
+b2tlX2Z1bmMoc3RydWN0IHRlZV9jb250ZXh0ICpjdHgsIHN0cnVjdCB0ZWVfaW9jdGxfaW52b2tl
+X2FyZyAqYXJnLA0KPiA+ICAgICAgICAgfQ0KPiA+DQo+ID4gICAgICAgICBpZiAob3B0ZWUtPm9w
+cy0+ZnJvbV9tc2dfcGFyYW0ob3B0ZWUsIHBhcmFtLCBhcmctPm51bV9wYXJhbXMsDQo+ID4gLSAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbXNnX2FyZy0+cGFyYW1zKSkgew0K
+PiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIG1zZ19hcmctPnBhcmFt
+cywgdHJ1ZSAvKnVwZGF0ZV9vdXQqLykpIHsNCj4gPiAgICAgICAgICAgICAgICAgbXNnX2FyZy0+
+cmV0ID0gVEVFQ19FUlJPUl9DT01NVU5JQ0FUSU9OOw0KPiA+ICAgICAgICAgICAgICAgICBtc2df
+YXJnLT5yZXRfb3JpZ2luID0gVEVFQ19PUklHSU5fQ09NTVM7DQo+ID4gICAgICAgICB9DQo+ID4g
+ZGlmZiAtLWdpdCBhL2RyaXZlcnMvdGVlL29wdGVlL2ZmYV9hYmkuYyBiL2RyaXZlcnMvdGVlL29w
+dGVlL2ZmYV9hYmkuYw0KPiA+IGluZGV4IGYzYWY1NjY2YmIxMS4uMDJlNjE3NWFjNWYwIDEwMDY0
+NA0KPiA+IC0tLSBhL2RyaXZlcnMvdGVlL29wdGVlL2ZmYV9hYmkuYw0KPiA+ICsrKyBiL2RyaXZl
+cnMvdGVlL29wdGVlL2ZmYV9hYmkuYw0KPiA+IEBAIC0xMjIsMTUgKzEyMiwyMSBAQCBzdGF0aWMg
+aW50IG9wdGVlX3NobV9yZW1fZmZhX2hhbmRsZShzdHJ1Y3Qgb3B0ZWUgKm9wdGVlLCB1NjQgZ2xv
+YmFsX2lkKQ0KPiA+ICAgKi8NCj4gPg0KPiA+ICBzdGF0aWMgdm9pZCBmcm9tX21zZ19wYXJhbV9m
+ZmFfbWVtKHN0cnVjdCBvcHRlZSAqb3B0ZWUsIHN0cnVjdCB0ZWVfcGFyYW0gKnAsDQo+ID4gLSAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB1MzIgYXR0ciwgY29uc3Qgc3RydWN0IG9w
+dGVlX21zZ19wYXJhbSAqbXApDQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICB1MzIgYXR0ciwgY29uc3Qgc3RydWN0IG9wdGVlX21zZ19wYXJhbSAqbXAsDQo+ID4gKyAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBib29sIHVwZGF0ZV9vdXQpDQo+ID4gIHsNCj4g
+PiAgICAgICAgIHN0cnVjdCB0ZWVfc2htICpzaG0gPSBOVUxMOw0KPiA+ICAgICAgICAgdTY0IG9m
+ZnNfaGlnaCA9IDA7DQo+ID4gICAgICAgICB1NjQgb2Zmc19sb3cgPSAwOw0KPiA+DQo+ID4gKyAg
+ICAgICBpZiAodXBkYXRlX291dCkgew0KPiA+ICsgICAgICAgICAgICAgICBpZiAoYXR0ciA9PSBP
+UFRFRV9NU0dfQVRUUl9UWVBFX0ZNRU1fSU5QVVQpDQo+ID4gKyAgICAgICAgICAgICAgICAgICAg
+ICAgcmV0dXJuOw0KPiA+ICsgICAgICAgICAgICAgICBnb3RvIG91dDsNCj4gPiArICAgICAgIH0N
+Cj4gPiArDQo+ID4gICAgICAgICBwLT5hdHRyID0gVEVFX0lPQ1RMX1BBUkFNX0FUVFJfVFlQRV9N
+RU1SRUZfSU5QVVQgKw0KPiA+ICAgICAgICAgICAgICAgICAgIGF0dHIgLSBPUFRFRV9NU0dfQVRU
+Ul9UWVBFX0ZNRU1fSU5QVVQ7DQo+ID4gLSAgICAgICBwLT51Lm1lbXJlZi5zaXplID0gbXAtPnUu
+Zm1lbS5zaXplOw0KPiA+DQo+ID4gICAgICAgICBpZiAobXAtPnUuZm1lbS5nbG9iYWxfaWQgIT0g
+T1BURUVfTVNHX0ZNRU1fSU5WQUxJRF9HTE9CQUxfSUQpDQo+ID4gICAgICAgICAgICAgICAgIHNo
+bSA9IG9wdGVlX3NobV9mcm9tX2ZmYV9oYW5kbGUob3B0ZWUsIG1wLT51LmZtZW0uZ2xvYmFsX2lk
+KTsNCj4gPiBAQCAtMTQxLDYgKzE0Nyw4IEBAIHN0YXRpYyB2b2lkIGZyb21fbXNnX3BhcmFtX2Zm
+YV9tZW0oc3RydWN0IG9wdGVlICpvcHRlZSwgc3RydWN0IHRlZV9wYXJhbSAqcCwNCj4gPiAgICAg
+ICAgICAgICAgICAgb2Zmc19oaWdoID0gbXAtPnUuZm1lbS5vZmZzX2hpZ2g7DQo+ID4gICAgICAg
+ICB9DQo+ID4gICAgICAgICBwLT51Lm1lbXJlZi5zaG1fb2ZmcyA9IG9mZnNfbG93IHwgb2Zmc19o
+aWdoIDw8IDMyOw0KPiA+ICtvdXQ6DQo+ID4gKyAgICAgICBwLT51Lm1lbXJlZi5zaXplID0gbXAt
+PnUuZm1lbS5zaXplOw0KPiA+ICB9DQo+ID4NCj4gPiAgLyoqDQo+ID4gQEAgLTE1MCwxMiArMTU4
+LDE0IEBAIHN0YXRpYyB2b2lkIGZyb21fbXNnX3BhcmFtX2ZmYV9tZW0oc3RydWN0IG9wdGVlICpv
+cHRlZSwgc3RydWN0IHRlZV9wYXJhbSAqcCwNCj4gPiAgICogQHBhcmFtczogICAgc3Vic3lzdGVt
+IGludGVybmFsIHBhcmFtZXRlciByZXByZXNlbnRhdGlvbg0KPiA+ICAgKiBAbnVtX3BhcmFtczog
+ICAgICAgIG51bWJlciBvZiBlbGVtZW50cyBpbiB0aGUgcGFyYW1ldGVyIGFycmF5cw0KPiA+ICAg
+KiBAbXNnX3BhcmFtczogICAgICAgIE9QVEVFX01TRyBwYXJhbWV0ZXJzDQo+ID4gKyAqIEB1cGRh
+dGVfb3V0OiB1cGRhdGUgcGFyYW1ldGVyIGZvciBvdXRwdXQgb25seQ0KPiA+ICAgKg0KPiA+ICAg
+KiBSZXR1cm5zIDAgb24gc3VjY2VzcyBvciA8MCBvbiBmYWlsdXJlDQo+ID4gICAqLw0KPiA+ICBz
+dGF0aWMgaW50IG9wdGVlX2ZmYV9mcm9tX21zZ19wYXJhbShzdHJ1Y3Qgb3B0ZWUgKm9wdGVlLA0K
+PiA+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHN0cnVjdCB0ZWVfcGFyYW0g
+KnBhcmFtcywgc2l6ZV90IG51bV9wYXJhbXMsDQo+ID4gLSAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgY29uc3Qgc3RydWN0IG9wdGVlX21zZ19wYXJhbSAqbXNnX3BhcmFtcykNCj4g
+PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb25zdCBzdHJ1Y3Qgb3B0ZWVf
+bXNnX3BhcmFtICptc2dfcGFyYW1zLA0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIGJvb2wgdXBkYXRlX291dCkNCj4gPiAgew0KPiA+ICAgICAgICAgc2l6ZV90IG47DQo+
+ID4NCj4gPiBAQCAtMTY2LDE4ICsxNzYsMjAgQEAgc3RhdGljIGludCBvcHRlZV9mZmFfZnJvbV9t
+c2dfcGFyYW0oc3RydWN0IG9wdGVlICpvcHRlZSwNCj4gPg0KPiA+ICAgICAgICAgICAgICAgICBz
+d2l0Y2ggKGF0dHIpIHsNCj4gPiAgICAgICAgICAgICAgICAgY2FzZSBPUFRFRV9NU0dfQVRUUl9U
+WVBFX05PTkU6DQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgaWYgKHVwZGF0ZV9vdXQpDQo+
+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBicmVhazsNCj4gPiAgICAgICAgICAg
+ICAgICAgICAgICAgICBwLT5hdHRyID0gVEVFX0lPQ1RMX1BBUkFNX0FUVFJfVFlQRV9OT05FOw0K
+PiA+ICAgICAgICAgICAgICAgICAgICAgICAgIG1lbXNldCgmcC0+dSwgMCwgc2l6ZW9mKHAtPnUp
+KTsNCj4gPiAgICAgICAgICAgICAgICAgICAgICAgICBicmVhazsNCj4gPiAgICAgICAgICAgICAg
+ICAgY2FzZSBPUFRFRV9NU0dfQVRUUl9UWVBFX1ZBTFVFX0lOUFVUOg0KPiA+ICAgICAgICAgICAg
+ICAgICBjYXNlIE9QVEVFX01TR19BVFRSX1RZUEVfVkFMVUVfT1VUUFVUOg0KPiA+ICAgICAgICAg
+ICAgICAgICBjYXNlIE9QVEVFX01TR19BVFRSX1RZUEVfVkFMVUVfSU5PVVQ6DQo+ID4gLSAgICAg
+ICAgICAgICAgICAgICAgICAgb3B0ZWVfZnJvbV9tc2dfcGFyYW1fdmFsdWUocCwgYXR0ciwgbXAp
+Ow0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIG9wdGVlX2Zyb21fbXNnX3BhcmFtX3ZhbHVl
+KHAsIGF0dHIsIG1wLCB1cGRhdGVfb3V0KTsNCj4gPiAgICAgICAgICAgICAgICAgICAgICAgICBi
+cmVhazsNCj4gPiAgICAgICAgICAgICAgICAgY2FzZSBPUFRFRV9NU0dfQVRUUl9UWVBFX0ZNRU1f
+SU5QVVQ6DQo+ID4gICAgICAgICAgICAgICAgIGNhc2UgT1BURUVfTVNHX0FUVFJfVFlQRV9GTUVN
+X09VVFBVVDoNCj4gPiAgICAgICAgICAgICAgICAgY2FzZSBPUFRFRV9NU0dfQVRUUl9UWVBFX0ZN
+RU1fSU5PVVQ6DQo+ID4gLSAgICAgICAgICAgICAgICAgICAgICAgZnJvbV9tc2dfcGFyYW1fZmZh
+X21lbShvcHRlZSwgcCwgYXR0ciwgbXApOw0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIGZy
+b21fbXNnX3BhcmFtX2ZmYV9tZW0ob3B0ZWUsIHAsIGF0dHIsIG1wLCB1cGRhdGVfb3V0KTsNCj4g
+PiAgICAgICAgICAgICAgICAgICAgICAgICBicmVhazsNCj4gPiAgICAgICAgICAgICAgICAgZGVm
+YXVsdDoNCj4gPiAgICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gLUVJTlZBTDsNCj4gPiBA
+QCAtMTg4LDEwICsyMDAsMTYgQEAgc3RhdGljIGludCBvcHRlZV9mZmFfZnJvbV9tc2dfcGFyYW0o
+c3RydWN0IG9wdGVlICpvcHRlZSwNCj4gPiAgfQ0KPiA+DQo+ID4gIHN0YXRpYyBpbnQgdG9fbXNn
+X3BhcmFtX2ZmYV9tZW0oc3RydWN0IG9wdGVlX21zZ19wYXJhbSAqbXAsDQo+ID4gLSAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICBjb25zdCBzdHJ1Y3QgdGVlX3BhcmFtICpwKQ0KPiA+ICsg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY29uc3Qgc3RydWN0IHRlZV9wYXJhbSAqcCwg
+Ym9vbCB1cGRhdGVfb3V0KQ0KPiA+ICB7DQo+ID4gICAgICAgICBzdHJ1Y3QgdGVlX3NobSAqc2ht
+ID0gcC0+dS5tZW1yZWYuc2htOw0KPiA+DQo+ID4gKyAgICAgICBpZiAodXBkYXRlX291dCkgew0K
+PiA+ICsgICAgICAgICAgICAgICBpZiAocC0+YXR0ciA9PSBURUVfSU9DVExfUEFSQU1fQVRUUl9U
+WVBFX01FTVJFRl9JTlBVVCkNCj4gPiArICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gMDsN
+Cj4gPiArICAgICAgICAgICAgICAgZ290byBvdXQ7DQo+ID4gKyAgICAgICB9DQo+ID4gKw0KPiA+
+ICAgICAgICAgbXAtPmF0dHIgPSBPUFRFRV9NU0dfQVRUUl9UWVBFX0ZNRU1fSU5QVVQgKyBwLT5h
+dHRyIC0NCj4gPiAgICAgICAgICAgICAgICAgICAgVEVFX0lPQ1RMX1BBUkFNX0FUVFJfVFlQRV9N
+RU1SRUZfSU5QVVQ7DQo+ID4NCj4gPiBAQCAtMjExLDYgKzIyOSw3IEBAIHN0YXRpYyBpbnQgdG9f
+bXNnX3BhcmFtX2ZmYV9tZW0oc3RydWN0IG9wdGVlX21zZ19wYXJhbSAqbXAsDQo+ID4gICAgICAg
+ICAgICAgICAgIG1lbXNldCgmbXAtPnUsIDAsIHNpemVvZihtcC0+dSkpOw0KPiA+ICAgICAgICAg
+ICAgICAgICBtcC0+dS5mbWVtLmdsb2JhbF9pZCA9IE9QVEVFX01TR19GTUVNX0lOVkFMSURfR0xP
+QkFMX0lEOw0KPiA+ICAgICAgICAgfQ0KPiA+ICtvdXQ6DQo+ID4gICAgICAgICBtcC0+dS5mbWVt
+LnNpemUgPSBwLT51Lm1lbXJlZi5zaXplOw0KPiA+DQo+ID4gICAgICAgICByZXR1cm4gMDsNCj4g
+PiBAQCAtMjIyLDEzICsyNDEsMTUgQEAgc3RhdGljIGludCB0b19tc2dfcGFyYW1fZmZhX21lbShz
+dHJ1Y3Qgb3B0ZWVfbXNnX3BhcmFtICptcCwNCj4gPiAgICogQG9wdGVlOiAgICAgbWFpbiBzZXJ2
+aWNlIHN0cnVjdA0KPiA+ICAgKiBAbXNnX3BhcmFtczogICAgICAgIE9QVEVFX01TRyBwYXJhbWV0
+ZXJzDQo+ID4gICAqIEBudW1fcGFyYW1zOiAgICAgICAgbnVtYmVyIG9mIGVsZW1lbnRzIGluIHRo
+ZSBwYXJhbWV0ZXIgYXJyYXlzDQo+ID4gLSAqIEBwYXJhbXM6ICAgIHN1YnN5c3RlbSBpdG5lcm5h
+bCBwYXJhbWV0ZXIgcmVwcmVzZW50YXRpb24NCj4gPiArICogQHBhcmFtczogICAgc3Vic3lzdGVt
+IGludGVybmFsIHBhcmFtZXRlciByZXByZXNlbnRhdGlvbg0KPiA+ICsgKiBAdXBkYXRlX291dDog
+dXBkYXRlIHBhcmFtZXRlciBmb3Igb3V0cHV0IG9ubHkNCj4gPiAgICogUmV0dXJucyAwIG9uIHN1
+Y2Nlc3Mgb3IgPDAgb24gZmFpbHVyZQ0KPiA+ICAgKi8NCj4gPiAgc3RhdGljIGludCBvcHRlZV9m
+ZmFfdG9fbXNnX3BhcmFtKHN0cnVjdCBvcHRlZSAqb3B0ZWUsDQo+ID4gICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIHN0cnVjdCBvcHRlZV9tc2dfcGFyYW0gKm1zZ19wYXJhbXMsDQo+
+ID4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHNpemVfdCBudW1fcGFyYW1zLA0K
+PiA+IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb25zdCBzdHJ1Y3QgdGVlX3Bh
+cmFtICpwYXJhbXMpDQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNvbnN0
+IHN0cnVjdCB0ZWVfcGFyYW0gKnBhcmFtcywNCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgYm9vbCB1cGRhdGVfb3V0KQ0KPiA+ICB7DQo+ID4gICAgICAgICBzaXplX3QgbjsN
+Cj4gPg0KPiA+IEBAIC0yMzgsMTggKzI1OSwyMCBAQCBzdGF0aWMgaW50IG9wdGVlX2ZmYV90b19t
+c2dfcGFyYW0oc3RydWN0IG9wdGVlICpvcHRlZSwNCj4gPg0KPiA+ICAgICAgICAgICAgICAgICBz
+d2l0Y2ggKHAtPmF0dHIpIHsNCj4gPiAgICAgICAgICAgICAgICAgY2FzZSBURUVfSU9DVExfUEFS
+QU1fQVRUUl9UWVBFX05PTkU6DQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgaWYgKHVwZGF0
+ZV9vdXQpDQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBicmVhazsNCj4gPiAg
+ICAgICAgICAgICAgICAgICAgICAgICBtcC0+YXR0ciA9IFRFRV9JT0NUTF9QQVJBTV9BVFRSX1RZ
+UEVfTk9ORTsNCj4gPiAgICAgICAgICAgICAgICAgICAgICAgICBtZW1zZXQoJm1wLT51LCAwLCBz
+aXplb2YobXAtPnUpKTsNCj4gPiAgICAgICAgICAgICAgICAgICAgICAgICBicmVhazsNCj4gPiAg
+ICAgICAgICAgICAgICAgY2FzZSBURUVfSU9DVExfUEFSQU1fQVRUUl9UWVBFX1ZBTFVFX0lOUFVU
+Og0KPiA+ICAgICAgICAgICAgICAgICBjYXNlIFRFRV9JT0NUTF9QQVJBTV9BVFRSX1RZUEVfVkFM
+VUVfT1VUUFVUOg0KPiA+ICAgICAgICAgICAgICAgICBjYXNlIFRFRV9JT0NUTF9QQVJBTV9BVFRS
+X1RZUEVfVkFMVUVfSU5PVVQ6DQo+ID4gLSAgICAgICAgICAgICAgICAgICAgICAgb3B0ZWVfdG9f
+bXNnX3BhcmFtX3ZhbHVlKG1wLCBwKTsNCj4gPiArICAgICAgICAgICAgICAgICAgICAgICBvcHRl
+ZV90b19tc2dfcGFyYW1fdmFsdWUobXAsIHAsIHVwZGF0ZV9vdXQpOw0KPiA+ICAgICAgICAgICAg
+ICAgICAgICAgICAgIGJyZWFrOw0KPiA+ICAgICAgICAgICAgICAgICBjYXNlIFRFRV9JT0NUTF9Q
+QVJBTV9BVFRSX1RZUEVfTUVNUkVGX0lOUFVUOg0KPiA+ICAgICAgICAgICAgICAgICBjYXNlIFRF
+RV9JT0NUTF9QQVJBTV9BVFRSX1RZUEVfTUVNUkVGX09VVFBVVDoNCj4gPiAgICAgICAgICAgICAg
+ICAgY2FzZSBURUVfSU9DVExfUEFSQU1fQVRUUl9UWVBFX01FTVJFRl9JTk9VVDoNCj4gPiAtICAg
+ICAgICAgICAgICAgICAgICAgICBpZiAodG9fbXNnX3BhcmFtX2ZmYV9tZW0obXAsIHApKQ0KPiA+
+ICsgICAgICAgICAgICAgICAgICAgICAgIGlmICh0b19tc2dfcGFyYW1fZmZhX21lbShtcCwgcCwg
+dXBkYXRlX291dCkpDQo+ID4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4g
+LUVJTlZBTDsNCj4gPiAgICAgICAgICAgICAgICAgICAgICAgICBicmVhazsNCj4gPiAgICAgICAg
+ICAgICAgICAgZGVmYXVsdDoNCj4gPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy90ZWUvb3B0ZWUvb3B0
+ZWVfcHJpdmF0ZS5oIGIvZHJpdmVycy90ZWUvb3B0ZWUvb3B0ZWVfcHJpdmF0ZS5oDQo+ID4gaW5k
+ZXggZGMwZjM1NWVmNzJhLi4yMGVkYTUwOGRiYWMgMTAwNjQ0DQo+ID4gLS0tIGEvZHJpdmVycy90
+ZWUvb3B0ZWUvb3B0ZWVfcHJpdmF0ZS5oDQo+ID4gKysrIGIvZHJpdmVycy90ZWUvb3B0ZWUvb3B0
+ZWVfcHJpdmF0ZS5oDQo+ID4gQEAgLTE4NSwxMCArMTg1LDEyIEBAIHN0cnVjdCBvcHRlZV9vcHMg
+ew0KPiA+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYm9vbCBzeXN0ZW1fdGhyZWFk
+KTsNCj4gPiAgICAgICAgIGludCAoKnRvX21zZ19wYXJhbSkoc3RydWN0IG9wdGVlICpvcHRlZSwN
+Cj4gPiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc3RydWN0IG9wdGVlX21zZ19wYXJhbSAq
+bXNnX3BhcmFtcywNCj4gPiAtICAgICAgICAgICAgICAgICAgICAgICAgICAgc2l6ZV90IG51bV9w
+YXJhbXMsIGNvbnN0IHN0cnVjdCB0ZWVfcGFyYW0gKnBhcmFtcyk7DQo+ID4gKyAgICAgICAgICAg
+ICAgICAgICAgICAgICAgIHNpemVfdCBudW1fcGFyYW1zLCBjb25zdCBzdHJ1Y3QgdGVlX3BhcmFt
+ICpwYXJhbXMsDQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgIGJvb2wgdXBkYXRlX291
+dCk7DQo+ID4gICAgICAgICBpbnQgKCpmcm9tX21zZ19wYXJhbSkoc3RydWN0IG9wdGVlICpvcHRl
+ZSwgc3RydWN0IHRlZV9wYXJhbSAqcGFyYW1zLA0KPiA+ICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIHNpemVfdCBudW1fcGFyYW1zLA0KPiA+IC0gICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgIGNvbnN0IHN0cnVjdCBvcHRlZV9tc2dfcGFyYW0gKm1zZ19wYXJhbXMpOw0KPiA+ICsgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIGNvbnN0IHN0cnVjdCBvcHRlZV9tc2dfcGFyYW0gKm1z
+Z19wYXJhbXMsDQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYm9vbCB1cGRhdGVf
+b3V0KTsNCj4gPiAgfTsNCj4gPg0KPiA+ICAvKioNCj4gPiBAQCAtMzE2LDIzICszMTgsMzUgQEAg
+dm9pZCBvcHRlZV9yZWxlYXNlKHN0cnVjdCB0ZWVfY29udGV4dCAqY3R4KTsNCj4gPiAgdm9pZCBv
+cHRlZV9yZWxlYXNlX3N1cHAoc3RydWN0IHRlZV9jb250ZXh0ICpjdHgpOw0KPiA+DQo+ID4gIHN0
+YXRpYyBpbmxpbmUgdm9pZCBvcHRlZV9mcm9tX21zZ19wYXJhbV92YWx1ZShzdHJ1Y3QgdGVlX3Bh
+cmFtICpwLCB1MzIgYXR0ciwNCj4gPiAtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgY29uc3Qgc3RydWN0IG9wdGVlX21zZ19wYXJhbSAqbXApDQo+ID4gKyAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNvbnN0IHN0cnVjdCBvcHRl
+ZV9tc2dfcGFyYW0gKm1wLA0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICBib29sIHVwZGF0ZV9vdXQpDQo+ID4gIHsNCj4gPiAtICAgICAgIHAtPmF0dHIg
+PSBURUVfSU9DVExfUEFSQU1fQVRUUl9UWVBFX1ZBTFVFX0lOUFVUICsNCj4gPiAtICAgICAgICAg
+ICAgICAgICBhdHRyIC0gT1BURUVfTVNHX0FUVFJfVFlQRV9WQUxVRV9JTlBVVDsNCj4gPiAtICAg
+ICAgIHAtPnUudmFsdWUuYSA9IG1wLT51LnZhbHVlLmE7DQo+ID4gLSAgICAgICBwLT51LnZhbHVl
+LmIgPSBtcC0+dS52YWx1ZS5iOw0KPiA+IC0gICAgICAgcC0+dS52YWx1ZS5jID0gbXAtPnUudmFs
+dWUuYzsNCj4gPiArICAgICAgIGlmICghdXBkYXRlX291dCkNCj4gPiArICAgICAgICAgICAgICAg
+cC0+YXR0ciA9IFRFRV9JT0NUTF9QQVJBTV9BVFRSX1RZUEVfVkFMVUVfSU5QVVQgKw0KPiA+ICsg
+ICAgICAgICAgICAgICAgICAgICAgICAgYXR0ciAtIE9QVEVFX01TR19BVFRSX1RZUEVfVkFMVUVf
+SU5QVVQ7DQo+ID4gKw0KPiA+ICsgICAgICAgaWYgKGF0dHIgPT0gT1BURUVfTVNHX0FUVFJfVFlQ
+RV9WQUxVRV9PVVRQVVQgfHwNCj4gPiArICAgICAgICAgICBhdHRyID09IE9QVEVFX01TR19BVFRS
+X1RZUEVfVkFMVUVfSU5PVVQgfHwgIXVwZGF0ZV9vdXQpIHsNCj4gPiArICAgICAgICAgICAgICAg
+cC0+dS52YWx1ZS5hID0gbXAtPnUudmFsdWUuYTsNCj4gPiArICAgICAgICAgICAgICAgcC0+dS52
+YWx1ZS5iID0gbXAtPnUudmFsdWUuYjsNCj4gPiArICAgICAgICAgICAgICAgcC0+dS52YWx1ZS5j
+ID0gbXAtPnUudmFsdWUuYzsNCj4gPiArICAgICAgIH0NCj4gPiAgfQ0KPiA+DQo+ID4gIHN0YXRp
+YyBpbmxpbmUgdm9pZCBvcHRlZV90b19tc2dfcGFyYW1fdmFsdWUoc3RydWN0IG9wdGVlX21zZ19w
+YXJhbSAqbXAsDQo+ID4gLSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICBjb25zdCBzdHJ1Y3QgdGVlX3BhcmFtICpwKQ0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgY29uc3Qgc3RydWN0IHRlZV9wYXJhbSAqcCwNCj4gPiArICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJvb2wgdXBkYXRlX291dCkN
+Cj4gPiAgew0KPiA+IC0gICAgICAgbXAtPmF0dHIgPSBPUFRFRV9NU0dfQVRUUl9UWVBFX1ZBTFVF
+X0lOUFVUICsgcC0+YXR0ciAtDQo+ID4gLSAgICAgICAgICAgICAgICAgIFRFRV9JT0NUTF9QQVJB
+TV9BVFRSX1RZUEVfVkFMVUVfSU5QVVQ7DQo+ID4gLSAgICAgICBtcC0+dS52YWx1ZS5hID0gcC0+
+dS52YWx1ZS5hOw0KPiA+IC0gICAgICAgbXAtPnUudmFsdWUuYiA9IHAtPnUudmFsdWUuYjsNCj4g
+PiAtICAgICAgIG1wLT51LnZhbHVlLmMgPSBwLT51LnZhbHVlLmM7DQo+ID4gKyAgICAgICBpZiAo
+IXVwZGF0ZV9vdXQpDQo+ID4gKyAgICAgICAgICAgICAgIG1wLT5hdHRyID0gT1BURUVfTVNHX0FU
+VFJfVFlQRV9WQUxVRV9JTlBVVCArIHAtPmF0dHIgLQ0KPiA+ICsgICAgICAgICAgICAgICAgICAg
+ICAgICAgIFRFRV9JT0NUTF9QQVJBTV9BVFRSX1RZUEVfVkFMVUVfSU5QVVQ7DQo+ID4gKw0KPiA+
+ICsgICAgICAgaWYgKHAtPmF0dHIgPT0gVEVFX0lPQ1RMX1BBUkFNX0FUVFJfVFlQRV9WQUxVRV9P
+VVRQVVQgfHwNCj4gPiArICAgICAgICAgICBwLT5hdHRyID09IFRFRV9JT0NUTF9QQVJBTV9BVFRS
+X1RZUEVfVkFMVUVfSU5PVVQgfHwgIXVwZGF0ZV9vdXQpIHsNCj4gPiArICAgICAgICAgICAgICAg
+bXAtPnUudmFsdWUuYSA9IHAtPnUudmFsdWUuYTsNCj4gPiArICAgICAgICAgICAgICAgbXAtPnUu
+dmFsdWUuYiA9IHAtPnUudmFsdWUuYjsNCj4gPiArICAgICAgICAgICAgICAgbXAtPnUudmFsdWUu
+YyA9IHAtPnUudmFsdWUuYzsNCj4gPiArICAgICAgIH0NCj4gPiAgfQ0KPiA+DQo+ID4gIHZvaWQg
+b3B0ZWVfY3FfaW5pdChzdHJ1Y3Qgb3B0ZWVfY2FsbF9xdWV1ZSAqY3EsIGludCB0aHJlYWRfY291
+bnQpOw0KPiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3RlZS9vcHRlZS9ycGMuYyBiL2RyaXZlcnMv
+dGVlL29wdGVlL3JwYy5jDQo+ID4gaW5kZXggZWJiYmQ0MmIwZTNlLi41ODBlNmI5YjA2MDYgMTAw
+NjQ0DQo+ID4gLS0tIGEvZHJpdmVycy90ZWUvb3B0ZWUvcnBjLmMNCj4gPiArKysgYi9kcml2ZXJz
+L3RlZS9vcHRlZS9ycGMuYw0KPiA+IEBAIC02Myw3ICs2Myw3IEBAIHN0YXRpYyB2b2lkIGhhbmRs
+ZV9ycGNfZnVuY19jbWRfaTJjX3RyYW5zZmVyKHN0cnVjdCB0ZWVfY29udGV4dCAqY3R4LA0KPiA+
+ICAgICAgICAgfQ0KPiA+DQo+ID4gICAgICAgICBpZiAob3B0ZWUtPm9wcy0+ZnJvbV9tc2dfcGFy
+YW0ob3B0ZWUsIHBhcmFtcywgYXJnLT5udW1fcGFyYW1zLA0KPiA+IC0gICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIGFyZy0+cGFyYW1zKSkNCj4gPiArICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICBhcmctPnBhcmFtcywgZmFsc2UgLyohdXBkYXRlX291dCov
+KSkNCj4gPiAgICAgICAgICAgICAgICAgZ290byBiYWQ7DQo+ID4NCj4gPiAgICAgICAgIGZvciAo
+aSA9IDA7IGkgPCBhcmctPm51bV9wYXJhbXM7IGkrKykgew0KPiA+IEBAIC0xMDcsNyArMTA3LDgg
+QEAgc3RhdGljIHZvaWQgaGFuZGxlX3JwY19mdW5jX2NtZF9pMmNfdHJhbnNmZXIoc3RydWN0IHRl
+ZV9jb250ZXh0ICpjdHgsDQo+ID4gICAgICAgICB9IGVsc2Ugew0KPiA+ICAgICAgICAgICAgICAg
+ICBwYXJhbXNbM10udS52YWx1ZS5hID0gbXNnLmxlbjsNCj4gPiAgICAgICAgICAgICAgICAgaWYg
+KG9wdGVlLT5vcHMtPnRvX21zZ19wYXJhbShvcHRlZSwgYXJnLT5wYXJhbXMsDQo+ID4gLSAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYXJnLT5udW1fcGFyYW1zLCBw
+YXJhbXMpKQ0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+IGFyZy0+bnVtX3BhcmFtcywgcGFyYW1zLA0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIHRydWUgLyp1cGRhdGVfb3V0Ki8pKQ0KPiA+ICAgICAgICAgICAg
+ICAgICAgICAgICAgIGFyZy0+cmV0ID0gVEVFQ19FUlJPUl9CQURfUEFSQU1FVEVSUzsNCj4gPiAg
+ICAgICAgICAgICAgICAgZWxzZQ0KPiA+ICAgICAgICAgICAgICAgICAgICAgICAgIGFyZy0+cmV0
+ID0gVEVFQ19TVUNDRVNTOw0KPiA+IEBAIC0xODgsNiArMTg5LDcgQEAgc3RhdGljIHZvaWQgaGFu
+ZGxlX3JwY19mdW5jX2NtZF93YWl0KHN0cnVjdCBvcHRlZV9tc2dfYXJnICphcmcpDQo+ID4gIHN0
+YXRpYyB2b2lkIGhhbmRsZV9ycGNfc3VwcF9jbWQoc3RydWN0IHRlZV9jb250ZXh0ICpjdHgsIHN0
+cnVjdCBvcHRlZSAqb3B0ZWUsDQo+ID4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBz
+dHJ1Y3Qgb3B0ZWVfbXNnX2FyZyAqYXJnKQ0KPiA+ICB7DQo+ID4gKyAgICAgICBib29sIHVwZGF0
+ZV9vdXQgPSBmYWxzZTsNCj4gPiAgICAgICAgIHN0cnVjdCB0ZWVfcGFyYW0gKnBhcmFtczsNCj4g
+Pg0KPiA+ICAgICAgICAgYXJnLT5yZXRfb3JpZ2luID0gVEVFQ19PUklHSU5fQ09NTVM7DQo+ID4g
+QEAgLTIwMCwxNSArMjAyLDIxIEBAIHN0YXRpYyB2b2lkIGhhbmRsZV9ycGNfc3VwcF9jbWQoc3Ry
+dWN0IHRlZV9jb250ZXh0ICpjdHgsIHN0cnVjdCBvcHRlZSAqb3B0ZWUsDQo+ID4gICAgICAgICB9
+DQo+ID4NCj4gPiAgICAgICAgIGlmIChvcHRlZS0+b3BzLT5mcm9tX21zZ19wYXJhbShvcHRlZSwg
+cGFyYW1zLCBhcmctPm51bV9wYXJhbXMsDQo+ID4gLSAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgYXJnLT5wYXJhbXMpKSB7DQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgYXJnLT5wYXJhbXMsIHVwZGF0ZV9vdXQpKSB7DQo+ID4gICAgICAgICAg
+ICAgICAgIGFyZy0+cmV0ID0gVEVFQ19FUlJPUl9CQURfUEFSQU1FVEVSUzsNCj4gPiAgICAgICAg
+ICAgICAgICAgZ290byBvdXQ7DQo+ID4gICAgICAgICB9DQo+ID4NCj4gPiAgICAgICAgIGFyZy0+
+cmV0ID0gb3B0ZWVfc3VwcF90aHJkX3JlcShjdHgsIGFyZy0+Y21kLCBhcmctPm51bV9wYXJhbXMs
+IHBhcmFtcyk7DQo+ID4NCj4gPiArICAgICAgIC8qDQo+ID4gKyAgICAgICAgKiBTcGVjaWFsIHRy
+ZWF0bWVudCBmb3IgT1BURUVfUlBDX0NNRF9TSE1fQUxMT0Mgc2luY2UgaW5wdXQgaXMgYQ0KPiA+
+ICsgICAgICAgICogdmFsdWUgdHlwZSwgYnV0IHRoZSBvdXRwdXQgaXMgYSBtZW1yZWYgdHlwZS4N
+Cj4gPiArICAgICAgICAqLw0KPiA+ICsgICAgICAgaWYgKGFyZy0+Y21kICE9IE9QVEVFX1JQQ19D
+TURfU0hNX0FMTE9DKQ0KPiA+ICsgICAgICAgICAgICAgICB1cGRhdGVfb3V0ID0gdHJ1ZTsNCj4g
+PiAgICAgICAgIGlmIChvcHRlZS0+b3BzLT50b19tc2dfcGFyYW0ob3B0ZWUsIGFyZy0+cGFyYW1z
+LCBhcmctPm51bV9wYXJhbXMsDQo+ID4gLSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgIHBhcmFtcykpDQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
+cmFtcywgdXBkYXRlX291dCkpDQo+ID4gICAgICAgICAgICAgICAgIGFyZy0+cmV0ID0gVEVFQ19F
+UlJPUl9CQURfUEFSQU1FVEVSUzsNCj4gPiAgb3V0Og0KPiA+ICAgICAgICAga2ZyZWUocGFyYW1z
+KTsNCj4gPiBAQCAtMjcwLDcgKzI3OCw3IEBAIHN0YXRpYyB2b2lkIGhhbmRsZV9ycGNfZnVuY19y
+cG1iX3Byb2JlX3Jlc2V0KHN0cnVjdCB0ZWVfY29udGV4dCAqY3R4LA0KPiA+DQo+ID4gICAgICAg
+ICBpZiAoYXJnLT5udW1fcGFyYW1zICE9IEFSUkFZX1NJWkUocGFyYW1zKSB8fA0KPiA+ICAgICAg
+ICAgICAgIG9wdGVlLT5vcHMtPmZyb21fbXNnX3BhcmFtKG9wdGVlLCBwYXJhbXMsIGFyZy0+bnVt
+X3BhcmFtcywNCj4gPiAtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBhcmct
+PnBhcmFtcykgfHwNCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBh
+cmctPnBhcmFtcywgZmFsc2UgLyohdXBkYXRlX291dCovKSB8fA0KPiA+ICAgICAgICAgICAgIHBh
+cmFtc1swXS5hdHRyICE9IFRFRV9JT0NUTF9QQVJBTV9BVFRSX1RZUEVfVkFMVUVfT1VUUFVUKSB7
+DQo+ID4gICAgICAgICAgICAgICAgIGFyZy0+cmV0ID0gVEVFQ19FUlJPUl9CQURfUEFSQU1FVEVS
+UzsNCj4gPiAgICAgICAgICAgICAgICAgcmV0dXJuOw0KPiA+IEBAIC0yODAsNyArMjg4LDggQEAg
+c3RhdGljIHZvaWQgaGFuZGxlX3JwY19mdW5jX3JwbWJfcHJvYmVfcmVzZXQoc3RydWN0IHRlZV9j
+b250ZXh0ICpjdHgsDQo+ID4gICAgICAgICBwYXJhbXNbMF0udS52YWx1ZS5iID0gMDsNCj4gPiAg
+ICAgICAgIHBhcmFtc1swXS51LnZhbHVlLmMgPSAwOw0KPiA+ICAgICAgICAgaWYgKG9wdGVlLT5v
+cHMtPnRvX21zZ19wYXJhbShvcHRlZSwgYXJnLT5wYXJhbXMsDQo+ID4gLSAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIGFyZy0+bnVtX3BhcmFtcywgcGFyYW1zKSkgew0KPiA+ICsg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBhcmctPm51bV9wYXJhbXMsIHBhcmFt
+cywNCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdHJ1ZSAvKnVwZGF0
+ZV9vdXQqLykpIHsNCj4gPiAgICAgICAgICAgICAgICAgYXJnLT5yZXQgPSBURUVDX0VSUk9SX0JB
+RF9QQVJBTUVURVJTOw0KPiA+ICAgICAgICAgICAgICAgICByZXR1cm47DQo+ID4gICAgICAgICB9
+DQo+ID4gQEAgLTMyNCw3ICszMzMsNyBAQCBzdGF0aWMgdm9pZCBoYW5kbGVfcnBjX2Z1bmNfcnBt
+Yl9wcm9iZV9uZXh0KHN0cnVjdCB0ZWVfY29udGV4dCAqY3R4LA0KPiA+DQo+ID4gICAgICAgICBp
+ZiAoYXJnLT5udW1fcGFyYW1zICE9IEFSUkFZX1NJWkUocGFyYW1zKSB8fA0KPiA+ICAgICAgICAg
+ICAgIG9wdGVlLT5vcHMtPmZyb21fbXNnX3BhcmFtKG9wdGVlLCBwYXJhbXMsIGFyZy0+bnVtX3Bh
+cmFtcywNCj4gPiAtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBhcmctPnBh
+cmFtcykgfHwNCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBhcmct
+PnBhcmFtcywgZmFsc2UgLyohdXBkYXRlX291dCovKSB8fA0KPiA+ICAgICAgICAgICAgIHBhcmFt
+c1swXS5hdHRyICE9IFRFRV9JT0NUTF9QQVJBTV9BVFRSX1RZUEVfVkFMVUVfT1VUUFVUIHx8DQo+
+ID4gICAgICAgICAgICAgcGFyYW1zWzFdLmF0dHIgIT0gVEVFX0lPQ1RMX1BBUkFNX0FUVFJfVFlQ
+RV9NRU1SRUZfT1VUUFVUKSB7DQo+ID4gICAgICAgICAgICAgICAgIGFyZy0+cmV0ID0gVEVFQ19F
+UlJPUl9CQURfUEFSQU1FVEVSUzsNCj4gPiBAQCAtMzU4LDcgKzM2Nyw4IEBAIHN0YXRpYyB2b2lk
+IGhhbmRsZV9ycGNfZnVuY19ycG1iX3Byb2JlX25leHQoc3RydWN0IHRlZV9jb250ZXh0ICpjdHgs
+DQo+ID4gICAgICAgICBwYXJhbXNbMF0udS52YWx1ZS5iID0gcmRldi0+ZGVzY3IuY2FwYWNpdHk7
+DQo+ID4gICAgICAgICBwYXJhbXNbMF0udS52YWx1ZS5jID0gcmRldi0+ZGVzY3IucmVsaWFibGVf
+d3JfY291bnQ7DQo+ID4gICAgICAgICBpZiAob3B0ZWUtPm9wcy0+dG9fbXNnX3BhcmFtKG9wdGVl
+LCBhcmctPnBhcmFtcywNCj4gPiAtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+YXJnLT5udW1fcGFyYW1zLCBwYXJhbXMpKSB7DQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIGFyZy0+bnVtX3BhcmFtcywgcGFyYW1zLA0KPiA+ICsgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICB0cnVlIC8qdXBkYXRlX291dCovKSkgew0KPiA+ICAgICAg
+ICAgICAgICAgICBhcmctPnJldCA9IFRFRUNfRVJST1JfQkFEX1BBUkFNRVRFUlM7DQo+ID4gICAg
+ICAgICAgICAgICAgIHJldHVybjsNCj4gPiAgICAgICAgIH0NCj4gPiBAQCAtMzg0LDcgKzM5NCw3
+IEBAIHN0YXRpYyB2b2lkIGhhbmRsZV9ycGNfZnVuY19ycG1iX2ZyYW1lcyhzdHJ1Y3QgdGVlX2Nv
+bnRleHQgKmN0eCwNCj4gPg0KPiA+ICAgICAgICAgaWYgKGFyZy0+bnVtX3BhcmFtcyAhPSBBUlJB
+WV9TSVpFKHBhcmFtcykgfHwNCj4gPiAgICAgICAgICAgICBvcHRlZS0+b3BzLT5mcm9tX21zZ19w
+YXJhbShvcHRlZSwgcGFyYW1zLCBhcmctPm51bV9wYXJhbXMsDQo+ID4gLSAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgYXJnLT5wYXJhbXMpIHx8DQo+ID4gKyAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgYXJnLT5wYXJhbXMsIGZhbHNlIC8qIXVwZGF0ZV9v
+dXQqLykgfHwNCj4gPiAgICAgICAgICAgICBwYXJhbXNbMF0uYXR0ciAhPSBURUVfSU9DVExfUEFS
+QU1fQVRUUl9UWVBFX01FTVJFRl9JTlBVVCB8fA0KPiA+ICAgICAgICAgICAgIHBhcmFtc1sxXS5h
+dHRyICE9IFRFRV9JT0NUTF9QQVJBTV9BVFRSX1RZUEVfTUVNUkVGX09VVFBVVCkgew0KPiA+ICAg
+ICAgICAgICAgICAgICBhcmctPnJldCA9IFRFRUNfRVJST1JfQkFEX1BBUkFNRVRFUlM7DQo+ID4g
+QEAgLTQwMSw3ICs0MTEsOCBAQCBzdGF0aWMgdm9pZCBoYW5kbGVfcnBjX2Z1bmNfcnBtYl9mcmFt
+ZXMoc3RydWN0IHRlZV9jb250ZXh0ICpjdHgsDQo+ID4gICAgICAgICAgICAgICAgIGdvdG8gb3V0
+Ow0KPiA+ICAgICAgICAgfQ0KPiA+ICAgICAgICAgaWYgKG9wdGVlLT5vcHMtPnRvX21zZ19wYXJh
+bShvcHRlZSwgYXJnLT5wYXJhbXMsDQo+ID4gLSAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIGFyZy0+bnVtX3BhcmFtcywgcGFyYW1zKSkgew0KPiA+ICsgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICBhcmctPm51bV9wYXJhbXMsIHBhcmFtcywNCj4gPiArICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdHJ1ZSAvKnVwZGF0ZV9vdXQqLykpIHsNCj4g
+PiAgICAgICAgICAgICAgICAgYXJnLT5yZXQgPSBURUVDX0VSUk9SX0JBRF9QQVJBTUVURVJTOw0K
+PiA+ICAgICAgICAgICAgICAgICBnb3RvIG91dDsNCj4gPiAgICAgICAgIH0NCj4gPiBkaWZmIC0t
+Z2l0IGEvZHJpdmVycy90ZWUvb3B0ZWUvc21jX2FiaS5jIGIvZHJpdmVycy90ZWUvb3B0ZWUvc21j
+X2FiaS5jDQo+ID4gaW5kZXggZTk0NTZlM2U3NGNjLi5kMWY3OTk0N2Y1OGEgMTAwNjQ0DQo+ID4g
+LS0tIGEvZHJpdmVycy90ZWUvb3B0ZWUvc21jX2FiaS5jDQo+ID4gKysrIGIvZHJpdmVycy90ZWUv
+b3B0ZWUvc21jX2FiaS5jDQo+ID4gQEAgLTgxLDIwICs4MSwyNiBAQCBzdGF0aWMgaW50IG9wdGVl
+X2NwdWhwX2Rpc2FibGVfcGNwdV9pcnEodW5zaWduZWQgaW50IGNwdSkNCj4gPiAgICovDQo+ID4N
+Cj4gPiAgc3RhdGljIGludCBmcm9tX21zZ19wYXJhbV90bXBfbWVtKHN0cnVjdCB0ZWVfcGFyYW0g
+KnAsIHUzMiBhdHRyLA0KPiA+IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb25z
+dCBzdHJ1Y3Qgb3B0ZWVfbXNnX3BhcmFtICptcCkNCj4gPiArICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgY29uc3Qgc3RydWN0IG9wdGVlX21zZ19wYXJhbSAqbXAsDQo+ID4gKyAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJvb2wgdXBkYXRlX291dCkNCj4gPiAgew0KPiA+
+ICAgICAgICAgc3RydWN0IHRlZV9zaG0gKnNobTsNCj4gPiAgICAgICAgIHBoeXNfYWRkcl90IHBh
+Ow0KPiA+ICAgICAgICAgaW50IHJjOw0KPiA+DQo+ID4gKyAgICAgICBpZiAodXBkYXRlX291dCkg
+ew0KPiA+ICsgICAgICAgICAgICAgICBpZiAoYXR0ciA9PSBPUFRFRV9NU0dfQVRUUl9UWVBFX1RN
+RU1fSU5QVVQpDQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIDA7DQo+ID4gKyAg
+ICAgICAgICAgICAgIGdvdG8gb3V0Ow0KPiA+ICsgICAgICAgfQ0KPiA+ICsNCj4gPiAgICAgICAg
+IHAtPmF0dHIgPSBURUVfSU9DVExfUEFSQU1fQVRUUl9UWVBFX01FTVJFRl9JTlBVVCArDQo+ID4g
+ICAgICAgICAgICAgICAgICAgYXR0ciAtIE9QVEVFX01TR19BVFRSX1RZUEVfVE1FTV9JTlBVVDsN
+Cj4gPiAtICAgICAgIHAtPnUubWVtcmVmLnNpemUgPSBtcC0+dS50bWVtLnNpemU7DQo+ID4gICAg
+ICAgICBzaG0gPSAoc3RydWN0IHRlZV9zaG0gKikodW5zaWduZWQgbG9uZyltcC0+dS50bWVtLnNo
+bV9yZWY7DQo+ID4gICAgICAgICBpZiAoIXNobSkgew0KPiA+ICAgICAgICAgICAgICAgICBwLT51
+Lm1lbXJlZi5zaG1fb2ZmcyA9IDA7DQo+ID4gICAgICAgICAgICAgICAgIHAtPnUubWVtcmVmLnNo
+bSA9IE5VTEw7DQo+ID4gLSAgICAgICAgICAgICAgIHJldHVybiAwOw0KPiA+ICsgICAgICAgICAg
+ICAgICBnb3RvIG91dDsNCj4gPiAgICAgICAgIH0NCj4gPg0KPiA+ICAgICAgICAgcmMgPSB0ZWVf
+c2htX2dldF9wYShzaG0sIDAsICZwYSk7DQo+ID4gQEAgLTEwMywxOCArMTA5LDI1IEBAIHN0YXRp
+YyBpbnQgZnJvbV9tc2dfcGFyYW1fdG1wX21lbShzdHJ1Y3QgdGVlX3BhcmFtICpwLCB1MzIgYXR0
+ciwNCj4gPg0KPiA+ICAgICAgICAgcC0+dS5tZW1yZWYuc2htX29mZnMgPSBtcC0+dS50bWVtLmJ1
+Zl9wdHIgLSBwYTsNCj4gPiAgICAgICAgIHAtPnUubWVtcmVmLnNobSA9IHNobTsNCj4gPiAtDQo+
+ID4gK291dDoNCj4gPiArICAgICAgIHAtPnUubWVtcmVmLnNpemUgPSBtcC0+dS50bWVtLnNpemU7
+DQo+ID4gICAgICAgICByZXR1cm4gMDsNCj4gPiAgfQ0KPiA+DQo+ID4gIHN0YXRpYyB2b2lkIGZy
+b21fbXNnX3BhcmFtX3JlZ19tZW0oc3RydWN0IHRlZV9wYXJhbSAqcCwgdTMyIGF0dHIsDQo+ID4g
+LSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb25zdCBzdHJ1Y3Qgb3B0ZWVfbXNn
+X3BhcmFtICptcCkNCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNvbnN0
+IHN0cnVjdCBvcHRlZV9tc2dfcGFyYW0gKm1wLA0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgYm9vbCB1cGRhdGVfb3V0KQ0KPiA+ICB7DQo+ID4gICAgICAgICBzdHJ1Y3Qg
+dGVlX3NobSAqc2htOw0KPiA+DQo+ID4gKyAgICAgICBpZiAodXBkYXRlX291dCkgew0KPiA+ICsg
+ICAgICAgICAgICAgICBpZiAoYXR0ciA9PSBPUFRFRV9NU0dfQVRUUl9UWVBFX1JNRU1fSU5QVVQp
+DQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuOw0KPiA+ICsgICAgICAgICAgICAg
+ICBnb3RvIG91dDsNCj4gPiArICAgICAgIH0NCj4gPiArDQo+ID4gICAgICAgICBwLT5hdHRyID0g
+VEVFX0lPQ1RMX1BBUkFNX0FUVFJfVFlQRV9NRU1SRUZfSU5QVVQgKw0KPiA+ICAgICAgICAgICAg
+ICAgICAgIGF0dHIgLSBPUFRFRV9NU0dfQVRUUl9UWVBFX1JNRU1fSU5QVVQ7DQo+ID4gLSAgICAg
+ICBwLT51Lm1lbXJlZi5zaXplID0gbXAtPnUucm1lbS5zaXplOw0KPiA+ICAgICAgICAgc2htID0g
+KHN0cnVjdCB0ZWVfc2htICopKHVuc2lnbmVkIGxvbmcpbXAtPnUucm1lbS5zaG1fcmVmOw0KPiA+
+DQo+ID4gICAgICAgICBpZiAoc2htKSB7DQo+ID4gQEAgLTEyNCw2ICsxMzcsOCBAQCBzdGF0aWMg
+dm9pZCBmcm9tX21zZ19wYXJhbV9yZWdfbWVtKHN0cnVjdCB0ZWVfcGFyYW0gKnAsIHUzMiBhdHRy
+LA0KPiA+ICAgICAgICAgICAgICAgICBwLT51Lm1lbXJlZi5zaG1fb2ZmcyA9IDA7DQo+ID4gICAg
+ICAgICAgICAgICAgIHAtPnUubWVtcmVmLnNobSA9IE5VTEw7DQo+ID4gICAgICAgICB9DQo+ID4g
+K291dDoNCj4gPiArICAgICAgIHAtPnUubWVtcmVmLnNpemUgPSBtcC0+dS5ybWVtLnNpemU7DQo+
+ID4gIH0NCj4gPg0KPiA+ICAvKioNCj4gPiBAQCAtMTMzLDExICsxNDgsMTMgQEAgc3RhdGljIHZv
+aWQgZnJvbV9tc2dfcGFyYW1fcmVnX21lbShzdHJ1Y3QgdGVlX3BhcmFtICpwLCB1MzIgYXR0ciwN
+Cj4gPiAgICogQHBhcmFtczogICAgc3Vic3lzdGVtIGludGVybmFsIHBhcmFtZXRlciByZXByZXNl
+bnRhdGlvbg0KPiA+ICAgKiBAbnVtX3BhcmFtczogICAgICAgIG51bWJlciBvZiBlbGVtZW50cyBp
+biB0aGUgcGFyYW1ldGVyIGFycmF5cw0KPiA+ICAgKiBAbXNnX3BhcmFtczogICAgICAgIE9QVEVF
+X01TRyBwYXJhbWV0ZXJzDQo+ID4gKyAqIEB1cGRhdGVfb3V0OiAgICAgICAgdXBkYXRlIHBhcmFt
+ZXRlciBmb3Igb3V0cHV0IG9ubHkNCj4gPiAgICogUmV0dXJucyAwIG9uIHN1Y2Nlc3Mgb3IgPDAg
+b24gZmFpbHVyZQ0KPiA+ICAgKi8NCj4gPiAgc3RhdGljIGludCBvcHRlZV9mcm9tX21zZ19wYXJh
+bShzdHJ1Y3Qgb3B0ZWUgKm9wdGVlLCBzdHJ1Y3QgdGVlX3BhcmFtICpwYXJhbXMsDQo+ID4gICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzaXplX3QgbnVtX3BhcmFtcywNCj4gPiAtICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNvbnN0IHN0cnVjdCBvcHRlZV9tc2dfcGFyYW0g
+Km1zZ19wYXJhbXMpDQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb25zdCBz
+dHJ1Y3Qgb3B0ZWVfbXNnX3BhcmFtICptc2dfcGFyYW1zLA0KPiA+ICsgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgYm9vbCB1cGRhdGVfb3V0KQ0KPiA+ICB7DQo+ID4gICAgICAgICBpbnQg
+cmM7DQo+ID4gICAgICAgICBzaXplX3QgbjsNCj4gPiBAQCAtMTQ5LDI1ICsxNjYsMjcgQEAgc3Rh
+dGljIGludCBvcHRlZV9mcm9tX21zZ19wYXJhbShzdHJ1Y3Qgb3B0ZWUgKm9wdGVlLCBzdHJ1Y3Qg
+dGVlX3BhcmFtICpwYXJhbXMsDQo+ID4NCj4gPiAgICAgICAgICAgICAgICAgc3dpdGNoIChhdHRy
+KSB7DQo+ID4gICAgICAgICAgICAgICAgIGNhc2UgT1BURUVfTVNHX0FUVFJfVFlQRV9OT05FOg0K
+PiA+ICsgICAgICAgICAgICAgICAgICAgICAgIGlmICh1cGRhdGVfb3V0KQ0KPiA+ICsgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgYnJlYWs7DQo+ID4gICAgICAgICAgICAgICAgICAgICAg
+ICAgcC0+YXR0ciA9IFRFRV9JT0NUTF9QQVJBTV9BVFRSX1RZUEVfTk9ORTsNCj4gPiAgICAgICAg
+ICAgICAgICAgICAgICAgICBtZW1zZXQoJnAtPnUsIDAsIHNpemVvZihwLT51KSk7DQo+ID4gICAg
+ICAgICAgICAgICAgICAgICAgICAgYnJlYWs7DQo+ID4gICAgICAgICAgICAgICAgIGNhc2UgT1BU
+RUVfTVNHX0FUVFJfVFlQRV9WQUxVRV9JTlBVVDoNCj4gPiAgICAgICAgICAgICAgICAgY2FzZSBP
+UFRFRV9NU0dfQVRUUl9UWVBFX1ZBTFVFX09VVFBVVDoNCj4gPiAgICAgICAgICAgICAgICAgY2Fz
+ZSBPUFRFRV9NU0dfQVRUUl9UWVBFX1ZBTFVFX0lOT1VUOg0KPiA+IC0gICAgICAgICAgICAgICAg
+ICAgICAgIG9wdGVlX2Zyb21fbXNnX3BhcmFtX3ZhbHVlKHAsIGF0dHIsIG1wKTsNCj4gPiArICAg
+ICAgICAgICAgICAgICAgICAgICBvcHRlZV9mcm9tX21zZ19wYXJhbV92YWx1ZShwLCBhdHRyLCBt
+cCwgdXBkYXRlX291dCk7DQo+ID4gICAgICAgICAgICAgICAgICAgICAgICAgYnJlYWs7DQo+ID4g
+ICAgICAgICAgICAgICAgIGNhc2UgT1BURUVfTVNHX0FUVFJfVFlQRV9UTUVNX0lOUFVUOg0KPiA+
+ICAgICAgICAgICAgICAgICBjYXNlIE9QVEVFX01TR19BVFRSX1RZUEVfVE1FTV9PVVRQVVQ6DQo+
+ID4gICAgICAgICAgICAgICAgIGNhc2UgT1BURUVfTVNHX0FUVFJfVFlQRV9UTUVNX0lOT1VUOg0K
+PiA+IC0gICAgICAgICAgICAgICAgICAgICAgIHJjID0gZnJvbV9tc2dfcGFyYW1fdG1wX21lbShw
+LCBhdHRyLCBtcCk7DQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgcmMgPSBmcm9tX21zZ19w
+YXJhbV90bXBfbWVtKHAsIGF0dHIsIG1wLCB1cGRhdGVfb3V0KTsNCj4gPiAgICAgICAgICAgICAg
+ICAgICAgICAgICBpZiAocmMpDQo+ID4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBy
+ZXR1cm4gcmM7DQo+ID4gICAgICAgICAgICAgICAgICAgICAgICAgYnJlYWs7DQo+ID4gICAgICAg
+ICAgICAgICAgIGNhc2UgT1BURUVfTVNHX0FUVFJfVFlQRV9STUVNX0lOUFVUOg0KPiA+ICAgICAg
+ICAgICAgICAgICBjYXNlIE9QVEVFX01TR19BVFRSX1RZUEVfUk1FTV9PVVRQVVQ6DQo+ID4gICAg
+ICAgICAgICAgICAgIGNhc2UgT1BURUVfTVNHX0FUVFJfVFlQRV9STUVNX0lOT1VUOg0KPiA+IC0g
+ICAgICAgICAgICAgICAgICAgICAgIGZyb21fbXNnX3BhcmFtX3JlZ19tZW0ocCwgYXR0ciwgbXAp
+Ow0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIGZyb21fbXNnX3BhcmFtX3JlZ19tZW0ocCwg
+YXR0ciwgbXAsIHVwZGF0ZV9vdXQpOw0KPiA+ICAgICAgICAgICAgICAgICAgICAgICAgIGJyZWFr
+Ow0KPiA+DQo+ID4gICAgICAgICAgICAgICAgIGRlZmF1bHQ6DQo+ID4gQEAgLTE3OCwyMCArMTk3
+LDI1IEBAIHN0YXRpYyBpbnQgb3B0ZWVfZnJvbV9tc2dfcGFyYW0oc3RydWN0IG9wdGVlICpvcHRl
+ZSwgc3RydWN0IHRlZV9wYXJhbSAqcGFyYW1zLA0KPiA+ICB9DQo+ID4NCj4gPiAgc3RhdGljIGlu
+dCB0b19tc2dfcGFyYW1fdG1wX21lbShzdHJ1Y3Qgb3B0ZWVfbXNnX3BhcmFtICptcCwNCj4gPiAt
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNvbnN0IHN0cnVjdCB0ZWVfcGFyYW0gKnAp
+DQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb25zdCBzdHJ1Y3QgdGVlX3Bh
+cmFtICpwLCBib29sIHVwZGF0ZV9vdXQpDQo+ID4gIHsNCj4gPiAgICAgICAgIGludCByYzsNCj4g
+PiAgICAgICAgIHBoeXNfYWRkcl90IHBhOw0KPiA+DQo+ID4gKyAgICAgICBpZiAodXBkYXRlX291
+dCkgew0KPiA+ICsgICAgICAgICAgICAgICBpZiAocC0+YXR0ciA9PSBURUVfSU9DVExfUEFSQU1f
+QVRUUl9UWVBFX01FTVJFRl9JTlBVVCkNCj4gPiArICAgICAgICAgICAgICAgICAgICAgICByZXR1
+cm4gMDsNCj4gPiArICAgICAgICAgICAgICAgZ290byBvdXQ7DQo+ID4gKyAgICAgICB9DQo+ID4g
+Kw0KPiA+ICAgICAgICAgbXAtPmF0dHIgPSBPUFRFRV9NU0dfQVRUUl9UWVBFX1RNRU1fSU5QVVQg
+KyBwLT5hdHRyIC0NCj4gPiAgICAgICAgICAgICAgICAgICAgVEVFX0lPQ1RMX1BBUkFNX0FUVFJf
+VFlQRV9NRU1SRUZfSU5QVVQ7DQo+ID4NCj4gPiAgICAgICAgIG1wLT51LnRtZW0uc2htX3JlZiA9
+ICh1bnNpZ25lZCBsb25nKXAtPnUubWVtcmVmLnNobTsNCj4gPiAtICAgICAgIG1wLT51LnRtZW0u
+c2l6ZSA9IHAtPnUubWVtcmVmLnNpemU7DQo+ID4NCj4gPiAgICAgICAgIGlmICghcC0+dS5tZW1y
+ZWYuc2htKSB7DQo+ID4gICAgICAgICAgICAgICAgIG1wLT51LnRtZW0uYnVmX3B0ciA9IDA7DQo+
+ID4gLSAgICAgICAgICAgICAgIHJldHVybiAwOw0KPiA+ICsgICAgICAgICAgICAgICBnb3RvIG91
+dDsNCj4gPiAgICAgICAgIH0NCj4gPg0KPiA+ICAgICAgICAgcmMgPSB0ZWVfc2htX2dldF9wYShw
+LT51Lm1lbXJlZi5zaG0sIHAtPnUubWVtcmVmLnNobV9vZmZzLCAmcGEpOw0KPiA+IEBAIC0yMDEs
+MTkgKzIyNSwyNyBAQCBzdGF0aWMgaW50IHRvX21zZ19wYXJhbV90bXBfbWVtKHN0cnVjdCBvcHRl
+ZV9tc2dfcGFyYW0gKm1wLA0KPiA+ICAgICAgICAgbXAtPnUudG1lbS5idWZfcHRyID0gcGE7DQo+
+ID4gICAgICAgICBtcC0+YXR0ciB8PSBPUFRFRV9NU0dfQVRUUl9DQUNIRV9QUkVERUZJTkVEIDw8
+DQo+ID4gICAgICAgICAgICAgICAgICAgICBPUFRFRV9NU0dfQVRUUl9DQUNIRV9TSElGVDsNCj4g
+PiAtDQo+ID4gK291dDoNCj4gPiArICAgICAgIG1wLT51LnRtZW0uc2l6ZSA9IHAtPnUubWVtcmVm
+LnNpemU7DQo+ID4gICAgICAgICByZXR1cm4gMDsNCj4gPiAgfQ0KPiA+DQo+ID4gIHN0YXRpYyBp
+bnQgdG9fbXNnX3BhcmFtX3JlZ19tZW0oc3RydWN0IG9wdGVlX21zZ19wYXJhbSAqbXAsDQo+ID4g
+LSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb25zdCBzdHJ1Y3QgdGVlX3BhcmFtICpw
+KQ0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY29uc3Qgc3RydWN0IHRlZV9w
+YXJhbSAqcCwgYm9vbCB1cGRhdGVfb3V0KQ0KPiA+ICB7DQo+ID4gKyAgICAgICBpZiAodXBkYXRl
+X291dCkgew0KPiA+ICsgICAgICAgICAgICAgICBpZiAocC0+YXR0ciA9PSBURUVfSU9DVExfUEFS
+QU1fQVRUUl9UWVBFX01FTVJFRl9JTlBVVCkNCj4gPiArICAgICAgICAgICAgICAgICAgICAgICBy
+ZXR1cm4gMDsNCj4gPiArICAgICAgICAgICAgICAgZ290byBvdXQ7DQo+ID4gKyAgICAgICB9DQo+
+ID4gKw0KPiA+ICAgICAgICAgbXAtPmF0dHIgPSBPUFRFRV9NU0dfQVRUUl9UWVBFX1JNRU1fSU5Q
+VVQgKyBwLT5hdHRyIC0NCj4gPiAgICAgICAgICAgICAgICAgICAgVEVFX0lPQ1RMX1BBUkFNX0FU
+VFJfVFlQRV9NRU1SRUZfSU5QVVQ7DQo+ID4NCj4gPiAgICAgICAgIG1wLT51LnJtZW0uc2htX3Jl
+ZiA9ICh1bnNpZ25lZCBsb25nKXAtPnUubWVtcmVmLnNobTsNCj4gPiAtICAgICAgIG1wLT51LnJt
+ZW0uc2l6ZSA9IHAtPnUubWVtcmVmLnNpemU7DQo+ID4gICAgICAgICBtcC0+dS5ybWVtLm9mZnMg
+PSBwLT51Lm1lbXJlZi5zaG1fb2ZmczsNCj4gPiArb3V0Og0KPiA+ICsgICAgICAgbXAtPnUucm1l
+bS5zaXplID0gcC0+dS5tZW1yZWYuc2l6ZTsNCj4gPiAgICAgICAgIHJldHVybiAwOw0KPiA+ICB9
+DQo+ID4NCj4gPiBAQCAtMjIzLDExICsyNTUsMTMgQEAgc3RhdGljIGludCB0b19tc2dfcGFyYW1f
+cmVnX21lbShzdHJ1Y3Qgb3B0ZWVfbXNnX3BhcmFtICptcCwNCj4gPiAgICogQG1zZ19wYXJhbXM6
+ICAgICAgICBPUFRFRV9NU0cgcGFyYW1ldGVycw0KPiA+ICAgKiBAbnVtX3BhcmFtczogICAgICAg
+IG51bWJlciBvZiBlbGVtZW50cyBpbiB0aGUgcGFyYW1ldGVyIGFycmF5cw0KPiA+ICAgKiBAcGFy
+YW1zOiAgICBzdWJzeXN0ZW0gaXRuZXJuYWwgcGFyYW1ldGVyIHJlcHJlc2VudGF0aW9uDQo+ID4g
+KyAqIEB1cGRhdGVfb3V0OiAgICAgICAgdXBkYXRlIHBhcmFtZXRlciBmb3Igb3V0cHV0IG9ubHkN
+Cj4gPiAgICogUmV0dXJucyAwIG9uIHN1Y2Nlc3Mgb3IgPDAgb24gZmFpbHVyZQ0KPiA+ICAgKi8N
+Cj4gPiAgc3RhdGljIGludCBvcHRlZV90b19tc2dfcGFyYW0oc3RydWN0IG9wdGVlICpvcHRlZSwN
+Cj4gPiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzdHJ1Y3Qgb3B0ZWVfbXNnX3BhcmFt
+ICptc2dfcGFyYW1zLA0KPiA+IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAgIHNpemVfdCBu
+dW1fcGFyYW1zLCBjb25zdCBzdHJ1Y3QgdGVlX3BhcmFtICpwYXJhbXMpDQo+ID4gKyAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgc2l6ZV90IG51bV9wYXJhbXMsIGNvbnN0IHN0cnVjdCB0ZWVf
+cGFyYW0gKnBhcmFtcywNCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICBib29sIHVw
+ZGF0ZV9vdXQpDQo+ID4gIHsNCj4gPiAgICAgICAgIGludCByYzsNCj4gPiAgICAgICAgIHNpemVf
+dCBuOw0KPiA+IEBAIC0yMzgsMjEgKzI3MiwyMyBAQCBzdGF0aWMgaW50IG9wdGVlX3RvX21zZ19w
+YXJhbShzdHJ1Y3Qgb3B0ZWUgKm9wdGVlLA0KPiA+DQo+ID4gICAgICAgICAgICAgICAgIHN3aXRj
+aCAocC0+YXR0cikgew0KPiA+ICAgICAgICAgICAgICAgICBjYXNlIFRFRV9JT0NUTF9QQVJBTV9B
+VFRSX1RZUEVfTk9ORToNCj4gPiArICAgICAgICAgICAgICAgICAgICAgICBpZiAodXBkYXRlX291
+dCkNCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJyZWFrOw0KPiA+ICAgICAg
+ICAgICAgICAgICAgICAgICAgIG1wLT5hdHRyID0gVEVFX0lPQ1RMX1BBUkFNX0FUVFJfVFlQRV9O
+T05FOw0KPiA+ICAgICAgICAgICAgICAgICAgICAgICAgIG1lbXNldCgmbXAtPnUsIDAsIHNpemVv
+ZihtcC0+dSkpOw0KPiA+ICAgICAgICAgICAgICAgICAgICAgICAgIGJyZWFrOw0KPiA+ICAgICAg
+ICAgICAgICAgICBjYXNlIFRFRV9JT0NUTF9QQVJBTV9BVFRSX1RZUEVfVkFMVUVfSU5QVVQ6DQo+
+ID4gICAgICAgICAgICAgICAgIGNhc2UgVEVFX0lPQ1RMX1BBUkFNX0FUVFJfVFlQRV9WQUxVRV9P
+VVRQVVQ6DQo+ID4gICAgICAgICAgICAgICAgIGNhc2UgVEVFX0lPQ1RMX1BBUkFNX0FUVFJfVFlQ
+RV9WQUxVRV9JTk9VVDoNCj4gPiAtICAgICAgICAgICAgICAgICAgICAgICBvcHRlZV90b19tc2df
+cGFyYW1fdmFsdWUobXAsIHApOw0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIG9wdGVlX3Rv
+X21zZ19wYXJhbV92YWx1ZShtcCwgcCwgdXBkYXRlX291dCk7DQo+ID4gICAgICAgICAgICAgICAg
+ICAgICAgICAgYnJlYWs7DQo+ID4gICAgICAgICAgICAgICAgIGNhc2UgVEVFX0lPQ1RMX1BBUkFN
+X0FUVFJfVFlQRV9NRU1SRUZfSU5QVVQ6DQo+ID4gICAgICAgICAgICAgICAgIGNhc2UgVEVFX0lP
+Q1RMX1BBUkFNX0FUVFJfVFlQRV9NRU1SRUZfT1VUUFVUOg0KPiA+ICAgICAgICAgICAgICAgICBj
+YXNlIFRFRV9JT0NUTF9QQVJBTV9BVFRSX1RZUEVfTUVNUkVGX0lOT1VUOg0KPiA+ICAgICAgICAg
+ICAgICAgICAgICAgICAgIGlmICh0ZWVfc2htX2lzX2R5bmFtaWMocC0+dS5tZW1yZWYuc2htKSkN
+Cj4gPiAtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJjID0gdG9fbXNnX3BhcmFtX3Jl
+Z19tZW0obXAsIHApOw0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcmMgPSB0
+b19tc2dfcGFyYW1fcmVnX21lbShtcCwgcCwgdXBkYXRlX291dCk7DQo+ID4gICAgICAgICAgICAg
+ICAgICAgICAgICAgZWxzZQ0KPiA+IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcmMg
+PSB0b19tc2dfcGFyYW1fdG1wX21lbShtcCwgcCk7DQo+ID4gKyAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICByYyA9IHRvX21zZ19wYXJhbV90bXBfbWVtKG1wLCBwLCB1cGRhdGVfb3V0KTsN
+Cj4gPiAgICAgICAgICAgICAgICAgICAgICAgICBpZiAocmMpDQo+ID4gICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICByZXR1cm4gcmM7DQo+ID4gICAgICAgICAgICAgICAgICAgICAgICAg
+YnJlYWs7DQo+ID4gLS0NCj4gPiAyLjQzLjANCj4gPg0KX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGlu
+YXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwg
+dG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
