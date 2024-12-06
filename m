@@ -2,146 +2,192 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 137399E6131
-	for <lists+linaro-mm-sig@lfdr.de>; Fri,  6 Dec 2024 00:18:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D1B959E681D
+	for <lists+linaro-mm-sig@lfdr.de>; Fri,  6 Dec 2024 08:41:24 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5C26243F7E
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  5 Dec 2024 23:18:19 +0000 (UTC)
-Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com [209.85.218.50])
-	by lists.linaro.org (Postfix) with ESMTPS id E84CF43C00
-	for <linaro-mm-sig@lists.linaro.org>; Thu,  5 Dec 2024 23:18:11 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 8B66344856
+	for <lists+linaro-mm-sig@lfdr.de>; Fri,  6 Dec 2024 07:41:23 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+	by lists.linaro.org (Postfix) with ESMTPS id 5BDF441253
+	for <linaro-mm-sig@lists.linaro.org>; Fri,  6 Dec 2024 07:41:17 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=google.com header.s=20230601 header.b=4IqMH631;
-	spf=pass (lists.linaro.org: domain of jstultz@google.com designates 209.85.218.50 as permitted sender) smtp.mailfrom=jstultz@google.com;
-	dmarc=pass (policy=reject) header.from=google.com
-Received: by mail-ej1-f50.google.com with SMTP id a640c23a62f3a-aa5325af6a0so228799266b.2
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 05 Dec 2024 15:18:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1733440691; x=1734045491; darn=lists.linaro.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ABRkDj2N+QkWL48IvhN2/HmURfPPjhYtD6+wjCTrDIo=;
-        b=4IqMH631ZEzj91QVl9Px2dt+oGUKrQIByFfcTdAhZwoxdNHaCnz5I97jxpC4HUDWok
-         G8Ef98IGBgTD/hYQz1FwqRvXHhr4g8WpGB2HtBVTvWP5ED+YZvR/HLVDe7hM6DIDnNwh
-         9BvMDiZD3dPU2NWNKJTSsFf/7RftcLiKVbHda+h+1IY6hK23j3609EkPwNJVGHMiNb1y
-         tjpx+Kp27ZsoVSAJvBjrH3m6L6um/i/TwZtGo3nIg+wJIPfyEo8vwBR+piuu/8MpPAnk
-         T+RAhQAsX0FXogPvbq1Pol4D9Wqs0AP0slS2IWn1DGgfXsAsydqesfdG+lYy9kBEHn0o
-         CjOw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1733440691; x=1734045491;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=ABRkDj2N+QkWL48IvhN2/HmURfPPjhYtD6+wjCTrDIo=;
-        b=O07CX4QM6ClBjeB2utKHGzl+b6d+YTWVp6bx0qhlepqpLvqOUXYSVvdcc88TWiJBHD
-         yAZ+/tzJv9Radm1cfKo1cIJ+3yg18Hz5NwLWtvlfrqU8PDZ4/4JTKSvIVOkicPj2Ol4o
-         QSnixAUUA9ipYufBbNO/ti76oOmFjqhSIOpfDvxf7aD2uJ22jlwpbIGndZBI8FP6B0ev
-         ro+wCliapiOMjI7GwcRWlft0deDVzu02wVbgHCDO00i9ngOXNY8wysKdlwk9BoP0DCB5
-         Dqpt0mY8Vna6NWBZ+qIR5dPGvLaE5c6C6J8v56+L0VLzAW7gwvBc/zIXpQyHT3nT02Ve
-         LVoQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWH9N8NUghf0KWlR3hO5rJ8MeLj9tpC97dv38VRfJjdA3ooofeI8ByM9FvB529lFKgBgpzZ7G41kWRlO/Tv@lists.linaro.org
-X-Gm-Message-State: AOJu0YzUChCUfq3hrQA0TG0TWY0ESJNvGzf1xLrbU60X1ZNdyty7MYsB
-	VQUND0I4tHoAtDTtkxCf+jSzHr0bg7dwCxLPgZH6GuKKSsXiSz3/Zed7lmuBMWeaN8Mvk0z1xtk
-	FydaTiJOPWs6uYBvXqaUaHabEMHQCsH/iaHQ=
-X-Gm-Gg: ASbGncthfqBCLlFL831m1eIiBSKPKxdVjyJ9qvw0xlierrDsZ4Vx14fgwaFKLbeVd/r
-	Pi0CekKXws6aUZjRZ9BdAZz6IAmUCnnK2HgBEHQ6KN/GZwFy7pwDpeKkG35Gq
-X-Google-Smtp-Source: AGHT+IFp8XCFg1lEU3e1fi+fHUhDavDNkEfjadO/eMfIJfRp5lhMaScdyBmt/tCjFNB2PINDghB3+C6LC7IZg7++n4w=
-X-Received: by 2002:a17:907:3a57:b0:aa5:2bab:69f6 with SMTP id
- a640c23a62f3a-aa639fb37fbmr47238966b.8.1733440690804; Thu, 05 Dec 2024
- 15:18:10 -0800 (PST)
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=uE8BedoB;
+	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=mripard@kernel.org;
+	dmarc=pass (policy=quarantine) header.from=kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by dfw.source.kernel.org (Postfix) with ESMTP id B450B5C72DE;
+	Fri,  6 Dec 2024 07:32:26 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D7FBBC4CED1;
+	Fri,  6 Dec 2024 07:33:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1733470389;
+	bh=Br4Ym+uOjzwX17XYvI6sLeN1epKmjEpXyufYM9pwxpQ=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=uE8BedoByqhdRpsz+nvWWsw9TdjmV87U11uPD4Qop8gheN7MZTHZLzp7GEq7SN1Cc
+	 q4jE4Utd01mmoHUmUsuEhjBtBQzY6LQqQd0c9UAoOWArRLtqkciMcWPlXNKsqSoXlf
+	 8zlHorpx7x+cCDbzFPaKzYxc8I0Yx4b8NeEh2ydzLZu0w9x9l+97T9X0qjMrNUkyPn
+	 loJUghnwxME1X8VwvaJrduAMuSXpKvUvJofn3we2z/pFu7cS31/+0rk9CKh8VpYnhR
+	 hd6hpvQ+60DXYaYCziZ+37lnaPK0K/FPVBIe9wqhEeSnhSTYk40NhVNpWBk3CQaVmW
+	 jUW5MkLThAWeA==
+Date: Fri, 6 Dec 2024 08:33:06 +0100
+From: Maxime Ripard <mripard@kernel.org>
+To: John Stultz <jstultz@google.com>
+Message-ID: <20241206-wealthy-hyrax-of-grandeur-ca3cba@houat>
+References: <20241202115827.50388-1-mripard@kernel.org>
+ <CANDhNCpTnc6=YkjQgQngRCw1_xLWgOFrcjTxrrGX+bRhvGb5DQ@mail.gmail.com>
+ <20241203-cerulean-ringtail-of-speed-920c5f@houat>
+ <f6412229-4606-41ad-8c05-7bbba2eb6e08@ti.com>
+ <CANDhNCqtMUaO4Y_7UYGJebDEdN==vTAQRexuuek5SZt5rqd8sQ@mail.gmail.com>
 MIME-Version: 1.0
-References: <20241202115827.50388-1-mripard@kernel.org> <CANDhNCpTnc6=YkjQgQngRCw1_xLWgOFrcjTxrrGX+bRhvGb5DQ@mail.gmail.com>
- <20241203-cerulean-ringtail-of-speed-920c5f@houat> <f6412229-4606-41ad-8c05-7bbba2eb6e08@ti.com>
-In-Reply-To: <f6412229-4606-41ad-8c05-7bbba2eb6e08@ti.com>
-From: John Stultz <jstultz@google.com>
-Date: Thu, 5 Dec 2024 15:17:57 -0800
-Message-ID: <CANDhNCqtMUaO4Y_7UYGJebDEdN==vTAQRexuuek5SZt5rqd8sQ@mail.gmail.com>
-To: Andrew Davis <afd@ti.com>
-X-Rspamd-Queue-Id: E84CF43C00
-X-Spamd-Bar: ----
-X-Spamd-Result: default: False [-4.07 / 15.00];
-	BAYES_HAM(-2.97)[99.87%];
-	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	R_DKIM_ALLOW(-0.20)[google.com:s=20230601];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	MIME_GOOD(-0.10)[text/plain];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.218.50:from];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_ONE(0.00)[1];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
+In-Reply-To: <CANDhNCqtMUaO4Y_7UYGJebDEdN==vTAQRexuuek5SZt5rqd8sQ@mail.gmail.com>
+X-Rspamd-Queue-Id: 5BDF441253
+X-Spamd-Bar: ----------
+X-Spamd-Result: default: False [-10.55 / 15.00];
+	REPLY(-4.00)[];
+	BAYES_HAM(-2.95)[99.79%];
+	SIGNED_PGP(-2.00)[];
+	RBL_SENDERSCORE_REPUT_9(-1.00)[139.178.84.217:from];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	MID_RHS_NOT_FQDN(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
+	MIME_GOOD(-0.20)[multipart/signed,text/plain];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
 	RCPT_COUNT_TWELVE(0.00)[12];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	RBL_SENDERSCORE_REPUT_8(0.00)[209.85.218.50:from];
-	URIBL_BLOCKED(0.00)[ti.com:email];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
 	MISSING_XM_UA(0.00)[];
+	ARC_NA(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	DKIM_TRACE(0.00)[google.com:+]
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: VR7SUDV6JLHLQP53JRFEDMEUJFQ4PR64
-X-Message-ID-Hash: VR7SUDV6JLHLQP53JRFEDMEUJFQ4PR64
-X-MailFrom: jstultz@google.com
+Message-ID-Hash: 2CH3H4LAGAKWP2B6HPEQLUPPCX2RSOPX
+X-Message-ID-Hash: 2CH3H4LAGAKWP2B6HPEQLUPPCX2RSOPX
+X-MailFrom: mripard@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Maxime Ripard <mripard@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, "T.J. Mercier" <tjmercier@google.com>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org, linux-doc@vger.kernel.org
+CC: Andrew Davis <afd@ti.com>, Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, "T.J. Mercier" <tjmercier@google.com>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org, linux-doc@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH v2] Documentation: dma-buf: heaps: Add heap name definitions
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VR7SUDV6JLHLQP53JRFEDMEUJFQ4PR64/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2CH3H4LAGAKWP2B6HPEQLUPPCX2RSOPX/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8465252686160005715=="
 
-T24gVHVlLCBEZWMgMywgMjAyNCBhdCAxMTowNOKAr0FNIEFuZHJldyBEYXZpcyA8YWZkQHRpLmNv
-bT4gd3JvdGU6DQo+IE9uIDEyLzMvMjQgMTo0NCBBTSwgTWF4aW1lIFJpcGFyZCB3cm90ZToNCj4g
-PiBPbiBNb24sIERlYyAwMiwgMjAyNCBhdCAxMToxMjoyM0FNIC0wODAwLCBKb2huIFN0dWx0eiB3
-cm90ZToNCj4gPj4gSHJtLiBJJ20gbm90IHN1cmUgSSBzZWUgdGhlIHZhbHVlIGluIGVudW1lcmF0
-aW5nIHRoaW5ncyBpbiB0aGlzIHdheSwNCj4gPj4gaXQgc2VlbXMgbGlrZSBpdCB3aWxsIGJlIGEg
-bnVpc2FuY2UgdG8ga2VlcCBjdXJyZW50PyAgTWF5YmUgc29tZXRoaW5nDQo+ID4+IGxpa2U6DQo+
-ID4+DQo+ID4+IE9uIG1vc3Qgc3lzdGVtcyB0aGUgZGVmYXVsdCBjbWEgcmVnaW9uIGlzIG5hbWVk
-ICJsaW51eCwgY21hIiBvcg0KPiA+PiAicmVzZXJ2ZWQiLCB3aXRoIGEgZmV3IGV4Y2VwdGlvbnM6
-DQo+ID4+ICAgICAgLSBBbGx3aW5uZXIgc3VuNGksIHN1bjVpIGFuZCBzdW43aSBmYW1pbGllczog
-YGBkZWZhdWx0LXBvb2xgYA0KPiA+DQo+ID4gSSdtIGEgYml0IHdvcnJpZWQgYWJvdXQgZG9pbmcg
-c28uIFdoYXQgaWYsIG9uIGEgImxpbnV4LGNtYSIgc3lzdGVtLCB3ZQ0KPiA+IGhhdmUgYW5vdGhl
-ciAicmVzZXJ2ZWQiIGhlYXAgY3JlYXRlZCB3aXRoIGRpZmZlcmVudCBzZW1hbnRpY3M/DQo+ID4N
-Cj4NCj4gSGF2aW5nIHRoZSAiZGVmYXVsdCBDTUEiIGhlYXAgZ2V0IGl0cyBkZXYgbmFtZSBiYXNl
-ZCBvbiB0aGUgbWV0aG9kIHRoYXQNCj4gY3JlYXRlZCBpdCB3YXMgYXJndWFibHkgYSBtaXN0YWtl
-IG1hZGUgd2hlbiBmaXJzdCB1cHN0cmVhbWluZyB0aGlzIGhlYXAuDQo+IFdlIHNob3VsZCBmaXgg
-dGhpcywgdGhlbiBtYXliZSBhZGQgdGhlIG9sZCBuYW1lIGFzIGEgbGluayBqdXN0IGZvcg0KPiBi
-YWNrd2FyZHMgY29tcGF0IGFzIG5lZWRlZC4NCj4NCj4gZXhwX2luZm8ubmFtZSA9ICJkZWZhdWx0
-X2NtYSI7DQo+DQo+IEFsbCBvdGhlciBDTUEgYW5kIGNhcnZlb3V0IGhlYXBzIHdpbGwgaGF2ZSBu
-YW1lcyBiYXNlZCBvbiB0aGVpcg0KPiBtZXRob2Qgb2YgY3JlYXRpb24gYXMgdGhlcmUgbWF5IGJl
-IG11bHRpcGxlIG9mIHRoZW0sIGJ1dCB0aGVyZQ0KPiB3aWxsIG9ubHkgZXZlcnkgYmUgb25lICJk
-ZWZhdWx0IENNQSIgYXJlYSwgYW5kIGl0cyBoZWFwIHNob3VsZA0KPiBiZSBuYW1lZCB0byBtYXRj
-aC4NCg0KVGhpcyBzZWVtcyByZWFzb25hYmxlIHRvIG1lLiBNYXliZSBwdXR0aW5nIHRoZSBsaW5r
-IGNyZWF0aW9uIGJlaGluZCBhDQpjb21wYXRpYmlsaXR5IGNvbmZpZyBzbyB0aGV5IGNhbiBiZSBs
-YXRlciBkZXByZWNhdGVkPw0KDQpUaGF0IHNhaWQsIHdoaWxlIEkgdW5kZXJzdGFuZCB0aGUgaW1w
-dWxzZSB0byB3YW50IHRvIGZpeCB0aGUgaGVhcA0KbmFtZXMgc28gYXBwbGljYXRpb25zIGNhbiBk
-ZXBlbmQgb24gdGhlbSwgSSBhbHNvIHdhbnQgdG8gY2F1dGlvbiBpdCdzDQphIGxpdHRsZSBiaXQg
-bGlrZSB0cnlpbmcgdG8gaGFyZCBjb2RlIGV0aDAgYXMgYSBuZXR3b3JrIGRldmljZSBuYW1lIGlu
-DQp5b3VyIHNjcmlwdHMuICBUaGVyZSBhcmUgdG9vIG1hbnkgcG90ZW50aWFsIGNvbmZpZ3VyYXRp
-b25zLCBhbmQgYW55DQpmaXhlZCBtYXBwaW5nIGlzIGdvaW5nIHRvIGJyZWFrIGluIHNvbWUgY2Fz
-ZXMuICBJIHRoaW5rIHRoZXJlIGlzIGp1c3QNCmdvaW5nIHRvIGhhdmUgdG8gYmUgc29tZSAoZ3Jh
-bGxvYy1saWtlKSBkZXZpY2Utc3BlY2lmaWMgY29uZmlndXJhdGlvbg0KZ2x1ZSB0byBtYXAgYSBw
-aXBlbGluZS91c2UtY2FzZSB0byB0aGUgbWVtb3J5IHR5cGUgKHNpbWlsYXIgdG8gZnN0YWINCmZv
-ciBmaWxlc3lzdGVtIHRvIG1vdW50IHBvaW50cykgaW4gb3JkZXIgdG8gaGFuZGxlIGV2ZXJ5IGNh
-c2UuDQoNClNvIGlmIEknbSBiZWluZyBhIGxpdHRsZSBzcXVpcnJlbHkgb24gZml4ZWQgbmFtZXMs
-IGl0J3MgbW9zdGx5IGR1ZSB0bw0Kd2FudGluZyB0byBhdm9pZCBhbnlvbmUgZ2V0dGluZyB0aGUg
-bWlzdGFrZW4gaW1wcmVzc2lvbiB0aGF0IGZpeGVkDQptYXBwaW5ncyB3aWxsIGdlbmVyYWxseSB3
-b3JrLg0KDQp0aGFua3MNCi1qb2huDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2ln
-QGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8t
-bW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+
+--===============8465252686160005715==
+Content-Type: multipart/signed; micalg=pgp-sha384;
+	protocol="application/pgp-signature"; boundary="w6x675unrzbjvp2x"
+Content-Disposition: inline
+
+
+--w6x675unrzbjvp2x
+Content-Type: text/plain; protected-headers=v1; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH v2] Documentation: dma-buf: heaps: Add heap name
+ definitions
+MIME-Version: 1.0
+
+On Thu, Dec 05, 2024 at 03:17:57PM -0800, John Stultz wrote:
+> On Tue, Dec 3, 2024 at 11:04=E2=80=AFAM Andrew Davis <afd@ti.com> wrote:
+> > On 12/3/24 1:44 AM, Maxime Ripard wrote:
+> > > On Mon, Dec 02, 2024 at 11:12:23AM -0800, John Stultz wrote:
+> > >> Hrm. I'm not sure I see the value in enumerating things in this way,
+> > >> it seems like it will be a nuisance to keep current?  Maybe something
+> > >> like:
+> > >>
+> > >> On most systems the default cma region is named "linux, cma" or
+> > >> "reserved", with a few exceptions:
+> > >>      - Allwinner sun4i, sun5i and sun7i families: ``default-pool``
+> > >
+> > > I'm a bit worried about doing so. What if, on a "linux,cma" system, we
+> > > have another "reserved" heap created with different semantics?
+> > >
+> >
+> > Having the "default CMA" heap get its dev name based on the method that
+> > created it was arguably a mistake made when first upstreaming this heap.
+> > We should fix this, then maybe add the old name as a link just for
+> > backwards compat as needed.
+> >
+> > exp_info.name =3D "default_cma";
+> >
+> > All other CMA and carveout heaps will have names based on their
+> > method of creation as there may be multiple of them, but there
+> > will only every be one "default CMA" area, and its heap should
+> > be named to match.
+>=20
+> This seems reasonable to me. Maybe putting the link creation behind a
+> compatibility config so they can be later deprecated?
+
+That sounds reasonable to me too. However, I'm not sure how to create a
+symlink in devtmpfs from the kernel. Or maybe we should create a second
+device file with the same major / minor?
+
+> That said, while I understand the impulse to want to fix the heap
+> names so applications can depend on them, I also want to caution it's
+> a little bit like trying to hard code eth0 as a network device name in
+> your scripts.  There are too many potential configurations, and any
+> fixed mapping is going to break in some cases.
+
+I certainly don't want to spark *that* discussion again, but it's
+exactly why I wasn't convinced about the names providing the guarantees
+back in Plumbers. I definitely agree with you there that the situation
+is kind of messy already, and it will only get worse.
+
+It will be really hard to document, and if we can't document it,
+userspace can't rely on guarantees either.
+
+> I think there is just going to have to be some (gralloc-like)
+> device-specific configuration glue to map a pipeline/use-case to the
+> memory type (similar to fstab for filesystem to mount points) in order
+> to handle every case.
+
+That might work for Android, but it really doesn't for anything more
+generic than that.
+
+> So if I'm being a little squirrely on fixed names, it's mostly due to
+> wanting to avoid anyone getting the mistaken impression that fixed
+> mappings will generally work.
+
+Ack :)
+Maxime
+
+--w6x675unrzbjvp2x
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iJUEABMJAB0WIQTkHFbLp4ejekA/qfgnX84Zoj2+dgUCZ1KosQAKCRAnX84Zoj2+
+ds/mAYC5oull8D+NhsZeCjJbs/mJRi1Y1zq/Mnhb0orpy9wyHHtCo3KrcFCnkiaj
+rUeJBjABgNA9DcsfGkKd8Qls0c/K42LeX5GkSBdFVlo30WUjrWr+u9Nt/JBW9oPk
+4+etnwsr0g==
+=NN+l
+-----END PGP SIGNATURE-----
+
+--w6x675unrzbjvp2x--
+
+--===============8465252686160005715==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============8465252686160005715==--
