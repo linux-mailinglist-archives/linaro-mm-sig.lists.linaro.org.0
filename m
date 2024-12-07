@@ -2,107 +2,110 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id AC6FD9E809A
-	for <lists+linaro-mm-sig@lfdr.de>; Sat,  7 Dec 2024 17:17:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CB3599E80C3
+	for <lists+linaro-mm-sig@lfdr.de>; Sat,  7 Dec 2024 17:18:15 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 655EE4435F
-	for <lists+linaro-mm-sig@lfdr.de>; Sat,  7 Dec 2024 16:17:24 +0000 (UTC)
-Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
-	by lists.linaro.org (Postfix) with ESMTPS id 762623F086
-	for <linaro-mm-sig@lists.linaro.org>; Sat,  7 Dec 2024 16:17:16 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E4BF844628
+	for <lists+linaro-mm-sig@lfdr.de>; Sat,  7 Dec 2024 16:18:14 +0000 (UTC)
+Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
+	by lists.linaro.org (Postfix) with ESMTPS id 966C03F086
+	for <linaro-mm-sig@lists.linaro.org>; Sat,  7 Dec 2024 16:18:07 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20230601 header.b=AGDu9EG+;
-	spf=pass (lists.linaro.org: domain of robdclark@gmail.com designates 209.85.215.176 as permitted sender) smtp.mailfrom=robdclark@gmail.com;
+	dkim=pass header.d=gmail.com header.s=20230601 header.b=m0cqtzGN;
+	spf=pass (lists.linaro.org: domain of robdclark@gmail.com designates 209.85.214.181 as permitted sender) smtp.mailfrom=robdclark@gmail.com;
 	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-pg1-f176.google.com with SMTP id 41be03b00d2f7-7fc8f0598cdso3245541a12.1
-        for <linaro-mm-sig@lists.linaro.org>; Sat, 07 Dec 2024 08:17:16 -0800 (PST)
+Received: by mail-pl1-f181.google.com with SMTP id d9443c01a7336-215ac560292so30008175ad.2
+        for <linaro-mm-sig@lists.linaro.org>; Sat, 07 Dec 2024 08:18:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1733588235; x=1734193035; darn=lists.linaro.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=nQVo/h69eP7W7+1c9cYInjm18ZQ/NruUHHKzUMPfb2g=;
-        b=AGDu9EG+XVtMQoDF5sYooN/YdUo5Ef/4kYPUCnwGvkhbk3p9xQl5yErI4+TgVw1woP
-         0HjURLvc5OzAH6J/C79B+nk6sHDWpjZiiJk72Vg5KT3YBYnh93M/n1zIYc9pnUz2Y29t
-         apcfDPovbJNBDqAv4LgfplPs38Oe4uXiUN//mQuNHfmGq0pfqPFpzitDtgsv8zgiqd3G
-         ex4Iycgs03ZKfakpy/Vj11Lps4DxyuxYazrfC6/QpDcSQJissb0Mk0SljN7rUD+a3D6j
-         YVubHkqLapGd4xQnY5R3iwUnfoy38qSHtyFeuVIwZtryx5BylgjO7WJQS6ej6I8fwJBs
-         EQvA==
+        d=gmail.com; s=20230601; t=1733588287; x=1734193087; darn=lists.linaro.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=5h1uhcGe1shthBGxBVlrXLlTzIKG363gSG371Gar4pg=;
+        b=m0cqtzGNe/NhygKSIEqRHNGh9rSipIyh6lbH8waKwhsS3RYfd1axR6hCKTAPxnXs05
+         l31/eMnCB9NCJP2WzhBeXo5kXS6OQxZ3RtsdT2pvN9GPTZyWMRQ6Rb9LaIddTAYuHN4V
+         lbeu3P+UIy16OOFARVtXDxnj5oWCiH2MQkn4dMDjomHSdkGCt0RCy6ujz1XLz0kczZh2
+         oMMXhtAcyQWULxR3I79RIjXHP5LeQXOX1KslBJxWqwWJY2pBFc0pmbg1iAC5zCNBw7iE
+         CqjwzJiA6q26/Vsc0tt5MnsHrAc80HBJdKCPNaOiTlBaInkEMnyGn97b0It5E7JcL07R
+         MZyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1733588235; x=1734193035;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=nQVo/h69eP7W7+1c9cYInjm18ZQ/NruUHHKzUMPfb2g=;
-        b=XceW/mzH34Sf/0n1NondD4Q8ptbZw4G3Hz5ubbYuzzgcu7Z1VO0/LPkwhLDyRc0//R
-         Kq2m28/bOtOY+bK4G/BDwdIl0HFQ/kiApQnbZUwzEgV9nXiU0MM5xi+VYcQroml2noJf
-         Cpc6aJFdWdJzSSINpog3W8qFPv7pOwuH+iCdnmVYE8XeRVsTevU/wq6KVplgcCplOkN4
-         nGaXek8yA57mNdbGhHvTIGQ+CDw84rDnnq0LYd5OdF1iS02LVJDFNppbmsBT4UCRabvE
-         Q3V6ocu/5hm/Xxb1iMBRa0M65hid7v2VvCYeLOougOHW4KMjkv0er9TZqwDMBtBGNbc4
-         1WDg==
-X-Forwarded-Encrypted: i=1; AJvYcCUvcqEqrnwnOXvL9oq/HZT/7YdpzJS/aY+BHIPNlrLptQEtrx1Ec505eCla272gM/wpKhQmbj4N/+uLJKu2@lists.linaro.org
-X-Gm-Message-State: AOJu0Yzwfz8jivFJ/ZQvh1xrjUqSIueaQJfoJA97Osm9LIMwQABFSz6l
-	D5f+hno5IEb94H8Nb/n1WwLc2lR9RMRU+hxQ4gVOIy0xqWo9HOHK
-X-Gm-Gg: ASbGncs/+eXGaO6eg/zuLWA2rOwBB3oP3CNBNF91yCPwbVkz/8qqcKhE+vQdX6gppdI
-	cmZgu2/A06Vw8ejUkfqGUn6u0XSPqG+DJS1MUlw8tN794NWDZ1SbUUHb3htuOykj/UDkel5M8TT
-	sLCHC2tkQ1OBwIzvvHHr3Vh9baznR5P6gHTGUoy6pMdUur/0JnE9nSIdb8Fx2GAfdS3kOIJvkBq
-	Y95bmsEMtByCDHXApxeKxZvvGpOT2Nv1ICcsjbjKVWPk5GI77GBGrj4vgsGKpZC1ljEKgsOMbii
-	ZZm+TxD4
-X-Google-Smtp-Source: AGHT+IEmvFnBaDTFAw3iJraQEGMF/iUDVX5tXZvZVfuIO2OYpZL0lZpXEUIfhOJmviPs0qS6KOnT/w==
-X-Received: by 2002:a17:90b:2015:b0:2ef:6ef4:817d with SMTP id 98e67ed59e1d1-2ef6ef486ebmr9437262a91.6.1733588235412;
-        Sat, 07 Dec 2024 08:17:15 -0800 (PST)
+        d=1e100.net; s=20230601; t=1733588287; x=1734193087;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=5h1uhcGe1shthBGxBVlrXLlTzIKG363gSG371Gar4pg=;
+        b=cUsME+tQhg+WlmNrW0Q3h04Dz8nXF3M0TcnI2FgA9RFT+fhVOOaKrjwTfuksiSLBOF
+         bC48/sx4dvWkZAxPOttOaxuK8pZ01nw41ouWnuzEfA9DgqgaqaDv+OUHcWzQR9UW2ddu
+         UKxFktdxxPskPzKYRVnYSlRy4Mp63XUgShe9C91dSXrnklXbzCvn0gBmq1fkRg3ooR/f
+         MS1sajB/LTlEQ24UIPUouVEv2IWk0nGBacVauR+dc5CXTiOnopJI8Q6+nvAJ7FTpQGIJ
+         zkZzNPSb0sN7fHlHxKsWRwtWXjgloGUcv8yMpyZcJDAnaPGA1rCeBEhi9/9lc7J4PJK/
+         tEeg==
+X-Forwarded-Encrypted: i=1; AJvYcCWnXKxl+sSYIbWPQRFz/6i8qAsxvWZcMQ6vbQG8UC6wRCZyYqWJF78P7xD7lZhfi30cVmAnmkLN2CNk3DoV@lists.linaro.org
+X-Gm-Message-State: AOJu0YyoJtyKC032cj7MQwBzKesxas2KyIWMU3exjq8cStA81D0AYNkX
+	kxzOOmiWnl3vrw9AqC8tp9NAYGx+Dohb2URoxnBCe/uCsLxO8OnE
+X-Gm-Gg: ASbGncvIlsMK213c+Gje6ma0sVg/MPMiTZyP7U6u4KJXUTzC24m53VPqg8P1vYkULlJ
+	ADfcp58gp98goVy1PGuZ5ZXxvQ2Un0UdfJPUnHB9VzT01n4QRIXta0r4e8u4+dCwfOi+W2h0Gmh
+	pRfNpKG5te34j2Q/H1Lzf15kiC0lhC68/XmZ5sFBG086tfNlmVIZuNl8mspMDLSw3xMUKnSyv5d
+	2sTgQkB6N6TWMgExg9iqTQegLf8ewqRe/XJtvBbhNF63cvOATI1/2iaxWqIwuwwxmfqPA+Bm/3I
+	95qUgifO
+X-Google-Smtp-Source: AGHT+IHoc0cdu0fl4BkIxjrGdBeLkPtIQTBBV4VaO5/T66Kf51XXGOzTpAEPXBeRnjy6Om3Oobigjg==
+X-Received: by 2002:a17:903:240a:b0:212:fa3:f627 with SMTP id d9443c01a7336-21614d457ebmr125472915ad.16.1733588286604;
+        Sat, 07 Dec 2024 08:18:06 -0800 (PST)
 Received: from localhost (c-73-37-105-206.hsd1.or.comcast.net. [73.37.105.206])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2ef8610ee98sm1426630a91.5.2024.12.07.08.17.13
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-21631bd2c2dsm9980865ad.263.2024.12.07.08.18.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 07 Dec 2024 08:17:14 -0800 (PST)
+        Sat, 07 Dec 2024 08:18:06 -0800 (PST)
 From: Rob Clark <robdclark@gmail.com>
 To: dri-devel@lists.freedesktop.org
-Date: Sat,  7 Dec 2024 08:15:00 -0800
-Message-ID: <20241207161651.410556-1-robdclark@gmail.com>
+Date: Sat,  7 Dec 2024 08:15:16 -0800
+Message-ID: <20241207161651.410556-17-robdclark@gmail.com>
 X-Mailer: git-send-email 2.47.1
+In-Reply-To: <20241207161651.410556-1-robdclark@gmail.com>
+References: <20241207161651.410556-1-robdclark@gmail.com>
 MIME-Version: 1.0
-X-Rspamd-Queue-Id: 762623F086
-X-Spamd-Bar: ---
-X-Spamd-Result: default: False [-3.50 / 15.00];
+X-Rspamd-Queue-Id: 966C03F086
+X-Spamd-Bar: -------
+X-Spamd-Result: default: False [-7.60 / 15.00];
+	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
+	RBL_SENDERSCORE_REPUT_9(-1.00)[209.85.214.181:from];
 	MID_CONTAINS_FROM(1.00)[];
-	RBL_SENDERSCORE_REPUT_9(-1.00)[209.85.215.176:from];
-	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_MISSING_CHARSET(0.50)[];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
 	MIME_GOOD(-0.10)[text/plain];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.214.181:from];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	ARC_NA(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	FREEMAIL_CC(0.00)[lists.freedesktop.org,vger.kernel.org,gmail.com,quicinc.com,chromium.org,mainlining.org,linaro.org,intel.com,marek.ca,kernel.org,lists.linaro.org,somainline.org,poorly.run];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.215.176:from];
-	NEURAL_HAM(-0.00)[-1.000];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[22];
+	ARC_NA(0.00)[];
+	FREEMAIL_CC(0.00)[lists.freedesktop.org,vger.kernel.org,gmail.com,quicinc.com,chromium.org,linaro.org,poorly.run,somainline.org,ffwll.ch,kernel.org,linux.intel.com,suse.de,amd.com,lists.linaro.org];
 	DKIM_TRACE(0.00)[gmail.com:+];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_EQ_ENVFROM(0.00)[];
 	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	FROM_HAS_DN(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: FRR54FWLZQ3CTL43SOCPRMS5N7C56BUW
-X-Message-ID-Hash: FRR54FWLZQ3CTL43SOCPRMS5N7C56BUW
+Message-ID-Hash: IFC6FZ36SZVDT6IFUGKNK3T6YIZI4U7R
+X-Message-ID-Hash: IFC6FZ36SZVDT6IFUGKNK3T6YIZI4U7R
 X-MailFrom: robdclark@gmail.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, Connor Abbott <cwabbott0@gmail.com>, Akhil P Oommen <quic_akhilpo@quicinc.com>, Rob Clark <robdclark@chromium.org>, Abhinav Kumar <quic_abhinavk@quicinc.com>, =?UTF-8?q?Barnab=C3=A1s=20Cz=C3=A9m=C3=A1n?= <barnabas.czeman@mainlining.org>, Carl Vanderlip <quic_carlv@quicinc.com>, Dmitry Baryshkov <dmitry.baryshkov@linaro.org>, Jani Nikula <jani.nikula@intel.com>, Jonathan Marek <jonathan@marek.ca>, Jun Nie <jun.nie@linaro.org>, Konrad Dybcio <konradybcio@kernel.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK:Keyword:bdma_?:buf|fence|resvb" <linaro-mm-sig@lists.linaro.org>, open list <linux-kernel@vger.kernel.org>, "open list:DMA BUFFER SHARING FRAMEWORK:Keyword:bdma_?:buf|fence|resvb" <linux-media@vger.kernel.org>, "open list:SUSPEND TO RAM" <linux-pm@vger.kernel.org>, Marijn Suijten <marijn.suijten@somainline.org>, Paloma Arellano <quic_parellan@quicinc.com>, "Rafael J. Wysocki" <rafael@kernel.org>, Sean Paul <sean
- @poorly.run>, Stephen Boyd <swboyd@chromium.org>
+CC: freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, Connor Abbott <cwabbott0@gmail.com>, Akhil P Oommen <quic_akhilpo@quicinc.com>, Rob Clark <robdclark@chromium.org>, Rob Clark <robdclark@gmail.com>, Abhinav Kumar <quic_abhinavk@quicinc.com>, Dmitry Baryshkov <dmitry.baryshkov@linaro.org>, Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>, Simona Vetter <simona@ffwll.ch>, Konrad Dybcio <konradybcio@kernel.org>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, open list <linux-kernel@vger.kernel.org>, "open list:DMA BUFFER SHARING FRAMEWORK:Keyword:bdma_?:buf|fence|resvb" <linux-media@vger.kernel.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK:Keyword:bdma_?:buf|fence|resvb" <linaro-mm-sig@lists.linaro.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [RFC 00/24] drm/msm: sparse / "VM_BIND" support
+Subject: [Linaro-mm-sig] [RFC 16/24] drm/msm: Extend SUBMIT ioctl for VM_BIND
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FRR54FWLZQ3CTL43SOCPRMS5N7C56BUW/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/IFC6FZ36SZVDT6IFUGKNK3T6YIZI4U7R/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -114,139 +117,290 @@ Content-Transfer-Encoding: 7bit
 
 From: Rob Clark <robdclark@chromium.org>
 
-Conversion to DRM GPU VA Manager[1], and adding support for Vulkan Sparse
-Memory[2] in the form of:
-1. A new VM_BIND submitqueue type for executing VM MSM_SUBMIT_BO_OP_MAP/
-   MAP_NULL/UNMAP commands
-2. Extending the SUBMIT` ioctl to allow submitting batches of one or more
-   MAP/MAP_NULL/UNMAP commands to a VM_BIND submitqueue
+This is a bit different than the path taken by other clean-slate
+drivers.  But there is a lot in similar with BO pinning in the legacy
+"EXEC" path and "VM_BIND" MAP path.  Also, we want the same fence and
+syncobj handling.
 
-The UABI takes a slightly different approach from what other drivers have
-done, and what would make sense if starting from a clean sheet, ie separate
-VM_BIND and EXEC ioctls.  But since we have to maintain support for the
-existing SUBMIT ioctl, and because the fence, syncobj, and BO pinning is
-largely the same between legacy "BO-table" style SUBMIT ioctls, and new-
-style VM updates submitted to a VM_BIND submitqueue, I chose to go the
-route of extending the existing `SUBMIT` ioctl rather than adding a new
-ioctl.
+(Why bother with fence fd's?  Because for virtgpu nctx for, guest
+syncobj's exist only as dma_fence's between the guest kernel and host.)
 
-I also did not implement support for synchronous VM_BIND commands.  Since
-userspace could just immediately wait for the `SUBMIT` to complete, I don't
-think we need this extra complexity in the kernel.
+Signed-off-by: Rob Clark <robdclark@chromium.org>
+---
+ drivers/gpu/drm/msm/msm_gem.h        | 10 ++---
+ drivers/gpu/drm/msm/msm_gem_submit.c | 65 ++++++++++++++++++++++++----
+ include/uapi/drm/msm_drm.h           | 49 ++++++++++++++++++---
+ 3 files changed, 103 insertions(+), 21 deletions(-)
 
-The corresponding mesa MR: https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/32533
-
-### Notes/TODOs/Open Questions:
-1. The first handful of patches are from Bibek Kumar Patro's series, 
-   "iommu/arm-smmu: introduction of ACTLR implementation for Qualcomm SoCs[3],
-   which introduces PRR (Partially-Resident-Region) support, needed to
-   implement MAP_NULL (for Vulkan Sparse Residency[4]
-2. Why do VM_BIND commands need fence fd support, instead of just syncobjs?
-   Mainly for the benefit of virtgpu drm native context guest<->host fence
-   passing[5], where the host VMM is operating in terms of fence fd's
-   (syncobs are just a convenience wrapper above a dma_fence, and don't
-   exist below the guest kernel).
-3. Currently shrinker support is disabled (hence this being in Draft/RFC
-   state).  To properly support the shrinker, we need to pre-allocate
-   various objects and pages needed for the pagetables themselves, to
-   move memory allocations out of the fence signaling path.  This short-
-   cut was taken to unblock userspace implementation of sparse buffer/
-   image support.
-4. Could/should we do all the vm/vma updates synchronously and defer _only_
-   the io-pgtable updates to the VM_BIND scheduler queue?  This would
-   simplify the previous point, in that we'd only have to pre-allocate
-   pages for the io-pgtable updates.
-5. Currently we lose support for BO dumping for devcoredump.  Ideally we'd
-   plumb `MSM_SUBMIT_BO_DUMP` flag in a `MAP` commands thru to the resulting
-   drm_gpuva's.  To do this, I think we need to extend drm_gpuva with a
-   flags field.. the flags can be driver defined, but drm_gpuvm needs to
-   know not to merge drm_gpuva's with different flags.
-
-This series can be found in MR form, if you prefer:
-https://gitlab.freedesktop.org/drm/msm/-/merge_requests/144
-
-[1] https://www.kernel.org/doc/html/next/gpu/drm-mm.html#drm-gpuvm
-[2] https://docs.vulkan.org/spec/latest/chapters/sparsemem.html
-[3] https://patchwork.kernel.org/project/linux-arm-kernel/list/?series=909700
-[4] https://docs.vulkan.org/spec/latest/chapters/sparsemem.html#sparsememory-partially-resident-buffers
-[5] https://patchew.org/linux/20231007194747.788934-1-dmitry.osipenko@collabora.com/
-
-Rob Clark (24):
-  HACK: drm/msm: Disable shrinker
-  drm/gpuvm: Don't require obj lock in destructor path
-  drm/gpuvm: Remove bogus lock assert
-  drm/msm: Rename msm_file_private -> msm_context
-  drm/msm: Improve msm_context comments
-  drm/msm: Rename msm_gem_address_space -> msm_gem_vm
-  drm/msm: Remove vram carveout support
-  drm/msm: Collapse vma allocation and initialization
-  drm/msm: Collapse vma close and delete
-  drm/msm: drm_gpuvm conversion
-  drm/msm: Use drm_gpuvm types more
-  drm/msm: Split submit_pin_objects()
-  drm/msm: Lazily create context VM
-  drm/msm: Add opt-in for VM_BIND
-  drm/msm: Mark VM as unusable on faults
-  drm/msm: Extend SUBMIT ioctl for VM_BIND
-  drm/msm: Add VM_BIND submitqueue
-  drm/msm: Add _NO_SHARE flag
-  drm/msm: Split out helper to get iommu prot flags
-  drm/msm: Add mmu support for non-zero offset
-  drm/msm: Add PRR support
-  drm/msm: Rename msm_gem_vma_purge() -> _unmap()
-  drm/msm: Wire up gpuvm ops
-  drm/msm: Bump UAPI version
-
- drivers/gpu/drm/drm_gpuvm.c                   |  10 +-
- drivers/gpu/drm/msm/Kconfig                   |   1 +
- drivers/gpu/drm/msm/adreno/a2xx_gpu.c         |  19 +-
- drivers/gpu/drm/msm/adreno/a2xx_gpummu.c      |   5 +-
- drivers/gpu/drm/msm/adreno/a3xx_gpu.c         |   4 +-
- drivers/gpu/drm/msm/adreno/a4xx_gpu.c         |   4 +-
- drivers/gpu/drm/msm/adreno/a5xx_debugfs.c     |   4 +-
- drivers/gpu/drm/msm/adreno/a5xx_gpu.c         |  24 +-
- drivers/gpu/drm/msm/adreno/a5xx_power.c       |   2 +-
- drivers/gpu/drm/msm/adreno/a5xx_preempt.c     |  10 +-
- drivers/gpu/drm/msm/adreno/a6xx_gmu.c         |  32 +-
- drivers/gpu/drm/msm/adreno/a6xx_gmu.h         |   2 +-
- drivers/gpu/drm/msm/adreno/a6xx_gpu.c         |  51 +-
- drivers/gpu/drm/msm/adreno/a6xx_gpu_state.c   |   6 +-
- drivers/gpu/drm/msm/adreno/a6xx_preempt.c     |  10 +-
- drivers/gpu/drm/msm/adreno/adreno_gpu.c       |  78 ++-
- drivers/gpu/drm/msm/adreno/adreno_gpu.h       |  22 +-
- .../drm/msm/disp/dpu1/dpu_encoder_phys_wb.c   |  14 +-
- drivers/gpu/drm/msm/disp/dpu1/dpu_formats.c   |  18 +-
- drivers/gpu/drm/msm/disp/dpu1/dpu_formats.h   |   2 +-
- drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c       |  18 +-
- drivers/gpu/drm/msm/disp/dpu1/dpu_plane.c     |  14 +-
- drivers/gpu/drm/msm/disp/dpu1/dpu_plane.h     |   4 +-
- drivers/gpu/drm/msm/disp/mdp4/mdp4_crtc.c     |   6 +-
- drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.c      |  28 +-
- drivers/gpu/drm/msm/disp/mdp4/mdp4_plane.c    |  12 +-
- drivers/gpu/drm/msm/disp/mdp5/mdp5_crtc.c     |   4 +-
- drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.c      |  19 +-
- drivers/gpu/drm/msm/disp/mdp5/mdp5_plane.c    |  12 +-
- drivers/gpu/drm/msm/dsi/dsi_host.c            |  14 +-
- drivers/gpu/drm/msm/msm_drv.c                 | 175 ++----
- drivers/gpu/drm/msm/msm_drv.h                 |  31 +-
- drivers/gpu/drm/msm/msm_fb.c                  |  18 +-
- drivers/gpu/drm/msm/msm_fbdev.c               |   2 +-
- drivers/gpu/drm/msm/msm_gem.c                 | 403 ++++++-------
- drivers/gpu/drm/msm/msm_gem.h                 | 193 +++++--
- drivers/gpu/drm/msm/msm_gem_prime.c           |  15 +
- drivers/gpu/drm/msm/msm_gem_submit.c          | 223 +++++--
- drivers/gpu/drm/msm/msm_gem_vma.c             | 543 +++++++++++++++---
- drivers/gpu/drm/msm/msm_gpu.c                 |  66 ++-
- drivers/gpu/drm/msm/msm_gpu.h                 | 132 +++--
- drivers/gpu/drm/msm/msm_iommu.c               |  84 ++-
- drivers/gpu/drm/msm/msm_kms.c                 |  14 +-
- drivers/gpu/drm/msm/msm_kms.h                 |   2 +-
- drivers/gpu/drm/msm/msm_mmu.h                 |   2 +-
- drivers/gpu/drm/msm/msm_ringbuffer.c          |   4 +-
- drivers/gpu/drm/msm/msm_submitqueue.c         |  86 ++-
- include/uapi/drm/msm_drm.h                    |  98 +++-
- 48 files changed, 1637 insertions(+), 903 deletions(-)
-
+diff --git a/drivers/gpu/drm/msm/msm_gem.h b/drivers/gpu/drm/msm/msm_gem.h
+index 7cb720137548..8e29e36ca9c5 100644
+--- a/drivers/gpu/drm/msm/msm_gem.h
++++ b/drivers/gpu/drm/msm/msm_gem.h
+@@ -345,13 +345,13 @@ struct msm_gem_submit {
+ 		uint32_t nr_relocs;
+ 		struct drm_msm_gem_submit_reloc *relocs;
+ 	} *cmd;  /* array of size nr_cmds */
+-	struct {
++	struct msm_gem_submit_bo {
+ 		uint32_t flags;
+-		union {
+-			struct drm_gem_object *obj;
+-			uint32_t handle;
+-		};
++		uint32_t handle;
++		struct drm_gem_object *obj;
+ 		uint64_t iova;
++		uint64_t bo_offset;
++		uint64_t range;
+ 	} bos[];
+ };
+ 
+diff --git a/drivers/gpu/drm/msm/msm_gem_submit.c b/drivers/gpu/drm/msm/msm_gem_submit.c
+index 79bbe552f23e..9ac74f9a139e 100644
+--- a/drivers/gpu/drm/msm/msm_gem_submit.c
++++ b/drivers/gpu/drm/msm/msm_gem_submit.c
+@@ -115,23 +115,37 @@ void __msm_gem_submit_destroy(struct kref *kref)
+ 	kfree(submit);
+ }
+ 
++static bool invalid_alignment(uint64_t addr)
++{
++	/*
++	 * Technically this is about GPU alignment, not CPU alignment.  But
++	 * I've not seen any qcom SoC where the SMMU does not support the
++	 * CPU's smallest page size.
++	 */
++	return !PAGE_ALIGNED(addr);
++}
++
+ static int submit_lookup_objects(struct msm_gem_submit *submit,
+ 		struct drm_msm_gem_submit *args, struct drm_file *file)
+ {
+-	unsigned i;
++	unsigned i, bo_stride = args->bos_stride;
+ 	int ret = 0;
+ 
++	if (!bo_stride)
++		bo_stride = sizeof(struct drm_msm_gem_submit_bo);
++
+ 	for (i = 0; i < args->nr_bos; i++) {
+-		struct drm_msm_gem_submit_bo submit_bo;
++		struct drm_msm_gem_submit_bo_v2 submit_bo = {0};
+ 		void __user *userptr =
+-			u64_to_user_ptr(args->bos + (i * sizeof(submit_bo)));
++			u64_to_user_ptr(args->bos + (i * bo_stride));
++		unsigned copy_sz = min(bo_stride, sizeof(submit_bo));
+ 
+ 		/* make sure we don't have garbage flags, in case we hit
+ 		 * error path before flags is initialized:
+ 		 */
+ 		submit->bos[i].flags = 0;
+ 
+-		if (copy_from_user(&submit_bo, userptr, sizeof(submit_bo))) {
++		if (copy_from_user(&submit_bo, userptr, copy_sz)) {
+ 			ret = -EFAULT;
+ 			i = 0;
+ 			goto out;
+@@ -141,14 +155,27 @@ static int submit_lookup_objects(struct msm_gem_submit *submit,
+ #define MANDATORY_FLAGS (MSM_SUBMIT_BO_READ | MSM_SUBMIT_BO_WRITE)
+ 
+ 		if ((submit_bo.flags & ~MSM_SUBMIT_BO_FLAGS) ||
+-			!(submit_bo.flags & MANDATORY_FLAGS)) {
++		    !(submit_bo.flags & MANDATORY_FLAGS))
+ 			ret = SUBMIT_ERROR(EINVAL, submit, "invalid flags: %x\n", submit_bo.flags);
++
++		if (invalid_alignment(submit_bo.address))
++			ret = SUBMIT_ERROR(EINVAL, submit, "invalid address: %016llx\n", submit_bo.address);
++
++		if (invalid_alignment(submit_bo.bo_offset))
++			ret = SUBMIT_ERROR(EINVAL, submit, "invalid bo_offset: %016llx\n", submit_bo.bo_offset);
++
++		if (invalid_alignment(submit_bo.range))
++			ret = SUBMIT_ERROR(EINVAL, submit, "invalid range: %016llx\n", submit_bo.range);
++
++		if (ret) {
+ 			i = 0;
+ 			goto out;
+ 		}
+ 
+ 		submit->bos[i].handle = submit_bo.handle;
+ 		submit->bos[i].flags = submit_bo.flags;
++		submit->bos[i].bo_offset = submit_bo.bo_offset;
++		submit->bos[i].range = submit_bo.range;
+ 	}
+ 
+ 	spin_lock(&file->table_lock);
+@@ -167,6 +194,15 @@ static int submit_lookup_objects(struct msm_gem_submit *submit,
+ 
+ 		drm_gem_object_get(obj);
+ 
++		if (submit->bos[i].bo_offset > obj->size)
++			ret = SUBMIT_ERROR(EINVAL, submit, "bo_offset to large: %016llx\n", submit->bos[i].bo_offset);
++
++		if ((submit->bos[i].bo_offset + submit->bos[i].range) > obj->size)
++			ret = SUBMIT_ERROR(EINVAL, submit, "range to large: %016llx\n", submit->bos[i].range);
++
++		if (ret)
++			goto out_unlock;
++
+ 		submit->bos[i].obj = obj;
+ 	}
+ 
+@@ -182,6 +218,7 @@ static int submit_lookup_objects(struct msm_gem_submit *submit,
+ static int submit_lookup_cmds(struct msm_gem_submit *submit,
+ 		struct drm_msm_gem_submit *args, struct drm_file *file)
+ {
++	struct msm_context *ctx = file->driver_priv;
+ 	unsigned i;
+ 	size_t sz;
+ 	int ret = 0;
+@@ -213,6 +250,19 @@ static int submit_lookup_cmds(struct msm_gem_submit *submit,
+ 			goto out;
+ 		}
+ 
++		if (msm_context_is_vmbind(ctx)) {
++			if (submit_cmd.nr_relocs) {
++				ret = SUBMIT_ERROR(EINVAL, submit, "nr_relocs must be zero");
++				goto out;
++			}
++			if (submit_cmd.submit_idx || submit_cmd.submit_offset) {
++				ret = SUBMIT_ERROR(EINVAL, submit, "submit_idx/offset must be zero");
++				goto out;
++			}
++
++			submit->cmd[i].iova = submit_cmd.iova;
++		}
++
+ 		submit->cmd[i].type = submit_cmd.type;
+ 		submit->cmd[i].size = submit_cmd.size / 4;
+ 		submit->cmd[i].offset = submit_cmd.submit_offset / 4;
+@@ -665,9 +715,6 @@ int msm_ioctl_gem_submit(struct drm_device *dev, void *data,
+ 	if (!gpu)
+ 		return -ENXIO;
+ 
+-	if (args->pad)
+-		return -EINVAL;
+-
+ 	if (to_msm_vm(ctx->vm)->unusable)
+ 		return UERR(EPIPE, dev, "context is unusable");
+ 
+@@ -677,7 +724,7 @@ int msm_ioctl_gem_submit(struct drm_device *dev, void *data,
+ 	if (MSM_PIPE_ID(args->flags) != MSM_PIPE_3D0)
+ 		return UERR(EINVAL, dev, "invalid pipe");
+ 
+-	if (MSM_PIPE_FLAGS(args->flags) & ~MSM_SUBMIT_FLAGS)
++	if (MSM_PIPE_FLAGS(args->flags) & ~MSM_SUBMIT_EXEC_FLAGS)
+ 		return UERR(EINVAL, dev, "invalid flags");
+ 
+ 	if (args->flags & MSM_SUBMIT_SUDO) {
+diff --git a/include/uapi/drm/msm_drm.h b/include/uapi/drm/msm_drm.h
+index 072e82a80607..1a948d49c610 100644
+--- a/include/uapi/drm/msm_drm.h
++++ b/include/uapi/drm/msm_drm.h
+@@ -245,7 +245,10 @@ struct drm_msm_gem_submit_cmd {
+ 	__u32 size;           /* in, cmdstream size */
+ 	__u32 pad;
+ 	__u32 nr_relocs;      /* in, number of submit_reloc's */
+-	__u64 relocs;         /* in, ptr to array of submit_reloc's */
++	union {
++		__u64 relocs; /* in, ptr to array of submit_reloc's */
++		__u64 iova;   /* cmdstream address (for VM_BIND contexts) */
++	};
+ };
+ 
+ /* Each buffer referenced elsewhere in the cmdstream submit (ie. the
+@@ -264,6 +267,19 @@ struct drm_msm_gem_submit_cmd {
+ #define MSM_SUBMIT_BO_DUMP             0x0004
+ #define MSM_SUBMIT_BO_NO_IMPLICIT      0x0008
+ 
++/* Map OP for for submits to a VM_BIND submitqueue:
++ *  - MAP:      map a specified range of the BO into the VM
++ *  - MAP_NULL: map a NULL page into the specified range of the VM, handle
++ *              and bo_offset MBZ.  A NULL range will return zero on reads
++ *              and discard writes
++ *              see: VkPhysicalDeviceSparseProperties::residencyNonResidentStrict
++ *  - UNMAP:    unmap a specified VM range, handle and bo_offset MBZ
++ */
++#define MSM_SUBMIT_BO_OP_MASK          0xf000
++#define MSM_SUBMIT_BO_OP_MAP           0x0000
++#define MSM_SUBMIT_BO_OP_MAP_NULL      0x1000
++#define MSM_SUBMIT_BO_OP_UNMAP         0x2000
++
+ #define MSM_SUBMIT_BO_FLAGS            (MSM_SUBMIT_BO_READ | \
+ 					MSM_SUBMIT_BO_WRITE | \
+ 					MSM_SUBMIT_BO_DUMP | \
+@@ -272,7 +288,16 @@ struct drm_msm_gem_submit_cmd {
+ struct drm_msm_gem_submit_bo {
+ 	__u32 flags;          /* in, mask of MSM_SUBMIT_BO_x */
+ 	__u32 handle;         /* in, GEM handle */
+-	__u64 presumed;       /* in/out, presumed buffer address */
++	__u64 address;        /* in/out, presumed buffer address */
++};
++
++struct drm_msm_gem_submit_bo_v2 {
++	__u32 flags;          /* in, mask of MSM_SUBMIT_BO_x */
++	__u32 handle;         /* in, GEM handle */
++	__u64 address;        /* in/out, presumed buffer address */
++	/* Remaining fields are only used with MSM_SUBMIT_OP_VM_BIND/_ASYNC: */
++	__u64 bo_offset;
++	__u64 range;
+ };
+ 
+ /* Valid submit ioctl flags: */
+@@ -283,7 +308,8 @@ struct drm_msm_gem_submit_bo {
+ #define MSM_SUBMIT_SYNCOBJ_IN    0x08000000 /* enable input syncobj */
+ #define MSM_SUBMIT_SYNCOBJ_OUT   0x04000000 /* enable output syncobj */
+ #define MSM_SUBMIT_FENCE_SN_IN   0x02000000 /* userspace passes in seqno fence */
+-#define MSM_SUBMIT_FLAGS                ( \
++
++#define MSM_SUBMIT_EXEC_FLAGS            ( \
+ 		MSM_SUBMIT_NO_IMPLICIT   | \
+ 		MSM_SUBMIT_FENCE_FD_IN   | \
+ 		MSM_SUBMIT_FENCE_FD_OUT  | \
+@@ -293,6 +319,13 @@ struct drm_msm_gem_submit_bo {
+ 		MSM_SUBMIT_FENCE_SN_IN   | \
+ 		0)
+ 
++#define MSM_SUBMIT_VM_BIND_FLAGS         ( \
++		MSM_SUBMIT_FENCE_FD_IN   | \
++		MSM_SUBMIT_FENCE_FD_OUT  | \
++		MSM_SUBMIT_SYNCOBJ_IN    | \
++		MSM_SUBMIT_SYNCOBJ_OUT   | \
++		0)
++
+ #define MSM_SUBMIT_SYNCOBJ_RESET 0x00000001 /* Reset syncobj after wait. */
+ #define MSM_SUBMIT_SYNCOBJ_FLAGS        ( \
+ 		MSM_SUBMIT_SYNCOBJ_RESET | \
+@@ -307,14 +340,17 @@ struct drm_msm_gem_submit_syncobj {
+ /* Each cmdstream submit consists of a table of buffers involved, and
+  * one or more cmdstream buffers.  This allows for conditional execution
+  * (context-restore), and IB buffers needed for per tile/bin draw cmds.
++ *
++ * For MSM_SUBMIT_VM_BIND/_ASYNC operations, the queue must have been
++ * created with the MSM_SUBMITQUEUE_VM_BIND flag.
+  */
+ struct drm_msm_gem_submit {
+ 	__u32 flags;          /* MSM_PIPE_x | MSM_SUBMIT_x */
+ 	__u32 fence;          /* out (or in with MSM_SUBMIT_FENCE_SN_IN flag) */
+ 	__u32 nr_bos;         /* in, number of submit_bo's */
+-	__u32 nr_cmds;        /* in, number of submit_cmd's */
++	__u32 nr_cmds;        /* in, number of submit_cmd's, MBZ for VM_BIND queue */
+ 	__u64 bos;            /* in, ptr to array of submit_bo's */
+-	__u64 cmds;           /* in, ptr to array of submit_cmd's */
++	__u64 cmds;           /* in, ptr to array of submit_cmd's, MBZ for VM_BIND queue */
+ 	__s32 fence_fd;       /* in/out fence fd (see MSM_SUBMIT_FENCE_FD_IN/OUT) */
+ 	__u32 queueid;        /* in, submitqueue id */
+ 	__u64 in_syncobjs;    /* in, ptr to array of drm_msm_gem_submit_syncobj */
+@@ -322,8 +358,7 @@ struct drm_msm_gem_submit {
+ 	__u32 nr_in_syncobjs; /* in, number of entries in in_syncobj */
+ 	__u32 nr_out_syncobjs; /* in, number of entries in out_syncobj. */
+ 	__u32 syncobj_stride; /* in, stride of syncobj arrays. */
+-	__u32 pad;            /*in, reserved for future use, always 0. */
+-
++	__u32 bos_stride;     /* in, stride of bos array, if zero 16bytes used. */
+ };
+ 
+ #define MSM_WAIT_FENCE_BOOST	0x00000001
 -- 
 2.47.1
 
