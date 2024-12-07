@@ -2,192 +2,254 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id D1B959E681D
-	for <lists+linaro-mm-sig@lfdr.de>; Fri,  6 Dec 2024 08:41:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AC6FD9E809A
+	for <lists+linaro-mm-sig@lfdr.de>; Sat,  7 Dec 2024 17:17:25 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8B66344856
-	for <lists+linaro-mm-sig@lfdr.de>; Fri,  6 Dec 2024 07:41:23 +0000 (UTC)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id 5BDF441253
-	for <linaro-mm-sig@lists.linaro.org>; Fri,  6 Dec 2024 07:41:17 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 655EE4435F
+	for <lists+linaro-mm-sig@lfdr.de>; Sat,  7 Dec 2024 16:17:24 +0000 (UTC)
+Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
+	by lists.linaro.org (Postfix) with ESMTPS id 762623F086
+	for <linaro-mm-sig@lists.linaro.org>; Sat,  7 Dec 2024 16:17:16 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=uE8BedoB;
-	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=mripard@kernel.org;
-	dmarc=pass (policy=quarantine) header.from=kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by dfw.source.kernel.org (Postfix) with ESMTP id B450B5C72DE;
-	Fri,  6 Dec 2024 07:32:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D7FBBC4CED1;
-	Fri,  6 Dec 2024 07:33:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1733470389;
-	bh=Br4Ym+uOjzwX17XYvI6sLeN1epKmjEpXyufYM9pwxpQ=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=uE8BedoByqhdRpsz+nvWWsw9TdjmV87U11uPD4Qop8gheN7MZTHZLzp7GEq7SN1Cc
-	 q4jE4Utd01mmoHUmUsuEhjBtBQzY6LQqQd0c9UAoOWArRLtqkciMcWPlXNKsqSoXlf
-	 8zlHorpx7x+cCDbzFPaKzYxc8I0Yx4b8NeEh2ydzLZu0w9x9l+97T9X0qjMrNUkyPn
-	 loJUghnwxME1X8VwvaJrduAMuSXpKvUvJofn3we2z/pFu7cS31/+0rk9CKh8VpYnhR
-	 hd6hpvQ+60DXYaYCziZ+37lnaPK0K/FPVBIe9wqhEeSnhSTYk40NhVNpWBk3CQaVmW
-	 jUW5MkLThAWeA==
-Date: Fri, 6 Dec 2024 08:33:06 +0100
-From: Maxime Ripard <mripard@kernel.org>
-To: John Stultz <jstultz@google.com>
-Message-ID: <20241206-wealthy-hyrax-of-grandeur-ca3cba@houat>
-References: <20241202115827.50388-1-mripard@kernel.org>
- <CANDhNCpTnc6=YkjQgQngRCw1_xLWgOFrcjTxrrGX+bRhvGb5DQ@mail.gmail.com>
- <20241203-cerulean-ringtail-of-speed-920c5f@houat>
- <f6412229-4606-41ad-8c05-7bbba2eb6e08@ti.com>
- <CANDhNCqtMUaO4Y_7UYGJebDEdN==vTAQRexuuek5SZt5rqd8sQ@mail.gmail.com>
+	dkim=pass header.d=gmail.com header.s=20230601 header.b=AGDu9EG+;
+	spf=pass (lists.linaro.org: domain of robdclark@gmail.com designates 209.85.215.176 as permitted sender) smtp.mailfrom=robdclark@gmail.com;
+	dmarc=pass (policy=none) header.from=gmail.com
+Received: by mail-pg1-f176.google.com with SMTP id 41be03b00d2f7-7fc8f0598cdso3245541a12.1
+        for <linaro-mm-sig@lists.linaro.org>; Sat, 07 Dec 2024 08:17:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1733588235; x=1734193035; darn=lists.linaro.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=nQVo/h69eP7W7+1c9cYInjm18ZQ/NruUHHKzUMPfb2g=;
+        b=AGDu9EG+XVtMQoDF5sYooN/YdUo5Ef/4kYPUCnwGvkhbk3p9xQl5yErI4+TgVw1woP
+         0HjURLvc5OzAH6J/C79B+nk6sHDWpjZiiJk72Vg5KT3YBYnh93M/n1zIYc9pnUz2Y29t
+         apcfDPovbJNBDqAv4LgfplPs38Oe4uXiUN//mQuNHfmGq0pfqPFpzitDtgsv8zgiqd3G
+         ex4Iycgs03ZKfakpy/Vj11Lps4DxyuxYazrfC6/QpDcSQJissb0Mk0SljN7rUD+a3D6j
+         YVubHkqLapGd4xQnY5R3iwUnfoy38qSHtyFeuVIwZtryx5BylgjO7WJQS6ej6I8fwJBs
+         EQvA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1733588235; x=1734193035;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=nQVo/h69eP7W7+1c9cYInjm18ZQ/NruUHHKzUMPfb2g=;
+        b=XceW/mzH34Sf/0n1NondD4Q8ptbZw4G3Hz5ubbYuzzgcu7Z1VO0/LPkwhLDyRc0//R
+         Kq2m28/bOtOY+bK4G/BDwdIl0HFQ/kiApQnbZUwzEgV9nXiU0MM5xi+VYcQroml2noJf
+         Cpc6aJFdWdJzSSINpog3W8qFPv7pOwuH+iCdnmVYE8XeRVsTevU/wq6KVplgcCplOkN4
+         nGaXek8yA57mNdbGhHvTIGQ+CDw84rDnnq0LYd5OdF1iS02LVJDFNppbmsBT4UCRabvE
+         Q3V6ocu/5hm/Xxb1iMBRa0M65hid7v2VvCYeLOougOHW4KMjkv0er9TZqwDMBtBGNbc4
+         1WDg==
+X-Forwarded-Encrypted: i=1; AJvYcCUvcqEqrnwnOXvL9oq/HZT/7YdpzJS/aY+BHIPNlrLptQEtrx1Ec505eCla272gM/wpKhQmbj4N/+uLJKu2@lists.linaro.org
+X-Gm-Message-State: AOJu0Yzwfz8jivFJ/ZQvh1xrjUqSIueaQJfoJA97Osm9LIMwQABFSz6l
+	D5f+hno5IEb94H8Nb/n1WwLc2lR9RMRU+hxQ4gVOIy0xqWo9HOHK
+X-Gm-Gg: ASbGncs/+eXGaO6eg/zuLWA2rOwBB3oP3CNBNF91yCPwbVkz/8qqcKhE+vQdX6gppdI
+	cmZgu2/A06Vw8ejUkfqGUn6u0XSPqG+DJS1MUlw8tN794NWDZ1SbUUHb3htuOykj/UDkel5M8TT
+	sLCHC2tkQ1OBwIzvvHHr3Vh9baznR5P6gHTGUoy6pMdUur/0JnE9nSIdb8Fx2GAfdS3kOIJvkBq
+	Y95bmsEMtByCDHXApxeKxZvvGpOT2Nv1ICcsjbjKVWPk5GI77GBGrj4vgsGKpZC1ljEKgsOMbii
+	ZZm+TxD4
+X-Google-Smtp-Source: AGHT+IEmvFnBaDTFAw3iJraQEGMF/iUDVX5tXZvZVfuIO2OYpZL0lZpXEUIfhOJmviPs0qS6KOnT/w==
+X-Received: by 2002:a17:90b:2015:b0:2ef:6ef4:817d with SMTP id 98e67ed59e1d1-2ef6ef486ebmr9437262a91.6.1733588235412;
+        Sat, 07 Dec 2024 08:17:15 -0800 (PST)
+Received: from localhost (c-73-37-105-206.hsd1.or.comcast.net. [73.37.105.206])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2ef8610ee98sm1426630a91.5.2024.12.07.08.17.13
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 07 Dec 2024 08:17:14 -0800 (PST)
+From: Rob Clark <robdclark@gmail.com>
+To: dri-devel@lists.freedesktop.org
+Date: Sat,  7 Dec 2024 08:15:00 -0800
+Message-ID: <20241207161651.410556-1-robdclark@gmail.com>
+X-Mailer: git-send-email 2.47.1
 MIME-Version: 1.0
-In-Reply-To: <CANDhNCqtMUaO4Y_7UYGJebDEdN==vTAQRexuuek5SZt5rqd8sQ@mail.gmail.com>
-X-Rspamd-Queue-Id: 5BDF441253
-X-Spamd-Bar: ----------
-X-Spamd-Result: default: False [-10.55 / 15.00];
-	REPLY(-4.00)[];
-	BAYES_HAM(-2.95)[99.79%];
-	SIGNED_PGP(-2.00)[];
-	RBL_SENDERSCORE_REPUT_9(-1.00)[139.178.84.217:from];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
-	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
-	RCPT_COUNT_TWELVE(0.00)[12];
-	MISSING_XM_UA(0.00)[];
+X-Rspamd-Queue-Id: 762623F086
+X-Spamd-Bar: ---
+X-Spamd-Result: default: False [-3.50 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
+	MID_CONTAINS_FROM(1.00)[];
+	RBL_SENDERSCORE_REPUT_9(-1.00)[209.85.215.176:from];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	MIME_GOOD(-0.10)[text/plain];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	ARC_NA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+]
+	RCPT_COUNT_TWELVE(0.00)[23];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	FREEMAIL_CC(0.00)[lists.freedesktop.org,vger.kernel.org,gmail.com,quicinc.com,chromium.org,mainlining.org,linaro.org,intel.com,marek.ca,kernel.org,lists.linaro.org,somainline.org,poorly.run];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.215.176:from];
+	NEURAL_HAM(-0.00)[-1.000];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	FROM_HAS_DN(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: 2CH3H4LAGAKWP2B6HPEQLUPPCX2RSOPX
-X-Message-ID-Hash: 2CH3H4LAGAKWP2B6HPEQLUPPCX2RSOPX
-X-MailFrom: mripard@kernel.org
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Andrew Davis <afd@ti.com>, Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, "T.J. Mercier" <tjmercier@google.com>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org, linux-doc@vger.kernel.org
+Message-ID-Hash: FRR54FWLZQ3CTL43SOCPRMS5N7C56BUW
+X-Message-ID-Hash: FRR54FWLZQ3CTL43SOCPRMS5N7C56BUW
+X-MailFrom: robdclark@gmail.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, Connor Abbott <cwabbott0@gmail.com>, Akhil P Oommen <quic_akhilpo@quicinc.com>, Rob Clark <robdclark@chromium.org>, Abhinav Kumar <quic_abhinavk@quicinc.com>, =?UTF-8?q?Barnab=C3=A1s=20Cz=C3=A9m=C3=A1n?= <barnabas.czeman@mainlining.org>, Carl Vanderlip <quic_carlv@quicinc.com>, Dmitry Baryshkov <dmitry.baryshkov@linaro.org>, Jani Nikula <jani.nikula@intel.com>, Jonathan Marek <jonathan@marek.ca>, Jun Nie <jun.nie@linaro.org>, Konrad Dybcio <konradybcio@kernel.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK:Keyword:bdma_?:buf|fence|resvb" <linaro-mm-sig@lists.linaro.org>, open list <linux-kernel@vger.kernel.org>, "open list:DMA BUFFER SHARING FRAMEWORK:Keyword:bdma_?:buf|fence|resvb" <linux-media@vger.kernel.org>, "open list:SUSPEND TO RAM" <linux-pm@vger.kernel.org>, Marijn Suijten <marijn.suijten@somainline.org>, Paloma Arellano <quic_parellan@quicinc.com>, "Rafael J. Wysocki" <rafael@kernel.org>, Sean Paul <sean
+ @poorly.run>, Stephen Boyd <swboyd@chromium.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2] Documentation: dma-buf: heaps: Add heap name definitions
+Subject: [Linaro-mm-sig] [RFC 00/24] drm/msm: sparse / "VM_BIND" support
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2CH3H4LAGAKWP2B6HPEQLUPPCX2RSOPX/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FRR54FWLZQ3CTL43SOCPRMS5N7C56BUW/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============8465252686160005715=="
-
-
---===============8465252686160005715==
-Content-Type: multipart/signed; micalg=pgp-sha384;
-	protocol="application/pgp-signature"; boundary="w6x675unrzbjvp2x"
-Content-Disposition: inline
-
-
---w6x675unrzbjvp2x
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH v2] Documentation: dma-buf: heaps: Add heap name
- definitions
-MIME-Version: 1.0
-
-On Thu, Dec 05, 2024 at 03:17:57PM -0800, John Stultz wrote:
-> On Tue, Dec 3, 2024 at 11:04=E2=80=AFAM Andrew Davis <afd@ti.com> wrote:
-> > On 12/3/24 1:44 AM, Maxime Ripard wrote:
-> > > On Mon, Dec 02, 2024 at 11:12:23AM -0800, John Stultz wrote:
-> > >> Hrm. I'm not sure I see the value in enumerating things in this way,
-> > >> it seems like it will be a nuisance to keep current?  Maybe something
-> > >> like:
-> > >>
-> > >> On most systems the default cma region is named "linux, cma" or
-> > >> "reserved", with a few exceptions:
-> > >>      - Allwinner sun4i, sun5i and sun7i families: ``default-pool``
-> > >
-> > > I'm a bit worried about doing so. What if, on a "linux,cma" system, we
-> > > have another "reserved" heap created with different semantics?
-> > >
-> >
-> > Having the "default CMA" heap get its dev name based on the method that
-> > created it was arguably a mistake made when first upstreaming this heap.
-> > We should fix this, then maybe add the old name as a link just for
-> > backwards compat as needed.
-> >
-> > exp_info.name =3D "default_cma";
-> >
-> > All other CMA and carveout heaps will have names based on their
-> > method of creation as there may be multiple of them, but there
-> > will only every be one "default CMA" area, and its heap should
-> > be named to match.
->=20
-> This seems reasonable to me. Maybe putting the link creation behind a
-> compatibility config so they can be later deprecated?
-
-That sounds reasonable to me too. However, I'm not sure how to create a
-symlink in devtmpfs from the kernel. Or maybe we should create a second
-device file with the same major / minor?
-
-> That said, while I understand the impulse to want to fix the heap
-> names so applications can depend on them, I also want to caution it's
-> a little bit like trying to hard code eth0 as a network device name in
-> your scripts.  There are too many potential configurations, and any
-> fixed mapping is going to break in some cases.
-
-I certainly don't want to spark *that* discussion again, but it's
-exactly why I wasn't convinced about the names providing the guarantees
-back in Plumbers. I definitely agree with you there that the situation
-is kind of messy already, and it will only get worse.
-
-It will be really hard to document, and if we can't document it,
-userspace can't rely on guarantees either.
-
-> I think there is just going to have to be some (gralloc-like)
-> device-specific configuration glue to map a pipeline/use-case to the
-> memory type (similar to fstab for filesystem to mount points) in order
-> to handle every case.
-
-That might work for Android, but it really doesn't for anything more
-generic than that.
-
-> So if I'm being a little squirrely on fixed names, it's mostly due to
-> wanting to avoid anyone getting the mistaken impression that fixed
-> mappings will generally work.
-
-Ack :)
-Maxime
-
---w6x675unrzbjvp2x
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iJUEABMJAB0WIQTkHFbLp4ejekA/qfgnX84Zoj2+dgUCZ1KosQAKCRAnX84Zoj2+
-ds/mAYC5oull8D+NhsZeCjJbs/mJRi1Y1zq/Mnhb0orpy9wyHHtCo3KrcFCnkiaj
-rUeJBjABgNA9DcsfGkKd8Qls0c/K42LeX5GkSBdFVlo30WUjrWr+u9Nt/JBW9oPk
-4+etnwsr0g==
-=NN+l
------END PGP SIGNATURE-----
-
---w6x675unrzbjvp2x--
-
---===============8465252686160005715==
 Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+
+From: Rob Clark <robdclark@chromium.org>
+
+Conversion to DRM GPU VA Manager[1], and adding support for Vulkan Sparse
+Memory[2] in the form of:
+1. A new VM_BIND submitqueue type for executing VM MSM_SUBMIT_BO_OP_MAP/
+   MAP_NULL/UNMAP commands
+2. Extending the SUBMIT` ioctl to allow submitting batches of one or more
+   MAP/MAP_NULL/UNMAP commands to a VM_BIND submitqueue
+
+The UABI takes a slightly different approach from what other drivers have
+done, and what would make sense if starting from a clean sheet, ie separate
+VM_BIND and EXEC ioctls.  But since we have to maintain support for the
+existing SUBMIT ioctl, and because the fence, syncobj, and BO pinning is
+largely the same between legacy "BO-table" style SUBMIT ioctls, and new-
+style VM updates submitted to a VM_BIND submitqueue, I chose to go the
+route of extending the existing `SUBMIT` ioctl rather than adding a new
+ioctl.
+
+I also did not implement support for synchronous VM_BIND commands.  Since
+userspace could just immediately wait for the `SUBMIT` to complete, I don't
+think we need this extra complexity in the kernel.
+
+The corresponding mesa MR: https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/32533
+
+### Notes/TODOs/Open Questions:
+1. The first handful of patches are from Bibek Kumar Patro's series, 
+   "iommu/arm-smmu: introduction of ACTLR implementation for Qualcomm SoCs[3],
+   which introduces PRR (Partially-Resident-Region) support, needed to
+   implement MAP_NULL (for Vulkan Sparse Residency[4]
+2. Why do VM_BIND commands need fence fd support, instead of just syncobjs?
+   Mainly for the benefit of virtgpu drm native context guest<->host fence
+   passing[5], where the host VMM is operating in terms of fence fd's
+   (syncobs are just a convenience wrapper above a dma_fence, and don't
+   exist below the guest kernel).
+3. Currently shrinker support is disabled (hence this being in Draft/RFC
+   state).  To properly support the shrinker, we need to pre-allocate
+   various objects and pages needed for the pagetables themselves, to
+   move memory allocations out of the fence signaling path.  This short-
+   cut was taken to unblock userspace implementation of sparse buffer/
+   image support.
+4. Could/should we do all the vm/vma updates synchronously and defer _only_
+   the io-pgtable updates to the VM_BIND scheduler queue?  This would
+   simplify the previous point, in that we'd only have to pre-allocate
+   pages for the io-pgtable updates.
+5. Currently we lose support for BO dumping for devcoredump.  Ideally we'd
+   plumb `MSM_SUBMIT_BO_DUMP` flag in a `MAP` commands thru to the resulting
+   drm_gpuva's.  To do this, I think we need to extend drm_gpuva with a
+   flags field.. the flags can be driver defined, but drm_gpuvm needs to
+   know not to merge drm_gpuva's with different flags.
+
+This series can be found in MR form, if you prefer:
+https://gitlab.freedesktop.org/drm/msm/-/merge_requests/144
+
+[1] https://www.kernel.org/doc/html/next/gpu/drm-mm.html#drm-gpuvm
+[2] https://docs.vulkan.org/spec/latest/chapters/sparsemem.html
+[3] https://patchwork.kernel.org/project/linux-arm-kernel/list/?series=909700
+[4] https://docs.vulkan.org/spec/latest/chapters/sparsemem.html#sparsememory-partially-resident-buffers
+[5] https://patchew.org/linux/20231007194747.788934-1-dmitry.osipenko@collabora.com/
+
+Rob Clark (24):
+  HACK: drm/msm: Disable shrinker
+  drm/gpuvm: Don't require obj lock in destructor path
+  drm/gpuvm: Remove bogus lock assert
+  drm/msm: Rename msm_file_private -> msm_context
+  drm/msm: Improve msm_context comments
+  drm/msm: Rename msm_gem_address_space -> msm_gem_vm
+  drm/msm: Remove vram carveout support
+  drm/msm: Collapse vma allocation and initialization
+  drm/msm: Collapse vma close and delete
+  drm/msm: drm_gpuvm conversion
+  drm/msm: Use drm_gpuvm types more
+  drm/msm: Split submit_pin_objects()
+  drm/msm: Lazily create context VM
+  drm/msm: Add opt-in for VM_BIND
+  drm/msm: Mark VM as unusable on faults
+  drm/msm: Extend SUBMIT ioctl for VM_BIND
+  drm/msm: Add VM_BIND submitqueue
+  drm/msm: Add _NO_SHARE flag
+  drm/msm: Split out helper to get iommu prot flags
+  drm/msm: Add mmu support for non-zero offset
+  drm/msm: Add PRR support
+  drm/msm: Rename msm_gem_vma_purge() -> _unmap()
+  drm/msm: Wire up gpuvm ops
+  drm/msm: Bump UAPI version
+
+ drivers/gpu/drm/drm_gpuvm.c                   |  10 +-
+ drivers/gpu/drm/msm/Kconfig                   |   1 +
+ drivers/gpu/drm/msm/adreno/a2xx_gpu.c         |  19 +-
+ drivers/gpu/drm/msm/adreno/a2xx_gpummu.c      |   5 +-
+ drivers/gpu/drm/msm/adreno/a3xx_gpu.c         |   4 +-
+ drivers/gpu/drm/msm/adreno/a4xx_gpu.c         |   4 +-
+ drivers/gpu/drm/msm/adreno/a5xx_debugfs.c     |   4 +-
+ drivers/gpu/drm/msm/adreno/a5xx_gpu.c         |  24 +-
+ drivers/gpu/drm/msm/adreno/a5xx_power.c       |   2 +-
+ drivers/gpu/drm/msm/adreno/a5xx_preempt.c     |  10 +-
+ drivers/gpu/drm/msm/adreno/a6xx_gmu.c         |  32 +-
+ drivers/gpu/drm/msm/adreno/a6xx_gmu.h         |   2 +-
+ drivers/gpu/drm/msm/adreno/a6xx_gpu.c         |  51 +-
+ drivers/gpu/drm/msm/adreno/a6xx_gpu_state.c   |   6 +-
+ drivers/gpu/drm/msm/adreno/a6xx_preempt.c     |  10 +-
+ drivers/gpu/drm/msm/adreno/adreno_gpu.c       |  78 ++-
+ drivers/gpu/drm/msm/adreno/adreno_gpu.h       |  22 +-
+ .../drm/msm/disp/dpu1/dpu_encoder_phys_wb.c   |  14 +-
+ drivers/gpu/drm/msm/disp/dpu1/dpu_formats.c   |  18 +-
+ drivers/gpu/drm/msm/disp/dpu1/dpu_formats.h   |   2 +-
+ drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c       |  18 +-
+ drivers/gpu/drm/msm/disp/dpu1/dpu_plane.c     |  14 +-
+ drivers/gpu/drm/msm/disp/dpu1/dpu_plane.h     |   4 +-
+ drivers/gpu/drm/msm/disp/mdp4/mdp4_crtc.c     |   6 +-
+ drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.c      |  28 +-
+ drivers/gpu/drm/msm/disp/mdp4/mdp4_plane.c    |  12 +-
+ drivers/gpu/drm/msm/disp/mdp5/mdp5_crtc.c     |   4 +-
+ drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.c      |  19 +-
+ drivers/gpu/drm/msm/disp/mdp5/mdp5_plane.c    |  12 +-
+ drivers/gpu/drm/msm/dsi/dsi_host.c            |  14 +-
+ drivers/gpu/drm/msm/msm_drv.c                 | 175 ++----
+ drivers/gpu/drm/msm/msm_drv.h                 |  31 +-
+ drivers/gpu/drm/msm/msm_fb.c                  |  18 +-
+ drivers/gpu/drm/msm/msm_fbdev.c               |   2 +-
+ drivers/gpu/drm/msm/msm_gem.c                 | 403 ++++++-------
+ drivers/gpu/drm/msm/msm_gem.h                 | 193 +++++--
+ drivers/gpu/drm/msm/msm_gem_prime.c           |  15 +
+ drivers/gpu/drm/msm/msm_gem_submit.c          | 223 +++++--
+ drivers/gpu/drm/msm/msm_gem_vma.c             | 543 +++++++++++++++---
+ drivers/gpu/drm/msm/msm_gpu.c                 |  66 ++-
+ drivers/gpu/drm/msm/msm_gpu.h                 | 132 +++--
+ drivers/gpu/drm/msm/msm_iommu.c               |  84 ++-
+ drivers/gpu/drm/msm/msm_kms.c                 |  14 +-
+ drivers/gpu/drm/msm/msm_kms.h                 |   2 +-
+ drivers/gpu/drm/msm/msm_mmu.h                 |   2 +-
+ drivers/gpu/drm/msm/msm_ringbuffer.c          |   4 +-
+ drivers/gpu/drm/msm/msm_submitqueue.c         |  86 ++-
+ include/uapi/drm/msm_drm.h                    |  98 +++-
+ 48 files changed, 1637 insertions(+), 903 deletions(-)
+
+-- 
+2.47.1
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============8465252686160005715==--
