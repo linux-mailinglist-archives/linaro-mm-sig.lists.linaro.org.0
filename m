@@ -2,477 +2,269 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 44087A11EE9
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 Jan 2025 11:07:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9440DA12306
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 Jan 2025 12:49:59 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4F19444A5A
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 Jan 2025 10:07:10 +0000 (UTC)
-Received: from NAM02-DM3-obe.outbound.protection.outlook.com (mail-dm3nam02on2046.outbound.protection.outlook.com [40.107.95.46])
-	by lists.linaro.org (Postfix) with ESMTPS id 1E8CA44797
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 15 Jan 2025 10:07:03 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 46A293F622
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 Jan 2025 11:49:58 +0000 (UTC)
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (mail-dm6nam10on2071.outbound.protection.outlook.com [40.107.93.71])
+	by lists.linaro.org (Postfix) with ESMTPS id 313453F622
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 15 Jan 2025 11:49:47 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=amd.com header.s=selector1 header.b=hCzq7hN3;
-	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.107.95.46 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
+	dkim=pass header.d=amd.com header.s=selector1 header.b="mhWd/74B";
+	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.107.93.71 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
 	dmarc=pass (policy=quarantine) header.from=amd.com;
 	arc=pass ("microsoft.com:s=arcselector10001:i=1")
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ofHN1CzDZ7cxFQuzBKgG9QXRKdPwHyUGPhfAfIKjxtxkuNYkrb7omakEQqNYwo5ts2PkpiYh61C6gRgO4+X/oEiFe+YH1DmW3fGuEG1LnTw/4Kl3JJKPaMwhmnHVS1E2D4MKZD0cnJiU/NgXak9qx5utJLbhANzdeDtyuoIAweQK9bu8FWGK6e/yssgP6QaoiP0zCcyj+iM1Ba0sxt7b3WWS9/9Rfjqyx0etJEE1aSGqa1z4sUfn1d3XAMeV3mtl6HWqhB8n27fvcyQtdbhwtNelCCnfeab9WmZNWHsX7Xtqf8I5w4PRGJNSFmIknFs9geXRFJhGJEX50hFjm1ipmg==
+ b=UqkPGUeS1JrjnnCTrAKPLOv8XKdzvmOwUXkpFD2pon7KuIxhI16ro4kQGMSQV1UDXdR5O6boH3vySDYLPUpueiq9ELd1XPB39/hwz349pjY47NAnVKz2WR0PR0vamHOep2zZgP5S/eNqwD1NkQHgOHQdfL15RzEaNZ7D+2iWBHvJK2sKqg9KRiTV2egpuHZI4M2AFXjasBJBTtWFyuRUDF4nGu5iR0TCw3vm0eQZrR1yInpmY8leVhzHYsnF9rOyigbxCZctuVxl321qlnymhlQtnf40ycEPNA2YJ74td5aCOB6zpxTpH+42KbbM5rYStT7WCw4hRWjqzsieWvl7qQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=WwEp+JHbE+dxCXovpf1qhoVG7rxnGyw4lUQ/SebskHA=;
- b=JytNLoJW+layHeoMs36KxOT38OtMTdpBxRYego/H8OSfMa2Vd94wniMMEV0/sB/tbuTj9OQUxv/lR9h1Og4K8aHmpAd9NwJJN/gX0EJUZlnTvFYI+S0k0poBfSqbnXisrVyS0LmmJlH12cI8WFnfkabTIwdl5noeSgU2RS+o2N3vHV91p3IQd8k/ZXC61YFmGegxnDTEIXEG1mViWsHVhU6vGEJ+PdaUntgS6tZ7wAEQN0iaa1zrS0sURRFx9s+0HCAwi2oVxZEhOSdDU0BHamGfxY5PQACPo7+7vGXpfdgDmTFLZItX76gGGHVUdl//0lHbfG6k1EJ8jshQ4Lb8PA==
+ bh=g4Ayrrl6vZyHKovxsMwlg8hxyb09bVKOBqgHmF/1tTA=;
+ b=MKrE9/+gAoOpLGSowV4OMFzuhksBLJo0U7HgNhvrRMe590gyZGmLcxBCz8dHBc5PQvHSOWT5CuPloC2aE6qwmo8eWuavmjvA+ESyIpSgiSAUA1WR9M39QF0XDMxSDf6eZr0BEizq6eEgX4mZcZGsa/DuZ4knxy2eES5mCQ+ffaTYtQvRranrRWxu30B11EwuzlYAG0A0iiEBCLVAup31JVu5v0u7S/QWJIAo5wRz6U48JT5S84GCqnfAzEKtFbCJ+QFDb/ex5eS1vxRjUFahh69CTAy4B54ZLpnFf2e6lJoaj++EcvNbyoir0tyuL78d8qVYG6cPkKIYBB/Xhr8I4A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=WwEp+JHbE+dxCXovpf1qhoVG7rxnGyw4lUQ/SebskHA=;
- b=hCzq7hN3XV1W3qWnc8XiNGQVf7BlP91l7IVRDMB3sMm++AzE+sjpwNj/dUbabBR8htSjTYPJentqBRygLt8tQjDyxDDuwHr8dpy7J0A6nNPBG8USwc0tIqAVBtqcnS739123HGwrm+ZYnXrLXuEPqXtX7PIhyinBtNPYbhaqLug=
+ bh=g4Ayrrl6vZyHKovxsMwlg8hxyb09bVKOBqgHmF/1tTA=;
+ b=mhWd/74BkttMFSuaqzK3gUwLzGbQcj/cchya8M+zw8noCqZolh6XlEHZ7nhrsg3gaEp6qD7VCp9jgxPQEvQL8VXQRRFlQ8QrvjNbxBxBCnqUWucIWW9MDNfKgi8A7Lk7fHG9vKCI1WSj4auA+cKizd0ikIJs5xh3h4JEkvMkabc=
 Received: from PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
- by CY8PR12MB7564.namprd12.prod.outlook.com (2603:10b6:930:97::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8335.18; Wed, 15 Jan
- 2025 10:07:01 +0000
+ by DS0PR12MB8413.namprd12.prod.outlook.com (2603:10b6:8:f9::7) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8335.18; Wed, 15 Jan 2025 11:49:45 +0000
 Received: from PH7PR12MB5685.namprd12.prod.outlook.com
  ([fe80::46fb:96f2:7667:7ca5]) by PH7PR12MB5685.namprd12.prod.outlook.com
  ([fe80::46fb:96f2:7667:7ca5%5]) with mapi id 15.20.8356.010; Wed, 15 Jan 2025
- 10:07:01 +0000
-Message-ID: <420bd2ea-d87c-4f01-883e-a7a5cf1635fe@amd.com>
-Date: Wed, 15 Jan 2025 11:06:53 +0100
+ 11:49:45 +0000
+Message-ID: <bfd19718-e7dc-45c4-8f86-34205e733916@amd.com>
+Date: Wed, 15 Jan 2025 12:49:38 +0100
 User-Agent: Mozilla Thunderbird
-To: Jason Gunthorpe <jgg@nvidia.com>, Xu Yilun <yilun.xu@linux.intel.com>,
- Christoph Hellwig <hch@lst.de>, Leon Romanovsky <leonro@nvidia.com>,
- kvm@vger.kernel.org, dri-devel@lists.freedesktop.org,
- linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org,
- sumit.semwal@linaro.org, pbonzini@redhat.com, seanjc@google.com,
- alex.williamson@redhat.com, vivek.kasireddy@intel.com,
- dan.j.williams@intel.com, aik@amd.com, yilun.xu@intel.com,
- linux-coco@lists.linux.dev, linux-kernel@vger.kernel.org, lukas@wunner.de,
- yan.y.zhao@intel.com, leon@kernel.org, baolu.lu@linux.intel.com,
- zhenzhong.duan@intel.com, tao1.su@intel.com
-References: <5a858e00-6fea-4a7a-93be-f23b66e00835@amd.com>
- <20250108162227.GT5556@nvidia.com> <Z37HpvHAfB0g9OQ-@phenom.ffwll.local>
- <Z37QaIDUgiygLh74@yilunxu-OptiPlex-7050>
- <58e97916-e6fd-41ef-84b4-bbf53ed0e8e4@amd.com>
- <Z38FCOPE7WPprYhx@yilunxu-OptiPlex-7050>
- <Z4F2X7Fu-5lprLrk@phenom.ffwll.local> <20250110203838.GL5556@nvidia.com>
- <Z4Z4NKqVG2Vbv98Q@phenom.ffwll.local> <20250114173103.GE5556@nvidia.com>
- <Z4d4AaLGrhRa5KLJ@phenom.ffwll.local>
+To: "zhaoyang.huang" <zhaoyang.huang@unisoc.com>,
+ Sumit Semwal <sumit.semwal@linaro.org>,
+ Benjamin Gaignard <benjamin.gaignard@collabora.com>,
+ Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>,
+ "T . J . Mercier" <tjmercier@google.com>,
+ "open list:DMA-BUF HEAPS FRAMEWORK" <linux-media@vger.kernel.org>,
+ "open list:DMA-BUF HEAPS FRAMEWORK" <dri-devel@lists.freedesktop.org>,
+ "moderated list:DMA-BUF HEAPS FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
+ linux-kernel@vger.kernel.org, Zhaoyang Huang <huangzhaoyang@gmail.com>,
+ steve.kang@unisoc.com
+References: <20250115061805.3495048-1-zhaoyang.huang@unisoc.com>
 Content-Language: en-US
 From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-In-Reply-To: <Z4d4AaLGrhRa5KLJ@phenom.ffwll.local>
-X-ClientProxiedBy: FR4P281CA0012.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:c8::20) To PH7PR12MB5685.namprd12.prod.outlook.com
+In-Reply-To: <20250115061805.3495048-1-zhaoyang.huang@unisoc.com>
+X-ClientProxiedBy: FR0P281CA0191.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:ab::14) To PH7PR12MB5685.namprd12.prod.outlook.com
  (2603:10b6:510:13c::22)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|CY8PR12MB7564:EE_
-X-MS-Office365-Filtering-Correlation-Id: 29cddcf0-2680-4f90-2ea2-08dd354c5a85
+X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|DS0PR12MB8413:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4fd577e4-5221-44ad-6a3e-08dd355ab47a
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|366016|1800799024|376014|7416014|8096899003|921020;
+	BCL:0;ARA:13230040|1800799024|366016|7416014|376014|7053199007|921020;
 X-Microsoft-Antispam-Message-Info: 
-	=?utf-8?B?UDcxZkc4WGhhWUNOc3pBUjZRa0V0aHpBNE5WZ1phOGdVR1RDdkVVUTZGa0RO?=
- =?utf-8?B?ZHRPeGdLNWR0ZGhWY3d1RWE2R2VsU3g0UC9CRWtZelczZHhoV2xUVEhTQTZ5?=
- =?utf-8?B?WjFMM3N5RzB6L2VrQUN5T083KzZYZUFUQ1J6OWlrUHRCVktjOGJLMkpiYmZF?=
- =?utf-8?B?Z0o2Ym9OZkt5VzM4TXBPZmh2cTF0bWRDbDRwajh0Ylh3eG5Na1JOR0pJaDFN?=
- =?utf-8?B?aVNOYlRYWnNpVnFKK211U1pzenpHbG9GczFWdUNKZEE0VWk1MDMwaGxCeXIr?=
- =?utf-8?B?TUtpTEkwdE9zOGRid0E5OXdSLyt2YXNKRUt2Y1QrUDdXYnhEWHRYdVNjK0Fx?=
- =?utf-8?B?Qy9UcDI5VHQxcis5d0ltb2RSUWhiUEJoZExYcDJ0RmU1UHZpdFM5WElvR0I1?=
- =?utf-8?B?SlNFdVZJTnVseUkzMXRXY2oydmlkeGNlWHpkWHcxYlRDamVFQnFkd1RhWEdh?=
- =?utf-8?B?YzFvdkJiMkxuMGRvdStkVW8zK2JKczEwVTR0UzI0NmRyMDVFSW1neStYUGta?=
- =?utf-8?B?VkRJUjJlendZeVRLVDd1QVNMdkc2UUpRaGptY3BHekVjYWZESEhBZHFDR2Zz?=
- =?utf-8?B?UWRwcVRzUEFOeHFLamd1S0pXTmJpaWR4SE5wM2lCQnRGbWF0ZURvcDBIbXdG?=
- =?utf-8?B?NWZsZ2xnNm56Mkh5RVZPa2pvYWVrK1g2TXNKOWZpQkxwNFZSbjZaaEtzZGpk?=
- =?utf-8?B?blRnUU8xNTJJNWltYXF0UjJFNWxYR0NPbEJXTVlIVzd0RDg2R2hXWFRjRnhX?=
- =?utf-8?B?K1JoS1NuN1JQV0ZuSlBvVHkzNHZnWDFvZ2t6elFLWVh5TGlBVnJIM0hNU1Rz?=
- =?utf-8?B?ZldVbitzbGMrOWNSZG84NEFxeURUc09RMzhkeUFHTU95WGJ3enZad0poRTls?=
- =?utf-8?B?TDZEY0dQT2pEVm42VGpvUlEyc056SUxWQm1rc0Y2cVFMZmRqbVdLT3R1cmU2?=
- =?utf-8?B?cXNSNHVDM1pERzAxMGZidmZYamY5OHdRNWZoOFJGVVlPNVRYVmI0L1M0V052?=
- =?utf-8?B?Y2hsWVZFMUo2YlhpeEtUaHBsYmtRejU4ekFZRUdRdm13UEJrdnhjMzkzQlpV?=
- =?utf-8?B?WnEzNVUwYVlRSXRlUWQxRVNnMkdxZUVHTlhDVUFxL1RxSlBETVQvZXk2OWIw?=
- =?utf-8?B?VG9uL3B6cGR2YW1Da1VXV0ZWNkY4RjhXUHV2MUZzRlBYb1JxVFpPUEc3ZXpr?=
- =?utf-8?B?NXlEVEhTOGQ5ckU4MVZ3WTl5eEFmdjNTdkg2UEFGWWNNMVkxelI5NTQwaG9l?=
- =?utf-8?B?bzh6Z1BMSVNsVlJ3c1RTd0paNUtEM0tsZXN0YWVxemZGVDE0VW85cU9PZzdB?=
- =?utf-8?B?RWllaUpRZmhNMmVkYlVZVHA4K21nUklYc2lTQWoxQVUrM3FtOG1pa2g4aWwr?=
- =?utf-8?B?d3NWT21neFJZempsaTh0S1lkc21PNElIZ1dHUDJaakR0VURsOEY4WjBhTDZC?=
- =?utf-8?B?VDFBVnpiTzQxMi9xWHYrK0Q0WktLenhCTEd5aDhqancrMVRDZkhRdzdKZzE3?=
- =?utf-8?B?N3A1azllN1JVT1RiRldoMGs1VHE2MTB3c3g1RkFHaDdaMzl4YVNxQ0xUWTE5?=
- =?utf-8?B?ZVVXYTh1MFVZemVBa1dwa2tRaWVOWko3WEJ4MFBUVW5WN1RIbWNGNUVuOVg0?=
- =?utf-8?B?Uis5MUZtLzgxcWFpbTFTcXZQajZPb1hmVGo1QUtOdXBPVFUyNHllQncralk2?=
- =?utf-8?B?TFRPaUQvUVJGODNzWWZhdnl5b1k4OVk3TXVjc2hIdk5VUWxHNndPMFlCckdp?=
- =?utf-8?B?VCtwUE4yZVVDUGR3UVJYZjQzc01hYThaWk5FRmJzbHlwLytOMEQ0eGNjaXZC?=
- =?utf-8?B?bUVVbEVxd2NGT2JydllSTE9iVDVqUllITGtIU1NlQkR2TVJ4S0FuSlVGN3o1?=
- =?utf-8?B?VzFtcE1FY3JpK3h4M3RQeHcvWmtUZFJmZzY1MSt1SDIzNm5kS0puRnlHVENI?=
- =?utf-8?Q?Dj6g0fIeXD4=3D?=
+	=?utf-8?B?b1JaelFoZUhKTDFzTVQ2ZVFsOU5zWnZUUWF1SDlhMzU5enhaMUk1cm13NldS?=
+ =?utf-8?B?bDRoQ2RkdGZkamhTUnN5UkFobFpvcjRDVEVpS0owRXlndVhRSUY1WjAxMTVC?=
+ =?utf-8?B?N2p3bEUycmRJK094eXVxK1hVZnArL1JyMHNMS0ltV2UzbDRBUHZhdm9XUEhy?=
+ =?utf-8?B?TmgzSXVwVStMS3lWNkczNEhxUVRtNU9jTGp1Uk9qNGl1WVF2cjh0WWZmYzI5?=
+ =?utf-8?B?d2V6NHpzN2lyTXBKczhYMTkxMXZJQ084eHhXVjhSKzZBYnFSV2RLNmtBL0Ux?=
+ =?utf-8?B?S1lxWWppRWZUYWhsYUp1MDFOUGRsWlFSbXoxMzVhbkgxcXVibXB1Tlg3a1RB?=
+ =?utf-8?B?a3FnZmE5MGNlY1pjY2VHL2tYNU51Rmk2bjU1dDNEMFFMTUNNZlpLS1BaZXIx?=
+ =?utf-8?B?NGtSSHNzcnNXTFh5VGxub2FMNjFGQkgxTzBvVUora2hySWlENmZsbW15aUpu?=
+ =?utf-8?B?ODJkRjEwNnpDTmNXdnQwNFBQSTNCK2FvM0FBN0ROak94M2pqK080dVhNOTF3?=
+ =?utf-8?B?U1JpV2RNeCtVWXlZN3phSkczZFNKNGh6L0llNmdFVVVnclpEZm5FYVgzMWpv?=
+ =?utf-8?B?Q3doeFBabUFTY2NVejBrYTNXbWF5cmkwL3U1bDJmU2puMVpKaUhvYmdwdDhG?=
+ =?utf-8?B?VUZIamZZcUxzbW84R1I1MWJHV2ZNMEJSaDlSTmpacW1Ca0NabmhJZXJpajln?=
+ =?utf-8?B?RWxDcmlSR1k2MkhhTlU1Z2ZMNjNxUkhESDhRRElWcU1XVlN2cGZDSTliQUJo?=
+ =?utf-8?B?UTNOQkNZSkZqM1pvNG1laVRpd3FjRTJSL0ZmV1N5RmtZNitHQjl5VDRtQjF3?=
+ =?utf-8?B?SUFTZG8xall3cmYwUTBMem41dUQxOXNkVlhSbTF0ZzFWMmdMNDV2Z0J0ck80?=
+ =?utf-8?B?N0V2WUMzWUZoKzdMc1VlOHpqSSs5eDhocCtLS0FWRHRkMGMvSkxoVkQvRVNL?=
+ =?utf-8?B?S1N1enY2U090U081cUFOSGkyRnZMdGV3SGhsYUY4WGJZcHN6T1VCekRWTVhW?=
+ =?utf-8?B?R3BUa1QyMWpkYS91V01uTks1MTYyVkxCdzVUZHR0NEVJMXBRSDQwQk0zaFkv?=
+ =?utf-8?B?TzFDSytmOXBUWFE2MEpFZEhvNFpyU25rSmFOR0hIc0JkVWx1TEZ5VCt1SGtE?=
+ =?utf-8?B?clpXTmk1RXRlbXZnaTZ5S3VrVHU5VHZ1RFNEK2MyR2svTXBuN0F6bDhCdzRX?=
+ =?utf-8?B?alUrTFIwQ0RpZkNvK3NqNjdpZ0orc1N0azhBQW9kVDFOWEtQVzlxY2JoRW56?=
+ =?utf-8?B?NTZubVUyV0hvYXY4bExjTFVZTGdEbVkwR0MvTjFHQ3Y2YkFYSW5BT0g5K3VB?=
+ =?utf-8?B?ZE5JV2wrbWQvRDA5dy9xaDlsVGtSK1pPdXZiWjlXQmZoa0V5aVlreUMxK1ph?=
+ =?utf-8?B?aEVFbWM5cE54VUdFU0lJODliQ0l3STFkYmJsY2l0TkNnV2Z2SVhFbjdMWmlt?=
+ =?utf-8?B?b1ltYmQ1eTg5M0U5VEdPL1h6MVRIcVJnMmZLeVhjcXRsUU9pSGNUc0Z6SlZv?=
+ =?utf-8?B?bURTVnkyWUplUGI5ZUE4VzgvWHlIUk5EMmJ5K08ya3VLRS85YlFKWCtmYmdS?=
+ =?utf-8?B?SmZWbzUwdHdsVVNseHFDd2lKYnJvcDI1N3BWREg1cG5FL0E3RWx5aklZbFhr?=
+ =?utf-8?B?NzlnY3MxeWVvSzVFMjl5N08zSjNVQzZQNmUzazZodlJ5c0IyVlVmVUVqRUxq?=
+ =?utf-8?B?ekliRlZYTElWMS9Dei9uUXRHcWp2dnQ4Y09FMGhEamJMN0pwUDFTQWRxZE5l?=
+ =?utf-8?B?UVBTbFREMHNtM2dQTm9UUlZOYWZxZHBOMlRDRU1nRzRjZmU3bHBSeGtpNURS?=
+ =?utf-8?B?RFRtSGttS3dEYS9iQ3BYZWhBWWdCRDF0S1I2TXhJNnJ3bTExOFNheDN2WWFw?=
+ =?utf-8?B?YWFiaUcvTFUvZ2dOUHJMZFJVQW55Y0IxZGF6ZDc4VHlHbDdrMTlPSWNpenN0?=
+ =?utf-8?Q?44VFAeYjtfg=3D?=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB5685.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(7416014)(8096899003)(921020);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB5685.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(7416014)(376014)(7053199007)(921020);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?cjUyb1VVZytrbEh5Z1NMNEE0V0pFRzk4UzFkR20yMndlekV1YTMvanR4bFRO?=
- =?utf-8?B?enpaMS9ua0Z1QlorL25aR2FyMjhURUxhK1E3OVJ0dzVBRWdlSlpIaGVMbTho?=
- =?utf-8?B?MHpFUXFSWDJzblo2akphcGE0eTBtV1g2RDZLWEloc0dzRUVpbW5YajFQUEhm?=
- =?utf-8?B?UjhrRGRURWQ0NXBIYXRWeEJGTnJnWjVYUGdsbEdGamFDQWpUTjY4cUhtN2da?=
- =?utf-8?B?aE95VGw3KzVaeFV0dFAzdnZ6WGlsaExkUGJpZ1BXVFRCQ2xkMFFlWDhaQXdL?=
- =?utf-8?B?U056Sm5jVnhEcEl0Y1cxTDNubVhPMy92M2YxcHNkSTF0b2ZvUHErRVVkMzJh?=
- =?utf-8?B?amJDUjJxWnBRQVdxanAwVUlqN0s2UkU0TG80bC9wUlM0YW9WeWI0eU5ZZVZn?=
- =?utf-8?B?b2FwRVYzTjlFUXIya2dkTmdPMzVPU0tUNnpGdGo1RlBuTFhCN20wckdacXh2?=
- =?utf-8?B?Z0loR3BlK3A0Y2VLTGg0L3U1SFQvM1pHd2VqWThCVmdMSzRXT1JQQkFFeWEv?=
- =?utf-8?B?WXJKWElYK3oyaSt0MzQ3S3IvNjdLL2NZMTZUdHc3QzlQcHFHQjlzdXFyNnpF?=
- =?utf-8?B?WmlIQ0psMmI2YlRDeDJCTng0eElrekFUQjFwdFFZTmpRZ1ZCMHJhcDRLZzBR?=
- =?utf-8?B?a0tDRHJ1cXQrakh0K1hiQmZ5MkJIbVpFNHpmYVh2VUZzZmt1bWd5MFhHMDJG?=
- =?utf-8?B?VHErUndLSmt0ci9WK1k1TVRHRE1HYmNBaTVTdHRVN1VYNDlON0ZDa1J0QSt5?=
- =?utf-8?B?RGdxU2ZFQ25xUFVFUDJrN3d6bjA4K3VKYVdqSFIxQnliRWdYVXRqbHRkRFV5?=
- =?utf-8?B?S0FnUGFiQXQ3RjRxSE81cUZlMUJ1OGI3c2wyZ0prbkZ1cVlwZGoyaEpRVXk0?=
- =?utf-8?B?MmFyUkFpTUNBOHNFdnpqKzRzSUE1cE9kUTdIYlhkTHhpRzdmNUp0T0U5bXMv?=
- =?utf-8?B?cEU5VTFnaE9NV1Z0N0tJZjdsWlRHNTg1UUJWU09sOXJ0cDR1akx2RHczYTZn?=
- =?utf-8?B?SHN2WGR6VHlGRlFXSzN6WnBLRHl2SW9qSmMvLzN5Tk5yVUV1d291K2J2Y050?=
- =?utf-8?B?aDZxZXdRR21uSEU0SmhkcUVJZFh6bTBKL1pvKzExUk43L21iK210ckp1WUp5?=
- =?utf-8?B?cWZab0FTMjhmSGpzcVlVRHhRaTNiY3ZzcG1CL1pQck5Mb0t2QTJCRHNSeGZR?=
- =?utf-8?B?Qys3N3FNNzBjSGxTclhVV25abVNCd0NUSzE0N0o0M3VpVHMwamYyT0YvWXVx?=
- =?utf-8?B?d0Nyb3BuTk1kRHdnaFdWMzhGa2U3bjB2dGUxNGphOWdCbFg0c1doTHdSK0Jy?=
- =?utf-8?B?TkVkelF0SitQVXhnS2RNbHhhY2lMOHlaZ1EzWm5pQ0FhODNaSHRXQWludzFW?=
- =?utf-8?B?TWVMeWVYdWx6Ui96U0VkRmZWOHFyNzlsYjJRcjk5dUwyL1FvQTFFZ1gyaUJ1?=
- =?utf-8?B?bFA3dXBETnI2K2VFcjUybnNLdmJKR3E0WHRsQndtMXZnSU9iMS96b2xISlZ5?=
- =?utf-8?B?VlJKSWxmNVd6RHcvUHJ5Z0VIaG9EYlZrTlpzcm9zT1U5ckFkdE03MU9LbFQx?=
- =?utf-8?B?bC9MdlFOVWliM3g4Z3Z0S0hRV1JjYkp5L3dTeElaZnJ3OU1Oa0haR2tpWXhG?=
- =?utf-8?B?ZEJDcGdCUmNFbDVpU0VEaXZKVG1EWDdzZjhPSy90Tlh0OG85M2NpamJ2bUdx?=
- =?utf-8?B?YUFQOHM4bGUvRWtHVjZXbU5WeWE3OTFnb0tjREZUUktyaW1aOHpwNUZ2dXNM?=
- =?utf-8?B?YXZtMktZeWdMRktHc0hNVTBmQ1VNTndvbTZQS01Eb04wdkNNb2E0WmVBTmNq?=
- =?utf-8?B?Mnhhayt2VTcralllWjFyOGlwenBIeGZOK2pwMFptVkg4YzBIQWVzaFc4UkRw?=
- =?utf-8?B?WmVxcFNXNEVMbHA0YmV0OXZsWGhJMUMyeFJrRFV4SFU0VWZWNzlKOHlSVmNy?=
- =?utf-8?B?QVEycTh5UCtGUmMxalROVmN1VDFjQjNRaHpQNDVZOU1pN0xSaFBkUGVmRFd6?=
- =?utf-8?B?OENQTEdZM2N5NFVSSXhIdStZdTNpVW5YdXpreVU3blMzbXlicFpWL2hVQlM3?=
- =?utf-8?B?S3pCcXRlLzJHczlKVS9iN2xHczludUUrbzlrKzhXZXFZT3YvS0pNR2o3MHFG?=
- =?utf-8?Q?0Xj0EA6vbvyz42mr9x7eYfd5Z?=
+	=?utf-8?B?QU1waUQ1Q0VOUlZSRWJHOWhHVXhERDNRM1VzanVtVmtWUlVUa01lVkZCaGJw?=
+ =?utf-8?B?SHRITjdlMEZWdC9ML2U0OURySnJubktHekVoL0dvNVMwbklNN0JyS0RCZENM?=
+ =?utf-8?B?eGc0RmZBc1hSRzRVcDIwVjlUU2ExOGFKYXNqU0VYN29kQlFtOHNwdEVPOCtl?=
+ =?utf-8?B?c1dmM2NRY2ZGMDZWYmhING83elBoNDFnWEFMSENURGpyS05uTnFtLzRRWXo1?=
+ =?utf-8?B?cEFqVWYzWm5HcHJZMzZ1Z2FFak1NWGU1VkZxV3YvOFBrZHd4SzlKYXQwK3la?=
+ =?utf-8?B?Um1Vc2FqYW1pdVVpQlQzbXMvai9PMVNrUWk1dGJHSTQwd21xTW1lK0tJOHNP?=
+ =?utf-8?B?WkFHSDFrZDFZRWY2UWVvdEpJdW5vSlU3ektXcXczT0R1R2RPNGhUaEtIM29k?=
+ =?utf-8?B?TytYSU9CdEFLSE5HLys2b1R0VDdQZFlqTkkwbTZnSkd3cC9LcmZsREhrdGk2?=
+ =?utf-8?B?amgwYVlJK0hYd0lkV0N0Q1ZpN0R5VGQ2YlplL29XN21NWUFGSy9iZkFScUU5?=
+ =?utf-8?B?T1hKM1RvRklUS0NXZXFXeGQ1NFg2a1Y4a2w4YmNxbW1kTU5ibGx6YVBDWldv?=
+ =?utf-8?B?ei9IcG1KbTNFeWx2V3c1cnJBRC9sWUZyOUVTNCtZM25CY1l5SDRTM2E2V2ZN?=
+ =?utf-8?B?QkJBSnBSZExPQTZ6WHk3SWxOZmNhd3NIOWFQNEd4RHBhYmlGTE0rNFpCVk8z?=
+ =?utf-8?B?eDk2TzBUVkg3SVN4SDdtTmpyWi9PaGJGdTNyRmVaOTlzWEYxWmxrY3N0Zjc2?=
+ =?utf-8?B?QnYycUJOTHlLYzFwbXlrU0RyRnhFVkVVdXZsZTN0VlN0SktaNmIzOS90dHNr?=
+ =?utf-8?B?V1ZNbW5uRndpRVVLcmF0UEUzTGpVTmx0NVFqTlJ0V3ZTTXV1MExreE1uTEFM?=
+ =?utf-8?B?RitDMHZEcnplYmgzQ3NEU0dXT3FzbWlSeVpldCs3LzRKMVBYaytPbkFpWEtC?=
+ =?utf-8?B?STJ4SjUxZ1NHV1ZYN01BZ1M2cWQyWE9MTDNPRk8wZjU1bUZxWXc4eXVrcnFV?=
+ =?utf-8?B?V20zcXlYQWQ5Qm5hdTVWZjhHUkhPMkF2dXRuYWVWaDBDK1NtNndVN21EWkt3?=
+ =?utf-8?B?WGF5RHA1ZFE1c2lWNUFFdmllSGRUTFhySkpFTTFPRVlyalN0NlllNEpwT2Zn?=
+ =?utf-8?B?YlE3ejFVV0lhMytPSGlGQzh3VXJ5andVUW9LOXFwMk1XTGFhV01HSTZtbVRs?=
+ =?utf-8?B?eUJtTjc1b3BleVRTc3hoMGNGVXRlWHBZN1hEeFA5WGhMRTQvNGpFbEdjUWtH?=
+ =?utf-8?B?NHJoZ3NLS2s2cG9haS82REtmVDlnRVhOeUdjVzVRVDRsOHNRL0V0bzRqMG9i?=
+ =?utf-8?B?YnVCMDZRY3NLSXUxMUZUY21KeHVFUzhyeTdwTS8xRlByTUhnWXhtSkplaURl?=
+ =?utf-8?B?ZHBQQWJVckVmSFJyd3I1a2YxYTlBZ0JYNmJ2ZjZoZ1R3aStLVEVKc0dtaVdK?=
+ =?utf-8?B?d3VaQ2tLVUpndU9lb2pDaWo5N256M29VOTNMKzBSMHY5b1VVeVZHMFRqb3N3?=
+ =?utf-8?B?cThVWEkxQmVxUjJ3YTJFcGxUaGlpcGRvN2NRbExjaVZ2UWhxUXVlQ3hGVWNk?=
+ =?utf-8?B?TXJzOEZuNGRER2JZanNtK1lmWEFzL0xwV1VhQTVOOGVOMEpuaytmeFBld1F0?=
+ =?utf-8?B?d0RkZjZ2QVEvdE8rcVhrTzNkMTlleGZvNWtWdnFtanZocE5YbE1WNElBeGJy?=
+ =?utf-8?B?bHdKNlRLYXV4b3lUbVRMT2RkV1B4Z0JqaGtjeGREQnhOazlqbVVUMFpJYzRE?=
+ =?utf-8?B?ekhna2tYT0ZNRFI3L3hLQkhPNWV3Zm1kNXEra2RPNm96aGVUb3d0Z0F6ZEEv?=
+ =?utf-8?B?M0dLYkJvOGJMVlVqMkVmTWhlaForRmV4eFJSTVVwL2c2elRyZHcvYnJOUFBW?=
+ =?utf-8?B?SXZIUEdWNHB5SmcxejJoY3AybkxkbEVyM2pleUtnWDVoNERGcTZhVTNHZVhP?=
+ =?utf-8?B?UXNWblJlV1BzTkVVZk1kUnFoSjIyaVVGbjA5alpmTjJieWtHakdMSy84UVNs?=
+ =?utf-8?B?eDNqWksyYmZJOGJmMW5sd1M4ZVk5NEpkY3VxbFBSR2FMMlBRWGZnSnBqamhY?=
+ =?utf-8?B?WTJsYTlnVG9yZUo4MHQ4dFZMLzNEYzJBVGd6ZFcvMHlYcnFwbEVvdkpVeGVJ?=
+ =?utf-8?Q?522L8UkIc8Su9ZTRhY9emn8ae?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 29cddcf0-2680-4f90-2ea2-08dd354c5a85
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4fd577e4-5221-44ad-6a3e-08dd355ab47a
 X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5685.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jan 2025 10:07:01.1292
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jan 2025 11:49:45.0133
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: TrcDm8JUtEOJvoGzHXItUEFqU9NAyiSpSrFFB8ZrKAGCgy/C7wA6LpbWGOxxxWY/
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB7564
+X-MS-Exchange-CrossTenant-UserPrincipalName: Ye8/fcIOVN919ZswXpgC1KGl1XuWAO6L38F4k90yk1SR/9bcXPhsECtJCC/+7qhH
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB8413
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 1E8CA44797
-X-Spamd-Bar: -----
+X-Rspamd-Queue-Id: 313453F622
+X-Spamd-Bar: ------
 X-Spamd-Result: default: False [-6.00 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
-	RBL_SENDERSCORE_REPUT_9(-1.00)[40.107.95.46:from];
+	BAYES_HAM(-3.00)[100.00%];
+	RBL_SENDERSCORE_REPUT_9(-1.00)[40.107.93.71:from];
 	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector10001:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
 	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
-	MIME_GOOD(-0.10)[multipart/alternative,text/plain];
+	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
+	MIME_GOOD(-0.10)[text/plain];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.93.71:from];
+	FREEMAIL_TO(0.00)[unisoc.com,linaro.org,collabora.com,arm.com,google.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,gmail.com];
+	RCPT_COUNT_TWELVE(0.00)[12];
 	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.95.46:from];
-	RCPT_COUNT_TWELVE(0.00)[24];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	MIME_TRACE(0.00)[0:+];
+	MID_RHS_MATCH_FROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	TO_DN_SOME(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
+	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
 	RCVD_TLS_LAST(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	DKIM_TRACE(0.00)[amd.com:+]
-Message-ID-Hash: PXBKBWLLO3GUK46TTWUT4UGIGGPCWHFQ
-X-Message-ID-Hash: PXBKBWLLO3GUK46TTWUT4UGIGGPCWHFQ
+Message-ID-Hash: OVMZKYARQNYBBE32C464YET3BR7FYR6H
+X-Message-ID-Hash: OVMZKYARQNYBBE32C464YET3BR7FYR6H
 X-MailFrom: Christian.Koenig@amd.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [RFC PATCH 01/12] dma-buf: Introduce dma_buf_get_pfn_unlocked() kAPI
+Subject: [Linaro-mm-sig] Re: [RFC PATCH] driver: dma-buf: use vmf_insert_page for cma_heap_vm_fault
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PXBKBWLLO3GUK46TTWUT4UGIGGPCWHFQ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OVMZKYARQNYBBE32C464YET3BR7FYR6H/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============5508336122302147808=="
-
---===============5508336122302147808==
-Content-Type: multipart/alternative;
- boundary="------------bk9sSTANHxMt5J3jhN3Nde2E"
-Content-Language: en-US
-
---------------bk9sSTANHxMt5J3jhN3Nde2E
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
 Content-Transfer-Encoding: 7bit
 
-Am 15.01.25 um 09:55 schrieb Simona Vetter:
->>> If we add something
->>> new, we need clear rules and not just "here's the kvm code that uses it".
->>> That's how we've done dma-buf at first, and it was a terrible mess of
->>> mismatched expecations.
->> Yes, that would be wrong. It should be self defined within dmabuf and
->> kvm should adopt to it, move semantics and all.
-> Ack.
+Am 15.01.25 um 07:18 schrieb zhaoyang.huang:
+> From: Zhaoyang Huang <zhaoyang.huang@unisoc.com>
 >
-> I feel like we have a plan here.
+> When using dma-buf as memory pool for VMM. The vmf_insert_pfn will
+> apply PTE_SPECIAL on pte which have vm_normal_page report bad_pte and
+> return NULL. This commit would like to suggest to replace
+> vmf_insert_pfn by vmf_insert_page.
 
-I think I have to object a bit on that.
+Setting PTE_SPECIAL is completely intentional here to prevent 
+get_user_pages() from working on DMA-buf mappings.
 
->   Summary from my side:
->
-> - Sort out pin vs revocable vs dynamic/moveable semantics, make sure
->    importers have no surprises.
->
-> - Adopt whatever new dma-api datastructures pops out of the dma-api
->    reworks.
->
-> - Add pfn based memory access as yet another optional access method, with
->    helpers so that exporters who support this get all the others for free.
->
-> I don't see a strict ordering between these, imo should be driven by
-> actual users of the dma-buf api.
->
-> Already done:
->
-> - dmem cgroup so that we can resource control device pinnings just landed
->    in drm-next for next merge window. So that part is imo sorted and we can
->    charge ahead with pinning into device memory without all the concerns
->    we've had years ago when discussing that for p2p dma-buf support.
->
->    But there might be some work so that we can p2p pin without requiring
->    dynamic attachments only, I haven't checked whether that needs
->    adjustment in dma-buf.c code or just in exporters.
->
-> Anything missing?
+So absolutely clear NAK to this patch here.
 
-Well as far as I can see this use case is not a good fit for the DMA-buf 
-interfaces in the first place. DMA-buf deals with devices and buffer 
-exchange.
-
-What's necessary here instead is to give an importing VM full access on 
-some memory for their specific use case.
-
-That full access includes CPU and DMA mappings, modifying caching 
-attributes, potentially setting encryption keys for specific ranges 
-etc.... etc...
-
-In other words we have a lot of things the importer here should be able 
-to do which we don't want most of the DMA-buf importers to do.
-
-The semantics for things like pin vs revocable vs dynamic/moveable seems 
-similar, but that's basically it.
-
-As far as I know the TEE subsystem also represents their allocations as 
-file descriptors. If I'm not completely mistaken this use case most 
-likely fit's better there.
-
-> I feel like this is small enough that m-l archives is good enough. For
-> some of the bigger projects we do in graphics we sometimes create entries
-> in our kerneldoc with wip design consensus and things like that. But
-> feels like overkill here.
->
->> My general desire is to move all of RDMA's MR process away from
->> scatterlist and work using only the new DMA API. This will save *huge*
->> amounts of memory in common workloads and be the basis for non-struct
->> page DMA support, including P2P.
-> Yeah a more memory efficient structure than the scatterlist would be
-> really nice. That would even benefit the very special dma-buf exporters
-> where you cannot get a pfn and only the dma_addr_t, altough most of those
-> (all maybe even?) have contig buffers, so your scatterlist has only one
-> entry. But it would definitely be nice from a design pov.
-
-Completely agree on that part.
-
-Scatterlist have a some design flaws, especially mixing the input and 
-out parameters of the DMA API into the same structure.
-
-Additional to that DMA addresses are basically missing which bus they 
-belong to and details how the access should be made (e.g. snoop vs 
-no-snoop etc...).
-
-> Aside: A way to more efficiently create compressed scatterlists would be
-> neat too, because a lot of drivers hand-roll that and it's a bit brittle
-> and kinda silly to duplicate. With compressed I mean just a single entry
-> for a contig range, in practice thanks to huge pages/folios and allocators
-> trying to hand out contig ranges if there's plenty of memory that saves a
-> lot of memory too. But currently it's a bit a pain to construct these
-> efficiently, mostly it's just a two-pass approach and then trying to free
-> surplus memory or krealloc to fit. Also I don't have good ideas here, but
-> dma-api folks might have some from looking at too many things that create
-> scatterlists.
-
-I mailed with Christoph about that a while back as well and we both 
-agreed that it would probably be a good idea to start defining a data 
-structure to better encapsulate DMA addresses.
-
-It's just that nobody had time for that yet and/or I wasn't looped in in 
-the final discussion about it.
+What exactly are you trying to do?
 
 Regards,
 Christian.
 
-> -Sima
-
---------------bk9sSTANHxMt5J3jhN3Nde2E
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-
-<!DOCTYPE html><html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body>
-    Am 15.01.25 um 09:55 schrieb Simona Vetter:<br>
-    <blockquote type="cite" cite="mid:Z4d4AaLGrhRa5KLJ@phenom.ffwll.local"><span style="white-space: pre-wrap">
-</span><span style="white-space: pre-wrap">
-</span>
-      <blockquote type="cite">
-        <blockquote type="cite">
-          <pre class="moz-quote-pre" wrap="">If we add something
-new, we need clear rules and not just &quot;here's the kvm code that uses it&quot;.
-That's how we've done dma-buf at first, and it was a terrible mess of
-mismatched expecations.
-</pre>
-        </blockquote>
-        <pre class="moz-quote-pre" wrap="">
-Yes, that would be wrong. It should be self defined within dmabuf and
-kvm should adopt to it, move semantics and all.
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-Ack.
-
-I feel like we have a plan here.</pre>
-    </blockquote>
-    <br>
-    I think I have to object a bit on that.<br>
-    <br>
-    <blockquote type="cite" cite="mid:Z4d4AaLGrhRa5KLJ@phenom.ffwll.local">
-      <pre class="moz-quote-pre" wrap=""> Summary from my side:
-
-- Sort out pin vs revocable vs dynamic/moveable semantics, make sure
-  importers have no surprises.
-
-- Adopt whatever new dma-api datastructures pops out of the dma-api
-  reworks.
-
-- Add pfn based memory access as yet another optional access method, with
-  helpers so that exporters who support this get all the others for free.
-
-I don't see a strict ordering between these, imo should be driven by
-actual users of the dma-buf api.
-
-Already done:
-
-- dmem cgroup so that we can resource control device pinnings just landed
-  in drm-next for next merge window. So that part is imo sorted and we can
-  charge ahead with pinning into device memory without all the concerns
-  we've had years ago when discussing that for p2p dma-buf support.
-
-  But there might be some work so that we can p2p pin without requiring
-  dynamic attachments only, I haven't checked whether that needs
-  adjustment in dma-buf.c code or just in exporters.
-
-Anything missing?</pre>
-    </blockquote>
-    <br>
-    Well as far as I can see this use case is not a good fit for the
-    DMA-buf interfaces in the first place. DMA-buf deals with devices
-    and buffer exchange.<br>
-    <br>
-    What's necessary here instead is to give an importing VM full access
-    on some memory for their specific use case.<br>
-    <br>
-    That full access includes CPU and DMA mappings, modifying caching
-    attributes, potentially setting encryption keys for specific ranges
-    etc.... etc...<br>
-    <br>
-    In other words we have a lot of things the importer here should be
-    able to do which we don't want most of the DMA-buf importers to do.<br>
-    <br>
-    The semantics for things like pin vs revocable vs dynamic/moveable
-    seems similar, but that's basically it.<br>
-    <br>
-    As far as I know the TEE subsystem also represents their allocations
-    as file descriptors. If I'm not completely mistaken this use case
-    most likely fit's better there.<br>
-    <br>
-    <blockquote type="cite" cite="mid:Z4d4AaLGrhRa5KLJ@phenom.ffwll.local">
-      <pre class="moz-quote-pre" wrap="">I feel like this is small enough that m-l archives is good enough. For
-some of the bigger projects we do in graphics we sometimes create entries
-in our kerneldoc with wip design consensus and things like that. But
-feels like overkill here.
-
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">My general desire is to move all of RDMA's MR process away from
-scatterlist and work using only the new DMA API. This will save *huge*
-amounts of memory in common workloads and be the basis for non-struct
-page DMA support, including P2P.
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-Yeah a more memory efficient structure than the scatterlist would be
-really nice. That would even benefit the very special dma-buf exporters
-where you cannot get a pfn and only the dma_addr_t, altough most of those
-(all maybe even?) have contig buffers, so your scatterlist has only one
-entry. But it would definitely be nice from a design pov.</pre>
-    </blockquote>
-    <br>
-    Completely agree on that part.<br>
-    <br>
-    Scatterlist have a some design flaws, especially mixing the input
-    and out parameters of the DMA API into the same structure.<br>
-    <br>
-    Additional to that DMA addresses are basically missing which bus
-    they belong to and details how the access should be made (e.g. snoop
-    vs no-snoop etc...).<br>
-    <br>
-    <blockquote type="cite" cite="mid:Z4d4AaLGrhRa5KLJ@phenom.ffwll.local">
-      <pre class="moz-quote-pre" wrap="">Aside: A way to more efficiently create compressed scatterlists would be
-neat too, because a lot of drivers hand-roll that and it's a bit brittle
-and kinda silly to duplicate. With compressed I mean just a single entry
-for a contig range, in practice thanks to huge pages/folios and allocators
-trying to hand out contig ranges if there's plenty of memory that saves a
-lot of memory too. But currently it's a bit a pain to construct these
-efficiently, mostly it's just a two-pass approach and then trying to free
-surplus memory or krealloc to fit. Also I don't have good ideas here, but
-dma-api folks might have some from looking at too many things that create
-scatterlists.</pre>
-    </blockquote>
-    <br>
-    I mailed with Christoph about that a while back as well and we both
-    agreed that it would probably be a good idea to start defining a
-    data structure to better encapsulate DMA addresses.<br>
-    <br>
-    It's just that nobody had time for that yet and/or I wasn't looped
-    in in the final discussion about it.<br>
-    <br>
-    Regards,<br>
-    Christian.<br>
-    <br>
-    <blockquote type="cite" cite="mid:Z4d4AaLGrhRa5KLJ@phenom.ffwll.local">
-      <pre class="moz-quote-pre" wrap="">
--Sima
-</pre>
-    </blockquote>
-    <br>
-  </body>
-</html>
-
---------------bk9sSTANHxMt5J3jhN3Nde2E--
-
---===============5508336122302147808==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+>
+> [  103.402787] kvm [5276]: gfn(ipa)=0x80000 hva=0x7d4a400000 write_fault=0
+> [  103.403822] BUG: Bad page map in process crosvm_vcpu0  pte:168000140000f43 pmd:8000000c1ca0003
+> [  103.405144] addr:0000007d4a400000 vm_flags:040400fb anon_vma:0000000000000000 mapping:ffffff8085163df0 index:0
+> [  103.406536] file:dmabuf fault:cma_heap_vm_fault [cma_heap] mmap:dma_buf_mmap_internal read_folio:0x0
+> [  103.407877] CPU: 3 PID: 5276 Comm: crosvm_vcpu0 Tainted: G        W  OE      6.6.46-android15-8-g8bab72b63c20-dirty-4k #1 1e474a12dac4553a3ebba3a911f3b744176a5d2d
+> [  103.409818] Hardware name: Unisoc UMS9632-base Board (DT)
+> [  103.410613] Call trace:
+> [  103.411038] dump_backtrace+0xf4/0x140
+> [  103.411641] show_stack+0x20/0x30
+> [  103.412184] dump_stack_lvl+0x60/0x84
+> [  103.412766] dump_stack+0x18/0x24
+> [  103.413304] print_bad_pte+0x1b8/0x1cc
+> [  103.413909] vm_normal_page+0xc8/0xd0
+> [  103.414491] follow_page_pte+0xb0/0x304
+> [  103.415096] follow_page_mask+0x108/0x240
+> [  103.415721] __get_user_pages+0x168/0x4ac
+> [  103.416342] __gup_longterm_locked+0x15c/0x864
+> [  103.417023] pin_user_pages+0x70/0xcc
+> [  103.417609] pkvm_mem_abort+0xf8/0x5c0
+> [  103.418207] kvm_handle_guest_abort+0x3e0/0x3e4
+> [  103.418906] handle_exit+0xac/0x33c
+> [  103.419472] kvm_arch_vcpu_ioctl_run+0x48c/0x8d8
+> [  103.420176] kvm_vcpu_ioctl+0x504/0x5bc
+> [  103.420785] __arm64_sys_ioctl+0xb0/0xec
+> [  103.421401] invoke_syscall+0x60/0x11c
+> [  103.422000] el0_svc_common+0xb4/0xe8
+> [  103.422590] do_el0_svc+0x24/0x30
+> [  103.423131] el0_svc+0x3c/0x70
+> [  103.423640] el0t_64_sync_handler+0x68/0xbc
+> [  103.424288] el0t_64_sync+0x1a8/0x1ac
+>
+> Signed-off-by: Xiwei Wang <xiwei.wang1@unisoc.com>
+> Signed-off-by: Aijun Sun <aijun.sun@unisoc.com>
+> Signed-off-by: Zhaoyang Huang <zhaoyang.huang@unisoc.com>
+> ---
+>   drivers/dma-buf/heaps/cma_heap.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/drivers/dma-buf/heaps/cma_heap.c b/drivers/dma-buf/heaps/cma_heap.c
+> index c384004b918e..b301fb63f16b 100644
+> --- a/drivers/dma-buf/heaps/cma_heap.c
+> +++ b/drivers/dma-buf/heaps/cma_heap.c
+> @@ -168,7 +168,7 @@ static vm_fault_t cma_heap_vm_fault(struct vm_fault *vmf)
+>   	if (vmf->pgoff > buffer->pagecount)
+>   		return VM_FAULT_SIGBUS;
+>   
+> -	return vmf_insert_pfn(vma, vmf->address, page_to_pfn(buffer->pages[vmf->pgoff]));
+> +	return vmf_insert_page(vma, vmf->address, buffer->pages[vmf->pgoff]);
+>   }
+>   
+>   static const struct vm_operations_struct dma_heap_vm_ops = {
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============5508336122302147808==--
