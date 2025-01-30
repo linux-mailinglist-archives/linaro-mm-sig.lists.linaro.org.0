@@ -2,112 +2,165 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5D046A21D8F
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 29 Jan 2025 14:09:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BB36FA22DB2
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 30 Jan 2025 14:25:43 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id D388644931
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 29 Jan 2025 13:09:15 +0000 (UTC)
-Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
-	by lists.linaro.org (Postfix) with ESMTPS id 92C003F080
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 29 Jan 2025 13:08:58 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 88E734413E
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 30 Jan 2025 13:25:42 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+	by lists.linaro.org (Postfix) with ESMTPS id 122F13F3DF
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 30 Jan 2025 13:25:29 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=none;
-	dmarc=none;
-	spf=pass (lists.linaro.org: domain of l.stach@pengutronix.de designates 185.203.201.7 as permitted sender) smtp.mailfrom=l.stach@pengutronix.de
-Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77] helo=[IPv6:::1])
-	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <l.stach@pengutronix.de>)
-	id 1td7oL-0006hM-05; Wed, 29 Jan 2025 14:08:53 +0100
-Message-ID: <5323c8d6d906fe1724eac606c94588d815580a40.camel@pengutronix.de>
-From: Lucas Stach <l.stach@pengutronix.de>
-To: Christian =?ISO-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>,
-	marek.olsak@amd.com, sumit.semwal@linaro.org
-Date: Wed, 29 Jan 2025 14:08:51 +0100
-In-Reply-To: <20250129105841.1806-1-christian.koenig@amd.com>
-References: <20250129105841.1806-1-christian.koenig@amd.com>
-User-Agent: Evolution 3.52.4 (3.52.4-2.fc40) 
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=ZArjtJgJ;
+	spf=pass (lists.linaro.org: domain of krzk@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=krzk@kernel.org;
+	dmarc=pass (policy=quarantine) header.from=kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by dfw.source.kernel.org (Postfix) with ESMTP id 72F6E5C5CD0;
+	Thu, 30 Jan 2025 13:24:48 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 28ADAC4CED2;
+	Thu, 30 Jan 2025 13:25:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1738243528;
+	bh=SzvFFMSfP6Mm1H6JGD78EZYrFbiROfqXxHife8p2lZ4=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=ZArjtJgJOtt2zO8Ds9hhTBZ6Cip7ztSItXYlMI+3Wby3sbIdjSg13JCTjcGVEUrVy
+	 477w5XvibraWxa5LyaOrC/G0C9M5pIH4To5x5yMfj786kHYlLpXJpBJCkpiNodBP2M
+	 c8TgdRfyEwshEvU0J6nr+ANlcEUtaaQuDma+5+I45EUpMED6MQn3ttDJ4rfrmIL8+h
+	 WFAE2eyUxnnOURV6BUVeOwDhVd2U36VsIIzyxHSXTt9FsRzf6eaiqio1MG09jb8Dwj
+	 v5K40ip5cIQZSddX5UNQKXASh6Nfb/dmU4NTX+FgcwgDXNahR/g8E2lL8Guq7KzWHc
+	 /duo7iPWQu1kg==
+Message-ID: <7234f25c-a2aa-4834-931b-aeeb7a49dfa7@kernel.org>
+Date: Thu, 30 Jan 2025 14:25:16 +0100
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:900:1d::77
-X-SA-Exim-Mail-From: l.stach@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: linaro-mm-sig@lists.linaro.org
+User-Agent: Mozilla Thunderbird
+To: Florent Tomasin <florent.tomasin@arm.com>, Vinod Koul <vkoul@kernel.org>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>,
+ Boris Brezillon <boris.brezillon@collabora.com>,
+ Steven Price <steven.price@arm.com>, Liviu Dudau <liviu.dudau@arm.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Sumit Semwal <sumit.semwal@linaro.org>,
+ Benjamin Gaignard <benjamin.gaignard@collabora.com>,
+ Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>,
+ "T . J . Mercier" <tjmercier@google.com>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ Matthias Brugger <matthias.bgg@gmail.com>,
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+ Yong Wu <yong.wu@mediatek.com>
+References: <cover.1738228114.git.florent.tomasin@arm.com>
+ <36b57dcf20860398ba83985e1c5b6f6958d08ba7.1738228114.git.florent.tomasin@arm.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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 fv0=
+In-Reply-To: <36b57dcf20860398ba83985e1c5b6f6958d08ba7.1738228114.git.florent.tomasin@arm.com>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 92C003F080
-X-Spamd-Bar: -
-X-Spamd-Result: default: False [-1.80 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
+X-Rspamd-Queue-Id: 122F13F3DF
+X-Spamd-Bar: ---
+X-Spamd-Result: default: False [-3.09 / 15.00];
+	BAYES_HAM(-2.59)[98.19%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ONCE_RECEIVED(0.20)[];
-	R_SPF_ALLOW(-0.20)[+mx];
-	RCVD_IN_DNSWL_MED(-0.20)[185.203.201.7:from];
+	RBL_SENDERSCORE_REPUT_9(-1.00)[139.178.84.217:from];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
 	MIME_GOOD(-0.10)[text/plain];
-	TAGGED_RCPT(0.00)[];
-	RCVD_TLS_ALL(0.00)[];
-	ASN(0.00)[asn:209379, ipnet:185.203.200.0/22, country:DE];
+	TAGGED_RCPT(0.00)[dt];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
 	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[32];
 	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_ONE(0.00)[1];
-	FREEMAIL_TO(0.00)[gmail.com,amd.com,linaro.org];
-	R_DKIM_NA(0.00)[];
-	TO_DN_SOME(0.00)[];
+	FREEMAIL_TO(0.00)[arm.com,kernel.org,collabora.com,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,google.com,amd.com,mediatek.com];
+	MID_RHS_MATCH_FROM(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
+	TO_DN_SOME(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DMARC_NA(0.00)[pengutronix.de];
-	DNSWL_BLOCKED(0.00)[2a0a:edc0:0:900:1d::77:received];
-	NEURAL_HAM(-0.00)[-0.999];
-	RCPT_COUNT_FIVE(0.00)[6]
-Message-ID-Hash: AB6KPC5MGMQI4KYV6HAPS5M4BN672HOC
-X-Message-ID-Hash: AB6KPC5MGMQI4KYV6HAPS5M4BN672HOC
-X-MailFrom: l.stach@pengutronix.de
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	DKIM_TRACE(0.00)[kernel.org:+]
+Message-ID-Hash: QKYJHGVUHI4YUYPOHCTYXKJIOFHQ2BP4
+X-Message-ID-Hash: QKYJHGVUHI4YUYPOHCTYXKJIOFHQ2BP4
+X-MailFrom: krzk@kernel.org
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+CC: dmaengine@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, nd@arm.com, Akash Goel <akash.goel@arm.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf: fix timeout handling in dma_resv_wait_timeout v2
+Subject: [Linaro-mm-sig] Re: [RFC PATCH 3/5] dt-bindings: gpu: Add protected heap name to Mali Valhall CSF binding
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AB6KPC5MGMQI4KYV6HAPS5M4BN672HOC/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QKYJHGVUHI4YUYPOHCTYXKJIOFHQ2BP4/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-QW0gTWl0dHdvY2gsIGRlbSAyOS4wMS4yMDI1IHVtIDExOjU4ICswMTAwIHNjaHJpZWIgQ2hyaXN0
-aWFuIEvDtm5pZzoNCj4gRXZlbiB0aGUga2VybmVsZG9jIHNheXMgdGhhdCB3aXRoIGEgemVybyB0
-aW1lb3V0IHRoZSBmdW5jdGlvbiBzaG91bGQgbm90DQo+IHdhaXQgZm9yIGFueXRoaW5nLCBidXQg
-c3RpbGwgcmV0dXJuIDEgdG8gaW5kaWNhdGUgdGhhdCB0aGUgZmVuY2VzIGFyZQ0KPiBzaWduYWxl
-ZCBub3cuDQo+IA0KPiBVbmZvcnR1bmF0ZWx5IHRoYXQgaXNuJ3Qgd2hhdCB3YXMgaW1wbGVtZW50
-ZWQsIGluc3RlYWQgb2Ygb25seSByZXR1cm5pbmcNCj4gMSB3ZSBhbHNvIHdhaXRlZCBmb3IgYXQg
-bGVhc3Qgb25lIGppZmZpZXMuDQo+IA0KPiBGaXggdGhhdCBieSBhZGp1c3RpbmcgdGhlIGhhbmRs
-aW5nIHRvIHdoYXQgdGhlIGZ1bmN0aW9uIGlzIGFjdHVhbGx5DQo+IGRvY3VtZW50ZWQgdG8gZG8u
-DQo+IA0KPiB2MjogaW1wcm92ZSBjb2RlIHJlYWRhYmlsaXR5DQo+IA0KPiBSZXBvcnRlZC1ieTog
-TWFyZWsgT2zFocOhayA8bWFyZWsub2xzYWtAYW1kLmNvbT4NCj4gUmVwb3J0ZWQtYnk6IEx1Y2Fz
-IFN0YWNoIDxsLnN0YWNoQHBlbmd1dHJvbml4LmRlPg0KPiBTaWduZWQtb2ZmLWJ5OiBDaHJpc3Rp
-YW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+DQo+IENjOiA8c3RhYmxlQHZnZXIu
-a2VybmVsLm9yZz4NCg0KUmV2aWV3ZWQtYnk6IEx1Y2FzIFN0YWNoIDxsLnN0YWNoQHBlbmd1dHJv
-bml4LmRlPg0KDQo+IC0tLQ0KPiAgZHJpdmVycy9kbWEtYnVmL2RtYS1yZXN2LmMgfCAxMiArKysr
-KysrLS0tLS0NCj4gIDEgZmlsZSBjaGFuZ2VkLCA3IGluc2VydGlvbnMoKyksIDUgZGVsZXRpb25z
-KC0pDQo+IA0KPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9kbWEtYnVmL2RtYS1yZXN2LmMgYi9kcml2
-ZXJzL2RtYS1idWYvZG1hLXJlc3YuYw0KPiBpbmRleCA1ZjhkMDEwNTE2ZjAuLmM3OGNkYWUzZGVh
-ZiAxMDA2NDQNCj4gLS0tIGEvZHJpdmVycy9kbWEtYnVmL2RtYS1yZXN2LmMNCj4gKysrIGIvZHJp
-dmVycy9kbWEtYnVmL2RtYS1yZXN2LmMNCj4gQEAgLTY4NCwxMSArNjg0LDEzIEBAIGxvbmcgZG1h
-X3Jlc3Zfd2FpdF90aW1lb3V0KHN0cnVjdCBkbWFfcmVzdiAqb2JqLCBlbnVtIGRtYV9yZXN2X3Vz
-YWdlIHVzYWdlLA0KPiAgCWRtYV9yZXN2X2l0ZXJfYmVnaW4oJmN1cnNvciwgb2JqLCB1c2FnZSk7
-DQo+ICAJZG1hX3Jlc3ZfZm9yX2VhY2hfZmVuY2VfdW5sb2NrZWQoJmN1cnNvciwgZmVuY2UpIHsN
-Cj4gIA0KPiAtCQlyZXQgPSBkbWFfZmVuY2Vfd2FpdF90aW1lb3V0KGZlbmNlLCBpbnRyLCByZXQp
-Ow0KPiAtCQlpZiAocmV0IDw9IDApIHsNCj4gLQkJCWRtYV9yZXN2X2l0ZXJfZW5kKCZjdXJzb3Ip
-Ow0KPiAtCQkJcmV0dXJuIHJldDsNCj4gLQkJfQ0KPiArCQlyZXQgPSBkbWFfZmVuY2Vfd2FpdF90
-aW1lb3V0KGZlbmNlLCBpbnRyLCB0aW1lb3V0KTsNCj4gKwkJaWYgKHJldCA8PSAwKQ0KPiArCQkJ
-YnJlYWs7DQo+ICsNCj4gKwkJLyogRXZlbiBmb3IgemVybyB0aW1lb3V0IHRoZSByZXR1cm4gdmFs
-dWUgaXMgMSAqLw0KPiArCQlpZiAodGltZW91dCkNCj4gKwkJCXRpbWVvdXQgPSByZXQ7DQo+ICAJ
-fQ0KPiAgCWRtYV9yZXN2X2l0ZXJfZW5kKCZjdXJzb3IpOw0KPiAgDQoNCl9fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBs
-aXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5k
-IGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+On 30/01/2025 14:08, Florent Tomasin wrote:
+> Allow mali-valhall-csf driver to retrieve a protected
+> heap at probe time by passing the name of the heap
+> as attribute to the device tree GPU node.
+
+Please wrap commit message according to Linux coding style / submission
+process (neither too early nor over the limit):
+https://elixir.bootlin.com/linux/v6.4-rc1/source/Documentation/process/submitting-patches.rst#L597
+
+Why this cannot be passed by phandle, just like all reserved regions?
+
+From where do you take these protected heaps? Firmware? This would
+explain why no relation is here (no probe ordering, no device links,
+nothing connecting separate devices).
+
+Best regards,
+Krzysztof
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
