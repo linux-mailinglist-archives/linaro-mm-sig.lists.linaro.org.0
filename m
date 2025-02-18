@@ -2,117 +2,121 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5BEF7A3A012
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 18 Feb 2025 15:37:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6DCC5A3A28B
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 18 Feb 2025 17:22:31 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7617245588
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 18 Feb 2025 14:37:48 +0000 (UTC)
-Received: from mail-lf1-f50.google.com (mail-lf1-f50.google.com [209.85.167.50])
-	by lists.linaro.org (Postfix) with ESMTPS id 4F81544981
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 18 Feb 2025 14:35:53 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 63EE544AED
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 18 Feb 2025 16:22:30 +0000 (UTC)
+Received: from mail-qk1-f172.google.com (mail-qk1-f172.google.com [209.85.222.172])
+	by lists.linaro.org (Postfix) with ESMTPS id 85F0442501
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 18 Feb 2025 16:22:23 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=linaro.org header.s=google header.b=WNCcA4zT;
-	dmarc=pass (policy=none) header.from=linaro.org;
-	spf=pass (lists.linaro.org: domain of jens.wiklander@linaro.org designates 209.85.167.50 as permitted sender) smtp.mailfrom=jens.wiklander@linaro.org
-Received: by mail-lf1-f50.google.com with SMTP id 2adb3069b0e04-5454f00fc8dso2632927e87.0
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 18 Feb 2025 06:35:53 -0800 (PST)
+	dkim=pass header.d=fooishbar.org header.s=google header.b=BLp5SbGj;
+	dmarc=none;
+	spf=pass (lists.linaro.org: domain of daniel@fooishbar.org designates 209.85.222.172 as permitted sender) smtp.mailfrom=daniel@fooishbar.org
+Received: by mail-qk1-f172.google.com with SMTP id af79cd13be357-7c04df48a5bso484572085a.2
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 18 Feb 2025 08:22:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1739889352; x=1740494152; darn=lists.linaro.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=K8kowqzBNNR30VBKvjQTsvLxpaN4SxkdbGASJgFBpcA=;
-        b=WNCcA4zTYtOb6EdXaRm36MXmfNfTqZ8kyckmnt79vmPFUJ1b+D4PX3EmXkT53iYQQ+
-         MRr8RgEY5gcUiDQNBQwsH+GUT1L2w0HXaUrRHkX3ahAffKBZG6CC4/VmVV6XwHb8wKuP
-         SlDJnK7K2QPy1XAG/lKxCgnviHXvnymj5zbMtKs+NFrzujWQB9l96zVNNTQrbdvnMCFf
-         l+c4f+aCbMT3R9WOiq01jfXBtWBFTWGnaPnOMBqQonu/tSdlyC6YNAfvQwMKTnM7W3HW
-         5RoIdXKz+Z6JTPVSlnSUJhBRq76SuZmBdgGbzdN03z7m8Kmcr0vDxDsICe0YCW10lbox
-         AZ9g==
+        d=fooishbar.org; s=google; t=1739895743; x=1740500543; darn=lists.linaro.org;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=KjXMgQyDFOilO3Xu47Ib173LdeZX8gmPYDyKndrcKnk=;
+        b=BLp5SbGjfKsuZ7rBQzYczbJcj6wC0yq6c2qkf3jWJhi3prM8ufOOnG1yy7iMnMsvnI
+         Ch5FzJoBK64l59U8ATPxIKjp39oBZ9AZTBKsM2GRuXy8tpFMQfjLLZWhSrudPIJ3Q8f6
+         WJKiCOlLjs/4JzbLsrpISZ/h67jiBGSzwm035/p9+00zQq4ZeK1/tZ63hjcuRrrq2MQd
+         CbthqrNm0XL5emsSslczSDv1Et3X4ZL0byapzyGpDCmrm1mtJOuXiQskEl7qMUQHbZpn
+         8LAgsRFDWWAXY3r5hdmvvVDDTsfwDb2QyLc3DbA3bB8mvkX4XIZQ+HwNizQ/F0JgzKvD
+         sSqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1739889352; x=1740494152;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=K8kowqzBNNR30VBKvjQTsvLxpaN4SxkdbGASJgFBpcA=;
-        b=AHMxMGZ6Ww2khrzY6MOkCq+1f4wDaAPMK9RKywTmuITx7VNL5xiWEGFZI07xwkus0A
-         jXrluVG92iWFgdoCjp/FeEnn8PnK483divc/QQvAAC+ZHDB6PRX2yxZ/IXJ6ha9hz0JD
-         qRgd9Uh69pQ8UeocjwRpZ/Ivmr62CKA7xUxGXomGyaV7tBhcndiTGDOMY9CMp3J8BzHM
-         UEV9hJg41KuksCzaYNzEd6myGS+sIqvjCIrYGvqUmUzTLgpLCZ05TY40XX8A4P1rkmx7
-         5LbOLBgpzLoLX+5FcevmLKvNk8SkuTkXnn6WuagUaT55O1oUzVdhtC9NUBAmtXO9tDFz
-         NR+Q==
-X-Forwarded-Encrypted: i=1; AJvYcCVNua4vfG76VKdfvNiGiDacfMTJdcFRI6diEEquFbFEj6+EWA5SKR2v6vc1jCFsAb9PTX64XdGsirHyufk6@lists.linaro.org
-X-Gm-Message-State: AOJu0YxTgKDNo8gdeOzCMMj4JFyACyc9z222Z7UwTQRcay5q7QooydDf
-	ER8mu7HoAuRSAedvMnpGG3O+e/YmrbF5i9ODzTNPRRbCdJX2PU7gfssZO8WZK0ohhQ==
-X-Gm-Gg: ASbGncszOAO+Bk+oDtt1q9+KwMmf9S4hytyXXoqGvNGr4QuOOeW+z0A/fPydVPNUHZ1
-	rFH2pGTg6y3pwyKvoj5hB1hdnnot238vO9AHrRp+hqwc+HvuOifsKQKR9LeA3OCG/49u3vp+4Lj
-	HCanWvpcAEWSsUWypzB8ENlk1LUIGJ5vCf6BKGHwbdc1DPUJNXOTlWsvtr14JkWTW6LgjzwkR4l
-	Ii19PuO0mUO02X/q2GNvoGjZuKWSTv0Wp+ASgncvsFEltzhArpLIJvE7wowolwtc4Ev35G9o3/u
-	41+5Ew3vLSdaKC47u6bhK51LANi+swX+8Jyq37qOP9ddW7wRf92qiH9eFpiitlIktUKK
-X-Google-Smtp-Source: AGHT+IG2QSia+pqq7pQb/RgZH7dPW4LfCNk4j/lwNSmjg+mmOj+PY1NlVhF5Eyeo9wfiKu01ckwckA==
-X-Received: by 2002:a05:6512:ba6:b0:545:2fa7:5a8b with SMTP id 2adb3069b0e04-5452fe3aaafmr5144347e87.27.1739889351902;
-        Tue, 18 Feb 2025 06:35:51 -0800 (PST)
-Received: from rayden.urgonet (h-98-128-140-123.A175.priv.bahnhof.se. [98.128.140.123])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-309311777a8sm12360831fa.25.2025.02.18.06.35.49
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 18 Feb 2025 06:35:50 -0800 (PST)
-From: Jens Wiklander <jens.wiklander@linaro.org>
-To: linux-kernel@vger.kernel.org,
-	linux-media@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	linaro-mm-sig@lists.linaro.org,
-	op-tee@lists.trustedfirmware.org,
-	linux-arm-kernel@lists.infradead.org
-Date: Tue, 18 Feb 2025 15:34:56 +0100
-Message-ID: <20250218143527.1236668-8-jens.wiklander@linaro.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250218143527.1236668-1-jens.wiklander@linaro.org>
-References: <20250218143527.1236668-1-jens.wiklander@linaro.org>
+        d=1e100.net; s=20230601; t=1739895743; x=1740500543;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=KjXMgQyDFOilO3Xu47Ib173LdeZX8gmPYDyKndrcKnk=;
+        b=HjpmBpMgqaqqZpfkhWimL5nspeXfsyhrOFPqO4NCXSNk/qCQPdxY74nOBZbzjNcvxW
+         sTaHd4AhOiSE/a5g4J0iDfx4pwhdApNNFO7UH6ueOAXjOj5nC0+FP2pDp0uBvmpp4QJA
+         uck5Rz/UNNGH+IAPq3gOI9CgzNWOzU/MpvM0ziuJeYOLqlrr6ACGMz3Fc2MtfkjiKk5U
+         qT3CY0xtuuPGHSoK019dXlcdUgeJDKAIFECkvEp8XOZ+Q4ofW96l67Keo1TqLwNlQd6t
+         dOHQuBwXteoAB5VQpyhCHdCxz5uVutKqcUJBw9OyhY7jFGmpgAqpbhaLRHU8X/RuoDOV
+         rIBQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXH4TLB1MAXLGQlb2XnUbxCo/6zq351RHyhBpJMT20zCqQnhXFTC6Cew+Cj0pVgd2xtsOpCmL1wssSxNJVk@lists.linaro.org
+X-Gm-Message-State: AOJu0YzA95uxZNNzgsl1HFgKF4Ub0LP3vqE3V4PlESY0+xoYswHuueb4
+	C+ULG/Z/juAXtaDTHu35agy5+cKAeF6MoxaE+8fHQof6QUyEZH3DAfb9QUgqjDyt6ZpIEACNmxH
+	OUk22OwrzXylKsZ1G58JhAqMWhOjMi/egEM2Rzg==
+X-Gm-Gg: ASbGncskEOdr8k6ny3CRPb8trlSMU9pzwyD1hnhhshkx0iKR2P4Pr0DjA613TA1Burr
+	9ffGNjcadXDiTleG0m4XyLjfE6zM6ypIlcapItRAJtxwRqPBh6Jzj5tBGrZCng80h8ZQnsw==
+X-Google-Smtp-Source: AGHT+IEbV3293ASWpwU6KwIQOOU1vJS5NgcKsmd6eL12KHdOz9KO5J5HKfrJx309aUhi1VkMOaqfdyrVi2QFW0IL94s=
+X-Received: by 2002:a05:620a:1905:b0:7c0:7303:8d78 with SMTP id
+ af79cd13be357-7c0b534e90cmr15243285a.44.1739895742877; Tue, 18 Feb 2025
+ 08:22:22 -0800 (PST)
 MIME-Version: 1.0
+References: <20241217100809.3962439-1-jens.wiklander@linaro.org>
+ <20250212205613.4400a888@collabora.com> <CAFA6WYOaGEPj0xNEDBCoEmjJreEHChjQ2hyXRJ_CYoGhiBonfw@mail.gmail.com>
+ <20250213093557.278f5d19@collabora.com> <CAFA6WYOJkSRsH-15QdqXNMd08Q=Dg4NkRd1Cr9LXA+5nozTF6g@mail.gmail.com>
+ <20250213134008.4cbef142@collabora.com> <CAPj87rM5Y=-Jgf4mwukicF6Yb-vccn2fpG2X1jNq0upH2+cAEQ@mail.gmail.com>
+ <CAHUa44G9hw-z6wzxg=HkVAxPKEW1yES5JTEqRWMvJUJAtcUDkQ@mail.gmail.com>
+ <CAPj87rPHnME5Osgnf5-FSAu22mDpLj=dzvhi_NqEcOwr1ThgGw@mail.gmail.com>
+ <CAHUa44Gs0D1fBD0=+EDgcQUMeDv4knci9trUkYEc1J98qFV7HQ@mail.gmail.com>
+ <CAFA6WYOuTwRPEh3L7+hMyARB_E73xmp+OwhKyS-r4+ryS7=9sw@mail.gmail.com>
+ <20250214164856.0d2ead8a@collabora.com> <CAFA6WYPc6EHQwcPuMZRm4C1P6SoDrCzEPUmju_meupB6NXQ1sg@mail.gmail.com>
+In-Reply-To: <CAFA6WYPc6EHQwcPuMZRm4C1P6SoDrCzEPUmju_meupB6NXQ1sg@mail.gmail.com>
+From: Daniel Stone <daniel@fooishbar.org>
+Date: Tue, 18 Feb 2025 16:22:10 +0000
+X-Gm-Features: AWEUYZm4DmHXwV4iRPDNo2H2j8DSqPPY_t2q4WxWwnT6ATyeMsQki0rC9akhuRA
+Message-ID: <CAPj87rN-OYTzh5=Gdv619UQD5=x=U6Yt=uV4N1kCs4Zao4RVAg@mail.gmail.com>
+To: Boris Brezillon <boris.brezillon@collabora.com>,
+	Jens Wiklander <jens.wiklander@linaro.org>,
+	Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+	Linux Media Mailing List <linux-media@vger.kernel.org>, dri-devel <dri-devel@lists.freedesktop.org>,
+	"moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, op-tee@lists.trustedfirmware.org,
+	linux-arm-kernel <linux-arm-kernel@lists.infradead.org>,
+	Olivier Masse <olivier.masse@nxp.com>, Thierry Reding <thierry.reding@gmail.com>,
+	Yong Wu <yong.wu@mediatek.com>, Sumit Semwal <sumit.semwal@linaro.org>,
+	Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>,
+	John Stultz <jstultz@google.com>, "T . J . Mercier" <tjmercier@google.com>,
+	=?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+	Matthias Brugger <matthias.bgg@gmail.com>,
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, azarrabi@qti.qualcomm.com,
+	Florent Tomasin <florent.tomasin@arm.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 4F81544981
-X-Spamd-Bar: -----
-X-Spamd-Result: default: False [-5.00 / 15.00];
-	REPLY(-4.00)[];
-	BAYES_HAM(-3.00)[100.00%];
+X-Rspamd-Queue-Id: 85F0442501
+X-Spamd-Bar: /
+X-Spamd-Result: default: False [-0.99 / 15.00];
+	BAYES_HAM(-2.99)[99.96%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
-	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
+	RBL_SENDERSCORE_REPUT_7(0.50)[209.85.222.172:from];
+	BAD_REP_POLICIES(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
-	RCPT_COUNT_TWELVE(0.00)[21];
+	RCVD_TLS_LAST(0.00)[];
+	R_DKIM_ALLOW(0.00)[fooishbar.org:s=google];
+	DMARC_NA(0.00)[fooishbar.org];
+	FREEMAIL_TO(0.00)[collabora.com,linaro.org,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.trustedfirmware.org,lists.infradead.org,nxp.com,gmail.com,mediatek.com,arm.com,google.com,amd.com,qti.qualcomm.com];
+	DKIM_TRACE(0.00)[fooishbar.org:+];
 	MIME_TRACE(0.00)[0:+];
 	ARC_NA(0.00)[];
-	FREEMAIL_CC(0.00)[nxp.com,gmail.com,mediatek.com,linaro.org,collabora.com,arm.com,google.com,amd.com,qti.qualcomm.com,ffwll.ch];
-	RCVD_TLS_LAST(0.00)[];
-	URIBL_BLOCKED(0.00)[linaro.org:dkim,linaro.org:mid,linaro.org:email];
-	DKIM_TRACE(0.00)[linaro.org:+];
-	RBL_NIXSPAM_FAIL(0.00)[209.85.167.50:server fail];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RBL_NIXSPAM_FAIL(0.00)[209.85.222.172:server fail];
+	RCVD_COUNT_ONE(0.00)[1];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_EQ_ENVFROM(0.00)[];
-	TO_DN_SOME(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.167.50:from];
-	RBL_SENDERSCORE_REPUT_8(0.00)[209.85.167.50:from];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[21];
 	TAGGED_RCPT(0.00)[];
+	R_SPF_ALLOW(0.00)[+ip4:209.85.128.0/17];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.222.172:from];
 	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FROM_HAS_DN(0.00)[]
+	MISSING_XM_UA(0.00)[];
+	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
-Message-ID-Hash: ZXWL42EPEARTRISI2BDDMZUNSE7CXVFM
-X-Message-ID-Hash: ZXWL42EPEARTRISI2BDDMZUNSE7CXVFM
-X-MailFrom: jens.wiklander@linaro.org
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Olivier Masse <olivier.masse@nxp.com>, Thierry Reding <thierry.reding@gmail.com>, Yong Wu <yong.wu@mediatek.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T . J . Mercier" <tjmercier@google.com>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Sumit Garg <sumit.garg@linaro.org>, Matthias Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, azarrabi@qti.qualcomm.com, Simona Vetter <simona.vetter@ffwll.ch>, Jens Wiklander <jens.wiklander@linaro.org>
+Message-ID-Hash: DYEP7ZX7UEXPGUMSPS7NC7NXKYJN4JWA
+X-Message-ID-Hash: DYEP7ZX7UEXPGUMSPS7NC7NXKYJN4JWA
+X-MailFrom: daniel@fooishbar.org
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v5 7/7] optee: smc abi: dynamic restricted memory allocation
+Subject: [Linaro-mm-sig] Re: [PATCH v4 0/6] TEE subsystem for restricted dma-buf allocations
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZXWL42EPEARTRISI2BDDMZUNSE7CXVFM/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DYEP7ZX7UEXPGUMSPS7NC7NXKYJN4JWA/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -122,133 +126,131 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Add support in the OP-TEE backend driver for dynamic restricted memory
-allocation using the SMC ABI.
+Hi Sumit,
 
-Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
----
- drivers/tee/optee/smc_abi.c | 76 +++++++++++++++++++++++++++++++++++--
- 1 file changed, 73 insertions(+), 3 deletions(-)
+On Mon, 17 Feb 2025 at 06:13, Sumit Garg <sumit.garg@linaro.org> wrote:
+> On Fri, 14 Feb 2025 at 21:19, Boris Brezillon <boris.brezillon@collabora.com> wrote:
+> > I would say one heap per-profile.
+>
+> And then it would have a per vendor multiplication factor as each
+> vendor enforces memory restriction in a platform specific manner which
+> won't scale.
 
-diff --git a/drivers/tee/optee/smc_abi.c b/drivers/tee/optee/smc_abi.c
-index 11589e5120c9..ca0cb5045f5b 100644
---- a/drivers/tee/optee/smc_abi.c
-+++ b/drivers/tee/optee/smc_abi.c
-@@ -1001,6 +1001,67 @@ static int optee_smc_do_call_with_arg(struct tee_context *ctx,
- 	return rc;
- }
- 
-+static int optee_smc_lend_rstmem(struct optee *optee, struct tee_shm *rstmem,
-+				 u16 *end_points, unsigned int ep_count)
-+{
-+	struct optee_shm_arg_entry *entry;
-+	struct optee_msg_arg *msg_arg;
-+	struct tee_shm *shm;
-+	u_int offs;
-+	int rc;
-+
-+	msg_arg = optee_get_msg_arg(optee->ctx, 2, &entry, &shm, &offs);
-+	if (IS_ERR(msg_arg))
-+		return PTR_ERR(msg_arg);
-+
-+	msg_arg->cmd = OPTEE_MSG_CMD_LEND_RSTMEM;
-+	msg_arg->params[0].attr = OPTEE_MSG_ATTR_TYPE_VALUE_INPUT;
-+	msg_arg->params[0].u.value.a = OPTEE_MSG_RSTMEM_SECURE_VIDEO_PLAY;
-+	msg_arg->params[1].attr = OPTEE_MSG_ATTR_TYPE_TMEM_INPUT;
-+	msg_arg->params[1].u.tmem.buf_ptr = rstmem->paddr;
-+	msg_arg->params[1].u.tmem.size = rstmem->size;
-+	msg_arg->params[1].u.tmem.shm_ref = (u_long)rstmem;
-+
-+	rc = optee->ops->do_call_with_arg(optee->ctx, shm, offs, false);
-+	if (rc)
-+		goto out;
-+	if (msg_arg->ret != TEEC_SUCCESS) {
-+		rc = -EINVAL;
-+		goto out;
-+	}
-+
-+out:
-+	optee_free_msg_arg(optee->ctx, entry, offs);
-+	return rc;
-+}
-+
-+static int optee_smc_reclaim_rstmem(struct optee *optee, struct tee_shm *rstmem)
-+{
-+	struct optee_shm_arg_entry *entry;
-+	struct optee_msg_arg *msg_arg;
-+	struct tee_shm *shm;
-+	u_int offs;
-+	int rc;
-+
-+	msg_arg = optee_get_msg_arg(optee->ctx, 1, &entry, &shm, &offs);
-+	if (IS_ERR(msg_arg))
-+		return PTR_ERR(msg_arg);
-+
-+	msg_arg->cmd = OPTEE_MSG_CMD_RECLAIM_RSTMEM;
-+	msg_arg->params[0].attr = OPTEE_MSG_ATTR_TYPE_RMEM_INPUT;
-+	msg_arg->params[0].u.rmem.shm_ref = (u_long)rstmem;
-+
-+	rc = optee->ops->do_call_with_arg(optee->ctx, shm, offs, false);
-+	if (rc)
-+		goto out;
-+	if (msg_arg->ret != TEEC_SUCCESS)
-+		rc = -EINVAL;
-+
-+out:
-+	optee_free_msg_arg(optee->ctx, entry, offs);
-+	return rc;
-+}
-+
- /*
-  * 5. Asynchronous notification
-  */
-@@ -1258,6 +1319,8 @@ static const struct optee_ops optee_ops = {
- 	.do_call_with_arg = optee_smc_do_call_with_arg,
- 	.to_msg_param = optee_to_msg_param,
- 	.from_msg_param = optee_from_msg_param,
-+	.lend_rstmem = optee_smc_lend_rstmem,
-+	.reclaim_rstmem = optee_smc_reclaim_rstmem,
- };
- 
- static int enable_async_notif(optee_invoke_fn *invoke_fn)
-@@ -1628,6 +1691,9 @@ static inline int optee_load_fw(struct platform_device *pdev,
- 
- static int optee_sdp_pool_init(struct optee *optee)
- {
-+	bool dyn_sdp = (optee->smc.sec_caps &
-+			OPTEE_SMC_SEC_CAP_DYNAMIC_RSTMEM) &&
-+		       IS_ENABLED(CONFIG_CMA) && !IS_MODULE(CONFIG_OPTEE);
- 	bool sdp = optee->smc.sec_caps & OPTEE_SMC_SEC_CAP_SDP;
- 	struct tee_shm_pool *pool;
- 	int rc;
-@@ -1635,9 +1701,11 @@ static int optee_sdp_pool_init(struct optee *optee)
- 	/*
- 	 * optee_sdp_pools_init() must be called if secure world has any
- 	 * SDP capability. If the static carvout is available initialize
--	 * and add a pool for that.
-+	 * and add a pool for that. If there's an error from secure world
-+	 * we complain but don't call optee_sdp_pools_uninit() unless we
-+	 * know that there is no SDP capability left.
- 	 */
--	if (!sdp)
-+	if (!dyn_sdp && !sdp)
- 		return 0;
- 
- 	rc = optee_rstmem_pools_init(optee);
-@@ -1654,7 +1722,9 @@ static int optee_sdp_pool_init(struct optee *optee)
- 				     0, &res.smccc);
- 		if (res.result.status != OPTEE_SMC_RETURN_OK) {
- 			pr_err("Secure Data Path service not available\n");
--			goto err;
-+			if (!dyn_sdp)
-+				goto err;
-+			return 0;
- 		}
- 
- 		pool = tee_rstmem_gen_pool_alloc(res.result.start,
--- 
-2.43.0
+Yes, they do enforce it in a platform-specific manner, but so does
+TEE. There is no one golden set of semantics which is globally
+applicable between all hardware and all products in a useful manner.
 
+So, if we define protected,secure-video +
+protected,secure-video-record + protected,trusted-ui heap names, we
+have exactly the same number of axes. The only change is from uint32_t
+to string.
+
+> > > Christian gave an historical background here [1] as to why that hasn't
+> > > worked in the past with DMA heaps given the scalability issues.
+> > >
+> > > [1] https://lore.kernel.org/dri-devel/e967e382-6cca-4dee-8333-39892d532f71@gmail.com/
+> >
+> > Hm, I fail to see where Christian dismiss the dma-heaps solution in
+> > this email. He even says:
+> >
+> > > If the memory is not physically attached to any device, but rather just
+> > memory attached to the CPU or a system wide memory controller then
+> > expose the memory as DMA-heap with specific requirements (e.g. certain
+> > sized pages, contiguous, restricted, encrypted, ...).
+>
+> I am not saying Christian dismissed DMA heaps but rather how
+> scalability is an issue. What we are proposing here is a generic
+> interface via TEE to the firmware/Trusted OS which can perform all the
+> platform specific memory restrictions. This solution will scale across
+> vendors.
+
+I read something completely different into Christian's mail.
+
+What Christian is saying is that injecting generic constraint solving
+into the kernel doesn't scale. It's not OK to build out generic
+infrastructure in the kernel which queries a bunch of leaf drivers and
+attempts to somehow come up with something which satisfies
+userspace-provided constraints.
+
+But this isn't the same thing as saying 'dma-heaps is wrong'! Again,
+there is no additional complexity in the kernel between a dma-heap
+which bridges over to TEE, and a TEE userspace interface which also
+bridges over to TEE. Both of them are completely fine according to
+what he's said.
+
+> > Honestly, when I look at dma-heap implementations, they seem
+> > to be trivial shells around existing (more complex) allocators, and the
+> > boiler plate [1] to expose a dma-heap is relatively small. The dma-buf
+> > implementation, you already have, so we're talking about a hundred
+> > lines of code to maintain, which shouldn't be significantly more than
+> > what you have for the new ioctl() to be honest.
+>
+> It will rather be redundant vendor specific code under DMA heaps
+> calling into firmware/Trusted OS to enforce memory restrictions as you
+> can look into Mediatek example [1]. With TEE subsystem managing that
+> it won't be the case as we will provide a common abstraction for the
+> communication with underlying firmware/Trusted OS.
+
+Yes, it's common for everyone who uses TEE to implement SVP. It's not
+common for the people who do _not_ use TEE to implement SVP. Which
+means that userspace has to type out both, and what we're asking in
+this thread is: why?
+
+Why should userspace have to support dma-heap allocation for platforms
+supporting SVP via a static DT-defined carveout as well as supporting
+TEE API allocation for platforms supporting SVP via a dynamic
+carveout? What benefit does it bring to have this surfaced as a
+completely separate uAPI?
+
+> > And I'll insist on what
+> > Daniel said, it's a small price to pay to have a standard interface to
+> > expose to userspace. If dma-heaps are not used for this kind things, I
+> > honestly wonder what they will be used for...
+>
+> Let's try not to forcefully find a use-case for DMA heaps when there
+> is a better alternative available.
+
+What makes it better? If you could explain very clearly the benefit
+userspace will gain from asking TEE to allocate $n bytes for
+TEE_IOC_UC_SECURE_VIDEO_PLAY, compared to asking dma-heap to allocate
+$n bytes for protected,secure-video, I think that would really help.
+Right now, I don't understand how it would be better in any way
+whatsoever for userspace. And I think your decision to implement it as
+a separate API is based on a misunderstanding of Christian's position.
+
+> I am still failing to see why you
+> don't consider following as a standardised user-space interface:
+>
+> "When user-space has to work with restricted memory, ask TEE device to
+> allocate it"
+
+As far as I can tell, having userspace work with the TEE interface
+brings zero benefit (again, please correct me if I'm wrong and explain
+how it's better). The direct cost - call it a disbenefit - it brings
+is that we have to spend a pile of time typing out support for TEE
+allocation in every media/GPU/display driver/application, and when we
+do any kind of negotiation, we have to have one protocol definition
+for TEE and one for non-TEE.
+
+dma-heaps was created to solve the problem of having too many
+'allocate $n bytes from $specialplace' uAPIs. The proliferation was
+painful and making it difficult for userspace to do what it needed to
+do. Userspace doesn't _yet_ make full use of it, but the solution is
+to make userspace make full use of it, not to go create entirely
+separate allocation paths for unclear reasons.
+
+Besides, I'm writing this from a platform that implements SVP not via
+TEE. I've worked on platforms which implement SVP without any TEE,
+where the TEE implementation would be at best a no-op stub, and at
+worst flat-out impossible.
+
+So that's 'why not TEE as the single uAPI for SVP'. So, again, let's
+please turn this around: _why_ TEE? Who benefits from exposing this as
+completely separate to the more generic uAPI that we specifically
+designed to handle things like this?
+
+Cheers,
+Daniel
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
