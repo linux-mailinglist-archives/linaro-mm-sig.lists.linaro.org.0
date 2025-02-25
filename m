@@ -2,75 +2,75 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4C774A437BD
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 25 Feb 2025 09:35:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3F617A437E9
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 25 Feb 2025 09:44:12 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3AC6C44D1B
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 25 Feb 2025 08:35:39 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 1A63644D1C
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 25 Feb 2025 08:44:11 +0000 (UTC)
 Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
-	by lists.linaro.org (Postfix) with ESMTPS id 9384141116
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 25 Feb 2025 08:35:35 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 06F6F40B9E
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 25 Feb 2025 08:44:07 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=1OM5i+fQ;
-	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b="c3kQ/xhV";
-	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=1OM5i+fQ;
-	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b="c3kQ/xhV";
+	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=d+W4wwim;
+	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=3I1ztK52;
+	dkim=pass header.d=suse.de header.s=susede2_rsa header.b="n9MKxe/F";
+	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=IJdzNMEm;
 	dmarc=pass (policy=none) header.from=suse.de;
 	spf=pass (lists.linaro.org: domain of tzimmermann@suse.de designates 195.135.223.131 as permitted sender) smtp.mailfrom=tzimmermann@suse.de
 Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
 	(No client certificate requested)
-	by smtp-out2.suse.de (Postfix) with ESMTPS id 752861F44F;
-	Tue, 25 Feb 2025 08:35:34 +0000 (UTC)
+	by smtp-out2.suse.de (Postfix) with ESMTPS id DC6DE1F44F;
+	Tue, 25 Feb 2025 08:44:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1740472534; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1740473046; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=uMM5bLzA9j3o8sps9jmcrBs0joj/12hdiYZwkw2d5Ic=;
-	b=1OM5i+fQhp5KLs1nYvViBJZ8kVPoyXj4y3l7fa6l//EcEX8dKWl4rj44A6F7VfQZf+coDw
-	ZG46+roFJXxvsMStEc9ClVQ5Xj530S60T/5lGQFXJKCEPR0I9H7qwyNZKQA5b8na3qRh4s
-	Jo2yOkWK9C6jrHVkvJYzIexMnBLC/F4=
+	bh=d+fpTNHdP4ep6ZfjWqB9fVEA1xmGCSlF8OJHmw0RTQU=;
+	b=d+W4wwimeritLKGrCpFnK6OoC88VuSKeeUj0MTw4zWGE9hWNprTenxbkOgjRKSnPuxb5Qk
+	fdrtSTFUGowbJjCFY6BN1o3dWd+J4twLwRAP3kWrYuUDBDVZiJOyabFHaOqzO5QmFVd15X
+	y7n5nVUic2OUSmj14JqViSNM7AYuJpc=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1740472534;
+	s=susede2_ed25519; t=1740473046;
 	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=uMM5bLzA9j3o8sps9jmcrBs0joj/12hdiYZwkw2d5Ic=;
-	b=c3kQ/xhVLYX7YyKktt3AuPVpQAKgoWwmIpGUZHF0FZdNhVovlgb8VXo3UdsVGJjXa0hZAS
-	2iR3L5kLqgZTApDQ==
+	bh=d+fpTNHdP4ep6ZfjWqB9fVEA1xmGCSlF8OJHmw0RTQU=;
+	b=3I1ztK52jH9kF6gowGpIVbncNPDah+ZV/9afkeiVtcnXAzUnQZbixWhPE8w9oOT8/5Des1
+	U4U2hPq4MEC+ykBQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1740472534; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1740473044; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=uMM5bLzA9j3o8sps9jmcrBs0joj/12hdiYZwkw2d5Ic=;
-	b=1OM5i+fQhp5KLs1nYvViBJZ8kVPoyXj4y3l7fa6l//EcEX8dKWl4rj44A6F7VfQZf+coDw
-	ZG46+roFJXxvsMStEc9ClVQ5Xj530S60T/5lGQFXJKCEPR0I9H7qwyNZKQA5b8na3qRh4s
-	Jo2yOkWK9C6jrHVkvJYzIexMnBLC/F4=
+	bh=d+fpTNHdP4ep6ZfjWqB9fVEA1xmGCSlF8OJHmw0RTQU=;
+	b=n9MKxe/FO0zb7iWIsDXtRwuoPmYoH0+X/DlCfWqhMtl71rHxtwsX3OEFSbB1I7beKgcDHA
+	jbvxBvcuRF/n5xi5D5s9ZxYlMlxyvJsxA14uXUMUmacOWfVrI13/86AgW9PBRuFJeKfp07
+	qoNT4WStoZl/JS0i6un3UwJj2SWseBQ=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1740472534;
+	s=susede2_ed25519; t=1740473044;
 	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=uMM5bLzA9j3o8sps9jmcrBs0joj/12hdiYZwkw2d5Ic=;
-	b=c3kQ/xhVLYX7YyKktt3AuPVpQAKgoWwmIpGUZHF0FZdNhVovlgb8VXo3UdsVGJjXa0hZAS
-	2iR3L5kLqgZTApDQ==
+	bh=d+fpTNHdP4ep6ZfjWqB9fVEA1xmGCSlF8OJHmw0RTQU=;
+	b=IJdzNMEm2UkaEx7ZAdgCnOzyIXLkhC3g8ZX7hB49oEcGdWdg9qWz/U25lGHQiQF6e6a7cI
+	HJU6ntXp/SfUkTCw==
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
 	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id D0F4C13A61;
-	Tue, 25 Feb 2025 08:35:33 +0000 (UTC)
+	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 41BD213A61;
+	Tue, 25 Feb 2025 08:44:04 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
 	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id 6F3SMdWAvWcsAwAAD6G6ig
-	(envelope-from <tzimmermann@suse.de>); Tue, 25 Feb 2025 08:35:33 +0000
-Message-ID: <f64d3e4c-86d3-4c7f-969a-0e8123a5c9b8@suse.de>
-Date: Tue, 25 Feb 2025 09:35:33 +0100
+	id hFIpDtSCvWckBgAAD6G6ig
+	(envelope-from <tzimmermann@suse.de>); Tue, 25 Feb 2025 08:44:04 +0000
+Message-ID: <d40fddec-553a-4bc0-934e-bb89025be5a3@suse.de>
+Date: Tue, 25 Feb 2025 09:44:03 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Tomeu Vizoso <tomeu@tomeuvizoso.net>, Rob Herring <robh@kernel.org>,
@@ -84,7 +84,7 @@ To: Tomeu Vizoso <tomeu@tomeuvizoso.net>, Rob Herring <robh@kernel.org>,
  Sebastian Reichel <sebastian.reichel@collabora.com>,
  Jeffrey Hugo <quic_jhugo@quicinc.com>
 References: <20250225-6-10-rocket-v2-0-d4dbcfafc141@tomeuvizoso.net>
- <20250225-6-10-rocket-v2-5-d4dbcfafc141@tomeuvizoso.net>
+ <20250225-6-10-rocket-v2-6-d4dbcfafc141@tomeuvizoso.net>
 Content-Language: en-US
 From: Thomas Zimmermann <tzimmermann@suse.de>
 Autocrypt: addr=tzimmermann@suse.de; keydata=
@@ -111,277 +111,1137 @@ Autocrypt: addr=tzimmermann@suse.de; keydata=
  SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
  Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
  4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
-In-Reply-To: <20250225-6-10-rocket-v2-5-d4dbcfafc141@tomeuvizoso.net>
+In-Reply-To: <20250225-6-10-rocket-v2-6-d4dbcfafc141@tomeuvizoso.net>
 X-Spam-Score: -3.01
 X-Spam-Flag: NO
 X-Spam-Level: 
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 9384141116
+X-Rspamd-Queue-Id: 06F6F40B9E
 X-Spamd-Bar: ---
-X-Spamd-Result: default: False [-3.20 / 15.00];
+X-Spamd-Result: default: False [-3.50 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	RCVD_DKIM_ARC_DNSWL_MED(-0.50)[];
+	RBL_SENDERSCORE_REPUT_9(-1.00)[195.135.223.131:from];
 	DMARC_POLICY_ALLOW(-0.50)[suse.de,none];
-	RCVD_IN_DNSWL_MED(-0.20)[195.135.223.131:from];
 	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
 	R_SPF_ALLOW(-0.20)[+ip4:195.135.223.131/32];
 	MIME_GOOD(-0.10)[text/plain];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	MIME_TRACE(0.00)[0:+];
-	URIBL_BLOCKED(0.00)[suse.de:mid,suse.de:dkim,tomeuvizoso.net:email,smtp-out2.suse.de:rdns,smtp-out2.suse.de:helo];
 	ARC_NA(0.00)[];
-	FREEMAIL_TO(0.00)[tomeuvizoso.net,kernel.org,sntech.de,lwn.net,linux.intel.com,gmail.com,ffwll.ch,linaro.org,amd.com,collabora.com,quicinc.com];
-	RCVD_COUNT_THREE(0.00)[3];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	RCVD_TLS_ALL(0.00)[];
-	DKIM_TRACE(0.00)[suse.de:+];
-	DNSWL_BLOCKED(0.00)[2a07:de40:b281:104:10:150:64:97:received,2a07:de40:b281:106:10:150:64:167:received];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
+	MIME_TRACE(0.00)[0:+];
+	ASN(0.00)[asn:29298, ipnet:195.135.223.0/24, country:DE];
+	RCPT_COUNT_TWELVE(0.00)[23];
 	TAGGED_RCPT(0.00)[dt];
 	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:29298, ipnet:195.135.223.0/24, country:DE];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FROM_HAS_DN(0.00)[]
+	TO_DN_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_TO(0.00)[tomeuvizoso.net,kernel.org,sntech.de,lwn.net,linux.intel.com,gmail.com,ffwll.ch,linaro.org,amd.com,collabora.com,quicinc.com];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
+	URIBL_BLOCKED(0.00)[suse.de:mid,suse.de:dkim];
+	NEURAL_HAM(-0.00)[-1.000];
+	DKIM_TRACE(0.00)[suse.de:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: MW5DKURPWOYLZLBVNLCVWLNM7CIHRHL7
-X-Message-ID-Hash: MW5DKURPWOYLZLBVNLCVWLNM7CIHRHL7
+Message-ID-Hash: JNLBVW2JBVKW45ARJ4PVGNC25HDGIQO2
+X-Message-ID-Hash: JNLBVW2JBVKW45ARJ4PVGNC25HDGIQO2
 X-MailFrom: tzimmermann@suse.de
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 5/7] accel/rocket: Add IOCTL for BO creation
+Subject: [Linaro-mm-sig] Re: [PATCH v2 6/7] accel/rocket: Add job submission IOCTL
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MW5DKURPWOYLZLBVNLCVWLNM7CIHRHL7/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JNLBVW2JBVKW45ARJ4PVGNC25HDGIQO2/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Transfer-Encoding: 7bit
 
-SGkNCg0KQW0gMjUuMDIuMjUgdW0gMDg6NTUgc2NocmllYiBUb21ldSBWaXpvc286DQo+IFRoaXMg
-dXNlcyB0aGUgU0hNRU0gRFJNIGhlbHBlcnMgYW5kIHdlIG1hcCByaWdodCBhd2F5IHRvIHRoZSBD
-UFUgYW5kIE5QVQ0KPiBzaWRlcywgYXMgYWxsIGJ1ZmZlcnMgYXJlIGV4cGVjdGVkIHRvIGJlIGFj
-Y2Vzc2VkIGZyb20gYm90aC4NCj4NCj4gdjI6DQo+IC0gU3luYyB0aGUgSU9NTVVzIGZvciB0aGUg
-b3RoZXIgY29yZXMgd2hlbiBtYXBwaW5nIGFuZCB1bm1hcHBpbmcuDQo+DQo+IFNpZ25lZC1vZmYt
-Ynk6IFRvbWV1IFZpem9zbyA8dG9tZXVAdG9tZXV2aXpvc28ubmV0Pg0KPiAtLS0NCj4gICBkcml2
-ZXJzL2FjY2VsL3JvY2tldC9NYWtlZmlsZSAgICAgICAgfCAgIDMgKy0NCj4gICBkcml2ZXJzL2Fj
-Y2VsL3JvY2tldC9yb2NrZXRfZGV2aWNlLmMgfCAgIDQgKw0KPiAgIGRyaXZlcnMvYWNjZWwvcm9j
-a2V0L3JvY2tldF9kZXZpY2UuaCB8ICAgMiArDQo+ICAgZHJpdmVycy9hY2NlbC9yb2NrZXQvcm9j
-a2V0X2Rydi5jICAgIHwgICA3ICstDQo+ICAgZHJpdmVycy9hY2NlbC9yb2NrZXQvcm9ja2V0X2dl
-bS5jICAgIHwgMTQxICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrDQo+ICAgZHJp
-dmVycy9hY2NlbC9yb2NrZXQvcm9ja2V0X2dlbS5oICAgIHwgIDI3ICsrKysrKysNCj4gICBpbmNs
-dWRlL3VhcGkvZHJtL3JvY2tldF9hY2NlbC5oICAgICAgfCAgNDMgKysrKysrKysrKysNCj4gICA3
-IGZpbGVzIGNoYW5nZWQsIDIyNSBpbnNlcnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQ0KPg0KPiBk
-aWZmIC0tZ2l0IGEvZHJpdmVycy9hY2NlbC9yb2NrZXQvTWFrZWZpbGUgYi9kcml2ZXJzL2FjY2Vs
-L3JvY2tldC9NYWtlZmlsZQ0KPiBpbmRleCA3M2E3MjgwZDI2MGMwNjhkMzdhZDMwNDg4MjRmNzEw
-NDgyMzMzNTQwLi44NzVjYWMyMjQzZDkwMjY5NGUwZDVkMDVlNjBiNGFlNTUxYTYzM2M0IDEwMDY0
-NA0KPiAtLS0gYS9kcml2ZXJzL2FjY2VsL3JvY2tldC9NYWtlZmlsZQ0KPiArKysgYi9kcml2ZXJz
-L2FjY2VsL3JvY2tldC9NYWtlZmlsZQ0KPiBAQCAtNSw0ICs1LDUgQEAgb2JqLSQoQ09ORklHX0RS
-TV9BQ0NFTF9ST0NLRVQpIDo9IHJvY2tldC5vDQo+ICAgcm9ja2V0LXkgOj0gXA0KPiAgIAlyb2Nr
-ZXRfY29yZS5vIFwNCj4gICAJcm9ja2V0X2RldmljZS5vIFwNCj4gLQlyb2NrZXRfZHJ2Lm8NCj4g
-Kwlyb2NrZXRfZHJ2Lm8gXA0KPiArCXJvY2tldF9nZW0ubw0KPiBkaWZmIC0tZ2l0IGEvZHJpdmVy
-cy9hY2NlbC9yb2NrZXQvcm9ja2V0X2RldmljZS5jIGIvZHJpdmVycy9hY2NlbC9yb2NrZXQvcm9j
-a2V0X2RldmljZS5jDQo+IGluZGV4IGNlM2I1MzNmMTVjMTAxMWQ4YTdhMjNkZDgxMzJlOTA3Y2Mz
-MzRjNTguLjlhZjM2MzU3Y2FiYTcxNDhkY2FjNzY0YzgyMjI2OTlmM2I1NzJkNjAgMTAwNjQ0DQo+
-IC0tLSBhL2RyaXZlcnMvYWNjZWwvcm9ja2V0L3JvY2tldF9kZXZpY2UuYw0KPiArKysgYi9kcml2
-ZXJzL2FjY2VsL3JvY2tldC9yb2NrZXRfZGV2aWNlLmMNCj4gQEAgLTEsNiArMSw3IEBADQo+ICAg
-Ly8gU1BEWC1MaWNlbnNlLUlkZW50aWZpZXI6IEdQTC0yLjANCj4gICAvKiBDb3B5cmlnaHQgMjAy
-NCBUb21ldSBWaXpvc28gPHRvbWV1QHRvbWV1dml6b3NvLm5ldD4gKi8NCj4gICANCj4gKyNpbmNs
-dWRlICJsaW51eC9tdXRleC5oIg0KDQpJbmNsdWRlIHdpdGggYW5nbGUgYnJhY2tldHMgcGxlYXNl
-Lg0KDQo+ICAgI2luY2x1ZGUgPGxpbnV4L2Nsay5oPg0KPiAgIA0KPiAgICNpbmNsdWRlICJyb2Nr
-ZXRfZGV2aWNlLmgiDQo+IEBAIC0xMCw2ICsxMSw4IEBAIGludCByb2NrZXRfZGV2aWNlX2luaXQo
-c3RydWN0IHJvY2tldF9kZXZpY2UgKnJkZXYpDQo+ICAgCXN0cnVjdCBkZXZpY2UgKmRldiA9IHJk
-ZXYtPmNvcmVzWzBdLmRldjsNCj4gICAJaW50IGVycjsNCj4gICANCj4gKwltdXRleF9pbml0KCZy
-ZGV2LT5pb21tdV9sb2NrKTsNCg0KSW4gRFJNLCB3ZSBoYXZlIGRybW1fbXV0ZXhfaW5pdCgpIGlu
-IGRybS9kcm1fbWFuYWdlZC5oLiBNYW5hZ2VkIGNsZWFudXAgDQppcyBnZW5lcmFsbHkgcHJlZmVy
-cmVkLg0KDQo+ICsNCj4gICAJcmRldi0+Y2xrX25wdSA9IGRldm1fY2xrX2dldChkZXYsICJucHUi
-KTsNCj4gICAJcmRldi0+cGNsayA9IGRldm1fY2xrX2dldChkZXYsICJwY2xrIik7DQo+ICAgDQo+
-IEBAIC0yNiw0ICsyOSw1IEBAIGludCByb2NrZXRfZGV2aWNlX2luaXQoc3RydWN0IHJvY2tldF9k
-ZXZpY2UgKnJkZXYpDQo+ICAgdm9pZCByb2NrZXRfZGV2aWNlX2Zpbmkoc3RydWN0IHJvY2tldF9k
-ZXZpY2UgKnJkZXYpDQo+ICAgew0KPiAgIAlyb2NrZXRfY29yZV9maW5pKCZyZGV2LT5jb3Jlc1sw
-XSk7DQo+ICsJbXV0ZXhfZGVzdHJveSgmcmRldi0+aW9tbXVfbG9jayk7DQo+ICAgfQ0KPiBkaWZm
-IC0tZ2l0IGEvZHJpdmVycy9hY2NlbC9yb2NrZXQvcm9ja2V0X2RldmljZS5oIGIvZHJpdmVycy9h
-Y2NlbC9yb2NrZXQvcm9ja2V0X2RldmljZS5oDQo+IGluZGV4IDQ2NmVkYmE5MTAyYzVkYzVkZmFj
-NWQzZmNjMWM5MDRmMjA2ZWFlYmIuLmM2MTUyNTY5ZmRkOWU1NTg3YzhlOGQ3YjBkN2MyZTJhNzdh
-ZjYwMDAgMTAwNjQ0DQo+IC0tLSBhL2RyaXZlcnMvYWNjZWwvcm9ja2V0L3JvY2tldF9kZXZpY2Uu
-aA0KPiArKysgYi9kcml2ZXJzL2FjY2VsL3JvY2tldC9yb2NrZXRfZGV2aWNlLmgNCj4gQEAgLTE0
-LDYgKzE0LDggQEAgc3RydWN0IHJvY2tldF9kZXZpY2Ugew0KPiAgIAlzdHJ1Y3QgY2xrICpjbGtf
-bnB1Ow0KPiAgIAlzdHJ1Y3QgY2xrICpwY2xrOw0KPiAgIA0KPiArCXN0cnVjdCBtdXRleCBpb21t
-dV9sb2NrOw0KPiArDQo+ICAgCXN0cnVjdCByb2NrZXRfY29yZSAqY29yZXM7DQo+ICAgCXVuc2ln
-bmVkIGludCBudW1fY29yZXM7DQo+ICAgfTsNCj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvYWNjZWwv
-cm9ja2V0L3JvY2tldF9kcnYuYyBiL2RyaXZlcnMvYWNjZWwvcm9ja2V0L3JvY2tldF9kcnYuYw0K
-PiBpbmRleCBjMjJkOTY1ZjIwZjEyMzlhMzZiMWQ4MjNkNWZlNWYzNzI3MTM1NTVkLi5lNTYxMmI1
-Mjk1MmZhN2EwY2QwYWYwMmFlZjMxNDk4NGJjNDgzYjA1IDEwMDY0NA0KPiAtLS0gYS9kcml2ZXJz
-L2FjY2VsL3JvY2tldC9yb2NrZXRfZHJ2LmMNCj4gKysrIGIvZHJpdmVycy9hY2NlbC9yb2NrZXQv
-cm9ja2V0X2Rydi5jDQo+IEBAIC02LDYgKzYsNyBAQA0KPiAgICNpbmNsdWRlIDxkcm0vZHJtX2dl
-bS5oPg0KPiAgICNpbmNsdWRlIDxkcm0vZHJtX2lvY3RsLmg+DQo+ICAgI2luY2x1ZGUgPGRybS9k
-cm1fb2YuaD4NCj4gKyNpbmNsdWRlIDxkcm0vcm9ja2V0X2FjY2VsLmg+DQo+ICAgI2luY2x1ZGUg
-PGxpbnV4L2Nsay5oPg0KPiAgICNpbmNsdWRlIDxsaW51eC9jb21wb25lbnQuaD4NCj4gICAjaW5j
-bHVkZSA8bGludXgvZG1hLW1hcHBpbmcuaD4NCj4gQEAgLTE0LDYgKzE1LDcgQEANCj4gICAjaW5j
-bHVkZSA8bGludXgvcG1fcnVudGltZS5oPg0KPiAgIA0KPiAgICNpbmNsdWRlICJyb2NrZXRfZHJ2
-LmgiDQo+ICsjaW5jbHVkZSAicm9ja2V0X2dlbS5oIg0KPiAgIA0KPiAgIHN0YXRpYyBpbnQNCj4g
-ICByb2NrZXRfb3BlbihzdHJ1Y3QgZHJtX2RldmljZSAqZGV2LCBzdHJ1Y3QgZHJtX2ZpbGUgKmZp
-bGUpDQo+IEBAIC00Miw2ICs0NCw4IEBAIHJvY2tldF9wb3N0Y2xvc2Uoc3RydWN0IGRybV9kZXZp
-Y2UgKmRldiwgc3RydWN0IGRybV9maWxlICpmaWxlKQ0KPiAgIHN0YXRpYyBjb25zdCBzdHJ1Y3Qg
-ZHJtX2lvY3RsX2Rlc2Mgcm9ja2V0X2RybV9kcml2ZXJfaW9jdGxzW10gPSB7DQo+ICAgI2RlZmlu
-ZSBST0NLRVRfSU9DVEwobiwgZnVuYykgXA0KPiAgIAlEUk1fSU9DVExfREVGX0RSVihST0NLRVRf
-IyNuLCByb2NrZXRfaW9jdGxfIyNmdW5jLCAwKQ0KPiArDQo+ICsJUk9DS0VUX0lPQ1RMKENSRUFU
-RV9CTywgY3JlYXRlX2JvKSwNCj4gICB9Ow0KPiAgIA0KPiAgIERFRklORV9EUk1fQUNDRUxfRk9Q
-Uyhyb2NrZXRfYWNjZWxfZHJpdmVyX2ZvcHMpOw0KPiBAQCAtNTEsOSArNTUsMTAgQEAgREVGSU5F
-X0RSTV9BQ0NFTF9GT1BTKHJvY2tldF9hY2NlbF9kcml2ZXJfZm9wcyk7DQo+ICAgICogLSAxLjAg
-LSBpbml0aWFsIGludGVyZmFjZQ0KPiAgICAqLw0KPiAgIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZHJt
-X2RyaXZlciByb2NrZXRfZHJtX2RyaXZlciA9IHsNCj4gLQkuZHJpdmVyX2ZlYXR1cmVzCT0gRFJJ
-VkVSX0NPTVBVVEVfQUNDRUwsDQo+ICsJLmRyaXZlcl9mZWF0dXJlcwk9IERSSVZFUl9DT01QVVRF
-X0FDQ0VMIHwgRFJJVkVSX0dFTSwNCj4gICAJLm9wZW4JCQk9IHJvY2tldF9vcGVuLA0KPiAgIAku
-cG9zdGNsb3NlCQk9IHJvY2tldF9wb3N0Y2xvc2UsDQo+ICsJLmdlbV9jcmVhdGVfb2JqZWN0CT0g
-cm9ja2V0X2dlbV9jcmVhdGVfb2JqZWN0LA0KPiAgIAkuaW9jdGxzCQkJPSByb2NrZXRfZHJtX2Ry
-aXZlcl9pb2N0bHMsDQo+ICAgCS5udW1faW9jdGxzCQk9IEFSUkFZX1NJWkUocm9ja2V0X2RybV9k
-cml2ZXJfaW9jdGxzKSwNCj4gICAJLmZvcHMJCQk9ICZyb2NrZXRfYWNjZWxfZHJpdmVyX2ZvcHMs
-DQo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2FjY2VsL3JvY2tldC9yb2NrZXRfZ2VtLmMgYi9kcml2
-ZXJzL2FjY2VsL3JvY2tldC9yb2NrZXRfZ2VtLmMNCj4gbmV3IGZpbGUgbW9kZSAxMDA2NDQNCj4g
-aW5kZXggMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMC4uZDUzMzdjZjFl
-Mjc1YzI0OWExNDkxZDBkZDI4ZTZiOGNjZDJmZjJjYg0KPiAtLS0gL2Rldi9udWxsDQo+ICsrKyBi
-L2RyaXZlcnMvYWNjZWwvcm9ja2V0L3JvY2tldF9nZW0uYw0KPiBAQCAtMCwwICsxLDE0MSBAQA0K
-PiArLy8gU1BEWC1MaWNlbnNlLUlkZW50aWZpZXI6IEdQTC0yLjANCj4gKy8qIENvcHlyaWdodCAy
-MDI0IFRvbWV1IFZpem9zbyA8dG9tZXVAdG9tZXV2aXpvc28ubmV0PiAqLw0KPiArDQo+ICsjaW5j
-bHVkZSA8ZHJtL2RybV9kZXZpY2UuaD4NCj4gKyNpbmNsdWRlIDxkcm0vZHJtX3V0aWxzLmg+DQo+
-ICsjaW5jbHVkZSA8ZHJtL3JvY2tldF9hY2NlbC5oPg0KPiArI2luY2x1ZGUgPGxpbnV4L2RtYS1t
-YXBwaW5nLmg+DQo+ICsjaW5jbHVkZSA8bGludXgvaW9tbXUuaD4NCj4gKw0KPiArI2luY2x1ZGUg
-InJvY2tldF9kZXZpY2UuaCINCj4gKyNpbmNsdWRlICJyb2NrZXRfZ2VtLmgiDQo+ICsNCj4gK3N0
-YXRpYyB2b2lkIHJvY2tldF9nZW1fYm9fZnJlZShzdHJ1Y3QgZHJtX2dlbV9vYmplY3QgKm9iaikN
-Cj4gK3sNCj4gKwlzdHJ1Y3Qgcm9ja2V0X2RldmljZSAqcmRldiA9IHRvX3JvY2tldF9kZXZpY2Uo
-b2JqLT5kZXYpOw0KPiArCXN0cnVjdCByb2NrZXRfZ2VtX29iamVjdCAqYm8gPSB0b19yb2NrZXRf
-Ym8ob2JqKTsNCj4gKwlzdHJ1Y3Qgc2dfdGFibGUgKnNndDsNCj4gKw0KPiArCWRybV9XQVJOX09O
-KG9iai0+ZGV2LCBiby0+YmFzZS5wYWdlc191c2VfY291bnQgPiAxKTsNCj4gKw0KPiArCW11dGV4
-X2xvY2soJnJkZXYtPmlvbW11X2xvY2spOw0KPiArDQo+ICsJc2d0ID0gZHJtX2dlbV9zaG1lbV9n
-ZXRfcGFnZXNfc2d0KCZiby0+YmFzZSk7DQo+ICsNCj4gKwkvKiBVbm1hcCB0aGlzIG9iamVjdCBm
-cm9tIHRoZSBJT01NVXMgZm9yIGNvcmVzID4gMCAqLw0KPiArCWZvciAodW5zaWduZWQgaW50IGNv
-cmUgPSAxOyBjb3JlIDwgcmRldi0+bnVtX2NvcmVzOyBjb3JlKyspIHsNCj4gKwkJc3RydWN0IGlv
-bW11X2RvbWFpbiAqZG9tYWluID0gaW9tbXVfZ2V0X2RvbWFpbl9mb3JfZGV2KHJkZXYtPmNvcmVz
-W2NvcmVdLmRldik7DQo+ICsJCXNpemVfdCB1bm1hcHBlZCA9IGlvbW11X3VubWFwKGRvbWFpbiwg
-c2d0LT5zZ2wtPmRtYV9hZGRyZXNzLCBiby0+c2l6ZSk7DQo+ICsNCj4gKwkJZHJtX1dBUk5fT04o
-b2JqLT5kZXYsIHVubWFwcGVkICE9IGJvLT5zaXplKTsNCj4gKwl9DQo+ICsNCj4gKwkvKiBUaGlz
-IHdpbGwgdW5tYXAgdGhlIHBhZ2VzIGZyb20gdGhlIElPTU1VIGxpbmtlZCB0byBjb3JlIDAgKi8N
-Cj4gKwlkcm1fZ2VtX3NobWVtX2ZyZWUoJmJvLT5iYXNlKTsNCj4gKw0KPiArCW11dGV4X3VubG9j
-aygmcmRldi0+aW9tbXVfbG9jayk7DQo+ICt9DQo+ICsNCj4gK3N0YXRpYyBjb25zdCBzdHJ1Y3Qg
-ZHJtX2dlbV9vYmplY3RfZnVuY3Mgcm9ja2V0X2dlbV9mdW5jcyA9IHsNCj4gKwkuZnJlZSA9IHJv
-Y2tldF9nZW1fYm9fZnJlZSwNCj4gKwkucHJpbnRfaW5mbyA9IGRybV9nZW1fc2htZW1fb2JqZWN0
-X3ByaW50X2luZm8sDQo+ICsJLnBpbiA9IGRybV9nZW1fc2htZW1fb2JqZWN0X3BpbiwNCj4gKwku
-dW5waW4gPSBkcm1fZ2VtX3NobWVtX29iamVjdF91bnBpbiwNCj4gKwkuZ2V0X3NnX3RhYmxlID0g
-ZHJtX2dlbV9zaG1lbV9vYmplY3RfZ2V0X3NnX3RhYmxlLA0KPiArCS52bWFwID0gZHJtX2dlbV9z
-aG1lbV9vYmplY3Rfdm1hcCwNCj4gKwkudnVubWFwID0gZHJtX2dlbV9zaG1lbV9vYmplY3RfdnVu
-bWFwLA0KPiArCS5tbWFwID0gZHJtX2dlbV9zaG1lbV9vYmplY3RfbW1hcCwNCj4gKwkudm1fb3Bz
-ID0gJmRybV9nZW1fc2htZW1fdm1fb3BzLA0KPiArfTsNCj4gKw0KPiArLyoqDQo+ICsgKiByb2Nr
-ZXRfZ2VtX2NyZWF0ZV9vYmplY3QgLSBJbXBsZW1lbnRhdGlvbiBvZiBkcml2ZXItPmdlbV9jcmVh
-dGVfb2JqZWN0Lg0KPiArICogQGRldjogRFJNIGRldmljZQ0KPiArICogQHNpemU6IFNpemUgaW4g
-Ynl0ZXMgb2YgdGhlIG1lbW9yeSB0aGUgb2JqZWN0IHdpbGwgcmVmZXJlbmNlDQo+ICsgKg0KPiAr
-ICogVGhpcyBsZXRzIHRoZSBHRU0gaGVscGVycyBhbGxvY2F0ZSBvYmplY3Qgc3RydWN0cyBmb3Ig
-dXMsIGFuZCBrZWVwDQo+ICsgKiBvdXIgQk8gc3RhdHMgY29ycmVjdC4NCj4gKyAqLw0KPiArc3Ry
-dWN0IGRybV9nZW1fb2JqZWN0ICpyb2NrZXRfZ2VtX2NyZWF0ZV9vYmplY3Qoc3RydWN0IGRybV9k
-ZXZpY2UgKmRldiwgc2l6ZV90IHNpemUpDQo+ICt7DQo+ICsJc3RydWN0IHJvY2tldF9nZW1fb2Jq
-ZWN0ICpvYmo7DQo+ICsNCj4gKwlvYmogPSBremFsbG9jKHNpemVvZigqb2JqKSwgR0ZQX0tFUk5F
-TCk7DQo+ICsJaWYgKCFvYmopDQo+ICsJCXJldHVybiBFUlJfUFRSKC1FTk9NRU0pOw0KPiArDQo+
-ICsJb2JqLT5iYXNlLmJhc2UuZnVuY3MgPSAmcm9ja2V0X2dlbV9mdW5jczsNCj4gKw0KPiArCXJl
-dHVybiAmb2JqLT5iYXNlLmJhc2U7DQo+ICt9DQo+ICsNCj4gK2ludCByb2NrZXRfaW9jdGxfY3Jl
-YXRlX2JvKHN0cnVjdCBkcm1fZGV2aWNlICpkZXYsIHZvaWQgKmRhdGEsIHN0cnVjdCBkcm1fZmls
-ZSAqZmlsZSkNCj4gK3sNCj4gKwlzdHJ1Y3QgZHJtX3JvY2tldF9jcmVhdGVfYm8gKmFyZ3MgPSBk
-YXRhOw0KPiArCXN0cnVjdCByb2NrZXRfZGV2aWNlICpyZGV2ID0gdG9fcm9ja2V0X2RldmljZShk
-ZXYpOw0KPiArCXN0cnVjdCBkcm1fZ2VtX3NobWVtX29iamVjdCAqc2htZW1fb2JqOw0KPiArCXN0
-cnVjdCByb2NrZXRfZ2VtX29iamVjdCAqcmt0X29iajsNCj4gKwlzdHJ1Y3QgZHJtX2dlbV9vYmpl
-Y3QgKmdlbV9vYmo7DQo+ICsJc3RydWN0IHNnX3RhYmxlICpzZ3Q7DQo+ICsJaW50IHJldDsNCj4g
-Kw0KPiArCXNobWVtX29iaiA9IGRybV9nZW1fc2htZW1fY3JlYXRlKGRldiwgYXJncy0+c2l6ZSk7
-DQo+ICsJaWYgKElTX0VSUihzaG1lbV9vYmopKQ0KPiArCQlyZXR1cm4gUFRSX0VSUihzaG1lbV9v
-YmopOw0KPiArDQo+ICsJZ2VtX29iaiA9ICZzaG1lbV9vYmotPmJhc2U7DQo+ICsJcmt0X29iaiA9
-IHRvX3JvY2tldF9ibyhnZW1fb2JqKTsNCj4gKw0KPiArCXJrdF9vYmotPnNpemUgPSBhcmdzLT5z
-aXplOw0KPiArCXJrdF9vYmotPm9mZnNldCA9IDA7DQo+ICsJbXV0ZXhfaW5pdCgmcmt0X29iai0+
-bXV0ZXgpOw0KPiArDQo+ICsJcmV0ID0gZHJtX2dlbV9oYW5kbGVfY3JlYXRlKGZpbGUsIGdlbV9v
-YmosICZhcmdzLT5oYW5kbGUpOw0KPiArCWRybV9nZW1fb2JqZWN0X3B1dChnZW1fb2JqKTsNCj4g
-KwlpZiAocmV0KQ0KPiArCQlnb3RvIGVycjsNCj4gKw0KPiArCW11dGV4X2xvY2soJnJkZXYtPmlv
-bW11X2xvY2spOw0KPiArDQo+ICsJLyogVGhpcyB3aWxsIG1hcCB0aGUgcGFnZXMgdG8gdGhlIElP
-TU1VIGxpbmtlZCB0byBjb3JlIDAgKi8NCj4gKwlzZ3QgPSBkcm1fZ2VtX3NobWVtX2dldF9wYWdl
-c19zZ3Qoc2htZW1fb2JqKTsNCj4gKwlpZiAoSVNfRVJSKHNndCkpIHsNCj4gKwkJcmV0ID0gUFRS
-X0VSUihzZ3QpOw0KPiArCQlnb3RvIGVycl91bmxvY2s7DQo+ICsJfQ0KPiArDQo+ICsJLyogTWFw
-IHRoZSBwYWdlcyB0byB0aGUgSU9NTVVzIGxpbmtlZCB0byB0aGUgb3RoZXIgY29yZXMsIHNvIGFs
-bCBjb3JlcyBjYW4gYWNjZXNzIHRoaXMgQk8gKi8NCj4gKwlmb3IgKHVuc2lnbmVkIGludCBjb3Jl
-ID0gMTsgY29yZSA8IHJkZXYtPm51bV9jb3JlczsgY29yZSsrKSB7DQo+ICsNCj4gKwkJcmV0ID0g
-aW9tbXVfbWFwX3NndGFibGUoaW9tbXVfZ2V0X2RvbWFpbl9mb3JfZGV2KHJkZXYtPmNvcmVzW2Nv
-cmVdLmRldiksDQo+ICsJCQkJCXNndC0+c2dsLT5kbWFfYWRkcmVzcywNCj4gKwkJCQkJc2d0LA0K
-PiArCQkJCQlJT01NVV9SRUFEIHwgSU9NTVVfV1JJVEUpOw0KPiArCQlpZiAocmV0IDwgMCB8fCBy
-ZXQgPCBhcmdzLT5zaXplKSB7DQo+ICsJCQlEUk1fRVJST1IoImZhaWxlZCB0byBtYXAgYnVmZmVy
-OiBzaXplPSVkIHJlcXVlc3Rfc2l6ZT0ldVxuIiwNCj4gKwkJCQlyZXQsIGFyZ3MtPnNpemUpOw0K
-PiArCQkJcmV0ID0gLUVOT01FTTsNCj4gKwkJCWdvdG8gZXJyX3VubG9jazsNCj4gKwkJfQ0KPiAr
-DQo+ICsJCS8qIGlvbW11X21hcF9zZ3RhYmxlIG1pZ2h0IGhhdmUgYWxpZ25lZCB0aGUgc2l6ZSAq
-Lw0KPiArCQlya3Rfb2JqLT5zaXplID0gcmV0Ow0KPiArDQo+ICsJCWRtYV9zeW5jX3NndGFibGVf
-Zm9yX2RldmljZShyZGV2LT5jb3Jlc1tjb3JlXS5kZXYsIHNobWVtX29iai0+c2d0LA0KPiArCQkJ
-CQkgICAgRE1BX0JJRElSRUNUSU9OQUwpOw0KPiArCX0NCj4gKw0KPiArCW11dGV4X3VubG9jaygm
-cmRldi0+aW9tbXVfbG9jayk7DQo+ICsNCj4gKwlhcmdzLT5vZmZzZXQgPSBkcm1fdm1hX25vZGVf
-b2Zmc2V0X2FkZHIoJmdlbV9vYmotPnZtYV9ub2RlKTsNCj4gKwlhcmdzLT5kbWFfYWRkcmVzcyA9
-IHNnX2RtYV9hZGRyZXNzKHNobWVtX29iai0+c2d0LT5zZ2wpOw0KPiArDQo+ICsJcmV0dXJuIDA7
-DQo+ICsNCj4gK2Vycl91bmxvY2s6DQo+ICsJbXV0ZXhfdW5sb2NrKCZyZGV2LT5pb21tdV9sb2Nr
-KTsNCj4gK2VycjoNCj4gKwlkcm1fZ2VtX3NobWVtX29iamVjdF9mcmVlKGdlbV9vYmopOw0KPiAr
-DQo+ICsJcmV0dXJuIHJldDsNCj4gK30NCj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvYWNjZWwvcm9j
-a2V0L3JvY2tldF9nZW0uaCBiL2RyaXZlcnMvYWNjZWwvcm9ja2V0L3JvY2tldF9nZW0uaA0KPiBu
-ZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiBpbmRleCAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAw
-MDAwMDAwMDAwMDAwLi4xOWIwY2Y5MWRkZDk5YmQxMjZjMWFmMzBiZWIxNjlkNjEwMWY2ZGVlDQo+
-IC0tLSAvZGV2L251bGwNCj4gKysrIGIvZHJpdmVycy9hY2NlbC9yb2NrZXQvcm9ja2V0X2dlbS5o
-DQo+IEBAIC0wLDAgKzEsMjcgQEANCj4gKy8qIFNQRFgtTGljZW5zZS1JZGVudGlmaWVyOiBHUEwt
-Mi4wICovDQo+ICsvKiBDb3B5cmlnaHQgMjAyNCBUb21ldSBWaXpvc28gPHRvbWV1QHRvbWV1dml6
-b3NvLm5ldD4gKi8NCj4gKw0KPiArI2lmbmRlZiBfX1JPQ0tFVF9HRU1fSF9fDQo+ICsjZGVmaW5l
-IF9fUk9DS0VUX0dFTV9IX18NCj4gKw0KPiArI2luY2x1ZGUgPGRybS9kcm1fZ2VtX3NobWVtX2hl
-bHBlci5oPg0KPiArDQo+ICtzdHJ1Y3Qgcm9ja2V0X2dlbV9vYmplY3Qgew0KPiArCXN0cnVjdCBk
-cm1fZ2VtX3NobWVtX29iamVjdCBiYXNlOw0KPiArDQo+ICsJc3RydWN0IG11dGV4IG11dGV4Ow0K
-DQpZb3UgaW5pdCB0aGlzIG11dGV4LCBidXQgbmV2ZXIgZGVzdHJveSBpdC4NCg0KSSBzdHJvbmds
-eSByZWNvbW1lbmQgdG8gc2NyYXRjaCBhbGwgcGVyLW9iamVjdCBsb2NrcyBhbmQgdXNlIHRoZSAN
-Cm9iamVjdCdzIHJlc2VydmF0aW9uIGxvY2sgaW5zdGVhZCAoZm91bmQgaW4gYmFzZS5yZXN2KSwg
-aWYgcG9zc2libGUuIA0KV2l0aCBtdWx0aXBsZSBsb2NrcyBhbmQgZG1hLWJ1ZiBidWZmZXIgc2hh
-cmluZywgdGhlcmUncyBvdGhlcndpc2UgDQplbmRsZXNzIGZ1biBmcm9tIGdldHRpbmcgdGhlIGxv
-Y2tpbmcgb3JkZXIgcmlnaHQuDQoNCj4gKwlzaXplX3Qgc2l6ZTsNCj4gKwl1MzIgb2Zmc2V0Ow0K
-PiArfTsNCj4gKw0KPiArc3RydWN0IGRybV9nZW1fb2JqZWN0ICpyb2NrZXRfZ2VtX2NyZWF0ZV9v
-YmplY3Qoc3RydWN0IGRybV9kZXZpY2UgKmRldiwgc2l6ZV90IHNpemUpOw0KPiArDQo+ICtpbnQg
-cm9ja2V0X2lvY3RsX2NyZWF0ZV9ibyhzdHJ1Y3QgZHJtX2RldmljZSAqZGV2LCB2b2lkICpkYXRh
-LCBzdHJ1Y3QgZHJtX2ZpbGUgKmZpbGUpOw0KPiArDQo+ICtzdGF0aWMgaW5saW5lDQo+ICtzdHJ1
-Y3QgIHJvY2tldF9nZW1fb2JqZWN0ICp0b19yb2NrZXRfYm8oc3RydWN0IGRybV9nZW1fb2JqZWN0
-ICpvYmopDQo+ICt7DQo+ICsJcmV0dXJuIGNvbnRhaW5lcl9vZih0b19kcm1fZ2VtX3NobWVtX29i
-aihvYmopLCBzdHJ1Y3Qgcm9ja2V0X2dlbV9vYmplY3QsIGJhc2UpOw0KPiArfQ0KPiArDQo+ICsj
-ZW5kaWYNCj4gZGlmZiAtLWdpdCBhL2luY2x1ZGUvdWFwaS9kcm0vcm9ja2V0X2FjY2VsLmggYi9p
-bmNsdWRlL3VhcGkvZHJtL3JvY2tldF9hY2NlbC5oDQo+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+
-IGluZGV4IDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAuLjgzMzg3MjZh
-ODNjMzFiOTU0NjA4Y2E1MDVjZjc4YmNkNzBkMzQ5NGINCj4gLS0tIC9kZXYvbnVsbA0KPiArKysg
-Yi9pbmNsdWRlL3VhcGkvZHJtL3JvY2tldF9hY2NlbC5oDQo+IEBAIC0wLDAgKzEsNDMgQEANCj4g
-Ky8qIFNQRFgtTGljZW5zZS1JZGVudGlmaWVyOiBNSVQgKi8NCj4gKy8qDQo+ICsgKiBDb3B5cmln
-aHQgwqkgMjAyNCBUb21ldSBWaXpvc28NCj4gKyAqLw0KPiArI2lmbmRlZiBfUk9DS0VUX0RSTV9I
-Xw0KPiArI2RlZmluZSBfUk9DS0VUX0RSTV9IXw0KDQpGb3IgVUFQSSBoZWFkZXJzLCBpdCBtYWtl
-cyBzZW5zZSB0byB1c2UgYSBtb3JlIHZlcmJvc2UgaW5jbHVkZSBndWFyZDsgDQpzYXkgX19EUk1f
-VUFQSV9ST0NLRVRfQUNDRUxfSF9fLiBBdm9pZHMgcG9zc2libGUgY29uZmxpY3RzLg0KDQpCZXN0
-IHJlZ2FyZHMNClRob21hcw0KDQo+ICsNCj4gKyNpbmNsdWRlICJkcm0uaCINCj4gKw0KPiArI2lm
-IGRlZmluZWQoX19jcGx1c3BsdXMpDQo+ICtleHRlcm4gIkMiIHsNCj4gKyNlbmRpZg0KPiArDQo+
-ICsjZGVmaW5lIERSTV9ST0NLRVRfQ1JFQVRFX0JPCQkJMHgwMA0KPiArDQo+ICsjZGVmaW5lIERS
-TV9JT0NUTF9ST0NLRVRfQ1JFQVRFX0JPCQlEUk1fSU9XUihEUk1fQ09NTUFORF9CQVNFICsgRFJN
-X1JPQ0tFVF9DUkVBVEVfQk8sIHN0cnVjdCBkcm1fcm9ja2V0X2NyZWF0ZV9ibykNCj4gKw0KPiAr
-LyoqDQo+ICsgKiBzdHJ1Y3QgZHJtX3JvY2tldF9jcmVhdGVfYm8gLSBpb2N0bCBhcmd1bWVudCBm
-b3IgY3JlYXRpbmcgUm9ja2V0IEJPcy4NCj4gKyAqDQo+ICsgKi8NCj4gK3N0cnVjdCBkcm1fcm9j
-a2V0X2NyZWF0ZV9ibyB7DQo+ICsJX191MzIgc2l6ZTsNCj4gKw0KPiArCS8qKiBSZXR1cm5lZCBH
-RU0gaGFuZGxlIGZvciB0aGUgQk8uICovDQo+ICsJX191MzIgaGFuZGxlOw0KPiArDQo+ICsJLyoq
-DQo+ICsJICogUmV0dXJuZWQgRE1BIGFkZHJlc3MgZm9yIHRoZSBCTyBpbiB0aGUgTlBVIGFkZHJl
-c3Mgc3BhY2UuICBUaGlzIGFkZHJlc3MNCj4gKwkgKiBpcyBwcml2YXRlIHRvIHRoZSBEUk0gZmQg
-YW5kIGlzIHZhbGlkIGZvciB0aGUgbGlmZXRpbWUgb2YgdGhlIEdFTQ0KPiArCSAqIGhhbmRsZS4N
-Cj4gKwkgKi8NCj4gKwlfX3U2NCBkbWFfYWRkcmVzczsNCj4gKw0KPiArCS8qKiBPZmZzZXQgaW50
-byB0aGUgZHJtIG5vZGUgdG8gdXNlIGZvciBzdWJzZXF1ZW50IG1tYXAgY2FsbC4gKi8NCj4gKwlf
-X3U2NCBvZmZzZXQ7DQo+ICt9Ow0KPiArDQo+ICsjaWYgZGVmaW5lZChfX2NwbHVzcGx1cykNCj4g
-K30NCj4gKyNlbmRpZg0KPiArDQo+ICsjZW5kaWYgLyogX1JPQ0tFVF9EUk1fSF8gKi8NCj4NCg0K
-LS0gDQotLQ0KVGhvbWFzIFppbW1lcm1hbm4NCkdyYXBoaWNzIERyaXZlciBEZXZlbG9wZXINClNV
-U0UgU29mdHdhcmUgU29sdXRpb25zIEdlcm1hbnkgR21iSA0KRnJhbmtlbnN0cmFzc2UgMTQ2LCA5
-MDQ2MSBOdWVybmJlcmcsIEdlcm1hbnkNCkdGOiBJdm8gVG90ZXYsIEFuZHJldyBNeWVycywgQW5k
-cmV3IE1jRG9uYWxkLCBCb3VkaWVuIE1vZXJtYW4NCkhSQiAzNjgwOSAoQUcgTnVlcm5iZXJnKQ0K
-DQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8t
-bW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8g
-dW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxp
-bmFyby5vcmcK
+Hi
+
+Am 25.02.25 um 08:55 schrieb Tomeu Vizoso:
+> Using the DRM GPU scheduler infrastructure, with a scheduler for each
+> core.
+>
+> Userspace can decide for a series of tasks to be executed sequentially
+> in the same core, so SRAM locality can be taken advantage of.
+>
+> The job submission code was initially based on Panfrost.
+>
+> v2:
+> - Remove hardcoded number of cores
+> - Misc. style fixes (Jeffrey Hugo)
+> - Repack IOCTL struct (Jeffrey Hugo)
+>
+> Signed-off-by: Tomeu Vizoso <tomeu@tomeuvizoso.net>
+> ---
+>   drivers/accel/rocket/Makefile        |   3 +-
+>   drivers/accel/rocket/rocket_core.c   |   6 +
+>   drivers/accel/rocket/rocket_core.h   |  14 +
+>   drivers/accel/rocket/rocket_device.c |   2 +
+>   drivers/accel/rocket/rocket_device.h |   2 +
+>   drivers/accel/rocket/rocket_drv.c    |  15 +
+>   drivers/accel/rocket/rocket_drv.h    |   4 +
+>   drivers/accel/rocket/rocket_job.c    | 710 +++++++++++++++++++++++++++++++++++
+>   drivers/accel/rocket/rocket_job.h    |  50 +++
+>   include/uapi/drm/rocket_accel.h      |  55 +++
+>   10 files changed, 860 insertions(+), 1 deletion(-)
+>
+> diff --git a/drivers/accel/rocket/Makefile b/drivers/accel/rocket/Makefile
+> index 875cac2243d902694e0d5d05e60b4ae551a633c4..4d59036af8d9c213d3cac0559eb66e3ebb0320e7 100644
+> --- a/drivers/accel/rocket/Makefile
+> +++ b/drivers/accel/rocket/Makefile
+> @@ -6,4 +6,5 @@ rocket-y := \
+>   	rocket_core.o \
+>   	rocket_device.o \
+>   	rocket_drv.o \
+> -	rocket_gem.o
+> +	rocket_gem.o \
+> +	rocket_job.o
+> diff --git a/drivers/accel/rocket/rocket_core.c b/drivers/accel/rocket/rocket_core.c
+> index 09d966c826b5b1090a18cb24b3aa4aba286a12d4..2b522592693874eed90463e8f85653d5282ae5b8 100644
+> --- a/drivers/accel/rocket/rocket_core.c
+> +++ b/drivers/accel/rocket/rocket_core.c
+> @@ -6,6 +6,7 @@
+>   #include <linux/pm_runtime.h>
+>   
+>   #include "rocket_core.h"
+> +#include "rocket_job.h"
+>   #include "rocket_registers.h"
+>   
+>   static int rocket_clk_init(struct rocket_core *core)
+> @@ -48,6 +49,10 @@ int rocket_core_init(struct rocket_core *core)
+>   	if (IS_ERR(core->iomem))
+>   		return PTR_ERR(core->iomem);
+>   
+> +	err = rocket_job_init(core);
+> +	if (err)
+> +		return err;
+> +
+>   	pm_runtime_use_autosuspend(dev);
+>   	pm_runtime_set_autosuspend_delay(dev, 50); /* ~3 frames */
+>   	pm_runtime_enable(dev);
+> @@ -68,4 +73,5 @@ int rocket_core_init(struct rocket_core *core)
+>   void rocket_core_fini(struct rocket_core *core)
+>   {
+>   	pm_runtime_disable(core->dev);
+> +	rocket_job_fini(core);
+>   }
+> diff --git a/drivers/accel/rocket/rocket_core.h b/drivers/accel/rocket/rocket_core.h
+> index 2171eba7139ccc63fe24802dc81b4adb7f3abf31..045a46a2010a2ffd6122ed86c379e5fabc70365a 100644
+> --- a/drivers/accel/rocket/rocket_core.h
+> +++ b/drivers/accel/rocket/rocket_core.h
+> @@ -21,6 +21,20 @@ struct rocket_core {
+>   	void __iomem *iomem;
+>   	struct clk *a_clk;
+>   	struct clk *h_clk;
+> +
+> +	struct rocket_job *in_flight_job;
+> +
+> +	spinlock_t job_lock;
+> +
+> +	struct {
+> +		struct workqueue_struct *wq;
+> +		struct work_struct work;
+> +		atomic_t pending;
+> +	} reset;
+> +
+> +	struct drm_gpu_scheduler sched;
+> +	u64 fence_context;
+> +	u64 emit_seqno;
+>   };
+>   
+>   int rocket_core_init(struct rocket_core *core);
+> diff --git a/drivers/accel/rocket/rocket_device.c b/drivers/accel/rocket/rocket_device.c
+> index 9af36357caba7148dcac764c8222699f3b572d60..62c640e1e0200fe25b6834e45d71f6de139ff3ab 100644
+> --- a/drivers/accel/rocket/rocket_device.c
+> +++ b/drivers/accel/rocket/rocket_device.c
+> @@ -12,6 +12,7 @@ int rocket_device_init(struct rocket_device *rdev)
+>   	int err;
+>   
+>   	mutex_init(&rdev->iommu_lock);
+> +	mutex_init(&rdev->sched_lock);
+>   
+>   	rdev->clk_npu = devm_clk_get(dev, "npu");
+>   	rdev->pclk = devm_clk_get(dev, "pclk");
+> @@ -29,5 +30,6 @@ int rocket_device_init(struct rocket_device *rdev)
+>   void rocket_device_fini(struct rocket_device *rdev)
+>   {
+>   	rocket_core_fini(&rdev->cores[0]);
+> +	mutex_destroy(&rdev->sched_lock);
+>   	mutex_destroy(&rdev->iommu_lock);
+>   }
+> diff --git a/drivers/accel/rocket/rocket_device.h b/drivers/accel/rocket/rocket_device.h
+> index c6152569fdd9e5587c8e8d7b0d7c2e2a77af6000..4168ae8da2d38c2ea114b37c6e053b02611a0232 100644
+> --- a/drivers/accel/rocket/rocket_device.h
+> +++ b/drivers/accel/rocket/rocket_device.h
+> @@ -11,6 +11,8 @@
+>   struct rocket_device {
+>   	struct drm_device ddev;
+>   
+> +	struct mutex sched_lock;
+> +
+>   	struct clk *clk_npu;
+>   	struct clk *pclk;
+>   
+> diff --git a/drivers/accel/rocket/rocket_drv.c b/drivers/accel/rocket/rocket_drv.c
+> index e5612b52952fa7a0cd0af02aef314984bc483b05..a6b486e2d4f648d7b1d8831590b633bf661c7bc4 100644
+> --- a/drivers/accel/rocket/rocket_drv.c
+> +++ b/drivers/accel/rocket/rocket_drv.c
+> @@ -16,12 +16,14 @@
+>   
+>   #include "rocket_drv.h"
+>   #include "rocket_gem.h"
+> +#include "rocket_job.h"
+>   
+>   static int
+>   rocket_open(struct drm_device *dev, struct drm_file *file)
+>   {
+>   	struct rocket_device *rdev = to_rocket_device(dev);
+>   	struct rocket_file_priv *rocket_priv;
+> +	int ret;
+>   
+>   	rocket_priv = kzalloc(sizeof(*rocket_priv), GFP_KERNEL);
+>   	if (!rocket_priv)
+> @@ -30,7 +32,15 @@ rocket_open(struct drm_device *dev, struct drm_file *file)
+>   	rocket_priv->rdev = rdev;
+>   	file->driver_priv = rocket_priv;
+>   
+> +	ret = rocket_job_open(rocket_priv);
+> +	if (ret)
+> +		goto err_free;
+> +
+>   	return 0;
+> +
+> +err_free:
+> +	kfree(rocket_priv);
+> +	return ret;
+>   }
+>   
+>   static void
+> @@ -38,6 +48,7 @@ rocket_postclose(struct drm_device *dev, struct drm_file *file)
+>   {
+>   	struct rocket_file_priv *rocket_priv = file->driver_priv;
+>   
+> +	rocket_job_close(rocket_priv);
+>   	kfree(rocket_priv);
+>   }
+>   
+> @@ -46,6 +57,7 @@ static const struct drm_ioctl_desc rocket_drm_driver_ioctls[] = {
+>   	DRM_IOCTL_DEF_DRV(ROCKET_##n, rocket_ioctl_##func, 0)
+>   
+>   	ROCKET_IOCTL(CREATE_BO, create_bo),
+> +	ROCKET_IOCTL(SUBMIT, submit),
+>   };
+>   
+>   DEFINE_DRM_ACCEL_FOPS(rocket_accel_driver_fops);
+> @@ -245,6 +257,9 @@ static int rocket_device_runtime_suspend(struct device *dev)
+>   		if (dev != rdev->cores[core].dev)
+>   			continue;
+>   
+> +		if (!rocket_job_is_idle(&rdev->cores[core]))
+> +			return -EBUSY;
+> +
+>   		clk_disable_unprepare(rdev->cores[core].a_clk);
+>   		clk_disable_unprepare(rdev->cores[core].h_clk);
+>   
+> diff --git a/drivers/accel/rocket/rocket_drv.h b/drivers/accel/rocket/rocket_drv.h
+> index ccdd50c69d4c033eea18cb800407fdcfb3bf2e9b..54e21a61006057aee293496016e54b495a2f6d55 100644
+> --- a/drivers/accel/rocket/rocket_drv.h
+> +++ b/drivers/accel/rocket/rocket_drv.h
+> @@ -4,10 +4,14 @@
+>   #ifndef __ROCKET_DRV_H__
+>   #define __ROCKET_DRV_H__
+>   
+> +#include <drm/gpu_scheduler.h>
+> +
+>   #include "rocket_device.h"
+>   
+>   struct rocket_file_priv {
+>   	struct rocket_device *rdev;
+> +
+> +	struct drm_sched_entity sched_entity;
+>   };
+>   
+>   #endif
+> diff --git a/drivers/accel/rocket/rocket_job.c b/drivers/accel/rocket/rocket_job.c
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..25b31f28e932aaee86173b9a0962932c9c640c03
+> --- /dev/null
+> +++ b/drivers/accel/rocket/rocket_job.c
+> @@ -0,0 +1,710 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/* Copyright 2019 Linaro, Ltd, Rob Herring <robh@kernel.org> */
+> +/* Copyright 2019 Collabora ltd. */
+> +/* Copyright 2024 Tomeu Vizoso <tomeu@tomeuvizoso.net> */
+> +
+> +#include <drm/drm_file.h>
+> +#include <drm/drm_gem.h>
+> +#include <drm/rocket_accel.h>
+> +#include <linux/interrupt.h>
+> +#include <linux/platform_device.h>
+> +#include <linux/pm_runtime.h>
+> +
+> +#include "rocket_core.h"
+> +#include "rocket_device.h"
+> +#include "rocket_drv.h"
+> +#include "rocket_job.h"
+> +#include "rocket_registers.h"
+> +
+> +#define JOB_TIMEOUT_MS 500
+> +
+> +#define job_write(dev, reg, data) writel(data, dev->iomem + (reg))
+> +#define job_read(dev, reg) readl(dev->iomem + (reg))
+> +
+> +static struct rocket_job *
+> +to_rocket_job(struct drm_sched_job *sched_job)
+> +{
+> +	return container_of(sched_job, struct rocket_job, base);
+> +}
+> +
+> +struct rocket_fence {
+> +	struct dma_fence base;
+> +	struct drm_device *dev;
+> +	/* rocket seqno for signaled() test */
+> +	u64 seqno;
+> +	int queue;
+> +};
+> +
+> +static inline struct rocket_fence *
+> +to_rocket_fence(struct dma_fence *fence)
+> +{
+> +	return (struct rocket_fence *)fence;
+
+Proper upcast with container_of() please.
+
+> +}
+> +
+> +static const char *rocket_fence_get_driver_name(struct dma_fence *fence)
+> +{
+> +	return "rocket";
+> +}
+> +
+> +static const char *rocket_fence_get_timeline_name(struct dma_fence *fence)
+> +{
+> +	return "rockchip-npu";
+> +}
+> +
+> +static const struct dma_fence_ops rocket_fence_ops = {
+> +	.get_driver_name = rocket_fence_get_driver_name,
+> +	.get_timeline_name = rocket_fence_get_timeline_name,
+> +};
+> +
+> +static struct dma_fence *rocket_fence_create(struct rocket_core *core)
+> +{
+> +	struct rocket_device *rdev = core->rdev;
+> +	struct rocket_fence *fence;
+> +
+> +	fence = kzalloc(sizeof(*fence), GFP_KERNEL);
+> +	if (!fence)
+> +		return ERR_PTR(-ENOMEM);
+> +
+> +	fence->dev = &rdev->ddev;
+> +	fence->seqno = ++core->emit_seqno;
+> +	dma_fence_init(&fence->base, &rocket_fence_ops, &core->job_lock,
+> +		       core->fence_context, fence->seqno);
+> +
+> +	return &fence->base;
+> +}
+> +
+> +static int
+> +rocket_copy_tasks(struct drm_device *dev,
+> +		  struct drm_file *file_priv,
+> +		  struct drm_rocket_job *job,
+> +		  struct rocket_job *rjob)
+> +{
+> +	struct drm_rocket_task *tasks;
+> +	int ret = 0;
+> +	int i;
+> +
+> +	rjob->task_count = job->task_count;
+> +
+> +	if (!rjob->task_count)
+> +		return 0;
+> +
+> +	tasks = kvmalloc_array(rjob->task_count, sizeof(*tasks), GFP_KERNEL);
+> +	if (!tasks) {
+> +		ret = -ENOMEM;
+> +		DRM_DEBUG("Failed to allocate incoming tasks\n");
+
+These logging macros are deprecated. Please use drm_dbg() and similar 
+functions instead. Here and everywhere else.
+
+> +		goto fail;
+> +	}
+> +
+> +	if (copy_from_user(tasks,
+> +			   (void __user *)(uintptr_t)job->tasks,
+> +			   rjob->task_count * sizeof(*tasks))) {
+> +		ret = -EFAULT;
+> +		DRM_DEBUG("Failed to copy incoming tasks\n");
+> +		goto fail;
+> +	}
+> +
+> +	rjob->tasks = kvmalloc_array(job->task_count, sizeof(*rjob->tasks), GFP_KERNEL);
+> +	if (!rjob->tasks) {
+> +		DRM_DEBUG("Failed to allocate task array\n");
+> +		ret = -ENOMEM;
+> +		goto fail;
+> +	}
+> +
+> +	for (i = 0; i < rjob->task_count; i++) {
+> +		if (tasks[i].regcmd_count == 0) {
+> +			ret = -EINVAL;
+> +			goto fail;
+> +		}
+> +		rjob->tasks[i].regcmd = tasks[i].regcmd;
+> +		rjob->tasks[i].regcmd_count = tasks[i].regcmd_count;
+> +	}
+> +
+> +fail:
+> +	kvfree(tasks);
+> +	return ret;
+> +}
+> +
+> +static void rocket_job_hw_submit(struct rocket_core *core, struct rocket_job *job)
+> +{
+> +	struct rocket_task *task;
+> +	bool task_pp_en = 1;
+> +	bool task_count = 1;
+> +
+> +	/* GO ! */
+> +
+> +	/* Don't queue the job if a reset is in progress */
+> +	if (!atomic_read(&core->reset.pending)) {
+> +
+> +		task = &job->tasks[job->next_task_idx];
+> +		job->next_task_idx++;   /* TODO: Do this only after a successful run? */
+> +
+> +		rocket_write(core, REG_PC_BASE_ADDRESS, 0x1);
+
+Just 'write' seems a little imprecise. Maybe 'writel' would be better.
+
+Best regards
+Thomas
+
+> +
+> +		rocket_write(core, REG_CNA_S_POINTER, 0xe + 0x10000000 * core->index);
+> +		rocket_write(core, REG_CORE_S_POINTER, 0xe + 0x10000000 * core->index);
+> +
+> +		rocket_write(core, REG_PC_BASE_ADDRESS, task->regcmd);
+> +		rocket_write(core, REG_PC_REGISTER_AMOUNTS, (task->regcmd_count + 1) / 2 - 1);
+> +
+> +		rocket_write(core, REG_PC_INTERRUPT_MASK,
+> +			     PC_INTERRUPT_MASK_DPU_0 | PC_INTERRUPT_MASK_DPU_1);
+> +		rocket_write(core, REG_PC_INTERRUPT_CLEAR,
+> +			     PC_INTERRUPT_CLEAR_DPU_0 | PC_INTERRUPT_CLEAR_DPU_1);
+> +
+> +		rocket_write(core, REG_PC_TASK_CON, ((0x6 | task_pp_en) << 12) | task_count);
+> +
+> +		rocket_write(core, REG_PC_TASK_DMA_BASE_ADDR, 0x0);
+> +
+> +		rocket_write(core, REG_PC_OPERATION_ENABLE, 0x1);
+> +
+> +		dev_dbg(core->dev,
+> +			"Submitted regcmd at 0x%llx to core %d",
+> +			task->regcmd, core->index);
+> +	}
+> +}
+> +
+> +static int rocket_acquire_object_fences(struct drm_gem_object **bos,
+> +					int bo_count,
+> +					struct drm_sched_job *job,
+> +					bool is_write)
+> +{
+> +	int i, ret;
+> +
+> +	for (i = 0; i < bo_count; i++) {
+> +		ret = dma_resv_reserve_fences(bos[i]->resv, 1);
+> +		if (ret)
+> +			return ret;
+> +
+> +		ret = drm_sched_job_add_implicit_dependencies(job, bos[i],
+> +							      is_write);
+> +		if (ret)
+> +			return ret;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static void rocket_attach_object_fences(struct drm_gem_object **bos,
+> +					  int bo_count,
+> +					  struct dma_fence *fence)
+> +{
+> +	int i;
+> +
+> +	for (i = 0; i < bo_count; i++)
+> +		dma_resv_add_fence(bos[i]->resv, fence, DMA_RESV_USAGE_WRITE);
+> +}
+> +
+> +static int rocket_job_push(struct rocket_job *job)
+> +{
+> +	struct rocket_device *rdev = job->rdev;
+> +	struct drm_gem_object **bos;
+> +	struct ww_acquire_ctx acquire_ctx;
+> +	int ret = 0;
+> +
+> +	bos = kvmalloc_array(job->in_bo_count + job->out_bo_count, sizeof(void *),
+> +			     GFP_KERNEL);
+> +	memcpy(bos, job->in_bos, job->in_bo_count * sizeof(void *));
+> +	memcpy(&bos[job->in_bo_count], job->out_bos, job->out_bo_count * sizeof(void *));
+> +
+> +	ret = drm_gem_lock_reservations(bos, job->in_bo_count + job->out_bo_count, &acquire_ctx);
+> +	if (ret)
+> +		goto err;
+> +
+> +	mutex_lock(&rdev->sched_lock);
+> +	drm_sched_job_arm(&job->base);
+> +
+> +	job->inference_done_fence = dma_fence_get(&job->base.s_fence->finished);
+> +
+> +	ret = rocket_acquire_object_fences(job->in_bos, job->in_bo_count, &job->base, false);
+> +	if (ret) {
+> +		mutex_unlock(&rdev->sched_lock);
+> +		goto err_unlock;
+> +	}
+> +
+> +	ret = rocket_acquire_object_fences(job->out_bos, job->out_bo_count, &job->base, true);
+> +	if (ret) {
+> +		mutex_unlock(&rdev->sched_lock);
+> +		goto err_unlock;
+> +	}
+> +
+> +	kref_get(&job->refcount); /* put by scheduler job completion */
+> +
+> +	drm_sched_entity_push_job(&job->base);
+> +
+> +	mutex_unlock(&rdev->sched_lock);
+> +
+> +	rocket_attach_object_fences(job->out_bos, job->out_bo_count, job->inference_done_fence);
+> +
+> +err_unlock:
+> +	drm_gem_unlock_reservations(bos, job->in_bo_count + job->out_bo_count, &acquire_ctx);
+> +err:
+> +	kfree(bos);
+> +
+> +	return ret;
+> +}
+> +
+> +static void rocket_job_cleanup(struct kref *ref)
+> +{
+> +	struct rocket_job *job = container_of(ref, struct rocket_job,
+> +						refcount);
+> +	unsigned int i;
+> +
+> +	dma_fence_put(job->done_fence);
+> +	dma_fence_put(job->inference_done_fence);
+> +
+> +	if (job->in_bos) {
+> +		for (i = 0; i < job->in_bo_count; i++)
+> +			drm_gem_object_put(job->in_bos[i]);
+> +
+> +		kvfree(job->in_bos);
+> +	}
+> +
+> +	if (job->out_bos) {
+> +		for (i = 0; i < job->out_bo_count; i++)
+> +			drm_gem_object_put(job->out_bos[i]);
+> +
+> +		kvfree(job->out_bos);
+> +	}
+> +
+> +	kfree(job->tasks);
+> +
+> +	kfree(job);
+> +}
+> +
+> +static void rocket_job_put(struct rocket_job *job)
+> +{
+> +	kref_put(&job->refcount, rocket_job_cleanup);
+> +}
+> +
+> +static void rocket_job_free(struct drm_sched_job *sched_job)
+> +{
+> +	struct rocket_job *job = to_rocket_job(sched_job);
+> +
+> +	drm_sched_job_cleanup(sched_job);
+> +
+> +	rocket_job_put(job);
+> +}
+> +
+> +static struct rocket_core *sched_to_core(struct rocket_device *rdev,
+> +					 struct drm_gpu_scheduler *sched)
+> +{
+> +	unsigned int core;
+> +
+> +	for (core = 0; core < rdev->num_cores; core++) {
+> +		if (&rdev->cores[core].sched == sched)
+> +			return &rdev->cores[core];
+> +	}
+> +
+> +	return NULL;
+> +}
+> +
+> +static struct dma_fence *rocket_job_run(struct drm_sched_job *sched_job)
+> +{
+> +	struct rocket_job *job = to_rocket_job(sched_job);
+> +	struct rocket_device *rdev = job->rdev;
+> +	struct rocket_core *core = sched_to_core(rdev, sched_job->sched);
+> +	struct dma_fence *fence = NULL;
+> +	int ret;
+> +
+> +	if (unlikely(job->base.s_fence->finished.error))
+> +		return NULL;
+> +
+> +	/*
+> +	 * Nothing to execute: can happen if the job has finished while
+> +	 * we were resetting the GPU.
+> +	 */
+> +	if (job->next_task_idx == job->task_count)
+> +		return NULL;
+> +
+> +	fence = rocket_fence_create(core);
+> +	if (IS_ERR(fence))
+> +		return fence;
+> +
+> +	if (job->done_fence)
+> +		dma_fence_put(job->done_fence);
+> +	job->done_fence = dma_fence_get(fence);
+> +
+> +	ret = pm_runtime_get_sync(core->dev);
+> +	if (ret < 0)
+> +		return fence;
+> +
+> +	spin_lock(&core->job_lock);
+> +
+> +	core->in_flight_job = job;
+> +	rocket_job_hw_submit(core, job);
+> +
+> +	spin_unlock(&core->job_lock);
+> +
+> +	return fence;
+> +}
+> +
+> +static void rocket_job_handle_done(struct rocket_core *core,
+> +				   struct rocket_job *job)
+> +{
+> +	if (job->next_task_idx < job->task_count) {
+> +		rocket_job_hw_submit(core, job);
+> +		return;
+> +	}
+> +
+> +	core->in_flight_job = NULL;
+> +	dma_fence_signal_locked(job->done_fence);
+> +	pm_runtime_put_autosuspend(core->dev);
+> +}
+> +
+> +static void rocket_job_handle_irq(struct rocket_core *core)
+> +{
+> +	uint32_t status, raw_status;
+> +
+> +	pm_runtime_mark_last_busy(core->dev);
+> +
+> +	status = rocket_read(core, REG_PC_INTERRUPT_STATUS);
+> +	raw_status = rocket_read(core, REG_PC_INTERRUPT_RAW_STATUS);
+> +
+> +	rocket_write(core, REG_PC_OPERATION_ENABLE, 0x0);
+> +	rocket_write(core, REG_PC_INTERRUPT_CLEAR, 0x1ffff);
+> +
+> +	spin_lock(&core->job_lock);
+> +
+> +	if (core->in_flight_job)
+> +		rocket_job_handle_done(core, core->in_flight_job);
+> +
+> +	spin_unlock(&core->job_lock);
+> +}
+> +
+> +static void
+> +rocket_reset(struct rocket_core *core, struct drm_sched_job *bad)
+> +{
+> +	bool cookie;
+> +
+> +	if (!atomic_read(&core->reset.pending))
+> +		return;
+> +
+> +	/*
+> +	 * Stop the scheduler.
+> +	 *
+> +	 * FIXME: We temporarily get out of the dma_fence_signalling section
+> +	 * because the cleanup path generate lockdep splats when taking locks
+> +	 * to release job resources. We should rework the code to follow this
+> +	 * pattern:
+> +	 *
+> +	 *	try_lock
+> +	 *	if (locked)
+> +	 *		release
+> +	 *	else
+> +	 *		schedule_work_to_release_later
+> +	 */
+> +	drm_sched_stop(&core->sched, bad);
+> +
+> +	cookie = dma_fence_begin_signalling();
+> +
+> +	if (bad)
+> +		drm_sched_increase_karma(bad);
+> +
+> +	/*
+> +	 * Mask job interrupts and synchronize to make sure we won't be
+> +	 * interrupted during our reset.
+> +	 */
+> +	rocket_write(core, REG_PC_INTERRUPT_MASK, 0x0);
+> +	synchronize_irq(core->irq);
+> +
+> +	/* Handle the remaining interrupts before we reset. */
+> +	rocket_job_handle_irq(core);
+> +
+> +	/*
+> +	 * Remaining interrupts have been handled, but we might still have
+> +	 * stuck jobs. Let's make sure the PM counters stay balanced by
+> +	 * manually calling pm_runtime_put_noidle() and
+> +	 * rocket_devfreq_record_idle() for each stuck job.
+> +	 * Let's also make sure the cycle counting register's refcnt is
+> +	 * kept balanced to prevent it from running forever
+> +	 */
+> +	spin_lock(&core->job_lock);
+> +	if (core->in_flight_job)
+> +		pm_runtime_put_noidle(core->dev);
+> +
+> +	core->in_flight_job = NULL;
+> +	spin_unlock(&core->job_lock);
+> +
+> +	/* Proceed with reset now. */
+> +	pm_runtime_force_suspend(core->dev);
+> +	pm_runtime_force_resume(core->dev);
+> +
+> +	/* GPU has been reset, we can clear the reset pending bit. */
+> +	atomic_set(&core->reset.pending, 0);
+> +
+> +	/*
+> +	 * Now resubmit jobs that were previously queued but didn't have a
+> +	 * chance to finish.
+> +	 * FIXME: We temporarily get out of the DMA fence signalling section
+> +	 * while resubmitting jobs because the job submission logic will
+> +	 * allocate memory with the GFP_KERNEL flag which can trigger memory
+> +	 * reclaim and exposes a lock ordering issue.
+> +	 */
+> +	dma_fence_end_signalling(cookie);
+> +	drm_sched_resubmit_jobs(&core->sched);
+> +	cookie = dma_fence_begin_signalling();
+> +
+> +	/* Restart the scheduler */
+> +	drm_sched_start(&core->sched, 0);
+> +
+> +	dma_fence_end_signalling(cookie);
+> +}
+> +
+> +static enum drm_gpu_sched_stat rocket_job_timedout(struct drm_sched_job *sched_job)
+> +{
+> +	struct rocket_job *job = to_rocket_job(sched_job);
+> +	struct rocket_device *rdev = job->rdev;
+> +	struct rocket_core *core = sched_to_core(rdev, sched_job->sched);
+> +
+> +	/*
+> +	 * If the GPU managed to complete this jobs fence, the timeout is
+> +	 * spurious. Bail out.
+> +	 */
+> +	if (dma_fence_is_signaled(job->done_fence))
+> +		return DRM_GPU_SCHED_STAT_NOMINAL;
+> +
+> +	/*
+> +	 * Rocket IRQ handler may take a long time to process an interrupt
+> +	 * if there is another IRQ handler hogging the processing.
+> +	 * For example, the HDMI encoder driver might be stuck in the IRQ
+> +	 * handler for a significant time in a case of bad cable connection.
+> +	 * In order to catch such cases and not report spurious rocket
+> +	 * job timeouts, synchronize the IRQ handler and re-check the fence
+> +	 * status.
+> +	 */
+> +	synchronize_irq(core->irq);
+> +
+> +	if (dma_fence_is_signaled(job->done_fence)) {
+> +		dev_warn(core->dev, "unexpectedly high interrupt latency\n");
+> +		return DRM_GPU_SCHED_STAT_NOMINAL;
+> +	}
+> +
+> +	dev_err(core->dev, "gpu sched timeout");
+> +
+> +	atomic_set(&core->reset.pending, 1);
+> +	rocket_reset(core, sched_job);
+> +
+> +	return DRM_GPU_SCHED_STAT_NOMINAL;
+> +}
+> +
+> +static void rocket_reset_work(struct work_struct *work)
+> +{
+> +	struct rocket_core *core;
+> +
+> +	core = container_of(work, struct rocket_core, reset.work);
+> +	rocket_reset(core, NULL);
+> +}
+> +
+> +static const struct drm_sched_backend_ops rocket_sched_ops = {
+> +	.run_job = rocket_job_run,
+> +	.timedout_job = rocket_job_timedout,
+> +	.free_job = rocket_job_free
+> +};
+> +
+> +static irqreturn_t rocket_job_irq_handler_thread(int irq, void *data)
+> +{
+> +	struct rocket_core *core = data;
+> +
+> +	rocket_job_handle_irq(core);
+> +
+> +	return IRQ_HANDLED;
+> +}
+> +
+> +static irqreturn_t rocket_job_irq_handler(int irq, void *data)
+> +{
+> +	struct rocket_core *core = data;
+> +	uint32_t raw_status = rocket_read(core, REG_PC_INTERRUPT_RAW_STATUS);
+> +
+> +	WARN_ON(raw_status & PC_INTERRUPT_RAW_STATUS_DMA_READ_ERROR);
+> +	WARN_ON(raw_status & PC_INTERRUPT_RAW_STATUS_DMA_READ_ERROR);
+> +
+> +	if (!(raw_status & PC_INTERRUPT_RAW_STATUS_DPU_0 ||
+> +	      raw_status & PC_INTERRUPT_RAW_STATUS_DPU_1))
+> +		return IRQ_NONE;
+> +
+> +	rocket_write(core, REG_PC_INTERRUPT_MASK, 0x0);
+> +
+> +	return IRQ_WAKE_THREAD;
+> +}
+> +
+> +int rocket_job_init(struct rocket_core *core)
+> +{
+> +	int ret;
+> +
+> +	INIT_WORK(&core->reset.work, rocket_reset_work);
+> +	spin_lock_init(&core->job_lock);
+> +
+> +	core->irq = platform_get_irq(to_platform_device(core->dev), 0);
+> +	if (core->irq < 0)
+> +		return core->irq;
+> +
+> +	ret = devm_request_threaded_irq(core->dev, core->irq,
+> +					rocket_job_irq_handler,
+> +					rocket_job_irq_handler_thread,
+> +					IRQF_SHARED, KBUILD_MODNAME "-job",
+> +					core);
+> +	if (ret) {
+> +		dev_err(core->dev, "failed to request job irq");
+> +		return ret;
+> +	}
+> +
+> +	core->reset.wq = alloc_ordered_workqueue("rocket-reset-%d", 0, core->index);
+> +	if (!core->reset.wq)
+> +		return -ENOMEM;
+> +
+> +	core->fence_context = dma_fence_context_alloc(1);
+> +
+> +	ret = drm_sched_init(&core->sched,
+> +				&rocket_sched_ops, NULL,
+> +				DRM_SCHED_PRIORITY_COUNT,
+> +				1, 0,
+> +				msecs_to_jiffies(JOB_TIMEOUT_MS),
+> +				core->reset.wq,
+> +				NULL, "rocket", core->dev);
+> +	if (ret) {
+> +		dev_err(core->dev, "Failed to create scheduler: %d.", ret);
+> +		goto err_sched;
+> +	}
+> +
+> +	return 0;
+> +
+> +err_sched:
+> +	drm_sched_fini(&core->sched);
+> +
+> +	destroy_workqueue(core->reset.wq);
+> +	return ret;
+> +}
+> +
+> +void rocket_job_fini(struct rocket_core *core)
+> +{
+> +	drm_sched_fini(&core->sched);
+> +
+> +	cancel_work_sync(&core->reset.work);
+> +	destroy_workqueue(core->reset.wq);
+> +}
+> +
+> +int rocket_job_open(struct rocket_file_priv *rocket_priv)
+> +{
+> +	struct rocket_device *rdev = rocket_priv->rdev;
+> +	struct drm_gpu_scheduler **scheds = kmalloc_array(rdev->num_cores, sizeof(scheds),
+> +							  GFP_KERNEL);
+> +	unsigned int core;
+> +	int ret;
+> +
+> +	for (core = 0; core < rdev->num_cores; core++)
+> +		scheds[core] = &rdev->cores[core].sched;
+> +
+> +	ret = drm_sched_entity_init(&rocket_priv->sched_entity,
+> +				    DRM_SCHED_PRIORITY_NORMAL,
+> +				    scheds,
+> +				    rdev->num_cores, NULL);
+> +	if (WARN_ON(ret))
+> +		return ret;
+> +
+> +	return 0;
+> +}
+> +
+> +void rocket_job_close(struct rocket_file_priv *rocket_priv)
+> +{
+> +	struct drm_sched_entity *entity = &rocket_priv->sched_entity;
+> +
+> +	kfree(entity->sched_list);
+> +	drm_sched_entity_destroy(entity);
+> +}
+> +
+> +int rocket_job_is_idle(struct rocket_core *core)
+> +{
+> +	/* If there are any jobs in this HW queue, we're not idle */
+> +	if (atomic_read(&core->sched.credit_count))
+> +		return false;
+> +
+> +	return true;
+> +}
+> +
+> +static int rocket_ioctl_submit_job(struct drm_device *dev, struct drm_file *file,
+> +				   struct drm_rocket_job *job)
+> +{
+> +	struct rocket_device *rdev = to_rocket_device(dev);
+> +	struct rocket_file_priv *file_priv = file->driver_priv;
+> +	struct rocket_job *rjob = NULL;
+> +	int ret = 0;
+> +
+> +	if (job->task_count == 0)
+> +		return -EINVAL;
+> +
+> +	rjob = kzalloc(sizeof(*rjob), GFP_KERNEL);
+> +	if (!rjob)
+> +		return -ENOMEM;
+> +
+> +	kref_init(&rjob->refcount);
+> +
+> +	rjob->rdev = rdev;
+> +
+> +	ret = drm_sched_job_init(&rjob->base,
+> +				 &file_priv->sched_entity,
+> +				 1, NULL);
+> +	if (ret)
+> +		goto out_put_job;
+> +
+> +	ret = rocket_copy_tasks(dev, file, job, rjob);
+> +	if (ret)
+> +		goto out_cleanup_job;
+> +
+> +	ret = drm_gem_objects_lookup(file,
+> +				     (void __user *)(uintptr_t)job->in_bo_handles,
+> +				     job->in_bo_handle_count, &rjob->in_bos);
+> +	if (ret)
+> +		goto out_cleanup_job;
+> +
+> +	rjob->in_bo_count = job->in_bo_handle_count;
+> +
+> +	ret = drm_gem_objects_lookup(file,
+> +				     (void __user *)(uintptr_t)job->out_bo_handles,
+> +				     job->out_bo_handle_count, &rjob->out_bos);
+> +	if (ret)
+> +		goto out_cleanup_job;
+> +
+> +	rjob->out_bo_count = job->out_bo_handle_count;
+> +
+> +	ret = rocket_job_push(rjob);
+> +	if (ret)
+> +		goto out_cleanup_job;
+> +
+> +out_cleanup_job:
+> +	if (ret)
+> +		drm_sched_job_cleanup(&rjob->base);
+> +out_put_job:
+> +	rocket_job_put(rjob);
+> +
+> +	return ret;
+> +}
+> +
+> +int rocket_ioctl_submit(struct drm_device *dev, void *data, struct drm_file *file)
+> +{
+> +	struct drm_rocket_submit *args = data;
+> +	struct drm_rocket_job *jobs;
+> +	int ret = 0;
+> +	unsigned int i = 0;
+> +
+> +	jobs = kvmalloc_array(args->job_count, sizeof(*jobs), GFP_KERNEL);
+> +	if (!jobs) {
+> +		DRM_DEBUG("Failed to allocate incoming job array\n");
+> +		return -ENOMEM;
+> +	}
+> +
+> +	if (copy_from_user(jobs,
+> +			   (void __user *)(uintptr_t)args->jobs,
+> +			   args->job_count * sizeof(*jobs))) {
+> +		ret = -EFAULT;
+> +		DRM_DEBUG("Failed to copy incoming job array\n");
+> +		goto exit;
+> +	}
+> +
+> +	for (i = 0; i < args->job_count; i++)
+> +		rocket_ioctl_submit_job(dev, file, &jobs[i]);
+> +
+> +exit:
+> +	kfree(jobs);
+> +
+> +	return ret;
+> +}
+> diff --git a/drivers/accel/rocket/rocket_job.h b/drivers/accel/rocket/rocket_job.h
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..93fa1f988c72adb7a405acbf08c1c9b87d22f9c5
+> --- /dev/null
+> +++ b/drivers/accel/rocket/rocket_job.h
+> @@ -0,0 +1,50 @@
+> +/* SPDX-License-Identifier: GPL-2.0 */
+> +/* Copyright 2024 Tomeu Vizoso <tomeu@tomeuvizoso.net> */
+> +
+> +#ifndef __ROCKET_JOB_H__
+> +#define __ROCKET_JOB_H__
+> +
+> +#include <drm/drm_drv.h>
+> +#include <drm/gpu_scheduler.h>
+> +
+> +#include "rocket_core.h"
+> +#include "rocket_drv.h"
+> +
+> +struct rocket_task {
+> +	u64 regcmd;
+> +	u32 regcmd_count;
+> +};
+> +
+> +struct rocket_job {
+> +	struct drm_sched_job base;
+> +
+> +	struct rocket_device *rdev;
+> +
+> +	struct drm_gem_object **in_bos;
+> +	struct drm_gem_object **out_bos;
+> +
+> +	u32 in_bo_count;
+> +	u32 out_bo_count;
+> +
+> +	struct rocket_task *tasks;
+> +	u32 task_count;
+> +	u32 next_task_idx;
+> +
+> +	/* Fence to be signaled by drm-sched once its done with the job */
+> +	struct dma_fence *inference_done_fence;
+> +
+> +	/* Fence to be signaled by IRQ handler when the job is complete. */
+> +	struct dma_fence *done_fence;
+> +
+> +	struct kref refcount;
+> +};
+> +
+> +int rocket_ioctl_submit(struct drm_device *dev, void *data, struct drm_file *file);
+> +
+> +int rocket_job_init(struct rocket_core *core);
+> +void rocket_job_fini(struct rocket_core *core);
+> +int rocket_job_open(struct rocket_file_priv *rocket_priv);
+> +void rocket_job_close(struct rocket_file_priv *rocket_priv);
+> +int rocket_job_is_idle(struct rocket_core *core);
+> +
+> +#endif
+> diff --git a/include/uapi/drm/rocket_accel.h b/include/uapi/drm/rocket_accel.h
+> index 8338726a83c31b954608ca505cf78bcd70d3494b..eb886351134ebef62969b1e1182ccc174f88fe9d 100644
+> --- a/include/uapi/drm/rocket_accel.h
+> +++ b/include/uapi/drm/rocket_accel.h
+> @@ -12,8 +12,10 @@ extern "C" {
+>   #endif
+>   
+>   #define DRM_ROCKET_CREATE_BO			0x00
+> +#define DRM_ROCKET_SUBMIT			0x01
+>   
+>   #define DRM_IOCTL_ROCKET_CREATE_BO		DRM_IOWR(DRM_COMMAND_BASE + DRM_ROCKET_CREATE_BO, struct drm_rocket_create_bo)
+> +#define DRM_IOCTL_ROCKET_SUBMIT			DRM_IOW(DRM_COMMAND_BASE + DRM_ROCKET_SUBMIT, struct drm_rocket_submit)
+>   
+>   /**
+>    * struct drm_rocket_create_bo - ioctl argument for creating Rocket BOs.
+> @@ -36,6 +38,59 @@ struct drm_rocket_create_bo {
+>   	__u64 offset;
+>   };
+>   
+> +/**
+> + * struct drm_rocket_task - A task to be run on the NPU
+> + *
+> + * A task is the smallest unit of work that can be run on the NPU.
+> + */
+> +struct drm_rocket_task {
+> +	/** DMA address to NPU mapping of register command buffer */
+> +	__u64 regcmd;
+> +
+> +	/** Number of commands in the register command buffer */
+> +	__u32 regcmd_count;
+> +};
+> +
+> +/**
+> + * struct drm_rocket_job - A job to be run on the NPU
+> + *
+> + * The kernel will schedule the execution of this job taking into account its
+> + * dependencies with other jobs. All tasks in the same job will be executed
+> + * sequentially on the same core, to benefit from memory residency in SRAM.
+> + */
+> +struct drm_rocket_job {
+> +	/** Pointer to an array of struct drm_rocket_task. */
+> +	__u64 tasks;
+> +
+> +	/** Pointer to a u32 array of the BOs that are read by the job. */
+> +	__u64 in_bo_handles;
+> +
+> +	/** Pointer to a u32 array of the BOs that are written to by the job. */
+> +	__u64 out_bo_handles;
+> +
+> +	/** Number of tasks passed in. */
+> +	__u32 task_count;
+> +
+> +	/** Number of input BO handles passed in (size is that times 4). */
+> +	__u32 in_bo_handle_count;
+> +
+> +	/** Number of output BO handles passed in (size is that times 4). */
+> +	__u32 out_bo_handle_count;
+> +};
+> +
+> +/**
+> + * struct drm_rocket_submit - ioctl argument for submitting commands to the NPU.
+> + *
+> + * The kernel will schedule the execution of these jobs in dependency order.
+> + */
+> +struct drm_rocket_submit {
+> +	/** Pointer to an array of struct drm_rocket_job. */
+> +	__u64 jobs;
+> +
+> +	/** Number of jobs passed in. */
+> +	__u32 job_count;
+> +};
+> +
+>   #if defined(__cplusplus)
+>   }
+>   #endif
+>
+
+-- 
+--
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Frankenstrasse 146, 90461 Nuernberg, Germany
+GF: Ivo Totev, Andrew Myers, Andrew McDonald, Boudien Moerman
+HRB 36809 (AG Nuernberg)
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
