@@ -2,202 +2,153 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5A7BAA59913
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 10 Mar 2025 16:06:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1BC2AA59B00
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 10 Mar 2025 17:29:02 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 72298444C9
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 10 Mar 2025 15:06:23 +0000 (UTC)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by lists.linaro.org (Postfix) with ESMTP id 462683F2C0
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 10 Mar 2025 15:06:07 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 0DB6744532
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 10 Mar 2025 16:29:01 +0000 (UTC)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+	by lists.linaro.org (Postfix) with ESMTPS id 659263F39F
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 10 Mar 2025 16:28:30 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=none;
-	spf=pass (lists.linaro.org: domain of robin.murphy@arm.com designates 217.140.110.172 as permitted sender) smtp.mailfrom=robin.murphy@arm.com;
-	dmarc=pass (policy=none) header.from=arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 4E10516F2;
-	Mon, 10 Mar 2025 08:06:18 -0700 (PDT)
-Received: from [10.57.39.174] (unknown [10.57.39.174])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id F15A23F5A1;
-	Mon, 10 Mar 2025 08:06:02 -0700 (PDT)
-Message-ID: <8bb8dfcb-bc44-48f2-acdb-58e6d259d25b@arm.com>
-Date: Mon, 10 Mar 2025 15:06:00 +0000
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Maxime Ripard <mripard@kernel.org>,
- Andrew Morton <akpm@linux-foundation.org>,
- Marek Szyprowski <m.szyprowski@samsung.com>,
- Sumit Semwal <sumit.semwal@linaro.org>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- Benjamin Gaignard <benjamin.gaignard@collabora.com>,
- Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>,
- "T.J. Mercier" <tjmercier@google.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Tomasz Figa <tfiga@chromium.org>,
- Mauro Carvalho Chehab <mchehab@kernel.org>
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=HjCRfgvh;
+	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 147.75.193.91 as permitted sender) smtp.mailfrom=mripard@kernel.org;
+	dmarc=pass (policy=quarantine) header.from=kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by nyc.source.kernel.org (Postfix) with ESMTP id 80D8BA45A5A;
+	Mon, 10 Mar 2025 16:22:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D3E28C4CEE5;
+	Mon, 10 Mar 2025 16:28:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1741624109;
+	bh=sfvhajnKh+JsG0G6ZCvurp8nXoOWJhhwIboB81/bSrw=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=HjCRfgvhI4AlUc9WjlFhsPXUiJyzrUc7p1qSry8OFL6MdHrIU9dymbeJiT9YIoP0D
+	 VpC7Nku3EXjciL5/o5SgIqVML56l8wAsBs9D0MV02GYwaxyVQleOU1pZm20IaC9MqS
+	 6WL2AQtsDOrq/PSSrVIqLEmgiG7O2qg68NrFKbo0o/GbNDo1vAl8GfYDxMYrV6IemA
+	 TA2xBT4nqJ+pqLZuSkQGtcP74qh8qiWlsFnT1nJd8PimtWtBMONmIe6Y1t9kfiJZfa
+	 zgaHp90KP/TRdKxL6fw5PTlDtElMmsEjwJkxJo+mqgxXI69OPILcXnnV23cR/5WNFt
+	 Lra5gXAYY48XQ==
+Date: Mon, 10 Mar 2025 17:28:26 +0100
+From: Maxime Ripard <mripard@kernel.org>
+To: Robin Murphy <robin.murphy@arm.com>
+Message-ID: <20250310-expert-piculet-of-fascination-3813cd@houat>
 References: <20250310-dmem-cgroups-v1-0-2984c1bc9312@kernel.org>
- <20250310-dmem-cgroups-v1-11-2984c1bc9312@kernel.org>
-From: Robin Murphy <robin.murphy@arm.com>
-Content-Language: en-GB
-In-Reply-To: <20250310-dmem-cgroups-v1-11-2984c1bc9312@kernel.org>
+ <20250310-dmem-cgroups-v1-6-2984c1bc9312@kernel.org>
+ <2af9ea85-b31d-49c9-b574-38c33cc89cef@arm.com>
+MIME-Version: 1.0
+In-Reply-To: <2af9ea85-b31d-49c9-b574-38c33cc89cef@arm.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 462683F2C0
-X-Spamd-Bar: ----
-X-Spamd-Result: default: False [-4.90 / 15.00];
+X-Rspamd-Queue-Id: 659263F39F
+X-Spamd-Bar: --------
+X-Spamd-Result: default: False [-8.10 / 15.00];
 	REPLY(-4.00)[];
-	BAYES_HAM(-3.00)[100.00%];
+	BAYES_HAM(-3.00)[99.99%];
+	SIGNED_PGP(-2.00)[];
 	SUSPICIOUS_RECIPS(1.50)[];
-	RBL_SENDERSCORE_REPUT_7(0.50)[217.140.110.172:from];
-	BAD_REP_POLICIES(0.10)[];
-	MIME_GOOD(-0.10)[text/plain];
-	RCVD_NO_TLS_LAST(0.10)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	MID_RHS_NOT_FQDN(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:147.75.193.91];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	MIME_GOOD(-0.20)[multipart/signed,text/plain];
+	RCPT_COUNT_TWELVE(0.00)[23];
+	FREEMAIL_CC(0.00)[linux-foundation.org,samsung.com,linaro.org,amd.com,collabora.com,arm.com,google.com,linux.intel.com,suse.de,gmail.com,ffwll.ch,chromium.org,kernel.org,xs4all.nl,ideasonboard.com,kvack.org,vger.kernel.org,lists.linux.dev,lists.freedesktop.org,lists.linaro.org];
+	MIME_TRACE(0.00)[0:+,1:+,2:~];
 	ARC_NA(0.00)[];
-	DMARC_POLICY_ALLOW(0.00)[arm.com,none];
-	FREEMAIL_TO(0.00)[kernel.org,linux-foundation.org,samsung.com,linaro.org,amd.com,collabora.com,arm.com,google.com,linux.intel.com,suse.de,gmail.com,ffwll.ch,chromium.org];
-	FREEMAIL_CC(0.00)[xs4all.nl,ideasonboard.com,kvack.org,vger.kernel.org,lists.linux.dev,lists.freedesktop.org,lists.linaro.org];
-	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:28939, ipnet:217.140.110.0/24, country:GB];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	MISSING_XM_UA(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DNSWL_BLOCKED(0.00)[217.140.110.172:from];
 	RCVD_COUNT_TWO(0.00)[2];
 	FROM_EQ_ENVFROM(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	NEURAL_HAM(-0.00)[-1.000];
-	MID_RHS_MATCH_FROM(0.00)[];
-	R_DKIM_NA(0.00)[];
-	R_SPF_ALLOW(0.00)[+ip4:217.140.96.0/20];
+	TO_DN_SOME(0.00)[];
+	DNSWL_BLOCKED(0.00)[147.75.193.91:from,100.75.92.58:received];
 	TAGGED_RCPT(0.00)[renesas];
-	TO_DN_SOME(0.00)[]
+	NEURAL_HAM(-0.00)[-1.000];
+	ASN(0.00)[asn:54825, ipnet:147.75.192.0/21, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RBL_SENDERSCORE_REPUT_BLOCKED(0.00)[147.75.193.91:from]
 X-Rspamd-Action: no action
-Message-ID-Hash: NREGDB2ZSHDINQKCMTZALBNB3JKDAJRT
-X-Message-ID-Hash: NREGDB2ZSHDINQKCMTZALBNB3JKDAJRT
-X-MailFrom: robin.murphy@arm.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Hans Verkuil <hverkuil@xs4all.nl>, Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>, linux-mm@kvack.org, linux-kernel@vger.kernel.org, iommu@lists.linux.dev, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+Message-ID-Hash: Y3NDECY2AHMGNQ7NUUNIHOTZ6IYLACNI
+X-Message-ID-Hash: Y3NDECY2AHMGNQ7NUUNIHOTZ6IYLACNI
+X-MailFrom: mripard@kernel.org
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: Andrew Morton <akpm@linux-foundation.org>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Thomas Zimmermann <tzimmermann@suse.de>, Simona Vetter <simona@ffwll.ch>, Tomasz Figa <tfiga@chromium.org>, Mauro Carvalho Chehab <mchehab@kernel.org>, Hans Verkuil <hverkuil@xs4all.nl>, Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>, linux-mm@kvack.org, linux-kernel@vger.kernel.org, iommu@lists.linux.dev, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH RFC 11/12] drm/gem: Add cgroup memory accounting
+Subject: [Linaro-mm-sig] Re: [PATCH RFC 06/12] dma: direct: Provide accessor to dmem region
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NREGDB2ZSHDINQKCMTZALBNB3JKDAJRT/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/Y3NDECY2AHMGNQ7NUUNIHOTZ6IYLACNI/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Type: multipart/mixed; boundary="===============1084677769791334213=="
+
+
+--===============1084677769791334213==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="u3dzblkp3nldqa3e"
+Content-Disposition: inline
+
+
+--u3dzblkp3nldqa3e
+Content-Type: text/plain; protected-headers=v1; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH RFC 06/12] dma: direct: Provide accessor to dmem region
+MIME-Version: 1.0
+
+On Mon, Mar 10, 2025 at 02:56:37PM +0000, Robin Murphy wrote:
+> On 2025-03-10 12:06 pm, Maxime Ripard wrote:
+> > Consumers of the direct DMA API will have to know which region their
+> > device allocate from in order for them to charge the memory allocation
+> > in the right one.
+>=20
+> This doesn't seem to make much sense - dma-direct is not an allocator
+> itself, it just provides the high-level dma_alloc_attrs/dma_alloc_pages/e=
+tc.
+> interfaces wherein the underlying allocations _could_ come from CMA, but
+> also a per-device coherent/restricted pool, or a global coherent/atomic
+> pool, or the regular page allocator, or in one weird corner case the SWIO=
+TLB
+> buffer, or...
+
+I guess it wasn't super clear, but what I meant is that it's an
+allocator to the consumer: it gets called, and returns a buffer. How it
+does so is transparent to the device, and on the other side of the
+abstraction.
+
+I do agree that the logic is complicated to follow, and that's what I
+was getting at in the cover letter.
+
+Maxime
+
+--u3dzblkp3nldqa3e
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCZ88TKQAKCRDj7w1vZxhR
+xeXsAP4+bkSf79vghGDX51PPSs2osfbQ4iJhpf10VBrMEcmucQD/fkdqnL4MMQHy
+pTxcWVuD9g8C9rHEtoXUgWXksoghYQ4=
+=f/EX
+-----END PGP SIGNATURE-----
+
+--u3dzblkp3nldqa3e--
+
+--===============1084677769791334213==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-
-On 2025-03-10 12:06 pm, Maxime Ripard wrote:
-> In order to support any device using the GEM support, let's charge any
-> GEM DMA allocation into the dmem cgroup.
-> 
-> Signed-off-by: Maxime Ripard <mripard@kernel.org>
-> ---
->   drivers/gpu/drm/drm_gem.c            | 5 +++++
->   drivers/gpu/drm/drm_gem_dma_helper.c | 6 ++++++
->   include/drm/drm_device.h             | 1 +
->   include/drm/drm_gem.h                | 2 ++
->   4 files changed, 14 insertions(+)
-> 
-> diff --git a/drivers/gpu/drm/drm_gem.c b/drivers/gpu/drm/drm_gem.c
-> index ee811764c3df4b4e9c377a66afd4967512ba2001..e04733cb49353cf3ff9672d883b106a083f80d86 100644
-> --- a/drivers/gpu/drm/drm_gem.c
-> +++ b/drivers/gpu/drm/drm_gem.c
-> @@ -108,10 +108,11 @@ drm_gem_init(struct drm_device *dev)
->   	dev->vma_offset_manager = vma_offset_manager;
->   	drm_vma_offset_manager_init(vma_offset_manager,
->   				    DRM_FILE_PAGE_OFFSET_START,
->   				    DRM_FILE_PAGE_OFFSET_SIZE);
->   
-> +
->   	return drmm_add_action(dev, drm_gem_init_release, NULL);
->   }
->   
->   /**
->    * drm_gem_object_init_with_mnt - initialize an allocated shmem-backed GEM
-> @@ -973,10 +974,14 @@ drm_gem_release(struct drm_device *dev, struct drm_file *file_private)
->    * drm_gem_object_init().
->    */
->   void
->   drm_gem_object_release(struct drm_gem_object *obj)
->   {
-> +
-> +	if (obj->cgroup_pool_state)
-> +		dmem_cgroup_uncharge(obj->cgroup_pool_state, obj->size);
-> +
->   	if (obj->filp)
->   		fput(obj->filp);
->   
->   	drm_gem_private_object_fini(obj);
->   
-> diff --git a/drivers/gpu/drm/drm_gem_dma_helper.c b/drivers/gpu/drm/drm_gem_dma_helper.c
-> index 16988d316a6dc702310fa44c15c92dc67b82802b..6236feb67ddd6338f0f597a0606377e0352ca6ed 100644
-> --- a/drivers/gpu/drm/drm_gem_dma_helper.c
-> +++ b/drivers/gpu/drm/drm_gem_dma_helper.c
-> @@ -104,10 +104,16 @@ __drm_gem_dma_create(struct drm_device *drm, size_t size, bool private)
->   	if (ret) {
->   		drm_gem_object_release(gem_obj);
->   		goto error;
->   	}
->   
-> +	ret = dmem_cgroup_try_charge(dma_get_dmem_cgroup_region(drm->dev),
-> +				     size,
-> +				     &dma_obj->base.cgroup_pool_state, NULL);
-> +	if (ret)
-> +		goto error;
-
-Doesn't that miss cleaning up gem_obj? However, surely you want the 
-accounting before the allocation anyway, like in the other cases. 
-Otherwise userspace is still able to allocate massive amounts of memory 
-and incur some of the associated side-effects of that, it just doesn't 
-get to keep said memory for very long :)
-
-Thanks,
-Robin.
-
-> +
->   	return dma_obj;
->   
->   error:
->   	kfree(dma_obj);
->   	return ERR_PTR(ret);
-> diff --git a/include/drm/drm_device.h b/include/drm/drm_device.h
-> index c91f87b5242d7a499917eb4aeb6ca8350f856eb3..58987f39ba8718eb768f6261fb0a1fbf16b38549 100644
-> --- a/include/drm/drm_device.h
-> +++ b/include/drm/drm_device.h
-> @@ -1,8 +1,9 @@
->   #ifndef _DRM_DEVICE_H_
->   #define _DRM_DEVICE_H_
->   
-> +#include <linux/cgroup_dmem.h>
->   #include <linux/list.h>
->   #include <linux/kref.h>
->   #include <linux/mutex.h>
->   #include <linux/idr.h>
->   
-> diff --git a/include/drm/drm_gem.h b/include/drm/drm_gem.h
-> index fdae947682cd0b7b06db5e35e120f049a0f30179..95fe8ed48a26204020bb47d6074689829c410465 100644
-> --- a/include/drm/drm_gem.h
-> +++ b/include/drm/drm_gem.h
-> @@ -430,10 +430,12 @@ struct drm_gem_object {
->   	 * @lru:
->   	 *
->   	 * The current LRU list that the GEM object is on.
->   	 */
->   	struct drm_gem_lru *lru;
-> +
-> +	struct dmem_cgroup_pool_state *cgroup_pool_state;
->   };
->   
->   /**
->    * DRM_GEM_FOPS - Default drm GEM file operations
->    *
-> 
+Content-Disposition: inline
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============1084677769791334213==--
