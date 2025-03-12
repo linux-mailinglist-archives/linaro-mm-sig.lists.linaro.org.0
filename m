@@ -2,114 +2,271 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id D9E20A5A56E
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 10 Mar 2025 22:01:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3E745A5D419
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 12 Mar 2025 02:37:51 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0012044553
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 10 Mar 2025 21:01:20 +0000 (UTC)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id 0C00644542
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 10 Mar 2025 21:01:04 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 0A9B24410C
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 12 Mar 2025 01:37:50 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.11])
+	by lists.linaro.org (Postfix) with ESMTPS id C32B644031
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 12 Mar 2025 01:37:27 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=XELG8I6W;
-	spf=pass (lists.linaro.org: domain of vkoul@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=vkoul@kernel.org;
-	dmarc=pass (policy=quarantine) header.from=kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by dfw.source.kernel.org (Postfix) with ESMTP id B8CE95C5D11;
-	Mon, 10 Mar 2025 20:58:46 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4CE6AC4CEE5;
-	Mon, 10 Mar 2025 21:01:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1741640463;
-	bh=aYyGi+0GlhtZZOl3eElkEgro/Og6UgEBW7ME0Eh2cEM=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=XELG8I6WYICbM6YDswWTIzR5vBY0ZCdCcGJ/XwRd+rPF8jWKv8h3HR7gxrqFV55Yk
-	 YC03rspukIbY7kdASAul32qn3tTTF0Mjsk4YyEhIb3u5/Qj1XV8c+Zcm0FFT2h6v/m
-	 F+zkgxIJhbNnd1atUL3+ZMTBsK1wGd1gj7eVnMIfItWqcZQxPHdLUiPB76A4Z3cCow
-	 IF6tot8i/DiR7HlFaN9aZMA18vcatU2dTOp5YxckUak3MYgFIzXJtGfVYF6T2k2P02
-	 /qA3Twqr+moDiV/Zm01s5J3HOrF4lAXYPAyy3NYPcJQWX3oaLIFX74c7Yw+/KrdG1v
-	 Dwfdi1Ujv4h8A==
-Date: Tue, 11 Mar 2025 02:30:59 +0530
-From: Vinod Koul <vkoul@kernel.org>
-To: Jyothi Kumar Seerapu <quic_jseerapu@quicinc.com>
-Message-ID: <Z89TC7fKzmmeu6tW@vaman>
-References: <20250212120536.28879-1-quic_jseerapu@quicinc.com>
- <20250212120536.28879-2-quic_jseerapu@quicinc.com>
-MIME-Version: 1.0
+	dkim=pass header.d=intel.com header.s=Intel header.b="OH7q/d36";
+	spf=pass (lists.linaro.org: domain of dan.j.williams@intel.com designates 192.198.163.11 as permitted sender) smtp.mailfrom=dan.j.williams@intel.com;
+	dmarc=pass (policy=none) header.from=intel.com;
+	arc=reject ("signature check failed: fail, {[1] = sig:microsoft.com:reject}")
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1741743448; x=1773279448;
+  h=date:from:to:cc:subject:message-id:references:
+   in-reply-to:mime-version;
+  bh=lK4xktmhmtsLcBmwsWCeVzG6OHgFPKoSSQkcbFdxrcU=;
+  b=OH7q/d36zPf8OW8X6s4/QWeM59zpI5VX6DD4sqI2JTHtAHLfLhiWBAso
+   /8VxrWImY/OVZoKGgMjRWLCXCrfIKC1hIMwh/KCJQUwyzcNsY0a8mO+N1
+   +fgXzFV3nUQAfWbW10CXqTibKX7QOER9AfAm/M62ZdgN/5ngXxzsd5xto
+   U7QUncY/C7AkfFmQ3cuJwIMR6E8l+u90XeOK6hYNDDjBxWT7YCppcR8fm
+   5pVw4fpHSh7xqqSxY1QEeRXvPN9W+DCuID0ZC9A/MGKTRO4KRxhrXECKH
+   Tf0pN36JBkWksRa/0nvCVn979P+P7wLlB9SlUv06OZwUWmYuHdslX/u7b
+   w==;
+X-CSE-ConnectionGUID: LHZLtbEXS+KDP24qXokRpw==
+X-CSE-MsgGUID: drX3yxLTQomkom/OfahUrg==
+X-IronPort-AV: E=McAfee;i="6700,10204,11370"; a="53448238"
+X-IronPort-AV: E=Sophos;i="6.14,240,1736841600";
+   d="scan'208";a="53448238"
+Received: from orviesa009.jf.intel.com ([10.64.159.149])
+  by fmvoesa105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Mar 2025 18:37:26 -0700
+X-CSE-ConnectionGUID: xdiefz1USOiaGnhD7Cgomw==
+X-CSE-MsgGUID: z90UtD4KRYqZQl9mdttPYw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.14,240,1736841600";
+   d="scan'208";a="120193427"
+Received: from orsmsx603.amr.corp.intel.com ([10.22.229.16])
+  by orviesa009.jf.intel.com with ESMTP/TLS/AES256-GCM-SHA384; 11 Mar 2025 18:37:26 -0700
+Received: from ORSMSX901.amr.corp.intel.com (10.22.229.23) by
+ ORSMSX603.amr.corp.intel.com (10.22.229.16) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.44; Tue, 11 Mar 2025 18:37:25 -0700
+Received: from ORSEDG602.ED.cps.intel.com (10.7.248.7) by
+ ORSMSX901.amr.corp.intel.com (10.22.229.23) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.14 via Frontend Transport; Tue, 11 Mar 2025 18:37:25 -0700
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com (104.47.58.174)
+ by edgegateway.intel.com (134.134.137.103) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2507.44; Tue, 11 Mar 2025 18:37:25 -0700
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=JC+Ld3koqNdb6HXxIN6fJjismL6kLF/qHhqM9shxmAeq/VkwcbQeND0HQz7R4wHGKqhUDBcvrxUv+KmFNKQ50VdHA97CbEbBWgSGxgTsv2Vj6xO/nKjUQbF46xQyph9GTds7Udb5+RljWdUn1rJuP+N+PuC2a/msvT6aqQKnTfJ5UWmgUpyfByW7Ejj/WOHNxnCkO9UzO/roDz12VERoS8W/4wYUNMxiRljhH6fr4764XE9FlV4wckNaMkVAurMwsSoeavV40nquB98Ou7fyWWossF8SIbU+C3WRvUAKROEyqOEJzsxZrjyiyd3q94EJME2azO28nKqzsd9Dg/hODQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Su8yCl/m9HJ4ipeRf8wS/T3VyEUWJ0hgUDBZiqYVC8U=;
+ b=COFBWTAkGQlKULOOFJZkHgPg7b+pLeCP9meBRCdlWMYRd+s0AvI/QdqO5Pu3RgpaEAn8M9e271tTvELXFlsEind5HACdS5t6BwY1H46p7Dd9pZ++vm/9jzLi5UEm3udCVDH2cTrjraiwF01qjtmiHeUnwi8HSmsBt6kCZ9ExtfKumU89wlunFIEYPSF2PmCYaDHvQUq/IzXo0IVInAlswMErByo5yGyAQY21HMGmxx5BIr4iMUJFUC1OrlYDFqWPySRGjXq42+R/gNoeu5zJq0Y55hQvJLJHZRlWh/lxwMp6F3doAau/3gGRuh5t5LuEcKba64TsY+Sql9I7rPGrVg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Received: from PH8PR11MB8107.namprd11.prod.outlook.com (2603:10b6:510:256::6)
+ by LV3PR11MB8766.namprd11.prod.outlook.com (2603:10b6:408:212::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8511.27; Wed, 12 Mar
+ 2025 01:37:17 +0000
+Received: from PH8PR11MB8107.namprd11.prod.outlook.com
+ ([fe80::6b05:74cf:a304:ecd8]) by PH8PR11MB8107.namprd11.prod.outlook.com
+ ([fe80::6b05:74cf:a304:ecd8%4]) with mapi id 15.20.8511.026; Wed, 12 Mar 2025
+ 01:37:17 +0000
+Date: Tue, 11 Mar 2025 18:37:13 -0700
+From: Dan Williams <dan.j.williams@intel.com>
+To: Jason Gunthorpe <jgg@nvidia.com>, Alexey Kardashevskiy <aik@amd.com>
+Message-ID: <67d0e549d4d27_201f029458@dwillia2-xfh.jf.intel.com.notmuch>
+References: <Z4Hp9jvJbhW0cqWY@yilunxu-OptiPlex-7050>
+ <20250113164935.GP5556@nvidia.com>
+ <ZnDGqww5SLbVD6ET@yilunxu-OptiPlex-7050>
+ <20250114133553.GB5556@nvidia.com>
+ <17cd9b77-4620-4883-9a6a-8d1cab822c88@amd.com>
+ <20250115130102.GM5556@nvidia.com>
+ <f1ac048f-64b1-4343-ab86-ad98c24a44f5@linux.intel.com>
+ <20250117132523.GA5556@nvidia.com>
+ <835c7751-d8ba-4af0-812f-2b3a9a91d0bc@amd.com>
+ <20250120132843.GI5556@nvidia.com>
+Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20250212120536.28879-2-quic_jseerapu@quicinc.com>
+In-Reply-To: <20250120132843.GI5556@nvidia.com>
+X-ClientProxiedBy: MW2PR2101CA0025.namprd21.prod.outlook.com
+ (2603:10b6:302:1::38) To PH8PR11MB8107.namprd11.prod.outlook.com
+ (2603:10b6:510:256::6)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH8PR11MB8107:EE_|LV3PR11MB8766:EE_
+X-MS-Office365-Filtering-Correlation-Id: 37b5634f-18cf-489a-67b2-08dd61066c5c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|7416014|376014|366016|1800799024;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Kzkxq8zPsyIXGe0BThEHRfArRJy3R4j37lCV1QxvGzVF+zI/UfjN3zPTJwyA?=
+ =?us-ascii?Q?8HHxo/z/mDb3V79KO63pHAUtK3MVspTnfDW2mY4DYwSosN4pFwE07bfibsEE?=
+ =?us-ascii?Q?5p/VIbLJp+IN6LjY00hRAOuS9pp0KfI69XtWCJJXxc7Llu/sSmUDzZd0mU8g?=
+ =?us-ascii?Q?D7dSTRewPfBgyS9w0KkidOhWo8qYuoKj6wlzg1vD48O/f/USagGeUcO+I3ii?=
+ =?us-ascii?Q?OQ6zvNM0KNJwWOZjd51aHmk7u/J3c9rSLYx5wZJNmQmlbDOm4QjhHc9tbua2?=
+ =?us-ascii?Q?Aux6DJ+vqoKmqcsPCu0efKoML/HArDzOrfcNAD4MnvKtENtJOmTxB8O1BJ0p?=
+ =?us-ascii?Q?BxrUsZbLPo86p3SKTyRiy3aaIb8V0tY8+e2n6hhOXjnTMVpEv+xOUyuuIRqD?=
+ =?us-ascii?Q?SCuWKEFeHl50eeh6S0i4uXKOFW+Lf76mzFTtLEwnanjr+c0wsUDtYwKfoeVF?=
+ =?us-ascii?Q?fAXHPff7KTnPi9lwsI89ZR2LDCfUmt/3cRvKjE0XGrMmKAE/ejvPLvaTzvZ2?=
+ =?us-ascii?Q?9u7AqMXRD+0P1Kai90OZUzIrANwPWUO8pH8VGp6OCGTRXr+RWo78msJkJYh+?=
+ =?us-ascii?Q?Oux+k8jBnUQjdPdes9zzjqRYycpd7Tgwqu4EG5AxUGrUZVTaF61VV1BSYw6B?=
+ =?us-ascii?Q?Rc5Ii/LP7+s8reNbtP4TNkMM3vbO96gDwmnRkMcI/h9OO3UsDJOtWJP75IH5?=
+ =?us-ascii?Q?lVB8dklwS5zXlk1WzuihNuievaW6ZO8EQ0Alyfn7Piziv6KWYKa2IGmXA3Qh?=
+ =?us-ascii?Q?EjwLMYcwsjXkXnF1Pp9ZvSp2kNO9q2FHlbNMVmo3pR905rJJGY0i4/VyTOqq?=
+ =?us-ascii?Q?jsbf1z+qZG0Tg0dnt8BdwgIhkv45aJ1vOX4pg0+iW1TjJoPbH73KdqG9tWz+?=
+ =?us-ascii?Q?shr1i08lstb5b+jG3WCbhOSmVs/oa2RrJS5yYgRB31BIwH/NXtNgysoRjOpP?=
+ =?us-ascii?Q?Q+UTSabBzbcmUqBy7uAurSe8YJ6flB6DIewSD6pHtr1PO3g83llQr6ad+aXx?=
+ =?us-ascii?Q?0fJrvcxuCWRDq4auHDgZAcdURGy6jdmWMrhcEpr83iwJYipXe6gxgATj6dIh?=
+ =?us-ascii?Q?AddYg45T8EEJ+Vn0vS03U0sV8++PE/bMtxDE3ukVUhK0JMR1r6Six09L7/03?=
+ =?us-ascii?Q?gjQCQ42ZgkvSGRyxEC99NXcLiOTI8yT466tiRs2kPvPuFqQmn4q0PxbRc7UO?=
+ =?us-ascii?Q?5bhKBK+p5dIpKNjf4oeZfnfZcqH4fZF6Vjmj4kgtQV8th5xj9+ZXZPJLMNGt?=
+ =?us-ascii?Q?II359vQBf9BAVQBXXIFvdUqaTJgYzMO+rydkLRispOflMlUkGxiB2It6jKa2?=
+ =?us-ascii?Q?Rv6oJs3Nnvya4tGnM3tZTXtojgO0D+wJFXDBa3MmhmdO+4QXvINQhpktY1mH?=
+ =?us-ascii?Q?aqRivjasiieU3uyav4PePS0HZHSj?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH8PR11MB8107.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(376014)(366016)(1800799024);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Ttrl8dLU7exUQCLVc4KQwjKgtPQkM2R9IiqSAJxuXFtjUg6asrMb43p+3mBV?=
+ =?us-ascii?Q?2AKVeqT6KhjlSCQD2x6/FUtmM1bDiriMC+u1YOI1u0T/ODeub07WR6t+CogI?=
+ =?us-ascii?Q?vFMIKlvzrjzMMeuZWSKDyf9mRNLuyCfcQ+kNuuaHCaz1+HGb2/r5aV7fzuE2?=
+ =?us-ascii?Q?5OwYUo8dBLPxblVVXS/MXdz64YlBP5viqUefI0ehosxBZXHmgrlYd1yqlk0B?=
+ =?us-ascii?Q?/WtVZDqPz/4mW4KWPEBo5rjPzAdCe1VlIBt+f1ZSfzer+7ohp2XPMV89S7Go?=
+ =?us-ascii?Q?lE092PAmdW5NZ9su0f7m7ThXFHAyZFDez1FhCLCKW0sZ0xHGb9CCk8nbW4S+?=
+ =?us-ascii?Q?7BYwGWt7Jr+aI5MWOspWziB8g52tPg2DzSaD4HSubgvyXk9giIdWLMDDfCms?=
+ =?us-ascii?Q?P/zF3LwsRQDj12MUA6S9YM2A/QKBH2PKX6CJD+PibS+MGMCFXFaN9xGVZ1Rh?=
+ =?us-ascii?Q?MXhCcMIa+vRsN4+hzKhO8mWnDQoGsbSiyZJ0UPIHjatc5X5jM8xeElte0a1i?=
+ =?us-ascii?Q?21PwvDns/7BjHnkyqKD96hgzmDHil+mHn5U5h7bNPCpBNvb0WdMZZbY/M17w?=
+ =?us-ascii?Q?bGX793hcJLA0yWTLwH9fwvtwYyveQOYhGxoKRLsgdAiDNDqpnNF6Y02yxMpk?=
+ =?us-ascii?Q?Vz71p4rCysLPBVSK9t909DyyrzYkSwbny0HE4j/aEqUcHmaPbus5zZ1wDl0m?=
+ =?us-ascii?Q?zZiezpveJ8oT1uwMBSHvWslvEb/1XkK31M2S0dLbfshswTiVoPLI3Go17fRJ?=
+ =?us-ascii?Q?gEfXUAJEFZnAWkn5w4Dfdv8sfITp9ZohcfPWXJJOu9imT0/+f/iPVVpJtVPJ?=
+ =?us-ascii?Q?WXAQLYniOa//w8DDVdEjoPx7ea7OvY6Up6ESD8bSF7r5Woiub58ljSzcrxZA?=
+ =?us-ascii?Q?8WZl9hKLDNWhsprRt4DyEsVPXqNgnburSAZPS0798Cy+7UbEL5w/kF5lu6SP?=
+ =?us-ascii?Q?Te19HkkIKdEhGGdH61wF6wT08gVc6ze9Trrg2CHeG7Dta1LhKkR4Z6D1fmw4?=
+ =?us-ascii?Q?1/w5BwW4FvLQS1r4Lbbs3Dpi8zcgIthkpbYZCO3tfL5xy+Tp1c045mrYD9MU?=
+ =?us-ascii?Q?ZnZafgmdgOgNEt7oSKdqwftJ54jMjB8JF+gkZdgqRClIu0CfNxu/jbgnMVN2?=
+ =?us-ascii?Q?VlAlYeJE7E/AZHqjLbW7DTvea419OsnEqxF2FnopDRNYhN29aXSFCS7+wQsI?=
+ =?us-ascii?Q?/1T7UkFNRRmmrWCVtRtmpYxqoQqQ/L/QtkiZd2dv/ymXQw/EqN6Pcnfg59tB?=
+ =?us-ascii?Q?XmVZA9KyhehQ+9DXPI1zHKuIFFb63SWRUZhSzz3Z6MV9yuifRe5Tg48t8JIV?=
+ =?us-ascii?Q?DXRigpE1bYJ6LmylIAh4wGuCx9gJs5HPXrWRi13yJ1hLVP/ebal1OT4+OZH4?=
+ =?us-ascii?Q?XVe916I7smxIG/xVRiOvgOVpiZp1RNJF2hsakCz49FdXJ/96smV37HIC/N7R?=
+ =?us-ascii?Q?gpBbGn1MUayuC1tklPA7hEpEgdC4nj7EfTEmEkUEXZZnj0lbGbip9ocapUK0?=
+ =?us-ascii?Q?sNbnJ2IkhaZbCeyBZKhF6xxIZIvQ3C+ZGUYExlZncVHqat0xJgLuXeQlzS/P?=
+ =?us-ascii?Q?dUhYYjw8NciON0X8H4SzLfRUlmmaazYbp3XSM3N+iZCl44RHxmN0XkLPXTrw?=
+ =?us-ascii?Q?wg=3D=3D?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: 37b5634f-18cf-489a-67b2-08dd61066c5c
+X-MS-Exchange-CrossTenant-AuthSource: PH8PR11MB8107.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Mar 2025 01:37:17.3926
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: F4zyWPgxAbFeVdbfvJBOeiPHtC20mGPC6h/cUgUUQ2LmVVQPoU3S/0/gh8AbqmCI8jeQOC/uc7+CczncDSjDee3GjFgjhjHOUFipeSc348E=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR11MB8766
+X-OriginatorOrg: intel.com
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 0C00644542
-X-Spamd-Bar: ----
-X-Spamd-Result: default: False [-4.76 / 15.00];
-	BAYES_HAM(-2.76)[98.96%];
-	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	RCVD_IN_DNSWL_HI(-0.50)[139.178.84.217:from];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
+X-Rspamd-Queue-Id: C32B644031
+X-Spamd-Bar: ------
+X-Spamd-Result: default: False [-6.61 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
+	BAYES_HAM(-2.61)[98.28%];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
+	RBL_SENDERSCORE_REPUT_9(-1.00)[192.198.163.11:from];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	R_SPF_ALLOW(-0.20)[+ip4:192.198.163.0/26];
 	MIME_GOOD(-0.10)[text/plain];
-	TO_DN_SOME(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
 	MISSING_XM_UA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[13];
-	ARC_NA(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_TLS_LAST(0.00)[];
+	ASN(0.00)[asn:4983, ipnet:192.198.162.0/23, country:US];
+	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[24];
+	DWL_DNSWL_BLOCKED(0.00)[intel.com:dkim];
+	DKIM_TRACE(0.00)[intel.com:+];
+	RCVD_IN_DNSWL_NONE(0.00)[104.47.58.174:received];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	DWL_DNSWL_BLOCKED(0.00)[kernel.org:dkim];
-	RCVD_COUNT_TWO(0.00)[2];
-	DNSWL_BLOCKED(0.00)[100.75.92.58:received];
+	NEURAL_HAM(-0.00)[-1.000];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+]
+	RCVD_TLS_LAST(0.00)[];
+	DNSWL_BLOCKED(0.00)[192.198.163.11:from];
+	URIBL_BLOCKED(0.00)[mgamail.intel.com:helo,mgamail.intel.com:rdns,dwillia2-xfh.jf.intel.com.notmuch:mid];
+	RCVD_COUNT_SEVEN(0.00)[7]
 X-Rspamd-Action: no action
-Message-ID-Hash: 7CIUXKXFBDUJPQ5HDNYVVRRSIWC2VSQ7
-X-Message-ID-Hash: 7CIUXKXFBDUJPQ5HDNYVVRRSIWC2VSQ7
-X-MailFrom: vkoul@kernel.org
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Andi Shyti <andi.shyti@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, linux-arm-msm@vger.kernel.org, dmaengine@vger.kernel.org, linux-kernel@vger.kernel.org, linux-i2c@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, quic_msavaliy@quicinc.com, quic_vtanuku@quicinc.com
+Message-ID-Hash: AX3X2BVUDGX24LIXCI4O6AEH2MEEGYWS
+X-Message-ID-Hash: AX3X2BVUDGX24LIXCI4O6AEH2MEEGYWS
+X-MailFrom: dan.j.williams@intel.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Baolu Lu <baolu.lu@linux.intel.com>, Xu Yilun <yilun.xu@linux.intel.com>, kvm@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, sumit.semwal@linaro.org, christian.koenig@amd.com, pbonzini@redhat.com, seanjc@google.com, alex.williamson@redhat.com, vivek.kasireddy@intel.com, dan.j.williams@intel.com, yilun.xu@intel.com, linux-coco@lists.linux.dev, linux-kernel@vger.kernel.org, lukas@wunner.de, yan.y.zhao@intel.com, leon@kernel.org, zhenzhong.duan@intel.com, tao1.su@intel.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v5 RESEND 1/2] dmaengine: qcom: gpi: Add GPI Block event interrupt support
+Subject: [Linaro-mm-sig] Re: [RFC PATCH 08/12] vfio/pci: Create host unaccessible dma-buf for private device
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7CIUXKXFBDUJPQ5HDNYVVRRSIWC2VSQ7/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AX3X2BVUDGX24LIXCI4O6AEH2MEEGYWS/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On 12-02-25, 17:35, Jyothi Kumar Seerapu wrote:
-> GSI hardware generates an interrupt for each transfer completion.
-> For multiple messages within a single transfer, this results in
-> N interrupts for N messages, leading to significant software
-> interrupt latency.
-> 
-> To mitigate this latency, utilize Block Event Interrupt (BEI) mechanism.
-> Enabling BEI instructs the GSI hardware to prevent interrupt generation
-> and BEI is disabled when an interrupt is necessary.
-> 
-> When using BEI, consider splitting a single multi-message transfer into
-> chunks of 8 messages internally and so interrupts are not expected for
-> the first 7 message completions, only the last message triggers
-> an interrupt, indicating the completion of 8 messages.
-> 
-> This BEI mechanism enhances overall transfer efficiency.
+[ My ears have been burning for a couple months regarding this thread
+  and I have finally had the chance to circle back and read through all
+  the discussion on PATCH 01/12 and this PATCH 08/12, pardon the latency
+  while I addressed some CXL backlog ]
 
-That sounds good but I dont like the idea that we add a custom interface
-for this. Please use DMA_PREP_INTERRUPT instead. Adding this flag should
-trigger N interrupts, absence of this should lead to Block events only
+Jason Gunthorpe wrote:
+> On Mon, Jan 20, 2025 at 08:45:51PM +1100, Alexey Kardashevskiy wrote:
+> 
+> > > For CC I'm expecting the KVM fd to be the handle for the cVM, so any
+> > > RPCs that want to call into the secure world need the KVM FD to get
+> > > the cVM's identifier. Ie a "bind to cVM" RPC will need the PCI
+> > > information and the cVM's handle.
+> > 
+> > And keep KVM fd open until unbind? Or just for the short time to call the
+> > PSP?
+> 
+> iommufd will keep the KVM fd alive so long as the vIOMMU object
+> exists. Other uses for kvm require it to work like this.
+> 
+> > > But it also seems to me that VFIO should be able to support putting
+> > > the device into the RUN state without involving KVM or cVMs.
+> > 
+> > AMD's TDI bind handler in the PSP wants a guest handle ("GCTX") and a guest
+> > device BDFn, and VFIO has no desire to dive into this KVM business beyond
+> > IOMMUFD.
+> 
+> As in my other email, VFIO is not restricted to running VMs, useful
+> things should be available to apps like DPDK.
+> 
+> There is a use case for using TDISP and getting devices up into an
+> ecrypted/attested state on pure bare metal without any KVM, VFIO
+> should work in that use case too.
 
--- 
-~Vinod
+Are you sure you are not confusing the use case for native PCI CMA plus
+PCIe IDE *without* PCIe TDISP? In other words validate device
+measurements over a secure session and set up link encryption, but not
+enable DMA to private memory. Without a cVM there is no private memory
+for the device to talk to in the TDISP run state, but you can certainly
+encrypt the PCIe link.
+
+However that pretty much only gets you an extension of a secure session
+to a PCIe link state. It does not enable end-to-end MMIO and DMA
+integrity+confidentiality.
+
+Note that to my knowledge all but the Intel TEE I/O implementation
+disallow routing T=0 traffic over IDE. The host bridge only accepts T=1
+traffic over IDE to private memory which is not this "without any KVM"
+use case.
+
+The uapi proposed in the PCI/TSM series [1] is all about the setup of PCI
+CMA + PCIe IDE without KVM as a precuror to all the VFIO + KVM + IOMMUFD
+work needed to get the TDI able to publish private MMIO and DMA to
+private memory.
+
+[1]: http://lore.kernel.org/174107245357.1288555.10863541957822891561.stgit@dwillia2-xfh.jf.intel.com
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
