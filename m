@@ -2,226 +2,129 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 226CAA5FF0E
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 13 Mar 2025 19:17:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8E2BDA6366E
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 16 Mar 2025 17:41:34 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E6AF845830
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 13 Mar 2025 18:17:19 +0000 (UTC)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id 59D86410BC
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 13 Mar 2025 18:17:02 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 42523449FE
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 16 Mar 2025 16:41:33 +0000 (UTC)
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+	by lists.linaro.org (Postfix) with ESMTPS id 54BA7447DC
+	for <linaro-mm-sig@lists.linaro.org>; Sun, 16 Mar 2025 16:41:14 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=ckrwnbay;
-	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=mripard@kernel.org;
-	dmarc=pass (policy=quarantine) header.from=kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by dfw.source.kernel.org (Postfix) with ESMTP id 223AD5C5DF5;
-	Thu, 13 Mar 2025 18:14:45 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 22BEAC4CEDD;
-	Thu, 13 Mar 2025 18:17:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1741889821;
-	bh=DXglPiNNV84Je9bZlfd3wkaek0EXUcsHteRC16eVmM8=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=ckrwnbayb5nxjjekbrpH+Bfn1tGnTSe5VjfyI3zlwSEo4IVMokY85CipHU+Xenac/
-	 eOS2KApmgXHCoF8qJuZ7DPP3XdCjCOOTdllG7Y004ZUtI0Gm5LoF3dRYjujXvuq/tA
-	 NJyestEaQryHvfOXiLJlY7vwfgOveJVdA0A6a8X67ekYjhsL72rXfLzm79jy0uq26D
-	 0sr7oBrzKzBKVQ6/cRjYD6QIvQtdAll4UZSYLVMtrIhT3gcXmIgx4ODBgs8qQ9wozq
-	 Cla7oizVWP8n3nihzMelgNDqxW/BDc1bINOQvhRzDjIIyZju4FuHWoiJmH3wRcxU1q
-	 LVJIahEP6jzsg==
-Date: Thu, 13 Mar 2025 19:16:58 +0100
-From: Maxime Ripard <mripard@kernel.org>
-To: Robin Murphy <robin.murphy@arm.com>
-Message-ID: <20250313-wooden-violet-quokka-001ef5@houat>
-References: <20250310-dmem-cgroups-v1-0-2984c1bc9312@kernel.org>
- <20250310-dmem-cgroups-v1-6-2984c1bc9312@kernel.org>
- <2af9ea85-b31d-49c9-b574-38c33cc89cef@arm.com>
- <20250310-expert-piculet-of-fascination-3813cd@houat>
- <0b057c55-fe02-4c83-af69-37770dc83eb8@arm.com>
+	dkim=pass header.d=google.com header.s=20230601 header.b=k7ZoZZjj;
+	spf=pass (lists.linaro.org: domain of tjmercier@google.com designates 209.85.128.49 as permitted sender) smtp.mailfrom=tjmercier@google.com;
+	dmarc=pass (policy=reject) header.from=google.com
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-43cfe808908so45615e9.0
+        for <linaro-mm-sig@lists.linaro.org>; Sun, 16 Mar 2025 09:41:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1742143273; x=1742748073; darn=lists.linaro.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=7GBF4hrYNg5S2oageJXSHFRedLtcB0fhaX79E6KBaak=;
+        b=k7ZoZZjjLWBAid4zScPYqjeimXoon5VLWD+q0d/3VtYz5zqyMMX8hUBlBBuvUck4zM
+         e0xmfpmbwG5p30qkYEXYZN3WfWYVbQzpri2kPDsQH3hsvkUVMW+b2WQHz8aZpzGyzVzG
+         W7lS0ME7k3HMWcjI+AFSkkDLlt6k1KA7qBqM0/847C0BNGccq5EQBGGpRc86chEIDX89
+         PuWBoWGw3gyY2uFj5qaSU+1UtPxRlceHmIrIEzLw7Xiey8ITqm75zGnX/fUFAcljc8kr
+         dyzGduOTlGewwEidFFjB2/9R8SbVYx9P553ZIpMCamoWxTYlzOzcPH5esUQrJ4Nw6bDL
+         xP7g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1742143273; x=1742748073;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=7GBF4hrYNg5S2oageJXSHFRedLtcB0fhaX79E6KBaak=;
+        b=woluVyZ79dST8JtfVVXzvqJynGzHWK5KoXzqVjUtL4IqEFchU1c/ASUDb3ml001wwX
+         l4ugl03RfCXXoWhm72uResZPjOn9e1UKmiATx+pzYCQ7CtrIRehVV576mpGjtL3+acFX
+         ml2xoUWFZUss1AFPGSUzi7SdjUwRBaF6EEJZynVa8sFQk6Upw6xX7qhvHN66GflTWi74
+         ZKPGoGKKQN+FO/xwOQxR4Dv0qguyc8QexhkMZfkDPlnRrf0kbUC6UQGphYsCW3atypyo
+         jp/wKSR4/LcX+JPyV6zCuc4baEaNDF6aCz3W0vBvPfXJbLow9ptMM5ZPta6f3SMNcIDG
+         UBlg==
+X-Forwarded-Encrypted: i=1; AJvYcCWxfYM1U7HmKOMnBZM/lQOmaPWs3JiauQn66oeWNzExgWIH/UYHg0Pyf2CgJ6vGB9v6gmkWUuM+czykb9OD@lists.linaro.org
+X-Gm-Message-State: AOJu0Yzyx67M6w7xS7N7O4D1/v45JWoK9xHYwsIlNuJXPnh2PLHrZQo8
+	8Efaih3+/m/uOVy4WPpLvRXrIatKnkaz6c3lRy1v1YugKNi5hM5zOb+17FsQdIGQkMBGLyHL/Ol
+	LzZgr8x84+++fMj+Sg/WCWH0xtZnS7byrywJ6
+X-Gm-Gg: ASbGncvQU4/bO3s+MkLOOuh+R0gs78qwHdAujgTh/Z9L1+vuA5lU+cMUtR7EHpNrsTb
+	W4/ID51Xsv7u73Dgzocm7M32ml9T9yfpGYNtHg3R08vvDmkD25mrhYL688zMscydBRMgjM/GpRD
+	xk1e3KjNCsMZ4jPri3Ivcq5tMP
+X-Google-Smtp-Source: AGHT+IF01D4Ob7pcCq8yAjLqxY9BCY5mwz1iWe7tPkMuZuzOjPrqhF7cEGLklDlZvCaLJveOXlkJJNWEbV8nPmuKJPg=
+X-Received: by 2002:a05:600d:14:b0:43b:df25:8c4 with SMTP id
+ 5b1f17b1804b1-43d251f360emr1754805e9.4.1742143273244; Sun, 16 Mar 2025
+ 09:41:13 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <0b057c55-fe02-4c83-af69-37770dc83eb8@arm.com>
+References: <20250315130201758KxKWj6Mb7bgN6SqVrzu94@zte.com.cn>
+In-Reply-To: <20250315130201758KxKWj6Mb7bgN6SqVrzu94@zte.com.cn>
+From: "T.J. Mercier" <tjmercier@google.com>
+Date: Sun, 16 Mar 2025 09:41:01 -0700
+X-Gm-Features: AQ5f1JouN29fy-ISQChV-CR0419-uR30-ym4OBM0CsdHXmZK3sOodPrtzjtePzw
+Message-ID: <CABdmKX02xw+bDiW9ruXO+nLtDdidQsfKOp-N7NgvACHKyYq8xw@mail.gmail.com>
+To: feng.wei8@zte.com.cn
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 59D86410BC
-X-Spamd-Bar: -----
-X-Spamd-Result: default: False [-5.10 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
-	SIGNED_PGP(-2.00)[];
-	SUSPICIOUS_RECIPS(1.50)[];
-	RBL_SENDERSCORE_REPUT_9(-1.00)[139.178.84.217:from];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	MID_RHS_NOT_FQDN(0.50)[];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
-	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
+X-Rspamd-Queue-Id: 54BA7447DC
+X-Spamd-Bar: ----
+X-Spamd-Result: default: False [-4.00 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20230601];
+	MIME_GOOD(-0.10)[text/plain];
 	ARC_NA(0.00)[];
-	URIBL_BLOCKED(0.00)[dfw.source.kernel.org:helo,dfw.source.kernel.org:rdns];
-	FREEMAIL_CC(0.00)[linux-foundation.org,samsung.com,linaro.org,amd.com,collabora.com,arm.com,google.com,linux.intel.com,suse.de,gmail.com,ffwll.ch,chromium.org,kernel.org,xs4all.nl,ideasonboard.com,kvack.org,vger.kernel.org,lists.linux.dev,lists.freedesktop.org,lists.linaro.org];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCVD_COUNT_ONE(0.00)[1];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.49:from];
 	MISSING_XM_UA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_EQ_ENVFROM(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	DNSWL_BLOCKED(0.00)[139.178.84.217:from];
-	TAGGED_RCPT(0.00)[renesas];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_SEVEN(0.00)[10];
 	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_DN_SOME(0.00)[]
+	RCVD_TLS_LAST(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RBL_SENDERSCORE_REPUT_BLOCKED(0.00)[209.85.128.49:from];
+	TO_DN_NONE(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	DKIM_TRACE(0.00)[google.com:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: OKQO5VJWPJRDDF5NIPE46N36QPKWLWNT
-X-Message-ID-Hash: OKQO5VJWPJRDDF5NIPE46N36QPKWLWNT
-X-MailFrom: mripard@kernel.org
+Message-ID-Hash: QHCX6ZXGWRT2G2SF2K2ZTGJPHGH7HIUZ
+X-Message-ID-Hash: QHCX6ZXGWRT2G2SF2K2ZTGJPHGH7HIUZ
+X-MailFrom: tjmercier@google.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Andrew Morton <akpm@linux-foundation.org>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Thomas Zimmermann <tzimmermann@suse.de>, Simona Vetter <simona@ffwll.ch>, Tomasz Figa <tfiga@chromium.org>, Mauro Carvalho Chehab <mchehab@kernel.org>, Hans Verkuil <hverkuil@xs4all.nl>, Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>, linux-mm@kvack.org, linux-kernel@vger.kernel.org, iommu@lists.linux.dev, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+CC: sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, brian.starkey@arm.com, jstultz@google.com, christian.koenig@amd.com, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH RFC 06/12] dma: direct: Provide accessor to dmem region
+Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf: Replace nested max() with single max3()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OKQO5VJWPJRDDF5NIPE46N36QPKWLWNT/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QHCX6ZXGWRT2G2SF2K2ZTGJPHGH7HIUZ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============1703907245928887962=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-
---===============1703907245928887962==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="ffb7rrvpjvoby4z6"
-Content-Disposition: inline
-
-
---ffb7rrvpjvoby4z6
-Content-Type: text/plain; protected-headers=v1; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH RFC 06/12] dma: direct: Provide accessor to dmem region
-MIME-Version: 1.0
-
-On Mon, Mar 10, 2025 at 06:44:51PM +0000, Robin Murphy wrote:
-> On 2025-03-10 4:28 pm, Maxime Ripard wrote:
-> > On Mon, Mar 10, 2025 at 02:56:37PM +0000, Robin Murphy wrote:
-> > > On 2025-03-10 12:06 pm, Maxime Ripard wrote:
-> > > > Consumers of the direct DMA API will have to know which region their
-> > > > device allocate from in order for them to charge the memory allocat=
-ion
-> > > > in the right one.
-> > >=20
-> > > This doesn't seem to make much sense - dma-direct is not an allocator
-> > > itself, it just provides the high-level dma_alloc_attrs/dma_alloc_pag=
-es/etc.
-> > > interfaces wherein the underlying allocations _could_ come from CMA, =
-but
-> > > also a per-device coherent/restricted pool, or a global coherent/atom=
-ic
-> > > pool, or the regular page allocator, or in one weird corner case the =
-SWIOTLB
-> > > buffer, or...
-> >=20
-> > I guess it wasn't super clear, but what I meant is that it's an
-> > allocator to the consumer: it gets called, and returns a buffer. How it
-> > does so is transparent to the device, and on the other side of the
-> > abstraction.
-> >=20
-> > I do agree that the logic is complicated to follow, and that's what I
-> > was getting at in the cover letter.
->=20
-> Right, but ultimately my point is that when we later end up with:
->=20
-> struct dmem_cgroup_region *
-> dma_get_dmem_cgroup_region(struct device *dev)
-> {
-> 	if (dma_alloc_direct(dev, get_dma_ops(dev)))
-> 		return dma_direct_get_dmem_cgroup_region(dev);
->=20
-> 		=3D dma_contiguous_get_dmem_cgroup_region(dev);
->=20
-> it's objectively wrong given what dma_alloc_direct() means in context:
->=20
-> void *dma_alloc_attrs(...)
-> {
-> 	if (dma_alloc_direct(dev, ops))
-> 		cpu_addr =3D dma_direct_alloc(...);
->=20
-> where dma_direct_alloc() may then use at least 5 different allocation
-> methods, only one of which is CMA. Accounting things which are not CMA to
-> CMA seems to thoroughly defeat the purpose of having such fine-grained
-> accounting at all.
->=20
-> This is why the very notion of "consumers of dma-direct" should
-> fundamentally not be a thing IMO. Drivers consume the DMA API interfaces,
-> and the DMA API ultimately consumes various memory allocators, but what
-> happens in between is nobody else's business; dma-direct happens to
-> represent *some* paths between the two, but there are plenty more paths to
-> the same (and different) allocators through other DMA API implementations=
- as
-> well. Which route a particular call takes to end up at a particular
-> allocator is not meaningful unless you are the DMA ops dispatch code.
->=20
-> Or to put it another way, to even go for the "dumbest possible correct
-> solution", the plumbing of dma_get_dmem_cgroup_region() would need to be
-> about as complex and widespread as the plumbing of dma_alloc_attrs() itse=
-lf
-> ;)
-
-I largely agree with the sentiment, and I think the very idea of
-dma_get_dmem_cgroup_region() is a bad one for that reason. But since I
-wasn't too sure what a good one might look like, I figured it would be a
-good way to start the discussion still :)
-
-> I think I see why a simple DMA attribute couldn't be made to work, as
-> dmem_cgroup_uncharge() can't simply look up the pool the same way
-> dmem_cgroup_try_charge() found it, since we still need a cg for that and
-> get_current_dmemcs() can't be assumed to be stable over time, right?
-> At the point I'm probably starting to lean towards a whole new DMA op wit=
-h a
-> properly encapsulated return type (and maybe a long-term goal of
-> consolidating the 3 or 4 different allocation type we already have)
-
-It felt like a good solution to me too, and what I alluded to with
-struct page or folio. My feeling was that the best way to do it would be
-to encapsulate it into the structure returned by the dma_alloc_* API.
-That's a pretty large rework though, so I wanted to make sure I was on
-the right path before doing so.
-
-> or just have a single dmem region for "DMA API memory" and don't care
-> where it came from (although I do see the issues with that too - you
-> probably wouldn't want to ration a device-private pool the same way as
-> global system memory, for example)
-
-Yeah, the CMA pool is probably something you want to limit differently
-as well.
-
-Maxime
-
---ffb7rrvpjvoby4z6
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCZ9MhGQAKCRDj7w1vZxhR
-xd9pAQCHcGvhv8bNn26UvuNcyqdmxp8TBRjnsTOXt3Y6nu+UiwD/c+NEwXwAONYX
-R/jM767xucC1ylTWThh2/9kyYuWCpwM=
-=byXD
------END PGP SIGNATURE-----
-
---ffb7rrvpjvoby4z6--
-
---===============1703907245928887962==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============1703907245928887962==--
+T24gRnJpLCBNYXIgMTQsIDIwMjUgYXQgMTA6MDLigK9QTSA8ZmVuZy53ZWk4QHp0ZS5jb20uY24+
+IHdyb3RlOg0KPg0KPiBGcm9tOiBGZW5nV2VpIDxmZW5nLndlaThAenRlLmNvbS5jbj4NCj4NCj4g
+VXNlIG1heDMoKSBtYWNybyBpbnN0ZWFkIG9mIG5lc3RpbmcgbWF4KCkgdG8gc2ltcGxpZnkgdGhl
+IHJldHVybg0KPiBzdGF0ZW1lbnQuDQo+DQo+IFNpZ25lZC1vZmYtYnk6IEZlbmdXZWkgPGZlbmcu
+d2VpOEB6dGUuY29tLmNuPg0KDQpUaGUgY29tbWl0IHN1YmplY3Qgc2hvdWxkIGluY2x1ZGUgImRt
+YS1idWY6IGhlYXBzOiIgYXMgYSBwcmVmaXguDQoNCldpdGggdGhhdDoNClJldmlld2VkLWJ5OiBU
+LkouIE1lcmNpZXIgPHRqbWVyY2llckBnb29nbGUuY29tPg0KDQo+IC0tLQ0KPiAgZHJpdmVycy9k
+bWEtYnVmL2RtYS1oZWFwLmMgfCAyICstDQo+ICAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24o
+KyksIDEgZGVsZXRpb24oLSkNCj4NCj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZG1hLWJ1Zi9kbWEt
+aGVhcC5jIGIvZHJpdmVycy9kbWEtYnVmL2RtYS1oZWFwLmMNCj4gaW5kZXggM2NiZTg3ZDRhNDY0
+Li45NmNiOWFiNTczMWEgMTAwNjQ0DQo+IC0tLSBhL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtaGVhcC5j
+DQo+ICsrKyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtaGVhcC5jDQo+IEBAIC0xNDcsNyArMTQ3LDcg
+QEAgc3RhdGljIGxvbmcgZG1hX2hlYXBfaW9jdGwoc3RydWN0IGZpbGUgKmZpbGUsIHVuc2lnbmVk
+IGludCB1Y21kLA0KPiAgICAgICAgICAgICAgICAgaW5fc2l6ZSA9IDA7DQo+ICAgICAgICAgaWYg
+KCh1Y21kICYga2NtZCAmIElPQ19PVVQpID09IDApDQo+ICAgICAgICAgICAgICAgICBvdXRfc2l6
+ZSA9IDA7DQo+IC0gICAgICAga3NpemUgPSBtYXgobWF4KGluX3NpemUsIG91dF9zaXplKSwgZHJ2
+X3NpemUpOw0KPiArICAgICAgIGtzaXplID0gbWF4Myhpbl9zaXplLCBvdXRfc2l6ZSwgZHJ2X3Np
+emUpOw0KPg0KPiAgICAgICAgIC8qIElmIG5lY2Vzc2FyeSwgYWxsb2NhdGUgYnVmZmVyIGZvciBp
+b2N0bCBhcmd1bWVudCAqLw0KPiAgICAgICAgIGlmIChrc2l6ZSA+IHNpemVvZihzdGFja19rZGF0
+YSkpIHsNCj4gLS0NCj4gMi4yNS4xDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2ln
+QGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8t
+bW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
