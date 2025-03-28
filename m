@@ -2,88 +2,104 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 44473A741D9
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 28 Mar 2025 01:49:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D70AEA75273
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 28 Mar 2025 23:22:23 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 1C99844789
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 28 Mar 2025 00:49:19 +0000 (UTC)
-Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com [136.143.188.112])
-	by lists.linaro.org (Postfix) with ESMTPS id E9A9344322
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 28 Mar 2025 00:49:06 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9C89E44A78
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 28 Mar 2025 22:22:22 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.11])
+	by lists.linaro.org (Postfix) with ESMTPS id 54A4F4425A
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 28 Mar 2025 22:22:09 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=collabora.com header.s=zohomail header.b=DtxW+hk0;
-	spf=pass (lists.linaro.org: domain of dmitry.osipenko@collabora.com designates 136.143.188.112 as permitted sender) smtp.mailfrom=dmitry.osipenko@collabora.com;
-	arc=pass ("zohomail.com:s=zohoarc:i=1");
-	dmarc=pass (policy=none) header.from=collabora.com
-ARC-Seal: i=1; a=rsa-sha256; t=1743122927; cv=none;
-	d=zohomail.com; s=zohoarc;
-	b=IzZR/6eV3eRANWwtaDsVX/tXgsystpLRs4MCOJQyyFvwjM8t4p1XelmrqOJEbuc0Bt+fbmHaeE3tOre1KtzUOsEK8itnIDNuh7g8IEjms5/nuJvB4KUs1kpy/T1IIq7EDjNE3xdz9OpmRQtJY1IWZHkLeE61bOOS8rpmem4wK0M=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc;
-	t=1743122927; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
-	bh=y4jDLIxxgTPU6S6kjP6W2qy0YbeeCk7wPRc5Aobjd8M=;
-	b=Nmte/jjj7G01iR2nwqUhdLMHRg+n7VG7CdERbuYd7ANJ9k0UZEu4UQkeGyagX3eRqZDAuHz68CaoyCklRKpot31/s0RfCAz4clsFJOnwQ55xaloi4vk0p7DNxGx2JUcQ6F/D07INAwgkhQT48mM6ybk4+1Hc5vaDvgIeR5kx4so=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=collabora.com;
-	spf=pass  smtp.mailfrom=dmitry.osipenko@collabora.com;
-	dmarc=pass header.from=<dmitry.osipenko@collabora.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1743122927;
-	s=zohomail; d=collabora.com; i=dmitry.osipenko@collabora.com;
-	h=Message-ID:Date:Date:MIME-Version:Subject:Subject:To:To:Cc:Cc:References:From:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
-	bh=y4jDLIxxgTPU6S6kjP6W2qy0YbeeCk7wPRc5Aobjd8M=;
-	b=DtxW+hk0x+nE/5ZN/O4jFoR06MHA4xywBRKT++cphAAK0IL8yZXUakntasdEI4Jg
-	JGZc3Kw+3j2ng4V1AyKeeJSive2GpXY7ZY4yVMilLaiC9n+hbUfg15rtQRkEh86Zi9a
-	s1HNnPjN84Gn0FKEvYHhPlH9wwFBrEXOIjtSKZB0=
-Received: by mx.zohomail.com with SMTPS id 174312292550316.712910908575054;
-	Thu, 27 Mar 2025 17:48:45 -0700 (PDT)
-Message-ID: <f438c1ae-add1-4ff1-b9f3-6996fc441cd9@collabora.com>
-Date: Fri, 28 Mar 2025 03:48:40 +0300
+	dkim=pass header.d=intel.com header.s=Intel header.b="VOVHyTn/";
+	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 198.175.65.11 as permitted sender) smtp.mailfrom=lkp@intel.com;
+	dmarc=pass (policy=none) header.from=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1743200530; x=1774736530;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=G98Z3WGYvhW2A7hi2E5Ks/YG6A7og48XM823kzIjspc=;
+  b=VOVHyTn/vEz+VJLp2FCM7U194U0Hqz/aoBvuc8f9KjIaJ1C/9Ot2iMml
+   uf653bncUY6/DhhCKXNbbGlq5fERCT2bhszCET/X0fRTWSCB/V4llZlL+
+   x+lG1k8bTwqF+FBDPA17Cvz3/QLcO7EWUbdL7+vbhwOF0qS09JyPBo9w5
+   vSTvKF1bzFyDrQxADbpBe3VL3fYK5pTJdGziVb6dvPvODQxXbQQHQwDB6
+   2ixnyynAsWNfDyP019yE111JexohkLpbFARoSiyLG3jCpPyoyCOqQ3STx
+   g58SKqHTpvQTBLeQovTqNGgO5hbmxaLe0wP8a1MulrSacSxMdepk/m8pA
+   w==;
+X-CSE-ConnectionGUID: REAXst8gTki7DxmlxXy31g==
+X-CSE-MsgGUID: 8rD0neNcSMy68LiQX8vQfA==
+X-IronPort-AV: E=McAfee;i="6700,10204,11387"; a="54771483"
+X-IronPort-AV: E=Sophos;i="6.14,284,1736841600";
+   d="scan'208";a="54771483"
+Received: from fmviesa001.fm.intel.com ([10.60.135.141])
+  by orvoesa103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Mar 2025 15:22:09 -0700
+X-CSE-ConnectionGUID: KYawj+qMRMyHBjjedYu1Iw==
+X-CSE-MsgGUID: ZOy7Bdi5RhSgFN2XMyjDdA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.14,284,1736841600";
+   d="scan'208";a="156553352"
+Received: from lkp-server02.sh.intel.com (HELO e98e3655d6d2) ([10.239.97.151])
+  by fmviesa001.fm.intel.com with ESMTP; 28 Mar 2025 15:22:04 -0700
+Received: from kbuild by e98e3655d6d2 with local (Exim 4.96)
+	(envelope-from <lkp@intel.com>)
+	id 1tyI5R-0007ju-2g;
+	Fri, 28 Mar 2025 22:22:01 +0000
+Date: Sat, 29 Mar 2025 06:21:16 +0800
+From: kernel test robot <lkp@intel.com>
+To: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
+	Jens Wiklander <jens.wiklander@linaro.org>,
+	Sumit Garg <sumit.garg@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>,
+	Apurupa Pattapu <quic_apurupa@quicinc.com>,
+	Kees Cook <kees@kernel.org>,
+	"Gustavo A. R. Silva" <gustavoars@kernel.org>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
+Message-ID: <202503290620.2KJEcZM6-lkp@intel.com>
+References: <20250327-qcom-tee-using-tee-ss-without-mem-obj-v3-8-7f457073282d@oss.qualcomm.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Rob Clark <robdclark@gmail.com>, dri-devel@lists.freedesktop.org
-References: <20250327213632.7903-1-robdclark@gmail.com>
-From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
-Content-Language: en-US
-In-Reply-To: <20250327213632.7903-1-robdclark@gmail.com>
-X-ZohoMailClient: External
+Content-Disposition: inline
+In-Reply-To: <20250327-qcom-tee-using-tee-ss-without-mem-obj-v3-8-7f457073282d@oss.qualcomm.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: E9A9344322
-X-Spamd-Bar: --------
-X-Spamd-Result: default: False [-9.00 / 15.00];
-	REPLY(-4.00)[];
+X-Rspamd-Queue-Id: 54A4F4425A
+X-Spamd-Bar: -----
+X-Spamd-Result: default: False [-6.00 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
 	BAYES_HAM(-3.00)[99.99%];
-	ARC_ALLOW(-1.00)[zohomail.com:s=zohoarc:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[collabora.com,none];
-	RWL_MAILSPIKE_VERYGOOD(-0.20)[136.143.188.112:from];
-	R_SPF_ALLOW(-0.20)[+ip4:136.143.188.0/24];
-	R_DKIM_ALLOW(-0.20)[collabora.com:s=zohomail];
-	ONCE_RECEIVED(0.20)[];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	R_SPF_ALLOW(-0.20)[+ip4:198.175.65.0/26];
 	MIME_GOOD(-0.10)[text/plain];
-	FREEMAIL_CC(0.00)[amd.com,chromium.org,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,linaro.org,vger.kernel.org,lists.linaro.org];
 	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:2639, ipnet:136.143.188.0/24, country:US];
-	RCVD_COUNT_ONE(0.00)[1];
-	RCPT_COUNT_TWELVE(0.00)[13];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com,lists.freedesktop.org];
-	RCVD_TLS_LAST(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[20];
+	ARC_NA(0.00)[];
+	ASN(0.00)[asn:4983, ipnet:198.175.64.0/23, country:US];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_COUNT_THREE(0.00)[3];
 	FROM_EQ_ENVFROM(0.00)[];
-	NEURAL_HAM(-0.00)[-0.997];
+	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	DKIM_TRACE(0.00)[collabora.com:+]
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	URIBL_BLOCKED(0.00)[intel.com:mid,intel.com:dkim,intel.com:email];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[intel.com:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: ZJYOCYVRQCGOZ6B7HOUXZHIQUAV62WFH
-X-Message-ID-Hash: ZJYOCYVRQCGOZ6B7HOUXZHIQUAV62WFH
-X-MailFrom: dmitry.osipenko@collabora.com
+Message-ID-Hash: VXEBL5WMT7PLDZP4TB66XMG2DQPCIVPY
+X-Message-ID-Hash: VXEBL5WMT7PLDZP4TB66XMG2DQPCIVPY
+X-MailFrom: lkp@intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Rob Clark <robdclark@chromium.org>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, open list <linux-kernel@vger.kernel.org>, "open list:DMA BUFFER SHARING FRAMEWORK:Keyword:bdma_(?:buf|fence|resv)b" <linux-media@vger.kernel.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK:Keyword:bdma_(?:buf|fence|resv)b" <linaro-mm-sig@lists.linaro.org>
+CC: oe-kbuild-all@lists.linux.dev, linux-arm-msm@vger.kernel.org, op-tee@lists.trustedfirmware.org, linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org, Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v4] drm/syncobj: Extend EXPORT_SYNC_FILE for timeline syncobjs
+Subject: [Linaro-mm-sig] Re: [PATCH v3 08/11] tee: add Qualcomm TEE driver
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZJYOCYVRQCGOZ6B7HOUXZHIQUAV62WFH/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VXEBL5WMT7PLDZP4TB66XMG2DQPCIVPY/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -93,78 +109,74 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On 3/28/25 00:36, Rob Clark wrote:
-...
->  static int drm_syncobj_import_sync_file_fence(struct drm_file *file_private,
-> -					      int fd, int handle)
-> +					      int fd, int handle, u64 point)
->  {
->  	struct dma_fence *fence = sync_file_get_fence(fd);
->  	struct drm_syncobj *syncobj;
-> @@ -755,14 +755,18 @@ static int drm_syncobj_import_sync_file_fence(struct drm_file *file_private,
->  		return -ENOENT;
->  	}
->  
-> -	drm_syncobj_replace_fence(syncobj, fence);
-> +	if (point) {
-> +		drm_syncobj_add_point(syncobj, dma_fence_chain_alloc(), fence, point);
+Hi Amirreza,
 
-Nit: check dma_fence_chain_alloc() for ENOMEM
+kernel test robot noticed the following build warnings:
 
-> +	} else {
-> +		drm_syncobj_replace_fence(syncobj, fence);
-> +	}
+[auto build test WARNING on db8da9da41bced445077925f8a886c776a47440c]
 
-Nit: checkpath should complain about the unnecessary braces
+url:    https://github.com/intel-lab-lkp/linux/commits/Amirreza-Zarrabi/tee-allow-a-driver-to-allocate-a-tee_device-without-a-pool/20250328-104950
+base:   db8da9da41bced445077925f8a886c776a47440c
+patch link:    https://lore.kernel.org/r/20250327-qcom-tee-using-tee-ss-without-mem-obj-v3-8-7f457073282d%40oss.qualcomm.com
+patch subject: [PATCH v3 08/11] tee: add Qualcomm TEE driver
+config: s390-allyesconfig (https://download.01.org/0day-ci/archive/20250329/202503290620.2KJEcZM6-lkp@intel.com/config)
+compiler: s390-linux-gcc (GCC) 14.2.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20250329/202503290620.2KJEcZM6-lkp@intel.com/reproduce)
 
->  	dma_fence_put(fence);
->  	drm_syncobj_put(syncobj);
->  	return 0;
->  }
->  
->  static int drm_syncobj_export_sync_file(struct drm_file *file_private,
-> -					int handle, int *p_fd)
-> +					int handle, u64 point, int *p_fd)
->  {
->  	int ret;
->  	struct dma_fence *fence;
-> @@ -772,7 +776,7 @@ static int drm_syncobj_export_sync_file(struct drm_file *file_private,
->  	if (fd < 0)
->  		return fd;
->  
-> -	ret = drm_syncobj_find_fence(file_private, handle, 0, 0, &fence);
-> +	ret = drm_syncobj_find_fence(file_private, handle, point, 0, &fence);
->  	if (ret)
->  		goto err_put_fd;
->  
-> @@ -869,6 +873,9 @@ drm_syncobj_handle_to_fd_ioctl(struct drm_device *dev, void *data,
->  				   struct drm_file *file_private)
->  {
->  	struct drm_syncobj_handle *args = data;
-> +	unsigned valid_flags = DRM_SYNCOBJ_HANDLE_TO_FD_FLAGS_TIMELINE |
-> +			       DRM_SYNCOBJ_HANDLE_TO_FD_FLAGS_EXPORT_SYNC_FILE;
-> +	u64 point = 0;
->  
->  	if (!drm_core_check_feature(dev, DRIVER_SYNCOBJ))
->  		return -EOPNOTSUPP;
-> @@ -876,13 +883,18 @@ drm_syncobj_handle_to_fd_ioctl(struct drm_device *dev, void *data,
->  	if (args->pad)
->  		return -EINVAL;
->  
-> -	if (args->flags != 0 &&
-> -	    args->flags != DRM_SYNCOBJ_HANDLE_TO_FD_FLAGS_EXPORT_SYNC_FILE)
-> +	if (args->flags != 0 && (args->flags & ~valid_flags))
->  		return -EINVAL;
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202503290620.2KJEcZM6-lkp@intel.com/
 
-Nit: args->flags!=0 not needed as (0 & ~valid_flags) is always false,
-same for import
+All warnings (new ones prefixed by >>):
 
-...
+>> drivers/tee/qcomtee/core.c:310: warning: Function parameter or struct member 'oic' not described in 'qcomtee_object_qtee_init'
 
+
+vim +310 drivers/tee/qcomtee/core.c
+
+   298	
+   299	/**
+   300	 * qcomtee_object_qtee_init() - Initialize an object for QTEE.
+   301	 * @object: object returned.
+   302	 * @object_id: object ID received from QTEE.
+   303	 *
+   304	 * Return: On failure, returns < 0 and sets @object to %NULL_QCOMTEE_OBJECT.
+   305	 *         On success, returns 0
+   306	 */
+   307	static int qcomtee_object_qtee_init(struct qcomtee_object_invoke_ctx *oic,
+   308					    struct qcomtee_object **object,
+   309					    unsigned int object_id)
+ > 310	{
+   311		int ret = 0;
+   312	
+   313		switch (qcomtee_object_type(object_id)) {
+   314		case QCOMTEE_OBJECT_TYPE_NULL:
+   315			*object = NULL_QCOMTEE_OBJECT;
+   316	
+   317			break;
+   318		case QCOMTEE_OBJECT_TYPE_CB:
+   319			*object = qcomtee_local_object_get(object_id);
+   320			if (*object == NULL_QCOMTEE_OBJECT)
+   321				ret = -EINVAL;
+   322	
+   323			break;
+   324	
+   325		default: /* QCOMTEE_OBJECT_TYPE_TEE */
+   326			*object = qcomtee_qtee_object_alloc(oic, object_id);
+   327			if (*object == NULL_QCOMTEE_OBJECT)
+   328				ret = -ENOMEM;
+   329	
+   330			break;
+   331		}
+   332	
+   333		return ret;
+   334	}
+   335	
 
 -- 
-Best regards,
-Dmitry
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
