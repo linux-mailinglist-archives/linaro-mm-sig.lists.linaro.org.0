@@ -2,104 +2,103 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED936A7543C
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 29 Mar 2025 05:59:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CB8C3A76377
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 31 Mar 2025 11:45:28 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DDC0344031
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 29 Mar 2025 04:59:36 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.15])
-	by lists.linaro.org (Postfix) with ESMTPS id C908343F84
-	for <linaro-mm-sig@lists.linaro.org>; Sat, 29 Mar 2025 04:59:20 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7C15344291
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 31 Mar 2025 09:45:27 +0000 (UTC)
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+	by lists.linaro.org (Postfix) with ESMTPS id 06E5E4046F
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 31 Mar 2025 09:45:15 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=aWGIvbX+;
-	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 192.198.163.15 as permitted sender) smtp.mailfrom=lkp@intel.com;
-	dmarc=pass (policy=none) header.from=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1743224361; x=1774760361;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=2Yne1QbhxA+8CZWwW8yAQd6QasSrkff6bi9RqIVQxpI=;
-  b=aWGIvbX+7sPZ3/QLXuOyv4OOr3zwnZ8/Q0x5/Eb67VUfpIjeKxI2bOeN
-   baybo38bjoJgkz3NMOWcw2Qn55cKURojY8lKJ4blDNjxfa1dr5H3hk99+
-   Sb/gAVgnEOspLXQvJvHF40XaoVLNeOeCPwl/SE0XwEREbVDpAuz2mrrY/
-   3OZ0FcajzE3nQF/JBiThjMjohu0hAXyS0xuRX8cDH3TWjqXtG76LCz+hl
-   +EwhewQWfVKLm7Ok35Pr5c4ZH8hcdITDuHyFeivlQcytvvVRBJJQfeMBz
-   6ct+DtxJWFZ8jD4Xfh8MFEHOdnEaedMndOtA4DOSEFZb3cHCN5Y6WfGUl
-   w==;
-X-CSE-ConnectionGUID: IOBaiToURtWH9J5+u++yaQ==
-X-CSE-MsgGUID: LVc3QEmIT0qEfrqWaMLyeQ==
-X-IronPort-AV: E=McAfee;i="6700,10204,11387"; a="44718741"
-X-IronPort-AV: E=Sophos;i="6.14,285,1736841600";
-   d="scan'208";a="44718741"
-Received: from orviesa001.jf.intel.com ([10.64.159.141])
-  by fmvoesa109.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Mar 2025 21:59:20 -0700
-X-CSE-ConnectionGUID: IhXeNcEpQXmA46pvyVZ4WQ==
-X-CSE-MsgGUID: 52fOeOn6QNehvEx91wWYZQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.14,285,1736841600";
-   d="scan'208";a="162869118"
-Received: from lkp-server02.sh.intel.com (HELO e98e3655d6d2) ([10.239.97.151])
-  by orviesa001.jf.intel.com with ESMTP; 28 Mar 2025 21:59:15 -0700
-Received: from kbuild by e98e3655d6d2 with local (Exim 4.96)
-	(envelope-from <lkp@intel.com>)
-	id 1tyOHo-0007uc-2j;
-	Sat, 29 Mar 2025 04:59:12 +0000
-Date: Sat, 29 Mar 2025 12:58:43 +0800
-From: kernel test robot <lkp@intel.com>
-To: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
-	Jens Wiklander <jens.wiklander@linaro.org>,
-	Sumit Garg <sumit.garg@kernel.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>,
-	Apurupa Pattapu <quic_apurupa@quicinc.com>,
-	Kees Cook <kees@kernel.org>,
-	"Gustavo A. R. Silva" <gustavoars@kernel.org>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
-Message-ID: <202503291204.imMRd3l7-lkp@intel.com>
-References: <20250327-qcom-tee-using-tee-ss-without-mem-obj-v3-3-7f457073282d@oss.qualcomm.com>
+	dkim=pass header.d=linaro.org header.s=google header.b=nO3j+lbM;
+	spf=pass (lists.linaro.org: domain of dan.carpenter@linaro.org designates 209.85.128.54 as permitted sender) smtp.mailfrom=dan.carpenter@linaro.org;
+	dmarc=pass (policy=none) header.from=linaro.org
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-43cfba466b2so42414945e9.3
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 31 Mar 2025 02:45:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1743414314; x=1744019114; darn=lists.linaro.org;
+        h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=aKS0Fboa1dtHIDG4S6gLCYTAz2lAP8mKMrYFIOMeSw4=;
+        b=nO3j+lbM9Z8YCY3fF2+ViARx6gO87oh1itxcTq6R6md78wGPQ0Had7RGdJ2WzMRkYz
+         HziMvsyHJXjCh6AsBN62OEcgJj9M3UCCut0KCq6g//4+LA4XbijvMta4IEzvGWCTUqUc
+         nRsDhttVVZBkpThajuUOPMkeyqAQ57N0pQRd02ogUYLqB6IiIAKB+Sb2S3U8w5gXcutI
+         EfujvrXeOAq5FO9WVEkPCW+vs5emZ9woBRRu0pDwO+Ev2Ym3zXN8M8hBJl1xjrcypo/r
+         S49WLaxG7Ccjn2ooRdep7EKrVYgWwQDp2SH4Kb/jo7TyKeL33008KS2Aax/pVzyHwVfO
+         esZA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1743414314; x=1744019114;
+        h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=aKS0Fboa1dtHIDG4S6gLCYTAz2lAP8mKMrYFIOMeSw4=;
+        b=ogsX4312s32NBIbnGdSpA2dJbKCm3E8Hj8oF3ezhfwNOyPqQ+G8bkYiP/y7HiEC/0N
+         bLoHYM2lVYw5ZONy3F07I6E9UEt51Hj17NHRAeTs2mBP8+CtII9OU/++0EJCVjUKfMPE
+         SzndQBjRZO/uVo4tZgqbq+dRzF0zz/tZDK+pQdxcadAuS6LTqM1hBfYxUPAPRGMGOcuM
+         Go3McQcs9LBf3SB9rfkRHx5CBq+s7XBxn1JzlwvnSFY8wO5YSL47se96QfK4tmXEpdGN
+         jr1QzjX9NMtWHBIX5zhPM/xvy3swNMzPlL62rTUj88wzRch0dprmxXDMUcqGazVTD27F
+         fJDQ==
+X-Forwarded-Encrypted: i=1; AJvYcCUwbg4ihZqbzLZciZRCrjq7AbjaAqPqc93enhpAIc1QIQ5TlQwHSpEU9uRl4KlWzRnxKntzh/6LNH2Ml9rN@lists.linaro.org
+X-Gm-Message-State: AOJu0YzNQuLRt2OlKErsYdwbBmptX2k21YmpkufECbJW43ySWwBOJj2i
+	r63HsG2weRW57zsGbRye7nSvpKAycXBtYOE8ogpHAO4/TOLQWbr9nRP0UVLR9OLhIg==
+X-Gm-Gg: ASbGncvvM39WNBFkoc/UvhY49t9Vnn9iH6jlyb9KrTZGe2WWBm0LB2s9iTqUrQ2TFl5
+	yYduQvDxyZX7MuHKey7zTcyso473QEm9v+4Sd/aN9oqumumfPTw5g4lGz5ZYVtZSZno7ThfTG9J
+	K0OQCNlB3UrWk6iU92Lf1Kk3PSDUkQLK0rIwRnyZjYKWfMQ1LgsTekHFIi90/V6rsWk8S7p8EkB
+	IRrvOGcG573q1qKruvl3x93QkSeqX6NRtAsnlR7qbWjHHuERsgL4RJyLNoRuRsvjsRZZFxSEdzj
+	OH7hD4w9J9dASIvgpTeJsz/4keu7X+6tWZIrkW1dQ/ro+EorBw==
+X-Google-Smtp-Source: AGHT+IFVzFpYmKBAGEXWi3zw7wUU5N+0+BO4pZCgxv4I35ZkC0wJP7yiqMMStfAjpc9DsFCTgkEtog==
+X-Received: by 2002:a05:600c:83c4:b0:43c:ec28:d31b with SMTP id 5b1f17b1804b1-43db62283d1mr102074565e9.10.1743414313954;
+        Mon, 31 Mar 2025 02:45:13 -0700 (PDT)
+Received: from localhost ([196.207.164.177])
+        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-43d8fbc10e1sm115778485e9.12.2025.03.31.02.45.12
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 31 Mar 2025 02:45:13 -0700 (PDT)
+Date: Mon, 31 Mar 2025 12:45:11 +0300
+From: Dan Carpenter <dan.carpenter@linaro.org>
+To: Rob Clark <robdclark@chromium.org>
+Message-ID: <5dbd6105-3acf-47ad-84d6-2920171916ac@stanley.mountain>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20250327-qcom-tee-using-tee-ss-without-mem-obj-v3-3-7f457073282d@oss.qualcomm.com>
+X-Mailer: git-send-email haha only kidding
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: C908343F84
-X-Spamd-Bar: -----
-X-Spamd-Result: default: False [-6.00 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
+X-Rspamd-Queue-Id: 06E5E4046F
+X-Spamd-Bar: ---
+X-Spamd-Result: default: False [-3.99 / 15.00];
 	BAYES_HAM(-3.00)[99.99%];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip4:192.198.163.0/26];
+	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
+	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_TRACE(0.00)[0:+];
-	MISSING_XM_UA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[20];
+	XM_UA_NO_VERSION(0.01)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.54:from];
+	RBL_SENDERSCORE_REPUT_BLOCKED(0.00)[209.85.128.54:from];
 	ARC_NA(0.00)[];
-	ASN(0.00)[asn:4983, ipnet:192.198.162.0/23, country:US];
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	RCVD_TLS_LAST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_COUNT_THREE(0.00)[3];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
+	URIBL_BLOCKED(0.00)[linaro.org:email,linaro.org:dkim,mail-wm1-f54.google.com:helo,mail-wm1-f54.google.com:rdns];
+	RCVD_COUNT_TWO(0.00)[2];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	URIBL_BLOCKED(0.00)[01.org:url];
-	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:+]
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	DKIM_TRACE(0.00)[linaro.org:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: 6QGPBEE26FVIFUHWCKW22GOA7SWSDOB4
-X-Message-ID-Hash: 6QGPBEE26FVIFUHWCKW22GOA7SWSDOB4
-X-MailFrom: lkp@intel.com
+Message-ID-Hash: ZTY4PYUYPL6THYYGTT3P2YL6U2JEHFMM
+X-Message-ID-Hash: ZTY4PYUYPL6THYYGTT3P2YL6U2JEHFMM
+X-MailFrom: dan.carpenter@linaro.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: oe-kbuild-all@lists.linux.dev, linux-arm-msm@vger.kernel.org, op-tee@lists.trustedfirmware.org, linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org, Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
+CC: Sumit Semwal <sumit.semwal@linaro.org>, Gustavo Padovan <gustavo@padovan.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Dmitry Baryshkov <lumag@kernel.org>, Pekka Paalanen <pekka.paalanen@collabora.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, kernel-janitors@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3 03/11] tee: add TEE_IOCTL_PARAM_ATTR_TYPE_UBUF
+Subject: [Linaro-mm-sig] [PATCH] dma-buf/sw_sync: Decrement refcount on error in sw_sync_ioctl_get_deadline()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6QGPBEE26FVIFUHWCKW22GOA7SWSDOB4/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZTY4PYUYPL6THYYGTT3P2YL6U2JEHFMM/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -109,141 +108,33 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Hi Amirreza,
+Call dma_fence_put(fence) before returning an error on this error path.
 
-kernel test robot noticed the following build warnings:
+Fixes: 70e67aaec2f4 ("dma-buf/sw_sync: Add fence deadline support")
+Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
+---
+ drivers/dma-buf/sw_sync.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-[auto build test WARNING on db8da9da41bced445077925f8a886c776a47440c]
-
-url:    https://github.com/intel-lab-lkp/linux/commits/Amirreza-Zarrabi/tee-allow-a-driver-to-allocate-a-tee_device-without-a-pool/20250328-104950
-base:   db8da9da41bced445077925f8a886c776a47440c
-patch link:    https://lore.kernel.org/r/20250327-qcom-tee-using-tee-ss-without-mem-obj-v3-3-7f457073282d%40oss.qualcomm.com
-patch subject: [PATCH v3 03/11] tee: add TEE_IOCTL_PARAM_ATTR_TYPE_UBUF
-config: x86_64-randconfig-122-20250329 (https://download.01.org/0day-ci/archive/20250329/202503291204.imMRd3l7-lkp@intel.com/config)
-compiler: clang version 20.1.1 (https://github.com/llvm/llvm-project 424c2d9b7e4de40d0804dd374721e6411c27d1d1)
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20250329/202503291204.imMRd3l7-lkp@intel.com/reproduce)
-
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202503291204.imMRd3l7-lkp@intel.com/
-
-sparse warnings: (new ones prefixed by >>)
->> drivers/tee/tee_core.c:410:48: sparse: sparse: incorrect type in assignment (different address spaces) @@     expected void *[noderef] uaddr @@     got void [noderef] __user * @@
-   drivers/tee/tee_core.c:410:48: sparse:     expected void *[noderef] uaddr
-   drivers/tee/tee_core.c:410:48: sparse:     got void [noderef] __user *
->> drivers/tee/tee_core.c:413:30: sparse: sparse: incorrect type in argument 1 (different address spaces) @@     expected void const [noderef] __user *ptr @@     got void *[noderef] uaddr @@
-   drivers/tee/tee_core.c:413:30: sparse:     expected void const [noderef] __user *ptr
-   drivers/tee/tee_core.c:413:30: sparse:     got void *[noderef] uaddr
-   drivers/tee/tee_core.c:802:41: sparse: sparse: incorrect type in assignment (different address spaces) @@     expected void *[noderef] uaddr @@     got void [noderef] __user * @@
-   drivers/tee/tee_core.c:802:41: sparse:     expected void *[noderef] uaddr
-   drivers/tee/tee_core.c:802:41: sparse:     got void [noderef] __user *
-   drivers/tee/tee_core.c:805:30: sparse: sparse: incorrect type in argument 1 (different address spaces) @@     expected void const [noderef] __user *ptr @@     got void *[noderef] uaddr @@
-   drivers/tee/tee_core.c:805:30: sparse:     expected void const [noderef] __user *ptr
-   drivers/tee/tee_core.c:805:30: sparse:     got void *[noderef] uaddr
->> drivers/tee/tee_core.c:413:30: sparse: sparse: dereference of noderef expression
->> drivers/tee/tee_core.c:413:30: sparse: sparse: dereference of noderef expression
-   drivers/tee/tee_core.c:694:37: sparse: sparse: dereference of noderef expression
-   drivers/tee/tee_core.c:805:30: sparse: sparse: dereference of noderef expression
-   drivers/tee/tee_core.c:805:30: sparse: sparse: dereference of noderef expression
-
-vim +410 drivers/tee/tee_core.c
-
-   378	
-   379	static int params_from_user(struct tee_context *ctx, struct tee_param *params,
-   380				    size_t num_params,
-   381				    struct tee_ioctl_param __user *uparams)
-   382	{
-   383		size_t n;
-   384	
-   385		for (n = 0; n < num_params; n++) {
-   386			struct tee_shm *shm;
-   387			struct tee_ioctl_param ip;
-   388	
-   389			if (copy_from_user(&ip, uparams + n, sizeof(ip)))
-   390				return -EFAULT;
-   391	
-   392			/* All unused attribute bits has to be zero */
-   393			if (ip.attr & ~TEE_IOCTL_PARAM_ATTR_MASK)
-   394				return -EINVAL;
-   395	
-   396			params[n].attr = ip.attr;
-   397			switch (ip.attr & TEE_IOCTL_PARAM_ATTR_TYPE_MASK) {
-   398			case TEE_IOCTL_PARAM_ATTR_TYPE_NONE:
-   399			case TEE_IOCTL_PARAM_ATTR_TYPE_VALUE_OUTPUT:
-   400				break;
-   401			case TEE_IOCTL_PARAM_ATTR_TYPE_VALUE_INPUT:
-   402			case TEE_IOCTL_PARAM_ATTR_TYPE_VALUE_INOUT:
-   403				params[n].u.value.a = ip.a;
-   404				params[n].u.value.b = ip.b;
-   405				params[n].u.value.c = ip.c;
-   406				break;
-   407			case TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_INPUT:
-   408			case TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_OUTPUT:
-   409			case TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_INOUT:
- > 410				params[n].u.ubuf.uaddr = u64_to_user_ptr(ip.a);
-   411				params[n].u.ubuf.size = ip.b;
-   412	
- > 413				if (!access_ok(params[n].u.ubuf.uaddr,
-   414					       params[n].u.ubuf.size))
-   415					return -EFAULT;
-   416	
-   417				break;
-   418			case TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_INPUT:
-   419			case TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_OUTPUT:
-   420			case TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_INOUT:
-   421				/*
-   422				 * If a NULL pointer is passed to a TA in the TEE,
-   423				 * the ip.c IOCTL parameters is set to TEE_MEMREF_NULL
-   424				 * indicating a NULL memory reference.
-   425				 */
-   426				if (ip.c != TEE_MEMREF_NULL) {
-   427					/*
-   428					 * If we fail to get a pointer to a shared
-   429					 * memory object (and increase the ref count)
-   430					 * from an identifier we return an error. All
-   431					 * pointers that has been added in params have
-   432					 * an increased ref count. It's the callers
-   433					 * responibility to do tee_shm_put() on all
-   434					 * resolved pointers.
-   435					 */
-   436					shm = tee_shm_get_from_id(ctx, ip.c);
-   437					if (IS_ERR(shm))
-   438						return PTR_ERR(shm);
-   439	
-   440					/*
-   441					 * Ensure offset + size does not overflow
-   442					 * offset and does not overflow the size of
-   443					 * the referred shared memory object.
-   444					 */
-   445					if ((ip.a + ip.b) < ip.a ||
-   446					    (ip.a + ip.b) > shm->size) {
-   447						tee_shm_put(shm);
-   448						return -EINVAL;
-   449					}
-   450				} else if (ctx->cap_memref_null) {
-   451					/* Pass NULL pointer to OP-TEE */
-   452					shm = NULL;
-   453				} else {
-   454					return -EINVAL;
-   455				}
-   456	
-   457				params[n].u.memref.shm_offs = ip.a;
-   458				params[n].u.memref.size = ip.b;
-   459				params[n].u.memref.shm = shm;
-   460				break;
-   461			default:
-   462				/* Unknown attribute */
-   463				return -EINVAL;
-   464			}
-   465		}
-   466		return 0;
-   467	}
-   468	
-
+diff --git a/drivers/dma-buf/sw_sync.c b/drivers/dma-buf/sw_sync.c
+index f5905d67dedb..b7615c5c6cac 100644
+--- a/drivers/dma-buf/sw_sync.c
++++ b/drivers/dma-buf/sw_sync.c
+@@ -438,8 +438,10 @@ static int sw_sync_ioctl_get_deadline(struct sync_timeline *obj, unsigned long a
+ 		return -EINVAL;
+ 
+ 	pt = dma_fence_to_sync_pt(fence);
+-	if (!pt)
++	if (!pt) {
++		dma_fence_put(fence);
+ 		return -EINVAL;
++	}
+ 
+ 	spin_lock_irqsave(fence->lock, flags);
+ 	if (test_bit(SW_SYNC_HAS_DEADLINE_BIT, &fence->flags)) {
 -- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+2.47.2
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
