@@ -2,186 +2,221 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id B71ABA7A73B
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  3 Apr 2025 17:47:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C4A00A7BA01
+	for <lists+linaro-mm-sig@lfdr.de>; Fri,  4 Apr 2025 11:32:42 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id AE53146010
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  3 Apr 2025 15:47:30 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 806B9450B9
-	for <linaro-mm-sig@lists.linaro.org>; Thu,  3 Apr 2025 15:47:27 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id A986F44789
+	for <lists+linaro-mm-sig@lfdr.de>; Fri,  4 Apr 2025 09:32:41 +0000 (UTC)
+Received: from mail-lj1-f177.google.com (mail-lj1-f177.google.com [209.85.208.177])
+	by lists.linaro.org (Postfix) with ESMTPS id CE1F63EA16
+	for <linaro-mm-sig@lists.linaro.org>; Fri,  4 Apr 2025 09:32:31 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=BHiu9zpQ;
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=mripard@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id 29A6843AE7;
-	Thu,  3 Apr 2025 15:47:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 10A82C4CEE5;
-	Thu,  3 Apr 2025 15:47:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1743695246;
-	bh=EaxIEi2MzHezSZZXiYbZ5wYqTfobu9WblfTbW9XFbBU=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=BHiu9zpQPAcxHwkl1Fk/pF6J7ENRms/xF8j934S+wm5det9lbVcH1nobBOu15k51V
-	 RmDBtTgJZHYPAdwvl4kISbu5SX2/wkYQ0u1jiGP4hQtG7pu7SP7BNPvH7vTC1xrEIo
-	 ltfbDK2HY+se5xOmcWrS/NNPQn+JU+xDg4xJp/d+sv7rTQqOUQghv20wtk5dTFtOFB
-	 veMF3kZMzeJReUYQtauA8m+blHkxnPv0xw+OKZwrM1t6or5a9UTXUI5ozuHTVEJYt1
-	 gw8ANUXA7riCX5CUAfPQlKcGsacCkcw1I4VNuBhzP9A+Vm0J7vijuKj1sAzGiztkWX
-	 iVhsYPqKATeJg==
-Date: Thu, 3 Apr 2025 17:47:23 +0200
-From: Maxime Ripard <mripard@kernel.org>
-To: Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>
-Message-ID: <20250403-quick-salamander-of-charisma-cab289@houat>
-References: <20250310-dmem-cgroups-v1-0-2984c1bc9312@kernel.org>
- <f5fdc666-dd72-4a4f-9270-b539a3179382@amd.com>
- <20250310-eccentric-wonderful-puffin-ddbb26@houat>
- <CAPM=9tzkLXOz=-3eujUbbjMHunR+_5JZ4oQaqNmbrWWF9WZJ0w@mail.gmail.com>
- <e08f10da-b0cd-444b-8e0b-11009b05b161@amd.com>
- <CAPM=9twgFt43OKqUY0TNopTmibnR_d891xmV=wFM91n604NUCw@mail.gmail.com>
- <5ed87c80-6fe3-4f8c-bb98-ca07f1db8c34@amd.com>
+	dkim=pass header.d=linaro.org header.s=google header.b=JtdmBXwI;
+	spf=pass (lists.linaro.org: domain of dan.carpenter@linaro.org designates 209.85.208.177 as permitted sender) smtp.mailfrom=dan.carpenter@linaro.org;
+	dmarc=pass (policy=none) header.from=linaro.org
+Received: by mail-lj1-f177.google.com with SMTP id 38308e7fff4ca-30bf5d7d107so14540991fa.2
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 04 Apr 2025 02:32:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1743759150; x=1744363950; darn=lists.linaro.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=DJa0y5uHqB+uXYxg4Ee5P8Mqg/g0/KhhIdf1SuA6v4A=;
+        b=JtdmBXwIorsBVW3NVTzogZZIq0aA9WP0gOD3Jj69hVHnA4E0Co6eo4DWkVLFP93OPG
+         GNMb2HsRvaPJ3HWWZcw0gmBZgoRJlrbhzB1p5pJdhEYIRMXfWLnCb9PsFnxrk1O5WRKe
+         eauK9vv/+qO/SaJ9+ywrFieCorP3Q7Q53A+0s27HbUsmlOmA92yw/KsnUGGI7tdRMqCl
+         qFbuAKVP9JeSbxA+fVSkppdwuzRLeHuPFgNMj1mY4Bf96ASC4SwXVqj4JGkDoOqqaiuZ
+         ZX7zuB/ygqTL/Az3Ux+xLe6B0cLczPlQLhQGLJ8QAmDxdtDxUYbudEcOfZuLC4VBO7Bn
+         YIBw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1743759150; x=1744363950;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=DJa0y5uHqB+uXYxg4Ee5P8Mqg/g0/KhhIdf1SuA6v4A=;
+        b=Wy00INO7JHPLmNHMRJ65yR35uzbhIcEDNDRh+AOsN08awmNMbldjw7Uov9gsal6LUa
+         RoMwcHYKIfCle1GN6NG7Z+QLGugCx6+BPvI1/f6VpD9WSeI5RALRlRPdHyvURe9loySa
+         EBKkrwUB1vKn62Tk6SmfMg7y49TDuXCE790f5bi3LAv1h3ND67BEfWyZ+9lmno9J74Xp
+         3FKi9+CekYf5HkKULsB/o7Lr3xUCXdABYY3k3BbWAnZmOOIafOjmR3NbuqkEdPSyHqeC
+         4eDkbI0iAGo81m/bdz80dU7OsnjqHFflToVYm+NDBBCJR9KDsgT1tknq3J5BzwTfp8aM
+         BXPw==
+X-Forwarded-Encrypted: i=1; AJvYcCW2EkgFKDpkzVRIM7LiB+yCpd8sjg3mq9ab3MGhDwlhs0jiXnXyqRCPSqLTQVMEjBbflAiYBIIhmwJl5nYP@lists.linaro.org
+X-Gm-Message-State: AOJu0Yz/2rZH65QuUPi/wOznbBmHfgQjSjqcQUVEjQ15UXDk8KQcE5eG
+	2c/izTgl1tmuof/GEwm9hzCd13SPkq0uIdvIkx21cb65Ew3NdbiJ5WpArDcW6FSAW4kbN1LOhB0
+	JpyE=
+X-Gm-Gg: ASbGnctVENCCHX09Do/41lxS09R90oTWxDvw/2eEbnx6yn4hsd/bFVd04a9ouPFwEk8
+	ZwGyrPebp4rRT9kpxwtbYuDzlE1cZl4+IYVMbYTHWUcoCAkVnPz+jSTV9vRaYCXGdiqLJajCjpR
+	9KF8FAYHicaCzZojAZkaQ9klbr/l6YbyGf7lSymAOinMmPBJ3ndi1fcuEmhB/DL/UVpU9wvkMFR
+	hDf9i9k7bJMF390bDV5xR1PxHYZPn7P+DUqoe1jb1gqflrVmO8HV+z2WuA/vKCAbCWiFWp3mEs5
+	MVm8QaJ/V18ZwBRn9/c0djMe0ciT43viamfFWuBW9wO07y9IPA==
+X-Google-Smtp-Source: AGHT+IG+NDQDuY7wpbCJM2rLv7MTUqbCkkmKdHj5rYcXcQpcsNWGZu7a+1mkk53652ueI0HgxX47pg==
+X-Received: by 2002:a05:6000:250a:b0:391:12a5:3cb3 with SMTP id ffacd0b85a97d-39d0873fd19mr1619780f8f.3.1743755263387;
+        Fri, 04 Apr 2025 01:27:43 -0700 (PDT)
+Received: from localhost ([196.207.164.177])
+        by smtp.gmail.com with UTF8SMTPSA id ffacd0b85a97d-39c3020dacfsm3780694f8f.72.2025.04.04.01.27.42
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 04 Apr 2025 01:27:42 -0700 (PDT)
+Date: Fri, 4 Apr 2025 11:27:39 +0300
+From: Dan Carpenter <dan.carpenter@linaro.org>
+To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
+Message-ID: <03c838ab-3bc8-4e5a-9f0a-331254701b0c@stanley.mountain>
+References: <5dbd6105-3acf-47ad-84d6-2920171916ac@stanley.mountain>
+ <0e832ed8-9692-43ba-869d-8db3b419f3a9@amd.com>
 MIME-Version: 1.0
-In-Reply-To: <5ed87c80-6fe3-4f8c-bb98-ca07f1db8c34@amd.com>
-X-Spamd-Result: default: False [-9.10 / 15.00];
-	REPLY(-4.00)[];
-	BAYES_HAM(-3.00)[99.99%];
-	SIGNED_PGP(-2.00)[];
-	SUSPICIOUS_RECIPS(1.50)[];
-	RBL_SENDERSCORE_REPUT_9(-1.00)[172.234.252.31:from];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	MID_RHS_NOT_FQDN(0.50)[];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.252.31];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
+Content-Disposition: inline
+In-Reply-To: <0e832ed8-9692-43ba-869d-8db3b419f3a9@amd.com>
+X-Spamd-Bar: ----
+X-Spamd-Result: default: False [-4.00 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
+	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
+	MIME_GOOD(-0.10)[text/plain];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.208.177:from];
 	ARC_NA(0.00)[];
-	FREEMAIL_CC(0.00)[gmail.com,linux-foundation.org,samsung.com,arm.com,linaro.org,collabora.com,google.com,linux.intel.com,suse.de,ffwll.ch,chromium.org,kernel.org,redhat.com,xs4all.nl,ideasonboard.com,kvack.org,vger.kernel.org,lists.linux.dev,lists.freedesktop.org,lists.linaro.org];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[24];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	URIBL_BLOCKED(0.00)[linaro.org:dkim,linaro.org:email,stanley.mountain:mid];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	NEURAL_HAM(-0.00)[-0.999];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[renesas];
-	ASN(0.00)[asn:20940, ipnet:172.232.0.0/13, country:NL];
-	TO_DN_SOME(0.00)[]
-X-Rspamd-Server: lists.linaro.org
+	FROM_HAS_DN(0.00)[];
+	RBL_SENDERSCORE_REPUT_BLOCKED(0.00)[209.85.208.177:from];
+	RCVD_COUNT_TWO(0.00)[2];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[linaro.org:+]
 X-Rspamd-Action: no action
-X-Rspamd-Queue-Id: 806B9450B9
-X-Spamd-Bar: ---------
-Message-ID-Hash: K2UU5GXQ2QBLSSNRLBARUES2AGGU56CP
-X-Message-ID-Hash: K2UU5GXQ2QBLSSNRLBARUES2AGGU56CP
-X-MailFrom: mripard@kernel.org
+X-Rspamd-Server: lists.linaro.org
+X-Rspamd-Queue-Id: CE1F63EA16
+Message-ID-Hash: THDGO7WGXHJGS53DOOGVGYHGT3T7FFGH
+X-Message-ID-Hash: THDGO7WGXHJGS53DOOGVGYHGT3T7FFGH
+X-MailFrom: dan.carpenter@linaro.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Andrew Morton <akpm@linux-foundation.org>, Robin Murphy <robin.murphy@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Thomas Zimmermann <tzimmermann@suse.de>, Simona Vetter <simona@ffwll.ch>, Tomasz Figa <tfiga@chromium.org>, Mauro Carvalho Chehab <mchehab@kernel.org>, Ben Woodard <woodard@redhat.com>, Hans Verkuil <hverkuil@xs4all.nl>, Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>, linux-mm@kvack.org, linux-kernel@vger.kernel.org, iommu@lists.linux.dev, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+CC: Rob Clark <robdclark@chromium.org>, Sumit Semwal <sumit.semwal@linaro.org>, Gustavo Padovan <gustavo@padovan.org>, Dmitry Baryshkov <lumag@kernel.org>, Pekka Paalanen <pekka.paalanen@collabora.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, kernel-janitors@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH RFC 00/12] dma: Enable dmem cgroup tracking
+Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf/sw_sync: Decrement refcount on error in sw_sync_ioctl_get_deadline()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/K2UU5GXQ2QBLSSNRLBARUES2AGGU56CP/>
-List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============2083818661969032083=="
-
-
---===============2083818661969032083==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="ladwbtqhxfoyjegt"
-Content-Disposition: inline
-
-
---ladwbtqhxfoyjegt
-Content-Type: text/plain; protected-headers=v1; charset=iso-8859-1
-Content-Disposition: inline
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH RFC 00/12] dma: Enable dmem cgroup tracking
-MIME-Version: 1.0
 
-On Thu, Apr 03, 2025 at 09:39:52AM +0200, Christian K=F6nig wrote:
-> > For the UMA GPU case where there is no device memory or eviction
-> > problem, perhaps a configurable option to just say account memory in
-> > memcg for all allocations done by this process, and state yes you can
-> > work around it with allocation servers or whatever but the behaviour
-> > for well behaved things is at least somewhat defined.
+On Mon, Mar 31, 2025 at 02:02:44PM +0200, Christian K=F6nig wrote:
+> Am 31.03.25 um 11:45 schrieb Dan Carpenter:
+> > Call dma_fence_put(fence) before returning an error on this error path.
+> >
+> > Fixes: 70e67aaec2f4 ("dma-buf/sw_sync: Add fence deadline support")
+> > Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
+> > ---
+> >  drivers/dma-buf/sw_sync.c | 4 +++-
+> >  1 file changed, 3 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/drivers/dma-buf/sw_sync.c b/drivers/dma-buf/sw_sync.c
+> > index f5905d67dedb..b7615c5c6cac 100644
+> > --- a/drivers/dma-buf/sw_sync.c
+> > +++ b/drivers/dma-buf/sw_sync.c
+> > @@ -438,8 +438,10 @@ static int sw_sync_ioctl_get_deadline(struct sync_=
+timeline *obj, unsigned long a
+> >  		return -EINVAL;
+> > =20
+> >  	pt =3D dma_fence_to_sync_pt(fence);
+> > -	if (!pt)
+> > +	if (!pt) {
+> > +		dma_fence_put(fence);
+> >  		return -EINVAL;
+> > +	}
 >=20
-> We can have that as a workaround, but I think we should approach that
-> differently.
+> Good catch.
 >=20
-> With upcoming CXL even coherent device memory is exposed to the core
-> OS as NUMA memory with just a high latency.
+> I think it would be cleaner if we add an error label and then use "ret =
+=3D -EINVAL; goto error;" here as well as a few lines below when ret is set=
+ to -ENOENT.
 >=20
-> So both in the CXL and UMA case it actually doesn't make sense to
-> allocate the memory through the driver interfaces any more. With
-> AMDGPU for example we are just replicating mbind()/madvise() within
-> the driver.
+> This way we can also avoid the ret =3D 0 in the declaration and let the c=
+ompiler actually check the lifetime of the assignment.
 >=20
-> Instead what the DRM subsystem should aim for is to allocate memory
-> using the normal core OS functionality and then import it into the
-> driver.
->=20
-> AMD, NVidia and Intel have HMM working for quite a while now but it
-> has some limitations, especially on the performance side.
->=20
-> So for AMDGPU we are currently evaluating udmabuf as alternative. That
-> seems to be working fine with different NUMA nodes, is perfectly memcg
-> accounted and gives you a DMA-buf which can be imported everywhere.
->=20
-> The only show stopper might be the allocation performance, but even if
-> that's the case I think the ongoing folio work will properly resolve
-> that.
 
-I mean, no, the showstopper to that is that using udmabuf has the
-assumption that you have an IOMMU for every device doing DMA, which is
-absolutely not true on !x86 platforms.
+I had some issues with my email and it silently ate a bunch of outgoing
+email without saving a single trace of anything I had sent.  I see
+this was one that was eaten.
 
-It might be true for all GPUs, but it certainly isn't for display
-controllers, and it's not either for codecs, ISPs, and cameras.
+Unwind ladders don't work really well for things where you just take it
+for a little while and then drop it a few lines later.  Such as here you
+take reference and then drop it or you take a lock and then drop it.
+Normally, you can add things to anywere in the unwind ladder but if you
+add an unlock to the ladder than you to add a weird bunny hop if the goto
+isn't holding the lock.  It ends up getting confusing.  With that kind of
+thing, I prefer to do the unlock before the goto.
 
-And then there's the other assumption that all memory is under the
-memory allocator control, which isn't the case on most recent platforms
-either.
+free_c:
+	free(c);
+	goto free_b;  <-- bunny hop;
+unlock:
+	unlock();
+free_b:
+	free(b);
+free_a:
+	free(a);
 
-We *need* to take CMA into account there, all the carved-out, device
-specific memory regions, and the memory regions that aren't even under
-Linux supervision like protected memory that is typically handled by the
-firmware and all you get is a dma-buf.
+	return ret;
 
-Saying that it's how you want to workaround it on AMD is absolutely
-fine, but DRM as a whole should certainly not aim for that, because it
-can't.
+regards,
+dan carpenter
 
-Maxime
+diff --git a/drivers/dma-buf/sw_sync.c b/drivers/dma-buf/sw_sync.c
+index f5905d67dedb..22a808995f10 100644
+--- a/drivers/dma-buf/sw_sync.c
++++ b/drivers/dma-buf/sw_sync.c
+@@ -438,15 +438,17 @@ static int sw_sync_ioctl_get_deadline(struct sync_tim=
+eline *obj, unsigned long a
+ 		return -EINVAL;
+=20
+ 	pt =3D dma_fence_to_sync_pt(fence);
+-	if (!pt)
+-		return -EINVAL;
++	if (!pt) {
++		ret =3D -EINVAL;
++		goto put_fence;
++	}
+=20
+ 	spin_lock_irqsave(fence->lock, flags);
+-	if (test_bit(SW_SYNC_HAS_DEADLINE_BIT, &fence->flags)) {
+-		data.deadline_ns =3D ktime_to_ns(pt->deadline);
+-	} else {
++	if (!test_bit(SW_SYNC_HAS_DEADLINE_BIT, &fence->flags)) {
+ 		ret =3D -ENOENT;
++		goto unlock;
+ 	}
++	data.deadline_ns =3D ktime_to_ns(pt->deadline);
+ 	spin_unlock_irqrestore(fence->lock, flags);
+=20
+ 	dma_fence_put(fence);
+@@ -458,6 +460,13 @@ static int sw_sync_ioctl_get_deadline(struct sync_time=
+line *obj, unsigned long a
+ 		return -EFAULT;
+=20
+ 	return 0;
++
++unlock:
++	spin_unlock_irqrestore(fence->lock, flags);
++put_fence:
++	dma_fence_put(fence);
++
++	return ret;
+ }
+=20
+ static long sw_sync_ioctl(struct file *file, unsigned int cmd,
 
---ladwbtqhxfoyjegt
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCZ+6tigAKCRDj7w1vZxhR
-xQFfAQDBTdwSGeM/HRXug8mlHyT5psOLiGa5pibxIgH2xR/VmgEA0w5A63Bu6RYa
-JKVhD2+5cuBaPVUha8mXQIEsqmEOGgI=
-=Li+I
------END PGP SIGNATURE-----
-
---ladwbtqhxfoyjegt--
-
---===============2083818661969032083==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============2083818661969032083==--
