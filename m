@@ -2,171 +2,174 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0087CA88CE9
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 14 Apr 2025 22:14:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D9AA6A88F88
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Apr 2025 00:53:02 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A1D2E455DD
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 14 Apr 2025 20:14:19 +0000 (UTC)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
-	by lists.linaro.org (Postfix) with ESMTPS id 86CD343FA1
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 14 Apr 2025 20:14:04 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E29574593F
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 14 Apr 2025 22:53:01 +0000 (UTC)
+Received: from mail-pj1-f73.google.com (mail-pj1-f73.google.com [209.85.216.73])
+	by lists.linaro.org (Postfix) with ESMTPS id 30FEC443A1
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 14 Apr 2025 22:52:45 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=ti.com header.s=ti-com-17Q1 header.b=rdxPbLcW;
-	spf=pass (lists.linaro.org: domain of afd@ti.com designates 198.47.23.234 as permitted sender) smtp.mailfrom=afd@ti.com;
-	dmarc=pass (policy=quarantine) header.from=ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53EKDr7M2255205
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Mon, 14 Apr 2025 15:13:53 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1744661633;
-	bh=u4s325uvuTrWBpavXWq6UQUmHw42JVkD/r2Zx8Uy0G4=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=rdxPbLcWyTDIJ9phfExl7sbHI2mZmInXxPpoGj/wFsJkGVlvtRGloTMdtZxIBXrED
-	 7TELmyo9rNl8zsOJZBDwZhvqEeu0SIJRVV9jNqOvbbk9PLU9jZeuGLrJIyw5ATrZyM
-	 KOFq5+UyrUBsVdrOplbysZE/EGNZ9W6GdmLbrMMQ=
-Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53EKDrWo107347
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 14 Apr 2025 15:13:53 -0500
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 14
- Apr 2025 15:13:52 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 14 Apr 2025 15:13:53 -0500
-Received: from [10.249.42.149] ([10.249.42.149])
-	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53EKDqaS030321;
-	Mon, 14 Apr 2025 15:13:52 -0500
-Message-ID: <4c77a566-d231-43f2-ada6-a81ec6b58237@ti.com>
-Date: Mon, 14 Apr 2025 15:13:52 -0500
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Thomas Petazzoni <thomas.petazzoni@bootlin.com>
-References: <20250410-uio-dma-v1-0-6468ace2c786@bootlin.com>
- <Z_yjNgY3dVnA5OVz@infradead.org> <20250414102455.03331c0f@windsurf>
- <Z_zwZYBO5Txz6lDF@infradead.org> <20250414134831.20b04c77@windsurf>
- <8f55367e-45c0-4280-b1ed-7ce9160c1fad@ti.com>
- <20250414212125.4b3e6f33@windsurf>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20250414212125.4b3e6f33@windsurf>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-Rspamd-Queue-Id: 86CD343FA1
-X-Spamd-Bar: -----
-X-Spamd-Result: default: False [-6.00 / 15.00];
+	dkim=pass header.d=google.com header.s=20230601 header.b=WpmeeJOA;
+	spf=pass (lists.linaro.org: domain of 3vJH9ZwkKDR0MCF7K5B7K9HH9E7.5HFEBG3KH-FF-LB9EBLML.EBG3KH.HK9@flex--tjmercier.bounces.google.com designates 209.85.216.73 as permitted sender) smtp.mailfrom=3vJH9ZwkKDR0MCF7K5B7K9HH9E7.5HFEBG3KH-FF-LB9EBLML.EBG3KH.HK9@flex--tjmercier.bounces.google.com;
+	dmarc=pass (policy=reject) header.from=google.com
+Received: by mail-pj1-f73.google.com with SMTP id 98e67ed59e1d1-3032ea03448so4489426a91.2
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 14 Apr 2025 15:52:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1744671164; x=1745275964; darn=lists.linaro.org;
+        h=cc:to:from:subject:message-id:mime-version:date:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=togwTMsUrCvDnQk9l1lLNxbmxkHmbN4j0HA8wPGqV8E=;
+        b=WpmeeJOAbFhRMuasL/Xcox/k189mqJU1fqOlg+OFWxryoEI5daO/a8VN573RCfk7Sw
+         ozA7FyBgS2Xtd+A0Cs84zSQzqIEi4PV6zD0+UbK3Av5zainBalByt4Wa7ecFKw7yDBxF
+         813acUdRhBBv/NQKsk/SjtPyz5osCUstBzGGLPueLPga7uOk6djWvRsUJP56x+7wDUn+
+         kI/00Mwa/6LGivHWf/mCEzqR2IJilPGwuW08Slx6MZYPghId5Mun29O9tXYD4xgUG9YY
+         X7EZLOwnD8/P6OnP3VyElijQNduLm1lYRaHld/RL2J59ThbjYGWAbnAWeIS+2/dU3bAp
+         olOQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1744671164; x=1745275964;
+        h=cc:to:from:subject:message-id:mime-version:date:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=togwTMsUrCvDnQk9l1lLNxbmxkHmbN4j0HA8wPGqV8E=;
+        b=hvJ0P5tSPUqj6FdjXUFFWfpBhUK/NT47kFMVcANAOPb84RTh+m1E6woUUexXMkKzML
+         5FcJszcg5xb8J+v/HF28kBFYJTTj7+FMOaMu4LAozBiVSikNL98BYiC9cvIvB7hdN8yB
+         k/cNuh7m8OwLl/yUt0jBnXo8eRS2EXu+lJMJ3rBNmKeTUC8e/Cp85b1dH+IizcaPkxZq
+         EGVrrilU104NTy6ImtUCfzL2WjZx66De6W28uw7tEhk09fJCKyuDgyEJ5B2a7icVtO3V
+         5ryixk7m74aiLQSY1e8MFMrzBGgZPkns8hEWnHLuGO9W1+mnhzhlv0ROePKKGwtn0mDf
+         4Suw==
+X-Forwarded-Encrypted: i=1; AJvYcCUqsfjAKwi7ysIF3cFzcA2jRa9S4+/GVhsszF/tpQfhC204D03Tsx2D9W9mFPw9Ua6BqApb9WKMSKkfxey0@lists.linaro.org
+X-Gm-Message-State: AOJu0Yy8l8IHdDAPlhmljs41YoFNjDEdIpWqM7HAhpxaggLd89+FRMeF
+	vNlki13IwDvBgfT23r7NkoWbafYV7RQrG+aTI4qZ0pKKNdXEzIjzQAHZdbTe+ik0fyx8IjTZku+
+	z74E/Xjg0Vw7jCw==
+X-Google-Smtp-Source: AGHT+IEVzbizS5bwIONCCb0BiftDU4fhMTk3w7cU8mlcfeirhwdZn8Tcrol5ikyaUqfRuPhfJrQ0elLNwB7pMag=
+X-Received: from pjtq5.prod.google.com ([2002:a17:90a:c105:b0:305:2d68:2be6])
+ (user=tjmercier job=prod-delivery.src-stubby-dispatcher) by
+ 2002:a17:90b:5242:b0:2fa:1a23:c01d with SMTP id 98e67ed59e1d1-3082367497dmr18231328a91.21.1744671164151;
+ Mon, 14 Apr 2025 15:52:44 -0700 (PDT)
+Date: Mon, 14 Apr 2025 22:52:23 +0000
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.49.0.604.gff1f9ca942-goog
+Message-ID: <20250414225227.3642618-1-tjmercier@google.com>
+From: "T.J. Mercier" <tjmercier@google.com>
+To: sumit.semwal@linaro.org, christian.koenig@amd.com, ast@kernel.org,
+	daniel@iogearbox.net, andrii@kernel.org, martin.lau@linux.dev,
+	skhan@linuxfoundation.org
+X-Rspamd-Queue-Id: 30FEC443A1
+X-Spamd-Bar: -
+X-Spamd-Result: default: False [-1.80 / 15.00];
 	BAYES_HAM(-3.00)[99.99%];
-	RBL_SENDERSCORE_REPUT_9(-1.00)[198.47.23.234:from];
-	DWL_DNSWL_LOW(-1.00)[ti.com:dkim];
-	DMARC_POLICY_ALLOW(-0.50)[ti.com,quarantine];
-	R_DKIM_ALLOW(-0.20)[ti.com:s=ti-com-17Q1];
-	R_SPF_ALLOW(-0.20)[+ip4:198.47.23.224/27];
+	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
+	RBL_SENDERSCORE_REPUT_9(-1.00)[209.85.216.73:from];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	MV_CASE(0.50)[];
+	FORGED_SENDER(0.30)[tjmercier@google.com,3vJH9ZwkKDR0MCF7K5B7K9HH9E7.5HFEBG3KH-FF-LB9EBLML.EBG3KH.HK9@flex--tjmercier.bounces.google.com];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20230601];
 	MIME_GOOD(-0.10)[text/plain];
-	ARC_NA(0.00)[];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.216.73:from];
+	FREEMAIL_CC(0.00)[vger.kernel.org,lists.freedesktop.org,lists.linaro.org,google.com,ffwll.ch,lwn.net,gmail.com,kernel.org,linux.dev,fomichev.me,fb.com];
 	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:161, ipnet:198.47.23.0/24, country:US];
-	TO_DN_SOME(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	NEURAL_HAM(-0.00)[-1.000];
+	ARC_NA(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_COUNT_ONE(0.00)[1];
+	RCPT_COUNT_TWELVE(0.00)[26];
+	DNSWL_BLOCKED(0.00)[209.85.216.73:from];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	DKIM_TRACE(0.00)[ti.com:+]
+	FROM_NEQ_ENVFROM(0.00)[tjmercier@google.com,3vJH9ZwkKDR0MCF7K5B7K9HH9E7.5HFEBG3KH-FF-LB9EBLML.EBG3KH.HK9@flex--tjmercier.bounces.google.com];
+	DKIM_TRACE(0.00)[google.com:+];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	DWL_DNSWL_BLOCKED(0.00)[google.com:dkim];
+	NEURAL_HAM(-0.00)[-1.000];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	TAGGED_RCPT(0.00)[];
+	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: EBGMVWXZT4UKNBEN6XX4AYHIRFCG7DF2
-X-Message-ID-Hash: EBGMVWXZT4UKNBEN6XX4AYHIRFCG7DF2
-X-MailFrom: afd@ti.com
+Message-ID-Hash: TY4LJT2UPCABDWTXJP6MHO2RRE2SFP24
+X-Message-ID-Hash: TY4LJT2UPCABDWTXJP6MHO2RRE2SFP24
+X-MailFrom: 3vJH9ZwkKDR0MCF7K5B7K9HH9E7.5HFEBG3KH-FF-LB9EBLML.EBG3KH.HK9@flex--tjmercier.bounces.google.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Christoph Hellwig <hch@infradead.org>, Bastien Curutchet <bastien.curutchet@bootlin.com>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
+CC: linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org, bpf@vger.kernel.org, linux-kselftest@vger.kernel.org, android-mm@google.com, simona@ffwll.ch, corbet@lwn.net, eddyz87@gmail.com, song@kernel.org, yonghong.song@linux.dev, john.fastabend@gmail.com, kpsingh@kernel.org, sdf@fomichev.me, jolsa@kernel.org, mykolal@fb.com, "T.J. Mercier" <tjmercier@google.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 0/3] uio/dma-buf: Give UIO users access to DMA addresses.
+Subject: [Linaro-mm-sig] [PATCH 0/4] Replace CONFIG_DMABUF_SYSFS_STATS with BPF
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EBGMVWXZT4UKNBEN6XX4AYHIRFCG7DF2/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TY4LJT2UPCABDWTXJP6MHO2RRE2SFP24/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On 4/14/25 2:21 PM, Thomas Petazzoni wrote:
-> Hello Andrew,
-> 
-> On Mon, 14 Apr 2025 12:08:44 -0500
-> Andrew Davis <afd@ti.com> wrote:
-> 
->> "UIO is a broken legacy mess, so let's add more broken things
->> to it as broken + broken => still broken, so no harm done", am I
->> getting that right?
-> 
-> Who says UIO is a "broken legacy mess"? Only you says so. I don't see
-> any indication anywhere in the kernel tree suggesting that UIO is
-> considered a broken legacy mess.
-> 
+Until CONFIG_DMABUF_SYSFS_STATS was added [1] it was only possible to
+perform per-buffer accounting with debugfs which is not suitable for
+production environments. Eventually we discovered the overhead with
+per-buffer sysfs file creation/removal was significantly impacting
+allocation and free times, and exacerbated kernfs lock contention. [2]
+dma_buf_stats_setup() is responsible for 39% of single-page buffer
+creation duration, or 74% of single-page dma_buf_export() duration when
+stressing dmabuf allocations and frees.
 
-I'm not saying that*, I'm pointing out your argument is that even
-though what you are trying to do is broken and unsafe, it is okay to
-do because it isn't any "more "broken and unsafe" than UIO already is."
+I prototyped a change from per-buffer to per-exporter statistics with a
+RCU protected list of exporter allocations that accommodates most (but
+not all) of our use-cases and avoids almost all of the sysfs overhead.
+While that adds less overhead than per-buffer sysfs, and less even than
+the maintenance of the dmabuf debugfs_list, it's still *additional*
+overhead on top of the debugfs_list and doesn't give us per-buffer info.
 
-*It is, but that is an argument to have outside of this thread :)
+This series uses the existing dmabuf debugfs_list to implement a BPF
+dmabuf iterator, which adds no overhead to buffer allocation/free and
+provides per-buffer info. While the kernel must have CONFIG_DEBUG_FS for
+the dmabuf_iter to be available, debugfs does not need to be mounted.
+The BPF program loaded by userspace that extracts per-buffer information
+gets to define its own interface which avoids the lack of ABI stability
+with debugfs (even if it were mounted).
 
-> Keep in mind that when you're running code as root, you can load a
-> kernel module, which can do anything on the system security-wise. So
-> letting UIO expose MMIO registers of devices to userspace applications
-> running as root is not any worse than that.
-> 
+As this is a replacement for our use of CONFIG_DMABUF_SYSFS_STATS, the
+last patch is a RFC for removing it from the kernel. Please see my
+suggestion there regarding the timeline for that.
 
-You can take your computer out back and shoot it too, but we shouldn't
-encourage that either :) According to the original docs, UIO was created
-to support "industrial I/O cards", think old one-off custom ISA cards by
-vendors that had no intention of ever writing a proper driver and just
-wanted to poke registers and wait on an IRQ.
+[1] https://lore.kernel.org/linux-media/20201210044400.1080308-1-hridya@google.com/
+[2] https://lore.kernel.org/all/20220516171315.2400578-1-tjmercier@google.com/
 
-IMHO we shouldn't be encouraging that, and trying to modernize UIO does just
-that. It gives the impression that is how drivers should still be written.
-If you setup your FPGA card to go blink an LED, sure UIO driver it is,
-anything more complex, then writing a proper driver is the way to go.
+T.J. Mercier (4):
+  dma-buf: Rename and expose debugfs symbols
+  bpf: Add dmabuf iterator
+  selftests/bpf: Add test for dmabuf_iter
+  RFC: dma-buf: Remove DMA-BUF statistics
 
->> If your FPGA IP can do DMA then you should not be using UIO in
->> the first place, see UIO docs:
->>
->>> Please note that UIO is not an universal driver interface. Devices that
->>> are already handled well by other kernel subsystems (like networking or
->>> serial or USB) are no candidates for an UIO driver.
->>
->> The DMA subsystem already handles DMA devices, so write a DMA driver.
-> 
-> My FPGA IP block is not a DMA controller that would fit the dmaengine
-> kernel subsystem. It's a weird custom device that doesn't fit in any
-> existing subsystem, and that happens to do "peripheral DMA" (i.e the IP
-> block is DMA-capable itself, without relying on a separate DMA
-> controller). So this (very valid) recommendation from the UIO
-> documentation doesn't apply to my device.
+ .../ABI/testing/sysfs-kernel-dmabuf-buffers   |  24 ---
+ Documentation/driver-api/dma-buf.rst          |   5 -
+ drivers/dma-buf/Kconfig                       |  15 --
+ drivers/dma-buf/Makefile                      |   1 -
+ drivers/dma-buf/dma-buf-sysfs-stats.c         | 202 ------------------
+ drivers/dma-buf/dma-buf-sysfs-stats.h         |  35 ---
+ drivers/dma-buf/dma-buf.c                     |  40 +---
+ include/linux/btf_ids.h                       |   1 +
+ include/linux/dma-buf.h                       |   6 +
+ kernel/bpf/Makefile                           |   3 +
+ kernel/bpf/dmabuf_iter.c                      | 130 +++++++++++
+ tools/testing/selftests/bpf/config            |   1 +
+ .../selftests/bpf/prog_tests/dmabuf_iter.c    | 116 ++++++++++
+ .../testing/selftests/bpf/progs/dmabuf_iter.c |  31 +++
+ 14 files changed, 299 insertions(+), 311 deletions(-)
+ delete mode 100644 Documentation/ABI/testing/sysfs-kernel-dmabuf-buffers
+ delete mode 100644 drivers/dma-buf/dma-buf-sysfs-stats.c
+ delete mode 100644 drivers/dma-buf/dma-buf-sysfs-stats.h
+ create mode 100644 kernel/bpf/dmabuf_iter.c
+ create mode 100644 tools/testing/selftests/bpf/prog_tests/dmabuf_iter.c
+ create mode 100644 tools/testing/selftests/bpf/progs/dmabuf_iter.c
 
-Peripheral DMA is the much more common case, nothing new here. Could
-you give a hint as to what this device does that doesn't fit *any*
-current subsystem? Or are we talking a hypothetical device (which
-for the sake of argument is a valid thing to say, I'm sure with an
-FPGA card I could make something that doesn't fit any current
-framework too). Just want to know if you are trying to solve a
-specific issue or a generic issue here.
+-- 
+2.49.0.604.gff1f9ca942-goog
 
-Andrew
-
-> 
-> Best regards,
-> 
-> Thomas
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
