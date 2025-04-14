@@ -2,82 +2,82 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9809FA881F3
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 14 Apr 2025 15:28:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 342E0A8820A
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 14 Apr 2025 15:29:34 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id BB99C454D8
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 14 Apr 2025 13:28:23 +0000 (UTC)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id 0EB93454D7
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 14 Apr 2025 13:28:08 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 52037454D5
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 14 Apr 2025 13:29:33 +0000 (UTC)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+	by lists.linaro.org (Postfix) with ESMTPS id 689D5454D5
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 14 Apr 2025 13:29:18 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=ixdHXDA1;
-	spf=pass (lists.linaro.org: domain of sashal@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=sashal@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=iVXAXUee;
+	spf=pass (lists.linaro.org: domain of sashal@kernel.org designates 147.75.193.91 as permitted sender) smtp.mailfrom=sashal@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by dfw.source.kernel.org (Postfix) with ESMTP id 9AA625C5565;
-	Mon, 14 Apr 2025 13:25:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1D028C4CEEC;
-	Mon, 14 Apr 2025 13:28:05 +0000 (UTC)
+	by nyc.source.kernel.org (Postfix) with ESMTP id CCAB6A400D4;
+	Mon, 14 Apr 2025 13:23:49 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 85F4DC4CEE2;
+	Mon, 14 Apr 2025 13:29:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1744637287;
+	s=k20201202; t=1744637357;
 	bh=c4bb7948CzGoj3oK8R1FhfxFgh0zTsJGIPCWe8mgqO0=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=ixdHXDA1oaXbJ/ajJJx/tnZGSTWVfbw19e9orAdL7Oik1ZXGBOEtcZBxtTS0JnMbo
-	 Yoa5S5s8606JbsHIbZB9b+SkLGk3TEnYNaSixzpjHYd6whDPzHhdWz5MEk3o/yyvcR
-	 JDnGmUJxpA1vyTKGjbQMorGbrluD5mhbGI7XQWDM6/ZFUtVDWR/k4ItyPyW8xvYYmM
-	 e+NEdtvKt5Wp1zTS3HWu3RTPYxrvUkqAUeOVmtsTqRQ6xrBsDBMwomele/SgzcYHFl
-	 VXnNRgZcOoijVxknRrtSGMo1CD4wI8ek9sM2yHPweRLsXNGhRh9o0NC23CbjzMpRyx
-	 sLVBQEN209/BQ==
+	b=iVXAXUeeFIpbuFrX1dt9n5owMHjvrN0THlc3RDTVhG/9QhBg7NlJOD8mxsnDigNar
+	 JBWor0hZC+yxq4jVix51Y2dWZqkBwdNiPELjU1U4sBWQ6tTaQkOduj4KISU6M+xNyc
+	 3fG4oF7sNvSRTVmwaWSHO/h4PKbnXAJofj4r8JOrImr7IaKWZdaAyfWISvv1or9ufl
+	 2tXYTOGxPc5g45W+xiWZf/bA8q8YsJ9fkY41lUywjhWtAWErrhMeC+mFU0OeHxV8+b
+	 oXxnw3MKKFeUj30uvFghqMHO0PFGXqtNzm8IJN8PhjO7S8VXcQPfmhz9VN+CejvF+1
+	 gYK6wCc7kI26A==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Mon, 14 Apr 2025 09:27:09 -0400
-Message-Id: <20250414132729.679254-15-sashal@kernel.org>
+Date: Mon, 14 Apr 2025 09:28:28 -0400
+Message-Id: <20250414132848.679855-11-sashal@kernel.org>
 X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250414132729.679254-1-sashal@kernel.org>
-References: <20250414132729.679254-1-sashal@kernel.org>
+In-Reply-To: <20250414132848.679855-1-sashal@kernel.org>
+References: <20250414132848.679855-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-X-stable-base: Linux 6.13.11
-X-Rspamd-Queue-Id: 0EB93454D7
+X-stable-base: Linux 6.12.23
+X-Rspamd-Queue-Id: 689D5454D5
 X-Spamd-Bar: ----
 X-Spamd-Result: default: False [-4.00 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	RBL_SENDERSCORE_REPUT_9(-1.00)[139.178.84.217:from];
+	RBL_SENDERSCORE_REPUT_9(-1.00)[147.75.193.91:from];
 	MID_CONTAINS_FROM(1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217:c];
+	R_SPF_ALLOW(-0.20)[+ip4:147.75.193.91:c];
 	MIME_GOOD(-0.10)[text/plain];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	ARC_NA(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
 	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
+	ASN(0.00)[asn:54825, ipnet:147.75.192.0/21, country:US];
 	RCPT_COUNT_TWELVE(0.00)[18];
-	FREEMAIL_CC(0.00)[amd.com,ffwll.ch,kernel.org,gmail.com,linaro.org,igalia.com,intel.com,lists.freedesktop.org,vger.kernel.org,lists.linaro.org];
+	FREEMAIL_CC(0.00)[amd.com,ffwll.ch,kernel.org,gmail.com,linaro.org,intel.com,igalia.com,lists.freedesktop.org,vger.kernel.org,lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
-	DNSWL_BLOCKED(0.00)[100.75.92.58:received,139.178.84.217:from];
+	DNSWL_BLOCKED(0.00)[147.75.193.91:from,100.75.92.58:received];
 	TO_DN_SOME(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: U4A427526BNBYI77QSTRDGWRL4JLPMLN
-X-Message-ID-Hash: U4A427526BNBYI77QSTRDGWRL4JLPMLN
+Message-ID-Hash: HZKWGAF6XQKL47J2IIROXGCO67QBA5JA
+X-Message-ID-Hash: HZKWGAF6XQKL47J2IIROXGCO67QBA5JA
 X-MailFrom: sashal@kernel.org
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Simona Vetter <simona.vetter@ffwll.ch>, Felix Kuehling <felix.kuehling@amd.com>, Pak Nin Lui <pak.lui@amd.com>, Alex Deucher <alexander.deucher@amd.com>, Sasha Levin <sashal@kernel.org>, simona@ffwll.ch, sumit.semwal@linaro.org, Yunxiang.Li@amd.com, tvrtko.ursulin@igalia.com, matthew.auld@intel.com, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+CC: =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Simona Vetter <simona.vetter@ffwll.ch>, Felix Kuehling <felix.kuehling@amd.com>, Pak Nin Lui <pak.lui@amd.com>, Alex Deucher <alexander.deucher@amd.com>, Sasha Levin <sashal@kernel.org>, simona@ffwll.ch, sumit.semwal@linaro.org, Yunxiang.Li@amd.com, matthew.auld@intel.com, tvrtko.ursulin@igalia.com, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH AUTOSEL 6.13 15/34] drm/amdgpu: allow pinning DMA-bufs into VRAM if all importers can do P2P
+Subject: [Linaro-mm-sig] [PATCH AUTOSEL 6.12 11/30] drm/amdgpu: allow pinning DMA-bufs into VRAM if all importers can do P2P
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/U4A427526BNBYI77QSTRDGWRL4JLPMLN/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HZKWGAF6XQKL47J2IIROXGCO67QBA5JA/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
