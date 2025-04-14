@@ -2,266 +2,169 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 37F0AA8828F
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 14 Apr 2025 15:39:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8BF5CA882FA
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 14 Apr 2025 15:48:42 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4072145531
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 14 Apr 2025 13:39:26 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.13])
-	by lists.linaro.org (Postfix) with ESMTPS id C1495454D5
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 14 Apr 2025 13:39:10 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9C2854600F
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 14 Apr 2025 13:48:41 +0000 (UTC)
+Received: from mail-vk1-f174.google.com (mail-vk1-f174.google.com [209.85.221.174])
+	by lists.linaro.org (Postfix) with ESMTPS id 6B7A2454D5
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 14 Apr 2025 13:48:23 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=mUlYL88R;
-	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 198.175.65.13 as permitted sender) smtp.mailfrom=lkp@intel.com;
-	dmarc=pass (policy=none) header.from=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1744637951; x=1776173951;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:content-transfer-encoding:in-reply-to;
-  bh=BnjCiRheLd50KZFZ6NJW6u2NJG2oMLt7fJoUT9IgrY4=;
-  b=mUlYL88Rt9t71wYxLqFkwNkGh4OwdY+VkWf8Sgus8PPH0Lgx1Y7r3VBz
-   pVgEZNCNv0kvSqFoM0sq6Mv09LELZirOE81LFdoN8VQ627xMNtzvIg+Xb
-   JiWGi7E8wvfZ/TQC7xBtZYhSwEgfFpmihGJm7lPA2teggeYu6U2s2TZu1
-   equPLBVbmgGPn5kdwhhbNKCHkthYbQdHBo0sWPAxSVKNPXr8tqaEBNoJK
-   Em6DIKkkEYwpzO4z9bJhAGaGNa/JUl0KSdEIcMVygO+USYUslDvq6BcFq
-   qUxR1ZJMpdHYNhqZiCMObXrhesCeODlGSPFXEY8IvQnvh/zJrc7jfGCCy
-   w==;
-X-CSE-ConnectionGUID: ZwqsIgckQZSFvmP6+sPWpg==
-X-CSE-MsgGUID: qeXMKOiES+uJFGgTKrIcig==
-X-IronPort-AV: E=McAfee;i="6700,10204,11403"; a="57097825"
-X-IronPort-AV: E=Sophos;i="6.15,212,1739865600";
-   d="scan'208";a="57097825"
-Received: from orviesa002.jf.intel.com ([10.64.159.142])
-  by orvoesa105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Apr 2025 06:39:10 -0700
-X-CSE-ConnectionGUID: xDzeAt+nTdGpMdjqU1KNyQ==
-X-CSE-MsgGUID: 5ddJHiVxSV6ucBpJq22FuA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.15,212,1739865600";
-   d="scan'208";a="160778914"
-Received: from lkp-server01.sh.intel.com (HELO b207828170a5) ([10.239.97.150])
-  by orviesa002.jf.intel.com with ESMTP; 14 Apr 2025 06:39:05 -0700
-Received: from kbuild by b207828170a5 with local (Exim 4.96)
-	(envelope-from <lkp@intel.com>)
-	id 1u4K1e-000EGs-2b;
-	Mon, 14 Apr 2025 13:39:02 +0000
-Date: Mon, 14 Apr 2025 21:38:20 +0800
-From: kernel test robot <lkp@intel.com>
-To: =?iso-8859-1?Q?Adri=E1n?= Larumbe <adrian.larumbe@collabora.com>,
-	"To : Boris Brezillon" <boris.brezillon@collabora.com>,
-	Steven Price <steven.price@arm.com>,
-	Liviu Dudau <liviu.dudau@arm.com>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
-Message-ID: <202504142148.NBAyzLuE-lkp@intel.com>
-References: <20250411150357.3308921-4-adrian.larumbe@collabora.com>
+	dkim=pass header.d=gmail.com header.s=20230601 header.b=Pq11M46U;
+	spf=pass (lists.linaro.org: domain of alexdeucher@gmail.com designates 209.85.221.174 as permitted sender) smtp.mailfrom=alexdeucher@gmail.com;
+	dmarc=pass (policy=none) header.from=gmail.com
+Received: by mail-vk1-f174.google.com with SMTP id 71dfb90a1353d-523f5836aaeso215060e0c.3
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 14 Apr 2025 06:48:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1744638503; x=1745243303; darn=lists.linaro.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=9gg6c9JaP3fAvNMBtbYiSQTaF78FsgYOrIyM/tQBJqE=;
+        b=Pq11M46U4fuLgLYEjMFcHYjs5Ros8zRQtUHb5ybLIJ9vvm1bBuMCk93mQTBpOlWLee
+         Z0I/NemR+FvdPSVdzizIG5t02iwC9UBvbx8XUhZ7Vd9vGWA/d5joE/5uscuBygc3PqB/
+         G5RP7+M+s7HwMz0ZejqFK7TqvRviXsIKtU3m2bBZ6liRk8m8QmV5m19dsn/d2fgRmtan
+         m0wQtXOfKm/Fry9/Ia7W4pKLqZ9IRevN9HqQiwkMmaO7mdY9pL/b6Bdl9VNkIrYwr1Q+
+         MBJQbt7mmq/tpyWgrDBYCIIR27G3oIkGWiqTgEZNQ+UPJ0WGk3VuijwOAi+2aBq8cpKn
+         kNeA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1744638503; x=1745243303;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=9gg6c9JaP3fAvNMBtbYiSQTaF78FsgYOrIyM/tQBJqE=;
+        b=cGxluV5mvfGzABy3WXQFGMVMWTpWPy9SgQbrhDQbKECato9KOS6cLmZW6u4n0xEkeM
+         LtD8EdOkymxRyYHrowNk0dt/kZ5CruYp9WTn34e8UsXa1xhaKbFxRyKhUFJL8+hhauBK
+         pbE//1LO04hPRV982YYhl5xd5YiTrcWQHv3j9RnwZzoYN+Wq1cnyrxsz8tsNywFlVR9j
+         sWkRQEQzYY3Obfgr3YBvZiQspSr/bvkNUty3nAASKoo0bwLtDu5d3unhn8ielpwPfId+
+         KNHiwh7FqYbdeq6IU57dGCNf1px25Yv8a6+hIqStRkTaLSR5OOeFiChZHq3DWCXZFlVl
+         OREA==
+X-Forwarded-Encrypted: i=1; AJvYcCUxOzzgjEvxaJyWGCVpPfwCBerb04ERZ2Tl+t/m9roy6P2eKD+pituM6nMdYJuSnOWguXPkt8RpEPhJU51O@lists.linaro.org
+X-Gm-Message-State: AOJu0YytTeQReqbc0BDVHQt9+aHoCSUGbDOWKB4XQuhkCJE4YfSek3Yu
+	fzF2bFdbl747xUEa9M7GFsPOQeka6gNQNx/Xr2iKMhrx/JtNS1K8Ffps6dHIcRDqG86+rF1HA1S
+	LataZBX9Eb13Q1Bch+MTaApV+EwY=
+X-Gm-Gg: ASbGncvSKJFNFYvwjQOh2s1vp7WZ5HTDs1O3xQc4rem9QT68yaDOPn73lTVnxH0ujoA
+	wpIxY+JAtKAxlUSk3qjqMKYxhhk13vznDj6hg77/bLWHokVAoRD7dziaNmjyym8vQSLA9NU2T9R
+	5U9f/GuBxkbjtPQXT5IJa/Lw==
+X-Google-Smtp-Source: AGHT+IFZNxc/KHoZDwFGFG6I1MTEwTJWg8WdgpWDyKSrkajFA9wV/Z9DP3VoJO9ODfnboEI+ZztudNXfilRisu5rbL8=
+X-Received: by 2002:a05:6122:daa:b0:520:5400:ac0f with SMTP id
+ 71dfb90a1353d-527c35b6a41mr2823390e0c.3.1744638502640; Mon, 14 Apr 2025
+ 06:48:22 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20250411150357.3308921-4-adrian.larumbe@collabora.com>
-X-Rspamd-Queue-Id: C1495454D5
-X-Spamd-Bar: ------
-X-Spamd-Result: default: False [-7.00 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
-	BAYES_HAM(-3.00)[99.99%];
-	MID_CONTAINS_FROM(1.00)[];
-	RBL_SENDERSCORE_REPUT_9(-1.00)[198.175.65.13:from];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip4:198.175.65.0/26];
+References: <20250414132729.679254-1-sashal@kernel.org> <20250414132729.679254-15-sashal@kernel.org>
+In-Reply-To: <20250414132729.679254-15-sashal@kernel.org>
+From: Alex Deucher <alexdeucher@gmail.com>
+Date: Mon, 14 Apr 2025 09:48:10 -0400
+X-Gm-Features: ATxdqUGsIVkJwostdQs5byeooJDamJZ9S8mgOlW4xpayrB_LVHSmjP3XNtx4Yaw
+Message-ID: <CADnq5_OyrpJL3fnbyiueyddkNZ2B-uRO9pyrRVqBTeY5AnepYw@mail.gmail.com>
+To: Sasha Levin <sashal@kernel.org>
+X-Rspamd-Queue-Id: 6B7A2454D5
+X-Spamd-Bar: --------
+X-Spamd-Result: default: False [-8.00 / 15.00];
+	REPLY(-4.00)[];
+	BAYES_HAM(-3.00)[100.00%];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	MIME_GOOD(-0.10)[text/plain];
-	ARC_NA(0.00)[];
-	ASN(0.00)[asn:4983, ipnet:198.175.64.0/23, country:US];
-	MIME_TRACE(0.00)[0:+];
-	MISSING_XM_UA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[18];
-	FREEMAIL_TO(0.00)[collabora.com,arm.com,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_COUNT_THREE(0.00)[3];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	DNSWL_BLOCKED(0.00)[198.175.65.13:from];
-	DKIM_TRACE(0.00)[intel.com:+]
+	FROM_HAS_DN(0.00)[];
+	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	TO_DN_SOME(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCPT_COUNT_TWELVE(0.00)[17];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	MISSING_XM_UA(0.00)[];
+	RCVD_COUNT_ONE(0.00)[1];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	NEURAL_HAM(-0.00)[-1.000];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.221.174:from];
+	DWL_DNSWL_BLOCKED(0.00)[gmail.com:dkim];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RBL_SENDERSCORE_REPUT_8(0.00)[209.85.221.174:from];
+	RCVD_IN_DNSWL_NONE(0.00)[209.85.221.174:from]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: QN2IREOXE4CXIF4OKQVHYX5LPFOFB4ZG
-X-Message-ID-Hash: QN2IREOXE4CXIF4OKQVHYX5LPFOFB4ZG
-X-MailFrom: lkp@intel.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: oe-kbuild-all@lists.linux.dev, kernel@collabora.com, =?iso-8859-1?Q?Adri=E1n?= Larumbe <adrian.larumbe@collabora.com>, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+Message-ID-Hash: IJJI45L6EUMMLWVHQU4GAOXZDF2XTXUF
+X-Message-ID-Hash: IJJI45L6EUMMLWVHQU4GAOXZDF2XTXUF
+X-MailFrom: alexdeucher@gmail.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: linux-kernel@vger.kernel.org, stable@vger.kernel.org, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Simona Vetter <simona.vetter@ffwll.ch>, Felix Kuehling <felix.kuehling@amd.com>, Pak Nin Lui <pak.lui@amd.com>, Alex Deucher <alexander.deucher@amd.com>, simona@ffwll.ch, sumit.semwal@linaro.org, Yunxiang.Li@amd.com, tvrtko.ursulin@igalia.com, matthew.auld@intel.com, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v7 3/4] drm/panthor: Label all kernel BO's
+Subject: [Linaro-mm-sig] Re: [PATCH AUTOSEL 6.13 15/34] drm/amdgpu: allow pinning DMA-bufs into VRAM if all importers can do P2P
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QN2IREOXE4CXIF4OKQVHYX5LPFOFB4ZG/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/IJJI45L6EUMMLWVHQU4GAOXZDF2XTXUF/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Hi Adri=E1n,
-
-kernel test robot noticed the following build warnings:
-
-[auto build test WARNING on linus/master]
-[also build test WARNING on v6.15-rc2 next-20250414]
-[cannot apply to drm-misc/drm-misc-next]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
-
-url:    https://github.com/intel-lab-lkp/linux/commits/Adri-n-Larumbe/drm-p=
-anthor-Introduce-BO-labeling/20250414-101541
-base:   linus/master
-patch link:    https://lore.kernel.org/r/20250411150357.3308921-4-adrian.la=
-rumbe%40collabora.com
-patch subject: [PATCH v7 3/4] drm/panthor: Label all kernel BO's
-config: i386-buildonly-randconfig-006-20250414 (https://download.01.org/0da=
-y-ci/archive/20250414/202504142148.NBAyzLuE-lkp@intel.com/config)
-compiler: gcc-12 (Debian 12.2.0-14) 12.2.0
-reproduce (this is a W=3D1 build): (https://download.01.org/0day-ci/archive=
-/20250414/202504142148.NBAyzLuE-lkp@intel.com/reproduce)
-
-If you fix the issue in a separate patch/commit (i.e. not just a new versio=
-n of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202504142148.NBAyzLuE-lkp@i=
-ntel.com/
-
-All warnings (new ones prefixed by >>):
-
->> drivers/gpu/drm/panthor/panthor_gem.c:86: warning: Function parameter or=
- struct member 'name' not described in 'panthor_kernel_bo_create'
-
-
-vim +86 drivers/gpu/drm/panthor/panthor_gem.c
-
-8a1cc07578bf42 Boris Brezillon 2024-02-29   67 =20
-8a1cc07578bf42 Boris Brezillon 2024-02-29   68  /**
-8a1cc07578bf42 Boris Brezillon 2024-02-29   69   * panthor_kernel_bo_create=
-() - Create and map a GEM object to a VM
-8a1cc07578bf42 Boris Brezillon 2024-02-29   70   * @ptdev: Device.
-8a1cc07578bf42 Boris Brezillon 2024-02-29   71   * @vm: VM to map the GEM t=
-o. If NULL, the kernel object is not GPU mapped.
-8a1cc07578bf42 Boris Brezillon 2024-02-29   72   * @size: Size of the buffe=
-r object.
-8a1cc07578bf42 Boris Brezillon 2024-02-29   73   * @bo_flags: Combination o=
-f drm_panthor_bo_flags flags.
-8a1cc07578bf42 Boris Brezillon 2024-02-29   74   * @vm_map_flags: Combinati=
-on of drm_panthor_vm_bind_op_flags (only those
-8a1cc07578bf42 Boris Brezillon 2024-02-29   75   * that are related to map =
-operations).
-8a1cc07578bf42 Boris Brezillon 2024-02-29   76   * @gpu_va: GPU address ass=
-igned when mapping to the VM.
-8a1cc07578bf42 Boris Brezillon 2024-02-29   77   * If gpu_va =3D=3D PANTHOR=
-_VM_KERNEL_AUTO_VA, the virtual address will be
-8a1cc07578bf42 Boris Brezillon 2024-02-29   78   * automatically allocated.
-8a1cc07578bf42 Boris Brezillon 2024-02-29   79   *
-8a1cc07578bf42 Boris Brezillon 2024-02-29   80   * Return: A valid pointer =
-in case of success, an ERR_PTR() otherwise.
-8a1cc07578bf42 Boris Brezillon 2024-02-29   81   */
-8a1cc07578bf42 Boris Brezillon 2024-02-29   82  struct panthor_kernel_bo *
-8a1cc07578bf42 Boris Brezillon 2024-02-29   83  panthor_kernel_bo_create(st=
-ruct panthor_device *ptdev, struct panthor_vm *vm,
-8a1cc07578bf42 Boris Brezillon 2024-02-29   84  			 size_t size, u32 bo_fla=
-gs, u32 vm_map_flags,
-f48f05d54f7696 Adri=E1n Larumbe  2025-04-11   85  			 u64 gpu_va, const cha=
-r *name)
-8a1cc07578bf42 Boris Brezillon 2024-02-29  @86  {
-8a1cc07578bf42 Boris Brezillon 2024-02-29   87  	struct drm_gem_shmem_objec=
-t *obj;
-8a1cc07578bf42 Boris Brezillon 2024-02-29   88  	struct panthor_kernel_bo *=
-kbo;
-8a1cc07578bf42 Boris Brezillon 2024-02-29   89  	struct panthor_gem_object =
-*bo;
-8a1cc07578bf42 Boris Brezillon 2024-02-29   90  	int ret;
-8a1cc07578bf42 Boris Brezillon 2024-02-29   91 =20
-8a1cc07578bf42 Boris Brezillon 2024-02-29   92  	if (drm_WARN_ON(&ptdev->ba=
-se, !vm))
-8a1cc07578bf42 Boris Brezillon 2024-02-29   93  		return ERR_PTR(-EINVAL);
-8a1cc07578bf42 Boris Brezillon 2024-02-29   94 =20
-8a1cc07578bf42 Boris Brezillon 2024-02-29   95  	kbo =3D kzalloc(sizeof(*kb=
-o), GFP_KERNEL);
-8a1cc07578bf42 Boris Brezillon 2024-02-29   96  	if (!kbo)
-8a1cc07578bf42 Boris Brezillon 2024-02-29   97  		return ERR_PTR(-ENOMEM);
-8a1cc07578bf42 Boris Brezillon 2024-02-29   98 =20
-8a1cc07578bf42 Boris Brezillon 2024-02-29   99  	obj =3D drm_gem_shmem_crea=
-te(&ptdev->base, size);
-8a1cc07578bf42 Boris Brezillon 2024-02-29  100  	if (IS_ERR(obj)) {
-8a1cc07578bf42 Boris Brezillon 2024-02-29  101  		ret =3D PTR_ERR(obj);
-8a1cc07578bf42 Boris Brezillon 2024-02-29  102  		goto err_free_bo;
-8a1cc07578bf42 Boris Brezillon 2024-02-29  103  	}
-8a1cc07578bf42 Boris Brezillon 2024-02-29  104 =20
-8a1cc07578bf42 Boris Brezillon 2024-02-29  105  	bo =3D to_panthor_bo(&obj-=
->base);
-8a1cc07578bf42 Boris Brezillon 2024-02-29  106  	kbo->obj =3D &obj->base;
-8a1cc07578bf42 Boris Brezillon 2024-02-29  107  	bo->flags =3D bo_flags;
-8a1cc07578bf42 Boris Brezillon 2024-02-29  108 =20
-f48f05d54f7696 Adri=E1n Larumbe  2025-04-11  109  	panthor_gem_kernel_bo_se=
-t_label(kbo, name);
-f48f05d54f7696 Adri=E1n Larumbe  2025-04-11  110 =20
-5d01b56f0518d8 Boris Brezillon 2024-10-30  111  	/* The system and GPU MMU =
-page size might differ, which becomes a
-5d01b56f0518d8 Boris Brezillon 2024-10-30  112  	 * problem for FW sections=
- that need to be mapped at explicit address
-5d01b56f0518d8 Boris Brezillon 2024-10-30  113  	 * since our PAGE_SIZE ali=
-gnment might cover a VA range that's
-5d01b56f0518d8 Boris Brezillon 2024-10-30  114  	 * expected to be used for=
- another section.
-5d01b56f0518d8 Boris Brezillon 2024-10-30  115  	 * Make sure we never map =
-more than we need.
-5d01b56f0518d8 Boris Brezillon 2024-10-30  116  	 */
-5d01b56f0518d8 Boris Brezillon 2024-10-30  117  	size =3D ALIGN(size, panth=
-or_vm_page_size(vm));
-8a1cc07578bf42 Boris Brezillon 2024-02-29  118  	ret =3D panthor_vm_alloc_v=
-a(vm, gpu_va, size, &kbo->va_node);
-8a1cc07578bf42 Boris Brezillon 2024-02-29  119  	if (ret)
-8a1cc07578bf42 Boris Brezillon 2024-02-29  120  		goto err_put_obj;
-8a1cc07578bf42 Boris Brezillon 2024-02-29  121 =20
-8a1cc07578bf42 Boris Brezillon 2024-02-29  122  	ret =3D panthor_vm_map_bo_=
-range(vm, bo, 0, size, kbo->va_node.start, vm_map_flags);
-8a1cc07578bf42 Boris Brezillon 2024-02-29  123  	if (ret)
-8a1cc07578bf42 Boris Brezillon 2024-02-29  124  		goto err_free_va;
-8a1cc07578bf42 Boris Brezillon 2024-02-29  125 =20
-ff60c8da0aaf7e Boris Brezillon 2024-05-02  126  	kbo->vm =3D panthor_vm_get=
-(vm);
-8a1cc07578bf42 Boris Brezillon 2024-02-29  127  	bo->exclusive_vm_root_gem =
-=3D panthor_vm_root_gem(vm);
-8a1cc07578bf42 Boris Brezillon 2024-02-29  128  	drm_gem_object_get(bo->exc=
-lusive_vm_root_gem);
-8a1cc07578bf42 Boris Brezillon 2024-02-29  129  	bo->base.base.resv =3D bo-=
->exclusive_vm_root_gem->resv;
-8a1cc07578bf42 Boris Brezillon 2024-02-29  130  	return kbo;
-8a1cc07578bf42 Boris Brezillon 2024-02-29  131 =20
-8a1cc07578bf42 Boris Brezillon 2024-02-29  132  err_free_va:
-8a1cc07578bf42 Boris Brezillon 2024-02-29  133  	panthor_vm_free_va(vm, &kb=
-o->va_node);
-8a1cc07578bf42 Boris Brezillon 2024-02-29  134 =20
-8a1cc07578bf42 Boris Brezillon 2024-02-29  135  err_put_obj:
-8a1cc07578bf42 Boris Brezillon 2024-02-29  136  	drm_gem_object_put(&obj->b=
-ase);
-8a1cc07578bf42 Boris Brezillon 2024-02-29  137 =20
-8a1cc07578bf42 Boris Brezillon 2024-02-29  138  err_free_bo:
-8a1cc07578bf42 Boris Brezillon 2024-02-29  139  	kfree(kbo);
-8a1cc07578bf42 Boris Brezillon 2024-02-29  140  	return ERR_PTR(ret);
-8a1cc07578bf42 Boris Brezillon 2024-02-29  141  }
-8a1cc07578bf42 Boris Brezillon 2024-02-29  142 =20
-
---=20
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gTW9uLCBBcHIgMTQsIDIwMjUgYXQgOToyOOKAr0FNIFNhc2hhIExldmluIDxzYXNoYWxAa2Vy
+bmVsLm9yZz4gd3JvdGU6DQo+DQo+IEZyb206IENocmlzdGlhbiBLw7ZuaWcgPGNocmlzdGlhbi5r
+b2VuaWdAYW1kLmNvbT4NCj4NCj4gWyBVcHN0cmVhbSBjb21taXQgZjVlN2ZhYmQxZjVjNjViMmUw
+NzdlZmNkYjExOGNmYTY3ZWFlNzMxMSBdDQo+DQo+IFRyeSBwaW5uaW5nIGludG8gVlJBTSB0byBh
+bGxvdyBQMlAgd2l0aCBSRE1BIE5JQ3Mgd2l0aG91dCBPRFANCj4gc3VwcG9ydCBpZiBhbGwgYXR0
+YWNobWVudHMgY2FuIGRvIFAyUC4gSWYgYW55IGF0dGFjaG1lbnQgY2FuJ3QgZG8NCj4gUDJQIGp1
+c3QgcGluIGludG8gR1RUIGluc3RlYWQuDQo+DQo+IEFja2VkLWJ5OiBTaW1vbmEgVmV0dGVyIDxz
+aW1vbmEudmV0dGVyQGZmd2xsLmNoPg0KPiBTaWduZWQtb2ZmLWJ5OiBDaHJpc3RpYW4gS8O2bmln
+IDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+DQo+IFNpZ25lZC1vZmYtYnk6IEZlbGl4IEt1ZWhs
+aW5nIDxmZWxpeC5rdWVobGluZ0BhbWQuY29tPg0KPiBSZXZpZXdlZC1ieTogRmVsaXggS3VlaGxp
+bmcgPGZlbGl4Lmt1ZWhsaW5nQGFtZC5jb20+DQo+IFRlc3RlZC1ieTogUGFrIE5pbiBMdWkgPHBh
+ay5sdWlAYW1kLmNvbT4NCj4gQ2M6IFNpbW9uYSBWZXR0ZXIgPHNpbW9uYS52ZXR0ZXJAZmZ3bGwu
+Y2g+DQo+IFNpZ25lZC1vZmYtYnk6IEFsZXggRGV1Y2hlciA8YWxleGFuZGVyLmRldWNoZXJAYW1k
+LmNvbT4NCj4gU2lnbmVkLW9mZi1ieTogU2FzaGEgTGV2aW4gPHNhc2hhbEBrZXJuZWwub3JnPg0K
+DQpUaGlzIHNob3VsZCBub3QgZ28gdG8gc3RhYmxlLiAgSXQgZGVwZW5kcyBvbiBkbWVtIGNncm91
+cHMuDQoNCkFsZXgNCg0KDQo+IC0tLQ0KPiAgZHJpdmVycy9ncHUvZHJtL2FtZC9hbWRncHUvYW1k
+Z3B1X2RtYV9idWYuYyB8IDI1ICsrKysrKysrKysrKysrKy0tLS0tLQ0KPiAgMSBmaWxlIGNoYW5n
+ZWQsIDE4IGluc2VydGlvbnMoKyksIDcgZGVsZXRpb25zKC0pDQo+DQo+IGRpZmYgLS1naXQgYS9k
+cml2ZXJzL2dwdS9kcm0vYW1kL2FtZGdwdS9hbWRncHVfZG1hX2J1Zi5jIGIvZHJpdmVycy9ncHUv
+ZHJtL2FtZC9hbWRncHUvYW1kZ3B1X2RtYV9idWYuYw0KPiBpbmRleCA4ZTgxYTgzZDM3ZDg0Li44
+MzM5MDE0M2MyZTlmIDEwMDY0NA0KPiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vYW1kL2FtZGdwdS9h
+bWRncHVfZG1hX2J1Zi5jDQo+ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS9hbWQvYW1kZ3B1L2FtZGdw
+dV9kbWFfYnVmLmMNCj4gQEAgLTcyLDExICs3MiwyNSBAQCBzdGF0aWMgaW50IGFtZGdwdV9kbWFf
+YnVmX2F0dGFjaChzdHJ1Y3QgZG1hX2J1ZiAqZG1hYnVmLA0KPiAgICovDQo+ICBzdGF0aWMgaW50
+IGFtZGdwdV9kbWFfYnVmX3BpbihzdHJ1Y3QgZG1hX2J1Zl9hdHRhY2htZW50ICphdHRhY2gpDQo+
+ICB7DQo+IC0gICAgICAgc3RydWN0IGRybV9nZW1fb2JqZWN0ICpvYmogPSBhdHRhY2gtPmRtYWJ1
+Zi0+cHJpdjsNCj4gLSAgICAgICBzdHJ1Y3QgYW1kZ3B1X2JvICpibyA9IGdlbV90b19hbWRncHVf
+Ym8ob2JqKTsNCj4gKyAgICAgICBzdHJ1Y3QgZG1hX2J1ZiAqZG1hYnVmID0gYXR0YWNoLT5kbWFi
+dWY7DQo+ICsgICAgICAgc3RydWN0IGFtZGdwdV9ibyAqYm8gPSBnZW1fdG9fYW1kZ3B1X2JvKGRt
+YWJ1Zi0+cHJpdik7DQo+ICsgICAgICAgdTMyIGRvbWFpbnMgPSBiby0+cHJlZmVycmVkX2RvbWFp
+bnM7DQo+DQo+IC0gICAgICAgLyogcGluIGJ1ZmZlciBpbnRvIEdUVCAqLw0KPiAtICAgICAgIHJl
+dHVybiBhbWRncHVfYm9fcGluKGJvLCBBTURHUFVfR0VNX0RPTUFJTl9HVFQpOw0KPiArICAgICAg
+IGRtYV9yZXN2X2Fzc2VydF9oZWxkKGRtYWJ1Zi0+cmVzdik7DQo+ICsNCj4gKyAgICAgICAvKg0K
+PiArICAgICAgICAqIFRyeSBwaW5uaW5nIGludG8gVlJBTSB0byBhbGxvdyBQMlAgd2l0aCBSRE1B
+IE5JQ3Mgd2l0aG91dCBPRFANCj4gKyAgICAgICAgKiBzdXBwb3J0IGlmIGFsbCBhdHRhY2htZW50
+cyBjYW4gZG8gUDJQLiBJZiBhbnkgYXR0YWNobWVudCBjYW4ndCBkbw0KPiArICAgICAgICAqIFAy
+UCBqdXN0IHBpbiBpbnRvIEdUVCBpbnN0ZWFkLg0KPiArICAgICAgICAqLw0KPiArICAgICAgIGxp
+c3RfZm9yX2VhY2hfZW50cnkoYXR0YWNoLCAmZG1hYnVmLT5hdHRhY2htZW50cywgbm9kZSkNCj4g
+KyAgICAgICAgICAgICAgIGlmICghYXR0YWNoLT5wZWVyMnBlZXIpDQo+ICsgICAgICAgICAgICAg
+ICAgICAgICAgIGRvbWFpbnMgJj0gfkFNREdQVV9HRU1fRE9NQUlOX1ZSQU07DQo+ICsNCj4gKyAg
+ICAgICBpZiAoZG9tYWlucyAmIEFNREdQVV9HRU1fRE9NQUlOX1ZSQU0pDQo+ICsgICAgICAgICAg
+ICAgICBiby0+ZmxhZ3MgfD0gQU1ER1BVX0dFTV9DUkVBVEVfQ1BVX0FDQ0VTU19SRVFVSVJFRDsN
+Cj4gKw0KPiArICAgICAgIHJldHVybiBhbWRncHVfYm9fcGluKGJvLCBkb21haW5zKTsNCj4gIH0N
+Cj4NCj4gIC8qKg0KPiBAQCAtMTMxLDkgKzE0NSw2IEBAIHN0YXRpYyBzdHJ1Y3Qgc2dfdGFibGUg
+KmFtZGdwdV9kbWFfYnVmX21hcChzdHJ1Y3QgZG1hX2J1Zl9hdHRhY2htZW50ICphdHRhY2gsDQo+
+ICAgICAgICAgICAgICAgICByID0gdHRtX2JvX3ZhbGlkYXRlKCZiby0+dGJvLCAmYm8tPnBsYWNl
+bWVudCwgJmN0eCk7DQo+ICAgICAgICAgICAgICAgICBpZiAocikNCj4gICAgICAgICAgICAgICAg
+ICAgICAgICAgcmV0dXJuIEVSUl9QVFIocik7DQo+IC0NCj4gLSAgICAgICB9IGVsc2UgaWYgKGJv
+LT50Ym8ucmVzb3VyY2UtPm1lbV90eXBlICE9IFRUTV9QTF9UVCkgew0KPiAtICAgICAgICAgICAg
+ICAgcmV0dXJuIEVSUl9QVFIoLUVCVVNZKTsNCj4gICAgICAgICB9DQo+DQo+ICAgICAgICAgc3dp
+dGNoIChiby0+dGJvLnJlc291cmNlLT5tZW1fdHlwZSkgew0KPiAtLQ0KPiAyLjM5LjUNCj4NCj4g
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18NCj4gTGluYXJv
+LW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnDQo+
+IFRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0
+cy5saW5hcm8ub3JnDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxp
+bmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxl
+YXZlQGxpc3RzLmxpbmFyby5vcmcK
