@@ -2,106 +2,186 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id A667DA88F9E
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Apr 2025 00:54:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8B044A8975F
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Apr 2025 11:03:35 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id AC6BC44541
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 14 Apr 2025 22:54:07 +0000 (UTC)
-Received: from mail-pf1-f201.google.com (mail-pf1-f201.google.com [209.85.210.201])
-	by lists.linaro.org (Postfix) with ESMTPS id 738D2458DC
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 14 Apr 2025 22:53:16 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7180945974
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Apr 2025 09:03:32 +0000 (UTC)
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com (mail-bn8nam12on2082.outbound.protection.outlook.com [40.107.237.82])
+	by lists.linaro.org (Postfix) with ESMTPS id 1755A44201
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 15 Apr 2025 09:03:16 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=google.com header.s=20230601 header.b=KCMD9k8X;
-	spf=pass (lists.linaro.org: domain of 325H9ZwkKDTwrhkcpagcpemmejc.amkjglYpm-kk-qgejgqrq.jglYpm.mpe@flex--tjmercier.bounces.google.com designates 209.85.210.201 as permitted sender) smtp.mailfrom=325H9ZwkKDTwrhkcpagcpemmejc.amkjglYpm-kk-qgejgqrq.jglYpm.mpe@flex--tjmercier.bounces.google.com;
-	dmarc=pass (policy=reject) header.from=google.com
-Received: by mail-pf1-f201.google.com with SMTP id d2e1a72fcca58-736b5f9279cso3945323b3a.2
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 14 Apr 2025 15:53:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1744671195; x=1745275995; darn=lists.linaro.org;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=Sj2aMODu0TMI+OkrO28E3Y2gNJN96MKDTkgbK9EXs5s=;
-        b=KCMD9k8X7TX3x0Ej7hx9b7McKW5VjP5k1eNABrkEAw9TLeqRVAmrVmhcUWW4HaLeDJ
-         7BFbhV9K0tbFQCokpK85IrflNpPH8s1ANj79q5DyEY5ovBq0jAXKhCpg9wITGJpMl5hz
-         5r74ZdgESAo+wQxAVJErsXlS6LaokGUXXUjj27YMe9rhDeZFTqbZdVpSy4sLfdHWkYiv
-         0moRumXATQKgbjqORMQDyMZSXaCrT5IpXeccAwMIo1MT6rhXEdYQd6HCWkcfbUZGS782
-         I1PmdlbocVpzJ2d0eOq4ZA04HxBOKwO0SRjMNxQHjIv4MJ4y7pkbmRI5/T9JW18QXQAN
-         USzw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744671195; x=1745275995;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=Sj2aMODu0TMI+OkrO28E3Y2gNJN96MKDTkgbK9EXs5s=;
-        b=NboxmayNPzOD+xrhll0dUyfAob6TCEcY2esyfH2IyxI8PdosFdN4CQVEfN4ARPqDya
-         45/6xX30JS3Fc+hfBtglkZBssbU7tVPS0AOgLpxNJ0HAICxNTLCzA9qj2iTDEw+qnCTr
-         OelUGox0DnEet6qGMBn/QdtEMfvGKsCZ7OBftbowvHuG8UMrCzhaWEmZKgFjuwbH/CQQ
-         oz06II6XV7qUjbDDmbHifwErqS3Uwl8QjxBludSuT9jSEs2c9gcYy1ZPer6OT3jl8Ewt
-         cr58dr5EyZ+Vx3t3PTCieUdH8xdTe/joEuPyiLerbnPcZ7RIgYxvovY1ab4/ly6HbDlh
-         qx1Q==
-X-Forwarded-Encrypted: i=1; AJvYcCWnZV3QnvXMWfLSwTc8u7Xu/41hGyt85t8ByS5eSjvqTg7iEy2BxSePdU0E28oN53uxmb7N7DhDWw0zkHZ9@lists.linaro.org
-X-Gm-Message-State: AOJu0YwQOSae4ahYTO8TVGfficxd1nw+09CvmFRKxRPXzJCJFh5m1NBb
-	Hm/HOHpZd4QD1+yq8RZAdRJ7Ki2qzOGIA04Zl3wizuC0oyrotRdX4ySbvy9kcjUUhQiGGUqomFb
-	8Bs26fehEMyM+Eg==
-X-Google-Smtp-Source: AGHT+IEj7zNqNfptXNNUue87BJyb/FHvPVDFuwMDhoZ1upwkrURM+XZqbz0aSLjDfeLDRXbDa24onVaNZxLtgak=
-X-Received: from pgbdo11.prod.google.com ([2002:a05:6a02:e8b:b0:af2:85f7:ec23])
- (user=tjmercier job=prod-delivery.src-stubby-dispatcher) by
- 2002:a05:6a20:d04c:b0:1f5:8153:93fb with SMTP id adf61e73a8af0-201797a2b8bmr19535067637.10.1744671195447;
- Mon, 14 Apr 2025 15:53:15 -0700 (PDT)
-Date: Mon, 14 Apr 2025 22:52:27 +0000
-In-Reply-To: <20250414225227.3642618-1-tjmercier@google.com>
-Mime-Version: 1.0
+	dkim=pass header.d=amd.com header.s=selector1 header.b=LaaKi+6L;
+	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.107.237.82 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
+	dmarc=pass (policy=quarantine) header.from=amd.com;
+	arc=pass ("microsoft.com:s=arcselector10001:i=1")
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=HPxrGfwX+kfiBkNhH3ADsV+TYED26MGVBQ6YupXa73HxG6Txz4Z3rvEPGxWO+S8u/YO1541g6WKhv0NkXgRLS1R5iOj/B0ZStRVu8h+7G5FWifnyCupHG3Z9rP+yEEZ4ySEzgLz8yrPxLRxOx2dLfboakT0h6CXbrkCO56MlCrMee/qmSebZbG19z1aH02XlH0a6dgFAl9kDw23yGDe4UpDfD3PV9HyvE8AuoE+8oKJeTVnIs+u2sEY2TknUmzkJoB3PWFfDjjDZdzqYOiPRwrWi4Yts1TjRvhvLUZ3+b0g4FDCIqx6G3skzOJTEXAZj5WSdKf4nBx3ifn1yAoTjRA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=cPui5XTIbJxAqfJUuvtVo0pM5WZSfhQ29CX9ENnXIh4=;
+ b=gZkBm9DDfpysVdetsa45YqsnzSswkRzjV3jc3vuSD0ecyoRzmnWhvFyCXPW5HgB82CrGdLe8ccK/843SWODdKFQu+GEUc6puykZ6bIa0NCU/Q2M8WOMlDXEcaayGxwPKhenYUpUgiC3VrqN1E1CI4Y8IsKQWxT45TkSVejRFHiPbY+kruEAcZIr8jbUwuOWVfC3/5Tm0O6ghAGvOclkpns1HgjCayCavl/lgmLqPHmDbTgtM1ENQ6uOY24AlK9ZuedG3QVKt6yPfrT1pTeUeQVYm8ilVJ0CwVTPFTfWVqVCjusLC3TBs+cCnikQEVC1xo0HmGnMM2+WjhKeMEw6epA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=cPui5XTIbJxAqfJUuvtVo0pM5WZSfhQ29CX9ENnXIh4=;
+ b=LaaKi+6LbALtHanedG0xxkN7e2yhRiP0DUP0//7dFaPuRBUwl1N+Nc1pLZYD/TXkEXU4ar/T0tNxSD6OsqBhyNI0Qq76YpLPm+aq1T2A7fR4C3KbtfZrMlERLA60IMdqR4o3y5ZNQeRFL7BIPZz4E5ZCoAdMWSSTaFKppCSJvcI=
+Received: from PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
+ by DS0PR12MB8071.namprd12.prod.outlook.com (2603:10b6:8:df::5) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8632.33; Tue, 15 Apr 2025 09:03:12 +0000
+Received: from PH7PR12MB5685.namprd12.prod.outlook.com
+ ([fe80::46fb:96f2:7667:7ca5]) by PH7PR12MB5685.namprd12.prod.outlook.com
+ ([fe80::46fb:96f2:7667:7ca5%5]) with mapi id 15.20.8632.025; Tue, 15 Apr 2025
+ 09:03:12 +0000
+Message-ID: <1d94316f-3336-4d40-bd18-e4703c7037e8@amd.com>
+Date: Tue, 15 Apr 2025 11:03:04 +0200
+User-Agent: Mozilla Thunderbird
+To: "T.J. Mercier" <tjmercier@google.com>, sumit.semwal@linaro.org,
+ ast@kernel.org, daniel@iogearbox.net, andrii@kernel.org,
+ martin.lau@linux.dev, skhan@linuxfoundation.org
 References: <20250414225227.3642618-1-tjmercier@google.com>
-X-Mailer: git-send-email 2.49.0.604.gff1f9ca942-goog
-Message-ID: <20250414225227.3642618-5-tjmercier@google.com>
-From: "T.J. Mercier" <tjmercier@google.com>
-To: sumit.semwal@linaro.org, christian.koenig@amd.com, ast@kernel.org,
-	daniel@iogearbox.net, andrii@kernel.org, martin.lau@linux.dev,
-	skhan@linuxfoundation.org
-X-Rspamd-Queue-Id: 738D2458DC
-X-Spamd-Bar: -----
-X-Spamd-Result: default: False [-5.80 / 15.00];
+Content-Language: en-US
+From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+In-Reply-To: <20250414225227.3642618-1-tjmercier@google.com>
+X-ClientProxiedBy: FR3P281CA0066.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:4b::17) To PH7PR12MB5685.namprd12.prod.outlook.com
+ (2603:10b6:510:13c::22)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|DS0PR12MB8071:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7c7e4921-ec18-4153-580d-08dd7bfc5974
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|7416014|1800799024;
+X-Microsoft-Antispam-Message-Info: 
+	=?utf-8?B?eXVjZlZBaGhySFlLQWwzMldKWmNHVUI2YVNmcjR2bWJjR00rVEhpSVUxakVW?=
+ =?utf-8?B?RTJobW1PQ0lSSDdtbDBZWmk5dldadExNNzNDNFc3b3pqYU9qWEZwTlNUaHFa?=
+ =?utf-8?B?OHdxOWJMSzc4NTNOQytYOFZ2eW93RDhuK21IM3BvQ3JPZ1daKzhVSUNRcmhI?=
+ =?utf-8?B?eGFkWUhtQjc4MUhPSHQ1dDYxbUM2ZXJnRlU1NE4wZ2FaVGw2cGozS1UvNFhw?=
+ =?utf-8?B?TnhTdWZzK3VIZFJ5UEJtSTgxbkJXbElSUStRcEYvY1ZaeHZqaEtKK3lkSmJB?=
+ =?utf-8?B?R0p6UUZrcm9qQ1hqNGU2dzRrV0xsWlM1a25YbktGUlNraGNlYVJVcHpvcmZC?=
+ =?utf-8?B?Qi9VbFVwRldDRmt3RnZXNEJnVi9xRkxnV0FQUzdkQWs1dHVWRy9GckNtQmdC?=
+ =?utf-8?B?Ujk4ZUs2ZVo5Vyt3R0tPNE9Hd3ErSEZqQjFjVkdaUWpFWmNQbnhidFl5SHFB?=
+ =?utf-8?B?OS9oRTJDaDhMUWgzaDlJdC9yZ3Q3TWo0V2tmcHhDYnVQcENXa21NQ1NidE9F?=
+ =?utf-8?B?WGVTMThzd3c2bjRCVFVUUHEwQ1A2bTlRVWZrV0gxRS94NFc5Tlh4QVYxRkNh?=
+ =?utf-8?B?Q1d0ODlYUDRSZDB0dStPNE5MTWxwYTE4QjVYMk1kUU1OcGFiZnpnek8yb3pU?=
+ =?utf-8?B?elNQSGdzekd1ZllBU29DclAzNjFiclZWSXBBZ0diLzFwS0QzM04rSXVBK2pz?=
+ =?utf-8?B?eVNPUUNQY2Y5K0tXWmU0ZG1obVF2SktlR0dLd0lKS093UERmY0NlNjlsSGJq?=
+ =?utf-8?B?MklDaHVsbWNha3hWenlkMUt1RWtGeU5vaWdUQ0szbkRXSUxPOWppVy85ZlpM?=
+ =?utf-8?B?VWFYUEl4M1dEOTIya1hjSmhQaGhwUVRCYUY4eHhLbjA0SU9CNi9aaGlORjc3?=
+ =?utf-8?B?Um1VektjQVlObFJaOWVpTFdqY08zNlU5NUNmYjJEbTV5R0EwVDV2SUxqUWtZ?=
+ =?utf-8?B?ZGcxSEdOb01MSFFSWTVoZndHME1GUWtLb0tTRUZqc09DN2xWRFdqK3Q4V0tH?=
+ =?utf-8?B?RmZwRG5QN1VzbjdoNzRLc09nWDRuQ29SbVV5cGMvb1ppNHllVlEzSGo0Z08y?=
+ =?utf-8?B?ZVFPaE9sYlhaVDI4SGV3YjNRemtEL2ZZT3RKZElxTndYaGprZW9aWlh3UDdB?=
+ =?utf-8?B?S01yTlNyUElub1JORGljc0ovRm1oUGtVK2NzazczckFYeFFiaW9RZGp5dlVx?=
+ =?utf-8?B?Q0tqMkJWT0Z3dmM3Rml1VTh6YVBtczRKVFFoNnF5dUxRbWYva2VFM2JUTzRR?=
+ =?utf-8?B?Tno3SDU3UGwwU3ZUWnhuMEsvd3F4Umt6Q2RRbTZOY25aTFhndGRnMWQ0bWVI?=
+ =?utf-8?B?NXUybjFSZG8yMWE5dnd0a285UFhIWEZ3eEExSnRXbkg2MHZTakhvb212UFNO?=
+ =?utf-8?B?VTRmRVUreVRvZXgvS01hV3ZjdENrQlFHUm81a1JWZk1iMjBwQmRiR2JKaEpH?=
+ =?utf-8?B?NGYyZ0tJeEt3eDdQM3ljWXdBWU9GMGc0K292UWFCWFpXYnY4bHBaaml4UDBw?=
+ =?utf-8?B?WUwyckJRK3l4cmJpK2h1OWNscVB1cFdTSnpPa2IzeU1CRkxVV00rN2lYTVlV?=
+ =?utf-8?B?RWJhQ0FXVVAvT2xEM2FMVGkzb1k2akxjalF3ZUMxOHdVTjlEU1VvM3dNaXI3?=
+ =?utf-8?B?UkV0eDRySEJOOGV4TUZad3V6Tmp1OVRrbjlDSHpxcVdFeWUxNTc1UFo1MkEz?=
+ =?utf-8?B?K0VRUmZYZ0RXdjBkNkZFRmdLOEgzS2VRV2ZEeWZnSVpjL3VzKzZEY3hRTlFt?=
+ =?utf-8?B?Q0tlWkZjOEVWRnE5MEpYNk5EQ09GUzJhWFh6a1BTcldHOFJSMUE0cjlqMVNX?=
+ =?utf-8?B?bTV4c0RhK3BHcGwvUUZSTXRxZlhGS3JMdVBZUHFRU25vZi8zbEVuUjgxT2Z1?=
+ =?utf-8?B?Vm0wa0FnZkdWZjNsejArOUtUNVhQSGR5bUxGaEEzY3ZyRituT21yVWk4MDJj?=
+ =?utf-8?Q?PLYDg9vXDiE=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB5685.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(7416014)(1800799024);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?V1Frc3hScnVPZkJ1Zmw2a1JZdHlmQXN2ZUg5RkZDaWhIUUlXRDBYWmE1c1dv?=
+ =?utf-8?B?SUtib2tqdDNnTFZlK2NUT0VTYURaT1JWRTRjdm8vQmR3eWhpZTNlNHNQY3lJ?=
+ =?utf-8?B?RmUzQlRhMTBQRjNzV010QUszR1pRcDVrSW1GS0dUdktSZWhnMFk4bXhvU2Va?=
+ =?utf-8?B?MnQ5YzFGKzkwUEp0UU1FbFAvbE9KQmRtWVZIalhOMlVwNnBKQjNiblc1YjVC?=
+ =?utf-8?B?Tm5aNnpXZzlISTV3Y0hDOUZOTU9EVWF0dllCcGRxMitQM0xZaWJncFhFanZ4?=
+ =?utf-8?B?NTEwMXdkOHl3RTRyQkxKZFpJZW1yWGRuaURMNk5PVGpCTzdXSWRoWCsyNTY4?=
+ =?utf-8?B?d3dPMFJuQ28vaHp3TGRqN0tMQS8wSDNJN1ZPTXVVdGJERDY5QWJZYjVleGRL?=
+ =?utf-8?B?cGNIZkFidkViT0xOV1BzdWdqcFgxbUJKcG5PUEdXeFlDWm43dmtGRFdtUll5?=
+ =?utf-8?B?NmsrR3JVOEJ6WmlLREp5c0JjY2VzUjZkVkc4MDBmdkh1TTVucXBiZ3NiT2c0?=
+ =?utf-8?B?ZFQvQjVMNDFtSlJJenR6eUdaU0tYN1hUNWxLdnVFcElNM3lSNVplcmJEWklN?=
+ =?utf-8?B?S1hMWFBwRmZja2UrU3V2NVZEZ3ViME1ZT0g1SmZBemVwMUErb2l5VXo4MmxB?=
+ =?utf-8?B?OXBQRDVtNUVta05FSFdSYzc4WTBMRnYwWUZYZHNWbm1UMzFtYVZWK2ErSGlm?=
+ =?utf-8?B?RjlKcjNWckoyL0YzNFNVL2wyRTNEUlQ0L1hmVFdQZ0ZDRXQ1V2RIVEtMY0Nk?=
+ =?utf-8?B?QXZjZDJuNWxFT0JtMUxEb0M5NzZXOWRQbndTU1ZVWjBCbDlnVzIzaFBuTmVh?=
+ =?utf-8?B?VFpnc0gyVFQ3bHdEWkgreU9lNHphVUxjVENMamZUZTh4MHRpRThzTHpkVVFO?=
+ =?utf-8?B?UHBHelB4SjJ4Ymg0MXlnS0RJMWt6N1NGNWxBclV5RmdsTVcrZ1poUmRwVVJN?=
+ =?utf-8?B?MkJHOEpGUjNtZFdYVjRMd0NPUTJPNE9uQjFPUnc3NytCalppOXJhdnJlc1Y3?=
+ =?utf-8?B?VWlkUlZPYVVYeUhkRW9qR2p5YXltaFpwanRPRXBDMk5VeGk4QXZFY0tiUVBF?=
+ =?utf-8?B?bEVkOWxHZE9GUVVweUtIV1FuclpxaFpxM2lwQTdVb3N0SnFLaUFOeFNvam1j?=
+ =?utf-8?B?a3Fia0VRUzVXNEVvZGJ4S00yYlpJRVVXMzlxa25TcGZFWnoreWE1M2JXY0hk?=
+ =?utf-8?B?cjBPblY5SEtTU3owUUt2ZmtBN240UisyL0diSUgvcEZiVTJKdm1ZNk1KclJi?=
+ =?utf-8?B?dWdlanJDLysrSVZ5UDJRT2RUaHU2OTlqVTk2Z3grb3F3QkhhTFVpcU0vQVJF?=
+ =?utf-8?B?di9Oemo0TUk1dUFsZEdaOFg2T3JDUThtdG84ejMvb1phNWNvNmlpN0tDbFhT?=
+ =?utf-8?B?ZXhBcnAxcjRBVlJQWnp3WFBRVW0yak1EKzQrbStrNDlmYXpoY3BJQ004aHFK?=
+ =?utf-8?B?dnZYd3M3WjRJRDc3THdLMldDNE9yNlVCY1lNNjByekJNdjNONFlQbzNuN1dR?=
+ =?utf-8?B?TVhidGEyZ2R3dmhoNmx0TjhCWGt2aEVJQ2JUbjRoTDl5VUtSU2ppWURMb2tm?=
+ =?utf-8?B?WWdmdks0TkhLNVRJVWQ3ODdPODR2T0FHZktDcEdsN3Q5bnRpWUU1NUcrVmpi?=
+ =?utf-8?B?STA5S2Z5dEVCVnJmMm12MGtXa3JuQTRqVVJwa1ZoRUx4Tzl2MUpaVlB5bUFT?=
+ =?utf-8?B?M2pwcE1FQ2JOTGMwVVRETUZsblBWNXQrOStFTjk3YVhGR1g5WmMydXdkdWhT?=
+ =?utf-8?B?eVcrSVVrZXhCVCtvQkpiNWZ1NTZSMVl3MzMxV1dxU2VsblEvWHAwUm9PYU54?=
+ =?utf-8?B?VmwvTkN5UUdZRFJjL1pLeUJrS2YvYUZJSUprMHFKU3F3NDl6Q3NLZEh1TzEy?=
+ =?utf-8?B?K2hEcVdwc05zQ0N0dFNBQ3kwYUsvV2R1R0szdy9TVFBwdi92Yk52bTRRc3cz?=
+ =?utf-8?B?TEpubW1XeDZqdWUxc0VvL3k2bENUNHRKUDB2dlZkODJHbTVhaENhNDFMS29Z?=
+ =?utf-8?B?aEMyZWphUnlKNnZrUEpHeGdZcEhDN3I3amljaFBpNWNOZ0hCOU52OXp2bnNt?=
+ =?utf-8?B?UEVycTFQRyttS1RCVUs2dUYxK3M5WjhVUTM3TkFZWmRtZDJpdEEra2JmZWRI?=
+ =?utf-8?Q?BSzE=3D?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7c7e4921-ec18-4153-580d-08dd7bfc5974
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5685.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Apr 2025 09:03:12.0694
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: AhgzVhF1olvEdjW++nUblWRVZ0acSOOLDH0dIPpwjk5MI5Yn+IR+oLZY7O2YybQj
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB8071
+X-Rspamd-Queue-Id: 1755A44201
+X-Spamd-Bar: --------
+X-Spamd-Result: default: False [-8.50 / 15.00];
 	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	RBL_SENDERSCORE_REPUT_9(-1.00)[209.85.210.201:from];
-	MID_CONTAINS_FROM(1.00)[];
-	MV_CASE(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	FORGED_SENDER(0.30)[tjmercier@google.com,325H9ZwkKDTwrhkcpagcpemmejc.amkjglYpm-kk-qgejgqrq.jglYpm.mpe@flex--tjmercier.bounces.google.com];
-	R_DKIM_ALLOW(-0.20)[google.com:s=20230601];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.210.201:from];
+	RBL_SENDERSCORE_REPUT_9(-1.00)[40.107.237.82:from];
+	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector10001:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
+	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
 	MIME_GOOD(-0.10)[text/plain];
-	FROM_HAS_DN(0.00)[];
-	ARC_NA(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[vger.kernel.org,lists.freedesktop.org,lists.linaro.org,google.com,ffwll.ch,lwn.net,gmail.com,kernel.org,linux.dev,fomichev.me,fb.com];
-	DKIM_TRACE(0.00)[google.com:+];
-	RCVD_COUNT_ONE(0.00)[1];
-	DNSWL_BLOCKED(0.00)[209.85.210.201:from];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[tjmercier@google.com,325H9ZwkKDTwrhkcpagcpemmejc.amkjglYpm-kk-qgejgqrq.jglYpm.mpe@flex--tjmercier.bounces.google.com];
-	RCPT_COUNT_TWELVE(0.00)[26];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	DWL_DNSWL_BLOCKED(0.00)[google.com:dkim];
-	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.237.82:from];
 	TAGGED_RCPT(0.00)[];
-	TO_DN_SOME(0.00)[]
+	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[25];
+	NEURAL_HAM(-0.00)[-1.000];
+	URIBL_BLOCKED(0.00)[NAM12-BN8-obe.outbound.protection.outlook.com:helo];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[vger.kernel.org,lists.freedesktop.org,lists.linaro.org,google.com,ffwll.ch,lwn.net,gmail.com,kernel.org,linux.dev,fomichev.me,fb.com];
+	MID_RHS_MATCH_FROM(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[amd.com:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: MMYZRTMR7PBUYHOGLEW3WHLQ22Y4HO7X
-X-Message-ID-Hash: MMYZRTMR7PBUYHOGLEW3WHLQ22Y4HO7X
-X-MailFrom: 325H9ZwkKDTwrhkcpagcpemmejc.amkjglYpm-kk-qgejgqrq.jglYpm.mpe@flex--tjmercier.bounces.google.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org, bpf@vger.kernel.org, linux-kselftest@vger.kernel.org, android-mm@google.com, simona@ffwll.ch, corbet@lwn.net, eddyz87@gmail.com, song@kernel.org, yonghong.song@linux.dev, john.fastabend@gmail.com, kpsingh@kernel.org, sdf@fomichev.me, jolsa@kernel.org, mykolal@fb.com, "T.J. Mercier" <tjmercier@google.com>
+Message-ID-Hash: CSWHDOBPMWNV7JCJQCANYYES6VCOO2G4
+X-Message-ID-Hash: CSWHDOBPMWNV7JCJQCANYYES6VCOO2G4
+X-MailFrom: Christian.Koenig@amd.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org, bpf@vger.kernel.org, linux-kselftest@vger.kernel.org, android-mm@google.com, simona@ffwll.ch, corbet@lwn.net, eddyz87@gmail.com, song@kernel.org, yonghong.song@linux.dev, john.fastabend@gmail.com, kpsingh@kernel.org, sdf@fomichev.me, jolsa@kernel.org, mykolal@fb.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [RFC PATCH 4/4] RFC: dma-buf: Remove DMA-BUF statistics
+Subject: [Linaro-mm-sig] Re: [PATCH 0/4] Replace CONFIG_DMABUF_SYSFS_STATS with BPF
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MMYZRTMR7PBUYHOGLEW3WHLQ22Y4HO7X/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CSWHDOBPMWNV7JCJQCANYYES6VCOO2G4/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -111,427 +191,82 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-I think Android is probably the only remaining user of the dmabuf sysfs
-files. The BPF infrastructure added earlier in this series will allow us
-to get the same information much more cheaply.
+Am 15.04.25 um 00:52 schrieb T.J. Mercier:
+> Until CONFIG_DMABUF_SYSFS_STATS was added [1] it was only possible to
+> perform per-buffer accounting with debugfs which is not suitable for
+> production environments. Eventually we discovered the overhead with
+> per-buffer sysfs file creation/removal was significantly impacting
+> allocation and free times, and exacerbated kernfs lock contention. [2]
+> dma_buf_stats_setup() is responsible for 39% of single-page buffer
+> creation duration, or 74% of single-page dma_buf_export() duration when
+> stressing dmabuf allocations and frees.
+>
+> I prototyped a change from per-buffer to per-exporter statistics with a
+> RCU protected list of exporter allocations that accommodates most (but
+> not all) of our use-cases and avoids almost all of the sysfs overhead.
+> While that adds less overhead than per-buffer sysfs, and less even than
+> the maintenance of the dmabuf debugfs_list, it's still *additional*
+> overhead on top of the debugfs_list and doesn't give us per-buffer info.
+>
+> This series uses the existing dmabuf debugfs_list to implement a BPF
+> dmabuf iterator, which adds no overhead to buffer allocation/free and
+> provides per-buffer info.
 
-This patch is a RFC because I'd like to keep this for at least one more
-longterm stable release (6.18?) before actually removing it so that we
-can have one kernel version that supports both options to facilitate a
-transition from the sysfs files to a BPF program.
+Really interesting suggestion. I was expecting something like cgroups, but bpf is certainly an option as well.
 
-Signed-off-by: T.J. Mercier <tjmercier@google.com>
----
- .../ABI/testing/sysfs-kernel-dmabuf-buffers   |  24 ---
- Documentation/driver-api/dma-buf.rst          |   5 -
- drivers/dma-buf/Kconfig                       |  15 --
- drivers/dma-buf/Makefile                      |   1 -
- drivers/dma-buf/dma-buf-sysfs-stats.c         | 202 ------------------
- drivers/dma-buf/dma-buf-sysfs-stats.h         |  35 ---
- drivers/dma-buf/dma-buf.c                     |  18 --
- 7 files changed, 300 deletions(-)
- delete mode 100644 Documentation/ABI/testing/sysfs-kernel-dmabuf-buffers
- delete mode 100644 drivers/dma-buf/dma-buf-sysfs-stats.c
- delete mode 100644 drivers/dma-buf/dma-buf-sysfs-stats.h
+How do you then use bpf to account the buffers? E.g. are you interacting with cgroups or have sysfs procedure to expose the list or how does that work?
 
-diff --git a/Documentation/ABI/testing/sysfs-kernel-dmabuf-buffers b/Documentation/ABI/testing/sysfs-kernel-dmabuf-buffers
-deleted file mode 100644
-index 5d3bc997dc64..000000000000
---- a/Documentation/ABI/testing/sysfs-kernel-dmabuf-buffers
-+++ /dev/null
-@@ -1,24 +0,0 @@
--What:		/sys/kernel/dmabuf/buffers
--Date:		May 2021
--KernelVersion:	v5.13
--Contact:	Hridya Valsaraju <hridya@google.com>
--Description:	The /sys/kernel/dmabuf/buffers directory contains a
--		snapshot of the internal state of every DMA-BUF.
--		/sys/kernel/dmabuf/buffers/<inode_number> will contain the
--		statistics for the DMA-BUF with the unique inode number
--		<inode_number>
--Users:		kernel memory tuning/debugging tools
--
--What:		/sys/kernel/dmabuf/buffers/<inode_number>/exporter_name
--Date:		May 2021
--KernelVersion:	v5.13
--Contact:	Hridya Valsaraju <hridya@google.com>
--Description:	This file is read-only and contains the name of the exporter of
--		the DMA-BUF.
--
--What:		/sys/kernel/dmabuf/buffers/<inode_number>/size
--Date:		May 2021
--KernelVersion:	v5.13
--Contact:	Hridya Valsaraju <hridya@google.com>
--Description:	This file is read-only and specifies the size of the DMA-BUF in
--		bytes.
-diff --git a/Documentation/driver-api/dma-buf.rst b/Documentation/driver-api/dma-buf.rst
-index 29abf1eebf9f..2f36c21d9948 100644
---- a/Documentation/driver-api/dma-buf.rst
-+++ b/Documentation/driver-api/dma-buf.rst
-@@ -125,11 +125,6 @@ Implicit Fence Poll Support
- .. kernel-doc:: drivers/dma-buf/dma-buf.c
-    :doc: implicit fence polling
- 
--DMA-BUF statistics
--~~~~~~~~~~~~~~~~~~
--.. kernel-doc:: drivers/dma-buf/dma-buf-sysfs-stats.c
--   :doc: overview
--
- DMA Buffer ioctls
- ~~~~~~~~~~~~~~~~~
- 
-diff --git a/drivers/dma-buf/Kconfig b/drivers/dma-buf/Kconfig
-index fee04fdb0822..03e38c0d1fff 100644
---- a/drivers/dma-buf/Kconfig
-+++ b/drivers/dma-buf/Kconfig
-@@ -76,21 +76,6 @@ menuconfig DMABUF_HEAPS
- 	  allows userspace to allocate dma-bufs that can be shared
- 	  between drivers.
- 
--menuconfig DMABUF_SYSFS_STATS
--	bool "DMA-BUF sysfs statistics (DEPRECATED)"
--	depends on DMA_SHARED_BUFFER
--	help
--	   Choose this option to enable DMA-BUF sysfs statistics
--	   in location /sys/kernel/dmabuf/buffers.
--
--	   /sys/kernel/dmabuf/buffers/<inode_number> will contain
--	   statistics for the DMA-BUF with the unique inode number
--	   <inode_number>.
--
--	   This option is deprecated and should sooner or later be removed.
--	   Android is the only user of this and it turned out that this resulted
--	   in quite some performance problems.
--
- source "drivers/dma-buf/heaps/Kconfig"
- 
- endmenu
-diff --git a/drivers/dma-buf/Makefile b/drivers/dma-buf/Makefile
-index 70ec901edf2c..8ab2bfecb1c9 100644
---- a/drivers/dma-buf/Makefile
-+++ b/drivers/dma-buf/Makefile
-@@ -6,7 +6,6 @@ obj-$(CONFIG_DMABUF_HEAPS)	+= heaps/
- obj-$(CONFIG_SYNC_FILE)		+= sync_file.o
- obj-$(CONFIG_SW_SYNC)		+= sw_sync.o sync_debug.o
- obj-$(CONFIG_UDMABUF)		+= udmabuf.o
--obj-$(CONFIG_DMABUF_SYSFS_STATS) += dma-buf-sysfs-stats.o
- 
- dmabuf_selftests-y := \
- 	selftest.o \
-diff --git a/drivers/dma-buf/dma-buf-sysfs-stats.c b/drivers/dma-buf/dma-buf-sysfs-stats.c
-deleted file mode 100644
-index b5b62e40ccc1..000000000000
---- a/drivers/dma-buf/dma-buf-sysfs-stats.c
-+++ /dev/null
-@@ -1,202 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0-only
--/*
-- * DMA-BUF sysfs statistics.
-- *
-- * Copyright (C) 2021 Google LLC.
-- */
--
--#include <linux/dma-buf.h>
--#include <linux/dma-resv.h>
--#include <linux/kobject.h>
--#include <linux/printk.h>
--#include <linux/slab.h>
--#include <linux/sysfs.h>
--
--#include "dma-buf-sysfs-stats.h"
--
--#define to_dma_buf_entry_from_kobj(x) container_of(x, struct dma_buf_sysfs_entry, kobj)
--
--/**
-- * DOC: overview
-- *
-- * ``/sys/kernel/debug/dma_buf/bufinfo`` provides an overview of every DMA-BUF
-- * in the system. However, since debugfs is not safe to be mounted in
-- * production, procfs and sysfs can be used to gather DMA-BUF statistics on
-- * production systems.
-- *
-- * The ``/proc/<pid>/fdinfo/<fd>`` files in procfs can be used to gather
-- * information about DMA-BUF fds. Detailed documentation about the interface
-- * is present in Documentation/filesystems/proc.rst.
-- *
-- * Unfortunately, the existing procfs interfaces can only provide information
-- * about the DMA-BUFs for which processes hold fds or have the buffers mmapped
-- * into their address space. This necessitated the creation of the DMA-BUF sysfs
-- * statistics interface to provide per-buffer information on production systems.
-- *
-- * The interface at ``/sys/kernel/dmabuf/buffers`` exposes information about
-- * every DMA-BUF when ``CONFIG_DMABUF_SYSFS_STATS`` is enabled.
-- *
-- * The following stats are exposed by the interface:
-- *
-- * * ``/sys/kernel/dmabuf/buffers/<inode_number>/exporter_name``
-- * * ``/sys/kernel/dmabuf/buffers/<inode_number>/size``
-- *
-- * The information in the interface can also be used to derive per-exporter
-- * statistics. The data from the interface can be gathered on error conditions
-- * or other important events to provide a snapshot of DMA-BUF usage.
-- * It can also be collected periodically by telemetry to monitor various metrics.
-- *
-- * Detailed documentation about the interface is present in
-- * Documentation/ABI/testing/sysfs-kernel-dmabuf-buffers.
-- */
--
--struct dma_buf_stats_attribute {
--	struct attribute attr;
--	ssize_t (*show)(struct dma_buf *dmabuf,
--			struct dma_buf_stats_attribute *attr, char *buf);
--};
--#define to_dma_buf_stats_attr(x) container_of(x, struct dma_buf_stats_attribute, attr)
--
--static ssize_t dma_buf_stats_attribute_show(struct kobject *kobj,
--					    struct attribute *attr,
--					    char *buf)
--{
--	struct dma_buf_stats_attribute *attribute;
--	struct dma_buf_sysfs_entry *sysfs_entry;
--	struct dma_buf *dmabuf;
--
--	attribute = to_dma_buf_stats_attr(attr);
--	sysfs_entry = to_dma_buf_entry_from_kobj(kobj);
--	dmabuf = sysfs_entry->dmabuf;
--
--	if (!dmabuf || !attribute->show)
--		return -EIO;
--
--	return attribute->show(dmabuf, attribute, buf);
--}
--
--static const struct sysfs_ops dma_buf_stats_sysfs_ops = {
--	.show = dma_buf_stats_attribute_show,
--};
--
--static ssize_t exporter_name_show(struct dma_buf *dmabuf,
--				  struct dma_buf_stats_attribute *attr,
--				  char *buf)
--{
--	return sysfs_emit(buf, "%s\n", dmabuf->exp_name);
--}
--
--static ssize_t size_show(struct dma_buf *dmabuf,
--			 struct dma_buf_stats_attribute *attr,
--			 char *buf)
--{
--	return sysfs_emit(buf, "%zu\n", dmabuf->size);
--}
--
--static struct dma_buf_stats_attribute exporter_name_attribute =
--	__ATTR_RO(exporter_name);
--static struct dma_buf_stats_attribute size_attribute = __ATTR_RO(size);
--
--static struct attribute *dma_buf_stats_default_attrs[] = {
--	&exporter_name_attribute.attr,
--	&size_attribute.attr,
--	NULL,
--};
--ATTRIBUTE_GROUPS(dma_buf_stats_default);
--
--static void dma_buf_sysfs_release(struct kobject *kobj)
--{
--	struct dma_buf_sysfs_entry *sysfs_entry;
--
--	sysfs_entry = to_dma_buf_entry_from_kobj(kobj);
--	kfree(sysfs_entry);
--}
--
--static const struct kobj_type dma_buf_ktype = {
--	.sysfs_ops = &dma_buf_stats_sysfs_ops,
--	.release = dma_buf_sysfs_release,
--	.default_groups = dma_buf_stats_default_groups,
--};
--
--void dma_buf_stats_teardown(struct dma_buf *dmabuf)
--{
--	struct dma_buf_sysfs_entry *sysfs_entry;
--
--	sysfs_entry = dmabuf->sysfs_entry;
--	if (!sysfs_entry)
--		return;
--
--	kobject_del(&sysfs_entry->kobj);
--	kobject_put(&sysfs_entry->kobj);
--}
--
--
--/* Statistics files do not need to send uevents. */
--static int dmabuf_sysfs_uevent_filter(const struct kobject *kobj)
--{
--	return 0;
--}
--
--static const struct kset_uevent_ops dmabuf_sysfs_no_uevent_ops = {
--	.filter = dmabuf_sysfs_uevent_filter,
--};
--
--static struct kset *dma_buf_stats_kset;
--static struct kset *dma_buf_per_buffer_stats_kset;
--int dma_buf_init_sysfs_statistics(void)
--{
--	dma_buf_stats_kset = kset_create_and_add("dmabuf",
--						 &dmabuf_sysfs_no_uevent_ops,
--						 kernel_kobj);
--	if (!dma_buf_stats_kset)
--		return -ENOMEM;
--
--	dma_buf_per_buffer_stats_kset = kset_create_and_add("buffers",
--							    &dmabuf_sysfs_no_uevent_ops,
--							    &dma_buf_stats_kset->kobj);
--	if (!dma_buf_per_buffer_stats_kset) {
--		kset_unregister(dma_buf_stats_kset);
--		return -ENOMEM;
--	}
--
--	return 0;
--}
--
--void dma_buf_uninit_sysfs_statistics(void)
--{
--	kset_unregister(dma_buf_per_buffer_stats_kset);
--	kset_unregister(dma_buf_stats_kset);
--}
--
--int dma_buf_stats_setup(struct dma_buf *dmabuf, struct file *file)
--{
--	struct dma_buf_sysfs_entry *sysfs_entry;
--	int ret;
--
--	if (!dmabuf->exp_name) {
--		pr_err("exporter name must not be empty if stats needed\n");
--		return -EINVAL;
--	}
--
--	sysfs_entry = kzalloc(sizeof(struct dma_buf_sysfs_entry), GFP_KERNEL);
--	if (!sysfs_entry)
--		return -ENOMEM;
--
--	sysfs_entry->kobj.kset = dma_buf_per_buffer_stats_kset;
--	sysfs_entry->dmabuf = dmabuf;
--
--	dmabuf->sysfs_entry = sysfs_entry;
--
--	/* create the directory for buffer stats */
--	ret = kobject_init_and_add(&sysfs_entry->kobj, &dma_buf_ktype, NULL,
--				   "%lu", file_inode(file)->i_ino);
--	if (ret)
--		goto err_sysfs_dmabuf;
--
--	return 0;
--
--err_sysfs_dmabuf:
--	kobject_put(&sysfs_entry->kobj);
--	dmabuf->sysfs_entry = NULL;
--	return ret;
--}
-diff --git a/drivers/dma-buf/dma-buf-sysfs-stats.h b/drivers/dma-buf/dma-buf-sysfs-stats.h
-deleted file mode 100644
-index 7a8a995b75ba..000000000000
---- a/drivers/dma-buf/dma-buf-sysfs-stats.h
-+++ /dev/null
-@@ -1,35 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0-only */
--/*
-- * DMA-BUF sysfs statistics.
-- *
-- * Copyright (C) 2021 Google LLC.
-- */
--
--#ifndef _DMA_BUF_SYSFS_STATS_H
--#define _DMA_BUF_SYSFS_STATS_H
--
--#ifdef CONFIG_DMABUF_SYSFS_STATS
--
--int dma_buf_init_sysfs_statistics(void);
--void dma_buf_uninit_sysfs_statistics(void);
--
--int dma_buf_stats_setup(struct dma_buf *dmabuf, struct file *file);
--
--void dma_buf_stats_teardown(struct dma_buf *dmabuf);
--#else
--
--static inline int dma_buf_init_sysfs_statistics(void)
--{
--	return 0;
--}
--
--static inline void dma_buf_uninit_sysfs_statistics(void) {}
--
--static inline int dma_buf_stats_setup(struct dma_buf *dmabuf, struct file *file)
--{
--	return 0;
--}
--
--static inline void dma_buf_stats_teardown(struct dma_buf *dmabuf) {}
--#endif
--#endif // _DMA_BUF_SYSFS_STATS_H
-diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
-index affb47eb8629..c51967c6cf85 100644
---- a/drivers/dma-buf/dma-buf.c
-+++ b/drivers/dma-buf/dma-buf.c
-@@ -31,8 +31,6 @@
- #include <uapi/linux/dma-buf.h>
- #include <uapi/linux/magic.h>
- 
--#include "dma-buf-sysfs-stats.h"
--
- static inline int is_dma_buf_file(struct file *);
- 
- #if IS_ENABLED(CONFIG_DEBUG_FS)
-@@ -98,7 +96,6 @@ static void dma_buf_release(struct dentry *dentry)
- 	 */
- 	BUG_ON(dmabuf->cb_in.active || dmabuf->cb_out.active);
- 
--	dma_buf_stats_teardown(dmabuf);
- 	dmabuf->ops->release(dmabuf);
- 
- 	if (dmabuf->resv == (struct dma_resv *)&dmabuf[1])
-@@ -681,10 +678,6 @@ struct dma_buf *dma_buf_export(const struct dma_buf_export_info *exp_info)
- 		dmabuf->resv = resv;
- 	}
- 
--	ret = dma_buf_stats_setup(dmabuf, file);
--	if (ret)
--		goto err_dmabuf;
--
- 	file->private_data = dmabuf;
- 	file->f_path.dentry->d_fsdata = dmabuf;
- 	dmabuf->file = file;
-@@ -693,10 +686,6 @@ struct dma_buf *dma_buf_export(const struct dma_buf_export_info *exp_info)
- 
- 	return dmabuf;
- 
--err_dmabuf:
--	if (!resv)
--		dma_resv_fini(dmabuf->resv);
--	kfree(dmabuf);
- err_file:
- 	fput(file);
- err_module:
-@@ -1727,12 +1716,6 @@ static inline void dma_buf_uninit_debugfs(void)
- 
- static int __init dma_buf_init(void)
- {
--	int ret;
--
--	ret = dma_buf_init_sysfs_statistics();
--	if (ret)
--		return ret;
--
- 	dma_buf_mnt = kern_mount(&dma_buf_fs_type);
- 	if (IS_ERR(dma_buf_mnt))
- 		return PTR_ERR(dma_buf_mnt);
-@@ -1746,6 +1729,5 @@ static void __exit dma_buf_deinit(void)
- {
- 	dma_buf_uninit_debugfs();
- 	kern_unmount(dma_buf_mnt);
--	dma_buf_uninit_sysfs_statistics();
- }
- __exitcall(dma_buf_deinit);
--- 
-2.49.0.604.gff1f9ca942-goog
+Additional to that why using DMA-buf for accounting in the first place? See DMA-buf is for sharing buffers and only a minimal fraction of buffers usually need to get shared. Everything else is just massive overhead.
+
+> While the kernel must have CONFIG_DEBUG_FS for
+> the dmabuf_iter to be available, debugfs does not need to be mounted.
+> The BPF program loaded by userspace that extracts per-buffer information
+> gets to define its own interface which avoids the lack of ABI stability
+> with debugfs (even if it were mounted).
+
+I think we can make the buffer list independent of CONFIG_DEBUG_FS.
+
+> As this is a replacement for our use of CONFIG_DMABUF_SYSFS_STATS, the
+> last patch is a RFC for removing it from the kernel. Please see my
+> suggestion there regarding the timeline for that.
+
+Oh, yes please!
+
+Regards,
+Christian.
+
+>
+> [1] https://lore.kernel.org/linux-media/20201210044400.1080308-1-hridya@google.com/
+> [2] https://lore.kernel.org/all/20220516171315.2400578-1-tjmercier@google.com/
+>
+> T.J. Mercier (4):
+>   dma-buf: Rename and expose debugfs symbols
+>   bpf: Add dmabuf iterator
+>   selftests/bpf: Add test for dmabuf_iter
+>   RFC: dma-buf: Remove DMA-BUF statistics
+>
+>  .../ABI/testing/sysfs-kernel-dmabuf-buffers   |  24 ---
+>  Documentation/driver-api/dma-buf.rst          |   5 -
+>  drivers/dma-buf/Kconfig                       |  15 --
+>  drivers/dma-buf/Makefile                      |   1 -
+>  drivers/dma-buf/dma-buf-sysfs-stats.c         | 202 ------------------
+>  drivers/dma-buf/dma-buf-sysfs-stats.h         |  35 ---
+>  drivers/dma-buf/dma-buf.c                     |  40 +---
+>  include/linux/btf_ids.h                       |   1 +
+>  include/linux/dma-buf.h                       |   6 +
+>  kernel/bpf/Makefile                           |   3 +
+>  kernel/bpf/dmabuf_iter.c                      | 130 +++++++++++
+>  tools/testing/selftests/bpf/config            |   1 +
+>  .../selftests/bpf/prog_tests/dmabuf_iter.c    | 116 ++++++++++
+>  .../testing/selftests/bpf/progs/dmabuf_iter.c |  31 +++
+>  14 files changed, 299 insertions(+), 311 deletions(-)
+>  delete mode 100644 Documentation/ABI/testing/sysfs-kernel-dmabuf-buffers
+>  delete mode 100644 drivers/dma-buf/dma-buf-sysfs-stats.c
+>  delete mode 100644 drivers/dma-buf/dma-buf-sysfs-stats.h
+>  create mode 100644 kernel/bpf/dmabuf_iter.c
+>  create mode 100644 tools/testing/selftests/bpf/prog_tests/dmabuf_iter.c
+>  create mode 100644 tools/testing/selftests/bpf/progs/dmabuf_iter.c
+>
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
