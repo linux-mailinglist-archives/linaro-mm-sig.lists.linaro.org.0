@@ -2,236 +2,129 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B7C4A9A5F2
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 24 Apr 2025 10:34:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 114D7A9BB9F
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 25 Apr 2025 02:14:16 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E5EAA45976
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 24 Apr 2025 08:34:16 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 472B443CFD
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 24 Apr 2025 08:34:02 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id CC0E6443AE
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 25 Apr 2025 00:14:14 +0000 (UTC)
+Received: from mail-lf1-f49.google.com (mail-lf1-f49.google.com [209.85.167.49])
+	by lists.linaro.org (Postfix) with ESMTPS id 1D5404427F
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 25 Apr 2025 00:14:01 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=HtNciVMT;
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=mripard@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id 0AD5D43C46;
-	Thu, 24 Apr 2025 08:34:00 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 31C24C4CEE3;
-	Thu, 24 Apr 2025 08:34:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1745483641;
-	bh=uWQHk37Gm0FmiSDmpihjGp+GK47gFOCM7m+SvUGFxYo=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=HtNciVMTmjgT4B8/PtMCIrFeOeAv8ZZrPDZ6qdIaMi0x5sMj7WXGuBxAk82UHPyYj
-	 0gjQ5IAAlFpE2mKpYt6LxFLJwnOrbokYyEepPL+eiccK2JgkSTQb++CLQeYQsxV9sr
-	 hKITY/wLVZRhsbUUAPab+yevKkUqGZjbwT5U59oqgSf3o6CBALhUn3ay0Fa3NM/B4c
-	 Gd1gCCiVKXFVUslVuKhc4bOH2L+7jNgr+S0JSs5ZnAYJILTJuxRj462kYtfc9IgCXK
-	 qtrQGILa6X+u7cqwsgEyHTapHtNayLIB5fnoc5+q6w4NRXMqzLMu+NfHz+3cDog4lz
-	 r6gszxbCJ+Jig==
-Date: Thu, 24 Apr 2025 10:33:58 +0200
-From: Maxime Ripard <mripard@kernel.org>
-To: Jared Kangas <jkangas@redhat.com>
-Message-ID: <20250424-sassy-cunning-pillbug-ffde51@houat>
-References: <20250422191939.555963-1-jkangas@redhat.com>
- <20250422191939.555963-3-jkangas@redhat.com>
+	dkim=pass header.d=google.com header.s=20230601 header.b="f0374p/V";
+	dmarc=pass (policy=reject) header.from=google.com;
+	spf=pass (lists.linaro.org: domain of jstultz@google.com designates 209.85.167.49 as permitted sender) smtp.mailfrom=jstultz@google.com
+Received: by mail-lf1-f49.google.com with SMTP id 2adb3069b0e04-54d3ee30af1so1802037e87.0
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 24 Apr 2025 17:14:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1745540040; x=1746144840; darn=lists.linaro.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=weepQ3o3E6eVKCjaxY3CTZ3gGB6j9iWw3wdfeMK8HxI=;
+        b=f0374p/VFQQ1Ye705waZur0ieCG3lZv56j22ufkgYaWCWXxJCI8T4CJYxaab2iMLYb
+         oK87heO0Z8cD4dlWFYPXVvqTSXM/Cx46MyqCOk/4nRgLdvcMU5v5Oc6o33sYSLvGRR41
+         TUwLcJ/IZtA2svtieYy7xoZCoLqTa4wTdC9343PANISFlqrPjj40dGG3KbSj1O4gjejm
+         Bpzz87L4ioMhPmnIAbxg7/NLGC+atWsyM4ahkbTbdmjVsAmU1q2TL7+/gp5sg5SHmFjD
+         w6AFbgDA39gx2kW6tanVEY1U4VqNfrCvoCZXUT05U7pcSw0loVUA6RXihfpZG5pFoWGQ
+         XQpg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1745540040; x=1746144840;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=weepQ3o3E6eVKCjaxY3CTZ3gGB6j9iWw3wdfeMK8HxI=;
+        b=WH8G0NZVuleN+aHOffS1UFbtGRrOteXkaV8AO2mU2DlhO/MSbvW05sMfqPfsuYUeBr
+         gWoK1t9ZT/JFedwKKdjZxZQzwJl0NP7qahqD+6EwEJE1bZN9zTMIpsx33BBOVI9rx9IC
+         cnX0/Y5uX5036VXRPS+UmeItFWFUbv2I7rarQxnI2olG/D4y0C+SbfA1JotZMo5r40l8
+         rmhVow8bhSa1pGnSRu/PMgYQnamVV87MCBhCrHKLuYP1Sy068z8jueOI7tFba0LLoEn+
+         fb0DqPQ8JOSJxogBlR1BVwr4Hz2rse+wqBIYwzp4+7Szjd8MseijsIICj09N/fE7vuR3
+         X/Ew==
+X-Forwarded-Encrypted: i=1; AJvYcCXBWXL0jgJ086Bc28i6gg9H3t3sr6+RPdMjrOtiU3g0IX/YlYrv3i0gpDcFy60OixPLHgkl8Immraws/Wmv@lists.linaro.org
+X-Gm-Message-State: AOJu0Yy5XOEvhbYTw0ZDmFxV5zznK2/lpBzOpnbE470LuDCuzvjDHbvu
+	XuwUcr3QxmnyS3JuyQ5iMqjsQM8XhzAenRAWtq6/OmiiSIv7nH5vw667zUN/eiRNFmispV7SdZd
+	QGz+B2jOLK3bcjS0VibeExMmAUwhlu12i4Iw=
+X-Gm-Gg: ASbGncs8c0sfRSG/pLqX+yWgDtZxlQyS4UsfJjL9etogjPV5l6DUOmmwxGhXNrA+WBd
+	SE7IoooEue0Hd5kAsr2mnw05Dq75OoPDt322fvt6tLFBtRYq6DAXNMLOFpmbFspU/AhF62tNZxz
+	jsWS3jH3HemNHyomEINrqDHzBQ6G6mlsUzU55m3FVOBcWkcV2DpWqQvg1UF530P6g=
+X-Google-Smtp-Source: AGHT+IFupDhtk787UYFC+m51vWARrrW+g3qeY1nzKmRJUOvJStBMU1HIyqroJk5ca7MURfz+ouovj/qgbuHigNDZtwA=
+X-Received: by 2002:a05:6512:ac5:b0:545:2871:7cd5 with SMTP id
+ 2adb3069b0e04-54e8cbce2bamr107809e87.15.1745540039297; Thu, 24 Apr 2025
+ 17:13:59 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20250422191939.555963-3-jkangas@redhat.com>
+References: <20250422191939.555963-1-jkangas@redhat.com> <20250422191939.555963-3-jkangas@redhat.com>
+ <20250424-sassy-cunning-pillbug-ffde51@houat>
+In-Reply-To: <20250424-sassy-cunning-pillbug-ffde51@houat>
+From: John Stultz <jstultz@google.com>
+Date: Thu, 24 Apr 2025 17:13:47 -0700
+X-Gm-Features: ATxdqUEd-WZkBCWlXClEEov2Vu7arSm9wmBJpDM85wdm6VobmqGM8s292rnkW9E
+Message-ID: <CANDhNCqfsUbN3aavAH5hi4wdcKuUkjLX4jqhKzy-q+jCEqpoow@mail.gmail.com>
+To: Maxime Ripard <mripard@kernel.org>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 472B443CFD
-X-Spamd-Bar: -----
-X-Spamd-Result: default: False [-5.60 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
-	SIGNED_PGP(-2.00)[];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.252.31];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
+X-Rspamd-Queue-Id: 1D5404427F
+X-Spamd-Bar: -------
+X-Spamd-Result: default: False [-8.00 / 15.00];
+	REPLY(-4.00)[];
+	BAYES_HAM(-3.00)[99.97%];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20230601];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	MIME_GOOD(-0.10)[text/plain];
+	RBL_SENDERSCORE_REPUT_8(0.00)[209.85.167.49:from];
+	MIME_TRACE(0.00)[0:+];
 	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_ONE(0.00)[1];
 	ARC_NA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCPT_COUNT_SEVEN(0.00)[11];
 	MISSING_XM_UA(0.00)[];
-	DWL_DNSWL_BLOCKED(0.00)[kernel.org:dkim];
-	RBL_SENDERSCORE_REPUT_BLOCKED(0.00)[172.234.252.31:from];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	RCVD_COUNT_TWO(0.00)[2];
-	RCVD_TLS_LAST(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.167.49:from];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	NEURAL_HAM(-0.00)[-1.000];
-	DKIM_TRACE(0.00)[kernel.org:+]
+	DKIM_TRACE(0.00)[google.com:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: WTYJV5MAPHARX3SQ5AUVXQVZT3DYBJOP
-X-Message-ID-Hash: WTYJV5MAPHARX3SQ5AUVXQVZT3DYBJOP
-X-MailFrom: mripard@kernel.org
+Message-ID-Hash: X36YB6IMXHGZMN4HBZ4UAOS2DKLYGO34
+X-Message-ID-Hash: X36YB6IMXHGZMN4HBZ4UAOS2DKLYGO34
+X-MailFrom: jstultz@google.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, Brian.Starkey@arm.com, jstultz@google.com, tjmercier@google.com, christian.koenig@amd.com, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
+CC: Jared Kangas <jkangas@redhat.com>, sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, Brian.Starkey@arm.com, tjmercier@google.com, christian.koenig@amd.com, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH v2 2/2] dma-buf: heaps: Give default CMA heap a fixed name
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WTYJV5MAPHARX3SQ5AUVXQVZT3DYBJOP/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/X36YB6IMXHGZMN4HBZ4UAOS2DKLYGO34/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============0986254259059682493=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-
---===============0986254259059682493==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="3zbhpucpbyq3iuve"
-Content-Disposition: inline
-
-
---3zbhpucpbyq3iuve
-Content-Type: text/plain; protected-headers=v1; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH v2 2/2] dma-buf: heaps: Give default CMA heap a fixed name
-MIME-Version: 1.0
-
-Hi Jared,
-
-Thanks for working on this
-
-On Tue, Apr 22, 2025 at 12:19:39PM -0700, Jared Kangas wrote:
-> The CMA heap's name in devtmpfs can vary depending on how the heap is
-> defined. Its name defaults to "reserved", but if a CMA area is defined
-> in the devicetree, the heap takes on the devicetree node's name, such as
-> "default-pool" or "linux,cma". To simplify naming, just name it
-> "default_cma", and keep a legacy node in place backed by the same
-> underlying structure for backwards compatibility.
->=20
-> Signed-off-by: Jared Kangas <jkangas@redhat.com>
-> ---
->  Documentation/userspace-api/dma-buf-heaps.rst | 11 +++++++----
->  drivers/dma-buf/heaps/Kconfig                 | 10 ++++++++++
->  drivers/dma-buf/heaps/cma_heap.c              | 14 +++++++++++++-
->  3 files changed, 30 insertions(+), 5 deletions(-)
->=20
-> diff --git a/Documentation/userspace-api/dma-buf-heaps.rst b/Documentatio=
-n/userspace-api/dma-buf-heaps.rst
-> index 535f49047ce64..577de813ba461 100644
-> --- a/Documentation/userspace-api/dma-buf-heaps.rst
-> +++ b/Documentation/userspace-api/dma-buf-heaps.rst
-> @@ -19,7 +19,10 @@ following heaps:
->   - The ``cma`` heap allocates physically contiguous, cacheable,
->     buffers. Only present if a CMA region is present. Such a region is
->     usually created either through the kernel commandline through the
-> -   `cma` parameter, a memory region Device-Tree node with the
-> -   `linux,cma-default` property set, or through the `CMA_SIZE_MBYTES` or
-> -   `CMA_SIZE_PERCENTAGE` Kconfig options. Depending on the platform, it
-> -   might be called ``reserved``, ``linux,cma``, or ``default-pool``.
-> +   ``cma`` parameter, a memory region Device-Tree node with the
-> +   ``linux,cma-default`` property set, or through the ``CMA_SIZE_MBYTES`=
-` or
-> +   ``CMA_SIZE_PERCENTAGE`` Kconfig options. The heap's name in devtmpfs =
-is
-> +   ``default_cma``. For backwards compatibility, when the
-> +   ``DMABUF_HEAPS_CMA_LEGACY`` Kconfig option is set, a duplicate node is
-> +   created following legacy naming conventions; the legacy name might be
-> +   ``reserved``, ``linux,cma``, or ``default-pool``.
-
-It looks like, in addition to documenting the new naming, you also
-changed all the backticks to double backticks. Why did you do so? It
-seems mostly unrelated to that patch, so it would be better in a
-separate patch.
-
-> diff --git a/drivers/dma-buf/heaps/Kconfig b/drivers/dma-buf/heaps/Kconfig
-> index a5eef06c42264..83f3770fa820a 100644
-> --- a/drivers/dma-buf/heaps/Kconfig
-> +++ b/drivers/dma-buf/heaps/Kconfig
-> @@ -12,3 +12,13 @@ config DMABUF_HEAPS_CMA
->  	  Choose this option to enable dma-buf CMA heap. This heap is backed
->  	  by the Contiguous Memory Allocator (CMA). If your system has these
->  	  regions, you should say Y here.
-> +
-> +config DMABUF_HEAPS_CMA_LEGACY
-> +	bool "DMA-BUF CMA Heap"
-> +	default y
-> +	depends on DMABUF_HEAPS_CMA
-> +	help
-> +	  Add a duplicate CMA-backed dma-buf heap with legacy naming derived
-> +	  from the CMA area's devicetree node, or "reserved" if the area is not
-> +	  defined in the devicetree. This uses the same underlying allocator as
-> +	  CONFIG_DMABUF_HEAPS_CMA.
-> diff --git a/drivers/dma-buf/heaps/cma_heap.c b/drivers/dma-buf/heaps/cma=
-_heap.c
-> index e998d8ccd1dc6..cd742c961190d 100644
-> --- a/drivers/dma-buf/heaps/cma_heap.c
-> +++ b/drivers/dma-buf/heaps/cma_heap.c
-> @@ -22,6 +22,7 @@
->  #include <linux/slab.h>
->  #include <linux/vmalloc.h>
-> =20
-> +#define DEFAULT_CMA_NAME "default_cma"
-
-I appreciate this is kind of bikeshed-color territory, but I think "cma"
-would be a better option here. There's nothing "default" about it.
-
->  struct cma_heap {
->  	struct dma_heap *heap;
-> @@ -394,15 +395,26 @@ static int __init __add_cma_heap(struct cma *cma, c=
-onst char *name)
->  static int __init add_default_cma_heap(void)
->  {
->  	struct cma *default_cma =3D dev_get_cma_area(NULL);
-> +	const char *legacy_cma_name;
->  	int ret;
-> =20
->  	if (!default_cma)
->  		return 0;
-> =20
-> -	ret =3D __add_cma_heap(default_cma, cma_get_name(default_cma));
-> +	ret =3D __add_cma_heap(default_cma, DEFAULT_CMA_NAME);
->  	if (ret)
->  		return ret;
-> =20
-> +	legacy_cma_name =3D cma_get_name(default_cma);
-> +
-> +	if (IS_ENABLED(CONFIG_DMABUF_HEAPS_CMA_LEGACY) &&
-> +	    strcmp(legacy_cma_name, DEFAULT_CMA_NAME)) {
-> +		ret =3D __add_cma_heap(default_cma, legacy_cma_name);
-> +		if (ret)
-> +			pr_warn("cma_heap: failed to add legacy heap: %pe\n",
-> +				ERR_PTR(-ret));
-> +	}
-> +
-
-It would also simplify this part, since you would always create the legacy =
-heap.
-
-Maxime
-
---3zbhpucpbyq3iuve
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCaAn3dgAKCRDj7w1vZxhR
-xSkFAQCWlqlBVC/iWXqYmsCJiH2d6ZyfL7bDqLNVAy3qLDpGaQD/XbhUUVuw0tmo
-M25rRzYXESlsYYFGR3AX9ynWoYBiaw0=
-=7Vsm
------END PGP SIGNATURE-----
-
---3zbhpucpbyq3iuve--
-
---===============0986254259059682493==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============0986254259059682493==--
+T24gVGh1LCBBcHIgMjQsIDIwMjUgYXQgMTozNOKAr0FNIE1heGltZSBSaXBhcmQgPG1yaXBhcmRA
+a2VybmVsLm9yZz4gd3JvdGU6DQo+IE9uIFR1ZSwgQXByIDIyLCAyMDI1IGF0IDEyOjE5OjM5UE0g
+LTA3MDAsIEphcmVkIEthbmdhcyB3cm90ZToNCj4gPiBAQCAtMjIsNiArMjIsNyBAQA0KPiA+ICAj
+aW5jbHVkZSA8bGludXgvc2xhYi5oPg0KPiA+ICAjaW5jbHVkZSA8bGludXgvdm1hbGxvYy5oPg0K
+PiA+DQo+ID4gKyNkZWZpbmUgREVGQVVMVF9DTUFfTkFNRSAiZGVmYXVsdF9jbWEiDQo+DQo+IEkg
+YXBwcmVjaWF0ZSB0aGlzIGlzIGtpbmQgb2YgYmlrZXNoZWQtY29sb3IgdGVycml0b3J5LCBidXQg
+SSB0aGluayAiY21hIg0KPiB3b3VsZCBiZSBhIGJldHRlciBvcHRpb24gaGVyZS4gVGhlcmUncyBu
+b3RoaW5nICJkZWZhdWx0IiBhYm91dCBpdC4NCg0KSSBkaXNhZ3JlZS4gIEl0IHZlcnkgbXVjaCBp
+cyAiZGVmYXVsdCIgYXMgaXQncyByZXR1cm5pbmcgdGhlDQpkbWFfY29udGlndW91c19kZWZhdWx0
+X2FyZWEuDQoNClRoZXJlIGNhbiBiZSBtdWx0aXBsZSBDTUEgYXJlYXMsIGFuZCBvdXQgb2YgdHJl
+ZSwgdmVuZG9ycyBkbyByZXNlcnZlDQpzZXBhcmF0ZSBhcmVhcyBmb3Igc3BlY2lmaWMgcHVycG9z
+ZXMsIGV4cG9zaW5nIG11bHRpcGxlIENNQSBkbWFidWYNCmhlYXBzLg0KVGhlcmUgaGF2ZSBiZWVu
+IHBhdGNoZXMgdG8gZXhwb3NlIG11bHRpcGxlIENNQSBoZWFwcywgYnV0IHdpdGggbm8NCnVwc3Ry
+ZWFtIGRyaXZlcnMgdXNpbmcgdGhvc2UgcHVycG9zZSBzcGVjaWZpYyByZWdpb25zLCB3ZSBoYXZl
+bid0DQp0YWtlbiB0aGVtIHlldC4NCkkgZG8gaG9wZSBhcyB0aGUgZHJpdmVycyB0aGF0IHV0aWxp
+emUgdGhlc2UgcHVycG9zZSBmb2N1c2VkIGhlYXBzIGdvDQp1cHN0cmVhbSwgd2UgY2FuIGFkZCB0
+aGF0IGxvZ2ljLCBzbyBJIHRoaW5rIGJlaW5nIHNwZWNpZmljIHRoYXQgdGhpcw0KaXMgZGVmYXVs
+dCBDTUEgaXMgYSBnb29kIGlkZWEuDQoNCnRoYW5rcw0KLWpvaG4NCl9fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0
+IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFu
+IGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
