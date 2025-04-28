@@ -2,278 +2,266 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id A564EA9F3D4
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 28 Apr 2025 16:52:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 952C1A9FAEF
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 28 Apr 2025 22:56:46 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id AEE3A454DC
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 28 Apr 2025 14:52:16 +0000 (UTC)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id D4B01410BC
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 28 Apr 2025 14:52:02 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id A920A459B1
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 28 Apr 2025 20:56:45 +0000 (UTC)
+Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
+	by lists.linaro.org (Postfix) with ESMTPS id 2CEC9410BC
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 28 Apr 2025 20:56:32 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=V2MK7vRc;
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=mripard@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by dfw.source.kernel.org (Postfix) with ESMTP id 1683B5C135F;
-	Mon, 28 Apr 2025 14:49:45 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8D7CAC4CEE4;
-	Mon, 28 Apr 2025 14:52:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1745851921;
-	bh=SZ88ynsrxyycASOHhheCX/iwl8zgTZHYGYj+3bNOJx4=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=V2MK7vRcY1dlL1+EZ1NoZxP268+GNpFW3Ocb8LPN7Yho6nLoAaaXufXwx5XaLAbYR
-	 6zPVK5hyb6Jf25WzBeSpMyXbLEDodvvjRqSvXP5GJ4m9lMT3IZTcmm6+5Rz3X+W2MD
-	 e815HEh/S03UXEZDcH+Ri2VhCgWcvowtURogNlBNZGuVRl42HhPlu1cq3jTlWLOaEM
-	 J8bu8qMesc4jRWKYH6rEI97pjDBrlOAfnaD4vDOj/9JlQBE+ckM+Q2fu+zYJuuYFbN
-	 nvO/iKk9W95uGjmgDHW1+MHW662Wu2n98EvjpLPoqRWKzrgGPqZpSpR74RcwQovTe0
-	 iWkaLaFC1Ymkw==
-Date: Mon, 28 Apr 2025 16:51:59 +0200
-From: Maxime Ripard <mripard@kernel.org>
-To: John Stultz <jstultz@google.com>
-Message-ID: <20250428-greedy-vivid-goldfish-5abb35@houat>
-References: <20250422191939.555963-1-jkangas@redhat.com>
- <20250422191939.555963-3-jkangas@redhat.com>
- <20250424-sassy-cunning-pillbug-ffde51@houat>
- <CANDhNCqfsUbN3aavAH5hi4wdcKuUkjLX4jqhKzy-q+jCEqpoow@mail.gmail.com>
- <20250425-savvy-chubby-alpaca-0196e3@houat>
- <CANDhNCroe6ZBtN_o=c71kzFFaWK-fF5rCdnr9P5h1sgPOWSGSw@mail.gmail.com>
+	dkim=pass header.d=gmail.com header.s=20230601 header.b=kD6132ox;
+	dmarc=pass (policy=none) header.from=gmail.com;
+	spf=pass (lists.linaro.org: domain of robdclark@gmail.com designates 209.85.214.175 as permitted sender) smtp.mailfrom=robdclark@gmail.com
+Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-227b828de00so53588475ad.1
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 28 Apr 2025 13:56:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1745873791; x=1746478591; darn=lists.linaro.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=7+KwwMScg2wIn1wFiZ7xCslKNcpSi/KKVTjv87cSzPQ=;
+        b=kD6132oxLveS7GuPyZBKv+p8kjbsIqq0tVgjCeIchHAvNfgp2bKbz8UMjNXc2Xb5nY
+         X6BdgGPkauC1Y3PgMN+F+XuJYEho+s/xGJZj25m1kO9CmSDUTB+W6ryrMiCndoxbJpHT
+         mRiu84n+N+Av51eTtDzgIL4kZPPHc9Dke7bA9p721mdoY6vDtek2TlErPOqsRKCgDYEv
+         hEcf8SUu4iCbXgkqe5Hmk/R503ZuAPkQUke9eF8hzlTzfEZhfz1V0TIwKTChc9hLTQxN
+         +onFHRIMUD5EIzCOS8rPrDmg3tHgDFgL7QfLP4x1dr7S9wryY4/0vlhapx93gKgN7CCg
+         ULXQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1745873791; x=1746478591;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=7+KwwMScg2wIn1wFiZ7xCslKNcpSi/KKVTjv87cSzPQ=;
+        b=wKF6c9mNvIh3Uuqjt9evAqHZuRx9SLk6wexYF4YrhSkfgPFEXjGkiw1J118glH2ckJ
+         yWEJzUZTynNbrsUBtrDKForAMGWpzpjGzeo/bQGHbRoF34nMQytZIvlrWIABODxD1Qyu
+         sVGiDoBDHcuhDyN8CcG/XyWsakwl510O1jcX3+bCttmv75T2NsSmgNkU60y6Dwx5oYtZ
+         iZ3RUB8k1UwNJLtKA2eLdynf8au2CvkxMYywyx8Pv/fVYJGTtHJhY8Sl/1weeXcpATvv
+         q9WSYOk4ax9+9lDUsPut9lGbKJSldG0XZfT2DZBxVmMZ2gfI5RpDr7KKIUfJ2o9oNfbr
+         4IPg==
+X-Forwarded-Encrypted: i=1; AJvYcCUPmGe2NyU5EEcFS2y00eQPT72BOZmAS9guiLYrqKgsIvUXAL3aBIrpp5rCbC5SE9py/XvCYzmfuiABGMqI@lists.linaro.org
+X-Gm-Message-State: AOJu0YxQxno87jar0jCtg5Yy9QlB0fwioLHAXzS+sznfgCgXnoPL/v6+
+	s2w3yh6zB2muqgCz/827xdnxYR6ARYRxDXZaLKem4rxC4L9hpvJB
+X-Gm-Gg: ASbGncsbIgJy3lxW7D7YzWdfDzE8Zzr6cyr3Ymfcg3z9Wk6iYIsHU1n6BJBOsYxkLVS
+	czk3FKpeKCMBJF7C1KeDNIAJqguS43en6ar74cqkIviX5R0CVe2JVkl75x2Zv+XqXJ1rrr59uRB
+	nInUSRi7I5kLU/59Hzg9psN2CKM+LQX+ZBjc4Ft9Vm8IsZrOhnatw1k92QP2XzPgFgU8/K4qeQo
+	EUmf2kfo+mkCicUhiBUogEL0yTU+IY0JPEjEfXR3CwzHET4JTLlyJYBVbDvtp0sNmX3+e9QaNyF
+	JYKwYBYrIgd65vuvuCztXm3w/H3PHrR8lLDYXzP/2N+W7ZLaohyd9kPF90WdjQmRqcg3rTPbM5l
+	y4ImKPzLlE8yMRyQ=
+X-Google-Smtp-Source: AGHT+IGKtMSFhDrKALYHacjDf6o2U+ErId2ldlU83bKr18MjClQcRoYfhtohAxt8HdoNAwV1+GksqQ==
+X-Received: by 2002:a17:903:194b:b0:223:50f0:b97 with SMTP id d9443c01a7336-22de7097d8emr6300835ad.52.1745873791175;
+        Mon, 28 Apr 2025 13:56:31 -0700 (PDT)
+Received: from localhost ([2a00:79e0:3e00:2601:3afc:446b:f0df:eadc])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-22db51051c6sm87904215ad.206.2025.04.28.13.56.30
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 28 Apr 2025 13:56:30 -0700 (PDT)
+From: Rob Clark <robdclark@gmail.com>
+To: dri-devel@lists.freedesktop.org
+Date: Mon, 28 Apr 2025 13:54:07 -0700
+Message-ID: <20250428205619.227835-1-robdclark@gmail.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-In-Reply-To: <CANDhNCroe6ZBtN_o=c71kzFFaWK-fF5rCdnr9P5h1sgPOWSGSw@mail.gmail.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: D4B01410BC
-X-Spamd-Bar: ---------
-X-Spamd-Result: default: False [-9.10 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
-	DWL_DNSWL_MED(-2.00)[kernel.org:dkim];
-	SIGNED_PGP(-2.00)[];
-	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	RCVD_IN_DNSWL_HI(-0.50)[139.178.84.217:from];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	DNSWL_BLOCKED(0.00)[100.75.92.58:received];
-	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
-	ARC_NA(0.00)[];
-	MISSING_XM_UA(0.00)[];
+X-Rspamd-Queue-Id: 2CEC9410BC
+X-Spamd-Bar: /
+X-Spamd-Result: default: False [-0.50 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
+	MID_CONTAINS_FROM(1.00)[];
+	RBL_SENDERSCORE_REPUT_6(1.00)[209.85.214.175:from];
+	R_MISSING_CHARSET(0.50)[];
+	MIME_GOOD(-0.10)[text/plain];
+	BAD_REP_POLICIES(0.10)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
 	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	RCPT_COUNT_TWELVE(0.00)[31];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	R_DKIM_ALLOW(0.00)[gmail.com:s=20230601];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	FREEMAIL_CC(0.00)[lists.freedesktop.org,vger.kernel.org,gmail.com,chromium.org,quicinc.com,igalia.com,arndb.de,mainlining.org,kode54.net,oss.qualcomm.com,kernel.org,lists.linux.dev,ziepe.ca,oracle.com,marek.ca,intel.com,linaro.org,lists.linaro.org,lists.infradead.org,somainline.org,nvidia.com,arm.com,poorly.run];
+	DMARC_POLICY_ALLOW(0.00)[gmail.com,none];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	DNSWL_BLOCKED(0.00)[209.85.214.175:from];
 	RCVD_COUNT_TWO(0.00)[2];
+	FROM_EQ_ENVFROM(0.00)[];
+	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.214.175:from];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	DKIM_TRACE(0.00)[kernel.org:+]
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	R_SPF_ALLOW(0.00)[+ip4:209.85.128.0/17];
+	FROM_HAS_DN(0.00)[]
 X-Rspamd-Action: no action
-Message-ID-Hash: QTGURZSQAF7CMJA4VKFQHCARGH5TXKWF
-X-Message-ID-Hash: QTGURZSQAF7CMJA4VKFQHCARGH5TXKWF
-X-MailFrom: mripard@kernel.org
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Jared Kangas <jkangas@redhat.com>, sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, Brian.Starkey@arm.com, tjmercier@google.com, christian.koenig@amd.com, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
+Message-ID-Hash: 3A24WJ5UBCTKFSKCD72BU37JZL3AIW5G
+X-Message-ID-Hash: 3A24WJ5UBCTKFSKCD72BU37JZL3AIW5G
+X-MailFrom: robdclark@gmail.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, Connor Abbott <cwabbott0@gmail.com>, Rob Clark <robdclark@chromium.org>, Abhinav Kumar <quic_abhinavk@quicinc.com>, =?UTF-8?q?Andr=C3=A9=20Almeida?= <andrealmeid@igalia.com>, Arnd Bergmann <arnd@arndb.de>, =?UTF-8?q?Barnab=C3=A1s=20Cz=C3=A9m=C3=A1n?= <barnabas.czeman@mainlining.org>, Christopher Snowhill <chris@kode54.net>, Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, Eugene Lepshy <fekz115@gmail.com>, "open list:IOMMU SUBSYSTEM" <iommu@lists.linux.dev>, Jason Gunthorpe <jgg@ziepe.ca>, Jessica Zhang <quic_jesszhan@quicinc.com>, Joao Martins <joao.m.martins@oracle.com>, Jonathan Marek <jonathan@marek.ca>, Kevin Tian <kevin.tian@intel.com>, Konrad Dybcio <konradybcio@kernel.org>, Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK:Keyword:bdma_?:buf|fence|resvb" <linaro-mm-sig@lists.linaro.org>, "moderated list:ARM SMMU DRIVERS
+ " <linux-arm-kernel@lists.infradead.org>, open list <linux-kernel@vger.kernel.org>, "open list:DMA BUFFER SHARING FRAMEWORK:Keyword:bdma_?:buf|fence|resvb" <linux-media@vger.kernel.org>, Marijn Suijten <marijn.suijten@somainline.org>, Nicolin Chen <nicolinc@nvidia.com>, "Rob Herring (Arm)" <robh@kernel.org>, Robin Murphy <robin.murphy@arm.com>, Sean Paul <sean@poorly.run>, Will Deacon <will@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 2/2] dma-buf: heaps: Give default CMA heap a fixed name
+Subject: [Linaro-mm-sig] [PATCH v3 00/33] drm/msm: sparse / "VM_BIND" support
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QTGURZSQAF7CMJA4VKFQHCARGH5TXKWF/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3A24WJ5UBCTKFSKCD72BU37JZL3AIW5G/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============3513652899912542922=="
-
-
---===============3513652899912542922==
-Content-Type: multipart/signed; micalg=pgp-sha384;
-	protocol="application/pgp-signature"; boundary="63qayjjnrzawfdlj"
-Content-Disposition: inline
-
-
---63qayjjnrzawfdlj
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH v2 2/2] dma-buf: heaps: Give default CMA heap a fixed name
-MIME-Version: 1.0
-
-Hi John,
-
-On Fri, Apr 25, 2025 at 12:39:40PM -0700, John Stultz wrote:
-> On Thu, Apr 24, 2025 at 11:58=E2=80=AFPM Maxime Ripard <mripard@kernel.or=
-g> wrote:
-> > On Thu, Apr 24, 2025 at 05:13:47PM -0700, John Stultz wrote:
-> > > On Thu, Apr 24, 2025 at 1:34=E2=80=AFAM Maxime Ripard <mripard@kernel=
-=2Eorg> wrote:
-> > > > I appreciate this is kind of bikeshed-color territory, but I think =
-"cma"
-> > > > would be a better option here. There's nothing "default" about it.
-> > >
-> > > I disagree.  It very much is "default" as it's returning the
-> > > dma_contiguous_default_area.
-> >
-> > My main concern here is that it's "default" as opposed to what, exactly?
-> > We have a single CMA allocator. We could have multiple buffer
-> > attributes, but then "cached_cma" would make more sense to me if we
-> > expect to have uncached CMA allocations at some point.
->=20
-> Well, there may be one CMA allocator, but there can be multiple CMA regio=
-ns.
->=20
-> So in the kernel, cma_alloc() always takes the cma area as an
-> argument.  And dma_alloc_contiguous() lets you do allocations against
-> a device, which may reference a specific cma area. Or if the device
-> doesn't specify a region it will utilize the default region.
->=20
-> > > There can be multiple CMA areas, and out of tree, vendors do reserve
-> > > separate areas for specific purposes, exposing multiple CMA dmabuf
-> > > heaps.
-> >
-> > By "CMA areas", I guess you mean carved-out memory regions? If so, how
-> > is it relevant to userspace if we use CMA or any other implementation to
-> > expose a carved-out region, and thus that we carry that implemenattion
-> > detail in the name?
->=20
-> So, no, I don't mean carve-out regions.  It's more about dealing with
-> competition between multiple CMA users. In some cases, where there are
-> known fixed buffer sizes, say camera buffers, it's much easier to
-> reserve a separate specific sized region to allocate from so that you
-> know it will always succeed and you don't need to waste much on safety
-> margins. Having this added as a separate CMA region makes it a lot
-> easier to account or reason about, and the kernel can still make
-> (limited) use of the CMA space when it's idle. Then you don't have to
-> worry about some other device having a short term cma allocation that
-> pushes back the alignment for your large allocation, possibly
-> impacting some other devices larger allocations.
->=20
-> And unlike with just using a carveout, you don't end up just wasting
-> all that space when it is unused.
-
-The way I see it, it's an implementation detail and is abstracted away
-=66rom userspace. That's what I meant by carved-out I guess: a region
-dedicated to a (set of) devices(s) that the rest of the system won't
-use from userspace point of view.
-
-> So userland may want to allocate contiguous memory, but it may also be
-> relevant to userland to be able to allocate contiguous memory from a
-> purpose specific pool.
->=20
-> And while not used in Android, you could imagine having separate
-> purpose reserved cma heaps with different permissions on the heap
-> devnodes, allowing less trusted applications to allocate cma from a
-> small pool without having the potential to DoS the system.
-
-Yeah... I don't think it's the right approach for that. If Android
-doesn't use it, and if it's the only Linux distro with 1 app / 1 user
-policy, then the only permissions we'll effectively have is one for the
-whole use, trusted and untrusted apps alike.
-
-cgroups look like a much better path forward, and wouldn't require
-multiple heaps.
-
-Anyway... It's not really important at this point I guess.
-
-> > > There have been patches to expose multiple CMA heaps, but with no
-> > > upstream drivers using those purpose specific regions, we haven't
-> > > taken them yet.
-> > > I do hope as the drivers that utilize these purpose focused heaps go
-> > > upstream, we can add that logic, so I think being specific that this
-> > > is default CMA is a good idea.
-> >
-> > If heaps names are supposed to carry the region it exposes, then it
-> > should be default_cma_region/area. If heap names are supposed to expose
-> > the allocator (but I don't think it's a good idea), it should be cma. If
-> > they are meant to carry all that plus some policy,
-> > cached_default_cma_region should be used.
-> >
-> > Either way, default_cma seems to me either too specific or not specific
-> > enough. And we should really document what the policy for those heaps
-> > are supposed to be.
->=20
-> I don't see it as such a problem. It is clear it is cma, it also is
-> clear conceptually that it is the "default" region that the kernel
-> uses when devices aren't specific.
-> But I wouldn't object to cma_default_region/area as a name either, but
-> I don't see it as particularly improved over cma_default.
->=20
-> To your larger point about policy, I do get the tension that you want
-> to be able to programmatically derive or evaluate heap names, so that
-> applications can consistently derive a pathname to get what they want.
-
-We've discussed it in the past, I don't really want to. But it was clear
-=66rom the last discussion that you (plural) wanted to infer heap
-semantics from the names. I'm ok with that, but then if we want to make
-it work we need to have well defined names.
-
-And it's actually what I really want to discuss here: we've discussed at
-length how bad the heaps name are (and not only here), but I don't think
-we have any documented policy on what makes a good name?
-
-For example, I'm not sure exposing the allocator name is a good idea:
-it's an implementation detail and for all userspace cares about, we
-could change it every release if it provided the same kind of buffers.
-
-Taking your camera buffers example before, then we could also expose a
-memory region id, and let the platform figure it out, or use the usecase
-as the name.
-
-But if we don't document that, how can we possibly expect everyone
-including downstream to come up with perfect names every time. And FTR,
-I'm willing to write that doc down once the discussion settles.
-
-> But I also think that there is so much variety in both the devices and
-> uses that there is no way that all use cases and all devices can be
-> satisfied with such a static or even programmatic mapping. From my
-> perspective, there just is going to have to be some device specific
-> glue logic that maps use->heap name. Same reason we have fstab and the
-> passwd file.
-
-fstab and passwd can be generated at (first) boot time / install. fstab
-is also being somewhat less important with the auto-partition discovery.
-How would you generate that configuration file at boot?
-
-I'm not really asking this as a theoretical question. Being able to
-auto-discover which heap a driver/device would allocate from is central
-for the cgroup work I mentioned earlier.
-
-And I'm really not sure how distros or applications developpers are
-supposed to keep up with the raw volume of devices that go out every
-year, each and every one of them having different heap names, etc.
-Possibly different from one version of the firmware to another.
-
-> That said, I think advocating for naming conventions is definitely
-> useful, but I'm wary of trying to enforce too specific a schema on the
-> names as the incompleteness theorem will bite us.
-
---63qayjjnrzawfdlj
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iJUEABMJAB0WIQTkHFbLp4ejekA/qfgnX84Zoj2+dgUCaA+WCgAKCRAnX84Zoj2+
-dtAdAX490+iTTwDqyILjSOEVCA8RChLdm0moya2/lu4SN1P1TfZ7XV7zi3X4jh0S
-5VdaV+IBgL+thiZgE/SuZsHWgo1vstjGkPj1WnOIESpeFXh4Q59WDtafcqWPQU8T
-rxMeOC+VsQ==
-=9b8o
------END PGP SIGNATURE-----
-
---63qayjjnrzawfdlj--
-
---===============3513652899912542922==
 Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+
+From: Rob Clark <robdclark@chromium.org>
+
+Conversion to DRM GPU VA Manager[1], and adding support for Vulkan Sparse
+Memory[2] in the form of:
+
+1. A new VM_BIND submitqueue type for executing VM MSM_SUBMIT_BO_OP_MAP/
+   MAP_NULL/UNMAP commands
+
+2. A new VM_BIND ioctl to allow submitting batches of one or more
+   MAP/MAP_NULL/UNMAP commands to a VM_BIND submitqueue
+
+I did not implement support for synchronous VM_BIND commands.  Since
+userspace could just immediately wait for the `SUBMIT` to complete, I don't
+think we need this extra complexity in the kernel.  Synchronous/immediate
+VM_BIND operations could be implemented with a 2nd VM_BIND submitqueue.
+
+The corresponding mesa MR: https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/32533
+
+Changes in v3:
+- Switched to seperate VM_BIND ioctl.  This makes the UABI a bit
+  cleaner, but OTOH the userspace code was cleaner when the end result
+  of either type of VkQueue lead to the same ioctl.  So I'm a bit on
+  the fence.
+- Switched to doing the gpuvm bookkeeping synchronously, and only
+  deferring the pgtable updates.  This avoids needing to hold any resv
+  locks in the fence signaling path, resolving the last shrinker related
+  lockdep complaints.  OTOH it means userspace can trigger invalid
+  pgtable updates with multiple VM_BIND queues.  In this case, we ensure
+  that unmaps happen completely (to prevent userspace from using this to
+  access free'd pages), mark the context as unusable, and move on with
+  life.
+- Link to v2: https://lore.kernel.org/all/20250319145425.51935-1-robdclark@gmail.com/
+
+Changes in v2:
+- Dropped Bibek Kumar Patro's arm-smmu patches[3], which have since been
+  merged.
+- Pre-allocate all the things, and drop HACK patch which disabled shrinker.
+  This includes ensuring that vm_bo objects are allocated up front, pre-
+  allocating VMA objects, and pre-allocating pages used for pgtable updates.
+  The latter utilizes io_pgtable_cfg callbacks for pgtable alloc/free, that
+  were initially added for panthor. 
+- Add back support for BO dumping for devcoredump.
+- Link to v1 (RFC): https://lore.kernel.org/dri-devel/20241207161651.410556-1-robdclark@gmail.com/T/#t
+
+[1] https://www.kernel.org/doc/html/next/gpu/drm-mm.html#drm-gpuvm
+[2] https://docs.vulkan.org/spec/latest/chapters/sparsemem.html
+[3] https://patchwork.kernel.org/project/linux-arm-kernel/list/?series=909700
+
+Rob Clark (33):
+  drm/gpuvm: Don't require obj lock in destructor path
+  drm/gpuvm: Allow VAs to hold soft reference to BOs
+  iommu/io-pgtable-arm: Add quirk to quiet WARN_ON()
+  drm/msm: Rename msm_file_private -> msm_context
+  drm/msm: Improve msm_context comments
+  drm/msm: Rename msm_gem_address_space -> msm_gem_vm
+  drm/msm: Remove vram carveout support
+  drm/msm: Collapse vma allocation and initialization
+  drm/msm: Collapse vma close and delete
+  drm/msm: Don't close VMAs on purge
+  drm/msm: drm_gpuvm conversion
+  drm/msm: Convert vm locking
+  drm/msm: Use drm_gpuvm types more
+  drm/msm: Split out helper to get iommu prot flags
+  drm/msm: Add mmu support for non-zero offset
+  drm/msm: Add PRR support
+  drm/msm: Rename msm_gem_vma_purge() -> _unmap()
+  drm/msm: Lazily create context VM
+  drm/msm: Add opt-in for VM_BIND
+  drm/msm: Mark VM as unusable on GPU hangs
+  drm/msm: Add _NO_SHARE flag
+  drm/msm: Crashdump prep for sparse mappings
+  drm/msm: rd dumping prep for sparse mappings
+  drm/msm: Crashdec support for sparse
+  drm/msm: rd dumping support for sparse
+  drm/msm: Extract out syncobj helpers
+  drm/msm: Use DMA_RESV_USAGE_BOOKKEEP/KERNEL
+  drm/msm: Add VM_BIND submitqueue
+  drm/msm: Support IO_PGTABLE_QUIRK_NO_WARN_ON
+  drm/msm: Support pgtable preallocation
+  drm/msm: Split out map/unmap ops
+  drm/msm: Add VM_BIND ioctl
+  drm/msm: Bump UAPI version
+
+ drivers/gpu/drm/drm_gpuvm.c                   |   15 +-
+ drivers/gpu/drm/msm/Kconfig                   |    1 +
+ drivers/gpu/drm/msm/Makefile                  |    1 +
+ drivers/gpu/drm/msm/adreno/a2xx_gpu.c         |   25 +-
+ drivers/gpu/drm/msm/adreno/a2xx_gpummu.c      |    5 +-
+ drivers/gpu/drm/msm/adreno/a3xx_gpu.c         |   17 +-
+ drivers/gpu/drm/msm/adreno/a4xx_gpu.c         |   17 +-
+ drivers/gpu/drm/msm/adreno/a5xx_debugfs.c     |    4 +-
+ drivers/gpu/drm/msm/adreno/a5xx_gpu.c         |   22 +-
+ drivers/gpu/drm/msm/adreno/a5xx_power.c       |    2 +-
+ drivers/gpu/drm/msm/adreno/a5xx_preempt.c     |   10 +-
+ drivers/gpu/drm/msm/adreno/a6xx_gmu.c         |   32 +-
+ drivers/gpu/drm/msm/adreno/a6xx_gmu.h         |    2 +-
+ drivers/gpu/drm/msm/adreno/a6xx_gpu.c         |   49 +-
+ drivers/gpu/drm/msm/adreno/a6xx_gpu_state.c   |    6 +-
+ drivers/gpu/drm/msm/adreno/a6xx_preempt.c     |   10 +-
+ drivers/gpu/drm/msm/adreno/adreno_device.c    |    4 -
+ drivers/gpu/drm/msm/adreno/adreno_gpu.c       |   88 +-
+ drivers/gpu/drm/msm/adreno/adreno_gpu.h       |   23 +-
+ .../drm/msm/disp/dpu1/dpu_encoder_phys_wb.c   |   14 +-
+ drivers/gpu/drm/msm/disp/dpu1/dpu_formats.c   |   18 +-
+ drivers/gpu/drm/msm/disp/dpu1/dpu_formats.h   |    2 +-
+ drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c       |   18 +-
+ drivers/gpu/drm/msm/disp/dpu1/dpu_plane.c     |   14 +-
+ drivers/gpu/drm/msm/disp/dpu1/dpu_plane.h     |    4 +-
+ drivers/gpu/drm/msm/disp/mdp4/mdp4_crtc.c     |    6 +-
+ drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.c      |   28 +-
+ drivers/gpu/drm/msm/disp/mdp4/mdp4_plane.c    |   12 +-
+ drivers/gpu/drm/msm/disp/mdp5/mdp5_crtc.c     |    4 +-
+ drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.c      |   19 +-
+ drivers/gpu/drm/msm/disp/mdp5/mdp5_plane.c    |   12 +-
+ drivers/gpu/drm/msm/dsi/dsi_host.c            |   14 +-
+ drivers/gpu/drm/msm/msm_drv.c                 |  183 +--
+ drivers/gpu/drm/msm/msm_drv.h                 |   35 +-
+ drivers/gpu/drm/msm/msm_fb.c                  |   18 +-
+ drivers/gpu/drm/msm/msm_fbdev.c               |    2 +-
+ drivers/gpu/drm/msm/msm_gem.c                 |  489 +++----
+ drivers/gpu/drm/msm/msm_gem.h                 |  217 ++-
+ drivers/gpu/drm/msm/msm_gem_prime.c           |   15 +
+ drivers/gpu/drm/msm/msm_gem_shrinker.c        |    4 +-
+ drivers/gpu/drm/msm/msm_gem_submit.c          |  295 ++--
+ drivers/gpu/drm/msm/msm_gem_vma.c             | 1265 +++++++++++++++--
+ drivers/gpu/drm/msm/msm_gpu.c                 |  171 ++-
+ drivers/gpu/drm/msm/msm_gpu.h                 |  132 +-
+ drivers/gpu/drm/msm/msm_iommu.c               |  298 +++-
+ drivers/gpu/drm/msm/msm_kms.c                 |   18 +-
+ drivers/gpu/drm/msm/msm_kms.h                 |    2 +-
+ drivers/gpu/drm/msm/msm_mmu.h                 |   38 +-
+ drivers/gpu/drm/msm/msm_rd.c                  |   62 +-
+ drivers/gpu/drm/msm/msm_ringbuffer.c          |    4 +-
+ drivers/gpu/drm/msm/msm_submitqueue.c         |   86 +-
+ drivers/gpu/drm/msm/msm_syncobj.c             |  172 +++
+ drivers/gpu/drm/msm/msm_syncobj.h             |   37 +
+ drivers/iommu/io-pgtable-arm.c                |   18 +-
+ include/drm/drm_gpuvm.h                       |   12 +-
+ include/linux/io-pgtable.h                    |    8 +
+ include/uapi/drm/msm_drm.h                    |  149 +-
+ 57 files changed, 3012 insertions(+), 1216 deletions(-)
+ create mode 100644 drivers/gpu/drm/msm/msm_syncobj.c
+ create mode 100644 drivers/gpu/drm/msm/msm_syncobj.h
+
+-- 
+2.49.0
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============3513652899912542922==--
