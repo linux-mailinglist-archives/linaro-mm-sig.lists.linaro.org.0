@@ -2,1560 +2,288 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0A713A9FB3F
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 28 Apr 2025 22:58:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 292FCAA053A
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 29 Apr 2025 10:13:15 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2931D45A11
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 28 Apr 2025 20:58:37 +0000 (UTC)
-Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
-	by lists.linaro.org (Postfix) with ESMTPS id 46056410BC
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 28 Apr 2025 20:58:01 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 11D294552B
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 29 Apr 2025 08:13:14 +0000 (UTC)
+Received: from NAM04-MW2-obe.outbound.protection.outlook.com (mail-mw2nam04on2048.outbound.protection.outlook.com [40.107.101.48])
+	by lists.linaro.org (Postfix) with ESMTPS id 116FF43FEB
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 29 Apr 2025 08:12:58 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20230601 header.b="ebt/vmTB";
-	dmarc=pass (policy=none) header.from=gmail.com;
-	spf=pass (lists.linaro.org: domain of robdclark@gmail.com designates 209.85.215.182 as permitted sender) smtp.mailfrom=robdclark@gmail.com
-Received: by mail-pg1-f182.google.com with SMTP id 41be03b00d2f7-b074d908e56so3964159a12.2
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 28 Apr 2025 13:58:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1745873880; x=1746478680; darn=lists.linaro.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=AqbCKUfESrDdXM9YTu1Ypf1jKLBYkJfDcNHUu79S7+0=;
-        b=ebt/vmTBRWpw+oH+As5Kv7Uz/sFC2Qhi3E+R5fXK103PKHO1kubbHmRGtLVB/h2g4m
-         qJpaUnaHKmpmwUmFnnpOp/mDDPHTEBdzZHo0V4R+65Dlzn/VnlBZTwUmILa0j4GlWmKx
-         mXQSbxgr1WzcWu06CxXdjonI/PmNvHo6ITSvlp/6WWDcfBWgfto7MRrL5+6VYXpEWow2
-         cXlP1zSmyYg67FMKZu2EdUBJ+gjvChMH56nHk/XlvSKGEWj1RBoboKILhnPStQ88x0o2
-         2hQqJPJC3vNP5CN7ur0Q/XwH+V+QxOsiIFmpP29OCDluGjRZeMm9CFBag65zRjd6ma+M
-         YEBw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1745873880; x=1746478680;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=AqbCKUfESrDdXM9YTu1Ypf1jKLBYkJfDcNHUu79S7+0=;
-        b=uscb4A9gfmKQ0IXM/OFzRopO0DgMbkwoEhm/iuf6LXe9zDAJN41yMq/wwAlsNZ/Z35
-         izy8q4OXsohAraMBVJfX+gqmo2NWErp5z2Vye64Qnb4Peibr70f7SivrpbquVB+cTQ8d
-         jGGeNnSM6bU5PrDbG92wfgD27LN7mGjEPPI4hh5+60Gp5/78qr4DPj1yZ/bqKDx7j4FR
-         ucncISW3CpC0CRfqquU4nCocGhwkrzgVuMYD5WzS4vZD21D51oqe9E6bUdvK42TNDWD/
-         1M8VWPk8Gbr4VJJtXMdXc8mWVfP+mg6ff6m7ZvjXUkNqoxKi+TYVpFsn3EjlRPqQqr28
-         plYw==
-X-Forwarded-Encrypted: i=1; AJvYcCUSVZ9wRSXYQu1ydGQFj0Ve9ZhAt3Q4xrAou699K3jmsBAvcR7Zo1ooErPbywK0Iygd7fkN6d7juGVAE/qW@lists.linaro.org
-X-Gm-Message-State: AOJu0YzeWZCEHGwHUIP9hVkVIpF6eDeyc0QDS1Xd3bYqvOpVmuLlAen/
-	HkEoK3YOoO8698qQDZlfiYYOt4HeJ+DYW2qenG6nz2YuFv+bujwb
-X-Gm-Gg: ASbGncvYWaRlZUItjPXkJG1jwBfxWAxmiMLDdY4MDMZuR4tS4/JstjUq69vzMBJa/bJ
-	58MCmUhQYP0VcbgEwIoX+I8OGWpgEGVX8kkY8eGdbO6t71ZCK6yyTmCZaVrV30qC+u93ByKgB+0
-	IGEyOPucSEhCaTtryS98BySErdYycx6o+HyiWlcrsLCRt12mKMcz9qq/obLRaj9bj8KN7EU9w5T
-	7rTVMrI9y/GvAUS8ccTNKdfW+i7vxvieuaTFN6dt6wM66gsqJ5mRIYzFbHSzX8olfieuT0tetYJ
-	G7+9R9f5WgYJTTkS92pVpZWf8+MgZnGcm2z8zZqTuNjypcyTJqe4KfnWyIgvKzuI0hHOONUs7I5
-	kXlBUHk0So56EZ78=
-X-Google-Smtp-Source: AGHT+IECQGP1wmsoTq8MndQ0s+V21w4LPMD67LVK/wkAVjQ4uIC7u6csrd+LuNStWU+R+MrtjbsVmw==
-X-Received: by 2002:a05:6a20:c990:b0:201:8a13:f392 with SMTP id adf61e73a8af0-2046a57d7a4mr13815014637.20.1745873880163;
-        Mon, 28 Apr 2025 13:58:00 -0700 (PDT)
-Received: from localhost ([2a00:79e0:3e00:2601:3afc:446b:f0df:eadc])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-73e25967766sm8495867b3a.82.2025.04.28.13.57.59
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 28 Apr 2025 13:57:59 -0700 (PDT)
-From: Rob Clark <robdclark@gmail.com>
-To: dri-devel@lists.freedesktop.org
-Date: Mon, 28 Apr 2025 13:54:39 -0700
-Message-ID: <20250428205619.227835-33-robdclark@gmail.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250428205619.227835-1-robdclark@gmail.com>
-References: <20250428205619.227835-1-robdclark@gmail.com>
+	dkim=pass header.d=amd.com header.s=selector1 header.b=oyDpcRt9;
+	dmarc=pass (policy=quarantine) header.from=amd.com;
+	arc=pass ("microsoft.com:s=arcselector10001:i=1");
+	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.107.101.48 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=DdcYj2A/dTxctByKgZJo9x0DN1oSP/kqdwc6NP/44SIB3qPBVqvjGuaFvr0BdnxZGTsm2IuK0YEjvrrnLnklclsezCLpGjgpL6nNjY+05LK+w/zAre/Kzn/Z+/HnoeATsx/+jmACKWygscGTnXto+j/EomB/C8u+k36UOh8ThoUHp57FqMveOZ9ie0h+ZKh6JUBbTZ3+2jep65Wz52kZhplWoAc4V5yQq60ZaaZcPdO996y3Od01qMFzY3ckZsDnZPSeJFIQPg4+1L+GxYtyoS0uiNm3w2dNdiRO8KNWq7RO7cFgHnNKNhpnApN+LgJOHyF6NEOv8UDGWCcHKzrlPA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=WeX3rMeEJ2I+horWWVpFZy1fQBt/2ys/vpfhp/9FGmg=;
+ b=igRq+eYc9dsdMmIqumMMMHKz63vntqg2LlwQ4fL1Ow593776JL9lB4Sj0zzkOJg3Qjtd+Eo3QdvinRogGWyrKnVsTIVLEils8iZ8i2tYjtCgoE1bXT7lNc9+BVT1TeNfi5FFj5ZogmR1RV9b3aZv1G8/ievU1G3PiVjc4cqWRQKsYyswt4LUzTLRaQ/OPxoq+bp6qs7MqP5/9jNYc9ss6NuXSjVcNO24PCAYYq9qcjrL9Jx/quNIJuQAaokj8A6NH2vQPZm4oZT3/9nqw9IytrUKhThld2khuUtbNApqeaYryhshJsZZfCAzMW77RIpFy8tpyHREKqzqK0iGMP1xBA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=WeX3rMeEJ2I+horWWVpFZy1fQBt/2ys/vpfhp/9FGmg=;
+ b=oyDpcRt9WOrEedgZIbPzYIk5FcZB/S+lcJ35fdgeKNQarDlD7EQiElOix/rSVogO48df56tZQ8puQllNjaTv2pIiTsAYRKniK41Q7Gc0p0UvgD5OwzDj1y0bnp2VKAsrnQ00LOrtZSwdUbhF38IP19+YtDithQ1ugJWUVzN91HI=
+Received: from PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
+ by PH7PR12MB6836.namprd12.prod.outlook.com (2603:10b6:510:1b6::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8678.34; Tue, 29 Apr
+ 2025 08:12:55 +0000
+Received: from PH7PR12MB5685.namprd12.prod.outlook.com
+ ([fe80::46fb:96f2:7667:7ca5]) by PH7PR12MB5685.namprd12.prod.outlook.com
+ ([fe80::46fb:96f2:7667:7ca5%7]) with mapi id 15.20.8678.028; Tue, 29 Apr 2025
+ 08:12:55 +0000
+Message-ID: <72b7e968-10cb-4db6-8a1a-dc39187c7855@amd.com>
+Date: Tue, 29 Apr 2025 10:12:50 +0200
+User-Agent: Mozilla Thunderbird
+To: Nicolas Dufresne <nicolas@ndufresne.ca>,
+ Bastien Curutchet <bastien.curutchet@bootlin.com>,
+ Sumit Semwal <sumit.semwal@linaro.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
+References: <20250410-uio-dma-v1-0-6468ace2c786@bootlin.com>
+ <20250410-uio-dma-v1-2-6468ace2c786@bootlin.com>
+ <d19639fb0fbe5c0992a69d7783e6fad91c50561b.camel@ndufresne.ca>
+ <aBB0NNOg47XHIjpq@phenom.ffwll.local>
+Content-Language: en-US
+From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+In-Reply-To: <aBB0NNOg47XHIjpq@phenom.ffwll.local>
+X-ClientProxiedBy: FR4P281CA0093.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:cb::12) To PH7PR12MB5685.namprd12.prod.outlook.com
+ (2603:10b6:510:13c::22)
 MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|PH7PR12MB6836:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9e408065-92ac-422a-d264-08dd86f5a4f1
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
+X-Microsoft-Antispam-Message-Info: 
+	=?utf-8?B?cTNnYTd2QnBYY1pBY3A1REZ5eDdCdWdhc0xQTDFzeStHWURRbHNtVTBUdmFH?=
+ =?utf-8?B?RWd0bWw4MGZpVGZDb0loU0EwSE9MQ2RRS0dCOUx2d0M1blRtTDVSQWNmbjZr?=
+ =?utf-8?B?eDJoVHNvK1hKY2FtNUhIazZidk4vVjdBKzNCdVMrOUdWZ1pxdzdVVEdBQzZF?=
+ =?utf-8?B?WUpwVzlZTWRMTVl6VG1UMGFaZFZnUEZqSjExaFdINVBNb0dXLzNhUU56cGla?=
+ =?utf-8?B?THlZNW9HcnhSaVBxam44Qk1JdG1XYTJSaU1BUDYrZ1B4S0RVK2o1OXB6MVBZ?=
+ =?utf-8?B?N003Y2FJNkFHK3J4NlJ3cTZKYnhWS3lVRWk3TkFQK3ZLb2lGWjdNMWRKUnZv?=
+ =?utf-8?B?WUFpU2U5cW1DeldSd0RsSGdyNlF1K3htWlMvR0dYbkpaOTNYMFRKYnZ4dWdo?=
+ =?utf-8?B?bVF0aXhDaXl5bUxMeG5IWkUxTkpzejNyZGxZVkY1U2ptQlpGb2VFNXVNcW1a?=
+ =?utf-8?B?ai9DdVVzT3QzUExOSW8wOXJMajI5K25yblV1di9lUVk3ZkNCdzVXZEpUblh0?=
+ =?utf-8?B?R3BRNnRNR0hMd1Z4T3lxUGpOWktEeFIwV1FXK0J2T1lzMUlsZHMwdTZ5eXVW?=
+ =?utf-8?B?VE56QkNtazE1M0cxUmxKaXBuWlNCQjFJY0QxNHFFS0hZekpxWE9EZFZVVUp3?=
+ =?utf-8?B?dytGUzhab0I2ZS81VWdjcCtwYkZvak5xTXQzWkZBUWxMbVZEL09va2tHcG1a?=
+ =?utf-8?B?Ujc4QUFOTDZoVm8xcmxPVmI5cy9pYjU0dHR4ZGFMd3BvR3RmbnlmZVZrRW5h?=
+ =?utf-8?B?OTE3dzR5QlNwQTZnckFvTDBVbmlQWDhBcEpTZmRMZmJMSVNDcVlST2FNai9y?=
+ =?utf-8?B?c0VRTmNvNEsvU3NITG0xSExiQkpGSEp2QmNrVE10c1A2VGFqTnpMdkRJVy9l?=
+ =?utf-8?B?bHh6K0lLRWVWOE9RMmkxNEpZOU52VU5OS1ZxbkVEWFBJbVQvRGg4RGE5d1li?=
+ =?utf-8?B?MjBUeWVIYUtlU2kycGZrbWdxWW9WTjNBcDQ3UE8wc09tY0ZFZEg4VW8zOGlR?=
+ =?utf-8?B?NlA1enZJbWlkSUNZVS9Cd3psUktubTM3MlM1M1VwLzVEVUVSV09aUXZsOWdl?=
+ =?utf-8?B?ZkJlcHRNdytVQ2RkblRZcXI4amxvQ3JXSDdkNWRRNThvdVZIajhnRnV5ME9t?=
+ =?utf-8?B?NHhvZzVybzZMSTJRZjd1UlNrQXZWbVJ0U2UrM3JQM1c1dGFwbmJsVWZSUWNF?=
+ =?utf-8?B?Z1FKOWMwaXBDVnlWS2poNzB1MW44cTRaUk1JR05Ra01NcUppU3RhQjF6a2xT?=
+ =?utf-8?B?M0p0ekFQNm5pTExxQjA2b1lINnI0MEZYU1JGS2h0TzRRcFdtRUZtSzhGYWpp?=
+ =?utf-8?B?L25TTTF3TmlhN05pc1o0NEZ1NHljRGpUeTdTUVJXRzBDNVE4ZVlITVI3VlBF?=
+ =?utf-8?B?WE5OQUNHSTg3RDVIK2l6ME9oQ0ZjeG5tRG83S0FxYkNVWHlIYTh4SGVMRDUz?=
+ =?utf-8?B?RmJwTWNhTE5GVnBRck5yYUxvamcvamdBTEpNNkNGbENSNXArTlBCVXhFUkdq?=
+ =?utf-8?B?WXZSY25JUnFQVS9FN09rUEd1VzUzdVdDbzJhd1p1QU81bUN2YnpCUjRmTnI4?=
+ =?utf-8?B?WTZxSjM5UjI5OWd0Z0U1VzhTME9vaWpXYS9YOGdYeXYyRjlLMTdoL2hNMUtN?=
+ =?utf-8?B?eFE0dE9EbHp6cmF3dEV6WFIwbW15dlEvZk1leFNUdmE4a25Cb2txSmY4a1VX?=
+ =?utf-8?B?QUc3U2dJajlCRUF3Z0t0MHBjUEJQeXZRWmFnYUNKdEJsaWlSaXNTL2djbkhx?=
+ =?utf-8?B?YUlGSHg0QlQ4ZlhndHNHb2RFYXMvN2srb2lVSXVzdFlWQWxYWEtyTHJ1Tkw0?=
+ =?utf-8?B?em1rMGNhclhDa1h5RHhyeXg2UitQMlRMNzhRakRQOGkvcE9JUG5zclVRVE4x?=
+ =?utf-8?B?ZDB2SjlaZEVhQkl1VXFWUm0vSEw5d2EvdTBKS0ZIRFhWeUg1V0ZsSTRKa2xR?=
+ =?utf-8?Q?sJ2zybJJyKY=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB5685.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?a2VTZ2lxaUhMR09aWFlzMWFHa0l2M0ZUWTR1MTdGTWhPS1AyM2pTYkxZb2xR?=
+ =?utf-8?B?K3F0Vmk2ZFdmdkhRNDROTm5uL1BndzkrWGFtVnJCelVtTjlFNXZlQWNPY1da?=
+ =?utf-8?B?L3p0TXZZR1FPb1JsbmgzZmVQMzVnTTdVaGNHVmNQNGdVZkpGYzlMdjZ4VjQ1?=
+ =?utf-8?B?UHhTWHdiVzVPR1RUbjJCRmV6Y2NkdDBrR0lUY2lOc0RTTS91ZC9mS1pzM2Fa?=
+ =?utf-8?B?WFA1STRmTGlWZGlDM3p6Z0tXUWZJRDBBcjBxYnRWRG1Ed2pCS0R6VTg5Y3lD?=
+ =?utf-8?B?ZWwrREoyamJFYlZPVHpTY1dZam5xRkhqTjdyaWFjbThLaTZ1U3Zic3lmRnJL?=
+ =?utf-8?B?VzI4bjFPTWRRNm1SVEJGQXhrQUhRNWd1d3NHU1FQNFF4K283WlZ3ZjhONlZa?=
+ =?utf-8?B?a2xnY3k4d0pDZGl6UkJwd1A4YTNsS3YvUEhCd2hIbmJQQlkrbUNaRnNDZ1B1?=
+ =?utf-8?B?QXE5NnlDV2M0N2MvQWh4enBwRnU2eXBnUWFDRGVtOE5xNjdUWDc4dG5aTE5K?=
+ =?utf-8?B?ZEtXZmRVK0dkM05Na1VlMGJvZHRNQWNZMkhRUVhZQ3BwZStvelQvQ3JmSjVL?=
+ =?utf-8?B?Q2hNc0xheDRBNHkxTllRcCtVU3ZhdHlmY1BVcms5L1QzNlg0MVBPczNrUkEv?=
+ =?utf-8?B?amxyNDE3WkJOanNZNUN2SGdXeGRyK0YxbmdnTGdmSDRIU05IUVJJUW93UXQw?=
+ =?utf-8?B?bmFGZDhnbUJNK083SjBoOTQ1U0hjTUhhWXpoWkVhTVJwaFFtOEpaTXZBaDdK?=
+ =?utf-8?B?bFM5L3pPWW04MTFXMHhFN0lOdWNIQkJMZXVqWVZvWTlRUGlSc0FBTnNkc3lV?=
+ =?utf-8?B?N0pSVjY0UjdDcmtKb2R4ZUtuQWhkL2VjU3RUc2NDbnRjN1FmMVpSWXNUbDdw?=
+ =?utf-8?B?b2p4MlFETmpNSzFUdTcrWEFXM0c4Uk1Bb1RBNlk1QnBGbFZUN0RQT3o4OWh5?=
+ =?utf-8?B?OUZzelIxSVM5Yks4OTIzMnZSaGdqWkFwL01QYlA1bXBFSmFKbDZKcEVqbXJo?=
+ =?utf-8?B?c0VIWTl5ZzJ3d05OR2RURGRTQVFOSGVnSU1EK2NMaTVUTDdUaFBXR1JDVHNX?=
+ =?utf-8?B?Q2FIWHlzMXFDMzk5enBRQlVycllrcTAwa3RuS1VNb3ZTV3dzVWR5RTg1YlJ6?=
+ =?utf-8?B?TnFFODljQUVRcElFRFR6WWpwNXlZQzNNSXFhTS9NeENmRjlDeENkY1N5VjdH?=
+ =?utf-8?B?U0cvWVpBeVBxbUVvTUc5bGtEYjZNWjArT08xU3A3dFBXV3RQN0J0Y2dtR1g4?=
+ =?utf-8?B?N2t4R2FsMVpDZE1YY1RvN2pYVVhEYVZjQWFqaXk3cVNFUHc5bzVpbWlPc25M?=
+ =?utf-8?B?UkFSTlBaa25nT0U2Um1PQ3hYLyt2N2VRRnEzM1cvZ1lWaHN4QkFFejZFS3Mx?=
+ =?utf-8?B?T1lFbldQY2ZkeHFiWXMxRGlxSUN3dmtNM3NNZUtpWHFyVW4wR2FnOXpRL2U2?=
+ =?utf-8?B?cVU2SFg1T0xLVzd4SEVzK0xoYjFqV1F3U3dvd3FQYXVrQ1FHa094d2RkSUlO?=
+ =?utf-8?B?WU51V0ErTFRDTGJ6dGoxWkpMNEd2S2thSHlHck1OM0JwNXF3U253TklTU0RX?=
+ =?utf-8?B?ekphOFhZVG5sVTRBTFJOd1p1Um5KLzg1NmJlcjUwNDU1Y1ZvRHpwdFE2S00z?=
+ =?utf-8?B?UWVmb2FKZVZ6Uk51UTFIRk04a28vN2xOc0NUaDE2U0FoUStuVThnUE40M3po?=
+ =?utf-8?B?cisxLzhhL0NjMmpFTjdieFQ4UFBDYWwyUDJXRjliUmZGa2owYTFMdWJYRU0y?=
+ =?utf-8?B?U2ljbVc3Wm9pb01UUFZhVXZzRVRnZDRqS3czcXUwMHNJaVVtbkNlSGVaSUFi?=
+ =?utf-8?B?YmxCNzF6RTAvcWRLOTV5R3lycENpL1l5WmxIdWdVMlFxMFJxN1dRbjZ4aTRT?=
+ =?utf-8?B?cXJwcjlRckE0WjFVTlZLM3pCMkI4QTRHaHV1VUt1WGx5ZTBnaEZwYTViSTBF?=
+ =?utf-8?B?SzIweHVDQW9UYjRwYlhzK3czWUNZS0F2MlJ1ZlloVzBTWk11alhxeGVjaW5W?=
+ =?utf-8?B?b1FGc2l5bm1VWTN6WG52RllDaXpyeHVpdjVHMm5Jb1Q0QTljdUJHem9IWEVD?=
+ =?utf-8?B?dnMwYzFsVE9sNVF2Mktyb3BnT29leitmWnY4dzBtc2xZNTVWRFQwc1BmS2g1?=
+ =?utf-8?Q?65uEzf6HUPsNFCBPYvruzc67i?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9e408065-92ac-422a-d264-08dd86f5a4f1
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5685.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Apr 2025 08:12:55.0143
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 5ICx6Ei5SKdrpVlS5qFpD7eczb7wJMSn9sq4l0BkV2Jm+ImE9JRyqhmHk46Ho6la
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6836
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 46056410BC
-X-Spamd-Bar: ------
-X-Spamd-Result: default: False [-6.60 / 15.00];
-	REPLY(-4.00)[];
+X-Rspamd-Queue-Id: 116FF43FEB
+X-Spamd-Bar: -----
+X-Spamd-Result: default: False [-5.00 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.215.182:from];
+	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector10001:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
+	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
+	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
 	MIME_GOOD(-0.10)[text/plain];
-	RCPT_COUNT_TWELVE(0.00)[21];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_TLS_LAST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	ARC_NA(0.00)[];
-	FREEMAIL_CC(0.00)[lists.freedesktop.org,vger.kernel.org,gmail.com,chromium.org,quicinc.com,kernel.org,poorly.run,somainline.org,ffwll.ch,linux.intel.com,suse.de,linaro.org,amd.com,lists.linaro.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DNSWL_BLOCKED(0.00)[209.85.215.182:from];
-	RCVD_COUNT_TWO(0.00)[2];
+	MIME_TRACE(0.00)[0:+];
+	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
+	RBL_SENDERSCORE_REPUT_BLOCKED(0.00)[40.107.101.48:from];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.101.48:from];
+	RCPT_COUNT_SEVEN(0.00)[9];
+	MID_RHS_MATCH_FROM(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
-	FREEMAIL_ENVFROM(0.00)[gmail.com];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCVD_IN_DNSWL_NONE(0.00)[40.107.101.48:from];
+	RCVD_COUNT_TWO(0.00)[2];
+	RCVD_TLS_LAST(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	RBL_SENDERSCORE_REPUT_8(0.00)[209.85.215.182:from];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	FROM_HAS_DN(0.00)[]
+	DKIM_TRACE(0.00)[amd.com:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: LMDQQX5UNHMETTSSZ2NZNJPWCFQ7G3N2
-X-Message-ID-Hash: LMDQQX5UNHMETTSSZ2NZNJPWCFQ7G3N2
-X-MailFrom: robdclark@gmail.com
+Message-ID-Hash: KVN3WQ7CNH3MIVJYPRDVRGRR252XDHXU
+X-Message-ID-Hash: KVN3WQ7CNH3MIVJYPRDVRGRR252XDHXU
+X-MailFrom: Christian.Koenig@amd.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, Connor Abbott <cwabbott0@gmail.com>, Rob Clark <robdclark@chromium.org>, Rob Clark <robdclark@gmail.com>, Abhinav Kumar <quic_abhinavk@quicinc.com>, Dmitry Baryshkov <lumag@kernel.org>, Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>, Simona Vetter <simona@ffwll.ch>, Konrad Dybcio <konradybcio@kernel.org>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, open list <linux-kernel@vger.kernel.org>, "open list:DMA BUFFER SHARING FRAMEWORK:Keyword:bdma_?:buf|fence|resvb" <linux-media@vger.kernel.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK:Keyword:bdma_?:buf|fence|resvb" <linaro-mm-sig@lists.linaro.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v3 32/33] drm/msm: Add VM_BIND ioctl
+Subject: [Linaro-mm-sig] Re: [PATCH 2/3] dma-buf: Add DMA_BUF_IOCTL_GET_DMA_ADDR
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LMDQQX5UNHMETTSSZ2NZNJPWCFQ7G3N2/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KVN3WQ7CNH3MIVJYPRDVRGRR252XDHXU/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-From: Rob Clark <robdclark@chromium.org>
-
-Add a VM_BIND ioctl for binding/unbinding buffers into a VM.  This is
-only supported if userspace has opted in to MSM_PARAM_EN_VM_BIND.
-
-Signed-off-by: Rob Clark <robdclark@chromium.org>
----
- drivers/gpu/drm/msm/msm_drv.c        |   1 +
- drivers/gpu/drm/msm/msm_drv.h        |   4 +-
- drivers/gpu/drm/msm/msm_gem.c        |  40 +-
- drivers/gpu/drm/msm/msm_gem.h        |   4 +
- drivers/gpu/drm/msm/msm_gem_submit.c |  22 +-
- drivers/gpu/drm/msm/msm_gem_vma.c    | 987 ++++++++++++++++++++++++++-
- include/uapi/drm/msm_drm.h           |  74 +-
- 7 files changed, 1097 insertions(+), 35 deletions(-)
-
-diff --git a/drivers/gpu/drm/msm/msm_drv.c b/drivers/gpu/drm/msm/msm_drv.c
-index 49e4425c3caf..a63442039e22 100644
---- a/drivers/gpu/drm/msm/msm_drv.c
-+++ b/drivers/gpu/drm/msm/msm_drv.c
-@@ -790,6 +790,7 @@ static const struct drm_ioctl_desc msm_ioctls[] = {
- 	DRM_IOCTL_DEF_DRV(MSM_SUBMITQUEUE_NEW,   msm_ioctl_submitqueue_new,   DRM_RENDER_ALLOW),
- 	DRM_IOCTL_DEF_DRV(MSM_SUBMITQUEUE_CLOSE, msm_ioctl_submitqueue_close, DRM_RENDER_ALLOW),
- 	DRM_IOCTL_DEF_DRV(MSM_SUBMITQUEUE_QUERY, msm_ioctl_submitqueue_query, DRM_RENDER_ALLOW),
-+	DRM_IOCTL_DEF_DRV(MSM_VM_BIND,      msm_ioctl_vm_bind,      DRM_RENDER_ALLOW),
- };
- 
- static void msm_show_fdinfo(struct drm_printer *p, struct drm_file *file)
-diff --git a/drivers/gpu/drm/msm/msm_drv.h b/drivers/gpu/drm/msm/msm_drv.h
-index b0add236cbb3..33240afc6365 100644
---- a/drivers/gpu/drm/msm/msm_drv.h
-+++ b/drivers/gpu/drm/msm/msm_drv.h
-@@ -232,7 +232,9 @@ struct drm_gpuvm *msm_kms_init_vm(struct drm_device *dev);
- bool msm_use_mmu(struct drm_device *dev);
- 
- int msm_ioctl_gem_submit(struct drm_device *dev, void *data,
--		struct drm_file *file);
-+			 struct drm_file *file);
-+int msm_ioctl_vm_bind(struct drm_device *dev, void *data,
-+		      struct drm_file *file);
- 
- #ifdef CONFIG_DEBUG_FS
- unsigned long msm_gem_shrinker_shrink(struct drm_device *dev, unsigned long nr_to_scan);
-diff --git a/drivers/gpu/drm/msm/msm_gem.c b/drivers/gpu/drm/msm/msm_gem.c
-index b4b299e3f3d3..9d60b38ba58a 100644
---- a/drivers/gpu/drm/msm/msm_gem.c
-+++ b/drivers/gpu/drm/msm/msm_gem.c
-@@ -233,8 +233,7 @@ static void put_pages(struct drm_gem_object *obj)
- 	}
- }
- 
--static struct page **msm_gem_get_pages_locked(struct drm_gem_object *obj,
--					      unsigned madv)
-+struct page **msm_gem_get_pages_locked(struct drm_gem_object *obj, unsigned madv)
- {
- 	struct msm_gem_object *msm_obj = to_msm_bo(obj);
- 
-@@ -1036,18 +1035,37 @@ static void msm_gem_free_object(struct drm_gem_object *obj)
- 	/*
- 	 * We need to lock any VMs the object is still attached to, but not
- 	 * the object itself (see explaination in msm_gem_assert_locked()),
--	 * so just open-code this special case:
-+	 * so just open-code this special case.
-+	 *
-+	 * Note that we skip the dance if we aren't attached to any VM.  This
-+	 * is load bearing.  The driver needs to support two usage models:
-+	 *
-+	 * 1. Legacy kernel managed VM: Userspace expects the VMA's to be
-+	 *    implicitly torn down when the object is freed, the VMA's do
-+	 *    not hold a hard reference to the BO.
-+	 *
-+	 * 2. VM_BIND, userspace managed VM: The VMA holds a reference to the
-+	 *    BO.  This can be dropped when the VM is closed and it's associated
-+	 *    VMAs are torn down.  (See msm_gem_vm_close()).
-+	 *
-+	 * In the latter case the last reference to a BO can be dropped while
-+	 * we already have the VM locked.  It would have already been removed
-+	 * from the gpuva list, but lockdep doesn't know that.  Or understand
-+	 * the differences between the two usage models.
- 	 */
--	drm_exec_init(&exec, 0, 0);
--	drm_exec_until_all_locked (&exec) {
--		struct drm_gpuvm_bo *vm_bo;
--		drm_gem_for_each_gpuvm_bo (vm_bo, obj) {
--			drm_exec_lock_obj(&exec, drm_gpuvm_resv_obj(vm_bo->vm));
--			drm_exec_retry_on_contention(&exec);
-+	if (!list_empty(&obj->gpuva.list)) {
-+		drm_exec_init(&exec, 0, 0);
-+		drm_exec_until_all_locked (&exec) {
-+			struct drm_gpuvm_bo *vm_bo;
-+			drm_gem_for_each_gpuvm_bo (vm_bo, obj) {
-+				drm_exec_lock_obj(&exec,
-+						  drm_gpuvm_resv_obj(vm_bo->vm));
-+				drm_exec_retry_on_contention(&exec);
-+			}
- 		}
-+		put_iova_spaces(obj, NULL, true);
-+		drm_exec_fini(&exec);     /* drop locks */
- 	}
--	put_iova_spaces(obj, NULL, true);
--	drm_exec_fini(&exec);     /* drop locks */
- 
- 	if (obj->import_attach) {
- 		GEM_WARN_ON(msm_obj->vaddr);
-diff --git a/drivers/gpu/drm/msm/msm_gem.h b/drivers/gpu/drm/msm/msm_gem.h
-index 8ad25927c604..bfeb0f584ae5 100644
---- a/drivers/gpu/drm/msm/msm_gem.h
-+++ b/drivers/gpu/drm/msm/msm_gem.h
-@@ -73,6 +73,9 @@ struct msm_gem_vm {
- 	/** @mmu: The mmu object which manages the pgtables */
- 	struct msm_mmu *mmu;
- 
-+	/** @mmu_lock: Protects access to the mmu */
-+	struct mutex mmu_lock;
-+
- 	/**
- 	 * @pid: For address spaces associated with a specific process, this
- 	 * will be non-NULL:
-@@ -205,6 +208,7 @@ int msm_gem_get_and_pin_iova(struct drm_gem_object *obj, struct drm_gpuvm *vm,
- 			     uint64_t *iova);
- void msm_gem_unpin_iova(struct drm_gem_object *obj, struct drm_gpuvm *vm);
- void msm_gem_pin_obj_locked(struct drm_gem_object *obj);
-+struct page **msm_gem_get_pages_locked(struct drm_gem_object *obj, unsigned madv);
- struct page **msm_gem_pin_pages_locked(struct drm_gem_object *obj);
- void msm_gem_unpin_pages_locked(struct drm_gem_object *obj);
- int msm_gem_dumb_create(struct drm_file *file, struct drm_device *dev,
-diff --git a/drivers/gpu/drm/msm/msm_gem_submit.c b/drivers/gpu/drm/msm/msm_gem_submit.c
-index 2e7f8352fa40..7cea8743ff68 100644
---- a/drivers/gpu/drm/msm/msm_gem_submit.c
-+++ b/drivers/gpu/drm/msm/msm_gem_submit.c
-@@ -184,6 +184,7 @@ static int submit_lookup_objects(struct msm_gem_submit *submit,
- static int submit_lookup_cmds(struct msm_gem_submit *submit,
- 		struct drm_msm_gem_submit *args, struct drm_file *file)
- {
-+	struct msm_context *ctx = file->driver_priv;
- 	unsigned i;
- 	size_t sz;
- 	int ret = 0;
-@@ -215,6 +216,20 @@ static int submit_lookup_cmds(struct msm_gem_submit *submit,
- 			goto out;
- 		}
- 
-+		if (msm_context_is_vmbind(ctx)) {
-+			if (submit_cmd.nr_relocs) {
-+				ret = SUBMIT_ERROR(EINVAL, submit, "nr_relocs must be zero");
-+				goto out;
-+			}
-+
-+			if (submit_cmd.submit_idx || submit_cmd.submit_offset) {
-+				ret = SUBMIT_ERROR(EINVAL, submit, "submit_idx/offset must be zero");
-+				goto out;
-+			}
-+
-+			submit->cmd[i].iova = submit_cmd.iova;
-+		}
-+
- 		submit->cmd[i].type = submit_cmd.type;
- 		submit->cmd[i].size = submit_cmd.size / 4;
- 		submit->cmd[i].offset = submit_cmd.submit_offset / 4;
-@@ -517,6 +532,7 @@ int msm_ioctl_gem_submit(struct drm_device *dev, void *data,
- 	struct msm_ringbuffer *ring;
- 	struct msm_syncobj_post_dep *post_deps = NULL;
- 	struct drm_syncobj **syncobjs_to_reset = NULL;
-+	unsigned cmds_to_parse;
- 	int out_fence_fd = -1;
- 	unsigned i;
- 	int ret;
-@@ -652,7 +668,9 @@ int msm_ioctl_gem_submit(struct drm_device *dev, void *data,
- 			goto out;
- 	}
- 
--	for (i = 0; i < args->nr_cmds; i++) {
-+	cmds_to_parse = msm_context_is_vmbind(ctx) ? 0 : args->nr_cmds;
-+
-+	for (i = 0; i < cmds_to_parse; i++) {
- 		struct drm_gem_object *obj;
- 		uint64_t iova;
- 
-@@ -683,7 +701,7 @@ int msm_ioctl_gem_submit(struct drm_device *dev, void *data,
- 			goto out;
- 	}
- 
--	submit->nr_cmds = i;
-+	submit->nr_cmds = args->nr_cmds;
- 
- 	idr_preload(GFP_KERNEL);
- 
-diff --git a/drivers/gpu/drm/msm/msm_gem_vma.c b/drivers/gpu/drm/msm/msm_gem_vma.c
-index f3903825e0b6..69d0d423900e 100644
---- a/drivers/gpu/drm/msm/msm_gem_vma.c
-+++ b/drivers/gpu/drm/msm/msm_gem_vma.c
-@@ -4,9 +4,16 @@
-  * Author: Rob Clark <robdclark@gmail.com>
-  */
- 
-+#include "drm/drm_file.h"
-+#include "drm/msm_drm.h"
-+#include "linux/file.h"
-+#include "linux/sync_file.h"
-+
- #include "msm_drv.h"
- #include "msm_gem.h"
-+#include "msm_gpu.h"
- #include "msm_mmu.h"
-+#include "msm_syncobj.h"
- 
- #define vm_dbg(fmt, ...) pr_debug("%s:%d: "fmt"\n", __func__, __LINE__, ##__VA_ARGS__)
- 
-@@ -34,8 +41,95 @@ struct msm_vm_unmap_op {
- 	uint64_t iova;
- 	/** @range: size of region to unmap */
- 	uint64_t range;
-+	/**
-+	 * @obj: backing object for pages to be unmapped
-+	 *
-+	 * Async unmap ops must hold a reference to the original GEM object
-+	 * backing the mapping that will be unmapped.  This ensures that the
-+	 * pages backing the mapping are not freed before the mapping is torn
-+	 * down.
-+	 */
-+	struct drm_gem_object *obj;
-+};
-+
-+/**
-+ * struct msm_vma_op - A MAP or UNMAP operation
-+ */
-+struct msm_vm_op {
-+	/** @op: The operation type */
-+	enum {
-+		MSM_VM_OP_MAP,
-+		MSM_VM_OP_UNMAP,
-+	} op;
-+	union {
-+		/** @map: Parameters used if op == MSM_VMA_OP_MAP */
-+		struct msm_vm_map_op map;
-+		/** @unmap: Parameters used if op == MSM_VMA_OP_UNMAP */
-+		struct msm_vm_unmap_op unmap;
-+	};
-+	/** @node: list head in msm_vm_bind_job::vm_ops */
-+	struct list_head node;
- };
- 
-+/**
-+ * struct msm_vm_bind_job - Tracking for a VM_BIND ioctl
-+ *
-+ * A table of userspace requested VM updates (MSM_VM_BIND_OP_UNMAP/MAP/MAP_NULL)
-+ * gets applied to the vm, generating a list of VM ops (MSM_VM_OP_MAP/UNMAP)
-+ * which are applied to the pgtables asynchronously.  For example a userspace
-+ * requested MSM_VM_BIND_OP_MAP could end up generating both an MSM_VM_OP_UNMAP
-+ * to unmap an existing mapping, and a MSM_VM_OP_MAP to apply the new mapping.
-+ */
-+struct msm_vm_bind_job {
-+	/** @base: base class for drm_sched jobs */
-+	struct drm_sched_job base;
-+	/** @vm: The VM being operated on */
-+	struct drm_gpuvm *vm;
-+	/** @fence: The fence that is signaled when job completes */
-+	struct dma_fence *fence;
-+	/** @queue: The queue that the job runs on */
-+	struct msm_gpu_submitqueue *queue;
-+	/** @prealloc: Tracking for pre-allocated MMU pgtable pages */
-+	struct msm_mmu_prealloc prealloc;
-+	/** @vm_ops: a list of struct msm_vm_op */
-+	struct list_head vm_ops;
-+	/** @bos_pinned: are the GEM objects being bound pinned? */
-+	bool bos_pinned;
-+	/** @nr_ops: the number of userspace requested ops */
-+	unsigned int nr_ops;
-+	/**
-+	 * @ops: the userspace requested ops
-+	 *
-+	 * The userspace requested ops are copied/parsed and validated
-+	 * before we start applying the updates to try to do as much up-
-+	 * front error checking as possible, to avoid the VM being in an
-+	 * undefined state due to partially executed VM_BIND.
-+	 *
-+	 * This table also serves to hold a reference to the backing GEM
-+	 * objects.
-+	 */
-+	struct msm_vm_bind_op {
-+		uint32_t op;
-+		uint32_t flags;
-+		union {
-+			struct drm_gem_object *obj;
-+			uint32_t handle;
-+		};
-+		uint64_t obj_offset;
-+		uint64_t iova;
-+		uint64_t range;
-+	} ops[];
-+};
-+
-+#define job_foreach_bo(obj, _job) \
-+	for (unsigned i = 0; i < (_job)->nr_ops; i++) \
-+		if ((obj = (_job)->ops[i].obj))
-+
-+static inline struct msm_vm_bind_job *to_msm_vm_bind_job(struct drm_sched_job *job)
-+{
-+	return container_of(job, struct msm_vm_bind_job, base);
-+}
-+
- static void
- msm_gem_vm_free(struct drm_gpuvm *gpuvm)
- {
-@@ -49,34 +143,52 @@ msm_gem_vm_free(struct drm_gpuvm *gpuvm)
- 	kfree(vm);
- }
- 
--static void
-+static int
- vm_unmap_op(struct msm_gem_vm *vm, const struct msm_vm_unmap_op *op)
- {
-+	if (!vm->managed)
-+		lockdep_assert_held(&vm->mmu_lock);
-+
- 	vm_dbg("%p: %016llx %016llx", vm, op->iova, op->iova + op->range);
- 
--	vm->mmu->funcs->unmap(vm->mmu, op->iova, op->range);
-+	return vm->mmu->funcs->unmap(vm->mmu, op->iova, op->range);
- }
- 
- /* Actually unmap memory for the vma */
- void msm_gem_vma_unmap(struct drm_gpuva *vma)
- {
-+	struct msm_gem_vm *vm = to_msm_vm(vma->vm);
- 	struct msm_gem_vma *msm_vma = to_msm_vma(vma);
- 
- 	/* Don't do anything if the memory isn't mapped */
- 	if (!msm_vma->mapped)
- 		return;
- 
--	vm_unmap_op(to_msm_vm(vma->vm), &(struct msm_vm_unmap_op){
-+	/*
-+	 * The mmu_lock is only needed when preallocation is used.  But
-+	 * in that case we don't need to worry about recursion into
-+	 * shrinker
-+	 */
-+	if (!vm->managed)
-+		 mutex_lock(&vm->mmu_lock);
-+
-+	vm_unmap_op(vm, &(struct msm_vm_unmap_op){
- 		.iova = vma->va.addr,
- 		.range = vma->va.range,
- 	});
- 
-+	if (!vm->managed)
-+		mutex_unlock(&vm->mmu_lock);
-+
- 	msm_vma->mapped = false;
- }
- 
- static int
- vm_map_op(struct msm_gem_vm *vm, const struct msm_vm_map_op *op)
- {
-+	if (!vm->managed)
-+		lockdep_assert_held(&vm->mmu_lock);
-+
- 	vm_dbg("%p: %016llx %016llx", vm, op->iova, op->iova + op->range);
- 
- 	return vm->mmu->funcs->map(vm->mmu, op->iova, op->sgt, op->offset,
-@@ -87,6 +199,7 @@ vm_map_op(struct msm_gem_vm *vm, const struct msm_vm_map_op *op)
- int
- msm_gem_vma_map(struct drm_gpuva *vma, int prot, struct sg_table *sgt)
- {
-+	struct msm_gem_vm *vm = to_msm_vm(vma->vm);
- 	struct msm_gem_vma *msm_vma = to_msm_vma(vma);
- 	int ret;
- 
-@@ -98,6 +211,14 @@ msm_gem_vma_map(struct drm_gpuva *vma, int prot, struct sg_table *sgt)
- 
- 	msm_vma->mapped = true;
- 
-+	/*
-+	 * The mmu_lock is only needed when preallocation is used.  But
-+	 * in that case we don't need to worry about recursion into
-+	 * shrinker
-+	 */
-+	if (!vm->managed)
-+		mutex_lock(&vm->mmu_lock);
-+
- 	/*
- 	 * NOTE: iommu/io-pgtable can allocate pages, so we cannot hold
- 	 * a lock across map/unmap which is also used in the job_run()
-@@ -107,16 +228,19 @@ msm_gem_vma_map(struct drm_gpuva *vma, int prot, struct sg_table *sgt)
- 	 * Revisit this if we can come up with a scheme to pre-alloc pages
- 	 * for the pgtable in map/unmap ops.
- 	 */
--	ret = vm_map_op(to_msm_vm(vma->vm), &(struct msm_vm_map_op){
-+	ret = vm_map_op(vm, &(struct msm_vm_map_op){
- 		.iova = vma->va.addr,
- 		.range = vma->va.range,
- 		.offset = vma->gem.offset,
- 		.sgt = sgt,
- 		.prot = prot,
- 	});
--	if (ret) {
-+
-+	if (!vm->managed)
-+		mutex_unlock(&vm->mmu_lock);
-+
-+	if (ret)
- 		msm_vma->mapped = false;
--	}
- 
- 	return ret;
- }
-@@ -131,6 +255,9 @@ void msm_gem_vma_close(struct drm_gpuva *vma)
- 
- 	drm_gpuvm_resv_assert_held(&vm->base);
- 
-+	if (vma->gem.obj)
-+		msm_gem_assert_locked(vma->gem.obj);
-+
- 	if (vma->va.addr && vm->managed)
- 		drm_mm_remove_node(&msm_vma->node);
- 
-@@ -158,6 +285,7 @@ msm_gem_vma_new(struct drm_gpuvm *_vm, struct drm_gem_object *obj,
- 
- 	if (vm->managed) {
- 		BUG_ON(offset != 0);
-+		BUG_ON(!obj);  /* NULL mappings not valid for kernel managed VM */
- 		ret = drm_mm_insert_node_in_range(&vm->mm, &vma->node,
- 						obj->size, PAGE_SIZE, 0,
- 						range_start, range_end, 0);
-@@ -169,7 +297,8 @@ msm_gem_vma_new(struct drm_gpuvm *_vm, struct drm_gem_object *obj,
- 		range_end   = range_start + obj->size;
- 	}
- 
--	GEM_WARN_ON((range_end - range_start) > obj->size);
-+	if (obj)
-+		GEM_WARN_ON((range_end - range_start) > obj->size);
- 
- 	drm_gpuva_init(&vma->base, range_start, range_end - range_start, obj, offset);
- 	vma->mapped = false;
-@@ -178,6 +307,9 @@ msm_gem_vma_new(struct drm_gpuvm *_vm, struct drm_gem_object *obj,
- 	if (ret)
- 		goto err_free_range;
- 
-+	if (!obj)
-+		return &vma->base;
-+
- 	vm_bo = drm_gpuvm_bo_obtain(&vm->base, obj);
- 	if (IS_ERR(vm_bo)) {
- 		ret = PTR_ERR(vm_bo);
-@@ -199,11 +331,290 @@ msm_gem_vma_new(struct drm_gpuvm *_vm, struct drm_gem_object *obj,
- 	return ERR_PTR(ret);
- }
- 
-+static int
-+msm_gem_vm_bo_validate(struct drm_gpuvm_bo *vm_bo, struct drm_exec *exec)
-+{
-+	struct drm_gem_object *obj = vm_bo->obj;
-+	struct drm_gpuva *vma;
-+	int ret;
-+
-+	msm_gem_assert_locked(obj);
-+
-+	drm_gpuvm_bo_for_each_va (vma, vm_bo) {
-+		ret = msm_gem_pin_vma_locked(obj, vma);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+struct op_arg {
-+	unsigned flags;
-+	struct msm_vm_bind_job *job;
-+};
-+
-+static void
-+vm_op_enqueue(struct op_arg *arg, struct msm_vm_op _op)
-+{
-+	struct msm_vm_op *op = kmalloc(sizeof(*op), GFP_KERNEL);
-+	*op = _op;
-+	list_add_tail(&op->node, &arg->job->vm_ops);
-+}
-+
-+static struct drm_gpuva *
-+vma_from_op(struct op_arg *arg, struct drm_gpuva_op_map *op)
-+{
-+	return msm_gem_vma_new(arg->job->vm, op->gem.obj, op->gem.offset,
-+			       op->va.addr, op->va.addr + op->va.range);
-+}
-+
-+static void
-+map_vma(struct drm_gpuva *vma, void *arg)
-+{
-+	struct drm_gem_object *obj = vma->gem.obj;
-+	struct sg_table *sgt;
-+	unsigned prot;
-+
-+	if (obj) {
-+		sgt = to_msm_bo(obj)->sgt;
-+		prot = msm_gem_prot(obj);
-+	} else {
-+		sgt = NULL;
-+		prot = IOMMU_READ | IOMMU_WRITE;
-+	}
-+
-+	vm_op_enqueue(arg, (struct msm_vm_op){
-+		.op = MSM_VM_OP_MAP,
-+		.map = {
-+			.sgt = sgt,
-+			.iova = vma->va.addr,
-+			.range = vma->va.range,
-+			.offset = vma->gem.offset,
-+			.prot = prot,
-+		},
-+	});
-+
-+	to_msm_vma(vma)->mapped = true;
-+}
-+
-+static int
-+msm_gem_vm_sm_step_map(struct drm_gpuva_op *op, void *arg)
-+{
-+	struct drm_gpuva *vma;
-+
-+	vma = vma_from_op(arg, &op->map);
-+	if (WARN_ON(IS_ERR(vma)))
-+		return PTR_ERR(vma);
-+
-+	vm_dbg("%p:%p: %016llx %016llx", vma->vm, vma, vma->va.addr, vma->va.range);
-+
-+	vma->flags = ((struct op_arg *)arg)->flags;
-+
-+	map_vma(vma, arg);
-+
-+	return 0;
-+}
-+
-+static int
-+msm_gem_vm_sm_step_remap(struct drm_gpuva_op *op, void *arg)
-+{
-+	struct drm_gpuvm *vm = ((struct op_arg *)arg)->job->vm;
-+	struct drm_gpuva *orig_vma = op->remap.unmap->va;
-+	struct drm_gpuva *prev_vma = NULL, *next_vma = NULL;
-+	uint64_t unmap_start, unmap_range;
-+	unsigned flags;
-+
-+	vm_dbg("orig_vma: %p:%p: %016llx %016llx", vm, orig_vma, orig_vma->va.addr, orig_vma->va.range);
-+
-+	/*
-+	 * We are going to need at least some of the orig_vma mapped, the
-+	 * easier thing is to just map the whole thing and then unmap the
-+	 * unmap_range, instead of trying to optimize for this case
-+	 */
-+	if (!to_msm_vma(orig_vma)->mapped)
-+		map_vma(orig_vma, arg);
-+
-+	drm_gpuva_op_remap_to_unmap_range(&op->remap, &unmap_start, &unmap_range);
-+
-+	if (orig_vma->gem.obj)
-+		drm_gem_object_get(orig_vma->gem.obj);
-+
-+	vm_op_enqueue(arg, (struct msm_vm_op){
-+		.op = MSM_VM_OP_UNMAP,
-+		.unmap = {
-+			.iova = unmap_start,
-+			.range = unmap_range,
-+			.obj = orig_vma->gem.obj,
-+		},
-+	});
-+
-+	/*
-+	 * Part of this GEM obj is still mapped, but we're going to kill the
-+	 * existing VMA and replace it with one or two new ones (ie. two if
-+	 * the unmapped range is in the middle of the existing (unmap) VMA).
-+	 * So just set the state to unmapped:
-+	 */
-+	to_msm_vma(orig_vma)->mapped = false;
-+
-+	/*
-+	 * The prev_vma and/or next_vma are replacing the unmapped vma, and
-+	 * therefore should preserve it's flags:
-+	 */
-+	flags = orig_vma->flags;
-+
-+	msm_gem_vma_close(orig_vma);
-+
-+	if (op->remap.prev) {
-+		prev_vma = vma_from_op(arg, op->remap.prev);
-+		if (WARN_ON(IS_ERR(prev_vma)))
-+			return PTR_ERR(prev_vma);
-+
-+		vm_dbg("prev_vma: %p:%p: %016llx %016llx", vm, prev_vma, prev_vma->va.addr, prev_vma->va.range);
-+		to_msm_vma(prev_vma)->mapped = true;
-+		prev_vma->flags = flags;
-+	}
-+
-+	if (op->remap.next) {
-+		next_vma = vma_from_op(arg, op->remap.next);
-+		if (WARN_ON(IS_ERR(next_vma)))
-+			return PTR_ERR(next_vma);
-+
-+		vm_dbg("next_vma: %p:%p: %016llx %016llx", vm, next_vma, next_vma->va.addr, next_vma->va.range);
-+		to_msm_vma(next_vma)->mapped = true;
-+		next_vma->flags = flags;
-+	}
-+
-+	return 0;
-+}
-+
-+static int
-+msm_gem_vm_sm_step_unmap(struct drm_gpuva_op *op, void *arg)
-+{
-+	struct drm_gpuva *vma = op->unmap.va;
-+	struct msm_gem_vma *msm_vma = to_msm_vma(vma);
-+
-+	vm_dbg("%p:%p: %016llx %016llx", vma->vm, vma, vma->va.addr, vma->va.range);
-+
-+	if (!msm_vma->mapped)
-+		goto out_close;
-+
-+	if (vma->gem.obj)
-+		drm_gem_object_get(vma->gem.obj);
-+
-+	vm_op_enqueue(arg, (struct msm_vm_op){
-+		.op = MSM_VM_OP_UNMAP,
-+		.unmap = {
-+			.iova = vma->va.addr,
-+			.range = vma->va.range,
-+			.obj = vma->gem.obj,
-+		},
-+	});
-+
-+	msm_vma->mapped = false;
-+
-+out_close:
-+	msm_gem_vma_close(vma);
-+
-+	return 0;
-+}
-+
- static const struct drm_gpuvm_ops msm_gpuvm_ops = {
- 	.vm_free = msm_gem_vm_free,
-+	.vm_bo_validate = msm_gem_vm_bo_validate,
-+	.sm_step_map = msm_gem_vm_sm_step_map,
-+	.sm_step_remap = msm_gem_vm_sm_step_remap,
-+	.sm_step_unmap = msm_gem_vm_sm_step_unmap,
- };
- 
-+static struct dma_fence *
-+msm_vma_job_run(struct drm_sched_job *_job)
-+{
-+	struct msm_vm_bind_job *job = to_msm_vm_bind_job(_job);
-+	struct msm_gem_vm *vm = to_msm_vm(job->vm);
-+	struct drm_gem_object *obj;
-+	int ret = 0;
-+
-+	vm_dbg("");
-+
-+	mutex_lock(&vm->mmu_lock);
-+	vm->mmu->prealloc = &job->prealloc;
-+
-+	while (!list_empty(&job->vm_ops)) {
-+		struct msm_vm_op *op =
-+			list_first_entry(&job->vm_ops, struct msm_vm_op, node);
-+
-+		switch (op->op) {
-+		case MSM_VM_OP_MAP:
-+			/*
-+			 * On error, stop trying to map new things.. but we
-+			 * still want to process the unmaps (or in particular,
-+			 * the drm_gem_object_put()s)
-+			 */
-+			if (!ret)
-+				ret = vm_map_op(vm, &op->map);
-+			break;
-+		case MSM_VM_OP_UNMAP:
-+			if (!ret)
-+				ret = vm_unmap_op(vm, &op->unmap);
-+			drm_gem_object_put(op->unmap.obj);
-+			break;
-+		}
-+		list_del(&op->node);
-+		kfree(op);
-+	}
-+
-+	/*
-+	 * We failed to perform at least _some_ of the pgtable updates, so
-+	 * now the VM is in an undefined state.  Game over!
-+	 */
-+	if (ret)
-+		vm->unusable = true;
-+
-+	vm->mmu->prealloc = NULL;
-+	mutex_unlock(&vm->mmu_lock);
-+
-+	job_foreach_bo (obj, job) {
-+		msm_gem_lock(obj);
-+		msm_gem_unpin_locked(obj);
-+		msm_gem_unlock(obj);
-+	}
-+
-+	/* VM_BIND ops are synchronous, so no fence to wait on: */
-+	return NULL;
-+}
-+
-+static void
-+msm_vma_job_free(struct drm_sched_job *_job)
-+{
-+	struct msm_vm_bind_job *job = to_msm_vm_bind_job(_job);
-+	struct msm_mmu *mmu = to_msm_vm(job->vm)->mmu;
-+	struct drm_gem_object *obj;
-+
-+	mmu->funcs->prealloc_cleanup(mmu, &job->prealloc);
-+
-+	drm_sched_job_cleanup(_job);
-+
-+	job_foreach_bo (obj, job)
-+		drm_gem_object_put(obj);
-+
-+	msm_submitqueue_put(job->queue);
-+	dma_fence_put(job->fence);
-+
-+	/* In error paths, we could have unexecuted ops: */
-+	while (!list_empty(&job->vm_ops)) {
-+		struct msm_vm_op *op =
-+			list_first_entry(&job->vm_ops, struct msm_vm_op, node);
-+		list_del(&op->node);
-+		kfree(op);
-+	}
-+
-+	kfree(job);
-+}
-+
- static const struct drm_sched_backend_ops msm_vm_bind_ops = {
-+	.run_job = msm_vma_job_run,
-+	.free_job = msm_vma_job_free
- };
- 
- /**
-@@ -264,6 +675,7 @@ msm_gem_vm_create(struct drm_device *drm, struct msm_mmu *mmu, const char *name,
- 	drm_gem_object_put(dummy_gem);
- 
- 	vm->mmu = mmu;
-+	mutex_init(&vm->mmu_lock);
- 	vm->managed = managed;
- 
- 	drm_mm_init(&vm->mm, va_start, va_size);
-@@ -276,7 +688,6 @@ msm_gem_vm_create(struct drm_device *drm, struct msm_mmu *mmu, const char *name,
- err_free_vm:
- 	kfree(vm);
- 	return ERR_PTR(ret);
--
- }
- 
- /**
-@@ -292,6 +703,7 @@ msm_gem_vm_close(struct drm_gpuvm *gpuvm)
- {
- 	struct msm_gem_vm *vm = to_msm_vm(gpuvm);
- 	struct drm_gpuva *vma, *tmp;
-+	struct drm_exec exec;
- 
- 	/*
- 	 * For kernel managed VMs, the VMAs are torn down when the handle is
-@@ -308,22 +720,557 @@ msm_gem_vm_close(struct drm_gpuvm *gpuvm)
- 	drm_sched_fini(&vm->sched);
- 
- 	/* Tear down any remaining mappings: */
--	dma_resv_lock(drm_gpuvm_resv(gpuvm), NULL);
--	drm_gpuvm_for_each_va_safe (vma, tmp, gpuvm) {
--		struct drm_gem_object *obj = vma->gem.obj;
-+	drm_exec_init(&exec, 0, 2);
-+	drm_exec_until_all_locked (&exec) {
-+		drm_exec_lock_obj(&exec, drm_gpuvm_resv_obj(gpuvm));
-+		drm_exec_retry_on_contention(&exec);
-+
-+		drm_gpuvm_for_each_va_safe (vma, tmp, gpuvm) {
-+			struct drm_gem_object *obj = vma->gem.obj;
-+
-+			/*
-+			 * MSM_BO_NO_SHARE objects share the same resv as the
-+			 * VM, in which case the obj is already locked:
-+			 */
-+			if (obj && (obj->resv == drm_gpuvm_resv(gpuvm)))
-+				obj = NULL;
-+
-+			if (obj) {
-+				drm_exec_lock_obj(&exec, obj);
-+				drm_exec_retry_on_contention(&exec);
-+			}
-+
-+			msm_gem_vma_unmap(vma);
-+			msm_gem_vma_close(vma);
-+
-+			if (obj) {
-+				drm_exec_unlock_obj(&exec, obj);
-+			}
-+		}
-+	}
-+	drm_exec_fini(&exec);
-+}
-+
-+
-+static struct msm_vm_bind_job *
-+vm_bind_job_create(struct drm_device *dev, struct msm_gpu *gpu,
-+		   struct msm_gpu_submitqueue *queue, uint32_t nr_ops)
-+{
-+	struct msm_vm_bind_job *job;
-+	uint64_t sz;
-+	int ret;
-+
-+	sz = struct_size(job, ops, nr_ops);
-+
-+	if (sz > SIZE_MAX)
-+		return ERR_PTR(-ENOMEM);
-+
-+	job = kzalloc(sz, GFP_KERNEL | __GFP_NOWARN);
-+	if (!job)
-+		return ERR_PTR(-ENOMEM);
-+
-+	ret = drm_sched_job_init(&job->base, queue->entity, 1, queue);
-+	if (ret) {
-+		kfree(job);
-+		return ERR_PTR(ret);
-+	}
-+
-+	job->vm = msm_context_vm(dev, queue->ctx);
-+	job->queue = queue;
-+	INIT_LIST_HEAD(&job->vm_ops);
-+
-+	return job;
-+}
-+
-+static bool invalid_alignment(uint64_t addr)
-+{
-+	/*
-+	 * Technically this is about GPU alignment, not CPU alignment.  But
-+	 * I've not seen any qcom SoC where the SMMU does not support the
-+	 * CPU's smallest page size.
-+	 */
-+	return !PAGE_ALIGNED(addr);
-+}
- 
--		if (obj && obj->resv != drm_gpuvm_resv(gpuvm)) {
--			drm_gem_object_get(obj);
--			msm_gem_lock(obj);
-+static int
-+lookup_op(struct msm_vm_bind_job *job, const struct drm_msm_vm_bind_op *op)
-+{
-+	struct drm_device *dev = job->vm->drm;
-+	struct msm_mmu *mmu = to_msm_vm(job->vm)->mmu;
-+	int i = job->nr_ops++;
-+	int ret = 0;
-+
-+	job->ops[i].op = op->op;
-+	job->ops[i].handle = op->handle;
-+	job->ops[i].obj_offset = op->obj_offset;
-+	job->ops[i].iova = op->iova;
-+	job->ops[i].range = op->range;
-+	job->ops[i].flags = op->flags;
-+
-+	if (op->flags & ~MSM_VM_BIND_OP_FLAGS)
-+		ret = UERR(EINVAL, dev, "invalid flags: %x\n", op->flags);
-+
-+	if (invalid_alignment(op->iova))
-+		ret = UERR(EINVAL, dev, "invalid address: %016llx\n", op->iova);
-+
-+	if (invalid_alignment(op->obj_offset))
-+		ret = UERR(EINVAL, dev, "invalid bo_offset: %016llx\n", op->obj_offset);
-+
-+	if (invalid_alignment(op->range))
-+		ret = UERR(EINVAL, dev, "invalid range: %016llx\n", op->range);
-+
-+
-+	/*
-+	 * MAP must specify a valid handle.  But the handle MBZ for
-+	 * UNMAP or MAP_NULL.
-+	 */
-+	if (op->op == MSM_VM_BIND_OP_MAP) {
-+		if (!op->handle)
-+			ret = UERR(EINVAL, dev, "invalid handle\n");
-+	} else if (op->handle) {
-+		ret = UERR(EINVAL, dev, "handle must be zero\n");
-+	}
-+
-+	switch (op->op) {
-+	case MSM_VM_BIND_OP_MAP:
-+	case MSM_VM_BIND_OP_MAP_NULL:
-+		mmu->funcs->prealloc_count(mmu, &job->prealloc, op->iova, op->range);
-+		break;
-+	case MSM_VM_BIND_OP_UNMAP:
-+		break;
-+	default:
-+		ret = UERR(EINVAL, dev, "invalid op: %u\n", op->op);
-+		break;
-+	}
-+
-+	return ret;
-+}
-+
-+/*
-+ * ioctl parsing, parameter validation, and GEM handle lookup
-+ */
-+static int
-+vm_bind_job_lookup_ops(struct msm_vm_bind_job *job, struct drm_msm_vm_bind *args,
-+		       struct drm_file *file, int *nr_bos)
-+{
-+	struct drm_device *dev = job->vm->drm;
-+	int ret = 0;
-+	int cnt = 0;
-+
-+	if (args->nr_ops == 1) {
-+		/* Single op case, the op is inlined: */
-+		ret = lookup_op(job, &args->op);
-+	} else {
-+		for (unsigned i = 0; i < args->nr_ops; i++) {
-+			struct drm_msm_vm_bind_op op;
-+			void __user *userptr =
-+				u64_to_user_ptr(args->ops + (i * sizeof(op)));
-+
-+			/* make sure we don't have garbage flags, in case we hit
-+			 * error path before flags is initialized:
-+			 */
-+			job->ops[i].flags = 0;
-+
-+			if (copy_from_user(&op, userptr, sizeof(op))) {
-+				ret = -EFAULT;
-+				break;
-+			}
-+
-+			ret = lookup_op(job, &op);
-+			if (ret)
-+				break;
- 		}
-+	}
-+
-+	if (ret) {
-+		job->nr_ops = 0;
-+		goto out;
-+	}
-+
-+	spin_lock(&file->table_lock);
-+
-+	for (unsigned i = 0; i < args->nr_ops; i++) {
-+		struct drm_gem_object *obj;
- 
--		msm_gem_vma_unmap(vma);
--		msm_gem_vma_close(vma);
-+		if (!job->ops[i].handle) {
-+			job->ops[i].obj = NULL;
-+			continue;
-+		}
- 
--		if (obj && obj->resv != drm_gpuvm_resv(gpuvm)) {
--			msm_gem_unlock(obj);
--			drm_gem_object_put(obj);
-+		/*
-+		 * normally use drm_gem_object_lookup(), but for bulk lookup
-+		 * all under single table_lock just hit object_idr directly:
-+		 */
-+		obj = idr_find(&file->object_idr, job->ops[i].handle);
-+		if (!obj) {
-+			ret = UERR(EINVAL, dev, "invalid handle %u at index %u\n", job->ops[i].handle, i);
-+			goto out_unlock;
- 		}
-+
-+		drm_gem_object_get(obj);
-+
-+		job->ops[i].obj = obj;
-+		cnt++;
- 	}
--	dma_resv_unlock(drm_gpuvm_resv(gpuvm));
-+
-+	*nr_bos = cnt;
-+
-+out_unlock:
-+	spin_unlock(&file->table_lock);
-+
-+out:
-+	return ret;
-+}
-+
-+/*
-+ * Lock VM and GEM objects
-+ */
-+static int
-+vm_bind_job_lock_objects(struct msm_vm_bind_job *job, struct drm_exec *exec)
-+{
-+	struct drm_gem_object *obj;
-+	int ret;
-+
-+	/* Lock VM and objects: */
-+	drm_exec_until_all_locked(exec) {
-+		ret = drm_exec_lock_obj(exec, drm_gpuvm_resv_obj(job->vm));
-+		drm_exec_retry_on_contention(exec);
-+		if (ret)
-+			return ret;
-+
-+		job_foreach_bo (obj, job) {
-+			ret = drm_exec_prepare_obj(exec, obj, 1);
-+			drm_exec_retry_on_contention(exec);
-+			if (ret)
-+				return ret;
-+		}
-+	}
-+
-+	return 0;
-+}
-+
-+/*
-+ * Pin GEM objects, ensuring that we have backing pages.  Pinning will move
-+ * the object to the pinned LRU so that the shrinker knows to first consider
-+ * other objects for evicting.
-+ */
-+static int
-+vm_bind_job_pin_objects(struct msm_vm_bind_job *job)
-+{
-+	struct drm_gem_object *obj;
-+
-+	/*
-+	 * First loop, before holding the LRU lock, avoids holding the
-+	 * LRU lock while calling msm_gem_pin_vma_locked (which could
-+	 * trigger get_pages())
-+	 */
-+	job_foreach_bo (obj, job) {
-+		struct page **pages;
-+
-+		pages = msm_gem_get_pages_locked(obj, MSM_MADV_WILLNEED);
-+		if (IS_ERR(pages))
-+			return PTR_ERR(pages);
-+	}
-+
-+	struct msm_drm_private *priv = job->vm->drm->dev_private;
-+
-+	/*
-+	 * A second loop while holding the LRU lock (a) avoids acquiring/dropping
-+	 * the LRU lock for each individual bo, while (b) avoiding holding the
-+	 * LRU lock while calling msm_gem_pin_vma_locked() (which could trigger
-+	 * get_pages() which could trigger reclaim.. and if we held the LRU lock
-+	 * could trigger deadlock with the shrinker).
-+	 */
-+	mutex_lock(&priv->lru.lock);
-+	job_foreach_bo (obj, job)
-+		msm_gem_pin_obj_locked(obj);
-+	mutex_unlock(&priv->lru.lock);
-+
-+	job->bos_pinned = true;
-+
-+	return 0;
-+}
-+
-+/*
-+ * Unpin GEM objects.  Normally this is done after the bind job is run.
-+ */
-+static void
-+vm_bind_job_unpin_objects(struct msm_vm_bind_job *job)
-+{
-+	struct drm_gem_object *obj;
-+
-+	if (!job->bos_pinned)
-+		return;
-+
-+	job_foreach_bo (obj, job)
-+		msm_gem_unpin_locked(obj);
-+
-+	job->bos_pinned = false;
-+}
-+
-+/*
-+ * Pre-allocate pgtable memory, and translate the VM bind requests into a
-+ * sequence of pgtable updates to be applied asynchronously.
-+ */
-+static int
-+vm_bind_job_prepare(struct msm_vm_bind_job *job)
-+{
-+	struct msm_gem_vm *vm = to_msm_vm(job->vm);
-+	struct msm_mmu *mmu = vm->mmu;
-+	int ret;
-+
-+	mmu->funcs->prealloc_allocate(mmu, &job->prealloc);
-+
-+	for (unsigned i = 0; i < job->nr_ops; i++) {
-+		const struct msm_vm_bind_op *op = &job->ops[i];
-+		struct op_arg arg = {
-+			.job = job,
-+		};
-+
-+		switch (op->op) {
-+		case MSM_VM_BIND_OP_UNMAP:
-+			ret = drm_gpuvm_sm_unmap(job->vm, &arg, op->iova,
-+						 op->obj_offset);
-+			break;
-+		case MSM_VM_BIND_OP_MAP:
-+			if (op->flags & MSM_VM_BIND_OP_DUMP)
-+				arg.flags |= MSM_VMA_DUMP;
-+			fallthrough;
-+		case MSM_VM_BIND_OP_MAP_NULL:
-+			ret = drm_gpuvm_sm_map(job->vm, &arg, op->iova,
-+					       op->range, op->obj, op->obj_offset);
-+			break;
-+		default:
-+			/*
-+			 * lookup_op() should have already thrown an error for
-+			 * invalid ops
-+			 */
-+			BUG_ON("unreachable");
-+		}
-+
-+		if (ret) {
-+			/*
-+			 * If we've already started modifying the vm, we can't
-+			 * adequetly describe to userspace the intermediate
-+			 * state the vm is in.  So throw up our hands!
-+			 */
-+			if (i > 0)
-+				vm->unusable = true;
-+			return ret;
-+		}
-+	}
-+
-+	return 0;
-+}
-+
-+/*
-+ * Attach fences to the GEM objects being bound.  This will signify to
-+ * the shrinker that they are busy even after dropping the locks (ie.
-+ * drm_exec_fini())
-+ */
-+static void
-+vm_bind_job_attach_fences(struct msm_vm_bind_job *job)
-+{
-+	for (unsigned i = 0; i < job->nr_ops; i++) {
-+		struct drm_gem_object *obj = job->ops[i].obj;
-+
-+		if (!obj)
-+			continue;
-+
-+		dma_resv_add_fence(obj->resv, job->fence,
-+				   DMA_RESV_USAGE_KERNEL);
-+	}
-+}
-+
-+int
-+msm_ioctl_vm_bind(struct drm_device *dev, void *data, struct drm_file *file)
-+{
-+	struct msm_drm_private *priv = dev->dev_private;
-+	struct drm_msm_vm_bind *args = data;
-+	struct msm_context *ctx = file->driver_priv;
-+	struct msm_vm_bind_job *job = NULL;
-+	struct msm_gpu *gpu = priv->gpu;
-+	struct msm_gpu_submitqueue *queue;
-+	struct msm_syncobj_post_dep *post_deps = NULL;
-+	struct drm_syncobj **syncobjs_to_reset = NULL;
-+	struct dma_fence *fence;
-+	int out_fence_fd = -1;
-+	int ret, nr_bos = 0;
-+	unsigned i;
-+
-+	if (!gpu)
-+		return -ENXIO;
-+
-+	/*
-+	 * Maybe we could allow just UNMAP ops?  OTOH userspace should just
-+	 * immediately close the device file and all will be torn down.
-+	 */
-+	if (to_msm_vm(ctx->vm)->unusable)
-+		return UERR(EPIPE, dev, "context is unusable");
-+
-+	/*
-+	 * Technically, you cannot create a VM_BIND submitqueue in the first
-+	 * place, if you haven't opted in to VM_BIND context.  But it is
-+	 * cleaner / less confusing, to check this case directly.
-+	 */
-+	if (!msm_context_is_vmbind(ctx))
-+		return UERR(EINVAL, dev, "context does not support vmbind");
-+
-+	if (args->flags & ~MSM_VM_BIND_FLAGS)
-+		return UERR(EINVAL, dev, "invalid flags");
-+
-+	queue = msm_submitqueue_get(ctx, args->queue_id);
-+	if (!queue)
-+		return -ENOENT;
-+
-+	if (!(queue->flags & MSM_SUBMITQUEUE_VM_BIND)) {
-+		ret = UERR(EINVAL, dev, "Invalid queue type");
-+		goto out_post_unlock;
-+	}
-+
-+	if (args->flags & MSM_VM_BIND_FENCE_FD_OUT) {
-+		out_fence_fd = get_unused_fd_flags(O_CLOEXEC);
-+		if (out_fence_fd < 0) {
-+			ret = out_fence_fd;
-+			goto out_post_unlock;
-+		}
-+	}
-+
-+	job = vm_bind_job_create(dev, gpu, queue, args->nr_ops);
-+	if (IS_ERR(job)) {
-+		ret = PTR_ERR(job);
-+		goto out_post_unlock;
-+	}
-+
-+	ret = mutex_lock_interruptible(&queue->lock);
-+	if (ret)
-+		goto out_post_unlock;
-+
-+	if (args->flags & MSM_VM_BIND_FENCE_FD_IN) {
-+		struct dma_fence *in_fence;
-+
-+		in_fence = sync_file_get_fence(args->fence_fd);
-+
-+		if (!in_fence) {
-+			ret = UERR(EINVAL, dev, "invalid in-fence");
-+			goto out_unlock;
-+		}
-+
-+		ret = drm_sched_job_add_dependency(&job->base, in_fence);
-+		if (ret)
-+			goto out_unlock;
-+	}
-+
-+	if (args->in_syncobjs > 0) {
-+		syncobjs_to_reset = msm_syncobj_parse_deps(dev, &job->base,
-+							   file, args->in_syncobjs,
-+							   args->nr_in_syncobjs,
-+							   args->syncobj_stride);
-+		if (IS_ERR(syncobjs_to_reset)) {
-+			ret = PTR_ERR(syncobjs_to_reset);
-+			goto out_unlock;
-+		}
-+	}
-+
-+	if (args->out_syncobjs > 0) {
-+		post_deps = msm_syncobj_parse_post_deps(dev, file,
-+							args->out_syncobjs,
-+							args->nr_out_syncobjs,
-+							args->syncobj_stride);
-+		if (IS_ERR(post_deps)) {
-+			ret = PTR_ERR(post_deps);
-+			goto out_unlock;
-+		}
-+	}
-+
-+	ret = vm_bind_job_lookup_ops(job, args, file, &nr_bos);
-+	if (ret)
-+		goto out_unlock;
-+
-+	struct drm_exec exec;
-+	unsigned flags = DRM_EXEC_IGNORE_DUPLICATES | DRM_EXEC_INTERRUPTIBLE_WAIT;
-+	drm_exec_init(&exec, flags, nr_bos + 1);
-+
-+	ret = vm_bind_job_lock_objects(job, &exec);
-+	if (ret)
-+		goto out;
-+
-+	ret = vm_bind_job_pin_objects(job);
-+	if (ret)
-+		goto out;
-+
-+	ret = vm_bind_job_prepare(job);
-+	if (ret)
-+		goto out;
-+
-+	drm_sched_job_arm(&job->base);
-+
-+	job->fence = dma_fence_get(&job->base.s_fence->finished);
-+
-+	if (ret == 0 && args->flags & MSM_VM_BIND_FENCE_FD_OUT) {
-+		struct sync_file *sync_file = sync_file_create(job->fence);
-+		if (!sync_file) {
-+			ret = -ENOMEM;
-+		} else {
-+			fd_install(out_fence_fd, sync_file->file);
-+			args->fence_fd = out_fence_fd;
-+		}
-+	}
-+
-+	if (ret)
-+		goto out;
-+
-+	vm_bind_job_attach_fences(job);
-+
-+	/*
-+	 * The job can be free'd (and fence unref'd) at any point after
-+	 * drm_sched_entity_push_job(), so we need to hold our own ref
-+	 */
-+	fence = dma_fence_get(job->fence);
-+
-+	drm_sched_entity_push_job(&job->base);
-+
-+	msm_syncobj_reset(syncobjs_to_reset, args->nr_in_syncobjs);
-+	msm_syncobj_process_post_deps(post_deps, args->nr_out_syncobjs, fence);
-+
-+	dma_fence_put(fence);
-+
-+out:
-+	if (ret)
-+		vm_bind_job_unpin_objects(job);
-+	drm_exec_fini(&exec);
-+out_unlock:
-+	mutex_unlock(&queue->lock);
-+out_post_unlock:
-+	if (ret && (out_fence_fd >= 0))
-+		put_unused_fd(out_fence_fd);
-+
-+	if (!IS_ERR_OR_NULL(job)) {
-+		if (ret)
-+			msm_vma_job_free(&job->base);
-+	} else {
-+		/*
-+		 * If the submit hasn't yet taken ownership of the queue
-+		 * then we need to drop the reference ourself:
-+		 */
-+		msm_submitqueue_put(queue);
-+	}
-+
-+	if (!IS_ERR_OR_NULL(post_deps)) {
-+		for (i = 0; i < args->nr_out_syncobjs; ++i) {
-+			kfree(post_deps[i].chain);
-+			drm_syncobj_put(post_deps[i].syncobj);
-+		}
-+		kfree(post_deps);
-+	}
-+
-+	if (!IS_ERR_OR_NULL(syncobjs_to_reset)) {
-+		for (i = 0; i < args->nr_in_syncobjs; ++i) {
-+			if (syncobjs_to_reset[i])
-+				drm_syncobj_put(syncobjs_to_reset[i]);
-+		}
-+		kfree(syncobjs_to_reset);
-+	}
-+
-+	return ret;
- }
-diff --git a/include/uapi/drm/msm_drm.h b/include/uapi/drm/msm_drm.h
-index 6d6cd1219926..5c67294edc95 100644
---- a/include/uapi/drm/msm_drm.h
-+++ b/include/uapi/drm/msm_drm.h
-@@ -272,7 +272,10 @@ struct drm_msm_gem_submit_cmd {
- 	__u32 size;           /* in, cmdstream size */
- 	__u32 pad;
- 	__u32 nr_relocs;      /* in, number of submit_reloc's */
--	__u64 relocs;         /* in, ptr to array of submit_reloc's */
-+	union {
-+		__u64 relocs; /* in, ptr to array of submit_reloc's */
-+		__u64 iova;   /* cmdstream address (for VM_BIND contexts) */
-+	};
- };
- 
- /* Each buffer referenced elsewhere in the cmdstream submit (ie. the
-@@ -339,7 +342,74 @@ struct drm_msm_gem_submit {
- 	__u32 nr_out_syncobjs; /* in, number of entries in out_syncobj. */
- 	__u32 syncobj_stride; /* in, stride of syncobj arrays. */
- 	__u32 pad;            /*in, reserved for future use, always 0. */
-+};
-+
-+#define MSM_VM_BIND_OP_UNMAP	0
-+#define MSM_VM_BIND_OP_MAP	1
-+#define MSM_VM_BIND_OP_MAP_NULL	2
-+
-+#define MSM_VM_BIND_OP_DUMP	1
-+#define MSM_VM_BIND_OP_FLAGS ( \
-+		MSM_VM_BIND_OP_DUMP | \
-+		0)
- 
-+/**
-+ * struct drm_msm_vm_bind_op - bind/unbind op to run
-+ */
-+struct drm_msm_vm_bind_op {
-+	/** @op: one of MSM_VM_BIND_OP_x */
-+	__u32 op;
-+	/** @handle: GEM object handle, MBZ for UNMAP or MAP_NULL */
-+	__u32 handle;
-+	/** @obj_offset: Offset into GEM object, MBZ for UNMAP or MAP_NULL */
-+	__u64 obj_offset;
-+	/** @iova: Address to operate on */
-+	__u64 iova;
-+	/** @range: Number of bites to to map/unmap */
-+	__u64 range;
-+	/** @flags: Bitmask of MSM_VM_BIND_OP_FLAG_x */
-+	__u32 flags;
-+	/** @pad: MBZ */
-+	__u32 pad;
-+};
-+
-+#define MSM_VM_BIND_FENCE_FD_IN		0x00000001
-+#define MSM_VM_BIND_FENCE_FD_OUT	0x00000002
-+#define MSM_VM_BIND_FLAGS ( \
-+		MSM_VM_BIND_FENCE_FD_IN | \
-+		MSM_VM_BIND_FENCE_FD_OUT | \
-+		0)
-+
-+/**
-+ * struct drm_msm_vm_bind - Input of &DRM_IOCTL_MSM_VM_BIND
-+ */
-+struct drm_msm_vm_bind {
-+	/** @flags: in, bitmask of MSM_VM_BIND_x */
-+	__u32 flags;
-+	/** @nr_ops: the number of bind ops in this ioctl */
-+	__u32 nr_ops;
-+	/** @fence_fd: in/out fence fd (see MSM_VM_BIND_FENCE_FD_IN/OUT) */
-+	__s32 fence_fd;
-+	/** @queue_id: in, submitqueue id */
-+	__u32 queue_id;
-+	/** @in_syncobjs: in, ptr to array of drm_msm_gem_syncobj */
-+	__u64 in_syncobjs;
-+	/** @out_syncobjs: in, ptr to array of drm_msm_gem_syncobj */
-+	__u64 out_syncobjs;
-+	/** @nr_in_syncobjs: in, number of entries in in_syncobj */
-+	__u32 nr_in_syncobjs;
-+	/** @nr_out_syncobjs: in, number of entries in out_syncobj */
-+	__u32 nr_out_syncobjs;
-+	/** @syncobj_stride: in, stride of syncobj arrays */
-+	__u32 syncobj_stride;
-+	/** @op_stride: sizeof each struct drm_msm_vm_bind_op in @ops */
-+	__u32 op_stride;
-+	union {
-+		/** @op: used if num_ops == 1 */
-+		struct drm_msm_vm_bind_op op;
-+		/** @ops: userptr to array of drm_msm_vm_bind_op if num_ops > 1 */
-+		__u64 ops;
-+	};
- };
- 
- #define MSM_WAIT_FENCE_BOOST	0x00000001
-@@ -435,6 +505,7 @@ struct drm_msm_submitqueue_query {
- #define DRM_MSM_SUBMITQUEUE_NEW        0x0A
- #define DRM_MSM_SUBMITQUEUE_CLOSE      0x0B
- #define DRM_MSM_SUBMITQUEUE_QUERY      0x0C
-+#define DRM_MSM_VM_BIND                0x0D
- 
- #define DRM_IOCTL_MSM_GET_PARAM        DRM_IOWR(DRM_COMMAND_BASE + DRM_MSM_GET_PARAM, struct drm_msm_param)
- #define DRM_IOCTL_MSM_SET_PARAM        DRM_IOW (DRM_COMMAND_BASE + DRM_MSM_SET_PARAM, struct drm_msm_param)
-@@ -448,6 +519,7 @@ struct drm_msm_submitqueue_query {
- #define DRM_IOCTL_MSM_SUBMITQUEUE_NEW    DRM_IOWR(DRM_COMMAND_BASE + DRM_MSM_SUBMITQUEUE_NEW, struct drm_msm_submitqueue)
- #define DRM_IOCTL_MSM_SUBMITQUEUE_CLOSE  DRM_IOW (DRM_COMMAND_BASE + DRM_MSM_SUBMITQUEUE_CLOSE, __u32)
- #define DRM_IOCTL_MSM_SUBMITQUEUE_QUERY  DRM_IOW (DRM_COMMAND_BASE + DRM_MSM_SUBMITQUEUE_QUERY, struct drm_msm_submitqueue_query)
-+#define DRM_IOCTL_MSM_VM_BIND          DRM_IOWR(DRM_COMMAND_BASE + DRM_MSM_VM_BIND, struct drm_msm_vm_bind)
- 
- #if defined(__cplusplus)
- }
--- 
-2.49.0
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gNC8yOS8yNSAwODozOSwgU2ltb25hIFZldHRlciB3cm90ZToNCj4gQ2F0Y2hpbmcgdXAgYWZ0
+ZXIgc3ByaW5nIGJyZWFrLCBoZW5jZSB0aGUgbGF0ZSByZXBseSAuLi4NCj4gDQo+IE9uIEZyaSwg
+QXByIDExLCAyMDI1IGF0IDAyOjM0OjM3UE0gLTA0MDAsIE5pY29sYXMgRHVmcmVzbmUgd3JvdGU6
+DQo+PiBMZSBqZXVkaSAxMCBhdnJpbCAyMDI1IMOgIDE2OjUzICswMjAwLCBCYXN0aWVuIEN1cnV0
+Y2hldCBhIMOpY3JpdMKgOg0KPj4+IFRoZXJlIGlzIG5vIHdheSB0byB0cmFuc21pdCB0aGUgRE1B
+IGFkZHJlc3Mgb2YgYSBidWZmZXIgdG8gdXNlcnNwYWNlLg0KPj4+IFNvbWUgVUlPIHVzZXJzIG5l
+ZWQgdGhpcyB0byBoYW5kbGUgRE1BIGZyb20gdXNlcnNwYWNlLg0KPj4NCj4+IFRvIG1lIHRoaXMg
+QVBJIGlzIGFnYWluc3QgYWxsIHNhZmUgcHJhY3RpY2Ugd2UndmUgYmVlbiBwdXNoaW5nIGZvcndh
+cmQNCj4+IGFuZCBoYXMgbm8gcGxhY2UgaW4gRE1BX0JVRiBBUEkuDQo+Pg0KPj4gSWYgdGhpcyBp
+cyBmaW5lIGZvciB0aGUgVUlPIHN1YnN5c3RlbSB0byBwYXNzIGFyb3VuZCBwaHlzaWNpYWwNCj4+
+IGFkZHJlc3NlcywgdGhlbiBtYWtlIHRoaXMgcGFydCBvZiB0aGUgVUlPIGRldmljZSBpb2N0bC4N
+Cj4gDQo+IFllYWgsIHRoaXMgaGFzIG5vIGJ1c2luZXNzIGluIGRtYS1idWYgc2luY2UgdGhlIGVu
+dGlyZSBwb2ludCBvZiBkbWEtYnVmDQo+IHdhcyB0byBzdG9wIGFsbCB0aGUgbmFzdHkgImp1c3Qg
+cGFzcyByYXcgZG1hIGFkZHIgaW4gdXNlcnNwYWNlIiBoYWNrcyB0aGF0DQo+IHByZWNlZWRlZCBp
+dC4NCj4gDQo+IEFuZCBvdmVyIHRoZSB5ZWFycyBzaW5jZSBkbWEtYnVmIGxhbmRlZCwgd2UndmUg
+cmVtb3ZlZCBhIGxvdCBvZiB0aGVzZSwNCj4gbGlrZSBkcmkxIGRyaXZlcnMuIE9yIHdoZXJlIHRo
+YXQncyBub3QgcG9zc2libGUgbGlrZSB3aXRoIGZiZGV2LCBoaWQgdGhlDQo+IHJhdyBkbWEgYWRk
+ciB1YXBpIGJlaGluZCBhIEtjb25maWcuDQo+IA0KPiBJIGNvbmN1ciB3aXRoIHRoZSBvdmVyYWxs
+IHNlbnRpbWVudCB0aGF0IHRoaXMgc2hvdWxkIGJlIGRvbmUgaW4NCj4gdmZpby9pb21tdWZkIGlu
+dGVyZmFjZXMsIG1heWJlIHdpdGggc29tZSBzdXBwb3J0IGFkZGVkIHRvIG1hcCBkbWEtYnVmLiBJ
+DQo+IHRoaW5rIHBhdGNoZXMgZm9yIHRoYXQgaGF2ZSBiZWVuIGZsb2F0aW5nIGFyb3VuZCBmb3Ig
+YSB3aGlsZSwgYnV0IEkgbG9zdCBhDQo+IGJpdCB0aGUgc3RhdHVzIG9mIHdoZXJlIGV4YWN0bHkg
+dGhleSBhcmUuDQoNCk15IHRha2UgYXdheSBpcyB0aGF0IHdlIG5lZWQgdG8gaGF2ZSBhIGRvY3Vt
+ZW50ZWQgd2F5IGZvciBzcGVjaWFsIGRyaXZlciBzcGVjaWZpYyBpbnRlcmZhY2VzIGluIERNQS1i
+dWYuDQoNCkluIG90aGVyIHdvcmRzIERNQS1idWYgaGFzIHNvbWUgc3RhbmRhcmRpemVkIHJ1bGVz
+IG9mIGRvaW5nIHRoaW5ncyB3aGljaCBldmVyeSBpbXBsZW1lbnRhdGlvbiBzaG91bGQgZm9sbG93
+LiBUaGUgaW1wbGVtZW50YXRpb25zIG1pZ2h0IG9mIGNvdXJzZSBzdGlsbCBoYXZlIGJ1Z3MgKGUu
+Zy4gYWxsb2NhdGUgbWVtb3J5IGZvciBhIGRtYV9mZW5jZSBvcGVyYXRpb24pLCBidXQgYXQgbGVh
+c3Qgd2UgaGF2ZSBkb2N1bWVudGVkIHdoYXQgc2hvdWxkIGJlIGRvbmUgYW5kIHdoYXQncyBmb3Ji
+aWRkZW4uDQoNCldoYXQgaXMgc3RpbGwgbWlzc2luZyBpbiB0aGUgZG9jdW1lbnRhdGlvbiBpcyB0
+aGUgdXNlIGNhc2Ugd2hlbiB5b3UgaGF2ZSBmb3IgZXhhbXBsZSB2ZmlvIHdoaWNoIHdhbnRzIHRv
+IHRhbGsgdG8gaW9tbXVmZCB0aHJvdWdoIGEgc3BlY2lhbGl6ZWQgaW50ZXJmYWNlLiBUaGlzIGRv
+ZXNuJ3QgbmVjZXNzYXJpbHkgbmVlZHMgdG8gYmUgcGFydCBvZiBETUEtYnVmLCBidXQgd2Ugc2hv
+dWxkIHN0aWxsIGRvY3VtZW50ICJkbyBpdCB0aGlzIHdheSIgYmVjYXVzZSB0aGF0IGhhcyBhbHJl
+YWR5IHdvcmtlZCBpbiB0aGUgbGFzdCB0ZW4gdXNlIGNhc2VzIGFuZCB3ZSBkb24ndCB3YW50IHBl
+b3BsZSB0byByZS1pbnZlbnQgdGhlIHdoZWVsIGluIGEgbmV3IGZ1bmt5IHdheSB3aGljaCB0aGVu
+IGxhdGVyIHR1cm5zIG91dCB0byBub3Qgd29yay4NCg0KUmVnYXJkcywNCkNocmlzdGlhbi4NCg0K
+PiANCj4gQ2hlZXJzLCBTaW1hDQo+IA0KPj4NCj4+IHJlZ2FyZHMsDQo+PiBOaWNvbGFzDQo+Pg0K
+Pj4+DQo+Pj4gQWRkIGEgbmV3IGRtYV9idWZfb3BzIG9wZXJhdGlvbiB0aGF0IHJldHVybnMgdGhl
+IERNQSBhZGRyZXNzLg0KPj4+IEFkZCBhIG5ldyBpb2N0bCB0byB0cmFuc21pdCB0aGlzIERNQSBh
+ZGRyZXNzIHRvIHVzZXJzcGFjZS4NCj4+Pg0KPj4+IFNpZ25lZC1vZmYtYnk6IEJhc3RpZW4gQ3Vy
+dXRjaGV0IDxiYXN0aWVuLmN1cnV0Y2hldEBib290bGluLmNvbT4NCj4+PiAtLS0NCj4+PiDCoGRy
+aXZlcnMvZG1hLWJ1Zi9kbWEtYnVmLmPCoMKgwqAgfCAyMSArKysrKysrKysrKysrKysrKysrKysN
+Cj4+PiDCoGluY2x1ZGUvbGludXgvZG1hLWJ1Zi5owqDCoMKgwqDCoCB8wqAgMSArDQo+Pj4gwqBp
+bmNsdWRlL3VhcGkvbGludXgvZG1hLWJ1Zi5oIHzCoCAxICsNCj4+PiDCoDMgZmlsZXMgY2hhbmdl
+ZCwgMjMgaW5zZXJ0aW9ucygrKQ0KPj4+DQo+Pj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZG1hLWJ1
+Zi9kbWEtYnVmLmMgYi9kcml2ZXJzL2RtYS1idWYvZG1hLWJ1Zi5jDQo+Pj4gaW5kZXgNCj4+PiAz
+OTg0MThiZDk3MzFhZDdhM2ExZjEyZWFlYTZhMTU1ZmE3N2EyMmZlLi5jYmJiNTE4OTgxZTU0ZTUw
+ZjQ3OWMzZDFmY2YNCj4+PiA2ZGE2OTcxZjYzOWMxIDEwMDY0NA0KPj4+IC0tLSBhL2RyaXZlcnMv
+ZG1hLWJ1Zi9kbWEtYnVmLmMNCj4+PiArKysgYi9kcml2ZXJzL2RtYS1idWYvZG1hLWJ1Zi5jDQo+
+Pj4gQEAgLTQ1NCw2ICs0NTQsMjQgQEAgc3RhdGljIGxvbmcgZG1hX2J1Zl9pbXBvcnRfc3luY19m
+aWxlKHN0cnVjdA0KPj4+IGRtYV9idWYgKmRtYWJ1ZiwNCj4+PiDCoH0NCj4+PiDCoCNlbmRpZg0K
+Pj4+IMKgDQo+Pj4gK3N0YXRpYyBpbnQgZG1hX2J1Zl9nZXRfZG1hX2FkZHIoc3RydWN0IGRtYV9i
+dWYgKmRtYWJ1ZiwgdTY0IF9fdXNlcg0KPj4+ICphcmcpDQo+Pj4gK3sNCj4+PiArCXU2NCBhZGRy
+Ow0KPj4+ICsJaW50IHJldDsNCj4+PiArDQo+Pj4gKwlpZiAoIWRtYWJ1Zi0+b3BzLT5nZXRfZG1h
+X2FkZHIpDQo+Pj4gKwkJcmV0dXJuIC1FSU5WQUw7DQo+Pj4gKw0KPj4+ICsJcmV0ID0gZG1hYnVm
+LT5vcHMtPmdldF9kbWFfYWRkcihkbWFidWYsICZhZGRyKTsNCj4+PiArCWlmIChyZXQpDQo+Pj4g
+KwkJcmV0dXJuIHJldDsNCj4+PiArDQo+Pj4gKwlpZiAoY29weV90b191c2VyKGFyZywgJmFkZHIs
+IHNpemVvZih1NjQpKSkNCj4+PiArCQlyZXR1cm4gLUVGQVVMVDsNCj4+PiArDQo+Pj4gKwlyZXR1
+cm4gMDsNCj4+PiArfQ0KPj4+ICsNCj4+PiDCoHN0YXRpYyBsb25nIGRtYV9idWZfaW9jdGwoc3Ry
+dWN0IGZpbGUgKmZpbGUsDQo+Pj4gwqAJCQnCoCB1bnNpZ25lZCBpbnQgY21kLCB1bnNpZ25lZCBs
+b25nIGFyZykNCj4+PiDCoHsNCj4+PiBAQCAtNTA0LDYgKzUyMiw5IEBAIHN0YXRpYyBsb25nIGRt
+YV9idWZfaW9jdGwoc3RydWN0IGZpbGUgKmZpbGUsDQo+Pj4gwqAJCXJldHVybiBkbWFfYnVmX2lt
+cG9ydF9zeW5jX2ZpbGUoZG1hYnVmLCAoY29uc3Qgdm9pZA0KPj4+IF9fdXNlciAqKWFyZyk7DQo+
+Pj4gwqAjZW5kaWYNCj4+PiDCoA0KPj4+ICsJY2FzZSBETUFfQlVGX0lPQ1RMX0dFVF9ETUFfQURE
+UjoNCj4+PiArCQlyZXR1cm4gZG1hX2J1Zl9nZXRfZG1hX2FkZHIoZG1hYnVmLCAodTY0IF9fdXNl
+cg0KPj4+ICopYXJnKTsNCj4+PiArDQo+Pj4gwqAJZGVmYXVsdDoNCj4+PiDCoAkJcmV0dXJuIC1F
+Tk9UVFk7DQo+Pj4gwqAJfQ0KPj4+IGRpZmYgLS1naXQgYS9pbmNsdWRlL2xpbnV4L2RtYS1idWYu
+aCBiL2luY2x1ZGUvbGludXgvZG1hLWJ1Zi5oDQo+Pj4gaW5kZXgNCj4+PiAzNjIxNmQyOGQ4YmRj
+MDFhOWM5YzQ3ZTI3YzM5MjQxM2Y3ZjZjNWZiLi5lZDRiZjE1ZDNjZTgyZTdhODYzMjNmZmY0NTkN
+Cj4+PiA2OTlhOWJjOGJhYTNiIDEwMDY0NA0KPj4+IC0tLSBhL2luY2x1ZGUvbGludXgvZG1hLWJ1
+Zi5oDQo+Pj4gKysrIGIvaW5jbHVkZS9saW51eC9kbWEtYnVmLmgNCj4+PiBAQCAtMjg1LDYgKzI4
+NSw3IEBAIHN0cnVjdCBkbWFfYnVmX29wcyB7DQo+Pj4gwqANCj4+PiDCoAlpbnQgKCp2bWFwKShz
+dHJ1Y3QgZG1hX2J1ZiAqZG1hYnVmLCBzdHJ1Y3QgaW9zeXNfbWFwICptYXApOw0KPj4+IMKgCXZv
+aWQgKCp2dW5tYXApKHN0cnVjdCBkbWFfYnVmICpkbWFidWYsIHN0cnVjdCBpb3N5c19tYXANCj4+
+PiAqbWFwKTsNCj4+PiArCWludCAoKmdldF9kbWFfYWRkcikoc3RydWN0IGRtYV9idWYgKmRtYWJ1
+ZiwgdTY0ICphZGRyKTsNCj4+PiDCoH07DQo+Pj4gwqANCj4+PiDCoC8qKg0KPj4+IGRpZmYgLS1n
+aXQgYS9pbmNsdWRlL3VhcGkvbGludXgvZG1hLWJ1Zi5oIGIvaW5jbHVkZS91YXBpL2xpbnV4L2Rt
+YS0NCj4+PiBidWYuaA0KPj4+IGluZGV4DQo+Pj4gNWE2ZmRhNjZkOWFkZjAxNDM4NjE5ZTdlNjdm
+YTY5ZjBmZWMyZDg4ZC4uZjNhYmE0Njk0MjA0MmRlNmEyZTNhNGNjYTNlDQo+Pj4gYjNmODcxNzVl
+MjljOSAxMDA2NDQNCj4+PiAtLS0gYS9pbmNsdWRlL3VhcGkvbGludXgvZG1hLWJ1Zi5oDQo+Pj4g
+KysrIGIvaW5jbHVkZS91YXBpL2xpbnV4L2RtYS1idWYuaA0KPj4+IEBAIC0xNzgsNSArMTc4LDYg
+QEAgc3RydWN0IGRtYV9idWZfaW1wb3J0X3N5bmNfZmlsZSB7DQo+Pj4gwqAjZGVmaW5lIERNQV9C
+VUZfU0VUX05BTUVfQglfSU9XKERNQV9CVUZfQkFTRSwgMSwgX191NjQpDQo+Pj4gwqAjZGVmaW5l
+IERNQV9CVUZfSU9DVExfRVhQT1JUX1NZTkNfRklMRQlfSU9XUihETUFfQlVGX0JBU0UsIDIsDQo+
+Pj4gc3RydWN0IGRtYV9idWZfZXhwb3J0X3N5bmNfZmlsZSkNCj4+PiDCoCNkZWZpbmUgRE1BX0JV
+Rl9JT0NUTF9JTVBPUlRfU1lOQ19GSUxFCV9JT1coRE1BX0JVRl9CQVNFLCAzLCBzdHJ1Y3QNCj4+
+PiBkbWFfYnVmX2ltcG9ydF9zeW5jX2ZpbGUpDQo+Pj4gKyNkZWZpbmUgRE1BX0JVRl9JT0NUTF9H
+RVRfRE1BX0FERFIJX0lPUihETUFfQlVGX0JBU0UsIDQsIF9fdTY0DQo+Pj4gKikNCj4+PiDCoA0K
+Pj4+IMKgI2VuZGlmDQo+IA0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxp
+c3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0t
+c2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
