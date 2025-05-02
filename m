@@ -2,528 +2,334 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id AAEE1AA65A7
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 May 2025 23:34:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 46142AA6E9C
+	for <lists+linaro-mm-sig@lfdr.de>; Fri,  2 May 2025 12:01:10 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 68B9D459D2
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 May 2025 21:34:12 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.17])
-	by lists.linaro.org (Postfix) with ESMTPS id 2307B3F549
-	for <linaro-mm-sig@lists.linaro.org>; Thu,  1 May 2025 21:33:58 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 13F0145F87
+	for <lists+linaro-mm-sig@lfdr.de>; Fri,  2 May 2025 10:01:09 +0000 (UTC)
+Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
+	by lists.linaro.org (Postfix) with ESMTPS id D9CC13F935
+	for <linaro-mm-sig@lists.linaro.org>; Fri,  2 May 2025 10:00:53 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=B5ly+rZ0;
-	dmarc=pass (policy=none) header.from=intel.com;
-	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 198.175.65.17 as permitted sender) smtp.mailfrom=lkp@intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1746135238; x=1777671238;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:content-transfer-encoding:in-reply-to;
-  bh=MJ41/j8bpvaKo0HV0EhEkS4sZ3w9r/QdKBwub0mVVWk=;
-  b=B5ly+rZ0YTyngXW1M/ysLpmMuGqX3NaDMozyrafNqDQrxb+hyurAfR+m
-   IWRApiCOS0l/pJ/jVnuPl7jTg+Oqb12oyGqGwe8tolka8St/of9B0l6TQ
-   /eNJlxInujdLc9YIiVHZ8hKyMJ5TCZU4/AfiAzTb00+5cXi1tP6NVHLZt
-   rqpTASuxP+QnC6wo8h2jh4O4FbrVJ8NXE/0ZwCqvGsRZxXjbcrzGKDoC2
-   QjgUqTIeX6kiNYp/3S2W4POD8TalADtVg3IkVc1MEJ585h+fTFCM9eQEs
-   NgGE03Km6CBzLf6mfzVdL2SXJF0vbS95X6Wdo+R2UEXSvZAewI9c6Cpi4
-   A==;
-X-CSE-ConnectionGUID: KZ5R1zadRhCSeZ6o3ASKKQ==
-X-CSE-MsgGUID: N/EFO4zpS4Sh97MbkfPGNA==
-X-IronPort-AV: E=McAfee;i="6700,10204,11420"; a="47829717"
-X-IronPort-AV: E=Sophos;i="6.15,254,1739865600";
-   d="scan'208";a="47829717"
-Received: from orviesa008.jf.intel.com ([10.64.159.148])
-  by orvoesa109.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 May 2025 14:33:57 -0700
-X-CSE-ConnectionGUID: F8wQRuLNTAWrT0Ov51Y8Eg==
-X-CSE-MsgGUID: /qhBleJETD2qEdsgvLYhCQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.15,254,1739865600";
-   d="scan'208";a="135462245"
-Received: from lkp-server01.sh.intel.com (HELO 1992f890471c) ([10.239.97.150])
-  by orviesa008.jf.intel.com with ESMTP; 01 May 2025 14:33:52 -0700
-Received: from kbuild by 1992f890471c with local (Exim 4.96)
-	(envelope-from <lkp@intel.com>)
-	id 1uAbXS-0004Oz-1u;
-	Thu, 01 May 2025 21:33:50 +0000
-Date: Fri, 2 May 2025 05:33:14 +0800
-From: kernel test robot <lkp@intel.com>
-To: oushixiong1025@163.com, Sumit Semwal <sumit.semwal@linaro.org>
-Message-ID: <202505020434.7EfUIAjh-lkp@intel.com>
-References: <20250430085658.540746-1-oushixiong1025@163.com>
+	dkim=pass header.d=linaro.org header.s=google header.b=JxUpsTf9;
+	dmarc=pass (policy=none) header.from=linaro.org;
+	spf=pass (lists.linaro.org: domain of jens.wiklander@linaro.org designates 209.85.218.44 as permitted sender) smtp.mailfrom=jens.wiklander@linaro.org
+Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-acacb8743a7so323948666b.1
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 02 May 2025 03:00:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1746180053; x=1746784853; darn=lists.linaro.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=7s0K4WHliGKFdPFhl8MQS72UtHPv10vOZ0g0k2aEl9I=;
+        b=JxUpsTf9CqxRxEgmQCzPq5HEMJ77I+EbaJBx053Nfmt5DNwE0NbfRt3rEu4rpm69oW
+         AeW28LOao35RVX+lAZKFUpeRnWPMROO0Oc+IvSwVw8Wzqa2IMxsc/GnfNuA0A2oYzfOZ
+         htu7V9UtBYsWDTkRUyNHTwq3DY5pXlM8fefTIEo1sm9G8TMk2E5BYs80pDzcbOomkHv5
+         83YGgpejzFGzfEKOX4Af7s3xuggMp8xDBHUJM1QJV6E5NPZHii6ZNhVZQgvOLOShZ9vX
+         Qq2JV+zMbcNmDosqWkAl/6W4wtSQah73Gaj9oGv51oGUZrU4/lk7vBHSZYR6E9ZrZui4
+         JymQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1746180053; x=1746784853;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=7s0K4WHliGKFdPFhl8MQS72UtHPv10vOZ0g0k2aEl9I=;
+        b=tyCGeQvsiURc7flvWtJoloW7J6Q9uhpD7NkvmnrNeG0Df2GC33I/ibj9fs3NjcGeGK
+         HXuFIk3ebwVTX/9Fca1hBTQzG/B9UZWyZ7OAruQuxpsC3lLuCs8MT8Ai+e1T3II3PLjz
+         TcSiELo9VMak5/JdHyA7MRCuip0dZ1Mu+COnzuIz6Vu7XbDgE12j7bOWdYmCFGKvPITj
+         IJG72W6xj2YHoA+b/3rEPEpIS8AKxwZp/35NvmQnrrstmb04/k3LKeJMRaOFQpTYRnNj
+         pRLKMomAefqsh/a8rk5gDQImfjmk6C83VAx6IUqGM3j7X4eRLxh0tMmnVRFFr2hSpFWg
+         y1ig==
+X-Forwarded-Encrypted: i=1; AJvYcCUyyghk9eojTM7tGWXyTpda2R4W5MaT135vtmxsDT70l1h5zB1iZwIKfsm73L/dx3YT2t5ZQ9+6zFOwL88T@lists.linaro.org
+X-Gm-Message-State: AOJu0YylG2D0c0YdMgVFwjvInVI5t0v0oZjTiX/moEK4DBEQcdNHY1OP
+	DRxN+njm9QQKwQQs9J1+QrgKP6Qnq2Q3kXHG0Rrn/9ZNKluzr16j6XuTWKeemjjkEA==
+X-Gm-Gg: ASbGncvfdGiaM6sZZxWgtrpynO2+yAfaIil81gX7M+pvZ5Et4pHNXq2RlsNBvjv2gF3
+	PIDvROeLNJemnP/CRdqs72exiYCM3b7TchOUUi8wRlcig+dfKH0U6Bw/W9gIMt54LgpIOiFw6td
+	x/PzcfXjKCaMp56bvbasvtLvA9Th/QB571nwh0JMUVmuU+Ugsaz+ojn5OlVGIzR3/ZGKKLuHfI6
+	DxCgJ9Ji91KUoA9SKb9nQwqlG6uec37NPzoB7wQQZd4JfrP84kuvhQNRKMZ2k3SvCoBWxExrxIf
+	OotdA7PHR2leBOIPX2/Y9PTlOTAzG0m/gWV4TsVMRBRFnFI8K/zLQCOaSYECBLDstkHWvRHdiXK
+	H9bbjJgRIN+vg5z7TJknVWiZVHvdt
+X-Google-Smtp-Source: AGHT+IFVQ05Wy19uhQgm3WGFHmkjNDkU/CkOZ/JefCJgyEqixW3GP1YNcmydW/OHUj5KILxYfZoE8Q==
+X-Received: by 2002:a17:907:6e87:b0:ace:4ed9:a8c3 with SMTP id a640c23a62f3a-ad17ad876e4mr209631266b.7.1746180052767;
+        Fri, 02 May 2025 03:00:52 -0700 (PDT)
+Received: from rayden.urgonet (h-98-128-140-123.A175.priv.bahnhof.se. [98.128.140.123])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ad1891473a1sm26030566b.4.2025.05.02.03.00.51
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 02 May 2025 03:00:52 -0700 (PDT)
+From: Jens Wiklander <jens.wiklander@linaro.org>
+To: linux-kernel@vger.kernel.org,
+	linux-media@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	linaro-mm-sig@lists.linaro.org,
+	op-tee@lists.trustedfirmware.org,
+	linux-arm-kernel@lists.infradead.org
+Date: Fri,  2 May 2025 11:59:14 +0200
+Message-ID: <20250502100049.1746335-1-jens.wiklander@linaro.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20250430085658.540746-1-oushixiong1025@163.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 2307B3F549
-X-Spamd-Bar: -------
-X-Spamd-Result: default: False [-7.00 / 15.00];
+X-Rspamd-Queue-Id: D9CC13F935
+X-Spamd-Bar: -
+X-Spamd-Result: default: False [-1.00 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
+	SUSPICIOUS_RECIPS(1.50)[];
 	MID_CONTAINS_FROM(1.00)[];
-	RBL_SENDERSCORE_REPUT_9(-1.00)[198.175.65.17:from];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip4:198.175.65.0/26];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
 	MIME_GOOD(-0.10)[text/plain];
 	ARC_NA(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:4983, ipnet:198.175.64.0/23, country:US];
-	RCPT_COUNT_TWELVE(0.00)[16];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_TO(0.00)[163.com,linaro.org];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_COUNT_THREE(0.00)[3];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[lists.linux.dev,amd.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,redhat.com,poorly.run,kylinos.cn];
-	TO_DN_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[23];
 	RCVD_TLS_LAST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[nxp.com,gmail.com,mediatek.com,linaro.org,collabora.com,arm.com,google.com,amd.com,kernel.org,qti.qualcomm.com,ffwll.ch,fooishbar.org];
+	URIBL_BLOCKED(0.00)[linaro.org:mid,linaro.org:dkim,mail-ej1-f44.google.com:helo,mail-ej1-f44.google.com:rdns];
+	DKIM_TRACE(0.00)[linaro.org:+];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:+]
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_EQ_ENVFROM(0.00)[];
+	TO_DN_SOME(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	TAGGED_RCPT(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.218.44:from];
+	FROM_HAS_DN(0.00)[]
 X-Rspamd-Action: no action
-Message-ID-Hash: 3SVDLTL2XWO4LYXQQHQG65FPFET5CWLN
-X-Message-ID-Hash: 3SVDLTL2XWO4LYXQQHQG65FPFET5CWLN
-X-MailFrom: lkp@intel.com
+Message-ID-Hash: 5NZGSL24S5W4Y5F2YRPJYPQHMZGA2XQW
+X-Message-ID-Hash: 5NZGSL24S5W4Y5F2YRPJYPQHMZGA2XQW
+X-MailFrom: jens.wiklander@linaro.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: oe-kbuild-all@lists.linux.dev, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Simona Vetter <simona@ffwll.ch>, Dave Airlie <airlied@redhat.com>, Sean Paul <sean@poorly.run>, Shixiong Ou <oushixiong@kylinos.cn>
+CC: Olivier Masse <olivier.masse@nxp.com>, Thierry Reding <thierry.reding@gmail.com>, Yong Wu <yong.wu@mediatek.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T . J . Mercier" <tjmercier@google.com>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Sumit Garg <sumit.garg@kernel.org>, Matthias Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, azarrabi@qti.qualcomm.com, Simona Vetter <simona.vetter@ffwll.ch>, Daniel Stone <daniel@fooishbar.org>, Rouven Czerwinski <rouven.czerwinski@linaro.org>, Jens Wiklander <jens.wiklander@linaro.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 1/3] dma-buf: add flags to skip map_dma_buf() for some drivers
+Subject: [Linaro-mm-sig] [PATCH v8 00/14] TEE subsystem for protected dma-buf allocations
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3SVDLTL2XWO4LYXQQHQG65FPFET5CWLN/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5NZGSL24S5W4Y5F2YRPJYPQHMZGA2XQW/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
 Hi,
 
-kernel test robot noticed the following build warnings:
+This patch set allocates the protected DMA-bufs from a DMA-heap
+instantiated from the TEE subsystem.
 
-[auto build test WARNING on jic23-iio/togreg]
-[also build test WARNING on char-misc/char-misc-testing char-misc/char-misc=
--next char-misc/char-misc-linus usb/usb-testing usb/usb-next usb/usb-linus =
-xen-tip/linux-next linus/master v6.15-rc4]
-[cannot apply to tegra/for-next drm-xe/drm-xe-next rmk-arm/drm-armada-devel=
- rmk-arm/drm-armada-fixes next-20250430]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
+The TEE subsystem handles the DMA-buf allocations since it is the TEE
+(OP-TEE, AMD-TEE, TS-TEE, or perhaps a future QTEE) which sets up the
+protection for the memory used for the DMA-bufs.
 
-url:    https://github.com/intel-lab-lkp/linux/commits/oushixiong1025-163-c=
-om/drm-prime-Support-importing-DMA-BUF-without-sg_table/20250430-170136
-base:   https://git.kernel.org/pub/scm/linux/kernel/git/jic23/iio.git togreg
-patch link:    https://lore.kernel.org/r/20250430085658.540746-1-oushixiong=
-1025%40163.com
-patch subject: [PATCH 1/3] dma-buf: add flags to skip map_dma_buf() for som=
-e drivers
-config: arc-randconfig-002-20250501 (https://download.01.org/0day-ci/archiv=
-e/20250502/202505020434.7EfUIAjh-lkp@intel.com/config)
-compiler: arc-linux-gcc (GCC) 14.2.0
-reproduce (this is a W=3D1 build): (https://download.01.org/0day-ci/archive=
-/20250502/202505020434.7EfUIAjh-lkp@intel.com/reproduce)
+The DMA-heap uses a protected memory pool provided by the backend TEE
+driver, allowing it to choose how to allocate the protected physical
+memory.
 
-If you fix the issue in a separate patch/commit (i.e. not just a new versio=
-n of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202505020434.7EfUIAjh-lkp@i=
-ntel.com/
+The allocated DMA-bufs must be imported with a new TEE_IOC_SHM_REGISTER_FD
+before they can be passed as arguments when requesting services from the
+secure world.
 
-All warnings (new ones prefixed by >>):
+Three use-cases (Secure Video Playback, Trusted UI, and Secure Video
+Recording) has been identified so far to serve as examples of what can be
+expected. The use-cases has predefined DMA-heap names,
+"protected,secure-video", "protected,trusted-ui", and
+"protected,secure-video-record". The backend driver registers protected
+memory pools for the use-cases it supports.
 
->> drivers/dma-buf/dma-buf.c:908: warning: Function parameter or struct mem=
-ber 'skip_map' not described in 'dma_buf_dynamic_attach'
->> drivers/dma-buf/dma-buf.c:996: warning: Function parameter or struct mem=
-ber 'skip_map' not described in 'dma_buf_attach'
+Each use-case has it's own protected memory pool since different use-cases
+requires isolation from different parts of the system. A protected memory
+pool can be based on a static carveout instantiated while probing the TEE
+backend driver, or dynamically allocated from CMA and made protected as
+needed by the TEE.
+
+This can be tested on a RockPi 4B+ with the following steps:
+repo init -u https://github.com/jenswi-linaro/manifest.git -m rockpi4.xml \
+        -b prototype/sdp-v8
+repo sync -j8
+cd build
+make toolchains -j$(nproc)
+make all -j$(nproc)
+# Copy ../out/rockpi4.img to an SD card and boot the RockPi from that
+# Connect a monitor to the RockPi
+# login and at the prompt:
+gst-launch-1.0 videotestsrc ! \
+        aesenc key=1f9423681beb9a79215820f6bda73d0f \
+                iv=e9aa8e834d8d70b7e0d254ff670dd718 serialize-iv=true ! \
+        aesdec key=1f9423681beb9a79215820f6bda73d0f ! \
+        kmssink
+
+The aesdec module has been hacked to use an OP-TEE TA to decrypt the stream
+into protected DMA-bufs which are consumed by the kmssink.
+
+The primitive QEMU tests from previous patch set can be tested on RockPi
+in the same way with:
+xtest --sdp-basic
+
+The primitive test are tested on QEMU with the following steps:
+repo init -u https://github.com/jenswi-linaro/manifest.git -m qemu_v8.xml \
+        -b prototype/sdp-v8
+repo sync -j8
+cd build
+make toolchains -j$(nproc)
+make SPMC_AT_EL=1 all -j$(nproc)
+make SPMC_AT_EL=1 run-only
+# login and at the prompt:
+xtest --sdp-basic
+
+The SPMC_AT_EL=1 parameter configures the build with FF-A and an SPMC at
+S-EL1 inside OP-TEE. The parameter can be changed into SPMC_AT_EL=n to test
+without FF-A using the original SMC ABI instead. Please remember to do
+%rm -rf ../trusted-firmware-a/build/qemu
+for TF-A to be rebuilt properly using the new configuration.
+
+https://optee.readthedocs.io/en/latest/building/prerequisites.html
+list dependencies needed to build the above.
+
+The tests are pretty basic, mostly checking that a Trusted Application in
+the secure world can access and manipulate the memory. There are also some
+negative tests for out of bounds buffers etc.
+
+Thanks,
+Jens
+
+Changes since V7:
+* Adding "dma-buf: dma-heap: export declared functions",
+  "cma: export cma_alloc() and cma_release()", and
+  "dma-contiguous: export dma_contiguous_default_area" to export the symbols
+  needed to keep the TEE subsystem as a load module.
+* Removing CONFIG_TEE_DMABUF_HEAP and CONFIG_TEE_CMA since they aren't
+  needed any longer.
+* Addressing review comments in "optee: sync secure world ABI headers"
+* Better align protected memory pool initialization between the smc-abi and
+  ffa-abi parts of the optee driver.
+
+Changes since V6:
+* Restricted memory is now known as protected memory since to use the same
+  term as https://docs.vulkan.org/guide/latest/protected.html. Update all
+  patches to consistently use protected memory.
+* In "tee: implement protected DMA-heap" add the hidden config option
+  TEE_DMABUF_HEAP to tell if the DMABUF_HEAPS functions are available
+  for the TEE subsystem
+* Adding "tee: refactor params_from_user()", broken out from the patch
+  "tee: new ioctl to a register tee_shm from a dmabuf file descriptor"
+* For "tee: new ioctl to a register tee_shm from a dmabuf file descriptor":
+  - Update commit message to mention protected memory
+  - Remove and open code tee_shm_get_parent_shm() in param_from_user_memref()
+* In "tee: add tee_shm_alloc_cma_phys_mem" add the hidden config option
+  TEE_CMA to tell if the CMA functions are available for the TEE subsystem
+* For "tee: tee_device_alloc(): copy dma_mask from parent device" and
+  "optee: pass parent device to tee_device_alloc", added
+  Reviewed-by: Sumit Garg <sumit.garg@kernel.org>
+
+Changes since V5:
+* Removing "tee: add restricted memory allocation" and
+  "tee: add TEE_IOC_RSTMEM_FD_INFO"
+* Adding "tee: implement restricted DMA-heap",
+  "tee: new ioctl to a register tee_shm from a dmabuf file descriptor",
+  "tee: add tee_shm_alloc_cma_phys_mem()",
+  "optee: pass parent device to tee_device_alloc()", and
+  "tee: tee_device_alloc(): copy dma_mask from parent device"
+* The two TEE driver OPs "rstmem_alloc()" and "rstmem_free()" are replaced
+  with a struct tee_rstmem_pool abstraction.
+* Replaced the the TEE_IOC_RSTMEM_ALLOC user space API with the DMA-heap API
+
+Changes since V4:
+* Adding the patch "tee: add TEE_IOC_RSTMEM_FD_INFO" needed by the
+  GStreamer demo
+* Removing the dummy CPU access and mmap functions from the dma_buf_ops
+* Fixing a compile error in "optee: FF-A: dynamic restricted memory allocation"
+  reported by kernel test robot <lkp@intel.com>
+
+Changes since V3:
+* Make the use_case and flags field in struct tee_shm u32's instead of
+  u16's
+* Add more description for TEE_IOC_RSTMEM_ALLOC in the header file
+* Import namespace DMA_BUF in module tee, reported by lkp@intel.com
+* Added a note in the commit message for "optee: account for direction
+  while converting parameters" why it's needed
+* Factor out dynamic restricted memory allocation from
+  "optee: support restricted memory allocation" into two new commits
+  "optee: FF-A: dynamic restricted memory allocation" and
+  "optee: smc abi: dynamic restricted memory allocation"
+* Guard CMA usage with #ifdef CONFIG_CMA, effectively disabling dynamic
+  restricted memory allocate if CMA isn't configured
+
+Changes since the V2 RFC:
+* Based on v6.12
+* Replaced the flags for SVP and Trusted UID memory with a u32 field with
+  unique id for each use case
+* Added dynamic allocation of restricted memory pools
+* Added OP-TEE ABI both with and without FF-A for dynamic restricted memory
+* Added support for FF-A with FFA_LEND
+
+Changes since the V1 RFC:
+* Based on v6.11
+* Complete rewrite, replacing the restricted heap with TEE_IOC_RSTMEM_ALLOC
+
+Changes since Olivier's post [2]:
+* Based on Yong Wu's post [1] where much of dma-buf handling is done in
+  the generic restricted heap
+* Simplifications and cleanup
+* New commit message for "dma-buf: heaps: add Linaro restricted dmabuf heap
+  support"
+* Replaced the word "secure" with "restricted" where applicable
 
 
-vim +908 drivers/dma-buf/dma-buf.c
 
-84335675f2223c drivers/dma-buf/dma-buf.c Simona Vetter    2021-01-15   817 =
-=20
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   818 =
- /**
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   819 =
-  * DOC: locking convention
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   820 =
-  *
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   821 =
-  * In order to avoid deadlock situations between dma-buf exports and impor=
-ters,
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   822 =
-  * all dma-buf API users must follow the common dma-buf locking convention.
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   823 =
-  *
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   824 =
-  * Convention for importers
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   825 =
-  *
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   826 =
-  * 1. Importers must hold the dma-buf reservation lock when calling these
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   827 =
-  *    functions:
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   828 =
-  *
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   829 =
-  *     - dma_buf_pin()
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   830 =
-  *     - dma_buf_unpin()
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   831 =
-  *     - dma_buf_map_attachment()
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   832 =
-  *     - dma_buf_unmap_attachment()
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   833 =
-  *     - dma_buf_vmap()
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   834 =
-  *     - dma_buf_vunmap()
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   835 =
-  *
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   836 =
-  * 2. Importers must not hold the dma-buf reservation lock when calling th=
-ese
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   837 =
-  *    functions:
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   838 =
-  *
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   839 =
-  *     - dma_buf_attach()
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   840 =
-  *     - dma_buf_dynamic_attach()
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   841 =
-  *     - dma_buf_detach()
-e3ecbd21776f1f drivers/dma-buf/dma-buf.c Ma=EDra Canal      2023-02-23   84=
-2   *     - dma_buf_export()
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   843 =
-  *     - dma_buf_fd()
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   844 =
-  *     - dma_buf_get()
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   845 =
-  *     - dma_buf_put()
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   846 =
-  *     - dma_buf_mmap()
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   847 =
-  *     - dma_buf_begin_cpu_access()
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   848 =
-  *     - dma_buf_end_cpu_access()
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   849 =
-  *     - dma_buf_map_attachment_unlocked()
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   850 =
-  *     - dma_buf_unmap_attachment_unlocked()
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   851 =
-  *     - dma_buf_vmap_unlocked()
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   852 =
-  *     - dma_buf_vunmap_unlocked()
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   853 =
-  *
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   854 =
-  * Convention for exporters
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   855 =
-  *
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   856 =
-  * 1. These &dma_buf_ops callbacks are invoked with unlocked dma-buf
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   857 =
-  *    reservation and exporter can take the lock:
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   858 =
-  *
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   859 =
-  *     - &dma_buf_ops.attach()
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   860 =
-  *     - &dma_buf_ops.detach()
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   861 =
-  *     - &dma_buf_ops.release()
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   862 =
-  *     - &dma_buf_ops.begin_cpu_access()
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   863 =
-  *     - &dma_buf_ops.end_cpu_access()
-8021fa16b7ec0a drivers/dma-buf/dma-buf.c Dmitry Osipenko  2023-05-30   864 =
-  *     - &dma_buf_ops.mmap()
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   865 =
-  *
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   866 =
-  * 2. These &dma_buf_ops callbacks are invoked with locked dma-buf
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   867 =
-  *    reservation and exporter can't take the lock:
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   868 =
-  *
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   869 =
-  *     - &dma_buf_ops.pin()
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   870 =
-  *     - &dma_buf_ops.unpin()
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   871 =
-  *     - &dma_buf_ops.map_dma_buf()
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   872 =
-  *     - &dma_buf_ops.unmap_dma_buf()
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   873 =
-  *     - &dma_buf_ops.vmap()
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   874 =
-  *     - &dma_buf_ops.vunmap()
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   875 =
-  *
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   876 =
-  * 3. Exporters must hold the dma-buf reservation lock when calling these
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   877 =
-  *    functions:
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   878 =
-  *
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   879 =
-  *     - dma_buf_move_notify()
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   880 =
-  */
-ae2e7f28a170c0 drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   881 =
-=20
-d15bd7ee445d07 drivers/base/dma-buf.c    Sumit Semwal     2011-12-26   882 =
- /**
-85804b70cca68d drivers/dma-buf/dma-buf.c Simona Vetter    2020-12-11   883 =
-  * dma_buf_dynamic_attach - Add the device to dma_buf's attachments list
-d15bd7ee445d07 drivers/base/dma-buf.c    Sumit Semwal     2011-12-26   884 =
-  * @dmabuf:		[in]	buffer to attach device to.
-d15bd7ee445d07 drivers/base/dma-buf.c    Sumit Semwal     2011-12-26   885 =
-  * @dev:		[in]	device to be attached.
-6f49c2515e2258 drivers/dma-buf/dma-buf.c Randy Dunlap     2020-04-07   886 =
-  * @importer_ops:	[in]	importer operations for the attachment
-6f49c2515e2258 drivers/dma-buf/dma-buf.c Randy Dunlap     2020-04-07   887 =
-  * @importer_priv:	[in]	importer private pointer for the attachment
-d15bd7ee445d07 drivers/base/dma-buf.c    Sumit Semwal     2011-12-26   888 =
-  *
-2904a8c1311f02 drivers/dma-buf/dma-buf.c Simona Vetter    2016-12-09   889 =
-  * Returns struct dma_buf_attachment pointer for this attachment. Attachme=
-nts
-2904a8c1311f02 drivers/dma-buf/dma-buf.c Simona Vetter    2016-12-09   890 =
-  * must be cleaned up by calling dma_buf_detach().
-2904a8c1311f02 drivers/dma-buf/dma-buf.c Simona Vetter    2016-12-09   891 =
-  *
-85804b70cca68d drivers/dma-buf/dma-buf.c Simona Vetter    2020-12-11   892 =
-  * Optionally this calls &dma_buf_ops.attach to allow device-specific atta=
-ch
-85804b70cca68d drivers/dma-buf/dma-buf.c Simona Vetter    2020-12-11   893 =
-  * functionality.
-85804b70cca68d drivers/dma-buf/dma-buf.c Simona Vetter    2020-12-11   894 =
-  *
-2904a8c1311f02 drivers/dma-buf/dma-buf.c Simona Vetter    2016-12-09   895 =
-  * Returns:
-2904a8c1311f02 drivers/dma-buf/dma-buf.c Simona Vetter    2016-12-09   896 =
-  *
-2904a8c1311f02 drivers/dma-buf/dma-buf.c Simona Vetter    2016-12-09   897 =
-  * A pointer to newly created &dma_buf_attachment on success, or a negative
-2904a8c1311f02 drivers/dma-buf/dma-buf.c Simona Vetter    2016-12-09   898 =
-  * error code wrapped into a pointer on failure.
-2904a8c1311f02 drivers/dma-buf/dma-buf.c Simona Vetter    2016-12-09   899 =
-  *
-2904a8c1311f02 drivers/dma-buf/dma-buf.c Simona Vetter    2016-12-09   900 =
-  * Note that this can fail if the backing storage of @dmabuf is in a place=
- not
-2904a8c1311f02 drivers/dma-buf/dma-buf.c Simona Vetter    2016-12-09   901 =
-  * accessible to @dev, and cannot be moved to a more suitable place. This =
-is
-2904a8c1311f02 drivers/dma-buf/dma-buf.c Simona Vetter    2016-12-09   902 =
-  * indicated with the error code -EBUSY.
-d15bd7ee445d07 drivers/base/dma-buf.c    Sumit Semwal     2011-12-26   903 =
-  */
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   90=
-4  struct dma_buf_attachment *
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   90=
-5  dma_buf_dynamic_attach(struct dma_buf *dmabuf, struct device *dev,
-bb42df4662a447 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   90=
-6  		       const struct dma_buf_attach_ops *importer_ops,
-8935ae05eee351 drivers/dma-buf/dma-buf.c Shixiong Ou      2025-04-30   907 =
- 		       void *importer_priv, bool skip_map)
-d15bd7ee445d07 drivers/base/dma-buf.c    Sumit Semwal     2011-12-26  @908 =
- {
-d15bd7ee445d07 drivers/base/dma-buf.c    Sumit Semwal     2011-12-26   909 =
- 	struct dma_buf_attachment *attach;
-d15bd7ee445d07 drivers/base/dma-buf.c    Sumit Semwal     2011-12-26   910 =
- 	int ret;
-d15bd7ee445d07 drivers/base/dma-buf.c    Sumit Semwal     2011-12-26   911 =
-=20
-d1aa06a1eaf5f7 drivers/base/dma-buf.c    Laurent Pinchart 2012-01-26   912 =
- 	if (WARN_ON(!dmabuf || !dev))
-d15bd7ee445d07 drivers/base/dma-buf.c    Sumit Semwal     2011-12-26   913 =
- 		return ERR_PTR(-EINVAL);
-d15bd7ee445d07 drivers/base/dma-buf.c    Sumit Semwal     2011-12-26   914 =
-=20
-4981cdb063e3e9 drivers/dma-buf/dma-buf.c Christian K=F6nig  2020-02-19   91=
-5  	if (WARN_ON(importer_ops && !importer_ops->move_notify))
-4981cdb063e3e9 drivers/dma-buf/dma-buf.c Christian K=F6nig  2020-02-19   91=
-6  		return ERR_PTR(-EINVAL);
-4981cdb063e3e9 drivers/dma-buf/dma-buf.c Christian K=F6nig  2020-02-19   91=
-7 =20
-db7942b6292306 drivers/dma-buf/dma-buf.c Markus Elfring   2017-05-08   918 =
- 	attach =3D kzalloc(sizeof(*attach), GFP_KERNEL);
-34d84ec4881d13 drivers/dma-buf/dma-buf.c Markus Elfring   2017-05-08   919 =
- 	if (!attach)
-a9fbc3b73127ef drivers/base/dma-buf.c    Laurent Pinchart 2012-01-26   920 =
- 		return ERR_PTR(-ENOMEM);
-d15bd7ee445d07 drivers/base/dma-buf.c    Sumit Semwal     2011-12-26   921 =
-=20
-d15bd7ee445d07 drivers/base/dma-buf.c    Sumit Semwal     2011-12-26   922 =
- 	attach->dev =3D dev;
-d15bd7ee445d07 drivers/base/dma-buf.c    Sumit Semwal     2011-12-26   923 =
- 	attach->dmabuf =3D dmabuf;
-09606b5446c25b drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-03-22   92=
-4  	if (importer_ops)
-09606b5446c25b drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-03-22   92=
-5  		attach->peer2peer =3D importer_ops->allow_peer2peer;
-bb42df4662a447 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   92=
-6  	attach->importer_ops =3D importer_ops;
-bb42df4662a447 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   92=
-7  	attach->importer_priv =3D importer_priv;
-2ed9201bdd9a8e drivers/base/dma-buf.c    Laurent Pinchart 2012-01-26   928 =
-=20
-d15bd7ee445d07 drivers/base/dma-buf.c    Sumit Semwal     2011-12-26   929 =
- 	if (dmabuf->ops->attach) {
-a19741e5e5a9f1 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-05-28   93=
-0  		ret =3D dmabuf->ops->attach(dmabuf, attach);
-d15bd7ee445d07 drivers/base/dma-buf.c    Sumit Semwal     2011-12-26   931 =
- 		if (ret)
-d15bd7ee445d07 drivers/base/dma-buf.c    Sumit Semwal     2011-12-26   932 =
- 			goto err_attach;
-d15bd7ee445d07 drivers/base/dma-buf.c    Sumit Semwal     2011-12-26   933 =
- 	}
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   93=
-4  	dma_resv_lock(dmabuf->resv, NULL);
-d15bd7ee445d07 drivers/base/dma-buf.c    Sumit Semwal     2011-12-26   935 =
- 	list_add(&attach->node, &dmabuf->attachments);
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   93=
-6  	dma_resv_unlock(dmabuf->resv);
-d15bd7ee445d07 drivers/base/dma-buf.c    Sumit Semwal     2011-12-26   937 =
-=20
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   93=
-8  	/* When either the importer or the exporter can't handle dynamic
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   93=
-9  	 * mappings we cache the mapping here to avoid issues with the
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   94=
-0  	 * reservation object lock.
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   94=
-1  	 */
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   94=
-2  	if (dma_buf_attachment_is_dynamic(attach) !=3D
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   94=
-3  	    dma_buf_is_dynamic(dmabuf)) {
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   94=
-4  		dma_resv_lock(attach->dmabuf->resv, NULL);
-809d9c72c2f83e drivers/dma-buf/dma-buf.c Dmitry Osipenko  2022-10-17   945 =
- 		if (dma_buf_is_dynamic(attach->dmabuf)) {
-7e008b02557cce drivers/dma-buf/dma-buf.c Christian K=F6nig  2021-05-17   94=
-6  			ret =3D dmabuf->ops->pin(attach);
-bb42df4662a447 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   94=
-7  			if (ret)
-bb42df4662a447 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   94=
-8  				goto err_unlock;
-bb42df4662a447 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   94=
-9  		}
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   95=
-0 =20
-8935ae05eee351 drivers/dma-buf/dma-buf.c Shixiong Ou      2025-04-30   951 =
- 		if (!skip_map) {
-8935ae05eee351 drivers/dma-buf/dma-buf.c Shixiong Ou      2025-04-30   952 =
- 			struct sg_table *sgt;
-8935ae05eee351 drivers/dma-buf/dma-buf.c Shixiong Ou      2025-04-30   953 =
-=20
-84335675f2223c drivers/dma-buf/dma-buf.c Simona Vetter    2021-01-15   954 =
- 			sgt =3D __map_dma_buf(attach, DMA_BIDIRECTIONAL);
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   95=
-5  			if (!sgt)
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   95=
-6  				sgt =3D ERR_PTR(-ENOMEM);
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   95=
-7  			if (IS_ERR(sgt)) {
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   95=
-8  				ret =3D PTR_ERR(sgt);
-bb42df4662a447 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   95=
-9  				goto err_unpin;
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   96=
-0  			}
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   96=
-1  			attach->sgt =3D sgt;
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   96=
-2  			attach->dir =3D DMA_BIDIRECTIONAL;
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   96=
-3  		}
-8935ae05eee351 drivers/dma-buf/dma-buf.c Shixiong Ou      2025-04-30   964 =
- 		dma_resv_unlock(attach->dmabuf->resv);
-8935ae05eee351 drivers/dma-buf/dma-buf.c Shixiong Ou      2025-04-30   965 =
- 	}
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   96=
-6 =20
-d15bd7ee445d07 drivers/base/dma-buf.c    Sumit Semwal     2011-12-26   967 =
- 	return attach;
-d15bd7ee445d07 drivers/base/dma-buf.c    Sumit Semwal     2011-12-26   968 =
-=20
-d15bd7ee445d07 drivers/base/dma-buf.c    Sumit Semwal     2011-12-26   969 =
- err_attach:
-d15bd7ee445d07 drivers/base/dma-buf.c    Sumit Semwal     2011-12-26   970 =
- 	kfree(attach);
-d15bd7ee445d07 drivers/base/dma-buf.c    Sumit Semwal     2011-12-26   971 =
- 	return ERR_PTR(ret);
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   97=
-2 =20
-bb42df4662a447 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   97=
-3  err_unpin:
-bb42df4662a447 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   97=
-4  	if (dma_buf_is_dynamic(attach->dmabuf))
-7e008b02557cce drivers/dma-buf/dma-buf.c Christian K=F6nig  2021-05-17   97=
-5  		dmabuf->ops->unpin(attach);
-bb42df4662a447 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   97=
-6 =20
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   97=
-7  err_unlock:
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   97=
-8  	dma_resv_unlock(attach->dmabuf->resv);
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   97=
-9 =20
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   98=
-0  	dma_buf_detach(dmabuf, attach);
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   98=
-1  	return ERR_PTR(ret);
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   98=
-2  }
-cdd30ebb1b9f36 drivers/dma-buf/dma-buf.c Peter Zijlstra   2024-12-02   983 =
- EXPORT_SYMBOL_NS_GPL(dma_buf_dynamic_attach, "DMA_BUF");
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   98=
-4 =20
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   98=
-5  /**
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   98=
-6   * dma_buf_attach - Wrapper for dma_buf_dynamic_attach
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   98=
-7   * @dmabuf:	[in]	buffer to attach device to.
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   98=
-8   * @dev:	[in]	device to be attached.
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   98=
-9   *
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   99=
-0   * Wrapper to call dma_buf_dynamic_attach() for drivers which still use =
-a static
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   99=
-1   * mapping.
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   99=
-2   */
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03   99=
-3  struct dma_buf_attachment *dma_buf_attach(struct dma_buf *dmabuf,
-8935ae05eee351 drivers/dma-buf/dma-buf.c Shixiong Ou      2025-04-30   994 =
- 					  struct device *dev,
-8935ae05eee351 drivers/dma-buf/dma-buf.c Shixiong Ou      2025-04-30   995 =
- 					  bool skip_map)
-15fd552d186cb0 drivers/dma-buf/dma-buf.c Christian K=F6nig  2018-07-03  @99=
-6  {
-8935ae05eee351 drivers/dma-buf/dma-buf.c Shixiong Ou      2025-04-30   997 =
- 	return dma_buf_dynamic_attach(dmabuf, dev, NULL, NULL, skip_map);
-d15bd7ee445d07 drivers/base/dma-buf.c    Sumit Semwal     2011-12-26   998 =
- }
-cdd30ebb1b9f36 drivers/dma-buf/dma-buf.c Peter Zijlstra   2024-12-02   999 =
- EXPORT_SYMBOL_NS_GPL(dma_buf_attach, "DMA_BUF");
-d15bd7ee445d07 drivers/base/dma-buf.c    Sumit Semwal     2011-12-26  1000 =
-=20
+Etienne Carriere (1):
+  tee: new ioctl to a register tee_shm from a dmabuf file descriptor
 
---=20
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+Jens Wiklander (13):
+  tee: tee_device_alloc(): copy dma_mask from parent device
+  optee: pass parent device to tee_device_alloc()
+  optee: account for direction while converting parameters
+  optee: sync secure world ABI headers
+  dma-buf: dma-heap: export declared functions
+  tee: implement protected DMA-heap
+  tee: refactor params_from_user()
+  cma: export cma_alloc() and cma_release()
+  dma-contiguous: export dma_contiguous_default_area
+  tee: add tee_shm_alloc_cma_phys_mem()
+  optee: support protected memory allocation
+  optee: FF-A: dynamic protected memory allocation
+  optee: smc abi: dynamic protected memory allocation
+
+ drivers/dma-buf/dma-heap.c        |   3 +
+ drivers/tee/Makefile              |   1 +
+ drivers/tee/optee/Makefile        |   1 +
+ drivers/tee/optee/call.c          |  10 +-
+ drivers/tee/optee/core.c          |   1 +
+ drivers/tee/optee/ffa_abi.c       | 198 ++++++++++++-
+ drivers/tee/optee/optee_ffa.h     |  27 +-
+ drivers/tee/optee/optee_msg.h     |  83 +++++-
+ drivers/tee/optee/optee_private.h |  55 +++-
+ drivers/tee/optee/optee_smc.h     |  69 ++++-
+ drivers/tee/optee/protmem.c       | 330 +++++++++++++++++++++
+ drivers/tee/optee/rpc.c           |  31 +-
+ drivers/tee/optee/smc_abi.c       | 191 ++++++++++--
+ drivers/tee/tee_core.c            | 157 +++++++---
+ drivers/tee/tee_heap.c            | 470 ++++++++++++++++++++++++++++++
+ drivers/tee/tee_private.h         |  16 +
+ drivers/tee/tee_shm.c             | 164 ++++++++++-
+ include/linux/tee_core.h          |  70 +++++
+ include/linux/tee_drv.h           |  10 +
+ include/uapi/linux/tee.h          |  31 ++
+ kernel/dma/contiguous.c           |   1 +
+ mm/cma.c                          |   2 +
+ 22 files changed, 1789 insertions(+), 132 deletions(-)
+ create mode 100644 drivers/tee/optee/protmem.c
+ create mode 100644 drivers/tee/tee_heap.c
+
+
+base-commit: b4432656b36e5cc1d50a1f2dc15357543add530e
+-- 
+2.43.0
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
