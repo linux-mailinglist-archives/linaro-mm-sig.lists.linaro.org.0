@@ -2,60 +2,60 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 955D5AA6EBD
-	for <lists+linaro-mm-sig@lfdr.de>; Fri,  2 May 2025 12:03:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 74E5BAA6EC0
+	for <lists+linaro-mm-sig@lfdr.de>; Fri,  2 May 2025 12:03:37 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B0B88454DD
-	for <lists+linaro-mm-sig@lfdr.de>; Fri,  2 May 2025 10:03:19 +0000 (UTC)
-Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
-	by lists.linaro.org (Postfix) with ESMTPS id 8443E45588
-	for <linaro-mm-sig@lists.linaro.org>; Fri,  2 May 2025 10:01:05 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 8A62241111
+	for <lists+linaro-mm-sig@lfdr.de>; Fri,  2 May 2025 10:03:36 +0000 (UTC)
+Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com [209.85.208.53])
+	by lists.linaro.org (Postfix) with ESMTPS id 5632745505
+	for <linaro-mm-sig@lists.linaro.org>; Fri,  2 May 2025 10:01:07 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=linaro.org header.s=google header.b=u1JcVUBf;
+	dkim=pass header.d=linaro.org header.s=google header.b=zsJJljef;
 	dmarc=pass (policy=none) header.from=linaro.org;
-	spf=pass (lists.linaro.org: domain of jens.wiklander@linaro.org designates 209.85.218.47 as permitted sender) smtp.mailfrom=jens.wiklander@linaro.org
-Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-acbb48bad09so323398166b.0
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 02 May 2025 03:01:05 -0700 (PDT)
+	spf=pass (lists.linaro.org: domain of jens.wiklander@linaro.org designates 209.85.208.53 as permitted sender) smtp.mailfrom=jens.wiklander@linaro.org
+Received: by mail-ed1-f53.google.com with SMTP id 4fb4d7f45d1cf-5e5e22e6ed2so2773329a12.3
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 02 May 2025 03:01:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1746180064; x=1746784864; darn=lists.linaro.org;
+        d=linaro.org; s=google; t=1746180066; x=1746784866; darn=lists.linaro.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=f5jhiqA1zG29Lgsbk1e3tgzIZj3BB1weGWEg1Dsr52w=;
-        b=u1JcVUBfhc6OLPHt2T4KlVDzMVLFnWPTwMXQVDj3PqP/kJ4PnkhWRNY47KZSiJYoGX
-         7L7QeXzDjGuZEjI//Mr3F6Dc7dCeYVjvpsBqNh8tc4kkzrQwsdOADBQNJP6l0LBiwIyP
-         BCyxD84KuoP6sR2uSzZEhsfzpr4YcZX+CIpbUJ8I5uUANFmWfe9KmmBz61/tfFazOEkG
-         LJ1IZy+NeZda+AQQn4lbTc7clljbGD7DojycQxVBy8yC7AdTSn894sChYn2IHR7Qj4L2
-         uzQS7ilSBYkVh7p02w5r+qvz9rjcXlP87HcFReLvk8e+XGKyJ3CiQm9AYYdSh6pquml/
-         ZkCg==
+        bh=fs7nqD12lkBPC3o5IKJmDFRrEPWNWVuJ0deEV/XnG9g=;
+        b=zsJJljefLjP9qFJWQL3u3SIuB7n9YE0UWCpb1rGG02fe1kLY34sVV6YYwCoy3m6U8S
+         2INZoGHkGO4IyPMUT7Vi8SpQNtT7m0dKQh3h3KbAK/DOvSQLL7KyAiyCAnhXvJMsnYKd
+         +HdUrKZB20K1VJMz3Fo48lZBg1tDIOhyag4+0R8PtDoy/OVQwO5zI1ZX6VueSeqT9gjq
+         VjeUdUwDvsqye1/Qo5eu0+eQKuHkFkTx0jaHIm4G39stGLzgDkBW40q96x5d6KkgmV2U
+         t39Lbdw735sVO1KFLlORAedMImI+UKdSoGdybk/hMR1J5qzWc2pCPtxb6413lRWUDkL7
+         uJAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1746180064; x=1746784864;
+        d=1e100.net; s=20230601; t=1746180066; x=1746784866;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=f5jhiqA1zG29Lgsbk1e3tgzIZj3BB1weGWEg1Dsr52w=;
-        b=ewz0dU+CAT3yYvKEwaJGBY4YUV0JJYOx4JpmnoHks0Q4ursEm2gBIzKeU+HhjOuwXQ
-         S6qYiEgbxS6Y7KugaA7wW9/TlpuyooVYfSF/s3k+qaj/sb7faU1hYnS4Z9A9VZKOssfS
-         TIx0k1MlWRxcFVWrXJSSH6loSH98ij0y/q6e9lCvWzd1UI4n8Qmixf+TuyWIAtoAI7DF
-         Q6dwrlE6xflY40xbrwXcgUnsjJ8vPHdlMzf9104idJDFclmT/ukFnGrPpnudem4Ea9S3
-         kP9PueWl/Xi+eWP7E5SUpJ7uzLqNkKS2//tsJfBXuBAbr/AMUa3JfBT8beAIf4epAno9
-         MPBQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUnwBQXe6jqYVk1E3URMDN2zsfQADsjDErSsBL3AbyxzrPmTt9tCkNusIm1p4hwuSUm/5HA1l9iEgbVIMe8@lists.linaro.org
-X-Gm-Message-State: AOJu0YzH6RGYj5p0+qkEAn57O7bSy6QZKKooRp2VxkHEsp497NW6KHn7
-	CkSJxv6Ky7BpB/GJtPZbZeEGyvPIzonOgZl4GCxq0bPmkMhITaNmowlEMgZuo7qMJw==
-X-Gm-Gg: ASbGncu0DHBdXupz37y1NgTEv/LpZuNc75682iBkHjrSqc226dKW8uukxpAzjoS6eWs
-	0fzzM4SVzcHEe9mgK1U2TXphiJNACT394jlKtF/c1Ubylh668EFUX8Ndg8V8RYOybchUV7y30G+
-	adDlh0+frRrcNEv1spZea/YetK+ii2f+9XPdY0fb2uBWRb8jHpzX4sOJ4JCmJQIFk2tuVdoS+cT
-	IZYwTP/TLz+4jMc05Zu4EtLVEc9vOER8SXO4KtsLZwiRye0tWGBaqyl0DwuEIG+VhtXdM8Zvc7A
-	t0OFxTqybq2s2vO2NRb23TU0Ddd4B8/nbi90yeMvA7uLJBRp1QrkFPqj2SMZ6rsEXMwZDSAXCBx
-	jlHSVom5AdH/4oV4dXQ==
-X-Google-Smtp-Source: AGHT+IH4tfnvhjJC6foaVXRAQB4ztRnFhg1yI0XSDv0B7be9RXR5Lh1kGm9yySiWtepeWwHfj9zmLA==
-X-Received: by 2002:a17:907:7da9:b0:ac1:dfab:d38e with SMTP id a640c23a62f3a-ad17ad44563mr219961666b.15.1746180064318;
-        Fri, 02 May 2025 03:01:04 -0700 (PDT)
+        bh=fs7nqD12lkBPC3o5IKJmDFRrEPWNWVuJ0deEV/XnG9g=;
+        b=H8mdYTuu7kmSUfWIpzc1B8WQ66ZBMlOyWXDc4llxLC6GA6GeM8k39YHHfVqqwWyurM
+         MwWj5uCB0oKeS4KS4+2UNLsoTUnphM0wPVO8CLbvM9Kc/hP45wFe1Ypd1bKD2aKvK+gr
+         IClvZOVYHEdCaRMUnazXaAbmiMN3xsL/GFbXc7FktHwREJIATJ0fZr9IcZQkmfKox026
+         zfQ53zD4nv+ebkuvMIZGrEK+a6mNVHqiPFdrivorfSH0Hvb1Y5S15+fjXEwU0u5N5+Is
+         WOhvlAo88VmKN7qrVsRzSCQeMkyiS0FfQHuWwP5SpVMKvJno3JxAnQUslffozuqsDX2e
+         ENIw==
+X-Forwarded-Encrypted: i=1; AJvYcCV8AThaexX91Z0jHE5z1zOSG6M+32zDKJIMR5uzNH7ho/6vTFHjsTgYWeR4tAxYGqb921OFY/qHmJyhqy8h@lists.linaro.org
+X-Gm-Message-State: AOJu0Yy0yKSkOJHEYgxxu+7rLQXGbNlzn2V3EIypvWHW0hy0vWOGvLzT
+	aVKnI9PB+goW7Wu+hIrf4L8nFWLD9vB8hnaI4g0jYO1R+I0IwxkHN3e4Y1UHnUOhrg==
+X-Gm-Gg: ASbGncvi+slz2TzT5uvLqx5UIYRC8ns5dbOFu2FnsPltZ+9/JIuRm/k+V+EV+YFgfyV
+	dHmlWYGdjxbB4eOT9hyZfKgeSBrb2VetiCn0tFD0hA6yRTgBRqjbSkDGoZE886dOExKHzs6E6R/
+	W9VX5k3kupr0YJO41gKjzNxDjor0Uuw3NZujkR4JrXJfA9c1xPzXfyWY+zKLk+SsprvgMZay/CN
+	GcEcYMts8Dwr0STkuBygr7bp5yup7tj9C8TE+2WBmeF+O9BbH1yst7mnhhUmiHg58/lpFczOzLC
+	ZENAcfzwON2nLKNVl/nC03ISvKS6Qpbjb8ph5lYrOmmaXmGneOWcVEyqnI/eSgO2SG84KL82t77
+	errwpmj9KUs2S11qeQw==
+X-Google-Smtp-Source: AGHT+IFFcCMXXLABaW9tvRZ1qpMWwe7p/TbtI+cL2YnquR0Nl0siV3BBf3ahUJ21DjrVNKWPwxmwtg==
+X-Received: by 2002:a17:907:3f0f:b0:ace:9d35:6987 with SMTP id a640c23a62f3a-ad17ad24ac3mr199106166b.3.1746180066113;
+        Fri, 02 May 2025 03:01:06 -0700 (PDT)
 Received: from rayden.urgonet (h-98-128-140-123.A175.priv.bahnhof.se. [98.128.140.123])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ad1891473a1sm26030566b.4.2025.05.02.03.01.02
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ad1891473a1sm26030566b.4.2025.05.02.03.01.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 02 May 2025 03:01:03 -0700 (PDT)
+        Fri, 02 May 2025 03:01:05 -0700 (PDT)
 From: Jens Wiklander <jens.wiklander@linaro.org>
 To: linux-kernel@vger.kernel.org,
 	linux-media@vger.kernel.org,
@@ -63,18 +63,18 @@ To: linux-kernel@vger.kernel.org,
 	linaro-mm-sig@lists.linaro.org,
 	op-tee@lists.trustedfirmware.org,
 	linux-arm-kernel@lists.infradead.org
-Date: Fri,  2 May 2025 11:59:20 +0200
-Message-ID: <20250502100049.1746335-7-jens.wiklander@linaro.org>
+Date: Fri,  2 May 2025 11:59:21 +0200
+Message-ID: <20250502100049.1746335-8-jens.wiklander@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250502100049.1746335-1-jens.wiklander@linaro.org>
 References: <20250502100049.1746335-1-jens.wiklander@linaro.org>
 MIME-Version: 1.0
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 8443E45588
-X-Spamd-Bar: -----
+X-Rspamd-Queue-Id: 5632745505
+X-Spamd-Bar: ----
 X-Spamd-Result: default: False [-5.00 / 15.00];
 	REPLY(-4.00)[];
-	BAYES_HAM(-3.00)[100.00%];
+	BAYES_HAM(-3.00)[99.99%];
 	SUSPICIOUS_RECIPS(1.50)[];
 	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
@@ -82,7 +82,7 @@ X-Spamd-Result: default: False [-5.00 / 15.00];
 	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
 	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
 	MIME_GOOD(-0.10)[text/plain];
-	URIBL_BLOCKED(0.00)[linaro.org:dkim,linaro.org:mid,linaro.org:email,mail-ej1-f47.google.com:helo,mail-ej1-f47.google.com:rdns];
+	URIBL_BLOCKED(0.00)[linaro.org:dkim,linaro.org:mid,linaro.org:email];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
 	FROM_EQ_ENVFROM(0.00)[];
@@ -92,7 +92,7 @@ X-Spamd-Result: default: False [-5.00 / 15.00];
 	NEURAL_HAM(-0.00)[-1.000];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	FREEMAIL_CC(0.00)[nxp.com,gmail.com,mediatek.com,linaro.org,collabora.com,arm.com,google.com,amd.com,kernel.org,qti.qualcomm.com,ffwll.ch,fooishbar.org];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.218.47:from];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.208.53:from];
 	TAGGED_RCPT(0.00)[];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
@@ -101,17 +101,17 @@ X-Spamd-Result: default: False [-5.00 / 15.00];
 	TO_DN_SOME(0.00)[];
 	FROM_HAS_DN(0.00)[]
 X-Rspamd-Action: no action
-Message-ID-Hash: IVUUEQWGZYYOREYX7NFVIKHSVFWY2PWX
-X-Message-ID-Hash: IVUUEQWGZYYOREYX7NFVIKHSVFWY2PWX
+Message-ID-Hash: 2OYQXWC3PBIVFESABJICGL5KMFPSOLDQ
+X-Message-ID-Hash: 2OYQXWC3PBIVFESABJICGL5KMFPSOLDQ
 X-MailFrom: jens.wiklander@linaro.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: Olivier Masse <olivier.masse@nxp.com>, Thierry Reding <thierry.reding@gmail.com>, Yong Wu <yong.wu@mediatek.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T . J . Mercier" <tjmercier@google.com>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Sumit Garg <sumit.garg@kernel.org>, Matthias Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, azarrabi@qti.qualcomm.com, Simona Vetter <simona.vetter@ffwll.ch>, Daniel Stone <daniel@fooishbar.org>, Rouven Czerwinski <rouven.czerwinski@linaro.org>, Jens Wiklander <jens.wiklander@linaro.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v8 06/14] tee: implement protected DMA-heap
+Subject: [Linaro-mm-sig] [PATCH v8 07/14] tee: refactor params_from_user()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/IVUUEQWGZYYOREYX7NFVIKHSVFWY2PWX/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2OYQXWC3PBIVFESABJICGL5KMFPSOLDQ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -121,650 +121,134 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Implement DMA heap for protected DMA-buf allocation in the TEE
-subsystem.
-
-Restricted memory refers to memory buffers behind a hardware enforced
-firewall. It is not accessible to the kernel during normal circumstances
-but rather only accessible to certain hardware IPs or CPUs executing in
-higher or differently privileged mode than the kernel itself. This
-interface allows to allocate and manage such protected memory buffers
-via interaction with a TEE implementation.
-
-The protected memory is allocated for a specific use-case, like Secure
-Video Playback, Trusted UI, or Secure Video Recording where certain
-hardware devices can access the memory.
-
-The DMA-heaps are enabled explicitly by the TEE backend driver. The TEE
-backend drivers needs to implement protected memory pool to manage the
-protected memory.
+Break out the memref handling into a separate helper function.
+No change in behavior.
 
 Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
 ---
- drivers/tee/Makefile      |   1 +
- drivers/tee/tee_heap.c    | 470 ++++++++++++++++++++++++++++++++++++++
- drivers/tee/tee_private.h |   6 +
- include/linux/tee_core.h  |  65 ++++++
- 4 files changed, 542 insertions(+)
- create mode 100644 drivers/tee/tee_heap.c
+ drivers/tee/tee_core.c | 94 ++++++++++++++++++++++++------------------
+ 1 file changed, 54 insertions(+), 40 deletions(-)
 
-diff --git a/drivers/tee/Makefile b/drivers/tee/Makefile
-index 5488cba30bd2..949a6a79fb06 100644
---- a/drivers/tee/Makefile
-+++ b/drivers/tee/Makefile
-@@ -1,6 +1,7 @@
- # SPDX-License-Identifier: GPL-2.0
- obj-$(CONFIG_TEE) += tee.o
- tee-objs += tee_core.o
-+tee-objs += tee_heap.o
- tee-objs += tee_shm.o
- tee-objs += tee_shm_pool.o
- obj-$(CONFIG_OPTEE) += optee/
-diff --git a/drivers/tee/tee_heap.c b/drivers/tee/tee_heap.c
-new file mode 100644
-index 000000000000..d91f0b6be760
---- /dev/null
-+++ b/drivers/tee/tee_heap.c
-@@ -0,0 +1,470 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Copyright (c) 2025, Linaro Limited
-+ */
-+
-+#include <linux/dma-buf.h>
-+#include <linux/dma-heap.h>
-+#include <linux/genalloc.h>
-+#include <linux/module.h>
-+#include <linux/scatterlist.h>
-+#include <linux/slab.h>
-+#include <linux/tee_core.h>
-+#include <linux/xarray.h>
-+
-+#include "tee_private.h"
-+
-+struct tee_dma_heap {
-+	struct dma_heap *heap;
-+	enum tee_dma_heap_id id;
-+	struct tee_protmem_pool *pool;
-+	struct tee_device *teedev;
-+	/* Protects pool and teedev above */
-+	struct mutex mu;
-+};
-+
-+struct tee_heap_buffer {
-+	struct tee_protmem_pool *pool;
-+	struct tee_device *teedev;
-+	size_t size;
-+	size_t offs;
-+	struct sg_table table;
-+};
-+
-+struct tee_heap_attachment {
-+	struct sg_table table;
-+	struct device *dev;
-+};
-+
-+struct tee_protmem_static_pool {
-+	struct tee_protmem_pool pool;
-+	struct gen_pool *gen_pool;
-+	phys_addr_t pa_base;
-+};
-+
-+#if IS_ENABLED(CONFIG_DMABUF_HEAPS)
-+static DEFINE_XARRAY_ALLOC(tee_dma_heap);
-+
-+static int copy_sg_table(struct sg_table *dst, struct sg_table *src)
-+{
-+	struct scatterlist *dst_sg;
-+	struct scatterlist *src_sg;
-+	int ret;
-+	int i;
-+
-+	ret = sg_alloc_table(dst, src->orig_nents, GFP_KERNEL);
-+	if (ret)
-+		return ret;
-+
-+	dst_sg = dst->sgl;
-+	for_each_sgtable_sg(src, src_sg, i) {
-+		sg_set_page(dst_sg, sg_page(src_sg), src_sg->length,
-+			    src_sg->offset);
-+		dst_sg = sg_next(dst_sg);
-+	}
-+
-+	return 0;
-+}
-+
-+static int tee_heap_attach(struct dma_buf *dmabuf,
-+			   struct dma_buf_attachment *attachment)
-+{
-+	struct tee_heap_buffer *buf = dmabuf->priv;
-+	struct tee_heap_attachment *a;
-+	int ret;
-+
-+	a = kzalloc(sizeof(*a), GFP_KERNEL);
-+	if (!a)
-+		return -ENOMEM;
-+
-+	ret = copy_sg_table(&a->table, &buf->table);
-+	if (ret) {
-+		kfree(a);
-+		return ret;
-+	}
-+
-+	a->dev = attachment->dev;
-+	attachment->priv = a;
-+
-+	return 0;
-+}
-+
-+static void tee_heap_detach(struct dma_buf *dmabuf,
-+			    struct dma_buf_attachment *attachment)
-+{
-+	struct tee_heap_attachment *a = attachment->priv;
-+
-+	sg_free_table(&a->table);
-+	kfree(a);
-+}
-+
-+static struct sg_table *
-+tee_heap_map_dma_buf(struct dma_buf_attachment *attachment,
-+		     enum dma_data_direction direction)
-+{
-+	struct tee_heap_attachment *a = attachment->priv;
-+	int ret;
-+
-+	ret = dma_map_sgtable(attachment->dev, &a->table, direction,
-+			      DMA_ATTR_SKIP_CPU_SYNC);
-+	if (ret)
-+		return ERR_PTR(ret);
-+
-+	return &a->table;
-+}
-+
-+static void tee_heap_unmap_dma_buf(struct dma_buf_attachment *attachment,
-+				   struct sg_table *table,
-+				   enum dma_data_direction direction)
-+{
-+	struct tee_heap_attachment *a = attachment->priv;
-+
-+	WARN_ON(&a->table != table);
-+
-+	dma_unmap_sgtable(attachment->dev, table, direction,
-+			  DMA_ATTR_SKIP_CPU_SYNC);
-+}
-+
-+static void tee_heap_buf_free(struct dma_buf *dmabuf)
-+{
-+	struct tee_heap_buffer *buf = dmabuf->priv;
-+	struct tee_device *teedev = buf->teedev;
-+
-+	buf->pool->ops->free(buf->pool, &buf->table);
-+	tee_device_put(teedev);
-+}
-+
-+static const struct dma_buf_ops tee_heap_buf_ops = {
-+	.attach = tee_heap_attach,
-+	.detach = tee_heap_detach,
-+	.map_dma_buf = tee_heap_map_dma_buf,
-+	.unmap_dma_buf = tee_heap_unmap_dma_buf,
-+	.release = tee_heap_buf_free,
-+};
-+
-+static struct dma_buf *tee_dma_heap_alloc(struct dma_heap *heap,
-+					  unsigned long len, u32 fd_flags,
-+					  u64 heap_flags)
-+{
-+	struct tee_dma_heap *h = dma_heap_get_drvdata(heap);
-+	DEFINE_DMA_BUF_EXPORT_INFO(exp_info);
-+	struct tee_device *teedev = NULL;
-+	struct tee_heap_buffer *buf;
-+	struct tee_protmem_pool *pool;
-+	struct dma_buf *dmabuf;
-+	int rc;
-+
-+	mutex_lock(&h->mu);
-+	if (tee_device_get(h->teedev)) {
-+		teedev = h->teedev;
-+		pool = h->pool;
-+	}
-+	mutex_unlock(&h->mu);
-+
-+	if (!teedev)
-+		return ERR_PTR(-EINVAL);
-+
-+	buf = kzalloc(sizeof(*buf), GFP_KERNEL);
-+	if (!buf) {
-+		dmabuf = ERR_PTR(-ENOMEM);
-+		goto err;
-+	}
-+	buf->size = len;
-+	buf->pool = pool;
-+	buf->teedev = teedev;
-+
-+	rc = pool->ops->alloc(pool, &buf->table, len, &buf->offs);
-+	if (rc) {
-+		dmabuf = ERR_PTR(rc);
-+		goto err_kfree;
-+	}
-+
-+	exp_info.ops = &tee_heap_buf_ops;
-+	exp_info.size = len;
-+	exp_info.priv = buf;
-+	exp_info.flags = fd_flags;
-+	dmabuf = dma_buf_export(&exp_info);
-+	if (IS_ERR(dmabuf))
-+		goto err_protmem_free;
-+
-+	return dmabuf;
-+
-+err_protmem_free:
-+	pool->ops->free(pool, &buf->table);
-+err_kfree:
-+	kfree(buf);
-+err:
-+	tee_device_put(h->teedev);
-+	return dmabuf;
-+}
-+
-+static const struct dma_heap_ops tee_dma_heap_ops = {
-+	.allocate = tee_dma_heap_alloc,
-+};
-+
-+static const char *heap_id_2_name(enum tee_dma_heap_id id)
-+{
-+	switch (id) {
-+	case TEE_DMA_HEAP_SECURE_VIDEO_PLAY:
-+		return "protected,secure-video";
-+	case TEE_DMA_HEAP_TRUSTED_UI:
-+		return "protected,trusted-ui";
-+	case TEE_DMA_HEAP_SECURE_VIDEO_RECORD:
-+		return "protected,secure-video-record";
-+	default:
-+		return NULL;
-+	}
-+}
-+
-+static int alloc_dma_heap(struct tee_device *teedev, enum tee_dma_heap_id id,
-+			  struct tee_protmem_pool *pool)
-+{
-+	struct dma_heap_export_info exp_info = {
-+		.ops = &tee_dma_heap_ops,
-+		.name = heap_id_2_name(id),
-+	};
-+	struct tee_dma_heap *h;
-+	int rc;
-+
-+	if (!exp_info.name)
-+		return -EINVAL;
-+
-+	if (xa_reserve(&tee_dma_heap, id, GFP_KERNEL)) {
-+		if (!xa_load(&tee_dma_heap, id))
-+			return -EEXIST;
-+		return -ENOMEM;
-+	}
-+
-+	h = kzalloc(sizeof(*h), GFP_KERNEL);
-+	if (!h)
-+		return -ENOMEM;
-+	h->id = id;
-+	h->teedev = teedev;
-+	h->pool = pool;
-+	mutex_init(&h->mu);
-+
-+	exp_info.priv = h;
-+	h->heap = dma_heap_add(&exp_info);
-+	if (IS_ERR(h->heap)) {
-+		rc = PTR_ERR(h->heap);
-+		kfree(h);
-+
-+		return rc;
-+	}
-+
-+	/* "can't fail" due to the call to xa_reserve() above */
-+	return WARN(xa_store(&tee_dma_heap, id, h, GFP_KERNEL),
-+		    "xa_store() failed");
-+}
-+
-+int tee_device_register_dma_heap(struct tee_device *teedev,
-+				 enum tee_dma_heap_id id,
-+				 struct tee_protmem_pool *pool)
-+{
-+	struct tee_dma_heap *h;
-+	int rc;
-+
-+	h = xa_load(&tee_dma_heap, id);
-+	if (h) {
-+		mutex_lock(&h->mu);
-+		if (h->teedev) {
-+			rc = -EBUSY;
-+		} else {
-+			h->teedev = teedev;
-+			h->pool = pool;
-+			rc = 0;
-+		}
-+		mutex_unlock(&h->mu);
-+	} else {
-+		rc = alloc_dma_heap(teedev, id, pool);
-+	}
-+
-+	if (rc)
-+		dev_err(&teedev->dev, "can't register DMA heap id %d (%s)\n",
-+			id, heap_id_2_name(id));
-+
-+	return rc;
-+}
-+EXPORT_SYMBOL_GPL(tee_device_register_dma_heap);
-+
-+void tee_device_unregister_all_dma_heaps(struct tee_device *teedev)
-+{
-+	struct tee_protmem_pool *pool;
-+	struct tee_dma_heap *h;
-+	u_long i;
-+
-+	xa_for_each(&tee_dma_heap, i, h) {
-+		if (h) {
-+			pool = NULL;
-+			mutex_lock(&h->mu);
-+			if (h->teedev == teedev) {
-+				pool = h->pool;
-+				h->teedev = NULL;
-+				h->pool = NULL;
-+			}
-+			mutex_unlock(&h->mu);
-+			if (pool)
-+				pool->ops->destroy_pool(pool);
-+		}
-+	}
-+}
-+EXPORT_SYMBOL_GPL(tee_device_unregister_all_dma_heaps);
-+
-+int tee_heap_update_from_dma_buf(struct tee_device *teedev,
-+				 struct dma_buf *dmabuf, size_t *offset,
-+				 struct tee_shm *shm,
-+				 struct tee_shm **parent_shm)
-+{
-+	struct tee_heap_buffer *buf;
-+	int rc;
-+
-+	/* The DMA-buf must be from our heap */
-+	if (dmabuf->ops != &tee_heap_buf_ops)
-+		return -EINVAL;
-+
-+	buf = dmabuf->priv;
-+	/* The buffer must be from the same teedev */
-+	if (buf->teedev != teedev)
-+		return -EINVAL;
-+
-+	shm->size = buf->size;
-+
-+	rc = buf->pool->ops->update_shm(buf->pool, &buf->table, buf->offs, shm,
-+					parent_shm);
-+	if (!rc && *parent_shm)
-+		*offset = buf->offs;
-+
-+	return rc;
-+}
-+#else
-+int tee_device_register_dma_heap(struct tee_device *teedev __always_unused,
-+				 enum tee_dma_heap_id id __always_unused,
-+				 struct tee_protmem_pool *pool __always_unused)
-+{
-+	return -EINVAL;
-+}
-+EXPORT_SYMBOL_GPL(tee_device_register_dma_heap);
-+
-+void
-+tee_device_unregister_all_dma_heaps(struct tee_device *teedev __always_unused)
-+{
-+}
-+EXPORT_SYMBOL_GPL(tee_device_unregister_all_dma_heaps);
-+
-+int tee_heap_update_from_dma_buf(struct tee_device *teedev __always_unused,
-+				 struct dma_buf *dmabuf __always_unused,
-+				 size_t *offset __always_unused,
-+				 struct tee_shm *shm __always_unused,
-+				 struct tee_shm **parent_shm __always_unused)
-+{
-+	return -EINVAL;
-+}
-+#endif
-+
-+static struct tee_protmem_static_pool *
-+to_protmem_static_pool(struct tee_protmem_pool *pool)
-+{
-+	return container_of(pool, struct tee_protmem_static_pool, pool);
-+}
-+
-+static int protmem_pool_op_static_alloc(struct tee_protmem_pool *pool,
-+					struct sg_table *sgt, size_t size,
-+					size_t *offs)
-+{
-+	struct tee_protmem_static_pool *stp = to_protmem_static_pool(pool);
-+	phys_addr_t pa;
-+	int ret;
-+
-+	pa = gen_pool_alloc(stp->gen_pool, size);
-+	if (!pa)
-+		return -ENOMEM;
-+
-+	ret = sg_alloc_table(sgt, 1, GFP_KERNEL);
-+	if (ret) {
-+		gen_pool_free(stp->gen_pool, pa, size);
-+		return ret;
-+	}
-+
-+	sg_set_page(sgt->sgl, phys_to_page(pa), size, 0);
-+	*offs = pa - stp->pa_base;
-+
-+	return 0;
-+}
-+
-+static void protmem_pool_op_static_free(struct tee_protmem_pool *pool,
-+					struct sg_table *sgt)
-+{
-+	struct tee_protmem_static_pool *stp = to_protmem_static_pool(pool);
-+	struct scatterlist *sg;
-+	int i;
-+
-+	for_each_sgtable_sg(sgt, sg, i)
-+		gen_pool_free(stp->gen_pool, sg_phys(sg), sg->length);
-+	sg_free_table(sgt);
-+}
-+
-+static int protmem_pool_op_static_update_shm(struct tee_protmem_pool *pool,
-+					     struct sg_table *sgt, size_t offs,
-+					     struct tee_shm *shm,
-+					     struct tee_shm **parent_shm)
-+{
-+	struct tee_protmem_static_pool *stp = to_protmem_static_pool(pool);
-+
-+	shm->paddr = stp->pa_base + offs;
-+	*parent_shm = NULL;
-+
-+	return 0;
-+}
-+
-+static void protmem_pool_op_static_destroy_pool(struct tee_protmem_pool *pool)
-+{
-+	struct tee_protmem_static_pool *stp = to_protmem_static_pool(pool);
-+
-+	gen_pool_destroy(stp->gen_pool);
-+	kfree(stp);
-+}
-+
-+static struct tee_protmem_pool_ops protmem_pool_ops_static = {
-+	.alloc = protmem_pool_op_static_alloc,
-+	.free = protmem_pool_op_static_free,
-+	.update_shm = protmem_pool_op_static_update_shm,
-+	.destroy_pool = protmem_pool_op_static_destroy_pool,
-+};
-+
-+struct tee_protmem_pool *tee_protmem_static_pool_alloc(phys_addr_t paddr,
-+						       size_t size)
-+{
-+	const size_t page_mask = PAGE_SIZE - 1;
-+	struct tee_protmem_static_pool *stp;
-+	int rc;
-+
-+	/* Check it's page aligned */
-+	if ((paddr | size) & page_mask)
-+		return ERR_PTR(-EINVAL);
-+
-+	stp = kzalloc(sizeof(*stp), GFP_KERNEL);
-+	if (!stp)
-+		return ERR_PTR(-ENOMEM);
-+
-+	stp->gen_pool = gen_pool_create(PAGE_SHIFT, -1);
-+	if (!stp->gen_pool) {
-+		rc = -ENOMEM;
-+		goto err_free;
-+	}
-+
-+	rc = gen_pool_add(stp->gen_pool, paddr, size, -1);
-+	if (rc)
-+		goto err_free_pool;
-+
-+	stp->pool.ops = &protmem_pool_ops_static;
-+	stp->pa_base = paddr;
-+	return &stp->pool;
-+
-+err_free_pool:
-+	gen_pool_destroy(stp->gen_pool);
-+err_free:
-+	kfree(stp);
-+
-+	return ERR_PTR(rc);
-+}
-+EXPORT_SYMBOL_GPL(tee_protmem_static_pool_alloc);
-diff --git a/drivers/tee/tee_private.h b/drivers/tee/tee_private.h
-index 9bc50605227c..6c6ff5d5eed2 100644
---- a/drivers/tee/tee_private.h
-+++ b/drivers/tee/tee_private.h
-@@ -8,6 +8,7 @@
- #include <linux/cdev.h>
- #include <linux/completion.h>
- #include <linux/device.h>
-+#include <linux/dma-buf.h>
- #include <linux/kref.h>
- #include <linux/mutex.h>
- #include <linux/types.h>
-@@ -24,4 +25,9 @@ struct tee_shm *tee_shm_alloc_user_buf(struct tee_context *ctx, size_t size);
- struct tee_shm *tee_shm_register_user_buf(struct tee_context *ctx,
- 					  unsigned long addr, size_t length);
- 
-+int tee_heap_update_from_dma_buf(struct tee_device *teedev,
-+				 struct dma_buf *dmabuf, size_t *offset,
-+				 struct tee_shm *shm,
-+				 struct tee_shm **parent_shm);
-+
- #endif /*TEE_PRIVATE_H*/
-diff --git a/include/linux/tee_core.h b/include/linux/tee_core.h
-index a38494d6b5f4..b8b99c97e00c 100644
---- a/include/linux/tee_core.h
-+++ b/include/linux/tee_core.h
-@@ -8,9 +8,11 @@
- 
- #include <linux/cdev.h>
- #include <linux/device.h>
-+#include <linux/dma-buf.h>
- #include <linux/idr.h>
- #include <linux/kref.h>
- #include <linux/list.h>
-+#include <linux/scatterlist.h>
- #include <linux/tee.h>
- #include <linux/tee_drv.h>
- #include <linux/types.h>
-@@ -30,6 +32,12 @@
- #define TEE_DEVICE_FLAG_REGISTERED	0x1
- #define TEE_MAX_DEV_NAME_LEN		32
- 
-+enum tee_dma_heap_id {
-+	TEE_DMA_HEAP_SECURE_VIDEO_PLAY = 1,
-+	TEE_DMA_HEAP_TRUSTED_UI,
-+	TEE_DMA_HEAP_SECURE_VIDEO_RECORD,
-+};
-+
- /**
-  * struct tee_device - TEE Device representation
-  * @name:	name of device
-@@ -116,6 +124,36 @@ struct tee_desc {
- 	u32 flags;
- };
- 
-+/**
-+ * struct tee_protmem_pool - protected memory pool
-+ * @ops:		operations
-+ *
-+ * This is an abstract interface where this struct is expected to be
-+ * embedded in another struct specific to the implementation.
-+ */
-+struct tee_protmem_pool {
-+	const struct tee_protmem_pool_ops *ops;
-+};
-+
-+/**
-+ * struct tee_protmem_pool_ops - protected memory pool operations
-+ * @alloc:		called when allocating protected memory
-+ * @free:		called when freeing protected memory
-+ * @update_shm:		called when registering a dma-buf to update the @shm
-+ *			with physical address of the buffer or to return the
-+ *			@parent_shm of the memory pool
-+ * @destroy_pool:	called when destroying the pool
-+ */
-+struct tee_protmem_pool_ops {
-+	int (*alloc)(struct tee_protmem_pool *pool, struct sg_table *sgt,
-+		     size_t size, size_t *offs);
-+	void (*free)(struct tee_protmem_pool *pool, struct sg_table *sgt);
-+	int (*update_shm)(struct tee_protmem_pool *pool, struct sg_table *sgt,
-+			  size_t offs, struct tee_shm *shm,
-+			  struct tee_shm **parent_shm);
-+	void (*destroy_pool)(struct tee_protmem_pool *pool);
-+};
-+
- /**
-  * tee_device_alloc() - Allocate a new struct tee_device instance
-  * @teedesc:	Descriptor for this driver
-@@ -154,6 +192,11 @@ int tee_device_register(struct tee_device *teedev);
-  */
- void tee_device_unregister(struct tee_device *teedev);
- 
-+int tee_device_register_dma_heap(struct tee_device *teedev,
-+				 enum tee_dma_heap_id id,
-+				 struct tee_protmem_pool *pool);
-+void tee_device_unregister_all_dma_heaps(struct tee_device *teedev);
-+
- /**
-  * tee_device_set_dev_groups() - Set device attribute groups
-  * @teedev:	Device to register
-@@ -229,6 +272,28 @@ static inline void tee_shm_pool_free(struct tee_shm_pool *pool)
- 	pool->ops->destroy_pool(pool);
+diff --git a/drivers/tee/tee_core.c b/drivers/tee/tee_core.c
+index 685afcaa3ea1..820e394b9054 100644
+--- a/drivers/tee/tee_core.c
++++ b/drivers/tee/tee_core.c
+@@ -353,6 +353,55 @@ tee_ioctl_shm_register(struct tee_context *ctx,
+ 	return ret;
  }
  
-+/**
-+ * tee_protmem_static_pool_alloc() - Create a protected memory manager
-+ * @paddr:	Physical address of start of pool
-+ * @size:	Size in bytes of the pool
-+ *
-+ * @returns pointer to a 'struct tee_shm_pool' or an ERR_PTR on failure.
-+ */
-+struct tee_protmem_pool *tee_protmem_static_pool_alloc(phys_addr_t paddr,
-+						       size_t size);
-+
-+/**
-+ * tee_protmem_pool_free() - Free a protected memory pool
-+ * @pool:	The protected memory pool to free
-+ *
-+ * There must be no remaining protected memory allocated from this pool
-+ * when this function is called.
-+ */
-+static inline void tee_protmem_pool_free(struct tee_protmem_pool *pool)
++static int param_from_user_memref(struct tee_context *ctx,
++				  struct tee_param_memref *memref,
++				  struct tee_ioctl_param *ip)
 +{
-+	pool->ops->destroy_pool(pool);
++	struct tee_shm *shm;
++
++	/*
++	 * If a NULL pointer is passed to a TA in the TEE,
++	 * the ip.c IOCTL parameters is set to TEE_MEMREF_NULL
++	 * indicating a NULL memory reference.
++	 */
++	if (ip->c != TEE_MEMREF_NULL) {
++		/*
++		 * If we fail to get a pointer to a shared
++		 * memory object (and increase the ref count)
++		 * from an identifier we return an error. All
++		 * pointers that has been added in params have
++		 * an increased ref count. It's the callers
++		 * responibility to do tee_shm_put() on all
++		 * resolved pointers.
++		 */
++		shm = tee_shm_get_from_id(ctx, ip->c);
++		if (IS_ERR(shm))
++			return PTR_ERR(shm);
++
++		/*
++		 * Ensure offset + size does not overflow
++		 * offset and does not overflow the size of
++		 * the referred shared memory object.
++		 */
++		if ((ip->a + ip->b) < ip->a ||
++		    (ip->a + ip->b) > shm->size) {
++			tee_shm_put(shm);
++			return -EINVAL;
++		}
++	} else if (ctx->cap_memref_null) {
++		/* Pass NULL pointer to OP-TEE */
++		shm = NULL;
++	} else {
++		return -EINVAL;
++	}
++
++	memref->shm_offs = ip->a;
++	memref->size = ip->b;
++	memref->shm = shm;
++
++	return 0;
 +}
 +
- /**
-  * tee_get_drvdata() - Return driver_data pointer
-  * @returns the driver_data pointer supplied to tee_register().
+ static int params_from_user(struct tee_context *ctx, struct tee_param *params,
+ 			    size_t num_params,
+ 			    struct tee_ioctl_param __user *uparams)
+@@ -360,8 +409,8 @@ static int params_from_user(struct tee_context *ctx, struct tee_param *params,
+ 	size_t n;
+ 
+ 	for (n = 0; n < num_params; n++) {
+-		struct tee_shm *shm;
+ 		struct tee_ioctl_param ip;
++		int rc;
+ 
+ 		if (copy_from_user(&ip, uparams + n, sizeof(ip)))
+ 			return -EFAULT;
+@@ -384,45 +433,10 @@ static int params_from_user(struct tee_context *ctx, struct tee_param *params,
+ 		case TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_INPUT:
+ 		case TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_OUTPUT:
+ 		case TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_INOUT:
+-			/*
+-			 * If a NULL pointer is passed to a TA in the TEE,
+-			 * the ip.c IOCTL parameters is set to TEE_MEMREF_NULL
+-			 * indicating a NULL memory reference.
+-			 */
+-			if (ip.c != TEE_MEMREF_NULL) {
+-				/*
+-				 * If we fail to get a pointer to a shared
+-				 * memory object (and increase the ref count)
+-				 * from an identifier we return an error. All
+-				 * pointers that has been added in params have
+-				 * an increased ref count. It's the callers
+-				 * responibility to do tee_shm_put() on all
+-				 * resolved pointers.
+-				 */
+-				shm = tee_shm_get_from_id(ctx, ip.c);
+-				if (IS_ERR(shm))
+-					return PTR_ERR(shm);
+-
+-				/*
+-				 * Ensure offset + size does not overflow
+-				 * offset and does not overflow the size of
+-				 * the referred shared memory object.
+-				 */
+-				if ((ip.a + ip.b) < ip.a ||
+-				    (ip.a + ip.b) > shm->size) {
+-					tee_shm_put(shm);
+-					return -EINVAL;
+-				}
+-			} else if (ctx->cap_memref_null) {
+-				/* Pass NULL pointer to OP-TEE */
+-				shm = NULL;
+-			} else {
+-				return -EINVAL;
+-			}
+-
+-			params[n].u.memref.shm_offs = ip.a;
+-			params[n].u.memref.size = ip.b;
+-			params[n].u.memref.shm = shm;
++			rc = param_from_user_memref(ctx, &params[n].u.memref,
++						    &ip);
++			if (rc)
++				return rc;
+ 			break;
+ 		default:
+ 			/* Unknown attribute */
 -- 
 2.43.0
 
