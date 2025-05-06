@@ -2,293 +2,126 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9C074AAC649
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 May 2025 15:34:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 875B7AACA9D
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 May 2025 18:14:36 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C5A50454DD
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 May 2025 13:34:12 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 81B4B41014
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  6 May 2025 13:33:59 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 21F133F6BB
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 May 2025 16:14:35 +0000 (UTC)
+Received: from mailout1.w1.samsung.com (mailout1.w1.samsung.com [210.118.77.11])
+	by lists.linaro.org (Postfix) with ESMTPS id 4DEE43F6BB
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  6 May 2025 16:14:22 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=mZxEkZLM;
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=mripard@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id E0B8244B8F;
-	Tue,  6 May 2025 13:33:58 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 70A75C4CEE4;
-	Tue,  6 May 2025 13:33:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1746538438;
-	bh=ytVei68A+haMDJ6ZilvkYH/flA7qc1bgrqpzA5apH+M=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=mZxEkZLMI7yQGe81cWfdb4fbb/Xohz8LNH6LjDeiqld1fuKnt8aDE1jTuqBMBWir7
-	 bXCrubgmH6eOB4f9Gu1oJz/jUuBOTNfNZGJ+ycq2PXSZuVsySUfzWxjweTNnxpZiKA
-	 gdkWRwZIiBIp/axAEqtjGtbhUhUgi8mrlvUY7S4JSsRbSBmafjbtdLeq/bd2pdLo4h
-	 LRWHYx9vla4DWhL2c+EurtYNdwDSK8fdEB7jH0EqMgceAtMvI3OUFJxCuHyX8FhowC
-	 xWoiw3XQDVc1G/unOlxEpP+VY7gRFnpAKY8i5tWk36MeirbLxtnFw1p2jULapGfCak
-	 aFn9ZbrkyOuig==
-Date: Tue, 6 May 2025 15:33:55 +0200
-From: Maxime Ripard <mripard@kernel.org>
-To: John Stultz <jstultz@google.com>
-Message-ID: <20250506-gleaming-pillbug-of-love-4cb6ca@houat>
-References: <20250422191939.555963-1-jkangas@redhat.com>
- <20250422191939.555963-3-jkangas@redhat.com>
- <20250424-sassy-cunning-pillbug-ffde51@houat>
- <CANDhNCqfsUbN3aavAH5hi4wdcKuUkjLX4jqhKzy-q+jCEqpoow@mail.gmail.com>
- <20250425-savvy-chubby-alpaca-0196e3@houat>
- <CANDhNCroe6ZBtN_o=c71kzFFaWK-fF5rCdnr9P5h1sgPOWSGSw@mail.gmail.com>
- <20250428-greedy-vivid-goldfish-5abb35@houat>
- <CANDhNCqdL7Oha+cGkk0XCZ8shO08ax1rd2k6f9SckuREUdQUjg@mail.gmail.com>
+	dkim=pass header.d=samsung.com header.s=mail20170921 header.b=bOgubCQl;
+	dmarc=pass (policy=none) header.from=samsung.com;
+	spf=pass (lists.linaro.org: domain of m.szyprowski@samsung.com designates 210.118.77.11 as permitted sender) smtp.mailfrom=m.szyprowski@samsung.com
+Received: from eucas1p1.samsung.com (unknown [182.198.249.206])
+	by mailout1.w1.samsung.com (KnoxPortal) with ESMTP id 20250506161421euoutp01deb2d7bbbc5a572543c2bd4233784c8a~8-DVCQByo0485604856euoutp01W
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  6 May 2025 16:14:21 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.w1.samsung.com 20250506161421euoutp01deb2d7bbbc5a572543c2bd4233784c8a~8-DVCQByo0485604856euoutp01W
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+	s=mail20170921; t=1746548061;
+	bh=LhEIDzPK3RvKZEBceRbDdfPrXJegfKev0Ozuz3A9Xts=;
+	h=From:To:Cc:Subject:Date:References:From;
+	b=bOgubCQlk4q1/5f9MyQ2fGda6DFAh5WYUl9it+MLvZW7TzWMuhe9jqKaUK1z/iiUw
+	 KySWiEiwQz4tRc0V3fOpOerQd9szInIB2lwrvh8rAujQVSmHmjqu1J9mWLToIrPti4
+	 mEvXwkgUCqzMTPGy9aa5lUgiQw3XTS8m6oloaPRA=
+Received: from eusmtip2.samsung.com (unknown [203.254.199.222]) by
+	eucas1p1.samsung.com (KnoxPortal) with ESMTPA id
+	20250506161420eucas1p1f3d602a916a1327d1583cb86fcd8280b~8-DUeWA2S0408504085eucas1p1C;
+	Tue,  6 May 2025 16:14:20 +0000 (GMT)
+Received: from AMDC4653.digital.local (unknown [106.120.51.32]) by
+	eusmtip2.samsung.com (KnoxPortal) with ESMTPA id
+	20250506161419eusmtip26942da3e12a8e7b32708a6ec1b746d39~8-DTuYPA40137601376eusmtip2X;
+	Tue,  6 May 2025 16:14:19 +0000 (GMT)
+From: Marek Szyprowski <m.szyprowski@samsung.com>
+To: dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org,
+	linaro-mm-sig@lists.linaro.org, iommu@lists.linux.dev
+Date: Tue,  6 May 2025 18:13:43 +0200
+Message-Id: <20250506161346.1211105-1-m.szyprowski@samsung.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-In-Reply-To: <CANDhNCqdL7Oha+cGkk0XCZ8shO08ax1rd2k6f9SckuREUdQUjg@mail.gmail.com>
+X-CMS-MailID: 20250506161420eucas1p1f3d602a916a1327d1583cb86fcd8280b
+X-Msg-Generator: CA
+X-RootMTR: 20250506161420eucas1p1f3d602a916a1327d1583cb86fcd8280b
+X-EPHeader: CA
+X-CMS-RootMailID: 20250506161420eucas1p1f3d602a916a1327d1583cb86fcd8280b
+References: <CGME20250506161420eucas1p1f3d602a916a1327d1583cb86fcd8280b@eucas1p1.samsung.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 81B4B41014
-X-Spamd-Bar: -----
-X-Spamd-Result: default: False [-5.60 / 15.00];
-	BAYES_HAM(-3.00)[99.98%];
-	SIGNED_PGP(-2.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.252.31];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
+X-Rspamd-Queue-Id: 4DEE43F6BB
+X-Spamd-Bar: ---
+X-Spamd-Result: default: False [-3.10 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[samsung.com,none];
+	R_DKIM_ALLOW(-0.20)[samsung.com:s=mail20170921];
+	R_SPF_ALLOW(-0.20)[+ip4:210.118.77.0/24];
+	MIME_GOOD(-0.10)[text/plain];
+	RWL_MAILSPIKE_GOOD(-0.10)[210.118.77.11:from];
 	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[17];
+	DWL_DNSWL_BLOCKED(0.00)[samsung.com:dkim];
+	MIME_TRACE(0.00)[0:+];
+	ASN(0.00)[asn:6619, ipnet:210.118.76.0/23, country:KR];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
-	MISSING_XM_UA(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_EQ_ENVFROM(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_COUNT_THREE(0.00)[3];
 	TO_DN_SOME(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+]
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[samsung.com,chromium.org,kernel.org,xs4all.nl,redhat.com,intel.com,linaro.org,amd.com,ideasonboard.com,linux.intel.com,arm.com];
+	NEURAL_HAM(-0.00)[-1.000];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	DNSWL_BLOCKED(0.00)[203.254.199.222:received,210.118.77.11:from,106.120.51.32:received];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[samsung.com:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: R27UE4QCQLSSCXTSVVOC6UIMSRDEBIDD
-X-Message-ID-Hash: R27UE4QCQLSSCXTSVVOC6UIMSRDEBIDD
-X-MailFrom: mripard@kernel.org
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Jared Kangas <jkangas@redhat.com>, sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, Brian.Starkey@arm.com, tjmercier@google.com, christian.koenig@amd.com, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
+Message-ID-Hash: VABIOLJQRFNNR4XKPNYACHALBOTQLGLQ
+X-Message-ID-Hash: VABIOLJQRFNNR4XKPNYACHALBOTQLGLQ
+X-MailFrom: m.szyprowski@samsung.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Tomasz Figa <tfiga@chromium.org>, Mauro Carvalho Chehab <mchehab@kernel.org>, Sergey Senozhatsky <senozhatsky@chromium.org>, Hans Verkuil <hverkuil@xs4all.nl>, Gerd Hoffmann <kraxel@redhat.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Gurchetan Singh <gurchetansingh@chromium.org>, Laurent Pinchart <laurent.pinchart@ideasonboard.com>, Sakari Ailus <sakari.ailus@linux.intel.com>, Robin Murphy <robin.murphy@arm.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 2/2] dma-buf: heaps: Give default CMA heap a fixed name
+Subject: [Linaro-mm-sig] [PATCH 0/3] media: fix incorrect use of dma_sync_sg_*() calls
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/R27UE4QCQLSSCXTSVVOC6UIMSRDEBIDD/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VABIOLJQRFNNR4XKPNYACHALBOTQLGLQ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============8449219071993936214=="
-
-
---===============8449219071993936214==
-Content-Type: multipart/signed; micalg=pgp-sha384;
-	protocol="application/pgp-signature"; boundary="u4b35s3vftslgagk"
-Content-Disposition: inline
-
-
---u4b35s3vftslgagk
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH v2 2/2] dma-buf: heaps: Give default CMA heap a fixed name
-MIME-Version: 1.0
-
-On Tue, Apr 29, 2025 at 09:25:00AM -0700, John Stultz wrote:
-> On Mon, Apr 28, 2025 at 7:52=E2=80=AFAM Maxime Ripard <mripard@kernel.org=
-> wrote:
-> > On Fri, Apr 25, 2025 at 12:39:40PM -0700, John Stultz wrote:
-> > > To your larger point about policy, I do get the tension that you want
-> > > to be able to programmatically derive or evaluate heap names, so that
-> > > applications can consistently derive a pathname to get what they want.
-> >
-> > We've discussed it in the past, I don't really want to. But it was clear
-> > from the last discussion that you (plural) wanted to infer heap
-> > semantics from the names. I'm ok with that, but then if we want to make
-> > it work we need to have well defined names.
->=20
-> So my name keeps on getting attached to that, but I don't think I was
-> involved in the LPC conversation when that got decided.
-
-Sorry then :/
-
-That's what I recalled, but I guess the pastries got the best of me :)
-
-Does that mean that you disagree with this point though? or just that
-you agree but still wanted to point out you were not part of that
-discussion?
-
-> > And it's actually what I really want to discuss here: we've discussed at
-> > length how bad the heaps name are (and not only here), but I don't think
-> > we have any documented policy on what makes a good name?
->=20
-> I very much think having a policy/guidance for better names is a good goa=
-l.
->=20
-> I just want to make sure it doesn't become a strict policy that lead
-> folks to make mistaken assumptions about a static solution being
-> viable in userland (like folks nostalgicly using "eth0" or a fixed
-> network device name in scripts expecting it to work on a different
-> system)
-
-I think that's one of the point where the "derive the buffer attributes"
-=66rom the name interact badly though. In your example, eth0 wouldn't have
-had any non-discoverable guarantees. So it can have any name you want,
-it doesn't matter, you can always discover it through some other mean,
-and go from there.
-
-If we say the name is how you can associate a heap and the kind of
-buffers you get, then we can't just use another heap name just like
-that. We could get buffers with a totally different semantics.
-
-I mean, it would probably work with Android, but for any other
-distribution, even if we came up with a gralloc-like solution, as soon
-as you start updating the kernel and whatever is using the heaps
-separately, it's game over. And pretty much all non-Android distros do?
-
-> > For example, I'm not sure exposing the allocator name is a good idea:
-> > it's an implementation detail and for all userspace cares about, we
-> > could change it every release if it provided the same kind of buffers.
->=20
-> That is a fair point.
->=20
-> > Taking your camera buffers example before, then we could also expose a
-> > memory region id, and let the platform figure it out, or use the usecase
-> > as the name.
-> >
-> > But if we don't document that, how can we possibly expect everyone
-> > including downstream to come up with perfect names every time. And FTR,
-> > I'm willing to write that doc down once the discussion settles.
->=20
-> So again, yeah, I very much support having better guidance on the names.
->=20
-> I think the number of device constraints and device combinations makes
-> a raw enumeration of things difficult.
->=20
-> This is why the per-device use->heap mapping "glue" seems necessary to me.
->=20
-> And, I do get that this runs into a similar problem with enumerating
-> and defining "uses" (which boil down to a combination of
-> devices-in-a-pipeline and access use patterns), but for Andorid it has
-> so far been manageable.
->=20
-> Personally, I think the best idea I've heard so far to resolve this
-> from userland was Christian's suggestion that devices expose links to
-> compatible heaps, and then userland without a use->heap mapping could
-> for the set of devices they plan to use in a pipeline, figure out the
-> common heap name and use that to allocate.
-
-I plan to work on that, but also, it covers only what the driver cares
-about, ie, buffer location, etc. It doesn't really cover what userspace
-might care about, like whether the buffer is cachable or not. Both would
-work for any driver, but userspace will have to prefer one over the
-other if it plans to do CPU accesses.
-
-So we'd still need some (arguably more limited) enumeration on the
-userspace side.
-
-> However, that pushes the problem down a bit, requiring drivers
-> (instead of userland) to know what heaps they can work with and what
-> the names might be (which again, your goal for standardizing the heap
-> names isn't a bad thing!). Though, this approach also runs into
-> trouble as it opens a question of: should it only encode strict
-> constraint satisfaction, or something more subtle, as while something
-> might work with multiple heaps, its possible it won't be performant
-> enough unless it picks a specific one on device A or a different one
-> on device B.  And getting that sort of device-specific details
-> embedded into a driver isn't great either.
-
-Yeah :/
-
-> > > But I also think that there is so much variety in both the devices and
-> > > uses that there is no way that all use cases and all devices can be
-> > > satisfied with such a static or even programmatic mapping. From my
-> > > perspective, there just is going to have to be some device specific
-> > > glue logic that maps use->heap name. Same reason we have fstab and the
-> > > passwd file.
-> >
-> > fstab and passwd can be generated at (first) boot time / install. fstab
-> > is also being somewhat less important with the auto-partition discovery.
-> > How would you generate that configuration file at boot?
-> >
-> > I'm not really asking this as a theoretical question. Being able to
-> > auto-discover which heap a driver/device would allocate from is central
-> > for the cgroup work I mentioned earlier.
-> >
-> > And I'm really not sure how distros or applications developpers are
-> > supposed to keep up with the raw volume of devices that go out every
-> > year, each and every one of them having different heap names, etc.
-> > Possibly different from one version of the firmware to another.
->=20
-> For generic distros, I don't have a good answer here. Historically the
-> focus has always been on single device usage, so having the driver do
-> the allocation was fine, and if you were using multiple devices you
-> could just copy the memory between the driver allocated buffers.  But
-> as we've moved to disaggregated IP blocks and device pipelines, all
-> those potential copies wreck performance and power.   I'm not sure
-> generic distros have the concept of a device pipeline very well
-> abstracted (obviously mesa and the wayland/X have had to deal with it,
-> and the video and camera side is dealing with it more and more).
-> Maybe a more established notion of use -> pipeline/device collections,
-> is needed as a starting point? Then using Christian's suggestion, one
-> could at least enumerate  use -> heap that would be functional. And
-> maybe device makers could then supplement explicit optimized mapping
-> overrides for their device?
->=20
-> I just think leaving individual applications (or even individual
-> frameworks like mesa) to embed assumptions about heap names ->
-> functionality is going to be a problematic approach.
-
-I totally agree on the conclusion, but I still don't see how having a
-central component in charge of that will make things better. It just
-won't scale to the thousands of devices out there.
-
-And that's great improvements for the future, but heaps have use-cases
-today: the CMA heap is the only way to get a physically contiguous
-cacheable buffer in userspace at the moment for example.
-
-libcamera uses it for its software ISP implementation for example.
-
-So, while working on improving things in the future is a reasonable
-goal, we also need to improve things for the current users right now.
-And there's definitely users for it outside of Android.
-
-Which brings us back to the question: What would be a good name? Do we
-want to expose a platform specific region name, possibly with a suffix
-or prefix to define whether it's cached or not?
-
-Maxime
-
---u4b35s3vftslgagk
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iJUEABMJAB0WIQTkHFbLp4ejekA/qfgnX84Zoj2+dgUCaBoPvwAKCRAnX84Zoj2+
-dqLKAXwN6RbIIm6e8RsvdgaSYZ4Q9EwZfTT5eFdxUHB6lT8Lux7+QWav3kRwU6ur
-7GIn+IEBgK9SEyVRAXfcvD3TxU5DFIJdax3+A2/TCq6DydwChzvX8/pzA14Rv80l
-fV6CJ8bmAQ==
-=Su3z
------END PGP SIGNATURE-----
-
---u4b35s3vftslgagk--
-
---===============8449219071993936214==
 Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+
+Dear All,
+
+This patchset fixes the incorrect use of dma_sync_sg_*() calls in
+media and related drivers. They are replaced with much safer
+dma_sync_sgtable_*() variants, which take care of passing the proper
+number of elements for the sync operation.
+
+Best regards
+Marek Szyprowski, PhD
+Samsung R&D Institute Poland
+
+
+Patch summary:
+
+Marek Szyprowski (3):
+  media: videobuf2: use sgtable-based scatterlist wrappers
+  udmabuf: use sgtable-based scatterlist wrappers
+  omap3isp:: use sgtable-based scatterlist wrappers
+
+ drivers/dma-buf/udmabuf.c                         | 5 ++---
+ drivers/media/common/videobuf2/videobuf2-dma-sg.c | 4 ++--
+ drivers/media/platform/ti/omap3isp/ispccdc.c      | 8 ++++----
+ drivers/media/platform/ti/omap3isp/ispstat.c      | 6 ++----
+ 4 files changed, 10 insertions(+), 13 deletions(-)
+
+-- 
+2.34.1
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============8449219071993936214==--
