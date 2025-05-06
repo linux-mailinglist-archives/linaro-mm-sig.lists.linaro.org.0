@@ -2,210 +2,293 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id B6972AABB5E
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 May 2025 09:39:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9C074AAC649
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 May 2025 15:34:29 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C224D45530
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 May 2025 07:39:51 +0000 (UTC)
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
-	by lists.linaro.org (Postfix) with ESMTPS id B3B1D43B97
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  6 May 2025 07:39:38 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C5A50454DD
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 May 2025 13:34:12 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+	by lists.linaro.org (Postfix) with ESMTPS id 81B4B41014
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  6 May 2025 13:33:59 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=SkMO06yo;
-	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=J6odBsss;
-	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=SkMO06yo;
-	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=J6odBsss;
-	dmarc=pass (policy=none) header.from=suse.de;
-	spf=pass (lists.linaro.org: domain of tzimmermann@suse.de designates 195.135.223.131 as permitted sender) smtp.mailfrom=tzimmermann@suse.de
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by smtp-out2.suse.de (Postfix) with ESMTPS id 929981F394;
-	Tue,  6 May 2025 07:39:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1746517177; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=ehkdWJ3YE419DK32pcGDu4hccVQUEQyIl3HFAkVAK9A=;
-	b=SkMO06yoach6wLGwv+m29h4epdrHbnuEUjxt3MMGeBwNjEQMefXO2wrKWt9IKp0cbJ3kEJ
-	NGwOrUSFhnAQYKYEkpSWxNsa4a6TZRnwxhr2q8CWy6dSlcuLnhQhV9858ZW+lRT6lCjSGz
-	T3F3COVb2vtENSdJFE1pBrkNRipBdR0=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1746517177;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=ehkdWJ3YE419DK32pcGDu4hccVQUEQyIl3HFAkVAK9A=;
-	b=J6odBsssK3RtaI9VQnBx2yRbe5nOASXuMAzGT0Cz8GUoSCZTRBI4t+XlkdmaU/EDHsEfW+
-	TaQGX4fKK6a7hfDA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1746517177; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=ehkdWJ3YE419DK32pcGDu4hccVQUEQyIl3HFAkVAK9A=;
-	b=SkMO06yoach6wLGwv+m29h4epdrHbnuEUjxt3MMGeBwNjEQMefXO2wrKWt9IKp0cbJ3kEJ
-	NGwOrUSFhnAQYKYEkpSWxNsa4a6TZRnwxhr2q8CWy6dSlcuLnhQhV9858ZW+lRT6lCjSGz
-	T3F3COVb2vtENSdJFE1pBrkNRipBdR0=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1746517177;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=ehkdWJ3YE419DK32pcGDu4hccVQUEQyIl3HFAkVAK9A=;
-	b=J6odBsssK3RtaI9VQnBx2yRbe5nOASXuMAzGT0Cz8GUoSCZTRBI4t+XlkdmaU/EDHsEfW+
-	TaQGX4fKK6a7hfDA==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 3DE3D137CF;
-	Tue,  6 May 2025 07:39:37 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
-	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id YdmYDbm8GWgATAAAD6G6ig
-	(envelope-from <tzimmermann@suse.de>); Tue, 06 May 2025 07:39:37 +0000
-Message-ID: <e8b91c26-77e4-41a6-ab32-b0ef1bb7962c@suse.de>
-Date: Tue, 6 May 2025 09:39:36 +0200
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=mZxEkZLM;
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=mripard@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by sea.source.kernel.org (Postfix) with ESMTP id E0B8244B8F;
+	Tue,  6 May 2025 13:33:58 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 70A75C4CEE4;
+	Tue,  6 May 2025 13:33:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1746538438;
+	bh=ytVei68A+haMDJ6ZilvkYH/flA7qc1bgrqpzA5apH+M=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=mZxEkZLMI7yQGe81cWfdb4fbb/Xohz8LNH6LjDeiqld1fuKnt8aDE1jTuqBMBWir7
+	 bXCrubgmH6eOB4f9Gu1oJz/jUuBOTNfNZGJ+ycq2PXSZuVsySUfzWxjweTNnxpZiKA
+	 gdkWRwZIiBIp/axAEqtjGtbhUhUgi8mrlvUY7S4JSsRbSBmafjbtdLeq/bd2pdLo4h
+	 LRWHYx9vla4DWhL2c+EurtYNdwDSK8fdEB7jH0EqMgceAtMvI3OUFJxCuHyX8FhowC
+	 xWoiw3XQDVc1G/unOlxEpP+VY7gRFnpAKY8i5tWk36MeirbLxtnFw1p2jULapGfCak
+	 aFn9ZbrkyOuig==
+Date: Tue, 6 May 2025 15:33:55 +0200
+From: Maxime Ripard <mripard@kernel.org>
+To: John Stultz <jstultz@google.com>
+Message-ID: <20250506-gleaming-pillbug-of-love-4cb6ca@houat>
+References: <20250422191939.555963-1-jkangas@redhat.com>
+ <20250422191939.555963-3-jkangas@redhat.com>
+ <20250424-sassy-cunning-pillbug-ffde51@houat>
+ <CANDhNCqfsUbN3aavAH5hi4wdcKuUkjLX4jqhKzy-q+jCEqpoow@mail.gmail.com>
+ <20250425-savvy-chubby-alpaca-0196e3@houat>
+ <CANDhNCroe6ZBtN_o=c71kzFFaWK-fF5rCdnr9P5h1sgPOWSGSw@mail.gmail.com>
+ <20250428-greedy-vivid-goldfish-5abb35@houat>
+ <CANDhNCqdL7Oha+cGkk0XCZ8shO08ax1rd2k6f9SckuREUdQUjg@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Boris Brezillon <boris.brezillon@collabora.com>,
- Simona Vetter <simona.vetter@ffwll.ch>
-References: <20250416065820.26076-1-tzimmermann@suse.de>
- <Z_96e7Lv-sEDUS6U@phenom.ffwll.local> <aBHoRTdsdOLFhzfg@phenom.ffwll.local>
- <20250505092949.1124657d@collabora.com>
-Content-Language: en-US
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Autocrypt: addr=tzimmermann@suse.de; keydata=
- xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
- XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
- BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
- hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
- 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
- AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
- AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
- AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
- lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
- U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
- vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
- 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
- j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
- T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
- 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
- GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
- hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
- EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
- C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
- yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
- SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
- Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
- 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
-In-Reply-To: <20250505092949.1124657d@collabora.com>
-X-Spam-Score: -4.30
-X-Spam-Flag: NO
-X-Spam-Level: 
+In-Reply-To: <CANDhNCqdL7Oha+cGkk0XCZ8shO08ax1rd2k6f9SckuREUdQUjg@mail.gmail.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: B3B1D43B97
-X-Spamd-Bar: ---
-X-Spamd-Result: default: False [-4.00 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
-	DMARC_POLICY_ALLOW(-0.50)[suse.de,none];
-	R_SPF_ALLOW(-0.20)[+ip4:195.135.223.131/32];
-	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	MIME_GOOD(-0.10)[text/plain];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCVD_TLS_ALL(0.00)[];
-	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:29298, ipnet:195.135.223.0/24, country:DE];
-	RCPT_COUNT_TWELVE(0.00)[13];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	TO_DN_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[ffwll.ch,gmail.com,redhat.com,163.com,amd.com,kernel.org,linux.intel.com,lists.freedesktop.org,linaro.org,vger.kernel.org,lists.linaro.org];
-	NEURAL_HAM(-0.00)[-1.000];
-	FROM_EQ_ENVFROM(0.00)[];
-	URIBL_BLOCKED(0.00)[linaro.org:email,smtp-out2.suse.de:helo,smtp-out2.suse.de:rdns];
+X-Rspamd-Queue-Id: 81B4B41014
+X-Spamd-Bar: -----
+X-Spamd-Result: default: False [-5.60 / 15.00];
+	BAYES_HAM(-3.00)[99.98%];
+	SIGNED_PGP(-2.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	MID_RHS_NOT_FQDN(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.252.31];
+	MIME_GOOD(-0.20)[multipart/signed,text/plain];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DKIM_TRACE(0.00)[suse.de:+]
+	ARC_NA(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	MISSING_XM_UA(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_EQ_ENVFROM(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	TO_DN_SOME(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: 46NVMH45AZ2F7Q3A7NSM3JYLSRDJZHEJ
-X-Message-ID-Hash: 46NVMH45AZ2F7Q3A7NSM3JYLSRDJZHEJ
-X-MailFrom: tzimmermann@suse.de
+Message-ID-Hash: R27UE4QCQLSSCXTSVVOC6UIMSRDEBIDD
+X-Message-ID-Hash: R27UE4QCQLSSCXTSVVOC6UIMSRDEBIDD
+X-MailFrom: mripard@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: simona@ffwll.ch, asrivats@redhat.com, andyshrk@163.com, christian.koenig@amd.com, mripard@kernel.org, maarten.lankhorst@linux.intel.com, dri-devel@lists.freedesktop.org, Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+CC: Jared Kangas <jkangas@redhat.com>, sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, Brian.Starkey@arm.com, tjmercier@google.com, christian.koenig@amd.com, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3] drm/gem: Internally test import_attach for imported objects
+Subject: [Linaro-mm-sig] Re: [PATCH v2 2/2] dma-buf: heaps: Give default CMA heap a fixed name
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/46NVMH45AZ2F7Q3A7NSM3JYLSRDJZHEJ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/R27UE4QCQLSSCXTSVVOC6UIMSRDEBIDD/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8449219071993936214=="
 
-SGkNCg0KQW0gMDUuMDUuMjUgdW0gMDk6Mjkgc2NocmllYiBCb3JpcyBCcmV6aWxsb246DQo+IE9u
-IFdlZCwgMzAgQXByIDIwMjUgMTE6MDc6MTcgKzAyMDANCj4gU2ltb25hIFZldHRlciA8c2ltb25h
-LnZldHRlckBmZndsbC5jaD4gd3JvdGU6DQo+DQo+PiBPbiBXZWQsIEFwciAxNiwgMjAyNSBhdCAx
-MTozODowM0FNICswMjAwLCBTaW1vbmEgVmV0dGVyIHdyb3RlOg0KPj4+IE9uIFdlZCwgQXByIDE2
-LCAyMDI1IGF0IDA4OjU3OjQ1QU0gKzAyMDAsIFRob21hcyBaaW1tZXJtYW5uIHdyb3RlOg0KPj4+
-PiBUZXN0IHN0cnVjdCBkcm1fZ2VtX29iamVjdC5pbXBvcnRfYXR0YWNoIHRvIGRldGVjdCBpbXBv
-cnRlZCBvYmplY3RzLg0KPj4+Pg0KPj4+PiBEdXJpbmcgb2JqZWN0IGNsZW5hbnVwLCB0aGUgZG1h
-X2J1ZiBmaWVsZCBtaWdodCBiZSBOVUxMLiBUZXN0aW5nIGl0IGluDQo+Pj4+IGFuIG9iamVjdCdz
-IGZyZWUgY2FsbGJhY2sgdGhlbiBpbmNvcnJlY3RseSBkb2VzIGEgY2xlYW51cCBhcyBmb3IgbmF0
-aXZlDQo+Pj4+IG9iamVjdHMuIEhhcHBlbnMgZm9yIGNhbGxzIHRvIGRybV9tb2RlX2Rlc3Ryb3lf
-ZHVtYl9pb2N0bCgpIHRoYXQNCj4+Pj4gY2xlYXJzIHRoZSBkbWFfYnVmIGZpZWxkIGluIGRybV9n
-ZW1fb2JqZWN0X2V4cG9ydGVkX2RtYV9idWZfZnJlZSgpLg0KPj4+Pg0KPj4+PiB2MzoNCj4+Pj4g
-LSBvbmx5IHRlc3QgZm9yIGltcG9ydF9hdHRhY2ggKEJvcmlzKQ0KPj4+PiB2MjoNCj4+Pj4gLSB1
-c2UgaW1wb3J0X2F0dGFjaC5kbWFidWYgaW5zdGVhZCBvZiBkbWFfYnVmIChDaHJpc3RpYW4pDQo+
-Pj4+DQo+Pj4+IFNpZ25lZC1vZmYtYnk6IFRob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBz
-dXNlLmRlPg0KPj4+PiBGaXhlczogYjU3YWE0N2QzOWU5ICgiZHJtL2dlbTogVGVzdCBmb3IgaW1w
-b3J0ZWQgR0VNIGJ1ZmZlcnMgd2l0aCBoZWxwZXIiKQ0KPj4+PiBSZXBvcnRlZC1ieTogQW5keSBZ
-YW4gPGFuZHlzaHJrQDE2My5jb20+DQo+Pj4+IENsb3NlczogaHR0cHM6Ly9sb3JlLmtlcm5lbC5v
-cmcvZHJpLWRldmVsLzM4ZDA5ZDM0LjQzNTQuMTk2Mzc5YWE1NjAuQ29yZW1haWwuYW5keXNocmtA
-MTYzLmNvbS8NCj4+Pj4gVGVzdGVkLWJ5OiBBbmR5IFlhbiA8YW5keXNocmtAMTYzLmNvbT4NCj4+
-Pj4gQ2M6IFRob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPg0KPj4+PiBDYzog
-QW51c2hhIFNyaXZhdHNhIDxhc3JpdmF0c0ByZWRoYXQuY29tPg0KPj4+PiBDYzogQ2hyaXN0aWFu
-IEvDtm5pZyA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPg0KPj4+PiBDYzogTWFhcnRlbiBMYW5r
-aG9yc3QgPG1hYXJ0ZW4ubGFua2hvcnN0QGxpbnV4LmludGVsLmNvbT4NCj4+Pj4gQ2M6IE1heGlt
-ZSBSaXBhcmQgPG1yaXBhcmRAa2VybmVsLm9yZz4NCj4+Pj4gQ2M6IERhdmlkIEFpcmxpZSA8YWly
-bGllZEBnbWFpbC5jb20+DQo+Pj4+IENjOiBTaW1vbmEgVmV0dGVyIDxzaW1vbmFAZmZ3bGwuY2g+
-DQo+Pj4+IENjOiBTdW1pdCBTZW13YWwgPHN1bWl0LnNlbXdhbEBsaW5hcm8ub3JnPg0KPj4+PiBD
-YzogIkNocmlzdGlhbiBLw7ZuaWciIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+DQo+Pj4+IENj
-OiBkcmktZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnDQo+Pj4+IENjOiBsaW51eC1tZWRpYUB2
-Z2VyLmtlcm5lbC5vcmcNCj4+Pj4gQ2M6IGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZw0K
-Pj4+IFJldmlld2VkLWJ5OiBTaW1vbmEgVmV0dGVyIDxzaW1vbmEudmV0dGVyQGZmd2xsLmNoPg0K
-Pj4gQWxzbyBxdWljayBkb2MgcmVxdWVzdDogV2UgZG8gaGF2ZSBhIGJpdCBvZiBvdmVydmlldyBk
-b2N1bWVudGF0aW9uIGZvcg0KPj4gcHJpbWUgaGVyZSBhYm91dCBzcGVjaWZpY2FsbHkgdGhpcyBs
-aWZldGltZSBmdW4sIGFuZCB3aHkgdGhlcmUncyBhIGNoYWluDQo+PiBvZiByZWZlcmVuY2VzIGFu
-ZCBoZW5jZSBhIGRpc3RpbmN0aW9uIGJldHdlZW4gaW1wb3J0ZWQgZm9yZWlnbiBkbWEtYnVmIGFu
-ZA0KPj4gcmUtaW1wb3J0ZWQgbmF0aXZlIGRtYS1idWY6DQo+Pg0KPj4gaHR0cHM6Ly9kcmkuZnJl
-ZWRlc2t0b3Aub3JnL2RvY3MvZHJtL2dwdS9kcm0tbW0uaHRtbCNyZWZlcmVuY2UtY291bnRpbmct
-Zm9yLWdlbS1kcml2ZXJzDQo+Pg0KPj4gSSB0aGluayBpdCB3b3VsZCBiZSBnb29kIHRvIGF1Z21l
-bnQgdGhpcyB3aXRoIG1vcmUgbGlua3MgdG8gZnVuY3Rpb25zDQo+PiAobGlrZSB0aGlzIG9uZSBy
-ZWNlbnRseSBhZGRlZCBhbmQgZml4ZWQgaW4gdGhpcyBwYXRjaCBoZXJlKSBhbmQgc3RydWN0DQo+
-PiBtZW1iZXJzIHRvIHRoYXQgb3ZlcnZpZXcuIEFuZCBtYXliZSBhbHNvIGxpbmsgZnJvbSBrZXkg
-ZnVuY3Rpb24gYW5kIHN0cnVjdA0KPj4gZnVuY3Rpb25zIGJhY2sgdG8gdGhhdCBvdmVydmlldyBk
-b2MuIE90aGVyd2lzZSBJIHRoaW5rIHRoZSBuZXh0IHBlcnNvbg0KPj4gd2lsbCBnZXQgY29uZnVz
-ZWQgYnkgdGhpcyByYXRoZXIgdHJpY2t5IGNvZGUgYWdhaW4gYW5kIGJyZWFrIGEgY29ybmVyDQo+
-PiBjYXNlcy4NCj4gQlRXLCBjb3VsZCB3ZSBhbHNvIGJhY2ttZXJnZSA2LjE1LXJjNSBpbnRvIGRy
-bS1taXNjLW5leHQgc28gdGhlIGZpeCBpcw0KPiBhbHNvIHByZXNlbnQgaW4gZHJtLW1pc2MtbmV4
-dD8NCg0KZHJtLW1pc2MtbmV4dCBpcyBub3cgYXQgLXJjNQ0KDQpCZXN0IHJlZ2FyZHMNClRob21h
-cw0KDQoNCi0tIA0KLS0NClRob21hcyBaaW1tZXJtYW5uDQpHcmFwaGljcyBEcml2ZXIgRGV2ZWxv
-cGVyDQpTVVNFIFNvZnR3YXJlIFNvbHV0aW9ucyBHZXJtYW55IEdtYkgNCkZyYW5rZW5zdHJhc3Nl
-IDE0NiwgOTA0NjEgTnVlcm5iZXJnLCBHZXJtYW55DQpHRjogSXZvIFRvdGV2LCBBbmRyZXcgTXll
-cnMsIEFuZHJldyBNY0RvbmFsZCwgQm91ZGllbiBNb2VybWFuDQpIUkIgMzY4MDkgKEFHIE51ZXJu
-YmVyZykNCg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
-TGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8u
-b3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBs
-aXN0cy5saW5hcm8ub3JnCg==
+
+--===============8449219071993936214==
+Content-Type: multipart/signed; micalg=pgp-sha384;
+	protocol="application/pgp-signature"; boundary="u4b35s3vftslgagk"
+Content-Disposition: inline
+
+
+--u4b35s3vftslgagk
+Content-Type: text/plain; protected-headers=v1; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH v2 2/2] dma-buf: heaps: Give default CMA heap a fixed name
+MIME-Version: 1.0
+
+On Tue, Apr 29, 2025 at 09:25:00AM -0700, John Stultz wrote:
+> On Mon, Apr 28, 2025 at 7:52=E2=80=AFAM Maxime Ripard <mripard@kernel.org=
+> wrote:
+> > On Fri, Apr 25, 2025 at 12:39:40PM -0700, John Stultz wrote:
+> > > To your larger point about policy, I do get the tension that you want
+> > > to be able to programmatically derive or evaluate heap names, so that
+> > > applications can consistently derive a pathname to get what they want.
+> >
+> > We've discussed it in the past, I don't really want to. But it was clear
+> > from the last discussion that you (plural) wanted to infer heap
+> > semantics from the names. I'm ok with that, but then if we want to make
+> > it work we need to have well defined names.
+>=20
+> So my name keeps on getting attached to that, but I don't think I was
+> involved in the LPC conversation when that got decided.
+
+Sorry then :/
+
+That's what I recalled, but I guess the pastries got the best of me :)
+
+Does that mean that you disagree with this point though? or just that
+you agree but still wanted to point out you were not part of that
+discussion?
+
+> > And it's actually what I really want to discuss here: we've discussed at
+> > length how bad the heaps name are (and not only here), but I don't think
+> > we have any documented policy on what makes a good name?
+>=20
+> I very much think having a policy/guidance for better names is a good goa=
+l.
+>=20
+> I just want to make sure it doesn't become a strict policy that lead
+> folks to make mistaken assumptions about a static solution being
+> viable in userland (like folks nostalgicly using "eth0" or a fixed
+> network device name in scripts expecting it to work on a different
+> system)
+
+I think that's one of the point where the "derive the buffer attributes"
+=66rom the name interact badly though. In your example, eth0 wouldn't have
+had any non-discoverable guarantees. So it can have any name you want,
+it doesn't matter, you can always discover it through some other mean,
+and go from there.
+
+If we say the name is how you can associate a heap and the kind of
+buffers you get, then we can't just use another heap name just like
+that. We could get buffers with a totally different semantics.
+
+I mean, it would probably work with Android, but for any other
+distribution, even if we came up with a gralloc-like solution, as soon
+as you start updating the kernel and whatever is using the heaps
+separately, it's game over. And pretty much all non-Android distros do?
+
+> > For example, I'm not sure exposing the allocator name is a good idea:
+> > it's an implementation detail and for all userspace cares about, we
+> > could change it every release if it provided the same kind of buffers.
+>=20
+> That is a fair point.
+>=20
+> > Taking your camera buffers example before, then we could also expose a
+> > memory region id, and let the platform figure it out, or use the usecase
+> > as the name.
+> >
+> > But if we don't document that, how can we possibly expect everyone
+> > including downstream to come up with perfect names every time. And FTR,
+> > I'm willing to write that doc down once the discussion settles.
+>=20
+> So again, yeah, I very much support having better guidance on the names.
+>=20
+> I think the number of device constraints and device combinations makes
+> a raw enumeration of things difficult.
+>=20
+> This is why the per-device use->heap mapping "glue" seems necessary to me.
+>=20
+> And, I do get that this runs into a similar problem with enumerating
+> and defining "uses" (which boil down to a combination of
+> devices-in-a-pipeline and access use patterns), but for Andorid it has
+> so far been manageable.
+>=20
+> Personally, I think the best idea I've heard so far to resolve this
+> from userland was Christian's suggestion that devices expose links to
+> compatible heaps, and then userland without a use->heap mapping could
+> for the set of devices they plan to use in a pipeline, figure out the
+> common heap name and use that to allocate.
+
+I plan to work on that, but also, it covers only what the driver cares
+about, ie, buffer location, etc. It doesn't really cover what userspace
+might care about, like whether the buffer is cachable or not. Both would
+work for any driver, but userspace will have to prefer one over the
+other if it plans to do CPU accesses.
+
+So we'd still need some (arguably more limited) enumeration on the
+userspace side.
+
+> However, that pushes the problem down a bit, requiring drivers
+> (instead of userland) to know what heaps they can work with and what
+> the names might be (which again, your goal for standardizing the heap
+> names isn't a bad thing!). Though, this approach also runs into
+> trouble as it opens a question of: should it only encode strict
+> constraint satisfaction, or something more subtle, as while something
+> might work with multiple heaps, its possible it won't be performant
+> enough unless it picks a specific one on device A or a different one
+> on device B.  And getting that sort of device-specific details
+> embedded into a driver isn't great either.
+
+Yeah :/
+
+> > > But I also think that there is so much variety in both the devices and
+> > > uses that there is no way that all use cases and all devices can be
+> > > satisfied with such a static or even programmatic mapping. From my
+> > > perspective, there just is going to have to be some device specific
+> > > glue logic that maps use->heap name. Same reason we have fstab and the
+> > > passwd file.
+> >
+> > fstab and passwd can be generated at (first) boot time / install. fstab
+> > is also being somewhat less important with the auto-partition discovery.
+> > How would you generate that configuration file at boot?
+> >
+> > I'm not really asking this as a theoretical question. Being able to
+> > auto-discover which heap a driver/device would allocate from is central
+> > for the cgroup work I mentioned earlier.
+> >
+> > And I'm really not sure how distros or applications developpers are
+> > supposed to keep up with the raw volume of devices that go out every
+> > year, each and every one of them having different heap names, etc.
+> > Possibly different from one version of the firmware to another.
+>=20
+> For generic distros, I don't have a good answer here. Historically the
+> focus has always been on single device usage, so having the driver do
+> the allocation was fine, and if you were using multiple devices you
+> could just copy the memory between the driver allocated buffers.  But
+> as we've moved to disaggregated IP blocks and device pipelines, all
+> those potential copies wreck performance and power.   I'm not sure
+> generic distros have the concept of a device pipeline very well
+> abstracted (obviously mesa and the wayland/X have had to deal with it,
+> and the video and camera side is dealing with it more and more).
+> Maybe a more established notion of use -> pipeline/device collections,
+> is needed as a starting point? Then using Christian's suggestion, one
+> could at least enumerate  use -> heap that would be functional. And
+> maybe device makers could then supplement explicit optimized mapping
+> overrides for their device?
+>=20
+> I just think leaving individual applications (or even individual
+> frameworks like mesa) to embed assumptions about heap names ->
+> functionality is going to be a problematic approach.
+
+I totally agree on the conclusion, but I still don't see how having a
+central component in charge of that will make things better. It just
+won't scale to the thousands of devices out there.
+
+And that's great improvements for the future, but heaps have use-cases
+today: the CMA heap is the only way to get a physically contiguous
+cacheable buffer in userspace at the moment for example.
+
+libcamera uses it for its software ISP implementation for example.
+
+So, while working on improving things in the future is a reasonable
+goal, we also need to improve things for the current users right now.
+And there's definitely users for it outside of Android.
+
+Which brings us back to the question: What would be a good name? Do we
+want to expose a platform specific region name, possibly with a suffix
+or prefix to define whether it's cached or not?
+
+Maxime
+
+--u4b35s3vftslgagk
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iJUEABMJAB0WIQTkHFbLp4ejekA/qfgnX84Zoj2+dgUCaBoPvwAKCRAnX84Zoj2+
+dqLKAXwN6RbIIm6e8RsvdgaSYZ4Q9EwZfTT5eFdxUHB6lT8Lux7+QWav3kRwU6ur
+7GIn+IEBgK9SEyVRAXfcvD3TxU5DFIJdax3+A2/TCq6DydwChzvX8/pzA14Rv80l
+fV6CJ8bmAQ==
+=Su3z
+-----END PGP SIGNATURE-----
+
+--u4b35s3vftslgagk--
+
+--===============8449219071993936214==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============8449219071993936214==--
