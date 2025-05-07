@@ -2,105 +2,105 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 56056AAD1F0
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  7 May 2025 02:11:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B17FCAAD1F3
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  7 May 2025 02:11:46 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 715BA446D1
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  7 May 2025 00:11:26 +0000 (UTC)
-Received: from mail-pg1-f201.google.com (mail-pg1-f201.google.com [209.85.215.201])
-	by lists.linaro.org (Postfix) with ESMTPS id 6404E463DF
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  7 May 2025 00:10:48 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id CDC1044A4C
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  7 May 2025 00:11:45 +0000 (UTC)
+Received: from mail-pl1-f202.google.com (mail-pl1-f202.google.com [209.85.214.202])
+	by lists.linaro.org (Postfix) with ESMTPS id EE025463E5
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  7 May 2025 00:10:50 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=google.com header.s=20230601 header.b=EEcFP92k;
+	dkim=pass header.d=google.com header.s=20230601 header.b=tiGlxXYf;
 	dmarc=pass (policy=reject) header.from=google.com;
-	spf=pass (lists.linaro.org: domain of 3B6UaaAkKDQQxnqivgmivksskpi.gsqpmrevs-qq-wmkpmwxw.pmrevs.svk@flex--tjmercier.bounces.google.com designates 209.85.215.201 as permitted sender) smtp.mailfrom=3B6UaaAkKDQQxnqivgmivksskpi.gsqpmrevs-qq-wmkpmwxw.pmrevs.svk@flex--tjmercier.bounces.google.com
-Received: by mail-pg1-f201.google.com with SMTP id 41be03b00d2f7-af2f03fcc95so6192422a12.1
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 06 May 2025 17:10:48 -0700 (PDT)
+	spf=pass (lists.linaro.org: domain of 3CaUaaAkKDQYzpskxiokxmuumrk.iusrotgxu-ss-yomroyzy.rotgxu.uxm@flex--tjmercier.bounces.google.com designates 209.85.214.202 as permitted sender) smtp.mailfrom=3CaUaaAkKDQYzpskxiokxmuumrk.iusrotgxu-ss-yomroyzy.rotgxu.uxm@flex--tjmercier.bounces.google.com
+Received: by mail-pl1-f202.google.com with SMTP id d9443c01a7336-22651aca434so51274495ad.1
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 06 May 2025 17:10:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1746576647; x=1747181447; darn=lists.linaro.org;
+        d=google.com; s=20230601; t=1746576650; x=1747181450; darn=lists.linaro.org;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=J2Exutn/ZWXBPWobLv3f+bgAg3/+JyztWu0aq/wV+8U=;
-        b=EEcFP92ksWfACCFi0NODvCrC+TXjtEa6q+k3+5TI7+XUs6bKhxrQp9kEvayXYnpHos
-         5/zVpJNG1QVw5SxbgmxdIGxhoa8J8HSE+9r+lwyM9J+8JN8JN2mjQOKabBl9VZuhqKwC
-         orFjJn9aS8T3SmKtap83H0s8Sdi7V7AZnyOBsw99VMzoTbkXAtBsLQ8T8kQ7KTUunt9u
-         ZkTHoF/WJsSlp2Fzv7nlwRr4qjl/US+tzfroQpKAm5PRxAgmhwPWJK4IjeevbE8apcGc
-         kOQEq7Faa5qJHwAZ8I2HcBQc5UsUyQACAdsogLNUhZHBn5UwEGz7l1pEu96VXIQvKbPZ
-         436w==
+        bh=SkxID+WP7mb4sg4ZUV6PaZg3RytzLGPGnjFriQZ17Hk=;
+        b=tiGlxXYfn282UPGdHHV4BgsRi9Cm19Fx1Mq4Lp54SalXCccLoeuG/6tVDX9F6VAdSY
+         zLsU6CvZwVvGMgvGYD7olClds1D4ENiAZsgP23RcuTldnAKkOpLaoZ2WkRJeNeak+BpT
+         QhwdiiR6Fdjkiqpx20uOi2KL9Ns6W+RUyw8UaMr3tT5w6RKRnOsl3FTIgQd3Ta5fc1l3
+         fCBmnqjDICPV326lFC88cnkVbbl+XxC31MLsgdQgqgYnN+Z4ZAjhaDdqmMV8uhJnBcAq
+         P9T2mXYgd6s7Z+JAinuu3/WnBBA01jh/8tDaWnKvJ06fBgoG10sJmBVXdiBhOx7Im1jd
+         uuHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1746576647; x=1747181447;
+        d=1e100.net; s=20230601; t=1746576650; x=1747181450;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=J2Exutn/ZWXBPWobLv3f+bgAg3/+JyztWu0aq/wV+8U=;
-        b=sjfUKjDjylrA0b2Z27LxZnp+k89Tdf+LbzTyCvRnaDVX3zQQp+bOcV5wbwFOc2oYzI
-         hgzoKnELczsRpNymIt+l+S7HX5HxHLk7gB7F0tbwnq0RqxvmUDWrjfIvKJKnGeM5A0H1
-         VlXQaNMYBQ2QfF5c1gbsBI3TZ/Kg0EC1t0x+GtQM0pRR8Bggwc1NvCLTX/gxY5EQFeS+
-         3JgeAU6Xcr/TF545OOtF+Am/t8g5AEh6KlLhioa2AeRb+bNfRuupS5AFByb+jw1yL3WQ
-         5GKl0gw+VWDAPp9SyoCxXY1Ya6Y8fbGl+rbsuIloyHKvwD6Xbwi4k0zrRTl7yg0gmGIR
-         SMIQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXw8ft6nUKhcnjOEAdLCdpPdGl4R8ErKqeoMjlsD8nPAWad0G9/pwuBEwWz21S2xNX8HuQ7OHcgcJxDxwnL@lists.linaro.org
-X-Gm-Message-State: AOJu0YwAy4bt0KJqAvEWwU8Zq+CkThkoAq5C5ojGgHTkGEM27NgRYS2D
-	zGRtmiKdLpEAmnYvXSBpcVzp4yHA02rvKLPex56rIJ7fSMPKsX9A3yaxxtjMaOfYiblaQVqlfN2
-	O5m+V1EfDjJ26oQ==
-X-Google-Smtp-Source: AGHT+IFL0AeKYJWX5uQDx4vtlik1jrjuYKA2AIFKy1hdyB/rg+TpkzIfgKkb1XNyAaj5vjstqCOldZHytqVX2N0=
-X-Received: from pjf8.prod.google.com ([2002:a17:90b:3f08:b0:30a:8830:9f6b])
+        bh=SkxID+WP7mb4sg4ZUV6PaZg3RytzLGPGnjFriQZ17Hk=;
+        b=Gib9HLv62vRxY+YiEDf7jiVE7ZtIDnp7WOnj5t8xJ+UdMXORpcWE1MIM2muJi9WzsW
+         dvBzKnj4jSyN+S95TaDAF9ddl47j3agBqUjgn8hwWNCxy1LDsN5CcJBJH6YX3lDDUOFn
+         Rl1czmoRLpD8o88WG+0U7Wmv1J/G2Pd4iJ03SVOkFyTlxaF8YdxsA9FHLGCnAdjKgOU3
+         LClMBWKo8qx5qAdT247Pj1F8jSgYV9bMTfhCYnacyRpBApQOwKYw6MiHoXOqoVDWyn/o
+         srBbksFVxkots0P7Mx14vSwcbLOm7rpDwL4Yo2GJ6zmFPruQhhE4pgAi4pWKA88ljWDG
+         odTA==
+X-Forwarded-Encrypted: i=1; AJvYcCXscv6LJ2CrGMvv/8f6iL27W0Uqp+EcZGHG79ll9nys6wKfU0JDq2ZbWj5KWxT0D+B7V/0Py7tTPOT2dEXZ@lists.linaro.org
+X-Gm-Message-State: AOJu0Yxcot1JHTA6/niu8t9imTNiQTo9XnQz74/BpX3baXk9EfKItAij
+	hG30WiyW/V6m18Ik+LOBC2tPUg7QLrJPDbuZLtoBYPQso6YcKDwDDHt40BmcUHy5NKX6y0RR4Q5
+	SwCYwEKGPY7SBlw==
+X-Google-Smtp-Source: AGHT+IEx7hDcQzk8ELF2Wf/YDX+04BAayFsjqz8ketxueOqk4IMFJhrgD4+bT2AOspb/6AKarjrhAJ8dHZy5bPA=
+X-Received: from pjbsi7.prod.google.com ([2002:a17:90b:5287:b0:2fb:fa85:1678])
  (user=tjmercier job=prod-delivery.src-stubby-dispatcher) by
- 2002:a17:90b:2249:b0:2ee:c291:765a with SMTP id 98e67ed59e1d1-30aac179571mr2222024a91.8.1746576647544;
- Tue, 06 May 2025 17:10:47 -0700 (PDT)
-Date: Wed,  7 May 2025 00:10:33 +0000
+ 2002:a17:902:ecc6:b0:22e:1740:e561 with SMTP id d9443c01a7336-22e5ea501ccmr19570925ad.19.1746576649869;
+ Tue, 06 May 2025 17:10:49 -0700 (PDT)
+Date: Wed,  7 May 2025 00:10:34 +0000
 In-Reply-To: <20250507001036.2278781-1-tjmercier@google.com>
 Mime-Version: 1.0
 References: <20250507001036.2278781-1-tjmercier@google.com>
 X-Mailer: git-send-email 2.49.0.1045.g170613ef41-goog
-Message-ID: <20250507001036.2278781-3-tjmercier@google.com>
+Message-ID: <20250507001036.2278781-4-tjmercier@google.com>
 From: "T.J. Mercier" <tjmercier@google.com>
 To: sumit.semwal@linaro.org, christian.koenig@amd.com, ast@kernel.org,
 	daniel@iogearbox.net, andrii@kernel.org, martin.lau@linux.dev,
 	skhan@linuxfoundation.org, alexei.starovoitov@gmail.com, song@kernel.org
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 6404E463DF
+X-Rspamd-Queue-Id: EE025463E5
 X-Spamd-Bar: ----
-X-Spamd-Result: default: False [-4.70 / 15.00];
+X-Spamd-Result: default: False [-4.80 / 15.00];
 	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
 	MID_CONTAINS_FROM(1.00)[];
 	MV_CASE(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	FORGED_SENDER(0.30)[tjmercier@google.com,3B6UaaAkKDQQxnqivgmivksskpi.gsqpmrevs-qq-wmkpmwxw.pmrevs.svk@flex--tjmercier.bounces.google.com];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
+	FORGED_SENDER(0.30)[tjmercier@google.com,3CaUaaAkKDQYzpskxiokxmuumrk.iusrotgxu-ss-yomroyzy.rotgxu.uxm@flex--tjmercier.bounces.google.com];
 	R_DKIM_ALLOW(-0.20)[google.com:s=20230601];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
 	MIME_GOOD(-0.10)[text/plain];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[25];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.214.202:from];
 	RCVD_TLS_LAST(0.00)[];
+	ARC_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	FREEMAIL_TO(0.00)[linaro.org,amd.com,kernel.org,iogearbox.net,linux.dev,linuxfoundation.org,gmail.com];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[25];
+	DNSWL_BLOCKED(0.00)[209.85.214.202:from];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	NEURAL_HAM(-0.00)[-1.000];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[tjmercier@google.com,3B6UaaAkKDQQxnqivgmivksskpi.gsqpmrevs-qq-wmkpmwxw.pmrevs.svk@flex--tjmercier.bounces.google.com];
+	FROM_NEQ_ENVFROM(0.00)[tjmercier@google.com,3CaUaaAkKDQYzpskxiokxmuumrk.iusrotgxu-ss-yomroyzy.rotgxu.uxm@flex--tjmercier.bounces.google.com];
 	FREEMAIL_CC(0.00)[vger.kernel.org,lists.freedesktop.org,lists.linaro.org,google.com,ffwll.ch,gmail.com,linux.dev,kernel.org,fomichev.me,fb.com];
-	TAGGED_RCPT(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
 	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.215.201:from];
+	TAGGED_RCPT(0.00)[];
 	DKIM_TRACE(0.00)[google.com:+];
 	RCVD_COUNT_ONE(0.00)[1];
-	RCVD_IN_DNSWL_NONE(0.00)[209.85.215.201:from]
+	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
-Message-ID-Hash: 6WMFMUO2YLASOQXQVKTRCUMJHDIRVAWE
-X-Message-ID-Hash: 6WMFMUO2YLASOQXQVKTRCUMJHDIRVAWE
-X-MailFrom: 3B6UaaAkKDQQxnqivgmivksskpi.gsqpmrevs-qq-wmkpmwxw.pmrevs.svk@flex--tjmercier.bounces.google.com
+Message-ID-Hash: R4A6LTWC6CVKUSADIELLQMKRQPEXE3PW
+X-Message-ID-Hash: R4A6LTWC6CVKUSADIELLQMKRQPEXE3PW
+X-MailFrom: 3CaUaaAkKDQYzpskxiokxmuumrk.iusrotgxu-ss-yomroyzy.rotgxu.uxm@flex--tjmercier.bounces.google.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, bpf@vger.kernel.org, linux-kselftest@vger.kernel.org, android-mm@google.com, simona@ffwll.ch, eddyz87@gmail.com, yonghong.song@linux.dev, john.fastabend@gmail.com, kpsingh@kernel.org, sdf@fomichev.me, jolsa@kernel.org, mykolal@fb.com, "T.J. Mercier" <tjmercier@google.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH bpf-next v3 2/5] bpf: Add dmabuf iterator
+Subject: [Linaro-mm-sig] [PATCH bpf-next v3 3/5] bpf: Add open coded dmabuf iterator
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6WMFMUO2YLASOQXQVKTRCUMJHDIRVAWE/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/R4A6LTWC6CVKUSADIELLQMKRQPEXE3PW/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -110,241 +110,90 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-The dmabuf iterator traverses the list of all DMA buffers.
-
-DMA buffers are refcounted through their associated struct file. A
-reference is taken on each buffer as the list is iterated to ensure each
-buffer persists for the duration of the bpf program execution without
-holding the list mutex.
+This open coded iterator allows for more flexibility when creating BPF
+programs. It can support output in formats other than text. With an open
+coded iterator, a single BPF program can traverse multiple kernel data
+structures (now including dmabufs), allowing for more efficient analysis
+of kernel data compared to multiple reads from procfs, sysfs, or
+multiple traditional BPF iterator invocations.
 
 Signed-off-by: T.J. Mercier <tjmercier@google.com>
 ---
- drivers/dma-buf/dma-buf.c |  64 ++++++++++++++++++++++++
- include/linux/dma-buf.h   |   3 ++
- kernel/bpf/Makefile       |   3 ++
- kernel/bpf/dmabuf_iter.c  | 102 ++++++++++++++++++++++++++++++++++++++
- 4 files changed, 172 insertions(+)
- create mode 100644 kernel/bpf/dmabuf_iter.c
+ kernel/bpf/dmabuf_iter.c | 47 ++++++++++++++++++++++++++++++++++++++++
+ kernel/bpf/helpers.c     |  5 +++++
+ 2 files changed, 52 insertions(+)
 
-diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
-index 8d151784e302..9fee2788924e 100644
---- a/drivers/dma-buf/dma-buf.c
-+++ b/drivers/dma-buf/dma-buf.c
-@@ -19,7 +19,9 @@
- #include <linux/anon_inodes.h>
- #include <linux/export.h>
- #include <linux/debugfs.h>
-+#include <linux/list.h>
- #include <linux/module.h>
-+#include <linux/mutex.h>
- #include <linux/seq_file.h>
- #include <linux/sync_file.h>
- #include <linux/poll.h>
-@@ -55,6 +57,68 @@ static void __dma_buf_list_del(struct dma_buf *dmabuf)
- 	mutex_unlock(&dmabuf_list_mutex);
- }
- 
-+/**
-+ * get_first_dmabuf - begin iteration through global list of DMA-bufs
-+ *
-+ * Returns the first buffer in the global list of DMA-bufs that's not in the
-+ * process of being destroyed. Increments that buffer's reference count to
-+ * prevent buffer destruction. Callers must release the reference, either by
-+ * continuing iteration with get_next_dmabuf(), or with dma_buf_put().
-+ *
-+ * Returns NULL If no active buffers are present.
-+ */
-+struct dma_buf *get_first_dmabuf(void)
-+{
-+	struct dma_buf *ret = NULL, *dmabuf;
-+
-+	/*
-+	 * The list mutex does not protect a dmabuf's refcount, so it can be
-+	 * zeroed while we are iterating. We cannot call get_dma_buf() since the
-+	 * caller may not already own a reference to the buffer.
-+	 */
-+	mutex_lock(&dmabuf_list_mutex);
-+	list_for_each_entry(dmabuf, &dmabuf_list, list_node) {
-+		if (file_ref_get(&dmabuf->file->f_ref)) {
-+			ret = dmabuf;
-+			break;
-+		}
-+	}
-+	mutex_unlock(&dmabuf_list_mutex);
-+	return ret;
-+}
-+
-+/**
-+ * get_next_dmabuf - continue iteration through global list of DMA-bufs
-+ * @dmabuf:	[in]	pointer to dma_buf
-+ *
-+ * Decrements the reference count on the provided buffer. Returns the next
-+ * buffer from the remainder of the global list of DMA-bufs with its reference
-+ * count incremented. Callers must release the reference, either by continuing
-+ * iteration with get_next_dmabuf(), or with dma_buf_put().
-+ *
-+ * Returns NULL If no additional active buffers are present.
-+ */
-+struct dma_buf *get_next_dmabuf(struct dma_buf *dmabuf)
-+{
-+	struct dma_buf *ret = NULL;
-+
-+	/*
-+	 * The list mutex does not protect a dmabuf's refcount, so it can be
-+	 * zeroed while we are iterating. We cannot call get_dma_buf() since the
-+	 * caller may not already own a reference to the buffer.
-+	 */
-+	mutex_lock(&dmabuf_list_mutex);
-+	dma_buf_put(dmabuf);
-+	list_for_each_entry_continue(dmabuf, &dmabuf_list, list_node) {
-+		if (file_ref_get(&dmabuf->file->f_ref)) {
-+			ret = dmabuf;
-+			break;
-+		}
-+	}
-+	mutex_unlock(&dmabuf_list_mutex);
-+	return ret;
-+}
-+
- static char *dmabuffs_dname(struct dentry *dentry, char *buffer, int buflen)
- {
- 	struct dma_buf *dmabuf;
-diff --git a/include/linux/dma-buf.h b/include/linux/dma-buf.h
-index 8ff4add71f88..1820f6db6e58 100644
---- a/include/linux/dma-buf.h
-+++ b/include/linux/dma-buf.h
-@@ -568,6 +568,9 @@ static inline void get_dma_buf(struct dma_buf *dmabuf)
- 	get_file(dmabuf->file);
- }
- 
-+struct dma_buf *get_first_dmabuf(void);
-+struct dma_buf *get_next_dmabuf(struct dma_buf *dmbuf);
-+
- /**
-  * dma_buf_is_dynamic - check if a DMA-buf uses dynamic mappings.
-  * @dmabuf: the DMA-buf to check
-diff --git a/kernel/bpf/Makefile b/kernel/bpf/Makefile
-index 70502f038b92..3a335c50e6e3 100644
---- a/kernel/bpf/Makefile
-+++ b/kernel/bpf/Makefile
-@@ -53,6 +53,9 @@ obj-$(CONFIG_BPF_SYSCALL) += relo_core.o
- obj-$(CONFIG_BPF_SYSCALL) += btf_iter.o
- obj-$(CONFIG_BPF_SYSCALL) += btf_relocate.o
- obj-$(CONFIG_BPF_SYSCALL) += kmem_cache_iter.o
-+ifeq ($(CONFIG_DMA_SHARED_BUFFER),y)
-+obj-$(CONFIG_BPF_SYSCALL) += dmabuf_iter.o
-+endif
- 
- CFLAGS_REMOVE_percpu_freelist.o = $(CC_FLAGS_FTRACE)
- CFLAGS_REMOVE_bpf_lru_list.o = $(CC_FLAGS_FTRACE)
 diff --git a/kernel/bpf/dmabuf_iter.c b/kernel/bpf/dmabuf_iter.c
-new file mode 100644
-index 000000000000..80bca8239c6d
---- /dev/null
+index 80bca8239c6d..b0478b4875ed 100644
+--- a/kernel/bpf/dmabuf_iter.c
 +++ b/kernel/bpf/dmabuf_iter.c
-@@ -0,0 +1,102 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/* Copyright (c) 2025 Google LLC */
-+#include <linux/bpf.h>
-+#include <linux/btf_ids.h>
-+#include <linux/dma-buf.h>
-+#include <linux/kernel.h>
-+#include <linux/seq_file.h>
+@@ -100,3 +100,50 @@ static int __init dmabuf_iter_init(void)
+ }
+ 
+ late_initcall(dmabuf_iter_init);
 +
-+BTF_ID_LIST_SINGLE(bpf_dmabuf_btf_id, struct, dma_buf)
-+DEFINE_BPF_ITER_FUNC(dmabuf, struct bpf_iter_meta *meta, struct dma_buf *dmabuf)
++struct bpf_iter_dmabuf {
++	/* opaque iterator state; having __u64 here allows to preserve correct
++	 * alignment requirements in vmlinux.h, generated from BTF
++	 */
++	__u64 __opaque[1];
++} __aligned(8);
 +
-+static void *dmabuf_iter_seq_start(struct seq_file *seq, loff_t *pos)
++/* Non-opaque version of bpf_iter_dmabuf */
++struct bpf_iter_dmabuf_kern {
++	struct dma_buf *dmabuf;
++} __aligned(8);
++
++__bpf_kfunc_start_defs();
++
++__bpf_kfunc int bpf_iter_dmabuf_new(struct bpf_iter_dmabuf *it)
 +{
-+	if (*pos)
-+		return NULL;
++	struct bpf_iter_dmabuf_kern *kit = (void *)it;
 +
-+	return get_first_dmabuf();
-+}
++	BUILD_BUG_ON(sizeof(*kit) > sizeof(*it));
++	BUILD_BUG_ON(__alignof__(*kit) != __alignof__(*it));
 +
-+static void *dmabuf_iter_seq_next(struct seq_file *seq, void *v, loff_t *pos)
-+{
-+	struct dma_buf *dmabuf = v;
-+
-+	++*pos;
-+
-+	return get_next_dmabuf(dmabuf);
-+}
-+
-+struct bpf_iter__dmabuf {
-+	__bpf_md_ptr(struct bpf_iter_meta *, meta);
-+	__bpf_md_ptr(struct dma_buf *, dmabuf);
-+};
-+
-+static int __dmabuf_seq_show(struct seq_file *seq, void *v, bool in_stop)
-+{
-+	struct bpf_iter_meta meta = {
-+		.seq = seq,
-+	};
-+	struct bpf_iter__dmabuf ctx = {
-+		.meta = &meta,
-+		.dmabuf = v,
-+	};
-+	struct bpf_prog *prog = bpf_iter_get_info(&meta, in_stop);
-+
-+	if (prog)
-+		return bpf_iter_run_prog(prog, &ctx);
-+
++	kit->dmabuf = NULL;
 +	return 0;
 +}
 +
-+static int dmabuf_iter_seq_show(struct seq_file *seq, void *v)
++__bpf_kfunc struct dma_buf *bpf_iter_dmabuf_next(struct bpf_iter_dmabuf *it)
 +{
-+	return __dmabuf_seq_show(seq, v, false);
++	struct bpf_iter_dmabuf_kern *kit = (void *)it;
++
++	if (kit->dmabuf)
++		kit->dmabuf = get_next_dmabuf(kit->dmabuf);
++	else
++		kit->dmabuf = get_first_dmabuf();
++
++	return kit->dmabuf;
 +}
 +
-+static void dmabuf_iter_seq_stop(struct seq_file *seq, void *v)
++__bpf_kfunc void bpf_iter_dmabuf_destroy(struct bpf_iter_dmabuf *it)
 +{
-+	struct dma_buf *dmabuf = v;
++	struct bpf_iter_dmabuf_kern *kit = (void *)it;
 +
-+	if (dmabuf)
-+		dma_buf_put(dmabuf);
++	if (kit->dmabuf)
++		dma_buf_put(kit->dmabuf);
 +}
 +
-+static const struct seq_operations dmabuf_iter_seq_ops = {
-+	.start	= dmabuf_iter_seq_start,
-+	.next	= dmabuf_iter_seq_next,
-+	.stop	= dmabuf_iter_seq_stop,
-+	.show	= dmabuf_iter_seq_show,
-+};
-+
-+static void bpf_iter_dmabuf_show_fdinfo(const struct bpf_iter_aux_info *aux,
-+					struct seq_file *seq)
-+{
-+	seq_puts(seq, "dmabuf iter\n");
-+}
-+
-+static const struct bpf_iter_seq_info dmabuf_iter_seq_info = {
-+	.seq_ops		= &dmabuf_iter_seq_ops,
-+	.init_seq_private	= NULL,
-+	.fini_seq_private	= NULL,
-+	.seq_priv_size		= 0,
-+};
-+
-+static struct bpf_iter_reg bpf_dmabuf_reg_info = {
-+	.target			= "dmabuf",
-+	.feature                = BPF_ITER_RESCHED,
-+	.show_fdinfo		= bpf_iter_dmabuf_show_fdinfo,
-+	.ctx_arg_info_size	= 1,
-+	.ctx_arg_info		= {
-+		{ offsetof(struct bpf_iter__dmabuf, dmabuf),
-+		  PTR_TO_BTF_ID_OR_NULL },
-+	},
-+	.seq_info		= &dmabuf_iter_seq_info,
-+};
-+
-+static int __init dmabuf_iter_init(void)
-+{
-+	bpf_dmabuf_reg_info.ctx_arg_info[0].btf_id = bpf_dmabuf_btf_id[0];
-+	return bpf_iter_reg_target(&bpf_dmabuf_reg_info);
-+}
-+
-+late_initcall(dmabuf_iter_init);
++__bpf_kfunc_end_defs();
+diff --git a/kernel/bpf/helpers.c b/kernel/bpf/helpers.c
+index 78cefb41266a..39fe63016868 100644
+--- a/kernel/bpf/helpers.c
++++ b/kernel/bpf/helpers.c
+@@ -3346,6 +3346,11 @@ BTF_ID_FLAGS(func, bpf_iter_kmem_cache_next, KF_ITER_NEXT | KF_RET_NULL | KF_SLE
+ BTF_ID_FLAGS(func, bpf_iter_kmem_cache_destroy, KF_ITER_DESTROY | KF_SLEEPABLE)
+ BTF_ID_FLAGS(func, bpf_local_irq_save)
+ BTF_ID_FLAGS(func, bpf_local_irq_restore)
++#ifdef CONFIG_DMA_SHARED_BUFFER
++BTF_ID_FLAGS(func, bpf_iter_dmabuf_new, KF_ITER_NEW | KF_SLEEPABLE)
++BTF_ID_FLAGS(func, bpf_iter_dmabuf_next, KF_ITER_NEXT | KF_RET_NULL | KF_SLEEPABLE)
++BTF_ID_FLAGS(func, bpf_iter_dmabuf_destroy, KF_ITER_DESTROY | KF_SLEEPABLE)
++#endif
+ BTF_KFUNCS_END(common_btf_ids)
+ 
+ static const struct btf_kfunc_id_set common_kfunc_set = {
 -- 
 2.49.0.1045.g170613ef41-goog
 
