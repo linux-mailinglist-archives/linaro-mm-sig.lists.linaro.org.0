@@ -2,105 +2,105 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id B4883AAD1FF
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  7 May 2025 02:12:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 89EB2AAD942
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  7 May 2025 09:59:16 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id D8E33446D1
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  7 May 2025 00:12:15 +0000 (UTC)
-Received: from mail-pg1-f201.google.com (mail-pg1-f201.google.com [209.85.215.201])
-	by lists.linaro.org (Postfix) with ESMTPS id 6B0BB463DF
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  7 May 2025 00:10:55 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 564B4459AD
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  7 May 2025 07:59:15 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.15])
+	by lists.linaro.org (Postfix) with ESMTPS id DE3EB3F57F
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  7 May 2025 07:59:01 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=google.com header.s=20230601 header.b=xOilTX4g;
-	dmarc=pass (policy=reject) header.from=google.com;
-	spf=pass (lists.linaro.org: domain of 3DqUaaAkKDQs4uxp2ntp2rzzrwp.nzxwtyl2z-xx-3trwt343.wtyl2z.z2r@flex--tjmercier.bounces.google.com designates 209.85.215.201 as permitted sender) smtp.mailfrom=3DqUaaAkKDQs4uxp2ntp2rzzrwp.nzxwtyl2z-xx-3trwt343.wtyl2z.z2r@flex--tjmercier.bounces.google.com
-Received: by mail-pg1-f201.google.com with SMTP id 41be03b00d2f7-af5156fbe79so7091450a12.1
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 06 May 2025 17:10:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1746576654; x=1747181454; darn=lists.linaro.org;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=6jpVjHCzkmCWbY9yKnMBqEBZlPsFYlEJmH11rX7kflc=;
-        b=xOilTX4g1KQ48qrCTHvVs3gh5Unc0tySRfA8jRuU60r2Xj1A6IDnAURGl3GPsEFQGR
-         1aHTQ557z9LYZTVipIrtmlVy+/pUuPMVZ0osjl2AWCcEs23rqcH0iGV1N2bWfHFq8T3M
-         jjJTyL6VpSZnRZtCLO0cEUds3J0pJj/CvWxhc1BRtmQLtJp/u1Qdwn4VxEvmF4uNJWY5
-         Ruzy9LICtIIZ1bnNrMn6jjfQdfqZDWwMGoKCe01GeAuoBQClrbs2IhoEgyI0umZeVf2L
-         Z1EGGSZRrcT2U+/gJ37cjJvhYCtcQs/LEoYJ6YRICkdYp5Z9HgEcG9AQGB8myjeWfDl5
-         4p3A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1746576654; x=1747181454;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=6jpVjHCzkmCWbY9yKnMBqEBZlPsFYlEJmH11rX7kflc=;
-        b=ladsttYS2d2le7dEB+ayO159biTmBL+INmYA+vA+ZqWRf3ai+8Wtke3VnfhgK44yBH
-         Z6ALnmLk/Gs6wg7UHXVOaewq0kn7OdtVWb+4uYk5Yi5Mr5Ib1GYHkXtxzXbV2UcSU6Ll
-         Abe/lDOEgDpuNGinfhUF0Nq5dmzMHfL0RqVpySX/OuQKFdTkWa65cSTUYPkhle9NyDEw
-         wQ2MOncoB0TwBGUfTRSBN1J04D4AFKNbzqqGfzTducDO5ERFg3LiB0UGl/gLs5fIxNj4
-         tC1XGxrUWqiJPfUqkXb1ArYtOoznmp2dnbAcubIOD6+R68fH+5BYPIghYWVIAkily8mp
-         4n1A==
-X-Forwarded-Encrypted: i=1; AJvYcCXKNn2gokWGGTS2XqXNhk683X4VeljCn4nrjm+dKklpHE+R5IiAnQWxq9XAPzyN6snGEGRAOH0G1p6tSnK0@lists.linaro.org
-X-Gm-Message-State: AOJu0Yz0oYQjSC/udHj7L+tILzBNtrmpqQEvAevD4evNUOOXXu9mVT3F
-	0QLGErMWrsia6ddi3ksU2Wibk7DFaIUfcXWaRdFD5rhBZ5Pbe6TqrJhX94MHSjRyHnHTkwp891s
-	hB5mQ04xOLRKLxw==
-X-Google-Smtp-Source: AGHT+IE1g6ZISbTEJDgWxmK/h1TRKB//bmXhLy5RaNBy5/H9JIqO4bz4IEDm9/jAN63XigNGeBqNcMqHYx0Wqlo=
-X-Received: from pgbq20.prod.google.com ([2002:a63:5c14:0:b0:af9:94ca:51b])
- (user=tjmercier job=prod-delivery.src-stubby-dispatcher) by
- 2002:a05:6a20:3950:b0:20b:a75e:fa32 with SMTP id adf61e73a8af0-2148d42d024mr1638788637.40.1746576654550;
- Tue, 06 May 2025 17:10:54 -0700 (PDT)
-Date: Wed,  7 May 2025 00:10:36 +0000
-In-Reply-To: <20250507001036.2278781-1-tjmercier@google.com>
-Mime-Version: 1.0
-References: <20250507001036.2278781-1-tjmercier@google.com>
-X-Mailer: git-send-email 2.49.0.1045.g170613ef41-goog
-Message-ID: <20250507001036.2278781-6-tjmercier@google.com>
-From: "T.J. Mercier" <tjmercier@google.com>
-To: sumit.semwal@linaro.org, christian.koenig@amd.com, ast@kernel.org,
-	daniel@iogearbox.net, andrii@kernel.org, martin.lau@linux.dev,
-	skhan@linuxfoundation.org, alexei.starovoitov@gmail.com, song@kernel.org
+	dkim=pass header.d=intel.com header.s=Intel header.b=fCiXWS+F;
+	dmarc=pass (policy=none) header.from=intel.com;
+	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 198.175.65.15 as permitted sender) smtp.mailfrom=lkp@intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1746604742; x=1778140742;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=pc9ZnpfpNAW8KOYgspYmh8RTXqehB+edtu1UuEUhwVw=;
+  b=fCiXWS+FphLuH8p/ardWVmN2K3rxql3v/YdeJx+Fq1jA2jEuJVuzwJ5b
+   u2koIiC1v/lPvXqohzgK37EI1o3nv0zrPidkHejXl+vAPk5VLSkijocKk
+   8VAotCr0rHqFOcpu4Jnzx1/lR5aDNUd9jvOtKGSA4LPnA0Q9fine+k+5w
+   n7/TrARTDFxQ3UKxN4MV9x9LN1VauU/FSumOputJ79C62P6oWnZjOQalX
+   VQnV7m4x9JyQkvqV9er4jBF2ggU1YwFNnd5aJIXNgulnsg/EmBF6vvk8W
+   7zVG4dFn+jQ+7/4Uc1nNobWJn5bnohV35YoirKwoYseeLoFvq+TmxVeqM
+   w==;
+X-CSE-ConnectionGUID: SZh6Uv0FQO6V7D41AO0ZGQ==
+X-CSE-MsgGUID: 3X5rUQKoT4GnOJEqAm7Jhw==
+X-IronPort-AV: E=McAfee;i="6700,10204,11425"; a="51969521"
+X-IronPort-AV: E=Sophos;i="6.15,268,1739865600";
+   d="scan'208";a="51969521"
+Received: from fmviesa002.fm.intel.com ([10.60.135.142])
+  by orvoesa107.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 May 2025 00:59:01 -0700
+X-CSE-ConnectionGUID: qCHCQ2hDQBu1dMXhuqOWpw==
+X-CSE-MsgGUID: HwB8VYUgR8ivGlALf/bRSA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.15,268,1739865600";
+   d="scan'208";a="159175157"
+Received: from lkp-server01.sh.intel.com (HELO 1992f890471c) ([10.239.97.150])
+  by fmviesa002.fm.intel.com with ESMTP; 07 May 2025 00:58:58 -0700
+Received: from kbuild by 1992f890471c with local (Exim 4.96)
+	(envelope-from <lkp@intel.com>)
+	id 1uCZg6-0007Mz-26;
+	Wed, 07 May 2025 07:58:54 +0000
+Date: Wed, 7 May 2025 15:58:20 +0800
+From: kernel test robot <lkp@intel.com>
+To: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
+	Jens Wiklander <jens.wiklander@linaro.org>,
+	Sumit Garg <sumit.garg@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>,
+	Apurupa Pattapu <quic_apurupa@quicinc.com>,
+	Kees Cook <kees@kernel.org>,
+	"Gustavo A. R. Silva" <gustavoars@kernel.org>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
+Message-ID: <202505071540.hAeEOUWt-lkp@intel.com>
+References: <20250428-qcom-tee-using-tee-ss-without-mem-obj-v4-8-6a143640a6cb@oss.qualcomm.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20250428-qcom-tee-using-tee-ss-without-mem-obj-v4-8-6a143640a6cb@oss.qualcomm.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 6B0BB463DF
-X-Spamd-Bar: ----
-X-Spamd-Result: default: False [-4.70 / 15.00];
-	REPLY(-4.00)[];
-	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Rspamd-Queue-Id: DE3EB3F57F
+X-Spamd-Bar: -------
+X-Spamd-Result: default: False [-8.00 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
+	BAYES_HAM(-3.00)[99.99%];
+	DWL_DNSWL_MED(-2.00)[intel.com:dkim];
 	MID_CONTAINS_FROM(1.00)[];
-	MV_CASE(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	FORGED_SENDER(0.30)[tjmercier@google.com,3DqUaaAkKDQs4uxp2ntp2rzzrwp.nzxwtyl2z-xx-3trwt343.wtyl2z.z2r@flex--tjmercier.bounces.google.com];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
-	R_DKIM_ALLOW(-0.20)[google.com:s=20230601];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	R_SPF_ALLOW(-0.20)[+ip4:198.175.65.0/26];
 	MIME_GOOD(-0.10)[text/plain];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[25];
-	RCVD_TLS_LAST(0.00)[];
+	ASN(0.00)[asn:4983, ipnet:198.175.64.0/23, country:US];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_TO(0.00)[linaro.org,amd.com,kernel.org,iogearbox.net,linux.dev,linuxfoundation.org,gmail.com];
-	FROM_HAS_DN(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[20];
+	ARC_NA(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
 	TO_DN_SOME(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[tjmercier@google.com,3DqUaaAkKDQs4uxp2ntp2rzzrwp.nzxwtyl2z-xx-3trwt343.wtyl2z.z2r@flex--tjmercier.bounces.google.com];
-	FREEMAIL_CC(0.00)[vger.kernel.org,lists.freedesktop.org,lists.linaro.org,google.com,ffwll.ch,gmail.com,linux.dev,kernel.org,fomichev.me,fb.com];
-	TAGGED_RCPT(0.00)[];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.215.201:from];
-	DKIM_TRACE(0.00)[google.com:+];
-	RCVD_COUNT_ONE(0.00)[1];
-	RCVD_IN_DNSWL_NONE(0.00)[209.85.215.201:from]
+	RCVD_TLS_LAST(0.00)[];
+	DNSWL_BLOCKED(0.00)[198.175.65.15:from];
+	DKIM_TRACE(0.00)[intel.com:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: 2W4MMXERGMGEHLNCYWBUQU3J2FQVXQVF
-X-Message-ID-Hash: 2W4MMXERGMGEHLNCYWBUQU3J2FQVXQVF
-X-MailFrom: 3DqUaaAkKDQs4uxp2ntp2rzzrwp.nzxwtyl2z-xx-3trwt343.wtyl2z.z2r@flex--tjmercier.bounces.google.com
+Message-ID-Hash: JRAFEUNTDTGSWPGZB6GAGF7ZZN2PEVRU
+X-Message-ID-Hash: JRAFEUNTDTGSWPGZB6GAGF7ZZN2PEVRU
+X-MailFrom: lkp@intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, bpf@vger.kernel.org, linux-kselftest@vger.kernel.org, android-mm@google.com, simona@ffwll.ch, eddyz87@gmail.com, yonghong.song@linux.dev, john.fastabend@gmail.com, kpsingh@kernel.org, sdf@fomichev.me, jolsa@kernel.org, mykolal@fb.com, "T.J. Mercier" <tjmercier@google.com>
+CC: oe-kbuild-all@lists.linux.dev, linux-arm-msm@vger.kernel.org, op-tee@lists.trustedfirmware.org, linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org, Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH bpf-next v3 5/5] selftests/bpf: Add test for open coded dmabuf_iter
+Subject: [Linaro-mm-sig] Re: [PATCH v4 08/11] tee: add Qualcomm TEE driver
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2W4MMXERGMGEHLNCYWBUQU3J2FQVXQVF/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JRAFEUNTDTGSWPGZB6GAGF7ZZN2PEVRU/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -110,211 +110,39 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Use the same test buffers as the traditional iterator and a new BPF map
-to verify the test buffers can be found with the open coded dmabuf
-iterator.
+Hi Amirreza,
 
-Signed-off-by: T.J. Mercier <tjmercier@google.com>
----
- .../testing/selftests/bpf/bpf_experimental.h  |  5 ++
- .../selftests/bpf/prog_tests/dmabuf_iter.c    | 52 +++++++++++++++----
- .../testing/selftests/bpf/progs/dmabuf_iter.c | 38 ++++++++++++++
- 3 files changed, 86 insertions(+), 9 deletions(-)
+kernel test robot noticed the following build warnings:
 
-diff --git a/tools/testing/selftests/bpf/bpf_experimental.h b/tools/testing/selftests/bpf/bpf_experimental.h
-index 6535c8ae3c46..5e512a1d09d1 100644
---- a/tools/testing/selftests/bpf/bpf_experimental.h
-+++ b/tools/testing/selftests/bpf/bpf_experimental.h
-@@ -591,4 +591,9 @@ extern int bpf_iter_kmem_cache_new(struct bpf_iter_kmem_cache *it) __weak __ksym
- extern struct kmem_cache *bpf_iter_kmem_cache_next(struct bpf_iter_kmem_cache *it) __weak __ksym;
- extern void bpf_iter_kmem_cache_destroy(struct bpf_iter_kmem_cache *it) __weak __ksym;
- 
-+struct bpf_iter_dmabuf;
-+extern int bpf_iter_dmabuf_new(struct bpf_iter_dmabuf *it) __weak __ksym;
-+extern struct dma_buf *bpf_iter_dmabuf_next(struct bpf_iter_dmabuf *it) __weak __ksym;
-+extern void bpf_iter_dmabuf_destroy(struct bpf_iter_dmabuf *it) __weak __ksym;
-+
- #endif
-diff --git a/tools/testing/selftests/bpf/prog_tests/dmabuf_iter.c b/tools/testing/selftests/bpf/prog_tests/dmabuf_iter.c
-index 35745f4ce0f8..cc02bb555610 100644
---- a/tools/testing/selftests/bpf/prog_tests/dmabuf_iter.c
-+++ b/tools/testing/selftests/bpf/prog_tests/dmabuf_iter.c
-@@ -26,10 +26,11 @@ static int sysheap_dmabuf;
- static const char sysheap_test_buffer_name[DMA_BUF_NAME_LEN] = "sysheap_test_buffer_for_iter";
- static size_t sysheap_test_buffer_size;
- 
--static int create_udmabuf(void)
-+static int create_udmabuf(int map_fd)
- {
- 	struct udmabuf_create create;
- 	int dev_udmabuf;
-+	bool f = false;
- 
- 	udmabuf_test_buffer_size = 10 * getpagesize();
- 
-@@ -63,10 +64,10 @@ static int create_udmabuf(void)
- 	if (!ASSERT_OK(ioctl(udmabuf, DMA_BUF_SET_NAME_B, udmabuf_test_buffer_name), "name"))
- 		return 1;
- 
--	return 0;
-+	return bpf_map_update_elem(map_fd, udmabuf_test_buffer_name, &f, BPF_ANY);
- }
- 
--static int create_sys_heap_dmabuf(void)
-+static int create_sys_heap_dmabuf(int map_fd)
- {
- 	sysheap_test_buffer_size = 20 * getpagesize();
- 
-@@ -77,6 +78,7 @@ static int create_sys_heap_dmabuf(void)
- 		.heap_flags = 0,
- 	};
- 	int heap_fd, ret;
-+	bool f = false;
- 
- 	if (!ASSERT_LE(sizeof(sysheap_test_buffer_name), DMA_BUF_NAME_LEN, "NAMETOOLONG"))
- 		return 1;
-@@ -95,18 +97,18 @@ static int create_sys_heap_dmabuf(void)
- 	if (!ASSERT_OK(ioctl(sysheap_dmabuf, DMA_BUF_SET_NAME_B, sysheap_test_buffer_name), "name"))
- 		return 1;
- 
--	return 0;
-+	return bpf_map_update_elem(map_fd, sysheap_test_buffer_name, &f, BPF_ANY);
- }
- 
--static int create_test_buffers(void)
-+static int create_test_buffers(int map_fd)
- {
- 	int ret;
- 
--	ret = create_udmabuf();
-+	ret = create_udmabuf(map_fd);
- 	if (ret)
- 		return ret;
- 
--	return create_sys_heap_dmabuf();
-+	return create_sys_heap_dmabuf(map_fd);
- }
- 
- static void destroy_test_buffers(void)
-@@ -187,17 +189,46 @@ static void subtest_dmabuf_iter_check_default_iter(struct dmabuf_iter *skel)
- 	close(iter_fd);
- }
- 
-+static void subtest_dmabuf_iter_check_open_coded(struct dmabuf_iter *skel, int map_fd)
-+{
-+	LIBBPF_OPTS(bpf_test_run_opts, topts);
-+	char key[DMA_BUF_NAME_LEN];
-+	int err, fd;
-+	bool found;
-+
-+	/* No need to attach it, just run it directly */
-+	fd = bpf_program__fd(skel->progs.iter_dmabuf_for_each);
-+
-+	err = bpf_prog_test_run_opts(fd, &topts);
-+	if (!ASSERT_OK(err, "test_run_opts err"))
-+		return;
-+	if (!ASSERT_OK(topts.retval, "test_run_opts retval"))
-+		return;
-+
-+	if (!ASSERT_OK(bpf_map_get_next_key(map_fd, NULL, key), "get next key"))
-+		return;
-+
-+	do {
-+		ASSERT_OK(bpf_map_lookup_elem(map_fd, key, &found), "lookup elem");
-+		ASSERT_TRUE(found, "found test buffer");
-+	} while (bpf_map_get_next_key(map_fd, key, key));
-+}
-+
- void test_dmabuf_iter(void)
- {
- 	struct dmabuf_iter *skel = NULL;
-+	int iter_fd, map_fd;
- 	char buf[256];
--	int iter_fd;
- 
- 	skel = dmabuf_iter__open_and_load();
- 	if (!ASSERT_OK_PTR(skel, "dmabuf_iter__open_and_load"))
- 		return;
- 
--	if (!ASSERT_OK(create_test_buffers(), "create_buffers"))
-+	map_fd = bpf_map__fd(skel->maps.testbuf_hash);
-+	if (!ASSERT_OK_FD(map_fd, "map_fd"))
-+		goto destroy_skel;
-+
-+	if (!ASSERT_OK(create_test_buffers(map_fd), "create_buffers"))
- 		goto destroy;
- 
- 	if (!ASSERT_OK(dmabuf_iter__attach(skel), "skel_attach"))
-@@ -215,10 +246,13 @@ void test_dmabuf_iter(void)
- 
- 	if (test__start_subtest("default_iter"))
- 		subtest_dmabuf_iter_check_default_iter(skel);
-+	if (test__start_subtest("open_coded"))
-+		subtest_dmabuf_iter_check_open_coded(skel, map_fd);
- 
- 	close(iter_fd);
- 
- destroy:
- 	destroy_test_buffers();
-+destroy_skel:
- 	dmabuf_iter__destroy(skel);
- }
-diff --git a/tools/testing/selftests/bpf/progs/dmabuf_iter.c b/tools/testing/selftests/bpf/progs/dmabuf_iter.c
-index 6e80a53c4670..030654ab5717 100644
---- a/tools/testing/selftests/bpf/progs/dmabuf_iter.c
-+++ b/tools/testing/selftests/bpf/progs/dmabuf_iter.c
-@@ -9,6 +9,13 @@
- 
- char _license[] SEC("license") = "GPL";
- 
-+struct {
-+	__uint(type, BPF_MAP_TYPE_HASH);
-+	__uint(key_size, DMA_BUF_NAME_LEN);
-+	__type(value, bool);
-+	__uint(max_entries, 5);
-+} testbuf_hash SEC(".maps");
-+
- /**
-  * Fields output by this iterator are delimited by newlines. Convert any
-  * newlines in user-provided printed strings to spaces.
-@@ -51,3 +58,34 @@ int dmabuf_collector(struct bpf_iter__dmabuf *ctx)
- 	BPF_SEQ_PRINTF(seq, "%lu\n%llu\n%s\n%s\n", inode, size, name, exporter);
- 	return 0;
- }
-+
-+SEC("syscall")
-+int iter_dmabuf_for_each(const void *ctx)
-+{
-+	struct dma_buf *d;
-+
-+	bpf_for_each(dmabuf, d) {
-+		char name[DMA_BUF_NAME_LEN];
-+		const char *pname;
-+		bool *found;
-+
-+		if (bpf_core_read(&pname, sizeof(pname), &d->name))
-+			return 1;
-+
-+		/* Buffers are not required to be named */
-+		if (!pname)
-+			continue;
-+
-+		if (bpf_probe_read_kernel(name, sizeof(name), pname))
-+			return 1;
-+
-+		found = bpf_map_lookup_elem(&testbuf_hash, name);
-+		if (found) {
-+			bool t = true;
-+
-+			bpf_map_update_elem(&testbuf_hash, name, &t, BPF_EXIST);
-+		}
-+	}
-+
-+	return 0;
-+}
+[auto build test WARNING on 33035b665157558254b3c21c3f049fd728e72368]
+
+url:    https://github.com/intel-lab-lkp/linux/commits/Amirreza-Zarrabi/tee-allow-a-driver-to-allocate-a-tee_device-without-a-pool/20250429-140908
+base:   33035b665157558254b3c21c3f049fd728e72368
+patch link:    https://lore.kernel.org/r/20250428-qcom-tee-using-tee-ss-without-mem-obj-v4-8-6a143640a6cb%40oss.qualcomm.com
+patch subject: [PATCH v4 08/11] tee: add Qualcomm TEE driver
+config: sh-allmodconfig (https://download.01.org/0day-ci/archive/20250507/202505071540.hAeEOUWt-lkp@intel.com/config)
+compiler: sh4-linux-gcc (GCC) 14.2.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20250507/202505071540.hAeEOUWt-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202505071540.hAeEOUWt-lkp@intel.com/
+
+All warnings (new ones prefixed by >>):
+
+>> Warning: drivers/tee/qcomtee/async.c:101 function parameter 'async_msg' not described in 'async_release'
+>> Warning: drivers/tee/qcomtee/async.c:101 Excess function parameter 'msg' description in 'async_release'
+
+Kconfig warnings: (for reference only)
+   WARNING: unmet direct dependencies detected for DRM_AUX_HPD_BRIDGE
+   Depends on [n]: HAS_IOMEM [=y] && DRM [=n] && DRM_BRIDGE [=n] && OF [=y]
+   Selected by [m]:
+   - UCSI_HUAWEI_GAOKUN [=m] && USB_SUPPORT [=y] && TYPEC [=m] && TYPEC_UCSI [=m] && EC_HUAWEI_GAOKUN [=m]
+
 -- 
-2.49.0.1045.g170613ef41-goog
-
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
