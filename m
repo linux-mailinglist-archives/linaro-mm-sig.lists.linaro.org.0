@@ -2,168 +2,186 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id DFF4AAACAAB
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 May 2025 18:15:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 33679AAD1E4
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  7 May 2025 02:10:58 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0614B3F5C6
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 May 2025 16:15:19 +0000 (UTC)
-Received: from mailout2.w1.samsung.com (mailout2.w1.samsung.com [210.118.77.12])
-	by lists.linaro.org (Postfix) with ESMTPS id 528223F5C6
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  6 May 2025 16:14:23 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 03E1B463E5
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  7 May 2025 00:10:57 +0000 (UTC)
+Received: from mail-pj1-f73.google.com (mail-pj1-f73.google.com [209.85.216.73])
+	by lists.linaro.org (Postfix) with ESMTPS id 1A8C4446D1
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  7 May 2025 00:10:43 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=samsung.com header.s=mail20170921 header.b=PUzKD2UJ;
-	dmarc=pass (policy=none) header.from=samsung.com;
-	spf=pass (lists.linaro.org: domain of m.szyprowski@samsung.com designates 210.118.77.12 as permitted sender) smtp.mailfrom=m.szyprowski@samsung.com
-Received: from eucas1p2.samsung.com (unknown [182.198.249.207])
-	by mailout2.w1.samsung.com (KnoxPortal) with ESMTP id 20250506161422euoutp02ba24e17e762b1ac21600846f8debcaa2~8-DWYG17-1083010830euoutp020
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  6 May 2025 16:14:22 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.w1.samsung.com 20250506161422euoutp02ba24e17e762b1ac21600846f8debcaa2~8-DWYG17-1083010830euoutp020
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
-	s=mail20170921; t=1746548062;
-	bh=R9q7Jvt/vvnvLvP5MlEUycQ7Jn8CgPtIl0CrrLxmcLU=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=PUzKD2UJ5wIZjaDENYXdq1qbWwANyinFlimDwA5UDvVH6nWxXLAmCgRBZGV4wBrPA
-	 zv/vAxu6QA0BPCGupqjDQKmMLeNsZNyDgM1QjTPgW0DhvU7vWKgvv52xsnOKnHgsjb
-	 hrrRlqfGtJSg8hPnnv/CQ0dqCT4rLOMtb8HxgbtQ=
-Received: from eusmtip2.samsung.com (unknown [203.254.199.222]) by
-	eucas1p2.samsung.com (KnoxPortal) with ESMTPA id
-	20250506161422eucas1p2edddea0233c1d47541bd42145fbd9db1~8-DWFmoiw1851618516eucas1p2V;
-	Tue,  6 May 2025 16:14:22 +0000 (GMT)
-Received: from AMDC4653.digital.local (unknown [106.120.51.32]) by
-	eusmtip2.samsung.com (KnoxPortal) with ESMTPA id
-	20250506161421eusmtip2d4b568e08cf5a0107f5e9a307705ba7b~8-DVp_-ME0190501905eusmtip2f;
-	Tue,  6 May 2025 16:14:21 +0000 (GMT)
-From: Marek Szyprowski <m.szyprowski@samsung.com>
-To: linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org,
-	iommu@lists.linux.dev
-Date: Tue,  6 May 2025 18:13:46 +0200
-Message-Id: <20250506161346.1211105-4-m.szyprowski@samsung.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250506161346.1211105-1-m.szyprowski@samsung.com>
-MIME-Version: 1.0
-X-CMS-MailID: 20250506161422eucas1p2edddea0233c1d47541bd42145fbd9db1
-X-Msg-Generator: CA
-X-RootMTR: 20250506161422eucas1p2edddea0233c1d47541bd42145fbd9db1
-X-EPHeader: CA
-X-CMS-RootMailID: 20250506161422eucas1p2edddea0233c1d47541bd42145fbd9db1
-References: <20250506161346.1211105-1-m.szyprowski@samsung.com>
-	<CGME20250506161422eucas1p2edddea0233c1d47541bd42145fbd9db1@eucas1p2.samsung.com>
+	dkim=pass header.d=google.com header.s=20230601 header.b=twmcRwgw;
+	dmarc=pass (policy=reject) header.from=google.com;
+	spf=pass (lists.linaro.org: domain of 3AqUaaAkKDf0yorjwhnjwlttlqj.htrqnsfwt-rr-xnlqnxyx.qnsfwt.twl@flex--tjmercier.bounces.google.com designates 209.85.216.73 as permitted sender) smtp.mailfrom=3AqUaaAkKDf0yorjwhnjwlttlqj.htrqnsfwt-rr-xnlqnxyx.qnsfwt.twl@flex--tjmercier.bounces.google.com
+Received: by mail-pj1-f73.google.com with SMTP id 98e67ed59e1d1-2ff798e8c3bso5512176a91.2
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 06 May 2025 17:10:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1746576642; x=1747181442; darn=lists.linaro.org;
+        h=content-transfer-encoding:cc:to:from:subject:message-id
+         :mime-version:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=XbM0hT4nN9Qi5ds4e0j9GLdbgAxkWG3cIrhqKGc4+Co=;
+        b=twmcRwgw7hbsZHwmNe2ws+8D83DbTGpJlQ6JZIg8VwCGPwJXyqKEXPnKGvjfWhKO5K
+         9DyY1nIdvDQWMM6TOLiqPx+le/OwhrJzToppcM3M3XESIjEkOCKxrMr2W+RQ/mFdHp4l
+         vcJwv0bt+lifsde5jSS9YwLLdGtX1wv4WP53lstqHGUD0F5V4f3WvHoLTP+vpJQeReLM
+         GLYVMrLKY9y64jwclkWiPQAndWC0TKY2YpY7fJvayh+EifdhULqoHH6TOeWwUnap6IWY
+         qvXxpVr+Ir+oc/u51q9PjW5EWwH6HbDxM6QT4LAQlMYJUp8xDjpTY8jH0bH0geZDgN1l
+         +qpw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1746576642; x=1747181442;
+        h=content-transfer-encoding:cc:to:from:subject:message-id
+         :mime-version:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=XbM0hT4nN9Qi5ds4e0j9GLdbgAxkWG3cIrhqKGc4+Co=;
+        b=utj9FKOGa5rCq3saAEF5VpgGtDvPDg/JndGeglrotP9JKyAf72ECn00YicmfFvhfur
+         Ei9AG6TkW6IqsqKVX0jjrIqIUcwa53jq8wlfNhCVaC7i4tK6N+KY7xa7/eZac6s+4LWB
+         qfPREAsbkf/HKbnrATBAsXq43oVAy9ygWvfiIyP6VEUI3gyFWtOvgQ50D+3eNdVqSIol
+         1pYSI+7grgcLZstjkKxaozqy876cLmdPRMkl71Ad6uDhbka4UNeyPR4hTQ3M3lRpR7t+
+         w0SzOsapqeg7tLsURWQizU1CcZJPz5ICJ/qhyocP+wfXpwFqXwje5SpiX/3jIzg77mxj
+         VKkw==
+X-Forwarded-Encrypted: i=1; AJvYcCWcxC0d/vUBENW2z2WfQPzW+0GVNgJQvNBf6i11y8swLUesm4cPlxb0oifpW3ESKHY9bOZbkujBRVrjXOxd@lists.linaro.org
+X-Gm-Message-State: AOJu0Yz+txICwXV16DBkgSJlV16UIv6OJWpuS6Yvn4lvzYaxPMKgvJJ+
+	MEQW9gEBrKV4md8VihOyBdDaelX5P3NS9V93wsH6FpCkXnQ455YVQmlmYRlWuTlrqfXqMLteWLf
+	FkicvhSt086vyqA==
+X-Google-Smtp-Source: AGHT+IGgh9HyAs9Nj/w00VjUmiwsbbsyaNDbuDxCtSFIr9y5AQvyC41+3cohLwHox+GxYYqlbWOuGxl6mDGD8Sc=
+X-Received: from pjbpt3.prod.google.com ([2002:a17:90b:3d03:b0:2fa:15aa:4d1e])
+ (user=tjmercier job=prod-delivery.src-stubby-dispatcher) by
+ 2002:a17:90b:3d8c:b0:2ee:e317:69ab with SMTP id 98e67ed59e1d1-30aabf6f73emr2662572a91.0.1746576642184;
+ Tue, 06 May 2025 17:10:42 -0700 (PDT)
+Date: Wed,  7 May 2025 00:10:31 +0000
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.49.0.1045.g170613ef41-goog
+Message-ID: <20250507001036.2278781-1-tjmercier@google.com>
+From: "T.J. Mercier" <tjmercier@google.com>
+To: sumit.semwal@linaro.org, christian.koenig@amd.com, ast@kernel.org,
+	daniel@iogearbox.net, andrii@kernel.org, martin.lau@linux.dev,
+	skhan@linuxfoundation.org, alexei.starovoitov@gmail.com, song@kernel.org
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 528223F5C6
-X-Spamd-Bar: ----
-X-Spamd-Result: default: False [-4.60 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
+X-Rspamd-Queue-Id: 1A8C4446D1
+X-Spamd-Bar: /
+X-Spamd-Result: default: False [-0.80 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
+	SUSPICIOUS_RECIPS(1.50)[];
 	MID_CONTAINS_FROM(1.00)[];
-	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[samsung.com,none];
-	RCVD_IN_DNSWL_HI(-0.50)[210.118.77.12:from];
-	R_SPF_ALLOW(-0.20)[+ip4:210.118.77.0/24:c];
-	R_DKIM_ALLOW(-0.20)[samsung.com:s=mail20170921];
-	RWL_MAILSPIKE_GOOD(-0.10)[210.118.77.12:from];
+	MV_CASE(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	FORGED_SENDER(0.30)[tjmercier@google.com,3AqUaaAkKDf0yorjwhnjwlttlqj.htrqnsfwt-rr-xnlqnxyx.qnsfwt.twl@flex--tjmercier.bounces.google.com];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20230601];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.216.73:from];
 	MIME_GOOD(-0.10)[text/plain];
-	DKIM_TRACE(0.00)[samsung.com:+];
-	RCVD_COUNT_THREE(0.00)[3];
-	ARC_NA(0.00)[];
-	FREEMAIL_CC(0.00)[samsung.com,ideasonboard.com,linux.intel.com,kernel.org,xs4all.nl,arm.com];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:6619, ipnet:210.118.76.0/23, country:KR];
-	DNSWL_BLOCKED(0.00)[106.120.51.32:received,203.254.199.222:received,182.198.249.207:received];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[linaro.org,amd.com,kernel.org,iogearbox.net,linux.dev,linuxfoundation.org,gmail.com];
+	ARC_NA(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[vger.kernel.org,lists.freedesktop.org,lists.linaro.org,google.com,ffwll.ch,gmail.com,linux.dev,kernel.org,fomichev.me,fb.com];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[google.com:+];
+	DNSWL_BLOCKED(0.00)[209.85.216.73:from];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[tjmercier@google.com,3AqUaaAkKDf0yorjwhnjwlttlqj.htrqnsfwt-rr-xnlqnxyx.qnsfwt.twl@flex--tjmercier.bounces.google.com];
+	RCPT_COUNT_TWELVE(0.00)[25];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	DWL_DNSWL_BLOCKED(0.00)[samsung.com:dkim];
+	TAGGED_RCPT(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[9];
+	RCVD_COUNT_ONE(0.00)[1];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
-Message-ID-Hash: D45WFGZFCMTHHFOIDFZLCKIZN2NWLFRV
-X-Message-ID-Hash: D45WFGZFCMTHHFOIDFZLCKIZN2NWLFRV
-X-MailFrom: m.szyprowski@samsung.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Laurent Pinchart <laurent.pinchart@ideasonboard.com>, Sakari Ailus <sakari.ailus@linux.intel.com>, Mauro Carvalho Chehab <mchehab@kernel.org>, Hans Verkuil <hverkuil@xs4all.nl>, Robin Murphy <robin.murphy@arm.com>
+Message-ID-Hash: SKLZMSSZWEXRIPRH2DGN53BCL7PSQQVV
+X-Message-ID-Hash: SKLZMSSZWEXRIPRH2DGN53BCL7PSQQVV
+X-MailFrom: 3AqUaaAkKDf0yorjwhnjwlttlqj.htrqnsfwt-rr-xnlqnxyx.qnsfwt.twl@flex--tjmercier.bounces.google.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, bpf@vger.kernel.org, linux-kselftest@vger.kernel.org, android-mm@google.com, simona@ffwll.ch, eddyz87@gmail.com, yonghong.song@linux.dev, john.fastabend@gmail.com, kpsingh@kernel.org, sdf@fomichev.me, jolsa@kernel.org, mykolal@fb.com, "T.J. Mercier" <tjmercier@google.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 3/3] omap3isp:: use sgtable-based scatterlist wrappers
+Subject: [Linaro-mm-sig] [PATCH bpf-next v3 0/5] Replace CONFIG_DMABUF_SYSFS_STATS with BPF
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/D45WFGZFCMTHHFOIDFZLCKIZN2NWLFRV/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SKLZMSSZWEXRIPRH2DGN53BCL7PSQQVV/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Use common wrappers operating directly on the struct sg_table objects to
-fix incorrect use of statterlists sync calls. dma_sync_sg_for_*()
-functions have to be called with the number of elements originally passed
-to dma_map_sg_*() function, not the one returned in sgtable's nents.
-
-Fixes: d33186d0be18 ("[media] omap3isp: ccdc: Use the DMA API for LSC")
-Fixes: 0e24e90f2ca7 ("[media] omap3isp: stat: Use the DMA API")
-Signed-off-by: Marek Szyprowski <m.szyprowski@samsung.com>
----
- drivers/media/platform/ti/omap3isp/ispccdc.c | 8 ++++----
- drivers/media/platform/ti/omap3isp/ispstat.c | 6 ++----
- 2 files changed, 6 insertions(+), 8 deletions(-)
-
-diff --git a/drivers/media/platform/ti/omap3isp/ispccdc.c b/drivers/media/platform/ti/omap3isp/ispccdc.c
-index dd375c4e180d..7d0c723dcd11 100644
---- a/drivers/media/platform/ti/omap3isp/ispccdc.c
-+++ b/drivers/media/platform/ti/omap3isp/ispccdc.c
-@@ -446,8 +446,8 @@ static int ccdc_lsc_config(struct isp_ccdc_device *ccdc,
- 		if (ret < 0)
- 			goto done;
- 
--		dma_sync_sg_for_cpu(isp->dev, req->table.sgt.sgl,
--				    req->table.sgt.nents, DMA_TO_DEVICE);
-+		dma_sync_sgtable_for_cpu(isp->dev, &req->table.sgt,
-+					 DMA_TO_DEVICE);
- 
- 		if (copy_from_user(req->table.addr, config->lsc,
- 				   req->config.size)) {
-@@ -455,8 +455,8 @@ static int ccdc_lsc_config(struct isp_ccdc_device *ccdc,
- 			goto done;
- 		}
- 
--		dma_sync_sg_for_device(isp->dev, req->table.sgt.sgl,
--				       req->table.sgt.nents, DMA_TO_DEVICE);
-+		dma_sync_sgtable_for_device(isp->dev, &req->table.sgt,
-+					    DMA_TO_DEVICE);
- 	}
- 
- 	spin_lock_irqsave(&ccdc->lsc.req_lock, flags);
-diff --git a/drivers/media/platform/ti/omap3isp/ispstat.c b/drivers/media/platform/ti/omap3isp/ispstat.c
-index 359a846205b0..d3da68408ecb 100644
---- a/drivers/media/platform/ti/omap3isp/ispstat.c
-+++ b/drivers/media/platform/ti/omap3isp/ispstat.c
-@@ -161,8 +161,7 @@ static void isp_stat_buf_sync_for_device(struct ispstat *stat,
- 	if (ISP_STAT_USES_DMAENGINE(stat))
- 		return;
- 
--	dma_sync_sg_for_device(stat->isp->dev, buf->sgt.sgl,
--			       buf->sgt.nents, DMA_FROM_DEVICE);
-+	dma_sync_sgtable_for_device(stat->isp->dev, &buf->sgt, DMA_FROM_DEVICE);
- }
- 
- static void isp_stat_buf_sync_for_cpu(struct ispstat *stat,
-@@ -171,8 +170,7 @@ static void isp_stat_buf_sync_for_cpu(struct ispstat *stat,
- 	if (ISP_STAT_USES_DMAENGINE(stat))
- 		return;
- 
--	dma_sync_sg_for_cpu(stat->isp->dev, buf->sgt.sgl,
--			    buf->sgt.nents, DMA_FROM_DEVICE);
-+	dma_sync_sgtable_for_cpu(stat->isp->dev, &buf->sgt, DMA_FROM_DEVICE);
- }
- 
- static void isp_stat_buf_clear(struct ispstat *stat)
--- 
-2.34.1
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+VW50aWwgQ09ORklHX0RNQUJVRl9TWVNGU19TVEFUUyB3YXMgYWRkZWQgWzFdIGl0IHdhcyBvbmx5
+IHBvc3NpYmxlIHRvDQpwZXJmb3JtIHBlci1idWZmZXIgYWNjb3VudGluZyB3aXRoIGRlYnVnZnMg
+d2hpY2ggaXMgbm90IHN1aXRhYmxlIGZvcg0KcHJvZHVjdGlvbiBlbnZpcm9ubWVudHMuIEV2ZW50
+dWFsbHkgd2UgZGlzY292ZXJlZCB0aGUgb3ZlcmhlYWQgd2l0aA0KcGVyLWJ1ZmZlciBzeXNmcyBm
+aWxlIGNyZWF0aW9uL3JlbW92YWwgd2FzIHNpZ25pZmljYW50bHkgaW1wYWN0aW5nDQphbGxvY2F0
+aW9uIGFuZCBmcmVlIHRpbWVzLCBhbmQgZXhhY2VyYmF0ZWQga2VybmZzIGxvY2sgY29udGVudGlv
+bi4gWzJdDQpkbWFfYnVmX3N0YXRzX3NldHVwKCkgaXMgcmVzcG9uc2libGUgZm9yIDM5JSBvZiBz
+aW5nbGUtcGFnZSBidWZmZXINCmNyZWF0aW9uIGR1cmF0aW9uLCBvciA3NCUgb2Ygc2luZ2xlLXBh
+Z2UgZG1hX2J1Zl9leHBvcnQoKSBkdXJhdGlvbiB3aGVuDQpzdHJlc3NpbmcgZG1hYnVmIGFsbG9j
+YXRpb25zIGFuZCBmcmVlcy4NCg0KSSBwcm90b3R5cGVkIGEgY2hhbmdlIGZyb20gcGVyLWJ1ZmZl
+ciB0byBwZXItZXhwb3J0ZXIgc3RhdGlzdGljcyB3aXRoIGENClJDVSBwcm90ZWN0ZWQgbGlzdCBv
+ZiBleHBvcnRlciBhbGxvY2F0aW9ucyB0aGF0IGFjY29tbW9kYXRlcyBtb3N0IChidXQNCm5vdCBh
+bGwpIG9mIG91ciB1c2UtY2FzZXMgYW5kIGF2b2lkcyBhbG1vc3QgYWxsIG9mIHRoZSBzeXNmcyBv
+dmVyaGVhZC4NCldoaWxlIHRoYXQgYWRkcyBsZXNzIG92ZXJoZWFkIHRoYW4gcGVyLWJ1ZmZlciBz
+eXNmcywgYW5kIGxlc3MgZXZlbiB0aGFuDQp0aGUgbWFpbnRlbmFuY2Ugb2YgdGhlIGRtYWJ1ZiBk
+ZWJ1Z2ZzX2xpc3QsIGl0J3Mgc3RpbGwgKmFkZGl0aW9uYWwqDQpvdmVyaGVhZCBvbiB0b3Agb2Yg
+dGhlIGRlYnVnZnNfbGlzdCBhbmQgZG9lc24ndCBnaXZlIHVzIHBlci1idWZmZXIgaW5mby4NCg0K
+VGhpcyBzZXJpZXMgdXNlcyB0aGUgZXhpc3RpbmcgZG1hYnVmIGRlYnVnZnNfbGlzdCB0byBpbXBs
+ZW1lbnQgYSBCUEYNCmRtYWJ1ZiBpdGVyYXRvciwgd2hpY2ggYWRkcyBubyBvdmVyaGVhZCB0byBi
+dWZmZXIgYWxsb2NhdGlvbi9mcmVlIGFuZA0KcHJvdmlkZXMgcGVyLWJ1ZmZlciBpbmZvLiBUaGUg
+bGlzdCBoYXMgYmVlbiBtb3ZlZCBvdXRzaWRlIG9mDQpDT05GSUdfREVCVUdfRlMgc2NvcGUgc28g
+dGhhdCBpdCBpcyBhbHdheXMgcG9wdWxhdGVkLiBUaGUgQlBGIHByb2dyYW0NCmxvYWRlZCBieSB1
+c2Vyc3BhY2UgdGhhdCBleHRyYWN0cyBwZXItYnVmZmVyIGluZm9ybWF0aW9uIGdldHMgdG8gZGVm
+aW5lDQppdHMgb3duIGludGVyZmFjZSB3aGljaCBhdm9pZHMgdGhlIGxhY2sgb2YgQUJJIHN0YWJp
+bGl0eSB3aXRoIGRlYnVnZnMuDQoNClRoaXMgd2lsbCBhbGxvdyB1cyB0byByZXBsYWNlIG91ciB1
+c2Ugb2YgQ09ORklHX0RNQUJVRl9TWVNGU19TVEFUUywgYW5kDQp0aGUgcGxhbiBpcyB0byByZW1v
+dmUgaXQgZnJvbSB0aGUga2VybmVsIGFmdGVyIHRoZSBuZXh0IGxvbmd0ZXJtIHN0YWJsZQ0KcmVs
+ZWFzZS4NCg0KWzFdIGh0dHBzOi8vbG9yZS5rZXJuZWwub3JnL2xpbnV4LW1lZGlhLzIwMjAxMjEw
+MDQ0NDAwLjEwODAzMDgtMS1ocmlkeWFAZ29vZ2xlLmNvbQ0KWzJdIGh0dHBzOi8vbG9yZS5rZXJu
+ZWwub3JnL2FsbC8yMDIyMDUxNjE3MTMxNS4yNDAwNTc4LTEtdGptZXJjaWVyQGdvb2dsZS5jb20N
+Cg0KdjE6IGh0dHBzOi8vbG9yZS5rZXJuZWwub3JnL2FsbC8yMDI1MDQxNDIyNTIyNy4zNjQyNjE4
+LTEtdGptZXJjaWVyQGdvb2dsZS5jb20NCnYxIC0+IHYyOg0KTWFrZSB0aGUgRE1BIGJ1ZmZlciBs
+aXN0IGluZGVwZW5kZW50IG9mIENPTkZJR19ERUJVR19GUyBwZXIgQ2hyaXN0aWFuIEvDtm5pZw0K
+QWRkIENPTkZJR19ETUFfU0hBUkVEX0JVRkZFUiBjaGVjayB0byBrZXJuZWwvYnBmL01ha2VmaWxl
+IHBlciBrZXJuZWwgdGVzdCByb2JvdA0KVXNlIEJURl9JRF9MSVNUX1NJTkdMRSBpbnN0ZWFkIG9m
+IEJURl9JRF9MSVNUX0dMT0JBTF9TSU5HTEUgcGVyIFNvbmcgTGl1DQpGaXh1cCBjb21tZW50IHN0
+eWxlLCBtaXhpbmcgY29kZS9kZWNsYXJhdGlvbnMsIGFuZCB1c2UgQVNTRVJUX09LX0ZEIGluIHNl
+bGZ0ZXN0IHBlciBTb25nIExpdQ0KQWRkIEJQRl9JVEVSX1JFU0NIRUQgZmVhdHVyZSB0byBicGZf
+ZG1hYnVmX3JlZ19pbmZvIHBlciBBbGV4ZWkgU3Rhcm92b2l0b3YNCkFkZCBvcGVuLWNvZGVkIGl0
+ZXJhdG9yIGFuZCBzZWxmdGVzdCBwZXIgQWxleGVpIFN0YXJvdm9pdG92DQpBZGQgYSBzZWNvbmQg
+dGVzdCBidWZmZXIgZnJvbSB0aGUgc3lzdGVtIGRtYWJ1ZiBoZWFwIHRvIHNlbGZ0ZXN0cw0KVXNl
+IHRoZSBCUEYgcHJvZ3JhbSB3ZSdsbCB1c2UgaW4gcHJvZHVjdGlvbiBmb3Igc2VsZnRlc3QgcGVy
+IEFsZXhlaSBTdGFyb3ZvaXRvdg0KICBodHRwczovL3IuYW5kcm9pZC5jb20vYy9wbGF0Zm9ybS9z
+eXN0ZW0vYnBmcHJvZ3MvKy8zNjE2MTIzLzIvZG1hYnVmSXRlci5jDQogIGh0dHBzOi8vci5hbmRy
+b2lkLmNvbS9jL3BsYXRmb3JtL3N5c3RlbS9tZW1vcnkvbGlibWVtaW5mby8rLzM2MTQyNTkvMS9s
+aWJkbWFidWZpbmZvL2RtYWJ1Zl9icGZfc3RhdHMuY3BwDQp2MjogaHR0cHM6Ly9sb3JlLmtlcm5l
+bC5vcmcvYWxsLzIwMjUwNTA0MjI0MTQ5LjEwMzM4NjctMS10am1lcmNpZXJAZ29vZ2xlLmNvbQ0K
+djIgLT4gdjM6DQpSZWJhc2Ugb250byBicGYtbmV4dC9tYXN0ZXINCk1vdmUgZ2V0X25leHRfZG1h
+YnVmKCkgaW50byBkcml2ZXJzL2RtYS1idWYvZG1hLWJ1Zi5jLCBhbG9uZyB3aXRoIHRoZQ0KICBu
+ZXcgZ2V0X2ZpcnN0X2RtYWJ1ZigpLiBUaGlzIGF2b2lkcyBoYXZpbmcgdG8gZXhwb3NlIHRoZSBk
+bWFidWYgbGlzdA0KICBhbmQgbXV0ZXggdG8gdGhlIHJlc3Qgb2YgdGhlIGtlcm5lbCwgYW5kIGtl
+ZXBzIHRoZSBkbWFidWYgbXV0ZXgNCiAgb3BlcmF0aW9ucyBuZWFyIGVhY2ggb3RoZXIgaW4gdGhl
+IHNhbWUgZmlsZS4gKENocmlzdGlhbiBLw7ZuaWcpDQpBZGQgQ2hyaXN0aWFuJ3MgUkIgdG8gZG1h
+LWJ1ZjogUmVuYW1lIGRlYnVnZnMgc3ltYm9scw0KRHJvcCBSRkM6IGRtYS1idWY6IFJlbW92ZSBE
+TUEtQlVGIHN0YXRpc3RpY3MNCg0KVC5KLiBNZXJjaWVyICg1KToNCiAgZG1hLWJ1ZjogUmVuYW1l
+IGRlYnVnZnMgc3ltYm9scw0KICBicGY6IEFkZCBkbWFidWYgaXRlcmF0b3INCiAgYnBmOiBBZGQg
+b3BlbiBjb2RlZCBkbWFidWYgaXRlcmF0b3INCiAgc2VsZnRlc3RzL2JwZjogQWRkIHRlc3QgZm9y
+IGRtYWJ1Zl9pdGVyDQogIHNlbGZ0ZXN0cy9icGY6IEFkZCB0ZXN0IGZvciBvcGVuIGNvZGVkIGRt
+YWJ1Zl9pdGVyDQoNCiBkcml2ZXJzL2RtYS1idWYvZG1hLWJ1Zi5jICAgICAgICAgICAgICAgICAg
+ICAgfCAgOTQgKysrKystLQ0KIGluY2x1ZGUvbGludXgvZG1hLWJ1Zi5oICAgICAgICAgICAgICAg
+ICAgICAgICB8ICAgNSArLQ0KIGtlcm5lbC9icGYvTWFrZWZpbGUgICAgICAgICAgICAgICAgICAg
+ICAgICAgICB8ICAgMyArDQoga2VybmVsL2JwZi9kbWFidWZfaXRlci5jICAgICAgICAgICAgICAg
+ICAgICAgIHwgMTQ5ICsrKysrKysrKysNCiBrZXJuZWwvYnBmL2hlbHBlcnMuYyAgICAgICAgICAg
+ICAgICAgICAgICAgICAgfCAgIDUgKw0KIC4uLi90ZXN0aW5nL3NlbGZ0ZXN0cy9icGYvYnBmX2V4
+cGVyaW1lbnRhbC5oICB8ICAgNSArDQogdG9vbHMvdGVzdGluZy9zZWxmdGVzdHMvYnBmL2NvbmZp
+ZyAgICAgICAgICAgIHwgICAzICsNCiAuLi4vc2VsZnRlc3RzL2JwZi9wcm9nX3Rlc3RzL2RtYWJ1
+Zl9pdGVyLmMgICAgfCAyNTggKysrKysrKysrKysrKysrKysrDQogLi4uL3Rlc3Rpbmcvc2VsZnRl
+c3RzL2JwZi9wcm9ncy9kbWFidWZfaXRlci5jIHwgIDkxICsrKysrKw0KIDkgZmlsZXMgY2hhbmdl
+ZCwgNTkxIGluc2VydGlvbnMoKyksIDIyIGRlbGV0aW9ucygtKQ0KIGNyZWF0ZSBtb2RlIDEwMDY0
+NCBrZXJuZWwvYnBmL2RtYWJ1Zl9pdGVyLmMNCiBjcmVhdGUgbW9kZSAxMDA2NDQgdG9vbHMvdGVz
+dGluZy9zZWxmdGVzdHMvYnBmL3Byb2dfdGVzdHMvZG1hYnVmX2l0ZXIuYw0KIGNyZWF0ZSBtb2Rl
+IDEwMDY0NCB0b29scy90ZXN0aW5nL3NlbGZ0ZXN0cy9icGYvcHJvZ3MvZG1hYnVmX2l0ZXIuYw0K
+DQoNCmJhc2UtY29tbWl0OiA0Mzc0NWQxMWJmZDk2ODNhYmRmMDhhZDdhNWNjNDAzZDZhOWZmZDE1
+DQotLSANCjIuNDkuMC4xMDQ1LmcxNzA2MTNlZjQxLWdvb2cNCg0KX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3Qg
+LS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4g
+ZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
