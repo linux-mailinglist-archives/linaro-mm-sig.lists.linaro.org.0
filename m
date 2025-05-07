@@ -2,133 +2,165 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 60A50AAE7FA
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  7 May 2025 19:37:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 30FFAAAEA5B
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  7 May 2025 20:54:23 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7FCEF41014
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  7 May 2025 17:37:28 +0000 (UTC)
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
-	by lists.linaro.org (Postfix) with ESMTPS id DDC22459DC
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  7 May 2025 17:37:14 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 4B87544AC7
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  7 May 2025 18:54:22 +0000 (UTC)
+Received: from perceval.ideasonboard.com (perceval.ideasonboard.com [213.167.242.64])
+	by lists.linaro.org (Postfix) with ESMTPS id 681F541014
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  7 May 2025 18:54:08 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=google.com header.s=20230601 header.b=sr42PkTm;
-	dmarc=pass (policy=reject) header.from=google.com;
-	spf=pass (lists.linaro.org: domain of tjmercier@google.com designates 209.85.128.47 as permitted sender) smtp.mailfrom=tjmercier@google.com
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-43cf3192d8bso4835e9.1
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 07 May 2025 10:37:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1746639434; x=1747244234; darn=lists.linaro.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=bQHhiJb/IfsuDYo0XF1+Y57pCH6WG6CKDTT1nxeWSmE=;
-        b=sr42PkTm9+dTCVQ4SCGNZSmQXbAKb4y1Nt2rzgyG7BqwgrHWgvxFOoMx8qs8RrV/T4
-         nGfPbWKsbIWyfR1B7kLSvcol8GOJrYCFD0ERk3dL6n+AKfBWeFT1YH19SV+4bUEkrTgN
-         m23hYgiYfA8c8SsMrIuj+u1hww9LmCyTvzpeubY9170qbxi2HIo2P7A5OeykDL0MyAmQ
-         sCtpRrsISuFvjdHyP/rK1OAB2fiOif4th/cemg9Xd6H4SwWI7YA07eUXCJz0t96qgCFh
-         v4X6iRFl2AmXvtBYW45jFzs1mY11MYlfcmYGh0cEuTjzlMbGNUg7gCgBP+dVHThketxr
-         gnWg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1746639434; x=1747244234;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=bQHhiJb/IfsuDYo0XF1+Y57pCH6WG6CKDTT1nxeWSmE=;
-        b=hHB6qFkiq9LNYkyky1x55ejCuG+dDVLetyNDiaom5FyXz5WqD8fQeBqVb3W6pDh4NF
-         dwF4uXit7o22wzeqsI8BgtCptsj7ZOJDTnkUFpCCn3364/pupojGegF2RBoq8P8LT2zx
-         X66CW2svSI5+ENM9rZsld6E9iPC/bEpmp7NwC+uY3l/Q/2m+6xAuDDTCd7zP7V292df+
-         9Dw4znlYSiOKILnJeVJ2yCzQIWfMbOZg6YbiA2JykSSA30nlPx7Lbry5qGgZgVNpZqgR
-         QZJWEAzSLg44D7UJe0OYRdNE/rbN3i03UhtxZso0hSGG0ZDqvEb/b7edv7nZSl67KJkN
-         Qsgw==
-X-Forwarded-Encrypted: i=1; AJvYcCU9KhG+B1VuOjAxhor2PA2DX3brnHcJ8Lh4e7SE4G5Y+teFTtuZgx9I4rIKSzD2+jmZIF52KuuvOBokVE7Q@lists.linaro.org
-X-Gm-Message-State: AOJu0YydZoBvbclJZ9d8h3gkqBTGeSJJimveYd090aRR4e7mz77CIo1x
-	bqqGLAIpz6kYFl2YJU5rJKoc2Kf4pWZYuF7PcYpJvkQtUaVf4yTO4+r0XUQmMpNsqW690WT0jYf
-	3cRawW8WdbwBSFnVoUhj8ZPBUYND0Lq2CXM2b
-X-Gm-Gg: ASbGncsaSthTjGrWnbwhgQ5mCHCPizwOXT6LCV7/MOrvLJPQna9mn7/93o8Hl7zuavc
-	vPbV08d+JAeEYwcsyGZn9pVMpQjj+J42fhayYEZgDD70Z8fXx86SGA7w/+femvzJhSXMcME9x+Y
-	fPwULLOTTX1bucxDdyfwOf09h/4mQetxII+bTD2n/djVxQom+BKQU=
-X-Google-Smtp-Source: AGHT+IGhDsyDC4rx4Jh4KPoVriF6uM/2LMAigWo/dJgJXOk4tdHRjlokfIMBEcSr4ZZiHUTQp//vG2FjpjSJlL89x3c=
-X-Received: by 2002:a05:600c:4448:b0:43b:c2cc:5075 with SMTP id
- 5b1f17b1804b1-441d4d4b8d4mr1462165e9.5.1746639433809; Wed, 07 May 2025
- 10:37:13 -0700 (PDT)
+	dkim=pass header.d=ideasonboard.com header.s=mail header.b=a5YfppQs;
+	dmarc=none;
+	spf=pass (lists.linaro.org: domain of laurent.pinchart@ideasonboard.com designates 213.167.242.64 as permitted sender) smtp.mailfrom=laurent.pinchart@ideasonboard.com
+Received: from pendragon.ideasonboard.com (static-176-133-119-130.ftth.abo.bbox.fr [176.133.119.130])
+	by perceval.ideasonboard.com (Postfix) with ESMTPSA id BDACE6D5;
+	Wed,  7 May 2025 20:53:55 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
+	s=mail; t=1746644035;
+	bh=4HKpOBJtT9Knd8yHFCVLaU8ixVr4lTJ1SeumRrcVqw4=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=a5YfppQsqevzz/DMRtGjjdbEW9ziRNKHDPWqIm3PIuPGPyf+Pd0EukV43zV25uwpE
+	 FvxM4Ef0dESs1lmsMsGGjU/f4IPbYwTk2C/wvi62o6wzPKBh+JzzmxnRsBLJzQsOnD
+	 gg5DkNh7IEPpZ/QZ9m9LaudG6hj0z8rmgmJhbWtc=
+Date: Wed, 7 May 2025 20:53:58 +0200
+From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+To: Marek Szyprowski <m.szyprowski@samsung.com>
+Message-ID: <20250507185358.GB28125@pendragon.ideasonboard.com>
+References: <20250507160913.2084079-1-m.szyprowski@samsung.com>
+ <CGME20250507160923eucas1p1a344e74759410b49143e2be42ef43ded@eucas1p1.samsung.com>
+ <20250507160913.2084079-4-m.szyprowski@samsung.com>
 MIME-Version: 1.0
-References: <20250507001036.2278781-1-tjmercier@google.com>
- <20250507001036.2278781-3-tjmercier@google.com> <CAADnVQL2i87Q4NEX-4rXDBa_xpTWnh=VY-sMCJzK+nY0qogeqw@mail.gmail.com>
-In-Reply-To: <CAADnVQL2i87Q4NEX-4rXDBa_xpTWnh=VY-sMCJzK+nY0qogeqw@mail.gmail.com>
-From: "T.J. Mercier" <tjmercier@google.com>
-Date: Wed, 7 May 2025 10:37:01 -0700
-X-Gm-Features: ATxdqUGvlgXnJv15CWumpdguGu0hVB25voP1FwyUGSqp8OgHDoPOAE5CsZeJmPA
-Message-ID: <CABdmKX15i760AKT3e6BL-mOUgOjNfX7ugYJQmy_J6YD1TeNEfw@mail.gmail.com>
-To: Alexei Starovoitov <alexei.starovoitov@gmail.com>
+Content-Disposition: inline
+In-Reply-To: <20250507160913.2084079-4-m.szyprowski@samsung.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: DDC22459DC
-X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.50 / 15.00];
-	BAYES_HAM(-3.00)[99.98%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	R_DKIM_ALLOW(-0.20)[google.com:s=20230601];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
+X-Rspamd-Queue-Id: 681F541014
+X-Spamd-Bar: -------
+X-Spamd-Result: default: False [-7.30 / 15.00];
+	REPLY(-4.00)[];
+	BAYES_HAM(-3.00)[99.99%];
+	R_SPF_ALLOW(-0.20)[+mx];
+	ONCE_RECEIVED(0.20)[];
+	R_DKIM_ALLOW(-0.20)[ideasonboard.com:s=mail];
 	MIME_GOOD(-0.10)[text/plain];
-	FREEMAIL_CC(0.00)[linaro.org,amd.com,kernel.org,iogearbox.net,linux.dev,linuxfoundation.org,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,google.com,ffwll.ch,gmail.com,fomichev.me,fb.com];
-	FROM_HAS_DN(0.00)[];
-	URIBL_BLOCKED(0.00)[mail.gmail.com:mid];
-	FREEMAIL_TO(0.00)[gmail.com];
-	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	ARC_NA(0.00)[];
-	DKIM_TRACE(0.00)[google.com:+];
-	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:29169, ipnet:213.167.240.0/20, country:FR];
+	MIME_TRACE(0.00)[0:+];
 	RCVD_COUNT_ONE(0.00)[1];
-	DNSWL_BLOCKED(0.00)[209.85.128.47:from];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_TLS_ALL(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[9];
+	DMARC_NA(0.00)[ideasonboard.com];
 	FROM_EQ_ENVFROM(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[24];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	TAGGED_RCPT(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[vger.kernel.org,lists.linaro.org,lists.linux.dev,linux.intel.com,kernel.org,xs4all.nl,arm.com];
 	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.47:from];
-	TO_DN_SOME(0.00)[]
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	URIBL_BLOCKED(0.00)[samsung.com:email,ideasonboard.com:email,ideasonboard.com:dkim,perceval.ideasonboard.com:helo,perceval.ideasonboard.com:rdns,pendragon.ideasonboard.com:mid];
+	DNSWL_BLOCKED(0.00)[176.133.119.130:received,213.167.242.64:from];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	DKIM_TRACE(0.00)[ideasonboard.com:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: HCU6F7MVFT4F3QBAM543COSWUEGOLFPR
-X-Message-ID-Hash: HCU6F7MVFT4F3QBAM543COSWUEGOLFPR
-X-MailFrom: tjmercier@google.com
+Message-ID-Hash: BWV2J4Q55EDINU3ALNRPYXXT4UJXW2JB
+X-Message-ID-Hash: BWV2J4Q55EDINU3ALNRPYXXT4UJXW2JB
+X-MailFrom: laurent.pinchart@ideasonboard.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Alexei Starovoitov <ast@kernel.org>, Daniel Borkmann <daniel@iogearbox.net>, Andrii Nakryiko <andrii@kernel.org>, Martin KaFai Lau <martin.lau@linux.dev>, Shuah Khan <skhan@linuxfoundation.org>, Song Liu <song@kernel.org>, LKML <linux-kernel@vger.kernel.org>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, bpf <bpf@vger.kernel.org>, "open list:KERNEL SELFTEST FRAMEWORK" <linux-kselftest@vger.kernel.org>, android-mm@google.com, simona@ffwll.ch, Eduard <eddyz87@gmail.com>, Yonghong Song <yonghong.song@linux.dev>, John Fastabend <john.fastabend@gmail.com>, KP Singh <kpsingh@kernel.org>, Stanislav Fomichev <sdf@fomichev.me>, Jiri Olsa <jolsa@kernel.org>, Mykola Lysenko <mykolal@fb.com>
+CC: linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, iommu@lists.linux.dev, Sakari Ailus <sakari.ailus@linux.intel.com>, Mauro Carvalho Chehab <mchehab@kernel.org>, Hans Verkuil <hverkuil@xs4all.nl>, Robin Murphy <robin.murphy@arm.com>, stable@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH bpf-next v3 2/5] bpf: Add dmabuf iterator
+Subject: [Linaro-mm-sig] Re: [PATCH v3 3/3] media: omap3isp: use sgtable-based scatterlist wrappers
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HCU6F7MVFT4F3QBAM543COSWUEGOLFPR/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/BWV2J4Q55EDINU3ALNRPYXXT4UJXW2JB/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-T24gV2VkLCBNYXkgNywgMjAyNSBhdCA3OjE04oCvQU0gQWxleGVpIFN0YXJvdm9pdG92DQo8YWxl
-eGVpLnN0YXJvdm9pdG92QGdtYWlsLmNvbT4gd3JvdGU6DQo+DQo+IE9uIFR1ZSwgTWF5IDYsIDIw
-MjUgYXQgNToxMOKAr1BNIFQuSi4gTWVyY2llciA8dGptZXJjaWVyQGdvb2dsZS5jb20+IHdyb3Rl
-Og0KPiA+DQo+ID4gKy8qKg0KPiA+ICsgKiBnZXRfZmlyc3RfZG1hYnVmIC0gYmVnaW4gaXRlcmF0
-aW9uIHRocm91Z2ggZ2xvYmFsIGxpc3Qgb2YgRE1BLWJ1ZnMNCj4gPiArICoNCj4gPiArICogUmV0
-dXJucyB0aGUgZmlyc3QgYnVmZmVyIGluIHRoZSBnbG9iYWwgbGlzdCBvZiBETUEtYnVmcyB0aGF0
-J3Mgbm90IGluIHRoZQ0KPiA+ICsgKiBwcm9jZXNzIG9mIGJlaW5nIGRlc3Ryb3llZC4gSW5jcmVt
-ZW50cyB0aGF0IGJ1ZmZlcidzIHJlZmVyZW5jZSBjb3VudCB0bw0KPiA+ICsgKiBwcmV2ZW50IGJ1
-ZmZlciBkZXN0cnVjdGlvbi4gQ2FsbGVycyBtdXN0IHJlbGVhc2UgdGhlIHJlZmVyZW5jZSwgZWl0
-aGVyIGJ5DQo+ID4gKyAqIGNvbnRpbnVpbmcgaXRlcmF0aW9uIHdpdGggZ2V0X25leHRfZG1hYnVm
-KCksIG9yIHdpdGggZG1hX2J1Zl9wdXQoKS4NCj4gPiArICoNCj4gPiArICogUmV0dXJucyBOVUxM
-IElmIG5vIGFjdGl2ZSBidWZmZXJzIGFyZSBwcmVzZW50Lg0KPiA+ICsgKi8NCj4NCj4ga2RvYyB3
-YW50cyB0byBzZWUgJ1JldHVybjonLg0KPg0KPiBTZWUgZXJyb3JzIGluIEJQRiBDSS4NCj4NCj4g
-QW5kIHBhdGNoIDUgc2hvdWxkbid0IGJlIHVzaW5nIC8qKiBmb3IgcGxhaW4gY29tbWVudHMuDQoN
-ClRoYW5rcywgSSBmb3VuZCB0aGUgQ0kgZXJyb3JzLCBmaXhlZCwgYW5kIHZlcmlmaWVkIHdpdGgN
-CnNjcmlwdHMva2VybmVsLWRvYy4gSSBkaWRuJ3QgcmVjZWl2ZSBlbWFpbHMgYWJvdXQgdGhlbSB0
-aG91Z2gsIG5vdA0Kc3VyZSBpZiBJIHNob3VsZCBoYXZlLg0KDQo+IHB3LWJvdDogY3INCl9fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcg
-bWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNj
-cmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9y
-Zwo=
+Hi Marek,
+
+Thank you for the patch.
+
+On Wed, May 07, 2025 at 06:09:13PM +0200, Marek Szyprowski wrote:
+> Use common wrappers operating directly on the struct sg_table objects to
+> fix incorrect use of scatterlists sync calls. dma_sync_sg_for_*()
+> functions have to be called with the number of elements originally passed
+> to dma_map_sg_*() function, not the one returned in sgtable's nents.
+> 
+> Fixes: d33186d0be18 ("[media] omap3isp: ccdc: Use the DMA API for LSC")
+> Fixes: 0e24e90f2ca7 ("[media] omap3isp: stat: Use the DMA API")
+> CC: stable@vger.kernel.org
+> Signed-off-by: Marek Szyprowski <m.szyprowski@samsung.com>
+
+Reviewed-by: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+
+> ---
+>  drivers/media/platform/ti/omap3isp/ispccdc.c | 8 ++++----
+>  drivers/media/platform/ti/omap3isp/ispstat.c | 6 ++----
+>  2 files changed, 6 insertions(+), 8 deletions(-)
+> 
+> diff --git a/drivers/media/platform/ti/omap3isp/ispccdc.c b/drivers/media/platform/ti/omap3isp/ispccdc.c
+> index dd375c4e180d..7d0c723dcd11 100644
+> --- a/drivers/media/platform/ti/omap3isp/ispccdc.c
+> +++ b/drivers/media/platform/ti/omap3isp/ispccdc.c
+> @@ -446,8 +446,8 @@ static int ccdc_lsc_config(struct isp_ccdc_device *ccdc,
+>  		if (ret < 0)
+>  			goto done;
+>  
+> -		dma_sync_sg_for_cpu(isp->dev, req->table.sgt.sgl,
+> -				    req->table.sgt.nents, DMA_TO_DEVICE);
+> +		dma_sync_sgtable_for_cpu(isp->dev, &req->table.sgt,
+> +					 DMA_TO_DEVICE);
+>  
+>  		if (copy_from_user(req->table.addr, config->lsc,
+>  				   req->config.size)) {
+> @@ -455,8 +455,8 @@ static int ccdc_lsc_config(struct isp_ccdc_device *ccdc,
+>  			goto done;
+>  		}
+>  
+> -		dma_sync_sg_for_device(isp->dev, req->table.sgt.sgl,
+> -				       req->table.sgt.nents, DMA_TO_DEVICE);
+> +		dma_sync_sgtable_for_device(isp->dev, &req->table.sgt,
+> +					    DMA_TO_DEVICE);
+>  	}
+>  
+>  	spin_lock_irqsave(&ccdc->lsc.req_lock, flags);
+> diff --git a/drivers/media/platform/ti/omap3isp/ispstat.c b/drivers/media/platform/ti/omap3isp/ispstat.c
+> index 359a846205b0..d3da68408ecb 100644
+> --- a/drivers/media/platform/ti/omap3isp/ispstat.c
+> +++ b/drivers/media/platform/ti/omap3isp/ispstat.c
+> @@ -161,8 +161,7 @@ static void isp_stat_buf_sync_for_device(struct ispstat *stat,
+>  	if (ISP_STAT_USES_DMAENGINE(stat))
+>  		return;
+>  
+> -	dma_sync_sg_for_device(stat->isp->dev, buf->sgt.sgl,
+> -			       buf->sgt.nents, DMA_FROM_DEVICE);
+> +	dma_sync_sgtable_for_device(stat->isp->dev, &buf->sgt, DMA_FROM_DEVICE);
+>  }
+>  
+>  static void isp_stat_buf_sync_for_cpu(struct ispstat *stat,
+> @@ -171,8 +170,7 @@ static void isp_stat_buf_sync_for_cpu(struct ispstat *stat,
+>  	if (ISP_STAT_USES_DMAENGINE(stat))
+>  		return;
+>  
+> -	dma_sync_sg_for_cpu(stat->isp->dev, buf->sgt.sgl,
+> -			    buf->sgt.nents, DMA_FROM_DEVICE);
+> +	dma_sync_sgtable_for_cpu(stat->isp->dev, &buf->sgt, DMA_FROM_DEVICE);
+>  }
+>  
+>  static void isp_stat_buf_clear(struct ispstat *stat)
+
+-- 
+Regards,
+
+Laurent Pinchart
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
