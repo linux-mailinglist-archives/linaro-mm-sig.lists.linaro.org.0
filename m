@@ -2,177 +2,315 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id B427EAAF838
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  8 May 2025 12:43:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D7FF4AAF864
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  8 May 2025 12:56:16 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 82EE344B18
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  8 May 2025 10:43:03 +0000 (UTC)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by lists.linaro.org (Postfix) with ESMTP id D760344605
-	for <linaro-mm-sig@lists.linaro.org>; Thu,  8 May 2025 10:42:49 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 0183544667
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  8 May 2025 10:56:16 +0000 (UTC)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com (mail-dm6nam11on2081.outbound.protection.outlook.com [40.107.223.81])
+	by lists.linaro.org (Postfix) with ESMTPS id 706AC44605
+	for <linaro-mm-sig@lists.linaro.org>; Thu,  8 May 2025 10:56:03 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=none;
-	dmarc=pass (policy=none) header.from=arm.com;
-	spf=pass (lists.linaro.org: domain of steven.price@arm.com designates 217.140.110.172 as permitted sender) smtp.mailfrom=steven.price@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 08547106F;
-	Thu,  8 May 2025 03:42:39 -0700 (PDT)
-Received: from [10.1.38.30] (e122027.cambridge.arm.com [10.1.38.30])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 901BE3F5A1;
-	Thu,  8 May 2025 03:42:47 -0700 (PDT)
-Message-ID: <9c0b95c8-bf2d-4689-ac1f-ccacba826060@arm.com>
-Date: Thu, 8 May 2025 11:42:46 +0100
-MIME-Version: 1.0
+	dkim=pass header.d=amd.com header.s=selector1 header.b=1y2tqDn5;
+	dmarc=pass (policy=quarantine) header.from=amd.com;
+	arc=pass ("microsoft.com:s=arcselector10001:i=1");
+	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.107.223.81 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=fVJR2TQ9Ifh5s/ktB5blNqZ0P2jzS46FpDbMGmxN5RuoJFOmIr9WEpFKg5mHdkxCSGC/WTH9VVpQVSI+4D9d7tCz0/gOOEj7dxbia6xXA0YV/D/dGAvkpCQLhWuV+MumL+nRvaZuLhEjdARKpaVGpKuymdC0vSNpEoKUiN/WwDi//b5Amf3vS3M/xdEwgyXYrpYb7eKpeV0JsDsgLIlR1+ll1jaqaWao3sRrNXwoahZ2R0uuKXli+gmHbwW2xkk0JD9nIDJeLLR+M0Pso/lAFdQg47JQVn7pW2kxiTWwFYVsuef+/uX8KVmDyx6Nn1egDNICCXY8kt1OVwbkiHqw9Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=aN2b75/gxxaF7JyJKtag5qVjiIJaGinopxYhGj+wTA0=;
+ b=o3GQDBCidnEl9e5q3KN37ZHzFGVkRl8o/+jpV31ssq9TxhI930BU2JvHPmchhrwPj5Lwemk4WxZxbJ+OqbzZiqJ8fZaYObSCPwwPqJMxbEi3lxRyItMQskeWM4H8lv7mE3gYyGfIzExMk8KhzShtH8Ps2dVRgx40aduDtrwl0xBgbw19I1iv6hMLxIlyMo0D1JTaDP9PZrBXXkiYc3ZS2qYtTOZ32ACwYXoyvcNzx7p5dslfXXcFqCggGa3lWn0LJzl2vdGXEuwNrjJhhvYC6YL+VTqCvW+eRLEGCJFGRBktOo/RKK/iUTQ5YHFRF/ac+ZGp7I+zCqSw3CXiaJu0iQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=aN2b75/gxxaF7JyJKtag5qVjiIJaGinopxYhGj+wTA0=;
+ b=1y2tqDn5Of7yMpkKsl/UtoNwDWdFeHpsKwpp5PV1FL+37UC6QkK8tCyFFVzRtnAAezLst2ojAkYfL5peR3fOsYZGewmrBErR8utSsgKK/R86rMpHfgOeuTeEpUL0WiM+JrcyxGKMVnaMbw6CmEzGXG+R0FtTH77RzoSydwaYDzI=
+Received: from PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
+ by SN7PR12MB7786.namprd12.prod.outlook.com (2603:10b6:806:349::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.21; Thu, 8 May
+ 2025 10:55:56 +0000
+Received: from PH7PR12MB5685.namprd12.prod.outlook.com
+ ([fe80::46fb:96f2:7667:7ca5]) by PH7PR12MB5685.namprd12.prod.outlook.com
+ ([fe80::46fb:96f2:7667:7ca5%7]) with mapi id 15.20.8678.028; Thu, 8 May 2025
+ 10:55:56 +0000
+Message-ID: <50c0ce93-5d74-44b4-af7a-049c5d901a7b@amd.com>
+Date: Thu, 8 May 2025 12:55:52 +0200
 User-Agent: Mozilla Thunderbird
-To: =?UTF-8?Q?Adri=C3=A1n_Larumbe?= <adrian.larumbe@collabora.com>,
- linux-kernel@vger.kernel.org
-References: <20250507160713.1363985-1-adrian.larumbe@collabora.com>
- <20250507160713.1363985-4-adrian.larumbe@collabora.com>
-From: Steven Price <steven.price@arm.com>
-Content-Language: en-GB
-In-Reply-To: <20250507160713.1363985-4-adrian.larumbe@collabora.com>
+To: linux@treblig.org, sumit.semwal@linaro.org, gustavo@padovan.org
+References: <20250505233838.105668-1-linux@treblig.org>
+Content-Language: en-US
+From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+In-Reply-To: <20250505233838.105668-1-linux@treblig.org>
+X-ClientProxiedBy: FR4P281CA0093.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:cb::12) To PH7PR12MB5685.namprd12.prod.outlook.com
+ (2603:10b6:510:13c::22)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|SN7PR12MB7786:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1ee1e507-40cc-4bac-985c-08dd8e1ee885
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014|7053199007;
+X-Microsoft-Antispam-Message-Info: 
+	=?utf-8?B?OHliSzQxVTZRVHRPcW9HTTRRTjF5T0EzQlRncmVDQ2h1VGhvZWxva2l1bHIz?=
+ =?utf-8?B?S0tBYTJ3bVBhYUtoNU03c0laUVNvYzZldWQ1S1VGSUtkTm1aMmVZRURBUUJP?=
+ =?utf-8?B?ODFDV0pKdjNPYjNtR285MGU0RFMrMVYwaWVRbkd2S1V2My81VUQ1M1VNaDFR?=
+ =?utf-8?B?azJlaU9CTFdoVFhuaG1qWHcwWHk3UTI2QjUzWnFTenBSL0xqa2ltVGRRU3BK?=
+ =?utf-8?B?disxbVhBNVVQdldkYlVIR05oK2pWK21wbUdyYnkrNmNGWWhPdnBjMWk1UEJQ?=
+ =?utf-8?B?aTFscEJVaUdkNldnUnRwNm93TXc2STBYU0htS0JMUmhjOTNsS1F1U3BTOXM2?=
+ =?utf-8?B?QXZNc2Q3SGx3Q1BWcGViQkxTWVdMYzdaZ0pDeDlNWjk5RE1kSG85QllTQXRj?=
+ =?utf-8?B?aVpVa2VvcXByejdnVDM0R0VFbzRXcndkOUlQUFJZWGI2NHAyVGt6ZzM5bUJh?=
+ =?utf-8?B?QVhrT0FpYnArdUVPU1JtTDhwUUwwbUpaa3ZIMnlSRUh2bEFZSXE5cVgvYUxW?=
+ =?utf-8?B?MWF4YUpnUjAzSG9YRS95NGx0NExwVWxJQll6djVsWTJSdjJCTG90T292L01y?=
+ =?utf-8?B?SFpTcFAyQ0RxUzFiQVFsK0dzcWsrTWx6d0Vqdml2d3JtQVNPRjdadktGVUNL?=
+ =?utf-8?B?TzRpQnZKYnVTc0gzT1NYaFhHbWF5ZlU5MHlyNkxFbU1lYmlaVWZhWkw2OWYr?=
+ =?utf-8?B?SHBneWo3dWVuQVh4UnFPU2FjN1VaOHR2UkY5elpjUjlFUjBiTk54c2NJOWth?=
+ =?utf-8?B?K0J0bTNCUUVaajgzdEJDTWVCTENwaE1CbUZhWUxNQWU0Z1ZKeDV5VkFDM2dV?=
+ =?utf-8?B?aTJsRnVFb3V4US8rV3lnSTc5dXZibCswYy9BMGdQMDB6ZytQSDl3bjZtOVNX?=
+ =?utf-8?B?TTBFVEZoM2VLdldBWXF6UUZjbS8wNEV3SWFNbUk3SnNZNzJSNHNoem9HbzdU?=
+ =?utf-8?B?MzRDamhrMVcwVW9WZVczYTEvc1pBTElYMTlkVTZacUNEY3BRRkFjWDZyV0RC?=
+ =?utf-8?B?L2NYdUh2MGgzQVd0cWhDcG5BVUJWMW1PNCtYVUZJV2NBZDhPUFEwTkQyRmR6?=
+ =?utf-8?B?aW9pVCtPRENnZWc0eUxvU3RnT2QvS2Z0bkJWSEFPUU54M0VTQ1NCNE1NS0xX?=
+ =?utf-8?B?VUFsSWUwY0E3UkhBamRwczdMNnNqQlRFNTdxc21KZ3NFTlZWSUJuZ2Z1bWJK?=
+ =?utf-8?B?TmxTQnRseGw3ZmQwclpXbmIrSTlMeEhuQ0YxQkdPOSsyMDdFM05aK3Q2a1Zq?=
+ =?utf-8?B?OVk5NXJzRUNTWnQzMTUzL24xWFd3NWdMck00YXR0NTI4N0ROb3kySDFNckZJ?=
+ =?utf-8?B?L2hFWWRKQ3NheW51elE1YWpGQXlyb1ZaVitDWjZLYWhTRzJCckp3aFFWYVFk?=
+ =?utf-8?B?RjhJSzBsYUF1Qi9qdWxMZ29jdHlFcVZHL1BzVmQxckU1cmV1TXlqcUNkQ1Bo?=
+ =?utf-8?B?ZG81M0hKd2xTbmdOcjVtRGJ1RmZEZWdNQkVvb1dUT2VMNnYybzBLQ0JJWU0v?=
+ =?utf-8?B?aDV6WXN6OWVDTDVZL3dHZDdNL25UdHR6RE9vY2VrN0VBVDBGNEp3bzY5UTlK?=
+ =?utf-8?B?KytvSVYvY3VOaXJtaVNHV1FNZktqeTRCNE9nRUZqTXQ3ZmVvTFNuME5oMmhs?=
+ =?utf-8?B?UmpJZlpmWlJYcGNVWGR4U1NqL2V1cUJ0b0NpR2d6dXpMa01mdXVURk5uaFZI?=
+ =?utf-8?B?UWRFcFhMb2RvZTk4bjRFNjg3RTdBWER0YkRNY0dqNE1BTFRJOGluaXlSMEtY?=
+ =?utf-8?B?UEZMUjhjeDc5aXR1ditiVkpSWi9YWndkVm02bk52Skdoait6SzFDRyttL0FN?=
+ =?utf-8?B?SllLdzRJYWhlRXgwSlJHRFlaZC9Xb25vZlBnaU02ZC9kMjJSY2YrUXhhRDU1?=
+ =?utf-8?B?dkZLSERNUllEL2pMaTBDck1sNjlGQjkyKzdFVktFU3lJbFl4RG5JNjhTUVI5?=
+ =?utf-8?Q?zoHK6ESTKPw=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB5685.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(7053199007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?NDZoSDJEcExEUk51N3M2ejIwMFdDeEpNY2piLzZFdEZZcm1VNWhHanBDZm5M?=
+ =?utf-8?B?Y1FGQzNGbzYyaTlYSG9KblczU2plWkZkdHBKVkFKWlUyZzU3djc1b3V4czJh?=
+ =?utf-8?B?dmZMeEZZM3hENXVKVGl5dVFhdTNxRHJKb1hrMTlwSStteG1sUEExOEJweDlZ?=
+ =?utf-8?B?OGxtQ1VlbFJKSTR0ZTloa0EzTGUzUkdyVU1walRXaWErVXVVNFd4RjcxZE9w?=
+ =?utf-8?B?TENPTy9hZmc1emxQTFk1eXN0MTlWN013Q1hBdUhyandybWtqYzZENnZvTVRC?=
+ =?utf-8?B?dkxIcWVxZUJRNXZYRVFvdm1XS0ZlYitaRHJqeElzZTdUand5VXo1V21zem1I?=
+ =?utf-8?B?akFOZzBaNUJZMjBHUzZoWVMvNjRqSzVOWWpMUFpxTE9kWUtMcWowWGJ5WnNr?=
+ =?utf-8?B?T3ZhMEUzeUxNVnNlaU92NWF1ZEwvbHA2YlhYNHV0dkJteDh4eHJHRWRZbTB2?=
+ =?utf-8?B?UDJMcWhRM3RrQkJHZkxCWGpMU3BydXFBRkJNV0J2NnNVbmFpbHBrYjVRTHJ0?=
+ =?utf-8?B?THJJUXZ6MjloaWVkTFlzT3NaRDF1SXRUQkhwMEowUjluNjd1S0tTY2JwbmRU?=
+ =?utf-8?B?WHFMSXVzT0xIckZxZXFSSmE4MnhyQ2FFakJXbVZJYmlIZ1FVaWhTNTB2dWhB?=
+ =?utf-8?B?K1g0Ulo3NDJ6enJ0SEVNYUdqRDhrQnNzcGkxNGFwZU4zOW5ka25ya0RVUUFu?=
+ =?utf-8?B?SUpISi80SkNZNmVYT0hNUFBiRlNWZEErM1hqS0hUblFDRXVweVZjclZlM0ZB?=
+ =?utf-8?B?c0NSUmovZVYwVGF2aThKY3Zwb3JIZzhrMzVjRXZmKzBoZk1GSkJUczFrVlJT?=
+ =?utf-8?B?Y2p0VVR1TW45UGdZcTloSnFHbVhDMXJ3cnl4cHVESldGVDBzRFM5Mk1VdUU1?=
+ =?utf-8?B?UkNwYjl4MmQ0Q3hvUG8wRUJqSGFLWVBPS1VvSExndWRrcjkyK2N1UjNBSHl3?=
+ =?utf-8?B?Q2Vmdkhyb2ZOemVnL0NwUmlHNm8yMjZxTXA1VzdnM2JHODJGU2o4T1l6YkFr?=
+ =?utf-8?B?QkdwamU3UjhqUzNhck1LeTM5MU1PUFFINjBXV3VlVlkyRU1uODRSSCtsNDNT?=
+ =?utf-8?B?bVBZUVlxaFBaUkxTZEZXT3FDcFI1eEZ4eXlqQXZ1S2M3VDJVelZkaWJWNk1G?=
+ =?utf-8?B?TlcrWXNYOUVzbDVDWkh5VHZaTWtFMHZXd1h5TTJEakNCUUZZLzVqZHd3NXhz?=
+ =?utf-8?B?ZW1lZTdWVDN6Y0J3L3ViRzJCRk5DalNuSVpZWk80N0NIZzh3NVJUSnFUNlZ5?=
+ =?utf-8?B?NFFiUWlMQlBxbHJxc2YzZmVBUUZraS9pN3RRcW9VQlB2czNzbUZaNmtTbXla?=
+ =?utf-8?B?ZndLVnBvV2NXa0xycS9abEFhVEh0M0ZZbDZldWRWcWQzdkx1WGszTlVIbmh1?=
+ =?utf-8?B?UjBPZ3g1Y0MxRXNlYU4yaEtnaVBnMVZseWtISlRZL0V2aHVmU3pkeWxYMHRj?=
+ =?utf-8?B?QzZJNjdJT1laa0FrcGVlRjNYUERNUm85aFI0ODR1VkRzNHlaclVLRGZpWEti?=
+ =?utf-8?B?RGJ2MFBLR0lnb1A0c3RSeUFSVkdLbmdRYjVTRjZqYkhiYWplZEpZVmVhZ1pw?=
+ =?utf-8?B?NndRdHZBbVR2eHRrbE4wMy95dTJoZUd2MFBTYWxEN2lzUWpnaTBhUjFlem1I?=
+ =?utf-8?B?SDZ4WWRNU0dmVWxTcTBZQ1VrRFB1U3NSdWJaRU1tSlpGMDh2aGJiUENQbWxU?=
+ =?utf-8?B?ZE10OExwTHFCS2RLWTVUVFJBYzFjejhkR1R2bHJ5cjhKc2l4bG5QOVQzQ0Vl?=
+ =?utf-8?B?MUNNYVQ1U255TGlXOXU3NW82U0pkMWRYMVJraFdGZnd1WlFHaVVyQzB2cFJi?=
+ =?utf-8?B?UWN4S0srdHp1ZkV2N2VKRUJNNjdWdFpLeXgrVFZvOE1VUHVjSE5tSE96T096?=
+ =?utf-8?B?b1MxcVN1amptMUdvMGd3U05YR3ZzeCtzTzFZbGppMGdMZkt2OWU4WWlvc01a?=
+ =?utf-8?B?QTZoeSt5Ui9DZXMrVFBLdDFRRWVDSHMyRm53NjcyTVM4blgyU3kzNTFiT0J2?=
+ =?utf-8?B?TGwrREpCN3JoczNrTkJnZkp0VERCK2VPeTBwUG80cjNaQlorcjVjMWdROThI?=
+ =?utf-8?B?bUhSa0xlcHFhSnF0QW5CdzJISURaajVvemorbVM5amtjUDRucWpwM1lRSkx6?=
+ =?utf-8?Q?E5IN9pbSH+URmFN14K8VSX1LR?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1ee1e507-40cc-4bac-985c-08dd8e1ee885
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5685.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 May 2025 10:55:55.9393
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: UmcQIRx6eXa5xdTPN161FM9RQ5opslzJbcq+sU2SbAwskhK+adNv4ERqBXaEfmOE
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB7786
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: D760344605
-X-Spamd-Bar: ---
-X-Spamd-Result: default: False [-3.70 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
-	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:217.140.96.0/20];
+X-Rspamd-Queue-Id: 706AC44605
+X-Spamd-Bar: -----
+X-Spamd-Result: default: False [-5.00 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
+	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector10001:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
+	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
+	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
 	MIME_GOOD(-0.10)[text/plain];
-	RCVD_NO_TLS_LAST(0.10)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	ARC_NA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:28939, ipnet:217.140.110.0/24, country:GB];
-	RCPT_COUNT_TWELVE(0.00)[15];
+	RCPT_COUNT_SEVEN(0.00)[7];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.223.81:from];
+	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
+	MID_RHS_MATCH_FROM(0.00)[];
+	DNSWL_BLOCKED(0.00)[40.107.223.81:from,2603:10b6:510:13c::22:received];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_TLS_LAST(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	RCVD_COUNT_TWO(0.00)[2];
-	FREEMAIL_CC(0.00)[lists.freedesktop.org,collabora.com,kernel.org,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,vger.kernel.org,lists.linaro.org];
-	R_DKIM_NA(0.00)[];
-	DNSWL_BLOCKED(0.00)[217.140.110.172:from];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	NEURAL_HAM(-0.00)[-0.994]
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	TO_DN_NONE(0.00)[];
+	DKIM_TRACE(0.00)[amd.com:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: W6HKFBBJODHLJZNTZ22SBDVNRAGTMEI3
-X-Message-ID-Hash: W6HKFBBJODHLJZNTZ22SBDVNRAGTMEI3
-X-MailFrom: steven.price@arm.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: dri-devel@lists.freedesktop.org, Boris Brezillon <boris.brezillon@collabora.com>, kernel@collabora.com, Rob Herring <robh@kernel.org>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+Message-ID-Hash: VQT3XBPHRYSVF6UAVY7IOUBHWH2PRKW4
+X-Message-ID-Hash: VQT3XBPHRYSVF6UAVY7IOUBHWH2PRKW4
+X-MailFrom: Christian.Koenig@amd.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 3/3] drm/panfrost: show device-wide list of DRM GEM objects over DebugFS
+Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf/sw-sync: Remove unused debug code
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/W6HKFBBJODHLJZNTZ22SBDVNRAGTMEI3/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VQT3XBPHRYSVF6UAVY7IOUBHWH2PRKW4/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-T24gMDcvMDUvMjAyNSAxNzowNywgQWRyacOhbiBMYXJ1bWJlIHdyb3RlOg0KPiBUaGlzIGNoYW5n
-ZSBpcyBlc3NlbnRpYWxseSBhIFBhbmZyb3N0IHBvcnQgb2YgY29tbWl0IGEzNzA3ZjUzZWIzZg0K
-PiAoImRybS9wYW50aG9yOiBzaG93IGRldmljZS13aWRlIGxpc3Qgb2YgRFJNIEdFTSBvYmplY3Rz
-IG92ZXIgRGVidWdGUyIpLg0KPiANCj4gVGhlIERlYnVnRlMgZmlsZSBpcyBhbG1vc3QgdGhlIHNh
-bWUgYXMgaW4gUGFudGhvciwgbWludXMgdGhlIEdFTSBvYmplY3QNCj4gdXNhZ2UgZmxhZ3MsIHNp
-bmNlIFBhbmZyb3N0IGhhcyBubyBrZXJuZWwtb25seSBCTydzLg0KPiANCj4gVHdvIGFkZGl0aW9u
-YWwgR0VNIHN0YXRlIGZsYWdzIHdoaWNoIGFyZSBkaXNwbGF5ZWQgYnV0IGFyZW4ndCByZWxldmFu
-dA0KPiB0byBQYW50aG9yIGFyZSAnUHVyZ2VkJyBhbmQgJ1B1cmdlYWJsZScsIHNpbmNlIFBhbmZy
-b3N0IGltcGxlbWVudHMgYW4NCj4gZXhwbGljaXQgc2hyaW5rZXIgYW5kIGEgbWFkdmlzZSBpb2N0
-bCB0byBmbGFnIG9iamVjdHMgYXMgcmVjbGFpbWFibGUuDQo+IA0KPiBTaWduZWQtb2ZmLWJ5OiBB
-ZHJpw6FuIExhcnVtYmUgPGFkcmlhbi5sYXJ1bWJlQGNvbGxhYm9yYS5jb20+DQoNCk1pbm9yIHBv
-aW50LCBidXQgeW91J3ZlIHVzZWQgInB0ZGV2IiByYXRoZXIgdGhhbiAicGZkZXYiIHNldmVyYWwg
-dGltZXMgDQppbiB0aGlzIHBhdGNoIC0gaXQgd291bGQgYmUgZ29vZCB0byBhdm9pZCB0aGlzLg0K
-DQpJJ20gYWxzbyBzZWVpbmcgYSBzcGxhdCB3aGVuIHJ1bm5pbmcgdGhpcywgc2VlIGJlbG93LiBJ
-IGhhdmVuJ3QgZ290IG15IA0KaGVhZCBhcm91bmQgaG93IHRoaXMgaXMgaGFwcGVuaW5nLCBidXQg
-SSBzZWUgaXQgd2hlbiBnbG1hcmsgcXVpdHMgYXQgdGhlIA0KZW5kIG9mIHRoZSB0ZXN0Lg0KDQpT
-dGV2ZQ0KDQpbICAzOTkuNTA1MDY2XSBVbmFibGUgdG8gaGFuZGxlIGtlcm5lbCBOVUxMIHBvaW50
-ZXIgZGVyZWZlcmVuY2UgYXQgdmlydHVhbCBhZGRyZXNzIDAwMDAwMDA0IHdoZW4gd3JpdGUNClsg
-IDM5OS41MTU1MTldIFswMDAwMDAwNF0gKnBnZD0wMDAwMDAwMA0KWyAgMzk5LjUxOTU0MV0gSW50
-ZXJuYWwgZXJyb3I6IE9vcHM6IDgwNSBbIzFdIFNNUCBBUk0NClsgIDM5OS41MjQ4OTZdIE1vZHVs
-ZXMgbGlua2VkIGluOiBwYW5mcm9zdCBncHVfc2NoZWQgZHJtX3NobWVtX2hlbHBlcg0KWyAgMzk5
-LjUzMTgxN10gQ1BVOiAxIFVJRDogMTAwMCBQSUQ6IDMxNiBDb21tOiBnbG1hcmsyLWVzMi1kcm0g
-Tm90IHRhaW50ZWQgNi4xNS4wLXJjNS0wMDczMS1nOWNjNWI0ZDdkYTI3ICMxIE5PTkUgDQpbICAz
-OTkuNTQzMDk4XSBIYXJkd2FyZSBuYW1lOiBSb2NrY2hpcCAoRGV2aWNlIFRyZWUpDQpbICAzOTku
-NTQ4MzUwXSBQQyBpcyBhdCBwYW5mcm9zdF9nZW1fZnJlZV9vYmplY3QrMHg4Yy8weDE2MCBbcGFu
-ZnJvc3RdDQpbICAzOTkuNTU1MzcxXSBMUiBpcyBhdCB0cmFjZV9jb250ZW50aW9uX2VuZCsweDRj
-LzB4ZmMNClsgIDM5OS41NjA4MjJdIHBjIDogWzxiZjAxYTM4ND5dICAgIGxyIDogWzxjMDNkMDE3
-MD5dICAgIHBzcjogNjAwMTAwMTMNClsgIDM5OS41Njc4MjNdIHNwIDogZjIyYjFkZjggIGlwIDog
-YzIxNjNlMDAgIGZwIDogYzRiMTU4MDANClsgIDM5OS41NzM2NThdIHIxMDogMDAwMDAwMDkgIHI5
-IDogYzVmOTRjNDAgIHI4IDogYzRiMTU4NTANClsgIDM5OS41Nzk0OTJdIHI3IDogYzRiMTU4ODQg
-IHI2IDogYzc4MTM2MTQgIHI1IDogYzVmOTRmMzAgIHI0IDogYzc4MTM0MDANClsgIDM5OS41ODY3
-ODRdIHIzIDogMDAwMDAwMDAgIHIyIDogMDAwMDAwMDAgIHIxIDogMDAwMDAwMDAgIHIwIDogYzVm
-OTRmMzANClsgIDM5OS41OTQwNzVdIEZsYWdzOiBuWkN2ICBJUlFzIG9uICBGSVFzIG9uICBNb2Rl
-IFNWQ18zMiAgSVNBIEFSTSAgU2VnbWVudCBub25lDQpbICAzOTkuNjAyMDQ4XSBDb250cm9sOiAx
-MGM1Mzg3ZCAgVGFibGU6IDA2YzZjMDZhICBEQUM6IDAwMDAwMDUxDQpbICAzOTkuNjA4NDY1XSBS
-ZWdpc3RlciByMCBpbmZvcm1hdGlvbjogc2xhYiBrbWFsbG9jLTFrIHN0YXJ0IGM1Zjk0YzAwIHBv
-aW50ZXIgb2Zmc2V0IDgxNiBzaXplIDEwMjQNClsgIDM5OS42MTgyOTZdIFJlZ2lzdGVyIHIxIGlu
-Zm9ybWF0aW9uOiBOVUxMIHBvaW50ZXINClsgIDM5OS42MjM1NTFdIFJlZ2lzdGVyIHIyIGluZm9y
-bWF0aW9uOiBOVUxMIHBvaW50ZXINClsgIDM5OS42Mjg4MDRdIFJlZ2lzdGVyIHIzIGluZm9ybWF0
-aW9uOiBOVUxMIHBvaW50ZXINClsgIDM5OS42MzQwNTddIFJlZ2lzdGVyIHI0IGluZm9ybWF0aW9u
-OiBzbGFiIGttYWxsb2MtMWsgc3RhcnQgYzc4MTM0MDAgcG9pbnRlciBvZmZzZXQgMCBzaXplIDEw
-MjQNClsgIDM5OS42NDM2OTBdIFJlZ2lzdGVyIHI1IGluZm9ybWF0aW9uOiBzbGFiIGttYWxsb2Mt
-MWsgc3RhcnQgYzVmOTRjMDAgcG9pbnRlciBvZmZzZXQgODE2IHNpemUgMTAyNA0KWyAgMzk5LjY1
-MzUxN10gUmVnaXN0ZXIgcjYgaW5mb3JtYXRpb246IHNsYWIga21hbGxvYy0xayBzdGFydCBjNzgx
-MzQwMCBwb2ludGVyIG9mZnNldCA1MzIgc2l6ZSAxMDI0DQpbICAzOTkuNjYzMzQ0XSBSZWdpc3Rl
-ciByNyBpbmZvcm1hdGlvbjogc2xhYiBrbWFsbG9jLTFrIHN0YXJ0IGM0YjE1ODAwIHBvaW50ZXIg
-b2Zmc2V0IDEzMiBzaXplIDEwMjQNClsgIDM5OS42NzMxNzFdIFJlZ2lzdGVyIHI4IGluZm9ybWF0
-aW9uOiBzbGFiIGttYWxsb2MtMWsgc3RhcnQgYzRiMTU4MDAgcG9pbnRlciBvZmZzZXQgODAgc2l6
-ZSAxMDI0DQpbICAzOTkuNjgyOTAxXSBSZWdpc3RlciByOSBpbmZvcm1hdGlvbjogc2xhYiBrbWFs
-bG9jLTFrIHN0YXJ0IGM1Zjk0YzAwIHBvaW50ZXIgb2Zmc2V0IDY0IHNpemUgMTAyNA0KWyAgMzk5
-LjY5MjYzMV0gUmVnaXN0ZXIgcjEwIGluZm9ybWF0aW9uOiBub24tcGFnZWQgbWVtb3J5DQpbICAz
-OTkuNjk4MzcwXSBSZWdpc3RlciByMTEgaW5mb3JtYXRpb246IHNsYWIga21hbGxvYy0xayBzdGFy
-dCBjNGIxNTgwMCBwb2ludGVyIG9mZnNldCAwIHNpemUgMTAyNA0KWyAgMzk5LjcwODEwMV0gUmVn
-aXN0ZXIgcjEyIGluZm9ybWF0aW9uOiBub24tc2xhYi92bWFsbG9jIG1lbW9yeQ0KWyAgMzk5Ljcx
-NDUyMV0gUHJvY2VzcyBnbG1hcmsyLWVzMi1kcm0gKHBpZDogMzE2LCBzdGFjayBsaW1pdCA9IDB4
-MTc4YmM0ZWEpDQpbICAzOTkuNzIyMDA5XSBTdGFjazogKDB4ZjIyYjFkZjggdG8gMHhmMjJiMjAw
-MCkNClsgIDM5OS43MjY4NzRdIDFkZTA6ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIDAwMDAwMDAwIGM0YjE1ODg0DQpbICAzOTkuNzM2MDEyXSAx
-ZTAwOiBjNzgxMzQwMCBjNGIxNTgwMCAwMDAwMDAwNyBjNGIxNTg4NCBjNGIxNTg1MCBjNjgxNTAw
-MCAwMDAwMDAwOSBjMGJiMzgyNA0KWyAgMzk5Ljc0NTE1MF0gMWUyMDogMDAwMDAwMDAgNDAwODY0
-MDkgYzc4NjA4MDAgYzE1ZmQwMDggMDAwMDAwMDggYzBiYjU4OGMgYzY4MTU2MzAgMDAwMDAxM2MN
-ClsgIDM5OS43NTQyODhdIDFlNDA6IDAwMDBlMjgwIDAwMDAwMDAwIGMxYjM1NjUwIGIyMzVlMDAw
-IGYyMmIxZjVjIDAwMDAwMDA4IGYyMmIxZTc0IGJlYzM3NTUwDQpbICAzOTkuNzYzNDI2XSAxZTYw
-OiBjNjgxNTYzMCBjNjk0ZWEwMCBjMGJiNDdjYyAwMDAwMDA1MSAwMDAwMDAwMCAwMDAwMDAwNyAw
-MDAwMDAwMCAwMDAwMDAwMA0KWyAgMzk5Ljc3MjU2NF0gMWU4MDogMDAwMDAwMDAgMDAwMDAwMDAg
-MDAwMDAwMDAgMDAwMDAwMDAgMDAwMDAwMDAgMDAwMDAwMDAgMDAwMDAwMDAgMDAwMDAwMDANClsg
-IDM5OS43ODE3MDFdIDFlYTA6IDAwMDAwMDAwIDAwMDAwMDAwIDAwMDAwMDAwIDAwMDAwMDAwIDAw
-MDAwMDAwIDAwMDAwMDAwIDAwMDAwMDAwIDAwMDAwMDAwDQpbICAzOTkuNzkwODM5XSAxZWMwOiAw
-MDAwMDAwMCAwMDAwMDAwMCAwMDAwMDAwMCAwMDAwMDAwMCAwMDAwMDAwMCAwMDAwMDAwMCAwMDAw
-MDAwMCAwMDAwMDAwMA0KWyAgMzk5Ljc5OTk3N10gMWVlMDogMDAwMDAwMDAgMDAwMDAwMDAgMDAw
-MDAwMDAgMDAwMDAwMDAgMDAwMDAwMDAgMzU2Y2M0NmYgMDAwMDAwMDAgNDAwODY0MDkNClsgIDM5
-OS44MDkxMTVdIDFmMDA6IGM2OTRlYTAwIGMwMzAwMGMwIGJlYzM3NTUwIGM2OTRlYTAwIGM2ODE1
-MDAwIDAwMDAwMDA2IGM0YmY5YjcwIGMwNThkNjk0DQpbICAzOTkuODE4MjUzXSAxZjIwOiBiMmI0
-NzAwMCBmMjJiMWY1MCAwMDAwMDAwMSBjMDMwMDJmMCAwMDAwMDAwMCBjNWY2MDkwMCAwMDAwMDAw
-MCBiMjM1ZTAwMA0KWyAgMzk5LjgyNzM5MV0gMWY0MDogMDA3ZTkwMDAgYzA1M2Q4NzQgZjIyYjFm
-NTAgMDAwMDAwMDEgZjIyYjFmNTAgZjIyYjFmNTAgMDA0ZTBiMTQgYzVmNjA5NDANClsgIDM5OS44
-MzY1MjhdIDFmNjA6IGIyMzVlMDAwIGIyYjQ2ZmZmIGM0YWJlYzBjIGIwOWUzMDAwIGIyYmNmZmZm
-IDAwMDAwMDAwIDAwMDAwMDAwIDM1NmNjNDZmDQpbICAzOTkuODQ1NjY2XSAxZjgwOiAwMDAwMDAw
-MyAwMDRlNmI0MCBiZWMzNzU1MCA0MDA4NjQwOSAwMDAwMDAzNiBjMDMwMDJmMCBjNjgxNTAwMCAw
-MDAwMDAzNg0KWyAgMzk5Ljg1NDgwNV0gMWZhMDogMDFjYjMyYTAgYzAzMDAwYzAgMDA0ZTZiNDAg
-YmVjMzc1NTAgMDAwMDAwMDYgNDAwODY0MDkgYmVjMzc1NTAgMDAwMDAwMDcNClsgIDM5OS44NjM5
-NDNdIDFmYzA6IDAwNGU2YjQwIGJlYzM3NTUwIDQwMDg2NDA5IDAwMDAwMDM2IDAwMDAwMDAwIDAw
-MDAwMDAwIDAxY2IyZGEwIDAxY2IzMmEwDQpbICAzOTkuODczMDgwXSAxZmUwOiBiNmU0YjA4YyBi
-ZWMzNzUzNCBiNmUzNDQyZiBiNmJiOGY5OCA2MDAxMDAzMCAwMDAwMDAwNiAwMDAwMDAwMCAwMDAw
-MDAwMA0KWyAgMzk5Ljg4MjIxNl0gQ2FsbCB0cmFjZTogDQpbICAzOTkuODgyMjIyXSAgcGFuZnJv
-c3RfZ2VtX2ZyZWVfb2JqZWN0IFtwYW5mcm9zdF0gZnJvbSBkcm1fZ2VtX2hhbmRsZV9kZWxldGUr
-MHg4NC8weGIwDQpbICAzOTkuODkzODEzXSAgZHJtX2dlbV9oYW5kbGVfZGVsZXRlIGZyb20gZHJt
-X2lvY3RsKzB4MmI4LzB4NGY0DQpbICAzOTkuOTAwMjM3XSAgZHJtX2lvY3RsIGZyb20gc3lzX2lv
-Y3RsKzB4NDI4LzB4ZTMwDQpbICAzOTkuOTA1NDk2XSAgc3lzX2lvY3RsIGZyb20gcmV0X2Zhc3Rf
-c3lzY2FsbCsweDAvMHgxYw0KWyAgMzk5LjkxMTE0MV0gRXhjZXB0aW9uIHN0YWNrKDB4ZjIyYjFm
-YTggdG8gMHhmMjJiMWZmMCkNClsgIDM5OS45MTY3ODNdIDFmYTA6ICAgICAgICAgICAgICAgICAg
-IDAwNGU2YjQwIGJlYzM3NTUwIDAwMDAwMDA2IDQwMDg2NDA5IGJlYzM3NTUwIDAwMDAwMDA3DQpb
-ICAzOTkuOTI1OTIyXSAxZmMwOiAwMDRlNmI0MCBiZWMzNzU1MCA0MDA4NjQwOSAwMDAwMDAzNiAw
-MDAwMDAwMCAwMDAwMDAwMCAwMWNiMmRhMCAwMWNiMzJhMA0KWyAgMzk5LjkzNTA1OF0gMWZlMDog
-YjZlNGIwOGMgYmVjMzc1MzQgYjZlMzQ0MmYgYjZiYjhmOTgNClsgIDM5OS45NDA3MDJdIENvZGU6
-IGViMDAxOGZhIGU1OTQzMjE4IGU1OTQyMjE0IGUxYTAwMDA1IChlNTgyMzAwNCkgDQpbICAzOTku
-OTQ3NTMyXSAtLS1bIGVuZCB0cmFjZSAwMDAwMDAwMDAwMDAwMDAwIF0tLS0NCg0KX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWls
-aW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJl
-IHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
+On 5/6/25 01:38, linux@treblig.org wrote:
+> From: "Dr. David Alan Gilbert" <linux@treblig.org>
+> 
+> sync_file_debug_add() and sync_file_debug_remove() have been unused
+> since 2016's
+> commit d4cab38e153d ("staging/android: prepare sync_file for de-staging")
+> 
+> Remove them.
+> 
+> Since sync_file_debug_add was the only thing to add to
+> sync_file_list_head, the code that dumps it in part of
+> sync_info_debugfs_show can be removed, and the declaration of
+> the list and it's associated lock can be removed.
+> (The 'fences:\n...' marker in that debugfs file is left in
+> so as not to change the output)
+> 
+> That leaves the sync_print_sync_file() helper unused, and
+> is thus removed.
+> 
+> Signed-off-by: Dr. David Alan Gilbert <linux@treblig.org>
+
+
+I've added my reviewed-by and pushed it into drm-misc-next for upstreaming.
+
+Thanks,
+Christian.
+
+> ---
+>  drivers/dma-buf/sync_debug.c | 49 ------------------------------------
+>  drivers/dma-buf/sync_debug.h |  2 --
+>  2 files changed, 51 deletions(-)
+> 
+> diff --git a/drivers/dma-buf/sync_debug.c b/drivers/dma-buf/sync_debug.c
+> index 237bce21d1e7..a9c3312dc85d 100644
+> --- a/drivers/dma-buf/sync_debug.c
+> +++ b/drivers/dma-buf/sync_debug.c
+> @@ -12,8 +12,6 @@ static struct dentry *dbgfs;
+>  
+>  static LIST_HEAD(sync_timeline_list_head);
+>  static DEFINE_SPINLOCK(sync_timeline_list_lock);
+> -static LIST_HEAD(sync_file_list_head);
+> -static DEFINE_SPINLOCK(sync_file_list_lock);
+>  
+>  void sync_timeline_debug_add(struct sync_timeline *obj)
+>  {
+> @@ -33,24 +31,6 @@ void sync_timeline_debug_remove(struct sync_timeline *obj)
+>  	spin_unlock_irqrestore(&sync_timeline_list_lock, flags);
+>  }
+>  
+> -void sync_file_debug_add(struct sync_file *sync_file)
+> -{
+> -	unsigned long flags;
+> -
+> -	spin_lock_irqsave(&sync_file_list_lock, flags);
+> -	list_add_tail(&sync_file->sync_file_list, &sync_file_list_head);
+> -	spin_unlock_irqrestore(&sync_file_list_lock, flags);
+> -}
+> -
+> -void sync_file_debug_remove(struct sync_file *sync_file)
+> -{
+> -	unsigned long flags;
+> -
+> -	spin_lock_irqsave(&sync_file_list_lock, flags);
+> -	list_del(&sync_file->sync_file_list);
+> -	spin_unlock_irqrestore(&sync_file_list_lock, flags);
+> -}
+> -
+>  static const char *sync_status_str(int status)
+>  {
+>  	if (status < 0)
+> @@ -118,26 +98,6 @@ static void sync_print_obj(struct seq_file *s, struct sync_timeline *obj)
+>  	spin_unlock(&obj->lock);
+>  }
+>  
+> -static void sync_print_sync_file(struct seq_file *s,
+> -				  struct sync_file *sync_file)
+> -{
+> -	char buf[128];
+> -	int i;
+> -
+> -	seq_printf(s, "[%p] %s: %s\n", sync_file,
+> -		   sync_file_get_name(sync_file, buf, sizeof(buf)),
+> -		   sync_status_str(dma_fence_get_status(sync_file->fence)));
+> -
+> -	if (dma_fence_is_array(sync_file->fence)) {
+> -		struct dma_fence_array *array = to_dma_fence_array(sync_file->fence);
+> -
+> -		for (i = 0; i < array->num_fences; ++i)
+> -			sync_print_fence(s, array->fences[i], true);
+> -	} else {
+> -		sync_print_fence(s, sync_file->fence, true);
+> -	}
+> -}
+> -
+>  static int sync_info_debugfs_show(struct seq_file *s, void *unused)
+>  {
+>  	struct list_head *pos;
+> @@ -157,15 +117,6 @@ static int sync_info_debugfs_show(struct seq_file *s, void *unused)
+>  
+>  	seq_puts(s, "fences:\n--------------\n");
+>  
+> -	spin_lock_irq(&sync_file_list_lock);
+> -	list_for_each(pos, &sync_file_list_head) {
+> -		struct sync_file *sync_file =
+> -			container_of(pos, struct sync_file, sync_file_list);
+> -
+> -		sync_print_sync_file(s, sync_file);
+> -		seq_putc(s, '\n');
+> -	}
+> -	spin_unlock_irq(&sync_file_list_lock);
+>  	return 0;
+>  }
+>  
+> diff --git a/drivers/dma-buf/sync_debug.h b/drivers/dma-buf/sync_debug.h
+> index a1bdd62efccd..02af347293d0 100644
+> --- a/drivers/dma-buf/sync_debug.h
+> +++ b/drivers/dma-buf/sync_debug.h
+> @@ -68,7 +68,5 @@ extern const struct file_operations sw_sync_debugfs_fops;
+>  
+>  void sync_timeline_debug_add(struct sync_timeline *obj);
+>  void sync_timeline_debug_remove(struct sync_timeline *obj);
+> -void sync_file_debug_add(struct sync_file *fence);
+> -void sync_file_debug_remove(struct sync_file *fence);
+>  
+>  #endif /* _LINUX_SYNC_H */
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
