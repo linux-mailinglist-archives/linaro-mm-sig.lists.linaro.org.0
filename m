@@ -2,410 +2,268 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 94317AB6D47
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 14 May 2025 15:51:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6BE15AB6D7E
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 14 May 2025 15:57:28 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A13A54553D
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 14 May 2025 13:51:15 +0000 (UTC)
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com (mail-dm6nam10on2043.outbound.protection.outlook.com [40.107.93.43])
-	by lists.linaro.org (Postfix) with ESMTPS id 4915A42B42
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 14 May 2025 13:51:02 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 75D154553F
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 14 May 2025 13:57:27 +0000 (UTC)
+Received: from mail-il1-f178.google.com (mail-il1-f178.google.com [209.85.166.178])
+	by lists.linaro.org (Postfix) with ESMTPS id C68873EB7E
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 14 May 2025 13:57:13 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=amd.com header.s=selector1 header.b=5iwIjjO9;
-	dmarc=pass (policy=quarantine) header.from=amd.com;
-	arc=pass ("microsoft.com:s=arcselector10001:i=1");
-	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.107.93.43 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=r/5Qx4jQBV8XciC9JfqWOINS4i++niCwa1Ih0NUCVrLp+qXCU4gSZdcMs9Nw2Ld/04R0BmXnK68Lku+RkwXJU0KFXERJL1op0OnC/2E+ixwYSCSxRhUehLKcHfhJJr5vqgraVBCEAajakjScYebvANkbk1E+3SFQXb3ri9aYDiaSOMREc+gzWhMj+CN7qj+7hLqAcbVFdZA9qMfOszdTBvK5qtb8A2nBSkIWaQWScL//1W6BIcNUgaGA8w0Z6+E3wvZuwknayeO2ADSuv0YNaDQeXbZVt+CfabOv2QeTCh97b8xyanVar5BQqBBf+d+So5ap6E7bjIRwzOO4hF+ZLQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=XqvRAzLRbIKUpy/IlPRrSU4fIOtO92ZCAIo1vAE9RKQ=;
- b=PLTHakgZQdOSZjsfMNa2+6JHNPzr8LhExpIOMSwbBpeBeMF0pdh0iRhbnSHhEmbjK4YivxdjnQ0F38td1KuMOVfuwPuFqPF1VSjhhPdhPSFGptpADy7JCrJvnvIV79kG6fIutvLFOB8yMmdJD6zA/W9Yhoci7HJP5ZPk1kF4Ty/dwpUJkMzQk/F+u4hfcfXW6R9kdZSuYEYUkoVsZYtY1WbzVwP+Vd5ByzLm+vsuuS1zvkw/ghSnYndlNpXZxqhvKGADPeWZlQpJlmDhqfoYmmJ6tcnrAd92u42YXpsseTU7VZrY5EacKzKpi7g4kCruBpS8aE7rg6Hz8F39p392+A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=XqvRAzLRbIKUpy/IlPRrSU4fIOtO92ZCAIo1vAE9RKQ=;
- b=5iwIjjO9WxatFsvTHWDKbdCeDDfC/ATIPOzrSAkyifQ/kU6YSLwE71uWJVb4831uQavdrQfs8NA1WA6MREfyVlqSdqwcGrdi9g3XJ14XMFho52/6ZxyIuSYuKUvz30CdzyVUR9HB1UBIm9PB3bOkwacpuHm8motU6hgB+QPK5Lk=
-Received: from PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
- by SN7PR12MB6863.namprd12.prod.outlook.com (2603:10b6:806:264::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.26; Wed, 14 May
- 2025 13:50:59 +0000
-Received: from PH7PR12MB5685.namprd12.prod.outlook.com
- ([fe80::46fb:96f2:7667:7ca5]) by PH7PR12MB5685.namprd12.prod.outlook.com
- ([fe80::46fb:96f2:7667:7ca5%7]) with mapi id 15.20.8722.027; Wed, 14 May 2025
- 13:50:59 +0000
-Message-ID: <00d3e903-76fe-463d-bb5c-232e4dac4bb5@amd.com>
-Date: Wed, 14 May 2025 15:50:53 +0200
-User-Agent: Mozilla Thunderbird
-To: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>,
- dri-devel@lists.freedesktop.org
-References: <20250513074513.81727-1-tvrtko.ursulin@igalia.com>
- <20250513074513.81727-8-tvrtko.ursulin@igalia.com>
-Content-Language: en-US
-From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-In-Reply-To: <20250513074513.81727-8-tvrtko.ursulin@igalia.com>
-X-ClientProxiedBy: MN0PR03CA0016.namprd03.prod.outlook.com
- (2603:10b6:208:52f::18) To PH7PR12MB5685.namprd12.prod.outlook.com
- (2603:10b6:510:13c::22)
+	dkim=pass header.d=gmail.com header.s=20230601 header.b=NVXo551d;
+	dmarc=pass (policy=none) header.from=gmail.com;
+	spf=pass (lists.linaro.org: domain of robdclark@gmail.com designates 209.85.166.178 as permitted sender) smtp.mailfrom=robdclark@gmail.com
+Received: by mail-il1-f178.google.com with SMTP id e9e14a558f8ab-3da831c17faso12236115ab.3
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 14 May 2025 06:57:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1747231033; x=1747835833; darn=lists.linaro.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=MgCmvbU22TlHNQI/j8glSzzRZPdd5Tz37NOzI6EnK/c=;
+        b=NVXo551dHctlCpDBjZTJP3JlZ70QkYj5o8A7ey4eOyM/kbtcqylsoNXoQWzFSDtZmR
+         gQNMd2f02c1Bai8iKUDOJTlTmCwFdlyF6V2xkbqidAHMQF5SmWRJa4Np+djl8EAnypTc
+         ZDUzRVxgKvU6/nLsm7CzRAV65IwHilz6uO0vzVea0vruqbGdnzkZ7VbYbvsMpb5R/dHp
+         guFdxLlKUElQIS3hUlDf/BQ9jc8/Nbl5xGju8aCUTPtotxhFsNdgEUxWLTzKdEmZ98oM
+         0+s7v03qBN171A3MZ1Nemf5BKImIjBQ2DhM1DhV/FrtmYYb1S7lI2+FCISAcT9a90ucK
+         zpmg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1747231033; x=1747835833;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=MgCmvbU22TlHNQI/j8glSzzRZPdd5Tz37NOzI6EnK/c=;
+        b=d987UdNK06MAe2m9n4se5C2UVu3k0XPeOej6DvIzwSkde6Qu5HqF/kKvJQU1Mad3iz
+         bgM6wvkNq483uUcIf4mFmkRu0sSg9D32/Sd3kyFuB7oTTvv9UG3SmdmFQhJGndl3YtPd
+         nKz0qpxCKo8P9baQomD/r07ogQMA0iK4tLgNrszZqchIziLOfylbpOhpXE9N5zn0A1yc
+         5RZzbSgvsDSKZ50f+r21bw9G7PmsujGwIaf5welSHd9F5TPpcH3AuY/qBo7Wpys9mpyH
+         fBPAtqonTbV0sE549a78fYwLhM8TzR/Ya6vk0cA6JaBKSz9U5moTHek7OhV8HR2/VVGz
+         TePA==
+X-Forwarded-Encrypted: i=1; AJvYcCVcPjy0YZKfl0VtoLJPRHRnRoNMXCNnDVdOj6Mco+YHiZu6vHRStFJGBzcCQIDSagLOuMVUoDLNsKJwn9O+@lists.linaro.org
+X-Gm-Message-State: AOJu0YxfnyDEcVfkrXqedgzD0H5leP33l7U6NRFuzMUs7dJvr3CPD3mq
+	BJ29a/0glSSlBVTYl4sOxDDF0XYUb4ULqH5fOHPgxxlu2uj/v71DeqX/mPmpgihQDqJlrxFjuno
+	a+32b+XnXTA9m2Kl7/Opnkvfe3r0=
+X-Gm-Gg: ASbGncuHzPZRnbaJCRNLPe/OE//Zm+sRHRruXnRYpU8N4P2Q3SX1HwkuJMjT6jcczQg
+	OARgw/DgwOBP+pcJ+pqLqUsyb+t1KRDxQvvCcR7pV8J5jKPu7toKSNfckyZLxzu7wmNQS94PBz0
+	Q3ozElD28BWLgSyoCXqh87OjGztcmRYzEx
+X-Google-Smtp-Source: AGHT+IE42TmblYaLtD0IQrSrhpiLKxuUdkN+txUzkzbyrrbRU6Tz+L9MbbrnGz7ZIIHPzBwsN83m/OUcsivazuYW8nw=
+X-Received: by 2002:a05:6e02:2503:b0:3d3:db70:b585 with SMTP id
+ e9e14a558f8ab-3db6f7fa09fmr40763325ab.21.1747231032651; Wed, 14 May 2025
+ 06:57:12 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|SN7PR12MB6863:EE_
-X-MS-Office365-Filtering-Correlation-Id: cb66133b-cb39-4e40-3c1b-08dd92ee5bbf
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014|7416014;
-X-Microsoft-Antispam-Message-Info: 
-	=?utf-8?B?eDhjT3p4M0pHVnRhd1k0ckxwYXo3KzB2UTNIMTNTSm5IUWFQVkE4ZzlWSUtp?=
- =?utf-8?B?NnordUVBR1NlV2dUS0ZkSGNXb2lUQ0JUL3I3RGlodnlrYzd5dnRTQjhTMGRI?=
- =?utf-8?B?NFhiTVdtQTF1d0VLZjZ5dFpDN3ZCNWVLUTBUU2RBYVhXNXJZUXJXY3M3WHdL?=
- =?utf-8?B?OUliVzlYZ0FReC9vbmFHSnVRNjMzOVoxVElnMzRiL01GU3l2eGNJQjJpNlgy?=
- =?utf-8?B?QkpIMTdaaWQ0dklUL085OXErQzdwNGlxcytYQndxYy9BbUNaY3FYNit4Z0E1?=
- =?utf-8?B?YWd6dXZzVGpIZEVuRDRLYTRvSXlYa0duNkY5cTN4b2dLd3h6cHFtTTlHMjh6?=
- =?utf-8?B?eTh5eEhNOGRaTEtYTTQrcjVvVmhsVXJDNnorZnYyTDA0Q01tR2o1aXRXU3po?=
- =?utf-8?B?Q251VTZVbXR4TEorb3VScWwwa2tVUk9sSlJMRDBPbmJHTjdYU2kybjVEMC9V?=
- =?utf-8?B?YnZXTVc2aXQxVU1ocExyZ29lUkNZMC9YTVBqaXRKK3hjbmVRSnZEeGpMaXdh?=
- =?utf-8?B?Qmt4QXFJRFpIbFczU1ZsVTM5MkxRVUMxd3p0VkQ3Sk01NTZHRWpVVEF3eTRO?=
- =?utf-8?B?a29va1BQajNnc0hmZ3F5d2ZzeENMejZ5YnpENW1IUUY4UXFaMjdwSXVCM1Y3?=
- =?utf-8?B?T0ZDSGdVemk0MXFXTHh0UFEwajIyazVXZFpPVGJiZWdWNWZ3bndlZkt5SkpM?=
- =?utf-8?B?eFB6WWo5M05IU0hRcUNOMzcrUEx6OE8wRkQxMm03U3hoZFNNbk05VDdxK25j?=
- =?utf-8?B?ZUJCVlAzQTBPUmpVOVY1ZzZyR2kwaGJtUWlKNzd3cERqcE56TTFRb0lkcnJU?=
- =?utf-8?B?RWZ0YWhVMmNJNzVvTktUWU1KLzZPQ1lkTUttRngxb0JmKzNHSnU2cjEraEZR?=
- =?utf-8?B?ZGJFSGdtLzZWZmR6aFYxMERmbGl1c0xWa2NnbkkvMXQ4TmxKL0F2YXFIcXhr?=
- =?utf-8?B?V0JTR2Yrd3dFUDBOUkZRZDNXczkxY08zellIRVJqTm9DMXpycVhWSGY1WHFQ?=
- =?utf-8?B?aWNjSlJwVWFKbWoyV2hpVzRJZlh2M3Y0MDNoSzJZalhmWFhQQ29LcCt1TzRx?=
- =?utf-8?B?RE1SSm9IOFBCNi95Q1djN2xWS0dxajZJRWZ1Snk2WkJGWnZucHBZditPczM2?=
- =?utf-8?B?NHhDQTFOanJLVnMwdCtYWm9nTWMzOWQrUzNNL2lzMjNPaSsyc29aZFlNWTND?=
- =?utf-8?B?U0JFVUVLNmtXMlZoeFJ4U1U5NXhwUmJPeTg1eGlLM2xiU3dFTGIvRkFHVkh3?=
- =?utf-8?B?MjNkM3NId0RFRkVvNU5BSHZnODUySG1xOXF1QkVzM2hqaUVKWEVFdDNuMFd6?=
- =?utf-8?B?aktrdDJaRmxNdUtXY1BwS0ZYemJOeTU1dWp5dmEwOTJoNW1kRGUvTngwbU4y?=
- =?utf-8?B?TDhWbXI1NG1HL0dBRWoycDFYNkZlUDRtV045blY4RGhMTm1XbDhCUTdrbUky?=
- =?utf-8?B?NFhXdTYzQmNNTVZwMlFYdnIySGRDS1BhQmVWaWhYYlU0djVQc0czVzRQdkhP?=
- =?utf-8?B?ZDRpc0swanBFdGd3UnVzWFNhc3Y3YU1kc2xQQmhxRGI0bG8wU05RS3Nydyti?=
- =?utf-8?B?aHhJTGpxMlFFQy9KRGJEalR6bzZNSnM4Vm1sYUQyRWFvV0tpemZzMkFhT21T?=
- =?utf-8?B?eVRQczdmdW9LTVpZbWdDanM4czFqc1krRVZSb0k1N3dtajNnSEVOUXMrdUFz?=
- =?utf-8?B?WjBOVDFmb0hkM29zRmtTNzlhenlpWENZY25wUmJVQVVmVGJsUGE5b1BvVk9h?=
- =?utf-8?B?aUFUa2VpTmJZdU5TY3RQa1J1WnFvUUI3eWlub04rbENTSHUyMENKclFNV2lR?=
- =?utf-8?B?NmtzZGpRdlRtckFIUHJuQzNKdzJLQnhNQWFqMzMvRmc3QzNUQXpScTE2QlV3?=
- =?utf-8?B?bjhHL1R6cjRPWmE3bjJRU1dlc0tKd2d0dHhzZWxraWJjTDlQQzFSUjdtMTBr?=
- =?utf-8?Q?D21/dkdaCgo=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB5685.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(7416014);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?QmpYMVg1NEcxOXc5RHZ3V2hqaDJYTjE5KzNldkUxRWJOeDhWREVHRDAyT2Z6?=
- =?utf-8?B?bFQvaldHNDNMeFFlVS9tRFQ5SlpPS2tiOHVOMnRGUldPTWJ0Y3BNVlVwVHg0?=
- =?utf-8?B?a2xOUzdhaW5aSE1UaDJqUjJCWkFvd1hkNGFZVldhcDdSQ1l5MEtwNU5FZFlt?=
- =?utf-8?B?Ly9NVHg3WXNUaWJxWEdrbjcyRE15SFAyQzYyZTJCNWJNazA4R3pyWUJEU2JB?=
- =?utf-8?B?Sm16SVJBUXFyc0pONnUvWDh1ZXpYV25kc0poVW02WHlDbnQ1d3dxaVA3OUNS?=
- =?utf-8?B?dEtIVS84Y3k0K1owdmdHVWhIRVpSK2M1L0VReHlaMEZYbWlYVTNHWWVTOEhE?=
- =?utf-8?B?RndlcC9GTWx6OHVIRWhjMnVrNnhXbGYyTGkzcXFCZjVlK0NQL0RyTWZFTGJ5?=
- =?utf-8?B?elVreXV5YXIxZm1oclBWYTBsL1hmRkZPUkFDQ2VWU0VCcEZ5ZTRIeEFRY1Nr?=
- =?utf-8?B?bnFEcTczSUlWelV5Zk9iRW1hMzh1TnhzYW5Qemtub2FXbG0xd3pvWDJTSEhp?=
- =?utf-8?B?SlJnOEZwSlNXSWxXb2FKSWhmbkcraXdGL1RTaTBOYnV1d2p2b3l6Y01yaTVN?=
- =?utf-8?B?MHkwbmR5OW5UQVZ0OVJLQ0h1NXhROGJBZTFPblp2cFlueDBrNUNudm1peDRa?=
- =?utf-8?B?WkFNb0lRR1hDZUN3M0NXRTN2QTFWcVZ4YzJ3Y3RxV3ZaQnE3Z1QrZ21xUkIw?=
- =?utf-8?B?dHl4cm5JTHYzTDNyVjIxYWJuN1ZmTk8yekJrUU00WU5ZQTNLMG1acVIwenR4?=
- =?utf-8?B?d2pUSVQzWGVCNFlrOWhsTW5BcEdILzRFek4zWGx1R0hLRzlLRGp2QkJ2c2dq?=
- =?utf-8?B?Z1ZMT3F5Z2FRU3FHTVRRSlJPVWlCcDdUbkhFdXhXWURpUEhiZW1pYU5OK2RV?=
- =?utf-8?B?RlhCYW9PTWNRaW0rMlk5Y25iRklxbkI4MG9Xd2Q3eFlJZVpTaVJCM284OXpG?=
- =?utf-8?B?anlVZ1grcVJBczc5dkltWUI0aUVvZHZQYnoxRjBNcHBuRkZLMENaK010UkRj?=
- =?utf-8?B?OWJ6VUZDMzNXV2J5L0lwWFhlYmwvQVZFcDJxdmtieDlDRjVyZUZGS3c3QkFF?=
- =?utf-8?B?djhVZHBlV2p1Zm5iK3E4V3c3bWdxWDhMZkZ6VDV1VW5INk12RDhja0RhaU5N?=
- =?utf-8?B?cE80VktMQi9abDJjdU1LWWhkdElaZk5nVEhRTXdwTXlTNGhHUmh3UDlkQjY3?=
- =?utf-8?B?T2RFZ216T2xieHh6UGlHRmc1Z1BkYmV6OFZDQU00MXFCNXBhaFlVWUpCMitR?=
- =?utf-8?B?YmdQdG5OZmI1Y1ZYL3pHc0xlY2NBaXJCM1A1MHYvVzFUbVR4aFM0bUlsaFBH?=
- =?utf-8?B?MStqSGQ0WHRsd2hjR29IMjNLM2NDaHZYMTZJckFuZkZzNjVyRkRBeXZTSWpM?=
- =?utf-8?B?RjBpUmpyRVhTRE1JbTRHcDVHUURhVmYzcjRmYnlBZjVjaUFjQ3VMVEFIemhy?=
- =?utf-8?B?R1VwMG50REpURmY4NWhTYytkblBCR1pDWjE4b1lLTERjbTZRU2hJUFpmTndq?=
- =?utf-8?B?Nng4MFgxY1RNdjd1MWNFWHEyS25SOTNoT3gxM2VLTG5pSVlONVhNSlZHS2Vs?=
- =?utf-8?B?VUwwUUE2dGdJbE83WFVDaXBTemk1eFJuRGZzUk1USERER0JTUFVwcXdRM1hj?=
- =?utf-8?B?QllyeUpiQWVUUktHbTBrRWJoQUJVekNpMXozL2tpM3BEeGxZcDI2YXRZQldn?=
- =?utf-8?B?T3J4STBDQ0Fxek9UYm4ycXM4RERYZnl2dGd4Mnk1RS9CR2NsWXBBZ04rVk1s?=
- =?utf-8?B?QndWc0IyQ0p2bm5lejBydzVTbDhFSnpSUk9jVVhZYSt6MDdudXR2RDZUMlR4?=
- =?utf-8?B?ejdKU25nbkdwNUhhQTkwUDVlR2hucTJvaXhsekpocjNjUUpPaHhSb1VnQ0Fh?=
- =?utf-8?B?VHdrdFBHYnJ5MUlnZS9QdG1uZzBPS056OXZ4YXdDY3RJRVFSMElWdHp4V2R3?=
- =?utf-8?B?dkhDVGtkZmpZS2o2Rit4dG94L0dOWWVzaUUwM0c0Yy9xaTRSeFZOT3JEYmw0?=
- =?utf-8?B?U3Zxckt1d21PVFF4dzNzU0txdE1wZFhVaTgwK0VTbnRPTmhDODViVjRVZ0x3?=
- =?utf-8?B?K1V5RTgzNWtickhaYmRrallraHBHbjdER1g1ME11UFJDKzRheldrU0xiQlkv?=
- =?utf-8?Q?j2v4=3D?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: cb66133b-cb39-4e40-3c1b-08dd92ee5bbf
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5685.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 May 2025 13:50:59.7522
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 2Bb2Vs+YiEB+1mCCjW0KM0lbO5STZqXGBG1VcFVKYRv1bsWdH2BcSIG8t55xzU36
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB6863
+References: <20250509153352.7187-1-tvrtko.ursulin@igalia.com>
+ <20250509153352.7187-11-tvrtko.ursulin@igalia.com> <CAF6AEGuOC4NnSTQexvD5tk8VLfOR_gGq-cqs3gnJcS1qNtMjQg@mail.gmail.com>
+ <dddebe25-9fe2-4c3d-89ee-c90168b5a017@igalia.com>
+In-Reply-To: <dddebe25-9fe2-4c3d-89ee-c90168b5a017@igalia.com>
+From: Rob Clark <robdclark@gmail.com>
+Date: Wed, 14 May 2025 06:57:01 -0700
+X-Gm-Features: AX0GCFu9_cD6xBE41jTXRzOPv3Dbpx1RYAvoYeJn3S6DUuFSDJFfxf64WuPvA44
+Message-ID: <CAF6AEGsP2TyjaRVtSXAYyDbNJqZ3NsL-2TCKZ+SAyZaONrJvjA@mail.gmail.com>
+To: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 4915A42B42
-X-Spamd-Bar: -----
-X-Spamd-Result: default: False [-5.00 / 15.00];
+X-Rspamd-Queue-Id: C68873EB7E
+X-Spamd-Bar: ----
+X-Spamd-Result: default: False [-4.00 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector10001:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
-	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
-	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	MIME_GOOD(-0.10)[text/plain];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.93.43:from];
-	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
+	RCVD_COUNT_ONE(0.00)[1];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[14];
-	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[gmail.com,linaro.org,padovan.org,intel.com,lists.freedesktop.org,vger.kernel.org,lists.linaro.org,igalia.com];
-	RCVD_IN_DNSWL_NONE(0.00)[40.107.93.43:from];
-	FROM_EQ_ENVFROM(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	ARC_NA(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	NEURAL_HAM(-0.00)[-0.999];
+	RCVD_IN_DNSWL_NONE(0.00)[209.85.166.178:from];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.166.178:from];
+	DWL_DNSWL_NONE(0.00)[gmail.com:dkim];
 	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[amd.com:+]
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
-Message-ID-Hash: DBOI7BY6X26ZEZKRBNEPL2AHKL65L4BB
-X-Message-ID-Hash: DBOI7BY6X26ZEZKRBNEPL2AHKL65L4BB
-X-MailFrom: Christian.Koenig@amd.com
+Message-ID-Hash: XMCTXUR2UYDH6GTCA5GL7OZUJ3ALNVR6
+X-Message-ID-Hash: XMCTXUR2UYDH6GTCA5GL7OZUJ3ALNVR6
+X-MailFrom: robdclark@gmail.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Rob Clark <robdclark@gmail.com>, Sumit Semwal <sumit.semwal@linaro.org>, Gustavo Padovan <gustavo@padovan.org>, Matthew Brost <matthew.brost@intel.com>, Lucas De Marchi <lucas.demarchi@intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, amd-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, kernel-dev@igalia.com
+CC: dri-devel@lists.freedesktop.org, Sumit Semwal <sumit.semwal@linaro.org>, Gustavo Padovan <gustavo@padovan.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Matthew Brost <matthew.brost@intel.com>, Lucas De Marchi <lucas.demarchi@intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, amd-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, kernel-dev@igalia.com, Rob Clark <robdclark@chromium.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [RFC v3 07/10] dma-fence: Add safe access helpers and document the rules
+Subject: [Linaro-mm-sig] Re: [RFC v2 10/13] dma-fence: Add safe access helpers and document the rules
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DBOI7BY6X26ZEZKRBNEPL2AHKL65L4BB/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XMCTXUR2UYDH6GTCA5GL7OZUJ3ALNVR6/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-I'm going to push patches #1-#6 to drm-misc-next.
-
-They make sense as a stand alone cleanups anyway.
-
-But that here needs a bit more documentation I think.
-
-On 5/13/25 09:45, Tvrtko Ursulin wrote:
-> Dma-fence objects currently suffer from a potential use after free problem
-> where fences exported to userspace and other drivers can outlive the
-> exporting driver, or the associated data structures.
-> 
-> The discussion on how to address this concluded that adding reference
-> counting to all the involved objects is not desirable, since it would need
-> to be very wide reaching and could cause unloadable drivers if another
-> entity would be holding onto a signaled fence reference potentially
-> indefinitely.
-> 
-> This patch enables the safe access by introducing and documenting a
-> contract between fence exporters and users. It documents a set of
-> contraints and adds helpers which a) drivers with potential to suffer from
-> the use after free must use and b) users of the dma-fence API must use as
-> well.
-> 
-> Premise of the design has multiple sides:
-> 
-> 1. Drivers (fence exporters) MUST ensure a RCU grace period between
-> signalling a fence and freeing the driver private data associated with it.
-
-That's a must have anyway, otherwise functions like dma_fence_get_rcu() won't work.
-
-I hope that we have documented that somewhere, but I'm not 100% sure to be honest.
-
-> The grace period does not have to follow the signalling immediately but
-> HAS to happen before data is freed.
-
-That is the new requirement we have to document somehow.
-
-I'm not 100% sure but I think module unloading waits for an RCU grace period anyway.
-
-
-> 2. Users of the dma-fence API marked with such requirement MUST contain
-> the complete access to the data within a single code block guarded by the
-> new dma_fence_access_begin() and dma_fence_access_end() helpers.
-> 
-> The combination of the two ensures that whoever sees the
-> DMA_FENCE_FLAG_SIGNALED_BIT not set is guaranteed to have access to a
-> valid fence->lock and valid data potentially accessed by the fence->ops
-> virtual functions, until the call to dma_fence_access_end().
-
-Mhm, how about returning copies of the string?
-
-This is only for debugging anyway and kstrdup_const() isn't that costly.
-
-Regards,
-Christian.
-
-
-> 
-> 3. Module unload (fence->ops) disappearing is for now explicitly not
-> handled. That would required a more complex protection, possibly needing
-> SRCU instead of RCU to handle callers such as dma_fence_wait_timeout(),
-> where race between dma_fence_enable_sw_signaling, signalling, and
-> dereference of fence->ops->wait() would need a sleeping SRCU context.
-> 
-> Signed-off-by: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>
-> ---
->  drivers/dma-buf/dma-fence.c | 69 +++++++++++++++++++++++++++++++++++++
->  include/linux/dma-fence.h   | 32 ++++++++++++-----
->  2 files changed, 93 insertions(+), 8 deletions(-)
-> 
-> diff --git a/drivers/dma-buf/dma-fence.c b/drivers/dma-buf/dma-fence.c
-> index dc2456f68685..cfe1d7b79c22 100644
-> --- a/drivers/dma-buf/dma-fence.c
-> +++ b/drivers/dma-buf/dma-fence.c
-> @@ -533,6 +533,7 @@ void dma_fence_release(struct kref *kref)
->  	struct dma_fence *fence =
->  		container_of(kref, struct dma_fence, refcount);
->  
-> +	dma_fence_access_begin();
->  	trace_dma_fence_destroy(fence);
->  
->  	if (WARN(!list_empty(&fence->cb_list) &&
-> @@ -560,6 +561,8 @@ void dma_fence_release(struct kref *kref)
->  		fence->ops->release(fence);
->  	else
->  		dma_fence_free(fence);
-> +
-> +	dma_fence_access_end();
->  }
->  EXPORT_SYMBOL(dma_fence_release);
->  
-> @@ -982,11 +985,13 @@ EXPORT_SYMBOL(dma_fence_set_deadline);
->   */
->  void dma_fence_describe(struct dma_fence *fence, struct seq_file *seq)
->  {
-> +	dma_fence_access_begin();
->  	seq_printf(seq, "%s %s seq %llu %ssignalled\n",
->  		   dma_fence_driver_name(fence),
->  		   dma_fence_timeline_name(fence),
->  		   fence->seqno,
->  		   dma_fence_is_signaled(fence) ? "" : "un");
-> +	dma_fence_access_end();
->  }
->  EXPORT_SYMBOL(dma_fence_describe);
->  
-> @@ -1033,3 +1038,67 @@ dma_fence_init64(struct dma_fence *fence, const struct dma_fence_ops *ops,
->  	__set_bit(DMA_FENCE_FLAG_SEQNO64_BIT, &fence->flags);
->  }
->  EXPORT_SYMBOL(dma_fence_init64);
-> +
-> +/**
-> + * dma_fence_driver_name - Access the driver name
-> + * @fence: the fence to query
-> + *
-> + * Returns a driver name backing the dma-fence implementation.
-> + *
-> + * IMPORTANT CONSIDERATION:
-> + * Dma-fence contract stipulates that access to driver provided data (data not
-> + * directly embedded into the object itself), such as the &dma_fence.lock and
-> + * memory potentially accessed by the &dma_fence.ops functions, is forbidden
-> + * after the fence has been signalled. Drivers are allowed to free that data,
-> + * and some do.
-> + *
-> + * To allow safe access drivers are mandated to guarantee a RCU grace period
-> + * between signalling the fence and freeing said data.
-> + *
-> + * As such access to the driver name is only valid inside a RCU locked section.
-> + * The pointer MUST be both queried and USED ONLY WITHIN a SINGLE block guarded
-> + * by the &dma_fence_access_being and &dma_fence_access_end pair.
-> + */
-> +const char *dma_fence_driver_name(struct dma_fence *fence)
-> +{
-> +	RCU_LOCKDEP_WARN(!rcu_read_lock_held(),
-> +			 "rcu_read_lock() required for safe access to returned string");
-> +
-> +	if (!test_bit(DMA_FENCE_FLAG_SIGNALED_BIT, &fence->flags))
-> +		return fence->ops->get_driver_name(fence);
-> +	else
-> +		return "detached-driver";
-> +}
-> +EXPORT_SYMBOL(dma_fence_driver_name);
-> +
-> +/**
-> + * dma_fence_timeline_name - Access the timeline name
-> + * @fence: the fence to query
-> + *
-> + * Returns a timeline name provided by the dma-fence implementation.
-> + *
-> + * IMPORTANT CONSIDERATION:
-> + * Dma-fence contract stipulates that access to driver provided data (data not
-> + * directly embedded into the object itself), such as the &dma_fence.lock and
-> + * memory potentially accessed by the &dma_fence.ops functions, is forbidden
-> + * after the fence has been signalled. Drivers are allowed to free that data,
-> + * and some do.
-> + *
-> + * To allow safe access drivers are mandated to guarantee a RCU grace period
-> + * between signalling the fence and freeing said data.
-> + *
-> + * As such access to the driver name is only valid inside a RCU locked section.
-> + * The pointer MUST be both queried and USED ONLY WITHIN a SINGLE block guarded
-> + * by the &dma_fence_access_being and &dma_fence_access_end pair.
-> + */
-> +const char *dma_fence_timeline_name(struct dma_fence *fence)
-> +{
-> +	RCU_LOCKDEP_WARN(!rcu_read_lock_held(),
-> +			 "rcu_read_lock() required for safe access to returned string");
-> +
-> +	if (!test_bit(DMA_FENCE_FLAG_SIGNALED_BIT, &fence->flags))
-> +		return fence->ops->get_driver_name(fence);
-> +	else
-> +		return "signaled-timeline";
-> +}
-> +EXPORT_SYMBOL(dma_fence_timeline_name);
-> diff --git a/include/linux/dma-fence.h b/include/linux/dma-fence.h
-> index c5ac37e10d85..b39e430142ea 100644
-> --- a/include/linux/dma-fence.h
-> +++ b/include/linux/dma-fence.h
-> @@ -377,15 +377,31 @@ bool dma_fence_remove_callback(struct dma_fence *fence,
->  			       struct dma_fence_cb *cb);
->  void dma_fence_enable_sw_signaling(struct dma_fence *fence);
->  
-> -static inline const char *dma_fence_driver_name(struct dma_fence *fence)
-> -{
-> -	return fence->ops->get_driver_name(fence);
-> -}
-> +/**
-> + * DOC: Safe external access to driver provided object members
-> + *
-> + * All data not stored directly in the dma-fence object, such as the
-> + * &dma_fence.lock and memory potentially accessed by functions in the
-> + * &dma_fence.ops table, MUST NOT be accessed after the fence has been signalled
-> + * because after that point drivers are allowed to free it.
-> + *
-> + * All code accessing that data via the dma-fence API (or directly, which is
-> + * discouraged), MUST make sure to contain the complete access within a
-> + * &dma_fence_access_begin and &dma_fence_access_end pair.
-> + *
-> + * Some dma-fence API handles this automatically, while other, as for example
-> + * &dma_fence_driver_name and &dma_fence_timeline_name, leave that
-> + * responsibility to the caller.
-> + *
-> + * To enable this scheme to work drivers MUST ensure a RCU grace period elapses
-> + * between signalling the fence and freeing the said data.
-> + *
-> + */
-> +#define dma_fence_access_begin	rcu_read_lock
-> +#define dma_fence_access_end	rcu_read_unlock
->  
-> -static inline const char *dma_fence_timeline_name(struct dma_fence *fence)
-> -{
-> -	return fence->ops->get_timeline_name(fence);
-> -}
-> +const char *dma_fence_driver_name(struct dma_fence *fence);
-> +const char *dma_fence_timeline_name(struct dma_fence *fence);
->  
->  /**
->   * dma_fence_is_signaled_locked - Return an indication if the fence
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gV2VkLCBNYXkgMTQsIDIwMjUgYXQgMzowMeKAr0FNIFR2cnRrbyBVcnN1bGluDQo8dHZydGtv
+LnVyc3VsaW5AaWdhbGlhLmNvbT4gd3JvdGU6DQo+DQo+DQo+IE9uIDEzLzA1LzIwMjUgMTU6MTYs
+IFJvYiBDbGFyayB3cm90ZToNCj4gPiBPbiBGcmksIE1heSA5LCAyMDI1IGF0IDg6MzTigK9BTSBU
+dnJ0a28gVXJzdWxpbiA8dHZydGtvLnVyc3VsaW5AaWdhbGlhLmNvbT4gd3JvdGU6DQo+ID4+DQo+
+ID4+IERtYS1mZW5jZSBvYmplY3RzIGN1cnJlbnRseSBzdWZmZXIgZnJvbSBhIHBvdGVudGlhbCB1
+c2UgYWZ0ZXIgZnJlZSBwcm9ibGVtDQo+ID4+IHdoZXJlIGZlbmNlcyBleHBvcnRlZCB0byB1c2Vy
+c3BhY2UgYW5kIG90aGVyIGRyaXZlcnMgY2FuIG91dGxpdmUgdGhlDQo+ID4+IGV4cG9ydGluZyBk
+cml2ZXIsIG9yIHRoZSBhc3NvY2lhdGVkIGRhdGEgc3RydWN0dXJlcy4NCj4gPj4NCj4gPj4gVGhl
+IGRpc2N1c3Npb24gb24gaG93IHRvIGFkZHJlc3MgdGhpcyBjb25jbHVkZWQgdGhhdCBhZGRpbmcg
+cmVmZXJlbmNlDQo+ID4+IGNvdW50aW5nIHRvIGFsbCB0aGUgaW52b2x2ZWQgb2JqZWN0cyBpcyBu
+b3QgZGVzaXJhYmxlLCBzaW5jZSBpdCB3b3VsZCBuZWVkDQo+ID4+IHRvIGJlIHZlcnkgd2lkZSBy
+ZWFjaGluZyBhbmQgY291bGQgY2F1c2UgdW5sb2FkYWJsZSBkcml2ZXJzIGlmIGFub3RoZXINCj4g
+Pj4gZW50aXR5IHdvdWxkIGJlIGhvbGRpbmcgb250byBhIHNpZ25hbGVkIGZlbmNlIHJlZmVyZW5j
+ZSBwb3RlbnRpYWxseQ0KPiA+PiBpbmRlZmluaXRlbHkuDQo+ID4+DQo+ID4+IFRoaXMgcGF0Y2gg
+ZW5hYmxlcyB0aGUgc2FmZSBhY2Nlc3MgYnkgaW50cm9kdWNpbmcgYW5kIGRvY3VtZW50aW5nIGEN
+Cj4gPj4gY29udHJhY3QgYmV0d2VlbiBmZW5jZSBleHBvcnRlcnMgYW5kIHVzZXJzLiBJdCBkb2N1
+bWVudHMgYSBzZXQgb2YNCj4gPj4gY29udHJhaW50cyBhbmQgYWRkcyBoZWxwZXJzIHdoaWNoIGEp
+IGRyaXZlcnMgd2l0aCBwb3RlbnRpYWwgdG8gc3VmZmVyIGZyb20NCj4gPj4gdGhlIHVzZSBhZnRl
+ciBmcmVlIG11c3QgdXNlIGFuZCBiKSB1c2VycyBvZiB0aGUgZG1hLWZlbmNlIEFQSSBtdXN0IHVz
+ZSBhcw0KPiA+PiB3ZWxsLg0KPiA+Pg0KPiA+PiBQcmVtaXNlIG9mIHRoZSBkZXNpZ24gaGFzIG11
+bHRpcGxlIHNpZGVzOg0KPiA+Pg0KPiA+PiAxLiBEcml2ZXJzIChmZW5jZSBleHBvcnRlcnMpIE1V
+U1QgZW5zdXJlIGEgUkNVIGdyYWNlIHBlcmlvZCBiZXR3ZWVuDQo+ID4+IHNpZ25hbGxpbmcgYSBm
+ZW5jZSBhbmQgZnJlZWluZyB0aGUgZHJpdmVyIHByaXZhdGUgZGF0YSBhc3NvY2lhdGVkIHdpdGgg
+aXQuDQo+ID4+DQo+ID4+IFRoZSBncmFjZSBwZXJpb2QgZG9lcyBub3QgaGF2ZSB0byBmb2xsb3cg
+dGhlIHNpZ25hbGxpbmcgaW1tZWRpYXRlbHkgYnV0DQo+ID4+IEhBUyB0byBoYXBwZW4gYmVmb3Jl
+IGRhdGEgaXMgZnJlZWQuDQo+ID4+DQo+ID4+IDIuIFVzZXJzIG9mIHRoZSBkbWEtZmVuY2UgQVBJ
+IG1hcmtlZCB3aXRoIHN1Y2ggcmVxdWlyZW1lbnQgTVVTVCBjb250YWluDQo+ID4+IHRoZSBjb21w
+bGV0ZSBhY2Nlc3MgdG8gdGhlIGRhdGEgd2l0aGluIGEgc2luZ2xlIGNvZGUgYmxvY2sgZ3VhcmRl
+ZCBieSB0aGUNCj4gPj4gbmV3IGRtYV9mZW5jZV9hY2Nlc3NfYmVnaW4oKSBhbmQgZG1hX2ZlbmNl
+X2FjY2Vzc19lbmQoKSBoZWxwZXJzLg0KPiA+Pg0KPiA+PiBUaGUgY29tYmluYXRpb24gb2YgdGhl
+IHR3byBlbnN1cmVzIHRoYXQgd2hvZXZlciBzZWVzIHRoZQ0KPiA+PiBETUFfRkVOQ0VfRkxBR19T
+SUdOQUxFRF9CSVQgbm90IHNldCBpcyBndWFyYW50ZWVkIHRvIGhhdmUgYWNjZXNzIHRvIGENCj4g
+Pj4gdmFsaWQgZmVuY2UtPmxvY2sgYW5kIHZhbGlkIGRhdGEgcG90ZW50aWFsbHkgYWNjZXNzZWQg
+YnkgdGhlIGZlbmNlLT5vcHMNCj4gPj4gdmlydHVhbCBmdW5jdGlvbnMsIHVudGlsIHRoZSBjYWxs
+IHRvIGRtYV9mZW5jZV9hY2Nlc3NfZW5kKCkuDQo+ID4+DQo+ID4+IDMuIE1vZHVsZSB1bmxvYWQg
+KGZlbmNlLT5vcHMpIGRpc2FwcGVhcmluZyBpcyBmb3Igbm93IGV4cGxpY2l0bHkgbm90DQo+ID4+
+IGhhbmRsZWQuIFRoYXQgd291bGQgcmVxdWlyZWQgYSBtb3JlIGNvbXBsZXggcHJvdGVjdGlvbiwg
+cG9zc2libHkgbmVlZGluZw0KPiA+PiBTUkNVIGluc3RlYWQgb2YgUkNVIHRvIGhhbmRsZSBjYWxs
+ZXJzIHN1Y2ggYXMgZG1hX2ZlbmNlX3dhaXRfdGltZW91dCgpLA0KPiA+PiB3aGVyZSByYWNlIGJl
+dHdlZW4gZG1hX2ZlbmNlX2VuYWJsZV9zd19zaWduYWxpbmcsIHNpZ25hbGxpbmcsIGFuZA0KPiA+
+PiBkZXJlZmVyZW5jZSBvZiBmZW5jZS0+b3BzLT53YWl0KCkgd291bGQgbmVlZCBhIHNsZWVwaW5n
+IFNSQ1UgY29udGV4dC4NCj4gPj4NCj4gPj4gU2lnbmVkLW9mZi1ieTogVHZydGtvIFVyc3VsaW4g
+PHR2cnRrby51cnN1bGluQGlnYWxpYS5jb20+DQo+ID4+IC0tLQ0KPiA+PiAgIGRyaXZlcnMvZG1h
+LWJ1Zi9kbWEtZmVuY2UuYyB8IDY5ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
+KysNCj4gPj4gICBpbmNsdWRlL2xpbnV4L2RtYS1mZW5jZS5oICAgfCAzMiArKysrKysrKysrKyst
+LS0tLQ0KPiA+PiAgIDIgZmlsZXMgY2hhbmdlZCwgOTMgaW5zZXJ0aW9ucygrKSwgOCBkZWxldGlv
+bnMoLSkNCj4gPj4NCj4gPj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtZmVuY2Uu
+YyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtZmVuY2UuYw0KPiA+PiBpbmRleCBkYzI0NTZmNjg2ODUu
+LmNmZTFkN2I3OWMyMiAxMDA2NDQNCj4gPj4gLS0tIGEvZHJpdmVycy9kbWEtYnVmL2RtYS1mZW5j
+ZS5jDQo+ID4+ICsrKyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtZmVuY2UuYw0KPiA+PiBAQCAtNTMz
+LDYgKzUzMyw3IEBAIHZvaWQgZG1hX2ZlbmNlX3JlbGVhc2Uoc3RydWN0IGtyZWYgKmtyZWYpDQo+
+ID4+ICAgICAgICAgIHN0cnVjdCBkbWFfZmVuY2UgKmZlbmNlID0NCj4gPj4gICAgICAgICAgICAg
+ICAgICBjb250YWluZXJfb2Yoa3JlZiwgc3RydWN0IGRtYV9mZW5jZSwgcmVmY291bnQpOw0KPiA+
+Pg0KPiA+PiArICAgICAgIGRtYV9mZW5jZV9hY2Nlc3NfYmVnaW4oKTsNCj4gPj4gICAgICAgICAg
+dHJhY2VfZG1hX2ZlbmNlX2Rlc3Ryb3koZmVuY2UpOw0KPiA+Pg0KPiA+PiAgICAgICAgICBpZiAo
+V0FSTighbGlzdF9lbXB0eSgmZmVuY2UtPmNiX2xpc3QpICYmDQo+ID4+IEBAIC01NjAsNiArNTYx
+LDggQEAgdm9pZCBkbWFfZmVuY2VfcmVsZWFzZShzdHJ1Y3Qga3JlZiAqa3JlZikNCj4gPj4gICAg
+ICAgICAgICAgICAgICBmZW5jZS0+b3BzLT5yZWxlYXNlKGZlbmNlKTsNCj4gPj4gICAgICAgICAg
+ZWxzZQ0KPiA+PiAgICAgICAgICAgICAgICAgIGRtYV9mZW5jZV9mcmVlKGZlbmNlKTsNCj4gPj4g
+Kw0KPiA+PiArICAgICAgIGRtYV9mZW5jZV9hY2Nlc3NfZW5kKCk7DQo+ID4+ICAgfQ0KPiA+PiAg
+IEVYUE9SVF9TWU1CT0woZG1hX2ZlbmNlX3JlbGVhc2UpOw0KPiA+Pg0KPiA+PiBAQCAtOTgyLDEx
+ICs5ODUsMTMgQEAgRVhQT1JUX1NZTUJPTChkbWFfZmVuY2Vfc2V0X2RlYWRsaW5lKTsNCj4gPj4g
+ICAgKi8NCj4gPj4gICB2b2lkIGRtYV9mZW5jZV9kZXNjcmliZShzdHJ1Y3QgZG1hX2ZlbmNlICpm
+ZW5jZSwgc3RydWN0IHNlcV9maWxlICpzZXEpDQo+ID4+ICAgew0KPiA+PiArICAgICAgIGRtYV9m
+ZW5jZV9hY2Nlc3NfYmVnaW4oKTsNCj4gPj4gICAgICAgICAgc2VxX3ByaW50ZihzZXEsICIlcyAl
+cyBzZXEgJWxsdSAlc3NpZ25hbGxlZFxuIiwNCj4gPj4gICAgICAgICAgICAgICAgICAgICBkbWFf
+ZmVuY2VfZHJpdmVyX25hbWUoZmVuY2UpLA0KPiA+PiAgICAgICAgICAgICAgICAgICAgIGRtYV9m
+ZW5jZV90aW1lbGluZV9uYW1lKGZlbmNlKSwNCj4gPj4gICAgICAgICAgICAgICAgICAgICBmZW5j
+ZS0+c2Vxbm8sDQo+ID4+ICAgICAgICAgICAgICAgICAgICAgZG1hX2ZlbmNlX2lzX3NpZ25hbGVk
+KGZlbmNlKSA/ICIiIDogInVuIik7DQo+ID4+ICsgICAgICAgZG1hX2ZlbmNlX2FjY2Vzc19lbmQo
+KTsNCj4gPj4gICB9DQo+ID4+ICAgRVhQT1JUX1NZTUJPTChkbWFfZmVuY2VfZGVzY3JpYmUpOw0K
+PiA+Pg0KPiA+PiBAQCAtMTAzMywzICsxMDM4LDY3IEBAIGRtYV9mZW5jZV9pbml0NjQoc3RydWN0
+IGRtYV9mZW5jZSAqZmVuY2UsIGNvbnN0IHN0cnVjdCBkbWFfZmVuY2Vfb3BzICpvcHMsDQo+ID4+
+ICAgICAgICAgIF9fc2V0X2JpdChETUFfRkVOQ0VfRkxBR19TRVFOTzY0X0JJVCwgJmZlbmNlLT5m
+bGFncyk7DQo+ID4+ICAgfQ0KPiA+PiAgIEVYUE9SVF9TWU1CT0woZG1hX2ZlbmNlX2luaXQ2NCk7
+DQo+ID4+ICsNCj4gPj4gKy8qKg0KPiA+PiArICogZG1hX2ZlbmNlX2RyaXZlcl9uYW1lIC0gQWNj
+ZXNzIHRoZSBkcml2ZXIgbmFtZQ0KPiA+PiArICogQGZlbmNlOiB0aGUgZmVuY2UgdG8gcXVlcnkN
+Cj4gPj4gKyAqDQo+ID4+ICsgKiBSZXR1cm5zIGEgZHJpdmVyIG5hbWUgYmFja2luZyB0aGUgZG1h
+LWZlbmNlIGltcGxlbWVudGF0aW9uLg0KPiA+PiArICoNCj4gPj4gKyAqIElNUE9SVEFOVCBDT05T
+SURFUkFUSU9OOg0KPiA+PiArICogRG1hLWZlbmNlIGNvbnRyYWN0IHN0aXB1bGF0ZXMgdGhhdCBh
+Y2Nlc3MgdG8gZHJpdmVyIHByb3ZpZGVkIGRhdGEgKGRhdGEgbm90DQo+ID4+ICsgKiBkaXJlY3Rs
+eSBlbWJlZGRlZCBpbnRvIHRoZSBvYmplY3QgaXRzZWxmKSwgc3VjaCBhcyB0aGUgJmRtYV9mZW5j
+ZS5sb2NrIGFuZA0KPiA+PiArICogbWVtb3J5IHBvdGVudGlhbGx5IGFjY2Vzc2VkIGJ5IHRoZSAm
+ZG1hX2ZlbmNlLm9wcyBmdW5jdGlvbnMsIGlzIGZvcmJpZGRlbg0KPiA+PiArICogYWZ0ZXIgdGhl
+IGZlbmNlIGhhcyBiZWVuIHNpZ25hbGxlZC4gRHJpdmVycyBhcmUgYWxsb3dlZCB0byBmcmVlIHRo
+YXQgZGF0YSwNCj4gPj4gKyAqIGFuZCBzb21lIGRvLg0KPiA+PiArICoNCj4gPj4gKyAqIFRvIGFs
+bG93IHNhZmUgYWNjZXNzIGRyaXZlcnMgYXJlIG1hbmRhdGVkIHRvIGd1YXJhbnRlZSBhIFJDVSBn
+cmFjZSBwZXJpb2QNCj4gPj4gKyAqIGJldHdlZW4gc2lnbmFsbGluZyB0aGUgZmVuY2UgYW5kIGZy
+ZWVpbmcgc2FpZCBkYXRhLg0KPiA+PiArICoNCj4gPj4gKyAqIEFzIHN1Y2ggYWNjZXNzIHRvIHRo
+ZSBkcml2ZXIgbmFtZSBpcyBvbmx5IHZhbGlkIGluc2lkZSBhIFJDVSBsb2NrZWQgc2VjdGlvbi4N
+Cj4gPj4gKyAqIFRoZSBwb2ludGVyIE1VU1QgYmUgYm90aCBxdWVyaWVkIGFuZCBVU0VEIE9OTFkg
+V0lUSElOIGEgU0lOR0xFIGJsb2NrIGd1YXJkZWQNCj4gPj4gKyAqIGJ5IHRoZSAmZG1hX2ZlbmNl
+X2FjY2Vzc19iZWluZyBhbmQgJmRtYV9mZW5jZV9hY2Nlc3NfZW5kIHBhaXIuDQo+ID4+ICsgKi8N
+Cj4gPj4gK2NvbnN0IGNoYXIgKmRtYV9mZW5jZV9kcml2ZXJfbmFtZShzdHJ1Y3QgZG1hX2ZlbmNl
+ICpmZW5jZSkNCj4gPj4gK3sNCj4gPj4gKyAgICAgICBSQ1VfTE9DS0RFUF9XQVJOKCFyY3VfcmVh
+ZF9sb2NrX2hlbGQoKSwNCj4gPj4gKyAgICAgICAgICAgICAgICAgICAgICAgICJyY3VfcmVhZF9s
+b2NrKCkgcmVxdWlyZWQgZm9yIHNhZmUgYWNjZXNzIHRvIHJldHVybmVkIHN0cmluZyIpOw0KPiA+
+PiArDQo+ID4+ICsgICAgICAgaWYgKCF0ZXN0X2JpdChETUFfRkVOQ0VfRkxBR19TSUdOQUxFRF9C
+SVQsICZmZW5jZS0+ZmxhZ3MpKQ0KPiA+PiArICAgICAgICAgICAgICAgcmV0dXJuIGZlbmNlLT5v
+cHMtPmdldF9kcml2ZXJfbmFtZShmZW5jZSk7DQo+ID4+ICsgICAgICAgZWxzZQ0KPiA+PiArICAg
+ICAgICAgICAgICAgcmV0dXJuICJkZXRhY2hlZC1kcml2ZXIiOw0KPiA+PiArfQ0KPiA+PiArRVhQ
+T1JUX1NZTUJPTChkbWFfZmVuY2VfZHJpdmVyX25hbWUpOw0KPiA+PiArDQo+ID4+ICsvKioNCj4g
+Pj4gKyAqIGRtYV9mZW5jZV90aW1lbGluZV9uYW1lIC0gQWNjZXNzIHRoZSB0aW1lbGluZSBuYW1l
+DQo+ID4+ICsgKiBAZmVuY2U6IHRoZSBmZW5jZSB0byBxdWVyeQ0KPiA+PiArICoNCj4gPj4gKyAq
+IFJldHVybnMgYSB0aW1lbGluZSBuYW1lIHByb3ZpZGVkIGJ5IHRoZSBkbWEtZmVuY2UgaW1wbGVt
+ZW50YXRpb24uDQo+ID4+ICsgKg0KPiA+PiArICogSU1QT1JUQU5UIENPTlNJREVSQVRJT046DQo+
+ID4+ICsgKiBEbWEtZmVuY2UgY29udHJhY3Qgc3RpcHVsYXRlcyB0aGF0IGFjY2VzcyB0byBkcml2
+ZXIgcHJvdmlkZWQgZGF0YSAoZGF0YSBub3QNCj4gPj4gKyAqIGRpcmVjdGx5IGVtYmVkZGVkIGlu
+dG8gdGhlIG9iamVjdCBpdHNlbGYpLCBzdWNoIGFzIHRoZSAmZG1hX2ZlbmNlLmxvY2sgYW5kDQo+
+ID4+ICsgKiBtZW1vcnkgcG90ZW50aWFsbHkgYWNjZXNzZWQgYnkgdGhlICZkbWFfZmVuY2Uub3Bz
+IGZ1bmN0aW9ucywgaXMgZm9yYmlkZGVuDQo+ID4+ICsgKiBhZnRlciB0aGUgZmVuY2UgaGFzIGJl
+ZW4gc2lnbmFsbGVkLiBEcml2ZXJzIGFyZSBhbGxvd2VkIHRvIGZyZWUgdGhhdCBkYXRhLA0KPiA+
+PiArICogYW5kIHNvbWUgZG8uDQo+ID4+ICsgKg0KPiA+PiArICogVG8gYWxsb3cgc2FmZSBhY2Nl
+c3MgZHJpdmVycyBhcmUgbWFuZGF0ZWQgdG8gZ3VhcmFudGVlIGEgUkNVIGdyYWNlIHBlcmlvZA0K
+PiA+PiArICogYmV0d2VlbiBzaWduYWxsaW5nIHRoZSBmZW5jZSBhbmQgZnJlZWluZyBzYWlkIGRh
+dGEuDQo+ID4+ICsgKg0KPiA+PiArICogQXMgc3VjaCBhY2Nlc3MgdG8gdGhlIGRyaXZlciBuYW1l
+IGlzIG9ubHkgdmFsaWQgaW5zaWRlIGEgUkNVIGxvY2tlZCBzZWN0aW9uLg0KPiA+PiArICogVGhl
+IHBvaW50ZXIgTVVTVCBiZSBib3RoIHF1ZXJpZWQgYW5kIFVTRUQgT05MWSBXSVRISU4gYSBTSU5H
+TEUgYmxvY2sgZ3VhcmRlZA0KPiA+PiArICogYnkgdGhlICZkbWFfZmVuY2VfYWNjZXNzX2JlaW5n
+IGFuZCAmZG1hX2ZlbmNlX2FjY2Vzc19lbmQgcGFpci4NCj4gPj4gKyAqLw0KPiA+PiArY29uc3Qg
+Y2hhciAqZG1hX2ZlbmNlX3RpbWVsaW5lX25hbWUoc3RydWN0IGRtYV9mZW5jZSAqZmVuY2UpDQo+
+ID4+ICt7DQo+ID4+ICsgICAgICAgUkNVX0xPQ0tERVBfV0FSTighcmN1X3JlYWRfbG9ja19oZWxk
+KCksDQo+ID4+ICsgICAgICAgICAgICAgICAgICAgICAgICAicmN1X3JlYWRfbG9jaygpIHJlcXVp
+cmVkIGZvciBzYWZlIGFjY2VzcyB0byByZXR1cm5lZCBzdHJpbmciKTsNCj4gPj4gKw0KPiA+PiAr
+ICAgICAgIGlmICghdGVzdF9iaXQoRE1BX0ZFTkNFX0ZMQUdfU0lHTkFMRURfQklULCAmZmVuY2Ut
+PmZsYWdzKSkNCj4gPj4gKyAgICAgICAgICAgICAgIHJldHVybiBmZW5jZS0+b3BzLT5nZXRfZHJp
+dmVyX25hbWUoZmVuY2UpOw0KPiA+PiArICAgICAgIGVsc2UNCj4gPj4gKyAgICAgICAgICAgICAg
+IHJldHVybiAic2lnbmFsZWQtdGltZWxpbmUiOw0KPiA+DQo+ID4gVGhpcyBtZWFucyB0aGF0IHRy
+YWNlX2RtYV9mZW5jZV9zaWduYWxlZCgpIHdpbGwgZ2V0IHRoZSB3cm9uZw0KPiA+IHRpbWVsaW5l
+L2RyaXZlciBuYW1lLCB3aGljaCBwcm9iYWJseSBzY3Jld3MgdXAgcGVyZmV0dG8gYW5kIG1heWJl
+DQo+ID4gb3RoZXIgdG9vbHMuDQo+DQo+IERvIHlvdSB0aGluayBjb250ZXh0IGFuZCBzZXFubyBh
+cmUgbm90IGVub3VnaCBmb3IgdGhvc2UgdG9vbHMgYW5kIHRoZXkNCj4gYWN0dWFsbHkgcmVseSBv
+biB0aGUgbmFtZXM/IEl0IHdvdWxkIHNvdW5kIHdlaXJkIGlmIHRoZXkgZGVjaWRlZCB0bw0KPiBp
+bmRleCBhbnl0aGluZyBvbiB0aGUgbmFtZXMgd2hpY2ggYXJlIG5vbi1zdGFuZGFyZGlzZWQgYmV0
+d2VlbiBkcml2ZXJzLA0KPiBidXQgSSBndWVzcyBhbnl0aGluZyBpcyBwb3NzaWJsZS4NCg0KQXQg
+c29tZSBwb2ludCBwZXJmZXR0byB1c2VzIHRoZSB0aW1lbGluZSBuYW1lIHRvIHB1dCB1cCBhIG5h
+bWVkIGZlbmNlDQp0aW1lbGluZSwgSSdtIG5vdCBzdXJlIGlmIGl0IGlzIHVzaW5nIHRoZSBuYW1l
+IG9yIGNvbnRleHQgIyBmb3INCnN1YnNlcXVlbnQgZmVuY2UgZXZlbnRzIChuYW1lbHksIHNpZ25h
+bGxlZCkuICBJJ2QgaGF2ZSB0byBjaGVjayB0aGUNCmNvZGUgYW5kIGdldCBiYWNrIHRvIHlvdS4N
+Cg0KVGhlcmUgaXMgYWxzbyBncHV2aXMsIHdoaWNoIEkgZ3Vlc3MgZG9lcyBzb21ldGhpbmcgc2lt
+aWxhciwgYnV0DQpoYXZlbid0IGxvb2tlZCBpbnRvIGl0LiAgSWRrIGlmIHRoZXJlIGFyZSBvdGhl
+cnMuDQoNCj4gPiBNYXliZSBpdCB3b3VsZCB3b3JrIHdlbGwgZW5vdWdoIGp1c3QgdG8gbW92ZSB0
+aGUNCj4gPiB0cmFjZV9kbWFfZmVuY2Vfc2lnbmFsZWQoKSBjYWxsIGFoZWFkIG9mIHRoZSB0ZXN0
+X2FuZF9zZXRfYml0KCk/ICBJZGsNCj4gPiBpZiBzb21lIHRoaW5ncyB3aWxsIHN0YXJ0IGdldHRp
+bmcgY29uZnVzZWQgaWYgdGhleSBzZWUgdGhhdCB0cmFjZQ0KPiA+IG11bHRpcGxlIHRpbWVzLg0K
+Pg0KPiBBbm90aGVyIGFsdGVybmF0aXZlIGlzIHRvIG1ha2UgdGhpcyB0cmFjZXBvaW50IGFjY2Vz
+cyB0aGUgbmFtZXMNCj4gZGlyZWN0bHkuIEl0IGlzIHVuZGVyIHRoZSBsb2NrIHNvIGd1YXJhbnRl
+ZWQgbm90IHRvIGdldCBmcmVlZCB3aXRoDQo+IGRyaXZlcnMgd2hpY2ggd2lsbCBiZSBtYWRlIGNv
+bXBsaWFudCB3aXRoIHRoZSBkb2N1bWVudGVkIHJ1bGVzLg0KDQpJIGd1ZXNzIGl0IHdvdWxkIGhh
+dmUgYmVlbiBiZXR0ZXIgaWYsIG90aGVyIHRoYW4gZG1hX2ZlbmNlX2luaXQNCnRyYWNlcG9pbnQs
+IGxhdGVyIHRyYWNlcG9pbnRzIGRpZG4ndCBpbmNsdWRlIHRoZSBkcml2ZXIvdGltZWxpbmUNCm5h
+bWUuLiB0aGF0IHdvdWxkIGhhdmUgZm9yY2VkIHRoZSB1c2Ugb2YgdGhlIGNvbnRleHQuICBCdXQg
+SSBndWVzcyB0b28NCmxhdGUgZm9yIHRoYXQuICBQZXJoYXBzIHRoZSBsZWFzdCBiYWQgdGhpbmcg
+dG8gZG8gaXMgdXNlIHRoZSBsb2NraW5nPw0KDQpCUiwNCi1SDQpfX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAt
+LSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBl
+bWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
