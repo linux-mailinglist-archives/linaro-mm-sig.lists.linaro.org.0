@@ -2,175 +2,111 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A3C6AB7182
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 14 May 2025 18:34:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D239AB7222
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 14 May 2025 19:03:27 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id AAFB7449FE
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 14 May 2025 16:34:00 +0000 (UTC)
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com (mail-mw2nam12on2072.outbound.protection.outlook.com [40.107.244.72])
-	by lists.linaro.org (Postfix) with ESMTPS id 226723EB7E
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 14 May 2025 16:33:48 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 308B24594A
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 14 May 2025 17:03:26 +0000 (UTC)
+Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
+	by lists.linaro.org (Postfix) with ESMTPS id 37DAF3F935
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 14 May 2025 17:03:11 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=Nvidia.com header.s=selector2 header.b=dzA6cYz8;
-	dmarc=pass (policy=reject) header.from=nvidia.com;
-	arc=pass ("microsoft.com:s=arcselector10001:i=1");
-	spf=pass (lists.linaro.org: domain of jgg@nvidia.com designates 40.107.244.72 as permitted sender) smtp.mailfrom=jgg@nvidia.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=hE6Q++lvwJxdM/TznDNM9qO/9NKRUpvT4viZwzEEQETOZcyLnuEJuHx8XTTM+WYCZlO9oMd1V3pvHB6rrKCZSqUP2Ye38T1KN+IP7vaqpKp+F1EkVPufo7FH3H3sbcPH/BBpw3OUt7fcA4n7SPQ7y9IwkVUc9oq3Ua+KWk0ATIrlp2+WmzrEsiGMMGmwlKHkHLe2YbK4dfL1Ix2xCZuBgOSxHdcx2PyvcVRuiTuH+p+whYUzeYLFSQwCx9cfxrGVLPnxnN9a2BmpxtO+hxfA/lcaF6ZDlOGQEUEtWnKgbgatZ3oywWwXeisfa8JCXOt1Ffa6yQGovnVbICXnlbfiRA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JxQirxrhTI8EOU1qJy412hQmprVmytWNGW+UPnIeZWA=;
- b=NCJzpFoZr2Zsau3drXCiAtTCjIxaEMZh+yXep/M3HqOvUDCZ0knlXjgKigIsK54jzUziqbMVRaX2znkvOmzjaMzuvbz9IG/6WA0FkcuBmFHUIKlqLR8e9WBxnyNDdCMAcuKFJHjuv7ClnKqDRB78i7tGns5e2Jc0TlR21jYDqi02iWcJAnqoiCivkXK9GpwyW9OzZwJn3jh79PvRPPdMt5dNHyn616N9ipcFeSU4f4poVs3M/xUbuHlexjEMlF6ZgXE91DxsErNGN5YjpFN0/ofVEm8Szjjuj3oTJJ4hgBoWRy+KbE7vSW7+4iR1ixX+OCl1h6wHgLUx9ctdl2miQQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JxQirxrhTI8EOU1qJy412hQmprVmytWNGW+UPnIeZWA=;
- b=dzA6cYz8ACdNRcSt78lLQv67PxqBDcgCafRbBdi/yZWnCzn88bpVLLXNostHLjAuoaRuSFpY7wO+dJqyuQS7b9GbzPkQPsowHomu6Era+epAfrea7riqVlHd8mu4/6nMxH+Y2lanMXBm5D2M8KCww8HGe4mNRie63hEQTgYzlxz4rIrAtlHELdKX6suMv9PRMwIQQ2ZkdVrG3vGwIEOmVlCz4KWtf4slkRCJVM28Xyg3GtE5JPgMhu+BMkktA0+7w9vL5CMcEk+6Myhyh4rTtU0R9oWq3medt3502eLuc83xp4vzmYzhWkktUN+YOetbPlgFkRtdWLo2vlbOS/f2bA==
-Received: from CH3PR12MB8659.namprd12.prod.outlook.com (2603:10b6:610:17c::13)
- by CH3PR12MB7548.namprd12.prod.outlook.com (2603:10b6:610:144::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.32; Wed, 14 May
- 2025 16:33:41 +0000
-Received: from CH3PR12MB8659.namprd12.prod.outlook.com
- ([fe80::6eb6:7d37:7b4b:1732]) by CH3PR12MB8659.namprd12.prod.outlook.com
- ([fe80::6eb6:7d37:7b4b:1732%7]) with mapi id 15.20.8722.027; Wed, 14 May 2025
- 16:33:41 +0000
-Date: Wed, 14 May 2025 13:33:39 -0300
-From: Jason Gunthorpe <jgg@nvidia.com>
-To: Xu Yilun <yilun.xu@linux.intel.com>
-Message-ID: <20250514163339.GD382960@nvidia.com>
-References: <371ab632-d167-4720-8f0d-57be1e3fee84@amd.com>
- <4b6dc759-86fd-47a7-a206-66b25a0ccc6d@amd.com>
- <c10bf9c2-e073-479d-ad1c-6796c592d333@amd.com>
- <aB3jLmlUKKziwdeG@yilunxu-OptiPlex-7050>
- <aB4tQHmHzHooDeTE@yilunxu-OptiPlex-7050>
- <20250509184318.GD5657@nvidia.com>
- <aB7Ma84WXATiu5O1@yilunxu-OptiPlex-7050>
- <2c4713b0-3d6c-4705-841b-1cb58cd9a0f5@amd.com>
- <20250512140617.GA285583@nvidia.com>
- <aCRAHRCKP1s0Oi0c@yilunxu-OptiPlex-7050>
-Content-Disposition: inline
-In-Reply-To: <aCRAHRCKP1s0Oi0c@yilunxu-OptiPlex-7050>
-X-ClientProxiedBy: BN0PR04CA0209.namprd04.prod.outlook.com
- (2603:10b6:408:e9::34) To CH3PR12MB8659.namprd12.prod.outlook.com
- (2603:10b6:610:17c::13)
+	dkim=pass header.d=gmail.com header.s=20230601 header.b=g+PoMFNr;
+	dmarc=pass (policy=none) header.from=gmail.com;
+	spf=pass (lists.linaro.org: domain of robdclark@gmail.com designates 209.85.215.180 as permitted sender) smtp.mailfrom=robdclark@gmail.com
+Received: by mail-pg1-f180.google.com with SMTP id 41be03b00d2f7-b0db0b6a677so6322266a12.2
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 14 May 2025 10:03:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1747242190; x=1747846990; darn=lists.linaro.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=tTRZYELUxikHuZrnr6hjy5+oWoL6AQWZaZWVaCTTMUs=;
+        b=g+PoMFNrKZPkE/ZziFkAeNFecoEGRfPwjaNxbXidqdE8S2XzJw02i8rZuXvsykEH+X
+         nNvRwOQ0u7YKjRYLCrcoGzDqz0JzWiq+o6GRJ80vSM3E1DlUKXlBec7NuHElVvp+b6w8
+         jk3fRd1MuLvbMbzJxmTR/WSULeSfLNetYva0CeaJjlvSim+/XPYylgV2izIEniVRxpKz
+         8E4bjaE5O1mTiZlhgfNr5kL6om5Gl7DkdWWtUlyfv85jYAF1GjnfzmnLIDxOZtoY9lPH
+         zUa/jBlz3YZ3OuW9J7VbM/rZsOH0x7bTPYmkh9w9zxPf5saMwKTDHwoU6vAWNUujOuaq
+         rgDA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1747242190; x=1747846990;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=tTRZYELUxikHuZrnr6hjy5+oWoL6AQWZaZWVaCTTMUs=;
+        b=hOOMS4kVa2s/K4LBC7K2Odm12uRhe4eIRnEzx40phgxi3xslDud5QR8bO7eOyc92BZ
+         Qzsf8BArwp/W0ZGgLxDJMjyvKnyK28qUG2x9Oe6sZhTLdkhkXjHEvsx6X5Jqe0OKRnvD
+         y+W4sMIpNweT6VPSgUbM5aEQYC5JP+bGWZppLKs/QsfdRbSsnJOO4u8kuA++YODdehVe
+         9ZHPseJ33v7V4NJTYrR6rPlh4sreij6zNIIHYGbkpmogc7bnwfNeMOiD1Y8fZ5uxC+Sy
+         xScfZ1VGDnlEQWUPz1wRve1j650A2qES9K1F539XRAAwNzoA3AzH8GJoBdwhhJjFowXL
+         AzbQ==
+X-Forwarded-Encrypted: i=1; AJvYcCWzRfDeWRcphf+OD3Lx3QphkHzfDszv4C73OnszMafmbZ8VFtVTEdxL33tmxzaXfQXz3nzQPIV+++2GCXps@lists.linaro.org
+X-Gm-Message-State: AOJu0Yx0Q8hwBMB0M3zojTKBsJRtvajiQpRGGwvITEjbk1BdPPghNfZa
+	8hXEfhj41JfmAurm5WbI74HnRydI9g90l4OwwqTn36XeW9HBJky1
+X-Gm-Gg: ASbGncsrT2l57d9X6BxTbNmQBnAjoImvpCwZDcgoC5ESJ8JKBwRi5xhcvuxigzqbdrd
+	baKWSRL4mARC72I1o+1pqos4Rnaqi0QcltQUnUF9szlZs0PMGyqoqGov9ep8P9DeMTt58g0UGPX
+	+UEjC2Bq5dELAs9o/UqO5VP6KzSZA9dW+6MnJ8kzb4HalADkYcXwmCEZ6eMHVnEY1W9ezMAZKDO
+	MG+2xRYMHmu8iQQAx55TpWV60cgOmA128GD2hZhlqXfC3T55zDM+H+QD/VcgYGmgDL0hYFKOY/p
+	t/TNTLdfbUSsSypL2rvzhDeQjEuUXfENNdKdYoaOSgyUHP/XpjoOPapUmRjkaj4hc3TfpV/palc
+	XVAJsjrALfuyllu/+cR6W0ja7Rw==
+X-Google-Smtp-Source: AGHT+IG+/kVgSThsJVSjiF3uCAxUrBjb1zbLg+VbmolSv8I7lQK3Z+fmpPdwjzXJNN06J8fdXZzhsg==
+X-Received: by 2002:a17:90b:51c5:b0:2fe:a79e:f56f with SMTP id 98e67ed59e1d1-30e2e5bb68cmr7472695a91.13.1747242190032;
+        Wed, 14 May 2025 10:03:10 -0700 (PDT)
+Received: from localhost ([2a00:79e0:3e00:2601:3afc:446b:f0df:eadc])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-b2350ddbafdsm7966273a12.53.2025.05.14.10.03.09
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 14 May 2025 10:03:09 -0700 (PDT)
+From: Rob Clark <robdclark@gmail.com>
+To: dri-devel@lists.freedesktop.org
+Date: Wed, 14 May 2025 09:58:59 -0700
+Message-ID: <20250514170118.40555-1-robdclark@gmail.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PR12MB8659:EE_|CH3PR12MB7548:EE_
-X-MS-Office365-Filtering-Correlation-Id: e111c9f8-b292-4876-f72b-08dd930515db
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024|7416014;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?l9lMwEa0e3O4iqd5fDUqfWT125cdynwHqUimk8bH5XtNl11Xl97oqxgXFStL?=
- =?us-ascii?Q?Ax+9R/bNiDUOZegiIMVgtRVJI00hdW/qwSFJ+hyYku0fzaPQ8q641KFcRuBv?=
- =?us-ascii?Q?H2RLAgvzXJdCnYLy8Ta5QA7mtLXLiZ2IsMnGp8cih5SFZArxqGURtZltL9+b?=
- =?us-ascii?Q?y5FkOyckcdwzxMpudE/4ltN6oUhe/+rH6XfwVcKEXg8RFERKoJ2zJBDxxqyW?=
- =?us-ascii?Q?+Kd945CRjPhiPT4WVvoLpVbgJWHDSlQbwHN6rNq1H2ZDTdHUVYfqg9DF2I8C?=
- =?us-ascii?Q?+EduP8ufuYaZvJ7Qmqmf7yqRf5+0w9UlKaRPzho3AFX/PmdUM6GN3wHrSVUC?=
- =?us-ascii?Q?DwCmszuk4B3sb3hKNaYw8lY05hfTWs8SaWzth9UAL2WVegChkEt2TaoWJvkD?=
- =?us-ascii?Q?O3BrvoD7ujtsNZ7ubdqUBA2toDKf4HHS5zuWwTabhl8gaMMTE0vZLmQ2oIZK?=
- =?us-ascii?Q?INQy34ay6PTu2m9jNRRYW0v+X47HFfWENMXgNGE3cB9/fsaZzspiWnWwK38O?=
- =?us-ascii?Q?yXAUTuD/DTp/13GuDoYqWsI4teRVXrXWoqWRcG/kobhRYXfyhBvlFB1kfB+2?=
- =?us-ascii?Q?TTLJ14nYLG8XZrYmLZutSq0z1HCoWk29BpR2LgYink1GJ8K6ute7H8GKFhRm?=
- =?us-ascii?Q?qRPJdbrCS3OMkbV/KnIDHwnUSCyIB5lK2cjmcpZoACJQe1EaxTVshSMECaKC?=
- =?us-ascii?Q?JSia9C2nrMfgzai38I7cso+T+j/BIum9sVq0J/5giTpGn4tp969N+OjMfYiB?=
- =?us-ascii?Q?I68QiWKI8yDRQqm/9rh+Os9tkP3B2Lyou+/9iUuDy4Xtzu9gf0iLJwxdnehB?=
- =?us-ascii?Q?2DBDlaAEccYX7UofH2P+NwbJBjatgRlwo7Ow1cFFAGE6u2gLIGmikv0i3lQ4?=
- =?us-ascii?Q?sxqT9AM3TXW3OhHhRHZblr5pB+Xh4lOCtV22OxEu4GFQGOKr1SygO3hc+Kh+?=
- =?us-ascii?Q?2uf5Gts9yQT6zVlqlQWFQKX3ng3yQ3RINKiAMHczoAkbAqx4xKrH3at88xP3?=
- =?us-ascii?Q?84W1DNeDBmc6qpnBnUJSU7HFTNrGT2SaiF0woqOQgBpD+Q5ugoYUjbHjwVKj?=
- =?us-ascii?Q?teOiOWyn15qOSHLCRzXJ4rRGdZwKI1/Mgj96BSOQknrzUEjhoj9zXIh54k+f?=
- =?us-ascii?Q?0aJxRMF+Zc9eebiuTn+c4+h1LXc3P1bwCSOsO8nCONVdtSCQA8Qih/NB00lf?=
- =?us-ascii?Q?gqhSiyKJxy/PXJLGTlmzh9ev4ppCDHFwZwcBQuO8cT/3vBjmoaMgf2t3T/I8?=
- =?us-ascii?Q?7G1TzLXtBj+FbSpdHDS/loxiOH352YOOiIXATkAI9STqQeKGcl/i7DAmvyjB?=
- =?us-ascii?Q?f+EZBgwKlUi9Y0cveMI5BZ7iXNSR4MmXou5wDeXtjXt7eFckhrPRb6IgxgRv?=
- =?us-ascii?Q?s5riQW3NO7+LfN47meHPW3izDWZ59SZjULxsXDtx94LfupljO6UalA9WEcSc?=
- =?us-ascii?Q?Gi4o+RK9QGQ=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH3PR12MB8659.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(7416014);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?goWbTGc1+I5z9UbzhhS9RF/UfA2Cnq2wVqyzA71wz39PVPvGzTd+B9HTr1Pn?=
- =?us-ascii?Q?1j6lqeeQv1f/NGVN71h/5fuRvLrsbkF9idfxkHnOGbCYJ9f8LkblHb7zuIZC?=
- =?us-ascii?Q?Y8HzPkpWQnpz1w4x8iV1ZOVDJ7fg/ONoR37lwLHxoQLwZEugw+sMXwlBsArU?=
- =?us-ascii?Q?GeiFJC+Xaur1UhUptwiDReP6btEdwsbLfnQQY6uJVVd7JycONMrThZQbn/OZ?=
- =?us-ascii?Q?xxV1oLvvKanEclCMr0hxes5eyAJLIoZZl+y7RQANtTp+o7A/AWXNA6Q4BMtP?=
- =?us-ascii?Q?xGFHTkHuTBaPaGzK7GCncmG/r4Aw0dwif4ZaCk9JsDMQaJnc2/vpctBrBkmb?=
- =?us-ascii?Q?99etyyKkRhh9OoA18EdMvoOjnsdXPk1AdVXdpfgA94ZVvnqiJY06Uxfp7KQA?=
- =?us-ascii?Q?bLSrS1LqmfPHo8+82qtoNDkOc07PZiCmn6z4E1bKcRQuxYWIotwKg8lDaf2B?=
- =?us-ascii?Q?h9Uuvvfnh0V1FEDdfKglUT2pB9btD+uynmNp7NFV6xH5pWco3G9CMaYMuJ3/?=
- =?us-ascii?Q?+hcd/c4/+0Y8CE/CkXGLDJ4XSJ3dlosMwt3js2OffQzzSuYeoQqhfo1mLJyl?=
- =?us-ascii?Q?8PuQdXlP5k3y9HRTrC7dungj/NqACm0wrHkSqTTjtVItL5HxcssAYSFfG9nx?=
- =?us-ascii?Q?K6csBYHXOWDNPgDvvewacS7nTJlEaTq8d9fhlpQ+SVUr6Hy0dtZX+zPpL6wv?=
- =?us-ascii?Q?THDRFndhBQPg6o8uhUapChCnm/zelLH8F23NMAKvRXmyUvzZwXN91OMqyuxq?=
- =?us-ascii?Q?vWSFY19/P/Z2bgVvIL05reCvY8id9FD4hGBi+bkpnhKUIGs7L5bLi5SH+sLC?=
- =?us-ascii?Q?r+7Cn0Y0338zIZtz0txJ2rB8LyFK3n1pE9FnteP8XVseU5KZo120vYyA7V+7?=
- =?us-ascii?Q?iSuGOGk9EAKRpCwrNBq/ht4U7z0sssPzDEdlH7ulCSL58mR+/m9H7e4hjgas?=
- =?us-ascii?Q?DBrITSt26CKjCAbqLagRK7gnYsYYRarM1BERN8R9ClZ66iyf45LHnAelCZwP?=
- =?us-ascii?Q?DIRg9yA0rw1+iAQxJ5P7pjrboD60MZ1turyUhogzQO1uijDKWsCO/hUHusZa?=
- =?us-ascii?Q?zuYmXGYbTa5JPWAwk4imzCMdZuMKDyehKJ6UaLTIdtBRaNyk0F0rQesp6XuI?=
- =?us-ascii?Q?gRi6Xou+/b8UbUBHDEJt6bxOrVC47x3U7RTqNHSWw6ha0fdaL+nRj2C5dQMO?=
- =?us-ascii?Q?bz736WPsnMXTwDP2bg/sXGkN4SqxTQHZb2auOKLILp6sulqXEHzPoD7ixnG8?=
- =?us-ascii?Q?1W3RWXxSMi4LBMpyIiBbNaoDuFPKDRudQ/hBk3zyPyWYz9T0u2jKxU8MixUH?=
- =?us-ascii?Q?JgKEEhYvtR0/iu8sJ5lXl6/B5ctt59RPrQlTpB9q67fVaUSR8zSLTmDVe3eF?=
- =?us-ascii?Q?MuiUta52qgR1O7oERWJ9may7koN1d3wl0s8PDZNZofRykvqdrBb6XUpsfBv3?=
- =?us-ascii?Q?lRG/8K9Bm4SS/5We32NWV1QTQrXEvObhZXltJWhmfoNBWX8OwRb6505p7J8t?=
- =?us-ascii?Q?t8nknsxm5nT9bU+G462frr6OU4sW0Vpn1Ap2R7cdwkELlzqxNOfAw+kr0t05?=
- =?us-ascii?Q?enx29PjtDeofR/uC3r3Cm/IcBrBOWOMdCqT6Si/x?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e111c9f8-b292-4876-f72b-08dd930515db
-X-MS-Exchange-CrossTenant-AuthSource: CH3PR12MB8659.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 May 2025 16:33:40.9503
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: yFZk7HjtLkzpDHZ4eC/jwQKvpPOU17wJnwCxa3/uILoSjW+qGWtBhhjWdAWPxukg
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB7548
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 226723EB7E
-X-Spamd-Bar: -----
-X-Spamd-Result: default: False [-5.85 / 15.00];
-	BAYES_HAM(-2.85)[99.37%];
-	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector10001:i=1];
-	DWL_DNSWL_LOW(-1.00)[Nvidia.com:dkim];
-	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
-	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
-	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
+X-Rspamd-Queue-Id: 37DAF3F935
+X-Spamd-Bar: -
+X-Spamd-Result: default: False [-1.10 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
+	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_MISSING_CHARSET(0.50)[];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.215.180:from];
 	MIME_GOOD(-0.10)[text/plain];
-	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
-	MISSING_XM_UA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	TO_DN_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.244.72:from];
+	RCPT_COUNT_TWELVE(0.00)[31];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	ARC_NA(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FREEMAIL_CC(0.00)[lists.freedesktop.org,vger.kernel.org,gmail.com,chromium.org,quicinc.com,igalia.com,arndb.de,mainlining.org,kode54.net,oss.qualcomm.com,kernel.org,lists.linux.dev,ziepe.ca,oracle.com,marek.ca,intel.com,linaro.org,lists.linaro.org,lists.infradead.org,somainline.org,nvidia.com,arm.com,poorly.run];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	DWL_DNSWL_NONE(0.00)[gmail.com:dkim];
 	RCVD_COUNT_TWO(0.00)[2];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_IN_DNSWL_NONE(0.00)[209.85.215.180:from];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	TAGGED_RCPT(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_IN_DNSWL_NONE(0.00)[40.107.244.72:from];
-	MID_RHS_MATCH_FROM(0.00)[];
-	DKIM_TRACE(0.00)[Nvidia.com:+]
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FROM_HAS_DN(0.00)[]
 X-Rspamd-Action: no action
-Message-ID-Hash: Q4XBZWA56L2JY546DJ72KJ4YC4P3MQM3
-X-Message-ID-Hash: Q4XBZWA56L2JY546DJ72KJ4YC4P3MQM3
-X-MailFrom: jgg@nvidia.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Alexey Kardashevskiy <aik@amd.com>, kvm@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, sumit.semwal@linaro.org, christian.koenig@amd.com, pbonzini@redhat.com, seanjc@google.com, alex.williamson@redhat.com, vivek.kasireddy@intel.com, dan.j.williams@intel.com, yilun.xu@intel.com, linux-coco@lists.linux.dev, linux-kernel@vger.kernel.org, lukas@wunner.de, yan.y.zhao@intel.com, leon@kernel.org, baolu.lu@linux.intel.com, zhenzhong.duan@intel.com, tao1.su@intel.com
+Message-ID-Hash: 73AYIXOYBNIMNYXRM6FGSAFT2BCZW3HN
+X-Message-ID-Hash: 73AYIXOYBNIMNYXRM6FGSAFT2BCZW3HN
+X-MailFrom: robdclark@gmail.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, Connor Abbott <cwabbott0@gmail.com>, Rob Clark <robdclark@chromium.org>, Abhinav Kumar <quic_abhinavk@quicinc.com>, =?UTF-8?q?Andr=C3=A9=20Almeida?= <andrealmeid@igalia.com>, Arnd Bergmann <arnd@arndb.de>, =?UTF-8?q?Barnab=C3=A1s=20Cz=C3=A9m=C3=A1n?= <barnabas.czeman@mainlining.org>, Christopher Snowhill <chris@kode54.net>, Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, Eugene Lepshy <fekz115@gmail.com>, "open list:IOMMU SUBSYSTEM" <iommu@lists.linux.dev>, Jason Gunthorpe <jgg@ziepe.ca>, Jessica Zhang <quic_jesszhan@quicinc.com>, Joao Martins <joao.m.martins@oracle.com>, Jonathan Marek <jonathan@marek.ca>, Kevin Tian <kevin.tian@intel.com>, Konrad Dybcio <konradybcio@kernel.org>, Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK:Keyword:bdma_?:buf|fence|resvb" <linaro-mm-sig@lists.linaro.org>, "moderated list:ARM SMMU DRIVERS
+ " <linux-arm-kernel@lists.infradead.org>, open list <linux-kernel@vger.kernel.org>, "open list:DMA BUFFER SHARING FRAMEWORK:Keyword:bdma_?:buf|fence|resvb" <linux-media@vger.kernel.org>, Marijn Suijten <marijn.suijten@somainline.org>, Nicolin Chen <nicolinc@nvidia.com>, Robin Murphy <robin.murphy@arm.com>, Sean Paul <sean@poorly.run>, Will Deacon <will@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [RFC PATCH 00/12] Private MMIO support for private assigned dev
+Subject: [Linaro-mm-sig] [PATCH v4 00/40] drm/msm: sparse / "VM_BIND" support
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/Q4XBZWA56L2JY546DJ72KJ4YC4P3MQM3/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/73AYIXOYBNIMNYXRM6FGSAFT2BCZW3HN/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -180,80 +116,178 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Wed, May 14, 2025 at 03:02:53PM +0800, Xu Yilun wrote:
-> > We have an awkward fit for what CCA people are doing to the various
-> > Linux APIs. Looking somewhat maximally across all the arches a "bind"
-> > for a CC vPCI device creation operation does:
-> > 
-> >  - Setup the CPU page tables for the VM to have access to the MMIO
-> 
-> This is guest side thing, is it? Anything host need to opt-in?
+From: Rob Clark <robdclark@chromium.org>
 
-CPU hypervisor page tables.
+Conversion to DRM GPU VA Manager[1], and adding support for Vulkan Sparse
+Memory[2] in the form of:
 
-> >  - Revoke hypervisor access to the MMIO
-> 
-> VFIO could choose never to mmap MMIO, so in this case nothing to do?
+1. A new VM_BIND submitqueue type for executing VM MSM_SUBMIT_BO_OP_MAP/
+   MAP_NULL/UNMAP commands
 
-Yes, if you do it that way.
- 
-> >  - Setup the vIOMMU to understand the vPCI device
-> >  - Take over control of some of the IOVA translation, at least for T=1,
-> >    and route to the the vIOMMU
-> >  - Register the vPCI with any attestation functions the VM might use
-> >  - Do some DOE stuff to manage/validate TDSIP/etc
-> 
-> Intel TDX Connect has a extra requirement for "unbind":
-> 
-> - Revoke KVM page table (S-EPT) for the MMIO only after TDISP
->   CONFIG_UNLOCK
+2. A new VM_BIND ioctl to allow submitting batches of one or more
+   MAP/MAP_NULL/UNMAP commands to a VM_BIND submitqueue
 
-Maybe you could express this as the S-EPT always has the MMIO mapped
-into it as long as the vPCI function is installed to the VM? Is KVM
-responsible for the S-EPT?
+I did not implement support for synchronous VM_BIND commands.  Since
+userspace could just immediately wait for the `SUBMIT` to complete, I don't
+think we need this extra complexity in the kernel.  Synchronous/immediate
+VM_BIND operations could be implemented with a 2nd VM_BIND submitqueue.
 
-> Another thing is, seems your term "bind" includes all steps for
-> shared -> private conversion. 
+The corresponding mesa MR: https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/32533
 
-Well, I was talking about vPCI creation. I understand that during the
-vPCI lifecycle the VM will do "bind" "unbind" which are more or less
-switching the device into a T=1 mode. Though I understood on some
-arches this was mostly invisible to the hypervisor?
+Changes in v4:
+- Various locking/etc fixes
+- Optimize the pgtable preallocation.  If userspace sorts the VM_BIND ops
+  then the kernel detects ops that fall into the same 2MB last level PTD
+  to avoid duplicate page preallocation.
+- Add way to throttle pushing jobs to the scheduler, to cap the amount of
+  potentially temporary prealloc'd pgtable pages.
+- Add vm_log to devcoredump for debugging.  If the vm_log_shift module
+  param is set, keep a log of the last 1<<vm_log_shift VM updates for
+  easier debugging of faults/crashes.
+- Link to v3: https://lore.kernel.org/all/20250428205619.227835-1-robdclark@gmail.com/
 
-> But in my mind, "bind" only includes
-> putting device in TDISP LOCK state & corresponding host setups required
-> by firmware. I.e "bind" means host lockes down the CC setup, waiting for
-> guest attestation.
+Changes in v3:
+- Switched to seperate VM_BIND ioctl.  This makes the UABI a bit
+  cleaner, but OTOH the userspace code was cleaner when the end result
+  of either type of VkQueue lead to the same ioctl.  So I'm a bit on
+  the fence.
+- Switched to doing the gpuvm bookkeeping synchronously, and only
+  deferring the pgtable updates.  This avoids needing to hold any resv
+  locks in the fence signaling path, resolving the last shrinker related
+  lockdep complaints.  OTOH it means userspace can trigger invalid
+  pgtable updates with multiple VM_BIND queues.  In this case, we ensure
+  that unmaps happen completely (to prevent userspace from using this to
+  access free'd pages), mark the context as unusable, and move on with
+  life.
+- Link to v2: https://lore.kernel.org/all/20250319145425.51935-1-robdclark@gmail.com/
 
-So we will need to have some other API for this that modifies the vPCI
-object.
+Changes in v2:
+- Dropped Bibek Kumar Patro's arm-smmu patches[3], which have since been
+  merged.
+- Pre-allocate all the things, and drop HACK patch which disabled shrinker.
+  This includes ensuring that vm_bo objects are allocated up front, pre-
+  allocating VMA objects, and pre-allocating pages used for pgtable updates.
+  The latter utilizes io_pgtable_cfg callbacks for pgtable alloc/free, that
+  were initially added for panthor. 
+- Add back support for BO dumping for devcoredump.
+- Link to v1 (RFC): https://lore.kernel.org/dri-devel/20241207161651.410556-1-robdclark@gmail.com/T/#t
 
-It might be reasonable to have VFIO reach into iommufd to do that on
-an already existing iommufd VDEVICE object. A little weird, but we
-could probably make that work.
+[1] https://www.kernel.org/doc/html/next/gpu/drm-mm.html#drm-gpuvm
+[2] https://docs.vulkan.org/spec/latest/chapters/sparsemem.html
+[3] https://patchwork.kernel.org/project/linux-arm-kernel/list/?series=909700
 
-But you have some weird ordering issues here if the S-EPT has to have
-the VFIO MMIO then you have to have a close() destruction order that
-sees VFIO remove the S-EPT and release the KVM, then have iommufd
-destroy the VDEVICE object.
+Rob Clark (40):
+  drm/gpuvm: Don't require obj lock in destructor path
+  drm/gpuvm: Allow VAs to hold soft reference to BOs
+  drm/gem: Add ww_acquire_ctx support to drm_gem_lru_scan()
+  drm/sched: Add enqueue credit limit
+  iommu/io-pgtable-arm: Add quirk to quiet WARN_ON()
+  drm/msm: Rename msm_file_private -> msm_context
+  drm/msm: Improve msm_context comments
+  drm/msm: Rename msm_gem_address_space -> msm_gem_vm
+  drm/msm: Remove vram carveout support
+  drm/msm: Collapse vma allocation and initialization
+  drm/msm: Collapse vma close and delete
+  drm/msm: Don't close VMAs on purge
+  drm/msm: drm_gpuvm conversion
+  drm/msm: Convert vm locking
+  drm/msm: Use drm_gpuvm types more
+  drm/msm: Split out helper to get iommu prot flags
+  drm/msm: Add mmu support for non-zero offset
+  drm/msm: Add PRR support
+  drm/msm: Rename msm_gem_vma_purge() -> _unmap()
+  drm/msm: Drop queued submits on lastclose()
+  drm/msm: Lazily create context VM
+  drm/msm: Add opt-in for VM_BIND
+  drm/msm: Mark VM as unusable on GPU hangs
+  drm/msm: Add _NO_SHARE flag
+  drm/msm: Crashdump prep for sparse mappings
+  drm/msm: rd dumping prep for sparse mappings
+  drm/msm: Crashdec support for sparse
+  drm/msm: rd dumping support for sparse
+  drm/msm: Extract out syncobj helpers
+  drm/msm: Use DMA_RESV_USAGE_BOOKKEEP/KERNEL
+  drm/msm: Add VM_BIND submitqueue
+  drm/msm: Support IO_PGTABLE_QUIRK_NO_WARN_ON
+  drm/msm: Support pgtable preallocation
+  drm/msm: Split out map/unmap ops
+  drm/msm: Add VM_BIND ioctl
+  drm/msm: Add VM logging for VM_BIND updates
+  drm/msm: Add VMA unmap reason
+  drm/msm: Add mmu prealloc tracepoint
+  drm/msm: use trylock for debugfs
+  drm/msm: Bump UAPI version
 
-> > It doesn't mean that iommufd is suddenly doing PCI stuff, no, that
-> > stays in VFIO.
-> 
-> I'm not sure if Alexey's patch [1] illustates your idea. It calls
-> tsm_tdi_bind() which directly does device stuff, and impacts MMIO.
-> VFIO doesn't know about this.
-> 
-> I have to interpret this as VFIO firstly hand over device CC features
-> and MMIO resources to IOMMUFD, so VFIO never cares about them.
-> 
-> [1] https://lore.kernel.org/all/20250218111017.491719-15-aik@amd.com/
+ drivers/gpu/drm/drm_gem.c                     |   14 +-
+ drivers/gpu/drm/drm_gpuvm.c                   |   15 +-
+ drivers/gpu/drm/msm/Kconfig                   |    1 +
+ drivers/gpu/drm/msm/Makefile                  |    1 +
+ drivers/gpu/drm/msm/adreno/a2xx_gpu.c         |   25 +-
+ drivers/gpu/drm/msm/adreno/a2xx_gpummu.c      |    5 +-
+ drivers/gpu/drm/msm/adreno/a3xx_gpu.c         |   17 +-
+ drivers/gpu/drm/msm/adreno/a4xx_gpu.c         |   17 +-
+ drivers/gpu/drm/msm/adreno/a5xx_debugfs.c     |    4 +-
+ drivers/gpu/drm/msm/adreno/a5xx_gpu.c         |   22 +-
+ drivers/gpu/drm/msm/adreno/a5xx_power.c       |    2 +-
+ drivers/gpu/drm/msm/adreno/a5xx_preempt.c     |   10 +-
+ drivers/gpu/drm/msm/adreno/a6xx_gmu.c         |   32 +-
+ drivers/gpu/drm/msm/adreno/a6xx_gmu.h         |    2 +-
+ drivers/gpu/drm/msm/adreno/a6xx_gpu.c         |   49 +-
+ drivers/gpu/drm/msm/adreno/a6xx_gpu_state.c   |    6 +-
+ drivers/gpu/drm/msm/adreno/a6xx_preempt.c     |   10 +-
+ drivers/gpu/drm/msm/adreno/adreno_device.c    |    4 -
+ drivers/gpu/drm/msm/adreno/adreno_gpu.c       |   99 +-
+ drivers/gpu/drm/msm/adreno/adreno_gpu.h       |   23 +-
+ .../drm/msm/disp/dpu1/dpu_encoder_phys_wb.c   |   14 +-
+ drivers/gpu/drm/msm/disp/dpu1/dpu_formats.c   |   18 +-
+ drivers/gpu/drm/msm/disp/dpu1/dpu_formats.h   |    2 +-
+ drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c       |   18 +-
+ drivers/gpu/drm/msm/disp/dpu1/dpu_plane.c     |   14 +-
+ drivers/gpu/drm/msm/disp/dpu1/dpu_plane.h     |    4 +-
+ drivers/gpu/drm/msm/disp/mdp4/mdp4_crtc.c     |    6 +-
+ drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.c      |   28 +-
+ drivers/gpu/drm/msm/disp/mdp4/mdp4_plane.c    |   12 +-
+ drivers/gpu/drm/msm/disp/mdp5/mdp5_crtc.c     |    4 +-
+ drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.c      |   19 +-
+ drivers/gpu/drm/msm/disp/mdp5/mdp5_plane.c    |   12 +-
+ drivers/gpu/drm/msm/dsi/dsi_host.c            |   14 +-
+ drivers/gpu/drm/msm/msm_drv.c                 |  184 +--
+ drivers/gpu/drm/msm/msm_drv.h                 |   35 +-
+ drivers/gpu/drm/msm/msm_fb.c                  |   18 +-
+ drivers/gpu/drm/msm/msm_fbdev.c               |    2 +-
+ drivers/gpu/drm/msm/msm_gem.c                 |  494 +++---
+ drivers/gpu/drm/msm/msm_gem.h                 |  247 ++-
+ drivers/gpu/drm/msm/msm_gem_prime.c           |   15 +
+ drivers/gpu/drm/msm/msm_gem_shrinker.c        |  104 +-
+ drivers/gpu/drm/msm/msm_gem_submit.c          |  295 ++--
+ drivers/gpu/drm/msm/msm_gem_vma.c             | 1471 ++++++++++++++++-
+ drivers/gpu/drm/msm/msm_gpu.c                 |  214 ++-
+ drivers/gpu/drm/msm/msm_gpu.h                 |  144 +-
+ drivers/gpu/drm/msm/msm_gpu_trace.h           |   14 +
+ drivers/gpu/drm/msm/msm_iommu.c               |  302 +++-
+ drivers/gpu/drm/msm/msm_kms.c                 |   18 +-
+ drivers/gpu/drm/msm/msm_kms.h                 |    2 +-
+ drivers/gpu/drm/msm/msm_mmu.h                 |   38 +-
+ drivers/gpu/drm/msm/msm_rd.c                  |   62 +-
+ drivers/gpu/drm/msm/msm_ringbuffer.c          |   10 +-
+ drivers/gpu/drm/msm/msm_submitqueue.c         |   96 +-
+ drivers/gpu/drm/msm/msm_syncobj.c             |  172 ++
+ drivers/gpu/drm/msm/msm_syncobj.h             |   37 +
+ drivers/gpu/drm/scheduler/sched_entity.c      |   16 +-
+ drivers/gpu/drm/scheduler/sched_main.c        |    3 +
+ drivers/iommu/io-pgtable-arm.c                |   27 +-
+ include/drm/drm_gem.h                         |   10 +-
+ include/drm/drm_gpuvm.h                       |   12 +-
+ include/drm/gpu_scheduler.h                   |   13 +-
+ include/linux/io-pgtable.h                    |    8 +
+ include/uapi/drm/msm_drm.h                    |  149 +-
+ 63 files changed, 3484 insertions(+), 1251 deletions(-)
+ create mode 100644 drivers/gpu/drm/msm/msm_syncobj.c
+ create mode 100644 drivers/gpu/drm/msm/msm_syncobj.h
 
-There is also the PCI layer involved here and maybe PCI should be
-participating in managing some of this. Like it makes a bit of sense
-that PCI would block the FLR on platforms that require this?
+-- 
+2.49.0
 
-Jason
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
