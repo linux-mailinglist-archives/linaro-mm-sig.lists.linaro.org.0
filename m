@@ -2,106 +2,174 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9E348AB8E71
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 15 May 2025 20:05:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A234DAB8FD7
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 15 May 2025 21:21:45 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B7D7945952
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 15 May 2025 18:05:09 +0000 (UTC)
-Received: from mail-qt1-f170.google.com (mail-qt1-f170.google.com [209.85.160.170])
-	by lists.linaro.org (Postfix) with ESMTPS id E1917446D4
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 15 May 2025 18:04:55 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C0420459A4
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 15 May 2025 19:21:44 +0000 (UTC)
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com (mail-bn7nam10on2083.outbound.protection.outlook.com [40.107.92.83])
+	by lists.linaro.org (Postfix) with ESMTPS id A6277444C4
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 15 May 2025 19:21:31 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=fooishbar.org header.s=google header.b=Gx+bJSnk;
-	dmarc=none;
-	spf=pass (lists.linaro.org: domain of daniel@fooishbar.org designates 209.85.160.170 as permitted sender) smtp.mailfrom=daniel@fooishbar.org
-Received: by mail-qt1-f170.google.com with SMTP id d75a77b69052e-4769f3e19a9so9381051cf.0
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 15 May 2025 11:04:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=fooishbar.org; s=google; t=1747332295; x=1747937095; darn=lists.linaro.org;
-        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=SqENoL4aMLDUtpJ6J41zIxw9AQzbwBrm9u1/bZHdjuY=;
-        b=Gx+bJSnkoE2vbIpXcrajqbSh3QRmMK9zltQCWBU4tLDpuJ7t+asMAYEn2FYMfZMkBm
-         WCe/H2K+3HSBdStO/4Ru6NSU17PJnxyT3kcStj/ruieh7yIrVM75e3OoFn2vK99uHAd7
-         j9KxImdRiuDu2I0Vmnbz0ck9UL3QfEQ4OEiDfknDzLJAM+XX0dhz3lKmJ9NJlkDCbraV
-         BfeBikNA69dQtQOHRCjjHjFK1Ysaksl1T0a2v5gS/TPQ6ZyPhMXk9FSlKc1QpLP25EYi
-         RTagrUhrItcZKa/FrB+3t5e0yZp9XDInzkrV3hGb5DjJt6CYCH1XEJFy0EfirpQcgkRW
-         VhkA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747332295; x=1747937095;
-        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=SqENoL4aMLDUtpJ6J41zIxw9AQzbwBrm9u1/bZHdjuY=;
-        b=MZPIDK7WSjgYW28mf81MyoKvQvtOSvNdm6gI7TPdQR/jmk8Z6GDvctXk9smTGnwW4K
-         KgVV9+ZkWKA6LJCyhNdBLvmZ6llH4IwOLEBi05IceqGqAa+psdTUdn2E3rTaaX8GyfDW
-         nN7EAGxMgbz7odzkWJWUGPyJJB6zy9RVG8D+aR5awD2JokfyVcGkT3gJpAZmry4/9Iio
-         b+FAqAlZ344waW1cHaS0hWQiJa/YSSc8/XsPwtbIXVSUHVRDu/A9rfQEJsZFL6DScp5d
-         CMpEbEMCRWk8OTt5SZ4BtOIaqOHm4o6h53LWpk7Rr26IRRLjvp9h2ax4u/f3oPNf9jCG
-         gw5w==
-X-Forwarded-Encrypted: i=1; AJvYcCXkK82C2YkMa59MXiUxKsaw5QEseGuDeY2SNoySqlTAs8A3e0m8a5Zz9t1Rn/CEHBTlNLv82Jh+qmWhWGi/@lists.linaro.org
-X-Gm-Message-State: AOJu0YyyM330KF9FehnfDrJoZxndV4oUPvPVWKLs4hoiPD+l92dcyE9U
-	uu/RLflMSgXqYgGUumPTGFUsju3Uye3IpzGGHU8Z2svly6ewxR0w5H5DaEjkKQ0ACr8aR7NkMYu
-	Y70kEy+K9v0/g6A78sAGLNvuJksmkZcXxsrKDd8c/cQ==
-X-Gm-Gg: ASbGnctYaKkGsGsUhxtAmamB8wmPT6hX2Azm7YOdwWLLNUbBKZiGD/PjSSEH0ZLV54w
-	ftGtn8XFCQxlKEk28njm93Xch1nk4xedZDpnuHttjtknzmPYSl3P6e0yHo3NWgGngn60hUx/gSY
-	umIJw6acg52daQULiQIS3zk++jCFxehB4=
-X-Google-Smtp-Source: AGHT+IGFQP++c9XJDNDJpVGCGwvgZpf4fTxFvv688y33OjFyfYfYLK9l//bZATh/43rI6k4OFGCYqhyQBM5SOYRCBtA=
-X-Received: by 2002:a05:622a:59ca:b0:476:9b40:c2cd with SMTP id
- d75a77b69052e-494ae49f4e0mr5251951cf.47.1747332295147; Thu, 15 May 2025
- 11:04:55 -0700 (PDT)
+	dkim=pass header.d=Nvidia.com header.s=selector2 header.b=NgbQYr1o;
+	dmarc=pass (policy=reject) header.from=nvidia.com;
+	arc=pass ("microsoft.com:s=arcselector10001:i=1");
+	spf=pass (lists.linaro.org: domain of jgg@nvidia.com designates 40.107.92.83 as permitted sender) smtp.mailfrom=jgg@nvidia.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=w7AZJzBxOreX3Te4DHOhpdjxdFKuWaXGhMtQBIx/GGIpLGVYfkpquPr0TKUOdY9lJdMkGdNQiC7KYbisNaRklgz0agV8tnylVgStNO+suOQizn3orQOYBvjFNi+lApV0J7bbsCFHRv7vrLjtuPKGXOKe4qZsIlt9LvXB1mIh9l6rFofnYUgeF5Lyy6ccadVyJb/q8gpeLYkvsolwEQSxes0cHPOuQoKdliswi/ADklR2wnayRQ1lcRJZnCtQ0u3kSVp4VC7FC7eJoiSASGBn9ecKwvN2b150lbi2PFJMNN1s6choCY2pHsBCXJJtzXzhiWZlpokFNarUF1OV/iGm5w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=K33z5+xi4198KnymUusYgyJb+35rjaT/UbgCF6jKnxk=;
+ b=OvEl8nDJQMUE4Cc9aZom9h3VPXaR4VMfWEFE0ocLL+nw3sQShtQXcnVJ6pHM/CqBtx9QQ7Z995RAoakJT0gfpt7IoJ3o+UJhDJYDdzvLsWrhIi9mdh5NgppUQD2vbIR1brAPcBq8LIOp1FwYrk7AIDxyV/lFDoo0VMHX1jWA98Yzr8hPxaOFkRvJZACEUlm5ankd7CNRdVxQHYE6dtQXgE57CJEa7Pu1cpyRPUnzSckLU/oZXXAF7+vMPW5RrD9TXynGamvWEuOdEwCFvid674jXYMx0BwngC1fo6KbEuhzd86etqxh7v9OKV9EVuJDiP9KXzPRIE1WmiGwzkYgiLA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=K33z5+xi4198KnymUusYgyJb+35rjaT/UbgCF6jKnxk=;
+ b=NgbQYr1o0gAvxoLowTFe0mjIbyOqnRwxUeQEFzsIhbLM+JsgPQc23/qTd1gqqdzkZEmWoVtLfVQF+WfvyefVgD4pq9LavjL5I+IyYRZ/anaHa8LU0zsFigC7MSGcgI1xi0Qs9kb+esm1/TJ9T0rw0NkguUBqfOAXHalbPK5b3W5kZ5VOJjv47kfDqxlk1SaCxzghfwGyHZsq7mChFfgrkBKq6/fz3bmv+gouDd10m9J69kyQksnFTT6kyN1gCXBBIHCXq9GKZAcgUef8FdtEfts0S04mfEzt9PLSra9L5P6NsGxOQbqvixmSV3YpSql/sdFIPnGDXWMebrr6SvW+8w==
+Received: from CH3PR12MB8659.namprd12.prod.outlook.com (2603:10b6:610:17c::13)
+ by CY8PR12MB7489.namprd12.prod.outlook.com (2603:10b6:930:90::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.29; Thu, 15 May
+ 2025 19:21:29 +0000
+Received: from CH3PR12MB8659.namprd12.prod.outlook.com
+ ([fe80::6eb6:7d37:7b4b:1732]) by CH3PR12MB8659.namprd12.prod.outlook.com
+ ([fe80::6eb6:7d37:7b4b:1732%7]) with mapi id 15.20.8722.031; Thu, 15 May 2025
+ 19:21:29 +0000
+Date: Thu, 15 May 2025 16:21:27 -0300
+From: Jason Gunthorpe <jgg@nvidia.com>
+To: Xu Yilun <yilun.xu@linux.intel.com>
+Message-ID: <20250515192127.GA580805@nvidia.com>
+References: <aB3jLmlUKKziwdeG@yilunxu-OptiPlex-7050>
+ <aB4tQHmHzHooDeTE@yilunxu-OptiPlex-7050>
+ <20250509184318.GD5657@nvidia.com>
+ <aB7Ma84WXATiu5O1@yilunxu-OptiPlex-7050>
+ <2c4713b0-3d6c-4705-841b-1cb58cd9a0f5@amd.com>
+ <20250512140617.GA285583@nvidia.com>
+ <20250513130315.0158a626.zhiw@nvidia.com>
+ <aCRmoDupzK9zTqFL@yilunxu-OptiPlex-7050>
+ <20250514230502.6b64da7f.zhiw@nvidia.com>
+ <aCYsNSFQJZzHVOFI@yilunxu-OptiPlex-7050>
+Content-Disposition: inline
+In-Reply-To: <aCYsNSFQJZzHVOFI@yilunxu-OptiPlex-7050>
+X-ClientProxiedBy: BN9PR03CA0196.namprd03.prod.outlook.com
+ (2603:10b6:408:f9::21) To CH3PR12MB8659.namprd12.prod.outlook.com
+ (2603:10b6:610:17c::13)
 MIME-Version: 1.0
-References: <20250507160713.1363985-1-adrian.larumbe@collabora.com>
- <20250507160713.1363985-4-adrian.larumbe@collabora.com> <9c0b95c8-bf2d-4689-ac1f-ccacba826060@arm.com>
-In-Reply-To: <9c0b95c8-bf2d-4689-ac1f-ccacba826060@arm.com>
-From: Daniel Stone <daniel@fooishbar.org>
-Date: Thu, 15 May 2025 19:04:44 +0100
-X-Gm-Features: AX0GCFuRDimE2NPezlvg51LNRrQrl-sYF337fsjOpF63sMhVPLZez7fPK-61IS0
-Message-ID: <CAPj87rOiEa1bTOPqyauYhoVoXEtNeDjE+DkLbzeGVJ1tW9fJcQ@mail.gmail.com>
-To: =?UTF-8?Q?Adri=C3=A1n_Larumbe?= <adrian.larumbe@collabora.com>,
-	Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, dri-devel <dri-devel@lists.freedesktop.org>,
-	Boris Brezillon <boris.brezillon@collabora.com>, kernel@collabora.com,
-	Rob Herring <robh@kernel.org>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-	Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
-	Linux Media Mailing List <linux-media@vger.kernel.org>,
-	"moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH3PR12MB8659:EE_|CY8PR12MB7489:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9e61b64e-f264-4728-1479-08dd93e5b15a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|7416014|1800799024|376014|366016;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?h+LQIdYaTZBsVhC6jGPXhvgsiTkkE//NBY83PaC6jk6/kue+QvIz5tcyFQqp?=
+ =?us-ascii?Q?wQshwWAPpDDG/Tq1v7jc6bcMTgHAurKO5jqxHlR0ciS2o6/IVyHtWj8HhvJu?=
+ =?us-ascii?Q?AH6V04N+WJtzYElLidy1l2xno6Uz2dOD56T1na1CP+1xut3YS8/rTxWnB+z8?=
+ =?us-ascii?Q?VnO6tRUtWiElz+fvrFKOMMdD+XL4D25d7mY0IQJB/MTA3wdpLpx+zJiN7rOp?=
+ =?us-ascii?Q?N23rf+JD4gATqU7leWkO7d2062Rf8LIlKnXnecKTPr4D3balstINcmXITGII?=
+ =?us-ascii?Q?NsasRnAYvPKOTDdksY5zfQq8A0DOpLDQnzHSq1MDyo6vfC0TY03eCp4qcvpe?=
+ =?us-ascii?Q?PCoSCWoG1wMDt0qNTaIQC4xGE7R+jbFz/5C2inoWOItUJFX+y/HlC3Shqhco?=
+ =?us-ascii?Q?VQXndyLLjouSL5Ak4oPtQAovYNwFcaoMM/+ix6OwpNhzJ9VVa/S+J/bBrjOO?=
+ =?us-ascii?Q?cVXM3brNXxwd00i8cjQBZM//osDCPLFTkbe0fxNJE55+usOBZf6Q2uSQXbOJ?=
+ =?us-ascii?Q?IFwf0LJ9PhZ+PYzzHgWYnpbjzpf8O0FyqSQ0cWPX1Rtq16PuU9ATYo/SnfP0?=
+ =?us-ascii?Q?nX7k91rhOZ5DLu/a4Bjjy7ssCNxwkD8V35tlQBWbk6+Cyja+cPP5F1iTz482?=
+ =?us-ascii?Q?wm1zthPkJaYbXjdVq1J9+g1KREhmCv0xqFzPZLRxj4IfcWDp/s1qmS5tCrw1?=
+ =?us-ascii?Q?/oiqaIp1c18jXVl7Fgn93NJQFAGqlYMOgCliLlKGeVNeiivcFG0AkcQQf+Po?=
+ =?us-ascii?Q?/KfhMIGZMeqOTK8DEBrZVOC6MnZ3q7iEFCbUgnSKNGuxNemimNXYIWn1/Nl0?=
+ =?us-ascii?Q?LJi1rVLt/5jilLfMJIM9OTKyXNt2T7rhKKhknEUceYmE2BgzmsTGgy0iqHQK?=
+ =?us-ascii?Q?5xieWBOyAngJ+aRk6RIgVI6WmM/Do8VukW2h88NuF5Bx3LQJKusuWohbFvVE?=
+ =?us-ascii?Q?L1b7bwnv4LLqVfBS5hCBM5y20fygeZ+cA3TGrQOPHUhlJsYnEMy0zqPGYvUd?=
+ =?us-ascii?Q?w6AopVFga/eBc88pReeXtHE57fVuJLY2N9oSQTHl4T8u++P7ezrJQU0Sj2gX?=
+ =?us-ascii?Q?RIOc9qqEkzlBnb6v/ihwMc+GQKcrRppMUuUSaJ6X1sj0DHE3ZU3kgzhKBK4r?=
+ =?us-ascii?Q?a6+S1E+IeTPrrP0qxUlz1zjQRfq0uQ0oy+0PK6FhjmfE3LgkMz+5kFOWoyxd?=
+ =?us-ascii?Q?IeqSLd/vPB6s1sG7AOTguoIXFyuy9rN2dJs2wLJmyKXI0U6XaKIHrKNnL3QP?=
+ =?us-ascii?Q?eQ7IPc1f26OZCxJe8lJrPsTRlJ2trUIEoiB9qENxnLwe3Z+ELIKNloPL5/ys?=
+ =?us-ascii?Q?zbtlhTmdrxoMWkDr/8CP9moTfzSf2OpPNueOHf/SA3erjBb/14gZqqjvmJUg?=
+ =?us-ascii?Q?an8jD3CjycFcYdgZuPYgCH4EoPFjHt227qFamWaIc+zMSiPMkg=3D=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH3PR12MB8659.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(1800799024)(376014)(366016);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?z2FPrpEMXo9zg+DLuZGm7ZJatUkXKJUjlCxUbcxjB/08hcx1NNUHRpwdbXbQ?=
+ =?us-ascii?Q?Ig/fxJQHB6B0//KGWYMo6WCPqgWUv1BzNuu5MBwj8cx2sBEzYBl2iLSEmCLS?=
+ =?us-ascii?Q?ElHsLr2lJ3vCRJVI3grcOSV15QGNAQsqMRqtbMdFiKWwE70m8G6TVc9rJUEn?=
+ =?us-ascii?Q?9pw1AAOpfVYIa49pKNO8hCwK5VMeks8j7PGuvPSMk7IrKqdgH7w3tv6Q6cKu?=
+ =?us-ascii?Q?ZWsKhagv9tdVfCwW2ahVPXd1BWIgvJV+5mmV7pQ0qKm8t1QVSxHfBhgqyy5w?=
+ =?us-ascii?Q?xBkj/WUiMvxIIVDk93iEjkI0YOwW6u+nWTJe7ILjyvMR268LYnND2PrezQFg?=
+ =?us-ascii?Q?V57RhFjwilFzw7hl0lJDY2QZe9JJ5iXWRK/BIQakRxNCTVBfqlP0lYGgFGOJ?=
+ =?us-ascii?Q?H0uBu3u2yHgfCBIB7fjKxp7igafcMfzeQBDDOI/M3EsaTqiKPmxS01rPKtnA?=
+ =?us-ascii?Q?DplSbXSBFcEGkKN1DhAN1jZN8elCmZoD85ep/PvPWSbPvhNk/yjTkwC+nI7d?=
+ =?us-ascii?Q?ocKKDS+2APUGwOc5lHp3kB7EJ3bFeeFlj660GAHUPB3Ard5pWd5kk1MaWPe4?=
+ =?us-ascii?Q?y0iB6z+K5JK7NY940gmLbT8VoJOgMU7+Gxx29t3Yh5/3+HtbeFwGk13yLwqC?=
+ =?us-ascii?Q?BDW/qx5uSQpAlpfZXAbtVBn+ZxbDTJIMINP8qMC0Af8wz8tDX0Xkhv7zcJFB?=
+ =?us-ascii?Q?O0BwzAL/IC12OwzucGktu8oOnup3Rmgn0MV09x3wkLNMDoQpwYqbZ1hDs17b?=
+ =?us-ascii?Q?r0pAtqNzyJdRxPkJQBXF9xaaqYj0hVk2+Bnzs9P2Dpq79zZCw98slpy8NdU7?=
+ =?us-ascii?Q?bnz9+hXFqTjirdvvSoqadbawqe7wr4aLXlLrjgFFypW8+zJV3B4jupIFQtHA?=
+ =?us-ascii?Q?IUuS9ezVLx8vJar3Ty9cttVBUkHr/H8fxAfQFnnxYSGSVbIFe7h8hP6WjCiy?=
+ =?us-ascii?Q?Djd5erZAgigVSckHYlOq4FuTtuS1WPdl4Q9fFmHHdl/VdDesOcjjqNBy1+Gy?=
+ =?us-ascii?Q?0XDD1YQ3B48mm1x5ksv1LzfPc6NMVnC40Q/OM+QIKuBHhvho7X+WR0+1tj09?=
+ =?us-ascii?Q?ADtQtcNd5dg2Iz8x0YEuxrv3vsndJTrWq0bfot7RmwhFL9c4Dh+lfpgpv6AY?=
+ =?us-ascii?Q?1/zTWYvxOKmcmRfqc0GqFuZ/3+oukcGhCVTTwbqdTl1lbSZoek/kmeowaFqQ?=
+ =?us-ascii?Q?aSNfgpOA/F6KM/v9d30v6L/SMx/j1DEV0LxgMYa6oLOFNiGo5z5YWLnm5nrE?=
+ =?us-ascii?Q?Zg28kpWokukUlsUeucgMIQu3eby4KmJcwUdIuyWJ1NUrR9feeYU7KBLjzad7?=
+ =?us-ascii?Q?whhqNCA6J2Ccw8jOSjj26oiRQk+W+aM7ENjvI4z4dLWWZEeKTnqKcIdygXG2?=
+ =?us-ascii?Q?OxnSZp1H9k1xCj+v3WIGLOlJ3T/Pq5TSOHtsAoFWoYsoSCLCW9vW1ojTCNPa?=
+ =?us-ascii?Q?tMBX65sLRwqVNNqYcV4XhilUfgmLReB0CKdVyMdTKZjaABBtEPJ4//DjpkDR?=
+ =?us-ascii?Q?hwLQGwwhWQPgqTSwxxw/tKuQw+jxj5ujieSySCXSGRkg2vzwt/I4eHgyHiD6?=
+ =?us-ascii?Q?eo2n78PajRWkfqQ8K4/3I/1+vdJmn2OjAl4wJpTD?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9e61b64e-f264-4728-1479-08dd93e5b15a
+X-MS-Exchange-CrossTenant-AuthSource: CH3PR12MB8659.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 May 2025 19:21:29.0334
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: LB2PnzlZ1MeaoByM2L5VMYsDoQbI8acPINc+QIkMwrRKrQoeF1QG/0KS0lWXWYdC
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB7489
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: E1917446D4
-X-Spamd-Bar: ---
-X-Spamd-Result: default: False [-3.60 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	R_DKIM_ALLOW(-0.20)[fooishbar.org:s=google];
+X-Rspamd-Queue-Id: A6277444C4
+X-Spamd-Bar: -----
+X-Spamd-Result: default: False [-5.74 / 15.00];
+	BAYES_HAM(-2.74)[98.88%];
+	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector10001:i=1];
+	DWL_DNSWL_LOW(-1.00)[Nvidia.com:dkim];
+	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
+	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
+	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
 	MIME_GOOD(-0.10)[text/plain];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.160.170:from];
-	ARC_NA(0.00)[];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	RCVD_COUNT_ONE(0.00)[1];
-	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
 	MISSING_XM_UA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[24];
+	TO_DN_SOME(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	RCVD_IN_DNSWL_NONE(0.00)[209.85.160.170:from];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
-	FREEMAIL_TO(0.00)[collabora.com,vger.kernel.org,lists.freedesktop.org,kernel.org,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,lists.linaro.org];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	NEURAL_HAM(-0.00)[-1.000];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.92.83:from];
 	RCVD_TLS_LAST(0.00)[];
-	DMARC_NA(0.00)[fooishbar.org];
-	DKIM_TRACE(0.00)[fooishbar.org:+]
+	RCVD_COUNT_TWO(0.00)[2];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_IN_DNSWL_NONE(0.00)[40.107.92.83:from];
+	MID_RHS_MATCH_FROM(0.00)[];
+	DKIM_TRACE(0.00)[Nvidia.com:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: 7E3I664CFQIN55DBAKZ2A5SIAD5JTBP2
-X-Message-ID-Hash: 7E3I664CFQIN55DBAKZ2A5SIAD5JTBP2
-X-MailFrom: daniel@fooishbar.org
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+Message-ID-Hash: 3R5ENAGR2ZB2KA6B2X77WBO3OD2XAP76
+X-Message-ID-Hash: 3R5ENAGR2ZB2KA6B2X77WBO3OD2XAP76
+X-MailFrom: jgg@nvidia.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: Zhi Wang <zhiw@nvidia.com>, Alexey Kardashevskiy <aik@amd.com>, kvm@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, sumit.semwal@linaro.org, christian.koenig@amd.com, pbonzini@redhat.com, seanjc@google.com, alex.williamson@redhat.com, vivek.kasireddy@intel.com, dan.j.williams@intel.com, yilun.xu@intel.com, linux-coco@lists.linux.dev, linux-kernel@vger.kernel.org, lukas@wunner.de, yan.y.zhao@intel.com, leon@kernel.org, baolu.lu@linux.intel.com, zhenzhong.duan@intel.com, tao1.su@intel.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 3/3] drm/panfrost: show device-wide list of DRM GEM objects over DebugFS
+Subject: [Linaro-mm-sig] Re: [RFC PATCH 00/12] Private MMIO support for private assigned dev
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7E3I664CFQIN55DBAKZ2A5SIAD5JTBP2/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3R5ENAGR2ZB2KA6B2X77WBO3OD2XAP76/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -111,46 +179,106 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Hi Steven,
+On Fri, May 16, 2025 at 02:02:29AM +0800, Xu Yilun wrote:
+> > IMHO, I think it might be helpful that you can picture out what are the
+> > minimum requirements (function/life cycle) to the current IOMMUFD TSM
+> > bind architecture:
+> > 
+> > 1.host tsm_bind (preparation) is in IOMMUFD, triggered by QEMU handling
+> > the TVM-HOST call.
+> > 2. TDI acceptance is handled in guest_request() to accept the TDI after
+> > the validation in the TVM)
+> 
+> I'll try my best to brainstorm and make a flow in ASCII. 
+> 
+> (*) means new feature
+> 
+> 
+>       Guest          Guest TSM       QEMU           VFIO            IOMMUFD       host TSM          KVM 
+>       -----          ---------       ----           ----            -------       --------          ---
+> 1.                                                                               *Connect(IDE)
+> 2.                                 Init vdev            
 
-On Thu, 8 May 2025 at 11:42, Steven Price <steven.price@arm.com> wrote:
-> I'm also seeing a splat when running this, see below. I haven't got my
-> head around how this is happening, but I see it when glmark quits at the
-> end of the test.
->
-> [  399.505066] Unable to handle kernel NULL pointer dereference at virtual address 00000004 when write
-> [...]
-> [  399.882216] Call trace:
-> [  399.882222]  panfrost_gem_free_object [panfrost] from drm_gem_handle_delete+0x84/0xb0
-> [  399.893813]  drm_gem_handle_delete from drm_ioctl+0x2b8/0x4f4
-> [  399.900237]  drm_ioctl from sys_ioctl+0x428/0xe30
-> [  399.905496]  sys_ioctl from ret_fast_syscall+0x0/0x1c
+open /dev/vfio/XX as a VFIO action
 
-Soooo. Let's assume it has to actually occur in
-panfrost_gem_debugfs_bo_rm(), since that's all that's changed here.
+Then VFIO attaches to IOMMUFD as an iommufd action creating the idev
 
-I don't think pfdev can be NULL here, because we've already
-dereferenced ptdev and written to a structure member earlier in
-panfrost_gem_free_object(). I don't think it can be the debugfs mutex,
-because a) that's initialised with the device, and b) wouldn't be
-offset 0x4.
+> 3.                                *create dmabuf   
+> 4.                                               *export dmabuf                              
+> 5.                                create memslot
+> 6.                                                                                              *import dmabuf
+> 7.                                setup shared DMA
+> 8.                                                                 create hwpt
+> 9.                                               attach hwpt
+> 10.                                  kvm run
+> 11.enum shared dev
+> 12.*Connect(Bind)
+> 13.                  *GHCI Bind
+> 14.                                  *Bind
+> 15                                                                 CC viommu alloc
+> 16.                                                                vdevice allloc
 
-I'm looking then at list_del_init(&bo->debugfs.node), which would
-effectively execute bo->debugfs.node->next->prev =
-bo->debugfs.node->prev. So if bo->debugfs.node->next was NULL, that
-would explain a write to 0x4 on 32-bit systems.
+viommu and vdevice creation happen before KVM run. The vPCI function
+is visible to the guest from the very start, even though it is in T=0
+mode. If a platform does not require any special CC steps prior to KVM
+run then it just has a NOP for these functions.
 
-What I _can't_ see is how that would be. Even a double-free calls
-list_del_init() so we're all good. If the shmem alloc failed then this
-would splat because panfrost_gem_debugfs_bo_add() happens too late,
-and we end up with an uninitialised list head - so that's one to fix.
-But I assume that isn't what happens here. I wonder if it's the import
-path, and the panfrost_gem_debugfs_bo_add() call instead needs to be
-in the panfrost_gem_create_object() callback rather than only
-panfrost_gem_create() which is called through the ioctl?
+What you have here is some new BIND operation against the already
+existing vdevice as we discussed earlier.
 
-Cheers,
-Daniel
+> 16.                                              *attach vdev
+> 17.                                                               *setup CC viommu
+> 18                                                                 *tsm_bind
+> 19.                                                                                  *bind
+> 20.*Attest
+> 21.               *GHCI get CC info
+> 22.                                 *get CC info
+> 23.                                                                *vdev guest req
+> 24.                                                                                 *guest req
+> 25.*Accept
+> 26.             *GHCI accept MMIO/DMA
+> 27.                                *accept MMIO/DMA
+> 28.                                                               *vdev guest req
+> 29.                                                                                 *guest req
+> 30.                                                                                              *map private MMIO
+> 31.             *GHCI start tdi
+> 32.                                *start tdi
+> 33.                                                               *vdev guest req
+> 34.                                                                                 *guest req
+
+This seems reasonable you want to have some generic RPC scheme to
+carry messages fro mthe VM to the TSM tunneled through the iommufd
+vdevice (because the vdevice has the vPCI ID, the KVM ID, the VIOMMU
+id and so on)
+
+> 35.Workload...
+> 36.*disconnect(Unbind)
+> 37.              *GHCI unbind
+> 38.                                *Unbind
+> 39.                                            *detach vdev
+
+unbind vdev. vdev remains until kvm is stopped.
+
+> 40.                                                               *tsm_unbind
+> 41.                                                                                 *TDX stop tdi
+> 42.                                                                                 *TDX disable mmio cb
+> 43.                                            *cb dmabuf revoke
+> 44.                                                                                               *unmap private MMIO
+> 45.                                                                                 *TDX disable dma cb
+> 46.                                                              *cb disable CC viommu
+
+I don't know why you'd disable a viommu while the VM is running,
+doesn't make sense.
+
+> 47.                                                                                 *TDX tdi free
+> 48.                                                                                 *enable mmio
+> 49.                                            *cb dmabuf recover
+> 50.workable shared dev
+
+This is a nice chart, it would be good to see a comparable chart for
+AMD and ARM
+
+Jason
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
