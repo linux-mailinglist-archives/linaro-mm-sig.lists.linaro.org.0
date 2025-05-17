@@ -2,34 +2,34 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id A53FDABA3CD
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 16 May 2025 21:31:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3590CABA801
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 17 May 2025 05:33:54 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 65A0E44A31
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 16 May 2025 19:31:31 +0000 (UTC)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id 9463B445C4
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 16 May 2025 19:31:17 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E644544532
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 17 May 2025 03:33:52 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+	by lists.linaro.org (Postfix) with ESMTPS id EDCDD3EACA
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 17 May 2025 03:33:39 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=EndgVF7j;
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (lists.linaro.org: domain of robh@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=robh@kernel.org
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=HmJ8yckV;
+	spf=pass (lists.linaro.org: domain of robh@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=robh@kernel.org;
+	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by dfw.source.kernel.org (Postfix) with ESMTP id B148C5C055B;
-	Fri, 16 May 2025 19:28:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 296CFC4CEE4;
-	Fri, 16 May 2025 19:31:16 +0000 (UTC)
+	by tor.source.kernel.org (Postfix) with ESMTP id 4FA2A60EDF;
+	Sat, 17 May 2025 03:33:39 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 71CC6C4CEE4;
+	Sat, 17 May 2025 03:33:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1747423876;
+	s=k20201202; t=1747452818;
 	bh=AWPQKMivdFQ6QmrVDoYacp12BqW2VCLe3IzFWlx64xM=;
 	h=Date:From:Cc:To:In-Reply-To:References:Subject:From;
-	b=EndgVF7jHnRNOZffKKDayjFtL05ED5RQkdlaGYZWIvu0UXFilqtk8NXOQ+IlfVVxm
-	 abX+EGyiT298vd5JGQY+ri7TQ28zNYmVxR8Ii8dWGw3aPAsZxQ5t3brz2OEro3ASzL
-	 oxpineiAJTm71bOH7dlLGr+vSaiYGdSK0OJXKxjRezK7lz6ronWfMBc/jJpjJdwfhr
-	 GjA57D3RkdirRz1PR+T3wqMkyVdKMTkUi1fzRx/MbATfaEqjy4RLuvy74Ld1KOMGXP
-	 pZNg/e+6nBokBQeleuf8CpDJz2NjZlQ5hYSqcvaAMjA3tS22hYobBm7YE6CPyHjZQr
-	 3csYRAZKS0euw==
-Date: Fri, 16 May 2025 14:31:14 -0500
+	b=HmJ8yckV02na2BlMCmeVWnJjkGQj3zmQIiH34ixgqwRY4AhiFG48HX9ludo2KuTnq
+	 okvf4QqPNMVvOAQ9ptKll0delkhvBYl/9h+8W+fs+8U4b7PwXeZFtWBghG8+nzEvK5
+	 NQXEfG6uQ4XPkiLSNCq98xCbYGj6WugNRJ2yTFi32x2lBJuKrfo5W22QRz111O46M/
+	 qo9z9IYxdwV7t8fFTP7ichoBu1WP5EXFpAT0MbbJkPEvt7fuI9Fn4vrv+JbfTbeuXI
+	 MqxyVRTeIaQQvoG3oS07JNGfE8c/49/ehsjzjhcKCkfE3ecb6c/ljTDkFDwUl3YJf/
+	 HzjrAh0sYgUDQ==
+Date: Fri, 16 May 2025 22:33:37 -0500
 MIME-Version: 1.0
 From: "Rob Herring (Arm)" <robh@kernel.org>
 To: Tomeu Vizoso <tomeu@tomeuvizoso.net>
@@ -37,25 +37,24 @@ In-Reply-To: <20250516-6-10-rocket-v3-1-7051ac9225db@tomeuvizoso.net>
 References: <20250516-6-10-rocket-v3-0-7051ac9225db@tomeuvizoso.net>
  <20250516-6-10-rocket-v3-1-7051ac9225db@tomeuvizoso.net>
 Message-Id: <174742024812.3649303.12389396177218408388.robh@kernel.org>
+X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 9463B445C4
-X-Spamd-Bar: -
 X-Spamd-Result: default: False [-1.50 / 15.00];
 	BAYES_HAM(-3.00)[99.99%];
 	SUSPICIOUS_RECIPS(1.50)[];
 	MID_CONTAINS_FROM(1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.4.254];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MIME_GOOD(-0.10)[text/plain];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	ARC_NA(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
+	ASN(0.00)[asn:63949, ipnet:172.105.0.0/19, country:SG];
 	RCPT_COUNT_TWELVE(0.00)[24];
 	MIME_TRACE(0.00)[0:+];
 	TAGGED_RCPT(0.00)[dt];
-	NEURAL_HAM(-0.00)[-1.000];
+	DWL_DNSWL_BLOCKED(0.00)[kernel.org:dkim];
 	RCVD_TLS_LAST(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FREEMAIL_CC(0.00)[gmail.com,vger.kernel.org,suse.de,kernel.org,linux.intel.com,lwn.net,collabora.com,lists.freedesktop.org,lists.linaro.org,lists.infradead.org,amd.com,oss.qualcomm.com,linaro.org,sntech.de,ffwll.ch];
@@ -64,7 +63,8 @@ X-Spamd-Result: default: False [-1.50 / 15.00];
 	RCVD_COUNT_TWO(0.00)[2];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+]
-X-Rspamd-Action: no action
+X-Rspamd-Queue-Id: EDCDD3EACA
+X-Spamd-Bar: -
 Message-ID-Hash: CSEXYXB2O3Q2I2GRLQNXA7UNV2AW7AOA
 X-Message-ID-Hash: CSEXYXB2O3Q2I2GRLQNXA7UNV2AW7AOA
 X-MailFrom: robh@kernel.org
