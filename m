@@ -2,34 +2,34 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 77EE0ABB97A
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 19 May 2025 11:34:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 412B0ABBA06
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 19 May 2025 11:49:32 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 86CA144B36
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 19 May 2025 09:34:20 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 53E953F648
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 19 May 2025 09:34:09 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 49DF944668
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 19 May 2025 09:49:31 +0000 (UTC)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+	by lists.linaro.org (Postfix) with ESMTPS id 2A21444336
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 19 May 2025 09:49:19 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=WVWCbBnT;
-	spf=pass (lists.linaro.org: domain of robh@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=robh@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=nPuhYqwj;
+	spf=pass (lists.linaro.org: domain of robh@kernel.org designates 147.75.193.91 as permitted sender) smtp.mailfrom=robh@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id 76CEA4A931;
-	Mon, 19 May 2025 09:34:08 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1D6E4C4CEE4;
-	Mon, 19 May 2025 09:34:08 +0000 (UTC)
+	by nyc.source.kernel.org (Postfix) with ESMTP id D5EC5A48E0F;
+	Mon, 19 May 2025 09:49:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3E635C4CEE4;
+	Mon, 19 May 2025 09:49:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1747647248;
+	s=k20201202; t=1747648158;
 	bh=AWPQKMivdFQ6QmrVDoYacp12BqW2VCLe3IzFWlx64xM=;
 	h=Date:From:Cc:To:In-Reply-To:References:Subject:From;
-	b=WVWCbBnTkk0ktrvABJxuaYyiplG2vJKmYpK4HgwTkwCIEtblM/AJ0+VyDW34WxQAa
-	 IpTEtWMVIuEdhVeYrBWqFMipUtdZn81FnjSXJ/HE3Pz0OdLCbGCxi969dgJztpZTv3
-	 vwILvrmwOiogJwIVgIyV/qGCvBXf/llm7L6Elezxs0w1wYR49dRbu3y3gKgAT6fSZ3
-	 i8vzRM0IMik4HSs5wZAZrd9o9YO3hugJ6ZxI58aEZVzRObKvZc8L/3XzuUq4tC3GNf
-	 WPrunVGCIB+xLmoWb3ESebQy498xiKiknOqZFZc0uZDmOkoWrdanoq/D8PJPfp8Tus
-	 uRMTlv160j9Qg==
-Date: Mon, 19 May 2025 04:34:06 -0500
+	b=nPuhYqwj8v/tc/7qY5bU12RGUyTz/xO6Ql3LT74ISSeq7WZoLRR+VNfpx7PLosa8j
+	 I4mqqESu2fgtWqh1hHc0AxkBIE6xybCKMWICzlbmf7bmzSSQ0uuQW1quP0BXUoxnRG
+	 zK/0ewt2JP1JguFmBG7lWJoNZoSheONy/RM9FuHoqD3QMBG8aDjJewYj/0ZiTr+1Hm
+	 exIduw0kwbx5Pccf/AWDIyoT1o2DO6SKfVD/N9Xi4DDkrODxTRgoE4NVQAra3jdqbE
+	 Y3A+nAIoEXk8lJH8Nk+dAfx9jP9gxmlheBCQgUbn6S1B7gTZTxzx76QdIw4j7x6aZw
+	 rOexiIGSWWjeQ==
+Date: Mon, 19 May 2025 04:49:16 -0500
 MIME-Version: 1.0
 From: "Rob Herring (Arm)" <robh@kernel.org>
 To: Tomeu Vizoso <tomeu@tomeuvizoso.net>
@@ -44,10 +44,10 @@ X-Spamd-Result: default: False [-1.50 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	MID_CONTAINS_FROM(1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.252.31];
+	R_SPF_ALLOW(-0.20)[+ip4:147.75.193.91];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MIME_GOOD(-0.10)[text/plain];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:54825, ipnet:147.75.192.0/21, country:US];
 	ARC_NA(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[24];
 	MIME_TRACE(0.00)[0:+];
@@ -62,7 +62,7 @@ X-Spamd-Result: default: False [-1.50 / 15.00];
 	TO_DN_SOME(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+]
-X-Rspamd-Queue-Id: 53E953F648
+X-Rspamd-Queue-Id: 2A21444336
 X-Spamd-Bar: -
 Message-ID-Hash: CSEXYXB2O3Q2I2GRLQNXA7UNV2AW7AOA
 X-Message-ID-Hash: CSEXYXB2O3Q2I2GRLQNXA7UNV2AW7AOA
