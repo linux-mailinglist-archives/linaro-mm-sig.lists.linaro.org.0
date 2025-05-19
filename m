@@ -2,78 +2,83 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 515DCABBC7C
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 19 May 2025 13:35:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6210EABC368
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 19 May 2025 18:02:27 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 6323145F81
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 19 May 2025 11:35:18 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 851DB3F648
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 19 May 2025 11:35:07 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 61D2245FF5
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 19 May 2025 16:02:26 +0000 (UTC)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by lists.linaro.org (Postfix) with ESMTP id DC0313F6AA
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 19 May 2025 16:02:15 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=ARPAoil1;
-	spf=pass (lists.linaro.org: domain of robh@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=robh@kernel.org;
-	dmarc=pass (policy=quarantine) header.from=kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id C660C4A7AB;
-	Mon, 19 May 2025 11:35:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7039CC4CEE4;
-	Mon, 19 May 2025 11:35:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1747654506;
-	bh=AWPQKMivdFQ6QmrVDoYacp12BqW2VCLe3IzFWlx64xM=;
-	h=Date:From:Cc:To:In-Reply-To:References:Subject:From;
-	b=ARPAoil1c3u/sCK9+f+i48JmtcFrCNOMjZ6ahQ/YV4lHg3OLLaN6VBASpD2BNL/nn
-	 m/JTsTiEBQYZqejNrOIPrAJzGrjaiKAZrVW9x3+8tUYf/kjADGOCAlZb4EueHQqzzM
-	 n5bFO40gnwgq7xHiZsMFYwzyRKmSFL6GjQRwOuMmVRpZP3SMmx7d3ryLvUSUdGVj9+
-	 oJEsalgbnnggpqNAaLqNA9zCToPpwZYrwsWG8ft9ICn8Nn/ANbxhhzV/hEyYR8XIWN
-	 wooCesYp61Z3hQcFBI3PYDJTAAsfwkymlvT0LzoQ/AlVt71QgKse+J3pQRqWu7AvoX
-	 H/TFzFrT3uCNQ==
-Date: Mon, 19 May 2025 06:35:04 -0500
+	dkim=none;
+	spf=pass (lists.linaro.org: domain of steven.price@arm.com designates 217.140.110.172 as permitted sender) smtp.mailfrom=steven.price@arm.com;
+	dmarc=pass (policy=none) header.from=arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 67ADF153B;
+	Mon, 19 May 2025 09:02:02 -0700 (PDT)
+Received: from [10.57.24.231] (unknown [10.57.24.231])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id CD20F3F5A1;
+	Mon, 19 May 2025 09:02:12 -0700 (PDT)
+Message-ID: <6a00017f-89dd-47b9-a4db-ceedd63f456f@arm.com>
+Date: Mon, 19 May 2025 17:02:10 +0100
 MIME-Version: 1.0
-From: "Rob Herring (Arm)" <robh@kernel.org>
-To: Tomeu Vizoso <tomeu@tomeuvizoso.net>
-In-Reply-To: <20250516-6-10-rocket-v3-1-7051ac9225db@tomeuvizoso.net>
-References: <20250516-6-10-rocket-v3-0-7051ac9225db@tomeuvizoso.net>
- <20250516-6-10-rocket-v3-1-7051ac9225db@tomeuvizoso.net>
-Message-Id: <174742024812.3649303.12389396177218408388.robh@kernel.org>
+User-Agent: Mozilla Thunderbird
+To: Daniel Stone <daniel@fooishbar.org>,
+ =?UTF-8?Q?Adri=C3=A1n_Larumbe?= <adrian.larumbe@collabora.com>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>,
+ Boris Brezillon <boris.brezillon@collabora.com>, kernel@collabora.com,
+ Rob Herring <robh@kernel.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Sumit Semwal <sumit.semwal@linaro.org>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ Linux Media Mailing List <linux-media@vger.kernel.org>,
+ "moderated list:DMA BUFFER SHARING FRAMEWORK"
+ <linaro-mm-sig@lists.linaro.org>
+References: <20250507160713.1363985-1-adrian.larumbe@collabora.com>
+ <20250507160713.1363985-4-adrian.larumbe@collabora.com>
+ <9c0b95c8-bf2d-4689-ac1f-ccacba826060@arm.com>
+ <CAPj87rOiEa1bTOPqyauYhoVoXEtNeDjE+DkLbzeGVJ1tW9fJcQ@mail.gmail.com>
+From: Steven Price <steven.price@arm.com>
+Content-Language: en-GB
+In-Reply-To: <CAPj87rOiEa1bTOPqyauYhoVoXEtNeDjE+DkLbzeGVJ1tW9fJcQ@mail.gmail.com>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Spamd-Result: default: False [-1.50 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.252.31];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+X-Spamd-Result: default: False [-3.90 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
+	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
+	RCVD_IN_DNSWL_MED(-0.20)[217.140.110.172:from];
+	R_SPF_ALLOW(-0.20)[+ip4:217.140.96.0/20];
 	MIME_GOOD(-0.10)[text/plain];
-	ASN(0.00)[asn:20940, ipnet:172.232.0.0/13, country:NL];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[24];
-	MIME_TRACE(0.00)[0:+];
-	MISSING_XM_UA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TAGGED_RCPT(0.00)[dt];
-	FREEMAIL_CC(0.00)[gmail.com,vger.kernel.org,suse.de,kernel.org,linux.intel.com,lwn.net,collabora.com,lists.freedesktop.org,lists.linaro.org,lists.infradead.org,amd.com,oss.qualcomm.com,linaro.org,sntech.de,ffwll.ch];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_NO_TLS_LAST(0.10)[];
 	RCVD_COUNT_TWO(0.00)[2];
+	ASN(0.00)[asn:28939, ipnet:217.140.110.0/24, country:GB];
+	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FREEMAIL_TO(0.00)[fooishbar.org,collabora.com,vger.kernel.org,lists.freedesktop.org,kernel.org,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,lists.linaro.org];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	R_DKIM_NA(0.00)[];
 	TO_DN_SOME(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+]
-X-Rspamd-Queue-Id: 851DB3F648
-X-Spamd-Bar: -
-Message-ID-Hash: CSEXYXB2O3Q2I2GRLQNXA7UNV2AW7AOA
-X-Message-ID-Hash: CSEXYXB2O3Q2I2GRLQNXA7UNV2AW7AOA
-X-MailFrom: robh@kernel.org
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: devicetree@vger.kernel.org, Thomas Zimmermann <tzimmermann@suse.de>, Maxime Ripard <mripard@kernel.org>, linux-kernel@vger.kernel.org, Conor Dooley <conor+dt@kernel.org>, Oded Gabbay <ogabbay@kernel.org>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Jonathan Corbet <corbet@lwn.net>, Sebastian Reichel <sebastian.reichel@collabora.com>, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org, =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Jeff Hugo <jeff.hugo@oss.qualcomm.com>, Sumit Semwal <sumit.semwal@linaro.org>, Heiko Stuebner <heiko@sntech.de>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Nicolas Frattaroli <nicolas.frattaroli@collabora.com>, Simona Vetter <simona@ffwll.ch>, linux-rockchip@lists.infradead.org, linux-doc@vger.kernel.org
+	MID_RHS_MATCH_FROM(0.00)[]
+X-Rspamd-Queue-Id: DC0313F6AA
+X-Spamd-Bar: ---
+Message-ID-Hash: 4SC7RHZQMDT3DLBX4LWGADLFE4H4H4M5
+X-Message-ID-Hash: 4SC7RHZQMDT3DLBX4LWGADLFE4H4H4M5
+X-MailFrom: steven.price@arm.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3 01/10] dt-bindings: npu: rockchip,rknn: Add bindings
+Subject: [Linaro-mm-sig] Re: [PATCH v2 3/3] drm/panfrost: show device-wide list of DRM GEM objects over DebugFS
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CSEXYXB2O3Q2I2GRLQNXA7UNV2AW7AOA/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4SC7RHZQMDT3DLBX4LWGADLFE4H4H4M5/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -83,70 +88,85 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-
-On Fri, 16 May 2025 18:53:15 +0200, Tomeu Vizoso wrote:
-> Add the bindings for the Neural Processing Unit IP from Rockchip.
+On 15/05/2025 19:04, Daniel Stone wrote:
+> Hi Steven,
 > 
-> v2:
-> - Adapt to new node structure (one node per core, each with its own
->   IOMMU)
-> - Several misc. fixes from Sebastian Reichel
+> On Thu, 8 May 2025 at 11:42, Steven Price <steven.price@arm.com> wrote:
+>> I'm also seeing a splat when running this, see below. I haven't got my
+>> head around how this is happening, but I see it when glmark quits at the
+>> end of the test.
+>>
+>> [  399.505066] Unable to handle kernel NULL pointer dereference at virtual address 00000004 when write
+>> [...]
+>> [  399.882216] Call trace:
+>> [  399.882222]  panfrost_gem_free_object [panfrost] from drm_gem_handle_delete+0x84/0xb0
+>> [  399.893813]  drm_gem_handle_delete from drm_ioctl+0x2b8/0x4f4
+>> [  399.900237]  drm_ioctl from sys_ioctl+0x428/0xe30
+>> [  399.905496]  sys_ioctl from ret_fast_syscall+0x0/0x1c
 > 
-> v3:
-> - Split register block in its constituent subblocks, and only require
->   the ones that the kernel would ever use (Nicolas Frattaroli)
-> - Group supplies (Rob Herring)
-> - Explain the way in which the top core is special (Rob Herring)
+> Soooo. Let's assume it has to actually occur in
+> panfrost_gem_debugfs_bo_rm(), since that's all that's changed here.
 > 
-> Signed-off-by: Tomeu Vizoso <tomeu@tomeuvizoso.net>
-> Signed-off-by: Sebastian Reichel <sebastian.reichel@collabora.com>
-> ---
->  .../bindings/npu/rockchip,rknn-core.yaml           | 162 +++++++++++++++++++++
->  1 file changed, 162 insertions(+)
+> I don't think pfdev can be NULL here, because we've already
+> dereferenced ptdev and written to a structure member earlier in
+> panfrost_gem_free_object(). I don't think it can be the debugfs mutex,
+> because a) that's initialised with the device, and b) wouldn't be
+> offset 0x4.
 > 
+> I'm looking then at list_del_init(&bo->debugfs.node), which would
+> effectively execute bo->debugfs.node->next->prev =
+> bo->debugfs.node->prev. So if bo->debugfs.node->next was NULL, that
+> would explain a write to 0x4 on 32-bit systems.
 
-My bot found errors running 'make dt_binding_check' on your patch:
+So I finally got some time to do some debugging on this. And you are
+absolutely correct on where the fault is triggered.
 
-yamllint warnings/errors:
+The cause of it is that panfrost_gem_debugfs_bo_add() is called from
+panfrost_gem_create(), but that isn't the only place that Panfrost GEM
+objects are created - it turns out panfrost_perfcnt_enable_locked() also
+calls drm_gem_shmem_create(). And in that case the list next/prev
+pointers are left set to NULL, causing things to blow up when the GEM
+object is freed.
 
-dtschema/dtc warnings/errors:
-/builds/robherring/dt-review-ci/linux/Documentation/devicetree/bindings/npu/rockchip,rknn-core.yaml: properties:reg-names: 'oneOf' conditional failed, one must be fixed:
-	[{'const': 'pc'}, {'const': 'cna'}, {'const': 'core'}] is too long
-	[{'const': 'pc'}, {'const': 'cna'}, {'const': 'core'}] is too short
-	False schema does not allow 3
-	1 was expected
-	3 is greater than the maximum of 2
-	hint: "minItems" is only needed if less than the "items" list length
-	from schema $id: http://devicetree.org/meta-schemas/items.yaml#
-/builds/robherring/dt-review-ci/linux/Documentation/devicetree/bindings/npu/rockchip,rknn-core.example.dtb: npu-core@fdab0000 (rockchip,rk3588-rknn-core-top): compatible: 'oneOf' conditional failed, one must be fixed:
-	['rockchip,rk3588-rknn-core-top', 'rockchip,rknn-core-top'] is too long
-	'rockchip,rk3588-rknn-core-top' is not one of ['rockchip,rk3588-rknn-core']
-	from schema $id: http://devicetree.org/schemas/npu/rockchip,rknn-core.yaml#
-/builds/robherring/dt-review-ci/linux/Documentation/devicetree/bindings/npu/rockchip,rknn-core.example.dtb: npu-core@fdab0000 (rockchip,rk3588-rknn-core-top): reg: [[0, 4255842304, 0, 36864]] is too short
-	from schema $id: http://devicetree.org/schemas/npu/rockchip,rknn-core.yaml#
-/builds/robherring/dt-review-ci/linux/Documentation/devicetree/bindings/npu/rockchip,rknn-core.example.dtb: npu-core@fdac0000 (rockchip,rk3588-rknn-core): compatible: 'oneOf' conditional failed, one must be fixed:
-	['rockchip,rk3588-rknn-core', 'rockchip,rknn-core'] is too long
-	'rockchip,rk3588-rknn-core' is not one of ['rockchip,rk3588-rknn-core-top']
-	from schema $id: http://devicetree.org/schemas/npu/rockchip,rknn-core.yaml#
-/builds/robherring/dt-review-ci/linux/Documentation/devicetree/bindings/npu/rockchip,rknn-core.example.dtb: npu-core@fdac0000 (rockchip,rk3588-rknn-core): reg: [[0, 4255907840, 0, 36864]] is too short
-	from schema $id: http://devicetree.org/schemas/npu/rockchip,rknn-core.yaml#
+The below patch gets things working, or alternatively just init the list
+in panfrost_gem_create_object() if we don't want to include the perfcnt
+buffer in the list.
 
-doc reference errors (make refcheckdocs):
+Steve
 
-See https://patchwork.ozlabs.org/project/devicetree-bindings/patch/20250516-6-10-rocket-v3-1-7051ac9225db@tomeuvizoso.net
+---8<--
+diff --git a/drivers/gpu/drm/panfrost/panfrost_gem.c
+b/drivers/gpu/drm/panfrost/panfrost_gem.c
+index fe2cdbe8baf0..51da13cd81f0 100644
+--- a/drivers/gpu/drm/panfrost/panfrost_gem.c
++++ b/drivers/gpu/drm/panfrost/panfrost_gem.c
+@@ -297,13 +297,14 @@ struct drm_gem_object
+*panfrost_gem_create_object(struct drm_device *dev, size_t
+        obj->base.map_wc = !pfdev->coherent;
+        mutex_init(&obj->label.lock);
 
-The base for the series is generally the latest rc1. A different dependency
-should be noted in *this* patch.
++       panfrost_gem_debugfs_bo_add(pfdev, obj);
++
+        return &obj->base.base;
+ }
 
-If you already ran 'make dt_binding_check' and didn't see the above
-error(s), then make sure 'yamllint' is installed and dt-schema is up to
-date:
+ struct panfrost_gem_object *
+ panfrost_gem_create(struct drm_device *dev, size_t size, u32 flags)
+ {
+-       struct panfrost_device *pfdev = dev->dev_private;
+        struct drm_gem_shmem_object *shmem;
+        struct panfrost_gem_object *bo;
 
-pip3 install dtschema --upgrade
+@@ -319,8 +320,6 @@ panfrost_gem_create(struct drm_device *dev, size_t
+size, u32 flags)
+        bo->noexec = !!(flags & PANFROST_BO_NOEXEC);
+        bo->is_heap = !!(flags & PANFROST_BO_HEAP);
 
-Please check and re-submit after running the above command yourself. Note
-that DT_SCHEMA_FILES can be set to your schema file to speed up checking
-your schema. However, it must be unset to test all examples with your schema.
+-       panfrost_gem_debugfs_bo_add(pfdev, bo);
+-
+        return bo;
+ }
+
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
