@@ -2,53 +2,53 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id C1EA5ABD07D
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 May 2025 09:34:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1EB64ABD094
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 May 2025 09:37:57 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A3E76459E1
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 May 2025 07:34:09 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 84BAD3F6D3
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 20 May 2025 07:33:57 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3CBCD4598D
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 May 2025 07:37:56 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+	by lists.linaro.org (Postfix) with ESMTPS id E04A941106
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 20 May 2025 07:37:43 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b="c3/DTfV+";
-	spf=pass (lists.linaro.org: domain of krzk@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=krzk@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b="dBCD7X/I";
+	spf=pass (lists.linaro.org: domain of krzk@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=krzk@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id C533644C8D;
-	Tue, 20 May 2025 07:33:56 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 17977C4CEE9;
-	Tue, 20 May 2025 07:33:56 +0000 (UTC)
+	by tor.source.kernel.org (Postfix) with ESMTP id 2CF8961155;
+	Tue, 20 May 2025 07:37:43 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 48570C4CEE9;
+	Tue, 20 May 2025 07:37:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1747726436;
-	bh=IxJDbHhoIBlRsEC8dNmFDP5+Wyd+qkC2iRVS4ulVwEw=;
+	s=k20201202; t=1747726662;
+	bh=fVyiR8D7qQA0+vUTgX2LRrLxivKrGYmC1L9B3HBhIp4=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=c3/DTfV+WGGKr8thDEznVcCK6Zt+adMAj/Cp+a9oYEBzujm0rNmpnQvHujGxblbzi
-	 cPh3hPmAPQ+Ds/hoPqR3FXN0l6Krw+/cXqSSq0OGKZfAT+PKGA5pHB91ODH4rF2ef+
-	 OcVj5zo4rUd7pOzBJWdv0jpI41xu75b4hsVLuDATYt8piVeUv3/p4RhV/IAZtAogxd
-	 gvxlAINrqfxUu/KVKoTmVFOwjfPpYkoIVxI+CuFf/HEK6l75v+66vi6nt/n89dDcwW
-	 ANzssYus/nb/5ItchaWbUuPm8l7t9JrbwU8qo1yTqYDbXcv/ToHcTGXa1ggFbQ3a7p
-	 uTCz7CLBHQcAg==
-Date: Tue, 20 May 2025 09:33:54 +0200
+	b=dBCD7X/Ibe+2sYG6xP8sVpZb/vvzfhqkfWycoZsODdRu0VlV9AzpwEbDry/P8F/Ki
+	 160DahL5vOyYPwKvMHogsbRJjloc+9RW95QTgbAOYkHGrvyU6pZOIzBMpLDSRvv58+
+	 BUnXAyXUkB275DFTYj37RQ48hOiD4G6tZPHThU8pDoh7Q96nKggGXnvCvaWTssLPXy
+	 D4Lxnato7ApFWIGCt02TmsNFsgVWDS05ddVMquc+IEx925tVwN1KoOstszxYB9LJSg
+	 931bNAa+VGLwHHpB9NalKtr0s4Ta9DlL0WsQCce7tNWGaAiywZjHqBSPLO//shlkOy
+	 Xncs2LCkxJUOg==
+Date: Tue, 20 May 2025 09:37:40 +0200
 From: Krzysztof Kozlowski <krzk@kernel.org>
 To: Tomeu Vizoso <tomeu@tomeuvizoso.net>
-Message-ID: <20250520-hypnotic-pink-lori-dece51@kuoka>
+Message-ID: <20250520-silent-prophetic-cricket-fa0fa9@kuoka>
 References: <20250519-6-10-rocket-v4-0-d6dff6b4c0ae@tomeuvizoso.net>
- <20250519-6-10-rocket-v4-1-d6dff6b4c0ae@tomeuvizoso.net>
+ <20250519-6-10-rocket-v4-5-d6dff6b4c0ae@tomeuvizoso.net>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20250519-6-10-rocket-v4-1-d6dff6b4c0ae@tomeuvizoso.net>
+In-Reply-To: <20250519-6-10-rocket-v4-5-d6dff6b4c0ae@tomeuvizoso.net>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
 X-Spamd-Result: default: False [-2.00 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
+	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.252.31];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.4.254:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MIME_GOOD(-0.10)[text/plain];
-	ASN(0.00)[asn:20940, ipnet:172.232.0.0/13, country:NL];
+	ASN(0.00)[asn:63949, ipnet:172.105.0.0/19, country:SG];
 	ARC_NA(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[25];
 	MIME_TRACE(0.00)[0:+];
@@ -63,18 +63,18 @@ X-Spamd-Result: default: False [-2.00 / 15.00];
 	TO_DN_SOME(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+]
-X-Rspamd-Queue-Id: 84BAD3F6D3
-X-Spamd-Bar: -
-Message-ID-Hash: LIHSGADTAS7HXNOUD3UK2J3BJPI2OMRE
-X-Message-ID-Hash: LIHSGADTAS7HXNOUD3UK2J3BJPI2OMRE
+X-Rspamd-Queue-Id: E04A941106
+X-Spamd-Bar: --
+Message-ID-Hash: WTZCG3FT7JYNLVRN74E7CN2NG3KAEUPT
+X-Message-ID-Hash: WTZCG3FT7JYNLVRN74E7CN2NG3KAEUPT
 X-MailFrom: krzk@kernel.org
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Heiko Stuebner <heiko@sntech.de>, Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Sebastian Reichel <sebastian.reichel@collabora.com>, Nicolas Frattaroli <nicolas.frattaroli@collabora.com>, Jeff Hugo <jeff.hugo@oss.qualcomm.com>, devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v4 01/10] dt-bindings: npu: rockchip,rknn: Add bindings
+Subject: [Linaro-mm-sig] Re: [PATCH v4 05/10] accel/rocket: Add a new driver for Rockchip's NPU
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LIHSGADTAS7HXNOUD3UK2J3BJPI2OMRE/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WTZCG3FT7JYNLVRN74E7CN2NG3KAEUPT/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -84,90 +84,115 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Mon, May 19, 2025 at 03:43:33PM GMT, Tomeu Vizoso wrote:
-> Add the bindings for the Neural Processing Unit IP from Rockchip.
-> 
-> v2:
-> - Adapt to new node structure (one node per core, each with its own
->   IOMMU)
-> - Several misc. fixes from Sebastian Reichel
-> 
-> v3:
-> - Split register block in its constituent subblocks, and only require
->   the ones that the kernel would ever use (Nicolas Frattaroli)
-> - Group supplies (Rob Herring)
-> - Explain the way in which the top core is special (Rob Herring)
-> 
-> v4:
-> - Change required node name to npu@ (Rob Herring and Krzysztof Kozlowski)
-> - Remove unneeded items: (Krzysztof Kozlowski)
-> - Fix use of minItems/maxItems (Krzysztof Kozlowski)
-> - Add reg-names to list of required properties (Krzysztof Kozlowski)
-> - Fix example (Krzysztof Kozlowski)
-> 
-> Signed-off-by: Tomeu Vizoso <tomeu@tomeuvizoso.net>
-> Signed-off-by: Sebastian Reichel <sebastian.reichel@collabora.com>
-
-This order of SoB is still odd. You as person sending it should be the
-last signing person. Are you sure you are using b4 for managing
-trailers? I would expect it to re-order these on every update and this
-is already v4.
-
-> ---
->  .../bindings/npu/rockchip,rknn-core.yaml           | 149 +++++++++++++++++++++
-
-Filename matching compatible, so rockchip,rk3588-rknn-core.yaml
-
->  1 file changed, 149 insertions(+)
-> 
-> diff --git a/Documentation/devicetree/bindings/npu/rockchip,rknn-core.yaml b/Documentation/devicetree/bindings/npu/rockchip,rknn-core.yaml
+On Mon, May 19, 2025 at 03:43:37PM GMT, Tomeu Vizoso wrote:
+> +#endif
+> diff --git a/drivers/accel/rocket/rocket_device.c b/drivers/accel/rocket/rocket_device.c
 > new file mode 100644
-> index 0000000000000000000000000000000000000000..fafd0b01da215c7396262012988e364ef07ea137
+> index 0000000000000000000000000000000000000000..bb469ac87d36249157f4ba9d9f7106ad558309e4
 > --- /dev/null
-> +++ b/Documentation/devicetree/bindings/npu/rockchip,rknn-core.yaml
-> @@ -0,0 +1,149 @@
-> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/npu/rockchip,rknn-core.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +++ b/drivers/accel/rocket/rocket_device.c
+> @@ -0,0 +1,39 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/* Copyright 2024-2025 Tomeu Vizoso <tomeu@tomeuvizoso.net> */
 > +
-> +title: Neural Processing Unit IP from Rockchip
+> +#include <linux/clk.h>
+> +#include <linux/dev_printk.h>
 > +
-> +maintainers:
-> +  - Tomeu Vizoso <tomeu@tomeuvizoso.net>
+> +#include "rocket_device.h"
 > +
-> +description:
-> +  Rockchip IP for accelerating inference of neural networks, based on NVIDIA's
-> +  open source NVDLA IP.
+> +int rocket_device_init(struct rocket_device *rdev)
+> +{
+> +	struct device *dev = rdev->cores[0].dev;
+> +	int err;
 > +
-> +  There is to be a node per each core in the NPU. In Rockchip's design there
-> +  will be one core that is special and needs to be powered on before any of the
-> +  other cores can be used. This special core is called the top core and should
-> +  have the compatible string that corresponds to top cores.
-> +
-> +properties:
-> +  $nodename:
-> +    pattern: '^npu@[a-f0-9]+$'
-> +
-> +  compatible:
-> +    oneOf:
+> +	rdev->clk_npu = devm_clk_get(dev, "npu");
+> +	if (IS_ERR(rdev->clk_npu)) {
+> +		err = PTR_ERR(rdev->clk_npu);
+> +		dev_err(dev, "devm_clk_get failed %d for clock npu\n", err);
+> +		return err;
+> +	}
 
-Drop... if you followed my advice you would notice it is not necessary.
+That's probe path? so use standard syntax:
 
-> +      - enum:
-> +          - rockchip,rk3588-rknn-core-top
-> +      - enum:
-> +          - rockchip,rk3588-rknn-core
+return dev_err_probe(). One line instead of four.
 
-My comments were only partially implemented. This syntax is really not
-readable and not necessary and I asked to make it part of previous enum.
-This is just one enum:
+> +
+> +	rdev->pclk = devm_clk_get(dev, "pclk");
+> +	if (IS_ERR(rdev->pclk)) {
+> +		err = PTR_ERR(rdev->pclk);
+> +		dev_err(dev, "devm_clk_get failed %d for clock pclk\n", err);
+> +		return err;
 
-compatible:
-  enum:
-    - foo
-    - bar
+Same here... except that this should be blk API and entire function gets
+smaller.
+
+> +	}
+> +
+> +	/* Initialize core 0 (top) */
+> +	err = rocket_core_init(&rdev->cores[0]);
+> +	if (err)
+> +		return err;
+> +
+> +	return 0;
+> +}
+
+...
+
+> +static int rocket_device_runtime_resume(struct device *dev)
+> +{
+> +	struct rocket_device *rdev = dev_get_drvdata(dev);
+> +	int core = find_core_for_dev(dev);
+> +	int err = 0;
+> +
+> +	if (core < 0)
+> +		return -ENODEV;
+> +
+> +	if (core == 0) {
+> +		err = clk_prepare_enable(rdev->clk_npu);
+> +		if (err) {
+> +			dev_err(dev, "clk_prepare_enable failed %d for clock npu\n", err);
+> +			return err;
+> +		}
+> +
+> +		err = clk_prepare_enable(rdev->pclk);
+> +		if (err) {
+> +			dev_err(dev, "clk_prepare_enable failed %d for clock pclk\n", err);
+> +			goto error_clk_npu;
+> +		}
+> +	}
+> +
+> +	err = clk_prepare_enable(rdev->cores[core].a_clk);
+> +	if (err) {
+> +		dev_err(dev, "clk_prepare_enable failed %d for a_clk in core %d\n", err, core);
+> +		goto error_pclk;
+> +	}
+> +
+> +	err = clk_prepare_enable(rdev->cores[core].h_clk);
+> +	if (err) {
+> +		dev_err(dev, "clk_prepare_enable failed %d for h_clk in core %d\n", err, core);
+> +		goto error_a_clk;
+> +	}
+
+All four above calls could be just one call with bulk API.
+
+> +
+> +	return 0;
+> +
+> +error_a_clk:
+> +	clk_disable_unprepare(rdev->cores[core].a_clk);
+> +
+> +error_pclk:
+> +	if (core == 0)
+> +		clk_disable_unprepare(rdev->pclk);
+> +
+> +error_clk_npu:
+> +	if (core == 0)
+> +		clk_disable_unprepare(rdev->clk_npu);
+
+And all this would be gone...
+
+> +
+> +	return err;
 
 Best regards,
 Krzysztof
