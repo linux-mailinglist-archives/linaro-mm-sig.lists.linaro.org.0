@@ -1,89 +1,81 @@
 Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
-Received: from lists.linaro.org (unknown [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id ABFE1ABD41E
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 May 2025 12:02:56 +0200 (CEST)
-Received: from server-108-138-64-24.iad12.r.cloudfront.net (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 521F845F8E
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 May 2025 10:02:55 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id B46C7459C5
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 20 May 2025 10:00:59 +0000 (UTC)
+Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
+	by mail.lfdr.de (Postfix) with ESMTPS id E6C5DABD558
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 May 2025 12:42:43 +0200 (CEST)
+Received: from lists.linaro.org (localhost [127.0.0.1])
+	by lists.linaro.org (Postfix) with ESMTP id 0301D40C69
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 May 2025 10:42:43 +0000 (UTC)
+Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
+	by lists.linaro.org (Postfix) with ESMTPS id 6F1FC40C69
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 20 May 2025 10:42:31 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=JO+mWJwv;
-	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=mripard@kernel.org;
-	dmarc=pass (policy=quarantine) header.from=kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id E9FCF4A517;
-	Tue, 20 May 2025 10:00:58 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 760E2C4CEE9;
-	Tue, 20 May 2025 10:00:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1747735258;
-	bh=VtvyvJBr+xABbz7Z/Y+DSfzvO6xe8ZmQbFMl50W4Adg=;
-	h=From:Date:Subject:To:Cc:From;
-	b=JO+mWJwvZgebav7s6IIkQQVajz5Ge2lf2xdMS8+oBzHJAuNCNko1ml50feRmIYcFI
-	 QwgZBahA6ywZWArWlTWEm6nZB/7CIVFtF4s6HXfpDo+pVW6O1snVx/y2siukRT5dMr
-	 SPSVqb6bMl8w29K6mx9l1p/4EZGm7w/Jv755v0YLniNRfYegH4sdqsDxX2WE1MAANh
-	 o9GCJeXo4uWFQdt+HzU4W2MfMEs7n24gEf2z3J0fIj++BsLnWRRDaP0FHSVt5ilcTS
-	 BRGizJ3OF34h/Qi77xMYbHtYjpm9/VGIFLAvqS59B4NUUKqi5HOrr8RIPG8HieI4lB
-	 bSPh57dhwneWg==
-From: Maxime Ripard <mripard@kernel.org>
-Date: Tue, 20 May 2025 12:00:53 +0200
+	dkim=none;
+	spf=pass (lists.linaro.org: domain of l.stach@pengutronix.de designates 185.203.201.7 as permitted sender) smtp.mailfrom=l.stach@pengutronix.de;
+	dmarc=none
+Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77] helo=[IPv6:::1])
+	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <l.stach@pengutronix.de>)
+	id 1uHKPz-0001aN-MM; Tue, 20 May 2025 12:41:55 +0200
+Message-ID: <e7c08305612e7323ca9d9ff6c44f3e2b63f171ff.camel@pengutronix.de>
+From: Lucas Stach <l.stach@pengutronix.de>
+To: Tomeu Vizoso <tomeu@tomeuvizoso.net>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Heiko Stuebner <heiko@sntech.de>, Oded Gabbay
+ <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Maarten Lankhorst
+ <maarten.lankhorst@linux.intel.com>,  Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>,
+ Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Sebastian
+ Reichel <sebastian.reichel@collabora.com>,  Nicolas Frattaroli
+ <nicolas.frattaroli@collabora.com>, Jeff Hugo <jeff.hugo@oss.qualcomm.com>
+Date: Tue, 20 May 2025 12:41:47 +0200
+In-Reply-To: <20250520-6-10-rocket-v5-8-18c9ca0fcb3c@tomeuvizoso.net>
+References: <20250520-6-10-rocket-v5-0-18c9ca0fcb3c@tomeuvizoso.net>
+	 <20250520-6-10-rocket-v5-8-18c9ca0fcb3c@tomeuvizoso.net>
+User-Agent: Evolution 3.52.4 (3.52.4-2.fc40) 
 MIME-Version: 1.0
-Message-Id: <20250520-dma-buf-heap-names-doc-v1-1-ab31f74809ee@kernel.org>
-X-B4-Tracking: v=1; b=H4sIANRSLGgC/x3MQQqAIBBA0avIrBtQoxZdJVpMOtYsMlGKILx70
- vIt/n+hcBYuMKkXMt9S5IwNplPgdoobo/hmsNoOerAa/UG4XgF3poSRDi7oT4e9saMh0i7wCC1
- OmYM8/3heav0A9+Bmw2gAAAA=
-X-Change-ID: 20250520-dma-buf-heap-names-doc-31261aa0cfe6
-To: Sumit Semwal <sumit.semwal@linaro.org>,
- Benjamin Gaignard <benjamin.gaignard@collabora.com>,
- Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>,
- "T.J. Mercier" <tjmercier@google.com>, Jonathan Corbet <corbet@lwn.net>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1869; i=mripard@kernel.org;
- h=from:subject:message-id; bh=VtvyvJBr+xABbz7Z/Y+DSfzvO6xe8ZmQbFMl50W4Adg=;
- b=owGbwMvMwCmsHn9OcpHtvjLG02pJDBk6QdfNUwoC2mY7pIvHTVs8LUzhR8fqpk8ldpqXXYO+O
- L6P7ovrmMrCIMzJICumyPJEJuz08vbFVQ72K3/AzGFlAhnCwMUpABPRncbYMNGk4Iwsd2V1e+ps
- 3XsTpqmfUFMKzhEQbT7z/vnN71oLWd43tjx9LOK9OMr45ZwALfM9jA2npgk1H3Pw2nPqeQ5TlOY
- Egfsssh+6FB8yV/ZemSf31+Q6o/MSDc63D7dYN0/+7+ixShwA
-X-Developer-Key: i=mripard@kernel.org; a=openpgp;
- fpr=BE5675C37E818C8B5764241C254BCFC56BF6CE8D
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:900:1d::77
+X-SA-Exim-Mail-From: l.stach@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: linaro-mm-sig@lists.linaro.org
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Spamd-Result: default: False [-4.00 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.252.31];
+X-Spamd-Result: default: False [-1.60 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ONCE_RECEIVED(0.20)[];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	RCPT_COUNT_TWELVE(0.00)[12];
 	ARC_NA(0.00)[];
+	RCVD_TLS_ALL(0.00)[];
+	RCVD_COUNT_ONE(0.00)[1];
+	ASN(0.00)[asn:209379, ipnet:185.203.200.0/22, country:DE];
+	MIME_TRACE(0.00)[0:+];
+	TAGGED_RCPT(0.00)[dt];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[25];
 	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_TO(0.00)[tomeuvizoso.net,kernel.org,sntech.de,lwn.net,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,collabora.com,oss.qualcomm.com];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	DKIM_TRACE(0.00)[kernel.org:+]
-X-Rspamd-Queue-Id: B46C7459C5
-X-Spamd-Bar: ---
-Message-ID-Hash: V42XGQHDREP7ZD7LWWHKVPVQLCXJMNPO
-X-Message-ID-Hash: V42XGQHDREP7ZD7LWWHKVPVQLCXJMNPO
-X-MailFrom: mripard@kernel.org
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, Maxime Ripard <mripard@kernel.org>
+	R_DKIM_NA(0.00)[];
+	DMARC_NA(0.00)[pengutronix.de];
+	TO_DN_SOME(0.00)[]
+X-Rspamd-Queue-Id: 6F1FC40C69
+X-Spamd-Bar: -
+Message-ID-Hash: U64YER42RLH54XDC2QRR34BSB2YPLQKA
+X-Message-ID-Hash: U64YER42RLH54XDC2QRR34BSB2YPLQKA
+X-MailFrom: l.stach@pengutronix.de
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH] Documentation: dma-buf: heaps: Add naming guidelines
+Subject: [Linaro-mm-sig] Re: [PATCH v5 08/10] accel/rocket: Add IOCTLs for synchronizing memory accesses
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/V42XGQHDREP7ZD7LWWHKVPVQLCXJMNPO/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/U64YER42RLH54XDC2QRR34BSB2YPLQKA/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -93,54 +85,69 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-We've discussed a number of times of how some heap names are bad, but
-not really what makes a good heap name.
+Hi Tomeu,
 
-Let's document what we expect the heap names to look like.
+Am Dienstag, dem 20.05.2025 um 12:27 +0200 schrieb Tomeu Vizoso:
+> The NPU cores have their own access to the memory bus, and this isn't
+> cache coherent with the CPUs.
+> 
+> Add IOCTLs so userspace can mark when the caches need to be flushed, and
+> also when a writer job needs to be waited for before the buffer can be
+> accessed from the CPU.
+> 
+> Initially based on the same IOCTLs from the Etnaviv driver.
+> 
+> v2:
+> - Don't break UABI by reordering the IOCTL IDs (Jeff Hugo)
+> 
+> v3:
+> - Check that padding fields in IOCTLs are zero (Jeff Hugo)
+> 
+> Signed-off-by: Tomeu Vizoso <tomeu@tomeuvizoso.net>
+> ---
+>  drivers/accel/rocket/rocket_drv.c |  2 +
+>  drivers/accel/rocket/rocket_gem.c | 80 +++++++++++++++++++++++++++++++++++++++
+>  drivers/accel/rocket/rocket_gem.h |  5 +++
+>  include/uapi/drm/rocket_accel.h   | 37 ++++++++++++++++++
+>  4 files changed, 124 insertions(+)
+> 
+> diff --git a/drivers/accel/rocket/rocket_drv.c b/drivers/accel/rocket/rocket_drv.c
+> index fef9b93372d3f65c41c1ac35a9bfa0c01ee721a5..c06e66939e6c39909fe08bef3c4f301b07bf8fbf 100644
+> --- a/drivers/accel/rocket/rocket_drv.c
+> +++ b/drivers/accel/rocket/rocket_drv.c
+> @@ -59,6 +59,8 @@ static const struct drm_ioctl_desc rocket_drm_driver_ioctls[] = {
+>  
+>  	ROCKET_IOCTL(CREATE_BO, create_bo),
+>  	ROCKET_IOCTL(SUBMIT, submit),
+> +	ROCKET_IOCTL(PREP_BO, prep_bo),
+> +	ROCKET_IOCTL(FINI_BO, fini_bo),
+>  };
+>  
+>  DEFINE_DRM_ACCEL_FOPS(rocket_accel_driver_fops);
+> diff --git a/drivers/accel/rocket/rocket_gem.c b/drivers/accel/rocket/rocket_gem.c
+> index 8a8a7185daac4740081293aae6945c9b2bbeb2dd..cdc5238a93fa5978129dc1ac8ec8de955160dc18 100644
+> --- a/drivers/accel/rocket/rocket_gem.c
+> +++ b/drivers/accel/rocket/rocket_gem.c
+> @@ -129,3 +129,83 @@ int rocket_ioctl_create_bo(struct drm_device *dev, void *data, struct drm_file *
+>  
+>  	return ret;
+>  }
+> +
+> +static inline enum dma_data_direction rocket_op_to_dma_dir(u32 op)
+> +{
+> +	if (op & ROCKET_PREP_READ)
+> +		return DMA_FROM_DEVICE;
+> +	else if (op & ROCKET_PREP_WRITE)
+> +		return DMA_TO_DEVICE;
+> +	else
+> +		return DMA_BIDIRECTIONAL;
+> +}
 
-Signed-off-by: Maxime Ripard <mripard@kernel.org>
----
- Documentation/userspace-api/dma-buf-heaps.rst | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
+This has copied over the bug fixed in etnaviv commit 58979ad6330a
+("drm/etnaviv: fix DMA direction handling for cached RW buffers")
 
-diff --git a/Documentation/userspace-api/dma-buf-heaps.rst b/Documentation/userspace-api/dma-buf-heaps.rst
-index 535f49047ce6450796bf4380c989e109355efc05..b24618e360a9a9ba0bd85135d8c1760776f1a37f 100644
---- a/Documentation/userspace-api/dma-buf-heaps.rst
-+++ b/Documentation/userspace-api/dma-buf-heaps.rst
-@@ -21,5 +21,24 @@ following heaps:
-    usually created either through the kernel commandline through the
-    `cma` parameter, a memory region Device-Tree node with the
-    `linux,cma-default` property set, or through the `CMA_SIZE_MBYTES` or
-    `CMA_SIZE_PERCENTAGE` Kconfig options. Depending on the platform, it
-    might be called ``reserved``, ``linux,cma``, or ``default-pool``.
-+
-+Naming Convention
-+=================
-+
-+A good heap name is a name that:
-+
-+- Is stable, and won't change from one version to the other;
-+
-+- Describes the memory region the heap will allocate from, and will
-+  uniquely identify it in a given platform;
-+
-+- Doesn't use implementation details, such as the allocator;
-+
-+- Can describe intended usage.
-+
-+For example, assuming a platform with a reserved memory region located
-+at the RAM address 0x42000000, intended to allocate video framebuffers,
-+and backed by the CMA kernel allocator. Good names would be
-+`memory@42000000` or `video@42000000`, but `cma-video` wouldn't.
-
----
-base-commit: 92a09c47464d040866cf2b4cd052bc60555185fb
-change-id: 20250520-dma-buf-heap-names-doc-31261aa0cfe6
-
-Best regards,
--- 
-Maxime Ripard <mripard@kernel.org>
-
+Regards,
+Lucas
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
