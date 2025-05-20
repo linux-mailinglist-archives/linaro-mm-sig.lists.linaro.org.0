@@ -1,80 +1,89 @@
 Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
-Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1EB64ABD094
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 May 2025 09:37:57 +0200 (CEST)
-Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3CBCD4598D
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 May 2025 07:37:56 +0000 (UTC)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
-	by lists.linaro.org (Postfix) with ESMTPS id E04A941106
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 20 May 2025 07:37:43 +0000 (UTC)
+Received: from lists.linaro.org (unknown [3.208.193.21])
+	by mail.lfdr.de (Postfix) with ESMTPS id ABFE1ABD41E
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 May 2025 12:02:56 +0200 (CEST)
+Received: from server-108-138-64-24.iad12.r.cloudfront.net (localhost [127.0.0.1])
+	by lists.linaro.org (Postfix) with ESMTP id 521F845F8E
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 May 2025 10:02:55 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+	by lists.linaro.org (Postfix) with ESMTPS id B46C7459C5
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 20 May 2025 10:00:59 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b="dBCD7X/I";
-	spf=pass (lists.linaro.org: domain of krzk@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=krzk@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=JO+mWJwv;
+	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=mripard@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by tor.source.kernel.org (Postfix) with ESMTP id 2CF8961155;
-	Tue, 20 May 2025 07:37:43 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 48570C4CEE9;
-	Tue, 20 May 2025 07:37:42 +0000 (UTC)
+	by sea.source.kernel.org (Postfix) with ESMTP id E9FCF4A517;
+	Tue, 20 May 2025 10:00:58 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 760E2C4CEE9;
+	Tue, 20 May 2025 10:00:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1747726662;
-	bh=fVyiR8D7qQA0+vUTgX2LRrLxivKrGYmC1L9B3HBhIp4=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=dBCD7X/Ibe+2sYG6xP8sVpZb/vvzfhqkfWycoZsODdRu0VlV9AzpwEbDry/P8F/Ki
-	 160DahL5vOyYPwKvMHogsbRJjloc+9RW95QTgbAOYkHGrvyU6pZOIzBMpLDSRvv58+
-	 BUnXAyXUkB275DFTYj37RQ48hOiD4G6tZPHThU8pDoh7Q96nKggGXnvCvaWTssLPXy
-	 D4Lxnato7ApFWIGCt02TmsNFsgVWDS05ddVMquc+IEx925tVwN1KoOstszxYB9LJSg
-	 931bNAa+VGLwHHpB9NalKtr0s4Ta9DlL0WsQCce7tNWGaAiywZjHqBSPLO//shlkOy
-	 Xncs2LCkxJUOg==
-Date: Tue, 20 May 2025 09:37:40 +0200
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Tomeu Vizoso <tomeu@tomeuvizoso.net>
-Message-ID: <20250520-silent-prophetic-cricket-fa0fa9@kuoka>
-References: <20250519-6-10-rocket-v4-0-d6dff6b4c0ae@tomeuvizoso.net>
- <20250519-6-10-rocket-v4-5-d6dff6b4c0ae@tomeuvizoso.net>
+	s=k20201202; t=1747735258;
+	bh=VtvyvJBr+xABbz7Z/Y+DSfzvO6xe8ZmQbFMl50W4Adg=;
+	h=From:Date:Subject:To:Cc:From;
+	b=JO+mWJwvZgebav7s6IIkQQVajz5Ge2lf2xdMS8+oBzHJAuNCNko1ml50feRmIYcFI
+	 QwgZBahA6ywZWArWlTWEm6nZB/7CIVFtF4s6HXfpDo+pVW6O1snVx/y2siukRT5dMr
+	 SPSVqb6bMl8w29K6mx9l1p/4EZGm7w/Jv755v0YLniNRfYegH4sdqsDxX2WE1MAANh
+	 o9GCJeXo4uWFQdt+HzU4W2MfMEs7n24gEf2z3J0fIj++BsLnWRRDaP0FHSVt5ilcTS
+	 BRGizJ3OF34h/Qi77xMYbHtYjpm9/VGIFLAvqS59B4NUUKqi5HOrr8RIPG8HieI4lB
+	 bSPh57dhwneWg==
+From: Maxime Ripard <mripard@kernel.org>
+Date: Tue, 20 May 2025 12:00:53 +0200
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20250519-6-10-rocket-v4-5-d6dff6b4c0ae@tomeuvizoso.net>
+Message-Id: <20250520-dma-buf-heap-names-doc-v1-1-ab31f74809ee@kernel.org>
+X-B4-Tracking: v=1; b=H4sIANRSLGgC/x3MQQqAIBBA0avIrBtQoxZdJVpMOtYsMlGKILx70
+ vIt/n+hcBYuMKkXMt9S5IwNplPgdoobo/hmsNoOerAa/UG4XgF3poSRDi7oT4e9saMh0i7wCC1
+ OmYM8/3heav0A9+Bmw2gAAAA=
+X-Change-ID: 20250520-dma-buf-heap-names-doc-31261aa0cfe6
+To: Sumit Semwal <sumit.semwal@linaro.org>,
+ Benjamin Gaignard <benjamin.gaignard@collabora.com>,
+ Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>,
+ "T.J. Mercier" <tjmercier@google.com>, Jonathan Corbet <corbet@lwn.net>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1869; i=mripard@kernel.org;
+ h=from:subject:message-id; bh=VtvyvJBr+xABbz7Z/Y+DSfzvO6xe8ZmQbFMl50W4Adg=;
+ b=owGbwMvMwCmsHn9OcpHtvjLG02pJDBk6QdfNUwoC2mY7pIvHTVs8LUzhR8fqpk8ldpqXXYO+O
+ L6P7ovrmMrCIMzJICumyPJEJuz08vbFVQ72K3/AzGFlAhnCwMUpABPRncbYMNGk4Iwsd2V1e+ps
+ 3XsTpqmfUFMKzhEQbT7z/vnN71oLWd43tjx9LOK9OMr45ZwALfM9jA2npgk1H3Pw2nPqeQ5TlOY
+ Egfsssh+6FB8yV/ZemSf31+Q6o/MSDc63D7dYN0/+7+ixShwA
+X-Developer-Key: i=mripard@kernel.org; a=openpgp;
+ fpr=BE5675C37E818C8B5764241C254BCFC56BF6CE8D
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Spamd-Result: default: False [-2.00 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-4.00 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.4.254:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.252.31];
 	MIME_GOOD(-0.10)[text/plain];
-	ASN(0.00)[asn:63949, ipnet:172.105.0.0/19, country:SG];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[25];
 	MIME_TRACE(0.00)[0:+];
-	MISSING_XM_UA(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TAGGED_RCPT(0.00)[dt];
-	FREEMAIL_CC(0.00)[kernel.org,sntech.de,lwn.net,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,collabora.com,oss.qualcomm.com,vger.kernel.org,lists.infradead.org,lists.freedesktop.org,lists.linaro.org];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	ARC_NA(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
 	DKIM_TRACE(0.00)[kernel.org:+]
-X-Rspamd-Queue-Id: E04A941106
-X-Spamd-Bar: --
-Message-ID-Hash: WTZCG3FT7JYNLVRN74E7CN2NG3KAEUPT
-X-Message-ID-Hash: WTZCG3FT7JYNLVRN74E7CN2NG3KAEUPT
-X-MailFrom: krzk@kernel.org
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Heiko Stuebner <heiko@sntech.de>, Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Sebastian Reichel <sebastian.reichel@collabora.com>, Nicolas Frattaroli <nicolas.frattaroli@collabora.com>, Jeff Hugo <jeff.hugo@oss.qualcomm.com>, devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+X-Rspamd-Queue-Id: B46C7459C5
+X-Spamd-Bar: ---
+Message-ID-Hash: V42XGQHDREP7ZD7LWWHKVPVQLCXJMNPO
+X-Message-ID-Hash: V42XGQHDREP7ZD7LWWHKVPVQLCXJMNPO
+X-MailFrom: mripard@kernel.org
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, Maxime Ripard <mripard@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v4 05/10] accel/rocket: Add a new driver for Rockchip's NPU
+Subject: [Linaro-mm-sig] [PATCH] Documentation: dma-buf: heaps: Add naming guidelines
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WTZCG3FT7JYNLVRN74E7CN2NG3KAEUPT/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/V42XGQHDREP7ZD7LWWHKVPVQLCXJMNPO/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -84,118 +93,53 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Mon, May 19, 2025 at 03:43:37PM GMT, Tomeu Vizoso wrote:
-> +#endif
-> diff --git a/drivers/accel/rocket/rocket_device.c b/drivers/accel/rocket/rocket_device.c
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..bb469ac87d36249157f4ba9d9f7106ad558309e4
-> --- /dev/null
-> +++ b/drivers/accel/rocket/rocket_device.c
-> @@ -0,0 +1,39 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +/* Copyright 2024-2025 Tomeu Vizoso <tomeu@tomeuvizoso.net> */
-> +
-> +#include <linux/clk.h>
-> +#include <linux/dev_printk.h>
-> +
-> +#include "rocket_device.h"
-> +
-> +int rocket_device_init(struct rocket_device *rdev)
-> +{
-> +	struct device *dev = rdev->cores[0].dev;
-> +	int err;
-> +
-> +	rdev->clk_npu = devm_clk_get(dev, "npu");
-> +	if (IS_ERR(rdev->clk_npu)) {
-> +		err = PTR_ERR(rdev->clk_npu);
-> +		dev_err(dev, "devm_clk_get failed %d for clock npu\n", err);
-> +		return err;
-> +	}
+We've discussed a number of times of how some heap names are bad, but
+not really what makes a good heap name.
 
-That's probe path? so use standard syntax:
+Let's document what we expect the heap names to look like.
 
-return dev_err_probe(). One line instead of four.
+Signed-off-by: Maxime Ripard <mripard@kernel.org>
+---
+ Documentation/userspace-api/dma-buf-heaps.rst | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
 
-> +
-> +	rdev->pclk = devm_clk_get(dev, "pclk");
-> +	if (IS_ERR(rdev->pclk)) {
-> +		err = PTR_ERR(rdev->pclk);
-> +		dev_err(dev, "devm_clk_get failed %d for clock pclk\n", err);
-> +		return err;
+diff --git a/Documentation/userspace-api/dma-buf-heaps.rst b/Documentation/userspace-api/dma-buf-heaps.rst
+index 535f49047ce6450796bf4380c989e109355efc05..b24618e360a9a9ba0bd85135d8c1760776f1a37f 100644
+--- a/Documentation/userspace-api/dma-buf-heaps.rst
++++ b/Documentation/userspace-api/dma-buf-heaps.rst
+@@ -21,5 +21,24 @@ following heaps:
+    usually created either through the kernel commandline through the
+    `cma` parameter, a memory region Device-Tree node with the
+    `linux,cma-default` property set, or through the `CMA_SIZE_MBYTES` or
+    `CMA_SIZE_PERCENTAGE` Kconfig options. Depending on the platform, it
+    might be called ``reserved``, ``linux,cma``, or ``default-pool``.
++
++Naming Convention
++=================
++
++A good heap name is a name that:
++
++- Is stable, and won't change from one version to the other;
++
++- Describes the memory region the heap will allocate from, and will
++  uniquely identify it in a given platform;
++
++- Doesn't use implementation details, such as the allocator;
++
++- Can describe intended usage.
++
++For example, assuming a platform with a reserved memory region located
++at the RAM address 0x42000000, intended to allocate video framebuffers,
++and backed by the CMA kernel allocator. Good names would be
++`memory@42000000` or `video@42000000`, but `cma-video` wouldn't.
 
-Same here... except that this should be blk API and entire function gets
-smaller.
-
-> +	}
-> +
-> +	/* Initialize core 0 (top) */
-> +	err = rocket_core_init(&rdev->cores[0]);
-> +	if (err)
-> +		return err;
-> +
-> +	return 0;
-> +}
-
-...
-
-> +static int rocket_device_runtime_resume(struct device *dev)
-> +{
-> +	struct rocket_device *rdev = dev_get_drvdata(dev);
-> +	int core = find_core_for_dev(dev);
-> +	int err = 0;
-> +
-> +	if (core < 0)
-> +		return -ENODEV;
-> +
-> +	if (core == 0) {
-> +		err = clk_prepare_enable(rdev->clk_npu);
-> +		if (err) {
-> +			dev_err(dev, "clk_prepare_enable failed %d for clock npu\n", err);
-> +			return err;
-> +		}
-> +
-> +		err = clk_prepare_enable(rdev->pclk);
-> +		if (err) {
-> +			dev_err(dev, "clk_prepare_enable failed %d for clock pclk\n", err);
-> +			goto error_clk_npu;
-> +		}
-> +	}
-> +
-> +	err = clk_prepare_enable(rdev->cores[core].a_clk);
-> +	if (err) {
-> +		dev_err(dev, "clk_prepare_enable failed %d for a_clk in core %d\n", err, core);
-> +		goto error_pclk;
-> +	}
-> +
-> +	err = clk_prepare_enable(rdev->cores[core].h_clk);
-> +	if (err) {
-> +		dev_err(dev, "clk_prepare_enable failed %d for h_clk in core %d\n", err, core);
-> +		goto error_a_clk;
-> +	}
-
-All four above calls could be just one call with bulk API.
-
-> +
-> +	return 0;
-> +
-> +error_a_clk:
-> +	clk_disable_unprepare(rdev->cores[core].a_clk);
-> +
-> +error_pclk:
-> +	if (core == 0)
-> +		clk_disable_unprepare(rdev->pclk);
-> +
-> +error_clk_npu:
-> +	if (core == 0)
-> +		clk_disable_unprepare(rdev->clk_npu);
-
-And all this would be gone...
-
-> +
-> +	return err;
+---
+base-commit: 92a09c47464d040866cf2b4cd052bc60555185fb
+change-id: 20250520-dma-buf-heap-names-doc-31261aa0cfe6
 
 Best regards,
-Krzysztof
+-- 
+Maxime Ripard <mripard@kernel.org>
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
