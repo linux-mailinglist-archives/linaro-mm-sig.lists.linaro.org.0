@@ -2,79 +2,187 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id B832EABECA4
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 May 2025 09:03:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E588ABECD2
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 May 2025 09:13:37 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id CBFE3443B5
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 May 2025 07:03:01 +0000 (UTC)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
-	by lists.linaro.org (Postfix) with ESMTPS id 7394240C9D
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 21 May 2025 07:02:50 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 518A4443BC
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 May 2025 07:13:36 +0000 (UTC)
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com (mail-bn8nam11on2066.outbound.protection.outlook.com [40.107.236.66])
+	by lists.linaro.org (Postfix) with ESMTPS id 3C76140C9D
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 21 May 2025 07:13:26 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=ckmoVOQJ;
-	spf=pass (lists.linaro.org: domain of krzk@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=krzk@kernel.org;
-	dmarc=pass (policy=quarantine) header.from=kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by tor.source.kernel.org (Postfix) with ESMTP id D3A22629D5;
-	Wed, 21 May 2025 07:02:49 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EE7A7C4CEE4;
-	Wed, 21 May 2025 07:02:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1747810969;
-	bh=rJJFudt4I3SK/FsUgWrU4RNF8V2zQbKq65qLzlHHtm0=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=ckmoVOQJAGhQ8RMwu7LGRHDrCdz1GrlTq7wOzvcIhVeLgKay8aWoyL3zOVUW3kMTn
-	 AwfdR3bMdRPJU2ET5Zv35oJ4S0+zo3jC2l1cKYZ6FJ4Zg54FYZ9JHed0VLFIHQJ6Ep
-	 jF4REK8QkUWaAbii5lK7sVFNXbU99il8vftx/IRKGOOS13Psb2VsbDXriYc2E2fcVt
-	 wZUDrWohnrLd5rJfgnDXh9A07yVFMpe5QvR9DqzbxbJyOs+Q/1X5HfQ535jmyNKw1w
-	 zADXuuYXI6rVDvvR8rwd70tH6HVRF6S3tNc1P5otdpD4DBLv9uiAc34zr5HHdhOGTU
-	 LaiBf0yTaSPbA==
-Date: Wed, 21 May 2025 09:02:46 +0200
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Tomeu Vizoso <tomeu@tomeuvizoso.net>
-Message-ID: <20250521-able-heretic-starfish-ff51c4@kuoka>
-References: <20250520-6-10-rocket-v5-0-18c9ca0fcb3c@tomeuvizoso.net>
- <20250520-6-10-rocket-v5-1-18c9ca0fcb3c@tomeuvizoso.net>
+	dkim=pass header.d=amd.com header.s=selector1 header.b=ZMPD0nZ1;
+	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.107.236.66 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
+	dmarc=pass (policy=quarantine) header.from=amd.com;
+	arc=pass ("microsoft.com:s=arcselector10001:i=1")
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Jv1EWIg7JeSQaN/WcLgyUAcEH+1fMcqCLDurit9wjtqhr3+EwIlgPPBqYlwPERC0Qfe+seLHsZzUeR1Nyj24F9k2cYfEvjJH99N3TSkZSOYzTe5oksxKEGExH+tNfJ01MYQy7Vx2HkaKfKO22o74ABi6JowUZXd/XygCPXVi9iXUcnwS0waRd9ovl2Fnx0W9Lxd/SpXuHmROKHkHZ1uhegfug0AOqk2Fk3e79JQF1oG4SO0bgl4HNJWpDnxPI3Ps2MXs0jKktwzr1Zwr6SKZ4Yb/trE788ph1qcV8SXlKcDMsiB0FDghXW90z6gMY+kk/ZY4YTwYPIvz8YBxqBTPHw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=d3Zc+HE3zAeuA4amKvHN4n7m1wlVxVe1VnraaL1MD0E=;
+ b=VoU1MMAsXS6fywFSjEI+VRFsKcbpepzXFTc95HJeSFPeFPnk6Yj4fEyDMbww0PbiT4xnxC5s/8Kb3Gb+75dWsMpBiNLmHTKpUfPTKXNG37v547Hu92LYz/HXHXDaeblJVwDM9BVY8Ho+EwkeIh6n+AgHJnOGsuLKbXmROUExhDmiu2FQ4Z6DiTQKTXsGkYTYD9iBYAV/ELthl/BC52A7XLeoYIfvpCKXqNOMM8sQIK9DsE3P98Wd5ebwJfEzjX50qU57x7NPoDA7LT6RkoEg2B3DFhnv5f/CFuBesfDC8yOV9C2UlvaQWybP9pk1qhjkneahBpUCtPQQbYvdZumvHg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=d3Zc+HE3zAeuA4amKvHN4n7m1wlVxVe1VnraaL1MD0E=;
+ b=ZMPD0nZ1WMBJzppQ/jYnAAUxh+Jok3MuDhMhzs4smQ8o1MvVVUci0jQ6UGk0XG2oKnetCPn29Ifz6IL5q994qMwqAPfmY1VjdMYlkOz0zX+zqs8T7ilLEAapXI+GuHFmwpZDJUFg/V6YNlSLUzGyzgU08Kiv40bczB36nKN+Zco=
+Received: from PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
+ by LV3PR12MB9265.namprd12.prod.outlook.com (2603:10b6:408:215::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8746.30; Wed, 21 May
+ 2025 07:13:24 +0000
+Received: from PH7PR12MB5685.namprd12.prod.outlook.com
+ ([fe80::46fb:96f2:7667:7ca5]) by PH7PR12MB5685.namprd12.prod.outlook.com
+ ([fe80::46fb:96f2:7667:7ca5%7]) with mapi id 15.20.8722.031; Wed, 21 May 2025
+ 07:13:24 +0000
+Message-ID: <dffbd709-def0-47af-93ff-a48686f04153@amd.com>
+Date: Wed, 21 May 2025 09:13:15 +0200
+User-Agent: Mozilla Thunderbird
+To: Jens Wiklander <jens.wiklander@linaro.org>, linux-kernel@vger.kernel.org,
+ linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linaro-mm-sig@lists.linaro.org, op-tee@lists.trustedfirmware.org,
+ linux-arm-kernel@lists.infradead.org
+References: <20250520152436.474778-1-jens.wiklander@linaro.org>
+ <20250520152436.474778-3-jens.wiklander@linaro.org>
+Content-Language: en-US
+From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+In-Reply-To: <20250520152436.474778-3-jens.wiklander@linaro.org>
+X-ClientProxiedBy: BL1PR13CA0019.namprd13.prod.outlook.com
+ (2603:10b6:208:256::24) To PH7PR12MB5685.namprd12.prod.outlook.com
+ (2603:10b6:510:13c::22)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20250520-6-10-rocket-v5-1-18c9ca0fcb3c@tomeuvizoso.net>
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|LV3PR12MB9265:EE_
+X-MS-Office365-Filtering-Correlation-Id: b432b7d6-730f-484e-d195-08dd9836f9f2
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|366016|7416014|1800799024|376014|7053199007;
+X-Microsoft-Antispam-Message-Info: 
+	=?utf-8?B?dnRTOGUvTnRPR0lQQUs5eWpLaXlxdjM4Z3VtYk5pMHl6bUtoL1V2dk5SV2Uz?=
+ =?utf-8?B?RnlNTW5tWi9ibXNLM3hVclNwNjRra1MycFR5aVVqUk5MeFkvNUs4N2R0WU0z?=
+ =?utf-8?B?enU2N0JUTlNCUW5WaE12L1NNdGdkaHpUSEt2M2ZVVGg2b1AxMnY5MkdoeGcv?=
+ =?utf-8?B?UFJRRjVEWVJFTCtmRE5WNUZRbm8yTU5Uc0gwUFNMcTltczQrVXBaRHN4T0Uv?=
+ =?utf-8?B?Z3dCRjlteGZnaW5McGZLWTNIWkZCUTcveWRIdE4veSs4ZnducGozT3dEcVhG?=
+ =?utf-8?B?UHVUY3hjK1ltOGkvS3AxVWZzTTFBaWZLc3pyeGdZYU84anBRTUlFcEs3bCs1?=
+ =?utf-8?B?bHlhK21PSmRkOEFNK0JqcGRiQVYzZXQ1Snh4YkdZOSsvZjZFRUtNUjdEeUV0?=
+ =?utf-8?B?d21BOEZQV3B4MEczSnM2ckxtS3R6a1BBUXYwSTNvRlloNGo5MGJlalhKejN1?=
+ =?utf-8?B?SHlUbWxvOUkzcDNBNHd0Ti9YZk9jMk4wZXlGdkxsTG51NXJrbGF5SnA5L2lL?=
+ =?utf-8?B?M01nR25KZXVkTit0eDNtc3B3U1VTVlpIUWhhTGwwQlBmYVhnQmliYWJzRWth?=
+ =?utf-8?B?YXl2QkQrYVNaRmpCcVRKMjNMUW5UNURwMnRlM29JQlJ6RGs2dUp0aFVhSENX?=
+ =?utf-8?B?K1NZSWRYMUhxT0puNFIwdjVEZWwxNWpXMkNmTnY3c2wrL2NFYUFpZVlRQ2h1?=
+ =?utf-8?B?Q1I0bWladko4MnRwZlE2b3VTT2lpZVgyUmpoVGxXa3BlTEgrVU1oRmdteTVi?=
+ =?utf-8?B?cXFPMG5ybEpWa1ZZQlRCK0RnWkhNS05odzdZNk9wRkR5MERDU2k1ZzRjdzl6?=
+ =?utf-8?B?ZlYwUWhqV1pVa2U5ZUxPU21DeXN5b1UzMTRPK3B6alZLb2YrdDI1RnVBcXk0?=
+ =?utf-8?B?bGttcnNYdnQ2NldxWkVjcjhJMXB3U3cvME5MRkU3MlhHK1pNK1BCZTZaMktS?=
+ =?utf-8?B?N0xDdElVdjRjSy96eHpiNkUvQzh5UG4xZzFHbCtZWFloalRBMWxrRmFmcmh3?=
+ =?utf-8?B?U29haklvNWR1WUZRSXpBaURLeFpHNVJPWE5MQU52Rk5wbzNhRXk4d0VmYWM4?=
+ =?utf-8?B?MU5OSFpXUlZJK0VaWnEyNElSUmFYTjFacUNuZDVKazVEdXhaU3JRcXZUM1lR?=
+ =?utf-8?B?KzhpazdYZzVnSDV3T2tCSTZrcnNneWM0NHkrcHJMZ1ZHbzBtNVVQOVlOQ2N6?=
+ =?utf-8?B?OTBwSDFqQzZSOXRaSjZpc2RJZE9EWllTc1ZDV3hmZVRZVEFKQm1xVk1Vbmd2?=
+ =?utf-8?B?VTNUM2hLaTBhcHRrc291N3BrMDNEdER4OTBCeldQeXovdldJUTdBUmhSMGww?=
+ =?utf-8?B?OWZIOXp1T1I4dEJEMERla2lFTVJsV1c3QlhxSFBmZk1UeGJSazZMVkdzZGIw?=
+ =?utf-8?B?bUFIWGM0dTV0YXFIQkY5cFNjUnF4QnVIMUZiNmIxT3o5YVJTUVdEbkE3V0Zs?=
+ =?utf-8?B?UHU0WDM1SDhHcGFaeGIxU3grbkhNYVU0T3lDbUZRVGFweXQwUDUxUzRmemJq?=
+ =?utf-8?B?TXBzTXp0OXFOSU1hUTVQS3ZMaFdmSy94S2RlVkhmeXlYVVVKdzI3YXZmTmVT?=
+ =?utf-8?B?c3JaL1dham9IeEYrYml4U0hoVjBjMVlSSno0TDRrT0pnaDcrNUltdXFlWFR6?=
+ =?utf-8?B?YnlLMmV6ZFJJRHJyN0FFazdZcUxtWVg4N0E3b0ovSU9Sbyt2Uk1iRFVxVEZo?=
+ =?utf-8?B?M3d0SDVkWGJtOWhjelNCVDFUR3RCRUY4SG04NHZLMG5OVWg4aU92OHBGb1Yz?=
+ =?utf-8?B?eEdaK3VQMHZtU1RCd3VvTjA1YUhNdmNFZ1hnVUVabVFub3IxQkdyN2xqRmZw?=
+ =?utf-8?B?b1JOQWtOSC91TXY1UjVDVHhaaFBDcUg0cm1oWVlPcXV1OGRxQmNxb3FQTi9o?=
+ =?utf-8?B?Qk9MQmZXYXh5VlRJeG11UDBNYXJDL29QNEpjK1FFRG9icFNoMThnbnNKd1JB?=
+ =?utf-8?Q?2ilKW+T7N30=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB5685.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(7416014)(1800799024)(376014)(7053199007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?NEFtTll2amExZEpNU3R2dHBSeGRLbVg2S1Vla0hzTjNpUG5wL09wd2NtbVNn?=
+ =?utf-8?B?b0xidDVwOWVId2svQjBNZ00xMFR1K2VlY2l5bHprbUdYa00ybUY2T0JXQmdm?=
+ =?utf-8?B?UllKMFc0UDNHUUJUT25rK2h4WkF4OVVMTjJYOE8zUTBpOXliYkhoSU1rS202?=
+ =?utf-8?B?M2x2eVp1UG5Sc1lxQjFDZTA5Q2p4aWlaL3RFM29Qc1ErL1pVQWJrSWRNNndH?=
+ =?utf-8?B?TkJQWHlXdVk3aFd5bVJCR3Q3cmpPVlEzQytPTi9WQWc4NnkrY2d2K3lOTWdi?=
+ =?utf-8?B?VTlBYmJ4dzlzM252WkdWSFVCVnR5N3JkWENwY28wWnNYZjFuUThnRkFycXNE?=
+ =?utf-8?B?QUFXUDd3WmJzMWwrY1oxbXp6RmtSQlFLanh3VkVySlRROGxpaDJhZTRKU2JT?=
+ =?utf-8?B?c3lpRGw4aS93cjh6ZU8xZzZRQmhuRkp4cEV4NG02YVhTN3FFQ1ZQQ0RsRFl2?=
+ =?utf-8?B?K2ZGaFZVNmlrT2dna3NpM0M4K2pTbkVkSUNLZHIycjFKNzllRkdjRUtIWTVJ?=
+ =?utf-8?B?c2tpY2wzOHNSN09XTnBTRHh3Z3lPV2N0MGQ3MmViMUZkY3ZrQW5XOWNuSTVE?=
+ =?utf-8?B?WlVZaVR4eENyaTNLUlBLaENvYk51VHZqTUpDdXM5YnA2SGNZVjhzazBoeStZ?=
+ =?utf-8?B?TmhMVmFUTE9iOXZJWHYrMGRxbDBGdE5zSEZvdXQvd3N2a2NEeDdLcDdIS0Fs?=
+ =?utf-8?B?blU2NDFuM1pKUzJNVjNDb2dFbTdtd0ZreUdqUU9zbGw4K09Ia1c4TzRCcHYz?=
+ =?utf-8?B?YnhmY2dka255NldUQktDMVhHOTJmS2pNdHlkUGQ2UFhPOWpKbUs1YWdZT2Q2?=
+ =?utf-8?B?bjRnL0JoTFhxd00vZitFSGh1dytCa2hybndMMk9DRko1K1RlWEc2SDAwei9u?=
+ =?utf-8?B?VWxXeHVwR2p6aVEya0lCa29KWUN3aENBcFFCVDcrdW5xZU5kTkUzSDNHcDd1?=
+ =?utf-8?B?eEcxVmxCNjVBbGNnM0hDbUgzeDRGNjN3aWxEelJudWVpdEkwVHFOdUZEWXMr?=
+ =?utf-8?B?QWtSY21wVWxvK2V4WUx6ajlzYkVzQU9tcmFUYVBZWUlRUXBiaWxCeHVMckFt?=
+ =?utf-8?B?czZWQ1pGQzhjS0s1eW5YZUptSEY2ZmhnbkhMcWxPdEtKS2Nia2hwWndlVFVN?=
+ =?utf-8?B?anRxTWtKQk96UVhIeHRaZDYvZFRUb0RJYjU3aXU0akpZQ0U2MGFnWHlKUHY3?=
+ =?utf-8?B?enBQMVYrQklpVGdlWms2Y2dvOGVaeXpjL05pbnFsOHg4N1VNbSt6cWNjZHM4?=
+ =?utf-8?B?MmxWMlBaN3dLS3ZJcXRmVXcwU1VoYkZQS2MrMEhHTUV5aTE2UGJ0TmxxcDg3?=
+ =?utf-8?B?QUVKMEo0ZFZiUlN6Qjc5bnNVL3ArYjN0MGNhcExCTW5rN05DVDFJcHpISExB?=
+ =?utf-8?B?WmE4ZkM2WVl1MUJDVXd4UzFTNnVINjRhdkJweU84N1FQT29BYTZxVDFnUUxk?=
+ =?utf-8?B?OE8rS1BXaHJFaWpaOC9lM0dXdlBnT3h3QXprVWxiZklzWHgraFdkTU1zcG1G?=
+ =?utf-8?B?MWsyWXM5b0lIRThRSmxybXdFRmdBTzBuZnhhUmRUaFVCYXVzbGFWQ3BQNUZR?=
+ =?utf-8?B?NW1LQVBJc0dYcXgrVWZwQ3JpNUtYYVpLZ3JISktaMGI4VTkrL1BCa3RLVVF1?=
+ =?utf-8?B?SWVUeDlGUTNjQXBER0NwRVF1S1FRcVhuRG9UajdtNXdIVU1DYXZxcW5wN296?=
+ =?utf-8?B?aXcrbk0zbUpRNUM0VkpvZFB6YnpGS1M4c1FWOHpRR09XT0JSbWR0YWx5anN6?=
+ =?utf-8?B?Ny9jVFlHYnVHSnRuSnZ3RU0xb0NETWhwK3h2QS8wMjRWRVdBdkFZajZmdXRm?=
+ =?utf-8?B?Rkc4TVpFTE45eFRhVGplK3VUa2R5bnRxUktPRmlSOHFrdHNBd0FyVnRDRElI?=
+ =?utf-8?B?N05FRlJTc3JJWThRbk4yekcreFBUMG14RUVteG44N2VkTWl4TFFhTUpEL3I2?=
+ =?utf-8?B?TWlTUjVOalAvZUFrS2Z2b0VUNmhUTFZZdkpkTml5RU4razZDMHBKemd4M0xz?=
+ =?utf-8?B?emVhK2p1RlAwYVovS1N1S0pmNkdPYmlHUDlMajF6S0NKd0xvbWFISXd4Y2JG?=
+ =?utf-8?B?QThab2l3VktHdHh3ZE9hU3lJVDBNOExMRmw1dWhxSFFReG1mWjFmQmhLTkJB?=
+ =?utf-8?Q?RxSX+MkQzmKgvnsEN5eADA5vV?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b432b7d6-730f-484e-d195-08dd9836f9f2
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5685.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 May 2025 07:13:24.7140
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: AZF1vLwbmgYxMBouhf12MpMjocBBsILmHK9i+/9wB9Ppv/Dk3+HFxxGFosx+z7KO
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR12MB9265
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Spamd-Result: default: False [-1.98 / 15.00];
-	BAYES_HAM(-2.98)[99.92%];
+X-Spamd-Result: default: False [-7.50 / 15.00];
+	REPLY(-4.00)[];
+	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.4.254];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector10001:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
+	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
 	MIME_GOOD(-0.10)[text/plain];
-	ASN(0.00)[asn:63949, ipnet:172.105.0.0/19, country:SG];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[25];
-	MIME_TRACE(0.00)[0:+];
-	MISSING_XM_UA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TAGGED_RCPT(0.00)[dt];
-	FREEMAIL_CC(0.00)[kernel.org,sntech.de,lwn.net,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,collabora.com,oss.qualcomm.com,vger.kernel.org,lists.infradead.org,lists.freedesktop.org,lists.linaro.org];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	TO_DN_SOME(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+]
-X-Rspamd-Queue-Id: 7394240C9D
-X-Spamd-Bar: -
-Message-ID-Hash: VI3AZZRUZUGKF26GDXEFYZ34KUGAXAS7
-X-Message-ID-Hash: VI3AZZRUZUGKF26GDXEFYZ34KUGAXAS7
-X-MailFrom: krzk@kernel.org
+	FREEMAIL_CC(0.00)[nxp.com,gmail.com,mediatek.com,linaro.org,collabora.com,arm.com,google.com,kernel.org,qti.qualcomm.com,ffwll.ch,fooishbar.org];
+	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
+	RCPT_COUNT_TWELVE(0.00)[22];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_TWO(0.00)[2];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.236.66:from];
+	FROM_EQ_ENVFROM(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	TAGGED_RCPT(0.00)[];
+	TO_DN_SOME(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	DKIM_TRACE(0.00)[amd.com:+]
+X-Rspamd-Queue-Id: 3C76140C9D
+X-Spamd-Bar: -------
+Message-ID-Hash: Y2R5RVPUSCMZXX33673E745MDVKVJQIH
+X-Message-ID-Hash: Y2R5RVPUSCMZXX33673E745MDVKVJQIH
+X-MailFrom: Christian.Koenig@amd.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Heiko Stuebner <heiko@sntech.de>, Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Sebastian Reichel <sebastian.reichel@collabora.com>, Nicolas Frattaroli <nicolas.frattaroli@collabora.com>, Jeff Hugo <jeff.hugo@oss.qualcomm.com>, devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+CC: Olivier Masse <olivier.masse@nxp.com>, Thierry Reding <thierry.reding@gmail.com>, Yong Wu <yong.wu@mediatek.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T . J . Mercier" <tjmercier@google.com>, Sumit Garg <sumit.garg@kernel.org>, Matthias Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, azarrabi@qti.qualcomm.com, Simona Vetter <simona.vetter@ffwll.ch>, Daniel Stone <daniel@fooishbar.org>, Rouven Czerwinski <rouven.czerwinski@linaro.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v5 01/10] dt-bindings: npu: rockchip,rknn: Add bindings
+Subject: [Linaro-mm-sig] Re: [PATCH v9 2/9] dma-buf: dma-heap: export declared functions
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VI3AZZRUZUGKF26GDXEFYZ34KUGAXAS7/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/Y2R5RVPUSCMZXX33673E745MDVKVJQIH/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -84,39 +192,50 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Tue, May 20, 2025 at 12:26:54PM GMT, Tomeu Vizoso wrote:
-> Add the bindings for the Neural Processing Unit IP from Rockchip.
-> 
-> v2:
-> - Adapt to new node structure (one node per core, each with its own
->   IOMMU)
-> - Several misc. fixes from Sebastian Reichel
-> 
-> v3:
-> - Split register block in its constituent subblocks, and only require
->   the ones that the kernel would ever use (Nicolas Frattaroli)
-> - Group supplies (Rob Herring)
-> - Explain the way in which the top core is special (Rob Herring)
-> 
-> v4:
-> - Change required node name to npu@ (Rob Herring and Krzysztof Kozlowski)
-> - Remove unneeded items: (Krzysztof Kozlowski)
-> - Fix use of minItems/maxItems (Krzysztof Kozlowski)
-> - Add reg-names to list of required properties (Krzysztof Kozlowski)
-> - Fix example (Krzysztof Kozlowski)
-> 
-> v5:
-> - Rename file to rockchip,rk3588-rknn-core.yaml (Krzysztof Kozlowski)
-> - Streamline compatible property (Krzysztof Kozlowski)
-> 
+On 5/20/25 17:16, Jens Wiklander wrote:
+> Export the dma-buf heap functions declared in <linux/dma-heap.h>.
 
-This is a big patchset, so please slow down and do not send it every day
-but allow people to actually review the version you post.
+That is what this patch does and that should be obvious by looking at it. You need to explain why you do this.
 
-Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+Looking at the rest of the series it's most likely ok, but this commit message should really be improved.
 
-Best regards,
-Krzysztof
+Regards,
+Christian.
+
+> 
+> Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
+> ---
+>  drivers/dma-buf/dma-heap.c | 3 +++
+>  1 file changed, 3 insertions(+)
+> 
+> diff --git a/drivers/dma-buf/dma-heap.c b/drivers/dma-buf/dma-heap.c
+> index 3cbe87d4a464..cdddf0e24dce 100644
+> --- a/drivers/dma-buf/dma-heap.c
+> +++ b/drivers/dma-buf/dma-heap.c
+> @@ -202,6 +202,7 @@ void *dma_heap_get_drvdata(struct dma_heap *heap)
+>  {
+>  	return heap->priv;
+>  }
+> +EXPORT_SYMBOL(dma_heap_get_drvdata);
+>  
+>  /**
+>   * dma_heap_get_name - get heap name
+> @@ -214,6 +215,7 @@ const char *dma_heap_get_name(struct dma_heap *heap)
+>  {
+>  	return heap->name;
+>  }
+> +EXPORT_SYMBOL(dma_heap_get_name);
+>  
+>  /**
+>   * dma_heap_add - adds a heap to dmabuf heaps
+> @@ -303,6 +305,7 @@ struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_info)
+>  	kfree(heap);
+>  	return err_ret;
+>  }
+> +EXPORT_SYMBOL(dma_heap_add);
+>  
+>  static char *dma_heap_devnode(const struct device *dev, umode_t *mode)
+>  {
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
