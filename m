@@ -2,126 +2,128 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id A35EEAC560B
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 27 May 2025 19:17:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4DCF3AC5468
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 27 May 2025 19:00:15 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id BB5534600B
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 27 May 2025 17:17:12 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 6B78345FEB
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 27 May 2025 17:00:14 +0000 (UTC)
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id F17EC45FF5
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 27 May 2025 17:17:00 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 026E745594
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 27 May 2025 17:00:03 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=linuxfoundation.org header.s=korg header.b=NNg+bJxU;
-	spf=pass (lists.linaro.org: domain of gregkh@linuxfoundation.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=gregkh@linuxfoundation.org;
-	dmarc=pass (policy=none) header.from=linuxfoundation.org
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=iSArvkHK;
+	spf=pass (lists.linaro.org: domain of patchwork-bot+netdevbpf@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=patchwork-bot+netdevbpf@kernel.org;
+	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by dfw.source.kernel.org (Postfix) with ESMTP id 88E695C3DD6;
-	Tue, 27 May 2025 17:14:43 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7D13EC4CEEB;
-	Tue, 27 May 2025 17:16:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-	s=korg; t=1748366220;
-	bh=rXR+j7SzkBphvPCQmVf0AQbUzKSDcaE0HgfxPMuKOsI=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=NNg+bJxUOAt/PcwQYa/noEn0OWxych4EvIChVQ67RktpCrXiU09rgXyZgKCMj61/B
-	 yB7URlKSEYR/BqFJNXFZ0BkmIDjn55P+414KAhI5N8sX02Ml1CKg1L5TajXRO9is+A
-	 z5PoTN4te78iJMdKFp+qNmsBU8Hy9AhV69ZeEIvI=
-From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To: stable@vger.kernel.org
-Date: Tue, 27 May 2025 18:28:39 +0200
-Message-ID: <20250527162510.435633025@linuxfoundation.org>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250527162445.028718347@linuxfoundation.org>
-References: <20250527162445.028718347@linuxfoundation.org>
-User-Agent: quilt/0.68
-X-stable: review
-X-Patchwork-Hint: ignore
+	by dfw.source.kernel.org (Postfix) with ESMTP id 6FCE35C57BA;
+	Tue, 27 May 2025 16:57:45 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0F63BC4CEEB;
+	Tue, 27 May 2025 17:00:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1748365202;
+	bh=YZ2oMVULHYa93hhilrUAyynPEjoYTyfzy2z4lPIc7Tg=;
+	h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
+	b=iSArvkHKnbdfsIqUw+stBXLTL/Ke5U83Hr/h23PCKH2twhwaBkubimAvx+taEjhT+
+	 17GlrF1mNeJ2qOU1eeQFgusqyTP1WRXOw7wtddnqrTKjnZLZXhJ4GxmKoP6fqH3adF
+	 0z2L9LzHN+9Vy5fTKrqM/7c9uzziOcOKJ0MDEdzdO1qPK+X3ASzCKvacfPGOisD9+F
+	 WKAGBUN79iYYo5BVjEit65FIDLp3Sp67mhiw4T5Bvx6D2IFu+Tqb3fSiLcz5O4kK1n
+	 /YBV1WAXRqBb0V/YcRRV6HLwvAO05G2KHwpnU0EdoV5jkVxUdL9tc1RSwrXhIv1HM4
+	 U6NdPKaAX22tg==
+Received: from [10.30.226.235] (localhost [IPv6:::1])
+	by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id 7228D380AAE2;
+	Tue, 27 May 2025 17:00:37 +0000 (UTC)
 MIME-Version: 1.0
+From: patchwork-bot+netdevbpf@kernel.org
+Message-Id: 
+ <174836523626.1711047.17059127767778339738.git-patchwork-notify@kernel.org>
+Date: Tue, 27 May 2025 17:00:36 +0000
+References: <20250522230429.941193-1-tjmercier@google.com>
+In-Reply-To: <20250522230429.941193-1-tjmercier@google.com>
+To: T.J. Mercier <tjmercier@google.com>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Spamd-Result: default: False [-8.00 / 15.00];
-	REPLY(-4.00)[];
-	BAYES_HAM(-3.00)[100.00%];
-	DMARC_POLICY_ALLOW(-0.50)[linuxfoundation.org,none];
+X-Spamd-Result: default: False [-2.50 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
+	SUSPICIOUS_RECIPS(1.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
-	R_DKIM_ALLOW(-0.20)[linuxfoundation.org:s=korg];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MIME_GOOD(-0.10)[text/plain];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
-	RCPT_COUNT_TWELVE(0.00)[17];
+	MIME_TRACE(0.00)[0:+];
+	FROM_NO_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[26];
+	TAGGED_RCPT(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[linuxfoundation.org,lists.linux.dev,suse.de,163.com,redhat.com,amd.com,linux.intel.com,kernel.org,gmail.com,ffwll.ch,linaro.org,lists.freedesktop.org,vger.kernel.org,lists.linaro.org,collabora.com];
-	TO_DN_SOME(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
+	FREEMAIL_CC(0.00)[linaro.org,amd.com,kernel.org,iogearbox.net,linux.dev,linuxfoundation.org,gmail.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,google.com,ffwll.ch,fomichev.me,fb.com];
+	MISSING_XM_UA(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DKIM_TRACE(0.00)[linuxfoundation.org:+]
-X-Rspamd-Queue-Id: F17EC45FF5
-X-Spamd-Bar: --------
-Message-ID-Hash: RRURUGTG77MXPVZXHIPPDOSMTISKFXPP
-X-Message-ID-Hash: RRURUGTG77MXPVZXHIPPDOSMTISKFXPP
-X-MailFrom: gregkh@linuxfoundation.org
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, patches@lists.linux.dev, Thomas Zimmermann <tzimmermann@suse.de>, Andy Yan <andyshrk@163.com>, Anusha Srivatsa <asrivats@redhat.com>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Boris Brezillon <boris.brezillon@collabora.com>, Simona Vetter <simona.vetter@ffwll.ch>
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[netdevbpf];
+	RCVD_COUNT_THREE(0.00)[3];
+	DKIM_TRACE(0.00)[kernel.org:+]
+X-Rspamd-Queue-Id: 026E745594
+X-Spamd-Bar: --
+Message-ID-Hash: PRWVEOFHHZWVFGMFD7BGEHFN5DLVO6JS
+X-Message-ID-Hash: PRWVEOFHHZWVFGMFD7BGEHFN5DLVO6JS
+X-MailFrom: patchwork-bot+netdevbpf@kernel.org
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: sumit.semwal@linaro.org, christian.koenig@amd.com, ast@kernel.org, daniel@iogearbox.net, andrii@kernel.org, martin.lau@linux.dev, skhan@linuxfoundation.org, alexei.starovoitov@gmail.com, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, bpf@vger.kernel.org, linux-kselftest@vger.kernel.org, android-mm@google.com, simona@ffwll.ch, eddyz87@gmail.com, yonghong.song@linux.dev, john.fastabend@gmail.com, kpsingh@kernel.org, sdf@fomichev.me, jolsa@kernel.org, mykolal@fb.com, shuah@kernel.org, song@kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 6.12 626/626] drm/gem: Internally test import_attach for imported objects
+Subject: [Linaro-mm-sig] Re: [PATCH bpf-next v7 0/5] Replace CONFIG_DMABUF_SYSFS_STATS with BPF
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RRURUGTG77MXPVZXHIPPDOSMTISKFXPP/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AJ7BW5QVSYQNTWIWDP6TMLX2B3CLJNGF/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-Ni4xMi1zdGFibGUgcmV2aWV3IHBhdGNoLiAgSWYgYW55b25lIGhhcyBhbnkgb2JqZWN0aW9ucywg
-cGxlYXNlIGxldCBtZSBrbm93Lg0KDQotLS0tLS0tLS0tLS0tLS0tLS0NCg0KRnJvbTogVGhvbWFz
-IFppbW1lcm1hbm4gPHR6aW1tZXJtYW5uQHN1c2UuZGU+DQoNCmNvbW1pdCA4MjYwNzMxY2NhZDA0
-NTEyMDdiNDU4NDRiYjY2ZWIxNjFhMjA5MjE4IHVwc3RyZWFtLg0KDQpUZXN0IHN0cnVjdCBkcm1f
-Z2VtX29iamVjdC5pbXBvcnRfYXR0YWNoIHRvIGRldGVjdCBpbXBvcnRlZCBvYmplY3RzLg0KDQpE
-dXJpbmcgb2JqZWN0IGNsZW5hbnVwLCB0aGUgZG1hX2J1ZiBmaWVsZCBtaWdodCBiZSBOVUxMLiBU
-ZXN0aW5nIGl0IGluDQphbiBvYmplY3QncyBmcmVlIGNhbGxiYWNrIHRoZW4gaW5jb3JyZWN0bHkg
-ZG9lcyBhIGNsZWFudXAgYXMgZm9yIG5hdGl2ZQ0Kb2JqZWN0cy4gSGFwcGVucyBmb3IgY2FsbHMg
-dG8gZHJtX21vZGVfZGVzdHJveV9kdW1iX2lvY3RsKCkgdGhhdA0KY2xlYXJzIHRoZSBkbWFfYnVm
-IGZpZWxkIGluIGRybV9nZW1fb2JqZWN0X2V4cG9ydGVkX2RtYV9idWZfZnJlZSgpLg0KDQp2MzoN
-Ci0gb25seSB0ZXN0IGZvciBpbXBvcnRfYXR0YWNoIChCb3JpcykNCnYyOg0KLSB1c2UgaW1wb3J0
-X2F0dGFjaC5kbWFidWYgaW5zdGVhZCBvZiBkbWFfYnVmIChDaHJpc3RpYW4pDQoNClNpZ25lZC1v
-ZmYtYnk6IFRob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPg0KRml4ZXM6IGI1
-N2FhNDdkMzllOSAoImRybS9nZW06IFRlc3QgZm9yIGltcG9ydGVkIEdFTSBidWZmZXJzIHdpdGgg
-aGVscGVyIikNClJlcG9ydGVkLWJ5OiBBbmR5IFlhbiA8YW5keXNocmtAMTYzLmNvbT4NCkNsb3Nl
-czogaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvZHJpLWRldmVsLzM4ZDA5ZDM0LjQzNTQuMTk2Mzc5
-YWE1NjAuQ29yZW1haWwuYW5keXNocmtAMTYzLmNvbS8NClRlc3RlZC1ieTogQW5keSBZYW4gPGFu
-ZHlzaHJrQDE2My5jb20+DQpDYzogVGhvbWFzIFppbW1lcm1hbm4gPHR6aW1tZXJtYW5uQHN1c2Uu
-ZGU+DQpDYzogQW51c2hhIFNyaXZhdHNhIDxhc3JpdmF0c0ByZWRoYXQuY29tPg0KQ2M6IENocmlz
-dGlhbiBLw7ZuaWcgPGNocmlzdGlhbi5rb2VuaWdAYW1kLmNvbT4NCkNjOiBNYWFydGVuIExhbmto
-b3JzdCA8bWFhcnRlbi5sYW5raG9yc3RAbGludXguaW50ZWwuY29tPg0KQ2M6IE1heGltZSBSaXBh
-cmQgPG1yaXBhcmRAa2VybmVsLm9yZz4NCkNjOiBEYXZpZCBBaXJsaWUgPGFpcmxpZWRAZ21haWwu
-Y29tPg0KQ2M6IFNpbW9uYSBWZXR0ZXIgPHNpbW9uYUBmZndsbC5jaD4NCkNjOiBTdW1pdCBTZW13
-YWwgPHN1bWl0LnNlbXdhbEBsaW5hcm8ub3JnPg0KQ2M6ICJDaHJpc3RpYW4gS8O2bmlnIiA8Y2hy
-aXN0aWFuLmtvZW5pZ0BhbWQuY29tPg0KQ2M6IGRyaS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5v
-cmcNCkNjOiBsaW51eC1tZWRpYUB2Z2VyLmtlcm5lbC5vcmcNCkNjOiBsaW5hcm8tbW0tc2lnQGxp
-c3RzLmxpbmFyby5vcmcNClJldmlld2VkLWJ5OiBCb3JpcyBCcmV6aWxsb24gPGJvcmlzLmJyZXpp
-bGxvbkBjb2xsYWJvcmEuY29tPg0KUmV2aWV3ZWQtYnk6IFNpbW9uYSBWZXR0ZXIgPHNpbW9uYS52
-ZXR0ZXJAZmZ3bGwuY2g+DQpMaW5rOiBodHRwczovL2xvcmUua2VybmVsLm9yZy9yLzIwMjUwNDE2
-MDY1ODIwLjI2MDc2LTEtdHppbW1lcm1hbm5Ac3VzZS5kZQ0KU2lnbmVkLW9mZi1ieTogR3JlZyBL
-cm9haC1IYXJ0bWFuIDxncmVna2hAbGludXhmb3VuZGF0aW9uLm9yZz4NCi0tLQ0KIGluY2x1ZGUv
-ZHJtL2RybV9nZW0uaCB8ICAgIDMgKy0tDQogMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCsp
-LCAyIGRlbGV0aW9ucygtKQ0KDQotLS0gYS9pbmNsdWRlL2RybS9kcm1fZ2VtLmgNCisrKyBiL2lu
-Y2x1ZGUvZHJtL2RybV9nZW0uaA0KQEAgLTU4MCw4ICs1ODAsNyBAQCBzdGF0aWMgaW5saW5lIGJv
-b2wgZHJtX2dlbV9vYmplY3RfaXNfc2hhDQogICovDQogc3RhdGljIGlubGluZSBib29sIGRybV9n
-ZW1faXNfaW1wb3J0ZWQoY29uc3Qgc3RydWN0IGRybV9nZW1fb2JqZWN0ICpvYmopDQogew0KLQkv
-KiBUaGUgZG1hLWJ1ZidzIHByaXYgZmllbGQgcG9pbnRzIHRvIHRoZSBvcmlnaW5hbCBHRU0gb2Jq
-ZWN0LiAqLw0KLQlyZXR1cm4gb2JqLT5kbWFfYnVmICYmIChvYmotPmRtYV9idWYtPnByaXYgIT0g
-b2JqKTsNCisJcmV0dXJuICEhb2JqLT5pbXBvcnRfYXR0YWNoOw0KIH0NCiANCiAjaWZkZWYgQ09O
-RklHX0xPQ0tERVANCg0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3Rz
-LmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2ln
-LWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+Hello:
+
+This series was applied to bpf/bpf-next.git (master)
+by Alexei Starovoitov <ast@kernel.org>:
+
+On Thu, 22 May 2025 23:04:24 +0000 you wrote:
+> Until CONFIG_DMABUF_SYSFS_STATS was added [1] it was only possible to
+> perform per-buffer accounting with debugfs which is not suitable for
+> production environments. Eventually we discovered the overhead with
+> per-buffer sysfs file creation/removal was significantly impacting
+> allocation and free times, and exacerbated kernfs lock contention. [2]
+> dma_buf_stats_setup() is responsible for 39% of single-page buffer
+> creation duration, or 74% of single-page dma_buf_export() duration when
+> stressing dmabuf allocations and frees.
+> 
+> [...]
+
+Here is the summary with links:
+  - [bpf-next,v7,1/5] dma-buf: Rename debugfs symbols
+    https://git.kernel.org/bpf/bpf-next/c/89f9dba365e1
+  - [bpf-next,v7,2/5] bpf: Add dmabuf iterator
+    https://git.kernel.org/bpf/bpf-next/c/76ea95534995
+  - [bpf-next,v7,3/5] bpf: Add open coded dmabuf iterator
+    https://git.kernel.org/bpf/bpf-next/c/6eab7ac7c5ee
+  - [bpf-next,v7,4/5] selftests/bpf: Add test for dmabuf_iter
+    https://git.kernel.org/bpf/bpf-next/c/ae5d2c59ecd7
+  - [bpf-next,v7,5/5] selftests/bpf: Add test for open coded dmabuf_iter
+    https://git.kernel.org/bpf/bpf-next/c/7594dcb71ff8
+
+You are awesome, thank you!
+-- 
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
+
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
