@@ -2,292 +2,364 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 24603AD3415
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 10 Jun 2025 12:52:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2F4BBAD38A7
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 10 Jun 2025 15:16:49 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B992344958
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 10 Jun 2025 10:52:46 +0000 (UTC)
-Received: from NAM04-BN8-obe.outbound.protection.outlook.com (mail-bn8nam04on2078.outbound.protection.outlook.com [40.107.100.78])
-	by lists.linaro.org (Postfix) with ESMTPS id 472FA440F2
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 10 Jun 2025 10:52:31 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 150B5447EA
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 10 Jun 2025 13:16:48 +0000 (UTC)
+Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com [209.85.218.45])
+	by lists.linaro.org (Postfix) with ESMTPS id 3D3454446C
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 10 Jun 2025 13:16:10 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=amd.com header.s=selector1 header.b=3Gf0w0ks;
-	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.107.100.78 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
-	dmarc=pass (policy=quarantine) header.from=amd.com;
-	arc=pass ("microsoft.com:s=arcselector10001:i=1")
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=NTeQm6+PbjZ9YCmO2wYoGyM1qEqCCJHeA9aPXjSynRnCIH3efl4M/BOg5RyYkWfjdEqBupPERI7Sos/VTDjB0awLCvtQIR8toowjjof82NMf9atu9YPI7zIOk6/VLPqJ/eGZpYcmQkWYwLTwZTFYPYtpjq40rarPt+ihMEihaM2LQGvxMpSIZ7ASBs5+dgco25cYqdqhXhjj3vJaF7gNRy+ZByhVeT4Li8Zu/ZXOnwlyqgOXI0wRjOm4wKk3q7LaaLQY49oHgoUvEfE9VNutFeu9J+8KogyWIt68YkvaPe9OWDAdHOMiMvEl22OyGAWiUnzsTmed7FmB13cAzBO1dw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=BAoQKF8pPMAnmczas7f9JycgXT6NwEWd/h29qTHCt0Y=;
- b=RcgY/Jy8xbOekmunWkY49GdZA8jLYRIbeH4pwATABiYM8tqnFA/LsMy+6CWJrcpysUH+0Ry36EGlKA42c1c3XRT90/klU2XRiE/J2yNuFC3VcyO3ENrJp9fUUnxTxIpu/VUmiM0+DTkriM7qaojHh61fEuF89HvdamVyLTGYsb9dqc3LD/vaaYN5uavyQMUMm69x8Oifz9y1qjAEvzEwS2HYfhu5arEygyqwE9Pm0UfdxPpRoeCGdEICcmTIt5I4oB5NOnbRp1D1Mn6M/vmbvFhaL7swcD5qZ7xNYS5pX34aodDsItIBDnsmCdxWAKxOL477YjEMJdnSY5wslaK8HA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BAoQKF8pPMAnmczas7f9JycgXT6NwEWd/h29qTHCt0Y=;
- b=3Gf0w0kspSVR4ahNwYViUGGR5YOyfF5Pj4UGp2lUI1PA5p7RWxSps5WL2NKvUg8AReUR03ErOkPkqtntArmMtCho9miQSvmQLH169n7YDIplZMQFh8OCG0mikGyFzKa1hpqfQ/wMvlhyX5I5UzwZ129omzNLPM4oshsTmHozxX0=
-Received: from PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
- by MN2PR12MB4421.namprd12.prod.outlook.com (2603:10b6:208:26c::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8792.34; Tue, 10 Jun
- 2025 10:52:28 +0000
-Received: from PH7PR12MB5685.namprd12.prod.outlook.com
- ([fe80::46fb:96f2:7667:7ca5]) by PH7PR12MB5685.namprd12.prod.outlook.com
- ([fe80::46fb:96f2:7667:7ca5%7]) with mapi id 15.20.8722.031; Tue, 10 Jun 2025
- 10:52:28 +0000
-Message-ID: <d86a677b-e8a7-4611-9494-06907c661f05@amd.com>
-Date: Tue, 10 Jun 2025 12:52:18 +0200
-User-Agent: Mozilla Thunderbird
-To: wangtao <tao.wangtao@honor.com>, Christoph Hellwig <hch@infradead.org>
-References: <20250603095245.17478-1-tao.wangtao@honor.com>
- <aD7x_b0hVyvZDUsl@infradead.org>
- <09c8fb7c-a337-4813-9f44-3a538c4ee8b1@amd.com>
- <aD72alIxu718uri4@infradead.org> <5d36abace6bf492aadd847f0fabc38be@honor.com>
- <a766fbf4-6cda-43a5-a1c7-61a3838f93f9@amd.com>
- <aEZkjA1L-dP_Qt3U@infradead.org> <761986ec0f404856b6f21c3feca67012@honor.com>
-Content-Language: en-US
-From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-In-Reply-To: <761986ec0f404856b6f21c3feca67012@honor.com>
-X-ClientProxiedBy: BL6PEPF0001641A.NAMP222.PROD.OUTLOOK.COM
- (2603:10b6:22e:400:0:1004:0:6) To PH7PR12MB5685.namprd12.prod.outlook.com
- (2603:10b6:510:13c::22)
+	dkim=pass header.d=linaro.org header.s=google header.b=gD4HxxfG;
+	spf=pass (lists.linaro.org: domain of jens.wiklander@linaro.org designates 209.85.218.45 as permitted sender) smtp.mailfrom=jens.wiklander@linaro.org;
+	dmarc=pass (policy=none) header.from=linaro.org
+Received: by mail-ej1-f45.google.com with SMTP id a640c23a62f3a-ade48b24c97so449327266b.2
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 10 Jun 2025 06:16:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1749561369; x=1750166169; darn=lists.linaro.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Ri4++88KyCAFFBsQpRdzKdsThABD6WsDtwqnK7XpHl8=;
+        b=gD4HxxfG//ooiGbFgtxbHScPo1cgE06IiSbZIjQAuYhoZYI+P9yxhswsQwqr5LZjrT
+         pkjTF9pnSxNEf1Kw7ICqfMLCCQsV3dbv6plvBtxPeBo1CiB7GTYzz+p5mfR7nPB2dOF5
+         TOQjeOiD/pg+Smvq9qkM6JDCPz9TV2xkxISqTDfJa9VgC7qVjHcmzo861Cdq4uq8ew1e
+         lqUbIGoHfTOz1M6heHx7vMTxVGu1i3EtagO5TDp9AeiJofQf1+7izlqIvQ+/lm/lDkJz
+         CAd9Sfp1xht/EDZ1NQK904dt3PtmLw01hT4CAetL0SNyvzmagcrk0YwrZ4kRp8aYcwi/
+         jQ6w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1749561369; x=1750166169;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Ri4++88KyCAFFBsQpRdzKdsThABD6WsDtwqnK7XpHl8=;
+        b=jtnCeRUCHV1hVXdMclBY+q7tqzryveiaoJud2PNhky28pDmBxXjltLHFVd2nC/Zbq4
+         LrkG7m9ol+pavxJ3iv4OYrwNkMF5WU99cdDoF/6MJZxRWrPZyDyJ1mOwJFfCr8JSv/1t
+         1CDm+KZ4k05xL/BxYK+7mWtpyazgb8vOEe6VkMu+o6g1dAXza64u9tI2HqkrnC7wDVmX
+         WotewzU6SkPobboyjid5lDjBceUXY7Qo/HSsFJhXmYURKu6h3OalwudzHK5sj++Xew83
+         8X5KEep05sj1ph21o3R6fR/MmfYLyYjsKuf1DFqBwY92MOaKxRLRZRKMA53mLZTSsnF9
+         Xa9g==
+X-Forwarded-Encrypted: i=1; AJvYcCU6L51b0FQNrqkrgKVG0f3bPQpMd0c2osOPikfRInmRCp5bGw1ko52LERZxS9CZ8aVe7WFRgyVisAY+fpO4@lists.linaro.org
+X-Gm-Message-State: AOJu0YxxjpOMzI4q/DTqcTFz8MyT3G8JpsYy9G1xOmSfpibyqy96lLui
+	1IwFmRoW0vjnThmisJGYYyt4AnHiPwQsVlmJdr9uwpX7tCrz2HhRaACaVtOgAN7yH7CDlQ==
+X-Gm-Gg: ASbGncspydtbMhxn6nSpPfka5MyOt+w8LGFUokNDS9E65jniV1SdVe1pvOwvy5AYwT/
+	LIjlqJ/6tSiT02PkU952T4ZCGIl/H7u9etMQZRwZ8nnhWRCfZyADh3TrXbheYOPBmWzSMlGCqed
+	su+il6yth/teZcxw5NvjwsfHGOJTr67fOkkZbr/7kIvPjp9s5dr9UmtymNqB3ELGa3qQFwKahrz
+	Wm72yBnLKN2JdbGrrgZYujWaZhAEygvFm7O23Rb6JN9XBpg7qHJ7adaYvY6Q/qIIdDkb3N6HE33
+	LU7lqWBDfSm6cQYRaQJYpGyyXl+95Q8+tPxEJ+w9HQiQiIV8dhvAe6Yc/3eK/qL/ifpUPQTIYp9
+	lmGG8mXDaqowEPuT7RNqITRzMlKAv9U8IfqFy+ts=
+X-Google-Smtp-Source: AGHT+IH+NqfO0eRJpBwx+OETPzlNHnv9dU7aYJP1gt7nx8Svz410+PQMt4+K+Y+L3GHIBYSzGjaBVg==
+X-Received: by 2002:a17:907:60d1:b0:adb:2462:d921 with SMTP id a640c23a62f3a-ade1a9160c3mr1613066266b.5.1749561369005;
+        Tue, 10 Jun 2025 06:16:09 -0700 (PDT)
+Received: from rayden.urgonet (h-98-128-140-123.A175.priv.bahnhof.se. [98.128.140.123])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ade3206a1efsm643651666b.67.2025.06.10.06.16.07
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 10 Jun 2025 06:16:08 -0700 (PDT)
+From: Jens Wiklander <jens.wiklander@linaro.org>
+To: linux-kernel@vger.kernel.org,
+	linux-media@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	linaro-mm-sig@lists.linaro.org,
+	op-tee@lists.trustedfirmware.org,
+	linux-arm-kernel@lists.infradead.org
+Date: Tue, 10 Jun 2025 15:13:44 +0200
+Message-ID: <20250610131600.2972232-1-jens.wiklander@linaro.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|MN2PR12MB4421:EE_
-X-MS-Office365-Filtering-Correlation-Id: fb58e536-72cc-4cfe-6647-08dda80ce432
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|376014|7416014|366016|7053199007;
-X-Microsoft-Antispam-Message-Info: 
-	=?utf-8?B?NlFKNGRyS3ZDYTRDMklUdHgyaGhNUjN1Wllsb0dDcEpTVEZFQ3FsQzdOVk5T?=
- =?utf-8?B?a2ZtWVRqNENkSTJUbTM0Z1lPVDlEUHF4U3lyVGhnSVprWkRJRkNZNllqdEFz?=
- =?utf-8?B?eVg3ZTlTSzIrZ2JuL2kzUkVydDZVY0JOcUs0TFd2ekh4OFg1QXo4SzJ1VVdI?=
- =?utf-8?B?WUVtejVQTlhwbFdZdmNwLzY4R3lUdEMrNm45TzZYck5KMG4vbXVPNnRlVWwr?=
- =?utf-8?B?a2VaMlJOZDBvV0FlYzVXVHUrMVp1cHRlYThJWWljeXp6NUwyV3d3bndCeFpW?=
- =?utf-8?B?QWg3eWx6R1ozUGpyMnMvMG10QzVIem5GbWMvekM1RndTUVVoVVU0OGNRcWlY?=
- =?utf-8?B?R2NyK0pjTlV5YlpEbFQvTzJ3akFSNldrSFh3UnlDay9vWlE3elhHMWd0YnN4?=
- =?utf-8?B?MlgwYk82WGJxYWgwNk1vSXcvcXZ2SWM4M0hqei9EMEY4NTJjQUJjMkRTUGwz?=
- =?utf-8?B?UEFLd29CMXlDWFJhd2liSU9RWkJYa0g0dVc3YVpqZmN0Y2l0a3pqaGo2RE1X?=
- =?utf-8?B?bUoyNUVkdURVcTZiWUY0TFVTZEtBWGtrTGt2a2VJbCtFZTZDeGdIRU40d3VB?=
- =?utf-8?B?WkpuQU9KQ1FvYTgwck5uMXVUZmFZT09NMmpYaW5oWTdiWDRESjN3MWQyWG1o?=
- =?utf-8?B?VHZBZEJKemd1K0JhQXA5cUR4MFVkbHhFc2V1VDZDOEh6dDdHMEhOY3Y4VVdx?=
- =?utf-8?B?Y0hNbWZLOEpRVUxRTGxCYWk5b3Q2N213bTNPQ3BTZm9CMmlVOThjV3JVVzhU?=
- =?utf-8?B?dXg1UmZYYjJwV09iYVBzQkxPTk1CMDRPa1FqMDJBamo3S0hKcHpjcVVWY3Fp?=
- =?utf-8?B?eWxmRGpDYWpsclcranlyNGJHMStFU2trUWlzeGFEZ3RHNnRWVkN1N1pIaWxv?=
- =?utf-8?B?WHljR1FKNUNHVnZSMmx0Sm1GK3d5WkdqOVpvQ0Y0UzR2M2FQemdWb00valNq?=
- =?utf-8?B?dWZKOThaaFNXTUpaU09taXEzYWZLZFhSY0lTRytWN3FxSTRJVzZNQzdTOXJL?=
- =?utf-8?B?b0NGYTRqMW81ZFVzMk9XTmF4NWlUVEhUQzRGYUNlOWpVTllwbktJNlFRSThO?=
- =?utf-8?B?NEYzYjdlOERCcC9iV0ZMMFJ2MlNFQmEvRTBQR0xEYnZQMHBObnUwckZYbkx6?=
- =?utf-8?B?MDVTallHVUJTRFg4dWdoKzdvdDNLcytmWHM5MEd0Qm05TmZxSDA2UUhUNkZP?=
- =?utf-8?B?RFBIZWFjd2F2YVFWT1pkeU5HdHMzZHlqL201cy9UeWpuTkVrRjY5eXg5emxV?=
- =?utf-8?B?OEpzblVESnlzRDZ4a3NCVUg3TGl0dFpmZUR2cUZ4VHpQVEJ2VEE2QzF3YnFu?=
- =?utf-8?B?YXRQWkx4WjM1dERSSENYRjFYV3B4M1pkcTBQUWI4ZkJ6WmtiUDErSjdZeGNa?=
- =?utf-8?B?dnVVN0ZIQXpINFVCZWFpeWJGQklhOXBhK3VrYnIxZS8xaUxxanpQeXYvUzRS?=
- =?utf-8?B?M2p0Y3J5cW4wNll2M05QZjhiNXhFVDAyWmxPdFd4Nm42V3pTdmZTa0prZTMw?=
- =?utf-8?B?SGh1S0Rnb3NEQjF1a3pxNXJEcy9mS1JGVHNUMC9PdHBpSXFkNGc0Q2Q4UDNJ?=
- =?utf-8?B?WEdTNnpibElHTTMrbXNCRWRwOS8rbFRjbXJaSVl5dXJYa3BXeG9MM3R6SGk2?=
- =?utf-8?B?S2hKYjVCbzViaW9kM0MwbW5PZExUcEU3dEZzMGswb1FaVElYU1JzUkRVSXlD?=
- =?utf-8?B?dDkvTEZsWTV5UnY2dW1vekFPaUlJWTR4UDlYSU5Vd3o5SEUzK2hDL0NDNW1k?=
- =?utf-8?B?dy9XVUZrVEdxOERaWXlsM1l1dU5YZTFlTXBMSVFTQ1FMTXpKRFBVYXZxa0Qz?=
- =?utf-8?B?SGNBQ0FFeUg3VW4xTWJubkQzOXg0SGp6RExYc1lHeXc2dHFVVlIyZFhYTTg3?=
- =?utf-8?B?Q0ZzSElRdEtaRVAvbnRONjQvM1Q0MnN1REI4T1BQeXhYUnhaK2dSM0x4L2Ja?=
- =?utf-8?Q?/WZfC7wyBpg=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB5685.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(7416014)(366016)(7053199007);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?UktJVVBCeEw0NEtTV2lBZVFyZkJQNGp4QU01NFlKRW03UVpLdDRya2wwQlpx?=
- =?utf-8?B?U1NPdnNlekxlcCtqTUZweDJKQjdTSkNMVU9qV3YyUENucnZoeHFEZC9TYVJa?=
- =?utf-8?B?WklYNU1jYXNJSFgxK0xQV1hFeXE5Z1RYOUN3RWVvNjdUZkIxMjVaRFdrWmcv?=
- =?utf-8?B?bXZ3Tk9TenJmK1M0cEthd09IUDlucGFXQlFUZDJRQVB2OGNnL2RYZ1JTWUlx?=
- =?utf-8?B?ME8xNUFIbWR6ZjNwRjN6TWExcDFVRXBOQ0ZPRkdrZ2wvUmR2dWY3SUJhRk1D?=
- =?utf-8?B?RUNMSzhvSzdRei9JQUVuaDFUemZHcFBSeTZsV0FmWnVzY2VlWTFwWUpZVEln?=
- =?utf-8?B?RjBOY3ZyZmcxWVUvMzlPdG9ENGRqS3RGSFZ2Y1N6d2VDeXhEV2REZk5VY1Zq?=
- =?utf-8?B?dkkzNEF2Tzd5bjk2c2dRWWtyb2lkeitsSVVnTU1jdHRnNzU3NDBhbHpMSHFu?=
- =?utf-8?B?QTVqa1Z5Y1Y0ZitsMFJqdldudHYxNXY5bW9RdEhZSmJiM1E5WE5Kd1hZdU9K?=
- =?utf-8?B?RC8ydmI2Y0NZUGM2Z2hTZ1k5KzZDbkx3TlUray9XR0FwblNvU0UyWlpvRGZk?=
- =?utf-8?B?bEJ4UmFNVlpLeFJFRFhJaDdLNld4OVpKTmhkWDRSejh4aU5DWmN1d2JmeSt5?=
- =?utf-8?B?ZHh3aEtVREE5Rk82VVRLS1FaOHhIVGVOdWdhWklFYUc5cFM4VC9HbENaRlVl?=
- =?utf-8?B?Qm10c3I1akQ1VUUwdWhRa0VUczFtNGZJaHg3eGxYejlGL1pwL3ZMU2xpUjJB?=
- =?utf-8?B?QjVrejFYdTlXcGNLd0RiSFFNVk91SnRsVDdpLzZYZXdmay9qRStjYWZKVzVw?=
- =?utf-8?B?dTkxVElsdWMvTjVWcURNLzlnQU1jSTFocEdaMm1PMXJGamkyWXpRSFpIWHRD?=
- =?utf-8?B?Y0xRbzhNS1RkbUxwdUZ5bUhuYUQyNG1FK1VqTElXNTFQRjZRVVptUHk5MXdK?=
- =?utf-8?B?RFVaM3ppaG1VZkd4dy9HaC9NRlFQTTIxd0VldWdrenlYckNKMG53NzJOVG0y?=
- =?utf-8?B?ODZjK3FCcENrN0hpekUwK3BPRW1QQWlDekNXQ1d1UUhlL2VqYlhsVEh6QjBN?=
- =?utf-8?B?QllTS1kyelg1emhGNjF6SDJZNTAxS1FHclNsSHFFTXZpQWRYQ2dYR1NGQVdz?=
- =?utf-8?B?YXFvSHpZdkNnZkVpVTRCQnN2ZVlqcUZVQlV3THZINGtEa1Nhei9pazhwVlho?=
- =?utf-8?B?cTdJd2c4cXdvREZmc1kxdFRvRHU4VUZiZWJMOEtzSEx3ajRGaFNTKy9QQjJp?=
- =?utf-8?B?cFljRmVkUWVsK2xLYUM1VndTc1Rqa2ptdTRQblJMZlFmNzZ2b1VVZUZ2ZU51?=
- =?utf-8?B?bW5yc29POTRIdjh2b0VKcFhoWDJoVVliWFdPaksyaUpESVkwNlZlalkxd2Z2?=
- =?utf-8?B?elVrb0lNQ3Z3cDIzeVBraDNVZGVZSlJxekw5eTNBbnFJenFIRHlpNFFLMDk2?=
- =?utf-8?B?cXdFWGd2NXU3bFRkSVVDblhpRkpkZnh3TU4rQy9DV295VXZXQ2FXS3JWeFll?=
- =?utf-8?B?YVlUZFM5MFplSEIwaDVhRDhvb2lRbm5NZWFwVlZZQ3prVENwWmppL0RQbS9F?=
- =?utf-8?B?N1Y2b043K1hCM0R2aGhDWlg0RnhlNDFaYXZGYkF0bzlmZ1Y3Sjk0aEVOWGxV?=
- =?utf-8?B?b0o2VGNYNXlTUk55MnEzVW9oU2tpcmU0WFhlNklUVHZGUWZvTkVUcTAwUzJh?=
- =?utf-8?B?a00vVXFjU0FacFdMMVhnNGhHVURQSGs2bGNTS1A4MWUvamcrVnhHU0VES05i?=
- =?utf-8?B?WmVscEhsbUlsNGN5T1QyVHlVVm9acjhCb09rNnBwaENacGIwWERqVk5JYUYy?=
- =?utf-8?B?b05BTnFhbkFsd3Y0OVdOTUdUNlc5RC8vMVZ6OXpSNWN4OHhDcW5DN0hyYkQ4?=
- =?utf-8?B?MXFYY3c0b2FNOUZHL3lYRkRMWWd6cnRHWml1ck1ZNkhhcXFIclZ2UCt5UlJR?=
- =?utf-8?B?d21weEpUdlJLU043RkswVkJ4UXQ4cGZQZVNTdW1qdUlmOTExRFRDKzBJQTJD?=
- =?utf-8?B?L25keVZuNTRFN1lrUS9ST2RjeWJmTUtyb2ZEMHI1VU9hUmRJd3NFZVA5THQx?=
- =?utf-8?B?SHFMTTEySzR0NTVwd0NCWXJiUzlVdUc0VW14cUo0Rjd6SEs0S0xXRDBvcDVl?=
- =?utf-8?Q?+fVc=3D?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: fb58e536-72cc-4cfe-6647-08dda80ce432
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5685.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2025 10:52:28.0700
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: jFnBUImNiyxHQA0cdQuB14+39q8dBimQjVtETw0+B7AbKnu0SZjePkoLiwdw00sK
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4421
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Spamd-Result: default: False [-5.00 / 15.00];
+X-Spamd-Result: default: False [-1.10 / 15.00];
 	BAYES_HAM(-3.00)[99.99%];
-	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector10001:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
-	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
-	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
+	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
+	R_MISSING_CHARSET(0.50)[];
+	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.218.45:from];
 	MIME_GOOD(-0.10)[text/plain];
-	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[26];
+	TAGGED_RCPT(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[24];
+	ARC_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.100.78:from];
-	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
 	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[linaro.org,redhat.com,intel.com,zeniv.linux.org.uk,kernel.org,google.com,linux-foundation.org,gmail.com,collabora.com,arm.com,suse.cz,linux.alibaba.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,kvack.org,honor.com];
+	FREEMAIL_CC(0.00)[nxp.com,gmail.com,mediatek.com,linaro.org,collabora.com,arm.com,google.com,amd.com,kernel.org,qti.qualcomm.com,ffwll.ch,fooishbar.org];
 	TO_DN_SOME(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	DKIM_TRACE(0.00)[amd.com:+]
-X-Rspamd-Queue-Id: 472FA440F2
-X-Spamd-Bar: ----
-Message-ID-Hash: SSGH3X2KHSJB5OQLDC5GKXOX2SO75N44
-X-Message-ID-Hash: SSGH3X2KHSJB5OQLDC5GKXOX2SO75N44
-X-MailFrom: Christian.Koenig@amd.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: "sumit.semwal@linaro.org" <sumit.semwal@linaro.org>, "kraxel@redhat.com" <kraxel@redhat.com>, "vivek.kasireddy@intel.com" <vivek.kasireddy@intel.com>, "viro@zeniv.linux.org.uk" <viro@zeniv.linux.org.uk>, "brauner@kernel.org" <brauner@kernel.org>, "hughd@google.com" <hughd@google.com>, "akpm@linux-foundation.org" <akpm@linux-foundation.org>, "amir73il@gmail.com" <amir73il@gmail.com>, "benjamin.gaignard@collabora.com" <benjamin.gaignard@collabora.com>, "Brian.Starkey@arm.com" <Brian.Starkey@arm.com>, "jstultz@google.com" <jstultz@google.com>, "tjmercier@google.com" <tjmercier@google.com>, "jack@suse.cz" <jack@suse.cz>, "baolin.wang@linux.alibaba.com" <baolin.wang@linux.alibaba.com>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "linux-fsdevel@vger.kernel.org" <linux-fsdev
- el@vger.kernel.org>, "linux-mm@kvack.org" <linux-mm@kvack.org>, "wangbintian(BintianWang)" <bintian.wang@honor.com>, yipengxiang <yipengxiang@honor.com>, liulu 00013167 <liulu.liu@honor.com>, hanfeng 00012985 <feng.han@honor.com>
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[linaro.org:+]
+X-Rspamd-Queue-Id: 3D3454446C
+X-Spamd-Bar: -
+Message-ID-Hash: UITEG2UXVGKOJXE7TD7SNVOPIKMI6X6P
+X-Message-ID-Hash: UITEG2UXVGKOJXE7TD7SNVOPIKMI6X6P
+X-MailFrom: jens.wiklander@linaro.org
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: Olivier Masse <olivier.masse@nxp.com>, Thierry Reding <thierry.reding@gmail.com>, Yong Wu <yong.wu@mediatek.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T . J . Mercier" <tjmercier@google.com>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Sumit Garg <sumit.garg@kernel.org>, Matthias Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, azarrabi@qti.qualcomm.com, Simona Vetter <simona.vetter@ffwll.ch>, Daniel Stone <daniel@fooishbar.org>, Rouven Czerwinski <rouven.czerwinski@linaro.org>, robin.murphy@arm.com, Jens Wiklander <jens.wiklander@linaro.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v4 0/4] Implement dmabuf direct I/O via copy_file_range
+Subject: [Linaro-mm-sig] [PATCH v10 0/9] TEE subsystem for protected dma-buf allocations
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SSGH3X2KHSJB5OQLDC5GKXOX2SO75N44/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UITEG2UXVGKOJXE7TD7SNVOPIKMI6X6P/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-T24gNi85LzI1IDExOjMyLCB3YW5ndGFvIHdyb3RlOg0KPj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdl
-LS0tLS0NCj4+IEZyb206IENocmlzdG9waCBIZWxsd2lnIDxoY2hAaW5mcmFkZWFkLm9yZz4NCj4+
-IFNlbnQ6IE1vbmRheSwgSnVuZSA5LCAyMDI1IDEyOjM1IFBNDQo+PiBUbzogQ2hyaXN0aWFuIEvD
-tm5pZyA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPg0KPj4gQ2M6IHdhbmd0YW8gPHRhby53YW5n
-dGFvQGhvbm9yLmNvbT47IENocmlzdG9waCBIZWxsd2lnDQo+PiA8aGNoQGluZnJhZGVhZC5vcmc+
-OyBzdW1pdC5zZW13YWxAbGluYXJvLm9yZzsga3JheGVsQHJlZGhhdC5jb207DQo+PiB2aXZlay5r
-YXNpcmVkZHlAaW50ZWwuY29tOyB2aXJvQHplbml2LmxpbnV4Lm9yZy51azsgYnJhdW5lckBrZXJu
-ZWwub3JnOw0KPj4gaHVnaGRAZ29vZ2xlLmNvbTsgYWtwbUBsaW51eC1mb3VuZGF0aW9uLm9yZzsg
-YW1pcjczaWxAZ21haWwuY29tOw0KPj4gYmVuamFtaW4uZ2FpZ25hcmRAY29sbGFib3JhLmNvbTsg
-QnJpYW4uU3RhcmtleUBhcm0uY29tOw0KPj4ganN0dWx0ekBnb29nbGUuY29tOyB0am1lcmNpZXJA
-Z29vZ2xlLmNvbTsgamFja0BzdXNlLmN6Ow0KPj4gYmFvbGluLndhbmdAbGludXguYWxpYmFiYS5j
-b207IGxpbnV4LW1lZGlhQHZnZXIua2VybmVsLm9yZzsgZHJpLQ0KPj4gZGV2ZWxAbGlzdHMuZnJl
-ZWRlc2t0b3Aub3JnOyBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmc7IGxpbnV4LQ0KPj4g
-a2VybmVsQHZnZXIua2VybmVsLm9yZzsgbGludXgtZnNkZXZlbEB2Z2VyLmtlcm5lbC5vcmc7IGxp
-bnV4LQ0KPj4gbW1Aa3ZhY2sub3JnOyB3YW5nYmludGlhbihCaW50aWFuV2FuZykgPGJpbnRpYW4u
-d2FuZ0Bob25vci5jb20+Ow0KPj4geWlwZW5neGlhbmcgPHlpcGVuZ3hpYW5nQGhvbm9yLmNvbT47
-IGxpdWx1IDAwMDEzMTY3DQo+PiA8bGl1bHUubGl1QGhvbm9yLmNvbT47IGhhbmZlbmcgMDAwMTI5
-ODUgPGZlbmcuaGFuQGhvbm9yLmNvbT4NCj4+IFN1YmplY3Q6IFJlOiBbUEFUQ0ggdjQgMC80XSBJ
-bXBsZW1lbnQgZG1hYnVmIGRpcmVjdCBJL08gdmlhDQo+PiBjb3B5X2ZpbGVfcmFuZ2UNCj4+DQo+
-PiBPbiBGcmksIEp1biAwNiwgMjAyNSBhdCAwMToyMDo0OFBNICswMjAwLCBDaHJpc3RpYW4gS8O2
-bmlnIHdyb3RlOg0KPj4+PiBkbWFidWYgYWN0cyBhcyBhIGRyaXZlciBhbmQgc2hvdWxkbid0IGJl
-IGhhbmRsZWQgYnkgVkZTLCBzbyBJIG1hZGUNCj4+Pj4gZG1hYnVmIGltcGxlbWVudCBjb3B5X2Zp
-bGVfcmFuZ2UgY2FsbGJhY2tzIHRvIHN1cHBvcnQgZGlyZWN0IEkvTw0KPj4+PiB6ZXJvLWNvcHku
-IEknbSBvcGVuIHRvIGJvdGggYXBwcm9hY2hlcy4gV2hhdCdzIHRoZSBwcmVmZXJlbmNlIG9mIFZG
-Uw0KPj4+PiBleHBlcnRzPw0KPj4+DQo+Pj4gVGhhdCB3b3VsZCBwcm9iYWJseSBiZSBpbGxlZ2Fs
-LiBVc2luZyB0aGUgc2dfdGFibGUgaW4gdGhlIERNQS1idWYNCj4+PiBpbXBsZW1lbnRhdGlvbiB0
-dXJuZWQgb3V0IHRvIGJlIGEgbWlzdGFrZS4NCj4+DQo+PiBUd28gdGhpbmcgaGVyZSB0aGF0IHNo
-b3VsZCBub3QgYmUgZGlyZWN0bHkgY29uZmxhdGVkLiAgVXNpbmcgdGhlIHNnX3RhYmxlIHdhcw0K
-Pj4gYSBodWdlIG1pc3Rha2UsIGFuZCB3ZSBzaG91bGQgdHJ5IHRvIG1vdmUgZG1hYnVmIHRvIHN3
-aXRjaCB0aGF0IHRvIGEgcHVyZQ0KPiBJJ20gYSBiaXQgY29uZnVzZWQ6IGRvbid0IGRtYWJ1ZiBp
-bXBvcnRlcnMgbmVlZCB0byB0cmF2ZXJzZSBzZ190YWJsZSB0bw0KPiBhY2Nlc3MgZm9saW9zIG9y
-IGRtYV9hZGRyL2xlbj8gRG8geW91IG1lYW4gcmVzdHJpY3Rpbmcgc2dfdGFibGUgYWNjZXNzDQo+
-IChlLmcuLCBvbmx5IHZpYSBpb3ZfaXRlcikgb3IgcHJvcG9zaW5nIGFsdGVybmF0aXZlIGFwcHJv
-YWNoZXM/DQoNCk5vLCBhY2Nlc3NpbmcgcGFnZXMgZm9saW9zIGluc2lkZSB0aGUgc2dfdGFibGUg
-b2YgYSBETUEtYnVmIGlzIHN0cmljdGx5IGZvcmJpZGRlbi4NCg0KV2UgaGF2ZSByZW1vdmVkIG1v
-c3QgdXNlIGNhc2VzIG9mIHRoYXQgb3ZlciB0aGUgeWVhcnMgYW5kIHB1c2ggYmFjayBvbiBnZW5l
-cmF0aW5nIG5ldyBvbmVzLiANCg0KPiANCj4+IGRtYV9hZGRyX3QvbGVuIGFycmF5IG5vdyB0aGF0
-IHRoZSBuZXcgRE1BIEFQSSBzdXBwb3J0aW5nIHRoYXQgaGFzIGJlZW4NCj4+IG1lcmdlZC4gIElz
-IHRoZXJlIGFueSBjaGFuY2UgdGhlIGRtYS1idWYgbWFpbnRhaW5lcnMgY291bGQgc3RhcnQgdG8g
-a2ljayB0aGlzDQo+PiBvZmY/ICBJJ20gb2YgY291cnNlIGhhcHB5IHRvIGFzc2lzdC4NCg0KV29y
-ayBvbiB0aGF0IGlzIGFscmVhZHkgdW5kZXJ3YXkgZm9yIHNvbWUgdGltZS4NCg0KTW9zdCBHUFUg
-ZHJpdmVycyBhbHJlYWR5IGRvIHNnX3RhYmxlIC0+IERNQSBhcnJheSBjb252ZXJzaW9uLCBJIG5l
-ZWQgdG8gcHVzaCBvbiB0aGUgcmVtYWluaW5nIHRvIGNsZWFuIHVwLg0KDQpCdXQgdGhlcmUgYXJl
-IGFsc28gdG9ucyBvZiBvdGhlciB1c2VycyBvZiBkbWFfYnVmX21hcF9hdHRhY2htZW50KCkgd2hp
-Y2ggbmVlZHMgdG8gYmUgY29udmVydGVkLg0KDQo+PiBCdXQgdGhhdCBub3R3aXRoc3RhbmRpbmcs
-IGRtYS1idWYgaXMgVEhFIGJ1ZmZlciBzaGFyaW5nIG1lY2hhbmlzbSBpbiB0aGUNCj4+IGtlcm5l
-bCwgYW5kIHdlIHNob3VsZCBwcm9tb3RlIGl0IGluc3RlYWQgb2YgcmVpbnZlbnRpbmcgaXQgYmFk
-bHkuDQo+PiBBbmQgdGhlcmUgaXMgYSB1c2UgY2FzZSBmb3IgaGF2aW5nIGEgZnVsbHkgRE1BIG1h
-cHBlZCBidWZmZXIgaW4gdGhlIGJsb2NrDQo+PiBsYXllciBhbmQgSS9PIHBhdGgsIGVzcGVjaWFs
-bHkgb24gc3lzdGVtcyB3aXRoIGFuIElPTU1VLg0KPj4gU28gaGF2aW5nIGFuIGlvdl9pdGVyIGJh
-Y2tlZCBieSBhIGRtYS1idWYgd291bGQgYmUgZXh0cmVtZWx5IGhlbHBmdWwuDQo+PiBUaGF0J3Mg
-bW9zdGx5IGxpYi9pb3ZfaXRlci5jIGNvZGUsIG5vdCBWRlMsIHRob3VnaC4NCj4gQXJlIHlvdSBz
-dWdnZXN0aW5nIGFkZGluZyBhbiBJVEVSX0RNQUJVRiB0eXBlIHRvIGlvdl9pdGVyLCBvcg0KPiBp
-bXBsZW1lbnRpbmcgZG1hYnVmLXRvLWlvdl9idmVjIGNvbnZlcnNpb24gd2l0aGluIGlvdl9pdGVy
-Pw0KDQpUaGF0IHdvdWxkIGJlIHJhdGhlciBuaWNlIHRvIGhhdmUsIHllYWguDQoNCj4gDQo+Pg0K
-Pj4+IFRoZSBxdWVzdGlvbiBDaHJpc3RvcGggcmFpc2VkIHdhcyByYXRoZXIgd2h5IGlzIHlvdXIg
-Q1BVIHNvIHNsb3cgdGhhdA0KPj4+IHdhbGtpbmcgdGhlIHBhZ2UgdGFibGVzIGhhcyBhIHNpZ25p
-ZmljYW50IG92ZXJoZWFkIGNvbXBhcmVkIHRvIHRoZQ0KPj4+IGFjdHVhbCBJL08/DQo+Pg0KPj4g
-WWVzLCB0aGF0J3MgcmVhbGx5IHB1enpsaW5nIGFuZCBzaG91bGQgYmUgYWRkcmVzc2VkIGZpcnN0
-Lg0KPiBXaXRoIGhpZ2ggQ1BVIHBlcmZvcm1hbmNlIChlLmcuLCAzR0h6KSwgR1VQIChnZXRfdXNl
-cl9wYWdlcykgb3ZlcmhlYWQNCj4gaXMgcmVsYXRpdmVseSBsb3cgKG9ic2VydmVkIGluIDNHSHog
-dGVzdHMpLg0KDQpFdmVuIG9uIGEgbG93IGVuZCBDUFUgd2Fsa2luZyB0aGUgcGFnZSB0YWJsZXMg
-YW5kIGdyYWJiaW5nIHJlZmVyZW5jZXMgc2hvdWxkbid0IGJlIHRoYXQgbXVjaCBvZiBhbiBvdmVy
-aGVhZC4NCg0KVGhlcmUgbXVzdCBiZSBzb21lIHJlYXNvbiB3aHkgeW91IHNlZSBzbyBtdWNoIENQ
-VSBvdmVyaGVhZC4gRS5nLiBjb21wb3VuZCBwYWdlcyBhcmUgYnJva2VuIHVwIG9yIHNpbWlsYXIg
-d2hpY2ggc2hvdWxkIG5vdCBoYXBwZW4gaW4gdGhlIGZpcnN0IHBsYWNlLg0KDQpSZWdhcmRzLA0K
-Q2hyaXN0aWFuLg0KDQoNCj4gfCAgICAzMngzMk1CIFJlYWQgMTAyNE1CICAgIHxDcmVhdC1tc3xD
-bG9zZS1tc3wgIEkvTy1tc3xJL08tTUIvc3wgSS9PJQ0KPiB8LS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tfC0tLS0tLS0tfC0tLS0tLS0tfC0tLS0tLS0tfC0tLS0tLS0tfC0tLS0tDQo+IHwgMSkg
-ICAgICAgIG1lbWZkIGRpcmVjdCBSL1d8ICAgICAgMSB8ICAgIDExOCB8ICAgIDMxMiB8ICAgMzQ0
-OCB8IDEwMCUNCj4gfCAyKSAgICAgIHUrbWVtZmQgZGlyZWN0IFIvV3wgICAgMTk2IHwgICAgMTIz
-IHwgICAgMjk1IHwgICAzNjUxIHwgMTA1JQ0KPiB8IDMpIHUrbWVtZmQgZGlyZWN0IHNlbmRmaWxl
-fCAgICAxNzUgfCAgICAxMDIgfCAgICA5NzYgfCAgIDExMDAgfCAgMzElDQo+IHwgNCkgICB1K21l
-bWZkIGRpcmVjdCBzcGxpY2V8ICAgIDE3MyB8ICAgIDEwMyB8ICAgIDQ0MyB8ICAgMjQyOCB8ICA3
-MCUNCj4gfCA1KSAgICAgIHVkbWFidWYgYnVmZmVyIFIvV3wgICAgMTgzIHwgICAgMTAwIHwgICAg
-NDUzIHwgICAyMzc1IHwgIDY4JQ0KPiB8IDYpICAgICAgIGRtYWJ1ZiBidWZmZXIgUi9XfCAgICAg
-MzQgfCAgICAgIDQgfCAgICA0MjcgfCAgIDI1MTkgfCAgNzMlDQo+IHwgNykgICAgdWRtYWJ1ZiBk
-aXJlY3QgY19mX3J8ICAgIDIwMCB8ICAgIDEwMiB8ICAgIDI3OCB8ICAgMzg3NCB8IDExMiUNCj4g
-fCA4KSAgICAgZG1hYnVmIGRpcmVjdCBjX2ZfcnwgICAgIDM2IHwgICAgICA1IHwgICAgMjY5IHwg
-ICA0MDAyIHwgMTE2JQ0KPiANCj4gV2l0aCBsb3dlciBDUFUgcGVyZm9ybWFuY2UgKGUuZy4sIDFH
-SHopLCBHVVAgb3ZlcmhlYWQgYmVjb21lcyBtb3JlDQo+IHNpZ25pZmljYW50IChhcyBzZWVuIGlu
-IDFHSHogdGVzdHMpLg0KPiB8ICAgIDMyeDMyTUIgUmVhZCAxMDI0TUIgICAgfENyZWF0LW1zfENs
-b3NlLW1zfCAgSS9PLW1zfEkvTy1NQi9zfCBJL08lDQo+IHwtLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS18LS0tLS0tLS18LS0tLS0tLS18LS0tLS0tLS18LS0tLS0tLS18LS0tLS0NCj4gfCAxKSAg
-ICAgICAgbWVtZmQgZGlyZWN0IFIvV3wgICAgICAyIHwgICAgMzkzIHwgICAgOTY5IHwgICAxMTA5
-IHwgMTAwJQ0KPiB8IDIpICAgICAgdSttZW1mZCBkaXJlY3QgUi9XfCAgICA1OTIgfCAgICA0MjQg
-fCAgICA1NzAgfCAgIDE4ODQgfCAxNjklDQo+IHwgMykgdSttZW1mZCBkaXJlY3Qgc2VuZGZpbGV8
-ICAgIDU4NyB8ICAgIDM1NiB8ICAgMjIyOSB8ICAgIDQ4MSB8ICA0MyUNCj4gfCA0KSAgIHUrbWVt
-ZmQgZGlyZWN0IHNwbGljZXwgICAgNTY4IHwgICAgMzUyIHwgICAgNzk1IHwgICAxMzUwIHwgMTIx
-JQ0KPiB8IDUpICAgICAgdWRtYWJ1ZiBidWZmZXIgUi9XfCAgICA1OTcgfCAgICAzNDMgfCAgIDEy
-MzggfCAgICA4NjcgfCAgNzglDQo+IHwgNikgICAgICAgZG1hYnVmIGJ1ZmZlciBSL1d8ICAgICA2
-OSB8ICAgICAxMyB8ICAgMTEyOCB8ICAgIDk1MiB8ICA4NSUNCj4gfCA3KSAgICB1ZG1hYnVmIGRp
-cmVjdCBjX2ZfcnwgICAgNTk1IHwgICAgMzQ1IHwgICAgMzcyIHwgICAyODg5IHwgMjYwJQ0KPiB8
-IDgpICAgICBkbWFidWYgZGlyZWN0IGNfZl9yfCAgICAgODAgfCAgICAgMTMgfCAgICAyNzQgfCAg
-IDM5MjkgfCAzNTQlDQo+IA0KPiBSZWdhcmRzLA0KPiBXYW5ndGFvLg0KDQpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcg
-bGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2Vu
-ZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+Hi,
+
+This patch set allocates the protected DMA-bufs from a DMA-heap
+instantiated from the TEE subsystem.
+
+The TEE subsystem handles the DMA-buf allocations since it is the TEE
+(OP-TEE, AMD-TEE, TS-TEE, or perhaps a future QTEE) which sets up the
+protection for the memory used for the DMA-bufs.
+
+The DMA-heap uses a protected memory pool provided by the backend TEE
+driver, allowing it to choose how to allocate the protected physical
+memory.
+
+The allocated DMA-bufs must be imported with a new TEE_IOC_SHM_REGISTER_FD
+before they can be passed as arguments when requesting services from the
+secure world.
+
+Three use-cases (Secure Video Playback, Trusted UI, and Secure Video
+Recording) have been identified so far to serve as examples of what can be
+expected. The use-cases have predefined DMA-heap names,
+"protected,secure-video", "protected,trusted-ui", and
+"protected,secure-video-record". The backend driver registers protected
+memory pools for the use-cases it supports.
+
+Each use-case has its own protected memory pool since different use-cases
+require isolation from different parts of the system. A protected memory
+pool can be based on a static carveout instantiated while probing the TEE
+backend driver, or dynamically allocated from CMA (dma_alloc_pages()) and
+made protected as needed by the TEE.
+
+This can be tested on a RockPi 4B+ with the following steps:
+repo init -u https://github.com/jenswi-linaro/manifest.git -m rockpi4.xml \
+        -b prototype/sdp-v10
+repo sync -j8
+cd build
+make toolchains -j$(nproc)
+make all -j$(nproc)
+# Copy ../out/rockpi4.img to an SD card and boot the RockPi from that
+# Connect a monitor to the RockPi
+# login and at the prompt:
+gst-launch-1.0 videotestsrc ! \
+        aesenc key=1f9423681beb9a79215820f6bda73d0f \
+                iv=e9aa8e834d8d70b7e0d254ff670dd718 serialize-iv=true ! \
+        aesdec key=1f9423681beb9a79215820f6bda73d0f ! \
+        kmssink
+
+The aesdec module has been hacked to use an OP-TEE TA to decrypt the stream
+into protected DMA-bufs which are consumed by the kmssink.
+
+The primitive QEMU tests from previous patch sets can be tested on RockPi
+in the same way using:
+xtest --sdp-basic
+
+The primitive tests are tested on QEMU with the following steps:
+repo init -u https://github.com/jenswi-linaro/manifest.git -m qemu_v8.xml \
+        -b prototype/sdp-v10
+repo sync -j8
+cd build
+make toolchains -j$(nproc)
+make SPMC_AT_EL=1 all -j$(nproc)
+make SPMC_AT_EL=1 run-only
+# login and at the prompt:
+xtest --sdp-basic
+
+The SPMC_AT_EL=1 parameter configures the build with FF-A and an SPMC at
+S-EL1 inside OP-TEE. The parameter can be changed to SPMC_AT_EL=n to test
+without FF-A using the original SMC ABI instead. Please remember to do
+%make arm-tf-clean
+for TF-A to be rebuilt properly using the new configuration.
+
+https://optee.readthedocs.io/en/latest/building/prerequisites.html
+list dependencies required to build the above.
+
+The primitive tests are pretty basic, mostly checking that a Trusted
+Application in the secure world can access and manipulate the memory. There
+are also some negative tests for out of bounds buffers, etc.
+
+Thanks,
+Jens
+
+Changes since V9:
+* Adding Sumit's R-B to "optee: sync secure world ABI headers"
+* Update commit message as requested for "dma-buf: dma-heap: export
+  declared functions".
+* In "tee: implement protected DMA-heap":
+  - add the hidden config option TEE_DMABUF_HEAPS to tell if the TEE
+    subsystem can support DMA heaps
+  - add a pfn_valid() to check that the passed physical address can be
+    used by __pfn_to_page() and friends
+  - remove the memremap() call, the caller is should do that instead if
+    needed
+* In "tee: add tee_shm_alloc_dma_mem()" guard the calls to
+  dma_alloc_pages() and dma_free_pages() with TEE_DMABUF_HEAPS to avoid
+  linking errors in some configurations
+* In "optee: support protected memory allocation":
+  - add the hidden config option OPTEE_STATIC_PROTMEM_POOL to tell if the
+    driver can support a static protected memory pool
+  - optee_protmem_pool_init() is slightly refactored to make the patches
+    that follow easier
+  - Call devm_memremap() before calling tee_protmem_static_pool_alloc()
+
+Changes since V8:
+* Using dma_alloc_pages() instead of cma_alloc() so the direct dependency on
+  CMA can be removed together with the patches
+  "cma: export cma_alloc() and cma_release()" and
+  "dma-contiguous: export dma_contiguous_default_area". The patch
+* Renaming the patch "tee: add tee_shm_alloc_cma_phys_mem()" to
+  "tee: add tee_shm_alloc_dma_mem()"
+* Setting DMA mask for the OP-TEE TEE device based on input from the secure
+  world instead of relying on the parent device so following patches are
+  removed: "tee: tee_device_alloc(): copy dma_mask from parent device" and
+  "optee: pass parent device to tee_device_alloc()".
+* Adding Sumit Garg's R-B to "tee: refactor params_from_user()"
+* In the patch "tee: implement protected DMA-heap", map the physical memory
+  passed to tee_protmem_static_pool_alloc().
+
+Changes since V7:
+* Adding "dma-buf: dma-heap: export declared functions",
+  "cma: export cma_alloc() and cma_release()", and
+  "dma-contiguous: export dma_contiguous_default_area" to export the symbols
+  needed to keep the TEE subsystem as a load module.
+* Removing CONFIG_TEE_DMABUF_HEAP and CONFIG_TEE_CMA since they aren't
+  needed any longer.
+* Addressing review comments in "optee: sync secure world ABI headers"
+* Better align protected memory pool initialization between the smc-abi and
+  ffa-abi parts of the optee driver.
+* Removing the patch "optee: account for direction while converting parameters"
+
+Changes since V6:
+* Restricted memory is now known as protected memory since to use the same
+  term as https://docs.vulkan.org/guide/latest/protected.html. Update all
+  patches to consistently use protected memory.
+* In "tee: implement protected DMA-heap" add the hidden config option
+  TEE_DMABUF_HEAP to tell if the DMABUF_HEAPS functions are available
+  for the TEE subsystem
+* Adding "tee: refactor params_from_user()", broken out from the patch
+  "tee: new ioctl to a register tee_shm from a dmabuf file descriptor"
+* For "tee: new ioctl to a register tee_shm from a dmabuf file descriptor":
+  - Update commit message to mention protected memory
+  - Remove and open code tee_shm_get_parent_shm() in param_from_user_memref()
+* In "tee: add tee_shm_alloc_cma_phys_mem" add the hidden config option
+  TEE_CMA to tell if the CMA functions are available for the TEE subsystem
+* For "tee: tee_device_alloc(): copy dma_mask from parent device" and
+  "optee: pass parent device to tee_device_alloc", added
+  Reviewed-by: Sumit Garg <sumit.garg@kernel.org>
+
+Changes since V5:
+* Removing "tee: add restricted memory allocation" and
+  "tee: add TEE_IOC_RSTMEM_FD_INFO"
+* Adding "tee: implement restricted DMA-heap",
+  "tee: new ioctl to a register tee_shm from a dmabuf file descriptor",
+  "tee: add tee_shm_alloc_cma_phys_mem()",
+  "optee: pass parent device to tee_device_alloc()", and
+  "tee: tee_device_alloc(): copy dma_mask from parent device"
+* The two TEE driver OPs "rstmem_alloc()" and "rstmem_free()" are replaced
+  with a struct tee_rstmem_pool abstraction.
+* Replaced the the TEE_IOC_RSTMEM_ALLOC user space API with the DMA-heap API
+
+Changes since V4:
+* Adding the patch "tee: add TEE_IOC_RSTMEM_FD_INFO" needed by the
+  GStreamer demo
+* Removing the dummy CPU access and mmap functions from the dma_buf_ops
+* Fixing a compile error in "optee: FF-A: dynamic restricted memory allocation"
+  reported by kernel test robot <lkp@intel.com>
+
+Changes since V3:
+* Make the use_case and flags field in struct tee_shm u32's instead of
+  u16's
+* Add more description for TEE_IOC_RSTMEM_ALLOC in the header file
+* Import namespace DMA_BUF in module tee, reported by lkp@intel.com
+* Added a note in the commit message for "optee: account for direction
+  while converting parameters" why it's needed
+* Factor out dynamic restricted memory allocation from
+  "optee: support restricted memory allocation" into two new commits
+  "optee: FF-A: dynamic restricted memory allocation" and
+  "optee: smc abi: dynamic restricted memory allocation"
+* Guard CMA usage with #ifdef CONFIG_CMA, effectively disabling dynamic
+  restricted memory allocate if CMA isn't configured
+
+Changes since the V2 RFC:
+* Based on v6.12
+* Replaced the flags for SVP and Trusted UID memory with a u32 field with
+  unique id for each use case
+* Added dynamic allocation of restricted memory pools
+* Added OP-TEE ABI both with and without FF-A for dynamic restricted memory
+* Added support for FF-A with FFA_LEND
+
+Changes since the V1 RFC:
+* Based on v6.11
+* Complete rewrite, replacing the restricted heap with TEE_IOC_RSTMEM_ALLOC
+
+Changes since Olivier's post [2]:
+* Based on Yong Wu's post [1] where much of dma-buf handling is done in
+  the generic restricted heap
+* Simplifications and cleanup
+* New commit message for "dma-buf: heaps: add Linaro restricted dmabuf heap
+  support"
+* Replaced the word "secure" with "restricted" where applicable
+
+
+
+
+Etienne Carriere (1):
+  tee: new ioctl to a register tee_shm from a dmabuf file descriptor
+
+Jens Wiklander (8):
+  optee: sync secure world ABI headers
+  dma-buf: dma-heap: export declared functions
+  tee: implement protected DMA-heap
+  tee: refactor params_from_user()
+  tee: add tee_shm_alloc_dma_mem()
+  optee: support protected memory allocation
+  optee: FF-A: dynamic protected memory allocation
+  optee: smc abi: dynamic protected memory allocation
+
+ drivers/dma-buf/dma-heap.c        |   3 +
+ drivers/tee/Kconfig               |   5 +
+ drivers/tee/Makefile              |   1 +
+ drivers/tee/optee/Kconfig         |   5 +
+ drivers/tee/optee/Makefile        |   1 +
+ drivers/tee/optee/core.c          |  10 +
+ drivers/tee/optee/ffa_abi.c       | 147 +++++++++-
+ drivers/tee/optee/optee_ffa.h     |  27 +-
+ drivers/tee/optee/optee_msg.h     |  84 +++++-
+ drivers/tee/optee/optee_private.h |  15 +-
+ drivers/tee/optee/optee_smc.h     |  37 ++-
+ drivers/tee/optee/protmem.c       | 335 +++++++++++++++++++++
+ drivers/tee/optee/smc_abi.c       | 142 ++++++++-
+ drivers/tee/tee_core.c            | 155 +++++++---
+ drivers/tee/tee_heap.c            | 472 ++++++++++++++++++++++++++++++
+ drivers/tee/tee_private.h         |  16 +
+ drivers/tee/tee_shm.c             | 189 +++++++++++-
+ include/linux/tee_core.h          |  71 +++++
+ include/linux/tee_drv.h           |  10 +
+ include/uapi/linux/tee.h          |  31 ++
+ 20 files changed, 1689 insertions(+), 67 deletions(-)
+ create mode 100644 drivers/tee/optee/protmem.c
+ create mode 100644 drivers/tee/tee_heap.c
+
+
+base-commit: 0ff41df1cb268fc69e703a08a57ee14ae967d0ca
+-- 
+2.43.0
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
