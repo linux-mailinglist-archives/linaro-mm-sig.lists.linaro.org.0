@@ -2,84 +2,97 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id F0F58ADB675
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Jun 2025 18:17:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B2EDBADCB5F
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 17 Jun 2025 14:26:01 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id EC88E44982
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Jun 2025 16:17:30 +0000 (UTC)
-Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
-	by lists.linaro.org (Postfix) with ESMTPS id EE1BD4445B
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 16 Jun 2025 16:17:19 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 787B344B3D
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 17 Jun 2025 12:26:00 +0000 (UTC)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+	by lists.linaro.org (Postfix) with ESMTPS id A26DA447F9
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 17 Jun 2025 12:25:49 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=infradead.org header.s=casper.20170209 header.b=tPdjG3SN;
-	spf=none (lists.linaro.org: domain of rdunlap@infradead.org has no SPF policy when checking 90.155.50.34) smtp.mailfrom=rdunlap@infradead.org;
-	dmarc=none
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:Content-Type:
-	In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender
-	:Reply-To:Content-ID:Content-Description;
-	bh=qMUs8krXpT3RxJC3nLENkT9+r0tAUvQgrF/aF9nQOVc=; b=tPdjG3SNgqONBCjSzAb74LT7R6
-	qgqINN8bEw7vV0HB3o6Jet97v9TucGDYw4M5+jcPd1IwakNDPixlUiAnPoU23A/uz8Mh+2LP6qyxp
-	h4ll3CEZ5wpKRuNRkY3EPpXesyy1MpLNyGvJ8XsuCwC/2tb3x2FLJmxc29eWFx6TmlXR/LEkQCRtI
-	4VYWZqG3OLBQaTKAUf/Q1a4sCs2imZu45cTWmHQVflixi51tc3ahDMB4W0JOiwftZiMr9t3/zbiGj
-	B1aNMupR4IAKzHztNzB17gLigAKOprfax/2qIjRr50XIcAsKeUfVrOg5IDV2i4A7kSW9GKLWu8RzD
-	zxVvVvfw==;
-Received: from [50.53.25.54] (helo=[192.168.254.17])
-	by casper.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
-	id 1uRCWB-0000000G8qT-1kZM;
-	Mon, 16 Jun 2025 16:17:07 +0000
-Message-ID: <2bc21d27-c7e9-4b74-bae5-d10ad0963e70@infradead.org>
-Date: Mon, 16 Jun 2025 09:17:03 -0700
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b="lhZ/y8oV";
+	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 147.75.193.91 as permitted sender) smtp.mailfrom=mripard@kernel.org;
+	dmarc=pass (policy=quarantine) header.from=kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by nyc.source.kernel.org (Postfix) with ESMTP id 81C9EA501DF;
+	Tue, 17 Jun 2025 12:25:49 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 87FF6C4CEE3;
+	Tue, 17 Jun 2025 12:25:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1750163149;
+	bh=aoNET68UJIiLHYzCWITUHaaHkuJoHm/VQY7CwpH5NQw=;
+	h=From:Subject:Date:To:Cc:From;
+	b=lhZ/y8oVCPQyDybARc9LQ/ZtkG8+ESnzbX40CQqwTEW8F1VrJVAs2VNyFB+LcPwTN
+	 BuVDDoVAGMnXpDtVqRFVfLW/BWMNdjV6+I8MHQA26MHUkmi6f1nxLri8kGUemQogX3
+	 ZjBlJmS4yD0k7xwww+1ihUoJlspN9UZla6vZukSPtMIc8NEKGSPk5Z5rAP1rBWsHhY
+	 kbTg1ssV4t+gkxNQxDRQOrMWhzSkFoAtDm8Jri6ckVq4RFRdQkjq7i4iTworFioluh
+	 EHR6GNGonvywjhZAstchFCGYE5WXom0gyT5KEJZoUHHk4M7tGl/OKLOnFl+tH8dewq
+	 7VpmW1naLviqA==
+From: Maxime Ripard <mripard@kernel.org>
+Date: Tue, 17 Jun 2025 14:25:39 +0200
+Message-Id: <20250617-dma-buf-ecc-heap-v5-0-0abdc5863a4f@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Maxime Ripard <mripard@kernel.org>, Sumit Semwal
- <sumit.semwal@linaro.org>,
+X-B4-Tracking: v=1; b=H4sIAMNeUWgC/33N3U7DMAyG4VuZcoyR7Tgb5Yj7QDvIj7NGQDulr
+ AJNvXeySQjQKg7fT/Ljs5m0Fp3M4+Zsqs5lKuPQwt1tTOz9cFAoqbVhZEFHDtKbh3DKoDFCr/4
+ I/OAtUeLYiZp2dqyay8eVfN637sv0PtbP64eZLus/2EyA4CSGkFA6R/T0onXQ1/uxHsxFm/lbc
+ ChIKwI3AcXmhLj15PONYH8LuxXBNqHbxZTs1rvM3Y0gP4JjXBEECEJipUwhCMc/wrIsX+uH3YR
+ 3AQAA
+X-Change-ID: 20240515-dma-buf-ecc-heap-28a311d2c94e
+To: Rob Herring <robh@kernel.org>, Saravana Kannan <saravanak@google.com>,
+ Sumit Semwal <sumit.semwal@linaro.org>,
  Benjamin Gaignard <benjamin.gaignard@collabora.com>,
  Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>,
- "T.J. Mercier" <tjmercier@google.com>, Jonathan Corbet <corbet@lwn.net>
-References: <20250616-dma-buf-heap-names-doc-v2-1-8ae43174cdbf@kernel.org>
-Content-Language: en-US
-From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <20250616-dma-buf-heap-names-doc-v2-1-8ae43174cdbf@kernel.org>
+ "T.J. Mercier" <tjmercier@google.com>,
+ =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3003; i=mripard@kernel.org;
+ h=from:subject:message-id; bh=aoNET68UJIiLHYzCWITUHaaHkuJoHm/VQY7CwpH5NQw=;
+ b=owGbwMvMwCmsHn9OcpHtvjLG02pJDBmBcSf8lUxWPr39QW9m2N5G/bJYdkHZNd805rH/d7l1+
+ HTjpiuSHVNZGIQ5GWTFFFmeyISdXt6+uMrBfuUPmDmsTCBDGLg4BWAi3baMteIrVhzjql6pvG9D
+ Wsl0b+FPh9wOnFnMl7L8v6Ob/xLb+QdfzGFJmfq1ZEHM88lbPVOfqjM2rL47XbCaQ0Voe9S1sET
+ +aAezgxtjj0760TnlScgvl6kze/y4JtxcE35qsopg+rJzao9iAA==
+X-Developer-Key: i=mripard@kernel.org; a=openpgp;
+ fpr=BE5675C37E818C8B5764241C254BCFC56BF6CE8D
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Spamd-Result: default: False [-7.80 / 15.00];
-	REPLY(-4.00)[];
+X-Spamd-Result: default: False [-2.50 / 15.00];
 	BAYES_HAM(-3.00)[99.99%];
-	RCVD_DKIM_ARC_DNSWL_MED(-0.50)[];
-	R_DKIM_ALLOW(-0.20)[infradead.org:s=casper.20170209];
-	RCVD_IN_DNSWL_MED(-0.20)[90.155.50.34:from];
-	ONCE_RECEIVED(0.20)[];
+	SUSPICIOUS_RECIPS(1.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip4:147.75.193.91];
 	MIME_GOOD(-0.10)[text/plain];
-	ARC_NA(0.00)[];
-	TO_DN_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[19];
+	TAGGED_RCPT(0.00)[dt];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN_FAIL(0.00)[34.50.155.90.asn.rspamd.com:server fail];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	RCVD_COUNT_ONE(0.00)[1];
-	RCVD_TLS_ALL(0.00)[];
+	ASN(0.00)[asn:54825, ipnet:147.75.192.0/21, country:US];
+	ARC_NA(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,lists.freedesktop.org,lists.linaro.org,redhat.com,kernel.org,gmail.com];
-	DMARC_NA(0.00)[infradead.org];
-	FROM_EQ_ENVFROM(0.00)[];
-	R_SPF_NA(0.00)[no SPF record];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	DKIM_TRACE(0.00)[infradead.org:+]
-X-Rspamd-Queue-Id: EE1BD4445B
-X-Spamd-Bar: -------
-Message-ID-Hash: 55FGYN445MFI436NQPJAOX4JNWSM3NGV
-X-Message-ID-Hash: 55FGYN445MFI436NQPJAOX4JNWSM3NGV
-X-MailFrom: rdunlap@infradead.org
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, Jared Kangas <jkangas@redhat.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>, Bagas Sanjaya <bagasdotme@gmail.com>
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	DKIM_TRACE(0.00)[kernel.org:+]
+X-Rspamd-Queue-Id: A26DA447F9
+X-Spamd-Bar: --
+Message-ID-Hash: QLT6IAFHSHUWBVLAII2AVB2ZOXBQ4PQZ
+X-Message-ID-Hash: QLT6IAFHSHUWBVLAII2AVB2ZOXBQ4PQZ
+X-MailFrom: mripard@kernel.org
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: Andrew Davis <afd@ti.com>, Jared Kangas <jkangas@redhat.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Maxime Ripard <mripard@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2] Documentation: dma-buf: heaps: Add naming guidelines
+Subject: [Linaro-mm-sig] [PATCH v5 0/2] dma-buf: heaps: Support carved-out heaps
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/55FGYN445MFI436NQPJAOX4JNWSM3NGV/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QLT6IAFHSHUWBVLAII2AVB2ZOXBQ4PQZ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -89,94 +102,81 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
+Hi,
 
+This series is the follow-up of the discussion that John and I had some
+time ago here:
 
-On 6/16/25 8:21 AM, Maxime Ripard wrote:
-> We've discussed a number of times of how some heap names are bad, but
-> not really what makes a good heap name.
-> 
-> Let's document what we expect the heap names to look like.
-> 
-> Reviewed-by: Bagas Sanjaya <bagasdotme@gmail.com>
-> Signed-off-by: Maxime Ripard <mripard@kernel.org>
-> ---
-> Changes in v2:
-> - Added justifications for each requirement / suggestions
-> - Added a mention and example of buffer attributes
-> - Link to v1: https://lore.kernel.org/r/20250520-dma-buf-heap-names-doc-v1-1-ab31f74809ee@kernel.org
-> ---
->  Documentation/userspace-api/dma-buf-heaps.rst | 38 +++++++++++++++++++++++++++
->  1 file changed, 38 insertions(+)
-> 
-> diff --git a/Documentation/userspace-api/dma-buf-heaps.rst b/Documentation/userspace-api/dma-buf-heaps.rst
-> index 535f49047ce6450796bf4380c989e109355efc05..835ad1c3a65bc07b6f41d387d85c57162909e859 100644
-> --- a/Documentation/userspace-api/dma-buf-heaps.rst
-> +++ b/Documentation/userspace-api/dma-buf-heaps.rst
-> @@ -21,5 +21,43 @@ following heaps:
->     usually created either through the kernel commandline through the
->     `cma` parameter, a memory region Device-Tree node with the
->     `linux,cma-default` property set, or through the `CMA_SIZE_MBYTES` or
->     `CMA_SIZE_PERCENTAGE` Kconfig options. Depending on the platform, it
->     might be called ``reserved``, ``linux,cma``, or ``default-pool``.
-> +
-> +Naming Convention
-> +=================
-> +
-> +``dma-buf`` heaps name should meet a number of constraints:
-> +
+https://lore.kernel.org/all/CANDhNCquJn6bH3KxKf65BWiTYLVqSd9892-xtFDHHqqyrroCMQ@mail.gmail.com/
 
-For these points below, I would s/That name/The name/ (3 places).
+The initial problem we were discussing was that I'm currently working on
+a platform which has a memory layout with ECC enabled. However, enabling
+the ECC has a number of drawbacks on that platform: lower performance,
+increased memory usage, etc. So for things like framebuffers, the
+trade-off isn't great and thus there's a memory region with ECC disabled
+to allocate from for such use cases.
 
-> +- That name must be stable, and must not change from one version to the
-> +  other. Userspace identifies heaps by their name, so if the names ever
-> +  changes, we would be likely to introduce regressions.
+After a suggestion from John, I chose to first start using heap
+allocations flags to allow for userspace to ask for a particular ECC
+setup. This is then backed by a new heap type that runs from reserved
+memory chunks flagged as such, and the existing DT properties to specify
+the ECC properties.
 
-     change,
+After further discussion, it was considered that flags were not the
+right solution, and relying on the names of the heaps would be enough to
+let userspace know the kind of buffer it deals with.
 
-> +
-> +- That name must describe the memory region the heap will allocate from,
-> +  and must uniquely identify it in a given platform. Since userspace
-> +  applications use the heap name as the discriminant, it must be able to
-> +  tell which heap it wants to use reliably if there's multiple heaps.
+Thus, even though the uAPI part of it has been dropped in this second
+version, we still need a driver to create heaps out of carved-out memory
+regions. In addition to the original usecase, a similar driver can be
+found in BSPs from most vendors, so I believe it would be a useful
+addition to the kernel.
 
-                                              if there are
+Let me know what you think,
+Maxime
 
-> +
-> +- That name must not mention implementation details, such as the
-> +  allocator. The heap driver will change over time, and implementation
-> +  details when it was introduced might not be relevant in the future.
-> +
-> +- The name should describe properties of the buffers that would be
-> +  allocated. Doing so will make heap identification easier for
-> +  userspace. Such properties are:
-> +
-> +  - ``cacheable`` / ``uncacheable`` for buffers with CPU caches enabled
-> +    or disabled;
-> +
-> +  - ``contiguous`` for physically contiguous buffers;
-> +
-> +  - ``protected`` for encrypted buffers not accessible the OS;
-> +
-> +- The name may describe intended usage. Doing so will make heap
-> +  identification easier for userspace applications and users.
-> +
-> +For example, assuming a platform with a reserved memory region located
-> +at the RAM address 0x42000000, intended to allocate video framebuffers,
-> +physically contiguous, and backed by the CMA kernel allocator. Good
+Signed-off-by: Maxime Ripard <mripard@kernel.org>
+---
+Changes in v5:
+- Rebased on 6.16-rc2
+- Switch from property to dedicated binding
+- Link to v4: https://lore.kernel.org/r/20250520-dma-buf-ecc-heap-v4-1-bd2e1f1bb42c@kernel.org
 
-   ^^^ Not a complete sentence. Change '.' to ',':     allocator, good
+Changes in v4:
+- Rebased on 6.15-rc7
+- Map buffers only when map is actually called, not at allocation time
+- Deal with restricted-dma-pool and shared-dma-pool
+- Reword Kconfig options
+- Properly report dma_map_sgtable failures
+- Link to v3: https://lore.kernel.org/r/20250407-dma-buf-ecc-heap-v3-0-97cdd36a5f29@kernel.org
 
-> +names would be ``memory@42000000-cacheable-contiguous`` or
-> +``video@42000000``, but ``cma-video`` wouldn't.
-> 
-> ---
-> base-commit: 19272b37aa4f83ca52bdf9c16d5d81bdd1354494
-> change-id: 20250520-dma-buf-heap-names-doc-31261aa0cfe6
-> 
-> Best regards,
+Changes in v3:
+- Reworked global variable patch
+- Link to v2: https://lore.kernel.org/r/20250401-dma-buf-ecc-heap-v2-0-043fd006a1af@kernel.org
 
+Changes in v2:
+- Add vmap/vunmap operations
+- Drop ECC flags uapi
+- Rebase on top of 6.14
+- Link to v1: https://lore.kernel.org/r/20240515-dma-buf-ecc-heap-v1-0-54cbbd049511@kernel.org
+
+---
+Maxime Ripard (2):
+      dt-bindings: reserved-memory: Introduce carved-out memory region binding
+      dma-buf: heaps: Introduce a new heap for reserved memory
+
+ .../bindings/reserved-memory/carved-out.yaml       |  49 +++
+ drivers/dma-buf/heaps/Kconfig                      |   8 +
+ drivers/dma-buf/heaps/Makefile                     |   1 +
+ drivers/dma-buf/heaps/carveout_heap.c              | 362 +++++++++++++++++++++
+ 4 files changed, 420 insertions(+)
+---
+base-commit: d076bed8cb108ba2236d4d49c92303fda4036893
+change-id: 20240515-dma-buf-ecc-heap-28a311d2c94e
+
+Best regards,
 -- 
-~Randy
+Maxime Ripard <mripard@kernel.org>
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
