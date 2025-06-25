@@ -2,329 +2,133 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5F3C3AE6CF4
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 24 Jun 2025 18:52:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5D334AE8E2F
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Jun 2025 21:12:42 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7DA5044AA2
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 24 Jun 2025 16:52:42 +0000 (UTC)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by lists.linaro.org (Postfix) with ESMTP id 43C053F6E0
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 24 Jun 2025 16:52:30 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3A23045610
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Jun 2025 19:12:40 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+	by lists.linaro.org (Postfix) with ESMTPS id B47BF3F575
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Jun 2025 19:12:28 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=none;
-	spf=pass (lists.linaro.org: domain of robin.murphy@arm.com designates 217.140.110.172 as permitted sender) smtp.mailfrom=robin.murphy@arm.com;
-	dmarc=pass (policy=none) header.from=arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D1D731AC1;
-	Tue, 24 Jun 2025 09:52:11 -0700 (PDT)
-Received: from [10.57.29.113] (unknown [10.57.29.113])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 929923F58B;
-	Tue, 24 Jun 2025 09:52:24 -0700 (PDT)
-Message-ID: <eb5dd1dd-ae08-4ab6-9bdc-c17e99bbacbd@arm.com>
-Date: Tue, 24 Jun 2025 17:52:22 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Tomeu Vizoso <tomeu@tomeuvizoso.net>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Heiko Stuebner <heiko@sntech.de>,
- Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=jQXCQmT8;
+	spf=pass (lists.linaro.org: domain of broonie@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=broonie@kernel.org;
+	dmarc=pass (policy=quarantine) header.from=kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by sea.source.kernel.org (Postfix) with ESMTP id EFDBE4B26A;
+	Wed, 25 Jun 2025 19:12:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AC099C4CEEE;
+	Wed, 25 Jun 2025 19:12:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1750878747;
+	bh=+qriwj9qU4FY/kuIp4wDLlM/t8OqijQo1R2YW3zdLuU=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date:From;
+	b=jQXCQmT8D2h0EMiy0LeKaMVgq4MMLwiB5Ojl9jxZUv3lfWTMXOdg/Ik0UrDQyUSjL
+	 4MyfWPrrhsFgzVudtvHgpM62ZTCCpPxy35fmIvUUFQNGqTyaa+MlvHiuIsfLG1LPq7
+	 DqO/X6euoQBAnIVWUFCtnMvL/ngetC26Gn7NfJVTg6zqih6MrgmXqtLPNUAMhF8Dyl
+	 MqUCjuQmArTDzS7IxOthC7s73wiH1W/851Whej89BlsJAhXIvMsYOcLLDNVEoVpD4k
+	 IO0k5pr5rxMRmHCfbJBy4JwocPtv2E4fPF/CDD2INuRNUBPSpXrHi/aKwXrLqj48Gf
+	 MZhLmOg8QqPSA==
+From: Mark Brown <broonie@kernel.org>
+To: Alain Volmat <alain.volmat@foss.st.com>,
+ Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+ Alexandre Torgue <alexandre.torgue@foss.st.com>,
+ Valentin Caron <valentin.caron@foss.st.com>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Erwan Leray <erwan.leray@foss.st.com>,
+ Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
  Sumit Semwal <sumit.semwal@linaro.org>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- Sebastian Reichel <sebastian.reichel@collabora.com>,
- Nicolas Frattaroli <nicolas.frattaroli@collabora.com>,
- Kever Yang <kever.yang@rock-chips.com>, Daniel Stone <daniel@fooishbar.org>,
- Da Xue <da@libre.computer>, Jeff Hugo <jeff.hugo@oss.qualcomm.com>
-References: <20250606-6-10-rocket-v7-0-dc16cfe6fe4e@tomeuvizoso.net>
- <20250606-6-10-rocket-v7-5-dc16cfe6fe4e@tomeuvizoso.net>
-From: Robin Murphy <robin.murphy@arm.com>
-Content-Language: en-GB
-In-Reply-To: <20250606-6-10-rocket-v7-5-dc16cfe6fe4e@tomeuvizoso.net>
+ =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ =?utf-8?q?Cl=C3=A9ment_Le_Goffic?= <clement.legoffic@foss.st.com>
+In-Reply-To: <20250616-spi-upstream-v1-0-7e8593f3f75d@foss.st.com>
+References: <20250616-spi-upstream-v1-0-7e8593f3f75d@foss.st.com>
+Message-Id: <175087874236.261602.8727707950137724434.b4-ty@kernel.org>
+Date: Wed, 25 Jun 2025 20:12:22 +0100
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+X-Mailer: b4 0.15-dev-08c49
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 43C053F6E0
+X-Rspamd-Queue-Id: B47BF3F575
 X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.20 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
+X-Spamd-Result: default: False [-2.44 / 15.00];
+	BAYES_HAM(-2.94)[99.74%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:217.140.96.0/20];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.252.31];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MIME_GOOD(-0.10)[text/plain];
-	RCVD_NO_TLS_LAST(0.10)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	ARC_NA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:28939, ipnet:217.140.110.0/24, country:GB];
-	RCPT_COUNT_TWELVE(0.00)[28];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_HAS_DN(0.00)[];
 	TAGGED_RCPT(0.00)[dt];
-	NEURAL_HAM(-0.00)[-1.000];
-	FROM_EQ_ENVFROM(0.00)[];
-	R_DKIM_NA(0.00)[];
-	TO_DN_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[21];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[foss.st.com,gmail.com,kernel.org,linaro.org,amd.com];
 	MID_RHS_MATCH_FROM(0.00)[];
-	FREEMAIL_TO(0.00)[tomeuvizoso.net,kernel.org,sntech.de,lwn.net,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,collabora.com,rock-chips.com,fooishbar.org,libre.computer,oss.qualcomm.com]
+	TO_DN_SOME(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	DWL_DNSWL_BLOCKED(0.00)[kernel.org:dkim];
+	DNSWL_BLOCKED(0.00)[100.75.92.58:received];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	NEURAL_HAM(-0.00)[-1.000];
+	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: F5B5BJPHORPPYKEKW3AFZLYL76CPGFAO
-X-Message-ID-Hash: F5B5BJPHORPPYKEKW3AFZLYL76CPGFAO
-X-MailFrom: robin.murphy@arm.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+Message-ID-Hash: FYRQOVS4PG22G2MTZKB4M2FYPD6A7LGD
+X-Message-ID-Hash: FYRQOVS4PG22G2MTZKB4M2FYPD6A7LGD
+X-MailFrom: broonie@kernel.org
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: linux-spi@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com, linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kernel test robot <lkp@intel.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v7 05/10] accel/rocket: Add IOCTLs for synchronizing memory accesses
+Subject: [Linaro-mm-sig] Re: [PATCH 0/6] Add few updates to the STM32 SPI driver
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/F5B5BJPHORPPYKEKW3AFZLYL76CPGFAO/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FYRQOVS4PG22G2MTZKB4M2FYPD6A7LGD/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
 
-On 2025-06-06 7:28 am, Tomeu Vizoso wrote:
-> The NPU cores have their own access to the memory bus, and this isn't
-> cache coherent with the CPUs.
-> 
-> Add IOCTLs so userspace can mark when the caches need to be flushed, and
-> also when a writer job needs to be waited for before the buffer can be
-> accessed from the CPU.
-> 
-> Initially based on the same IOCTLs from the Etnaviv driver.
-> 
-> v2:
-> - Don't break UABI by reordering the IOCTL IDs (Jeff Hugo)
-> 
-> v3:
-> - Check that padding fields in IOCTLs are zero (Jeff Hugo)
-> 
-> v6:
-> - Fix conversion logic to make sure we use DMA_BIDIRECTIONAL when needed
->    (Lucas Stach)
-> 
-> Signed-off-by: Tomeu Vizoso <tomeu@tomeuvizoso.net>
-> Reviewed-by: Jeff Hugo <jeff.hugo@oss.qualcomm.com>
-> ---
->   drivers/accel/rocket/rocket_drv.c |  2 +
->   drivers/accel/rocket/rocket_gem.c | 82 +++++++++++++++++++++++++++++++++++++++
->   drivers/accel/rocket/rocket_gem.h |  5 +++
->   include/uapi/drm/rocket_accel.h   | 37 ++++++++++++++++++
->   4 files changed, 126 insertions(+)
-> 
-> diff --git a/drivers/accel/rocket/rocket_drv.c b/drivers/accel/rocket/rocket_drv.c
-> index 4ab78193c186dfcfc3e323f16c588e85e6a8a334..eb9284ee2511f730afe6a532225c2706ce0e2822 100644
-> --- a/drivers/accel/rocket/rocket_drv.c
-> +++ b/drivers/accel/rocket/rocket_drv.c
-> @@ -62,6 +62,8 @@ static const struct drm_ioctl_desc rocket_drm_driver_ioctls[] = {
->   
->   	ROCKET_IOCTL(CREATE_BO, create_bo),
->   	ROCKET_IOCTL(SUBMIT, submit),
-> +	ROCKET_IOCTL(PREP_BO, prep_bo),
-> +	ROCKET_IOCTL(FINI_BO, fini_bo),
->   };
->   
->   DEFINE_DRM_ACCEL_FOPS(rocket_accel_driver_fops);
-> diff --git a/drivers/accel/rocket/rocket_gem.c b/drivers/accel/rocket/rocket_gem.c
-> index 61b7f970a6885aa13784daa1222611a02aa10dee..07024b6e71bf544dc7f00b008b9afb74b0c4e802 100644
-> --- a/drivers/accel/rocket/rocket_gem.c
-> +++ b/drivers/accel/rocket/rocket_gem.c
-> @@ -113,3 +113,85 @@ int rocket_ioctl_create_bo(struct drm_device *dev, void *data, struct drm_file *
->   
->   	return ret;
->   }
-> +
-> +static inline enum dma_data_direction rocket_op_to_dma_dir(u32 op)
-> +{
-> +	op &= ROCKET_PREP_READ | ROCKET_PREP_WRITE;
-> +
-> +	if (op == ROCKET_PREP_READ)
-> +		return DMA_FROM_DEVICE;
-> +	else if (op == ROCKET_PREP_WRITE)
-> +		return DMA_TO_DEVICE;
-> +	else
-> +		return DMA_BIDIRECTIONAL;
-> +}
-> +
-> +int rocket_ioctl_prep_bo(struct drm_device *dev, void *data, struct drm_file *file)
-> +{
-> +	struct drm_rocket_prep_bo *args = data;
-> +	unsigned long timeout = drm_timeout_abs_to_jiffies(args->timeout_ns);
-> +	struct rocket_device *rdev = to_rocket_device(dev);
-> +	struct drm_gem_object *gem_obj;
-> +	struct drm_gem_shmem_object *shmem_obj;
-> +	bool write = !!(args->op & ROCKET_PREP_WRITE);
-> +	long ret = 0;
-> +
-> +	if (args->op & ~(ROCKET_PREP_READ | ROCKET_PREP_WRITE))
-> +		return -EINVAL;
-> +
-> +	gem_obj = drm_gem_object_lookup(file, args->handle);
-> +	if (!gem_obj)
-> +		return -ENOENT;
-> +
-> +	ret = dma_resv_wait_timeout(gem_obj->resv, dma_resv_usage_rw(write),
-> +				    true, timeout);
-> +	if (!ret)
-> +		ret = timeout ? -ETIMEDOUT : -EBUSY;
-> +
-> +	shmem_obj = &to_rocket_bo(gem_obj)->base;
-> +
-> +	for (unsigned int core = 1; core < rdev->num_cores; core++) {
-
-Huh? If you need to sync the BO memory ever, then you need to sync it 
-for the same device it was mapped, and certainly not 0 or 2+ times 
-depending on how may cores happen to be enabled. Please throw 
-CONFIG_DMA_API_DEBUG at this.
-
-> +		dma_sync_sgtable_for_cpu(rdev->cores[core].dev, shmem_obj->sgt,
-> +					 rocket_op_to_dma_dir(args->op));
-
-Hmm, the intent of the API is really that the direction for sync should 
-match the direction for map and unmap too; if it was mapped 
-DMA_BIDIRECTIONAL then it should be synced DMA_BIDIRECTIONAL. If you 
-have BOs which are really only used for one-directional purposes then 
-they should be mapped as such at creation.
-
-Does anything actually prevent one thread form trying to read from a 
-buffer while another thread is writing it, and thus the read 
-inintuitively destroying newly-written data (and/or the write 
-unwittingly destroying its own data in FINI_BO because last_cpu_prep_op 
-got overwritten)? Unless there's a significant measurable benefit to 
-trying to be clever here (of which I'm somewhjat doubtful), I would be 
-strongly inclined to just keep things simple and straightforward.
-
-Thanks,
-Robin.
-
-> +	}
-> +
-> +	to_rocket_bo(gem_obj)->last_cpu_prep_op = args->op;
-> +
-> +	drm_gem_object_put(gem_obj);
-> +
-> +	return ret;
-> +}
-> +
-> +int rocket_ioctl_fini_bo(struct drm_device *dev, void *data, struct drm_file *file)
-> +{
-> +	struct rocket_device *rdev = to_rocket_device(dev);
-> +	struct drm_rocket_fini_bo *args = data;
-> +	struct drm_gem_shmem_object *shmem_obj;
-> +	struct rocket_gem_object *rkt_obj;
-> +	struct drm_gem_object *gem_obj;
-> +
-> +	if (args->reserved != 0) {
-> +		drm_dbg(dev, "Reserved field in drm_rocket_fini_bo struct should be 0.\n");
-> +		return -EINVAL;
-> +	}
-> +
-> +	gem_obj = drm_gem_object_lookup(file, args->handle);
-> +	if (!gem_obj)
-> +		return -ENOENT;
-> +
-> +	rkt_obj = to_rocket_bo(gem_obj);
-> +	shmem_obj = &rkt_obj->base;
-> +
-> +	WARN_ON(rkt_obj->last_cpu_prep_op == 0);
-> +
-> +	for (unsigned int core = 1; core < rdev->num_cores; core++) {
-> +		dma_sync_sgtable_for_device(rdev->cores[core].dev, shmem_obj->sgt,
-> +					    rocket_op_to_dma_dir(rkt_obj->last_cpu_prep_op));
-> +	}
-> +
-> +	rkt_obj->last_cpu_prep_op = 0;
-> +
-> +	drm_gem_object_put(gem_obj);
-> +
-> +	return 0;
-> +}
-> diff --git a/drivers/accel/rocket/rocket_gem.h b/drivers/accel/rocket/rocket_gem.h
-> index e8a4d6213fd80419be2ec8af04583a67fb1a4b75..a52a63cd78339a6150b99592ab5f94feeeb51fde 100644
-> --- a/drivers/accel/rocket/rocket_gem.h
-> +++ b/drivers/accel/rocket/rocket_gem.h
-> @@ -12,12 +12,17 @@ struct rocket_gem_object {
->   	struct iommu_domain *domain;
->   	size_t size;
->   	u32 offset;
-> +	u32 last_cpu_prep_op;
->   };
->   
->   struct drm_gem_object *rocket_gem_create_object(struct drm_device *dev, size_t size);
->   
->   int rocket_ioctl_create_bo(struct drm_device *dev, void *data, struct drm_file *file);
->   
-> +int rocket_ioctl_prep_bo(struct drm_device *dev, void *data, struct drm_file *file);
-> +
-> +int rocket_ioctl_fini_bo(struct drm_device *dev, void *data, struct drm_file *file);
-> +
->   static inline
->   struct  rocket_gem_object *to_rocket_bo(struct drm_gem_object *obj)
->   {
-> diff --git a/include/uapi/drm/rocket_accel.h b/include/uapi/drm/rocket_accel.h
-> index cb1b5934c201160e7650aabd1b3a2b1c77b1fd7b..b5c80dd767be56e9720b51e4a82617a425a881a1 100644
-> --- a/include/uapi/drm/rocket_accel.h
-> +++ b/include/uapi/drm/rocket_accel.h
-> @@ -13,9 +13,13 @@ extern "C" {
->   
->   #define DRM_ROCKET_CREATE_BO			0x00
->   #define DRM_ROCKET_SUBMIT			0x01
-> +#define DRM_ROCKET_PREP_BO			0x02
-> +#define DRM_ROCKET_FINI_BO			0x03
->   
->   #define DRM_IOCTL_ROCKET_CREATE_BO		DRM_IOWR(DRM_COMMAND_BASE + DRM_ROCKET_CREATE_BO, struct drm_rocket_create_bo)
->   #define DRM_IOCTL_ROCKET_SUBMIT			DRM_IOW(DRM_COMMAND_BASE + DRM_ROCKET_SUBMIT, struct drm_rocket_submit)
-> +#define DRM_IOCTL_ROCKET_PREP_BO		DRM_IOW(DRM_COMMAND_BASE + DRM_ROCKET_PREP_BO, struct drm_rocket_prep_bo)
-> +#define DRM_IOCTL_ROCKET_FINI_BO		DRM_IOW(DRM_COMMAND_BASE + DRM_ROCKET_FINI_BO, struct drm_rocket_fini_bo)
->   
->   /**
->    * struct drm_rocket_create_bo - ioctl argument for creating Rocket BOs.
-> @@ -39,6 +43,39 @@ struct drm_rocket_create_bo {
->   	__u64 offset;
->   };
->   
-> +#define ROCKET_PREP_READ        0x01
-> +#define ROCKET_PREP_WRITE       0x02
-> +
-> +/**
-> + * struct drm_rocket_prep_bo - ioctl argument for starting CPU ownership of the BO.
-> + *
-> + * Takes care of waiting for any NPU jobs that might still use the NPU and performs cache
-> + * synchronization.
-> + */
-> +struct drm_rocket_prep_bo {
-> +	/** Input: GEM handle of the buffer object. */
-> +	__u32 handle;
-> +
-> +	/** Input: mask of ROCKET_PREP_x, direction of the access. */
-> +	__u32 op;
-> +
-> +	/** Input: Amount of time to wait for NPU jobs. */
-> +	__s64 timeout_ns;
-> +};
-> +
-> +/**
-> + * struct drm_rocket_fini_bo - ioctl argument for finishing CPU ownership of the BO.
-> + *
-> + * Synchronize caches for NPU access.
-> + */
-> +struct drm_rocket_fini_bo {
-> +	/** Input: GEM handle of the buffer object. */
-> +	__u32 handle;
-> +
-> +	/** Reserved, must be zero. */
-> +	__u32 reserved;
-> +};
-> +
->   /**
->    * struct drm_rocket_task - A task to be run on the NPU
->    *
-> 
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gTW9uLCAxNiBKdW4gMjAyNSAxMToyMTowMSArMDIwMCwgQ2zDqW1lbnQgTGUgR29mZmljIHdy
+b3RlOg0KPiBUaGlzIHNlcmllcyBhaW1zIHRvIGltcHJvdmUgdGhlIFNUTTMyIFNQSSBkcml2ZXIg
+aW4gZGlmZmVyZW50IGFyZWFzLg0KPiBJdCBhZGRzIFNQSV9SRUFEWSBtb2RlLCBmaXhlcyBhbiBp
+c3N1ZSByYWlzZWQgYnkgYSBrZXJuZWwgYm90LA0KPiBhZGQgdGhlIGFiaWxpdHkgdG8gdXNlIERN
+QS1NRE1BIGNoYWluaW5nIGZvciBSWCBhbmQgZGVwcmVjYXRlIGFuIFNUIGJpbmRpbmdzDQo+IHZl
+bmRvciBwcm9wZXJ0eS4NCj4gDQo+IA0KDQpBcHBsaWVkIHRvDQoNCiAgIGh0dHBzOi8vZ2l0Lmtl
+cm5lbC5vcmcvcHViL3NjbS9saW51eC9rZXJuZWwvZ2l0L2Jyb29uaWUvc3BpLmdpdCBmb3ItbmV4
+dA0KDQpUaGFua3MhDQoNClsxLzZdIHNwaTogc3RtMzI6IEFkZCBTUElfUkVBRFkgbW9kZSB0byBz
+cGkgY29udHJvbGxlcg0KICAgICAgY29tbWl0OiBlNGZlZWZhNWM3MTkxMmViZmNiOTdhM2RiZTJi
+MDIxZmQxY2VhOWQxDQpbMi82XSBzcGk6IHN0bTMyOiBDaGVjayBmb3IgY2ZnIGF2YWlsYWJpbGl0
+eSBpbiBzdG0zMl9zcGlfcHJvYmUNCiAgICAgIGNvbW1pdDogMjFmMWM4MDBmNjYyMGU0M2YzMWRm
+ZDc2NzA5ZGJhYzhlYmFhNWExNg0KWzMvNl0gZHQtYmluZGluZ3M6IHNwaTogc3RtMzI6IHVwZGF0
+ZSBiaW5kaW5ncyB3aXRoIFNQSSBSeCBETUEtTURNQSBjaGFpbmluZw0KICAgICAgY29tbWl0OiBi
+ZDYwZjk0YTNlYjRmODBjYjY2Yzk2ODdkNjQwNTU0ZmQwYzU3OWQwDQpbNC82XSBzcGk6IHN0bTMy
+OiB1c2UgU1RNMzIgRE1BIHdpdGggU1RNMzIgTURNQSB0byBlbmhhbmNlIEREUiB1c2UNCiAgICAg
+IGNvbW1pdDogZDE3ZGQyZjFkOGExZDkxOWUzOWM2MzAyYjAyNGYxMzVhMmY5MDc3Mw0KWzUvNl0g
+c3BpOiBzdG0zMjogZGVwcmVjYXRlIGBzdCxzcGktbWlkaS1uc2AgcHJvcGVydHkNCiAgICAgIGNv
+bW1pdDogNDk1NmJmNDQ1MjQzOTQyMTFjYTgwYWEwNGQwYzllMWU5YmIwMjE5ZA0KWzYvNl0gZHQt
+YmluZGluZ3M6IHNwaTogc3RtMzI6IGRlcHJlY2F0ZSBgc3Qsc3BpLW1pZGktbnNgIHByb3BlcnR5
+DQogICAgICBjb21taXQ6IDlhOTQ0NDk0YzI5OWZhYmYzY2M3ODE3OThlYjdjMDJhMGJlY2UzNjQN
+Cg0KQWxsIGJlaW5nIHdlbGwgdGhpcyBtZWFucyB0aGF0IGl0IHdpbGwgYmUgaW50ZWdyYXRlZCBp
+bnRvIHRoZSBsaW51eC1uZXh0DQp0cmVlICh1c3VhbGx5IHNvbWV0aW1lIGluIHRoZSBuZXh0IDI0
+IGhvdXJzKSBhbmQgc2VudCB0byBMaW51cyBkdXJpbmcNCnRoZSBuZXh0IG1lcmdlIHdpbmRvdyAo
+b3Igc29vbmVyIGlmIGl0IGlzIGEgYnVnIGZpeCksIGhvd2V2ZXIgaWYNCnByb2JsZW1zIGFyZSBk
+aXNjb3ZlcmVkIHRoZW4gdGhlIHBhdGNoIG1heSBiZSBkcm9wcGVkIG9yIHJldmVydGVkLg0KDQpZ
+b3UgbWF5IGdldCBmdXJ0aGVyIGUtbWFpbHMgcmVzdWx0aW5nIGZyb20gYXV0b21hdGVkIG9yIG1h
+bnVhbCB0ZXN0aW5nDQphbmQgcmV2aWV3IG9mIHRoZSB0cmVlLCBwbGVhc2UgZW5nYWdlIHdpdGgg
+cGVvcGxlIHJlcG9ydGluZyBwcm9ibGVtcyBhbmQNCnNlbmQgZm9sbG93dXAgcGF0Y2hlcyBhZGRy
+ZXNzaW5nIGFueSBpc3N1ZXMgdGhhdCBhcmUgcmVwb3J0ZWQgaWYgbmVlZGVkLg0KDQpJZiBhbnkg
+dXBkYXRlcyBhcmUgcmVxdWlyZWQgb3IgeW91IGFyZSBzdWJtaXR0aW5nIGZ1cnRoZXIgY2hhbmdl
+cyB0aGV5DQpzaG91bGQgYmUgc2VudCBhcyBpbmNyZW1lbnRhbCB1cGRhdGVzIGFnYWluc3QgY3Vy
+cmVudCBnaXQsIGV4aXN0aW5nDQpwYXRjaGVzIHdpbGwgbm90IGJlIHJlcGxhY2VkLg0KDQpQbGVh
+c2UgYWRkIGFueSByZWxldmFudCBsaXN0cyBhbmQgbWFpbnRhaW5lcnMgdG8gdGhlIENDcyB3aGVu
+IHJlcGx5aW5nDQp0byB0aGlzIG1haWwuDQoNClRoYW5rcywNCk1hcmsNCg0KX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5n
+IGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNl
+bmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
