@@ -2,35 +2,35 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5ECB3AFAB46
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  7 Jul 2025 07:55:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D49AAFAB5A
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  7 Jul 2025 07:58:47 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 59F2F44A29
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  7 Jul 2025 05:55:51 +0000 (UTC)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id D28063F61A
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  7 Jul 2025 05:55:39 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3A62844A3B
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  7 Jul 2025 05:58:46 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+	by lists.linaro.org (Postfix) with ESMTPS id 4F75B3F5B7
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  7 Jul 2025 05:58:34 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b="Z/xezK9q";
-	spf=pass (lists.linaro.org: domain of krzk@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=krzk@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=GguYTzG1;
+	spf=pass (lists.linaro.org: domain of krzk@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=krzk@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by dfw.source.kernel.org (Postfix) with ESMTP id 71F0D5C58DF;
-	Mon,  7 Jul 2025 05:55:39 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DC1D6C4CEE3;
-	Mon,  7 Jul 2025 05:55:35 +0000 (UTC)
+	by tor.source.kernel.org (Postfix) with ESMTP id 7E16E61130;
+	Mon,  7 Jul 2025 05:58:33 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8C2AEC4CEE3;
+	Mon,  7 Jul 2025 05:58:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1751867739;
-	bh=hoXMp+VgKgPJ/M9+rwELrRmZnYdLSyCGtRFwRi3ZxeA=;
+	s=k20201202; t=1751867913;
+	bh=TQ8niipcDW0KwRyOxm4GIOICKfjbN5Jrf98vlsGuva8=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=Z/xezK9qDm16zM+OFEcj5pEOrhu4AGirtPoAWIe42rabSn8ANe+c35JSvadsC2DhP
-	 tLfMw+XpHxiqB2j1Pnaz02mKIsqWnMKgxyrsfsUCoMhJkIVF2nVeLD3QnMnsz+xVcf
-	 HV1/jmQcDEDlqrlAyFGIqbfGCLe3hU0JJFu3CHDK1aXS0GGj7yqJ1Lz1hBYSJwyMvM
-	 v9JVUcPONGNbiZYyivgcv4t/YTKL9zk6D6ZTQeNglS1q403vMlB5yVSUs9nm0/Aiob
-	 bUBocC4ge/ySbOYIom00hZsetxH+EMId0Ljk+33VizQCJ99CeKqBKc6Xag6YppbPdp
-	 /uUa9JFCPo5PA==
-Message-ID: <b703f4bf-6360-4776-913b-411974ee8bc8@kernel.org>
-Date: Mon, 7 Jul 2025 07:55:33 +0200
+	b=GguYTzG134RYKZXM25Wg3xyyZ0SGkQcFQhFicvkk9Wk6NlZ2iRmSRYYA0IsaYpOX7
+	 a05tNAiAqHcaCiUrUaDkqeiMrvtMMYhmNGIelxS1VCOJ9V9tS86UhZSal95+ZJnmRp
+	 ugjbYZ5VWIGsXtkMI2uqC9gv+7O0L+ra09NxxJZLyghLH7Bw7sgg+D5xr2P9oDPgxg
+	 fjVwddhuO+gI3em+Ifp6PryOKwaIsdGlDAgkvDoTUIfd8Y/V+BcJE8O1dwJCiOOrxB
+	 ZKnCyks35CoQgk16Tc2k/066OwpMhc07x80rjIsjCG/RPDxhziUZr9CSl5pH8VNoGs
+	 p5qMffAx7j+oA==
+Message-ID: <5762f13d-73b1-4f56-aec7-b42add14ca5e@kernel.org>
+Date: Mon, 7 Jul 2025 07:58:27 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: shangyao lin <shangyao.lin@mediatek.com>,
@@ -39,6 +39,7 @@ To: shangyao lin <shangyao.lin@mediatek.com>,
  <conor+dt@kernel.org>, Matthias Brugger <matthias.bgg@gmail.com>,
  AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
 References: <20250707013154.4055874-1-shangyao.lin@mediatek.com>
+ <20250707013154.4055874-9-shangyao.lin@mediatek.com>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
@@ -84,45 +85,45 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  jWt87ecuHlpL3uuQ0ZZNWqHgZoQLXoqC2ZV5KrtKWb/jyiFX/sxSrodALf0zf+tfHv0FZWT2
  zHjUqd0t4njD/UOsuIMOQn4Ig0SdivYPfZukb5cdasKJukG1NOpbW7yRNivaCnfZz6dTawXw
  XRIV/KDsHQiyVxKvN73bThKhONkcX2LWuD928tAR6XMM2G5ovxLe09vuOzzfTWQDsm++9UKF a/A=
-In-Reply-To: <20250707013154.4055874-1-shangyao.lin@mediatek.com>
+In-Reply-To: <20250707013154.4055874-9-shangyao.lin@mediatek.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: D28063F61A
-X-Spamd-Bar: /
-X-Spamd-Result: default: False [-0.61 / 15.00];
+X-Rspamd-Queue-Id: 4F75B3F5B7
+X-Spamd-Bar: --
+X-Spamd-Result: default: False [-2.50 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	BAYES_HAM(-1.11)[88.28%];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.4.254:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
 	MIME_GOOD(-0.10)[text/plain];
 	TAGGED_RCPT(0.00)[dt];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:15830, ipnet:139.178.80.0/21, country:NL];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[15];
 	MIME_TRACE(0.00)[0:+];
+	ASN(0.00)[asn:63949, ipnet:172.105.0.0/19, country:SG];
+	ARC_NA(0.00)[];
 	FREEMAIL_TO(0.00)[mediatek.com,kernel.org,gmail.com,collabora.com];
-	DWL_DNSWL_BLOCKED(0.00)[kernel.org:dkim];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
+	URIBL_BLOCKED(0.00)[tor.source.kernel.org:rdns,tor.source.kernel.org:helo];
+	RCVD_COUNT_TWO(0.00)[2];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	NEURAL_HAM(-0.00)[-1.000];
 	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: FJLLW6HH7VNL7YO2I3PBBCGED76YI5WW
-X-Message-ID-Hash: FJLLW6HH7VNL7YO2I3PBBCGED76YI5WW
+Message-ID-Hash: OHLGRNYYLEX44IWC6ISFVCMRCXO5EX7L
+X-Message-ID-Hash: OHLGRNYYLEX44IWC6ISFVCMRCXO5EX7L
 X-MailFrom: krzk@kernel.org
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: linux-media@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Project_Global_Chrome_Upstream_Group@mediatek.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 00/13] Add MediaTek ISP7.x camera system support
+Subject: [Linaro-mm-sig] Re: [PATCH v2 08/13] media: platform: mediatek: add isp_7x camsys unit
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FJLLW6HH7VNL7YO2I3PBBCGED76YI5WW/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OHLGRNYYLEX44IWC6ISFVCMRCXO5EX7L/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -133,17 +134,190 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
 On 07/07/2025 03:31, shangyao lin wrote:
-> Based on linux-next tag: next-20250630
-> 
-> This patch set adds the MediaTek ISP7.x camera system hardware driver.
-> 
-> The driver sets up ISP hardware, handles interrupts, and initializes
-> V4L2 device nodes and functions. It also implements a V4L2 standard video
-> driver utilizing the media framework APIs, connects sensors and the ISP
-> via the seninf interface, and communicates with the SCP co-processor to
-> compose ISP registers in firmware.
-> 
-Now I found v1. How did you address comment about compliance report?
+> +static int mtk_cam_create_links(struct mtk_cam_device *cam)
+> +{
+> +	struct v4l2_subdev *sd;
+> +	int ret = 0;
+> +
+> +	v4l2_device_for_each_subdev(sd, &cam->v4l2_dev) {
+> +		if (sd->entity.function == MEDIA_ENT_F_VID_IF_BRIDGE)
+> +			ret = config_bridge_pad_links(cam, sd);
+> +	}
+> +
+> +	return ret;
+> +}
+> +
+> +static int mtk_cam_master_register(struct device *dev)
+> +{
+> +	struct mtk_cam_device *cam_dev = dev_get_drvdata(dev);
+> +	struct media_device *media_dev = &cam_dev->media_dev;
+> +	int ret;
+> +
+> +	dev_info(dev, "camsys | start %s\n", __func__);
+
+NAK, nothing improved, you already got comments on that. Provide
+detailed changelog next time. And respond to EACH comment acknowledging
+that you understood it.
+
+This code still has so many trivial issues and terrible coding style,
+including wrong indentation, wrong alignment/wrapping.
+
+
+> +
+> +	media_dev->dev = cam_dev->dev;
+> +	strscpy(media_dev->model, dev_driver_string(dev),
+> +		sizeof(media_dev->model));
+> +	snprintf(media_dev->bus_info, sizeof(media_dev->bus_info),
+> +		 "platform:%s", dev_name(dev));
+> +	media_dev->hw_revision = 0;
+> +	media_dev->ops = &mtk_cam_dev_ops;
+> +	media_device_init(media_dev);
+> +
+> +	cam_dev->v4l2_dev.mdev = media_dev;
+> +	ret = v4l2_device_register(cam_dev->dev, &cam_dev->v4l2_dev);
+> +	if (ret) {
+> +		dev_dbg(dev, "Failed to register V4L2 device: %d\n", ret);
+> +		goto fail_media_device_cleanup;
+> +	}
+> +
+> +	ret = media_device_register(media_dev);
+> +	if (ret) {
+> +		dev_dbg(dev, "Failed to register media device: %d\n",
+> +			ret);
+> +		goto fail_v4l2_device_unreg;
+> +	}
+> +
+> +	dev_info(dev, "%s success\n", __func__);
+> +	return 0;
+> +
+> +fail_v4l2_device_unreg:
+> +	v4l2_device_unregister(&cam_dev->v4l2_dev);
+> +
+> +fail_media_device_cleanup:
+> +	media_device_cleanup(&cam_dev->media_dev);
+> +
+> +	return ret;
+> +}
+> +
+> +static void mtk_cam_master_unregister(struct device *dev)
+> +{
+> +	struct mtk_cam_device *cam_dev = dev_get_drvdata(dev);
+> +
+> +	dev_info(dev, "camsys | start %s\n", __func__);
+
+NAK
+
+> +
+> +	media_device_unregister(&cam_dev->media_dev);
+> +	v4l2_device_unregister(&cam_dev->v4l2_dev);
+> +	media_device_cleanup(&cam_dev->media_dev);
+> +}
+> +
+> +static int mtk_cam_async_add_by_driver(struct device *dev,
+> +				       struct platform_driver *drv,
+> +				       struct v4l2_async_notifier *notifier)
+> +{
+> +	struct fwnode_handle *fwnode;
+> +	struct device *p;
+> +	struct v4l2_async_connection *asc;
+> +	int dev_num = 0;
+> +
+> +	p = platform_find_device_by_driver(NULL, &drv->driver);
+> +	while (p) {
+> +		dev_info(dev, "camsys | %s add %s\n", __func__, p->kobj.name);
+> +
+> +		fwnode = dev_fwnode(p);
+> +		asc = v4l2_async_nf_add_fwnode(notifier, fwnode,
+> +					       struct v4l2_async_connection);
+> +		put_device(p);
+> +
+
+...
+
+> +
+> +	cam_dev->base = devm_ioremap_resource(dev, res);
+> +	if (IS_ERR(cam_dev->base)) {
+> +		dev_err(dev, "failed to map register base\n");
+> +		return PTR_ERR(cam_dev->base);
+> +	}
+> +
+> +	cam_dev->dev = dev;
+> +	dev_set_drvdata(dev, cam_dev);
+> +
+> +	cam_dev->composer_cnt = 0;
+> +	cam_dev->num_seninf_devices = 0;
+> +
+> +	cam_dev->max_stream_num = MTKCAM_SUBDEV_MAX;
+> +	cam_dev->ctxs = devm_kcalloc(dev, cam_dev->max_stream_num,
+> +				     sizeof(*cam_dev->ctxs), GFP_KERNEL);
+> +	if (!cam_dev->ctxs)
+> +		return -ENOMEM;
+> +
+> +	cam_dev->streaming_ctx = 0;
+> +	for (i = 0; i < cam_dev->max_stream_num; i++)
+> +		mtk_cam_ctx_init(cam_dev->ctxs + i, cam_dev, i);
+> +
+> +	cam_dev->running_job_count = 0;
+> +	spin_lock_init(&cam_dev->pending_job_lock);
+> +	spin_lock_init(&cam_dev->running_job_lock);
+> +	INIT_LIST_HEAD(&cam_dev->pending_job_list);
+> +	INIT_LIST_HEAD(&cam_dev->running_job_list);
+> +
+> +	cam_dev->dma_processing_count = 0;
+> +	spin_lock_init(&cam_dev->dma_pending_lock);
+> +	spin_lock_init(&cam_dev->dma_processing_lock);
+> +	INIT_LIST_HEAD(&cam_dev->dma_pending);
+> +	INIT_LIST_HEAD(&cam_dev->dma_processing);
+> +
+> +	mutex_init(&cam_dev->queue_lock);
+> +
+> +	pm_runtime_enable(dev);
+> +
+> +	ret = mtk_cam_of_rproc(cam_dev, pdev);
+> +	if (ret)
+> +		goto fail_destroy_mutex;
+> +
+> +	ret = register_sub_drivers(dev);
+> +	if (ret) {
+> +		dev_err(dev, "fail to register_sub_drivers\n");
+> +		goto fail_destroy_mutex;
+> +	}
+> +
+> +    cam_dev->clks_pdev = platform_device_register_data(
+> +        dev, "clk-mt8188-cam", PLATFORM_DEVID_AUTO, NULL, 0);
+> +    if (IS_ERR(cam_dev->clks_pdev)) {
+> +        ret = PTR_ERR(cam_dev->clks_pdev);
+> +        dev_err(dev, "Failed to register cam clk device: %d\n", ret);
+> +        goto fail_unregister_sub_drivers;
+> +    }
+> +	
+> +	/* register mtk_cam as all isp subdev async parent */
+> +	cam_dev->notifier.ops = &mtk_cam_async_nf_ops;
+> +	v4l2_async_nf_init(&cam_dev->notifier, &cam_dev->v4l2_dev);
+> +	ret = mtk_cam_async_subdev_add(dev); /* wait all isp sub drivers */
+> +	if (ret) {
+> +		dev_err(dev, "%s failed mtk_cam_async_subdev_add\n", __func__);
+> +		goto fail_unregister_clks;
+> +	}
+> +
+> +	ret = v4l2_async_nf_register(&cam_dev->notifier);
+> +	if (ret) {
+> +		dev_err(dev, "%s async_nf_register ret:%d\n", __func__, ret);
+> +		v4l2_async_nf_cleanup(&cam_dev->notifier);
+> +		goto fail_unregister_clks;
+> +	}
+> +
+> +	dev_info(dev, "camsys | [%s] success\n", __func__);
+
+You already got comments. Nothing improved here.
+
+> +
+> +	return 0;
+> +
+> +fail_unregister_clks:
+> +    if (cam_dev->clks_pdev)
+> +        platform_device_unregister(cam_dev->clks_pdev);
+> +
 
 Best regards,
 Krzysztof
