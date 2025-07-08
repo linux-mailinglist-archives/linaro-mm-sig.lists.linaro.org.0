@@ -2,197 +2,142 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 418ACAFC440
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  8 Jul 2025 09:39:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 20B7EAFC750
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  8 Jul 2025 11:45:33 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0620342503
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  8 Jul 2025 07:39:07 +0000 (UTC)
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
-	by lists.linaro.org (Postfix) with ESMTPS id AE21741406
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  8 Jul 2025 07:38:54 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 1CB13443EF
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  8 Jul 2025 09:45:32 +0000 (UTC)
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+	by lists.linaro.org (Postfix) with ESMTPS id 586854159B
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  8 Jul 2025 09:45:18 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=Z+cDIoqg;
-	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=oCcz3XoT;
-	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=Z+cDIoqg;
-	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=oCcz3XoT;
-	spf=pass (lists.linaro.org: domain of tzimmermann@suse.de designates 195.135.223.130 as permitted sender) smtp.mailfrom=tzimmermann@suse.de;
-	dmarc=pass (policy=none) header.from=suse.de
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by smtp-out1.suse.de (Postfix) with ESMTPS id 7DE6C2115F;
-	Tue,  8 Jul 2025 07:38:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1751960333; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=gvG5OJSZUKUfmOaM9AGtFnkko27si3EQj7m9quIH+1U=;
-	b=Z+cDIoqgze0oqsRAESJ+3Zsubl5j79M5/pT1u8FEq56KkABuklx2yAl0/NOQBBq7cLliEG
-	w/BgzsdD5oNmLng+Ej9dIh+o55N1YVqhN4CqcCO+MbE7SxVxW7+kKpJ1tPj7QM2zeYl1gr
-	4jUnK5OWMyE7gIUGrduMElIiHqfl0PA=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1751960333;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=gvG5OJSZUKUfmOaM9AGtFnkko27si3EQj7m9quIH+1U=;
-	b=oCcz3XoTG2OpMrgy6Go/NmHCi+I73sVD2Pqsd2PADEDbC8BCxQ6lqFq6fSktqH9ZfYBB//
-	meQGvKx6KWqOyyBQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1751960333; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=gvG5OJSZUKUfmOaM9AGtFnkko27si3EQj7m9quIH+1U=;
-	b=Z+cDIoqgze0oqsRAESJ+3Zsubl5j79M5/pT1u8FEq56KkABuklx2yAl0/NOQBBq7cLliEG
-	w/BgzsdD5oNmLng+Ej9dIh+o55N1YVqhN4CqcCO+MbE7SxVxW7+kKpJ1tPj7QM2zeYl1gr
-	4jUnK5OWMyE7gIUGrduMElIiHqfl0PA=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1751960333;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=gvG5OJSZUKUfmOaM9AGtFnkko27si3EQj7m9quIH+1U=;
-	b=oCcz3XoTG2OpMrgy6Go/NmHCi+I73sVD2Pqsd2PADEDbC8BCxQ6lqFq6fSktqH9ZfYBB//
-	meQGvKx6KWqOyyBQ==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 1198913A54;
-	Tue,  8 Jul 2025 07:38:53 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
-	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id HNbpAg3LbGhQRwAAD6G6ig
-	(envelope-from <tzimmermann@suse.de>); Tue, 08 Jul 2025 07:38:53 +0000
-Message-ID: <a421623f-e93f-4423-bf30-c7388c6a3508@suse.de>
-Date: Tue, 8 Jul 2025 09:38:52 +0200
+	dkim=pass header.d=infradead.org header.s=bombadil.20210309 header.b=UWKNWOvb;
+	spf=none (lists.linaro.org: domain of BATV+94213881afc477778e20+7989+infradead.org+hch@bombadil.srs.infradead.org has no SPF policy when checking 198.137.202.133) smtp.mailfrom=BATV+94213881afc477778e20+7989+infradead.org+hch@bombadil.srs.infradead.org;
+	dmarc=none
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
+	:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=aIbqbwBgG/lyES8ZapCr+jWLXI49EU1keL2UKBLl4ZQ=; b=UWKNWOvbW1xTiQyAkogBIy5vXY
+	1kMTpJM38uJiKRySLNvCg1/KWyoRb1P010eKGu0Ne4OmVDj2enRDpDMIYiYutgg62elXC6HX5fRwp
+	M1LNLNaS6wDYR9RjAnmSCamtrf8dgwjDhxgF2622TFGsWOtY8XIgCxUX7uUkeFHHe88+IJxPP1aH5
+	C5UZrWlj2eHwJoWhyOzwHz2bpVaRlInzIv2GdifcrnVgCksZ0myip6UGZhhb0Tu0LW3YV/B7CjhVD
+	9z4Jd2Nv/RLlugnLGApfhYL3NyOuZthIVKEvuC2NpqgIbuLqfHQrETLIoiOgkss1GF0ULYqQBX//B
+	eBqoAwnQ==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.98.2 #2 (Red Hat Linux))
+	id 1uZ4t1-00000004vIx-0KrK;
+	Tue, 08 Jul 2025 09:45:15 +0000
+Date: Tue, 8 Jul 2025 02:45:15 -0700
+From: Christoph Hellwig <hch@infradead.org>
+To: Pavel Begunkov <asml.silence@gmail.com>
+Message-ID: <aGzoqyM06rgXIJst@infradead.org>
+References: <cover.1751035820.git.asml.silence@gmail.com>
+ <aGaSb5rpLD9uc1IK@infradead.org>
+ <f2216c30-6540-4b1a-b798-d9a3f83547b2@gmail.com>
+ <aGveLlLDcsyCBKuU@infradead.org>
+ <e210595b-d01f-4405-9b5d-a486ddca49ed@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Satadru Pramanik <satadru@gmail.com>
-References: <20250707131224.249496-1-tzimmermann@suse.de>
- <a3336964-1b72-421c-b4dc-2ac3f548430b@amd.com>
- <4c1bc40d-6bd4-4102-b12f-fda320216e1d@suse.de>
- <CAFrh3J9uh0M5bWeS3cv_Cb1yFTKhE2+9mSk5hsZTzWW3uYKaWg@mail.gmail.com>
-Content-Language: en-US
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Autocrypt: addr=tzimmermann@suse.de; keydata=
- xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
- XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
- BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
- hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
- 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
- AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
- AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
- AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
- lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
- U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
- vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
- 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
- j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
- T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
- 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
- GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
- hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
- EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
- C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
- yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
- SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
- Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
- 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
-In-Reply-To: <CAFrh3J9uh0M5bWeS3cv_Cb1yFTKhE2+9mSk5hsZTzWW3uYKaWg@mail.gmail.com>
-X-Spam-Flag: NO
-X-Spam-Level: 
-X-Spam-Score: -4.51
+Content-Disposition: inline
+In-Reply-To: <e210595b-d01f-4405-9b5d-a486ddca49ed@gmail.com>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: AE21741406
+X-Rspamd-Queue-Id: 586854159B
 X-Spamd-Bar: ---
-X-Spamd-Result: default: False [-4.00 / 15.00];
+X-Spamd-Result: default: False [-3.30 / 15.00];
 	BAYES_HAM(-3.00)[99.99%];
-	DMARC_POLICY_ALLOW(-0.50)[suse.de,none];
-	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	R_SPF_ALLOW(-0.20)[+ip4:195.135.223.130/32];
+	DWL_DNSWL_MED(-2.00)[infradead.org:dkim];
+	SUSPICIOUS_RECIPS(1.50)[];
+	FORGED_SENDER(0.30)[hch@infradead.org,BATV@bombadil.srs.infradead.org];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
+	ONCE_RECEIVED(0.20)[];
 	MIME_GOOD(-0.10)[text/plain];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[94213881afc477778e20,7989,infradead.org,hch];
 	FREEMAIL_TO(0.00)[gmail.com];
-	RCVD_TLS_ALL(0.00)[];
-	ASN(0.00)[asn:29298, ipnet:195.135.223.0/24, country:DE];
 	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[17];
+	DMARC_NA(0.00)[infradead.org];
 	MIME_TRACE(0.00)[0:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	TO_DN_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[amd.com,redhat.com,linux.intel.com,kernel.org,gmail.com,ffwll.ch,guillain.net,alien8.de,lists.freedesktop.org,vger.kernel.org,web.de,linaro.org,lists.linaro.org];
-	NEURAL_HAM(-0.00)[-1.000];
-	FROM_EQ_ENVFROM(0.00)[];
-	DNSWL_BLOCKED(0.00)[2a07:de40:b281:104:10:150:64:97:received,195.135.223.130:from];
+	R_SPF_NA(0.00)[no SPF record];
+	DKIM_TRACE(0.00)[infradead.org:+];
+	MISSING_XM_UA(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DKIM_TRACE(0.00)[suse.de:+]
+	FROM_NEQ_ENVFROM(0.00)[hch@infradead.org,BATV@bombadil.srs.infradead.org];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[14];
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_COUNT_ONE(0.00)[1];
+	ASN(0.00)[asn:7247, ipnet:198.137.202.0/24, country:US];
+	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
-Message-ID-Hash: XRMHNOQFZVFCZATJY2OSTL3FRTRAP7I7
-X-Message-ID-Hash: XRMHNOQFZVFCZATJY2OSTL3FRTRAP7I7
-X-MailFrom: tzimmermann@suse.de
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, asrivats@redhat.com, maarten.lankhorst@linux.intel.com, mripard@kernel.org, simona@ffwll.ch, jean-christophe@guillain.net, superm1@kernel.org, bp@alien8.de, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, Bert Karwatzki <spasswolf@web.de>, Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, stable@vger.kernel.org
+Message-ID-Hash: HSDBG5YE5ON6P7JMDJYCJ673FFMDMCE7
+X-Message-ID-Hash: HSDBG5YE5ON6P7JMDJYCJ673FFMDMCE7
+X-MailFrom: BATV+94213881afc477778e20+7989+infradead.org+hch@bombadil.srs.infradead.org
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Christoph Hellwig <hch@infradead.org>, io-uring@vger.kernel.org, linux-block@vger.kernel.org, linux-nvme@lists.infradead.org, linux-fsdevel@vger.kernel.org, Keith Busch <kbusch@kernel.org>, David Wei <dw@davidwei.uk>, Vishal Verma <vishal1.verma@intel.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3] drm/framebuffer: Acquire internal references on GEM handles
+Subject: [Linaro-mm-sig] Re: [RFC 00/12] io_uring dmabuf read/write support
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XRMHNOQFZVFCZATJY2OSTL3FRTRAP7I7/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HSDBG5YE5ON6P7JMDJYCJ673FFMDMCE7/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-SGkNCg0KQW0gMDcuMDcuMjUgdW0gMTg6MTQgc2NocmllYiBTYXRhZHJ1IFByYW1hbmlrOg0KPiBB
-cHBseWluZyB0aGlzIHBhdGNoIHRvIDYuMTYtcmM1IHJlc29sdmVzIHRoZSBzbGVlcCBpc3N1ZSBy
-ZWdyZXNzaW9uIA0KPiBmcm9tIDYuMTYtcmM0IEkgd2FzIGhhdmluZyBvbiBtecKgTWFjQm9va1By
-bzExLDMgKE1pZC0yMDE0IDE1IiANCj4gTWFjQm9va1BybyksIHdoaWNoIGhhcyB0aGXCoE5WSURJ
-QSBHSzEwN00gR1BVIGVuYWJsZWQgdmlhIHRoZSBOb3V2ZWF1IA0KPiBkcml2ZXIuDQoNClRoYW5r
-cyBmb3IgdGVzdGluZy4gSSB0aGluayB0aGUgc2xlZXAgcmVncmVzc2lvbiB3YXMganVzdCBhIHNp
-ZGUgZWZmZWN0IA0Kb2YgdGhlIGJyb2tlbiByZWZlcmVuY2UgY291bnRpbmcuDQoNCkJlc3QgcmVn
-YXJkcw0KVGhvbWFzDQoNCj4NCj4gTWFueSB0aGFua3MsDQo+DQo+IFNhdGFkcnUNCj4NCj4gT24g
-TW9uLCBKdWwgNywgMjAyNSBhdCA5OjMz4oCvQU0gVGhvbWFzIFppbW1lcm1hbm4gPHR6aW1tZXJt
-YW5uQHN1c2UuZGU+IA0KPiB3cm90ZToNCj4NCj4gICAgIEhpDQo+DQo+ICAgICBBbSAwNy4wNy4y
-NSB1bSAxNToyMSBzY2hyaWViIENocmlzdGlhbiBLw7ZuaWc6DQo+DQo+ICAgICA+Pg0KPiAgICAg
-Pj4gKyNkZWZpbmUgRFJNX0ZSQU1FQlVGRkVSX0hBU19IQU5ETEVfUkVGKF9pKcKgIEJJVCgwdSAr
-IChfaSkpDQo+ICAgICA+IFdoeSB0aGUgIjB1ICsgKF9pKSIgaGVyZT8gQW4gbWFjcm8gdHJpY2s/
-DQo+DQo+ICAgICBZb3UgbWVhbiB3aHkgbm90IGp1c3QgQklUKF9pKT8gaW50ZXJuYWxfZmxhZ3Mg
-Y291bGQgcG9zc2libHkgY29udGFpbg0KPiAgICAgYWRkaXRpb25hbCBmbGFncy4gSnVzdCB1c2lu
-ZyBCSVQoX2kpIHdvdWxkIG1ha2UgaXQgbG9vayBhcyBpZiBpdCdzDQo+ICAgICBvbmx5DQo+ICAg
-ICBmb3IgdGhvc2UgaGFuZGxlIHJlZnMuDQo+DQo+ICAgICBCZXN0IHJlZ2FyZHMNCj4gICAgIFRo
-b21hcw0KPg0KPiAgICAgPg0KPiAgICAgPiBSZWdhcmRzLA0KPiAgICAgPiBDaHJpc3RpYW4uDQo+
-ICAgICA+DQo+ICAgICA+PiArDQo+ICAgICA+PsKgIMKgLyoqDQo+ICAgICA+PsKgIMKgICogc3Ry
-dWN0IGRybV9mcmFtZWJ1ZmZlciAtIGZyYW1lIGJ1ZmZlciBvYmplY3QNCj4gICAgID4+wqAgwqAg
-Kg0KPiAgICAgPj4gQEAgLTE4OCw2ICsxOTEsMTAgQEAgc3RydWN0IGRybV9mcmFtZWJ1ZmZlciB7
-DQo+ICAgICA+PsKgIMKgIMKgIMKgKiBEUk1fTU9ERV9GQl9NT0RJRklFUlMuDQo+ICAgICA+PsKg
-IMKgIMKgIMKgKi8NCj4gICAgID4+wqAgwqAgwqAgaW50IGZsYWdzOw0KPiAgICAgPj4gK8KgIMKg
-IC8qKg0KPiAgICAgPj4gK8KgIMKgIMKgKiBAaW50ZXJuYWxfZmxhZ3M6IEZyYW1lYnVmZmVyIGZs
-YWdzIGxpa2UNCj4gICAgIERSTV9GUkFNRUJVRkZFUl9IQVNfSEFORExFX1JFRi4NCj4gICAgID4+
-ICvCoCDCoCDCoCovDQo+ICAgICA+PiArwqAgwqAgdW5zaWduZWQgaW50IGludGVybmFsX2ZsYWdz
-Ow0KPiAgICAgPj7CoCDCoCDCoCAvKioNCj4gICAgID4+wqAgwqAgwqAgwqAqIEBmaWxwX2hlYWQ6
-IFBsYWNlZCBvbiAmZHJtX2ZpbGUuZmJzLCBwcm90ZWN0ZWQgYnkNCj4gICAgICZkcm1fZmlsZS5m
-YnNfbG9jay4NCj4gICAgID4+wqAgwqAgwqAgwqAqLw0KPg0KPiAgICAgLS0gDQo+ICAgICAtLQ0K
-PiAgICAgVGhvbWFzIFppbW1lcm1hbm4NCj4gICAgIEdyYXBoaWNzIERyaXZlciBEZXZlbG9wZXIN
-Cj4gICAgIFNVU0UgU29mdHdhcmUgU29sdXRpb25zIEdlcm1hbnkgR21iSA0KPiAgICAgRnJhbmtl
-bnN0cmFzc2UgMTQ2LCA5MDQ2MSBOdWVybmJlcmcsIEdlcm1hbnkNCj4gICAgIEdGOiBJdm8gVG90
-ZXYsIEFuZHJldyBNeWVycywgQW5kcmV3IE1jRG9uYWxkLCBCb3VkaWVuIE1vZXJtYW4NCj4gICAg
-IEhSQiAzNjgwOSAoQUcgTnVlcm5iZXJnKQ0KPg0KDQotLSANCi0tDQpUaG9tYXMgWmltbWVybWFu
-bg0KR3JhcGhpY3MgRHJpdmVyIERldmVsb3Blcg0KU1VTRSBTb2Z0d2FyZSBTb2x1dGlvbnMgR2Vy
-bWFueSBHbWJIDQpGcmFua2Vuc3RyYXNzZSAxNDYsIDkwNDYxIE51ZXJuYmVyZywgR2VybWFueQ0K
-R0Y6IEl2byBUb3RldiwgQW5kcmV3IE15ZXJzLCBBbmRyZXcgTWNEb25hbGQsIEJvdWRpZW4gTW9l
-cm1hbg0KSFJCIDM2ODA5IChBRyBOdWVybmJlcmcpDQoNCl9fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxp
-bmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWls
-IHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+On Mon, Jul 07, 2025 at 04:41:23PM +0100, Pavel Begunkov wrote:
+> > I mean a reference the actual dma_buf (probably indirect through the file
+> > * for it, but listen to the dma_buf experts for that and not me).
+> 
+> My expectation is that io_uring would pass struct dma_buf to the
+
+io_uring isn't the only user.  We've already had one other use case
+coming up for pre-load of media files in mobile very recently.  It's
+also a really good interface for P2P transfers of any kind.
+
+> file during registration, so that it can do a bunch of work upfront,
+> but iterators will carry sth already pre-attached and pre dma mapped,
+> probably in a file specific format hiding details for multi-device
+> support, and possibly bundled with the dma-buf pointer if necessary.
+> (All modulo move notify which I need to look into first).
+
+I'd expect that the exported passed around the dma_buf, and something
+that has access to it then imports it to the file.  This could be
+directly forwarded to the device for the initial scrope in your series
+where you only support it for block device files.
+
+Now we have two variants:
+
+ 1) the file instance returns a cookie for the registration that the
+    caller has to pass into every read/write
+ 2) the file instance tracks said cookie itself and matches it on
+    every read/write
+
+1) sounds faster, 2) has more sanity checking and could prevent things
+from going wrong.
+
+(all this is based on my limited dma_buf understanding, corrections
+always welcome).
+
+> > > But maybe that's fine. It's 40B -> 48B,
+> > 
+> > Alternatively we could the union point to a struct that has the dma buf
+> > pointer and a variable length array of dma_segs. Not sure if that would
+> > create a mess in the callers, though.
+> 
+> Iteration helpers adjust the pointer, so either it needs to store
+> the pointer directly in iter or keep the current index. It could rely
+> solely on offsets, but that'll be a mess with nested loops (where the
+> inner one would walk some kind of sg table).
+
+Yeah.  Maybe just keep is as a separate pointer growing the structure
+and see if anyone screams.
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
