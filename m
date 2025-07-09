@@ -2,218 +2,156 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD5F7AFEA64
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  9 Jul 2025 15:38:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0C781AFECFA
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  9 Jul 2025 17:03:21 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E2B9D45723
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  9 Jul 2025 13:38:50 +0000 (UTC)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id 8B75D43BFB
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  9 Jul 2025 13:38:38 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B8F6045739
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  9 Jul 2025 15:03:19 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.9])
+	by lists.linaro.org (Postfix) with ESMTPS id F1B4443BFB
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  9 Jul 2025 15:02:49 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=cok7Ru6t;
-	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=mripard@kernel.org;
-	dmarc=pass (policy=quarantine) header.from=kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by dfw.source.kernel.org (Postfix) with ESMTP id 13BAC5C58D5;
-	Wed,  9 Jul 2025 13:38:38 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5FEC4C4CEEF;
-	Wed,  9 Jul 2025 13:38:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1752068317;
-	bh=h8rkgdzFHzQfCXKGB13VqG6DTj3tCT4fvRbPC6Q9TJc=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=cok7Ru6tbwPf8DJ/GhRrPstP/I0zh/TMSe60GW8wNsnXiRyHW+Tf9VR43hFMEXANp
-	 nA9yQR+3gGyjumTd2aR31jkaluaCPUfp9OJzMJNGL6iO1bosVebm+gtOam0s3LgviF
-	 0qgXZtR5I68ISvW6+7jrDWcLGDJ5eZ1lxF4wInZz59liiDUeFKysL48gZydSKKo/sV
-	 RBhFESjNO2O8yASjDhpRyrL3yew7ckHOedOhDO2NYrNdFPmP8ofnTqyxuSr/3hpl/V
-	 r9BARdBLahmPKDK4L5U6u/awlc3gw3+s31xuPfGtfv7Y4UgprYL97ykPOEARLt/Afz
-	 RKn2Zom/0ZhDw==
-Date: Wed, 9 Jul 2025 15:38:34 +0200
-From: Maxime Ripard <mripard@kernel.org>
-To: Nicolas Dufresne <nicolas@ndufresne.ca>
-Message-ID: <20250709-spotted-ancient-oriole-c8bcd1@houat>
-References: <20250709-dma-buf-ecc-heap-v6-0-dac9bf80f35d@kernel.org>
- <49e3fa834aadb37452112bb704a1a1593c1fd0b8.camel@ndufresne.ca>
+	dkim=pass header.d=intel.com header.s=Intel header.b=Xti7dCmR;
+	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 192.198.163.9 as permitted sender) smtp.mailfrom=lkp@intel.com;
+	dmarc=pass (policy=none) header.from=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1752073370; x=1783609370;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=UmvOJsqQeOZo6uv2hXfptlbOgxzKjfEBeTjZ5Q0Wrbk=;
+  b=Xti7dCmRGe/emyFj6larF/be3LQjGY35LjBdjMpDuAlOdvf5lW92+ABy
+   soEDeBOYHVetFACzR39o/73BMh7GIJXHG3mnmFcedfuO6HrrWp0D//LWS
+   z5kGe3U/8tm3DotRxBzqN6bIfovDY3YMoR9PuUtqmBxvq8TN43zYYPfnb
+   P98rpBZACIm4RqDOwulC7Sc2I8XE2iN0aDNb+VU9gQ2hfJrZBlgFMHv7Q
+   AZ/wyLA8CUMHUF8Brho6DIEFmX98JpOo/VAVTmoIH5K2tWJqlN7PCMtYK
+   b8Wwt0zleFpID3llvv/+QkrqCldYbRQd0ziBWrCK2Y36EFC1As+3RtKBD
+   A==;
+X-CSE-ConnectionGUID: 87yHIxPpTFSlJP0QP2CG6A==
+X-CSE-MsgGUID: htgHu9L1SbCCqNPN7krt/g==
+X-IronPort-AV: E=McAfee;i="6800,10657,11489"; a="65035758"
+X-IronPort-AV: E=Sophos;i="6.16,298,1744095600";
+   d="scan'208";a="65035758"
+Received: from fmviesa007.fm.intel.com ([10.60.135.147])
+  by fmvoesa103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Jul 2025 08:02:49 -0700
+X-CSE-ConnectionGUID: jQGMFmdxT2arjTPo/Z/l4A==
+X-CSE-MsgGUID: m/zVlW8/THqyehHj9WGIWA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.16,298,1744095600";
+   d="scan'208";a="155431612"
+Received: from lkp-server01.sh.intel.com (HELO 9ee84586c615) ([10.239.97.150])
+  by fmviesa007.fm.intel.com with ESMTP; 09 Jul 2025 08:02:40 -0700
+Received: from kbuild by 9ee84586c615 with local (Exim 4.96)
+	(envelope-from <lkp@intel.com>)
+	id 1uZWJh-0003eF-2o;
+	Wed, 09 Jul 2025 15:02:37 +0000
+Date: Wed, 9 Jul 2025 23:02:27 +0800
+From: kernel test robot <lkp@intel.com>
+To: LiangCheng Wang <zaq14760@gmail.com>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+	Wig Cheng <onlywig@gmail.com>
+Message-ID: <202507092231.FtZkMync-lkp@intel.com>
+References: <20250708-drm-v1-2-45055fdadc8a@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <49e3fa834aadb37452112bb704a1a1593c1fd0b8.camel@ndufresne.ca>
+Content-Disposition: inline
+In-Reply-To: <20250708-drm-v1-2-45055fdadc8a@gmail.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 8B75D43BFB
+X-Rspamd-Queue-Id: F1B4443BFB
 X-Spamd-Bar: ----
-X-Spamd-Result: default: False [-4.10 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
-	SIGNED_PGP(-2.00)[];
+X-Spamd-Result: default: False [-4.50 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
+	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
-	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
-	DNSWL_BLOCKED(0.00)[139.178.84.217:from];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ARC_NA(0.00)[];
-	ASN(0.00)[asn:15830, ipnet:139.178.80.0/21, country:NL];
-	MISSING_XM_UA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
-	FROM_HAS_DN(0.00)[];
-	TAGGED_RCPT(0.00)[dt];
-	DWL_DNSWL_BLOCKED(0.00)[kernel.org:dkim];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	R_SPF_ALLOW(-0.20)[+ip4:192.198.163.0/26];
+	MIME_GOOD(-0.10)[text/plain];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	ARC_NA(0.00)[];
+	ASN(0.00)[asn:4983, ipnet:192.198.162.0/23, country:US];
+	MISSING_XM_UA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[lists.linux.dev,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,gmail.com];
+	RCPT_COUNT_TWELVE(0.00)[19];
+	TAGGED_RCPT(0.00)[dt];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com,kernel.org,linux.intel.com,suse.de,ffwll.ch,linaro.org,amd.com];
+	RCVD_COUNT_THREE(0.00)[3];
+	RCVD_TLS_LAST(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	TO_DN_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+]
+	DWL_DNSWL_BLOCKED(0.00)[intel.com:dkim];
+	DKIM_TRACE(0.00)[intel.com:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: MFMNVAPENY446THGMKYW7XEJPFKWQ4U4
-X-Message-ID-Hash: MFMNVAPENY446THGMKYW7XEJPFKWQ4U4
-X-MailFrom: mripard@kernel.org
+Message-ID-Hash: V6X7TUF6L2PFZ6OQHCKK7E3ICWJ7MJRR
+X-Message-ID-Hash: V6X7TUF6L2PFZ6OQHCKK7E3ICWJ7MJRR
+X-MailFrom: lkp@intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Rob Herring <robh@kernel.org>, Saravana Kannan <saravanak@google.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Robin Murphy <robin.murphy@arm.com>, Andrew Davis <afd@ti.com>, Jared Kangas <jkangas@redhat.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, iommu@lists.linux.dev
+CC: oe-kbuild-all@lists.linux.dev, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, LiangCheng Wang <zaq14760@gmail.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v6 0/2] dma-buf: heaps: Create a CMA heap for each CMA reserved region
+Subject: [Linaro-mm-sig] Re: [PATCH 2/3] drm: tiny: Add support for Mayqueen Pixpaper e-ink panel
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MFMNVAPENY446THGMKYW7XEJPFKWQ4U4/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/V6X7TUF6L2PFZ6OQHCKK7E3ICWJ7MJRR/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============1040802766415072797=="
-
-
---===============1040802766415072797==
-Content-Type: multipart/signed; micalg=pgp-sha384;
-	protocol="application/pgp-signature"; boundary="t6erlqty7rzkhzhp"
-Content-Disposition: inline
-
-
---t6erlqty7rzkhzhp
-Content-Type: text/plain; protected-headers=v1; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH v6 0/2] dma-buf: heaps: Create a CMA heap for each CMA
- reserved region
-MIME-Version: 1.0
-
-On Wed, Jul 09, 2025 at 09:10:02AM -0400, Nicolas Dufresne wrote:
-> Hi Maxime,
->=20
-> Le mercredi 09 juillet 2025 =E0 14:44 +0200, Maxime Ripard a =E9crit=A0:
-> > Hi,
-> >=20
-> > Here's another attempt at supporting user-space allocations from a
-> > specific carved-out reserved memory region.
-> >=20
-> > The initial problem we were discussing was that I'm currently working on
-> > a platform which has a memory layout with ECC enabled. However, enabling
-> > the ECC has a number of drawbacks on that platform: lower performance,
-> > increased memory usage, etc. So for things like framebuffers, the
-> > trade-off isn't great and thus there's a memory region with ECC disabled
-> > to allocate from for such use cases.
-> >=20
-> > After a suggestion from John, I chose to first start using heap
-> > allocations flags to allow for userspace to ask for a particular ECC
-> > setup. This is then backed by a new heap type that runs from reserved
-> > memory chunks flagged as such, and the existing DT properties to specify
-> > the ECC properties.
-> >=20
-> > After further discussion, it was considered that flags were not the
-> > right solution, and relying on the names of the heaps would be enough to
-> > let userspace know the kind of buffer it deals with.
-> >=20
-> > Thus, even though the uAPI part of it had been dropped in this second
-> > version, we still needed a driver to create heaps out of carved-out mem=
-ory
-> > regions. In addition to the original usecase, a similar driver can be
-> > found in BSPs from most vendors, so I believe it would be a useful
-> > addition to the kernel.
-> >=20
-> > Some extra discussion with Rob Herring [1] came to the conclusion that
-> > some specific compatible for this is not great either, and as such an
-> > new driver probably isn't called for either.
-> >=20
-> > Some other discussions we had with John [2] also dropped some hints that
-> > multiple CMA heaps might be a good idea, and some vendors seem to do
-> > that too.
-> >=20
-> > So here's another attempt that doesn't affect the device tree at all and
-> > will just create a heap for every CMA reserved memory region.
->=20
-> Does that means that if we carve-out memory for a co-processor operating =
-system,
-> that memory region is now available to userspace to allocate from ? Or is=
- there
-> a nuance to that ?
-
-There is a nuance to that :)
-
-You need to have the "reusable" property set which is documented as:
-
-      The operating system can use the memory in this region with the
-      limitation that the device driver(s) owning the region need to be
-      able to reclaim it back. Typically that means that the operating
-      system can use that region to store volatile or cached data that
-      can be otherwise regenerated or migrated elsewhere.
-
-https://github.com/devicetree-org/dt-schema/blob/main/dtschema/schemas/rese=
-rved-memory/reserved-memory.yaml#L87
-
-If it's not set, it's not exposed, and I'd expect a coprocessor memory
-region wouldn't be flagged as such.
-
-> For other carveout, such as RK3588 HDMI receiver, that is clearly a win, =
-giving
-> user the ability to allocate using externally supplied constraints rather=
- then
-> having to convince the v4l2 driver to match these. While keeping the safe=
-ty that
-> this carveout will yield valid addresses for the IP.
->=20
-> Will there be a generic way to find out which driver/device this carveout
-> belongs to ? In V4L2, only complex cameras have userspace drivers, everyt=
-hing
-> else is generic code.
-
-I believe it's a separate discussion, but the current stance is that the
-heap name is enough to identify in a platform-specific way where you
-allocate from. I've worked on documenting what a good name is so
-userspace can pick it up more easily here:
-
-https://lore.kernel.org/r/20250616-dma-buf-heap-names-doc-v2-1-8ae43174cdbf=
-@kernel.org
-
-But it's not really what you expected
-
-Maxime
-
---t6erlqty7rzkhzhp
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iJUEABMJAB0WIQTkHFbLp4ejekA/qfgnX84Zoj2+dgUCaG5w1QAKCRAnX84Zoj2+
-dp3pAX9+Z09k44eaivapsVKw/NqvekdMSYnQGvkEfOP/NBTjJF5RGakuRbEE73Xk
-qKAYEiMBgKsMpFVvSS9l9pFXZtK1LVDJ1XtphLJBeHq/gZxL+5K0t2qMG09CpG18
-A+HJas+mmg==
-=pWj1
------END PGP SIGNATURE-----
-
---t6erlqty7rzkhzhp--
-
---===============1040802766415072797==
 Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
+Hi LiangCheng,
+
+kernel test robot noticed the following build warnings:
+
+[auto build test WARNING on d7b8f8e20813f0179d8ef519541a3527e7661d3a]
+
+url:    https://github.com/intel-lab-lkp/linux/commits/LiangCheng-Wang/dt-bindings-vendor-prefixes-Add-Mayqueen-name/20250708-180933
+base:   d7b8f8e20813f0179d8ef519541a3527e7661d3a
+patch link:    https://lore.kernel.org/r/20250708-drm-v1-2-45055fdadc8a%40gmail.com
+patch subject: [PATCH 2/3] drm: tiny: Add support for Mayqueen Pixpaper e-ink panel
+config: sparc-randconfig-r112-20250709 (https://download.01.org/0day-ci/archive/20250709/202507092231.FtZkMync-lkp@intel.com/config)
+compiler: sparc64-linux-gcc (GCC) 14.3.0
+reproduce: (https://download.01.org/0day-ci/archive/20250709/202507092231.FtZkMync-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202507092231.FtZkMync-lkp@intel.com/
+
+sparse warnings: (new ones prefixed by >>)
+>> drivers/gpu/drm/tiny/pixpaper.c:85:10: sparse: sparse: Initializer entry defined twice
+   drivers/gpu/drm/tiny/pixpaper.c:86:9: sparse:   also defined here
+   drivers/gpu/drm/tiny/pixpaper.c:601:10: sparse: sparse: Initializer entry defined twice
+   drivers/gpu/drm/tiny/pixpaper.c:606:10: sparse:   also defined here
+
+vim +85 drivers/gpu/drm/tiny/pixpaper.c
+
+    80	
+    81	static const struct drm_plane_funcs pixpaper_plane_funcs = {
+    82		.update_plane = drm_atomic_helper_update_plane,
+    83		.disable_plane = drm_atomic_helper_disable_plane,
+    84		.destroy = drm_plane_cleanup,
+  > 85		.reset = drm_atomic_helper_plane_reset,
+    86		DRM_GEM_SHADOW_PLANE_FUNCS,
+    87	};
+    88	
+
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============1040802766415072797==--
