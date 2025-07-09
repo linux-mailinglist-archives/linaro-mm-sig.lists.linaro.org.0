@@ -2,140 +2,214 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 528FCAFDCEC
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  9 Jul 2025 03:29:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 224D6AFE942
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  9 Jul 2025 14:45:21 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4BD0E44861
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  9 Jul 2025 01:29:23 +0000 (UTC)
-Received: from mail.kapsi.fi (mail-auth.kapsi.fi [91.232.154.24])
-	by lists.linaro.org (Postfix) with ESMTPS id 1009243D54
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  9 Jul 2025 01:29:09 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 1B8A945746
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  9 Jul 2025 12:45:20 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+	by lists.linaro.org (Postfix) with ESMTPS id 0324740B80
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  9 Jul 2025 12:45:05 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kapsi.fi header.s=20161220 header.b=rEhNdc7s;
-	spf=pass (lists.linaro.org: domain of cyndis@kapsi.fi designates 91.232.154.24 as permitted sender) smtp.mailfrom=cyndis@kapsi.fi;
-	dmarc=pass (policy=quarantine) header.from=kapsi.fi
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=kapsi.fi;
-	s=20161220; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
-	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=H30So9AdIyWkMEDjX7oZ8/lNt3wPb9URPVhtN/UoCoY=; b=rEhNdc7sYP5QbjLhEpRTTFVnp0
-	ClbZhjfAN7rxmvfHdU7gK/TyLwxr0S4kyalUfl6O5lQVbmwXXj0GAm4y+D6eHK19w6rd00nl0NBD4
-	fhsuc8+x4XfWBA6rw4mEUfEnTtaQdM97t9U+z2s5w8yIQjP/8QMnayxU0WH9CyApz47kIFv/YFPA2
-	SO/Dvu2ZgUt6lOpKpAsS7uK0CjRMTS4bZ8lI7F0Y4ll1dm0R2X718scvBUGcN28ufbPYTYfZwSDrT
-	wnrScpmzaMiDupKZt2STDmWCcWNUU3sEIBfENoqZ3F+wu3VOc5Zw3TE4pj2qn5RhnrS79LcW+7FUo
-	4SwvH3bQ==;
-Received: from [2404:7a80:b960:1a00:5eaa:b33c:a197:a90f]
-	by mail.kapsi.fi with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-	(Exim 4.96)
-	(envelope-from <cyndis@kapsi.fi>)
-	id 1uZJcD-00Amxc-2j;
-	Wed, 09 Jul 2025 04:28:54 +0300
-Message-ID: <17629989-891c-4026-b9d6-3e1403adba6c@kapsi.fi>
-Date: Wed, 9 Jul 2025 10:28:46 +0900
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=SU8qJ591;
+	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=mripard@kernel.org;
+	dmarc=pass (policy=quarantine) header.from=kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by dfw.source.kernel.org (Postfix) with ESMTP id 806045C6417;
+	Wed,  9 Jul 2025 12:45:04 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AE565C4CEEF;
+	Wed,  9 Jul 2025 12:45:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1752065104;
+	bh=5ig93j1gHmVqigZVEEovbc0sfYjFNVqIz+vVSrVJ/jo=;
+	h=From:Subject:Date:To:Cc:From;
+	b=SU8qJ591v3ZuHKWkIDNsGPC/TsUVy5S48YTk8I+wA/R98cRRp92a8dBLwXVe4UUQX
+	 h62V/N4GwCQnBqvMRN/dhOkcZT7Ssfa5mggfF34/0QPOqfEmWo15hH3XTHDCU3wiCv
+	 Y6nFOpZXhmwRDr5eeybDpTrDAlJ1IaiOkbNfKDKzdx+VyQnto48W5ciawaeUsIhJpU
+	 yDA6aEdBir32pT6DCYAmKoojkdWjZ811ES/KwYqd6iRccGhxFvUMJsmphaTBKEF8KY
+	 lEtAOdiJRJQu++19on2WBnLmlaE8lMvX0qRuyl7dlwb3WeSSmgMKEoXeNZiQeAFgpn
+	 y6+6c80EJRdVg==
+From: Maxime Ripard <mripard@kernel.org>
+Date: Wed, 09 Jul 2025 14:44:50 +0200
+Message-Id: <20250709-dma-buf-ecc-heap-v6-0-dac9bf80f35d@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- Sumit Semwal <sumit.semwal@linaro.org>, Gustavo Padovan <gustavo@padovan.org>
-References: <20250708-syncfile-enable-signaling-v1-1-9f6e6cd9fcda@nvidia.com>
- <1ebba600-31d2-48ed-b08b-46d667d38054@amd.com>
-Content-Language: en-US
-From: Mikko Perttunen <cyndis@kapsi.fi>
-In-Reply-To: <1ebba600-31d2-48ed-b08b-46d667d38054@amd.com>
-X-SA-Exim-Connect-IP: 2404:7a80:b960:1a00:5eaa:b33c:a197:a90f
-X-SA-Exim-Mail-From: cyndis@kapsi.fi
-X-SA-Exim-Scanned: No (on mail.kapsi.fi); SAEximRunCond expanded to false
+X-B4-Tracking: v=1; b=H4sIAEJkbmgC/33RyU7DMBAG4FeJfMaRx1uaCqG+B+LgZdKYkqbYa
+ QSq+u44KaigRBzHkr9Z/gtJGAMmsi0uJOIYUuiPudAPBXGtOe6RBp9rwhmXTIGivjPUnhuKztE
+ WzYnyjREAnrtaIsnfThGb8DGTzy+5bkMa+vg5dxhhev0HG4EyqqSz1jNZK4DdAeMR38o+7smkj
+ fxHUEwyWBF4FpgUjWdMGzDNQhC/hWpFEFmoK+e90EY1vF4I8i4ozlYESYFazxEasFZytxDUXdC
+ wNoOatjDWO7XRwsi/W1xvZ474fs6BDbdbkw5TMnNg2+Lxm2YggAsooeJS8yqP9XrIqZq0i+hbM
+ 5Su756m1KxJSHPRhWFbjLoETaNTudX1C/BYCfAjAgAA
+X-Change-ID: 20240515-dma-buf-ecc-heap-28a311d2c94e
+To: Rob Herring <robh@kernel.org>, Saravana Kannan <saravanak@google.com>,
+ Sumit Semwal <sumit.semwal@linaro.org>,
+ Benjamin Gaignard <benjamin.gaignard@collabora.com>,
+ Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>,
+ "T.J. Mercier" <tjmercier@google.com>,
+ =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>,
+ Marek Szyprowski <m.szyprowski@samsung.com>,
+ Robin Murphy <robin.murphy@arm.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4178; i=mripard@kernel.org;
+ h=from:subject:message-id; bh=5ig93j1gHmVqigZVEEovbc0sfYjFNVqIz+vVSrVJ/jo=;
+ b=owGbwMvMwCmsHn9OcpHtvjLG02pJDBl5KT5Hp6VN1J1s9/a/8haBzfaebxOsuz9PEsiwblQvt
+ vuxue5vx1QWBmFOBlkxRZYnMmGnl7cvrnKwX/kDZg4rE8gQBi5OAZhIrCtjfeD3N8X7VM9EHM05
+ Jl/BWOmovOeVced54b2zy+tUznS/jS9Jq17zR7H35r4cp4uS0/9mMzYsKAxinxtWNtO6+rW+/f/
+ mhETDhTI+Eidjj/zu2bnbeRrH02e/PVaunM4VG3bQ2s5odSwA
+X-Developer-Key: i=mripard@kernel.org; a=openpgp;
+ fpr=BE5675C37E818C8B5764241C254BCFC56BF6CE8D
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 1009243D54
-X-Spamd-Bar: ----
-X-Spamd-Result: default: False [-4.00 / 15.00];
+X-Rspamd-Queue-Id: 0324740B80
+X-Spamd-Bar: --
+X-Spamd-Result: default: False [-2.50 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	DMARC_POLICY_ALLOW(-0.50)[kapsi.fi,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:91.232.154.24];
-	R_DKIM_ALLOW(-0.20)[kapsi.fi:s=20161220];
+	SUSPICIOUS_RECIPS(1.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MIME_GOOD(-0.10)[text/plain];
+	TAGGED_RCPT(0.00)[dt];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCVD_TLS_ALL(0.00)[];
-	ASN(0.00)[asn:57692, ipnet:91.232.154.0/24, country:FI];
-	RCVD_COUNT_ONE(0.00)[1];
+	ASN(0.00)[asn:15830, ipnet:139.178.80.0/21, country:NL];
 	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[22];
 	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_SEVEN(0.00)[8];
-	NEURAL_HAM(-0.00)[-1.000];
-	TO_DN_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	DWL_DNSWL_BLOCKED(0.00)[kernel.org:dkim];
 	MID_RHS_MATCH_FROM(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
 	FROM_EQ_ENVFROM(0.00)[];
-	DNSWL_BLOCKED(0.00)[91.232.154.24:from,2404:7a80:b960:1a00:5eaa:b33c:a197:a90f:received];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DKIM_TRACE(0.00)[kapsi.fi:+]
+	RCVD_COUNT_TWO(0.00)[2];
+	DNSWL_BLOCKED(0.00)[139.178.84.217:from];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: WBDJGW73NHQAMMHV52DKHKLJLECJTFTV
-X-Message-ID-Hash: WBDJGW73NHQAMMHV52DKHKLJLECJTFTV
-X-MailFrom: cyndis@kapsi.fi
+Message-ID-Hash: FZIJETFYHVFJKHGQCEJFJ6TJDMSYKWO4
+X-Message-ID-Hash: FZIJETFYHVFJKHGQCEJFJ6TJDMSYKWO4
+X-MailFrom: mripard@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, Mikko Perttunen <mperttunen@nvidia.com>
+CC: Andrew Davis <afd@ti.com>, Jared Kangas <jkangas@redhat.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, iommu@lists.linux.dev, Maxime Ripard <mripard@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] dma_buf/sync_file: Enable signaling for fences when querying status
+Subject: [Linaro-mm-sig] [PATCH v6 0/2] dma-buf: heaps: Create a CMA heap for each CMA reserved region
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WBDJGW73NHQAMMHV52DKHKLJLECJTFTV/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FZIJETFYHVFJKHGQCEJFJ6TJDMSYKWO4/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-T24gNy84LzI1IDExOjIwIFBNLCBDaHJpc3RpYW4gS8O2bmlnIHdyb3RlOg0KPiBPbiAwOC4wNy4y
-NSAxNDowMywgTWlra28gUGVydHR1bmVuIHdyb3RlOg0KPj4gRnJvbTogTWlra28gUGVydHR1bmVu
-IDxtcGVydHR1bmVuQG52aWRpYS5jb20+DQo+Pg0KPj4gZG1hX2ZlbmNlX2dldF9zdGF0dXMgaXMg
-bm90IGd1YXJhbnRlZWQgdG8gcmV0dXJuIHZhbGlkIGluZm9ybWF0aW9uDQo+PiBvbiBpZiB0aGUg
-ZmVuY2UgaGFzIGJlZW4gc2lnbmFsZWQgb3Igbm90IGlmIFNXIHNpZ25hbGluZyBoYXMgbm90DQo+
-PiBiZWVuIGVuYWJsZWQgZm9yIHRoZSBmZW5jZS4gVG8gZW5zdXJlIHZhbGlkIGluZm9ybWF0aW9u
-IGlzIHJlcG9ydGVkLA0KPj4gZW5hYmxlIFNXIHNpZ25hbGluZyBmb3IgZmVuY2VzIGJlZm9yZSBn
-ZXR0aW5nIHRoZWlyIHN0YXR1cy4NCj4gDQo+IEkgZG9uJ3Qga25vdyBob3cgb2Z0ZW4gSSBoYWQg
-dG8gcmVqZWN0ZWQgdGhhdCBwYXRjaCBub3csIHdlIHJlYWxseSBuZWVkIHRvIGltcHJvdmUgdGhl
-IGRvY3VtZW50YXRpb24gOigNCg0KU29ycnkgOigNCg0KSW1wcm92ZWQgZG9jdW1lbnRhdGlvbiBj
-ZXJ0YWlubHkgd291bGQgYmUgZ29vZC4gSSd2ZSB0aG91Z2h0IG9mIFNXIA0Kc2lnbmFsaW5nIGFz
-IGEga2VybmVsLXNpZGUgJ29wdGltaXphdGlvbicgYW5kIG5vdCBzb21ldGhpbmcgdGhhdCB3b3Vs
-ZCANCmJlIHZpc2libGUgdG8gdGhlIHVzZXIgc3BhY2UuIFBlcmhhcHMgZG9jdW1lbnRhdGlvbiBj
-b3VsZCBhbHNvIG1lbnRpb24gDQpzaXR1YXRpb25zIHdoZXJlIGNhbGxpbmcgdGhpcyB3aXRob3V0
-IGVuYWJsaW5nIHNpZ25hbGluZyBpcyB1c2VmdWwuIA0KQW55d2F5LCBJJ2xsIGZpeCBvdXIgaXNz
-dWUgaW4gdXNlcnNwYWNlIGJ5IGFkZGluZyB0aGUgemVyby10aW1lb3V0IHBvbGwgDQppbnN0ZWFk
-Lg0KDQpUaGFua3MhDQpNaWtrbw0KDQo+IA0KPiBUaGUgZmVuY2UgaW5mbyBxdWVyeSBleGlzdHMg
-dG8gcXVlcnkgdGhlIHN0YXR1cyAqd2l0aG91dCogZW5hYmxpbmcgc2lnbmFsaW5nLCB0aGF0IGlz
-IHRoZSB3aG9sZSBwdXJwb3NlIG9mIHRoZSBmdW5jdGlvbiENCj4gDQo+IElmIHlvdSB3YW50IHRv
-IGVuYWJsZSBzaWduYWxpbmcgKmFuZCogcXVlcnkgdGhlIHN0YXR1cyB0aGVuIGp1c3QgcG9sbCBv
-biB0aGUgc3luYyBmaWxlIGZpbGUgZGVzY3JpcHRvciB3aXRoIGEgemVybyB0aW1lb3V0Lg0KPiAN
-Cj4gSWYgdGhlIHNpZ25hbGluZyB0aW1lc3RhbXAgb3IgZXJyb3IgY29kZSBpcyBuZWVkZWQgdGhl
-biB0aGF0IGNhbiBiZSByZXRyaWV2ZWQgYWZ0ZXIgc2lnbmFsaW5nIHRocm91Z2ggdGhlIGluZm8g
-SU9DVEwuDQo+IA0KPiBSZWdhcmRzLA0KPiBDaHJpc3RpYW4uDQo+IA0KPj4NCj4+IFNpZ25lZC1v
-ZmYtYnk6IE1pa2tvIFBlcnR0dW5lbiA8bXBlcnR0dW5lbkBudmlkaWEuY29tPg0KPj4gLS0tDQo+
-PiAgIGRyaXZlcnMvZG1hLWJ1Zi9zeW5jX2ZpbGUuYyB8IDMgKysrDQo+PiAgIDEgZmlsZSBjaGFu
-Z2VkLCAzIGluc2VydGlvbnMoKykNCj4+DQo+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9kbWEtYnVm
-L3N5bmNfZmlsZS5jIGIvZHJpdmVycy9kbWEtYnVmL3N5bmNfZmlsZS5jDQo+PiBpbmRleCA3NDdl
-Mzc3ZmI5NTQxN2RkZDUwNmI1Mjg2MThhNDI4OGJlYTlkNDU5Li5hNmZkMWQxNGRkZTE1NTU2MWI5
-ZmQyYzA3ZTZhYTIwZGM5ODYzYThkIDEwMDY0NA0KPj4gLS0tIGEvZHJpdmVycy9kbWEtYnVmL3N5
-bmNfZmlsZS5jDQo+PiArKysgYi9kcml2ZXJzL2RtYS1idWYvc3luY19maWxlLmMNCj4+IEBAIC0y
-NzEsNiArMjcxLDggQEAgc3RhdGljIGludCBzeW5jX2ZpbGxfZmVuY2VfaW5mbyhzdHJ1Y3QgZG1h
-X2ZlbmNlICpmZW5jZSwNCj4+ICAgCWNvbnN0IGNoYXIgX19yY3UgKnRpbWVsaW5lOw0KPj4gICAJ
-Y29uc3QgY2hhciBfX3JjdSAqZHJpdmVyOw0KPj4gICANCj4+ICsJZG1hX2ZlbmNlX2VuYWJsZV9z
-d19zaWduYWxpbmcoZmVuY2UpOw0KPj4gKw0KPj4gICAJcmN1X3JlYWRfbG9jaygpOw0KPj4gICAN
-Cj4+ICAgCWRyaXZlciA9IGRtYV9mZW5jZV9kcml2ZXJfbmFtZShmZW5jZSk7DQo+PiBAQCAtMzIw
-LDYgKzMyMiw3IEBAIHN0YXRpYyBsb25nIHN5bmNfZmlsZV9pb2N0bF9mZW5jZV9pbmZvKHN0cnVj
-dCBzeW5jX2ZpbGUgKnN5bmNfZmlsZSwNCj4+ICAgCSAqIGluZm8tPm51bV9mZW5jZXMuDQo+PiAg
-IAkgKi8NCj4+ICAgCWlmICghaW5mby5udW1fZmVuY2VzKSB7DQo+PiArCQlkbWFfZmVuY2VfZW5h
-YmxlX3N3X3NpZ25hbGluZyhzeW5jX2ZpbGUtPmZlbmNlKTsNCj4+ICAgCQlpbmZvLnN0YXR1cyA9
-IGRtYV9mZW5jZV9nZXRfc3RhdHVzKHN5bmNfZmlsZS0+ZmVuY2UpOw0KPj4gICAJCWdvdG8gbm9f
-ZmVuY2VzOw0KPj4gICAJfSBlbHNlIHsNCj4+DQo+PiAtLS0NCj4+IGJhc2UtY29tbWl0OiA1OGJh
-ODBjNDc0MDIxMmMyOWExY2Y5YjQ4ZjU4OGU2MGE3NjEyMjA5DQo+PiBjaGFuZ2UtaWQ6IDIwMjUw
-NzA4LXN5bmNmaWxlLWVuYWJsZS1zaWduYWxpbmctYTk5M2FjZmYxODYwDQo+Pg0KPiANCg0KX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNp
-ZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vi
-c2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8u
-b3JnCg==
+Hi,
+
+Here's another attempt at supporting user-space allocations from a
+specific carved-out reserved memory region.
+
+The initial problem we were discussing was that I'm currently working on
+a platform which has a memory layout with ECC enabled. However, enabling
+the ECC has a number of drawbacks on that platform: lower performance,
+increased memory usage, etc. So for things like framebuffers, the
+trade-off isn't great and thus there's a memory region with ECC disabled
+to allocate from for such use cases.
+
+After a suggestion from John, I chose to first start using heap
+allocations flags to allow for userspace to ask for a particular ECC
+setup. This is then backed by a new heap type that runs from reserved
+memory chunks flagged as such, and the existing DT properties to specify
+the ECC properties.
+
+After further discussion, it was considered that flags were not the
+right solution, and relying on the names of the heaps would be enough to
+let userspace know the kind of buffer it deals with.
+
+Thus, even though the uAPI part of it had been dropped in this second
+version, we still needed a driver to create heaps out of carved-out memory
+regions. In addition to the original usecase, a similar driver can be
+found in BSPs from most vendors, so I believe it would be a useful
+addition to the kernel.
+
+Some extra discussion with Rob Herring [1] came to the conclusion that
+some specific compatible for this is not great either, and as such an
+new driver probably isn't called for either.
+
+Some other discussions we had with John [2] also dropped some hints that
+multiple CMA heaps might be a good idea, and some vendors seem to do
+that too.
+
+So here's another attempt that doesn't affect the device tree at all and
+will just create a heap for every CMA reserved memory region.
+
+It also falls nicely into the current plan we have to support cgroups in
+DRM/KMS and v4l2, which is an additional benefit.
+
+Let me know what you think,
+Maxime
+
+1: https://lore.kernel.org/all/20250707-cobalt-dingo-of-serenity-dbf92c@houat/
+2: https://lore.kernel.org/all/CANDhNCroe6ZBtN_o=c71kzFFaWK-fF5rCdnr9P5h1sgPOWSGSw@mail.gmail.com/
+
+Let me know what you think,
+Maxime
+
+Signed-off-by: Maxime Ripard <mripard@kernel.org>
+---
+Changes in v6:
+- Drop the new driver and allocate a CMA heap for each region now
+- Dropped the binding
+- Rebased on 6.16-rc5
+- Link to v5: https://lore.kernel.org/r/20250617-dma-buf-ecc-heap-v5-0-0abdc5863a4f@kernel.org
+
+Changes in v5:
+- Rebased on 6.16-rc2
+- Switch from property to dedicated binding
+- Link to v4: https://lore.kernel.org/r/20250520-dma-buf-ecc-heap-v4-1-bd2e1f1bb42c@kernel.org
+
+Changes in v4:
+- Rebased on 6.15-rc7
+- Map buffers only when map is actually called, not at allocation time
+- Deal with restricted-dma-pool and shared-dma-pool
+- Reword Kconfig options
+- Properly report dma_map_sgtable failures
+- Link to v3: https://lore.kernel.org/r/20250407-dma-buf-ecc-heap-v3-0-97cdd36a5f29@kernel.org
+
+Changes in v3:
+- Reworked global variable patch
+- Link to v2: https://lore.kernel.org/r/20250401-dma-buf-ecc-heap-v2-0-043fd006a1af@kernel.org
+
+Changes in v2:
+- Add vmap/vunmap operations
+- Drop ECC flags uapi
+- Rebase on top of 6.14
+- Link to v1: https://lore.kernel.org/r/20240515-dma-buf-ecc-heap-v1-0-54cbbd049511@kernel.org
+
+---
+Maxime Ripard (2):
+      dma/contiguous: Add helper to test reserved memory type
+      dma-buf: heaps: cma: Create CMA heap for each CMA reserved region
+
+ drivers/dma-buf/heaps/cma_heap.c | 52 +++++++++++++++++++++++++++++++++++++++-
+ include/linux/dma-map-ops.h      | 13 ++++++++++
+ kernel/dma/contiguous.c          |  7 ++++++
+ 3 files changed, 71 insertions(+), 1 deletion(-)
+---
+base-commit: 47633099a672fc7bfe604ef454e4f116e2c954b1
+change-id: 20240515-dma-buf-ecc-heap-28a311d2c94e
+prerequisite-message-id: <20250610131231.1724627-1-jkangas@redhat.com>
+prerequisite-patch-id: bc44be5968feb187f2bc1b8074af7209462b18e7
+prerequisite-patch-id: f02a91b723e5ec01fbfedf3c3905218b43d432da
+prerequisite-patch-id: e944d0a3e22f2cdf4d3b3906e5603af934696deb
+
+Best regards,
+-- 
+Maxime Ripard <mripard@kernel.org>
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
