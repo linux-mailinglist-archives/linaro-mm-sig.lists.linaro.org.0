@@ -2,66 +2,72 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id C1531B00659
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 10 Jul 2025 17:21:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DEB17B007F9
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 10 Jul 2025 18:01:25 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id D802F44ADD
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 10 Jul 2025 15:21:16 +0000 (UTC)
-Received: from mail-qv1-f68.google.com (mail-qv1-f68.google.com [209.85.219.68])
-	by lists.linaro.org (Postfix) with ESMTPS id 6B35943C33
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 10 Jul 2025 15:21:05 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id F3BD545731
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 10 Jul 2025 16:01:24 +0000 (UTC)
+Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com [209.85.160.193])
+	by lists.linaro.org (Postfix) with ESMTPS id 3771B3EB94
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 10 Jul 2025 16:01:12 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=ndufresne-ca.20230601.gappssmtp.com header.s=20230601 header.b=l+OT7IZw;
-	spf=pass (lists.linaro.org: domain of nicolas@ndufresne.ca designates 209.85.219.68 as permitted sender) smtp.mailfrom=nicolas@ndufresne.ca;
+	dkim=pass header.d=ndufresne-ca.20230601.gappssmtp.com header.s=20230601 header.b=3KB+LLN9;
+	spf=pass (lists.linaro.org: domain of nicolas@ndufresne.ca designates 209.85.160.193 as permitted sender) smtp.mailfrom=nicolas@ndufresne.ca;
 	dmarc=pass (policy=none) header.from=ndufresne.ca
-Received: by mail-qv1-f68.google.com with SMTP id 6a1803df08f44-7048d8fec46so16872456d6.0
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 10 Jul 2025 08:21:05 -0700 (PDT)
+Received: by mail-qt1-f193.google.com with SMTP id d75a77b69052e-4a752944794so12628971cf.3
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 10 Jul 2025 09:01:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ndufresne-ca.20230601.gappssmtp.com; s=20230601; t=1752160865; x=1752765665; darn=lists.linaro.org;
-        h=mime-version:user-agent:autocrypt:references:in-reply-to:date:cc:to
+        d=ndufresne-ca.20230601.gappssmtp.com; s=20230601; t=1752163272; x=1752768072; darn=lists.linaro.org;
+        h=mime-version:user-agent:autocrypt:references:in-reply-to:date:to
          :from:subject:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=xKpf3SbAmWkt5VJofJn48qdY/118qeqD5HjzAhisH5k=;
-        b=l+OT7IZwhEZ7UjzTPtY8Py6Pf6+Y11kbvPQGpbdxirol1p9JmVQMbIozApDXXKH79x
-         6UtuG3Ju+TkCWJAIoSkqJr+vicPh6NYc19+U8BQF3yMiS0ZhUYXr7ejPSby2IXrtTKsU
-         HE4eZtrlmlQHQyGdQ7VZoXfNxTkpDFvtGRdRyKs3F4ZnxdH9grKa85OU8HZVxKGywuHp
-         2Qd55AnnpCOdIW+RgNLmumJArFRkQu5EaHXxiuX2Whg9U2Y9/EmhgOVfhWW9DxQpclb+
-         QD1/dQK0bvAZsELnF2vV0gRjng/LcdwC3N8VqnxrYVxuSzkggeFPyL2QAuj8beSfJPzD
-         qVqw==
+        bh=h2JvzJqEFY8FcNSNGs4AC4X799LbBQx2h7PFI9T2cfQ=;
+        b=3KB+LLN9PZXVucaFZkPmcdRrvLb5BFew+AMXNwkJy/LAusFQG0pJggAVVtr/v3arB1
+         aPrRRe/YnSFhcfODFMkUf8QteJVhChH4XVWsgcRqgzqd5V42tRthmJ+tCEHh2jKG9DqM
+         bCqOsxV+zHym72Su5WaZbY78Pnz53KtiZZsa/a/SdMloPD1ulfjrYEtsHa5uFc2tUo7T
+         lmXiwAvDupmYodPs6+sR2905i5Z3TUXm2G1TSRLQp66+wPta/xR0oe+PRAPajUf5f0CM
+         Vym1Qx2EULs1UyUi9s8XQDDFSf4vJ3keplVrBVlohzl51vm4RgHLd1m4crWaO3sDcczU
+         2Kqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752160865; x=1752765665;
-        h=mime-version:user-agent:autocrypt:references:in-reply-to:date:cc:to
+        d=1e100.net; s=20230601; t=1752163272; x=1752768072;
+        h=mime-version:user-agent:autocrypt:references:in-reply-to:date:to
          :from:subject:message-id:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=xKpf3SbAmWkt5VJofJn48qdY/118qeqD5HjzAhisH5k=;
-        b=K1IejBn8tckpJOSqJxXGNVKj1e4jHZMfeYxjsm37y7Dkn5mDQnCrYnfyIxvwTrx3PB
-         jeRW9e7ezPFgScnq0pAiU+Pp9+a4XZZHZjVjrwD0ew7kmyg5r/7FGaSpkzZnx44aeqGo
-         lV0N9hR+sDDsaiPyneo9ZZV1X9ov9SOQhCeKun1ZsKuyQaVYLEhWUWL65Bigs8qowLj2
-         akwkTvfC4bPXtYTLHMejBSnxxI9J254tcn+EhGw12TJYfpeqb/EwkA1qdJFgGhNVKnfP
-         57+j8X5CpaDnDXm5ZNjDleJAOsocsEvSLgyp0JxHJXbgvmbGrRmrtykofEHK/MLNa3vH
-         2oNQ==
-X-Forwarded-Encrypted: i=1; AJvYcCU8Ag1XNQ+fRKrM2kwxxzlWTlYNHwvFJr/4pH0ZtQ/dZ+YuCpQpxK0acaH/JarJgOJHJ1gShoeq5potuIbP@lists.linaro.org
-X-Gm-Message-State: AOJu0YwO8ZQmaPcukzqqxcEuXe+kmgsbaVXHwcUGvszKnLD88KFwENO9
-	GKpTmpMeHLf4f6mIN18c5PueVODiMDyxd61InEor8b6bgUyTXEoj5CH/d2II55PnIL8=
-X-Gm-Gg: ASbGnctTPLLfRPG4094JTSBjugWfgDOD22MlhWqx5KkISetzXHpv/eSdPlVCi2pdQP6
-	P272zhUigui3o7iHaV3Jlyezu+k83bpL7R7a/Gm4OHsOSN0Bs+/jwW9dnW+Z1kJSCUZ3um+MesB
-	ZBSVfz72dOZnFg7q4pGqGbnlRTDZA/j7oLWCX4U6c+IAboveicYyGVE3x+tNcOdobj/ROFZhFpV
-	POdpu5E2irsqw8u/j55Jymib+EfACyOPYY15rIp87V/t9TJwlbQQ6czddEf3C8mpvWSG9ZuAUqE
-	qTPqEbmevgWi8qsEOjOmE3PqfqVSFMDOd/LHTAnkF3eSZYuFJuUHTgqPEaNTgmu7UFk=
-X-Google-Smtp-Source: AGHT+IH0uA7EbnPkACvyJEVJCpbYJKsf0sky4Js9sJlbaC40zioZfAIyIXsCJGWIghdll3hzxEsL/w==
-X-Received: by 2002:a05:6214:4e14:b0:6fa:a5c9:2ee7 with SMTP id 6a1803df08f44-70495a1fe12mr51088666d6.8.1752160864846;
-        Thu, 10 Jul 2025 08:21:04 -0700 (PDT)
+        bh=h2JvzJqEFY8FcNSNGs4AC4X799LbBQx2h7PFI9T2cfQ=;
+        b=qNCke1D4Qks654F6fDB6iuq3oe7IgGOB/0qR+lKDIGpo4L+yUbH350nDRYPJmWBs6R
+         TPD5J4nNbdXUP+L4ckQO+b25ZTliX3lVcAjTYU4+0skIbjQv2+F6SOfZgA4w+zKDDnsn
+         dCjQ1MLKq+qWJxzpyJ9UEkYxLdKR1uMElUr2JzTvnUOw2Fq/sWiYexDjlQ3+8ffIb70a
+         rifdyI5n0wz2MiXrdyRPSDEwxILY1+vGlOe38sv3PBXudJyDVgCvPhvBJImPkVOqDnHz
+         m2/lwunjJ+nzKh/zbzBF3KvHltvtfZybQFevXobGwQNEZPXeKNihBsgVYZ0NjA6pwWbK
+         JrJQ==
+X-Forwarded-Encrypted: i=1; AJvYcCUE+gj1pZDqbZ+LJyyNLlOdXcseqC7kwKiV/HQcrEnkvC47dfvWo8WXxJbNerHSA38hy6cRGRvQe1PEYuZK@lists.linaro.org
+X-Gm-Message-State: AOJu0Yxi5ba07yq9Y72GBqf2ZkV3SD0VQo0GFyiyjUpdO719rrRvXu7F
+	cfPsKBAWiY7XJW47Schbv6cKkWl7XGlbhjOHEJtfhIdm2z/CN6xS0yfHKWAI4wccRZ8=
+X-Gm-Gg: ASbGncu3XTO1fVJiRSDWZVnLICZ0IHEbCDrZmDuYWiRHXjXNBPgcyEo6Np86oJC4Gzx
+	938KeZdnQkGc9PVRikGmuggWNnAS4ZBWCPzijzkZ2PFwaesfhbxZxenzUcGxnKD3ww8Nyb2uNSB
+	A003ohazmsPQDf5uTzMCJSAJiqJ23eQxWxlrFBAfzDP9/J+H5YXLKqycZDCpiNXaSQ6baQhYlRO
+	DRfx3U4K79khRzl8azTA1WlKQQLGCePI25GK5F6Ynx10IDchRWhieA0C0U6L1Pnf/dAoLmH3/bU
+	nJOv3RxhvbxF6PtxpDhJ0cUHJIuym48C2sq+YWmhuqY9PT4gcux7b00hkJ4+NsZh+Ak=
+X-Google-Smtp-Source: AGHT+IFbQFapyLU2kvG8JwQQkxoFge/HX+KIphHVjcEQzpniLu173HdtuK79yftQGxLEwpJMC++ZBw==
+X-Received: by 2002:a05:622a:8cc:b0:4a4:30a0:39c0 with SMTP id d75a77b69052e-4a9f80b0c22mr23008391cf.28.1752163271437;
+        Thu, 10 Jul 2025 09:01:11 -0700 (PDT)
 Received: from ?IPv6:2606:6d00:17:b699::5ac? ([2606:6d00:17:b699::5ac])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-7049799e407sm9536186d6.23.2025.07.10.08.21.03
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-4a9edefb55asm10028431cf.77.2025.07.10.09.01.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 10 Jul 2025 08:21:04 -0700 (PDT)
-Message-ID: <78c981eb7fafe864bea60c662ba5b474fbd44669.camel@ndufresne.ca>
+        Thu, 10 Jul 2025 09:01:09 -0700 (PDT)
+Message-ID: <775b0f527f365fa4217a5d9acfbb80e4f87078ef.camel@ndufresne.ca>
 From: Nicolas Dufresne <nicolas@ndufresne.ca>
-To: Maxime Ripard <mripard@kernel.org>
-Date: Thu, 10 Jul 2025 11:21:02 -0400
-In-Reply-To: <20250709-spotted-ancient-oriole-c8bcd1@houat>
-References: <20250709-dma-buf-ecc-heap-v6-0-dac9bf80f35d@kernel.org>
-	 <49e3fa834aadb37452112bb704a1a1593c1fd0b8.camel@ndufresne.ca>
-	 <20250709-spotted-ancient-oriole-c8bcd1@houat>
+To: Pavel Machek <pavel@ucw.cz>, kraxel@redhat.com,
+ vivek.kasireddy@intel.com, 	dri-devel@lists.freedesktop.org,
+ sumit.semwal@linaro.org, 	benjamin.gaignard@collabora.com,
+ Brian.Starkey@arm.com, jstultz@google.com, 	tjmercier@google.com,
+ linux-media@vger.kernel.org, 	linaro-mm-sig@lists.linaro.org, kernel list
+ <linux-kernel@vger.kernel.org>, 	laurent.pinchart@ideasonboard.com,
+ l.stach@pengutronix.de, 	linux+etnaviv@armlinux.org.uk,
+ christian.gmeiner@gmail.com, 	etnaviv@lists.freedesktop.org,
+ phone-devel@vger.kernel.org
+Date: Thu, 10 Jul 2025 12:01:07 -0400
+In-Reply-To: <aG94uNDrL1MdHJPM@duo.ucw.cz>
+References: <aG94uNDrL1MdHJPM@duo.ucw.cz>
 Autocrypt: addr=nicolas@ndufresne.ca; prefer-encrypt=mutual;
  keydata=mDMEaCN2ixYJKwYBBAHaRw8BAQdAM0EHepTful3JOIzcPv6ekHOenE1u0vDG1gdHFrChD
  /e0MU5pY29sYXMgRHVmcmVzbmUgPG5pY29sYXMuZHVmcmVzbmVAY29sbGFib3JhLmNvbT6ImQQTFg
@@ -74,160 +80,155 @@ Autocrypt: addr=nicolas@ndufresne.ca; prefer-encrypt=mutual;
 User-Agent: Evolution 3.56.2 (3.56.2-1.fc42) 
 MIME-Version: 1.0
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 6B35943C33
+X-Rspamd-Queue-Id: 3771B3EB94
 X-Spamd-Bar: ----
-X-Spamd-Result: default: False [-4.58 / 15.00];
-	BAYES_HAM(-2.98)[99.90%];
+X-Spamd-Result: default: False [-4.48 / 15.00];
+	BAYES_HAM(-2.78)[99.05%];
 	SIGNED_PGP(-2.00)[];
 	SUSPICIOUS_RECIPS(1.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[ndufresne.ca,none];
-	R_DKIM_ALLOW(-0.20)[ndufresne-ca.20230601.gappssmtp.com:s=20230601];
 	MIME_GOOD(-0.20)[multipart/signed,text/plain];
+	R_DKIM_ALLOW(-0.20)[ndufresne-ca.20230601.gappssmtp.com:s=20230601];
 	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.219.68:from];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
-	TAGGED_RCPT(0.00)[dt];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.160.193:from];
 	RCVD_TLS_LAST(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	ARC_NA(0.00)[];
+	FREEMAIL_TO(0.00)[ucw.cz,redhat.com,intel.com,lists.freedesktop.org,linaro.org,collabora.com,arm.com,google.com,vger.kernel.org,lists.linaro.org,ideasonboard.com,pengutronix.de,armlinux.org.uk,gmail.com];
+	RCPT_COUNT_TWELVE(0.00)[18];
+	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	DKIM_TRACE(0.00)[ndufresne-ca.20230601.gappssmtp.com:+];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
-	DKIM_TRACE(0.00)[ndufresne-ca.20230601.gappssmtp.com:+]
+	FROM_EQ_ENVFROM(0.00)[];
+	TO_DN_SOME(0.00)[];
+	DNSWL_BLOCKED(0.00)[2606:6d00:17:b699::5ac:received];
+	NEURAL_HAM(-0.00)[-1.000];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	TAGGED_RCPT(0.00)[etnaviv];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_IN_DNSWL_NONE(0.00)[209.85.160.193:from]
 X-Rspamd-Action: no action
-Message-ID-Hash: YJKIRDDJCK6IWN3X74XI2IUPQIUZWWJV
-X-Message-ID-Hash: YJKIRDDJCK6IWN3X74XI2IUPQIUZWWJV
+Message-ID-Hash: YGXJ3OBH5JEXCANBJKBMJVZDUG3YPIEB
+X-Message-ID-Hash: YGXJ3OBH5JEXCANBJKBMJVZDUG3YPIEB
 X-MailFrom: nicolas@ndufresne.ca
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Rob Herring <robh@kernel.org>, Saravana Kannan <saravanak@google.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Robin Murphy <robin.murphy@arm.com>, Andrew Davis <afd@ti.com>, Jared Kangas <jkangas@redhat.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, iommu@lists.linux.dev
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v6 0/2] dma-buf: heaps: Create a CMA heap for each CMA reserved region
+Subject: [Linaro-mm-sig] Re: DMA-BUFs always uncached on arm64, causing poor camera performance on Librem 5
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YJKIRDDJCK6IWN3X74XI2IUPQIUZWWJV/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YGXJ3OBH5JEXCANBJKBMJVZDUG3YPIEB/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============4062330255867858697=="
+Content-Type: multipart/mixed; boundary="===============3201195428342303794=="
 
 
---===============4062330255867858697==
+--===============3201195428342303794==
 Content-Type: multipart/signed; micalg="pgp-sha512";
-	protocol="application/pgp-signature"; boundary="=-0srW01EuwsYGDYpmIBS/"
+	protocol="application/pgp-signature"; boundary="=-Nzv40WcQzqiJQr2kcTPI"
 
 
---=-0srW01EuwsYGDYpmIBS/
+--=-Nzv40WcQzqiJQr2kcTPI
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
+Hi Pavel,
 
-Le mercredi 09 juillet 2025 =C3=A0 15:38 +0200, Maxime Ripard a =C3=A9crit=
-=C2=A0:
-> > Will there be a generic way to find out which driver/device this carveo=
-ut
-> > belongs to ? In V4L2, only complex cameras have userspace drivers,
-> > everything
-> > else is generic code.
+Le jeudi 10 juillet 2025 =C3=A0 10:24 +0200, Pavel Machek a =C3=A9crit=C2=
+=A0:
+> Hi!
 >=20
-> I believe it's a separate discussion, but the current stance is that the
-> heap name is enough to identify in a platform-specific way where you
-> allocate from. I've worked on documenting what a good name is so
-> userspace can pick it up more easily here:
+> It seems that DMA-BUFs are always uncached on arm64... which is a
+> problem.
 >=20
-> https://lore.kernel.org/r/20250616-dma-buf-heap-names-doc-v2-1-8ae43174cd=
-bf@kernel.org
+> I'm trying to get useful camera support on Librem 5, and that includes
+> recording vidos (and taking photos).
 >=20
-> But it's not really what you expected
+> memcpy() from normal memory is about 2msec/1MB. Unfortunately, for
+> DMA-BUFs it is 20msec/1MB, and that basically means I can't easily do
+> 760p video recording. Plus, copying full-resolution photo buffer takes
+> more than 200msec!
+>=20
+> There's possibility to do some processing on GPU, and its implemented her=
+e:
+>=20
+> https://gitlab.com/tui/tui/-/tree/master/icam?ref_type=3Dheads
+>=20
+> but that hits the same problem in the end -- data is in DMA-BUF,
+> uncached, and takes way too long to copy out.
+>=20
+> And that's ... wrong. DMA ended seconds ago, complete cache flush
+> would be way cheaper than copying single frame out, and I still have
+> to deal with uncached frames.
+>=20
+> So I have two questions:
+>=20
+> 1) Is my analysis correct that, no matter how I get frame from v4l and
+> process it on GPU, I'll have to copy it from uncached memory in the
+> end?
+>=20
+> 2) Does anyone have patches / ideas / roadmap how to solve that? It
+> makes GPU unusable for computing, and camera basically unusable for
+> video.
 
-=46rom a dma-heap API, the naming rules seems necessary, but suggesting gener=
-ic
-code to use "grep" style of search to match a heap is extremely fragile. Th=
-e
-documentation you propose is (intentionally?) vague. For me, the naming is =
-more
-like giving proper names to your function calls do devs can make sense out =
-of
-it.
+If CPU access is strictly required for your use case, the way forward is to
+implement=C2=A0V4L2_BUF_CAP_SUPPORTS_MMAP_CACHE_HINT in the capture driver.=
+ Very
+little drivers enable that.
 
-Stepping back a little, we already opened the door for in-driver use of hea=
-ps.
-So perhaps the way forward is to have V4L2 drivers utilize heaps from insid=
-e the
-kernel. Once driver are fully ported, additional APIs could be added so tha=
+Once your driver have that capability, you will be able to set
+V4L2_MEMORY_FLAG_NON_COHERENT while doing REQBUFS or CREATE_BUFS ioctl. Tha=
 t
-userspace can read which heap(s) is going to be used for the active
-configuration, and which other heaps are known usable (enumerate them). The=
-re is
-no need to add properties in that context, since these will derives from th=
-e
-driver configuration you picked. If you told you driver you doing secure me=
-mory
-playback, the driver will filter-out what can't be used.
+gives you allocation with CPU cache working, but you'll get the invalidatio=
+n (or
+flush) overhead by default. When capture data have not been read by CPU, yo=
+u can
+always queue it back with the V4L2_BUF_FLAG_NO_CACHE_INVALIDATE. But for yo=
+ur
+use case, it seems that you want the invalidation to take place, otherwise =
+your
+software will endup reading old cache data instead of the next frame data.
 
-Examples out there often express simplified view of the problem. Your ECC v=
-ideo
-playback case is a good one. Let's say you have performance issue in both
-decoder and display due to ECC. You may think that you just allocate from a=
- non-
-ECC heap, import these into the decoder, and once filled, import these into=
- the
-display driver and you won.
+Please note that the integration in the DMABuf SYNC ioctl was missing for a
+while, so make sure you have recent enough kernel or get ready for backport=
+s.
+The feature itself was commonly used with CPU only access, notably on Chrom=
+eOS
+using libyuv. No DMABuf was involved initially.
 
-But in reality, your display buffer might not be the reference buffers, and=
- most
-of the memory bandwidth in a modern decoder goes into reading reference fra=
-mes
-and the attached metadata (the later which may or may not be in the same
-allocation block).
-
-Even once the reference frames get exposed to userspace (which is a long te=
-rm
-goal), there will still be couple of buffers that just simply don't fit and=
- must
-be kept hidden inside the driver.
-
-My general conclusion is that once these heap exists, and that we guarantee
-platform specific unique names, we should probably build on top. Both users=
-pace
-and driver become consumers of the heap. And for the case where the platfor=
-m-
-specific knowledge lives inside the kernel, then heaps are selected by the
-kernel. Also, very little per-driver duplication will be needed, since 90% =
-of
-the V4L2 driver share the allocator implementation.
-
-Does that makes any sense to anyone ?
+regards,
 
 Nicolas
 
+[0] https://www.kernel.org/doc/html/latest/userspace-api/media/v4l/vidioc-r=
+eqbufs.html#v4l2-buf-cap-supports-mmap-cache-hints
 
---=-0srW01EuwsYGDYpmIBS/
+>=20
+> Best regards,
+> 								Pavel
+
+--=-Nzv40WcQzqiJQr2kcTPI
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTvDVKBFcTDwhoEbxLZQZRRKWBy9AUCaG/aXgAKCRDZQZRRKWBy
-9DlHAP9fTMIloahiN5XMBZnBB4aGkZUXdygAalNGlj6RFJZc3AD/RAhlPPmyBaVt
-ZDKBRjZVW40OnGDxhAYZePpjsIkSPw4=
-=uaX4
+iHUEABYKAB0WIQTvDVKBFcTDwhoEbxLZQZRRKWBy9AUCaG/jwwAKCRDZQZRRKWBy
+9BRcAP404riqHZv877jAk3LeonpmR8YSE9c6bNWGPspAtHTMNAEAzVw7ScK+PCWl
+1/uUbQsGbqWd6r5mH47vDOU14pKwSQM=
+=wFFh
 -----END PGP SIGNATURE-----
 
---=-0srW01EuwsYGDYpmIBS/--
+--=-Nzv40WcQzqiJQr2kcTPI--
 
---===============4062330255867858697==
+--===============3201195428342303794==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -237,4 +238,4 @@ _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
 
---===============4062330255867858697==--
+--===============3201195428342303794==--
