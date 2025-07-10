@@ -2,208 +2,211 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id D3C9AAFFA5F
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 10 Jul 2025 09:06:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 57FBDAFFB05
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 10 Jul 2025 09:36:20 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9EBAC456B7
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 10 Jul 2025 07:06:20 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 96D0843BFB
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 10 Jul 2025 07:06:09 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 4B04C456FE
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 10 Jul 2025 07:36:19 +0000 (UTC)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+	by lists.linaro.org (Postfix) with ESMTPS id 688E943BFB
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 10 Jul 2025 07:36:07 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=jzOJBawL;
-	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=mripard@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=YeAF51fE;
+	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 147.75.193.91 as permitted sender) smtp.mailfrom=mripard@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id A85AE43B48;
-	Thu, 10 Jul 2025 07:06:08 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 367F6C4CEE3;
-	Thu, 10 Jul 2025 07:06:08 +0000 (UTC)
+	by nyc.source.kernel.org (Postfix) with ESMTP id EB264A542F6;
+	Thu, 10 Jul 2025 07:36:06 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2F563C4CEE3;
+	Thu, 10 Jul 2025 07:36:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1752131168;
-	bh=2rsqAsMWywrwSTFuoWoPqSM41RgFfbsJD7gr5xyRK3M=;
+	s=k20201202; t=1752132966;
+	bh=mue2JFn58Xcox+gqmOTPe7zIvbnkjtHDu9euATkcNVo=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=jzOJBawL72CNgNRoq/cF7tG9xR+kP+G1r42rtJIfrzLA3cVwiT6Akuvx3ey6skLIX
-	 zA9OU8MJrWX9d1kQVd8za2PbIfNVD8HPqD1xiTYzd3dtRSWq/KF7bb9eaX9ShEA7C0
-	 wQwpPsIMis0HMadUNtphlLV65t1XPiugfHmN//9t1XHDyn9c9agdy08wP8ah/Upz+y
-	 8hXPdaGeJR2mgJc9qET7S2JwY30EwC8d9Q5axarCUgPA/LExLrL++ujJMVJDRZhXxI
-	 IfHRw8G5+WT93u7pSTe7eieBsPmqydjiaCqc0XWa+dpCcudnhSiSRT5GHpr69RfrhW
-	 XB9fV4i0tEoTA==
-Date: Thu, 10 Jul 2025 09:06:05 +0200
+	b=YeAF51fEBgve2cj8TTkkBVcVZftaDtNa2vKCye50KkTYB6V58VR69pEHVtJFWKj0C
+	 bYonbs/rFRWGwmUC4vqDFMRwsS4lJW0ckF329I6pYiXOsPhMDGmODpbh0qvrc2oFr+
+	 CmILLBoWy74hzGqAnBxA+sLvUVWzPod8yRi0qb04joZK0ryc+0F6YMgbNCfOWAvTPw
+	 k5w63jllp35HDD5FKBAQZdQ4BC4dE1U3G4S0hVxRZR7wwAjE8T+1viF5Ka8ud4Z60m
+	 3ssDLrhC3wMJHrxuRxMb73thEXfsgfjrH/e2S5H0eQ9cvdfKFgBrySXQRPxPoZS84Q
+	 434MPGU0K/HhQ==
+Date: Thu, 10 Jul 2025 09:36:03 +0200
 From: Maxime Ripard <mripard@kernel.org>
 To: Andrew Davis <afd@ti.com>
-Message-ID: <20250710-knowing-premium-goldfish-0bfe6e@houat>
-References: <20250616-dma-buf-heap-names-doc-v2-1-8ae43174cdbf@kernel.org>
- <9182c5cd-b3de-470b-bf84-3ebef309def6@ti.com>
+Message-ID: <20250710-sincere-dainty-marmot-1cad58@houat>
+References: <20250709-dma-buf-ecc-heap-v6-0-dac9bf80f35d@kernel.org>
+ <20250709-dma-buf-ecc-heap-v6-1-dac9bf80f35d@kernel.org>
+ <8b36f958-3406-421d-ab94-5e49f911f92e@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <9182c5cd-b3de-470b-bf84-3ebef309def6@ti.com>
+In-Reply-To: <8b36f958-3406-421d-ab94-5e49f911f92e@ti.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 96D0843BFB
-X-Spamd-Bar: -------
-X-Spamd-Result: default: False [-7.60 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
-	SIGNED_PGP(-2.00)[];
+X-Rspamd-Queue-Id: 688E943BFB
+X-Spamd-Bar: ------
+X-Spamd-Result: default: False [-6.10 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
 	DWL_DNSWL_MED(-2.00)[kernel.org:dkim];
+	SIGNED_PGP(-2.00)[];
+	SUSPICIOUS_RECIPS(1.50)[];
 	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.252.31];
+	R_SPF_ALLOW(-0.20)[+ip4:147.75.193.91];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MIME_GOOD(-0.20)[multipart/signed,text/plain];
-	ARC_NA(0.00)[];
+	TAGGED_RCPT(0.00)[dt];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	ASN(0.00)[asn:15830, ipnet:147.75.193.0/24, country:NL];
+	RCPT_COUNT_TWELVE(0.00)[21];
 	MISSING_XM_UA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	ARC_NA(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	FREEMAIL_CC(0.00)[linaro.org,collabora.com,arm.com,google.com,lwn.net,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,redhat.com,kernel.org,gmail.com];
-	RCVD_TLS_LAST(0.00)[];
-	DNSWL_BLOCKED(0.00)[172.234.252.31:from];
-	RCVD_COUNT_TWO(0.00)[2];
 	FROM_EQ_ENVFROM(0.00)[];
-	TO_DN_SOME(0.00)[];
 	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	DNSWL_BLOCKED(0.00)[100.75.92.58:received,147.75.193.91:from];
+	RCVD_TLS_LAST(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: 6UI2NJJZASHFJIAMGPQM4BGJGIDFL6IC
-X-Message-ID-Hash: 6UI2NJJZASHFJIAMGPQM4BGJGIDFL6IC
+Message-ID-Hash: KYBS2Y6JDYNXYMPYFDX74HKCXVXQFVH3
+X-Message-ID-Hash: KYBS2Y6JDYNXYMPYFDX74HKCXVXQFVH3
 X-MailFrom: mripard@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Jonathan Corbet <corbet@lwn.net>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, Jared Kangas <jkangas@redhat.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>, Bagas Sanjaya <bagasdotme@gmail.com>
+CC: Rob Herring <robh@kernel.org>, Saravana Kannan <saravanak@google.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Robin Murphy <robin.murphy@arm.com>, Jared Kangas <jkangas@redhat.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, iommu@lists.linux.dev
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2] Documentation: dma-buf: heaps: Add naming guidelines
+Subject: [Linaro-mm-sig] Re: [PATCH v6 1/2] dma/contiguous: Add helper to test reserved memory type
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6UI2NJJZASHFJIAMGPQM4BGJGIDFL6IC/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KYBS2Y6JDYNXYMPYFDX74HKCXVXQFVH3/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============8747668255810211742=="
+Content-Type: multipart/mixed; boundary="===============5427184516511664120=="
 
 
---===============8747668255810211742==
+--===============5427184516511664120==
 Content-Type: multipart/signed; micalg=pgp-sha384;
-	protocol="application/pgp-signature"; boundary="3pv5hyaxempbdl7i"
+	protocol="application/pgp-signature"; boundary="b2q4t2bjxzo6g2kd"
 Content-Disposition: inline
 
 
---3pv5hyaxempbdl7i
+--b2q4t2bjxzo6g2kd
 Content-Type: text/plain; protected-headers=v1; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH v2] Documentation: dma-buf: heaps: Add naming guidelines
+Subject: Re: [PATCH v6 1/2] dma/contiguous: Add helper to test reserved
+ memory type
 MIME-Version: 1.0
 
-On Wed, Jul 09, 2025 at 12:39:15PM -0500, Andrew Davis wrote:
-> On 6/16/25 10:21 AM, Maxime Ripard wrote:
-> > We've discussed a number of times of how some heap names are bad, but
-> > not really what makes a good heap name.
+Hi Andrew,
+
+On Wed, Jul 09, 2025 at 10:55:40AM -0500, Andrew Davis wrote:
+> On 7/9/25 7:44 AM, Maxime Ripard wrote:
+> > A given reserved-memory region can be of multiple types.
 > >=20
-> > Let's document what we expect the heap names to look like.
+> > We have currently four types defined in the tree: contiguous, backed by
+> > CMA, coherent and swiotlb, backed by their respective allocators, and a
+> > platform-specific one for tegra.
 > >=20
-> > Reviewed-by: Bagas Sanjaya <bagasdotme@gmail.com>
+> > However, some users, like dma-buf heaps, might be interested in the
+> > exact type of a reserved memory region they are getting. It would thus
+> > be useful to have helpers to test if a given region is of a given type.
+> >=20
+> > Since we only care about CMA for now though, let's create one for CMA
+> > only.
+> >=20
 > > Signed-off-by: Maxime Ripard <mripard@kernel.org>
 > > ---
-> > Changes in v2:
-> > - Added justifications for each requirement / suggestions
-> > - Added a mention and example of buffer attributes
-> > - Link to v1: https://lore.kernel.org/r/20250520-dma-buf-heap-names-doc=
--v1-1-ab31f74809ee@kernel.org
-> > ---
-> >   Documentation/userspace-api/dma-buf-heaps.rst | 38 ++++++++++++++++++=
-+++++++++
-> >   1 file changed, 38 insertions(+)
+> >   include/linux/dma-map-ops.h | 13 +++++++++++++
+> >   kernel/dma/contiguous.c     |  7 +++++++
+> >   2 files changed, 20 insertions(+)
 > >=20
-> > diff --git a/Documentation/userspace-api/dma-buf-heaps.rst b/Documentat=
-ion/userspace-api/dma-buf-heaps.rst
-> > index 535f49047ce6450796bf4380c989e109355efc05..835ad1c3a65bc07b6f41d38=
-7d85c57162909e859 100644
-> > --- a/Documentation/userspace-api/dma-buf-heaps.rst
-> > +++ b/Documentation/userspace-api/dma-buf-heaps.rst
-> > @@ -21,5 +21,43 @@ following heaps:
-> >      usually created either through the kernel commandline through the
-> >      `cma` parameter, a memory region Device-Tree node with the
-> >      `linux,cma-default` property set, or through the `CMA_SIZE_MBYTES`=
- or
-> >      `CMA_SIZE_PERCENTAGE` Kconfig options. Depending on the platform, =
-it
-> >      might be called ``reserved``, ``linux,cma``, or ``default-pool``.
+> > diff --git a/include/linux/dma-map-ops.h b/include/linux/dma-map-ops.h
+> > index f48e5fb88bd5dd346094bbf2ce1b79e5f5bfe1a6..ea646acb6367bd062619b33=
+7013db221749f85ab 100644
+> > --- a/include/linux/dma-map-ops.h
+> > +++ b/include/linux/dma-map-ops.h
+> > @@ -153,10 +153,23 @@ static inline void dma_free_contiguous(struct dev=
+ice *dev, struct page *page,
+> >   {
+> >   	__free_pages(page, get_order(size));
+> >   }
+> >   #endif /* CONFIG_DMA_CMA*/
+> > +#if defined(CONFIG_DMA_CMA) && defined(CONFIG_OF_RESERVED_MEM)
+> > +struct reserved_mem;
 > > +
-> > +Naming Convention
-> > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> > +bool of_reserved_mem_is_contiguous(const struct reserved_mem *rmem);
+> > +#else
+> > +struct reserved_mem;
 > > +
-> > +``dma-buf`` heaps name should meet a number of constraints:
-> > +
-> > +- That name must be stable, and must not change from one version to the
-> > +  other. Userspace identifies heaps by their name, so if the names ever
-> > +  changes, we would be likely to introduce regressions.
-> > +
-> > +- That name must describe the memory region the heap will allocate fro=
-m,
-> > +  and must uniquely identify it in a given platform. Since userspace
-> > +  applications use the heap name as the discriminant, it must be able =
-to
-> > +  tell which heap it wants to use reliably if there's multiple heaps.
-> > +
-> > +- That name must not mention implementation details, such as the
-> > +  allocator. The heap driver will change over time, and implementation
-> > +  details when it was introduced might not be relevant in the future.
-> > +
-> > +- The name should describe properties of the buffers that would be
-> > +  allocated. Doing so will make heap identification easier for
-> > +  userspace. Such properties are:
-> > +
-> > +  - ``cacheable`` / ``uncacheable`` for buffers with CPU caches enabled
-> > +    or disabled;
+> > +static inline bool of_reserved_mem_is_contiguous(const struct reserved=
+_mem *rmem)
+> > +{
+> > +	return false;
+> > +}
+> > +#endif
 > > +
 >=20
-> We should avoid exposing cacheability to userspace. What users care about
-> is if writes are readable by the other side (and vice versa) without SYNC
-> operations in-between. This property is "coherency". Being non-cached
-> is just one way to achieve coherency on some systems. For many systems
-> even cached buffers are still coherent and manually specifying "non-cache=
-d"
-> causes unneeded performance issues.
-
-I disagree. If you want to do any kind of software rendering, the
-buffers being cached is absolutely critical to having decent
-performance.
-
-> DMA-BUFs are default assumed to be non-coherent and sync operations should
-> be always be performed (if the buffer is actually coherent these operatio=
-ns
-> are turned into NOPs and no harm done). If sync operations cannot be done
-> (for instance small multi-writer ring-buffers), then the property can
-> be simply:
+> Should this all go in linux/of_reserved_mem.h?
 >=20
-> - ``coherent`` for buffers which do not require sync operations
+> >   #ifdef CONFIG_DMA_DECLARE_COHERENT
+> >   int dma_declare_coherent_memory(struct device *dev, phys_addr_t phys_=
+addr,
+> >   		dma_addr_t device_addr, size_t size);
+> >   void dma_release_coherent_memory(struct device *dev);
+> >   int dma_alloc_from_dev_coherent(struct device *dev, ssize_t size,
+> > diff --git a/kernel/dma/contiguous.c b/kernel/dma/contiguous.c
+> > index 8df0dfaaca18eeb0a20145512ba64425d2e7601e..ace4982e928e404315cf385=
+51e1596f7ed445156 100644
+> > --- a/kernel/dma/contiguous.c
+> > +++ b/kernel/dma/contiguous.c
+> > @@ -493,6 +493,13 @@ static int __init rmem_cma_setup(struct reserved_m=
+em *rmem)
+> >   		&rmem->base, (unsigned long)rmem->size / SZ_1M);
+> >   	return 0;
+> >   }
+> >   RESERVEDMEM_OF_DECLARE(cma, "shared-dma-pool", rmem_cma_setup);
+> > +
+> > +bool of_reserved_mem_is_contiguous(const struct reserved_mem *rmem)
+>=20
+> Needing to check where the reserved mem comes from seems wrong, it hints
+> that the reserved mem region drivers, like this one, are not in full cont=
+rol
+> of their regions. Instead of looping over all the regions in DT in the ne=
+xt
+> patch and searching for the owner, how about the owner (this driver) call
+> into __add_cma_heap() if it chooses to expose the region in that way.
+>=20
+> (I know RESERVEDMEM_OF_DECLARE callbacks are done very early and the CMA-=
+Heap
+> driver might not be able to deal with adding heaps at this point, so maybe
+> keeping a table the heaps driver can later iterate over would also work).
 
-That would be a change in the uAPI which, so far, requires sync
-operations to be performed. I'm not necessarily agaisnt it, but handling
-coherency in general is not what this patch is about.
+It's something I considered but wasn't too sure about, so I went the
+less intrusive way.
 
+I'll work on that for the next version, thanks!
 Maxime
 
---3pv5hyaxempbdl7i
+--b2q4t2bjxzo6g2kd
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iJUEABMJAB0WIQTkHFbLp4ejekA/qfgnX84Zoj2+dgUCaG9mVAAKCRAnX84Zoj2+
-dowXAYDGfPub9kqiHZxZAgjBCjYI1+bysy9zqYNVFPXKQit6jVElaE/b4h8UBIhu
-BqPeyRUBfR/oAiC05NHDJaX8Q2apzbT2BQsYyRs9RvJP+nErimerl3p2BOj1vya/
-KaclhnfZBQ==
-=wxVn
+iJUEABMJAB0WIQTkHFbLp4ejekA/qfgnX84Zoj2+dgUCaG9tYwAKCRAnX84Zoj2+
+dirHAX9y8X3F+DfFYUDveJIb9DstTlSvimj5QRvPEuzVfmbJoGCEVCl3SFChG0nH
+Dl2sh0sBgJIDvY1QFYOlOAUR1G4Ec2V12xDBUeAYbip+I9SmiZyQ5mpDfHQUD4pH
+kPC3oAIFNg==
+=8N7z
 -----END PGP SIGNATURE-----
 
---3pv5hyaxempbdl7i--
+--b2q4t2bjxzo6g2kd--
 
---===============8747668255810211742==
+--===============5427184516511664120==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -213,4 +216,4 @@ _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
 
---===============8747668255810211742==--
+--===============5427184516511664120==--
