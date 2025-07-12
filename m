@@ -2,39 +2,39 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 28FD9B02B73
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 12 Jul 2025 16:37:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5AF6DB02B74
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 12 Jul 2025 16:38:12 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 46CC8454CD
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 12 Jul 2025 14:37:56 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7C23445707
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 12 Jul 2025 14:38:11 +0000 (UTC)
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id 018BF40D22
-	for <linaro-mm-sig@lists.linaro.org>; Sat, 12 Jul 2025 14:37:45 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 5EFA040D22
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 12 Jul 2025 14:37:47 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=linuxfoundation.org header.s=korg header.b=0Fju1uOt;
+	dkim=pass header.d=linuxfoundation.org header.s=korg header.b=Z9BkD+Wy;
 	spf=pass (lists.linaro.org: domain of gregkh@linuxfoundation.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=gregkh@linuxfoundation.org;
 	dmarc=pass (policy=none) header.from=linuxfoundation.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by dfw.source.kernel.org (Postfix) with ESMTP id 6CF455C543B;
-	Sat, 12 Jul 2025 14:37:44 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C25D6C4CEF6;
-	Sat, 12 Jul 2025 14:37:43 +0000 (UTC)
+	by dfw.source.kernel.org (Postfix) with ESMTP id 0A1345C4C6E;
+	Sat, 12 Jul 2025 14:37:47 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 64FB9C4CEEF;
+	Sat, 12 Jul 2025 14:37:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-	s=korg; t=1752331064;
-	bh=Vs6MCROPTYo6m8lKFInHSo+1gFWNsdYy0vpB/pXwkoY=;
+	s=korg; t=1752331066;
+	bh=4NZsBeKK2X3pj7t2PeAlNndUrrDjGFEBWihxRMTX1PU=;
 	h=Subject:To:Cc:From:Date:From;
-	b=0Fju1uOtXYRIvDFNzKrGH6pX4c61j5MwA3v40siTGxyo9B5epHW7+I8Ed8M7nBvqi
-	 i1ALEw6qpYzM6WqmVSdeJf8vr976nnofTS87+3m7BVhjN+wWys+RY2vG1sIQwDg2Vq
-	 3tTEvRG/kBBGT9Uthw11IM9vLQKFLMc/sg0CHkIA=
+	b=Z9BkD+WyXKUBooyEr3i+EuyHigahFBnhVgQq5DV4ZPnetQ0U37lGuOJkIc5sjb6ry
+	 yKjFMvuBh+p8l87SDLF3bNNSmlu/koVvjYjA8yJZUzeFGAAS7Wd2a5XqPHmwc/4hbR
+	 o8kmA7OoVasPxwTfNILeMXdhJHiKoMSnN7SwliWU=
 To: asrivats@redhat.com,christian.koenig@amd.com,dri-devel@lists.freedesktop.org,gregkh@linuxfoundation.org,linaro-mm-sig@lists.linaro.org,maarten.lankhorst@linux.intel.com,mripard@kernel.org,sumit.semwal@linaro.org,tzimmermann@suse.de
 From: <gregkh@linuxfoundation.org>
-Date: Sat, 12 Jul 2025 16:37:13 +0200
-Message-ID: <2025071213-glimpse-wad-b500@gregkh>
+Date: Sat, 12 Jul 2025 16:37:21 +0200
+Message-ID: <2025071221-wish-appraiser-71fd@gregkh>
 MIME-Version: 1.0
 X-stable: commit
 X-Patchwork-Hint: ignore 
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 018BF40D22
+X-Rspamd-Queue-Id: 5EFA040D22
 X-Spamd-Bar: /
 X-Spamd-Result: default: False [0.50 / 15.00];
 	MID_END_EQ_FROM_USER_PART(4.00)[];
@@ -60,16 +60,16 @@ X-Spamd-Result: default: False [0.50 / 15.00];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	DKIM_TRACE(0.00)[linuxfoundation.org:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: MTZTO7SESKL7YB7YALPJM6HQVBZY7QJU
-X-Message-ID-Hash: MTZTO7SESKL7YB7YALPJM6HQVBZY7QJU
+Message-ID-Hash: X5ZPXIXZOUW6V6OSXJ6IGCZSLAVE6TBD
+X-Message-ID-Hash: X5ZPXIXZOUW6V6OSXJ6IGCZSLAVE6TBD
 X-MailFrom: gregkh@linuxfoundation.org
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: stable-commits@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Patch "drm/gem: Acquire references on GEM handles for framebuffers" has been added to the 6.12-stable tree
+Subject: [Linaro-mm-sig] Patch "drm/gem: Acquire references on GEM handles for framebuffers" has been added to the 6.15-stable tree
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MTZTO7SESKL7YB7YALPJM6HQVBZY7QJU/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/X5ZPXIXZOUW6V6OSXJ6IGCZSLAVE6TBD/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -81,12 +81,12 @@ Content-Transfer-Encoding: base64
 
 DQpUaGlzIGlzIGEgbm90ZSB0byBsZXQgeW91IGtub3cgdGhhdCBJJ3ZlIGp1c3QgYWRkZWQgdGhl
 IHBhdGNoIHRpdGxlZA0KDQogICAgZHJtL2dlbTogQWNxdWlyZSByZWZlcmVuY2VzIG9uIEdFTSBo
-YW5kbGVzIGZvciBmcmFtZWJ1ZmZlcnMNCg0KdG8gdGhlIDYuMTItc3RhYmxlIHRyZWUgd2hpY2gg
+YW5kbGVzIGZvciBmcmFtZWJ1ZmZlcnMNCg0KdG8gdGhlIDYuMTUtc3RhYmxlIHRyZWUgd2hpY2gg
 Y2FuIGJlIGZvdW5kIGF0Og0KICAgIGh0dHA6Ly93d3cua2VybmVsLm9yZy9naXQvP3A9bGludXgv
 a2VybmVsL2dpdC9zdGFibGUvc3RhYmxlLXF1ZXVlLmdpdDthPXN1bW1hcnkNCg0KVGhlIGZpbGVu
 YW1lIG9mIHRoZSBwYXRjaCBpczoNCiAgICAgZHJtLWdlbS1hY3F1aXJlLXJlZmVyZW5jZXMtb24t
 Z2VtLWhhbmRsZXMtZm9yLWZyYW1lYnVmZmVycy5wYXRjaA0KYW5kIGl0IGNhbiBiZSBmb3VuZCBp
-biB0aGUgcXVldWUtNi4xMiBzdWJkaXJlY3RvcnkuDQoNCklmIHlvdSwgb3IgYW55b25lIGVsc2Us
+biB0aGUgcXVldWUtNi4xNSBzdWJkaXJlY3RvcnkuDQoNCklmIHlvdSwgb3IgYW55b25lIGVsc2Us
 IGZlZWxzIGl0IHNob3VsZCBub3QgYmUgYWRkZWQgdG8gdGhlIHN0YWJsZSB0cmVlLA0KcGxlYXNl
 IGxldCA8c3RhYmxlQHZnZXIua2VybmVsLm9yZz4ga25vdyBhYm91dCBpdC4NCg0KDQo+RnJvbSA1
 MzA3ZGNlODc4ZDQxMjZlMWIzNzU1ODczMTg5NTViZDAxOWMzNzQxIE1vbiBTZXAgMTcgMDA6MDA6
@@ -160,7 +160,7 @@ KysrKysrKysrKysrKysrKysrKysrKy0tLQ0KIGRyaXZlcnMvZ3B1L2RybS9kcm1fZ2VtX2ZyYW1l
 YnVmZmVyX2hlbHBlci5jIHwgICAxNiArKysrKy0tLS0NCiBkcml2ZXJzL2dwdS9kcm0vZHJtX2lu
 dGVybmFsLmggICAgICAgICAgICAgICB8ICAgIDIgKw0KIDMgZmlsZXMgY2hhbmdlZCwgNTEgaW5z
 ZXJ0aW9ucygrKSwgMTEgZGVsZXRpb25zKC0pDQoNCi0tLSBhL2RyaXZlcnMvZ3B1L2RybS9kcm1f
-Z2VtLmMNCisrKyBiL2RyaXZlcnMvZ3B1L2RybS9kcm1fZ2VtLmMNCkBAIC0xODYsNiArMTg2LDM1
+Z2VtLmMNCisrKyBiL2RyaXZlcnMvZ3B1L2RybS9kcm1fZ2VtLmMNCkBAIC0yMTIsNiArMjEyLDM1
 IEBAIHZvaWQgZHJtX2dlbV9wcml2YXRlX29iamVjdF9maW5pKHN0cnVjdA0KIH0NCiBFWFBPUlRf
 U1lNQk9MKGRybV9nZW1fcHJpdmF0ZV9vYmplY3RfZmluaSk7DQogDQorc3RhdGljIHZvaWQgZHJt
 X2dlbV9vYmplY3RfaGFuZGxlX2dldChzdHJ1Y3QgZHJtX2dlbV9vYmplY3QgKm9iaikNCit7DQor
@@ -180,7 +180,7 @@ ZiB0YWtlbiBpbiBjcmVhdGUtdGFpbCBoZWxwZXIgKi8NCisJZHJtX2dlbV9vYmplY3RfaGFuZGxl
 X2dldChvYmopOw0KK30NCitFWFBPUlRfU1lNQk9MKGRybV9nZW1fb2JqZWN0X2hhbmRsZV9nZXRf
 dW5sb2NrZWQpOw0KKw0KIC8qKg0KICAqIGRybV9nZW1fb2JqZWN0X2hhbmRsZV9mcmVlIC0gcmVs
 ZWFzZSByZXNvdXJjZXMgYm91bmQgdG8gdXNlcnNwYWNlIGhhbmRsZXMNCiAgKiBAb2JqOiBHRU0g
-b2JqZWN0IHRvIGNsZWFuIHVwLg0KQEAgLTIxNiw4ICsyNDUsMTQgQEAgc3RhdGljIHZvaWQgZHJt
+b2JqZWN0IHRvIGNsZWFuIHVwLg0KQEAgLTI0Miw4ICsyNzEsMTQgQEAgc3RhdGljIHZvaWQgZHJt
 X2dlbV9vYmplY3RfZXhwb3J0ZWRfZG1hXw0KIAl9DQogfQ0KIA0KLXN0YXRpYyB2b2lkDQotZHJt
 X2dlbV9vYmplY3RfaGFuZGxlX3B1dF91bmxvY2tlZChzdHJ1Y3QgZHJtX2dlbV9vYmplY3QgKm9i
 aikNCisvKioNCisgKiBkcm1fZ2VtX29iamVjdF9oYW5kbGVfcHV0X3VubG9ja2VkIC0gcmVsZWFz
@@ -190,11 +190,11 @@ IGhhbmRsZS4gUG9zc2libHkgcmVsZWFzZXMNCisgKiB0aGUgR0VNIGJ1ZmZlciBvYmplY3QgYW5k
 IGFzc29jaWF0ZWQgZG1hLWJ1ZiBvYmplY3RzLg0KKyAqLw0KK3ZvaWQgZHJtX2dlbV9vYmplY3Rf
 aGFuZGxlX3B1dF91bmxvY2tlZChzdHJ1Y3QgZHJtX2dlbV9vYmplY3QgKm9iaikNCiB7DQogCXN0
 cnVjdCBkcm1fZGV2aWNlICpkZXYgPSBvYmotPmRldjsNCiAJYm9vbCBmaW5hbCA9IGZhbHNlOw0K
-QEAgLTI0Miw2ICsyNzcsNyBAQCBkcm1fZ2VtX29iamVjdF9oYW5kbGVfcHV0X3VubG9ja2VkKHN0
+QEAgLTI2OCw2ICszMDMsNyBAQCBkcm1fZ2VtX29iamVjdF9oYW5kbGVfcHV0X3VubG9ja2VkKHN0
 cnVjDQogCWlmIChmaW5hbCkNCiAJCWRybV9nZW1fb2JqZWN0X3B1dChvYmopOw0KIH0NCitFWFBP
 UlRfU1lNQk9MKGRybV9nZW1fb2JqZWN0X2hhbmRsZV9wdXRfdW5sb2NrZWQpOw0KIA0KIC8qDQog
 ICogQ2FsbGVkIGF0IGRldmljZSBvciBvYmplY3QgY2xvc2UgdG8gcmVsZWFzZSB0aGUgZmlsZSdz
-DQpAQCAtMzYzLDggKzM5OSw4IEBAIGRybV9nZW1faGFuZGxlX2NyZWF0ZV90YWlsKHN0cnVjdCBk
+DQpAQCAtMzg5LDggKzQyNSw4IEBAIGRybV9nZW1faGFuZGxlX2NyZWF0ZV90YWlsKHN0cnVjdCBk
 cm1fZmkNCiAJaW50IHJldDsNCiANCiAJV0FSTl9PTighbXV0ZXhfaXNfbG9ja2VkKCZkZXYtPm9i
 amVjdF9uYW1lX2xvY2spKTsNCi0JaWYgKG9iai0+aGFuZGxlX2NvdW50KysgPT0gMCkNCi0JCWRy
 bV9nZW1fb2JqZWN0X2dldChvYmopOw0KKw0KKwlkcm1fZ2VtX29iamVjdF9oYW5kbGVfZ2V0KG9i
@@ -228,7 +228,7 @@ aGFuZGxlX3B1dF91bmxvY2tlZDoNCiAJd2hpbGUgKGkgPiAwKSB7DQogCQktLWk7DQotCQlkcm1f
 Z2VtX29iamVjdF9wdXQob2Jqc1tpXSk7DQorCQlkcm1fZ2VtX29iamVjdF9oYW5kbGVfcHV0X3Vu
 bG9ja2VkKG9ianNbaV0pOw0KIAl9DQogCXJldHVybiByZXQ7DQogfQ0KLS0tIGEvZHJpdmVycy9n
 cHUvZHJtL2RybV9pbnRlcm5hbC5oDQorKysgYi9kcml2ZXJzL2dwdS9kcm0vZHJtX2ludGVybmFs
-LmgNCkBAIC0xNTMsNiArMTUzLDggQEAgdm9pZCBkcm1fc3lzZnNfbGVhc2VfZXZlbnQoc3RydWN0
+LmgNCkBAIC0xNjEsNiArMTYxLDggQEAgdm9pZCBkcm1fc3lzZnNfbGVhc2VfZXZlbnQoc3RydWN0
 IGRybV9kZQ0KIA0KIC8qIGRybV9nZW0uYyAqLw0KIGludCBkcm1fZ2VtX2luaXQoc3RydWN0IGRy
 bV9kZXZpY2UgKmRldik7DQordm9pZCBkcm1fZ2VtX29iamVjdF9oYW5kbGVfZ2V0X3VubG9ja2Vk
 KHN0cnVjdCBkcm1fZ2VtX29iamVjdCAqb2JqKTsNCit2b2lkIGRybV9nZW1fb2JqZWN0X2hhbmRs
@@ -236,8 +236,8 @@ ZV9wdXRfdW5sb2NrZWQoc3RydWN0IGRybV9nZW1fb2JqZWN0ICpvYmopOw0KIGludCBkcm1fZ2Vt
 X2hhbmRsZV9jcmVhdGVfdGFpbChzdHJ1Y3QgZHJtX2ZpbGUgKmZpbGVfcHJpdiwNCiAJCQkgICAg
 ICAgc3RydWN0IGRybV9nZW1fb2JqZWN0ICpvYmosDQogCQkJICAgICAgIHUzMiAqaGFuZGxlcCk7
 DQoNCg0KUGF0Y2hlcyBjdXJyZW50bHkgaW4gc3RhYmxlLXF1ZXVlIHdoaWNoIG1pZ2h0IGJlIGZy
-b20gdHppbW1lcm1hbm5Ac3VzZS5kZSBhcmUNCg0KcXVldWUtNi4xMi9kcm0tZ2VtLWZpeC1yYWNl
-LWluLWRybV9nZW1faGFuZGxlX2NyZWF0ZV90YWlsLnBhdGNoDQpxdWV1ZS02LjEyL2RybS1nZW0t
+b20gdHppbW1lcm1hbm5Ac3VzZS5kZSBhcmUNCg0KcXVldWUtNi4xNS9kcm0tZ2VtLWZpeC1yYWNl
+LWluLWRybV9nZW1faGFuZGxlX2NyZWF0ZV90YWlsLnBhdGNoDQpxdWV1ZS02LjE1L2RybS1nZW0t
 YWNxdWlyZS1yZWZlcmVuY2VzLW9uLWdlbS1oYW5kbGVzLWZvci1mcmFtZWJ1ZmZlcnMucGF0Y2gN
 Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1t
 bS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1
