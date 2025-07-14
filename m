@@ -2,35 +2,35 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0424BB035CB
+	by mail.lfdr.de (Postfix) with ESMTPS id 4D294B035CE
 	for <lists+linaro-mm-sig@lfdr.de>; Mon, 14 Jul 2025 07:35:44 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7BA4545757
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 14 Jul 2025 05:35:25 +0000 (UTC)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id 40DF3443BA
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 14 Jul 2025 05:35:13 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9FCFE44776
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 14 Jul 2025 05:35:39 +0000 (UTC)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+	by lists.linaro.org (Postfix) with ESMTPS id 51A7A44776
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 14 Jul 2025 05:35:19 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=AUvq3Ktg;
-	spf=pass (lists.linaro.org: domain of krzk@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=krzk@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b="CP/9Im8o";
+	spf=pass (lists.linaro.org: domain of krzk@kernel.org designates 147.75.193.91 as permitted sender) smtp.mailfrom=krzk@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by dfw.source.kernel.org (Postfix) with ESMTP id 89A835C54C6;
-	Mon, 14 Jul 2025 05:35:12 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7B142C4CEF0;
-	Mon, 14 Jul 2025 05:35:08 +0000 (UTC)
+	by nyc.source.kernel.org (Postfix) with ESMTP id DB669A51D16;
+	Mon, 14 Jul 2025 05:35:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7E63AC4CEF7;
+	Mon, 14 Jul 2025 05:35:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1752471312;
-	bh=j+izsfBJF9w4Gy9CrV8R4+uyMFxSr043Yk/954YoIbE=;
+	s=k20201202; t=1752471318;
+	bh=pBCIRAJi0foXxJRoXZ3zYn02pRbQBBQBVlaAHcDr2JU=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=AUvq3KtguDuNeEIx6t/A+ZNC+RkcsTnyo0dVPMOJXWRCVbks4rK5ywva2yhv7hNGB
-	 c/buLyDyLebAQASR5gKUgURQ/wulHQ8Imqpxx/FHOjB3FEYn+OTcY7h4R3ht+6PO2g
-	 QMuwaHn/iCOxg8tq9lBwNp/7AtNj77G20DQxi4/Abe7uH2AUJU0PAsJwAwzr5BJvOt
-	 UIe8r1LIT5yoaRYRC1OHyVVj/AxFi/74NvGBzY63pcK2ScVBhLDEJt+DgSU7EtnlZM
-	 /f9mErY+tGMnen+18JUCPAp6Jx2il/vQRVDrGdVqr6eH4z46nybvocUTkkmo+S7BF5
-	 JsHcrXr+EGWJw==
-Message-ID: <1e7cc022-d69f-477f-91e3-7fe1d63bf933@kernel.org>
-Date: Mon, 14 Jul 2025 07:35:06 +0200
+	b=CP/9Im8olLCuDP41Dxr6lvO5fHVQ2U8QdvNcUq1nn3GQmlMHb+AUJ7ICjW/9+mylh
+	 Kta9XJWKfjtbD9CHx3NuAb5Gi4rcuLU1j60j2O1V7GRi5zfGy0z2NuOPRYGdOK9vZf
+	 Yv8+Dw0beR3RQ+7Q2aWTgmLcPQGhAAO0fDaRB+EgPPCjBzA5fKKs7voMbfdqo4xcgJ
+	 /mTsELhrWA4wW9lPmhhzwlIZkjWsacYy+XuI3Gl1ct90rnJse9LJb/O+8lOoZbN7QY
+	 CbYuRYDeswhGW9XGb0POcg/kEWvw+4NmW0hFss1AayBMMLIRA/moj+2+qf+OriT7No
+	 XVdof3/fjV7Jw==
+Message-ID: <ed14c7ba-12e6-49f4-ba3f-1bbe57f507fd@kernel.org>
+Date: Mon, 14 Jul 2025 07:35:13 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: LiangCheng Wang <zaq14760@gmail.com>, Rob Herring <robh@kernel.org>,
@@ -42,6 +42,7 @@ To: LiangCheng Wang <zaq14760@gmail.com>, Rob Herring <robh@kernel.org>,
  =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
  Wig Cheng <onlywig@gmail.com>
 References: <20250714-drm-v2-0-5d1a2e12796c@gmail.com>
+ <20250714-drm-v2-1-5d1a2e12796c@gmail.com>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
@@ -87,46 +88,47 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  jWt87ecuHlpL3uuQ0ZZNWqHgZoQLXoqC2ZV5KrtKWb/jyiFX/sxSrodALf0zf+tfHv0FZWT2
  zHjUqd0t4njD/UOsuIMOQn4Ig0SdivYPfZukb5cdasKJukG1NOpbW7yRNivaCnfZz6dTawXw
  XRIV/KDsHQiyVxKvN73bThKhONkcX2LWuD928tAR6XMM2G5ovxLe09vuOzzfTWQDsm++9UKF a/A=
-In-Reply-To: <20250714-drm-v2-0-5d1a2e12796c@gmail.com>
+In-Reply-To: <20250714-drm-v2-1-5d1a2e12796c@gmail.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 40DF3443BA
-X-Spamd-Bar: -
-X-Spamd-Result: default: False [-1.97 / 15.00];
-	BAYES_HAM(-2.47)[97.61%];
+X-Rspamd-Queue-Id: 51A7A44776
+X-Spamd-Bar: /
+X-Spamd-Result: default: False [-0.31 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
+	BAYES_HAM(-0.81)[84.95%];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip4:147.75.193.91:c];
 	MIME_GOOD(-0.10)[text/plain];
 	TAGGED_RCPT(0.00)[dt];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:15830, ipnet:139.178.80.0/21, country:NL];
 	ARC_NA(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[17];
-	MIME_TRACE(0.00)[0:+];
 	FREEMAIL_TO(0.00)[gmail.com,kernel.org,linux.intel.com,suse.de,ffwll.ch,linaro.org,amd.com];
+	MIME_TRACE(0.00)[0:+];
+	ASN(0.00)[asn:15830, ipnet:147.75.193.0/24, country:NL];
+	DWL_DNSWL_BLOCKED(0.00)[kernel.org:dkim];
 	MID_RHS_MATCH_FROM(0.00)[];
-	TO_DN_SOME(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	URIBL_BLOCKED(0.00)[linaro.org:email,nyc.source.kernel.org:rdns,nyc.source.kernel.org:helo,bootlin.com:url];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	DWL_DNSWL_BLOCKED(0.00)[kernel.org:dkim];
-	DNSWL_BLOCKED(0.00)[100.75.92.58:received,139.178.84.217:from];
-	RCVD_TLS_LAST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
-	NEURAL_HAM(-0.00)[-1.000];
+	DNSWL_BLOCKED(0.00)[100.75.92.58:received,147.75.193.91:from];
+	RCVD_TLS_LAST(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: W6OT4L6ESYEIDJNWVW3N5IYEMN64SWU6
-X-Message-ID-Hash: W6OT4L6ESYEIDJNWVW3N5IYEMN64SWU6
+Message-ID-Hash: NEJJBDHCQZSX3OKZABIB6COQXLNOYWLL
+X-Message-ID-Hash: NEJJBDHCQZSX3OKZABIB6COQXLNOYWLL
 X-MailFrom: krzk@kernel.org
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 0/3] Add support for Mayqueen Pixpaper e-ink panel
+Subject: [Linaro-mm-sig] Re: [PATCH v2 1/3] dt-bindings: vendor-prefixes: Add Mayqueen name
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/W6OT4L6ESYEIDJNWVW3N5IYEMN64SWU6/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NEJJBDHCQZSX3OKZABIB6COQXLNOYWLL/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -137,18 +139,35 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
 On 14/07/2025 04:59, LiangCheng Wang wrote:
+> From: Wig Cheng <onlywig@gmail.com>
+> 
+> Mayqueen is a Taiwan-based company primarily focused on the development
+> of arm64 development boards and e-paper displays.
+> 
+> Signed-off-by: Wig Cheng <onlywig@gmail.com>
 > ---
-> Changes in v2:
-> - Reordered patches so that DT bindings come before the driver (suggested by Rob Herring)
-> - Fixed sparse warning: removed duplicate `.reset` initializer in `pixpaper_plane_funcs`
-> - Fixed checkpatch issues reported by Media CI:
->   - Removed unnecessary blank line before closing brace
->   - Moved opening parentheses up to function call lines (e.g., `DRM_WARN(...)`)
->   - Fixed alignment of conditionals
->   - Fixed `dev_warn(` and `drm_universal_plane_init(` formatting
-> - Thanks to Rob Herring for ack on vendor-prefix patch
+<form letter>
+This is a friendly reminder during the review process.
 
-And what did you do about it?
+It looks like you received a tag and forgot to add it.
+
+If you do not know the process, here is a short explanation:
+Please add Acked-by/Reviewed-by/Tested-by tags when posting new versions
+of patchset, under or above your Signed-off-by tag, unless patch changed
+significantly (e.g. new properties added to the DT bindings). Tag is
+"received", when provided in a message replied to you on the mailing
+list. Tools like b4 can help here. However, there's no need to repost
+patches *only* to add the tags. The upstream maintainer will do that for
+tags received on the version they apply.
+
+Please read:
+https://elixir.bootlin.com/linux/v6.12-rc3/source/Documentation/process/submitting-patches.rst#L577
+
+If a tag was not added on purpose, please state why and what changed.
+</form letter>
+
+
+Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
 
 Best regards,
 Krzysztof
