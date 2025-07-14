@@ -2,35 +2,35 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4D294B035CE
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 14 Jul 2025 07:35:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 48518B035D8
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 14 Jul 2025 07:36:03 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9FCFE44776
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 14 Jul 2025 05:35:39 +0000 (UTC)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
-	by lists.linaro.org (Postfix) with ESMTPS id 51A7A44776
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 14 Jul 2025 05:35:19 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 6A0E144638
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 14 Jul 2025 05:36:02 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+	by lists.linaro.org (Postfix) with ESMTPS id 1FFB1443BA
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 14 Jul 2025 05:35:51 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b="CP/9Im8o";
-	spf=pass (lists.linaro.org: domain of krzk@kernel.org designates 147.75.193.91 as permitted sender) smtp.mailfrom=krzk@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b="AzED9ED/";
+	spf=pass (lists.linaro.org: domain of krzk@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=krzk@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by nyc.source.kernel.org (Postfix) with ESMTP id DB669A51D16;
-	Mon, 14 Jul 2025 05:35:18 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7E63AC4CEF7;
-	Mon, 14 Jul 2025 05:35:14 +0000 (UTC)
+	by dfw.source.kernel.org (Postfix) with ESMTP id B7A8E5C54C6;
+	Mon, 14 Jul 2025 05:35:50 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 73092C4CEED;
+	Mon, 14 Jul 2025 05:35:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1752471318;
-	bh=pBCIRAJi0foXxJRoXZ3zYn02pRbQBBQBVlaAHcDr2JU=;
+	s=k20201202; t=1752471350;
+	bh=9+08Hc9UF8N52xk3lCvwIIkOnYxSZRn+lE4UAJftaJc=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=CP/9Im8olLCuDP41Dxr6lvO5fHVQ2U8QdvNcUq1nn3GQmlMHb+AUJ7ICjW/9+mylh
-	 Kta9XJWKfjtbD9CHx3NuAb5Gi4rcuLU1j60j2O1V7GRi5zfGy0z2NuOPRYGdOK9vZf
-	 Yv8+Dw0beR3RQ+7Q2aWTgmLcPQGhAAO0fDaRB+EgPPCjBzA5fKKs7voMbfdqo4xcgJ
-	 /mTsELhrWA4wW9lPmhhzwlIZkjWsacYy+XuI3Gl1ct90rnJse9LJb/O+8lOoZbN7QY
-	 CbYuRYDeswhGW9XGb0POcg/kEWvw+4NmW0hFss1AayBMMLIRA/moj+2+qf+OriT7No
-	 XVdof3/fjV7Jw==
-Message-ID: <ed14c7ba-12e6-49f4-ba3f-1bbe57f507fd@kernel.org>
-Date: Mon, 14 Jul 2025 07:35:13 +0200
+	b=AzED9ED/brZHpr6n3jFjD4wWC7PycIp9Hp+4HXSPN7ZmzFIvqd2DLfZ0O0GWfe6sB
+	 6rLl1eTaTRJkQLuuDfcGFLeqbELIAnWhuBsrhw9yzI3ka+j3xXn/JQNkqpIfGqieY8
+	 0xio7bOjQTJiRqq9MdhX4xhdm/zfyQ6YsFAqcrvgI2Y5JHfMmV+OS3VRfIXXrRrWf3
+	 x1qx7OOCtYuufCJXlAeJxHX71JiKEjtWyhNE3SFppwNLVXQY2jRqswnuBTLVAJAot2
+	 G47HBDQ0Gl4Q2+/DYAV8J51aYfSVns8lR9FcpYwPUHbr3NVeeewI9eo2slV/DXWVpf
+	 KxueoalNFCXog==
+Message-ID: <ab35bb65-6652-4e58-9898-ea34adaf2de8@kernel.org>
+Date: Mon, 14 Jul 2025 07:35:44 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: LiangCheng Wang <zaq14760@gmail.com>, Rob Herring <robh@kernel.org>,
@@ -42,7 +42,7 @@ To: LiangCheng Wang <zaq14760@gmail.com>, Rob Herring <robh@kernel.org>,
  =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
  Wig Cheng <onlywig@gmail.com>
 References: <20250714-drm-v2-0-5d1a2e12796c@gmail.com>
- <20250714-drm-v2-1-5d1a2e12796c@gmail.com>
+ <20250714-drm-v2-2-5d1a2e12796c@gmail.com>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
@@ -88,16 +88,16 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  jWt87ecuHlpL3uuQ0ZZNWqHgZoQLXoqC2ZV5KrtKWb/jyiFX/sxSrodALf0zf+tfHv0FZWT2
  zHjUqd0t4njD/UOsuIMOQn4Ig0SdivYPfZukb5cdasKJukG1NOpbW7yRNivaCnfZz6dTawXw
  XRIV/KDsHQiyVxKvN73bThKhONkcX2LWuD928tAR6XMM2G5ovxLe09vuOzzfTWQDsm++9UKF a/A=
-In-Reply-To: <20250714-drm-v2-1-5d1a2e12796c@gmail.com>
+In-Reply-To: <20250714-drm-v2-2-5d1a2e12796c@gmail.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 51A7A44776
-X-Spamd-Bar: /
-X-Spamd-Result: default: False [-0.31 / 15.00];
+X-Rspamd-Queue-Id: 1FFB1443BA
+X-Spamd-Bar: -
+X-Spamd-Result: default: False [-1.50 / 15.00];
+	BAYES_HAM(-2.00)[95.07%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	BAYES_HAM(-0.81)[84.95%];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:147.75.193.91:c];
+	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217:c];
 	MIME_GOOD(-0.10)[text/plain];
 	TAGGED_RCPT(0.00)[dt];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
@@ -105,30 +105,30 @@ X-Spamd-Result: default: False [-0.31 / 15.00];
 	RCPT_COUNT_TWELVE(0.00)[17];
 	FREEMAIL_TO(0.00)[gmail.com,kernel.org,linux.intel.com,suse.de,ffwll.ch,linaro.org,amd.com];
 	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:15830, ipnet:147.75.193.0/24, country:NL];
+	ASN(0.00)[asn:15830, ipnet:139.178.80.0/21, country:NL];
 	DWL_DNSWL_BLOCKED(0.00)[kernel.org:dkim];
 	MID_RHS_MATCH_FROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	URIBL_BLOCKED(0.00)[linaro.org:email,nyc.source.kernel.org:rdns,nyc.source.kernel.org:helo,bootlin.com:url];
+	URIBL_BLOCKED(0.00)[bootlin.com:url];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
-	DNSWL_BLOCKED(0.00)[100.75.92.58:received,147.75.193.91:from];
+	DNSWL_BLOCKED(0.00)[100.75.92.58:received,139.178.84.217:from];
 	RCVD_TLS_LAST(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: NEJJBDHCQZSX3OKZABIB6COQXLNOYWLL
-X-Message-ID-Hash: NEJJBDHCQZSX3OKZABIB6COQXLNOYWLL
+Message-ID-Hash: ZO2ORH4P2XHS2V3WPYS5DU6WA2YX6HRV
+X-Message-ID-Hash: ZO2ORH4P2XHS2V3WPYS5DU6WA2YX6HRV
 X-MailFrom: krzk@kernel.org
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 1/3] dt-bindings: vendor-prefixes: Add Mayqueen name
+Subject: [Linaro-mm-sig] Re: [PATCH v2 2/3] dt-bindings: display: Add Mayqueen Pixpaper e-ink panel
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NEJJBDHCQZSX3OKZABIB6COQXLNOYWLL/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZO2ORH4P2XHS2V3WPYS5DU6WA2YX6HRV/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -139,13 +139,11 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
 On 14/07/2025 04:59, LiangCheng Wang wrote:
-> From: Wig Cheng <onlywig@gmail.com>
+> The binding is for the Mayqueen Pixpaper e-ink display panel,
+> controlled via an SPI interface.
 > 
-> Mayqueen is a Taiwan-based company primarily focused on the development
-> of arm64 development boards and e-paper displays.
-> 
-> Signed-off-by: Wig Cheng <onlywig@gmail.com>
-> ---
+> Signed-off-by: LiangCheng Wang <zaq14760@gmail.com>
+
 <form letter>
 This is a friendly reminder during the review process.
 
@@ -165,9 +163,6 @@ https://elixir.bootlin.com/linux/v6.12-rc3/source/Documentation/process/submitti
 
 If a tag was not added on purpose, please state why and what changed.
 </form letter>
-
-
-Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
 
 Best regards,
 Krzysztof
