@@ -2,190 +2,229 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 86552B04783
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 14 Jul 2025 20:50:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C3E56B05B43
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Jul 2025 15:19:04 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 73D8A41244
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 14 Jul 2025 18:50:14 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.12])
-	by lists.linaro.org (Postfix) with ESMTPS id C916841244
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 14 Jul 2025 18:50:00 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 92FE145777
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Jul 2025 13:19:03 +0000 (UTC)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+	by lists.linaro.org (Postfix) with ESMTPS id E5CA6440EB
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 15 Jul 2025 13:18:49 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=Qyu7Fvom;
-	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 198.175.65.12 as permitted sender) smtp.mailfrom=lkp@intel.com;
-	dmarc=pass (policy=none) header.from=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1752519001; x=1784055001;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=g/hdVwW4OrDEpaJ2jeOYNUGdpDfpOP3FpqeHfrFX5Q4=;
-  b=Qyu7FvomqSBeaQc4dV6s/XpHySGK/WmhngPKChdZIiyzTemp/mHHxUQ+
-   wkUT1zRxuQOKWgJCeK80t6lJiUIreM8+T5JWn7zymnULEGtL+GoMKPYr0
-   3CqmBSR5DTzhVd7QgK+90ybNOQv4pHatS+yVpHACHiWFDXQkXDv/0oMMK
-   K8Kbs9EsFFNY32IQ+5PBcEjgCQ8Kv0JZ2Y/UYY6/yt4xurj9wpw9GCuro
-   9B6tiLWAtdmNdOI0CzGppga0ZVaVlnIRjjd7fvaCyaIiFaKQsmXhTTEB8
-   8TyR3yuCDTQ80rNQUbuKhpYD2F+SpgDF5nwxT7zHdtRDtnsYKH0Zx9I+L
-   Q==;
-X-CSE-ConnectionGUID: M8Em5E+wTKOUiscqQQT8VQ==
-X-CSE-MsgGUID: 8d0FlTMIQoSQcX6XG0gdBA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11491"; a="66171353"
-X-IronPort-AV: E=Sophos;i="6.16,311,1744095600";
-   d="scan'208";a="66171353"
-Received: from fmviesa007.fm.intel.com ([10.60.135.147])
-  by orvoesa104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Jul 2025 11:50:00 -0700
-X-CSE-ConnectionGUID: n6iP6M2LTgWMCXmgik1TTw==
-X-CSE-MsgGUID: LOJAA0uFQLidXjoFjsHfaw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.16,311,1744095600";
-   d="scan'208";a="156651276"
-Received: from lkp-server01.sh.intel.com (HELO 9ee84586c615) ([10.239.97.150])
-  by fmviesa007.fm.intel.com with ESMTP; 14 Jul 2025 11:49:54 -0700
-Received: from kbuild by 9ee84586c615 with local (Exim 4.96)
-	(envelope-from <lkp@intel.com>)
-	id 1ubOFM-0009EJ-1n;
-	Mon, 14 Jul 2025 18:49:52 +0000
-Date: Tue, 15 Jul 2025 02:49:15 +0800
-From: kernel test robot <lkp@intel.com>
-To: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
-	Jens Wiklander <jens.wiklander@linaro.org>,
-	Sumit Garg <sumit.garg@kernel.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>,
-	Apurupa Pattapu <quic_apurupa@quicinc.com>,
-	Kees Cook <kees@kernel.org>,
-	"Gustavo A. R. Silva" <gustavoars@kernel.org>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
-Message-ID: <202507150221.oWiaX1I9-lkp@intel.com>
-References: <20250713-qcom-tee-using-tee-ss-without-mem-obj-v6-9-697fb7d41c36@oss.qualcomm.com>
+	dkim=pass header.d=linuxfoundation.org header.s=korg header.b=qaHJvotO;
+	spf=pass (lists.linaro.org: domain of gregkh@linuxfoundation.org designates 147.75.193.91 as permitted sender) smtp.mailfrom=gregkh@linuxfoundation.org;
+	dmarc=pass (policy=none) header.from=linuxfoundation.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by nyc.source.kernel.org (Postfix) with ESMTP id AB27CA5497F;
+	Tue, 15 Jul 2025 13:18:49 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 09D5CC4CEE3;
+	Tue, 15 Jul 2025 13:18:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+	s=korg; t=1752585529;
+	bh=sdgPHpmQIxPooMihWiGcUt/qCPORZsgGCxwb7Xrx4B0=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=qaHJvotOaJT/XhVegkEjB1hMxCTP/JY6CruWhNtdi/mPefThrdWpL0k8hfuqPGovI
+	 hKytDMp/n3xZDZrrj4Jlzkt5plxjlXOXDPgsSMoEIR3LEIDD66QCzXDuVdC1nbOqWX
+	 qUDUZCGb5esgoCRv7Fqy6gE2rHFup3/GasaEBEuk=
+From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To: stable@vger.kernel.org
+Date: Tue, 15 Jul 2025 15:12:22 +0200
+Message-ID: <20250715130811.705959272@linuxfoundation.org>
+X-Mailer: git-send-email 2.50.1
+In-Reply-To: <20250715130808.777350091@linuxfoundation.org>
+References: <20250715130808.777350091@linuxfoundation.org>
+User-Agent: quilt/0.68
+X-stable: review
+X-Patchwork-Hint: ignore
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20250713-qcom-tee-using-tee-ss-without-mem-obj-v6-9-697fb7d41c36@oss.qualcomm.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: C916841244
-X-Spamd-Bar: ------
-X-Spamd-Result: default: False [-6.00 / 15.00];
+X-Rspamd-Queue-Id: E5CA6440EB
+X-Spamd-Bar: ----
+X-Spamd-Result: default: False [-4.00 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip4:198.175.65.0/26];
+	DMARC_POLICY_ALLOW(-0.50)[linuxfoundation.org,none];
+	R_SPF_ALLOW(-0.20)[+ip4:147.75.193.91];
+	R_DKIM_ALLOW(-0.20)[linuxfoundation.org:s=korg];
 	MIME_GOOD(-0.10)[text/plain];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:15830, ipnet:147.75.193.0/24, country:NL];
 	ARC_NA(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:4983, ipnet:198.175.64.0/23, country:US];
-	RCPT_COUNT_TWELVE(0.00)[22];
+	RCPT_COUNT_TWELVE(0.00)[12];
 	MIME_TRACE(0.00)[0:+];
-	DWL_DNSWL_BLOCKED(0.00)[intel.com:dkim];
+	MID_RHS_MATCH_FROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_COUNT_THREE(0.00)[3];
+	URIBL_BLOCKED(0.00)[linaro.org:email,linuxfoundation.org:email,linuxfoundation.org:dkim,linuxfoundation.org:mid,intel.com:email,bootlin.com:url,nyc.source.kernel.org:rdns,nyc.source.kernel.org:helo,suse.de:email,lists.freedesktop.org:email,amd.com:email];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	DNSWL_BLOCKED(0.00)[147.75.193.91:from,100.75.92.58:received];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	DNSWL_BLOCKED(0.00)[198.175.65.12:from];
-	URIBL_BLOCKED(0.00)[intel.com:email,intel.com:dkim,intel.com:mid,mgamail.intel.com:rdns,mgamail.intel.com:helo];
-	DKIM_TRACE(0.00)[intel.com:+]
+	DKIM_TRACE(0.00)[linuxfoundation.org:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: CGGHSIIVOWK64H5PJM3GUZBYJLFEBOIA
-X-Message-ID-Hash: CGGHSIIVOWK64H5PJM3GUZBYJLFEBOIA
-X-MailFrom: lkp@intel.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: oe-kbuild-all@lists.linux.dev, Harshal Dev <quic_hdev@quicinc.com>, linux-arm-msm@vger.kernel.org, op-tee@lists.trustedfirmware.org, linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org, Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>, Neil Armstrong <neil.armstrong@linaro.org>
+Message-ID-Hash: X7YG6HDQL455QXM3C2XX25SMSQYQQXEL
+X-Message-ID-Hash: X7YG6HDQL455QXM3C2XX25SMSQYQQXEL
+X-MailFrom: gregkh@linuxfoundation.org
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, patches@lists.linux.dev, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Thomas Zimmermann <tzimmermann@suse.de>, Anusha Srivatsa <asrivats@redhat.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v6 09/12] tee: add Qualcomm TEE driver
+Subject: [Linaro-mm-sig] [PATCH 6.12 074/163] drm/gem: Acquire references on GEM handles for framebuffers
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CGGHSIIVOWK64H5PJM3GUZBYJLFEBOIA/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/X7YG6HDQL455QXM3C2XX25SMSQYQQXEL/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Hi Amirreza,
-
-kernel test robot noticed the following build errors:
-
-[auto build test ERROR on 835244aba90de290b4b0b1fa92b6734f3ee7b3d9]
-
-url:    https://github.com/intel-lab-lkp/linux/commits/Amirreza-Zarrabi/tee-allow-a-driver-to-allocate-a-tee_device-without-a-pool/20250714-085215
-base:   835244aba90de290b4b0b1fa92b6734f3ee7b3d9
-patch link:    https://lore.kernel.org/r/20250713-qcom-tee-using-tee-ss-without-mem-obj-v6-9-697fb7d41c36%40oss.qualcomm.com
-patch subject: [PATCH v6 09/12] tee: add Qualcomm TEE driver
-config: sh-allmodconfig (https://download.01.org/0day-ci/archive/20250715/202507150221.oWiaX1I9-lkp@intel.com/config)
-compiler: sh4-linux-gcc (GCC) 15.1.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20250715/202507150221.oWiaX1I9-lkp@intel.com/reproduce)
-
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202507150221.oWiaX1I9-lkp@intel.com/
-
-All errors (new ones prefixed by >>):
-
-   In file included from drivers/tee/qcomtee/qcomtee.h:12,
-                    from drivers/tee/qcomtee/async.c:8:
-   drivers/tee/qcomtee/qcomtee_msg.h: In function 'qcomtee_msg_num_ib':
->> drivers/tee/qcomtee/qcomtee_msg.h:172:16: error: implicit declaration of function 'FIELD_GET' [-Wimplicit-function-declaration]
-     172 |         return FIELD_GET(QCOMTEE_MASK_IB, counts);
-         |                ^~~~~~~~~
---
-   In file included from drivers/tee/qcomtee/qcomtee.h:12,
-                    from drivers/tee/qcomtee/core.c:14:
-   drivers/tee/qcomtee/qcomtee_msg.h: In function 'qcomtee_msg_num_ib':
->> drivers/tee/qcomtee/qcomtee_msg.h:172:16: error: implicit declaration of function 'FIELD_GET' [-Wimplicit-function-declaration]
-     172 |         return FIELD_GET(QCOMTEE_MASK_IB, counts);
-         |                ^~~~~~~~~
-   drivers/tee/qcomtee/core.c: In function 'qcomtee_object_user_init':
-   drivers/tee/qcomtee/core.c:303:17: warning: function 'qcomtee_object_user_init' might be a candidate for 'gnu_printf' format attribute [-Wsuggest-attribute=format]
-     303 |                 object->name = kvasprintf_const(GFP_KERNEL, fmt, ap);
-         |                 ^~~~~~
-   drivers/tee/qcomtee/core.c: In function 'qcomtee_prepare_msg':
-   drivers/tee/qcomtee/core.c:417:26: error: implicit declaration of function 'copy_from_user' [-Wimplicit-function-declaration]
-     417 |                 else if (copy_from_user(ptr, u[i].b.uaddr, u[i].b.size))
-         |                          ^~~~~~~~~~~~~~
-   drivers/tee/qcomtee/core.c: In function 'qcomtee_update_args':
-   drivers/tee/qcomtee/core.c:496:26: error: implicit declaration of function 'copy_to_user' [-Wimplicit-function-declaration]
-     496 |                 else if (copy_to_user(u[i].b.uaddr, ptr, u[i].b.size))
-         |                          ^~~~~~~~~~~~
---
-   In file included from drivers/tee/qcomtee/qcomtee.h:12,
-                    from drivers/tee/qcomtee/user_obj.c:10:
-   drivers/tee/qcomtee/qcomtee_msg.h: In function 'qcomtee_msg_num_ib':
->> drivers/tee/qcomtee/qcomtee_msg.h:172:16: error: implicit declaration of function 'FIELD_GET' [-Wimplicit-function-declaration]
-     172 |         return FIELD_GET(QCOMTEE_MASK_IB, counts);
-         |                ^~~~~~~~~
-   drivers/tee/qcomtee/user_obj.c: In function 'qcomtee_cb_params_from_args':
-   drivers/tee/qcomtee/user_obj.c:449:29: error: implicit declaration of function 'copy_to_user' [-Wimplicit-function-declaration]
-     449 |                         if (copy_to_user(params[i].u.ubuf.uaddr, u[i].b.addr,
-         |                             ^~~~~~~~~~~~
-   drivers/tee/qcomtee/user_obj.c: In function 'qcomtee_cb_params_to_args':
-   drivers/tee/qcomtee/user_obj.c:526:29: error: implicit declaration of function 'copy_from_user' [-Wimplicit-function-declaration]
-     526 |                         if (copy_from_user(u[i].b.addr, params[i].u.ubuf.uaddr,
-         |                             ^~~~~~~~~~~~~~
-
-
-vim +/FIELD_GET +172 drivers/tee/qcomtee/qcomtee_msg.h
-
-   169	
-   170	static inline unsigned int qcomtee_msg_num_ib(u32 counts)
-   171	{
- > 172		return FIELD_GET(QCOMTEE_MASK_IB, counts);
-   173	}
-   174	
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+Ni4xMi1zdGFibGUgcmV2aWV3IHBhdGNoLiAgSWYgYW55b25lIGhhcyBhbnkgb2JqZWN0aW9ucywg
+cGxlYXNlIGxldCBtZSBrbm93Lg0KDQotLS0tLS0tLS0tLS0tLS0tLS0NCg0KRnJvbTogVGhvbWFz
+IFppbW1lcm1hbm4gPHR6aW1tZXJtYW5uQHN1c2UuZGU+DQoNCmNvbW1pdCA1MzA3ZGNlODc4ZDQx
+MjZlMWIzNzU1ODczMTg5NTViZDAxOWMzNzQxIHVwc3RyZWFtLg0KDQpBIEdFTSBoYW5kbGUgY2Fu
+IGJlIHJlbGVhc2VkIHdoaWxlIHRoZSBHRU0gYnVmZmVyIG9iamVjdCBpcyBhdHRhY2hlZA0KdG8g
+YSBEUk0gZnJhbWVidWZmZXIuIFRoaXMgbGVhZHMgdG8gdGhlIHJlbGVhc2Ugb2YgdGhlIGRtYS1i
+dWYgYmFja2luZw0KdGhlIGJ1ZmZlciBvYmplY3QsIGlmIGFueS4gWzFdIFRyeWluZyB0byB1c2Ug
+dGhlIGZyYW1lYnVmZmVyIGluIGZ1cnRoZXINCm1vZGUtc2V0dGluZyBvcGVyYXRpb25zIGxlYWRz
+IHRvIGEgc2VnbWVudGF0aW9uIGZhdWx0LiBNb3N0IGVhc2lseQ0KaGFwcGVucyB3aXRoIGRyaXZl
+ciB0aGF0IHVzZSBzaGFkb3cgcGxhbmVzIGZvciB2bWFwLWluZyB0aGUgZG1hLWJ1Zg0KZHVyaW5n
+IGEgcGFnZSBmbGlwLiBBbiBleGFtcGxlIGlzIHNob3duIGJlbG93Lg0KDQpbICAxNTYuNzkxOTY4
+XSAtLS0tLS0tLS0tLS1bIGN1dCBoZXJlIF0tLS0tLS0tLS0tLS0NClsgIDE1Ni43OTY4MzBdIFdB
+Uk5JTkc6IENQVTogMiBQSUQ6IDIyNTUgYXQgZHJpdmVycy9kbWEtYnVmL2RtYS1idWYuYzoxNTI3
+IGRtYV9idWZfdm1hcCsweDIyNC8weDQzMA0KWy4uLl0NClsgIDE1Ni45NDIwMjhdIFJJUDogMDAx
+MDpkbWFfYnVmX3ZtYXArMHgyMjQvMHg0MzANClsgIDE1Ny4wNDM0MjBdIENhbGwgVHJhY2U6DQpb
+ICAxNTcuMDQ1ODk4XSAgPFRBU0s+DQpbICAxNTcuMDQ4MDMwXSAgPyBzaG93X3RyYWNlX2xvZ19s
+dmwrMHgxYWYvMHgyYzANClsgIDE1Ny4wNTI0MzZdICA/IHNob3dfdHJhY2VfbG9nX2x2bCsweDFh
+Zi8weDJjMA0KWyAgMTU3LjA1NjgzNl0gID8gc2hvd190cmFjZV9sb2dfbHZsKzB4MWFmLzB4MmMw
+DQpbICAxNTcuMDYxMjUzXSAgPyBkcm1fZ2VtX3NobWVtX3ZtYXArMHg3NC8weDcxMA0KWyAgMTU3
+LjA2NTU2N10gID8gZG1hX2J1Zl92bWFwKzB4MjI0LzB4NDMwDQpbICAxNTcuMDY5NDQ2XSAgPyBf
+X3dhcm4uY29sZCsweDU4LzB4ZTQNClsgIDE1Ny4wNzMwNjFdICA/IGRtYV9idWZfdm1hcCsweDIy
+NC8weDQzMA0KWyAgMTU3LjA3NzExMV0gID8gcmVwb3J0X2J1ZysweDFkZC8weDM5MA0KWyAgMTU3
+LjA4MDg0Ml0gID8gaGFuZGxlX2J1ZysweDVlLzB4YTANClsgIDE1Ny4wODQzODldICA/IGV4Y19p
+bnZhbGlkX29wKzB4MTQvMHg1MA0KWyAgMTU3LjA4ODI5MV0gID8gYXNtX2V4Y19pbnZhbGlkX29w
+KzB4MTYvMHgyMA0KWyAgMTU3LjA5MjU0OF0gID8gZG1hX2J1Zl92bWFwKzB4MjI0LzB4NDMwDQpb
+ICAxNTcuMDk2NjYzXSAgPyBkbWFfcmVzdl9nZXRfc2luZ2xldG9uKzB4NmQvMHgyMzANClsgIDE1
+Ny4xMDEzNDFdICA/IF9fcGZ4X2RtYV9idWZfdm1hcCsweDEwLzB4MTANClsgIDE1Ny4xMDU1ODhd
+ICA/IF9fcGZ4X2RtYV9yZXN2X2dldF9zaW5nbGV0b24rMHgxMC8weDEwDQpbICAxNTcuMTEwNjk3
+XSAgZHJtX2dlbV9zaG1lbV92bWFwKzB4NzQvMHg3MTANClsgIDE1Ny4xMTQ4NjZdICBkcm1fZ2Vt
+X3ZtYXArMHhhOS8weDFiMA0KWyAgMTU3LjExODc2M10gIGRybV9nZW1fdm1hcF91bmxvY2tlZCsw
+eDQ2LzB4YTANClsgIDE1Ny4xMjMwODZdICBkcm1fZ2VtX2ZiX3ZtYXArMHhhYi8weDMwMA0KWyAg
+MTU3LjEyNjk3OV0gIGRybV9hdG9taWNfaGVscGVyX3ByZXBhcmVfcGxhbmVzLnBhcnQuMCsweDQ4
+Ny8weGIxMA0KWyAgMTU3LjEzMzAzMl0gID8gbG9ja2RlcF9pbml0X21hcF90eXBlKzB4MTlkLzB4
+ODgwDQpbICAxNTcuMTM3NzAxXSAgZHJtX2F0b21pY19oZWxwZXJfY29tbWl0KzB4MTNkLzB4MmUw
+DQpbICAxNTcuMTQyNjcxXSAgPyBkcm1fYXRvbWljX25vbmJsb2NraW5nX2NvbW1pdCsweGEwLzB4
+MTgwDQpbICAxNTcuMTQ3OTg4XSAgZHJtX21vZGVfYXRvbWljX2lvY3RsKzB4NzY2LzB4ZTQwDQpb
+Li4uXQ0KWyAgMTU3LjM0NjQyNF0gLS0tWyBlbmQgdHJhY2UgMDAwMDAwMDAwMDAwMDAwMCBdLS0t
+DQoNCkFjcXVpcmluZyBHRU0gaGFuZGxlcyBmb3IgdGhlIGZyYW1lYnVmZmVyJ3MgR0VNIGJ1ZmZl
+ciBvYmplY3RzIHByZXZlbnRzDQp0aGlzIGZyb20gaGFwcGVuaW5nLiBUaGUgZnJhbWVidWZmZXIn
+cyBjbGVhbnVwIGxhdGVyIHB1dHMgdGhlIGhhbmRsZQ0KcmVmZXJlbmNlcy4NCg0KQ29tbWl0IDFh
+MTQ4YWYwNjAwMCAoImRybS9nZW0tc2htZW06IFVzZSBkbWFfYnVmIGZyb20gR0VNIG9iamVjdA0K
+aW5zdGFuY2UiKSB0cmlnZ2VycyB0aGUgc2VnbWVudGF0aW9uIGZhdWx0IGVhc2lseSBieSB1c2lu
+ZyB0aGUgZG1hLWJ1Zg0KZmllbGQgbW9yZSB3aWRlbHkuIFRoZSB1bmRlcmx5aW5nIGlzc3VlIHdp
+dGggcmVmZXJlbmNlIGNvdW50aW5nIGhhcw0KYmVlbiBwcmVzZW50IGJlZm9yZS4NCg0KdjI6DQot
+IGFjcXVpcmUgdGhlIGhhbmRsZSBpbnN0ZWFkIG9mIHRoZSBCTyAoQ2hyaXN0aWFuKQ0KLSBmaXgg
+Y29tbWVudCBzdHlsZSAoQ2hyaXN0aWFuKQ0KLSBkcm9wIHRoZSBGaXhlcyB0YWcgKENocmlzdGlh
+bikNCi0gcmVuYW1lIGVycl8gZ290b3MNCi0gYWRkIG1pc3NpbmcgTGluayB0YWcNCg0KU3VnZ2Vz
+dGVkLWJ5OiBDaHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+DQpTaWdu
+ZWQtb2ZmLWJ5OiBUaG9tYXMgWmltbWVybWFubiA8dHppbW1lcm1hbm5Ac3VzZS5kZT4NCkxpbms6
+IGh0dHBzOi8vZWxpeGlyLmJvb3RsaW4uY29tL2xpbnV4L3Y2LjE1L3NvdXJjZS9kcml2ZXJzL2dw
+dS9kcm0vZHJtX2dlbS5jI0wyNDEgIyBbMV0NCkNjOiBUaG9tYXMgWmltbWVybWFubiA8dHppbW1l
+cm1hbm5Ac3VzZS5kZT4NCkNjOiBBbnVzaGEgU3JpdmF0c2EgPGFzcml2YXRzQHJlZGhhdC5jb20+
+DQpDYzogQ2hyaXN0aWFuIEvDtm5pZyA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPg0KQ2M6IE1h
+YXJ0ZW4gTGFua2hvcnN0IDxtYWFydGVuLmxhbmtob3JzdEBsaW51eC5pbnRlbC5jb20+DQpDYzog
+TWF4aW1lIFJpcGFyZCA8bXJpcGFyZEBrZXJuZWwub3JnPg0KQ2M6IFN1bWl0IFNlbXdhbCA8c3Vt
+aXQuc2Vtd2FsQGxpbmFyby5vcmc+DQpDYzogIkNocmlzdGlhbiBLw7ZuaWciIDxjaHJpc3RpYW4u
+a29lbmlnQGFtZC5jb20+DQpDYzogbGludXgtbWVkaWFAdmdlci5rZXJuZWwub3JnDQpDYzogZHJp
+LWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZw0KQ2M6IGxpbmFyby1tbS1zaWdAbGlzdHMubGlu
+YXJvLm9yZw0KQ2M6IDxzdGFibGVAdmdlci5rZXJuZWwub3JnPg0KUmV2aWV3ZWQtYnk6IENocmlz
+dGlhbiBLw7ZuaWcgPGNocmlzdGlhbi5rb2VuaWdAYW1kLmNvbT4NCkxpbms6IGh0dHBzOi8vbG9y
+ZS5rZXJuZWwub3JnL3IvMjAyNTA2MzAwODQwMDEuMjkzMDUzLTEtdHppbW1lcm1hbm5Ac3VzZS5k
+ZQ0KU2lnbmVkLW9mZi1ieTogR3JlZyBLcm9haC1IYXJ0bWFuIDxncmVna2hAbGludXhmb3VuZGF0
+aW9uLm9yZz4NCi0tLQ0KIGRyaXZlcnMvZ3B1L2RybS9kcm1fZ2VtLmMgICAgICAgICAgICAgICAg
+ICAgIHwgICA0NCArKysrKysrKysrKysrKysrKysrKysrKystLS0NCiBkcml2ZXJzL2dwdS9kcm0v
+ZHJtX2dlbV9mcmFtZWJ1ZmZlcl9oZWxwZXIuYyB8ICAgMTYgKysrKystLS0tDQogZHJpdmVycy9n
+cHUvZHJtL2RybV9pbnRlcm5hbC5oICAgICAgICAgICAgICAgfCAgICAyICsNCiAzIGZpbGVzIGNo
+YW5nZWQsIDUxIGluc2VydGlvbnMoKyksIDExIGRlbGV0aW9ucygtKQ0KDQotLS0gYS9kcml2ZXJz
+L2dwdS9kcm0vZHJtX2dlbS5jDQorKysgYi9kcml2ZXJzL2dwdS9kcm0vZHJtX2dlbS5jDQpAQCAt
+MTg2LDYgKzE4NiwzNSBAQCB2b2lkIGRybV9nZW1fcHJpdmF0ZV9vYmplY3RfZmluaShzdHJ1Y3QN
+CiB9DQogRVhQT1JUX1NZTUJPTChkcm1fZ2VtX3ByaXZhdGVfb2JqZWN0X2ZpbmkpOw0KIA0KK3N0
+YXRpYyB2b2lkIGRybV9nZW1fb2JqZWN0X2hhbmRsZV9nZXQoc3RydWN0IGRybV9nZW1fb2JqZWN0
+ICpvYmopDQorew0KKwlzdHJ1Y3QgZHJtX2RldmljZSAqZGV2ID0gb2JqLT5kZXY7DQorDQorCWRy
+bV9XQVJOX09OKGRldiwgIW11dGV4X2lzX2xvY2tlZCgmZGV2LT5vYmplY3RfbmFtZV9sb2NrKSk7
+DQorDQorCWlmIChvYmotPmhhbmRsZV9jb3VudCsrID09IDApDQorCQlkcm1fZ2VtX29iamVjdF9n
+ZXQob2JqKTsNCit9DQorDQorLyoqDQorICogZHJtX2dlbV9vYmplY3RfaGFuZGxlX2dldF91bmxv
+Y2tlZCAtIGFjcXVpcmUgcmVmZXJlbmNlIG9uIHVzZXItc3BhY2UgaGFuZGxlcw0KKyAqIEBvYmo6
+IEdFTSBvYmplY3QNCisgKg0KKyAqIEFjcXVpcmVzIGEgcmVmZXJlbmNlIG9uIHRoZSBHRU0gYnVm
+ZmVyIG9iamVjdCdzIGhhbmRsZS4gUmVxdWlyZWQNCisgKiB0byBrZWVwIHRoZSBHRU0gb2JqZWN0
+IGFsaXZlLiBDYWxsIGRybV9nZW1fb2JqZWN0X2hhbmRsZV9wdXRfdW5sb2NrZWQoKQ0KKyAqIHRv
+IHJlbGVhc2UgdGhlIHJlZmVyZW5jZS4NCisgKi8NCit2b2lkIGRybV9nZW1fb2JqZWN0X2hhbmRs
+ZV9nZXRfdW5sb2NrZWQoc3RydWN0IGRybV9nZW1fb2JqZWN0ICpvYmopDQorew0KKwlzdHJ1Y3Qg
+ZHJtX2RldmljZSAqZGV2ID0gb2JqLT5kZXY7DQorDQorCWd1YXJkKG11dGV4KSgmZGV2LT5vYmpl
+Y3RfbmFtZV9sb2NrKTsNCisNCisJZHJtX1dBUk5fT04oZGV2LCAhb2JqLT5oYW5kbGVfY291bnQp
+OyAvKiBmaXJzdCByZWYgdGFrZW4gaW4gY3JlYXRlLXRhaWwgaGVscGVyICovDQorCWRybV9nZW1f
+b2JqZWN0X2hhbmRsZV9nZXQob2JqKTsNCit9DQorRVhQT1JUX1NZTUJPTChkcm1fZ2VtX29iamVj
+dF9oYW5kbGVfZ2V0X3VubG9ja2VkKTsNCisNCiAvKioNCiAgKiBkcm1fZ2VtX29iamVjdF9oYW5k
+bGVfZnJlZSAtIHJlbGVhc2UgcmVzb3VyY2VzIGJvdW5kIHRvIHVzZXJzcGFjZSBoYW5kbGVzDQog
+ICogQG9iajogR0VNIG9iamVjdCB0byBjbGVhbiB1cC4NCkBAIC0yMTYsOCArMjQ1LDE0IEBAIHN0
+YXRpYyB2b2lkIGRybV9nZW1fb2JqZWN0X2V4cG9ydGVkX2RtYV8NCiAJfQ0KIH0NCiANCi1zdGF0
+aWMgdm9pZA0KLWRybV9nZW1fb2JqZWN0X2hhbmRsZV9wdXRfdW5sb2NrZWQoc3RydWN0IGRybV9n
+ZW1fb2JqZWN0ICpvYmopDQorLyoqDQorICogZHJtX2dlbV9vYmplY3RfaGFuZGxlX3B1dF91bmxv
+Y2tlZCAtIHJlbGVhc2VzIHJlZmVyZW5jZSBvbiB1c2VyLXNwYWNlIGhhbmRsZXMNCisgKiBAb2Jq
+OiBHRU0gb2JqZWN0DQorICoNCisgKiBSZWxlYXNlcyBhIHJlZmVyZW5jZSBvbiB0aGUgR0VNIGJ1
+ZmZlciBvYmplY3QncyBoYW5kbGUuIFBvc3NpYmx5IHJlbGVhc2VzDQorICogdGhlIEdFTSBidWZm
+ZXIgb2JqZWN0IGFuZCBhc3NvY2lhdGVkIGRtYS1idWYgb2JqZWN0cy4NCisgKi8NCit2b2lkIGRy
+bV9nZW1fb2JqZWN0X2hhbmRsZV9wdXRfdW5sb2NrZWQoc3RydWN0IGRybV9nZW1fb2JqZWN0ICpv
+YmopDQogew0KIAlzdHJ1Y3QgZHJtX2RldmljZSAqZGV2ID0gb2JqLT5kZXY7DQogCWJvb2wgZmlu
+YWwgPSBmYWxzZTsNCkBAIC0yNDIsNiArMjc3LDcgQEAgZHJtX2dlbV9vYmplY3RfaGFuZGxlX3B1
+dF91bmxvY2tlZChzdHJ1Yw0KIAlpZiAoZmluYWwpDQogCQlkcm1fZ2VtX29iamVjdF9wdXQob2Jq
+KTsNCiB9DQorRVhQT1JUX1NZTUJPTChkcm1fZ2VtX29iamVjdF9oYW5kbGVfcHV0X3VubG9ja2Vk
+KTsNCiANCiAvKg0KICAqIENhbGxlZCBhdCBkZXZpY2Ugb3Igb2JqZWN0IGNsb3NlIHRvIHJlbGVh
+c2UgdGhlIGZpbGUncw0KQEAgLTM2Myw4ICszOTksOCBAQCBkcm1fZ2VtX2hhbmRsZV9jcmVhdGVf
+dGFpbChzdHJ1Y3QgZHJtX2ZpDQogCWludCByZXQ7DQogDQogCVdBUk5fT04oIW11dGV4X2lzX2xv
+Y2tlZCgmZGV2LT5vYmplY3RfbmFtZV9sb2NrKSk7DQotCWlmIChvYmotPmhhbmRsZV9jb3VudCsr
+ID09IDApDQotCQlkcm1fZ2VtX29iamVjdF9nZXQob2JqKTsNCisNCisJZHJtX2dlbV9vYmplY3Rf
+aGFuZGxlX2dldChvYmopOw0KIA0KIAkvKg0KIAkgKiBHZXQgdGhlIHVzZXItdmlzaWJsZSBoYW5k
+bGUgdXNpbmcgaWRyLiAgUHJlbG9hZCBhbmQgcGVyZm9ybQ0KLS0tIGEvZHJpdmVycy9ncHUvZHJt
+L2RybV9nZW1fZnJhbWVidWZmZXJfaGVscGVyLmMNCisrKyBiL2RyaXZlcnMvZ3B1L2RybS9kcm1f
+Z2VtX2ZyYW1lYnVmZmVyX2hlbHBlci5jDQpAQCAtOTksNyArOTksNyBAQCB2b2lkIGRybV9nZW1f
+ZmJfZGVzdHJveShzdHJ1Y3QgZHJtX2ZyYW1lDQogCXVuc2lnbmVkIGludCBpOw0KIA0KIAlmb3Ig
+KGkgPSAwOyBpIDwgZmItPmZvcm1hdC0+bnVtX3BsYW5lczsgaSsrKQ0KLQkJZHJtX2dlbV9vYmpl
+Y3RfcHV0KGZiLT5vYmpbaV0pOw0KKwkJZHJtX2dlbV9vYmplY3RfaGFuZGxlX3B1dF91bmxvY2tl
+ZChmYi0+b2JqW2ldKTsNCiANCiAJZHJtX2ZyYW1lYnVmZmVyX2NsZWFudXAoZmIpOw0KIAlrZnJl
+ZShmYik7DQpAQCAtMTgyLDggKzE4MiwxMCBAQCBpbnQgZHJtX2dlbV9mYl9pbml0X3dpdGhfZnVu
+Y3Moc3RydWN0IGRyDQogCQlpZiAoIW9ianNbaV0pIHsNCiAJCQlkcm1fZGJnX2ttcyhkZXYsICJG
+YWlsZWQgdG8gbG9va3VwIEdFTSBvYmplY3RcbiIpOw0KIAkJCXJldCA9IC1FTk9FTlQ7DQotCQkJ
+Z290byBlcnJfZ2VtX29iamVjdF9wdXQ7DQorCQkJZ290byBlcnJfZ2VtX29iamVjdF9oYW5kbGVf
+cHV0X3VubG9ja2VkOw0KIAkJfQ0KKwkJZHJtX2dlbV9vYmplY3RfaGFuZGxlX2dldF91bmxvY2tl
+ZChvYmpzW2ldKTsNCisJCWRybV9nZW1fb2JqZWN0X3B1dChvYmpzW2ldKTsNCiANCiAJCW1pbl9z
+aXplID0gKGhlaWdodCAtIDEpICogbW9kZV9jbWQtPnBpdGNoZXNbaV0NCiAJCQkgKyBkcm1fZm9y
+bWF0X2luZm9fbWluX3BpdGNoKGluZm8sIGksIHdpZHRoKQ0KQEAgLTE5MywyMiArMTk1LDIyIEBA
+IGludCBkcm1fZ2VtX2ZiX2luaXRfd2l0aF9mdW5jcyhzdHJ1Y3QgZHINCiAJCQlkcm1fZGJnX2tt
+cyhkZXYsDQogCQkJCSAgICAiR0VNIG9iamVjdCBzaXplICglenUpIHNtYWxsZXIgdGhhbiBtaW5p
+bXVtIHNpemUgKCV1KSBmb3IgcGxhbmUgJWRcbiIsDQogCQkJCSAgICBvYmpzW2ldLT5zaXplLCBt
+aW5fc2l6ZSwgaSk7DQotCQkJZHJtX2dlbV9vYmplY3RfcHV0KG9ianNbaV0pOw0KKwkJCWRybV9n
+ZW1fb2JqZWN0X2hhbmRsZV9wdXRfdW5sb2NrZWQob2Jqc1tpXSk7DQogCQkJcmV0ID0gLUVJTlZB
+TDsNCi0JCQlnb3RvIGVycl9nZW1fb2JqZWN0X3B1dDsNCisJCQlnb3RvIGVycl9nZW1fb2JqZWN0
+X2hhbmRsZV9wdXRfdW5sb2NrZWQ7DQogCQl9DQogCX0NCiANCiAJcmV0ID0gZHJtX2dlbV9mYl9p
+bml0KGRldiwgZmIsIG1vZGVfY21kLCBvYmpzLCBpLCBmdW5jcyk7DQogCWlmIChyZXQpDQotCQln
+b3RvIGVycl9nZW1fb2JqZWN0X3B1dDsNCisJCWdvdG8gZXJyX2dlbV9vYmplY3RfaGFuZGxlX3B1
+dF91bmxvY2tlZDsNCiANCiAJcmV0dXJuIDA7DQogDQotZXJyX2dlbV9vYmplY3RfcHV0Og0KK2Vy
+cl9nZW1fb2JqZWN0X2hhbmRsZV9wdXRfdW5sb2NrZWQ6DQogCXdoaWxlIChpID4gMCkgew0KIAkJ
+LS1pOw0KLQkJZHJtX2dlbV9vYmplY3RfcHV0KG9ianNbaV0pOw0KKwkJZHJtX2dlbV9vYmplY3Rf
+aGFuZGxlX3B1dF91bmxvY2tlZChvYmpzW2ldKTsNCiAJfQ0KIAlyZXR1cm4gcmV0Ow0KIH0NCi0t
+LSBhL2RyaXZlcnMvZ3B1L2RybS9kcm1faW50ZXJuYWwuaA0KKysrIGIvZHJpdmVycy9ncHUvZHJt
+L2RybV9pbnRlcm5hbC5oDQpAQCAtMTUzLDYgKzE1Myw4IEBAIHZvaWQgZHJtX3N5c2ZzX2xlYXNl
+X2V2ZW50KHN0cnVjdCBkcm1fZGUNCiANCiAvKiBkcm1fZ2VtLmMgKi8NCiBpbnQgZHJtX2dlbV9p
+bml0KHN0cnVjdCBkcm1fZGV2aWNlICpkZXYpOw0KK3ZvaWQgZHJtX2dlbV9vYmplY3RfaGFuZGxl
+X2dldF91bmxvY2tlZChzdHJ1Y3QgZHJtX2dlbV9vYmplY3QgKm9iaik7DQordm9pZCBkcm1fZ2Vt
+X29iamVjdF9oYW5kbGVfcHV0X3VubG9ja2VkKHN0cnVjdCBkcm1fZ2VtX29iamVjdCAqb2JqKTsN
+CiBpbnQgZHJtX2dlbV9oYW5kbGVfY3JlYXRlX3RhaWwoc3RydWN0IGRybV9maWxlICpmaWxlX3By
+aXYsDQogCQkJICAgICAgIHN0cnVjdCBkcm1fZ2VtX29iamVjdCAqb2JqLA0KIAkJCSAgICAgICB1
+MzIgKmhhbmRsZXApOw0KDQoNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlz
+dHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1z
+aWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
