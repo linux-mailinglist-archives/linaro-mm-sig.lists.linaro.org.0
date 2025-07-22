@@ -2,122 +2,146 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id C4DDAB0C781
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 21 Jul 2025 17:25:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DF208B0E6D1
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 23 Jul 2025 00:59:32 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B3AAE4579B
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 21 Jul 2025 15:25:02 +0000 (UTC)
-Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
-	by lists.linaro.org (Postfix) with ESMTPS id 434BE3F6B8
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 21 Jul 2025 15:24:50 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9CE3645744
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 22 Jul 2025 22:59:31 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+	by lists.linaro.org (Postfix) with ESMTPS id C342C40C78
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 22 Jul 2025 22:59:19 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=sntech.de header.s=gloria202408 header.b=N7F21LPI;
-	spf=pass (lists.linaro.org: domain of heiko@sntech.de designates 185.11.138.130 as permitted sender) smtp.mailfrom=heiko@sntech.de;
-	dmarc=pass (policy=none) header.from=sntech.de
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sntech.de;
-	s=gloria202408; h=Content-Type:Content-Transfer-Encoding:MIME-Version:
-	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Reply-To;
-	bh=N1dy7xoxRKl1sQ1tb4Ipkebpw3UhPsQ6Fu34IdYEgOA=; b=N7F21LPIdchD8+2O9CRvE6O6lI
-	gX1sGnojJnysvzXKgRZSVl3qksY/yK/9djn9/YWNxOIWo7kFQbymnEjUusxPGd1xxRZxoe4sKglj0
-	h5Dh1ridpadW6MvtjkAbPCgYeYBiRCxw1Sg96MnfuX+/9+opxxxztm6oYj0PzZmb1sgUJ4KI2NSYg
-	3BVv4bX1JAQbphTSLHK+Me/8AOwc2onF5MjEXKI8VCbzpWtbhsMOvO5HiV0lI01ilo91r6z1ubpOv
-	+Zu5Ulx51fV7sPn3ctWr48CQG/p3JV46sJ2rUHDQ9QNCIY9gs1FwB6HfVy+QTbCfCw1igvlrNNkf5
-	K4zSFjWA==;
-Received: from i53875b2e.versanet.de ([83.135.91.46] helo=diego.localnet)
-	by gloria.sntech.de with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.94.2)
-	(envelope-from <heiko@sntech.de>)
-	id 1udsND-00047Z-91; Mon, 21 Jul 2025 17:24:15 +0200
-From: Heiko =?UTF-8?B?U3TDvGJuZXI=?= <heiko@sntech.de>
-To: Tomeu Vizoso <tomeu@tomeuvizoso.net>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
- Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=Vym2qzur;
+	spf=pass (lists.linaro.org: domain of robh@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=robh@kernel.org;
+	dmarc=pass (policy=quarantine) header.from=kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by dfw.source.kernel.org (Postfix) with ESMTP id 5C1375C68BA;
+	Tue, 22 Jul 2025 22:59:19 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E35DEC4CEEB;
+	Tue, 22 Jul 2025 22:59:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1753225159;
+	bh=MfICkfXMWCF9NlybbsMcp/Dwcx+IdC0bFbu+PNYcl/o=;
+	h=From:Subject:Date:To:Cc:From;
+	b=Vym2qzurrN+nyVhZaDuWfyNWYBe30J4TiLDbfkuX5fR3cbVo3ZIXDW0XJT0k3DIgW
+	 AOpo4p+Id4Ie4GX2+1pdVJ7PuuA5gCBZN8OjUPlmbtInuB3edX+q9C2WBLi+0QuiG9
+	 dOWp6ILP/1d79lYMPWsHkR7FRqf82twodpyA2of/6ovfrwmSYvglyHaysMLL+EFn0y
+	 wUM52EMoAiGE03WcN7IlD0+sMj3Ug4eaVyCJ2VNm5ZCjrs8dnbvXhuT7Tz23xUujjp
+	 9XIXuhk43zGRhRmXTo6K2GxXe7u6ZI9WvJIXFQWqh3g2lrKBbx2cwg4f4Z1IsACPAM
+	 ouBSglhe0jerg==
+From: "Rob Herring (Arm)" <robh@kernel.org>
+Date: Tue, 22 Jul 2025 17:58:55 -0500
+Message-Id: <20250722-ethos-v1-0-cc1c5a0cbbfb@kernel.org>
+MIME-Version: 1.0
+X-B4-Tracking: v=1; b=H4sIAK8XgGgC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1MDc0NT3dSSjPxiXeO0lBRjy9Q0szRDSyWg2oKi1LTMCrA50UpBbs5KsbW
+ 1APW9Sm5cAAAA
+X-Change-ID: 20250715-ethos-3fdd39ef6f19
+To: Tomeu Vizoso <tomeu@tomeuvizoso.net>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Oded Gabbay <ogabbay@kernel.org>,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
  Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
  David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
  Sumit Semwal <sumit.semwal@linaro.org>,
- Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>,
- Sebastian Reichel <sebastian.reichel@collabora.com>,
- Nicolas Frattaroli <nicolas.frattaroli@collabora.com>,
- Kever Yang <kever.yang@rock-chips.com>, Robin Murphy <robin.murphy@arm.com>,
- Daniel Stone <daniel@fooishbar.org>, Da Xue <da@libre.computer>,
- Philipp Zabel <p.zabel@pengutronix.de>,
- Jeff Hugo <jeff.hugo@oss.qualcomm.com>
-Date: Mon, 21 Jul 2025 17:24:13 +0200
-Message-ID: <4109088.mvXUDI8C0e@diego>
-In-Reply-To: <b48c6694-2bd1-44d0-9dd1-1b7a67e22d87@oss.qualcomm.com>
-References: 
- <20250721-6-10-rocket-v9-0-77ebd484941e@tomeuvizoso.net>
- <b48c6694-2bd1-44d0-9dd1-1b7a67e22d87@oss.qualcomm.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-X-Spamd-Result: default: False [-1.46 / 15.00];
-	BAYES_HAM(-2.66)[98.52%];
+ =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ Robin Murphy <robin.murphy@arm.com>, Steven Price <steven.price@arm.com>
+X-Mailer: b4 0.15-dev
+X-Spamd-Result: default: False [-2.50 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[sntech.de,none];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_DKIM_ALLOW(-0.20)[sntech.de:s=gloria202408];
-	R_SPF_ALLOW(-0.20)[+ip4:185.11.138.130];
-	ONCE_RECEIVED(0.20)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
 	MIME_GOOD(-0.10)[text/plain];
-	RCVD_COUNT_ONE(0.00)[1];
-	RCVD_TLS_ALL(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:48823, ipnet:185.11.136.0/22, country:DE];
-	TO_DN_SOME(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[31];
-	ARC_NA(0.00)[];
-	FREEMAIL_TO(0.00)[tomeuvizoso.net,kernel.org,lwn.net,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,collabora.com,rock-chips.com,arm.com,fooishbar.org,libre.computer,pengutronix.de,oss.qualcomm.com];
 	TAGGED_RCPT(0.00)[dt];
-	FROM_HAS_DN(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:15830, ipnet:139.178.80.0/21, country:NL];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[18];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[tomeuvizoso.net,kernel.org,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,arm.com];
+	MID_RHS_MATCH_FROM(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
 	FROM_EQ_ENVFROM(0.00)[];
-	DNSWL_BLOCKED(0.00)[185.11.138.130:from];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DKIM_TRACE(0.00)[sntech.de:+]
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 434BE3F6B8
-X-Spamd-Bar: -
-Message-ID-Hash: 6L3I5ZLSRIRI54POSTRDXE4BTCTBWLDV
-X-Message-ID-Hash: 6L3I5ZLSRIRI54POSTRDXE4BTCTBWLDV
-X-MailFrom: heiko@sntech.de
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Robert Foss <rfoss@kernel.org>, Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+X-Rspamd-Queue-Id: C342C40C78
+X-Spamd-Bar: --
+Message-ID-Hash: 4RM2SALDCTZIROLTCBKBWI4GQHHBA473
+X-Message-ID-Hash: 4RM2SALDCTZIROLTCBKBWI4GQHHBA473
+X-MailFrom: robh@kernel.org
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v9 00/10] New DRM accel driver for Rockchip's RKNN NPU
+Subject: [Linaro-mm-sig] [PATCH RFC 0/2] accel: Add Arm Ethos-U NPU
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6L3I5ZLSRIRI54POSTRDXE4BTCTBWLDV/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4RM2SALDCTZIROLTCBKBWI4GQHHBA473/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-SGkgSmVmZiwNCg0KQW0gTW9udGFnLCAyMS4gSnVsaSAyMDI1LCAxNjo1NTowMSBNaXR0ZWxldXJv
-cMOkaXNjaGUgU29tbWVyemVpdCBzY2hyaWViIEplZmYgSHVnbzoNCj4gT24gNy8yMS8yMDI1IDM6
-MTcgQU0sIFRvbWV1IFZpem9zbyB3cm90ZToNCj4gPiBUaGlzIHNlcmllcyBhZGRzIGEgbmV3IGRy
-aXZlciBmb3IgdGhlIE5QVSB0aGF0IFJvY2tjaGlwIGluY2x1ZGVzIGluIGl0cw0KPiA+IG5ld2Vy
-IFNvQ3MsIGRldmVsb3BlZCBieSB0aGVtIG9uIHRoZSBOVkRMQSBiYXNlLg0KPiA+IA0KPiA+IElu
-IGl0cyBjdXJyZW50IGZvcm0sIGl0IHN1cHBvcnRzIHRoZSBzcGVjaWZpYyBOUFUgaW4gdGhlIFJL
-MzU4OCBTb0MuDQo+ID4gDQo+ID4gVGhlIHVzZXJzcGFjZSBkcml2ZXIgaXMgcGFydCBvZiBNZXNh
-IGFuZCBhbiBpbml0aWFsIGRyYWZ0IGNhbiBiZSBmb3VuZCBhdDoNCj4gPiANCj4gPiBodHRwczov
-L2dpdGxhYi5mcmVlZGVza3RvcC5vcmcvbWVzYS9tZXNhLy0vbWVyZ2VfcmVxdWVzdHMvMjk2OTgN
-Cj4gPiANCj4gPiBTaWduZWQtb2ZmLWJ5OiBUb21ldSBWaXpvc28gPHRvbWV1QHRvbWV1dml6b3Nv
-Lm5ldD4NCj4gDQo+IFRoaXMgKGFuZCB0aGUgdXNlcnNwYWNlIGNvbXBvbmVudCkgYXBwZWFyIHJl
-YWR5IGZvciBtZXJnZSBmcm9tIHdoYXQgSSANCj4gY2FuIHRlbGwuIFRvbWV1IGlzIHN0aWxsIHdv
-cmtpbmcgb24gaGlzIGRybS1taXNjIGFjY2VzcyBzbyBJJ3ZlIG9mZmVyZWQgDQo+IHRvIG1lcmdl
-IG9uIGhpcyBiZWhhbGYuIFBsYW5uaW5nIG9uIHdhaXRpbmcgdW50aWwgRnJpZGF5IGZvciBhbnkg
-ZmluYWwgDQo+IGZlZWRiYWNrIHRvIGNvbWUgaW4gYmVmb3JlIGRvaW5nIHNvLg0KDQpzb3VuZHMg
-Z3JlYXQuDQoNCkp1c3QgdG8gbWFrZSBzdXJlLCB5b3UncmUgcGxhbm5pbmcgdG8gbWVyZ2UgcGF0
-Y2hlcyAxLTYgKGRyaXZlciArIGJpbmRpbmcpDQppbnRvIGRybS1taXNjIGFuZCBJJ2xsIHBpY2sg
-dXAgdGhlICJhcm02NDogZHRzOiAiIHBhdGNoZXMgNy0xMCBhZnRlcndhcmRzPw0KDQpIZWlrbw0K
-DQoNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFy
-by1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpU
-byB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMu
-bGluYXJvLm9yZwo=
+The Arm Ethos-U65/85 NPUs are designed for edge AI inference 
+applications[0].
+
+The driver works with Mesa Teflon. WIP support is available here[1]. The 
+UAPI should also be compatible with the downstream driver stack[2] and 
+Vela compiler though that has not been implemented.
+
+Testing so far has been on i.MX93 boards with Ethos-U65. Support for U85 
+is still todo. Only minor changes on driver side will be needed for U85 
+support.
+
+A git tree is here[3].
+
+Rob
+
+[0] https://www.arm.com/products/silicon-ip-cpu?families=ethos%20npus
+[1] https://gitlab.freedesktop.org/tomeu/mesa.git ethos
+[2] https://gitlab.arm.com/artificial-intelligence/ethos-u/
+[3] git://git.kernel.org/pub/scm/linux/kernel/git/robh/linux.git ethos
+
+Signed-off-by: Rob Herring (Arm) <robh@kernel.org>
+---
+Rob Herring (Arm) (2):
+      dt-bindings: npu: Add Arm Ethos-U65/U85
+      accel: Add Arm Ethos-U NPU driver
+
+ .../devicetree/bindings/npu/arm,ethos.yaml         |  79 +++
+ MAINTAINERS                                        |   9 +
+ drivers/accel/Kconfig                              |   1 +
+ drivers/accel/Makefile                             |   1 +
+ drivers/accel/ethos/Kconfig                        |  10 +
+ drivers/accel/ethos/Makefile                       |   4 +
+ drivers/accel/ethos/ethos_device.h                 | 186 ++++++
+ drivers/accel/ethos/ethos_drv.c                    | 412 ++++++++++++
+ drivers/accel/ethos/ethos_drv.h                    |  15 +
+ drivers/accel/ethos/ethos_gem.c                    | 707 +++++++++++++++++++++
+ drivers/accel/ethos/ethos_gem.h                    |  46 ++
+ drivers/accel/ethos/ethos_job.c                    | 527 +++++++++++++++
+ drivers/accel/ethos/ethos_job.h                    |  41 ++
+ include/uapi/drm/ethos_accel.h                     | 262 ++++++++
+ 14 files changed, 2300 insertions(+)
+---
+base-commit: 19272b37aa4f83ca52bdf9c16d5d81bdd1354494
+change-id: 20250715-ethos-3fdd39ef6f19
+
+Best regards,
+--  
+Rob Herring (Arm) <robh@kernel.org>
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
