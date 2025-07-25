@@ -2,106 +2,186 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 93F61B1030A
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 24 Jul 2025 10:13:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 84FD5B12340
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 25 Jul 2025 19:50:09 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 780B7454D5
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 24 Jul 2025 08:13:38 +0000 (UTC)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
-	by lists.linaro.org (Postfix) with ESMTPS id AF31E43C1B
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 24 Jul 2025 08:13:26 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id AA3B345541
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 25 Jul 2025 17:50:07 +0000 (UTC)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+	by lists.linaro.org (Postfix) with ESMTPS id 606D43F6B3
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 25 Jul 2025 17:49:55 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b="GZij/Khf";
-	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=leon@kernel.org;
-	dmarc=pass (policy=quarantine) header.from=kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by tor.source.kernel.org (Postfix) with ESMTP id 1FAEF601EE;
-	Thu, 24 Jul 2025 08:13:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 259DEC4CEED;
-	Thu, 24 Jul 2025 08:13:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1753344805;
-	bh=TMHBNschFRg/EXbokl2TnOo376mtUvL9vCgJ968zWc0=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=GZij/KhfBIUnbU4lbHxjP88/lDFzJVzpN+LpEfBwzehWsDkUfges9TR5IyiZTnUhz
-	 OadLn/vpSTN0knIfMqxk1/W2CkIVAi3gxUO12Curbh72sdoAFUoZHMoQdkblwXYtCK
-	 DBBS15tXdkII8NQBEHBXo5TqCjHgGsdp0FLQhgc8yB1hMi8M7wr3Or6XwNhMDDmE5z
-	 Em/8soyscY18uKVRMTABiIjE1R3FnnTzVaf+jWOosD8zdiT3uo+rw2d6i+cCw9KzmJ
-	 6lq4oh/7XQmhm5eJkFy7pTkaIXNXQvR9uEMZs2rWb31Otvoz0nnuBSZNCxcv8TqFNT
-	 vTyCJMK4plyfw==
-Date: Thu, 24 Jul 2025 11:13:21 +0300
-From: Leon Romanovsky <leon@kernel.org>
-To: Christoph Hellwig <hch@lst.de>
-Message-ID: <20250724081321.GT402218@unreal>
-References: <cover.1753274085.git.leonro@nvidia.com>
- <82e62eb59afcd39b68ae143573d5ed113a92344e.1753274085.git.leonro@nvidia.com>
- <20250724080313.GA31887@lst.de>
+	dkim=pass header.d=ti.com header.s=ti-com-17Q1 header.b="rRk/10Ix";
+	spf=pass (lists.linaro.org: domain of afd@ti.com designates 198.47.23.235 as permitted sender) smtp.mailfrom=afd@ti.com;
+	dmarc=pass (policy=quarantine) header.from=ti.com
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+	by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56PHnc3d2251811;
+	Fri, 25 Jul 2025 12:49:38 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1753465778;
+	bh=+eBwJup3Yjm99HHyJ3Azuh5yfqVuAmBeRvTWq8BjN1Y=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=rRk/10Ix0X2smb4WE4ZUcNvU3FwYJWosRBjhlZORYEwD18orQCFeJEdiljeIaqR2w
+	 LrKV6RqWOaeGA3QvBh7Tpbysec16MIv+DxoJJ//NkeyX2g0NNRO/MWpev6OMWEuDFP
+	 Ly0mLMGHwG2FObKZhFIO7QgJTH5CMw7bfwAe02ds=
+Received: from DFLE20.ent.ti.com (dfle20.ent.ti.com [10.64.6.57])
+	by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56PHncUf2468477
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Fri, 25 Jul 2025 12:49:38 -0500
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE20.ent.ti.com
+ (10.64.6.57) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.2.1748.24; Fri, 25 Jul
+ 2025 12:49:38 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Fri, 25 Jul 2025 12:49:38 -0500
+Received: from [10.249.42.149] ([10.249.42.149])
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56PHnb9c2388126;
+	Fri, 25 Jul 2025 12:49:37 -0500
+Message-ID: <30d4bf10-274d-485c-84dd-7cbb8157efab@ti.com>
+Date: Fri, 25 Jul 2025 12:49:37 -0500
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20250724080313.GA31887@lst.de>
-X-Spamd-Result: default: False [-3.46 / 15.00];
-	BAYES_HAM(-2.96)[99.81%];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.4.254];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+User-Agent: Mozilla Thunderbird
+To: Maxime Ripard <mripard@kernel.org>,
+        Sumit Semwal
+	<sumit.semwal@linaro.org>,
+        Benjamin Gaignard
+	<benjamin.gaignard@collabora.com>,
+        Brian Starkey <Brian.Starkey@arm.com>,
+        John Stultz <jstultz@google.com>,
+        "T.J. Mercier" <tjmercier@google.com>,
+        Jonathan Corbet <corbet@lwn.net>
+References: <20250717-dma-buf-heap-names-doc-v3-1-d2dbb4b95ef6@kernel.org>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20250717-dma-buf-heap-names-doc-v3-1-d2dbb4b95ef6@kernel.org>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-Spamd-Result: default: False [-5.00 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
+	RBL_SENDERSCORE_REPUT_9(-1.00)[198.47.23.235:from];
+	DMARC_POLICY_ALLOW(-0.50)[ti.com,quarantine];
+	R_DKIM_ALLOW(-0.20)[ti.com:s=ti-com-17Q1];
+	R_SPF_ALLOW(-0.20)[+ip4:198.47.23.224/27];
 	MIME_GOOD(-0.10)[text/plain];
-	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:161, ipnet:198.47.23.0/24, country:US];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[15];
 	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[24];
-	ASN(0.00)[asn:63949, ipnet:172.105.0.0/19, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ARC_NA(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
+	ARC_NA(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[redhat.com,kernel.org,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,gmail.com];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	DNSWL_BLOCKED(0.00)[172.105.4.254:from];
+	FROM_EQ_ENVFROM(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+]
+	RCVD_COUNT_FIVE(0.00)[5];
+	DKIM_TRACE(0.00)[ti.com:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: AF31E43C1B
-X-Spamd-Bar: ---
-Message-ID-Hash: RV3JOAMRKUWOSDKNMQOJ3AWTOZDM4CSW
-X-Message-ID-Hash: RV3JOAMRKUWOSDKNMQOJ3AWTOZDM4CSW
-X-MailFrom: leon@kernel.org
+X-Rspamd-Queue-Id: 606D43F6B3
+X-Spamd-Bar: ----
+Message-ID-Hash: 5SISXIKKSFNARUQMLB3V6Q7S4WUNM742
+X-Message-ID-Hash: 5SISXIKKSFNARUQMLB3V6Q7S4WUNM742
+X-MailFrom: afd@ti.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Alex Williamson <alex.williamson@redhat.com>, Jason Gunthorpe <jgg@nvidia.com>, Andrew Morton <akpm@linux-foundation.org>, Bjorn Helgaas <bhelgaas@google.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, iommu@lists.linux.dev, Jens Axboe <axboe@kernel.dk>, =?iso-8859-1?B?Suly9G1l?= Glisse <jglisse@redhat.com>, Joerg Roedel <joro@8bytes.org>, kvm@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linux-mm@kvack.org, linux-pci@vger.kernel.org, Logan Gunthorpe <logang@deltatee.com>, Robin Murphy <robin.murphy@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, Vivek Kasireddy <vivek.kasireddy@intel.com>, Will Deacon <will@kernel.org>
+CC: Jared Kangas <jkangas@redhat.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, Bagas Sanjaya <bagasdotme@gmail.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 05/10] PCI/P2PDMA: Export pci_p2pdma_map_type() function
+Subject: [Linaro-mm-sig] Re: [PATCH v3] Documentation: dma-buf: heaps: Add naming guidelines
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RV3JOAMRKUWOSDKNMQOJ3AWTOZDM4CSW/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5SISXIKKSFNARUQMLB3V6Q7S4WUNM742/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
 Content-Transfer-Encoding: 7bit
 
-On Thu, Jul 24, 2025 at 10:03:13AM +0200, Christoph Hellwig wrote:
-> On Wed, Jul 23, 2025 at 04:00:06PM +0300, Leon Romanovsky wrote:
-> > From: Leon Romanovsky <leonro@nvidia.com>
-> > 
-> > Export the pci_p2pdma_map_type() function to allow external modules
-> > and subsystems to determine the appropriate mapping type for P2PDMA
-> > transfers between a provider and target device.
+On 7/17/25 3:10 AM, Maxime Ripard wrote:
+> We've discussed a number of times of how some heap names are bad, but
+> not really what makes a good heap name.
 > 
-> External modules have no business doing this.
-
-VFIO PCI code is built as module. There is no way to access PCI p2p code
-without exporting functions in it.
-
-Thanks
-
+> Let's document what we expect the heap names to look like.
 > 
+> Reviewed-by: Bagas Sanjaya <bagasdotme@gmail.com>
+> Signed-off-by: Maxime Ripard <mripard@kernel.org>
+> ---
+> Changes in v3:
+> - Grammar, spelling fixes
+> - Remove the cacheable / uncacheable name suggestion
+> - Link to v2: https://lore.kernel.org/r/20250616-dma-buf-heap-names-doc-v2-1-8ae43174cdbf@kernel.org
 > 
+> Changes in v2:
+> - Added justifications for each requirement / suggestions
+> - Added a mention and example of buffer attributes
+> - Link to v1: https://lore.kernel.org/r/20250520-dma-buf-heap-names-doc-v1-1-ab31f74809ee@kernel.org
+> ---
+>   Documentation/userspace-api/dma-buf-heaps.rst | 35 +++++++++++++++++++++++++++
+>   1 file changed, 35 insertions(+)
+> 
+> diff --git a/Documentation/userspace-api/dma-buf-heaps.rst b/Documentation/userspace-api/dma-buf-heaps.rst
+> index 535f49047ce6450796bf4380c989e109355efc05..3ee4e7961fe390ba356a2125d53b060546c3e4a6 100644
+> --- a/Documentation/userspace-api/dma-buf-heaps.rst
+> +++ b/Documentation/userspace-api/dma-buf-heaps.rst
+> @@ -21,5 +21,40 @@ following heaps:
+>      usually created either through the kernel commandline through the
+>      `cma` parameter, a memory region Device-Tree node with the
+>      `linux,cma-default` property set, or through the `CMA_SIZE_MBYTES` or
+>      `CMA_SIZE_PERCENTAGE` Kconfig options. Depending on the platform, it
+>      might be called ``reserved``, ``linux,cma``, or ``default-pool``.
+> +
+> +Naming Convention
+> +=================
+> +
+> +``dma-buf`` heaps name should meet a number of constraints:
+> +
+> +- The name must be stable, and must not change from one version to the other.
+> +  Userspace identifies heaps by their name, so if the names ever change, we
+> +  would be likely to introduce regressions.
+> +
+> +- The name must describe the memory region the heap will allocate from, and
+> +  must uniquely identify it in a given platform. Since userspace applications
+> +  use the heap name as the discriminant, it must be able to tell which heap it
+> +  wants to use reliably if there's multiple heaps.
+> +
+> +- The name must not mention implementation details, such as the allocator. The
+> +  heap driver will change over time, and implementation details when it was
+> +  introduced might not be relevant in the future.
+> +
+> +- The name should describe properties of the buffers that would be allocated.
+> +  Doing so will make heap identification easier for userspace. Such properties
+> +  are:
+> +
+> +  - ``contiguous`` for physically contiguous buffers;
+> +
+> +  - ``protected`` for encrypted buffers not accessible the OS;
+> +
+> +- The name may describe intended usage. Doing so will make heap identification
+> +  easier for userspace applications and users.
+> +
+> +For example, assuming a platform with a reserved memory region located at the
+> +RAM address 0x42000000, intended to allocate video framebuffers, physically
+> +contiguous, and backed by the CMA kernel allocator, good names would be
+> +``memory@42000000-cacheable-contiguous`` or ``video@42000000``, but
+
+You dropped "cacheable" but left it here in the suggested names, maybe
+replace with "protected" here. Otherwise, LGTM,
+
+Reviewed-by: Andrew Davis <afd@ti.com>
+
+> +``cma-video`` wouldn't.
+> 
+> ---
+> base-commit: 19272b37aa4f83ca52bdf9c16d5d81bdd1354494
+> change-id: 20250520-dma-buf-heap-names-doc-31261aa0cfe6
+> 
+> Best regards,
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
