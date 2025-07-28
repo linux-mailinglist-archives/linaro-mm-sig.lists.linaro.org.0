@@ -2,93 +2,85 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4F525B13643
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 28 Jul 2025 10:21:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D5C9EB14082
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 28 Jul 2025 18:41:56 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 6820545415
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 28 Jul 2025 08:21:43 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 3E08943F5D
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 28 Jul 2025 08:21:31 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 45D16444B1
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 28 Jul 2025 16:41:55 +0000 (UTC)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+	by lists.linaro.org (Postfix) with ESMTPS id A08CF3F6D6
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 28 Jul 2025 16:41:42 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b="OoKp2O/+";
-	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=mripard@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b="B+keFTh/";
+	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 147.75.193.91 as permitted sender) smtp.mailfrom=leon@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id 8BEC243D35;
-	Mon, 28 Jul 2025 08:21:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1AF8CC4CEE7;
-	Mon, 28 Jul 2025 08:21:29 +0000 (UTC)
+	by nyc.source.kernel.org (Postfix) with ESMTP id 66B4CA53E34;
+	Mon, 28 Jul 2025 16:41:42 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 51E4FC4CEE7;
+	Mon, 28 Jul 2025 16:41:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1753690890;
-	bh=ZRY+6/nyvo8KZTIrleYpG4C+tuqfPfTS1XAX1p+YB1E=;
-	h=From:Date:Subject:To:Cc:From;
-	b=OoKp2O/+xlcLqP/N6dy8ZajsSmZVl3xEi/eDCf6EICLzSJIRkzdNTNMcLcabe6HYM
-	 Wl73qYRFxze8J0QfVc0j7G2E3mOirVOCEymjit4+XbfP6f6DUu/QOe/SQBXLHMNoX4
-	 JcbmVJvM/hluXeqm8WHYL5pnA+b73iUi5dVggZSmO0mDNKiD1p9sZzUbg4efIyvn2r
-	 GVJNaAyqeM0nzikONPvHoFq4HF2LuvHclzqfPfp91jDakF3IV0B/7a/JepYjQcE0cB
-	 YFZuvdOFoE0ZD2Yjan4ZKW/t2r3Mkzc+UFjx/CVBkSzyxQz3D9O535Qh/mPhyH84fH
-	 Z66B3s5fs1wog==
-From: Maxime Ripard <mripard@kernel.org>
-Date: Mon, 28 Jul 2025 10:21:23 +0200
+	s=k20201202; t=1753720902;
+	bh=7x0ZgIgFMhmGblvNn1rp9l0J3jLs/NKo357QqFEU40c=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=B+keFTh/H3uyJm+2CRXywKicPx1XFBBkxeKmrZZbdSdo7TbhwSKWM+9PVaAkV/Ggd
+	 rdbs8jBkHbT/8OTgeGMPL4gfUOW2ABlcD8WUcg8AnFQUJTXwNmVXpc6MVeqX+1gX/B
+	 Hl4YyyFNqJKjrMehvwoAGQununhgEiDlRgPJ4pHhRsT2e9nnS0dUD7g029zGYqMvz0
+	 +n1X/yXScSmTwLjOGstVCV5NVXNowOdBanEpgP5gJZIZzUwp2PqhdbrI1ndD1ANzQ6
+	 U3SK+z5/iiu7H8t8oy3Nyrh+r+SHqvFdQXzv1CHbtq87l4SZmHe8/P8OoUYzv0vSLF
+	 T/9RjFtCR33XQ==
+Date: Mon, 28 Jul 2025 19:41:36 +0300
+From: Leon Romanovsky <leon@kernel.org>
+To: Logan Gunthorpe <logang@deltatee.com>
+Message-ID: <20250728164136.GD402218@unreal>
+References: <cover.1753274085.git.leonro@nvidia.com>
+ <82e62eb59afcd39b68ae143573d5ed113a92344e.1753274085.git.leonro@nvidia.com>
+ <20250724080313.GA31887@lst.de>
+ <20250724081321.GT402218@unreal>
+ <b32ae619-6c4a-46fc-a368-6ad4e245d581@deltatee.com>
+ <20250727190514.GG7551@nvidia.com>
+ <d69e0d74-285e-4cde-a2e4-a803accfa9e1@deltatee.com>
 MIME-Version: 1.0
-Message-Id: <20250728-dma-buf-heap-names-doc-v4-1-f73f71cf0dfd@kernel.org>
-X-B4-Tracking: v=1; b=H4sIAAIzh2gC/4XNTQrCMBCG4auUrB3JJGnauvIe4iJpJjZof0i0K
- NK7G92IiLh8P5hn7ixRDJTYprizSHNIYRxyqFXB2s4MB4LgcjPBRclLwcH1BuzFQ0dmgsH0lMC
- NLUgUGo3hrSfN8vEUyYfrC97tc3chncd4e/2Z8bn+JWcEBGMl+krVvCHaHikOdFqP8cCe5izej
- kb90xHZqQ0piZVqnfVfjnw7FVY/HZkdJ5y1yjYlef3hLMvyAJIqzF5NAQAA
-X-Change-ID: 20250520-dma-buf-heap-names-doc-31261aa0cfe6
-To: Sumit Semwal <sumit.semwal@linaro.org>,
- Benjamin Gaignard <benjamin.gaignard@collabora.com>,
- Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>,
- "T.J. Mercier" <tjmercier@google.com>, Jonathan Corbet <corbet@lwn.net>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3494; i=mripard@kernel.org;
- h=from:subject:message-id; bh=ZRY+6/nyvo8KZTIrleYpG4C+tuqfPfTS1XAX1p+YB1E=;
- b=owGbwMvMwCmsHn9OcpHtvjLG02pJDBntxmzSnxRahTZl7NMv3Fwbs2rWr6tvpB9L3Ot37H3ff
- 9r01IyZHVNZGIQ5GWTFFFmeyISdXt6+uMrBfuUPmDmsTCBDGLg4BWAiWp6MdeaW+6Y1TNon/W3a
- nFWbIw+EBjy+sd88PW3urkWf1fy1JrAnMKw/LrWsZ/ej2+tvvlbl1GCs95m7f+qtqKVTLi/08uR
- RXrF9zZZf+sdC5fITl0bk9Mou3T4hvsZ5ZbJs2ZpH1+vV1NlTAQ==
-X-Developer-Key: i=mripard@kernel.org; a=openpgp;
- fpr=BE5675C37E818C8B5764241C254BCFC56BF6CE8D
-X-Spamd-Result: default: False [-4.00 / 15.00];
+Content-Disposition: inline
+In-Reply-To: <d69e0d74-285e-4cde-a2e4-a803accfa9e1@deltatee.com>
+X-Spamd-Result: default: False [-3.50 / 15.00];
 	BAYES_HAM(-3.00)[99.99%];
+	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.252.31:c];
+	R_SPF_ALLOW(-0.20)[+ip4:147.75.193.91];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MIME_GOOD(-0.10)[text/plain];
-	DWL_DNSWL_BLOCKED(0.00)[kernel.org:dkim];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[16];
+	MISSING_XM_UA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	MID_RHS_MATCH_FROM(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[24];
+	ASN(0.00)[asn:15830, ipnet:147.75.193.0/24, country:NL];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ARC_NA(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	URIBL_BLOCKED(0.00)[2.128.222.128:email,ti.com:email];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[ti.com,redhat.com,kernel.org,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,gmail.com];
 	TO_DN_SOME(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	URIBL_BLOCKED(0.00)[nvidia.com:email];
 	RCVD_COUNT_TWO(0.00)[2];
+	DNSWL_BLOCKED(0.00)[100.75.92.58:received,147.75.193.91:from];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 3E08943F5D
+X-Rspamd-Queue-Id: A08CF3F6D6
 X-Spamd-Bar: ---
-Message-ID-Hash: VQ5CCHT2PBUZXOFBZI5CDFZFVHO7MCXE
-X-Message-ID-Hash: VQ5CCHT2PBUZXOFBZI5CDFZFVHO7MCXE
-X-MailFrom: mripard@kernel.org
+Message-ID-Hash: ZOFQ6PCEH5U35BLCWXHOK4TRVFZING2A
+X-Message-ID-Hash: ZOFQ6PCEH5U35BLCWXHOK4TRVFZING2A
+X-MailFrom: leon@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Andrew Davis <afd@ti.com>, Jared Kangas <jkangas@redhat.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, Bagas Sanjaya <bagasdotme@gmail.com>, Maxime Ripard <mripard@kernel.org>
+CC: Jason Gunthorpe <jgg@nvidia.com>, Christoph Hellwig <hch@lst.de>, Alex Williamson <alex.williamson@redhat.com>, Andrew Morton <akpm@linux-foundation.org>, Bjorn Helgaas <bhelgaas@google.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, iommu@lists.linux.dev, Jens Axboe <axboe@kernel.dk>, =?iso-8859-1?B?Suly9G1l?= Glisse <jglisse@redhat.com>, Joerg Roedel <joro@8bytes.org>, kvm@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linux-mm@kvack.org, linux-pci@vger.kernel.org, Robin Murphy <robin.murphy@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, Vivek Kasireddy <vivek.kasireddy@intel.com>, Will Deacon <will@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v4] Documentation: dma-buf: heaps: Add naming guidelines
+Subject: [Linaro-mm-sig] Re: [PATCH 05/10] PCI/P2PDMA: Export pci_p2pdma_map_type() function
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VQ5CCHT2PBUZXOFBZI5CDFZFVHO7MCXE/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZOFQ6PCEH5U35BLCWXHOK4TRVFZING2A/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -98,86 +90,74 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-We've discussed a number of times of how some heap names are bad, but
-not really what makes a good heap name.
+On Mon, Jul 28, 2025 at 10:12:31AM -0600, Logan Gunthorpe wrote:
+> 
+> 
+> On 2025-07-27 13:05, Jason Gunthorpe wrote:
+> > On Fri, Jul 25, 2025 at 10:30:46AM -0600, Logan Gunthorpe wrote:
+> >>
+> >>
+> >> On 2025-07-24 02:13, Leon Romanovsky wrote:
+> >>> On Thu, Jul 24, 2025 at 10:03:13AM +0200, Christoph Hellwig wrote:
+> >>>> On Wed, Jul 23, 2025 at 04:00:06PM +0300, Leon Romanovsky wrote:
+> >>>>> From: Leon Romanovsky <leonro@nvidia.com>
+> >>>>>
+> >>>>> Export the pci_p2pdma_map_type() function to allow external modules
+> >>>>> and subsystems to determine the appropriate mapping type for P2PDMA
+> >>>>> transfers between a provider and target device.
+> >>>>
+> >>>> External modules have no business doing this.
+> >>>
+> >>> VFIO PCI code is built as module. There is no way to access PCI p2p code
+> >>> without exporting functions in it.
+> >>
+> >> The solution that would make more sense to me would be for either
+> >> dma_iova_try_alloc() or another helper in dma-iommu.c to handle the
+> >> P2PDMA case.
+> > 
+> > This has nothing to do with dma-iommu.c, the decisions here still need
+> > to be made even if dma-iommu.c is not compiled in.
+> 
+> Doesn't it though? Every single call in patch 10 to the newly exported
+> PCI functions calls into the the dma-iommu functions. If there were
+> non-iommu paths then I would expect the code would use the regular DMA
+> api directly which would then call in to dma-iommu.
 
-Let's document what we expect the heap names to look like.
+If p2p type is PCI_P2PDMA_MAP_BUS_ADDR, there will no dma-iommu and DMA
+at all.
 
-Reviewed-by: Andrew Davis <afd@ti.com>
-Reviewed-by: Bagas Sanjaya <bagasdotme@gmail.com>
-Signed-off-by: Maxime Ripard <mripard@kernel.org>
----
-Changes in v4:
-- Dropped *all* the cacheable mentions
-- Link to v3: https://lore.kernel.org/r/20250717-dma-buf-heap-names-doc-v3-1-d2dbb4b95ef6@kernel.org
-
-Changes in v3:
-- Grammar, spelling fixes
-- Remove the cacheable / uncacheable name suggestion
-- Link to v2: https://lore.kernel.org/r/20250616-dma-buf-heap-names-doc-v2-1-8ae43174cdbf@kernel.org
-
-Changes in v2:
-- Added justifications for each requirement / suggestions
-- Added a mention and example of buffer attributes
-- Link to v1: https://lore.kernel.org/r/20250520-dma-buf-heap-names-doc-v1-1-ab31f74809ee@kernel.org
----
- Documentation/userspace-api/dma-buf-heaps.rst | 35 +++++++++++++++++++++++++++
- 1 file changed, 35 insertions(+)
-
-diff --git a/Documentation/userspace-api/dma-buf-heaps.rst b/Documentation/userspace-api/dma-buf-heaps.rst
-index 535f49047ce6450796bf4380c989e109355efc05..1ced2720f929432661182f1a3a88aa1ff80bd6af 100644
---- a/Documentation/userspace-api/dma-buf-heaps.rst
-+++ b/Documentation/userspace-api/dma-buf-heaps.rst
-@@ -21,5 +21,40 @@ following heaps:
-    usually created either through the kernel commandline through the
-    `cma` parameter, a memory region Device-Tree node with the
-    `linux,cma-default` property set, or through the `CMA_SIZE_MBYTES` or
-    `CMA_SIZE_PERCENTAGE` Kconfig options. Depending on the platform, it
-    might be called ``reserved``, ``linux,cma``, or ``default-pool``.
++static int vfio_pci_dma_buf_attach(struct dma_buf *dmabuf,
++				   struct dma_buf_attachment *attachment)
++{
++	struct vfio_pci_dma_buf *priv = dmabuf->priv;
 +
-+Naming Convention
-+=================
++	if (!attachment->peer2peer)
++		return -EOPNOTSUPP;
 +
-+``dma-buf`` heaps name should meet a number of constraints:
++	if (priv->revoked)
++		return -ENODEV;
 +
-+- The name must be stable, and must not change from one version to the other.
-+  Userspace identifies heaps by their name, so if the names ever change, we
-+  would be likely to introduce regressions.
++	switch (pci_p2pdma_map_type(priv->vdev->provider, attachment->dev)) {
++	case PCI_P2PDMA_MAP_THRU_HOST_BRIDGE:
++		break;
++	case PCI_P2PDMA_MAP_BUS_ADDR:
++		/*
++		 * There is no need in IOVA at all for this flow.
++		 * We rely on attachment->priv == NULL as a marker
++		 * for this mode.
++		 */
++		return 0;
++	default:
++		return -EINVAL;
++	}
 +
-+- The name must describe the memory region the heap will allocate from, and
-+  must uniquely identify it in a given platform. Since userspace applications
-+  use the heap name as the discriminant, it must be able to tell which heap it
-+  wants to use reliably if there's multiple heaps.
++	attachment->priv = kzalloc(sizeof(struct dma_iova_state), GFP_KERNEL);
++	if (!attachment->priv)
++		return -ENOMEM;
 +
-+- The name must not mention implementation details, such as the allocator. The
-+  heap driver will change over time, and implementation details when it was
-+  introduced might not be relevant in the future.
-+
-+- The name should describe properties of the buffers that would be allocated.
-+  Doing so will make heap identification easier for userspace. Such properties
-+  are:
-+
-+  - ``contiguous`` for physically contiguous buffers;
-+
-+  - ``protected`` for encrypted buffers not accessible the OS;
-+
-+- The name may describe intended usage. Doing so will make heap identification
-+  easier for userspace applications and users.
-+
-+For example, assuming a platform with a reserved memory region located
-+at the RAM address 0x42000000, intended to allocate video framebuffers,
-+physically contiguous, and backed by the CMA kernel allocator, good
-+names would be ``memory@42000000-contiguous`` or ``video@42000000``, but
-+``cma-video`` wouldn't.
-
----
-base-commit: 038d61fd642278bab63ee8ef722c50d10ab01e8f
-change-id: 20250520-dma-buf-heap-names-doc-31261aa0cfe6
-
-Best regards,
--- 
-Maxime Ripard <mripard@kernel.org>
-
++	dma_iova_try_alloc(attachment->dev, attachment->priv, 0, priv->phys_vec.len);
++	return 0;
++}
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
