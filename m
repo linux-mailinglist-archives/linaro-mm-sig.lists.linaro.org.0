@@ -2,54 +2,56 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4C730B14A53
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 29 Jul 2025 10:45:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F024DB14A7E
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 29 Jul 2025 10:53:59 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5C29F45415
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 29 Jul 2025 08:45:47 +0000 (UTC)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
-	by lists.linaro.org (Postfix) with ESMTPS id 239B2440E3
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 29 Jul 2025 08:45:33 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 794CB44B2F
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 29 Jul 2025 08:53:58 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+	by lists.linaro.org (Postfix) with ESMTPS id 2E9AA440E3
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 29 Jul 2025 08:53:42 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=mtjx7aNo;
-	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 147.75.193.91 as permitted sender) smtp.mailfrom=leon@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=FY4CeHlP;
+	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=leon@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by nyc.source.kernel.org (Postfix) with ESMTP id C4605A54C7C;
-	Tue, 29 Jul 2025 08:45:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8EFDBC4CEEF;
-	Tue, 29 Jul 2025 08:45:31 +0000 (UTC)
+	by dfw.source.kernel.org (Postfix) with ESMTP id 885C55C6062;
+	Tue, 29 Jul 2025 08:53:41 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 50444C4CEEF;
+	Tue, 29 Jul 2025 08:53:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1753778732;
-	bh=jkDZ+7UedrBceUBz8tlmLsJhxKV0IBvkz5SAqWUmQpY=;
+	s=k20201202; t=1753779221;
+	bh=yu/bVYFPs5NHquFn45Bc9xbptKoY+Y8L/DXBiDm3w50=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=mtjx7aNoJVq9DvGD4ORxhlZmNSbDYw4VpIt5G+1PbR6Rre8lAWRCRQDkAz4KTJ/bm
-	 BxOO9PzCPjXSeWidky8QMCKZKV2QSFneK6+i7wXzmhFeCMmGPsUu+Uy8H23JTs1bR5
-	 SBAPBVl6JzLSEXRQh+LZJX7ikFN585m8EXq0Nqd8+eigGIwYYpnp+T2AW9EPD5Qm2R
-	 IQhv3G+CGzUj9jLEaAYGbBzjIi0YUwqQckxK9Csm1y+KGwG6KpqkBl4LHIvFc569cc
-	 xXopr3S7OAVJSk8wPuanNo4rGMQEBZyFc3yISHfeC6xtoUaght3ICDAFyg47naXy+n
-	 xTgrSU4QNB9rQ==
-Date: Tue, 29 Jul 2025 11:45:27 +0300
+	b=FY4CeHlPxqEQY3ggQahQUSoRRGfmVjinO49I5sJuOGjcPHAj8mklTAkSCG4Zakzuo
+	 CvWjQEOC2+odKsm58x6VrEU4e8noHt+BTQbIa+b8nP0QopI+HxgtYaxzEYSMyMyP1i
+	 OBLiuqeEwUGzRceBsbP3L3NpTi5My4ZIkmooTnlb/vqma7yjemisxCsOOiwn0jdZcv
+	 57/GCBU5FjqNrGAV4nlmMOjD9QCbx2JTS2GDjEJ1QU42jdlN+Mb3IRDi9GqqvzA6Or
+	 K07AZpyONe96SwTYWZo5V9aAQimkHX1XB5pFni7jy4mTsr/t5VjM2AL0Q5t4DXy+76
+	 S/PGBqWqDL1RA==
+Date: Tue, 29 Jul 2025 11:53:36 +0300
 From: Leon Romanovsky <leon@kernel.org>
 To: Christoph Hellwig <hch@lst.de>
-Message-ID: <20250729084527.GF402218@unreal>
+Message-ID: <20250729085336.GG402218@unreal>
 References: <cover.1753274085.git.leonro@nvidia.com>
- <82e62eb59afcd39b68ae143573d5ed113a92344e.1753274085.git.leonro@nvidia.com>
- <20250724080313.GA31887@lst.de>
- <20250724081321.GT402218@unreal>
- <20250729075230.GB23823@lst.de>
+ <c2307cb4c3f1af46da138f3410738754691fbb3d.1753274085.git.leonro@nvidia.com>
+ <20250724075145.GB30590@lst.de>
+ <20250724075533.GR402218@unreal>
+ <20250724075922.GD30590@lst.de>
+ <20250727185158.GE7551@nvidia.com>
+ <20250729075209.GA23823@lst.de>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20250729075230.GB23823@lst.de>
+In-Reply-To: <20250729075209.GA23823@lst.de>
 X-Spamd-Result: default: False [-3.50 / 15.00];
 	BAYES_HAM(-3.00)[99.99%];
 	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:147.75.193.91];
+	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
 	MIME_GOOD(-0.10)[text/plain];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:15830, ipnet:147.75.193.0/24, country:NL];
+	ASN(0.00)[asn:15830, ipnet:139.178.80.0/21, country:NL];
 	MISSING_XM_UA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	RCPT_COUNT_TWELVE(0.00)[24];
@@ -64,19 +66,19 @@ X-Spamd-Result: default: False [-3.50 / 15.00];
 	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 239B2440E3
+X-Rspamd-Queue-Id: 2E9AA440E3
 X-Spamd-Bar: ---
-Message-ID-Hash: 52JUZYFOHDKPXJXBEVCKJXCKGJFKITCD
-X-Message-ID-Hash: 52JUZYFOHDKPXJXBEVCKJXCKGJFKITCD
+Message-ID-Hash: ZBDRLCJRQ6XIJ4BVJMJTLSDY76TZANX6
+X-Message-ID-Hash: ZBDRLCJRQ6XIJ4BVJMJTLSDY76TZANX6
 X-MailFrom: leon@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Alex Williamson <alex.williamson@redhat.com>, Jason Gunthorpe <jgg@nvidia.com>, Andrew Morton <akpm@linux-foundation.org>, Bjorn Helgaas <bhelgaas@google.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, iommu@lists.linux.dev, Jens Axboe <axboe@kernel.dk>, =?iso-8859-1?B?Suly9G1l?= Glisse <jglisse@redhat.com>, Joerg Roedel <joro@8bytes.org>, kvm@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linux-mm@kvack.org, linux-pci@vger.kernel.org, Logan Gunthorpe <logang@deltatee.com>, Robin Murphy <robin.murphy@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, Vivek Kasireddy <vivek.kasireddy@intel.com>, Will Deacon <will@kernel.org>
+CC: Jason Gunthorpe <jgg@nvidia.com>, Alex Williamson <alex.williamson@redhat.com>, Andrew Morton <akpm@linux-foundation.org>, Bjorn Helgaas <bhelgaas@google.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, iommu@lists.linux.dev, Jens Axboe <axboe@kernel.dk>, =?iso-8859-1?B?Suly9G1l?= Glisse <jglisse@redhat.com>, Joerg Roedel <joro@8bytes.org>, kvm@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linux-mm@kvack.org, linux-pci@vger.kernel.org, Logan Gunthorpe <logang@deltatee.com>, Robin Murphy <robin.murphy@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, Vivek Kasireddy <vivek.kasireddy@intel.com>, Will Deacon <will@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 05/10] PCI/P2PDMA: Export pci_p2pdma_map_type() function
+Subject: [Linaro-mm-sig] Re: [PATCH 02/10] PCI/P2PDMA: Introduce p2pdma_provider structure for cleaner abstraction
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/52JUZYFOHDKPXJXBEVCKJXCKGJFKITCD/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZBDRLCJRQ6XIJ4BVJMJTLSDY76TZANX6/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -86,28 +88,32 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Tue, Jul 29, 2025 at 09:52:30AM +0200, Christoph Hellwig wrote:
-> On Thu, Jul 24, 2025 at 11:13:21AM +0300, Leon Romanovsky wrote:
-> > On Thu, Jul 24, 2025 at 10:03:13AM +0200, Christoph Hellwig wrote:
-> > > On Wed, Jul 23, 2025 at 04:00:06PM +0300, Leon Romanovsky wrote:
-> > > > From: Leon Romanovsky <leonro@nvidia.com>
+On Tue, Jul 29, 2025 at 09:52:09AM +0200, Christoph Hellwig wrote:
+> On Sun, Jul 27, 2025 at 03:51:58PM -0300, Jason Gunthorpe wrote:
+> > On Thu, Jul 24, 2025 at 09:59:22AM +0200, Christoph Hellwig wrote:
+> > > On Thu, Jul 24, 2025 at 10:55:33AM +0300, Leon Romanovsky wrote:
+> > > > Please, see last patch in the series https://lore.kernel.org/all/aea452cc27ca9e5169f7279d7b524190c39e7260.1753274085.git.leonro@nvidia.com
+> > > > It gives me a way to call p2p code with stable pointer for whole BAR.
 > > > > 
-> > > > Export the pci_p2pdma_map_type() function to allow external modules
-> > > > and subsystems to determine the appropriate mapping type for P2PDMA
-> > > > transfers between a provider and target device.
 > > > 
-> > > External modules have no business doing this.
+> > > That simply can't work.
 > > 
-> > VFIO PCI code is built as module. There is no way to access PCI p2p code
-> > without exporting functions in it.
+> > Why not?
+> > 
+> > That's the whole point of this, to remove struct page and use
+> > something else as a handle for the p2p when doing the DMA API stuff.
 > 
-> We never ever export anything for "external" modules, and you really
-> should know that.
+> Because the struct page is the only thing that:
+> 
+>  a) dma-mapping works on
+>  b) is the only place we can discover the routing information, but also
+>     more importantly ensure that the underlying page is still present
+>     and the device is not hot unplugged, or in a very theoretical worst
+>     case replaced by something else.
 
-It is just a wrong word in commit message. I clearly need it for
-vfio-pci module and nothing more.
-
-"Never attribute to malice that which is adequately explained by stupidity." - Hanlon's razor.
+It is correct in general case, but here we are talking about MMIO
+memory, which is "connected" to device X and routing information is
+stable.
 
 Thanks
 
