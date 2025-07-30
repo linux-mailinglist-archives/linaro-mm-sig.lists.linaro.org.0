@@ -2,47 +2,37 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0C71AB15528
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 30 Jul 2025 00:15:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1F348B15A24
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 30 Jul 2025 10:03:38 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 845AD44A3B
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 29 Jul 2025 22:15:35 +0000 (UTC)
-Received: from NAM02-DM3-obe.outbound.protection.outlook.com (mail-dm3nam02on2073.outbound.protection.outlook.com [40.107.95.73])
-	by lists.linaro.org (Postfix) with ESMTPS id 357A644547
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 29 Jul 2025 22:15:23 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id EBAD2441C4
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 30 Jul 2025 08:03:36 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+	by lists.linaro.org (Postfix) with ESMTPS id 24878441C4
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 30 Jul 2025 08:03:24 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=Nvidia.com header.s=selector2 header.b=j9weyLuZ;
-	arc=pass ("microsoft.com:s=arcselector10001:i=1");
-	spf=pass (lists.linaro.org: domain of jgg@nvidia.com designates 40.107.95.73 as permitted sender) smtp.mailfrom=jgg@nvidia.com;
-	dmarc=pass (policy=reject) header.from=nvidia.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Pgme0RAGQkyVK5DWf5EJcmwJglIwMy6JCWra4YKQ3Dt3Rr0sS1C6J6D5Tuo/MmeS+3sdqQUgMwIrh6JwJHao548IFbKEnyBKzHBePEJHqPjigW2su8D7EhOf8xVpznOBLcXNZ4qHGrC8aTv2LHm5m0lBbQIRF7SyioO5Bsd+KnmogqJL7QJxlggu+JBbzpsr4YRWSP1fBbAYr6mPQf7sTWhQdos/9e8hT9C9Wx+qEBDYg/Z+JIgivjFij+AnstkebhFsPe9k8/bbSWt8AhAYfBcgKruwebCslCi9LNAtqbzopcCJAgLSMvt220m4w1vRjdYupItFa5b1Jb5KV9grYA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OcdX1K5T1AZvkWtseRY5CLzuvhXArPhbeks5EEKiU5I=;
- b=bdd/klzlk/VkQyD/JLniMlcFSBhMXTkRf1j1SwvnzzvyJFiTkZEj5POnyFP7zzalVnpoWjjepQQQq5QcqvLbe86GPD5WkGa8YQlCqexZU6bTg+15CNTF+xqBlKq8gdnJpO3zvCs2YVrJE9xk81svL1qi460wAk02CZnFVehg3z+7Mndr4O3GoO78mCrqIAiDUSBHZXZXeKRJ5QmxifYkYtexQkscyl0MOKaa68drLdp/1LWwfOpZXPF66hJsIlHCsTYWMeVODHBm/WGB736r5bvdjqU62d8pioj7kCONERBCVpoL1KwKt2hhegt23YotRfxGhySNV1ki0aXjQAFw+g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OcdX1K5T1AZvkWtseRY5CLzuvhXArPhbeks5EEKiU5I=;
- b=j9weyLuZIpqjAPxcHQdXIFSD8/Fy3TTQA8euoS05iVX9VY4LOv5R3kDkTMRkmtD8WCJ2lPxFcmHdnRT/kknfXEIh9Fh2gLc6djrZNxXUcZ3vr6sheALQqEoBEpPmdNirkL1UTpVVctbFzw8Uty/hU/wBeaWoBk9OGL1y4vcK8GLP0glOPL2ivZy0chM8VQdQ7UBniBRwGZfUK6JUh7luijbEGBmwU1igBhyItmfsDEMehB4gP0ujYnvHX/gVobn71aqjrC0XPVCSM5q3pvhy8u0trnJZ2N8dCSCKYN2SnuaX6Ckm7Bvep3sqh6hAY5FEy/7Ja1PCfnfP7b1F/ilNDg==
-Received: from CH3PR12MB8659.namprd12.prod.outlook.com (2603:10b6:610:17c::13)
- by DS0PR12MB8527.namprd12.prod.outlook.com (2603:10b6:8:161::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8989.11; Tue, 29 Jul
- 2025 22:15:21 +0000
-Received: from CH3PR12MB8659.namprd12.prod.outlook.com
- ([fe80::6eb6:7d37:7b4b:1732]) by CH3PR12MB8659.namprd12.prod.outlook.com
- ([fe80::6eb6:7d37:7b4b:1732%7]) with mapi id 15.20.8964.024; Tue, 29 Jul 2025
- 22:15:20 +0000
-Date: Tue, 29 Jul 2025 19:14:28 -0300
-From: Jason Gunthorpe <jgg@nvidia.com>
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=Phq6ne8j;
+	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=leon@kernel.org;
+	dmarc=pass (policy=quarantine) header.from=kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by sea.source.kernel.org (Postfix) with ESMTP id 7CC0543D89;
+	Wed, 30 Jul 2025 08:03:23 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9C439C4CEE7;
+	Wed, 30 Jul 2025 08:03:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1753862603;
+	bh=HEgPRodovJalgZ/g1kb94tmKLk2QtGEpj7zW37uzKec=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=Phq6ne8jeiHRh+g/jyaIbVu24BslXtOFr5jlNeVkeq5Pd4JP4IP/urevgfTH7y8Ng
+	 IM4N1EVTTw6lIyVWLMQ5K0tdY5QpmQj79Qaao8gIoOMRohyP/vZ3M9ekEqXib6GZL+
+	 Vd2t51G/uWQd6oD58QoSzV0VWLuJ8QqSIDQStXuXWQ5G8gEHsTZDXx81LTTpzH1daZ
+	 ezVZXuukAwl9TGk23btBxOterY1GjPt8BN4i8ULPTxzKhdnMZ1IhejtxHnXHMC5Wo6
+	 rXCmw6UrvY7ectigm1BvmYyiZfOF9dlvJf0mlr92yHUxxT/i06Xv2nhdtuZ9olDn3p
+	 c3RNuuUGIqBAg==
+Date: Wed, 30 Jul 2025 11:03:17 +0300
+From: Leon Romanovsky <leon@kernel.org>
 To: Logan Gunthorpe <logang@deltatee.com>
-Message-ID: <20250729221428.GB82395@nvidia.com>
+Message-ID: <20250730080317.GO402218@unreal>
 References: <82e62eb59afcd39b68ae143573d5ed113a92344e.1753274085.git.leonro@nvidia.com>
  <20250724080313.GA31887@lst.de>
  <20250724081321.GT402218@unreal>
@@ -53,124 +43,46 @@ References: <82e62eb59afcd39b68ae143573d5ed113a92344e.1753274085.git.leonro@nvid
  <d3c8c573-f201-4450-9400-cc3ccafd2c04@deltatee.com>
  <20250728231107.GE36037@nvidia.com>
  <f332e2b9-151f-49ca-ac0c-8c9494c38027@deltatee.com>
+MIME-Version: 1.0
 Content-Disposition: inline
 In-Reply-To: <f332e2b9-151f-49ca-ac0c-8c9494c38027@deltatee.com>
-X-ClientProxiedBy: YT4PR01CA0181.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:110::8) To CH3PR12MB8659.namprd12.prod.outlook.com
- (2603:10b6:610:17c::13)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PR12MB8659:EE_|DS0PR12MB8527:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3c5f1f13-e926-4c18-8e2f-08ddceed681d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|7416014|1800799024|366016;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?V21jIgAfhwgoy4pJX3stt1U2HUcsdxHxDce4Unfnqv6lAZfeBRUbV74nxLxB?=
- =?us-ascii?Q?Ss6ecX0nmFK/FzdemNMy1nXQPh+1H8URupJDFd+73Xmzz/9kfBZn9DqPTACn?=
- =?us-ascii?Q?tnNwH8LTYOtadR8G5A8/WaRNcE/Gu0NIpl9DwCZkyHMLqCx3IWLvAnpJskof?=
- =?us-ascii?Q?PCNouKtT41qPUQDk0uSqJAFztPpP6SShGU3rI/dsr47SW0a2KY68OITeoc2a?=
- =?us-ascii?Q?p4DkhRxcYAxkqN1+nPdpJGOPgiis6Ay1Qir2VmKuvcgQVII6INTj5U/qCe3i?=
- =?us-ascii?Q?QO6ElSJg52CDJ/xMaKzuqZG+19ZJoQUd98IIMr08Ji5fsvZdS5AxHKKh6hfQ?=
- =?us-ascii?Q?bikVzV5tWkMGk/ybR4W+tdfLdLx3conc9lglZS18Jcl1mIXJWyooNaTbwEiF?=
- =?us-ascii?Q?oc90UmKFqVdv1ZJmdXX2D/q+Rx6xCv4+xrNaY/f50n8FfJzI0AsQeSCoMdd4?=
- =?us-ascii?Q?1UcsVo/HhlSFgDzqq1w6L7rvOIdzaYGPz+UpDncm7BWYE0IEN/Xie/4uzvYu?=
- =?us-ascii?Q?VLJp1bfGXfXqJJZf8lTtnIci0DC/QyUtjQulvw00TeebEIwf6RELlwc9G87L?=
- =?us-ascii?Q?a+teTU4D2UheaMVMKld6QdrA3fiNUyG1io9/wzFG8svxNIPQNYBOJWtcQ3oV?=
- =?us-ascii?Q?SHs7afjoqnkgPGEt1xxs7XGmvcJjngnb3lHgTnBZYLWbLvPtAxtJOs7INUUE?=
- =?us-ascii?Q?IsyUD60Hobqjm21pGEX+v7VbMUvztwNJJCglwB/HOJ7z0o/zdizg+3dNjgYa?=
- =?us-ascii?Q?pNmnebpC0gEJkIC/wPjno6NSq/aqJZFQM3ADOciUoC2346InFksX/gIRbuV5?=
- =?us-ascii?Q?6A+Jg618fr4dEYkOi8guppJllAw6TSKLDu6HWTjDUt7AKw1rX/pmlSW8L5Ql?=
- =?us-ascii?Q?ZmauRKXf0gwAvoYSlPiPKhb9bRJaLt2EwJbt8ovfuCQHYYICOQMqv4B15R5M?=
- =?us-ascii?Q?OsjB2PEISAtsB/rCHF2VhmAvVu90nQVnz9CE7cZtRllfj6doRBtERfMWHfzG?=
- =?us-ascii?Q?AbF8H6FWPgM6o3Ip1tM+dLhuGgEsU419ZqYUbEZDBwTKKvsEEd61H9jT95tS?=
- =?us-ascii?Q?stMAjHDJDZqwrAFD0M0tW6JFMNezVbx3To0dj97lVUQeDInVugOj0S9MoLtq?=
- =?us-ascii?Q?6o3AePWZFb3FRRsJCRNkDmr/Y3aIptemZau2zIQ7ZsxBx23JSTbT0bnCICP8?=
- =?us-ascii?Q?g4YJu0B5CijOmPjY6BFVBZW9mK88q8z2YWue6NSw1g8rqmW5lpqpUXBLHK3g?=
- =?us-ascii?Q?Ji0/fOPbjvlmtrrVokxto5oPN21jNFAaGOjy/kw9uIAbSul5HbABe37/JXmU?=
- =?us-ascii?Q?f5/Iswt9BbKhrzkkqO5VdiKrwFVCWkeNzgTntCEhBk9lNtGIlzAr7L4sYB83?=
- =?us-ascii?Q?OT+02VXmZkhKkIdEgeNIs8wWrFuOX/gHWaYesFdOFwVoLX0FMak4KO3yBzEX?=
- =?us-ascii?Q?/489aMngu08=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH3PR12MB8659.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(1800799024)(366016);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?S7rnikbmFGh2JoJ6IkermJR49GpfukJklLCzafyBW9yl45Vjjp1xnDXozcds?=
- =?us-ascii?Q?znroJIFJpI0aBdZ9FMWviZMEcpsCXH3RBR0MnEDtojRdiwbW9a+9946L/oSR?=
- =?us-ascii?Q?rQ+HUvps1TjvKhTms17gZYtzKNxjdeTjSQ/A3s/S+ymykDxPc1vrd1Oe2gJO?=
- =?us-ascii?Q?N6ovCtGVcqL0HZD32BPOmUEx9h/buzx5uaaDQiWzUGFKFYItkPsvxXOQb/Pb?=
- =?us-ascii?Q?Ae2nFgKQkMFiWxjdiijaJO/2gtz0IQbhIaUk/RIECSVa7Zw50uUS9wngqfo3?=
- =?us-ascii?Q?TVfFOiZqT+DknXVn+zIf4UsCfVCA8JxrBL4Ws7ZLnE3jMOjeWidKWPByK6tq?=
- =?us-ascii?Q?wBfRQOIeKEVeckM9yWRmPCtPjKy6m1ybFKSlPJsnYW+NnXxZe5WkRLvlB14U?=
- =?us-ascii?Q?vo/yrN2a6oq9Ha9VK7e4vsX6zDhZMq+3uR3qxDQdbLRL7c9cMcmiLxAi6MN0?=
- =?us-ascii?Q?m0YdWu3u575nm1Md5bfzJ7rv3ybZL/fTP2nsjOLxPvcXWJUkFH7TWRrkecrh?=
- =?us-ascii?Q?r8KbSm8yXPa+VU5Nk9MwrvaSjPkucvvfu+W/OoCsevGT00m3oLqwjWMhJ68S?=
- =?us-ascii?Q?vSZwG2MLCP4R5f11cQBSJKaD/ByuYxl7GJkSNtJN2axGz6AGrTgB+og6vM8B?=
- =?us-ascii?Q?2/Bj74W0Zci+6EWtpMUs0qLX6GidTkAcOfhKWQs9MojoYKCzTKzUPVQ45EzJ?=
- =?us-ascii?Q?q8ozm5jnOF7KOl3LQFzvvgTc7iIUYen5psWpPHZz/4zdbVY/zz/vIVpJdGk6?=
- =?us-ascii?Q?pf1mj0eFTxdmDUQrB1fXJBgu2LcOgEmfemTW1+rbon+9HKcO89GEkZSNLnd9?=
- =?us-ascii?Q?fyXD24uA3WbyzLR6kOroj7bZT8oTry1ijCp0bZJOrmwq1Eylx9EVomE3IG9s?=
- =?us-ascii?Q?LbTG/nZQGGYzt8tvLKD43n4B6cgdqoifMTH/aSdpLFOfyYYi/uFGpDXOgGKe?=
- =?us-ascii?Q?XU/moe2d7uqwyX2HoAK04KkGh4qDnJwm3ho2gv1nQCrW1kVSxDEkUnMEvuVU?=
- =?us-ascii?Q?QbDd/qbAQZUGAzRUxKrYPqRr2Z9L+F2ZA2K38owGVTqnuFMZKgtldv9SLxF6?=
- =?us-ascii?Q?haG113lgsCl5Cgs8r6bQiSX/eUER5ciZucCVuGFKwfSvNoGplla9e9nkKNwr?=
- =?us-ascii?Q?OieIpphGyj2bDp6zONCextjKNPNwQC8pmllPoEFk6z+7aomI7nZ2/Nr1e987?=
- =?us-ascii?Q?XluYyhsL5w5Ho8KRo9eykVES4B6OCve8gMlVfB99FqQljA1K2SKV6hOW83H5?=
- =?us-ascii?Q?JhwQ2PK2OJK4A/JgsqitbldjuYY4iLVf+P8ZJ92/hyq+qS2T0E8LPCL8tvAX?=
- =?us-ascii?Q?0iQ87qZ0+bupr8EELF5/zFCRv1ndogeg96eIQjAC58hV4/pCTDG8K+53XgtU?=
- =?us-ascii?Q?DCNanRg3m868ADYNumb1GgvwR/7ARkKTVOlEP6akihkKLvHlSSY0zUJB5YKj?=
- =?us-ascii?Q?LzGPHJb4DpJAZHJy8BIFzbfa3w/YlQ8ERb4kFK8kPfCiL6MYnyLzjr+bw1HQ?=
- =?us-ascii?Q?3BKS8eSz08d+Uhl6620zcCMU8FWKuiFDUJaTrKMGjbsiAfHB8SpnDFWa04zh?=
- =?us-ascii?Q?yJ+OMFpJb5MqzkWwtZo=3D?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3c5f1f13-e926-4c18-8e2f-08ddceed681d
-X-MS-Exchange-CrossTenant-AuthSource: CH3PR12MB8659.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jul 2025 22:15:20.7500
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: p+eYr1GEjeWfjffBR335mwTee1PJd75EYCh0ECScn+RXQZ236Ueo0Om/ojC07uTS
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB8527
-X-Spamd-Result: default: False [-6.00 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
-	DWL_DNSWL_LOW(-1.00)[Nvidia.com:dkim];
-	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector10001:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
-	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
-	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
+X-Spamd-Result: default: False [-2.52 / 15.00];
+	BAYES_HAM(-2.02)[95.14%];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.252.31];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MIME_GOOD(-0.10)[text/plain];
-	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.95.73:from];
-	RCPT_COUNT_TWELVE(0.00)[24];
-	MIME_TRACE(0.00)[0:+];
 	MISSING_XM_UA(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[24];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ARC_NA(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_TLS_LAST(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
-	DNSWL_BLOCKED(0.00)[40.107.95.73:from];
+	DNSWL_BLOCKED(0.00)[100.75.92.58:received,172.234.252.31:from];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[Nvidia.com:+]
+	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 357A644547
-X-Spamd-Bar: -----
-Message-ID-Hash: WN5DMTDIPIRUDUXYBRWRJOXNS7LNPBB5
-X-Message-ID-Hash: WN5DMTDIPIRUDUXYBRWRJOXNS7LNPBB5
-X-MailFrom: jgg@nvidia.com
+X-Rspamd-Queue-Id: 24878441C4
+X-Spamd-Bar: --
+Message-ID-Hash: VMOVRYK63OZTG2YTWZMUGP34JZY5EXTN
+X-Message-ID-Hash: VMOVRYK63OZTG2YTWZMUGP34JZY5EXTN
+X-MailFrom: leon@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Leon Romanovsky <leon@kernel.org>, Christoph Hellwig <hch@lst.de>, Alex Williamson <alex.williamson@redhat.com>, Andrew Morton <akpm@linux-foundation.org>, Bjorn Helgaas <bhelgaas@google.com>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, iommu@lists.linux.dev, Jens Axboe <axboe@kernel.dk>, =?utf-8?B?SsOpcsO0bWU=?= Glisse <jglisse@redhat.com>, Joerg Roedel <joro@8bytes.org>, kvm@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linux-mm@kvack.org, linux-pci@vger.kernel.org, Robin Murphy <robin.murphy@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, Vivek Kasireddy <vivek.kasireddy@intel.com>, Will Deacon <will@kernel.org>
+CC: Jason Gunthorpe <jgg@nvidia.com>, Christoph Hellwig <hch@lst.de>, Alex Williamson <alex.williamson@redhat.com>, Andrew Morton <akpm@linux-foundation.org>, Bjorn Helgaas <bhelgaas@google.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, iommu@lists.linux.dev, Jens Axboe <axboe@kernel.dk>, =?iso-8859-1?B?Suly9G1l?= Glisse <jglisse@redhat.com>, Joerg Roedel <joro@8bytes.org>, kvm@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linux-mm@kvack.org, linux-pci@vger.kernel.org, Robin Murphy <robin.murphy@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, Vivek Kasireddy <vivek.kasireddy@intel.com>, Will Deacon <will@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH 05/10] PCI/P2PDMA: Export pci_p2pdma_map_type() function
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WN5DMTDIPIRUDUXYBRWRJOXNS7LNPBB5/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VMOVRYK63OZTG2YTWZMUGP34JZY5EXTN/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -196,101 +108,17 @@ On Tue, Jul 29, 2025 at 02:54:13PM -0600, Logan Gunthorpe wrote:
 > cleaned up and I based it off Leon's git repo which appears to not be
 > the same as what was posted, but the core concept is sound).
 
-I did hope for something like this in the early days, but it proved
-not so easy to get agreements on details :(
+I started to prepare v2, this is why posted version is slightly
+different from dmabuf-vfio branch.
 
-My feeling was we should get some actual examples of using this thing
-and then it is far easier to discuss ideas, like yours here, to
-improve it. Many of the discussions kind of got confused without
-enough actual usering code for everyone to refer to.
+In addition to what Jason wrote. there is an extra complexity with using
+state. The wrappers which operate on dma_iova_state assume that all memory,
+which is going to be mapped, is the same type: or p2p or not.
 
-For instance the nvme use case is a big driver for the API design, and
-it is quite different from these simpler flows, this idea needs to see
-how it would work there.
+This is not the cased for HMM/RDMA users, there you create state in
+advance and get mixed type of pages.
 
-Maybe this idea could also have provider = NULL meaning it is CPU
-cachable memory?
-
-> +static inline void dma_iova_try_alloc_p2p(struct p2pdma_provider *provider,
-> +               struct device *dev, struct dma_iova_state *state, phys_addr_t phys,
-> +               size_t size)
-> +{
-> +}
-
-Can't be empty - PCI_P2PDMA_MAP_THRU_HOST_BRIDGE vs
-PCI_P2PDMA_MAP_BUS_ADDR still matters so it still must set
-dma_iova_state::bus_addr to get dma_map_phys_prealloc() to do the
-right thing.
-
-Still, it would make sense to put something like that in dma/mapping.c
-and rely on the static inline stub for dma_iova_try_alloc()..
-
->   	for (i = 0; i < priv->nr_ranges; i++) {
-> -		if (!state) {
-> -			addr = pci_p2pdma_bus_addr_map(provider,
-> -						       phys_vec[i].paddr);
-> -		} else if (dma_use_iova(state)) {
-> -			ret = dma_iova_link(attachment->dev, state,
-> -					    phys_vec[i].paddr, 0,
-> -					    phys_vec[i].len, dir, attrs);
-> -			if (ret)
-> -				goto err_unmap_dma;
-> -
-> -			mapped_len += phys_vec[i].len;
-> -		} else {
-> -			addr = dma_map_phys(attachment->dev, phys_vec[i].paddr,
-> -					    phys_vec[i].len, dir, attrs);
-> -			ret = dma_mapping_error(attachment->dev, addr);
-> -			if (ret)
-> -				goto err_unmap_dma;
-> -		}
-> +		addr = dma_map_phys_prealloc(attachment->dev, phys_vec[i].paddr,
-> +					     phys_vec[i].len, dir, attrs, state,
-> +					     provider);
-
-There was a draft of something like this at some point. The
-DMA_MAPPING_USE_IOVA is a new twist though
-
->  #define DMA_BIT_MASK(n)	(((n) == 64) ? ~0ULL : ((1ULL<<(n))-1))
->   struct dma_iova_state {
->  	dma_addr_t addr;
->  	u64 __size;
-> +	bool bus_addr;
->  };
-
-Gowing this structure has been strongly pushed back on. This probably
-can be solved in some other way, a bitfield on size perhaps..
-
->  +dma_addr_t dma_map_phys_prealloc(struct device *dev, phys_addr_t phys,
-> size_t size,
-> +		enum dma_data_direction dir, unsigned long attrs,
-> +		struct dma_iova_state *state, struct p2pdma_provider *provider)
-> +{
-> +	int ret;
-> +
-> +	if (state->bus_addr)
-> +		return pci_p2pdma_bus_addr_map(provider, phys);
-> +
-> +	if (dma_use_iova(state)) {
-> +		ret = dma_iova_link(dev, state, phys, 0, size, dir, attrs);
-> +		if (ret)
-> +			return DMA_MAPPING_ERROR;
-> +
-> +		return DMA_MAPPING_USE_IOVA;
-> +	}
-> +
-> +	return dma_map_phys(dev, phys, size, dir, attrs);
-> +}
-> +EXPORT_SYMBOL_GPL(dma_map_phys_prealloc);
-
-I would be tempted to inline this
-
-Overall, yeah I would certainly welcome improvements like this if
-everyone can agree, but I'd really like to see nvme merged before we
-start working on ideas. That way the proposal can be properly
-evaluated by all the stake holders.
-
-Jason
+Thanks
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
