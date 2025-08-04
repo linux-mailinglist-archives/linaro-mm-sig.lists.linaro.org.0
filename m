@@ -2,51 +2,53 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id F1293B1A27A
+	by mail.lfdr.de (Postfix) with ESMTPS id F308EB1A27B
 	for <lists+linaro-mm-sig@lfdr.de>; Mon,  4 Aug 2025 15:01:33 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DCE1E4402F
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  4 Aug 2025 13:01:15 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 4E5894402F
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  4 Aug 2025 13:00:57 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 653C244A01
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  4 Aug 2025 13:01:30 +0000 (UTC)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+	by lists.linaro.org (Postfix) with ESMTPS id EFA45443E0
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  4 Aug 2025 13:01:01 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b="snB5SB/e";
-	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=leon@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=s2heiyEq;
+	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 147.75.193.91 as permitted sender) smtp.mailfrom=leon@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id 79D6144916;
-	Mon,  4 Aug 2025 13:00:56 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B4D16C4CEE7;
-	Mon,  4 Aug 2025 13:00:55 +0000 (UTC)
+	by nyc.source.kernel.org (Postfix) with ESMTP id 63060A558C7;
+	Mon,  4 Aug 2025 13:01:01 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3FECEC4CEF7;
+	Mon,  4 Aug 2025 13:01:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1754312456;
-	bh=L+bDZNrpRD6+NWnAqrJEaGTijfdyb7IbO9utRG6Adzo=;
-	h=From:To:Cc:Subject:Date:From;
-	b=snB5SB/ehi27xLbb8aXhBb2ZiyhJ9e2m9WSnuYjDNUxyhSq9Re9sx8WnUosm/3yxL
-	 SN+3fMWL37eSzIUuNZEpqvSRbpU4PmQ9ZQZ/z/4VzZJKU+kN7HvBN/F1h/BSrkWO4H
-	 eehopP6+SZUepq07StYSJKXP/s6hK7iUlUNz/zLE1wzKs99j9fG2ZEivbECfeIUph9
-	 mrTs+HP3dr/zmRQ7l+QB7kp63HpOLpvFMfwujRo8eiMA/fuNXqD90jHbTmSImsSBka
-	 U9Vy29jyCkt6W0MVTKUgd+gmftF40ONXFbnqj01gMf7pyAukD8MzMoYkOvBk/LgfIf
-	 0LjjJU3m+NNxQ==
+	s=k20201202; t=1754312461;
+	bh=NGf1AYRJqA3TDpKjHdv56/eFxItdmJcxurU8Pl18z1c=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=s2heiyEqDcV3a7/Mlnc3aDnSnlB91n/iIZskVpJMq07doaJ4Y/+n8z6i9uQQ97TTI
+	 Jwn0N16sASMrrNaXjxejbTLPAT9lGF7/gcaarJFfI95wEN2Kz7h6p1b0JkTfrEfX1D
+	 VmbMlwmvB94SRPw2Xf00i3CbnZQu4DmD3LJOwOg2/BnEk/zOGMDtR/fPvAMB7TZrjt
+	 D2BZw3t3cwdHCfJg4yEMRZxnPlAGDpPyhGUZmjuuOELZDDsSP1Cj+D3TXKyV+f0pZ3
+	 MnJhHXzeBublwqXE+kDR1RxC/k4p4smIMvq4VeNTH7oDc1ta1AFC3kGqyk5VZsiQTO
+	 Ve6+Tt4c6rKlg==
 From: Leon Romanovsky <leon@kernel.org>
 To: Alex Williamson <alex.williamson@redhat.com>
-Date: Mon,  4 Aug 2025 16:00:35 +0300
-Message-ID: <cover.1754311439.git.leon@kernel.org>
+Date: Mon,  4 Aug 2025 16:00:36 +0300
+Message-ID: <c9b6237964b9606418af400bb6bec5178fcffff2.1754311439.git.leon@kernel.org>
 X-Mailer: git-send-email 2.50.1
+In-Reply-To: <cover.1754311439.git.leon@kernel.org>
+References: <cover.1754311439.git.leon@kernel.org>
 MIME-Version: 1.0
 X-Spamd-Result: default: False [-2.50 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	MID_CONTAINS_FROM(1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.252.31];
+	R_SPF_ALLOW(-0.20)[+ip4:147.75.193.91:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MIME_GOOD(-0.10)[text/plain];
-	RCPT_COUNT_TWELVE(0.00)[23];
+	RCPT_COUNT_TWELVE(0.00)[24];
 	ARC_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:15830, ipnet:147.75.193.0/24, country:NL];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
 	FROM_HAS_DN(0.00)[];
@@ -58,19 +60,19 @@ X-Spamd-Result: default: False [-2.50 / 15.00];
 	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 4E5894402F
+X-Rspamd-Queue-Id: EFA45443E0
 X-Spamd-Bar: --
-Message-ID-Hash: OUWD3FWLMTLG3VOIA5NK72O6ZL4NO3RD
-X-Message-ID-Hash: OUWD3FWLMTLG3VOIA5NK72O6ZL4NO3RD
+Message-ID-Hash: E6YDB2GYIUFYYHMYLBLKP4U3YUONFRPY
+X-Message-ID-Hash: E6YDB2GYIUFYYHMYLBLKP4U3YUONFRPY
 X-MailFrom: leon@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Jason Gunthorpe <jgg@nvidia.com>, Andrew Morton <akpm@linux-foundation.org>, Bjorn Helgaas <bhelgaas@google.com>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Christoph Hellwig <hch@lst.de>, dri-devel@lists.freedesktop.org, iommu@lists.linux.dev, Jens Axboe <axboe@kernel.dk>, Joerg Roedel <joro@8bytes.org>, kvm@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linux-mm@kvack.org, linux-pci@vger.kernel.org, Logan Gunthorpe <logang@deltatee.com>, Robin Murphy <robin.murphy@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, Vivek Kasireddy <vivek.kasireddy@intel.com>, Will Deacon <will@kernel.org>
+CC: Leon Romanovsky <leonro@nvidia.com>, Jason Gunthorpe <jgg@nvidia.com>, Andrew Morton <akpm@linux-foundation.org>, Bjorn Helgaas <bhelgaas@google.com>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Christoph Hellwig <hch@lst.de>, dri-devel@lists.freedesktop.org, iommu@lists.linux.dev, Jens Axboe <axboe@kernel.dk>, Joerg Roedel <joro@8bytes.org>, kvm@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linux-mm@kvack.org, linux-pci@vger.kernel.org, Logan Gunthorpe <logang@deltatee.com>, Robin Murphy <robin.murphy@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, Vivek Kasireddy <vivek.kasireddy@intel.com>, Will Deacon <will@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v1 00/10] vfio/pci: Allow MMIO regions to be exported through dma-buf
+Subject: [Linaro-mm-sig] [PATCH v1 01/10] PCI/P2PDMA: Remove redundant bus_offset from map state
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OUWD3FWLMTLG3VOIA5NK72O6ZL4NO3RD/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/E6YDB2GYIUFYYHMYLBLKP4U3YUONFRPY/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -80,97 +82,54 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Changelog:
-v1:
- * Changed commit messages.
- * Reused DMA_ATTR_MMIO attribute.
- * Returned support for multiple DMA ranges per-dMABUF.
-v0: https://lore.kernel.org/all/cover.1753274085.git.leonro@nvidia.com
+From: Leon Romanovsky <leonro@nvidia.com>
 
----------------------------------------------------------------------------
-Based on "[PATCH v1 00/16] dma-mapping: migrate to physical address-based API"
-https://lore.kernel.org/all/cover.1754292567.git.leon@kernel.org series.
----------------------------------------------------------------------------
+Remove the bus_off field from pci_p2pdma_map_state since it duplicates
+information already available in the pgmap structure. The bus_offset
+is only used in one location (pci_p2pdma_bus_addr_map) and is always
+identical to pgmap->bus_offset.
 
-This series extends the VFIO PCI subsystem to support exporting MMIO regions
-from PCI device BARs as dma-buf objects, enabling safe sharing of non-struct
-page memory with controlled lifetime management. This allows RDMA and other
-subsystems to import dma-buf FDs and build them into memory regions for PCI
-P2P operations.
+Reviewed-by: Christoph Hellwig <hch@lst.de>
+Signed-off-by: Jason Gunthorpe <jgg@nvidia.com>
+Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
+---
+ drivers/pci/p2pdma.c       | 1 -
+ include/linux/pci-p2pdma.h | 3 +--
+ 2 files changed, 1 insertion(+), 3 deletions(-)
 
-The series supports a use case for SPDK where a NVMe device will be owned
-by SPDK through VFIO but interacting with a RDMA device. The RDMA device
-may directly access the NVMe CMB or directly manipulate the NVMe device's
-doorbell using PCI P2P.
-
-However, as a general mechanism, it can support many other scenarios with
-VFIO. This dmabuf approach can be usable by iommufd as well for generic
-and safe P2P mappings.
-
-In addition to the SPDK use-case mentioned above, the capability added
-in this patch series can also be useful when a buffer (located in device
-memory such as VRAM) needs to be shared between any two dGPU devices or
-instances (assuming one of them is bound to VFIO PCI) as long as they
-are P2P DMA compatible.
-
-The implementation provides a revocable attachment mechanism using dma-buf
-move operations. MMIO regions are normally pinned as BARs don't change
-physical addresses, but access is revoked when the VFIO device is closed
-or a PCI reset is issued. This ensures kernel self-defense against
-potentially hostile userspace.
-
-The series includes significant refactoring of the PCI P2PDMA subsystem
-to separate core P2P functionality from memory allocation features,
-making it more modular and suitable for VFIO use cases that don't need
-struct page support.
-
------------------------------------------------------------------------
-The series is based originally on
-https://lore.kernel.org/all/20250307052248.405803-1-vivek.kasireddy@intel.com/
-but heavily rewritten to be based on DMA physical API.
------------------------------------------------------------------------
-The WIP branch can be found here:
-https://git.kernel.org/pub/scm/linux/kernel/git/leon/linux-rdma.git/log/?h=dmabuf-vfio-v1
-
-Thanks
-
-Leon Romanovsky (8):
-  PCI/P2PDMA: Remove redundant bus_offset from map state
-  PCI/P2PDMA: Separate the mmap() support from the core logic
-  PCI/P2PDMA: Simplify bus address mapping API
-  PCI/P2PDMA: Refactor to separate core P2P functionality from memory
-    allocation
-  PCI/P2PDMA: Export pci_p2pdma_map_type() function
-  types: move phys_vec definition to common header
-  vfio/pci: Enable peer-to-peer DMA transactions by default
-  vfio/pci: Add dma-buf export support for MMIO regions
-
-Vivek Kasireddy (2):
-  vfio: Export vfio device get and put registration helpers
-  vfio/pci: Share the core device pointer while invoking feature
-    functions
-
- block/blk-mq-dma.c                 |   7 +-
- drivers/iommu/dma-iommu.c          |   4 +-
- drivers/pci/p2pdma.c               | 154 ++++++++----
- drivers/vfio/pci/Kconfig           |  20 ++
- drivers/vfio/pci/Makefile          |   2 +
- drivers/vfio/pci/vfio_pci_config.c |  22 +-
- drivers/vfio/pci/vfio_pci_core.c   |  59 +++--
- drivers/vfio/pci/vfio_pci_dmabuf.c | 390 +++++++++++++++++++++++++++++
- drivers/vfio/pci/vfio_pci_priv.h   |  23 ++
- drivers/vfio/vfio_main.c           |   2 +
- include/linux/dma-buf.h            |   1 +
- include/linux/pci-p2pdma.h         | 114 +++++----
- include/linux/types.h              |   5 +
- include/linux/vfio.h               |   2 +
- include/linux/vfio_pci_core.h      |   4 +
- include/uapi/linux/vfio.h          |  25 ++
- kernel/dma/direct.c                |   4 +-
- mm/hmm.c                           |   2 +-
- 18 files changed, 715 insertions(+), 125 deletions(-)
- create mode 100644 drivers/vfio/pci/vfio_pci_dmabuf.c
-
+diff --git a/drivers/pci/p2pdma.c b/drivers/pci/p2pdma.c
+index da5657a020074..274bb7bcc0bc5 100644
+--- a/drivers/pci/p2pdma.c
++++ b/drivers/pci/p2pdma.c
+@@ -1009,7 +1009,6 @@ void __pci_p2pdma_update_state(struct pci_p2pdma_map_state *state,
+ {
+ 	state->pgmap = page_pgmap(page);
+ 	state->map = pci_p2pdma_map_type(state->pgmap, dev);
+-	state->bus_off = to_p2p_pgmap(state->pgmap)->bus_offset;
+ }
+ 
+ /**
+diff --git a/include/linux/pci-p2pdma.h b/include/linux/pci-p2pdma.h
+index 075c20b161d98..b502fc8b49bf9 100644
+--- a/include/linux/pci-p2pdma.h
++++ b/include/linux/pci-p2pdma.h
+@@ -146,7 +146,6 @@ enum pci_p2pdma_map_type {
+ struct pci_p2pdma_map_state {
+ 	struct dev_pagemap *pgmap;
+ 	enum pci_p2pdma_map_type map;
+-	u64 bus_off;
+ };
+ 
+ /* helper for pci_p2pdma_state(), do not use directly */
+@@ -186,7 +185,7 @@ static inline dma_addr_t
+ pci_p2pdma_bus_addr_map(struct pci_p2pdma_map_state *state, phys_addr_t paddr)
+ {
+ 	WARN_ON_ONCE(state->map != PCI_P2PDMA_MAP_BUS_ADDR);
+-	return paddr + state->bus_off;
++	return paddr + to_p2p_pgmap(state->pgmap)->bus_offsetf;
+ }
+ 
+ #endif /* _LINUX_PCI_P2P_H */
 -- 
 2.50.1
 
