@@ -2,127 +2,188 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B561B24322
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 Aug 2025 09:49:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 92963B2555F
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 Aug 2025 23:29:11 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 089463F6F9
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 Aug 2025 07:49:52 +0000 (UTC)
-Received: from mail-oo1-f53.google.com (mail-oo1-f53.google.com [209.85.161.53])
-	by lists.linaro.org (Postfix) with ESMTPS id 135EE3F6F9
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 13 Aug 2025 07:49:40 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id EE5D045D25
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 Aug 2025 21:29:09 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.17])
+	by lists.linaro.org (Postfix) with ESMTPS id A9DB74413E
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 13 Aug 2025 21:28:57 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=linaro.org header.s=google header.b=YCSpsYzo;
-	spf=pass (lists.linaro.org: domain of jens.wiklander@linaro.org designates 209.85.161.53 as permitted sender) smtp.mailfrom=jens.wiklander@linaro.org;
-	dmarc=pass (policy=none) header.from=linaro.org
-Received: by mail-oo1-f53.google.com with SMTP id 006d021491bc7-61bca43dbeaso97755eaf.3
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 13 Aug 2025 00:49:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1755071379; x=1755676179; darn=lists.linaro.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=wfeJn6OXLOSd2GklhvEK2KXBF/te/QhNlLJRLLpT6NU=;
-        b=YCSpsYzoJRXDeejabA48AvAEikcInKIMFJ0djtN3oW2Pc7YlAqx69KktlA52tInopL
-         v5+ZFT1wzaV4DMObJBCj1mb1T7m/LkXiet4CbgNEi57rjlXUGMcI91kbWkR/inQooWkH
-         zUsgWpA7SYtnNTW1arnGQRZ/PGDBMQ3Exm9lwanlbOkmPjuROlcqf8cwpu6xayhoL7WQ
-         Pv/uRq8kTSacY3hWN2rjd6Xspie6bX3OQCKwRP49G5qg/L27d5a7bEKx89c7aTr/eMtw
-         4gauHxiMKFpZUFk8aKmnN9ThZllj26opo2rHHBOqK0SjmNJFOTsbDd6Y2w9pVH8Y5RIq
-         SN7w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1755071379; x=1755676179;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=wfeJn6OXLOSd2GklhvEK2KXBF/te/QhNlLJRLLpT6NU=;
-        b=NBMAsLOhRm3XLC5vnZwtfC1SOCFMk1jyJ8AoS5w7hjbP3uttceUmU6qGndKrB2PliM
-         ZgmkRLpXwmsUCv+Dne/pEkI+tEDNmK8WIF6PcCjmNAO7IC5HWQ76Wid1JKfp7gH60JtF
-         V8HafcMMXAwgcmt+nbivIdc7rOvH9452mDu6ir5uL1aMBiXhC0qxtDlqeilwoDmHdwNt
-         M//Hkf7mXUq4tZ2VqBHB0ijbhihq8y3KYk3WgYdEp0iDivBFu5xIzwp/4rY1DJ43aHEY
-         v9lkNxnp7I7cSZrmTbgHiaHKeJ/V8eV7sxWoxJEeO7ht4C1dGJmuYiyKXCC3w0EUYS5R
-         zw8A==
-X-Forwarded-Encrypted: i=1; AJvYcCVJv1lTnz4jhv31mn+vtgPplG4LQDR42T18g4g52o9UcTIXF11SttMKrdezHcqktKcnciy7hy9pS4bZpDdQ@lists.linaro.org
-X-Gm-Message-State: AOJu0YyWU65tAISUc4Xyoriw1YhbynZcqDo6XewLN0QAz7YwmeqM4yAS
-	ewBawrMx6ti8ADuTUngcjU/wYPYtOhQ0KpvchoG0JKbYk8yypI548Z1UOcz4wiYJkZHIbE+O7E9
-	zBC6g7jzDaQZ9kcyzCW3GkoNWUniM33HlJ4mej0nrjzjz
-X-Gm-Gg: ASbGncvZhJuGN/HxCeIi3J4MhFac1d16DzkVieuengxh1mztives48CHgxv51yz2w91
-	Y3fs596GpcWzdSN3KlxDiPGkEb91V6wLO35TIn9g8Df6yfuK0eT8IcZ94xpCHrfBfUPIeNu13Bx
-	wMOrNB9jAMGP34V1DtrAmZwT7vrWYQhbP6mzSrdnogFp41hf6V8EbsbJNqk9Ht78hyPmwXaUObI
-	raqHmT0JC0BMyFwnVQ=
-X-Google-Smtp-Source: AGHT+IFAfPPXVnV/fIsv8KnI8b8Bl+IOsf+U5t0pmvRJM0gZ8xG3AukFt3DXdXVb9aF/gWZVqDSUuTyRuSP2uDtgU3s=
-X-Received: by 2002:a05:6820:1ac1:b0:619:a6c0:b4b with SMTP id
- 006d021491bc7-61bc758538amr1013523eaf.5.1755071379266; Wed, 13 Aug 2025
- 00:49:39 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250812-qcom-tee-using-tee-ss-without-mem-obj-v7-0-ce7a1a774803@oss.qualcomm.com>
-In-Reply-To: <20250812-qcom-tee-using-tee-ss-without-mem-obj-v7-0-ce7a1a774803@oss.qualcomm.com>
-From: Jens Wiklander <jens.wiklander@linaro.org>
-Date: Wed, 13 Aug 2025 09:49:27 +0200
-X-Gm-Features: Ac12FXyfvHrDtrackOzZC99WcBb71C_WC3_DT2d5Ppi_3YWKQtwtthH808vWulI
-Message-ID: <CAHUa44FJ9iRMyDHffRBwgxxX27vTwsAwNiCCEGQ8fMQPZS_D+g@mail.gmail.com>
+	dkim=pass header.d=intel.com header.s=Intel header.b=FZ0XlFa2;
+	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 192.198.163.17 as permitted sender) smtp.mailfrom=lkp@intel.com;
+	dmarc=pass (policy=none) header.from=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1755120538; x=1786656538;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=ofdvNgNJdkJbmwEfKc1AUQhG3hnc8SN1vSgvqxoKNRM=;
+  b=FZ0XlFa24TOob0M8jYRbC1LdDoM5YO8PWh4TVb09N3FDgvOy4NkWSoJc
+   6Nt+PjbhzIbd1mNgkS+Zvo5b459TEPAYOpLSmQF+vmdyMHVs5Cb34FMpe
+   ISxzl0m6UobCbx6/g3mw/pDQb9DKwGME4zKbQLsxk/Myfflbl6ywF36Ij
+   yKzIRBwNdW6ponM+dFSfbGvJsiShfKN7v72rgndWm327d+wBDldc2YM4s
+   m90Z+hkONCOcFst2ngrZLWtEJie/zwcvy2sX2FS8bGziRrGQSupdDxyJv
+   Dtp3/dZhNne/2hIdqLyXUalH6r5yqfu1eIOsWjNhcgyL1XFiesufE1+C5
+   Q==;
+X-CSE-ConnectionGUID: 3Pp33vilQFqbEj9ZmpLBqQ==
+X-CSE-MsgGUID: pOuei+ejRIyrF6Wp8nhnRA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11520"; a="57351322"
+X-IronPort-AV: E=Sophos;i="6.17,287,1747724400";
+   d="scan'208";a="57351322"
+Received: from orviesa010.jf.intel.com ([10.64.159.150])
+  by fmvoesa111.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Aug 2025 14:28:57 -0700
+X-CSE-ConnectionGUID: NnWqMrE8TtWi2BeCREw8Ug==
+X-CSE-MsgGUID: tloz5Ue9QdSbrGoa8xCmwg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.17,287,1747724400";
+   d="scan'208";a="165807755"
+Received: from lkp-server02.sh.intel.com (HELO 4ea60e6ab079) ([10.239.97.151])
+  by orviesa010.jf.intel.com with ESMTP; 13 Aug 2025 14:28:52 -0700
+Received: from kbuild by 4ea60e6ab079 with local (Exim 4.96)
+	(envelope-from <lkp@intel.com>)
+	id 1umJ1d-000AKg-0i;
+	Wed, 13 Aug 2025 21:28:49 +0000
+Date: Thu, 14 Aug 2025 05:28:10 +0800
+From: kernel test robot <lkp@intel.com>
 To: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
-	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>
-X-Spamd-Result: default: False [-3.97 / 15.00];
-	BAYES_HAM(-2.87)[99.46%];
-	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
-	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	Jens Wiklander <jens.wiklander@linaro.org>,
+	Sumit Garg <sumit.garg@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>,
+	Apurupa Pattapu <quic_apurupa@quicinc.com>,
+	Kees Cook <kees@kernel.org>,
+	"Gustavo A. R. Silva" <gustavoars@kernel.org>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
+Message-ID: <202508140527.ighXikjo-lkp@intel.com>
+References: <20250812-qcom-tee-using-tee-ss-without-mem-obj-v7-8-ce7a1a774803@oss.qualcomm.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20250812-qcom-tee-using-tee-ss-without-mem-obj-v7-8-ce7a1a774803@oss.qualcomm.com>
+X-Spamd-Result: default: False [-6.00 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
+	BAYES_HAM(-3.00)[100.00%];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:192.198.163.0/26];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MIME_GOOD(-0.10)[text/plain];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.161.53:from];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[20];
 	ARC_NA(0.00)[];
-	RCVD_COUNT_ONE(0.00)[1];
-	NEURAL_HAM(-0.00)[-1.000];
 	MISSING_XM_UA(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[22];
+	MIME_TRACE(0.00)[0:+];
+	ASN(0.00)[asn:4983, ipnet:192.198.162.0/23, country:US];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_COUNT_THREE(0.00)[3];
 	FROM_HAS_DN(0.00)[];
-	DWL_DNSWL_BLOCKED(0.00)[linaro.org:dkim];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	DNSWL_BLOCKED(0.00)[209.85.161.53:from];
+	TO_DN_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[linaro.org:+]
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	DKIM_TRACE(0.00)[intel.com:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 135EE3F6F9
-X-Spamd-Bar: ---
-Message-ID-Hash: MAK36SX6OK74VASOYGZWWWN2GTMH62PA
-X-Message-ID-Hash: MAK36SX6OK74VASOYGZWWWN2GTMH62PA
-X-MailFrom: jens.wiklander@linaro.org
+X-Rspamd-Queue-Id: A9DB74413E
+X-Spamd-Bar: ------
+Message-ID-Hash: 4OC74MJCFJBPB4SDXLSQCV6VZ3TNEXK7
+X-Message-ID-Hash: 4OC74MJCFJBPB4SDXLSQCV6VZ3TNEXK7
+X-MailFrom: lkp@intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Sumit Garg <sumit.garg@kernel.org>, Bartosz Golaszewski <bartosz.golaszewski@linaro.org>, Apurupa Pattapu <quic_apurupa@quicinc.com>, Kees Cook <kees@kernel.org>, "Gustavo A. R. Silva" <gustavoars@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Harshal Dev <quic_hdev@quicinc.com>, linux-arm-msm@vger.kernel.org, op-tee@lists.trustedfirmware.org, linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org, Sumit Garg <sumit.garg@oss.qualcomm.com>, Neil Armstrong <neil.armstrong@linaro.org>
+CC: oe-kbuild-all@lists.linux.dev, Harshal Dev <quic_hdev@quicinc.com>, linux-arm-msm@vger.kernel.org, op-tee@lists.trustedfirmware.org, linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org, Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>, Neil Armstrong <neil.armstrong@linaro.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v7 00/11] Trusted Execution Environment (TEE) driver for Qualcomm TEE (QTEE)
+Subject: [Linaro-mm-sig] Re: [PATCH v7 08/11] tee: add Qualcomm TEE driver
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MAK36SX6OK74VASOYGZWWWN2GTMH62PA/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4OC74MJCFJBPB4SDXLSQCV6VZ3TNEXK7/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-SGkgQW1pciwNCg0KT24gV2VkLCBBdWcgMTMsIDIwMjUgYXQgMjozN+KAr0FNIEFtaXJyZXphIFph
-cnJhYmkNCjxhbWlycmV6YS56YXJyYWJpQG9zcy5xdWFsY29tbS5jb20+IHdyb3RlOg0KPg0KPiBU
-aGlzIHBhdGNoIHNlcmllcyBpbnRyb2R1Y2VzIGEgVHJ1c3RlZCBFeGVjdXRpb24gRW52aXJvbm1l
-bnQgKFRFRSkNCj4gZHJpdmVyIGZvciBRdWFsY29tbSBURUUgKFFURUUpLiBRVEVFIGVuYWJsZXMg
-VHJ1c3RlZCBBcHBsaWNhdGlvbnMgKFRBcykNCj4gYW5kIHNlcnZpY2VzIHRvIHJ1biBzZWN1cmVs
-eS4gSXQgdXNlcyBhbiBvYmplY3QtYmFzZWQgaW50ZXJmYWNlLCB3aGVyZQ0KPiBlYWNoIHNlcnZp
-Y2UgaXMgYW4gb2JqZWN0IHdpdGggc2V0cyBvZiBvcGVyYXRpb25zLiBDbGllbnRzIGNhbiBpbnZv
-a2UNCj4gdGhlc2Ugb3BlcmF0aW9ucyBvbiBvYmplY3RzLCB3aGljaCBjYW4gZ2VuZXJhdGUgcmVz
-dWx0cywgaW5jbHVkaW5nIG90aGVyDQo+IG9iamVjdHMuIEZvciBleGFtcGxlLCBhbiBvYmplY3Qg
-Y2FuIGxvYWQgYSBUQSBhbmQgcmV0dXJuIGFub3RoZXIgb2JqZWN0DQo+IHRoYXQgcmVwcmVzZW50
-cyB0aGUgbG9hZGVkIFRBLCBhbGxvd2luZyBhY2Nlc3MgdG8gaXRzIHNlcnZpY2VzLg0KPg0KDQpU
-aGVyZSBhcmUgc29tZSBidWlsZCBlcnJvcnMvd2FybmluZ3MgZm9yIGFybSBhbmQgeDg2XzY0LCBz
-ZWUNCmh0dHBzOi8vdHV4YXBpLnR1eHN1aXRlLmNvbS92MS9ncm91cHMvbGluYXJvL3Byb2plY3Rz
-L2plbnMvcGxhbnMvMzFEbUNPbjFwRjJKR1ZEazNvdEJPWE9MNmtWDQoNClRoYW5rcywNCkplbnMN
-Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1t
-bS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1
-bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGlu
-YXJvLm9yZwo=
+Hi Amirreza,
+
+kernel test robot noticed the following build warnings:
+
+[auto build test WARNING on 2674d1eadaa2fd3a918dfcdb6d0bb49efe8a8bb9]
+
+url:    https://github.com/intel-lab-lkp/linux/commits/Amirreza-Zarrabi/tee-allow-a-driver-to-allocate-a-tee_device-without-a-pool/20250813-084152
+base:   2674d1eadaa2fd3a918dfcdb6d0bb49efe8a8bb9
+patch link:    https://lore.kernel.org/r/20250812-qcom-tee-using-tee-ss-without-mem-obj-v7-8-ce7a1a774803%40oss.qualcomm.com
+patch subject: [PATCH v7 08/11] tee: add Qualcomm TEE driver
+config: hexagon-randconfig-r072-20250814 (https://download.01.org/0day-ci/archive/20250814/202508140527.ighXikjo-lkp@intel.com/config)
+compiler: clang version 22.0.0git (https://github.com/llvm/llvm-project 3769ce013be2879bf0b329c14a16f5cb766f26ce)
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20250814/202508140527.ighXikjo-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202508140527.ighXikjo-lkp@intel.com/
+
+All warnings (new ones prefixed by >>):
+
+>> drivers/tee/qcomtee/user_obj.c:384:12: warning: format specifies type 'unsigned long' but the argument has type 'u64' (aka 'unsigned long long') [-Wformat]
+     383 |                                        &qcomtee_user_object_ops, "uo-%lu",
+         |                                                                      ~~~
+         |                                                                      %llu
+     384 |                                        param->u.objref.id);
+         |                                        ^~~~~~~~~~~~~~~~~~
+   1 warning generated.
+
+
+vim +384 drivers/tee/qcomtee/user_obj.c
+
+   355	
+   356	/**
+   357	 * qcomtee_user_param_to_object() - OBJREF parameter to &struct qcomtee_object.
+   358	 * @object: object returned.
+   359	 * @param: TEE parameter.
+   360	 * @ctx: context in which the conversion should happen.
+   361	 *
+   362	 * @param is an OBJREF with %QCOMTEE_OBJREF_FLAG_USER flags.
+   363	 *
+   364	 * Return: On success, returns 0; on failure, returns < 0.
+   365	 */
+   366	int qcomtee_user_param_to_object(struct qcomtee_object **object,
+   367					 struct tee_param *param,
+   368					 struct tee_context *ctx)
+   369	{
+   370		struct qcomtee_user_object *user_object __free(kfree) = NULL;
+   371		int err;
+   372	
+   373		user_object = kzalloc(sizeof(*user_object), GFP_KERNEL);
+   374		if (!user_object)
+   375			return -ENOMEM;
+   376	
+   377		user_object->ctx = ctx;
+   378		user_object->object_id = param->u.objref.id;
+   379		/* By default, always notify userspace upon release. */
+   380		user_object->notify = true;
+   381		err = qcomtee_object_user_init(&user_object->object,
+   382					       QCOMTEE_OBJECT_TYPE_CB,
+   383					       &qcomtee_user_object_ops, "uo-%lu",
+ > 384					       param->u.objref.id);
+   385		if (err)
+   386			return err;
+   387		/* Matching teedev_ctx_put() is in qcomtee_user_object_release(). */
+   388		teedev_ctx_get(ctx);
+   389	
+   390		*object = &no_free_ptr(user_object)->object;
+   391	
+   392		return 0;
+   393	}
+   394	
+
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
