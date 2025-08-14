@@ -2,241 +2,146 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id C0D72B26C51
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 14 Aug 2025 18:17:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0E011B27303
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 15 Aug 2025 01:30:56 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 667BA45D90
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 14 Aug 2025 16:17:41 +0000 (UTC)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
-	by lists.linaro.org (Postfix) with ESMTPS id 0E7F8458E6
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 14 Aug 2025 16:17:20 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C7F8745D27
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 14 Aug 2025 23:30:54 +0000 (UTC)
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+	by lists.linaro.org (Postfix) with ESMTPS id 5E97743C14
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 14 Aug 2025 23:30:43 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=pio9G6wb;
-	spf=pass (lists.linaro.org: domain of robh@kernel.org designates 147.75.193.91 as permitted sender) smtp.mailfrom=robh@kernel.org;
-	dmarc=pass (policy=quarantine) header.from=kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by nyc.source.kernel.org (Postfix) with ESMTP id CC345A56E9F;
-	Thu, 14 Aug 2025 16:17:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 537E7C4CEED;
-	Thu, 14 Aug 2025 16:17:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1755188239;
-	bh=t1D6JoRLNosJcvcAajcvRlnrHWGxzsuS/lzNJzOW0hI=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=pio9G6wbquRvNu83KBNo2X4ztLrxi/r01Yra2kDpuajo7CBkUHYYdvK4faGGh0HAb
-	 rjx5Jgv7eKKlNVHsDBdwh6KVPR/H86dc/0jE4Ulqbyw2S9fQgN/GnAbwPsbeyMyOwh
-	 Chfx2v5gw69odeDgxyQhKNpeonaJFTYVzkOrmTP0ZtQraFQBTrcxusI+woyhb3Mu2X
-	 KOQEiRaxdyE0Vkl5ywCpafmAZVj8+ZlCmDK2W9tI8bja1kwi6xsM2NdYTCv+aZ8bva
-	 3+GYCvPHocaHi8HN9R6QSONg6DmD7PBKMBCGQ+nBxRsAEyuM6T6HEnlxupBmmEUjU1
-	 sRjtoDvFgxQow==
-Date: Thu, 14 Aug 2025 11:17:18 -0500
-From: Rob Herring <robh@kernel.org>
-To: Daniel Stone <daniel@fooishbar.org>
-Message-ID: <20250814161718.GA3117411-robh@kernel.org>
-References: <20250811-ethos-v2-0-a219fc52a95b@kernel.org>
- <20250811-ethos-v2-2-a219fc52a95b@kernel.org>
- <CAPj87rNG8gT-Wk+rQnFMsbCBqX6pL=qZY--_5=Z4XchLNsM5Ng@mail.gmail.com>
- <CAPj87rNDPQqTqj1LAdFYmd4Y12UHXWi5+65i0RepkcOX3wvEyA@mail.gmail.com>
+	dkim=pass header.d=google.com header.s=20230601 header.b=G7cciMO3;
+	spf=pass (lists.linaro.org: domain of tjmercier@google.com designates 209.85.128.52 as permitted sender) smtp.mailfrom=tjmercier@google.com;
+	dmarc=pass (policy=reject) header.from=google.com
+Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-459fbca0c95so29625e9.0
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 14 Aug 2025 16:30:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1755214242; x=1755819042; darn=lists.linaro.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=a0JmiFdlp9ZkN1fxeZfgjKK4+EMYxMKsgyQh0URM5ec=;
+        b=G7cciMO3td88SWtty0XT5lDx5QpL7nyjoRyJor/gY/Mv8ilwO2vrWuQ7QYA9aNxhgH
+         LJWZp7mUHF7lUZ6qN4GpZ/NcMluwzILhOc3yB5lBEXaDT2ni/aaJKc4S/q3Q4ZiypIPO
+         gQSfEuGoshnURJclwr5BuDQv/rb27rNFm1HtfCGuO0VzCmgBT4HbeER/A4i4Ng2N8Uv7
+         bVo8Ev6Mw0mOxqN9iHaEz/z1jD1c7nvh9eZirhFPa4vMTogOBQS3bqDw7I+5AXb1/w7Y
+         y3QJ6FKZpQ+mO5xwsnR8H8DBLX3hCh2X5osMDKkphqhgeR3l3YwZKIkYLDotX0oOlay4
+         N6sg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1755214242; x=1755819042;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=a0JmiFdlp9ZkN1fxeZfgjKK4+EMYxMKsgyQh0URM5ec=;
+        b=CaqLn2PZczDDxR6O6uCW6n1vXLA/iRwYwpyidBaqqFoqUz8Qi5S0bcpKj73ZS1Ejai
+         thIxpRQk+qs3JV7sMKCrKzHuCfxbEinRQ/g9pbjWox26pqOIU8Xwb9Mcx0IeEKZNQePb
+         x+LdiY2zfURS+veAn3cGH5o94zMVWrKGPHVbdPD/NkayzLRvbwugXnSGCIKLAx9CsFI7
+         se9PCddWW7CvB+g8Lk8wmtqySlrmt0U+wCe4+BTZ4pu6UC6FGtioMhoqG8RlcdSrkUJh
+         wo8x9d8mN3QterTcLJ0W1ghJpDJLu181mPg8lm3/tyFxSX5Efb81GXSWCtgIJLuK2LfE
+         UVwA==
+X-Forwarded-Encrypted: i=1; AJvYcCUzz5GRwOb5mJXO0UQZH/AOUZGn5Jupa5GLDRMN5WgLV+KsEZdy8oLirHwE5qwSALMuDhdC2GRmSX1pqjDK@lists.linaro.org
+X-Gm-Message-State: AOJu0Yy7CvzlL/m0bfhTwR0Y8bh1MLKeyKVivNPHWPymWKKDnDNsExSu
+	jyNJAOzfAYzJLVb2i6OeAVvXoc+6ZoGuOskfymVPiu/sqgKblAyyeX9AzhFFTGddAZlRxGhnt9R
+	KyacvPJ/qtQnzm1uupYK8Kvp/pxuyCKcAq71YvYTA
+X-Gm-Gg: ASbGncubukLNYjwtzpFtIIthtFI1Jx6zzWUflIJoiPf+E5peph+/8CrHvoEj8VrZO5A
+	rEVzu+feMvdcJqKa8U9CyG5rl1mQR4ORUl8t7/PMorseBztrreyWw5MOJlml1nmiVjEKqZNilnd
+	fQmzsAWljCdXnXwvflONxOTc9bKVdCOGcE1z7KInpoT+pGX5dSL+OsDhaKGXIRIWiCz/syXjtBr
+	h6Hz3htC6oCIfiOkwLczdJ9eKbJAXTJ60nf7fhPq0A=
+X-Google-Smtp-Source: AGHT+IEEw+uzXS2i8WjnVSg7+M8YgE/PH0qtNvR3RZRshlFOrW4DkRzKM58Y1imbSzgGPptKIKq3mUjkWcuT38ZrZFk=
+X-Received: by 2002:a05:600c:8909:b0:453:5ffb:e007 with SMTP id
+ 5b1f17b1804b1-45a20af818amr346105e9.4.1755214242237; Thu, 14 Aug 2025
+ 16:30:42 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAPj87rNDPQqTqj1LAdFYmd4Y12UHXWi5+65i0RepkcOX3wvEyA@mail.gmail.com>
-X-Spamd-Result: default: False [-1.50 / 15.00];
+References: <20250813060339.2977604-1-jens.wiklander@linaro.org>
+ <20250813060339.2977604-3-jens.wiklander@linaro.org> <aJ1-YpgvGt4_6CFU@sumit-X1>
+In-Reply-To: <aJ1-YpgvGt4_6CFU@sumit-X1>
+From: "T.J. Mercier" <tjmercier@google.com>
+Date: Thu, 14 Aug 2025 16:30:30 -0700
+X-Gm-Features: Ac12FXzYk8vQFwHlmYOx6GVXgELj4N91iOPnVrtkJq0EeS5aTQuf7I4LnzwBN-c
+Message-ID: <CABdmKX2FPg+hO55qWndMajuWP0kZH=OWEh9v-d8aO6HQWyxJtQ@mail.gmail.com>
+To: Sumit Garg <sumit.garg@kernel.org>
+X-Spamd-Result: default: False [-2.50 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:147.75.193.91];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20230601];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	MIME_GOOD(-0.10)[text/plain];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.52:from];
 	ARC_NA(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	ASN(0.00)[asn:15830, ipnet:147.75.193.0/24, country:NL];
-	RCPT_COUNT_TWELVE(0.00)[19];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_RCPT(0.00)[dt];
-	DWL_DNSWL_BLOCKED(0.00)[kernel.org:dkim];
+	RCVD_COUNT_ONE(0.00)[1];
+	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[24];
+	TAGGED_RCPT(0.00)[];
+	DWL_DNSWL_BLOCKED(0.00)[google.com:dkim];
 	NEURAL_HAM(-0.00)[-1.000];
 	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[tomeuvizoso.net,kernel.org,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,arm.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
-	RCVD_IN_DNSWL_NONE(0.00)[147.75.193.91:from];
+	FREEMAIL_CC(0.00)[linaro.org,amd.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.trustedfirmware.org,lists.infradead.org,nxp.com,gmail.com,mediatek.com,collabora.com,arm.com,google.com,qti.qualcomm.com,ffwll.ch,fooishbar.org,oss.qualcomm.com];
+	MISSING_XM_UA(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+]
+	DKIM_TRACE(0.00)[google.com:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 0E7F8458E6
-X-Spamd-Bar: -
-Message-ID-Hash: VXTKOUMULPGVJI7FXMZKAZ4MKIEFNYUW
-X-Message-ID-Hash: VXTKOUMULPGVJI7FXMZKAZ4MKIEFNYUW
-X-MailFrom: robh@kernel.org
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Tomeu Vizoso <tomeu@tomeuvizoso.net>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Oded Gabbay <ogabbay@kernel.org>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Robin Murphy <robin.murphy@arm.com>, Steven Price <steven.price@arm.com>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+X-Rspamd-Queue-Id: 5E97743C14
+X-Spamd-Bar: --
+Message-ID-Hash: ON5OTTKGYJZVP5FFLC4ZUBCRWBQBKBOX
+X-Message-ID-Hash: ON5OTTKGYJZVP5FFLC4ZUBCRWBQBKBOX
+X-MailFrom: tjmercier@google.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: Jens Wiklander <jens.wiklander@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Sumit Semwal <sumit.semwal@linaro.org>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, op-tee@lists.trustedfirmware.org, linux-arm-kernel@lists.infradead.org, Olivier Masse <olivier.masse@nxp.com>, Thierry Reding <thierry.reding@gmail.com>, Yong Wu <yong.wu@mediatek.com>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, Matthias Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, azarrabi@qti.qualcomm.com, Simona Vetter <simona.vetter@ffwll.ch>, Daniel Stone <daniel@fooishbar.org>, Rouven Czerwinski <rouven.czerwinski@linaro.org>, robin.murphy@arm.com, Sumit Garg <sumit.garg@oss.qualcomm.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 2/2] accel: Add Arm Ethos-U NPU driver
+Subject: [Linaro-mm-sig] Re: [PATCH v11 2/9] dma-buf: dma-heap: export declared functions
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VXTKOUMULPGVJI7FXMZKAZ4MKIEFNYUW/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ON5OTTKGYJZVP5FFLC4ZUBCRWBQBKBOX/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Thu, Aug 14, 2025 at 11:51:44AM +0100, Daniel Stone wrote:
-> Hi Rob,
-
-Thanks for the review.
-
-> 
-> On Tue, 12 Aug 2025 at 13:53, Daniel Stone <daniel@fooishbar.org> wrote:
-> > On Mon, 11 Aug 2025 at 22:05, Rob Herring (Arm) <robh@kernel.org> wrote:
-> > > +static int ethos_ioctl_submit_job(struct drm_device *dev, struct drm_file *file,
-> > > +                                  struct drm_ethos_job *job)
-> > > +{
-> > > +       [...]
-> > > +       ejob->cmd_bo = drm_gem_object_lookup(file, job->cmd_bo);
-> > > +       cmd_info = to_ethos_bo(ejob->cmd_bo)->info;
-> > > +       if (!ejob->cmd_bo)
-> > > +               goto out_cleanup_job;
-> >
-> > NULL deref here if this points to a non-command BO. Which is better
-> > than wild DMA, but hey.
-> 
-> Sorry this wasn't more clear. There are two NULL derefs here. If you
-> pass an invalid BO, ejob->cmd_bo is dereferenced before the NULL
-> check, effectively neutering it and winning you a mail from the other
-> Dan when he runs sparse on it. Secondly you pass a BO which is valid
-> but not a command BO, cmd_info gets unconditionally dereferenced so it
-> will fall apart there too.
-
-Yep. And there's a 3rd issue that I'm not setting 'ret' to an error 
-value.
-
-> 
-> > > +       for (int i = 0; i < NPU_BASEP_REGION_MAX; i++) {
-> > > +               struct drm_gem_object *gem;
-> > > +
-> > > +               if (job->region_bo_handles[i] == 0)
-> > > +                       continue;
-> > > +
-> > > +               /* Don't allow a region to point to the cmd BO */
-> > > +               if (job->region_bo_handles[i] == job->cmd_bo) {
-> > > +                       ret = -EINVAL;
-> > > +                       goto out_cleanup_job;
-> > > +               }
-> >
-> > And here I suppose you want to check if the BO's info pointer is
-> > non-NULL, i.e. disallow use of _any_ command BO instead of only
-> > disallowing this job's own command BO.
-> 
-> This is the main security issue, since it would allow writes a
-> cmdstream BO which has been created but is not _the_ cmdstream BO for
-> this job. Fixing that is pretty straightforward, but given that
-> someone will almost certainly try to add dmabuf support to this
-> driver, it's also probably worth a comment in the driver flags telling
-> anyone who tries to add DRIVER_PRIME that they need to disallow export
-> of cmdbuf BOs.
-
-What would be the usecase for exporting BOs here?
-
-I suppose if one wants to feed in camera data and we need to do the 
-allocation in the ethos driver since it likely has more constraints 
-(i.e. must be contiguous). (Whatever happened on the universal allocator 
-or constraint solver? I haven't been paying attention for a while...)
-
-> Relatedly, I think there's missing validity checks around the regions.
-> AFAICT it would be possible to do wild memory access:
-> * create a cmdstream BO which accesses one region
-> * submit a job using that cmdstream with one data BO correctly
-> attached to the region, execute the job and wait for completion
-> * free the data BO
-> * resubmit that job but declare zero BO handles
-> 
-> The first issue is that the job will be accepted by the processing
-> ioctl, because it doesn't check that all the regions specified by the
-> cmdstream are properly filled in by the job, which is definitely one
-> to fix for validation. The second issue is that region registers are
-> not cleared in any way, so in the above example, the second job will
-> reuse the region configuration from the first. I'm not sure if
-> clearing out unused job fields would be helpful defence in depth or
-> not; your call.
-
-I had considered clearing unused the region registers. That really has 
-little effect. There's not any way to disable regions. And region 
-offsets are a full 64-bits, so even if one set base address to 0 or some 
-faulting region, a cmdstream can still get to any address.
-
-The other issue is just whether there's leftover cmdstream state from 
-prior jobs. That's why the cmd_info is initialized to all 1s so that the 
-cmdstream has to setup all the state.
-
-> > (There's also a NULL deref if an invalid GEM handle is specified.)
-> 
-> This one is similar to the first; drm_gem_object_lookup() return isn't
-> checked so it gets dereferenced unconditionally.
-
-Here's the reworked (but not yet tested) code which I think should solve 
-all of the above issues. There was also an issue with the cleanup path 
-that we wouldn't do a put on the last BO if there was a size error. We 
-just need to set ejob->region_bo[ejob->region_cnt] and increment 
-region_cnt before any checks.
-
-	ejob->cmd_bo = drm_gem_object_lookup(file, job->cmd_bo);
-	if (!ejob->cmd_bo) {
-		ret = -ENOENT;
-		goto out_cleanup_job;
-	}
-	cmd_info = to_ethos_bo(ejob->cmd_bo)->info;
-	if (!cmd_info) {
-		ret = -EINVAL;
-		goto out_cleanup_job;
-	}
-
-	for (int i = 0; i < NPU_BASEP_REGION_MAX; i++) {
-		struct drm_gem_object *gem;
-
-		/* Can only omit a BO handle if the region is not used or used for SRAM */
-		if (!job->region_bo_handles[i] &&
-		    (!cmd_info->region_size[i] || (i == ETHOS_SRAM_REGION && job->sram_size)))
-			continue;
-
-		gem = drm_gem_object_lookup(file, job->region_bo_handles[i]);
-		if (!gem) {
-			dev_err(dev->dev,
-				"Invalid BO handle %d for region %d\n",
-				job->region_bo_handles[i], i);
-			ret = -ENOENT;
-			goto out_cleanup_job;
-		}
-
-		ejob->region_bo[ejob->region_cnt] = gem;
-		ejob->region_bo_num[ejob->region_cnt] = i;
-		ejob->region_cnt++;
-
-		if (to_ethos_bo(gem)->info) {
-			dev_err(dev->dev,
-				"Cmdstream BO handle %d used for region %d\n",
-				job->region_bo_handles[i], i);
-			ret = -EINVAL;
-			goto out_cleanup_job;
-		}
-
-		/* Verify the command stream doesn't have accesses outside the BO */
-		if (cmd_info->region_size[i] > gem->size) {
-			dev_err(dev->dev,
-				"cmd stream region %d size greater than BO size (%llu > %zu)\n",
-				i, cmd_info->region_size[i], gem->size);
-			ret = -EOVERFLOW;
-			goto out_cleanup_job;
-		}
-	}
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gV2VkLCBBdWcgMTMsIDIwMjUgYXQgMTE6MTPigK9QTSBTdW1pdCBHYXJnIDxzdW1pdC5nYXJn
+QGtlcm5lbC5vcmc+IHdyb3RlOg0KPg0KPiBPbiBXZWQsIEF1ZyAxMywgMjAyNSBhdCAwODowMjo1
+MUFNICswMjAwLCBKZW5zIFdpa2xhbmRlciB3cm90ZToNCj4gPiBFeHBvcnQgdGhlIGRtYS1idWYg
+aGVhcCBmdW5jdGlvbnMgdG8gYWxsb3cgdGhlbSB0byBiZSB1c2VkIGJ5IHRoZSBPUC1URUUNCj4g
+PiBkcml2ZXIuIFRoZSBPUC1URUUgZHJpdmVyIHdhbnRzIHRvIHJlZ2lzdGVyIGFuZCBtYW5hZ2Ug
+c3BlY2lmaWMgc2VjdXJlDQo+ID4gRE1BIGhlYXBzIHdpdGggaXQuDQo+ID4NCj4gPiBTaWduZWQt
+b2ZmLWJ5OiBKZW5zIFdpa2xhbmRlciA8amVucy53aWtsYW5kZXJAbGluYXJvLm9yZz4NCj4gPiBS
+ZXZpZXdlZC1ieTogU3VtaXQgR2FyZyA8c3VtaXQuZ2FyZ0Bvc3MucXVhbGNvbW0uY29tPg0KPiA+
+IC0tLQ0KPiA+ICBkcml2ZXJzL2RtYS1idWYvZG1hLWhlYXAuYyB8IDMgKysrDQo+ID4gIDEgZmls
+ZSBjaGFuZ2VkLCAzIGluc2VydGlvbnMoKykNCj4gPg0KPg0KPiBDYW4gd2UgZ2V0IGFuIGFjayBm
+cm9tIERNQWJ1ZiBtYWludGFpbmVycyBoZXJlPyBXaXRoIHRoYXQgd2Ugc2hvdWxkIGJlDQo+IGFi
+bGUgdG8gcXVldWUgdGhpcyBwYXRjaC1zZXQgZm9yIGxpbnV4LW5leHQgdGFyZ2V0dGluZyB0aGUg
+Ni4xOCBtZXJnZQ0KPiB3aW5kb3cuDQo+DQo+IC1TdW1pdA0KDQpSZXZpZXdlZC1ieTogVC5KLiBN
+ZXJjaWVyIDx0am1lcmNpZXJAZ29vZ2xlLmNvbT4NCg0KU29ycnkgSSBoYXZlbid0IGJlZW4gYWJs
+ZSB0byBwYXJ0aWNpcGF0ZSBtdWNoIHVwc3RyZWFtIGxhdGVseS4NCj4NCj4gPiBkaWZmIC0tZ2l0
+IGEvZHJpdmVycy9kbWEtYnVmL2RtYS1oZWFwLmMgYi9kcml2ZXJzL2RtYS1idWYvZG1hLWhlYXAu
+Yw0KPiA+IGluZGV4IDNjYmU4N2Q0YTQ2NC4uY2RkZGYwZTI0ZGNlIDEwMDY0NA0KPiA+IC0tLSBh
+L2RyaXZlcnMvZG1hLWJ1Zi9kbWEtaGVhcC5jDQo+ID4gKysrIGIvZHJpdmVycy9kbWEtYnVmL2Rt
+YS1oZWFwLmMNCj4gPiBAQCAtMjAyLDYgKzIwMiw3IEBAIHZvaWQgKmRtYV9oZWFwX2dldF9kcnZk
+YXRhKHN0cnVjdCBkbWFfaGVhcCAqaGVhcCkNCj4gPiAgew0KPiA+ICAgICAgIHJldHVybiBoZWFw
+LT5wcml2Ow0KPiA+ICB9DQo+ID4gK0VYUE9SVF9TWU1CT0woZG1hX2hlYXBfZ2V0X2RydmRhdGEp
+Ow0KPiA+DQo+ID4gIC8qKg0KPiA+ICAgKiBkbWFfaGVhcF9nZXRfbmFtZSAtIGdldCBoZWFwIG5h
+bWUNCj4gPiBAQCAtMjE0LDYgKzIxNSw3IEBAIGNvbnN0IGNoYXIgKmRtYV9oZWFwX2dldF9uYW1l
+KHN0cnVjdCBkbWFfaGVhcCAqaGVhcCkNCj4gPiAgew0KPiA+ICAgICAgIHJldHVybiBoZWFwLT5u
+YW1lOw0KPiA+ICB9DQo+ID4gK0VYUE9SVF9TWU1CT0woZG1hX2hlYXBfZ2V0X25hbWUpOw0KPiA+
+DQo+ID4gIC8qKg0KPiA+ICAgKiBkbWFfaGVhcF9hZGQgLSBhZGRzIGEgaGVhcCB0byBkbWFidWYg
+aGVhcHMNCj4gPiBAQCAtMzAzLDYgKzMwNSw3IEBAIHN0cnVjdCBkbWFfaGVhcCAqZG1hX2hlYXBf
+YWRkKGNvbnN0IHN0cnVjdCBkbWFfaGVhcF9leHBvcnRfaW5mbyAqZXhwX2luZm8pDQo+ID4gICAg
+ICAga2ZyZWUoaGVhcCk7DQo+ID4gICAgICAgcmV0dXJuIGVycl9yZXQ7DQo+ID4gIH0NCj4gPiAr
+RVhQT1JUX1NZTUJPTChkbWFfaGVhcF9hZGQpOw0KPiA+DQo+ID4gIHN0YXRpYyBjaGFyICpkbWFf
+aGVhcF9kZXZub2RlKGNvbnN0IHN0cnVjdCBkZXZpY2UgKmRldiwgdW1vZGVfdCAqbW9kZSkNCj4g
+PiAgew0KPiA+IC0tDQo+ID4gMi40My4wDQo+ID4NCl9fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFy
+by1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRv
+IGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
