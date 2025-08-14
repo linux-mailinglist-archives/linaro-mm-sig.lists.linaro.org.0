@@ -2,93 +2,84 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 22CCEB26C1C
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 14 Aug 2025 18:12:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C0D72B26C51
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 14 Aug 2025 18:17:42 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 25F9D45D91
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 14 Aug 2025 16:12:04 +0000 (UTC)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
-	by lists.linaro.org (Postfix) with ESMTPS id AD4D945D84
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 14 Aug 2025 16:11:01 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 667BA45D90
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 14 Aug 2025 16:17:41 +0000 (UTC)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+	by lists.linaro.org (Postfix) with ESMTPS id 0E7F8458E6
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 14 Aug 2025 16:17:20 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=ti.com header.s=ti-com-17Q1 header.b=tydm61H8;
-	spf=pass (lists.linaro.org: domain of afd@ti.com designates 198.47.19.245 as permitted sender) smtp.mailfrom=afd@ti.com;
-	dmarc=pass (policy=quarantine) header.from=ti.com
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
-	by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 57EGAq8q1916363;
-	Thu, 14 Aug 2025 11:10:52 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1755187852;
-	bh=zNxFBetvcy3aVTCoqvvC2GPeFMAlHszkPcmJmnZNL2U=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=tydm61H8/ZRDrdubLCHh+jz62yx6nUrLynUbWBpiV+QyoDpR8mA/PRpJAdi7GgsGP
-	 NRcsMHCa7oaYauG1Q56ewVBoIn6c3F/LXHPJy4irNk877td5QfE8Zta0iPgYKsVWii
-	 aJ3bZaaelJPT+8uECJL5bE3rHL7II/P3ihVoD8k0=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
-	by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 57EGAqLh1823425
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
-	Thu, 14 Aug 2025 11:10:52 -0500
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 14
- Aug 2025 11:10:51 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Thu, 14 Aug 2025 11:10:51 -0500
-Received: from lelvem-mr06.itg.ti.com ([10.249.42.149])
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 57EGAndn4172380;
-	Thu, 14 Aug 2025 11:10:51 -0500
-From: Andrew Davis <afd@ti.com>
-To: Gerd Hoffmann <kraxel@redhat.com>, Sumit Semwal <sumit.semwal@linaro.org>,
-        =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
-        Paul Cercueil
-	<paul@crapouillou.net>,
-        Vivek Kasireddy <vivek.kasireddy@intel.com>,
-        Daniel
- Vetter <daniel@ffwll.ch>
-Date: Thu, 14 Aug 2025 11:10:49 -0500
-Message-ID: <20250814161049.678672-4-afd@ti.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20250814161049.678672-1-afd@ti.com>
-References: <20250814161049.678672-1-afd@ti.com>
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=pio9G6wb;
+	spf=pass (lists.linaro.org: domain of robh@kernel.org designates 147.75.193.91 as permitted sender) smtp.mailfrom=robh@kernel.org;
+	dmarc=pass (policy=quarantine) header.from=kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by nyc.source.kernel.org (Postfix) with ESMTP id CC345A56E9F;
+	Thu, 14 Aug 2025 16:17:19 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 537E7C4CEED;
+	Thu, 14 Aug 2025 16:17:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1755188239;
+	bh=t1D6JoRLNosJcvcAajcvRlnrHWGxzsuS/lzNJzOW0hI=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=pio9G6wbquRvNu83KBNo2X4ztLrxi/r01Yra2kDpuajo7CBkUHYYdvK4faGGh0HAb
+	 rjx5Jgv7eKKlNVHsDBdwh6KVPR/H86dc/0jE4Ulqbyw2S9fQgN/GnAbwPsbeyMyOwh
+	 Chfx2v5gw69odeDgxyQhKNpeonaJFTYVzkOrmTP0ZtQraFQBTrcxusI+woyhb3Mu2X
+	 KOQEiRaxdyE0Vkl5ywCpafmAZVj8+ZlCmDK2W9tI8bja1kwi6xsM2NdYTCv+aZ8bva
+	 3+GYCvPHocaHi8HN9R6QSONg6DmD7PBKMBCGQ+nBxRsAEyuM6T6HEnlxupBmmEUjU1
+	 sRjtoDvFgxQow==
+Date: Thu, 14 Aug 2025 11:17:18 -0500
+From: Rob Herring <robh@kernel.org>
+To: Daniel Stone <daniel@fooishbar.org>
+Message-ID: <20250814161718.GA3117411-robh@kernel.org>
+References: <20250811-ethos-v2-0-a219fc52a95b@kernel.org>
+ <20250811-ethos-v2-2-a219fc52a95b@kernel.org>
+ <CAPj87rNG8gT-Wk+rQnFMsbCBqX6pL=qZY--_5=Z4XchLNsM5Ng@mail.gmail.com>
+ <CAPj87rNDPQqTqj1LAdFYmd4Y12UHXWi5+65i0RepkcOX3wvEyA@mail.gmail.com>
 MIME-Version: 1.0
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-Spamd-Result: default: False [-2.50 / 15.00];
+Content-Disposition: inline
+In-Reply-To: <CAPj87rNDPQqTqj1LAdFYmd4Y12UHXWi5+65i0RepkcOX3wvEyA@mail.gmail.com>
+X-Spamd-Result: default: False [-1.50 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
+	SUSPICIOUS_RECIPS(1.50)[];
 	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[ti.com,quarantine];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:198.47.19.0/24];
-	R_DKIM_ALLOW(-0.20)[ti.com:s=ti-com-17Q1];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:147.75.193.91];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MIME_GOOD(-0.10)[text/plain];
-	RCVD_TLS_LAST(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	ARC_NA(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:161, ipnet:198.47.19.0/24, country:US];
-	MIME_TRACE(0.00)[0:+];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	RCVD_COUNT_FIVE(0.00)[5];
+	MISSING_XM_UA(0.00)[];
 	TO_DN_SOME(0.00)[];
-	DKIM_TRACE(0.00)[ti.com:+]
+	ASN(0.00)[asn:15830, ipnet:147.75.193.0/24, country:NL];
+	RCPT_COUNT_TWELVE(0.00)[19];
+	MIME_TRACE(0.00)[0:+];
+	TAGGED_RCPT(0.00)[dt];
+	DWL_DNSWL_BLOCKED(0.00)[kernel.org:dkim];
+	NEURAL_HAM(-0.00)[-1.000];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[tomeuvizoso.net,kernel.org,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,arm.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
+	RCVD_IN_DNSWL_NONE(0.00)[147.75.193.91:from];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: AD4D945D84
-X-Spamd-Bar: --
-Message-ID-Hash: CRPD3B2MWXDU3N433F5PDN5AMEH2WHEC
-X-Message-ID-Hash: CRPD3B2MWXDU3N433F5PDN5AMEH2WHEC
-X-MailFrom: afd@ti.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, Andrew Davis <afd@ti.com>
+X-Rspamd-Queue-Id: 0E7F8458E6
+X-Spamd-Bar: -
+Message-ID-Hash: VXTKOUMULPGVJI7FXMZKAZ4MKIEFNYUW
+X-Message-ID-Hash: VXTKOUMULPGVJI7FXMZKAZ4MKIEFNYUW
+X-MailFrom: robh@kernel.org
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Tomeu Vizoso <tomeu@tomeuvizoso.net>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Oded Gabbay <ogabbay@kernel.org>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Robin Murphy <robin.murphy@arm.com>, Steven Price <steven.price@arm.com>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v2 3/3] udmabuf: Use module_misc_device() to register this device
+Subject: [Linaro-mm-sig] Re: [PATCH v2 2/2] accel: Add Arm Ethos-U NPU driver
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CRPD3B2MWXDU3N433F5PDN5AMEH2WHEC/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VXTKOUMULPGVJI7FXMZKAZ4MKIEFNYUW/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -98,56 +89,154 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Now that we do not need to call dma_coerce_mask_and_coherent() on our
-miscdevice device, use the module_misc_device() helper for registering
-and module init/exit.
+On Thu, Aug 14, 2025 at 11:51:44AM +0100, Daniel Stone wrote:
+> Hi Rob,
 
-While here, add module description and license, modules built with W=1
-warn if built without these.
+Thanks for the review.
 
-Signed-off-by: Andrew Davis <afd@ti.com>
-Acked-by: Vivek Kasireddy <vivek.kasireddy@intel.com>
----
- drivers/dma-buf/udmabuf.c | 24 +++---------------------
- 1 file changed, 3 insertions(+), 21 deletions(-)
+> 
+> On Tue, 12 Aug 2025 at 13:53, Daniel Stone <daniel@fooishbar.org> wrote:
+> > On Mon, 11 Aug 2025 at 22:05, Rob Herring (Arm) <robh@kernel.org> wrote:
+> > > +static int ethos_ioctl_submit_job(struct drm_device *dev, struct drm_file *file,
+> > > +                                  struct drm_ethos_job *job)
+> > > +{
+> > > +       [...]
+> > > +       ejob->cmd_bo = drm_gem_object_lookup(file, job->cmd_bo);
+> > > +       cmd_info = to_ethos_bo(ejob->cmd_bo)->info;
+> > > +       if (!ejob->cmd_bo)
+> > > +               goto out_cleanup_job;
+> >
+> > NULL deref here if this points to a non-command BO. Which is better
+> > than wild DMA, but hey.
+> 
+> Sorry this wasn't more clear. There are two NULL derefs here. If you
+> pass an invalid BO, ejob->cmd_bo is dereferenced before the NULL
+> check, effectively neutering it and winning you a mail from the other
+> Dan when he runs sparse on it. Secondly you pass a BO which is valid
+> but not a command BO, cmd_info gets unconditionally dereferenced so it
+> will fall apart there too.
 
-diff --git a/drivers/dma-buf/udmabuf.c b/drivers/dma-buf/udmabuf.c
-index 8d71c3d72eb5e..d888e4d667c67 100644
---- a/drivers/dma-buf/udmabuf.c
-+++ b/drivers/dma-buf/udmabuf.c
-@@ -566,26 +566,8 @@ static struct miscdevice udmabuf_misc = {
- 	.name           = "udmabuf",
- 	.fops           = &udmabuf_fops,
- };
--
--static int __init udmabuf_dev_init(void)
--{
--	int ret;
--
--	ret = misc_register(&udmabuf_misc);
--	if (ret < 0) {
--		pr_err("Could not initialize udmabuf device\n");
--		return ret;
--	}
--
--	return 0;
--}
--
--static void __exit udmabuf_dev_exit(void)
--{
--	misc_deregister(&udmabuf_misc);
--}
--
--module_init(udmabuf_dev_init)
--module_exit(udmabuf_dev_exit)
-+module_misc_device(udmabuf_misc);
- 
- MODULE_AUTHOR("Gerd Hoffmann <kraxel@redhat.com>");
-+MODULE_DESCRIPTION("Userspace memfd to DMA-BUF misc Driver");
-+MODULE_LICENSE("GPL");
--- 
-2.39.2
+Yep. And there's a 3rd issue that I'm not setting 'ret' to an error 
+value.
 
+> 
+> > > +       for (int i = 0; i < NPU_BASEP_REGION_MAX; i++) {
+> > > +               struct drm_gem_object *gem;
+> > > +
+> > > +               if (job->region_bo_handles[i] == 0)
+> > > +                       continue;
+> > > +
+> > > +               /* Don't allow a region to point to the cmd BO */
+> > > +               if (job->region_bo_handles[i] == job->cmd_bo) {
+> > > +                       ret = -EINVAL;
+> > > +                       goto out_cleanup_job;
+> > > +               }
+> >
+> > And here I suppose you want to check if the BO's info pointer is
+> > non-NULL, i.e. disallow use of _any_ command BO instead of only
+> > disallowing this job's own command BO.
+> 
+> This is the main security issue, since it would allow writes a
+> cmdstream BO which has been created but is not _the_ cmdstream BO for
+> this job. Fixing that is pretty straightforward, but given that
+> someone will almost certainly try to add dmabuf support to this
+> driver, it's also probably worth a comment in the driver flags telling
+> anyone who tries to add DRIVER_PRIME that they need to disallow export
+> of cmdbuf BOs.
+
+What would be the usecase for exporting BOs here?
+
+I suppose if one wants to feed in camera data and we need to do the 
+allocation in the ethos driver since it likely has more constraints 
+(i.e. must be contiguous). (Whatever happened on the universal allocator 
+or constraint solver? I haven't been paying attention for a while...)
+
+> Relatedly, I think there's missing validity checks around the regions.
+> AFAICT it would be possible to do wild memory access:
+> * create a cmdstream BO which accesses one region
+> * submit a job using that cmdstream with one data BO correctly
+> attached to the region, execute the job and wait for completion
+> * free the data BO
+> * resubmit that job but declare zero BO handles
+> 
+> The first issue is that the job will be accepted by the processing
+> ioctl, because it doesn't check that all the regions specified by the
+> cmdstream are properly filled in by the job, which is definitely one
+> to fix for validation. The second issue is that region registers are
+> not cleared in any way, so in the above example, the second job will
+> reuse the region configuration from the first. I'm not sure if
+> clearing out unused job fields would be helpful defence in depth or
+> not; your call.
+
+I had considered clearing unused the region registers. That really has 
+little effect. There's not any way to disable regions. And region 
+offsets are a full 64-bits, so even if one set base address to 0 or some 
+faulting region, a cmdstream can still get to any address.
+
+The other issue is just whether there's leftover cmdstream state from 
+prior jobs. That's why the cmd_info is initialized to all 1s so that the 
+cmdstream has to setup all the state.
+
+> > (There's also a NULL deref if an invalid GEM handle is specified.)
+> 
+> This one is similar to the first; drm_gem_object_lookup() return isn't
+> checked so it gets dereferenced unconditionally.
+
+Here's the reworked (but not yet tested) code which I think should solve 
+all of the above issues. There was also an issue with the cleanup path 
+that we wouldn't do a put on the last BO if there was a size error. We 
+just need to set ejob->region_bo[ejob->region_cnt] and increment 
+region_cnt before any checks.
+
+	ejob->cmd_bo = drm_gem_object_lookup(file, job->cmd_bo);
+	if (!ejob->cmd_bo) {
+		ret = -ENOENT;
+		goto out_cleanup_job;
+	}
+	cmd_info = to_ethos_bo(ejob->cmd_bo)->info;
+	if (!cmd_info) {
+		ret = -EINVAL;
+		goto out_cleanup_job;
+	}
+
+	for (int i = 0; i < NPU_BASEP_REGION_MAX; i++) {
+		struct drm_gem_object *gem;
+
+		/* Can only omit a BO handle if the region is not used or used for SRAM */
+		if (!job->region_bo_handles[i] &&
+		    (!cmd_info->region_size[i] || (i == ETHOS_SRAM_REGION && job->sram_size)))
+			continue;
+
+		gem = drm_gem_object_lookup(file, job->region_bo_handles[i]);
+		if (!gem) {
+			dev_err(dev->dev,
+				"Invalid BO handle %d for region %d\n",
+				job->region_bo_handles[i], i);
+			ret = -ENOENT;
+			goto out_cleanup_job;
+		}
+
+		ejob->region_bo[ejob->region_cnt] = gem;
+		ejob->region_bo_num[ejob->region_cnt] = i;
+		ejob->region_cnt++;
+
+		if (to_ethos_bo(gem)->info) {
+			dev_err(dev->dev,
+				"Cmdstream BO handle %d used for region %d\n",
+				job->region_bo_handles[i], i);
+			ret = -EINVAL;
+			goto out_cleanup_job;
+		}
+
+		/* Verify the command stream doesn't have accesses outside the BO */
+		if (cmd_info->region_size[i] > gem->size) {
+			dev_err(dev->dev,
+				"cmd stream region %d size greater than BO size (%llu > %zu)\n",
+				i, cmd_info->region_size[i], gem->size);
+			ret = -EOVERFLOW;
+			goto out_cleanup_job;
+		}
+	}
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
