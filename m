@@ -2,79 +2,112 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 076D8B4019A
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  2 Sep 2025 14:58:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CE8ADB40974
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  2 Sep 2025 17:46:47 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 90CD545400
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  2 Sep 2025 12:58:38 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 6948144552
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  2 Sep 2025 12:58:30 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 318DE45E6F
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  2 Sep 2025 15:46:46 +0000 (UTC)
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+	by lists.linaro.org (Postfix) with ESMTPS id EE07044668
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  2 Sep 2025 15:46:38 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=Y03rLipQ;
-	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=leon@kernel.org;
-	dmarc=pass (policy=quarantine) header.from=kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id BD99743995;
-	Tue,  2 Sep 2025 12:58:29 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 08555C4CEED;
-	Tue,  2 Sep 2025 12:58:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1756817909;
-	bh=CM1gzdTND9tJKwW5aJTGTYza7PZbOeFeI+0kiHDsfk0=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=Y03rLipQ172HNCWdzae1SvWeUKEZCuyy4iT/sxqmRUG2Mk9XAm0JD2Cf43Q4ccXI4
-	 vJ3zCW+7bhV2I/8W3AQ/zj+cPA9rZhBtVccOf2Syvu2xP3GZZOcRUzTwD1l9Dszm61
-	 coTmrjtssASLghJ0YobZBbn3b5yvo1gmHUuMYKl3N+eOUDvW9dLkEd42uz6ExoscbL
-	 AN9nGwSWGJAg2aXnrk/T8mIOnh8SJFTLZoRnFwoAw9p/ZVbj1um54ETkG1UmVJ0yaX
-	 k1mi0ufFXvprbr0GmTrnZJZPMNtSonfXc/UWWvtDhkzWmzN/ZJ+J57M3aRwqpyvkrT
-	 ePb8jIU/SceyA==
-Date: Tue, 2 Sep 2025 15:58:24 +0300
-From: Leon Romanovsky <leon@kernel.org>
-To: Alex Williamson <alex.williamson@redhat.com>
-Message-ID: <20250902125824.GH10073@unreal>
-References: <cover.1754311439.git.leon@kernel.org>
- <edb2ec654fc27ba8f73695382ab0a029f18422b5.1754311439.git.leon@kernel.org>
- <20250806160201.2b72e7a0.alex.williamson@redhat.com>
+	dkim=pass header.d=gmail.com header.s=20230601 header.b=B1wXpvqx;
+	spf=pass (lists.linaro.org: domain of thierry.reding@gmail.com designates 209.85.128.48 as permitted sender) smtp.mailfrom=thierry.reding@gmail.com;
+	dmarc=pass (policy=none) header.from=gmail.com
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-45b7d497abaso36766435e9.0
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 02 Sep 2025 08:46:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1756827998; x=1757432798; darn=lists.linaro.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Ehw/eR0F2M+6G/BFd9v/1nkHSYwDgsa32Hkiapct/js=;
+        b=B1wXpvqxEmz3PNUTzVU+HDTzd7qxZ5tfpc/V8EH4Ai6YNwXz2N7Rt4XesOQj8lN6EX
+         0KznRk3JHv50gtC26cKXdJ1LG4/eHhYuR7YO6GnYAB7uEuIINLOfrOcg/4KsDHSXDYTP
+         oDpRr4kuOxSmlOkD0j+rR5oewlKgNGzYaq1BDPQVSsuNLHamDnprkcaNLpQ3n1/DOZHX
+         H3mq0Oo9RySaIqBU7jChu61ffQEWF1pHy9ThwICNhlDr6V6Pcn3kuknzfVhGFBIZmwZF
+         PsT5L44ch6IKwaW2ABwlx81MHIUofKCgIqoCHXydVPmerIFNnhDTkGw8dNlh/tqtiFU3
+         hOWg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1756827998; x=1757432798;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Ehw/eR0F2M+6G/BFd9v/1nkHSYwDgsa32Hkiapct/js=;
+        b=w6DG7snBme4h7TTmCIfNv98TOGARVvuvGDkdIUaXOf3T9faDAxq4jiOyj81/j2xFDA
+         a7sF5Xu8xXuP/Tr340YvF0LTZ1C7Hrnjl8Oopt4jKNMmyo3ZmR5+aE6jXf4vWR/Pm3pb
+         g5o2Vlc7PjAxFe/h0CzMCFW8WBaJ37jBzlQFhJGsRMEMAnGe0tni5t9z44B7QMjSaXhF
+         7CevU8cjdOWOxa/GtQF/UisCJ/r3ElqIvcIEwP48yQzQOXFRft8igKgUm8kUcaAveyh3
+         CZ873rQ5iRyV5LnFYdNvRPLoPwm3SmPr5c9+aIgbjJcDg+KNcVeqt3p85aaHECyB0d+y
+         4VQg==
+X-Forwarded-Encrypted: i=1; AJvYcCUZHiMxv8ADTE+wpSn6BNIiv6m/E0McoJsqwOBndpb/bGm20QxvYylAhd/gXSRMyPJhLy9AtC3k6mvd+yi0@lists.linaro.org
+X-Gm-Message-State: AOJu0YxC4P76FKTS8Hi+aOJiydaCpJvaXO6YM7SnyHJcQynaU+71M+ZX
+	5scKm3NwcjJ7IOHED7rXZGf7dsXciB0MlQu5EDa72LSg+QsISpUgRuR8
+X-Gm-Gg: ASbGncs8WhDh5cUoVqCtv9Bsfcg5UoEMOmI/QzwWNSI5JQOsybRqGOEVdHSU3vDw6ms
+	2z7Rc+585MBqqsXyIdkcsW8O8+/kphGGMBlx2I/qu8O6MA3/m/LBdCDnb2FlW7XD0r3xAa37RmD
+	vXpOeaiYM9E+e5e1Svefn2yVBjwihn/J2z231A1nbO2YP1iLw+gc3OIYFJL6zNa1gRKMVZWXHRd
+	Dvh0NCKB3DK+VInox4ZFik+n7t3Us71rqp52THnnfklPa3+4gXlq7JujPiEnZHkFoO8bd36fCfG
+	whbcYBuwhfoVp05IEqI8enVYGo6iRWRMsfUuFC8whFtl0uaND8N8ItIQXWrOKAySqzb+Lv1gzaZ
+	lOPcakNHkNX5kuWrKxuBJjmYq8tDO1ZT04z6Dfk81B0eIh7sForSgNX2xVvh7ETDJll9SGb9DH2
+	Sfa+u4ACtfAjapPg==
+X-Google-Smtp-Source: AGHT+IFWiFaPK/3SzCCDMU0eaVs82NQJjjs4OJMxCNhx+PRy+qfGvhLoB3urjp1BVbB0eezwx8zy/w==
+X-Received: by 2002:a05:600c:8b33:b0:456:302:6dc3 with SMTP id 5b1f17b1804b1-45b877be066mr95265895e9.26.1756827997621;
+        Tue, 02 Sep 2025 08:46:37 -0700 (PDT)
+Received: from localhost (p200300e41f1c4d00f22f74fffe1f3a53.dip0.t-ipconnect.de. [2003:e4:1f1c:4d00:f22f:74ff:fe1f:3a53])
+        by smtp.gmail.com with UTF8SMTPSA id ffacd0b85a97d-3cf33fb9d37sm20384921f8f.49.2025.09.02.08.46.34
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 02 Sep 2025 08:46:34 -0700 (PDT)
+From: Thierry Reding <thierry.reding@gmail.com>
+To: Thierry Reding <thierry.reding@gmail.com>,
+	David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	Sumit Semwal <sumit.semwal@linaro.org>
+Date: Tue,  2 Sep 2025 17:46:20 +0200
+Message-ID: <20250902154630.4032984-1-thierry.reding@gmail.com>
+X-Mailer: git-send-email 2.50.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20250806160201.2b72e7a0.alex.williamson@redhat.com>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 6948144552
-X-Spamd-Bar: ---
-X-Spamd-Result: default: False [-3.50 / 15.00];
+X-Rspamd-Queue-Id: EE07044668
+X-Spamd-Bar: --
+X-Spamd-Result: default: False [-2.00 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.252.31];
+	SUSPICIOUS_RECIPS(1.50)[];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
 	MIME_GOOD(-0.10)[text/plain];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	MISSING_XM_UA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[23];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com,ffwll.ch,linaro.org];
 	ARC_NA(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	MIME_TRACE(0.00)[0:+];
 	TO_DN_SOME(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCPT_COUNT_TWELVE(0.00)[19];
+	TAGGED_FROM(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
-	DKIM_TRACE(0.00)[kernel.org:+]
-Message-ID-Hash: SZAZEUKPBCP57G4T62KWTF7HCG7CO6UG
-X-Message-ID-Hash: SZAZEUKPBCP57G4T62KWTF7HCG7CO6UG
-X-MailFrom: leon@kernel.org
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Jason Gunthorpe <jgg@nvidia.com>, Andrew Morton <akpm@linux-foundation.org>, Bjorn Helgaas <bhelgaas@google.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Christoph Hellwig <hch@lst.de>, dri-devel@lists.freedesktop.org, iommu@lists.linux.dev, Jens Axboe <axboe@kernel.dk>, Joerg Roedel <joro@8bytes.org>, kvm@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linux-mm@kvack.org, linux-pci@vger.kernel.org, Logan Gunthorpe <logang@deltatee.com>, Robin Murphy <robin.murphy@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, Vivek Kasireddy <vivek.kasireddy@intel.com>, Will Deacon <will@kernel.org>
+	TAGGED_RCPT(0.00)[dt];
+	MID_RHS_MATCH_FROM(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.48:from];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	FROM_HAS_DN(0.00)[]
+Message-ID-Hash: RSRRHTORYJFHUNDYTCVC6AH6KIOXHKWY
+X-Message-ID-Hash: RSRRHTORYJFHUNDYTCVC6AH6KIOXHKWY
+X-MailFrom: thierry.reding@gmail.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Andrew Morton <akpm@linux-foundation.org>, David Hildenbrand <david@redhat.com>, Mike Rapoport <rppt@kernel.org>, dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, linux-tegra@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-mm@kvack.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v1 08/10] vfio/pci: Enable peer-to-peer DMA transactions by default
+Subject: [Linaro-mm-sig] [PATCH 0/9] dma-buf: heaps: Add Tegra VPR support
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SZAZEUKPBCP57G4T62KWTF7HCG7CO6UG/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RSRRHTORYJFHUNDYTCVC6AH6KIOXHKWY/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -84,80 +117,68 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Wed, Aug 06, 2025 at 04:02:01PM -0600, Alex Williamson wrote:
-> On Mon,  4 Aug 2025 16:00:43 +0300
-> Leon Romanovsky <leon@kernel.org> wrote:
-> 
-> > From: Leon Romanovsky <leonro@nvidia.com>
-> > 
-> > Make sure that all VFIO PCI devices have peer-to-peer capabilities
-> > enables, so we would be able to export their MMIO memory through DMABUF,
-> > 
-> > Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
-> > ---
-> >  drivers/vfio/pci/vfio_pci_core.c | 4 ++++
-> >  include/linux/vfio_pci_core.h    | 1 +
-> >  2 files changed, 5 insertions(+)
-> > 
-> > diff --git a/drivers/vfio/pci/vfio_pci_core.c b/drivers/vfio/pci/vfio_pci_core.c
-> > index 31bdb9110cc0f..df9a32d3deac9 100644
-> > --- a/drivers/vfio/pci/vfio_pci_core.c
-> > +++ b/drivers/vfio/pci/vfio_pci_core.c
-> > @@ -28,6 +28,7 @@
-> >  #include <linux/nospec.h>
-> >  #include <linux/sched/mm.h>
-> >  #include <linux/iommufd.h>
-> > +#include <linux/pci-p2pdma.h>
-> >  #if IS_ENABLED(CONFIG_EEH)
-> >  #include <asm/eeh.h>
-> >  #endif
-> > @@ -2088,6 +2089,9 @@ int vfio_pci_core_init_dev(struct vfio_device *core_vdev)
-> >  	INIT_LIST_HEAD(&vdev->dummy_resources_list);
-> >  	INIT_LIST_HEAD(&vdev->ioeventfds_list);
-> >  	INIT_LIST_HEAD(&vdev->sriov_pfs_item);
-> > +	vdev->provider = pci_p2pdma_enable(vdev->pdev);
-> > +	if (IS_ERR(vdev->provider))
-> > +		return PTR_ERR(vdev->provider);
-> 
-> I think this just made all vfio-pci drivers functionally dependent on
-> CONFIG_PCI_P2PDMA.  Seems at best exporting a dma-buf should be
-> restricted if this fails.  Thanks,
+From: Thierry Reding <treding@nvidia.com>
 
-It is temporary solution in next patch "vfio/pci: Add dma-buf export
-support for MMIO regions", the strict ifdef is added.
+Hi,
 
-  2107 #ifdef CONFIG_VFIO_PCI_DMABUF
-  2108         vdev->provider = pci_p2pdma_enable(vdev->pdev);
-  2109         if (IS_ERR(vdev->provider))
-  2110                 return PTR_ERR(vdev->provider);
-  2111
-  2112         INIT_LIST_HEAD(&vdev->dmabufs);
-  2113 #endif
+This series adds support for the video protection region (VPR) used on
+Tegra SoC devices. It's a special region of memory that is protected
+from accesses by the CPU and used to store DRM protected content (both
+decrypted stream data as well as decoded video frames).
 
-I will split "vfio/pci: Add dma-buf export ..." patch to introduce CONFIG_VFIO_PCI_DMABUF
-before this "vfio/pci: Enable peer-to-peer ..." patch.
+Patches 1 and 2 add DT binding documentation for the VPR and add the VPR
+to the list of memory-region items for display and host1x.
 
-Thanks
+Patch 3 introduces new APIs needed by the Tegra VPR implementation that
+allow CMA areas to be dynamically created at runtime rather than using
+the fixed, system-wide list. This is used in this driver specifically
+because it can use an arbitrary number of these areas (though they are
+currently limited to 4).
 
-> 
-> Alex
-> 
-> >  	init_rwsem(&vdev->memory_lock);
-> >  	xa_init(&vdev->ctx);
-> >  
-> > diff --git a/include/linux/vfio_pci_core.h b/include/linux/vfio_pci_core.h
-> > index fbb472dd99b36..b017fae251811 100644
-> > --- a/include/linux/vfio_pci_core.h
-> > +++ b/include/linux/vfio_pci_core.h
-> > @@ -94,6 +94,7 @@ struct vfio_pci_core_device {
-> >  	struct vfio_pci_core_device	*sriov_pf_core_dev;
-> >  	struct notifier_block	nb;
-> >  	struct rw_semaphore	memory_lock;
-> > +	struct p2pdma_provider  *provider;
-> >  };
-> >  
-> >  /* Will be exported for vfio pci drivers usage */
-> 
+Patch 4 adds some infrastructure for DMA heap implementations to provide
+information through debugfs.
+
+The Tegra VPR implementation is added in patch 5. See its commit message
+for more details about the specifics of this implementation.
+
+Finally, patches 6-9 add the VPR placeholder node on Tegra234 and hook
+it up to the host1x and GPU nodes so that they can make use of this
+region.
+
+Thierry
+
+Thierry Reding (9):
+  dt-bindings: reserved-memory: Document Tegra VPR
+  dt-bindings: display: tegra: Document memory regions
+  mm/cma: Allow dynamically creating CMA areas
+  dma-buf: heaps: Add debugfs support
+  dma-buf: heaps: Add support for Tegra VPR
+  arm64: tegra: Add VPR placeholder node on Tegra234
+  arm64: tegra: Add GPU node on Tegra234
+  arm64: tegra: Hook up VPR to host1x
+  arm64: tegra: Hook up VPR to the GPU
+
+ .../display/tegra/nvidia,tegra186-dc.yaml     |  10 +
+ .../display/tegra/nvidia,tegra20-dc.yaml      |  10 +-
+ .../display/tegra/nvidia,tegra20-host1x.yaml  |   7 +
+ .../nvidia,tegra-video-protection-region.yaml |  55 ++
+ arch/arm64/boot/dts/nvidia/tegra234.dtsi      |  57 ++
+ drivers/dma-buf/dma-heap.c                    |  56 ++
+ drivers/dma-buf/heaps/Kconfig                 |   7 +
+ drivers/dma-buf/heaps/Makefile                |   1 +
+ drivers/dma-buf/heaps/tegra-vpr.c             | 831 ++++++++++++++++++
+ include/linux/cma.h                           |  16 +
+ include/linux/dma-heap.h                      |   2 +
+ include/trace/events/tegra_vpr.h              |  57 ++
+ mm/cma.c                                      |  89 +-
+ 13 files changed, 1175 insertions(+), 23 deletions(-)
+ create mode 100644 Documentation/devicetree/bindings/reserved-memory/nvidia,tegra-video-protection-region.yaml
+ create mode 100644 drivers/dma-buf/heaps/tegra-vpr.c
+ create mode 100644 include/trace/events/tegra_vpr.h
+
+-- 
+2.50.0
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
