@@ -2,56 +2,56 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id CA547B3FD50
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  2 Sep 2025 13:07:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 076D8B4019A
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  2 Sep 2025 14:58:45 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4686E44668
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  2 Sep 2025 11:07:06 +0000 (UTC)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
-	by lists.linaro.org (Postfix) with ESMTPS id 300B43F5B4
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  2 Sep 2025 11:06:58 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 90CD545400
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  2 Sep 2025 12:58:38 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+	by lists.linaro.org (Postfix) with ESMTPS id 6948144552
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  2 Sep 2025 12:58:30 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=luXQtemq;
-	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=leon@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=Y03rLipQ;
+	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=leon@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by tor.source.kernel.org (Postfix) with ESMTP id B389260206;
-	Tue,  2 Sep 2025 11:06:57 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7D67BC4CEED;
-	Tue,  2 Sep 2025 11:06:56 +0000 (UTC)
+	by sea.source.kernel.org (Postfix) with ESMTP id BD99743995;
+	Tue,  2 Sep 2025 12:58:29 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 08555C4CEED;
+	Tue,  2 Sep 2025 12:58:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1756811217;
-	bh=hCa1C3d5MBR18h+mVpk4RAM474rjo1/g4TQSzEy0Gzo=;
+	s=k20201202; t=1756817909;
+	bh=CM1gzdTND9tJKwW5aJTGTYza7PZbOeFeI+0kiHDsfk0=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=luXQtemqwauDCW1OGofW7KOn0Ed3TXz+7wSyh4Rq/4C4pBNfrCav73O7nhlQqKsu9
-	 pJwS6fgD10XM5MWzc2V32cauwX2xcs5uKtg2Bn+xWgyC8SmOfVZ8jKdythn+ZO4vAa
-	 0h7EOGiI+UMeKypfX8GCyk9wrCAP4tCX2z8kMskVDMEaLSOSdX6db0uWHaJchKjybu
-	 MaLbWwVqK1itWBWz4FOiOlTEHChtIjiBEjBS0WHuFG4wArCchdxmDkRdChfk7RgGoF
-	 PbQcn5XJw0e6Ezn8C5XZTAc61l/+qt/LvKdGUrn6ovVC7JKrzqR3GHSc85H+bG5dhG
-	 nrqyYFGPfwuJg==
-Date: Tue, 2 Sep 2025 14:06:51 +0300
+	b=Y03rLipQ172HNCWdzae1SvWeUKEZCuyy4iT/sxqmRUG2Mk9XAm0JD2Cf43Q4ccXI4
+	 vJ3zCW+7bhV2I/8W3AQ/zj+cPA9rZhBtVccOf2Syvu2xP3GZZOcRUzTwD1l9Dszm61
+	 coTmrjtssASLghJ0YobZBbn3b5yvo1gmHUuMYKl3N+eOUDvW9dLkEd42uz6ExoscbL
+	 AN9nGwSWGJAg2aXnrk/T8mIOnh8SJFTLZoRnFwoAw9p/ZVbj1um54ETkG1UmVJ0yaX
+	 k1mi0ufFXvprbr0GmTrnZJZPMNtSonfXc/UWWvtDhkzWmzN/ZJ+J57M3aRwqpyvkrT
+	 ePb8jIU/SceyA==
+Date: Tue, 2 Sep 2025 15:58:24 +0300
 From: Leon Romanovsky <leon@kernel.org>
 To: Alex Williamson <alex.williamson@redhat.com>
-Message-ID: <20250902110651.GF10073@unreal>
+Message-ID: <20250902125824.GH10073@unreal>
 References: <cover.1754311439.git.leon@kernel.org>
- <c9b6237964b9606418af400bb6bec5178fcffff2.1754311439.git.leon@kernel.org>
- <20250806145825.2654ee59.alex.williamson@redhat.com>
+ <edb2ec654fc27ba8f73695382ab0a029f18422b5.1754311439.git.leon@kernel.org>
+ <20250806160201.2b72e7a0.alex.williamson@redhat.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20250806145825.2654ee59.alex.williamson@redhat.com>
+In-Reply-To: <20250806160201.2b72e7a0.alex.williamson@redhat.com>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 300B43F5B4
+X-Rspamd-Queue-Id: 6948144552
 X-Spamd-Bar: ---
 X-Spamd-Result: default: False [-3.50 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.4.254];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.252.31];
 	MIME_GOOD(-0.10)[text/plain];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.0.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	MISSING_XM_UA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	RCPT_COUNT_TWELVE(0.00)[23];
@@ -64,85 +64,100 @@ X-Spamd-Result: default: False [-3.50 / 15.00];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
 	DKIM_TRACE(0.00)[kernel.org:+]
-Message-ID-Hash: VAMAWXNMTNKOPBBNMXIJUYPODDGJ2YHM
-X-Message-ID-Hash: VAMAWXNMTNKOPBBNMXIJUYPODDGJ2YHM
+Message-ID-Hash: SZAZEUKPBCP57G4T62KWTF7HCG7CO6UG
+X-Message-ID-Hash: SZAZEUKPBCP57G4T62KWTF7HCG7CO6UG
 X-MailFrom: leon@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: Jason Gunthorpe <jgg@nvidia.com>, Andrew Morton <akpm@linux-foundation.org>, Bjorn Helgaas <bhelgaas@google.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Christoph Hellwig <hch@lst.de>, dri-devel@lists.freedesktop.org, iommu@lists.linux.dev, Jens Axboe <axboe@kernel.dk>, Joerg Roedel <joro@8bytes.org>, kvm@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linux-mm@kvack.org, linux-pci@vger.kernel.org, Logan Gunthorpe <logang@deltatee.com>, Robin Murphy <robin.murphy@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, Vivek Kasireddy <vivek.kasireddy@intel.com>, Will Deacon <will@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v1 01/10] PCI/P2PDMA: Remove redundant bus_offset from map state
+Subject: [Linaro-mm-sig] Re: [PATCH v1 08/10] vfio/pci: Enable peer-to-peer DMA transactions by default
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VAMAWXNMTNKOPBBNMXIJUYPODDGJ2YHM/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SZAZEUKPBCP57G4T62KWTF7HCG7CO6UG/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-T24gV2VkLCBBdWcgMDYsIDIwMjUgYXQgMDI6NTg6MjVQTSAtMDYwMCwgQWxleCBXaWxsaWFtc29u
-IHdyb3RlOg0KPiBPbiBNb24sICA0IEF1ZyAyMDI1IDE2OjAwOjM2ICswMzAwDQo+IExlb24gUm9t
-YW5vdnNreSA8bGVvbkBrZXJuZWwub3JnPiB3cm90ZToNCj4gDQo+ID4gRnJvbTogTGVvbiBSb21h
-bm92c2t5IDxsZW9ucm9AbnZpZGlhLmNvbT4NCj4gPiANCj4gPiBSZW1vdmUgdGhlIGJ1c19vZmYg
-ZmllbGQgZnJvbSBwY2lfcDJwZG1hX21hcF9zdGF0ZSBzaW5jZSBpdCBkdXBsaWNhdGVzDQo+ID4g
-aW5mb3JtYXRpb24gYWxyZWFkeSBhdmFpbGFibGUgaW4gdGhlIHBnbWFwIHN0cnVjdHVyZS4gVGhl
-IGJ1c19vZmZzZXQNCj4gPiBpcyBvbmx5IHVzZWQgaW4gb25lIGxvY2F0aW9uIChwY2lfcDJwZG1h
-X2J1c19hZGRyX21hcCkgYW5kIGlzIGFsd2F5cw0KPiA+IGlkZW50aWNhbCB0byBwZ21hcC0+YnVz
-X29mZnNldC4NCj4gPiANCj4gPiBSZXZpZXdlZC1ieTogQ2hyaXN0b3BoIEhlbGx3aWcgPGhjaEBs
-c3QuZGU+DQo+ID4gU2lnbmVkLW9mZi1ieTogSmFzb24gR3VudGhvcnBlIDxqZ2dAbnZpZGlhLmNv
-bT4NCj4gPiBTaWduZWQtb2ZmLWJ5OiBMZW9uIFJvbWFub3Zza3kgPGxlb25yb0BudmlkaWEuY29t
-Pg0KPiA+IC0tLQ0KPiA+ICBkcml2ZXJzL3BjaS9wMnBkbWEuYyAgICAgICB8IDEgLQ0KPiA+ICBp
-bmNsdWRlL2xpbnV4L3BjaS1wMnBkbWEuaCB8IDMgKy0tDQo+ID4gIDIgZmlsZXMgY2hhbmdlZCwg
-MSBpbnNlcnRpb24oKyksIDMgZGVsZXRpb25zKC0pDQo+ID4gDQo+ID4gZGlmZiAtLWdpdCBhL2Ry
-aXZlcnMvcGNpL3AycGRtYS5jIGIvZHJpdmVycy9wY2kvcDJwZG1hLmMNCj4gPiBpbmRleCBkYTU2
-NTdhMDIwMDc0Li4yNzRiYjdiY2MwYmM1IDEwMDY0NA0KPiA+IC0tLSBhL2RyaXZlcnMvcGNpL3Ay
-cGRtYS5jDQo+ID4gKysrIGIvZHJpdmVycy9wY2kvcDJwZG1hLmMNCj4gPiBAQCAtMTAwOSw3ICsx
-MDA5LDYgQEAgdm9pZCBfX3BjaV9wMnBkbWFfdXBkYXRlX3N0YXRlKHN0cnVjdCBwY2lfcDJwZG1h
-X21hcF9zdGF0ZSAqc3RhdGUsDQo+ID4gIHsNCj4gPiAgCXN0YXRlLT5wZ21hcCA9IHBhZ2VfcGdt
-YXAocGFnZSk7DQo+ID4gIAlzdGF0ZS0+bWFwID0gcGNpX3AycGRtYV9tYXBfdHlwZShzdGF0ZS0+
-cGdtYXAsIGRldik7DQo+ID4gLQlzdGF0ZS0+YnVzX29mZiA9IHRvX3AycF9wZ21hcChzdGF0ZS0+
-cGdtYXApLT5idXNfb2Zmc2V0Ow0KPiA+ICB9DQo+ID4gIA0KPiA+ICAvKioNCj4gPiBkaWZmIC0t
-Z2l0IGEvaW5jbHVkZS9saW51eC9wY2ktcDJwZG1hLmggYi9pbmNsdWRlL2xpbnV4L3BjaS1wMnBk
-bWEuaA0KPiA+IGluZGV4IDA3NWMyMGIxNjFkOTguLmI1MDJmYzhiNDliZjkgMTAwNjQ0DQo+ID4g
-LS0tIGEvaW5jbHVkZS9saW51eC9wY2ktcDJwZG1hLmgNCj4gPiArKysgYi9pbmNsdWRlL2xpbnV4
-L3BjaS1wMnBkbWEuaA0KPiA+IEBAIC0xNDYsNyArMTQ2LDYgQEAgZW51bSBwY2lfcDJwZG1hX21h
-cF90eXBlIHsNCj4gPiAgc3RydWN0IHBjaV9wMnBkbWFfbWFwX3N0YXRlIHsNCj4gPiAgCXN0cnVj
-dCBkZXZfcGFnZW1hcCAqcGdtYXA7DQo+ID4gIAllbnVtIHBjaV9wMnBkbWFfbWFwX3R5cGUgbWFw
-Ow0KPiA+IC0JdTY0IGJ1c19vZmY7DQo+ID4gIH07DQo+ID4gIA0KPiA+ICAvKiBoZWxwZXIgZm9y
-IHBjaV9wMnBkbWFfc3RhdGUoKSwgZG8gbm90IHVzZSBkaXJlY3RseSAqLw0KPiA+IEBAIC0xODYs
-NyArMTg1LDcgQEAgc3RhdGljIGlubGluZSBkbWFfYWRkcl90DQo+ID4gIHBjaV9wMnBkbWFfYnVz
-X2FkZHJfbWFwKHN0cnVjdCBwY2lfcDJwZG1hX21hcF9zdGF0ZSAqc3RhdGUsIHBoeXNfYWRkcl90
-IHBhZGRyKQ0KPiA+ICB7DQo+ID4gIAlXQVJOX09OX09OQ0Uoc3RhdGUtPm1hcCAhPSBQQ0lfUDJQ
-RE1BX01BUF9CVVNfQUREUik7DQo+ID4gLQlyZXR1cm4gcGFkZHIgKyBzdGF0ZS0+YnVzX29mZjsN
-Cj4gPiArCXJldHVybiBwYWRkciArIHRvX3AycF9wZ21hcChzdGF0ZS0+cGdtYXApLT5idXNfb2Zm
-c2V0ZjsNCj4gPiAgfQ0KPiA+ICANCj4gPiAgI2VuZGlmIC8qIF9MSU5VWF9QQ0lfUDJQX0ggKi8N
-Cg0KU29ycnkgZm9yIGxvbmcgdGltZSB0byByZXBseSwgSSB3YWl0ZWQgdG8gc2VlIHdoYXQgaXMg
-Z29pbmcgb24gd2l0aCBETUENCnBoeXNfdmVjIGJhc2ljIHNlcmllcyBhbmQgdG9nZXRoZXIgd2l0
-aCBteSBzdW1tZXIgdmFjYXRpb24sIGl0IHRvb2sgYQ0Kd2hpbGUuDQoNCj4gDQo+IExvb2tzIGxp
-a2UgeW91J3JlIHJlbHlpbmcgb24gdGhpcyBib2d1cyBjb2RlIGdldHRpbmcgcmVzb2x2ZWQgaW4g
-dGhlDQo+IG5leHQgcGF0Y2guLi4NCj4gDQo+IEluIGZpbGUgaW5jbHVkZWQgZnJvbSBrZXJuZWwv
-ZG1hL2RpcmVjdC5jOjE2Og0KPiAuL2luY2x1ZGUvbGludXgvcGNpLXAycGRtYS5oOiBJbiBmdW5j
-dGlvbiDigJhwY2lfcDJwZG1hX2J1c19hZGRyX21hcOKAmToNCj4gLi9pbmNsdWRlL2xpbnV4L3Bj
-aS1wMnBkbWEuaDoxODg6MjQ6IGVycm9yOiBpbXBsaWNpdCBkZWNsYXJhdGlvbiBvZiBmdW5jdGlv
-biDigJh0b19wMnBfcGdtYXDigJkgWy1XaW1wbGljaXQtZnVuY3Rpb24tZGVjbGFyYXRpb25dDQo+
-ICAgMTg4IHwgICAgICAgICByZXR1cm4gcGFkZHIgKyB0b19wMnBfcGdtYXAoc3RhdGUtPnBnbWFw
-KS0+YnVzX29mZnNldGY7DQo+ICAgICAgIHwgICAgICAgICAgICAgICAgICAgICAgICBefn5+fn5+
-fn5+fn4NCj4gLi9pbmNsdWRlL2xpbnV4L3BjaS1wMnBkbWEuaDoxODg6NTA6IGVycm9yOiBpbnZh
-bGlkIHR5cGUgYXJndW1lbnQgb2Yg4oCYLT7igJkgKGhhdmUg4oCYaW504oCZKQ0KPiAgIDE4OCB8
-ICAgICAgICAgcmV0dXJuIHBhZGRyICsgdG9fcDJwX3BnbWFwKHN0YXRlLT5wZ21hcCktPmJ1c19v
-ZmZzZXRmOw0KPiAgICAgICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBefg0KPiAuL2luY2x1ZGUvbGludXgvcGNpLXAycGRtYS5oOjE4OToxOiBlcnJv
-cjogY29udHJvbCByZWFjaGVzIGVuZCBvZiBub24tdm9pZCBmdW5jdGlvbiBbLVdlcnJvcj1yZXR1
-cm4tdHlwZV0NCj4gICAxODkgfCB9DQo+ICAgICAgIHwgXg0KPiANCj4gdG9fcDJwX3BnbWFwKCkg
-aXMgYSBzdGF0aWMgZnVuY3Rpb24gYW5kIHN0cnVjdCBwY2lfcDJwZG1hX3BhZ2VtYXANCj4gZG9l
-c24ndCBoYXZlIGEgYnVzX29mZnNldGYgbWVtYmVyLiAgVGhhbmtzLA0KDQpZb3UgYXJlIHJpZ2h0
-LCBwcm9iYWJseSB0aGUgYmVzdCB3YXkgdG8gZml4IHRoZSBlcnJvciBpcyBzaW1wbHkgc3F1YXNo
-DQp0aGlzIGNoYW5nZSBpbnRvIHRoZSBuZXh0IHBhdGNoLg0KDQpUaGFua3MNCg0KDQoNCj4gDQo+
-IEFsZXgNCj4gDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFy
-by5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZl
-QGxpc3RzLmxpbmFyby5vcmcK
+On Wed, Aug 06, 2025 at 04:02:01PM -0600, Alex Williamson wrote:
+> On Mon,  4 Aug 2025 16:00:43 +0300
+> Leon Romanovsky <leon@kernel.org> wrote:
+> 
+> > From: Leon Romanovsky <leonro@nvidia.com>
+> > 
+> > Make sure that all VFIO PCI devices have peer-to-peer capabilities
+> > enables, so we would be able to export their MMIO memory through DMABUF,
+> > 
+> > Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
+> > ---
+> >  drivers/vfio/pci/vfio_pci_core.c | 4 ++++
+> >  include/linux/vfio_pci_core.h    | 1 +
+> >  2 files changed, 5 insertions(+)
+> > 
+> > diff --git a/drivers/vfio/pci/vfio_pci_core.c b/drivers/vfio/pci/vfio_pci_core.c
+> > index 31bdb9110cc0f..df9a32d3deac9 100644
+> > --- a/drivers/vfio/pci/vfio_pci_core.c
+> > +++ b/drivers/vfio/pci/vfio_pci_core.c
+> > @@ -28,6 +28,7 @@
+> >  #include <linux/nospec.h>
+> >  #include <linux/sched/mm.h>
+> >  #include <linux/iommufd.h>
+> > +#include <linux/pci-p2pdma.h>
+> >  #if IS_ENABLED(CONFIG_EEH)
+> >  #include <asm/eeh.h>
+> >  #endif
+> > @@ -2088,6 +2089,9 @@ int vfio_pci_core_init_dev(struct vfio_device *core_vdev)
+> >  	INIT_LIST_HEAD(&vdev->dummy_resources_list);
+> >  	INIT_LIST_HEAD(&vdev->ioeventfds_list);
+> >  	INIT_LIST_HEAD(&vdev->sriov_pfs_item);
+> > +	vdev->provider = pci_p2pdma_enable(vdev->pdev);
+> > +	if (IS_ERR(vdev->provider))
+> > +		return PTR_ERR(vdev->provider);
+> 
+> I think this just made all vfio-pci drivers functionally dependent on
+> CONFIG_PCI_P2PDMA.  Seems at best exporting a dma-buf should be
+> restricted if this fails.  Thanks,
+
+It is temporary solution in next patch "vfio/pci: Add dma-buf export
+support for MMIO regions", the strict ifdef is added.
+
+  2107 #ifdef CONFIG_VFIO_PCI_DMABUF
+  2108         vdev->provider = pci_p2pdma_enable(vdev->pdev);
+  2109         if (IS_ERR(vdev->provider))
+  2110                 return PTR_ERR(vdev->provider);
+  2111
+  2112         INIT_LIST_HEAD(&vdev->dmabufs);
+  2113 #endif
+
+I will split "vfio/pci: Add dma-buf export ..." patch to introduce CONFIG_VFIO_PCI_DMABUF
+before this "vfio/pci: Enable peer-to-peer ..." patch.
+
+Thanks
+
+> 
+> Alex
+> 
+> >  	init_rwsem(&vdev->memory_lock);
+> >  	xa_init(&vdev->ctx);
+> >  
+> > diff --git a/include/linux/vfio_pci_core.h b/include/linux/vfio_pci_core.h
+> > index fbb472dd99b36..b017fae251811 100644
+> > --- a/include/linux/vfio_pci_core.h
+> > +++ b/include/linux/vfio_pci_core.h
+> > @@ -94,6 +94,7 @@ struct vfio_pci_core_device {
+> >  	struct vfio_pci_core_device	*sriov_pf_core_dev;
+> >  	struct notifier_block	nb;
+> >  	struct rw_semaphore	memory_lock;
+> > +	struct p2pdma_provider  *provider;
+> >  };
+> >  
+> >  /* Will be exported for vfio pci drivers usage */
+> 
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
