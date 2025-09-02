@@ -2,75 +2,75 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 14366B4098E
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  2 Sep 2025 17:47:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E1AB6B40992
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  2 Sep 2025 17:47:54 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2F06245E7B
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  2 Sep 2025 15:47:38 +0000 (UTC)
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
-	by lists.linaro.org (Postfix) with ESMTPS id 28C2845E6F
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  2 Sep 2025 15:46:54 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 036DC45F2C
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  2 Sep 2025 15:47:54 +0000 (UTC)
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+	by lists.linaro.org (Postfix) with ESMTPS id 4C36044A45
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  2 Sep 2025 15:46:57 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20230601 header.b=igQBoWcD;
-	spf=pass (lists.linaro.org: domain of thierry.reding@gmail.com designates 209.85.221.41 as permitted sender) smtp.mailfrom=thierry.reding@gmail.com;
+	dkim=pass header.d=gmail.com header.s=20230601 header.b="ef/WJXD6";
+	spf=pass (lists.linaro.org: domain of thierry.reding@gmail.com designates 209.85.128.45 as permitted sender) smtp.mailfrom=thierry.reding@gmail.com;
 	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-3d3fa21a77fso1634829f8f.3
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 02 Sep 2025 08:46:54 -0700 (PDT)
+Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-45b8b7ac427so14916505e9.2
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 02 Sep 2025 08:46:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1756828013; x=1757432813; darn=lists.linaro.org;
+        d=gmail.com; s=20230601; t=1756828016; x=1757432816; darn=lists.linaro.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=n/5Ql6ePEZB3sncY9PXrRkrrrgHDmfb5EstPCmtwQL4=;
-        b=igQBoWcDC7eFTQOHKQxpMLFtyh1ueKz5Ca7JPWa09LKJzqAWdOWPKlnikAVLBtsTrG
-         Ha/T5B2rVwFQXZ59+7Bs8WQFLmq+jHgw6yloygkREjNq8pxSXo5aAXJQSGqsb8hBP6Hc
-         +FSqbceitzNgyqU/zIqDjXwe6bzUVyEZFoDLh/UO40ANqHs/nVLLctarXZf8cC1mADHu
-         mGzQBFTpQ72WiLiZJGfEfO7Vq9NlQ901cHqy2P7LTvFu8mJwKwh4dn0H0cELp4erZGcz
-         RUGj4jhcQv/FOAGRo6Dljn84h46sg4KxQgEvHQfMFGjNo/41w1wfJK7JCXOrUvvbGSfz
-         FtCw==
+        bh=90kZ9DvIdtL4dz9/qc/WVjEQ+mFVkPoHnP8T9TIhe7A=;
+        b=ef/WJXD6ND2VVTWtjP0vzwG88WfuVhxOJJArNwIQuxJude5gsVRhUqi8xPc4fE7qOk
+         V8wUMSO3Zv5SHMP50eLDxfPkSpNpOrO/D198Zv5u4WcgN4yA5w/wm3KGAKIiPHzu5xwu
+         z3gcvcdPF+P0D6qtAAbA93/JFddbzydUOCTIYjb/6maCpDdku1i7trDRA7Mau03Jgq3x
+         Tqf2WR3234mAPbFGhVYvbLol/pInxJics7zyrVKIbW+kEG8eCzGe7AS5ISs4q07xBvyp
+         luxp8xHGcma2WTsGP+iUbJxOdLddJI62YJUS1azA6Cey77UKz12D3oLCtzd8k/8cB63/
+         qMbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1756828013; x=1757432813;
+        d=1e100.net; s=20230601; t=1756828016; x=1757432816;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=n/5Ql6ePEZB3sncY9PXrRkrrrgHDmfb5EstPCmtwQL4=;
-        b=GfeTTYDJVm7sFA5USfAfKbTHK6fKvLZBiiocXDWcdQ4ZhXb13l4WZA1ysocc86ylPZ
-         4ou7CMrVA+tavs3rZD6YcUH7ABIPlh/5F1J0bVbOM6W864pX2KC03V9dWHAo9I6/k7d/
-         5p1hjf/+utv2rmaIUVt1MLv9AIj9MntEOmfTPVpWckOxW7mrvbKBg5yxyRpK3gDYmXKY
-         ciOdSI/HN/mG4Mt8Kq88nEGV6dNTP+Tjunz5sJidni4ORI+GfdKd54uI+j+zL1AhDD0h
-         cpNsOg8SAvDfZ7YS6xYpNLrzTBDoL0Ys7TU98k5uC2tfrqTKrYhu/l2aWJhPWqDcHQNr
-         ARXw==
-X-Forwarded-Encrypted: i=1; AJvYcCUOHdVNmIwPXsjk7jY1UK1hyP0iFK+qhwmK3igBqo/Qv5ocFsvdkb+nklS9Dr3Z5r2sll7V1rSP/UiNW6XP@lists.linaro.org
-X-Gm-Message-State: AOJu0YxGfpug+qMSJ9P7kja2065vg+siGiJ05DQzrfCeR75W8wnvjIr+
-	CKXKJoKVDWJLeotOXB/BWNDQfBcnCcYRKV1rviEYLvMOogebDvFhFhtg
-X-Gm-Gg: ASbGncs8C/7QdWK/aqh9FB4mASqxdp+nxfOOqPeAnkQDoUzVMejX25ehyrE5gDdXwOm
-	srKT5nf8IbLG3kbbZA2Ms01OJkbAAuRf50WeLObBsVULttZP5O14wUopg+CHmZTB7fVpfcsKMPY
-	4Xo3imqEPsMLAredZSeUhN/7fkoHGclNH0YQK1afLbBalfJff89WKC3UHwXEOf4ApvbQ7JBftYt
-	eJNe2GTKF4ZJzXj56CmHU5tIxOVSQ60la7ojUqx2OxZDgcbNjc4eagTlErCu5P1cKwN/yah77te
-	MFsvqMOWlRzQ9O7c85YiaOAKmXnexT2EFj4DiIFNSa1A64vEjkeEvg18vLsFOeGv2vq/19uN4d/
-	BjXAos2ArGEs2UXrOz96kGxWTQGJlYK5+PYBGbDYftq5Ewy9MIa8CNAY3Fah62sqct5pxMZvNKQ
-	LA1gsZ3vy56p1bWcHl2+usrFlq
-X-Google-Smtp-Source: AGHT+IHq43AbE5VkmkapAR0tzhsq3zXTXrsk3nysd56WKEVtoZpJPwZ7v6YnW4KfZ38+U9nLscJHkg==
-X-Received: by 2002:a05:6000:25c6:b0:3ce:f0a5:d598 with SMTP id ffacd0b85a97d-3d1dca7bfdbmr10337054f8f.10.1756828012868;
-        Tue, 02 Sep 2025 08:46:52 -0700 (PDT)
+        bh=90kZ9DvIdtL4dz9/qc/WVjEQ+mFVkPoHnP8T9TIhe7A=;
+        b=aPT2J+raS0y1B2mc2P0DojbCB4hYurJcV8dcpVqFCmLMhuPa+uhlfGVRCKq1yaE+eb
+         UQL0cYUs7+p/qNtRF4cqa2iuW4Q2SgImR2f6ogU7dKO6FSorU8YXQe8wgpkPu+I3Aytz
+         bGfYdlEx0X04Z93Mbx4qzOpAgRErr+ProeZLgeQyTEV8XvDMxI7IXe8HwVlRH34tjdhR
+         X4nIL4TV2/Wc2H9EvRuxyKkVSY9IXk8PBikXpNmLs4Butw30/ql52+dE4njXhBk1LBMn
+         FYIkP3MRbUoXFGGqaQd7Mezo4Y0L2IUb0rrDanTeIBMwHLlAnTUjjUstis9bot76/eN7
+         xAdg==
+X-Forwarded-Encrypted: i=1; AJvYcCWUoqSZmSaG05SUdzyx86XQ7ufn7cqLjUnRSjtvYzk4Oi+bnOrjoanDeaT/UbqxCWK/NPqKp+QZ+WZRAfc+@lists.linaro.org
+X-Gm-Message-State: AOJu0Yy57elz0Us6ZizXVkUFyqW1w+TiMg7sAWa8mznzzxTyDtR9AfqO
+	ZxOxorlsqAgOWsh0ZWn3Oj/LZWe6Nj94qwkbtYmSE92++cGjdh+/RbVr
+X-Gm-Gg: ASbGncs+AJiPpszqZqYhI//JMjkv+wurCHk9FKa40oa13pcp5bfZcnOqyg4+16fsrYX
+	Hnq6Z6hiNzmrBoAizaY2MZRdNNaHjqr3Q4DeVtpVvTHaIfp+YLyJnU0vV8FUxfy4xFFVtc3BN4p
+	+YEtoDv6CJt+ludPTjY9JRkCDquDk06w11XsRoXx5lWjPXntf8Q7Ao75lbSH5fNhUIDXkTNQ2km
+	IaC0oaP5M70AZgJdVAF3nU3Q0AxA0NcYKqqPriv2zChNqrNGOVMLBUnBInLvHLIyM+4j3uxguXy
+	L3l7vZ4xWW3YqwzN0BFbydLr++VqEIznzg7pnEU09snBYmKiyn5LisEBqJiv8h/np+253/n0Ybt
+	tZknQdDapHWU9yVRnJ3wTflxAPtshkmdO84Dw8ZwPIdnEai5DRRbVYgYVDeWmwx7HLmrgFiV3+4
+	G4YXNw0drBzTbt5qfCzJSkZ0d7
+X-Google-Smtp-Source: AGHT+IGEFJ9YebDpQzKgxpYDB/nK1gBHr48wi1ywTJ9aVMyk17MTQGdJjc1ZEGueQXcFUAhwJrBA9A==
+X-Received: by 2002:a05:6000:2f86:b0:3d0:64c1:1a39 with SMTP id ffacd0b85a97d-3d1dea894eamr9700405f8f.35.1756828016192;
+        Tue, 02 Sep 2025 08:46:56 -0700 (PDT)
 Received: from localhost (p200300e41f1c4d00f22f74fffe1f3a53.dip0.t-ipconnect.de. [2003:e4:1f1c:4d00:f22f:74ff:fe1f:3a53])
-        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-45c447244c4sm4765415e9.6.2025.09.02.08.46.48
+        by smtp.gmail.com with UTF8SMTPSA id ffacd0b85a97d-3d95df59e50sm4845738f8f.23.2025.09.02.08.46.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 02 Sep 2025 08:46:48 -0700 (PDT)
+        Tue, 02 Sep 2025 08:46:53 -0700 (PDT)
 From: Thierry Reding <thierry.reding@gmail.com>
 To: Thierry Reding <thierry.reding@gmail.com>,
 	David Airlie <airlied@gmail.com>,
 	Simona Vetter <simona@ffwll.ch>,
 	Sumit Semwal <sumit.semwal@linaro.org>
-Date: Tue,  2 Sep 2025 17:46:23 +0200
-Message-ID: <20250902154630.4032984-4-thierry.reding@gmail.com>
+Date: Tue,  2 Sep 2025 17:46:24 +0200
+Message-ID: <20250902154630.4032984-5-thierry.reding@gmail.com>
 X-Mailer: git-send-email 2.50.0
 In-Reply-To: <20250902154630.4032984-1-thierry.reding@gmail.com>
 References: <20250902154630.4032984-1-thierry.reding@gmail.com>
 MIME-Version: 1.0
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 28C2845E6F
+X-Rspamd-Queue-Id: 4C36044A45
 X-Spamd-Bar: --
 X-Spamd-Result: default: False [-2.00 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
@@ -96,21 +96,21 @@ X-Spamd-Result: default: False [-2.00 / 15.00];
 	MID_RHS_MATCH_FROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.221.41:from];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.45:from];
 	DKIM_TRACE(0.00)[gmail.com:+];
 	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	FREEMAIL_ENVFROM(0.00)[gmail.com];
 	FROM_HAS_DN(0.00)[]
-Message-ID-Hash: ODFXVZ4Q3VCR4FXFPGQ5C6VOSUVPEFOR
-X-Message-ID-Hash: ODFXVZ4Q3VCR4FXFPGQ5C6VOSUVPEFOR
+Message-ID-Hash: V33KFNKU6AOZBDAHYAS5DCTFRDUG4UP2
+X-Message-ID-Hash: V33KFNKU6AOZBDAHYAS5DCTFRDUG4UP2
 X-MailFrom: thierry.reding@gmail.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Andrew Morton <akpm@linux-foundation.org>, David Hildenbrand <david@redhat.com>, Mike Rapoport <rppt@kernel.org>, dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, linux-tegra@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-mm@kvack.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 3/9] mm/cma: Allow dynamically creating CMA areas
+Subject: [Linaro-mm-sig] [PATCH 4/9] dma-buf: heaps: Add debugfs support
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ODFXVZ4Q3VCR4FXFPGQ5C6VOSUVPEFOR/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/V33KFNKU6AOZBDAHYAS5DCTFRDUG4UP2/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -122,185 +122,125 @@ Content-Transfer-Encoding: 7bit
 
 From: Thierry Reding <treding@nvidia.com>
 
-There is no technical reason why there should be a limited number of CMA
-regions, so extract some code into helpers and use them to create extra
-functions (cma_create() and cma_free()) that allow creating and freeing,
-respectively, CMA regions dynamically at runtime.
-
-Note that these dynamically created CMA areas are treated specially and
-do not contribute to the number of total CMA pages so that this count
-still only applies to the fixed number of CMA areas.
+Add a callback to struct dma_heap_ops that heap providers can implement
+to show information about the state of the heap in debugfs. A top-level
+directory named "dma_heap" is created in debugfs and individual files
+will be named after the heaps.
 
 Signed-off-by: Thierry Reding <treding@nvidia.com>
 ---
- include/linux/cma.h | 16 ++++++++
- mm/cma.c            | 89 ++++++++++++++++++++++++++++++++++-----------
- 2 files changed, 83 insertions(+), 22 deletions(-)
+ drivers/dma-buf/dma-heap.c | 56 ++++++++++++++++++++++++++++++++++++++
+ include/linux/dma-heap.h   |  2 ++
+ 2 files changed, 58 insertions(+)
 
-diff --git a/include/linux/cma.h b/include/linux/cma.h
-index 62d9c1cf6326..f1e20642198a 100644
---- a/include/linux/cma.h
-+++ b/include/linux/cma.h
-@@ -61,6 +61,10 @@ extern void cma_reserve_pages_on_error(struct cma *cma);
- struct folio *cma_alloc_folio(struct cma *cma, int order, gfp_t gfp);
- bool cma_free_folio(struct cma *cma, const struct folio *folio);
- bool cma_validate_zones(struct cma *cma);
-+
-+struct cma *cma_create(phys_addr_t base, phys_addr_t size,
-+		       unsigned int order_per_bit, const char *name);
-+void cma_free(struct cma *cma);
- #else
- static inline struct folio *cma_alloc_folio(struct cma *cma, int order, gfp_t gfp)
- {
-@@ -71,10 +75,22 @@ static inline bool cma_free_folio(struct cma *cma, const struct folio *folio)
- {
- 	return false;
+diff --git a/drivers/dma-buf/dma-heap.c b/drivers/dma-buf/dma-heap.c
+index cdddf0e24dce..f062f88365a5 100644
+--- a/drivers/dma-buf/dma-heap.c
++++ b/drivers/dma-buf/dma-heap.c
+@@ -7,6 +7,7 @@
+  */
+ 
+ #include <linux/cdev.h>
++#include <linux/debugfs.h>
+ #include <linux/device.h>
+ #include <linux/dma-buf.h>
+ #include <linux/dma-heap.h>
+@@ -217,6 +218,46 @@ const char *dma_heap_get_name(struct dma_heap *heap)
  }
-+
- static inline bool cma_validate_zones(struct cma *cma)
- {
- 	return false;
- }
-+
-+static inline struct cma *cma_create(phys_addr_t base, phys_addr_t size,
-+				     unsigned int order_per_bit,
-+				     const char *name)
+ EXPORT_SYMBOL(dma_heap_get_name);
+ 
++#ifdef CONFIG_DEBUG_FS
++static int dma_heap_debug_show(struct seq_file *s, void *unused)
 +{
-+	return NULL;
++	struct dma_heap *heap = s->private;
++	int err = 0;
++
++	if (heap->ops && heap->ops->show)
++		err = heap->ops->show(s, heap);
++
++	return err;
++}
++DEFINE_SHOW_ATTRIBUTE(dma_heap_debug);
++
++static struct dentry *dma_heap_debugfs_dir;
++
++static void dma_heap_init_debugfs(void)
++{
++	struct dentry *dir;
++
++	dir = debugfs_create_dir("dma_heap", NULL);
++	if (IS_ERR(dir))
++		return;
++
++	dma_heap_debugfs_dir = dir;
 +}
 +
-+static inline void cma_free(struct cma *cma)
++static void dma_heap_exit_debugfs(void)
++{
++	debugfs_remove_recursive(dma_heap_debugfs_dir);
++}
++#else
++static void dma_heap_init_debugfs(void)
 +{
 +}
- #endif
- 
- #endif
-diff --git a/mm/cma.c b/mm/cma.c
-index e56ec64d0567..8149227d319f 100644
---- a/mm/cma.c
-+++ b/mm/cma.c
-@@ -214,6 +214,18 @@ void __init cma_reserve_pages_on_error(struct cma *cma)
- 	set_bit(CMA_RESERVE_PAGES_ON_ERROR, &cma->flags);
- }
- 
-+static void __init cma_init_area(struct cma *cma, const char *name,
-+				 phys_addr_t size, unsigned int order_per_bit)
++
++static void dma_heap_exit_debugfs(void)
 +{
-+	if (name)
-+		snprintf(cma->name, CMA_MAX_NAME, "%s", name);
-+	else
-+		snprintf(cma->name, CMA_MAX_NAME,  "cma%d\n", cma_area_count);
-+
-+	cma->available_count = cma->count = size >> PAGE_SHIFT;
-+	cma->order_per_bit = order_per_bit;
 +}
-+
- static int __init cma_new_area(const char *name, phys_addr_t size,
- 			       unsigned int order_per_bit,
- 			       struct cma **res_cma)
-@@ -232,13 +244,8 @@ static int __init cma_new_area(const char *name, phys_addr_t size,
- 	cma = &cma_areas[cma_area_count];
- 	cma_area_count++;
- 
--	if (name)
--		snprintf(cma->name, CMA_MAX_NAME, "%s", name);
--	else
--		snprintf(cma->name, CMA_MAX_NAME,  "cma%d\n", cma_area_count);
-+	cma_init_area(cma, name, size, order_per_bit);
- 
--	cma->available_count = cma->count = size >> PAGE_SHIFT;
--	cma->order_per_bit = order_per_bit;
- 	*res_cma = cma;
- 	totalcma_pages += cma->count;
- 
-@@ -251,6 +258,27 @@ static void __init cma_drop_area(struct cma *cma)
- 	cma_area_count--;
- }
- 
-+static int __init cma_check_memory(phys_addr_t base, phys_addr_t size)
-+{
-+	if (!size || !memblock_is_region_reserved(base, size))
-+		return -EINVAL;
-+
-+	/*
-+	 * CMA uses CMA_MIN_ALIGNMENT_BYTES as alignment requirement which
-+	 * needs pageblock_order to be initialized. Let's enforce it.
-+	 */
-+	if (!pageblock_order) {
-+		pr_err("pageblock_order not yet initialized. Called during early boot?\n");
-+		return -EINVAL;
-+	}
-+
-+	/* ensure minimal alignment required by mm core */
-+	if (!IS_ALIGNED(base | size, CMA_MIN_ALIGNMENT_BYTES))
-+		return -EINVAL;
-+
-+	return 0;
-+}
++#endif
 +
  /**
-  * cma_init_reserved_mem() - create custom contiguous area from reserved memory
-  * @base: Base address of the reserved area
-@@ -271,22 +299,9 @@ int __init cma_init_reserved_mem(phys_addr_t base, phys_addr_t size,
- 	struct cma *cma;
- 	int ret;
+  * dma_heap_add - adds a heap to dmabuf heaps
+  * @exp_info: information needed to register this heap
+@@ -291,6 +332,13 @@ struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_info)
  
--	/* Sanity checks */
--	if (!size || !memblock_is_region_reserved(base, size))
--		return -EINVAL;
--
--	/*
--	 * CMA uses CMA_MIN_ALIGNMENT_BYTES as alignment requirement which
--	 * needs pageblock_order to be initialized. Let's enforce it.
--	 */
--	if (!pageblock_order) {
--		pr_err("pageblock_order not yet initialized. Called during early boot?\n");
--		return -EINVAL;
--	}
--
--	/* ensure minimal alignment required by mm core */
--	if (!IS_ALIGNED(base | size, CMA_MIN_ALIGNMENT_BYTES))
--		return -EINVAL;
-+	ret = cma_check_memory(base, size);
-+	if (ret < 0)
-+		return ret;
+ 	/* Add heap to the list */
+ 	list_add(&heap->list, &heap_list);
++
++#ifdef CONFIG_DEBUG_FS
++	if (heap->ops && heap->ops->show)
++		debugfs_create_file(heap->name, 0444, dma_heap_debugfs_dir,
++				    heap, &dma_heap_debug_fops);
++#endif
++
+ 	mutex_unlock(&heap_list_lock);
  
- 	ret = cma_new_area(name, size, order_per_bit, &cma);
- 	if (ret != 0)
-@@ -1112,3 +1127,33 @@ void __init *cma_reserve_early(struct cma *cma, unsigned long size)
+ 	return heap;
+@@ -327,6 +375,14 @@ static int dma_heap_init(void)
+ 	}
+ 	dma_heap_class->devnode = dma_heap_devnode;
  
- 	return ret;
++	dma_heap_init_debugfs();
++
+ 	return 0;
  }
+ subsys_initcall(dma_heap_init);
 +
-+struct cma *__init cma_create(phys_addr_t base, phys_addr_t size,
-+			      unsigned int order_per_bit, const char *name)
++static void __exit dma_heap_exit(void)
 +{
-+	struct cma *cma;
-+	int ret;
-+
-+	ret = cma_check_memory(base, size);
-+	if (ret < 0)
-+		return ERR_PTR(ret);
-+
-+	cma = kzalloc(sizeof(*cma), GFP_KERNEL);
-+	if (!cma)
-+		return ERR_PTR(-ENOMEM);
-+
-+	cma_init_area(cma, name, size, order_per_bit);
-+	cma->ranges[0].base_pfn = PFN_DOWN(base);
-+	cma->ranges[0].early_pfn = PFN_DOWN(base);
-+	cma->ranges[0].count = cma->count;
-+	cma->nranges = 1;
-+
-+	cma_activate_area(cma);
-+
-+	return cma;
++	dma_heap_exit_debugfs();
 +}
-+
-+void cma_free(struct cma *cma)
-+{
-+	kfree(cma);
-+}
++__exitcall(dma_heap_exit);
+diff --git a/include/linux/dma-heap.h b/include/linux/dma-heap.h
+index 27d15f60950a..065f537177af 100644
+--- a/include/linux/dma-heap.h
++++ b/include/linux/dma-heap.h
+@@ -12,6 +12,7 @@
+ #include <linux/types.h>
+ 
+ struct dma_heap;
++struct seq_file;
+ 
+ /**
+  * struct dma_heap_ops - ops to operate on a given heap
+@@ -24,6 +25,7 @@ struct dma_heap_ops {
+ 				    unsigned long len,
+ 				    u32 fd_flags,
+ 				    u64 heap_flags);
++	int (*show)(struct seq_file *s, struct dma_heap *heap);
+ };
+ 
+ /**
 -- 
 2.50.0
 
