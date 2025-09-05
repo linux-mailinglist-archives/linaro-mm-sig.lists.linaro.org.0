@@ -2,251 +2,231 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5FD1FB440AA
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  4 Sep 2025 17:31:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 24349B44C97
+	for <lists+linaro-mm-sig@lfdr.de>; Fri,  5 Sep 2025 06:07:36 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C5B2844FBE
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  4 Sep 2025 15:31:09 +0000 (UTC)
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
-	by lists.linaro.org (Postfix) with ESMTPS id 2F85C434D9
-	for <linaro-mm-sig@lists.linaro.org>; Thu,  4 Sep 2025 15:31:00 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id DE18445608
+	for <lists+linaro-mm-sig@lfdr.de>; Fri,  5 Sep 2025 04:07:34 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.10])
+	by lists.linaro.org (Postfix) with ESMTPS id 725923F719
+	for <linaro-mm-sig@lists.linaro.org>; Fri,  5 Sep 2025 04:07:25 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20230601 header.b=iN27GiMF;
-	spf=pass (lists.linaro.org: domain of thierry.reding@gmail.com designates 209.85.221.48 as permitted sender) smtp.mailfrom=thierry.reding@gmail.com;
-	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-3dcce361897so804638f8f.3
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 04 Sep 2025 08:31:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1756999859; x=1757604659; darn=lists.linaro.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=8xE4rmjGRisIQDV5Gl3u0Fv0zsZRWzQtHGzTA13lIgs=;
-        b=iN27GiMFOO8mQDI1rR7A8NY3T78hbznA6exJTaAN3B15/12EFXv+71WwNe/DZ33gPF
-         qSRrmm3LwOqWh5socPucw6BAUYCZgwRHeSTIV+yHkRDFXYSIQX98MFzG1WvLeLNPFfQs
-         J0Qy1IKutA9qXvMGgTrm6YNXHtenXP9tcs1xxnRVIpzbe4Nsm97qEI1thddyxTMDj0Z8
-         TqUCsHm9pOM4Ebf4UQk0iBO1XFy+hZorFXeOLvwx//cnm/AfH+T15wxgNZJDt4IWgBXL
-         e2HmsBrm0x//txPqYzTgPK9ee+4oyBpsmnCis7+tswq7ZPWolNQlglTtP8T8eOMRwPSR
-         K/cg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1756999859; x=1757604659;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=8xE4rmjGRisIQDV5Gl3u0Fv0zsZRWzQtHGzTA13lIgs=;
-        b=NbCEwKArUS0fOU7LfOO4acrY3aSsjNX+AypoX8ley9gWFNiJNDdgQgdg2ZiYFHXh79
-         p/+4vguFlvskPvOLdwLsd9/rzquFD41onMtTl+trLwA8UEN61eMHvORvbigaFQfG9zTM
-         peh0IeMiVmJaEYqcQAp3fA4koy+NWW4M6FtS6su+g4nhlrzWsI8Eo9C7MtP3+5jG2VKK
-         a2AXZ4XsMovIe2TTjs7mI2yVl2k0Yd1obibUdDJgY9HBb0bkCD6dt6syBiWXKb0dfRqA
-         bTQBL1afKVD+rYXykYBlfxO2aC6c1gMM0Wmc4cUlqO4p6B4GDxJCzeEFsasC1T08TGWU
-         fdKw==
-X-Forwarded-Encrypted: i=1; AJvYcCWMHlN1NRr9Cawgo8WCI7RHUVV6kLs00jlK9S7HOmpAQYR5C0ogHl/ywi+yjLfaKYn+2zaZIQM6+G8Gnper@lists.linaro.org
-X-Gm-Message-State: AOJu0YysFjbndZARs4RZKXro2Ky6ff37SzyJnDpfNX6NniFCUgas/zSO
-	fPVXxgiXN5Wr2ORw8aA3QexErf9P4oghXfJttW1U/fokbjHFSxibcT9r
-X-Gm-Gg: ASbGncuhkw4xOXxZhaFu3Qxbzar6ADi5hgHcgaPZR+wgX24b3Fg2gCwoWha3LKb8CTS
-	71/2gW8vyO1sgGOz3Nr7EYIZybwlzxqUeTv/yIyK1FBw7hmp8ISfZgnXQWZ9X2GSJ6onj4rImXQ
-	KKuj3QFN/W5RsqvJtadAAcrrvOnCPF5uybvrYHtqcznmUZCvTZHbY0EeJ/pGdN/BXOET1/qopS6
-	9x33UbEjOr4FUVkBjCej8+1Hr8e/9F/Ki5nJ4OhoOecTSmIk2Rcw1V7QWJW6CTpkULCMD5ZNWN3
-	FkmKFCb+9L8NeXxLlsoLDQs7uQVjzHu6067BqH0Gr0AG+S6nkg+mDoDaH2sU31SpxTPuQcUhhIy
-	ymFEhf6i2a6fXHT/x6dtdvd98CEGc/f2ulOEIZnYQ5I5vXPG8x30EPL6sMFenFOLSJY2mGjMRTj
-	PMlcPC/Vjs
-X-Google-Smtp-Source: AGHT+IELB08VGh3VAq+KT32lgs3tsogmI3gmF9iQ69mvKEfdnKdejg4TzGBR9ruyPEVGthqdMWy/EA==
-X-Received: by 2002:a5d:588b:0:b0:3dc:1473:18f3 with SMTP id ffacd0b85a97d-3dc14731977mr5762689f8f.41.1756999858759;
-        Thu, 04 Sep 2025 08:30:58 -0700 (PDT)
-Received: from orome (p200300e41f1c4d00f22f74fffe1f3a53.dip0.t-ipconnect.de. [2003:e4:1f1c:4d00:f22f:74ff:fe1f:3a53])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3d0a1f807f9sm27264155f8f.38.2025.09.04.08.30.57
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 04 Sep 2025 08:30:57 -0700 (PDT)
-Date: Thu, 4 Sep 2025 17:30:55 +0200
-From: Thierry Reding <thierry.reding@gmail.com>
-To: Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>
-Message-ID: <dzbefkymgrtyxfgfcdu4kq7rmgpa6khfqyhzz4a6y3qqonc4gj@yfafsqwnloia>
-References: <20250902154630.4032984-1-thierry.reding@gmail.com>
- <20250902154630.4032984-7-thierry.reding@gmail.com>
+	dkim=pass header.d=intel.com header.s=Intel header.b=Z9yZ4Lzi;
+	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 192.198.163.10 as permitted sender) smtp.mailfrom=lkp@intel.com;
+	dmarc=pass (policy=none) header.from=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1757045246; x=1788581246;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=4ik2CJTqkP7JyZGKZODFZYdcNPSHjRkjR5R+MPvEcCo=;
+  b=Z9yZ4Lzi5UF9mKK1b5CTw6FgJ7Qsz5nGYb5qZlvhU8qZG4TnSxSEl/vZ
+   XUOzV8sNEGdRC5melIDdHgSRKlUclNTdge4fOyoC6Qtvkif0ZRlm9U557
+   mo88jZhovlkmhH1lKTZs6H6KPdRKZ/zuNyA7ZXDTozNT/5AMQBqtbIfqC
+   YCZlg52XsS8ePOAFOmPAj8P51rQ5t31iDEAgTGkIAmdsg5kxGZg0+zkj7
+   Zx7jZwwCqhKSkXbLX9dNUAYEkipHkJNqEC4KR/VMr2VxoUVq5b5W2mfG0
+   OhFvDHB6HTSBKnzGOBzo333PKTxr+2F4frlHQh0T/W1mt+Udn3zXVhE0r
+   A==;
+X-CSE-ConnectionGUID: 1m6ftwlqR1CJ0CVFKXA4fw==
+X-CSE-MsgGUID: s3stR3c5TIivejNAqs2FPQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11543"; a="70773234"
+X-IronPort-AV: E=Sophos;i="6.18,240,1751266800";
+   d="scan'208";a="70773234"
+Received: from fmviesa002.fm.intel.com ([10.60.135.142])
+  by fmvoesa104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 04 Sep 2025 21:07:24 -0700
+X-CSE-ConnectionGUID: UzhF1ARWTg+dFKBwSb3SZQ==
+X-CSE-MsgGUID: SZdZEBhnTWOI4Prh+5yVeg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.18,240,1751266800";
+   d="scan'208";a="195723838"
+Received: from lkp-server01.sh.intel.com (HELO 114d98da2b6c) ([10.239.97.150])
+  by fmviesa002.fm.intel.com with ESMTP; 04 Sep 2025 21:07:20 -0700
+Received: from kbuild by 114d98da2b6c with local (Exim 4.96)
+	(envelope-from <lkp@intel.com>)
+	id 1uuNjJ-00001H-2e;
+	Fri, 05 Sep 2025 04:07:17 +0000
+Date: Fri, 5 Sep 2025 12:06:33 +0800
+From: kernel test robot <lkp@intel.com>
+To: Thierry Reding <thierry.reding@gmail.com>,
+	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+	Sumit Semwal <sumit.semwal@linaro.org>
+Message-ID: <202509051132.C0y3nq6E-lkp@intel.com>
+References: <20250902154630.4032984-6-thierry.reding@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20250902154630.4032984-7-thierry.reding@gmail.com>
+Content-Disposition: inline
+In-Reply-To: <20250902154630.4032984-6-thierry.reding@gmail.com>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 2F85C434D9
+X-Rspamd-Queue-Id: 725923F719
 X-Spamd-Bar: ----
-X-Spamd-Result: default: False [-4.10 / 15.00];
+X-Spamd-Result: default: False [-4.50 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	SIGNED_PGP(-2.00)[];
+	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:192.198.163.0/26];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	MIME_GOOD(-0.10)[text/plain];
+	RCPT_COUNT_TWELVE(0.00)[20];
+	ASN(0.00)[asn:4983, ipnet:192.198.162.0/23, country:US];
+	MIME_TRACE(0.00)[0:+];
 	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
-	RCPT_COUNT_TWELVE(0.00)[18];
-	FREEMAIL_CC(0.00)[gmail.com,ffwll.ch,linaro.org,collabora.com,arm.com,google.com,linux-foundation.org,redhat.com,kernel.org,lists.freedesktop.org,vger.kernel.org,lists.linaro.org,kvack.org];
-	TAGGED_FROM(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
 	MISSING_XM_UA(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_EQ_ENVFROM(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	NEURAL_HAM(-0.00)[-1.000];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.221.48:from];
 	TAGGED_RCPT(0.00)[dt];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FREEMAIL_ENVFROM(0.00)[gmail.com]
-Message-ID-Hash: O7IKCZFGPLIKGY7RVXTSNNIQTKSADBEC
-X-Message-ID-Hash: O7IKCZFGPLIKGY7RVXTSNNIQTKSADBEC
-X-MailFrom: thierry.reding@gmail.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Andrew Morton <akpm@linux-foundation.org>, David Hildenbrand <david@redhat.com>, Mike Rapoport <rppt@kernel.org>, dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, linux-tegra@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-mm@kvack.org
+	FREEMAIL_TO(0.00)[gmail.com,ffwll.ch,linaro.org];
+	NEURAL_HAM(-0.00)[-1.000];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[intel.com:+]
+Message-ID-Hash: NRPK3DO2B5SORHT4NYSMZV3SRFXKXKU6
+X-Message-ID-Hash: NRPK3DO2B5SORHT4NYSMZV3SRFXKXKU6
+X-MailFrom: lkp@intel.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: oe-kbuild-all@lists.linux.dev, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Andrew Morton <akpm@linux-foundation.org>, Linux Memory Management List <linux-mm@kvack.org>, David Hildenbrand <david@redhat.com>, Mike Rapoport <rppt@kernel.org>, dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, linux-tegra@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 6/9] arm64: tegra: Add VPR placeholder node on Tegra234
+Subject: [Linaro-mm-sig] Re: [PATCH 5/9] dma-buf: heaps: Add support for Tegra VPR
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/O7IKCZFGPLIKGY7RVXTSNNIQTKSADBEC/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NRPK3DO2B5SORHT4NYSMZV3SRFXKXKU6/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============0808919169419460067=="
-
-
---===============0808919169419460067==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="4xtz2xrto4fsphdg"
-Content-Disposition: inline
-
-
---4xtz2xrto4fsphdg
-Content-Type: text/plain; protected-headers=v1; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH 6/9] arm64: tegra: Add VPR placeholder node on Tegra234
-MIME-Version: 1.0
-
-On Tue, Sep 02, 2025 at 05:46:26PM +0200, Thierry Reding wrote:
-> From: Thierry Reding <treding@nvidia.com>
->=20
-> This node contains two sets of properties, one for the case where the
-> VPR is resizable (in which case the VPR region will be dynamically
-> allocated at boot time) and another case where the VPR is fixed in size
-> and initialized by early firmware.
->=20
-> The firmware running on the device is responsible for updating the node
-> with the real physical address for the fixed VPR case and remove the
-> properties needed only for resizable VPR. Similarly, if the VPR is
-> resizable, the firmware should remove the "reg" property since it is no
-> longer needed.
->=20
-> Signed-off-by: Thierry Reding <treding@nvidia.com>
-> ---
->  arch/arm64/boot/dts/nvidia/tegra234.dtsi | 34 ++++++++++++++++++++++++
->  1 file changed, 34 insertions(+)
->=20
-> diff --git a/arch/arm64/boot/dts/nvidia/tegra234.dtsi b/arch/arm64/boot/d=
-ts/nvidia/tegra234.dtsi
-> index df034dbb8285..4d572f5fa0b1 100644
-> --- a/arch/arm64/boot/dts/nvidia/tegra234.dtsi
-> +++ b/arch/arm64/boot/dts/nvidia/tegra234.dtsi
-> @@ -28,6 +28,40 @@ aliases {
->  		i2c8 =3D &dp_aux_ch3_i2c;
->  	};
-> =20
-> +	reserved-memory {
-> +		#address-cells =3D <2>;
-> +		#size-cells =3D <2>;
-> +		ranges;
-> +
-> +		vpr: video-protection-region@0 {
-> +			compatible =3D "nvidia,tegra-video-protection-region";
-> +			status =3D "disabled";
-> +			no-map;
-> +
-> +			/*
-> +			 * Two variants exist for this. For fixed VPR, the
-> +			 * firmware is supposed to update the "reg" property
-> +			 * with the fixed memory region configured as VPR.
-> +			 *
-> +			 * For resizable VPR we don't care about the exact
-> +			 * address and instead want a reserved region to be
-> +			 * allocated with a certain size and alignment at
-> +			 * boot time.
-> +			 *
-> +			 * The firmware is responsible for removing the
-> +			 * unused set of properties.
-> +			 */
-> +
-> +			/* fixed VPR */
-> +			reg =3D <0x0 0x0 0x0 0x0>;
-> +
-> +			/* resizable VPR */
-> +			size =3D <0x0 0x70000000>;
-> +			alignment =3D <0x0 0x100000>;
-> +			reusable;
-> +		};
-> +	};
-
-Hi DT maintainers,
-
-I wanted to get some feedback on this type of placeholder DT node. This
-doesn't actually validate properly because it contains properties for
-both the fixed and resizable VPR variants, which are mutually exclusive.
-However, the way that this currently works is that UEFI will remove and
-update whatever properties need to change during boot, so the booted
-kernel ends up with the correct, non-conflicting information.
-
-The reason why it was done this way is because it simplifies the code in
-UEFI to update this node. Also, without this being a placeholder I don't
-know what to put into this. There's no "default" for this. One option is
-to not have this in the DT at all and completely create it at boot time,
-but then it becomes quite difficult to create the phandle references.
-
-While at it, I'm not sure if I properly understand how to correctly name
-a reserved-memory region that is dynamically allocated like in the case
-of resizable VPR? It doesn't have a base address during boot and the
-kernel will allocate memory where it sees fit. Do I just leave out the
-unit-address in that case?
-
-Thanks,
-Thierry
-
---4xtz2xrto4fsphdg
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCgAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmi5sKwACgkQ3SOs138+
-s6EL1w/+O3vMzwflDNuAsOeJT5PO30EnSdPQtwSfs1kegW1Z0O7O+SxPDRbIOumH
-ZtXCWjmHUA0x4A4tV1KHYusXEpLe8kdgMeaFYK3XECONFcW/xto7lbOk9ujNo4B0
-RSBU+KmbKVeHe3JQ8ENftNYUpQqLHdBEi/FZVlgjZW8KLe+MuWHnvoZsutLTvLim
-edJeSpS/ms98AYPqE+MACLkqG92b1y0jgGhsa3dymQhX6RYbJxLTzO3SCG9WKpFL
-OkfgV5XwyRYgsBQDIkJnBu4+CtPOO2mJeUQGuHgvSlfv8Ulz6jYKIcPQj5hhJ8KZ
-qtqV5vMoRauXf76f97vKenJ86SPlWymUWCj5/K88mqtDm9EUoTtMT0LfGhCsIfIX
-TNBYgIz79w16UvFuZ/CmD2MEUPi00WpA5b2UyifcHKKnORwL08lBhLD0r5UWMf/H
-qUqNt0qtK2EuPjOeUMwB8YN5VPZCP4oWEWoSVCF3cbjUitjx2ogJRMgeazsAZdmP
-x1+CSVvTpQ1RqXIn3ezRgBkPLQ2d1KJIJdv+pdQn1zcFTuqd0nP5yFS52TiWsJ8/
-cczmrWcs3r30Aoaw3e0rW3OQHghuXLaavcm6FmLVFGs4VDlpRbFnESuLbynzAbAk
-7VfAJwgPBaLVqs2UqkC5ezADL7wV+VxmrcPUry4JBO+17jVwwBk=
-=p0GH
------END PGP SIGNATURE-----
-
---4xtz2xrto4fsphdg--
-
---===============0808919169419460067==
 Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
+Hi Thierry,
+
+kernel test robot noticed the following build warnings:
+
+[auto build test WARNING on next-20250902]
+[also build test WARNING on v6.17-rc4]
+[cannot apply to robh/for-next akpm-mm/mm-everything tegra/for-next linus/master v6.17-rc4 v6.17-rc3 v6.17-rc2]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
+
+url:    https://github.com/intel-lab-lkp/linux/commits/Thierry-Reding/dt-bindings-reserved-memory-Document-Tegra-VPR/20250902-235038
+base:   next-20250902
+patch link:    https://lore.kernel.org/r/20250902154630.4032984-6-thierry.reding%40gmail.com
+patch subject: [PATCH 5/9] dma-buf: heaps: Add support for Tegra VPR
+config: i386-allmodconfig (https://download.01.org/0day-ci/archive/20250905/202509051132.C0y3nq6E-lkp@intel.com/config)
+compiler: gcc-13 (Debian 13.3.0-16) 13.3.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20250905/202509051132.C0y3nq6E-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202509051132.C0y3nq6E-lkp@intel.com/
+
+All warnings (new ones prefixed by >>):
+
+   drivers/dma-buf/heaps/tegra-vpr.c: In function 'tegra_vpr_protect_pages':
+   drivers/dma-buf/heaps/tegra-vpr.c:192:21: error: implicit declaration of function '__ptep_get'; did you mean 'ptep_get'? [-Werror=implicit-function-declaration]
+     192 |         pte_t pte = __ptep_get(ptep);
+         |                     ^~~~~~~~~~
+         |                     ptep_get
+   drivers/dma-buf/heaps/tegra-vpr.c:192:21: error: invalid initializer
+   drivers/dma-buf/heaps/tegra-vpr.c:194:15: error: implicit declaration of function 'clear_pte_bit'; did you mean 'clear_ptes'? [-Werror=implicit-function-declaration]
+     194 |         pte = clear_pte_bit(pte, __pgprot(PROT_NORMAL));
+         |               ^~~~~~~~~~~~~
+         |               clear_ptes
+   In file included from arch/x86/include/asm/paravirt_types.h:11,
+                    from arch/x86/include/asm/ptrace.h:175,
+                    from arch/x86/include/asm/math_emu.h:5,
+                    from arch/x86/include/asm/processor.h:13,
+                    from arch/x86/include/asm/cpufeature.h:5,
+                    from arch/x86/include/asm/thread_info.h:59,
+                    from include/linux/thread_info.h:60,
+                    from include/linux/spinlock.h:60,
+                    from include/linux/wait.h:9,
+                    from include/linux/wait_bit.h:8,
+                    from include/linux/fs.h:7,
+                    from include/linux/debugfs.h:15,
+                    from drivers/dma-buf/heaps/tegra-vpr.c:12:
+   drivers/dma-buf/heaps/tegra-vpr.c:194:43: error: 'PROT_NORMAL' undeclared (first use in this function)
+     194 |         pte = clear_pte_bit(pte, __pgprot(PROT_NORMAL));
+         |                                           ^~~~~~~~~~~
+   arch/x86/include/asm/pgtable_types.h:202:48: note: in definition of macro '__pgprot'
+     202 | #define __pgprot(x)             ((pgprot_t) { (x) } )
+         |                                                ^
+   drivers/dma-buf/heaps/tegra-vpr.c:194:43: note: each undeclared identifier is reported only once for each function it appears in
+     194 |         pte = clear_pte_bit(pte, __pgprot(PROT_NORMAL));
+         |                                           ^~~~~~~~~~~
+   arch/x86/include/asm/pgtable_types.h:202:48: note: in definition of macro '__pgprot'
+     202 | #define __pgprot(x)             ((pgprot_t) { (x) } )
+         |                                                ^
+   drivers/dma-buf/heaps/tegra-vpr.c:195:15: error: implicit declaration of function 'set_pte_bit'; did you mean 'set_pte_at'? [-Werror=implicit-function-declaration]
+     195 |         pte = set_pte_bit(pte, __pgprot(PROT_DEVICE_nGnRnE));
+         |               ^~~~~~~~~~~
+         |               set_pte_at
+   drivers/dma-buf/heaps/tegra-vpr.c:195:41: error: 'PROT_DEVICE_nGnRnE' undeclared (first use in this function)
+     195 |         pte = set_pte_bit(pte, __pgprot(PROT_DEVICE_nGnRnE));
+         |                                         ^~~~~~~~~~~~~~~~~~
+   arch/x86/include/asm/pgtable_types.h:202:48: note: in definition of macro '__pgprot'
+     202 | #define __pgprot(x)             ((pgprot_t) { (x) } )
+         |                                                ^
+   drivers/dma-buf/heaps/tegra-vpr.c:197:9: error: implicit declaration of function '__set_pte'; did you mean 'set_pte'? [-Werror=implicit-function-declaration]
+     197 |         __set_pte(ptep, pte);
+         |         ^~~~~~~~~
+         |         set_pte
+   drivers/dma-buf/heaps/tegra-vpr.c: In function 'tegra_vpr_unprotect_pages':
+   drivers/dma-buf/heaps/tegra-vpr.c:205:21: error: invalid initializer
+     205 |         pte_t pte = __ptep_get(ptep);
+         |                     ^~~~~~~~~~
+   drivers/dma-buf/heaps/tegra-vpr.c:207:43: error: 'PROT_DEVICE_nGnRnE' undeclared (first use in this function)
+     207 |         pte = clear_pte_bit(pte, __pgprot(PROT_DEVICE_nGnRnE));
+         |                                           ^~~~~~~~~~~~~~~~~~
+   arch/x86/include/asm/pgtable_types.h:202:48: note: in definition of macro '__pgprot'
+     202 | #define __pgprot(x)             ((pgprot_t) { (x) } )
+         |                                                ^
+   drivers/dma-buf/heaps/tegra-vpr.c:208:41: error: 'PROT_NORMAL' undeclared (first use in this function)
+     208 |         pte = set_pte_bit(pte, __pgprot(PROT_NORMAL));
+         |                                         ^~~~~~~~~~~
+   arch/x86/include/asm/pgtable_types.h:202:48: note: in definition of macro '__pgprot'
+     202 | #define __pgprot(x)             ((pgprot_t) { (x) } )
+         |                                                ^
+   drivers/dma-buf/heaps/tegra-vpr.c: In function 'tegra_vpr_add_heap':
+>> drivers/dma-buf/heaps/tegra-vpr.c:8:21: warning: format '%lu' expects argument of type 'long unsigned int', but argument 6 has type 'size_t' {aka 'unsigned int'} [-Wformat=]
+       8 | #define pr_fmt(fmt) "tegra-vpr: " fmt
+         |                     ^~~~~~~~~~~~~
+   include/linux/dynamic_debug.h:224:29: note: in expansion of macro 'pr_fmt'
+     224 |                 func(&id, ##__VA_ARGS__);                       \
+         |                             ^~~~~~~~~~~
+   include/linux/dynamic_debug.h:248:9: note: in expansion of macro '__dynamic_func_call_cls'
+     248 |         __dynamic_func_call_cls(__UNIQUE_ID(ddebug), cls, fmt, func, ##__VA_ARGS__)
+         |         ^~~~~~~~~~~~~~~~~~~~~~~
+   include/linux/dynamic_debug.h:250:9: note: in expansion of macro '_dynamic_func_call_cls'
+     250 |         _dynamic_func_call_cls(_DPRINTK_CLASS_DFLT, fmt, func, ##__VA_ARGS__)
+         |         ^~~~~~~~~~~~~~~~~~~~~~
+   include/linux/dynamic_debug.h:269:9: note: in expansion of macro '_dynamic_func_call'
+     269 |         _dynamic_func_call(fmt, __dynamic_pr_debug,             \
+         |         ^~~~~~~~~~~~~~~~~~
+   include/linux/printk.h:636:9: note: in expansion of macro 'dynamic_pr_debug'
+     636 |         dynamic_pr_debug(fmt, ##__VA_ARGS__)
+         |         ^~~~~~~~~~~~~~~~
+   drivers/dma-buf/heaps/tegra-vpr.c:715:17: note: in expansion of macro 'pr_debug'
+     715 |                 pr_debug("  %2u: %pap-%pap (%lu MiB)\n", i, &start, &end,
+         |                 ^~~~~~~~
+   cc1: some warnings being treated as errors
+
+
+vim +8 drivers/dma-buf/heaps/tegra-vpr.c
+
+   > 8	#define pr_fmt(fmt) "tegra-vpr: " fmt
+     9	
+
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============0808919169419460067==--
