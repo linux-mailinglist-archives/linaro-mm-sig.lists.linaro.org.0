@@ -2,316 +2,186 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 17DA2B50099
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  9 Sep 2025 17:03:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 55D66B50DDC
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Sep 2025 08:10:34 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 092B7456B2
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  9 Sep 2025 15:03:43 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 37CAA43F87
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  9 Sep 2025 15:03:35 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C4E0144761
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Sep 2025 06:10:32 +0000 (UTC)
+Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
+	by lists.linaro.org (Postfix) with ESMTPS id 982D7443C0
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 10 Sep 2025 06:10:23 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=ioE++mz5;
-	spf=pass (lists.linaro.org: domain of andersson@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=andersson@kernel.org;
-	dmarc=pass (policy=quarantine) header.from=kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id 7CA9A44318;
-	Tue,  9 Sep 2025 15:03:34 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E73E4C4CEFA;
-	Tue,  9 Sep 2025 15:03:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1757430214;
-	bh=7TvrYBicwc1qY4ysRF7W20klhiPgGx5P3bsI+4oFUmk=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=ioE++mz5L8p0NLmlPKMWtvlL96Wdvy1ac0IQDFGRKJz3AsoUYmYma3ssXNZvFKb3u
-	 VPT+5H6aHvXtLDhuOxMluIXw0CTXtgqPnbMDJfbNJgHuq1dDOiNaCwfRCB8BcczzdN
-	 2KnQFMoPSkUeCTRC+pbgVJSYDSqPOMq8pRJ7esSBt75/HMtToc67kUoB9mje0Ghmy9
-	 u1N6zc9dDA3nTDLTjWN0utAM5dgCuvnreOzoy530L+nTrkNcf3IpNgi6qzjo7XvNRj
-	 GSEzesiKzDafKk/e+9c1cS4mDQyf77eouRngsFm/TUS4Igkyk+9T/QGz8XYRVFVBz1
-	 gWmD2yiZCJG0A==
-Date: Tue, 9 Sep 2025 10:03:31 -0500
-From: Bjorn Andersson <andersson@kernel.org>
-To: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
-Message-ID: <rvz274v27t54iktoa6uds5hyrs5ujkmahdl4o635gkah7cw277@jf4fjp5wb7ci>
-References: <20250901-qcom-tee-using-tee-ss-without-mem-obj-v9-0-a2af23f132d5@oss.qualcomm.com>
+	dkim=pass header.d=linaro.org header.s=google header.b=yG0meCwZ;
+	spf=pass (lists.linaro.org: domain of sumit.semwal@linaro.org designates 209.85.218.54 as permitted sender) smtp.mailfrom=sumit.semwal@linaro.org;
+	dmarc=pass (policy=none) header.from=linaro.org
+Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-b04271cfc3eso850289166b.3
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 09 Sep 2025 23:10:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1757484622; x=1758089422; darn=lists.linaro.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=aIIpzdS8c9OeYQKLWQsdxP00kZekR6xE06hcgvXgJZ8=;
+        b=yG0meCwZBDabKHHc92ztxsJDFTH0gUdJJ9NxLR+jHZGL/wPH+zS5Gxu2aITAqO/+nA
+         xZPFeHjwxHXV+mR14po6f0c4ltds/7rbf8P7CGvZFcx8h13mg1rogT7AuarwAFjb6V9M
+         lWCvFI4C4FlcoIRnkzq7wRTVTayr6/emNwNe7QfrAGaUXjtJNDRisUL4+2OWUwp97/uF
+         Nj2pT0raV/Yah69g5pcniSjv7eUyzxonPhyu8ZJn/DZ5cQMj/ZSsNJouuX09b6AZOPs1
+         y/7bFbsrmUojFtpgTY3wZzDny0HqZOX3Gk9F+rh7TRqdA45ZJXg1e5tLo1CZMpW7p0C0
+         +FJQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1757484622; x=1758089422;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=aIIpzdS8c9OeYQKLWQsdxP00kZekR6xE06hcgvXgJZ8=;
+        b=O9HXgbjtsuB/9XrFz0+eBTZ7Ldt7NZKS8qFdyRm+Z4nXHzQDB4LKb+fjtbAZ6SA43j
+         83GpLtplP6AF/Fd1y4/zQ85SSOMmKCn7ZLYGEtqG6oDHImYj0I8XhlG8mlNejkUB4VJx
+         60gfuu6/fOhoqgjaXUrmXUZk7vbWDAXWLghkxPi7OC+VSXChnGA3i8wxhTJEuPG5W9ux
+         4ItnQVPdFoD7Dyu8TG0h5/nl8GhzHX6y9O7BXt4Ou7vFisqYJDSaYQXq+Gqykws5Npwj
+         UPfGcoRNFvUS3tUkVVjQH5CRTNZ1Jr+KSmZRi2+x6zOwKC9Vw8bfXoUhvg51vcSF87J1
+         WiCg==
+X-Forwarded-Encrypted: i=1; AJvYcCVdnz5KtBDS21mhFmiR9S8T0lRpgGMciio4E7x+2ogAJM0XJnnN9tSQrfXgmzbXu9e+KPxhvckuCyfkZKkz@lists.linaro.org
+X-Gm-Message-State: AOJu0Yxw10kNy/o+zENDvhVsFHzMoxVwhqjgbVzW4f6IOZdarmOykdYk
+	AnXwD9eBheswjdnrM7hzq7HGTgc0Kyst4ssLQPJbe/gKdEkO+EVttcVySy0x7ESHpcfax6QDlUQ
+	UnZafU+mzK3Jp7MhOjD3AlXeHF86fosMWavYasfWwf5p5
+X-Gm-Gg: ASbGnculpmyOmk64kwgBWSC0b18/sZSHhaXXLG6ssnIpOUmb40o847/diQL64epewb4
+	beEMcvk8P6+Ebrq5KJlu5FCQgptV3HncLIEJfS+DKZDI0NlfScbUs0CXrhzXTo0dM74VPhpW1xK
+	+hPjHIKgYyGgOkWXVgrQ2ieXQZK/WjzEiHugEo2mgLL8IKtDkk4MUKQa2OmgUv8sPc9+fqqTE8/
+	6OgAEhUQTP0e5aogDlmP1SZXGSsgS6rcr6yYd4=
+X-Google-Smtp-Source: AGHT+IHtltdBE6OyCGOjnTcRy/1zlqJJiS3bBRZ6Sp6xQiGD2+sybE8i8kqhky52N8PljETBXEHJPYT64WU/zafZwdY=
+X-Received: by 2002:a17:907:6093:b0:b04:5e57:6d0d with SMTP id
+ a640c23a62f3a-b04b1714547mr1454575766b.50.1757484622475; Tue, 09 Sep 2025
+ 23:10:22 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20250901-qcom-tee-using-tee-ss-without-mem-obj-v9-0-a2af23f132d5@oss.qualcomm.com>
+References: <20250728-dma-buf-heap-names-doc-v4-1-f73f71cf0dfd@kernel.org>
+In-Reply-To: <20250728-dma-buf-heap-names-doc-v4-1-f73f71cf0dfd@kernel.org>
+From: Sumit Semwal <sumit.semwal@linaro.org>
+Date: Wed, 10 Sep 2025 11:40:11 +0530
+X-Gm-Features: AS18NWC9G3fMk0QfS66tLk1WOnGvCPe7TBSPm8NPx9Lx1FMibITf2FeEIh1wODI
+Message-ID: <CAO_48GHsteXa9vu5n8FyuWYGOK7yMBhz3ppQeO=CtxTdcM+K8g@mail.gmail.com>
+To: Maxime Ripard <mripard@kernel.org>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 37CAA43F87
-X-Spamd-Bar: ---
-X-Spamd-Result: default: False [-3.50 / 15.00];
+X-Rspamd-Queue-Id: 982D7443C0
+X-Spamd-Bar: ----
+X-Spamd-Result: default: False [-4.10 / 15.00];
 	BAYES_HAM(-3.00)[99.99%];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.252.31];
+	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
 	MIME_GOOD(-0.10)[text/plain];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	MISSING_XM_UA(0.00)[];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.218.54:from];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	TO_DN_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[21];
+	RCPT_COUNT_TWELVE(0.00)[15];
 	ARC_NA(0.00)[];
+	RCVD_COUNT_ONE(0.00)[1];
 	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_TLS_LAST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
+	FREEMAIL_CC(0.00)[collabora.com,arm.com,google.com,lwn.net,ti.com,redhat.com,kernel.org,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,gmail.com];
+	MISSING_XM_UA(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	DKIM_TRACE(0.00)[kernel.org:+]
-Message-ID-Hash: WQAY4SWMMEPSTMY5RQOC3M4HMWDHHYNQ
-X-Message-ID-Hash: WQAY4SWMMEPSTMY5RQOC3M4HMWDHHYNQ
-X-MailFrom: andersson@kernel.org
+	DKIM_TRACE(0.00)[linaro.org:+]
+Message-ID-Hash: JFKEIZ5XOBF3HZSPP4ZI3XRCQIAKKPDH
+X-Message-ID-Hash: JFKEIZ5XOBF3HZSPP4ZI3XRCQIAKKPDH
+X-MailFrom: sumit.semwal@linaro.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Jens Wiklander <jens.wiklander@linaro.org>, Sumit Garg <sumit.garg@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, Bartosz Golaszewski <bartosz.golaszewski@linaro.org>, Apurupa Pattapu <quic_apurupa@quicinc.com>, Kees Cook <kees@kernel.org>, "Gustavo A. R. Silva" <gustavoars@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Harshal Dev <quic_hdev@quicinc.com>, linux-arm-msm@vger.kernel.org, op-tee@lists.trustedfirmware.org, linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org, Sumit Garg <sumit.garg@oss.qualcomm.com>, Neil Armstrong <neil.armstrong@linaro.org>, Kuldeep Singh <quic_kuldsing@quicinc.com>
+CC: Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Jonathan Corbet <corbet@lwn.net>, Andrew Davis <afd@ti.com>, Jared Kangas <jkangas@redhat.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, Bagas Sanjaya <bagasdotme@gmail.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v9 00/11] Trusted Execution Environment (TEE) driver for Qualcomm TEE (QTEE)
+Subject: [Linaro-mm-sig] Re: [PATCH v4] Documentation: dma-buf: heaps: Add naming guidelines
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WQAY4SWMMEPSTMY5RQOC3M4HMWDHHYNQ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JFKEIZ5XOBF3HZSPP4ZI3XRCQIAKKPDH/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Mon, Sep 01, 2025 at 09:55:47PM -0700, Amirreza Zarrabi wrote:
-> This patch series introduces a Trusted Execution Environment (TEE)
-> driver for Qualcomm TEE (QTEE). QTEE enables Trusted Applications (TAs)
-> and services to run securely. It uses an object-based interface, where
-> each service is an object with sets of operations. Clients can invoke
-> these operations on objects, which can generate results, including other
-> objects. For example, an object can load a TA and return another object
-> that represents the loaded TA, allowing access to its services.
-> 
-> Kernel and userspace services are also available to QTEE through a
-> similar approach. QTEE makes callback requests that are converted into
-> object invocations. These objects can represent services within the
-> kernel or userspace process.
-> 
-> Note: This patch series focuses on QTEE objects and userspace services.
-> 
-> Linux already provides a TEE subsystem, which is described in [1]. The
-> tee subsystem provides a generic ioctl interface, TEE_IOC_INVOKE, which
-> can be used by userspace to talk to a TEE backend driver. We extend the
-> Linux TEE subsystem to understand object parameters and an ioctl call so
-> client can invoke objects in QTEE:
-> 
->   - TEE_IOCTL_PARAM_ATTR_TYPE_OBJREF_*
->   - TEE_IOC_OBJECT_INVOKE
-> 
-> The existing ioctl calls TEE_IOC_SUPPL_RECV and TEE_IOC_SUPPL_SEND are
-> used for invoking services in the userspace process by QTEE.
-> 
-> The TEE backend driver uses the QTEE Transport Message to communicate
-> with QTEE. Interactions through the object INVOKE interface are
-> translated into QTEE messages. Likewise, object invocations from QTEE
-> for userspace objects are converted into SEND/RECV ioctl calls to
-> supplicants.
-> 
-> The details of QTEE Transport Message to communicate with QTEE is
-> available in [PATCH 12/12] Documentation: tee: Add Qualcomm TEE driver.
-> 
-> You can run basic tests with following steps:
-> git clone https://github.com/quic/quic-teec.git
-> cd quic-teec
-> mkdir build
-> cmake .. -DCMAKE_TOOLCHAIN_FILE=CMakeToolchain.txt -DBUILD_UNITTEST=ON
-> 
-> https://github.com/quic/quic-teec/blob/main/README.md lists dependencies
-> needed to build the above.
-> 
-> More comprehensive tests are availabe at
-> https://github.com/qualcomm/minkipc.
-> 
-> root@qcom-armv8a:~# qtee_supplicant &
-> root@qcom-armv8a:~# qtee_supplicant: process entry PPID = 378
-> Total listener services to start = 4
-> Opening CRequestTABuffer_open
-> Path /data/
-> register_service ::Opening CRegisterTABufCBO_UID
-> Calling TAbufCBO Register
-> QTEE_SUPPLICANT RUNNING
->  
-> root@qcom-armv8a:~# smcinvoke_client -c /data 1
-> Run callback obj test...
-> Load /data/tzecotestapp.mbn, size 52192, buf 0x1e44ba0.
-> System Time: 2024-02-27 17:26:31
-> PASSED - Callback tests with Buffer inputs.
-> PASSED - Callback tests with Remote and Callback object inputs.
-> PASSED - Callback tests with Memory Object inputs.
-> TEST PASSED!
-> root@qcom-armv8a:~#
-> root@qcom-armv8a:~# smcinvoke_client -m /data 1
-> Run memory obj test...
-> Load /data/tzecotestapp.mbn, size 52192, buf 0x26cafba0.
-> System Time: 2024-02-27 17:26:39
-> PASSED - Single Memory Object access Test.
-> PASSED - Two Memory Object access Test.
-> TEST PASSED!
-> 
-> This series has been tested for QTEE object invocations, including
-> loading a TA, requesting services from the TA, memory sharing, and
-> handling callback requests to a supplicant.
-> 
-> Tested platforms: sm8650-mtp, sm8550-qrd, sm8650-qrd, sm8650-hdk
-> 
-> [1] https://www.kernel.org/doc/Documentation/tee.txt
-> 
-> Signed-off-by: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
-> 
-> Changes in v9:
-> - Remove unnecessary logging in qcom_scm_probe().
-> - Replace the platform_device_alloc()/add() sequence with
->   platform_device_register_data().
-> - Fixed sparse warning.
-> - Fixed documentation typo.
-> - Link to v8:
->   https://lore.kernel.org/r/20250820-qcom-tee-using-tee-ss-without-mem-obj-v8-0-7066680f138a@oss.qualcomm.com
-> 
-> Changes in v8:
-> - Check if arguments to qcom_scm_qtee_invoke_smc() and
->   qcom_scm_qtee_callback_response() are NULL.
-> - Add CPU_BIG_ENDIAN as a dependency to Kconfig.
-> - Fixed kernel bot errors.
-> - Link to v7:
->   https://lore.kernel.org/r/20250812-qcom-tee-using-tee-ss-without-mem-obj-v7-0-ce7a1a774803@oss.qualcomm.com
-> 
-> Changes in v7:
-> - Updated copyrights.
-> - Updated Acked-by: tags.
-> - Fixed kernel bot errors.
-> - Link to v6:
->   https://lore.kernel.org/r/20250713-qcom-tee-using-tee-ss-without-mem-obj-v6-0-697fb7d41c36@oss.qualcomm.com
-> 
-> Changes in v6:
-> - Relocate QTEE version into the driver's main service structure.
-> - Simplfies qcomtee_objref_to_arg() and qcomtee_objref_from_arg().
-> - Enhanced the return logic of qcomtee_object_do_invoke_internal().
-> - Improve comments and remove redundant checks.
-> - Improve helpers in qcomtee_msh.h to use GENMASK() and FIELD_GET().
-> - updated Tested-by:, Acked-by:, and Reviewed-by: tags
-> - Link to v5:
->   https://lore.kernel.org/r/20250526-qcom-tee-using-tee-ss-without-mem-obj-v5-0-024e3221b0b9@oss.qualcomm.com
-> 
-> Changes in v5:
-> - Remove references to kernel services and public APIs.
-> - Support auto detection for failing devices (e.g., RB1, RB4).
-> - Add helpers for obtaining client environment and service objects.
-> - Query the QTEE version and print it.
-> - Move remaining static variables, including the object table, to struct
->   qcomtee.
-> - Update TEE_MAX_ARG_SIZE to 4096.
-> - Add a dependancy to QCOM_TZMEM_MODE_SHMBRIDGE in Kconfig
-> - Reorganize code by removing release.c and qcom_scm.c.
-> - Add more error messages and improve comments.
-> - updated Tested-by:, Acked-by:, and Reviewed-by: tags
-> - Link to v4: https://lore.kernel.org/r/20250428-qcom-tee-using-tee-ss-without-mem-obj-v4-0-6a143640a6cb@oss.qualcomm.com
-> 
-> Changes in v4:
-> - Move teedev_ctx_get/put and tee_device_get/put to tee_core.h.
-> - Rename object to id in struct tee_ioctl_object_invoke_arg.
-> - Replace spinlock with mutex for qtee_objects_idr.
-> - Move qcomtee_object_get to qcomtee_user/memobj_param_to_object.
-> - More code cleanup following the comments.
-> - Cleanup documentations.
-> - Update MAINTAINERS file.
-> - Link to v3: https://lore.kernel.org/r/20250327-qcom-tee-using-tee-ss-without-mem-obj-v3-0-7f457073282d@oss.qualcomm.com
-> 
-> Changes in v3:
-> - Export shm_bridge create/delete APIs.
-> - Enable support for QTEE memory objects.
-> - Update the memory management code to use the TEE subsystem for all
->   allocations using the pool.
-> - Move all driver states into the driver's main service struct.
-> - Add more documentations.
-> - Link to v2: https://lore.kernel.org/r/20250202-qcom-tee-using-tee-ss-without-mem-obj-v2-0-297eacd0d34f@quicinc.com
-> 
-> Changes in v2:
-> - Clean up commit messages and comments.
-> - Use better names such as ubuf instead of membuf or QCOMTEE prefix
->   instead of QCOM_TEE, or names that are more consistent with other
->   TEE-backend drivers such as qcomtee_context_data instead of
->   qcom_tee_context.
-> - Drop the DTS patch and instantiate the device from the scm driver.
-> - Use a single structure for all driver's internal states.
-> - Drop srcu primitives and use the existing mutex for synchronization
->   between the supplicant and QTEE.
-> - Directly use tee_context to track the lifetime of qcomtee_context_data.
-> - Add close_context() to be called when the user closes the tee_context.
-> - Link to v1: https://lore.kernel.org/r/20241202-qcom-tee-using-tee-ss-without-mem-obj-v1-0-f502ef01e016@quicinc.com
-> 
-> Changes in v1:
-> - It is a complete rewrite to utilize the TEE subsystem.
-> - Link to RFC: https://lore.kernel.org/all/20240702-qcom-tee-object-and-ioctls-v1-0-633c3ddf57ee@quicinc.com
-> 
-> ---
-> Amirreza Zarrabi (11):
->       tee: allow a driver to allocate a tee_device without a pool
->       tee: add close_context to TEE driver operation
->       tee: add TEE_IOCTL_PARAM_ATTR_TYPE_UBUF
->       tee: add TEE_IOCTL_PARAM_ATTR_TYPE_OBJREF
->       tee: increase TEE_MAX_ARG_SIZE to 4096
->       firmware: qcom: scm: add support for object invocation
->       firmware: qcom: tzmem: export shm_bridge create/delete
-
-These two patches are for code maintained by me, the rest by Jens. So we
-will have to dance to get this merged.
-
-Is there are reason why these two are in the middle of the series? Do
-they need to come after the first 5 but before the next 3?
-
-Regards,
-Bjorn
-
->       tee: add Qualcomm TEE driver
->       tee: qcom: add primordial object
->       tee: qcom: enable TEE_IOC_SHM_ALLOC ioctl
->       Documentation: tee: Add Qualcomm TEE driver
-> 
->  Documentation/tee/index.rst              |   1 +
->  Documentation/tee/qtee.rst               |  96 ++++
->  MAINTAINERS                              |   7 +
->  drivers/firmware/qcom/qcom_scm.c         | 124 +++++
->  drivers/firmware/qcom/qcom_scm.h         |   7 +
->  drivers/firmware/qcom/qcom_tzmem.c       |  63 ++-
->  drivers/tee/Kconfig                      |   1 +
->  drivers/tee/Makefile                     |   1 +
->  drivers/tee/qcomtee/Kconfig              |  12 +
->  drivers/tee/qcomtee/Makefile             |   9 +
->  drivers/tee/qcomtee/async.c              | 182 ++++++
->  drivers/tee/qcomtee/call.c               | 820 +++++++++++++++++++++++++++
->  drivers/tee/qcomtee/core.c               | 915 +++++++++++++++++++++++++++++++
->  drivers/tee/qcomtee/mem_obj.c            | 169 ++++++
->  drivers/tee/qcomtee/primordial_obj.c     | 113 ++++
->  drivers/tee/qcomtee/qcomtee.h            | 185 +++++++
->  drivers/tee/qcomtee/qcomtee_msg.h        | 304 ++++++++++
->  drivers/tee/qcomtee/qcomtee_object.h     | 316 +++++++++++
->  drivers/tee/qcomtee/shm.c                | 150 +++++
->  drivers/tee/qcomtee/user_obj.c           | 692 +++++++++++++++++++++++
->  drivers/tee/tee_core.c                   | 127 ++++-
->  drivers/tee/tee_private.h                |   6 -
->  include/linux/firmware/qcom/qcom_scm.h   |   6 +
->  include/linux/firmware/qcom/qcom_tzmem.h |  15 +
->  include/linux/tee_core.h                 |  54 +-
->  include/linux/tee_drv.h                  |  12 +
->  include/uapi/linux/tee.h                 |  56 +-
->  27 files changed, 4415 insertions(+), 28 deletions(-)
-> ---
-> base-commit: 33bcf93b9a6b028758105680f8b538a31bc563cf
-> change-id: 20241202-qcom-tee-using-tee-ss-without-mem-obj-362c66340527
-> 
-> Best regards,
-> -- 
-> Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
-> 
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+SGVsbG8gTWF4aW1lLA0KDQoNCk9uIE1vbiwgMjggSnVsIDIwMjUgYXQgMTM6NTEsIE1heGltZSBS
+aXBhcmQgPG1yaXBhcmRAa2VybmVsLm9yZz4gd3JvdGU6DQo+DQo+IFdlJ3ZlIGRpc2N1c3NlZCBh
+IG51bWJlciBvZiB0aW1lcyBvZiBob3cgc29tZSBoZWFwIG5hbWVzIGFyZSBiYWQsIGJ1dA0KPiBu
+b3QgcmVhbGx5IHdoYXQgbWFrZXMgYSBnb29kIGhlYXAgbmFtZS4NCj4NCj4gTGV0J3MgZG9jdW1l
+bnQgd2hhdCB3ZSBleHBlY3QgdGhlIGhlYXAgbmFtZXMgdG8gbG9vayBsaWtlLg0KVGhhbmsgeW91
+IGZvciB0aGUgcGF0Y2guIEluIHByaW5jaXBsZSwgSSdtIG9rIHRvIHRha2UgdGhpcyBwYXRjaCwg
+d2l0aA0KdGhlIG9idmlvdXMgdW5kZXJzdGFuZGluZyB0aGF0IGlmIHRoZXJlIGFyZSBmdXR1cmUg
+aGVhcCBuYW1lDQpyZXF1aXJlbWVudHMgdGhhdCBjYW4ndCBiZSBzYXRpc2ZpZWQgd2l0aCB0aGVz
+ZSBydWxlcywgd2Ugd2lsbCBkaXNjdXNzDQphbmQgYWRhcHQgdGhlIHJ1bGVzIGFjY29yZGluZ2x5
+Lg0KDQpJIGhvcGUgdGhpcyBzb3VuZHMgcmVhc29uYWJsZSB0byBhbGwuDQoNCklmIEkgZG9uJ3Qg
+aGVhciBhbnkgb2JqZWN0aW9ucywgSSdsbCBtZXJnZSB0aGlzIGJ5IHRoaXMgd2Vla2VuZC4NCj4N
+Cj4gUmV2aWV3ZWQtYnk6IEFuZHJldyBEYXZpcyA8YWZkQHRpLmNvbT4NCj4gUmV2aWV3ZWQtYnk6
+IEJhZ2FzIFNhbmpheWEgPGJhZ2FzZG90bWVAZ21haWwuY29tPg0KPiBTaWduZWQtb2ZmLWJ5OiBN
+YXhpbWUgUmlwYXJkIDxtcmlwYXJkQGtlcm5lbC5vcmc+DQoNCkJlc3QuDQpTdW1pdC4NCg0KPiAt
+LS0NCj4gQ2hhbmdlcyBpbiB2NDoNCj4gLSBEcm9wcGVkICphbGwqIHRoZSBjYWNoZWFibGUgbWVu
+dGlvbnMNCj4gLSBMaW5rIHRvIHYzOiBodHRwczovL2xvcmUua2VybmVsLm9yZy9yLzIwMjUwNzE3
+LWRtYS1idWYtaGVhcC1uYW1lcy1kb2MtdjMtMS1kMmRiYjRiOTVlZjZAa2VybmVsLm9yZw0KPg0K
+PiBDaGFuZ2VzIGluIHYzOg0KPiAtIEdyYW1tYXIsIHNwZWxsaW5nIGZpeGVzDQo+IC0gUmVtb3Zl
+IHRoZSBjYWNoZWFibGUgLyB1bmNhY2hlYWJsZSBuYW1lIHN1Z2dlc3Rpb24NCj4gLSBMaW5rIHRv
+IHYyOiBodHRwczovL2xvcmUua2VybmVsLm9yZy9yLzIwMjUwNjE2LWRtYS1idWYtaGVhcC1uYW1l
+cy1kb2MtdjItMS04YWU0MzE3NGNkYmZAa2VybmVsLm9yZw0KPg0KPiBDaGFuZ2VzIGluIHYyOg0K
+PiAtIEFkZGVkIGp1c3RpZmljYXRpb25zIGZvciBlYWNoIHJlcXVpcmVtZW50IC8gc3VnZ2VzdGlv
+bnMNCj4gLSBBZGRlZCBhIG1lbnRpb24gYW5kIGV4YW1wbGUgb2YgYnVmZmVyIGF0dHJpYnV0ZXMN
+Cj4gLSBMaW5rIHRvIHYxOiBodHRwczovL2xvcmUua2VybmVsLm9yZy9yLzIwMjUwNTIwLWRtYS1i
+dWYtaGVhcC1uYW1lcy1kb2MtdjEtMS1hYjMxZjc0ODA5ZWVAa2VybmVsLm9yZw0KPiAtLS0NCj4g
+IERvY3VtZW50YXRpb24vdXNlcnNwYWNlLWFwaS9kbWEtYnVmLWhlYXBzLnJzdCB8IDM1ICsrKysr
+KysrKysrKysrKysrKysrKysrKysrKw0KPiAgMSBmaWxlIGNoYW5nZWQsIDM1IGluc2VydGlvbnMo
+KykNCj4NCj4gZGlmZiAtLWdpdCBhL0RvY3VtZW50YXRpb24vdXNlcnNwYWNlLWFwaS9kbWEtYnVm
+LWhlYXBzLnJzdCBiL0RvY3VtZW50YXRpb24vdXNlcnNwYWNlLWFwaS9kbWEtYnVmLWhlYXBzLnJz
+dA0KPiBpbmRleCA1MzVmNDkwNDdjZTY0NTA3OTZiZjQzODBjOTg5ZTEwOTM1NWVmYzA1Li4xY2Vk
+MjcyMGY5Mjk0MzI2NjExODJmMWEzYTg4YWExZmY4MGJkNmFmIDEwMDY0NA0KPiAtLS0gYS9Eb2N1
+bWVudGF0aW9uL3VzZXJzcGFjZS1hcGkvZG1hLWJ1Zi1oZWFwcy5yc3QNCj4gKysrIGIvRG9jdW1l
+bnRhdGlvbi91c2Vyc3BhY2UtYXBpL2RtYS1idWYtaGVhcHMucnN0DQo+IEBAIC0yMSw1ICsyMSw0
+MCBAQCBmb2xsb3dpbmcgaGVhcHM6DQo+ICAgICB1c3VhbGx5IGNyZWF0ZWQgZWl0aGVyIHRocm91
+Z2ggdGhlIGtlcm5lbCBjb21tYW5kbGluZSB0aHJvdWdoIHRoZQ0KPiAgICAgYGNtYWAgcGFyYW1l
+dGVyLCBhIG1lbW9yeSByZWdpb24gRGV2aWNlLVRyZWUgbm9kZSB3aXRoIHRoZQ0KPiAgICAgYGxp
+bnV4LGNtYS1kZWZhdWx0YCBwcm9wZXJ0eSBzZXQsIG9yIHRocm91Z2ggdGhlIGBDTUFfU0laRV9N
+QllURVNgIG9yDQo+ICAgICBgQ01BX1NJWkVfUEVSQ0VOVEFHRWAgS2NvbmZpZyBvcHRpb25zLiBE
+ZXBlbmRpbmcgb24gdGhlIHBsYXRmb3JtLCBpdA0KPiAgICAgbWlnaHQgYmUgY2FsbGVkIGBgcmVz
+ZXJ2ZWRgYCwgYGBsaW51eCxjbWFgYCwgb3IgYGBkZWZhdWx0LXBvb2xgYC4NCj4gKw0KPiArTmFt
+aW5nIENvbnZlbnRpb24NCj4gKz09PT09PT09PT09PT09PT09DQo+ICsNCj4gK2BgZG1hLWJ1ZmBg
+IGhlYXBzIG5hbWUgc2hvdWxkIG1lZXQgYSBudW1iZXIgb2YgY29uc3RyYWludHM6DQo+ICsNCj4g
+Ky0gVGhlIG5hbWUgbXVzdCBiZSBzdGFibGUsIGFuZCBtdXN0IG5vdCBjaGFuZ2UgZnJvbSBvbmUg
+dmVyc2lvbiB0byB0aGUgb3RoZXIuDQo+ICsgIFVzZXJzcGFjZSBpZGVudGlmaWVzIGhlYXBzIGJ5
+IHRoZWlyIG5hbWUsIHNvIGlmIHRoZSBuYW1lcyBldmVyIGNoYW5nZSwgd2UNCj4gKyAgd291bGQg
+YmUgbGlrZWx5IHRvIGludHJvZHVjZSByZWdyZXNzaW9ucy4NCj4gKw0KPiArLSBUaGUgbmFtZSBt
+dXN0IGRlc2NyaWJlIHRoZSBtZW1vcnkgcmVnaW9uIHRoZSBoZWFwIHdpbGwgYWxsb2NhdGUgZnJv
+bSwgYW5kDQo+ICsgIG11c3QgdW5pcXVlbHkgaWRlbnRpZnkgaXQgaW4gYSBnaXZlbiBwbGF0Zm9y
+bS4gU2luY2UgdXNlcnNwYWNlIGFwcGxpY2F0aW9ucw0KPiArICB1c2UgdGhlIGhlYXAgbmFtZSBh
+cyB0aGUgZGlzY3JpbWluYW50LCBpdCBtdXN0IGJlIGFibGUgdG8gdGVsbCB3aGljaCBoZWFwIGl0
+DQo+ICsgIHdhbnRzIHRvIHVzZSByZWxpYWJseSBpZiB0aGVyZSdzIG11bHRpcGxlIGhlYXBzLg0K
+PiArDQo+ICstIFRoZSBuYW1lIG11c3Qgbm90IG1lbnRpb24gaW1wbGVtZW50YXRpb24gZGV0YWls
+cywgc3VjaCBhcyB0aGUgYWxsb2NhdG9yLiBUaGUNCj4gKyAgaGVhcCBkcml2ZXIgd2lsbCBjaGFu
+Z2Ugb3ZlciB0aW1lLCBhbmQgaW1wbGVtZW50YXRpb24gZGV0YWlscyB3aGVuIGl0IHdhcw0KPiAr
+ICBpbnRyb2R1Y2VkIG1pZ2h0IG5vdCBiZSByZWxldmFudCBpbiB0aGUgZnV0dXJlLg0KPiArDQo+
+ICstIFRoZSBuYW1lIHNob3VsZCBkZXNjcmliZSBwcm9wZXJ0aWVzIG9mIHRoZSBidWZmZXJzIHRo
+YXQgd291bGQgYmUgYWxsb2NhdGVkLg0KPiArICBEb2luZyBzbyB3aWxsIG1ha2UgaGVhcCBpZGVu
+dGlmaWNhdGlvbiBlYXNpZXIgZm9yIHVzZXJzcGFjZS4gU3VjaCBwcm9wZXJ0aWVzDQo+ICsgIGFy
+ZToNCj4gKw0KPiArICAtIGBgY29udGlndW91c2BgIGZvciBwaHlzaWNhbGx5IGNvbnRpZ3VvdXMg
+YnVmZmVyczsNCj4gKw0KPiArICAtIGBgcHJvdGVjdGVkYGAgZm9yIGVuY3J5cHRlZCBidWZmZXJz
+IG5vdCBhY2Nlc3NpYmxlIHRoZSBPUzsNCj4gKw0KPiArLSBUaGUgbmFtZSBtYXkgZGVzY3JpYmUg
+aW50ZW5kZWQgdXNhZ2UuIERvaW5nIHNvIHdpbGwgbWFrZSBoZWFwIGlkZW50aWZpY2F0aW9uDQo+
+ICsgIGVhc2llciBmb3IgdXNlcnNwYWNlIGFwcGxpY2F0aW9ucyBhbmQgdXNlcnMuDQo+ICsNCj4g
+K0ZvciBleGFtcGxlLCBhc3N1bWluZyBhIHBsYXRmb3JtIHdpdGggYSByZXNlcnZlZCBtZW1vcnkg
+cmVnaW9uIGxvY2F0ZWQNCj4gK2F0IHRoZSBSQU0gYWRkcmVzcyAweDQyMDAwMDAwLCBpbnRlbmRl
+ZCB0byBhbGxvY2F0ZSB2aWRlbyBmcmFtZWJ1ZmZlcnMsDQo+ICtwaHlzaWNhbGx5IGNvbnRpZ3Vv
+dXMsIGFuZCBiYWNrZWQgYnkgdGhlIENNQSBrZXJuZWwgYWxsb2NhdG9yLCBnb29kDQo+ICtuYW1l
+cyB3b3VsZCBiZSBgYG1lbW9yeUA0MjAwMDAwMC1jb250aWd1b3VzYGAgb3IgYGB2aWRlb0A0MjAw
+MDAwMGBgLCBidXQNCj4gK2BgY21hLXZpZGVvYGAgd291bGRuJ3QuDQo+DQo+IC0tLQ0KPiBiYXNl
+LWNvbW1pdDogMDM4ZDYxZmQ2NDIyNzhiYWI2M2VlOGVmNzIyYzUwZDEwYWIwMWU4Zg0KPiBjaGFu
+Z2UtaWQ6IDIwMjUwNTIwLWRtYS1idWYtaGVhcC1uYW1lcy1kb2MtMzEyNjFhYTBjZmU2DQo+DQo+
+IEJlc3QgcmVnYXJkcywNCj4gLS0NCj4gTWF4aW1lIFJpcGFyZCA8bXJpcGFyZEBrZXJuZWwub3Jn
+Pg0KPg0KDQoNCi0tIA0KVGhhbmtzIGFuZCByZWdhcmRzLA0KDQpTdW1pdCBTZW13YWwgKGhlIC8g
+aGltKQ0KU2VuaW9yIFRlY2ggTGVhZCAtIEFuZHJvaWQsIFBsYXRmb3JtcyBhbmQgVmlydHVhbGlz
+YXRpb24NCkxpbmFyby5vcmcg4pSCIEFybSBTb2x1dGlvbnMgYXQgTGlnaHQgU3BlZWQNCl9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcg
+bWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNj
+cmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9y
+Zwo=
