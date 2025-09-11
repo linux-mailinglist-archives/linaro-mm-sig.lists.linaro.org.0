@@ -2,47 +2,47 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 75506B530A3
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Sep 2025 13:35:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 60A7EB530A8
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Sep 2025 13:36:04 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8AA9F4433D
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Sep 2025 11:35:48 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7B80A44D49
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Sep 2025 11:36:03 +0000 (UTC)
 Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id BB93745E6E
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 11 Sep 2025 11:34:09 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id ABFE54433D
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 11 Sep 2025 11:34:13 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=RZe3Hghg;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=Ad2yV5YN;
 	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=leon@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id 3CD6E44EA9;
-	Thu, 11 Sep 2025 11:34:09 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A5D78C4CEF1;
-	Thu, 11 Sep 2025 11:34:08 +0000 (UTC)
+	by sea.source.kernel.org (Postfix) with ESMTP id 297D440899;
+	Thu, 11 Sep 2025 11:34:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 74F21C4CEFA;
+	Thu, 11 Sep 2025 11:34:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1757590449;
-	bh=J3JcsAko8zSIGuiXV9DflNw5AuJmzcXfJS1bY+J5d1Y=;
+	s=k20201202; t=1757590453;
+	bh=mSqO5z/pzcDb//9yVcXdFaM2PL2BJKuKbGZo2SMKi0U=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=RZe3Hghg8tuilG38NUupXeM//AvgeiRR0kwGj/2e8WXc5R8k2LXEtxylcKu0V7VR4
-	 1FL71pt5mLy3q7tg9mEDnGu1K88Gjtgeu2UYS8C2bKbKCCRRb9g+8K76CZAztiQE4R
-	 zdqO+vDPlmfczjhKjstsRUe+TJcL8TsKnPJphvQgKiSQraI79PT0SA713CHwIloZ1b
-	 QjKoUmsx9DTS6kou4xIZNyzUdbLcMrmVlBlLOlxFHYRxg+hUASmotNa3o3ZOLnAna3
-	 tmduKfLeIIC88uvLVpyqh0eIdL4F2g8wYiqMwsjlbdIeqNN/nVtXrzcn3ko/5wuWDV
-	 Cj92uwQIUWB2g==
+	b=Ad2yV5YNeoJ9zzsdaHBjO699sFgtNfEpNes8sd89X4omIZJ0YEBy1O3hp6lny0yrZ
+	 ILWO5eA0XWuT9RzwLMcDuv6Ntp704U58ULZdRrvE0BRzdadauWkHDNUhlIy8diW1Sr
+	 y2192xF79yqliPNZoabgcXQVuZLHO4PMDutNKFhydmoevRH0wase5xQGcjIK3FY0MF
+	 X68jQ0rwPyOETqlGGi+u4y12ceGmY4P7LGDzXxyCxL6+cmnuL8MODVCaf7moeka6WD
+	 3HKhRHP7rRXVx3CpCriHEXbkddLjKiLXtEypIBzfxSe7hBKwxGoElFYScXxEcY8u6u
+	 LdzxlHXBI2jCg==
 From: Leon Romanovsky <leon@kernel.org>
 To: Alex Williamson <alex.williamson@redhat.com>
-Date: Thu, 11 Sep 2025 14:33:11 +0300
-Message-ID: <e15b8a93822a69041e616edbea16e22644023be9.1757589589.git.leon@kernel.org>
+Date: Thu, 11 Sep 2025 14:33:12 +0300
+Message-ID: <536369328cdeda87ae37b37c63f800d38186034d.1757589589.git.leon@kernel.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <cover.1757589589.git.leon@kernel.org>
 References: <cover.1757589589.git.leon@kernel.org>
 MIME-Version: 1.0
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: BB93745E6E
+X-Rspamd-Queue-Id: ABFE54433D
 X-Spamd-Bar: --
 X-Spamd-Result: default: False [-2.50 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
+	BAYES_HAM(-3.00)[99.99%];
 	MID_CONTAINS_FROM(1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_MISSING_CHARSET(0.50)[];
@@ -62,17 +62,17 @@ X-Spamd-Result: default: False [-2.50 / 15.00];
 	RCVD_TLS_LAST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+]
-Message-ID-Hash: 7MN3YE6DUEOCGULDXHX7VPJYITIEZV5H
-X-Message-ID-Hash: 7MN3YE6DUEOCGULDXHX7VPJYITIEZV5H
+Message-ID-Hash: QT43DH3OUGJWF4RC23KCSTAUFAU3JQP2
+X-Message-ID-Hash: QT43DH3OUGJWF4RC23KCSTAUFAU3JQP2
 X-MailFrom: leon@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: Leon Romanovsky <leonro@nvidia.com>, Jason Gunthorpe <jgg@nvidia.com>, Andrew Morton <akpm@linux-foundation.org>, Bjorn Helgaas <bhelgaas@google.com>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, iommu@lists.linux.dev, Jens Axboe <axboe@kernel.dk>, Joerg Roedel <joro@8bytes.org>, kvm@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linux-mm@kvack.org, linux-pci@vger.kernel.org, Logan Gunthorpe <logang@deltatee.com>, Robin Murphy <robin.murphy@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, Vivek Kasireddy <vivek.kasireddy@intel.com>, Will Deacon <will@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v2 07/10] vfio/pci: Add dma-buf export config for MMIO regions
+Subject: [Linaro-mm-sig] [PATCH v2 08/10] vfio/pci: Enable peer-to-peer DMA transactions by default
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7MN3YE6DUEOCGULDXHX7VPJYITIEZV5H/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QT43DH3OUGJWF4RC23KCSTAUFAU3JQP2/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -84,45 +84,65 @@ Content-Transfer-Encoding: 7bit
 
 From: Leon Romanovsky <leonro@nvidia.com>
 
-Add new kernel config which indicates support for dma-buf export
-of MMIO regions, which implementation is provided in next patches.
+Make sure that all VFIO PCI devices have peer-to-peer capabilities
+enables, so we would be able to export their MMIO memory through DMABUF,
 
 Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
 ---
- drivers/vfio/pci/Kconfig | 20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
+ drivers/vfio/pci/vfio_pci_core.c | 11 +++++++++++
+ include/linux/vfio_pci_core.h    |  3 +++
+ 2 files changed, 14 insertions(+)
 
-diff --git a/drivers/vfio/pci/Kconfig b/drivers/vfio/pci/Kconfig
-index 2b0172f546652..55ae888bf26ae 100644
---- a/drivers/vfio/pci/Kconfig
-+++ b/drivers/vfio/pci/Kconfig
-@@ -55,6 +55,26 @@ config VFIO_PCI_ZDEV_KVM
+diff --git a/drivers/vfio/pci/vfio_pci_core.c b/drivers/vfio/pci/vfio_pci_core.c
+index 7dcf5439dedc9..b02dda8c96341 100644
+--- a/drivers/vfio/pci/vfio_pci_core.c
++++ b/drivers/vfio/pci/vfio_pci_core.c
+@@ -28,6 +28,9 @@
+ #include <linux/nospec.h>
+ #include <linux/sched/mm.h>
+ #include <linux/iommufd.h>
++#ifdef CONFIG_VFIO_PCI_DMABUF
++#include <linux/pci-p2pdma.h>
++#endif
+ #if IS_ENABLED(CONFIG_EEH)
+ #include <asm/eeh.h>
+ #endif
+@@ -2085,6 +2088,7 @@ int vfio_pci_core_init_dev(struct vfio_device *core_vdev)
+ {
+ 	struct vfio_pci_core_device *vdev =
+ 		container_of(core_vdev, struct vfio_pci_core_device, vdev);
++	int i;
  
- 	  To enable s390x KVM vfio-pci extensions, say Y.
+ 	vdev->pdev = to_pci_dev(core_vdev->dev);
+ 	vdev->irq_type = VFIO_PCI_NUM_IRQS;
+@@ -2094,6 +2098,13 @@ int vfio_pci_core_init_dev(struct vfio_device *core_vdev)
+ 	INIT_LIST_HEAD(&vdev->dummy_resources_list);
+ 	INIT_LIST_HEAD(&vdev->ioeventfds_list);
+ 	INIT_LIST_HEAD(&vdev->sriov_pfs_item);
++#ifdef CONFIG_VFIO_PCI_DMABUF
++	for (i = 0; i < PCI_STD_NUM_BARS; i++) {
++		vdev->provider[i] = pcim_p2pdma_enable(vdev->pdev, i);
++		if (IS_ERR(vdev->provider[i]))
++			return PTR_ERR(vdev->provider[i]);
++	}
++#endif
+ 	init_rwsem(&vdev->memory_lock);
+ 	xa_init(&vdev->ctx);
  
-+config VFIO_PCI_DMABUF
-+	bool "VFIO PCI extensions for DMA-BUF"
-+	depends on VFIO_PCI_CORE
-+	depends on PCI_P2PDMA && DMA_SHARED_BUFFER
-+	default y
-+	help
-+	  Enable support for VFIO PCI extensions that allow exporting
-+	  device MMIO regions as DMA-BUFs for peer devices to access via
-+	  peer-to-peer (P2P) DMA.
-+
-+	  This feature enables a VFIO-managed PCI device to export a portion
-+	  of its MMIO BAR as a DMA-BUF file descriptor, which can be passed
-+	  to other userspace drivers or kernel subsystems capable of
-+	  initiating DMA to that region.
-+
-+	  Say Y here if you want to enable VFIO DMABUF-based MMIO export
-+	  support for peer-to-peer DMA use cases.
-+
-+	  If unsure, say N.
-+
- source "drivers/vfio/pci/mlx5/Kconfig"
+diff --git a/include/linux/vfio_pci_core.h b/include/linux/vfio_pci_core.h
+index f541044e42a2a..2184ba65348b8 100644
+--- a/include/linux/vfio_pci_core.h
++++ b/include/linux/vfio_pci_core.h
+@@ -94,6 +94,9 @@ struct vfio_pci_core_device {
+ 	struct vfio_pci_core_device	*sriov_pf_core_dev;
+ 	struct notifier_block	nb;
+ 	struct rw_semaphore	memory_lock;
++#ifdef CONFIG_VFIO_PCI_DMABUF
++	struct p2pdma_provider  *provider[PCI_STD_NUM_BARS];
++#endif
+ };
  
- source "drivers/vfio/pci/hisilicon/Kconfig"
+ /* Will be exported for vfio pci drivers usage */
 -- 
 2.51.0
 
