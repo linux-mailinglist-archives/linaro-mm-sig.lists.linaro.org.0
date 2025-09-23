@@ -2,116 +2,167 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B2C8B9707E
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 23 Sep 2025 19:30:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 412E1B9711B
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 23 Sep 2025 19:43:45 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 202AB45DEC
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 23 Sep 2025 17:30:50 +0000 (UTC)
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	by lists.linaro.org (Postfix) with ESMTPS id F11F03F711
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 23 Sep 2025 17:30:46 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 4EA0245754
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 23 Sep 2025 17:43:44 +0000 (UTC)
+Received: from CH4PR04CU002.outbound.protection.outlook.com (mail-northcentralusazon11013053.outbound.protection.outlook.com [40.107.201.53])
+	by lists.linaro.org (Postfix) with ESMTPS id B96F444532
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 23 Sep 2025 17:43:40 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b="IMSAE/uk";
-	dmarc=pass (policy=quarantine) header.from=redhat.com;
-	spf=pass (lists.linaro.org: domain of alex.williamson@redhat.com designates 170.10.133.124 as permitted sender) smtp.mailfrom=alex.williamson@redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1758648646;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=OFNQwbdODcls1yBrLTyCkOTsxOyxsNLxzpt49nq+oT4=;
-	b=IMSAE/ukwgqc7iPO/pa0aMx7byi9JIwj35xAZv2Vthnk9tXxsT6NeacpIv3L9o3ONmLXaW
-	sEkMN/ABvJURerQV68uJE6i3lFtF6fu+rsJR3bcFxTAt6tlZxMYJ/al/aGo5IQq6oEYAoN
-	5nCPDnyMlXvCEtSr9TV0YSsqUJX89V0=
-Received: from mail-il1-f200.google.com (mail-il1-f200.google.com
- [209.85.166.200]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-658-3wun2hhfNJ27GHkoqPuFSg-1; Tue, 23 Sep 2025 13:30:45 -0400
-X-MC-Unique: 3wun2hhfNJ27GHkoqPuFSg-1
-X-Mimecast-MFC-AGG-ID: 3wun2hhfNJ27GHkoqPuFSg_1758648645
-Received: by mail-il1-f200.google.com with SMTP id e9e14a558f8ab-42574155f16so3005445ab.2
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 23 Sep 2025 10:30:45 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758648645; x=1759253445;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=OFNQwbdODcls1yBrLTyCkOTsxOyxsNLxzpt49nq+oT4=;
-        b=MHBgMohmqxatDC8zyJnjOE8bDbRkAEmtOo+ccb8iO4Q0GXQhHwJKKAdUnBVvEbjXQ5
-         pLTt4DRfRSqYOoT8Q5FAh3v21ZUdezmAScCZWayA04GtWq7fPEC/Z3bbjvi/FtxngIlZ
-         5K1RaRtkEHRGnwK73L+ehEj45UBsKVkBZT2qb88SDo1lYCAed3A0jT4uT9vk/Y0cYaid
-         V4kTO2CRLL86Q68DGksv0fWlN1iloGCPr5c5I6BHksLflOrlJYZ2ZX3GO8l84Hgh6a+S
-         Nc7NPyt065ViNYR2xWT24BonAPyqQKXED+/4i0eOZLSrvZwNoeQsIzF+AiazqarGqh/h
-         grcg==
-X-Forwarded-Encrypted: i=1; AJvYcCWsGpPawgtgNYVyNsm3q4YJKthMwDeHAusNAECmZp3YivbvNu63uz1byU4VKyTDi5uM8QD+1cr2EsDvH7fS@lists.linaro.org
-X-Gm-Message-State: AOJu0YxN+DQaZyQ7E7v64IkmMesKIO3FvLtV0LsjDe8WrT2x2+PJ2xXK
-	50l/vE3bVqaYslSzdVKCDUjirJ7MG0WKhlGFlgyBtokz9mNrVqKmMkLy35ThRKxBzjfUk8BVAA+
-	U5y6JKNwPmAmcxiHi7BKPzcRNWMBJdk8KhvpTSEfL6Q9VE8qN51RCYWPsa5YcY3GzogFq
-X-Gm-Gg: ASbGncsGYdww0r/PSIlFv+OApZaBPSbSI/W1VYYARw5coKoszXtqLEQ/O9+sttOrbpk
-	BW8r+bzDlo+VkoYbysWSIv1saTEQSnquRzmOBOMGlGFs84rtgnX/FaOSIXUs2kQY6J/t8U+GzHd
-	//8fkf2N8icXMHK/7ROpOAreeEbTuOQDv4mQ7eBOg5AkCHMqgu8pFwKAuKWbtQtZ0+E8PtT7PiH
-	AyOxGgZy81Deb4mi6MkaZNYtQvtjFri8D6OEWRHkWaghtuErPM9dhFwmyX/GKyXP9C9ZYzvWIDR
-	Yye0TpEjbEEDQBCY4uorgAXE9cEEq1iu0LM2B4t3+6Y=
-X-Received: by 2002:a05:6e02:164d:b0:400:7d06:dd6d with SMTP id e9e14a558f8ab-42581e09c50mr18781085ab.1.1758648644623;
-        Tue, 23 Sep 2025 10:30:44 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGNobmhXZYu8wcE6bAQtE0C6wCF0m0+GFNpZFLyv2Bpb6JP547FE77pkIiIGw0EG9S0P84Gyw==
-X-Received: by 2002:a05:6e02:164d:b0:400:7d06:dd6d with SMTP id e9e14a558f8ab-42581e09c50mr18780695ab.1.1758648644175;
-        Tue, 23 Sep 2025 10:30:44 -0700 (PDT)
-Received: from redhat.com ([38.15.36.11])
-        by smtp.gmail.com with ESMTPSA id 8926c6da1cb9f-566127693e0sm275326173.30.2025.09.23.10.30.42
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 23 Sep 2025 10:30:43 -0700 (PDT)
-Date: Tue, 23 Sep 2025 11:30:41 -0600
-From: Alex Williamson <alex.williamson@redhat.com>
-To: Jason Gunthorpe <jgg@nvidia.com>
-Message-ID: <20250923113041.38bee711.alex.williamson@redhat.com>
-In-Reply-To: <20250923150414.GA2608121@nvidia.com>
+	dkim=pass header.d=Nvidia.com header.s=selector2 header.b=EaWxsYjh;
+	dmarc=pass (policy=reject) header.from=nvidia.com;
+	arc=pass ("microsoft.com:s=arcselector10001:i=1");
+	spf=pass (lists.linaro.org: domain of jgg@nvidia.com designates 40.107.201.53 as permitted sender) smtp.mailfrom=jgg@nvidia.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Du0RYRFBCpSbdAbgESBcYV+wI/TJS2Ta6twbcoip1O8k7VxO7aTGyz8hrR37MpzzdIRcTVBefzIOW+sXcfEy4QNrBcd2eu6jIgzssUbmh/edr9t2oy3bQQDuJHTc+6HMJzxC9mZsrN9E2SxnvrWeIdDz9vaY9/N3ibtkjWnlYvdxXnE4pG001+kuQ/9ABjaBjThPSwlhwvL0eDLYHwqye3c8RFul3qpjY0LM4mM24xE5ShOqAyDyJV+hzPfdXT5hFLUquIZSSVDg3VBekIEVVGjS7bdzjTG2dA0RqEPW5JC88qgedpeqB+BnrD26VwyTyizcVhQbj9Ibzts++XYNNg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=pQUh9mweLCM541Cy/QMXzIeHtphgwjD4nkBl8XQfyWs=;
+ b=dkv/fvuZPTdDJoqsPdMuXmcSkD9PadBD6g2NWekNH4D12T3KUqMDPqrOHWs9AzYUOEgq8hzsGP5tdUZ+k0OKOC1atNeTwiIEyj+AZKD3QTrD9dI7jpCk6D790YqW6fGMCMKrqfg5A9Mqsdaf/I0IbNEjjcWFkJPbWL3LChIcg/ENcydQtBxoXBphZEeKDPzPhQoJ9YKbFcsExRIpp1OSLsGXD9RugtjdR8oLfEXw1Op/nQYn3VroC1tbtYfsToslNAYFLc42hBwGumo6HW2kucbMmvuUNsVvhcrWcZzfXXLLFLRZk0wExnidhXqpELecmVz/2sSEvL9C/VLCzUXmqQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=pQUh9mweLCM541Cy/QMXzIeHtphgwjD4nkBl8XQfyWs=;
+ b=EaWxsYjhFdRAgJ2EpRkUHtF4Beby7fT+ypTCHP5cxxF5eNER4/TdkcvEC99C/nuw2bba8/+25CQ7TQIu32MSKWapOpaJOt3JKrzf8s+TvJZSBGmXxc+nqop2MfZA5KeNviF5AxxQ2FKw8rKvSyEgn2nSHPlC45VmN/QOgwpG6o3z/guDWGXdsWqC+uNLNNimtUW0kfmKyjshDZhlXMAtFQusqofGWzZSQa2V6mITGBibV9O4ndjnHZaITK9E4vtizpCUMqIwVj57xG+AH8aqIO4TldVhoqogc3PbmkOsRccLtgVe1TM5PBoeduypKIVEiYhDUr5amVnACd5Vk3MaWw==
+Received: from PH7PR12MB5757.namprd12.prod.outlook.com (2603:10b6:510:1d0::13)
+ by SA3PR12MB8045.namprd12.prod.outlook.com (2603:10b6:806:31d::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9137.19; Tue, 23 Sep
+ 2025 17:43:35 +0000
+Received: from PH7PR12MB5757.namprd12.prod.outlook.com
+ ([fe80::f012:300c:6bf4:7632]) by PH7PR12MB5757.namprd12.prod.outlook.com
+ ([fe80::f012:300c:6bf4:7632%2]) with mapi id 15.20.9137.018; Tue, 23 Sep 2025
+ 17:43:35 +0000
+Date: Tue, 23 Sep 2025 14:43:33 -0300
+From: Jason Gunthorpe <jgg@nvidia.com>
+To: Alex Williamson <alex.williamson@redhat.com>
+Message-ID: <20250923174333.GE2608121@nvidia.com>
 References: <cover.1757589589.git.leon@kernel.org>
-	<1e2cb89ea76a92949d06a804e3ab97478e7cacbb.1757589589.git.leon@kernel.org>
-	<20250922150032.3e3da410.alex.williamson@redhat.com>
-	<20250923150414.GA2608121@nvidia.com>
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.43; x86_64-redhat-linux-gnu)
+ <1e2cb89ea76a92949d06a804e3ab97478e7cacbb.1757589589.git.leon@kernel.org>
+ <20250922150032.3e3da410.alex.williamson@redhat.com>
+ <20250923150414.GA2608121@nvidia.com>
+ <20250923113041.38bee711.alex.williamson@redhat.com>
+Content-Disposition: inline
+In-Reply-To: <20250923113041.38bee711.alex.williamson@redhat.com>
+X-ClientProxiedBy: BYAPR08CA0070.namprd08.prod.outlook.com
+ (2603:10b6:a03:117::47) To PH7PR12MB5757.namprd12.prod.outlook.com
+ (2603:10b6:510:1d0::13)
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: w7CybWUy_FpTSFpStb5v5qaB71p7gmzMIw3yI-zKO8c_1758648645
-X-Mimecast-Originator: redhat.com
-X-Rspamd-Queue-Id: F11F03F711
-X-Spamd-Bar: ---
-X-Spamd-Result: default: False [-3.40 / 15.00];
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7PR12MB5757:EE_|SA3PR12MB8045:EE_
+X-MS-Office365-Filtering-Correlation-Id: cd92416e-4b78-405b-5d65-08ddfac8b881
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|7416014|376014;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?0jwefVbBhfCuKzCx4n0Pg8AOBqjBzpKGN4i8l/7K/BateORZTJcOOv2U3mN8?=
+ =?us-ascii?Q?GuKAseV4GT2/+7rl8jm1S61Hnn1+I+tyJbaxHWIBRuH1+eqkb/DU9TGYCVsz?=
+ =?us-ascii?Q?KqmUKQsv324IwHNfpzyG2SxBjORJPTpfVNRAXUyQVtMWowjbveaFDm3JouU/?=
+ =?us-ascii?Q?9aSSwqojb1tPHCnt2RzBc8BjMFEm+NwQhn8aJyzDrfv1i4vlcmceGeRx04FO?=
+ =?us-ascii?Q?1dDCvZjI/NmbRG/oBj1ToGW9AtxT5vRalqHFb4g0jn8qCqzf2K8XVv3LT+/x?=
+ =?us-ascii?Q?+qnjzs3ck5I33flZtlRwXOBRVo5ey+0o+gsJ9kY1M7ppbk1Tm3e2tSYtBAHW?=
+ =?us-ascii?Q?fSqTSpLpwXJt0EUNZuKbJgvL948FWywjDkHASzM9VJw+uwKnoCqvaDl20YKo?=
+ =?us-ascii?Q?q88eZrDI9oOnZgIb8Sgsn9Hx+NUzboQ/SwN5cwP/c1IV+nPqx9/j2nU8fgUW?=
+ =?us-ascii?Q?i2DKtKfhyDKrR5er8REmXoRDsUbXi3/8x6M0b0VmadzzslIUG2Iskv4G2WMG?=
+ =?us-ascii?Q?URoE048AuZbmsojNAfO7JO6qs1poAaz0gpAXtyIK/6pp6PWCBxAqtXPAUzM3?=
+ =?us-ascii?Q?+PabFXsK/zkY8zttthF4Qrk6hZ7dia85apKMdxcARtfHAAr0a8jHXpBfe7/X?=
+ =?us-ascii?Q?/Dr0Vmmq64nMKqrPlfXGPpV01Ab2eRZCy1paq8PXBSaH0Nhtjeu66ix3vT8H?=
+ =?us-ascii?Q?b4UM2om8/pXnnQHSLSU2u0Iz/ecCPsdfyfsNsGi6FpiiRoaPJGGz7klxo0ez?=
+ =?us-ascii?Q?2N78cW8cDZ+EwX11A2Zcu1xpdN7SWSljsNmObXjlQIVLRQCKtZ6fUnPBnmFe?=
+ =?us-ascii?Q?aRe57WwR7QqOF7Q3EIIEC2JaIGMj4v6K2qDY6aEclL6sh7W2FTY/MBOiWntt?=
+ =?us-ascii?Q?q/z9Sfegw1os0dmWrU9wcSwXPgqvrqJ/5DdYUcepg8QpVsgoWbNdPAdGEs8j?=
+ =?us-ascii?Q?EOdN2efts4V20PuDNTMx0Oy26QjG6DNrMQ6IpxNiRS7qskzrB3qUZTUl2G9C?=
+ =?us-ascii?Q?0tWz9JpElkZLCD0ghgpzYK3RTx1sEFFc0KiMbbtqLcq6HZJLi8MvbcRcYLPp?=
+ =?us-ascii?Q?MgApCPH2lFzRK7w9KRHNY6wFCXcY2iDrUAMQ32+doO0evCmLDl7Ns1+nRs7x?=
+ =?us-ascii?Q?FohohlMn4SmqGAb7WLemqahpLkbnwuEsyp1Z/n5z4msVShoGE7F5A/omhSL6?=
+ =?us-ascii?Q?tksFJocZbtQMC5SI+W7ZiF2k25mWlUD0UJI+uUDjaPIQhoFKgyH9o9iINXV9?=
+ =?us-ascii?Q?T1O3LbEjjLXXg2li5hRGvNrPs3D7Popg7n7nL6vb4vW0IicTnItITeslsLpu?=
+ =?us-ascii?Q?yc3SHz0o1kasyWpNHQlfpi5Y5tVSfndru39+s9UJs4qMC2hlZZtgc1/y40Vs?=
+ =?us-ascii?Q?/IH99uXYQAXVcKmuPpT90DBZLAoGA3tG+ZYhEpJlOF0EJy2kNta4Fa8OUS18?=
+ =?us-ascii?Q?pxHNQBP5PQ0=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB5757.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(7416014)(376014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?1GHagwMpjjQQyA95vx6sBGw7kZYNp6GYdqLXCgrw2nB9DQ2PwwEzqVjqGlHQ?=
+ =?us-ascii?Q?Zry8FZUGq/GtA2qi27sq9A5qoL/kEIjo4dzFLtM+Uh3Qb55PDD9wBYgsFxnW?=
+ =?us-ascii?Q?+NoqHvwgv9+Vjpm+sJPPlkh2fp1CMPMN4eXPQaQKoizmlz3Nuv3CEiAW0QN1?=
+ =?us-ascii?Q?ahDjmP+35t/x8ezFO1hnfXWkFUZFk9nfOafdZSKTHoNj7IuMb+d0UK2FHEmD?=
+ =?us-ascii?Q?i2mztw85/vsxMEIh2ZnfsEXxPnrLehktQT77PE1YLlqkDuAAatn1exREnUx7?=
+ =?us-ascii?Q?ZpUmrby/cPmA2+OqL46iVK9urirGcqFWeMtNVPn8Isf6KpeUddsKLcI8lPX0?=
+ =?us-ascii?Q?H3PKAaMYswirLZ0IqL+ojHgK5TpDftfM642Hyfz5igzTJfDcMwpnVJ35MSr4?=
+ =?us-ascii?Q?48iXhKOpiW0c3+x1rPh5RK4ZaGLH68lIE3NYmHinynd7O54rD2iFEOUlzIX6?=
+ =?us-ascii?Q?c7EtNe6/nxChDj+zj/9wwQgGIqs9lkINqFOMMfFopdgzv6e/XWCQ0UD0oLvU?=
+ =?us-ascii?Q?LYq4IZy5QzWp9/LOAg3oMoO8KwzuGjXaHwv8BRX6i8P1AjUKwDukjTzS0t7r?=
+ =?us-ascii?Q?cPcrQ4TFYPaHh4uFdthZJVYg5+TcLAbqSSqYNQHbew2ECQkX0T9VRtWD+5E3?=
+ =?us-ascii?Q?oZXyLEFJU5gBk7bOZTwsI0IVAYGQLepSb0R2aQaqpFEuASZC883rIShO/6TW?=
+ =?us-ascii?Q?bM9kp0l6lyIcHmSOf+N5hbfhLKjVUKToTDytjiDCBA4bt63Z8eHcKJm+Y7DR?=
+ =?us-ascii?Q?roljuh4crxVuNl7eaF/EycL6Nu7dvl60l5tDvSCxOzlXCmtj//gUukaNzDnS?=
+ =?us-ascii?Q?eL4wIDEFGxPWUo1fQzM86GQ56QQS1K5bVgbi3YVRpCnHLJki+ETI2r5bQ5D9?=
+ =?us-ascii?Q?OGNGo5uildPDNazU2sPqjalTQU6P1k8CyMYX5234lz3fSO6EjQxjDd7qGF4I?=
+ =?us-ascii?Q?E2fKZoRbKNpFnJjYAGBUsRZrRjbPgL0FfvifHNCq69rPVN3mN7Tukfaf8KIN?=
+ =?us-ascii?Q?83WmL4bN7ks1eWRBqG6BAkzB2cWRJqdxeana4OTNuG8W/vxEjB6RX+Q/+d/+?=
+ =?us-ascii?Q?7kPTlKJ4tl8PO7LljSB3AgiYJRulzpY9dQOyYBKowsKHNoh/oKrH08zXI/Rz?=
+ =?us-ascii?Q?jcSopyABQ/YvNiuLPB5tWZ6ggw/CpfNka5dr6v4Qxy8GG0Ln7p7KM/t/UCOx?=
+ =?us-ascii?Q?jAATu9j2TP44TrKL+1Q4adO2MvD8AUOqVxwN7NgObUOqNME8vS057e4D2/Xj?=
+ =?us-ascii?Q?g8eVjYaBf7Mdt0pHG/G15uxckMDdOLk+2sGy+/kzxb9qM75B++bO9/9yrPtJ?=
+ =?us-ascii?Q?gfCWIFDg0EGfPE02F4IUGOSJEFMVhGrwtJf42I7ZXmWK0xtn6UBue1XnhoLt?=
+ =?us-ascii?Q?E6uVknK9iuwunRLrOE+3fb/p19m80jzStT9h7coCvZ8AlyP1lOKPWddHcFko?=
+ =?us-ascii?Q?d5jUpYRIMLOQ0Ixol3xZQWgvBrPo6vwUw9wYKG9hT19Ty8g7vO41OqkH8UDf?=
+ =?us-ascii?Q?a4v3XNME3Ji/mY975CdKuukejksb6tRqu5eUiko/IcVQdErsCRAyy8bdWK0m?=
+ =?us-ascii?Q?IBV3bfKMv4ZQRMIJLQVEyo/ZvG23TdV9zCelh4O+?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: cd92416e-4b78-405b-5d65-08ddfac8b881
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5757.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Sep 2025 17:43:35.4927
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: A2xEDAyO0jvobdvQD0MaTXiLy780iTjibHmisclshFOvk9Kf3cywfpNEv+MNKWfl
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR12MB8045
+X-Rspamd-Queue-Id: B96F444532
+X-Spamd-Bar: ----
+X-Spamd-Result: default: False [-5.00 / 15.00];
 	BAYES_HAM(-3.00)[99.99%];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
-	RWL_MAILSPIKE_EXCELLENT(-0.40)[170.10.133.124:from];
-	R_SPF_ALLOW(-0.20)[+ip4:170.10.133.0/24];
-	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719];
+	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector10001:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
+	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
+	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
 	MIME_GOOD(-0.10)[text/plain];
-	RCVD_TLS_LAST(0.00)[];
-	ASN(0.00)[asn:30031, ipnet:170.10.132.0/23, country:US];
-	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
 	RCPT_COUNT_TWELVE(0.00)[23];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
+	MIME_TRACE(0.00)[0:+];
+	MISSING_XM_UA(0.00)[];
 	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.201.53:from];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	DKIM_TRACE(0.00)[redhat.com:+]
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	DKIM_TRACE(0.00)[Nvidia.com:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: RLWI5D3X4PEA46ZBZZUIKHJ4COWAJOR3
-X-Message-ID-Hash: RLWI5D3X4PEA46ZBZZUIKHJ4COWAJOR3
-X-MailFrom: alex.williamson@redhat.com
+Message-ID-Hash: 6L3BCWXDENY63XDGRRWOXQINDJUSHYSV
+X-Message-ID-Hash: 6L3BCWXDENY63XDGRRWOXQINDJUSHYSV
+X-MailFrom: jgg@nvidia.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Leon Romanovsky <leon@kernel.org>, Leon Romanovsky <leonro@nvidia.com>, Andrew Morton <akpm@linux-foundation.org>, Bjorn Helgaas <bhelgaas@google.com>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, iommu@lists.linux.dev, Jens Axboe <axboe@kernel.dk>, Joerg Roedel <joro@8bytes.org>, kvm@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linux-mm@kvack.org, linux-pci@vger.kernel.org, Logan Gunthorpe <logang@deltatee.com>, Robin Murphy <robin.murphy@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, Vivek Kasireddy <vivek.kasireddy@intel.com>, Will Deacon <will@kernel.org>
+CC: Leon Romanovsky <leon@kernel.org>, Leon Romanovsky <leonro@nvidia.com>, Andrew Morton <akpm@linux-foundation.org>, Bjorn Helgaas <bhelgaas@google.com>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, iommu@lists.linux.dev, Jens Axboe <axboe@kernel.dk>, Joerg Roedel <joro@8bytes.org>, kvm@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linux-mm@kvack.org, linux-pci@vger.kernel.org, Logan Gunthorpe <logang@deltatee.com>, Robin Murphy <robin.murphy@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, Vivek Kasireddy <vivek.kasireddy@intel.com>, Will Deacon <will@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH v2 03/10] PCI/P2PDMA: Refactor to separate core P2P functionality from memory allocation
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RLWI5D3X4PEA46ZBZZUIKHJ4COWAJOR3/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6L3BCWXDENY63XDGRRWOXQINDJUSHYSV/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -121,35 +172,34 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Tue, 23 Sep 2025 12:04:14 -0300
-Jason Gunthorpe <jgg@nvidia.com> wrote:
-
-> On Mon, Sep 22, 2025 at 03:00:32PM -0600, Alex Williamson wrote:
-> > But then later in patch 8/ and again in 10/ why exactly do we cache
-> > the provider on the vfio_pci_core_device rather than ask for it on
-> > demand from the p2pdma?  
+On Tue, Sep 23, 2025 at 11:30:41AM -0600, Alex Williamson wrote:
+> On Tue, 23 Sep 2025 12:04:14 -0300
+> Jason Gunthorpe <jgg@nvidia.com> wrote:
 > 
-> It makes the most sense if the P2P is activated once during probe(),
-> it is just a cheap memory allocation, so no reason not to.
+> > On Mon, Sep 22, 2025 at 03:00:32PM -0600, Alex Williamson wrote:
+> > > But then later in patch 8/ and again in 10/ why exactly do we cache
+> > > the provider on the vfio_pci_core_device rather than ask for it on
+> > > demand from the p2pdma?  
+> > 
+> > It makes the most sense if the P2P is activated once during probe(),
+> > it is just a cheap memory allocation, so no reason not to.
+> > 
+> > If you try to do it on-demand then it will require more locking.
 > 
-> If you try to do it on-demand then it will require more locking.
+> I'm only wondering about splitting to an "initialize/setup" function
+> where providers for each BAR are setup, and a "get provider" interface,
+> which doesn't really seem to be a hot path anyway.  Batching could
+> still be done to setup all BAR providers at once.
 
-I'm only wondering about splitting to an "initialize/setup" function
-where providers for each BAR are setup, and a "get provider" interface,
-which doesn't really seem to be a hot path anyway.  Batching could
-still be done to setup all BAR providers at once.
+I agree it is a weird interface, but it is close to the existing weird
+interface :\
 
-However, the setup isn't really once per probe(), even in the case of a
-new driver probing we re-use the previously setup providers.  Doesn't
-that introduce a problem that the provider bus_offset can be stale if
-something like a BAR resize has occurred between drivers?
+> However, the setup isn't really once per probe(), even in the case of a
+> new driver probing we re-use the previously setup providers.  
 
-Possibly the providers should be setup in PCI core, a re-init triggered
-for resource updates, and the driver interface is only to get the
-provider.  Thanks,
+It uses devm to call pci_p2pdma_release() which NULL's pdev->p2pdma.
 
-Alex
-
+Jason
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
