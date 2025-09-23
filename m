@@ -2,115 +2,100 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6AE28B934F5
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 22 Sep 2025 23:00:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 972ADB9597E
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 23 Sep 2025 13:14:50 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E44214486F
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 22 Sep 2025 21:00:44 +0000 (UTC)
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	by lists.linaro.org (Postfix) with ESMTPS id 8B01D3F6DA
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 22 Sep 2025 21:00:41 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 11B41446DA
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 23 Sep 2025 11:14:49 +0000 (UTC)
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+	by lists.linaro.org (Postfix) with ESMTPS id 16C2F3F689
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 23 Sep 2025 11:14:46 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=D3spg5jm;
-	dmarc=pass (policy=quarantine) header.from=redhat.com;
-	spf=pass (lists.linaro.org: domain of alex.williamson@redhat.com designates 170.10.133.124 as permitted sender) smtp.mailfrom=alex.williamson@redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1758574841;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=u976ILMXRioS/uyYdClouLABKNXfjZw/zLt8Qjs8X1U=;
-	b=D3spg5jmIV3fjarcJINfq8kd63VUQSlIbkWAXF3cthZMu8mXjjS7UkGUxGfJEmxvpUrCTf
-	Hrd9wEAlFTeJ04NaQdnWAsC77Duesom5A6yOJj3Gc80O3wNU7v3dKi/x6+vVDi2LVPbvDE
-	KN7flnw5kOGU4zjU5lYEt2mtwiyUj5U=
-Received: from mail-il1-f198.google.com (mail-il1-f198.google.com
- [209.85.166.198]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-340-aJj4hU4AOyGn7RNyuFRVUw-1; Mon, 22 Sep 2025 17:00:37 -0400
-X-MC-Unique: aJj4hU4AOyGn7RNyuFRVUw-1
-X-Mimecast-MFC-AGG-ID: aJj4hU4AOyGn7RNyuFRVUw_1758574837
-Received: by mail-il1-f198.google.com with SMTP id e9e14a558f8ab-4248bfd20faso7641225ab.2
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 22 Sep 2025 14:00:37 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758574837; x=1759179637;
-        h=content-transfer-encoding:mime-version:organization:references
-         :in-reply-to:message-id:subject:cc:to:from:date:x-gm-message-state
+	dkim=pass header.d=linaro.org header.s=google header.b=kvrIPk5a;
+	dmarc=pass (policy=none) header.from=linaro.org;
+	spf=pass (lists.linaro.org: domain of dan.carpenter@linaro.org designates 209.85.128.41 as permitted sender) smtp.mailfrom=dan.carpenter@linaro.org
+Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-46b7bf21fceso25695495e9.3
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 23 Sep 2025 04:14:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1758626085; x=1759230885; darn=lists.linaro.org;
+        h=content-disposition:mime-version:message-id:subject:cc:to:from:date
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=u976ILMXRioS/uyYdClouLABKNXfjZw/zLt8Qjs8X1U=;
-        b=blw8MzybKpG04B3MT1y3E8teFQUIi108iierT1QMMEqRgXEJq8+z/CQ4wHzpvnl9j9
-         +mxUmcKsfB9WqTnmqeMRQ9rGY3i1CePxcM/BjVeHPbPG88+21r7kHgqlDVgh5AR+/J2V
-         cXzUJWua/qf1nYN5Wyvj9xG/c5wvmQMDYKDbezLnpWIEwY4D2aJ7DmdmrG0LA0hDY7bH
-         wUVBL7xZI/fvDP+Fh8N1OlS9p/mV0HrT6I8svKdooS4VHDiv4fRRrekzuDvy0vUnQnlc
-         YDWrjqJAhkbS/cRKfPjjMaLIgoANsVwcwWilhlEYbszUvb6id6k3n8gdDlFCfK0tf5q+
-         3nCg==
-X-Forwarded-Encrypted: i=1; AJvYcCXNIbAq1BKCepdskuL7mqm8hP+9cFDW1Q6G3CSJdi7cZh0U4pMSE1SrHg5Qb5cPr7WebLS+QWcgcUX1kkUX@lists.linaro.org
-X-Gm-Message-State: AOJu0YwuJcFgblEAnKFfirhlTwq9OOxhEJyae4AqxfSH0Vqn3XRuqDWK
-	VnvhHuRa+C0oBEed8uw8Z86r228RhYwb31oDIcns+q+bcGa5/cOaKWqGcLLP0qLF1CJ0PNC04fg
-	9l3unmtGhtlR8tQV61RCmJvf+25KJQ5sLvkEGNYAmI0O50c2tupBubBtu/SwPgGjuSA1N
-X-Gm-Gg: ASbGncs570b4S8jQPPFPn5JHtSkB3R1SfZo376f3UNnbURZ5wBb8Qy2TkVXPeWDVaIM
-	HVc6d6PMrNlaaG5OY6KYZZDdwah/ljjiy9v+2FAgLmT56LF9Ve/buUnS6+W6q9zESf/+7s6eDij
-	IG1VnAfezb+AycZ8z1ZU4j2VVefokGbmvdjdcUGZWXHsnW0LLEXH8Edvw8UT/vRoeCuUF0170l6
-	rfdKdfU9FmA0n6TU1F9+wm4+bSH7tXpsbvnVxEORUuANhn87IWVMSDounBnw/u/6xSwMoN+tJP1
-	xXmz+q0V7TXDMwj88eS9PT3M3jFHsznr7NnAmaopQ0A=
-X-Received: by 2002:a05:6e02:1564:b0:424:1774:6908 with SMTP id e9e14a558f8ab-42581d411aemr2507425ab.0.1758574836521;
-        Mon, 22 Sep 2025 14:00:36 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEHevCmO0qja9+CaJmqTAnyT70ByyebOs+GgzBvQQPshgkX8jExSjBAAuoPEqWA6rRJFVM2cg==
-X-Received: by 2002:a05:6e02:1564:b0:424:1774:6908 with SMTP id e9e14a558f8ab-42581d411aemr2507095ab.0.1758574835992;
-        Mon, 22 Sep 2025 14:00:35 -0700 (PDT)
-Received: from redhat.com ([38.15.36.11])
-        by smtp.gmail.com with ESMTPSA id 8926c6da1cb9f-53d3e337bebsm6192605173.28.2025.09.22.14.00.34
+        bh=veRQoXTOP5jOH7336MItrAXBwCoB6ZB/LrxpVKH7RUg=;
+        b=kvrIPk5a35UT08Gnky+lZv6LN0OIPpSR5xXOFENnY2TylYXiAZR5bhG2QtEZwTHNlT
+         s2wRJPvDh4vJcF9TYd04s5ytzqOZqbu3mX1L1eG11Mq8cv8HFDwTgnZE9TiKcDJzJyOR
+         RSTRMblNk1TLz0cpFHYftU4YSJKZGbJxpwnzitd/YM9+w4vtILzqBs6tD8LYJBsc0Q/x
+         WFmmRybzyU7gip/twB7BH/GgerbKBl5AKoYhjpdsEJX6jDm08WaFFFTjdPzX3zYJn2Ql
+         o6kV3N+i2UKUMj0rj0uOLgIaAx1iRUn6Uij6At/u9ZNMwffZyrglTb+3WXqZUr30s4VH
+         mdZA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1758626085; x=1759230885;
+        h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=veRQoXTOP5jOH7336MItrAXBwCoB6ZB/LrxpVKH7RUg=;
+        b=hNUhIMCezPn+fVpef03qWsdlqkNDseGXCS5EsajJRsLc3vcVoMPJRigKQkjvR9nqlc
+         qRdVepLO3WPmYyyIQAO36c2VS+4vXxIYB7yaQZkXIGO/hfQQFITN1I6egRoShJmiBS5T
+         AOCePvMHZ5UPaei83SRLa0KW8tGmhlTEV4/amo4/ke5I3IDUiPF7jC7kSY0ibghz41GO
+         0QE6kIU0b3CUcziXhgk3lg2W3js4QRAdQrmNL+rzE/kCBYBDEH3iRiMkudMrw8BxHER9
+         32uIJNn4LNLw3vea5j+WXwgl7WMXA7XweApa4eTvY5r1kGzCFs9o9ZJ1hvPKg9o1/BNX
+         qszw==
+X-Forwarded-Encrypted: i=1; AJvYcCV52PXZU0lUo3a4v5kp5BmnDswV9W7LpI7Zf0O9hI/ZnpKx+wjeogRGdmaRlQzxIcENhK0w/WpTRaurjUAI@lists.linaro.org
+X-Gm-Message-State: AOJu0YzfB0RzEZBfR19bi93UGM6rBP2q/r1Ua/E/5r4Orb+tVEjRIXTP
+	3MfpKF1W7ZHtjOpJ3RED5hl+IvxjLmh23rTGHeczrqlRAstY0h9nzKiL98+JsO9/i7sWnw==
+X-Gm-Gg: ASbGncsjkt8/naSCMxUDK7b3/RpU6n5lOH0vU5jAK8jSnBc2j+CbOdq4zbR4sSvFXFL
+	gsK6kXZOVVkppYHi92GvKcCArfqhCESxNCAacuQyofLXdydJV+BJstQfbgK9oJ/U+oomzs8zGYs
+	+aWJrLZuoxGbl9CX0BYUMaxVNyf/Vf21x5MAJMSEZqFVjAE0dUwNoXHTvQ//oe0ClxYMspzUCYE
+	a7Kof/HVLAuYcXkz8+SFg/COP6EoaR/T8Dos16dWAdNjFrQij+MvTxxwd7swiYxkRoU83JdMyKV
+	q2SHbvzE0Y677qfER7Yaf0G/2Rr3QUtkIgfIK5DKdeM6bezYzBZev4GbMXxAdTt5hUFB3z8sCI+
+	Zt6wNqEOHV9KL9wRP/f7KSi8Dcoql
+X-Google-Smtp-Source: AGHT+IGNA4ZE/G6xv8PAXiFATMi0x7yx2B6IdUPeinnVHdHE221ujk0cX1DYaOF+khzLyUivuysi8g==
+X-Received: by 2002:a05:600c:3145:b0:45d:f804:bcda with SMTP id 5b1f17b1804b1-46e1d9817dbmr22553515e9.13.1758626085008;
+        Tue, 23 Sep 2025 04:14:45 -0700 (PDT)
+Received: from localhost ([196.207.164.177])
+        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-464f5a285efsm270902105e9.18.2025.09.23.04.14.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 22 Sep 2025 14:00:35 -0700 (PDT)
-Date: Mon, 22 Sep 2025 15:00:32 -0600
-From: Alex Williamson <alex.williamson@redhat.com>
-To: Leon Romanovsky <leon@kernel.org>
-Message-ID: <20250922150032.3e3da410.alex.williamson@redhat.com>
-In-Reply-To: <1e2cb89ea76a92949d06a804e3ab97478e7cacbb.1757589589.git.leon@kernel.org>
-References: <cover.1757589589.git.leon@kernel.org>
-	<1e2cb89ea76a92949d06a804e3ab97478e7cacbb.1757589589.git.leon@kernel.org>
-Organization: Red Hat
+        Tue, 23 Sep 2025 04:14:44 -0700 (PDT)
+Date: Tue, 23 Sep 2025 14:14:41 +0300
+From: Dan Carpenter <dan.carpenter@linaro.org>
+To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
+Message-ID: <aNKBIcpF6kZRG6Mg@stanley.mountain>
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: EZf5uCZbHtR9wB8Kwsn82tPZVyuSjfuBHjriZd4sumg_1758574837
-X-Mimecast-Originator: redhat.com
-X-Rspamd-Queue-Id: 8B01D3F6DA
+Content-Disposition: inline
+X-Mailer: git-send-email haha only kidding
+X-Rspamd-Queue-Id: 16C2F3F689
 X-Spamd-Bar: ---
-X-Spamd-Result: default: False [-3.40 / 15.00];
+X-Spamd-Result: default: False [-3.99 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
-	RWL_MAILSPIKE_EXCELLENT(-0.40)[170.10.133.124:from];
-	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719];
-	R_SPF_ALLOW(-0.20)[+ip4:170.10.133.0/24];
+	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
 	MIME_GOOD(-0.10)[text/plain];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	HAS_ORG_HEADER(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	RCVD_TLS_LAST(0.00)[];
+	XM_UA_NO_VERSION(0.01)[];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DKIM_TRACE(0.00)[redhat.com:+]
+	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FROM_EQ_ENVFROM(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.41:from];
+	RCPT_COUNT_SEVEN(0.00)[8];
+	RCVD_TLS_LAST(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	RCVD_COUNT_TWO(0.00)[2];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	DKIM_TRACE(0.00)[linaro.org:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: WRXGM5MCW3SMR72HFPX2BCRMBLDFT2WV
-X-Message-ID-Hash: WRXGM5MCW3SMR72HFPX2BCRMBLDFT2WV
-X-MailFrom: alex.williamson@redhat.com
+Message-ID-Hash: ZTWOR7RGCTTMVKULM5BLDEL4HSR32SKU
+X-Message-ID-Hash: ZTWOR7RGCTTMVKULM5BLDEL4HSR32SKU
+X-MailFrom: dan.carpenter@linaro.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Leon Romanovsky <leonro@nvidia.com>, Jason Gunthorpe <jgg@nvidia.com>, Andrew Morton <akpm@linux-foundation.org>, Bjorn Helgaas <bhelgaas@google.com>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, iommu@lists.linux.dev, Jens Axboe <axboe@kernel.dk>, Joerg Roedel <joro@8bytes.org>, kvm@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linux-mm@kvack.org, linux-pci@vger.kernel.org, Logan Gunthorpe <logang@deltatee.com>, Robin Murphy <robin.murphy@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, Vivek Kasireddy <vivek.kasireddy@intel.com>, Will Deacon <will@kernel.org>
+CC: Sumit Semwal <sumit.semwal@linaro.org>, Simona Vetter <simona.vetter@ffwll.ch>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, kernel-janitors@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 03/10] PCI/P2PDMA: Refactor to separate core P2P functionality from memory allocation
+Subject: [Linaro-mm-sig] [PATCH] dma-buf: fix reference count leak in dma_buf_poll_add_cb()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WRXGM5MCW3SMR72HFPX2BCRMBLDFT2WV/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZTWOR7RGCTTMVKULM5BLDEL4HSR32SKU/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -120,310 +105,33 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Thu, 11 Sep 2025 14:33:07 +0300
-Leon Romanovsky <leon@kernel.org> wrote:
+Call dma_fence_put(fence) if dma_fence_add_callback() fails.
 
-> From: Leon Romanovsky <leonro@nvidia.com>
-> 
-> Refactor the PCI P2PDMA subsystem to separate the core peer-to-peer DMA
-> functionality from the optional memory allocation layer. This creates a
-> two-tier architecture:
-> 
-> The core layer provides P2P mapping functionality for physical addresses
-> based on PCI device MMIO BARs and integrates with the DMA API for
-> mapping operations. This layer is required for all P2PDMA users.
-> 
-> The optional upper layer provides memory allocation capabilities
-> including gen_pool allocator, struct page support, and sysfs interface
-> for user space access.
-> 
-> This separation allows subsystems like VFIO to use only the core P2P
-> mapping functionality without the overhead of memory allocation features
-> they don't need. The core functionality is now available through the
-> new pci_p2pdma_enable() function that returns a p2pdma_provider
-> structure.
-> 
-> Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
-> ---
->  drivers/pci/p2pdma.c       | 129 +++++++++++++++++++++++++++----------
->  include/linux/pci-p2pdma.h |   5 ++
->  2 files changed, 100 insertions(+), 34 deletions(-)
-> 
-> diff --git a/drivers/pci/p2pdma.c b/drivers/pci/p2pdma.c
-> index 176a99232fdca..c22cbb3a26030 100644
-> --- a/drivers/pci/p2pdma.c
-> +++ b/drivers/pci/p2pdma.c
-> @@ -25,11 +25,12 @@ struct pci_p2pdma {
->  	struct gen_pool *pool;
->  	bool p2pmem_published;
->  	struct xarray map_types;
-> +	struct p2pdma_provider mem[PCI_STD_NUM_BARS];
->  };
->  
->  struct pci_p2pdma_pagemap {
->  	struct dev_pagemap pgmap;
-> -	struct p2pdma_provider mem;
-> +	struct p2pdma_provider *mem;
->  };
->  
->  static struct pci_p2pdma_pagemap *to_p2p_pgmap(struct dev_pagemap *pgmap)
-> @@ -204,7 +205,7 @@ static void p2pdma_page_free(struct page *page)
->  	struct pci_p2pdma_pagemap *pgmap = to_p2p_pgmap(page_pgmap(page));
->  	/* safe to dereference while a reference is held to the percpu ref */
->  	struct pci_p2pdma *p2pdma = rcu_dereference_protected(
-> -		to_pci_dev(pgmap->mem.owner)->p2pdma, 1);
-> +		to_pci_dev(pgmap->mem->owner)->p2pdma, 1);
->  	struct percpu_ref *ref;
->  
->  	gen_pool_free_owner(p2pdma->pool, (uintptr_t)page_to_virt(page),
-> @@ -227,44 +228,93 @@ static void pci_p2pdma_release(void *data)
->  
->  	/* Flush and disable pci_alloc_p2p_mem() */
->  	pdev->p2pdma = NULL;
-> -	synchronize_rcu();
-> +	if (p2pdma->pool)
-> +		synchronize_rcu();
-> +	xa_destroy(&p2pdma->map_types);
-> +
-> +	if (!p2pdma->pool)
-> +		return;
->  
->  	gen_pool_destroy(p2pdma->pool);
->  	sysfs_remove_group(&pdev->dev.kobj, &p2pmem_group);
-> -	xa_destroy(&p2pdma->map_types);
->  }
->  
-> -static int pci_p2pdma_setup(struct pci_dev *pdev)
-> +/**
-> + * pcim_p2pdma_enable - Enable peer-to-peer DMA support for a PCI device
-> + * @pdev: The PCI device to enable P2PDMA for
-> + * @bar: BAR index to get provider
-> + *
-> + * This function initializes the peer-to-peer DMA infrastructure for a PCI
-> + * device. It allocates and sets up the necessary data structures to support
-> + * P2PDMA operations, including mapping type tracking.
-> + */
-> +struct p2pdma_provider *pcim_p2pdma_enable(struct pci_dev *pdev, int bar)
->  {
-> -	int error = -ENOMEM;
->  	struct pci_p2pdma *p2p;
-> +	int i, ret;
-> +
-> +	p2p = rcu_dereference_protected(pdev->p2pdma, 1);
-> +	if (p2p)
-> +		/* PCI device was "rebound" to the driver */
-> +		return &p2p->mem[bar];
->  
+Fixes: 6b51b02a3a0a ("dma-buf: fix and rework dma_buf_poll v7")
+Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
+---
+From code review, not from testing.  Please review carefully.
 
-This seems like two separate functions rolled into one, an 'initialize
-providers' and a 'get provider for BAR'.  The comment above even makes
-it sound like only a driver re-probing a device would encounter this
-branch, but the use case later in vfio-pci shows it to be the common
-case to iterate BARs for a device.
+ drivers/dma-buf/dma-buf.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-But then later in patch 8/ and again in 10/ why exactly do we cache
-the provider on the vfio_pci_core_device rather than ask for it on
-demand from the p2pdma?
-
-It also seems like the coordination of a valid provider is ad-hoc
-between p2pdma and vfio-pci.  For example, this only fills providers
-for MMIO BARs and vfio-pci validates that dmabuf operations are for
-MMIO BARs, but it would be more consistent if vfio-pci relied on p2pdma
-to give it a valid provider for a given BAR.  Thanks,
-
-Alex
-
->  	p2p = devm_kzalloc(&pdev->dev, sizeof(*p2p), GFP_KERNEL);
->  	if (!p2p)
-> -		return -ENOMEM;
-> +		return ERR_PTR(-ENOMEM);
->  
->  	xa_init(&p2p->map_types);
-> +	/*
-> +	 * Iterate over all standard PCI BARs and record only those that
-> +	 * correspond to MMIO regions. Skip non-memory resources (e.g. I/O
-> +	 * port BARs) since they cannot be used for peer-to-peer (P2P)
-> +	 * transactions.
-> +	 */
-> +	for (i = 0; i < PCI_STD_NUM_BARS; i++) {
-> +		if (!(pci_resource_flags(pdev, i) & IORESOURCE_MEM))
-> +			continue;
->  
-> -	p2p->pool = gen_pool_create(PAGE_SHIFT, dev_to_node(&pdev->dev));
-> -	if (!p2p->pool)
-> -		goto out;
-> +		p2p->mem[i].owner = &pdev->dev;
-> +		p2p->mem[i].bus_offset =
-> +			pci_bus_address(pdev, i) - pci_resource_start(pdev, i);
-> +	}
->  
-> -	error = devm_add_action_or_reset(&pdev->dev, pci_p2pdma_release, pdev);
-> -	if (error)
-> -		goto out_pool_destroy;
-> +	ret = devm_add_action_or_reset(&pdev->dev, pci_p2pdma_release, pdev);
-> +	if (ret)
-> +		goto out_p2p;
->  
-> -	error = sysfs_create_group(&pdev->dev.kobj, &p2pmem_group);
-> -	if (error)
-> +	rcu_assign_pointer(pdev->p2pdma, p2p);
-> +	return &p2p->mem[bar];
-> +
-> +out_p2p:
-> +	devm_kfree(&pdev->dev, p2p);
-> +	return ERR_PTR(ret);
-> +}
-> +EXPORT_SYMBOL_GPL(pcim_p2pdma_enable);
-> +
-> +static int pci_p2pdma_setup_pool(struct pci_dev *pdev)
-> +{
-> +	struct pci_p2pdma *p2pdma;
-> +	int ret;
-> +
-> +	p2pdma = rcu_dereference_protected(pdev->p2pdma, 1);
-> +	if (p2pdma->pool)
-> +		/* We already setup pools, do nothing, */
-> +		return 0;
-> +
-> +	p2pdma->pool = gen_pool_create(PAGE_SHIFT, dev_to_node(&pdev->dev));
-> +	if (!p2pdma->pool)
-> +		return -ENOMEM;
-> +
-> +	ret = sysfs_create_group(&pdev->dev.kobj, &p2pmem_group);
-> +	if (ret)
->  		goto out_pool_destroy;
->  
-> -	rcu_assign_pointer(pdev->p2pdma, p2p);
->  	return 0;
->  
->  out_pool_destroy:
-> -	gen_pool_destroy(p2p->pool);
-> -out:
-> -	devm_kfree(&pdev->dev, p2p);
-> -	return error;
-> +	gen_pool_destroy(p2pdma->pool);
-> +	p2pdma->pool = NULL;
-> +	return ret;
->  }
->  
->  static void pci_p2pdma_unmap_mappings(void *data)
-> @@ -276,7 +326,7 @@ static void pci_p2pdma_unmap_mappings(void *data)
->  	 * unmap_mapping_range() on the inode, teardown any existing userspace
->  	 * mappings and prevent new ones from being created.
->  	 */
-> -	sysfs_remove_file_from_group(&p2p_pgmap->mem.owner->kobj,
-> +	sysfs_remove_file_from_group(&p2p_pgmap->mem->owner->kobj,
->  				     &p2pmem_alloc_attr.attr,
->  				     p2pmem_group.name);
->  }
-> @@ -295,6 +345,7 @@ int pci_p2pdma_add_resource(struct pci_dev *pdev, int bar, size_t size,
->  			    u64 offset)
->  {
->  	struct pci_p2pdma_pagemap *p2p_pgmap;
-> +	struct p2pdma_provider *mem;
->  	struct dev_pagemap *pgmap;
->  	struct pci_p2pdma *p2pdma;
->  	void *addr;
-> @@ -312,15 +363,25 @@ int pci_p2pdma_add_resource(struct pci_dev *pdev, int bar, size_t size,
->  	if (size + offset > pci_resource_len(pdev, bar))
->  		return -EINVAL;
->  
-> -	if (!pdev->p2pdma) {
-> -		error = pci_p2pdma_setup(pdev);
-> +	p2pdma = rcu_dereference_protected(pdev->p2pdma, 1);
-> +	if (!p2pdma) {
-> +		mem = pcim_p2pdma_enable(pdev, bar);
-> +		if (IS_ERR(mem))
-> +			return PTR_ERR(mem);
-> +
-> +		error = pci_p2pdma_setup_pool(pdev);
->  		if (error)
->  			return error;
-> -	}
-> +
-> +		p2pdma = rcu_dereference_protected(pdev->p2pdma, 1);
-> +	} else
-> +		mem = &p2pdma->mem[bar];
->  
->  	p2p_pgmap = devm_kzalloc(&pdev->dev, sizeof(*p2p_pgmap), GFP_KERNEL);
-> -	if (!p2p_pgmap)
-> -		return -ENOMEM;
-> +	if (!p2p_pgmap) {
-> +		error = -ENOMEM;
-> +		goto free_pool;
-> +	}
->  
->  	pgmap = &p2p_pgmap->pgmap;
->  	pgmap->range.start = pci_resource_start(pdev, bar) + offset;
-> @@ -328,9 +389,7 @@ int pci_p2pdma_add_resource(struct pci_dev *pdev, int bar, size_t size,
->  	pgmap->nr_range = 1;
->  	pgmap->type = MEMORY_DEVICE_PCI_P2PDMA;
->  	pgmap->ops = &p2pdma_pgmap_ops;
-> -	p2p_pgmap->mem.owner = &pdev->dev;
-> -	p2p_pgmap->mem.bus_offset =
-> -		pci_bus_address(pdev, bar) - pci_resource_start(pdev, bar);
-> +	p2p_pgmap->mem = mem;
->  
->  	addr = devm_memremap_pages(&pdev->dev, pgmap);
->  	if (IS_ERR(addr)) {
-> @@ -343,7 +402,6 @@ int pci_p2pdma_add_resource(struct pci_dev *pdev, int bar, size_t size,
->  	if (error)
->  		goto pages_free;
->  
-> -	p2pdma = rcu_dereference_protected(pdev->p2pdma, 1);
->  	error = gen_pool_add_owner(p2pdma->pool, (unsigned long)addr,
->  			pci_bus_address(pdev, bar) + offset,
->  			range_len(&pgmap->range), dev_to_node(&pdev->dev),
-> @@ -359,7 +417,10 @@ int pci_p2pdma_add_resource(struct pci_dev *pdev, int bar, size_t size,
->  pages_free:
->  	devm_memunmap_pages(&pdev->dev, pgmap);
->  pgmap_free:
-> -	devm_kfree(&pdev->dev, pgmap);
-> +	devm_kfree(&pdev->dev, p2p_pgmap);
-> +free_pool:
-> +	sysfs_remove_group(&pdev->dev.kobj, &p2pmem_group);
-> +	gen_pool_destroy(p2pdma->pool);
->  	return error;
->  }
->  EXPORT_SYMBOL_GPL(pci_p2pdma_add_resource);
-> @@ -1008,11 +1069,11 @@ void __pci_p2pdma_update_state(struct pci_p2pdma_map_state *state,
->  {
->  	struct pci_p2pdma_pagemap *p2p_pgmap = to_p2p_pgmap(page_pgmap(page));
->  
-> -	if (state->mem == &p2p_pgmap->mem)
-> +	if (state->mem == p2p_pgmap->mem)
->  		return;
->  
-> -	state->mem = &p2p_pgmap->mem;
-> -	state->map = pci_p2pdma_map_type(&p2p_pgmap->mem, dev);
-> +	state->mem = p2p_pgmap->mem;
-> +	state->map = pci_p2pdma_map_type(p2p_pgmap->mem, dev);
->  }
->  
->  /**
-> diff --git a/include/linux/pci-p2pdma.h b/include/linux/pci-p2pdma.h
-> index eef96636c67e6..888ad7b0c54cf 100644
-> --- a/include/linux/pci-p2pdma.h
-> +++ b/include/linux/pci-p2pdma.h
-> @@ -27,6 +27,7 @@ struct p2pdma_provider {
->  };
->  
->  #ifdef CONFIG_PCI_P2PDMA
-> +struct p2pdma_provider *pcim_p2pdma_enable(struct pci_dev *pdev, int bar);
->  int pci_p2pdma_add_resource(struct pci_dev *pdev, int bar, size_t size,
->  		u64 offset);
->  int pci_p2pdma_distance_many(struct pci_dev *provider, struct device **clients,
-> @@ -45,6 +46,10 @@ int pci_p2pdma_enable_store(const char *page, struct pci_dev **p2p_dev,
->  ssize_t pci_p2pdma_enable_show(char *page, struct pci_dev *p2p_dev,
->  			       bool use_p2pdma);
->  #else /* CONFIG_PCI_P2PDMA */
-> +static inline struct p2pdma_provider *pcim_p2pdma_enable(struct pci_dev *pdev, int bar)
-> +{
-> +	return ERR_PTR(-EOPNOTSUPP);
-> +}
->  static inline int pci_p2pdma_add_resource(struct pci_dev *pdev, int bar,
->  		size_t size, u64 offset)
->  {
+diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
+index 2bcf9ceca997..a14e1f50b090 100644
+--- a/drivers/dma-buf/dma-buf.c
++++ b/drivers/dma-buf/dma-buf.c
+@@ -301,9 +301,9 @@ static bool dma_buf_poll_add_cb(struct dma_resv *resv, bool write,
+ 				fence) {
+ 		dma_fence_get(fence);
+ 		r = dma_fence_add_callback(fence, &dcb->cb, dma_buf_poll_cb);
++		dma_fence_put(fence);
+ 		if (!r)
+ 			return true;
+-		dma_fence_put(fence);
+ 	}
+ 
+ 	return false;
+-- 
+2.51.0
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
