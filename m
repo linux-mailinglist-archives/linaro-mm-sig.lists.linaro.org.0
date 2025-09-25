@@ -2,211 +2,190 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id D9EB1B9F6F0
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Sep 2025 15:09:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DFEACB9F7CF
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Sep 2025 15:18:32 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 08C5D45D6A
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Sep 2025 13:09:49 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
-	by lists.linaro.org (Postfix) with ESMTPS id 7C9CA45D6A
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 25 Sep 2025 13:09:18 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id CAA1D45D62
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Sep 2025 13:18:31 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+	by lists.linaro.org (Postfix) with ESMTPS id 3135943B90
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 25 Sep 2025 13:18:29 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=Q1tsCrDH;
-	dmarc=pass (policy=none) header.from=intel.com;
-	spf=pass (lists.linaro.org: domain of thomas.hellstrom@linux.intel.com designates 198.175.65.21 as permitted sender) smtp.mailfrom=thomas.hellstrom@linux.intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1758805759; x=1790341759;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=xuaCmYDCN/vVg5YfT7DtznqrL8bkFM2T4rIX+TL5tas=;
-  b=Q1tsCrDHpcZzHSGSZ4s+NrEK7lomzajWS670Aq+s0FPSUhDO+SYUGJxn
-   TNbjHrZ7IaXAUAjmTq9wC9qDBjWpg1y9xCZfZ0xglbIdMfOj4j31Ra+Kk
-   ADOiJJ/iZ5qZBrBgyv8J7jDYKnmt++7kiLeO29Z78XY/GQuGR2eDjMQy1
-   +G0Wd0QQ+RFcMtxuQzUK4MLE/dZnQuBKtTpZ9I6PEWqtaoD3zOa6Y9sZI
-   hKVWWRgiG2LWHQPN6fWJ+aKvTC3GfIMwhcYybUHdS8gRviktitqeEetYG
-   hmbpPu873AZX0dwwvdFcGUhSB2MpRPkmpLDWLSVIDFQwoFK/28cs1JebX
-   Q==;
-X-CSE-ConnectionGUID: qtaV6zjQSC2xd20KBeGsEw==
-X-CSE-MsgGUID: lUMRsDaZTfCpBOm0XiyCNA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11531"; a="61035820"
-X-IronPort-AV: E=Sophos;i="6.17,312,1747724400";
-   d="scan'208";a="61035820"
-Received: from fmviesa002.fm.intel.com ([10.60.135.142])
-  by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Sep 2025 06:09:19 -0700
-X-CSE-ConnectionGUID: 6qc3KjshRvy+a4FoGm4dOQ==
-X-CSE-MsgGUID: G269syTsR02tQvC+GE4Idg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.18,292,1751266800";
-   d="scan'208";a="201011393"
-Received: from dalessan-mobl3.ger.corp.intel.com (HELO fedora) ([10.245.244.100])
-  by fmviesa002-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Sep 2025 06:09:15 -0700
-From: =?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>
-To: intel-xe@lists.freedesktop.org
-Date: Thu, 25 Sep 2025 15:08:49 +0200
-Message-ID: <20250925130849.12021-3-thomas.hellstrom@linux.intel.com>
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=tyMtduVm;
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=leon@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by tor.source.kernel.org (Postfix) with ESMTP id B01716057F;
+	Thu, 25 Sep 2025 13:18:28 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E522DC4CEF0;
+	Thu, 25 Sep 2025 13:18:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1758806308;
+	bh=jQzVVFrSJ7ucYZq15uO8/5+M3IU4mjEtHjNrG1vAE+o=;
+	h=From:To:Cc:Subject:Date:From;
+	b=tyMtduVmcBWMzBWiJspZLwmeJ2ceNqfCyWctxCHtsWpa33DUFzUSwR+lAYuXSkSbq
+	 7hyAzyHDnJmIUikYk3CItyM7Uh35bR2JxITeQkJhmDYCJYXHsKr+LGIuRm4+yXoCaD
+	 JZiNMdX+Zw0TOCsazhHYjXM8C1WC31w10xakUJdR/Vn7x+k3dTdJUf9G5Maob/fD4A
+	 26gabXuJymbyanTC7dVHAFcKpHr6e/oODVxTFeiHGn/xxwdP5aGAzn0HBac9BEnYEm
+	 arr3AcxqjEzjhe0bR+w8YwaGFfWHj/09uhM6APuXkZfWoicvjxRbdiHLgAavHVhOcQ
+	 +hGPrG6oy4xJQ==
+From: Leon Romanovsky <leon@kernel.org>
+To: Alex Williamson <alex.williamson@redhat.com>
+Date: Thu, 25 Sep 2025 16:14:28 +0300
+Message-ID: <cover.1758804980.git.leon@kernel.org>
 X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20250925130849.12021-1-thomas.hellstrom@linux.intel.com>
-References: <20250925130849.12021-1-thomas.hellstrom@linux.intel.com>
 MIME-Version: 1.0
-X-Rspamd-Queue-Id: 7C9CA45D6A
-X-Spamd-Bar: ------
-X-Spamd-Result: default: False [-6.00 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
+X-Rspamd-Queue-Id: 3135943B90
+X-Spamd-Bar: --
+X-Spamd-Result: default: False [-2.50 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:198.175.65.0/26:c];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.4.254];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MIME_GOOD(-0.10)[text/plain];
+	RCPT_COUNT_TWELVE(0.00)[22];
 	ARC_NA(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FROM_HAS_DN(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[8];
-	NEURAL_HAM(-0.00)[-1.000];
+	ASN(0.00)[asn:63949, ipnet:172.105.0.0/19, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
+	FROM_HAS_DN(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:+]
+	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: GDJ4VLAQYM6W5N4XCDA266YC4OC24OVL
-X-Message-ID-Hash: GDJ4VLAQYM6W5N4XCDA266YC4OC24OVL
-X-MailFrom: thomas.hellstrom@linux.intel.com
+Message-ID-Hash: ACWCHBOX77VQJLHTBLYMY2UAYOQX4UU6
+X-Message-ID-Hash: ACWCHBOX77VQJLHTBLYMY2UAYOQX4UU6
+X-MailFrom: leon@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: =?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>, Matthew Brost <matthew.brost@intel.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Kasireddy Vivek <vivek.kasireddy@intel.com>, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+CC: Jason Gunthorpe <jgg@nvidia.com>, Andrew Morton <akpm@linux-foundation.org>, Bjorn Helgaas <bhelgaas@google.com>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, iommu@lists.linux.dev, Jens Axboe <axboe@kernel.dk>, Joerg Roedel <joro@8bytes.org>, kvm@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linux-mm@kvack.org, linux-pci@vger.kernel.org, Logan Gunthorpe <logang@deltatee.com>, Robin Murphy <robin.murphy@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, Vivek Kasireddy <vivek.kasireddy@intel.com>, Will Deacon <will@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [RFC PATCH 2/2] drm/xe/dma-buf: Add generic interconnect support framework
+Subject: [Linaro-mm-sig] [PATCH v3 00/10] vfio/pci: Allow MMIO regions to be exported through dma-buf
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GDJ4VLAQYM6W5N4XCDA266YC4OC24OVL/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ACWCHBOX77VQJLHTBLYMY2UAYOQX4UU6/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-TmVnb3RpYXRlIHRvIHVzZSBhbiB4ZS1zcGVjaWZpYyBpbnRlcmNvbm5lY3QuDQoNClNpZ25lZC1v
-ZmYtYnk6IFRob21hcyBIZWxsc3Ryw7ZtIDx0aG9tYXMuaGVsbHN0cm9tQGxpbnV4LmludGVsLmNv
-bT4NCi0tLQ0KIGRyaXZlcnMvZ3B1L2RybS94ZS90ZXN0cy94ZV9kbWFfYnVmLmMgfCAxMiArKyst
-LS0NCiBkcml2ZXJzL2dwdS9kcm0veGUveGVfZG1hX2J1Zi5jICAgICAgIHwgNTQgKysrKysrKysr
-KysrKysrKysrKysrKystLS0tDQogZHJpdmVycy9ncHUvZHJtL3hlL3hlX2RtYV9idWYuaCAgICAg
-ICB8ICAxIC0NCiBkcml2ZXJzL2dwdS9kcm0veGUveGVfaW50ZXJjb25uZWN0LmggIHwgMjIgKysr
-KysrKysrKysNCiA0IGZpbGVzIGNoYW5nZWQsIDc1IGluc2VydGlvbnMoKyksIDE0IGRlbGV0aW9u
-cygtKQ0KIGNyZWF0ZSBtb2RlIDEwMDY0NCBkcml2ZXJzL2dwdS9kcm0veGUveGVfaW50ZXJjb25u
-ZWN0LmgNCg0KZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS94ZS90ZXN0cy94ZV9kbWFfYnVm
-LmMgYi9kcml2ZXJzL2dwdS9kcm0veGUvdGVzdHMveGVfZG1hX2J1Zi5jDQppbmRleCA1ZGY5OGRl
-NWJhM2MuLjhlYWVhNmMyYTNiNyAxMDA2NDQNCi0tLSBhL2RyaXZlcnMvZ3B1L2RybS94ZS90ZXN0
-cy94ZV9kbWFfYnVmLmMNCisrKyBiL2RyaXZlcnMvZ3B1L2RybS94ZS90ZXN0cy94ZV9kbWFfYnVm
-LmMNCkBAIC0yMTAsOSArMjEwLDkgQEAgc3RhdGljIGNvbnN0IHN0cnVjdCBkbWFfYnVmX2F0dGFj
-aF9vcHMgbm9wMnBfYXR0YWNoX29wcyA9IHsNCiAgKi8NCiBzdGF0aWMgY29uc3Qgc3RydWN0IGRt
-YV9idWZfdGVzdF9wYXJhbXMgdGVzdF9wYXJhbXNbXSA9IHsNCiAJey5tZW1fbWFzayA9IFhFX0JP
-X0ZMQUdfVlJBTTAsDQotCSAuYXR0YWNoX29wcyA9ICZ4ZV9kbWFfYnVmX2F0dGFjaF9vcHN9LA0K
-KwkgLmF0dGFjaF9vcHMgPSAmeGVfZG1hX2J1Zl9hdHRhY2hfb3BzLmRtYV9vcHN9LA0KIAl7Lm1l
-bV9tYXNrID0gWEVfQk9fRkxBR19WUkFNMCB8IFhFX0JPX0ZMQUdfTkVFRFNfQ1BVX0FDQ0VTUywN
-Ci0JIC5hdHRhY2hfb3BzID0gJnhlX2RtYV9idWZfYXR0YWNoX29wcywNCisJIC5hdHRhY2hfb3Bz
-ID0gJnhlX2RtYV9idWZfYXR0YWNoX29wcy5kbWFfb3BzLA0KIAkgLmZvcmNlX2RpZmZlcmVudF9k
-ZXZpY2VzID0gdHJ1ZX0sDQogDQogCXsubWVtX21hc2sgPSBYRV9CT19GTEFHX1ZSQU0wLA0KQEAg
-LTIyNiw5ICsyMjYsOSBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IGRtYV9idWZfdGVzdF9wYXJhbXMg
-dGVzdF9wYXJhbXNbXSA9IHsNCiAJIC5mb3JjZV9kaWZmZXJlbnRfZGV2aWNlcyA9IHRydWV9LA0K
-IA0KIAl7Lm1lbV9tYXNrID0gWEVfQk9fRkxBR19TWVNURU0sDQotCSAuYXR0YWNoX29wcyA9ICZ4
-ZV9kbWFfYnVmX2F0dGFjaF9vcHN9LA0KKwkgLmF0dGFjaF9vcHMgPSAmeGVfZG1hX2J1Zl9hdHRh
-Y2hfb3BzLmRtYV9vcHN9LA0KIAl7Lm1lbV9tYXNrID0gWEVfQk9fRkxBR19TWVNURU0sDQotCSAu
-YXR0YWNoX29wcyA9ICZ4ZV9kbWFfYnVmX2F0dGFjaF9vcHMsDQorCSAuYXR0YWNoX29wcyA9ICZ4
-ZV9kbWFfYnVmX2F0dGFjaF9vcHMuZG1hX29wcywNCiAJIC5mb3JjZV9kaWZmZXJlbnRfZGV2aWNl
-cyA9IHRydWV9LA0KIA0KIAl7Lm1lbV9tYXNrID0gWEVfQk9fRkxBR19TWVNURU0sDQpAQCAtMjQy
-LDEwICsyNDIsMTAgQEAgc3RhdGljIGNvbnN0IHN0cnVjdCBkbWFfYnVmX3Rlc3RfcGFyYW1zIHRl
-c3RfcGFyYW1zW10gPSB7DQogCSAuZm9yY2VfZGlmZmVyZW50X2RldmljZXMgPSB0cnVlfSwNCiAN
-CiAJey5tZW1fbWFzayA9IFhFX0JPX0ZMQUdfU1lTVEVNIHwgWEVfQk9fRkxBR19WUkFNMCwNCi0J
-IC5hdHRhY2hfb3BzID0gJnhlX2RtYV9idWZfYXR0YWNoX29wc30sDQorCSAuYXR0YWNoX29wcyA9
-ICZ4ZV9kbWFfYnVmX2F0dGFjaF9vcHMuZG1hX29wc30sDQogCXsubWVtX21hc2sgPSBYRV9CT19G
-TEFHX1NZU1RFTSB8IFhFX0JPX0ZMQUdfVlJBTTAgfA0KIAkJICAgICBYRV9CT19GTEFHX05FRURT
-X0NQVV9BQ0NFU1MsDQotCSAuYXR0YWNoX29wcyA9ICZ4ZV9kbWFfYnVmX2F0dGFjaF9vcHMsDQor
-CSAuYXR0YWNoX29wcyA9ICZ4ZV9kbWFfYnVmX2F0dGFjaF9vcHMuZG1hX29wcywNCiAJIC5mb3Jj
-ZV9kaWZmZXJlbnRfZGV2aWNlcyA9IHRydWV9LA0KIA0KIAl7Lm1lbV9tYXNrID0gWEVfQk9fRkxB
-R19TWVNURU0gfCBYRV9CT19GTEFHX1ZSQU0wLA0KZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2Ry
-bS94ZS94ZV9kbWFfYnVmLmMgYi9kcml2ZXJzL2dwdS9kcm0veGUveGVfZG1hX2J1Zi5jDQppbmRl
-eCA1NGU0Mjk2MGRhYWQuLjQwZTlhMjhlYWY2NCAxMDA2NDQNCi0tLSBhL2RyaXZlcnMvZ3B1L2Ry
-bS94ZS94ZV9kbWFfYnVmLmMNCisrKyBiL2RyaXZlcnMvZ3B1L2RybS94ZS94ZV9kbWFfYnVmLmMN
-CkBAIC0xNiwxOSArMTYsNDAgQEANCiAjaW5jbHVkZSAidGVzdHMveGVfdGVzdC5oIg0KICNpbmNs
-dWRlICJ4ZV9iby5oIg0KICNpbmNsdWRlICJ4ZV9kZXZpY2UuaCINCisjaW5jbHVkZSAieGVfaW50
-ZXJjb25uZWN0LmgiDQogI2luY2x1ZGUgInhlX3BtLmgiDQogI2luY2x1ZGUgInhlX3R0bV92cmFt
-X21nci5oIg0KICNpbmNsdWRlICJ4ZV92bS5oIg0KIA0KIE1PRFVMRV9JTVBPUlRfTlMoIkRNQV9C
-VUYiKTsNCiANCitzdHJ1Y3QgeGVfZG1hX2J1Zl9hdHRhY2hfb3BzIHsNCisJc3RydWN0IGRtYV9i
-dWZfYXR0YWNoX29wcyBkbWFfb3BzOw0KKwlzdHJ1Y3QgeGVfaW50ZXJjb25uZWN0X2F0dGFjaF9v
-cHMgaWNfb3BzOw0KK307DQorDQorc3RhdGljIGNvbnN0IHN0cnVjdCB4ZV9kbWFfYnVmX2F0dGFj
-aF9vcHMgKg0KK3RvX3hlX2RtYV9idWZfYXR0YWNoX29wcyhzdHJ1Y3QgZG1hX2J1Zl9hdHRhY2ht
-ZW50ICphdHRhY2gpDQorew0KKwljb25zdCBzdHJ1Y3QgZG1hX2J1Zl9hdHRhY2hfb3BzICphb3Bz
-ID0gYXR0YWNoLT5pbXBvcnRlcl9vcHM7DQorDQorCWlmICghYW9wcyB8fCAhYW9wcy0+c3VwcG9y
-dHNfaW50ZXJjb25uZWN0KQ0KKwkJcmV0dXJuIE5VTEw7DQorDQorCXJldHVybiBhb3BzLT5zdXBw
-b3J0c19pbnRlcmNvbm5lY3QoYXR0YWNoLCB4ZV9pbnRlcmNvbm5lY3QpOw0KK30NCisNCiBzdGF0
-aWMgaW50IHhlX2RtYV9idWZfYXR0YWNoKHN0cnVjdCBkbWFfYnVmICpkbWFidWYsDQogCQkJICAg
-ICBzdHJ1Y3QgZG1hX2J1Zl9hdHRhY2htZW50ICphdHRhY2gpDQogew0KIAlzdHJ1Y3QgZHJtX2dl
-bV9vYmplY3QgKm9iaiA9IGF0dGFjaC0+ZG1hYnVmLT5wcml2Ow0KKwljb25zdCBzdHJ1Y3QgeGVf
-ZG1hX2J1Zl9hdHRhY2hfb3BzICp4ZV9hdHRhY2hfb3BzID0NCisJCXRvX3hlX2RtYV9idWZfYXR0
-YWNoX29wcyhhdHRhY2gpOw0KIA0KLQlpZiAoYXR0YWNoLT5wZWVyMnBlZXIgJiYNCi0JICAgIHBj
-aV9wMnBkbWFfZGlzdGFuY2UodG9fcGNpX2RldihvYmotPmRldi0+ZGV2KSwgYXR0YWNoLT5kZXYs
-IGZhbHNlKSA8IDApDQorCWlmICh4ZV9hdHRhY2hfb3BzICYmIHhlX2F0dGFjaF9vcHMtPmljX29w
-cy5hbGxvd19pYykNCisJCWF0dGFjaC0+aW50ZXJjb25uZWN0ID0geGVfaW50ZXJjb25uZWN0Ow0K
-KwllbHNlIGlmIChhdHRhY2gtPnBlZXIycGVlciAmJg0KKwkJIHBjaV9wMnBkbWFfZGlzdGFuY2Uo
-dG9fcGNpX2RldihvYmotPmRldi0+ZGV2KSwgYXR0YWNoLT5kZXYsIGZhbHNlKSA8IDApDQogCQlh
-dHRhY2gtPnBlZXIycGVlciA9IGZhbHNlOw0KIA0KIAlpZiAoIWF0dGFjaC0+cGVlcjJwZWVyICYm
-ICF4ZV9ib19jYW5fbWlncmF0ZShnZW1fdG9feGVfYm8ob2JqKSwgWEVfUExfVFQpKQ0KQEAgLTI4
-NSw5ICszMDYsMjcgQEAgc3RhdGljIHZvaWQgeGVfZG1hX2J1Zl9tb3ZlX25vdGlmeShzdHJ1Y3Qg
-ZG1hX2J1Zl9hdHRhY2htZW50ICphdHRhY2gpDQogCVhFX1dBUk5fT04oeGVfYm9fZXZpY3QoYm8s
-IGV4ZWMpKTsNCiB9DQogDQotc3RhdGljIGNvbnN0IHN0cnVjdCBkbWFfYnVmX2F0dGFjaF9vcHMg
-eGVfZG1hX2J1Zl9hdHRhY2hfb3BzID0gew0KLQkuYWxsb3dfcGVlcjJwZWVyID0gdHJ1ZSwNCi0J
-Lm1vdmVfbm90aWZ5ID0geGVfZG1hX2J1Zl9tb3ZlX25vdGlmeQ0KK3N0YXRpYyBjb25zdCB2b2lk
-ICp4ZV9kbWFfYnVmX3N1cHBvcnRzX2ludGVyY29ubmVjdChzdHJ1Y3QgZG1hX2J1Zl9hdHRhY2ht
-ZW50ICphdHRhY2gsDQorCQkJCQkJICAgIGNvbnN0IHZvaWQgKmludGVyY29ubmVjdCkNCit7DQor
-CWlmIChpbnRlcmNvbm5lY3QgPT0geGVfaW50ZXJjb25uZWN0KSB7DQorCQlyZXR1cm4gJmNvbnRh
-aW5lcl9vZihhdHRhY2gtPmltcG9ydGVyX29wcywNCisJCQkJICAgICBjb25zdCBzdHJ1Y3QgeGVf
-ZG1hX2J1Zl9hdHRhY2hfb3BzLA0KKwkJCQkgICAgIGRtYV9vcHMpLT5pY19vcHM7DQorCX0NCisN
-CisJcmV0dXJuIE5VTEw7DQorfQ0KKw0KK3N0YXRpYyBjb25zdCBzdHJ1Y3QgeGVfZG1hX2J1Zl9h
-dHRhY2hfb3BzIHhlX2RtYV9idWZfYXR0YWNoX29wcyA9IHsNCisJLmRtYV9vcHMgPSB7DQorCQku
-YWxsb3dfcGVlcjJwZWVyID0gdHJ1ZSwNCisJCS5tb3ZlX25vdGlmeSA9IHhlX2RtYV9idWZfbW92
-ZV9ub3RpZnksDQorCQkuc3VwcG9ydHNfaW50ZXJjb25uZWN0ID0geGVfZG1hX2J1Zl9zdXBwb3J0
-c19pbnRlcmNvbm5lY3QsDQorCX0sDQorCS5pY19vcHMgPSB7DQorCQkuYWxsb3dfaWMgPSB0cnVl
-LA0KKwl9DQogfTsNCiANCiAjaWYgSVNfRU5BQkxFRChDT05GSUdfRFJNX1hFX0tVTklUX1RFU1Qp
-DQpAQCAtMzM2LDEyICszNzUsMTEgQEAgc3RydWN0IGRybV9nZW1fb2JqZWN0ICp4ZV9nZW1fcHJp
-bWVfaW1wb3J0KHN0cnVjdCBkcm1fZGV2aWNlICpkZXYsDQogCWlmIChJU19FUlIoYm8pKQ0KIAkJ
-cmV0dXJuIEVSUl9DQVNUKGJvKTsNCiANCi0JYXR0YWNoX29wcyA9ICZ4ZV9kbWFfYnVmX2F0dGFj
-aF9vcHM7DQorCWF0dGFjaF9vcHMgPSAmeGVfZG1hX2J1Zl9hdHRhY2hfb3BzLmRtYV9vcHM7DQog
-I2lmIElTX0VOQUJMRUQoQ09ORklHX0RSTV9YRV9LVU5JVF9URVNUKQ0KIAlpZiAodGVzdCkNCiAJ
-CWF0dGFjaF9vcHMgPSB0ZXN0LT5hdHRhY2hfb3BzOw0KICNlbmRpZg0KLQ0KIAlhdHRhY2ggPSBk
-bWFfYnVmX2R5bmFtaWNfYXR0YWNoKGRtYV9idWYsIGRldi0+ZGV2LCBhdHRhY2hfb3BzLCAmYm8t
-PnR0bS5iYXNlKTsNCiAJaWYgKElTX0VSUihhdHRhY2gpKSB7DQogCQlvYmogPSBFUlJfQ0FTVChh
-dHRhY2gpOw0KQEAgLTM2NCw2ICs0MDIsOCBAQCBzdHJ1Y3QgZHJtX2dlbV9vYmplY3QgKnhlX2dl
-bV9wcmltZV9pbXBvcnQoc3RydWN0IGRybV9kZXZpY2UgKmRldiwNCiAJcmV0dXJuIG9iajsNCiB9
-DQogDQordm9pZCAqeGVfaW50ZXJjb25uZWN0ID0gIlhFX0lOVEVSQ09OTkVDVCI7DQorDQogI2lm
-IElTX0VOQUJMRUQoQ09ORklHX0RSTV9YRV9LVU5JVF9URVNUKQ0KICNpbmNsdWRlICJ0ZXN0cy94
-ZV9kbWFfYnVmLmMiDQogI2VuZGlmDQpkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL3hlL3hl
-X2RtYV9idWYuaCBiL2RyaXZlcnMvZ3B1L2RybS94ZS94ZV9kbWFfYnVmLmgNCmluZGV4IDg2MWRk
-MjhhODYyYy4uNmIzODFjZTRiN2MxIDEwMDY0NA0KLS0tIGEvZHJpdmVycy9ncHUvZHJtL3hlL3hl
-X2RtYV9idWYuaA0KKysrIGIvZHJpdmVycy9ncHUvZHJtL3hlL3hlX2RtYV9idWYuaA0KQEAgLTEx
-LDUgKzExLDQgQEANCiBzdHJ1Y3QgZG1hX2J1ZiAqeGVfZ2VtX3ByaW1lX2V4cG9ydChzdHJ1Y3Qg
-ZHJtX2dlbV9vYmplY3QgKm9iaiwgaW50IGZsYWdzKTsNCiBzdHJ1Y3QgZHJtX2dlbV9vYmplY3Qg
-KnhlX2dlbV9wcmltZV9pbXBvcnQoc3RydWN0IGRybV9kZXZpY2UgKmRldiwNCiAJCQkJCSAgIHN0
-cnVjdCBkbWFfYnVmICpkbWFfYnVmKTsNCi0NCiAjZW5kaWYNCmRpZmYgLS1naXQgYS9kcml2ZXJz
-L2dwdS9kcm0veGUveGVfaW50ZXJjb25uZWN0LmggYi9kcml2ZXJzL2dwdS9kcm0veGUveGVfaW50
-ZXJjb25uZWN0LmgNCm5ldyBmaWxlIG1vZGUgMTAwNjQ0DQppbmRleCAwMDAwMDAwMDAwMDAuLjFm
-YTA1MjYyM2QwNQ0KLS0tIC9kZXYvbnVsbA0KKysrIGIvZHJpdmVycy9ncHUvZHJtL3hlL3hlX2lu
-dGVyY29ubmVjdC5oDQpAQCAtMCwwICsxLDIyIEBADQorLyogU1BEWC1MaWNlbnNlLUlkZW50aWZp
-ZXI6IE1JVCAqLw0KKy8qDQorICogQ29weXJpZ2h0IMKpIDIwMjUgSW50ZWwgQ29ycG9yYXRpb24N
-CisgKi8NCisjaWZuZGVmIF9YRV9JTlRFUkNPTk5FQ1RfSF8NCisjZGVmaW5lIF9YRV9JTlRFUkNP
-Tk5FQ1RfSF8NCisNCisjaW5jbHVkZSA8bGludXgvdHlwZXMuaD4NCisNCisvKiBUaGlzIGZpbGUg
-bmVlZHMgdG8gYmUgc2hhcmVkIGJldHdlZW4gdGhlIGltcG9ydGVyIGFuZCBleHBvcnRlciBvZiB0
-aGUgaW50ZXJjb25uZWN0ICovDQorDQorZXh0ZXJuIHZvaWQgKnhlX2ludGVyY29ubmVjdDsNCisN
-CitzdHJ1Y3QgeGVfaW50ZXJjb25uZWN0X2F0dGFjaF9vcHMgew0KKwkvKg0KKwkgKiBIZXJlIGlu
-dGVyY29ubmVjdC1wcml2YXRlIHN0dWZmIGNhbiBiZSBhZGRlZC4NCisJICogTGlrZSBhIGZ1bmN0
-aW9uIHRvIGNoZWNrIGludGVyY29ubmVjdCBwb3NzaWJpbGl0eS4NCisJICovDQorCWJvb2wgYWxs
-b3dfaWM7DQorfTsNCisNCisjZW5kaWYNCi0tIA0KMi41MS4wDQoNCl9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0
-IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFu
-IGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+Changelog:
+v3:
+ * Changed pcim_p2pdma_enable() to be pcim_p2pdma_provider().
+ * Cache provider in vfio_pci_dma_buf struct instead of BAR index.
+ * Removed misleading comment from pcim_p2pdma_provider().
+ * Moved MMIO check to be in pcim_p2pdma_provider().
+v2: https://lore.kernel.org/all/cover.1757589589.git.leon@kernel.org/
+ * Added extra patch which adds new CONFIG, so next patches can reuse it.
+ * Squashed "PCI/P2PDMA: Remove redundant bus_offset from map state"
+   into the other patch.
+ * Fixed revoke calls to be aligned with true->false semantics.
+ * Extended p2pdma_providers to be per-BAR and not global to whole device.
+ * Fixed possible race between dmabuf states and revoke.
+ * Moved revoke to PCI BAR zap block.
+v1: https://lore.kernel.org/all/cover.1754311439.git.leon@kernel.org
+ * Changed commit messages.
+ * Reused DMA_ATTR_MMIO attribute.
+ * Returned support for multiple DMA ranges per-dMABUF.
+v0: https://lore.kernel.org/all/cover.1753274085.git.leonro@nvidia.com
+
+---------------------------------------------------------------------------
+Based on "[PATCH v6 00/16] dma-mapping: migrate to physical address-based API"
+https://lore.kernel.org/all/cover.1757423202.git.leonro@nvidia.com/ series.
+---------------------------------------------------------------------------
+
+This series extends the VFIO PCI subsystem to support exporting MMIO
+regions from PCI device BARs as dma-buf objects, enabling safe sharing of
+non-struct page memory with controlled lifetime management. This allows RDMA
+and other subsystems to import dma-buf FDs and build them into memory regions
+for PCI P2P operations.
+
+The series supports a use case for SPDK where a NVMe device will be
+owned by SPDK through VFIO but interacting with a RDMA device. The RDMA
+device may directly access the NVMe CMB or directly manipulate the NVMe
+device's doorbell using PCI P2P.
+
+However, as a general mechanism, it can support many other scenarios with
+VFIO. This dmabuf approach can be usable by iommufd as well for generic
+and safe P2P mappings.
+
+In addition to the SPDK use-case mentioned above, the capability added
+in this patch series can also be useful when a buffer (located in device
+memory such as VRAM) needs to be shared between any two dGPU devices or
+instances (assuming one of them is bound to VFIO PCI) as long as they
+are P2P DMA compatible.
+
+The implementation provides a revocable attachment mechanism using dma-buf
+move operations. MMIO regions are normally pinned as BARs don't change
+physical addresses, but access is revoked when the VFIO device is closed
+or a PCI reset is issued. This ensures kernel self-defense against
+potentially hostile userspace.
+
+The series includes significant refactoring of the PCI P2PDMA subsystem
+to separate core P2P functionality from memory allocation features,
+making it more modular and suitable for VFIO use cases that don't need
+struct page support.
+
+-----------------------------------------------------------------------
+The series is based originally on
+https://lore.kernel.org/all/20250307052248.405803-1-vivek.kasireddy@intel.com/
+but heavily rewritten to be based on DMA physical API.
+-----------------------------------------------------------------------
+The WIP branch can be found here:
+https://git.kernel.org/pub/scm/linux/kernel/git/leon/linux-rdma.git/log/?h=dmabuf-vfio-v3
+
+Thanks
+
+Leon Romanovsky (8):
+  PCI/P2PDMA: Separate the mmap() support from the core logic
+  PCI/P2PDMA: Simplify bus address mapping API
+  PCI/P2PDMA: Refactor to separate core P2P functionality from memory
+    allocation
+  PCI/P2PDMA: Export pci_p2pdma_map_type() function
+  types: move phys_vec definition to common header
+  vfio/pci: Add dma-buf export config for MMIO regions
+  vfio/pci: Enable peer-to-peer DMA transactions by default
+  vfio/pci: Add dma-buf export support for MMIO regions
+
+Vivek Kasireddy (2):
+  vfio: Export vfio device get and put registration helpers
+  vfio/pci: Share the core device pointer while invoking feature
+    functions
+
+ block/blk-mq-dma.c                 |   7 +-
+ drivers/iommu/dma-iommu.c          |   4 +-
+ drivers/pci/p2pdma.c               | 176 +++++++++----
+ drivers/vfio/pci/Kconfig           |  20 ++
+ drivers/vfio/pci/Makefile          |   2 +
+ drivers/vfio/pci/vfio_pci_config.c |  22 +-
+ drivers/vfio/pci/vfio_pci_core.c   |  58 +++--
+ drivers/vfio/pci/vfio_pci_dmabuf.c | 394 +++++++++++++++++++++++++++++
+ drivers/vfio/pci/vfio_pci_priv.h   |  23 ++
+ drivers/vfio/vfio_main.c           |   2 +
+ include/linux/pci-p2pdma.h         | 115 +++++----
+ include/linux/types.h              |   5 +
+ include/linux/vfio.h               |   2 +
+ include/linux/vfio_pci_core.h      |   4 +
+ include/uapi/linux/vfio.h          |  25 ++
+ kernel/dma/direct.c                |   4 +-
+ mm/hmm.c                           |   2 +-
+ 17 files changed, 741 insertions(+), 124 deletions(-)
+ create mode 100644 drivers/vfio/pci/vfio_pci_dmabuf.c
+
+-- 
+2.51.0
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
