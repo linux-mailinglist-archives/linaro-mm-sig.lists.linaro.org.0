@@ -2,116 +2,82 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 680E3B9771C
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 23 Sep 2025 22:07:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0F04FB9DBE8
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Sep 2025 09:03:25 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8067345959
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 23 Sep 2025 20:07:33 +0000 (UTC)
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-	by lists.linaro.org (Postfix) with ESMTPS id BBABD42525
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 23 Sep 2025 20:07:30 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 611C644857
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Sep 2025 07:03:23 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+	by lists.linaro.org (Postfix) with ESMTPS id D0D76442EC
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 25 Sep 2025 07:03:20 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=ZLFqnU6d;
-	dmarc=pass (policy=quarantine) header.from=redhat.com;
-	spf=pass (lists.linaro.org: domain of alex.williamson@redhat.com designates 170.10.129.124 as permitted sender) smtp.mailfrom=alex.williamson@redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1758658050;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=TkF/1TIVCdQ8I35UWInq/5XGtjT7LO6t3DfocUuGzJk=;
-	b=ZLFqnU6d+6znjZm1pAwJ06tM7mu3sevqZlUrT8MjnxwlkXnkTcyAXiAA6TG2ugWnXotjoI
-	TdSoPOFUBZUupSa72gNvmK6pOUe++iUCJ2LAaZQ+ZbW03xt+Z/3dlVMHZjvF6jguJV9+zY
-	anHh/hhO8vGM/0FtG3uQIIO8IH4Ytj4=
-Received: from mail-il1-f197.google.com (mail-il1-f197.google.com
- [209.85.166.197]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-373-f9P008S-MdyWJlbFcsOaRw-1; Tue, 23 Sep 2025 16:07:29 -0400
-X-MC-Unique: f9P008S-MdyWJlbFcsOaRw-1
-X-Mimecast-MFC-AGG-ID: f9P008S-MdyWJlbFcsOaRw_1758658048
-Received: by mail-il1-f197.google.com with SMTP id e9e14a558f8ab-4258981d664so852275ab.3
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 23 Sep 2025 13:07:28 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758658048; x=1759262848;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=TkF/1TIVCdQ8I35UWInq/5XGtjT7LO6t3DfocUuGzJk=;
-        b=BB3eLlRekkqfRkg+zCOgUvPZNDuh/9owYjXB7q6Zy5X0tSF/rlqNYrbG4uMOtwP4h8
-         1gZp3cSLZip0WMlYyEUHgdQGjSP8kgBmFVctEVI7iTHDlfn/FfZD72Dv+mLoiAwwZxHW
-         sWB65TGLil8iG11NJTXGBb9Y+O+Q1ClEOkYXgVklAUMkKYFPsAxPZkpnk+KH1wQJZPan
-         vrak0x6Ra4zRq3bVIazgWtvr18Ni+VdEJE+HBye4A75rxZ4fx76s3ij9LzXWhjIbq4ov
-         jpNZD4nChKkWKIZbHG3hhEJivGLDYA4fd9gfm6j5x1vTDiVgDxffGnKDbzv0nwf0G5gk
-         DB8A==
-X-Forwarded-Encrypted: i=1; AJvYcCUqpvSVYQklM/e4awC72+0MnY0tXt8YIt1SplRxrqVgB7htAxgLL2+17o9Le8AUAqjBKs2dAG5NkrkYv+EW@lists.linaro.org
-X-Gm-Message-State: AOJu0Yy5ip9LprXJYnljCFztZGh2W9sNFd+1tHMEh5kf7pKQyUENpsb+
-	I3zMzKhN9e8TE8hobJB/wrsGohIZZrReClYBZjZXlS0KkH7zxX4IC4pJUzWXSvDDdNzG7BF7RRe
-	7JyNkXuz2LGrxGPmnmU+bAp8Y9psKVXhtMlazBTb7Od8VhxiVIaWHHO5v+qbiN9VJk2TD
-X-Gm-Gg: ASbGncsgU2Tw2BMoDAsLcjDCYGpKMrSsHKKe1razmWlNSmf9L/kchoz/sYiP27LlHMZ
-	sZaBapAqsidNSPpfpDGYus4R02U+sP0xXHegO8c4IXShepxu0rHuml/hr1lesITn0Mpaj8u++JV
-	qMP6qBGrdkevO93HCiG/wAfWNAZBt+4S4mLyUho+vddy6GUNgTsChOMNCRvqgXxWDfjj48UdOsx
-	UtJpOv3fRhVykGUB9zdiu4zASQeFlmDQcoEXWwl7mUEil+Xj5YgNbIyC++6q2lvHonrowt8yH5/
-	ltczDWg6NWPYWM7V8jGH4mKh1+ecjphRy6mdf0wJ15I=
-X-Received: by 2002:a05:6e02:b27:b0:423:fd07:d3fe with SMTP id e9e14a558f8ab-42581e0924amr21638545ab.2.1758658048112;
-        Tue, 23 Sep 2025 13:07:28 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEmMxIqHNMDHwq6jPuldjwSxK84807XGPUliuEF5qCvF8SuPWmF0LqQLkrDELCWNHqAt6pi1g==
-X-Received: by 2002:a05:6e02:b27:b0:423:fd07:d3fe with SMTP id e9e14a558f8ab-42581e0924amr21638385ab.2.1758658047638;
-        Tue, 23 Sep 2025 13:07:27 -0700 (PDT)
-Received: from redhat.com ([38.15.36.11])
-        by smtp.gmail.com with ESMTPSA id e9e14a558f8ab-425813f3053sm15141865ab.21.2025.09.23.13.07.25
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 23 Sep 2025 13:07:26 -0700 (PDT)
-Date: Tue, 23 Sep 2025 14:07:23 -0600
-From: Alex Williamson <alex.williamson@redhat.com>
-To: Leon Romanovsky <leon@kernel.org>
-Message-ID: <20250923140723.14c63741.alex.williamson@redhat.com>
-In-Reply-To: <20250923171228.GL10800@unreal>
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=qHutfg7p;
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=leon@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by sea.source.kernel.org (Postfix) with ESMTP id 161F540817;
+	Thu, 25 Sep 2025 07:03:20 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 476E0C4CEF4;
+	Thu, 25 Sep 2025 07:03:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1758783799;
+	bh=IfFjt1sIn89xjUeeoV2zJsvE3bTjSj86lJ2QWvNYz8w=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=qHutfg7p0MJiJzKdbXS/d6R3kdEqDhdXcGmgxvkwI4AM6XuKyeIpgR1GSCsEqIGVB
+	 9ZrAilO0Zj59EMAXR1lQlcpWEMA28nquUz1IKkduHGuS4dyD2OJmp5f3UxncKmQ8+I
+	 Dp30uxy2wGUYE3Hja5f4XS00BFzuj+WaXq60qYIzodUdV2tvE04uI5a85RPL6mAqR7
+	 MWKPSQplfkMcH9/nRS03UG60TJBwCq9ZQRhoS60sk8FdhiE0kifJqWTjrMUqN9REZV
+	 kUzpbXtt2XKNZVaDT/F1inIn9vj+we8Gfm9meFs0BUoq+pahNKDPioVkPIFajbcBnM
+	 waHnKaEouWGfQ==
+Date: Thu, 25 Sep 2025 10:03:14 +0300
+From: Leon Romanovsky <leon@kernel.org>
+To: Alex Williamson <alex.williamson@redhat.com>
+Message-ID: <20250925070314.GA12165@unreal>
 References: <cover.1757589589.git.leon@kernel.org>
-	<1e2cb89ea76a92949d06a804e3ab97478e7cacbb.1757589589.git.leon@kernel.org>
-	<20250922150032.3e3da410.alex.williamson@redhat.com>
-	<20250923171228.GL10800@unreal>
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.43; x86_64-redhat-linux-gnu)
+ <1e2cb89ea76a92949d06a804e3ab97478e7cacbb.1757589589.git.leon@kernel.org>
+ <20250922150032.3e3da410.alex.williamson@redhat.com>
+ <20250923150414.GA2608121@nvidia.com>
+ <20250923113041.38bee711.alex.williamson@redhat.com>
+ <20250923174333.GE2608121@nvidia.com>
+ <20250923120932.47df57b2.alex.williamson@redhat.com>
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: V08HrcB920CLc3E_D6sWjIN4bFQ7SEg9LyuPiux5R6o_1758658048
-X-Mimecast-Originator: redhat.com
-X-Rspamd-Queue-Id: BBABD42525
+Content-Disposition: inline
+In-Reply-To: <20250923120932.47df57b2.alex.williamson@redhat.com>
+X-Rspamd-Queue-Id: D0D76442EC
 X-Spamd-Bar: ---
-X-Spamd-Result: default: False [-3.20 / 15.00];
+X-Spamd-Result: default: False [-3.50 / 15.00];
 	BAYES_HAM(-3.00)[99.99%];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
-	RWL_MAILSPIKE_VERYGOOD(-0.20)[170.10.129.124:from];
-	R_SPF_ALLOW(-0.20)[+ip4:170.10.129.0/24];
-	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.252.31];
 	MIME_GOOD(-0.10)[text/plain];
-	RCVD_TLS_LAST(0.00)[];
-	ARC_NA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	MISSING_XM_UA(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[22];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_TLS_LAST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DNSWL_BLOCKED(0.00)[170.10.129.124:from,38.15.36.11:received,209.85.166.197:received];
-	FROM_EQ_ENVFROM(0.00)[];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	DKIM_TRACE(0.00)[redhat.com:+]
+	FROM_EQ_ENVFROM(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: LYIVWCWCTNPV6IPIDWYUL6G3ZGUFD5XX
-X-Message-ID-Hash: LYIVWCWCTNPV6IPIDWYUL6G3ZGUFD5XX
-X-MailFrom: alex.williamson@redhat.com
+Message-ID-Hash: XQAQWPIET5Q2EGRPGBIANWSU7HMIXI5Y
+X-Message-ID-Hash: XQAQWPIET5Q2EGRPGBIANWSU7HMIXI5Y
+X-MailFrom: leon@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Jason Gunthorpe <jgg@nvidia.com>, Andrew Morton <akpm@linux-foundation.org>, Bjorn Helgaas <bhelgaas@google.com>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, iommu@lists.linux.dev, Jens Axboe <axboe@kernel.dk>, Joerg Roedel <joro@8bytes.org>, kvm@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linux-mm@kvack.org, linux-pci@vger.kernel.org, Logan Gunthorpe <logang@deltatee.com>, Robin Murphy <robin.murphy@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, Vivek Kasireddy <vivek.kasireddy@intel.com>, Will Deacon <will@kernel.org>
+CC: Jason Gunthorpe <jgg@nvidia.com>, Andrew Morton <akpm@linux-foundation.org>, Bjorn Helgaas <bhelgaas@google.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, iommu@lists.linux.dev, Jens Axboe <axboe@kernel.dk>, Joerg Roedel <joro@8bytes.org>, kvm@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linux-mm@kvack.org, linux-pci@vger.kernel.org, Logan Gunthorpe <logang@deltatee.com>, Robin Murphy <robin.murphy@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, Vivek Kasireddy <vivek.kasireddy@intel.com>, Will Deacon <will@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH v2 03/10] PCI/P2PDMA: Refactor to separate core P2P functionality from memory allocation
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LYIVWCWCTNPV6IPIDWYUL6G3ZGUFD5XX/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XQAQWPIET5Q2EGRPGBIANWSU7HMIXI5Y/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -121,113 +87,63 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Tue, 23 Sep 2025 20:12:28 +0300
-Leon Romanovsky <leon@kernel.org> wrote:
-
-> On Mon, Sep 22, 2025 at 03:00:32PM -0600, Alex Williamson wrote:
-> > On Thu, 11 Sep 2025 14:33:07 +0300
-> > Leon Romanovsky <leon@kernel.org> wrote:
-> >   
-> > > From: Leon Romanovsky <leonro@nvidia.com>
-> > > 
-> > > Refactor the PCI P2PDMA subsystem to separate the core peer-to-peer DMA
-> > > functionality from the optional memory allocation layer. This creates a
-> > > two-tier architecture:
-> > > 
-> > > The core layer provides P2P mapping functionality for physical addresses
-> > > based on PCI device MMIO BARs and integrates with the DMA API for
-> > > mapping operations. This layer is required for all P2PDMA users.
-> > > 
-> > > The optional upper layer provides memory allocation capabilities
-> > > including gen_pool allocator, struct page support, and sysfs interface
-> > > for user space access.
-> > > 
-> > > This separation allows subsystems like VFIO to use only the core P2P
-> > > mapping functionality without the overhead of memory allocation features
-> > > they don't need. The core functionality is now available through the
-> > > new pci_p2pdma_enable() function that returns a p2pdma_provider
-> > > structure.
-> > > 
-> > > Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
-> > > ---
-> > >  drivers/pci/p2pdma.c       | 129 +++++++++++++++++++++++++++----------
-> > >  include/linux/pci-p2pdma.h |   5 ++
-> > >  2 files changed, 100 insertions(+), 34 deletions(-)  
+On Tue, Sep 23, 2025 at 12:09:32PM -0600, Alex Williamson wrote:
+> On Tue, 23 Sep 2025 14:43:33 -0300
+> Jason Gunthorpe <jgg@nvidia.com> wrote:
 > 
-> <...>
-> 
-> > > -static int pci_p2pdma_setup(struct pci_dev *pdev)
-> > > +/**
-> > > + * pcim_p2pdma_enable - Enable peer-to-peer DMA support for a PCI device
-> > > + * @pdev: The PCI device to enable P2PDMA for
-> > > + * @bar: BAR index to get provider
-> > > + *
-> > > + * This function initializes the peer-to-peer DMA infrastructure for a PCI
-> > > + * device. It allocates and sets up the necessary data structures to support
-> > > + * P2PDMA operations, including mapping type tracking.
-> > > + */
-> > > +struct p2pdma_provider *pcim_p2pdma_enable(struct pci_dev *pdev, int bar)
-> > >  {
-> > > -	int error = -ENOMEM;
-> > >  	struct pci_p2pdma *p2p;
-> > > +	int i, ret;
-> > > +
-> > > +	p2p = rcu_dereference_protected(pdev->p2pdma, 1);
-> > > +	if (p2p)
-> > > +		/* PCI device was "rebound" to the driver */
-> > > +		return &p2p->mem[bar];
-> > >    
+> > On Tue, Sep 23, 2025 at 11:30:41AM -0600, Alex Williamson wrote:
+> > > On Tue, 23 Sep 2025 12:04:14 -0300
+> > > Jason Gunthorpe <jgg@nvidia.com> wrote:
+> > >   
+> > > > On Mon, Sep 22, 2025 at 03:00:32PM -0600, Alex Williamson wrote:  
+> > > > > But then later in patch 8/ and again in 10/ why exactly do we cache
+> > > > > the provider on the vfio_pci_core_device rather than ask for it on
+> > > > > demand from the p2pdma?    
+> > > > 
+> > > > It makes the most sense if the P2P is activated once during probe(),
+> > > > it is just a cheap memory allocation, so no reason not to.
+> > > > 
+> > > > If you try to do it on-demand then it will require more locking.  
+> > > 
+> > > I'm only wondering about splitting to an "initialize/setup" function
+> > > where providers for each BAR are setup, and a "get provider" interface,
+> > > which doesn't really seem to be a hot path anyway.  Batching could
+> > > still be done to setup all BAR providers at once.  
 > > 
-> > This seems like two separate functions rolled into one, an 'initialize
-> > providers' and a 'get provider for BAR'.  The comment above even makes
-> > it sound like only a driver re-probing a device would encounter this
-> > branch, but the use case later in vfio-pci shows it to be the common
-> > case to iterate BARs for a device.
-> > 
-> > But then later in patch 8/ and again in 10/ why exactly do we cache
-> > the provider on the vfio_pci_core_device rather than ask for it on
-> > demand from the p2pdma?  
+> > I agree it is a weird interface, but it is close to the existing weird
+> > interface :\
 > 
-> In addition to what Jason said about locking. The whole p2pdma.c is
-> written with assumption that "pdev->p2pdma" pointer is assigned only
-> once during PCI device lifetime. For example, see how sysfs files
-> are exposed and accessed in p2pdma.c.
+> Seems like it would help if we just positioned it as a "get provider
+> for BAR" function that happens to initialize all the providers on the
+> first call, rather than an "enable" function with some strange BAR
+> argument and provider return.  pcim_p2pdma_provider(pdev, bar)?
+> 
+> It would at least make sense to me then to store the provider on the
+> vfio_pci_dma_buf object at the time of the get feature call rather than
+> vfio_pci_core_init_dev() though.  That would eliminate patch 08/ and
+> the inline #ifdefs.
 
-Except as Jason identifies in the other thread, the p2pdma is a devm
-object, so it's assigned once during the lifetime of the driver, not
-the device.  It seems that to get the sysfs attributes exposed, a
-driver would need to call pci_p2pdma_add_resource() to setup a pool,
-but that pool setup is only done if pci_p2pdma_add_resource() itself
-calls pcim_p2pdma_enable():
+I'll change it now. If "enable" function goes to be "get" function, we
+won't need to store anything in vfio_pci_dma_buf too. At the end, we
+have exactly two lines "provider = priv->vdev->provider[priv->bar];",
+which can easily be changed to be "provider = pcim_p2pdma_provider(priv->vdev->pdev, priv->bar)"
 
-        p2pdma = rcu_dereference_protected(pdev->p2pdma, 1);
-        if (!p2pdma) {
-                mem = pcim_p2pdma_enable(pdev, bar);
-                if (IS_ERR(mem))
-                        return PTR_ERR(mem);
+> 
+> > > However, the setup isn't really once per probe(), even in the case of a
+> > > new driver probing we re-use the previously setup providers.    
+> > 
+> > It uses devm to call pci_p2pdma_release() which NULL's pdev->p2pdma.
+> 
+> Ah, right.  So the /* PCI device was "rebound" to the driver */ comment
+> is further misleading, a new probe would do a new setup.  Thanks,
 
-                error = pci_p2pdma_setup_pool(pdev);
-		...
-        } else
-                mem = &p2pdma->mem[bar];
+I will fix the comment.
 
-Therefore as proposed here a device bound to vfio-pci would never have
-these sysfs attributes.
+Thanks
 
-> Once you initialize p2pdma, it is much easier to initialize all BARs at
-> the same time.
-
-I didn't phrase my question above well.  We can setup all the providers
-on the p2pdma at once, that's fine.  My comment is related to the
-awkward API we're creating and what seems to be gratuitously caching
-the providers on the vfio_pci_core_device when it seems much more
-logical to get the provider for a specific dmabuf and cache it on the
-vfio_pci_dma_buf object in the device feature ioctl.  We could also
-validate the provider at that point rather than the ad-hoc, parallel
-checks for MMIO BARs.  Thanks,
-
-Alex
-
+> 
+> Alex
+> 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
