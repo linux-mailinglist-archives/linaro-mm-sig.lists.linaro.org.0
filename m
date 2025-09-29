@@ -2,764 +2,167 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 98E74BA726E
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 28 Sep 2025 16:53:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6709DBA85E9
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 29 Sep 2025 10:16:39 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id AE4DB40E18
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 28 Sep 2025 14:53:41 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 17D0B40E0D
-	for <linaro-mm-sig@lists.linaro.org>; Sun, 28 Sep 2025 14:51:42 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id ECC3044B56
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 29 Sep 2025 08:16:37 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.14])
+	by lists.linaro.org (Postfix) with ESMTPS id C3A7B41226
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 29 Sep 2025 08:16:34 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=IecM6cnp;
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=leon@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id 6B130437BA;
-	Sun, 28 Sep 2025 14:51:41 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C5E67C4CEF0;
-	Sun, 28 Sep 2025 14:51:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1759071101;
-	bh=dgoJMONAaQ0FkHEaGJp6kyyPUaHl6mfDGBVyCOc4l40=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=IecM6cnpNQvD5wQqEvIeJ/E6uGESzXx3kbcqbVzD/Dvj5U0kHPMCxBYsK134UQTWZ
-	 peWN/Mt/KWo875ErMqKWbmPtdm2xxCfMfmCrH2YdSQnOSQ1/ns/IKgrB2tcvPrqHKX
-	 R0UocbSiDFfdIt07cha7D7zhiujISujBVDlvoJDl5wLHXvjv/Trq4Q5svk4SUZPgxp
-	 MkUrdGopSUJcJNHfP4+neherNzeyd4c/13oAnGUjCiy9UtYwSpXPvogFwrQdahEsL4
-	 Qnv29RL4DibXJX7l9M8ynLh5Uv95cjHAoe/5jX7bEv8V5XHipTG+nX4GG8ICSoBY49
-	 XuSzg+p6uWOFQ==
-From: Leon Romanovsky <leon@kernel.org>
-To: Alex Williamson <alex.williamson@redhat.com>
-Date: Sun, 28 Sep 2025 17:50:20 +0300
-Message-ID: <53f3ea1947919a5e657b4f83e74ca53aa45814d4.1759070796.git.leon@kernel.org>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <cover.1759070796.git.leon@kernel.org>
-References: <cover.1759070796.git.leon@kernel.org>
+	dkim=pass header.d=intel.com header.s=Intel header.b=U42egk9f;
+	dmarc=pass (policy=none) header.from=intel.com;
+	spf=pass (lists.linaro.org: domain of thomas.hellstrom@linux.intel.com designates 192.198.163.14 as permitted sender) smtp.mailfrom=thomas.hellstrom@linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1759133795; x=1790669795;
+  h=message-id:subject:from:to:cc:date:in-reply-to:
+   references:content-transfer-encoding:mime-version;
+  bh=SnlqN1mumhwBKc4PNmKCKRfU3VEW0DNHRfvCd0sbaJs=;
+  b=U42egk9f53wlpIpGjDZQuAWAC1yqGWY9HASk8seGDLA0+7vBuUgdBY/H
+   sI9GzhSDgwntBUh3jcAyxo6pEfGh1s3vmSeBVrsduOSav5I8ZQ0UNAK7q
+   P2OsT6fPT93t/tx3PcN3gjdXauaHxpfv9jfOSbYITbE722OD/4pN84eXP
+   u9Jp3kbTucDmfR/H7qpkd5NFQec+QTOHUCnBgRmCss4ZPzW0vB3OLikF7
+   L2XIi3vOFcN8F6HbvJ7nnxz+f09Ga9Im1bih8eGLuKeaE026KXOBcjwht
+   9uGjzUa3Bn8ReeRIYmZ/OycbSCrzBnmZqepojRT0j/oF2LUaWeQqCzP5n
+   Q==;
+X-CSE-ConnectionGUID: iNeqbE2pTdOLbsMirnZjOQ==
+X-CSE-MsgGUID: oad0kj0RTj+ugXgbCxvzQA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11567"; a="61417112"
+X-IronPort-AV: E=Sophos;i="6.18,301,1751266800";
+   d="scan'208";a="61417112"
+Received: from fmviesa009.fm.intel.com ([10.60.135.149])
+  by fmvoesa108.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 29 Sep 2025 01:16:33 -0700
+X-CSE-ConnectionGUID: 0JxY8mmpQ4Sad/Ggo2Z17w==
+X-CSE-MsgGUID: pZlUf9WmQK6XlelLVKn/iw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.18,301,1751266800";
+   d="scan'208";a="178601499"
+Received: from smoticic-mobl1.ger.corp.intel.com (HELO [10.245.245.197]) ([10.245.245.197])
+  by fmviesa009-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 29 Sep 2025 01:16:31 -0700
+Message-ID: <d3cc5b7fe4189c6f529b532273ece34c9c0e975f.camel@linux.intel.com>
+From: Thomas =?ISO-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>
+To: Jason Gunthorpe <jgg@nvidia.com>, Christian =?ISO-8859-1?Q?K=F6nig?=
+	 <christian.koenig@amd.com>
+Date: Mon, 29 Sep 2025 10:16:29 +0200
+In-Reply-To: <20250926160036.GE2617119@nvidia.com>
+References: <20250926084624.2288-1-thomas.hellstrom@linux.intel.com>
+	 <20250926084624.2288-2-thomas.hellstrom@linux.intel.com>
+	 <472f27f0-2f54-45dd-b0a6-3a26b5eec301@amd.com>
+	 <ef9f4fb1c55bf3e5e6423b2accdccee0607b95ef.camel@linux.intel.com>
+	 <20250926144128.GD2617119@nvidia.com>
+	 <765e3449-2eb1-49f5-954e-3bab5a5fc9d1@amd.com>
+	 <20250926160036.GE2617119@nvidia.com>
+Organization: Intel Sweden AB, Registration Number: 556189-6027
+User-Agent: Evolution 3.54.3 (3.54.3-2.fc41) 
 MIME-Version: 1.0
-X-Rspamd-Queue-Id: 17D0B40E0D
-X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.50 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.252.31:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+X-Rspamd-Queue-Id: C3A7B41226
+X-Spamd-Bar: ------
+X-Spamd-Result: default: False [-7.00 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
+	BAYES_HAM(-3.00)[99.99%];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	R_SPF_ALLOW(-0.20)[+ip4:192.198.163.0/26];
 	MIME_GOOD(-0.10)[text/plain];
 	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[23];
+	HAS_ORG_HEADER(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[9];
+	MID_RHS_MATCH_FROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
-	URIBL_BLOCKED(0.00)[intel.com:email];
-	DKIM_TRACE(0.00)[kernel.org:+]
+	RCVD_COUNT_TWO(0.00)[2];
+	RCVD_TLS_LAST(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	DKIM_TRACE(0.00)[intel.com:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: JFM3KE4QBBMPCSBL4YCX5AECDP43JVGX
-X-Message-ID-Hash: JFM3KE4QBBMPCSBL4YCX5AECDP43JVGX
-X-MailFrom: leon@kernel.org
+Message-ID-Hash: 6CHL2SGQAZOUMFX7CU35RTCLIJ4XR2IS
+X-Message-ID-Hash: 6CHL2SGQAZOUMFX7CU35RTCLIJ4XR2IS
+X-MailFrom: thomas.hellstrom@linux.intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Leon Romanovsky <leonro@nvidia.com>, Jason Gunthorpe <jgg@nvidia.com>, Andrew Morton <akpm@linux-foundation.org>, Bjorn Helgaas <bhelgaas@google.com>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, iommu@lists.linux.dev, Jens Axboe <axboe@kernel.dk>, Joerg Roedel <joro@8bytes.org>, kvm@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linux-mm@kvack.org, linux-pci@vger.kernel.org, Logan Gunthorpe <logang@deltatee.com>, Robin Murphy <robin.murphy@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, Vivek Kasireddy <vivek.kasireddy@intel.com>, Will Deacon <will@kernel.org>
+CC: intel-xe@lists.freedesktop.org, Matthew Brost <matthew.brost@intel.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Kasireddy Vivek <vivek.kasireddy@intel.com>, Simona Vetter <simona.vetter@ffwll.ch>, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v4 10/10] vfio/pci: Add dma-buf export support for MMIO regions
+Subject: [Linaro-mm-sig] Re: [RFC PATCH v2 1/2] dma-buf: Add support for private interconnects
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JFM3KE4QBBMPCSBL4YCX5AECDP43JVGX/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6CHL2SGQAZOUMFX7CU35RTCLIJ4XR2IS/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-From: Leon Romanovsky <leonro@nvidia.com>
-
-Add support for exporting PCI device MMIO regions through dma-buf,
-enabling safe sharing of non-struct page memory with controlled
-lifetime management. This allows RDMA and other subsystems to import
-dma-buf FDs and build them into memory regions for PCI P2P operations.
-
-The implementation provides a revocable attachment mechanism using
-dma-buf move operations. MMIO regions are normally pinned as BARs
-don't change physical addresses, but access is revoked when the VFIO
-device is closed or a PCI reset is issued. This ensures kernel
-self-defense against potentially hostile userspace.
-
-Signed-off-by: Jason Gunthorpe <jgg@nvidia.com>
-Signed-off-by: Vivek Kasireddy <vivek.kasireddy@intel.com>
-Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
----
- drivers/vfio/pci/Makefile          |   2 +
- drivers/vfio/pci/vfio_pci_config.c |  22 +-
- drivers/vfio/pci/vfio_pci_core.c   |  17 ++
- drivers/vfio/pci/vfio_pci_dmabuf.c | 398 +++++++++++++++++++++++++++++
- drivers/vfio/pci/vfio_pci_priv.h   |  23 ++
- include/linux/vfio_pci_core.h      |   3 +
- include/uapi/linux/vfio.h          |  25 ++
- 7 files changed, 486 insertions(+), 4 deletions(-)
- create mode 100644 drivers/vfio/pci/vfio_pci_dmabuf.c
-
-diff --git a/drivers/vfio/pci/Makefile b/drivers/vfio/pci/Makefile
-index cf00c0a7e55c..f9155e9c5f63 100644
---- a/drivers/vfio/pci/Makefile
-+++ b/drivers/vfio/pci/Makefile
-@@ -2,7 +2,9 @@
- 
- vfio-pci-core-y := vfio_pci_core.o vfio_pci_intrs.o vfio_pci_rdwr.o vfio_pci_config.o
- vfio-pci-core-$(CONFIG_VFIO_PCI_ZDEV_KVM) += vfio_pci_zdev.o
-+
- obj-$(CONFIG_VFIO_PCI_CORE) += vfio-pci-core.o
-+vfio-pci-core-$(CONFIG_VFIO_PCI_DMABUF) += vfio_pci_dmabuf.o
- 
- vfio-pci-y := vfio_pci.o
- vfio-pci-$(CONFIG_VFIO_PCI_IGD) += vfio_pci_igd.o
-diff --git a/drivers/vfio/pci/vfio_pci_config.c b/drivers/vfio/pci/vfio_pci_config.c
-index 8f02f236b5b4..1f6008eabf23 100644
---- a/drivers/vfio/pci/vfio_pci_config.c
-+++ b/drivers/vfio/pci/vfio_pci_config.c
-@@ -589,10 +589,12 @@ static int vfio_basic_config_write(struct vfio_pci_core_device *vdev, int pos,
- 		virt_mem = !!(le16_to_cpu(*virt_cmd) & PCI_COMMAND_MEMORY);
- 		new_mem = !!(new_cmd & PCI_COMMAND_MEMORY);
- 
--		if (!new_mem)
-+		if (!new_mem) {
- 			vfio_pci_zap_and_down_write_memory_lock(vdev);
--		else
-+			vfio_pci_dma_buf_move(vdev, true);
-+		} else {
- 			down_write(&vdev->memory_lock);
-+		}
- 
- 		/*
- 		 * If the user is writing mem/io enable (new_mem/io) and we
-@@ -627,6 +629,8 @@ static int vfio_basic_config_write(struct vfio_pci_core_device *vdev, int pos,
- 		*virt_cmd &= cpu_to_le16(~mask);
- 		*virt_cmd |= cpu_to_le16(new_cmd & mask);
- 
-+		if (__vfio_pci_memory_enabled(vdev))
-+			vfio_pci_dma_buf_move(vdev, false);
- 		up_write(&vdev->memory_lock);
- 	}
- 
-@@ -707,12 +711,16 @@ static int __init init_pci_cap_basic_perm(struct perm_bits *perm)
- static void vfio_lock_and_set_power_state(struct vfio_pci_core_device *vdev,
- 					  pci_power_t state)
- {
--	if (state >= PCI_D3hot)
-+	if (state >= PCI_D3hot) {
- 		vfio_pci_zap_and_down_write_memory_lock(vdev);
--	else
-+		vfio_pci_dma_buf_move(vdev, true);
-+	} else {
- 		down_write(&vdev->memory_lock);
-+	}
- 
- 	vfio_pci_set_power_state(vdev, state);
-+	if (__vfio_pci_memory_enabled(vdev))
-+		vfio_pci_dma_buf_move(vdev, false);
- 	up_write(&vdev->memory_lock);
- }
- 
-@@ -900,7 +908,10 @@ static int vfio_exp_config_write(struct vfio_pci_core_device *vdev, int pos,
- 
- 		if (!ret && (cap & PCI_EXP_DEVCAP_FLR)) {
- 			vfio_pci_zap_and_down_write_memory_lock(vdev);
-+			vfio_pci_dma_buf_move(vdev, true);
- 			pci_try_reset_function(vdev->pdev);
-+			if (__vfio_pci_memory_enabled(vdev))
-+				vfio_pci_dma_buf_move(vdev, false);
- 			up_write(&vdev->memory_lock);
- 		}
- 	}
-@@ -982,7 +993,10 @@ static int vfio_af_config_write(struct vfio_pci_core_device *vdev, int pos,
- 
- 		if (!ret && (cap & PCI_AF_CAP_FLR) && (cap & PCI_AF_CAP_TP)) {
- 			vfio_pci_zap_and_down_write_memory_lock(vdev);
-+			vfio_pci_dma_buf_move(vdev, true);
- 			pci_try_reset_function(vdev->pdev);
-+			if (__vfio_pci_memory_enabled(vdev))
-+				vfio_pci_dma_buf_move(vdev, false);
- 			up_write(&vdev->memory_lock);
- 		}
- 	}
-diff --git a/drivers/vfio/pci/vfio_pci_core.c b/drivers/vfio/pci/vfio_pci_core.c
-index 0c39368280d7..aa88c42db69b 100644
---- a/drivers/vfio/pci/vfio_pci_core.c
-+++ b/drivers/vfio/pci/vfio_pci_core.c
-@@ -289,6 +289,8 @@ static int vfio_pci_runtime_pm_entry(struct vfio_pci_core_device *vdev,
- 	 * semaphore.
- 	 */
- 	vfio_pci_zap_and_down_write_memory_lock(vdev);
-+	vfio_pci_dma_buf_move(vdev, true);
-+
- 	if (vdev->pm_runtime_engaged) {
- 		up_write(&vdev->memory_lock);
- 		return -EINVAL;
-@@ -372,6 +374,8 @@ static void vfio_pci_runtime_pm_exit(struct vfio_pci_core_device *vdev)
- 	 */
- 	down_write(&vdev->memory_lock);
- 	__vfio_pci_runtime_pm_exit(vdev);
-+	if (__vfio_pci_memory_enabled(vdev))
-+		vfio_pci_dma_buf_move(vdev, false);
- 	up_write(&vdev->memory_lock);
- }
- 
-@@ -692,6 +696,8 @@ void vfio_pci_core_close_device(struct vfio_device *core_vdev)
- #endif
- 	vfio_pci_core_disable(vdev);
- 
-+	vfio_pci_dma_buf_cleanup(vdev);
-+
- 	mutex_lock(&vdev->igate);
- 	if (vdev->err_trigger) {
- 		eventfd_ctx_put(vdev->err_trigger);
-@@ -1224,7 +1230,10 @@ static int vfio_pci_ioctl_reset(struct vfio_pci_core_device *vdev,
- 	 */
- 	vfio_pci_set_power_state(vdev, PCI_D0);
- 
-+	vfio_pci_dma_buf_move(vdev, true);
- 	ret = pci_try_reset_function(vdev->pdev);
-+	if (__vfio_pci_memory_enabled(vdev))
-+		vfio_pci_dma_buf_move(vdev, false);
- 	up_write(&vdev->memory_lock);
- 
- 	return ret;
-@@ -1513,6 +1522,8 @@ int vfio_pci_core_ioctl_feature(struct vfio_device *device, u32 flags,
- 		return vfio_pci_core_pm_exit(vdev, flags, arg, argsz);
- 	case VFIO_DEVICE_FEATURE_PCI_VF_TOKEN:
- 		return vfio_pci_core_feature_token(vdev, flags, arg, argsz);
-+	case VFIO_DEVICE_FEATURE_DMA_BUF:
-+		return vfio_pci_core_feature_dma_buf(vdev, flags, arg, argsz);
- 	default:
- 		return -ENOTTY;
- 	}
-@@ -2098,6 +2109,7 @@ int vfio_pci_core_init_dev(struct vfio_device *core_vdev)
- 	ret = pcim_p2pdma_init(vdev->pdev);
- 	if (ret)
- 		return ret;
-+	INIT_LIST_HEAD(&vdev->dmabufs);
- #endif
- 	init_rwsem(&vdev->memory_lock);
- 	xa_init(&vdev->ctx);
-@@ -2463,6 +2475,7 @@ static int vfio_pci_dev_set_hot_reset(struct vfio_device_set *dev_set,
- 			break;
- 		}
- 
-+		vfio_pci_dma_buf_move(vdev, true);
- 		vfio_pci_zap_bars(vdev);
- 	}
- 
-@@ -2486,6 +2499,10 @@ static int vfio_pci_dev_set_hot_reset(struct vfio_device_set *dev_set,
- 
- 	ret = pci_reset_bus(pdev);
- 
-+	list_for_each_entry(vdev, &dev_set->device_list, vdev.dev_set_list)
-+		if (__vfio_pci_memory_enabled(vdev))
-+			vfio_pci_dma_buf_move(vdev, false);
-+
- 	vdev = list_last_entry(&dev_set->device_list,
- 			       struct vfio_pci_core_device, vdev.dev_set_list);
- 
-diff --git a/drivers/vfio/pci/vfio_pci_dmabuf.c b/drivers/vfio/pci/vfio_pci_dmabuf.c
-new file mode 100644
-index 000000000000..838619f812aa
---- /dev/null
-+++ b/drivers/vfio/pci/vfio_pci_dmabuf.c
-@@ -0,0 +1,398 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/* Copyright (c) 2025, NVIDIA CORPORATION & AFFILIATES.
-+ */
-+#include <linux/dma-buf.h>
-+#include <linux/pci-p2pdma.h>
-+#include <linux/dma-resv.h>
-+
-+#include "vfio_pci_priv.h"
-+
-+MODULE_IMPORT_NS("DMA_BUF");
-+
-+struct vfio_pci_dma_buf {
-+	struct dma_buf *dmabuf;
-+	struct vfio_pci_core_device *vdev;
-+	struct list_head dmabufs_elm;
-+	size_t size;
-+	struct phys_vec *phys_vec;
-+	struct p2pdma_provider *provider;
-+	u32 nr_ranges;
-+	u8 revoked : 1;
-+};
-+
-+static int vfio_pci_dma_buf_attach(struct dma_buf *dmabuf,
-+				   struct dma_buf_attachment *attachment)
-+{
-+	struct vfio_pci_dma_buf *priv = dmabuf->priv;
-+
-+	if (!attachment->peer2peer)
-+		return -EOPNOTSUPP;
-+
-+	if (priv->revoked)
-+		return -ENODEV;
-+
-+	switch (pci_p2pdma_map_type(priv->provider, attachment->dev)) {
-+	case PCI_P2PDMA_MAP_THRU_HOST_BRIDGE:
-+		break;
-+	case PCI_P2PDMA_MAP_BUS_ADDR:
-+		/*
-+		 * There is no need in IOVA at all for this flow.
-+		 * We rely on attachment->priv == NULL as a marker
-+		 * for this mode.
-+		 */
-+		return 0;
-+	default:
-+		return -EINVAL;
-+	}
-+
-+	attachment->priv = kzalloc(sizeof(struct dma_iova_state), GFP_KERNEL);
-+	if (!attachment->priv)
-+		return -ENOMEM;
-+
-+	dma_iova_try_alloc(attachment->dev, attachment->priv, 0, priv->size);
-+	return 0;
-+}
-+
-+static void vfio_pci_dma_buf_detach(struct dma_buf *dmabuf,
-+				    struct dma_buf_attachment *attachment)
-+{
-+	kfree(attachment->priv);
-+}
-+
-+static void fill_sg_entry(struct scatterlist *sgl, unsigned int length,
-+			 dma_addr_t addr)
-+{
-+	/*
-+	 * Follow the DMABUF rules for scatterlist, the struct page can be
-+	 * NULL'd for MMIO only memort.
-+	 */
-+	sg_set_page(sgl, NULL, length, 0);
-+	sg_dma_address(sgl) = addr;
-+	sg_dma_len(sgl) = length;
-+}
-+
-+static struct sg_table *
-+vfio_pci_dma_buf_map(struct dma_buf_attachment *attachment,
-+		     enum dma_data_direction dir)
-+{
-+	struct vfio_pci_dma_buf *priv = attachment->dmabuf->priv;
-+	struct dma_iova_state *state = attachment->priv;
-+	struct phys_vec *phys_vec = priv->phys_vec;
-+	unsigned long attrs = DMA_ATTR_MMIO;
-+	unsigned int mapped_len = 0;
-+	struct scatterlist *sgl;
-+	struct sg_table *sgt;
-+	dma_addr_t addr;
-+	int ret, i;
-+
-+	dma_resv_assert_held(priv->dmabuf->resv);
-+
-+	if (priv->revoked)
-+		return ERR_PTR(-ENODEV);
-+
-+	sgt = kzalloc(sizeof(*sgt), GFP_KERNEL);
-+	if (!sgt)
-+		return ERR_PTR(-ENOMEM);
-+
-+	ret = sg_alloc_table(sgt, 1, GFP_KERNEL | __GFP_ZERO);
-+	if (ret)
-+		goto err_kfree_sgt;
-+
-+	sgl = sgt->sgl;
-+
-+	for (i = 0; i < priv->nr_ranges; i++) {
-+		if (!state) {
-+			addr = pci_p2pdma_bus_addr_map(priv->provider,
-+						       phys_vec[i].paddr);
-+		} else if (dma_use_iova(state)) {
-+			ret = dma_iova_link(attachment->dev, state,
-+					    phys_vec[i].paddr, 0,
-+					    phys_vec[i].len, dir, attrs);
-+			if (ret)
-+				goto err_unmap_dma;
-+
-+			mapped_len += phys_vec[i].len;
-+		} else {
-+			addr = dma_map_phys(attachment->dev, phys_vec[i].paddr,
-+					    phys_vec[i].len, dir, attrs);
-+			ret = dma_mapping_error(attachment->dev, addr);
-+			if (ret)
-+				goto err_unmap_dma;
-+		}
-+
-+		if (!state || !dma_use_iova(state)) {
-+			/*
-+			 * In IOVA case, there is only one SG entry which spans
-+			 * for whole IOVA address space. So there is no need
-+			 * to call to sg_next() here.
-+			 */
-+			fill_sg_entry(sgl, phys_vec[i].len, addr);
-+			sgl = sg_next(sgl);
-+		}
-+	}
-+
-+	if (state && dma_use_iova(state)) {
-+		WARN_ON_ONCE(mapped_len != priv->size);
-+		ret = dma_iova_sync(attachment->dev, state, 0, mapped_len);
-+		if (ret)
-+			goto err_unmap_dma;
-+		fill_sg_entry(sgl, mapped_len, state->addr);
-+	}
-+
-+	return sgt;
-+
-+err_unmap_dma:
-+	if (!i || !state)
-+		; /* Do nothing */
-+	else if (dma_use_iova(state))
-+		dma_iova_destroy(attachment->dev, state, mapped_len, dir,
-+				 attrs);
-+	else
-+		for_each_sgtable_dma_sg(sgt, sgl, i)
-+			dma_unmap_phys(attachment->dev, sg_dma_address(sgl),
-+					sg_dma_len(sgl), dir, attrs);
-+	sg_free_table(sgt);
-+err_kfree_sgt:
-+	kfree(sgt);
-+	return ERR_PTR(ret);
-+}
-+
-+static void vfio_pci_dma_buf_unmap(struct dma_buf_attachment *attachment,
-+				   struct sg_table *sgt,
-+				   enum dma_data_direction dir)
-+{
-+	struct vfio_pci_dma_buf *priv = attachment->dmabuf->priv;
-+	struct dma_iova_state *state = attachment->priv;
-+	unsigned long attrs = DMA_ATTR_MMIO;
-+	struct scatterlist *sgl;
-+	int i;
-+
-+	if (!state)
-+		; /* Do nothing */
-+	else if (dma_use_iova(state))
-+		dma_iova_destroy(attachment->dev, state, priv->size, dir,
-+				 attrs);
-+	else
-+		for_each_sgtable_dma_sg(sgt, sgl, i)
-+			dma_unmap_phys(attachment->dev, sg_dma_address(sgl),
-+				       sg_dma_len(sgl), dir, attrs);
-+
-+	sg_free_table(sgt);
-+	kfree(sgt);
-+}
-+
-+static void vfio_pci_dma_buf_release(struct dma_buf *dmabuf)
-+{
-+	struct vfio_pci_dma_buf *priv = dmabuf->priv;
-+
-+	/*
-+	 * Either this or vfio_pci_dma_buf_cleanup() will remove from the list.
-+	 * The refcount prevents both.
-+	 */
-+	if (priv->vdev) {
-+		down_write(&priv->vdev->memory_lock);
-+		list_del_init(&priv->dmabufs_elm);
-+		up_write(&priv->vdev->memory_lock);
-+		vfio_device_put_registration(&priv->vdev->vdev);
-+	}
-+	kfree(priv->phys_vec);
-+	kfree(priv);
-+}
-+
-+static const struct dma_buf_ops vfio_pci_dmabuf_ops = {
-+	.attach = vfio_pci_dma_buf_attach,
-+	.detach = vfio_pci_dma_buf_detach,
-+	.map_dma_buf = vfio_pci_dma_buf_map,
-+	.release = vfio_pci_dma_buf_release,
-+	.unmap_dma_buf = vfio_pci_dma_buf_unmap,
-+};
-+
-+static void dma_ranges_to_p2p_phys(struct vfio_pci_dma_buf *priv,
-+				   struct vfio_device_feature_dma_buf *dma_buf,
-+				   struct vfio_region_dma_range *dma_ranges,
-+				   struct p2pdma_provider *provider)
-+{
-+	struct pci_dev *pdev = priv->vdev->pdev;
-+	phys_addr_t pci_start;
-+	int i;
-+
-+	pci_start = pci_resource_start(pdev, dma_buf->region_index);
-+	for (i = 0; i < dma_buf->nr_ranges; i++) {
-+		priv->phys_vec[i].len = dma_ranges[i].length;
-+		priv->phys_vec[i].paddr = pci_start + dma_ranges[i].offset;
-+		priv->size += priv->phys_vec[i].len;
-+	}
-+	priv->nr_ranges = dma_buf->nr_ranges;
-+	priv->provider = provider;
-+}
-+
-+static int validate_dmabuf_input(struct vfio_pci_core_device *vdev,
-+				 struct vfio_device_feature_dma_buf *dma_buf,
-+				 struct vfio_region_dma_range *dma_ranges,
-+				 struct p2pdma_provider **provider)
-+{
-+	struct pci_dev *pdev = vdev->pdev;
-+	u32 bar = dma_buf->region_index;
-+	resource_size_t bar_size;
-+	u64 sum;
-+	int i;
-+
-+	if (dma_buf->flags)
-+		return -EINVAL;
-+	/*
-+	 * For PCI the region_index is the BAR number like  everything else.
-+	 */
-+	if (bar >= VFIO_PCI_ROM_REGION_INDEX)
-+		return -ENODEV;
-+
-+	*provider = pcim_p2pdma_provider(pdev, bar);
-+	if (!provider)
-+		return -EINVAL;
-+
-+	bar_size = pci_resource_len(pdev, bar);
-+	for (i = 0; i < dma_buf->nr_ranges; i++) {
-+		u64 offset = dma_ranges[i].offset;
-+		u64 len = dma_ranges[i].length;
-+
-+		if (!PAGE_ALIGNED(offset) || !PAGE_ALIGNED(len))
-+			return -EINVAL;
-+
-+		if (check_add_overflow(offset, len, &sum) || sum > bar_size)
-+			return -EINVAL;
-+	}
-+
-+	return 0;
-+}
-+
-+int vfio_pci_core_feature_dma_buf(struct vfio_pci_core_device *vdev, u32 flags,
-+				  struct vfio_device_feature_dma_buf __user *arg,
-+				  size_t argsz)
-+{
-+	struct vfio_device_feature_dma_buf get_dma_buf = {};
-+	struct vfio_region_dma_range *dma_ranges;
-+	DEFINE_DMA_BUF_EXPORT_INFO(exp_info);
-+	struct p2pdma_provider *provider;
-+	struct vfio_pci_dma_buf *priv;
-+	int ret;
-+
-+	ret = vfio_check_feature(flags, argsz, VFIO_DEVICE_FEATURE_GET,
-+				 sizeof(get_dma_buf));
-+	if (ret != 1)
-+		return ret;
-+
-+	if (copy_from_user(&get_dma_buf, arg, sizeof(get_dma_buf)))
-+		return -EFAULT;
-+
-+	if (!get_dma_buf.nr_ranges)
-+		return -EINVAL;
-+
-+	dma_ranges = memdup_array_user(&arg->dma_ranges, get_dma_buf.nr_ranges,
-+				       sizeof(*dma_ranges));
-+	if (IS_ERR(dma_ranges))
-+		return PTR_ERR(dma_ranges);
-+
-+	ret = validate_dmabuf_input(vdev, &get_dma_buf, dma_ranges, &provider);
-+	if (ret)
-+		return ret;
-+
-+	priv = kzalloc(sizeof(*priv), GFP_KERNEL);
-+	if (!priv) {
-+		ret = -ENOMEM;
-+		goto err_free_ranges;
-+	}
-+	priv->phys_vec = kcalloc(get_dma_buf.nr_ranges, sizeof(*priv->phys_vec),
-+				 GFP_KERNEL);
-+	if (!priv->phys_vec) {
-+		ret = -ENOMEM;
-+		goto err_free_priv;
-+	}
-+
-+	priv->vdev = vdev;
-+	dma_ranges_to_p2p_phys(priv, &get_dma_buf, dma_ranges, provider);
-+	kfree(dma_ranges);
-+	dma_ranges = NULL;
-+
-+	if (!vfio_device_try_get_registration(&vdev->vdev)) {
-+		ret = -ENODEV;
-+		goto err_free_phys;
-+	}
-+
-+	exp_info.ops = &vfio_pci_dmabuf_ops;
-+	exp_info.size = priv->size;
-+	exp_info.flags = get_dma_buf.open_flags;
-+	exp_info.priv = priv;
-+
-+	priv->dmabuf = dma_buf_export(&exp_info);
-+	if (IS_ERR(priv->dmabuf)) {
-+		ret = PTR_ERR(priv->dmabuf);
-+		goto err_dev_put;
-+	}
-+
-+	/* dma_buf_put() now frees priv */
-+	INIT_LIST_HEAD(&priv->dmabufs_elm);
-+	down_write(&vdev->memory_lock);
-+	dma_resv_lock(priv->dmabuf->resv, NULL);
-+	priv->revoked = !__vfio_pci_memory_enabled(vdev);
-+	list_add_tail(&priv->dmabufs_elm, &vdev->dmabufs);
-+	dma_resv_unlock(priv->dmabuf->resv);
-+	up_write(&vdev->memory_lock);
-+
-+	/*
-+	 * dma_buf_fd() consumes the reference, when the file closes the dmabuf
-+	 * will be released.
-+	 */
-+	return dma_buf_fd(priv->dmabuf, get_dma_buf.open_flags);
-+
-+err_dev_put:
-+	vfio_device_put_registration(&vdev->vdev);
-+err_free_phys:
-+	kfree(priv->phys_vec);
-+err_free_priv:
-+	kfree(priv);
-+err_free_ranges:
-+	kfree(dma_ranges);
-+	return ret;
-+}
-+
-+void vfio_pci_dma_buf_move(struct vfio_pci_core_device *vdev, bool revoked)
-+{
-+	struct vfio_pci_dma_buf *priv;
-+	struct vfio_pci_dma_buf *tmp;
-+
-+	lockdep_assert_held_write(&vdev->memory_lock);
-+
-+	list_for_each_entry_safe(priv, tmp, &vdev->dmabufs, dmabufs_elm) {
-+		if (!get_file_active(&priv->dmabuf->file))
-+			continue;
-+
-+		if (priv->revoked != revoked) {
-+			dma_resv_lock(priv->dmabuf->resv, NULL);
-+			priv->revoked = revoked;
-+			dma_buf_move_notify(priv->dmabuf);
-+			dma_resv_unlock(priv->dmabuf->resv);
-+		}
-+		dma_buf_put(priv->dmabuf);
-+	}
-+}
-+
-+void vfio_pci_dma_buf_cleanup(struct vfio_pci_core_device *vdev)
-+{
-+	struct vfio_pci_dma_buf *priv;
-+	struct vfio_pci_dma_buf *tmp;
-+
-+	down_write(&vdev->memory_lock);
-+	list_for_each_entry_safe(priv, tmp, &vdev->dmabufs, dmabufs_elm) {
-+		if (!get_file_active(&priv->dmabuf->file))
-+			continue;
-+
-+		dma_resv_lock(priv->dmabuf->resv, NULL);
-+		list_del_init(&priv->dmabufs_elm);
-+		priv->vdev = NULL;
-+		priv->revoked = true;
-+		dma_buf_move_notify(priv->dmabuf);
-+		dma_resv_unlock(priv->dmabuf->resv);
-+		vfio_device_put_registration(&vdev->vdev);
-+		dma_buf_put(priv->dmabuf);
-+	}
-+	up_write(&vdev->memory_lock);
-+}
-diff --git a/drivers/vfio/pci/vfio_pci_priv.h b/drivers/vfio/pci/vfio_pci_priv.h
-index a9972eacb293..28a405f8b97c 100644
---- a/drivers/vfio/pci/vfio_pci_priv.h
-+++ b/drivers/vfio/pci/vfio_pci_priv.h
-@@ -107,4 +107,27 @@ static inline bool vfio_pci_is_vga(struct pci_dev *pdev)
- 	return (pdev->class >> 8) == PCI_CLASS_DISPLAY_VGA;
- }
- 
-+#ifdef CONFIG_VFIO_PCI_DMABUF
-+int vfio_pci_core_feature_dma_buf(struct vfio_pci_core_device *vdev, u32 flags,
-+				  struct vfio_device_feature_dma_buf __user *arg,
-+				  size_t argsz);
-+void vfio_pci_dma_buf_cleanup(struct vfio_pci_core_device *vdev);
-+void vfio_pci_dma_buf_move(struct vfio_pci_core_device *vdev, bool revoked);
-+#else
-+static inline int
-+vfio_pci_core_feature_dma_buf(struct vfio_pci_core_device *vdev, u32 flags,
-+			      struct vfio_device_feature_dma_buf __user *arg,
-+			      size_t argsz)
-+{
-+	return -ENOTTY;
-+}
-+static inline void vfio_pci_dma_buf_cleanup(struct vfio_pci_core_device *vdev)
-+{
-+}
-+static inline void vfio_pci_dma_buf_move(struct vfio_pci_core_device *vdev,
-+					 bool revoked)
-+{
-+}
-+#endif
-+
- #endif
-diff --git a/include/linux/vfio_pci_core.h b/include/linux/vfio_pci_core.h
-index f541044e42a2..68afa18630d4 100644
---- a/include/linux/vfio_pci_core.h
-+++ b/include/linux/vfio_pci_core.h
-@@ -94,6 +94,9 @@ struct vfio_pci_core_device {
- 	struct vfio_pci_core_device	*sriov_pf_core_dev;
- 	struct notifier_block	nb;
- 	struct rw_semaphore	memory_lock;
-+#ifdef CONFIG_VFIO_PCI_DMABUF
-+	struct list_head	dmabufs;
-+#endif
- };
- 
- /* Will be exported for vfio pci drivers usage */
-diff --git a/include/uapi/linux/vfio.h b/include/uapi/linux/vfio.h
-index 75100bf009ba..63214467c875 100644
---- a/include/uapi/linux/vfio.h
-+++ b/include/uapi/linux/vfio.h
-@@ -1478,6 +1478,31 @@ struct vfio_device_feature_bus_master {
- };
- #define VFIO_DEVICE_FEATURE_BUS_MASTER 10
- 
-+/**
-+ * Upon VFIO_DEVICE_FEATURE_GET create a dma_buf fd for the
-+ * regions selected.
-+ *
-+ * open_flags are the typical flags passed to open(2), eg O_RDWR, O_CLOEXEC,
-+ * etc. offset/length specify a slice of the region to create the dmabuf from.
-+ * nr_ranges is the total number of (P2P DMA) ranges that comprise the dmabuf.
-+ *
-+ * Return: The fd number on success, -1 and errno is set on failure.
-+ */
-+#define VFIO_DEVICE_FEATURE_DMA_BUF 11
-+
-+struct vfio_region_dma_range {
-+	__u64 offset;
-+	__u64 length;
-+};
-+
-+struct vfio_device_feature_dma_buf {
-+	__u32	region_index;
-+	__u32	open_flags;
-+	__u32   flags;
-+	__u32   nr_ranges;
-+	struct vfio_region_dma_range dma_ranges[];
-+};
-+
- /* -------- API for Type1 VFIO IOMMU -------- */
- 
- /**
--- 
-2.51.0
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gRnJpLCAyMDI1LTA5LTI2IGF0IDEzOjAwIC0wMzAwLCBKYXNvbiBHdW50aG9ycGUgd3JvdGU6
+DQo+IE9uIEZyaSwgU2VwIDI2LCAyMDI1IGF0IDA0OjUxOjI5UE0gKzAyMDAsIENocmlzdGlhbiBL
+w7ZuaWcgd3JvdGU6DQo+ID4gT24gMjYuMDkuMjUgMTY6NDEsIEphc29uIEd1bnRob3JwZSB3cm90
+ZToNCj4gPiA+IE9uIEZyaSwgU2VwIDI2LCAyMDI1IGF0IDAzOjUxOjIxUE0gKzAyMDAsIFRob21h
+cyBIZWxsc3Ryw7ZtIHdyb3RlOg0KPiA+ID4gDQo+ID4gPiA+IFdlbGwgYm90aCBleHBvcnRlciBh
+bmQgZXhwb3J0ZXIgaGFzIHNwZWNpZmljIGluZm9ybWF0aW9uIFdSVA0KPiA+ID4gPiB0aGlzLiBU
+aGUNCj4gPiA+ID4gdWx0aW1hdGUgZGVjaXNpb24gaXMgZG9uZSBpbiB0aGUgZXhwb3J0ZXIgYXR0
+YWNoKCkgY2FsbGJhY2ssDQo+ID4gPiA+IGp1c3QgbGlrZQ0KPiA+ID4gPiBwY2llX3AycC4gQW5k
+IHRoZSBleHBvcnRlciBhY2tub3dsZWRnZXMgdGhhdCBieSBzZXR0aW5nIHRoZQ0KPiA+ID4gPiBk
+bWFfYnVmX2F0dGFjaG1lbnQ6OmludGVyY29ubmVjdF9hdHRhY2ggZmllbGQuIEluIGFuYWxvZ3kg
+d2l0aA0KPiA+ID4gPiB0aGUNCj4gPiA+ID4gZG1hX2J1Zl9hdHRhY2htZW50OjpwZWVyMnBlZXIg
+bWVtYmVyLg0KPiA+ID4gDQo+ID4gPiBIYXZpbmcgYSBzaW5nbGUgb3B0aW9uIHNlZW1zIHRvbyBs
+aW1pdGVkIHRvIG1lLi4NCj4gPiANCj4gPiBZZWFoLCBhZ3JlZS4NCj4gPiANCj4gPiA+IEkgdGhp
+bmsgaXQgd291bGQgYmUgbmljZSBpZiB0aGUgaW1wb3J0ZXIgY291bGQgc3VwcGx5IGEgbGlzdCBv
+Zg0KPiA+ID4gJ2ludGVyY29ubmVjdHMnIGl0IGNhbiBhY2NlcHQsIGVnOg0KPiA+ID4gDQo+ID4g
+PiDCoC0gVlJBTSBvZmZzZXQgd2l0aGluIHRoaXMgc3BlY2lmaWMgVlJBTSBtZW1vcnkNCj4gPiA+
+IMKgLSBkbWFfYWRkcl90IGZvciB0aGlzIHN0cnVjdCBkZXZpY2UNCj4gPiA+IMKgLSAiSU9WQSIg
+Zm9yIHRoaXMgaW5pdGlhdG9yIG9uIGEgcHJpdmF0ZSBpbnRlcmNvbm5lY3QNCj4gPiA+IMKgLSBQ
+Q0kgYmFyIHNsaWNlDQo+ID4gPiDCoC0gcGh5c19hZGRyX3QgKHVzZWQgYmV0d2VlbiB2ZmlvLCBr
+dm0sIGlvbW11ZmQpDQo+ID4gDQo+ID4gSSB3b3VsZCByYXRoZXIgc2F5IHRoYXQgdGhlIGV4cG9y
+dGVyIHNob3VsZCBwcm92aWRlIHRoZSBsaXN0IG9mDQo+ID4gd2hhdA0KPiA+IGludGVyY29ubmVj
+dHMgdGhlIGJ1ZmZlciBtaWdodCBiZSBhY2Nlc3NpYmxlIHRocm91Z2guDQo+IA0KPiBFaXRoZXIg
+ZGlyZWN0aW9uIHdvcmtzLCBJIHNrZXRjaGVkIGl0IGxpa2UgdGhpcyBiZWNhdXNlIEkgdGhvdWdo
+dA0KPiB0aGVyZSB3ZXJlIG1vcmUgaW1wb3J0ZXJzIHRoYW4gZXhwb3J0ZXJzLCBhbmQgaW4gdGhl
+IGZsb3cgaXQgaXMgZWFzeQ0KPiBmb3IgdGhlIGltcG9ydGVyIHRvIHByb3ZpZGUgYSBsaXN0IG9u
+IHRoZSBzdGFjaw0KPiANCj4gSSBkaWRuJ3Qgc2tldGNoIGZ1cnRoZXIsIGJ1dCBJIHRoaW5rIHRo
+ZSBleHBvcnRlciBhbmQgaW1wb3J0ZXIgc2hvdWxkDQo+IGJvdGggYmUgcHJvdmlkaW5nIGEgY29t
+cGF0aWJsZSBsaXN0IGFuZCB0aGVuIGluIGFsbW9zdCBhbGwgY2FzZXMgdGhlDQo+IGNvcmUgY29k
+ZSBzaG91bGQgZG8gdGhlIG1hdGNoaW5nLg0KPiANCj4gSWYgdGhlIGltcG9ydGVyIHdvcmtzIGFz
+IEkgc2hvd2VkLCB0aGVuIHRoZSBleHBvcnRlciB2ZXJzaW9uIHdvdWxkIGJlDQo+IGluIGFuIG9w
+Og0KPiANCj4gaW50IGV4cG9ydGVyX25lZ290aWF0ZV9vcChzdHJ1Y3QgZG1hX2J1ZiAqZG1hYnVm
+LA0KPiDCoMKgIHN0cnVjdCBkbWFfYnVmX2ludGVyY29ubmVjdF9uZWdvdGlhdGlvbiAqaW1wb3J0
+ZXJfc3VwcG9ydCwgc2l6ZV90DQo+IGltcG9ydGVyX2xlbikNCj4gew0KPiDCoMKgwqDCoCBzdHJ1
+Y3QgZG1hX2J1Zl9pbnRlcmNvbm5lY3RfbmVnb3RpYXRpb24gZXhwb3J0ZXJfc3VwcG9ydFsyXSA9
+IHsNCj4gwqDCoMKgwqDCoMKgwqDCoCBbMF0gPSB7LmludGVyY29ubmVjdCA9IG15c2VsZi0+eGVf
+dnJhbX0sDQo+IMKgwqDCoMKgwqDCoMKgwqAgWzFdID0gey5pbnRlcmNvbm5lY3QgPSAmZG1hYnVm
+X2dlbmVyaWNfZG1hX2FkZHJfdCwNCj4gLmludGVyY29ubmVjdF9hcmdzID0gZXhwb3J0ZXJfZGV2
+fSwNCj4gwqDCoMKgwqAgfTsNCj4gwqDCoMKgwqAgcmV0dXJuIGRtYV9idWZfaGVscGVyX25lZ290
+aWF0ZShkbWFidWYsIGV4cG9ydGVyX3N1cHBvcnQsDQo+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oCBBUlJBWV9TSVpFKGV4cG9ydGVyX3N1cHBvcnQpLCBpbXBvcnRlcl9zdXBwb3J0LA0KPiBpbXBv
+cnRlcl9sZW4pOw0KPiB9DQo+IA0KPiBXaGljaCB0aGUgZG1hX2J1Zl9uZWdvdGlhdGUoKSBjYWxs
+cy4NCj4gDQo+IFRoZSBjb3JlIGNvZGUgZG9lcyB0aGUgbWF0Y2hpbmcgZ2VuZXJpY2FsbHksIHBy
+b2JhYmx5IHRoZXJlIGlzIGENCj4gc3RydWN0IGRtYV9idWZfaW50ZXJjb25uZWN0IG1hdGNoKCkg
+b3AgaXQgdXNlcyB0byBoZWxwIHRoaXMgcHJvY2Vzcy4NCj4gDQo+IEkgZG9uJ3QgdGhpbmsgaW1w
+b3J0ZXIgb3IgZXhwb3J0ZXIgc2hvdWxkIGJlIG9wZW4gY29kaW5nIGFueQ0KPiBtYXRjaGluZy4N
+Cj4gDQo+IEZvciBleGFtcGxlLCB3ZSBoYXZlIHNvbWUgc3lzdGVtcyB3aXRoIG11bHRpcGF0aCBQ
+Q0kuIFRoaXMgY291bGQNCj4gYWN0dWFsbHkgc3VwcG9ydCB0aG9zZSBwcm9wZXJseS4gVGhlIFJE
+TUEgTklDIGhhcyB0d28gc3RydWN0IGRldmljZXMNCj4gaXQgb3BlcmF0ZXMgd2l0aCBkaWZmZXJl
+bnQgcGF0aHMsIHNvIGl0IHdvdWxkIHdyaXRlIG91dCB0d28NCj4gJmRtYWJ1Zl9nZW5lcmljX2Rt
+YV9hZGRyX3QncyAtIG9uZSBmb3IgZWFjaC4NCj4gDQo+IFRoZSBHUFUgd291bGQgZG8gdGhlIHNh
+bWUuIFRoZSBjb3JlIGNvZGUgY2FuIGhhdmUgZ2VuZXJpYyBjb2RlIHRvDQo+IGV2YWx1YXRlIGlm
+IFAyUCBpcyBwb3NzaWJsZSBhbmQgZXN0aW1hdGUgc29tZSBRT1IgYmV0d2VlbiB0aGUNCj4gb3B0
+aW9ucy4NCg0KVGhpcyBzb3VuZHMgT0sgd2l0aCBtZS4gSSBoYXZlIHNvbWUgYWRkaXRpb25hbCBx
+dWVzdGlvbnMsIHRob3VnaCwNCg0KMSkgRXZlcnlib2R5IGFncmVlcyB0aGF0IHRoZSBpbnRlcmNv
+bm5lY3QgdXNlZCBpcyBhIHByb3BlcnR5IG9mIHRoZQ0KYXR0YWNobWVudD8gSXQgc2hvdWxkIGJl
+IG5lZ290aWF0ZWQgZHVyaW5nIGF0dGFjaCgpPw0KDQoyKSBkbWEtYnVmIHBjaWUtcDJwIGFsbG93
+cyB0cmFuc3BhcmVudCBmYWxsYmFjayB0byBzeXN0ZW0gbWVtb3J5IGRtYS0NCmJ1Zi4gSSB0aGlu
+ayB0aGF0IGlzIGEgZ29vZCB0aGluZyB0byBrZWVwIGV2ZW4gZm9yIG90aGVyIGludGVyY29ubmVj
+dHMNCihpZiBwb3NzaWJsZSkuIExpa2UgaWYgc29tZW9uZSB3YW50cyB0byBwdWxsIHRoZSBuZXR3
+b3JrIGNhYmxlLCB3ZQ0KY291bGQgdHJpZ2dlciBhIG1vdmVfbm90aWZ5KCkgYW5kIG9uIG5leHQg
+bWFwKCkgd2UnZCBmYWxsIGJhY2suIEFueQ0KaWRlYXMgYXJvdW5kIHRoaXM/DQoNClRoYW5rcywN
+ClRob21hcw0KDQoNCg0KPiANCj4gSmFzb24NCg0KX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJv
+LW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8g
+bGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
