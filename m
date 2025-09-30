@@ -2,201 +2,140 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id F130BBAD332
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 30 Sep 2025 16:34:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CF86EBADF5E
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 30 Sep 2025 17:46:19 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A318D45719
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 30 Sep 2025 14:34:22 +0000 (UTC)
-Received: from CO1PR03CU002.outbound.protection.outlook.com (mail-westus2azon11010068.outbound.protection.outlook.com [52.101.46.68])
-	by lists.linaro.org (Postfix) with ESMTPS id A48F14444F
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 30 Sep 2025 14:34:18 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C527E44B14
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 30 Sep 2025 15:46:17 +0000 (UTC)
+Received: from mailout2.w1.samsung.com (mailout2.w1.samsung.com [210.118.77.12])
+	by lists.linaro.org (Postfix) with ESMTPS id EDF07447E0
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 30 Sep 2025 15:46:13 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=Nvidia.com header.s=selector2 header.b=lpGrvc3+;
-	dmarc=pass (policy=reject) header.from=nvidia.com;
-	arc=pass ("microsoft.com:s=arcselector10001:i=1");
-	spf=pass (lists.linaro.org: domain of jgg@nvidia.com designates 52.101.46.68 as permitted sender) smtp.mailfrom=jgg@nvidia.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=HUS0E9qByJJgu09puVh6qbCm++TXjkVVyNyVVzNz43JI5FpNEc6MWX/qnTirGVZSP9zg/ejciJ3KBPSqzpNMJx5dHSUcJg0w0+brolMBUCVZGBFLMykMWhLDTLqrnrm6kYjkH3CSGkXPh1cyd3kc9n60m8o443Fzlt1Jut+iR7fTzRMn9ia5MWjHP3Vis9RZzDgmZLu/gMOdHxdwIfz0dJ5OU4LCsIaG07t7KCM7MoqqqWBv0HcCBiU6baJsC1JZ4qY2tZqhTTPaIgWp1gZ6I7Px8bRDgodlK6bO+yH3cSzAXvXnWDatMBlZ0ci1kEPgqyhJQ1EhAOWlyed59/1t4w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=BWb85YI1VAI1u57e9BaSuKn7OX//onhqU/j1fE+iGeM=;
- b=A+EAhyD+O/+HkBRFsYTO68DLec9DLNSZObaUI6eFhvCT4VamfxMqFUVweF37yOjSYagbn1NJwSaK3TPTiVbD9z9EUvS6qXjXlM2aHrugOOpbouEgq2wFnDbu0tqp8CEEJM5pYiDMdZ28keiCtsqOAVBm0CwzehRwVmHqavuY4yckubRN89WPbu62OVnd/RzBaXEbYk4pdKSCtnykAfWfbRX83tF1it7W6wzRYRzEQZcdi1NJr25GdnCt3RwtS/1/NqYld6OvojabJMHYSJWrsa9aLov1CBzsENtK8BGeZ4V9laJib+VnCLyPxV6e1KfGJwTsnbCFAmDyY90zOFSt8Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BWb85YI1VAI1u57e9BaSuKn7OX//onhqU/j1fE+iGeM=;
- b=lpGrvc3+bXWKdknypUgMPCr4E8wu8pALBeiQyMaUdKTIaNXe9GhLaEkPbUZ5anVNdQbo6UvY+ewOfTdRZmNWX3lwvnmhEQB56oc6MDUQWhI4HBw1eMhMJBR/nC6fOV3WdaKToUYAMz39jwopjmWTFdvC8BCf+L2LnmwR8Zn5WD0BaQq0E0F+A17xgKnOO/A7CJERQ4jXHNvkDRwdMW17KTZBRXIALzsmmT3oryrG9yG4ZKQEkcnY75J7oa2Uvth9Fj9Jvl+47mVNcoPGpbdkpO9OR5Ou53FI/bxBvdUl9HnLl82bFDkmXQhJm5X6jIS9C1o0rK6w8Wej7PeDpJiPKw==
-Received: from PH7PR12MB5757.namprd12.prod.outlook.com (2603:10b6:510:1d0::13)
- by PH7PR12MB8425.namprd12.prod.outlook.com (2603:10b6:510:240::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.17; Tue, 30 Sep
- 2025 14:34:11 +0000
-Received: from PH7PR12MB5757.namprd12.prod.outlook.com
- ([fe80::f012:300c:6bf4:7632]) by PH7PR12MB5757.namprd12.prod.outlook.com
- ([fe80::f012:300c:6bf4:7632%2]) with mapi id 15.20.9160.014; Tue, 30 Sep 2025
- 14:34:11 +0000
-Date: Tue, 30 Sep 2025 11:34:08 -0300
-From: Jason Gunthorpe <jgg@nvidia.com>
-To: Shameer Kolothum <skolothumtho@nvidia.com>
-Message-ID: <20250930143408.GI2942991@nvidia.com>
-References: <cover.1759070796.git.leon@kernel.org>
- <53f3ea1947919a5e657b4f83e74ca53aa45814d4.1759070796.git.leon@kernel.org>
- <20250929151749.2007b192.alex.williamson@redhat.com>
- <20250930090048.GG324804@unreal>
- <CH3PR12MB754801DC65227CC39A3CB1F3AB1AA@CH3PR12MB7548.namprd12.prod.outlook.com>
-Content-Disposition: inline
-In-Reply-To: <CH3PR12MB754801DC65227CC39A3CB1F3AB1AA@CH3PR12MB7548.namprd12.prod.outlook.com>
-X-ClientProxiedBy: BN0PR07CA0018.namprd07.prod.outlook.com
- (2603:10b6:408:141::25) To PH7PR12MB5757.namprd12.prod.outlook.com
- (2603:10b6:510:1d0::13)
+	dkim=pass header.d=samsung.com header.s=mail20170921 header.b=GEmo2aaV;
+	dmarc=pass (policy=none) header.from=samsung.com;
+	spf=pass (lists.linaro.org: domain of m.szyprowski@samsung.com designates 210.118.77.12 as permitted sender) smtp.mailfrom=m.szyprowski@samsung.com
+Received: from eucas1p2.samsung.com (unknown [182.198.249.207])
+	by mailout2.w1.samsung.com (KnoxPortal) with ESMTP id 20250930154613euoutp0284381aec18bd4d7f936fcd41cd189c4b~qGfuk244p2320623206euoutp024
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 30 Sep 2025 15:46:13 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.w1.samsung.com 20250930154613euoutp0284381aec18bd4d7f936fcd41cd189c4b~qGfuk244p2320623206euoutp024
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+	s=mail20170921; t=1759247173;
+	bh=iCpr5TzyOFeRuqU82QBgsAybOuX0sXWBwEO+eHNweII=;
+	h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
+	b=GEmo2aaV3Fhb+h0H+OL88S5Un3zCHcz7kvEcOruc4TmXpXvHdpKjLwI7cEBp7asMO
+	 muCNuGSqnMlJSRFBKwmUe+kxce/c8fhUiZy+mBT4fvst9i7T4SLjLU0Jge/xzV09V9
+	 trHRBO20Um+o+53qS3gt/u6DVrintZBeymx0x8lo=
+Received: from eusmtip1.samsung.com (unknown [203.254.199.221]) by
+	eucas1p2.samsung.com (KnoxPortal) with ESMTPA id
+	20250930154612eucas1p2cf5b43435487dc8e6b19b60d1a3801ef~qGft4sFWT2800928009eucas1p2c;
+	Tue, 30 Sep 2025 15:46:12 +0000 (GMT)
+Received: from [106.210.134.192] (unknown [106.210.134.192]) by
+	eusmtip1.samsung.com (KnoxPortal) with ESMTPA id
+	20250930154610eusmtip1200c7ebad2fc47c80d082b3f7ac27ab7~qGfryC8yB2715127151eusmtip1T;
+	Tue, 30 Sep 2025 15:46:09 +0000 (GMT)
+Message-ID: <75d06769-4896-4095-9969-03a517705196@samsung.com>
+Date: Tue, 30 Sep 2025 17:46:09 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR12MB5757:EE_|PH7PR12MB8425:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3abc86bf-36ec-4831-a421-08de002e6ba8
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|7416014|376014;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?zk5++mRU27edAOeAL7UL+yNfoW6jFDjhMWcRzDoBxseHJGKdBHcdeq8r+sM2?=
- =?us-ascii?Q?EPp4MO5DSMLEi3+cythe/dhtKyob2vluNTgxX6+TBDEXepGiYJ3ggjEvNQBZ?=
- =?us-ascii?Q?58M9uegDlFxbR6zs0IfAMgVqT4d7bPbknEop7Yw1LQNvit663CgYSquKF76u?=
- =?us-ascii?Q?K++zGodYxKgb//TkNzayMAYru3iCxwlaGNJNCeWtQziiNJtCFvh0QaAFck/G?=
- =?us-ascii?Q?+ksakBqG3GsQjIPAuasCRU5+RWaLRPML4hvG8LsNeJdf7GLqc6n7J8SEqZF9?=
- =?us-ascii?Q?rwBA8ANzJBgUg/wdAXo88ZXVDb5R7i50DqDlHjFVU+QZP5gzvtL2InCihBFp?=
- =?us-ascii?Q?ks3muR1h0yfLaScny7yLSkveMj+CyD0zYeMjssGuBFkeA6NKcexWICJdoG+z?=
- =?us-ascii?Q?hc4/J/fcCY5qqhEVVGJT5Uxr2GuA0rWjUFPlDv5DJGHypklgL23m0uWyZcA9?=
- =?us-ascii?Q?rp+5kxSByjRS16imbuJ75PzRxo+SADjXClLW0vcWFSUfQ70LmvUcqzjVZnd2?=
- =?us-ascii?Q?1jTsU1AqLf1anNKsvt2YdEkALahgDBzh/RrJmYeiIrxrXazuYid8+u9w4+R/?=
- =?us-ascii?Q?zVnIJqZJFtq75C6HIKltfAG43/Whuf2nN0DF6EKUlMVdfwxrVAMEjdsiKjLP?=
- =?us-ascii?Q?MAK8zgf57HfuDL29QDZRrOtctOsu4lHQkLmyU6MrYgmLk1pAoutFe03xZJzK?=
- =?us-ascii?Q?cgSbJQeA49KoEA5EwNBKNMeh4d4dZsIbR+FUxgh5CodsvywpwINYyl0ycXbD?=
- =?us-ascii?Q?Mas2V+iXEXUyjb5aVQrSlhOiEctd9TZ+1D040xswi2q39r9eSYRxoL3mgPH6?=
- =?us-ascii?Q?EqBh6rE8ycBuu6VoEj8Yd2opuXYec0NehZPzXqp3c193nIbBr+rCq/26wbmc?=
- =?us-ascii?Q?yb8vRBQsSViAoXP6UWm8mpgwaFKHgZN0w4mGtImBO6AzkSUALvE/WRnR4dP+?=
- =?us-ascii?Q?EF6/FN/G2S9/db492yeEPDrZgoqoO/kzGAvYVqnL3UV+73vyfpgpDYCOqlYm?=
- =?us-ascii?Q?mq4nxqIWfdJw9z6oWCXJ4EEliiZWDNsdU+qrc57hdoxUrC1CjWhTo4PIOf/+?=
- =?us-ascii?Q?4LGJuTGSh+4Pq/Pmk3ggP5bv5kKBDUB/4EPZos3tDWeJpiPOv1Mn8az7i8+S?=
- =?us-ascii?Q?lpdfOi9yC6YDhf1c6+MFWzHbP5n2UxXt9bOs+WOTJGSNO1hIeFhQ7rRdVLFv?=
- =?us-ascii?Q?A6KNM7J6gBxMYJx7kFDpXZHVouCBBtl1bHoJyp+odsO1QVxVJO+PErJjdrFE?=
- =?us-ascii?Q?Oz9H8MAXiKY9Ql05L9ex3xpUamfTpczDFhq+cZBJeQuSj34dDoZmKar3oveg?=
- =?us-ascii?Q?VoY4z404gdnJkhK45CaZrMm0?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB5757.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(7416014)(376014);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?JJRHN8vE2WuQYNc6WJirOIQRQ5M3gyPrSil1VVJLK44jOYf6fAoMhcO8VFWo?=
- =?us-ascii?Q?vS4ncEdMq9rfS6jTy31HtJ/kr03ZoLQSNqVwPgXV4YWJf0T3NQr91koFCwnT?=
- =?us-ascii?Q?l6nzhYCOcCfA7kbG/8YCul9qr+KoVAdveG+bBkiz11jZ93QRC1djb4LqsMfw?=
- =?us-ascii?Q?4U2MP6ArnqiyxMrlmnclMRUYLHkKlTzgkQm60QjzoYCg2L6cs+o6fMIL/0Yf?=
- =?us-ascii?Q?ALc3d+DQjz1kU37xFSOE3NxHsUKBYs5lAiO642J+uMBAAcyKWbXxyfi6RXre?=
- =?us-ascii?Q?BHG/r2L2vkVIPVPAX++TkPSbsMEYnZgOkNXnVspFRG06kJ2cweNeivUPF/F6?=
- =?us-ascii?Q?CXS7HeWbJ5yMJPX4vtMIW5I4PxnXZSS4HYVmThulnVKBKpEqTkL/N4t6XehR?=
- =?us-ascii?Q?vNUpjl3tzHXdGOL8ysprtGje8vyzd04DFXdnxvwWLBvOnuH3x/SADKtdaqRY?=
- =?us-ascii?Q?c5Somy2qNQcCuZ3Z1Pw3ZFSlbrONpSKrpNSC+smVDpC+zL22PjFH77jhIGwY?=
- =?us-ascii?Q?pPYjW/1dh2lqKnBDtDrz+w/0pBiLQjyuZYNQkZEBLiq/6+Mk3U/dTb2+Kf2A?=
- =?us-ascii?Q?gdozRUEqhWSdGDPEYJbt7iry5J3PEZDNSEofC37WH9XZqsAHzmiRW9HsrMm0?=
- =?us-ascii?Q?FeR7D2oSk8KAH4bGQT/yXDhEEW2LESlT9UpODKOu63CBBGDQ9Za01wc9bJ9H?=
- =?us-ascii?Q?dKZCQ8rFW4Cieg0i1XoFrLX8cMMjo3UW8c9C1379ESHiSQ54Qups/tcMAgsm?=
- =?us-ascii?Q?fpGSUaZ6w1bH8XVLruLy7phGPWyYgWFrMf59YDx9o3gOaITkFX0e8loVjN8Y?=
- =?us-ascii?Q?ZJj92hnm5pmigdkSosrgRyTS7gHx1X79dy/weLUbIbx6BRunEsppbGFBNB1d?=
- =?us-ascii?Q?Xa7Z8vWq+K51od7rZLD5udhJkaxQNtJgqYbXLsGA8Fn9vB9W+FiQ8FpqilMu?=
- =?us-ascii?Q?yBd2OYH/mTF/e8TGdhvQbiD+B6kyx/N6PU2OY1XaWcavBuYIO4BZkiKICTX4?=
- =?us-ascii?Q?dH6YG3TofNXqbyaMpkXuHcJSO8W8YJQak7OBsD5HW1/1PGRU++ucAP3N2t3W?=
- =?us-ascii?Q?7fhVXAsUEnfxkzuYJfTlwOHgCvrSy81ws2YQ/6UfG9Y4VF45/T/k4OzSeLbf?=
- =?us-ascii?Q?ti9dG+EqNgSZD4NlT489Ri6/j+KQiT1qxzzLh8ozE9V4h3BGyro0sc83OyYK?=
- =?us-ascii?Q?7jxCXV5yN6ENmWsLclJpLVWSBoBudPyZNGNvEwxDWcQwa/oCmT7uAwfouV+y?=
- =?us-ascii?Q?0u6C5TIaP1X48Y7k+MwEhdhttZ0ZaTD/ItwNUrllUZrghymTIE2qnhhw2ffo?=
- =?us-ascii?Q?qdGGeEvnaFdQ/FqA6w7c2EoEvSjTwK+OTNbINzdNYhOg05o1ms/cGs0ET0G9?=
- =?us-ascii?Q?AQ8cIMpNKMJDnyW6QdMViOmJRv/FK93rkvwj9Yg3CXaZMfy7ANRgJj4o8bIL?=
- =?us-ascii?Q?k4+Y5MxkMXg6YUKa/kzNjNtr5/HFVgdn3wkQMQ0MgHcNya81navQJ7glK1rn?=
- =?us-ascii?Q?/kbg9sqlo3Vsz7ZSeYy5m1GAfgkQi4yEahTKIWCKmpsHPE65MnB9LsVJHBEv?=
- =?us-ascii?Q?cPpeQRT8+s44eW2MddIJH1igmTSp7SvFwOWj9vwB?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3abc86bf-36ec-4831-a421-08de002e6ba8
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5757.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Sep 2025 14:34:11.0186
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: fD2nX+HNIxtPpBPldMJ+Uhjb+M9Ymg6B4Brli66rjds5EqfKQELgyMBIfmUlBatL
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB8425
-X-Rspamd-Queue-Id: A48F14444F
-X-Spamd-Bar: ----
-X-Spamd-Result: default: False [-5.00 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
-	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector10001:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
-	R_SPF_ALLOW(-0.20)[+ip4:52.100.0.0/15];
-	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
+User-Agent: Betterbird (Windows)
+To: Krzysztof Kozlowski <krzk@kernel.org>, Himanshu Dewangan
+	<h.dewangan@samsung.com>
+Content-Language: en-US
+From: Marek Szyprowski <m.szyprowski@samsung.com>
+In-Reply-To: <CAJKOXPecLREbEDM4yfM=WD-EFfuBqPDXNZceATLeWQRj0X_w7w@mail.gmail.com>
+X-CMS-MailID: 20250930154612eucas1p2cf5b43435487dc8e6b19b60d1a3801ef
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+X-RootMTR: 20250930035551epcas5p4ee7cb5af08eadb2f5ed6e5eaa06a60a9
+X-EPHeader: CA
+X-CMS-RootMailID: 20250930035551epcas5p4ee7cb5af08eadb2f5ed6e5eaa06a60a9
+References: <CGME20250930035551epcas5p4ee7cb5af08eadb2f5ed6e5eaa06a60a9@epcas5p4.samsung.com>
+	<20250930040348.3702923-1-h.dewangan@samsung.com>
+	<20250930040348.3702923-9-h.dewangan@samsung.com>
+	<CAJKOXPecLREbEDM4yfM=WD-EFfuBqPDXNZceATLeWQRj0X_w7w@mail.gmail.com>
+X-Rspamd-Queue-Id: EDF07447E0
+X-Spamd-Bar: --
+X-Spamd-Result: default: False [-2.43 / 15.00];
+	BAYES_HAM(-2.84)[99.30%];
+	SUSPICIOUS_RECIPS(1.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[samsung.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:210.118.77.0/24];
+	R_DKIM_ALLOW(-0.20)[samsung.com:s=mail20170921];
 	MIME_GOOD(-0.10)[text/plain];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[52.101.46.68:from];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:8075, ipnet:52.96.0.0/12, country:US];
-	RCPT_COUNT_TWELVE(0.00)[23];
+	RWL_MAILSPIKE_GOOD(-0.10)[210.118.77.12:from];
+	XM_UA_NO_VERSION(0.01)[];
+	DWL_DNSWL_BLOCKED(0.00)[samsung.com:dkim];
+	TAGGED_RCPT(0.00)[dt];
+	RCPT_COUNT_TWELVE(0.00)[20];
+	ARC_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	DWL_DNSWL_BLOCKED(0.00)[Nvidia.com:dkim];
-	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	DNSWL_BLOCKED(0.00)[2603:10b6:510:1d0::13:received];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[Nvidia.com:+]
+	MID_RHS_MATCH_FROM(0.00)[];
+	DNSWL_BLOCKED(0.00)[210.118.77.12:from,203.254.199.221:received];
+	RCVD_COUNT_THREE(0.00)[3];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	NEURAL_HAM(-0.00)[-1.000];
+	DKIM_TRACE(0.00)[samsung.com:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: FRH2GEN6SM4PQXZGOO34PS53OCOAE4JI
-X-Message-ID-Hash: FRH2GEN6SM4PQXZGOO34PS53OCOAE4JI
-X-MailFrom: jgg@nvidia.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Leon Romanovsky <leon@kernel.org>, Alex Williamson <alex.williamson@redhat.com>, Andrew Morton <akpm@linux-foundation.org>, Bjorn Helgaas <bhelgaas@google.com>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "iommu@lists.linux.dev" <iommu@lists.linux.dev>, Jens Axboe <axboe@kernel.dk>, Joerg Roedel <joro@8bytes.org>, "kvm@vger.kernel.org" <kvm@vger.kernel.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "linux-block@vger.kernel.org" <linux-block@vger.kernel.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "linux-mm@kvack.org" <linux-mm@kvack.org>, "linux-pci@vger.kernel.org" <linux-pci@vger.kernel.org>, Logan Gunthorpe <logang@deltatee.com>, Robin Murphy <robin.murphy@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, Vivek Kasireddy <vivek.kasireddy@intel.com>, Will Deacon <will@kernel.org>
+Message-ID-Hash: SBJQJPWYW5ZBL6C2Q3ANIJRZ6RDZD6SE
+X-Message-ID-Hash: SBJQJPWYW5ZBL6C2Q3ANIJRZ6RDZD6SE
+X-MailFrom: m.szyprowski@samsung.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: mchehab@kernel.org, robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, sumit.semwal@linaro.org, christian.koenig@amd.com, alim.akhtar@samsung.com, manjun@samsung.com, nagaraju.s@samsung.com, ih0206.lee@samsung.com, jehyung.lee@samsung.com, linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org, devicetree@vger.kernel.org, linux-samsung-soc@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v4 10/10] vfio/pci: Add dma-buf export support for MMIO regions
+Subject: [Linaro-mm-sig] =?utf-8?q?Re=3A_=5BPATCH_08/29=5D_media=3A_mfc=3A_Add_Exynos=E2=80=91MFC_driver_probe_support?=
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FRH2GEN6SM4PQXZGOO34PS53OCOAE4JI/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SBJQJPWYW5ZBL6C2Q3ANIJRZ6RDZD6SE/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
 
-On Tue, Sep 30, 2025 at 12:50:47PM +0000, Shameer Kolothum wrote:
-
-> This is where hisi_acc reports a different BAR size as it tries to hide
-> the migration control region from Guest access.
-
-I think for now we should disable DMABUF for any PCI driver that
-implements a VFIO_DEVICE_GET_REGION_INFO
-
-For a while I've wanted to further reduce the use of the ioctl
-multiplexer, so maybe this series:
-
-https://github.com/jgunthorpe/linux/commits/vfio_get_region_info_op/
-
-And then the dmabuf code can check if the ops are set to the generic
-or not and disable itself automatically.
-
-Otherwise perhaps route the dmabuf through an op and deliberately omit
-it (with a comment!) from hisi, virtio, nvgrace.
-
-We need to route it through an op anyhow as those three drivers will
-probably eventually want to implement their own version.
-
-Jason
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+SGkgS3J6eXN6dG9mLA0KDQpPbiAzMC4wOS4yMDI1IDA3OjU0LCBLcnp5c3p0b2YgS296bG93c2tp
+IHdyb3RlOg0KPiBPbiBUdWUsIDMwIFNlcHQgMjAyNSBhdCAxMjo1NiwgSGltYW5zaHUgRGV3YW5n
+YW4gPGguZGV3YW5nYW5Ac2Ftc3VuZy5jb20+IHdyb3RlOg0KPj4gRnJvbTogTmFnYXJhanUgU2lk
+ZGluZW5pIDxuYWdhcmFqdS5zQHNhbXN1bmcuY29tPg0KPj4NCj4+IEludHJvZHVjZSBhIG5ldyBL
+Y29uZmlnIGVudHJ5IFZJREVPX0VYWU5PU19NRkMgZm9yIHRoZSBTYW1zdW5nDQo+PiBFeHlub3Mg
+TUZDIGRyaXZlciB0aGF0IHN1cHBvcnRzIGZpcm13YXJlIHZlcnNpb27igK8xMyBhbmQgbGF0ZXIu
+DQo+PiBFeHRlbmQgdGhlIHRvcOKAkWxldmVsIFNhbXN1bmcgcGxhdGZvcm0gS2NvbmZpZyB0byBk
+aXNhYmxlIHRoZSBsZWdhY3kNCj4+IFM1UOKAkU1GQyBkcml2ZXIgd2hlbiBpdHMgZmlybXdhcmUg
+dmVyc2lvbiBpcyA+4oCvdjEyIGFuZCB0byBzZWxlY3QgdGhlDQo+PiBuZXcgRXh5bm9z4oCRTUZD
+IGRyaXZlciBvbmx5IHdoZW4gVklERU9fU0FNU1VOR19TNVBfTUZDIGlzIG5vdCBlbmFibGVkLg0K
+Pj4NCj4+IEFkZCBleHlub3MtbWZjIEtjb25maWcgYW5kIE1ha2VmaWxlIGZvciBwcm9iZSBmdW5j
+dGlvbmFsaXR5IGFuZCBjcmVhdGlvbg0KPj4gb2YgZGVjb2RlciBhbmQgZW5jb2RlciBkZXZpY2Ug
+ZmlsZXMgYnkgcmVnaXN0ZXJpbmcgdGhlIGRyaXZlciBvYmplY3QNCj4+IGV4eW5vc19tZmMubyBh
+bmQgb3RoZXIgcmVsZXZhbnQgc291cmNlIGZpbGVzLg0KPj4NCj4+IFByb3ZpZGUgaGVhZGVyIGZp
+bGVzIG1mY19jb3JlX29wcy5oIGFuZCBtZmNfcm0uaCBjb250YWluaW5nIGNvcmUNCj4+ICAgIG9w
+ZXJhdGlvbiBwcm90b3R5cGVzLCByZXNvdXJjZeKAkW1hbmFnZXIgaGVscGVycywNCj4+ICAgIGFu
+ZCBjb3Jl4oCRc2VsZWN0aW9uIHV0aWxpdGllcy4NCj4+DQo+PiBBZGQgYSBjb25maWd1cmFibGUg
+b3B0aW9uIE1GQ19VU0VfQ09SRURVTVAgdG8gZW5hYmxlIGNvcmXigJFkdW1wDQo+PiBzdXBwb3J0
+IGZvciBkZWJ1Z2dpbmcgTUZDIGVycm9ycy4NCj4+DQo+PiBUaGVzZSBjaGFuZ2VzIGJyaW5nIHN1
+cHBvcnQgZm9yIG5ld2VyIEV4eW5vc+KAkWJhc2VkIE1GQyBoYXJkd2FyZSwNCj4+IGNsZWFubHkg
+c2VwYXJhdGUgaXQgZnJvbSB0aGUgbGVnYWN5IFM1UOKAkU1GQyBkcml2ZXIsIGFuZCBsYXkgdGhl
+DQo+PiBncm91bmR3b3JrIGZvciBmdXR1cmUgZmVhdHVyZSBkZXZlbG9wbWVudCBhbmQgZGVidWdn
+aW5nLg0KPj4NCj4gTm8sIE5BSy4gRXhpc3RpbmcgZHJpdmVyIGlzIHdlbGwgdGVzdGVkIGFuZCBh
+bHJlYWR5IHVzZWQgb24gbmV3ZXN0DQo+IEV4eW5vcyBTb0MsIHNvIGFsbCB0aGlzIG5ldyBkcml2
+ZXIgaXMgZXhhY3RseSBob3cgeW91IHNob3VsZCBub3Qgd29yaw0KPiBpbiB1cHN0cmVhbS4gWW91
+IG5lZWQgdG8gaW50ZWdyYXRlIGludG8gZXhpc3RpbmcgZHJpdmVyLg0KPg0KPiBTYW1zdW5nIHJl
+Y2VpdmVkIHRoaXMgcmV2aWV3IG11bHRpcGxlIHRpbWVzIGFscmVhZHkuDQoNClBsZWFzZSBkb24n
+dCBiZSBzbyBjYXRlZ29yaWNhbC4gVGhlIE1GQyBoYXJkd2FyZSBldm9sdmVkIHF1aXRlIGEgYml0
+IA0KZnJvbSB0aGUgYW5jaWVudCB0aW1lcyBvZiBTNVBWMjEwIFNvQywgd2hlbiBzNXAtbWZjIGRy
+aXZlciB3YXMgZGVzaWduZWQuIA0KVGhlIGZlYXR1cmUgbGlzdCBvZiB0aGUgbmV3IGhhcmR3YXJl
+IGhhcmRseSBtYXRjaGVzIHRob3NlIGFuZCBJIHJlYWxseSANCmRvbid0IHNlZSB0aGUgcmVhc29u
+IGZvciBmb3JjaW5nIHN1cHBvcnQgZm9yIHNvIGRpZmZlcmVudCBoYXJkd2FyZSBpbiBhIA0Kc2lu
+Z2xlIGRyaXZlci4gU29tZXRpbWVzIGl0IGlzIGVhc2llciBqdXN0IHRvIGhhdmUgMiBzZXBhcmF0
+ZSBkcml2ZXJzIGlmIA0KdGhlIGNvbW1vbiBwYXJ0IGlzIGp1c3QgdGhlIGFjcm9ueW0gaW4gdGhl
+IGhhcmR3YXJlIGJsb2NrIG5hbWUuLi4NCg0KQmVzdCByZWdhcmRzDQotLSANCk1hcmVrIFN6eXBy
+b3dza2ksIFBoRA0KU2Ftc3VuZyBSJkQgSW5zdGl0dXRlIFBvbGFuZA0KDQpfX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcg
+bGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2Vu
+ZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
