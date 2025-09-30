@@ -2,140 +2,209 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id CF86EBADF5E
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 30 Sep 2025 17:46:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CCADCBADFD9
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 30 Sep 2025 18:01:21 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C527E44B14
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 30 Sep 2025 15:46:17 +0000 (UTC)
-Received: from mailout2.w1.samsung.com (mailout2.w1.samsung.com [210.118.77.12])
-	by lists.linaro.org (Postfix) with ESMTPS id EDF07447E0
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 30 Sep 2025 15:46:13 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9C3D845776
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 30 Sep 2025 16:01:20 +0000 (UTC)
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+	by lists.linaro.org (Postfix) with ESMTPS id 373D544B41
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 30 Sep 2025 16:01:18 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=samsung.com header.s=mail20170921 header.b=GEmo2aaV;
-	dmarc=pass (policy=none) header.from=samsung.com;
-	spf=pass (lists.linaro.org: domain of m.szyprowski@samsung.com designates 210.118.77.12 as permitted sender) smtp.mailfrom=m.szyprowski@samsung.com
-Received: from eucas1p2.samsung.com (unknown [182.198.249.207])
-	by mailout2.w1.samsung.com (KnoxPortal) with ESMTP id 20250930154613euoutp0284381aec18bd4d7f936fcd41cd189c4b~qGfuk244p2320623206euoutp024
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 30 Sep 2025 15:46:13 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.w1.samsung.com 20250930154613euoutp0284381aec18bd4d7f936fcd41cd189c4b~qGfuk244p2320623206euoutp024
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
-	s=mail20170921; t=1759247173;
-	bh=iCpr5TzyOFeRuqU82QBgsAybOuX0sXWBwEO+eHNweII=;
-	h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
-	b=GEmo2aaV3Fhb+h0H+OL88S5Un3zCHcz7kvEcOruc4TmXpXvHdpKjLwI7cEBp7asMO
-	 muCNuGSqnMlJSRFBKwmUe+kxce/c8fhUiZy+mBT4fvst9i7T4SLjLU0Jge/xzV09V9
-	 trHRBO20Um+o+53qS3gt/u6DVrintZBeymx0x8lo=
-Received: from eusmtip1.samsung.com (unknown [203.254.199.221]) by
-	eucas1p2.samsung.com (KnoxPortal) with ESMTPA id
-	20250930154612eucas1p2cf5b43435487dc8e6b19b60d1a3801ef~qGft4sFWT2800928009eucas1p2c;
-	Tue, 30 Sep 2025 15:46:12 +0000 (GMT)
-Received: from [106.210.134.192] (unknown [106.210.134.192]) by
-	eusmtip1.samsung.com (KnoxPortal) with ESMTPA id
-	20250930154610eusmtip1200c7ebad2fc47c80d082b3f7ac27ab7~qGfryC8yB2715127151eusmtip1T;
-	Tue, 30 Sep 2025 15:46:09 +0000 (GMT)
-Message-ID: <75d06769-4896-4095-9969-03a517705196@samsung.com>
-Date: Tue, 30 Sep 2025 17:46:09 +0200
+	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=fXNEoCIo;
+	dmarc=pass (policy=quarantine) header.from=redhat.com;
+	spf=pass (lists.linaro.org: domain of alex.williamson@redhat.com designates 170.10.129.124 as permitted sender) smtp.mailfrom=alex.williamson@redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1759248077;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=HOYVDlXcgikSCUwOdxOfSsjt8Nh4FIwdpCdV/JBPVPE=;
+	b=fXNEoCIoR+K4YTQjX+UMw0SszYm9keXeDIdPPwfE3PBYTgnQT1eGg1GFhJrm1IWIn0NNCi
+	eU6wcF0ce9Qk55Nl2fRIZ3bLuxLWw641P4m44MWrucjCExU2LXT6JBxrP9HA7hJbGIJQfU
+	50kih9g+c06iRaSHmeZk/vrlOvm6J/0=
+Received: from mail-il1-f198.google.com (mail-il1-f198.google.com
+ [209.85.166.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-253-vybF-9InP7-9pjAJD8hJuA-1; Tue, 30 Sep 2025 12:01:16 -0400
+X-MC-Unique: vybF-9InP7-9pjAJD8hJuA-1
+X-Mimecast-MFC-AGG-ID: vybF-9InP7-9pjAJD8hJuA_1759248075
+Received: by mail-il1-f198.google.com with SMTP id e9e14a558f8ab-42571642af9so17420265ab.0
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 30 Sep 2025 09:01:16 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1759248075; x=1759852875;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=HOYVDlXcgikSCUwOdxOfSsjt8Nh4FIwdpCdV/JBPVPE=;
+        b=p8g4UDSd3x0rkNH4aw098T+JywRvQnOs0Et4wQaBBLBdR3GZSNjtW0Mw5669nmuZE8
+         ytUtItgWRgpqYZn4aIbSKKdX3M1EGjN5AHCC/i6rZAUFfNvEocNSUGicarYM+rAhXXTl
+         EkyNpS2aSwchKVVQ8B6oWW9jnop7q/kG/53msWR2IEL1kQjVOgnhTYojERJt/SbLImxx
+         ccUtmkMcFkDJc7kR9qcv1X+qo/9BFeuSe0HtCqORkYqt6hO/eULh7c2pIrDE8PU8dyq8
+         bi84uunLesE9Ul4+Kmgh9O/VG433q6VYCnVnB0av6rdXpXIPGdkLe0Qk0T11wcTPBr5B
+         /NKg==
+X-Forwarded-Encrypted: i=1; AJvYcCVu7R0isPWO5fRN53Sf7hFBUu1oNazz4n1e22wBvya87wOzZftSJyKvGDL1MhaXNNKGEdg34DaDrW5egfPl@lists.linaro.org
+X-Gm-Message-State: AOJu0Yzpv3ZNEWva3/Z+AqQCrix8zcvuL7Br+9e3GN4fOv1wRgs6JMQr
+	Z6Rz0fHgy3vhJt9xnuuCsOUmk+Z8SvOurF/ZVeUwHY++0+8S6vZ3DR0IGJPoyHMDYYOwx38DmGo
+	KDIbHkfMTmwwKZHu6k8JFnPA/wBF1OwQtldvbaMLPgmBwLD2YkU6at727CvnhIVFQtjXc
+X-Gm-Gg: ASbGncuZe+686DUSjhWLLM1Kdk4lFpbZFU1uLAFaDTtCPkLxKJ0tWeaRCpCzv0ZQGs1
+	4jPYWLy9UlM2O1YKEu99muULE/RTTEaEgjf3LeleeKlYap0QgyBgF0QgurmEr37L4XaVxgATkF9
+	/fAModcj0W7EwFEDsy4oImBoehA1EPt2QUV5vTWfejX/K2xDMdgPmaCkKC6zE25a6fH4gfoABVe
+	7I7qFRcgW/ZhMxdFqfgcRB0yRayMJ0M+WJKACtAE3HMeOftZypwtG2LCK1tgx/Jez/9jDxIqtfl
+	A4Zdhnxksseg7vojXhTSwHoeKQYinArrEFFIj7v4Cr3DW+14
+X-Received: by 2002:a05:6e02:164b:b0:42b:1763:5796 with SMTP id e9e14a558f8ab-42d81635257mr2672865ab.7.1759248075087;
+        Tue, 30 Sep 2025 09:01:15 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFa3YWCojRcq8FvhA8oy0OghueS9jHVQ9BVoBDjYigh74bKjlyhu7iHP48jxbQj2TC5kTDAzg==
+X-Received: by 2002:a05:6e02:164b:b0:42b:1763:5796 with SMTP id e9e14a558f8ab-42d81635257mr2672385ab.7.1759248074259;
+        Tue, 30 Sep 2025 09:01:14 -0700 (PDT)
+Received: from redhat.com ([38.15.36.11])
+        by smtp.gmail.com with ESMTPSA id e9e14a558f8ab-425bfba6242sm68758215ab.27.2025.09.30.09.01.12
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 30 Sep 2025 09:01:13 -0700 (PDT)
+Date: Tue, 30 Sep 2025 10:01:10 -0600
+From: Alex Williamson <alex.williamson@redhat.com>
+To: Leon Romanovsky <leon@kernel.org>, Marek Szyprowski
+ <m.szyprowski@samsung.com>
+Message-ID: <20250930100110.6ec5b8a1.alex.williamson@redhat.com>
+In-Reply-To: <20250930073053.GE324804@unreal>
+References: <cover.1759070796.git.leon@kernel.org>
+	<ac8c6ccd792e79f9424217d4bca23edd249916ca.1759070796.git.leon@kernel.org>
+	<20250929151745.439be1ec.alex.williamson@redhat.com>
+	<20250930073053.GE324804@unreal>
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.43; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Betterbird (Windows)
-To: Krzysztof Kozlowski <krzk@kernel.org>, Himanshu Dewangan
-	<h.dewangan@samsung.com>
-Content-Language: en-US
-From: Marek Szyprowski <m.szyprowski@samsung.com>
-In-Reply-To: <CAJKOXPecLREbEDM4yfM=WD-EFfuBqPDXNZceATLeWQRj0X_w7w@mail.gmail.com>
-X-CMS-MailID: 20250930154612eucas1p2cf5b43435487dc8e6b19b60d1a3801ef
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-RootMTR: 20250930035551epcas5p4ee7cb5af08eadb2f5ed6e5eaa06a60a9
-X-EPHeader: CA
-X-CMS-RootMailID: 20250930035551epcas5p4ee7cb5af08eadb2f5ed6e5eaa06a60a9
-References: <CGME20250930035551epcas5p4ee7cb5af08eadb2f5ed6e5eaa06a60a9@epcas5p4.samsung.com>
-	<20250930040348.3702923-1-h.dewangan@samsung.com>
-	<20250930040348.3702923-9-h.dewangan@samsung.com>
-	<CAJKOXPecLREbEDM4yfM=WD-EFfuBqPDXNZceATLeWQRj0X_w7w@mail.gmail.com>
-X-Rspamd-Queue-Id: EDF07447E0
-X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.43 / 15.00];
-	BAYES_HAM(-2.84)[99.30%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[samsung.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:210.118.77.0/24];
-	R_DKIM_ALLOW(-0.20)[samsung.com:s=mail20170921];
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: BX5bhr_F1AsX3u8LCH4Y8-ooLUQFf5Ud90D8FHKvrsg_1759248075
+X-Mimecast-Originator: redhat.com
+X-Rspamd-Queue-Id: 373D544B41
+X-Spamd-Bar: ----
+X-Spamd-Result: default: False [-4.20 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
+	MID_CONTAINS_FROM(1.00)[];
+	DWL_DNSWL_LOW(-1.00)[redhat.com:dkim];
+	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
+	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719];
+	R_SPF_ALLOW(-0.20)[+ip4:170.10.129.0/24];
+	RWL_MAILSPIKE_VERYGOOD(-0.20)[170.10.129.124:from];
 	MIME_GOOD(-0.10)[text/plain];
-	RWL_MAILSPIKE_GOOD(-0.10)[210.118.77.12:from];
-	XM_UA_NO_VERSION(0.01)[];
-	DWL_DNSWL_BLOCKED(0.00)[samsung.com:dkim];
-	TAGGED_RCPT(0.00)[dt];
-	RCPT_COUNT_TWELVE(0.00)[20];
-	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	ASN(0.00)[asn:30031, ipnet:170.10.128.0/23, country:US];
+	RCPT_COUNT_TWELVE(0.00)[22];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_TLS_LAST(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	DNSWL_BLOCKED(0.00)[210.118.77.12:from,203.254.199.221:received];
 	RCVD_COUNT_THREE(0.00)[3];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	NEURAL_HAM(-0.00)[-1.000];
-	DKIM_TRACE(0.00)[samsung.com:+]
+	DNSWL_BLOCKED(0.00)[170.10.129.124:from,38.15.36.11:received];
+	DKIM_TRACE(0.00)[redhat.com:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: SBJQJPWYW5ZBL6C2Q3ANIJRZ6RDZD6SE
-X-Message-ID-Hash: SBJQJPWYW5ZBL6C2Q3ANIJRZ6RDZD6SE
-X-MailFrom: m.szyprowski@samsung.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: mchehab@kernel.org, robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, sumit.semwal@linaro.org, christian.koenig@amd.com, alim.akhtar@samsung.com, manjun@samsung.com, nagaraju.s@samsung.com, ih0206.lee@samsung.com, jehyung.lee@samsung.com, linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org, devicetree@vger.kernel.org, linux-samsung-soc@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+Message-ID-Hash: WBKMPWWR3V4NT25DYWOAOPAI4MCKSARN
+X-Message-ID-Hash: WBKMPWWR3V4NT25DYWOAOPAI4MCKSARN
+X-MailFrom: alex.williamson@redhat.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: Jason Gunthorpe <jgg@nvidia.com>, Andrew Morton <akpm@linux-foundation.org>, Bjorn Helgaas <bhelgaas@google.com>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, iommu@lists.linux.dev, Jens Axboe <axboe@kernel.dk>, Joerg Roedel <joro@8bytes.org>, kvm@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linux-mm@kvack.org, linux-pci@vger.kernel.org, Logan Gunthorpe <logang@deltatee.com>, Robin Murphy <robin.murphy@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, Vivek Kasireddy <vivek.kasireddy@intel.com>, Will Deacon <will@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] =?utf-8?q?Re=3A_=5BPATCH_08/29=5D_media=3A_mfc=3A_Add_Exynos=E2=80=91MFC_driver_probe_support?=
+Subject: [Linaro-mm-sig] Re: [PATCH v4 08/10] vfio/pci: Enable peer-to-peer DMA transactions by default
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SBJQJPWYW5ZBL6C2Q3ANIJRZ6RDZD6SE/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WBKMPWWR3V4NT25DYWOAOPAI4MCKSARN/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-SGkgS3J6eXN6dG9mLA0KDQpPbiAzMC4wOS4yMDI1IDA3OjU0LCBLcnp5c3p0b2YgS296bG93c2tp
-IHdyb3RlOg0KPiBPbiBUdWUsIDMwIFNlcHQgMjAyNSBhdCAxMjo1NiwgSGltYW5zaHUgRGV3YW5n
-YW4gPGguZGV3YW5nYW5Ac2Ftc3VuZy5jb20+IHdyb3RlOg0KPj4gRnJvbTogTmFnYXJhanUgU2lk
-ZGluZW5pIDxuYWdhcmFqdS5zQHNhbXN1bmcuY29tPg0KPj4NCj4+IEludHJvZHVjZSBhIG5ldyBL
-Y29uZmlnIGVudHJ5IFZJREVPX0VYWU5PU19NRkMgZm9yIHRoZSBTYW1zdW5nDQo+PiBFeHlub3Mg
-TUZDIGRyaXZlciB0aGF0IHN1cHBvcnRzIGZpcm13YXJlIHZlcnNpb27igK8xMyBhbmQgbGF0ZXIu
-DQo+PiBFeHRlbmQgdGhlIHRvcOKAkWxldmVsIFNhbXN1bmcgcGxhdGZvcm0gS2NvbmZpZyB0byBk
-aXNhYmxlIHRoZSBsZWdhY3kNCj4+IFM1UOKAkU1GQyBkcml2ZXIgd2hlbiBpdHMgZmlybXdhcmUg
-dmVyc2lvbiBpcyA+4oCvdjEyIGFuZCB0byBzZWxlY3QgdGhlDQo+PiBuZXcgRXh5bm9z4oCRTUZD
-IGRyaXZlciBvbmx5IHdoZW4gVklERU9fU0FNU1VOR19TNVBfTUZDIGlzIG5vdCBlbmFibGVkLg0K
-Pj4NCj4+IEFkZCBleHlub3MtbWZjIEtjb25maWcgYW5kIE1ha2VmaWxlIGZvciBwcm9iZSBmdW5j
-dGlvbmFsaXR5IGFuZCBjcmVhdGlvbg0KPj4gb2YgZGVjb2RlciBhbmQgZW5jb2RlciBkZXZpY2Ug
-ZmlsZXMgYnkgcmVnaXN0ZXJpbmcgdGhlIGRyaXZlciBvYmplY3QNCj4+IGV4eW5vc19tZmMubyBh
-bmQgb3RoZXIgcmVsZXZhbnQgc291cmNlIGZpbGVzLg0KPj4NCj4+IFByb3ZpZGUgaGVhZGVyIGZp
-bGVzIG1mY19jb3JlX29wcy5oIGFuZCBtZmNfcm0uaCBjb250YWluaW5nIGNvcmUNCj4+ICAgIG9w
-ZXJhdGlvbiBwcm90b3R5cGVzLCByZXNvdXJjZeKAkW1hbmFnZXIgaGVscGVycywNCj4+ICAgIGFu
-ZCBjb3Jl4oCRc2VsZWN0aW9uIHV0aWxpdGllcy4NCj4+DQo+PiBBZGQgYSBjb25maWd1cmFibGUg
-b3B0aW9uIE1GQ19VU0VfQ09SRURVTVAgdG8gZW5hYmxlIGNvcmXigJFkdW1wDQo+PiBzdXBwb3J0
-IGZvciBkZWJ1Z2dpbmcgTUZDIGVycm9ycy4NCj4+DQo+PiBUaGVzZSBjaGFuZ2VzIGJyaW5nIHN1
-cHBvcnQgZm9yIG5ld2VyIEV4eW5vc+KAkWJhc2VkIE1GQyBoYXJkd2FyZSwNCj4+IGNsZWFubHkg
-c2VwYXJhdGUgaXQgZnJvbSB0aGUgbGVnYWN5IFM1UOKAkU1GQyBkcml2ZXIsIGFuZCBsYXkgdGhl
-DQo+PiBncm91bmR3b3JrIGZvciBmdXR1cmUgZmVhdHVyZSBkZXZlbG9wbWVudCBhbmQgZGVidWdn
-aW5nLg0KPj4NCj4gTm8sIE5BSy4gRXhpc3RpbmcgZHJpdmVyIGlzIHdlbGwgdGVzdGVkIGFuZCBh
-bHJlYWR5IHVzZWQgb24gbmV3ZXN0DQo+IEV4eW5vcyBTb0MsIHNvIGFsbCB0aGlzIG5ldyBkcml2
-ZXIgaXMgZXhhY3RseSBob3cgeW91IHNob3VsZCBub3Qgd29yaw0KPiBpbiB1cHN0cmVhbS4gWW91
-IG5lZWQgdG8gaW50ZWdyYXRlIGludG8gZXhpc3RpbmcgZHJpdmVyLg0KPg0KPiBTYW1zdW5nIHJl
-Y2VpdmVkIHRoaXMgcmV2aWV3IG11bHRpcGxlIHRpbWVzIGFscmVhZHkuDQoNClBsZWFzZSBkb24n
-dCBiZSBzbyBjYXRlZ29yaWNhbC4gVGhlIE1GQyBoYXJkd2FyZSBldm9sdmVkIHF1aXRlIGEgYml0
-IA0KZnJvbSB0aGUgYW5jaWVudCB0aW1lcyBvZiBTNVBWMjEwIFNvQywgd2hlbiBzNXAtbWZjIGRy
-aXZlciB3YXMgZGVzaWduZWQuIA0KVGhlIGZlYXR1cmUgbGlzdCBvZiB0aGUgbmV3IGhhcmR3YXJl
-IGhhcmRseSBtYXRjaGVzIHRob3NlIGFuZCBJIHJlYWxseSANCmRvbid0IHNlZSB0aGUgcmVhc29u
-IGZvciBmb3JjaW5nIHN1cHBvcnQgZm9yIHNvIGRpZmZlcmVudCBoYXJkd2FyZSBpbiBhIA0Kc2lu
-Z2xlIGRyaXZlci4gU29tZXRpbWVzIGl0IGlzIGVhc2llciBqdXN0IHRvIGhhdmUgMiBzZXBhcmF0
-ZSBkcml2ZXJzIGlmIA0KdGhlIGNvbW1vbiBwYXJ0IGlzIGp1c3QgdGhlIGFjcm9ueW0gaW4gdGhl
-IGhhcmR3YXJlIGJsb2NrIG5hbWUuLi4NCg0KQmVzdCByZWdhcmRzDQotLSANCk1hcmVrIFN6eXBy
-b3dza2ksIFBoRA0KU2Ftc3VuZyBSJkQgSW5zdGl0dXRlIFBvbGFuZA0KDQpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcg
-bGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2Vu
-ZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+On Tue, 30 Sep 2025 10:30:53 +0300
+Leon Romanovsky <leon@kernel.org> wrote:
+
+> On Mon, Sep 29, 2025 at 03:17:45PM -0600, Alex Williamson wrote:
+> > On Sun, 28 Sep 2025 17:50:18 +0300
+> > Leon Romanovsky <leon@kernel.org> wrote:
+> >   
+> > > From: Leon Romanovsky <leonro@nvidia.com>
+> > > 
+> > > Make sure that all VFIO PCI devices have peer-to-peer capabilities
+> > > enables, so we would be able to export their MMIO memory through DMABUF,
+> > > 
+> > > Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
+> > > ---
+> > >  drivers/vfio/pci/vfio_pci_core.c | 9 +++++++++
+> > >  1 file changed, 9 insertions(+)
+> > > 
+> > > diff --git a/drivers/vfio/pci/vfio_pci_core.c b/drivers/vfio/pci/vfio_pci_core.c
+> > > index 7dcf5439dedc..608af135308e 100644
+> > > --- a/drivers/vfio/pci/vfio_pci_core.c
+> > > +++ b/drivers/vfio/pci/vfio_pci_core.c
+> > > @@ -28,6 +28,9 @@
+> > >  #include <linux/nospec.h>
+> > >  #include <linux/sched/mm.h>
+> > >  #include <linux/iommufd.h>
+> > > +#ifdef CONFIG_VFIO_PCI_DMABUF
+> > > +#include <linux/pci-p2pdma.h>
+> > > +#endif
+> > >  #if IS_ENABLED(CONFIG_EEH)
+> > >  #include <asm/eeh.h>
+> > >  #endif
+> > > @@ -2085,6 +2088,7 @@ int vfio_pci_core_init_dev(struct vfio_device *core_vdev)
+> > >  {
+> > >  	struct vfio_pci_core_device *vdev =
+> > >  		container_of(core_vdev, struct vfio_pci_core_device, vdev);
+> > > +	int __maybe_unused ret;
+> > >  
+> > >  	vdev->pdev = to_pci_dev(core_vdev->dev);
+> > >  	vdev->irq_type = VFIO_PCI_NUM_IRQS;
+> > > @@ -2094,6 +2098,11 @@ int vfio_pci_core_init_dev(struct vfio_device *core_vdev)
+> > >  	INIT_LIST_HEAD(&vdev->dummy_resources_list);
+> > >  	INIT_LIST_HEAD(&vdev->ioeventfds_list);
+> > >  	INIT_LIST_HEAD(&vdev->sriov_pfs_item);
+> > > +#ifdef CONFIG_VFIO_PCI_DMABUF
+> > > +	ret = pcim_p2pdma_init(vdev->pdev);
+> > > +	if (ret)
+> > > +		return ret;
+> > > +#endif
+> > >  	init_rwsem(&vdev->memory_lock);
+> > >  	xa_init(&vdev->ctx);
+> > >    
+> > 
+> > What breaks if we don't test the return value and remove all the
+> > #ifdefs?  The feature call should fail if we don't have a provider but
+> > that seems more robust than failing to register the device.  Thanks,  
+> 
+> pcim_p2pdma_init() fails if memory allocation fails, which is worth to check.
+> Such failure will most likely cause to non-working vfio-pci module anyway,
+> as failure in pcim_p2pdma_init() will trigger OOM. It is better to fail early
+> and help for the system to recover from OOM, instead of delaying to the
+> next failure while trying to load vfio-pci.
+> 
+> CONFIG_VFIO_PCI_DMABUF is mostly for next line "INIT_LIST_HEAD(&vdev->dmabufs);"
+> from the following patch. Because that pcim_p2pdma_init() and dmabufs list are
+> coupled, I put CONFIG_VFIO_PCI_DMABUF on both of them.
+
+Maybe it would remove my hang-up on the #ifdefs if we were to
+unconditionally include the header and move everything below that into
+a 'if (IS_ENABLED(CONFIG_VFIO_PCI_DMA)) {}' block.  I think that would
+be statically evaluated by the compiler so we can still conditionalize
+the list_head in the vfio_pci_core_device struct via #ifdef, though I'm
+not super concerned about that since I'm expecting this will eventually
+be necessary for p2p DMA with IOMMUFD.
+
+That's also my basis for questioning why we think this needs a user
+visible kconfig option.  I don't see a lot of value in enabling
+P2PDMA, DMABUF, and VFIO_PCI, but not VFIO_PCI_DMABUF.  Thanks,
+
+Alex
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
