@@ -2,130 +2,147 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 81CB1BB3AA3
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 02 Oct 2025 12:40:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CBC1BBB3CB8
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 02 Oct 2025 13:40:24 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 42E6544D39
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  2 Oct 2025 10:40:01 +0000 (UTC)
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
-	by lists.linaro.org (Postfix) with ESMTPS id 4619F448A4
-	for <linaro-mm-sig@lists.linaro.org>; Thu,  2 Oct 2025 10:39:58 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 8A5044577C
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  2 Oct 2025 11:40:23 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+	by lists.linaro.org (Postfix) with ESMTPS id 1F4D7448A4
+	for <linaro-mm-sig@lists.linaro.org>; Thu,  2 Oct 2025 11:40:00 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20230601 header.b=RNIfS9Pw;
-	dmarc=pass (policy=none) header.from=gmail.com;
-	spf=pass (lists.linaro.org: domain of miguel.ojeda.sandonis@gmail.com designates 209.85.214.175 as permitted sender) smtp.mailfrom=miguel.ojeda.sandonis@gmail.com
-Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-26808b24a00so1352195ad.1
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 02 Oct 2025 03:39:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759401597; x=1760006397; darn=lists.linaro.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=5zqSShRm39AvEZ2mdKxWsxXrw2ZA/BSSQMCMwPSXcG4=;
-        b=RNIfS9PwX6fZa2l88rlYx0sOp45OReHceWXBxL9VU7X3S3SQvGCq+YMdD8GmL/lxjC
-         Me16uPcIMsSH2dDMuLTWT2TwdrcBy1ktbLR7fY5mtDL8lieajrL7V/sRZonvIviRPkc0
-         lnXx30C6EaBHepeBonaZWtrub21iZQ9UzJNRaH0f0WjHSUF856qXVGOX8lfOffpx06IC
-         nCI72PDWFHAf7OHCC5UCDL6geMzNLe2ZSbZrjbpoDjfYyB7mvBK/YnR0hexqw16uKr7H
-         9phE4eo1qpvn+m3fLSuC4i53YJCOrzLFudnoUB34k5IljumHiQhgKVb/NRAQ8jW+RrTP
-         ay1g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759401597; x=1760006397;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=5zqSShRm39AvEZ2mdKxWsxXrw2ZA/BSSQMCMwPSXcG4=;
-        b=E0y+qkKIwufTOt39f24CRtoVVJP6c5rUF0+3xExSCPiA6BfiRbgn2nM4WjCCuX9ybq
-         5STTcxH7yGyLAIBCUgd2zYy3PkrhIVx8MUrHuGfRbdHb6R2e/5LfhX5SgCy4O3WBfqZq
-         9Eg1Y1Yah2wIvuSTFM3vq85hUrcZ0GVylcgNZ57AvRD9ikx88GAYOku0lOPp0IcuAsDx
-         MNsGXyLQi/4Yka699BpWfS2ZxwO+uGd9/UXypA9+vuA900l5rZ7WNN1xj4SAEhm00g06
-         rwAe9oW/0PLFdyiZ87WvfyK9mvDLU366VfeE1rrKMkMI0ZK1nevKPgIp1V8OusR/j2rV
-         Moaw==
-X-Forwarded-Encrypted: i=1; AJvYcCVu1ix7oyi9Egeix9b22ZT77sZWKmcAdvdzuApjqlT/0CXUWVk5Eghs7QVM4Zq87oapSxH6KT77mAklUUsR@lists.linaro.org
-X-Gm-Message-State: AOJu0YyvV6F/ffaQwWxoQdPvUSfiNcjfM//4fakzlB/5eUTlB2UB4VLZ
-	Iph56j/+Eo4AyyR81U8ro19OieCrJFAhKo3afzxwiJlDGLQ6rpsHeTFMoU9VMc7HXqnpXGKMIMn
-	bgurrYXGyRSRYRKsF6mwlQT4FqNVQrJ0=
-X-Gm-Gg: ASbGncuqv4d1J9k9SWJz74G8V0FE92sFrg+ApWHzixi5FIYY/DJ8At0eFOcnLhjS4LR
-	XMvnBR4/hPzkSvtMERkINiMGQ6X179sUplewb1MgyzHmlFgfA8MGSAeEjd3FvoRRbAS9CCdUUII
-	8HnjAA9lrPR+TiAqYqBOuON7dFDuMZE6GrpKwS/7SJ8WH5cb+4mI8oWfHRf1uOjqLoWoGCSZ1nK
-	pAA4zhhyvhqf9vNUPaqp4TUmpRnIB45fA4U23XeSf8WNS8v3l15GZO7DDh9PG7CCEPtWptdAfIA
-	V5s7RjhtPh6Cvs7dZGbwoBDTotOimzMNLnZNAZMxnhuQ3XOMiw==
-X-Google-Smtp-Source: AGHT+IHFLND1P6O8TdHjmnKikosiXvhXOIfnx1PV0ljjYUmm/N/aJM7ueeeJ1F4XTf3eavFywQQD7J67z/yFzofBPI0=
-X-Received: by 2002:a17:903:2f83:b0:24e:af92:70de with SMTP id
- d9443c01a7336-28e7f33482dmr45430085ad.7.1759401597241; Thu, 02 Oct 2025
- 03:39:57 -0700 (PDT)
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b="TW1/86Ro";
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	spf=pass (lists.linaro.org: domain of broonie@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=broonie@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by sea.source.kernel.org (Postfix) with ESMTP id 57A0F45A0A;
+	Thu,  2 Oct 2025 11:39:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BB65CC4CEF4;
+	Thu,  2 Oct 2025 11:39:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1759405199;
+	bh=AqM4M+MGYM63wBzkJdjM+deX6L3r76MLEIOrwOOOwJs=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=TW1/86RoVUn8qaQrgHMvsQvcXg86d9INUtwu3WmMM1sNr7Nnhsdu5LGDe4wj5Nmcd
+	 h3ahbC+1P18XctdTn5Su30qTYLkv7UarZVkeP70mkiGhbyiaB4Tf6m6FHeWhLlYVJv
+	 LhShOrKMSXkpVSMXLKYov1x2dryfuR3xlR/mL6dZWVfYhX3Zictu/5mKj4LvKtKxkm
+	 Ma7bsVvTVvu3F16nnUTBVa3mDEJ/xjXtgVjwBY+8URYSBCdEXXcChHc80acWuzep8i
+	 mXGvMQLTMLWWC7+zGhRkCVamXaRa0GZJHQuGz3SNFpxw4WC4iKaqKbkQ2SmMMevhe3
+	 M2PF47W5eCD9A==
+Date: Thu, 2 Oct 2025 12:39:31 +0100
+From: Mark Brown <broonie@kernel.org>
+To: Byungchul Park <byungchul@sk.com>
+Message-ID: <a7f41101-d80a-4cee-ada5-9c591321b1d7@sirena.org.uk>
+References: <20251002081247.51255-1-byungchul@sk.com>
+ <20251002081247.51255-10-byungchul@sk.com>
 MIME-Version: 1.0
-References: <20251002081247.51255-37-byungchul@sk.com> <tencent_13F1EDE0D6B7A44697F31AE274C8E664E908@qq.com>
-In-Reply-To: <tencent_13F1EDE0D6B7A44697F31AE274C8E664E908@qq.com>
-From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Thu, 2 Oct 2025 12:39:44 +0200
-X-Gm-Features: AS18NWBvN_Cs7ivtqpv2OaNBhg_Klbjg_5caE3pe8g8RPQqJWvaoaACfChLj4F8
-Message-ID: <CANiq72ngvZSL72GQ+CwFoaE4ZfakZSPcZk1zrXqyaKEZLWDf-g@mail.gmail.com>
-To: Guangbo Cui <2407018371@qq.com>
-X-Rspamd-Queue-Id: 4619F448A4
-X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.49 / 15.00];
-	BAYES_HAM(-2.99)[99.96%];
+In-Reply-To: <20251002081247.51255-10-byungchul@sk.com>
+X-Cookie: idleness, n.:
+X-Rspamd-Queue-Id: 1F4D7448A4
+X-Spamd-Bar: ----
+X-Spamd-Result: default: False [-4.51 / 15.00];
+	BAYES_HAM(-2.91)[99.63%];
+	SIGNED_PGP(-2.00)[];
+	FORGED_RECIPIENTS(2.00)[m:byungchul@sk.com,m:linux-kernel@vger.kernel.org,m:kernel_team@skhynix.com,m:torvalds@linux-foundation.org,m:damien.lemoal@opensource.wdc.com,m:linux-ide@vger.kernel.org,m:adilger.kernel@dilger.ca,m:linux-ext4@vger.kernel.org,m:mingo@redhat.com,m:peterz@infradead.org,m:will@kernel.org,m:tglx@linutronix.de,m:rostedt@goodmis.org,m:joel@joelfernandes.org,m:sashal@kernel.org,m:daniel.vetter@ffwll.ch,m:duyuyang@gmail.com,m:johannes.berg@intel.com,m:tj@kernel.org,m:tytso@mit.edu,m:willy@infradead.org,m:david@fromorbit.com,m:amir73il@gmail.com,m:gregkh@linuxfoundation.org,m:kernel-team@lge.com,m:linux-mm@kvack.org,m:akpm@linux-foundation.org,m:mhocko@kernel.org,m:minchan@kernel.org,m:hannes@cmpxchg.org,m:vdavydov.dev@gmail.com,m:sj@kernel.org,m:jglisse@redhat.com,m:dennis@kernel.org,m:cl@linux.com,m:penberg@kernel.org,m:rientjes@google.com,m:vbabka@suse.cz,m:ngupta@vflare.org,m:linux-block@vger.kernel.org,m:josef@toxicpanda.com,m:linux-fsdevel@vger.kernel.org,m:jac
+ k@suse.cz,m:jlayton@kernel.org,m:dan.j.williams@intel.com,m:hch@infradead.org,m:djwong@kernel.org,m:dri-devel@lists.freedesktop.org,m:rodrigosiqueiramelo@gmail.com,m:melissa.srw@gmail.com,m:hamohammed.sa@gmail.com,m:harry.yoo@oracle.com,m:chris.p.wilson@intel.com,m:gwan-gyeong.mun@intel.com,m:max.byungchul.park@gmail.com,m:boqun.feng@gmail.com,m:longman@redhat.com,m:yunseong.kim@ericsson.com,m:ysk@kzalloc.com,m:yeoreum.yun@arm.com,m:netdev@vger.kernel.org,m:matthew.brost@intel.com,m:her0gyugyu@gmail.com,m:corbet@lwn.net,m:catalin.marinas@arm.com,m:bp@alien8.de,m:dave.hansen@linux.intel.com,m:x86@kernel.org,m:hpa@zytor.com,m:luto@kernel.org,m:sumit.semwal@linaro.org,m:gustavo@padovan.org,m:christian.koenig@amd.com,m:andi.shyti@kernel.org,m:arnd@arndb.de,m:lorenzo.stoakes@oracle.com,m:Liam.Howlett@oracle.com,m:rppt@kernel.org,m:surenb@google.com,m:mcgrof@kernel.org,m:petr.pavlu@suse.com,m:da.gomez@kernel.org,m:samitolvanen@google.com,m:paulmck@kernel.org,m:frederic@kernel.org,m:neeraj
+ .upadhyay@kernel.org,m:joelagnelf@nvidia.com,m:josh@joshtriplett.org,m:urezki@gmail.com,m:mathieu.desnoyers@efficios.com,m:jiangshanlai@gmail.com,m:qiang.zhang@linux.dev,m:juri.lelli@redhat.com,m:vincent.guittot@linaro.org,m:dietmar.eggemann@arm.com,m:bsegall@google.com,m:mgorman@suse.de,m:vschneid@redhat.com,m:chuck.lever@oracle.com,s:linaro-mm-sig@lists.linaro.org];
+	DWL_DNSWL_MED(-2.00)[kernel.org:dkim];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
-	MIME_GOOD(-0.10)[text/plain];
-	RCVD_TLS_LAST(0.00)[];
-	URIBL_BLOCKED(0.00)[mail.gmail.com:mid,qq.com:email];
-	TAGGED_FROM(0.00)[];
-	FREEMAIL_TO(0.00)[qq.com];
-	TO_DN_SOME(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.252.31];
+	MIME_GOOD(-0.20)[multipart/signed,text/plain];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[41];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[sk.com,oracle.com,gmail.com,kernel.org,google.com,linuxfoundation.org,lists.linaro.org,vivo.com,vger.kernel.org,arm.com,efficios.com,intel.com,suse.de,redhat.com,infradead.org,suse.com,linux-foundation.org,linaro.org,kzalloc.com,garyguo.net,protonmail.com];
+	URIBL_BLOCKED(0.00)[sea.source.kernel.org:rdns,sea.source.kernel.org:helo,sirena.org.uk:mid];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[vger.kernel.org,skhynix.com,linux-foundation.org,opensource.wdc.com,dilger.ca,redhat.com,infradead.org,kernel.org,linutronix.de,goodmis.org,joelfernandes.org,ffwll.ch,gmail.com,intel.com,mit.edu,fromorbit.com,linuxfoundation.org,lge.com,kvack.org,cmpxchg.org,linux.com,google.com,suse.cz,vflare.org,toxicpanda.com,lists.freedesktop.org,oracle.com,ericsson.com,kzalloc.com,arm.com,lwn.net,alien8.de,linux.intel.com,zytor.com,linaro.org,padovan.org,amd.com,arndb.de,suse.com,nvidia.com,joshtriplett.org,efficios.com,linux.dev,suse.de,brown.name,talpey.com,huawei.com,amazon.co.uk,linux.alibaba.com,glider.be,treblig.org,star-ark.net,valla.it,vivo.com,baidu.com,lists.infradead.org,lists.linaro.org,lists.linux.dev];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	FROM_EQ_ENVFROM(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FREEMAIL_ENVFROM(0.00)[gmail.com];
-	DWL_DNSWL_BLOCKED(0.00)[gmail.com:dkim];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.214.175:from];
 	MISSING_XM_UA(0.00)[];
-	TAGGED_RCPT(0.00)[];
-	RCVD_COUNT_ONE(0.00)[1];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	RCVD_IN_DNSWL_NONE(0.00)[209.85.214.175:from]
+	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_EQ_ENVFROM(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	RCPT_COUNT_GT_50(0.00)[149];
+	TAGGED_RCPT(0.00)[renesas];
+	NEURAL_HAM(-0.00)[-1.000];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: VUWUO4UIMAL4WO7337XWNRSV47C2ULGT
-X-Message-ID-Hash: VUWUO4UIMAL4WO7337XWNRSV47C2ULGT
-X-MailFrom: miguel.ojeda.sandonis@gmail.com
+Message-ID-Hash: S32GIOQX2EGWCPUWHAKQF2EDX27BMXTK
+X-Message-ID-Hash: S32GIOQX2EGWCPUWHAKQF2EDX27BMXTK
+X-MailFrom: broonie@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: byungchul@sk.com, Liam.Howlett@oracle.com, amir73il@gmail.com, andi.shyti@kernel.org, andrii@kernel.org, boqun.feng@gmail.com, bsegall@google.com, gregkh@linuxfoundation.org, linaro-mm-sig@lists.linaro.org, link@vivo.com, linux-kernel@vger.kernel.org, mark.rutland@arm.com, masahiroy@kernel.org, mathieu.desnoyers@efficios.com, matthew.brost@intel.com, max.byungchul.park@gmail.com, mcgrof@kernel.org, melissa.srw@gmail.com, mgorman@suse.de, mhocko@kernel.org, minchan@kernel.org, oleg@redhat.com, paulmck@kernel.org, penberg@kernel.org, peterz@infradead.org, petr.pavlu@suse.com, torvalds@linux-foundation.org, vincent.guittot@linaro.org, will@kernel.org, yeoreum.yun@arm.com, ysk@kzalloc.com, rust-for-linux@vger.kernel.org, ojeda@kernel.org, gary@garyguo.net, lossin@kernel.org, a.hindborg@kernel.org, aliceryhl@google.com, dakr@kernel.org, alex.gaynor@gmail.com, bjorn3_gh@protonmail.com
+CC: linux-kernel@vger.kernel.org, kernel_team@skhynix.com, torvalds@linux-foundation.org, damien.lemoal@opensource.wdc.com, linux-ide@vger.kernel.org, adilger.kernel@dilger.ca, linux-ext4@vger.kernel.org, mingo@redhat.com, peterz@infradead.org, will@kernel.org, tglx@linutronix.de, rostedt@goodmis.org, joel@joelfernandes.org, sashal@kernel.org, duyuyang@gmail.com, johannes.berg@intel.com, tj@kernel.org, tytso@mit.edu, willy@infradead.org, david@fromorbit.com, amir73il@gmail.com, gregkh@linuxfoundation.org, kernel-team@lge.com, linux-mm@kvack.org, akpm@linux-foundation.org, mhocko@kernel.org, minchan@kernel.org, hannes@cmpxchg.org, vdavydov.dev@gmail.com, sj@kernel.org, jglisse@redhat.com, dennis@kernel.org, cl@linux.com, penberg@kernel.org, rientjes@google.com, vbabka@suse.cz, ngupta@vflare.org, linux-block@vger.kernel.org, josef@toxicpanda.com, linux-fsdevel@vger.kernel.org, jack@suse.cz, jlayton@kernel.org, dan.j.williams@intel.com, hch@infradead.org, djwong@kernel.org, dri-devel@li
+ sts.freedesktop.org, rodrigosiqueiramelo@gmail.com, melissa.srw@gmail.com, hamohammed.sa@gmail.com, harry.yoo@oracle.com, chris.p.wilson@intel.com, gwan-gyeong.mun@intel.com, max.byungchul.park@gmail.com, boqun.feng@gmail.com, longman@redhat.com, yunseong.kim@ericsson.com, ysk@kzalloc.com, yeoreum.yun@arm.com, netdev@vger.kernel.org, matthew.brost@intel.com, her0gyugyu@gmail.com, corbet@lwn.net, catalin.marinas@arm.com, bp@alien8.de, dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com, luto@kernel.org, sumit.semwal@linaro.org, gustavo@padovan.org, christian.koenig@amd.com, andi.shyti@kernel.org, arnd@arndb.de, lorenzo.stoakes@oracle.com, Liam.Howlett@oracle.com, rppt@kernel.org, surenb@google.com, mcgrof@kernel.org, petr.pavlu@suse.com, da.gomez@kernel.org, samitolvanen@google.com, paulmck@kernel.org, frederic@kernel.org, neeraj.upadhyay@kernel.org, joelagnelf@nvidia.com, josh@joshtriplett.org, urezki@gmail.com, mathieu.desnoyers@efficios.com, jiangshanlai@gmail.com, qiang.zh
+ ang@linux.dev, juri.lelli@redhat.com, vincent.guittot@linaro.org, dietmar.eggemann@arm.com, bsegall@google.com, mgorman@suse.de, vschneid@redhat.com, chuck.lever@oracle.com, neil@brown.name, okorniev@redhat.com, Dai.Ngo@oracle.com, tom@talpey.com, trondmy@kernel.org, anna@kernel.org, kees@kernel.org, bigeasy@linutronix.de, clrkwllms@kernel.org, mark.rutland@arm.com, ada.coupriediaz@arm.com, kristina.martsenko@arm.com, wangkefeng.wang@huawei.com, kevin.brodsky@arm.com, dwmw@amazon.co.uk, shakeel.butt@linux.dev, ast@kernel.org, ziy@nvidia.com, yuzhao@google.com, baolin.wang@linux.alibaba.com, usamaarif642@gmail.com, joel.granados@kernel.org, richard.weiyang@gmail.com, geert+renesas@glider.be, tim.c.chen@linux.intel.com, linux@treblig.org, alexander.shishkin@linux.intel.com, lillian@star-ark.net, chenhuacai@kernel.org, francesco@valla.it, guoweikang.kernel@gmail.com, link@vivo.com, jpoimboe@kernel.org, masahiroy@kernel.org, brauner@kernel.org, thomas.weissschuh@linutronix.de, oleg@redh
+ at.com, mjguzik@gmail.com, andrii@kernel.org, wangfushuai@baidu.com, linux-doc@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-i2c@vger.kernel.org, linux-arch@vger.kernel.org, linux-modules@vger.kernel.org, rcu@vger.kernel.org, linux-nfs@vger.kernel.org, linux-rt-devel@lists.linux.dev
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] rust: bindings: add `rust_helper_wait_for_completion` helper function
+Subject: [Linaro-mm-sig] Re: [PATCH v17 09/47] arm64, dept: add support CONFIG_ARCH_HAS_DEPT_SUPPORT to arm64
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VUWUO4UIMAL4WO7337XWNRSV47C2ULGT/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/S32GIOQX2EGWCPUWHAKQF2EDX27BMXTK/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4064701906439949946=="
 
-T24gVGh1LCBPY3QgMiwgMjAyNSBhdCAxMjoxMuKAr1BNIEd1YW5nYm8gQ3VpIDwyNDA3MDE4Mzcx
-QHFxLmNvbT4gd3JvdGU6DQo+DQo+IFRoZSBERVBUIHBhdGNoIHNlcmllcyBjaGFuZ2VkIGB3YWl0
-X2Zvcl9jb21wbGV0aW9uYCBpbnRvIGEgbWFjcm8uDQoNClRoYW5rcyENCg0KSW4gZ2VuZXJhbCwg
-aXQgaXMgdXNlZnVsIHRvIHByb3ZpZGUgYSBMaW5rOiB0byBMb3JlIHRvIHRoZSByaWdodCBwYXRj
-aA0KKGkuZS4gY29udGV4dCBpcyBnb29kKSwgYW5kIHBsZWFzZSBjbGFyaWZ5IGluIHdoaWNoIHRy
-ZWUgeW91IGZvdW5kIHRoZQ0KaXNzdWUgaWYgYW55IC0tIEkgZG9uJ3Qgc2VlIGl0IGluIGxpbnV4
-LW5leHQsIHNvIEkgaW1hZ2luZSBpdCBpcyBub3QNCmFwcGxpZWQsIGJ1dCAiY2hhbmdlZCIgc291
-bmRzIGxpa2UgaXQgd2FzPyBJZiBpdCB3YXMgYWN0dWFsbHkgYXBwbGllZCwNCnBsZWFzZSBhbHNv
-IHByb3ZpZGUgYSBGaXhlczogdGFnLg0KDQpDaGVlcnMsDQpNaWd1ZWwNCl9fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBs
-aXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5k
-IGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+
+--===============4064701906439949946==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="KmVT2ZbmJlsEn2vS"
+Content-Disposition: inline
+
+
+--KmVT2ZbmJlsEn2vS
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Oct 02, 2025 at 05:12:09PM +0900, Byungchul Park wrote:
+> dept needs to notice every entrance from user to kernel mode to treat
+> every kernel context independently when tracking wait-event dependencies.
+> Roughly, system call and user oriented fault are the cases.
+>=20
+> Make dept aware of the entrances of arm64 and add support
+> CONFIG_ARCH_HAS_DEPT_SUPPORT to arm64.
+
+The description of what needs to be tracked probably needs some
+tightening up here, it's not clear to me for example why exceptions for
+mops or the vector extensions aren't included here, or what the
+distinction is with error faults like BTI or GCS not being tracked?
+
+--KmVT2ZbmJlsEn2vS
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmjeZHIACgkQJNaLcl1U
+h9C/NQf6AxgZ6UzPOMzfmL9NSrLltWX75xfq7wx8SUKs1A6RFEWCR/s8jeaJZeCx
+834KNHe3AuR4JVKLLGCZS/c26uVb8ee5itMM53Hv9CN8sQFUNuw/xdO1WCQVmZOI
+pHaKeDBxXVnmeBO3uxS+3ITFDSNIPz6DOUAhqdFLhC6EhioGurq1dr8EtQu0aL3A
+CqG9/M48cKPZRG7a1vLkqKbg8o15SYytfgXtl1kBey51IR89HXUZA4xdNc1CP0Sf
+t2jQUg9ne/qxFnWt0CZEL+07IEC/enVs8gcO+mSpVX1r8yRDs496wZ29z7TjDaXB
+8wuHMVCoKqwssyLsusjOjgef5XgKoQ==
+=Ipx4
+-----END PGP SIGNATURE-----
+
+--KmVT2ZbmJlsEn2vS--
+
+--===============4064701906439949946==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============4064701906439949946==--
