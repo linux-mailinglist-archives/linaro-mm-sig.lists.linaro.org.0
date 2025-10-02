@@ -2,247 +2,159 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 427A9BB4B09
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 02 Oct 2025 19:28:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 63643BB50AC
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 02 Oct 2025 21:45:59 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4423B45E7E
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  2 Oct 2025 17:27:58 +0000 (UTC)
-Received: from mail-qk1-f177.google.com (mail-qk1-f177.google.com [209.85.222.177])
-	by lists.linaro.org (Postfix) with ESMTPS id 99AAF4412B
-	for <linaro-mm-sig@lists.linaro.org>; Thu,  2 Oct 2025 17:27:55 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5B5D545D97
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  2 Oct 2025 19:45:58 +0000 (UTC)
+Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
+	by lists.linaro.org (Postfix) with ESMTPS id EA2CE4466C
+	for <linaro-mm-sig@lists.linaro.org>; Thu,  2 Oct 2025 19:45:54 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20230601 header.b=E6LEI2YE;
-	dmarc=pass (policy=none) header.from=gmail.com;
-	spf=pass (lists.linaro.org: domain of boqun.feng@gmail.com designates 209.85.222.177 as permitted sender) smtp.mailfrom=boqun.feng@gmail.com
-Received: by mail-qk1-f177.google.com with SMTP id af79cd13be357-8572d7b2457so150973685a.1
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 02 Oct 2025 10:27:55 -0700 (PDT)
+	dkim=pass header.d=google.com header.s=20230601 header.b="ctxvMs/6";
+	dmarc=pass (policy=reject) header.from=google.com;
+	spf=pass (lists.linaro.org: domain of jstultz@google.com designates 209.85.218.46 as permitted sender) smtp.mailfrom=jstultz@google.com
+Received: by mail-ej1-f46.google.com with SMTP id a640c23a62f3a-b40f11a1027so274343366b.2
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 02 Oct 2025 12:45:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759426075; x=1760030875; darn=lists.linaro.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:feedback-id:from:to:cc:subject:date
+        d=google.com; s=20230601; t=1759434354; x=1760039154; darn=lists.linaro.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=qTM0UQL/8j7dglCka3v9L9QTEMlq52c4L0JAQ1Z24Bs=;
-        b=E6LEI2YEkn5OuUrQR2ea9vqM/oRNzq56utEdqHk/01fTfZPGeBVxbwx2EB/sbgkG9W
-         AA7qPO3KZ4Hxy1cx9tH+K6WGIR9KXc9QIZGVGLjdRUdHFV1GeAOuZ2gDD4Wu933bj/T7
-         n6zNdnxPgnN4zBU1gEOx0mBuwQTzp/woVy++hYGU7hIS54oTIS7+2PxA30uRCyXvnS0g
-         Uy/gb+hGoDs2I7ME/jsKZwC5b1z5IIxWUiZ+SX2TDMvBmCNMpnHLmbQfYrfoJId/1D0F
-         xqPeuZECwQDx71mMH2xkSDcymyD+wNtZWgKnMWMZqq6RTNARflJFBMtyUVtfUfOWMvG4
-         xU5A==
+        bh=R4gQv0EOz4rGm7+DH/Ll/ylPaIILm6U8HqWQMm5vF7w=;
+        b=ctxvMs/6MS7camrbLYgNqWkd+bpwMHkjaI0jtDIa0jjPrwgDmFWMaElBecfcA4+/mJ
+         0DzE1Brqd6olbRPF8VxAzp8c23Zg3ebAIV0qhGx+5fXbjgHsUjNjT6G15PwKXjo0YY4h
+         stfD71RJ4nDamzxsbACx72Sssor2UYaZD1+aB7hS7XQey36IX561eo09sLp+z+2A7QXE
+         zSqyK/iXLDMzl4VrfZxOO55Dh1zgVwBGfGiAuGitvMv1+6U9DZzPb6EhCcUDIFM/Zs+P
+         5nzA1QPmeCXXL4gH28mUz1v5oe9E8Hw0FOkrFTG1piTsb+3d7WatIOmFwPiwCOMexeBF
+         k8KA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759426075; x=1760030875;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:feedback-id:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1759434354; x=1760039154;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=qTM0UQL/8j7dglCka3v9L9QTEMlq52c4L0JAQ1Z24Bs=;
-        b=g65YC7tU3/vZLSRwypGXDZeRhzGwZKmoWkuuh9jHHwLfDpzkNtP66z68+n1dZU6moo
-         wm+lPLtyPWPrdSCqMHYnPdtk952JsqzZbf36J/QTseLpwyaYSu2zIhEzcZveFd2IDcsM
-         4cbBpYKCr2ronjJbYGcuQnYxy7ETrOkGsxwYBvJYq/93dA9hfger2c9r75r1ur9SjpbC
-         iD+RQpGEAAe0G+iRY+7n0Wb1+/mDQzbxebQuiQqufwIoy0GFanrRgNGzsuEbeU2mJnwR
-         MKxbUduz5tAiSEyGVw8WIxvxOdZYCuzYicf1ZUt9Awyraz4POPn88aD5LHjYLyVrpN2r
-         F2UQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVZzf8lAmG+2w+OYW1jv4e/oW8O+TccmLhwKazV3HEyEESVc3jHTL67iuOtaz2q5CFSHO6Vzvh3A8YS5NZl@lists.linaro.org
-X-Gm-Message-State: AOJu0YwSxg4XZ/QL8URFv6DJwheRQ7irKs22p+A9yYPnPBYx1Xyg/Xhb
-	iSghkC1GB4FM5oEKvA+ezeYhVXTJWfl6doPmzQEHUwU6J4ZE9uBKoKxv
-X-Gm-Gg: ASbGnct3080U0rx+YDzQnj3bS9itXvXUVXQRgipXSxxjo9c0q2L3QS6cSid2nSfp++H
-	yH87Zdp6YY5Z0tNpDPTJJBU+LKhI2EJk4mMrObFAhoeZ+YeQtkdWfvmgnOLNFLXUj9WhW7y7oN2
-	pQqFmKcu2s0NfS20dFjvnxUQ2JhFwYhbuyC1iPdi+CYcxuqTqhcOxBHqgoPBmtNnSS0teOgjdDS
-	BkiwhUBSCiUqkk/D4P2Sq1wG3fjNJDRwMe2YTbtRmTurBEXFykczwcsBVlgx08QHnln6ka9cF/b
-	s5qDSzaZhwieuPA1wdWhkVVaOP48AYzX0brxLGO7UfwGlNSswPmdlYH9ijAbAQhBw5X6nbaoPnV
-	RT+OA0H5a4cXrTBBxKOrSAznJBHT7Ta946pFUxeXzJ4+anTE0Zt8/wbRIfRrEV4XLMueCuVoGbo
-	H7I6FQwvm7o3Tu+H+LMFjt2ll+xRE2cHD3wxNN9tdfpa1BeOs=
-X-Google-Smtp-Source: AGHT+IEccWf95m9em/uI+dQlqBiU53wpoCpSc5+xQyyCCz3DNyftc7RYyrlZ2VQKH150B9/39RYCLg==
-X-Received: by 2002:a05:620a:4542:b0:80b:bb34:371c with SMTP id af79cd13be357-87765c0283amr556367685a.4.1759426074903;
-        Thu, 02 Oct 2025 10:27:54 -0700 (PDT)
-Received: from fauth-a1-smtp.messagingengine.com (fauth-a1-smtp.messagingengine.com. [103.168.172.200])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-87771129f10sm250580785a.9.2025.10.02.10.27.53
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 02 Oct 2025 10:27:54 -0700 (PDT)
-Received: from phl-compute-11.internal (phl-compute-11.internal [10.202.2.51])
-	by mailfauth.phl.internal (Postfix) with ESMTP id 64F31F40069;
-	Thu,  2 Oct 2025 13:27:53 -0400 (EDT)
-Received: from phl-mailfrontend-02 ([10.202.2.163])
-  by phl-compute-11.internal (MEProxy); Thu, 02 Oct 2025 13:27:53 -0400
-X-ME-Sender: <xms:GbbeaA47QkWtwwPWv6vtzqHqLGFsZJYXwawRT5GZ7ove-YTVfKveog>
-    <xme:GbbeaLRKare3YFvYQ8IM-3q6zMpvcmvJN3fBupwOyYuvxHTzciEIpTEH6HTjCtMJz
-    Ui03Aoj6wC_x9XxdjVLoZXrwD3h3lyNY_1pwER6F99ybfMZqbhZ>
-X-ME-Received: <xmr:GbbeaIkFcpyNXJiJ2YkRCL5cDJkQz13nP_ZUKR3iXf7c09R20thn7hUns-BrtUcx7vb5zVggjK5D7CpuHdVyLFtfmFh1oXW9>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdeggdekieeiudcutefuodetggdotefrod
-    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
-    ihhlohhuthemuceftddtnecunecujfgurhepfffhvfevuffkfhggtggujgesthdtredttd
-    dtvdenucfhrhhomhepuehoqhhunhcuhfgvnhhguceosghoqhhunhdrfhgvnhhgsehgmhgr
-    ihhlrdgtohhmqeenucggtffrrghtthgvrhhnpeehudfgudffffetuedtvdehueevledvhf
-    elleeivedtgeeuhfegueevieduffeivdenucevlhhushhtvghrufhiiigvpedtnecurfgr
-    rhgrmhepmhgrihhlfhhrohhmpegsohhquhhnodhmvghsmhhtphgruhhthhhpvghrshhonh
-    grlhhithihqdeiledvgeehtdeigedqudejjeekheehhedvqdgsohhquhhnrdhfvghnghep
-    pehgmhgrihhlrdgtohhmsehfihigmhgvrdhnrghmvgdpnhgspghrtghpthhtohepgedupd
-    hmohguvgepshhmthhpohhuthdprhgtphhtthhopedvgedtjedtudekfeejudesqhhqrdgt
-    ohhmpdhrtghpthhtohepsgihuhhnghgthhhulhesshhkrdgtohhmpdhrtghpthhtoheplh
-    hirghmrdhhohiflhgvthhtsehorhgrtghlvgdrtghomhdprhgtphhtthhopegrmhhirhej
-    fehilhesghhmrghilhdrtghomhdprhgtphhtthhopegrnhguihdrshhhhihtiheskhgvrh
-    hnvghlrdhorhhgpdhrtghpthhtoheprghnughrihhisehkvghrnhgvlhdrohhrghdprhgt
-    phhtthhopegsshgvghgrlhhlsehgohhoghhlvgdrtghomhdprhgtphhtthhopehgrhgvgh
-    hkhheslhhinhhugihfohhunhgurghtihhonhdrohhrghdprhgtphhtthhopehlihhnrghr
-    ohdqmhhmqdhsihhgsehlihhsthhsrdhlihhnrghrohdrohhrgh
-X-ME-Proxy: <xmx:GbbeaIKfrjD-eqlOsaEu8oupAwCNL5B3v_jSdUHcY24JYHPWjN5_tQ>
-    <xmx:GbbeaOSZC2NlhdVwmqKBdbD4NIwKEaTDKckNg4nutrEqyq1jJ65JtQ>
-    <xmx:GbbeaPMPlfhxRayyy1Im8WpdH8DW6D_tTVsqfNIfnjn98KI1eVpWSA>
-    <xmx:GbbeaPaxaAKzS_UqYZsc_slWPxKZim7zmb4NsaNtun6TSMRkIYCuOw>
-    <xmx:GbbeaDDpRUzAmACJHoEs-WQm9-qedNFlV-mfcoTZk1unrpqOZiNLvsDC>
-Feedback-ID: iad51458e:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 2 Oct 2025 13:27:52 -0400 (EDT)
-Date: Thu, 2 Oct 2025 10:27:51 -0700
-From: Boqun Feng <boqun.feng@gmail.com>
-To: Guangbo Cui <2407018371@qq.com>
-Message-ID: <aN62F8t493R7UmCT@tardis.local>
-References: <20251002081247.51255-37-byungchul@sk.com>
- <tencent_13F1EDE0D6B7A44697F31AE274C8E664E908@qq.com>
+        bh=R4gQv0EOz4rGm7+DH/Ll/ylPaIILm6U8HqWQMm5vF7w=;
+        b=q1datjIt7pMDSApCk/IJJaop3mi3GRn+purdlrO83RTDwUfjVvTljm7MpVDW5d8X6Y
+         WbqbDza3JmwYEmUU+KJ3ukmKhEzRVYkPpXYDWBi3JkVoyIqU6WZYy5eL0iJwg6QSM2CM
+         K84zT5PIcQxS6O5xKNpSd1otyS2ugrp8c2b//tWJ5qqcG3t0gWc9jWdCj0EPVjVXVwdk
+         j+i0BuFMBXbnweNJPma/NCmi9epb2Ij2wLhnTVjAYhEs80XyWspRLSBcbXQd9FNmSiB3
+         LxG1pCYTcxP94dxavywFe1o3qu36kTD+4aDke4/6ByWpTrD3DtSJmrjl52wKHHT0Ejgk
+         dImQ==
+X-Forwarded-Encrypted: i=1; AJvYcCUd1Zbl+Mh1G4+DepCpSu4sSykxEUfCKp2B+Ddsbn1lBzxfCAwuw4tIP80er8J5PFLbWyC1mA11EQNvq2H2@lists.linaro.org
+X-Gm-Message-State: AOJu0Yy9MR/RCKhxv5GxbRgYfhEpL5B2V6HZ9ba/Xo1ubCGQs/sFuN9v
+	W6+Iws0zdhz5Jvqjvo6QHVArpNGZBDPOqEret9lgGabbWA4S7pkfd5glcaAb50QWCddbYkN9fhg
+	zrZTRmnSn7Gb1VZR46nAMAnT59eH25tKHIf1lEMU=
+X-Gm-Gg: ASbGncu+NX9bDbp4RlEWanfZv6bqd7gH5nrfltB1e7fONCn8aWnqgf2oOYeTiwv/hJ9
+	n1dkSJPKxNdDYOLReTJsM8aagBtK8rZJ0LawJOoF3mkTJwIUVXajECXpOWktUwOYtykf/fnQ943
+	Yt2tDN/f9b/wZvdI2cVJ4vYL4MXcUJtv5XWOeWcG2p1AL43UgXXhUBjMwTUZ/Apo60APqSbggyP
+	jy6kB9SzGRfbDbQcRkXQ1PcRTs2CCwvMLpDglrw/OG9BieC5C18C4NbbGZNnQ/+ATM=
+X-Google-Smtp-Source: AGHT+IHFUMZbxy2/RNA58+rbmrFxgard/FJeBDueJyRahdE9BuRrcf+Nu3HssY90NgcmF3JiiWGdZyfE5Xm8slA6aeE=
+X-Received: by 2002:a17:906:dc94:b0:b3b:eb5f:9f1a with SMTP id
+ a640c23a62f3a-b49c3933030mr76697066b.38.1759434353566; Thu, 02 Oct 2025
+ 12:45:53 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <tencent_13F1EDE0D6B7A44697F31AE274C8E664E908@qq.com>
-X-Rspamd-Queue-Id: 99AAF4412B
+References: <20250911135007.1275833-1-jens.wiklander@linaro.org>
+ <20250911135007.1275833-3-jens.wiklander@linaro.org> <20251002-shaggy-mastiff-of-elevation-c8e1f0@houat>
+In-Reply-To: <20251002-shaggy-mastiff-of-elevation-c8e1f0@houat>
+From: John Stultz <jstultz@google.com>
+Date: Thu, 2 Oct 2025 12:45:41 -0700
+X-Gm-Features: AS18NWBdha9LdZ51VIWM4Jj3n7QLoIkRAEzrxrFPUOsILr8-gV57tRYN27CBzqA
+Message-ID: <CANDhNCqS+WKhTWjeC7yBL+x4erK4S4bievTxdneaCu1haA8=hA@mail.gmail.com>
+To: Maxime Ripard <mripard@redhat.com>
+X-Rspamd-Queue-Id: EA2CE4466C
 X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.50 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
+X-Spamd-Result: default: False [-2.60 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20230601];
 	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
 	MIME_GOOD(-0.10)[text/plain];
-	TAGGED_FROM(0.00)[];
-	URIBL_BLOCKED(0.00)[mail-qk1-f177.google.com:rdns,mail-qk1-f177.google.com:helo,tardis.local:mid];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.218.46:from];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_TO(0.00)[qq.com];
-	TO_DN_SOME(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	RCVD_COUNT_ONE(0.00)[1];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[40];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[sk.com,oracle.com,gmail.com,kernel.org,google.com,linuxfoundation.org,lists.linaro.org,vivo.com,vger.kernel.org,arm.com,efficios.com,intel.com,suse.de,redhat.com,infradead.org,suse.com,linux-foundation.org,linaro.org,kzalloc.com,garyguo.net,protonmail.com];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
+	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[25];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	DNSWL_BLOCKED(0.00)[103.168.172.200:received];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FREEMAIL_ENVFROM(0.00)[gmail.com];
-	NEURAL_HAM(-0.00)[-1.000];
+	FREEMAIL_CC(0.00)[linaro.org,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.trustedfirmware.org,lists.infradead.org,nxp.com,gmail.com,mediatek.com,collabora.com,arm.com,google.com,amd.com,kernel.org,qti.qualcomm.com,ffwll.ch,fooishbar.org,oss.qualcomm.com];
 	TAGGED_RCPT(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	DWL_DNSWL_BLOCKED(0.00)[google.com:dkim];
 	MISSING_XM_UA(0.00)[];
-	DWL_DNSWL_BLOCKED(0.00)[gmail.com:dkim];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.222.177:from];
-	RCVD_IN_DNSWL_NONE(0.00)[209.85.222.177:from]
+	DKIM_TRACE(0.00)[google.com:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: ZSF53S6B5P7ICFAMKXE7RM3DN4S6SITC
-X-Message-ID-Hash: ZSF53S6B5P7ICFAMKXE7RM3DN4S6SITC
-X-MailFrom: boqun.feng@gmail.com
+Message-ID-Hash: UJZHOXDWI7VJTCYT4LCDF3E4AUNLHBVR
+X-Message-ID-Hash: UJZHOXDWI7VJTCYT4LCDF3E4AUNLHBVR
+X-MailFrom: jstultz@google.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: byungchul@sk.com, Liam.Howlett@oracle.com, amir73il@gmail.com, andi.shyti@kernel.org, andrii@kernel.org, bsegall@google.com, gregkh@linuxfoundation.org, linaro-mm-sig@lists.linaro.org, link@vivo.com, linux-kernel@vger.kernel.org, mark.rutland@arm.com, masahiroy@kernel.org, mathieu.desnoyers@efficios.com, matthew.brost@intel.com, max.byungchul.park@gmail.com, mcgrof@kernel.org, melissa.srw@gmail.com, mgorman@suse.de, mhocko@kernel.org, minchan@kernel.org, oleg@redhat.com, paulmck@kernel.org, penberg@kernel.org, peterz@infradead.org, petr.pavlu@suse.com, torvalds@linux-foundation.org, vincent.guittot@linaro.org, will@kernel.org, yeoreum.yun@arm.com, ysk@kzalloc.com, rust-for-linux@vger.kernel.org, ojeda@kernel.org, gary@garyguo.net, lossin@kernel.org, a.hindborg@kernel.org, aliceryhl@google.com, dakr@kernel.org, alex.gaynor@gmail.com, bjorn3_gh@protonmail.com
+CC: Jens Wiklander <jens.wiklander@linaro.org>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, op-tee@lists.trustedfirmware.org, linux-arm-kernel@lists.infradead.org, Olivier Masse <olivier.masse@nxp.com>, Thierry Reding <thierry.reding@gmail.com>, Yong Wu <yong.wu@mediatek.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, "T . J . Mercier" <tjmercier@google.com>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Sumit Garg <sumit.garg@kernel.org>, Matthias Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, azarrabi@qti.qualcomm.com, Simona Vetter <simona.vetter@ffwll.ch>, Daniel Stone <daniel@fooishbar.org>, Rouven Czerwinski <rouven.czerwinski@linaro.org>, robin.murphy@arm.com, Sumit Garg <sumit.garg@oss.qualcomm.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] rust: bindings: add `rust_helper_wait_for_completion` helper function
+Subject: [Linaro-mm-sig] Re: [PATCH v12 2/9] dma-buf: dma-heap: export declared functions
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZSF53S6B5P7ICFAMKXE7RM3DN4S6SITC/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UJZHOXDWI7VJTCYT4LCDF3E4AUNLHBVR/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Thu, Oct 02, 2025 at 10:06:17AM +0000, Guangbo Cui wrote:
-> > -extern void wait_for_completion(struct completion *);
-> > -extern void wait_for_completion_io(struct completion *);
-> > -extern int wait_for_completion_interruptible(struct completion *x);
-> > -extern int wait_for_completion_killable(struct completion *x);
-> > -extern int wait_for_completion_state(struct completion *x, unsigned int state);
-> > -extern unsigned long wait_for_completion_timeout(struct completion *x,
-> > +extern void __wait_for_completion(struct completion *);
-> > +extern void __wait_for_completion_io(struct completion *);
-> > +extern int __wait_for_completion_interruptible(struct completion *x);
-> > +extern int __wait_for_completion_killable(struct completion *x);
-> > +extern int __wait_for_completion_state(struct completion *x, unsigned int state);
-> > +extern unsigned long __wait_for_completion_timeout(struct completion *x,
-> >  						   unsigned long timeout);
-> > -extern unsigned long wait_for_completion_io_timeout(struct completion *x,
-> > +extern unsigned long __wait_for_completion_io_timeout(struct completion *x,
-> >  						    unsigned long timeout);
-> > -extern long wait_for_completion_interruptible_timeout(
-> > +extern long __wait_for_completion_interruptible_timeout(
-> >  	struct completion *x, unsigned long timeout);
-> > -extern long wait_for_completion_killable_timeout(
-> > +extern long __wait_for_completion_killable_timeout(
-> >  	struct completion *x, unsigned long timeout);
-> >  extern bool try_wait_for_completion(struct completion *x);
-> >  extern bool completion_done(struct completion *x);
-> > @@ -139,4 +134,79 @@ extern void complete(struct completion *);
-> >  extern void complete_on_current_cpu(struct completion *x);
-> >  extern void complete_all(struct completion *);
-> >  
-> > +#define wait_for_completion(x)						\
-> > +({									\
-> > +	sdt_might_sleep_start_timeout(NULL, -1L);			\
-> > +	__wait_for_completion(x);					\
-> > +	sdt_might_sleep_end();						\
-> > +})
-> 
-> The DEPT patch series changed `wait_for_completion` into a macro.
-> Because bindgen cannot handle function-like macros, this caused
-> Rust build errors. Add a helper function to fix it.
-> 
-> ```
-> error[E0425]: cannot find function `wait_for_completion` in crate `bindings`
->      --> rust/kernel/sync/completion.rs:110:28
->       |
->   110 |         unsafe { bindings::wait_for_completion(self.as_raw()) };
->       |                            ^^^^^^^^^^^^^^^^^^^ help: a function with a similar name exists: `__wait_for_completion`
->       |
->      ::: /root/linux/rust/bindings/bindings_generated.rs:33440:5
->       |
-> 33440 |     pub fn __wait_for_completion(arg1: *mut completion);
->       |     ---------------------------------------------------- similarly named function `__wait_for_completion` defined here
-> 
-> error: aborting due to 1 previous error
-> 
-> For more information about this error, try `rustc --explain E0425`.
-> ```
-> 
-
-I think Danilo already made it clear, please fold this the existing
-patch. Moreover, since this patchset doesn't adjust init_completion()
-from the Rust side, the result is Rust code will also use the same dept
-key for completion, which has to be fixed if dept wants to be in-tree.
-
-Regards,
-Boqun
-
-> Signed-off-by: Guangbo Cui <2407018371@qq.com>
-> ---
->  rust/helpers/completion.c | 5 +++++
->  1 file changed, 5 insertions(+)
-> 
-> diff --git a/rust/helpers/completion.c b/rust/helpers/completion.c
-> index b2443262a2ae..5bae5e749def 100644
-> --- a/rust/helpers/completion.c
-> +++ b/rust/helpers/completion.c
-> @@ -6,3 +6,8 @@ void rust_helper_init_completion(struct completion *x)
->  {
->  	init_completion(x);
->  }
-> +
-> +void rust_helper_wait_for_completion(struct completion *x)
-> +{
-> +	wait_for_completion(x);
-> +}
-> -- 
-> 2.43.0
-> 
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gVGh1LCBPY3QgMiwgMjAyNSBhdCAxMjo0N+KAr0FNIE1heGltZSBSaXBhcmQgPG1yaXBhcmRA
+cmVkaGF0LmNvbT4gd3JvdGU6DQo+IE9uIFRodSwgU2VwIDExLCAyMDI1IGF0IDAzOjQ5OjQzUE0g
+KzAyMDAsIEplbnMgV2lrbGFuZGVyIHdyb3RlOg0KPiA+IEV4cG9ydCB0aGUgZG1hLWJ1ZiBoZWFw
+IGZ1bmN0aW9ucyB0byBhbGxvdyB0aGVtIHRvIGJlIHVzZWQgYnkgdGhlIE9QLVRFRQ0KPiA+IGRy
+aXZlci4gVGhlIE9QLVRFRSBkcml2ZXIgd2FudHMgdG8gcmVnaXN0ZXIgYW5kIG1hbmFnZSBzcGVj
+aWZpYyBzZWN1cmUNCj4gPiBETUEgaGVhcHMgd2l0aCBpdC4NCj4gPg0KPiA+IFJldmlld2VkLWJ5
+OiBTdW1pdCBHYXJnIDxzdW1pdC5nYXJnQG9zcy5xdWFsY29tbS5jb20+DQo+ID4gUmV2aWV3ZWQt
+Ynk6IFQuSi4gTWVyY2llciA8dGptZXJjaWVyQGdvb2dsZS5jb20+DQo+ID4gQWNrZWQtYnk6IFN1
+bWl0IFNlbXdhbCA8c3VtaXQuc2Vtd2FsQGxpbmFyby5vcmc+DQo+ID4gU2lnbmVkLW9mZi1ieTog
+SmVucyBXaWtsYW5kZXIgPGplbnMud2lrbGFuZGVyQGxpbmFyby5vcmc+DQo+ID4gLS0tDQo+ID4g
+IGRyaXZlcnMvZG1hLWJ1Zi9kbWEtaGVhcC5jIHwgNCArKysrDQo+ID4gIDEgZmlsZSBjaGFuZ2Vk
+LCA0IGluc2VydGlvbnMoKykNCj4gPg0KPiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2RtYS1idWYv
+ZG1hLWhlYXAuYyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtaGVhcC5jDQo+ID4gaW5kZXggM2NiZTg3
+ZDRhNDY0Li44YWI0OTkyNGY4YjcgMTAwNjQ0DQo+ID4gLS0tIGEvZHJpdmVycy9kbWEtYnVmL2Rt
+YS1oZWFwLmMNCj4gPiArKysgYi9kcml2ZXJzL2RtYS1idWYvZG1hLWhlYXAuYw0KPiA+IEBAIC0x
+MSw2ICsxMSw3IEBADQo+ID4gICNpbmNsdWRlIDxsaW51eC9kbWEtYnVmLmg+DQo+ID4gICNpbmNs
+dWRlIDxsaW51eC9kbWEtaGVhcC5oPg0KPiA+ICAjaW5jbHVkZSA8bGludXgvZXJyLmg+DQo+ID4g
+KyNpbmNsdWRlIDxsaW51eC9leHBvcnQuaD4NCj4gPiAgI2luY2x1ZGUgPGxpbnV4L2xpc3QuaD4N
+Cj4gPiAgI2luY2x1ZGUgPGxpbnV4L25vc3BlYy5oPg0KPiA+ICAjaW5jbHVkZSA8bGludXgvc3lz
+Y2FsbHMuaD4NCj4gPiBAQCAtMjAyLDYgKzIwMyw3IEBAIHZvaWQgKmRtYV9oZWFwX2dldF9kcnZk
+YXRhKHN0cnVjdCBkbWFfaGVhcCAqaGVhcCkNCj4gPiAgew0KPiA+ICAgICAgIHJldHVybiBoZWFw
+LT5wcml2Ow0KPiA+ICB9DQo+ID4gK0VYUE9SVF9TWU1CT0xfTlNfR1BMKGRtYV9oZWFwX2dldF9k
+cnZkYXRhLCAiRE1BX0JVRl9IRUFQIik7DQo+ID4NCj4gPiAgLyoqDQo+ID4gICAqIGRtYV9oZWFw
+X2dldF9uYW1lIC0gZ2V0IGhlYXAgbmFtZQ0KPiA+IEBAIC0yMTQsNiArMjE2LDcgQEAgY29uc3Qg
+Y2hhciAqZG1hX2hlYXBfZ2V0X25hbWUoc3RydWN0IGRtYV9oZWFwICpoZWFwKQ0KPiA+ICB7DQo+
+ID4gICAgICAgcmV0dXJuIGhlYXAtPm5hbWU7DQo+ID4gIH0NCj4gPiArRVhQT1JUX1NZTUJPTF9O
+U19HUEwoZG1hX2hlYXBfZ2V0X25hbWUsICJETUFfQlVGX0hFQVAiKTsNCj4gPg0KPiA+ICAvKioN
+Cj4gPiAgICogZG1hX2hlYXBfYWRkIC0gYWRkcyBhIGhlYXAgdG8gZG1hYnVmIGhlYXBzDQo+ID4g
+QEAgLTMwMyw2ICszMDYsNyBAQCBzdHJ1Y3QgZG1hX2hlYXAgKmRtYV9oZWFwX2FkZChjb25zdCBz
+dHJ1Y3QgZG1hX2hlYXBfZXhwb3J0X2luZm8gKmV4cF9pbmZvKQ0KPiA+ICAgICAgIGtmcmVlKGhl
+YXApOw0KPiA+ICAgICAgIHJldHVybiBlcnJfcmV0Ow0KPiA+ICB9DQo+ID4gK0VYUE9SVF9TWU1C
+T0xfTlNfR1BMKGRtYV9oZWFwX2FkZCwgIkRNQV9CVUZfSEVBUCIpOw0KPg0KPiBJdCdzIG5vdCBj
+bGVhciB0byBtZSB3aHkgd2Ugd291bGQgbmVlZCB0byBleHBvcnQgdGhvc2Ugc3ltYm9scy4NCj4N
+Cj4gQXMgZmFyIGFzIEkga25vdywgaGVhcHMgY2Fubm90IGJlIHJlbW92ZWQsIGFuZCBjb21waWxp
+bmcgdGhlbSBhcyBtb2R1bGUNCj4gbWVhbnMgdGhhdCB3ZSB3b3VsZCBiZSBhYmxlIHRvIHJlbW92
+ZSB0aGVtLg0KPg0KPiBOb3csIGlmIHdlIGRvbid0IGV4cGVjdCB0aGUgdXNlcnMgdG8gYmUgY29t
+cGlsZWQgYXMgbW9kdWxlcywgdGhlbiB3ZQ0KPiBkb24ndCBuZWVkIHRvIGV4cG9ydCB0aGVzZSBz
+eW1ib2xzIGF0IGFsbC4NCj4NCj4gQW0gSSBtaXNzaW5nIHNvbWV0aGluZz8NCg0KRm9yIHRoaW5n
+cyBsaWtlIGRpc3RybyBrZXJuZWxzIChvciBpbiBBbmRyb2lkJ3MgY2FzZSwgdGhlIEdLSSksDQp0
+aGVyZSdzIGEgYmVuZWZpdCBmb3IgbW9kdWxlcyB0aGF0IGNhbiBiZSBsb2FkZWQgcGVybWFuZW50
+bHkgKG5vdA0KaGF2aW5nIGEgbW9kdWxlX2V4aXQgaG9vaykuDQpPbmUgZG9lc24ndCBoYXZlIHRv
+IGJsb2F0IHRoZSBiYXNlIGtlcm5lbCBpbWFnZS9tZW1vcnkgdXNhZ2UgZm9yDQpldmVyeW9uZSwg
+d2hpbGUgc3RpbGwgbm90IGhhdmluZyB0byBuZWNlc3NhcmlseSBkZWFsIHdpdGgNCmNvbXBsaWNh
+dGlvbnMgZnJvbSBtb2R1bGUgdW5sb2FkaW5nIGlzc3Vlcy4NCg0KdGhhbmtzDQotam9obg0KX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNp
+ZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vi
+c2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8u
+b3JnCg==
