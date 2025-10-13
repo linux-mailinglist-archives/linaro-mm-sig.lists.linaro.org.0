@@ -2,37 +2,37 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8507EBD215D
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 13 Oct 2025 10:35:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C902CBD2174
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 13 Oct 2025 10:35:53 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9FD7946347
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 13 Oct 2025 08:35:38 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E7E9946062
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 13 Oct 2025 08:35:52 +0000 (UTC)
 Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
-	by lists.linaro.org (Postfix) with ESMTPS id BCFAC4607D
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 13 Oct 2025 08:35:24 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 6BC3E46063
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 13 Oct 2025 08:35:27 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=PoKMEbD7;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=ar36uzXP;
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=mripard@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by tor.source.kernel.org (Postfix) with ESMTP id 3BDDE6117B;
-	Mon, 13 Oct 2025 08:35:24 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8B2A3C4CEFE;
-	Mon, 13 Oct 2025 08:35:23 +0000 (UTC)
+	by tor.source.kernel.org (Postfix) with ESMTP id 2813960273;
+	Mon, 13 Oct 2025 08:35:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 76092C116B1;
+	Mon, 13 Oct 2025 08:35:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1760344523;
-	bh=LajQOzk5GurvfMLYf/AkXrRyTeYx/Rv5O6zLtZAh0eM=;
+	s=k20201202; t=1760344526;
+	bh=lUw9GHG4vdm6ouZncuqfKqupuE9bzmklFJzA4Z/pqzg=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=PoKMEbD7W7BvsFwuUR4NZOpmLGVqH3UTQkCAWknoduVynmpAKzMHMwUWeyKxWahzb
-	 x09EBSmy88L4bwEun0kHl+ctSTqkbW2jCEA+nusK/xSke2aerDalu063VBP0Ic7OKR
-	 O0ryxoWQ9gUHfI9uRrQ40KcRHD1KsXfQayvlXHpmPwiIQHfCD0KhzzgtMXs8Jr9YTn
-	 pS2xw3/MRz+Xvd2GQiCsOup591MTBB4UDDAMxh6WCFbVYnfK7Oik9PQRcZQOUFuO0R
-	 CJ/E+mK3zQ+jWuBLwJHtsyGESV8nYXJWUDhP7KZwX+97oP8XCHDTyJ+ithGbwrCU9k
-	 y1ffjnDqAhDRA==
+	b=ar36uzXPghn/6XpfCNjCmvOdqTHBYAt0yZtSKxOeTfb8iSPc6AW078/YPCytyh/NK
+	 uqSMbumS5lFRZDZuunYla3fzj49PpXjYHIwGE9CAtoauqqc75fA/JiXsUpPOjODKSQ
+	 bXSNYablIiFUbEY2p3OmDDJagf7NxlJf+z+Sf3ZNC2fqzloEFNlluP8+qv1eDZ9OCN
+	 VndYhufDiZ594L2Tk2lV/tWkgudaAtunB8UDwaIaxf1Xb2oqxQqYY0NKXzXVCnoriT
+	 LgPfMcZKDgKDCmRJcFocHjSllRSL7zm1CXynLnqk7XZHQjJuUq3Juq8oSOEQzLvLwh
+	 2Vcoh3qxPMNrg==
 From: Maxime Ripard <mripard@kernel.org>
-Date: Mon, 13 Oct 2025 10:35:16 +0200
+Date: Mon, 13 Oct 2025 10:35:17 +0200
 MIME-Version: 1.0
-Message-Id: <20251013-dma-buf-ecc-heap-v8-1-04ce150ea3d9@kernel.org>
+Message-Id: <20251013-dma-buf-ecc-heap-v8-2-04ce150ea3d9@kernel.org>
 References: <20251013-dma-buf-ecc-heap-v8-0-04ce150ea3d9@kernel.org>
 In-Reply-To: <20251013-dma-buf-ecc-heap-v8-0-04ce150ea3d9@kernel.org>
 To: Sumit Semwal <sumit.semwal@linaro.org>,
@@ -43,10 +43,10 @@ To: Sumit Semwal <sumit.semwal@linaro.org>,
  Marek Szyprowski <m.szyprowski@samsung.com>,
  Robin Murphy <robin.murphy@arm.com>
 X-Mailer: b4 0.14.2
-X-Rspamd-Queue-Id: BCFAC4607D
-X-Spamd-Bar: ---
+X-Rspamd-Queue-Id: 6BC3E46063
+X-Spamd-Bar: ----
 X-Spamd-Result: default: False [-4.00 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
+	BAYES_HAM(-3.00)[100.00%];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_SPF_ALLOW(-0.20)[+ip4:172.105.4.254:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
@@ -68,17 +68,17 @@ X-Spamd-Result: default: False [-4.00 / 15.00];
 	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: BGWSAYYSYT7UEDV2W6YQW6VXM74HKQEM
-X-Message-ID-Hash: BGWSAYYSYT7UEDV2W6YQW6VXM74HKQEM
+Message-ID-Hash: U6734XS5LCXJVI5JVVR576VZ6FDFA7ZT
+X-Message-ID-Hash: U6734XS5LCXJVI5JVVR576VZ6FDFA7ZT
 X-MailFrom: mripard@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: Andrew Davis <afd@ti.com>, Jared Kangas <jkangas@redhat.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, iommu@lists.linux.dev, Maxime Ripard <mripard@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v8 1/5] doc: dma-buf: List the heaps by name
+Subject: [Linaro-mm-sig] [PATCH v8 2/5] dma-buf: heaps: cma: Register list of CMA regions at boot
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/BGWSAYYSYT7UEDV2W6YQW6VXM74HKQEM/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/U6734XS5LCXJVI5JVVR576VZ6FDFA7ZT/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -88,52 +88,105 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Since we're going to introduce multiple instances of the CMA heap
-driver, there's no single CMA heap anymore.
+In order to create a CMA heap instance for each CMA region found in the
+system, we need to register each of these instances.
 
-Let's use the heap name instead to differentiate between all the heaps
-available in the system.
+While it would appear trivial, the CMA regions are created super early
+in the kernel boot process, before most of the subsystems are
+initialized. Thus, we can't just create an exported function to create a
+heap from the CMA region being initialized.
 
-While we're at it, let's also rework the backward compatibility part to
-make it easier to amend later on.
+What we can do however is create a two-step process, where we collect
+all the CMA regions into an array early on, and then when we initialize
+the heaps we iterate over that array and create the heaps from the CMA
+regions we collected.
 
 Reviewed-by: T.J. Mercier <tjmercier@google.com>
 Signed-off-by: Maxime Ripard <mripard@kernel.org>
 ---
- Documentation/userspace-api/dma-buf-heaps.rst | 21 +++++++++++----------
- 1 file changed, 11 insertions(+), 10 deletions(-)
+ MAINTAINERS                       |  1 +
+ drivers/dma-buf/heaps/cma_heap.c  | 14 ++++++++++++++
+ include/linux/dma-buf/heaps/cma.h | 16 ++++++++++++++++
+ 3 files changed, 31 insertions(+)
 
-diff --git a/Documentation/userspace-api/dma-buf-heaps.rst b/Documentation/userspace-api/dma-buf-heaps.rst
-index 1dfe5e7acd5a3c674323775176d81944147e40c0..17bf6829efd7963bc849765db54d327644e8c395 100644
---- a/Documentation/userspace-api/dma-buf-heaps.rst
-+++ b/Documentation/userspace-api/dma-buf-heaps.rst
-@@ -14,15 +14,16 @@ Heaps
- A heap represents a specific allocator. The Linux kernel currently supports the
- following heaps:
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 46126ce2f968e4f9260263f1574ee29f5ff0de1c..c4edcc29368eec722432a85ac5c420a08c2680ea 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -7306,10 +7306,11 @@ T:	git https://gitlab.freedesktop.org/drm/misc/kernel.git
+ F:	Documentation/driver-api/dma-buf.rst
+ F:	Documentation/userspace-api/dma-buf-alloc-exchange.rst
+ F:	drivers/dma-buf/
+ F:	include/linux/*fence.h
+ F:	include/linux/dma-buf.h
++F:	include/linux/dma-buf/
+ F:	include/linux/dma-resv.h
+ K:	\bdma_(?:buf|fence|resv)\b
  
-  - The ``system`` heap allocates virtually contiguous, cacheable, buffers.
+ DMA GENERIC OFFLOAD ENGINE SUBSYSTEM
+ M:	Vinod Koul <vkoul@kernel.org>
+diff --git a/drivers/dma-buf/heaps/cma_heap.c b/drivers/dma-buf/heaps/cma_heap.c
+index 0df007111975447d555714d61ead9699287fd65a..2a901af635ed76cdb085915c03258c235e302792 100644
+--- a/drivers/dma-buf/heaps/cma_heap.c
++++ b/drivers/dma-buf/heaps/cma_heap.c
+@@ -12,10 +12,11 @@
  
-- - The ``cma`` heap allocates physically contiguous, cacheable,
--   buffers. Only present if a CMA region is present. Such a region is
--   usually created either through the kernel commandline through the
--   ``cma`` parameter, a memory region Device-Tree node with the
--   ``linux,cma-default`` property set, or through the ``CMA_SIZE_MBYTES`` or
--   ``CMA_SIZE_PERCENTAGE`` Kconfig options. The heap's name in devtmpfs is
--   ``default_cma_region``. For backwards compatibility, when the
--   ``DMABUF_HEAPS_CMA_LEGACY`` Kconfig option is set, a duplicate node is
--   created following legacy naming conventions; the legacy name might be
--   ``reserved``, ``linux,cma``, or ``default-pool``.
-+ - The ``default_cma_region`` heap allocates physically contiguous,
-+   cacheable, buffers. Only present if a CMA region is present. Such a
-+   region is usually created either through the kernel commandline
-+   through the ``cma`` parameter, a memory region Device-Tree node with
-+   the ``linux,cma-default`` property set, or through the
-+   ``CMA_SIZE_MBYTES`` or ``CMA_SIZE_PERCENTAGE`` Kconfig options. Prior
-+   to Linux 6.17, its name wasn't stable and could be called
-+   ``reserved``, ``linux,cma``, or ``default-pool``, depending on the
-+   platform. From Linux 6.17 onwards, the creation of these heaps is
-+   controlled through the ``DMABUF_HEAPS_CMA_LEGACY`` Kconfig option for
-+   backwards compatibility.
+ #define pr_fmt(fmt) "cma_heap: " fmt
+ 
+ #include <linux/cma.h>
+ #include <linux/dma-buf.h>
++#include <linux/dma-buf/heaps/cma.h>
+ #include <linux/dma-heap.h>
+ #include <linux/dma-map-ops.h>
+ #include <linux/err.h>
+ #include <linux/highmem.h>
+ #include <linux/io.h>
+@@ -25,10 +26,23 @@
+ #include <linux/slab.h>
+ #include <linux/vmalloc.h>
+ 
+ #define DEFAULT_CMA_NAME "default_cma_region"
+ 
++static struct cma *dma_areas[MAX_CMA_AREAS] __initdata;
++static unsigned int dma_areas_num __initdata;
++
++int __init dma_heap_cma_register_heap(struct cma *cma)
++{
++	if (dma_areas_num >= ARRAY_SIZE(dma_areas))
++		return -EINVAL;
++
++	dma_areas[dma_areas_num++] = cma;
++
++	return 0;
++}
++
+ struct cma_heap {
+ 	struct dma_heap *heap;
+ 	struct cma *cma;
+ };
+ 
+diff --git a/include/linux/dma-buf/heaps/cma.h b/include/linux/dma-buf/heaps/cma.h
+new file mode 100644
+index 0000000000000000000000000000000000000000..e751479e21e703e24a5f799b4a7fc8bd0df3c1c4
+--- /dev/null
++++ b/include/linux/dma-buf/heaps/cma.h
+@@ -0,0 +1,16 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++#ifndef DMA_BUF_HEAP_CMA_H_
++#define DMA_BUF_HEAP_CMA_H_
++
++struct cma;
++
++#ifdef CONFIG_DMABUF_HEAPS_CMA
++int dma_heap_cma_register_heap(struct cma *cma);
++#else
++static inline int dma_heap_cma_register_heap(struct cma *cma)
++{
++	return 0;
++}
++#endif // CONFIG_DMABUF_HEAPS_CMA
++
++#endif // DMA_BUF_HEAP_CMA_H_
 
 -- 
 2.51.0
