@@ -2,244 +2,260 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 64509BD21AD
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 13 Oct 2025 10:36:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 792B5BD39CF
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 13 Oct 2025 16:40:04 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 86F36441F9
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 13 Oct 2025 08:36:41 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 673564634D
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 13 Oct 2025 08:35:36 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3D14845523
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 13 Oct 2025 14:40:03 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.9])
+	by lists.linaro.org (Postfix) with ESMTPS id E0F8E445D6
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 13 Oct 2025 14:39:59 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=Sl+YtXJN;
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=mripard@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id E046F4337C;
-	Mon, 13 Oct 2025 08:35:35 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6ABFAC116B1;
-	Mon, 13 Oct 2025 08:35:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1760344535;
-	bh=KLq6UV149iWlcbOb9BAgyPNNCpzPtwQ5QaRQCIh5ebk=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=Sl+YtXJNxiPzUTKnj5nq7CzD43piYS7wBecQAXfiXUxaN94nXtUgXkTFnKXYLWHJ2
-	 //ttm99e5QkvlcJSSlRjvk2r9KxeHpidc/j/xyNP4xZdsmAaLg+e2Cf7s9AtBqnO3C
-	 pSDXZGssVOarVlUO1MmNkp7PO/mQoofCC3ur/DX1n3LkOXiLEhvBgUevaaD7in4059
-	 rbgkE5z1rRx6XiG2IjkZty8gHd8FPYtqHixT7yFWMWDhuJ/iXCAc4S/eMw8KQlxMFc
-	 oFSXtPJSwsYIiXrcFSRAfN4eLWO4bJ0rAXdSg5aSjTmIhlPo3ZQk+0ZGJmOjZSjRzM
-	 tWecRHFZNPHQg==
-From: Maxime Ripard <mripard@kernel.org>
-Date: Mon, 13 Oct 2025 10:35:20 +0200
+	dkim=pass header.d=intel.com header.s=Intel header.b=XqzQ45do;
+	dmarc=pass (policy=none) header.from=intel.com;
+	arc=pass ("microsoft.com:s=arcselector10001:i=1");
+	spf=pass (lists.linaro.org: domain of michael.j.ruhl@intel.com designates 192.198.163.9 as permitted sender) smtp.mailfrom=michael.j.ruhl@intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1760366400; x=1791902400;
+  h=from:to:subject:date:message-id:references:in-reply-to:
+   content-transfer-encoding:mime-version;
+  bh=KL1ikxoBMshQvOSpp4AvGOGEfdNVBvtG+8McHdS4JT8=;
+  b=XqzQ45doTX/tKmF3yV5H/lXYMvmC6r+riQrK8VhY9Zqh2Dkd/q1DxFnP
+   sfa8cxZZ5RkKzTxLzpr2EPsGCweU9vqpbBLBR/F/gXSAq9SbrJ6wWLIpc
+   PTjGCHRKoFnnxZIPznsh2hMYzCVOO1u8Cf/6guUH+n2c8bfSIfujZ23VI
+   6yes+9rp6mkxEjXL51ce1tUv6qCoYgZhjk/7j1RQC3OO38Bm+IU6ZjOPJ
+   G0FdAb1ULG4EycFYt+X3CdLyzvdml0qQv6CH0/2jKeEMEIYvPalmWxNDr
+   /7kgTLOeeixw4Q2tk+DDl38knqgb8ogjqfYzWWHOmvB88VQ+t6o3TTwTu
+   Q==;
+X-CSE-ConnectionGUID: 3S0DrtfsQPSER70gAIAgPg==
+X-CSE-MsgGUID: Y4Hk/qrlSIiCSne0pORe7w==
+X-IronPort-AV: E=McAfee;i="6800,10657,11581"; a="73188099"
+X-IronPort-AV: E=Sophos;i="6.19,225,1754982000";
+   d="scan'208";a="73188099"
+Received: from orviesa005.jf.intel.com ([10.64.159.145])
+  by fmvoesa103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Oct 2025 07:39:59 -0700
+X-CSE-ConnectionGUID: vTYb3ICqR0CTMCGbM4A89w==
+X-CSE-MsgGUID: 9MMy/AAhQuSTbSH+57nrTg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.19,225,1754982000";
+   d="scan'208";a="186699699"
+Received: from fmsmsx901.amr.corp.intel.com ([10.18.126.90])
+  by orviesa005.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Oct 2025 07:39:58 -0700
+Received: from FMSMSX901.amr.corp.intel.com (10.18.126.90) by
+ fmsmsx901.amr.corp.intel.com (10.18.126.90) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.27; Mon, 13 Oct 2025 07:39:57 -0700
+Received: from fmsedg901.ED.cps.intel.com (10.1.192.143) by
+ FMSMSX901.amr.corp.intel.com (10.18.126.90) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.27 via Frontend Transport; Mon, 13 Oct 2025 07:39:57 -0700
+Received: from SA9PR02CU001.outbound.protection.outlook.com (40.93.196.68) by
+ edgegateway.intel.com (192.55.55.81) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.27; Mon, 13 Oct 2025 07:39:57 -0700
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=JrRvoLErYy0CnwP6ij+stT8Dh89O3Xi3G4Yun23HJO6FYJx+NM+Z6UB6oj6AUnEUABqiTJM3H6KVTDahut73aQHacNtO+Q9kI0DA/v1RwAFwAsyOij3NjN1fIVP1441fi02cxiR8jCRqEbf9GeYCVTECKGemVa0AtiIyx13ZVxQ+UfBXpJhRNvdYPajgAb9haVS2EE7ikn0R78v7G3IZFY3/S308BBk7ZkkwHYQTaS5S+twdlhhs5vHoNOVQj9LQptOphatCrwAhpTWlXLDe+SBCkuQO604IL9fs9cYKrJQbZODCzm3a6QPX55ahG6kc5Wm9lngY2vpo1UXrEZdPeQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=KL1ikxoBMshQvOSpp4AvGOGEfdNVBvtG+8McHdS4JT8=;
+ b=bBLMp4aglQoy5vX362DaI1J8Hpplgc7XP6E/s9j1/kzCxcx7EC6L//TM8MABc/uArT6q7YaJwfSZObs9/ZtrC3eVCxpgNZT2aMrUpc1VxveMd/IfdpE9B+fD3Z2xp6/KjY2FqD58YQ4E8cpV8JatqPynw+BYAuBuwyLytyXKpI5PMolyJvZPud7YYJu3SsCzUO1+1MI6jHWEThVVPOt6PFdyfn3CZ5GbLBrBhtexamS/f7IJJWTxTb6mr39C36cPYK7HIlt5msgx+iMhAyDAEN76fjY5KOVW9eEGmKg1fYzhNnXW3pNe4bRI5s7svL4OXvAmQvP1urzjkVu3iS+LQg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Received: from IA1PR11MB6418.namprd11.prod.outlook.com (2603:10b6:208:3aa::18)
+ by LV3PR11MB8765.namprd11.prod.outlook.com (2603:10b6:408:21d::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9203.12; Mon, 13 Oct
+ 2025 14:39:50 +0000
+Received: from IA1PR11MB6418.namprd11.prod.outlook.com
+ ([fe80::68b8:5391:865e:a83]) by IA1PR11MB6418.namprd11.prod.outlook.com
+ ([fe80::68b8:5391:865e:a83%2]) with mapi id 15.20.9203.009; Mon, 13 Oct 2025
+ 14:39:50 +0000
+From: "Ruhl, Michael J" <michael.j.ruhl@intel.com>
+To: =?utf-8?B?Q2hyaXN0aWFuIEvDtm5pZw==?= <ckoenig.leichtzumerken@gmail.com>,
+	"sumit.semwal@linaro.org" <sumit.semwal@linaro.org>,
+	"linux-media@vger.kernel.org" <linux-media@vger.kernel.org>,
+	"dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+	"linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>,
+	"simona.vetter@ffwll.ch" <simona.vetter@ffwll.ch>
+Thread-Topic: [PATCH 1/2] dma-buf: replace "#if" with just "if"
+Thread-Index: AQHcNsfGQXY92IIBjEudozjkjKXfs7TALtEQ
+Date: Mon, 13 Oct 2025 14:39:50 +0000
+Message-ID: <IA1PR11MB6418179599E7B35F9040C7F2C1EAA@IA1PR11MB6418.namprd11.prod.outlook.com>
+References: <20251006134713.1846-1-christian.koenig@amd.com>
+In-Reply-To: <20251006134713.1846-1-christian.koenig@amd.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: IA1PR11MB6418:EE_|LV3PR11MB8765:EE_
+x-ms-office365-filtering-correlation-id: 1d936349-add9-4ca3-4fdd-08de0a665d57
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;ARA:13230040|366016|1800799024|376014|38070700021;
+x-microsoft-antispam-message-info: =?utf-8?B?TWhYUFRUWktxRHhqempiN1B1d2UzWWFncU5IeEtXbVBEcEhLem9NSityL1E2?=
+ =?utf-8?B?Y2FvNkx5RFMrQ2tYRmpWcjlwRmp2cW1rWnkrdS9BWUsyQ2tGWHlxU3VlWGJM?=
+ =?utf-8?B?aWE0QTFzeVJuNGZ4WFVtdC9YN2k4RkJEeWhPYW40SzR6MGhnWTV0QklsQ1Y5?=
+ =?utf-8?B?OFV6ZEhGeFoxMWNBQTkyK1IySGNOV09NS2x4RHJPS1J0dGltTTgxbFRvNW9s?=
+ =?utf-8?B?S2ZSdFlIU0JOMDNxakFEdmxDRkI2cXBiVmxvS3BubzZTNmdUdWJ2NHlDRHJZ?=
+ =?utf-8?B?REwrRXJmeXk1QzRCck9TNzBsbUdGR1BobmRZWlFZcXRRNCtMOEVHWi9ZdEN6?=
+ =?utf-8?B?ZEVRa0U5SlBrdWtzeWRjQllWbS91Y295bFpXeWFyZ3VKdlUrM29CZE9wSnVP?=
+ =?utf-8?B?QlZsNy8vV2p4b2EzQktSWmxoNVNnY1RPTVc3Y2lrZGhvb2lDNVJYZ0R4YXJp?=
+ =?utf-8?B?MXFSMFdnemZqbWpkSmRmbElvdWFVdzBGZzNGRC8yYVpKMjNTZG1EN0dKd2M5?=
+ =?utf-8?B?UVlKcXhlc0Rib01qUXNZcEZMSUpBbmtUdTZhM1BrREQrL2d2cnFNaTFLUmFx?=
+ =?utf-8?B?MzltOXdGLytQZDZjc0R3Tk5raVovbXBadFdpdStBek94V1dwdTE5TTV2aGxt?=
+ =?utf-8?B?bElHaXlBS3JueUxhYkFZdDlRS3dITVlnSTg5YzRMU3NWYVYrREtEQUowN0pH?=
+ =?utf-8?B?N2JqVU9qeGtwQXB6RCtrU2IwMHB2UDVYVmhKT21IWEw1MUcrRDRaUWFmanY1?=
+ =?utf-8?B?eEszRlpuTUhZckw3WWY3amV0Z3FGNDhnUHphcU9BUS9DVmpKUy9FODFBYXk0?=
+ =?utf-8?B?Y0JUWTRoTEc5SXY5Z0xTSk9BcStPaGorMm1leWEzcEY2Y1RGOFRUaTI5NUxq?=
+ =?utf-8?B?YmVGYUsxc09PSlJNTTA5cDJQMHBiTEFwcjVOc1ZTenc5TGJJNFlKS2VoU1JO?=
+ =?utf-8?B?WGc2RW5rNkwrTHBVSWdHK2RtRHRzVitKbmZpaTNidEZLTFQ5V01raDd6QUtl?=
+ =?utf-8?B?ZVlmTjYybHJnVWpuQXlDQlQ0anA0dWZDY1ljY25sbk9kZ0JRODV0V1R2OFRl?=
+ =?utf-8?B?TWxwQjFJWDZ4TzA0UWRoanlhVDFZc29QNFZaTVpMd0F4UU9MUzZRaEUyMUJX?=
+ =?utf-8?B?RlQybU96TmhaVnYyUFZnSURwdXdCZk9XZFJjNmI3NVlYWlVZZ3BOWjFBbk91?=
+ =?utf-8?B?MzdWaldNRzRKNkpkMXovNHJmZndrTS9HTjNqK1NLeThWeUZWbkxrTU5GMXJT?=
+ =?utf-8?B?eFZhbXVpOXlsOE43N2lHYk9PWE9ITHZsbllaZ05BNXFJbXVRL1JTMWJvTDE2?=
+ =?utf-8?B?V0Zmb2g1bE9Ka24xTTRuUkpCVlpNTmtIU3JhYlBoRUZEbmJONHVTeERocFJx?=
+ =?utf-8?B?YkdRN0t2OUpBY3c1S2sybHBqaWhjUVJKekNDdHVUcTRzMERWNXdqMVZ4UUxo?=
+ =?utf-8?B?bjZibk10aXZUZHJFSmIxdmMvVUxGbFJZOTdKSmJxdTJBcHZNbyszZUFOSE9D?=
+ =?utf-8?B?RWVJSDhMOGxjOVcrR3gzZ2dQbTFHckFldlhRb0Nib2tieWZzOWhCMnh1cHNE?=
+ =?utf-8?B?UU1EOVpHYWxjb080U3huK2czM0pkZ1N1aVZ4a3ByRkJlNTJYdkN4L0tNUWts?=
+ =?utf-8?B?WnplZ3JNQ1hrUkI0UEhZeUo0YWNDaWtrQ0M1TDl1OTZSLzh4aW4zWk9taHFN?=
+ =?utf-8?B?bzlDcnplVGF5c01UMGRzRi9waUtMZjdUZWRZTE5ObjA3SEVMTHo4Z1BWVmUx?=
+ =?utf-8?B?OVo5OXA1UzcyYWFGaWFuNU1OeFl5clZwUVkzeFlkdk03ODFPZzkzN1daNGg2?=
+ =?utf-8?B?dUF0S2NHQW9yTFJqYlNZd2dSQUxiSWpZTGhpZkloQ2hUL2VCVlNUVFpXTlI3?=
+ =?utf-8?B?Q2RsM3VnQTdmZWk2di9KQ3BMbzc4Wk5sM0xLTXlKMGVjOEJYZzFKamxEeUpi?=
+ =?utf-8?B?eVU2cTB4U0loMmxuQVRvWHJYU3poSVFySHZsWE5ZOG41Z0FYaCtzcEo4Vmlw?=
+ =?utf-8?B?b1psb1V3aThtSzZPZWdrTG43UUJVbnY0ZXZON01WZW44cG5ZYzZpalBXOEhk?=
+ =?utf-8?Q?gd4WuV?=
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA1PR11MB6418.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(38070700021);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?Vk9tK01LSXc5ZlpHcVNJczlwRlQ3TGtmTkFJZThhdnAvVjBHL1Zra0JFSy9i?=
+ =?utf-8?B?Y1JlVmZ2aVVLVDduak1vUnBVTFVyd2tEZVFvcEgrNmIwYW40ZXFRWkJ0VTN4?=
+ =?utf-8?B?MUY1bnI0YWRTeWxGcVg3Zi9zYVRsVnVVZUQwMmZIYkFGaFpKbUpyc1lBODJo?=
+ =?utf-8?B?a0JLTFpvejc5ckxjUDZGY2hXZVAwUU5GNEQ5ak9lRXI3NHkwaEVMZ3BtU09Y?=
+ =?utf-8?B?WWsvTmZpZW1EOXlINkZMcEpuWnBsdnFUWUdmckF2aTZnNXRIK012K01JOFFX?=
+ =?utf-8?B?a25YaHREUGRmR0U5R3FkTld6SEpmWFRINjVRWFdPNDRFUWxBMEYvMDRlWW1C?=
+ =?utf-8?B?elp5ODFVWER2Y2lWbGRNVU92T2FKc1lXdFZGRDNZZTFpdWpNZ1lqZExQSGxs?=
+ =?utf-8?B?SU5JWUdhRTdxdkZXc1dRQlZaWFF5UWpOY3FUdUVvZFh3c1BkYXArd3JDVk9R?=
+ =?utf-8?B?TjVZc1UrNGcrSllBdG5neklmMUJQejNDMGxwOHZMdEhpUlpWb2c0ampqQWFD?=
+ =?utf-8?B?clQvME16T0IvNmRRZmI1MnVhdklmdG9ES2h0VmRUdDFXL1hkWmRCd2FkUXpt?=
+ =?utf-8?B?aGVmVFY1dDJRS1FFNk9NWGZlQnVpTjVkZUhNRGhRTStDYVJvVWR1YmNUdHRu?=
+ =?utf-8?B?MXFBVG5COUEvN3BJMFZMdlNnNlNpaFhKV2dwdU14bndETWg4SUJRWGdoblgw?=
+ =?utf-8?B?ZStWMzFEZmNoSjBybHVhSTNaNDJSTHByanRScVR0MTRMeW5ILzczNTlnS1BV?=
+ =?utf-8?B?N3VUV0l4V052R2o1clQrcjY3Z3JVNGhORXZCbDdUcFZxM0gvVVJQb24zbzZ5?=
+ =?utf-8?B?YWFVZ0RUU3llVTM1a0xsNGwrTll2d3ZHdDdxaW52SmJZbld4bTgxU2ZHSndG?=
+ =?utf-8?B?b1ZwREhaRjI0WUFva1ZZL29mREUwZDQ2cTJVZ2lMODZuTEJTYkNhV1pRa0tI?=
+ =?utf-8?B?ZGY0MEJoRE9XV0pGOW0wT0FGelVaSmVkRWEzRnEzdmUyTGg4TXpMbDlKZXRU?=
+ =?utf-8?B?dXlVQjlIV3ZGdEwwd0JZUDJkRHZreHBaVmhxcEs4SzRMRHQ5NnlNVitKOUhj?=
+ =?utf-8?B?YXZ3MXVVVXgrOWR4cjV2SUhHaFZZVE5ZTlFFL0ZXaEovRXJ4d09ZMi9HaGFZ?=
+ =?utf-8?B?dXQ4cCt1dlNxVFhOYVRKbW05Vy9IRnRYbW53QUV3SnhWVTdjaEgwbWdERU4r?=
+ =?utf-8?B?RE5HSHZHRjVsTFpibGZNUS9VK2VNTlQrTy9LT3ZjcTJQK3VEUlk0WGNlZFkw?=
+ =?utf-8?B?dGVsWGpQemxIcy9Db0pmUDlWVittd2kxQ2g5YjJ1NFBjc2pJdE1ja2d1cGYv?=
+ =?utf-8?B?VlpCYkE2Q3Q1VXErM0p3azNpaVo5K3U5cmRSMDhSRTRuMTJ5TmszUXh6R1dG?=
+ =?utf-8?B?dHlvUVNPcVZrSHNJSXFlMGZSbm1TMldtTTRYYU42WWprV1NUYUMrOWFiZWRV?=
+ =?utf-8?B?VDFLalAwNzRHVVdPUTZ6ZXkvS3Fpd0NtbVRlV2ovNmRtRHZwSzdUcVM1azBs?=
+ =?utf-8?B?Sjc4N2M5MnFiblFpSTEyazRUTzBiTzVyK2hNS09OTXRlMm9wdEhWVHBpbm5x?=
+ =?utf-8?B?UGVNV3A5TnhLWWlKZEFsaXFNSm9XeWY5dWttZmYraWVib2pGbE5jVWl3OG1Y?=
+ =?utf-8?B?VVlYc0FSK0Q3Yk50bTl2K0t4N3ZTV1IzazdPbXkwVUUvOUZIaGVrdmRtZklm?=
+ =?utf-8?B?QUdFbmFIdFczNTFLTWdZWk12WFpCNytsc3BRMUpXMjBsNkExNm1ubTdGY2lO?=
+ =?utf-8?B?c0huOFRMQVpvRHNHRi8xNWhaeEROZFFza2NERS93cEJDQ2FHOVpuaFF3NzBu?=
+ =?utf-8?B?RGoyS3IyYUh4SkJONEtuMm55d3d1dDZyUmt4emg3YjJKNWxLendWMGtSOC9V?=
+ =?utf-8?B?S2E2WUc5TlJZSkVROWlRam94UGpxNDh0Qk5jVjBQU2QvQWJ4N0g2YStMNU5h?=
+ =?utf-8?B?UlY5ZUJWL3VDM2J6RUQ0RU5Yc1J0NkZ2M3k2WmhKNWV4SlIxNDN1NGJZNlZr?=
+ =?utf-8?B?VVdMOGphbllBT1dQcVVFaEhYMEdHZWZVY1Y1OHBHSUJNT3JsMndBUlErSmJk?=
+ =?utf-8?B?RFF3SWdBa29CSlFFVGxFSCtiUE5BZU5vNjZjWWxUK1E4ZlN2MzZERkI5dzl5?=
+ =?utf-8?Q?vHUSV8HrOEF2p5WcVR0TvV142?=
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-Message-Id: <20251013-dma-buf-ecc-heap-v8-5-04ce150ea3d9@kernel.org>
-References: <20251013-dma-buf-ecc-heap-v8-0-04ce150ea3d9@kernel.org>
-In-Reply-To: <20251013-dma-buf-ecc-heap-v8-0-04ce150ea3d9@kernel.org>
-To: Sumit Semwal <sumit.semwal@linaro.org>,
- Benjamin Gaignard <benjamin.gaignard@collabora.com>,
- Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>,
- "T.J. Mercier" <tjmercier@google.com>, Jonathan Corbet <corbet@lwn.net>,
- =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- Marek Szyprowski <m.szyprowski@samsung.com>,
- Robin Murphy <robin.murphy@arm.com>
-X-Mailer: b4 0.14.2
-X-Rspamd-Queue-Id: 673564634D
-X-Spamd-Bar: ----
-X-Spamd-Result: default: False [-4.00 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.252.31:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: IA1PR11MB6418.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1d936349-add9-4ca3-4fdd-08de0a665d57
+X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Oct 2025 14:39:50.1687
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: sqQymonkz87YZZh3P28bvDggt7v3P4dQQwhAu1gWUPwJ/3ADsgDFSvNFEb3mH6UDsiqLjb6m1thE7tMm6Zz3P2ECvQc6hJKRxUJkqjiXHN4=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR11MB8765
+X-OriginatorOrg: intel.com
+X-Rspamd-Queue-Id: E0F8E445D6
+X-Spamd-Bar: ------
+X-Spamd-Result: default: False [-6.40 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
+	BAYES_HAM(-3.00)[99.99%];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector10001:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:192.198.163.0/26];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MIME_GOOD(-0.10)[text/plain];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[19];
+	MIME_BASE64_TEXT(0.10)[];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	TAGGED_RCPT(0.00)[];
+	TO_DN_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	MID_RHS_MATCH_FROM(0.00)[];
+	DKIM_TRACE(0.00)[intel.com:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[6];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	DNSWL_BLOCKED(0.00)[172.234.252.31:from];
+	FREEMAIL_TO(0.00)[gmail.com,linaro.org,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,ffwll.ch];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+]
+	RCVD_TLS_LAST(0.00)[];
+	DNSWL_BLOCKED(0.00)[40.93.196.68:received,192.198.163.9:from];
+	RCVD_COUNT_SEVEN(0.00)[7]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: QA75GQHTDFY74M3C2KW4WSJJO5DJX2VM
-X-Message-ID-Hash: QA75GQHTDFY74M3C2KW4WSJJO5DJX2VM
-X-MailFrom: mripard@kernel.org
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Andrew Davis <afd@ti.com>, Jared Kangas <jkangas@redhat.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, iommu@lists.linux.dev, Maxime Ripard <mripard@kernel.org>
+Message-ID-Hash: IPEP7KE4AGPG6EIF3PGFOCSXTOHLYSZO
+X-Message-ID-Hash: IPEP7KE4AGPG6EIF3PGFOCSXTOHLYSZO
+X-MailFrom: michael.j.ruhl@intel.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v8 5/5] dma-buf: heaps: cma: Create CMA heap for each CMA reserved region
+Subject: [Linaro-mm-sig] Re: [PATCH 1/2] dma-buf: replace "#if" with just "if"
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QA75GQHTDFY74M3C2KW4WSJJO5DJX2VM/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/IPEP7KE4AGPG6EIF3PGFOCSXTOHLYSZO/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
 
-Aside from the main CMA region, it can be useful to allow userspace to
-allocate from the other CMA reserved regions.
-
-Indeed, those regions can have specific properties that can be useful to
-a specific us-case.
-
-For example, one of them platform I've been with has ECC enabled on the
-entire memory but for a specific region. Using that region to allocate
-framebuffers can be particular beneficial because enabling the ECC has a
-performance and memory footprint cost.
-
-Thus, exposing these regions as heaps user-space can allocate from and
-import wherever needed allows to cover that use-case.
-
-For now, only shared-dma-pools regions with the reusable property (ie,
-backed by CMA) are supported, but eventually we'll want to support other
-DMA pools types.
-
-Since we collected all the CMA regions created during boot, we can
-simply iterate over all of them to create the heaps.
-
-This has a weird interaction with the recent work on the CMA name, in
-particular the backward compatibility code created by commit
-854acbe75ff4 ("dma-buf: heaps: Give default CMA heap a fixed name").
-
-Indeed, the old name was either 'reserved', or the name of the
-reserved-memory region device tree node if the linux,cma-default
-property was set.
-
-In both these cases, we have now collected this region during boot, and
-we're using the same name. So we're now largely redundant with the
-code to handle backward compatibility code, and we can thus remove it
-and the associated Kconfig option.
-
-Reviewed-by: T.J. Mercier <tjmercier@google.com>
-Signed-off-by: Maxime Ripard <mripard@kernel.org>
----
- Documentation/userspace-api/dma-buf-heaps.rst |  9 +++++---
- drivers/dma-buf/heaps/Kconfig                 | 10 --------
- drivers/dma-buf/heaps/cma_heap.c              | 33 +++++++++++++--------------
- 3 files changed, 22 insertions(+), 30 deletions(-)
-
-diff --git a/Documentation/userspace-api/dma-buf-heaps.rst b/Documentation/userspace-api/dma-buf-heaps.rst
-index 17bf6829efd7963bc849765db54d327644e8c395..b78d2faeba62cda721a1f49d49e02bcb520ad429 100644
---- a/Documentation/userspace-api/dma-buf-heaps.rst
-+++ b/Documentation/userspace-api/dma-buf-heaps.rst
-@@ -22,8 +22,11 @@ following heaps:
-    through the ``cma`` parameter, a memory region Device-Tree node with
-    the ``linux,cma-default`` property set, or through the
-    ``CMA_SIZE_MBYTES`` or ``CMA_SIZE_PERCENTAGE`` Kconfig options. Prior
-    to Linux 6.17, its name wasn't stable and could be called
-    ``reserved``, ``linux,cma``, or ``default-pool``, depending on the
--   platform. From Linux 6.17 onwards, the creation of these heaps is
--   controlled through the ``DMABUF_HEAPS_CMA_LEGACY`` Kconfig option for
--   backwards compatibility.
-+   platform.
-+
-+ - A heap will be created for each reusable region in the device tree
-+   with the ``shared-dma-pool`` compatible, using the full device tree
-+   node name as its name. The buffer semantics are identical to
-+   ``default-cma-region``.
-diff --git a/drivers/dma-buf/heaps/Kconfig b/drivers/dma-buf/heaps/Kconfig
-index bb369b38b001af51721b56e065df92825022f1f1..a5eef06c422644e8aadaf5aff2bd9a33c49c1ba3 100644
---- a/drivers/dma-buf/heaps/Kconfig
-+++ b/drivers/dma-buf/heaps/Kconfig
-@@ -10,15 +10,5 @@ config DMABUF_HEAPS_CMA
- 	depends on DMABUF_HEAPS && DMA_CMA
- 	help
- 	  Choose this option to enable dma-buf CMA heap. This heap is backed
- 	  by the Contiguous Memory Allocator (CMA). If your system has these
- 	  regions, you should say Y here.
--
--config DMABUF_HEAPS_CMA_LEGACY
--	bool "Legacy DMA-BUF CMA Heap"
--	default y
--	depends on DMABUF_HEAPS_CMA
--	help
--	  Add a duplicate CMA-backed dma-buf heap with legacy naming derived
--	  from the CMA area's devicetree node, or "reserved" if the area is not
--	  defined in the devicetree. This uses the same underlying allocator as
--	  CONFIG_DMABUF_HEAPS_CMA.
-diff --git a/drivers/dma-buf/heaps/cma_heap.c b/drivers/dma-buf/heaps/cma_heap.c
-index 2a901af635ed76cdb085915c03258c235e302792..42f88193eab9f8f4571064c7b3b8a73bca20fdf4 100644
---- a/drivers/dma-buf/heaps/cma_heap.c
-+++ b/drivers/dma-buf/heaps/cma_heap.c
-@@ -20,10 +20,12 @@
- #include <linux/err.h>
- #include <linux/highmem.h>
- #include <linux/io.h>
- #include <linux/mm.h>
- #include <linux/module.h>
-+#include <linux/of.h>
-+#include <linux/of_reserved_mem.h>
- #include <linux/scatterlist.h>
- #include <linux/slab.h>
- #include <linux/vmalloc.h>
- 
- #define DEFAULT_CMA_NAME "default_cma_region"
-@@ -407,35 +409,32 @@ static int __init __add_cma_heap(struct cma *cma, const char *name)
- 	}
- 
- 	return 0;
- }
- 
--static int __init add_default_cma_heap(void)
-+static int __init add_cma_heaps(void)
- {
- 	struct cma *default_cma = dev_get_cma_area(NULL);
--	const char *legacy_cma_name;
-+	unsigned int i;
- 	int ret;
- 
--	if (!default_cma)
--		return 0;
-+	if (default_cma) {
-+		ret = __add_cma_heap(default_cma, DEFAULT_CMA_NAME);
-+		if (ret)
-+			return ret;
-+	}
- 
--	ret = __add_cma_heap(default_cma, DEFAULT_CMA_NAME);
--	if (ret)
--		return ret;
-+	for (i = 0; i < dma_areas_num; i++) {
-+		struct cma *cma = dma_areas[i];
- 
--	if (IS_ENABLED(CONFIG_DMABUF_HEAPS_CMA_LEGACY)) {
--		legacy_cma_name = cma_get_name(default_cma);
--		if (!strcmp(legacy_cma_name, DEFAULT_CMA_NAME)) {
--			pr_warn("legacy name and default name are the same, skipping legacy heap\n");
--			return 0;
-+		ret = __add_cma_heap(cma, cma_get_name(cma));
-+		if (ret) {
-+			pr_warn("Failed to add CMA heap %s", cma_get_name(cma));
-+			continue;
- 		}
- 
--		ret = __add_cma_heap(default_cma, legacy_cma_name);
--		if (ret)
--			pr_warn("failed to add legacy heap: %pe\n",
--				ERR_PTR(ret));
- 	}
- 
- 	return 0;
- }
--module_init(add_default_cma_heap);
-+module_init(add_cma_heaps);
- MODULE_DESCRIPTION("DMA-BUF CMA Heap");
-
--- 
-2.51.0
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+Pi0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+RnJvbTogZHJpLWRldmVsIDxkcmktZGV2ZWwt
+Ym91bmNlc0BsaXN0cy5mcmVlZGVza3RvcC5vcmc+IE9uIEJlaGFsZiBPZg0KPkNocmlzdGlhbiBL
+w7ZuaWcNCj5TZW50OiBNb25kYXksIE9jdG9iZXIgNiwgMjAyNSA5OjQ3IEFNDQo+VG86IHN1bWl0
+LnNlbXdhbEBsaW5hcm8ub3JnOyBsaW51eC1tZWRpYUB2Z2VyLmtlcm5lbC5vcmc7IGRyaS0NCj5k
+ZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmc7IGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9y
+ZzsNCj5zaW1vbmEudmV0dGVyQGZmd2xsLmNoDQo+U3ViamVjdDogW1BBVENIIDEvMl0gZG1hLWJ1
+ZjogcmVwbGFjZSAiI2lmIiB3aXRoIGp1c3QgImlmIg0KPg0KPk5vIG5lZWQgdG8gY29uZGl0aW9u
+YWwgY29tcGlsZSB0aGF0IGNvZGUsIGxldCB0aGUgY29tcGlsZXJzIGRlYWQgY29kZQ0KPmVsaW1p
+bmF0aW9uIGhhbmRsZSBpdCBpbnN0ZWFkLg0KDQpNYWtlcyBzZW5zZSB0byBtZS4NCg0KUmV2aWV3
+ZWQtYnk6IE1pY2hhZWwgSi4gUnVobCA8bWljaGFlbC5qLnJ1aGxAaW50ZWwuY29tPg0KDQo+U2ln
+bmVkLW9mZi1ieTogQ2hyaXN0aWFuIEvDtm5pZyA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPg0K
+Pi0tLQ0KPiBkcml2ZXJzL2RtYS1idWYvZG1hLWJ1Zi5jIHwgNSArKy0tLQ0KPiAxIGZpbGUgY2hh
+bmdlZCwgMiBpbnNlcnRpb25zKCspLCAzIGRlbGV0aW9ucygtKQ0KPg0KPmRpZmYgLS1naXQgYS9k
+cml2ZXJzL2RtYS1idWYvZG1hLWJ1Zi5jIGIvZHJpdmVycy9kbWEtYnVmL2RtYS1idWYuYw0KPmlu
+ZGV4IDJiY2Y5Y2VjYTk5Ny4uMjMwNWJiMmNjMWYxIDEwMDY0NA0KPi0tLSBhL2RyaXZlcnMvZG1h
+LWJ1Zi9kbWEtYnVmLmMNCj4rKysgYi9kcml2ZXJzL2RtYS1idWYvZG1hLWJ1Zi5jDQo+QEAgLTEx
+NDEsOCArMTE0MSw3IEBAIHN0cnVjdCBzZ190YWJsZSAqZG1hX2J1Zl9tYXBfYXR0YWNobWVudChz
+dHJ1Y3QNCj5kbWFfYnVmX2F0dGFjaG1lbnQgKmF0dGFjaCwNCj4gCX0NCj4gCW1hbmdsZV9zZ190
+YWJsZShzZ190YWJsZSk7DQo+DQo+LSNpZmRlZiBDT05GSUdfRE1BX0FQSV9ERUJVRw0KPi0Jew0K
+PisJaWYgKElTX0VOQUJMRUQoQ09ORklHX0RNQV9BUElfREVCVUcpKSB7DQo+IAkJc3RydWN0IHNj
+YXR0ZXJsaXN0ICpzZzsNCj4gCQl1NjQgYWRkcjsNCj4gCQlpbnQgbGVuOw0KPkBAIC0xMTU0LDEw
+ICsxMTUzLDEwIEBAIHN0cnVjdCBzZ190YWJsZQ0KPipkbWFfYnVmX21hcF9hdHRhY2htZW50KHN0
+cnVjdCBkbWFfYnVmX2F0dGFjaG1lbnQgKmF0dGFjaCwNCj4gCQkJaWYgKCFQQUdFX0FMSUdORUQo
+YWRkcikgfHwgIVBBR0VfQUxJR05FRChsZW4pKSB7DQo+IAkJCQlwcl9kZWJ1ZygiJXM6IGFkZHIg
+JWxseCBvciBsZW4gJXggaXMgbm90IHBhZ2UNCj5hbGlnbmVkIVxuIiwNCj4gCQkJCQkgX19mdW5j
+X18sIGFkZHIsIGxlbik7DQo+KwkJCQlicmVhazsNCj4gCQkJfQ0KPiAJCX0NCj4gCX0NCj4tI2Vu
+ZGlmIC8qIENPTkZJR19ETUFfQVBJX0RFQlVHICovDQo+IAlyZXR1cm4gc2dfdGFibGU7DQo+DQo+
+IGVycm9yX3VubWFwOg0KPi0tDQo+Mi40My4wDQoNCl9fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFy
+by1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRv
+IGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
