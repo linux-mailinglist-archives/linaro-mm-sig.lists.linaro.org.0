@@ -2,221 +2,133 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 295C8BF03A3
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Oct 2025 11:39:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A399BBF1284
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Oct 2025 14:27:26 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A908E3F755
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Oct 2025 09:39:32 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.9])
-	by lists.linaro.org (Postfix) with ESMTPS id D96023F755
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 20 Oct 2025 09:35:10 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 343E83F75E
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Oct 2025 12:27:25 +0000 (UTC)
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+	by lists.linaro.org (Postfix) with ESMTPS id 0B1AC3F750
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 20 Oct 2025 12:27:15 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=HDpT+Neb;
-	dmarc=pass (policy=none) header.from=intel.com;
-	spf=pass (lists.linaro.org: domain of thomas.hellstrom@linux.intel.com designates 192.198.163.9 as permitted sender) smtp.mailfrom=thomas.hellstrom@linux.intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1760952911; x=1792488911;
-  h=message-id:subject:from:to:cc:date:in-reply-to:
-   references:content-transfer-encoding:mime-version;
-  bh=ZlAhWnMzThFErNs6nj61N00dMsX9TgSzAylKsKkopb0=;
-  b=HDpT+NebncV9tYkbD/ACbFf9hJQPgFamp+3IwVWjHj13vZQ7vUAW4AwV
-   TwaszsJtFchBbcT3+KLR2DgwSh+Ml6EpMeHuUDOXkrjvfy8pa3/XThncf
-   2iPPeMx2IM1SFk2Q2XzwqJkGxC9UqqrrouSj9XZBzJR6kHfx5EuoP7n3s
-   BPJqsMLEUvUiAZgRjfi58PLWNy42+5q/6PFttJ5mVTNuEVqhlvflm/dk6
-   /zZP+u8Y8rfHKeb9I7VSbV9srWFTpuHBoq7NmKBadMBAq3C1oi6nQjQpc
-   zgh5ywmPbNNo9XjP1NeeYGqP//iJU8p7nDb+5bGawl7023RHKAm9hTi5L
-   Q==;
-X-CSE-ConnectionGUID: iMhV6an3T6COiEl5OxNQ2A==
-X-CSE-MsgGUID: jJpwB2kcQSiCtllVqExKWg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11587"; a="73737599"
-X-IronPort-AV: E=Sophos;i="6.19,242,1754982000";
-   d="scan'208";a="73737599"
-Received: from orviesa010.jf.intel.com ([10.64.159.150])
-  by fmvoesa103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Oct 2025 02:35:10 -0700
-X-CSE-ConnectionGUID: Q4n8AAvzSYWm97MU4u4bdA==
-X-CSE-MsgGUID: rPbaYQ+ZQTS74dknrzS4JA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.19,242,1754982000";
-   d="scan'208";a="182475944"
-Received: from fdefranc-mobl3.ger.corp.intel.com (HELO [10.245.245.4]) ([10.245.245.4])
-  by orviesa010-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Oct 2025 02:35:07 -0700
-Message-ID: <9d32258381ef46807e599e8e85e8ab94244c9a67.camel@linux.intel.com>
-From: Thomas =?ISO-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>
-To: Vivek Kasireddy <vivek.kasireddy@intel.com>,
-	dri-devel@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
-	linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
-Date: Mon, 20 Oct 2025 11:34:52 +0200
-In-Reply-To: <20251014071243.811884-2-vivek.kasireddy@intel.com>
-References: <20251014071243.811884-1-vivek.kasireddy@intel.com>
-	 <20251014071243.811884-2-vivek.kasireddy@intel.com>
-Organization: Intel Sweden AB, Registration Number: 556189-6027
-User-Agent: Evolution 3.54.3 (3.54.3-2.fc41) 
+	dkim=pass header.d=infradead.org header.s=bombadil.20210309 header.b=KQhiungt;
+	dmarc=none;
+	spf=none (lists.linaro.org: domain of BATV+17a2c00bf4ec3f455068+8093+infradead.org+hch@bombadil.srs.infradead.org has no SPF policy when checking 198.137.202.133) smtp.mailfrom=BATV+17a2c00bf4ec3f455068+8093+infradead.org+hch@bombadil.srs.infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
+	:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=jdaQM4uR5JLsKGA0oS0VASYRTZKdaGisbnRnH43EfLY=; b=KQhiungt0DOFTC/2vEdmUu5RdM
+	IjizyZW3KhQexecpWhn1JKycVRVYWQTJ9G7l/7owVKfDlpqNGVtDnwK8xwsjX6I64YK5ejanAY0FB
+	zzX4HHOKjNYa4wCLEeTShJPyzXTrVdkNr6T+/TruAVmGzKfuVYgSNuwpcWQwRtB1xfAiScls8jaTF
+	CtGh0RsnHpRzgHMaS7buG481FDfyI7wa7CD/qzHH4+SgPejuNG/LF4EmwQHr8caZKTi5KEcUFoY9W
+	z+5GpLZZYb6wF0dThq4Fmcc6GulKZn6HurCZW1AoO7vNphT4pMFJzXHY8iCTyrAiXmSBWSKpPvYGt
+	H76pYSOw==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.98.2 #2 (Red Hat Linux))
+	id 1vAoyc-0000000DPQg-3mdN;
+	Mon, 20 Oct 2025 12:27:02 +0000
+Date: Mon, 20 Oct 2025 05:27:02 -0700
+From: Christoph Hellwig <hch@infradead.org>
+To: Jason Gunthorpe <jgg@nvidia.com>
+Message-ID: <aPYqliGwJTcZznSX@infradead.org>
+References: <cover.1760368250.git.leon@kernel.org>
+ <1044f7aa09836d63de964d4eb6e646b3071c1fdb.1760368250.git.leon@kernel.org>
+ <aPHibioUFZV8Wnd1@infradead.org>
+ <20251017115320.GF3901471@nvidia.com>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20251017115320.GF3901471@nvidia.com>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: D96023F755
-X-Spamd-Bar: -------
-X-Spamd-Result: default: False [-7.00 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
-	BAYES_HAM(-3.00)[100.00%];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip4:192.198.163.0/26];
+X-Rspamd-Queue-Id: 0B1AC3F750
+X-Spamd-Bar: --
+X-Spamd-Result: default: False [-2.80 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
+	FORGED_SENDER(0.30)[hch@infradead.org,BATV@bombadil.srs.infradead.org];
+	ONCE_RECEIVED(0.20)[];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
-	ASN(0.00)[asn:4983, ipnet:192.198.162.0/23, country:US];
-	HAS_ORG_HEADER(0.00)[];
-	DWL_DNSWL_BLOCKED(0.00)[intel.com:dkim];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	RCVD_TLS_LAST(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	R_SPF_NA(0.00)[no SPF record];
+	MISSING_XM_UA(0.00)[];
+	RCVD_COUNT_ONE(0.00)[1];
 	NEURAL_HAM(-0.00)[-1.000];
-	DKIM_TRACE(0.00)[intel.com:+]
+	RCPT_COUNT_TWELVE(0.00)[25];
+	MIME_TRACE(0.00)[0:+];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ARC_NA(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[hch@infradead.org,BATV@bombadil.srs.infradead.org];
+	FROM_HAS_DN(0.00)[];
+	DMARC_NA(0.00)[infradead.org];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[17a2c00bf4ec3f455068,8093,infradead.org,hch];
+	URIBL_BLOCKED(0.00)[infradead.org:mid,infradead.org:dkim];
+	DKIM_TRACE(0.00)[infradead.org:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: EGHJVQN5YR64L7WFKOMDYK7ORSSSM7DM
-X-Message-ID-Hash: EGHJVQN5YR64L7WFKOMDYK7ORSSSM7DM
-X-MailFrom: thomas.hellstrom@linux.intel.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Jason Gunthorpe <jgg@nvidia.com>, Christian Koenig <christian.koenig@amd.com>, Sumit Semwal <sumit.semwal@linaro.org>, Simona Vetter <simona.vetter@ffwll.ch>
+Message-ID-Hash: RPPN3L4INUTEHLBP3HHEYTF5SWEG24BU
+X-Message-ID-Hash: RPPN3L4INUTEHLBP3HHEYTF5SWEG24BU
+X-MailFrom: BATV+17a2c00bf4ec3f455068+8093+infradead.org+hch@bombadil.srs.infradead.org
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Christoph Hellwig <hch@infradead.org>, Leon Romanovsky <leon@kernel.org>, Alex Williamson <alex.williamson@redhat.com>, Leon Romanovsky <leonro@nvidia.com>, Andrew Morton <akpm@linux-foundation.org>, Bjorn Helgaas <bhelgaas@google.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, iommu@lists.linux.dev, Jens Axboe <axboe@kernel.dk>, Joerg Roedel <joro@8bytes.org>, kvm@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linux-mm@kvack.org, linux-pci@vger.kernel.org, Logan Gunthorpe <logang@deltatee.com>, Robin Murphy <robin.murphy@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, Vivek Kasireddy <vivek.kasireddy@intel.com>, Will Deacon <will@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [RFC 1/8] dma-buf: Add support for map/unmap APIs for interconnects
+Subject: [Linaro-mm-sig] Re: [PATCH v5 1/9] PCI/P2PDMA: Separate the mmap() support from the core logic
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EGHJVQN5YR64L7WFKOMDYK7ORSSSM7DM/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RPPN3L4INUTEHLBP3HHEYTF5SWEG24BU/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-SGksIFZpdmVrLA0KDQpPbiBUdWUsIDIwMjUtMTAtMTQgYXQgMDA6MDggLTA3MDAsIFZpdmVrIEth
-c2lyZWRkeSB3cm90ZToNCj4gRm9yIHRoZSBtYXAgb3BlcmF0aW9uLCB0aGUgZG1hLWJ1ZiBjb3Jl
-IHdpbGwgY3JlYXRlIGFuIHhhcnJheSBidXQNCj4gdGhlIGV4cG9ydGVyIGlzIGV4cGVjdGVkIHRv
-IHBvcHVsYXRlIGl0IHdpdGggdGhlIGludGVyY29ubmVjdA0KPiBzcGVjaWZpYyBhZGRyZXNzZXMu
-IEFuZCwgc2ltaWxhcmx5IGZvciB1bm1hcCwgdGhlIGV4cG9ydGVyIGlzDQo+IGV4cGVjdGVkIHRv
-IGNsZWFudXAgdGhlIGluZGl2aWR1YWwgZW50cmllcyBvZiB0aGUgeGFycmF5Lg0KPiANCj4gQ2M6
-IEphc29uIEd1bnRob3JwZSA8amdnQG52aWRpYS5jb20+DQo+IENjOiBDaHJpc3RpYW4gS29lbmln
-IDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+DQo+IENjOiBTdW1pdCBTZW13YWwgPHN1bWl0LnNl
-bXdhbEBsaW5hcm8ub3JnPg0KPiBDYzogVGhvbWFzIEhlbGxzdHLDtm0gPHRob21hcy5oZWxsc3Ry
-b21AbGludXguaW50ZWwuY29tPg0KPiBDYzogU2ltb25hIFZldHRlciA8c2ltb25hLnZldHRlckBm
-ZndsbC5jaD4NCj4gU2lnbmVkLW9mZi1ieTogVml2ZWsgS2FzaXJlZGR5IDx2aXZlay5rYXNpcmVk
-ZHlAaW50ZWwuY29tPg0KPiAtLS0NCj4gwqBkcml2ZXJzL2RtYS1idWYvZG1hLWJ1Zi5jwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoCB8IDY4DQo+ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysNCj4g
-wqBpbmNsdWRlL2xpbnV4L2RtYS1idWYtaW50ZXJjb25uZWN0LmggfCAyOSArKysrKysrKysrKysN
-Cj4gwqBpbmNsdWRlL2xpbnV4L2RtYS1idWYuaMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHwg
-MTEgKysrKysNCj4gwqAzIGZpbGVzIGNoYW5nZWQsIDEwOCBpbnNlcnRpb25zKCspDQo+IMKgY3Jl
-YXRlIG1vZGUgMTAwNjQ0IGluY2x1ZGUvbGludXgvZG1hLWJ1Zi1pbnRlcmNvbm5lY3QuaA0KPiAN
-Cj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtYnVmLmMgYi9kcml2ZXJzL2RtYS1i
-dWYvZG1hLWJ1Zi5jDQo+IGluZGV4IDJiY2Y5Y2VjYTk5Ny4uMTYyNjQyYmQ1M2U4IDEwMDY0NA0K
-PiAtLS0gYS9kcml2ZXJzL2RtYS1idWYvZG1hLWJ1Zi5jDQo+ICsrKyBiL2RyaXZlcnMvZG1hLWJ1
-Zi9kbWEtYnVmLmMNCj4gQEAgLTE2MTIsNiArMTYxMiw3NCBAQCB2b2lkIGRtYV9idWZfdnVubWFw
-X3VubG9ja2VkKHN0cnVjdCBkbWFfYnVmDQo+ICpkbWFidWYsIHN0cnVjdCBpb3N5c19tYXAgKm1h
-cCkNCj4gwqB9DQo+IMKgRVhQT1JUX1NZTUJPTF9OU19HUEwoZG1hX2J1Zl92dW5tYXBfdW5sb2Nr
-ZWQsICJETUFfQlVGIik7DQo+IMKgDQo+ICtzdHJ1Y3QgZG1hX2J1Zl9yYW5nZXMgKg0KPiArZG1h
-X2J1Zl9tYXBfaW50ZXJjb25uZWN0KHN0cnVjdCBkbWFfYnVmX2F0dGFjaG1lbnQgKmF0dGFjaCkN
-Cg0KRXZlbiBpZiB0aGlzIGlzIGFuIFJGQywgcGxlYXNlIGFkZCBrZXJuZWxkb2Mgc28gdGhhdCB0
-aGUgd2F5IHRoZQ0KaW50ZXJmYWNlIGlzIGludGVuZGVkIHRvIGJlIHVzZWQgYmVjb21lcyBjb21w
-bGV0ZWx5IGNsZWFyLiBCb3RoIGZvcg0KZnVuY3Rpb25zIGFuZCBzdHJ1Y3RzLg0KDQoNCj4gK3sN
-Cj4gKwljb25zdCBzdHJ1Y3QgZG1hX2J1Zl9pbnRlcmNvbm5lY3Rfb3BzICppY19vcHM7DQo+ICsJ
-c3RydWN0IGRtYV9idWYgKmRtYWJ1ZiA9IGF0dGFjaC0+ZG1hYnVmOw0KPiArCXN0cnVjdCBkbWFf
-YnVmX3JhbmdlcyAqcmFuZ2VzOw0KPiArCWludCByZXQ7DQo+ICsNCj4gKwltaWdodF9zbGVlcCgp
-Ow0KPiArDQo+ICsJaWYgKFdBUk5fT04oIWF0dGFjaCB8fCAhYXR0YWNoLT5kbWFidWYpKQ0KPiAr
-CQlyZXR1cm4gRVJSX1BUUigtRUlOVkFMKTsNCj4gKw0KPiArCWlmICghZG1hX2J1Zl9hdHRhY2ht
-ZW50X2lzX2R5bmFtaWMoYXR0YWNoKSkNCj4gKwkJcmV0dXJuIEVSUl9QVFIoLUVJTlZBTCk7DQo+
-ICsNCj4gKwlpZiAoIWF0dGFjaC0+YWxsb3dfaWMpDQo+ICsJCXJldHVybiBFUlJfUFRSKC1FT1BO
-T1RTVVBQKTsNCj4gKw0KPiArCWRtYV9yZXN2X2Fzc2VydF9oZWxkKGF0dGFjaC0+ZG1hYnVmLT5y
-ZXN2KTsNCj4gKw0KPiArCWljX29wcyA9IGRtYWJ1Zi0+b3BzLT5pbnRlcmNvbm5lY3Rfb3BzOw0K
-PiArCWlmICghaWNfb3BzIHx8ICFpY19vcHMtPm1hcF9pbnRlcmNvbm5lY3QpDQo+ICsJCXJldHVy
-biBFUlJfUFRSKC1FSU5WQUwpOw0KPiArDQo+ICsJcmFuZ2VzID0ga3phbGxvYyhzaXplb2YoKnJh
-bmdlcyksIEdGUF9LRVJORUwpOw0KPiArCWlmICghcmFuZ2VzKQ0KPiArCQlyZXR1cm4gRVJSX1BU
-UigtRU5PTUVNKTsNCj4gKw0KPiArCXhhX2luaXQoJnJhbmdlcy0+cmFuZ2VzKTsNCj4gKwlyZXQg
-PSBpY19vcHMtPm1hcF9pbnRlcmNvbm5lY3QoYXR0YWNoLCByYW5nZXMpOw0KPiArCWlmIChyZXQp
-DQo+ICsJCWdvdG8gZXJyX2ZyZWVfcmFuZ2VzOw0KPiArDQo+ICsJcmV0dXJuIHJhbmdlczsNCj4g
-Kw0KPiArZXJyX2ZyZWVfcmFuZ2VzOg0KPiArCXhhX2Rlc3Ryb3koJnJhbmdlcy0+cmFuZ2VzKTsN
-Cj4gKwlrZnJlZShyYW5nZXMpOw0KPiArCXJldHVybiBFUlJfUFRSKHJldCk7DQo+ICt9DQo+ICtF
-WFBPUlRfU1lNQk9MX05TX0dQTChkbWFfYnVmX21hcF9pbnRlcmNvbm5lY3QsICJETUFfQlVGIik7
-DQo+ICsNCj4gK3ZvaWQgZG1hX2J1Zl91bm1hcF9pbnRlcmNvbm5lY3Qoc3RydWN0IGRtYV9idWZf
-YXR0YWNobWVudCAqYXR0YWNoLA0KPiArCQkJCXN0cnVjdCBkbWFfYnVmX3JhbmdlcyAqcmFuZ2Vz
-KQ0KPiArew0KPiArCWNvbnN0IHN0cnVjdCBkbWFfYnVmX2ludGVyY29ubmVjdF9vcHMgKmljX29w
-czsNCj4gKwlzdHJ1Y3QgZG1hX2J1ZiAqZG1hYnVmID0gYXR0YWNoLT5kbWFidWY7DQo+ICsNCj4g
-KwlpZiAoV0FSTl9PTighYXR0YWNoIHx8ICFhdHRhY2gtPmRtYWJ1ZiB8fCAhcmFuZ2VzKSkNCj4g
-KwkJcmV0dXJuOw0KPiArDQo+ICsJaWYgKCFhdHRhY2gtPmFsbG93X2ljKQ0KPiArCQlyZXR1cm47
-DQo+ICsNCj4gKwlpY19vcHMgPSBkbWFidWYtPm9wcy0+aW50ZXJjb25uZWN0X29wczsNCj4gKwlp
-ZiAoIWljX29wcyB8fCAhaWNfb3BzLT51bm1hcF9pbnRlcmNvbm5lY3QpDQo+ICsJCXJldHVybjsN
-Cj4gKw0KPiArCWRtYV9yZXN2X2Fzc2VydF9oZWxkKGF0dGFjaC0+ZG1hYnVmLT5yZXN2KTsNCj4g
-Kw0KPiArCWljX29wcy0+dW5tYXBfaW50ZXJjb25uZWN0KGF0dGFjaCwgcmFuZ2VzKTsNCj4gKw0K
-PiArCXhhX2Rlc3Ryb3koJnJhbmdlcy0+cmFuZ2VzKTsNCj4gKwlrZnJlZShyYW5nZXMpOw0KPiAr
-fQ0KPiArRVhQT1JUX1NZTUJPTF9OU19HUEwoZG1hX2J1Zl91bm1hcF9pbnRlcmNvbm5lY3QsICJE
-TUFfQlVGIik7DQo+ICsNCj4gwqAjaWZkZWYgQ09ORklHX0RFQlVHX0ZTDQo+IMKgc3RhdGljIGlu
-dCBkbWFfYnVmX2RlYnVnX3Nob3coc3RydWN0IHNlcV9maWxlICpzLCB2b2lkICp1bnVzZWQpDQo+
-IMKgew0KPiBkaWZmIC0tZ2l0IGEvaW5jbHVkZS9saW51eC9kbWEtYnVmLWludGVyY29ubmVjdC5o
-DQo+IGIvaW5jbHVkZS9saW51eC9kbWEtYnVmLWludGVyY29ubmVjdC5oDQo+IG5ldyBmaWxlIG1v
-ZGUgMTAwNjQ0DQo+IGluZGV4IDAwMDAwMDAwMDAwMC4uMTc1MDRkZWE5NjkxDQo+IC0tLSAvZGV2
-L251bGwNCj4gKysrIGIvaW5jbHVkZS9saW51eC9kbWEtYnVmLWludGVyY29ubmVjdC5oDQo+IEBA
-IC0wLDAgKzEsMjkgQEANCj4gKy8qIFNQRFgtTGljZW5zZS1JZGVudGlmaWVyOiBNSVQgKi8NCj4g
-Kw0KPiArI2lmbmRlZiBfX0RNQV9CVUZfSU5URVJDT05ORUNUX0hfXw0KPiArI2RlZmluZSBfX0RN
-QV9CVUZfSU5URVJDT05ORUNUX0hfXw0KPiArDQo+ICsjaW5jbHVkZSA8bGludXgveGFycmF5Lmg+
-DQo+ICsNCj4gK3N0cnVjdCBkbWFfYnVmX2F0dGFjaG1lbnQ7DQo+ICsNCj4gK3N0cnVjdCBkbWFf
-YnVmX3JhbmdlcyB7DQo+ICsJc3RydWN0IHhhcnJheSByYW5nZXM7DQo+ICsJdW5zaWduZWQgaW50
-IG5yYW5nZXM7DQoNCklJVUMgdGhpcyB3b3VsZCByZXBsYWNlIHRoZSBzZy10YWJsZSByaWdodD8g
-SSBndWVzcyBKYXNvbiBvciBDaHJpc3RpYW4NCndvdWxkIG5lZWQgdG8gY29tbWVudCBvbiB3aGV0
-aGVyIHRoaXMgaXMgZ2VuZXJpYyBlbm91Z2ggb3Igd2hldGhlciBpdA0KbmVlZHMgdG8gYmUgaW50
-ZXJjb25uZWN0LWRlcGVuZGVudC4NCg0KPiArfTsNCj4gKw0KPiArZW51bSBkbWFfYnVmX2ludGVy
-Y29ubmVjdF90eXBlIHsNCj4gKwlETUFfQlVGX0lOVEVSQ09OTkVDVF9OT05FID0gMCwNCj4gK307
-DQoNClRoaXMgY2FsbHMgZm9yIHJlZ2lzdGVyaW5nIGFsbCBrbm93biBpbnRlcmNvbm5lY3RzIHdp
-dGggdGhlIGRtYS1idWYNCmxheWVyIGV2ZW4gaWYgdGhlIGludGVyY29ubmVjdHMgYXJlIGNvbXBs
-ZXRlbHkgZHJpdmVyLXByaXZhdGUuIEknZA0Kc3VnZ2VzdCB1c2luZyBhIHBvaW50ZXIgdG8gaWRl
-bnRpZnkgaW50ZXJjb25uZWN0IGFuZCB3aGF0ZXZlciBlbnRpdHkNCmRlZmluZXMgdGhlIGludGVy
-Y29ubmVjdCBwcm92aWRlcyBhIHVuaXF1ZSBwb2ludGVyLiBGb3IgZ2xvYmFsbHkNCnZpc2libGUg
-aW50ZXJjb25uZWN0cyB0aGlzIGNvdWxkIGJlIGRvbmUgaW4gZG1hLWJ1Zi5jIG9yIGEgZG1hLWJ1
-Zi0NCmludGVyY29ubmVjdC5jDQoNCj4gKw0KPiArc3RydWN0IGRtYV9idWZfaW50ZXJjb25uZWN0
-IHsNCj4gKwllbnVtIGRtYV9idWZfaW50ZXJjb25uZWN0X3R5cGUgdHlwZTsNCj4gK307DQo+ICsN
-Cj4gK3N0cnVjdCBkbWFfYnVmX2ludGVyY29ubmVjdF9vcHMgew0KPiArCWludCAoKm1hcF9pbnRl
-cmNvbm5lY3QpKHN0cnVjdCBkbWFfYnVmX2F0dGFjaG1lbnQgKmF0dGFjaCwNCj4gKwkJCQlzdHJ1
-Y3QgZG1hX2J1Zl9yYW5nZXMgKnJhbmdlcyk7DQo+ICsJdm9pZCAoKnVubWFwX2ludGVyY29ubmVj
-dCkoc3RydWN0IGRtYV9idWZfYXR0YWNobWVudA0KPiAqYXR0YWNoLA0KPiArCQkJCcKgwqAgc3Ry
-dWN0IGRtYV9idWZfcmFuZ2VzICpyYW5nZXMpOw0KPiArfTsNCj4gKyNlbmRpZg0KPiBkaWZmIC0t
-Z2l0IGEvaW5jbHVkZS9saW51eC9kbWEtYnVmLmggYi9pbmNsdWRlL2xpbnV4L2RtYS1idWYuaA0K
-PiBpbmRleCBkNThlMzI5YWMwZTcuLmRiOTFjNjdjMDBkNiAxMDA2NDQNCj4gLS0tIGEvaW5jbHVk
-ZS9saW51eC9kbWEtYnVmLmgNCj4gKysrIGIvaW5jbHVkZS9saW51eC9kbWEtYnVmLmgNCj4gQEAg
-LTIzLDYgKzIzLDggQEANCj4gwqAjaW5jbHVkZSA8bGludXgvZG1hLWZlbmNlLmg+DQo+IMKgI2lu
-Y2x1ZGUgPGxpbnV4L3dhaXQuaD4NCj4gwqANCj4gKyNpbmNsdWRlIDxsaW51eC9kbWEtYnVmLWlu
-dGVyY29ubmVjdC5oPg0KPiArDQo+IMKgc3RydWN0IGRldmljZTsNCj4gwqBzdHJ1Y3QgZG1hX2J1
-ZjsNCj4gwqBzdHJ1Y3QgZG1hX2J1Zl9hdHRhY2htZW50Ow0KPiBAQCAtMjc2LDYgKzI3OCw4IEBA
-IHN0cnVjdCBkbWFfYnVmX29wcyB7DQo+IMKgDQo+IMKgCWludCAoKnZtYXApKHN0cnVjdCBkbWFf
-YnVmICpkbWFidWYsIHN0cnVjdCBpb3N5c19tYXAgKm1hcCk7DQo+IMKgCXZvaWQgKCp2dW5tYXAp
-KHN0cnVjdCBkbWFfYnVmICpkbWFidWYsIHN0cnVjdCBpb3N5c19tYXANCj4gKm1hcCk7DQo+ICsN
-Cj4gKwljb25zdCBzdHJ1Y3QgZG1hX2J1Zl9pbnRlcmNvbm5lY3Rfb3BzICppbnRlcmNvbm5lY3Rf
-b3BzOw0KPiDCoH07DQo+IMKgDQo+IMKgLyoqDQo+IEBAIC01MDIsNyArNTA2LDkgQEAgc3RydWN0
-IGRtYV9idWZfYXR0YWNobWVudCB7DQo+IMKgCXN0cnVjdCBkZXZpY2UgKmRldjsNCj4gwqAJc3Ry
-dWN0IGxpc3RfaGVhZCBub2RlOw0KPiDCoAlib29sIHBlZXIycGVlcjsNCj4gKwlib29sIGFsbG93
-X2ljOw0KPiDCoAljb25zdCBzdHJ1Y3QgZG1hX2J1Zl9hdHRhY2hfb3BzICppbXBvcnRlcl9vcHM7
-DQo+ICsJc3RydWN0IGRtYV9idWZfaW50ZXJjb25uZWN0IGludGVyY29ubmVjdDsNCg0KSG1tLiBD
-b3VsZCB3ZSBoYXZlIGEgcG9pbnRlciB0byB0aGUgaW50ZXJjb25uZWN0IGhlcmU/IExldCdzIHNh
-eSB0aGUNCmludGVyY29ubmVjdCBpbXBsZW1lbnRhdGlvbiB3b3VsZCB3YW50IHRvIHN1YmNsYXNz
-IHdpdGggYWRkaXRpb25hbA0KaW5mb3JtYXRpb24/DQoNCg0KPiDCoAl2b2lkICppbXBvcnRlcl9w
-cml2Ow0KPiDCoAl2b2lkICpwcml2Ow0KPiDCoH07DQo+IEBAIC01ODksNiArNTk1LDExIEBAIHN0
-cnVjdCBzZ190YWJsZSAqZG1hX2J1Zl9tYXBfYXR0YWNobWVudChzdHJ1Y3QNCj4gZG1hX2J1Zl9h
-dHRhY2htZW50ICosDQo+IMKgCQkJCQllbnVtIGRtYV9kYXRhX2RpcmVjdGlvbik7DQo+IMKgdm9p
-ZCBkbWFfYnVmX3VubWFwX2F0dGFjaG1lbnQoc3RydWN0IGRtYV9idWZfYXR0YWNobWVudCAqLCBz
-dHJ1Y3QNCj4gc2dfdGFibGUgKiwNCj4gwqAJCQkJZW51bSBkbWFfZGF0YV9kaXJlY3Rpb24pOw0K
-PiArDQo+ICtzdHJ1Y3QgZG1hX2J1Zl9yYW5nZXMgKmRtYV9idWZfbWFwX2ludGVyY29ubmVjdChz
-dHJ1Y3QNCj4gZG1hX2J1Zl9hdHRhY2htZW50ICopOw0KPiArdm9pZCBkbWFfYnVmX3VubWFwX2lu
-dGVyY29ubmVjdChzdHJ1Y3QgZG1hX2J1Zl9hdHRhY2htZW50ICosDQo+ICsJCQkJc3RydWN0IGRt
-YV9idWZfcmFuZ2VzICopOw0KPiArDQo+IMKgdm9pZCBkbWFfYnVmX21vdmVfbm90aWZ5KHN0cnVj
-dCBkbWFfYnVmICpkbWFfYnVmKTsNCj4gwqBpbnQgZG1hX2J1Zl9iZWdpbl9jcHVfYWNjZXNzKHN0
-cnVjdCBkbWFfYnVmICpkbWFfYnVmLA0KPiDCoAkJCcKgwqDCoMKgIGVudW0gZG1hX2RhdGFfZGly
-ZWN0aW9uIGRpcik7DQoNClRoYW5rcywNClRob21hcw0KDQoNCl9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0t
-IGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVt
-YWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+On Fri, Oct 17, 2025 at 08:53:20AM -0300, Jason Gunthorpe wrote:
+> On Thu, Oct 16, 2025 at 11:30:06PM -0700, Christoph Hellwig wrote:
+> > On Mon, Oct 13, 2025 at 06:26:03PM +0300, Leon Romanovsky wrote:
+> > > The DMA API now has a new flow, and has gained phys_addr_t support, so
+> > > it no longer needs struct pages to perform P2P mapping.
+> > 
+> > That's news to me.  All the pci_p2pdma_map_state machinery is still
+> > based on pgmaps and thus pages.
+> 
+> We had this discussion already three months ago:
+> 
+> https://lore.kernel.org/all/20250729131502.GJ36037@nvidia.com/
+> 
+> These couple patches make the core pci_p2pdma_map_state machinery work
+> on struct p2pdma_provider, and pgmap is just one way to get a
+> p2pdma_provider *
+> 
+> The struct page paths through pgmap go page->pgmap->mem to get
+> p2pdma_provider.
+> 
+> The non-struct page paths just have a p2pdma_provider * without a
+> pgmap. In this series VFIO uses
+> 
+> +	*provider = pcim_p2pdma_provider(pdev, bar);
+> 
+> To get the provider for a specific BAR.
+
+And what protects that life time?  I've not seen anyone actually
+building the proper lifetime management.  And if someone did the patches
+need to clearly point to that.
+
+> I think I've answered this three times now - for DMABUF the DMABUF
+> invalidation scheme is used to control the lifetime and no DMA mapping
+> outlives the provider, and the provider doesn't outlive the driver.
+
+How?
+
+> Obviously you cannot use the new p2provider mechanism without some
+> kind of protection against use after hot unplug, but it doesn't have
+> to be struct page based.
+
+And how does this interact with everyone else expecting pgmap based
+lifetime management.
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
