@@ -2,468 +2,259 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cONaFWL34GnZnwAAu9opvQ
+	id iB/xFrH24GmInwAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:51:14 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:48:17 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id D624C40FD4B
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:51:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A62D940FC1A
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:48:16 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0624A404DC
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 14:41:17 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.10])
-	by lists.linaro.org (Postfix) with ESMTPS id D4C383F6A2
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 21 Oct 2025 05:45:51 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5B9B5404E5
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 14:48:15 +0000 (UTC)
+Received: from AM0PR83CU005.outbound.protection.outlook.com (mail-westeuropeazon11010058.outbound.protection.outlook.com [52.101.69.58])
+	by lists.linaro.org (Postfix) with ESMTPS id 0ED4B3F792
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 21 Oct 2025 16:10:48 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=Jkhzq7yb;
-	dmarc=pass (policy=none) header.from=intel.com;
-	arc=pass ("microsoft.com:s=arcselector10001:i=1");
-	spf=pass (lists.linaro.org: domain of vivek.kasireddy@intel.com designates 198.175.65.10 as permitted sender) smtp.mailfrom=vivek.kasireddy@intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1761025552; x=1792561552;
-  h=from:to:cc:subject:date:message-id:references:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=3yStUlJC1KfEJatCIVtl226mUZGnMu9eJNc6ChN7rgU=;
-  b=Jkhzq7ybRaKkvIiB8oQmMyZjOsr0Jz/j0g1sg296VZIPVGGWQk8MpZ34
-   wyp0qoa5Q70xr71rvQijRrVcnec+kO5SvFUN/bmO3fnM51J6oSW5sSjtx
-   gYDa3pk5MeCuw0NotC8nwBa70y7RbV3iKZk5aztuE2cfEKEY0Wd5HB1Pm
-   J1WgrnjkdVNjIYEPXzSu5CoBxvLddsoaUZ8NsprDT0jfuQjAo53trGC8L
-   2/6Z2S/OcOpjG5tZpMtoISLdrkxfwdnbb2uneYfvjiH/C8s5pWn99g8zQ
-   FP6FiFXhjXfKhpqTuTgEYVXx/wd1bT/TdPjBESVAjmnJgf4gx2CBtXm5W
-   w==;
-X-CSE-ConnectionGUID: goz5yoveQ+ePKskTy6w9HA==
-X-CSE-MsgGUID: IwyFuazdR9+p1BELT5QUNw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11586"; a="80584432"
-X-IronPort-AV: E=Sophos;i="6.19,244,1754982000";
-   d="scan'208";a="80584432"
-Received: from fmviesa005.fm.intel.com ([10.60.135.145])
-  by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Oct 2025 22:45:51 -0700
-X-CSE-ConnectionGUID: cYqkFEjoRieiK/lRdwgyVQ==
-X-CSE-MsgGUID: pnB8QVLURCeYHOkOyMfXaw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.19,244,1754982000";
-   d="scan'208";a="187916136"
-Received: from fmsmsx902.amr.corp.intel.com ([10.18.126.91])
-  by fmviesa005.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Oct 2025 22:45:50 -0700
-Received: from FMSMSX902.amr.corp.intel.com (10.18.126.91) by
- fmsmsx902.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.27; Mon, 20 Oct 2025 22:45:50 -0700
-Received: from fmsedg903.ED.cps.intel.com (10.1.192.145) by
- FMSMSX902.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.27 via Frontend Transport; Mon, 20 Oct 2025 22:45:50 -0700
-Received: from CH4PR04CU002.outbound.protection.outlook.com (40.107.201.51) by
- edgegateway.intel.com (192.55.55.83) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.27; Mon, 20 Oct 2025 22:45:50 -0700
+	dkim=pass header.d=arm.com header.s=selector1 header.b=EY3nEraE;
+	dkim=pass header.d=arm.com header.s=selector1 header.b=EY3nEraE;
+	dmarc=pass (policy=none) header.from=arm.com;
+	arc=pass ("microsoft.com:s=arcselector10001:i=2");
+	spf=pass (lists.linaro.org: domain of Akash.Goel@arm.com designates 52.101.69.58 as permitted sender) smtp.mailfrom=Akash.Goel@arm.com
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=E3zQIx49q4+eH8c4MBcEyUpDTdzRRW+6kivHjjkJ2Rt4hsoM0Y1k9cgM8Fy2PAMrmtxKlhAUL5lfGaoLz5pZk3J+1o2C7ye65u6YQZCi8wqmxxVqfuGRtwMUHLaPcCA2RMg+t+FxyYj3SHp6nzPRI8Ob7GnUOHH3ntwBJA62pRqpdWXt0Tfs4M6b0397h8EACPCvQbaATijxEj7X8Ddx4Ct1wO1NDjpYx+OpdjwFhznSW/yKPbZsIQdzzvj9DHt7zRb1vrTjiOuYU0o4Hy65T7D7r5jVD5yAVYN2UUbdqD1hdqIGEXpyry4qdLBUvPP057/Zm/6d8z0KzyHqhFk7DA==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=/c+NhDxISpEly1JM6PfDsyZ0zj/4CSmkyJovvOgmw1c=;
+ b=npAgRhiNqYQ5V4dbSW7+2a5iwwLjtBMAWvc4Vx2G/tNgl0JM9aFR10We3fe2Jf2KWRjCswaT1LT9etYEngOnclTnpS8xu/O4jom7SSIK84ibN5yWOQC4IjfX6mYBd2/jjKFRVFx17QtY4Eh+OM5EguKnFNurQKVe2YkBpovTdt/6S2iajllig+BBuBRrkjruJGExuLP30W8DWjjERbYWRMsYE1k+xvS1DMEDNcMwHmdyxxuhLfaWBmx2txobuoaMxZR5iqgwVTCaj75/zVYd3qmjWtxZrm8kNYWe5cDgFFDjHcUqLQ6w0A8lVrR9bt7IFfzd6Nrnx33a+8AF8LE71Q==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 4.158.2.129) smtp.rcpttodomain=linaro.org smtp.mailfrom=arm.com; dmarc=pass
+ (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
+ (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
+ spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
+ dmarc=[1,1,header.from=arm.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=/c+NhDxISpEly1JM6PfDsyZ0zj/4CSmkyJovvOgmw1c=;
+ b=EY3nEraE905QmAJFJMYfhrylMYBfH9wgHRKGKYz3NkHG5YY28MmEOZfdmopXSAI5w6J82w9fO28LZ3o1kq+BqYvZnBlTwAjikvWVV9p0Z3mT3Fx8CfGnEjSU9u8fXcdMkLTYdiWBX4NNfxYqW0LjSb2Ke4yk3IPPBZLQqLf1j5E=
+Received: from DU2PR04CA0053.eurprd04.prod.outlook.com (2603:10a6:10:234::28)
+ by VI0PR08MB11081.eurprd08.prod.outlook.com (2603:10a6:800:257::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9228.16; Tue, 21 Oct
+ 2025 16:10:45 +0000
+Received: from DU2PEPF00028CFE.eurprd03.prod.outlook.com
+ (2603:10a6:10:234:cafe::29) by DU2PR04CA0053.outlook.office365.com
+ (2603:10a6:10:234::28) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9228.16 via Frontend Transport; Tue,
+ 21 Oct 2025 16:10:44 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=arm.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
+ client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
+Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
+ DU2PEPF00028CFE.mail.protection.outlook.com (10.167.242.182) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9253.7
+ via Frontend Transport; Tue, 21 Oct 2025 16:10:44 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Zojjub71bg22LXzA9BpAX6ghW+0SAItkk33ItcpH4J2SAnRduAJuEyfHu0fUM87Ar2MItWhkScDDiXpCDqJGDRyLUHwpAAj/zPi09iJNgj9gBeXnY0sXVy2KmjGhHj3CqYP+U11TEJHioji3D2u3/WO8sBbvR17+IQzSBlHlO8XyK9R9ypKCpMqgE65eMzUnl/f6oCbzXx8Uhq9iWlpQWP+IxdE2FrCF7wEyjrRIa3zZTUN68v9Nmki2OTevAY9O8BQxOfiOS1kghYtBJgVUXVIL6Lwa0unRqvQDuIPSaY7XUTHVBw2ySoinZhezFAEPJrH2oq3ol8zRpHGAGrlrKA==
+ b=TCmsh8ke1iVz9nGlYaXQnTVBWCvMDyf/kqKVPRSAU4KXyFYMNkAEWc1V8m0lfn+skzHXKFhZORgDAAtYbS4GLOwyvFTqR2RL6GlnRpgdswGhq1ZOImJ7jVZqqjRbgxL/77H38p7T7VStJj1B02vjeOYlw9aATmtAfVoK4beiuOVNf/GxljH7fODO3xgfLm96EO39b02BC6qrDpqAIkumIOwr3u8Pfu5UdW25UtmIjNwte9jViSjRRWx7/6mZz3Cw+5KfSnM+EPj/2KN1jwr6XOVlWIwiVBxKcJuvCu7wWlVqaerAxrmKvPFT/VWXwodR0z4pK+AVTq71661bcdd5JQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=sCj1z2jrSNWDL1SuScf5AN828EJAyVl9KCv+lRHRXn4=;
- b=JXP5GDU8JoJlhfNvxu9kykWaB0rqtxbuylUXOj0h1Sni0qF/RGUyeshMTbVLQplOO7YeQ1uuAMijh3LUZ1RFuo53VT6dNqqTmE2pcXliLYud/e52nUxJWls5bsvip7oyLhr0i/UObNfi80Zu9sR5zb0tOo0EAGfU9uIVDznchA23No0DgnaLOK5d76X6i4d3KYBw8htJpjXhNEJcA6j9P8dDGlwROUu8cjZazezAv0ZaUQkr8amtZzpDqI1uTDzZcrZqRtUJvVgt5f9hNfV5YNmOHyw4ABYOl4+POVXDLdTtbUWGAncvf4tvCU41cKH2ekq1H1IOJXQ3azSyBas1QQ==
+ bh=/c+NhDxISpEly1JM6PfDsyZ0zj/4CSmkyJovvOgmw1c=;
+ b=a1ANkb6QZ8ySS71aCNKBtfTYF7Ph/WJdNcQ7zS9OhAuqq3/zPQ7yBnBoCLu21rUNwfF8Yn84E8NxDBoD0T5ONaykDF2K0tNhY8PBdK6FxwPTkb5uAzonMeaDQEWooinxKFOr+tRsc7nNy0mqfJq8K5k1rWNp2FNvuPokHdbFq6HSzSD1EZZN0Smfb4N+Mecs+IecqqIrwmnqrKxk4QTPNtbdLWgz2qei2uVBWbgIYS9EwfKCqhmHUgUM2CGIEZibkg4dvOYdhUtl/X1R9LfY2Vi6Xp/RzCTODl/baCOgVb2z+eOcYlDEoJu3rhhiBD11V8o673XlqBFwIXoF2fu6Rw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Received: from IA0PR11MB7185.namprd11.prod.outlook.com (2603:10b6:208:432::20)
- by SJ5PPFBC9025319.namprd11.prod.outlook.com (2603:10b6:a0f:fc02::84e) with
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=/c+NhDxISpEly1JM6PfDsyZ0zj/4CSmkyJovvOgmw1c=;
+ b=EY3nEraE905QmAJFJMYfhrylMYBfH9wgHRKGKYz3NkHG5YY28MmEOZfdmopXSAI5w6J82w9fO28LZ3o1kq+BqYvZnBlTwAjikvWVV9p0Z3mT3Fx8CfGnEjSU9u8fXcdMkLTYdiWBX4NNfxYqW0LjSb2Ke4yk3IPPBZLQqLf1j5E=
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+Received: from AM9PR08MB6982.eurprd08.prod.outlook.com (2603:10a6:20b:415::16)
+ by AS8PR08MB8370.eurprd08.prod.outlook.com (2603:10a6:20b:56b::17) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9228.16; Tue, 21 Oct
- 2025 05:45:47 +0000
-Received: from IA0PR11MB7185.namprd11.prod.outlook.com
- ([fe80::dd3b:ce77:841a:722b]) by IA0PR11MB7185.namprd11.prod.outlook.com
- ([fe80::dd3b:ce77:841a:722b%4]) with mapi id 15.20.9228.016; Tue, 21 Oct 2025
- 05:45:47 +0000
-From: "Kasireddy, Vivek" <vivek.kasireddy@intel.com>
-To: =?iso-8859-1?Q?Thomas_Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>,
-	Jason Gunthorpe <jgg@nvidia.com>, Christian Koenig
-	<christian.koenig@amd.com>, Sumit Semwal <sumit.semwal@linaro.org>, "Simona
- Vetter" <simona.vetter@ffwll.ch>
-Thread-Topic: [RFC 1/8] dma-buf: Add support for map/unmap APIs for
- interconnects
-Thread-Index: AQHcPNojyM5Ag60JRke2zNGq0ekHDLTKz94AgACy/yA=
-Date: Tue, 21 Oct 2025 05:45:47 +0000
-Message-ID: <IA0PR11MB7185F43DA66980266377755DF8F2A@IA0PR11MB7185.namprd11.prod.outlook.com>
-References: <20251014071243.811884-1-vivek.kasireddy@intel.com>
-	 <20251014071243.811884-2-vivek.kasireddy@intel.com>
- <9d32258381ef46807e599e8e85e8ab94244c9a67.camel@linux.intel.com>
-In-Reply-To: <9d32258381ef46807e599e8e85e8ab94244c9a67.camel@linux.intel.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: IA0PR11MB7185:EE_|SJ5PPFBC9025319:EE_
-x-ms-office365-filtering-correlation-id: 4ed6f275-0575-4553-23a2-08de106515c1
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;ARA:13230040|366016|376014|1800799024|38070700021;
-x-microsoft-antispam-message-info: =?iso-8859-1?Q?ExSEQVq3WHj4J70y0EmMMlEMvJZHfxyPgxGhpsKkxIS+ETepEFON/vDNDV?=
- =?iso-8859-1?Q?Kcn54qGfz7GLWwunRIv1m2N7g/4QhtgnttMtEM1TujB/Rla/X4lNFLi2SJ?=
- =?iso-8859-1?Q?+8osWze++pcqZW1yMRbcl+h9v2rZ9t+c8rbSk+co8xHtaVjBz5/BBRML0f?=
- =?iso-8859-1?Q?ZnaFHe/oI3bY1umSM1O9mTg/0KqKZC+F3pkKisD1kPKmr0EnZRkOj1NSAn?=
- =?iso-8859-1?Q?IvxoJcz4CeBHfqXjpmI48sl6jpmWYUVlPcQZ80RHkz0oq9WU5vuZNtHYD2?=
- =?iso-8859-1?Q?HoW24ByQ6qaUacD8Pl3/7EsHOdzSa6++5cZF96HG2GygCoh3L/7t76rlJa?=
- =?iso-8859-1?Q?U3CyIyJbsTVZa6Zg9GtJc0bucreERou5KQ8O0WpU8GkbNAj0ykt09WJZ4U?=
- =?iso-8859-1?Q?r+BjXXFVx2Q7ksDkFtKFw7em1FKYJL3KSnsHxqfSKHwF6wZfGoG6edEXKI?=
- =?iso-8859-1?Q?v7YRmJulsMlxIWbVjlIcbn3kEhTkalenkl5HSWTLpe8MzBWNGThf036Yn1?=
- =?iso-8859-1?Q?jW8W4tn+bnb3irDQpS50Uv30KDwhnVhiaQT3mG/Ni4UhwTjIyMFeyaQQ4G?=
- =?iso-8859-1?Q?8S8h6T2QiK3LCXa7u79tSuHyObABNEmz94qOHcQAU9tBNb1rxEzNQEs5yU?=
- =?iso-8859-1?Q?NQXFMEETL6ZL6gQDSaU16hlYbObwXLeWuk84uCFp4L+jN4NGQJCbMZ/jMN?=
- =?iso-8859-1?Q?7ELRGTJcsxzK/SJcPpe1nG8QFbsuV1ewSWdGSZPAxqwe284o110A1hyr8H?=
- =?iso-8859-1?Q?NIWL6Slgq1h64r0WtaybOUnas9onSleuscfyxmwHj8OodtrkRY1rcyYWgA?=
- =?iso-8859-1?Q?lYsZ5lpFPQ7d/chyT2fR0Mbl381C3l1wOUBueYoVrcVwWVXaheAf8HhOJN?=
- =?iso-8859-1?Q?Hqia7pRNqTS4US6+eB+0ee+8f6+DTTNRSjMOPZbKYZRu7ckxAyt+cWoNYB?=
- =?iso-8859-1?Q?3t1x1jA9ymg0mzmI0zRxcFEpgq8C3f9c2s/PJI187XdyhZCo7zy7eAStkV?=
- =?iso-8859-1?Q?t1qxigaT1+S4PLmgMGrBN0GnJuPJYLqH22kz1stIgG0C9MsbzAhTtRiC1P?=
- =?iso-8859-1?Q?kJoix1ASTZXDiuOHXO5RuPFLWjCGs1Cv4yFqglJnqdoknei0Gt9lsG5VYe?=
- =?iso-8859-1?Q?SFUC9u0so7PK5RI3aV/1vb2UBPkW1M+0amT5f32LQZbmjOfO7URd6RGrn1?=
- =?iso-8859-1?Q?8KTHMON/tRXAZyfnnEJLJl0po4hsu4bwMe15it45gaqX56Id8BNE8Gku/2?=
- =?iso-8859-1?Q?6vW+djnIBI5ohlpunyt4EjoKVafOPXVwrsPjWGjPAYJYRsY0HpP9vhH+5t?=
- =?iso-8859-1?Q?RV5O5aOvCmQWHKM5fNQKKg4G91oO9OB/IRxMzYckj8Q2IXqo7VMENeYshL?=
- =?iso-8859-1?Q?D0M/m/MyndgTVqybcyNRBylk2brZ/wmscXTCx6izl4Act8N771/Ck46WqJ?=
- =?iso-8859-1?Q?bbwUuihhxzZfSNsbXYJDDhYYZ6Yta9kWBJ7dnW8qKIBPtFsk2dZGdhNTxU?=
- =?iso-8859-1?Q?+QO9WOLFvf6ySXLPyySyScr63xwkvy+wGW5wbqrC/UJ6WAvV+0dVh7Z6h2?=
- =?iso-8859-1?Q?ViUQdDOAhq3EsCQjHVpM2M4bQ+gi?=
-x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA0PR11MB7185.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(38070700021);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?8klo6LWNgI070VSKN1EfDeFxX+GQWMYlT5jPPCUsmU7x5jzk+8m3mf9Ym9?=
- =?iso-8859-1?Q?tDRREnY4RRFJQAzK3RPXiJ3svLZ775cwbZeVM+h7ArBjbdFtv0NwKcYw/Z?=
- =?iso-8859-1?Q?c8aaFZsSV1Zpj1tMncQcZwcNKqG4iv2J71AM7QixZOf2B/6WO19aGPsKGD?=
- =?iso-8859-1?Q?z7wqZH8thYcYXgpOG9r3mycQncDvYLizUyTt5WF5cvGLzd2STYG2MWVxqh?=
- =?iso-8859-1?Q?MrxeqdoaffTmi5wK5bG6bW5KyanJG2mObxxuIPRMFXaG0AGBqzuMBxsf8n?=
- =?iso-8859-1?Q?8KfZmGwbmumo1VRVygcJDizVeAA6x/5abAN6rEsaBB5ulIWOjsNLutkkFB?=
- =?iso-8859-1?Q?GsOifHr1tlisXoaSyMaHfVJrMgUuU92kaOcMmIYJDgmJHYvrvRz2VU4RxM?=
- =?iso-8859-1?Q?sAOJuXgYcTJ7jEO950bMhRJnL1wQoulrfMQ0gc1KLlURdaLjDDVk4bhtco?=
- =?iso-8859-1?Q?2qZxNgQYTIh9Xz1+9bWwXwSt7mNhpuGHaI3NoWt6R80wYjc+QS3OglzXJF?=
- =?iso-8859-1?Q?3ly/3DTjfQZIKaKvnD8GwxMNYaszRy4tuhPpfgxCTb9aPAa1bx0Dj59eW1?=
- =?iso-8859-1?Q?ffimlY/U+Y85iC6C/sc73LYuPaBP3qyNdbV+a9BRaiS6jiTwXHl5F33yG/?=
- =?iso-8859-1?Q?D88/B7QQZ2Mv1UQA1A5DNhxnSpRxLxxVYGOwfDERftQYNU9NvaAhonvS9B?=
- =?iso-8859-1?Q?5gXdDiYqFZqlDnN0Jpnp6lFxWSYDjhqFFxHnx+J1kMiRNIf+RJjVYNO5cU?=
- =?iso-8859-1?Q?g8HBnHwn5FI/jwyVqWhrqHXLgM/gXI27LOTvgHQ4GoEN7g18epb+oq18Ec?=
- =?iso-8859-1?Q?4aMX8OD5VH+zem6KMma1AYEDBgRwwibb8hNBIw8h67PbGGyIAqZh8b51+f?=
- =?iso-8859-1?Q?pMZaDAPVGvMfBuqnnv06J89WbNimuWiNCrizkvc2slAaovcchrTCOkOAJ5?=
- =?iso-8859-1?Q?gXPWtHrmyuKy4ocCQMWNzvN/qdcf2rG4JygIlOAXPRXPiFQjqLBZhKBXH2?=
- =?iso-8859-1?Q?aiard6AfmZ9NcJfL/5OWfTRHAXnC3bU4F2p3Z0e2RLFaO4MeyZ7mFkAq4m?=
- =?iso-8859-1?Q?QTuyqbq94ISdoUbYpC11GylACRcI3h2hih+NHsZBbRHJJlEhiEezGaMNul?=
- =?iso-8859-1?Q?RQVX63eL+ylcITJ5gciHeVXXrPPzHYmWBaHTgdSse0+mAXfSH4TSIXYpFc?=
- =?iso-8859-1?Q?Fy6f3L/SmkV4MnMb5KNwPeHBTx+XTn+eBz83xWF/0UpZeUYkSopKV+uWRh?=
- =?iso-8859-1?Q?XbPOKn8sBojdJ4B/AN+Qp+g2NRha1NfvRPJPANJ7MHHkyebQhbetHvXMEi?=
- =?iso-8859-1?Q?UtPKiuk32hxXknSoh4szGb0mxQ9eYxvgd7h9q6yJXUgWpslg7p9j2q0s3L?=
- =?iso-8859-1?Q?zUbHoYhC8Zi3DYi2IJ/jchs9VC/AZBVdajTzDsiRKDwmvcBPuO+wB7bDcs?=
- =?iso-8859-1?Q?69hGAvcuhaf6OcxYEJDVCTcnrDbp4AliiN1qmXko1BjfNfqs7fXMopApHz?=
- =?iso-8859-1?Q?VRoJVcPINvBJpgbA5UBIG+kfB3ybOZxktFkd0HYKrBLjGPPj5w8Mtq8bNN?=
- =?iso-8859-1?Q?76eguaO3HBvl6KY/+ToX7T9pbHon99SUBvX9mZk52a1u34k/V1itaznfM7?=
- =?iso-8859-1?Q?aUmyWffM3wCjEmhbv+mvtvYvtdetyuiOmL?=
-Content-Type: text/plain; charset="iso-8859-1"
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9228.15; Tue, 21 Oct
+ 2025 16:10:10 +0000
+Received: from AM9PR08MB6982.eurprd08.prod.outlook.com
+ ([fe80::5d5d:a4a7:198c:fbdd]) by AM9PR08MB6982.eurprd08.prod.outlook.com
+ ([fe80::5d5d:a4a7:198c:fbdd%4]) with mapi id 15.20.9228.016; Tue, 21 Oct 2025
+ 16:10:10 +0000
+From: Akash Goel <akash.goel@arm.com>
+To: sumit.semwal@linaro.org,
+	gustavo@padovan.org,
+	christian.koenig@amd.com
+Date: Tue, 21 Oct 2025 17:09:51 +0100
+Message-Id: <20251021160951.1415603-1-akash.goel@arm.com>
+X-Mailer: git-send-email 2.25.1
+X-ClientProxiedBy: LO4P123CA0063.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:153::14) To AM9PR08MB6982.eurprd08.prod.outlook.com
+ (2603:10a6:20b:415::16)
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: IA0PR11MB7185.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4ed6f275-0575-4553-23a2-08de106515c1
-X-MS-Exchange-CrossTenant-originalarrivaltime: 21 Oct 2025 05:45:47.5328
+X-MS-TrafficTypeDiagnostic: 
+	AM9PR08MB6982:EE_|AS8PR08MB8370:EE_|DU2PEPF00028CFE:EE_|VI0PR08MB11081:EE_
+X-MS-Office365-Filtering-Correlation-Id: f2807782-9fab-4e78-6a5d-08de10bc63a1
+x-checkrecipientrouted: true
+NoDisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;ARA:13230040|376014|1800799024|366016;
+X-Microsoft-Antispam-Message-Info-Original: 
+ =?us-ascii?Q?6wbAkGvxB8d1G8F7GebYyT6viXoM8AZa3bJtLFZmaSE+mmi+FkP9DzpYgQpf?=
+ =?us-ascii?Q?oQTGiZLAsxjEtke4QFYOS74XJ/tLml/01Pjxl182///pnObR/rvrzmkGKrEi?=
+ =?us-ascii?Q?jdEHgGStSpR84DJc84CXboAq7kZZZHonmX0S616d0K2+dwnCX8xdwWFPbkde?=
+ =?us-ascii?Q?S48/HWXmt8xhn6Uz5dnPPhwivov0ab55ynZ9oeTMs1Cqqu5LijdWkFWwXFsD?=
+ =?us-ascii?Q?NLZocCd68gxOJKJO5ag05rKX1TbM9L+o2I84l71RavKybpsDBn5aZ7r732+g?=
+ =?us-ascii?Q?3x7nj1r+iJCpXZRb84YgLNNGCdLKPtX84iLZxA3kovTeHXbpOXC28JbXqzQx?=
+ =?us-ascii?Q?l2v+xPcgjiFXOAhe/+6ozhVcqyPNynQkdahV75KQqsamWSnqWu4zhhpX+Eot?=
+ =?us-ascii?Q?tyeGDxnwZV4Uxe1g41EBpojaNp3hnNPAiVW8OGrImM00vheOQd9n86cGtUqL?=
+ =?us-ascii?Q?gkmCQTBMXnbG68wBKxMlf6Oytwz/XPDolwAdtPG4muVSuk2WZPPbcHV42tPg?=
+ =?us-ascii?Q?Hd5N40F9BmCiPVILCwg2RoClme8DSiqjn7JJunMI5e6eu6561HmLS9rt1M3X?=
+ =?us-ascii?Q?u8wFePec6NncVsmThVW1lAiCTVxYFeyZT+8wh2GH7QJq8hDmzMesjaOR9syW?=
+ =?us-ascii?Q?9oD0SAVggJ0Rtp/fpCv6tjX+/x174Ijv/MoOAVp42a/aPsicfMPierr84dyh?=
+ =?us-ascii?Q?nQ8TsnTE3fmQ5iNJGFsVDIv2+ko6AubEDoxls7ocbPQ8eE1FKZ4y740ZJbJj?=
+ =?us-ascii?Q?SwzwqGyIW/LxcztW4p1Uooo2Oy6g1RgtCVltK/Ew0uHWIZ5/GvwzCyVZBdzU?=
+ =?us-ascii?Q?caTFaTpAG5opobgaFvZaiiHeiii3brudXqvMQEg4U4Rt3dbl8M7sKmNqgl98?=
+ =?us-ascii?Q?D9pesW7C6Zjq9VUWvm1K7bZyKBbOzQ0Y1u+MeiwLHLFZnW1JdtQEyRa1418F?=
+ =?us-ascii?Q?0ctk7tbPqiA//W7VqfRGhpsB+DOkkI7ceW7m0P57mNl3GAsr5xq4aO2W1Uer?=
+ =?us-ascii?Q?qOYwLVZQFpRb3ytsWbW9uk4HlV15E/imfpbN/uRF+Gn8jKwjUAjcEtr9gBzh?=
+ =?us-ascii?Q?NR4uyzA4fZbbG/eDFPJYNeGhiUxolbfZGb6DO/KrWys9WU1Gof028/jcqypb?=
+ =?us-ascii?Q?PC4lJafQkj0YVAiniAv2/qYnfHWyxzRau4ITbUSF9P/9aBMVJfNQ7oKPTLVS?=
+ =?us-ascii?Q?Vx3OYf5YXuZqXS3vNZmWL4CLOEDEsmlsmt3mT6oAA20uwK28ISIqymPRhTNK?=
+ =?us-ascii?Q?+OdLAmpT5Mmk5okD1XBJynRsBErKEgpFPMMxoYJB5oyKNiXk083tRVr5s9wQ?=
+ =?us-ascii?Q?pHD7sumADJoYqpk0yvhnZtqu3aoSUuDh/BQbq91rjnpCuwXoa1gWK/lp9qTp?=
+ =?us-ascii?Q?rSlboIJW+gsW0z/qe/qzEZBWeTbtkvrtQkABjgtkJZWM90clrsBaEGbLgzZC?=
+ =?us-ascii?Q?oM9eEoVoVZ4sNoM8Ll+/rSe4RBN0LC73?=
+X-Forefront-Antispam-Report-Untrusted: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM9PR08MB6982.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016);DIR:OUT;SFP:1101;
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB8370
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: 
+ DU2PEPF00028CFE.eurprd03.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 
+	5869f847-298f-4406-a5a1-08de10bc4f37
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|376014|82310400026|14060799003|35042699022|1800799024|36860700013;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?jl3Njxlc2lzTqVv3iyy4uK85VmIGFigNS2OpWHs96yeTky/HylRUb2MhIlxp?=
+ =?us-ascii?Q?uiB1umbJAVt7LlqHis9uVJRhrVdq7M4l9/ofJ6+D071Pt7exXUJs+CUT1jis?=
+ =?us-ascii?Q?vrU5+rk6R+4bbc+P2VBEyYLH1Dgv1BXQ4Wog4y9wRgw4WBG2ih8Fg2B/PxzI?=
+ =?us-ascii?Q?kLSsEgTy7a4xqAig6bQGio6/MWAFAJwhYXuWLAt9sZUvbjuLzXXSetvgrZPe?=
+ =?us-ascii?Q?zLacODceGOs7nT9hrgwHaVy72W4QNhTe+gREqm9TyFMJkrGY67XArKmEHehb?=
+ =?us-ascii?Q?mWMlj+dUZsdSTTWKD53BPiq1UZPnn7K0eRbnnuyY+STsL/b9uo6HvcuIxOju?=
+ =?us-ascii?Q?5DHzb4jpUg3mgCOfuVID88RB1uOx+Gd462cWzs9oYiL93tpZiAF7K5UiBAdX?=
+ =?us-ascii?Q?AUep+EHG/qmxRdqoDAeE0+jCJ89FGCzsp+9T4qRATIlyGEGN3MZ/YDdjvM9/?=
+ =?us-ascii?Q?wYlpD2R8H4yJsaxtmIjz1yEbS2Pj6Y9gT4t/KK85Q4lc7ptsToOuOxjg9Bav?=
+ =?us-ascii?Q?t0xxmSt9Gm20STl9ae63QtXowcntMr9xOVe+kEuxGpyyBR/KywQY5jRNw+Y0?=
+ =?us-ascii?Q?DpwH4IGzbTggJjZodu5w68GzEazp7dmPpdlcdtp2M7rYg1WUkdnj9A3Oz4/w?=
+ =?us-ascii?Q?WgdCaWXDZ0mdD+OM7M59Q6h68qoBe8ehvT8EAzekir8rZxc1B+C8RXJ7PTQD?=
+ =?us-ascii?Q?4KbNWBdR1sIt4BsBZzZmKbBMLyyOvyrx1Uew6YDaVCXqiaMCkdhyHiAsFLm0?=
+ =?us-ascii?Q?IovOZYo4h8w4muzZru0k1toOHJ8grTknmnaxrrVfoaCfCj++kU2TZ/5L+OB2?=
+ =?us-ascii?Q?hpnjwC6t1XeKGdUSSCfpLm1tGtGjPTcw/UsBKdk2ibwHTtwTjHKzuO1zyYzp?=
+ =?us-ascii?Q?f+mKYaAh91s2mYW2T1hwjqBiVllM31wrGtfi3HMvQZMgF13whqT+m5ELcZ0X?=
+ =?us-ascii?Q?gImMYdcy6izNIikHiF0rO1S+8RbSeuXaoSJ5MHMMkc2h6LNUkwZSFRBJWTP6?=
+ =?us-ascii?Q?CfXbp1ld12RA4dsr30q2Awp+SdiDSnocoP6aQT2b7eVtWORKf4or0RPvjcfT?=
+ =?us-ascii?Q?MQs1//6DVt2Lon3WQX25ImQ8DRsMOBw+BVKDh7+4vRt9/7unMDZKZSBkDDVA?=
+ =?us-ascii?Q?8moDwsjERZAf8GFTdCXphKYhGpG5ms6wQMRDyU9y5IBAk1sWOvMva8YYqoT2?=
+ =?us-ascii?Q?v6+8iP7emc2r4OZEfl3u7XDSTVIlS8n0ZVFJ9SIhx3x0LLz7Zg+tDScOK55I?=
+ =?us-ascii?Q?d1wSQ6TBvSytAoK95G1JGpX8ixojItZurHmp0JcTDRT1FBO++hyxlvTd3gKf?=
+ =?us-ascii?Q?ytK4dQ3d2nJhvjM4FnFHCpG6AphGaFSvNT/qr/tfJhWD034Nk1xWIqcGzDzP?=
+ =?us-ascii?Q?B336kkMZcOtJ4oCNaj+AlcJpj9RhnuLznoopBeZXiJpNZdwNy5Pz4gEj1mia?=
+ =?us-ascii?Q?ehAG2FhvtMNkQYD4XBp8cmIlX1GoXQWFEoyCxE9CyzYRkOOQtNyWiRYR/v3r?=
+ =?us-ascii?Q?ALi6conCeq9Tu37s2dm89zmjX4DV3f/0lVZwDGhm4S2URda0I4Uxh4/8yml+?=
+ =?us-ascii?Q?g+TGv0sDpqMac964bDA=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:4.158.2.129;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:outbound-uk1.az.dlp.m.darktrace.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(82310400026)(14060799003)(35042699022)(1800799024)(36860700013);DIR:OUT;SFP:1101;
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Oct 2025 16:10:44.3555
  (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: g1xitQrq7QGs/4EBpvZXmhE7avqbKvczF1OYxiE9FzvJSIOy10DwVMZUs+iXIMPn+ouO9xjAXtO25KgJImKSQnkZTLCULqyXtj0/pRkVugg=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ5PPFBC9025319
-X-OriginatorOrg: intel.com
-X-Spamd-Bar: --------
-X-MailFrom: vivek.kasireddy@intel.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f2807782-9fab-4e78-6a5d-08de10bc63a1
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[4.158.2.129];Helo=[outbound-uk1.az.dlp.m.darktrace.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	DU2PEPF00028CFE.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR08MB11081
+X-Spamd-Bar: ---
+X-MailFrom: Akash.Goel@arm.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: FDIDON2E3QELXZXNWPCVKWFPDIX5LZ7Q
-X-Message-ID-Hash: FDIDON2E3QELXZXNWPCVKWFPDIX5LZ7Q
-X-Mailman-Approved-At: Thu, 16 Apr 2026 14:40:35 +0000
-CC: "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "intel-xe@lists.freedesktop.org" <intel-xe@lists.freedesktop.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>
+Message-ID-Hash: RD6L3O6IE3XOGFUYZH22PIF2PBP4N3W3
+X-Message-ID-Hash: RD6L3O6IE3XOGFUYZH22PIF2PBP4N3W3
+X-Mailman-Approved-At: Thu, 16 Apr 2026 14:48:12 +0000
+CC: linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, nd@arm.com, Akash Goel <akash.goel@arm.com>, stable@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [RFC 1/8] dma-buf: Add support for map/unmap APIs for interconnects
+Subject: [Linaro-mm-sig] [PATCH] dma-fence: Fix safe access wrapper to call timeline name method
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FDIDON2E3QELXZXNWPCVKWFPDIX5LZ7Q/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RD6L3O6IE3XOGFUYZH22PIF2PBP4N3W3/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Transfer-Encoding: quoted-printable
-X-Spamd-Result: default: False [2.59 / 15.00];
-	DATE_IN_PAST(1.00)[4257];
-	R_DKIM_REJECT(1.00)[intel.com:s=Intel];
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [3.59 / 15.00];
+	DATE_IN_PAST(1.00)[4246];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
-	MAILLIST(-0.20)[mailman];
+	R_DKIM_REJECT(1.00)[arm.com:s=selector1];
 	R_SPF_ALLOW(-0.20)[+mx:c];
+	MAILLIST(-0.20)[mailman];
+	DMARC_POLICY_SOFTFAIL(0.10)[arm.com : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[intel.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,amd.com:email,intel.com:email,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,ffwll.ch:email,IA0PR11MB7185.namprd11.prod.outlook.com:mid];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.462];
-	FROM_NEQ_ENVFROM(0.00)[vivek.kasireddy@intel.com,linaro-mm-sig-bounces@lists.linaro.org];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[akash.goel@arm.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:-];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	DKIM_TRACE(0.00)[arm.com:-];
+	NEURAL_HAM(-0.00)[-0.710];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	MISSING_XM_UA(0.00)[];
-	RCVD_COUNT_SEVEN(0.00)[9]
-X-Rspamd-Queue-Id: D624C40FD4B
+	RCPT_COUNT_SEVEN(0.00)[10];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	RCVD_COUNT_SEVEN(0.00)[7]
+X-Rspamd-Queue-Id: A62D940FC1A
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Hi Thomas,
+This commit fixes the wrapper function dma_fence_timeline_name(), that
+was added for safe access, to actually call the timeline name method of
+dma_fence_ops.
 
-> Subject: Re: [RFC 1/8] dma-buf: Add support for map/unmap APIs for
-> interconnects
->=20
-> Hi, Vivek,
->=20
-> On Tue, 2025-10-14 at 00:08 -0700, Vivek Kasireddy wrote:
-> > For the map operation, the dma-buf core will create an xarray but
-> > the exporter is expected to populate it with the interconnect
-> > specific addresses. And, similarly for unmap, the exporter is
-> > expected to cleanup the individual entries of the xarray.
-> >
-> > Cc: Jason Gunthorpe <jgg@nvidia.com>
-> > Cc: Christian Koenig <christian.koenig@amd.com>
-> > Cc: Sumit Semwal <sumit.semwal@linaro.org>
-> > Cc: Thomas Hellstr=F6m <thomas.hellstrom@linux.intel.com>
-> > Cc: Simona Vetter <simona.vetter@ffwll.ch>
-> > Signed-off-by: Vivek Kasireddy <vivek.kasireddy@intel.com>
-> > ---
-> > =A0drivers/dma-buf/dma-buf.c=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 | 68
-> > ++++++++++++++++++++++++++++
-> > =A0include/linux/dma-buf-interconnect.h | 29 ++++++++++++
-> > =A0include/linux/dma-buf.h=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 | 11 =
-+++++
-> > =A03 files changed, 108 insertions(+)
-> > =A0create mode 100644 include/linux/dma-buf-interconnect.h
-> >
-> > diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
-> > index 2bcf9ceca997..162642bd53e8 100644
-> > --- a/drivers/dma-buf/dma-buf.c
-> > +++ b/drivers/dma-buf/dma-buf.c
-> > @@ -1612,6 +1612,74 @@ void dma_buf_vunmap_unlocked(struct
-> dma_buf
-> > *dmabuf, struct iosys_map *map)
-> > =A0}
-> > =A0EXPORT_SYMBOL_NS_GPL(dma_buf_vunmap_unlocked, "DMA_BUF");
-> >
-> > +struct dma_buf_ranges *
-> > +dma_buf_map_interconnect(struct dma_buf_attachment *attach)
->=20
-> Even if this is an RFC, please add kerneldoc so that the way the
-> interface is intended to be used becomes completely clear. Both for
-> functions and structs.
-Ok, will add documentation in the next version.
+Cc: <stable@vger.kernel.org> # v6.17+
+Signed-off-by: Akash Goel <akash.goel@arm.com>
+---
+ drivers/dma-buf/dma-fence.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
->=20
->=20
-> > +{
-> > +	const struct dma_buf_interconnect_ops *ic_ops;
-> > +	struct dma_buf *dmabuf =3D attach->dmabuf;
-> > +	struct dma_buf_ranges *ranges;
-> > +	int ret;
-> > +
-> > +	might_sleep();
-> > +
-> > +	if (WARN_ON(!attach || !attach->dmabuf))
-> > +		return ERR_PTR(-EINVAL);
-> > +
-> > +	if (!dma_buf_attachment_is_dynamic(attach))
-> > +		return ERR_PTR(-EINVAL);
-> > +
-> > +	if (!attach->allow_ic)
-> > +		return ERR_PTR(-EOPNOTSUPP);
-> > +
-> > +	dma_resv_assert_held(attach->dmabuf->resv);
-> > +
-> > +	ic_ops =3D dmabuf->ops->interconnect_ops;
-> > +	if (!ic_ops || !ic_ops->map_interconnect)
-> > +		return ERR_PTR(-EINVAL);
-> > +
-> > +	ranges =3D kzalloc(sizeof(*ranges), GFP_KERNEL);
-> > +	if (!ranges)
-> > +		return ERR_PTR(-ENOMEM);
-> > +
-> > +	xa_init(&ranges->ranges);
-> > +	ret =3D ic_ops->map_interconnect(attach, ranges);
-> > +	if (ret)
-> > +		goto err_free_ranges;
-> > +
-> > +	return ranges;
-> > +
-> > +err_free_ranges:
-> > +	xa_destroy(&ranges->ranges);
-> > +	kfree(ranges);
-> > +	return ERR_PTR(ret);
-> > +}
-> > +EXPORT_SYMBOL_NS_GPL(dma_buf_map_interconnect, "DMA_BUF");
-> > +
-> > +void dma_buf_unmap_interconnect(struct dma_buf_attachment *attach,
-> > +				struct dma_buf_ranges *ranges)
-> > +{
-> > +	const struct dma_buf_interconnect_ops *ic_ops;
-> > +	struct dma_buf *dmabuf =3D attach->dmabuf;
-> > +
-> > +	if (WARN_ON(!attach || !attach->dmabuf || !ranges))
-> > +		return;
-> > +
-> > +	if (!attach->allow_ic)
-> > +		return;
-> > +
-> > +	ic_ops =3D dmabuf->ops->interconnect_ops;
-> > +	if (!ic_ops || !ic_ops->unmap_interconnect)
-> > +		return;
-> > +
-> > +	dma_resv_assert_held(attach->dmabuf->resv);
-> > +
-> > +	ic_ops->unmap_interconnect(attach, ranges);
-> > +
-> > +	xa_destroy(&ranges->ranges);
-> > +	kfree(ranges);
-> > +}
-> > +EXPORT_SYMBOL_NS_GPL(dma_buf_unmap_interconnect, "DMA_BUF");
-> > +
-> > =A0#ifdef CONFIG_DEBUG_FS
-> > =A0static int dma_buf_debug_show(struct seq_file *s, void *unused)
-> > =A0{
-> > diff --git a/include/linux/dma-buf-interconnect.h
-> > b/include/linux/dma-buf-interconnect.h
-> > new file mode 100644
-> > index 000000000000..17504dea9691
-> > --- /dev/null
-> > +++ b/include/linux/dma-buf-interconnect.h
-> > @@ -0,0 +1,29 @@
-> > +/* SPDX-License-Identifier: MIT */
-> > +
-> > +#ifndef __DMA_BUF_INTERCONNECT_H__
-> > +#define __DMA_BUF_INTERCONNECT_H__
-> > +
-> > +#include <linux/xarray.h>
-> > +
-> > +struct dma_buf_attachment;
-> > +
-> > +struct dma_buf_ranges {
-> > +	struct xarray ranges;
-> > +	unsigned int nranges;
->=20
-> IIUC this would replace the sg-table right?
-Yes, that is the intended goal.=20
-
-> I guess Jason or Christian
-> would need to comment on whether this is generic enough or whether it
-> needs to be interconnect-dependent.
-AFAIU, the individual entries of the xarray could be of any type that is
-interconnect-specific and shared between exporter and importer.
-For example, for IOV interconnect, I have picked struct range as the
-type (to represent individual entries of the xarray) to share addresses
-between exporter and importer.
-
->=20
-> > +};
-> > +
-> > +enum dma_buf_interconnect_type {
-> > +	DMA_BUF_INTERCONNECT_NONE =3D 0,
-> > +};
->=20
-> This calls for registering all known interconnects with the dma-buf
-> layer even if the interconnects are completely driver-private. I'd
-> suggest using a pointer to identify interconnect and whatever entity
-> defines the interconnect provides a unique pointer. For globally
-> visible interconnects this could be done in dma-buf.c or a dma-buf-
-> interconnect.c
-Thank you for your suggestion. I'll explore the idea in more detail.
-
->=20
-> > +
-> > +struct dma_buf_interconnect {
-> > +	enum dma_buf_interconnect_type type;
-> > +};
-> > +
-> > +struct dma_buf_interconnect_ops {
-> > +	int (*map_interconnect)(struct dma_buf_attachment *attach,
-> > +				struct dma_buf_ranges *ranges);
-> > +	void (*unmap_interconnect)(struct dma_buf_attachment
-> > *attach,
-> > +				=A0=A0 struct dma_buf_ranges *ranges);
-> > +};
-> > +#endif
-> > diff --git a/include/linux/dma-buf.h b/include/linux/dma-buf.h
-> > index d58e329ac0e7..db91c67c00d6 100644
-> > --- a/include/linux/dma-buf.h
-> > +++ b/include/linux/dma-buf.h
-> > @@ -23,6 +23,8 @@
-> > =A0#include <linux/dma-fence.h>
-> > =A0#include <linux/wait.h>
-> >
-> > +#include <linux/dma-buf-interconnect.h>
-> > +
-> > =A0struct device;
-> > =A0struct dma_buf;
-> > =A0struct dma_buf_attachment;
-> > @@ -276,6 +278,8 @@ struct dma_buf_ops {
-> >
-> > =A0	int (*vmap)(struct dma_buf *dmabuf, struct iosys_map *map);
-> > =A0	void (*vunmap)(struct dma_buf *dmabuf, struct iosys_map
-> > *map);
-> > +
-> > +	const struct dma_buf_interconnect_ops *interconnect_ops;
-> > =A0};
-> >
-> > =A0/**
-> > @@ -502,7 +506,9 @@ struct dma_buf_attachment {
-> > =A0	struct device *dev;
-> > =A0	struct list_head node;
-> > =A0	bool peer2peer;
-> > +	bool allow_ic;
-> > =A0	const struct dma_buf_attach_ops *importer_ops;
-> > +	struct dma_buf_interconnect interconnect;
->=20
-> Hmm. Could we have a pointer to the interconnect here? Let's say the
-> interconnect implementation would want to subclass with additional
-> information?
-Sure. I was going to do that in the next version.
-
-Thanks,
-Vivek
-
->=20
->=20
-> > =A0	void *importer_priv;
-> > =A0	void *priv;
-> > =A0};
-> > @@ -589,6 +595,11 @@ struct sg_table
-> *dma_buf_map_attachment(struct
-> > dma_buf_attachment *,
-> > =A0					enum dma_data_direction);
-> > =A0void dma_buf_unmap_attachment(struct dma_buf_attachment *, struct
-> > sg_table *,
-> > =A0				enum dma_data_direction);
-> > +
-> > +struct dma_buf_ranges *dma_buf_map_interconnect(struct
-> > dma_buf_attachment *);
-> > +void dma_buf_unmap_interconnect(struct dma_buf_attachment *,
-> > +				struct dma_buf_ranges *);
-> > +
-> > =A0void dma_buf_move_notify(struct dma_buf *dma_buf);
-> > =A0int dma_buf_begin_cpu_access(struct dma_buf *dma_buf,
-> > =A0			=A0=A0=A0=A0 enum dma_data_direction dir);
->=20
-> Thanks,
-> Thomas
->=20
+diff --git a/drivers/dma-buf/dma-fence.c b/drivers/dma-buf/dma-fence.c
+index 3f78c56b58dc..39e6f93dc310 100644
+--- a/drivers/dma-buf/dma-fence.c
++++ b/drivers/dma-buf/dma-fence.c
+@@ -1141,7 +1141,7 @@ const char __rcu *dma_fence_timeline_name(struct dma_fence *fence)
+ 			 "RCU protection is required for safe access to returned string");
+ 
+ 	if (!test_bit(DMA_FENCE_FLAG_SIGNALED_BIT, &fence->flags))
+-		return fence->ops->get_driver_name(fence);
++		return fence->ops->get_timeline_name(fence);
+ 	else
+ 		return "signaled-timeline";
+ }
+-- 
+2.25.1
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
