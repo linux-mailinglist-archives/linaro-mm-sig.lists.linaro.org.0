@@ -2,260 +2,468 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sJz5Jzb24GmInwAAu9opvQ
+	id cONaFWL34GnZnwAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:46:14 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:51:14 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 208A040FBBF
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:46:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D624C40FD4B
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:51:13 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 13286404E4
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 14:41:08 +0000 (UTC)
-Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
-	by lists.linaro.org (Postfix) with ESMTPS id 30C333F779
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 21 Oct 2025 04:20:48 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 0624A404DC
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 14:41:17 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.10])
+	by lists.linaro.org (Postfix) with ESMTPS id D4C383F6A2
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 21 Oct 2025 05:45:51 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20230601 header.b=ZO3T3hoj;
-	dmarc=pass (policy=none) header.from=gmail.com;
-	spf=pass (lists.linaro.org: domain of 21cnbao@gmail.com designates 209.85.215.173 as permitted sender) smtp.mailfrom=21cnbao@gmail.com
-Received: by mail-pg1-f173.google.com with SMTP id 41be03b00d2f7-b6a7d3040efso1780490a12.1
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 20 Oct 2025 21:20:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1761020447; x=1761625247; darn=lists.linaro.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=SRLdP4GmC8TAaehpYwLWmY0fXaXzRogSZM1ApFlMens=;
-        b=ZO3T3hojlO7S/1DIcVwmKidF0jzhMDIFbgBWV+AQlwPv0EOH6D8k74mmhLZ4LY/SsQ
-         FP0oStHk8WuLdkHtV1jiiKM/4uFCePVwjMpOsJ0nKrVWrCalKvVIXAQs9HjVsWMGbFOH
-         1Bo6VzVQx9KqjMK2YuOphmQneEYfsq3gyeWLKD9o04HnmV5d+StMZZhEUfwJHe34roIB
-         JXtpshvJhpk2GXQCNhYE70h/OIzwDOHCNo1s2lQW6RtW/HCVbUo7QEpH9Ii0AMbuO0mC
-         e0jqlRcHGj3h0Df04PMHKXebEbJuQ7Wo8uGj+iIvbWGDH9ClaC0T222rBgXnrAiY7M+K
-         B6xQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761020447; x=1761625247;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=SRLdP4GmC8TAaehpYwLWmY0fXaXzRogSZM1ApFlMens=;
-        b=c7GSDHeJ/bbUBs9mwm4vuMF9lQ279OIA/y9Ke2+qN55ygBAG8qvL4lF6lbWuURpI43
-         whoyT5ukKNqpklt0sFPJbYPAJaXDalzwhQbh8H3d4PJ7zZowQ3BbUmeAehcmCmVMcczh
-         +4hzar/9QutSMoAdddcYwnBR0UAnBNwiP3gg7RlLGy0kUOeDunsfg+X+XadynjBWF0n4
-         WFWItPeSmo8KP4mlOPS+2s1cpPsMZOEhpxPVEpNPpIhCSI47K+pw/Gf13Ynk0zQyDcdZ
-         puY3CgHBFoJVUFFNTM7EeEp7194LD5qaSHwSIaKQbeeyGhaZzsBgUt8w4A/LIy+qZRh7
-         x82A==
-X-Gm-Message-State: AOJu0YxVNbruS9aT+cRx5ORY9JgG9Ued4+GGx63UVbFYxdV4dF/XLi0u
-	0eCT+kpA+8RUu4qA6dMfvQFT7yqbnxqCoEAmi7iYQRfXRLu8T7qe1Lo2VOkpuRWU
-X-Gm-Gg: ASbGnctogop9qCI26I+u8Xn6WqTXQTkLPjD4fOWjvckGe7lt/CJVbMYLIMUPRfuAQaS
-	af/Dc3Q8Xpn72qtLP9LIrnkRHuJM5iVGezAbb8k0PcDQDS+R+9C2B71Xu7q7M+JAYlWHQbwS5oF
-	QwVAtY5uerrtkRH2hOGJxKEu7tM47vAAegXbnSABa1UcUuCqs4ZloIbtXmFLzceKV7s98FBv2AR
-	fTS9EEMY5ikoMdqKhDwEN+phn6JauHbLoGYwGB061IT14HJYsMwG9YDtBvx6j6y3opKP+B49JqB
-	C8LFmyLia9GSQvqQOfLYvyoNCCGP+YSi1GdulwMPZt10rJqX34s/WwwFECuU5mv4QSb7x/uRsUi
-	W5u0mKwQyd7EFuxB9lOTmN27+e3NmfPgACiFg/JC6TFFTAfbenu6tVzzFmRHPHmdfo0nFhQHaT3
-	hJIsm0M/qwUbyivE+k6PCu8A4ek3FxDjJvay5IuhH4wuc=
-X-Google-Smtp-Source: AGHT+IGuMYHt7WIQD1fK0EiihxrlnrbJ5cDcN1SmyPvVx87IncetjCE6sVwVUYILV4vleroj1LiXDQ==
-X-Received: by 2002:a17:902:ce12:b0:27e:ec72:f62 with SMTP id d9443c01a7336-290c9c89b06mr180684945ad.6.1761020446906;
-        Mon, 20 Oct 2025 21:20:46 -0700 (PDT)
-Received: from Barrys-MBP.hub ([47.72.128.212])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-292471fde15sm96162725ad.84.2025.10.20.21.20.41
-        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
-        Mon, 20 Oct 2025 21:20:46 -0700 (PDT)
-From: Barry Song <21cnbao@gmail.com>
-To: linaro-mm-sig@lists.linaro.org,
-	linux-kernel@vger.kernel.org,
-	linux-media@vger.kernel.org,
-	sumit.semwal@linaro.org
-Date: Tue, 21 Oct 2025 17:20:22 +1300
-Message-Id: <20251021042022.47919-1-21cnbao@gmail.com>
-X-Mailer: git-send-email 2.39.3 (Apple Git-146)
+	dkim=pass header.d=intel.com header.s=Intel header.b=Jkhzq7yb;
+	dmarc=pass (policy=none) header.from=intel.com;
+	arc=pass ("microsoft.com:s=arcselector10001:i=1");
+	spf=pass (lists.linaro.org: domain of vivek.kasireddy@intel.com designates 198.175.65.10 as permitted sender) smtp.mailfrom=vivek.kasireddy@intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1761025552; x=1792561552;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=3yStUlJC1KfEJatCIVtl226mUZGnMu9eJNc6ChN7rgU=;
+  b=Jkhzq7ybRaKkvIiB8oQmMyZjOsr0Jz/j0g1sg296VZIPVGGWQk8MpZ34
+   wyp0qoa5Q70xr71rvQijRrVcnec+kO5SvFUN/bmO3fnM51J6oSW5sSjtx
+   gYDa3pk5MeCuw0NotC8nwBa70y7RbV3iKZk5aztuE2cfEKEY0Wd5HB1Pm
+   J1WgrnjkdVNjIYEPXzSu5CoBxvLddsoaUZ8NsprDT0jfuQjAo53trGC8L
+   2/6Z2S/OcOpjG5tZpMtoISLdrkxfwdnbb2uneYfvjiH/C8s5pWn99g8zQ
+   FP6FiFXhjXfKhpqTuTgEYVXx/wd1bT/TdPjBESVAjmnJgf4gx2CBtXm5W
+   w==;
+X-CSE-ConnectionGUID: goz5yoveQ+ePKskTy6w9HA==
+X-CSE-MsgGUID: IwyFuazdR9+p1BELT5QUNw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11586"; a="80584432"
+X-IronPort-AV: E=Sophos;i="6.19,244,1754982000";
+   d="scan'208";a="80584432"
+Received: from fmviesa005.fm.intel.com ([10.60.135.145])
+  by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Oct 2025 22:45:51 -0700
+X-CSE-ConnectionGUID: cYqkFEjoRieiK/lRdwgyVQ==
+X-CSE-MsgGUID: pnB8QVLURCeYHOkOyMfXaw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.19,244,1754982000";
+   d="scan'208";a="187916136"
+Received: from fmsmsx902.amr.corp.intel.com ([10.18.126.91])
+  by fmviesa005.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Oct 2025 22:45:50 -0700
+Received: from FMSMSX902.amr.corp.intel.com (10.18.126.91) by
+ fmsmsx902.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.27; Mon, 20 Oct 2025 22:45:50 -0700
+Received: from fmsedg903.ED.cps.intel.com (10.1.192.145) by
+ FMSMSX902.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.27 via Frontend Transport; Mon, 20 Oct 2025 22:45:50 -0700
+Received: from CH4PR04CU002.outbound.protection.outlook.com (40.107.201.51) by
+ edgegateway.intel.com (192.55.55.83) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.27; Mon, 20 Oct 2025 22:45:50 -0700
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Zojjub71bg22LXzA9BpAX6ghW+0SAItkk33ItcpH4J2SAnRduAJuEyfHu0fUM87Ar2MItWhkScDDiXpCDqJGDRyLUHwpAAj/zPi09iJNgj9gBeXnY0sXVy2KmjGhHj3CqYP+U11TEJHioji3D2u3/WO8sBbvR17+IQzSBlHlO8XyK9R9ypKCpMqgE65eMzUnl/f6oCbzXx8Uhq9iWlpQWP+IxdE2FrCF7wEyjrRIa3zZTUN68v9Nmki2OTevAY9O8BQxOfiOS1kghYtBJgVUXVIL6Lwa0unRqvQDuIPSaY7XUTHVBw2ySoinZhezFAEPJrH2oq3ol8zRpHGAGrlrKA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=sCj1z2jrSNWDL1SuScf5AN828EJAyVl9KCv+lRHRXn4=;
+ b=JXP5GDU8JoJlhfNvxu9kykWaB0rqtxbuylUXOj0h1Sni0qF/RGUyeshMTbVLQplOO7YeQ1uuAMijh3LUZ1RFuo53VT6dNqqTmE2pcXliLYud/e52nUxJWls5bsvip7oyLhr0i/UObNfi80Zu9sR5zb0tOo0EAGfU9uIVDznchA23No0DgnaLOK5d76X6i4d3KYBw8htJpjXhNEJcA6j9P8dDGlwROUu8cjZazezAv0ZaUQkr8amtZzpDqI1uTDzZcrZqRtUJvVgt5f9hNfV5YNmOHyw4ABYOl4+POVXDLdTtbUWGAncvf4tvCU41cKH2ekq1H1IOJXQ3azSyBas1QQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Received: from IA0PR11MB7185.namprd11.prod.outlook.com (2603:10b6:208:432::20)
+ by SJ5PPFBC9025319.namprd11.prod.outlook.com (2603:10b6:a0f:fc02::84e) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9228.16; Tue, 21 Oct
+ 2025 05:45:47 +0000
+Received: from IA0PR11MB7185.namprd11.prod.outlook.com
+ ([fe80::dd3b:ce77:841a:722b]) by IA0PR11MB7185.namprd11.prod.outlook.com
+ ([fe80::dd3b:ce77:841a:722b%4]) with mapi id 15.20.9228.016; Tue, 21 Oct 2025
+ 05:45:47 +0000
+From: "Kasireddy, Vivek" <vivek.kasireddy@intel.com>
+To: =?iso-8859-1?Q?Thomas_Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>,
+	Jason Gunthorpe <jgg@nvidia.com>, Christian Koenig
+	<christian.koenig@amd.com>, Sumit Semwal <sumit.semwal@linaro.org>, "Simona
+ Vetter" <simona.vetter@ffwll.ch>
+Thread-Topic: [RFC 1/8] dma-buf: Add support for map/unmap APIs for
+ interconnects
+Thread-Index: AQHcPNojyM5Ag60JRke2zNGq0ekHDLTKz94AgACy/yA=
+Date: Tue, 21 Oct 2025 05:45:47 +0000
+Message-ID: <IA0PR11MB7185F43DA66980266377755DF8F2A@IA0PR11MB7185.namprd11.prod.outlook.com>
+References: <20251014071243.811884-1-vivek.kasireddy@intel.com>
+	 <20251014071243.811884-2-vivek.kasireddy@intel.com>
+ <9d32258381ef46807e599e8e85e8ab94244c9a67.camel@linux.intel.com>
+In-Reply-To: <9d32258381ef46807e599e8e85e8ab94244c9a67.camel@linux.intel.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: IA0PR11MB7185:EE_|SJ5PPFBC9025319:EE_
+x-ms-office365-filtering-correlation-id: 4ed6f275-0575-4553-23a2-08de106515c1
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;ARA:13230040|366016|376014|1800799024|38070700021;
+x-microsoft-antispam-message-info: =?iso-8859-1?Q?ExSEQVq3WHj4J70y0EmMMlEMvJZHfxyPgxGhpsKkxIS+ETepEFON/vDNDV?=
+ =?iso-8859-1?Q?Kcn54qGfz7GLWwunRIv1m2N7g/4QhtgnttMtEM1TujB/Rla/X4lNFLi2SJ?=
+ =?iso-8859-1?Q?+8osWze++pcqZW1yMRbcl+h9v2rZ9t+c8rbSk+co8xHtaVjBz5/BBRML0f?=
+ =?iso-8859-1?Q?ZnaFHe/oI3bY1umSM1O9mTg/0KqKZC+F3pkKisD1kPKmr0EnZRkOj1NSAn?=
+ =?iso-8859-1?Q?IvxoJcz4CeBHfqXjpmI48sl6jpmWYUVlPcQZ80RHkz0oq9WU5vuZNtHYD2?=
+ =?iso-8859-1?Q?HoW24ByQ6qaUacD8Pl3/7EsHOdzSa6++5cZF96HG2GygCoh3L/7t76rlJa?=
+ =?iso-8859-1?Q?U3CyIyJbsTVZa6Zg9GtJc0bucreERou5KQ8O0WpU8GkbNAj0ykt09WJZ4U?=
+ =?iso-8859-1?Q?r+BjXXFVx2Q7ksDkFtKFw7em1FKYJL3KSnsHxqfSKHwF6wZfGoG6edEXKI?=
+ =?iso-8859-1?Q?v7YRmJulsMlxIWbVjlIcbn3kEhTkalenkl5HSWTLpe8MzBWNGThf036Yn1?=
+ =?iso-8859-1?Q?jW8W4tn+bnb3irDQpS50Uv30KDwhnVhiaQT3mG/Ni4UhwTjIyMFeyaQQ4G?=
+ =?iso-8859-1?Q?8S8h6T2QiK3LCXa7u79tSuHyObABNEmz94qOHcQAU9tBNb1rxEzNQEs5yU?=
+ =?iso-8859-1?Q?NQXFMEETL6ZL6gQDSaU16hlYbObwXLeWuk84uCFp4L+jN4NGQJCbMZ/jMN?=
+ =?iso-8859-1?Q?7ELRGTJcsxzK/SJcPpe1nG8QFbsuV1ewSWdGSZPAxqwe284o110A1hyr8H?=
+ =?iso-8859-1?Q?NIWL6Slgq1h64r0WtaybOUnas9onSleuscfyxmwHj8OodtrkRY1rcyYWgA?=
+ =?iso-8859-1?Q?lYsZ5lpFPQ7d/chyT2fR0Mbl381C3l1wOUBueYoVrcVwWVXaheAf8HhOJN?=
+ =?iso-8859-1?Q?Hqia7pRNqTS4US6+eB+0ee+8f6+DTTNRSjMOPZbKYZRu7ckxAyt+cWoNYB?=
+ =?iso-8859-1?Q?3t1x1jA9ymg0mzmI0zRxcFEpgq8C3f9c2s/PJI187XdyhZCo7zy7eAStkV?=
+ =?iso-8859-1?Q?t1qxigaT1+S4PLmgMGrBN0GnJuPJYLqH22kz1stIgG0C9MsbzAhTtRiC1P?=
+ =?iso-8859-1?Q?kJoix1ASTZXDiuOHXO5RuPFLWjCGs1Cv4yFqglJnqdoknei0Gt9lsG5VYe?=
+ =?iso-8859-1?Q?SFUC9u0so7PK5RI3aV/1vb2UBPkW1M+0amT5f32LQZbmjOfO7URd6RGrn1?=
+ =?iso-8859-1?Q?8KTHMON/tRXAZyfnnEJLJl0po4hsu4bwMe15it45gaqX56Id8BNE8Gku/2?=
+ =?iso-8859-1?Q?6vW+djnIBI5ohlpunyt4EjoKVafOPXVwrsPjWGjPAYJYRsY0HpP9vhH+5t?=
+ =?iso-8859-1?Q?RV5O5aOvCmQWHKM5fNQKKg4G91oO9OB/IRxMzYckj8Q2IXqo7VMENeYshL?=
+ =?iso-8859-1?Q?D0M/m/MyndgTVqybcyNRBylk2brZ/wmscXTCx6izl4Act8N771/Ck46WqJ?=
+ =?iso-8859-1?Q?bbwUuihhxzZfSNsbXYJDDhYYZ6Yta9kWBJ7dnW8qKIBPtFsk2dZGdhNTxU?=
+ =?iso-8859-1?Q?+QO9WOLFvf6ySXLPyySyScr63xwkvy+wGW5wbqrC/UJ6WAvV+0dVh7Z6h2?=
+ =?iso-8859-1?Q?ViUQdDOAhq3EsCQjHVpM2M4bQ+gi?=
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA0PR11MB7185.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(38070700021);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?8klo6LWNgI070VSKN1EfDeFxX+GQWMYlT5jPPCUsmU7x5jzk+8m3mf9Ym9?=
+ =?iso-8859-1?Q?tDRREnY4RRFJQAzK3RPXiJ3svLZ775cwbZeVM+h7ArBjbdFtv0NwKcYw/Z?=
+ =?iso-8859-1?Q?c8aaFZsSV1Zpj1tMncQcZwcNKqG4iv2J71AM7QixZOf2B/6WO19aGPsKGD?=
+ =?iso-8859-1?Q?z7wqZH8thYcYXgpOG9r3mycQncDvYLizUyTt5WF5cvGLzd2STYG2MWVxqh?=
+ =?iso-8859-1?Q?MrxeqdoaffTmi5wK5bG6bW5KyanJG2mObxxuIPRMFXaG0AGBqzuMBxsf8n?=
+ =?iso-8859-1?Q?8KfZmGwbmumo1VRVygcJDizVeAA6x/5abAN6rEsaBB5ulIWOjsNLutkkFB?=
+ =?iso-8859-1?Q?GsOifHr1tlisXoaSyMaHfVJrMgUuU92kaOcMmIYJDgmJHYvrvRz2VU4RxM?=
+ =?iso-8859-1?Q?sAOJuXgYcTJ7jEO950bMhRJnL1wQoulrfMQ0gc1KLlURdaLjDDVk4bhtco?=
+ =?iso-8859-1?Q?2qZxNgQYTIh9Xz1+9bWwXwSt7mNhpuGHaI3NoWt6R80wYjc+QS3OglzXJF?=
+ =?iso-8859-1?Q?3ly/3DTjfQZIKaKvnD8GwxMNYaszRy4tuhPpfgxCTb9aPAa1bx0Dj59eW1?=
+ =?iso-8859-1?Q?ffimlY/U+Y85iC6C/sc73LYuPaBP3qyNdbV+a9BRaiS6jiTwXHl5F33yG/?=
+ =?iso-8859-1?Q?D88/B7QQZ2Mv1UQA1A5DNhxnSpRxLxxVYGOwfDERftQYNU9NvaAhonvS9B?=
+ =?iso-8859-1?Q?5gXdDiYqFZqlDnN0Jpnp6lFxWSYDjhqFFxHnx+J1kMiRNIf+RJjVYNO5cU?=
+ =?iso-8859-1?Q?g8HBnHwn5FI/jwyVqWhrqHXLgM/gXI27LOTvgHQ4GoEN7g18epb+oq18Ec?=
+ =?iso-8859-1?Q?4aMX8OD5VH+zem6KMma1AYEDBgRwwibb8hNBIw8h67PbGGyIAqZh8b51+f?=
+ =?iso-8859-1?Q?pMZaDAPVGvMfBuqnnv06J89WbNimuWiNCrizkvc2slAaovcchrTCOkOAJ5?=
+ =?iso-8859-1?Q?gXPWtHrmyuKy4ocCQMWNzvN/qdcf2rG4JygIlOAXPRXPiFQjqLBZhKBXH2?=
+ =?iso-8859-1?Q?aiard6AfmZ9NcJfL/5OWfTRHAXnC3bU4F2p3Z0e2RLFaO4MeyZ7mFkAq4m?=
+ =?iso-8859-1?Q?QTuyqbq94ISdoUbYpC11GylACRcI3h2hih+NHsZBbRHJJlEhiEezGaMNul?=
+ =?iso-8859-1?Q?RQVX63eL+ylcITJ5gciHeVXXrPPzHYmWBaHTgdSse0+mAXfSH4TSIXYpFc?=
+ =?iso-8859-1?Q?Fy6f3L/SmkV4MnMb5KNwPeHBTx+XTn+eBz83xWF/0UpZeUYkSopKV+uWRh?=
+ =?iso-8859-1?Q?XbPOKn8sBojdJ4B/AN+Qp+g2NRha1NfvRPJPANJ7MHHkyebQhbetHvXMEi?=
+ =?iso-8859-1?Q?UtPKiuk32hxXknSoh4szGb0mxQ9eYxvgd7h9q6yJXUgWpslg7p9j2q0s3L?=
+ =?iso-8859-1?Q?zUbHoYhC8Zi3DYi2IJ/jchs9VC/AZBVdajTzDsiRKDwmvcBPuO+wB7bDcs?=
+ =?iso-8859-1?Q?69hGAvcuhaf6OcxYEJDVCTcnrDbp4AliiN1qmXko1BjfNfqs7fXMopApHz?=
+ =?iso-8859-1?Q?VRoJVcPINvBJpgbA5UBIG+kfB3ybOZxktFkd0HYKrBLjGPPj5w8Mtq8bNN?=
+ =?iso-8859-1?Q?76eguaO3HBvl6KY/+ToX7T9pbHon99SUBvX9mZk52a1u34k/V1itaznfM7?=
+ =?iso-8859-1?Q?aUmyWffM3wCjEmhbv+mvtvYvtdetyuiOmL?=
+Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
-X-Spamd-Bar: --
-X-MailFrom: 21cnbao@gmail.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: IA0PR11MB7185.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4ed6f275-0575-4553-23a2-08de106515c1
+X-MS-Exchange-CrossTenant-originalarrivaltime: 21 Oct 2025 05:45:47.5328
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: g1xitQrq7QGs/4EBpvZXmhE7avqbKvczF1OYxiE9FzvJSIOy10DwVMZUs+iXIMPn+ouO9xjAXtO25KgJImKSQnkZTLCULqyXtj0/pRkVugg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ5PPFBC9025319
+X-OriginatorOrg: intel.com
+X-Spamd-Bar: --------
+X-MailFrom: vivek.kasireddy@intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 2NFB34HKYFSM5THJOP4C7BKQARO2PF75
-X-Message-ID-Hash: 2NFB34HKYFSM5THJOP4C7BKQARO2PF75
+Message-ID-Hash: FDIDON2E3QELXZXNWPCVKWFPDIX5LZ7Q
+X-Message-ID-Hash: FDIDON2E3QELXZXNWPCVKWFPDIX5LZ7Q
 X-Mailman-Approved-At: Thu, 16 Apr 2026 14:40:35 +0000
-CC: 21cnbao@gmail.com, Brian.Starkey@arm.com, benjamin.gaignard@collabora.com, christian.koenig@amd.com, dri-devel@lists.freedesktop.org, jstultz@google.com, tjmercier@google.com, v-songbaohua@oppo.com, zhengtangquan@oppo.com
+CC: "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "intel-xe@lists.freedesktop.org" <intel-xe@lists.freedesktop.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v2] dma-buf: system_heap: use larger contiguous mappings instead of per-page mmap
+Subject: [Linaro-mm-sig] Re: [RFC 1/8] dma-buf: Add support for map/unmap APIs for interconnects
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2NFB34HKYFSM5THJOP4C7BKQARO2PF75/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FDIDON2E3QELXZXNWPCVKWFPDIX5LZ7Q/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [1.59 / 15.00];
-	DATE_IN_PAST(1.00)[4258];
-	MID_CONTAINS_FROM(1.00)[];
+Content-Transfer-Encoding: quoted-printable
+X-Spamd-Result: default: False [2.59 / 15.00];
+	DATE_IN_PAST(1.00)[4257];
+	R_DKIM_REJECT(1.00)[intel.com:s=Intel];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
+	DMARC_POLICY_SOFTFAIL(0.10)[intel.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[13];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[gmail.com,arm.com,collabora.com,amd.com,lists.freedesktop.org,google.com,oppo.com];
-	FROM_HAS_DN(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,amd.com:email,intel.com:email,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,ffwll.ch:email,IA0PR11MB7185.namprd11.prod.outlook.com:mid];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_NONE(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[21cnbao@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	NEURAL_HAM(-0.00)[-0.462];
+	FROM_NEQ_ENVFROM(0.00)[vivek.kasireddy@intel.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[intel.com:-];
+	RCPT_COUNT_SEVEN(0.00)[9];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	NEURAL_SPAM(0.00)[0.867];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: 208A040FBBF
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	MISSING_XM_UA(0.00)[];
+	RCVD_COUNT_SEVEN(0.00)[9]
+X-Rspamd-Queue-Id: D624C40FD4B
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-From: Barry Song <v-songbaohua@oppo.com>
+Hi Thomas,
 
-We can allocate high-order pages, but mapping them one by
-one is inefficient. This patch changes the code to map
-as large a chunk as possible. The code looks somewhat
-complicated mainly because supporting mmap with a
-non-zero offset is a bit tricky.
+> Subject: Re: [RFC 1/8] dma-buf: Add support for map/unmap APIs for
+> interconnects
+>=20
+> Hi, Vivek,
+>=20
+> On Tue, 2025-10-14 at 00:08 -0700, Vivek Kasireddy wrote:
+> > For the map operation, the dma-buf core will create an xarray but
+> > the exporter is expected to populate it with the interconnect
+> > specific addresses. And, similarly for unmap, the exporter is
+> > expected to cleanup the individual entries of the xarray.
+> >
+> > Cc: Jason Gunthorpe <jgg@nvidia.com>
+> > Cc: Christian Koenig <christian.koenig@amd.com>
+> > Cc: Sumit Semwal <sumit.semwal@linaro.org>
+> > Cc: Thomas Hellstr=F6m <thomas.hellstrom@linux.intel.com>
+> > Cc: Simona Vetter <simona.vetter@ffwll.ch>
+> > Signed-off-by: Vivek Kasireddy <vivek.kasireddy@intel.com>
+> > ---
+> > =A0drivers/dma-buf/dma-buf.c=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 | 68
+> > ++++++++++++++++++++++++++++
+> > =A0include/linux/dma-buf-interconnect.h | 29 ++++++++++++
+> > =A0include/linux/dma-buf.h=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 | 11 =
++++++
+> > =A03 files changed, 108 insertions(+)
+> > =A0create mode 100644 include/linux/dma-buf-interconnect.h
+> >
+> > diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
+> > index 2bcf9ceca997..162642bd53e8 100644
+> > --- a/drivers/dma-buf/dma-buf.c
+> > +++ b/drivers/dma-buf/dma-buf.c
+> > @@ -1612,6 +1612,74 @@ void dma_buf_vunmap_unlocked(struct
+> dma_buf
+> > *dmabuf, struct iosys_map *map)
+> > =A0}
+> > =A0EXPORT_SYMBOL_NS_GPL(dma_buf_vunmap_unlocked, "DMA_BUF");
+> >
+> > +struct dma_buf_ranges *
+> > +dma_buf_map_interconnect(struct dma_buf_attachment *attach)
+>=20
+> Even if this is an RFC, please add kerneldoc so that the way the
+> interface is intended to be used becomes completely clear. Both for
+> functions and structs.
+Ok, will add documentation in the next version.
 
-Using the micro-benchmark below, we see that mmap becomes
-3.5X faster:
+>=20
+>=20
+> > +{
+> > +	const struct dma_buf_interconnect_ops *ic_ops;
+> > +	struct dma_buf *dmabuf =3D attach->dmabuf;
+> > +	struct dma_buf_ranges *ranges;
+> > +	int ret;
+> > +
+> > +	might_sleep();
+> > +
+> > +	if (WARN_ON(!attach || !attach->dmabuf))
+> > +		return ERR_PTR(-EINVAL);
+> > +
+> > +	if (!dma_buf_attachment_is_dynamic(attach))
+> > +		return ERR_PTR(-EINVAL);
+> > +
+> > +	if (!attach->allow_ic)
+> > +		return ERR_PTR(-EOPNOTSUPP);
+> > +
+> > +	dma_resv_assert_held(attach->dmabuf->resv);
+> > +
+> > +	ic_ops =3D dmabuf->ops->interconnect_ops;
+> > +	if (!ic_ops || !ic_ops->map_interconnect)
+> > +		return ERR_PTR(-EINVAL);
+> > +
+> > +	ranges =3D kzalloc(sizeof(*ranges), GFP_KERNEL);
+> > +	if (!ranges)
+> > +		return ERR_PTR(-ENOMEM);
+> > +
+> > +	xa_init(&ranges->ranges);
+> > +	ret =3D ic_ops->map_interconnect(attach, ranges);
+> > +	if (ret)
+> > +		goto err_free_ranges;
+> > +
+> > +	return ranges;
+> > +
+> > +err_free_ranges:
+> > +	xa_destroy(&ranges->ranges);
+> > +	kfree(ranges);
+> > +	return ERR_PTR(ret);
+> > +}
+> > +EXPORT_SYMBOL_NS_GPL(dma_buf_map_interconnect, "DMA_BUF");
+> > +
+> > +void dma_buf_unmap_interconnect(struct dma_buf_attachment *attach,
+> > +				struct dma_buf_ranges *ranges)
+> > +{
+> > +	const struct dma_buf_interconnect_ops *ic_ops;
+> > +	struct dma_buf *dmabuf =3D attach->dmabuf;
+> > +
+> > +	if (WARN_ON(!attach || !attach->dmabuf || !ranges))
+> > +		return;
+> > +
+> > +	if (!attach->allow_ic)
+> > +		return;
+> > +
+> > +	ic_ops =3D dmabuf->ops->interconnect_ops;
+> > +	if (!ic_ops || !ic_ops->unmap_interconnect)
+> > +		return;
+> > +
+> > +	dma_resv_assert_held(attach->dmabuf->resv);
+> > +
+> > +	ic_ops->unmap_interconnect(attach, ranges);
+> > +
+> > +	xa_destroy(&ranges->ranges);
+> > +	kfree(ranges);
+> > +}
+> > +EXPORT_SYMBOL_NS_GPL(dma_buf_unmap_interconnect, "DMA_BUF");
+> > +
+> > =A0#ifdef CONFIG_DEBUG_FS
+> > =A0static int dma_buf_debug_show(struct seq_file *s, void *unused)
+> > =A0{
+> > diff --git a/include/linux/dma-buf-interconnect.h
+> > b/include/linux/dma-buf-interconnect.h
+> > new file mode 100644
+> > index 000000000000..17504dea9691
+> > --- /dev/null
+> > +++ b/include/linux/dma-buf-interconnect.h
+> > @@ -0,0 +1,29 @@
+> > +/* SPDX-License-Identifier: MIT */
+> > +
+> > +#ifndef __DMA_BUF_INTERCONNECT_H__
+> > +#define __DMA_BUF_INTERCONNECT_H__
+> > +
+> > +#include <linux/xarray.h>
+> > +
+> > +struct dma_buf_attachment;
+> > +
+> > +struct dma_buf_ranges {
+> > +	struct xarray ranges;
+> > +	unsigned int nranges;
+>=20
+> IIUC this would replace the sg-table right?
+Yes, that is the intended goal.=20
 
-  #include <stdio.h>
-  #include <fcntl.h>
-  #include <linux/dma-heap.h>
-  #include <sys/ioctl.h>
-  #include <sys/mman.h>
-  #include <time.h>
-  #include <unistd.h>
-  #include <stdlib.h>
+> I guess Jason or Christian
+> would need to comment on whether this is generic enough or whether it
+> needs to be interconnect-dependent.
+AFAIU, the individual entries of the xarray could be of any type that is
+interconnect-specific and shared between exporter and importer.
+For example, for IOV interconnect, I have picked struct range as the
+type (to represent individual entries of the xarray) to share addresses
+between exporter and importer.
 
-  #define SIZE   (512UL * 1024 * 1024)
-  #define PAGE   4096
-  #define STRIDE (PAGE/sizeof(int))
-  #define PAGES  (SIZE/PAGE)
+>=20
+> > +};
+> > +
+> > +enum dma_buf_interconnect_type {
+> > +	DMA_BUF_INTERCONNECT_NONE =3D 0,
+> > +};
+>=20
+> This calls for registering all known interconnects with the dma-buf
+> layer even if the interconnects are completely driver-private. I'd
+> suggest using a pointer to identify interconnect and whatever entity
+> defines the interconnect provides a unique pointer. For globally
+> visible interconnects this could be done in dma-buf.c or a dma-buf-
+> interconnect.c
+Thank you for your suggestion. I'll explore the idea in more detail.
 
-  int main(void) {
-      int heap = open("/dev/dma_heap/system", O_RDONLY);
-      struct dma_heap_allocation_data d =
-            { .len = SIZE, .fd_flags = O_RDWR|O_CLOEXEC };
-      ioctl(heap, DMA_HEAP_IOCTL_ALLOC, &d);
+>=20
+> > +
+> > +struct dma_buf_interconnect {
+> > +	enum dma_buf_interconnect_type type;
+> > +};
+> > +
+> > +struct dma_buf_interconnect_ops {
+> > +	int (*map_interconnect)(struct dma_buf_attachment *attach,
+> > +				struct dma_buf_ranges *ranges);
+> > +	void (*unmap_interconnect)(struct dma_buf_attachment
+> > *attach,
+> > +				=A0=A0 struct dma_buf_ranges *ranges);
+> > +};
+> > +#endif
+> > diff --git a/include/linux/dma-buf.h b/include/linux/dma-buf.h
+> > index d58e329ac0e7..db91c67c00d6 100644
+> > --- a/include/linux/dma-buf.h
+> > +++ b/include/linux/dma-buf.h
+> > @@ -23,6 +23,8 @@
+> > =A0#include <linux/dma-fence.h>
+> > =A0#include <linux/wait.h>
+> >
+> > +#include <linux/dma-buf-interconnect.h>
+> > +
+> > =A0struct device;
+> > =A0struct dma_buf;
+> > =A0struct dma_buf_attachment;
+> > @@ -276,6 +278,8 @@ struct dma_buf_ops {
+> >
+> > =A0	int (*vmap)(struct dma_buf *dmabuf, struct iosys_map *map);
+> > =A0	void (*vunmap)(struct dma_buf *dmabuf, struct iosys_map
+> > *map);
+> > +
+> > +	const struct dma_buf_interconnect_ops *interconnect_ops;
+> > =A0};
+> >
+> > =A0/**
+> > @@ -502,7 +506,9 @@ struct dma_buf_attachment {
+> > =A0	struct device *dev;
+> > =A0	struct list_head node;
+> > =A0	bool peer2peer;
+> > +	bool allow_ic;
+> > =A0	const struct dma_buf_attach_ops *importer_ops;
+> > +	struct dma_buf_interconnect interconnect;
+>=20
+> Hmm. Could we have a pointer to the interconnect here? Let's say the
+> interconnect implementation would want to subclass with additional
+> information?
+Sure. I was going to do that in the next version.
 
-      struct timespec t0, t1;
-      clock_gettime(CLOCK_MONOTONIC, &t0);
-      int *p = mmap(NULL, SIZE, PROT_READ|PROT_WRITE, MAP_SHARED, d.fd, 0);
-      clock_gettime(CLOCK_MONOTONIC, &t1);
+Thanks,
+Vivek
 
-      for (int i = 0; i < PAGES; i++) p[i*STRIDE] = i;
-      for (int i = 0; i < PAGES; i++)
-          if (p[i*STRIDE] != i) {
-              fprintf(stderr, "mismatch at page %d\n", i);
-              exit(1);
-          }
-
-      long ns = (t1.tv_sec-t0.tv_sec)*1000000000L +
-                (t1.tv_nsec-t0.tv_nsec);
-      printf("mmap 512MB took %.3f us, verify OK\n", ns/1000.0);
-      return 0;
-  }
-
-W/ patch:
-
-~ # ./a.out
-mmap 512MB took 200266.000 us, verify OK
-~ # ./a.out
-mmap 512MB took 198151.000 us, verify OK
-~ # ./a.out
-mmap 512MB took 197069.000 us, verify OK
-~ # ./a.out
-mmap 512MB took 196781.000 us, verify OK
-~ # ./a.out
-mmap 512MB took 198102.000 us, verify OK
-~ # ./a.out
-mmap 512MB took 195552.000 us, verify OK
-
-W/o patch:
-
-~ # ./a.out
-mmap 512MB took 6987470.000 us, verify OK
-~ # ./a.out
-mmap 512MB took 6970739.000 us, verify OK
-~ # ./a.out
-mmap 512MB took 6984383.000 us, verify OK
-~ # ./a.out
-mmap 512MB took 6971311.000 us, verify OK
-~ # ./a.out
-mmap 512MB took 6991680.000 us, verify OK
-
-Signed-off-by: Barry Song <v-songbaohua@oppo.com>
-Acked-by: John Stultz <jstultz@google.com>
----
- -v2: collect John's ack. thanks!
-
- drivers/dma-buf/heaps/system_heap.c | 33 +++++++++++++++++++++--------
- 1 file changed, 24 insertions(+), 9 deletions(-)
-
-diff --git a/drivers/dma-buf/heaps/system_heap.c b/drivers/dma-buf/heaps/system_heap.c
-index bbe7881f1360..4c782fe33fd4 100644
---- a/drivers/dma-buf/heaps/system_heap.c
-+++ b/drivers/dma-buf/heaps/system_heap.c
-@@ -186,20 +186,35 @@ static int system_heap_mmap(struct dma_buf *dmabuf, struct vm_area_struct *vma)
- 	struct system_heap_buffer *buffer = dmabuf->priv;
- 	struct sg_table *table = &buffer->sg_table;
- 	unsigned long addr = vma->vm_start;
--	struct sg_page_iter piter;
--	int ret;
-+	unsigned long pgoff = vma->vm_pgoff;
-+	struct scatterlist *sg;
-+	int i, ret;
-+
-+	for_each_sgtable_sg(table, sg, i) {
-+		unsigned long n = sg->length >> PAGE_SHIFT;
- 
--	for_each_sgtable_page(table, &piter, vma->vm_pgoff) {
--		struct page *page = sg_page_iter_page(&piter);
-+		if (pgoff < n)
-+			break;
-+		pgoff -= n;
-+	}
-+
-+	for (; sg && addr < vma->vm_end; sg = sg_next(sg)) {
-+		unsigned long n = (sg->length >> PAGE_SHIFT) - pgoff;
-+		struct page *page = sg_page(sg) + pgoff;
-+		unsigned long size = n << PAGE_SHIFT;
-+
-+		if (addr + size > vma->vm_end)
-+			size = vma->vm_end - addr;
- 
--		ret = remap_pfn_range(vma, addr, page_to_pfn(page), PAGE_SIZE,
--				      vma->vm_page_prot);
-+		ret = remap_pfn_range(vma, addr, page_to_pfn(page),
-+				size, vma->vm_page_prot);
- 		if (ret)
- 			return ret;
--		addr += PAGE_SIZE;
--		if (addr >= vma->vm_end)
--			return 0;
-+
-+		addr += size;
-+		pgoff = 0;
- 	}
-+
- 	return 0;
- }
- 
--- 
-2.39.3 (Apple Git-146)
+>=20
+>=20
+> > =A0	void *importer_priv;
+> > =A0	void *priv;
+> > =A0};
+> > @@ -589,6 +595,11 @@ struct sg_table
+> *dma_buf_map_attachment(struct
+> > dma_buf_attachment *,
+> > =A0					enum dma_data_direction);
+> > =A0void dma_buf_unmap_attachment(struct dma_buf_attachment *, struct
+> > sg_table *,
+> > =A0				enum dma_data_direction);
+> > +
+> > +struct dma_buf_ranges *dma_buf_map_interconnect(struct
+> > dma_buf_attachment *);
+> > +void dma_buf_unmap_interconnect(struct dma_buf_attachment *,
+> > +				struct dma_buf_ranges *);
+> > +
+> > =A0void dma_buf_move_notify(struct dma_buf *dma_buf);
+> > =A0int dma_buf_begin_cpu_access(struct dma_buf *dma_buf,
+> > =A0			=A0=A0=A0=A0 enum dma_data_direction dir);
+>=20
+> Thanks,
+> Thomas
+>=20
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
