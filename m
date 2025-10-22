@@ -2,78 +2,82 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id BBE9DBF42AE
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 21 Oct 2025 02:43:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C13A3BFA777
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Oct 2025 09:09:09 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 1D3D73F77A
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 21 Oct 2025 00:43:22 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 797483F776
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 21 Oct 2025 00:43:11 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 715D93F7B1
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Oct 2025 07:09:08 +0000 (UTC)
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+	by lists.linaro.org (Postfix) with ESMTPS id 4EF8A3F683
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 22 Oct 2025 07:08:57 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=cEtkjrjS;
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (lists.linaro.org: domain of kuba@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=kuba@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id E6CCD43E40;
-	Tue, 21 Oct 2025 00:43:10 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 65B00C4CEFB;
-	Tue, 21 Oct 2025 00:43:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1761007390;
-	bh=4RCzmBSn1YK3dNU1eu6WlsS+oiC3sOWT4kMWZcs60Is=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=cEtkjrjSI92wIHZJsTGhCickdT6aybd2B/sEoCNPQBq/fTzMFYu6KnoutQup+d3Ro
-	 lM5gStw8JWQUxulUM1ObqQoPovLRzmAZd6pDkxLZNOvipZeJs8WuC5drCdqW3pVzlM
-	 h/BndLLXV6OHUq6iIpQRcM7bJYk9icyWPTB5HiUu6//tb+H7Qb/DdZ+aG3zjCUS/Ty
-	 PRoWZxS854wCjMVNWDg3mNdhBMvr5w0gjQF3eaI2lbwC9unraJMT4P1SItRyPIjrWH
-	 8Pxo7LIrp/88tlKL+LQ5d1imWkZr7hsHbzmQNAOzfATefCser5tkqQeUtnFxqAIwLz
-	 OaSBPwcvab96Q==
-Date: Mon, 20 Oct 2025 17:43:08 -0700
-From: Jakub Kicinski <kuba@kernel.org>
-To: Meghana Malladi <m-malladi@ti.com>
-Message-ID: <20251020174308.59b87130@kernel.org>
-In-Reply-To: <20251014105613.2808674-1-m-malladi@ti.com>
-References: <20251014105613.2808674-1-m-malladi@ti.com>
+	dkim=pass header.d=infradead.org header.s=bombadil.20210309 header.b=SdNtRvN9;
+	dmarc=none;
+	spf=none (lists.linaro.org: domain of BATV+21c3bf232c3b55be12f8+8095+infradead.org+hch@bombadil.srs.infradead.org has no SPF policy when checking 198.137.202.133) smtp.mailfrom=BATV+21c3bf232c3b55be12f8+8095+infradead.org+hch@bombadil.srs.infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
+	:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=v9tFlJ2fSBgWVG5dQp+BqV6oOUweYHcntX3sRf6YFKM=; b=SdNtRvN9ECbH+6Wq5VOUBng1tV
+	rbcoTW7YrrfUGP/4J4whwouG1kDyvf3Lmdfi7LbnRPq89BMYv58xbUTBmXgSPXZVYRb6mJhJAPQU1
+	ZIA0/wC+S1RJMhiGYJjhCAdfm4FEwCrzY3g3l4cgwQjuPypeTpyBjpkFiGnJ3/MzMXNCCwCjSZrzm
+	n6BBFOL61exQBTv/xlQB1DwMELcEAU2ArzUgD/NYvkI2kZUkmNNPseZu9Lnk8f+brxHeHjW+o2OQa
+	50dWmbeHSHNr0vGLwBLSjUlfEwJXoZAmppaRqh0WNeM+hhzaF/nXElPtxtD2OmafhI0Tejkvpb775
+	0PevGOYA==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.98.2 #2 (Red Hat Linux))
+	id 1vBSxk-00000001oCQ-0f7W;
+	Wed, 22 Oct 2025 07:08:48 +0000
+Date: Wed, 22 Oct 2025 00:08:48 -0700
+From: Christoph Hellwig <hch@infradead.org>
+To: Jason Gunthorpe <jgg@nvidia.com>
+Message-ID: <aPiDACJHZY7Gu4y1@infradead.org>
+References: <cover.1760368250.git.leon@kernel.org>
+ <a04c44aa4625a6edfadaf9c9e2c2afb460ad1857.1760368250.git.leon@kernel.org>
+ <aPHjG2PS5DVgcG93@infradead.org>
+ <20251017115524.GG3901471@nvidia.com>
+ <aPYq0jQZOrn-lUJW@infradead.org>
+ <20251020130855.GM316284@nvidia.com>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20251020130855.GM316284@nvidia.com>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 797483F776
+X-Rspamd-Queue-Id: 4EF8A3F683
 X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.45 / 15.00];
-	BAYES_HAM(-2.95)[99.78%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.252.31];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+X-Spamd-Result: default: False [-2.80 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
+	FORGED_SENDER(0.30)[hch@infradead.org,BATV@bombadil.srs.infradead.org];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
+	ONCE_RECEIVED(0.20)[];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_TRACE(0.00)[0:+];
+	R_SPF_NA(0.00)[no SPF record];
 	MISSING_XM_UA(0.00)[];
-	TAGGED_RCPT(0.00)[netdev];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[26];
-	ARC_NA(0.00)[];
+	RCVD_COUNT_ONE(0.00)[1];
+	DMARC_NA(0.00)[infradead.org];
+	RCPT_COUNT_TWELVE(0.00)[25];
+	MIME_TRACE(0.00)[0:+];
 	NEURAL_HAM(-0.00)[-1.000];
+	DNSWL_BLOCKED(0.00)[198.137.202.133:from];
 	TO_DN_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[hch@infradead.org,BATV@bombadil.srs.infradead.org];
 	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[kernel.org,linutronix.de,intel.com,amd.com,linaro.org,fomichev.me,gmail.com,iogearbox.net,redhat.com,google.com,davemloft.net,lunn.ch,lists.linaro.org,lists.freedesktop.org,vger.kernel.org,lists.infradead.org,ti.com];
 	MID_RHS_MATCH_FROM(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+]
+	TAGGED_FROM(0.00)[21c3bf232c3b55be12f8,8095,infradead.org,hch];
+	ARC_NA(0.00)[];
+	DKIM_TRACE(0.00)[infradead.org:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: 37XKW547C4HVJRLUDDLQ5DPIMPG456RC
-X-Message-ID-Hash: 37XKW547C4HVJRLUDDLQ5DPIMPG456RC
-X-MailFrom: kuba@kernel.org
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: horms@kernel.org, namcao@linutronix.de, jacob.e.keller@intel.com, christian.koenig@amd.com, sumit.semwal@linaro.org, sdf@fomichev.me, john.fastabend@gmail.com, hawk@kernel.org, daniel@iogearbox.net, ast@kernel.org, pabeni@redhat.com, edumazet@google.com, davem@davemloft.net, andrew+netdev@lunn.ch, linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, bpf@vger.kernel.org, linux-kernel@vger.kernel.org, netdev@vger.kernel.org, linux-arm-kernel@lists.infradead.org, srk@ti.com, Vignesh Raghavendra <vigneshr@ti.com>, Roger Quadros <rogerq@kernel.org>, danishanwar@ti.com
+Message-ID-Hash: 4DNYR3V6SVJPKJNH5GGAH3PNR47EP5IX
+X-Message-ID-Hash: 4DNYR3V6SVJPKJNH5GGAH3PNR47EP5IX
+X-MailFrom: BATV+21c3bf232c3b55be12f8+8095+infradead.org+hch@bombadil.srs.infradead.org
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Christoph Hellwig <hch@infradead.org>, Leon Romanovsky <leon@kernel.org>, Alex Williamson <alex.williamson@redhat.com>, Leon Romanovsky <leonro@nvidia.com>, Andrew Morton <akpm@linux-foundation.org>, Bjorn Helgaas <bhelgaas@google.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, iommu@lists.linux.dev, Jens Axboe <axboe@kernel.dk>, Joerg Roedel <joro@8bytes.org>, kvm@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linux-mm@kvack.org, linux-pci@vger.kernel.org, Logan Gunthorpe <logang@deltatee.com>, Robin Murphy <robin.murphy@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, Vivek Kasireddy <vivek.kasireddy@intel.com>, Will Deacon <will@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH net-next v3 0/6] Add AF_XDP zero copy support
+Subject: [Linaro-mm-sig] Re: [PATCH v5 8/9] vfio/pci: Enable peer-to-peer DMA transactions by default
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/37XKW547C4HVJRLUDDLQ5DPIMPG456RC/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4DNYR3V6SVJPKJNH5GGAH3PNR47EP5IX/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -83,22 +87,18 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Tue, 14 Oct 2025 16:26:06 +0530 Meghana Malladi wrote:
-> This series adds AF_XDP zero coppy support to icssg driver.
-> 
-> Tests were performed on AM64x-EVM with xdpsock application [1].
-> 
-> A clear improvement is seen Transmit (txonly) and receive (rxdrop)
-> for 64 byte packets. 1500 byte test seems to be limited by line
-> rate (1G link) so no improvement seen there in packet rate
-> 
-> Having some issue with l2fwd as the benchmarking numbers show 0
-> for 64 byte packets after forwading first batch packets and I am
-> currently looking into it.
+On Mon, Oct 20, 2025 at 10:08:55AM -0300, Jason Gunthorpe wrote:
+> Sure, but this should be handled by the P2P subsystem and PCI quirks,
+> IMHO. It isn't VFIOs job.. If people complain about broken HW then it
+> is easy to add those things.
 
-This series stopped applying, could you please respin?
--- 
-pw-bot: cr
+I think it is.  You now open up behavior generally that previously
+had specific drivers in charge.
+
+> IDK where Intel GPU lands on this, but VFIO has always supported P2P
+
+How?
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
