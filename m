@@ -2,146 +2,181 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sEJiGUf34GmInwAAu9opvQ
+	id UKXOHU334GnZnwAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:50:47 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:50:53 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3C73E40FD17
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:50:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1B80C40FD26
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:50:52 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 44857404E5
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 14:50:46 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D9100404EE
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 14:50:51 +0000 (UTC)
 Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.12])
-	by lists.linaro.org (Postfix) with ESMTPS id 207773F7F0
+	by lists.linaro.org (Postfix) with ESMTPS id 84BDA3F7F2
 	for <linaro-mm-sig@lists.linaro.org>; Mon, 27 Oct 2025 04:48:39 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=EwiEDXpY;
+	dkim=pass header.d=intel.com header.s=Intel header.b=cDMaOJAc;
 	dmarc=pass (policy=none) header.from=intel.com;
 	spf=pass (lists.linaro.org: domain of vivek.kasireddy@intel.com designates 198.175.65.12 as permitted sender) smtp.mailfrom=vivek.kasireddy@intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1761540519; x=1793076519;
+  t=1761540520; x=1793076520;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=CvW8mMopgiskI6nzqkjC/nTU7/cwciLyHgd8H3wgFT4=;
-  b=EwiEDXpYh/a4x7LDG1zSGbzRI1WUQ/OXuMVXitw+gcsNbM4ysts6C4Ap
-   /MQNDKfKxVChCj3syx+r3tFtw5ajg0wTxgEbWtwtqUNqW1FIBQpRMH9Ug
-   TJ0D/UrI9QuPu6OX9cAuNjiQkiamLte2SHkCxOagsfyfUVi5KLEncHXIg
-   NNw8Rsenuu9WX9Eg2hkqkrMQkRGwwhrhNlKbG4bas3JjHpBg2dK/Ngfut
-   kGqIt4vE2zFs+UnO0vFnekWpXzLE5KpMh+GPF9taHxEqqsyu3hZJoVwu1
-   3KPcPUX5gp6T4c2HmnlWJLFRxOFhuQK7QyF8+izVInGGxiPI8GhHGDHKF
+  bh=MY2fLmxjj0+IXtVwTx8EQEka44NV8taZsq9/RrkuNEQ=;
+  b=cDMaOJAc3yN6dlpxoyC7Lc/b7Nw8P+dcVL0omiqxNLYwwDwSV3/b/OQJ
+   AJiDUCS1f7z6HUV16cERx/rrr2GHIefBlq4b6FbisOhODl1iL0gR5hKNW
+   Zmp+tLtDzp2jMWN9xz7uc4hDkoLC/ixigxZ8ctpyHDNpe7mMjJBf6RSAC
+   O07JNQ5nC1+PTxtwabjXCCoKaD1DjYJblusKYnok/T3cSdeHD5aHnS1RI
+   4nVRaKNS7uUSZlAIjQqis88nUOBm+d3InaFEeq4KZn9DGTGky17j3MHmd
+   5UDHGGIB70H34yxpAue1X9gGI2Cdef5wLM42ut5gInU/0Ko9sD3nDlFgj
    g==;
-X-CSE-ConnectionGUID: hSpKRiqXRqWLaydRp13KyA==
-X-CSE-MsgGUID: nHt/4rXSRI+uSDiLwf5tag==
-X-IronPort-AV: E=McAfee;i="6800,10657,11586"; a="75058939"
+X-CSE-ConnectionGUID: EKyhGGAmTy+rg+FH20v9BQ==
+X-CSE-MsgGUID: EI5IaEWjQISoGQobnP5lBw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11586"; a="75058940"
 X-IronPort-AV: E=Sophos;i="6.19,258,1754982000";
-   d="scan'208";a="75058939"
+   d="scan'208";a="75058940"
 Received: from orviesa003.jf.intel.com ([10.64.159.143])
   by orvoesa104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Oct 2025 21:48:37 -0700
-X-CSE-ConnectionGUID: dfCdQDeUSoSv6/ji/OIq3Q==
-X-CSE-MsgGUID: pIZwa8pPTX+bPw3NeLngRQ==
+X-CSE-ConnectionGUID: RLdqt1RDQS69UsDQU8chBg==
+X-CSE-MsgGUID: 8o8rQyF1QmS1jRYIxKdJSg==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.19,258,1754982000";
-   d="scan'208";a="188992989"
+   d="scan'208";a="188992992"
 Received: from vkasired-desk2.fm.intel.com ([10.105.128.132])
-  by ORVIESA003-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Oct 2025 21:48:37 -0700
+  by ORVIESA003-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Oct 2025 21:48:38 -0700
 From: Vivek Kasireddy <vivek.kasireddy@intel.com>
 To: dri-devel@lists.freedesktop.org,
 	intel-xe@lists.freedesktop.org,
 	linux-media@vger.kernel.org,
 	linaro-mm-sig@lists.linaro.org
-Date: Sun, 26 Oct 2025 21:44:17 -0700
-Message-ID: <20251027044712.1676175-6-vivek.kasireddy@intel.com>
+Date: Sun, 26 Oct 2025 21:44:18 -0700
+Message-ID: <20251027044712.1676175-7-vivek.kasireddy@intel.com>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <20251027044712.1676175-1-vivek.kasireddy@intel.com>
 References: <20251027044712.1676175-1-vivek.kasireddy@intel.com>
 MIME-Version: 1.0
-X-Spamd-Bar: ------
+X-Spamd-Bar: -----
 X-MailFrom: vivek.kasireddy@intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 34C5MKZP7IHWVDSJK7U7JCURSRGZ2LN5
-X-Message-ID-Hash: 34C5MKZP7IHWVDSJK7U7JCURSRGZ2LN5
-X-Mailman-Approved-At: Thu, 16 Apr 2026 14:48:24 +0000
-CC: Vivek Kasireddy <vivek.kasireddy@intel.com>, Jason Gunthorpe <jgg@nvidia.com>, Christian Koenig <christian.koenig@amd.com>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>, Simona Vetter <simona.vetter@ffwll.ch>
+Message-ID-Hash: QPTDHNHMRVBSKW37INFE6CXNC6VUMZD5
+X-Message-ID-Hash: QPTDHNHMRVBSKW37INFE6CXNC6VUMZD5
+X-Mailman-Approved-At: Thu, 16 Apr 2026 14:48:25 +0000
+CC: Vivek Kasireddy <vivek.kasireddy@intel.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [RFC v2 5/8] drm/xe/dma_buf: Add support for IOV interconnect
+Subject: [Linaro-mm-sig] [RFC v2 6/8] drm/xe/pf: Add a helper function to get a VF's backing object in LMEM
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/34C5MKZP7IHWVDSJK7U7JCURSRGZ2LN5/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QPTDHNHMRVBSKW37INFE6CXNC6VUMZD5/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-X-Spamd-Result: default: False [2.69 / 15.00];
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [2.59 / 15.00];
 	DATE_IN_PAST(1.00)[4114];
-	MID_CONTAINS_FROM(1.00)[];
 	R_DKIM_REJECT(1.00)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+	MID_CONTAINS_FROM(1.00)[];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	DMARC_POLICY_SOFTFAIL(0.10)[intel.com : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
+	TO_DN_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	RCVD_COUNT_THREE(0.00)[4];
 	ARC_NA(0.00)[];
-	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[intel.com:-];
-	NEURAL_HAM(-0.00)[-0.983];
+	NEURAL_HAM(-0.00)[-0.640];
 	FROM_NEQ_ENVFROM(0.00)[vivek.kasireddy@intel.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	RCPT_COUNT_FIVE(0.00)[5];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,ffwll.ch:email,intel.com:mid,intel.com:email,linaro.org:email,nvidia.com:email,amd.com:email]
-X-Rspamd-Queue-Id: 3C73E40FD17
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,intel.com:mid,intel.com:email]
+X-Rspamd-Queue-Id: 1B80C40FD26
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-UHJvdmlkZSBhIGNhbGxiYWNrIGZvciBzdXBwb3J0c19pbnRlcmNvbm5lY3RzKCkgdG8gaW5kaWNh
-dGUgdG8NCnRoZSBkbWEtYnVmIGNvcmUgYW5kIHRvIHRoZSBleHBvcnRlciB0aGF0IFhlIHN1cHBv
-cnRzIGludGVyY29ubmVjdHMuDQpOb3RlIHRoYXQgWGUgd291bGQgc3VwcG9ydCBJT1YgaW50ZXJj
-b25uZWN0IG9ubHkgaWYgdGhlIGJ1ZmZlcg0KaXMgbG9jYXRlZCBpbiBWUkFNIHJlZ2lvbi4NCg0K
-Q2M6IEphc29uIEd1bnRob3JwZSA8amdnQG52aWRpYS5jb20+DQpDYzogQ2hyaXN0aWFuIEtvZW5p
-ZyA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPg0KQ2M6IFN1bWl0IFNlbXdhbCA8c3VtaXQuc2Vt
-d2FsQGxpbmFyby5vcmc+DQpDYzogVGhvbWFzIEhlbGxzdHLDtm0gPHRob21hcy5oZWxsc3Ryb21A
-bGludXguaW50ZWwuY29tPg0KQ2M6IFNpbW9uYSBWZXR0ZXIgPHNpbW9uYS52ZXR0ZXJAZmZ3bGwu
-Y2g+DQpTaWduZWQtb2ZmLWJ5OiBWaXZlayBLYXNpcmVkZHkgPHZpdmVrLmthc2lyZWRkeUBpbnRl
-bC5jb20+DQotLS0NCiBkcml2ZXJzL2dwdS9kcm0veGUveGVfZG1hX2J1Zi5jIHwgMTcgKysrKysr
-KysrKysrKysrKy0NCiAxIGZpbGUgY2hhbmdlZCwgMTYgaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlv
-bigtKQ0KDQpkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL3hlL3hlX2RtYV9idWYuYyBiL2Ry
-aXZlcnMvZ3B1L2RybS94ZS94ZV9kbWFfYnVmLmMNCmluZGV4IGE3ZDY3NzI1YzNlZS4uNGExYWE0
-N2VmYmM2IDEwMDY0NA0KLS0tIGEvZHJpdmVycy9ncHUvZHJtL3hlL3hlX2RtYV9idWYuYw0KKysr
-IGIvZHJpdmVycy9ncHUvZHJtL3hlL3hlX2RtYV9idWYuYw0KQEAgLTEzLDYgKzEzLDcgQEANCiAj
-aW5jbHVkZSA8ZHJtL2RybV9wcmltZS5oPg0KICNpbmNsdWRlIDxkcm0vdHRtL3R0bV90dC5oPg0K
-IA0KKyNpbmNsdWRlICJyZWdzL3hlX2JhcnMuaCINCiAjaW5jbHVkZSAidGVzdHMveGVfdGVzdC5o
-Ig0KICNpbmNsdWRlICJ4ZV9iby5oIg0KICNpbmNsdWRlICJ4ZV9kZXZpY2UuaCINCkBAIC0yNzQs
-OSArMjc1LDIzIEBAIHN0YXRpYyB2b2lkIHhlX2RtYV9idWZfbW92ZV9ub3RpZnkoc3RydWN0IGRt
-YV9idWZfYXR0YWNobWVudCAqYXR0YWNoKQ0KIAlYRV9XQVJOX09OKHhlX2JvX2V2aWN0KGJvLCBl
-eGVjKSk7DQogfQ0KIA0KK3N0YXRpYyBib29sDQoreGVfZG1hX2J1Zl9zdXBwb3J0c19pbnRlcmNv
-bm5lY3RzKHN0cnVjdCBkbWFfYnVmX2F0dGFjaG1lbnQgKmF0dGFjaCwNCisJCQkJICBjb25zdCBz
-dHJ1Y3QgZG1hX2J1Zl9pbnRlcmNvbm5lY3RfbWF0Y2ggKmV4cCwNCisJCQkJICB1bnNpZ25lZCBp
-bnQgZXhwX2ljcykNCit7DQorCWNvbnN0IHN0cnVjdCBkbWFfYnVmX2ludGVyY29ubmVjdF9tYXRj
-aCBzdXBwb3J0c19pY3NbXSA9IHsNCisJCU1BVENIX0lOVEVSQ09OTkVDVChpb3ZfaW50ZXJjb25u
-ZWN0LCBhdHRhY2gtPmRldiwgTE1FTV9CQVIpLA0KKwl9Ow0KKw0KKwlyZXR1cm4gZG1hX2J1Zl9t
-YXRjaF9pbnRlcmNvbm5lY3RzKGF0dGFjaCwgZXhwLCBleHBfaWNzLCBzdXBwb3J0c19pY3MsDQor
-CQkJCQkgICBBUlJBWV9TSVpFKHN1cHBvcnRzX2ljcykpOw0KK30NCisNCiBzdGF0aWMgY29uc3Qg
-c3RydWN0IGRtYV9idWZfYXR0YWNoX29wcyB4ZV9kbWFfYnVmX2F0dGFjaF9vcHMgPSB7DQogCS5h
-bGxvd19wZWVyMnBlZXIgPSB0cnVlLA0KLQkubW92ZV9ub3RpZnkgPSB4ZV9kbWFfYnVmX21vdmVf
-bm90aWZ5DQorCS5tb3ZlX25vdGlmeSA9IHhlX2RtYV9idWZfbW92ZV9ub3RpZnksDQorCS5zdXBw
-b3J0c19pbnRlcmNvbm5lY3RzID0geGVfZG1hX2J1Zl9zdXBwb3J0c19pbnRlcmNvbm5lY3RzLA0K
-IH07DQogDQogI2lmIElTX0VOQUJMRUQoQ09ORklHX0RSTV9YRV9LVU5JVF9URVNUKQ0KLS0gDQoy
-LjUwLjENCg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
-TGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8u
-b3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBs
-aXN0cy5saW5hcm8ub3JnCg==
+To properly import a dmabuf that is associated with a VF (or that
+originates in a Guest VM that includes a VF), we need to know where
+in LMEM the VF's allocated regions exist. Therefore, introduce a
+new helper to return the object that backs the VF's regions in LMEM.
+
+v2:
+- Make the helper return the LMEM object instead of the start address
+
+v3:
+- Move the declaration of the helper under other lmem helpers (Michal)
+
+v4:
+- Take a ref on the LMEM obj while holding the PF master mutex (Matt)
+
+Signed-off-by: Vivek Kasireddy <vivek.kasireddy@intel.com>
+---
+ drivers/gpu/drm/xe/xe_gt_sriov_pf_config.c | 24 ++++++++++++++++++++++
+ drivers/gpu/drm/xe/xe_gt_sriov_pf_config.h |  1 +
+ 2 files changed, 25 insertions(+)
+
+diff --git a/drivers/gpu/drm/xe/xe_gt_sriov_pf_config.c b/drivers/gpu/drm/xe/xe_gt_sriov_pf_config.c
+index 6344b5205c08..2f09b67438fc 100644
+--- a/drivers/gpu/drm/xe/xe_gt_sriov_pf_config.c
++++ b/drivers/gpu/drm/xe/xe_gt_sriov_pf_config.c
+@@ -1535,6 +1535,30 @@ u64 xe_gt_sriov_pf_config_get_lmem(struct xe_gt *gt, unsigned int vfid)
+ 	return size;
+ }
+ 
++/**
++ * xe_gt_sriov_pf_config_get_lmem_obj - Get VF's LMEM BO.
++ * @gt: the &xe_gt
++ * @vfid: the VF identifier
++ *
++ * This function can only be called on PF.
++ *
++ * Return: BO that is backing VF's quota in LMEM.
++ */
++struct xe_bo *xe_gt_sriov_pf_config_get_lmem_obj(struct xe_gt *gt,
++						 unsigned int vfid)
++{
++	struct xe_gt_sriov_config *config;
++	struct xe_bo *lmem_obj;
++
++	mutex_lock(xe_gt_sriov_pf_master_mutex(gt));
++	config = pf_pick_vf_config(gt, vfid);
++	lmem_obj = config->lmem_obj;
++	xe_bo_get(lmem_obj);
++	mutex_unlock(xe_gt_sriov_pf_master_mutex(gt));
++
++	return lmem_obj;
++}
++
+ /**
+  * xe_gt_sriov_pf_config_set_lmem - Provision VF with LMEM.
+  * @gt: the &xe_gt (can't be media)
+diff --git a/drivers/gpu/drm/xe/xe_gt_sriov_pf_config.h b/drivers/gpu/drm/xe/xe_gt_sriov_pf_config.h
+index 513e6512a575..bbc5c238cbf6 100644
+--- a/drivers/gpu/drm/xe/xe_gt_sriov_pf_config.h
++++ b/drivers/gpu/drm/xe/xe_gt_sriov_pf_config.h
+@@ -36,6 +36,7 @@ int xe_gt_sriov_pf_config_set_lmem(struct xe_gt *gt, unsigned int vfid, u64 size
+ int xe_gt_sriov_pf_config_set_fair_lmem(struct xe_gt *gt, unsigned int vfid, unsigned int num_vfs);
+ int xe_gt_sriov_pf_config_bulk_set_lmem(struct xe_gt *gt, unsigned int vfid, unsigned int num_vfs,
+ 					u64 size);
++struct xe_bo *xe_gt_sriov_pf_config_get_lmem_obj(struct xe_gt *gt, unsigned int vfid);
+ 
+ u32 xe_gt_sriov_pf_config_get_exec_quantum(struct xe_gt *gt, unsigned int vfid);
+ int xe_gt_sriov_pf_config_set_exec_quantum(struct xe_gt *gt, unsigned int vfid, u32 exec_quantum);
+-- 
+2.50.1
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
