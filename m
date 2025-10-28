@@ -2,185 +2,185 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 8OU1CIn34GnZnwAAu9opvQ
+	id CM5hHZD34GnZnwAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:51:53 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:52:00 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id A163E40FD72
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:51:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1637940FD79
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:52:00 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B6ADC404E5
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 14:51:51 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.19])
-	by lists.linaro.org (Postfix) with ESMTPS id 8981D3F7EC
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 28 Oct 2025 05:39:50 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 277BA404ED
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 14:51:59 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.12])
+	by lists.linaro.org (Postfix) with ESMTPS id 3E6FB3F7A5
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 28 Oct 2025 06:04:51 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=B5qY7Lpw;
+	dkim=pass header.d=intel.com header.s=Intel header.b=aqFppSDh;
 	dmarc=pass (policy=none) header.from=intel.com;
 	arc=pass ("microsoft.com:s=arcselector10001:i=1");
-	spf=pass (lists.linaro.org: domain of vivek.kasireddy@intel.com designates 198.175.65.19 as permitted sender) smtp.mailfrom=vivek.kasireddy@intel.com
+	spf=pass (lists.linaro.org: domain of vivek.kasireddy@intel.com designates 198.175.65.12 as permitted sender) smtp.mailfrom=vivek.kasireddy@intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1761629990; x=1793165990;
+  t=1761631492; x=1793167492;
   h=from:to:cc:subject:date:message-id:references:
    in-reply-to:content-transfer-encoding:mime-version;
-  bh=mgZWfv0dBV5vpGB/xKP2NVK240PBEDIhsX5sXCUL29k=;
-  b=B5qY7Lpw9pN/Le29IJAJuGZyQEImPHEx4gO6m9Z4tXng7x3aWApx60mH
-   SUPeDEZ7LwTkpiCyZ0ogz7U2ckCwpN6mQAeCYej19pDKYz1bvw6bLuiUz
-   c15o+vrBDVlcixTVeleTn5vvUc9z6fQxy/HSX6u/zxrFWm50N2Kgw3Xff
-   yx9HoZcD4PLsmNneoEGdiFLOS+YTrn2NKb0awlRMpjZzKoBQAKiIOvv09
-   57v3revJoUidfQj1egapkeX7C3rz1g+wfxGaVLROy4Zouz4mgiM6Xki0H
-   WqTk4tofW6FvkU5vZiXTKiBEU5gLJ4ea2YbGH63f8R8doiKOxYbipXXW2
+  bh=lIrcs3HqZwRKT/aK3i515V+C/iyWC3Qls+lLPAJLxcU=;
+  b=aqFppSDhrvwcTD78cEOpRuH4HJsl0JmBmtz68Ids0KUhPwixZc+jjh6i
+   gI6SW5ERxtuc6lHlVON7nv/6TUyATwVo6C/EzOYWOLbbuedBzkWnU300n
+   tYQCUvrOJ6QwnsGg61ys2gtj+ttBLKtwAT5b795LC8VROSnPVZgAQ6thJ
+   ub10nCAnGNPEfwuuPsu/mwQnJ47CWOnscuLwqQvbyoc4yTim5tDJ7zCZL
+   Y9votLeoo4a0cKBrPrR8vykWByptHlcqMu4FHJTlvO9fHvcePsEs9XckI
+   wyxpmuAdSI/STN8g8Bt9Z9UyBWl2WseoA9lCDNrr+l2JKAaS0VD9SEiZ8
    g==;
-X-CSE-ConnectionGUID: ox53T+g1TF65w1wYydFYoA==
-X-CSE-MsgGUID: MNrUDo8DSMW0JlTdejG5Hw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11586"; a="63608319"
+X-CSE-ConnectionGUID: 1e3uBMvwQPu9EvSOSLTORA==
+X-CSE-MsgGUID: 7lLEx7DOQj2h4+ObfEm+Cg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11586"; a="75167910"
 X-IronPort-AV: E=Sophos;i="6.19,260,1754982000";
-   d="scan'208";a="63608319"
-Received: from orviesa004.jf.intel.com ([10.64.159.144])
-  by orvoesa111.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Oct 2025 22:39:49 -0700
-X-CSE-ConnectionGUID: ggseUyW8SV2Dx+02BT0qcg==
-X-CSE-MsgGUID: dRokDA1SQU+gfXvxZFFbEw==
+   d="scan'208";a="75167910"
+Received: from fmviesa009.fm.intel.com ([10.60.135.149])
+  by orvoesa104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Oct 2025 23:04:50 -0700
+X-CSE-ConnectionGUID: rfGZKfSMTAuswS1WzZVqKw==
+X-CSE-MsgGUID: 3teJPpP4QZO5sayFNGracw==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.19,260,1754982000";
-   d="scan'208";a="189561782"
-Received: from fmsmsx902.amr.corp.intel.com ([10.18.126.91])
-  by orviesa004.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Oct 2025 22:39:49 -0700
-Received: from FMSMSX902.amr.corp.intel.com (10.18.126.91) by
- fmsmsx902.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
+   d="scan'208";a="185714699"
+Received: from fmsmsx903.amr.corp.intel.com ([10.18.126.92])
+  by fmviesa009.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Oct 2025 23:04:49 -0700
+Received: from FMSMSX903.amr.corp.intel.com (10.18.126.92) by
+ fmsmsx903.amr.corp.intel.com (10.18.126.92) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.27; Mon, 27 Oct 2025 22:39:48 -0700
-Received: from fmsedg901.ED.cps.intel.com (10.1.192.143) by
- FMSMSX902.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
+ 15.2.2562.27; Mon, 27 Oct 2025 23:04:49 -0700
+Received: from fmsedg902.ED.cps.intel.com (10.1.192.144) by
+ FMSMSX903.amr.corp.intel.com (10.18.126.92) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.27 via Frontend Transport; Mon, 27 Oct 2025 22:39:48 -0700
-Received: from SN4PR0501CU005.outbound.protection.outlook.com (40.93.194.5) by
- edgegateway.intel.com (192.55.55.81) with Microsoft SMTP Server
+ 15.2.2562.27 via Frontend Transport; Mon, 27 Oct 2025 23:04:49 -0700
+Received: from BYAPR05CU005.outbound.protection.outlook.com (52.101.85.9) by
+ edgegateway.intel.com (192.55.55.82) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.27; Mon, 27 Oct 2025 22:39:48 -0700
+ 15.2.2562.27; Mon, 27 Oct 2025 23:04:48 -0700
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=EcgOOR8YWvjMnMrprx3UNLMx9+jVDgT2HNa09Q6+CGklqb3lMRiH39+OyEC16yP++sSKLmUuYOAOWvVTt72oNQxkdQSte86JD3+rMVNYg+7goc1VI8QyIUDpzgeBNiHy58ZCe4yPK+EqDByeoneibUjX/TsEECJ9TyGiHIM6fqaIh2bmF73z2vp23nm3wJjZaYHWR9stlFJqQ/j9FRAP1PFLdGZM7NhGK/X8wOAfkOz8oYk/GFRMTydwBWNM+r+ItZXo6jgnYpJY0kqopxEQ8V8wvG5M3A8w6ac7f8PRHqZ7Sp5VUpnOOtTmVOk51urb2CUNh3sEfKga7xfuBvzA/A==
+ b=ETjz5U7e50iuI7gGQZv8F0Ih9yaUwBNXXp/5ExwQGpnCfZkJrojq5Hqc1IM35DfhcDuMUAc7mYuOQiHksiNKwe9mdcDWuhl4lJZ2JI9jCuyQYEU1y8WwtOe31ZAhaaJixS9IJM28GeRXn2udJgh+CEjBhKnxNiNfJLyp2Y5hViWIyBBUrkwwpYhq5AZ8WHBDzVybB/cSfxpqGkUPBH0dk3FFefKzg/t3wToMO9TlEE8UQLUoiaM+SRd3rIU4Bq1L9oVM5irzfwP+GBowi3DzcJTKW0XCsTUUc9vXEyw+7f6iOF43F7Q6S+6hyF4m00E4w8+QIb5d6bSS/IxKDIAdBg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=5ztxa87lvzfiNy48TErR/exv1TMWPy1g61daXbYiM5k=;
- b=CtdHlLi++9UEj10jaLCj9oO6rmoV1gcZZkQbIMiWorKM3llaY4TqpDazu5u/m0sTabKC2X2ZpnobqRQuI6dmQdgzeZedreyTFGn9W4pqODu4sGxPgm47g9DkfNKq9OFTCZYNXVcZDanp9T+xZh7M1Ed3RvFZGeuGzJS41vSEU04HkMX1ljpVHg+b2cD3rBpNFB84Jm5JpSWc+/NQRm9hCfTvUWEznZGzypXwqSiZ190rgr3Imu0LspAIOahgHgqUiKboMSz+NAbBluabxjLrKMpisQrYZiD190D0hlvkw+ruN/UNZGInqrAz/WlQEzzIq5iTP6jVgeAjOMKvNZTcOg==
+ bh=+0jvClPSAjfGVrUn/egMu4urGTgPI0TEhHW2ANBjic8=;
+ b=IRoPmsiQ3sNFbRTkucuEBJMZXMxCpYOoL6xmvKw/HBedE7zf6uT32f5M3Dw+lbWCAgxor2rnSWr/Al5hTPbeW4ct/rGjXYTCYYGLiZvxPS7/B0U34QMNKqHdsGQfbsqujIxhtCTshfUjVIAECjxhVQ1CU6tL5XgFKL674+5lvbt4OJHV8nF1381oU8qAve+jtTdfEMMW4Jpq+F8nX837RisftSpzRUkhm/RD1LkG+CnrcjoUmCfQXIKRvVXlc0vqDBQA+r7pq0g2RcdKtbPcg0n3FFCpSGNtAYT6jRg6NfYo23nMF3RGbg5Q/MHsnaEiRG7KeXIEbRvuPbw8ZWyLFw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
  dkim=pass header.d=intel.com; arc=none
 Received: from IA0PR11MB7185.namprd11.prod.outlook.com (2603:10b6:208:432::20)
- by IA0PR11MB7380.namprd11.prod.outlook.com (2603:10b6:208:430::5) with
+ by CY8PR11MB7826.namprd11.prod.outlook.com (2603:10b6:930:76::17) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9253.18; Tue, 28 Oct
- 2025 05:39:39 +0000
+ 2025 06:04:47 +0000
 Received: from IA0PR11MB7185.namprd11.prod.outlook.com
  ([fe80::dd3b:ce77:841a:722b]) by IA0PR11MB7185.namprd11.prod.outlook.com
  ([fe80::dd3b:ce77:841a:722b%4]) with mapi id 15.20.9253.017; Tue, 28 Oct 2025
- 05:39:39 +0000
+ 06:04:47 +0000
 From: "Kasireddy, Vivek" <vivek.kasireddy@intel.com>
 To: Jason Gunthorpe <jgg@nvidia.com>
-Thread-Topic: [RFC v2 1/8] dma-buf: Add support for map/unmap APIs for
- interconnects
-Thread-Index: AQHcRvz5XpQuDeF4ak2URy3/E7CD9LTWRYWAgACfLqA=
-Date: Tue, 28 Oct 2025 05:39:39 +0000
-Message-ID: <IA0PR11MB718509D24638796FCAFACF79F8FDA@IA0PR11MB7185.namprd11.prod.outlook.com>
+Thread-Topic: [RFC v2 2/8] dma-buf: Add a helper to match interconnects
+ between exporter/importer
+Thread-Index: AQHcRvz60PfFXNAzIkykWYmmM32ny7TWTlKAgACjCaA=
+Date: Tue, 28 Oct 2025 06:04:46 +0000
+Message-ID: <IA0PR11MB7185FF98DD56C2C2E5057857F8FDA@IA0PR11MB7185.namprd11.prod.outlook.com>
 References: <20251027044712.1676175-1-vivek.kasireddy@intel.com>
- <20251027044712.1676175-2-vivek.kasireddy@intel.com>
- <20251027174723.GB1018328@nvidia.com>
-In-Reply-To: <20251027174723.GB1018328@nvidia.com>
+ <20251027044712.1676175-3-vivek.kasireddy@intel.com>
+ <20251027181853.GC1018328@nvidia.com>
+In-Reply-To: <20251027181853.GC1018328@nvidia.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: IA0PR11MB7185:EE_|IA0PR11MB7380:EE_
-x-ms-office365-filtering-correlation-id: d6db7d1a-1534-446e-425d-08de15e4634c
+x-ms-traffictypediagnostic: IA0PR11MB7185:EE_|CY8PR11MB7826:EE_
+x-ms-office365-filtering-correlation-id: 41acfe04-6a45-4636-dad7-08de15e7e5be
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;ARA:13230040|1800799024|376014|366016|38070700021;
-x-microsoft-antispam-message-info: =?iso-8859-1?Q?nyDaRwE2aR1L1ejSfmUZMn0qDsnBMqOABn2FWdvM+UAZFgoDMuYDE3nXiE?=
- =?iso-8859-1?Q?X1ZpH6K4nUjEXOmziSi/J8pBw7yn4P6ODDMrObtyzR1mzmYB9VS4BkOhoP?=
- =?iso-8859-1?Q?R5a3fTIjA+rvmfJHe2cI+RxR2ayWxVho9ajCYnI4h0IaRsF3uue6+OYALX?=
- =?iso-8859-1?Q?NhKCrAyetzy78yJczp4zpDtqtGm9zT1sb4+g6evY3PLpvYapJXieZEGnuI?=
- =?iso-8859-1?Q?MFmSMkplts/0zM0uIOSTz1v+bF2DTw+LsEb8GxEDQPJZVMNiqTt2eVAg5L?=
- =?iso-8859-1?Q?D78TNZUzhGFr/+PsuyQmoQwwzu9k8JMi1xZFwu4CoGG8R88b10WPAH2ikl?=
- =?iso-8859-1?Q?gZtlm0vkN6d9k3TNojt+dfe7zN9loBJPaO2ZUHmPtLneh7IL/QRe2VfdLM?=
- =?iso-8859-1?Q?jBxHGOpzXj7u7Q5Eqp4Ode8uxv5zpAr1VCGpf1pzL7l1WgA3tXeV6tYSs+?=
- =?iso-8859-1?Q?NbqB26594E8EoWeztbDGMzIIwn4TNo1j1yjQ76YquSXKgjy7gHCKRUngws?=
- =?iso-8859-1?Q?gQBWRNyFxC1Nss8CJHyruM1DfQXH8tilpFiSa78AG1zzej+jUMBMF/VNT1?=
- =?iso-8859-1?Q?mwyfaUVfPJ875cFCuUnlWsY1GQQESdlL4VUgSB8Pbq68v1zhiVd7XpSdah?=
- =?iso-8859-1?Q?srJVhgPCnReX/IiXL1mrPFumvIstOIYka4te2yogbC7ZBb3og3zrrccUpY?=
- =?iso-8859-1?Q?8PMbYyOg3p+3aS4rWpzozJGauMNSFECclIQaag3kxV6yN5i2ZTvVf69D9C?=
- =?iso-8859-1?Q?zC7rzCrB+Qzb8M6JAAG3Fu0DKOm5a78c77Sc9iZ5phhSYdowK+LNfkUII7?=
- =?iso-8859-1?Q?PC9Hqnv0xRyAGC9kwZ5w2aYk9Nq+cUIj/8aJIspkCkdk3xyqJDZaiTCxEJ?=
- =?iso-8859-1?Q?5hoN3/rqojd2Ga/3qCqs8EC46zATS7S8A3sQpUIdJ4Xth0QvT4fy10OKvR?=
- =?iso-8859-1?Q?tpxalDYJeQKAj/TWjMd/oPb3gMyi3SqiVKzI0Kei52QN0XSRPOBU9dJjIU?=
- =?iso-8859-1?Q?tqAe99XvW5bIA353WG/6l2MG0fDhxzC7NAjfwXgmMwVh777DD0iQ8FbFSL?=
- =?iso-8859-1?Q?8OyeL9jGiO0eKDMbtkl/0+g3n7MbCVed2mrGMEX4OOJTEEtJIC+ax+U04y?=
- =?iso-8859-1?Q?CfkDkM9dnz/9iN7/6+IK2Bjn5ulc9cp2k+fpE+Abs8QNoJiMfT9bzBYYuq?=
- =?iso-8859-1?Q?FYVttWlXwxFQQ4JKvkpJYu2jgaICIIy6nfoAWnoxqQecXh4Iyc/xla+h4N?=
- =?iso-8859-1?Q?WISON8dTT9vTUneIMvNfR8lYR7P9KK/jsSywDou4zRlUzhhVWvuFjp0jWo?=
- =?iso-8859-1?Q?MganzlNRi3Za2c1K1w6Fw0Nk7Y+aypZRtNLeVEsikunZu65bQvFs7XtWbO?=
- =?iso-8859-1?Q?zglM0NDMxbHKDsCWjA5TzG6hcHTv0oDXnH4zLs8mdRmrj8eCNc59ZblAeR?=
- =?iso-8859-1?Q?CoFczsGM7kb2INqxCmJ5sGdEDpsWJ7yaIK75+vKb/4XEbezD/OPO5Q4QJe?=
- =?iso-8859-1?Q?AeYFrB8Sy/gPWhSpWW9xNXSfA5+uBrjKt1orrHR8eERyACrBeVbzyWRmR6?=
- =?iso-8859-1?Q?h4bo7irvsv6SBop6NklE7Mj+PTip?=
-x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA0PR11MB7185.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(38070700021);DIR:OUT;SFP:1101;
+x-microsoft-antispam: BCL:0;ARA:13230040|366016|1800799024|376014|38070700021;
+x-microsoft-antispam-message-info: =?iso-8859-1?Q?j+3oIhdzmmIJxaG02FmtzYs8CYuy2ElPGIdeA+sCPsHj4Z2irAwMwBBuQP?=
+ =?iso-8859-1?Q?d4dstA8wHxiNU0rRDG2vnN6G+wwmvM2WZxmaq11sMS4oph9JmpOasdxl+l?=
+ =?iso-8859-1?Q?mtkPkXrfC6fuXfOJKsDOFexWqwpygsngTVYXEnrvYjjwIEQ51GiIy6LPWQ?=
+ =?iso-8859-1?Q?ABfAyZjgLCjr7HOHVppRdhFwUc7TWCqcGde2v8hziuXngEE5BnTknFv/s2?=
+ =?iso-8859-1?Q?dJjLrGaYk6CCqHFxQaMYaXEdxUdHpI3SbDUHf6FDEgyrdJjqBxUgVZTgsa?=
+ =?iso-8859-1?Q?r5ft2xRfnsnKpnsaRJAGBFaGgjiMhbx8GcwOZqIwqx3LB6YC/4Nze3JGyp?=
+ =?iso-8859-1?Q?HaXkaYpX0MXjPjbfI9asjhmSGRkrX4NM1Qnh3O4hfcy+8pMd2BBP0iOvH7?=
+ =?iso-8859-1?Q?0b7vl4dqmX9vRLMEgtPOknv5w2fTgON6ZwC8P+oh7xFJMOBm3Lafe/f30r?=
+ =?iso-8859-1?Q?Fqti4IojJhoUF0g4wqWwyXwxKnj4WWzFsrnLqlhhU7dZco/ZasNachP68b?=
+ =?iso-8859-1?Q?IH3hSoa8RXSFZtvrZfUPcWZta5HU68Jn1t+UWbIKndLP02OEM4Mo91cQ+L?=
+ =?iso-8859-1?Q?lXlEs5KC47XmOo/IeZrN1bhpEmIYXlME5drvOZfUHZUlLmsKbJ/mrP+qwe?=
+ =?iso-8859-1?Q?cpqac+CkOPtPssDdrcVLRSykE9IFUz79DnIzM4n+LVuYGidLOUO/yDU08o?=
+ =?iso-8859-1?Q?cEsGsmQIJuR+qlYEVeyA76IT2NAnFbySDWy07vuiwQK2pHxuGCDqj5mzF8?=
+ =?iso-8859-1?Q?z/t9daJK0YhI6y6koXfkrlFeKIbizUL1NzSFlCKEPILZe2UVjog5acFbpE?=
+ =?iso-8859-1?Q?MRve1+nh5GvoA09Ow8p6YN5TxtK0MurPWye/BK44Zvb4kX9lNGlFmM0hGG?=
+ =?iso-8859-1?Q?czTvl24Z2uTz3P1uv2TBpMoWtLmkl1NSPbyHEBlizFUq491+LxBABGaOgj?=
+ =?iso-8859-1?Q?bgR81XB6jAzMV0tKoa8E0YlOFCxJ14jMwgBE0/8fiQYUx2Cgi2iKqIRV1i?=
+ =?iso-8859-1?Q?cCNrYKy7Ylg/TY9BIhqkhKW2pCuiwlFXrBi7j+iqkeySEpB3poBnRm8jKg?=
+ =?iso-8859-1?Q?j/Pd4fhU9L8k6365I0vWKjlX3uGjfvHIFRFHdlOsPeaXlKKn5MiR92Sth0?=
+ =?iso-8859-1?Q?lpmDdjm28Zj1W+/ANS0H5zPuaRflvBh0KqWKsT/gv/RErmlQBhQ0Jk1env?=
+ =?iso-8859-1?Q?m5lNES7s1f4bHSUkQ5FzsWtLjlNl7nxXtmM3ktOawStFQLB1xTZUct49hn?=
+ =?iso-8859-1?Q?ae5LasvJPgksn31DF/4hDCt90cEjsdUKca/vAq9SXRDzO09B2f5+93RbAW?=
+ =?iso-8859-1?Q?FznsxhNGNu8klOUFR4F7EFLRcuiTD4jyXjm1uK2oA4V1lSUluGkmb8lUHb?=
+ =?iso-8859-1?Q?vg2c5PUR69Nl73Si+4sC7JU09MMi1HwLVLafXxW+fx/jQoOlVyQXmZm5jd?=
+ =?iso-8859-1?Q?iinxaq30cgIexIBVOiqefxN8KqZ8UjKJRZcRTzxtmXU9NsLzfZciRHEwin?=
+ =?iso-8859-1?Q?sgwKZDi6vc7OGbL7eA7Ngf83F9dSbcMUuHVPe14s3+W4BCFB1fhQ0Cbr/j?=
+ =?iso-8859-1?Q?YhVMjJqw6ZXNZ2tMMVy7/94dPORo?=
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA0PR11MB7185.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(38070700021);DIR:OUT;SFP:1101;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?fQqcM9ziQ9Hfmzx29NoyGA9ey/0wNMq49y2tga1GVqKhs5rDgxAwXjS1Di?=
- =?iso-8859-1?Q?xIOcCaaGwHozXRprL8AVbXn3wEXo2jQEC25pleVvf3M84KabYqXT9HEDfc?=
- =?iso-8859-1?Q?08RP9UQC/BSuyCN4DQn8uXGuw5eLyKV/xKw4uVUTV+61/Unhg/NUspw67x?=
- =?iso-8859-1?Q?Z8gh4sXQleRgrDFlOBW+ThmC1FC770LbZdfhlmWOFoJ3ZOgDlLHcPofCTE?=
- =?iso-8859-1?Q?Q+o2Ri3pS8jeRZ7N1igEL3HtAvDo4ZJbHRfHhiGHLZCAu43AVk82bX+ux7?=
- =?iso-8859-1?Q?AbGzfbpqKdebj53bJS2GxsnniYKAmLYyb2poGTYqroqYV/a3noeUOo1ORV?=
- =?iso-8859-1?Q?p/FvoDyVmeLhVRqcHRRc1Mog87RRMCXHxteEF50PbWFPU1TqFM5AHniO3/?=
- =?iso-8859-1?Q?l2s+x7y+0rhq18SD0y8ISgrCMC6BPLY288SMuE7XyNFiqp9Kum5xgxS/EO?=
- =?iso-8859-1?Q?GEk3wdIYU4jo+w5b8hsaXvuQK9iKqvAYM0IR0cBUigf1VexyqrtOICnJAX?=
- =?iso-8859-1?Q?eWo00rZH5xYU/d64jNTpReZgmIpScae7o3rgbU6wTFtKDj+QmYqypEOnJ6?=
- =?iso-8859-1?Q?3ZOrviT596ANEyacB4yKmH8ePhvuUlBfN9SadIl/qSpH7hGAklYyiCxMul?=
- =?iso-8859-1?Q?Sgixvc0vfnVTkKSc01o2q5lFOH5meMq+TDccY5MC6RAgnZUVJLaIEy078t?=
- =?iso-8859-1?Q?TZk57SiDmBSF7qT8OHvfDYX2Fjv7PONDlbw36JFSTufyUP94ldEl5kU0q/?=
- =?iso-8859-1?Q?u/Cg0XXAgQ/2NTXQ1s9LmqUUwblFARtOwOmNI0SAA2qxf7g7gJWA5/Amer?=
- =?iso-8859-1?Q?ixVChnJtWLU/2H8z79p0wpyNCjGzVgYVbZq4fb5rk37UEBAuSBY1TYogQB?=
- =?iso-8859-1?Q?O68WB+DRiTGCPzPnfdsGJvWX6FL41m6GFKJF6GTXsT5kuHsSR2Hf6x2OjV?=
- =?iso-8859-1?Q?u7G2dgXhpZe93j0d0rDS67Rc0OaHUax+OopZrlFMS+543QHCXh1fES2rvR?=
- =?iso-8859-1?Q?ZpiaDubImCSutUAHect/6e8YeP7njl6E7BJzXzLJ0NZaNhFA0tJTYj6aXw?=
- =?iso-8859-1?Q?ln4IWhGZOBYopP5iGYB/5ZPtweq5hp+trjYwkg9JWtU197dgonUnIyp0mv?=
- =?iso-8859-1?Q?4Ai61beIZ6xEOGY56ZJdoqS2xF3cAUuulMV+M6XhSJtPNBBrlcXmIoVjz6?=
- =?iso-8859-1?Q?oht4wKKEehWxNDBmB1A5nLIDeNMfaNlgS7+POrw9ibi79Audrg3i4y7Eiq?=
- =?iso-8859-1?Q?lnP2WF4FJcoRQvY72fu9MX0+UIFfeC0+UiGBI73bw9uTGZwkmvcAVcjiXI?=
- =?iso-8859-1?Q?zaVpFoKmmQL2cua4py/D0x53IvEVhfQ2A8+6SMhUU3Xg0F63QZPdUA+a87?=
- =?iso-8859-1?Q?HTMUHKv1jKNqVkRzMbEA/qwXxuV2d5F298nE6u1BMjK64VfG5PNJuarZCW?=
- =?iso-8859-1?Q?q2X9UC8YC2rPVNoDuNzK6MRoHyepmKftaoJLFIobs+qHrwe10gujN1w2ZJ?=
- =?iso-8859-1?Q?lcattehCC9xGf0v6siE3EGLK6oYvvL/oOBYe3Bqgd8YoyHipjNxc4kiotp?=
- =?iso-8859-1?Q?09a1+GOd2ytX3/z2baQfn9YqdUi6UEAd2pKNi1Ew0vRVpjctKPJWSOKhyy?=
- =?iso-8859-1?Q?Hv42mvXrj90k16L41Eg1vfhFsu+d49tv2B?=
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?h06UELDZjit62GE2MbZWFT0aP8qEpgeUVZEOSjGN1qz/Yno6o3grpEDoPP?=
+ =?iso-8859-1?Q?XRBXws9QtXWaEWMQDrh6a4Irx2Eccc7ZClxV3/wfKyouglLJ7m3bcG/3Bf?=
+ =?iso-8859-1?Q?NwXdSZZGqO0ThPkm77+Vvw/gCJgMFw68HlmLPUqi9dBZnUrUQEwVdqpYHV?=
+ =?iso-8859-1?Q?F4YfhqvX7PhstEd9JTRwS8tvDHgdfa/KCSSdI9Ki+TXumQyMSAI+RNmtLH?=
+ =?iso-8859-1?Q?bIjyvXSQMKyGq9qQbaQ78REm4e5rs5p6IrGGkPC/I8ATdbTEUXXYdMEhAY?=
+ =?iso-8859-1?Q?b3Cd2GIkI+QWi6enarCqc0b8Ps9EeqcpieFGeiSKKKlrxdRBteYpkqeJ12?=
+ =?iso-8859-1?Q?jMi8dI6hCMvk/ixkRcPBrA1bW3ZhCwGGjexJX2MUvrdYv0rpcsrUpbhkIV?=
+ =?iso-8859-1?Q?5TV1EQvFJJLtONSGXuHGAFiyv9UMf3Yz1VCuuVRkN+hYEpB0PrIOx4qaof?=
+ =?iso-8859-1?Q?Nr2NEtTXz5kAZsGd+y89ZFDOZ+EgIZ3LDq56tVQSg4wLOOiU5NO3VOkvg/?=
+ =?iso-8859-1?Q?zTn4oR1Y908z+SnpH8snE0xOXfLVqu+JBOvHYR+pew7Mg+9i4BwGjURU/F?=
+ =?iso-8859-1?Q?cRzkP6HzEI3eksmwdagisbXnh1nlzrRyWWjGNRsN62aEib19fTgPcJJZc0?=
+ =?iso-8859-1?Q?K8G9GXL6PSQeY1tassCXUVmQe05aMgKzju4gRHXFKY7ODlVtSpYIqSe5dO?=
+ =?iso-8859-1?Q?ddBeaQ1NqFoFqgYyUwJ35AqWfWuVsPKDD7emwlBUnQcPVGd9iNIVmEHqSe?=
+ =?iso-8859-1?Q?ke+Ytkef2VdnHzmEanheDrmftLUfIEAycqQcC5CVkIwIykAkLntzAiWEhl?=
+ =?iso-8859-1?Q?U7dBkak5P7eSm3B/eg8ZL/nJT8jkvm4yuZkklk8voFzyXYNQQcPZcHnWL3?=
+ =?iso-8859-1?Q?hbT2PM7JUXtNN0Y3foMlJSlOh7IgfnjvXTxtuEWTifcb4CCmZcGZDDhDAR?=
+ =?iso-8859-1?Q?/wmg1ukB/O2sarKTxOLn/I2RkRmrsRCAtlR2BcUsQejp6++QEIcQIuZDm0?=
+ =?iso-8859-1?Q?RM/0hJzsNJ6WAFl2fDRo7Lzsgj30fZ5pwozpyH+VK+eWNXIqTsRXRGhLxZ?=
+ =?iso-8859-1?Q?N1shxvRsOzZ7YvNT9ml8lVOR3FKTQwLQC0T0k+agdH0KC3Sg4rNR1BQpLH?=
+ =?iso-8859-1?Q?zMEQ2EJTAt9ZYA/3f4FM7cg+aqXImtV2/91C+2a+MomTLho2eovuL88F83?=
+ =?iso-8859-1?Q?TCNFgTV2mB4cdY6hO3XzM3PeXaAj7q42+vZ83fPaLBWDiaKWyEQyVTJ07g?=
+ =?iso-8859-1?Q?/68oXAmKpkGPevvvKTgrOdozLB/l6IZsqH8bJ1sO7I76CXUX7iVQ7BE+29?=
+ =?iso-8859-1?Q?GUbWLzPiBANnkL+Gd/dsUCfws+VHhBBIvGJjqa+cIa0Pcrur6OUirVbzaW?=
+ =?iso-8859-1?Q?z2KfvgMog4gyvNou4vE2l0SmYFfZytgJcaUFqpBee5knvvW5tRXgymdoUA?=
+ =?iso-8859-1?Q?F1bIghPZO4XabKtFerHcWaky50qlryaa4Zy2nikVT0MX6QTg27+/2nYEyy?=
+ =?iso-8859-1?Q?kWU685+U9b3Ct9E31cBjcSiBP66ItfjinMCVnfJ9Bzu+J6mtD99T3MaAez?=
+ =?iso-8859-1?Q?RIf4YsHIRGE11YIsRjrnzIxtrzVyAviI8Avk5toK333WUqn6LuZqiOyasg?=
+ =?iso-8859-1?Q?jw96J40LKvAG1WuUQywswQqCgqLOS1A4W7?=
 MIME-Version: 1.0
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: IA0PR11MB7185.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d6db7d1a-1534-446e-425d-08de15e4634c
-X-MS-Exchange-CrossTenant-originalarrivaltime: 28 Oct 2025 05:39:39.5823
+X-MS-Exchange-CrossTenant-Network-Message-Id: 41acfe04-6a45-4636-dad7-08de15e7e5be
+X-MS-Exchange-CrossTenant-originalarrivaltime: 28 Oct 2025 06:04:46.9104
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: NmrlX4qrBm1n/pBMHd8FlgUqZREZIEbXVKtvmgclUBb29KI0EAdyqpvNboJeKRAl/iZyURkU3WDuUlbmb4Jn77TxbkHV9MzLZqZgoqOJxUo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR11MB7380
+X-MS-Exchange-CrossTenant-userprincipalname: c0BQDm9/dAtzMTT9CuX4Y/pavJOdqdMjtvmvx+XYcalgBLQ5I8/3sjzz7Cv08WgPYu3SVAlFQ/Yhefg8POXNbrJiBsxfkjRwLdcTl0oz/Mk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR11MB7826
 X-OriginatorOrg: intel.com
 X-Spamd-Bar: -------
 X-MailFrom: vivek.kasireddy@intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: LQV73AFTA4L2N3IUSK5WCI5ZF345Z6A6
-X-Message-ID-Hash: LQV73AFTA4L2N3IUSK5WCI5ZF345Z6A6
+Message-ID-Hash: LUD7LWJOZVKHYF6DZIR5CFRNE2A7BYHJ
+X-Message-ID-Hash: LUD7LWJOZVKHYF6DZIR5CFRNE2A7BYHJ
 X-Mailman-Approved-At: Thu, 16 Apr 2026 14:48:29 +0000
 CC: "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "intel-xe@lists.freedesktop.org" <intel-xe@lists.freedesktop.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, Christian Koenig <christian.koenig@amd.com>, Sumit Semwal <sumit.semwal@linaro.org>, =?iso-8859-1?Q?Thomas_Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>, Simona Vetter <simona.vetter@ffwll.ch>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [RFC v2 1/8] dma-buf: Add support for map/unmap APIs for interconnects
+Subject: [Linaro-mm-sig] Re: [RFC v2 2/8] dma-buf: Add a helper to match interconnects between exporter/importer
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LQV73AFTA4L2N3IUSK5WCI5ZF345Z6A6/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LUD7LWJOZVKHYF6DZIR5CFRNE2A7BYHJ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -190,7 +190,7 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 X-Spamd-Result: default: False [2.59 / 15.00];
-	DATE_IN_PAST(1.00)[4089];
+	DATE_IN_PAST(1.00)[4088];
 	R_DKIM_REJECT(1.00)[intel.com:s=Intel];
 	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
 	MAILLIST(-0.20)[mailman];
@@ -203,10 +203,10 @@ X-Spamd-Result: default: False [2.59 / 15.00];
 	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[IA0PR11MB7185.namprd11.prod.outlook.com:mid,lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[IA0PR11MB7185.namprd11.prod.outlook.com:mid,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.665];
+	NEURAL_HAM(-0.00)[-0.584];
 	FROM_NEQ_ENVFROM(0.00)[vivek.kasireddy@intel.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[intel.com:-];
@@ -215,125 +215,151 @@ X-Spamd-Result: default: False [2.59 / 15.00];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	MISSING_XM_UA(0.00)[];
 	RCVD_COUNT_SEVEN(0.00)[9]
-X-Rspamd-Queue-Id: A163E40FD72
+X-Rspamd-Queue-Id: 1637940FD79
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 Hi Jason,
 
-> Subject: Re: [RFC v2 1/8] dma-buf: Add support for map/unmap APIs for
-> interconnects
+> Subject: Re: [RFC v2 2/8] dma-buf: Add a helper to match interconnects
+> between exporter/importer
 > 
-> On Sun, Oct 26, 2025 at 09:44:13PM -0700, Vivek Kasireddy wrote:
-> > For the map operation, the dma-buf core will create an xarray but
-> > the exporter needs to populate it with the interconnect specific
-> > addresses. And, similarly for unmap, the exporter is expected to
-> > cleanup the individual entries of the xarray.
+> On Sun, Oct 26, 2025 at 09:44:14PM -0700, Vivek Kasireddy wrote:
+> > +/**
+> > + * dma_buf_match_interconnects - determine if there is a specific
+> interconnect
+> > + * that is supported by both exporter and importer.
+> > + * @attach:	[in]	attachment to populate ic_match field
+> > + * @exp:	[in]	array of interconnects supported by exporter
+> > + * @exp_ics:	[in]	number of interconnects supported by exporter
+> > + * @imp:	[in]	array of interconnects supported by importer
+> > + * @imp_ics:	[in]	number of interconnects supported by importer
+> > + *
+> > + * This helper function iterates through the list interconnects supported by
+> > + * both exporter and importer to find a match. A successful match means
+> that
+> > + * a common interconnect type is supported by both parties and the
+> exporter's
+> > + * match_interconnect() callback also confirms that the importer is
+> compatible
+> > + * with the exporter for that interconnect type.
 > 
-> I don't think we should limit this to xarrays, nor do I think it is a
-> great datastructure for what is usually needed here..
-One of the goals (as suggested by Christian) is to have a container that
-can be used with an iterator. So, instead of creating a new data structure,
-I figured using an xarray would make sense here. And, since the entries
-of an xarray can be of any type, I think another advantage is that the
-dma-buf core only needs to be aware of the xarray but the exporter can
-use an interconnect specific type to populate the entries that the importer
-would be aware of.
+> Document which of the exporter/importer is supposed to call this
+I missed adding that part. The importer is expected to call this in my current design.
 
 > 
-> I just posted the patches showing what iommufd needs, and it wants
-> something like
+> > + *
+> > + * If a match is found, the attach->ic_match field is populated with a copy
+> > + * of the exporter's match data.
 > 
-> struct mapping {
->    struct p2p_provider *provider;
->    size_t nelms;
->    struct phys_vec *phys;
-> };
+> > + * Return: true if a match is found, false otherwise.
+> > + */
+> > +bool dma_buf_match_interconnects(struct dma_buf_attachment *attach,
+> > +				 const struct dma_buf_interconnect_match
+> *exp,
+> > +				 unsigned int exp_ics,
+> > +				 const struct dma_buf_interconnect_match
+> *imp,
+> > +				 unsigned int imp_ics)
+> > +{
+> > +	const struct dma_buf_interconnect_ops *ic_ops;
+> > +	struct dma_buf_interconnect_match *ic_match;
+> > +	struct dma_buf *dmabuf = attach->dmabuf;
+> > +	unsigned int i, j;
+> > +
+> > +	if (!exp || !imp)
+> > +		return false;
+> > +
+> > +	if (!attach->allow_ic)
+> > +		return false;
 > 
-> Which is not something that make sense as an xarray.
-If we do not want to use an xarray, I guess we can try to generalize the
-struct that holds the addresses and any additional info (such as provider).
-Would any of the following look OK to you:
-struct dma_buf_mapping {
-        struct phys_vec *phys;
-        unsigned int nents;
-        void *map_data;
-};
-
-Or
-
-struct dma_buf_ranges {
-        struct range *ranges;
-        unsigned int nranges;
-        void *ranges_data;
-};
-
-> 
-> I think the interconnect should have its own functions for map/unmap,
-> ie instead of trying to have them as a commmon
-> dma_buf_interconnect_ops do something like
-In my current design, the exporter would call the interconnect specific
-map/unmap functions from its common map() callback. But I guess I can
-try to implement and test your suggestions to see if they are more robust/elegant.
+> Seems redundant with this check for ic_ops == NULL:
+Not really; attach->allow_ic would indicate if a successful match is
+found or not. And, ic_ops is for the exporter to indicate whether it
+supports interconnect ops or not.
 
 > 
-> struct dma_buf_interconnect_ops {
->         const char *name;
->         bool (*supports_interconnects)(struct dma_buf_attachment *attach,
-I have this as part of dma_buf_attach_ops for the importer but I'll explore your
-idea in more detail.
-
->                                       const struct dma_buf_interconnect_match *,
->                                       unsigned int num_ics);
-> };
+> > +	ic_ops = dmabuf->ops->interconnect_ops;
+> > +	if (!ic_ops || !ic_ops->match_interconnect)
+> > +		return false;
 > 
-> struct dma_buf_iov_interconnect_ops {
->      struct dma_buf_interconnect_ops ic_ops;
->      struct xx *(*map)(struct dma_buf_attachment *attach,
-Do we want each specific interconnect to have its own return type for map?
-
->      	 		   unsigned int *bar_number,
-> 			   size_t *nelms);
->      // No unmap for iov
-> };
+> This seems like too much of a maze to me..
 > 
-> static inline struct xx *dma_buf_iov_map(struct dma_buf_attachment
-> *attach,
->      	 		   unsigned int *bar_number,
-> 			   size_t *nelms)
-> {
->      return container_of(attach->ic_ops, struct dma_buf_iov_interconnect_ops,
-> ic_ops)->map(
->                  attach, bar_number, nelms));
+> I think you should structure it like this. First declare an interconnect:
+> 
+> struct dma_buf_interconnect iov_interconnect {
+>    .name = "IOV interconnect",
+>    .match =..
 > }
 > 
-> > +/**
-> > + * dma_buf_attachment_is_dynamic - check if the importer can handle
-> move_notify.
-> > + * @attach: the attachment to check
-> > + *
-> > + * Returns true if a DMA-buf importer has indicated that it can handle
-> dmabuf
-> > + * location changes through the move_notify callback.
-> > + */
-> > +static inline bool
-> > +dma_buf_attachment_is_dynamic(struct dma_buf_attachment *attach)
-> > +{
-> > +	return !!attach->importer_ops;
-> > +}
+> Then the exporters "subclass"
 > 
-> Why is this in this patch?
-I figured it makes sense to limit map/unmap interconnect ops to dynamic
-importers (that register a move_notify callback) only. I guess I could move the
-above change into a separate patch.
+> struct dma_buf_interconnect_ops vfio_iov_interconnect {
+>     .interconnect = &iov_interconnect,
+>     .map = vfio_map,
+> }
+> 
+> I guess no container_of technique..
+> 
+> Then in VFIO's attach trigger the new code:
+> 
+>    const struct dma_buf_interconnect_match vfio_exp_ics[] = {
+>         {&vfio_iov_interconnect},
+>     };
+> 
+>    dma_buf_match_interconnects(attach, &vfio_exp_ics))
+> 
+> Which will callback to the importer:
+> 
+> static const struct dma_buf_attach_ops xe_dma_buf_attach_ops = {
+>    .get_importer_interconnects
+> }
+> 
+> dma_buf_match_interconnects() would call
+> aops->get_importer_interconnects
+> and matchs first on .interconnect, then call the interconnect->match
+> function with exp/inpt match structs if not NULL.
+Ok, I'll try to test your suggestions. 
 
 > 
-> I also think this patch should be second in the series, it makes more
-> sense to figure out how to attach with an interconnect then show how
-> to map/unmap with that interconnect
+> > +struct dma_buf_interconnect_match {
+> > +	const struct dma_buf_interconnect *type;
+> > +	struct device *dev;
+> > +	unsigned int bar;
+> > +};
 > 
-> Like I'm not sure why this introduces allow_ic?
-Ok, I'll move it to the other patch that introduces dma_buf_match_interconnects().
+> This should be more general, dev and bar are unique to the iov
+> importer. Maybe just simple:
+> 
+> struct dma_buf_interconnect_match {
+>     struct dma_buf_interconnect *ic; // no need for type
+>     const struct dma_buf_interconnct_ops *exporter_ic_ops;
+>     u64 match_data[2]; // dev and bar are IOV specific, generalize
+I am wondering what kind of match data would be needed for other
+interconnects, so that we can try to generalize dma_buf_interconnect_match
+or probably have interconnect specific implementations subclass it.
+
+> };
+> 
+> Then some helper
+> 
+>        const struct dma_buf_interconnect_match supports_ics[] = {
+>           IOV_INTERCONNECT(&vfio_iov_interconnect, dev, bar),
+>        }
+I have done mostly the same thing as you suggest in patches 4 and 5 of this
+series that add IOV interconnect support for vfio-pci and Xe drivers. Did you
+get a chance to look at them?
+
+> 
+> And it would be nice if interconnect aware drivers could more easially
+> interwork with non-interconnect importers.
+> 
+> So I'd add a exporter type of 'p2p dma mapped scatterlist' that just
+> matches the legacy importer.
+IIUC, even interconnect aware drivers (or exporters) would need to implement
+map_dma_buf() op (which is mandatory) which would return an sg_table.
+So, if match_interconnects() fails, then the exporter/importer would need to
+fallback to using the legacy path.
 
 Thanks,
 Vivek
