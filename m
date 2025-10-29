@@ -2,223 +2,208 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id eL5MLK734GnZnwAAu9opvQ
+	id 8OcXBrn34GnZnwAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:52:30 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:52:41 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4AEBD40FD96
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:52:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A30D840FD9D
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:52:40 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5E7A3404EA
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 14:52:29 +0000 (UTC)
-Received: from DM1PR04CU001.outbound.protection.outlook.com (mail-centralusazon11010045.outbound.protection.outlook.com [52.101.61.45])
-	by lists.linaro.org (Postfix) with ESMTPS id 325B53F774
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 29 Oct 2025 09:27:00 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B1D15404DE
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 14:52:39 +0000 (UTC)
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
+	by lists.linaro.org (Postfix) with ESMTPS id C876B3F74C
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 29 Oct 2025 18:07:49 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=Nvidia.com header.s=selector2 header.b="Q73AY/iJ";
-	dmarc=pass (policy=reject) header.from=nvidia.com;
-	arc=pass ("microsoft.com:s=arcselector10001:i=1");
-	spf=pass (lists.linaro.org: domain of leonro@nvidia.com designates 52.101.61.45 as permitted sender) smtp.mailfrom=leonro@nvidia.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ugsA56NmRYydxF5IJZxdxeAHzw4s8yCqWNC2khSFVXr4FBR9APVlgu6vOQFCG1YxkZ2yy3VAF8sWClD6mEj6y223MEkUobwrzh4mQtGft/efPdplMLd8mxlaXG59cK+OxWSwOI/9sJJgSQsx6d8wBCwV6ZS+qvcKS/k4WHLIW5RLbVZYFXf6jfLWALqKM0LNZpUk6Xb91r4hJkKunAP0d/q3i8K98zorD/TnnIF8cbWvZyBTlRIXbtieoOjeqyatsflHg/csdmI2CR3zx7ynl4cWKSnHrmzZzKzvEMDOfzahRLhZ9r/4063bGanMpssfTXRVOpQ0p7Z7awZI1m4Jiw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Xz6a3ozz4aSvRNROJz/OvlvZWPYRHeII2UMRvcKmH2Q=;
- b=Up7SvPMpIGtANrUHuIbLTnmU2aGm2g4HAsgZ2q9U5pqo9jittAq2Ba5hDENz2aLbbdXO7zOvBFGG0lGhpDMpfl0ftMTbnDr/lR6kngNwt4hGgqBzUiQwK6/9WxzbdbATkdGR9XyT4ln7dGGJGtCRGRdkvTuf1LYU8puBeAKdT6SnmBBUNLHIr2DCirXh0tdMYov05SS0moywrFwTb5Zi+9ShsG2mk/c80DpHHWS/9RphMBlZHoCHJY85NSum38o/6MtqVcGfPGsGj53dpbrrlgiAjLid83wnEWobbf7gcGRrBOUSLLrMrxZrTuIsvrH+bx2x/NPXaCdQaUnSMyY8fg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.117.160) smtp.rcpttodomain=intel.com smtp.mailfrom=nvidia.com;
- dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Xz6a3ozz4aSvRNROJz/OvlvZWPYRHeII2UMRvcKmH2Q=;
- b=Q73AY/iJTJLdPZ1VvrZzeeFLpZVmI8PXrocF/LqbeV4Rfa8mBTCX4jiiiCZZkj9Zr4o7ttQhZXZTsZYuRRMNOi6X6kmRZwS1O0/LwFqDwKdLLe9Ee/dtMdVtoC6y+pNvKZ6eb+9QTLuxyZuzorILF2j++htRlk6FR+B2Ph340LCIrTex97mgC39cDWy5Gi67AdXwr6m1+qIhKqhQFUxHo6CEdMcHjJzcwOjRAuIENLYpDbQxvnTvYvAvRCCT6W6p/+qVEACEFki3h7s1aF4v4mt7q2V8v4LTBnuDroU/Oan/brneWAkl6Z4OT7MGb7Jq07DR9VmOe5vz8mP0kUas2Q==
-Received: from BL1PR13CA0017.namprd13.prod.outlook.com (2603:10b6:208:256::22)
- by IA1PR12MB6530.namprd12.prod.outlook.com (2603:10b6:208:3a5::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.13; Wed, 29 Oct
- 2025 09:26:54 +0000
-Received: from BL6PEPF00022574.namprd02.prod.outlook.com
- (2603:10b6:208:256:cafe::6e) by BL1PR13CA0017.outlook.office365.com
- (2603:10b6:208:256::22) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9275.13 via Frontend Transport; Wed,
- 29 Oct 2025 09:26:54 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
- smtp.mailfrom=nvidia.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=nvidia.com;
-Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.117.160) by
- BL6PEPF00022574.mail.protection.outlook.com (10.167.249.42) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9275.10 via Frontend Transport; Wed, 29 Oct 2025 09:26:54 +0000
-Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
- (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.34; Wed, 29 Oct
- 2025 02:26:41 -0700
-Received: from localhost (10.126.231.35) by rnnvmail201.nvidia.com
- (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 29 Oct
- 2025 02:26:40 -0700
-Date: Wed, 29 Oct 2025 11:25:34 +0200
-From: Leon Romanovsky <leonro@nvidia.com>
-To: Jason Gunthorpe <jgg@nvidia.com>
-Message-ID: <20251029092534.GA11622@unreal>
-References: <20251027044712.1676175-1-vivek.kasireddy@intel.com>
- <20251029002726.GA1092494@nvidia.com>
+	dkim=pass header.d=linaro.org header.s=google header.b=ABsRIyUf;
+	dmarc=pass (policy=none) header.from=linaro.org;
+	spf=pass (lists.linaro.org: domain of neil.armstrong@linaro.org designates 209.85.128.43 as permitted sender) smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-47112edf9f7so1216025e9.0
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 29 Oct 2025 11:07:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1761761269; x=1762366069; darn=lists.linaro.org;
+        h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+         :date:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=KNwV3kIKfmFe80QZSUe0lDX9k4qYiLpxE6LgR+ZybE0=;
+        b=ABsRIyUfnx60rWV2/nSWw0SINBFOm28XbHAPPNPOjfigNuWOven8a6lPhTF6h+2Tkd
+         TQRiLgP7WDnwPpg2kWmH+NX/xDKcfQhSRKTBT1q0kgI4RHcEL+BFAQgOUYTI7omKw0XX
+         LHZoNggdT2XYQKYsIpEmdv/KM8ytq11Q7+oQ+MnuKXfzNyMsrQoks5/ULnRP7IOwjNMW
+         Zrf4ESZgABh045O4DKLjXmLyXONfCkbVT/8ZlvVGXwgLkQVgwni6cdKjizUEkc9YXC6K
+         C0foSe0obb0twT4ovvQEGqhueOk0ctMo/auY12b70x0tauy8+aBQtW5iXVFt9L3QB5cq
+         KHFg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1761761269; x=1762366069;
+        h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+         :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=KNwV3kIKfmFe80QZSUe0lDX9k4qYiLpxE6LgR+ZybE0=;
+        b=QsJ1GiHitG2Dv06OA9ao2348K07FZQwOnv8y9lbTYVTF5MQ9g/UcTH5gw0OW9Ov+OO
+         pTXe0+VlnFb8+qA8YKoeU88w2UTyZzb9bHZg4CP8qX0ZQoAj0+Sb39STkrVuBfpn+XlR
+         DKkJegxfxXbomP0gfvXNA4rdcACdH7m1IuTyxCPpSePdLHJXPsLmb78ywOMHJiVSQyB2
+         ikTf1PAR9aahgKWCuwJ+9RlUUXRS4GsxgaiLuEkR+76EVolpZWrZqD+h06NEVH6q2Cig
+         ipi8dDpHMnzMXqmmkZuWSC/IFUOU4ADLzmXz8nXo5cwHl51L1tYMlnknhKmkUfRNriPE
+         ikwg==
+X-Forwarded-Encrypted: i=1; AJvYcCXqTiKDRY4Oq4NDt9v50j1/oybSt4a5GAfAstjRGLnZc+NWYnnY4BYOQtVNlo6BTZjQFX8QqrzEj2qB554a@lists.linaro.org
+X-Gm-Message-State: AOJu0YwDiWxvJ9iqGQo+znkLA8GOcNb78qXgqYQik1Pg6VA23HZwZ+RF
+	kDKdAefx8qJNzpcI7zaiwenQPphbgVNAgKW8O0RIMW8vwG3lKMDNWagPRl75swnkZknQKg==
+X-Gm-Gg: ASbGncv3y9zorV1JisXfGKAMMhd2t4bBBsAecnkvA8lZ8cMsLkVvSFTjXSd3Jfbtbg7
+	cMxy0oPdIc7Gi5vqzDyNY8iFA+n/2SbFmxzJM4aO4Ph/OxUaCZ5IPN4XpFYuun9YFO6HWLWJLX7
+	r2pKAcqE1i5bDsVDOp6kW7xIvCXwb21CIQS0MkRiBXm/4ls5oMl5WDnL0MXL28KLdyG5MoQ0264
+	QVeKyF7RMTDW+bg7ED7qnzdDou6gp+EZvYhE/JW3J1ieKslRfmMzC6Ud5NM33H9lE0DGuQH1XVx
+	4MvwYM0uavL0sEtQFP71NEGmFIArrOyPqvJr3sDalvkFEEEwogMo2necD6hn+JeOa5Ye/ZNuHwm
+	uRqC5ZmNfETrCpmJSQKvskNgfxPqnNAWDtZQJohdqGutpKTmhK4wNl0vFreOjyu6g8ZYfVzX9ew
+	MrY4UjgwKKTlyP5j4US4g7
+X-Google-Smtp-Source: AGHT+IEtMPjVh9Zcm+7C9F/ERY97bz/iXjm8g8W+QKNDx62F94FG9cv5Huxi+liF2AyMpIvvFbv2hA==
+X-Received: by 2002:a05:600c:4707:b0:475:dd04:128a with SMTP id 5b1f17b1804b1-4771e1e10b2mr35660565e9.31.1761761268523;
+        Wed, 29 Oct 2025 11:07:48 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:3d9:2080:52eb:f6ff:feb3:451a])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47718427409sm49662015e9.1.2025.10.29.11.07.47
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 29 Oct 2025 11:07:48 -0700 (PDT)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Date: Wed, 29 Oct 2025 19:07:42 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20251029002726.GA1092494@nvidia.com>
-X-Originating-IP: [10.126.231.35]
-X-ClientProxiedBy: rnnvmail202.nvidia.com (10.129.68.7) To
- rnnvmail201.nvidia.com (10.129.68.8)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF00022574:EE_|IA1PR12MB6530:EE_
-X-MS-Office365-Filtering-Correlation-Id: d3a6868b-c28c-4f75-6bd9-08de16cd4cf2
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|82310400026|376014|7416014|36860700013|1800799024|13003099007;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?NVngunuNT47NQo84KAxs+T4FBFstm9ZqvyHhe6Y7o1ytajs0tghCGyc7lkp5?=
- =?us-ascii?Q?eft2oivsF9N4t0Jr0GTCwBYCltU2H3osfOOEttSVNQPDcXvv6Z06bIxD60dl?=
- =?us-ascii?Q?rS8tUNdNlqg4GaLFPoi/EvR+cGXAYV9HaPCEph88viM5IvrRfHi3tfcGMIlC?=
- =?us-ascii?Q?vkFXuxdvjCw0tL5Bb4uBwnfLUQcERgCQkwQjiJKPlDxMYmurRlqPOqxBpf1M?=
- =?us-ascii?Q?t/eRezZxLIKMLc4yDyxUQ5k2O4jzDjjXNuFhR/RW03uZtX3Ezha8od/STgNt?=
- =?us-ascii?Q?0Fp2YCZcBSpMqTOsvXL+Zj6ZOrYsTP9acG3TJVs/gCSU9G2TrYKEDNs88s3q?=
- =?us-ascii?Q?hfOojya9f/MhpJ8cf01NYjaeXMA7LB+stNzkbKYFZfby3Fts7hw4oKQFOmMu?=
- =?us-ascii?Q?Gsq/ERoHZ08vEAoYdH3ahN4YV3mBPxZm99yKGQCOizHrNxuuVXqdchbb2B0/?=
- =?us-ascii?Q?qCY9KFSqTu3nDXorLjBVFg7ShHrqqFWGi2g6OW3nD3cn2f1ImCt+ICfRQAV0?=
- =?us-ascii?Q?EGIlOrN4HFYymHmdkB0wdDBfnJeM7tPcleIgRzkSn3Ivok9EFBgy3kqQ+2xD?=
- =?us-ascii?Q?tumZrTNMGHaqwbCLDyBoOs6p3jOOoR4IWUJnAbRdPXuE/PpaO5nEICVy/1sp?=
- =?us-ascii?Q?qQk92PX5vs/ljT3K4u/PqbNfPX3Lsb0OZuii9f1qi7gqwhfk8pBDykz4H6y7?=
- =?us-ascii?Q?hQRay8LU2dnspn9ylmANZA5QPUrbR6YSGTaw+SV2O6gOPJGO1LmEMDO4NbWv?=
- =?us-ascii?Q?nXNUG8k2QKU1Bf/K/6kXw9dCjCB8+VmOiPGkcPORCR7rmrIGC7KO4pPSGSBl?=
- =?us-ascii?Q?L7jdm/8K2UoxXCQH94uboE86UWpraK+bJQ3bHNOe2hunSjzjE6ItiTGJ+gwW?=
- =?us-ascii?Q?1IC5jco/4YX1fVMZhECgPat8N8lcilzMa0yuDAa18X5i6QJiPI8wgMSPe42m?=
- =?us-ascii?Q?iq50OBnQZBcqbXSVc6MyWSjFGq9bxS+hXX+w5TGM2XFfAiXWcouFrZqWyfUL?=
- =?us-ascii?Q?i+rVOt5YLJeM7tnKS/NiLdvV4T6GTYNytBvcdloyX0VQKx0c9FPztgaZORHp?=
- =?us-ascii?Q?KF/WIRpmQDdYwb3HwSBpbqcAqnxfnqTXYvMDBSGJXA4VWutp9ohELv7t/+wy?=
- =?us-ascii?Q?MyPPEfqXhaiYYQylMfw52M/wA2S+KeitsfAawwzxKAxI0AUdWuPclZTocxv1?=
- =?us-ascii?Q?1NByaTK8zUPF47GZGltD1LRBEIKShWaxAHjAaR9anSfx/51jIRe0O9mxe8KM?=
- =?us-ascii?Q?EixkW8hTk0eHDqVtdwl64PJrfR6t/DJhr6jpNyu5xQct5NqEB4kEsaf0wryO?=
- =?us-ascii?Q?5QpANNRuC4N3RLALs8v0G9jdlKtg2kFiDV64G6jsiyYoJ9gDG7Z7LBDh6V6b?=
- =?us-ascii?Q?vMSm0qvgYPJXAi2ArbPYqP/MhfyYtqQuZbMrXtBMKV+rPqD1+Cy7LUAQVGBz?=
- =?us-ascii?Q?+pVlvyWbRlvEzSlpL3AN2ZfHyeo+ONuRD/axGIPXq+lNq+HDqEa7+hbtC9HJ?=
- =?us-ascii?Q?chj9LrUH4kpF2JHeaGxg02rQTZ0odC/Kjl3la6XHfhStxWb4uKWQpbD89KiS?=
- =?us-ascii?Q?JS++JcUjML30ZVvUSjctSz0NOneKI03kr2PACE/7?=
-X-Forefront-Antispam-Report: 
-	CIP:216.228.117.160;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:dc6edge1.nvidia.com;CAT:NONE;SFS:(13230040)(82310400026)(376014)(7416014)(36860700013)(1800799024)(13003099007);DIR:OUT;SFP:1101;
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Oct 2025 09:26:54.6379
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d3a6868b-c28c-4f75-6bd9-08de16cd4cf2
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.117.160];Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	BL6PEPF00022574.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6530
-X-Spamd-Bar: ----
-X-MailFrom: leonro@nvidia.com
+Message-Id: <20251029-topic-sm8x50-geni-i2c-hub-no-dma-v1-1-5e264258a5bd@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAO1XAmkC/x3NQQqDMBBG4avIrPtDMhBNe5XSRYyjzsJEkrYI4
+ t0buvw2751UpahUenQnFflq1Zwa7K2juIa0CHRqJjbsrOE73nnXiLr5wxkskhTKEetnRMqYtgD
+ vLbuhD72LI7XMXmTW4794vq7rB/dzaxxyAAAA
+X-Change-ID: 20251029-topic-sm8x50-geni-i2c-hub-no-dma-8812576a65cb
+To: Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>,
+ Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
+ Andi Shyti <andi.shyti@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>,
+ =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ Wolfram Sang <wsa@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2132;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=UJ2DT1Tiu56DrBbBEh0/iWktyI9wRry2MbdlaBokZTE=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBpAlfz8LKSj8+mAZ1QksgODZDbo1w7yGU4iVg2tYA9
+ VBEcFOKJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCaQJX8wAKCRB33NvayMhJ0S2wD/
+ sFxj0QkeV/duZgx4BgvFB456VI+EtWZMBJ3QVO9ZgwzJOGzQJplBMPxpyNBxWiRt1hSl5e/nOBUmXE
+ R/tv8d5Na4+kXHgxezaH2dDB9hBVX8+7mKi6KJtH4KQChVQ5fsEwqPVeO6/dg5DTELvu6mDm+O3OF9
+ Kzn2e3FgP2wbPrGCao5up8PR/wRUCP6zAbdYCWgf+D54nNkdZqLW90pRZxk8FGSPIW4AmSOs15Cc2R
+ Te996h007PCHLoEEfRf0bAt5lweueUCL/vnRMNIArrJ2noAoclVA7YJ5NyRaJtJ1+p3DDzVAVbCgPT
+ QxLDlvYyzc10fmx9aGlhqpRKmmrFjrI4RSO0swEpScsFdOGdnplAWs2lOKxKRhu3V65e5gIu0jNlBW
+ keYbmpfQZ+vvPBlPwzL6AK3KDHuAEaRniwekbixKVm62NNXHPwyz3sBPnoNnsfI5qIP31l3I9/3cLR
+ m/ywztQaFH3AWrdoSzWJrQkJueG2NgK7JveuZjlM4W0efx0ps8OIMbRnBcCg0k436Yt8tUspx8KZzw
+ qVetRqhHG/LSK4XVa5fceQfGqVhLkJ+/8INRV4Mxji7EqSg63no5xELxabQZTg2RHF4edYk1rOSQrZ
+ LmS4OPAo0UyyWqA3ZZ1hx2RX6tFe5s7yybh4qXJjkw0WzLOo2OswA6dki/aQ==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
+X-Spamd-Bar: ---
+X-MailFrom: neil.armstrong@linaro.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: SJNZPIOUJFU64V3LIY6FLD6QY753SVKN
-X-Message-ID-Hash: SJNZPIOUJFU64V3LIY6FLD6QY753SVKN
+Message-ID-Hash: XPM43GAXUQPONVNKD6PFPUDMYDYCOHS5
+X-Message-ID-Hash: XPM43GAXUQPONVNKD6PFPUDMYDYCOHS5
 X-Mailman-Approved-At: Thu, 16 Apr 2026 14:48:32 +0000
-CC: Vivek Kasireddy <vivek.kasireddy@intel.com>, dri-devel@lists.freedesktop.org, intel-xe@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Christian Koenig <christian.koenig@amd.com>, Sumit Semwal <sumit.semwal@linaro.org>, Thomas =?iso-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>, Simona Vetter <simona.vetter@ffwll.ch>, Matthew Brost <matthew.brost@intel.com>
+CC: linux-arm-msm@vger.kernel.org, linux-i2c@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Neil Armstrong <neil.armstrong@linaro.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [RFC v2 0/8] dma-buf: Add support for mapping dmabufs via interconnects
+Subject: [Linaro-mm-sig] [PATCH] i2c: qcom-geni: make sure I2C hub controllers can't use SE DMA
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SJNZPIOUJFU64V3LIY6FLD6QY753SVKN/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XPM43GAXUQPONVNKD6PFPUDMYDYCOHS5/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [4.99 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[nvidia.com : SPF not aligned (relaxed),reject];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
-	R_DKIM_REJECT(1.00)[Nvidia.com:s=selector2];
-	DATE_IN_PAST(1.00)[4061];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+X-Spamd-Result: default: False [-0.01 / 15.00];
+	DATE_IN_PAST(1.00)[4052];
+	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	GREYLIST(0.00)[pass,meta];
-	SUSPICIOUS_AUTH_ORIGIN(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns];
-	HAS_XOIP(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[leonro@nvidia.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[Nvidia.com:-];
-	NEURAL_HAM(-0.00)[-0.678];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	MISSING_XM_UA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	RCVD_COUNT_SEVEN(0.00)[7]
-X-Rspamd-Queue-Id: 4AEBD40FD96
+	ARC_NA(0.00)[];
+	TO_DN_SOME(0.00)[];
+	NEURAL_SPAM(0.00)[0.554];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[14];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[neil.armstrong@linaro.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCVD_TLS_LAST(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:mid,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
+X-Rspamd-Queue-Id: A30D840FD9D
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Tue, Oct 28, 2025 at 09:27:26PM -0300, Jason Gunthorpe wrote:
-> On Sun, Oct 26, 2025 at 09:44:12PM -0700, Vivek Kasireddy wrote:
-> > In a typical dma-buf use case, a dmabuf exporter makes its buffer
-> > buffer available to an importer by mapping it using DMA APIs
-> > such as dma_map_sgtable() or dma_map_resource(). However, this
-> > is not desirable in some cases where the exporter and importer
-> > are directly connected via a physical or virtual link (or
-> > interconnect) and the importer can access the buffer without
-> > having it DMA mapped.
-> 
-> I think my explanation was not so clear, I spent a few hours and typed
-> in what I was thinking about here:
-> 
-> https://github.com/jgunthorpe/linux/commits/dmabuf_map_type
-> 
-> I didn't type in the last patch for iommufd side, hopefully it is
-> clear enough. Adding iov should follow the pattern of the "physical
-> address list" patch.
-> 
-> I think the use of EXPORT_SYMBOL_FOR_MODULES() to lock down the
-> physical addres list mapping type to iommufd is clever and I'm hoping
-> addresses Chrsitian's concerns about abuse.
-> 
-> Single GPU drivers can easilly declare their own mapping type for
-> their own private interconnect without needing to change the core
-> code.
-> 
-> This seems to be fairly straightforward and reasonably type safe..
+The I2C Hub controller is a simpler GENI I2C variant that doesn't
+support DMA at all, add a no_dma flag to make sure it nevers selects
+the SE DMA mode with mappable 32bytes long transfers.
 
-It makes me wonder what am I supposed to do with my series now [1]?
-How do you see submission plan now?
+Fixes: cacd9643eca7 ("i2c: qcom-geni: add support for I2C Master Hub variant")
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+---
+ drivers/i2c/busses/i2c-qcom-geni.c | 11 +++++++----
+ 1 file changed, 7 insertions(+), 4 deletions(-)
 
-[1] https://lore.kernel.org/all/cover.1760368250.git.leon@kernel.org/
+diff --git a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-geni.c
+index 43fdd89b8beb..bfb352b04902 100644
+--- a/drivers/i2c/busses/i2c-qcom-geni.c
++++ b/drivers/i2c/busses/i2c-qcom-geni.c
+@@ -97,6 +97,7 @@ struct geni_i2c_dev {
+ 	dma_addr_t dma_addr;
+ 	struct dma_chan *tx_c;
+ 	struct dma_chan *rx_c;
++	bool no_dma;
+ 	bool gpi_mode;
+ 	bool abort_done;
+ };
+@@ -425,7 +426,7 @@ static int geni_i2c_rx_one_msg(struct geni_i2c_dev *gi2c, struct i2c_msg *msg,
+ 	size_t len = msg->len;
+ 	struct i2c_msg *cur;
+ 
+-	dma_buf = i2c_get_dma_safe_msg_buf(msg, 32);
++	dma_buf = gi2c->no_dma ? NULL : i2c_get_dma_safe_msg_buf(msg, 32);
+ 	if (dma_buf)
+ 		geni_se_select_mode(se, GENI_SE_DMA);
+ 	else
+@@ -464,7 +465,7 @@ static int geni_i2c_tx_one_msg(struct geni_i2c_dev *gi2c, struct i2c_msg *msg,
+ 	size_t len = msg->len;
+ 	struct i2c_msg *cur;
+ 
+-	dma_buf = i2c_get_dma_safe_msg_buf(msg, 32);
++	dma_buf = gi2c->no_dma ? NULL : i2c_get_dma_safe_msg_buf(msg, 32);
+ 	if (dma_buf)
+ 		geni_se_select_mode(se, GENI_SE_DMA);
+ 	else
+@@ -880,10 +881,12 @@ static int geni_i2c_probe(struct platform_device *pdev)
+ 		goto err_resources;
+ 	}
+ 
+-	if (desc && desc->no_dma_support)
++	if (desc && desc->no_dma_support) {
+ 		fifo_disable = false;
+-	else
++		gi2c->no_dma = true;
++	} else {
+ 		fifo_disable = readl_relaxed(gi2c->se.base + GENI_IF_DISABLE_RO) & FIFO_IF_DISABLE;
++	}
+ 
+ 	if (fifo_disable) {
+ 		/* FIFO is disabled, so we can only use GPI DMA */
 
+---
+base-commit: dcb6fa37fd7bc9c3d2b066329b0d27dedf8becaa
+change-id: 20251029-topic-sm8x50-geni-i2c-hub-no-dma-8812576a65cb
 
-> 
-> What do you think?
-> 
-> Jason
+Best regards,
+-- 
+Neil Armstrong <neil.armstrong@linaro.org>
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
