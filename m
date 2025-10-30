@@ -2,180 +2,381 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id ALXLKf/34GnZnwAAu9opvQ
+	id 8Dm7LgX44GnZnwAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:53:51 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:53:57 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3486140FDEC
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:53:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4F37440FDF3
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:53:57 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4AE7E409B1
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 14:53:50 +0000 (UTC)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
-	by lists.linaro.org (Postfix) with ESMTPS id 7C1143F7D0
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 30 Oct 2025 12:26:20 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 692D440993
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 14:53:56 +0000 (UTC)
+Received: from fhigh-a1-smtp.messagingengine.com (fhigh-a1-smtp.messagingengine.com [103.168.172.152])
+	by lists.linaro.org (Postfix) with ESMTPS id D4C3D3F75D
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 30 Oct 2025 20:38:41 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=vYHaRMpx;
-	dmarc=pass (policy=reject) header.from=mailbox.org;
-	spf=pass (lists.linaro.org: domain of phasta@mailbox.org designates 80.241.56.152 as permitted sender) smtp.mailfrom=phasta@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4cy3Hs1HYnz9vBj;
-	Thu, 30 Oct 2025 13:26:17 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
-	t=1761827177; h=from:from:reply-to:reply-to:subject:subject:date:date:
-	 message-id:message-id:to:to:cc:cc:mime-version:mime-version:
-	 content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=9DK/EsSrv/ZUc4X4MrgLDSTB0kWrjlTtTs1nlO5FmUg=;
-	b=vYHaRMpx01AqFN5eK8xNSNlujKnBCKhUWW+nXEEbLsTAXCQapvG+uBzxAT7/zTIq0Ocn4e
-	EkNumxB1SbEdozNM9GV4IhJZqNaYp0US2CWJUfA7OPVFsZo2mgHeFN/mEG1drwN6+qIQYN
-	tNqHw3eQgMfUbXto1Eu3Dcw6cSEUc9p5IDvdEviWqTSn7sVCqeEMRMyAPMC8mOxwkYYD4W
-	R2sdzkDzqMigZ+YFphSmFs2aza7IBYMxkgnuj2l5u9fbuCZZhNwr08A2Kj+AR7Y6ioSeVF
-	bRW6BQeov+jAFvcfaoKN/8AL5T0ShhlBcIyXaCPxACA21jk+LhcQQisqcPh2EA==
-Message-ID: <c51ea5a408ca6d404074be1df219077457ea76f6.camel@mailbox.org>
-From: Philipp Stanner <phasta@mailbox.org>
-To: Pierre-Eric Pelloux-Prayer <pierre-eric@damsy.net>, phasta@kernel.org,
- Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>, Matthew
- Brost <matthew.brost@intel.com>, Danilo Krummrich <dakr@kernel.org>,
- Christian =?ISO-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard
- <mripard@kernel.org>,  Thomas Zimmermann <tzimmermann@suse.de>, David
- Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal
- <sumit.semwal@linaro.org>
-Date: Thu, 30 Oct 2025 13:26:10 +0100
-In-Reply-To: <442d0e70-c9e2-4bd6-a144-ea083dbf86d2@damsy.net>
-References: <20251029091103.1159-1-pierre-eric.pelloux-prayer@amd.com>
-	 <fb2881006f843bd85dd02948c4467c81086effc8.camel@mailbox.org>
-	 <442d0e70-c9e2-4bd6-a144-ea083dbf86d2@damsy.net>
+	dkim=pass header.d=shazbot.org header.s=fm2 header.b=DsC38lET;
+	dkim=pass header.d=messagingengine.com header.s=fm3 header.b="y WVHoBY";
+	dmarc=pass (policy=none) header.from=shazbot.org;
+	spf=pass (lists.linaro.org: domain of alex@shazbot.org designates 103.168.172.152 as permitted sender) smtp.mailfrom=alex@shazbot.org
+Received: from phl-compute-02.internal (phl-compute-02.internal [10.202.2.42])
+	by mailfhigh.phl.internal (Postfix) with ESMTP id 8C9A014001DA;
+	Thu, 30 Oct 2025 16:38:41 -0400 (EDT)
+Received: from phl-mailfrontend-01 ([10.202.2.162])
+  by phl-compute-02.internal (MEProxy); Thu, 30 Oct 2025 16:38:41 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=shazbot.org; h=
+	cc:cc:content-transfer-encoding:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm2; t=1761856721;
+	 x=1761943121; bh=p/8nyxWirOj4W+hYeRtMTG+81adajTiGVYuh/z6LXOE=; b=
+	DsC38lETCmk/UCR0NCEwSG/uMsWXv3KF8nqtv5mXrxnOSNXAuNpeCuWFpcBvb+Rd
+	qJBjT5+eedr1G7iNzvqfrWIs8YRmqr2Wn21vsB0Emgw2ammXeAjJNTKT8X3CRF7f
+	sgThj4w6Go/EWjZJV5hnPtkmvfi6+pv64RwRGY8broPbxr/l47tuMqaHoojfoTlR
+	x8NDbZZySjAGPtlXTOwEeVtGqPiFwdzOMit5oo4Jlrg3Xiv12ZeKHlQsjJ2dfLoo
+	Dd4zchU1KSWfT+xErx3Qp84XfWS++Q21slSUIXTr2Vf+w51bpou71HnP2egRiZFl
+	JYynwj6jAFgGlfam/THdRQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:feedback-id:feedback-id
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1761856721; x=
+	1761943121; bh=p/8nyxWirOj4W+hYeRtMTG+81adajTiGVYuh/z6LXOE=; b=y
+	WVHoBY1ck0fhOfaNyfXlK3MsltrJ16L4JMUjk4/8F1vhiZvK9+ByZAPE2Fr+lDEn
+	31wuiMAdQO9JUckxnFimEg9qgiR7Buz2VVu3gcL2K4BISNU112JvnuEfmtkVFPU/
+	WkKn9wiMCn/ibulsR45YnPo3Fgmy6RI+6Fk3aMG8co7oZG18ttXuQ58m649z8toG
+	uT5IEDW7hMQMIpoPYi22aGzWDJxfD1aqI4Iw7ZnDH3Ltcib06o+rASeKq7T4jlRO
+	a3slUeUe0CCl0KdMKPV16WqcZAYF7H/sqwJXPOUxsj0SzU4xV0yEV9o7Tp0CRH3k
+	UOAJNTt/tx/Lco0qxnstA==
+X-ME-Sender: <xms:z8wDaZLo5dD7ZxDV6II0FqH4O7jccYwOPy06udjLAl4RXkxI_trqqw>
+    <xme:z8wDaW3NyxbzGjLL5VL8Xo8PzYRVFCOzMbstflMQqva5Wle0FjF3VlMyKQrzHC5El
+    q3grRf5LAMq5wsIJswOZBD4TQxX7zoQ86zYjcR_77WmesqtyRs2M7A>
+X-ME-Received: <xmr:z8wDaVIW0bK32xwhEPjPTrLSw9kl2duIIdiJN2tr1QWnNDZ4iA2BxWRaG40>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdeggdduieejheelucetufdoteggodetrf
+    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
+    rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
+    gurhepfffhvfevuffkjghfgggtgfesthejredttddtvdenucfhrhhomheptehlvgigucgh
+    ihhllhhirghmshhonhcuoegrlhgvgiesshhhrgiisghothdrohhrgheqnecuggftrfgrth
+    htvghrnhepteetudelgeekieegudegleeuvdffgeehleeivddtfeektdekkeehffehudet
+    hffhnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomheprg
+    hlvgigsehshhgriigsohhtrdhorhhgpdhnsggprhgtphhtthhopedvgedpmhhouggvpehs
+    mhhtphhouhhtpdhrtghpthhtoheplhgvohhnsehkvghrnhgvlhdrohhrghdprhgtphhtth
+    hopegrlhgvgidrfihilhhlihgrmhhsohhnsehrvgguhhgrthdrtghomhdprhgtphhtthho
+    pehlvghonhhrohesnhhvihguihgrrdgtohhmpdhrtghpthhtohepjhhgghesnhhvihguih
+    grrdgtohhmpdhrtghpthhtoheprghkphhmsehlihhnuhigqdhfohhunhgurghtihhonhdr
+    ohhrghdprhgtphhtthhopegshhgvlhhgrggrshesghhoohhglhgvrdgtohhmpdhrtghpth
+    htoheptghhrhhishhtihgrnhdrkhhovghnihhgsegrmhgurdgtohhmpdhrtghpthhtohep
+    ughrihdquggvvhgvlheslhhishhtshdrfhhrvggvuggvshhkthhophdrohhrghdprhgtph
+    htthhopehiohhmmhhusehlihhsthhsrdhlihhnuhigrdguvghv
+X-ME-Proxy: <xmx:z8wDaaMiGwbWX7czDe5iiad6EIpQFwJ1yQIteZ0s-dAUbUDysgOuAQ>
+    <xmx:z8wDaWyOXEdvkv2nByzkDyCMSCs83bIcsse_dM2y2-1KvLiBXmR81Q>
+    <xmx:z8wDaSIr0J6kFZz5NMvG-wATtPZO5nIJ7XYS0F5DucQqhu-KLzZWag>
+    <xmx:z8wDaVrwkjuhIMeJQEscr9oJy00Glt_Gj0UMB1ES18qD9i2fTKlcuQ>
+    <xmx:0cwDacSuknghBUpyXTe85wMhy52PcPg_FWLjbD2hGGkyV4h7HjHD1dZT>
+Feedback-ID: i03f14258:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
+ 30 Oct 2025 16:38:37 -0400 (EDT)
+Date: Thu, 30 Oct 2025 14:38:36 -0600
+From: Alex Williamson <alex@shazbot.org>
+To: Leon Romanovsky <leon@kernel.org>
+Message-ID: <20251030143836.66cdf116@shazbot.org>
+In-Reply-To: <72ecaa13864ca346797e342d23a7929562788148.1760368250.git.leon@kernel.org>
+References: <cover.1760368250.git.leon@kernel.org>
+	<72ecaa13864ca346797e342d23a7929562788148.1760368250.git.leon@kernel.org>
 MIME-Version: 1.0
-X-MBO-RS-META: t5i1pxoekhdn1m5qnn8hwnur5fmqbb8o
-X-MBO-RS-ID: 8afa6dd1f8f1b2c6dfd
-X-Spamd-Bar: --
-X-MailFrom: phasta@mailbox.org
+X-Spamd-Bar: ----
+X-MailFrom: alex@shazbot.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 34ZHMF2VDRNCJQAXYNJSFRWTZFR44C3G
-X-Message-ID-Hash: 34ZHMF2VDRNCJQAXYNJSFRWTZFR44C3G
+Message-ID-Hash: SNWFTXXWQL2SAZLTGQL54JN4HDRCLMZH
+X-Message-ID-Hash: SNWFTXXWQL2SAZLTGQL54JN4HDRCLMZH
 X-Mailman-Approved-At: Thu, 16 Apr 2026 14:48:37 +0000
-CC: Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+CC: Alex Williamson <alex.williamson@redhat.com>, Leon Romanovsky <leonro@nvidia.com>, Jason Gunthorpe <jgg@nvidia.com>, Andrew Morton <akpm@linux-foundation.org>, Bjorn Helgaas <bhelgaas@google.com>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, iommu@lists.linux.dev, Jens Axboe <axboe@kernel.dk>, Joerg Roedel <joro@8bytes.org>, kvm@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linux-mm@kvack.org, linux-pci@vger.kernel.org, Logan Gunthorpe <logang@deltatee.com>, Robin Murphy <robin.murphy@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, Vivek Kasireddy <vivek.kasireddy@intel.com>, Will Deacon <will@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Reply-To: phasta@kernel.org
-Subject: [Linaro-mm-sig] Re: [PATCH v1] drm/sched: fix deadlock in drm_sched_entity_kill_jobs_cb
+Subject: [Linaro-mm-sig] Re: [PATCH v5 9/9] vfio/pci: Add dma-buf export support for MMIO regions
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/34ZHMF2VDRNCJQAXYNJSFRWTZFR44C3G/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SNWFTXXWQL2SAZLTGQL54JN4HDRCLMZH/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-X-Spamd-Result: default: False [5.09 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[mailbox.org : SPF not aligned (relaxed),reject];
-	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[mailbox.org:s=mail20150812];
-	DATE_IN_PAST(1.00)[4034];
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [0.59 / 15.00];
+	DATE_IN_PAST(1.00)[4026];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx:c];
+	DMARC_POLICY_SOFTFAIL(0.10)[shazbot.org : SPF not aligned (relaxed), No valid DKIM,none];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	RCPT_COUNT_TWELVE(0.00)[17];
-	GREYLIST(0.00)[pass,meta];
-	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
-	FREEMAIL_TO(0.00)[damsy.net,kernel.org,amd.com,intel.com,gmail.com,linux.intel.com,suse.de,ffwll.ch,linaro.org];
-	DKIM_TRACE(0.00)[mailbox.org:-];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.954];
-	FROM_NEQ_ENVFROM(0.00)[phasta@mailbox.org,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
-	HAS_REPLYTO(0.00)[phasta@kernel.org];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[23];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mailbox.org:mid,linaro.org:email,gitlab.freedesktop.org:url,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: 3486140FDEC
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[alex@shazbot.org,linaro-mm-sig-bounces@lists.linaro.org];
+	NEURAL_SPAM(0.00)[0.729];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[shazbot.org:mid,lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
+X-Rspamd-Queue-Id: 4F37440FDF3
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-T24gVGh1LCAyMDI1LTEwLTMwIGF0IDEzOjA2ICswMTAwLCBQaWVycmUtRXJpYyBQZWxsb3V4LVBy
-YXllciB3cm90ZToNCj4gDQo+IA0KPiBMZSAzMC8xMC8yMDI1IMOgIDEyOjE3LCBQaGlsaXBwIFN0
-YW5uZXIgYSDDqWNyaXTCoDoNCj4gPiBPbiBXZWQsIDIwMjUtMTAtMjkgYXQgMTA6MTEgKzAxMDAs
-IFBpZXJyZS1FcmljIFBlbGxvdXgtUHJheWVyIHdyb3RlOg0KPiA+ID4gaHR0cHM6Ly9naXRsYWIu
-ZnJlZWRlc2t0b3Aub3JnL21lc2EvbWVzYS8tL2lzc3Vlcy8xMzkwOMKgcG9pbnRlZCBvdXQNCj4g
-PiANCj4gPiBUaGlzIGxpbmsgc2hvdWxkIGJlIG1vdmVkIHRvIHRoZSB0YWcgc2VjdGlvbiBhdCB0
-aGUgYm90dG9tIGF0IGEgQ2xvc2VzOg0KPiA+IHRhZy4gT3B0aW9uYWxseSBhIFJlcG9ydGVkLWJ5
-OiwgdG9vLg0KPiANCj4gVGhlIGJ1ZyByZXBvcnQgaXMgYWJvdXQgYSBkaWZmZXJlbnQgaXNzdWUu
-IFRoZSBwb3RlbnRpYWwgZGVhZGxvY2sgYmVpbmcgZml4ZWQgYnkgDQo+IHRoaXMgcGF0Y2ggd2Fz
-IGRpc2NvdmVyZWQgd2hpbGUgaW52ZXN0aWdhdGluZyBpdC4NCj4gSSdsbCBhZGQgYSBSZXBvcnRl
-ZC1ieSB0YWcgdGhvdWdoLg0KPiANCj4gPiANCj4gPiA+IGEgcG9zc2libGUgZGVhZGxvY2s6DQo+
-ID4gPiANCj4gPiA+IFsgMTIzMS42MTEwMzFdwqAgUG9zc2libGUgaW50ZXJydXB0IHVuc2FmZSBs
-b2NraW5nIHNjZW5hcmlvOg0KPiA+ID4gDQo+ID4gPiBbIDEyMzEuNjExMDMzXcKgwqDCoMKgwqDC
-oMKgIENQVTDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBDUFUxDQo+ID4g
-PiBbIDEyMzEuNjExMDM0XcKgwqDCoMKgwqDCoMKgIC0tLS3CoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoCAtLS0tDQo+ID4gPiBbIDEyMzEuNjExMDM1XcKgwqAgbG9jaygmeGEt
-PnhhX2xvY2sjMTcpOw0KPiA+ID4gWyAxMjMxLjYxMTAzOF3CoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBsb2NhbF9pcnFfZGlzYWJs
-ZSgpOw0KPiA+ID4gWyAxMjMxLjYxMTAzOV3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBsb2NrKCZmZW5jZS0+bG9jayk7DQo+ID4g
-PiBbIDEyMzEuNjExMDQxXcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgIGxvY2soJnhhLT54YV9sb2NrIzE3KTsNCj4gPiA+IFsgMTIz
-MS42MTEwNDRdwqDCoCA8SW50ZXJydXB0Pg0KPiA+ID4gWyAxMjMxLjYxMTA0NV3CoMKgwqDCoCBs
-b2NrKCZmZW5jZS0+bG9jayk7DQo+ID4gPiBbIDEyMzEuNjExMDQ3XQ0KPiA+ID4gwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgKioqIERFQURMT0NLICoqKg0KPiA+ID4gDQo+ID4gDQo+
-ID4gVGhlIGNvbW1pdCBtZXNzYWdlIGlzIGxhY2tpbmcgYW4gZXhwbGFuYXRpb24gYXMgdG8gX2hv
-d18gYW5kIF93aGVuXyB0aGUNCj4gPiBkZWFkbG9jayBjb21lcyB0byBiZS4gVGhhdCdzIGEgcHJl
-cmVxdWlzaXRlIGZvciB1bmRlcnN0YW5kaW5nIHdoeSB0aGUNCj4gPiBiZWxvdyBpcyB0aGUgcHJv
-cGVyIGZpeCBhbmQgc29sdXRpb24uDQo+IA0KPiBJIGNvcHktcGFzdGVkIGEgc21hbGwgY2h1bmsg
-b2YgdGhlIGZ1bGwgZGVhZGxvY2sgYW5hbHlzaXMgcmVwb3J0IGluY2x1ZGVkIGluIHRoZSANCj4g
-dGlja2V0IGJlY2F1c2UgaXQncyAzMDArIGxpbmVzIGxvbmcuIENvcHlpbmcgdGhlIGZ1bGwgbG9n
-IGlzbid0IHVzZWZ1bCBJTU8sIGJ1dCANCj4gSSBjYW4gYWRkIG1vcmUgY29udGV4dC4NCg0KVGhl
-IGxvZyB3b3VsZG4ndCBiZSB1c2VmdWwsIGJ1dCBhIGh1bWFuLWdlbmVyYXRlZCBleHBsYW5hdGlv
-biBhcyB5b3UNCmRldGFpbCBpdCBiZWxvdy4NCg0KPiANCj4gVGhlIHByb2JsZW0gaXMgdGhhdCBh
-IHRocmVhZCAoQ1BVMCBhYm92ZSkgY2FuIGxvY2sgdGhlIGpvYidzIGRlcGVuZGVuY2llcyANCj4g
-eGFfYXJyYXkgd2l0aG91dCBkaXNhYmxpbmcgdGhlIGludGVycnVwdHMuDQoNCldoaWNoIGRybV9z
-Y2hlZCBmdW5jdGlvbiB3b3VsZCB0aGF0IGJlPw0KDQo+IElmIGEgZmVuY2Ugc2lnbmFscyB3aGls
-ZSBDUFUwIGhvbGRzIHRoaXMgbG9jayBhbmQgZHJtX3NjaGVkX2VudGl0eV9raWxsX2pvYnNfY2Ig
-DQo+IGlzIGNhbGxlZCwgaXQgd2lsbCB0cnkgdG8gZ3JhYiB0aGUgeGFfYXJyYXkgbG9jayB3aGlj
-aCBpcyBub3QgcG9zc2libGUgYmVjYXVzZSANCj4gQ1BVMCBob2xkcyBpdCBhbHJlYWR5Lg0KDQpZ
-b3UgbWVhbiBhbiAqaW50ZXJydXB0KiBzaWduYWxzIHRoZSBmZW5jZT8gU2hvdWxkbid0IGludGVy
-cnVwdCBpc3N1ZXMNCmJlIHNvbHZlZCB3aXRoIHNwaW5fbG9ja19pcnFkaXNhYmxlKCkg4oCTIGJ1
-dCB3ZSBjYW4ndCBoYXZlIHRoYXQgYmVjYXVzZQ0KaXQncyB0aGUgeGFycmF5IGRvaW5nIHRoYXQg
-aW50ZXJuYWxseT8NCg0KWW91IGRvbid0IGhhdmUgdG8gZXhwbGFpbiB0aGF0IGluIHRoaXMgbWFp
-bC10aHJlYWQsIGEgdjIgZGV0YWlsaW5nIHRoYXQNCndvdWxkIGJlIHN1ZmljaWVudC4NCg0KPiAN
-Cj4gDQo+ID4gDQo+ID4gVGhlIGlzc3VlIHNlZW1zIHRvIGJlIHRoYXQgeW91IGNhbm5vdCBwZXJm
-b3JtIGNlcnRhaW4gdGFza3MgZnJvbSB3aXRoaW4NCj4gPiB0aGF0IHdvcmsgaXRlbT8NCg0KW+KA
-pl0NCg0KPiA+IA0KPiA+ID4gK3N0YXRpYyB2b2lkIGRybV9zY2hlZF9lbnRpdHlfa2lsbF9qb2Jz
-X2NiKHN0cnVjdCBkbWFfZmVuY2UgKmYsDQo+ID4gPiArCQkJCQnCoCBzdHJ1Y3QgZG1hX2ZlbmNl
-X2NiICpjYik7DQo+ID4gPiArDQo+ID4gPiDCoMKgc3RhdGljIHZvaWQgZHJtX3NjaGVkX2VudGl0
-eV9raWxsX2pvYnNfd29yayhzdHJ1Y3Qgd29ya19zdHJ1Y3QgKndyaykNCj4gPiA+IMKgwqB7DQo+
-ID4gPiDCoMKgCXN0cnVjdCBkcm1fc2NoZWRfam9iICpqb2IgPSBjb250YWluZXJfb2Yod3JrLCB0
-eXBlb2YoKmpvYiksIHdvcmspOw0KPiA+ID4gLQ0KPiA+ID4gLQlkcm1fc2NoZWRfZmVuY2Vfc2No
-ZWR1bGVkKGpvYi0+c19mZW5jZSwgTlVMTCk7DQo+ID4gPiAtCWRybV9zY2hlZF9mZW5jZV9maW5p
-c2hlZChqb2ItPnNfZmVuY2UsIC1FU1JDSCk7DQo+ID4gPiAtCVdBUk5fT04oam9iLT5zX2ZlbmNl
-LT5wYXJlbnQpOw0KPiA+ID4gLQlqb2ItPnNjaGVkLT5vcHMtPmZyZWVfam9iKGpvYik7DQo+ID4g
-DQo+ID4gQ2FuIGZyZWVfam9iKCkgcmVhbGx5IG5vdCBiZSBjYWxsZWQgZnJvbSB3aXRoaW4gd29y
-ayBpdGVtIGNvbnRleHQ/DQo+IA0KPiBJdCdzIHN0aWxsIGNhbGxlZCBmcm9tIGRybV9zY2hlZF9l
-bnRpdHlfa2lsbF9qb2JzX3dvcmsgYnV0IHRoZSBkaWZmIGlzIHNsaWdodGx5IA0KPiBjb25mdXNp
-bmcuDQoNCk9LLCBwcm9iYWJseSBteSBiYWQuIEJ1dCBqdXN0IGFza2luZywgZG8geW91IHVzZQ0K
-Z2l0IGZvcm1hdC1wYXRjaCAtLWhpc3RvZ3JhbQ0KPw0KDQpoaXN0b2dyYW0gb2Z0ZW4gcHJvZHVj
-ZXMgYmV0dGVyIGRpZmZzIHRoYW4gZGVmYXVsdC4NCg0KDQpQLg0KX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3Qg
-LS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4g
-ZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
+On Mon, 13 Oct 2025 18:26:11 +0300
+Leon Romanovsky <leon@kernel.org> wrote:
+> diff --git a/drivers/vfio/pci/vfio_pci_core.c b/drivers/vfio/pci/vfio_pci_core.c
+> index fe247d0e2831..56b1320238a9 100644
+> --- a/drivers/vfio/pci/vfio_pci_core.c
+> +++ b/drivers/vfio/pci/vfio_pci_core.c
+> @@ -1511,6 +1520,19 @@ int vfio_pci_core_ioctl_feature(struct vfio_device *device, u32 flags,
+>  		return vfio_pci_core_pm_exit(vdev, flags, arg, argsz);
+>  	case VFIO_DEVICE_FEATURE_PCI_VF_TOKEN:
+>  		return vfio_pci_core_feature_token(vdev, flags, arg, argsz);
+> +	case VFIO_DEVICE_FEATURE_DMA_BUF:
+> +		if (device->ops->ioctl != vfio_pci_core_ioctl)
+> +			/*
+> +			 * Devices that overwrite general .ioctl() callback
+> +			 * usually do it to implement their own
+> +			 * VFIO_DEVICE_GET_REGION_INFO handlerm and they present
+
+Typo, "handlerm"
+
+> +			 * different BAR information from the real PCI.
+> +			 *
+> +			 * DMABUF relies on real PCI information.
+> +			 */
+> +			return -EOPNOTSUPP;
+> +
+> +		return vfio_pci_core_feature_dma_buf(vdev, flags, arg, argsz);
+>  	default:
+>  		return -ENOTTY;
+>  	}
+...
+> @@ -2459,6 +2482,7 @@ static int vfio_pci_dev_set_hot_reset(struct vfio_device_set *dev_set,
+>  			break;
+>  		}
+>  
+> +		vfio_pci_dma_buf_move(vdev, true);
+>  		vfio_pci_zap_bars(vdev);
+>  	}
+>  
+> @@ -2482,6 +2506,10 @@ static int vfio_pci_dev_set_hot_reset(struct vfio_device_set *dev_set,
+>  
+>  	ret = pci_reset_bus(pdev);
+>  
+> +	list_for_each_entry(vdev, &dev_set->device_list, vdev.dev_set_list)
+> +		if (__vfio_pci_memory_enabled(vdev))
+> +			vfio_pci_dma_buf_move(vdev, false);
+> +
+>  	vdev = list_last_entry(&dev_set->device_list,
+>  			       struct vfio_pci_core_device, vdev.dev_set_list);
+>  
+
+This needs to be placed in the existing undo loop with the up_write(),
+otherwise it can be missed in the error case.
+
+> diff --git a/drivers/vfio/pci/vfio_pci_dmabuf.c b/drivers/vfio/pci/vfio_pci_dmabuf.c
+> new file mode 100644
+> index 000000000000..eaba010777f3
+> --- /dev/null
+> +++ b/drivers/vfio/pci/vfio_pci_dmabuf.c
+> +static unsigned int calc_sg_nents(struct vfio_pci_dma_buf *priv,
+> +				  struct dma_iova_state *state)
+> +{
+> +	struct phys_vec *phys_vec = priv->phys_vec;
+> +	unsigned int nents = 0;
+> +	u32 i;
+> +
+> +	if (!state || !dma_use_iova(state))
+> +		for (i = 0; i < priv->nr_ranges; i++)
+> +			nents += DIV_ROUND_UP(phys_vec[i].len, UINT_MAX);
+> +	else
+> +		/*
+> +		 * In IOVA case, there is only one SG entry which spans
+> +		 * for whole IOVA address space, but we need to make sure
+> +		 * that it fits sg->length, maybe we need more.
+> +		 */
+> +		nents = DIV_ROUND_UP(priv->size, UINT_MAX);
+
+I think we're arguably running afoul of the coding style standard here
+that this is not a single simple statement and should use braces.
+
+> +
+> +	return nents;
+> +}
+> +
+> +static struct sg_table *
+> +vfio_pci_dma_buf_map(struct dma_buf_attachment *attachment,
+> +		     enum dma_data_direction dir)
+> +{
+> +	struct vfio_pci_dma_buf *priv = attachment->dmabuf->priv;
+> +	struct dma_iova_state *state = attachment->priv;
+> +	struct phys_vec *phys_vec = priv->phys_vec;
+> +	unsigned long attrs = DMA_ATTR_MMIO;
+> +	unsigned int nents, mapped_len = 0;
+> +	struct scatterlist *sgl;
+> +	struct sg_table *sgt;
+> +	dma_addr_t addr;
+> +	int ret;
+> +	u32 i;
+> +
+> +	dma_resv_assert_held(priv->dmabuf->resv);
+> +
+> +	if (priv->revoked)
+> +		return ERR_PTR(-ENODEV);
+> +
+> +	sgt = kzalloc(sizeof(*sgt), GFP_KERNEL);
+> +	if (!sgt)
+> +		return ERR_PTR(-ENOMEM);
+> +
+> +	nents = calc_sg_nents(priv, state);
+> +	ret = sg_alloc_table(sgt, nents, GFP_KERNEL | __GFP_ZERO);
+> +	if (ret)
+> +		goto err_kfree_sgt;
+> +
+> +	sgl = sgt->sgl;
+> +
+> +	for (i = 0; i < priv->nr_ranges; i++) {
+> +		if (!state) {
+> +			addr = pci_p2pdma_bus_addr_map(priv->provider,
+> +						       phys_vec[i].paddr);
+> +		} else if (dma_use_iova(state)) {
+> +			ret = dma_iova_link(attachment->dev, state,
+> +					    phys_vec[i].paddr, 0,
+> +					    phys_vec[i].len, dir, attrs);
+> +			if (ret)
+> +				goto err_unmap_dma;
+> +
+> +			mapped_len += phys_vec[i].len;
+> +		} else {
+> +			addr = dma_map_phys(attachment->dev, phys_vec[i].paddr,
+> +					    phys_vec[i].len, dir, attrs);
+> +			ret = dma_mapping_error(attachment->dev, addr);
+> +			if (ret)
+> +				goto err_unmap_dma;
+> +		}
+> +
+> +		if (!state || !dma_use_iova(state))
+> +			sgl = fill_sg_entry(sgl, phys_vec[i].len, addr);
+> +	}
+> +
+> +	if (state && dma_use_iova(state)) {
+> +		WARN_ON_ONCE(mapped_len != priv->size);
+> +		ret = dma_iova_sync(attachment->dev, state, 0, mapped_len);
+> +		if (ret)
+> +			goto err_unmap_dma;
+> +		sgl = fill_sg_entry(sgl, mapped_len, state->addr);
+> +	}
+> +
+> +	/*
+> +	 * SGL must be NULL to indicate that SGL is the last one
+> +	 * and we allocated correct number of entries in sg_alloc_table()
+> +	 */
+> +	WARN_ON_ONCE(sgl);
+> +	return sgt;
+> +
+> +err_unmap_dma:
+> +	if (!i || !state)
+> +		; /* Do nothing */
+> +	else if (dma_use_iova(state))
+> +		dma_iova_destroy(attachment->dev, state, mapped_len, dir,
+> +				 attrs);
+> +	else
+> +		for_each_sgtable_dma_sg(sgt, sgl, i)
+> +			dma_unmap_phys(attachment->dev, sg_dma_address(sgl),
+> +					sg_dma_len(sgl), dir, attrs);
+
+Same, here for braces.
+
+> +	sg_free_table(sgt);
+> +err_kfree_sgt:
+> +	kfree(sgt);
+> +	return ERR_PTR(ret);
+> +}
+> +
+> +static void vfio_pci_dma_buf_unmap(struct dma_buf_attachment *attachment,
+> +				   struct sg_table *sgt,
+> +				   enum dma_data_direction dir)
+> +{
+> +	struct vfio_pci_dma_buf *priv = attachment->dmabuf->priv;
+> +	struct dma_iova_state *state = attachment->priv;
+> +	unsigned long attrs = DMA_ATTR_MMIO;
+> +	struct scatterlist *sgl;
+> +	int i;
+> +
+> +	if (!state)
+> +		; /* Do nothing */
+> +	else if (dma_use_iova(state))
+> +		dma_iova_destroy(attachment->dev, state, priv->size, dir,
+> +				 attrs);
+> +	else
+> +		for_each_sgtable_dma_sg(sgt, sgl, i)
+> +			dma_unmap_phys(attachment->dev, sg_dma_address(sgl),
+> +				       sg_dma_len(sgl), dir, attrs);
+> +
+
+Here too.
+
+> +	sg_free_table(sgt);
+> +	kfree(sgt);
+> +}
+...
+> diff --git a/include/uapi/linux/vfio.h b/include/uapi/linux/vfio.h
+> index 75100bf009ba..63214467c875 100644
+> --- a/include/uapi/linux/vfio.h
+> +++ b/include/uapi/linux/vfio.h
+> @@ -1478,6 +1478,31 @@ struct vfio_device_feature_bus_master {
+>  };
+>  #define VFIO_DEVICE_FEATURE_BUS_MASTER 10
+>  
+> +/**
+> + * Upon VFIO_DEVICE_FEATURE_GET create a dma_buf fd for the
+> + * regions selected.
+> + *
+> + * open_flags are the typical flags passed to open(2), eg O_RDWR, O_CLOEXEC,
+> + * etc. offset/length specify a slice of the region to create the dmabuf from.
+> + * nr_ranges is the total number of (P2P DMA) ranges that comprise the dmabuf.
+> + *
+
+Probably worth noting that .flags should be zero, I see we enforce
+that.  Thanks,
+
+Alex
+
+> + * Return: The fd number on success, -1 and errno is set on failure.
+> + */
+> +#define VFIO_DEVICE_FEATURE_DMA_BUF 11
+> +
+> +struct vfio_region_dma_range {
+> +	__u64 offset;
+> +	__u64 length;
+> +};
+> +
+> +struct vfio_device_feature_dma_buf {
+> +	__u32	region_index;
+> +	__u32	open_flags;
+> +	__u32   flags;
+> +	__u32   nr_ranges;
+> +	struct vfio_region_dma_range dma_ranges[];
+> +};
+> +
+>  /* -------- API for Type1 VFIO IOMMU -------- */
+>  
+>  /**
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
