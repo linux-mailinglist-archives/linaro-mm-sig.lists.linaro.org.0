@@ -2,212 +2,167 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id yAQrCNz34GnZnwAAu9opvQ
+	id sKUeLOX34GnZnwAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:53:16 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:53:25 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 91F2940FDCF
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:53:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 498C540FDD7
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:53:25 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A3F41406A2
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 14:53:14 +0000 (UTC)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	by lists.linaro.org (Postfix) with ESMTPS id 54D1B3F7D0
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 30 Oct 2025 09:26:47 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 55DFF3F7EE
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 14:53:24 +0000 (UTC)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+	by lists.linaro.org (Postfix) with ESMTPS id BBA183F7AB
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 30 Oct 2025 11:17:42 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=qualcomm.com header.s=qcppdkim1 header.b=WXvFdDly;
-	dkim=pass header.d=oss.qualcomm.com header.s=google header.b=K4lL8nxI;
-	dmarc=pass (policy=reject) header.from=qualcomm.com;
-	spf=pass (lists.linaro.org: domain of konrad.dybcio@oss.qualcomm.com designates 205.220.180.131 as permitted sender) smtp.mailfrom=konrad.dybcio@oss.qualcomm.com
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 59U4xfQN2622811
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 30 Oct 2025 09:26:47 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	MkhXCfGdSQcDvTlbYDPsW7XCU2SBVMl9E+b0/qNR+YA=; b=WXvFdDlyVDlLgs24
-	hRq6p+6qK8CV9lic9QlCuUfaa0N8G3YCqYN7vRhVoRwikaXnrxpBvPouyJN9TthI
-	Rvvxg6gHR2/83eMMhgIKHaF/2gzjTsd0/pwzyo1HiT7DJWdmxw4zXGOxJzj75wPv
-	MxIqgQRwirpvHbcGxz6Uh5x1NIHXK1NA5mM+EXNEXSpNYv+ArFuWKkIbnB6TyN+z
-	J+Mh2nk3LYfSRxD1D/R5R5tkklf9An488gzGNuxoue23wlQwz+TJGmjzPZzFtIfl
-	Ecw7mI8ytS+6TnUauCSxQKMRKMdlm9JUK7i5oHYuEdiLkBsiOgfN0108MZ76Nj9P
-	ZeiYXQ==
-Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com [209.85.219.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4a41fxgr1r-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 30 Oct 2025 09:26:46 +0000 (GMT)
-Received: by mail-qv1-f70.google.com with SMTP id 6a1803df08f44-87bd2dececeso3249086d6.1
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 30 Oct 2025 02:26:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1761816406; x=1762421206; darn=lists.linaro.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=MkhXCfGdSQcDvTlbYDPsW7XCU2SBVMl9E+b0/qNR+YA=;
-        b=K4lL8nxI/FF6KBj3GUZZO6qEUaph5upWBVFOiJK8KPavKb8GRD0sw3SfjjU2oqVboy
-         JfCIe1Ob0ZrmpWG9JIksOYkraB0Md7/4j3h6OGvHYSrDbGZ3QwE6abKFc+6DlRqjXpyV
-         THogbeQCSJ80s65VR4VYDk41W+pn6+L6g0ugCl5wbGBOMzvgWkGj8iReIPT2ws6I+m2n
-         9ewxKHco5toJJzPPKO0q23mEpRJQX9c+bYVpOu1JYOSOp2Q/r4wHtzo5rUjbbqy+RB3u
-         /OsdMWdSyI0IwW5U1mfGz1EnFJwvBITSYd31ifr4CAF/KAVHy3RXTrs5p4aTIq774sl7
-         Mmgw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761816406; x=1762421206;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=MkhXCfGdSQcDvTlbYDPsW7XCU2SBVMl9E+b0/qNR+YA=;
-        b=Ym3f5QePozc2vv04dIY1UUztpP6rNSk+kwVRkCBHYFKLmr7uYDOpoJ2h8wg+77SbjR
-         lO+JcieC5WKs/G4pjTWX8erXCubptE5stuDxBy2iqoHTaiHW1zL5dBD62ONIxjzP8za+
-         WLLLeHS6lDnA0NlFlztnu1iuRF6GC4j+iw0jocdH37UX8q6errKvyLpXMColiregBBLl
-         aRTilqTcxHobjbS++cIPgT3k2vtIVEF2Cdq/KcjYiSXqalutpTmOwqgKjDLmbncGeo+E
-         +IwbD/SWoavBwopfd+ZA0/+mr//R8qvb0Tbe6NS8F2A3yMSxBnv0IR1aNgbqGiOmc2nE
-         Qwlw==
-X-Forwarded-Encrypted: i=1; AJvYcCXn00wD/KCnwysgEsXZnlMvLjV4XBxDVOwjARuDLYWv9cq2FImhYt9+KnJ1zFvJXIQx6iGVwDPyuPIKvixj@lists.linaro.org
-X-Gm-Message-State: AOJu0YxejvUMHnRZzg4QGbL8USe9/8x3lQScgaO+380hh7nwBcIA3A9d
-	DmDZi+CaMYO/1Xf1klDlVnT9P8eo0A5DGZWtbV6d89Bl51sTeDx/HQvHMGU6V3biaVQyzkjJd0T
-	WVk/iPq6inbBnCiPNO5FCykYCYC5eb4RrMvDxu2/4/Tv1C8wFWBLPr3U5wjyqYH+Ccdq9EQ==
-X-Gm-Gg: ASbGnctJYwTeMYPe+YMvSrecFMcdjD9zp75SyHhfARK1ZS74443uVneukhADEPeo/Fb
-	tqDysJ4Ii+/kxUJMSN4drAg8PUbLyRKpIhPkh+eGs/wYNoVv1eHqKe2P57qmR8KKsB9REbF4Z0n
-	IMhHG2KAr5FFlHTfC3mUXlVkASvYl/nN1Lwf8GLPwsw/6KQwRtdAoLekZYX3dTnW40u5+vC1L6w
-	rfHSD8bLGLzeLLNs6ZmVuKYWHWmGg3oUZLPCdCebSbZNuShJmwAHtwremsxw4A6kGc8AOaJVZM7
-	z/SIxXBZykguR6fjza5SRk3DPdO+Dx8A0KGX+Qh4YgxHmZr/Bny3ROdIPVPm/AGmUnrfBfQtQ+9
-	FtvkvRKekfBAV65JNGhwQHO5SCUx/RNHUHa9UVD/GdSA3je7apxuqMmcl
-X-Received: by 2002:a05:6214:487:b0:84f:81b4:4440 with SMTP id 6a1803df08f44-88009c059damr57947666d6.7.1761816406130;
-        Thu, 30 Oct 2025 02:26:46 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IENOdltg392rpt/C6P2DXClkaCW6AuvtVnIkahf+FfBy++WBa3yu6xR0D9iLMYKtJjowkMGMg==
-X-Received: by 2002:a05:6214:487:b0:84f:81b4:4440 with SMTP id 6a1803df08f44-88009c059damr57947516d6.7.1761816405687;
-        Thu, 30 Oct 2025 02:26:45 -0700 (PDT)
-Received: from [192.168.119.202] (078088045245.garwolin.vectranet.pl. [78.88.45.245])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b6d853f9a0fsm1679780866b.50.2025.10.30.02.26.43
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 30 Oct 2025 02:26:45 -0700 (PDT)
-Message-ID: <49f067c0-20d3-4039-95e6-fc19ce48881d@oss.qualcomm.com>
-Date: Thu, 30 Oct 2025 10:26:42 +0100
+	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=rfCkCj1a;
+	dmarc=pass (policy=reject) header.from=mailbox.org;
+	spf=pass (lists.linaro.org: domain of phasta@mailbox.org designates 80.241.56.172 as permitted sender) smtp.mailfrom=phasta@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4cy1mg3LK0z9spB;
+	Thu, 30 Oct 2025 12:17:39 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
+	t=1761823059; h=from:from:reply-to:reply-to:subject:subject:date:date:
+	 message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+	 content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=udQdI8kZ9HNR1T3YelubgV+z74XJhbul0irKljvsfkw=;
+	b=rfCkCj1aKP3gD9fOKRtgCEZm254WNjvqqyYCD1808//A8YhflHFiiKP/HJOpq9yq7jNCyk
+	hj7d/rUdifE+Wvb1dA6BhWHH++w6Rp/9RQv02E7vyrnCJQD87ql2VfxV8iNEz7ryyPJEB6
+	CdVBDsuHksvbjEZ7QsbTjPA3Fue3uZqqbuNtCh5dKSZNtEZFqiEOS22+l+Dw4Cb4MutmvD
+	CpP519yREgx3PQSsNMBmJY1IV9tKJY8+akQB8/CXqqMjO/kZfBn4ZqOTBcmch6fx+WE+oG
+	+fZ3LqaV8rbTc8Al9CqQZW/zaCGJvIMlEJqLF+8Da7WYsH5KdeRDJLj7qoC9mg==
+Message-ID: <fb2881006f843bd85dd02948c4467c81086effc8.camel@mailbox.org>
+From: Philipp Stanner <phasta@mailbox.org>
+To: Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>,
+ Matthew Brost <matthew.brost@intel.com>, Danilo Krummrich
+ <dakr@kernel.org>, Philipp Stanner <phasta@kernel.org>,  Christian
+ =?ISO-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>, Maarten
+ Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard
+ <mripard@kernel.org>,  Thomas Zimmermann <tzimmermann@suse.de>, David
+ Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal
+ <sumit.semwal@linaro.org>
+Date: Thu, 30 Oct 2025 12:17:31 +0100
+In-Reply-To: <20251029091103.1159-1-pierre-eric.pelloux-prayer@amd.com>
+References: <20251029091103.1159-1-pierre-eric.pelloux-prayer@amd.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Neil Armstrong <neil.armstrong@linaro.org>,
-        Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>,
-        Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
-        Andi Shyti <andi.shyti@kernel.org>,
-        Sumit Semwal <sumit.semwal@linaro.org>,
-        =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
-        Wolfram Sang <wsa@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>
-References: <20251029-topic-sm8x50-geni-i2c-hub-no-dma-v1-1-5e264258a5bd@linaro.org>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20251029-topic-sm8x50-geni-i2c-hub-no-dma-v1-1-5e264258a5bd@linaro.org>
-X-Proofpoint-GUID: mYiSoQOe5M4O4XYX-XLPV_br9MTL3stL
-X-Authority-Analysis: v=2.4 cv=UJrQ3Sfy c=1 sm=1 tr=0 ts=69032f56 cx=c_pps
- a=oc9J++0uMp73DTRD5QyR2A==:117 a=FpWmc02/iXfjRdCD7H54yg==:17
- a=IkcTkHD0fZMA:10 a=x6icFKpwvdMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8
- a=7QP1INNbtZu8WugdpZMA:9 a=QEXdDO2ut3YA:10 a=iYH6xdkBrDN1Jqds4HTS:22
- a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-ORIG-GUID: mYiSoQOe5M4O4XYX-XLPV_br9MTL3stL
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDMwMDA3NiBTYWx0ZWRfX1E/Dg1JAAuL8
- BWpCfvnXATpOA4b6GIlKQKLzCF9CfrM4b/co+I1iguvvmQyQJNUg12I6BvE4X5QoXGmtLnTBNfI
- CKWq+B724hQHwFrrKHtkIHIaK+wbKWkwXxOch5tucr0DvStmCTyXHf84+6kX41JuTC7QCPvS3qd
- E1k3jZ+/ZJ1kLVEJpdk4jOOFUYfS1k5MuXCAdPRBOwDm16laIUPtNlADEiApt2rP0iwmZgbh6CY
- 47u+tC2s1pQYGgNMRGl7Fi7YKF6YjdgwTJsJXVbAy4jwwTek5W3aRRXLF7R8+GEqZqVINepIr+b
- nxtHVcec8B+aQROG4hCRry8kcSdwMp72/L6uOWU9zX7p2Q5VVQonr/nFBBnGyIogLtKJrwE9qRg
- C+jVC4Ie06Df8xilgS+XoRWuAe5Fyg==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-10-30_02,2025-10-29_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 lowpriorityscore=0 impostorscore=0 phishscore=0
- priorityscore=1501 malwarescore=0 bulkscore=0 spamscore=0 suspectscore=0
- adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2510240001
- definitions=main-2510300076
-X-Spamd-Bar: ----
-X-MailFrom: konrad.dybcio@oss.qualcomm.com
+X-MBO-RS-META: uxkngmmbxwy4o97th7ytiop6e8nj697p
+X-MBO-RS-ID: ca1f3193d85e48195cb
+X-Spamd-Bar: --
+X-MailFrom: phasta@mailbox.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: NZOSHJ77G3VBVX4GRPOXFYSI54W6G4VR
-X-Message-ID-Hash: NZOSHJ77G3VBVX4GRPOXFYSI54W6G4VR
-X-Mailman-Approved-At: Thu, 16 Apr 2026 14:48:35 +0000
-CC: linux-arm-msm@vger.kernel.org, linux-i2c@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+Message-ID-Hash: MIQ7NU5JBHLGMLJ7VZUPSXPL256LQ6ZO
+X-Message-ID-Hash: MIQ7NU5JBHLGMLJ7VZUPSXPL256LQ6ZO
+X-Mailman-Approved-At: Thu, 16 Apr 2026 14:48:36 +0000
+CC: Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] i2c: qcom-geni: make sure I2C hub controllers can't use SE DMA
+Reply-To: phasta@kernel.org
+Subject: [Linaro-mm-sig] Re: [PATCH v1] drm/sched: fix deadlock in drm_sched_entity_kill_jobs_cb
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NZOSHJ77G3VBVX4GRPOXFYSI54W6G4VR/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MIQ7NU5JBHLGMLJ7VZUPSXPL256LQ6ZO/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [3.49 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[qualcomm.com : SPF not aligned (relaxed),reject];
-	DATE_IN_PAST(1.00)[4037];
-	R_DKIM_REJECT(1.00)[qualcomm.com:s=qcppdkim1];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+X-Spamd-Result: default: False [5.09 / 15.00];
+	DMARC_POLICY_REJECT(2.00)[mailbox.org : SPF not aligned (relaxed),reject];
+	SUSPICIOUS_RECIPS(1.50)[];
+	R_DKIM_REJECT(1.00)[mailbox.org:s=mail20150812];
+	DATE_IN_PAST(1.00)[4035];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+mx:c];
+	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[14];
-	ARC_NA(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
 	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_TO(0.00)[amd.com,intel.com,kernel.org,gmail.com,linux.intel.com,suse.de,ffwll.ch,linaro.org];
+	GREYLIST(0.00)[pass,meta];
+	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	DKIM_TRACE(0.00)[qualcomm.com:-];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	FROM_NEQ_ENVFROM(0.00)[konrad.dybcio@oss.qualcomm.com,linaro-mm-sig-bounces@lists.linaro.org];
+	RCPT_COUNT_TWELVE(0.00)[16];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	NEURAL_HAM(-0.00)[-0.887];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	MID_RHS_MATCH_FROM(0.00)[];
+	DKIM_TRACE(0.00)[mailbox.org:-];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,oss.qualcomm.com:mid,qualcomm.com:email,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: 91F2940FDCF
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	MID_RHS_MATCH_FROM(0.00)[];
+	NEURAL_HAM(-0.00)[-0.943];
+	FROM_NEQ_ENVFROM(0.00)[phasta@mailbox.org,linaro-mm-sig-bounces@lists.linaro.org];
+	MISSING_XM_UA(0.00)[];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	HAS_REPLYTO(0.00)[phasta@kernel.org];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mailbox.org:mid,lists.linaro.org:helo,lists.linaro.org:rdns,gitlab.freedesktop.org:url,amd.com:email,linaro.org:email]
+X-Rspamd-Queue-Id: 498C540FDD7
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On 10/29/25 7:07 PM, Neil Armstrong wrote:
-> The I2C Hub controller is a simpler GENI I2C variant that doesn't
-> support DMA at all, add a no_dma flag to make sure it nevers selects
-> the SE DMA mode with mappable 32bytes long transfers.
-> 
-> Fixes: cacd9643eca7 ("i2c: qcom-geni: add support for I2C Master Hub variant")
-> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
-> ---
->  drivers/i2c/busses/i2c-qcom-geni.c | 11 +++++++----
->  1 file changed, 7 insertions(+), 4 deletions(-)
-> 
-> diff --git a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-geni.c
-> index 43fdd89b8beb..bfb352b04902 100644
-> --- a/drivers/i2c/busses/i2c-qcom-geni.c
-> +++ b/drivers/i2c/busses/i2c-qcom-geni.c
-> @@ -97,6 +97,7 @@ struct geni_i2c_dev {
->  	dma_addr_t dma_addr;
->  	struct dma_chan *tx_c;
->  	struct dma_chan *rx_c;
-> +	bool no_dma;
->  	bool gpi_mode;
->  	bool abort_done;
->  };
-> @@ -425,7 +426,7 @@ static int geni_i2c_rx_one_msg(struct geni_i2c_dev *gi2c, struct i2c_msg *msg,
->  	size_t len = msg->len;
->  	struct i2c_msg *cur;
->  
-> -	dma_buf = i2c_get_dma_safe_msg_buf(msg, 32);
-> +	dma_buf = gi2c->no_dma ? NULL : i2c_get_dma_safe_msg_buf(msg, 32);
-
-Not a huge fan of putting the ternary operator here, but I don't
-mind that much either
-
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-
-Konrad
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gV2VkLCAyMDI1LTEwLTI5IGF0IDEwOjExICswMTAwLCBQaWVycmUtRXJpYyBQZWxsb3V4LVBy
+YXllciB3cm90ZToNCj4gaHR0cHM6Ly9naXRsYWIuZnJlZWRlc2t0b3Aub3JnL21lc2EvbWVzYS8t
+L2lzc3Vlcy8xMzkwOMKgcG9pbnRlZCBvdXQNCg0KVGhpcyBsaW5rIHNob3VsZCBiZSBtb3ZlZCB0
+byB0aGUgdGFnIHNlY3Rpb24gYXQgdGhlIGJvdHRvbSBhdCBhIENsb3NlczoNCnRhZy4gT3B0aW9u
+YWxseSBhIFJlcG9ydGVkLWJ5OiwgdG9vLg0KDQo+IGEgcG9zc2libGUgZGVhZGxvY2s6DQo+IA0K
+PiBbIDEyMzEuNjExMDMxXcKgIFBvc3NpYmxlIGludGVycnVwdCB1bnNhZmUgbG9ja2luZyBzY2Vu
+YXJpbzoNCj4gDQo+IFsgMTIzMS42MTEwMzNdwqDCoMKgwqDCoMKgwqAgQ1BVMMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIENQVTENCj4gWyAxMjMxLjYxMTAzNF3CoMKgwqDC
+oMKgwqDCoCAtLS0twqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgLS0tLQ0K
+PiBbIDEyMzEuNjExMDM1XcKgwqAgbG9jaygmeGEtPnhhX2xvY2sjMTcpOw0KPiBbIDEyMzEuNjEx
+MDM4XcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgIGxvY2FsX2lycV9kaXNhYmxlKCk7DQo+IFsgMTIzMS42MTEwMzldwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgbG9j
+aygmZmVuY2UtPmxvY2spOw0KPiBbIDEyMzEuNjExMDQxXcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGxvY2soJnhhLT54YV9sb2Nr
+IzE3KTsNCj4gWyAxMjMxLjYxMTA0NF3CoMKgIDxJbnRlcnJ1cHQ+DQo+IFsgMTIzMS42MTEwNDVd
+wqDCoMKgwqAgbG9jaygmZmVuY2UtPmxvY2spOw0KPiBbIDEyMzEuNjExMDQ3XQ0KPiDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgKioqIERFQURMT0NLICoqKg0KPiANCg0KVGhlIGNvbW1p
+dCBtZXNzYWdlIGlzIGxhY2tpbmcgYW4gZXhwbGFuYXRpb24gYXMgdG8gX2hvd18gYW5kIF93aGVu
+XyB0aGUNCmRlYWRsb2NrIGNvbWVzIHRvIGJlLiBUaGF0J3MgYSBwcmVyZXF1aXNpdGUgZm9yIHVu
+ZGVyc3RhbmRpbmcgd2h5IHRoZQ0KYmVsb3cgaXMgdGhlIHByb3BlciBmaXggYW5kIHNvbHV0aW9u
+Lg0KDQpUaGUgaXNzdWUgc2VlbXMgdG8gYmUgdGhhdCB5b3UgY2Fubm90IHBlcmZvcm0gY2VydGFp
+biB0YXNrcyBmcm9tIHdpdGhpbg0KdGhhdCB3b3JrIGl0ZW0/DQoNCj4gTXkgaW5pdGlhbCBmaXgg
+d2FzIHRvIHJlcGxhY2UgeGFfZXJhc2UgYnkgeGFfZXJhc2VfaXJxLCBidXQgQ2hyaXN0aWFuDQo+
+IHBvaW50ZWQgb3V0IHRoYXQgY2FsbGluZyBkbWFfZmVuY2VfYWRkX2NhbGxiYWNrIGZyb20gYSBj
+YWxsYmFjayBjYW4NCj4gYWxzbyBkZWFkbG9jayBpZiB0aGUgc2lnbmFsbGluZyBmZW5jZSBhbmQg
+dGhlIG9uZSBwYXNzZWQgdG8NCj4gZG1hX2ZlbmNlX2FkZF9jYWxsYmFjayBzaGFyZSB0aGUgc2Ft
+ZSBsb2NrLg0KPiANCj4gVG8gZml4IGJvdGggaXNzdWVzLCB0aGUgY29kZSBpdGVyYXRpbmcgb24g
+ZGVwZW5kZW5jaWVzIGFuZCByZS1hcm1pbmcgdGhlbQ0KPiBpcyBtb3ZlZCBvdXQgdG8gZHJtX3Nj
+aGVkX2VudGl0eV9raWxsX2pvYnNfd29yay4NCj4gDQo+IFN1Z2dlc3RlZC1ieTogQ2hyaXN0aWFu
+IEvDtm5pZyA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPg0KPiBTaWduZWQtb2ZmLWJ5OiBQaWVy
+cmUtRXJpYyBQZWxsb3V4LVByYXllciA8cGllcnJlLWVyaWMucGVsbG91eC1wcmF5ZXJAYW1kLmNv
+bT4NCj4gLS0tDQo+IMKgZHJpdmVycy9ncHUvZHJtL3NjaGVkdWxlci9zY2hlZF9lbnRpdHkuYyB8
+IDM0ICsrKysrKysrKysrKystLS0tLS0tLS0tLQ0KPiDCoDEgZmlsZSBjaGFuZ2VkLCAxOSBpbnNl
+cnRpb25zKCspLCAxNSBkZWxldGlvbnMoLSkNCj4gDQo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dw
+dS9kcm0vc2NoZWR1bGVyL3NjaGVkX2VudGl0eS5jIGIvZHJpdmVycy9ncHUvZHJtL3NjaGVkdWxl
+ci9zY2hlZF9lbnRpdHkuYw0KPiBpbmRleCBjOGU5NDlmNGE1NjguLmZlMTc0YTQ4NTdiZSAxMDA2
+NDQNCj4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL3NjaGVkdWxlci9zY2hlZF9lbnRpdHkuYw0KPiAr
+KysgYi9kcml2ZXJzL2dwdS9kcm0vc2NoZWR1bGVyL3NjaGVkX2VudGl0eS5jDQo+IEBAIC0xNzMs
+MjYgKzE3MywxNSBAQCBpbnQgZHJtX3NjaGVkX2VudGl0eV9lcnJvcihzdHJ1Y3QgZHJtX3NjaGVk
+X2VudGl0eSAqZW50aXR5KQ0KPiDCoH0NCj4gwqBFWFBPUlRfU1lNQk9MKGRybV9zY2hlZF9lbnRp
+dHlfZXJyb3IpOw0KPiDCoA0KPiArc3RhdGljIHZvaWQgZHJtX3NjaGVkX2VudGl0eV9raWxsX2pv
+YnNfY2Ioc3RydWN0IGRtYV9mZW5jZSAqZiwNCj4gKwkJCQkJwqAgc3RydWN0IGRtYV9mZW5jZV9j
+YiAqY2IpOw0KPiArDQo+IMKgc3RhdGljIHZvaWQgZHJtX3NjaGVkX2VudGl0eV9raWxsX2pvYnNf
+d29yayhzdHJ1Y3Qgd29ya19zdHJ1Y3QgKndyaykNCj4gwqB7DQo+IMKgCXN0cnVjdCBkcm1fc2No
+ZWRfam9iICpqb2IgPSBjb250YWluZXJfb2Yod3JrLCB0eXBlb2YoKmpvYiksIHdvcmspOw0KPiAt
+DQo+IC0JZHJtX3NjaGVkX2ZlbmNlX3NjaGVkdWxlZChqb2ItPnNfZmVuY2UsIE5VTEwpOw0KPiAt
+CWRybV9zY2hlZF9mZW5jZV9maW5pc2hlZChqb2ItPnNfZmVuY2UsIC1FU1JDSCk7DQo+IC0JV0FS
+Tl9PTihqb2ItPnNfZmVuY2UtPnBhcmVudCk7DQo+IC0Jam9iLT5zY2hlZC0+b3BzLT5mcmVlX2pv
+Yihqb2IpOw0KDQpDYW4gZnJlZV9qb2IoKSByZWFsbHkgbm90IGJlIGNhbGxlZCBmcm9tIHdpdGhp
+biB3b3JrIGl0ZW0gY29udGV4dD8NCg0KDQpQLg0KX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJv
+LW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8g
+bGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
