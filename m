@@ -2,170 +2,80 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id F2993C204B7
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 30 Oct 2025 14:43:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9ABBAC2372C
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 31 Oct 2025 07:49:10 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 123353F7E0
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 30 Oct 2025 13:43:32 +0000 (UTC)
-Received: from PH8PR06CU001.outbound.protection.outlook.com (mail-westus3azon11012034.outbound.protection.outlook.com [40.107.209.34])
-	by lists.linaro.org (Postfix) with ESMTPS id A8ECE3F70A
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 30 Oct 2025 13:43:19 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5DF2D3F7EC
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 31 Oct 2025 06:49:09 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+	by lists.linaro.org (Postfix) with ESMTPS id 7B5D33F7EC
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 31 Oct 2025 06:48:56 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=Nvidia.com header.s=selector2 header.b=pHcMTKhk;
-	dmarc=pass (policy=reject) header.from=nvidia.com;
-	arc=pass ("microsoft.com:s=arcselector10001:i=1");
-	spf=pass (lists.linaro.org: domain of jgg@nvidia.com designates 40.107.209.34 as permitted sender) smtp.mailfrom=jgg@nvidia.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=LIEQMyJ2B2Qy+U0GbUGnqnb7bR00g4pQI99Z84PLjGOfQLJAeNvpR6DDeHOnHcc0dkzRBroafVeITSoKiQJK7vXpzIkdDFa1MH0sxer8Bg8Ox5XWBFgIgj/973/4I6vZt4VqBEPLLaziNIvQ3Jrn7lvLs9mKCgDlWADMycSeXN2B3e5Jq6V9E9UgtwbJFyGS8BaGwRRyH6uueLWqUZkxblic41WLXSqhI69r5jVrhIyiuYCtOYCY4DR0GwTgRRFu3aXq6sdciKHjHLtmnMhPORxz23/oubXIAVC42w905BDPGj66MWlBYWnw2l3FA7VL6r4SMRjxTdGSsxvmcHLwEA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=zYuZ1ZGkfgeKAgIM9XJ6Xynej5SzcnnkUBLkvXPPXyI=;
- b=hp4ICbWKh19m48zRzDt9UN4T98le5xFs/c18clIYfWVGM4xcCFkvVOWS3Yn0TsWosdrYB4wz1W7BgHlJEoS/DxEASy6lDfHlBjkLhBYgAo/gWxCQbfrJjox9tB+OjLjeKKzqW71GKDoaMQQJ+aPlHKtUgnweMPUclcsezizzG18dR70uE2HUZ6YMKUt7BEaDBZP10rwqO/P7IGJCiWqqQETqiDPfgAAl6uC59qZ2qfnvkoMUwCURYSW+7srVBt92VRySlQUAToKWfNMFiUlqnhMxgpqaCT4UHwJnRkYy8azUqUHy1ldDAIvVK/CIoIO7phy4R1k0uXLUScZluDecJg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zYuZ1ZGkfgeKAgIM9XJ6Xynej5SzcnnkUBLkvXPPXyI=;
- b=pHcMTKhkezZjRcFY/0CO+FWybmoAe8rmHSJ/poZ7NwC4fFH8xX2BvCBxD9a6SMNbU1ZWylhP1m9WKQ0HgkTdeU4pmptF3DapNICOkZL+bF/OMBs0yeL4tBDQmEtCTWAXbzbm4HZSK7XgnwKwWLFGrhE3EJW+uIGrXUwm8D3bxDpvhQDKsvtTssk4j1SYaK9KMFllEzKnkgjE7GkCgTLfawelqkTyesM1j8O7A+/aT9AivJ19SAPHcvjmzBuqU3q7rb5akyjIT+ezttfXfA1UfhapjFABZpiHIOtCBPx3cHhwlmr6ueLCjjAfmPsBAG1D3CIr07TGFmBNJiiOCPz9wg==
-Received: from MN2PR12MB3613.namprd12.prod.outlook.com (2603:10b6:208:c1::17)
- by SA1PR12MB7444.namprd12.prod.outlook.com (2603:10b6:806:2b3::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.12; Thu, 30 Oct
- 2025 13:43:13 +0000
-Received: from MN2PR12MB3613.namprd12.prod.outlook.com
- ([fe80::1b3b:64f5:9211:608b]) by MN2PR12MB3613.namprd12.prod.outlook.com
- ([fe80::1b3b:64f5:9211:608b%4]) with mapi id 15.20.9275.011; Thu, 30 Oct 2025
- 13:43:11 +0000
-Date: Thu, 30 Oct 2025 10:43:10 -0300
-From: Jason Gunthorpe <jgg@nvidia.com>
-To: "Kasireddy, Vivek" <vivek.kasireddy@intel.com>
-Message-ID: <20251030134310.GR1018328@nvidia.com>
-References: <20251027044712.1676175-1-vivek.kasireddy@intel.com>
- <20251029002726.GA1092494@nvidia.com>
- <IA0PR11MB7185E85E1CFAA04485768E30F8FBA@IA0PR11MB7185.namprd11.prod.outlook.com>
-Content-Disposition: inline
-In-Reply-To: <IA0PR11MB7185E85E1CFAA04485768E30F8FBA@IA0PR11MB7185.namprd11.prod.outlook.com>
-X-ClientProxiedBy: BL1PR13CA0003.namprd13.prod.outlook.com
- (2603:10b6:208:256::8) To MN2PR12MB3613.namprd12.prod.outlook.com
- (2603:10b6:208:c1::17)
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=a1h6FTwN;
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=leon@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by sea.source.kernel.org (Postfix) with ESMTP id DAAB14386B;
+	Fri, 31 Oct 2025 06:48:55 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 30340C4CEF1;
+	Fri, 31 Oct 2025 06:48:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1761893335;
+	bh=R5M/BZuEUeO6MNnujDu/RdiqPqOvxifgK+E/jWj/M64=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=a1h6FTwN+q+A4td6LvgwCZbm56rsVEOnHoTSFeQoA8kEIgslHwi8eKhmcAv9St0Ok
+	 W80x4Wj8UXuXSY+0aKudJ5lih9rGfReoMhWTywfeghp1RUox6v4uqV5oNv5qbYEg56
+	 QbNeAscqzR9+MyI87V97tP4x1PtA/rtR2xTBusZX/rYO0ZXMXvRQOdHykNpR4S0/F0
+	 1WmfFbl2veaaeJ/gkMhFWNLbBDpTqt/7ZKw1BnTuN4+koJ6EwRipT90WVcZLqWqcZF
+	 nn5bH+8Pi8nXwLiOrgVS7RmUROm+rQImaoV3BWpLLmivAW/zoQbjZp2iEz7zcV0W1P
+	 XuCupc4+xACzg==
+Date: Fri, 31 Oct 2025 08:48:51 +0200
+From: Leon Romanovsky <leon@kernel.org>
+To: Alex Williamson <alex@shazbot.org>
+Message-ID: <20251031064851.GA74544@unreal>
+References: <cover.1760368250.git.leon@kernel.org>
+ <72ecaa13864ca346797e342d23a7929562788148.1760368250.git.leon@kernel.org>
+ <20251030143836.66cdf116@shazbot.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MN2PR12MB3613:EE_|SA1PR12MB7444:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1c7b1106-b0c8-4e5a-8545-08de17ba444c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|7416014|376014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?J+kmN+LK1DUJ6wjFSyeUgOdsIEhM9iRl/cFpzw58hLZqjabkgtMrfftznHwy?=
- =?us-ascii?Q?kb5cr6U46201WKzWhvQ3LSfzglJMoBBaS0bUp+6hV8CbBZCqNzFwwWTSCDHb?=
- =?us-ascii?Q?yvXxIgXAMq6ZYDvrc4UgZmE9os3jLdVBwIwXL5J+xIlxOqKgcU/nOHWB76SX?=
- =?us-ascii?Q?AOVuVZqXPjVc7lpaVXT9nsOPEVRRfPWSnozAvwkSascPhQEwCCesVJy1MdK7?=
- =?us-ascii?Q?VyTKCZWqH5rq894AeO5WYW6uiORp6uk+NWbnQwQpQQIFh+MKAuOBIUsdrVXB?=
- =?us-ascii?Q?paVjYqohNhjlsgmZIwrMvVbU9n2MwxpWYWo4weHj3qg2Td/VCzfyb9QKVUGj?=
- =?us-ascii?Q?ujO8RN+tF4igMfoHeOfIcNj09ECjSpcZHsCGCOL2jOng2IEpq9BTMy2DG+za?=
- =?us-ascii?Q?kX/nSkS7bGz7OAp47KJkXCjZKNqFCi7jepO685DR6HrcLJniNokwhjaIsAqN?=
- =?us-ascii?Q?FVuyJXZaftKcb9QGKC3ipbDcpfSfE1jcj6XAqNX3FGN4jkY/7fT3d1J+Oz7R?=
- =?us-ascii?Q?huiR/koBMaFfcJs2cpqUfualK4vRQzbynhNraqf3m5cJ0T2SSOFcdseGvqzc?=
- =?us-ascii?Q?Sk0NuFDA0VC5XOPJPv5C7guZyZefxwn4X6FICWOJOx9jXZ9fkJzZ9RgUeYpU?=
- =?us-ascii?Q?DwvS+cl+X6asymVPQveHxDRIAp4NVNn602xZUQYxdTPOR/M1cFkyITtzEdKZ?=
- =?us-ascii?Q?E0NvrCI76mkUL49DK4ljEf4jSJ+ryc5eFxmDOekFeLBTiEJ5Txcf96ggzKd1?=
- =?us-ascii?Q?FDgMuJN8eH0ObZO3E6Omdja3ZI6Jt/Aah5lAtqqomoLZAJ4h8RK1i/e4qSYJ?=
- =?us-ascii?Q?tOgBUeZbo+yYzuP4Z/y2RH6H0SdKZ2/zbsoK/ALkgJ9XMXTdNCX44m6eDINE?=
- =?us-ascii?Q?OTchNHOp7y80B270Zy6e/0w3hvHwGLOj0dsz4pZSVJSelqoYuX8FKO9Dtxrq?=
- =?us-ascii?Q?EC310Va/BKuAT3FKQ/wNeiUcEuR4XT30lMi4dd12J7o3S8vna1ORztEbD0tU?=
- =?us-ascii?Q?vbZPNlvY4PnYInksLtq5uZvj4EMeeD4Cnytx/oml3wQAzEvGqy6Z0x1Fl9s/?=
- =?us-ascii?Q?CqC7asHa1MWIYbumhGh/UYfvDw7yZL38eMb1fdSStcJ1B1AQN1J1yviH4X0G?=
- =?us-ascii?Q?SxsZKEkC23k7jxtYtwsZe9qUH3VyOlJ8wqbA02VGUuBF3exPoZQr5slb5E0y?=
- =?us-ascii?Q?lCX53rF/IzLftM7VeCa32Hyy0EkGWknz5OKisHfnE7h3WVejmvwjhwnn84Pp?=
- =?us-ascii?Q?3cpr2FATvOvXGMxZj1xBGxiMIj5o6Wj9xIjmYloMbKH6XZ+M33VnQSDkJoqS?=
- =?us-ascii?Q?ZLieg97yLh1BBf/b+RP1DnnihRtWlHcayvAz+PyH+CqMfIEudzCGijrNVlzw?=
- =?us-ascii?Q?CJpZMma3jcl3A1c7WwWFpc6MJBDYbsE3YY7XuJs9lmckDByKc+Zm/Ym2xVCU?=
- =?us-ascii?Q?bxuL2kfun8U3mz17Z3SeB5K2nza5Mr/9?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MN2PR12MB3613.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(376014)(366016)(1800799024);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?VOfWCw060f8CZDPvETtZU0eH14zOpeV3BNAQvJNkBUF2Gvtr5nBQ8bTAxm1Q?=
- =?us-ascii?Q?nt17w3+W36DBmUVUZf5Trzh+tEUqYRb7UAngiw86yFgCnpo1WRkFI5gzYiAZ?=
- =?us-ascii?Q?BNxjgSI4H4YVNZJXXldqmnkdeDt/1J9mVoUuCTDxLQGTeS0Qx9dQIfotL7E1?=
- =?us-ascii?Q?1KFnDAWNyAkW3/CGulYph+qJHppBS28bpRjOwktDjIxyu5Zequv4c029k2Rw?=
- =?us-ascii?Q?9rocerCI+S+dz2Gki0wo8k0ZYcwLsqEWYYinYEMvf3Oo9lxG0JR4ubnuy1A+?=
- =?us-ascii?Q?Dh58kn24ezs2HlNc/H8tuelIqS+0paOyCQhXNekmLuvnm8SSNeChMbiCSw1R?=
- =?us-ascii?Q?JTEDEJqN0pdwwHsOhDG4FeaQRNp2QMnvFQfbWW6QB5sr4/udSLC+id21XCGS?=
- =?us-ascii?Q?ruR70aOGCqX7uV/OCL5EYTAIM0lfsSwjC64gnCfdl/bCy+18BGIGkUlPXp/D?=
- =?us-ascii?Q?C1gV0Ogq5qiSeIQpxiB/tqsk4An9VNGnDJ303jw73CjhDFP0L5UusaUbtR3R?=
- =?us-ascii?Q?ohHIscpn2EDYDlaRUPvtTTf0QGgR3oGb8nQfGe4HCv6/6u3373cg//eoFORl?=
- =?us-ascii?Q?UWp6vG40oMvKkCNW/uOIBB7d/91LpnxIbUpcF3m3GcTRTWtG6vkOeiOH5CzZ?=
- =?us-ascii?Q?vJT21geoaM7TSahp9VqimQe+alh4+2hh2qi4nR+Yx2ZTUA4nrGf6m/73SUdF?=
- =?us-ascii?Q?dreRcvalfW3GTICOtClC6JPaqqUEz+uqZCIOpS4899QJMqS3s8sJksczWBx+?=
- =?us-ascii?Q?YL59EeePAcp32cld7R9irRTtPvHEuaIt9OgevEEhAK1+LO+rPqGTn/HwnqG+?=
- =?us-ascii?Q?dQFi3oynl0B0fe7DXTiXE7GWa5OEVYtUDBlZO+qgFxJUqkOCaVa6bLCW0LFA?=
- =?us-ascii?Q?R1I++lVFOv9ZJIXVWufy9lFSudgkriEzRksK20z2QSLirwOnFQ8Ibur8iwRf?=
- =?us-ascii?Q?3h2tjXdHYZvMocL5wFpb2fIO3T7d8bqrHj1DvYeyEIrTBZez4vMLLUtFPYk+?=
- =?us-ascii?Q?T1MDPptf7y648D2212VwLvPYJAkFgjqPWSzIwauP7eOWKB4rj3MsB2EnDpeK?=
- =?us-ascii?Q?mdSzCCwI+HJ+j66FKBi010ZsObZwCTWdC9aYGA1CYq7vspz+lTN5ONABHdWh?=
- =?us-ascii?Q?YR9w0WJK4GvCJ9FgrPnIyHSDgfw6r8qVAan5Bcd2wYbHJnCHiYq0HvJXqhgc?=
- =?us-ascii?Q?ewWmM9gJWbmpwKF86vKlYGy68E9q5bMAZLvRdgFIaTzVnh9cYjGZg3WUoCXx?=
- =?us-ascii?Q?hjs3Rip8Y+kIE89NDXuuUT1EBDS6zYIqgCO7uc5h4WE5aI1ihB0JWCcgI8dJ?=
- =?us-ascii?Q?R6n7+N5iRoifX8eO2dR4j8DY8Ee0qP23OzPnaQajOnrmK888RX2JlKzy+fGL?=
- =?us-ascii?Q?zpaP17ARTOYFcT0Ib/8iUjtvHtUgodbN9Se4H0ZINH4t8nAbbEo+ocKfK6B6?=
- =?us-ascii?Q?/ykOaActVYURGbDrTtxqK+k6pnlM3A+pSDXHis3u7KPXHldf640jJjuONGJX?=
- =?us-ascii?Q?g7vKV1lY4V1Avg4tcxxVBo0fa1uGLZ8wrcFmgl6zQBaH5sTpUiHRCQqfWTlh?=
- =?us-ascii?Q?D4DgRfjAAcnqXLrpWa4=3D?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1c7b1106-b0c8-4e5a-8545-08de17ba444c
-X-MS-Exchange-CrossTenant-AuthSource: MN2PR12MB3613.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Oct 2025 13:43:11.2934
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: dUaLv9YnM+gULZTI5fZqwfID2kooSKJU6o/Let2mUmd2uLdyYJrhpT/+LBCP8Zah
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB7444
+Content-Disposition: inline
+In-Reply-To: <20251030143836.66cdf116@shazbot.org>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: A8ECE3F70A
-X-Spamd-Bar: -----
-X-Spamd-Result: default: False [-6.00 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
-	DWL_DNSWL_LOW(-1.00)[Nvidia.com:dkim];
-	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector10001:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
-	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
-	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
+X-Rspamd-Queue-Id: 7B5D33F7EC
+X-Spamd-Bar: ---
+X-Spamd-Result: default: False [-3.50 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.252.31];
 	MIME_GOOD(-0.10)[text/plain];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[12];
-	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.209.34:from];
 	MISSING_XM_UA(0.00)[];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.994];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	RCPT_COUNT_TWELVE(0.00)[23];
+	ARC_NA(0.00)[];
+	DWL_DNSWL_BLOCKED(0.00)[kernel.org:dkim];
+	NEURAL_HAM(-0.00)[-0.997];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
 	RCVD_TLS_LAST(0.00)[];
-	DNSWL_BLOCKED(0.00)[2603:10b6:208:c1::17:received,40.107.209.34:from];
-	URIBL_BLOCKED(0.00)[mail-westus3azon11012034.outbound.protection.outlook.com:rdns];
-	DKIM_TRACE(0.00)[Nvidia.com:+]
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: TDTAYAN6ILVQFS6XCGGHJRKS6USL7OS6
-X-Message-ID-Hash: TDTAYAN6ILVQFS6XCGGHJRKS6USL7OS6
-X-MailFrom: jgg@nvidia.com
+Message-ID-Hash: QRNF7HOK3XXALQWJGUCO6X4V5HTFYRA6
+X-Message-ID-Hash: QRNF7HOK3XXALQWJGUCO6X4V5HTFYRA6
+X-MailFrom: leon@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Leon Romanovsky <leonro@nvidia.com>, Christian Koenig <christian.koenig@amd.com>, Sumit Semwal <sumit.semwal@linaro.org>, Thomas =?utf-8?Q?Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>, Simona Vetter <simona.vetter@ffwll.ch>, "Brost, Matthew" <matthew.brost@intel.com>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "intel-xe@lists.freedesktop.org" <intel-xe@lists.freedesktop.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>
+CC: Alex Williamson <alex.williamson@redhat.com>, Jason Gunthorpe <jgg@nvidia.com>, Andrew Morton <akpm@linux-foundation.org>, Bjorn Helgaas <bhelgaas@google.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, iommu@lists.linux.dev, Jens Axboe <axboe@kernel.dk>, Joerg Roedel <joro@8bytes.org>, kvm@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linux-mm@kvack.org, linux-pci@vger.kernel.org, Logan Gunthorpe <logang@deltatee.com>, Robin Murphy <robin.murphy@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, Vivek Kasireddy <vivek.kasireddy@intel.com>, Will Deacon <will@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [RFC v2 0/8] dma-buf: Add support for mapping dmabufs via interconnects
+Subject: [Linaro-mm-sig] Re: [PATCH v5 9/9] vfio/pci: Add dma-buf export support for MMIO regions
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TDTAYAN6ILVQFS6XCGGHJRKS6USL7OS6/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QRNF7HOK3XXALQWJGUCO6X4V5HTFYRA6/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -175,106 +85,143 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Thu, Oct 30, 2025 at 06:17:11AM +0000, Kasireddy, Vivek wrote:
-> It mostly looks OK to me but there are a few things that I want to discuss,
-> after briefly looking at the patches in your branch:
-> - I am wondering what is the benefit of the SGT compatibility stuff especially
-> when Christian suggested that he'd like to see SGT usage gone from
-> dma-buf
+On Thu, Oct 30, 2025 at 02:38:36PM -0600, Alex Williamson wrote:
+> On Mon, 13 Oct 2025 18:26:11 +0300
+> Leon Romanovsky <leon@kernel.org> wrote:
+> > diff --git a/drivers/vfio/pci/vfio_pci_core.c b/drivers/vfio/pci/vfio_pci_core.c
+> > index fe247d0e2831..56b1320238a9 100644
+> > --- a/drivers/vfio/pci/vfio_pci_core.c
+> > +++ b/drivers/vfio/pci/vfio_pci_core.c
+> > @@ -1511,6 +1520,19 @@ int vfio_pci_core_ioctl_feature(struct vfio_device *device, u32 flags,
+> >  		return vfio_pci_core_pm_exit(vdev, flags, arg, argsz);
+> >  	case VFIO_DEVICE_FEATURE_PCI_VF_TOKEN:
+> >  		return vfio_pci_core_feature_token(vdev, flags, arg, argsz);
+> > +	case VFIO_DEVICE_FEATURE_DMA_BUF:
+> > +		if (device->ops->ioctl != vfio_pci_core_ioctl)
+> > +			/*
+> > +			 * Devices that overwrite general .ioctl() callback
+> > +			 * usually do it to implement their own
+> > +			 * VFIO_DEVICE_GET_REGION_INFO handlerm and they present
+> 
+> Typo, "handlerm"
 
-I think to get rid of SGT we do need to put it in a little well
-defined box and then create alternatives and remove things using
-SGT. This is a long journey, and I think this is the first step.
+Thanks, this part of code is going to be different in v6.
 
-If SGT is some special case it will be harder to excise.
+> 
 
-So the next steps would be to make all the exporters directly declare
-a SGT and then remove the SGT related ops from dma_ops itself and
-remove the compat sgt in the attach logic. This is not hard, it is all
-simple mechanical work.
+<...>
 
-This way the only compat requirement is to automatically give an
-import match list for a SGT only importer which is very little code in
-the core.
+> > @@ -2482,6 +2506,10 @@ static int vfio_pci_dev_set_hot_reset(struct vfio_device_set *dev_set,
+> >  
+> >  	ret = pci_reset_bus(pdev);
+> >  
+> > +	list_for_each_entry(vdev, &dev_set->device_list, vdev.dev_set_list)
+> > +		if (__vfio_pci_memory_enabled(vdev))
+> > +			vfio_pci_dma_buf_move(vdev, false);
+> > +
+> >  	vdev = list_last_entry(&dev_set->device_list,
+> >  			       struct vfio_pci_core_device, vdev.dev_set_list);
+> >  
+> 
+> This needs to be placed in the existing undo loop with the up_write(),
+> otherwise it can be missed in the error case.
 
-The point is we make the SGT stuff nonspecial and fully aligned with
-the mapping type in small steps. This way neither importer nor
-exporter should have any special code to deal with interworking.
+I'll move, but it caused me to wonder what did you want to achieve with
+this "vdev = list_last_entry ..." line? vdev is overwritten immediately
+after that line.
 
-To remove SGT we'd want to teach the core code how to create some kind
-of conversion mapping type, eg exporter uses SGT importer uses NEW so
-the magic conversion mapping type does the adapatation.
+> 
+> > diff --git a/drivers/vfio/pci/vfio_pci_dmabuf.c b/drivers/vfio/pci/vfio_pci_dmabuf.c
+> > new file mode 100644
+> > index 000000000000..eaba010777f3
+> > --- /dev/null
+> > +++ b/drivers/vfio/pci/vfio_pci_dmabuf.c
+> > +static unsigned int calc_sg_nents(struct vfio_pci_dma_buf *priv,
+> > +				  struct dma_iova_state *state)
+> > +{
+> > +	struct phys_vec *phys_vec = priv->phys_vec;
+> > +	unsigned int nents = 0;
+> > +	u32 i;
+> > +
+> > +	if (!state || !dma_use_iova(state))
+> > +		for (i = 0; i < priv->nr_ranges; i++)
+> > +			nents += DIV_ROUND_UP(phys_vec[i].len, UINT_MAX);
+> > +	else
+> > +		/*
+> > +		 * In IOVA case, there is only one SG entry which spans
+> > +		 * for whole IOVA address space, but we need to make sure
+> > +		 * that it fits sg->length, maybe we need more.
+> > +		 */
+> > +		nents = DIV_ROUND_UP(priv->size, UINT_MAX);
+> 
+> I think we're arguably running afoul of the coding style standard here
+> that this is not a single simple statement and should use braces.
+> 
 
-In this way we can convert importers and exporters to use NEW in any
-order and they still interwork with each other.
+<...>
 
-> eventually. Also, if matching fails, IMO, indicating that to the
-> importer (allow_ic) and having both exporter/importer fallback to
-> the current legacy mechanism would be simpler than the SGT
-> compatibility stuff.
+> > +err_unmap_dma:
+> > +	if (!i || !state)
+> > +		; /* Do nothing */
+> > +	else if (dma_use_iova(state))
+> > +		dma_iova_destroy(attachment->dev, state, mapped_len, dir,
+> > +				 attrs);
+> > +	else
+> > +		for_each_sgtable_dma_sg(sgt, sgl, i)
+> > +			dma_unmap_phys(attachment->dev, sg_dma_address(sgl),
+> > +					sg_dma_len(sgl), dir, attrs);
+> 
+> Same, here for braces.
+> 
 
-I don't want to have three paths in importers.
+<...>
 
-If the importer supports SGT it should declare it in a match and the
-core code should always return a SGT match for the importer to use
+> > +	if (!state)
+> > +		; /* Do nothing */
+> > +	else if (dma_use_iova(state))
+> > +		dma_iova_destroy(attachment->dev, state, priv->size, dir,
+> > +				 attrs);
+> > +	else
+> > +		for_each_sgtable_dma_sg(sgt, sgl, i)
+> > +			dma_unmap_phys(attachment->dev, sg_dma_address(sgl),
+> > +				       sg_dma_len(sgl), dir, attrs);
+> > +
+> 
+> Here too.
 
-The importer should not have to code 'oh it is sgt but it somehow a
-little different' via an allow_ic type idea.
- 
-> - Also, I thought PCIe P2P (along with SGT) use-cases are already well handled
-> by the existing map_dma_buf() and other interfaces. So, it might be confusing
-> if the newer interfaces also provide a mechanism to handle P2P although a
-> bit differently. I might be missing something here but shouldn't the existing
-> allow_peer2peer and other related stuff be left alone?
+I will change it, but it is worth to admit that I'm consistent in my
+coding style.
 
-P2P is part of SGT, it gets pulled into the SGT stuff as steps toward
-isolating SGT properly. Again as we move things to use native SGT
-exporters we would remove the exporter related allow_peer2peer items
-when they become unused.
- 
-> - You are also adding custom attach/detach ops for each mapping_type. I think
-> it makes sense to reuse existing attach/detach ops if possible and initiate the
-> matching process from there, at-least initially.
+> 
+> > +	sg_free_table(sgt);
+> > +	kfree(sgt);
+> > +}
+> ...
+> > diff --git a/include/uapi/linux/vfio.h b/include/uapi/linux/vfio.h
+> > index 75100bf009ba..63214467c875 100644
+> > --- a/include/uapi/linux/vfio.h
+> > +++ b/include/uapi/linux/vfio.h
+> > @@ -1478,6 +1478,31 @@ struct vfio_device_feature_bus_master {
+> >  };
+> >  #define VFIO_DEVICE_FEATURE_BUS_MASTER 10
+> >  
+> > +/**
+> > + * Upon VFIO_DEVICE_FEATURE_GET create a dma_buf fd for the
+> > + * regions selected.
+> > + *
+> > + * open_flags are the typical flags passed to open(2), eg O_RDWR, O_CLOEXEC,
+> > + * etc. offset/length specify a slice of the region to create the dmabuf from.
+> > + * nr_ranges is the total number of (P2P DMA) ranges that comprise the dmabuf.
+> > + *
+> 
+> Probably worth noting that .flags should be zero, I see we enforce
+> that.  Thanks,
 
-I started there, but as soon as I went to adding PAL I realized the
-attach/detach logic was completely different for each of the mapping
-types. So this is looking alot simpler.
+Added, thanks
 
-If the driver wants to share the same attach/detach ops for some of
-its mapping types then it can just set the same function pointer to
-all of them and pick up the mapping type from the attach->map_type.
-
-> - Looks like your design doesn't call for a dma_buf_map_interconnect() or other
-> similar helpers provided by dma-buf core that the importers can use. Is that
-> because the return type would not be known to the core?
-
-I don't want to have a single shared 'map' operation, that is the
-whole point of this design. Each mapping type has its own ops, own
-types, own function signatures that the client calls directly.
-
-No more type confusion or trying to abuse phys_addr_t, dma_addr_t, or
-scatterlist for in appropriate things. If your driver wants something
-special, like IOV, then give it proper clear types so it is
-understandable.
-
-> - And, just to confirm, with your design if I want to add a new interconnect/
-> mapping_type (not just IOV but in general), all that is needed is to provide custom
-> attach/detach, match ops and one or more ops to map/unmap the address list
-> right? Does this mean that the role of dma-buf core would be limited to just
-> match and the exporters are expected to do most of the heavy lifting and
-> checking for stuff like dynamic importers, resv lock held, etc?
-
-I expect the core code would continue to provide wrappers and helpers
-to call the ops that can do any required common stuff.
-
-However, keep in mind, when the importer moves to use mapping type it
-also must be upgraded to use the dynamic importer flow as this API
-doesn't support non-dynamic importers using mapping type.
-
-I will add some of these remarks to the commit messages..
-
-Thanks!
-Jason
+> 
+> Alex
+> 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
