@@ -2,320 +2,261 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cD7cOEH44GnZnwAAu9opvQ
+	id QPpZNE344GnZnwAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:54:57 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:55:09 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8481D40FE85
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:54:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 49DFE40FE93
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:55:09 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 558A0406AE
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 14:54:56 +0000 (UTC)
-Received: from mx0a-00082601.pphosted.com (mx0a-00082601.pphosted.com [67.231.145.42])
-	by lists.linaro.org (Postfix) with ESMTPS id DE52A3F7E7
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  3 Nov 2025 20:07:47 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 57A7A404E4
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 14:55:08 +0000 (UTC)
+Received: from CY7PR03CU001.outbound.protection.outlook.com (mail-westcentralusazon11010066.outbound.protection.outlook.com [40.93.198.66])
+	by lists.linaro.org (Postfix) with ESMTPS id 877A93F857
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  4 Nov 2025 08:36:28 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=fb.com header.s=s2048-2025-q2 header.b=Y5TYvio2;
-	dmarc=pass (policy=reject) header.from=fb.com;
-	spf=pass (lists.linaro.org: domain of "prvs=740262d6a4=amastro@meta.com" designates 67.231.145.42 as permitted sender) smtp.mailfrom="prvs=740262d6a4=amastro@meta.com"
-Received: from pps.filterd (m0044012.ppops.net [127.0.0.1])
-	by mx0a-00082601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5A3HSUl13368916;
-	Mon, 3 Nov 2025 12:07:21 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fb.com; h=cc
-	:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=s2048-2025-q2; bh=n9Hp+W96E82ffeM9TGY/
-	T64q12eMoTlbRaWkBHrOVhQ=; b=Y5TYvio2wy42a6OuNV1jizo/aQU5rL6HohWI
-	OdRswHnuwgKDGg4PRZorsSwOwSWNepxL3lv6e92F0ZZiEQOO8ZMDqwElBWya7VYx
-	yHZJ1Bg/rdGSvGKN1xCect7aLk4BJP3dFq0W4bRU4thNy47l/7qf6QCLDdrJWuYT
-	ttchffm5fJ8azlwk2GD5NtPH33FSvCNhfhPKLPVh0Qs6M/RaBFY1LsIhyFIHXKOv
-	PPwMbL4I1eFF62/08bb33eCUiaTLoRka7NFBHCCzuXtuZDc3HhRZW8A7Jd4FsCBj
-	aU36aw88WsqWA0jpB+Nf9LOBQRQOfcCvornGVmHGoYNGSzpsQw==
-Received: from mail.thefacebook.com ([163.114.134.16])
-	by mx0a-00082601.pphosted.com (PPS) with ESMTPS id 4a6yfe2849-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
-	Mon, 03 Nov 2025 12:07:21 -0800 (PST)
-Received: from devgpu015.cco6.facebook.com (2620:10d:c085:208::7cb7) by
- mail.thefacebook.com (2620:10d:c08b:78::c78f) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.2.2562.20; Mon, 3 Nov 2025 20:07:19 +0000
-Date: Mon, 3 Nov 2025 12:07:12 -0800
-From: Alex Mastro <amastro@fb.com>
-To: Leon Romanovsky <leon@kernel.org>
-Message-ID: <aQkLcAxEn4qmF3c4@devgpu015.cco6.facebook.com>
-References: <20251102-dmabuf-vfio-v6-0-d773cff0db9f@nvidia.com>
+	dkim=pass header.d=amd.com header.s=selector1 header.b="ChIA61/K";
+	dmarc=pass (policy=quarantine) header.from=amd.com;
+	arc=pass ("microsoft.com:s=arcselector10001:i=1");
+	spf=pass (lists.linaro.org: domain of Pierre-eric.Pelloux-prayer@amd.com designates 40.93.198.66 as permitted sender) smtp.mailfrom=Pierre-eric.Pelloux-prayer@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=OmO2PWmzXWYetQTFgGANmi01qbmjW+1Mjv0mZhPpnSJkH2TGWR0/m3gVgtavFmrogpix2eV8ym72aURJu0UJj4LwWv4IghSrwD7N2sFLkcncZi9yNAfJ6So6aabMW3ohET3QWYp6CvAm7wTLXPESwvvWnGJpbxQiDgQhiOndGrCc6TDoEkac2YDFLCvwxpnhzl/VAzuTfnptI3bNfLI19lTcUi8MaKcs/aAXJjIci9f6MZMR+pvcTXEUpkbQGzDGWuhrPey6GvIAHMsqJzt6HSwwFgTeOaHr+u6FwR6gQZyYnAJbaLqwW9dUCUEsNl30oEYfZJr0wRgTe25Gw/MeVg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=jg1+43C35mWs9x0Sh/VnKCJizCwGfVhf7CqzL4d6E8w=;
+ b=Ytc0O0exlkkd6D0lKRbQIzwAk3jr1cWpKzWMR+drfl78zbRniGgdofs8t9ulRsi9huTYAHUILFR5jLmflrg/JmPAaYRc1EfliVodVCC6H+E5uai210Nqjo5h9jlm4ZLx1E/dlZM5+9NtS97w0gGLd0YQJWeqwmHejfsdc1QujpnmD/KLD1xulO2mJAr024LP7Zl4R+M56IJWr9gXaNKx6CY579nSU5LoJI72JbcdUF1FlwFWikYxXkDAK/yClqhNoOzlFsa+cpBXSMNU3QSKQ6LH9zJrtdO6leurIPRKgJ4+8PdhLHxYZr3S/7OjAcnbWNk2cJB2eviYUPq9iHjN8w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=gmail.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=jg1+43C35mWs9x0Sh/VnKCJizCwGfVhf7CqzL4d6E8w=;
+ b=ChIA61/KrohP7LVvG/GDpHX08I9KURPid8IAf1WesxLVs6o4C2KUlV+gyrFekQOjU0B0Hj8mdw6rnKe65R2KRrEpKpZjULW3HXqX8xA+Dfy+6e1bDoblb/Sqmpl3hXOEU7axHhs7DfVtuKY1mp27EYCXO4vYgen/01TTfMxIVZo=
+Received: from MW4PR04CA0260.namprd04.prod.outlook.com (2603:10b6:303:88::25)
+ by CY3PR12MB9605.namprd12.prod.outlook.com (2603:10b6:930:103::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.16; Tue, 4 Nov
+ 2025 08:36:25 +0000
+Received: from CO1PEPF000042AE.namprd03.prod.outlook.com
+ (2603:10b6:303:88:cafe::4d) by MW4PR04CA0260.outlook.office365.com
+ (2603:10b6:303:88::25) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9275.16 via Frontend Transport; Tue,
+ 4 Nov 2025 08:36:22 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ CO1PEPF000042AE.mail.protection.outlook.com (10.167.243.43) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9298.6 via Frontend Transport; Tue, 4 Nov 2025 08:36:22 +0000
+Received: from FRAPPELLOUX01-WSLPUB.amd.com (10.180.168.240) by
+ satlexmb07.amd.com (10.181.42.216) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.17; Tue, 4 Nov 2025 00:36:19 -0800
+From: Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>
+To: 
+Date: Tue, 4 Nov 2025 09:35:15 +0100
+Message-ID: <20251104083605.13677-1-pierre-eric.pelloux-prayer@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20251102-dmabuf-vfio-v6-0-d773cff0db9f@nvidia.com>
-X-Originating-IP: [2620:10d:c085:208::7cb7]
-X-Authority-Analysis: v=2.4 cv=G9QR0tk5 c=1 sm=1 tr=0 ts=69090b79 cx=c_pps
- a=CB4LiSf2rd0gKozIdrpkBw==:117 a=CB4LiSf2rd0gKozIdrpkBw==:17
- a=kj9zAlcOel0A:10 a=6UeiqGixMTsA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=FOH2dFAWAAAA:8 a=b_Saz7MSmFOFN_6dvx4A:9 a=CjuIK1q_8ugA:10
- a=DXsff8QfwkrTrK3sU8N1:22 a=Z5ABNNGmrOfJ6cZ5bIyy:22 a=bWyr8ysk75zN3GCy5bjg:22
-X-Proofpoint-ORIG-GUID: F1nk6hmysPbKhKVQa_mqqIFKqOIt2lHM
-X-Proofpoint-GUID: F1nk6hmysPbKhKVQa_mqqIFKqOIt2lHM
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTAzMDE3OSBTYWx0ZWRfX6SW28Xvycs0O
- YOKukhqpHcTfkYNeGRk02UVQnYAieNl0FPP5nyOoQsMjQfkPKcUonaa3EWc/tqdoAAQyhyOyp0d
- /JHwcN3QLYQ/+EZJhZ2InHvQ5+q0ThEzTdyBEGsfGK6Opxy38U0CpsznUzKLwU/5Eqh1l493VDE
- PyTsfwJm0au//MmeaXH4NXKBaJs6mnL334sMoj6rtJQYWDX5DKMNRtgxvcMAQid95nsgniy4DYE
- +umaq/vNBvV3b0K6HXe0s/cT+YOR8m2DkpctVf5zXXorytYnhbn1vV3nGRWxaQ24cLeCzQnNSqB
- UmVF2ZqiQwbE9Yb71RMC4EJcfgbsbmodipz9oljstvRLhQ7lzspcSOdC0w5Z4QcLNUWGre4urgV
- ZaziQQl4T7tsVkAKgmifB2A8A6gzCQ==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-11-03_04,2025-11-03_03,2025-10-01_01
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
+ (10.181.42.216)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PEPF000042AE:EE_|CY3PR12MB9605:EE_
+X-MS-Office365-Filtering-Correlation-Id: dd2281e3-9bd4-4986-0c4b-08de1b7d3c4a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|7416014|376014|82310400026|36860700013|1800799024;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?3BET/Sz/jflXxImGGYc8/M4tllDJOLAXmKEHJyyn1a4uIFtYjhGVZXXlMNbe?=
+ =?us-ascii?Q?nexyaG4uSovhFYLbESvNJ46/5XEDb0eLOEQAebT8FcITkscYtIUYvlQAyZmf?=
+ =?us-ascii?Q?0gu0ajOwnOwPUhC30KFkYECvmEZUH8xKi4YeVXGYNK8irYW14FI0UVeNYfxl?=
+ =?us-ascii?Q?OoKlB00RYpP0JAMPAsWwedQBtU9Vslqw+h1Xax4inTw4Vq809ZJ6TUbQIHIe?=
+ =?us-ascii?Q?P+CKVrhZo/4aAIW9OqARYe12+5sgb54kO0Ry4VmT0OzVQ+/zy2niMVKDin5y?=
+ =?us-ascii?Q?qCOdMCjNWCbDHrUvisj8TfQVE19xk0oDd+aZvGfbNk+yOT9n45u9blI7ffYo?=
+ =?us-ascii?Q?Gtz2z0/i/wcfRf9yeoAWmZ3sCLK85+raJMu47s0wV15T2cLbYfBNmf+edQ6f?=
+ =?us-ascii?Q?DgMFthvgYuKoZ2leUda3/FNf+5vUxsR7qMew05LSfPFZKC8iL38STiJGCOyh?=
+ =?us-ascii?Q?v/gyjACQgawhpGbG9Bdgm8D4vrFdPwZQoyTnTQv+3lLfFxUwQVfqJ1cMO+4x?=
+ =?us-ascii?Q?12S8kJgz4fx2y6OI/rdXkcFXMEsfZMLN/bxmpoCEQO82d95aQr/SdfQ1NaeD?=
+ =?us-ascii?Q?v+7szgOR/dLQOgMVddRyO003dLdYXzaUt4rogMnNtK0Ay5kvT3yNjogwAhxU?=
+ =?us-ascii?Q?zEShIN4ETQyhK3dC/A+60VdjtBhJ/qagxMHAXGuIL84Fhvs6uuPIou+to2qG?=
+ =?us-ascii?Q?oqDBhN327HuTUVgcj++oEdwgxS7cwVU6fssP29SvejHykOu02zmP4mqB9aIg?=
+ =?us-ascii?Q?932H++Z5JSfBQqmdseEtZYvjdSHvvbWEv7oZMs210JDzxe7NkUpNc3Yni2qM?=
+ =?us-ascii?Q?dTAidXGmAlzwhRq5KR9laV9XHoGyTYzUl7IayWCVK7zwzVRakqEEjMI3yG5a?=
+ =?us-ascii?Q?fwxG4lvc+UwCg7X4b+72F0bb9QfkfMc67KI6/0/uoojkNlaVmRw8/8VJs0nh?=
+ =?us-ascii?Q?CH7ZiMiPANFLeEjZYRgldHFzJqGlNeDmSNAa9M1opke/AhbOk61EqxSBjPDS?=
+ =?us-ascii?Q?f/UWISpAeNn3PO5B3dN0kvTuMElVVHsMlYw2/eZN6K1UGhCYjvf4P8PZh+Ym?=
+ =?us-ascii?Q?LtS4d7PeN1MwFxGBjUflw/5cR3aaSxQnugvl5j44t0TD8oLnkroLHwgd0Lqe?=
+ =?us-ascii?Q?9yS4mdeeGbud5DQCXSHRrJ9EJmKY7jDv6FQaNRqFe6+bv/uuThbp0IEh3POm?=
+ =?us-ascii?Q?Y1g2h/DqCHduGLt0xhdwU2WALelaUAqBjBdFd0iEAm6LIH/3B3MjVn6NOLoH?=
+ =?us-ascii?Q?JEdOdOW1Y5MhGOQX4hznZqxIr0qldWToq8nixGrzLp6RNWFclGnUdQci384a?=
+ =?us-ascii?Q?e07r4XlJGfdhwLE5MCMesbtuO75omaqU6O452xbkK3n3jlSGcxyoFVvOPjq4?=
+ =?us-ascii?Q?WiUU23aGVznXqqMa3JsNojboyAtVabbmjHCG5bNLElbT3ehXYQ/5ADvnKIyL?=
+ =?us-ascii?Q?Eeqs3O46KNDm2fki21xaU5DUggfke5kPRusv51BboVuecLJCeltNSc3SERZS?=
+ =?us-ascii?Q?3XG5PJeRRXqZi+ML7uiM89NlKG7a6zQNfTlciFO1PrJMYcyqb6kc9yU5wMgQ?=
+ =?us-ascii?Q?yxTanGdP3Rqp9e5RyUE=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(7416014)(376014)(82310400026)(36860700013)(1800799024);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Nov 2025 08:36:22.8202
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: dd2281e3-9bd4-4986-0c4b-08de1b7d3c4a
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	CO1PEPF000042AE.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY3PR12MB9605
 X-Spamd-Bar: ---
-X-MailFrom: prvs=740262d6a4=amastro@meta.com
+X-MailFrom: Pierre-eric.Pelloux-prayer@amd.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: GMIP4L3N7IWTZ6YDATUQCFEW3AHZ5OQX
-X-Message-ID-Hash: GMIP4L3N7IWTZ6YDATUQCFEW3AHZ5OQX
-X-Mailman-Approved-At: Thu, 16 Apr 2026 14:48:42 +0000
-CC: Bjorn Helgaas <bhelgaas@google.com>, Logan Gunthorpe <logang@deltatee.com>, Jens Axboe <axboe@kernel.dk>, Robin Murphy <robin.murphy@arm.com>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Jason Gunthorpe <jgg@ziepe.ca>, Andrew Morton <akpm@linux-foundation.org>, Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Alex Williamson <alex.williamson@redhat.com>, Kees Cook <kees@kernel.org>, "Gustavo A. R. Silva" <gustavoars@kernel.org>, Ankit Agrawal <ankita@nvidia.com>, Yishai Hadas <yishaih@nvidia.com>, Shameer Kolothum <skolothumtho@nvidia.com>, Kevin Tian <kevin.tian@intel.com>, Krishnakant Jaju <kjaju@nvidia.com>, Matt Ochs <mochs@nvidia.com>, linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org, linux-block@vger.kernel.org, iommu@lists.linux.dev, linux-mm@kvack.org, linux-doc@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.
- linaro.org, kvm@vger.kernel.org, linux-hardening@vger.kernel.org, Vivek Kasireddy <vivek.kasireddy@intel.com>
+Message-ID-Hash: ZZU5TIKIHKD6ZQ54FP5FM4ZGRE4IHGHY
+X-Message-ID-Hash: ZZU5TIKIHKD6ZQ54FP5FM4ZGRE4IHGHY
+X-Mailman-Approved-At: Thu, 16 Apr 2026 14:48:43 +0000
+CC: Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Alex Deucher <alexander.deucher@amd.com>, David Airlie <airlied@gmail.com>, Felix Kuehling <Felix.Kuehling@amd.com>, Harry Wentland <harry.wentland@amd.com>, Huang Rui <ray.huang@amd.com>, Leo Li <sunpeng.li@amd.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Thomas Zimmermann <tzimmermann@suse.de>, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v6 00/11] vfio/pci: Allow MMIO regions to be exported through dma-buf
+Subject: [Linaro-mm-sig] [PATCH v1 00/20] drm/amdgpu: use all SDMA instances for TTM clears and moves
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GMIP4L3N7IWTZ6YDATUQCFEW3AHZ5OQX/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZZU5TIKIHKD6ZQ54FP5FM4ZGRE4IHGHY/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [3.49 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[fb.com : SPF not aligned (relaxed),reject];
-	DATE_IN_PAST(1.00)[3930];
-	R_DKIM_REJECT(1.00)[fb.com:s=s2048-2025-q2];
+X-Spamd-Result: default: False [4.99 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[amd.com : SPF not aligned (relaxed),quarantine];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
+	DATE_IN_PAST(1.00)[3918];
+	R_DKIM_REJECT(1.00)[amd.com:s=selector1];
+	MID_CONTAINS_FROM(1.00)[];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	SUSPICIOUS_AUTH_ORIGIN(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[33];
-	ARC_NA(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	DKIM_TRACE(0.00)[fb.com:-];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FROM_NEQ_ENVFROM(0.00)[amastro@fb.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	GREYLIST(0.00)[pass,meta];
+	SUSPICIOUS_AUTH_ORIGIN(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[18];
+	RCVD_TLS_LAST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_CC(0.00)[amd.com,gmail.com,linux.intel.com,kernel.org,ffwll.ch,linaro.org,suse.de,lists.freedesktop.org,lists.linaro.org,vger.kernel.org];
+	DKIM_TRACE(0.00)[amd.com:-];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	FROM_NEQ_ENVFROM(0.00)[pierre-eric.pelloux-prayer@amd.com,linaro-mm-sig-bounces@lists.linaro.org];
+	TO_DN_SOME(0.00)[];
 	HAS_XOIP(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	NEURAL_HAM(-0.00)[-0.860];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email,fb.com:email,devgpu015.cco6.facebook.com:mid]
-X-Rspamd-Queue-Id: 8481D40FE85
+	NEURAL_HAM(-0.00)[-0.473];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,amd.com:mid,lists.linaro.org:helo,lists.linaro.org:rdns]
+X-Rspamd-Queue-Id: 49DFE40FE93
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Sun, Nov 02, 2025 at 10:00:48AM +0200, Leon Romanovsky wrote:
-> Changelog:
-> v6:
->  * Fixed wrong error check from pcim_p2pdma_init().
->  * Documented pcim_p2pdma_provider() function.
->  * Improved commit messages.
->  * Added VFIO DMA-BUF selftest.
->  * Added __counted_by(nr_ranges) annotation to struct vfio_device_feature_dma_buf.
->  * Fixed error unwind when dma_buf_fd() fails.
->  * Document latest changes to p2pmem.
->  * Removed EXPORT_SYMBOL_GPL from pci_p2pdma_map_type.
->  * Moved DMA mapping logic to DMA-BUF.
->  * Removed types patch to avoid dependencies between subsystems.
->  * Moved vfio_pci_dma_buf_move() in err_undo block.
->  * Added nvgrace patch.
+The drm/ttm patch modifies TTM to support multiple contexts for the pipelined moves.
 
-Thanks Leon. Attaching a toy program which sanity tests the dma-buf export UAPI
-by feeding the allocated dma-buf into an dma-buf importer (libibverbs + CX-7).
- 
-Tested-by: Alex Mastro <amastro@fb.com>
+Then amdgpu/ttm is updated to express dependencies between jobs explicitely,
+instead of relying on the ordering of execution guaranteed by the use of a single
+instance.
+With all of this in place, we can use multiple entities, with each having access
+to the available SDMA instances.
 
-$ cc -Og -Wall -Wextra $(pkg-config --cflags --libs libibverbs) test_dmabuf.c -o test_dmabuf
-$ ./test_dmabuf 0000:05:00.0 3 4 0 0x1000
-opening 0000:05:00.0 via /dev/vfio/56
-allocating dma_buf bar_idx=4, bar_offset=0x0, size=0x1000
-allocated dma_buf fd=6
-discovered 4 ibv devices: mlx5_0 mlx5_1 mlx5_2 mlx5_3
-opened ibv device 3: mlx5_3
-registered dma_buf
-unregistered dma_buf
-closed dma_buf fd
+This rework also gives the opportunity to merge the clear functions into a single
+one and to optimize a bit GART usage.
 
----
-#include <fcntl.h>
-#include <infiniband/verbs.h>
-#include <libgen.h>
-#include <linux/limits.h>
-#include <linux/types.h>
-#include <linux/vfio.h>
-#include <stdbool.h>
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/ioctl.h>
-#include <unistd.h>
+(The first patch of the series has already been merged through drm-misc but I'm
+including it here to reduce conflicts)
 
-#define ensure(cond)                                                             \
-	do {                                                                     \
-		if (!(cond)) {                                                   \
-			fprintf(stderr,                                          \
-				"%s:%d Condition failed: '%s' (errno=%d: %s)\n", \
-				__FILE__, __LINE__, #cond, errno,                \
-				strerror(errno));                                \
-			exit(EXIT_FAILURE);                                      \
-		}                                                                \
-	} while (0)
+Pierre-Eric Pelloux-Prayer (20):
+  drm/amdgpu: give each kernel job a unique id
+  drm/ttm: rework pipelined eviction fence handling
+  drm/amdgpu: remove direct_submit arg from amdgpu_copy_buffer
+  drm/amdgpu: introduce amdgpu_ttm_entity
+  drm/amdgpu: pass the entity to use to ttm functions
+  drm/amdgpu: statically assign gart windows to ttm entities
+  drm/amdgpu: allocate multiple clear entities
+  drm/amdgpu: allocate multiple move entities
+  drm/amdgpu: pass optional dependency to amdgpu_fill_buffer
+  drm/amdgpu: prepare amdgpu_fill_buffer to use N entities
+  drm/amdgpu: use multiple entities in amdgpu_fill_buffer
+  drm/amdgpu: use TTM_FENCES_MAX_SLOT_COUNT
+  drm/amdgpu: use multiple entities in amdgpu_move_blit
+  drm/amdgpu: pass all the sdma rings to amdgpu_mman
+  drm/amdgpu: introduce amdgpu_sdma_set_vm_pte_scheds
+  drm/amdgpu: give ttm entities access to all the sdma scheds
+  drm/amdgpu: get rid of amdgpu_ttm_clear_buffer
+  drm/amdgpu: rename amdgpu_fill_buffer as amdgpu_clear_buffer
+  drm/amdgpu: use larger gart window when possible
+  drm/amdgpu: double AMDGPU_GTT_MAX_TRANSFER_SIZE
 
-#ifndef VFIO_DEVICE_FEATURE_DMA_BUF
-#define VFIO_DEVICE_FEATURE_DMA_BUF 11
+ drivers/gpu/drm/amd/amdgpu/amdgpu.h           |   2 +
+ drivers/gpu/drm/amd/amdgpu/amdgpu_benchmark.c |   7 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_cs.c        |   5 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_device.c    |   8 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gem.c       |   2 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gfx.c       |   3 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gmc.c       |  23 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gtt_mgr.c   |   6 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_job.c       |   5 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_job.h       |  19 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_jpeg.c      |   3 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_object.c    |  19 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c       | 496 ++++++++++++------
+ drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.h       |  51 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_uvd.c       |   3 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vce.c       |   5 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vcn.c       |   8 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vkms.c      |   2 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vm.c        |  24 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vm.h        |   2 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vm_cpu.c    |   4 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vm_pt.c     |   4 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vm_sdma.c   |  12 +-
+ drivers/gpu/drm/amd/amdgpu/cik_sdma.c         |  10 +-
+ drivers/gpu/drm/amd/amdgpu/sdma_v2_4.c        |  10 +-
+ drivers/gpu/drm/amd/amdgpu/sdma_v3_0.c        |  10 +-
+ drivers/gpu/drm/amd/amdgpu/sdma_v4_0.c        |  17 +-
+ drivers/gpu/drm/amd/amdgpu/sdma_v4_4_2.c      |  17 +-
+ drivers/gpu/drm/amd/amdgpu/sdma_v5_0.c        |  10 +-
+ drivers/gpu/drm/amd/amdgpu/sdma_v5_2.c        |  10 +-
+ drivers/gpu/drm/amd/amdgpu/sdma_v6_0.c        |  10 +-
+ drivers/gpu/drm/amd/amdgpu/sdma_v7_0.c        |  10 +-
+ drivers/gpu/drm/amd/amdgpu/si_dma.c           |  10 +-
+ drivers/gpu/drm/amd/amdgpu/uvd_v6_0.c         |   6 +-
+ drivers/gpu/drm/amd/amdgpu/uvd_v7_0.c         |   6 +-
+ drivers/gpu/drm/amd/amdkfd/kfd_migrate.c      |  31 +-
+ drivers/gpu/drm/amd/amdkfd/kfd_svm.c          |   2 +-
+ .../amd/display/amdgpu_dm/amdgpu_dm_plane.c   |   2 +-
+ .../drm/amd/display/amdgpu_dm/amdgpu_dm_wb.c  |   2 +-
+ .../gpu/drm/ttm/tests/ttm_bo_validate_test.c  |  13 +-
+ drivers/gpu/drm/ttm/tests/ttm_resource_test.c |   5 +-
+ drivers/gpu/drm/ttm/ttm_bo.c                  |  56 +-
+ drivers/gpu/drm/ttm/ttm_bo_util.c             |  36 +-
+ drivers/gpu/drm/ttm/ttm_resource.c            |  45 +-
+ include/drm/ttm/ttm_resource.h                |  34 +-
+ 45 files changed, 651 insertions(+), 414 deletions(-)
 
-struct vfio_region_dma_range {
-	__u64 offset;
-	__u64 length;
-};
+-- 
+2.43.0
 
-struct vfio_device_feature_dma_buf {
-	__u32 region_index;
-	__u32 open_flags;
-	__u32 flags;
-	__u32 nr_ranges;
-	struct vfio_region_dma_range dma_ranges[];
-};
-#endif
-
-static uint32_t group_for_bdf(const char *bdf)
-{
-	char path[PATH_MAX];
-	char link[PATH_MAX];
-	int ret;
-
-	snprintf(path, sizeof(path), "/sys/bus/pci/devices/%s/iommu_group",
-		 bdf);
-	ret = readlink(path, link, sizeof(link));
-	ensure(ret > 0);
-
-	const char *filename = basename(link);
-	ensure(filename);
-
-	return strtoul(filename, NULL, 0);
-}
-
-int main(int argc, char **argv)
-{
-	int ret;
-
-	if (argc != 6) {
-		printf("usage: %s <vfio_bdf> <ibv_device_idx> <bar_idx> <bar_offset> <size>\n",
-		       argv[0]);
-		printf("example: %s 0000:05:00.0 3 2 0x20000 0x1000\n",
-		       argv[0]);
-		return 1;
-	}
-
-	const char *bdf = argv[1];
-	uint32_t ibv_idx = strtoul(argv[2], NULL, 0);
-	uint32_t bar_idx = strtoul(argv[3], NULL, 0);
-	uint64_t bar_offs = strtoull(argv[4], NULL, 0);
-	uint64_t dmabuf_len = strtoull(argv[5], NULL, 0);
-
-	uint32_t group_num = group_for_bdf(bdf);
-	char group_path[PATH_MAX];
-	snprintf(group_path, sizeof(group_path), "/dev/vfio/%u", group_num);
-
-	int container_fd = open("/dev/vfio/vfio", O_RDWR);
-	ensure(container_fd >= 0);
-
-	printf("opening %s via %s\n", bdf, group_path);
-	int group_fd = open(group_path, O_RDWR);
-	ensure(group_fd >= 0);
-
-	ret = ioctl(group_fd, VFIO_GROUP_SET_CONTAINER, &container_fd);
-	ensure(!ret);
-
-	ret = ioctl(container_fd, VFIO_SET_IOMMU, VFIO_TYPE1v2_IOMMU);
-	ensure(!ret);
-
-	int device_fd = ioctl(group_fd, VFIO_GROUP_GET_DEVICE_FD, bdf);
-	ensure(device_fd >= 0);
-
-	uint8_t buf[sizeof(struct vfio_device_feature) +
-		    sizeof(struct vfio_device_feature_dma_buf) +
-		    sizeof(struct vfio_region_dma_range)]
-		__attribute__((aligned(32)));
-
-	struct vfio_device_feature *ft = (struct vfio_device_feature *)buf;
-	*ft = (struct vfio_device_feature){
-		.argsz = sizeof(buf),
-		.flags = VFIO_DEVICE_FEATURE_GET | VFIO_DEVICE_FEATURE_DMA_BUF,
-	};
-
-	struct vfio_device_feature_dma_buf *ft_dma_buf =
-		(struct vfio_device_feature_dma_buf *)ft->data;
-	*ft_dma_buf = (struct vfio_device_feature_dma_buf){
-		.region_index = bar_idx,
-		.open_flags = O_RDWR,
-		.nr_ranges = 1,
-	};
-
-	ft_dma_buf->dma_ranges[0] = (struct vfio_region_dma_range){
-		.length = dmabuf_len,
-		.offset = bar_offs,
-	};
-
-	printf("allocating dma_buf bar_idx=%u, bar_offset=0x%lx, size=0x%lx\n",
-	       bar_idx, bar_offs, dmabuf_len);
-	int dmabuf_fd = ioctl(device_fd, VFIO_DEVICE_FEATURE, buf);
-	ensure(dmabuf_fd >= 0);
-	printf("allocated dma_buf fd=%d\n", dmabuf_fd);
-
-	int num;
-	struct ibv_device **devs = ibv_get_device_list(&num);
-	ensure(devs && num > 0);
-	printf("discovered %d ibv devices:", num);
-	for (int i = 0; i < num; i++) {
-		printf(" %s", ibv_get_device_name(devs[i]));
-	}
-	printf("\n");
-	ensure(ibv_idx < (uint32_t)num);
-
-	struct ibv_context *ctx = ibv_open_device(devs[ibv_idx]);
-	ensure(ctx);
-	printf("opened ibv device %d: %s\n", ibv_idx,
-	       ibv_get_device_name(devs[ibv_idx]));
-
-	struct ibv_pd *pd = ibv_alloc_pd(ctx);
-	ensure(pd);
-
-	uint64_t offset = 0;
-	uint64_t iova = 0;
-	int access = IBV_ACCESS_LOCAL_WRITE | IBV_ACCESS_REMOTE_READ |
-		     IBV_ACCESS_REMOTE_WRITE;
-
-	struct ibv_mr *mr = ibv_reg_dmabuf_mr(pd, offset, dmabuf_len, iova,
-					      dmabuf_fd, access);
-	ensure(mr);
-	printf("registered dma_buf\n");
-
-	ret = ibv_dereg_mr(mr);
-	ensure(!ret);
-	printf("unregistered dma_buf\n");
-
-	ret = close(dmabuf_fd);
-	ensure(!ret);
-	printf("closed dma_buf fd\n");
-
-	return 0;
-}
----
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
