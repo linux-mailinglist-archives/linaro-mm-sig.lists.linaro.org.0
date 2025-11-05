@@ -2,44 +2,44 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id D0C39C346A6
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 05 Nov 2025 09:16:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6AD7DC346B9
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 05 Nov 2025 09:17:21 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id BB10F3F85D
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  5 Nov 2025 08:16:27 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 874883F85A
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  5 Nov 2025 08:17:20 +0000 (UTC)
 Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
-	by lists.linaro.org (Postfix) with ESMTPS id 4598F3F79C
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  5 Nov 2025 08:16:16 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 6BAE53F79C
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  5 Nov 2025 08:17:08 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=Snx30Fxc;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=Zb+T55Yc;
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=leon@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by tor.source.kernel.org (Postfix) with ESMTP id 9AE31601FF;
-	Wed,  5 Nov 2025 08:16:15 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6264CC4CEF8;
-	Wed,  5 Nov 2025 08:16:14 +0000 (UTC)
+	by tor.source.kernel.org (Postfix) with ESMTP id 0F6C0601FF;
+	Wed,  5 Nov 2025 08:17:08 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EBA46C4CEF8;
+	Wed,  5 Nov 2025 08:17:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1762330575;
-	bh=udr6mKWYM6gsMhi6l+HmrtMsrAYtMveuKFz9q/uMFUA=;
+	s=k20201202; t=1762330627;
+	bh=I+PyMO8FO2EK1xxh53hnQc6PLSI72+wbeSBrnWGdMZ0=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=Snx30FxcGRCf73Ui5tRrgwEAD2Zywqm32IJNeGhhqcKAbrPqP6nqCFttnO2dDSOm4
-	 3qR6wpowVnsvjN0rwPIcLCShDuoZ5jSJWmC7CGsP6fpxjY9i+SYJqWP6IoqWRVLYgf
-	 e4bq4qsJHj5tESPoXkPb0y8ytBDZ651wLfxCDqqJ9jA7XEK+WyuSgYvwy/Vm7Wwx/r
-	 zDkGgwhiDkELDGQgAB6nFzEU8HLSdIepIq4qHMlwOlYKVPQ+8SSA7rk1T7llt7a4zh
-	 qq/vaQ03kHbDoE7Sm1LenUPP2wbTMl4R8vo6i0BKl/7ynTmFOtTjZ+2cneXSjREyQ0
-	 hXQ5dtAYUVrzw==
-Date: Wed, 5 Nov 2025 10:16:09 +0200
+	b=Zb+T55YcpTdB9AIBqOV3Tfmamiogsb9dfH66G5UFmsvyAaTjQwCqltsPnhHyyZY73
+	 nOFOU6WP1ft/xSqaEt/fxOYY34rSlR2Z7kZJZ2rbDDGT2htW8PuKNT7WyTlieODQ2k
+	 plYxGV3055zKvlQOpqNywGZpdXSL7V90rwPlEqkcB+Fr5kSmTRutn309z5RZ99K/Ju
+	 Qy5ihI41f0ozi/Asgk4c77bI9TE2m7zGEd4Zm7hcmxOJ2Ac8BiG00O/RgTJT/OiOJ6
+	 8jlwnQigCl72ejo1WwJNNSX9r2OE+z6ujbXlOVM0BZHNjqTh2DxRuz7XYwq0B/+2mq
+	 08Aom7/pRG6lw==
+Date: Wed, 5 Nov 2025 10:17:04 +0200
 From: Leon Romanovsky <leon@kernel.org>
-To: Alex Mastro <amastro@fb.com>
-Message-ID: <20251105081609.GA16832@unreal>
+To: Nicolin Chen <nicolinc@nvidia.com>
+Message-ID: <20251105081704.GB16832@unreal>
 References: <20251102-dmabuf-vfio-v6-0-d773cff0db9f@nvidia.com>
- <aQkLcAxEn4qmF3c4@devgpu015.cco6.facebook.com>
+ <aQpRz74RurfhZK15@Asurada-Nvidia>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <aQkLcAxEn4qmF3c4@devgpu015.cco6.facebook.com>
+In-Reply-To: <aQpRz74RurfhZK15@Asurada-Nvidia>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 4598F3F79C
+X-Rspamd-Queue-Id: 6BAE53F79C
 X-Spamd-Bar: ---
 X-Spamd-Result: default: False [-3.50 / 15.00];
 	BAYES_HAM(-3.00)[99.99%];
@@ -63,8 +63,8 @@ X-Spamd-Result: default: False [-3.50 / 15.00];
 	RCVD_COUNT_TWO(0.00)[2];
 	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: CUUNL3FBYZKGYHDX477QTBN5PCDKZV75
-X-Message-ID-Hash: CUUNL3FBYZKGYHDX477QTBN5PCDKZV75
+Message-ID-Hash: ZGPGXQCM3TO3DFOSL4ZDMI6U7SLPDJ2V
+X-Message-ID-Hash: ZGPGXQCM3TO3DFOSL4ZDMI6U7SLPDJ2V
 X-MailFrom: leon@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
@@ -74,7 +74,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH v6 00/11] vfio/pci: Allow MMIO regions to be exported through dma-buf
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CUUNL3FBYZKGYHDX477QTBN5PCDKZV75/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZGPGXQCM3TO3DFOSL4ZDMI6U7SLPDJ2V/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -84,7 +84,7 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Mon, Nov 03, 2025 at 12:07:12PM -0800, Alex Mastro wrote:
+On Tue, Nov 04, 2025 at 11:19:43AM -0800, Nicolin Chen wrote:
 > On Sun, Nov 02, 2025 at 10:00:48AM +0200, Leon Romanovsky wrote:
 > > Changelog:
 > > v6:
@@ -101,10 +101,18 @@ On Mon, Nov 03, 2025 at 12:07:12PM -0800, Alex Mastro wrote:
 > >  * Moved vfio_pci_dma_buf_move() in err_undo block.
 > >  * Added nvgrace patch.
 > 
-> Thanks Leon. Attaching a toy program which sanity tests the dma-buf export UAPI
-> by feeding the allocated dma-buf into an dma-buf importer (libibverbs + CX-7).
->  
-> Tested-by: Alex Mastro <amastro@fb.com>
+> I have verified this v6 using Jason's iommufd dmabuf branch:
+> https://github.com/jgunthorpe/linux/commits/iommufd_dmabuf/
+> 
+> by drafting a QEMU patch on top of Shameer's vSMMU v5 series:
+> https://github.com/nicolinc/qemu/commits/wip/iommufd_dmabuf/
+> 
+> with that, I see GPU BAR memory be correctly fetched in the QEMU:
+> vfio_region_dmabuf Device 0009:01:00.0, region "0009:01:00.0 BAR 0", offset: 0x0, size: 0x1000000
+> vfio_region_dmabuf Device 0009:01:00.0, region "0009:01:00.0 BAR 2", offset: 0x0, size: 0x44f00000
+> vfio_region_dmabuf Device 0009:01:00.0, region "0009:01:00.0 BAR 4", offset: 0x0, size: 0x17a0000000
+> 
+> Tested-by: Nicolin Chen <nicolinc@nvidia.com>
 
 Thanks a lot.
 _______________________________________________
