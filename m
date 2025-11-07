@@ -2,182 +2,81 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 74EE8C40F25
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 07 Nov 2025 17:51:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4B488C415D3
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 07 Nov 2025 19:59:46 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 420D23F7FA
-	for <lists+linaro-mm-sig@lfdr.de>; Fri,  7 Nov 2025 16:51:15 +0000 (UTC)
-Received: from CH5PR02CU005.outbound.protection.outlook.com (mail-northcentralusazon11012036.outbound.protection.outlook.com [40.107.200.36])
-	by lists.linaro.org (Postfix) with ESMTPS id 38AA03F7DE
-	for <linaro-mm-sig@lists.linaro.org>; Fri,  7 Nov 2025 16:49:49 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 64BC53F772
+	for <lists+linaro-mm-sig@lfdr.de>; Fri,  7 Nov 2025 18:59:45 +0000 (UTC)
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+	by lists.linaro.org (Postfix) with ESMTPS id 2437D3F74C
+	for <linaro-mm-sig@lists.linaro.org>; Fri,  7 Nov 2025 18:58:45 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=Nvidia.com header.s=selector2 header.b="eF/RGHgm";
-	dmarc=pass (policy=reject) header.from=nvidia.com;
-	arc=pass ("microsoft.com:s=arcselector10001:i=1");
-	spf=pass (lists.linaro.org: domain of jgg@nvidia.com designates 40.107.200.36 as permitted sender) smtp.mailfrom=jgg@nvidia.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Jkf9WAPCBHCyqzKyornRk42+JvJypwoetsWyQI8dVVyS610ze6opRVQTD4OvLcM8WB/3gXsqrvdJwuSsNNIEOx9SbUhvh4Avenn5Bru9ohmcql4kGOSx5LTaiKkHUCmCV2/Yux4N0n1ZnHTndRzviDh+TFwVqIJsIUK3NsabjSnC9OqvdTlkviBTMNnRv0ew3sJCSYkkG7KNy8hs0JEu4l3jYvT+X4D8MZZ2pI4tFcMM4S9By1V5Nnzb1mqE0omQnauW1rEsoltVEgD2Z3w6KhvmGK7zUpedKaLphKXz+DcCvp6Yruzi4U7n5l6mvMjQsd9zfucT0KB4ZhYbS98YCQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=y6kHMhFZ64eoQJry/SBondQWArXNkmWIlJ7EMatsq4g=;
- b=NsG943TI5FaBIi5T7pXHWqjRSgFKBkP7va8+HXyXZiRHrwuevBek1BEnbjsrSLZp35++mTyHobU1hYhgobOmyA+ZnenIbIHRmZDw5iXRHwKIeo1Cf6t69feOt1x5YM6TpFs3ssNuw5RpWNthjFfxnpSLRzYJWCD/LyWnnZSpLEEdUqouMoaHdy56vmZRF1tuw06S2XwFzKLf+jNVAc/pM43e7svtbC8omt09h8k/20yFpkdbmtsjTSTwpvmvUMF5K3WR62oc8FMiSaK9/vzsxwuDV3cjW9LyZT1bRd02ZG5+qfo0UQL9xO656OHHGAyk3BfSrdHwyJ2DtP2l65OxmA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=y6kHMhFZ64eoQJry/SBondQWArXNkmWIlJ7EMatsq4g=;
- b=eF/RGHgmusYZIi/7wyZ3htuZhLB4vLalKT8Kp5upQ2eQgnyEIlsPGz+ARPscJbt7kKTHfe5CiWaS/kBAEFzPUYIzRuEuBkWXmcGdanQZCOHvJz/ErKfFmMtEwLGX7jUJ7S2YDj0bOTzKGVE3ZM4R4gO8EA3ejfIWEoj+G9pRGSV4olejb7FsGi9FlZuffFPWpGisKoAD6nc/V+3DUX1qpUbrKemCNblLFhrpf0Yom+Bw8eU4ldNPADW1NE4mTZusueCJNPSm3u3wBviO/WY4QGT97uAZIT8FmySXxg0rM2ste8XKfvWeo+XCibAKmdAOsgu3QTSVR2rhEIdUhsT3CA==
-Received: from MN2PR12MB3613.namprd12.prod.outlook.com (2603:10b6:208:c1::17)
- by BY5PR12MB4196.namprd12.prod.outlook.com (2603:10b6:a03:205::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.12; Fri, 7 Nov
- 2025 16:49:45 +0000
-Received: from MN2PR12MB3613.namprd12.prod.outlook.com
- ([fe80::1b3b:64f5:9211:608b]) by MN2PR12MB3613.namprd12.prod.outlook.com
- ([fe80::1b3b:64f5:9211:608b%4]) with mapi id 15.20.9298.006; Fri, 7 Nov 2025
- 16:49:45 +0000
-From: Jason Gunthorpe <jgg@nvidia.com>
-To: Alex Williamson <alex@shazbot.org>,
-	=?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
-	dri-devel@lists.freedesktop.org,
-	iommu@lists.linux.dev,
-	Joerg Roedel <joro@8bytes.org>,
-	Kevin Tian <kevin.tian@intel.com>,
-	kvm@vger.kernel.org,
-	linaro-mm-sig@lists.linaro.org,
-	linux-kselftest@vger.kernel.org,
-	linux-media@vger.kernel.org,
-	Robin Murphy <robin.murphy@arm.com>,
-	Shuah Khan <shuah@kernel.org>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	Will Deacon <will@kernel.org>
-Date: Fri,  7 Nov 2025 12:49:41 -0400
-Message-ID: <9-v1-af84a3ab44f5+f68-iommufd_buf_jgg@nvidia.com>
-In-Reply-To: <0-v1-af84a3ab44f5+f68-iommufd_buf_jgg@nvidia.com>
-References: 
-X-ClientProxiedBy: BLAPR03CA0131.namprd03.prod.outlook.com
- (2603:10b6:208:32e::16) To MN2PR12MB3613.namprd12.prod.outlook.com
- (2603:10b6:208:c1::17)
+	dkim=pass header.d=infradead.org header.s=bombadil.20210309 header.b=H59v75Ni;
+	dmarc=pass (policy=none) header.from=infradead.org;
+	spf=none (lists.linaro.org: domain of rdunlap@infradead.org has no SPF policy when checking 198.137.202.133) smtp.mailfrom=rdunlap@infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
+	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
+	bh=PjiF0FDj1ggdA8+srznADWIujFetT2w1WcC08yNm+xE=; b=H59v75NiiIx555adWgSui938BX
+	Yc3i1CYEaGF7O6kQ1NqaqRVT/Zz7Cswv0/fmOzsuOsqzoIRagasqeUrHrhrdChqEbZeXwaG25NO+S
+	5wwiT1Bk++lMCO2rTIpSkO6LuvNwiSk1/lj7Setie4/hO5vXucwRTkyP4yelMuEJS4S3/t3xpANoZ
+	fMWvRG+69LUGWzme6PVDco0ZFCeM7vfUpGeksDZI3z5FpBYHlU5+MqvBB/XCUz0tSEk1fDzrRkUZ2
+	YHwjo2XWY68XJ4S/UyDHNpcYYoIRz6GCK8IoBHNkuYm6Mq2NkrCY2ePjJ4l6ltSL9O9XJUZxKJPhW
+	/Noao/Cg==;
+Received: from [50.53.43.113] (helo=[192.168.254.34])
+	by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
+	id 1vHRfI-00000000bYE-3FZm;
+	Fri, 07 Nov 2025 18:58:28 +0000
+Message-ID: <0c265a9b-fdc5-40d7-845f-30910f1ac6ea@infradead.org>
+Date: Fri, 7 Nov 2025 10:58:27 -0800
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MN2PR12MB3613:EE_|BY5PR12MB4196:EE_
-X-MS-Office365-Filtering-Correlation-Id: 591fe821-0644-4787-83b5-08de1e1da73a
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|366016|7416014|376014|921020;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?Ap3l9p9xXAoLUvL0pi6FAtWQ+rb6U01qRKWiaIXO5iorUGKszNxr2TzefMT9?=
- =?us-ascii?Q?b+6tIsCaHfprcqSjD6sVPBf1GxJg0v62PY9GN1HBl0yIqXQ3xkePV6uXxNy4?=
- =?us-ascii?Q?QdGCl6YYO3kN5ybmpdug930dfU0vjlRaTus5HW7iUYSvo0Q2jgGx605An3YI?=
- =?us-ascii?Q?T36RVGz+QkRxj514N8Mf0HngeMHhdlB+uE0vowOpRuNDa1u4fOciNojgap2m?=
- =?us-ascii?Q?2eBiUbFYbCvwXBToxsT0J910koiz7NR8qGvkS3NwYLZ9cNsQdkjzDKdF5qwg?=
- =?us-ascii?Q?88d0gqNkdNcDyFO6InyH6F+DvEmkNzKP6OXg9TwQyZcXela4B11WPsfzJTtn?=
- =?us-ascii?Q?z1UJEAovy2DGPpAMHCtjES4a0FRfEw80cNHmc/o6hgTRxdNjbrNcZ9qfYnSb?=
- =?us-ascii?Q?G84ExHD/DO5jzfQ46S12yMr+BBPq5Hea0N1THd9qSFDm3ABC8ZL+sYnOEuML?=
- =?us-ascii?Q?0Mmv2hqZk9RATLe9yMJ/8HkojXarpN1B0DOqBG6Lr0+0tJ+prTUYblrzEbfW?=
- =?us-ascii?Q?gy9bkAfGfGds9Tr1BLpXrM4QyrTTuWl1ZaPrYV8R6vMeHvwFcRlrXRdgmH/D?=
- =?us-ascii?Q?F8GXn/1pC92BUhwUAFwyt79eljKsZN4NHq5pKM3hdvMkwE4lZBsVb+LfYQAg?=
- =?us-ascii?Q?1EExTMnoVAc/MXbIwhVKQKADXj1jICNZ1NHA7RYoyiPtMExEDOBw2XXtavfX?=
- =?us-ascii?Q?rhwLWXDYY6wervpdfV0V3fcoj8D5rg4qcR3Bo+Q5DxVwgTMOe+jPyuIUMUp1?=
- =?us-ascii?Q?LNC4elcvEG9cfEKfJ/Xe/O/8Jwtqv03FkjHmTMfvK/s2fVQHmpoWOoQe+Vfr?=
- =?us-ascii?Q?VdlcbbRtqM8LV7zUDHDL8EpQNesQSYIofXauRSCWdgCAoyWGKItWPT7eiQFm?=
- =?us-ascii?Q?p81a0bu5Fq1HG4bOYNiqg8SeCVntByvusNFTJbFovof7JCYUn8nXpAxB51rT?=
- =?us-ascii?Q?p5LdFuqn3WdwRHt80vdzWFiKsXvNDe3STV6FTLpqXQUie4Y+RGuNlusENYVD?=
- =?us-ascii?Q?61TW1EZwJOqHx1pPPV5gJMBo5mJVi3hXFgGsXe9FI/sgV7vaKBfnSatbP1G8?=
- =?us-ascii?Q?NvPcOaGC6NLLiwv6BKpe9IldgxFgV0yxQCwCDcV+R7ZLrFqLk+Wg/1JCHXje?=
- =?us-ascii?Q?sM7nnsbrN3o4N0lL/pGgNsFTmi7Vr3rdXbClkv1VyMCdaTgzUfjy1mY+gL2p?=
- =?us-ascii?Q?/1I5WVqRJH0XOmnaNKawKuuEyizteXHMY9LDmHAZRhWltRiuqHgJMpGxiaF9?=
- =?us-ascii?Q?FIHV0ZNH+vQbCoNjKKZyxIFp9znO3Ca6j/GS6JRdLWbQuYlX/hDdjdNlzyUx?=
- =?us-ascii?Q?JIYpSkyK4Of7lKCEdqfPB5Xwi82av3ONBmPLsDP0zRWA3n+2wsZnZ53eH2/X?=
- =?us-ascii?Q?ZYJkUS4zYXOdDHFsR6vGHaXq1hzOA+zw2hnft8atnOf/Wsixyo9bGwPNiUOA?=
- =?us-ascii?Q?C1KzcAbDZrLJlYhAp4k0pVsJYz/TNYURhpu2BJg15VqM2UK1wyxDLzCI2Vmn?=
- =?us-ascii?Q?+6JNGhuRSmxlKLo=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MN2PR12MB3613.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(7416014)(376014)(921020);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?SYyEW949PD0quStXSPqamf4MHnFJJ+MPWH1Gr49Y/kcNxVbX5cyOJZUmkYEH?=
- =?us-ascii?Q?yywV610wOo5IXSPsW7AurV/9xu5MUuqTSDfkmJpBRzbC15eb/c+fOboZjVB6?=
- =?us-ascii?Q?ZeqlUMx4PTIsC4WzSZktC5Q0aeXyMZv+QRZT7SbrcNID8dXXu+qF2+kYHwDD?=
- =?us-ascii?Q?1oOwE76NwUB2GsoJleJBdHpR58ry9mtM44//17YtebIky8iVili6nLBeB1l/?=
- =?us-ascii?Q?IZLyV0mAi8tWPri8Q6fEz0IiNhuZl2qPDzZaIyqGRA9XHCarwlah8Ng9mwIX?=
- =?us-ascii?Q?2x9xluDn+lI5FXuoVKmgzNnot82W4290eoXQahIunGXbBKml1pkIULcr1UxV?=
- =?us-ascii?Q?L1ESLEp7Akly5nOobIHTMi6iEloHeqbPQes+qoNZcFva52wpGGzBJNaHJTZI?=
- =?us-ascii?Q?rFZK7zy1dQJHvIFcCmtrx1plboDI2u5Y/ISxnBtvS+3SvcKwTUW7g9CqaNjx?=
- =?us-ascii?Q?hSG2PAED5RCZJ/olQkJzWt5SR6JutED6Yz+oNcWZrMjIDcEMi4fR3M5pUKam?=
- =?us-ascii?Q?ntgAdv6FNkkUw98seDU2SSNHBLoiTbyDQWmk6vK4I1Bv/DmVAfXZ8hQmOLJz?=
- =?us-ascii?Q?jnycczJkWikU+ThwvOq0m9xvzMQZqOJtT20k6QSyVvRpL4hxbZXOaBflb+cV?=
- =?us-ascii?Q?D6udgMEbetTVwHJEyJTxS3HaBaTlgvG/OSZ0U+itd4/3YNk8iXa2/N0elu29?=
- =?us-ascii?Q?Vjsd3lyAeVAyc6zpO1ECxRysfSPIQZ6s2qa/ZsTIPCBBN94uUeCiL81QRxzz?=
- =?us-ascii?Q?e/ELVPzCJDVvSNyBJ6yglkiVYEJQ4BzkdMIWIr18Jas6IV8uzQ+OgOGck1+b?=
- =?us-ascii?Q?4jWYOk77tnBjtWVINSdHbKmYUZ39pk+IOQM+fg6NX0RIjYVbo1yDh8nyw45f?=
- =?us-ascii?Q?UKho1jRUoGH7kKusJhQy8WO3rr93EN/faVA0MfvFjsr/kp3njRB36UHJBV+r?=
- =?us-ascii?Q?t/Bh9QA3D27dTEl/dBT0MdqldD+o2qx43RAybG+TyAjnTMX7EbLm5BSti8FD?=
- =?us-ascii?Q?IZiIkHVwTXjjl7JZcE7es0lNbrCmku0qFgjz4mLpyurwNCopodMOrNiDdXVt?=
- =?us-ascii?Q?ZHa1KyJhVVIGgdjzmx2RnjDDlmS/3g5nA8dCxUodLL5OLcuOLpjLZb0KQ6J0?=
- =?us-ascii?Q?UsVSskRydg1cdTBuF5qWCUE8HYr16uaGuRla1qgX5b5xsO5lpx2e32/gO37n?=
- =?us-ascii?Q?obDJc0UaZujRHYgiwEvIdtLutGIQxrGYl4gJHjMrvD+fKgSp/InVUPmgveaB?=
- =?us-ascii?Q?RszVyQoINVxV9M2RvkiDEqBj+n4ub14aL/YG6CQx95ldZ39hKuE5r44Hz0bl?=
- =?us-ascii?Q?T6QQTNar3xgpo03HoTCzpu9JR5lULOESAC2NBO9LYFjOOa+tfqRsESRn4Ogf?=
- =?us-ascii?Q?QTmmW6KWeEaVgoqADQieUPdVnP3LEdT0BSbAz/If86x1+nWPcH1pvjutvHe3?=
- =?us-ascii?Q?TsH0V4Kq9muORwweefOr1iZLveDL1bLphVZjcBVlRK5iihYoIzi2uRWzDcOh?=
- =?us-ascii?Q?4r80tLZKIalFgfxIUNiU8+Mv0mqs+SqReyONKyKxOD72m7nTAOg6KON/9xCR?=
- =?us-ascii?Q?74q8i3d4r7Mu7rJJLj0=3D?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 591fe821-0644-4787-83b5-08de1e1da73a
-X-MS-Exchange-CrossTenant-AuthSource: MN2PR12MB3613.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Nov 2025 16:49:44.3241
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 53jLu9YZ3KAkeTGbxI4vPYEr+li6GDuyPKc2nUG8hz//AvJr7cLNxI+D7RXPNIGs
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB4196
+User-Agent: Mozilla Thunderbird
+To: Leon Romanovsky <leon@kernel.org>
+References: <20251106-dmabuf-vfio-v7-0-2503bf390699@nvidia.com>
+ <20251106-dmabuf-vfio-v7-5-2503bf390699@nvidia.com>
+ <135df7eb-9291-428b-9c86-d58c2e19e052@infradead.org>
+ <20251107160120.GD15456@unreal>
+Content-Language: en-US
+From: Randy Dunlap <rdunlap@infradead.org>
+In-Reply-To: <20251107160120.GD15456@unreal>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 38AA03F7DE
+X-Rspamd-Queue-Id: 2437D3F74C
 X-Spamd-Bar: ---
-X-Spamd-Result: default: False [-3.50 / 15.00];
+X-Spamd-Result: default: False [-3.60 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	MID_CONTAINS_FROM(1.00)[];
-	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector10001:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
-	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
+	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
+	ONCE_RECEIVED(0.20)[];
 	MIME_GOOD(-0.10)[text/plain];
-	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	ARC_NA(0.00)[];
+	ASN(0.00)[asn:7247, ipnet:198.137.202.0/24, country:US];
+	RCVD_COUNT_ONE(0.00)[1];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[33];
 	MIME_TRACE(0.00)[0:+];
-	MISSING_XM_UA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.200.36:from];
-	FROM_EQ_ENVFROM(0.00)[];
-	DWL_DNSWL_BLOCKED(0.00)[Nvidia.com:dkim];
-	RCVD_TLS_LAST(0.00)[];
-	DNSWL_BLOCKED(0.00)[40.107.200.36:from,2603:10b6:208:c1::17:received];
-	RCVD_COUNT_TWO(0.00)[2];
-	URIBL_BLOCKED(0.00)[Nvidia.com:dkim,mail-northcentralusazon11012036.outbound.protection.outlook.com:rdns,nvidia.com:email,nvidia.com:mid];
+	RCVD_TLS_ALL(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	TO_DN_SOME(0.00)[];
-	DKIM_TRACE(0.00)[Nvidia.com:+]
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	R_SPF_NA(0.00)[no SPF record];
+	URIBL_BLOCKED(0.00)[nvidia.com:email,bombadil.infradead.org:rdns,bombadil.infradead.org:helo];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	DKIM_TRACE(0.00)[infradead.org:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: E5KG3EQMUGYTQPMXYZ2NOPM6TGZLSOUV
-X-Message-ID-Hash: E5KG3EQMUGYTQPMXYZ2NOPM6TGZLSOUV
-X-MailFrom: jgg@nvidia.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Krishnakant Jaju <kjaju@nvidia.com>, Leon Romanovsky <leon@kernel.org>, Matt Ochs <mochs@nvidia.com>, Nicolin Chen <nicolinc@nvidia.com>, patches@lists.linux.dev, Simona Vetter <simona.vetter@ffwll.ch>, Vivek Kasireddy <vivek.kasireddy@intel.com>, Xu Yilun <yilun.xu@linux.intel.com>
+Message-ID-Hash: QB4ZRNBWV3FNIH5MUYY2ZCOHKFVLL7WX
+X-Message-ID-Hash: QB4ZRNBWV3FNIH5MUYY2ZCOHKFVLL7WX
+X-MailFrom: rdunlap@infradead.org
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Bjorn Helgaas <bhelgaas@google.com>, Logan Gunthorpe <logang@deltatee.com>, Jens Axboe <axboe@kernel.dk>, Robin Murphy <robin.murphy@arm.com>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Jason Gunthorpe <jgg@ziepe.ca>, Andrew Morton <akpm@linux-foundation.org>, Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Kees Cook <kees@kernel.org>, "Gustavo A. R. Silva" <gustavoars@kernel.org>, Ankit Agrawal <ankita@nvidia.com>, Yishai Hadas <yishaih@nvidia.com>, Shameer Kolothum <skolothumtho@nvidia.com>, Kevin Tian <kevin.tian@intel.com>, Alex Williamson <alex@shazbot.org>, Krishnakant Jaju <kjaju@nvidia.com>, Matt Ochs <mochs@nvidia.com>, linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org, linux-block@vger.kernel.org, iommu@lists.linux.dev, linux-mm@kvack.org, linux-doc@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, 
+ kvm@vger.kernel.org, linux-hardening@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 9/9] iommufd/selftest: Add some tests for the dmabuf flow
+Subject: [Linaro-mm-sig] Re: [PATCH v7 05/11] PCI/P2PDMA: Document DMABUF model
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/E5KG3EQMUGYTQPMXYZ2NOPM6TGZLSOUV/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QB4ZRNBWV3FNIH5MUYY2ZCOHKFVLL7WX/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -187,381 +86,126 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Basic tests of establishing a dmabuf and revoking it. The selftest kernel
-side provides a basic small dmabuf for this testing.
+	
 
-Signed-off-by: Jason Gunthorpe <jgg@nvidia.com>
----
- drivers/iommu/iommufd/iommufd_private.h       |  10 ++
- drivers/iommu/iommufd/iommufd_test.h          |  10 ++
- drivers/iommu/iommufd/pages.c                 |   4 +
- drivers/iommu/iommufd/selftest.c              | 142 ++++++++++++++++++
- tools/testing/selftests/iommu/iommufd.c       |  43 ++++++
- tools/testing/selftests/iommu/iommufd_utils.h |  44 ++++++
- 6 files changed, 253 insertions(+)
+On 11/7/25 8:01 AM, Leon Romanovsky wrote:
+> On Thu, Nov 06, 2025 at 10:15:07PM -0800, Randy Dunlap wrote:
+>>
+>>
+>> On 11/6/25 6:16 AM, Leon Romanovsky wrote:
+>>> From: Jason Gunthorpe <jgg@nvidia.com>
+>>>
+>>> Reflect latest changes in p2p implementation to support DMABUF lifecycle.
+>>>
+>>> Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
+>>> Signed-off-by: Jason Gunthorpe <jgg@nvidia.com>
+>>> ---
+>>>  Documentation/driver-api/pci/p2pdma.rst | 95 +++++++++++++++++++++++++--------
+>>>  1 file changed, 72 insertions(+), 23 deletions(-)
+>>>
+>>> diff --git a/Documentation/driver-api/pci/p2pdma.rst b/Documentation/driver-api/pci/p2pdma.rst
+>>> index d0b241628cf1..69adea45f73e 100644
+>>> --- a/Documentation/driver-api/pci/p2pdma.rst
+>>> +++ b/Documentation/driver-api/pci/p2pdma.rst
+>>> @@ -9,22 +9,47 @@ between two devices on the bus. This type of transaction is henceforth
+>>>  called Peer-to-Peer (or P2P). However, there are a number of issues that
+>>>  make P2P transactions tricky to do in a perfectly safe way.
+>>>  
+>>> -One of the biggest issues is that PCI doesn't require forwarding
+>>> -transactions between hierarchy domains, and in PCIe, each Root Port
+>>> -defines a separate hierarchy domain. To make things worse, there is no
+>>> -simple way to determine if a given Root Complex supports this or not.
+>>> -(See PCIe r4.0, sec 1.3.1). Therefore, as of this writing, the kernel
+>>> -only supports doing P2P when the endpoints involved are all behind the
+>>> -same PCI bridge, as such devices are all in the same PCI hierarchy
+>>> -domain, and the spec guarantees that all transactions within the
+>>> -hierarchy will be routable, but it does not require routing
+>>> -between hierarchies.
+>>> -
+>>> -The second issue is that to make use of existing interfaces in Linux,
+>>> -memory that is used for P2P transactions needs to be backed by struct
+>>> -pages. However, PCI BARs are not typically cache coherent so there are
+>>> -a few corner case gotchas with these pages so developers need to
+>>> -be careful about what they do with them.
+>>> +For PCIe the routing of TLPs is well defined up until they reach a host bridge
+>>
+>> Define what TLP means?
+> 
+> In PCIe "world", TLP is very well-known and well-defined acronym, which
+> means Transaction Layer Packet.
 
-diff --git a/drivers/iommu/iommufd/iommufd_private.h b/drivers/iommu/iommufd/iommufd_private.h
-index a2786fee7603f5..ef2db82e3d7bf5 100644
---- a/drivers/iommu/iommufd/iommufd_private.h
-+++ b/drivers/iommu/iommufd/iommufd_private.h
-@@ -19,6 +19,8 @@ struct iommu_domain;
- struct iommu_group;
- struct iommu_option;
- struct iommufd_device;
-+struct dma_buf_attachment;
-+struct dma_buf_phys_vec;
- 
- struct iommufd_sw_msi_map {
- 	struct list_head sw_msi_item;
-@@ -713,6 +715,8 @@ bool iommufd_should_fail(void);
- int __init iommufd_test_init(void);
- void iommufd_test_exit(void);
- bool iommufd_selftest_is_mock_dev(struct device *dev);
-+int iommufd_test_dma_buf_iommufd_map(struct dma_buf_attachment *attachment,
-+				     struct dma_buf_phys_vec *phys);
- #else
- static inline void iommufd_test_syz_conv_iova_id(struct iommufd_ucmd *ucmd,
- 						 unsigned int ioas_id,
-@@ -734,5 +738,11 @@ static inline bool iommufd_selftest_is_mock_dev(struct device *dev)
- {
- 	return false;
- }
-+static inline int
-+iommufd_test_dma_buf_iommufd_map(struct dma_buf_attachment *attachment,
-+				 struct dma_buf_phys_vec *phys)
-+{
-+	return -EOPNOTSUPP;
-+}
- #endif
- #endif
-diff --git a/drivers/iommu/iommufd/iommufd_test.h b/drivers/iommu/iommufd/iommufd_test.h
-index 8fc618b2bcf967..9166c39eb0c8b2 100644
---- a/drivers/iommu/iommufd/iommufd_test.h
-+++ b/drivers/iommu/iommufd/iommufd_test.h
-@@ -29,6 +29,8 @@ enum {
- 	IOMMU_TEST_OP_PASID_REPLACE,
- 	IOMMU_TEST_OP_PASID_DETACH,
- 	IOMMU_TEST_OP_PASID_CHECK_HWPT,
-+	IOMMU_TEST_OP_DMABUF_GET,
-+	IOMMU_TEST_OP_DMABUF_REVOKE,
- };
- 
- enum {
-@@ -176,6 +178,14 @@ struct iommu_test_cmd {
- 			__u32 hwpt_id;
- 			/* @id is stdev_id */
- 		} pasid_check;
-+		struct {
-+			__u32 length;
-+			__u32 open_flags;
-+		} dmabuf_get;
-+		struct {
-+			__s32 dmabuf_fd;
-+			__u32 revoked;
-+		} dmabuf_revoke;
- 	};
- 	__u32 last;
- };
-diff --git a/drivers/iommu/iommufd/pages.c b/drivers/iommu/iommufd/pages.c
-index 410ddce4e99d8f..01c55e6519ee84 100644
---- a/drivers/iommu/iommufd/pages.c
-+++ b/drivers/iommu/iommufd/pages.c
-@@ -1464,6 +1464,10 @@ sym_vfio_pci_dma_buf_iommufd_map(struct dma_buf_attachment *attachment,
- 	typeof(&vfio_pci_dma_buf_iommufd_map) fn;
- 	int rc;
- 
-+	rc = iommufd_test_dma_buf_iommufd_map(attachment, phys);
-+	if (rc != -EOPNOTSUPP)
-+		return rc;
-+
- 	if (!IS_ENABLED(CONFIG_VFIO_PCI_DMABUF))
- 		return -EOPNOTSUPP;
- 
-diff --git a/drivers/iommu/iommufd/selftest.c b/drivers/iommu/iommufd/selftest.c
-index de178827a078a9..ccd90cf73a73d6 100644
---- a/drivers/iommu/iommufd/selftest.c
-+++ b/drivers/iommu/iommufd/selftest.c
-@@ -5,6 +5,8 @@
-  */
- #include <linux/anon_inodes.h>
- #include <linux/debugfs.h>
-+#include <linux/dma-buf.h>
-+#include <linux/dma-resv.h>
- #include <linux/fault-inject.h>
- #include <linux/file.h>
- #include <linux/iommu.h>
-@@ -2031,6 +2033,139 @@ void iommufd_selftest_destroy(struct iommufd_object *obj)
- 	}
- }
- 
-+struct iommufd_test_dma_buf {
-+	void *memory;
-+	size_t length;
-+	bool revoked;
-+};
-+
-+static int iommufd_test_dma_buf_attach(struct dma_buf *dmabuf,
-+				       struct dma_buf_attachment *attachment)
-+{
-+	return 0;
-+}
-+
-+static void iommufd_test_dma_buf_detach(struct dma_buf *dmabuf,
-+					struct dma_buf_attachment *attachment)
-+{
-+}
-+
-+static struct sg_table *
-+iommufd_test_dma_buf_map(struct dma_buf_attachment *attachment,
-+			 enum dma_data_direction dir)
-+{
-+	return ERR_PTR(-EOPNOTSUPP);
-+}
-+
-+static void iommufd_test_dma_buf_unmap(struct dma_buf_attachment *attachment,
-+				       struct sg_table *sgt,
-+				       enum dma_data_direction dir)
-+{
-+}
-+
-+static void iommufd_test_dma_buf_release(struct dma_buf *dmabuf)
-+{
-+	struct iommufd_test_dma_buf *priv = dmabuf->priv;
-+
-+	kfree(priv);
-+}
-+
-+static const struct dma_buf_ops iommufd_test_dmabuf_ops = {
-+	.attach = iommufd_test_dma_buf_attach,
-+	.detach = iommufd_test_dma_buf_detach,
-+	.map_dma_buf = iommufd_test_dma_buf_map,
-+	.release = iommufd_test_dma_buf_release,
-+	.unmap_dma_buf = iommufd_test_dma_buf_unmap,
-+};
-+
-+int iommufd_test_dma_buf_iommufd_map(struct dma_buf_attachment *attachment,
-+				     struct dma_buf_phys_vec *phys)
-+{
-+	struct iommufd_test_dma_buf *priv = attachment->dmabuf->priv;
-+
-+	dma_resv_assert_held(attachment->dmabuf->resv);
-+
-+	if (attachment->dmabuf->ops != &iommufd_test_dmabuf_ops)
-+		return -EOPNOTSUPP;
-+
-+	if (priv->revoked)
-+		return -ENODEV;
-+
-+	phys->paddr = virt_to_phys(priv->memory);
-+	phys->len = priv->length;
-+	return 0;
-+}
-+
-+static int iommufd_test_dmabuf_get(struct iommufd_ucmd *ucmd,
-+				   unsigned int open_flags,
-+				   size_t len)
-+{
-+	DEFINE_DMA_BUF_EXPORT_INFO(exp_info);
-+	struct iommufd_test_dma_buf *priv;
-+	struct dma_buf *dmabuf;
-+	int rc;
-+
-+	len = ALIGN(len, PAGE_SIZE);
-+	if (len == 0 || len > PAGE_SIZE * 512)
-+		return -EINVAL;
-+
-+	priv = kzalloc(sizeof(*priv), GFP_KERNEL);
-+	if (!priv)
-+		return -ENOMEM;
-+
-+	priv->length = len;
-+	priv->memory = kzalloc(len, GFP_KERNEL);
-+	if (!priv->memory) {
-+		rc = -ENOMEM;
-+		goto err_free;
-+	}
-+
-+	exp_info.ops = &iommufd_test_dmabuf_ops;
-+	exp_info.size = len;
-+	exp_info.flags = open_flags;
-+	exp_info.priv = priv;
-+
-+	dmabuf = dma_buf_export(&exp_info);
-+	if (IS_ERR(dmabuf)) {
-+		rc = PTR_ERR(dmabuf);
-+		goto err_free;
-+	}
-+
-+	return dma_buf_fd(dmabuf, open_flags);
-+
-+err_free:
-+	kfree(priv->memory);
-+	kfree(priv);
-+	return rc;
-+}
-+
-+static int iommufd_test_dmabuf_revoke(struct iommufd_ucmd *ucmd, int fd,
-+				      bool revoked)
-+{
-+	struct iommufd_test_dma_buf *priv;
-+	struct dma_buf *dmabuf;
-+	int rc = 0;
-+
-+	dmabuf = dma_buf_get(fd);
-+	if (IS_ERR(dmabuf))
-+		return PTR_ERR(dmabuf);
-+
-+	if (dmabuf->ops != &iommufd_test_dmabuf_ops) {
-+		rc = -EOPNOTSUPP;
-+		goto err_put;
-+	}
-+
-+	priv = dmabuf->priv;
-+	dma_resv_lock(dmabuf->resv, NULL);
-+	priv->revoked = revoked;
-+	dma_buf_move_notify(dmabuf);
-+	dma_resv_unlock(dmabuf->resv);
-+
-+err_put:
-+	dma_buf_put(dmabuf);
-+	return rc;
-+}
-+
- int iommufd_test(struct iommufd_ucmd *ucmd)
- {
- 	struct iommu_test_cmd *cmd = ucmd->cmd;
-@@ -2109,6 +2244,13 @@ int iommufd_test(struct iommufd_ucmd *ucmd)
- 		return iommufd_test_pasid_detach(ucmd, cmd);
- 	case IOMMU_TEST_OP_PASID_CHECK_HWPT:
- 		return iommufd_test_pasid_check_hwpt(ucmd, cmd);
-+	case IOMMU_TEST_OP_DMABUF_GET:
-+		return iommufd_test_dmabuf_get(ucmd, cmd->dmabuf_get.open_flags,
-+					       cmd->dmabuf_get.length);
-+	case IOMMU_TEST_OP_DMABUF_REVOKE:
-+		return iommufd_test_dmabuf_revoke(ucmd,
-+						  cmd->dmabuf_revoke.dmabuf_fd,
-+						  cmd->dmabuf_revoke.revoked);
- 	default:
- 		return -EOPNOTSUPP;
- 	}
-diff --git a/tools/testing/selftests/iommu/iommufd.c b/tools/testing/selftests/iommu/iommufd.c
-index 3eebf5e3b974f4..de348d6412791b 100644
---- a/tools/testing/selftests/iommu/iommufd.c
-+++ b/tools/testing/selftests/iommu/iommufd.c
-@@ -1574,6 +1574,49 @@ TEST_F(iommufd_ioas, copy_sweep)
- 	test_ioctl_destroy(dst_ioas_id);
- }
- 
-+TEST_F(iommufd_ioas, dmabuf_simple)
-+{
-+	size_t buf_size = PAGE_SIZE*4;
-+	__u64 iova;
-+	int dfd;
-+
-+	test_cmd_get_dmabuf(buf_size, &dfd);
-+	test_err_ioctl_ioas_map_file(EINVAL, dfd, 0, 0, &iova);
-+	test_err_ioctl_ioas_map_file(EINVAL, dfd, buf_size, buf_size, &iova);
-+	test_err_ioctl_ioas_map_file(EINVAL, dfd, 0, buf_size + 1, &iova);
-+	test_ioctl_ioas_map_file(dfd, 0, buf_size, &iova);
-+
-+	close(dfd);
-+}
-+
-+TEST_F(iommufd_ioas, dmabuf_revoke)
-+{
-+	size_t buf_size = PAGE_SIZE*4;
-+	__u32 hwpt_id;
-+	__u64 iova;
-+	__u64 iova2;
-+	int dfd;
-+
-+	test_cmd_get_dmabuf(buf_size, &dfd);
-+	test_ioctl_ioas_map_file(dfd, 0, buf_size, &iova);
-+	test_cmd_revoke_dmabuf(dfd, true);
-+
-+	if (variant->mock_domains)
-+		test_cmd_hwpt_alloc(self->device_id, self->ioas_id, 0,
-+				    &hwpt_id);
-+
-+	test_err_ioctl_ioas_map_file(ENODEV, dfd, 0, buf_size, &iova2);
-+
-+	test_cmd_revoke_dmabuf(dfd, false);
-+	test_ioctl_ioas_map_file(dfd, 0, buf_size, &iova2);
-+
-+	/* Restore the iova back */
-+	test_ioctl_ioas_unmap(iova, buf_size);
-+	test_ioctl_ioas_map_fixed_file(dfd, 0, buf_size, iova);
-+
-+	close(dfd);
-+}
-+
- FIXTURE(iommufd_mock_domain)
- {
- 	int fd;
-diff --git a/tools/testing/selftests/iommu/iommufd_utils.h b/tools/testing/selftests/iommu/iommufd_utils.h
-index 772ca1db6e5971..f6d1678b310e1f 100644
---- a/tools/testing/selftests/iommu/iommufd_utils.h
-+++ b/tools/testing/selftests/iommu/iommufd_utils.h
-@@ -548,6 +548,39 @@ static int _test_cmd_destroy_access_pages(int fd, unsigned int access_id,
- 	EXPECT_ERRNO(_errno, _test_cmd_destroy_access_pages(              \
- 				     self->fd, access_id, access_pages_id))
- 
-+static int _test_cmd_get_dmabuf(int fd, size_t len, int *out_fd)
-+{
-+	struct iommu_test_cmd cmd = {
-+		.size = sizeof(cmd),
-+		.op = IOMMU_TEST_OP_DMABUF_GET,
-+		.dmabuf_get = { .length = len, .open_flags = O_CLOEXEC },
-+	};
-+
-+	*out_fd = ioctl(fd, IOMMU_TEST_CMD, &cmd);
-+	if (*out_fd < 0)
-+		return -1;
-+	return 0;
-+}
-+#define test_cmd_get_dmabuf(len, out_fd) \
-+	ASSERT_EQ(0, _test_cmd_get_dmabuf(self->fd, len, out_fd))
-+
-+static int _test_cmd_revoke_dmabuf(int fd, int dmabuf_fd, bool revoked)
-+{
-+	struct iommu_test_cmd cmd = {
-+		.size = sizeof(cmd),
-+		.op = IOMMU_TEST_OP_DMABUF_REVOKE,
-+		.dmabuf_revoke = { .dmabuf_fd = dmabuf_fd, .revoked = revoked },
-+	};
-+	int ret;
-+
-+	ret = ioctl(fd, IOMMU_TEST_CMD, &cmd);
-+	if (ret < 0)
-+		return -1;
-+	return 0;
-+}
-+#define test_cmd_revoke_dmabuf(dmabuf_fd, revoke) \
-+	ASSERT_EQ(0, _test_cmd_revoke_dmabuf(self->fd, dmabuf_fd, revoke))
-+
- static int _test_ioctl_destroy(int fd, unsigned int id)
- {
- 	struct iommu_destroy cmd = {
-@@ -718,6 +751,17 @@ static int _test_ioctl_ioas_map_file(int fd, unsigned int ioas_id, int mfd,
- 			  self->fd, ioas_id, mfd, start, length, iova_p,     \
- 			  IOMMU_IOAS_MAP_WRITEABLE | IOMMU_IOAS_MAP_READABLE))
- 
-+#define test_ioctl_ioas_map_fixed_file(mfd, start, length, iova)          \
-+	({                                                                \
-+		__u64 __iova = iova;                                      \
-+		ASSERT_EQ(0, _test_ioctl_ioas_map_file(                   \
-+				     self->fd, self->ioas_id, mfd, start, \
-+				     length, &__iova,                     \
-+				     IOMMU_IOAS_MAP_FIXED_IOVA |          \
-+					     IOMMU_IOAS_MAP_WRITEABLE |   \
-+					     IOMMU_IOAS_MAP_READABLE));   \
-+	})
-+
- static int _test_ioctl_set_temp_memory_limit(int fd, unsigned int limit)
- {
- 	struct iommu_test_cmd memlimit_cmd = {
+It's your choice (or Bjorn's). I'm just reviewing...
+
+>>                                    well-defined
+> 
+> Thanks
+> 
+> diff --git a/Documentation/driver-api/pci/p2pdma.rst b/Documentation/driver-api/pci/p2pdma.rst
+> index 69adea45f73e..7530296a5dea 100644
+> --- a/Documentation/driver-api/pci/p2pdma.rst
+> +++ b/Documentation/driver-api/pci/p2pdma.rst
+> @@ -9,17 +9,17 @@ between two devices on the bus. This type of transaction is henceforth
+>  called Peer-to-Peer (or P2P). However, there are a number of issues that
+>  make P2P transactions tricky to do in a perfectly safe way.
+> 
+> -For PCIe the routing of TLPs is well defined up until they reach a host bridge
+> -or root port. If the path includes PCIe switches then based on the ACS settings
+> -the transaction can route entirely within the PCIe hierarchy and never reach the
+> -root port. The kernel will evaluate the PCIe topology and always permit P2P
+> -in these well defined cases.
+> +For PCIe the routing of Transaction Layer Packets (TLPs) is well-defined up
+> +until they reach a host bridge or root port. If the path includes PCIe switches
+> +then based on the ACS settings the transaction can route entirely within
+> +the PCIe hierarchy and never reach the root port. The kernel will evaluate
+> +the PCIe topology and always permit P2P in these well-defined cases.
+> 
+>  However, if the P2P transaction reaches the host bridge then it might have to
+>  hairpin back out the same root port, be routed inside the CPU SOC to another
+>  PCIe root port, or routed internally to the SOC.
+> 
+> -As this is not well defined or well supported in real HW the kernel defaults to
+> +As this is not well-defined or well supported in real HW the kernel defaults to
+Nit:                              well-supported
+
+The rest of it looks good. Thanks.
+
+>  blocking such routing. There is an allow list to allow detecting known-good HW,
+>  in which case P2P between any two PCIe devices will be permitted.
+> 
+> @@ -39,7 +39,7 @@ delegates lifecycle management to the providing driver. It is expected that
+>  drivers using this option will wrap their MMIO memory in DMABUF and use DMABUF
+>  to provide an invalidation shutdown. These MMIO pages have no struct page, and
+>  if used with mmap() must create special PTEs. As such there are very few
+> -kernel uAPIs that can accept pointers to them, in particular they cannot be used
+> +kernel uAPIs that can accept pointers to them; in particular they cannot be used
+>  with read()/write(), including O_DIRECT.
+> 
+>  Building on this, the subsystem offers a layer to wrap the MMIO in a ZONE_DEVICE
+> @@ -154,7 +154,7 @@ access happens.
+>  Usage With DMABUF
+>  =================
+> 
+> -DMABUF provides an alternative to the above struct page based
+> +DMABUF provides an alternative to the above struct page-based
+>  client/provider/orchestrator system. In this mode the exporting driver will wrap
+>  some of its MMIO in a DMABUF and give the DMABUF FD to userspace.
+> 
+> @@ -162,10 +162,10 @@ Userspace can then pass the FD to an importing driver which will ask the
+>  exporting driver to map it.
+> 
+>  In this case the initiator and target pci_devices are known and the P2P subsystem
+> -is used to determine the mapping type. The phys_addr_t based DMA API is used to
+> +is used to determine the mapping type. The phys_addr_t-based DMA API is used to
+>  establish the dma_addr_t.
+> 
+> -Lifecycle is controlled by DMABUF move_notify(), when the exporting driver wants
+> +Lifecycle is controlled by DMABUF move_notify(). When the exporting driver wants
+>  to remove() it must deliver an invalidation shutdown to all DMABUF importing
+>  drivers through move_notify() and synchronously DMA unmap all the MMIO.
+> 
+
 -- 
-2.43.0
+~Randy
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
