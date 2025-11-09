@@ -2,42 +2,42 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id QKKSJjL54GnZnwAAu9opvQ
+	id SO1zGjj54GnZnwAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:58:58 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:59:04 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 727CF410089
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:58:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 251FB410090
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:59:04 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8687D40503
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 14:58:57 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3327E404B2
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 14:59:03 +0000 (UTC)
 Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id EE7773F719
-	for <linaro-mm-sig@lists.linaro.org>; Sun,  9 Nov 2025 21:39:07 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id B9F893F719
+	for <linaro-mm-sig@lists.linaro.org>; Sun,  9 Nov 2025 21:39:12 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b="AE/QsBKe";
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=WEefhM+w;
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	spf=pass (lists.linaro.org: domain of rogerq@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=rogerq@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id 6C31E44230;
+	by sea.source.kernel.org (Postfix) with ESMTP id 1D9B742A66;
+	Sun,  9 Nov 2025 21:39:12 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BECEAC19423;
 	Sun,  9 Nov 2025 21:39:07 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DDBEBC4CEF7;
-	Sun,  9 Nov 2025 21:39:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1762724347;
-	bh=CN1oEXUSojkUBmaZlWlvuSVJlA/WWlAbJVlcXldCc2I=;
+	s=k20201202; t=1762724352;
+	bh=kVgnVQO18a916rVySKF1mV8rRyJyvwESYEk0lLLgQaY=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=AE/QsBKeL4COZDbWNKyPSb/Yeb4U/0zyaGDjqv6fz7Yf7CZDZasUkJDL9fz2jvP1A
-	 guxGCe+ViOhnrhhSbMo4ARJjAB+LGMNHwSNoCASXHrfHftFfwDOYyMV2rffepGqX2J
-	 m7jLtHkNq9h6MYUTUl69gmK4j9+mGkgMkaCOoehqY30OB9SDoWRZxrgJQVw0+oB4dI
-	 RphQ7zt0ZYEtu9OfwHOQb7mg+M/1ZD57U2qYKkvWDkJHM4JUmU4GYhonLk3LF87t16
-	 4EjtEkee052stjebv+wipougewFrKDaIRwEKHF/Otk1APFTM/YBsZwyIEKYz+bgoS2
-	 KTVvo0R0iTAFQ==
+	b=WEefhM+wvXEy1rWWzumJC5RPb0gVAJSBqN7mRuhwxH8PvDdhBWgEqFwZStqMEMNF2
+	 taGAZqeHs/RbkUh58PsASM2X92CWWgOBU29vC8wHuFqIVesO2YFSWtrDJ1g4pA9BWX
+	 Ndwi6/JkinnfIsIFh+LYcbKrXszHMCzdV2Yb05W4D7wHhWEECCbELc8MHuaZoC9pbN
+	 yG55Zlnv+nUJuyCyEbr40jdhms4NDQ30g/7UyhzZFAbnhtSqT3Rsd63NwqT37D79PD
+	 J/AamRW5kFyj6MEW2UI68kpWObmACabj4HDf6WuqwSzA8XYRRMRJKoZqXpL+hqbqTG
+	 JKvmi+4MlwgMg==
 From: Roger Quadros <rogerq@kernel.org>
-Date: Sun, 09 Nov 2025 23:37:56 +0200
+Date: Sun, 09 Nov 2025 23:37:57 +0200
 MIME-Version: 1.0
-Message-Id: <20251109-am65-cpsw-xdp-zc-v2-6-858f60a09d12@kernel.org>
+Message-Id: <20251109-am65-cpsw-xdp-zc-v2-7-858f60a09d12@kernel.org>
 References: <20251109-am65-cpsw-xdp-zc-v2-0-858f60a09d12@kernel.org>
 In-Reply-To: <20251109-am65-cpsw-xdp-zc-v2-0-858f60a09d12@kernel.org>
 To: Siddharth Vadapalli <s-vadapalli@ti.com>,
@@ -51,35 +51,35 @@ To: Siddharth Vadapalli <s-vadapalli@ti.com>,
  =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
  Stanislav Fomichev <sdf@fomichev.me>, Simon Horman <horms@kernel.org>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1060; i=rogerq@kernel.org;
- h=from:subject:message-id; bh=CN1oEXUSojkUBmaZlWlvuSVJlA/WWlAbJVlcXldCc2I=;
- b=owEBbQKS/ZANAwAIAdJaa9O+djCTAcsmYgBpEQna96yZlfyKuLZK25llM6B9VnnOag/jnGh9D
- 91Dvo+PqVeJAjMEAAEIAB0WIQRBIWXUTJ9SeA+rEFjSWmvTvnYwkwUCaREJ2gAKCRDSWmvTvnYw
- k+LtEADUgCFmF6aZIvEYu7sabE8u6Bp5lcZDbwYqnRBpvb8Vj4koNaounoTMuRmXWpOpUPIX/Xm
- TWvBAML53q3C79zHyatbDkcp0TymeiAQybxky5gS61YJLI3Ti947kKm/590u+tUsSFcKUeYe/Ny
- Fz3LFHW0Bm/YcGuR7xytB4DAvhra8VO5LhQXVwmIbewxf0OG8R1k8i8jzfY3CUQbRTVeuuUY+j2
- F+GcdAD3WqM9CIKrM1uhBJ9gAhstsl7XB4pVKUMosjJ5NnSwyTrUiDEkrUmx0hgQWtryXu6Yhjd
- bWW2+mYQmPPPssI6C3UROAD9j9sLnufwsY9mDzgQy/ko0jx2kH9KlQ2cp7p7dkIrukRVTXMTGiy
- lp1EgHGhUdjJszxldCwV08sx5O+IecOKlahvuU5GfGDrex0vRiTWe5AP7djJBCqAEySr0hHaG6F
- MtdyUDcfH8vbZau0Jgvaez5btY1MziZwQ0WTxZd2VROvdthaDeFR4pJGI9+ZnfmpJ8yjUCFyp7O
- mgFnof9Vp9f9TJSQhnFYPTQWOqUFsquvYoKvU1pszELddV2Uh9ncX3g9g1xZIECcJOH8suiIUVs
- nJ2cnfLqBvJkF+M4sGBcXkPT1DJ8yZcI2ODkZs5Pmb6RWfxOWysx3rveW7VM7+V77rq8TskBHQq
- ms57HQrnSzz98xQ==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1531; i=rogerq@kernel.org;
+ h=from:subject:message-id; bh=kVgnVQO18a916rVySKF1mV8rRyJyvwESYEk0lLLgQaY=;
+ b=owEBbQKS/ZANAwAIAdJaa9O+djCTAcsmYgBpEQnaoZQaCDOcP2jKXsqaIb7Y4IAM39JiwAlpR
+ whm4N5Vn1iJAjMEAAEIAB0WIQRBIWXUTJ9SeA+rEFjSWmvTvnYwkwUCaREJ2gAKCRDSWmvTvnYw
+ k+n2D/4n3QLBvZL+Ug6lzBiQ3yEIJ54RMQhXfWtoHhcZT+Wor3emaGkM+iZ3o3j+ObQhNfLnaH9
+ nqj5dWuuKVXWirrXjeIcgudnU6FcaO1DUY8SH6+H3jAtspFAI0Ne/eaRWCMNtEgdWw+tjR6Hki5
+ K/HF/m38zK2UzGqBPhSr/wFUiT7E94Xgvn30dEZEYJ2GMF0F9bDmsQLWkP12bD0U9M0Tkku8r3w
+ YZbH/h+iY986+tLVcgL9bV72urrYlAFGtzfkoUzGwTD0CN0Gk8qsiDwPEfwAb/wpJMR1NsOhDiX
+ RCa3Errmmt2VRD/ViOAbkobEfNRFsSGke6jrDeQ7VOeNJn6kIzrBtCDWZISg1orpImNpZLht1qF
+ mBW2x+s/+/nJLMMTyZA1eo72nRW0gu+ugSQ0JIwcuvdTFPn67sV+LRwgJusoBUUyeUbhdquF/Y5
+ EGMIRdGhkkVp+y4wSeZhmrWjyThAbUPh/ECj7mqphqLz4Ecd+osPOwtHjeQfZnJ+rXLSb+PAjqw
+ 7+J6wPI83RIPktGVBgGr7kLkPqmSSRCTgs6NEEwDMp9x//wKe+AN1+X/PS48nmxQF2kYsJCzZsO
+ NxWZ3LNtNVHwlyhZR7SEvxnM1T77zq0r9uYfJmHk1iqhaaOaUBNk+HA4ER1KeBvte0Fc7iehK80
+ Dnd1EZKdXkopKeg==
 X-Developer-Key: i=rogerq@kernel.org; a=openpgp;
  fpr=412165D44C9F52780FAB1058D25A6BD3BE763093
 X-Spamd-Bar: --
 X-MailFrom: rogerq@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: E62TZRU6QIEJMW4K5WDYY6R55Y3PDXLO
-X-Message-ID-Hash: E62TZRU6QIEJMW4K5WDYY6R55Y3PDXLO
-X-Mailman-Approved-At: Thu, 16 Apr 2026 14:52:50 +0000
+Message-ID-Hash: 4WNNLHBTSYLS6SXUQUL3ZTU3ISHCKEQL
+X-Message-ID-Hash: 4WNNLHBTSYLS6SXUQUL3ZTU3ISHCKEQL
+X-Mailman-Approved-At: Thu, 16 Apr 2026 14:52:51 +0000
 CC: srk@ti.com, Meghana Malladi <m-malladi@ti.com>, netdev@vger.kernel.org, linux-kernel@vger.kernel.org, bpf@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Roger Quadros <rogerq@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH net-next v2 6/7] net: ethernet: ti: am65-cpsw: enable zero copy in XDP features
+Subject: [Linaro-mm-sig] [PATCH net-next v2 7/7] net: ethernet: ti: am65-cpsw: Fix clearing of irq_disabled flag in rx_poll
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/E62TZRU6QIEJMW4K5WDYY6R55Y3PDXLO/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4WNNLHBTSYLS6SXUQUL3ZTU3ISHCKEQL/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -108,7 +108,7 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.493];
+	NEURAL_HAM(-0.00)[-0.458];
 	FROM_NEQ_ENVFROM(0.00)[rogerq@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:-];
@@ -117,32 +117,48 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	TAGGED_RCPT(0.00)[linaro-mm-sig,netdev];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: 727CF410089
+X-Rspamd-Queue-Id: 251FB410090
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Now that we have the plumbing in for XDP zero copy RX and TX, enable
-the zero copy feature flag.
+In am65_cpsw_nuss_rx_poll() there is a possibility that irq_disabled flag
+is cleared but the IRQ is not enabled.
 
+This patch fixes by that by clearing irq_disabled flag right when enabling
+the irq.
+
+Fixes: da70d184a8c3 ("net: ethernet: ti: am65-cpsw: Introduce multi queue Rx")
 Signed-off-by: Roger Quadros <rogerq@kernel.org>
 ---
- drivers/net/ethernet/ti/am65-cpsw-nuss.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ drivers/net/ethernet/ti/am65-cpsw-nuss.c | 14 ++++++--------
+ 1 file changed, 6 insertions(+), 8 deletions(-)
 
 diff --git a/drivers/net/ethernet/ti/am65-cpsw-nuss.c b/drivers/net/ethernet/ti/am65-cpsw-nuss.c
-index 2e06e7df23ad5249786d081e51434f87dd2a76b5..9d1048eea7e4734873676026906e07babf0345f5 100644
+index 9d1048eea7e4734873676026906e07babf0345f5..c0f891a91d7471364bd4c8b7d82da9967f1753b8 100644
 --- a/drivers/net/ethernet/ti/am65-cpsw-nuss.c
 +++ b/drivers/net/ethernet/ti/am65-cpsw-nuss.c
-@@ -3210,7 +3210,8 @@ am65_cpsw_nuss_init_port_ndev(struct am65_cpsw_common *common, u32 port_idx)
- 			       NETIF_F_HW_VLAN_CTAG_FILTER;
- 	port->ndev->xdp_features = NETDEV_XDP_ACT_BASIC |
- 				   NETDEV_XDP_ACT_REDIRECT |
--				   NETDEV_XDP_ACT_NDO_XMIT;
-+				   NETDEV_XDP_ACT_NDO_XMIT |
-+				   NETDEV_XDP_ACT_XSK_ZEROCOPY;
- 	port->ndev->vlan_features |=  NETIF_F_SG;
- 	port->ndev->netdev_ops = &am65_cpsw_nuss_netdev_ops;
- 	port->ndev->ethtool_ops = &am65_cpsw_ethtool_ops_slave;
+@@ -1778,15 +1778,13 @@ static int am65_cpsw_nuss_rx_poll(struct napi_struct *napi_rx, int budget)
+ 	dev_dbg(common->dev, "%s num_rx:%d %d\n", __func__, num_rx, budget);
+ 
+ 	if (num_rx < budget && napi_complete_done(napi_rx, num_rx)) {
+-		if (flow->irq_disabled) {
++		if (unlikely(flow->rx_pace_timeout)) {
++			hrtimer_start(&flow->rx_hrtimer,
++				      ns_to_ktime(flow->rx_pace_timeout),
++				      HRTIMER_MODE_REL_PINNED);
++		} else if (flow->irq_disabled) {
+ 			flow->irq_disabled = false;
+-			if (unlikely(flow->rx_pace_timeout)) {
+-				hrtimer_start(&flow->rx_hrtimer,
+-					      ns_to_ktime(flow->rx_pace_timeout),
+-					      HRTIMER_MODE_REL_PINNED);
+-			} else {
+-				enable_irq(flow->irq);
+-			}
++			enable_irq(flow->irq);
+ 		}
+ 	}
+ 
 
 -- 
 2.34.1
