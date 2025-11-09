@@ -2,201 +2,193 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sMgJMgL54GnZnwAAu9opvQ
+	id iMP5Hgv54GkloAAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:58:10 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:58:19 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B1A041003D
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:58:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D5E041004B
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:58:19 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4A5B7409FB
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 14:58:09 +0000 (UTC)
-Received: from SA9PR02CU001.outbound.protection.outlook.com (mail-southcentralusazon11013003.outbound.protection.outlook.com [40.93.196.3])
-	by lists.linaro.org (Postfix) with ESMTPS id 041413F73D
-	for <linaro-mm-sig@lists.linaro.org>; Fri,  7 Nov 2025 19:44:21 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 33DC0404B2
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 14:58:18 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+	by lists.linaro.org (Postfix) with ESMTPS id C72613F719
+	for <linaro-mm-sig@lists.linaro.org>; Sun,  9 Nov 2025 21:38:39 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=Nvidia.com header.s=selector2 header.b="Hxrvf/qt";
-	dmarc=pass (policy=reject) header.from=nvidia.com;
-	arc=pass ("microsoft.com:s=arcselector10001:i=1");
-	spf=pass (lists.linaro.org: domain of nicolinc@nvidia.com designates 40.93.196.3 as permitted sender) smtp.mailfrom=nicolinc@nvidia.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=IsPbLyAkPYdZJ2Y/NZQAxcr64JWaWUbbu7cr4cDxUlcOZBWIuPnHRsEzHHm1obv1StGJKqvqWzKmfca8UWTuE7arSHmM3gZ8/gcYLLQZGaEzYNvR/G8vc0mUC3mdfIKL7CGxGXi1772V8GpTYvPjtrcXi3eNVV9YD15gyEY6XS0/8op6CZa1WBibpXsBYdTsKflHHFGaXY14oCJdFaB8DoDkQ6WXRJnKPR/Qp4TKa358QAJN6jjWqsKWJzDHjwHpJDkh12jRP/KNs9jn7co7tn0/duSF0g2NQgYJLFni+ZY1kKdkcWaqk35KZ07MEfzU5Ac8mZfFrxmcuCev8/FH8Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=qGFpBUsbjy/THko9FXd2tawYqCuRGpFlX+SGLB0LePI=;
- b=EvZFjpuuoGX62rQofYkhskt0I+t+MTJgIp7ZbTa8wGp5f/vZsJOc8tGejoqi4FawcuO51jwCFscsp5ItZR5AvSwecxcXJRW4sEtkkWjHo6ITFE5SPDWP/j6xLh0zO8pr5ka8gsZMU2uZG0Y1RiQWfY4G7eAPDjogARIQZlfgl/9z1vhTt1HSBRA+xUqTA4CGd4LuDU7DrHrKjxo0DzEYYukx4e4/fyNILs1WXalRkqraIiuK+Esm38M0HzIAOK1z9PX4O2s5uqyoAplGtV6YVDttIbqXh4pbmkYWg1di/hQ5Whm10oGJQJb05W2HIbn2At3LtINHY1Vt4cXKKuWe1g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.117.161) smtp.rcpttodomain=ffwll.ch smtp.mailfrom=nvidia.com;
- dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qGFpBUsbjy/THko9FXd2tawYqCuRGpFlX+SGLB0LePI=;
- b=Hxrvf/qtu9RnrN4nwH74Gac1nxYDsIVylQvs1QVmcGO522TNzoJjJnYUxLRIo2sjNJpqqOdrcJWtL40vRrhQ+5NJ+DA84zNxVFo2U2e1HX9IVF0BOT3m4ZjTxgfhRWw5ER995fZ+sV+VngYZrKD04i5ydZarprb1SN6ZKIMQzz8f+Znn3ILlJUWuv3VXi2I2vakByujKM02Z2uI7VFQYV+5JiTUgRdAzPdxuqGmrLetyJLnoKebebmSYWpZB7Xa+vsC72bF8bEv1oB5A5jFfKZK7zLphLnBkW5Cy31iZj29zm4b/7T9oI4JQOdHwjSiOOxmP2EDioBu7SqUwTVxFYQ==
-Received: from SJ0PR05CA0139.namprd05.prod.outlook.com (2603:10b6:a03:33d::24)
- by IA4PR12MB9764.namprd12.prod.outlook.com (2603:10b6:208:5d0::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.12; Fri, 7 Nov
- 2025 19:44:17 +0000
-Received: from MWH0EPF000989E5.namprd02.prod.outlook.com
- (2603:10b6:a03:33d:cafe::6e) by SJ0PR05CA0139.outlook.office365.com
- (2603:10b6:a03:33d::24) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9320.8 via Frontend Transport; Fri, 7
- Nov 2025 19:44:17 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
- smtp.mailfrom=nvidia.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=nvidia.com;
-Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.117.161) by
- MWH0EPF000989E5.mail.protection.outlook.com (10.167.241.132) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9298.6 via Frontend Transport; Fri, 7 Nov 2025 19:44:17 +0000
-Received: from rnnvmail203.nvidia.com (10.129.68.9) by mail.nvidia.com
- (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 7 Nov
- 2025 11:43:59 -0800
-Received: from rnnvmail202.nvidia.com (10.129.68.7) by rnnvmail203.nvidia.com
- (10.129.68.9) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 7 Nov
- 2025 11:43:59 -0800
-Received: from Asurada-Nvidia (10.127.8.11) by mail.nvidia.com (10.129.68.7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 7 Nov 2025 11:43:57 -0800
-Date: Fri, 7 Nov 2025 11:43:56 -0800
-From: Nicolin Chen <nicolinc@nvidia.com>
-To: Jason Gunthorpe <jgg@nvidia.com>
-Message-ID: <aQ5L/NXA+pYfK9zf@Asurada-Nvidia>
-References: <0-v1-af84a3ab44f5+f68-iommufd_buf_jgg@nvidia.com>
- <9-v1-af84a3ab44f5+f68-iommufd_buf_jgg@nvidia.com>
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=O1eA0a4I;
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	spf=pass (lists.linaro.org: domain of rogerq@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by sea.source.kernel.org (Postfix) with ESMTP id 0CDDC438D2;
+	Sun,  9 Nov 2025 21:38:39 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9FF65C4CEF7;
+	Sun,  9 Nov 2025 21:38:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1762724318;
+	bh=1OeQ5leuGFX+BMFWlTTG7Yq9Lea1Zl3bo8L1tVXgnJU=;
+	h=From:Subject:Date:To:Cc:From;
+	b=O1eA0a4I81B5O2SKORoMD01mc9kPUecIbVVzFtjg/ViiEFGxv6BlC665gvLdbYafW
+	 LuZmT/kfbURcxDUytLyZcSsGgkpbRzPr67rxAu1bTGWSQHv6/8G1o1co4mvAPlZmFa
+	 3iJLJgDleEvwoqDOq/aNAISo9mO22PSpPUTlyo5w+j00TDMYX4XBcXWyQdwGFKZda1
+	 BbOxpDnI/5HC87e/7gvvDuBsMRxF3NCZ9OAbRykdVU8V8/84P4Ll0Hn9NkAWDgbCYZ
+	 xz/jFlavD7iouNq8j41kmaQft50ywKkuOV1RRATIHzqsXEL2vu06Y8YwHLKQyCNelf
+	 FGLWQH5PvvUMQ==
+From: Roger Quadros <rogerq@kernel.org>
+Date: Sun, 09 Nov 2025 23:37:50 +0200
+Message-Id: <20251109-am65-cpsw-xdp-zc-v2-0-858f60a09d12@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <9-v1-af84a3ab44f5+f68-iommufd_buf_jgg@nvidia.com>
-X-NV-OnPremToCloud: ExternallySecured
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MWH0EPF000989E5:EE_|IA4PR12MB9764:EE_
-X-MS-Office365-Filtering-Correlation-Id: f7917bcb-4518-4d0e-c9d1-08de1e3609ba
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|36860700013|82310400026|7416014|376014|1800799024;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?Zue1yWPcUuKEsAgL+cCEIfMxtP87nUV7pf43dzweM8RA5Oy5eOI6k3EYJLwW?=
- =?us-ascii?Q?nO3tlPdlUR989TftlbJXYXyB0vTXSmxapO0nCclGrQVHTdvu91t7ebrJNJRl?=
- =?us-ascii?Q?tfDM8uxx5qOPEfUxWt+ZsgWinPj9b86ahgFn2vNhJ2XJz2kYo5HIdLvOsIo4?=
- =?us-ascii?Q?OP/QTpQm936A0cSK1eAUVyH/K/+4AqLAIzZdgN9xg1exkKqKtmmZZ+cwA9Bm?=
- =?us-ascii?Q?NU/EjR1Qq1QP9pG93tS5ssNAFz4Lp6giXOu18Rqv5ScrcSsiQTaeELe0nO8o?=
- =?us-ascii?Q?MRaCeiN+JNjX8dJIKAZc8wBlTgEsen4nlddjYSmrEDIrLQSO+w8PNCfn+fGe?=
- =?us-ascii?Q?xLQxxUuSkr6dc4lGOuNCnrDC3+n+BfDyoDlE3lgn2QQuEKAL2Vg3NWf3fgiF?=
- =?us-ascii?Q?3iAdcwJSfPq6jAPtlPJyUqYwGkUtsYnyfQVMGR7sbnlde7OxOPF1xtbnbbWS?=
- =?us-ascii?Q?J76eRrA8uasI40erHpZbX77FmetevpBfw0UWfRVtLVAW44d5MbcgHUb4f7zH?=
- =?us-ascii?Q?FaNELoB1MmwVRXAXVdAIepu6lHgDTTEEmWzhMpFmHXxojuxaiJHrBtLCvNMC?=
- =?us-ascii?Q?NbJv42AqaLZKjKPLSapp8Srjx7URA9bvIVmTfpf/weqNm7/qxjSJ4b1cL7Wg?=
- =?us-ascii?Q?wkmErmn0utUlD/mSywj8b4VmpBI+pxz3WxVptF36wA5KmNwNJvz6DECrK3YA?=
- =?us-ascii?Q?Iii4iwNPaL6FpeHwlbjVIND2N6Q+M7hP2fzinJKDnQIZFhlPqq/Qb7x/aFV0?=
- =?us-ascii?Q?cJtuv2qEGOq3D3p1zRVrOVLsgiFtRGfxZUWuhwjMIAzsfKka9yRGgjhuKtse?=
- =?us-ascii?Q?8uoIfcK9uIVK9gR/oApnS4hqZkvtesIQtvvAqxLgFB5JjEdo0o8lJlJDfcrd?=
- =?us-ascii?Q?xFmZTX9kXDZOfVF27uo2e81XoMtkn9Z5zdSGo3Cvt9tqFz7z9psBUhuvdkIj?=
- =?us-ascii?Q?TacxxAWiayAWTEliHIXkDhwKNnMGJjzJGIi1fCJJYZBL/rRykSxqocp2FS0q?=
- =?us-ascii?Q?NeC3PEbtj/vVosWGAQne/pYgNuSt6gZFR8GxSmMgmnntzwh/pBDo5PZ6UHMi?=
- =?us-ascii?Q?PuyF6buNTv4QqmsQhv2B6CNe5RT/T/FH8lNi7d9o6gfJoGRHIHG6GK3CGnRs?=
- =?us-ascii?Q?Djcnd0S0tb6atufW6NSZmT5e3YBv1JfoKWkd36xKZubAXSQ73zf9vGsbERBZ?=
- =?us-ascii?Q?X3kUBrok0LVv+dgGkHe0w+uQc6ZoJT7mRWDGx5LCfGTA4EnDzv3dpVVzBfd3?=
- =?us-ascii?Q?L5Di+EimCFc2bCmrWmnyjgawD/jHMgo4wHJlHzmofdAtTmVfYNYyT2cbAEm5?=
- =?us-ascii?Q?FkDKUWtj2NgZFWOtz49G8p3FWBtzxqO1uI15xh1jS9KVhVXytIR5iQTovxC0?=
- =?us-ascii?Q?J+U79KUCDyZrOG43VqpuZIMGZUMoEq8UklipIJSVSnpGSAOllE40p0DSRl93?=
- =?us-ascii?Q?B8SxpCj60hl1JEok1mTl0Q+YLbHT9K1aR5kjWvnE9TnjSxRAOsuTdFGsgPh0?=
- =?us-ascii?Q?LcZffR4kepHLr5tnxO3GMyFQ553Bsr6hD2hpgdMJ0AZ1JOrr7tWy4wVbrNp/?=
- =?us-ascii?Q?XRm8fi535DmqqiFcY2A=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:216.228.117.161;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:dc6edge2.nvidia.com;CAT:NONE;SFS:(13230040)(36860700013)(82310400026)(7416014)(376014)(1800799024);DIR:OUT;SFP:1101;
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Nov 2025 19:44:17.2172
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f7917bcb-4518-4d0e-c9d1-08de1e3609ba
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.117.161];Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	MWH0EPF000989E5.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA4PR12MB9764
-X-Spamd-Bar: ----
-X-MailFrom: nicolinc@nvidia.com
+X-B4-Tracking: v=1; b=H4sIALAJEWkC/2WNQQ6CMBBFr0Jm7ZgyMo264h6GBZYBGrWQllSUc
+ Hebbl2+vPz3NwjirQS4Fht4iTbYySWgQwFmbN0gaLvEQIpYETG2L81o5vDGtZvxa5Da/iLVXco
+ Ta0iz2Utv15y8gZMFnawLNMmMNiyT/+SvWGafs0zqPxtLVFgx81lR1bPW9UO8k+dx8gM0+77/A
+ JZtY9y7AAAA
+X-Change-ID: 20250225-am65-cpsw-xdp-zc-2af9e4be1356
+To: Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Andrew Lunn <andrew+netdev@lunn.ch>,
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+ Alexei Starovoitov <ast@kernel.org>, Daniel Borkmann <daniel@iogearbox.net>,
+ Jesper Dangaard Brouer <hawk@kernel.org>,
+ John Fastabend <john.fastabend@gmail.com>,
+ Sumit Semwal <sumit.semwal@linaro.org>,
+ =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ Stanislav Fomichev <sdf@fomichev.me>, Simon Horman <horms@kernel.org>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2592; i=rogerq@kernel.org;
+ h=from:subject:message-id; bh=1OeQ5leuGFX+BMFWlTTG7Yq9Lea1Zl3bo8L1tVXgnJU=;
+ b=owEBbQKS/ZANAwAIAdJaa9O+djCTAcsmYgBpEQnZg6fI6ykKHG3Oz/FNzhRyWQwi6xRL+ysHJ
+ oOBN9cLLr+JAjMEAAEIAB0WIQRBIWXUTJ9SeA+rEFjSWmvTvnYwkwUCaREJ2QAKCRDSWmvTvnYw
+ k9eWEACMTuUzbaOk1xsjn4XoiN97IIuf/w38NHPAcEaf0tPHMTY7bDyzu5ugTaWwwkmtCeJ7o2U
+ OLNFTceVInqiMu4nxpHvhgLo4DCS3HVoT0zI9EiCv0a5Z0CuvCaJHA8QUJa6sbPmqDFd7bbEu6L
+ BVvhSPgN9RLKi5DplgGoONmgi81/E4wQ7WUUt8Vf2GjMyI6PXP8zMRYFUG/suRp+6u14QKRTdx3
+ fpPondIgeicoUuGaKmjuyVK0VWg8W92+Q+X3yi92exVGN+PF+fd7CEPFY+Sp7MDeoPiGfCHOQkB
+ T1l3d6vkvxSig3rcw9l6lx4GffUoRGXbjXW13ud2LIKwEg8UHk4EG0Rzek1orwBItxL5wZXjh5U
+ s61ydIdzoV2eT7ED5cVkgNyhZL4pEPPVoZqPFR52W/k9+BuQOCQn6a78x0+cIqxQK3bXHBmEkZx
+ h6o8bGpAPhhYYDfzGi+jlAVeJNAyaUlxe7ToHJkY8ZMuKe1TXzi2IMEinK96lBfMCxM244wj9qX
+ 8F+dM1Lsje2nJ0OGymksiAeWkmPgwZW8EFCfIQ6RPN2LtPbmsigexz0oIpSga8hdGsTu3N5yewQ
+ 2O4zIbs511nvexWNy/G1XuqkyphjcnL2XieKjaJTvn8voP/yH157sfxwSRAVtKf5esuMWe2ixra
+ Qe4oJzlWdYn7+Zg==
+X-Developer-Key: i=rogerq@kernel.org; a=openpgp;
+ fpr=412165D44C9F52780FAB1058D25A6BD3BE763093
+X-Spamd-Bar: --
+X-MailFrom: rogerq@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: EG5LNYGBJO5UNIMX2RLYVTV5FUMJPONP
-X-Message-ID-Hash: EG5LNYGBJO5UNIMX2RLYVTV5FUMJPONP
-X-Mailman-Approved-At: Thu, 16 Apr 2026 14:52:46 +0000
-CC: Alex Williamson <alex@shazbot.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, iommu@lists.linux.dev, Joerg Roedel <joro@8bytes.org>, Kevin Tian <kevin.tian@intel.com>, kvm@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-kselftest@vger.kernel.org, linux-media@vger.kernel.org, Robin Murphy <robin.murphy@arm.com>, Shuah Khan <shuah@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Will Deacon <will@kernel.org>, Krishnakant Jaju <kjaju@nvidia.com>, Leon Romanovsky <leon@kernel.org>, Matt Ochs <mochs@nvidia.com>, patches@lists.linux.dev, Simona Vetter <simona.vetter@ffwll.ch>, Vivek Kasireddy <vivek.kasireddy@intel.com>, Xu Yilun <yilun.xu@linux.intel.com>
+Message-ID-Hash: M3EGDICTHEI2VSBK4JTCOISOMQAGIRKN
+X-Message-ID-Hash: M3EGDICTHEI2VSBK4JTCOISOMQAGIRKN
+X-Mailman-Approved-At: Thu, 16 Apr 2026 14:52:47 +0000
+CC: srk@ti.com, Meghana Malladi <m-malladi@ti.com>, netdev@vger.kernel.org, linux-kernel@vger.kernel.org, bpf@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Roger Quadros <rogerq@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 9/9] iommufd/selftest: Add some tests for the dmabuf flow
+Subject: [Linaro-mm-sig] [PATCH net-next v2 0/7] net: ethernet: ti: am65-cpsw: add AF_XDP zero copy support
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EG5LNYGBJO5UNIMX2RLYVTV5FUMJPONP/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/M3EGDICTHEI2VSBK4JTCOISOMQAGIRKN/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [4.99 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[nvidia.com : SPF not aligned (relaxed),reject];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
-	R_DKIM_REJECT(1.00)[Nvidia.com:s=selector2];
-	DATE_IN_PAST(1.00)[3835];
-	MID_RHS_NOT_FQDN(0.50)[];
-	MAILLIST(-0.20)[mailman];
+X-Spamd-Result: default: False [4.49 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
+	SUSPICIOUS_RECIPS(1.50)[];
+	R_DKIM_REJECT(1.00)[kernel.org:s=k20201202];
+	DATE_IN_PAST(1.00)[3785];
 	R_SPF_ALLOW(-0.20)[+mx:c];
+	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	MIME_TRACE(0.00)[0:+];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FREEMAIL_TO(0.00)[ti.com,lunn.ch,davemloft.net,google.com,kernel.org,redhat.com,iogearbox.net,gmail.com,linaro.org,amd.com,fomichev.me];
+	ARC_NA(0.00)[];
 	GREYLIST(0.00)[pass,meta];
+	RCPT_COUNT_TWELVE(0.00)[23];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,nvidia.com:email,lists.linaro.org:helo,lists.linaro.org:rdns];
-	FROM_NEQ_ENVFROM(0.00)[nicolinc@nvidia.com,linaro-mm-sig-bounces@lists.linaro.org];
+	NEURAL_HAM(-0.00)[-0.618];
+	FROM_NEQ_ENVFROM(0.00)[rogerq@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[Nvidia.com:-];
-	NEURAL_HAM(-0.00)[-0.612];
+	DKIM_TRACE(0.00)[kernel.org:-];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig,netdev];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	MISSING_XM_UA(0.00)[];
-	RCVD_COUNT_SEVEN(0.00)[8]
-X-Rspamd-Queue-Id: 8B1A041003D
+	DBL_BLOCKED_OPENRESOLVER(0.00)[ti.com:email,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
+X-Rspamd-Queue-Id: 1D5E041004B
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Fri, Nov 07, 2025 at 12:49:41PM -0400, Jason Gunthorpe wrote:
-> Basic tests of establishing a dmabuf and revoking it. The selftest kernel
-> side provides a basic small dmabuf for this testing.
-> 
-> Signed-off-by: Jason Gunthorpe <jgg@nvidia.com>
+This series adds AF_XDP zero coppy support to am65-cpsw driver.
 
-Reviewed-by: Nicolin Chen <nicolinc@nvidia.com>
+Tests were performed on AM62x-sk with xdpsock application [1].
 
-> +static void iommufd_test_dma_buf_release(struct dma_buf *dmabuf)
-> +{
-> +	struct iommufd_test_dma_buf *priv = dmabuf->priv;
-> +
-> +	kfree(priv);
-> +}
+A clear improvement is seen in 64 byte packets on Transmit (txonly)
+and receive (rxdrop).
+1500 byte test seems to be limited by line rate (1G link) so no
+improvement seen there in packet rate. A test on higher speed link
+(or PHY-less setup) might be worthwile.
 
-Missing
-	kfree(priv->memory);
-?
+There is some issue during l2fwd with 64 byte packets and benchmark
+results show 0. This issue needs to be debugged further.
+A 512 byte l2fwd test result has been added to compare instead.
+
+AF_XDP performance using 64 byte packets in Kpps.
+Benchmark:	XDP-SKB		XDP-Native	XDP-Native(ZeroCopy)
+rxdrop		322		491		845
+txonly		390		394		723
+l2fwd 		205		257		0
+
+AF_XDP performance using 512 byte packets in Kpps.
+l2fwd		140		167		231
+
+AF_XDP performance using 1500 byte packets in Kpps.
+Benchmark:	XDP-SKB		XDP-Native	XDP-Native(ZeroCopy)
+rxdrop		82		82		82
+txonly		82		82		82
+l2fwd 		82		82		82
+
+[1]: https://github.com/xdp-project/bpf-examples/tree/master/AF_XDP-example
+
+Signed-off-by: Roger Quadros <rogerq@kernel.org>
+---
+Changes in v2:
+- Prevent crash on systems with 1 of 2 ports disabled in device tree. check
+  for valid ndev before registering/unregistering XDP RXQ.
+  Reported-by: Meghana Malladi <m-malladi@ti.com>
+- Retain page pool on XDP program exchangae so we don't have to re-alloacate
+  memory.
+- Fix clearing of irq_disabled flag in am65_cpsw_nuss_rx_poll().
+- Link to v1: https://lore.kernel.org/r/20250520-am65-cpsw-xdp-zc-v1-0-45558024f566@kernel.org
+
+---
+Roger Quadros (7):
+      net: ethernet: ti: am65-cpsw: fix BPF Program change on multi-port CPSW
+      net: ethernet: ti: am65-cpsw: Retain page_pool on XDP program exchange
+      net: ethernet: ti: am65-cpsw: add XSK pool helpers
+      net: ethernet: ti: am65-cpsw: Add AF_XDP zero copy for RX
+      net: ethernet: ti: am65-cpsw: Add AF_XDP zero copy for TX
+      net: ethernet: ti: am65-cpsw: enable zero copy in XDP features
+      net: ethernet: ti: am65-cpsw: Fix clearing of irq_disabled flag in rx_poll
+
+ drivers/net/ethernet/ti/Makefile         |   2 +-
+ drivers/net/ethernet/ti/am65-cpsw-nuss.c | 583 ++++++++++++++++++++++++++-----
+ drivers/net/ethernet/ti/am65-cpsw-nuss.h |  37 +-
+ drivers/net/ethernet/ti/am65-cpsw-xdp.c  | 155 ++++++++
+ 4 files changed, 692 insertions(+), 85 deletions(-)
+---
+base-commit: a0c3aefb08cd81864b17c23c25b388dba90b9dad
+change-id: 20250225-am65-cpsw-xdp-zc-2af9e4be1356
+
+Best regards,
+-- 
+Roger Quadros <rogerq@kernel.org>
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
