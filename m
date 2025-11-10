@@ -2,118 +2,273 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id yMBLNdP54GnZnwAAu9opvQ
+	id GARoJvP54GnZnwAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:01:39 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:02:11 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C656410152
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:01:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D66A1410171
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:02:09 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8E5A540963
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:01:38 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.18])
-	by lists.linaro.org (Postfix) with ESMTPS id 67DA13F78C
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 10 Nov 2025 18:48:08 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E16F74050C
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:02:08 +0000 (UTC)
+Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com [148.163.156.1])
+	by lists.linaro.org (Postfix) with ESMTPS id D140A3F78C
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 10 Nov 2025 19:12:58 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=NzIVtuLz;
-	dmarc=pass (policy=none) header.from=intel.com;
-	spf=pass (lists.linaro.org: domain of andriy.shevchenko@linux.intel.com designates 192.198.163.18 as permitted sender) smtp.mailfrom=andriy.shevchenko@linux.intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1762800489; x=1794336489;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=4juQ99p3e3KtM6te/hbvKyOPptF+QeNnwr8ndteNapw=;
-  b=NzIVtuLzyK/LiuIunDnBZlEFf2NBuaw5cj88WtpUe21ks+m/0bh+DApS
-   GHZQx4BgDjzskDWbbyozla+klyD9hpXD2xn8FlnJkHsmI6GgvdeeEBW6o
-   xl2i6uL5bA47P32vzQNAg5Cr3MwNO8FdXaB7UwlKqD7+LnFl8sfG+kB0n
-   WJo833dUQHO/NIDeOeacDuyQlXhwQCCCnvaZ/+venuGX/Xrx0xuZckYew
-   pvcoDTEiiI5QvvaDRvGxR5tn6Lx5uaBoaX+LAQsAaA5+h+68Xt/Xes1YB
-   8Kkm9PQMAyFutSPp3DSRSgHO1zj7AyeN3+ZI5Ssly5XC5LNncvCxwfE0C
-   A==;
-X-CSE-ConnectionGUID: V+/ZxW8wRH2c4ZsPH5OBIg==
-X-CSE-MsgGUID: AbHS99snQguRNq8t40xS4A==
-X-IronPort-AV: E=McAfee;i="6800,10657,11609"; a="64062613"
-X-IronPort-AV: E=Sophos;i="6.19,294,1754982000";
-   d="scan'208";a="64062613"
-Received: from fmviesa010.fm.intel.com ([10.60.135.150])
-  by fmvoesa112.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Nov 2025 10:48:08 -0800
-X-CSE-ConnectionGUID: 3ynojx9aTemebvQa2QUulQ==
-X-CSE-MsgGUID: twHEdvfkR26b2l2EM+qABw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.19,294,1754982000";
-   d="scan'208";a="189472138"
-Received: from black.igk.intel.com ([10.91.253.5])
-  by fmviesa010.fm.intel.com with ESMTP; 10 Nov 2025 10:47:59 -0800
-Received: by black.igk.intel.com (Postfix, from userid 1003)
-	id 8C76DAC; Mon, 10 Nov 2025 19:47:29 +0100 (CET)
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: Corey Minyard <corey@minyard.net>,
-	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
-	"Dr. David Alan Gilbert" <linux@treblig.org>,
-	Alex Deucher <alexander.deucher@amd.com>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Rob Clark <robin.clark@oss.qualcomm.com>,
-	Matthew Brost <matthew.brost@intel.com>,
-	Hans Verkuil <hverkuil@kernel.org>,
-	Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>,
-	Ulf Hansson <ulf.hansson@linaro.org>,
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-	Vitaly Lifshits <vitaly.lifshits@intel.com>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Niklas Cassel <cassel@kernel.org>,
-	Calvin Owens <calvin@wbinvd.org>,
-	Sagi Maimon <maimon.sagi@gmail.com>,
-	"Martin K. Petersen" <martin.petersen@oracle.com>,
-	Karan Tilak Kumar <kartilak@cisco.com>,
-	Casey Schaufler <casey@schaufler-ca.com>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Petr Mladek <pmladek@suse.com>,
-	Max Kellermann <max.kellermann@ionos.com>,
-	Takashi Iwai <tiwai@suse.de>,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	openipmi-developer@lists.sourceforge.net,
-	linux-media@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	linaro-mm-sig@lists.linaro.org,
-	amd-gfx@lists.freedesktop.org,
-	linux-arm-msm@vger.kernel.org,
-	freedreno@lists.freedesktop.org,
-	intel-xe@lists.freedesktop.org,
-	linux-mmc@vger.kernel.org,
-	netdev@vger.kernel.org,
-	intel-wired-lan@lists.osuosl.org,
-	linux-pci@vger.kernel.org,
-	linux-s390@vger.kernel.org,
-	linux-scsi@vger.kernel.org,
-	linux-staging@lists.linux.dev,
-	ceph-devel@vger.kernel.org,
-	linux-trace-kernel@vger.kernel.org,
-	linux-sound@vger.kernel.org
-Date: Mon, 10 Nov 2025 19:40:42 +0100
-Message-ID: <20251110184727.666591-24-andriy.shevchenko@linux.intel.com>
-X-Mailer: git-send-email 2.50.1
-In-Reply-To: <20251110184727.666591-1-andriy.shevchenko@linux.intel.com>
+	dkim=pass header.d=ibm.com header.s=pp1 header.b=sMvwPWUD;
+	dmarc=pass (policy=reject) header.from=ibm.com;
+	arc=reject ("signature check failed: fail, {[1] = sig:microsoft.com:reject}");
+	spf=pass (lists.linaro.org: domain of Slava.Dubeyko@ibm.com designates 148.163.156.1 as permitted sender) smtp.mailfrom=Slava.Dubeyko@ibm.com
+Received: from pps.filterd (m0360083.ppops.net [127.0.0.1])
+	by mx0a-001b2d01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5AAEiVuL005929;
+	Mon, 10 Nov 2025 19:12:44 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+	:content-id:content-transfer-encoding:content-type:date:from
+	:in-reply-to:message-id:mime-version:references:subject:to; s=
+	pp1; bh=kUv3d/PJA8WPa6iavIQEVQdshmFYx0CYQfpCl2kze0M=; b=sMvwPWUD
+	hkSbYS98OOIfWYdoY58wFair39hPOE8UnXLgZ1vGCDZAOJ8waIHh9otaoy+42qv1
+	D1rZd3Ki3ZIukUwdoasLt8sjwufmkrmolbeDLy7bw3Kf9cCtZfuQZdbacSHQp5NF
+	L03awHefUE3qlNR0LTRHeBYYb+lTs0j3m7wlgxHRK7pjQpz2sNKGIysBjFmIW+aN
+	So0PFV1ImX5nFsrL5T0Avc0yL5p8M8lfJ1D+pqQ11DoO4WNptRmib4kOnfhQqCh5
+	npPzeCbg8S8ltza2nN1bXUY/TrRe2n3pFwZBaJA+ZZ7BYltdDcVL8mpwx2G6wAPW
+	SJNvuAEKnmEGsg==
+Received: from pps.reinject (localhost [127.0.0.1])
+	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4a9wc71vvv-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Mon, 10 Nov 2025 19:12:43 +0000 (GMT)
+Received: from m0360083.ppops.net (m0360083.ppops.net [127.0.0.1])
+	by pps.reinject (8.18.1.12/8.18.0.8) with ESMTP id 5AAJ9ldW007231;
+	Mon, 10 Nov 2025 19:12:42 GMT
+Received: from cy3pr05cu001.outbound.protection.outlook.com (mail-westcentralusazon11013042.outbound.protection.outlook.com [40.93.201.42])
+	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4a9wc71vvr-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Mon, 10 Nov 2025 19:12:42 +0000 (GMT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=VwT8Vb96JX38U0umdWU/Bk+6/gatSPkHpp6Kup3gkRwX5WfHQgmpmJCUux7x1i6/Fi+BX0oFfv5thd7Qh6gcIrvIlWYBfLqQBqGP2VxEPtbS5NUKwHQhOQ03/wqtTjq44NaafEkoEwYfw7QTHWOSz7D/DpWMECYTdPTSI8ge3qOFVqLPqIeHt9GOkxGOqgWBvTpRLT6N47USXFFyaODMpqeNEN/FlCbvqu7bONenlo4oj5IwaaZ8/X2lgIS8VHUhJWK5iKTuw0loFUdZvhfw7OGzrMlwVFIwT7LWNg1nMYwaBnzLyibYnD2arsHiRri28C6cu0dz6QNYMrSzgpheow==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=kUv3d/PJA8WPa6iavIQEVQdshmFYx0CYQfpCl2kze0M=;
+ b=NZQ3s3v0iD9lJTaP26NBl3CVuE9ifwlAvh/+Y3+aI6pF0mcci9+NbYVtaS/mZlbshWZWQvUU27tPf5l0eZup0N+LjkWAp262lfYwgwqnZaYc1jf/XkimKv2PW56ofXPZS1ZeXuKWVQ1SBvCi+naTkSgdjL5qJ4xTTGUBP+soC6ApwEkDGuVE8IaaL7rvMco009rottB4XD4VhjrBy1vRBvjRj/rAahIMl1YjeLmfF9qdVvN61jnWQavwTV2qPYzmhPEQhk3v/uaHeV5ccJudo0o3wRetmWvZVOg3YdfdumDrE3WkvnEKv5yJ7G5zXgqds3I2riP6m+E35hPjJvpiCw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=ibm.com; dmarc=pass action=none header.from=ibm.com; dkim=pass
+ header.d=ibm.com; arc=none
+Received: from SA1PR15MB5819.namprd15.prod.outlook.com (2603:10b6:806:338::8)
+ by CH0PR15MB6293.namprd15.prod.outlook.com (2603:10b6:610:185::22) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.16; Mon, 10 Nov
+ 2025 19:12:38 +0000
+Received: from SA1PR15MB5819.namprd15.prod.outlook.com
+ ([fe80::920c:d2ba:5432:b539]) by SA1PR15MB5819.namprd15.prod.outlook.com
+ ([fe80::920c:d2ba:5432:b539%4]) with mapi id 15.20.9298.015; Mon, 10 Nov 2025
+ 19:12:38 +0000
+From: Viacheslav Dubeyko <Slava.Dubeyko@ibm.com>
+To: "casey@schaufler-ca.com" <casey@schaufler-ca.com>,
+        "linux-mmc@vger.kernel.org" <linux-mmc@vger.kernel.org>,
+        "intel-wired-lan@lists.osuosl.org" <intel-wired-lan@lists.osuosl.org>,
+        "mani@kernel.org" <mani@kernel.org>,
+        "pmladek@suse.com" <pmladek@suse.com>,
+        "intel-xe@lists.freedesktop.org" <intel-xe@lists.freedesktop.org>,
+        "linux-staging@lists.linux.dev" <linux-staging@lists.linux.dev>,
+        "dmitry.baryshkov@oss.qualcomm.com" <dmitry.baryshkov@oss.qualcomm.com>,
+        "vitaly.lifshits@intel.com" <vitaly.lifshits@intel.com>,
+        "amd-gfx@lists.freedesktop.org" <amd-gfx@lists.freedesktop.org>,
+        "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
+        "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>,
+        "ulf.hansson@linaro.org" <ulf.hansson@linaro.org>,
+        "max.kellermann@ionos.com"
+	<max.kellermann@ionos.com>,
+        "kartilak@cisco.com" <kartilak@cisco.com>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "christian.koenig@amd.com" <christian.koenig@amd.com>,
+        "linux-s390@vger.kernel.org" <linux-s390@vger.kernel.org>,
+        "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>,
+        "linux-trace-kernel@vger.kernel.org" <linux-trace-kernel@vger.kernel.org>,
+        "corey@minyard.net" <corey@minyard.net>,
+        "hverkuil@kernel.org"
+	<hverkuil@kernel.org>,
+        "calvin@wbinvd.org" <calvin@wbinvd.org>,
+        "ceph-devel@vger.kernel.org" <ceph-devel@vger.kernel.org>,
+        "openipmi-developer@lists.sourceforge.net"
+	<openipmi-developer@lists.sourceforge.net>,
+        "linux@treblig.org"
+	<linux@treblig.org>,
+        "linux-pci@vger.kernel.org" <linux-pci@vger.kernel.org>,
+        "rostedt@goodmis.org" <rostedt@goodmis.org>,
+        "matthew.brost@intel.com"
+	<matthew.brost@intel.com>,
+        "linux-scsi@vger.kernel.org"
+	<linux-scsi@vger.kernel.org>,
+        "andriy.shevchenko@linux.intel.com"
+	<andriy.shevchenko@linux.intel.com>,
+        "martin.petersen@oracle.com"
+	<martin.petersen@oracle.com>,
+        "freedreno@lists.freedesktop.org"
+	<freedreno@lists.freedesktop.org>,
+        "alexander.deucher@amd.com"
+	<alexander.deucher@amd.com>,
+        "maimon.sagi@gmail.com" <maimon.sagi@gmail.com>,
+        "linux-sound@vger.kernel.org" <linux-sound@vger.kernel.org>,
+        "tiwai@suse.de"
+	<tiwai@suse.de>,
+        "cassel@kernel.org" <cassel@kernel.org>,
+        "robin.clark@oss.qualcomm.com" <robin.clark@oss.qualcomm.com>,
+        "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+        "laurent.pinchart+renesas@ideasonboard.com"
+	<laurent.pinchart+renesas@ideasonboard.com>,
+        "linux-arm-msm@vger.kernel.org"
+	<linux-arm-msm@vger.kernel.org>,
+        "linux-doc@vger.kernel.org"
+	<linux-doc@vger.kernel.org>,
+        "tzimmermann@suse.de" <tzimmermann@suse.de>
+Thread-Topic: [EXTERNAL] [PATCH v1 03/23] ceph: Switch to use %ptSp
+Thread-Index: AQHcUnN3d/v3h0NBK0GprZn6lraKLrTsRwyA
+Date: Mon, 10 Nov 2025 19:12:38 +0000
+Message-ID: <ba4fd8ffa0468ce1ec2b4c5d6b249922758bc648.camel@ibm.com>
 References: <20251110184727.666591-1-andriy.shevchenko@linux.intel.com>
+	 <20251110184727.666591-4-andriy.shevchenko@linux.intel.com>
+In-Reply-To: <20251110184727.666591-4-andriy.shevchenko@linux.intel.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: SA1PR15MB5819:EE_|CH0PR15MB6293:EE_
+x-ms-office365-filtering-correlation-id: bf4f4d4c-2927-476d-5406-08de208d1d06
+x-ld-processed: fcf67057-50c9-4ad4-98f3-ffca64add9e9,ExtAddr
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: 
+ BCL:0;ARA:13230040|366016|10070799003|1800799024|376014|7416014|921020|38070700021;
+x-microsoft-antispam-message-info: 
+ =?utf-8?B?WWNUNXRVaGFKUFVkcW5BMER1d3IrRjhIYzN2QmtVYVd5TWRsc09Sb0RycXlt?=
+ =?utf-8?B?ZjZOQzFSWkpPTDV3NVhGUUJEdEtibmNEUkFpakJoT1JxZXFMTUNMS3J3RGJ4?=
+ =?utf-8?B?NVQxbUJpaFBSZmZ4TEd1UDAyT0ZmL2ZFU2pBTXFsUXdEUXcyRjRyeVhjQWJM?=
+ =?utf-8?B?aEZEU0pOU05yYjl2bmNIUGZLdFEwbzVqaFo5Zk03SCtXbFZHVkprUTU0WTRx?=
+ =?utf-8?B?KzNudXAydW1GaktqcllQdERsdTUwOVYrQnR0RGNZZm1hYlRoV2plK1lkcjVn?=
+ =?utf-8?B?c2NVU1d5cTJxaHd6MHl2M2tlK3dkSFArd1k2cytIMExFeEl2aFcxbVkyK0ZO?=
+ =?utf-8?B?UHUxdG1FVGRsd2c2UkZwSWtOYmxYa09xN2UzMU9MNmREWmZ1czlRK25mbGtY?=
+ =?utf-8?B?ZzA5THk4T25nblJ0YzArUEU4ZzUyelBER0FUN0Mzclhhd3BvQmRnVGtvOUQx?=
+ =?utf-8?B?S2NGeThGVWF4MXRETkRYbjVLdnk4MldkUjlLZVduTkZ4cWVONnkwRVQ5bGFl?=
+ =?utf-8?B?dTJrQllWVXJMNzN0Z0ZSem9yS1pHRVhMVG5JYzlLK3Rla0ZQd2NYbUJjS1hx?=
+ =?utf-8?B?S3VLa29aVU9QRFBsQ3BjNGR0aVZ6ckdmVDFiaGhBMFpnVFRpd0xqQS85QzE0?=
+ =?utf-8?B?dFBoYXAwTUdpSTVqdHpyWlh2NWxuWmpOQmFseCtLY0FWVytyYXJkWnhqaXZ5?=
+ =?utf-8?B?amxrNGxTcmpNdmRQZkdQVGVXWXQyWkpXM1RpdEtaVXVBb0JRY1dVNFhxbGkx?=
+ =?utf-8?B?YTJxd2pMM3djc05SNHJQamVxcUthcFFweHk0VkxvYy9WcHpydW5zdVFtRjk1?=
+ =?utf-8?B?VHNJV1dBRE8vN2hRQVUzOCtTc01QZm85ZmR6SHEvWDJXem4yVmgzK2JZWDlz?=
+ =?utf-8?B?Vld2cXdHWFpPWlZsbGtpVWN2eUsvVk1DR0pocG1pRnFrT2Q5TkpMQ2RwZXdS?=
+ =?utf-8?B?MDRwRDZDdWVLYTRMU25kTUpHSlVaWlVQNEZtdDdsRmI4NU5Sd2Y4TDZyc3dj?=
+ =?utf-8?B?UEFzR3E4NG5KczZpZXpPb3RVZnJBQlNyQWg0R1dGakgzYmRWVFc1N2FNTUVp?=
+ =?utf-8?B?TUxubUQ1Q1ZPUTlFUUY0eVR4eFNGQ05xWUoyc2FBV0VmWXg5YndQTnhWSjlU?=
+ =?utf-8?B?U3FZTnFOL3JiODVOejhJUFJ1dTFlNXMxK1JSaHVWejBVMUl3SHg0QmlEbjBl?=
+ =?utf-8?B?R21sWUNFeUNFM3ZmcmFTVGRPUnNqR253YUJDMmE1R25ETVhDKzR6UUZBaWkx?=
+ =?utf-8?B?cHlVcENLY3pOV203WDhPOThxbFJORmZyMHJBUDdrWHhvSWxNeGNRczYwVWJu?=
+ =?utf-8?B?c2g5bEhPWXM3cXF6NkQycjRvN05jRVBOWTRXUDE0M1YvbGRRdVB3LzVweHpP?=
+ =?utf-8?B?cTNPbTJLTm1SZ2cvZk5MbkNIbjVvVHhXdDFmR1FBV1M0S0ZQcXFjNGQ2Tlh3?=
+ =?utf-8?B?QVZlWExwN1lZcnhsVFlJdGJobFo0UEg2WFpxeFBSNS8xVHprU3lvUE5oeG1X?=
+ =?utf-8?B?Y0xzdXdMM2ZlTkh4bk5KeWxJYjYvMDFua25SY081SG9uL0Nhd2g2Q1FsOVkw?=
+ =?utf-8?B?NFJqZUp3Wko3QTc2OEZzRkVmWW56SlBMTi92UmNuUVNROCtib2lWa0pIV3U2?=
+ =?utf-8?B?czdrcUprYW13Y0NUTDg1b1REOVFXZjdUM3JaK2xsb1ZNSTFjVDlYQTVCODlZ?=
+ =?utf-8?B?ejlkOTBSWUx3M1E2cjhmRzVDMFROWlNkU2ppNjhyZkMxdy9hcUpNVnM5K01P?=
+ =?utf-8?B?Rkd1TmZDc1UvSmJxMmdna1VKK2RGMVYxalZsQmpvaDRBdXNlZ2U0WDhnK3JG?=
+ =?utf-8?B?VXBQWEJnUkZQZ2R6RWx1eUVtOXBRMy9pS2tzWnRKZGFCY1A3OVk1SjZMMlVy?=
+ =?utf-8?B?cGkra0ZGT0hDZkRLUERlR3RocHExcnlpOHRUa1hMN3EyWmFjdnU3WkJwVjM3?=
+ =?utf-8?B?ckVqZHZ5dVlUT05DbUp3TFpQZnllcFBMQytKRnYxaUtDNDM0Uk5uc0ErUUVK?=
+ =?utf-8?B?bmkzVjEzcmRueFpDZGE3WllKZjJVeEFPSkJmVzBxWDExMmNETmo0V2ljakZV?=
+ =?utf-8?B?bW4xaHlRR0JXT2czQkV1OTRDNlExMWFaNEJ2Zz09?=
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SA1PR15MB5819.namprd15.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(10070799003)(1800799024)(376014)(7416014)(921020)(38070700021);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?utf-8?B?OU5tdXB4OWhkRUtGYno2d1VUK0E3MDYvVCtjQXcwMWlGdDNYa1BmSTM1QzFu?=
+ =?utf-8?B?cEtOS083a0dxMzNWMURFckFhejhwb0hiZVNZTFB1ZE9WQThWOU9PN1RPWnhN?=
+ =?utf-8?B?aHpNMWlUbDlRcm95dW15ZTFLcEVsQmlESS9IOUg3c1NLVDlhSTFkaVVlVVR0?=
+ =?utf-8?B?RGwrUEl2TFg2MytUTDY5M0k0ZHdESlUrVllWUVVuZGgxeGpTWGhERmM2eTFw?=
+ =?utf-8?B?WGZ1cnA3L1YvR2E0eUxEbG5CRkM2RkZwNTdTMDNiQzhXZzFVV1Z0UE5PNGtR?=
+ =?utf-8?B?TlVhUWJlOGhzL0NnUWhrUU80RVF0UG5FN25pbVpIcy9jR1FlOHpRNk1iTm9J?=
+ =?utf-8?B?WGU4QTV4aUVYSVJSSEkrOGtQRU5vT091bVNESEhlWkF4VmEzWUFBZkdBMm5D?=
+ =?utf-8?B?TWtiS0tRdjVyNS9LWkVJWGN2K0h2a2h0OVIvYVI5aW85Y3pIc0EzNmNmM3dn?=
+ =?utf-8?B?TE9OTlJlWmlQZkFwdzFNVTZNNEx5Ly9TQS9jaEJLNzVFM0k0eE8rcTZkbjk5?=
+ =?utf-8?B?KzNCY3dFK1FOL01mYTNhanRyQ3RwaUpRWk9LTE5PSTFsbnhtQXhJZHBLMVdL?=
+ =?utf-8?B?VDVlV1J6emRrWXpxVGNBcmJpRVNoVFZWOTQwYVVtMndPeG1pYVdZSmZPbjJM?=
+ =?utf-8?B?dXBtL0lHQ3ljRXBBZGoxS0c1LzVIMWJxVHRVQmdFUkN6cy9acmUvODM2RDZt?=
+ =?utf-8?B?SW1nNmtzUENRRVZPVmdSM3RQVXNVUTVOMldTNDJydGxvUmtzZFdtYlZ3TVVj?=
+ =?utf-8?B?eWE0aDM2YjhKRE5CZTRKWUVubWhtU2JCYXQyMjlCaGFVN1VHUWFFaW1uRFdJ?=
+ =?utf-8?B?dzVDZnVvVHN0REFubkVBdS9JallBMXdLY3dPckk5NnZhYnhML3U5aFhBdmd5?=
+ =?utf-8?B?c2xMZFNKSnpGWWdZWUk5U3hsQ0pCNDlkUzkxN3N5NEEzc05kUWF0dVdWdng3?=
+ =?utf-8?B?dGw0ZXhDMnp4OGFUZ0t2eU5CcS8ybjNPNjJSQTRKVEpwaWdyZEF4RmhDekds?=
+ =?utf-8?B?UnpTdTh3SnUvZ0VWVlNORktILzVianF4RlM4aXVnS0ZGa0ZNQTVreEZvYnNB?=
+ =?utf-8?B?VmpYZHJ5NmJqQ1VyRWpTc2xVdDd4bWQ1Y2hIZy9hZ1J6TWo3L2k2YTNsa0kw?=
+ =?utf-8?B?RlpmWS81TDdER3V0czJ3T1hvWm9GeXFTSnYycmxNRFEvQ1FKWGJJckhwY0JO?=
+ =?utf-8?B?enNtS3lubkhvd05JTVl4bldQeXFLOWlvTmMrZFNvczBqekxqRDNyUXlDNTh2?=
+ =?utf-8?B?aWVFMkkrM2tTVWhSY2lSTFd5VHpHeEhqL3RpYURORXFDdjEwZkRmM204TDN3?=
+ =?utf-8?B?eTFVb3M0ZkNISEc2U1FzTUtIbVBtb3k1aTdvc0tlcC9MRE1veGprMlBCN0hO?=
+ =?utf-8?B?RW5EckxqWi8yN21CU1RPSUxUNnVWcXptdnBjN2tybWhhTmV6UUM3VExSdmZ0?=
+ =?utf-8?B?bHV5clZKMlpVOHZJMmxSU2xFM0hkV3Q1Y3pLOHdDYzlzN0RFZHZZZDJmTUcy?=
+ =?utf-8?B?MitCSFFxQStIUFdmdFRaa0JPT0s0MDhZV1pLbFJxemJoNGR6dHh0TmtLclpD?=
+ =?utf-8?B?RlhuTHp1dG45cklWZk5Rd3FlaUJZL0R5OEJ3YWU4eTk2MzRwM3V2MkdRaXFH?=
+ =?utf-8?B?SlViZTQrUzcvNlR1dDVLSllSSWlndGFJSDZVNjEyWGZpL0Q5NEkzOTdHTmRk?=
+ =?utf-8?B?YnlSMURqQW9PZlFPYktUTXNUeldnMlhhc2c2ZkxBZlNlMGh5bkVHYjBRWGhh?=
+ =?utf-8?B?cFpGbGJIVTl0bStCdVA3SG9hT1F3TzhvUDZmdmhHT0VBNGRvOEpjYmZHUld5?=
+ =?utf-8?B?dGQxb3BqbkVRY050QS9Fci82ZE1OM2h1WjNMT01ieDRzNjliWUJ0ZHRYbzZG?=
+ =?utf-8?B?RWlVeGwvQVBKQk5aV3J0TFFLQnAvNjRCZW1tR25ma2lROVJ5V1BBMEpOZUtw?=
+ =?utf-8?B?UlkwUjl4YVVMR2ZkVHhjSEd0ZVl3WTNYNVBHR1JlSXZ1Ulk2cXBlSGI0d1A5?=
+ =?utf-8?B?TGR6UXEzQ3pEditwR2FwN1Q0bzd0ZXJKbFBWdmlSd3Qyamkva2J5c2kzWElM?=
+ =?utf-8?B?WU9vVEpYTHVEbDlYM2IxYmFUNzFkdFJLM1ZUYzBkS1hhT3N3blZsYTBrbkI4?=
+ =?utf-8?B?WGtjMVFHRkp0c1F6OXFJSzg4UXEvTHBRdXZHV0lDeHpPTTMra2JLVkdGUlR0?=
+ =?utf-8?Q?xP9wG6LjVjPF3eYGg3CGAI4=3D?=
+Content-ID: <E4BBB9553FD6454BB8E0E2552B1E1EA4@namprd15.prod.outlook.com>
 MIME-Version: 1.0
-X-Spamd-Bar: ----
-X-MailFrom: andriy.shevchenko@linux.intel.com
+X-OriginatorOrg: ibm.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: SA1PR15MB5819.namprd15.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: bf4f4d4c-2927-476d-5406-08de208d1d06
+X-MS-Exchange-CrossTenant-originalarrivaltime: 10 Nov 2025 19:12:38.2179
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: fcf67057-50c9-4ad4-98f3-ffca64add9e9
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: HlFuCtB6ABlzjj6KtTOiN/kt3Qp0KCFKLzFzgUjbwf2zErZ5YElGV6Jq+R/eTDsCLcLccECyWBjA84cx7Lr0KQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR15MB6293
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTA4MDAxOCBTYWx0ZWRfX8DGC+jBv6edf
+ as3KrhlqoFJcN+nQwXoynWKBW1q8gmJN/5gC3PepW1H8+s7le/qmZ0Zlt16NhyF0+mH0G1awYhN
+ pWZyVKYOK8xbXlbQCybMjjT9S8upVPRBxjRUpL0l70Zpu6o6+B2EO6aSst7ZfbAXvFu6RK6qNFn
+ JztijSv53/k39WNa2oXkQaYo1OKX8dXnO2jUFNh8m/jkqhhjtqQp0J0m4HwBONFiKdNhi4de2Xp
+ a+u9h7FtPIFkNHZlvlhFz5a5PzAYO9b0y8mKG2LYvHZSC7FBQlcsO6GsCNMo7tiDei6twIR/2I1
+ GaBWUWo6S5oMED6U6PVgneIb7+pviDl1pVp+ORwvaaSgstjBpTrY/H6ICuqQwVGauILOoAq0e7L
+ aXnO8HU1GxVD8GEnZdgK3fCwmbLRog==
+X-Authority-Analysis: v=2.4 cv=GcEaXAXL c=1 sm=1 tr=0 ts=6912392b cx=c_pps
+ a=Xv5HOu5WSFZfuBAuS1yumw==:117 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
+ a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=6UeiqGixMTsA:10 a=VkNPw1HP01LnGYTKEx00:22 a=QyXUC8HyAAAA:8 a=VnNF1IyMAAAA:8
+ a=6-j_7sKItp_voF2SmKEA:9 a=QEXdDO2ut3YA:10 a=UhEZJTgQB8St2RibIkdl:22
+ a=Z5ABNNGmrOfJ6cZ5bIyy:22 a=QOGEsqRv6VhmHaoFNykA:22
+X-Proofpoint-GUID: 1L9JRQbmWp7AuhQUetZc888E6fKmcziW
+X-Proofpoint-ORIG-GUID: 6t2qwdpe0zaFDm8POsex3js8vGaYTx_n
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-11-10_07,2025-11-10_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 malwarescore=0 bulkscore=0 adultscore=0 impostorscore=0
+ lowpriorityscore=0 clxscore=1011 spamscore=0 priorityscore=1501 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.19.0-2510240000 definitions=main-2511080018
+X-Spamd-Bar: /
+X-MailFrom: Slava.Dubeyko@ibm.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: R37Q2BZUMKWXAPJQ5OH4ONXPIBKLYTMQ
-X-Message-ID-Hash: R37Q2BZUMKWXAPJQ5OH4ONXPIBKLYTMQ
-X-Mailman-Approved-At: Thu, 16 Apr 2026 14:53:03 +0000
-CC: Rasmus Villemoes <linux@rasmusvillemoes.dk>, Sergey Senozhatsky <senozhatsky@chromium.org>, Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>, Gustavo Padovan <gustavo@padovan.org>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>, Konrad Dybcio <konradybcio@kernel.org>, Lucas De Marchi <lucas.demarchi@intel.com>, =?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Mauro Carvalho Chehab <mchehab@kernel.org>, Vladimir Oltean <olteanv@gmail.com>, Andrew Lunn <andrew@lunn.ch>, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni
- @redhat.com>, Tony Nguyen <anthony.l.nguyen@intel.com>, Przemek Kitszel <przemyslaw.kitszel@intel.com>, =?UTF-8?q?Krzysztof=20Wilczy=C5=84ski?= <kwilczynski@kernel.org>, Kishon Vijay Abraham I <kishon@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>, Rodolfo Giometti <giometti@enneenne.com>, Jonathan Lemon <jonathan.lemon@gmail.com>, Vadim Fedorenko <vadim.fedorenko@linux.dev>, Richard Cochran <richardcochran@gmail.com>, Stefan Haberland <sth@linux.ibm.com>, Jan Hoeppner <hoeppner@linux.ibm.com>, Heiko Carstens <hca@linux.ibm.com>, Vasily Gorbik <gor@linux.ibm.com>, Alexander Gordeev <agordeev@linux.ibm.com>, Christian Borntraeger <borntraeger@linux.ibm.com>, Sven Schnelle <svens@linux.ibm.com>, Satish Kharat <satishkh@cisco.com>, Sesidhar Baddela <sebaddel@cisco.com>, "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Xiubo Li <xiubli@redhat.com>, Ilya Dryomov <idryomov@gmail.com>, Masami Hiramatsu <mhiramat@kernel.org>,
-  Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Andrew Morton <akpm@linux-foundation.org>, Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>
+Message-ID-Hash: YC6L4EKXAMUJCJGVFDTECAY7VKZTTJLS
+X-Message-ID-Hash: YC6L4EKXAMUJCJGVFDTECAY7VKZTTJLS
+X-Mailman-Approved-At: Thu, 16 Apr 2026 14:53:05 +0000
+CC: "borntraeger@linux.ibm.com" <borntraeger@linux.ibm.com>, "senozhatsky@chromium.org" <senozhatsky@chromium.org>, "jonathan.lemon@gmail.com" <jonathan.lemon@gmail.com>, "akpm@linux-foundation.org" <akpm@linux-foundation.org>, "lumag@kernel.org" <lumag@kernel.org>, "andrew@lunn.ch" <andrew@lunn.ch>, "olteanv@gmail.com" <olteanv@gmail.com>, "davem@davemloft.net" <davem@davemloft.net>, "przemyslaw.kitszel@intel.com" <przemyslaw.kitszel@intel.com>, "marijn.suijten@somainline.org" <marijn.suijten@somainline.org>, "linux@rasmusvillemoes.dk" <linux@rasmusvillemoes.dk>, "mripard@kernel.org" <mripard@kernel.org>, Paolo Abeni <pabeni@redhat.com>, "hca@linux.ibm.com" <hca@linux.ibm.com>, "hoeppner@linux.ibm.com" <hoeppner@linux.ibm.com>, "corbet@lwn.net" <corbet@lwn.net>, "anthony.l.nguyen@intel.com" <anthony.l.nguyen@intel.com>, "mathieu.desnoyers@efficios.com" <mathieu.desnoyers@efficios.com>, "satishkh@cisco.com" <satishkh@cisco.com>, "sumit.semwal@linaro.org" <sumit.semwal@linaro.org>, "g
+ iometti@enneenne.com" <giometti@enneenne.com>, "gustavo@padovan.org" <gustavo@padovan.org>, "kuba@kernel.org" <kuba@kernel.org>, "vadim.fedorenko@linux.dev" <vadim.fedorenko@linux.dev>, "thomas.hellstrom@linux.intel.com" <thomas.hellstrom@linux.intel.com>, "lucas.demarchi@intel.com" <lucas.demarchi@intel.com>, "rodrigo.vivi@intel.com" <rodrigo.vivi@intel.com>, "mhiramat@kernel.org" <mhiramat@kernel.org>, "jesszhan0024@gmail.com" <jesszhan0024@gmail.com>, "sean@poorly.run" <sean@poorly.run>, "mchehab@kernel.org" <mchehab@kernel.org>, "bhelgaas@google.com" <bhelgaas@google.com>, "simona@ffwll.ch" <simona@ffwll.ch>, "airlied@gmail.com" <airlied@gmail.com>, "kishon@kernel.org" <kishon@kernel.org>, "konradybcio@kernel.org" <konradybcio@kernel.org>, "tiwai@suse.com" <tiwai@suse.com>, "agordeev@linux.ibm.com" <agordeev@linux.ibm.com>, "gor@linux.ibm.com" <gor@linux.ibm.com>, "edumazet@google.com" <edumazet@google.com>, "kwilczynski@kernel.org" <kwilczynski@kernel.org>, "sebaddel@cisco.com"
+  <sebaddel@cisco.com>, "gregkh@linuxfoundation.org" <gregkh@linuxfoundation.org>, "idryomov@gmail.com" <idryomov@gmail.com>, "maarten.lankhorst@linux.intel.com" <maarten.lankhorst@linux.intel.com>, "abhinav.kumar@linux.dev" <abhinav.kumar@linux.dev>, "richardcochran@gmail.com" <richardcochran@gmail.com>, "sth@linux.ibm.com" <sth@linux.ibm.com>, "svens@linux.ibm.com" <svens@linux.ibm.com>, "James.Bottomley@HansenPartnership.com" <James.Bottomley@HansenPartnership.com>, Xiubo Li <xiubli@redhat.com>, "perex@perex.cz" <perex@perex.cz>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v1 23/23] tracing: Switch to use %ptSp
+Subject: [Linaro-mm-sig] Re: [PATCH v1 03/23] ceph: Switch to use %ptSp
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/R37Q2BZUMKWXAPJQ5OH4ONXPIBKLYTMQ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YC6L4EKXAMUJCJGVFDTECAY7VKZTTJLS/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -122,70 +277,209 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [4.09 / 15.00];
+X-Spamd-Result: default: False [5.99 / 15.00];
+	DMARC_POLICY_REJECT(2.00)[ibm.com : SPF not aligned (relaxed),reject];
 	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
-	R_DKIM_REJECT(1.00)[intel.com:s=Intel];
-	DATE_IN_PAST(1.00)[3764];
+	R_DKIM_REJECT(1.00)[ibm.com:s=pp1];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
+	DATE_IN_PAST(1.00)[3763];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
-	DMARC_POLICY_SOFTFAIL(0.10)[intel.com : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	MIME_TRACE(0.00)[0:+];
+	TO_DN_SOME(0.00)[];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	GREYLIST(0.00)[pass,meta];
 	RCVD_TLS_LAST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	TO_DN_SOME(0.00)[];
-	FREEMAIL_CC(0.00)[rasmusvillemoes.dk,chromium.org,lwn.net,linaro.org,padovan.org,gmail.com,ffwll.ch,linux.intel.com,kernel.org,linux.dev,poorly.run,somainline.org,intel.com,lunn.ch,davemloft.net,google.com,redhat.com,enneenne.com,linux.ibm.com,cisco.com,HansenPartnership.com,linuxfoundation.org,efficios.com,linux-foundation.org,perex.cz,suse.com];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_TO(0.00)[minyard.net,amd.com,treblig.org,suse.de,oss.qualcomm.com,intel.com,kernel.org,ideasonboard.com,linaro.org,linux.intel.com,wbinvd.org,gmail.com,oracle.com,cisco.com,schaufler-ca.com,goodmis.org,suse.com,ionos.com,vger.kernel.org,lists.sourceforge.net,lists.freedesktop.org,lists.linaro.org,lists.osuosl.org,lists.linux.dev];
-	GREYLIST(0.00)[pass,meta];
-	ARC_NA(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:-];
-	RCPT_COUNT_GT_50(0.00)[96];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FROM_NEQ_ENVFROM(0.00)[andriy.shevchenko@linux.intel.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,renesas];
-	NEURAL_SPAM(0.00)[0.609];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	FREEMAIL_CC(0.00)[linux.ibm.com,chromium.org,gmail.com,linux-foundation.org,kernel.org,lunn.ch,davemloft.net,intel.com,somainline.org,rasmusvillemoes.dk,redhat.com,lwn.net,efficios.com,cisco.com,linaro.org,enneenne.com,padovan.org,linux.dev,linux.intel.com,poorly.run,google.com,ffwll.ch,suse.com,linuxfoundation.org,HansenPartnership.com,perex.cz];
+	FREEMAIL_TO(0.00)[schaufler-ca.com,vger.kernel.org,lists.osuosl.org,kernel.org,suse.com,lists.freedesktop.org,lists.linux.dev,oss.qualcomm.com,intel.com,linaro.org,ionos.com,cisco.com,amd.com,lists.linaro.org,minyard.net,wbinvd.org,lists.sourceforge.net,treblig.org,goodmis.org,linux.intel.com,oracle.com,gmail.com,suse.de,ideasonboard.com];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:email,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,linux.intel.com:mid]
-X-Rspamd-Queue-Id: 7C656410152
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:email,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns];
+	RCPT_COUNT_GT_50(0.00)[96];
+	FROM_NEQ_ENVFROM(0.00)[Slava.Dubeyko@ibm.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[ibm.com:-];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	TAGGED_RCPT(0.00)[linaro-mm-sig,renesas];
+	NEURAL_SPAM(0.00)[0.608];
+	MISSING_XM_UA(0.00)[];
+	RCVD_COUNT_SEVEN(0.00)[8]
+X-Rspamd-Queue-Id: D66A1410171
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Use %ptSp instead of open coded variants to print content of
-struct timespec64 in human readable format.
+On Mon, 2025-11-10 at 19:40 +0100, Andy Shevchenko wrote:
+> Use %ptSp instead of open coded variants to print content of
+> struct timespec64 in human readable format.
+> 
+> Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+> ---
+>  fs/ceph/dir.c   |  5 ++---
+>  fs/ceph/inode.c | 47 +++++++++++++++--------------------------------
+>  fs/ceph/xattr.c |  6 ++----
+>  3 files changed, 19 insertions(+), 39 deletions(-)
+> 
+> diff --git a/fs/ceph/dir.c b/fs/ceph/dir.c
+> index d18c0eaef9b7..bf50c6e7a029 100644
+> --- a/fs/ceph/dir.c
+> +++ b/fs/ceph/dir.c
+> @@ -2155,7 +2155,7 @@ static ssize_t ceph_read_dir(struct file *file, char __user *buf, size_t size,
+>  				" rfiles:   %20lld\n"
+>  				" rsubdirs: %20lld\n"
+>  				"rbytes:    %20lld\n"
+> -				"rctime:    %10lld.%09ld\n",
+> +				"rctime:    %ptSp\n",
+>  				ci->i_files + ci->i_subdirs,
+>  				ci->i_files,
+>  				ci->i_subdirs,
+> @@ -2163,8 +2163,7 @@ static ssize_t ceph_read_dir(struct file *file, char __user *buf, size_t size,
+>  				ci->i_rfiles,
+>  				ci->i_rsubdirs,
+>  				ci->i_rbytes,
+> -				ci->i_rctime.tv_sec,
+> -				ci->i_rctime.tv_nsec);
+> +				&ci->i_rctime);
+>  	}
+>  
+>  	if (*ppos >= dfi->dir_info_len)
+> diff --git a/fs/ceph/inode.c b/fs/ceph/inode.c
+> index 37d3a2477c17..6db8951d79e0 100644
+> --- a/fs/ceph/inode.c
+> +++ b/fs/ceph/inode.c
+> @@ -879,7 +879,9 @@ void ceph_fill_file_time(struct inode *inode, int issued,
+>  {
+>  	struct ceph_client *cl = ceph_inode_to_client(inode);
+>  	struct ceph_inode_info *ci = ceph_inode(inode);
+> +	struct timespec64 iatime = inode_get_atime(inode);
+>  	struct timespec64 ictime = inode_get_ctime(inode);
+> +	struct timespec64 imtime = inode_get_mtime(inode);
+>  	int warn = 0;
+>  
+>  	if (issued & (CEPH_CAP_FILE_EXCL|
+> @@ -889,39 +891,26 @@ void ceph_fill_file_time(struct inode *inode, int issued,
+>  		      CEPH_CAP_XATTR_EXCL)) {
+>  		if (ci->i_version == 0 ||
+>  		    timespec64_compare(ctime, &ictime) > 0) {
+> -			doutc(cl, "ctime %lld.%09ld -> %lld.%09ld inc w/ cap\n",
+> -			     ictime.tv_sec, ictime.tv_nsec,
+> -			     ctime->tv_sec, ctime->tv_nsec);
+> +			doutc(cl, "ctime %ptSp -> %ptSp inc w/ cap\n", &ictime, ctime);
+>  			inode_set_ctime_to_ts(inode, *ctime);
+>  		}
+>  		if (ci->i_version == 0 ||
+>  		    ceph_seq_cmp(time_warp_seq, ci->i_time_warp_seq) > 0) {
+>  			/* the MDS did a utimes() */
+> -			doutc(cl, "mtime %lld.%09ld -> %lld.%09ld tw %d -> %d\n",
+> -			     inode_get_mtime_sec(inode),
+> -			     inode_get_mtime_nsec(inode),
+> -			     mtime->tv_sec, mtime->tv_nsec,
+> +			doutc(cl, "mtime %ptSp -> %ptSp tw %d -> %d\n", &imtime, mtime,
+>  			     ci->i_time_warp_seq, (int)time_warp_seq);
+>  
+>  			inode_set_mtime_to_ts(inode, *mtime);
+>  			inode_set_atime_to_ts(inode, *atime);
+>  			ci->i_time_warp_seq = time_warp_seq;
+>  		} else if (time_warp_seq == ci->i_time_warp_seq) {
+> -			struct timespec64	ts;
+> -
+>  			/* nobody did utimes(); take the max */
+> -			ts = inode_get_mtime(inode);
+> -			if (timespec64_compare(mtime, &ts) > 0) {
+> -				doutc(cl, "mtime %lld.%09ld -> %lld.%09ld inc\n",
+> -				     ts.tv_sec, ts.tv_nsec,
+> -				     mtime->tv_sec, mtime->tv_nsec);
+> +			if (timespec64_compare(mtime, &imtime) > 0) {
+> +				doutc(cl, "mtime %ptSp -> %ptSp inc\n", &imtime, mtime);
+>  				inode_set_mtime_to_ts(inode, *mtime);
+>  			}
+> -			ts = inode_get_atime(inode);
+> -			if (timespec64_compare(atime, &ts) > 0) {
+> -				doutc(cl, "atime %lld.%09ld -> %lld.%09ld inc\n",
+> -				     ts.tv_sec, ts.tv_nsec,
+> -				     atime->tv_sec, atime->tv_nsec);
+> +			if (timespec64_compare(atime, &iatime) > 0) {
+> +				doutc(cl, "atime %ptSp -> %ptSp inc\n", &iatime, atime);
+>  				inode_set_atime_to_ts(inode, *atime);
+>  			}
+>  		} else if (issued & CEPH_CAP_FILE_EXCL) {
+> @@ -2703,10 +2692,8 @@ int __ceph_setattr(struct mnt_idmap *idmap, struct inode *inode,
+>  	if (ia_valid & ATTR_ATIME) {
+>  		struct timespec64 atime = inode_get_atime(inode);
+>  
+> -		doutc(cl, "%p %llx.%llx atime %lld.%09ld -> %lld.%09ld\n",
+> -		      inode, ceph_vinop(inode),
+> -		      atime.tv_sec, atime.tv_nsec,
+> -		      attr->ia_atime.tv_sec, attr->ia_atime.tv_nsec);
+> +		doutc(cl, "%p %llx.%llx atime %ptSp -> %ptSp\n",
+> +		      inode, ceph_vinop(inode), &atime, &attr->ia_atime);
+>  		if (!do_sync && (issued & CEPH_CAP_FILE_EXCL)) {
+>  			ci->i_time_warp_seq++;
+>  			inode_set_atime_to_ts(inode, attr->ia_atime);
+> @@ -2780,10 +2767,8 @@ int __ceph_setattr(struct mnt_idmap *idmap, struct inode *inode,
+>  	if (ia_valid & ATTR_MTIME) {
+>  		struct timespec64 mtime = inode_get_mtime(inode);
+>  
+> -		doutc(cl, "%p %llx.%llx mtime %lld.%09ld -> %lld.%09ld\n",
+> -		      inode, ceph_vinop(inode),
+> -		      mtime.tv_sec, mtime.tv_nsec,
+> -		      attr->ia_mtime.tv_sec, attr->ia_mtime.tv_nsec);
+> +		doutc(cl, "%p %llx.%llx mtime %ptSp -> %ptSp\n",
+> +		      inode, ceph_vinop(inode), &mtime, &attr->ia_mtime);
+>  		if (!do_sync && (issued & CEPH_CAP_FILE_EXCL)) {
+>  			ci->i_time_warp_seq++;
+>  			inode_set_mtime_to_ts(inode, attr->ia_mtime);
+> @@ -2804,13 +2789,11 @@ int __ceph_setattr(struct mnt_idmap *idmap, struct inode *inode,
+>  
+>  	/* these do nothing */
+>  	if (ia_valid & ATTR_CTIME) {
+> +		struct timespec64 ictime = inode_get_ctime(inode);
+>  		bool only = (ia_valid & (ATTR_SIZE|ATTR_MTIME|ATTR_ATIME|
+>  					 ATTR_MODE|ATTR_UID|ATTR_GID)) == 0;
+> -		doutc(cl, "%p %llx.%llx ctime %lld.%09ld -> %lld.%09ld (%s)\n",
+> -		      inode, ceph_vinop(inode),
+> -		      inode_get_ctime_sec(inode),
+> -		      inode_get_ctime_nsec(inode),
+> -		      attr->ia_ctime.tv_sec, attr->ia_ctime.tv_nsec,
+> +		doutc(cl, "%p %llx.%llx ctime %ptSp -> %ptSp (%s)\n",
+> +		      inode, ceph_vinop(inode), &ictime, &attr->ia_ctime,
+>  		      only ? "ctime only" : "ignored");
+>  		if (only) {
+>  			/*
+> diff --git a/fs/ceph/xattr.c b/fs/ceph/xattr.c
+> index 537165db4519..ad1f30bea175 100644
+> --- a/fs/ceph/xattr.c
+> +++ b/fs/ceph/xattr.c
+> @@ -249,8 +249,7 @@ static ssize_t ceph_vxattrcb_dir_rbytes(struct ceph_inode_info *ci, char *val,
+>  static ssize_t ceph_vxattrcb_dir_rctime(struct ceph_inode_info *ci, char *val,
+>  					size_t size)
+>  {
+> -	return ceph_fmt_xattr(val, size, "%lld.%09ld", ci->i_rctime.tv_sec,
+> -				ci->i_rctime.tv_nsec);
+> +	return ceph_fmt_xattr(val, size, "%ptSp", &ci->i_rctime);
+>  }
+>  
+>  /* dir pin */
+> @@ -307,8 +306,7 @@ static bool ceph_vxattrcb_snap_btime_exists(struct ceph_inode_info *ci)
+>  static ssize_t ceph_vxattrcb_snap_btime(struct ceph_inode_info *ci, char *val,
+>  					size_t size)
+>  {
+> -	return ceph_fmt_xattr(val, size, "%lld.%09ld", ci->i_snap_btime.tv_sec,
+> -				ci->i_snap_btime.tv_nsec);
+> +	return ceph_fmt_xattr(val, size, "%ptSp", &ci->i_snap_btime);
+>  }
+>  
+>  static ssize_t ceph_vxattrcb_cluster_fsid(struct ceph_inode_info *ci,
 
-Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
----
- kernel/trace/trace_output.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+Looks good. Nice cleanup.
 
-diff --git a/kernel/trace/trace_output.c b/kernel/trace/trace_output.c
-index ebbab3e9622b..cc2d3306bb60 100644
---- a/kernel/trace/trace_output.c
-+++ b/kernel/trace/trace_output.c
-@@ -1490,12 +1490,12 @@ trace_hwlat_print(struct trace_iterator *iter, int flags,
- 
- 	trace_assign_type(field, entry);
- 
--	trace_seq_printf(s, "#%-5u inner/outer(us): %4llu/%-5llu ts:%lld.%09ld count:%d",
-+	trace_seq_printf(s, "#%-5u inner/outer(us): %4llu/%-5llu ts:%ptSp count:%d",
- 			 field->seqnum,
- 			 field->duration,
- 			 field->outer_duration,
--			 (long long)field->timestamp.tv_sec,
--			 field->timestamp.tv_nsec, field->count);
-+			 &field->timestamp,
-+			 field->count);
- 
- 	if (field->nmi_count) {
- 		/*
--- 
-2.50.1
+Reviewed-by: Viacheslav Dubeyko <Slava.Dubeyko@ibm.com>
 
+Thanks,
+Slava.
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
