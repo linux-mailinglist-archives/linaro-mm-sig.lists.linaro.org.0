@@ -2,78 +2,80 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 54539C48EC3
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 10 Nov 2025 20:13:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 427B6C493BF
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 10 Nov 2025 21:29:07 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 65BDC3F7E5
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 10 Nov 2025 19:13:16 +0000 (UTC)
-Received: from relay.hostedemail.com (smtprelay0015.hostedemail.com [216.40.44.15])
-	by lists.linaro.org (Postfix) with ESMTPS id 257E43F78C
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 10 Nov 2025 19:13:05 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 08F453F832
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 10 Nov 2025 20:29:06 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+	by lists.linaro.org (Postfix) with ESMTPS id 91A0D3F61F
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 10 Nov 2025 20:28:50 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=none;
-	dmarc=pass (policy=none) header.from=goodmis.org;
-	spf=pass (lists.linaro.org: domain of rostedt@goodmis.org designates 216.40.44.15 as permitted sender) smtp.mailfrom=rostedt@goodmis.org
-Received: from omf01.hostedemail.com (a10.router.float.18 [10.200.18.1])
-	by unirelay02.hostedemail.com (Postfix) with ESMTP id 93E52139F71;
-	Mon, 10 Nov 2025 19:13:00 +0000 (UTC)
-Received: from [HIDDEN] (Authenticated sender: rostedt@goodmis.org) by omf01.hostedemail.com (Postfix) with ESMTPA id 8E96560009;
-	Mon, 10 Nov 2025 19:12:20 +0000 (UTC)
-Date: Mon, 10 Nov 2025 14:12:28 -0500
-From: Steven Rostedt <rostedt@goodmis.org>
-To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Message-ID: <20251110141228.3f91d9a7@gandalf.local.home>
-In-Reply-To: <20251110184727.666591-24-andriy.shevchenko@linux.intel.com>
-References: <20251110184727.666591-1-andriy.shevchenko@linux.intel.com>
-	<20251110184727.666591-24-andriy.shevchenko@linux.intel.com>
-X-Mailer: Claws Mail 3.20.0git84 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=VDR5NR5O;
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=leon@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by sea.source.kernel.org (Postfix) with ESMTP id DCC594349A;
+	Mon, 10 Nov 2025 20:28:49 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0DA4BC4CEF5;
+	Mon, 10 Nov 2025 20:28:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1762806529;
+	bh=2+oC81xV69bAibilHvu376ufSMAg5fmIkqZozg3DinU=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=VDR5NR5O4p008RBxKau1oQ/sdWlbk31f0gH7CibVBxI2O26euYYItPd8xW5SsGwIf
+	 BfyOjN/ef0UL06UM/C3cMVem79iIrZmXWSv4wZWSr2v3hzmZyhdVYJRiHc/Nu+yUF8
+	 9iJeGQkgVYsrKA6/OXuRxy7pcx+XJQss+JBluppHjEB+L9jVPGPmZJuPlciZKxqZf+
+	 xzXvLVrHLoFaUWXdO8cGN0TSE8B1fAo4BssyPzeiffuWrvNmUc8/Mgm/FjLgoQgQmp
+	 E2+9VRHkM50gbCUNPShVcuzSzC5GNOuXLH1k7FYvnVqO5UUwveUcH1RL6Qm3MYu/Hn
+	 zaEFUM0yu5v3w==
+Date: Mon, 10 Nov 2025 22:28:44 +0200
+From: Leon Romanovsky <leon@kernel.org>
+To: Alex Williamson <alex@shazbot.org>
+Message-ID: <20251110202844.GL15456@unreal>
+References: <20251106-dmabuf-vfio-v7-0-2503bf390699@nvidia.com>
+ <20251106-dmabuf-vfio-v7-11-2503bf390699@nvidia.com>
+ <20251110130534.4d4b17ad.alex@shazbot.org>
 MIME-Version: 1.0
-X-Stat-Signature: 5hi1hakohzsg8hn7n1iyodmbff6458bx
-X-Spam-Status: No, score=1.40
-X-Session-Marker: 726F737465647440676F6F646D69732E6F7267
-X-Session-ID: U2FsdGVkX1/1YrbZuC0QyunYMMdAkDIH9kIv38TXqEA=
-X-HE-Tag: 1762801940-392122
-X-HE-Meta: U2FsdGVkX1/BylAg4AKkX/T62VAai09Fwoml7NNoYheN1mcYKcRGTBSABLgOYxDBmZc3QXGw435NWRW1fm6j26IoZJclHSgat1CYtqifdgYizQSiwftLFhR3KIWkHQZvWjzyXLg2mc0Q3PcpPlmly9wdl81xZUnfgj6L460ZoglHnyWOhH4JCMlOWSZwOcmlpyYl23ptJhBgBsvpLR2Kx8Ll9VVqHi6WIJKGvEKEkx6ilvffX6p0Md+SqUXFIyHv2WyDFgTArKQogLnmdfsVyUsJ0uOL4cbXthMvjI+fNrmir9/oaclf5f3+GPufx6UoMsebdMhlI3Sr4FpPoQrK6K880hi143pnEp1yWy8fDYta7ZhDYpeLLlRXJu8Dj1z7txbS6MErRzmgbJiDnG8EIQ==
+Content-Disposition: inline
+In-Reply-To: <20251110130534.4d4b17ad.alex@shazbot.org>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 257E43F78C
-X-Spamd-Bar: -
-X-Spamd-Result: default: False [-1.70 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	HFILTER_HOSTNAME_2(1.00)[smtprelay0015.hostedemail.com];
-	DMARC_POLICY_ALLOW(-0.50)[goodmis.org,none];
-	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.40.44.15:from];
-	R_SPF_ALLOW(-0.20)[+ip4:216.40.44.0/24];
+X-Rspamd-Queue-Id: 91A0D3F61F
+X-Spamd-Bar: ---
+X-Spamd-Result: default: False [-3.50 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.252.31];
 	MIME_GOOD(-0.10)[text/plain];
-	ARC_NA(0.00)[];
-	TAGGED_RCPT(0.00)[renesas];
-	MIME_TRACE(0.00)[0:+];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	MISSING_XM_UA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[34];
+	ARC_NA(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_TLS_LAST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.999];
-	TO_DN_SOME(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[minyard.net,amd.com,treblig.org,suse.de,oss.qualcomm.com,intel.com,kernel.org,ideasonboard.com,linaro.org,wbinvd.org,gmail.com,oracle.com,cisco.com,schaufler-ca.com,suse.com,ionos.com,vger.kernel.org,lists.sourceforge.net,lists.freedesktop.org,lists.linaro.org,lists.osuosl.org,lists.linux.dev,rasmusvillemoes.dk,chromium.org,lwn.net,padovan.org,ffwll.ch,linux.intel.com,linux.dev,poorly.run,somainline.org,lunn.ch,davemloft.net,google.com,redhat.com,enneenne.com,linux.ibm.com,HansenPartnership.com,linuxfoundation.org,efficios.com,linux-foundation.org,perex.cz];
-	R_DKIM_NA(0.00)[];
+	TO_DN_SOME(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[95];
-	RCVD_IN_DNSWL_NONE(0.00)[216.40.44.15:from]
+	RCVD_COUNT_TWO(0.00)[2];
+	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: 6TLF3O5EAKIELUEPCDZAYHWFL2GISDZ7
-X-Message-ID-Hash: 6TLF3O5EAKIELUEPCDZAYHWFL2GISDZ7
-X-MailFrom: rostedt@goodmis.org
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Corey Minyard <corey@minyard.net>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, "Dr. David Alan Gilbert" <linux@treblig.org>, Alex Deucher <alexander.deucher@amd.com>, Thomas Zimmermann <tzimmermann@suse.de>, Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, Rob Clark <robin.clark@oss.qualcomm.com>, Matthew Brost <matthew.brost@intel.com>, Hans Verkuil <hverkuil@kernel.org>, Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>, Ulf Hansson <ulf.hansson@linaro.org>, Vitaly Lifshits <vitaly.lifshits@intel.com>, Manivannan Sadhasivam <mani@kernel.org>, Niklas Cassel <cassel@kernel.org>, Calvin Owens <calvin@wbinvd.org>, Sagi Maimon <maimon.sagi@gmail.com>, "Martin K. Petersen" <martin.petersen@oracle.com>, Karan Tilak Kumar <kartilak@cisco.com>, Casey Schaufler <casey@schaufler-ca.com>, Petr Mladek <pmladek@suse.com>, Max Kellermann <max.kellermann@ionos.com>, Takashi Iwai <tiwai@suse.de>, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, openipmi-de
- veloper@lists.sourceforge.net, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, amd-gfx@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org, intel-xe@lists.freedesktop.org, linux-mmc@vger.kernel.org, netdev@vger.kernel.org, intel-wired-lan@lists.osuosl.org, linux-pci@vger.kernel.org, linux-s390@vger.kernel.org, linux-scsi@vger.kernel.org, linux-staging@lists.linux.dev, ceph-devel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, linux-sound@vger.kernel.org, Rasmus Villemoes <linux@rasmusvillemoes.dk>, Sergey Senozhatsky <senozhatsky@chromium.org>, Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>, Gustavo Padovan <gustavo@padovan.org>, Simona Vetter <simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>, Sean P
- aul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>, Konrad Dybcio <konradybcio@kernel.org>, Lucas De Marchi <lucas.demarchi@intel.com>, Thomas =?UTF-8?B?SGVsbHN0csO2bQ==?= <thomas.hellstrom@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Mauro Carvalho Chehab <mchehab@kernel.org>, Vladimir Oltean <olteanv@gmail.com>, Andrew Lunn <andrew@lunn.ch>, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Tony Nguyen <anthony.l.nguyen@intel.com>, Przemek Kitszel <przemyslaw.kitszel@intel.com>, Krzysztof =?UTF-8?B?V2lsY3p5xYRza2k=?= <kwilczynski@kernel.org>, Kishon Vijay Abraham I <kishon@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>, Rodolfo Giometti <giometti@enneenne.com>, Jonathan Lemon <jonathan.lemon@gmail.com>, Vadim Fedorenko <vadim.fedorenko@linux.dev>, Richard Cochran <richardcochran@gmail.com>, Stefan Haberland <sth@linux.ibm.com>, Jan Hoeppner <hoeppner@linux
- .ibm.com>, Heiko Carstens <hca@linux.ibm.com>, Vasily Gorbik <gor@linux.ibm.com>, Alexander Gordeev <agordeev@linux.ibm.com>, Christian Borntraeger <borntraeger@linux.ibm.com>, Sven Schnelle <svens@linux.ibm.com>, Satish Kharat <satishkh@cisco.com>, Sesidhar Baddela <sebaddel@cisco.com>, "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Xiubo Li <xiubli@redhat.com>, Ilya Dryomov <idryomov@gmail.com>, Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Andrew Morton <akpm@linux-foundation.org>, Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>
+Message-ID-Hash: AZRSZGP6TVSV5YGRKBRBZ26BHWQFH5P5
+X-Message-ID-Hash: AZRSZGP6TVSV5YGRKBRBZ26BHWQFH5P5
+X-MailFrom: leon@kernel.org
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: Bjorn Helgaas <bhelgaas@google.com>, Logan Gunthorpe <logang@deltatee.com>, Jens Axboe <axboe@kernel.dk>, Robin Murphy <robin.murphy@arm.com>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Jason Gunthorpe <jgg@ziepe.ca>, Andrew Morton <akpm@linux-foundation.org>, Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Kees Cook <kees@kernel.org>, "Gustavo A. R. Silva" <gustavoars@kernel.org>, Ankit Agrawal <ankita@nvidia.com>, Yishai Hadas <yishaih@nvidia.com>, Shameer Kolothum <skolothumtho@nvidia.com>, Kevin Tian <kevin.tian@intel.com>, Krishnakant Jaju <kjaju@nvidia.com>, Matt Ochs <mochs@nvidia.com>, linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org, linux-block@vger.kernel.org, iommu@lists.linux.dev, linux-mm@kvack.org, linux-doc@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org, linux-hardeni
+ ng@vger.kernel.org, Alex Mastro <amastro@fb.com>, Nicolin Chen <nicolinc@nvidia.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v1 23/23] tracing: Switch to use %ptSp
+Subject: [Linaro-mm-sig] Re: [PATCH v7 11/11] vfio/nvgrace: Support get_dmabuf_phys
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6TLF3O5EAKIELUEPCDZAYHWFL2GISDZ7/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AZRSZGP6TVSV5YGRKBRBZ26BHWQFH5P5/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -83,20 +85,139 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Mon, 10 Nov 2025 19:40:42 +0100
-Andy Shevchenko <andriy.shevchenko@linux.intel.com> wrote:
-
-> Use %ptSp instead of open coded variants to print content of
-> struct timespec64 in human readable format.
+On Mon, Nov 10, 2025 at 01:05:34PM -0700, Alex Williamson wrote:
+> On Thu,  6 Nov 2025 16:16:56 +0200
+> Leon Romanovsky <leon@kernel.org> wrote:
 > 
-> Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-> ---
->  kernel/trace/trace_output.c | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
+> > From: Jason Gunthorpe <jgg@nvidia.com>
+> > 
+> > Call vfio_pci_core_fill_phys_vec() with the proper physical ranges for the
+> > synthetic BAR 2 and BAR 4 regions. Otherwise use the normal flow based on
+> > the PCI bar.
+> > 
+> > This demonstrates a DMABUF that follows the region info report to only
+> > allow mapping parts of the region that are mmapable. Since the BAR is
+> > power of two sized and the "CXL" region is just page aligned the there can
+> > be a padding region at the end that is not mmaped or passed into the
+> > DMABUF.
+> > 
+> > The "CXL" ranges that are remapped into BAR 2 and BAR 4 areas are not PCI
+> > MMIO, they actually run over the CXL-like coherent interconnect and for
+> > the purposes of DMA behave identically to DRAM. We don't try to model this
+> > distinction between true PCI BAR memory that takes a real PCI path and the
+> > "CXL" memory that takes a different path in the p2p framework for now.
+> > 
+> > Signed-off-by: Jason Gunthorpe <jgg@nvidia.com>
+> > Tested-by: Alex Mastro <amastro@fb.com>
+> > Tested-by: Nicolin Chen <nicolinc@nvidia.com>
+> > Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
+> > ---
+> >  drivers/vfio/pci/nvgrace-gpu/main.c | 56 +++++++++++++++++++++++++++++++++++++
+> >  1 file changed, 56 insertions(+)
+> > 
+> > diff --git a/drivers/vfio/pci/nvgrace-gpu/main.c b/drivers/vfio/pci/nvgrace-gpu/main.c
+> > index e346392b72f6..7d7ab2c84018 100644
+> > --- a/drivers/vfio/pci/nvgrace-gpu/main.c
+> > +++ b/drivers/vfio/pci/nvgrace-gpu/main.c
+> > @@ -7,6 +7,7 @@
+> >  #include <linux/vfio_pci_core.h>
+> >  #include <linux/delay.h>
+> >  #include <linux/jiffies.h>
+> > +#include <linux/pci-p2pdma.h>
+> >  
+> >  /*
+> >   * The device memory usable to the workloads running in the VM is cached
+> > @@ -683,6 +684,54 @@ nvgrace_gpu_write(struct vfio_device *core_vdev,
+> >  	return vfio_pci_core_write(core_vdev, buf, count, ppos);
+> >  }
+> >  
+> > +static int nvgrace_get_dmabuf_phys(struct vfio_pci_core_device *core_vdev,
+> > +				   struct p2pdma_provider **provider,
+> > +				   unsigned int region_index,
+> > +				   struct dma_buf_phys_vec *phys_vec,
+> > +				   struct vfio_region_dma_range *dma_ranges,
+> > +				   size_t nr_ranges)
+> > +{
+> > +	struct nvgrace_gpu_pci_core_device *nvdev = container_of(
+> > +		core_vdev, struct nvgrace_gpu_pci_core_device, core_device);
+> > +	struct pci_dev *pdev = core_vdev->pdev;
+> > +
+> > +	if (nvdev->resmem.memlength && region_index == RESMEM_REGION_INDEX) {
+> > +		/*
+> > +		 * The P2P properties of the non-BAR memory is the same as the
+> > +		 * BAR memory, so just use the provider for index 0. Someday
+> > +		 * when CXL gets P2P support we could create CXLish providers
+> > +		 * for the non-BAR memory.
+> > +		 */
+> > +		*provider = pcim_p2pdma_provider(pdev, 0);
+> > +		if (!*provider)
+> > +			return -EINVAL;
+> > +		return vfio_pci_core_fill_phys_vec(phys_vec, dma_ranges,
+> > +						   nr_ranges,
+> > +						   nvdev->resmem.memphys,
+> > +						   nvdev->resmem.memlength);
+> > +	} else if (region_index == USEMEM_REGION_INDEX) {
+> > +		/*
+> > +		 * This is actually cachable memory and isn't treated as P2P in
+> > +		 * the chip. For now we have no way to push cachable memory
+> > +		 * through everything and the Grace HW doesn't care what caching
+> > +		 * attribute is programmed into the SMMU. So use BAR 0.
+> > +		 */
+> > +		*provider = pcim_p2pdma_provider(pdev, 0);
+> > +		if (!*provider)
+> > +			return -EINVAL;
+> > +		return vfio_pci_core_fill_phys_vec(phys_vec, dma_ranges,
+> > +						   nr_ranges,
+> > +						   nvdev->usemem.memphys,
+> > +						   nvdev->usemem.memlength);
+> > +	}
+> > +	return vfio_pci_core_get_dmabuf_phys(core_vdev, provider, region_index,
+> > +					     phys_vec, dma_ranges, nr_ranges);
+> > +}
+> 
+> 
+> Unless my eyes deceive, we could reduce the redundancy a bit:
+> 
+> 	struct mem_region *mem_region = NULL;
+> 
+> 	if (nvdev->resmem.memlength && region_index == RESMEM_REGION_INDEX) {
+> 		/*
+> 		 * The P2P properties of the non-BAR memory is the same as the
+> 		 * BAR memory, so just use the provider for index 0. Someday
+> 		 * when CXL gets P2P support we could create CXLish providers
+> 		 * for the non-BAR memory.
+> 		 */
+> 		mem_region = &nvdev->resmem;
+> 	} else if (region_index == USEMEM_REGION_INDEX) {
+> 		/*
+> 		 * This is actually cachable memory and isn't treated as P2P in
+> 		 * the chip. For now we have no way to push cachable memory
+> 		 * through everything and the Grace HW doesn't care what caching
+> 		 * attribute is programmed into the SMMU. So use BAR 0.
+> 		 */
+> 		mem_region = &nvdev->usemem;
+> 	}
+> 
+> 	if (mem_region) {
+> 		*provider = pcim_p2pdma_provider(pdev, 0);
+> 		if (!*provider)
+> 			return -EINVAL;
+> 		return vfio_pci_core_fill_phys_vec(phys_vec, dma_ranges,
+> 						   nr_ranges,
+> 						   mem_region->memphys,
+> 						   mem_region->memlength);
+> 	}
+> 
+> 	return vfio_pci_core_get_dmabuf_phys(core_vdev, provider, region_index,
+> 					     phys_vec, dma_ranges, nr_ranges);
 
-Acked-by: Steven Rostedt (Google) <rostedt@goodmis.org>
+Yes, this will work too.
 
--- Steve
+Thanks
+
+> 		
+> Thanks,
+> Alex
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
