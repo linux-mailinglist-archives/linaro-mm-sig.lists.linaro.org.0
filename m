@@ -2,65 +2,65 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id SNHQLiT64GnZnwAAu9opvQ
+	id KNroMjf64GnZnwAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:03:00 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:03:19 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2A5864101AD
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:02:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D6744101BB
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:03:13 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5084840513
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:02:57 +0000 (UTC)
-Received: from fhigh-b7-smtp.messagingengine.com (fhigh-b7-smtp.messagingengine.com [202.12.124.158])
-	by lists.linaro.org (Postfix) with ESMTPS id 921403F6C7
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 10 Nov 2025 20:05:47 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B9EC74095D
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:03:12 +0000 (UTC)
+Received: from fout-b7-smtp.messagingengine.com (fout-b7-smtp.messagingengine.com [202.12.124.150])
+	by lists.linaro.org (Postfix) with ESMTPS id 206053F6C7
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 10 Nov 2025 20:42:25 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=shazbot.org header.s=fm2 header.b=P44njGbF;
-	dkim=pass header.d=messagingengine.com header.s=fm3 header.b="S NeUHhP";
+	dkim=pass header.d=shazbot.org header.s=fm2 header.b=htuAqLZ4;
+	dkim=pass header.d=messagingengine.com header.s=fm3 header.b="W 1pcFNt";
 	dmarc=pass (policy=none) header.from=shazbot.org;
-	spf=pass (lists.linaro.org: domain of alex@shazbot.org designates 202.12.124.158 as permitted sender) smtp.mailfrom=alex@shazbot.org
-Received: from phl-compute-07.internal (phl-compute-07.internal [10.202.2.47])
-	by mailfhigh.stl.internal (Postfix) with ESMTP id 75B2F7A0140;
-	Mon, 10 Nov 2025 15:05:46 -0500 (EST)
+	spf=pass (lists.linaro.org: domain of alex@shazbot.org designates 202.12.124.150 as permitted sender) smtp.mailfrom=alex@shazbot.org
+Received: from phl-compute-01.internal (phl-compute-01.internal [10.202.2.41])
+	by mailfout.stl.internal (Postfix) with ESMTP id C4D701D000F8;
+	Mon, 10 Nov 2025 15:42:23 -0500 (EST)
 Received: from phl-mailfrontend-01 ([10.202.2.162])
-  by phl-compute-07.internal (MEProxy); Mon, 10 Nov 2025 15:05:47 -0500
+  by phl-compute-01.internal (MEProxy); Mon, 10 Nov 2025 15:42:24 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=shazbot.org; h=
 	cc:cc:content-transfer-encoding:content-type:content-type:date
 	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to; s=fm2; t=1762805146;
-	 x=1762891546; bh=QWavr1Y4jetO7CpzWCAeEensv2XOEaKTErTM/rpJMIg=; b=
-	P44njGbFkl3pOTaDtIZBVRumI3etEDzgSsJYEJ8FvFVsFvwvVLXMDMsvn6aUehvD
-	tX23j4ZkuYzzNKblPl5eoRtBEwnsSMAgClGzI595rx7rUTrPQrccQGCdhtWJhilp
-	DFNty4cB/vIdK2tbepFMl7R/oTdPaRpKD4aNfVR+Xglecv1lvs4o0i2y6hWz2K1k
-	hjQOHjtCIZX9JmdHtiVpZ3ytfYqE4fFhMOL2BauRmP34rlF8J3bLqEyyVgUd1Wxf
-	uivNmBy88n3BAYyUQvOeYyEMuRLR6HK6JD6EBQGVAM0wM0LqzVwMMkgCnjKZLOQg
-	DgK238GhJfZEC29HeBHAiw==
+	:references:reply-to:subject:subject:to:to; s=fm2; t=1762807343;
+	 x=1762893743; bh=gqeX2If3HYh30yCslpotpD1eSH8ukdg4bxJbH47uciI=; b=
+	htuAqLZ4SouJYoITuzsRhJjEXMvYg51jdhYpfuNbonoAiCijob/69evbidTgy+sh
+	iRd/focxifhKHG29GSovKjpd+ZahK1KX4u/ZS5xwu1cwXqVC/UCcfTwYH5JPDv12
+	hGHLp/nV+WavmCJRl9wTrZikJq0k+REA/xuHpzuBgd81DF7sIwQG9Nn6LXDccuBp
+	Kcbv2MQHhh0bNcI9y7090F/H/ONHQBQn0M3YoNGcqHaUJhgJYpUOx9LyevwJdnFy
+	Ict245DxpPf6jiaMEQZaHVfubTy/2FN5JOeKQcWBk3z0YAlBC9LITZ62vdXk1Y/c
+	Rd49/UzrTC9Hg0y+GBi9Hg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:feedback-id:feedback-id
 	:from:from:in-reply-to:in-reply-to:message-id:mime-version
 	:references:reply-to:subject:subject:to:to:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1762805146; x=
-	1762891546; bh=QWavr1Y4jetO7CpzWCAeEensv2XOEaKTErTM/rpJMIg=; b=S
-	NeUHhP4zFIIIq8T0qOoLspDmGo3aV7LstNjwQx/zOpqRPdikfwAhxZr1Vjza2V2E
-	XW/K9QSUwZMXVc1cpd8LZrXLMFISDLbA0gMT9DzEKhBjwLHv5lFAfjRT83KCvDG0
-	x+VbyV+GmrJlh9dG/d80U9KO5LcHh9ZfYF+WKaE8l/l8mwyerixOC3CYxhpxK7QT
-	utY6WevmBVi4E+itP3599pH3VYKeulT8r4BhTOEtO8xRecVlR3ctKNC4jSXmtxvC
-	2h7nADaicKEmXWPbqEmkAL4m9KLPQNtUHOf/1R6e0gVSWAnSSl3UOnKMj0isFnwa
-	eNkSbkIGUulICAJOtYeAw==
-X-ME-Sender: <xms:mUUSaaaK5cwS-xhU9OVo403uDM8aHpHjvUOkJEga3bQfJI6eFJYotw>
-    <xme:mUUSaUOSdeHiAs0fTeiXjMbzaJmVlggDHFik_3fnmUbem9yoBi-ZjsckApbF86-U7
-    ynkRiGLLEv74esQKOBTOEMDauyHwyQ0Mj3pKmcyAmMMdjGtG08YaQ>
-X-ME-Received: <xmr:mUUSad4OyW2iSq-SNa365c0LP2qomzGAB1q2q49mc7CXAe2Fugl7AT7Z>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdeggdduleelvddvucetufdoteggodetrf
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1762807343; x=
+	1762893743; bh=gqeX2If3HYh30yCslpotpD1eSH8ukdg4bxJbH47uciI=; b=W
+	1pcFNtXWP9fMq2c7Go8PGx8HwIWpuPF2lBF5s8fzNuWqlubpSf71I4RGXc/+pwcE
+	wq+IM4acQDpUfJS8lOK336Hg+6Yhp/JfxC5SEFBEOLYskuuF1zMvdgewgnWx52X/
+	fNOBJyzaAv96LswEo/scIGTSRxWJi2ZUU5XAvFuOshhDJGBo38Xa+K5zj1omajl4
+	9Nzw2IiBoN/XHZmZW4L1O2XuQ5m2ygcV/Ej73MJG4tl8Yp+XoKJ+BgkgvopLu2GH
+	obrv7xcViS0KT+tbc+wUE4u16+09BsabKp6VUrTPLyomAqmaiXC7s3Fr/VvCaEMh
+	I3yt1TVyxJAxtgG24ZoJw==
+X-ME-Sender: <xms:Lk4SadPf7Z_61ugy1UZG-S0z50mLGWjkeWFW-KUtptz0WE1qSwYswA>
+    <xme:Lk4SaWQnTbNosFeU6S8-IkOOxvD-vMp6PSlA7UVcS1gFInm63zNeLDUnY47L26hp1
+    UJx5XZp5pVS_p1iGPb8C2-PW03MLsP60V0ld5GGp6ghlpo8mHKR>
+X-ME-Received: <xmr:Lk4SaSQT-qKgrv4djpFBdctnnMfQHHqqcvgPYrMcvkpGGEF5Ve9ebvTg>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdeggdduleelfedtucetufdoteggodetrf
     dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
     rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
     gurhepfffhvfevuffkjghfgggtgfesthejredttddtvdenucfhrhhomheptehlvgigucgh
     ihhllhhirghmshhonhcuoegrlhgvgiesshhhrgiisghothdrohhrgheqnecuggftrfgrth
     htvghrnhepteetudelgeekieegudegleeuvdffgeehleeivddtfeektdekkeehffehudet
     hffhnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomheprg
-    hlvgigsehshhgriigsohhtrdhorhhgpdhnsggprhgtphhtthhopeefgedpmhhouggvpehs
+    hlvgigsehshhgriigsohhtrdhorhhgpdhnsggprhgtphhtthhopeefhedpmhhouggvpehs
     mhhtphhouhhtpdhrtghpthhtoheplhgvohhnsehkvghrnhgvlhdrohhrghdprhgtphhtth
     hopegshhgvlhhgrggrshesghhoohhglhgvrdgtohhmpdhrtghpthhtoheplhhoghgrnhhg
     seguvghlthgrthgvvgdrtghomhdprhgtphhtthhopegrgigsohgvsehkvghrnhgvlhdrug
@@ -68,36 +68,35 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdeggdduleelvddvucetufdote
     ohepjhhorhhoseeksgihthgvshdrohhrghdprhgtphhtthhopeifihhllheskhgvrhhnvg
     hlrdhorhhgpdhrtghpthhtohepmhdrshiihihprhhofihskhhisehsrghmshhunhhgrdgt
     ohhmpdhrtghpthhtohepjhhgghesiihivghpvgdrtggr
-X-ME-Proxy: <xmx:mUUSafeToLKTsQbuLZM6kEmGdnK__q1ufNj_7mjY6TPn4Cb2l9HtQA>
-    <xmx:mUUSaZ5tswyqdbZYVqwJwNXvGQKkUU-n3FXTHXWCfaR3FD8zq7k_Gw>
-    <xmx:mUUSaYwIeBG_38H1jrw5nP_NkQ8U-7_BWcif5aZgNIXiDaOxcE8Rgg>
-    <xmx:mUUSaVGomZsS1WpLMnPVYNXNtmHmLgLExnf6bot2yiXh6XuqFT7b2Q>
-    <xmx:mkUSad78fRNbEVrZWG_CzNExS_1JTTFN64vZAtv96-z5USrKjNrkIkun>
+X-ME-Proxy: <xmx:Lk4SaXAf2U3xTIUQxs8i0IsnHoTy1Jl7o0BH0TlVy7zhF4WWB901JA>
+    <xmx:Lk4SacCXUZGgOPwzyeCst1KYlCMu_DTngssMm-yanfi8GAiSreZfOA>
+    <xmx:Lk4SaYxVBS9qwrWpCA566IQDcrCbii10ahjD77GRLJBh3SrN6LWZAw>
+    <xmx:Lk4SaejgdRKg7EjLQE1Gk-cfpzoWXZw-pFjsodEgU8MMWqFzLPeaiQ>
+    <xmx:L04SaZr36QwMGCQIKH-kIOIQH3332nOSuBo78ltSYdTNpyhWUvhiqLCC>
 Feedback-ID: i03f14258:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 10 Nov 2025 15:05:43 -0500 (EST)
-Date: Mon, 10 Nov 2025 13:05:34 -0700
+ 10 Nov 2025 15:42:19 -0500 (EST)
+Date: Mon, 10 Nov 2025 13:42:18 -0700
 From: Alex Williamson <alex@shazbot.org>
 To: Leon Romanovsky <leon@kernel.org>
-Message-ID: <20251110130534.4d4b17ad.alex@shazbot.org>
-In-Reply-To: <20251106-dmabuf-vfio-v7-11-2503bf390699@nvidia.com>
+Message-ID: <20251110134218.5e399b0f.alex@shazbot.org>
+In-Reply-To: <20251106-dmabuf-vfio-v7-0-2503bf390699@nvidia.com>
 References: <20251106-dmabuf-vfio-v7-0-2503bf390699@nvidia.com>
-	<20251106-dmabuf-vfio-v7-11-2503bf390699@nvidia.com>
 MIME-Version: 1.0
-X-Spamd-Bar: ---
+X-Spamd-Bar: --
 X-MailFrom: alex@shazbot.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: GJJV6CTLQYTIJIEJ5P6QZY44MN3JEY26
-X-Message-ID-Hash: GJJV6CTLQYTIJIEJ5P6QZY44MN3JEY26
-X-Mailman-Approved-At: Thu, 16 Apr 2026 14:53:07 +0000
+Message-ID-Hash: 3R34KKODNPGU7KOJFXEEWK5JBRBD7RM7
+X-Message-ID-Hash: 3R34KKODNPGU7KOJFXEEWK5JBRBD7RM7
+X-Mailman-Approved-At: Thu, 16 Apr 2026 14:53:08 +0000
 CC: Bjorn Helgaas <bhelgaas@google.com>, Logan Gunthorpe <logang@deltatee.com>, Jens Axboe <axboe@kernel.dk>, Robin Murphy <robin.murphy@arm.com>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Jason Gunthorpe <jgg@ziepe.ca>, Andrew Morton <akpm@linux-foundation.org>, Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Kees Cook <kees@kernel.org>, "Gustavo A. R. Silva" <gustavoars@kernel.org>, Ankit Agrawal <ankita@nvidia.com>, Yishai Hadas <yishaih@nvidia.com>, Shameer Kolothum <skolothumtho@nvidia.com>, Kevin Tian <kevin.tian@intel.com>, Krishnakant Jaju <kjaju@nvidia.com>, Matt Ochs <mochs@nvidia.com>, linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org, linux-block@vger.kernel.org, iommu@lists.linux.dev, linux-mm@kvack.org, linux-doc@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org, linux-hardening@v
- ger.kernel.org, Alex Mastro <amastro@fb.com>, Nicolin Chen <nicolinc@nvidia.com>
+ ger.kernel.org, Alex Mastro <amastro@fb.com>, Nicolin Chen <nicolinc@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v7 11/11] vfio/nvgrace: Support get_dmabuf_phys
+Subject: [Linaro-mm-sig] Re: [PATCH v7 00/11] vfio/pci: Allow MMIO regions to be exported through dma-buf
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GJJV6CTLQYTIJIEJ5P6QZY44MN3JEY26/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3R34KKODNPGU7KOJFXEEWK5JBRBD7RM7/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -109,158 +108,48 @@ Content-Transfer-Encoding: 7bit
 X-Spamd-Result: default: False [1.59 / 15.00];
 	DATE_IN_PAST(1.00)[3762];
 	MID_CONTAINS_FROM(1.00)[];
-	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx:c];
-	MIME_GOOD(-0.10)[text/plain];
+	MAILLIST(-0.20)[mailman];
 	DMARC_POLICY_SOFTFAIL(0.10)[shazbot.org : SPF not aligned (relaxed), No valid DKIM,none];
+	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[34];
+	RSPAMD_URIBL_FAIL(0.00)[linaro.org:query timed out];
 	ARC_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[33];
-	FROM_HAS_DN(0.00)[];
-	NEURAL_SPAM(0.00)[0.697];
+	NEURAL_SPAM(0.00)[0.650];
 	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	FROM_NEQ_ENVFROM(0.00)[alex@shazbot.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email,shazbot.org:mid]
-X-Rspamd-Queue-Id: 2A5864101AD
+	DBL_BLOCKED_OPENRESOLVER(0.00)[shazbot.org:mid]
+X-Rspamd-Queue-Id: 1D6744101BB
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Thu,  6 Nov 2025 16:16:56 +0200
+On Thu,  6 Nov 2025 16:16:45 +0200
 Leon Romanovsky <leon@kernel.org> wrote:
 
-> From: Jason Gunthorpe <jgg@nvidia.com>
-> 
-> Call vfio_pci_core_fill_phys_vec() with the proper physical ranges for the
-> synthetic BAR 2 and BAR 4 regions. Otherwise use the normal flow based on
-> the PCI bar.
-> 
-> This demonstrates a DMABUF that follows the region info report to only
-> allow mapping parts of the region that are mmapable. Since the BAR is
-> power of two sized and the "CXL" region is just page aligned the there can
-> be a padding region at the end that is not mmaped or passed into the
-> DMABUF.
-> 
-> The "CXL" ranges that are remapped into BAR 2 and BAR 4 areas are not PCI
-> MMIO, they actually run over the CXL-like coherent interconnect and for
-> the purposes of DMA behave identically to DRAM. We don't try to model this
-> distinction between true PCI BAR memory that takes a real PCI path and the
-> "CXL" memory that takes a different path in the p2p framework for now.
-> 
-> Signed-off-by: Jason Gunthorpe <jgg@nvidia.com>
-> Tested-by: Alex Mastro <amastro@fb.com>
-> Tested-by: Nicolin Chen <nicolinc@nvidia.com>
-> Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
-> ---
->  drivers/vfio/pci/nvgrace-gpu/main.c | 56 +++++++++++++++++++++++++++++++++++++
->  1 file changed, 56 insertions(+)
-> 
-> diff --git a/drivers/vfio/pci/nvgrace-gpu/main.c b/drivers/vfio/pci/nvgrace-gpu/main.c
-> index e346392b72f6..7d7ab2c84018 100644
-> --- a/drivers/vfio/pci/nvgrace-gpu/main.c
-> +++ b/drivers/vfio/pci/nvgrace-gpu/main.c
-> @@ -7,6 +7,7 @@
->  #include <linux/vfio_pci_core.h>
->  #include <linux/delay.h>
->  #include <linux/jiffies.h>
-> +#include <linux/pci-p2pdma.h>
->  
->  /*
->   * The device memory usable to the workloads running in the VM is cached
-> @@ -683,6 +684,54 @@ nvgrace_gpu_write(struct vfio_device *core_vdev,
->  	return vfio_pci_core_write(core_vdev, buf, count, ppos);
->  }
->  
-> +static int nvgrace_get_dmabuf_phys(struct vfio_pci_core_device *core_vdev,
-> +				   struct p2pdma_provider **provider,
-> +				   unsigned int region_index,
-> +				   struct dma_buf_phys_vec *phys_vec,
-> +				   struct vfio_region_dma_range *dma_ranges,
-> +				   size_t nr_ranges)
-> +{
-> +	struct nvgrace_gpu_pci_core_device *nvdev = container_of(
-> +		core_vdev, struct nvgrace_gpu_pci_core_device, core_device);
-> +	struct pci_dev *pdev = core_vdev->pdev;
-> +
-> +	if (nvdev->resmem.memlength && region_index == RESMEM_REGION_INDEX) {
-> +		/*
-> +		 * The P2P properties of the non-BAR memory is the same as the
-> +		 * BAR memory, so just use the provider for index 0. Someday
-> +		 * when CXL gets P2P support we could create CXLish providers
-> +		 * for the non-BAR memory.
-> +		 */
-> +		*provider = pcim_p2pdma_provider(pdev, 0);
-> +		if (!*provider)
-> +			return -EINVAL;
-> +		return vfio_pci_core_fill_phys_vec(phys_vec, dma_ranges,
-> +						   nr_ranges,
-> +						   nvdev->resmem.memphys,
-> +						   nvdev->resmem.memlength);
-> +	} else if (region_index == USEMEM_REGION_INDEX) {
-> +		/*
-> +		 * This is actually cachable memory and isn't treated as P2P in
-> +		 * the chip. For now we have no way to push cachable memory
-> +		 * through everything and the Grace HW doesn't care what caching
-> +		 * attribute is programmed into the SMMU. So use BAR 0.
-> +		 */
-> +		*provider = pcim_p2pdma_provider(pdev, 0);
-> +		if (!*provider)
-> +			return -EINVAL;
-> +		return vfio_pci_core_fill_phys_vec(phys_vec, dma_ranges,
-> +						   nr_ranges,
-> +						   nvdev->usemem.memphys,
-> +						   nvdev->usemem.memlength);
-> +	}
-> +	return vfio_pci_core_get_dmabuf_phys(core_vdev, provider, region_index,
-> +					     phys_vec, dma_ranges, nr_ranges);
-> +}
+> Changelog:
+> v7:
+>  * Dropped restore_revoke flag and added vfio_pci_dma_buf_move
+>    to reverse loop.
+>  * Fixed spelling errors in documentation patch.
+>  * Rebased on top of v6.18-rc3.
+>  * Added include to stddef.h to vfio.h, to keep uapi header file independent.
 
+I think we're winding down on review comments.  It'd be great to get
+p2pdma and dma-buf acks on this series.  Otherwise it's been posted
+enough that we'll assume no objections.  Thanks,
 
-Unless my eyes deceive, we could reduce the redundancy a bit:
-
-	struct mem_region *mem_region = NULL;
-
-	if (nvdev->resmem.memlength && region_index == RESMEM_REGION_INDEX) {
-		/*
-		 * The P2P properties of the non-BAR memory is the same as the
-		 * BAR memory, so just use the provider for index 0. Someday
-		 * when CXL gets P2P support we could create CXLish providers
-		 * for the non-BAR memory.
-		 */
-		mem_region = &nvdev->resmem;
-	} else if (region_index == USEMEM_REGION_INDEX) {
-		/*
-		 * This is actually cachable memory and isn't treated as P2P in
-		 * the chip. For now we have no way to push cachable memory
-		 * through everything and the Grace HW doesn't care what caching
-		 * attribute is programmed into the SMMU. So use BAR 0.
-		 */
-		mem_region = &nvdev->usemem;
-	}
-
-	if (mem_region) {
-		*provider = pcim_p2pdma_provider(pdev, 0);
-		if (!*provider)
-			return -EINVAL;
-		return vfio_pci_core_fill_phys_vec(phys_vec, dma_ranges,
-						   nr_ranges,
-						   mem_region->memphys,
-						   mem_region->memlength);
-	}
-
-	return vfio_pci_core_get_dmabuf_phys(core_vdev, provider, region_index,
-					     phys_vec, dma_ranges, nr_ranges);
-		
-Thanks,
 Alex
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
