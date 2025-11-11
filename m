@@ -2,52 +2,52 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id CCMyNN/64GlloAAAu9opvQ
+	id MCX1Cun64GlloAAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:06:07 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:06:17 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8024C4102DD
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:06:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3F25E4102F3
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:06:15 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 92E1540511
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:06:06 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id EE55C4050C
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:06:14 +0000 (UTC)
 Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.9])
-	by lists.linaro.org (Postfix) with ESMTPS id E188A3F702
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 11 Nov 2025 12:28:04 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 7A0DF3F702
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 11 Nov 2025 12:28:05 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=llVHxoNE;
+	dkim=pass header.d=intel.com header.s=Intel header.b=MZ51XNGZ;
 	dmarc=pass (policy=none) header.from=intel.com;
 	spf=pass (lists.linaro.org: domain of andriy.shevchenko@linux.intel.com designates 192.198.163.9 as permitted sender) smtp.mailfrom=andriy.shevchenko@linux.intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1762864085; x=1794400085;
+  t=1762864086; x=1794400086;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=BmDr+9WwyAhMzsfsAApxDHVanVdl5gKra56KPccq0Eg=;
-  b=llVHxoNESluLOtFu8pqu8RZOuU/9eEJZufPv4oaIk0kpAqlBWs3qDEFr
-   lIXSbtGie9z53nWAiOakt+4wrOWJ7Td2o18zcEMmHLqNpPk62jRkqbRZj
-   ZPGetLQYZIavgNOEdIL9pAGE7tYU6zBXPwdonWMbAnC6cvZD/q+2cQJb6
-   8rctIhgQXwDUpGJA8zpYuWNLuMIySKxqoWxTQft9jxkHcC4l1zwFegRew
-   WeCgvzOjBZGMunVbqOxjrXbi+owQjOoIgNe2Nt4VGT9EmkILgQPhsHYnL
-   nmGiJqYVTjIV+lFpYx0GHFppyaEuUeyO5ZnCStwGyX9PEKyQGpG/Ft92P
-   g==;
-X-CSE-ConnectionGUID: GmJcM6PsSi+WqF2RmFJZ+Q==
-X-CSE-MsgGUID: 8t1ABwbERyuT7Y9hPNgQcw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11609"; a="75606963"
+  bh=Owa/uZSyQflLahGS6CmSwDqgbO1CL5jfKyID5Cl9frQ=;
+  b=MZ51XNGZVd0I829Zw5I6fqhLvEU4EBUJXMg4gww/TPRQgs1P9FnoAXwv
+   jGMRkcmd4AhoLlwd09FH8KNnAcLuEy6wwRI3PNItmXZlbFhog9BJQRg/n
+   WQggv8XXFQbPVKZW2fLdfhTaDOgUvNLXwlXOg97iZI8XzyjKOgYJedgdn
+   r+0tpKdZqErCXaH4EmxllZlQ7yYwEL8fWVI4mIuDxBkIbxntE1V1hYMDG
+   X1jmsCn73tvns8xd51fBX4c7vlflOlDgjiiGsa32v0SB0qkwXIfBy56qJ
+   e1vJ/2kobReZnkibL00mjw01WTXug28LIQLLaR0x0aw1FxqkbjO+DtIFY
+   w==;
+X-CSE-ConnectionGUID: AdTMRA3NTlONVVDE6ziH+w==
+X-CSE-MsgGUID: ZmdGZxatQ4y10+i0N/rtNw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11609"; a="75606994"
 X-IronPort-AV: E=Sophos;i="6.19,296,1754982000";
-   d="scan'208";a="75606963"
+   d="scan'208";a="75606994"
 Received: from fmviesa007.fm.intel.com ([10.60.135.147])
-  by fmvoesa103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Nov 2025 04:28:03 -0800
-X-CSE-ConnectionGUID: yb65GK5dTgmnslAPrRM0gA==
-X-CSE-MsgGUID: J9zlwCCETMGq265hl7+R7Q==
+  by fmvoesa103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Nov 2025 04:28:04 -0800
+X-CSE-ConnectionGUID: QpOvoTP2TYKT5V9dhrKvZA==
+X-CSE-MsgGUID: DJfjMKFlRSW8JzjS12Rp8g==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.19,296,1754982000";
-   d="scan'208";a="188592913"
+   d="scan'208";a="188592916"
 Received: from black.igk.intel.com ([10.91.253.5])
-  by fmviesa007.fm.intel.com with ESMTP; 11 Nov 2025 04:27:55 -0800
+  by fmviesa007.fm.intel.com with ESMTP; 11 Nov 2025 04:27:57 -0800
 Received: by black.igk.intel.com (Postfix, from userid 1003)
-	id 0AB809E; Tue, 11 Nov 2025 13:27:38 +0100 (CET)
+	id 10F139F; Tue, 11 Nov 2025 13:27:38 +0100 (CET)
 From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
 To: Corey Minyard <corey@minyard.net>,
 	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
@@ -92,27 +92,27 @@ To: Corey Minyard <corey@minyard.net>,
 	linux-staging@lists.linux.dev,
 	ceph-devel@vger.kernel.org,
 	linux-trace-kernel@vger.kernel.org
-Date: Tue, 11 Nov 2025 13:20:08 +0100
-Message-ID: <20251111122735.880607-9-andriy.shevchenko@linux.intel.com>
+Date: Tue, 11 Nov 2025 13:20:09 +0100
+Message-ID: <20251111122735.880607-10-andriy.shevchenko@linux.intel.com>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <20251111122735.880607-1-andriy.shevchenko@linux.intel.com>
 References: <20251111122735.880607-1-andriy.shevchenko@linux.intel.com>
 MIME-Version: 1.0
-X-Spamd-Bar: ---
+X-Spamd-Bar: ----
 X-MailFrom: andriy.shevchenko@linux.intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: AGTISJ4NBIN3I3XJWHX262HKDLYDTRWW
-X-Message-ID-Hash: AGTISJ4NBIN3I3XJWHX262HKDLYDTRWW
+Message-ID-Hash: FQSOTKHK26JZWXJGAPLR22ABSYLN226T
+X-Message-ID-Hash: FQSOTKHK26JZWXJGAPLR22ABSYLN226T
 X-Mailman-Approved-At: Thu, 16 Apr 2026 14:53:21 +0000
 CC: Rasmus Villemoes <linux@rasmusvillemoes.dk>, Sergey Senozhatsky <senozhatsky@chromium.org>, Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>, Gustavo Padovan <gustavo@padovan.org>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>, Konrad Dybcio <konradybcio@kernel.org>, Lucas De Marchi <lucas.demarchi@intel.com>, =?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Vladimir Oltean <olteanv@gmail.com>, Andrew Lunn <andrew@lunn.ch>, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Tony Nguyen <anthony.l.nguyen@
  intel.com>, Przemek Kitszel <przemyslaw.kitszel@intel.com>, =?UTF-8?q?Krzysztof=20Wilczy=C5=84ski?= <kwilczynski@kernel.org>, Kishon Vijay Abraham I <kishon@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>, Rodolfo Giometti <giometti@enneenne.com>, Richard Cochran <richardcochran@gmail.com>, Jonathan Lemon <jonathan.lemon@gmail.com>, Stefan Haberland <sth@linux.ibm.com>, Jan Hoeppner <hoeppner@linux.ibm.com>, Heiko Carstens <hca@linux.ibm.com>, Vasily Gorbik <gor@linux.ibm.com>, Alexander Gordeev <agordeev@linux.ibm.com>, Christian Borntraeger <borntraeger@linux.ibm.com>, Sven Schnelle <svens@linux.ibm.com>, Satish Kharat <satishkh@cisco.com>, Sesidhar Baddela <sebaddel@cisco.com>, "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>, Mauro Carvalho Chehab <mchehab@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Xiubo Li <xiubli@redhat.com>, Ilya Dryomov <idryomov@gmail.com>, Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficio
  s.com>, Andrew Morton <akpm@linux-foundation.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v2 08/21] drm/xe: Switch to use %ptSp
+Subject: [Linaro-mm-sig] [PATCH v2 09/21] e1000e: Switch to use %ptSp
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AGTISJ4NBIN3I3XJWHX262HKDLYDTRWW/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FQSOTKHK26JZWXJGAPLR22ABSYLN226T/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -146,39 +146,43 @@ X-Spamd-Result: default: False [4.09 / 15.00];
 	FROM_NEQ_ENVFROM(0.00)[andriy.shevchenko@linux.intel.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig,cisco];
-	NEURAL_SPAM(0.00)[0.612];
+	NEURAL_SPAM(0.00)[0.339];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:email,linux.intel.com:mid,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: 8024C4102DD
+	DBL_BLOCKED_OPENRESOLVER(0.00)[systim_overflow_work.work:url,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,intel.com:email,linux.intel.com:mid]
+X-Rspamd-Queue-Id: 3F25E4102F3
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 Use %ptSp instead of open coded variants to print content of
 struct timespec64 in human readable format.
 
-Acked-by: Lucas De Marchi <lucas.demarchi@intel.com>
 Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
 ---
- drivers/gpu/drm/xe/xe_devcoredump.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/net/ethernet/intel/e1000e/ptp.c | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/gpu/drm/xe/xe_devcoredump.c b/drivers/gpu/drm/xe/xe_devcoredump.c
-index 203e3038cc81..d444eda65ca6 100644
---- a/drivers/gpu/drm/xe/xe_devcoredump.c
-+++ b/drivers/gpu/drm/xe/xe_devcoredump.c
-@@ -106,9 +106,9 @@ static ssize_t __xe_devcoredump_read(char *buffer, ssize_t count,
- 	drm_puts(&p, "module: " KBUILD_MODNAME "\n");
+diff --git a/drivers/net/ethernet/intel/e1000e/ptp.c b/drivers/net/ethernet/intel/e1000e/ptp.c
+index ea3c3eb2ef20..ec39e35f3857 100644
+--- a/drivers/net/ethernet/intel/e1000e/ptp.c
++++ b/drivers/net/ethernet/intel/e1000e/ptp.c
+@@ -229,14 +229,11 @@ static void e1000e_systim_overflow_work(struct work_struct *work)
+ 						     systim_overflow_work.work);
+ 	struct e1000_hw *hw = &adapter->hw;
+ 	struct timespec64 ts;
+-	u64 ns;
  
- 	ts = ktime_to_timespec64(ss->snapshot_time);
--	drm_printf(&p, "Snapshot time: %lld.%09ld\n", ts.tv_sec, ts.tv_nsec);
-+	drm_printf(&p, "Snapshot time: %ptSp\n", &ts);
- 	ts = ktime_to_timespec64(ss->boot_time);
--	drm_printf(&p, "Uptime: %lld.%09ld\n", ts.tv_sec, ts.tv_nsec);
-+	drm_printf(&p, "Uptime: %ptSp\n", &ts);
- 	drm_printf(&p, "Process: %s [%d]\n", ss->process_name, ss->pid);
- 	xe_device_snapshot_print(xe, &p);
+ 	/* Update the timecounter */
+-	ns = timecounter_read(&adapter->tc);
++	ts = ns_to_timespec64(timecounter_read(&adapter->tc));
  
+-	ts = ns_to_timespec64(ns);
+-	e_dbg("SYSTIM overflow check at %lld.%09lu\n",
+-	      (long long) ts.tv_sec, ts.tv_nsec);
++	e_dbg("SYSTIM overflow check at %ptSp\n", &ts);
+ 
+ 	schedule_delayed_work(&adapter->systim_overflow_work,
+ 			      E1000_SYSTIM_OVERFLOW_PERIOD);
 -- 
 2.50.1
 
