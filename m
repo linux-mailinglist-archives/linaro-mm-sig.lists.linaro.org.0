@@ -2,90 +2,151 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WHOdFHf64GlloAAAu9opvQ
+	id uCFCJYj64GlloAAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:04:23 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:04:40 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 61457410225
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:04:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2D58C41024A
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:04:40 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 6618240503
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:04:21 +0000 (UTC)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
-	by lists.linaro.org (Postfix) with ESMTPS id 7F3223F77E
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 11 Nov 2025 08:05:13 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3CDD340513
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:04:39 +0000 (UTC)
+Received: from PH7PR06CU001.outbound.protection.outlook.com (mail-westus3azon11010034.outbound.protection.outlook.com [52.101.201.34])
+	by lists.linaro.org (Postfix) with ESMTPS id 5F4BF3F7CF
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 11 Nov 2025 10:15:41 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=NUIP1don;
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (lists.linaro.org: domain of hverkuil+cisco@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=hverkuil+cisco@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by tor.source.kernel.org (Postfix) with ESMTP id E86426191A;
-	Tue, 11 Nov 2025 08:05:12 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 758BFC116D0;
-	Tue, 11 Nov 2025 08:04:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1762848312;
-	bh=L5yMR8hp8K6n3p5Uz6MrsGqp/GNA0slthJowCoOHAbM=;
-	h=Date:From:Subject:To:Cc:References:In-Reply-To:From;
-	b=NUIP1don/7EEjqY/+TuMC7+CtmpG/nW2STT6PfNtEFuFU+HXZKqLbbnEAMH/X/3JJ
-	 WVWvR5dg7fblvx/9940inFYgR2C5Gv8VCu1k/MG3tLYRY2844vpHtjrgDZFeK1fdOO
-	 JM9vzH3/AWqsGZIFSz7EL/soDKXXUbKHVx/PFFqkGRFYGIzvUKJH2LfpLXAxaji/IR
-	 Vs8kH4VSFB0ma/R7k8kHRT0ZJzgV8pEkXXgoavVjbaLi01h+sab77WCI8dWWJ+fyMQ
-	 Px0GCJGzWonU67OPy+OHOih22E625vhqYo9ne3sB2zFxHcVeAaZEH4KOlSEdxaEekL
-	 55nfUGgl/CXGw==
-Message-ID: <fd47654d-c4cc-4cbc-95da-824f1e6bbbf9@kernel.org>
-Date: Tue, 11 Nov 2025 09:04:55 +0100
+	dkim=pass header.d=ti.com header.s=selector1 header.b=kdHVOZWO;
+	dmarc=pass (policy=quarantine) header.from=ti.com;
+	arc=pass ("microsoft.com:s=arcselector10001:i=1");
+	spf=pass (lists.linaro.org: domain of m-malladi@ti.com designates 52.101.201.34 as permitted sender) smtp.mailfrom=m-malladi@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=HLyDF9r+bMnMZQF+tiodsEfJTweWh11PfMW4ITjEnnYVn8VlToL88DJnjiuU+tWHqw9pFWv+yt9t/UXwtdlqB3uod4SO6CLYLU6kWxB2zU2dcfyDXfUoUUhttpe8yx4JvOEwpNp2z4LXz7Ig+bjvWYz52JJN8xCvIAMXPf+ere9+9AX36fZoRON6TwyLd1mRrSNvJ5eXyYR4gIXmEwM1Yu/qEFGTEnDDsXC3Idg7A2INJuVeL0xhrcXxde2O0Zvf86p5h0BBPo7yOO1zXdxchDVtUzZio4OTmsG1lgNnQi6BYB6WZTIWZWe1JXOiB2PQhLgE6qY457mYCUxR6XfKxg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=u/g10OXeyFVYDRWSv01A8reEIOYXEZwVJLGHlt+4yIc=;
+ b=MOGUcK6Qc3rGqQjJSFn1F7Xl2cqwoeExp3KfArkEvZdh6A7yeW5mmoBnV3PW+mPOlALv6wIzS4z1bypVIiUTchAb6nPbWjgV/fuKy1RpYDBn84EDvp8YWVJoUWo1+hIBWbC5dtlwhJLTMzf2w5gCWyHoJQ0LbjNlfh154lK3byVkwvF+9Ja659RWQW6Tc+Ie56tBcmsEyWn/E9bUOjIr+XLenGMYXTHB85PZFXiEOA0AVfOQMlTVxXgrOmT5bWN/ZESTsDgKt84Fo6HZpmTe1sygfZK7OZPpqIli5O82+Nu+KSXuAbNZMFakDsBJSZCLLlc/r2eK8q6p/LGb8jtThg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.194) smtp.rcpttodomain=kernel.org smtp.mailfrom=ti.com; dmarc=pass
+ (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
+ (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=u/g10OXeyFVYDRWSv01A8reEIOYXEZwVJLGHlt+4yIc=;
+ b=kdHVOZWOE52EMXpEkLvx5cbUkSE/YxJZ8yOIEDpyB2hBkU1AeRQuD4iUimhZjguzNsELnSAoJF1Ms1XpJToG2ojJFOpEVhbVv1QEEsevOgPlLi/UN7G6mpgVF4q1mKb+PRMu79RSuKrO40UA5GsFFYBu1BE565dW6dbhy0twn6w=
+Received: from BY3PR05CA0042.namprd05.prod.outlook.com (2603:10b6:a03:39b::17)
+ by SA1PR10MB7815.namprd10.prod.outlook.com (2603:10b6:806:3ac::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.16; Tue, 11 Nov
+ 2025 10:15:37 +0000
+Received: from SJ1PEPF00002311.namprd03.prod.outlook.com
+ (2603:10b6:a03:39b:cafe::86) by BY3PR05CA0042.outlook.office365.com
+ (2603:10b6:a03:39b::17) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9320.15 via Frontend Transport; Tue,
+ 11 Nov 2025 10:15:18 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ SJ1PEPF00002311.mail.protection.outlook.com (10.167.242.165) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9320.13 via Frontend Transport; Tue, 11 Nov 2025 10:15:37 +0000
+Received: from DLEE211.ent.ti.com (157.170.170.113) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 11 Nov
+ 2025 04:15:29 -0600
+Received: from DLEE207.ent.ti.com (157.170.170.95) by DLEE211.ent.ti.com
+ (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 11 Nov
+ 2025 04:15:29 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE207.ent.ti.com
+ (157.170.170.95) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Tue, 11 Nov 2025 04:15:29 -0600
+Received: from fllv0122.itg.ti.com (fllv0122.itg.ti.com [10.247.120.72])
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5ABAFTkb751480;
+	Tue, 11 Nov 2025 04:15:29 -0600
+Received: from localhost (meghana-pc.dhcp.ti.com [10.24.69.13] (may be forged))
+	by fllv0122.itg.ti.com (8.14.7/8.14.7) with ESMTP id 5ABAFRQj011888;
+	Tue, 11 Nov 2025 04:15:28 -0600
+From: Meghana Malladi <m-malladi@ti.com>
+To: <horms@kernel.org>, <namcao@linutronix.de>, <vadim.fedorenko@linux.dev>,
+	<jacob.e.keller@intel.com>, <m-malladi@ti.com>, <christian.koenig@amd.com>,
+	<sumit.semwal@linaro.org>, <sdf@fomichev.me>, <john.fastabend@gmail.com>,
+	<hawk@kernel.org>, <daniel@iogearbox.net>, <ast@kernel.org>,
+	<pabeni@redhat.com>, <kuba@kernel.org>, <edumazet@google.com>,
+	<davem@davemloft.net>, <andrew+netdev@lunn.ch>
+Date: Tue, 11 Nov 2025 15:45:17 +0530
+Message-ID: <20251111101523.3160680-1-m-malladi@ti.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Hans Verkuil <hverkuil+cisco@kernel.org>
-To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Corey Minyard <corey@minyard.net>, =?UTF-8?Q?Christian_K=C3=B6nig?=
- <christian.koenig@amd.com>, "Dr. David Alan Gilbert" <linux@treblig.org>,
- Alex Deucher <alexander.deucher@amd.com>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
- Rob Clark <robin.clark@oss.qualcomm.com>,
- Matthew Brost <matthew.brost@intel.com>, Hans Verkuil <hverkuil@kernel.org>,
- Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>,
- Ulf Hansson <ulf.hansson@linaro.org>,
- Vitaly Lifshits <vitaly.lifshits@intel.com>,
- Manivannan Sadhasivam <mani@kernel.org>, Niklas Cassel <cassel@kernel.org>,
- Calvin Owens <calvin@wbinvd.org>, Sagi Maimon <maimon.sagi@gmail.com>,
- "Martin K. Petersen" <martin.petersen@oracle.com>,
- Karan Tilak Kumar <kartilak@cisco.com>,
- Casey Schaufler <casey@schaufler-ca.com>,
- Steven Rostedt <rostedt@goodmis.org>, Petr Mladek <pmladek@suse.com>,
- Max Kellermann <max.kellermann@ionos.com>, Takashi Iwai <tiwai@suse.de>,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- openipmi-developer@lists.sourceforge.net, linux-media@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
- amd-gfx@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
- freedreno@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
- linux-mmc@vger.kernel.org, netdev@vger.kernel.org,
- intel-wired-lan@lists.osuosl.org, linux-pci@vger.kernel.org,
- linux-s390@vger.kernel.org, linux-scsi@vger.kernel.org,
- linux-staging@lists.linux.dev, ceph-devel@vger.kernel.org,
- linux-trace-kernel@vger.kernel.org, linux-sound@vger.kernel.org
-References: <20251110184727.666591-1-andriy.shevchenko@linux.intel.com>
- <20251110184727.666591-15-andriy.shevchenko@linux.intel.com>
-Content-Language: en-US, nl
-In-Reply-To: <20251110184727.666591-15-andriy.shevchenko@linux.intel.com>
-X-Spamd-Bar: --
-X-MailFrom: hverkuil+cisco@kernel.org
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ1PEPF00002311:EE_|SA1PR10MB7815:EE_
+X-MS-Office365-Filtering-Correlation-Id: 31d7b8c4-9d52-4619-f3d5-08de210b4235
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|7416014|376014|36860700013|1800799024|82310400026|921020;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?AWnrbSmOnAhZNlFv1GCQqafgr3yS/7mxg4Uiy4F14sbk26IU/i905lp0KFOL?=
+ =?us-ascii?Q?vbz7R3Ex+hgrRxfnpWvSyji41Lz4jVlZQrznReRn449O8s5o6C0nwyLF7pEk?=
+ =?us-ascii?Q?GC5G5t3tQNLEEd0u1jF+64gdybHnQV5MA5oQY4ksptdtour1OGLz3+4dZ/6w?=
+ =?us-ascii?Q?rDw8KhZn+XXvI/wQa13nUMc1kX0uNwtkgdVZ4qKwk3qv8V99S2XdjgupUzoC?=
+ =?us-ascii?Q?E9kalPbkJE0Mae+bDx54Nz0FIUS41Yfz/IX8WgiiUk658T1tIfN1vbU4mE8w?=
+ =?us-ascii?Q?zVvfv7JlJiZSgf83+wchL7lNM9MBF5hiEyYrDSR8b3Eu4Cr3UmPTzoCwBGq8?=
+ =?us-ascii?Q?MS1n4MmJGqG6CqycgyZ9w5cXiAP7CEODeBsQOEtfJPNFTU5PGV9DCK2GgAIT?=
+ =?us-ascii?Q?Hjzr3mmhotiX0iEAZ3uRD5gAqTFy/8aFtK2FkBokaPd4PHDZXNBQ7qm6Gn+N?=
+ =?us-ascii?Q?D+bCrpy1zkpZUq1j5PL25MOiANbioiDN2H/XTuRu9pJQB99uoq29JbIpfZkh?=
+ =?us-ascii?Q?7Jj2CBpkx/4jrih/vAapHZOFuJDfR9Bo/0zTTJf6RObdb/FUrv/a02Uo/cCk?=
+ =?us-ascii?Q?HAQ51b4YEFwqwRhdwqAA+t65IfuSIT5/oLroSt0U1pSDcSYYa3eVcUviyhS0?=
+ =?us-ascii?Q?mXhudZl+u85zvFS3HTv8VO1ULeAKk/8a3GCdN2mR4bF3WbJtSb58Smxlmekk?=
+ =?us-ascii?Q?cHJlJO0D3tPaUMGEEhikUJQMNp1iaUElEJvIB8VJ04aIuPvFcLmYXn/HVgot?=
+ =?us-ascii?Q?HHPTY0SvxvxrHsUioJulwro7RXz6Dg33LHmiTFHSw2ttrom4JavU2Flb9pVZ?=
+ =?us-ascii?Q?2rJFTNPT5Re3x0UY++wFV0WCGVc7bbLjvtnpW43WtoXaStMHRxvDLmGG+yrt?=
+ =?us-ascii?Q?qYI8iCRgikye0q4g4pXhnLC3yh/q47jFXnfPIm0teyMY8opZ61EQXGW3pp1l?=
+ =?us-ascii?Q?yUfOzpLW+Qq0pfz1JCUNeTd+HR/Sc/m0dIxzH+EI3TrYYgba/M1fB3dQYt9f?=
+ =?us-ascii?Q?hm5/jQo3QP8rwMKhlxFJZhbQEcEd0k7CJsnR/iMamkAD5j60uAZYzXRl4uiD?=
+ =?us-ascii?Q?ymitTdyebvjbjN6kZrs6V1aH14VVEqL6IZbUqDTX2qZ79Vc6QQyGf4nJopNd?=
+ =?us-ascii?Q?Etcdg0kZyaMY28nkLqYYXqQlRXIcVTSOGN4YgBNKOWOWdNSpMF1hKrN7Xdsk?=
+ =?us-ascii?Q?pLHdY620AN6L5N5gp2ZfIufj9AMF+JErWcGqwMeHJg9vO4rQQSGeJcwGLkIK?=
+ =?us-ascii?Q?vV+7eHJVE1gwDaMLd+RmZYhLqjzuq8m/knAMM5ltycubzU1VHzNA9OaOizV8?=
+ =?us-ascii?Q?1M7Hn8Z+HjzPZdsQVREG1LGniURf6blZ/DGl+yq+ZKn5Fn/XOhgZbY6CId8f?=
+ =?us-ascii?Q?+6+N3XIu+uaIe7/+x/HZQn75H0ppB7SOCSzCtGEKJKjNxYt/1KjgxsBPMRQT?=
+ =?us-ascii?Q?ZLfzj/pXwpi+7WymZ2rQsx0Nk/qUDFbtCgztuze/7RhR+BCWroYMmxbOE7xO?=
+ =?us-ascii?Q?D5AnzxinHh4lJtL2ZZwtsKWD2Rgin6ROKl6CfmCxaGlO1fhIxpZsZ7yShqSi?=
+ =?us-ascii?Q?NXLP2hud5pRMLgUDBBIkHiaUz7mgGGXKvG6QtbIz?=
+X-Forefront-Antispam-Report: 
+	CIP:198.47.23.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet200.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(7416014)(376014)(36860700013)(1800799024)(82310400026)(921020);DIR:OUT;SFP:1101;
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Nov 2025 10:15:37.1722
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 31d7b8c4-9d52-4619-f3d5-08de210b4235
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.194];Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	SJ1PEPF00002311.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR10MB7815
+X-Spamd-Bar: -
+X-MailFrom: m-malladi@ti.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 3MMWXGI5SRVG2WHRQOGQXE77LVF7CUK5
-X-Message-ID-Hash: 3MMWXGI5SRVG2WHRQOGQXE77LVF7CUK5
-X-Mailman-Approved-At: Thu, 16 Apr 2026 14:53:11 +0000
-CC: Rasmus Villemoes <linux@rasmusvillemoes.dk>, Sergey Senozhatsky <senozhatsky@chromium.org>, Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>, Gustavo Padovan <gustavo@padovan.org>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>, Konrad Dybcio <konradybcio@kernel.org>, Lucas De Marchi <lucas.demarchi@intel.com>, =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Mauro Carvalho Chehab <mchehab@kernel.org>, Vladimir Oltean <olteanv@gmail.com>, Andrew Lunn <andrew@lunn.ch>, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@r
- edhat.com>, Tony Nguyen <anthony.l.nguyen@intel.com>, Przemek Kitszel <przemyslaw.kitszel@intel.com>, =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>, Kishon Vijay Abraham I <kishon@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>, Rodolfo Giometti <giometti@enneenne.com>, Jonathan Lemon <jonathan.lemon@gmail.com>, Vadim Fedorenko <vadim.fedorenko@linux.dev>, Richard Cochran <richardcochran@gmail.com>, Stefan Haberland <sth@linux.ibm.com>, Jan Hoeppner <hoeppner@linux.ibm.com>, Heiko Carstens <hca@linux.ibm.com>, Vasily Gorbik <gor@linux.ibm.com>, Alexander Gordeev <agordeev@linux.ibm.com>, Christian Borntraeger <borntraeger@linux.ibm.com>, Sven Schnelle <svens@linux.ibm.com>, Satish Kharat <satishkh@cisco.com>, Sesidhar Baddela <sebaddel@cisco.com>, "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Xiubo Li <xiubli@redhat.com>, Ilya Dryomov <idryomov@gmail.com>, Masami Hiramatsu <mhiramat@kernel.org>, Mat
- hieu Desnoyers <mathieu.desnoyers@efficios.com>, Andrew Morton <akpm@linux-foundation.org>, Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>
+Message-ID-Hash: EFORCDSFLCPO42NC4AC5HIDWI7Q4IMMB
+X-Message-ID-Hash: EFORCDSFLCPO42NC4AC5HIDWI7Q4IMMB
+X-Mailman-Approved-At: Thu, 16 Apr 2026 14:53:13 +0000
+CC: linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, bpf@vger.kernel.org, linux-kernel@vger.kernel.org, netdev@vger.kernel.org, linux-arm-kernel@lists.infradead.org, srk@ti.com, Vignesh Raghavendra <vigneshr@ti.com>, Roger Quadros <rogerq@kernel.org>, danishanwar@ti.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v1 14/23] media: v4l2-ioctl: Switch to use %ptSp
+Subject: [Linaro-mm-sig] [PATCH net-next v5 0/6] Add AF_XDP zero copy support
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3MMWXGI5SRVG2WHRQOGQXE77LVF7CUK5/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EFORCDSFLCPO42NC4AC5HIDWI7Q4IMMB/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -94,87 +155,90 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [4.49 / 15.00];
-	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
+X-Spamd-Result: default: False [6.49 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DATE_IN_PAST(1.00)[3750];
-	R_DKIM_REJECT(1.00)[kernel.org:s=k20201202];
-	MAILLIST(-0.20)[mailman];
+	DMARC_POLICY_QUARANTINE(1.50)[ti.com : SPF not aligned (relaxed),quarantine];
+	MID_CONTAINS_FROM(1.00)[];
+	R_DKIM_REJECT(1.00)[ti.com:s=selector1];
+	DATE_IN_PAST(1.00)[3748];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
 	R_SPF_ALLOW(-0.20)[+mx:c];
+	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de,cisco];
-	ARC_NA(0.00)[];
-	FREEMAIL_TO(0.00)[linux.intel.com,minyard.net,amd.com,treblig.org,suse.de,oss.qualcomm.com,intel.com,kernel.org,ideasonboard.com,linaro.org,wbinvd.org,gmail.com,oracle.com,cisco.com,schaufler-ca.com,goodmis.org,suse.com,ionos.com,vger.kernel.org,lists.sourceforge.net,lists.freedesktop.org,lists.linaro.org,lists.osuosl.org,lists.linux.dev];
-	RCVD_COUNT_THREE(0.00)[4];
-	GREYLIST(0.00)[pass,meta];
 	MIME_TRACE(0.00)[0:+];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:-];
+	RCPT_COUNT_TWELVE(0.00)[28];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FREEMAIL_TO(0.00)[kernel.org,linutronix.de,linux.dev,intel.com,ti.com,amd.com,linaro.org,fomichev.me,gmail.com,iogearbox.net,redhat.com,google.com,davemloft.net,lunn.ch];
+	RCVD_TLS_LAST(0.00)[];
+	GREYLIST(0.00)[pass,meta];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[96];
-	FROM_NEQ_ENVFROM(0.00)[hverkuil@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
-	FREEMAIL_CC(0.00)[rasmusvillemoes.dk,chromium.org,lwn.net,linaro.org,padovan.org,gmail.com,ffwll.ch,linux.intel.com,kernel.org,linux.dev,poorly.run,somainline.org,intel.com,lunn.ch,davemloft.net,google.com,r edhat.com,enneenne.com,linux.ibm.com,cisco.com,HansenPartnership.com,linuxfoundation.org,redhat.com,efficios.com,linux-foundation.org,perex.cz,suse.com];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,renesas];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,ti.com:mid,lists.linaro.org:helo,lists.linaro.org:rdns,intel.com:email];
+	DKIM_TRACE(0.00)[ti.com:-];
+	FROM_NEQ_ENVFROM(0.00)[m-malladi@ti.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-0.241];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig,netdev];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_SPAM(0.00)[0.072];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,intel.com:email]
-X-Rspamd-Queue-Id: 61457410225
-X-Rspamd-Action: no action
+	RCVD_COUNT_SEVEN(0.00)[10]
+X-Rspamd-Queue-Id: 2D58C41024A
+X-Rspamd-Action: add header
 X-Rspamd-Server: lfdr
+X-Spam: Yes
 
-On 10/11/2025 19:40, Andy Shevchenko wrote:
-> Use %ptSp instead of open coded variants to print content of
-> struct timespec64 in human readable format.
-> 
-> Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-> ---
->  drivers/media/v4l2-core/v4l2-ioctl.c | 5 ++---
->  1 file changed, 2 insertions(+), 3 deletions(-)
-> 
-> diff --git a/drivers/media/v4l2-core/v4l2-ioctl.c b/drivers/media/v4l2-core/v4l2-ioctl.c
-> index 01cf52c3ea33..edc4d97b4161 100644
-> --- a/drivers/media/v4l2-core/v4l2-ioctl.c
-> +++ b/drivers/media/v4l2-core/v4l2-ioctl.c
-> @@ -791,9 +791,8 @@ static void v4l_print_event(const void *arg, bool write_only)
->  	const struct v4l2_event *p = arg;
->  	const struct v4l2_event_ctrl *c;
->  
-> -	pr_cont("type=0x%x, pending=%u, sequence=%u, id=%u, timestamp=%llu.%9.9llu\n",
-> -			p->type, p->pending, p->sequence, p->id,
-> -			p->timestamp.tv_sec, p->timestamp.tv_nsec);
-> +	pr_cont("type=0x%x, pending=%u, sequence=%u, id=%u, timestamp=%ptSp\n",
-> +		p->type, p->pending, p->sequence, p->id, &p->timestamp);
+This series adds AF_XDP zero coppy support to icssg driver.
 
-Hmm, p->timestamp is a struct __kernel_timespec, but that's not quite the
-same thing as struct timespec64:
+Tests were performed on AM64x-EVM with xdpsock application [1].
 
-struct __kernel_timespec {
-        __kernel_time64_t       tv_sec;                 /* seconds */
-        long long               tv_nsec;                /* nanoseconds */
-};
+A clear improvement is seen Transmit (txonly) and receive (rxdrop)
+for 64 byte packets. 1500 byte test seems to be limited by line
+rate (1G link) so no improvement seen there in packet rate
 
-vs:
+Having some issue with l2fwd as the benchmarking numbers show 0
+for 64 byte packets after forwading first batch packets and I am
+currently looking into it.
 
-struct timespec64 {
-        time64_t        tv_sec;                 /* seconds */
-        long            tv_nsec;                /* nanoseconds */
-};
+AF_XDP performance using 64 byte packets in Kpps.
+AF_XDP performance using 64 byte packets in Kpps.
+Benchmark:	XDP-SKB		XDP-Native	XDP-Native(ZeroCopy)
+rxdrop		253		473		656
+txonly		350		354		855
+l2fwd 		178		240		0
 
-So I'm not sure this will work.
+AF_XDP performance using 1500 byte packets in Kpps.
+Benchmark:	XDP-SKB		XDP-Native	XDP-Native(ZeroCopy)
+rxdrop		82		82		82
+txonly		81		82		82
+l2fwd 		81		82		82
 
-Regards,
+[1]: https://github.com/xdp-project/bpf-examples/tree/master/AF_XDP-example
+v4: https://lore.kernel.org/all/20251023093927.1878411-1-m-malladi@ti.com/
 
-	Hans
+v5-v4:
+- Rebased to the latest tip
+- Collected Reviewed-by from Jacob Keller <jacob.e.keller@intel.com>
 
->  	switch (p->type) {
->  	case V4L2_EVENT_VSYNC:
->  		printk(KERN_DEBUG "field=%s\n",
+Meghana Malladi (6):
+  net: ti: icssg-prueth: Add functions to create and destroy Rx/Tx
+    queues
+  net: ti: icssg-prueth: Add XSK pool helpers
+  net: ti: icssg-prueth: Add AF_XDP zero copy for TX
+  net: ti: icssg-prueth: Make emac_run_xdp function independent of page
+  net: ti: icssg-prueth: Add AF_XDP zero copy for RX
+  net: ti: icssg-prueth: Enable zero copy in XDP features
+
+ drivers/net/ethernet/ti/icssg/icssg_common.c | 471 ++++++++++++++++---
+ drivers/net/ethernet/ti/icssg/icssg_prueth.c | 394 +++++++++++++---
+ drivers/net/ethernet/ti/icssg/icssg_prueth.h |  25 +-
+ 3 files changed, 741 insertions(+), 149 deletions(-)
+
+
+base-commit: b981e100c19dcd91ce8cca8562c3cdabd4fcf28c
+-- 
+2.43.0
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
