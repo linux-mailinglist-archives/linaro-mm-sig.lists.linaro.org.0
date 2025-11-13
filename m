@@ -2,122 +2,115 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 36506C55B39
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 13 Nov 2025 05:51:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AFCCEC580E8
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 13 Nov 2025 15:53:54 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E761A3F6F4
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 13 Nov 2025 04:51:42 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
-	by lists.linaro.org (Postfix) with ESMTPS id 0E1703F6F4
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 13 Nov 2025 04:51:29 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9ABCB3F840
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 13 Nov 2025 14:53:53 +0000 (UTC)
+Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com [209.85.208.47])
+	by lists.linaro.org (Postfix) with ESMTPS id C84A63F6C7
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 13 Nov 2025 14:53:35 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=kcjHQCAA;
-	dmarc=pass (policy=none) header.from=intel.com;
-	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 198.175.65.21 as permitted sender) smtp.mailfrom=lkp@intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1763009490; x=1794545490;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=qq9EYIVJ3Tncasnn1UTSERO1iZT9ZPhsPZrFE8rSO+g=;
-  b=kcjHQCAAspORT+3GaPMpiaNog/D2Z2/LsMlEaWjZvmtreWj2Pb8VZwnF
-   0eK8mhDzTxgznuc3ZIBmYAvu+1+QOXbYboVpDLnO2ji5Ty2BfWryGxaA7
-   CeWuJoZ+PYCvllYBRvhmw5VstSdpbhQ6s84arYVw3I9XJ31RMCD7R4nbo
-   CzT34RuCQ1WcRi9HuK4ZJuaukWRDALtC1mmHqQ8OzH5ZZDtwqYtX/Y3hD
-   ZuX+mdZnTydjiv+p6HZ6I8wtzDuWTz7Sr2YO4tuPpVYuh491Vd241llRi
-   nZ/0yX34p/WkZv6b9MIvlNNW9S99jFszwDQmvYHsUX1jQDEaML1guNqfj
-   Q==;
-X-CSE-ConnectionGUID: NIZgWAWLQjawzDKX4smpVA==
-X-CSE-MsgGUID: MzmizYCeQtKHE7BOg6zM/Q==
-X-IronPort-AV: E=McAfee;i="6800,10657,11531"; a="65008639"
-X-IronPort-AV: E=Sophos;i="6.17,312,1747724400";
-   d="scan'208";a="65008639"
-Received: from orviesa005.jf.intel.com ([10.64.159.145])
-  by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Nov 2025 20:51:28 -0800
-X-CSE-ConnectionGUID: EyZILhKdS5u4MltFhc7Aiw==
-X-CSE-MsgGUID: upuRXUuxTLyWjRI+sgT0Og==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.19,301,1754982000";
-   d="scan'208";a="194586243"
-Received: from lkp-server01.sh.intel.com (HELO 7b01c990427b) ([10.239.97.150])
-  by orviesa005.jf.intel.com with ESMTP; 12 Nov 2025 20:51:22 -0800
-Received: from kbuild by 7b01c990427b with local (Exim 4.96)
-	(envelope-from <lkp@intel.com>)
-	id 1vJPIk-0004tL-3A;
-	Thu, 13 Nov 2025 04:51:18 +0000
-Date: Thu, 13 Nov 2025 12:51:08 +0800
-From: kernel test robot <lkp@intel.com>
-To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-	Corey Minyard <corey@minyard.net>,
-	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
-	"Dr. David Alan Gilbert" <linux@treblig.org>,
-	Alex Deucher <alexander.deucher@amd.com>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	Dmitry Baryshkov <lumag@kernel.org>,
-	Rob Clark <robin.clark@oss.qualcomm.com>,
-	Matthew Brost <matthew.brost@intel.com>,
-	Ulf Hansson <ulf.hansson@linaro.org>,
-	Vitaly Lifshits <vitaly.lifshits@intel.com>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Niklas Cassel <cassel@kernel.org>, Calvin Owens <calvin@wbinvd.org>,
-	Vadim Fedorenko <vadim.fedorenko@linux.dev>,
-	Sagi Maimon <maimon.sagi@gmail.com>,
-	"Martin K. Petersen" <martin.petersen@oracle.com>,
-	Karan Tilak Kumar <kartilak@cisco.com>,
-	Hans Verkuil <hverkuil@xs4all.nl>,
-	Casey Schaufler <casey@schaufler-ca.com>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Petr Mladek <pmladek@suse.com>,
-	Viacheslav Dubeyko <Slava.Dubeyko@ibm.com>,
-	Max Kellermann <max.kellermann@ionos.com>,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	openipmi-developer@lists.sourceforge.net,
-	linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org,
-	linaro-mm-sig@lists.linaro.org
-Message-ID: <202511130449.Q1mCZRpT-lkp@intel.com>
-References: <20251111122735.880607-20-andriy.shevchenko@linux.intel.com>
+	dkim=pass header.d=gmail.com header.s=20230601 header.b=PNRvgtb2;
+	dmarc=pass (policy=none) header.from=gmail.com;
+	spf=pass (lists.linaro.org: domain of ckoenig.leichtzumerken@gmail.com designates 209.85.208.47 as permitted sender) smtp.mailfrom=ckoenig.leichtzumerken@gmail.com
+Received: by mail-ed1-f47.google.com with SMTP id 4fb4d7f45d1cf-641977dc00fso1372270a12.1
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 13 Nov 2025 06:53:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1763045615; x=1763650415; darn=lists.linaro.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=2KuY4uk9dx+SEK4R72zOc8sDn7Cu3S//j0y0j/oIKkY=;
+        b=PNRvgtb2mNk3uiUOg06tOjfRRYbgAG3+NkLwJJ+aqz5uw9KrPkSsLHJzS34in94hwt
+         gtiKEcN++0m4fgyF+10qS6ejdDI87XbQW5CsoGF8LhFUTtXrOni7r0NQ5+P+LTOY+Zx0
+         bMMLWkeU0j/vc4dKacRblGGDhfxFbk7oJcl+39VPD2tcmivq8emVjfDfjnnPy57IbmWN
+         tYGFx1NP45wpptXRY0GG3Yr8uOIBFU2xYRytDvMtngy6sYh3dXPEWWV4nvVOtIDCrets
+         iFl9l8Z/9GtLN69WOcyRHR/m6AwrH4hZv77nJwR5sLfmPkDCiR2cerwoG0tJ1pKbH5HW
+         Oyyw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1763045615; x=1763650415;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=2KuY4uk9dx+SEK4R72zOc8sDn7Cu3S//j0y0j/oIKkY=;
+        b=Zah+oxzWoWuETJh3/l8uA6dEJHTNESL7oBnGMwBmGRxO98f9vIztScFyj1w0M3S6mK
+         3Gaa7XDD70mZ5AHuNb040uKJCLpY+qgW3EIz5FGr588Q6cQiKiFNbXQ+WNQ2+MZNxFJQ
+         UpLFbxEgEWrG5/jaudeTW1yeSjuFaBjz6MtwB6/EZQ+AXoJi4pXVWthjB5H01UXlZtEk
+         o0FgDe8J7Eg93eKtdzaOoszdCAL9DF1vUiGLFwgZfEeIYthSkyCOhn0QedzNtsf5oTH6
+         iK9XhS4Ao6m93vt38kjyuAFl3HemShAt7MHjJAEhL58YpXRkfFHQQEi6zDMW0uf2o4Ag
+         O7AA==
+X-Forwarded-Encrypted: i=1; AJvYcCWEtUwBYX4dVjnacfJJdnu8aGXvhQxy55K7F/+pSRaJfSrDYwhX/WJnZd1RT/+4odYL6RsJjr0YnOCDNxC3@lists.linaro.org
+X-Gm-Message-State: AOJu0Yxx18FYP9coo/y72vBPX+I7avjhCakX8i5DeN60Rj+QV2QR9mKO
+	Q2NpMJ49xWoYYH0azI6QCc+3lht2m2ykh/rr42tSN006qNb5bdstiEzv
+X-Gm-Gg: ASbGncuzY94sqEh11KKPbrhw/VObeiKI/FtKgcCb+28ROPeVFfC4dmg6tphoUf3b6BF
+	2I5yQ4oO+Wn+4TpMnA+UMMG4lUyxxyoQ9pOQdVuSoecCTSXGI9SmOsQc1ZO48lHNqX8BFyML/TP
+	VkykyzJUQjijb98mARjeFRySxljBVHOTU8+iNEAZGTlPwnNOJjJXgIslC61s0EdEZkWVUMV0cHF
+	XqJvkCDjhdyRCPxRI1ZfoV7iC48wT0urBy7kb3SYjM7xM2h7VNK7fb3Ml3/kn/kGNdr7oD48+Iu
+	8iv/1d/QNvqIQukkSnafaC3soIi00uLVgTTLQQam0OS7LtwKdkbxg9foNK746WAkDvBxi0/YWjF
+	L6Q3wHx1md1fqBgswPVcAZr7ACuPiYOBOTq0voI8UWuysJX/uAd23wpHn0kDMQDPKpfkCPo0Gex
+	FMmop9R0cse3M=
+X-Google-Smtp-Source: AGHT+IE17n8JQmz8ZzOanQPyu0ficEa1gOkY5xc57eixhccSjQy8+v1v9r9GRlWtfqrRxGWCG8nk1w==
+X-Received: by 2002:a17:906:f597:b0:b04:32ff:5d3a with SMTP id a640c23a62f3a-b73317a7930mr732977566b.0.1763045614394;
+        Thu, 13 Nov 2025 06:53:34 -0800 (PST)
+Received: from able.fritz.box ([2a00:e180:15aa:c600:cef:d94:436c:abc5])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b73513b400fsm173747166b.1.2025.11.13.06.53.33
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 13 Nov 2025 06:53:33 -0800 (PST)
+From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
+X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
+To: phasta@mailbox.org,
+	alexdeucher@gmail.com,
+	simona.vetter@ffwll.ch,
+	tursulin@ursulin.net,
+	matthew.brost@intel.com,
+	dri-devel@lists.freedesktop.org,
+	amd-gfx@lists.freedesktop.org,
+	linaro-mm-sig@lists.linaro.org,
+	sumit.semwal@linaro.org
+Date: Thu, 13 Nov 2025 15:51:37 +0100
+Message-ID: <20251113145332.16805-1-christian.koenig@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20251111122735.880607-20-andriy.shevchenko@linux.intel.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 0E1703F6F4
-X-Spamd-Bar: ----
-X-Spamd-Result: default: False [-4.50 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
-	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip4:198.175.65.0/26];
+X-Rspamd-Queue-Id: C84A63F6C7
+X-Spamd-Bar: --
+X-Spamd-Result: default: False [-2.50 / 15.00];
+	BAYES_HAM(-2.72)[98.77%];
+	R_MIXED_CHARSET(0.71)[subject];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	MIME_GOOD(-0.10)[text/plain];
-	DNSWL_BLOCKED(0.00)[198.175.65.21:from];
-	ARC_NA(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[32];
-	FROM_HAS_DN(0.00)[];
-	TAGGED_RCPT(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	FREEMAIL_TO(0.00)[linux.intel.com,minyard.net,amd.com,treblig.org,suse.de,kernel.org,oss.qualcomm.com,intel.com,linaro.org,wbinvd.org,linux.dev,gmail.com,oracle.com,cisco.com,xs4all.nl,schaufler-ca.com,goodmis.org,suse.com,ibm.com,ionos.com,vger.kernel.org,lists.sourceforge.net,lists.freedesktop.org,lists.linaro.org];
+	TAGGED_FROM(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
+	ARC_NA(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[mailbox.org,gmail.com,ffwll.ch,ursulin.net,intel.com,lists.freedesktop.org,lists.linaro.org,linaro.org];
+	SUBJECT_HAS_EXCLAIM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	TO_DN_NONE(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_EQ_ENVFROM(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	TO_DN_SOME(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	DKIM_TRACE(0.00)[intel.com:+]
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.208.47:from];
+	RCPT_COUNT_SEVEN(0.00)[9];
+	FROM_HAS_DN(0.00)[]
 X-Rspamd-Action: no action
-Message-ID-Hash: ITDK3AZB6QSIRRMLWUWZUHP2R7N2NOEA
-X-Message-ID-Hash: ITDK3AZB6QSIRRMLWUWZUHP2R7N2NOEA
-X-MailFrom: lkp@intel.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev
+Message-ID-Hash: TKKKZYGOMOX3BSKHPI7AXY6GGSLIKQOW
+X-Message-ID-Hash: TKKKZYGOMOX3BSKHPI7AXY6GGSLIKQOW
+X-MailFrom: ckoenig.leichtzumerken@gmail.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 19/21] scsi: fnic: Switch to use %ptS
+Subject: [Linaro-mm-sig] Independence for dma_fences! v3
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ITDK3AZB6QSIRRMLWUWZUHP2R7N2NOEA/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TKKKZYGOMOX3BSKHPI7AXY6GGSLIKQOW/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -127,310 +120,55 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Hi Andy,
+Hi everyone,
 
-kernel test robot noticed the following build errors:
+dma_fences have ever lived under the tyranny dictated by the module
+lifetime of their issuer, leading to crashes should anybody still holding
+a reference to a dma_fence when the module of the issuer was unloaded.
 
-[auto build test ERROR on ceph-client/testing]
-[also build test ERROR on ceph-client/for-linus cminyard-ipmi/for-next mkp-scsi/for-next jejb-scsi/for-next linus/master v6.18-rc5 next-20251112]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
+The basic problem is that when buffer are shared between drivers
+dma_fence objects can leak into external drivers and stay there even
+after they are signaled. The dma_resv object for example only lazy releases
+dma_fences.
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Andy-Shevchenko/lib-vsprintf-Add-specifier-for-printing-struct-timespec64/20251111-203105
-base:   https://github.com/ceph/ceph-client.git testing
-patch link:    https://lore.kernel.org/r/20251111122735.880607-20-andriy.shevchenko%40linux.intel.com
-patch subject: [PATCH v2 19/21] scsi: fnic: Switch to use %ptS
-config: x86_64-kexec (https://download.01.org/0day-ci/archive/20251113/202511130449.Q1mCZRpT-lkp@intel.com/config)
-compiler: clang version 20.1.8 (https://github.com/llvm/llvm-project 87f0227cb60147a26a1eeb4fb06e3b505e9c7261)
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20251113/202511130449.Q1mCZRpT-lkp@intel.com/reproduce)
+So what happens is that when the module who originally created the dma_fence
+unloads the dma_fence_ops function table becomes unavailable as well and so
+any attempt to release the fence crashes the system.
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202511130449.Q1mCZRpT-lkp@intel.com/
+Previously various approaches have been discussed, including changing the
+locking semantics of the dma_fence callbacks (by me) as well as using the
+drm scheduler as intermediate layer (by Sima) to disconnect dma_fences
+from their actual users, but none of them are actually solving all problems.
 
-All errors (new ones prefixed by >>):
+Tvrtko did some really nice prerequisite work by protecting the returned
+strings of the dma_fence_ops by RCU. This way dma_fence creators where
+able to just wait for an RCU grace period after fence signaling before
+they could be save to free those data structures.
 
->> drivers/scsi/fnic/fnic_trace.c:234:2: error: cannot take the address of an rvalue of type 'struct timespec64'
-     234 |         &timespec64_sub(val1, stats->stats_timestamps.last_reset_time),
-         |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   drivers/scsi/fnic/fnic_trace.c:235:2: error: cannot take the address of an rvalue of type 'struct timespec64'
-     235 |         &timespec64_sub(val1, stats->stats_timestamps.last_read_time));
-         |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   2 errors generated.
+Now this patch set here goes a step further and protects the whole
+dma_fence_ops structure by RCU, so that after the fence signals the
+pointer to the dma_fence_ops is set to NULL when there is no wait nor
+release callback given. All functionality which use the dma_fence_ops
+reference are put inside an RCU critical section, except for the
+deprecated issuer specific wait and of course the optional release
+callback.
+
+Additional to the RCU changes the lock protecting the dma_fence state
+previously had to be allocated external. This set here now changes the
+functionality to make that external lock optional and allows dma_fences
+to use an inline lock and be self contained.
+
+This patch set addressed all previous code review comments and is based
+on drm-tip, includes my changes for amdgpu as well as Mathew's patches for XE.
+
+Going to push the core DMA-buf changes to drm-misc-next as soon as I get
+the appropriate rb. The driver specific changes can go upstream through
+the driver channels as necessary.
+
+Please review and comment,
+Christian.
 
 
-vim +234 drivers/scsi/fnic/fnic_trace.c
-
-   198	
-   199	/*
-   200	 * fnic_get_stats_data - Copy fnic stats buffer to a memory file
-   201	 * @fnic_dbgfs_t: pointer to debugfs fnic stats buffer
-   202	 *
-   203	 * Description:
-   204	 * This routine gathers the fnic stats debugfs data from the fnic_stats struct
-   205	 * and dumps it to stats_debug_info.
-   206	 *
-   207	 * Return Value:
-   208	 * This routine returns the amount of bytes that were dumped into
-   209	 * stats_debug_info
-   210	 */
-   211	int fnic_get_stats_data(struct stats_debug_info *debug,
-   212				struct fnic_stats *stats)
-   213	{
-   214		int len = 0;
-   215		int buf_size = debug->buf_size;
-   216		struct timespec64 val1, val2;
-   217		int i = 0;
-   218	
-   219		ktime_get_real_ts64(&val1);
-   220		len = scnprintf(debug->debug_buffer + len, buf_size - len,
-   221			"------------------------------------------\n"
-   222			 "\t\tTime\n"
-   223			"------------------------------------------\n");
-   224	
-   225		len += scnprintf(debug->debug_buffer + len, buf_size - len,
-   226			"Current time :          [%ptSp]\n"
-   227			"Last stats reset time:  [%ptSp]\n"
-   228			"Last stats read time:   [%ptSp]\n"
-   229			"delta since last reset: [%ptSp]\n"
-   230			"delta since last read:  [%ptSp]\n",
-   231		&val1,
-   232		&stats->stats_timestamps.last_reset_time,
-   233		&stats->stats_timestamps.last_read_time,
- > 234		&timespec64_sub(val1, stats->stats_timestamps.last_reset_time),
-   235		&timespec64_sub(val1, stats->stats_timestamps.last_read_time));
-   236	
-   237		stats->stats_timestamps.last_read_time = val1;
-   238	
-   239		len += scnprintf(debug->debug_buffer + len, buf_size - len,
-   240			  "------------------------------------------\n"
-   241			  "\t\tIO Statistics\n"
-   242			  "------------------------------------------\n");
-   243		len += scnprintf(debug->debug_buffer + len, buf_size - len,
-   244			  "Number of Active IOs: %lld\nMaximum Active IOs: %lld\n"
-   245			  "Number of IOs: %lld\nNumber of IO Completions: %lld\n"
-   246			  "Number of IO Failures: %lld\nNumber of IO NOT Found: %lld\n"
-   247			  "Number of Memory alloc Failures: %lld\n"
-   248			  "Number of IOREQ Null: %lld\n"
-   249			  "Number of SCSI cmd pointer Null: %lld\n"
-   250	
-   251			  "\nIO completion times: \n"
-   252			  "            < 10 ms : %lld\n"
-   253			  "     10 ms - 100 ms : %lld\n"
-   254			  "    100 ms - 500 ms : %lld\n"
-   255			  "    500 ms -   5 sec: %lld\n"
-   256			  "     5 sec -  10 sec: %lld\n"
-   257			  "    10 sec -  30 sec: %lld\n"
-   258			  "            > 30 sec: %lld\n",
-   259			  (u64)atomic64_read(&stats->io_stats.active_ios),
-   260			  (u64)atomic64_read(&stats->io_stats.max_active_ios),
-   261			  (u64)atomic64_read(&stats->io_stats.num_ios),
-   262			  (u64)atomic64_read(&stats->io_stats.io_completions),
-   263			  (u64)atomic64_read(&stats->io_stats.io_failures),
-   264			  (u64)atomic64_read(&stats->io_stats.io_not_found),
-   265			  (u64)atomic64_read(&stats->io_stats.alloc_failures),
-   266			  (u64)atomic64_read(&stats->io_stats.ioreq_null),
-   267			  (u64)atomic64_read(&stats->io_stats.sc_null),
-   268			  (u64)atomic64_read(&stats->io_stats.io_btw_0_to_10_msec),
-   269			  (u64)atomic64_read(&stats->io_stats.io_btw_10_to_100_msec),
-   270			  (u64)atomic64_read(&stats->io_stats.io_btw_100_to_500_msec),
-   271			  (u64)atomic64_read(&stats->io_stats.io_btw_500_to_5000_msec),
-   272			  (u64)atomic64_read(&stats->io_stats.io_btw_5000_to_10000_msec),
-   273			  (u64)atomic64_read(&stats->io_stats.io_btw_10000_to_30000_msec),
-   274			  (u64)atomic64_read(&stats->io_stats.io_greater_than_30000_msec));
-   275	
-   276		len += scnprintf(debug->debug_buffer + len, buf_size - len,
-   277				"------------------------------------------\n"
-   278				"\t\tIO Queues and cumulative IOs\n"
-   279				"------------------------------------------\n");
-   280	
-   281		for (i = 0; i < FNIC_MQ_MAX_QUEUES; i++) {
-   282			len += scnprintf(debug->debug_buffer + len, buf_size - len,
-   283					"Q:%d -> %lld\n", i, (u64)atomic64_read(&stats->io_stats.ios[i]));
-   284		}
-   285	
-   286		len += scnprintf(debug->debug_buffer + len, buf_size - len,
-   287			  "\nCurrent Max IO time : %lld\n",
-   288			  (u64)atomic64_read(&stats->io_stats.current_max_io_time));
-   289	
-   290		len += scnprintf(debug->debug_buffer + len, buf_size - len,
-   291			  "\n------------------------------------------\n"
-   292			  "\t\tAbort Statistics\n"
-   293			  "------------------------------------------\n");
-   294	
-   295		len += scnprintf(debug->debug_buffer + len, buf_size - len,
-   296			  "Number of Aborts: %lld\n"
-   297			  "Number of Abort Failures: %lld\n"
-   298			  "Number of Abort Driver Timeouts: %lld\n"
-   299			  "Number of Abort FW Timeouts: %lld\n"
-   300			  "Number of Abort IO NOT Found: %lld\n"
-   301	
-   302			  "Abort issued times: \n"
-   303			  "            < 6 sec : %lld\n"
-   304			  "     6 sec - 20 sec : %lld\n"
-   305			  "    20 sec - 30 sec : %lld\n"
-   306			  "    30 sec - 40 sec : %lld\n"
-   307			  "    40 sec - 50 sec : %lld\n"
-   308			  "    50 sec - 60 sec : %lld\n"
-   309			  "            > 60 sec: %lld\n",
-   310	
-   311			  (u64)atomic64_read(&stats->abts_stats.aborts),
-   312			  (u64)atomic64_read(&stats->abts_stats.abort_failures),
-   313			  (u64)atomic64_read(&stats->abts_stats.abort_drv_timeouts),
-   314			  (u64)atomic64_read(&stats->abts_stats.abort_fw_timeouts),
-   315			  (u64)atomic64_read(&stats->abts_stats.abort_io_not_found),
-   316			  (u64)atomic64_read(&stats->abts_stats.abort_issued_btw_0_to_6_sec),
-   317			  (u64)atomic64_read(&stats->abts_stats.abort_issued_btw_6_to_20_sec),
-   318			  (u64)atomic64_read(&stats->abts_stats.abort_issued_btw_20_to_30_sec),
-   319			  (u64)atomic64_read(&stats->abts_stats.abort_issued_btw_30_to_40_sec),
-   320			  (u64)atomic64_read(&stats->abts_stats.abort_issued_btw_40_to_50_sec),
-   321			  (u64)atomic64_read(&stats->abts_stats.abort_issued_btw_50_to_60_sec),
-   322			  (u64)atomic64_read(&stats->abts_stats.abort_issued_greater_than_60_sec));
-   323	
-   324		len += scnprintf(debug->debug_buffer + len, buf_size - len,
-   325			  "\n------------------------------------------\n"
-   326			  "\t\tTerminate Statistics\n"
-   327			  "------------------------------------------\n");
-   328	
-   329		len += scnprintf(debug->debug_buffer + len, buf_size - len,
-   330			  "Number of Terminates: %lld\n"
-   331			  "Maximum Terminates: %lld\n"
-   332			  "Number of Terminate Driver Timeouts: %lld\n"
-   333			  "Number of Terminate FW Timeouts: %lld\n"
-   334			  "Number of Terminate IO NOT Found: %lld\n"
-   335			  "Number of Terminate Failures: %lld\n",
-   336			  (u64)atomic64_read(&stats->term_stats.terminates),
-   337			  (u64)atomic64_read(&stats->term_stats.max_terminates),
-   338			  (u64)atomic64_read(&stats->term_stats.terminate_drv_timeouts),
-   339			  (u64)atomic64_read(&stats->term_stats.terminate_fw_timeouts),
-   340			  (u64)atomic64_read(&stats->term_stats.terminate_io_not_found),
-   341			  (u64)atomic64_read(&stats->term_stats.terminate_failures));
-   342	
-   343		len += scnprintf(debug->debug_buffer + len, buf_size - len,
-   344			  "\n------------------------------------------\n"
-   345			  "\t\tReset Statistics\n"
-   346			  "------------------------------------------\n");
-   347	
-   348		len += scnprintf(debug->debug_buffer + len, buf_size - len,
-   349			  "Number of Device Resets: %lld\n"
-   350			  "Number of Device Reset Failures: %lld\n"
-   351			  "Number of Device Reset Aborts: %lld\n"
-   352			  "Number of Device Reset Timeouts: %lld\n"
-   353			  "Number of Device Reset Terminates: %lld\n"
-   354			  "Number of FW Resets: %lld\n"
-   355			  "Number of FW Reset Completions: %lld\n"
-   356			  "Number of FW Reset Failures: %lld\n"
-   357			  "Number of Fnic Reset: %lld\n"
-   358			  "Number of Fnic Reset Completions: %lld\n"
-   359			  "Number of Fnic Reset Failures: %lld\n",
-   360			  (u64)atomic64_read(&stats->reset_stats.device_resets),
-   361			  (u64)atomic64_read(&stats->reset_stats.device_reset_failures),
-   362			  (u64)atomic64_read(&stats->reset_stats.device_reset_aborts),
-   363			  (u64)atomic64_read(&stats->reset_stats.device_reset_timeouts),
-   364			  (u64)atomic64_read(
-   365				  &stats->reset_stats.device_reset_terminates),
-   366			  (u64)atomic64_read(&stats->reset_stats.fw_resets),
-   367			  (u64)atomic64_read(&stats->reset_stats.fw_reset_completions),
-   368			  (u64)atomic64_read(&stats->reset_stats.fw_reset_failures),
-   369			  (u64)atomic64_read(&stats->reset_stats.fnic_resets),
-   370			  (u64)atomic64_read(
-   371				  &stats->reset_stats.fnic_reset_completions),
-   372			  (u64)atomic64_read(&stats->reset_stats.fnic_reset_failures));
-   373	
-   374		len += scnprintf(debug->debug_buffer + len, buf_size - len,
-   375			  "\n------------------------------------------\n"
-   376			  "\t\tFirmware Statistics\n"
-   377			  "------------------------------------------\n");
-   378	
-   379		len += scnprintf(debug->debug_buffer + len, buf_size - len,
-   380			  "Number of Active FW Requests %lld\n"
-   381			  "Maximum FW Requests: %lld\n"
-   382			  "Number of FW out of resources: %lld\n"
-   383			  "Number of FW IO errors: %lld\n",
-   384			  (u64)atomic64_read(&stats->fw_stats.active_fw_reqs),
-   385			  (u64)atomic64_read(&stats->fw_stats.max_fw_reqs),
-   386			  (u64)atomic64_read(&stats->fw_stats.fw_out_of_resources),
-   387			  (u64)atomic64_read(&stats->fw_stats.io_fw_errs));
-   388	
-   389		len += scnprintf(debug->debug_buffer + len, buf_size - len,
-   390			  "\n------------------------------------------\n"
-   391			  "\t\tVlan Discovery Statistics\n"
-   392			  "------------------------------------------\n");
-   393	
-   394		len += scnprintf(debug->debug_buffer + len, buf_size - len,
-   395			  "Number of Vlan Discovery Requests Sent %lld\n"
-   396			  "Vlan Response Received with no FCF VLAN ID: %lld\n"
-   397			  "No solicitations recvd after vlan set, expiry count: %lld\n"
-   398			  "Flogi rejects count: %lld\n",
-   399			  (u64)atomic64_read(&stats->vlan_stats.vlan_disc_reqs),
-   400			  (u64)atomic64_read(&stats->vlan_stats.resp_withno_vlanID),
-   401			  (u64)atomic64_read(&stats->vlan_stats.sol_expiry_count),
-   402			  (u64)atomic64_read(&stats->vlan_stats.flogi_rejects));
-   403	
-   404		len += scnprintf(debug->debug_buffer + len, buf_size - len,
-   405			  "\n------------------------------------------\n"
-   406			  "\t\tOther Important Statistics\n"
-   407			  "------------------------------------------\n");
-   408	
-   409		jiffies_to_timespec64(stats->misc_stats.last_isr_time, &val1);
-   410		jiffies_to_timespec64(stats->misc_stats.last_ack_time, &val2);
-   411	
-   412		len += scnprintf(debug->debug_buffer + len, buf_size - len,
-   413			  "Last ISR time: %llu (%ptSp)\n"
-   414			  "Last ACK time: %llu (%ptSp)\n"
-   415			  "Max ISR jiffies: %llu\n"
-   416			  "Max ISR time (ms) (0 denotes < 1 ms): %llu\n"
-   417			  "Corr. work done: %llu\n"
-   418			  "Number of ISRs: %lld\n"
-   419			  "Maximum CQ Entries: %lld\n"
-   420			  "Number of ACK index out of range: %lld\n"
-   421			  "Number of data count mismatch: %lld\n"
-   422			  "Number of FCPIO Timeouts: %lld\n"
-   423			  "Number of FCPIO Aborted: %lld\n"
-   424			  "Number of SGL Invalid: %lld\n"
-   425			  "Number of Copy WQ Alloc Failures for ABTs: %lld\n"
-   426			  "Number of Copy WQ Alloc Failures for Device Reset: %lld\n"
-   427			  "Number of Copy WQ Alloc Failures for IOs: %lld\n"
-   428			  "Number of no icmnd itmf Completions: %lld\n"
-   429			  "Number of Check Conditions encountered: %lld\n"
-   430			  "Number of QUEUE Fulls: %lld\n"
-   431			  "Number of rport not ready: %lld\n"
-   432			 "Number of receive frame errors: %lld\n"
-   433			 "Port speed (in Mbps): %lld\n",
-   434			  (u64)stats->misc_stats.last_isr_time,
-   435			  &val1,
-   436			  (u64)stats->misc_stats.last_ack_time,
-   437			  &val2,
-   438			  (u64)atomic64_read(&stats->misc_stats.max_isr_jiffies),
-   439			  (u64)atomic64_read(&stats->misc_stats.max_isr_time_ms),
-   440			  (u64)atomic64_read(&stats->misc_stats.corr_work_done),
-   441			  (u64)atomic64_read(&stats->misc_stats.isr_count),
-   442			  (u64)atomic64_read(&stats->misc_stats.max_cq_entries),
-   443			  (u64)atomic64_read(&stats->misc_stats.ack_index_out_of_range),
-   444			  (u64)atomic64_read(&stats->misc_stats.data_count_mismatch),
-   445			  (u64)atomic64_read(&stats->misc_stats.fcpio_timeout),
-   446			  (u64)atomic64_read(&stats->misc_stats.fcpio_aborted),
-   447			  (u64)atomic64_read(&stats->misc_stats.sgl_invalid),
-   448			  (u64)atomic64_read(
-   449				  &stats->misc_stats.abts_cpwq_alloc_failures),
-   450			  (u64)atomic64_read(
-   451				  &stats->misc_stats.devrst_cpwq_alloc_failures),
-   452			  (u64)atomic64_read(&stats->misc_stats.io_cpwq_alloc_failures),
-   453			  (u64)atomic64_read(&stats->misc_stats.no_icmnd_itmf_cmpls),
-   454			  (u64)atomic64_read(&stats->misc_stats.check_condition),
-   455			  (u64)atomic64_read(&stats->misc_stats.queue_fulls),
-   456			  (u64)atomic64_read(&stats->misc_stats.tport_not_ready),
-   457			  (u64)atomic64_read(&stats->misc_stats.frame_errors),
-   458			  (u64)atomic64_read(&stats->misc_stats.port_speed_in_mbps));
-   459	
-   460		return len;
-   461	
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
