@@ -2,52 +2,52 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id iGw5Nrn84GlloAAAu9opvQ
+	id UF7GCMP84GlloAAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:14:01 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:14:11 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9292841060A
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:14:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 80FBE410611
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:14:10 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9F16A409A6
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:14:00 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 94393406AA
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:14:09 +0000 (UTC)
 Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
-	by lists.linaro.org (Postfix) with ESMTPS id DDC213F80C
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 13 Nov 2025 15:03:21 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 6F1B53F821
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 13 Nov 2025 15:03:23 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=X8jomdeQ;
+	dkim=pass header.d=intel.com header.s=Intel header.b=P83XlXUU;
 	dmarc=pass (policy=none) header.from=intel.com;
 	spf=pass (lists.linaro.org: domain of andriy.shevchenko@linux.intel.com designates 198.175.65.21 as permitted sender) smtp.mailfrom=andriy.shevchenko@linux.intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1763046202; x=1794582202;
+  t=1763046203; x=1794582203;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=mKCfGvyzNhw96Cnh7FIRHLBI440Q6rRaNHGoDV+QYYs=;
-  b=X8jomdeQHLEvdHpL0UATufcc0MJFDeinL+RGolbuzksZaRzwlcz7r0dR
-   ECd6ZbJlwvMGv2UgwTy9UUee7HshuuyEgpfY49ynCe1kPOTNcVEr+j2xm
-   pfpZM+MJ5YWelUDUb1PXMtn4I1pMswS+nYIEP84J8PCjRJ8We+4oivjKx
-   smNzsTS7eAYWjqPMNy4lv74FhhKlTQ1cqH1eITZFcLQ6FqRShqiBJ+Bk7
-   MbFUAq4yMgO4O6ww0A36LWaM325Q8jbCwfj9E7RmnmPMWUw4SITvrdbMl
-   IcEKBllWrIUTE5pDIHXPCtNj7j+9r1jQ0YZiHgnynZ3koAuRc6NVOtRqW
-   Q==;
-X-CSE-ConnectionGUID: lA0UZDJST1Gi9K4ly4hTSg==
-X-CSE-MsgGUID: gCaDVLoTQQSoiQ1gZ7UfdA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11531"; a="65054739"
+  bh=OtFs4nYXEH1ThWKykhpKfwgYG7osOn2qi/Z49bIrWUw=;
+  b=P83XlXUU+Sw8SFFmPheCDzsVVp2UX30P6zgEZ5/4VJpcxSp8hdl8q5cO
+   m3SzU04Vu28j0LdBvnsBg98CMeZFF136/S68vymRy1XZ8cHaNhScDchyI
+   sYxTliuxI+qJ7diHmHvKjvBIS/bTMxdDm/GRs45r0ftFPJbqBqF90Gbd/
+   SVCEwJZ4SLyw4dGtuNdttq+rolksHykqnQ29FOaigBfEXa8iUdiaY3RWa
+   9cBTVaPI6sb4LXOSlonTxADHsda1RhdXYJqSDO51XJiJakA1qs7VOWJhm
+   KQqL183C4Wyhinf7F0VILk66o2GtLkdleVoVNelBn5R4DnVVS4Md8WB3f
+   A==;
+X-CSE-ConnectionGUID: yEk+jhopSqKAaoBkOQuGVw==
+X-CSE-MsgGUID: wxoR6IzRSlCogYm8Ou9NDQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11531"; a="65054763"
 X-IronPort-AV: E=Sophos;i="6.17,312,1747724400";
-   d="scan'208";a="65054739"
+   d="scan'208";a="65054763"
 Received: from fmviesa001.fm.intel.com ([10.60.135.141])
   by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Nov 2025 07:03:03 -0800
-X-CSE-ConnectionGUID: yKzzlJzzQWapQitGWcT/+Q==
-X-CSE-MsgGUID: xLZAMTLNQZqO3A74MNxPAA==
+X-CSE-ConnectionGUID: wsJEWqiyRSOTWbBWxtwAyw==
+X-CSE-MsgGUID: TObbgzKmSz6dKnfJs+E4CA==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.19,302,1754982000";
-   d="scan'208";a="220325230"
+   d="scan'208";a="220325238"
 Received: from black.igk.intel.com ([10.91.253.5])
-  by fmviesa001.fm.intel.com with ESMTP; 13 Nov 2025 07:02:54 -0800
+  by fmviesa001.fm.intel.com with ESMTP; 13 Nov 2025 07:02:55 -0800
 Received: by black.igk.intel.com (Postfix, from userid 1003)
-	id 81C62AA; Thu, 13 Nov 2025 16:02:19 +0100 (CET)
+	id 88811AB; Thu, 13 Nov 2025 16:02:19 +0100 (CET)
 From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
 To: Corey Minyard <corey@minyard.net>,
 	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
@@ -93,8 +93,8 @@ To: Corey Minyard <corey@minyard.net>,
 	linux-staging@lists.linux.dev,
 	ceph-devel@vger.kernel.org,
 	linux-trace-kernel@vger.kernel.org
-Date: Thu, 13 Nov 2025 15:32:34 +0100
-Message-ID: <20251113150217.3030010-21-andriy.shevchenko@linux.intel.com>
+Date: Thu, 13 Nov 2025 15:32:35 +0100
+Message-ID: <20251113150217.3030010-22-andriy.shevchenko@linux.intel.com>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <20251113150217.3030010-1-andriy.shevchenko@linux.intel.com>
 References: <20251113150217.3030010-1-andriy.shevchenko@linux.intel.com>
@@ -103,17 +103,17 @@ X-Spamd-Bar: ----
 X-MailFrom: andriy.shevchenko@linux.intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: ZALNR4PP6KUXEPRJQQYMTR6U26REZ4R6
-X-Message-ID-Hash: ZALNR4PP6KUXEPRJQQYMTR6U26REZ4R6
+Message-ID-Hash: WXUW2G6FS6VZQA4VZH2XVKQSI4Z7OPLZ
+X-Message-ID-Hash: WXUW2G6FS6VZQA4VZH2XVKQSI4Z7OPLZ
 X-Mailman-Approved-At: Thu, 16 Apr 2026 14:56:46 +0000
 CC: Rasmus Villemoes <linux@rasmusvillemoes.dk>, Sergey Senozhatsky <senozhatsky@chromium.org>, Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>, Gustavo Padovan <gustavo@padovan.org>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>, Konrad Dybcio <konradybcio@kernel.org>, Lucas De Marchi <lucas.demarchi@intel.com>, =?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Vladimir Oltean <olteanv@gmail.com>, Andrew Lunn <andrew@lunn.ch>, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Tony Nguyen <anthony.l.nguyen@
  intel.com>, Przemek Kitszel <przemyslaw.kitszel@intel.com>, =?UTF-8?q?Krzysztof=20Wilczy=C5=84ski?= <kwilczynski@kernel.org>, Kishon Vijay Abraham I <kishon@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>, Rodolfo Giometti <giometti@enneenne.com>, Jonathan Lemon <jonathan.lemon@gmail.com>, Richard Cochran <richardcochran@gmail.com>, Stefan Haberland <sth@linux.ibm.com>, Jan Hoeppner <hoeppner@linux.ibm.com>, Heiko Carstens <hca@linux.ibm.com>, Vasily Gorbik <gor@linux.ibm.com>, Alexander Gordeev <agordeev@linux.ibm.com>, Christian Borntraeger <borntraeger@linux.ibm.com>, Sven Schnelle <svens@linux.ibm.com>, Satish Kharat <satishkh@cisco.com>, Sesidhar Baddela <sebaddel@cisco.com>, "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>, Mauro Carvalho Chehab <mchehab@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Xiubo Li <xiubli@redhat.com>, Ilya Dryomov <idryomov@gmail.com>, Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficio
  s.com>, Andrew Morton <akpm@linux-foundation.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v3 20/21] scsi: snic: Switch to use %ptSp
+Subject: [Linaro-mm-sig] [PATCH v3 21/21] tracing: Switch to use %ptSp
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZALNR4PP6KUXEPRJQQYMTR6U26REZ4R6/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WXUW2G6FS6VZQA4VZH2XVKQSI4Z7OPLZ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -147,68 +147,43 @@ X-Spamd-Result: default: False [4.09 / 15.00];
 	FROM_NEQ_ENVFROM(0.00)[andriy.shevchenko@linux.intel.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig,cisco];
-	NEURAL_SPAM(0.00)[0.377];
+	NEURAL_SPAM(0.00)[0.610];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,intel.com:email,linux.intel.com:mid]
-X-Rspamd-Queue-Id: 9292841060A
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.intel.com:mid,linaro.org:email,goodmis.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,intel.com:email]
+X-Rspamd-Queue-Id: 80FBE410611
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 Use %ptSp instead of open coded variants to print content of
 struct timespec64 in human readable format.
 
-Reviewed-by: Martin K. Petersen <martin.petersen@oracle.com>
+Acked-by: Steven Rostedt (Google) <rostedt@goodmis.org>
 Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
 ---
- drivers/scsi/snic/snic_debugfs.c | 10 ++++------
- drivers/scsi/snic/snic_trc.c     |  5 ++---
- 2 files changed, 6 insertions(+), 9 deletions(-)
+ kernel/trace/trace_output.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/scsi/snic/snic_debugfs.c b/drivers/scsi/snic/snic_debugfs.c
-index 9dd975b36b5b..edf3e5ef28a6 100644
---- a/drivers/scsi/snic/snic_debugfs.c
-+++ b/drivers/scsi/snic/snic_debugfs.c
-@@ -282,8 +282,8 @@ snic_stats_show(struct seq_file *sfp, void *data)
- 	jiffies_to_timespec64(stats->misc.last_ack_time, &last_ack_tms);
+diff --git a/kernel/trace/trace_output.c b/kernel/trace/trace_output.c
+index ebbab3e9622b..cc2d3306bb60 100644
+--- a/kernel/trace/trace_output.c
++++ b/kernel/trace/trace_output.c
+@@ -1490,12 +1490,12 @@ trace_hwlat_print(struct trace_iterator *iter, int flags,
  
- 	seq_printf(sfp,
--		   "Last ISR Time               : %llu (%8llu.%09lu)\n"
--		   "Last Ack Time               : %llu (%8llu.%09lu)\n"
-+		   "Last ISR Time               : %llu (%ptSp)\n"
-+		   "Last Ack Time               : %llu (%ptSp)\n"
- 		   "Ack ISRs                    : %llu\n"
- 		   "IO Cmpl ISRs                : %llu\n"
- 		   "Err Notify ISRs             : %llu\n"
-@@ -298,10 +298,8 @@ snic_stats_show(struct seq_file *sfp, void *data)
- 		   "Queue Ramp Down             : %lld\n"
- 		   "Queue Last Queue Depth      : %lld\n"
- 		   "Target Not Ready            : %lld\n",
--		   (u64) stats->misc.last_isr_time,
--		   last_isr_tms.tv_sec, last_isr_tms.tv_nsec,
--		   (u64)stats->misc.last_ack_time,
--		   last_ack_tms.tv_sec, last_ack_tms.tv_nsec,
-+		   (u64) stats->misc.last_isr_time, &last_isr_tms,
-+		   (u64) stats->misc.last_ack_time, &last_ack_tms,
- 		   (u64) atomic64_read(&stats->misc.ack_isr_cnt),
- 		   (u64) atomic64_read(&stats->misc.cmpl_isr_cnt),
- 		   (u64) atomic64_read(&stats->misc.errnotify_isr_cnt),
-diff --git a/drivers/scsi/snic/snic_trc.c b/drivers/scsi/snic/snic_trc.c
-index c2e5ab7e976c..6bad1ea9a6a7 100644
---- a/drivers/scsi/snic/snic_trc.c
-+++ b/drivers/scsi/snic/snic_trc.c
-@@ -56,9 +56,8 @@ snic_fmt_trc_data(struct snic_trc_data *td, char *buf, int buf_sz)
- 	jiffies_to_timespec64(td->ts, &tmspec);
+ 	trace_assign_type(field, entry);
  
- 	len += snprintf(buf, buf_sz,
--			"%llu.%09lu %-25s %3d %4x %16llx %16llx %16llx %16llx %16llx\n",
--			tmspec.tv_sec,
--			tmspec.tv_nsec,
-+			"%ptSp %-25s %3d %4x %16llx %16llx %16llx %16llx %16llx\n",
-+			&tmspec,
- 			td->fn,
- 			td->hno,
- 			td->tag,
+-	trace_seq_printf(s, "#%-5u inner/outer(us): %4llu/%-5llu ts:%lld.%09ld count:%d",
++	trace_seq_printf(s, "#%-5u inner/outer(us): %4llu/%-5llu ts:%ptSp count:%d",
+ 			 field->seqnum,
+ 			 field->duration,
+ 			 field->outer_duration,
+-			 (long long)field->timestamp.tv_sec,
+-			 field->timestamp.tv_nsec, field->count);
++			 &field->timestamp,
++			 field->count);
+ 
+ 	if (field->nmi_count) {
+ 		/*
 -- 
 2.50.1
 
