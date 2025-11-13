@@ -2,52 +2,52 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wKJJJj/84GlloAAAu9opvQ
+	id APfZEG784GlloAAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:11:59 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:12:46 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 61408410568
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:11:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F1D304105B3
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:12:45 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7B4AA40536
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:11:58 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.12])
-	by lists.linaro.org (Postfix) with ESMTPS id AC4A83F80D
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 13 Nov 2025 15:02:43 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 0D34E40F7F
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:12:45 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
+	by lists.linaro.org (Postfix) with ESMTPS id 537AD3F869
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 13 Nov 2025 15:02:56 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=GpIIOsPZ;
+	dkim=pass header.d=intel.com header.s=Intel header.b=nAiivghC;
 	dmarc=pass (policy=none) header.from=intel.com;
-	spf=pass (lists.linaro.org: domain of andriy.shevchenko@linux.intel.com designates 192.198.163.12 as permitted sender) smtp.mailfrom=andriy.shevchenko@linux.intel.com
+	spf=pass (lists.linaro.org: domain of andriy.shevchenko@linux.intel.com designates 198.175.65.21 as permitted sender) smtp.mailfrom=andriy.shevchenko@linux.intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1763046164; x=1794582164;
+  t=1763046176; x=1794582176;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=Re9XzxeVgaRpFu9Nr8p7rXjuLRXS6TBbrXT9/XQ7Zd0=;
-  b=GpIIOsPZ7q9u6RUUlWKqtecK+p0Z/L/c4RHRLXGmiO0SqR3OITBm770W
-   0tNwV3In9MuKtTb6R/FxTeXHNcGZsWHFNRgwbOnHNaRrcEnjxzispYQda
-   BgGY9sZXeguYnUfq/iKl3I34GDin2tvPslkLk3wgAfGvfB5t4XmSUWtBw
-   AOT8s6BeA1NT7equRNwyukGRY5fKXNMqreOp5DhWmq3M4OjVZGt30SDdq
-   jcn3ev9Bye2+fXDVlkChI76BrHMmP14OI18ZX0C7apavSiyuAfAmttpA/
-   j1yQPzE7BZQ90PngFVNRMcT5fxCVdCFYBHan63h74MvaOWzyFrD0EhyKL
-   g==;
-X-CSE-ConnectionGUID: XpZF8CX1SAGFqLmXmKhEAQ==
-X-CSE-MsgGUID: FPCr3UBKSRyfLRWQfJ5dNQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11612"; a="68991561"
-X-IronPort-AV: E=Sophos;i="6.19,302,1754982000";
-   d="scan'208";a="68991561"
-Received: from orviesa010.jf.intel.com ([10.64.159.150])
-  by fmvoesa106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Nov 2025 07:02:42 -0800
-X-CSE-ConnectionGUID: jgz+n6WVTPmKrN1pNQhPJg==
-X-CSE-MsgGUID: Pq6wVSdiTx2MefzRsMnAQg==
+  bh=EefPNFQBUNuGlR0DgULcxn8v9QseDyeQnp72XVg7OAg=;
+  b=nAiivghCKIht6NpCBhexZr0t1ge7Ldu2nftWd6ZZN1dUgAQLFWcbVNu2
+   vf46OJUvTMMa/WqBiGKIDG1q5wVGde3Jl93zbMpM21d+Aepf4C2+9Q9g0
+   sI9QiYFctMt+jFa4t209RZ0VzJDKXKYxNPUhY02P7JDtR0JTQhAaIirco
+   tNZawBWSj/XfaxCA/lwMmBQp8OGymORtjql7oK4fVECtR1hrOxl9Ibgjf
+   C6z+TpQPyqG6YYyrSlZDFpPmvVQy8QySK9H8FWBgjeWDaUtzifW297f/o
+   th4ThVtGww2RzMruaw4na0lJFy60hk3Z5K8Az/cO8DM8alP0297mhCm2s
+   w==;
+X-CSE-ConnectionGUID: J9fb2KRYRL2XbY1poehmmw==
+X-CSE-MsgGUID: Xq3SkmVMQiGJMS2HppfDMA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11531"; a="65054309"
+X-IronPort-AV: E=Sophos;i="6.17,312,1747724400";
+   d="scan'208";a="65054309"
+Received: from fmviesa001.fm.intel.com ([10.60.135.141])
+  by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Nov 2025 07:02:50 -0800
+X-CSE-ConnectionGUID: t3LH8vXXT7maKnUeZlI+Ig==
+X-CSE-MsgGUID: oTk1ntIWRFul66CPsbOOZg==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.19,302,1754982000";
-   d="scan'208";a="188810239"
+   d="scan'208";a="220324984"
 Received: from black.igk.intel.com ([10.91.253.5])
-  by orviesa010.jf.intel.com with ESMTP; 13 Nov 2025 07:02:33 -0800
+  by fmviesa001.fm.intel.com with ESMTP; 13 Nov 2025 07:02:37 -0800
 Received: by black.igk.intel.com (Postfix, from userid 1003)
-	id 270F09C; Thu, 13 Nov 2025 16:02:19 +0100 (CET)
+	id 2D4249D; Thu, 13 Nov 2025 16:02:19 +0100 (CET)
 From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
 To: Corey Minyard <corey@minyard.net>,
 	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
@@ -93,27 +93,27 @@ To: Corey Minyard <corey@minyard.net>,
 	linux-staging@lists.linux.dev,
 	ceph-devel@vger.kernel.org,
 	linux-trace-kernel@vger.kernel.org
-Date: Thu, 13 Nov 2025 15:32:20 +0100
-Message-ID: <20251113150217.3030010-7-andriy.shevchenko@linux.intel.com>
+Date: Thu, 13 Nov 2025 15:32:21 +0100
+Message-ID: <20251113150217.3030010-8-andriy.shevchenko@linux.intel.com>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <20251113150217.3030010-1-andriy.shevchenko@linux.intel.com>
 References: <20251113150217.3030010-1-andriy.shevchenko@linux.intel.com>
 MIME-Version: 1.0
-X-Spamd-Bar: ----
+X-Spamd-Bar: ---
 X-MailFrom: andriy.shevchenko@linux.intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: TYQGRBK2IZD4FLODWAOLIF73XXO5GQ6Q
-X-Message-ID-Hash: TYQGRBK2IZD4FLODWAOLIF73XXO5GQ6Q
-X-Mailman-Approved-At: Thu, 16 Apr 2026 14:56:37 +0000
+Message-ID-Hash: L7AEX6O76SMDRRIHLAS3QAY564XVMXBV
+X-Message-ID-Hash: L7AEX6O76SMDRRIHLAS3QAY564XVMXBV
+X-Mailman-Approved-At: Thu, 16 Apr 2026 14:56:40 +0000
 CC: Rasmus Villemoes <linux@rasmusvillemoes.dk>, Sergey Senozhatsky <senozhatsky@chromium.org>, Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>, Gustavo Padovan <gustavo@padovan.org>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>, Konrad Dybcio <konradybcio@kernel.org>, Lucas De Marchi <lucas.demarchi@intel.com>, =?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Vladimir Oltean <olteanv@gmail.com>, Andrew Lunn <andrew@lunn.ch>, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Tony Nguyen <anthony.l.nguyen@
  intel.com>, Przemek Kitszel <przemyslaw.kitszel@intel.com>, =?UTF-8?q?Krzysztof=20Wilczy=C5=84ski?= <kwilczynski@kernel.org>, Kishon Vijay Abraham I <kishon@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>, Rodolfo Giometti <giometti@enneenne.com>, Jonathan Lemon <jonathan.lemon@gmail.com>, Richard Cochran <richardcochran@gmail.com>, Stefan Haberland <sth@linux.ibm.com>, Jan Hoeppner <hoeppner@linux.ibm.com>, Heiko Carstens <hca@linux.ibm.com>, Vasily Gorbik <gor@linux.ibm.com>, Alexander Gordeev <agordeev@linux.ibm.com>, Christian Borntraeger <borntraeger@linux.ibm.com>, Sven Schnelle <svens@linux.ibm.com>, Satish Kharat <satishkh@cisco.com>, Sesidhar Baddela <sebaddel@cisco.com>, "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>, Mauro Carvalho Chehab <mchehab@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Xiubo Li <xiubli@redhat.com>, Ilya Dryomov <idryomov@gmail.com>, Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficio
  s.com>, Andrew Morton <akpm@linux-foundation.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v3 06/21] drm/msm: Switch to use %ptSp
+Subject: [Linaro-mm-sig] [PATCH v3 07/21] drm/vblank: Switch to use %ptSp
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TYQGRBK2IZD4FLODWAOLIF73XXO5GQ6Q/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/L7AEX6O76SMDRRIHLAS3QAY564XVMXBV/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -147,11 +147,11 @@ X-Spamd-Result: default: False [4.09 / 15.00];
 	FROM_NEQ_ENVFROM(0.00)[andriy.shevchenko@linux.intel.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig,cisco];
-	NEURAL_SPAM(0.00)[0.601];
+	NEURAL_SPAM(0.00)[0.537];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,intel.com:email,linux.intel.com:mid]
-X-Rspamd-Queue-Id: 61408410568
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.intel.com:mid,linaro.org:email,intel.com:email,lists.linaro.org:helo,lists.linaro.org:rdns]
+X-Rspamd-Queue-Id: F1D304105B3
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
@@ -160,38 +160,26 @@ struct timespec64 in human readable format.
 
 Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
 ---
- drivers/gpu/drm/msm/disp/msm_disp_snapshot_util.c | 3 +--
- drivers/gpu/drm/msm/msm_gpu.c                     | 3 +--
- 2 files changed, 2 insertions(+), 4 deletions(-)
+ drivers/gpu/drm/drm_vblank.c | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/gpu/drm/msm/disp/msm_disp_snapshot_util.c b/drivers/gpu/drm/msm/disp/msm_disp_snapshot_util.c
-index 071bcdea80f7..19b470968f4d 100644
---- a/drivers/gpu/drm/msm/disp/msm_disp_snapshot_util.c
-+++ b/drivers/gpu/drm/msm/disp/msm_disp_snapshot_util.c
-@@ -82,8 +82,7 @@ void msm_disp_state_print(struct msm_disp_state *state, struct drm_printer *p)
- 	drm_printf(p, "kernel: " UTS_RELEASE "\n");
- 	drm_printf(p, "module: " KBUILD_MODNAME "\n");
- 	drm_printf(p, "dpu devcoredump\n");
--	drm_printf(p, "time: %lld.%09ld\n",
--		state->time.tv_sec, state->time.tv_nsec);
-+	drm_printf(p, "time: %ptSp\n", &state->time);
+diff --git a/drivers/gpu/drm/drm_vblank.c b/drivers/gpu/drm/drm_vblank.c
+index 32d013c5c8fc..5c14140cd0c2 100644
+--- a/drivers/gpu/drm/drm_vblank.c
++++ b/drivers/gpu/drm/drm_vblank.c
+@@ -806,10 +806,8 @@ drm_crtc_vblank_helper_get_vblank_timestamp_internal(
+ 	ts_vblank_time = ktime_to_timespec64(*vblank_time);
  
- 	list_for_each_entry_safe(block, tmp, &state->blocks, node) {
- 		drm_printf(p, "====================%s================\n", block->name);
-diff --git a/drivers/gpu/drm/msm/msm_gpu.c b/drivers/gpu/drm/msm/msm_gpu.c
-index 17759abc46d7..a4251afe4541 100644
---- a/drivers/gpu/drm/msm/msm_gpu.c
-+++ b/drivers/gpu/drm/msm/msm_gpu.c
-@@ -197,8 +197,7 @@ static ssize_t msm_gpu_devcoredump_read(char *buffer, loff_t offset,
- 	drm_printf(&p, "---\n");
- 	drm_printf(&p, "kernel: " UTS_RELEASE "\n");
- 	drm_printf(&p, "module: " KBUILD_MODNAME "\n");
--	drm_printf(&p, "time: %lld.%09ld\n",
--		state->time.tv_sec, state->time.tv_nsec);
-+	drm_printf(&p, "time: %ptSp\n", &state->time);
- 	if (state->comm)
- 		drm_printf(&p, "comm: %s\n", state->comm);
- 	if (state->cmd)
+ 	drm_dbg_vbl(dev,
+-		    "crtc %u : v p(%d,%d)@ %lld.%06ld -> %lld.%06ld [e %d us, %d rep]\n",
+-		    pipe, hpos, vpos,
+-		    (u64)ts_etime.tv_sec, ts_etime.tv_nsec / 1000,
+-		    (u64)ts_vblank_time.tv_sec, ts_vblank_time.tv_nsec / 1000,
++		    "crtc %u : v p(%d,%d)@ %ptSp -> %ptSp [e %d us, %d rep]\n",
++		    pipe, hpos, vpos, &ts_etime, &ts_vblank_time,
+ 		    duration_ns / 1000, i);
+ 
+ 	return true;
 -- 
 2.50.1
 
