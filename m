@@ -2,228 +2,122 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6BD01C5491B
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 12 Nov 2025 22:13:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 36506C55B39
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 13 Nov 2025 05:51:44 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 561983F885
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 12 Nov 2025 21:13:22 +0000 (UTC)
-Received: from mx0a-00069f02.pphosted.com (mx0a-00069f02.pphosted.com [205.220.165.32])
-	by lists.linaro.org (Postfix) with ESMTPS id 4F3D33F74B
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 12 Nov 2025 21:13:10 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E761A3F6F4
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 13 Nov 2025 04:51:42 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
+	by lists.linaro.org (Postfix) with ESMTPS id 0E1703F6F4
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 13 Nov 2025 04:51:29 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=oracle.com header.s=corp-2025-04-25 header.b=WmGboi+h;
-	dkim=pass header.d=oracle.onmicrosoft.com header.s=selector2-oracle-onmicrosoft-com header.b=HcLXl3tx;
-	dmarc=pass (policy=reject) header.from=oracle.com;
-	arc=pass ("microsoft.com:s=arcselector10001:i=1");
-	spf=pass (lists.linaro.org: domain of martin.petersen@oracle.com designates 205.220.165.32 as permitted sender) smtp.mailfrom=martin.petersen@oracle.com
-Received: from pps.filterd (m0246629.ppops.net [127.0.0.1])
-	by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5ACLCFGd014704;
-	Wed, 12 Nov 2025 21:12:52 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
-	:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=corp-2025-04-25; bh=oFc23IXnw44mwHugmw
-	a49+ZsfJuDbwakgvZjUGij41U=; b=WmGboi+hg5/rjCl5RJkERTVRrq7P8ZysVw
-	cggxAazM7ECamkGZtxnr2YZzOb5y4hQAAqsdKtfrqxTRYrlEBcEb8+UlXlviQ3pM
-	tHvn0K/rJ/YfmwHVm8FZ+PM2/15DUyy8pBfaaLYQ6CdBxSSDavpY0anzLLETVXd7
-	1/Gy9wUc/faoP3ylWk3DVcfYkYm7jGgqMWKYfoZp6/IswazhzBy6LUsc1dAwu4YG
-	OzXYNeBi90ZQPnfB+DW7WCpNafHo/O0jnzjjCDlVrnxjrgPfShlXiTj/iFA3SvOB
-	Kcv/B4W88VjUkj/XpiYMU1QLC1Bm4PprCnjvGzVwS7pl2+UrnD/Q==
-Received: from iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com (iadpaimrmta03.appoci.oracle.com [130.35.103.27])
-	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 4acyjt8ah1-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Wed, 12 Nov 2025 21:12:52 +0000 (GMT)
-Received: from pps.filterd (iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
-	by iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com (8.18.1.2/8.18.1.2) with ESMTP id 5ACJpNZP032539;
-	Wed, 12 Nov 2025 21:12:51 GMT
-Received: from bl0pr03cu003.outbound.protection.outlook.com (mail-eastusazon11012006.outbound.protection.outlook.com [52.101.53.6])
-	by iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id 4a9van0d4u-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Wed, 12 Nov 2025 21:12:51 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ZTL14h0KBRqERhnAJMEAfEP8l+iorb4fodFbaA+DOVleaCRTRs9U9KNBYa/EZ8c0uTMg26ZMQkQuohfABoXEjOANs80A2pnzONkB6RQzN7jq9wtnizIja8ZU2CMfVFm7n+MRRFLBpuwQ32F5x3/yPPcS4F2CEBPTCLKkBlxqWqnl83TGYmnVIvwtlzt0xG8gIaXOzT2WriLFKKeAtBUR2WHUaZ/WvcqUtwUTRtwzJuN2A2I/q6GjIa3A1lP6lz/6KckT+0bFY4WUE2gWMTW0Zwr1NaGwAJIINEtIkKKLwwk754kWvho3lILPwz3zpk7dL7+BRO3Q0bSONKOxAtaz1A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=oFc23IXnw44mwHugmwa49+ZsfJuDbwakgvZjUGij41U=;
- b=BXSGt2AMMdR6YNFRfafk4vCy6cVcoMZ2YSe8QU7Ejxyet4cQCUQ+K2o7RaBd4MA6cuNGP1r9NPntJ2FTJTOEZxYUg5g2NrcGWaZ8zV9ibkin70JF9OV5KRDR0gnnCHL0RPENRPX/plSveCG1bbS2J1X0LgjaoiK+XKVscSP488femUtCCLc0tj72nj8NsMr/pS2XRGNzKdX3TGxUuz7MwlnGvZcwAztgAJzcb8ABDgKh71BxKzSV6ZjqXVnnR5weTqX/Gij2CuaHZCA4psXwcwFJ19AJASRLBOkf2oHq70LFGT4brbWGwF3Y0m+vj8sA+fIcdy0qYVWWWTP5k3Yyhw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
- dkim=pass header.d=oracle.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=oFc23IXnw44mwHugmwa49+ZsfJuDbwakgvZjUGij41U=;
- b=HcLXl3txHv8w2o3gIPaVTYKvNwprNSwFXK0EGmkqJ1MjpjOPB6rpp65OjBpAA14nvngbH7H1ywGHLChcbefwklB7RP+0xevKT8cXLGpQMsWEoJ9/Gy/tlAHqojnjXREBBw45S8KqUyF5+qapEsipu1oCsmASDFZK7LFsyUbVnJM=
-Received: from DS7PR10MB5344.namprd10.prod.outlook.com (2603:10b6:5:3ab::6) by
- DM3PPFEC98198CD.namprd10.prod.outlook.com (2603:10b6:f:fc00::c55) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.15; Wed, 12 Nov
- 2025 21:12:44 +0000
-Received: from DS7PR10MB5344.namprd10.prod.outlook.com
- ([fe80::b527:ca1f:1129:a680]) by DS7PR10MB5344.namprd10.prod.outlook.com
- ([fe80::b527:ca1f:1129:a680%4]) with mapi id 15.20.9320.013; Wed, 12 Nov 2025
- 21:12:44 +0000
-To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-From: "Martin K. Petersen" <martin.petersen@oracle.com>
-In-Reply-To: <20251111122735.880607-20-andriy.shevchenko@linux.intel.com>
-	(Andy Shevchenko's message of "Tue, 11 Nov 2025 13:20:19 +0100")
-Organization: Oracle Corporation
-Message-ID: <yq15xbfez2a.fsf@ca-mkp.ca.oracle.com>
-References: <20251111122735.880607-1-andriy.shevchenko@linux.intel.com>
-	<20251111122735.880607-20-andriy.shevchenko@linux.intel.com>
-Date: Wed, 12 Nov 2025 16:12:41 -0500
-X-ClientProxiedBy: YQBPR0101CA0111.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:c01:5::14) To DS7PR10MB5344.namprd10.prod.outlook.com
- (2603:10b6:5:3ab::6)
+	dkim=pass header.d=intel.com header.s=Intel header.b=kcjHQCAA;
+	dmarc=pass (policy=none) header.from=intel.com;
+	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 198.175.65.21 as permitted sender) smtp.mailfrom=lkp@intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1763009490; x=1794545490;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=qq9EYIVJ3Tncasnn1UTSERO1iZT9ZPhsPZrFE8rSO+g=;
+  b=kcjHQCAAspORT+3GaPMpiaNog/D2Z2/LsMlEaWjZvmtreWj2Pb8VZwnF
+   0eK8mhDzTxgznuc3ZIBmYAvu+1+QOXbYboVpDLnO2ji5Ty2BfWryGxaA7
+   CeWuJoZ+PYCvllYBRvhmw5VstSdpbhQ6s84arYVw3I9XJ31RMCD7R4nbo
+   CzT34RuCQ1WcRi9HuK4ZJuaukWRDALtC1mmHqQ8OzH5ZZDtwqYtX/Y3hD
+   ZuX+mdZnTydjiv+p6HZ6I8wtzDuWTz7Sr2YO4tuPpVYuh491Vd241llRi
+   nZ/0yX34p/WkZv6b9MIvlNNW9S99jFszwDQmvYHsUX1jQDEaML1guNqfj
+   Q==;
+X-CSE-ConnectionGUID: NIZgWAWLQjawzDKX4smpVA==
+X-CSE-MsgGUID: MzmizYCeQtKHE7BOg6zM/Q==
+X-IronPort-AV: E=McAfee;i="6800,10657,11531"; a="65008639"
+X-IronPort-AV: E=Sophos;i="6.17,312,1747724400";
+   d="scan'208";a="65008639"
+Received: from orviesa005.jf.intel.com ([10.64.159.145])
+  by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Nov 2025 20:51:28 -0800
+X-CSE-ConnectionGUID: EyZILhKdS5u4MltFhc7Aiw==
+X-CSE-MsgGUID: upuRXUuxTLyWjRI+sgT0Og==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.19,301,1754982000";
+   d="scan'208";a="194586243"
+Received: from lkp-server01.sh.intel.com (HELO 7b01c990427b) ([10.239.97.150])
+  by orviesa005.jf.intel.com with ESMTP; 12 Nov 2025 20:51:22 -0800
+Received: from kbuild by 7b01c990427b with local (Exim 4.96)
+	(envelope-from <lkp@intel.com>)
+	id 1vJPIk-0004tL-3A;
+	Thu, 13 Nov 2025 04:51:18 +0000
+Date: Thu, 13 Nov 2025 12:51:08 +0800
+From: kernel test robot <lkp@intel.com>
+To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+	Corey Minyard <corey@minyard.net>,
+	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+	"Dr. David Alan Gilbert" <linux@treblig.org>,
+	Alex Deucher <alexander.deucher@amd.com>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Rob Clark <robin.clark@oss.qualcomm.com>,
+	Matthew Brost <matthew.brost@intel.com>,
+	Ulf Hansson <ulf.hansson@linaro.org>,
+	Vitaly Lifshits <vitaly.lifshits@intel.com>,
+	Manivannan Sadhasivam <mani@kernel.org>,
+	Niklas Cassel <cassel@kernel.org>, Calvin Owens <calvin@wbinvd.org>,
+	Vadim Fedorenko <vadim.fedorenko@linux.dev>,
+	Sagi Maimon <maimon.sagi@gmail.com>,
+	"Martin K. Petersen" <martin.petersen@oracle.com>,
+	Karan Tilak Kumar <kartilak@cisco.com>,
+	Hans Verkuil <hverkuil@xs4all.nl>,
+	Casey Schaufler <casey@schaufler-ca.com>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Petr Mladek <pmladek@suse.com>,
+	Viacheslav Dubeyko <Slava.Dubeyko@ibm.com>,
+	Max Kellermann <max.kellermann@ionos.com>,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+	openipmi-developer@lists.sourceforge.net,
+	linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org,
+	linaro-mm-sig@lists.linaro.org
+Message-ID: <202511130449.Q1mCZRpT-lkp@intel.com>
+References: <20251111122735.880607-20-andriy.shevchenko@linux.intel.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS7PR10MB5344:EE_|DM3PPFEC98198CD:EE_
-X-MS-Office365-Filtering-Correlation-Id: 233f33ee-fa8a-44be-e383-08de22303915
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|7416014|366016;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?iiXBCrx2EDho605CxOedPES+lBaY4f5uLoAn+RnhjXIJ9MVi7GnyFQGQ4VPx?=
- =?us-ascii?Q?YNn39co+u44V84yYepimNv5wI/PLXacpYW93YOjEzqsMSC+2/+qdxuj/augE?=
- =?us-ascii?Q?/j4rGAOA+/quWsgNA06trrE7eG76QBsHUQC6/h32htDTy69zQVDCyZzw0IkB?=
- =?us-ascii?Q?jKdzVXvOIEaJGvUJmH69m4LKLqtJhEU664cugZjn5M8/lRkndVHhzPqehThj?=
- =?us-ascii?Q?nDE1waihofZaBwXPrXOS8JUU6ixlja0n4iN7ohbsYw/S1FlKyefD6GJTNE4Y?=
- =?us-ascii?Q?av6+nH3M3sfCg3ZfcdOyMvB3ci8miR5XFbxY4wVGjD7NFeza3mMNZJSsQIDd?=
- =?us-ascii?Q?fu+sCR1VgPqzWXfbqh899fR9Hnv++XKWtYYzaRR2H9KQlQt7ogkXPkKHhkIn?=
- =?us-ascii?Q?uN2y5muY5oRAHO71DmKnSXEsQDW069gcwQSeeszKtbw5cJaEhQZNrdIJ5tBz?=
- =?us-ascii?Q?fk158R87VNO3YP0RSwV5SDzmWMz1BCkdHItofm0cNZnepi21YLZ6RyKL+3Ja?=
- =?us-ascii?Q?YE4lDyfQiUR+yhNdHvTWRtUsoPQDqHQZDftOujVv+zcVJCewVwbt+L8rBxY8?=
- =?us-ascii?Q?5aiXwZVjfw1Vpz5Eie+QrGw3Fhqbn13d5MM7PGiJ/pu9pKuKkBH9HMBVePlw?=
- =?us-ascii?Q?I8E353uabOHRv0//8LdOAN9PoZlfWBQLg1EtBi0DWW0npW3F9OrQr01ZboM5?=
- =?us-ascii?Q?/XGce+vcVaemgLdYp94YoBB1JH2lMheRWQU6nhf+0v9QNRXMpoNYvCXjNM3n?=
- =?us-ascii?Q?P+0klwGzUAloiKqIHplxFHjacpvqlyFZMp3ZCLpAq37Y7EmGkbxQWh1LuPw8?=
- =?us-ascii?Q?VzpSEA5rPxvmT6ShCuGGiSemhW9Mi5sBD45SE4eMw9XNbI75t/xeHU3v7EYK?=
- =?us-ascii?Q?O45deVBTMn4Gxpx5H12PVkEZbAwFjLvQax7jMhTZhCV1r/DczO9o7GBSTfLH?=
- =?us-ascii?Q?yKdv0a/nO+V+voF2xmQT6Uv2y54TEr74WGsvfawcOa2jHGROLKdaRTX48iYw?=
- =?us-ascii?Q?d/nxH3N25zUQYc5+r50cLp9CyVCEM0Adf85sY3VxZTz6vmvOIFu3fn8vaahQ?=
- =?us-ascii?Q?3dEK6dnChBZWR0nf8MoHbsYO/coRCnYy1mgVEGWduYudSdpEoXCuQ+4gWtZJ?=
- =?us-ascii?Q?6j3Maj4fHTS9noM7UtrC9yL+uUOs4tsCNcg8tihR8qrzghwzBgIVhtOeoBLF?=
- =?us-ascii?Q?tjAddUneKrRsV+vNExUG6W9wQUzMk/jtHVaudtwI50DIJNRfp0QsAemIf5VK?=
- =?us-ascii?Q?ngXpbQXP5LLvHJRES5ltEi/glMtCIeRH8pVpFC8dtAkNJKq1cjp0W/64baB2?=
- =?us-ascii?Q?uJFmiBHehrJMazJsiEMSd/VhkK6pHg5C2ZYLgGV5epf7u2EaR5gIBYW4850m?=
- =?us-ascii?Q?3zJlI542xOwgvSGhy/e4R2x8EFq1e4QBkhlxS+F5zze5/xYg6YQ6c6irJnXl?=
- =?us-ascii?Q?+kdeQuC59bcYmCrP1XYpwkOBXusPI/Ei?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR10MB5344.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(7416014)(366016);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?fpNeLao9wOcc9UcxMat6tJjLJ6HLXKAJ2M93kYvO78iQ+MyfVE1BPB1MPj1j?=
- =?us-ascii?Q?IPiGKfy7FuhLnmTvcvrfZCbzFI+22yJKRLOogrNsHB2jl++H/ARg/n7pg3eY?=
- =?us-ascii?Q?ZHupo2vGe24sfB7KDKTCyh9BrZwJnoJ4qB3haENoWkpKpD//Ef2kTbwQyCGF?=
- =?us-ascii?Q?LfkaTLobnB64iEP/JHjtmDAXoB6EMk+7Uf/fQ0p7bjcQIToCQcy+qa/algy/?=
- =?us-ascii?Q?p2pGDCjvOn3LkF2zXFOxn6KdijEpsJMAlmjAJFFL6EEthx4RwSuVR2X3ne/X?=
- =?us-ascii?Q?mwkg7lTToFxhgdg7BfqoAQCJryjy3JM6lNaCs/wCDKFiWsfhB8fVS2eau/no?=
- =?us-ascii?Q?MzwCC0225J83MVYtmGI3XnTIq2qqQCw8qXfc4VoICEaT2VhotB34WC+E8L8j?=
- =?us-ascii?Q?FyYaoq2U/taGTIWnbwE2lceCBtYFYwQAzkNinAMzheAyy5JjMQ0s8vBfP0Wr?=
- =?us-ascii?Q?qmDjS1X27cG1qtYbuToURxjQM3L0Nj8tGBFtfHzuw+IIITTkN/IH2TVjY7zm?=
- =?us-ascii?Q?EW940pR/dd1F8V4er0VWf8M0WcAEnFVlV0ibabIXvgna45Mxgbd0qDFZCg7L?=
- =?us-ascii?Q?L+x/npbeNwQRJjsZwPxOOApHdu4x0nPh724toWP8QbWd4eTHjLu3ZD69lhak?=
- =?us-ascii?Q?fkg7QwqvrbaE/OylAn4r5N7HsjyKeqDDdLG/U0+AZNJsF805Th3oqaV6s1ed?=
- =?us-ascii?Q?YhELFPqKDiuQ/m0IyPia6Sog1YT7dkTk3whxj8+ZWdm31os/AM9S0jySWgwr?=
- =?us-ascii?Q?dp+7/S/jbgViMLKV5NoG4rLXp4WI4BlRW8mFmm38eQutqPBy5qY0qXCorI8h?=
- =?us-ascii?Q?FTEbtckWNBScIo9iy7En5vBVRhqNjVOkkKLeTokxKVqeMa+Ywc4Burh0ef+f?=
- =?us-ascii?Q?bW31DvCqqDWXumSayqmwJHELDLtvEVrEl3dfb7y0p6YKyK0v5uBmWLlNrYd8?=
- =?us-ascii?Q?n9wVZre4fMA4lqT/x0/r9LL11UyIfXl4vlZOnFwLGLZvgLL4jZB/qWv4/cLF?=
- =?us-ascii?Q?lw2Z22JpHEn6Ts9Nai14yjmdJ3aayXjmNVQ6wG4oy7eqYvklZvybd96cReYl?=
- =?us-ascii?Q?BszBMOqTECOobchqEq4sySCeorssEEeYK8imF55Unbg8LwGA3O4MC8FVctFe?=
- =?us-ascii?Q?qQpUXu3MFfqwV2P9Ki0aGYiJTOFMo+0o5BvE+j9xq+EyhKQ69hUrnwfvDh/R?=
- =?us-ascii?Q?o/DkV2X1DOwWAqpRCACmGaHOjLOuvKrTn1plHnODNmG1a71ibwInevmzmoW6?=
- =?us-ascii?Q?HlADJS3AlsQhgYcSIyan6hd28ldD0Tx51gTTzbrM1ubzBXqE5VliM/V/S+xX?=
- =?us-ascii?Q?c/Xz6j4Llim34YhutMqK76k5VQBhUs/gG4fRrjV0lSojOXVLvqufUI7oyz2n?=
- =?us-ascii?Q?+tB1ypiLz+Xwdn+pT1ujfyrJ7Qh73gV6jnpaTbOg8Sm89oMyzHItAjm0k9RD?=
- =?us-ascii?Q?yrZkQt5HuyLOqxMe/6tJrqPUD9g+ZKTiboeKYNk51iI6vS4q7/JgXGO7+t6V?=
- =?us-ascii?Q?+S8Q4dXwR7dRDKbcz7pl5nNwAt7eRCAVkW48hybA+vn6/mDDpFhCYwHVePlM?=
- =?us-ascii?Q?Td3333WLhqnVIPdWFfoDX/JM262h5XzPIOq9HA0XcSt4+rRhtsJabpjrddEX?=
- =?us-ascii?Q?yQ=3D=3D?=
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: 
-	xXARhFWp+LTro4WReyXokogveLuZ2RnHDC4MsS3yWHveooLHjUR2SN7/v5JNH7or4MXtp5pMorFFH5Z315AzaOnQAY3P/iXkWOkYaGveipTZW2akURndiQi6i+2+LAGl5DX9qdGM2tK6BJuhUzx7UueWAr2RDj8bE7iiRkXOdKSJR3U+611llHQORwPkPcr1yQB6RdqR9WihRpqAUA/tKIjrXRS4I9zUggZA1hSDpWit/1qsOlMjb6Hs8Z9heI8ZXkUatB3VHzhqfy6Kcq+SOYmfNUFJkQI+M8eha8KMvB03lqMDDag6y3RaCdSC3zTjifnesBKyLsDTwypVG21NMo878I/I/vmmCRfC/OYxjTrnGCjOS3OVwFGEiVqNqlzCBkS/dsWFDJEegpfVoR0RBbkFlQs32abPd3Z2rn7KwzTx79UlUpOnZJ1K/l+KQ/27nLSVZ0vwqguQLJoMhnCZe6wK4s0Ice4qjeQN23tVLJZZUX6lMKcaWawH1V2a8McHExipnVvB1CrOksFicZmPlZUAkJ59b3OiA67t3Qg+m36zFhfSOZw0jm1NYPBv1+XpGO94LtWMOuhHh6h9JLXNZ5St20M/Ju+F3kEIhJh15aE=
-X-OriginatorOrg: oracle.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 233f33ee-fa8a-44be-e383-08de22303915
-X-MS-Exchange-CrossTenant-AuthSource: DS7PR10MB5344.namprd10.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Nov 2025 21:12:44.6032
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: KhbHGcdDMfPmngAwkjC62hToszsrg5snPos907vlZdhC7w3tC8GF6VnK7tGUv38yVW5Zsc4EgfVR5DeS0yMANMGvGphjrAE5wo8Swatfq6c=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM3PPFEC98198CD
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-11-12_06,2025-11-12_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0 suspectscore=0 mlxscore=0
- phishscore=0 mlxlogscore=999 spamscore=0 bulkscore=0 malwarescore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2510240000
- definitions=main-2511120171
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTEyMDE0OSBTYWx0ZWRfX6Im7l94XKZoN
- ITX0DL4GCKeqGd4iWtCa2+LdgNbpDO1OU3Qu1rUzJ+JSMAdwUaNph2dY/ku91+JE8Gct+MEDjvv
- ztNwenn1jCTfa328IBp8caO3KdoxAez0WyvzLm5wCwYphu4mVnvP3aqwzedktpYyOhNZ0WZL8lI
- e4hM1JF6OlRRpKuwW90W1ZZt0hZ8JbnrdpXRKP8Dl8EE2m34NH2jHPlDWquXzq+4LCioNdjERuE
- 0rWIE1jO5fSXfqCXAdEEW7k3Pi+30lYPvdeSw3tFhDJJUG/rgRcX2WL8EbahQbdJfAdffIC32Kh
- Y2UMAHCEsNYr7jbbBxTp31Hn6NET+S/CreBweLdtbqUXTDmCoQhKeBbOUAhYQmVtjeLW7MbOw8r
- +OH7UfO5zRekEVRUzYXabWzyv3h/uN3MYJ9ysVzZZTYgRBBSUs0=
-X-Authority-Analysis: v=2.4 cv=S6/UAYsP c=1 sm=1 tr=0 ts=6914f854 b=1 cx=c_pps
- a=qoll8+KPOyaMroiJ2sR5sw==:117 a=qoll8+KPOyaMroiJ2sR5sw==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
- a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=xqWC_Br6kY4A:10 a=6UeiqGixMTsA:10
- a=GoEa3M9JfhUA:10 a=VkNPw1HP01LnGYTKEx00:22 a=yPCof4ZbAAAA:8
- a=JNz3O4sEs4oywJvo4n4A:9 a=MTAcVbZMd_8A:10 cc=ntf awl=host:12100
-X-Proofpoint-ORIG-GUID: nZbGArbcIOO0OLnFo5zSPZdLTs0Z9zCt
-X-Proofpoint-GUID: nZbGArbcIOO0OLnFo5zSPZdLTs0Z9zCt
+Content-Disposition: inline
+In-Reply-To: <20251111122735.880607-20-andriy.shevchenko@linux.intel.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 4F3D33F74B
+X-Rspamd-Queue-Id: 0E1703F6F4
 X-Spamd-Bar: ----
-X-Spamd-Result: default: False [-4.20 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
+X-Spamd-Result: default: False [-4.50 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
+	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector10001:i=1];
-	DWL_DNSWL_LOW(-1.00)[oracle.com:dkim];
-	DMARC_POLICY_ALLOW(-0.50)[oracle.com,reject];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:205.220.165.32:c];
-	RWL_MAILSPIKE_VERYGOOD(-0.20)[205.220.165.32:from];
-	R_DKIM_ALLOW(-0.20)[oracle.com:s=corp-2025-04-25,oracle.onmicrosoft.com:s=selector2-oracle-onmicrosoft-com];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	R_SPF_ALLOW(-0.20)[+ip4:198.175.65.0/26];
 	MIME_GOOD(-0.10)[text/plain];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	RCVD_TLS_LAST(0.00)[];
-	URIBL_BLOCKED(0.00)[ca-mkp.ca.oracle.com:mid,oracle.onmicrosoft.com:dkim];
-	HAS_ORG_HEADER(0.00)[];
-	FREEMAIL_CC(0.00)[minyard.net,amd.com,treblig.org,suse.de,oss.qualcomm.com,intel.com,linaro.org,kernel.org,wbinvd.org,linux.dev,gmail.com,oracle.com,cisco.com,schaufler-ca.com,goodmis.org,suse.com,ibm.com,ionos.com,vger.kernel.org,lists.sourceforge.net,lists.freedesktop.org,lists.linaro.org,lists.osuosl.org,lists.linux.dev,rasmusvillemoes.dk,chromium.org,lwn.net,padovan.org,ffwll.ch,linux.intel.com,poorly.run,somainline.org,lunn.ch,davemloft.net,google.com,redhat.com,enneenne.com,linux.ibm.com,HansenPartnership.com,linuxfoundation.org,efficios.com,linux-foundation.org];
-	MIME_TRACE(0.00)[0:+];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DKIM_TRACE(0.00)[oracle.com:+,oracle.onmicrosoft.com:+];
+	DNSWL_BLOCKED(0.00)[198.175.65.21:from];
+	ARC_NA(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	DWL_DNSWL_BLOCKED(0.00)[onmicrosoft.com:dkim];
-	NEURAL_HAM(-0.00)[-1.000];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[92];
-	TAGGED_RCPT(0.00)[cisco];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[32];
+	FROM_HAS_DN(0.00)[];
+	TAGGED_RCPT(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	FREEMAIL_TO(0.00)[linux.intel.com,minyard.net,amd.com,treblig.org,suse.de,kernel.org,oss.qualcomm.com,intel.com,linaro.org,wbinvd.org,linux.dev,gmail.com,oracle.com,cisco.com,xs4all.nl,schaufler-ca.com,goodmis.org,suse.com,ibm.com,ionos.com,vger.kernel.org,lists.sourceforge.net,lists.freedesktop.org,lists.linaro.org];
+	RCVD_TLS_LAST(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
 	TO_DN_SOME(0.00)[];
-	DNSWL_BLOCKED(0.00)[205.220.165.32:from,130.35.103.27:received,2603:10b6:5:3ab::6:received,52.101.53.6:received];
-	ASN(0.00)[asn:26211, ipnet:205.220.165.0/24, country:US];
-	FROM_HAS_DN(0.00)[]
+	NEURAL_HAM(-0.00)[-1.000];
+	DKIM_TRACE(0.00)[intel.com:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: W3JEQBHQE37KU2SWFBLKWOYKL3TG34Y7
-X-Message-ID-Hash: W3JEQBHQE37KU2SWFBLKWOYKL3TG34Y7
-X-MailFrom: martin.petersen@oracle.com
+Message-ID-Hash: ITDK3AZB6QSIRRMLWUWZUHP2R7N2NOEA
+X-Message-ID-Hash: ITDK3AZB6QSIRRMLWUWZUHP2R7N2NOEA
+X-MailFrom: lkp@intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Corey Minyard <corey@minyard.net>, Christian =?utf-8?Q?K=C3=B6nig?= <christian.koenig@amd.com>, "Dr. David Alan Gilbert" <linux@treblig.org>, Alex Deucher <alexander.deucher@amd.com>, Thomas Zimmermann <tzimmermann@suse.de>, Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, Rob Clark <robin.clark@oss.qualcomm.com>, Matthew Brost <matthew.brost@intel.com>, Ulf Hansson <ulf.hansson@linaro.org>, Vitaly Lifshits <vitaly.lifshits@intel.com>, Manivannan Sadhasivam <mani@kernel.org>, Niklas Cassel <cassel@kernel.org>, Calvin Owens <calvin@wbinvd.org>, Vadim Fedorenko <vadim.fedorenko@linux.dev>, Sagi Maimon <maimon.sagi@gmail.com>, "Martin K. Petersen" <martin.petersen@oracle.com>, Karan Tilak Kumar <kartilak@cisco.com>, Hans Verkuil <hverkuil+cisco@kernel.org>, Casey Schaufler <casey@schaufler-ca.com>, Steven Rostedt <rostedt@goodmis.org>, Petr Mladek <pmladek@suse.com>, Viacheslav Dubeyko <Slava.Dubeyko@ibm.com>, Max Kellermann <max.kellermann@ionos.com>, linux-doc@vger.kernel.org
- , linux-kernel@vger.kernel.org, openipmi-developer@lists.sourceforge.net, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, amd-gfx@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org, intel-xe@lists.freedesktop.org, linux-mmc@vger.kernel.org, netdev@vger.kernel.org, intel-wired-lan@lists.osuosl.org, linux-pci@vger.kernel.org, linux-s390@vger.kernel.org, linux-scsi@vger.kernel.org, linux-staging@lists.linux.dev, ceph-devel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, Rasmus Villemoes <linux@rasmusvillemoes.dk>, Sergey Senozhatsky <senozhatsky@chromium.org>, Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>, Gustavo Padovan <gustavo@padovan.org>, Simona Vetter <simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmai
- l.com>, Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>, Konrad Dybcio <konradybcio@kernel.org>, Lucas De Marchi <lucas.demarchi@intel.com>, Thomas =?utf-8?Q?Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Vladimir Oltean <olteanv@gmail.com>, Andrew Lunn <andrew@lunn.ch>, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Tony Nguyen <anthony.l.nguyen@intel.com>, Przemek Kitszel <przemyslaw.kitszel@intel.com>, Krzysztof =?utf-8?Q?Wil?= =?utf-8?Q?czy=C5=84ski?= <kwilczynski@kernel.org>, Kishon Vijay Abraham I <kishon@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>, Rodolfo Giometti <giometti@enneenne.com>, Richard Cochran <richardcochran@gmail.com>, Jonathan Lemon <jonathan.lemon@gmail.com>, Stefan Haberland <sth@linux.ibm.com>, Jan Hoeppner <hoeppner@linux.ibm.com>, Heiko Carstens <hca@linux.ibm.com>, Vasily Gorbik <gor
- @linux.ibm.com>, Alexander Gordeev <agordeev@linux.ibm.com>, Christian Borntraeger <borntraeger@linux.ibm.com>, Sven Schnelle <svens@linux.ibm.com>, Satish Kharat <satishkh@cisco.com>, Sesidhar Baddela <sebaddel@cisco.com>, "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>, Mauro Carvalho Chehab <mchehab@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Xiubo Li <xiubli@redhat.com>, Ilya Dryomov <idryomov@gmail.com>, Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Andrew Morton <akpm@linux-foundation.org>
+CC: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH v2 19/21] scsi: fnic: Switch to use %ptS
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/W3JEQBHQE37KU2SWFBLKWOYKL3TG34Y7/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ITDK3AZB6QSIRRMLWUWZUHP2R7N2NOEA/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -233,16 +127,310 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
+Hi Andy,
 
-Andy,
+kernel test robot noticed the following build errors:
 
-> Use %ptS instead of open coded variants to print content of
-> struct timespec64 in human readable format.
+[auto build test ERROR on ceph-client/testing]
+[also build test ERROR on ceph-client/for-linus cminyard-ipmi/for-next mkp-scsi/for-next jejb-scsi/for-next linus/master v6.18-rc5 next-20251112]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
-Reviewed-by: Martin K. Petersen <martin.petersen@oracle.com>
+url:    https://github.com/intel-lab-lkp/linux/commits/Andy-Shevchenko/lib-vsprintf-Add-specifier-for-printing-struct-timespec64/20251111-203105
+base:   https://github.com/ceph/ceph-client.git testing
+patch link:    https://lore.kernel.org/r/20251111122735.880607-20-andriy.shevchenko%40linux.intel.com
+patch subject: [PATCH v2 19/21] scsi: fnic: Switch to use %ptS
+config: x86_64-kexec (https://download.01.org/0day-ci/archive/20251113/202511130449.Q1mCZRpT-lkp@intel.com/config)
+compiler: clang version 20.1.8 (https://github.com/llvm/llvm-project 87f0227cb60147a26a1eeb4fb06e3b505e9c7261)
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20251113/202511130449.Q1mCZRpT-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202511130449.Q1mCZRpT-lkp@intel.com/
+
+All errors (new ones prefixed by >>):
+
+>> drivers/scsi/fnic/fnic_trace.c:234:2: error: cannot take the address of an rvalue of type 'struct timespec64'
+     234 |         &timespec64_sub(val1, stats->stats_timestamps.last_reset_time),
+         |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   drivers/scsi/fnic/fnic_trace.c:235:2: error: cannot take the address of an rvalue of type 'struct timespec64'
+     235 |         &timespec64_sub(val1, stats->stats_timestamps.last_read_time));
+         |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   2 errors generated.
+
+
+vim +234 drivers/scsi/fnic/fnic_trace.c
+
+   198	
+   199	/*
+   200	 * fnic_get_stats_data - Copy fnic stats buffer to a memory file
+   201	 * @fnic_dbgfs_t: pointer to debugfs fnic stats buffer
+   202	 *
+   203	 * Description:
+   204	 * This routine gathers the fnic stats debugfs data from the fnic_stats struct
+   205	 * and dumps it to stats_debug_info.
+   206	 *
+   207	 * Return Value:
+   208	 * This routine returns the amount of bytes that were dumped into
+   209	 * stats_debug_info
+   210	 */
+   211	int fnic_get_stats_data(struct stats_debug_info *debug,
+   212				struct fnic_stats *stats)
+   213	{
+   214		int len = 0;
+   215		int buf_size = debug->buf_size;
+   216		struct timespec64 val1, val2;
+   217		int i = 0;
+   218	
+   219		ktime_get_real_ts64(&val1);
+   220		len = scnprintf(debug->debug_buffer + len, buf_size - len,
+   221			"------------------------------------------\n"
+   222			 "\t\tTime\n"
+   223			"------------------------------------------\n");
+   224	
+   225		len += scnprintf(debug->debug_buffer + len, buf_size - len,
+   226			"Current time :          [%ptSp]\n"
+   227			"Last stats reset time:  [%ptSp]\n"
+   228			"Last stats read time:   [%ptSp]\n"
+   229			"delta since last reset: [%ptSp]\n"
+   230			"delta since last read:  [%ptSp]\n",
+   231		&val1,
+   232		&stats->stats_timestamps.last_reset_time,
+   233		&stats->stats_timestamps.last_read_time,
+ > 234		&timespec64_sub(val1, stats->stats_timestamps.last_reset_time),
+   235		&timespec64_sub(val1, stats->stats_timestamps.last_read_time));
+   236	
+   237		stats->stats_timestamps.last_read_time = val1;
+   238	
+   239		len += scnprintf(debug->debug_buffer + len, buf_size - len,
+   240			  "------------------------------------------\n"
+   241			  "\t\tIO Statistics\n"
+   242			  "------------------------------------------\n");
+   243		len += scnprintf(debug->debug_buffer + len, buf_size - len,
+   244			  "Number of Active IOs: %lld\nMaximum Active IOs: %lld\n"
+   245			  "Number of IOs: %lld\nNumber of IO Completions: %lld\n"
+   246			  "Number of IO Failures: %lld\nNumber of IO NOT Found: %lld\n"
+   247			  "Number of Memory alloc Failures: %lld\n"
+   248			  "Number of IOREQ Null: %lld\n"
+   249			  "Number of SCSI cmd pointer Null: %lld\n"
+   250	
+   251			  "\nIO completion times: \n"
+   252			  "            < 10 ms : %lld\n"
+   253			  "     10 ms - 100 ms : %lld\n"
+   254			  "    100 ms - 500 ms : %lld\n"
+   255			  "    500 ms -   5 sec: %lld\n"
+   256			  "     5 sec -  10 sec: %lld\n"
+   257			  "    10 sec -  30 sec: %lld\n"
+   258			  "            > 30 sec: %lld\n",
+   259			  (u64)atomic64_read(&stats->io_stats.active_ios),
+   260			  (u64)atomic64_read(&stats->io_stats.max_active_ios),
+   261			  (u64)atomic64_read(&stats->io_stats.num_ios),
+   262			  (u64)atomic64_read(&stats->io_stats.io_completions),
+   263			  (u64)atomic64_read(&stats->io_stats.io_failures),
+   264			  (u64)atomic64_read(&stats->io_stats.io_not_found),
+   265			  (u64)atomic64_read(&stats->io_stats.alloc_failures),
+   266			  (u64)atomic64_read(&stats->io_stats.ioreq_null),
+   267			  (u64)atomic64_read(&stats->io_stats.sc_null),
+   268			  (u64)atomic64_read(&stats->io_stats.io_btw_0_to_10_msec),
+   269			  (u64)atomic64_read(&stats->io_stats.io_btw_10_to_100_msec),
+   270			  (u64)atomic64_read(&stats->io_stats.io_btw_100_to_500_msec),
+   271			  (u64)atomic64_read(&stats->io_stats.io_btw_500_to_5000_msec),
+   272			  (u64)atomic64_read(&stats->io_stats.io_btw_5000_to_10000_msec),
+   273			  (u64)atomic64_read(&stats->io_stats.io_btw_10000_to_30000_msec),
+   274			  (u64)atomic64_read(&stats->io_stats.io_greater_than_30000_msec));
+   275	
+   276		len += scnprintf(debug->debug_buffer + len, buf_size - len,
+   277				"------------------------------------------\n"
+   278				"\t\tIO Queues and cumulative IOs\n"
+   279				"------------------------------------------\n");
+   280	
+   281		for (i = 0; i < FNIC_MQ_MAX_QUEUES; i++) {
+   282			len += scnprintf(debug->debug_buffer + len, buf_size - len,
+   283					"Q:%d -> %lld\n", i, (u64)atomic64_read(&stats->io_stats.ios[i]));
+   284		}
+   285	
+   286		len += scnprintf(debug->debug_buffer + len, buf_size - len,
+   287			  "\nCurrent Max IO time : %lld\n",
+   288			  (u64)atomic64_read(&stats->io_stats.current_max_io_time));
+   289	
+   290		len += scnprintf(debug->debug_buffer + len, buf_size - len,
+   291			  "\n------------------------------------------\n"
+   292			  "\t\tAbort Statistics\n"
+   293			  "------------------------------------------\n");
+   294	
+   295		len += scnprintf(debug->debug_buffer + len, buf_size - len,
+   296			  "Number of Aborts: %lld\n"
+   297			  "Number of Abort Failures: %lld\n"
+   298			  "Number of Abort Driver Timeouts: %lld\n"
+   299			  "Number of Abort FW Timeouts: %lld\n"
+   300			  "Number of Abort IO NOT Found: %lld\n"
+   301	
+   302			  "Abort issued times: \n"
+   303			  "            < 6 sec : %lld\n"
+   304			  "     6 sec - 20 sec : %lld\n"
+   305			  "    20 sec - 30 sec : %lld\n"
+   306			  "    30 sec - 40 sec : %lld\n"
+   307			  "    40 sec - 50 sec : %lld\n"
+   308			  "    50 sec - 60 sec : %lld\n"
+   309			  "            > 60 sec: %lld\n",
+   310	
+   311			  (u64)atomic64_read(&stats->abts_stats.aborts),
+   312			  (u64)atomic64_read(&stats->abts_stats.abort_failures),
+   313			  (u64)atomic64_read(&stats->abts_stats.abort_drv_timeouts),
+   314			  (u64)atomic64_read(&stats->abts_stats.abort_fw_timeouts),
+   315			  (u64)atomic64_read(&stats->abts_stats.abort_io_not_found),
+   316			  (u64)atomic64_read(&stats->abts_stats.abort_issued_btw_0_to_6_sec),
+   317			  (u64)atomic64_read(&stats->abts_stats.abort_issued_btw_6_to_20_sec),
+   318			  (u64)atomic64_read(&stats->abts_stats.abort_issued_btw_20_to_30_sec),
+   319			  (u64)atomic64_read(&stats->abts_stats.abort_issued_btw_30_to_40_sec),
+   320			  (u64)atomic64_read(&stats->abts_stats.abort_issued_btw_40_to_50_sec),
+   321			  (u64)atomic64_read(&stats->abts_stats.abort_issued_btw_50_to_60_sec),
+   322			  (u64)atomic64_read(&stats->abts_stats.abort_issued_greater_than_60_sec));
+   323	
+   324		len += scnprintf(debug->debug_buffer + len, buf_size - len,
+   325			  "\n------------------------------------------\n"
+   326			  "\t\tTerminate Statistics\n"
+   327			  "------------------------------------------\n");
+   328	
+   329		len += scnprintf(debug->debug_buffer + len, buf_size - len,
+   330			  "Number of Terminates: %lld\n"
+   331			  "Maximum Terminates: %lld\n"
+   332			  "Number of Terminate Driver Timeouts: %lld\n"
+   333			  "Number of Terminate FW Timeouts: %lld\n"
+   334			  "Number of Terminate IO NOT Found: %lld\n"
+   335			  "Number of Terminate Failures: %lld\n",
+   336			  (u64)atomic64_read(&stats->term_stats.terminates),
+   337			  (u64)atomic64_read(&stats->term_stats.max_terminates),
+   338			  (u64)atomic64_read(&stats->term_stats.terminate_drv_timeouts),
+   339			  (u64)atomic64_read(&stats->term_stats.terminate_fw_timeouts),
+   340			  (u64)atomic64_read(&stats->term_stats.terminate_io_not_found),
+   341			  (u64)atomic64_read(&stats->term_stats.terminate_failures));
+   342	
+   343		len += scnprintf(debug->debug_buffer + len, buf_size - len,
+   344			  "\n------------------------------------------\n"
+   345			  "\t\tReset Statistics\n"
+   346			  "------------------------------------------\n");
+   347	
+   348		len += scnprintf(debug->debug_buffer + len, buf_size - len,
+   349			  "Number of Device Resets: %lld\n"
+   350			  "Number of Device Reset Failures: %lld\n"
+   351			  "Number of Device Reset Aborts: %lld\n"
+   352			  "Number of Device Reset Timeouts: %lld\n"
+   353			  "Number of Device Reset Terminates: %lld\n"
+   354			  "Number of FW Resets: %lld\n"
+   355			  "Number of FW Reset Completions: %lld\n"
+   356			  "Number of FW Reset Failures: %lld\n"
+   357			  "Number of Fnic Reset: %lld\n"
+   358			  "Number of Fnic Reset Completions: %lld\n"
+   359			  "Number of Fnic Reset Failures: %lld\n",
+   360			  (u64)atomic64_read(&stats->reset_stats.device_resets),
+   361			  (u64)atomic64_read(&stats->reset_stats.device_reset_failures),
+   362			  (u64)atomic64_read(&stats->reset_stats.device_reset_aborts),
+   363			  (u64)atomic64_read(&stats->reset_stats.device_reset_timeouts),
+   364			  (u64)atomic64_read(
+   365				  &stats->reset_stats.device_reset_terminates),
+   366			  (u64)atomic64_read(&stats->reset_stats.fw_resets),
+   367			  (u64)atomic64_read(&stats->reset_stats.fw_reset_completions),
+   368			  (u64)atomic64_read(&stats->reset_stats.fw_reset_failures),
+   369			  (u64)atomic64_read(&stats->reset_stats.fnic_resets),
+   370			  (u64)atomic64_read(
+   371				  &stats->reset_stats.fnic_reset_completions),
+   372			  (u64)atomic64_read(&stats->reset_stats.fnic_reset_failures));
+   373	
+   374		len += scnprintf(debug->debug_buffer + len, buf_size - len,
+   375			  "\n------------------------------------------\n"
+   376			  "\t\tFirmware Statistics\n"
+   377			  "------------------------------------------\n");
+   378	
+   379		len += scnprintf(debug->debug_buffer + len, buf_size - len,
+   380			  "Number of Active FW Requests %lld\n"
+   381			  "Maximum FW Requests: %lld\n"
+   382			  "Number of FW out of resources: %lld\n"
+   383			  "Number of FW IO errors: %lld\n",
+   384			  (u64)atomic64_read(&stats->fw_stats.active_fw_reqs),
+   385			  (u64)atomic64_read(&stats->fw_stats.max_fw_reqs),
+   386			  (u64)atomic64_read(&stats->fw_stats.fw_out_of_resources),
+   387			  (u64)atomic64_read(&stats->fw_stats.io_fw_errs));
+   388	
+   389		len += scnprintf(debug->debug_buffer + len, buf_size - len,
+   390			  "\n------------------------------------------\n"
+   391			  "\t\tVlan Discovery Statistics\n"
+   392			  "------------------------------------------\n");
+   393	
+   394		len += scnprintf(debug->debug_buffer + len, buf_size - len,
+   395			  "Number of Vlan Discovery Requests Sent %lld\n"
+   396			  "Vlan Response Received with no FCF VLAN ID: %lld\n"
+   397			  "No solicitations recvd after vlan set, expiry count: %lld\n"
+   398			  "Flogi rejects count: %lld\n",
+   399			  (u64)atomic64_read(&stats->vlan_stats.vlan_disc_reqs),
+   400			  (u64)atomic64_read(&stats->vlan_stats.resp_withno_vlanID),
+   401			  (u64)atomic64_read(&stats->vlan_stats.sol_expiry_count),
+   402			  (u64)atomic64_read(&stats->vlan_stats.flogi_rejects));
+   403	
+   404		len += scnprintf(debug->debug_buffer + len, buf_size - len,
+   405			  "\n------------------------------------------\n"
+   406			  "\t\tOther Important Statistics\n"
+   407			  "------------------------------------------\n");
+   408	
+   409		jiffies_to_timespec64(stats->misc_stats.last_isr_time, &val1);
+   410		jiffies_to_timespec64(stats->misc_stats.last_ack_time, &val2);
+   411	
+   412		len += scnprintf(debug->debug_buffer + len, buf_size - len,
+   413			  "Last ISR time: %llu (%ptSp)\n"
+   414			  "Last ACK time: %llu (%ptSp)\n"
+   415			  "Max ISR jiffies: %llu\n"
+   416			  "Max ISR time (ms) (0 denotes < 1 ms): %llu\n"
+   417			  "Corr. work done: %llu\n"
+   418			  "Number of ISRs: %lld\n"
+   419			  "Maximum CQ Entries: %lld\n"
+   420			  "Number of ACK index out of range: %lld\n"
+   421			  "Number of data count mismatch: %lld\n"
+   422			  "Number of FCPIO Timeouts: %lld\n"
+   423			  "Number of FCPIO Aborted: %lld\n"
+   424			  "Number of SGL Invalid: %lld\n"
+   425			  "Number of Copy WQ Alloc Failures for ABTs: %lld\n"
+   426			  "Number of Copy WQ Alloc Failures for Device Reset: %lld\n"
+   427			  "Number of Copy WQ Alloc Failures for IOs: %lld\n"
+   428			  "Number of no icmnd itmf Completions: %lld\n"
+   429			  "Number of Check Conditions encountered: %lld\n"
+   430			  "Number of QUEUE Fulls: %lld\n"
+   431			  "Number of rport not ready: %lld\n"
+   432			 "Number of receive frame errors: %lld\n"
+   433			 "Port speed (in Mbps): %lld\n",
+   434			  (u64)stats->misc_stats.last_isr_time,
+   435			  &val1,
+   436			  (u64)stats->misc_stats.last_ack_time,
+   437			  &val2,
+   438			  (u64)atomic64_read(&stats->misc_stats.max_isr_jiffies),
+   439			  (u64)atomic64_read(&stats->misc_stats.max_isr_time_ms),
+   440			  (u64)atomic64_read(&stats->misc_stats.corr_work_done),
+   441			  (u64)atomic64_read(&stats->misc_stats.isr_count),
+   442			  (u64)atomic64_read(&stats->misc_stats.max_cq_entries),
+   443			  (u64)atomic64_read(&stats->misc_stats.ack_index_out_of_range),
+   444			  (u64)atomic64_read(&stats->misc_stats.data_count_mismatch),
+   445			  (u64)atomic64_read(&stats->misc_stats.fcpio_timeout),
+   446			  (u64)atomic64_read(&stats->misc_stats.fcpio_aborted),
+   447			  (u64)atomic64_read(&stats->misc_stats.sgl_invalid),
+   448			  (u64)atomic64_read(
+   449				  &stats->misc_stats.abts_cpwq_alloc_failures),
+   450			  (u64)atomic64_read(
+   451				  &stats->misc_stats.devrst_cpwq_alloc_failures),
+   452			  (u64)atomic64_read(&stats->misc_stats.io_cpwq_alloc_failures),
+   453			  (u64)atomic64_read(&stats->misc_stats.no_icmnd_itmf_cmpls),
+   454			  (u64)atomic64_read(&stats->misc_stats.check_condition),
+   455			  (u64)atomic64_read(&stats->misc_stats.queue_fulls),
+   456			  (u64)atomic64_read(&stats->misc_stats.tport_not_ready),
+   457			  (u64)atomic64_read(&stats->misc_stats.frame_errors),
+   458			  (u64)atomic64_read(&stats->misc_stats.port_speed_in_mbps));
+   459	
+   460		return len;
+   461	
 
 -- 
-Martin K. Petersen
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
