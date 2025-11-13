@@ -2,309 +2,158 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sO3iM/j84GlloAAAu9opvQ
+	id UKMzKf784GlloAAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:15:04 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:15:10 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 906A741064B
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:15:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 44A19410652
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:15:10 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id AB6DF4098D
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:15:03 +0000 (UTC)
-Received: from CH5PR02CU005.outbound.protection.outlook.com (mail-northcentralusazon11012003.outbound.protection.outlook.com [40.107.200.3])
-	by lists.linaro.org (Postfix) with ESMTPS id 35E663F845
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 13 Nov 2025 16:13:04 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 59377409AB
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:15:09 +0000 (UTC)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+	by lists.linaro.org (Postfix) with ESMTPS id 4DC563F846
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 13 Nov 2025 16:20:17 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=amd.com header.s=selector1 header.b=xLKMEyua;
-	dmarc=pass (policy=quarantine) header.from=amd.com;
-	arc=pass ("microsoft.com:s=arcselector10001:i=1");
-	spf=pass (lists.linaro.org: domain of Pierre-eric.Pelloux-prayer@amd.com designates 40.107.200.3 as permitted sender) smtp.mailfrom=Pierre-eric.Pelloux-prayer@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=TxFbrq/2aC4tG3Y80cEmU2nXOb1xfs0TunOGT0Ag9G5Lmst9Bqxn+yqcsWxBe5C02SZpTzklDLQNvD6yd+xDZ8ZTiLfjaqe+eus3q1E9fPK1IF/BvFaj2q1lCX0Qd/yDD/SaoYqGFXp86pJoZvr+zQ0DywG8CY7iTXTG2lhXxn8h7MaYAONBAWIKThRG6URt/mQ/sfLlwgHYa/JiLY6+nPui9nJXj5t7hmnU3ZH6T8Hz4aSIzJhom9vnGP0p/+PP4Z3FQpDyTMGTIHXluSbyfAzCC7gZ4xw/+hY3rhCbspBqLAeP5m4u00FRbxaWSSQhQeeBJKxKMLfWNm3VxwrciA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=WmfxQXGjTBVDXa/swxlMJa/RFBmk6wh92nSPBNpIpsY=;
- b=mZt+Fl1a3/IOnq/3B9w9a1w00MR6Jskw4JZgQOuvbO3Yb7z2JKl7V5D+Sxi6v2JV0r72dZlcH/NXGZYKRdUHSukQ/+YbaMVtrFVBlOEakS12J4A9AaLt0HdEdQy2y/rXO9I4NBzxDEbX/abmd9s41jfT8uZGcPstD98TgHbTIbIobs91mbUyHQFOGK55LGqh+rDXx5MYFYlCG2WMH3r34CNH1TzXyPxTovfg1Dhqw4yMZJKaCkSW8yQ2mbTlWendNGAooDrCSiIfmrMRgzGNl05vPojRX8zl7p4cYKIHDYFkgghhudUInZQ+vjOHDt5vuw+nzEKBukmuxSMYkVMM+w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=gmail.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=WmfxQXGjTBVDXa/swxlMJa/RFBmk6wh92nSPBNpIpsY=;
- b=xLKMEyuaRRMpluYg8qgtDjg9i2Y2qrKur2hmN0CcMZSixEW0ffL4LfVEixarqXFuMfg/uAbFhYb7q4jMC0b3mR5t+vG2y/h50B9jNVp1uFqinj1G4U8RZoa2u36LjpxKCkkCobSAaQWKwMq7oBWWGx39rdCAs6CrzEcxrnSSz/o=
-Received: from MN2PR07CA0002.namprd07.prod.outlook.com (2603:10b6:208:1a0::12)
- by DM4PR12MB5818.namprd12.prod.outlook.com (2603:10b6:8:62::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.13; Thu, 13 Nov
- 2025 16:13:01 +0000
-Received: from BL02EPF0002992E.namprd02.prod.outlook.com
- (2603:10b6:208:1a0:cafe::98) by MN2PR07CA0002.outlook.office365.com
- (2603:10b6:208:1a0::12) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9320.17 via Frontend Transport; Thu,
- 13 Nov 2025 16:12:56 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Received: from satlexmb07.amd.com (165.204.84.17) by
- BL02EPF0002992E.mail.protection.outlook.com (10.167.249.59) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9320.13 via Frontend Transport; Thu, 13 Nov 2025 16:13:01 +0000
-Received: from FRAPPELLOUX01-WSLPUB.amd.com (10.180.168.240) by
- satlexmb07.amd.com (10.181.42.216) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.17; Thu, 13 Nov 2025 08:12:58 -0800
-From: Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>
-To: Alex Deucher <alexander.deucher@amd.com>,
-	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, David Airlie
-	<airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal
-	<sumit.semwal@linaro.org>
-Date: Thu, 13 Nov 2025 17:05:59 +0100
-Message-ID: <20251113160632.5889-19-pierre-eric.pelloux-prayer@amd.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20251113160632.5889-1-pierre-eric.pelloux-prayer@amd.com>
-References: <20251113160632.5889-1-pierre-eric.pelloux-prayer@amd.com>
+	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=WQa6KZMH;
+	dmarc=pass (policy=reject) header.from=mailbox.org;
+	spf=pass (lists.linaro.org: domain of phasta@mailbox.org designates 80.241.56.171 as permitted sender) smtp.mailfrom=phasta@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4d6lqL3TQpz9sR1;
+	Thu, 13 Nov 2025 17:20:14 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
+	t=1763050814; h=from:from:reply-to:reply-to:subject:subject:date:date:
+	 message-id:message-id:to:to:cc:mime-version:mime-version:
+	 content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=YmRdbE5yV4ESUST58NcAN6JqHsVuMkNSnMIS9GDZAGU=;
+	b=WQa6KZMHCUapheBVUl2E09g0X2rIXp5QuLRKtn6jam5FE29gVdaDvMRjrQXcu/auldmsXk
+	hwPMU+/5XPRgDr63/cEGkCiVrPSPWpJwjS78WMe+XmEKPla+nWm8RSZzdni0e2UcGmAoSD
+	ke6/QQrZyZpPMFESp2966Jnxoil9yqhMKHBIxMYCTakvCOcQ9xLa4C+BuXXgL/QXzXYeoi
+	HZ6KQpSnhg5+VLP6zIxvr5e58xx4EKxYf8SmI5TE8Mgyu240cSJ9Y2eOMfCQUhExb72YDC
+	K8hh2cGQxomIIjMLME7lJDQZRZ1QOKG1n0E9a3ZYll/iItgB0W5Ybluz2R/Nuw==
+Message-ID: <26a1379427d97e969654061224fb36d37e87af24.camel@mailbox.org>
+From: Philipp Stanner <phasta@mailbox.org>
+To: Christian =?ISO-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>,
+	alexdeucher@gmail.com, simona.vetter@ffwll.ch, tursulin@ursulin.net,
+	matthew.brost@intel.com, dri-devel@lists.freedesktop.org,
+	amd-gfx@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
+	sumit.semwal@linaro.org
+Date: Thu, 13 Nov 2025 17:20:09 +0100
+In-Reply-To: <20251113145332.16805-1-christian.koenig@amd.com>
+References: <20251113145332.16805-1-christian.koenig@amd.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
- (10.181.42.216)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF0002992E:EE_|DM4PR12MB5818:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2006af19-fb8b-4ae6-d57f-08de22cf84ac
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|36860700013|376014|82310400026;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?yStdPGPr6xWTTV1to6p1YShKy2oXPGnSgHNtUky9ob6abdx776LnGQsL9dCd?=
- =?us-ascii?Q?ga4/zrEunkIMUC6epxjAEPfR2AZxD0uVXmakMLzT3aM0MK0DVtx+tApvORCI?=
- =?us-ascii?Q?cjB+gFWmnPhD/0YMc5N4l3PGscWNDyBFg7RMxDDemWHGLj47jMgW54c9gm87?=
- =?us-ascii?Q?sLnWPIgjXtNwXBdrCSfTI/wILy8QqpAy1m7SqrrGLiFge1rzgLqdB/S/2QKU?=
- =?us-ascii?Q?ByNhLFD6I6Jk+RriETLWNDh1pR9R08Oz8IaqFDhYr+KMbbjB2832/X7pNvbf?=
- =?us-ascii?Q?FPKSO0RDXykPEXHDPeuqfCixxqEpO0gamKBsmmZWYogyvkvgAJNiLcixGO/r?=
- =?us-ascii?Q?Y9NVuy1MOuZ2yB1v7g+YZOMyb5+DUv/0E6LcfHeBYFkRr3iZgDmXYhGHoBQU?=
- =?us-ascii?Q?dWgy/6YgIhPowoLBDE9MBXgbYAkFEPUgi42IsggF72x39MQ1gDsSoVf5DLlL?=
- =?us-ascii?Q?y1P6SmwFoxoXKXpDw0mYUHKjV31yEZVDgqUsqDjvGoOEqdZVfIOPWkJCRzKn?=
- =?us-ascii?Q?u4n3x8oWxCV76ZIZpuouhcYrSRPKQ5+A8xdliDl4nalpxiKs0uk1YKl9NaRK?=
- =?us-ascii?Q?CJSWhoiz/daj8zQWcEhxWg6VXtw8yIWh33EE9/WJhGfYirW8wm1be0Rjkd2g?=
- =?us-ascii?Q?qerss7ExgmWimSjWJzjOq0GF0FYQjl7V3I+Z+lDHbtVygnNx7EAAbCEe6RTC?=
- =?us-ascii?Q?oRDPpko6ObG7oMUHiurh2vSKxt6VIvP28UzPQhvoiqzFhPm7dzQ5soFlXaIS?=
- =?us-ascii?Q?BFaksR0Igq1uM8DIsPqP4NpIw0Glz5FQVP8v+g+uaHP6ikrW6GzP2hCjFDo6?=
- =?us-ascii?Q?xi7sSn7AxPMHKvmBQPILV4yccvyy4DV7lxPzXBX+4qGSIP/d/AZmC3ChvcNX?=
- =?us-ascii?Q?pqco3KQqMsXYlGRXKr6olEZxc2r6hR1VoqHUzedLX8hwHyzkU/LcGtatkQX0?=
- =?us-ascii?Q?uuiwrqveWdaNSHvS6R3wII0AXB0n1ASntaR5myFtyunyKomp7BgSvEIa9yan?=
- =?us-ascii?Q?fVi3wugL3fKE2Kf7SyHRcD77P/VCzssiKCldNIAX3kyzzDxHgRqftmun0B9I?=
- =?us-ascii?Q?FT5kUcqobYKHJ1Y+m2z9l/BOYJp77jQeaROD1Wn3YIEUYFbunZdIT7Q6Yu9Y?=
- =?us-ascii?Q?z1Z+X4dCn1hJlnGfxLl1OrlrU3veHUV0mqZuznWUcESuTfm70apNdCd7iaAB?=
- =?us-ascii?Q?UmPio0tCH8n3Ee6HkQ0PrOdmr1hCqCrtH+OaT6RcQAxgqiU6PkMxBWDE3WcR?=
- =?us-ascii?Q?jXCVwVBrOOytm3RDhI8xsv+WixfAYVAK2669+qWabSg4NrKSwH8uYD9YlBBK?=
- =?us-ascii?Q?zS6bY0akKY5QVDDJPPaf3/AmWKRoueqe4pL2Co7OVlHUbrn42T8Hw4J/suhX?=
- =?us-ascii?Q?wLqDrERKifTfHUTOApLyAHKgAGWEClloZGc5T613i16dlYJ7eZfHlIC3EqRU?=
- =?us-ascii?Q?DuHnBB2dKH54E9YtqEWzgCr6FDkk8GQYCoaPblBY85X2fkkyxEVX1kQG5D83?=
- =?us-ascii?Q?/wWv/a5LHFQTQfzKa/wxWc6kvvv1cqnWD2nJZVDdgg6kD2Tf8CxH/yvFz3jF?=
- =?us-ascii?Q?STzAC0YEf2Zz5Jn3h6g=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(36860700013)(376014)(82310400026);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Nov 2025 16:13:01.2260
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2006af19-fb8b-4ae6-d57f-08de22cf84ac
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	BL02EPF0002992E.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5818
-X-Spamd-Bar: ---
-X-MailFrom: Pierre-eric.Pelloux-prayer@amd.com
+X-MBO-RS-ID: 5ba540eb57a2f5f87b1
+X-MBO-RS-META: 86wo5zyfm9y79pcoertnf597wdntngqd
+X-Spamd-Bar: --
+X-MailFrom: phasta@mailbox.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: K7VBXAZMRMJ2BHVLCQ6JAQJKW4D6NACT
-X-Message-ID-Hash: K7VBXAZMRMJ2BHVLCQ6JAQJKW4D6NACT
-X-Mailman-Approved-At: Thu, 16 Apr 2026 14:56:51 +0000
-CC: Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+Message-ID-Hash: ZKOEY5NN4A6E6T2VVBUN4BILLYGAT63I
+X-Message-ID-Hash: ZKOEY5NN4A6E6T2VVBUN4BILLYGAT63I
+X-Mailman-Approved-At: Thu, 16 Apr 2026 14:56:52 +0000
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v2 18/20] drm/amdgpu: rename amdgpu_fill_buffer as amdgpu_ttm_clear_buffer
+Reply-To: phasta@kernel.org
+Subject: [Linaro-mm-sig] Re: Independence for dma_fences! v3
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/K7VBXAZMRMJ2BHVLCQ6JAQJKW4D6NACT/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZKOEY5NN4A6E6T2VVBUN4BILLYGAT63I/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [4.99 / 15.00];
-	DMARC_POLICY_QUARANTINE(1.50)[amd.com : SPF not aligned (relaxed),quarantine];
-	DATE_IN_PAST(1.00)[3695];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
-	MID_CONTAINS_FROM(1.00)[];
-	R_DKIM_REJECT(1.00)[amd.com:s=selector1];
-	MAILLIST(-0.20)[mailman];
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+X-Spamd-Result: default: False [5.09 / 15.00];
+	DMARC_POLICY_REJECT(2.00)[mailbox.org : SPF not aligned (relaxed),reject];
+	SUSPICIOUS_RECIPS(1.50)[];
+	R_DKIM_REJECT(1.00)[mailbox.org:s=mail20150812];
+	DATE_IN_PAST(1.00)[3694];
 	R_SPF_ALLOW(-0.20)[+mx:c];
+	MAILLIST(-0.20)[mailman];
+	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FREEMAIL_TO(0.00)[amd.com,gmail.com,ffwll.ch,linaro.org];
-	GREYLIST(0.00)[pass,meta];
-	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_THREE(0.00)[3];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
+	SUBJECT_HAS_EXCLAIM(0.00)[];
+	GREYLIST(0.00)[pass,meta];
+	ARC_NA(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	SUSPICIOUS_AUTH_ORIGIN(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com,ffwll.ch,ursulin.net,intel.com,lists.freedesktop.org,lists.linaro.org,linaro.org];
 	TO_DN_SOME(0.00)[];
-	HAS_XOIP(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	FROM_NEQ_ENVFROM(0.00)[pierre-eric.pelloux-prayer@amd.com,linaro-mm-sig-bounces@lists.linaro.org];
-	DKIM_TRACE(0.00)[amd.com:-];
-	NEURAL_HAM(-0.00)[-0.825];
+	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	FROM_HAS_DN(0.00)[];
+	HAS_REPLYTO(0.00)[phasta@kernel.org];
+	RCPT_COUNT_SEVEN(0.00)[9];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	RCPT_COUNT_SEVEN(0.00)[11];
+	MID_RHS_MATCH_FROM(0.00)[];
+	NEURAL_HAM(-0.00)[-0.930];
+	FROM_NEQ_ENVFROM(0.00)[phasta@mailbox.org,linaro-mm-sig-bounces@lists.linaro.org];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,amd.com:mid,amd.com:email,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: 906A741064B
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	DKIM_TRACE(0.00)[mailbox.org:-];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mailbox.org:mid,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
+X-Rspamd-Queue-Id: 44A19410652
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-This is the only use case for this function.
-
----
-v2: amdgpu_ttm_clear_buffer instead of amdgpu_clear_buffer
----
-
-Signed-off-by: Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>
----
- drivers/gpu/drm/amd/amdgpu/amdgpu_object.c |  8 +++----
- drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c    | 26 ++++++++++------------
- drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.h    | 15 ++++++-------
- 3 files changed, 23 insertions(+), 26 deletions(-)
-
-diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
-index 4490b19752b8..4b9518097899 100644
---- a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
-+++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
-@@ -725,8 +725,8 @@ int amdgpu_bo_create(struct amdgpu_device *adev,
- 	    bo->tbo.resource->mem_type == TTM_PL_VRAM) {
- 		struct dma_fence *fence;
- 
--		r = amdgpu_fill_buffer(NULL, bo, 0, NULL, &fence, NULL,
--				       true, AMDGPU_KERNEL_JOB_ID_TTM_CLEAR_BUFFER);
-+		r = amdgpu_ttm_clear_buffer(NULL, bo, NULL, &fence, NULL,
-+					    true, AMDGPU_KERNEL_JOB_ID_TTM_CLEAR_BUFFER);
- 		if (unlikely(r))
- 			goto fail_unreserve;
- 
-@@ -1324,8 +1324,8 @@ void amdgpu_bo_release_notify(struct ttm_buffer_object *bo)
- 	if (r)
- 		goto out;
- 
--	r = amdgpu_fill_buffer(NULL, abo, 0, &bo->base._resv, &fence, NULL,
--			       false, AMDGPU_KERNEL_JOB_ID_CLEAR_ON_RELEASE);
-+	r = amdgpu_ttm_clear_buffer(NULL, abo, &bo->base._resv, &fence, NULL,
-+				    false, AMDGPU_KERNEL_JOB_ID_CLEAR_ON_RELEASE);
- 	if (WARN_ON(r))
- 		goto out;
- 
-diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
-index df05768c3817..0a55bc4ea91f 100644
---- a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
-+++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
-@@ -433,9 +433,9 @@ static int amdgpu_move_blit(struct ttm_buffer_object *bo,
- 	    (abo->flags & AMDGPU_GEM_CREATE_VRAM_WIPE_ON_RELEASE)) {
- 		struct dma_fence *wipe_fence = NULL;
- 
--		r = amdgpu_fill_buffer(entity,
--				       abo, 0, NULL, &wipe_fence, fence,
--				       false, AMDGPU_KERNEL_JOB_ID_MOVE_BLIT);
-+		r = amdgpu_ttm_clear_buffer(entity,
-+					    abo, NULL, &wipe_fence, fence,
-+					    false, AMDGPU_KERNEL_JOB_ID_MOVE_BLIT);
- 		if (r) {
- 			goto error;
- 		} else if (wipe_fence) {
-@@ -2418,11 +2418,10 @@ static int amdgpu_ttm_fill_mem(struct amdgpu_ring *ring,
- }
- 
- /**
-- * amdgpu_fill_buffer - fill a buffer with a given value
-+ * amdgpu_ttm_clear_buffer - fill a buffer with 0
-  * @entity: optional entity to use. If NULL, the clearing entities will be
-  *          used to load-balance the partial clears
-  * @bo: the bo to fill
-- * @src_data: the value to set
-  * @resv: fences contained in this reservation will be used as dependencies.
-  * @out_fence: the fence from the last clear will be stored here. It might be
-  *             NULL if no job was run.
-@@ -2432,14 +2431,13 @@ static int amdgpu_ttm_fill_mem(struct amdgpu_ring *ring,
-  * @k_job_id: trace id
-  *
-  */
--int amdgpu_fill_buffer(struct amdgpu_ttm_buffer_entity *entity,
--		       struct amdgpu_bo *bo,
--		       uint32_t src_data,
--		       struct dma_resv *resv,
--		       struct dma_fence **out_fence,
--		       struct dma_fence *dependency,
--		       bool consider_clear_status,
--		       u64 k_job_id)
-+int amdgpu_ttm_clear_buffer(struct amdgpu_ttm_buffer_entity *entity,
-+			    struct amdgpu_bo *bo,
-+			    struct dma_resv *resv,
-+			    struct dma_fence **out_fence,
-+			    struct dma_fence *dependency,
-+			    bool consider_clear_status,
-+			    u64 k_job_id)
- {
- 	struct amdgpu_device *adev = amdgpu_ttm_adev(bo->tbo.bdev);
- 	struct dma_fence *fence = NULL;
-@@ -2486,7 +2484,7 @@ int amdgpu_fill_buffer(struct amdgpu_ttm_buffer_entity *entity,
- 			goto error;
- 
- 		r = amdgpu_ttm_fill_mem(ring, &entity->base,
--					src_data, to, cur_size, resv,
-+					0, to, cur_size, resv,
- 					&next, true, k_job_id);
- 		if (r)
- 			goto error;
-diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.h b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.h
-index e01c2173d79f..585aee9a173b 100644
---- a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.h
-+++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.h
-@@ -181,14 +181,13 @@ int amdgpu_copy_buffer(struct amdgpu_ring *ring,
- 		       struct dma_resv *resv,
- 		       struct dma_fence **fence,
- 		       bool vm_needs_flush, uint32_t copy_flags);
--int amdgpu_fill_buffer(struct amdgpu_ttm_buffer_entity *entity,
--		       struct amdgpu_bo *bo,
--		       uint32_t src_data,
--		       struct dma_resv *resv,
--		       struct dma_fence **out_fence,
--		       struct dma_fence *dependency,
--		       bool consider_clear_status,
--		       u64 k_job_id);
-+int amdgpu_ttm_clear_buffer(struct amdgpu_ttm_buffer_entity *entity,
-+			    struct amdgpu_bo *bo,
-+			    struct dma_resv *resv,
-+			    struct dma_fence **out_fence,
-+			    struct dma_fence *dependency,
-+			    bool consider_clear_status,
-+			    u64 k_job_id);
- 
- int amdgpu_ttm_alloc_gart(struct ttm_buffer_object *bo);
- void amdgpu_ttm_recover_gart(struct ttm_buffer_object *tbo);
--- 
-2.43.0
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gVGh1LCAyMDI1LTExLTEzIGF0IDE1OjUxICswMTAwLCBDaHJpc3RpYW4gS8O2bmlnIHdyb3Rl
+Og0KPiBIaSBldmVyeW9uZSwNCj4gDQo+IGRtYV9mZW5jZXMgaGF2ZSBldmVyIGxpdmVkIHVuZGVy
+IHRoZSB0eXJhbm55IGRpY3RhdGVkIGJ5IHRoZSBtb2R1bGUNCj4gbGlmZXRpbWUgb2YgdGhlaXIg
+aXNzdWVyLCBsZWFkaW5nIHRvIGNyYXNoZXMgc2hvdWxkIGFueWJvZHkgc3RpbGwgaG9sZGluZw0K
+PiBhIHJlZmVyZW5jZSB0byBhIGRtYV9mZW5jZSB3aGVuIHRoZSBtb2R1bGUgb2YgdGhlIGlzc3Vl
+ciB3YXMgdW5sb2FkZWQuDQo+IA0KPiBUaGUgYmFzaWMgcHJvYmxlbSBpcyB0aGF0IHdoZW4gYnVm
+ZmVyIGFyZSBzaGFyZWQgYmV0d2VlbiBkcml2ZXJzDQo+IGRtYV9mZW5jZSBvYmplY3RzIGNhbiBs
+ZWFrIGludG8gZXh0ZXJuYWwgZHJpdmVycyBhbmQgc3RheSB0aGVyZSBldmVuDQo+IGFmdGVyIHRo
+ZXkgYXJlIHNpZ25hbGVkLiBUaGUgZG1hX3Jlc3Ygb2JqZWN0IGZvciBleGFtcGxlIG9ubHkgbGF6
+eSByZWxlYXNlcw0KPiBkbWFfZmVuY2VzLg0KPiANCj4gU28gd2hhdCBoYXBwZW5zIGlzIHRoYXQg
+d2hlbiB0aGUgbW9kdWxlIHdobyBvcmlnaW5hbGx5IGNyZWF0ZWQgdGhlIGRtYV9mZW5jZQ0KPiB1
+bmxvYWRzIHRoZSBkbWFfZmVuY2Vfb3BzIGZ1bmN0aW9uIHRhYmxlIGJlY29tZXMgdW5hdmFpbGFi
+bGUgYXMgd2VsbCBhbmQgc28NCj4gYW55IGF0dGVtcHQgdG8gcmVsZWFzZSB0aGUgZmVuY2UgY3Jh
+c2hlcyB0aGUgc3lzdGVtLg0KPiANCj4gUHJldmlvdXNseSB2YXJpb3VzIGFwcHJvYWNoZXMgaGF2
+ZSBiZWVuIGRpc2N1c3NlZCwgaW5jbHVkaW5nIGNoYW5naW5nIHRoZQ0KPiBsb2NraW5nIHNlbWFu
+dGljcyBvZiB0aGUgZG1hX2ZlbmNlIGNhbGxiYWNrcyAoYnkgbWUpIGFzIHdlbGwgYXMgdXNpbmcg
+dGhlDQo+IGRybSBzY2hlZHVsZXIgYXMgaW50ZXJtZWRpYXRlIGxheWVyIChieSBTaW1hKSB0byBk
+aXNjb25uZWN0IGRtYV9mZW5jZXMNCj4gZnJvbSB0aGVpciBhY3R1YWwgdXNlcnMsIGJ1dCBub25l
+IG9mIHRoZW0gYXJlIGFjdHVhbGx5IHNvbHZpbmcgYWxsIHByb2JsZW1zLg0KPiANCj4gVHZydGtv
+IGRpZCBzb21lIHJlYWxseSBuaWNlIHByZXJlcXVpc2l0ZSB3b3JrIGJ5IHByb3RlY3RpbmcgdGhl
+IHJldHVybmVkDQo+IHN0cmluZ3Mgb2YgdGhlIGRtYV9mZW5jZV9vcHMgYnkgUkNVLiBUaGlzIHdh
+eSBkbWFfZmVuY2UgY3JlYXRvcnMgd2hlcmUNCj4gYWJsZSB0byBqdXN0IHdhaXQgZm9yIGFuIFJD
+VSBncmFjZSBwZXJpb2QgYWZ0ZXIgZmVuY2Ugc2lnbmFsaW5nIGJlZm9yZQ0KPiB0aGV5IGNvdWxk
+IGJlIHNhdmUgdG8gZnJlZSB0aG9zZSBkYXRhIHN0cnVjdHVyZXMuDQo+IA0KPiBOb3cgdGhpcyBw
+YXRjaCBzZXQgaGVyZSBnb2VzIGEgc3RlcCBmdXJ0aGVyIGFuZCBwcm90ZWN0cyB0aGUgd2hvbGUN
+Cj4gZG1hX2ZlbmNlX29wcyBzdHJ1Y3R1cmUgYnkgUkNVLCBzbyB0aGF0IGFmdGVyIHRoZSBmZW5j
+ZSBzaWduYWxzIHRoZQ0KPiBwb2ludGVyIHRvIHRoZSBkbWFfZmVuY2Vfb3BzIGlzIHNldCB0byBO
+VUxMIHdoZW4gdGhlcmUgaXMgbm8gd2FpdCBub3INCj4gcmVsZWFzZSBjYWxsYmFjayBnaXZlbi4g
+QWxsIGZ1bmN0aW9uYWxpdHkgd2hpY2ggdXNlIHRoZSBkbWFfZmVuY2Vfb3BzDQo+IHJlZmVyZW5j
+ZSBhcmUgcHV0IGluc2lkZSBhbiBSQ1UgY3JpdGljYWwgc2VjdGlvbiwgZXhjZXB0IGZvciB0aGUN
+Cj4gZGVwcmVjYXRlZCBpc3N1ZXIgc3BlY2lmaWMgd2FpdCBhbmQgb2YgY291cnNlIHRoZSBvcHRp
+b25hbCByZWxlYXNlDQo+IGNhbGxiYWNrLg0KPiANCj4gQWRkaXRpb25hbCB0byB0aGUgUkNVIGNo
+YW5nZXMgdGhlIGxvY2sgcHJvdGVjdGluZyB0aGUgZG1hX2ZlbmNlIHN0YXRlDQo+IHByZXZpb3Vz
+bHkgaGFkIHRvIGJlIGFsbG9jYXRlZCBleHRlcm5hbC4gVGhpcyBzZXQgaGVyZSBub3cgY2hhbmdl
+cyB0aGUNCj4gZnVuY3Rpb25hbGl0eSB0byBtYWtlIHRoYXQgZXh0ZXJuYWwgbG9jayBvcHRpb25h
+bCBhbmQgYWxsb3dzIGRtYV9mZW5jZXMNCj4gdG8gdXNlIGFuIGlubGluZSBsb2NrIGFuZCBiZSBz
+ZWxmIGNvbnRhaW5lZC4NCj4gDQo+IFRoaXMgcGF0Y2ggc2V0IGFkZHJlc3NlZCBhbGwgcHJldmlv
+dXMgY29kZSByZXZpZXcgY29tbWVudHMgYW5kIGlzIGJhc2VkDQo+IG9uIGRybS10aXAsIGluY2x1
+ZGVzIG15IGNoYW5nZXMgZm9yIGFtZGdwdSBhcyB3ZWxsIGFzIE1hdGhldydzIHBhdGNoZXMgZm9y
+IFhFLg0KPiANCj4gR29pbmcgdG8gcHVzaCB0aGUgY29yZSBETUEtYnVmIGNoYW5nZXMgdG8gZHJt
+LW1pc2MtbmV4dCBhcyBzb29uIGFzIEkgZ2V0DQo+IHRoZSBhcHByb3ByaWF0ZSByYi4gVGhlIGRy
+aXZlciBzcGVjaWZpYyBjaGFuZ2VzIGNhbiBnbyB1cHN0cmVhbSB0aHJvdWdoDQo+IHRoZSBkcml2
+ZXIgY2hhbm5lbHMgYXMgbmVjZXNzYXJ5Lg0KDQpObyBjaGFuZ2Vsb2c/IDooDQoNClAuDQoNCj4g
+DQo+IFBsZWFzZSByZXZpZXcgYW5kIGNvbW1lbnQsDQo+IENocmlzdGlhbi4NCj4gDQo+IA0KDQpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0t
+c2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5z
+dWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFy
+by5vcmcK
