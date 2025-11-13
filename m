@@ -2,118 +2,142 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id UF7GCMP84GlloAAAu9opvQ
+	id WKDrJcj84GlloAAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:14:11 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:14:16 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 80FBE410611
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:14:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 18987410619
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:14:16 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 94393406AA
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:14:09 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
-	by lists.linaro.org (Postfix) with ESMTPS id 6F1B53F821
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 13 Nov 2025 15:03:23 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 2F4CE40952
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:14:15 +0000 (UTC)
+Received: from PH0PR06CU001.outbound.protection.outlook.com (mail-westus3azon11011051.outbound.protection.outlook.com [40.107.208.51])
+	by lists.linaro.org (Postfix) with ESMTPS id DBB3A3F6C7
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 13 Nov 2025 16:07:03 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=P83XlXUU;
-	dmarc=pass (policy=none) header.from=intel.com;
-	spf=pass (lists.linaro.org: domain of andriy.shevchenko@linux.intel.com designates 198.175.65.21 as permitted sender) smtp.mailfrom=andriy.shevchenko@linux.intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1763046203; x=1794582203;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=OtFs4nYXEH1ThWKykhpKfwgYG7osOn2qi/Z49bIrWUw=;
-  b=P83XlXUU+Sw8SFFmPheCDzsVVp2UX30P6zgEZ5/4VJpcxSp8hdl8q5cO
-   m3SzU04Vu28j0LdBvnsBg98CMeZFF136/S68vymRy1XZ8cHaNhScDchyI
-   sYxTliuxI+qJ7diHmHvKjvBIS/bTMxdDm/GRs45r0ftFPJbqBqF90Gbd/
-   SVCEwJZ4SLyw4dGtuNdttq+rolksHykqnQ29FOaigBfEXa8iUdiaY3RWa
-   9cBTVaPI6sb4LXOSlonTxADHsda1RhdXYJqSDO51XJiJakA1qs7VOWJhm
-   KQqL183C4Wyhinf7F0VILk66o2GtLkdleVoVNelBn5R4DnVVS4Md8WB3f
-   A==;
-X-CSE-ConnectionGUID: yEk+jhopSqKAaoBkOQuGVw==
-X-CSE-MsgGUID: wxoR6IzRSlCogYm8Ou9NDQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11531"; a="65054763"
-X-IronPort-AV: E=Sophos;i="6.17,312,1747724400";
-   d="scan'208";a="65054763"
-Received: from fmviesa001.fm.intel.com ([10.60.135.141])
-  by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Nov 2025 07:03:03 -0800
-X-CSE-ConnectionGUID: wsJEWqiyRSOTWbBWxtwAyw==
-X-CSE-MsgGUID: TObbgzKmSz6dKnfJs+E4CA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.19,302,1754982000";
-   d="scan'208";a="220325238"
-Received: from black.igk.intel.com ([10.91.253.5])
-  by fmviesa001.fm.intel.com with ESMTP; 13 Nov 2025 07:02:55 -0800
-Received: by black.igk.intel.com (Postfix, from userid 1003)
-	id 88811AB; Thu, 13 Nov 2025 16:02:19 +0100 (CET)
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: Corey Minyard <corey@minyard.net>,
-	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
-	"Dr. David Alan Gilbert" <linux@treblig.org>,
-	Alex Deucher <alexander.deucher@amd.com>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Rob Clark <robin.clark@oss.qualcomm.com>,
-	Matthew Brost <matthew.brost@intel.com>,
-	Ulf Hansson <ulf.hansson@linaro.org>,
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-	Aleksandr Loktionov <aleksandr.loktionov@intel.com>,
-	Vitaly Lifshits <vitaly.lifshits@intel.com>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Niklas Cassel <cassel@kernel.org>,
-	Calvin Owens <calvin@wbinvd.org>,
-	Vadim Fedorenko <vadim.fedorenko@linux.dev>,
-	Sagi Maimon <maimon.sagi@gmail.com>,
-	"Martin K. Petersen" <martin.petersen@oracle.com>,
-	Karan Tilak Kumar <kartilak@cisco.com>,
-	Hans Verkuil <hverkuil+cisco@kernel.org>,
-	Casey Schaufler <casey@schaufler-ca.com>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Petr Mladek <pmladek@suse.com>,
-	Viacheslav Dubeyko <Slava.Dubeyko@ibm.com>,
-	Max Kellermann <max.kellermann@ionos.com>,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	openipmi-developer@lists.sourceforge.net,
-	linux-media@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	linaro-mm-sig@lists.linaro.org,
-	amd-gfx@lists.freedesktop.org,
-	linux-arm-msm@vger.kernel.org,
-	freedreno@lists.freedesktop.org,
-	intel-xe@lists.freedesktop.org,
-	linux-mmc@vger.kernel.org,
-	netdev@vger.kernel.org,
-	intel-wired-lan@lists.osuosl.org,
-	linux-pci@vger.kernel.org,
-	linux-s390@vger.kernel.org,
-	linux-scsi@vger.kernel.org,
-	linux-staging@lists.linux.dev,
-	ceph-devel@vger.kernel.org,
-	linux-trace-kernel@vger.kernel.org
-Date: Thu, 13 Nov 2025 15:32:35 +0100
-Message-ID: <20251113150217.3030010-22-andriy.shevchenko@linux.intel.com>
-X-Mailer: git-send-email 2.50.1
-In-Reply-To: <20251113150217.3030010-1-andriy.shevchenko@linux.intel.com>
-References: <20251113150217.3030010-1-andriy.shevchenko@linux.intel.com>
+	dkim=pass header.d=amd.com header.s=selector1 header.b=zWj1sQM8;
+	dmarc=pass (policy=quarantine) header.from=amd.com;
+	arc=pass ("microsoft.com:s=arcselector10001:i=1");
+	spf=pass (lists.linaro.org: domain of Pierre-eric.Pelloux-prayer@amd.com designates 40.107.208.51 as permitted sender) smtp.mailfrom=Pierre-eric.Pelloux-prayer@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=wyd9KVpqu8QT9CBYIG/jECIv7WJLsrdZPQ9FKdEV/o8y9tM1Cn72WYD8gMKh+n26rbhEl4X6Cx7OBLUU2bW2WssfVYg1QHJeLdlHmVA019FJFVEyH+5dNYZad/AJAKXuibIchstxfTJfl15u+YqBIR7pU9EbDNwktshD0Lf8uBAP/fN7xSrf0bl6j9QvOzM3Ej01lUQbDwxIfcNaH4DA+NiNqRjMaTv+99gYRuLpGu/CWZjqxWSq53qu4rntKbKx5fOnPI6uTKkX5tuUnt0YdubhxuaE3Id3G42oSv4EceDgLEhDXhsIvZsgw87yBwYeJdKKiKe6QbX5KSMgMErvsg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=5T6C+2maAlhls6pQTQ+2SN2EX1bfix86R8KOznZlkHg=;
+ b=VyIcHlF6ISnjEsd06fhxPMMoflqxTOZ0tZxTk4wZ2qmU5hRRCw+zdQod1UVxTEwAV8K4Xt205hXIZsGrUs4G6wGDro1B7OemFiLtgyXZ5ROmQzaVtgNPKCBAhbmO9DXLwxYfaeMKPQ9gZf8juM+fl2dFZBhC6yE6JIzXcOlQF6qNhvxX0adyqRlsbxr1c9fWA18onj2P970wDWB8x6aAIj0uuSV/No0mRe8dNWfqgNsBQzHwlpAL6pIaTbVPDcqp3WaBGJK4l23kl90WRrxdkcDqxCK2XbYc7FiZt7VsgcfXHZWIMxEUkOEOr7L6d/D9A4/FVVYY33A0vCQW1BftNg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=gmail.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=5T6C+2maAlhls6pQTQ+2SN2EX1bfix86R8KOznZlkHg=;
+ b=zWj1sQM89KFYBYhP1C+2epVEv4LUOdVwx9k6h9oUdxXl0enxnmfIlONEjlbtuEVeLeEFnUUKXqnKp3vckESRgi51FchbzwXUNtdY6zvCYMGjwViAFWT/nl6L/8OVQIVY8OT7Cyzo6zxnQP3bitTldI5KNICxBHqInsjOa6Vue2U=
+Received: from CH0P220CA0026.NAMP220.PROD.OUTLOOK.COM (2603:10b6:610:ef::22)
+ by LV8PR12MB9134.namprd12.prod.outlook.com (2603:10b6:408:180::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.17; Thu, 13 Nov
+ 2025 16:07:01 +0000
+Received: from CH1PEPF0000A346.namprd04.prod.outlook.com
+ (2603:10b6:610:ef:cafe::7f) by CH0P220CA0026.outlook.office365.com
+ (2603:10b6:610:ef::22) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9320.17 via Frontend Transport; Thu,
+ 13 Nov 2025 16:07:01 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ CH1PEPF0000A346.mail.protection.outlook.com (10.167.244.11) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9320.13 via Frontend Transport; Thu, 13 Nov 2025 16:07:00 +0000
+Received: from FRAPPELLOUX01-WSLPUB.amd.com (10.180.168.240) by
+ satlexmb07.amd.com (10.181.42.216) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.17; Thu, 13 Nov 2025 08:06:56 -0800
+From: Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>
+To: 
+Date: Thu, 13 Nov 2025 17:05:41 +0100
+Message-ID: <20251113160632.5889-1-pierre-eric.pelloux-prayer@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
+ (10.181.42.216)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH1PEPF0000A346:EE_|LV8PR12MB9134:EE_
+X-MS-Office365-Filtering-Correlation-Id: c543ec43-7803-41dd-5bd2-08de22ceadf4
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|82310400026|376014|1800799024|36860700013|7416014;
+X-Microsoft-Antispam-Message-Info: 
+	=?utf-8?B?WWU0SytQeDRsWUdMSGttbFBKWEpxUHR3eDhuYnZRWE4zZEU3WnZiUEtla05F?=
+ =?utf-8?B?cnpCMjRMSzljWEJObzdocHNsKzRZMDJiYWxYYW5rNzZWMFhlVmdaLzhoWE9y?=
+ =?utf-8?B?ZnB2LzN0dTJVS3FUcThNRncra0VQQjRwVnB1VWZTMS9OWk50MUU0N1h1Wm9r?=
+ =?utf-8?B?KytTZ3JaNlo3NDFtSzRQcmVrWFNVNHlwOFN2ZzFhM0JRVlMybGlRMi85YTVU?=
+ =?utf-8?B?VGpvbmVQKzF2STB1Wk1NMzdsL050SzVoaDBwVXpLTUdSMng4ZFlsOURWVmVu?=
+ =?utf-8?B?cDFkNVFPMjl2Nis3by9mcEt3UzNRVlV6Tk5KL2N2RzgzQnQxVlUwVXljd3F5?=
+ =?utf-8?B?NkViRlAwVDIvOXlKNFQ5REVTQytLVndVSzZmdXpnQUhTRWhkT3UvMVA1YmRy?=
+ =?utf-8?B?QkhUN21ndUVveTVieitvK3gvN0FpQXZwS3ZCY0M5R2l5Tzk3ekJRdFZZeWxJ?=
+ =?utf-8?B?SW1HRWwzQjZ2UXJSWkEzS3F3MjNKSzdsL1NCVE1sOWhZNDI2a2dxZEdjdUIy?=
+ =?utf-8?B?RWJpVTZaRCtGdVJ1U0ZmSmVYTEZ0c0Z5NHVVZjdpODMwa1YrdGd4TFBzODFF?=
+ =?utf-8?B?YVVOdDVJcG1EN2Z4TnJMa1B1aUxnaXBvQ1VuRjZyUEF2RXY5YncwZGQ0WUJU?=
+ =?utf-8?B?eHhraFllbEdxMWJQdzhjWFUxQ01ZN2liZXl6SmlNSkJTNkdSeXh4ODl4ZDVH?=
+ =?utf-8?B?VDlyY0p3VTBwT1d6eW13YmhLZitNdmtoM1dHeFUyYTErLzFvVEJCNXpEZFRu?=
+ =?utf-8?B?Ni81NXJQc0FqWlRwMVcvOCtBeDZRUG96KzBQWElFUjk4OW9KblZzUE95SUJJ?=
+ =?utf-8?B?dm1SczdoVmFJU1FRSUpaUXMvd0t4YmdkaWdTWXJYQlFLd081eE5LSXY1SG82?=
+ =?utf-8?B?aUJ4Ym1EZW9hYjAyY2FzMS9EcGwxLzg3N2haYkRESW1ublVPQmEzb21lVnVr?=
+ =?utf-8?B?NmlKSXpPRkVjb3VwQ0xzM0FGVzFmTy9CWmRBQlRRNTd6WHNNckFRYk1KZDFR?=
+ =?utf-8?B?ZzluOXllM2tmL010cVA3NUpRK1hNWmVDR0hjQm9yZW5nT29sa3ZRVTBVYzhv?=
+ =?utf-8?B?OEVEV0pUellianZ0TUZ6aEhuTEZnZ2xwNUJmTk9rMHp3eWhmWFIyeWJUczVh?=
+ =?utf-8?B?MTIwMDY3cno2d3hpYURtQ0o1bmlSSE1kbkRaZWJyV1ZsQ1o5Zy9UbXZyTnMv?=
+ =?utf-8?B?YVZ5dmtaTUcrRjIvcFZLZ3VlckZQc0VUa3AyaDJVdnNCWVJZZ1ZiblFtY1Ux?=
+ =?utf-8?B?bmpSbGQvSUp2a2htNGcveWh1dW5LdEswT3ZTNzhSYnhnVmFFVHk4d3BwNW9H?=
+ =?utf-8?B?c1J3ZzJhWGd0d1o5NVk1UWNwbXVobmVvMTZoY3UxcmZ6QkdaMERJSlRJanhm?=
+ =?utf-8?B?TWd0d0xrUFFacU1ndFpGOTlCVU1abXVMNWpSNTZndlBWTGlRWC9mNzZTOGZj?=
+ =?utf-8?B?OW0rZWs3UjV4RlhtdGdqbU9SWVJjYTVndExkbThiZVp6aFh1Z0U3ek01S01H?=
+ =?utf-8?B?aVdXSUNaQzdSWjBDaUk2TUNhSFY4OHVXcitrN0lmVE9uVS9XRHVrQU9XT21L?=
+ =?utf-8?B?ZzByVXp0TVlnMzltVzJqaG00bUoxMlk4Qjk1ejZDZ0VrSXF4UkNwbVJjejNC?=
+ =?utf-8?B?T0pXWkxTenovN01Mc3pKZkd1SWh0QVBYTWY3dElxS0dBN3ZzalBBQXk5Wlhx?=
+ =?utf-8?B?SGRObVdCaWVlOVhQTEZFc2JpOVR0UUM1aEFuVy9kVklNWHluc2wyaHl4MkJS?=
+ =?utf-8?B?RjFFZVBZY0VlZjZmbzFJdm1XTzJFd0VPTDhNOVZDY0hJMXIvRXh2TGVjUWI2?=
+ =?utf-8?B?Q2gvOUtGalFMZmViR3J0VkdYVit3SWc0RGJuS01MV0gzSjdreWx2UHVkOUtN?=
+ =?utf-8?B?QkE2UHYva1lUN3REK1NiaUJlZWlrdDI4YjY4TDdxVzhBS2ZLVFVkM2E0TmlP?=
+ =?utf-8?B?UHdBNXJka0pqd0NqcCtZL0RzKzFoSDk5Q1hCdTg5OURDZWJIeWdYODMvNHFQ?=
+ =?utf-8?B?cEh0NEZRU29RNndURW82TFp1S1QyNnZnR0NOSHNvL0VDMFdKTUI4UEFvNlQ2?=
+ =?utf-8?Q?fNtxpJ?=
+X-Forefront-Antispam-Report: 
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013)(7416014);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Nov 2025 16:07:00.9733
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: c543ec43-7803-41dd-5bd2-08de22ceadf4
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	CH1PEPF0000A346.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV8PR12MB9134
 X-Spamd-Bar: ----
-X-MailFrom: andriy.shevchenko@linux.intel.com
+X-MailFrom: Pierre-eric.Pelloux-prayer@amd.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: WXUW2G6FS6VZQA4VZH2XVKQSI4Z7OPLZ
-X-Message-ID-Hash: WXUW2G6FS6VZQA4VZH2XVKQSI4Z7OPLZ
-X-Mailman-Approved-At: Thu, 16 Apr 2026 14:56:46 +0000
-CC: Rasmus Villemoes <linux@rasmusvillemoes.dk>, Sergey Senozhatsky <senozhatsky@chromium.org>, Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>, Gustavo Padovan <gustavo@padovan.org>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>, Konrad Dybcio <konradybcio@kernel.org>, Lucas De Marchi <lucas.demarchi@intel.com>, =?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Vladimir Oltean <olteanv@gmail.com>, Andrew Lunn <andrew@lunn.ch>, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Tony Nguyen <anthony.l.nguyen@
- intel.com>, Przemek Kitszel <przemyslaw.kitszel@intel.com>, =?UTF-8?q?Krzysztof=20Wilczy=C5=84ski?= <kwilczynski@kernel.org>, Kishon Vijay Abraham I <kishon@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>, Rodolfo Giometti <giometti@enneenne.com>, Jonathan Lemon <jonathan.lemon@gmail.com>, Richard Cochran <richardcochran@gmail.com>, Stefan Haberland <sth@linux.ibm.com>, Jan Hoeppner <hoeppner@linux.ibm.com>, Heiko Carstens <hca@linux.ibm.com>, Vasily Gorbik <gor@linux.ibm.com>, Alexander Gordeev <agordeev@linux.ibm.com>, Christian Borntraeger <borntraeger@linux.ibm.com>, Sven Schnelle <svens@linux.ibm.com>, Satish Kharat <satishkh@cisco.com>, Sesidhar Baddela <sebaddel@cisco.com>, "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>, Mauro Carvalho Chehab <mchehab@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Xiubo Li <xiubli@redhat.com>, Ilya Dryomov <idryomov@gmail.com>, Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficio
- s.com>, Andrew Morton <akpm@linux-foundation.org>
+Message-ID-Hash: YHNPLAT665VKZ4YQLWUO2UU6KIDKDYEK
+X-Message-ID-Hash: YHNPLAT665VKZ4YQLWUO2UU6KIDKDYEK
+X-Mailman-Approved-At: Thu, 16 Apr 2026 14:56:47 +0000
+CC: Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Alex Deucher <alexander.deucher@amd.com>, David Airlie <airlied@gmail.com>, Felix Kuehling <Felix.Kuehling@amd.com>, Harry Wentland <harry.wentland@amd.com>, Huang Rui <ray.huang@amd.com>, Leo Li <sunpeng.li@amd.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Thomas Zimmermann <tzimmermann@suse.de>, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v3 21/21] tracing: Switch to use %ptSp
+Subject: [Linaro-mm-sig] [PATCH v2 00/20] drm/amdgpu: use all SDMA instances for TTM clears and moves
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WXUW2G6FS6VZQA4VZH2XVKQSI4Z7OPLZ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YHNPLAT665VKZ4YQLWUO2UU6KIDKDYEK/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -122,70 +146,134 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [4.09 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [4.99 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[amd.com : SPF not aligned (relaxed),quarantine];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
+	DATE_IN_PAST(1.00)[3695];
+	R_DKIM_REJECT(1.00)[amd.com:s=selector1];
 	MID_CONTAINS_FROM(1.00)[];
-	R_DKIM_REJECT(1.00)[intel.com:s=Intel];
-	DATE_IN_PAST(1.00)[3696];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
-	DMARC_POLICY_SOFTFAIL(0.10)[intel.com : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	TO_DN_SOME(0.00)[];
-	FREEMAIL_CC(0.00)[rasmusvillemoes.dk,chromium.org,lwn.net,linaro.org,padovan.org,gmail.com,ffwll.ch,linux.intel.com,kernel.org,linux.dev,poorly.run,somainline.org,intel.com,lunn.ch,davemloft.net,google.com,redhat.com, intel.com,enneenne.com,linux.ibm.com,cisco.com,HansenPartnership.com,linuxfoundation.org,efficio s.com,linux-foundation.org];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_TO(0.00)[minyard.net,amd.com,treblig.org,suse.de,oss.qualcomm.com,intel.com,linaro.org,linux.intel.com,kernel.org,wbinvd.org,linux.dev,gmail.com,oracle.com,cisco.com,schaufler-ca.com,goodmis.org,suse.com,ibm.com,ionos.com,vger.kernel.org,lists.sourceforge.net,lists.freedesktop.org,lists.linaro.org,lists.osuosl.org,lists.linux.dev];
-	GREYLIST(0.00)[pass,meta];
-	ARC_NA(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:-];
-	RCPT_COUNT_GT_50(0.00)[93];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FROM_NEQ_ENVFROM(0.00)[andriy.shevchenko@linux.intel.com,linaro-mm-sig-bounces@lists.linaro.org];
+	GREYLIST(0.00)[pass,meta];
+	SUSPICIOUS_AUTH_ORIGIN(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[18];
+	RCVD_TLS_LAST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,cisco];
-	NEURAL_SPAM(0.00)[0.610];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	FREEMAIL_CC(0.00)[amd.com,gmail.com,linux.intel.com,kernel.org,ffwll.ch,linaro.org,suse.de,lists.freedesktop.org,lists.linaro.org,vger.kernel.org];
+	DKIM_TRACE(0.00)[amd.com:-];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.intel.com:mid,linaro.org:email,goodmis.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,intel.com:email]
-X-Rspamd-Queue-Id: 80FBE410611
+	RCVD_COUNT_FIVE(0.00)[6];
+	FROM_NEQ_ENVFROM(0.00)[pierre-eric.pelloux-prayer@amd.com,linaro-mm-sig-bounces@lists.linaro.org];
+	TO_DN_SOME(0.00)[];
+	HAS_XOIP(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	NEURAL_HAM(-0.00)[-0.661];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[amd.com:mid,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,lists.freedesktop.org:url]
+X-Rspamd-Queue-Id: 18987410619
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Use %ptSp instead of open coded variants to print content of
-struct timespec64 in human readable format.
+The drm/ttm patch modifies TTM to support multiple contexts for the pipelined moves.
 
-Acked-by: Steven Rostedt (Google) <rostedt@goodmis.org>
-Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
----
- kernel/trace/trace_output.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+Then amdgpu/ttm is updated to express dependencies between jobs explicitely,
+instead of relying on the ordering of execution guaranteed by the use of a single
+instance.
+With all of this in place, we can use multiple entities, with each having access
+to the available SDMA instances.
 
-diff --git a/kernel/trace/trace_output.c b/kernel/trace/trace_output.c
-index ebbab3e9622b..cc2d3306bb60 100644
---- a/kernel/trace/trace_output.c
-+++ b/kernel/trace/trace_output.c
-@@ -1490,12 +1490,12 @@ trace_hwlat_print(struct trace_iterator *iter, int flags,
- 
- 	trace_assign_type(field, entry);
- 
--	trace_seq_printf(s, "#%-5u inner/outer(us): %4llu/%-5llu ts:%lld.%09ld count:%d",
-+	trace_seq_printf(s, "#%-5u inner/outer(us): %4llu/%-5llu ts:%ptSp count:%d",
- 			 field->seqnum,
- 			 field->duration,
- 			 field->outer_duration,
--			 (long long)field->timestamp.tv_sec,
--			 field->timestamp.tv_nsec, field->count);
-+			 &field->timestamp,
-+			 field->count);
- 
- 	if (field->nmi_count) {
- 		/*
+This rework also gives the opportunity to merge the clear functions into a single
+one and to optimize a bit GART usage.
+
+(The first patch of the series has already been merged through drm-misc but I'm
+including it here to reduce conflicts)
+
+
+v2:
+  - addressed comments from Christian
+  - dropped "drm/amdgpu: prepare amdgpu_fill_buffer to use N entities" and
+    "drm/amdgpu: use multiple entities in amdgpu_fill_buffer"
+  - added "drm/admgpu: handle resv dependencies in amdgpu_ttm_map_buffer",
+    "drm/amdgpu: round robin through clear_entities in amdgpu_fill_buffer"
+  - reworked how sdma rings/scheds are passed to amdgpu_ttm
+v1: https://lists.freedesktop.org/archives/dri-devel/2025-November/534517.html
+
+Pierre-Eric Pelloux-Prayer (20):
+  drm/amdgpu: give each kernel job a unique id
+  drm/ttm: rework pipelined eviction fence handling
+  drm/amdgpu: remove direct_submit arg from amdgpu_copy_buffer
+  drm/amdgpu: introduce amdgpu_ttm_buffer_entity
+  drm/amdgpu: pass the entity to use to ttm functions
+  drm/amdgpu: statically assign gart windows to ttm entities
+  drm/amdgpu: allocate multiple clear entities
+  drm/amdgpu: allocate multiple move entities
+  drm/amdgpu: pass optional dependency to amdgpu_fill_buffer
+  drm/admgpu: handle resv dependencies in amdgpu_ttm_map_buffer
+  drm/amdgpu: round robin through clear_entities in amdgpu_fill_buffer
+  drm/amdgpu: use TTM_NUM_MOVE_FENCES when reserving fences
+  drm/amdgpu: use multiple entities in amdgpu_move_blit
+  drm/amdgpu: introduce amdgpu_sdma_set_vm_pte_scheds
+  drm/amdgpu: pass all the sdma scheds to amdgpu_mman
+  drm/amdgpu: give ttm entities access to all the sdma scheds
+  drm/amdgpu: get rid of amdgpu_ttm_clear_buffer
+  drm/amdgpu: rename amdgpu_fill_buffer as amdgpu_ttm_clear_buffer
+  drm/amdgpu: use larger gart window when possible
+  drm/amdgpu: double AMDGPU_GTT_MAX_TRANSFER_SIZE
+
+ drivers/gpu/drm/amd/amdgpu/amdgpu.h           |   4 +
+ drivers/gpu/drm/amd/amdgpu/amdgpu_benchmark.c |   9 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_cs.c        |   5 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_device.c    |   8 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gem.c       |   2 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gfx.c       |   3 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gmc.c       |  25 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gtt_mgr.c   |   6 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_job.c       |   5 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_job.h       |  19 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_jpeg.c      |   3 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_object.c    |  14 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c       | 435 +++++++++++-------
+ drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.h       |  50 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_uvd.c       |   3 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vce.c       |   5 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vcn.c       |   8 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vkms.c      |   6 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vm.c        |  26 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vm.h        |   2 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vm_cpu.c    |   4 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vm_pt.c     |   4 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vm_sdma.c   |  12 +-
+ drivers/gpu/drm/amd/amdgpu/cik_sdma.c         |  12 +-
+ drivers/gpu/drm/amd/amdgpu/sdma_v2_4.c        |  12 +-
+ drivers/gpu/drm/amd/amdgpu/sdma_v3_0.c        |  12 +-
+ drivers/gpu/drm/amd/amdgpu/sdma_v4_0.c        |  19 +-
+ drivers/gpu/drm/amd/amdgpu/sdma_v4_4_2.c      |  19 +-
+ drivers/gpu/drm/amd/amdgpu/sdma_v5_0.c        |  18 +-
+ drivers/gpu/drm/amd/amdgpu/sdma_v5_2.c        |  18 +-
+ drivers/gpu/drm/amd/amdgpu/sdma_v6_0.c        |  12 +-
+ drivers/gpu/drm/amd/amdgpu/sdma_v7_0.c        |  12 +-
+ drivers/gpu/drm/amd/amdgpu/si_dma.c           |  12 +-
+ drivers/gpu/drm/amd/amdgpu/uvd_v6_0.c         |   6 +-
+ drivers/gpu/drm/amd/amdgpu/uvd_v7_0.c         |   6 +-
+ drivers/gpu/drm/amd/amdkfd/kfd_migrate.c      |  32 +-
+ drivers/gpu/drm/amd/amdkfd/kfd_svm.c          |   3 +-
+ .../amd/display/amdgpu_dm/amdgpu_dm_plane.c   |   6 +-
+ .../drm/amd/display/amdgpu_dm/amdgpu_dm_wb.c  |   6 +-
+ .../gpu/drm/ttm/tests/ttm_bo_validate_test.c  |  11 +-
+ drivers/gpu/drm/ttm/tests/ttm_resource_test.c |   5 +-
+ drivers/gpu/drm/ttm/ttm_bo.c                  |  47 +-
+ drivers/gpu/drm/ttm/ttm_bo_util.c             |  38 +-
+ drivers/gpu/drm/ttm/ttm_resource.c            |  31 +-
+ include/drm/ttm/ttm_resource.h                |  29 +-
+ 45 files changed, 588 insertions(+), 436 deletions(-)
+
 -- 
-2.50.1
+2.43.0
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
