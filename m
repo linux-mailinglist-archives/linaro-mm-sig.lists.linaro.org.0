@@ -2,117 +2,99 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id A7A9BC5817A
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 13 Nov 2025 15:57:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3E17EC5A024
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 13 Nov 2025 21:50:26 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C690E3F889
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 13 Nov 2025 14:57:38 +0000 (UTC)
-Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com [209.85.218.45])
-	by lists.linaro.org (Postfix) with ESMTPS id 65AC53F829
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 13 Nov 2025 14:53:50 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 2EEE73F866
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 13 Nov 2025 20:50:25 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.19])
+	by lists.linaro.org (Postfix) with ESMTPS id 60BB93F85A
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 13 Nov 2025 20:50:10 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20230601 header.b=CDITjSA4;
-	dmarc=pass (policy=none) header.from=gmail.com;
-	spf=pass (lists.linaro.org: domain of ckoenig.leichtzumerken@gmail.com designates 209.85.218.45 as permitted sender) smtp.mailfrom=ckoenig.leichtzumerken@gmail.com
-Received: by mail-ej1-f45.google.com with SMTP id a640c23a62f3a-b7291af7190so131876366b.3
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 13 Nov 2025 06:53:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763045629; x=1763650429; darn=lists.linaro.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=VvIMk872eUcGrvr4oYbCLqZzU34y/qoctkmyPmiR2qE=;
-        b=CDITjSA4Q2SJlkPCbzCjKjAd2lOFQQlf0urhg09eGzM8pVyHJUiLFGULrdhj8gN4Mu
-         gkvQwBrI7r0q7EZ1Gz556v3g15rhFtkp5O+ibkCk/v8t24XgYp8RCtaD+84HNVYlX/dn
-         1AUWuseBul570sVuhqradNoMCfvIYHs+SnU0MFIMfg+6IhMO9peKU2poBaHDQhavOn4/
-         GPopf/vC3b1adtqPoYvAlTo5dUwH6RlwbmpN2G0K8D+g6mr5tp0Rda/pHw26swkXyfGi
-         fLQ6c0rOyPkGjZX5q74Gcxz1XbQ/mk4qiO8hDrZ1Y3PGLDR5OTOwVZiOEPRCft5TPdTh
-         HbAA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763045629; x=1763650429;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=VvIMk872eUcGrvr4oYbCLqZzU34y/qoctkmyPmiR2qE=;
-        b=aBQT75dhdZsiBR0kXcKX+nQW5bG6/DKNoBQzQRgZaaj7stPqcRa5j86kQLQKpNRWCv
-         W4v0B6PJ4rkYpiSF3v2TdeRL954vbchSrUuvaA3IeBPICSZMEtNnZifN/w9ZezUhVXeO
-         oIobjhZ3SvOc7dRrOabawseMDGI/DKmoAAXjsMJ03ma8JsSufpoGn7moNsblN5mam6Oj
-         djhlS4TWXTeOJwksG8s4zh+rMwNRxWF9T9hIxp5QSBkX3yxvxV9Tdh1ivJnP7Gafr5nq
-         J2BTO4YzvofGC0IEIF/suAr0l9po0+lqD/sOzkgExES1/7TfvcI5xyz6Lm4q7jPaEoUM
-         INZQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWCTaawW+t6RGdUkTL6Dova0cjluoshnKwpNRDCRvNndq66Wg9/a/ojVNXg0ZnHqcwOql8gsuRRs9HKzJb/@lists.linaro.org
-X-Gm-Message-State: AOJu0YwVzgaBRMuLj8xOu5Z0qGRJqpficJfZuTLlYbHTznuXRSCsF10x
-	lo0AlwcoNTxfslVMZPFv0hpuYOMFERlQSSXYxNENPN1JnKPIl/48WTDx
-X-Gm-Gg: ASbGncsJoGgcE8JmEOqNJUiH6cdcMYRJmxVDe0KT5KWKxkC8kcOzVNnEEymhfi9Yd+L
-	R5v3r8D+mh+5vkYLh7MKh5a83QPBA+V1qTaiVzjIGRyruAk54HGcwCt7c6NJ2jsV4wt8tvSDlQ9
-	ySS63eN115xf5uXvLrwIXaLknqSQY/5XwWAXYkp12oKAlxaLhz+gyQKAaIjzU22EPn00iOIFDt8
-	gxDoe0251LZ1TCUvoTyhaimLXXknHhABvijtK6c783Lj2grZaXPo3cIPUo4XD8ykrDWrqijGhe8
-	jMkXz9pIzjY8NJW5AQEJYd3QJhNWy2p+3pwmcXDOajRA2Xu4MUVLMKamTgWf5HBpjLqWC8Cu95B
-	joOiwMWVkgqGBZslMW88ce8B5XvQMtPdIk4dfLVMZYl3B27ivAKLfkS6DFuYYlY8Abzef7DwMmJ
-	dPqcpg+98ehGg=
-X-Google-Smtp-Source: AGHT+IE/99yJLzL1YvwaBMM+Q6kz/sb5G9lncACbhK/4baxWDS2QRo+Q6OgU+cRk722RQAFO4cEcfw==
-X-Received: by 2002:a17:907:705:b0:b73:1634:6d71 with SMTP id a640c23a62f3a-b73319af12amr827751866b.26.1763045629179;
-        Thu, 13 Nov 2025 06:53:49 -0800 (PST)
-Received: from able.fritz.box ([2a00:e180:15aa:c600:cef:d94:436c:abc5])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b73513b400fsm173747166b.1.2025.11.13.06.53.48
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Nov 2025 06:53:48 -0800 (PST)
-From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
-X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
-To: phasta@mailbox.org,
-	alexdeucher@gmail.com,
-	simona.vetter@ffwll.ch,
-	tursulin@ursulin.net,
-	matthew.brost@intel.com,
-	dri-devel@lists.freedesktop.org,
-	amd-gfx@lists.freedesktop.org,
-	linaro-mm-sig@lists.linaro.org,
-	sumit.semwal@linaro.org
-Date: Thu, 13 Nov 2025 15:51:55 +0100
-Message-ID: <20251113145332.16805-19-christian.koenig@amd.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20251113145332.16805-1-christian.koenig@amd.com>
-References: <20251113145332.16805-1-christian.koenig@amd.com>
+	dkim=pass header.d=intel.com header.s=Intel header.b=BIW7k8kd;
+	dmarc=pass (policy=none) header.from=intel.com;
+	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 192.198.163.19 as permitted sender) smtp.mailfrom=lkp@intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1763067010; x=1794603010;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=c14Im5Ycw0cJ83G30ozwTETFt4r0l7bFAsL/iOYSZDY=;
+  b=BIW7k8kdqIjmxylY2yOCkgYljbvxExqX87EfnZzYn4sexAG5T8zWGtev
+   M7IJLle4iBVU1BOh3vC2SiLwSGK2eoLlSdS3y2JH3xWVwGaplbBbRxjb7
+   XBdQ7C9f8xjKAqvlY1PabgG21R2n25EjwOfOqIUF75yhDMPxYuqDAVK/2
+   iCOMouQBMUAcZ307yaWr3n86wPxUEnOjSRzpwhXcRH+psMjsZxyoEmONN
+   IqoaDDvUgsq79rh92Mz1TVmkZLfHkAkObn5s3Uaelc0HVbbnsyKIqzaVC
+   u5i4BjSjDbMiVI/BQRgyKQCKxPStpMQibSMiYXTShw/ggXC2Gx11HhAHN
+   A==;
+X-CSE-ConnectionGUID: iSrtN2qbTte811wlxb5iEw==
+X-CSE-MsgGUID: hTPDJvKQTRuQ25NJ6gfLFA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11612"; a="64165038"
+X-IronPort-AV: E=Sophos;i="6.19,302,1754982000";
+   d="scan'208";a="64165038"
+Received: from orviesa004.jf.intel.com ([10.64.159.144])
+  by fmvoesa113.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Nov 2025 12:50:09 -0800
+X-CSE-ConnectionGUID: zCf4xlQuQzOoYE5SoOHg8Q==
+X-CSE-MsgGUID: kOJv2nQJTP+JB47h3uDyxg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.19,302,1754982000";
+   d="scan'208";a="194044028"
+Received: from lkp-server01.sh.intel.com (HELO 7b01c990427b) ([10.239.97.150])
+  by orviesa004.jf.intel.com with ESMTP; 13 Nov 2025 12:50:05 -0800
+Received: from kbuild by 7b01c990427b with local (Exim 4.96)
+	(envelope-from <lkp@intel.com>)
+	id 1vJeGY-0005qx-0p;
+	Thu, 13 Nov 2025 20:50:02 +0000
+Date: Fri, 14 Nov 2025 04:49:30 +0800
+From: kernel test robot <lkp@intel.com>
+To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>,
+	phasta@mailbox.org, alexdeucher@gmail.com, simona.vetter@ffwll.ch,
+	tursulin@ursulin.net, matthew.brost@intel.com,
+	dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
+	linaro-mm-sig@lists.linaro.org, sumit.semwal@linaro.org
+Message-ID: <202511140459.HpT5i7v9-lkp@intel.com>
+References: <20251113145332.16805-5-christian.koenig@amd.com>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20251113145332.16805-5-christian.koenig@amd.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 65AC53F829
-X-Spamd-Bar: ---
-X-Spamd-Result: default: False [-3.60 / 15.00];
+X-Rspamd-Queue-Id: 60BB93F85A
+X-Spamd-Bar: ----
+X-Spamd-Result: default: False [-4.50 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
+	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:192.198.163.0/26];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MIME_GOOD(-0.10)[text/plain];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.218.45:from];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	ARC_NA(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FREEMAIL_TO(0.00)[mailbox.org,gmail.com,ffwll.ch,ursulin.net,intel.com,lists.freedesktop.org,lists.linaro.org,linaro.org];
+	MISSING_XM_UA(0.00)[];
+	TAGGED_RCPT(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com,mailbox.org,ffwll.ch,ursulin.net,intel.com,lists.freedesktop.org,lists.linaro.org,linaro.org];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_COUNT_TWO(0.00)[2];
+	TO_DN_SOME(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FREEMAIL_ENVFROM(0.00)[gmail.com];
-	TO_DN_NONE(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	TAGGED_FROM(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[11];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+]
+	RCVD_COUNT_THREE(0.00)[3];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[intel.com:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: YZVKVLR7SGKLTODOPPBHALFTPXQMY7EG
-X-Message-ID-Hash: YZVKVLR7SGKLTODOPPBHALFTPXQMY7EG
-X-MailFrom: ckoenig.leichtzumerken@gmail.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+Message-ID-Hash: UMO3VCWV7OPI7XG4DX4GETJCACPL4GGR
+X-Message-ID-Hash: UMO3VCWV7OPI7XG4DX4GETJCACPL4GGR
+X-MailFrom: lkp@intel.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: oe-kbuild-all@lists.linux.dev
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 18/18] drm/xe: Finish disconnect HW fences from module
+Subject: [Linaro-mm-sig] Re: [PATCH 04/18] dma-buf: inline spinlock for fence protection v2
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YZVKVLR7SGKLTODOPPBHALFTPXQMY7EG/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UMO3VCWV7OPI7XG4DX4GETJCACPL4GGR/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -122,50 +104,54 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-From: Matthew Brost <matthew.brost@intel.com>
+Hi Christian,
 
-Be safe when dereferencing fence->xe.
+kernel test robot noticed the following build errors:
 
-Signed-off-by: Matthew Brost <matthew.brost@intel.com>
----
- drivers/gpu/drm/xe/xe_hw_fence.c | 13 +++++++------
- 1 file changed, 7 insertions(+), 6 deletions(-)
+[auto build test ERROR on next-20251113]
+[also build test ERROR on v6.18-rc5]
+[cannot apply to drm-xe/drm-xe-next linus/master v6.18-rc5 v6.18-rc4 v6.18-rc3]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
-diff --git a/drivers/gpu/drm/xe/xe_hw_fence.c b/drivers/gpu/drm/xe/xe_hw_fence.c
-index f5fad4426729..8181dfc628e4 100644
---- a/drivers/gpu/drm/xe/xe_hw_fence.c
-+++ b/drivers/gpu/drm/xe/xe_hw_fence.c
-@@ -159,9 +159,7 @@ static struct xe_hw_fence_irq *xe_hw_fence_irq(struct xe_hw_fence *fence)
- 
- static const char *xe_hw_fence_get_driver_name(struct dma_fence *dma_fence)
- {
--	struct xe_hw_fence *fence = to_xe_hw_fence(dma_fence);
--
--	return dev_name(fence->xe->drm.dev);
-+	return "xe";
- }
- 
- static const char *xe_hw_fence_get_timeline_name(struct dma_fence *dma_fence)
-@@ -175,10 +173,13 @@ static bool xe_hw_fence_signaled(struct dma_fence *dma_fence)
- {
- 	struct xe_hw_fence *fence = to_xe_hw_fence(dma_fence);
- 	struct xe_device *xe = fence->xe;
--	u32 seqno = xe_map_rd(xe, &fence->seqno_map, 0, u32);
-+	u32 seqno;
-+
-+	if (dma_fence->error)
-+		return true;
- 
--	return dma_fence->error ||
--		!__dma_fence_is_later(dma_fence, dma_fence->seqno, seqno);
-+	seqno = xe_map_rd(xe, &fence->seqno_map, 0, u32);
-+	return !__dma_fence_is_later(dma_fence, dma_fence->seqno, seqno);
- }
- 
- static bool xe_hw_fence_enable_signaling(struct dma_fence *dma_fence)
+url:    https://github.com/intel-lab-lkp/linux/commits/Christian-K-nig/dma-buf-protected-fence-ops-by-RCU-v3/20251113-235209
+base:   next-20251113
+patch link:    https://lore.kernel.org/r/20251113145332.16805-5-christian.koenig%40amd.com
+patch subject: [PATCH 04/18] dma-buf: inline spinlock for fence protection v2
+config: openrisc-randconfig-r072-20251114 (https://download.01.org/0day-ci/archive/20251114/202511140459.HpT5i7v9-lkp@intel.com/config)
+compiler: or1k-linux-gcc (GCC) 14.3.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20251114/202511140459.HpT5i7v9-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202511140459.HpT5i7v9-lkp@intel.com/
+
+All errors (new ones prefixed by >>):
+
+   drivers/dma-buf/st-dma-fence.c: In function '__wait_for_callbacks':
+>> drivers/dma-buf/st-dma-fence.c:454:24: error: 'struct dma_fence' has no member named 'lock'
+     454 |         spin_lock_irq(f->lock);
+         |                        ^~
+   drivers/dma-buf/st-dma-fence.c:455:26: error: 'struct dma_fence' has no member named 'lock'
+     455 |         spin_unlock_irq(f->lock);
+         |                          ^~
+
+
+vim +454 drivers/dma-buf/st-dma-fence.c
+
+2989f6451084ae Chris Wilson 2019-08-19  451  
+2989f6451084ae Chris Wilson 2019-08-19  452  static void __wait_for_callbacks(struct dma_fence *f)
+2989f6451084ae Chris Wilson 2019-08-19  453  {
+2989f6451084ae Chris Wilson 2019-08-19 @454  	spin_lock_irq(f->lock);
+2989f6451084ae Chris Wilson 2019-08-19  455  	spin_unlock_irq(f->lock);
+2989f6451084ae Chris Wilson 2019-08-19  456  }
+2989f6451084ae Chris Wilson 2019-08-19  457  
+
 -- 
-2.43.0
-
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
