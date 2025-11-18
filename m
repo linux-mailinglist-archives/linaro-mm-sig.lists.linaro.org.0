@@ -2,165 +2,113 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id D27D5C6B7AC
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 18 Nov 2025 20:44:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6038CC6BED6
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Nov 2025 00:03:16 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DAF893F913
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 18 Nov 2025 19:44:27 +0000 (UTC)
-Received: from BL2PR02CU003.outbound.protection.outlook.com (mail-eastusazon11011023.outbound.protection.outlook.com [52.101.52.23])
-	by lists.linaro.org (Postfix) with ESMTPS id 007CB3F833
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 18 Nov 2025 19:44:12 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 1E60F3F960
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 18 Nov 2025 23:03:15 +0000 (UTC)
+Received: from mail-qk1-f181.google.com (mail-qk1-f181.google.com [209.85.222.181])
+	by lists.linaro.org (Postfix) with ESMTPS id 05D5A3F912
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 18 Nov 2025 23:02:56 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=Nvidia.com header.s=selector2 header.b=O4lwrxbX;
-	spf=pass (lists.linaro.org: domain of jgg@nvidia.com designates 52.101.52.23 as permitted sender) smtp.mailfrom=jgg@nvidia.com;
-	dmarc=pass (policy=reject) header.from=nvidia.com;
-	arc=pass ("microsoft.com:s=arcselector10001:i=1")
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=QtenEp3Y47nz/+gGfT9HSnvkzaIPeweJh1j9D+qwNATKAGYqygy6TX8cSbhFE5r1hz5+9ujxHQmxKd9M2Y7vO1LZMXvLv6sXWuLtaZzRsoRrgnHjGgfSI5SsJxt5mfNX+UJ9Aaqcq+CU5GvTeKUZxqS8+jkrOTfnZ4r/7+Pq5+oocam4B38GCrVwEn8vUZgfUv8HbR6Gn64D6gQKLxoVXRxTeszm38MgombZe10KvIkkJebxtAMAas8beTyGflwp4Hfx1dTMFtQYPGY4EHJCXLuD/AWV1Gz+G++uM6AwRNNPz6oysP25sRDNHtwRD/nlbAqT5yVz7z/00ma4cz2SlQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1HnAf9yjhyOVH8hgODzeC22SUAwjAH/IBMFKlO8EQNE=;
- b=s9lc1Wad680iMILsCLGALSxdNCEl6VU1vYC7v1oYP2eTzoCjqG8gZOv7uPyobRG7/72YC6MiOKHWlfB1G+vz8qzJEonAWiGwJgFa3ehwRm86LlgdBZE8BvTacZPJJ5QLgPdUdHXTFFFZLhPyjmobB39T2jUuBz7nZDTNH0xNezDyxOx9KL174GqSs2aTxeLRIsSCE2pYa92+z/6O/eSj1UTZQD52XAdm8GG1Ek+NR9cOjrSZaCnSfenSiFFfZ4o4x6oQp3f/0IwuEd3Ndgx0ikFzq/op4WVCTVrztn0dFkAXw9thnI8UzHHCPOV3oqy6ioHGfR0QrthWOjPooGxXyg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1HnAf9yjhyOVH8hgODzeC22SUAwjAH/IBMFKlO8EQNE=;
- b=O4lwrxbX/CsbozudfZ/9poYQR6xMIZAovvrbpitujaPgyRPaOTLwrs96wGC8WO/IHW+oVh/w9YDwsu9+fyB/Dt0EAHS8/MBnbKPQCqCaIKwRyu0PDzEfF84CvgjJE+RsMSXVQCO04qk8ySlLSRBBsMVRerl8N141Po10DAiaSnkSgMyswAVJ19QKONRZcJo9YvRsmOSlbyUgCikfQxYZKsXqYaCiUtkh50LuhNukbCBeEmkmJ8Ome90xR7fh8q4QD5s479++aMkNlqsU0Sda4bWuS8jOPqzTKllXtdLO2OXb60F1EJO+s735lep1D+ya6KdepKQFVWcQQfIdCnCGEw==
-Received: from MN2PR12MB3613.namprd12.prod.outlook.com (2603:10b6:208:c1::17)
- by DS7PR12MB6240.namprd12.prod.outlook.com (2603:10b6:8:94::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.21; Tue, 18 Nov
- 2025 19:44:03 +0000
-Received: from MN2PR12MB3613.namprd12.prod.outlook.com
- ([fe80::1b3b:64f5:9211:608b]) by MN2PR12MB3613.namprd12.prod.outlook.com
- ([fe80::1b3b:64f5:9211:608b%4]) with mapi id 15.20.9343.009; Tue, 18 Nov 2025
- 19:44:02 +0000
-Date: Tue, 18 Nov 2025 15:44:01 -0400
-From: Jason Gunthorpe <jgg@nvidia.com>
-To: Nicolin Chen <nicolinc@nvidia.com>
-Message-ID: <20251118194401.GB120075@nvidia.com>
-References: <0-v1-af84a3ab44f5+f68-iommufd_buf_jgg@nvidia.com>
- <8-v1-af84a3ab44f5+f68-iommufd_buf_jgg@nvidia.com>
- <aRZyNaLxrwSKKMXG@Asurada-Nvidia>
-Content-Disposition: inline
-In-Reply-To: <aRZyNaLxrwSKKMXG@Asurada-Nvidia>
-X-ClientProxiedBy: MN0PR03CA0008.namprd03.prod.outlook.com
- (2603:10b6:208:52f::15) To MN2PR12MB3613.namprd12.prod.outlook.com
- (2603:10b6:208:c1::17)
+	dkim=pass header.d=ziepe.ca header.s=google header.b=EQgwTuO9;
+	spf=pass (lists.linaro.org: domain of jgg@ziepe.ca designates 209.85.222.181 as permitted sender) smtp.mailfrom=jgg@ziepe.ca;
+	dmarc=none
+Received: by mail-qk1-f181.google.com with SMTP id af79cd13be357-8b2627269d5so646287985a.2
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 18 Nov 2025 15:02:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ziepe.ca; s=google; t=1763506975; x=1764111775; darn=lists.linaro.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=V9774m00qC+l22EqhxH404c/5WuwECoHlv+7tMAloKg=;
+        b=EQgwTuO9BzLPgjVMvYFroJXBom5pvKzy0EpCu3ty7KHoaEgfNEqJt9Nq6bm16CqDNM
+         iUsGE0UTP+s/oij7JbHRgh05cxq1iErVXShauAQRzF30VXefkhSs40pu1calk2HaS5z0
+         A4ezsLAWcL7zyDKvgBU8/+fAhBmU/EXsaelP6WTpNa/Rt1wKVIdp1SH1hIUzDDq4jsiu
+         aXr6whXowhaG3jRtPocQdwdQ1CM4qte1yUSJOhB/AG7qS0IozE7JYvQUa6vBYUjD5nhz
+         x+uECR45qgKQW+2da8jRgRkkPzqnjXEwxu5ZPWCjLmxBORcmgENuWDAAdVanbGeHGN/G
+         Jv1w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1763506975; x=1764111775;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=V9774m00qC+l22EqhxH404c/5WuwECoHlv+7tMAloKg=;
+        b=nd+KQRtrg3+z8QsJxVj9BH7DPZsUId4awgrTLths+GrX9KUIRPtI5Fiskqivy2OBJj
+         HjZTWUamepGsZ0DOrWo5SSn+x3heXYHBy6wNl+5n05BN6Woj5p0YZ5z0+qH5YRCTQCUw
+         5O0fqkj3QrgANwMv5QFCv9aNTHAP14trDayvu+uUkPq8Yq9ykm091GjzLSzULkEsgBIX
+         aG2sDTtHwJXA7K7ZszhteHSHiyv7KytBXcN3lmUBVZpNZxT2VEEjDV8xpCNZl3aqNIQP
+         2gSoSR7ZNKX45adjLZZ4QnGvNOAvce/oqp+7POX1fothuNS4tiGH7sXfJP1IykfUn5l/
+         lZcQ==
+X-Forwarded-Encrypted: i=1; AJvYcCX+3TUsbq9vb5p99ioRDyS5RRCPY+vDYaXuUYJnpX1QdfuXTowByJrehguO3m03zUkzoPqjcHuOjgkKPbUM@lists.linaro.org
+X-Gm-Message-State: AOJu0YwaS7s6X1z9DjOa2hOpMUYgQBOdahuGFxF5gi2kI6FkHLso6g0E
+	65RYzZ/I74DFeeEDTXhTFJCNGRro8v8ls335k8Wux/O2sR0ePR2wOZ5cqtg8HAU3oCc=
+X-Gm-Gg: ASbGnctg2k38wM+3gS/yhl3u3FSV2pXl/4MQ073DEXo2w26AmoI/Thj2fKOorCnncpw
+	5VS6BRR5KKHQ6GvRecv6B+gS6OUcS3zfouZKrBiibTWx1c8wi3w9d6VkEyiTLfL2YDNq2bGN6iK
+	QMLia6WAZ4iui+qX99EVaUNm85Ahupqk12UCmoSTfPFDWfWdFw8DqMVxljKjPs7EprEEtvaR9tN
+	peKpVfckNXqc3sv+Ntud4GP1Y8uErN8nXRHesXC6bQ8BVPpexZeB4sw5khgUuuAnv94482MK8ML
+	ECsoL3iht2geRSZqLC8zfs0ICUNKHDs7+nceDYK2P3EEV/CnuufBmFjWgJZCnYUiB/SU3Upxy8W
+	Z5O7Oo186cVZb5IeX9hu1nFETY8cdK9bHsxG8cF7Qg6zkbjKD67OqxYw6DgrNh+b8QFialIzCJZ
+	wcBVSDJukl+Whl9CaQ1AeU2Rp3qXw8z7RDC2hTvebqsWO6+wfg62FLLDfz
+X-Google-Smtp-Source: AGHT+IE7qxNdGTB3O4Cyd9l/l5kqP+7hVSaobWOJQOGThUG/TNMz01RlkEIy242KlmPT6y0A+36Y2Q==
+X-Received: by 2002:a05:620a:4454:b0:8b2:eab0:629a with SMTP id af79cd13be357-8b2eab06506mr1265910785a.70.1763506975311;
+        Tue, 18 Nov 2025 15:02:55 -0800 (PST)
+Received: from ziepe.ca (hlfxns017vw-47-55-120-4.dhcp-dynamic.fibreop.ns.bellaliant.net. [47.55.120.4])
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-8b2da3e4cf4sm883665285a.10.2025.11.18.15.02.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 18 Nov 2025 15:02:54 -0800 (PST)
+Received: from jgg by wakko with local (Exim 4.97)
+	(envelope-from <jgg@ziepe.ca>)
+	id 1vLUiq-00000000W6g-43N6;
+	Tue, 18 Nov 2025 19:02:52 -0400
+Date: Tue, 18 Nov 2025 19:02:52 -0400
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Leon Romanovsky <leon@kernel.org>
+Message-ID: <20251118230252.GJ17968@ziepe.ca>
+References: <20251111-dmabuf-vfio-v8-0-fd9aa5df478f@nvidia.com>
+ <20251111-dmabuf-vfio-v8-6-fd9aa5df478f@nvidia.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MN2PR12MB3613:EE_|DS7PR12MB6240:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0f277b1c-171a-465a-920c-08de26dad378
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|7416014|376014|1800799024|366016;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?3tfG/vlG+l86C/S7ka9J17KbYcWvjM2ZKYQuLAC4c5PqNSpR0ABcNBUjjsDp?=
- =?us-ascii?Q?DLRtlb4cde0eBOSVauVm26our3DZr8U/fJFDEj8PVzkKuyWxx5hD2FQc7f3v?=
- =?us-ascii?Q?6ArrLpD84yk56GokXqWdsAeuRpzBuF00KW1pwbg/nPMaHllL7ZDyYjjpXTnF?=
- =?us-ascii?Q?gScKPRHiq6nOxnd9k02AON2MU40fo1ozitCd7mEgG7P/uleD2MonfMnFwiDT?=
- =?us-ascii?Q?JM3GHwj3I5UOEuDv1ll9SvwL+3r/lvSdg2TMHIEerME/juAp7ziy4AYQb8rw?=
- =?us-ascii?Q?R9C0HDxbey3WJZpm3xqwUAVvOZPF7M8YzNo+9HX0lP3+2ee7g5O6VBOvTZyJ?=
- =?us-ascii?Q?VbqsEVEI/2n2TbyQStNsZrktx3qrXRGwkdmkS+co3aoX1TvzriBGy6URu4LO?=
- =?us-ascii?Q?Us1xnLXTPMhzDvfOCODHeHCQQzneNvcQbAU7036nvra6sKG9HXzIQoBz2so5?=
- =?us-ascii?Q?uDCmOl3mtxnZU9k/qgDHNuap0G9aoBp/psb01rKntXKzn51czdI6zTed0gpr?=
- =?us-ascii?Q?xQKNDatlvKg/5HBFj8yMkyQ1X5C6Lk4dIvjUtDPyobuzeMZeGe64uwu6X11d?=
- =?us-ascii?Q?CtKBfWKPEWtfEzX0X+lNhNrSUmM1/sI1W4VIQblQnYOnIkZPEFkhj6hLBUjI?=
- =?us-ascii?Q?e0lQtmKwn3UtunTYxuMb/zdHBtQAK0EUEGvOd7E85IAIRZxOPjSmNWhxtud5?=
- =?us-ascii?Q?W+stS8jUJ6cb/QCbQMOX6at3x774n+XZskuJ5+KBJItFEbv9Zh6kPxBLkgnZ?=
- =?us-ascii?Q?X+PCudIPORrskzRLajSfVN6/FzazKzUktX5FpY96KHYlVJzfYocNRdDaqeDL?=
- =?us-ascii?Q?r2KSrnur7EVxnfN5i7b4reXST7LulCmtJwRJF1agQQRtfz177RUWop/EiPsi?=
- =?us-ascii?Q?Z4MPIjnRLp+pnG+w2saRZFTiPbanmoEfbP5GFBHCsj6jQe+JvjX+Rto0EiRD?=
- =?us-ascii?Q?OanVNE7wv8K5zRncnw7CgDcnQZAV+OKT34cIKdqLJRDo0XTD8hqnc5IVUQ+U?=
- =?us-ascii?Q?AdQ2vBRcxfu+R80uh7s/sJo1qPih2LfGAdLbswXsSSrVrys7ZHNEJ2GmnULY?=
- =?us-ascii?Q?YySHdXeejMbIlE4nzs5rqeTtI+U4iPZaVRTWi793dS+Llwnyu6+obil1wGZK?=
- =?us-ascii?Q?P1dhbhUcQGlELg4kZqTbUD8nDa5h0nEkHUwtCXNZz1vPoFwDUwkElIHwOvK5?=
- =?us-ascii?Q?Fb7jwYb4tgmEsQUyGyJ03GmsB7Tbuj6X2tPTdo65WrD2dwaKhTE045D8WDcx?=
- =?us-ascii?Q?up3pO7WLYc6pV2z2b77wPJMraeRgNDm/lo4GQn8rIzBeuIbBm15WodgrmHV6?=
- =?us-ascii?Q?JDlzUUdnpfnfTckvtz1+fZHkbZP3mNnpBnF7SNam0zbmk03ASur9k9DGBnv5?=
- =?us-ascii?Q?4irJRPxjnJp8IdNFeiQccp2YC+1H/qjuJShLFMCGg5c33z/kFqGqVILw7FMm?=
- =?us-ascii?Q?fIE0b5iuaeEePj119+0yDI70N16Y9j+x?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MN2PR12MB3613.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(376014)(1800799024)(366016);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?t8Ew0LHOtgr9vKYUDTax85WCjusOrVszHHW+zXlxBwK+DaiX+Sz/biKfmFA7?=
- =?us-ascii?Q?pCwBqQNUNNAk5A5Ef0CyIaL7YARV20qwJQC/68dK/qDNUNxB/0QwpW1QhNhu?=
- =?us-ascii?Q?dkFPSSY0GZSp17KcDEyr1ntcnxIEmHlMYZ0N8mFwixkPirviByAC8p9Uxx3Q?=
- =?us-ascii?Q?FQqKbr1Ly2l0cOet1ADjkTUDYXryPqyvL7vWCikE+m0FP6xD2XEjwTwrDn09?=
- =?us-ascii?Q?eqpLWFnLzhVkNGKsSXTWUlpMYUXcU3EIiW9xTyOeK9K/P1Iam26Q/WquxxWv?=
- =?us-ascii?Q?Rxtv5Y4/sMPaaBiNX8DdmMIh0fRxBpkEBFAV7GO7wGh14kiceFmuNWYUi7RC?=
- =?us-ascii?Q?64k58ka5hCXNGRnax80eRTMAVIMlk0euSZQ5smRGggMYJDjV9iI/4RMgLfF8?=
- =?us-ascii?Q?95LDuWyKatIrM9ISlKw57OKZJvGMvNv8DOIkxo59RP2V68+K6lfa4cHuUunS?=
- =?us-ascii?Q?8ACjck0i4CZPMCT3hTu6emDg3E6HiJRZzNKf7faCPrMaFYY5lwv3X1IwfGUj?=
- =?us-ascii?Q?16bxa6OjU7P93NMcI/+5AqJguj2NDmah7ENq8BpraNjn1f0Qusle3pNAk8nl?=
- =?us-ascii?Q?+ie4JkKoR20boHXfzoZ2M9u35lXKFl25ZaF7AEWrXFDkHuzr04N8CUGZDqwA?=
- =?us-ascii?Q?Rkaas8rvXCcBViRjine71dfsffnBVPV3VUfO2Yn1+JMgNZ/NblRgNMh9RnxC?=
- =?us-ascii?Q?H6VRfOFDr/whvp42t5as3E8bh+mKfvZY50d8lL/stQ7sTpsvJu33W2DCD9hC?=
- =?us-ascii?Q?yf7Akg47r4+VM0fBspSmY/0SsEyX0CNWIdRNML53a+S2FnBTbcW+AEw+aRoY?=
- =?us-ascii?Q?Ds9KOJLfkcJzIVKG3gBh0FhUAbX0V8kmbbH1iKKW2rUsWkIkOxaYdFBhXZRd?=
- =?us-ascii?Q?MdpL/tthBQJ+P1NT21Gshg2nnp/U1UqVbtgbRZBqCoIT4+pysVDYTNgZ75Nr?=
- =?us-ascii?Q?0nGk1v6bazzzE1O4KTZlRWOyf2cyzEt4nMEVrZ8hUollGSuljEFfZ3ekXexB?=
- =?us-ascii?Q?52yBHte6ANhHNU6B7+AIRcudlBgmtzRq6fJh2BDwm7DOcW5VKFV5uAMxxcLM?=
- =?us-ascii?Q?1DOQCFZsF2fwM7sNEwm2ftK8xxG2GuEt5Rhb4yhfTC1bmv9wRVx7QNuIhdCK?=
- =?us-ascii?Q?hLzfn00SOoqD40p4pKwwrgKpl7rntD1ipv8NfDDAaVJMekdYfhNGUCNe5frt?=
- =?us-ascii?Q?kb4rMJA5FTJ26cYhW+UYjGo5W8adiLsxi+iJIgkOj+/teZ5lcN2MLLA1kk/A?=
- =?us-ascii?Q?cS7VjPiDk7Y1YhMIx6zi7m0aBkLSToXw4lR8lshaLYvnwDjYmZbmZcr3iPCN?=
- =?us-ascii?Q?/Jng534XooKQZUd1gtBniXzww+T08Ba+i4FYz5bl1kdQ+Smxj5lnxQGQloWL?=
- =?us-ascii?Q?i6fY2O74Mmo6jbuNoFXYUorCMCaGD9LJ4awB2QdkAGXGk8VbKo/woqlFnZii?=
- =?us-ascii?Q?qCvf7yfA50BjxaUbDlvqSVd0PS+KD/gPYhtm2aTIGL2GfhX6vd1c/Cr6BpOo?=
- =?us-ascii?Q?3PHH1sQhEdh5MCadYJNo8C6WmQi9AbpRZisF2U/ty2McrfJKALTG/nX5+fx2?=
- =?us-ascii?Q?de5/VV2Ze1AEqVK5d9U=3D?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0f277b1c-171a-465a-920c-08de26dad378
-X-MS-Exchange-CrossTenant-AuthSource: MN2PR12MB3613.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Nov 2025 19:44:02.8987
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: iMa9LA2PZuzihoH33jnWM0HSFSsPaRoWBuF++Vy3uMXwCfb/gSpWKtJ+j0TUdhwy
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB6240
+Content-Disposition: inline
+In-Reply-To: <20251111-dmabuf-vfio-v8-6-fd9aa5df478f@nvidia.com>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-5.00 / 15.00];
+X-Spamd-Result: default: False [-3.50 / 15.00];
 	BAYES_HAM(-3.00)[99.99%];
-	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector10001:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
-	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
-	R_SPF_ALLOW(-0.20)[+ip4:52.100.0.0/15];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[ziepe.ca:s=google];
 	MIME_GOOD(-0.10)[text/plain];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[52.101.52.23:from];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	MISSING_XM_UA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	MID_RHS_MATCH_FROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.222.181:from];
+	ARC_NA(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCPT_COUNT_TWELVE(0.00)[34];
+	MIME_TRACE(0.00)[0:+];
+	DWL_DNSWL_BLOCKED(0.00)[ziepe.ca:dkim];
+	DMARC_NA(0.00)[ziepe.ca];
+	TO_DN_SOME(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
+	MID_RHS_MATCH_FROM(0.00)[];
+	DNSWL_BLOCKED(0.00)[209.85.222.181:from];
 	RCVD_TLS_LAST(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DKIM_TRACE(0.00)[Nvidia.com:+]
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	RCVD_COUNT_THREE(0.00)[3];
+	DKIM_TRACE(0.00)[ziepe.ca:+]
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 007CB3F833
-X-Spamd-Bar: ----
-Message-ID-Hash: WFKCH5MF5SDXNQPALIGLSX3YGSSRJE3W
-X-Message-ID-Hash: WFKCH5MF5SDXNQPALIGLSX3YGSSRJE3W
-X-MailFrom: jgg@nvidia.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Alex Williamson <alex@shazbot.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, iommu@lists.linux.dev, Joerg Roedel <joro@8bytes.org>, Kevin Tian <kevin.tian@intel.com>, kvm@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-kselftest@vger.kernel.org, linux-media@vger.kernel.org, Robin Murphy <robin.murphy@arm.com>, Shuah Khan <shuah@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Will Deacon <will@kernel.org>, Krishnakant Jaju <kjaju@nvidia.com>, Leon Romanovsky <leon@kernel.org>, Matt Ochs <mochs@nvidia.com>, patches@lists.linux.dev, Simona Vetter <simona.vetter@ffwll.ch>, Vivek Kasireddy <vivek.kasireddy@intel.com>, Xu Yilun <yilun.xu@linux.intel.com>
+X-Rspamd-Queue-Id: 05D5A3F912
+X-Spamd-Bar: ---
+Message-ID-Hash: J44OLZ3SSFTIQCUWILV2DO4NMP4QJY4H
+X-Message-ID-Hash: J44OLZ3SSFTIQCUWILV2DO4NMP4QJY4H
+X-MailFrom: jgg@ziepe.ca
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Bjorn Helgaas <bhelgaas@google.com>, Logan Gunthorpe <logang@deltatee.com>, Jens Axboe <axboe@kernel.dk>, Robin Murphy <robin.murphy@arm.com>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Andrew Morton <akpm@linux-foundation.org>, Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Kees Cook <kees@kernel.org>, "Gustavo A. R. Silva" <gustavoars@kernel.org>, Ankit Agrawal <ankita@nvidia.com>, Yishai Hadas <yishaih@nvidia.com>, Shameer Kolothum <skolothumtho@nvidia.com>, Kevin Tian <kevin.tian@intel.com>, Alex Williamson <alex@shazbot.org>, Krishnakant Jaju <kjaju@nvidia.com>, Matt Ochs <mochs@nvidia.com>, linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org, linux-block@vger.kernel.org, iommu@lists.linux.dev, linux-mm@kvack.org, linux-doc@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org, linux-hardeni
+ ng@vger.kernel.org, Alex Mastro <amastro@fb.com>, Nicolin Chen <nicolinc@nvidia.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 8/9] iommufd: Accept a DMABUF through IOMMU_IOAS_MAP_FILE
+Subject: [Linaro-mm-sig] Re: [PATCH v8 06/11] dma-buf: provide phys_vec to scatter-gather mapping routine
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WFKCH5MF5SDXNQPALIGLSX3YGSSRJE3W/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/J44OLZ3SSFTIQCUWILV2DO4NMP4QJY4H/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -170,27 +118,66 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Thu, Nov 13, 2025 at 04:05:09PM -0800, Nicolin Chen wrote:
-> > -struct iopt_pages *iopt_alloc_file_pages(struct file *file, unsigned long start,
-> > +struct iopt_pages *iopt_alloc_file_pages(struct file *file,
-> > +					 unsigned long start_byte,
-> > +					 unsigned long start,
-> >  					 unsigned long length, bool writable);
+On Tue, Nov 11, 2025 at 11:57:48AM +0200, Leon Romanovsky wrote:
+> From: Leon Romanovsky <leonro@nvidia.com>
 > 
-> Passing in start_byte looks like a cleanup to me, aligning with
-> what iopt_map_common() has.
+> Add dma_buf_map() and dma_buf_unmap() helpers to convert an array of
+> MMIO physical address ranges into scatter-gather tables with proper
+> DMA mapping.
+> 
+> These common functions are a starting point and support any PCI
+> drivers creating mappings from their BAR's MMIO addresses. VFIO is one
+> case, as shortly will be RDMA. We can review existing DRM drivers to
+> refactor them separately. We hope this will evolve into routines to
+> help common DRM that include mixed CPU and MMIO mappings.
+> 
+> Compared to the dma_map_resource() abuse this implementation handles
+> the complicated PCI P2P scenarios properly, especially when an IOMMU
+> is enabled:
+> 
+>  - Direct bus address mapping without IOVA allocation for
+>    PCI_P2PDMA_MAP_BUS_ADDR, using pci_p2pdma_bus_addr_map(). This
+>    happens if the IOMMU is enabled but the PCIe switch ACS flags allow
+>    transactions to avoid the host bridge.
+> 
+>    Further, this handles the slightly obscure, case of MMIO with a
+>    phys_addr_t that is different from the physical BAR programming
+>    (bus offset). The phys_addr_t is converted to a dma_addr_t and
+>    accommodates this effect. This enables certain real systems to
+>    work, especially on ARM platforms.
+> 
+>  - Mapping through host bridge with IOVA allocation and DMA_ATTR_MMIO
+>    attribute for MMIO memory regions (PCI_P2PDMA_MAP_THRU_HOST_BRIDGE).
+>    This happens when the IOMMU is enabled and the ACS flags are forcing
+>    all traffic to the IOMMU - ie for virtualization systems.
+> 
+>  - Cases where P2P is not supported through the host bridge/CPU. The
+>    P2P subsystem is the proper place to detect this and block it.
+> 
+> Helper functions fill_sg_entry() and calc_sg_nents() handle the
+> scatter-gather table construction, splitting large regions into
+> UINT_MAX-sized chunks to fit within sg->length field limits.
+> 
+> Since the physical address based DMA API forbids use of the CPU list
+> of the scatterlist this will produce a mangled scatterlist that has
+> a fully zero-length and NULL'd CPU list. The list is 0 length,
+> all the struct page pointers are NULL and zero sized. This is stronger
+> and more robust than the existing mangle_sg_table() technique. It is
+> a future project to migrate DMABUF as a subsystem away from using
+> scatterlist for this data structure.
+> 
+> Tested-by: Alex Mastro <amastro@fb.com>
+> Tested-by: Nicolin Chen <nicolinc@nvidia.com>
+> Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
+> ---
+>  drivers/dma-buf/dma-buf.c | 235 ++++++++++++++++++++++++++++++++++++++++++++++
+>  include/linux/dma-buf.h   |  18 ++++
+>  2 files changed, 253 insertions(+)
 
-> Since we are doing this cleanup, maybe we could follow the same
-> sequence: xxx, start, length, start_byte, writable?
+I've looked at this enough times now, the logic for DMA mapping and
+the construction of the scatterlist is good:
 
-??
-
-static int iopt_map_common(struct iommufd_ctx *ictx, struct io_pagetable *iopt,
-			   struct iopt_pages *pages, unsigned long *iova,
-			   unsigned long length, unsigned long start_byte,
-			   int iommu_prot, unsigned int flags)
-
-Not the same arguments, we don't pass start and start_byte there?
+Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
 
 Jason
 _______________________________________________
