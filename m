@@ -2,142 +2,160 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id AF06DC70D5E
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Nov 2025 20:37:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 271E2C70DA2
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Nov 2025 20:41:45 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id BABEB3F8F7
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Nov 2025 19:37:01 +0000 (UTC)
-Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com [209.85.222.170])
-	by lists.linaro.org (Postfix) with ESMTPS id EB22E3F80C
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Nov 2025 19:36:39 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id EF46A3F90A
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Nov 2025 19:41:38 +0000 (UTC)
+Received: from mail-qv1-f51.google.com (mail-qv1-f51.google.com [209.85.219.51])
+	by lists.linaro.org (Postfix) with ESMTPS id 6BAA73F786
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Nov 2025 19:41:22 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=ziepe.ca header.s=google header.b=fkk055yD;
-	spf=pass (lists.linaro.org: domain of jgg@ziepe.ca designates 209.85.222.170 as permitted sender) smtp.mailfrom=jgg@ziepe.ca;
+	dkim=pass header.d=ziepe.ca header.s=google header.b=iSdWrEVe;
+	spf=pass (lists.linaro.org: domain of jgg@ziepe.ca designates 209.85.219.51 as permitted sender) smtp.mailfrom=jgg@ziepe.ca;
 	dmarc=none
-Received: by mail-qk1-f170.google.com with SMTP id af79cd13be357-8b2d56eaaceso11756785a.0
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Nov 2025 11:36:39 -0800 (PST)
+Received: by mail-qv1-f51.google.com with SMTP id 6a1803df08f44-88051279e87so1038416d6.3
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Nov 2025 11:41:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ziepe.ca; s=google; t=1763580999; x=1764185799; darn=lists.linaro.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=sztelLlBrONBmM282viGyh6kz65i94yYxCWrYWozdqM=;
-        b=fkk055yDXS1f/WGM2qiZPIHtEWQU0vFhxiMvssiQLvSFqvyBBXjy8rm1WHykZBktDw
-         cYVoQDV19MlJNbPDf7JV5UC2WiO4R2L0a5YnYHeUOoG70usNz64V03xmlEqCy0tXpvdG
-         IsoT5YVJ5yUycjcAQpy2Tg6FD0ep3lwpLTy7O3dScKwExM8lpOCcWvmrxjmkWbsi2hNS
-         xvgY8/vRf6gkj/AAzbBvJcR++1JyEpP9D9vf1ySEvbqyWU/sTK8wk3bReZEvd32XK8gt
-         ugZbDMF0ECSRwZWoAUFq38SmAumuq+73DT4YIbRtpn3TZxTThBupX35c+5o52gOFf1Hl
-         AwQg==
+        d=ziepe.ca; s=google; t=1763581282; x=1764186082; darn=lists.linaro.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=1xvMcuBzJSIcfclCVWQ2hNnnKt+oezBHS+z89ygHsa4=;
+        b=iSdWrEVeObA7PwvIohdJSXajiU6x1UqDBPwlXtLIDZVO4f/RAHxqigYIJ/wau0DM+a
+         HC+cHfJGwM4pCxXlXq1SvluR3+f28EnoFWFk1pVNyyRogJTc45WOu12ftrlbqWaZb9Oc
+         2JrlaYnRW/4OMP6TGzK1Sd7JeUYJj4HFIssQzitrgel26+KwTuLlLHeEsLk6UGHqUDqP
+         zZqNrJ2SVcklzTFkRXaHsNw2YnQCiSdH0W8M9/0nM7c8QI2A/oV8tAyOS0IhDg5t2vq+
+         MVuoHgcXfhtW00Qry8xDyGiKZ68px1NL2aCPqJ+yDWGXEi1QJqRTojCeLhC8ZI1bu0Wa
+         swRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763580999; x=1764185799;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=sztelLlBrONBmM282viGyh6kz65i94yYxCWrYWozdqM=;
-        b=T29pajOA0RdBoay6Soe+Q4CAwWnneXzfYoe8Va4T2hgdN5zilouGzDozeMeJzN97Jr
-         I5aCtNE+WTKWAy1E8/YjHWPOmU5I3Ue0nEynIoB9oRXFU6OqdfkkvTqAa+GxkWscbmlt
-         GAqKwmxFxS0jsjtR+4DbHEPd33LrjzmB1xcDJI8J4FoF6qQzf66Epi4lXQMRWRPjiMu2
-         teBPIXP9ZQBTIoMSJxbS7hb6qzLg19LJhcXZX3eniWjd5KmnKWeq+L711+4VNru3SVCo
-         s6YdlmvFT+VZHUbe/WYBj8Xs3h9P5jt9cGiDjSJQbxHK2IpaCL05Uz9A5kOLG5PrEztA
-         sSow==
-X-Forwarded-Encrypted: i=1; AJvYcCX0uWyt9SinmLVQ037SyrluBEJSwMD7ZIwanN9nabtX97wuCWcYwI40lUnYi+CzDTHvEU07yTsTTFNf2ySp@lists.linaro.org
-X-Gm-Message-State: AOJu0YxcUqBDQiXgc6DBIJpQAs4Lv2J4+XR2vTQscKyQh3At4I8vTAEE
-	jhOllT9B/Y4taS5VAk1oZpg93z9t+kXVMj866z064M6VT89E0eZBPpGGfG7xa+XyhN4=
-X-Gm-Gg: ASbGnct/ZEVZF0CrZf/qWnDwpAwiUXW8qlLTsiRTpq2aPxL9Pw5HGDwGZgRUQh8zkg6
-	9+oljuY17K9WJDEcEBi93tQ0G+1m0gCQ838ZDU2SnZDPI8S4fuxczeKj/psU/gf3O9MqZlR0Kqh
-	I/jSXKd12XrHluaFldW76ExeVO3HYlxFxTOzY4NB9uF91Bgy7X2wucrlIXMsAU22agbXXuuDPCP
-	xWiEwEJCMU97aqpyekrfYRZ17XKgflPL60EBaXOHJ8ykjxKHBVJW2CofpZxT6C6YSLeMpUmtE1y
-	2dWbwJpzAHzZI95LiFg1YZtQIyNYVU6AIUmOH81X8qJEvsp/rgRVJkKePUsu6jtx+42/fcwbyMP
-	OInknn4Q/EdvyyWYOBvBPGaIyu89UQVY/dXr0qzy/tlAv4aKPwfIBA6SsbEhwXUmR9Am5rRl5xp
-	55BBEglV1O5muNIlq9kUruWaEREprqybhbcvuUG/8ver7r6qUcDZDvNOl0
-X-Google-Smtp-Source: AGHT+IEogkhlTHFcyAE9/u1UuBQV+X3tukog/nHIoHavB/ndnYOWZGPWrkYoYNh/EOln2cA+Kp4KoA==
-X-Received: by 2002:a05:622a:310:b0:4ee:1d84:3068 with SMTP id d75a77b69052e-4ee4971a985mr8236121cf.76.1763580999342;
-        Wed, 19 Nov 2025 11:36:39 -0800 (PST)
+        d=1e100.net; s=20230601; t=1763581282; x=1764186082;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=1xvMcuBzJSIcfclCVWQ2hNnnKt+oezBHS+z89ygHsa4=;
+        b=QmRbCclT2hwk31EOSOOx+HZkQ2mE5KMmBmq12CLI1lOoF0np9KtnFENj8m3r1Cxivk
+         oimHAuJLQOGymGwdaKEK6YWJXFTvfYZkKcDbocO4HYdOCNSBR4stzqjJjLJ4TaaAt5I0
+         aKsVquwoFFXtiffdIlvRZ67VL0xDcdv80C+UOuExggjC48Q50zu4FljWLbhBIAg+ewD+
+         Gz2i08pkxNAiWtPXt5P5j99/kb6uGjMRHy9Di4viqyYSvVysMnwuIgZHFRxN1EX0G17L
+         iNOV6WR0lzUgfyAozFbSAyjP0ekCPyvMDOxnTK5qznDiPTCWV3l6x5xwcW+bdllDNC//
+         Li2A==
+X-Forwarded-Encrypted: i=1; AJvYcCWEgkhFTs2QG5N123wwVPnQ2xNRE1Z2XImBrxntr4NiAy4FeE7c3+a6gPYdDAlotVn4qs2Y4qFgaWC2KMmd@lists.linaro.org
+X-Gm-Message-State: AOJu0YzI9XG0kPU88AEL28itS9n5hlK/FDIt3Hc+XFuZeR0HvKEzxtxd
+	tBrXaRaFJznqJK6fqK5PYWTuNSSbW8+8LC64cn80iLBjO009nyoM4oRpJluGZNa5G4I=
+X-Gm-Gg: ASbGncvL2n9yqfVYSaQeU/b5B7uABIJEDkHYZaaZc7TI4IOS0stGZJWUXRxAykgHO4h
+	HIEf0LK0o8dygMKa+IZDvNu71F6e+Nlmfr8YnlACZ7togFHjwoggiJ0TX/veHHF22CBI3WQ/VIj
+	nyfDIKAgV53ceHmQJ8V//usES9Abao9B8a5p9H/7C1Lqm0OlV36c6BSahBvgTkHiSbHKOyhuHP0
+	MO1n/a0yGi43og+fHf4MJudNvN0XLM9uczcsYihFL1hPorl6wAn2NCu2uHGuWlSqoSworMi24Mm
+	SujfSHjgNUfJdvsru84JWIV/DtZhz/d6rdMsGhA0XG+HQ8SYcJ6PMFD/jqfYdNUSefdmKZ9fJgJ
+	GDVSz5VjlETlirTWLzc4rXU0oakyFJ98YZPhfs4re9m5r3gz0xYdDSPbsRMzxSqJnpMzqnFDa5F
+	qBikzAQi3i7oaijVoP5A1WVVn8TbGuPxgWEDVkotdjP7Voeh6FVmqFb9+/
+X-Google-Smtp-Source: AGHT+IEkkwKLlD7bgArhzanqcgyJXrNkTCLmX/zPs7UZp1FVMILPKD98FXvYwEVi1NAfBqdDip+8Dg==
+X-Received: by 2002:a05:6214:4a84:b0:7d2:f787:1978 with SMTP id 6a1803df08f44-8846ed7f961mr1725046d6.3.1763581281958;
+        Wed, 19 Nov 2025 11:41:21 -0800 (PST)
 Received: from ziepe.ca (hlfxns017vw-47-55-120-4.dhcp-dynamic.fibreop.ns.bellaliant.net. [47.55.120.4])
-        by smtp.gmail.com with ESMTPSA id d75a77b69052e-4ee48d64503sm3117901cf.13.2025.11.19.11.36.38
+        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-8846e47115bsm1948696d6.21.2025.11.19.11.41.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 19 Nov 2025 11:36:38 -0800 (PST)
+        Wed, 19 Nov 2025 11:41:21 -0800 (PST)
 Received: from jgg by wakko with local (Exim 4.97)
 	(envelope-from <jgg@ziepe.ca>)
-	id 1vLnyo-00000000bYz-0lQx;
-	Wed, 19 Nov 2025 15:36:38 -0400
-Date: Wed, 19 Nov 2025 15:36:38 -0400
+	id 1vLo3M-00000000bbB-3imG;
+	Wed, 19 Nov 2025 15:41:20 -0400
+Date: Wed, 19 Nov 2025 15:41:20 -0400
 From: Jason Gunthorpe <jgg@ziepe.ca>
-To: Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>
-Message-ID: <20251119193638.GQ17968@ziepe.ca>
+To: "Tian, Kevin" <kevin.tian@intel.com>
+Message-ID: <20251119194120.GR17968@ziepe.ca>
 References: <20251111-dmabuf-vfio-v8-0-fd9aa5df478f@nvidia.com>
- <20251111-dmabuf-vfio-v8-6-fd9aa5df478f@nvidia.com>
- <8a11b605-6ac7-48ac-8f27-22df7072e4ad@amd.com>
- <20251119134245.GD18335@unreal>
- <6714dc49-6b5c-4d58-9a43-95bb95873a97@amd.com>
+ <20251111-dmabuf-vfio-v8-10-fd9aa5df478f@nvidia.com>
+ <BN9PR11MB527610F3240E677BE9720C2B8CD6A@BN9PR11MB5276.namprd11.prod.outlook.com>
+ <20251118142849.GG17968@ziepe.ca>
+ <BN9PR11MB5276EF47D26AB55B2CD456EE8CD6A@BN9PR11MB5276.namprd11.prod.outlook.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <6714dc49-6b5c-4d58-9a43-95bb95873a97@amd.com>
+In-Reply-To: <BN9PR11MB5276EF47D26AB55B2CD456EE8CD6A@BN9PR11MB5276.namprd11.prod.outlook.com>
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-3.50 / 15.00];
 	BAYES_HAM(-3.00)[99.99%];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
 	R_DKIM_ALLOW(-0.20)[ziepe.ca:s=google];
 	MIME_GOOD(-0.10)[text/plain];
-	ARC_NA(0.00)[];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	ARC_NA(0.00)[];
 	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	MISSING_XM_UA(0.00)[];
 	TO_DN_SOME(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.222.170:from];
-	RCPT_COUNT_TWELVE(0.00)[34];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.219.51:from];
+	RCPT_COUNT_TWELVE(0.00)[33];
 	MIME_TRACE(0.00)[0:+];
-	BLOCKLISTDE_FAIL(0.00)[47.55.120.4:query timed out,209.85.222.170:query timed out];
 	NEURAL_HAM(-0.00)[-1.000];
 	MID_RHS_MATCH_FROM(0.00)[];
-	DNSWL_BLOCKED(0.00)[47.55.120.4:received];
+	DMARC_NA(0.00)[ziepe.ca];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_IN_DNSWL_NONE(0.00)[209.85.222.170:from];
+	FROM_HAS_DN(0.00)[];
+	RCVD_IN_DNSWL_NONE(0.00)[209.85.219.51:from];
+	DNSWL_BLOCKED(0.00)[47.55.120.4:received];
+	RCVD_TLS_LAST(0.00)[];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	RCVD_COUNT_THREE(0.00)[3];
-	RCVD_TLS_LAST(0.00)[];
-	DMARC_NA(0.00)[ziepe.ca];
 	DKIM_TRACE(0.00)[ziepe.ca:+]
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: EB22E3F80C
+X-Rspamd-Queue-Id: 6BAA73F786
 X-Spamd-Bar: ---
-Message-ID-Hash: WRJPJFTOFUE7OEJ7MCBSPB626VQBXGTP
-X-Message-ID-Hash: WRJPJFTOFUE7OEJ7MCBSPB626VQBXGTP
+Message-ID-Hash: SMDQ36BZISTIGM5QSSPASLVYNUUYDXEE
+X-Message-ID-Hash: SMDQ36BZISTIGM5QSSPASLVYNUUYDXEE
 X-MailFrom: jgg@ziepe.ca
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Leon Romanovsky <leon@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>, Logan Gunthorpe <logang@deltatee.com>, Jens Axboe <axboe@kernel.dk>, Robin Murphy <robin.murphy@arm.com>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Andrew Morton <akpm@linux-foundation.org>, Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>, Kees Cook <kees@kernel.org>, "Gustavo A. R. Silva" <gustavoars@kernel.org>, Ankit Agrawal <ankita@nvidia.com>, Yishai Hadas <yishaih@nvidia.com>, Shameer Kolothum <skolothumtho@nvidia.com>, Kevin Tian <kevin.tian@intel.com>, Alex Williamson <alex@shazbot.org>, Krishnakant Jaju <kjaju@nvidia.com>, Matt Ochs <mochs@nvidia.com>, linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org, linux-block@vger.kernel.org, iommu@lists.linux.dev, linux-mm@kvack.org, linux-doc@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org, linux-hardening@vger.kernel.org, Alex
-  Mastro <amastro@fb.com>, Nicolin Chen <nicolinc@nvidia.com>
+CC: Leon Romanovsky <leon@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>, Logan Gunthorpe <logang@deltatee.com>, Jens Axboe <axboe@kernel.dk>, Robin Murphy <robin.murphy@arm.com>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Andrew Morton <akpm@linux-foundation.org>, Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Kees Cook <kees@kernel.org>, "Gustavo A. R. Silva" <gustavoars@kernel.org>, Ankit Agrawal <ankita@nvidia.com>, Yishai Hadas <yishaih@nvidia.com>, Shameer Kolothum <skolothumtho@nvidia.com>, Alex Williamson <alex@shazbot.org>, Krishnakant Jaju <kjaju@nvidia.com>, Matt Ochs <mochs@nvidia.com>, "linux-pci@vger.kernel.org" <linux-pci@vger.kernel.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "linux-block@vger.kernel.org" <linux-block@vger.kernel.org>, "iommu@lists.linux.dev" <iommu@lists.linux.dev>, "linux-mm@kvack.org" <linux-mm@kvack.org>, "linux-doc@
+ vger.kernel.org" <linux-doc@vger.kernel.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "kvm@vger.kernel.org" <kvm@vger.kernel.org>, "linux-hardening@vger.kernel.org" <linux-hardening@vger.kernel.org>, "Kasireddy, Vivek" <vivek.kasireddy@intel.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v8 06/11] dma-buf: provide phys_vec to scatter-gather mapping routine
+Subject: [Linaro-mm-sig] Re: [PATCH v8 10/11] vfio/pci: Add dma-buf export support for MMIO regions
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WRJPJFTOFUE7OEJ7MCBSPB626VQBXGTP/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SMDQ36BZISTIGM5QSSPASLVYNUUYDXEE/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-T24gV2VkLCBOb3YgMTksIDIwMjUgYXQgMDM6MTE6MDFQTSArMDEwMCwgQ2hyaXN0aWFuIEvDtm5p
-ZyB3cm90ZToNCg0KPiBJIG1pc3MgaW50ZXJwcmV0ZWQgdGhlIGNhbGwgdG8gcGNpX3AycGRtYV9t
-YXBfdHlwZSgpIGhlcmUgaW4gdGhhdA0KPiBub3cgdGhlIERNQS1idWYgY29kZSBkZWNpZGVzIGlm
-IHRyYW5zYWN0aW9ucyBnbyBvdmVyIHRoZSByb290DQo+IGNvbXBsZXggb3Igbm90Lg0KDQpPaCwg
-dGhhdCdzIG5vdCBpdCBhdCBhbGwuIEkgdGhpbmsgeW91IGdldCBpdCwgYnV0IGp1c3QgdG8gYmUg
-cmVhbGx5DQpjbGVhcjoNCg0KVGhpcyBjb2RlIGlzIHRha2luZyBhIHBoeXNpY2FsIGFkZHJlc3Mg
-ZnJvbSB0aGUgZXhwb3J0ZXIgYW5kDQpkZXRlcm1pbmluZyBob3cgaXQgTVVTVCByb3V0ZSBpbnNp
-ZGUgdGhlIGZhYnJpYy4gVGhlcmUgaXMgb25seSBvbmUNCnNpbmdsZSBjaG9pY2Ugd2l0aCBubyBv
-cHRpb25hbGl0eS4NCg0KVGhlIGV4cG9ydGVyIGFscmVhZHkgZGVjaWRlZCBpZiBpdCB3aWxsIGdv
-IG92ZXIgdGhlIGhvc3QgYnJpZGdlIGJ5DQpwcm92aWRpbmcgYW4gYWRkcmVzcyB0aGF0IG11c3Qg
-dXNlIGEgaG9zdCBicmlkZ2UgcGF0aC4NCg0KPiBCdXQgdGhlIGV4cG9ydGVyIGNhbiBjYWxsIHBj
-aV9wMnBkbWFfbWFwX3R5cGUoKSBldmVuIGJlZm9yZSBjYWxsaW5nDQo+IHRoaXMgZnVuY3Rpb24s
-IHNvIHRoYXQgbG9va3MgZmluZSB0byBtZS4NCg0KWWVzLCB0aGUgZXhwb3J0ZXIgbmVlZHMgdG8g
-ZGVjaWRlIHdoZXJlIHRoZSBkYXRhIGlzIHBsYWNlZCBiZWZvcmUgaXQNCnRyaWVzIHRvIG1hcCBp
-dCBpbnRvIHRoZSBTR1QuDQoNCkphc29uDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0t
-c2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5h
-cm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+On Tue, Nov 18, 2025 at 11:56:14PM +0000, Tian, Kevin wrote:
+> > > > +	down_write(&vdev->memory_lock);
+> > > > +	list_for_each_entry_safe(priv, tmp, &vdev->dmabufs, dmabufs_elm)
+> > > > {
+> > > > +		if (!get_file_active(&priv->dmabuf->file))
+> > > > +			continue;
+> > > > +
+> > > > +		dma_resv_lock(priv->dmabuf->resv, NULL);
+> > > > +		list_del_init(&priv->dmabufs_elm);
+> > > > +		priv->vdev = NULL;
+> > > > +		priv->revoked = true;
+> > > > +		dma_buf_move_notify(priv->dmabuf);
+> > > > +		dma_resv_unlock(priv->dmabuf->resv);
+> > > > +		vfio_device_put_registration(&vdev->vdev);
+> > > > +		fput(priv->dmabuf->file);
+> > >
+> > > dma_buf_put(priv->dmabuf), consistent with other places.
+> > 
+> > Someone else said this, I don't agree, the above got the get via
+> > 
+> > get_file_active() instead of a dma_buf version..
+> > 
+> > So we should pair with get_file_active() vs fput().
+> > 
+> > Christian rejected the idea of adding a dmabuf wrapper for
+> > get_file_active(), oh well.
+> 
+> Okay then vfio_pci_dma_buf_move() should be changed. It uses
+> get_file_active() to pair dma_buf_put().
+
+Makes sense, Leon can you fix it?
+
+Thanks,
+Jason 
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
