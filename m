@@ -2,76 +2,79 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id uGL4Mnr+4GkQoQAAu9opvQ
+	id KEwvOYP+4GkSoQAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:21:30 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:21:39 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5F30F410924
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:21:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A30E341092B
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:21:38 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 6C9BC40507
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:21:29 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.9])
-	by lists.linaro.org (Postfix) with ESMTPS id A2F763F690
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Nov 2025 09:14:49 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id AA58A404F9
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:21:37 +0000 (UTC)
+Received: from invmail4.hynix.com (exvmail4.skhynix.com [166.125.252.92])
+	by lists.linaro.org (Postfix) with ESMTP id 4648B3F90B
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Nov 2025 09:38:37 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=cekMWXcD;
-	spf=pass (lists.linaro.org: domain of andriy.shevchenko@linux.intel.com designates 198.175.65.9 as permitted sender) smtp.mailfrom=andriy.shevchenko@linux.intel.com;
-	dmarc=pass (policy=none) header.from=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1763543690; x=1795079690;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=q6da8jLQtnLnim6HyWRfNmg8bV209AFrRAch7qncfbs=;
-  b=cekMWXcD4aJBhqzu2a/2fPvj8qaxdpzbQGuSHMilqF2V+cbAekelvhKK
-   +DUjCDRwzR9B8+If3AgHJCVbL2XZ/pg2HA8ozhEW68p8MQNWHfAlxoh9V
-   wqw2ba1B2LLzlVhch/3eUZGlnyfau2sb2qeljWzb7RPZL0nxRWkpExT84
-   Axk8Zh6wVDrR6e4RDEJQf/l5IDqS0eOM3FTrLK45SnQpmkJ56iFDgGMZL
-   Ejqf5IvlRKN4dliHJIcMhFi4SDWDxTAyeQqaP4bGS+qrFeTxn5/Qdm727
-   uexSKOp5A5GZHggrajymje87+RT3504euXkA3s9e+Q2w+f4pFpl/Rsnyt
-   A==;
-X-CSE-ConnectionGUID: j2Yop7m7RLaLLxZ0+jf46A==
-X-CSE-MsgGUID: HPHaN77FS7SLqHcjMpGIAw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11617"; a="88232436"
-X-IronPort-AV: E=Sophos;i="6.19,315,1754982000";
-   d="scan'208";a="88232436"
-Received: from orviesa001.jf.intel.com ([10.64.159.141])
-  by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Nov 2025 01:14:47 -0800
-X-CSE-ConnectionGUID: oHYrWS8ATQebFcLjYXGykg==
-X-CSE-MsgGUID: DikRyuhjQLyYtee9Ng8YEQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.19,315,1754982000";
-   d="scan'208";a="228346786"
-Received: from rvuia-mobl.ger.corp.intel.com (HELO localhost) ([10.245.245.245])
-  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Nov 2025 01:14:41 -0800
-Date: Wed, 19 Nov 2025 11:14:38 +0200
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: Petr Mladek <pmladek@suse.com>
-Message-ID: <aR2KfgzV1_3ZzXhT@smile.fi.intel.com>
-References: <20251113150217.3030010-1-andriy.shevchenko@linux.intel.com>
- <20251113150217.3030010-2-andriy.shevchenko@linux.intel.com>
- <aRcnug35DOZ3IGNi@pathway.suse.cz>
- <aRd5HHUBu2ookDv_@smile.fi.intel.com>
+	dkim=none;
+	spf=pass (lists.linaro.org: domain of byungchul@sk.com designates 166.125.252.92 as permitted sender) smtp.mailfrom=byungchul@sk.com;
+	dmarc=none
+X-AuditID: a67dfc5b-c2dff70000001609-b3-691d901b1ebc
+Date: Wed, 19 Nov 2025 18:38:29 +0900
+From: Byungchul Park <byungchul@sk.com>
+To: Boqun Feng <boqun.feng@gmail.com>
+Message-ID: <20251119093829.GA20446@system.software.com>
+References: <20251002081247.51255-37-byungchul@sk.com>
+ <tencent_13F1EDE0D6B7A44697F31AE274C8E664E908@qq.com>
+ <aN62F8t493R7UmCT@tardis.local>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <aRd5HHUBu2ookDv_@smile.fi.intel.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
-X-Spamd-Bar: ------
-X-MailFrom: andriy.shevchenko@linux.intel.com
+In-Reply-To: <aN62F8t493R7UmCT@tardis.local>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Brightmail-Tracker: H4sIAAAAAAAAA02Sa0hTYRiA+853bg5Xp6X05SpoEal0p+LtQuiP7IP+BBFEFjXykKupualp
+	ENnN5rKaJF0su85Lc6Zo94TVEjO6LboNt9JsrcS0NFuXleTpQv17eN+Hh/fHK2KNk4sRDelZ
+	sildb9TxKlbVHXlqstY2xjCtvGQcWHZtBX9bgIMfRy8J0PJsOwuec9UI2j5ZEHwOH8Xg9bgw
+	OM9vY+BQ5zYWug5+4OHh3S4EO87U8nApv12A/scvGXAWBTE8unqMB9+9/QKUP3vIwMt2LwcN
+	9+5iCO3Tgqd4Lwde22sENT2neTjQE0TQFarAUPHpvQBnT1QiuODahaDPHmKh4OMAB7f2Xmeg
+	vL8HQ23wJoaOfd0CWJpCGHb6Z0FZ/3Tor3bwCbHUedyJaPmddzy1F35j6JXS5wI9WZ9NG6ri
+	6ZnGTobWOwp5eir8FlP/00aethwOs9RV5hSob+AVpr2vW1laVFDP0NZgDbckeoVqfopsNOTI
+	pqkL1qhSqx8cQxt943Ob7feZfBSOsSJRJNJM0uZabkURv/BF2C8ozEoTSNPTDqQwL00kXu9X
+	rOhRg3O7Y1BXiViqFchFq4VTnBHSSlJ8peiXr5aAtPmu8YqkkWyINH388mcxnNw+EmAVxlI8
+	8Q50MkoUS1pSOSAqGCFNIo+tqxUjWhpPrl+8xSgZInlEcrg5xP2+cxS5UeVlbUgq/a9a+l+1
+	9F/1JMIOpDGk56TpDcaZU1Lz0g25U9ZmpNWjwR+q2PI9+TLq8yx1I0lEuki1ZdgYg4bT55jz
+	0tyIiFgXpZ6QONqgUafo8zbLpozVpmyjbHYjrcjqRqpnhDalaKR1+ix5gyxvlE1/t4wYEZOP
+	ktZGtycXc4lZeOrizGlLzPjIsKXbgzvQoj199vaCoSeicpvfuIPPj4dq3CldB54sexvfqZ3T
+	sbM7SZPhaZFLEoU6TW+Dr9ExfF7roYV0bmHs+dlxzrhAFcQGeofsnnU/IfNBXOSL9Z/rbpdF
+	nx4yVkyYnGrOto5jO+pWjfRnBhboWHOqfno8Npn1PwEMJX1DPwMAAA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA02Sa0hTcRjG+Z//uTlanJbWaRbWxC5aZpDwQlH5xQ4SEd2RSEeecjVXbSau
+	iDSbzHmbBF00y9JpzZmwvHQDSyWVLmpmDmeapZJZdnGpNZVcFPntx/P8nvfTy2JZNiVnVZp4
+	UatRqhW0hJRsXZeyyte8SBUyPMiC0XAGunr6KJjMq2agseMsCS23SxH0/DAiGHPnYXC01GCw
+	VSQTcHEwmYShC19paH02hCClsJyGuvwmCqqT3jLgetVLgC1jAEPb/Ss0OJ9nM2DpaCWg962D
+	gjvPn2EYzfKFlpxMChzmfgRlwzdoOD88gGBotBhD8Y8vDNy6VoKgssaA4HvRKAmpI1MUNGQ+
+	IsDiGsZQPlCH4V3WZwaM9aMYznWFQr5rDbhKrfSmFYLtqg0JlqefaKEo7Rch3Mt9wwgF9hPC
+	nZuBQuHDQUKwW9No4br7Axa6Xj+khcZLblKoybcxgnPqPRa+9XeSQkaqnRA6B8qobfMiJetj
+	RLUqQdSu3hAtiS1tvoKOOf0TnxS9IJKQW25CXizPreW73V2Mh0kugK9//Q55mOaW8Q7HT2xC
+	LOs9nRdZ95qQhMVcOcNXmYyUx5nL7eNz7mX88aUc8D3OB7RHknFmxNePjP8t5vBNl/tID2Mu
+	kHdMDRKeo5jz5UumWA96cSv5V6Yoj+HD+fOPqhoIM5Lmzhjnzhjn/h8XIGxF3ipNQpxSpQ4N
+	1h2J1WtUicEHjsbZ0fSbFJ+eyLmLXG2baxHHIsUs6bh5oUpGKRN0+rhaxLNY4S0NCJuOpDFK
+	/UlRezRKe0It6mqRL0sq5ksj9ojRMu6QMl48IorHRO2/lmC95EmouzEp6sBE75b2oNnpzg59
+	X3CZZrJspykshBmPjz/uc9L2uLlyCZkuqgwyd0/mrpGXh3Tb6U+FY0sTw2OC+PY5hl1a53Y/
+	fYn/fl1yZHtTTOWlrMOJbZ2XFyyvWNCt9jPId0emf7wdtvKg5ZRx44WIAG19+OKxzpAlLdaD
+	Fn32zR0KUherXBOItTrlbzb9/H8iAwAA
+X-CFilter-Loop: Reflected
+X-Spamd-Bar: ---
+X-MailFrom: byungchul@sk.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: XTBNL73OGIRP554YHEPGCT6J5TCOXYF4
-X-Message-ID-Hash: XTBNL73OGIRP554YHEPGCT6J5TCOXYF4
+Message-ID-Hash: UQXVPJXQMJDG7GMJEJCFD2LRBGVHPXCR
+X-Message-ID-Hash: UQXVPJXQMJDG7GMJEJCFD2LRBGVHPXCR
 X-Mailman-Approved-At: Thu, 16 Apr 2026 15:00:51 +0000
-CC: Steven Rostedt <rostedt@goodmis.org>, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, openipmi-developer@lists.sourceforge.net, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, amd-gfx@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org, intel-xe@lists.freedesktop.org, linux-mmc@vger.kernel.org, netdev@vger.kernel.org, intel-wired-lan@lists.osuosl.org, linux-pci@vger.kernel.org, linux-s390@vger.kernel.org, linux-scsi@vger.kernel.org, linux-staging@lists.linux.dev, ceph-devel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, Rasmus Villemoes <linux@rasmusvillemoes.dk>, Sergey Senozhatsky <senozhatsky@chromium.org>, Jonathan Corbet <corbet@lwn.net>
+CC: Guangbo Cui <2407018371@qq.com>, Liam.Howlett@oracle.com, amir73il@gmail.com, andi.shyti@kernel.org, andrii@kernel.org, bsegall@google.com, gregkh@linuxfoundation.org, linaro-mm-sig@lists.linaro.org, link@vivo.com, linux-kernel@vger.kernel.org, mark.rutland@arm.com, masahiroy@kernel.org, mathieu.desnoyers@efficios.com, matthew.brost@intel.com, max.byungchul.park@gmail.com, mcgrof@kernel.org, melissa.srw@gmail.com, mgorman@suse.de, mhocko@kernel.org, minchan@kernel.org, oleg@redhat.com, paulmck@kernel.org, penberg@kernel.org, peterz@infradead.org, petr.pavlu@suse.com, torvalds@linux-foundation.org, vincent.guittot@linaro.org, will@kernel.org, yeoreum.yun@arm.com, ysk@kzalloc.com, rust-for-linux@vger.kernel.org, ojeda@kernel.org, gary@garyguo.net, lossin@kernel.org, a.hindborg@kernel.org, aliceryhl@google.com, dakr@kernel.org, alex.gaynor@gmail.com, bjorn3_gh@protonmail.com, kernel_team@skhynix.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3 01/21] lib/vsprintf: Add specifier for printing struct timespec64
+Subject: [Linaro-mm-sig] Re: [PATCH] rust: bindings: add `rust_helper_wait_for_completion` helper function
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XTBNL73OGIRP554YHEPGCT6J5TCOXYF4/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UQXVPJXQMJDG7GMJEJCFD2LRBGVHPXCR/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -80,63 +83,130 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [1.59 / 15.00];
-	DATE_IN_PAST(1.00)[3558];
-	R_DKIM_REJECT(1.00)[intel.com:s=Intel];
+X-Spamd-Result: default: False [1.99 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	DATE_IN_PAST(1.00)[3557];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[intel.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com];
 	ARC_NA(0.00)[];
-	HAS_ORG_HEADER(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	RCPT_COUNT_TWELVE(0.00)[24];
+	DMARC_NA(0.00)[sk.com];
+	RCPT_COUNT_TWELVE(0.00)[41];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_CC(0.00)[qq.com,oracle.com,gmail.com,kernel.org,google.com,linuxfoundation.org,lists.linaro.org,vivo.com,vger.kernel.org,arm.com,efficios.com,intel.com,suse.de,redhat.com,infradead.org,suse.com,linux-foundation.org,linaro.org,kzalloc.com,garyguo.net,protonmail.com,skhynix.com];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.939];
-	FROM_NEQ_ENVFROM(0.00)[andriy.shevchenko@linux.intel.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:-];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	FROM_NEQ_ENVFROM(0.00)[byungchul@sk.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	R_DKIM_NA(0.00)[];
+	NEURAL_HAM(-0.00)[-0.966];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
-X-Rspamd-Queue-Id: 5F30F410924
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,system.software.com:mid,qq.com:email,linaro.org:email]
+X-Rspamd-Queue-Id: A30E341092B
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Fri, Nov 14, 2025 at 08:46:52PM +0200, Andy Shevchenko wrote:
-> On Fri, Nov 14, 2025 at 01:59:38PM +0100, Petr Mladek wrote:
-> > On Thu 2025-11-13 15:32:15, Andy Shevchenko wrote:
-
-...
-
-> > I wonder how to move forward. I could take the whole patchset via
-> > printk tree. There is no conflict with linux-next at the moment.
-> > 
-> > It seems that only 3 patches haven't got any ack yet. I am going
-> > to wait for more feedback and push it later the following week
-> > (Wednesday or so) unless anyone complains.
+On Thu, Oct 02, 2025 at 10:27:51AM -0700, Boqun Feng wrote:
+> On Thu, Oct 02, 2025 at 10:06:17AM +0000, Guangbo Cui wrote:
+> > > -extern void wait_for_completion(struct completion *);
+> > > -extern void wait_for_completion_io(struct completion *);
+> > > -extern int wait_for_completion_interruptible(struct completion *x);
+> > > -extern int wait_for_completion_killable(struct completion *x);
+> > > -extern int wait_for_completion_state(struct completion *x, unsigned int state);
+> > > -extern unsigned long wait_for_completion_timeout(struct completion *x,
+> > > +extern void __wait_for_completion(struct completion *);
+> > > +extern void __wait_for_completion_io(struct completion *);
+> > > +extern int __wait_for_completion_interruptible(struct completion *x);
+> > > +extern int __wait_for_completion_killable(struct completion *x);
+> > > +extern int __wait_for_completion_state(struct completion *x, unsigned int state);
+> > > +extern unsigned long __wait_for_completion_timeout(struct completion *x,
+> > >                                                unsigned long timeout);
+> > > -extern unsigned long wait_for_completion_io_timeout(struct completion *x,
+> > > +extern unsigned long __wait_for_completion_io_timeout(struct completion *x,
+> > >                                                 unsigned long timeout);
+> > > -extern long wait_for_completion_interruptible_timeout(
+> > > +extern long __wait_for_completion_interruptible_timeout(
+> > >     struct completion *x, unsigned long timeout);
+> > > -extern long wait_for_completion_killable_timeout(
+> > > +extern long __wait_for_completion_killable_timeout(
+> > >     struct completion *x, unsigned long timeout);
+> > >  extern bool try_wait_for_completion(struct completion *x);
+> > >  extern bool completion_done(struct completion *x);
+> > > @@ -139,4 +134,79 @@ extern void complete(struct completion *);
+> > >  extern void complete_on_current_cpu(struct completion *x);
+> > >  extern void complete_all(struct completion *);
+> > >
+> > > +#define wait_for_completion(x)                                             \
+> > > +({                                                                 \
+> > > +   sdt_might_sleep_start_timeout(NULL, -1L);                       \
+> > > +   __wait_for_completion(x);                                       \
+> > > +   sdt_might_sleep_end();                                          \
+> > > +})
+> >
+> > The DEPT patch series changed `wait_for_completion` into a macro.
+> > Because bindgen cannot handle function-like macros, this caused
+> > Rust build errors. Add a helper function to fix it.
+> >
+> > ```
+> > error[E0425]: cannot find function `wait_for_completion` in crate `bindings`
+> >      --> rust/kernel/sync/completion.rs:110:28
+> >       |
+> >   110 |         unsafe { bindings::wait_for_completion(self.as_raw()) };
+> >       |                            ^^^^^^^^^^^^^^^^^^^ help: a function with a similar name exists: `__wait_for_completion`
+> >       |
+> >      ::: /root/linux/rust/bindings/bindings_generated.rs:33440:5
+> >       |
+> > 33440 |     pub fn __wait_for_completion(arg1: *mut completion);
+> >       |     ---------------------------------------------------- similarly named function `__wait_for_completion` defined here
+> >
+> > error: aborting due to 1 previous error
+> >
+> > For more information about this error, try `rustc --explain E0425`.
+> > ```
+> >
 > 
-> Sounds good to me!
+> I think Danilo already made it clear, please fold this the existing
+> patch. Moreover, since this patchset doesn't adjust init_completion()
+> from the Rust side, the result is Rust code will also use the same dept
+> key for completion, which has to be fixed if dept wants to be in-tree.
+
+Right.  The same key in Rust may generate false positives.  However, for
+now, I will keep the current code until finding ways to assign
+appropriate keys in Rust.  Thanks anyway.
+
+	Byungchul
+
+> Regards,
+> Boqun
 > 
-> But in the worst case all but untagged can be pushed, the rest can go
-> to the next cycle.
-
-Just got a "BUILD SUCCESS" from LKP and since we gained even more tags
-I think it's ready to go.
-
--- 
-With Best Regards,
-Andy Shevchenko
-
-
+> > Signed-off-by: Guangbo Cui <2407018371@qq.com>
+> > ---
+> >  rust/helpers/completion.c | 5 +++++
+> >  1 file changed, 5 insertions(+)
+> >
+> > diff --git a/rust/helpers/completion.c b/rust/helpers/completion.c
+> > index b2443262a2ae..5bae5e749def 100644
+> > --- a/rust/helpers/completion.c
+> > +++ b/rust/helpers/completion.c
+> > @@ -6,3 +6,8 @@ void rust_helper_init_completion(struct completion *x)
+> >  {
+> >       init_completion(x);
+> >  }
+> > +
+> > +void rust_helper_wait_for_completion(struct completion *x)
+> > +{
+> > +     wait_for_completion(x);
+> > +}
+> > --
+> > 2.43.0
+> >
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
