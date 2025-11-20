@@ -2,119 +2,165 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 66FF0C739DE
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 20 Nov 2025 12:05:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2D072C73C5C
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 20 Nov 2025 12:38:54 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7EB903F811
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 20 Nov 2025 11:05:20 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.13])
-	by lists.linaro.org (Postfix) with ESMTPS id 9B0673F69B
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 20 Nov 2025 11:04:43 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 37CD03F949
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 20 Nov 2025 11:38:53 +0000 (UTC)
+Received: from desiato.infradead.org (desiato.infradead.org [90.155.92.199])
+	by lists.linaro.org (Postfix) with ESMTPS id 9EE203F90A
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 20 Nov 2025 11:38:35 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=Qx2jndeU;
-	spf=pass (lists.linaro.org: domain of thomas.hellstrom@linux.intel.com designates 192.198.163.13 as permitted sender) smtp.mailfrom=thomas.hellstrom@linux.intel.com;
-	dmarc=pass (policy=none) header.from=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1763636684; x=1795172684;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=x0BJhxyGfR1XqEF23p9JtlRqYIN+PgNt9iKj9D425XA=;
-  b=Qx2jndeU4CcPI0iwNHCvXDgRLaqHnxLHSUu93iRUPFwOjFL+q0+o+Ixd
-   ZDs0UrBho1F+DM58EKMeVVKPOgN486m5O/+Nt5uyAK3TXPYH6Ce7GIKgb
-   CFx0vRh26CR5clZ/DZMew03+iJxp7xiUsbvtuimvFEWnQLsnqcWcZ+pej
-   r0GaP3FYugM+NpHv1wfEbvnHmDAf+1C24lPaAQSbrc0rysEFcMNtVdQF9
-   D7+oN+amu9EMk5k7yGb+oAPv5XzIoiLn16MI1Kh1I/QSazuJDCOaa2pZ3
-   N1KH1fbKD4rvp8Wlw6pAlh8DuPa9oeo4IGtjq69ux0aEXpD7OAWubpxnN
-   A==;
-X-CSE-ConnectionGUID: oaJpHFRmQgKO3PgDWDeFVg==
-X-CSE-MsgGUID: 6we/c5/zQ628V4n6n7Ey0g==
-X-IronPort-AV: E=McAfee;i="6800,10657,11618"; a="68308037"
-X-IronPort-AV: E=Sophos;i="6.19,317,1754982000";
-   d="scan'208";a="68308037"
-Received: from orviesa001.jf.intel.com ([10.64.159.141])
-  by fmvoesa107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Nov 2025 03:04:43 -0800
-X-CSE-ConnectionGUID: 5H/ovCg6RZaTR+4534E+pw==
-X-CSE-MsgGUID: U9eLlPA7SiyXBK4n683UDA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.19,317,1754982000";
-   d="scan'208";a="228643730"
-Received: from agladkov-desk.ger.corp.intel.com (HELO fedora) ([10.245.244.142])
-  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Nov 2025 03:04:40 -0800
-From: =?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>
-To: intel-xe@lists.freedesktop.org
-Date: Thu, 20 Nov 2025 12:03:41 +0100
-Message-ID: <20251120110341.2425-3-thomas.hellstrom@linux.intel.com>
-X-Mailer: git-send-email 2.51.1
-In-Reply-To: <20251120110341.2425-1-thomas.hellstrom@linux.intel.com>
+	dkim=pass header.d=infradead.org header.s=desiato.20200630 header.b=no12kTDy;
+	spf=none (lists.linaro.org: domain of peterz@infradead.org has no SPF policy when checking 90.155.92.199) smtp.mailfrom=peterz@infradead.org;
+	dmarc=pass (policy=none) header.from=infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=desiato.20200630; h=In-Reply-To:Content-Transfer-Encoding:
+	Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:
+	Sender:Reply-To:Content-ID:Content-Description;
+	bh=jNLf4kEyrJhIhQxXhV/wDZHhRdsSXxNMp9YKHK4/GJo=; b=no12kTDykFte+1geNs0ouoXEhA
+	0KDViRftSYjtcf2o89myhfE6bM/Fgjp3RI6JLzzZiPU0hB1QTZVc/BvwpiKeGwKdjM3Y+6U+frsLO
+	Iv96orLFcqKyn5T09CI8EeIsq/+YDQ3KOfiApJfxUME75IYbzUSxLvZMu87NHHwukv0b/F29Cwhv1
+	bVlpwkUe5S319+YNzpGbvPY7A19OXBnb2sVdopKcB55I3pZKmKEQ7wuP2ttEc7Ib6AB6LtVVrfDDA
+	WbFQEt0nCSywb1K7LSX80KeRM66Ktj2uV6Su/54JCq6sIBNXnh4Qy2pU+Qj9etPIScNe/uXUWMmhp
+	rLZhIs0g==;
+Received: from 77-249-17-252.cable.dynamic.v4.ziggo.nl ([77.249.17.252] helo=noisy.programming.kicks-ass.net)
+	by desiato.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
+	id 1vM27w-0000000ENxS-33Ll;
+	Thu, 20 Nov 2025 10:43:02 +0000
+Received: by noisy.programming.kicks-ass.net (Postfix, from userid 1000)
+	id 197173002A6; Thu, 20 Nov 2025 12:38:24 +0100 (CET)
+Date: Thu, 20 Nov 2025 12:38:24 +0100
+From: Peter Zijlstra <peterz@infradead.org>
+To: Thomas =?iso-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>
+Message-ID: <20251120113824.GJ4067720@noisy.programming.kicks-ass.net>
 References: <20251120110341.2425-1-thomas.hellstrom@linux.intel.com>
+ <20251120110341.2425-2-thomas.hellstrom@linux.intel.com>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20251120110341.2425-2-thomas.hellstrom@linux.intel.com>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-6.00 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
-	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:192.198.163.0/26:c];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+X-Spamd-Result: default: False [-3.80 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
+	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=desiato.20200630];
 	MIME_GOOD(-0.10)[text/plain];
+	DWL_DNSWL_BLOCKED(0.00)[infradead.org:dkim];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MISSING_XM_UA(0.00)[];
 	ARC_NA(0.00)[];
-	ASN(0.00)[asn:4983, ipnet:192.198.162.0/23, country:US];
-	RCVD_COUNT_TWO(0.00)[2];
-	RCPT_COUNT_TWELVE(0.00)[15];
+	RCPT_COUNT_TWELVE(0.00)[14];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[linux.intel.com,intel.com,infradead.org,redhat.com,kernel.org,gmail.com,linaro.org,amd.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
+	R_SPF_NA(0.00)[no SPF record];
 	RCVD_TLS_LAST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[lists.freedesktop.org,intel.com,linux.intel.com,redhat.com,kernel.org,gmail.com,linaro.org,amd.com,vger.kernel.org,lists.linaro.org];
 	TO_DN_SOME(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:+]
+	FROM_EQ_ENVFROM(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	DKIM_TRACE(0.00)[infradead.org:+]
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 9B0673F69B
-X-Spamd-Bar: ------
-Message-ID-Hash: S4WAT6NRKSNY27GPWPWZXC26KWVF3NX5
-X-Message-ID-Hash: S4WAT6NRKSNY27GPWPWZXC26KWVF3NX5
-X-MailFrom: thomas.hellstrom@linux.intel.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: =?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>, Matthew Auld <matthew.auld@intel.com>, Matthew Brost <matthew.brost@intel.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Peter Zijlstra <peterz@infradead.org>, Ingo Molnar <mingo@redhat.com>, Will Deacon <will@kernel.org>, Boqun Feng <boqun.feng@gmail.com>, Waiman Long <longman@redhat.com>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, LKML <linux-kernel@vger.kernel.org>, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+X-Rspamd-Queue-Id: 9EE203F90A
+X-Spamd-Bar: ---
+Message-ID-Hash: VHE6WETPN2JVHXR35TO4VKEX2TAMWWJM
+X-Message-ID-Hash: VHE6WETPN2JVHXR35TO4VKEX2TAMWWJM
+X-MailFrom: peterz@infradead.org
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: intel-xe@lists.freedesktop.org, Matthew Auld <matthew.auld@intel.com>, Matthew Brost <matthew.brost@intel.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Ingo Molnar <mingo@redhat.com>, Will Deacon <will@kernel.org>, Boqun Feng <boqun.feng@gmail.com>, Waiman Long <longman@redhat.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, LKML <linux-kernel@vger.kernel.org>, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [RFC PATCH 2/2] dma-buf/dma-resv: Improve the dma-resv lockdep checks
+Subject: [Linaro-mm-sig] Re: [RFC PATCH 1/2] kernel/locking/ww_mutex: Add per-lock lock-check helpers
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/S4WAT6NRKSNY27GPWPWZXC26KWVF3NX5/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VHE6WETPN2JVHXR35TO4VKEX2TAMWWJM/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-RW5zdXJlIHRoYXQgZG1hX3Jlc3ZfaGVsZCgpIGFuZCBkbWFfcmVzdl9hc3NlcnRfaGVsZCgpIG9w
-ZXJhdGUNCm9uIGluZGl2aWR1YWwgcmVzZXJ2YXRpb24gb2JqZWN0cyB3aXRoaW4gYSBXVyB0cmFu
-c2FjdGlvbiByYXRoZXINCnRoYW4gb24gdGhlIHJlc2VydmF0aW9uIFdXIGNsYXNzLg0KDQpTaWdu
-ZWQtb2ZmLWJ5OiBUaG9tYXMgSGVsbHN0csO2bSA8dGhvbWFzLmhlbGxzdHJvbUBsaW51eC5pbnRl
-bC5jb20+DQotLS0NCiBpbmNsdWRlL2xpbnV4L2RtYS1yZXN2LmggfCA3ICsrKysrLS0NCiAxIGZp
-bGUgY2hhbmdlZCwgNSBpbnNlcnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQ0KDQpkaWZmIC0tZ2l0
-IGEvaW5jbHVkZS9saW51eC9kbWEtcmVzdi5oIGIvaW5jbHVkZS9saW51eC9kbWEtcmVzdi5oDQpp
-bmRleCBjNWFiNmZkOWViZTguLjAwMWRlMzg4MGZkZSAxMDA2NDQNCi0tLSBhL2luY2x1ZGUvbGlu
-dXgvZG1hLXJlc3YuaA0KKysrIGIvaW5jbHVkZS9saW51eC9kbWEtcmVzdi5oDQpAQCAtMzA4LDgg
-KzMwOCwxMSBAQCBzdGF0aWMgaW5saW5lIGJvb2wgZG1hX3Jlc3ZfaXRlcl9pc19yZXN0YXJ0ZWQo
-c3RydWN0IGRtYV9yZXN2X2l0ZXIgKmN1cnNvcikNCiAJICAgICBmZW5jZSA9IGRtYV9yZXN2X2l0
-ZXJfZmlyc3QoY3Vyc29yKTsgZmVuY2U7CVwNCiAJICAgICBmZW5jZSA9IGRtYV9yZXN2X2l0ZXJf
-bmV4dChjdXJzb3IpKQ0KIA0KLSNkZWZpbmUgZG1hX3Jlc3ZfaGVsZChvYmopIGxvY2tkZXBfaXNf
-aGVsZCgmKG9iaiktPmxvY2suYmFzZSkNCi0jZGVmaW5lIGRtYV9yZXN2X2Fzc2VydF9oZWxkKG9i
-aikgbG9ja2RlcF9hc3NlcnRfaGVsZCgmKG9iaiktPmxvY2suYmFzZSkNCisjZGVmaW5lIGRtYV9y
-ZXN2X2hlbGQob2JqKSAobG9ja2RlcF9pc19oZWxkKCYob2JqKS0+bG9jay5iYXNlKSAmJiB3d19t
-dXRleF9oZWxkKCYob2JqKS0+bG9jaykpDQorI2RlZmluZSBkbWFfcmVzdl9hc3NlcnRfaGVsZChv
-YmopIGRvIHsJCQlcDQorCQlsb2NrZGVwX2Fzc2VydF9oZWxkKCYob2JqKS0+bG9jay5iYXNlKTsg
-XA0KKwkJd3dfbXV0ZXhfYXNzZXJ0X2hlbGQoJihvYmopLT5sb2NrKTsJXA0KKwl9IHdoaWxlICgw
-KQ0KIA0KICNpZmRlZiBDT05GSUdfREVCVUdfTVVURVhFUw0KIHZvaWQgZG1hX3Jlc3ZfcmVzZXRf
-bWF4X2ZlbmNlcyhzdHJ1Y3QgZG1hX3Jlc3YgKm9iaik7DQotLSANCjIuNTEuMQ0KDQpfX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1h
-aWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3Jp
-YmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+On Thu, Nov 20, 2025 at 12:03:40PM +0100, Thomas Hellstr=F6m wrote:
+> Code using ww_mutexes typically by design have a number of
+> such mutexes sharing the same ww_class, and within a ww transaction
+> they are all lockdep annotated using a nest_lock which means
+> that multiple ww_mutexes of the same lockdep class may be locked at
+> the same time. That means that lock_is_held() returns true and
+> lockdep_assert_held() doesn't fire as long as there is a *single*
+> ww_mutex held of the same class. IOW within a WW transaction.
+>=20
+> Code using these mutexes typically want to assert that individual
+> ww_mutexes are held. Not that any ww_mutex of the same class is
+> held.
+>=20
+> Introduce functions that can be used for that.
+>=20
+> RFC: Placement of the functions? lockdep.c? Are the #ifdefs testing for
+> the correct config?
+
+Yeah, I think so.
+
+Ack on this.
+
+> Signed-off-by: Thomas Hellstr=F6m <thomas.hellstrom@linux.intel.com>
+> ---
+>  include/linux/ww_mutex.h | 18 ++++++++++++++++++
+>  kernel/locking/mutex.c   | 10 ++++++++++
+>  2 files changed, 28 insertions(+)
+>=20
+> diff --git a/include/linux/ww_mutex.h b/include/linux/ww_mutex.h
+> index 45ff6f7a872b..7bc0f533dea6 100644
+> --- a/include/linux/ww_mutex.h
+> +++ b/include/linux/ww_mutex.h
+> @@ -380,4 +380,22 @@ static inline bool ww_mutex_is_locked(struct ww_mute=
+x *lock)
+>  	return ww_mutex_base_is_locked(&lock->base);
+>  }
+> =20
+> +#ifdef CONFIG_PROVE_LOCKING
+> +
+> +bool ww_mutex_held(struct ww_mutex *lock);
+> +
+> +#else /* CONFIG_PROVE_LOCKING */
+> +
+> +static inline bool ww_mutex_held(struct ww_mutex *lock)
+> +{
+> +	return true;
+> +}
+> +
+> +#endif /* CONFIG_PROVE_LOCKING */
+> +
+> +static inline void ww_mutex_assert_held(struct ww_mutex *lock)
+> +{
+> +	lockdep_assert(ww_mutex_held(lock));
+> +}
+> +
+>  #endif
+> diff --git a/kernel/locking/mutex.c b/kernel/locking/mutex.c
+> index de7d6702cd96..37868b739efd 100644
+> --- a/kernel/locking/mutex.c
+> +++ b/kernel/locking/mutex.c
+> @@ -1174,3 +1174,13 @@ int atomic_dec_and_mutex_lock(atomic_t *cnt, struc=
+t mutex *lock)
+>  	return 1;
+>  }
+>  EXPORT_SYMBOL(atomic_dec_and_mutex_lock);
+> +
+> +#ifdef CONFIG_PROVE_LOCKING
+> +
+> +bool ww_mutex_held(struct ww_mutex *lock)
+> +{
+> +	return __ww_mutex_owner(&lock->base) =3D=3D current;
+> +}
+> +EXPORT_SYMBOL(ww_mutex_held);
+> +
+> +#endif /* CONFIG_PROVE_LOCKING */
+> --=20
+> 2.51.1
+>=20
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
