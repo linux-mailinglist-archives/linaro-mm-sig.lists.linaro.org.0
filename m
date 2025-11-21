@@ -2,134 +2,141 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 82DFEC754A5
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 20 Nov 2025 17:18:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0F7AEC76C2C
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 21 Nov 2025 01:24:02 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9D10D3F98A
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 20 Nov 2025 16:18:08 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.10])
-	by lists.linaro.org (Postfix) with ESMTPS id 6E9663F90A
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 20 Nov 2025 16:17:51 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id EE62C3F99F
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 21 Nov 2025 00:24:00 +0000 (UTC)
+Received: from mail-qv1-f46.google.com (mail-qv1-f46.google.com [209.85.219.46])
+	by lists.linaro.org (Postfix) with ESMTPS id 6F5603F92D
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 21 Nov 2025 00:23:46 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=StMadqWu;
-	spf=pass (lists.linaro.org: domain of thomas.hellstrom@linux.intel.com designates 192.198.163.10 as permitted sender) smtp.mailfrom=thomas.hellstrom@linux.intel.com;
-	dmarc=pass (policy=none) header.from=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1763655471; x=1795191471;
-  h=message-id:subject:from:to:cc:date:in-reply-to:
-   references:content-transfer-encoding:mime-version;
-  bh=/2fPZfB59KUyz2Lm6t6OUzeT1S0pxU0VW+s/4VKpB3w=;
-  b=StMadqWu895iJe053u9fKvCJorJuklve25ifkunhQNx0CCwvOJQuA54q
-   7ql/whQFCD2WgMhI0qQqNnCBeTEh/NtCb0LOJ9XR+6dlRbniFS85DNmeu
-   41KbAN3PtlQAVDolyVHWfAd2p0FSDd+LtGrDDcay0cNVZL8t+Ppp3dKcT
-   g/X5KyRZD6sPP/h+D6Txr1dqZVsfVrrjcJXsVC3RTFeJMsEc164tpWUfm
-   booEPRyGi7Nduvy5LQEFUqMFvZyRuHYkk/dg3UlU11YaG6F/oPlA1JKrS
-   oUJq6WKi2PUJWSRIIeq9xRpi8ZFQqe1ja/Z3w6jbF8aIlDa76t6Dyr138
-   Q==;
-X-CSE-ConnectionGUID: A0shAXItSfWSPpIftCASGg==
-X-CSE-MsgGUID: a9V1KvBeQDu7dRHYTmG3Bw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11619"; a="77093103"
-X-IronPort-AV: E=Sophos;i="6.20,213,1758610800";
-   d="scan'208";a="77093103"
-Received: from orviesa006.jf.intel.com ([10.64.159.146])
-  by fmvoesa104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Nov 2025 08:17:50 -0800
-X-CSE-ConnectionGUID: DfPRgqgtQXurIL07N/mL/g==
-X-CSE-MsgGUID: tmc9Dr2xRveyYCoS7r69RA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.20,213,1758610800";
-   d="scan'208";a="190650292"
-Received: from agladkov-desk.ger.corp.intel.com (HELO [10.245.244.142]) ([10.245.244.142])
-  by orviesa006-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Nov 2025 08:17:47 -0800
-Message-ID: <0401ba0139881d7d9a060876bdf7924888034265.camel@linux.intel.com>
-From: Thomas =?ISO-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>
-To: Mika Kuoppala <mika.kuoppala@linux.intel.com>,
-	intel-xe@lists.freedesktop.org
-Date: Thu, 20 Nov 2025 17:17:44 +0100
-In-Reply-To: <20251120161435.3674556-1-mika.kuoppala@linux.intel.com>
-References: <20251120161435.3674556-1-mika.kuoppala@linux.intel.com>
-Organization: Intel Sweden AB, Registration Number: 556189-6027
-User-Agent: Evolution 3.54.3 (3.54.3-2.fc41) 
+	dkim=pass header.d=ziepe.ca header.s=google header.b=IFdehBM2;
+	spf=pass (lists.linaro.org: domain of jgg@ziepe.ca designates 209.85.219.46 as permitted sender) smtp.mailfrom=jgg@ziepe.ca;
+	dmarc=none
+Received: by mail-qv1-f46.google.com with SMTP id 6a1803df08f44-882475d8851so16503836d6.2
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 20 Nov 2025 16:23:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ziepe.ca; s=google; t=1763684626; x=1764289426; darn=lists.linaro.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=HeoQ6A9zQA47pPVQ4WN0R1Mr0WB5BGBDvzJz+/SIjn4=;
+        b=IFdehBM2jFlhycEfWqiD4QpoUU352+ZJfYLYmWt5Ly0mh978NXtVC3jmm+3cMGwsai
+         FX1tdFrL0ncVzvogicBd24jQpj79HyljUWvgSwtW+AHm2DFpZ01m51SccHM6UCrlhrnb
+         48O8zJ/z2gYTRoSwop+wbrUZSavSQkL36OJlYsIAl+6LqOjXQJBhZIgPWjTql3cIrlpp
+         Jk34gEVm0EESanFgXNkQajUinm0GBJmBpor9tc9/ZfQOtXU0X2UHIQn3hwVnVk744fb8
+         gmoyiRZGjqHcpJhme41OVTvNe28nQxyeT0nGOiXiotKPv5FdWfwq0Sszb2jBgoXsa5jT
+         S5oA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1763684626; x=1764289426;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=HeoQ6A9zQA47pPVQ4WN0R1Mr0WB5BGBDvzJz+/SIjn4=;
+        b=Z2ye4SsPh7NwMylP3NoB4H71j2yi2qu5Dagvi/zSZFuFsrmb9uexsJmAVcID9pzZb/
+         nPdGLTj+ADM2cOOAjg6kYgbdI0tRkdnLrkROGo7bvpuIBV7RK8aXXLgkQTZwRIoVykMR
+         JpnPRl+8ZKk2p23Isu6qZabK9X+7dOK37GBjJwjPBlrzOAU1GXTXJ1ZGh5igcduQ5NOi
+         wXvoeUS91QGVWmFlrHF0SvWHZBjL23cVJkcPixpSNQoGN1mM09oP55WfD7GSGWlLSFyE
+         LoQXDJ3wknaWN1D3P9TXatR9q/WFMBc+/lGl/4USodYGlDNR11csAfOBFUxF61vFVI6Y
+         sBqA==
+X-Forwarded-Encrypted: i=1; AJvYcCV8SBbXwCam89d+d0BGh0aFml1XNJy2wN2/4n18x2p/dOIQ9oNeok3DpVGwa5RD5ttEYMf2r+hOU70Zd+Dv@lists.linaro.org
+X-Gm-Message-State: AOJu0Yzc7pZji0eTHg5J7euG/SRv02Hp54QqJKJ7OjuqZqhyejnYNmW3
+	isXoaUWOfRtqWg84DyO7OJhJyYFLObi0Tpk5Slf34RouJxlpb4rTDTOMN/CgK/gpJwg=
+X-Gm-Gg: ASbGncvGA4hAQxh2Yofi3XTb5XKoLQjK/PU9qjm5ajY4tBP38Xsunda4E5/XfIsKabg
+	Ix95pHKCwvhwcFRTJAAHXuwQnpG4poIGCyzH/bjJ3NHUqqkI6dRpZf/YL00qAbjv3BGL8akTt2t
+	zPTK3zq72dKlX1+jUMXybAH1pgknlUvwjEcc3gf2V6Aj5QljPM/4SxDniKvPYjBSS1YWLSHMGuB
+	GTwnXLvoFbf865VI8j/4LZwIDd/HyTHL1iNmMhXa5Cat6zitADl2MKM2RYUQe/vzrA7EyjLvn3N
+	rSrTCVyXRRSyGyZJ+vzfZrQOFMzjtaWzjaHdWevVxWhPJxp4fFXcGAk6RdkD1Hh8B8IhBdpnTa6
+	e9Fgc1lj+Kk6Isle+e4PzYzwzRCpIwF53Uf+kZLP9X5+QvpYZUBMQieDJtZSmHoIogST4/imTev
+	5PZ4O/mufyFaCWNmtu2ww1LTmZbUETqpWHiINShJwKiBll2gFCtJF7eN/k
+X-Google-Smtp-Source: AGHT+IF9fpUZC0KSEi60qYSTXqU5TN/0kv3Br6v+7st2smYcT5XQOEwOWy/F2amvDq4QuChbOli5Vg==
+X-Received: by 2002:ad4:5d42:0:b0:880:2c08:88e with SMTP id 6a1803df08f44-8847c5206f8mr8425876d6.45.1763684625945;
+        Thu, 20 Nov 2025 16:23:45 -0800 (PST)
+Received: from ziepe.ca (hlfxns017vw-47-55-120-4.dhcp-dynamic.fibreop.ns.bellaliant.net. [47.55.120.4])
+        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-8846e472ae1sm27645766d6.22.2025.11.20.16.23.45
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 20 Nov 2025 16:23:45 -0800 (PST)
+Received: from jgg by wakko with local (Exim 4.97)
+	(envelope-from <jgg@ziepe.ca>)
+	id 1vMEwC-000000016i7-2ZE0;
+	Thu, 20 Nov 2025 20:23:44 -0400
+Date: Thu, 20 Nov 2025 20:23:44 -0400
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Alex Williamson <alex@shazbot.org>
+Message-ID: <20251121002344.GC233636@ziepe.ca>
+References: <20251120-dmabuf-vfio-v9-0-d7f71607f371@nvidia.com>
+ <20251120-dmabuf-vfio-v9-10-d7f71607f371@nvidia.com>
+ <20251120170413.050ccbb5.alex@shazbot.org>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20251120170413.050ccbb5.alex@shazbot.org>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-7.00 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
+X-Spamd-Result: default: False [-3.50 / 15.00];
 	BAYES_HAM(-3.00)[99.99%];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip4:192.198.163.0/26:c];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[ziepe.ca:s=google];
 	MIME_GOOD(-0.10)[text/plain];
-	DWL_DNSWL_BLOCKED(0.00)[intel.com:dkim];
-	ARC_NA(0.00)[];
-	ASN(0.00)[asn:4983, ipnet:192.198.162.0/23, country:US];
-	HAS_ORG_HEADER(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	RCVD_TLS_LAST(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.219.46:from];
+	ARC_NA(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCPT_COUNT_TWELVE(0.00)[33];
+	MIME_TRACE(0.00)[0:+];
+	NEURAL_HAM(-0.00)[-1.000];
+	MID_RHS_MATCH_FROM(0.00)[];
+	DMARC_NA(0.00)[ziepe.ca];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:+]
+	FROM_EQ_ENVFROM(0.00)[];
+	TO_DN_SOME(0.00)[];
+	DNSWL_BLOCKED(0.00)[209.85.219.46:from,47.55.120.4:received];
+	RCVD_TLS_LAST(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	RCVD_COUNT_THREE(0.00)[3];
+	DKIM_TRACE(0.00)[ziepe.ca:+]
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 6E9663F90A
-X-Spamd-Bar: ------
-Message-ID-Hash: FSD6JOLJKAE4KELKVPXLUEHJYSDPB4WS
-X-Message-ID-Hash: FSD6JOLJKAE4KELKVPXLUEHJYSDPB4WS
-X-MailFrom: thomas.hellstrom@linux.intel.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Matthew Brost <matthew.brost@intel.com>, Stuart Summers <stuart.summers@intel.com>, Lucas De Marchi <lucas.demarchi@intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+X-Rspamd-Queue-Id: 6F5603F92D
+X-Spamd-Bar: ---
+Message-ID-Hash: XAY2OD6Y6BX4ZRKGRTAKJPI6BPVLG2LW
+X-Message-ID-Hash: XAY2OD6Y6BX4ZRKGRTAKJPI6BPVLG2LW
+X-MailFrom: jgg@ziepe.ca
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Leon Romanovsky <leon@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>, Logan Gunthorpe <logang@deltatee.com>, Jens Axboe <axboe@kernel.dk>, Robin Murphy <robin.murphy@arm.com>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Andrew Morton <akpm@linux-foundation.org>, Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Kees Cook <kees@kernel.org>, "Gustavo A. R. Silva" <gustavoars@kernel.org>, Ankit Agrawal <ankita@nvidia.com>, Yishai Hadas <yishaih@nvidia.com>, Shameer Kolothum <skolothumtho@nvidia.com>, Kevin Tian <kevin.tian@intel.com>, Krishnakant Jaju <kjaju@nvidia.com>, Matt Ochs <mochs@nvidia.com>, linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org, linux-block@vger.kernel.org, iommu@lists.linux.dev, linux-mm@kvack.org, linux-doc@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org, linux-hardenin
+ g@vger.kernel.org, Vivek Kasireddy <vivek.kasireddy@intel.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] drm/xe: Fix memory leak when handling pagefault vma
+Subject: [Linaro-mm-sig] Re: [PATCH v9 10/11] vfio/pci: Add dma-buf export support for MMIO regions
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FSD6JOLJKAE4KELKVPXLUEHJYSDPB4WS/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XAY2OD6Y6BX4ZRKGRTAKJPI6BPVLG2LW/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-T24gVGh1LCAyMDI1LTExLTIwIGF0IDE4OjE0ICswMjAwLCBNaWthIEt1b3BwYWxhIHdyb3RlOg0K
-PiBXaGVuIHRoZSBwYWdlZmF1bHQgaGFuZGxpbmcgY29kZSB3YXMgbW92ZWQgdG8gYSBuZXcgZmls
-ZSwgYW4gZXh0cmENCj4gZHJtX2V4ZWNfaW5pdCgpIHdhcyBhZGRlZCB0byB0aGUgVk1BIHBhdGgu
-IFRoaXMgY2FsbCBpcyB1bm5lY2Vzc2FyeQ0KPiBiZWNhdXNlDQo+IHhlX3ZhbGlkYXRpb25fY3R4
-X2luaXQoKSBhbHJlYWR5IHBlcmZvcm1zIGEgZHJtX2V4ZWNfaW5pdCgpLA0KPiByZXN1bHRpbmcg
-aW4gYQ0KPiBtZW1vcnkgbGVhayByZXBvcnRlZCBieSBrbWVtbGVhay4NCj4gDQo+IFJlbW92ZSB0
-aGUgcmVkdW5kYW50IGRybV9leGVjX2luaXQoKSBmcm9tIHRoZSBWTUEgcGFnZWZhdWx0IGhhbmRs
-aW5nDQo+IGNvZGUuDQo+IA0KPiBGaXhlczogZmI1NDRiODQ0NTA4ICgiZHJtL3hlOiBJbXBsZW1l
-bnQgeGVfcGFnZWZhdWx0X3F1ZXVlX3dvcmsiKQ0KPiBDYzogTWF0dGhldyBCcm9zdCA8bWF0dGhl
-dy5icm9zdEBpbnRlbC5jb20+DQo+IENjOiBTdHVhcnQgU3VtbWVycyA8c3R1YXJ0LnN1bW1lcnNA
-aW50ZWwuY29tPg0KPiBDYzogTHVjYXMgRGUgTWFyY2hpIDxsdWNhcy5kZW1hcmNoaUBpbnRlbC5j
-b20+DQo+IENjOiAiVGhvbWFzIEhlbGxzdHLDtm0iIDx0aG9tYXMuaGVsbHN0cm9tQGxpbnV4Lmlu
-dGVsLmNvbT4NCj4gQ2M6IFJvZHJpZ28gVml2aSA8cm9kcmlnby52aXZpQGludGVsLmNvbT4NCj4g
-Q2M6IFN1bWl0IFNlbXdhbCA8c3VtaXQuc2Vtd2FsQGxpbmFyby5vcmc+DQo+IENjOiAiQ2hyaXN0
-aWFuIEvDtm5pZyIgPGNocmlzdGlhbi5rb2VuaWdAYW1kLmNvbT4NCj4gQ2M6IGludGVsLXhlQGxp
-c3RzLmZyZWVkZXNrdG9wLm9yZw0KPiBDYzogbGludXgtbWVkaWFAdmdlci5rZXJuZWwub3JnDQo+
-IENjOiBkcmktZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnDQo+IENjOiBsaW5hcm8tbW0tc2ln
-QGxpc3RzLmxpbmFyby5vcmcNCj4gU2lnbmVkLW9mZi1ieTogTWlrYSBLdW9wcGFsYSA8bWlrYS5r
-dW9wcGFsYUBsaW51eC5pbnRlbC5jb20+DQoNClJldmlld2VkLWJ5OiBUaG9tYXMgSGVsbHN0csO2
-bSA8dGhvbWFzLmhlbGxzdHJvbUBsaW51eC5pbnRlbC5jb20+DQo+IC0tLQ0KPiDCoGRyaXZlcnMv
-Z3B1L2RybS94ZS94ZV9wYWdlZmF1bHQuYyB8IDEgLQ0KPiDCoDEgZmlsZSBjaGFuZ2VkLCAxIGRl
-bGV0aW9uKC0pDQo+IA0KPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL3hlL3hlX3BhZ2Vm
-YXVsdC5jDQo+IGIvZHJpdmVycy9ncHUvZHJtL3hlL3hlX3BhZ2VmYXVsdC5jDQo+IGluZGV4IGZl
-M2U0MDE0NTAxMi4uYWZiMDY1OThiNmUxIDEwMDY0NA0KPiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0v
-eGUveGVfcGFnZWZhdWx0LmMNCj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL3hlL3hlX3BhZ2VmYXVs
-dC5jDQo+IEBAIC0xMDIsNyArMTAyLDYgQEAgc3RhdGljIGludCB4ZV9wYWdlZmF1bHRfaGFuZGxl
-X3ZtYShzdHJ1Y3QgeGVfZ3QNCj4gKmd0LCBzdHJ1Y3QgeGVfdm1hICp2bWEsDQo+IMKgDQo+IMKg
-CS8qIExvY2sgVk0gYW5kIEJPcyBkbWEtcmVzdiAqLw0KPiDCoAl4ZV92YWxpZGF0aW9uX2N0eF9p
-bml0KCZjdHgsICZ2bS0+eGUtPnZhbCwgJmV4ZWMsIChzdHJ1Y3QNCj4geGVfdmFsX2ZsYWdzKSB7
-fSk7DQo+IC0JZHJtX2V4ZWNfaW5pdCgmZXhlYywgMCwgMCk7DQo+IMKgCWRybV9leGVjX3VudGls
-X2FsbF9sb2NrZWQoJmV4ZWMpIHsNCj4gwqAJCWVyciA9IHhlX3BhZ2VmYXVsdF9iZWdpbigmZXhl
-Yywgdm1hLCB0aWxlLT5tZW0udnJhbSwNCj4gwqAJCQkJCSBuZWVkc192cmFtID09IDEpOw0KDQpf
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0t
-c2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5z
-dWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFy
-by5vcmcK
+On Thu, Nov 20, 2025 at 05:04:13PM -0700, Alex Williamson wrote:
+
+> @@ -2501,7 +2501,7 @@ static int vfio_pci_dev_set_hot_reset(struct vfio_device_set *dev_set,
+>  err_undo:
+>         list_for_each_entry_from_reverse(vdev, &dev_set->device_list,
+>                                          vdev.dev_set_list) {
+> -               if (__vfio_pci_memory_enabled(vdev))
+> +               if (vdev->vdev.open_count && __vfio_pci_memory_enabled(vdev))
+>                         vfio_pci_dma_buf_move(vdev, false);
+>                 up_write(&vdev->memory_lock);
+>         }
+> 
+> Any other suggestions?  This should be the only reset path with this
+> nuance of affecting non-opened devices.  Thanks,
+
+Seems reasonable, but should it be in __vfio_pci_memory_enabled() just
+to be robust?
+
+Jason
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
