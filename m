@@ -2,215 +2,189 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mALeIkr/4Gk7oQAAu9opvQ
+	id KPqdDVD/4Gk7oQAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:24:58 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:25:04 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4C8A0410ADA
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:24:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E3DA1410AEB
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:25:03 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4F0CB405D0
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:24:57 +0000 (UTC)
-Received: from PH7PR06CU001.outbound.protection.outlook.com (mail-westus3azon11010036.outbound.protection.outlook.com [52.101.201.36])
-	by lists.linaro.org (Postfix) with ESMTPS id 796333F69B
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 20 Nov 2025 17:35:19 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E852440A13
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:25:02 +0000 (UTC)
+Received: from fhigh-b5-smtp.messagingengine.com (fhigh-b5-smtp.messagingengine.com [202.12.124.156])
+	by lists.linaro.org (Postfix) with ESMTPS id CE7633F92D
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 21 Nov 2025 00:04:20 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=Nvidia.com header.s=selector2 header.b=ioH1WkcQ;
-	spf=pass (lists.linaro.org: domain of nicolinc@nvidia.com designates 52.101.201.36 as permitted sender) smtp.mailfrom=nicolinc@nvidia.com;
-	dmarc=pass (policy=reject) header.from=nvidia.com;
-	arc=pass ("microsoft.com:s=arcselector10001:i=1")
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=kJBewdhhHx6v1AN/YcSUzGFiDM8QCKcK+8+vjwnvzlKxoVGXDYrgmbPQwES4skdt5lTFdc88QEt81o1uS4gsYF6XEkDittghgWza9sQ8NRgSSP/dOMWx0jUbkjHyPazvhxNyi2z6u2CsDqvzasDQAfH/NL3bghCMs1XDGvQ36lsg3XUnesE3RZ5MTTri81AOAGGNqe3348KfGRf65stX7VXwawYf5sIgglhL3HlzcQTRgrTIflgeJn0mCg8259pHnoY48FaJx8Zxq2s8gR0l9YLVeaK6IYxfErQqv3C4ACv1M8LrGJAZ2UzWhgvt11rBxnqqn0oHTsYPNiqJelxMpA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=rOwGtsvmUyOAB3WlIZusz9JGYAOR2EypyVZsDmCO6bE=;
- b=uBTn5Sk2nFIzvof1mdfGxeJajF+hH+BgTr7Ek3ab7buRM/Vd24TkqZiwk7AXLzRVhOsxN9IfPWo+tP4MMlZcoAYe9K1QxtKDlWmyYU2YmwV0Y02TaU0y1pH8pQVqF3ede7dATZP8YfplCoXQNuYzIsBJ7iV5K8T7ACIbiaeTB1YJwIpqi2Y5GKPox9KKPJHcZmbzUTx1R7D09XvNyU5tgs0yxx7gHU1N8TUciVUboDTAXqZ5YeKahGWFwIJR7BSW0LWVHSwsNvCwdtUXLrSCVnpc5OZq7OR3S2j37MV4Pfgx9REHLX3uO6tbMlRpoUDbQLQuGjzjluSoGDA04dYH5Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.117.160) smtp.rcpttodomain=ffwll.ch smtp.mailfrom=nvidia.com;
- dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=rOwGtsvmUyOAB3WlIZusz9JGYAOR2EypyVZsDmCO6bE=;
- b=ioH1WkcQ8miNjomXxvb9rFeVrBmkxJESTE93JFnq6H6EEuCHQxpnK9PUcMfUpsw9zPcZ2l5xdOySgj0L91/1CinA4hhdBluRRIKHsoykgYn9P3lm2TBRc3FEHzHu5N0sf2lAKckVbtjBPvbCfqyhZjPYQsaYosHIuwuVc3loEi9914pJIzI/okFfkutSpA658sJsa7PYd6kSAH4HdxRCa3cvZJ46Rx0DZGaf4TxvpmFQ0eaQ6uOqJwxQ+YBe+1X24bzjPSvt6sTweDSwI2xyzD2giqHskG4S5TxdtJdYWNPPsnlQGMNVzGP0OWbzpc7JCLA301BSyy9LNxOe/MnEmQ==
-Received: from CH0PR03CA0243.namprd03.prod.outlook.com (2603:10b6:610:e5::8)
- by SA1PR12MB999085.namprd12.prod.outlook.com (2603:10b6:806:4a2::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.11; Thu, 20 Nov
- 2025 17:35:17 +0000
-Received: from DS3PEPF000099DD.namprd04.prod.outlook.com
- (2603:10b6:610:e5:cafe::91) by CH0PR03CA0243.outlook.office365.com
- (2603:10b6:610:e5::8) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9343.11 via Frontend Transport; Thu,
- 20 Nov 2025 17:35:13 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
- smtp.mailfrom=nvidia.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=nvidia.com;
-Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.117.160) by
- DS3PEPF000099DD.mail.protection.outlook.com (10.167.17.199) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9343.9 via Frontend Transport; Thu, 20 Nov 2025 17:35:17 +0000
-Received: from rnnvmail203.nvidia.com (10.129.68.9) by mail.nvidia.com
- (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 20 Nov
- 2025 09:34:59 -0800
-Received: from rnnvmail205.nvidia.com (10.129.68.10) by rnnvmail203.nvidia.com
- (10.129.68.9) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 20 Nov
- 2025 09:34:58 -0800
-Received: from Asurada-Nvidia (10.127.8.11) by mail.nvidia.com (10.129.68.10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 20 Nov 2025 09:34:57 -0800
-Date: Thu, 20 Nov 2025 09:34:55 -0800
-From: Nicolin Chen <nicolinc@nvidia.com>
-To: Jason Gunthorpe <jgg@nvidia.com>
-Message-ID: <aR9RPxtQIsoKgGHk@Asurada-Nvidia>
-References: <0-v1-af84a3ab44f5+f68-iommufd_buf_jgg@nvidia.com>
- <1-v1-af84a3ab44f5+f68-iommufd_buf_jgg@nvidia.com>
+	dkim=pass header.d=shazbot.org header.s=fm2 header.b=A4DQbQTO;
+	dkim=pass header.d=messagingengine.com header.s=fm3 header.b="D dwiK8V";
+	spf=pass (lists.linaro.org: domain of alex@shazbot.org designates 202.12.124.156 as permitted sender) smtp.mailfrom=alex@shazbot.org;
+	dmarc=pass (policy=none) header.from=shazbot.org
+Received: from phl-compute-04.internal (phl-compute-04.internal [10.202.2.44])
+	by mailfhigh.stl.internal (Postfix) with ESMTP id 879FA7A016A;
+	Thu, 20 Nov 2025 19:04:19 -0500 (EST)
+Received: from phl-mailfrontend-02 ([10.202.2.163])
+  by phl-compute-04.internal (MEProxy); Thu, 20 Nov 2025 19:04:20 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=shazbot.org; h=
+	cc:cc:content-transfer-encoding:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm2; t=1763683459;
+	 x=1763769859; bh=HjvLzwzMxld1mKMp0zyef95cQ5dfE6rG/eqr2WGdSgw=; b=
+	A4DQbQTOyZxcwypC3+L5HNDKquu8alZqgjdhfxqZhbERLv0+0bVTi2URYY9SzrLO
+	cIA7+3vgf/rnkv+XeyQZkg532nvGvpUxuRuwx8L/Uic271UWSaf9xReKLuEuvY74
+	TXftCb/sHWzhJltogSGXj4K0/ZbPmRRaXRFkmo3sRy+Z4z8++d48fHWnyoTm5Rd9
+	aH/FdoWkLMRiNni0STbqvQYOU5pdxxsY7e52rmKgWsiBf8fqGFqAxCDG3kL1PeG2
+	7GxTPsfg7ei7jvBCMfCyaQh0d+BBQYxa1SY8i0Kfw7zj/+JdqdB22GSLh+Fs90K6
+	u32o+RuLRjdGGSIuhBj9Zg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:feedback-id:feedback-id
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1763683459; x=
+	1763769859; bh=HjvLzwzMxld1mKMp0zyef95cQ5dfE6rG/eqr2WGdSgw=; b=D
+	dwiK8V+/jfQWiXQ4xfgr/qIY0MMzH+L4GlO/SbVTzukbW8v4IZsujct5M/7WHsGU
+	KJYRNfKXTpBUBZzevF7fYkXShA08TaKjEn7NKAD0fgTmLpjMlQw7jiuEY0bMZwZn
+	VccsOxjUPSrk4Ypi3Td2udeXQFCQSKbah3t7VMkpMgQAXlzIHM3l/phBNUmqAbsT
+	DpQzFdvi8RlbqpLR/grhmVmP/RW6ZfN97T+HzwghRhTZ8ofBo2MW2Y7y3xw+jjnc
+	vC3t58oLkrJxxKLSXx/zPq4Pu6J9ROujv6iqpDupZqdrM1VaUpFUxHq5MXTwkadv
+	zU0wpSwt6t6kGWO6qd5gg==
+X-ME-Sender: <xms:gawfaQpKfCI9uTs4scyVMdG0pHsQRE0PiBFHB_XYgFSu1KW_IQsjVA>
+    <xme:gawfaW2e_QMZXgkEpQ4dQAIhH754U_TcX65CFkHK4BzhBZeujWK2leqdh1rKUCtjh
+    4tLTjYQmkHsFx6m9HuoO30v226Seho2vROg9ws3UOb7QkFzwUN8>
+X-ME-Received: <xmr:gawfaX3HsXWu4ErPEmHODuiTinVc3SxzIhtZwD7cdqamrNVqEBbkCxqj>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdeggddvvdekgeejucetufdoteggodetrf
+    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
+    rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
+    gurhepfffhvfevuffkjghfgggtgfesthejredttddtvdenucfhrhhomheptehlvgigucgh
+    ihhllhhirghmshhonhcuoegrlhgvgiesshhhrgiisghothdrohhrgheqnecuggftrfgrth
+    htvghrnhepteetudelgeekieegudegleeuvdffgeehleeivddtfeektdekkeehffehudet
+    hffhnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomheprg
+    hlvgigsehshhgriigsohhtrdhorhhgpdhnsggprhgtphhtthhopeeffedpmhhouggvpehs
+    mhhtphhouhhtpdhrtghpthhtoheplhgvohhnsehkvghrnhgvlhdrohhrghdprhgtphhtth
+    hopegshhgvlhhgrggrshesghhoohhglhgvrdgtohhmpdhrtghpthhtoheplhhoghgrnhhg
+    seguvghlthgrthgvvgdrtghomhdprhgtphhtthhopegrgigsohgvsehkvghrnhgvlhdrug
+    hkpdhrtghpthhtoheprhhosghinhdrmhhurhhphhihsegrrhhmrdgtohhmpdhrtghpthht
+    ohepjhhorhhoseeksgihthgvshdrohhrghdprhgtphhtthhopeifihhllheskhgvrhhnvg
+    hlrdhorhhgpdhrtghpthhtohepmhdrshiihihprhhofihskhhisehsrghmshhunhhgrdgt
+    ohhmpdhrtghpthhtohepjhhgghesiihivghpvgdrtggr
+X-ME-Proxy: <xmx:gqwfaTc1qHnh0-i3KO6tJsUVtNtxTcxs3s7vL3whUFJvperGF6WN6g>
+    <xmx:gqwfaT4HBIK9hrr9a_hBvYAFnQ7rPa0nLaI-32DuwCrkmnxah0vROg>
+    <xmx:gqwfaQhMKw1KHBszqSGzGjVlPYaxt6EqZf0UcaWVJr34DnEzzh9nUg>
+    <xmx:gqwfaVrbusXEFt0RPAKnPhFRWA6SjT0BpwWPLXloz2sEwqtMNFS0HQ>
+    <xmx:g6wfae0YvvvtVTx0cpC_54SaFJugeR6HLLLdi1mavPKyN1Xc4JF--XDn>
+Feedback-ID: i03f14258:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
+ 20 Nov 2025 19:04:15 -0500 (EST)
+Date: Thu, 20 Nov 2025 17:04:13 -0700
+From: Alex Williamson <alex@shazbot.org>
+To: Leon Romanovsky <leon@kernel.org>
+Message-ID: <20251120170413.050ccbb5.alex@shazbot.org>
+In-Reply-To: <20251120-dmabuf-vfio-v9-10-d7f71607f371@nvidia.com>
+References: <20251120-dmabuf-vfio-v9-0-d7f71607f371@nvidia.com>
+	<20251120-dmabuf-vfio-v9-10-d7f71607f371@nvidia.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <1-v1-af84a3ab44f5+f68-iommufd_buf_jgg@nvidia.com>
-X-NV-OnPremToCloud: ExternallySecured
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS3PEPF000099DD:EE_|SA1PR12MB999085:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2cb638a1-0534-493b-ff97-08de285b2b9d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|36860700013|82310400026|7416014|376014|1800799024;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?1Lst3yZAVOq3nvPhtnWZzfhIJklW4ZJzf8TcqZuN4P+HbSHTSt0q3YEuP+uH?=
- =?us-ascii?Q?RjysqBTRWsCMFTEnUR9sjK9/yH699GU9pJaTtAFBqcydk+VON3Vb78aBBW8E?=
- =?us-ascii?Q?nNEhpN71r1Q+BD9C2GUG8oPB+Lt/OpFGc52L4PR0X2fPmLmu9z1jr05373se?=
- =?us-ascii?Q?EKajAM3iEpNqay75YCqymqEHBj0orvb2cz3W//Ng8UsWjVpjpf4oHa6RewxN?=
- =?us-ascii?Q?ZO7Jqh7048wQ5sK7qQUt3g94DqB0Sgs5W6maXcsUywTsImwM1Y2ZVXpa5WrV?=
- =?us-ascii?Q?MGY+XapkSfpiBzRnCanLPz/XRWACCqkGM0ju3rBx34yq5hGJdrXIvdub1Yv0?=
- =?us-ascii?Q?XpyCyPMNhKJ5/zlZ6Qn8GpkrDv+/NxCRjtIXQfBsk2Blbkhf6l73SjRLf9O9?=
- =?us-ascii?Q?ILAI6GYa+8qQ3dMbfm11AJNK6pOFnlfSC7/rQgoJ1gBBnCCIJU7Y5vyGm9FX?=
- =?us-ascii?Q?lzWxAUkDJcpoyKrz3McEetzCAEkUHt/16UIYRbhObXZS4jDjV/zbN3m0lgQb?=
- =?us-ascii?Q?XBDiVqD6swal2r/jOcg9Uu3FRq504im7JY1T6bLS6bj7NMxd5Rxr+l2yzxV5?=
- =?us-ascii?Q?y6YsrdxZtR2QbkmLUxsMV6x9DNvlqVePBm5AQveo+Z/GU5WPKXI/xY6IgomN?=
- =?us-ascii?Q?I2yt+ZgMVN06poALRchs6aZMVlaxZhrSSjJwAYp57lTFz83fCHEC3qA0Uprs?=
- =?us-ascii?Q?uvFEziBSv+nCoiz9wqn55seJwMd1lBEh6qQ+checpSdXy+jb3u/6GXxL3VR1?=
- =?us-ascii?Q?WDUKQJDmyYrEbPMl7D23fEubf/d3kjG9hE/fJlzyL1xIBivtz/tYJl1/LfX6?=
- =?us-ascii?Q?ns3VjXj1rnVgt+KssFjR8jl/2soBViOp4mugBqBP02naqB+ITi5tCMnz38Zs?=
- =?us-ascii?Q?D4WYQtcfWH73W2CbdW4FZkl+qOe3qjsoR8MMhfY4e/X/ensIi/8uqMo/00cd?=
- =?us-ascii?Q?BOFSr8dVQ3t89Mwc0+e8Io1LiVlm1wNjhZ/h53m++XrkWPwp4TWY7j4j1LlJ?=
- =?us-ascii?Q?LXw8Xnz6L76HY2KlxSZSgbqsgabSbqLsDQTUxTztoyUreJcaqXmbZ9q0YSFG?=
- =?us-ascii?Q?pgqHLt7tKIhR7tplp+dOtEei9/BvMe7nsDyo6qSzTGalOGba3WFgK7EjBkYG?=
- =?us-ascii?Q?+LTNBJ+AC7X/y4atQb3phVW9lM5Ge5Q4WPDNUiEZvGLl7LUT3n3/As+kkqhH?=
- =?us-ascii?Q?ToDfudrS6ELsI/nJltXWtO4I/s2DfJW+4BchASaDcEt3AWSXcheOn2x2fX6G?=
- =?us-ascii?Q?A0nFc8gT+OJ8pg2UKxnLTWDpOEu/dN1nMatjL7vYUswuzahexwLhapFoXBkR?=
- =?us-ascii?Q?9t/Cc11pen03Dt/aVfJ2GJ65QmkidRitcY5ajHJkXKnEc9KwYdJZ2/gwozgu?=
- =?us-ascii?Q?znieIJu7dMxxRoqtNIOHB906it494B5LGqMKi6FFijj6tPi4o9V2W84QsxQC?=
- =?us-ascii?Q?NVz0ZWb9bN0i2bcb5hXTRXO3eG1cdt5K54uuWIXgNzeKPJ1FyXVkorLeDxdF?=
- =?us-ascii?Q?u7MH05l9E10J5h1qHE7fyGgWVaxCo2HfO9XPFBTNmxcuSMsHWzjbrAKjoefF?=
- =?us-ascii?Q?/qeTGlb0WBkiFDYjYO4=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:216.228.117.160;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:dc6edge1.nvidia.com;CAT:NONE;SFS:(13230040)(36860700013)(82310400026)(7416014)(376014)(1800799024);DIR:OUT;SFP:1101;
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Nov 2025 17:35:17.0671
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2cb638a1-0534-493b-ff97-08de285b2b9d
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.117.160];Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	DS3PEPF000099DD.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB999085
-X-Spamd-Bar: ----
-X-MailFrom: nicolinc@nvidia.com
+X-Spamd-Bar: ---
+X-MailFrom: alex@shazbot.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: N4L3WD7JE3LW47HHGPQXGLZB5ZLDSPEE
-X-Message-ID-Hash: N4L3WD7JE3LW47HHGPQXGLZB5ZLDSPEE
-X-Mailman-Approved-At: Thu, 16 Apr 2026 15:01:08 +0000
-CC: Alex Williamson <alex@shazbot.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, iommu@lists.linux.dev, Joerg Roedel <joro@8bytes.org>, Kevin Tian <kevin.tian@intel.com>, kvm@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-kselftest@vger.kernel.org, linux-media@vger.kernel.org, Robin Murphy <robin.murphy@arm.com>, Shuah Khan <shuah@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Will Deacon <will@kernel.org>, Krishnakant Jaju <kjaju@nvidia.com>, Leon Romanovsky <leon@kernel.org>, Matt Ochs <mochs@nvidia.com>, patches@lists.linux.dev, Simona Vetter <simona.vetter@ffwll.ch>, Vivek Kasireddy <vivek.kasireddy@intel.com>, Xu Yilun <yilun.xu@linux.intel.com>
+Message-ID-Hash: Y2XYSAMWN35HCGRZ3BVHJ6GJRGHNM4VW
+X-Message-ID-Hash: Y2XYSAMWN35HCGRZ3BVHJ6GJRGHNM4VW
+X-Mailman-Approved-At: Thu, 16 Apr 2026 15:01:09 +0000
+CC: Bjorn Helgaas <bhelgaas@google.com>, Logan Gunthorpe <logang@deltatee.com>, Jens Axboe <axboe@kernel.dk>, Robin Murphy <robin.murphy@arm.com>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Jason Gunthorpe <jgg@ziepe.ca>, Andrew Morton <akpm@linux-foundation.org>, Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Kees Cook <kees@kernel.org>, "Gustavo A. R. Silva" <gustavoars@kernel.org>, Ankit Agrawal <ankita@nvidia.com>, Yishai Hadas <yishaih@nvidia.com>, Shameer Kolothum <skolothumtho@nvidia.com>, Kevin Tian <kevin.tian@intel.com>, Krishnakant Jaju <kjaju@nvidia.com>, Matt Ochs <mochs@nvidia.com>, linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org, linux-block@vger.kernel.org, iommu@lists.linux.dev, linux-mm@kvack.org, linux-doc@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org, linux-hardening@v
+ ger.kernel.org, Vivek Kasireddy <vivek.kasireddy@intel.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 1/9] vfio/pci: Add vfio_pci_dma_buf_iommufd_map()
+Subject: [Linaro-mm-sig] Re: [PATCH v9 10/11] vfio/pci: Add dma-buf export support for MMIO regions
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/N4L3WD7JE3LW47HHGPQXGLZB5ZLDSPEE/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/Y2XYSAMWN35HCGRZ3BVHJ6GJRGHNM4VW/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [4.99 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[nvidia.com : SPF not aligned (relaxed),reject];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
-	R_DKIM_REJECT(1.00)[Nvidia.com:s=selector2];
-	DATE_IN_PAST(1.00)[3525];
-	MID_RHS_NOT_FQDN(0.50)[];
+X-Spamd-Result: default: False [1.59 / 15.00];
+	DATE_IN_PAST(1.00)[3519];
+	MID_CONTAINS_FROM(1.00)[];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[shazbot.org : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	MIME_TRACE(0.00)[0:+];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	GREYLIST(0.00)[pass,meta];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email,nvidia.com:email];
-	FROM_NEQ_ENVFROM(0.00)[nicolinc@nvidia.com,linaro-mm-sig-bounces@lists.linaro.org];
+	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[32];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[Nvidia.com:-];
-	NEURAL_HAM(-0.00)[-0.709];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	NEURAL_SPAM(0.00)[0.664];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[alex@shazbot.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	RCVD_COUNT_SEVEN(0.00)[8]
-X-Rspamd-Queue-Id: 4C8A0410ADA
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,shazbot.org:mid,lists.linaro.org:helo,lists.linaro.org:rdns]
+X-Rspamd-Queue-Id: E3DA1410AEB
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Fri, Nov 07, 2025 at 12:49:33PM -0400, Jason Gunthorpe wrote:
-> This function is used to establish the "private interconnect" between the
-> VFIO DMABUF exporter and the iommufd DMABUF importer. This is intended to
-> be a temporary API until the core DMABUF interface is improved to natively
-> support a private interconnect and revocable negotiation.
-> 
-> This function should only be called by iommufd when trying to map a
-> DMABUF. For now iommufd will only support VFIO DMABUFs.
-> 
-> The following improvements are needed in the DMABUF API to generically
-> support more exporters with iommufd/kvm type importers that cannot use the
-> DMA API:
-> 
->  1) Revoke semantics. VFIO needs to be able to prevent access to the MMIO
->     during FLR, and so it will use dma_buf_move_notify() to prevent
->     access. iommmufd does not support fault handling so it cannot
->     implement the full move_notify. Instead if revoke is negotiated the
->     exporter promises not to use move_notify() unless the importer can
->     experiance failures. iommufd will unmap the dmabuf from the iommu page
->     tables while it is revoked.
-> 
->  2) Private interconnect negotiation. iommufd will only be able to map
->     a "private interconnect" that provides a phys_addr_t and a
->     struct p2pdma_provider * to describe the memory. It cannot use a DMA
->     mapped scatterlist since it is directly calling iommu_map().
-> 
->  3) NULL device during dma_buf_dynamic_attach(). Since iommufd doesn't use
->     the DMA API it doesn't have a DMAable struct device to pass here.
-> 
-> Signed-off-by: Jason Gunthorpe <jgg@nvidia.com>
- 
-Reviewed-by: Nicolin Chen <nicolinc@nvidia.com>
+On Thu, 20 Nov 2025 11:28:29 +0200
+Leon Romanovsky <leon@kernel.org> wrote:
+> diff --git a/drivers/vfio/pci/vfio_pci_core.c b/drivers/vfio/pci/vfio_pci_core.c
+> index 142b84b3f225..51a3bcc26f8b 100644
+> --- a/drivers/vfio/pci/vfio_pci_core.c
+> +++ b/drivers/vfio/pci/vfio_pci_core.c
+...
+> @@ -2487,8 +2500,11 @@ static int vfio_pci_dev_set_hot_reset(struct vfio_device_set *dev_set,
+>  
+>  err_undo:
+>  	list_for_each_entry_from_reverse(vdev, &dev_set->device_list,
+> -					 vdev.dev_set_list)
+> +					 vdev.dev_set_list) {
+> +		if (__vfio_pci_memory_enabled(vdev))
+> +			vfio_pci_dma_buf_move(vdev, false);
+>  		up_write(&vdev->memory_lock);
+> +	}
+
+I ran into a bug here.  In the hot reset path we can have dev_sets
+where one or more devices are not opened by the user.  The vconfig
+buffer for the device is established on open.  However:
+
+bool __vfio_pci_memory_enabled(struct vfio_pci_core_device *vdev)
+{
+        struct pci_dev *pdev = vdev->pdev;
+        u16 cmd = le16_to_cpu(*(__le16 *)&vdev->vconfig[PCI_COMMAND]);
+	...
+
+Leads to a NULL pointer dereference.
+
+I think the most straightforward fix is simply to test the open_count
+on the vfio_device, which is also protected by the dev_set->lock that
+we already hold here:
+
+--- a/drivers/vfio/pci/vfio_pci_core.c
++++ b/drivers/vfio/pci/vfio_pci_core.c
+@@ -2501,7 +2501,7 @@ static int vfio_pci_dev_set_hot_reset(struct vfio_device_set *dev_set,
+ err_undo:
+        list_for_each_entry_from_reverse(vdev, &dev_set->device_list,
+                                         vdev.dev_set_list) {
+-               if (__vfio_pci_memory_enabled(vdev))
++               if (vdev->vdev.open_count && __vfio_pci_memory_enabled(vdev))
+                        vfio_pci_dma_buf_move(vdev, false);
+                up_write(&vdev->memory_lock);
+        }
+
+Any other suggestions?  This should be the only reset path with this
+nuance of affecting non-opened devices.  Thanks,
+
+Alex
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
