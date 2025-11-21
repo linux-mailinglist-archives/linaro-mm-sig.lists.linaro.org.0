@@ -2,101 +2,81 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9D75CC77785
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 21 Nov 2025 06:52:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2EF51C77B9E
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 21 Nov 2025 08:42:27 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A4FA33F9B1
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 21 Nov 2025 05:52:34 +0000 (UTC)
-Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
-	by lists.linaro.org (Postfix) with ESMTPS id 991E23F9A9
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 21 Nov 2025 05:52:19 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 500543F9AD
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 21 Nov 2025 07:42:26 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+	by lists.linaro.org (Postfix) with ESMTPS id 6C13A3F7E1
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 21 Nov 2025 07:42:09 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=linaro.org header.s=google header.b=HbAfcVfm;
-	spf=pass (lists.linaro.org: domain of sumit.semwal@linaro.org designates 209.85.218.41 as permitted sender) smtp.mailfrom=sumit.semwal@linaro.org;
-	dmarc=pass (policy=none) header.from=linaro.org
-Received: by mail-ej1-f41.google.com with SMTP id a640c23a62f3a-b7277324054so252003666b.0
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 20 Nov 2025 21:52:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1763704338; x=1764309138; darn=lists.linaro.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=f3AJGPP8zMc+R4UOzL+aeZF1qHpaPM6Ue1kyKZrrIYA=;
-        b=HbAfcVfmCSwCmoTqg+3HvfVrX49ED5p21G0odm4GpaAatUVrTUIweXOwHov6BLjy3R
-         9wAiqJQBSoQHyPfF0lkQwQWG/3YDxNwwR0DC3wmXTi6oHZEe3gvGzqCKHdO/3zGiRm0K
-         JGhx2gCW8Vf7Gtli/ficJgeWCwvjgkGPuJ5+VKy1J1JZwC/3Kay3r22Ob8n2LQbxQkq3
-         8bGBt0VSoe8RrvtegzSuvtY/qUdR9AmzB7mVS1BRGL+4qBqcxSX4gXo4+onvjf8GL/PP
-         cBLqvBfO8lwYYgd4MOSjFvu/l/OqLqwy4sqIWmn3oxs2wNNkmqPJfnpkmBpgQ+ATxYIL
-         KbGA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763704338; x=1764309138;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=f3AJGPP8zMc+R4UOzL+aeZF1qHpaPM6Ue1kyKZrrIYA=;
-        b=BwKP0Z7Fo9Add7SYvYGhnhxQp1sCgrASPzXwlQqd8Cah+MjCYGUCdJqdGXqPuTwzke
-         nNVo8t9JrJIBNuUcDfwvUgRWCg5Y91xUFRMU+TZD+sEBLiN2W9UOayawOdeUd1kPBnpW
-         bRecVdagnUENtaxvMic8C9rKrSuSgvng0W2oim+yjSle9UBeKW6f4RNgvCA5GkE1LZp7
-         lwpn6DZdjeKO+y8io8FGhilXWghAmIaWeCIlxdoLsRtUN3JdRB/1uNTQCFfjArITh4GJ
-         WjGDTiPB5hIJFvVPC7a7iBEtztbpfE1mI6l67MIulspuL5+fV9ELwgD32OVLFJLrkVR0
-         LPSw==
-X-Gm-Message-State: AOJu0YzcRfUZOURoVy5Sk9JmZ8ctwZ4iDqLmjbZLQ2OYwsCnIfsdH5l2
-	VM8z6nM6kODticO4bNra426yx1OwhvEqzK9iHdS2fSHrG6GFoSYdAFR36O42FNHkVcTj9h4u45z
-	CBIa20Y4VENbRgbPr/o4cFwC0RMaWngyLcgXNwBMzdHuS
-X-Gm-Gg: ASbGnctaufwTPPoXPRP290X7ceA0fVHkGFvN6VFipPEdC9MyCF3wRbUqOF73V3Owk9r
-	z1/LFjB+/6uZs7mivBl1xa861DFww9DsO9n7WTGluN3aQZByPiG+JIX44z3mAebp4lxTCzKs2ec
-	u/UuE35m0DHNXE4VlAKuiff1Uof3/XKa/9AwXlkdJG7W+i8abgz7k4uFsSWpF2xjfdqyX4TL/90
-	iKKsrQuuxMcPPtpb86aaHwk+dNEeEDMc5QGgV3WfGrgEoQrJiGqGp04szO5xtgOoTRmLFN65w+G
-	utZ6GA==
-X-Google-Smtp-Source: AGHT+IH2Ft4P3PaBHYHUb9eBoowl1r0fF++S8Pm7hX7zw/Psj+ebZMqK+8HVlDkHZMDyBQFS0hAWL9JagTsIi4EtO7k=
-X-Received: by 2002:a17:907:9611:b0:b73:8b79:a322 with SMTP id
- a640c23a62f3a-b7671549d5amr89779966b.11.1763704338528; Thu, 20 Nov 2025
- 21:52:18 -0800 (PST)
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=OCp8Vjg5;
+	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=leon@kernel.org;
+	dmarc=pass (policy=quarantine) header.from=kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by sea.source.kernel.org (Postfix) with ESMTP id BD73D440E4;
+	Fri, 21 Nov 2025 07:42:08 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F0F4DC4CEF1;
+	Fri, 21 Nov 2025 07:42:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1763710928;
+	bh=O/owrQ7LTAA9ZbRZu64BC64XoYmRo+uhZTzeo+Ew2jc=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=OCp8Vjg5oImfKWfN4GXv7kmUMrNS5krBORtVRTmwcB4DOZvoX+/g/t4vr9ZWu6UJl
+	 1Vj7sFNlUll1T9YUQc4xpzO6PKziNve8YmQzv8+oTDniJ8ihFor/4t6HDeETH7XPnh
+	 0qzUx+skWQwrxymzZd4yqSdRZyo5Qm9O91YykG/j5f61W+s9sbvi1j4nNmvR6DSrSr
+	 IkeXOC0kXEpJjmiSHsc4BSNizwXT4L6AL6eRN87ViuHkHSr6r++BESWVogPdAjx1dI
+	 qCWxiIBByOU5w/PZ6VKwrk97r6+SckIe4Pi/3ecdSozDC1fXrYtDiogYDbOS5uXIBj
+	 XbOkJYPROPYqA==
+Date: Fri, 21 Nov 2025 09:42:03 +0200
+From: Leon Romanovsky <leon@kernel.org>
+To: Alex Williamson <alex@shazbot.org>
+Message-ID: <20251121074203.GX18335@unreal>
+References: <20251120-dmabuf-vfio-v9-0-d7f71607f371@nvidia.com>
+ <20251120-dmabuf-vfio-v9-10-d7f71607f371@nvidia.com>
+ <20251120170413.050ccbb5.alex@shazbot.org>
 MIME-Version: 1.0
-References: <20251021042022.47919-1-21cnbao@gmail.com> <CAGsJ_4zPrgkb37VCfY+C8Dn6dS4LmSMrHnfU7Oy4bR19yhxbAA@mail.gmail.com>
-In-Reply-To: <CAGsJ_4zPrgkb37VCfY+C8Dn6dS4LmSMrHnfU7Oy4bR19yhxbAA@mail.gmail.com>
-From: Sumit Semwal <sumit.semwal@linaro.org>
-Date: Fri, 21 Nov 2025 11:22:07 +0530
-X-Gm-Features: AWmQ_bkvqJFF6U-BXLQ5aYDwfQ_Tm4IRMssNoeoYXGILQhoCtvIipXPadVOiAf8
-Message-ID: <CAO_48GFhmJoivvaPFFxyuA+UH9woC1JoJE4=HeKa2nmPGA53-g@mail.gmail.com>
-To: Barry Song <21cnbao@gmail.com>
+Content-Disposition: inline
+In-Reply-To: <20251120170413.050ccbb5.alex@shazbot.org>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-4.10 / 15.00];
+X-Spamd-Result: default: False [-3.50 / 15.00];
 	BAYES_HAM(-3.00)[99.99%];
-	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
-	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.252.31];
 	MIME_GOOD(-0.10)[text/plain];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.218.41:from];
-	URIBL_BLOCKED(0.00)[mail-ej1-f41.google.com:rdns,mail-ej1-f41.google.com:helo,linaro.org:dkim,linaro.org:from_smtp,linaro.org:from_mime];
-	ARC_NA(0.00)[];
-	RCVD_COUNT_ONE(0.00)[1];
-	MISSING_XM_UA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[13];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_TO(0.00)[gmail.com];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	RCPT_COUNT_TWELVE(0.00)[33];
+	ARC_NA(0.00)[];
+	URIBL_BLOCKED(0.00)[unreal:mid];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_TLS_LAST(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	RCVD_TLS_LAST(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	DNSWL_BLOCKED(0.00)[209.85.218.41:from];
-	DKIM_TRACE(0.00)[linaro.org:+]
+	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 991E23F9A9
-X-Spamd-Bar: ----
-Message-ID-Hash: G3AOQU5WXS77EG56SZAGT6KOEH2G5WVP
-X-Message-ID-Hash: G3AOQU5WXS77EG56SZAGT6KOEH2G5WVP
-X-MailFrom: sumit.semwal@linaro.org
+X-Rspamd-Queue-Id: 6C13A3F7E1
+X-Spamd-Bar: ---
+Message-ID-Hash: DK2ZNF4BHXSTKKQA2XHA237A7D3VGHKI
+X-Message-ID-Hash: DK2ZNF4BHXSTKKQA2XHA237A7D3VGHKI
+X-MailFrom: leon@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, Brian.Starkey@arm.com, benjamin.gaignard@collabora.com, christian.koenig@amd.com, dri-devel@lists.freedesktop.org, jstultz@google.com, tjmercier@google.com, v-songbaohua@oppo.com, zhengtangquan@oppo.com, marcin.slusarz@arm.com
+CC: Bjorn Helgaas <bhelgaas@google.com>, Logan Gunthorpe <logang@deltatee.com>, Jens Axboe <axboe@kernel.dk>, Robin Murphy <robin.murphy@arm.com>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Jason Gunthorpe <jgg@ziepe.ca>, Andrew Morton <akpm@linux-foundation.org>, Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Kees Cook <kees@kernel.org>, "Gustavo A. R. Silva" <gustavoars@kernel.org>, Ankit Agrawal <ankita@nvidia.com>, Yishai Hadas <yishaih@nvidia.com>, Shameer Kolothum <skolothumtho@nvidia.com>, Kevin Tian <kevin.tian@intel.com>, Krishnakant Jaju <kjaju@nvidia.com>, Matt Ochs <mochs@nvidia.com>, linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org, linux-block@vger.kernel.org, iommu@lists.linux.dev, linux-mm@kvack.org, linux-doc@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org, linux-hardeni
+ ng@vger.kernel.org, Vivek Kasireddy <vivek.kasireddy@intel.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2] dma-buf: system_heap: use larger contiguous mappings instead of per-page mmap
+Subject: [Linaro-mm-sig] Re: [PATCH v9 10/11] vfio/pci: Add dma-buf export support for MMIO regions
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/G3AOQU5WXS77EG56SZAGT6KOEH2G5WVP/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DK2ZNF4BHXSTKKQA2XHA237A7D3VGHKI/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -106,58 +86,62 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Hi Barry,
+On Thu, Nov 20, 2025 at 05:04:13PM -0700, Alex Williamson wrote:
+> On Thu, 20 Nov 2025 11:28:29 +0200
+> Leon Romanovsky <leon@kernel.org> wrote:
+> > diff --git a/drivers/vfio/pci/vfio_pci_core.c b/drivers/vfio/pci/vfio_pci_core.c
+> > index 142b84b3f225..51a3bcc26f8b 100644
+> > --- a/drivers/vfio/pci/vfio_pci_core.c
+> > +++ b/drivers/vfio/pci/vfio_pci_core.c
+> ...
+> > @@ -2487,8 +2500,11 @@ static int vfio_pci_dev_set_hot_reset(struct vfio_device_set *dev_set,
+> >  
+> >  err_undo:
+> >  	list_for_each_entry_from_reverse(vdev, &dev_set->device_list,
+> > -					 vdev.dev_set_list)
+> > +					 vdev.dev_set_list) {
+> > +		if (__vfio_pci_memory_enabled(vdev))
+> > +			vfio_pci_dma_buf_move(vdev, false);
+> >  		up_write(&vdev->memory_lock);
+> > +	}
+> 
+> I ran into a bug here.  In the hot reset path we can have dev_sets
+> where one or more devices are not opened by the user.  The vconfig
+> buffer for the device is established on open.  However:
+> 
+> bool __vfio_pci_memory_enabled(struct vfio_pci_core_device *vdev)
+> {
+>         struct pci_dev *pdev = vdev->pdev;
+>         u16 cmd = le16_to_cpu(*(__le16 *)&vdev->vconfig[PCI_COMMAND]);
+> 	...
+> 
+> Leads to a NULL pointer dereference.
+> 
+> I think the most straightforward fix is simply to test the open_count
+> on the vfio_device, which is also protected by the dev_set->lock that
+> we already hold here:
+> 
+> --- a/drivers/vfio/pci/vfio_pci_core.c
+> +++ b/drivers/vfio/pci/vfio_pci_core.c
+> @@ -2501,7 +2501,7 @@ static int vfio_pci_dev_set_hot_reset(struct vfio_device_set *dev_set,
+>  err_undo:
+>         list_for_each_entry_from_reverse(vdev, &dev_set->device_list,
+>                                          vdev.dev_set_list) {
+> -               if (__vfio_pci_memory_enabled(vdev))
+> +               if (vdev->vdev.open_count && __vfio_pci_memory_enabled(vdev))
+>                         vfio_pci_dma_buf_move(vdev, false);
+>                 up_write(&vdev->memory_lock);
+>         }
+> 
+> Any other suggestions?  This should be the only reset path with this
+> nuance of affecting non-opened devices.  Thanks,
 
-On Fri, 21 Nov 2025 at 06:54, Barry Song <21cnbao@gmail.com> wrote:
->
-> Hi Sumit,
->
-> >
-> > Using the micro-benchmark below, we see that mmap becomes
-> > 3.5X faster:
->
->
-> Marcin pointed out to me off-tree that it is actually 35x faster,
-> not 3.5x faster. Sorry for my poor math. I assume you can fix this
-> when merging it?
+It seems right to me.
 
-Sure, I corrected this, and is merged to drm-misc-next
+Thanks
 
-Thanks,
-Sumit.
->
-> >
-> > W/ patch:
-> >
-> > ~ # ./a.out
-> > mmap 512MB took 200266.000 us, verify OK
-> > ~ # ./a.out
-> > mmap 512MB took 198151.000 us, verify OK
-> > ~ # ./a.out
-> > mmap 512MB took 197069.000 us, verify OK
-> > ~ # ./a.out
-> > mmap 512MB took 196781.000 us, verify OK
-> > ~ # ./a.out
-> > mmap 512MB took 198102.000 us, verify OK
-> > ~ # ./a.out
-> > mmap 512MB took 195552.000 us, verify OK
-> >
-> > W/o patch:
-> >
-> > ~ # ./a.out
-> > mmap 512MB took 6987470.000 us, verify OK
-> > ~ # ./a.out
-> > mmap 512MB took 6970739.000 us, verify OK
-> > ~ # ./a.out
-> > mmap 512MB took 6984383.000 us, verify OK
-> > ~ # ./a.out
-> > mmap 512MB took 6971311.000 us, verify OK
-> > ~ # ./a.out
-> > mmap 512MB took 6991680.000 us, verify OK
->
->
-> Thanks
-> Barry
+> 
+> Alex
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
