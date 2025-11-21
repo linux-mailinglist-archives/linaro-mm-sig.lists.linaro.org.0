@@ -2,81 +2,142 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wH/aNVr/4Gk7oQAAu9opvQ
+	id kN7yOWP/4Gk7oQAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:25:14 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:25:23 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id AE66E410B11
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:25:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6461B410B20
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:25:23 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id BB02B4050B
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:25:13 +0000 (UTC)
-Received: from mail-qk1-f172.google.com (mail-qk1-f172.google.com [209.85.222.172])
-	by lists.linaro.org (Postfix) with ESMTPS id 7B03A3F92D
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 21 Nov 2025 01:24:30 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 1CBAB404EE
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:25:22 +0000 (UTC)
+Received: from MW6PR02CU001.outbound.protection.outlook.com (mail-westus2azon11012065.outbound.protection.outlook.com [52.101.48.65])
+	by lists.linaro.org (Postfix) with ESMTPS id CE1253F803
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 21 Nov 2025 10:13:47 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20230601 header.b=CC3K6j52;
-	spf=pass (lists.linaro.org: domain of 21cnbao@gmail.com designates 209.85.222.172 as permitted sender) smtp.mailfrom=21cnbao@gmail.com;
-	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-qk1-f172.google.com with SMTP id af79cd13be357-8b2f2c5ec36so161123385a.1
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 20 Nov 2025 17:24:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763688270; x=1764293070; darn=lists.linaro.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=S501oRNPXFaui6LNQdJlEz7mEWZdKyDXXyx7cM9Nvjo=;
-        b=CC3K6j529L4hqOe/UtE1Fc+NNaJcyqXPodVgxc1nrwxGRIj+TJglNqKthSAVJBHF8d
-         Gc3Joc0tbN2loVxnRIT7+jNFEbRsGBfuq/k5JTQtgc87Lho68Bp6b3vbeci7Q1S7ue53
-         KLn7mEPzKWtnSH7HAD3S89wix2Vh3jymgTUkAzIE21b2ISyXiDC1+AvFjXq1PB91MVJd
-         K01Gpkt3j+p0uK0cG79m1N0L5l8YTWc9WAs4OxTuTd5lI396HVxD6tSSK/6ce1XL4P7p
-         5ugk2dVTLdD+/hnXE/9NNAKG1WVwvAwx+ryia81aNy7ljcG/OYhl0nvz1VF7Gs3D08u/
-         VJhA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763688270; x=1764293070;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=S501oRNPXFaui6LNQdJlEz7mEWZdKyDXXyx7cM9Nvjo=;
-        b=v8uiZH0k/haMS6Fu7ADmQ/V6VaOayAc2RI5klaEtYQOMlkDqr65i8VN7bgAQQVrrjD
-         DetTG6THXKGAXq0vrfn/Kl6b7TMybLpKAeb8MEUL3EeUSeTDD2lSzwn6XD8DAypndt+j
-         WGniQvjsYcaqs0ZzkLVkRchzu/p3FL9z0zt1VVEBZrLC0GPYyAkYsTjUky41qEJbRsJ1
-         UGwuKM2ckMUqwHjRuPdYpCjlolnBwGckcZf2bpuSTLbOcriO34cyPEPeGz7w9vlNvhNN
-         rRlFtlrjiDECtvnPKn8lo2MLVmcwyl/rYdc+iNsz+hUt6u5K4/1h7rf3F5ScPuqXKjKi
-         jA6g==
-X-Gm-Message-State: AOJu0YxKhM3c9/x4Md3xPSy0UWQoFEFbb2QBVIYcvHDbXcZmdteQ8guV
-	wT4H9Kxs2/zSdv4qYixWsKH7p7xx1ZJ0xV+UY4zTL40epwjIfxzZEjumSCR/Po3oBEnGU0gyVih
-	8HFcnZHXyzeDVCry/tjZsKraOGU7QMBD/S4oIjqs=
-X-Gm-Gg: ASbGncsf/3RUgS1crVzBAp3ibBnzymXbx81FF7JX8wRx6UVNOfW2+9qCipeZkn78Obq
-	9if4BCvhXy8k0KgvB3TlAJWIuIg8S2GHvPfIhOYFUzVMHQ7cRW17UpfqHYj5dQoAcZvFqqh+TPa
-	Er0JJhuTlHN3QlsnWIzi+ISl7ZpNGmfc7c4nMU8x/MQiCzWw34+h4KcwHwKcoKufI9zDPmXzd+w
-	kAc4LDcMxzDqiAaVTY1WXtmyXUkXyNR3fTSgiobBPoEzDUf+8bdQLdmmsLPsKzufO0iRQ==
-X-Google-Smtp-Source: AGHT+IELR0Y8MMC2IUY4VhJkvLWnV/PwywUiJ5X5L6wH3I6vLbKEaD3LENPCPlOKpe35gSnMK7AKTvy6xnB8ca8uJ8A=
-X-Received: by 2002:a05:620a:28cc:b0:8b2:e924:4db7 with SMTP id
- af79cd13be357-8b33d468f92mr51138585a.40.1763688269620; Thu, 20 Nov 2025
- 17:24:29 -0800 (PST)
+	dkim=pass header.d=amd.com header.s=selector1 header.b=12XZKvgg;
+	spf=pass (lists.linaro.org: domain of Pierre-eric.Pelloux-prayer@amd.com designates 52.101.48.65 as permitted sender) smtp.mailfrom=Pierre-eric.Pelloux-prayer@amd.com;
+	dmarc=pass (policy=quarantine) header.from=amd.com;
+	arc=pass ("microsoft.com:s=arcselector10001:i=1")
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=STAMn6oVmpBZbBM6rrbjqcFeYtd2VXa7+9lGLWsgXA1Z9fXep02+Nv2ejqDNJTGjNsn8ZWKYanDXcmbO43K0dYNW8vksJPFKnLczvO4+5/yGESvqnpPcyBehtDoM4gTNZGM20PN3XnZnHPr9ZgLYpl+fYCPIXo8amer3aMAiaIilD//oezQ8SnAg7UO83IQTH4qIzZmJ6HUWqr9JTjYr1eGRBRnoBkA9vv55EXTDSnZ8ZvM2Zf9ApzvhxEDmRVPtHoB9OfSVVdGtFkTE4uW7Dte/gIJUhaJ8GZNjZDr4q+lct5mUiuRc0SDbKqlX6GfEYqoaFn377XGpB+ehYHmLfA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=jv0TaBPAysMDm2r3OVTrjyPAipCVEICIUKhPQjsifGo=;
+ b=argcYPwrMbsKrI+om1Lch2rgqD8PqTWQQr+WMC1TRHihHv6ytR4k/STCCKRZdMkpR7yVmVfVTSb71xgUcu+YxntqoBx4NG/Wjj7w95gwtmmEporAjZED82AJQRy7NrqGpb5cvCLAAPaSXr+SVb01exR6yCTwpH+p6Futc6UafYvB+D88Q0T8yN78tYvjR8jF2SpTn2tUSFKScl5K4I6a0cxlcE0mnJx7dWB8Qwwf/EFdC+C4Y5PpitYiOYUAONCdRpw9KSuFTLVMtWKOwXcVdt4tqkPh3XLP+vyG8eHIHsf6kCpNZCLnukyLNqvwOnbFcioHTyj2WZA2zZIYbpPxww==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=gmail.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=jv0TaBPAysMDm2r3OVTrjyPAipCVEICIUKhPQjsifGo=;
+ b=12XZKvggHVKTPPXV9Jzze7+28ZsS9Ge6FKKIBgYTHTZ9UT+gprWaszZ8mYYp8apN6bdN8X79q9QnC85FGq/jqgEl2QFWOrEvvKawM/dFe1FNk2uRGIVAX3cEifEi8+ZmPo6R/Zv0x5fJaF0twj/8iBggvKfN4gAdqQbM2SfEJ9E=
+Received: from CH2PR07CA0027.namprd07.prod.outlook.com (2603:10b6:610:20::40)
+ by CYXPR12MB9278.namprd12.prod.outlook.com (2603:10b6:930:e5::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.11; Fri, 21 Nov
+ 2025 10:13:43 +0000
+Received: from CH2PEPF00000141.namprd02.prod.outlook.com
+ (2603:10b6:610:20:cafe::1b) by CH2PR07CA0027.outlook.office365.com
+ (2603:10b6:610:20::40) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9343.14 via Frontend Transport; Fri,
+ 21 Nov 2025 10:13:45 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ CH2PEPF00000141.mail.protection.outlook.com (10.167.244.74) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9343.9 via Frontend Transport; Fri, 21 Nov 2025 10:13:43 +0000
+Received: from FRAPPELLOUX01-WSLPUB.amd.com (10.180.168.240) by
+ satlexmb07.amd.com (10.181.42.216) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.17; Fri, 21 Nov 2025 02:13:40 -0800
+From: Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>
+To: 
+Date: Fri, 21 Nov 2025 11:12:10 +0100
+Message-ID: <20251121101315.3585-1-pierre-eric.pelloux-prayer@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20251021042022.47919-1-21cnbao@gmail.com>
-In-Reply-To: <20251021042022.47919-1-21cnbao@gmail.com>
-From: Barry Song <21cnbao@gmail.com>
-Date: Fri, 21 Nov 2025 09:24:18 +0800
-X-Gm-Features: AWmQ_bm-P1ruFcb-9PJ4wRhOHg5o1AnRHk24v2ra0lTOp-J1klyFcrWEtn5PclI
-Message-ID: <CAGsJ_4zPrgkb37VCfY+C8Dn6dS4LmSMrHnfU7Oy4bR19yhxbAA@mail.gmail.com>
-To: linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org,
-	linux-media@vger.kernel.org, sumit.semwal@linaro.org
-X-Spamd-Bar: ---
-X-MailFrom: 21cnbao@gmail.com
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
+ (10.181.42.216)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH2PEPF00000141:EE_|CYXPR12MB9278:EE_
+X-MS-Office365-Filtering-Correlation-Id: d0fc0e40-c46a-41cd-4035-08de28e6a6b5
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|36860700013|82310400026|376014|7416014|1800799024|13003099007;
+X-Microsoft-Antispam-Message-Info: 
+	=?utf-8?B?L3A4S1FKandBY0gxYlFLWDVpTWtmQ2NIZkJFOW4zS0NWbkNvTVQrV0ZNU0Ex?=
+ =?utf-8?B?dnNGZzFUQjZFWTVQc3lQb1pnbHlGaHVaY3J0Y2ZFMVp1UWp0cFRoYXNZcVhV?=
+ =?utf-8?B?bk9aR1VDUWdWZG1GR2tmU2kxQ2FKRXhScE1tdS9SakNZQTY2M2NrN1NVTEVn?=
+ =?utf-8?B?ekVpN2prdXBidE9KbGRqVVFETjVFcjJHT2tFc2tVRElVSWcwbnl6QVVzR1BU?=
+ =?utf-8?B?QWUySERiNWF3WksxQjhoVi92T3F5R2xZY0lJL2djbHIwMWsvL0FoTEZ0eFM1?=
+ =?utf-8?B?cXJiYUtNMElEemJDM1RtdjlRMXk5ZVZ1SzhnelZaOXNKdGpzRDhycTVBRDA3?=
+ =?utf-8?B?RUpEVEdwWXdiMW5JaExnUVZWODlOaE5Hbll5L1RjMXRubGF5TzFOOEZKc25n?=
+ =?utf-8?B?R0VETVp1UnFNeXN2TlhMR0tac3YxdjlMcmZDUDlrY3RtbFVIeTBuaE4zMTY2?=
+ =?utf-8?B?Mm1RTlgwN1c2Q1g2SmhOYWJ6ckp3V3Y3eWtzT1lWUzZiMys0YkQzWmpZOVNx?=
+ =?utf-8?B?d1kyRFhOb1lpU2lkOUUzSjk0cTlkUGJ0LzY3aXpud1BsOWUva3IyVGF5eDNC?=
+ =?utf-8?B?Z1Z4eGRIaUhaWlIwajZiUVlMWGxwNk1LMXdNbUFTZU5wL29jYWtWdjdLMGhP?=
+ =?utf-8?B?N1BrS0VBRyszMXlWWFBNalVCZExMb2Z1S3NNRnlNOUhvc25mV0lWVE9tSWNG?=
+ =?utf-8?B?ZzJFRE1DdGI3UTNESGdQOVhHRmsrZFlvbVhwTmZPQ2xiRGJKUTZLVENQTlBn?=
+ =?utf-8?B?WHJvL1A2RkR0cmhqYnZUTDNmdEU0clprK2YrY2ZGL0loK2ZsRGNtazB4SzF1?=
+ =?utf-8?B?OU1rUGRBVW1sRjVFTG40VDdyRGV0Wk9KT0dDL014WC9EcTEwOUhwRjZNS0do?=
+ =?utf-8?B?YlZxamJlc09mVE5LSFNIcXE1MG1BK1VTcndrTVhxeVhmVFArVTNERFdNUk5V?=
+ =?utf-8?B?K0ZNY3hROTFVMy9WUHFZNW5FejQ3ZldhUi8zdWpuZXdaajJjR1FTek1telN0?=
+ =?utf-8?B?ZHdzd2xaczVMUzcwODdMUjBlcW1CQTc3TDVOc3VXa0tkRTM2eWNiaW5PMFVn?=
+ =?utf-8?B?ZHNQWWNISkw3WHg5SklBVVM3aGU3Nnl4L2pzL0hlSWkyVmRPTmZsZDlQLys2?=
+ =?utf-8?B?MjFEUm5rNDFEMDZzRXhzRVlsdmJxRXBRZUg2V0xNcU1iQi9HdzdLelhRZWtj?=
+ =?utf-8?B?SnFhc2k0YlM0UHFKVlNtWXcwNU55R21OQm5RRC9VK3VmclJzbUJhd09DbXJW?=
+ =?utf-8?B?QTZzNVcya2FMeXlnQmkrVGpJd1dsaW9sWitCd1JFTjZDZS9hWDVwTVZKOGpm?=
+ =?utf-8?B?eXkzUEdCRzFDUDRnNFZNZ3AyWEh3cXdzTFRYWVcwTERkNTFId3NZY1FGSlRa?=
+ =?utf-8?B?b2crUXNDZjJhbkRtZ0p6Nnd6QWNoSlVxSk1hTC93by9STUxDOWJyTkdIdFJO?=
+ =?utf-8?B?b2dsUER1UHhPdEVyOFh3MVFYREhCa3BleUdjTVN0TTVPcUFpbjE2TjdFcWR4?=
+ =?utf-8?B?bE5KSUc5cXVhamJvZGV4c2dlN2ZITG1aTE5XUW1wc2VCTTRncjd5Y2d6M2w4?=
+ =?utf-8?B?d29MdTZwV3BheWZmMk1OS1ZzcjliMG9xSmVZemtwOXdwZ3dmeXVGWEFQbG5Q?=
+ =?utf-8?B?YVhKSGRaQmd6TUF2SXpIY1RFU1VCZXNPQW93REQ3aisvNW5ueWZaeFNVNWs2?=
+ =?utf-8?B?Yi9aajM1UERpb1JjL1ovQjBibjNRNHp3ZGtuY3Y4UXp6SkQzQUhZanZGbldm?=
+ =?utf-8?B?NTR1eG0rWXIrc2h1c0ViVlFtUS9YcGdaMTgzcEE4b3JjS1V2RHRiVnhhTzhW?=
+ =?utf-8?B?WkkvSlBLaDZEUE5zVWRpM3JEbGl3YzJGOGd6ci9rYTZzb2tlUDRYM0R5Znpi?=
+ =?utf-8?B?SXpqQ1l4THR1bFpVYU1xaWdEWnpVbExWVExvZEtwQU5SclBOQVhGY3crU2N4?=
+ =?utf-8?B?NXZhZEpOTnVQaW5PdDhMeGZ0S2JHbCtMN2NjWG8zcUpLMEVlV3hDSEE2RUZN?=
+ =?utf-8?B?dFlSQ2V5c0JpUFhPUVVSaU9PSGUweEE0LzBQRU85eE1DVE5HNUVodEJKR0ZJ?=
+ =?utf-8?Q?kchgAl?=
+X-Forefront-Antispam-Report: 
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(82310400026)(376014)(7416014)(1800799024)(13003099007);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Nov 2025 10:13:43.7144
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d0fc0e40-c46a-41cd-4035-08de28e6a6b5
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	CH2PEPF00000141.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CYXPR12MB9278
+X-Spamd-Bar: ----
+X-MailFrom: Pierre-eric.Pelloux-prayer@amd.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: IGXD3353G4HHWZKAH6ZPN3NBUEJYQCTX
-X-Message-ID-Hash: IGXD3353G4HHWZKAH6ZPN3NBUEJYQCTX
+Message-ID-Hash: HJLC7MGVEPTE7GH5HT6TWPJNHF3Q3JY5
+X-Message-ID-Hash: HJLC7MGVEPTE7GH5HT6TWPJNHF3Q3JY5
 X-Mailman-Approved-At: Thu, 16 Apr 2026 15:01:10 +0000
-CC: Brian.Starkey@arm.com, benjamin.gaignard@collabora.com, christian.koenig@amd.com, dri-devel@lists.freedesktop.org, jstultz@google.com, tjmercier@google.com, v-songbaohua@oppo.com, zhengtangquan@oppo.com, marcin.slusarz@arm.com
+CC: Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Alex Deucher <alexander.deucher@amd.com>, David Airlie <airlied@gmail.com>, Felix Kuehling <Felix.Kuehling@amd.com>, Harry Wentland <harry.wentland@amd.com>, Huang Rui <ray.huang@amd.com>, Leo Li <sunpeng.li@amd.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Thomas Zimmermann <tzimmermann@suse.de>, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2] dma-buf: system_heap: use larger contiguous mappings instead of per-page mmap
+Subject: [Linaro-mm-sig] [PATCH v3 00/28] drm/amdgpu: use all SDMA instances for TTM clears and moves
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/IGXD3353G4HHWZKAH6ZPN3NBUEJYQCTX/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HJLC7MGVEPTE7GH5HT6TWPJNHF3Q3JY5/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -85,78 +146,156 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [0.59 / 15.00];
-	DATE_IN_PAST(1.00)[3518];
-	MAILLIST(-0.20)[mailman];
+X-Spamd-Result: default: False [4.99 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[amd.com : SPF not aligned (relaxed),quarantine];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
+	DATE_IN_PAST(1.00)[3509];
+	R_DKIM_REJECT(1.00)[amd.com:s=selector1];
+	MID_CONTAINS_FROM(1.00)[];
 	R_SPF_ALLOW(-0.20)[+mx:c];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
+	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	ARC_NA(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[13];
-	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	NEURAL_SPAM(0.00)[0.775];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	TO_DN_NONE(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[21cnbao@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	GREYLIST(0.00)[pass,meta];
+	SUSPICIOUS_AUTH_ORIGIN(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[18];
+	RCVD_TLS_LAST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_CC(0.00)[amd.com,gmail.com,linux.intel.com,kernel.org,ffwll.ch,linaro.org,suse.de,lists.freedesktop.org,lists.linaro.org,vger.kernel.org];
+	DKIM_TRACE(0.00)[amd.com:-];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	RCVD_COUNT_FIVE(0.00)[6];
+	FROM_NEQ_ENVFROM(0.00)[pierre-eric.pelloux-prayer@amd.com,linaro-mm-sig-bounces@lists.linaro.org];
+	TO_DN_SOME(0.00)[];
+	HAS_XOIP(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,mail.gmail.com:mid,linaro.org:email]
-X-Rspamd-Queue-Id: AE66E410B11
+	NEURAL_HAM(-0.00)[-0.647];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,lists.freedesktop.org:url,linaro.org:email]
+X-Rspamd-Queue-Id: 6461B410B20
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Hi Sumit,
+The drm/ttm patch modifies TTM to support multiple contexts for the pipelined moves.
 
->
-> Using the micro-benchmark below, we see that mmap becomes
-> 3.5X faster:
+Then amdgpu/ttm is updated to express dependencies between jobs explicitely,
+instead of relying on the ordering of execution guaranteed by the use of a single
+instance.
+With all of this in place, we can use multiple entities, with each having access
+to the available SDMA instances.
 
+This rework also gives the opportunity to merge the clear functions into a single
+one and to optimize a bit GART usage.
 
-Marcin pointed out to me off-tree that it is actually 35x faster,
-not 3.5x faster. Sorry for my poor math. I assume you can fix this
-when merging it?
+(The first patch of the series has already been merged through drm-misc but I'm
+including it here to reduce conflicts)
 
->
-> W/ patch:
->
-> ~ # ./a.out
-> mmap 512MB took 200266.000 us, verify OK
-> ~ # ./a.out
-> mmap 512MB took 198151.000 us, verify OK
-> ~ # ./a.out
-> mmap 512MB took 197069.000 us, verify OK
-> ~ # ./a.out
-> mmap 512MB took 196781.000 us, verify OK
-> ~ # ./a.out
-> mmap 512MB took 198102.000 us, verify OK
-> ~ # ./a.out
-> mmap 512MB took 195552.000 us, verify OK
->
-> W/o patch:
->
-> ~ # ./a.out
-> mmap 512MB took 6987470.000 us, verify OK
-> ~ # ./a.out
-> mmap 512MB took 6970739.000 us, verify OK
-> ~ # ./a.out
-> mmap 512MB took 6984383.000 us, verify OK
-> ~ # ./a.out
-> mmap 512MB took 6971311.000 us, verify OK
-> ~ # ./a.out
-> mmap 512MB took 6991680.000 us, verify OK
+For v3 I've kept the series as a whole but I've reorganized the patches so that
+everything up to the drm/ttm change can be merged through amd-staging-drm-next
+once reviewed.
 
+v3:
+ - shuffled the patches: everything up to the drm/ttm patch has no dependency
+   on the ttm change and be merged independently
+ - split "drm/amdgpu: pass the entity to use to ttm functions" in 2 commits
+ - moved AMDGPU_GTT_NUM_TRANSFER_WINDOWS removal to its own commit
+ - added a ttm job submission helper
+ - addressed comments from Christian and Felix
+v2:
+  - addressed comments from Christian
+  - dropped "drm/amdgpu: prepare amdgpu_fill_buffer to use N entities" and
+    "drm/amdgpu: use multiple entities in amdgpu_fill_buffer"
+  - added "drm/admgpu: handle resv dependencies in amdgpu_ttm_map_buffer",
+    "drm/amdgpu: round robin through clear_entities in amdgpu_fill_buffer"
+  - reworked how sdma rings/scheds are passed to amdgpu_ttm
+v1: https://lists.freedesktop.org/archives/dri-devel/2025-November/534517.html
 
-Thanks
-Barry
+Pierre-Eric Pelloux-Prayer (28):
+  drm/amdgpu: give each kernel job a unique id
+  drm/amdgpu: use ttm_resource_manager_cleanup
+  drm/amdgpu: remove direct_submit arg from amdgpu_copy_buffer
+  drm/amdgpu: remove the ring param from ttm functions
+  drm/amdgpu: introduce amdgpu_ttm_buffer_entity
+  drm/amdgpu: add amdgpu_ttm_job_submit helper
+  drm/amdgpu: fix error handling in amdgpu_copy_buffer
+  drm/amdgpu: pass the entity to use to amdgpu_ttm_map_buffer
+  drm/amdgpu: pass the entity to use to ttm public functions
+  drm/amdgpu: add amdgpu_device argument to ttm functions that need it
+  drm/amdgpu: statically assign gart windows to ttm entities
+  drm/amdgpu: remove AMDGPU_GTT_NUM_TRANSFER_WINDOWS
+  drm/amdgpu: add missing lock when using ttm entities
+  drm/amdgpu: check entity lock is held in amdgpu_ttm_job_submit
+  drm/amdgpu: double AMDGPU_GTT_MAX_TRANSFER_SIZE
+  drm/amdgpu: use larger gart window when possible
+  drm/amdgpu: introduce amdgpu_sdma_set_vm_pte_scheds
+  drm/amdgpu: move sched status check inside
+    amdgpu_ttm_set_buffer_funcs_status
+  drm/ttm: rework pipelined eviction fence handling
+  drm/amdgpu: allocate multiple clear entities
+  drm/amdgpu: allocate multiple move entities
+  drm/amdgpu: round robin through clear_entities in amdgpu_fill_buffer
+  drm/amdgpu: use TTM_NUM_MOVE_FENCES when reserving fences
+  drm/amdgpu: use multiple entities in amdgpu_move_blit
+  drm/amdgpu: pass all the sdma scheds to amdgpu_mman
+  drm/amdgpu: give ttm entities access to all the sdma scheds
+  drm/amdgpu: get rid of amdgpu_ttm_clear_buffer
+  drm/amdgpu: rename amdgpu_fill_buffer as amdgpu_ttm_clear_buffer
+
+ drivers/gpu/drm/amd/amdgpu/amdgpu.h           |   4 +
+ drivers/gpu/drm/amd/amdgpu/amdgpu_benchmark.c |   8 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_cs.c        |   5 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_device.c    |  15 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gem.c       |   2 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gfx.c       |   3 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gmc.c       |  14 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gtt_mgr.c   |   8 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_job.c       |   5 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_job.h       |  19 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_jpeg.c      |   3 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_object.c    |  16 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c       | 493 +++++++++++-------
+ drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.h       |  58 ++-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_uvd.c       |   3 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vce.c       |  11 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vce.h       |   3 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vcn.c       |   8 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vkms.c      |   6 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vm.c        |  26 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vm.h        |   2 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vm_cpu.c    |   4 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vm_pt.c     |   4 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vm_sdma.c   |  12 +-
+ drivers/gpu/drm/amd/amdgpu/cik_sdma.c         |  34 +-
+ drivers/gpu/drm/amd/amdgpu/sdma_v2_4.c        |  34 +-
+ drivers/gpu/drm/amd/amdgpu/sdma_v3_0.c        |  34 +-
+ drivers/gpu/drm/amd/amdgpu/sdma_v4_0.c        |  41 +-
+ drivers/gpu/drm/amd/amdgpu/sdma_v4_4_2.c      |  41 +-
+ drivers/gpu/drm/amd/amdgpu/sdma_v5_0.c        |  37 +-
+ drivers/gpu/drm/amd/amdgpu/sdma_v5_2.c        |  37 +-
+ drivers/gpu/drm/amd/amdgpu/sdma_v6_0.c        |  32 +-
+ drivers/gpu/drm/amd/amdgpu/sdma_v7_0.c        |  32 +-
+ drivers/gpu/drm/amd/amdgpu/si_dma.c           |  34 +-
+ drivers/gpu/drm/amd/amdgpu/uvd_v6_0.c         |   6 +-
+ drivers/gpu/drm/amd/amdgpu/uvd_v7_0.c         |   6 +-
+ drivers/gpu/drm/amd/amdgpu/vce_v1_0.c         |  12 +-
+ drivers/gpu/drm/amd/amdkfd/kfd_migrate.c      |  33 +-
+ drivers/gpu/drm/amd/amdkfd/kfd_svm.c          |   3 +-
+ .../amd/display/amdgpu_dm/amdgpu_dm_plane.c   |   6 +-
+ .../drm/amd/display/amdgpu_dm/amdgpu_dm_wb.c  |   6 +-
+ .../gpu/drm/ttm/tests/ttm_bo_validate_test.c  |  11 +-
+ drivers/gpu/drm/ttm/tests/ttm_resource_test.c |   5 +-
+ drivers/gpu/drm/ttm/ttm_bo.c                  |  47 +-
+ drivers/gpu/drm/ttm/ttm_bo_util.c             |  38 +-
+ drivers/gpu/drm/ttm/ttm_resource.c            |  31 +-
+ include/drm/ttm/ttm_resource.h                |  29 +-
+ 47 files changed, 706 insertions(+), 615 deletions(-)
+
+-- 
+2.43.0
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
