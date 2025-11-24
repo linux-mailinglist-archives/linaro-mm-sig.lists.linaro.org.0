@@ -2,148 +2,147 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1C6F1C7AA92
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 21 Nov 2025 16:54:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BB5F3C7FE9B
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 24 Nov 2025 11:33:29 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3083F3F9AD
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 21 Nov 2025 15:54:29 +0000 (UTC)
-Received: from CO1PR03CU002.outbound.protection.outlook.com (mail-westus2azon11010066.outbound.protection.outlook.com [52.101.46.66])
-	by lists.linaro.org (Postfix) with ESMTPS id C5ED53F70E
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 21 Nov 2025 15:54:14 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C34083F834
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 24 Nov 2025 10:33:28 +0000 (UTC)
+Received: from BN1PR04CU002.outbound.protection.outlook.com (mail-eastus2azon11010029.outbound.protection.outlook.com [52.101.56.29])
+	by lists.linaro.org (Postfix) with ESMTPS id 494363F752
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 24 Nov 2025 10:33:12 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=amd.com header.s=selector1 header.b=gKNsLXAk;
-	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 52.101.46.66 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
+	dkim=pass header.d=amd.com header.s=selector1 header.b=TXW9wUFP;
+	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 52.101.56.29 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
 	dmarc=pass (policy=quarantine) header.from=amd.com;
 	arc=pass ("microsoft.com:s=arcselector10001:i=1")
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=J533CA2yK+uwgFVajbyIfSpjVi+ZEzdV1XEHkFnQR8BNL6wgPZP0ymrLA0pp6aBdl7GLqm9vzGjwGc6qGnaZ4I3xZjM1VGsLtT2J0FR6+VytgLIbeLJOpoA6dT4D/p6wYlPBXxRmz/ihDcu0UctKU1/MAA9Udyw2hIWMwGQTtJyFJiRW+maDBWFjzp0XVj2SvHo5Jt84A4nn1pWyVlZXq7AT1Qgu7yoJ97F05Y/pPoPre5OqgCr9Eu4pJpwo/ucHFCoqgFXc37MfVJwonImYo3Tso90mfMa9Is4nvF5kLa/1GFQN5jjBPrKuc3Ur6OgtnyEPiOpBcC6IRzy8FtCPvg==
+ b=qnOlXKSfloUY0xYMgW0W+oxzXa6sUIb2h1FHpwqvi6Ol/HPpsthULFLG9vQgYyeHMSkDYouZYHciw/6fEpscpnbszZbtJC0QwA1hozTZcRA+BvgSmLF6k75w/qopDGtm4Mi0kqM2g7fbpAyHEI8+Bq9LC9b0CCCzLsyCN232wYqivQi6MXN/c33pQ9zE+xNoryONLvFfOtQPPy3fFsCKmGRPZ6Fo0cJvjyLXQvvys1YPg9110NrMBtnSoY/84PzRB63j9TH8yI1lstWPvISEZ19e1sJ7ISkAAOe1aK8BaOTu0yZxY6O84STSDujlkX83orrWg4p4qxrb8TDPb112zQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=V4spVH7k5XMYgK3l3Cdmwxffbek6aXmtkgdVpLl0IYQ=;
- b=MQNhrzgM002S1j5br7Hwi5tZOovmnaNoy/j0r6xVr3CXFNZKUgtJc8GIGvnMXUlClGSFL/rpHittJ2zUoYYcAsR8nOw1776+sfwHsm8SnI7jFlbKUO7rehCplOOsOn2zXuOYrq6di9UpH+LCCGFqlx5/e9rQFe+qmjz85bFb0MGytca+iTfgE1Wp/vudINPRaut33CEAufpPkAYHly4Ir6YGY6TxxcNsEBr7UZkBnw1sYY+4m8HTGC3eRUJNL82LoxeT4aiIVeeodOHtJDbPK3KYIOr8uYbcqx3mnReli4m4oB1vUEf7vLOm6JYyDgW35viCR6BuNwnbnPgYJ1qdfA==
+ bh=gLu4irSg1OoQhtnCzTWt7TxaharY3fiK+9cCnHhBvwM=;
+ b=pUv+WJW3/GdNJKvTmfhcXXn4ho7POmBDRP88OMGnbMWGjo0OvRJo7OeAiv2tbRC6RWkjhJK3ZBQGD+xOk4nGnkZBZtG1cknbrbhsFoGKOKECt/YF8jw6f68mPAOxJ8fB6GbGB3F8fvokG12asLc5kgzpMaYKCKJynqrsb8Ro7C65lLxSpBn9/pbVmM/jpJPXC2T+dFoPt3PEQUpFmDPZ/xLuQH7tGneWF0qofrD3DBZjGZFoxqLRiweRvPZ7SeL5pt+kfhhh0KU1yPHeeXzZSxzMt09l6GX86MI9wg6rhNM0iFX4lw02DNwcUnhYFWKvAWKpVbRgJyLOqm1mjpoyfQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=V4spVH7k5XMYgK3l3Cdmwxffbek6aXmtkgdVpLl0IYQ=;
- b=gKNsLXAkxvRgZQNBZSgesAvbAJImsGILCFOqE/9Tr/SNt7oT436pFJvS2JZ16UkTK04pNHAJSEvIIfo2XcEBC0eocrqzMVK6rSA84/6xgh8m+n1xCUrT34UtVXCSUlhML6g6Ulk3iLv7PDciSzvR292WCOMg/31y832eUrhmpYg=
+ bh=gLu4irSg1OoQhtnCzTWt7TxaharY3fiK+9cCnHhBvwM=;
+ b=TXW9wUFPbpv7llj+6BTYuQHcpmyyuI6dgucKbXCAPfn28dLqy07FJZnvvbe87hIpw4mqbVePbpvxkyZrn+qAZnU5mg7BueL2DSkfv8LZMI+GrVZXzZLBMsfsl3d/kH36XrYFGHDDmsM3F1vLvtNakLPD+NS6vaxPsdJy8hVKDbY=
 Received: from PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
- by CY8PR12MB7121.namprd12.prod.outlook.com (2603:10b6:930:62::20) with
+ by SJ0PR12MB6965.namprd12.prod.outlook.com (2603:10b6:a03:448::18) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.10; Fri, 21 Nov
- 2025 15:54:10 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.16; Mon, 24 Nov
+ 2025 10:33:09 +0000
 Received: from PH7PR12MB5685.namprd12.prod.outlook.com
  ([fe80::46fb:96f2:7667:7ca5]) by PH7PR12MB5685.namprd12.prod.outlook.com
- ([fe80::46fb:96f2:7667:7ca5%4]) with mapi id 15.20.9320.021; Fri, 21 Nov 2025
- 15:54:10 +0000
-Message-ID: <43acfd2a-8a8b-4ca1-9435-a29ed77a3cba@amd.com>
-Date: Fri, 21 Nov 2025 16:54:00 +0100
+ ([fe80::46fb:96f2:7667:7ca5%4]) with mapi id 15.20.9343.016; Mon, 24 Nov 2025
+ 10:33:09 +0000
+Message-ID: <fd10fe48-f278-4ed0-b96b-c4f5a91b7f95@amd.com>
+Date: Mon, 24 Nov 2025 11:33:03 +0100
 User-Agent: Mozilla Thunderbird
-To: Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>,
- Alex Deucher <alexander.deucher@amd.com>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>
-References: <20251121101315.3585-1-pierre-eric.pelloux-prayer@amd.com>
- <20251121101315.3585-28-pierre-eric.pelloux-prayer@amd.com>
+To: Pavel Begunkov <asml.silence@gmail.com>, linux-block@vger.kernel.org,
+ io-uring@vger.kernel.org
+References: <cover.1763725387.git.asml.silence@gmail.com>
 Content-Language: en-US
 From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-In-Reply-To: <20251121101315.3585-28-pierre-eric.pelloux-prayer@amd.com>
-X-ClientProxiedBy: SG2PR04CA0206.apcprd04.prod.outlook.com
- (2603:1096:4:187::21) To PH7PR12MB5685.namprd12.prod.outlook.com
+In-Reply-To: <cover.1763725387.git.asml.silence@gmail.com>
+X-ClientProxiedBy: FR4P281CA0227.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:e9::8) To PH7PR12MB5685.namprd12.prod.outlook.com
  (2603:10b6:510:13c::22)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|CY8PR12MB7121:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2a9599a1-75bc-4105-ad0e-08de291635bc
+X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|SJ0PR12MB6965:EE_
+X-MS-Office365-Filtering-Correlation-Id: effa3041-69f7-482c-2ae2-08de2b44dcc5
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
+X-Microsoft-Antispam: BCL:0;ARA:13230040|7416014|1800799024|366016|376014;
 X-Microsoft-Antispam-Message-Info: 
-	=?utf-8?B?NE9Rck56MlBYMmgrdVdlbkVBZXNBdkNVUjY0Y29Oa2RlNG50enBZR2xtWkFJ?=
- =?utf-8?B?bG5zQjQ0VGNrSDI4Y0VaSzN1eXJiUkExYjVMNDhTMFRpaGljWXdYYjBxaFVY?=
- =?utf-8?B?Y2pYekVxdnNzQi9DUDAxNTZod0VFQ3UxZTRwVmViL1Q0OTltZ3M2a25TVStp?=
- =?utf-8?B?Mk5yeGpuTE4yVWZWbE1YQTFQd3VrLzh6bjB4TGlIUmswdjcwZFp5MjdlbDZO?=
- =?utf-8?B?TVd2QmlaZUtiUnh5Q1dNLzU4a2JEbitHa0o4TWoxOFpNRlBHMVRUQVhUY09C?=
- =?utf-8?B?VEQ5UWY4SVhXL0VhMHFyU2ZLUnNrRC8xOWpUeXdobXVPdVFCNnExZi9KSFk5?=
- =?utf-8?B?Q3ZIc2Nrc1hid0xSWVRNR1V6a2VJWEhrb1RQelU5RCt6cGtqZXZjeUphRC9x?=
- =?utf-8?B?U0dtRXNKSnlqaWNrTmRWQ1lBdE1KMTBsSndUejFwK1RWSWMyb3p5SCtlMExJ?=
- =?utf-8?B?N0J1SVNRUGtqRG1oZ250RVRScExzcE8ycUlTeU85bm9uM2Y0MmdtRjNZNk03?=
- =?utf-8?B?eHorcEQvdVk1L01aaUhRZHNuQUNnSjFaeHlUbUZCTERGV0RhRStGTVQzYWlU?=
- =?utf-8?B?MWs1QlBNYWRrTjlLK1FXbWhtUVlsOVI1TWZ0Sm9lYmF3SXMwMDMwcTFzbHlS?=
- =?utf-8?B?eTBqQkhVL3RKaG5JajZnTUpybFRwYkZjT3RGWlhVZE1jU0s1c0xPNFk3c3Fs?=
- =?utf-8?B?R2VLdTBPeVNJK2RpWkxwQUNGamFiTDRMbjVBZk4yQTRDNy90dkJUbnluR0hs?=
- =?utf-8?B?cGp1TjRPS09jWS8vUmN2Zy9aME0xTUNlbG5xbUs4ZDhBN3FGTG1WdnVmaHow?=
- =?utf-8?B?dFBRMmQwK2svTkJLSFpXOHFXZlBqclhULzl6L01iaTEyQXdQSFdwSnVMM1Z2?=
- =?utf-8?B?Q0VFb1pTZDF0dEJXU0hyVk01R21iU2FlREt5bDU3b2lQTkk1VGltLyt3NUpz?=
- =?utf-8?B?NHdSWFNUcEs1d1YvdmR4bG5RejM1NDN5TEVDRjR1N0dqR0pCQkNZSUQrT0NE?=
- =?utf-8?B?VnhCS2tlaEhRdFpHVjdQeEwweU1qS0E1OE0rUUtjbG9PTjRZbW9mdmNDYTNo?=
- =?utf-8?B?bVZ4RFA3akM1VXFuTGhRRjU4eUpBWGVEazZ5R1dENXpaYk80SkNBbnNQZ0J5?=
- =?utf-8?B?QXZXc3FOMytjdWRJQWtGMXlBT3Bmajk3QWtrdXJxZW1McElpaW93aDM5VW9z?=
- =?utf-8?B?RFpvM3NxdVRiRjEraDFleEcwSjFIUVRKb2E3aThncTJWS3o3UlNUcGdRWjRh?=
- =?utf-8?B?UzQ4UUVWQnpQWmtYcklUd0dHdTg5MU01eXRWV01IQ0tFWkY4c0NpalkxalVI?=
- =?utf-8?B?c3Z1cnBUaTZ5SFhxYnhwVExheEpmdllVZWEwVEM1YnR6b2hLUytSYTc0NDF2?=
- =?utf-8?B?eDh3U2IydDcydSszRFNVR2JJMkdMVXBiM3RZaWc3L2J6aCtqTEZPYU9YSDV6?=
- =?utf-8?B?UVRvRy9OSHVYcWk2N09Cb09Oak4yQzUxY2xUeG05VjhzbHZacGQyR29FbWtZ?=
- =?utf-8?B?ejhVUURYbWdoR2lDWUVzZDIxN0UySEdTTFp4RHdiWE5MOEVjVVkxVU8yeFoy?=
- =?utf-8?B?a2xOcFp4U09mUDVFakUwcCtuRlZOV0lJbXdyYjA0SnVBZjM5YjczbTZyaXJE?=
- =?utf-8?B?K21lQnBoYS9XQjZoamJKMWNoOVZWS0FHSGlnYVpiR0dDaWxEczVXT09sUFgr?=
- =?utf-8?B?TE50NDY3NUJiSlF6RlJHaDZ3VGlsaFQ4Y3VDK2NJRWx4Q0NhdGVVb1h1WkhE?=
- =?utf-8?B?UVN2aUQxM0RDMXBKaHVEMzYvTHNtWmFjQ3hBRktORVRUTFRqQXg1dm0ydW5m?=
- =?utf-8?B?dmliajJTcGd0UVFFU1FuNVZOQ3BRc1dWQmxDWDdGWnN1L01ocXBQOE4vWHoz?=
- =?utf-8?B?ZFJyVkI4Mml0YVU0b0xDdi9FbGlDamVNV0twNVZ1M3RrUUpoWGF4RGE1WlVW?=
- =?utf-8?Q?E95kpENcBz+8Jd2sZyoV530v9xdPtVQG?=
+	=?utf-8?B?NjdCYnlOd25HZG9kVTlQc3hmOU0xU29sVVNReVJHOWVrNlgvQlV3MWRZWnJW?=
+ =?utf-8?B?dElLbjNwT0RyT0ZRTkZwMlUzYk1nYU9nMVRmSVpYZUNXMEpmcVpOd3ZSSmxx?=
+ =?utf-8?B?SjVNeURmUk9vU1h5ZnRVbWJyWGdwS0liaFppWWtYTm50ZE5tWFJXMmhXZ09B?=
+ =?utf-8?B?dFZhYzFLbVZ6L2RTaXFmeStIYzNxVGg4QUhYVDF1bExEMDk5ZXVCZ29HSUxW?=
+ =?utf-8?B?bVNMd2dTRUNuazlhaVpWKy9YM24rRlNLb3AzRHBwUWgxaE4yRjdIMjF5L2dv?=
+ =?utf-8?B?WU5zTzVaclhuSUNuSXFNYmltQTJRV0tMTjNzU1NhTHZ2MjJ5N244Y2Mxdjh2?=
+ =?utf-8?B?K0ozNFJFQWNxLy9NUWdvTUU3SUliYUxFM0MzdUFVL0FmQ29ML1hPTnVWd2lN?=
+ =?utf-8?B?bVRINDNzY3BienZNZTNsdU1JSDFHS08yS3NOdytXTml3ZTMzRHBUU1o1d3Jx?=
+ =?utf-8?B?YkpjUXNkUDNNMm16aU1hWTc4bWdmUmlsU3hxZ29lMVRFdGxPckZYcDh1UE03?=
+ =?utf-8?B?azdvVlB0Q0tJV2ZXVDIxZndiWG5TcEt4TStDb2NMbys0R0N2VitKTFRGZ1lv?=
+ =?utf-8?B?Y0dkamx1RDNqbHRNV1lIaWRONFZhMW9Wc3RWM1BlMSttZUloRFN1SlIvK0xP?=
+ =?utf-8?B?VCtwbEQ1c0tZRHZZRDZrTkpEM1NlUjdBSk5GaW5kTTJxd2dtVTVSTG1UN2VX?=
+ =?utf-8?B?TG04S0l0ajkzYStYMjdTdTZ3d0NpdjRPSlBZQ1VQUDJLb0g4d2VoUlRZZUJ2?=
+ =?utf-8?B?elRYOURzdnlpemp2NTNNNFpDTFZDeStGRGpaMHV0dEQ1Wk16YlBDUUpYaksr?=
+ =?utf-8?B?bXpBQTRQUm5lRnFDZW9yODhqeFozOHNsaTNiYW1qcVBobWZaQXZKbm12V2Ex?=
+ =?utf-8?B?VFVTVWsyLzJGOGhySVZIY3RtdFgzTUZtVzdUeGd4WlhLNGtKRnBWU0Mvd1Fv?=
+ =?utf-8?B?NDlHcHl2V0U5WElWL2ducDVLcWFadk9LcVN3ZFV4NXRUQTJEVUNWS1psRWVm?=
+ =?utf-8?B?eG4vQU9JenpQajhyUW0zbWxRcExaT2lqeDIwVzhqcjhsUnJGcWN3NnRRNjRB?=
+ =?utf-8?B?TFovQUZTcExzb0hMUmkxMjZnTzhRbFdFb2FwWi9GZHc3ZS8vUU0rVm1iZlRP?=
+ =?utf-8?B?aXRsSXprL2tkb3oydHFXb0RmdERjOWFRdzI1RHRZUGlPSFBvOWhpRjlzRm5y?=
+ =?utf-8?B?WE9aVkhOSDJCbnlKRmVSRW1TRHpkb3kveWVKV0ppYXg2SFZ3OXhnSnRMTjRs?=
+ =?utf-8?B?QURxK2doSXZLOUdlak5tNTJSS1RCY0RaYjFiMVE5MlpMc3cveElDck1kTFdu?=
+ =?utf-8?B?Mmk2UmJ6L2VLenhIOUl0SDdXNm16cVRYSWVnTUhPdUhmWHhRZUU1WmxjSU5N?=
+ =?utf-8?B?bkFjalk4WUU0d25jYmtiWURkdk51blRLQ1dVSkRzZVN0VEpEMERyNWNDcmtv?=
+ =?utf-8?B?V2VFZWJXU0ZxZ01tbjAvN1FDUHFjdCsrbmVIV1lTZ0FpOWlvL2d4Q1kzT2pk?=
+ =?utf-8?B?VXdHMjBqUVhJQmtBT2x6STFQUG15V2JQUnhMNWtBQ1d4bEpRZ2RCVmFEaUFD?=
+ =?utf-8?B?Y2hmbE0xZklhZ3daUkhLL0VnSFdaZDZuTlprQU5ub2k1YnZvSWpTZURTRncr?=
+ =?utf-8?B?YW9NSUNzUHRYM1RWRFBSRU5FTEFseVNFYzJneEdVamVyNUNVUXIvMnQveGNK?=
+ =?utf-8?B?dmlzOEwzZGNBeGlIN2p0bkdmMDZkbmIxSnY0ZkQreFEyclF1VDQ3NXcyMkIy?=
+ =?utf-8?B?VnZCS2tvYXdVbE95ZlFBdlFRYnVHbWJ6Um1USVIwSHRwdkpXR083UjlJODI3?=
+ =?utf-8?B?b1l6MTRNa0srTVViSmVoWFVBdmJCYmhTSmlBWXlETEd2Unlia1FVU0w3N05i?=
+ =?utf-8?B?Z1RQZFV3dmZrK3dPanZNSTRJVnJpdzhZUmdwdzQ3b3dxa04vcHpiNTI3Nzdq?=
+ =?utf-8?B?NVFDWndZK01FQVJVbkF2ckgrRWlzOEtiMmpFOUhjMmpveWlIcERqbGVRMkh2?=
+ =?utf-8?B?bjhDSVN1azFRPT0=?=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB5685.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB5685.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(1800799024)(366016)(376014);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?WUs0ZnN0Q2lYdllOZjJlb1I0VEF6akhEWVNzaXlnK0VtYkZaUENlZjBGNnJH?=
- =?utf-8?B?MUVKY0tmVWdaWEt0RWdnRkFhY21DVHJKWXoyRjRBUGlWNXh2MFV5RU9OSlp0?=
- =?utf-8?B?SHRidm5JRlU1NWZhYjNLY0JjVE1EclBuOVN2NEtscXQ5M2JIcWZMRmhRcTdT?=
- =?utf-8?B?RkJ2Z0wrUThrVzlrcEE0TEtPQWZ0KzJ4eC8ya0dTZGJuNkl6RmU1OUsxQzgx?=
- =?utf-8?B?UG5SZXR5M3hZaTBqNVlFY0R4QXo1NzVZaFhiRE1NMklYeldhVDBTVWhvNElX?=
- =?utf-8?B?TDlaRFBkTVlsSXJ1RXBPbTAxdjV1NjlXdTg2QUZxcWJ4MlE1aEhzWnNqM2ZS?=
- =?utf-8?B?V0k3Ny9TWU9Ga1hxSmFCYkErb2EwTzUyMFNtUFRyNFc0RURGZ1lLd0RqMm9X?=
- =?utf-8?B?NmdxYVpheVFsYUdSYXJueGZUd3R2ZW5QenRaR0FTVzNzTlpHN1lLWUMweGN2?=
- =?utf-8?B?SVU0NGlXNmpWSElrY29jeGlIU29wTHAvQVF5WXlVUHRCZGJQSVNIaHNNbGVX?=
- =?utf-8?B?UGNZUi9yRGhLVWx3Ty9rOEtVRWsrays3b3Z5WGF5dGhCSjBGNG16aXFTeWRJ?=
- =?utf-8?B?OWZCWXIwc3JSbjQ3ZE5ZV3RRcFZMMjhyNTBxVzJLZThnWmpac1daamJZcG5U?=
- =?utf-8?B?UWtPeGF6OWg2Y1lKZjNCNzgzaE0rM1RCNlA1V3QzditTeVdOc0lFWE1OeEhN?=
- =?utf-8?B?OUVlN09lQWJEa3gwc0RUd1pIVFpvQjhHbWxqeEkyaU1VSVBJUW9wbHo5QUZK?=
- =?utf-8?B?MXk4b0JubDcvemxxcnRZNnhrcTcwNElENUdhOC96MVJBU3Z0ajFISGtuUCtq?=
- =?utf-8?B?cVhDbVM4MjFnL2pydHJCQWUyRlNNbzJZbjRCRXljU0xWSlJuWk9ScVZrMTZM?=
- =?utf-8?B?WDRRaWd1czZyaldUVEpZeStzeTRyeTRPOE5oVTJrVGgzQ2FCQjBUNkhSdDd6?=
- =?utf-8?B?S2ErMEJwVk1WNXZVd3ExakNvZ3RQWlZvWVRGdzR4OFZCakZTbUkwbjF2UnRQ?=
- =?utf-8?B?dDBTekpRbjRlSUs5Q2NQdXcxRVJ4WldUOE1aZjhZaUtaellZZ3dQdVJMSUZ4?=
- =?utf-8?B?NW5oNy9sNGlacm5QQUhtcVBKRWh5UXJqcVkwd0l0SDNxaHQxRmhaMVE0bDN3?=
- =?utf-8?B?Y1lCYzZOR2FSUm54b1B5Snhma3lZK2xHYVRBVzltaG1vaW9LV0RIYVlFNGlh?=
- =?utf-8?B?U1dnMmdpUU5pVnBuRk41enVnaE1zWUFRSWJVNGxLRHJFdXYvT2k5Ym0zeW9M?=
- =?utf-8?B?ZTdCc2IxelQ4T1hURW1VVWEwRWVya3dBSFN1S05ISnpLVkJ0Q3hNTThOa1pE?=
- =?utf-8?B?RG5rYUllZFJBOEloL1N0NytvS04zQXJmYWhFcWIwWEFNRGVnTEFKaGROcUdm?=
- =?utf-8?B?S2hWSDVseWZqSmVNa2ZKSzhRbXJKV0p0Q1h5OE9GUFBNeW9HWDV6Z3pMN3VZ?=
- =?utf-8?B?bGxJQUwxazNpbEpOaEdPTXVtTjVjTW5GYk54NGQwTVNNdHFBMzZ1ZTF2VmVl?=
- =?utf-8?B?Sythay9uV3Ztd2NBdHJyVGVJN1V5ZmFZcCtqbHVRbE1HSDBtalE5NnlGYzBi?=
- =?utf-8?B?d3VRQjRkbXhqc3hBZ1lzRzQyN1hNd3NyRkRBdVY1eWEybFg5RWVYU0pDY1ZF?=
- =?utf-8?B?VnhqaWxhK0Via0oxSHVWcTdQcXZEN2pNYjB3STc1TEx2S3VjOTdPWndFbWdB?=
- =?utf-8?B?dHIzSXhLYzhZUXh6dEJ2R1E0dkZyRk5odjFpaHExbkZjcTRJSFMzNlZ0dnZo?=
- =?utf-8?B?MDNEeHp4UXVKbXZuNEhvM0RRdEtBbmpjNzUzWm50Z2hpZzlRdTBSa3RqU2Jr?=
- =?utf-8?B?WklRS3YzN0dMUVd5SVQyK24yRXFwSllzMyszcWVjT2Vvam5aN1ZudkRFTjVQ?=
- =?utf-8?B?N3F4ZWh0aUExcFcxNzU1SmhkK2NONkE3ai9WUzJtZ05DTW1hVDMyNCtSWm5r?=
- =?utf-8?B?NFo1djBEd1ltbEM0UUlVZDZPdmgrcGtHQTUyVW1TZFhrbmpLUjh2bWsraHF2?=
- =?utf-8?B?Tk9xSGxLNFVENTh2clkycWxkbDNHaWZqYlJSaUpIMWFGNDNETFNCQXhHZTVo?=
- =?utf-8?B?aWdyR3huRVlTYmd4RmpXVjl0OFcwL1BNSm45ZG1vdkUvc29GUTRlNUdNTjJm?=
- =?utf-8?Q?jLFO8hr7AQpvWO0J/EFsXei4j?=
+	=?utf-8?B?cEk2eENwT24rQWw1Z3c2UDhMWFJSM01qZHlrZGVSR1g0TzBNVWpvMkk4SzNU?=
+ =?utf-8?B?bXNwdFBKbFVENC9YQlAzRm1MMUtNa29wZnp6bThKUU1ab3VsR1lnRnNBUHZC?=
+ =?utf-8?B?enhMZ2tMSkcveFY3dFVObDEvbVptVkduTVRuME5XWTZIVVZkbHRqZWtHb2hy?=
+ =?utf-8?B?azVsWXhXaVRVNEt4ZnorSmFoT3VuUWRFTGllS2JSN0tGNStYRXZlMDN6bHJt?=
+ =?utf-8?B?c1BQTFI5RDd6YnFuVGNEWFdJM2xqck5DZHB3a2N1ZXZKekExUTBlWnZ5Q2Zs?=
+ =?utf-8?B?c2h6N1lMTWlveDFyeUVralBPejBmc2xQc1BsS3ZSYnhhOHduM055UEttWWpo?=
+ =?utf-8?B?WURNL1cxb1hhQ3V4TzlsaHJXVDVSV2ZTdC9Vamt0YlkwWjJ0KzBId0R3eHZH?=
+ =?utf-8?B?WWVtdmhrK3JHMjE0eVQ0cjVnZGhaWWhKZ2JKUmF1bjZmYmVXWkNvcGQ2dkRD?=
+ =?utf-8?B?TVRLR01BUzlVN1ZSWFZrL2VTczdXem5RbUhFQVdaUERuMVRLVXhoN3hmYjJp?=
+ =?utf-8?B?ZjZ2c01hUUtVQ1dhYTNCY2ZmWElIZUVTR1MyVlFUK0NTSHdyV0ErTVpiUUhL?=
+ =?utf-8?B?dWtqcUlIcHhJbWp0angvdEpKQzJUV1YyK2JvV01nYmtXVmJLV1Q5S1M4TklT?=
+ =?utf-8?B?dWo3dDhqczIzeGEwcmZmOWc0dFhTcWVtZGdxTmpqNmxrZXprUVBSYloxREdL?=
+ =?utf-8?B?dmNpNHRiR2t3QXZoL1hBY0VyZU05VXBMZDBkVTRRdE9qMG9lUDg0dXNMMmF0?=
+ =?utf-8?B?aHp3WkVHdjd2RGtaZC9OTWFVVWQ4RkNkaldVU3VJMnNqMXFqM0FzbDY5K1N3?=
+ =?utf-8?B?TWhQdmcrdXVtaEdqSzdZWHQ0L3BYd2dJd3pvdEQxSzlxTVlZdDB3enpUeTRy?=
+ =?utf-8?B?ZnFtTWRsQjRmWDcyOExHY2MxUzk1c0t2dDRxaGcySzU0ckdJaElhU0hNV0ZE?=
+ =?utf-8?B?WkNvR1JDS3VlQm5RS3VXdEJ5TmNHMS8rSzJmNlh6QXFxbnRJRlVMNGhjUmtx?=
+ =?utf-8?B?dDk2WnBFMnBhMHNMaEljY2VDc1l4U0Y3bXNDend3SERXd3pCakRxZ3pYUHFD?=
+ =?utf-8?B?ZVpla1pyNXRpMDN0dXd4TFNpYW1RclNQQWZ0SWMySXlBdGdaTUpEajFSS3dz?=
+ =?utf-8?B?Z3dLTzd0SUs3UklzdlVJRlF6ZElrcTVJK3N1YU8zWktTZkwrK29RS3F2bnp3?=
+ =?utf-8?B?NjZGcVUweXZCYy9sbnA1dUt6T3NpdUFYYlFTclhKOWdpMEZEbjE1RDhFYW9w?=
+ =?utf-8?B?VERyRDBwUWdlOVlYMnd5UjQrc3pkdHcrY0kyS2YzTXpaMjk0WkEyUit2Y0dS?=
+ =?utf-8?B?T1JnNk9CK2hMWFZZN1lxc2hkZnJsenRoQ2lmR0p2aUtFUnpvTWcvY0h6aFoy?=
+ =?utf-8?B?VjYxTkJKYXY1b1YzTFNDbEIyMzNTK3E5bWpWUUhkREFwbnV3Rjl1akFBa0Rl?=
+ =?utf-8?B?SnU0V3pDbVBEWWp1SkN1YnNiZUtTM3ltaTJ6STdrYUJ4YmtNRmpGTFkzVWN2?=
+ =?utf-8?B?MHpLd0tGMEpWUE9JdmN3ODVjZnhYbVkzRzFOWFZHZ0Z3TnZrRFh1OWlweGdG?=
+ =?utf-8?B?U2d6QTQvaWdSQnpmUEhHOUh0cG1NMnFQTkpjUmphOVZNc2NKaWp0bDFVS0th?=
+ =?utf-8?B?QjUvMk9ucmtFMi9GTDE0ZXVmTi8ydE04QjRMb3FDTjVnaG05dEV0OUdzS0Jl?=
+ =?utf-8?B?SDd1R1ZVR1pMdTh6cGc1SmhBeWhNOEFqT3d3a2lnc0g4N2VWZlRZaTROQ3dh?=
+ =?utf-8?B?cEpqRVVtckxqNUJwbXVFV0pMMG1xdW9PMWNxeE5Sckh6cHZqbmh0T3d4Nmxv?=
+ =?utf-8?B?bytzcCt4ak5WRy9STjR2RjFEVnViYkk4UlFVdFZJdEI1NTRQQ05mcys5dTRN?=
+ =?utf-8?B?d0VGY2lzcUlsOTlZWmlQRmJRT3NLUldiTUJXQ0VNM0tJSE1VdWozVkRRZmNI?=
+ =?utf-8?B?bDVJYXNWa1g2YlFXTFY3bUZuUjFrcE9JNVVOMERFVVFQTi82NytRQjh3cGhr?=
+ =?utf-8?B?SktIZHJVa3RrWFRsWTNIS0M5cHRpZm5iZXpSZTVOMHZpZkhiUy83eUVYZ1h5?=
+ =?utf-8?B?WS93TGNHNjNaMFg2bS9ueER5TngvUkJ4cDAvTnZBZlJnaitLbHgzcXExTC9t?=
+ =?utf-8?Q?NUpE=3D?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2a9599a1-75bc-4105-ad0e-08de291635bc
+X-MS-Exchange-CrossTenant-Network-Message-Id: effa3041-69f7-482c-2ae2-08de2b44dcc5
 X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5685.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Nov 2025 15:54:10.3810
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Nov 2025 10:33:09.6770
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: muuPxCHEteAiXMKlmgE+eRvoHctW/c19WcNuQvg5RPb5BAcRwLt13W3e1gDkAjAO
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB7121
+X-MS-Exchange-CrossTenant-UserPrincipalName: mSWB7wR+DfLSw6vPiOMT2BRhM86EOkrvQ4APoMVYixMuE9AyrAVgwsPVDgQ5mmmC
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB6965
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-5.00 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
@@ -152,34 +151,32 @@ X-Spamd-Result: default: False [-5.00 / 15.00];
 	R_SPF_ALLOW(-0.20)[+ip4:52.100.0.0/15];
 	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
 	MIME_GOOD(-0.10)[text/plain];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[52.101.46.66:from];
+	FREEMAIL_TO(0.00)[gmail.com,vger.kernel.org];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[52.101.56.29:from];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_TO(0.00)[amd.com,gmail.com,ffwll.ch,linaro.org];
+	RCPT_COUNT_TWELVE(0.00)[19];
 	MID_RHS_MATCH_FROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	URIBL_BLOCKED(0.00)[amd.com:mid,amd.com:email,amd.com:dkim,amd.com:from_smtp,amd.com:from_mime];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
-	DNSWL_BLOCKED(0.00)[52.101.46.66:from,2603:10b6:510:13c::22:received];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	DKIM_TRACE(0.00)[amd.com:+]
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: C5ED53F70E
+X-Rspamd-Queue-Id: 494363F752
 X-Spamd-Bar: -----
-Message-ID-Hash: WEYBZHU7D7NJ5OYLTCAS4MIA43GL5EH7
-X-Message-ID-Hash: WEYBZHU7D7NJ5OYLTCAS4MIA43GL5EH7
+Message-ID-Hash: AFLKLU3V5GRRIRDKSFMXXQHZ3WLTMCMQ
+X-Message-ID-Hash: AFLKLU3V5GRRIRDKSFMXXQHZ3WLTMCMQ
 X-MailFrom: Christian.Koenig@amd.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+CC: Vishal Verma <vishal1.verma@intel.com>, tushar.gohad@intel.com, Keith Busch <kbusch@kernel.org>, Jens Axboe <axboe@kernel.dk>, Christoph Hellwig <hch@lst.de>, Sagi Grimberg <sagi@grimberg.me>, Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Andrew Morton <akpm@linux-foundation.org>, Sumit Semwal <sumit.semwal@linaro.org>, linux-kernel@vger.kernel.org, linux-nvme@lists.infradead.org, linux-fsdevel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3 27/28] drm/amdgpu: get rid of amdgpu_ttm_clear_buffer
+Subject: [Linaro-mm-sig] Re: [RFC v2 00/11] Add dmabuf read/write via io_uring
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WEYBZHU7D7NJ5OYLTCAS4MIA43GL5EH7/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AFLKLU3V5GRRIRDKSFMXXQHZ3WLTMCMQ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -189,218 +186,98 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On 11/21/25 11:12, Pierre-Eric Pelloux-Prayer wrote:
-> It's doing the same thing as amdgpu_fill_buffer(src_data=0), so drop it.
-> 
-> The only caveat is that amdgpu_res_cleared() return value is only valid
-> right after allocation.
-> 
-> ---
-> v2: introduce new "bool consider_clear_status" arg
-> ---
-> 
-> Signed-off-by: Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>
+On 11/23/25 23:51, Pavel Begunkov wrote:
+> Picking up the work on supporting dmabuf in the read/write path.
 
-It would be better to have that ealier in the patch set, but I guess that gives you rebasing problems?
+IIRC that work was completely stopped because it violated core dma_fence and DMA-buf rules and after some private discussion was considered not doable in general.
 
+Or am I mixing something up here? Since I don't see any dma_fence implementation at all that might actually be the case.
+
+On the other hand we have direct I/O from DMA-buf working for quite a while, just not upstream and without io_uring support.
+
+Regards,
 Christian.
 
-> ---
->  drivers/gpu/drm/amd/amdgpu/amdgpu_object.c | 16 ++--
->  drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c    | 90 +++++-----------------
->  drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.h    |  7 +-
->  3 files changed, 33 insertions(+), 80 deletions(-)
+> There
+> are two main changes. First, it doesn't pass a dma addresss directly by
+> rather wraps it into an opaque structure, which is extended and
+> understood by the target driver.
 > 
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
-> index 7d8d70135cc2..dccc31d0128e 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
-> @@ -725,13 +725,17 @@ int amdgpu_bo_create(struct amdgpu_device *adev,
->  	    bo->tbo.resource->mem_type == TTM_PL_VRAM) {
->  		struct dma_fence *fence;
->  
-> -		r = amdgpu_ttm_clear_buffer(adev, bo, bo->tbo.base.resv, &fence);
-> +		r = amdgpu_fill_buffer(adev, amdgpu_ttm_next_clear_entity(adev),
-> +				       bo, 0, NULL, &fence,
-> +				       true, AMDGPU_KERNEL_JOB_ID_TTM_CLEAR_BUFFER);
->  		if (unlikely(r))
->  			goto fail_unreserve;
->  
-> -		dma_resv_add_fence(bo->tbo.base.resv, fence,
-> -				   DMA_RESV_USAGE_KERNEL);
-> -		dma_fence_put(fence);
-> +		if (fence) {
-> +			dma_resv_add_fence(bo->tbo.base.resv, fence,
-> +					   DMA_RESV_USAGE_KERNEL);
-> +			dma_fence_put(fence);
-> +		}
->  	}
->  	if (!bp->resv)
->  		amdgpu_bo_unreserve(bo);
-> @@ -1323,8 +1327,8 @@ void amdgpu_bo_release_notify(struct ttm_buffer_object *bo)
->  		goto out;
->  
->  	r = amdgpu_fill_buffer(adev, amdgpu_ttm_next_clear_entity(adev),
-> -			       abo, 0, &bo->base._resv,
-> -			       &fence, AMDGPU_KERNEL_JOB_ID_CLEAR_ON_RELEASE);
-> +			       abo, 0, &bo->base._resv, &fence,
-> +			       false, AMDGPU_KERNEL_JOB_ID_CLEAR_ON_RELEASE);
->  	if (WARN_ON(r))
->  		goto out;
->  
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
-> index 39cfe2dbdf03..c65c411ce26e 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
-> @@ -459,7 +459,7 @@ static int amdgpu_move_blit(struct ttm_buffer_object *bo,
->  
->  		r = amdgpu_fill_buffer(adev, entity,
->  				       abo, 0, NULL, &wipe_fence,
-> -				       AMDGPU_KERNEL_JOB_ID_MOVE_BLIT);
-> +				       false, AMDGPU_KERNEL_JOB_ID_MOVE_BLIT);
->  		if (r) {
->  			goto error;
->  		} else if (wipe_fence) {
-> @@ -2459,79 +2459,28 @@ static int amdgpu_ttm_fill_mem(struct amdgpu_device *adev,
->  }
->  
->  /**
-> - * amdgpu_ttm_clear_buffer - clear memory buffers
-> + * amdgpu_fill_buffer - fill a buffer with a given value
->   * @adev: amdgpu device object
-> - * @bo: amdgpu buffer object
-> - * @resv: reservation object
-> - * @fence: dma_fence associated with the operation
-> + * @entity: optional entity to use. If NULL, the clearing entities will be
-> + *          used to load-balance the partial clears
-> + * @bo: the bo to fill
-> + * @src_data: the value to set
-> + * @resv: fences contained in this reservation will be used as dependencies.
-> + * @out_fence: the fence from the last clear will be stored here. It might be
-> + *             NULL if no job was run.
-> + * @dependency: optional input dependency fence.
-> + * @consider_clear_status: true if region reported as cleared by amdgpu_res_cleared()
-> + *                         are skipped.
-> + * @k_job_id: trace id
->   *
-> - * Clear the memory buffer resource.
-> - *
-> - * Returns:
-> - * 0 for success or a negative error code on failure.
->   */
-> -int amdgpu_ttm_clear_buffer(struct amdgpu_device *adev,
-> -			    struct amdgpu_bo *bo,
-> -			    struct dma_resv *resv,
-> -			    struct dma_fence **fence)
-> -{
-> -	struct amdgpu_ttm_buffer_entity *entity;
-> -	struct amdgpu_res_cursor cursor;
-> -	u64 addr;
-> -	int r = 0;
-> -
-> -	if (!adev->mman.buffer_funcs_enabled)
-> -		return -EINVAL;
-> -
-> -	if (!fence)
-> -		return -EINVAL;
-> -	entity = &adev->mman.clear_entities[0];
-> -	*fence = dma_fence_get_stub();
-> -
-> -	amdgpu_res_first(bo->tbo.resource, 0, amdgpu_bo_size(bo), &cursor);
-> -
-> -	mutex_lock(&entity->lock);
-> -	while (cursor.remaining) {
-> -		struct dma_fence *next = NULL;
-> -		u64 size;
-> -
-> -		if (amdgpu_res_cleared(&cursor)) {
-> -			amdgpu_res_next(&cursor, cursor.size);
-> -			continue;
-> -		}
-> -
-> -		/* Never clear more than 256MiB at once to avoid timeouts */
-> -		size = min(cursor.size, 256ULL << 20);
-> -
-> -		r = amdgpu_ttm_map_buffer(adev, entity,
-> -					  &bo->tbo, bo->tbo.resource, &cursor,
-> -					  1, false, false, &size, &addr);
-> -		if (r)
-> -			goto err;
-> -
-> -		r = amdgpu_ttm_fill_mem(adev, entity, 0, addr, size, resv,
-> -					&next, true,
-> -					AMDGPU_KERNEL_JOB_ID_TTM_CLEAR_BUFFER);
-> -		if (r)
-> -			goto err;
-> -
-> -		dma_fence_put(*fence);
-> -		*fence = next;
-> -
-> -		amdgpu_res_next(&cursor, size);
-> -	}
-> -err:
-> -	mutex_unlock(&entity->lock);
-> -
-> -	return r;
-> -}
-> -
->  int amdgpu_fill_buffer(struct amdgpu_device *adev,
->  		       struct amdgpu_ttm_buffer_entity *entity,
->  		       struct amdgpu_bo *bo,
->  		       uint32_t src_data,
->  		       struct dma_resv *resv,
-> -		       struct dma_fence **f,
-> +		       struct dma_fence **out_fence,
-> +		       bool consider_clear_status,
->  		       u64 k_job_id)
->  {
->  	struct dma_fence *fence = NULL;
-> @@ -2551,6 +2500,11 @@ int amdgpu_fill_buffer(struct amdgpu_device *adev,
->  		struct dma_fence *next;
->  		uint64_t cur_size, to;
->  
-> +		if (consider_clear_status && amdgpu_res_cleared(&dst)) {
-> +			amdgpu_res_next(&dst, dst.size);
-> +			continue;
-> +		}
-> +
->  		/* Never fill more than 256MiB at once to avoid timeouts */
->  		cur_size = min(dst.size, 256ULL << 20);
->  
-> @@ -2574,9 +2528,7 @@ int amdgpu_fill_buffer(struct amdgpu_device *adev,
->  	}
->  error:
->  	mutex_unlock(&entity->lock);
-> -	if (f)
-> -		*f = dma_fence_get(fence);
-> -	dma_fence_put(fence);
-> +	*out_fence = fence;
->  	return r;
->  }
->  
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.h b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.h
-> index 653a4d17543e..f3bdbcec9afc 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.h
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.h
-> @@ -181,16 +181,13 @@ int amdgpu_copy_buffer(struct amdgpu_device *adev,
->  		       struct dma_resv *resv,
->  		       struct dma_fence **fence,
->  		       bool vm_needs_flush, uint32_t copy_flags);
-> -int amdgpu_ttm_clear_buffer(struct amdgpu_device *adev,
-> -			    struct amdgpu_bo *bo,
-> -			    struct dma_resv *resv,
-> -			    struct dma_fence **fence);
->  int amdgpu_fill_buffer(struct amdgpu_device *adev,
->  		       struct amdgpu_ttm_buffer_entity *entity,
->  		       struct amdgpu_bo *bo,
->  		       uint32_t src_data,
->  		       struct dma_resv *resv,
-> -		       struct dma_fence **f,
-> +		       struct dma_fence **out_fence,
-> +		       bool consider_clear_status,
->  		       u64 k_job_id);
->  struct amdgpu_ttm_buffer_entity *amdgpu_ttm_next_clear_entity(struct amdgpu_device *adev);
->  
+> The second big change is support for dynamic attachments, which added a
+> good part of complexity (see Patch 5). I kept the main machinery in nvme
+> at first, but move_notify can ask to kill the dma mapping asynchronously,
+> and any new IO would need to wait during submission, thus it was moved
+> to blk-mq. That also introduced an extra callback layer b/w driver and
+> blk-mq.
+> 
+> There are some rough corners, and I'm not perfectly happy about the
+> complexity and layering. For v3 I'll try to move the waiting up in the
+> stack to io_uring wrapped into library helpers.
+> 
+> For now, I'm interested what is the best way to test move_notify? And
+> how dma_resv_reserve_fences() errors should be handled in move_notify?
+> 
+> The uapi didn't change, after registration it looks like a normal
+> io_uring registered buffer and can be used as such. Only non-vectored
+> fixed reads/writes are allowed. Pseudo code:
+> 
+> // registration
+> reg_buf_idx = 0;
+> io_uring_update_buffer(ring, reg_buf_idx, { dma_buf_fd, file_fd });
+> 
+> // request creation
+> io_uring_prep_read_fixed(sqe, file_fd, buffer_offset,
+>                          buffer_size, file_offset, reg_buf_idx);
+> 
+> And as previously, a good bunch of code was taken from Keith's series [1].
+> 
+> liburing based example:
+> 
+> git: https://github.com/isilence/liburing.git dmabuf-rw
+> link: https://github.com/isilence/liburing/tree/dmabuf-rw
+> 
+> [1] https://lore.kernel.org/io-uring/20220805162444.3985535-1-kbusch@fb.com/
+> 
+> Pavel Begunkov (11):
+>   file: add callback for pre-mapping dmabuf
+>   iov_iter: introduce iter type for pre-registered dma
+>   block: move around bio flagging helpers
+>   block: introduce dma token backed bio type
+>   block: add infra to handle dmabuf tokens
+>   nvme-pci: add support for dmabuf reggistration
+>   nvme-pci: implement dma_token backed requests
+>   io_uring/rsrc: add imu flags
+>   io_uring/rsrc: extended reg buffer registration
+>   io_uring/rsrc: add dmabuf-backed buffer registeration
+>   io_uring/rsrc: implement dmabuf regbuf import
+> 
+>  block/Makefile                   |   1 +
+>  block/bdev.c                     |  14 ++
+>  block/bio.c                      |  21 +++
+>  block/blk-merge.c                |  23 +++
+>  block/blk-mq-dma-token.c         | 236 +++++++++++++++++++++++++++++++
+>  block/blk-mq.c                   |  20 +++
+>  block/blk.h                      |   3 +-
+>  block/fops.c                     |   3 +
+>  drivers/nvme/host/pci.c          | 217 ++++++++++++++++++++++++++++
+>  include/linux/bio.h              |  49 ++++---
+>  include/linux/blk-mq-dma-token.h |  60 ++++++++
+>  include/linux/blk-mq.h           |  21 +++
+>  include/linux/blk_types.h        |   8 +-
+>  include/linux/blkdev.h           |   3 +
+>  include/linux/dma_token.h        |  35 +++++
+>  include/linux/fs.h               |   4 +
+>  include/linux/uio.h              |  10 ++
+>  include/uapi/linux/io_uring.h    |  13 +-
+>  io_uring/rsrc.c                  | 201 +++++++++++++++++++++++---
+>  io_uring/rsrc.h                  |  23 ++-
+>  io_uring/rw.c                    |   7 +-
+>  lib/iov_iter.c                   |  30 +++-
+>  22 files changed, 948 insertions(+), 54 deletions(-)
+>  create mode 100644 block/blk-mq-dma-token.c
+>  create mode 100644 include/linux/blk-mq-dma-token.h
+>  create mode 100644 include/linux/dma_token.h
+> 
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
