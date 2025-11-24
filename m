@@ -2,82 +2,82 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KNsyOA8A4Wk7oQAAu9opvQ
+	id iBNfBRUA4Wk7oQAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:28:15 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:28:21 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id B972E410C23
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:28:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DF5AB410C2A
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:28:20 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 79BC840A1A
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:28:14 +0000 (UTC)
-Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
-	by lists.linaro.org (Postfix) with ESMTPS id D88383F719
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 24 Nov 2025 13:38:54 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 0959040A23
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:28:20 +0000 (UTC)
+Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com [209.85.208.44])
+	by lists.linaro.org (Postfix) with ESMTPS id D64503F719
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 24 Nov 2025 13:41:36 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20230601 header.b=cG4sEwFt;
-	spf=pass (lists.linaro.org: domain of anuj1072538@gmail.com designates 209.85.208.46 as permitted sender) smtp.mailfrom=anuj1072538@gmail.com;
+	dkim=pass header.d=gmail.com header.s=20230601 header.b=Xl9xbZmO;
+	spf=pass (lists.linaro.org: domain of anuj1072538@gmail.com designates 209.85.208.44 as permitted sender) smtp.mailfrom=anuj1072538@gmail.com;
 	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-ed1-f46.google.com with SMTP id 4fb4d7f45d1cf-640e9f5951aso5243990a12.1
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 24 Nov 2025 05:38:54 -0800 (PST)
+Received: by mail-ed1-f44.google.com with SMTP id 4fb4d7f45d1cf-63c489f1e6cso145926a12.1
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 24 Nov 2025 05:41:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763991534; x=1764596334; darn=lists.linaro.org;
+        d=gmail.com; s=20230601; t=1763991696; x=1764596496; darn=lists.linaro.org;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=fGnf1zvNYnk55vDoYwHQmt5WFO2pnbA0Jle9HXGkL5k=;
-        b=cG4sEwFtz4CyJW1D6OD/Ny7OYLzZCOOus0QwcwM+/09Jvz3P/m2sahD6SrTpryGy86
-         hTXw2u1FfGiAhvRAKQMBg/GrMUsfTr4IELFxGXpalqc81e7dzvU5GVa+dzZmmoItHP66
-         h85gfVi6qX9kF1b0jXdFXn+KX6PBYYq6OUzLIiTLnrd0T1iR0SRyTaIOA9YHXUKDqRjo
-         TAixcYE+Pck32qA6ZMuk4tKUonCfljBSJqjYaSGuNQqwapBvRugi9j7FmD47VU44pZ4Y
-         1d+LIXbQilORClZ9TKC9Pqjo/TIjC/is22sjL6zknZwlaVeL3ut5/GhDqfWkLjxN0jN9
-         xvbw==
+        bh=9WiU+fUOoaOr/u86tVujVIv6iGVYl9gAhlsoumb2r9I=;
+        b=Xl9xbZmOyzgl4g9tB0oGAPxq9uq0S4DrPJQc7vBR4aGTORbdKYNvSdyLJ8kTNfQbMu
+         As+Oevzbmi/EcQ0Hz/sJqlA5aMxmNM9xnwEpW2COMyyg5p2bnu8csE+g8a4R+rGfJega
+         2eJkFHNqHWscuKV1EMDxkKvgBrqXIFK+F3JKdBARSurxp3Eb9AySZ1lX617XT6vGbg3P
+         aDwo4WnNTzqnkZId5qVwhSgIi4/N2QJb/pNJMskV03vR71X6qvkHdYtKbmsH/Selxk47
+         MEPg/WIP0fFJDTl0reQAwV/9ddh3DlQvkchAkFR+mWZtXdozJImx3OUESBbc1St16A4O
+         vxfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763991534; x=1764596334;
+        d=1e100.net; s=20230601; t=1763991696; x=1764596496;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=fGnf1zvNYnk55vDoYwHQmt5WFO2pnbA0Jle9HXGkL5k=;
-        b=EHgbIq0JQcmTu6fkvV34QoHgEwoy5QZ1rnTfB0Kei6Y34IlcnOAd1tvqZ+QJFGWxdi
-         tIGAY92BTJNf2KB04UId7+T2J+po6DCk8+yZTqmulgMR3Rd983Fbjiu8GkuX5sfJ9L3M
-         xHHiVb/984ReYeN23itS94Hi5n6DAQMhZL2Z//VT9SrLbfEOAg+Nxl1ywibY/XG1PbuF
-         9/Cbqhl8hrJ08fuOqEMw2cJ4rEwLuD8jZcLuG49h3XMZzjqoZmT25Iv2M5OeGjIj6LtX
-         8U4+wkSNSdETY5xKudcoMHumc3JcY+kxnJSAxpxMmY4C6xM66v4yCWMWn6ECXcTmD0Mh
-         LbFQ==
-X-Forwarded-Encrypted: i=1; AJvYcCW23FHGNO0/QSvPVcdmYwulSJlPP+t9/QGLHZXFAmUsNSZKazSYiDN6bNDYJKOG8VUDf8bNBQ51u+4o3Vwf@lists.linaro.org
-X-Gm-Message-State: AOJu0YyCg+x1pWAwr15HpZCwqO6ZPUGRDePt4bLJNu9zKvf73eRl8dt9
-	qB/WkJrpvr3k5VV2oa6JBcEMH05YEr/Uv8NOwoxFD7QgfsPDF5JAVMOqqVuMjGx3tTCP9SIYMnN
-	hD6ohyOYKmF4D/5ZqS4P3bQWzC7XcDg==
-X-Gm-Gg: ASbGncuVFp8dAju08PSddZ1nXGrGQSTdGNbsfZubAkHMh0I+17485/LBuRXDX43EgBP
-	U4PCbkJ/xZeEDi3ZwNpziklia0ogRjbbpxRYSCstBOxsQOK39CmmsZv1ATK4Vsl/M5SyLpYhF7L
-	1MFpH3yk7QnU0sIa0ZzkCrQZUSO3q3CPNhTSa/oFaUxset1LIUrjQFZ8EWIQ0PIs8jE68vqW1Ke
-	JKpxIdsbSSsd3sjm9nFKlI3gIsukEFbZBPFKdF9IpSsRTtuUgj+Pokbl1ajjo3qVC6CYi/R6ipo
-	8klmX93Al0IZH8yjAf57B4BqjFhRFctEaeOLvVR+qmTh/p+3Owp8gDqzfJCDlbKzMPA=
-X-Google-Smtp-Source: AGHT+IEIrrPvcFC3+rTLrgAPrW5zl0/cNdfSGGH+WdJU8CBkNncTEWdpxNp4QGdNjnbB8MXP5BRq+4un+OL6bxIbhcQ=
-X-Received: by 2002:aa7:d814:0:b0:640:93ea:8ff3 with SMTP id
- 4fb4d7f45d1cf-6453969fc53mr9852940a12.13.1763991533736; Mon, 24 Nov 2025
- 05:38:53 -0800 (PST)
+        bh=9WiU+fUOoaOr/u86tVujVIv6iGVYl9gAhlsoumb2r9I=;
+        b=qWcGdMZPOPQRVOtsaJKf9QWpxZC3ZrHM1nldwH7fkZ2lAWUz2uCBf42wu9QBMPvwHg
+         Jt9OZ7VTbq9zaWQugb19ZmuDAptT72HHpkiWCYrOp7SBamnkBCZss9LpkxMbfVwm591e
+         WjI0Y4lVHay1vBuR3RLWhocIuagNyjq4LbKddbTdthJz/HFNpiWo/ZzgiF2jzdoCGLEs
+         G7U4t7EU7xfwug6Egxvq05OwZxYenA6RdOIOyr8zSOU78dnoR/gqat/Al64opT0TVIBo
+         smrHPpBnqfpDgHgQcUkx5O/Ruy8gALyJc4ris6jxbMApsT2zv7iUo0ysA3cxMgpluZQk
+         oiaA==
+X-Forwarded-Encrypted: i=1; AJvYcCVLx5lIEDgBl58595dhrmJqY24w7cA66R7AM2RHcBZv4wmKBJg+UP8GzC2qeih0JKJPM5zAeL4bVQU1r6Md@lists.linaro.org
+X-Gm-Message-State: AOJu0YygNsJ2DpYrzEcJFrbDMpZvdAvnMlQJ2nHcfMEe2lLyDkL6bpAP
+	Q6/wuTP1PdskUc+GfHVVmRqzR0TM1seDAEWDKWZd40xqrtzk04sXNu+IUSbPsDuAzFyS2+85VaB
+	jAjAqdeiuH9erwO95p09wbuilmbN16w==
+X-Gm-Gg: ASbGnctf0s1p/QLS+JufwqvDlMIdBOgWbxfbJVi3cZxbRLANmfQ0gy//QHVqezSUmZY
+	wbKzY4B/a2KV3aC5fLZakt031jmlaPx2wdQGhE/LRIJKXJprHhKg4Pv3L9riFu4wcWCJmnKEoaO
+	E+JAoZQqnyGKL4MoY1OqsJ4wLOWiaHV9+BMr5mV5lcMY7JmhnTU6Tktxk1FfABmzvoL3/UJBzA1
+	R5mEcIaOqVqgyjWT6oTr9JoyZKjfmThIMWPtKjqqqsQskcJkbJiJozPeL017cNADMGzfDJOjgle
+	DwoZQK6OIwaSY6iy89KJJP5Mu3YsZ8LUahaNyd5LgmC/dpALSf67sld9
+X-Google-Smtp-Source: AGHT+IGfVsoGjX5Sxy1dySCnIJESUxRCyabV8O63iUc1Le7y4o1Ai34RI3broPwT+Hj5nWquSwgUdOuJhlEdpZCZaGc=
+X-Received: by 2002:a05:6402:40c1:b0:640:ef03:82de with SMTP id
+ 4fb4d7f45d1cf-645550809a7mr11399195a12.4.1763991695708; Mon, 24 Nov 2025
+ 05:41:35 -0800 (PST)
 MIME-Version: 1.0
-References: <cover.1763725387.git.asml.silence@gmail.com> <51cddd97b31d80ec8842a88b9f3c9881419e8a7b.1763725387.git.asml.silence@gmail.com>
-In-Reply-To: <51cddd97b31d80ec8842a88b9f3c9881419e8a7b.1763725387.git.asml.silence@gmail.com>
+References: <cover.1763725387.git.asml.silence@gmail.com> <9bc25f46d2116436d73140cd8e8554576de2caca.1763725388.git.asml.silence@gmail.com>
+In-Reply-To: <9bc25f46d2116436d73140cd8e8554576de2caca.1763725388.git.asml.silence@gmail.com>
 From: Anuj gupta <anuj1072538@gmail.com>
-Date: Mon, 24 Nov 2025 19:08:16 +0530
-X-Gm-Features: AWmQ_bnDcYvcgkdgCo-kXgELlQbBhcvXrCXwL82qa0EngBmCaaIoNiIBz4Az0nk
-Message-ID: <CACzX3As+CR4K+Vxm2izYYTGNo1DezNcVwjehOmFjxTqaqLrDGw@mail.gmail.com>
+Date: Mon, 24 Nov 2025 19:10:59 +0530
+X-Gm-Features: AWmQ_blM0KWu7aUv8ArY5r4a9fsKMGwJG-SFJqiYxWiv8fYwoMfNFeWPT1HOzl8
+Message-ID: <CACzX3AsXD_C50CY0KYNjt5yMY4hm-ZDLQU5dQSJAmP3Duerauw@mail.gmail.com>
 To: Pavel Begunkov <asml.silence@gmail.com>
 X-Spamd-Bar: ---
 X-MailFrom: anuj1072538@gmail.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: EOHCJCTR6QKQIQIIFSTTNPM2WJC4ZBFL
-X-Message-ID-Hash: EOHCJCTR6QKQIQIIFSTTNPM2WJC4ZBFL
+Message-ID-Hash: FTUMGB3JEA6634PL4X7ZB3B2DSOMKPA6
+X-Message-ID-Hash: FTUMGB3JEA6634PL4X7ZB3B2DSOMKPA6
 X-Mailman-Approved-At: Thu, 16 Apr 2026 15:06:52 +0000
 CC: linux-block@vger.kernel.org, io-uring@vger.kernel.org, Vishal Verma <vishal1.verma@intel.com>, tushar.gohad@intel.com, Keith Busch <kbusch@kernel.org>, Jens Axboe <axboe@kernel.dk>, Christoph Hellwig <hch@lst.de>, Sagi Grimberg <sagi@grimberg.me>, Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Andrew Morton <akpm@linux-foundation.org>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, linux-kernel@vger.kernel.org, linux-nvme@lists.infradead.org, linux-fsdevel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [RFC v2 05/11] block: add infra to handle dmabuf tokens
+Subject: [Linaro-mm-sig] Re: [RFC v2 06/11] nvme-pci: add support for dmabuf reggistration
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EOHCJCTR6QKQIQIIFSTTNPM2WJC4ZBFL/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FTUMGB3JEA6634PL4X7ZB3B2DSOMKPA6/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -104,7 +104,7 @@ X-Spamd-Result: default: False [2.09 / 15.00];
 	RCPT_COUNT_TWELVE(0.00)[20];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_SPAM(0.00)[0.939];
+	NEURAL_SPAM(0.00)[0.947];
 	FROM_NEQ_ENVFROM(0.00)[anuj1072538@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
@@ -112,17 +112,16 @@ X-Spamd-Result: default: False [2.09 / 15.00];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,mail.gmail.com:mid,linaro.org:email]
-X-Rspamd-Queue-Id: B972E410C23
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
+X-Rspamd-Queue-Id: DF5AB410C2A
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-> +void blk_mq_dma_map_move_notify(struct blk_mq_dma_token *token)
-> +{
-> +       blk_mq_dma_map_remove(token);
-> +}
-this needs to be exported as it is referenced from the nvme-pci driver,
-otherwise we get a build error
+nit:
+s/reggistration/registration/ in subject
+
+Also a MODULE_IMPORT_NS("DMA_BUF") needs to be added, since it now uses
+symbols from the DMA_BUF namespace, otherwise we got a build error
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
