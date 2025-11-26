@@ -2,190 +2,423 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4CE49C86184
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 25 Nov 2025 18:02:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6B257C87B6D
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 Nov 2025 02:39:03 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 21F003F826
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 25 Nov 2025 17:02:34 +0000 (UTC)
-Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
-	by lists.linaro.org (Postfix) with ESMTPS id 6C34C3F7A1
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 25 Nov 2025 17:02:17 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 19C033F96E
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 Nov 2025 01:39:02 +0000 (UTC)
+Received: from relay.hostedemail.com (smtprelay0016.hostedemail.com [216.40.44.16])
+	by lists.linaro.org (Postfix) with ESMTPS id 971663F820
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 26 Nov 2025 01:38:45 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
 	dkim=none;
-	spf=pass (lists.linaro.org: domain of l.stach@pengutronix.de designates 185.203.201.7 as permitted sender) smtp.mailfrom=l.stach@pengutronix.de;
-	dmarc=none
-Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77] helo=[IPv6:::1])
-	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <l.stach@pengutronix.de>)
-	id 1vNwQa-0005JT-Up; Tue, 25 Nov 2025 18:02:08 +0100
-Message-ID: <e2c006ca81081ee1afa00b1b52a035c28a267e0f.camel@pengutronix.de>
-From: Lucas Stach <l.stach@pengutronix.de>
-To: Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
-	phasta@kernel.org, alexdeucher@gmail.com, simona.vetter@ffwll.ch,
-	faith@gfxstrand.net, sumit.semwal@linaro.org
-Date: Tue, 25 Nov 2025 18:02:07 +0100
-In-Reply-To: <52d484c5-6dfb-4e2f-9caa-a61cf1d94801@amd.com>
-References: <20251120150018.27385-1-christian.koenig@amd.com>
-	 <20251120150018.27385-2-christian.koenig@amd.com>
-	 <380012b9d6f0e9ee3c2f125cfe2f37f65c1979e0.camel@mailbox.org>
-	 <b46913b6-fe61-48cd-a9ca-aa2fe3a12b63@amd.com>
-	 <1c1a14d42d0a4a25ebce26a2af0a61dc1b7813fc.camel@mailbox.org>
-	 <508ff709-0f05-4982-8e15-5fea3bbd12e7@amd.com>
-	 <c2b571a7e74f86c6cb95bebd11274447c3080df9.camel@mailbox.org>
-	 <52d484c5-6dfb-4e2f-9caa-a61cf1d94801@amd.com>
-User-Agent: Evolution 3.52.4 (3.52.4-2.fc40) 
+	spf=pass (lists.linaro.org: domain of rostedt@goodmis.org designates 216.40.44.16 as permitted sender) smtp.mailfrom=rostedt@goodmis.org;
+	dmarc=pass (policy=none) header.from=goodmis.org
+Received: from omf09.hostedemail.com (a10.router.float.18 [10.200.18.1])
+	by unirelay02.hostedemail.com (Postfix) with ESMTP id D871F13ADCA;
+	Wed, 26 Nov 2025 01:38:43 +0000 (UTC)
+Received: from [HIDDEN] (Authenticated sender: rostedt@goodmis.org) by omf09.hostedemail.com (Postfix) with ESMTPA id D182320025;
+	Wed, 26 Nov 2025 01:38:40 +0000 (UTC)
+Date: Tue, 25 Nov 2025 20:39:24 -0500
+From: Steven Rostedt <rostedt@goodmis.org>
+To: Xiang Gao <gxxa03070307@gmail.com>
+Message-ID: <20251125203924.3bd59b2c@gandalf.local.home>
+In-Reply-To: <20251125162949.220488-1-gxxa03070307@gmail.com>
+References: <20251125162949.220488-1-gxxa03070307@gmail.com>
+X-Mailer: Claws Mail 3.20.0git84 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:900:1d::77
-X-SA-Exim-Mail-From: l.stach@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: linaro-mm-sig@lists.linaro.org
+X-Stat-Signature: wayw5miybq35f7m8uxpd3ngttpjrb3gw
+X-Spam-Status: No, score=-0.12
+X-Session-Marker: 726F737465647440676F6F646D69732E6F7267
+X-Session-ID: U2FsdGVkX19vpd68vxmtNTdWxmMcQSSct/9/ajf8E4I=
+X-HE-Tag: 1764121120-98615
+X-HE-Meta: U2FsdGVkX18h4EAVllEURvlPrEQAWiGdg5Rzdx39bGekUaY1J1t/YJRFzEaYdhawLg/KlSqRN5mRr4NBH6Ky27JMAVmrJ9ItCPoks+A9WoK1Ep6ONWgg9MV8UVdQHiWryeSUUDsov6fk87uAoXEbr5sqfieXmx7hyUMoDBYZB1RLbqtuqvGwvcIuyG72l1GmYAQPIxgHY4mJZmOv/OvKlGxA49CXEM5WzRAsZIAJn7uvspoPJz6MyGgsf21JsuBjn1NjBHKMDNQTNUufAgIaZGsjYd87M03DaNE9J9bwOcuWB25V/nxYrhAPmRqQR6GH18jbQaFXuk4vLqCvSNI7u57mjRJKpbqP
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-3.10 / 15.00];
+X-Spamd-Result: default: False [-3.20 / 15.00];
 	BAYES_HAM(-3.00)[99.99%];
-	ONCE_RECEIVED(0.20)[];
-	R_SPF_ALLOW(-0.20)[+mx];
+	HFILTER_HOSTNAME_2(1.00)[smtprelay0016.hostedemail.com];
+	DMARC_POLICY_ALLOW(-0.50)[goodmis.org,none];
+	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.40.44.16:from];
+	R_SPF_ALLOW(-0.20)[+ip4:216.40.44.0/24];
 	MIME_GOOD(-0.10)[text/plain];
-	RCVD_TLS_ALL(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MIME_TRACE(0.00)[0:+];
 	ARC_NA(0.00)[];
-	ASN(0.00)[asn:209379, ipnet:185.203.200.0/22, country:DE];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_COUNT_ONE(0.00)[1];
-	FREEMAIL_TO(0.00)[amd.com,kernel.org,gmail.com,ffwll.ch,gfxstrand.net,linaro.org];
-	RCPT_COUNT_SEVEN(0.00)[8];
 	R_DKIM_NA(0.00)[];
+	NEURAL_HAM(-0.00)[-0.995];
+	URIBL_BLOCKED(0.00)[relay.hostedemail.com:helo];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	RCVD_COUNT_TWO(0.00)[2];
+	RCVD_TLS_LAST(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.971];
-	DMARC_NA(0.00)[pengutronix.de];
 	TO_DN_SOME(0.00)[]
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 6C34C3F7A1
+X-Rspamd-Queue-Id: 971663F820
 X-Spamd-Bar: ---
-Message-ID-Hash: CX77NN7GO6XUSRGUCU7JB3GFZ56JO7DH
-X-Message-ID-Hash: CX77NN7GO6XUSRGUCU7JB3GFZ56JO7DH
-X-MailFrom: l.stach@pengutronix.de
+Message-ID-Hash: WZYN2S77PBPKOB5CBIBKHTACNYVKO5GU
+X-Message-ID-Hash: WZYN2S77PBPKOB5CBIBKHTACNYVKO5GU
+X-MailFrom: rostedt@goodmis.org
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org
+CC: sumit.semwal@linaro.org, christian.koenig@amd.com, mhiramat@kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, mathieu.desnoyers@efficios.com, dhowells@redhat.com, kuba@kernel.org, brauner@kernel.org, akpm@linux-foundation.org, linux-trace-kernel@vger.kernel.org, gaoxiang17 <gaoxiang17@xiaomi.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 1/4] dma-buf/fence: give some reasonable maximum signaling timeout
+Subject: [Linaro-mm-sig] Re: [PATCH v2] dma-buf: add some tracepoints to debug.
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CX77NN7GO6XUSRGUCU7JB3GFZ56JO7DH/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WZYN2S77PBPKOB5CBIBKHTACNYVKO5GU/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-QW0gRGllbnN0YWcsIGRlbSAyNS4xMS4yMDI1IHVtIDE1OjI2ICswMTAwIHNjaHJpZWIgQ2hyaXN0
-aWFuIEvDtm5pZzoNCj4gT24gMTEvMjUvMjUgMTE6NTYsIFBoaWxpcHAgU3Rhbm5lciB3cm90ZToN
-Cj4gPiA+ID4gPiANCj4gPiA+ID4gPiBUaGUgR1BVIHNjaGVkdWxlciBoYXMgYSB2ZXJ5IHNpbWls
-YXIgZGVmaW5lLCBNQVhfV0FJVF9TQ0hFRF9FTlRJVFlfUV9FTVBUWSB3aGljaCBpcyBjdXJyZW50
-bHkganVzdCAxIHNlY29uZC4NCj4gPiA+ID4gPiANCj4gPiA+ID4gPiBUaGUgcmVhbCBxdWVzdGlv
-biBpcyB3aGF0IGlzIHRoZSBtYXhpbXVtIGFtb3VudCBvZiB0aW1lIHdlIGNhbiB3YWl0IGZvciB0
-aGUgSFcgYmVmb3JlIHdlIHNob3VsZCB0cmlnZ2VyIGEgdGltZW91dD8NCj4gPiA+ID4gDQo+ID4g
-PiA+IFRoYXQncyBhIHF1ZXN0aW9uIG9ubHkgdGhlIGRyaXZlcnMgY2FuIGFuc3dlciwgd2hpY2gg
-aXMgd2h5IEkgbGlrZSB0bw0KPiA+ID4gPiB0aGluayB0aGF0IHNldHRpbmcgZ2xvYmFsIGNvbnN0
-YW50cyBjb25zdHJhaW5pbmcgYWxsIHBhcnRpZXMgaXMgbm90IHRoZQ0KPiA+ID4gPiByaWdodCB0
-aGluZyB0byBkby4NCj4gPiA+IA0KPiA+ID4gRXhhY3RseSB0aGF0J3MgdGhlIHJlYXNvbiB3aHkg
-SSBicmluZyB0aGF0IHVwLiBJIHRoaW5rIHRoYXQgZHJpdmVycyBzaG91bGQgYmUgaW4gY2hhcmdl
-IG9mIHRpbWVvdXRzIGlzIHRoZSB3cm9uZyBhcHByb2FjaC4NCj4gPiA+IA0KPiA+ID4gU2VlIHRo
-ZSByZWFzb24gd2h5IHdlIGhhdmUgdGhlIHRpbWVvdXQgKGFuZCBkb2N1bWVudGVkIHRoYXQgaXQg
-aXMgYSBtdXN0IGhhdmUpIGlzIGJlY2F1c2Ugd2UgaGF2ZSBib3RoIGNvcmUgbWVtb3J5IG1hbmFn
-ZW1lbnQgYXMgd2VsbCBhIGRlc2t0b3AgcmVzcG9uc2l2ZW5lc3MgZGVwZW5kIG9uIGl0Lg0KPiA+
-IA0KPiA+IEdvb2QgYW5kIHdlbGwsIGJ1dCB0aGVuIHBhdGNoIDQgYmVjb21lcyBldmVuIG1vcmUg
-cHJvYmxlbWF0aWM6DQo+ID4gDQo+ID4gU28gd2UnZCBqdXN0IGhhdmUgZHJpdmVycyBmaXJlIHdh
-cm5pbmdzLCBhbmQgdGhlbiB0aGV5IHdvdWxkIHN0aWxsIGhhdmUNCj4gPiB0aGUgZnJlZWRvbSB0
-byBzZXQgdGltZW91dHMgZm9yIGRybS9zY2hlZCwgYXMgbG9uZyBhcyB0aG9zZSB0aW1lb3V0cw0K
-PiA+IGFyZSBzbWFsbGVyIHRoYW4geW91ciBuZXcgZ2xvYmFsIGNvbnN0YW50Lg0KPiA+IA0KPiA+
-IFdoeSB0aGVuIG5vdCByZW1vdmUgZHJtL3NjaGVkJ3MgdGltZW91dCBwYXJhbWV0ZXIgQVBJIGNv
-bXBsZXRlbHkgYW5kDQo+ID4gYWx3YXlzIHVzZSB5b3VyIG1heGltdW0gdmFsdWUgaW50ZXJuYWxs
-eSBpbiBkcm0vc2NoZWQ/IE9yIG1heWJlDQo+ID4gdHJ1bmNhdGUgaXQgd2l0aCBhIHdhcm5pbmc/
-DQo+IA0KPiBJIGhhdmUgY29uc2lkZXJlZCB0aGF0IGFzIHdlbGwsIGJ1dCB0aGVuIHRob3VnaHQg
-dGhhdCB3ZSBzaG91bGQgYXQgbGVhc3QgZ2l2ZSBlbmQgdXNlcnMgdGhlIHBvc3NpYmlsaXR5IHRv
-IG92ZXJyaWRlIHRoZSB0aW1lb3V0IHdoaWxlIHN0aWxsIHRhaW50aW5nIHRoZSBrZXJuZWwgc28g
-dGhhdCB3ZSBrbm93IGFib3V0IHRoaXMgaW4gYnVnIHJlcG9ydHMsIGNvcmUgZHVtcHMgZXRjLi4u
-DQo+IA0KPiA+ICJNYXhpbXVtIHRpbWVvdXQgcGFyYW1ldGVyIGV4Y2VlZGVkLCB0cnVuY2F0aW5n
-IHRvICVsZC5cbiINCj4gPiANCj4gPiBJIHN1cHBvc2Ugc29tZSBkcml2ZXJzIHdhbnQgZXZlbiBo
-aWdoZXIgcmVzcG9uc2l2ZW5lc3MgdGhhbiB0aG9zZSAyDQo+ID4gc2Vjb25kcy4NCj4gDQo+IEFz
-IGZhciBhcyBJIGtub3cgc29tZSBtZWRpY2FsIHVzZSBjYXNlcyBmb3IgZXhhbXBsZSBoYXZlIHRp
-bWVvdXRzIGxpa2UgMTAwLTIwMG1zLiBCdXQgYWdhaW4gdGhhdCBpcyB0aGUgdXNlIGNhc2UgYW5k
-IG5vdCB0aGUgZHJpdmVyLg0KPiANCj4gPiBJIGRvIGJlbGlldmUgdGhhdCBtb3JlIG9mIHRoZSBk
-cml2ZXIgZm9sa3Mgc2hvdWxkIGJlIG1hZGUgYXdhcmUgb2YgdGhpcw0KPiA+IGludGVuZGVkIGNo
-YW5nZS4NCj4gDQo+IEkgaGF2ZSBubyByZWFsIGludGVudGlvbiBvZiBhY3R1YWxseSBwdXNoaW5n
-IHRob3NlIHBhdGNoZXMsIGF0IGxlYXN0IG5vdCBhcyB0aGV5IGFyZS4gSSBqdXN0IHdhbnRlZCB0
-byBraWNrIG9mIHNvbWUgZGlzY3Vzc2lvbi4NCj4gDQo+ID4gPiANCj4gPiA+ID4gV2hhdCBpcyBl
-dmVuIHlvdXIgbW90aXZhdGlvbj8gV2hhdCBwcm9ibGVtIGRvZXMgdGhpcyBzb2x2ZT8gSXMgdGhl
-IE9PTQ0KPiA+ID4gPiBraWxsZXIgY3VycmVudGx5IGhhbmdpbmcgZm9yIGFueW9uZT8gQ2FuIHlv
-dSBsaW5rIGEgYnVnIHJlcG9ydD8NCj4gPiA+IA0KPiA+ID4gSSdtIG5vdCBzdXJlIGlmIHdlIGhh
-dmUgYW4gZXh0ZXJuYWwgYnVnIHJlcG9ydCAod2UgaGF2ZSBhbiBpbnRlcm5hbCBvbmUpLCBidXQg
-Zm9yIGFtZGdwdSB0aGVyZSB3ZXJlIGN1c3RvbWVyIGNvbXBsYWlucyB0aGF0IDEwIHNlY29uZHMg
-aXMgdG8gbG9uZy4NCj4gPiA+IA0KPiA+ID4gU28gd2UgY2hhbmdlZCBpdCB0byAyIHNlY29uZHMg
-Zm9yIGFtZGdwdSwgYW5kIG5vdyB0aGVyZSBhcmUgY29tcGxhaW5zIGZyb20gaW50ZXJuYWwgQU1E
-IHRlYW1zIHRoYXQgMiBzZWNvbmRzIGlzIHRvIHNob3J0Lg0KPiA+ID4gDQo+ID4gPiBXaGlsZSB3
-b3JraW5nIG9uIHRoYXQgSSByZWFsaXplZCB0aGF0IHRoZSB0aW1lb3V0IGlzIGFjdHVhbGx5IG5v
-dCBkcml2ZXIgZGVwZW5kZW50IGF0IGFsbC4NCj4gPiA+IA0KPiA+ID4gV2hhdCBjYW4gbWF5YmUg
-YXJndWVkIGlzIHRoYXQgYSBkZXNrdG9wIHN5c3RlbSBzaG91bGQgaGF2ZSBhIHNob3J0ZXIgdGlt
-ZW91dCB0aGFuIHNvbWUgc2VydmVyLCBidXQgdGhhdCBvbmUgZHJpdmVyIG5lZWRzIGEgZGlmZmVy
-ZW50IHRpbWVvdXQgdGhhbiBhbm90aGVyIGRyaXZlciBkb2Vzbid0IHJlYWxseSBtYWtlcyBzZW5z
-ZSB0byBtZS4NCj4gPiA+IA0KPiA+ID4gSSBtZWFuIHdoYXQgaXMgYWN0dWFsbHkgSFcgZGVwZW5k
-ZW50IG9uIHRoZSByZXF1aXJlbWVudCB0aGF0IEkgbmVlZCBhIHJlc3BvbnNpdmUgZGVza3RvcCBz
-eXN0ZW0/DQo+ID4gDQo+ID4gSSBzdXBwb3NlIHNvbWUgZHJpdmVycyBhcmUgaW5kZWVkIG9ubHkg
-dXNlZCBmb3Igc2VydmVyIGhhcmR3YXJlLiBBbmQNCj4gPiBmb3IgY29tcHV0ZSB5b3UgbWlnaHQg
-bm90IGNhcmUgYWJvdXQgcmVzcG9uc2l2ZW5lc3MgYXMgbG9uZyBhcyB5b3VyDQo+ID4gcmVzdWx0
-IGRyb3BzIG9mZiBhdCBzb21lIHBvaW50LiBCdXQgdGhlcmUncyBjbG91ZCBnYW1pbmcsIHRvby4u
-DQo+IA0KPiBHb29kIHBvaW50IHdpdGggdGhlIGNsb3VkIGdhbWluZy4NCj4gDQo+ID4gSSBhZ3Jl
-ZSB0aGF0IGRpc3Rpbmd1aXNoaW5nIHRoZSB1c2UgY2FzZSB0aGF0IHdheSBpcyBub3QgaWRlYWwu
-DQo+ID4gSG93ZXZlciwgd2hvIGhhcyB0aGUga25vd2xlZGdlIG9mIGhvdyB0aGUgaGFyZHdhcmUg
-aXMgYmVpbmcgdXNlZCBieQ0KPiA+IGN1c3RvbWVycyAvIHVzZXJzLCBpZiBub3QgdGhlIGRyaXZl
-cj8NCj4gDQo+IFdlbGwgdGhlIGVuZCB1c2VyLg0KPiANCj4gTWF5YmUgd2Ugc2hvdWxkIG1vdmUg
-dGhlIHdob2xlIHRpbWVvdXQgdG9waWMgaW50byB0aGUgRFJNIGxheWVyIG9yIHRoZSBzY2hlZHVs
-ZXIgY29tcG9uZW50Lg0KPiANCj4gU29tZXRoaW5nIGxpa2UgMiBzZWNvbmRzIGRlZmF1bHQgKHdo
-aWNoIEJUVyBpcyB0aGUgZGVmYXVsdCBvbiBXaW5kb3dzIGFzIHdlbGwpLCB3aGljaCBjYW4gYmUg
-b3ZlcnJpZGRlbiBvbiBhIGdsb2JhbCwgcGVyIGRldmljZSwgcGVyIHF1ZXVlIG5hbWUgYmFzaXMu
-DQo+IA0KPiBBbmQgMTAgc2Vjb25kcyBtYXhpbXVtIHdpdGggb25seSBhIHdhcm5pbmcgdGhhdCBh
-IG5vdCBkZWZhdWx0IHRpbWVvdXQgaXMgdXNlZCBhbmQgZXZlcnl0aGluZyBhYm92ZSAxMCBzZWNv
-bmRzIHRhaW50cyB0aGUga2VybmVsIGFuZCBzaG91bGQgcmVhbGx5IG9ubHkgYmUgdXNlZCBmb3Ig
-dGVzdGluZy9kZWJ1Z2dpbmcuDQoNClRoZSBxdWVzdGlvbiByZWFsbHkgaXMgd2hhdCB5b3Ugd2Fu
-dCB0byBkbyBhZnRlciB5b3UgaGl0IHRoZSAobG93ZXJlZCkNCnRpbWVvdXQ/IFVzZXJzIGdldCBn
-cnVtcHkgaWYgeW91IGJsb2NrIHRoaW5ncyBmb3IgMTAgc2Vjb25kcywgYnV0IHRoZXkNCmdldCBl
-cXVhbGx5IGlmIG5vdCBtb3JlIGdydW1weSB3aGVuIHlvdSBraWNrIG91dCBhIHZhbGlkIHdvcmts
-b2FkIHRoYXQNCmp1c3QgaGFwcGVucyB0byBuZWVkIGEgbG90IG9mIEdQVSB0aW1lLg0KDQpGZW5j
-ZXMgYXJlIG9ubHkgZGVmaW5lZCB0byBzaWduYWwgZXZlbnR1YWxseSwgd2l0aCBubyByZWFsIGNv
-bmNlcHQgb2YgYQ0KdGltZW91dC4gSU1PIGFsbCB0aW1lb3V0cyB3YWl0aW5nIGZvciBmZW5jZXMg
-c2hvdWxkIGJlIGxvbmcgZW5vdWdoIHRvDQpvbmx5IGJlIGNvbnNpZGVyZWQgbGFzdCByZXNvcnQu
-IFlvdSBtYXkgd2FudCB0byBnaXZlIHRoZSB1c2VyIHNvbWUNCmluZGljYXRpb24gb2YgYSBmYWls
-ZWQgZmVuY2Ugd2FpdCBpbnN0ZWFkIG9mIHN0YWxsaW5nIGluZGVmaW5pdGVseSwgYnV0DQp5b3Ug
-cmVhbGx5IG9ubHkgd2FudCB0byBkbyB0aGlzIGFmdGVyIGEgcXVpdGUgbG9uZyB0aW1lb3V0LCBu
-b3QgaW4gYQ0Kc2Vuc2Ugb2YgIlNvcnJ5LCBJIHJhbiBvdXQgb2YgcGF0aWVuY2UgYWZ0ZXIgMiBz
-ZWNvbmRzIi4NCg0KU3VyZSBtZW1vcnkgbWFuYWdlbWVudCBkZXBlbmRzIG9uIGZlbmNlcyBtYWtp
-bmcgZm9yd2FyZCBwcm9ncmVzcywgYnV0DQptbSBhbHNvIGRlcGVuZHMgb24gc2NoZWR1bGVkIHdy
-aXRlYmFjayBtYWtpbmcgZm9yd2FyZCBwcm9ncmVzcy4gWW91DQpkb24ndCBraWNrIG91dCB3cml0
-ZWJhY2sgcmVxdWVzdHMgYWZ0ZXIgYW4gYXJiaXRyYXJ5IHRpbWVvdXQganVzdA0KYmVjYXVzZSB0
-aGUgYmFja2luZyBzdG9yYWdlIGhhcHBlbnMgdG8gYmUgbG9hZGVkIGhlYXZpbHkuDQoNClRoaXMg
-QlRXIGlzIGFsc28gd2h5IGV0bmF2aXYgaGFzIGFsd2F5cyBoYWQgYSBxdWl0ZSBzaG9ydCB0aW1l
-b3V0IG9mDQo1MDBtcywgd2l0aCB0aGUgb3B0aW9uIHRvIGV4dGVuZCB0aGUgdGltZW91dCB3aGVu
-IHRoZSBHUFUgaXMgc3RpbGwNCm1ha2luZyBwcm9ncmVzcy4gV2UgZG9uJ3QgZXZlciB3YW50IHRv
-IHNob290IGRvd24gdmFsaWQgd29ya2xvYWRzICh3ZQ0KaGF2ZSBzb21lIHRoYXQgbmVlZCBhIGZl
-dyBzZWNvbmRzIHRvIHVwbG9hZCB0ZXh0dXJlcywgZXRjIG9uIG91ciB3aW1weQ0KR1BVKSwgYnV0
-IHlvdSBhbHNvIGRvbid0IHdhbnQgdG8gd2FpdCBtdWx0aXBsZSBzZWNvbmRzIHVudGlsIHlvdSBk
-ZXRlY3QNCmEgcmVhbCBHUFUgaGFuZy4NClNvIHdlIHVzZSB0aGUgc2hvcnQgc2NoZWR1bGVyIHRp
-bWVvdXQgdG8gY2hlY2sgaW4gb24gdGhlIEdQVSBhbmQgc2VlIGlmDQppdCBpcyBzdGlsbCBtYWtp
-bmcgcHJvZ3Jlc3MgKGZvciBncmFwaGljcyB3b3JrbG9hZHMgYnkgbG9va2luZyBhdCB0aGUNCmZy
-b250ZW5kIHBvc2l0aW9uIHdpdGhpbiB0aGUgY29tbWFuZCBidWZmZXIgYW5kIGN1cnJlbnQgcHJp
-bWl0aXZlIElEKS4NCklmIHdlIGNhbiBkZWR1Y2UgdGhhdCB0aGUgR1BVIGlzIHN0dWNrIHdlIGRv
-IHRoZSB1c3VhbCByZXNldC9yZWNvdmVyeQ0KZGFuY2Ugd2l0aGluIGEgcmVhc29uYWJsZSByZWFj
-dGlvbiB0aW1lLCBhY2NlcHRhYmxlIHRvIHVzZXJzIGhpdHRpbmcgYQ0KcmVhbCBHUFUgaGFuZy4g
-QnV0IGlmIHRoZSBHUFUgaXMgbWFraW5nIHByb2dyZXNzIHdlIHdpbGwgZ2l2ZSBhbg0KaW5maW5p
-dGUgbnVtYmVyIG9mIHRpbWVvdXQgZXh0ZW5zaW9ucyB3aXRoIG5vIGdsb2JhbCB0aW1lb3V0IGF0
-IGFsbCwNCm9ubHkgZnVsZmlsbGluZyB0aGUgZXZlbnR1YWwgc2lnbmFsaW5nIGd1YXJhbnRlZSBv
-ZiB0aGUgZmVuY2UuDQoNClJlZ2FyZHMsDQpMdWNhcw0KX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGlu
-YXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwg
-dG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
+On Wed, 26 Nov 2025 00:29:49 +0800
+Xiang Gao <gxxa03070307@gmail.com> wrote:
+
+> +++ b/include/trace/events/dma_buf.h
+> @@ -0,0 +1,281 @@
+> +/* SPDX-License-Identifier: GPL-2.0 */
+> +#undef TRACE_SYSTEM
+> +#define TRACE_SYSTEM dma_buf
+> +
+> +#if !defined(_TRACE_DMA_BUF_H) || defined(TRACE_HEADER_MULTI_READ)
+> +#define _TRACE_DMA_BUF_H
+> +
+> +#include <linux/dma-buf.h>
+> +#include <linux/tracepoint.h>
+> +
+> +TRACE_EVENT(dma_buf_export,
+> +
+> +	TP_PROTO(struct dma_buf *dmabuf),
+> +
+> +	TP_ARGS(dmabuf),
+> +
+> +	TP_STRUCT__entry(
+> +		__string(exp_name, dmabuf->exp_name)
+> +		__string(name, dmabuf->name)
+> +		__field(size_t, size)
+> +		__field(ino_t, ino)
+> +		__field(long, f_refcnt)
+> +	),
+> +
+> +	TP_fast_assign(
+> +		__assign_str(exp_name);
+> +		spin_lock(&dmabuf->name_lock);
+> +		__assign_str(name);
+> +		spin_unlock(&dmabuf->name_lock);
+
+The above isn't doing what you think it's doing. The name is assigned
+before this by the above __string(name, dmabuf->name).
+
+You really shouldn't be taking any locks in a tracepoint. A tracepoint is a
+callback, that isn't called most of the time. You could be hiding very
+hard to find deadlocks by taking a lock in a tracepoint callback.
+
+You need to take the lock around the tracepoint call itself where it is
+called in the code. Not in the TRACE_EVENT.
+
+You may need to have something like:
+
+@@ -220,6 +223,8 @@ static int dma_buf_mmap_internal(struct file *file, struct vm_area_struct *vma)
+ 	    dmabuf->size >> PAGE_SHIFT)
+ 		return -EINVAL;
+
++	if (trace_dma_buf_mmap_internal_enabled()) {
++		guard(spinlock)(&dmabuf->namelock);
++		trace_dma_buf_mmap_internal(dmabuf);
++	}
++
+ 	return dmabuf->ops->mmap(dmabuf, vma);
+ }
+
+
+The "trace_dma_buf_mmap_internal_enabled()" is a static branch, where it is
+either a nop or a jump to the tracing code. It's not a normal conditional
+branch. It acts the same as tracepoints themselves do.
+
+> +		__entry->size = dmabuf->size;
+> +		__entry->ino = dmabuf->file->f_inode->i_ino;
+> +		__entry->f_refcnt = file_count(dmabuf->file);
+> +	),
+> +
+> +	TP_printk("exp_name=%s name=%s size=%zu ino=%lu f_refcnt=%ld",
+> +		  __get_str(exp_name),
+> +		  __get_str(name),
+> +		  __entry->size,
+> +		  __entry->ino,
+> +		  __entry->f_refcnt)
+> +);
+
+Below seems to be a lot of very similar TRACE_EVENT()s. A TRACE_EVENT() is
+literally defined as:
+
+#define TRACE_EVENT(name, proto, args, tstruct, assign, print) \
+	DECLARE_EVENT_CLASS(name,			       \
+			     PARAMS(proto),		       \
+			     PARAMS(args),		       \
+			     PARAMS(tstruct),		       \
+			     PARAMS(assign),		       \
+			     PARAMS(print));		       \
+	DEFINE_EVENT(name, name, PARAMS(proto), PARAMS(args));
+
+That is, it is both a DECLARE_EVENT_CLASS() and a DEFINE_EVENT(). You can
+make one DECLARE_EVENT_CLASS() and use many DEFINE_EVENT()s with it.
+
+Each DECLARE_EVENT_CLASS() takes up around 4 to 5 kilobytes of memory. Each
+DEFINE_EVENT() takes around 300 bytes to 1K of memory. The more
+DEFINE_EVENT()s you use with a single DECLARE_EVENT_CLASS(), the more
+memory you save. Please try to do that.
+
+-- Steve
+
+
+
+> +
+> +TRACE_EVENT(dma_buf_fd,
+> +
+> +	TP_PROTO(struct dma_buf *dmabuf, int fd),
+> +
+> +	TP_ARGS(dmabuf, fd),
+> +
+> +	TP_STRUCT__entry(
+> +		__string(exp_name, dmabuf->exp_name)
+> +		__string(name, dmabuf->name)
+> +		__field(size_t, size)
+> +		__field(ino_t, ino)
+> +		__field(int, fd)
+> +		__field(long, f_refcnt)
+> +	),
+> +
+> +	TP_fast_assign(
+> +		__assign_str(exp_name);
+> +		spin_lock(&dmabuf->name_lock);
+> +		__assign_str(name);
+> +		spin_unlock(&dmabuf->name_lock);
+> +		__entry->size = dmabuf->size;
+> +		__entry->ino = dmabuf->file->f_inode->i_ino;
+> +		__entry->fd = fd;
+> +		__entry->f_refcnt = file_count(dmabuf->file);
+> +	),
+> +
+> +	TP_printk("exp_name=%s name=%s size=%zu ino=%lu fd=%d f_refcnt=%ld",
+> +		  __get_str(exp_name),
+> +		  __get_str(name),
+> +		  __entry->size,
+> +		  __entry->ino,
+> +		  __entry->fd,
+> +		  __entry->f_refcnt)
+> +);
+> +
+> +TRACE_EVENT(dma_buf_mmap_internal,
+> +
+> +	TP_PROTO(struct dma_buf *dmabuf),
+> +
+> +	TP_ARGS(dmabuf),
+> +
+> +	TP_STRUCT__entry(
+> +		__string(exp_name, dmabuf->exp_name)
+> +		__string(name, dmabuf->name)
+> +		__field(size_t, size)
+> +		__field(ino_t, ino)
+> +		__field(long, f_refcnt)
+> +	),
+> +
+> +	TP_fast_assign(
+> +		__assign_str(exp_name);
+> +		spin_lock(&dmabuf->name_lock);
+> +		__assign_str(name);
+> +		spin_unlock(&dmabuf->name_lock);
+> +		__entry->size = dmabuf->size;
+> +		__entry->ino = dmabuf->file->f_inode->i_ino;
+> +		__entry->f_refcnt = file_count(dmabuf->file);
+> +	),
+> +
+> +	TP_printk("exp_name=%s name=%s size=%zu ino=%lu f_refcnt=%ld",
+> +		  __get_str(exp_name),
+> +		  __get_str(name),
+> +		  __entry->size,
+> +		  __entry->ino,
+> +		  __entry->f_refcnt)
+> +);
+> +
+> +TRACE_EVENT(dma_buf_mmap,
+> +
+> +	TP_PROTO(struct dma_buf *dmabuf),
+> +
+> +	TP_ARGS(dmabuf),
+> +
+> +	TP_STRUCT__entry(
+> +		__string(exp_name, dmabuf->exp_name)
+> +		__string(name, dmabuf->name)
+> +		__field(size_t, size)
+> +		__field(ino_t, ino)
+> +		__field(long, f_refcnt)
+> +	),
+> +
+> +	TP_fast_assign(
+> +		__assign_str(exp_name);
+> +		spin_lock(&dmabuf->name_lock);
+> +		__assign_str(name);
+> +		spin_unlock(&dmabuf->name_lock);
+> +		__entry->size = dmabuf->size;
+> +		__entry->ino = dmabuf->file->f_inode->i_ino;
+> +		__entry->f_refcnt = file_count(dmabuf->file);
+> +	),
+> +
+> +	TP_printk("exp_name=%s name=%s size=%zu ino=%lu f_refcnt=%ld",
+> +		  __get_str(exp_name),
+> +		  __get_str(name),
+> +		  __entry->size,
+> +		  __entry->ino,
+> +		  __entry->f_refcnt)
+> +);
+> +
+> +TRACE_EVENT(dma_buf_attach,
+> +
+> +	TP_PROTO(struct dma_buf *dmabuf, struct device *dev),
+> +
+> +	TP_ARGS(dmabuf, dev),
+> +
+> +	TP_STRUCT__entry(
+> +		__string(dname, dev_name(dev))
+> +		__string(exp_name, dmabuf->exp_name)
+> +		__string(name, dmabuf->name)
+> +		__field(size_t, size)
+> +		__field(ino_t, ino)
+> +		__field(long, f_refcnt)
+> +	),
+> +
+> +	TP_fast_assign(
+> +		__assign_str(dname);
+> +		__assign_str(exp_name);
+> +		spin_lock(&dmabuf->name_lock);
+> +		__assign_str(name);
+> +		spin_unlock(&dmabuf->name_lock);
+> +		__entry->size = dmabuf->size;
+> +		__entry->ino = dmabuf->file->f_inode->i_ino;
+> +		__entry->f_refcnt = file_count(dmabuf->file);
+> +	),
+> +
+> +	TP_printk("dev_name=%s exp_name=%s name=%s size=%zu ino=%lu f_refcnt=%ld",
+> +		  __get_str(dname),
+> +		  __get_str(exp_name),
+> +		  __get_str(name),
+> +		  __entry->size,
+> +		  __entry->ino,
+> +		  __entry->f_refcnt)
+> +);
+> +
+> +TRACE_EVENT(dma_buf_detach,
+> +
+> +	TP_PROTO(struct dma_buf *dmabuf),
+> +
+> +	TP_ARGS(dmabuf),
+> +
+> +	TP_STRUCT__entry(
+> +		__string(exp_name, dmabuf->exp_name)
+> +		__string(name, dmabuf->name)
+> +		__field(size_t, size)
+> +		__field(ino_t, ino)
+> +		__field(long, f_refcnt)
+> +	),
+> +
+> +	TP_fast_assign(
+> +		__assign_str(exp_name);
+> +		spin_lock(&dmabuf->name_lock);
+> +		__assign_str(name);
+> +		spin_unlock(&dmabuf->name_lock);
+> +		__entry->size = dmabuf->size;
+> +		__entry->ino = dmabuf->file->f_inode->i_ino;
+> +		__entry->f_refcnt = file_count(dmabuf->file);
+> +	),
+> +
+> +	TP_printk("exp_name=%s name=%s size=%zu ino=%lu f_refcnt=%ld",
+> +		  __get_str(exp_name),
+> +		  __get_str(name),
+> +		  __entry->size,
+> +		  __entry->ino,
+> +		  __entry->f_refcnt)
+> +);
+> +
+> +TRACE_EVENT(dma_buf_get,
+> +
+> +	TP_PROTO(int fd, struct file *file),
+> +
+> +	TP_ARGS(fd, file),
+> +
+> +	TP_STRUCT__entry(
+> +		__string(exp_name, ((struct dma_buf *)file->private_data)->exp_name)
+> +		__string(name, ((struct dma_buf *)file->private_data)->name)
+> +		__field(size_t, size)
+> +		__field(ino_t, ino)
+> +		__field(int, fd)
+> +		__field(long, f_refcnt)
+> +	),
+> +
+> +	TP_fast_assign(
+> +		struct dma_buf *dmabuf = (struct dma_buf *)file->private_data;
+> +
+> +		__assign_str(exp_name);
+> +		spin_lock(&dmabuf->name_lock);
+> +		__assign_str(name);
+> +		spin_unlock(&dmabuf->name_lock);
+> +		__entry->size = dmabuf->size;
+> +		__entry->ino = dmabuf->file->f_inode->i_ino;
+> +		__entry->fd = fd;
+> +		__entry->f_refcnt = file_count(file);
+> +	),
+> +
+> +	TP_printk("exp_name=%s name=%s size=%zu ino=%lu fd=%d f_refcnt=%ld",
+> +		  __get_str(exp_name),
+> +		  __get_str(name),
+> +		  __entry->size,
+> +		  __entry->ino,
+> +		  __entry->fd,
+> +		  __entry->f_refcnt)
+> +);
+> +
+> +TRACE_EVENT(dma_buf_put,
+> +
+> +	TP_PROTO(struct dma_buf *dmabuf),
+> +
+> +	TP_ARGS(dmabuf),
+> +
+> +	TP_STRUCT__entry(
+> +		__string(exp_name, dmabuf->exp_name)
+> +		__string(name, dmabuf->name)
+> +		__field(size_t, size)
+> +		__field(ino_t, ino)
+> +		__field(long, f_refcnt)
+> +	),
+> +
+> +	TP_fast_assign(
+> +		__assign_str(exp_name);
+> +		spin_lock(&dmabuf->name_lock);
+> +		__assign_str(name);
+> +		spin_unlock(&dmabuf->name_lock);
+> +		__entry->size = dmabuf->size;
+> +		__entry->ino = dmabuf->file->f_inode->i_ino;
+> +		__entry->f_refcnt = file_count(dmabuf->file);
+> +	),
+> +
+> +	TP_printk("exp_name=%s name=%s size=%zu ino=%lu f_refcnt=%ld",
+> +		  __get_str(exp_name),
+> +		  __get_str(name),
+> +		  __entry->size,
+> +		  __entry->ino,
+> +		  __entry->f_refcnt)
+> +);
+> +
+> +#endif /* _TRACE_DMA_BUF_H */
+> +
+> +/* This part must be outside protection */
+> +#include <trace/define_trace.h>
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
