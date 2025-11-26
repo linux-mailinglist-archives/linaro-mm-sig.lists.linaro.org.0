@@ -2,38 +2,38 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id AO17GaMA4Wk7oQAAu9opvQ
+	id qBJEJKsA4Wk7oQAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:30:43 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:30:51 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 39CCA410D33
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:30:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 48029410D49
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:30:51 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4132343D1F
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:30:42 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 6174543CC3
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:30:50 +0000 (UTC)
 Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 250F73F69B
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 26 Nov 2025 13:20:28 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id A2BDE3F69B
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 26 Nov 2025 13:20:34 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=TwtlcmIl;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=SlzUKnq7;
 	spf=pass (lists.linaro.org: domain of phasta@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=phasta@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id 9C6BD44346;
+	by sea.source.kernel.org (Postfix) with ESMTP id 242B940BFF;
+	Wed, 26 Nov 2025 13:20:34 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 06F58C113D0;
 	Wed, 26 Nov 2025 13:20:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 89199C116B1;
-	Wed, 26 Nov 2025 13:20:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1764163227;
-	bh=UWZRmAEzkRqq5oGLP1a96kp5nn+UOgdKzQBXsbq4Mcc=;
+	s=k20201202; t=1764163234;
+	bh=lgAu6095fUG7URUtB5h9h1pWeOKehgRUT+IfEnrX0L8=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=TwtlcmIlc7KO7bkTPkzH6jVSl0c0R12kc6TX9T7fQ2Z88iPp6WbrfIkqrHVAY8oyV
-	 sTD4ZtmpevXeOQ8otE8u/HMIAOCWUNURuiB8yFzWBH+4THH8FAGv6kXCTfUpp1Rfyj
-	 3A/rYMsX0hPycQYG/bp+iKnWpoRPl5Djqyv0/6nj76SU4aGAPZHcOK8QiZv8ez9kJR
-	 d0KFSmR0lj6gdUB2bU/9mwbdzzfYfNOZFrK+GhnugiPGBOmbHkEG5+KO7HCSxYj7ii
-	 d1VDQ2ToDs0voceBmjaEJLdXGjuv3FR3ffa+lZW1Hez+8c7Z2WhjDyVnuGi0oS1VLD
-	 Ui6T8oE/fHQVg==
+	b=SlzUKnq7+JYkCPIISBxuVSJtdfIbgnro2PHCDrhP1dJKS3DVMtUcilQacvEz/ee17
+	 n/rAZbBLl1tDeiGBZMIfP903XFYmcmrpBfkc8FMNkSMAS5rh0UfG9DP0he9+bjVsGh
+	 X8NmWUTmwUR3GL7sikPHs0vQ2bTo45s6VLia93pI3VaJ0ZubUQToiKczIjcBU3OYJH
+	 76rPpa7YG4R/HdNwlS3tq9eBfDQfTnu4JO+iNOIJ01Ta2z0h+YCkqh/kjqfGUp2F4F
+	 Hm0Zlee+s4KQs9RusVyTgY9xIZfMwbSIzZxLh5C2T1MI6nNapaHJFzmkrvgHBUK7NB
+	 bgrvQM/LDGb7A==
 From: Philipp Stanner <phasta@kernel.org>
 To: Sumit Semwal <sumit.semwal@linaro.org>,
 	Gustavo Padovan <gustavo@padovan.org>,
@@ -54,8 +54,8 @@ To: Sumit Semwal <sumit.semwal@linaro.org>,
 	Thomas Zimmermann <tzimmermann@suse.de>,
 	Lucas De Marchi <lucas.demarchi@intel.com>,
 	=?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>
-Date: Wed, 26 Nov 2025 14:19:13 +0100
-Message-ID: <20251126131914.149445-6-phasta@kernel.org>
+Date: Wed, 26 Nov 2025 14:19:14 +0100
+Message-ID: <20251126131914.149445-7-phasta@kernel.org>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20251126131914.149445-2-phasta@kernel.org>
 References: <20251126131914.149445-2-phasta@kernel.org>
@@ -64,15 +64,15 @@ X-Spamd-Bar: ---
 X-MailFrom: phasta@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: EFZDRMEZVOM7437UGWGE5A4BA4NICLSV
-X-Message-ID-Hash: EFZDRMEZVOM7437UGWGE5A4BA4NICLSV
+Message-ID-Hash: YRXAND2ZJM6XPGJH3BNLTFHXDWN5YLBE
+X-Message-ID-Hash: YRXAND2ZJM6XPGJH3BNLTFHXDWN5YLBE
 X-Mailman-Approved-At: Thu, 16 Apr 2026 15:07:04 +0000
 CC: linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org, rust-for-linux@vger.kernel.org, Philipp Stanner <phasta@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 4/6] dma-buf: Don't misuse dma_fence_signal()
+Subject: [Linaro-mm-sig] [PATCH 5/6] drm/ttm: Remove return check of dma_fence_signal()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EFZDRMEZVOM7437UGWGE5A4BA4NICLSV/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YRXAND2ZJM6XPGJH3BNLTFHXDWN5YLBE/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -105,39 +105,32 @@ X-Spamd-Result: default: False [4.09 / 15.00];
 	FROM_NEQ_ENVFROM(0.00)[phasta@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.993];
+	NEURAL_HAM(-0.00)[-0.992];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[amd.com:email,lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
-X-Rspamd-Queue-Id: 39CCA410D33
+X-Rspamd-Queue-Id: 48029410D49
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-VGhlIHJldHVybiBjb2RlIG9mIGRtYV9mZW5jZV9zaWduYWwoKSBpcyBub3QgcmVhbGx5IHVzZWZ1
-bCBhcyB0aGVyZSBpcw0Kbm90aGluZyByZWFzb25hYmxlIHRvIGRvIGlmIGEgZmVuY2Ugd2FzIGFs
-cmVhZHkgc2lnbmFsZWQuIFRoYXQgcmV0dXJuDQpjb2RlIHNoYWxsIGJlIHJlbW92ZWQgZnJvbSB0
-aGUga2VybmVsLg0KDQpNb3Jlb3ZlciwgZG1hX2ZlbmNlX3NpZ25hbCgpIHNob3VsZCBub3QgYmUg
-dXNlZCB0byBjaGVjayB3aGV0aGVyIGZlbmNlcw0KYXJlIHNpZ25hbGVkLiBUaGF0J3Mgd2hhdCBk
-bWFfZmVuY2VfaXNfc2lnbmFsZWQoKSBhbmQNCmRtYV9mZW5jZV90ZXN0X3NpZ25hbGVkX2ZsYWco
-KSBleGlzdCBmb3IuDQoNClJlcGxhY2UgdGhlIG5vbi1jYW5vbmljYWwgdXNhZ2Ugb2YgZG1hX2Zl
-bmNlX3NpZ25hbCgpLg0KDQpTdWdnZXN0ZWQtYnk6IENocmlzdGlhbiBLw7ZuaWcgPGNocmlzdGlh
-bi5rb2VuaWdAYW1kLmNvbT4NClNpZ25lZC1vZmYtYnk6IFBoaWxpcHAgU3Rhbm5lciA8cGhhc3Rh
-QGtlcm5lbC5vcmc+DQotLS0NCiBkcml2ZXJzL2RtYS1idWYvc3QtZG1hLWZlbmNlLmMgfCA3ICsr
-LS0tLS0NCiAxIGZpbGUgY2hhbmdlZCwgMiBpbnNlcnRpb25zKCspLCA1IGRlbGV0aW9ucygtKQ0K
-DQpkaWZmIC0tZ2l0IGEvZHJpdmVycy9kbWEtYnVmL3N0LWRtYS1mZW5jZS5jIGIvZHJpdmVycy9k
-bWEtYnVmL3N0LWRtYS1mZW5jZS5jDQppbmRleCAyN2EzNjA0NTQxMGIuLjlmYzkzODU5ZjM2ZiAx
-MDA2NDQNCi0tLSBhL2RyaXZlcnMvZG1hLWJ1Zi9zdC1kbWEtZmVuY2UuYw0KKysrIGIvZHJpdmVy
-cy9kbWEtYnVmL3N0LWRtYS1mZW5jZS5jDQpAQCAtMTI2LDE3ICsxMjYsMTQgQEAgc3RhdGljIGlu
-dCB0ZXN0X3NpZ25hbGluZyh2b2lkICphcmcpDQogCQlnb3RvIGVycl9mcmVlOw0KIAl9DQogDQot
-CWlmIChkbWFfZmVuY2Vfc2lnbmFsKGYpKSB7DQotCQlwcl9lcnIoIkZlbmNlIHJlcG9ydGVkIGJl
-aW5nIGFscmVhZHkgc2lnbmFsZWRcbiIpOw0KLQkJZ290byBlcnJfZnJlZTsNCi0JfQ0KKwlkbWFf
-ZmVuY2Vfc2lnbmFsKGYpOw0KIA0KIAlpZiAoIWRtYV9mZW5jZV9pc19zaWduYWxlZChmKSkgew0K
-IAkJcHJfZXJyKCJGZW5jZSBub3QgcmVwb3J0aW5nIHNpZ25hbGVkXG4iKTsNCiAJCWdvdG8gZXJy
-X2ZyZWU7DQogCX0NCiANCi0JaWYgKCFkbWFfZmVuY2Vfc2lnbmFsKGYpKSB7DQorCWlmICghZG1h
-X2ZlbmNlX3Rlc3Rfc2lnbmFsZWRfZmxhZyhmKSkgew0KIAkJcHJfZXJyKCJGZW5jZSByZXBvcnRl
-ZCBub3QgYmVpbmcgYWxyZWFkeSBzaWduYWxlZFxuIik7DQogCQlnb3RvIGVycl9mcmVlOw0KIAl9
-DQotLSANCjIuNDkuMA0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3Rz
-LmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2ln
-LWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+VGhlIHJldHVybiBjb2RlIG9mIGRtYV9mZW5jZV9zaWduYWwoKSBpcyBub3QgdXNlZnVsIGFuZCBz
+aGFsbCBiZSByZW1vdmVkDQpmcm9tIHRoZSBrZXJuZWwuIFRvIGRvIHNvLCBhbGwgdXNlcnMgbXVz
+dCBiZSByZW1vdmVkLg0KDQpSZW1vdmUgdXNhZ2Ugb2YgZG1hX2ZlbmNlX3NpZ25hbCgpJ3MgcmV0
+dXJuIGNvZGUuDQoNClN1Z2dlc3RlZC1ieTogQ2hyaXN0aWFuIEvDtm5pZyA8Y2hyaXN0aWFuLmtv
+ZW5pZ0BhbWQuY29tPg0KU2lnbmVkLW9mZi1ieTogUGhpbGlwcCBTdGFubmVyIDxwaGFzdGFAa2Vy
+bmVsLm9yZz4NCi0tLQ0KIGRyaXZlcnMvZ3B1L2RybS90dG0vdGVzdHMvdHRtX2JvX3ZhbGlkYXRl
+X3Rlc3QuYyB8IDMgKystDQogMSBmaWxlIGNoYW5nZWQsIDIgaW5zZXJ0aW9ucygrKSwgMSBkZWxl
+dGlvbigtKQ0KDQpkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL3R0bS90ZXN0cy90dG1fYm9f
+dmFsaWRhdGVfdGVzdC5jIGIvZHJpdmVycy9ncHUvZHJtL3R0bS90ZXN0cy90dG1fYm9fdmFsaWRh
+dGVfdGVzdC5jDQppbmRleCAxYmNjNjc5NzdmNDguLjM0OTU3NjI0OTEwZiAxMDA2NDQNCi0tLSBh
+L2RyaXZlcnMvZ3B1L2RybS90dG0vdGVzdHMvdHRtX2JvX3ZhbGlkYXRlX3Rlc3QuYw0KKysrIGIv
+ZHJpdmVycy9ncHUvZHJtL3R0bS90ZXN0cy90dG1fYm9fdmFsaWRhdGVfdGVzdC5jDQpAQCAtNjky
+LDcgKzY5Miw4IEBAIHN0YXRpYyBpbnQgdGhyZWFkZWRfZmVuY2Vfc2lnbmFsKHZvaWQgKmFyZykN
+CiANCiAJbXNsZWVwKDIwKTsNCiANCi0JcmV0dXJuIGRtYV9mZW5jZV9zaWduYWwoZmVuY2UpOw0K
+KwlkbWFfZmVuY2Vfc2lnbmFsKGZlbmNlKTsNCisJcmV0dXJuIDA7DQogfQ0KIA0KIHN0YXRpYyB2
+b2lkIHR0bV9ib192YWxpZGF0ZV9tb3ZlX2ZlbmNlX25vdF9zaWduYWxlZChzdHJ1Y3Qga3VuaXQg
+KnRlc3QpDQotLSANCjIuNDkuMA0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2ln
+QGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8t
+bW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
