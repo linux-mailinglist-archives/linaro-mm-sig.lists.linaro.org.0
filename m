@@ -2,126 +2,259 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id DBD96C8ADC3
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 Nov 2025 17:11:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9FD70C8B13C
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 Nov 2025 17:55:14 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C22313F839
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 Nov 2025 16:11:24 +0000 (UTC)
-Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
-	by lists.linaro.org (Postfix) with ESMTPS id 97EDD3F69B
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 26 Nov 2025 16:11:08 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B35B83F839
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 Nov 2025 16:55:13 +0000 (UTC)
+Received: from BL2PR02CU003.outbound.protection.outlook.com (mail-eastusazon11011041.outbound.protection.outlook.com [52.101.52.41])
+	by lists.linaro.org (Postfix) with ESMTPS id 09B5D3F7A5
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 26 Nov 2025 16:54:57 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=none;
-	spf=pass (lists.linaro.org: domain of l.stach@pengutronix.de designates 185.203.201.7 as permitted sender) smtp.mailfrom=l.stach@pengutronix.de;
-	dmarc=none
-Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77] helo=[IPv6:::1])
-	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <l.stach@pengutronix.de>)
-	id 1vOI6g-0008FX-TN; Wed, 26 Nov 2025 17:11:02 +0100
-Message-ID: <5267e8fbb93a8fe722f845331d17c61e29f1a705.camel@pengutronix.de>
-From: Lucas Stach <l.stach@pengutronix.de>
-To: phasta@kernel.org, Christian =?ISO-8859-1?Q?K=F6nig?=
- <christian.koenig@amd.com>, alexdeucher@gmail.com, simona.vetter@ffwll.ch,
- faith@gfxstrand.net, sumit.semwal@linaro.org
-Date: Wed, 26 Nov 2025 17:11:01 +0100
-In-Reply-To: <ff4e03cf5281bf54d36c69b4ae0dd5a19723178d.camel@mailbox.org>
-References: <20251120150018.27385-1-christian.koenig@amd.com>
-	 <20251120150018.27385-2-christian.koenig@amd.com>
-	 <380012b9d6f0e9ee3c2f125cfe2f37f65c1979e0.camel@mailbox.org>
-	 <b46913b6-fe61-48cd-a9ca-aa2fe3a12b63@amd.com>
-	 <1c1a14d42d0a4a25ebce26a2af0a61dc1b7813fc.camel@mailbox.org>
-	 <508ff709-0f05-4982-8e15-5fea3bbd12e7@amd.com>
-	 <c2b571a7e74f86c6cb95bebd11274447c3080df9.camel@mailbox.org>
-	 <52d484c5-6dfb-4e2f-9caa-a61cf1d94801@amd.com>
-	 <e2c006ca81081ee1afa00b1b52a035c28a267e0f.camel@pengutronix.de>
-	 <207d50fe-eef3-4baa-97a7-567598e56b55@amd.com>
-	 <54d6e863fc606d22f245e30012bb5120d5bee7ee.camel@mailbox.org>
-	 <6151e7c5-1de2-4857-ae64-1e2fd6cb7513@amd.com>
-	 <ff4e03cf5281bf54d36c69b4ae0dd5a19723178d.camel@mailbox.org>
-User-Agent: Evolution 3.52.4 (3.52.4-2.fc40) 
+	dkim=pass header.d=Nvidia.com header.s=selector2 header.b=MZY4AyZv;
+	spf=pass (lists.linaro.org: domain of jgg@nvidia.com designates 52.101.52.41 as permitted sender) smtp.mailfrom=jgg@nvidia.com;
+	dmarc=pass (policy=reject) header.from=nvidia.com;
+	arc=pass ("microsoft.com:s=arcselector10001:i=1")
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ANwyrfTbxgoTDTn6t6ZqtURLtFKqlbkfViH/1iLtXohtHXF9XO+zzvPl0v25juh8kCOITltiFcxTY4UYVPVDjAwbUNPHbESX88wDv5JlFG5Tpb0h7wW3gE05lQNkr+Wpz+zYlbCiFtv73mMHPwgW64dJ/gJbsLx9WVuY1+h/1++r2fI1YdkhBZtXTMiJwDeLdnCY5cMX0DPirYYui28uIukjiXEeL6Vcz3It8Uzn1Ms+xUGVKHgzP5Mjde6YTazwrw6vExy4BpMk9JYJJ9qjjoNd/aRRmgoKCRPKXPPiSZpfqxsboYNnC29bLWwFlP8hOgMyL21i15s2OyA7GTiGlw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=xxZEkH5e2YVADb/xtty+0fsMHBrfT0hSD/MS5Fnx1KY=;
+ b=RAYzlTNwmf5GUkLl6nd/Sqr4QuOkjHIHtgPftkfuHG6zhYnJG10yAwCSRIFoFYYCV69ttUV3tJOvL6AVWu7XQZqAT+2ErD/Xy3EVhfoNiRB4cV1Tsxrldikzxrsr/mEhW+XqVeXWSp/pDUNKN5EQ/C9xJYPn75VMasv8fgLvv0K5VJ//8aTeONm16dkD9pQovMmSJkR45MW2hG4wa8FY38I0FWbZH/aIvtGoKL2hIHseCK5TCvMcJqiBnyuOHD2AqKTfToG9Tl7QmjevPr5Mi6UN5tk/EBtm/mCLaydBBRC7iJEsNsKjZwopAoSJUZ4p5iz8W3164gJrvqW7nYjJ3w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=xxZEkH5e2YVADb/xtty+0fsMHBrfT0hSD/MS5Fnx1KY=;
+ b=MZY4AyZvTpHNfT6rXopKbGuGRhcg1qGyb20ANGEJaWHR8ptiY+l9JLjCjLC3zFT7DiEP3nw6zKJDg9NoFPLB7prjGFzkERFb6TW5r+eZjP8Om+EWELMhsdXMIROunPHe57ugrdTFc2UggtJFOyZ6n6sH+Cg4tktkxPp4P4/Y4lo0nNlhsLjuikYxl1e3o5JLMfcGOV3YQBnXmpnteK8mpcXsMq/CUdEJfz8M4ws+VC9IXf256WwoV56D5zVpKmdiAi1LTv8zoStvehOQc07owflPYTFqvER3P4dA0ckd6uqQN4hudis5HZYj/bJ2PzCVHA+R0/nyVujiwSPk1RzpYA==
+Received: from MN2PR12MB3613.namprd12.prod.outlook.com (2603:10b6:208:c1::17)
+ by DS7PR12MB6046.namprd12.prod.outlook.com (2603:10b6:8:85::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.12; Wed, 26 Nov
+ 2025 16:54:54 +0000
+Received: from MN2PR12MB3613.namprd12.prod.outlook.com
+ ([fe80::1b3b:64f5:9211:608b]) by MN2PR12MB3613.namprd12.prod.outlook.com
+ ([fe80::1b3b:64f5:9211:608b%4]) with mapi id 15.20.9343.009; Wed, 26 Nov 2025
+ 16:54:53 +0000
+Date: Wed, 26 Nov 2025 12:54:53 -0400
+From: Jason Gunthorpe <jgg@nvidia.com>
+To: Alex Mastro <amastro@fb.com>
+Message-ID: <20251126165453.GJ520526@nvidia.com>
+References: <20251120-dmabuf-vfio-v9-0-d7f71607f371@nvidia.com>
+ <20251120-dmabuf-vfio-v9-6-d7f71607f371@nvidia.com>
+ <aSZHO6otK0Heh+Qj@devgpu015.cco6.facebook.com>
+ <aSb8yH6fSlwk1oZZ@google.com>
+ <aScl+LCPN2TiN7Pd@devgpu015.cco6.facebook.com>
+Content-Disposition: inline
+In-Reply-To: <aScl+LCPN2TiN7Pd@devgpu015.cco6.facebook.com>
+X-ClientProxiedBy: BL1PR13CA0399.namprd13.prod.outlook.com
+ (2603:10b6:208:2c2::14) To MN2PR12MB3613.namprd12.prod.outlook.com
+ (2603:10b6:208:c1::17)
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:900:1d::77
-X-SA-Exim-Mail-From: l.stach@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: linaro-mm-sig@lists.linaro.org
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MN2PR12MB3613:EE_|DS7PR12MB6046:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9ff12cb8-cfa7-461d-43c2-08de2d0c8584
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|7416014|376014|1800799024;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?b8rfNG3d6XXMf9rzORqAtbEuW99wCf87baKMReiYdns6w9nI15hAEOqfGutl?=
+ =?us-ascii?Q?GwA+crP2tY78qaUAWmztk33u0E3Tne8RKF6TuK6SjLLdIBy6s5v3ew6/+AsF?=
+ =?us-ascii?Q?OHQaYTGWbsYB/l55aiBdcwetnp0bAi9F+kcDH5944mdc3oa7CP2pPJ81STEy?=
+ =?us-ascii?Q?kNPGDjQP+UsmLaUiHsTj9X9Dfi0q5EXEyoVSOrsiUZ7t8peCLRN22vuH372m?=
+ =?us-ascii?Q?DZner46KuFMLJWhxIbuPfzvUulemNRhiEa5sL49+I2HnjtDHL/7NiMxMma56?=
+ =?us-ascii?Q?a2yItfWhRIB+UAOTfjPlhIqafgigpfvrEkk4AbCY60sZNegOT1iJaU+Lygc7?=
+ =?us-ascii?Q?+3j7+hfMTF9W3ZwR0hBBgyiSkhUfkrbnserFPNe208gREV51NhMm36Yhhx+y?=
+ =?us-ascii?Q?7O8M0gBz8MI8/P3/eTmQ0OYz26O1TLANCXoS5gK7+XFsuaGpITO7hpYmlYuz?=
+ =?us-ascii?Q?9o5FQ2UIgdQeMMECcOM0a/akF4nI659Oasgx7OR+nCe8S+5PIPvONH4tPdD2?=
+ =?us-ascii?Q?KM0IwROM6RPKEHgM/tOtd9ZRY+NHIciljPBJ2k8qzslfQaXUbD0bbY/jcNIi?=
+ =?us-ascii?Q?Hr20zS/3QFmrfbt/HaaVQ3SBGEgsqy/32GNhlv2oissmIdu768gUG9emgSv0?=
+ =?us-ascii?Q?8h8Q9EVLIP5lfxCrgLD0yqNKENxktpGEorW2RNdvOhmb9Xb8S+hiA6HvhMp3?=
+ =?us-ascii?Q?Iy9c2U9bsd3araoi4qwwioUDWi8wJ5dHfS/LEzEh2XS2RYawb0JVt+SZxRN0?=
+ =?us-ascii?Q?un7/57bh/JMNhEbdb+sCpXeGbGZcRBwqCTQL+Dh+trLzL3A8P6lEesvmq16z?=
+ =?us-ascii?Q?zxXWb+fY4DEaLSyC9d0FKC2KL+MvM3DMbY5QJsElv2WQIk76/7x6Elri2ZFf?=
+ =?us-ascii?Q?ZAgLrjD50uTehbF6Klls53N9yrpxjlGyUdOXsrSS4jrkXZRv8NUa5UnB72e8?=
+ =?us-ascii?Q?qfo6IBULw85pJFgO9RiU1mNN8yTsecysRU+qe3tY7XF0RM3fToUQWvC8xEnq?=
+ =?us-ascii?Q?ho97WCD5KH37KHqw6Pn6B6jR71uUjwX+SGNK7hbRrb7E6DVkkFJhsUG9VH2h?=
+ =?us-ascii?Q?DkGWM0boLCIK2jC/Lckjfq2x1Fe9Ea7QVMcizMPg1j8j0c5EvpGRDsGqpUhD?=
+ =?us-ascii?Q?KT01lVv3LhBOsAlqxP72BG0QKGPNCH14acJSU4Nn/Yyx2FNokboSnFvUGfuR?=
+ =?us-ascii?Q?t4Xv65TDj5rcYzi0tjU+bbND8JzqvlNgF9/y7j5NTXjr8dry06JLYBTlLE1s?=
+ =?us-ascii?Q?EeLHZhy+Hv666HjpRwSNyR0l3qtHMM+1hEj0y2ocqTVr2bTZV2FanMMKTJqF?=
+ =?us-ascii?Q?sbNCxJmz2xb2ABaxQD9Zc4HcgbEWv1oOSxGfTV2y/Orijt9msQ4X0RiJ/WJ9?=
+ =?us-ascii?Q?Hb78/tx0Ub7xpBT1cKcet0MafeT8KyAVtPlzHfoB50Ntx9IgVJH5gc82iP3F?=
+ =?us-ascii?Q?nhLIBr+X2JFbxTjHwGqK2B6eLD1hcbOm?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MN2PR12MB3613.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(7416014)(376014)(1800799024);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?Rr8/UggYXFoFXLH6yEBfemvBdigD6gjrHpj6l0/muxh/bDF9QDLG7Eox1fon?=
+ =?us-ascii?Q?MWI2n5bEKDU3I8owz1yRQLWnNz9CB5yAHUbqU2PKiY7kC+VmsNR3kijP2TVI?=
+ =?us-ascii?Q?/UXumx64nqN1h3VoO1yKLXeqaJKwQGwGWOiPAZL1pNryM8zUbLLiqXMHowT3?=
+ =?us-ascii?Q?Hvb5b3HLKGFBoel7lT1v42zZuxJXIVdKXCPIWEcbinmk51lQ3KbTRTHAZTM0?=
+ =?us-ascii?Q?kQQWbwgsLddcqN53QD+nNTXbil4nxDJEMffgCUQs+zFPO5l8kvAKRXW3Qu8U?=
+ =?us-ascii?Q?dSTV4BPuwv33vqUuzH9vaOgRO9RHTh9T5Y803/gRFWMk/ui1shqBlZ4SEMfZ?=
+ =?us-ascii?Q?bKMSTdtR4UDMDE/am3m+ot/eI9VKQ+k8l6Ww+p5gaIwntFAksAn4yjrfr4Pk?=
+ =?us-ascii?Q?TqqmuGSB5HvvfcbMs0nB5kFnwaqUh46+BJoL6MqBUr5m0LbmYcbhy8/ZLfss?=
+ =?us-ascii?Q?lHPT7Ow//qNK4JgAgKnxFiRtNhujYDSKa2pS7rZz0uCQ87tFQP+zgbfrlaMy?=
+ =?us-ascii?Q?DxhJg9ZLsZHg1dElHg5OKrlU8xlHA6tyUAgOdESngs2dl8qHh7NeHA3H+g6s?=
+ =?us-ascii?Q?qVDDmFUBcyxI/VFKjf65ttKgpJcCigDYLF6rKBA27YELdymqzXIXYgar8sXj?=
+ =?us-ascii?Q?mw8MheK0uxobw2uQwp/OcfhtSha6dB5D4DS/6iLEJBoyP0iGmiCoEuyHztio?=
+ =?us-ascii?Q?VxxN3Aq3AA9Ghyi/VZzTiNPQBCxLj6bXgQz1IC7yc6bTofh1OGXsXeF2anS5?=
+ =?us-ascii?Q?McXKDIsnkvDBabHHfsZ/isS4t6+QI1AGO3th0rHYM1kZ6zQuGfd+j9rgLinU?=
+ =?us-ascii?Q?ETh7J84liJcB21ZbbqNNvC0sVTll6SsX1Xt1oQr2ik+4e6j1Rgz9kx41AWlS?=
+ =?us-ascii?Q?4S6YyrKf87Zc5DsUbZLrSKL5/4AjC65OB+7arzM7L3RUm19awUzIsquK3HUd?=
+ =?us-ascii?Q?NL+qt9k36dusrhKpD42IrWcqWsavSsw6ZaNshrWIgvff4YL0B9Wv/i4VkoRd?=
+ =?us-ascii?Q?a8B4drYr0lG3yXn+puYFc9ZyCoOulFTj0S0wOPMzlhmJoHZGIkmDDxfH0LyK?=
+ =?us-ascii?Q?ic6FLXAtDpb0jMrttMk4GgGDGaACDnj996YAKFx5yWrTmpvShBzGDYjVwYWB?=
+ =?us-ascii?Q?opKDqMLnQbdomSAyuD5ms2Rw3eaifysuyhGjYRV6ScWjS8HSB59U2qm6wO6C?=
+ =?us-ascii?Q?8GhF4cuaE4ouxAnSvgPviMEI4ZJ7gwsHXMGcn6c7Z79FsTv9xnKiQ1/Jm31m?=
+ =?us-ascii?Q?jrBVOld83YVu89xcqMIxap19tLnC97GH1/YHYPIXY78iwC1+nUF/25T3T64N?=
+ =?us-ascii?Q?AZ3b6lCliKQUDXxjaZ96rmKarcMJK/SmQPWlNde8U2vpfsSe81iM8wNJifG5?=
+ =?us-ascii?Q?DBpAjg7MZKGuX6nVm8Ic1+D2P/HdkpMTDHnt/yJVSR56gxykmfyx7ZDfTVKZ?=
+ =?us-ascii?Q?zdZxVBQ1mwMZxL1wEDG5UNwfEig2a80XSFLGkZSkxIxRMKEBjsJSbJoDyfNs?=
+ =?us-ascii?Q?9J7Xaqw11T6Dcwt+zL03AOsZLG/LNJhVNDfzfDG9BXlYJQlJOBXCaFBBBRGE?=
+ =?us-ascii?Q?nTd+61lGY2kln3WycCs=3D?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9ff12cb8-cfa7-461d-43c2-08de2d0c8584
+X-MS-Exchange-CrossTenant-AuthSource: MN2PR12MB3613.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Nov 2025 16:54:53.8261
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: e/NLpBmrNNvioecHTBoir7ABAKXX8pH0Xx7Ti8jplfDNwnzvTkUxfFFNlu6zyfIr
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB6046
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.73 / 15.00];
-	BAYES_HAM(-2.63)[98.34%];
-	R_SPF_ALLOW(-0.20)[+mx];
-	ONCE_RECEIVED(0.20)[];
+X-Spamd-Result: default: False [-5.00 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
+	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector10001:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
+	R_SPF_ALLOW(-0.20)[+ip4:52.100.0.0/15];
+	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
 	MIME_GOOD(-0.10)[text/plain];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:8075, ipnet:52.96.0.0/12, country:US];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[52.101.52.41:from];
+	RCPT_COUNT_TWELVE(0.00)[35];
+	MIME_TRACE(0.00)[0:+];
 	MID_RHS_MATCH_FROM(0.00)[];
-	FREEMAIL_TO(0.00)[kernel.org,amd.com,gmail.com,ffwll.ch,gfxstrand.net,linaro.org];
-	RCVD_TLS_ALL(0.00)[];
-	ASN(0.00)[asn:209379, ipnet:185.203.200.0/22, country:DE];
-	ARC_NA(0.00)[];
-	RCVD_COUNT_ONE(0.00)[1];
-	RCPT_COUNT_SEVEN(0.00)[8];
-	R_DKIM_NA(0.00)[];
-	NEURAL_HAM(-0.00)[-0.971];
+	NEURAL_HAM(-0.00)[-1.000];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	RCVD_TLS_LAST(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DMARC_NA(0.00)[pengutronix.de];
-	URIBL_BLOCKED(0.00)[pengutronix.de:from_smtp,pengutronix.de:mid,pengutronix.de:from_mime,metis.whiteo.stw.pengutronix.de:rdns,metis.whiteo.stw.pengutronix.de:helo];
-	TO_DN_SOME(0.00)[]
+	DKIM_TRACE(0.00)[Nvidia.com:+]
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 97EDD3F69B
-X-Spamd-Bar: --
-Message-ID-Hash: NNNCLGTZYVVXO2P225NUK67U2VWKT4I4
-X-Message-ID-Hash: NNNCLGTZYVVXO2P225NUK67U2VWKT4I4
-X-MailFrom: l.stach@pengutronix.de
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org
+X-Rspamd-Queue-Id: 09B5D3F7A5
+X-Spamd-Bar: ----
+Message-ID-Hash: TMKT66S3OUNRJ2EJH7TXDKS7AMRIL42T
+X-Message-ID-Hash: TMKT66S3OUNRJ2EJH7TXDKS7AMRIL42T
+X-MailFrom: jgg@nvidia.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: Pranjal Shrivastava <praan@google.com>, Leon Romanovsky <leon@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>, Logan Gunthorpe <logang@deltatee.com>, Jens Axboe <axboe@kernel.dk>, Robin Murphy <robin.murphy@arm.com>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Andrew Morton <akpm@linux-foundation.org>, Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Kees Cook <kees@kernel.org>, "Gustavo A. R. Silva" <gustavoars@kernel.org>, Ankit Agrawal <ankita@nvidia.com>, Yishai Hadas <yishaih@nvidia.com>, Shameer Kolothum <skolothumtho@nvidia.com>, Kevin Tian <kevin.tian@intel.com>, Alex Williamson <alex@shazbot.org>, Krishnakant Jaju <kjaju@nvidia.com>, Matt Ochs <mochs@nvidia.com>, linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org, linux-block@vger.kernel.org, iommu@lists.linux.dev, linux-mm@kvack.org, linux-doc@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesk
+ top.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org, linux-hardening@vger.kernel.org, Nicolin Chen <nicolinc@nvidia.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 1/4] dma-buf/fence: give some reasonable maximum signaling timeout
+Subject: [Linaro-mm-sig] Re: [PATCH v9 06/11] dma-buf: provide phys_vec to scatter-gather mapping routine
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NNNCLGTZYVVXO2P225NUK67U2VWKT4I4/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TMKT66S3OUNRJ2EJH7TXDKS7AMRIL42T/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-QW0gTWl0dHdvY2gsIGRlbSAyNi4xMS4yMDI1IHVtIDE2OjQ0ICswMTAwIHNjaHJpZWIgUGhpbGlw
-cCBTdGFubmVyOg0KPiBPbiBXZWQsIDIwMjUtMTEtMjYgYXQgMTY6MDMgKzAxMDAsIENocmlzdGlh
-biBLw7ZuaWcgd3JvdGU6DQo+IA0KPiA+ID4gDQpbLi4uXQ0KPiA+ID4gTXkgaG9wZSB3b3VsZCBi
-ZSB0aGF0IGluIHRoZSBtaWQtdGVybSBmdXR1cmUgd2UnZCBnZXQgZmlybXdhcmUNCj4gPiA+IHJp
-bmdzDQo+ID4gPiB0aGF0IGNhbiBiZSBwcmVlbXB0ZWQgdGhyb3VnaCBhIGZpcm13YXJlIGNhbGwg
-Zm9yIGFsbCBtYWpvcg0KPiA+ID4gaGFyZHdhcmUuDQo+ID4gPiBUaGVuIGEgaHVnZSBzaGFyZSBv
-ZiBvdXIgcHJvYmxlbXMgd291bGQgZGlzYXBwZWFyLg0KPiA+IA0KPiA+IEF0IGxlYXN0IG9uIEFN
-RCBIVyBwcmUtZW1wdGlvbiBpcyBhY3R1YWxseSBob3JyaWJsZSB1bnJlbGlhYmxlIGFzDQo+ID4g
-d2VsbC4NCj4gDQo+IERvIHlvdSBtZWFuIG5ldyBHUFVzIHdpdGggZmlybXdhcmUgc2NoZWR1bGlu
-Zywgb3Igd2hhdCBpcyAiSFcgcHJlLQ0KPiBlbXB0aW9uIj8NCj4gDQo+IFdpdGggZmlybXdhcmUg
-aW50ZXJmYWNlcywgbXkgaG9wZSB3b3VsZCBiZSB0aGF0IHlvdSBjb3VsZCBzaW1wbHkgdGVsbA0K
-PiANCj4gc3RvcF9ydW5uaW5nX3JpbmcobnJfb2ZfcmluZykNCj4gLy8gdGltZSBzbGljZSBmb3Ig
-c29tZW9uZSBlbHNlDQo+IHN0YXJ0X3J1bm5pbmdfcmluZyhucl9vZl9yaW5nKQ0KPiANCj4gVGhl
-cmVieSBnZXR0aW5nIHJlYWwgc2NoZWR1bGluZyBhbmQgYWxsIHRoYXQuIEFuZCBlbGltaW5hdGlu
-ZyBtYW55DQo+IG90aGVyIHByb2JsZW1zIHdlIGtub3cgd2VsbCBmcm9tIGRybS9zY2hlZC4NCg0K
-SXQgZG9lc24ndCByZWFsbHkgbWF0dGVyIGlmIHlvdSBoYXZlIGZpcm13YXJlIHNjaGVkdWxpbmcg
-b3Igbm90IGZvcg0KcHJlZW1wdGlvbiB0byBiZSBhIGhhcmQgcHJvYmxlbSBvbiBHUFVzLiBDUFVz
-IGhhdmUgbGltaXRlZCBzb2Z0d2FyZQ0KdmlzaWJsZSBzdGF0ZSB0aGF0IG5lZWRzIHRvIGJlIHNh
-dmVkL3Jlc3RvcmVkIG9uIGEgY29udGV4dCBzd2l0Y2ggYW5kDQpldmVuIHRoZXJlIHBlb3BsZSBz
-dGFydCBjb21wbGFpbmluZyBub3cgdGhhdCB0aGV5IG5lZWQgdG8gY29udGV4dA0Kc3dpdGNoIHRo
-ZSBBVlg1MTIgcmVnaXN0ZXIgc2V0Lg0KDQpHUFVzIGhhdmUgbWVnYWJ5dGVzIG9mIHNvZnR3YXJl
-IHZpc2libGUgc3RhdGUuIFdoaWNoIG5lZWRzIHRvIGJlDQpzYXZlZC9yZXN0b3JlZCBvbiB0aGUg
-Y29udGV4dCBzd2l0Y2ggaWYgeW91IHdhbnQgZmluZSBncmFpbmVkDQpwcmVlbXB0aW9uIHdpdGgg
-bG93IHByZWVtcHRpb24gbGF0ZW5jeS4gVGhlcmUgbWlnaHQgYmUgcG9pbnRzIGluIHRoZQ0KY29t
-bWFuZCBleGVjdXRpb24gd2hlcmUgeW91IGNhbiBpZ25vcmUgbW9zdCBvZiB0aGF0IHN0YXRlLCBi
-dXQgcmVhY2hpbmcNCnRob3NlIHBvaW50cyBjYW4gaGF2ZSBiYXNpY2FsbHkgdW5ib3VuZGVkIGxh
-dGVuY3kuIFNvIGVpdGhlciB5b3UgY2FuDQpyZWxpYWJseSBzYXZlL3Jlc3RvcmUgbG90cyBvZiBz
-dGF0ZSBvciB5b3UgYXJlIGxpbWl0ZWQgdG8gdmVyeSBjb2Fyc2UNCmdyYWluZWQgcHJlZW1wdGlv
-biB3aXRoIGFsbCB0aGUgdXN1YWwgaXNzdWVzIG9mIHRpbWVvdXRzIGFuZCBEb1MNCnZlY3RvcnMu
-DQpJJ20gbm90IHRvdGFsbHkgdXAgdG8gc3BlZWQgd2l0aCB0aGUgY3VycmVudCBzdGF0ZSBhY3Jv
-c3MgYWxsIHJlbGV2YW50DQpHUFVzLCBidXQgdW50aWwgcmVjZW50bHkgTlZpZGlhIHdhcyB0aGUg
-b25seSB2ZW5kb3IgdG8gaGF2ZSByZWFsDQpyZWxpYWJsZSBmaW5lLWdyYWluZWQgcHJlZW1wdGlv
-bi4NCg0KUmVnYXJkcywNCkx1Y2FzDQoNCg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1t
-LXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGlu
-YXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
+On Wed, Nov 26, 2025 at 08:08:24AM -0800, Alex Mastro wrote:
+> On Wed, Nov 26, 2025 at 01:12:40PM +0000, Pranjal Shrivastava wrote:
+> > On Tue, Nov 25, 2025 at 04:18:03PM -0800, Alex Mastro wrote:
+> > > On Thu, Nov 20, 2025 at 11:28:25AM +0200, Leon Romanovsky wrote:
+> > > > +static struct scatterlist *fill_sg_entry(struct scatterlist *sgl, size_t length,
+> > > > +					 dma_addr_t addr)
+> > > > +{
+> > > > +	unsigned int len, nents;
+> > > > +	int i;
+> > > > +
+> > > > +	nents = DIV_ROUND_UP(length, UINT_MAX);
+> > > > +	for (i = 0; i < nents; i++) {
+> > > > +		len = min_t(size_t, length, UINT_MAX);
+> > > > +		length -= len;
+> > > > +		/*
+> > > > +		 * DMABUF abuses scatterlist to create a scatterlist
+> > > > +		 * that does not have any CPU list, only the DMA list.
+> > > > +		 * Always set the page related values to NULL to ensure
+> > > > +		 * importers can't use it. The phys_addr based DMA API
+> > > > +		 * does not require the CPU list for mapping or unmapping.
+> > > > +		 */
+> > > > +		sg_set_page(sgl, NULL, 0, 0);
+> > > > +		sg_dma_address(sgl) = addr + i * UINT_MAX;
+> > > 
+> > > (i * UINT_MAX) happens in 32-bit before being promoted to dma_addr_t for
+> > > addition with addr. Overflows for i >=2 when length >= 8 GiB. Needs a cast:
+> > > 
+> > > 		sg_dma_address(sgl) = addr + (dma_addr_t)i * UINT_MAX;
+
+Yeah, and i should not be signed.
+
+> > > Discovered this while debugging why dma-buf import was failing for
+> > > an 8 GiB dma-buf using my earlier toy program [1]. It was surfaced by
+> > > ib_umem_find_best_pgsz() returning 0 due to malformed scatterlist, which bubbles
+> > > up as an EINVAL.
+> > >
+> > 
+> > Thanks a lot for testing & reporting this!
+> > 
+> > However, I believe the casting approach is a little fragile (and
+> > potentially prone to issues depending on how dma_addr_t is sized on
+> > different platforms). Thus, approaching this with accumulation seems
+> > better as it avoids the multiplication logic entirely, maybe something
+> > like the following (untested) diff ?
+> 
+> If the function input range is well-formed, then all values in
+> [addr..addr+length) must be expressible by dma_addr_t, so I don't think overflow
+> after casting is possible as long as nents is valid.
+
+It is probably not perfect, but validate_dmabuf_input() limits length
+to a valid size_t
+
+The signature is:
+
+bool dma_iova_try_alloc(struct device *dev, struct dma_iova_state *state,
+		phys_addr_t phys, size_t size)
+
+And that function should fail if size is too large. I think it mostly
+does, but it looks like there are a few little misses:
+
+			iova_align(iovad, size + iova_off),
+	return ALIGN(size, iovad->granule);
+
+etc are all unchecked math that could overflow.
+
+> That said, `nents = DIV_ROUND_UP(length, UINT_MAX)` is simply broken on any
+> system where size_t is 32b. I don't know if that's a practical consideration for
+> these code paths though.
+
+Yeah, that's a good point.
+
+Casting to u64 will trigger 64 bit device errors on 32 bit too.
+
+// DIV_ROUND_UP that is safe at the type limits
+nents = size / UINT_MAX;
+if (size % UINT_MAX)
+   nents++;
+
+Compiler should turn the % into bit math.
+
+Jason
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
