@@ -2,154 +2,177 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id OEujC2MB4WmJoQAAu9opvQ
+	id SJGNNGgB4Wk7oQAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:33:55 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:34:00 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id D3B83410E9A
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:33:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B1565410EA9
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:34:00 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E7C6844482
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:33:53 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 9EA283F76E
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 27 Nov 2025 17:19:31 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 65076444A8
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:33:59 +0000 (UTC)
+Received: from mail-qv1-f50.google.com (mail-qv1-f50.google.com [209.85.219.50])
+	by lists.linaro.org (Postfix) with ESMTPS id C253E3F772
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 27 Nov 2025 20:44:06 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b="c0KfnE/y";
-	spf=pass (lists.linaro.org: domain of andi.shyti@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=andi.shyti@kernel.org;
-	dmarc=pass (policy=quarantine) header.from=kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id E8C8840645;
-	Thu, 27 Nov 2025 17:19:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id ECF0EC113D0;
-	Thu, 27 Nov 2025 17:19:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1764263970;
-	bh=+8mv6i8YDqflMNXf6rSyL0ngsI4DSuUXQc+IAsMcIoc=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=c0KfnE/yW9mBtNrtCv44gXHVw6SA0/m6sGRU7msy3eAgPWadTZyvHIkYKGNDUnM7W
-	 28ftgpbYM2BNqaIQH038Kl27gGXNVq7FV/E7oQRx3VLgZ6RFLtdff8s2iwtizMjgcg
-	 xeQzJCXOCOTb0EatsXDdloTWKGrDRCysTipTKHEftdjOa1ssf4m16kgkv0UgbXYc+4
-	 odbVSb8qMOxIkoimUTTcrsI13GEY0gYhIUAaRjZPomLyF0JlNFjl6w6aanfeYFQfA2
-	 lkq/9R63TZDx3yK+SxPvcsaAr1pNoICpg/TmokPgvFqSNd8ZcRbmaDKmPvRKVOfZ9s
-	 rAI1CjOpXsKAA==
-Date: Thu, 27 Nov 2025 18:19:27 +0100
-From: Andi Shyti <andi.shyti@kernel.org>
-To: phasta@kernel.org
-Message-ID: <enlnwawk3qtcbgfm7dmuyefb4tx3hxsrmzozkabpeixxsi3y24@pukuuth2zlke>
-References: <20251126131914.149445-2-phasta@kernel.org>
- <20251126131914.149445-5-phasta@kernel.org>
- <nrrk4kug6a42fztx7ryuz5bk6uy7roiszjhiivlvtrw3uvunps@wn44moyetzff>
- <aSeTsINKklqqJyIs@lstrano-desk.jf.intel.com>
- <q2kvwmnxomqlcx7zgvlvyhupduytfubcu5vghuf6ztrdaq55pb@gq4tg7qughun>
- <63274dd281ac94f2680a4aa91f541de82435fda5.camel@mailbox.org>
+	dkim=pass header.d=gmail.com header.s=20230601 header.b="D4SWEb/+";
+	spf=pass (lists.linaro.org: domain of 21cnbao@gmail.com designates 209.85.219.50 as permitted sender) smtp.mailfrom=21cnbao@gmail.com;
+	dmarc=pass (policy=none) header.from=gmail.com
+Received: by mail-qv1-f50.google.com with SMTP id 6a1803df08f44-8823dfa84c5so11900196d6.3
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 27 Nov 2025 12:44:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1764276246; x=1764881046; darn=lists.linaro.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=qwCD3atudzQaR/LDn9XgIygiEi/nCI5QmZX0e0EMwzk=;
+        b=D4SWEb/+EWpb8GyG8zdByblQqTiF9sSaYFZ/YtXVz6ZkJ2wR4TqqFNi0kXCY4j6vgL
+         SLG0IIH056HELmPkN8uqBoXDORndVs5ArYMjrPaGvxNHwfb/KdmcNVFF/RmxXeItVK6Y
+         znH3c7dXQtS12ozsWCWi0qecDFtKBQdqUytAkwye1zp4KdaDoPbmZfv/qU+5prjsPSN/
+         WBxO1rUpEdNSVyuVsF3yI6Ja1GUux3pCv8kph5QKC4ClytWuKy2Qdawy3ePaLZ0o8rNs
+         BhFMIic+5jUgIZs++VQJQdLl+7ElxYN2u9I2iuBOmCB8xXgLvbHxm5Cm/46dK1RRzfI8
+         Yuog==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1764276246; x=1764881046;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=qwCD3atudzQaR/LDn9XgIygiEi/nCI5QmZX0e0EMwzk=;
+        b=i7XAaNtFTCYHoUoswTjjTmNtDjxzqnHnQBLpj6spwCJw+zlwIS3H+I4r8xFzfQyxUZ
+         Ebw3lKr5GmGssXjqZoyLhwX824YKioeP4CyklY7X7ymrnbEe9Xg/4fUfDWoY8UYewzY5
+         0IpXhsxrAMImNTtwOs0PldmEIwCmfeZQFlJ7PWKNarM0oyR/9Mnz2HoQC0U4/ZYKYmnC
+         WHTIsC4/xWfNMZUAMaXGsnq8/kKnmJagklmV741eUd+ZJM5KmdKFPcStYu1AfHZjEm3w
+         RXAIa11MJhSa5Lak/1kQNqb2yl9TOey6TUS2hjecs+LiZNWKTl646Qa4mgGLHP+kRk4F
+         x2TQ==
+X-Forwarded-Encrypted: i=1; AJvYcCURf/w3sia9t0GlE3vs1L6d+YnETl3C7lzq52Dx78w7TWeJ2v/XJhU84PDXdSK9f/NZlEHFAqZ+vv6kajJ0@lists.linaro.org
+X-Gm-Message-State: AOJu0YykFLixiLMq7h+qJveIpDXSUaHAKb9QF6+LBAmJH0mCmajYfpWo
+	EA2WQA2aJqFUHlrWsoH5LDjsUhYYvVyq4BnHBEa4M8Inwwh/DZiCNFimdW5Ur+4c4MUDr5AJqaK
+	ay3cEjppgFuN9gipB3hHaYN4mJm2y/DU=
+X-Gm-Gg: ASbGncuc2yrOlx6DPDGxqSVTQWkJ3gkK4f2AzHfcJw+dvR5K2aa9mp9Uq2a59qRIaBt
+	KM4fJbESeK9b5IYBwLciWFlPQXLVYDzWN+VbrhZ0ugPvFSs2hPRqB+VRoXt+6iH0LOq6h588W3z
+	XG5secBdHW2Tb8/du3uhpGQXDffN8hx/ZLZ4YXW60bnj+8zP0QaKp1bgdUjJY1FH+ACe5WxmRXR
+	LlVS0xe56XnjREGUsjPdnAMSigeDEsv9ILmEhjhbB3xQl1UUjQAxkEmE9u6RGaFgSeAhQ==
+X-Google-Smtp-Source: AGHT+IE7voQiHDKLB4NwV8zGSE3REVdUO0e8yn38MIWlpfXSI6ZQdpofqkZUcP8t3D35swjRjPiF80F/keI36AiYhgc=
+X-Received: by 2002:a05:6214:4018:b0:880:4c02:c49 with SMTP id
+ 6a1803df08f44-8847c49a3ffmr351784406d6.23.1764276246078; Thu, 27 Nov 2025
+ 12:44:06 -0800 (PST)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <63274dd281ac94f2680a4aa91f541de82435fda5.camel@mailbox.org>
+References: <20251122090343.81243-1-21cnbao@gmail.com> <aSiB-UsunuE7u295@milan>
+In-Reply-To: <aSiB-UsunuE7u295@milan>
+From: Barry Song <21cnbao@gmail.com>
+Date: Fri, 28 Nov 2025 04:43:54 +0800
+X-Gm-Features: AWmQ_bn1BA-EHgk099B5JdrbxARNS1wqxvNFJMmU7BmZqAfXIiS6yKlNivY5AG4
+Message-ID: <CAGsJ_4z21fN2KSg6jt_qveYgrKZw1Vsi_kb+uhed=RJAbujMHw@mail.gmail.com>
+To: Uladzislau Rezki <urezki@gmail.com>
 X-Spamd-Bar: ---
-X-MailFrom: andi.shyti@kernel.org
+X-MailFrom: 21cnbao@gmail.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: LVLQSGWIFP4OJE3ITRQ3TOZHTGGS6SNO
-X-Message-ID-Hash: LVLQSGWIFP4OJE3ITRQ3TOZHTGGS6SNO
-X-Mailman-Approved-At: Thu, 16 Apr 2026 15:07:19 +0000
-CC: Matthew Brost <matthew.brost@intel.com>, Sumit Semwal <sumit.semwal@linaro.org>, Gustavo Padovan <gustavo@padovan.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Felix Kuehling <Felix.Kuehling@amd.com>, Alex Deucher <alexander.deucher@amd.com>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Jani Nikula <jani.nikula@linux.intel.com>, Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Tvrtko Ursulin <tursulin@ursulin.net>, Huang Rui <ray.huang@amd.com>, Matthew Auld <matthew.auld@intel.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Lucas De Marchi <lucas.demarchi@intel.com>, Thomas =?utf-8?Q?Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, amd-gfx@lists.freedesktop.org, intel-gfx@lists.freede
- sktop.org, intel-xe@lists.freedesktop.org, rust-for-linux@vger.kernel.org
+Message-ID-Hash: B36RPDUT2ZTUAPZ47F3XOLQ7EM7V7VJA
+X-Message-ID-Hash: B36RPDUT2ZTUAPZ47F3XOLQ7EM7V7VJA
+X-Mailman-Approved-At: Thu, 16 Apr 2026 15:07:20 +0000
+CC: akpm@linux-foundation.org, linux-mm@kvack.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, Barry Song <v-songbaohua@oppo.com>, Sumit Semwal <sumit.semwal@linaro.org>, John Stultz <jstultz@google.com>, Maxime Ripard <mripard@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 3/6] drm/gpu/xe: Ignore dma_fenc_signal() return code
+Subject: [Linaro-mm-sig] Re: [PATCH RFC] mm/vmap: map contiguous pages in batches whenever possible
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LVLQSGWIFP4OJE3ITRQ3TOZHTGGS6SNO/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/B36RPDUT2ZTUAPZ47F3XOLQ7EM7V7VJA/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="iso-8859-15"
-Content-Transfer-Encoding: quoted-printable
-X-Spamd-Result: default: False [3.49 / 15.00];
-	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
-	R_DKIM_REJECT(1.00)[kernel.org:s=k20201202];
-	DATE_IN_PAST(1.00)[3358];
-	MID_RHS_NOT_FQDN(0.50)[];
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [0.59 / 15.00];
+	DATE_IN_PAST(1.00)[3354];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	ARC_NA(0.00)[];
-	FREEMAIL_CC(0.00)[intel.com,linaro.org,padovan.org,amd.com,gmail.com,ffwll.ch,linux.intel.com,ursulin.net,kernel.org,suse.de,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.freede];
-	RCPT_COUNT_TWELVE(0.00)[28];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.239];
-	FROM_NEQ_ENVFROM(0.00)[andi.shyti@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
+	RCVD_COUNT_THREE(0.00)[3];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:-];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com];
+	ARC_NA(0.00)[];
+	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_SPAM(0.00)[0.554];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[21cnbao@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[11];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: D3B83410E9A
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email,mail.gmail.com:mid]
+X-Rspamd-Queue-Id: B1565410EA9
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Thu, Nov 27, 2025 at 02:51:39PM +0100, Philipp Stanner wrote:
-> On Thu, 2025-11-27 at 14:37 +0100, Andi Shyti wrote:
-> > On Wed, Nov 26, 2025 at 03:56:32PM -0800, Matthew Brost wrote:
-> > > On Wed, Nov 26, 2025 at 11:56:57PM +0100, Andi Shyti wrote:
-> > > > > @@ -85,7 +85,6 @@ void xe_hw_fence_irq_finish(struct xe_hw_fence_=
-irq *irq)
-> > > > > @@ -93,9 +92,9 @@ void xe_hw_fence_irq_finish(struct xe_hw_fence_=
-irq *irq)
-> > > > > =A0		spin_lock_irqsave(&irq->lock, flags);
-> > > > > =A0		list_for_each_entry_safe(fence, next, &irq->pending, irq_lin=
-k) {
-> > > > > =A0			list_del_init(&fence->irq_link);
-> > > > > -			err =3D dma_fence_signal_locked(&fence->dma);
-> > > >=20
-> > > > why don't we do
-> > > >=20
-> > > > XE_WARN_ON(dma_fence_signal_locked(..))
->=20
-> because it's impossible because the series is about removing the return
-> codes from the dma_fence_signal_* functions.
+> >
+> > +     /*
+> > +      * Some users may allocate pages from high-order down to order 0.
+> > +      * We roughly check if the first page is a compound page. If so,
+> > +      * there is a chance to batch multiple pages together.
+> > +      */
+> >       if (!IS_ENABLED(CONFIG_HAVE_ARCH_HUGE_VMALLOC) ||
+> > -                     page_shift == PAGE_SHIFT)
+> > +                     (page_shift == PAGE_SHIFT && !PageCompound(pages[0])))
+> >
+> Do we support __GFP_COMP as vmalloc/vmap flag? As i see from latest:
 
-oh yes, the last patch. Sorry, I went on reviewing and lost the
-final target from sight.
+This is not the case for vmalloc, but applies to dma-bufs that are allocated
+using alloc_pages() with GFP_COMP.
 
-> > > >=20
-> > >=20
-> > > IIRC the above statement can compile out. So the patch looks correct =
-to me.
-> >=20
-> > you have defined XE_WARN_ON as WARN_ON that should always
-> > evaluate the content and, depending on the configuration, it
-> > prints the logs or not.
-> >=20
-> > What I don't like from this patch is that we end up checking
-> > twice for the DMA_FENCE_FLAG_SIGNALED_BIT bit.
->=20
-> Depends on what you mean by "we". The Xe code checks it only once, with
-> dma_fence_test_signaled_flag(). The dma_fence backend checks it yet
-> again, as it always does, to avoid signaling a signaled fence.
->=20
-> That's not racy here, however, because the fence lock is already being
-> held, as evidenced by the current usage of dma_fence_signal_locked().
+#define LOW_ORDER_GFP (GFP_HIGHUSER | __GFP_ZERO)
+#define HIGH_ORDER_GFP  (((GFP_HIGHUSER | __GFP_ZERO | __GFP_NOWARN \
+                                | __GFP_NORETRY) & ~__GFP_RECLAIM) \
+                                | __GFP_COMP)
 
-I haven't said it's racy, I just didn't like that we are testing
-for the DMA_FENCE_FLAG_SIGNALED_BIT twice. On the other hand,
-with dma_fence_signal_locked() being void, I wouldn't know how to
-do it better. So that I guess it's fine.
+>
+> /*
+>  * See __vmalloc_node_range() for a clear list of supported vmalloc flags.
+>  * This gfp lists all flags currently passed through vmalloc. Currently,
+>  * __GFP_ZERO is used by BPF and __GFP_NORETRY is used by percpu. Both drm
+>  * and BPF also use GFP_USER. Additionally, various users pass
+>  * GFP_KERNEL_ACCOUNT. Xfs uses __GFP_NOLOCKDEP.
+>  */
+> #define GFP_VMALLOC_SUPPORTED (GFP_KERNEL | GFP_ATOMIC | GFP_NOWAIT |\
+>                                __GFP_NOFAIL |  __GFP_ZERO | __GFP_NORETRY |\
+>                                GFP_NOFS | GFP_NOIO | GFP_KERNEL_ACCOUNT |\
+>                                GFP_USER | __GFP_NOLOCKDEP)
+>
+> Could you please clarify when PageCompound(pages[0]) returns true?
+>
 
-Andi
+In this case, dma-buf attempts to allocate as many compound high-order pages
+as possible, falling back to 0-order allocations if necessary.
+
+Then, dma_buf_vmap() is called by the GPU drivers:
+
+ 1    404  drivers/accel/amdxdna/amdxdna_gem.c <<amdxdna_gem_obj_vmap>>
+             dma_buf_vmap(abo->dma_buf, map);
+   2   1568  drivers/dma-buf/dma-buf.c <<dma_buf_vmap_unlocked>>
+             ret = dma_buf_vmap(dmabuf, map);
+   3    354  drivers/gpu/drm/drm_gem_shmem_helper.c
+<<drm_gem_shmem_vmap_locked>>
+             ret = dma_buf_vmap(obj->import_attach->dmabuf, map);
+   4     85  drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c
+<<etnaviv_gem_prime_vmap_impl>>
+             ret = dma_buf_vmap(etnaviv_obj->base.import_attach->dmabuf, &map);
+   5    433  drivers/gpu/drm/vmwgfx/vmwgfx_blit.c <<map_external>>
+             ret = dma_buf_vmap(bo->tbo.base.dma_buf, map);
+   6     88  drivers/gpu/drm/vmwgfx/vmwgfx_gem.c <<vmw_gem_vmap>>
+             ret = dma_buf_vmap(obj->import_attach->dmabuf, map);
+
+Thanks
+Barry
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
