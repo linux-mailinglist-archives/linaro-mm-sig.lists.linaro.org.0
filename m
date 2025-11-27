@@ -2,138 +2,130 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 2F0WGEUB4Wk7oQAAu9opvQ
+	id IOqKOE0B4WmJoQAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:33:25 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:33:33 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id C728D410E64
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:33:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7EE5B410E74
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:33:33 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id D9019443EA
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:33:23 +0000 (UTC)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
-	by lists.linaro.org (Postfix) with ESMTPS id 380293F70A
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 27 Nov 2025 11:17:27 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 42CF140A77
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:33:32 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+	by lists.linaro.org (Postfix) with ESMTPS id 953BD3F76E
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 27 Nov 2025 13:37:23 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=DQJVIS7e;
-	spf=pass (lists.linaro.org: domain of phasta@mailbox.org designates 80.241.56.171 as permitted sender) smtp.mailfrom=phasta@mailbox.org;
-	dmarc=pass (policy=reject) header.from=mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [IPv6:2001:67c:2050:b231:465::2])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4dHDRS2fwjz9t8m;
-	Thu, 27 Nov 2025 12:17:24 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
-	t=1764242244; h=from:from:reply-to:reply-to:subject:subject:date:date:
-	 message-id:message-id:to:to:cc:mime-version:mime-version:
-	 content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=kdLhtFqYrGAAE3G7PcwuS9PaciP06RnxEbDvvNTDD/Y=;
-	b=DQJVIS7ewZzM9YvbsjEUaBWPNvLb1ZMsuRtiTTLb/pTG6W3zasbrbLy4xc2cfgWoRW3Pd4
-	t1+ui2QrBJLaS+EPrJeJQfcQPuQkzTZSOPIoUqeeD7sEvd6nUKpKoZr32z5GV0Fqd0Aa0y
-	Bp4QUNfx5a4AJ7V/TZXB5g+TaQbrUeC3OgsEGJDIHS5hmQHFweg0D1d1E9afDy5Dm2Pz0K
-	OK49kcpVMpz7ASaQM34+HNh+kVWaUbO9uLO4Sfac4GKS1/jaIl2/DCn38pcm5QU9pjwuXn
-	aED50hAvcuU8ZFdGmzN//DNn0ZmGigIji6Oq1CX6cjFHFvcJ5mw2/W5tYiXBSA==
-Message-ID: <ce96cf250dfca4aea9ddfc00e45fc1b47caceedc.camel@mailbox.org>
-From: Philipp Stanner <phasta@mailbox.org>
-To: Christian =?ISO-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>,
-	alexdeucher@gmail.com, simona.vetter@ffwll.ch, tursulin@ursulin.net,
-	matthew.brost@intel.com, dri-devel@lists.freedesktop.org,
-	amd-gfx@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
-	sumit.semwal@linaro.org
-Date: Thu, 27 Nov 2025 12:17:19 +0100
-In-Reply-To: <20251113145332.16805-19-christian.koenig@amd.com>
-References: <20251113145332.16805-1-christian.koenig@amd.com>
-	 <20251113145332.16805-19-christian.koenig@amd.com>
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=CeKkfLKK;
+	spf=pass (lists.linaro.org: domain of andi.shyti@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=andi.shyti@kernel.org;
+	dmarc=pass (policy=quarantine) header.from=kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by tor.source.kernel.org (Postfix) with ESMTP id D198360141;
+	Thu, 27 Nov 2025 13:37:22 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 83865C4CEF8;
+	Thu, 27 Nov 2025 13:37:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1764250642;
+	bh=I4PdYzRN+MTqsZDHBCDDkw07FlKUWJA4d9AsRMAWLio=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=CeKkfLKKq6G2UJMAEwwq2lg7VIxz8nzuVel8G7pTAuyH6g3qCqjQ8JbVJCTgKB5Am
+	 NCMVptKu378LkF7MM+L9dGF3qY6Pju+zikBlcD/BNdZgkdfPZcfhSndlNaMDRlZfcd
+	 cIGOWkJaxaMGt6jRIXFnZd6JLo27vPLyU9BlbPlkZ/1fRNDi0nsotRreRw8EWTltxZ
+	 WRA5KtbghLMHzz8Q81GXthn0Ikzfp+vFn20tyCC121ThWqzKt3GgD3JdXjuE4s3EAM
+	 JkIKVKDFSw2nhbiITA524q66FbPbAuvlxU+b07DAfBkefVMCGnTnrhW26qvWO3Vhme
+	 0YABbqiV2F/nA==
+Date: Thu, 27 Nov 2025 14:37:17 +0100
+From: Andi Shyti <andi.shyti@kernel.org>
+To: Matthew Brost <matthew.brost@intel.com>
+Message-ID: <q2kvwmnxomqlcx7zgvlvyhupduytfubcu5vghuf6ztrdaq55pb@gq4tg7qughun>
+References: <20251126131914.149445-2-phasta@kernel.org>
+ <20251126131914.149445-5-phasta@kernel.org>
+ <nrrk4kug6a42fztx7ryuz5bk6uy7roiszjhiivlvtrw3uvunps@wn44moyetzff>
+ <aSeTsINKklqqJyIs@lstrano-desk.jf.intel.com>
 MIME-Version: 1.0
-X-MBO-RS-ID: bfbff4823f15586f625
-X-MBO-RS-META: u74iaqnp9jeowrxeu5hz8h5ni6i6syeu
+Content-Disposition: inline
+In-Reply-To: <aSeTsINKklqqJyIs@lstrano-desk.jf.intel.com>
 X-Spamd-Bar: ---
-X-MailFrom: phasta@mailbox.org
+X-MailFrom: andi.shyti@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 4TXOJ3VC4VXEPJMJILLEWV26CG2BB6AD
-X-Message-ID-Hash: 4TXOJ3VC4VXEPJMJILLEWV26CG2BB6AD
+Message-ID-Hash: BUJN4FOPM5LG4DTPIGAQJVLGWZMQDN7N
+X-Message-ID-Hash: BUJN4FOPM5LG4DTPIGAQJVLGWZMQDN7N
 X-Mailman-Approved-At: Thu, 16 Apr 2026 15:07:17 +0000
+CC: Philipp Stanner <phasta@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Gustavo Padovan <gustavo@padovan.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Felix Kuehling <Felix.Kuehling@amd.com>, Alex Deucher <alexander.deucher@amd.com>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Jani Nikula <jani.nikula@linux.intel.com>, Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Tvrtko Ursulin <tursulin@ursulin.net>, Huang Rui <ray.huang@amd.com>, Matthew Auld <matthew.auld@intel.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Lucas De Marchi <lucas.demarchi@intel.com>, Thomas =?utf-8?Q?Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedeskto
+ p.org, intel-xe@lists.freedesktop.org, rust-for-linux@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Reply-To: phasta@kernel.org
-Subject: [Linaro-mm-sig] Re: [PATCH 18/18] drm/xe: Finish disconnect HW fences from module
+Subject: [Linaro-mm-sig] Re: [PATCH 3/6] drm/gpu/xe: Ignore dma_fenc_signal() return code
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4TXOJ3VC4VXEPJMJILLEWV26CG2BB6AD/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/BUJN4FOPM5LG4DTPIGAQJVLGWZMQDN7N/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-X-Spamd-Result: default: False [5.09 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[mailbox.org : SPF not aligned (relaxed),reject];
-	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[mailbox.org:s=mail20150812];
-	DATE_IN_PAST(1.00)[3364];
-	MAILLIST(-0.20)[mailman];
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [3.49 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
+	R_DKIM_REJECT(1.00)[kernel.org:s=k20201202];
+	DATE_IN_PAST(1.00)[3361];
+	MID_RHS_NOT_FQDN(0.50)[];
 	R_SPF_ALLOW(-0.20)[+mx:c];
+	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	TO_DN_SOME(0.00)[];
-	GREYLIST(0.00)[pass,meta];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_THREE(0.00)[4];
 	ARC_NA(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com,ffwll.ch,ursulin.net,intel.com,lists.freedesktop.org,lists.linaro.org,linaro.org];
-	DKIM_TRACE(0.00)[mailbox.org:-];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	NEURAL_HAM(-0.00)[-0.910];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[phasta@mailbox.org,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
-	HAS_REPLYTO(0.00)[phasta@kernel.org];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	FREEMAIL_CC(0.00)[kernel.org,linaro.org,padovan.org,amd.com,gmail.com,ffwll.ch,linux.intel.com,intel.com,ursulin.net,suse.de,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.freedeskto];
+	RCPT_COUNT_TWELVE(0.00)[28];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-0.211];
+	FROM_NEQ_ENVFROM(0.00)[andi.shyti@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:-];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mailbox.org:mid,lists.linaro.org:helo,lists.linaro.org:rdns,intel.com:email,linaro.org:email]
-X-Rspamd-Queue-Id: C728D410E64
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
+X-Rspamd-Queue-Id: 7EE5B410E74
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-T24gVGh1LCAyMDI1LTExLTEzIGF0IDE1OjUxICswMTAwLCBDaHJpc3RpYW4gS8O2bmlnIHdyb3Rl
-Og0KPiBGcm9tOiBNYXR0aGV3IEJyb3N0IDxtYXR0aGV3LmJyb3N0QGludGVsLmNvbT4NCj4gDQo+
-IEJlIHNhZmUgd2hlbiBkZXJlZmVyZW5jaW5nIGZlbmNlLT54ZS4NCj4gDQo+IFNpZ25lZC1vZmYt
-Ynk6IE1hdHRoZXcgQnJvc3QgPG1hdHRoZXcuYnJvc3RAaW50ZWwuY29tPg0KPiAtLS0NCj4gwqBk
-cml2ZXJzL2dwdS9kcm0veGUveGVfaHdfZmVuY2UuYyB8IDEzICsrKysrKystLS0tLS0NCj4gwqAx
-IGZpbGUgY2hhbmdlZCwgNyBpbnNlcnRpb25zKCspLCA2IGRlbGV0aW9ucygtKQ0KPiANCj4gZGlm
-ZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS94ZS94ZV9od19mZW5jZS5jIGIvZHJpdmVycy9ncHUv
-ZHJtL3hlL3hlX2h3X2ZlbmNlLmMNCj4gaW5kZXggZjVmYWQ0NDI2NzI5Li44MTgxZGZjNjI4ZTQg
-MTAwNjQ0DQo+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS94ZS94ZV9od19mZW5jZS5jDQo+ICsrKyBi
-L2RyaXZlcnMvZ3B1L2RybS94ZS94ZV9od19mZW5jZS5jDQo+IEBAIC0xNTksOSArMTU5LDcgQEAg
-c3RhdGljIHN0cnVjdCB4ZV9od19mZW5jZV9pcnEgKnhlX2h3X2ZlbmNlX2lycShzdHJ1Y3QgeGVf
-aHdfZmVuY2UgKmZlbmNlKQ0KPiDCoA0KPiDCoHN0YXRpYyBjb25zdCBjaGFyICp4ZV9od19mZW5j
-ZV9nZXRfZHJpdmVyX25hbWUoc3RydWN0IGRtYV9mZW5jZSAqZG1hX2ZlbmNlKQ0KPiDCoHsNCj4g
-LQlzdHJ1Y3QgeGVfaHdfZmVuY2UgKmZlbmNlID0gdG9feGVfaHdfZmVuY2UoZG1hX2ZlbmNlKTsN
-Cj4gLQ0KPiAtCXJldHVybiBkZXZfbmFtZShmZW5jZS0+eGUtPmRybS5kZXYpOw0KPiArCXJldHVy
-biAieGUiOw0KPiDCoH0NCg0KTWF5IEkgYXNrIHdoYXQgdGhvc2UgbmFtZSBjYWxsYmFja3MgYXJl
-IHVzZWQgZm9yIGluIFhlPw0KSSBoYWQgc28gZmFyIG9ubHkgc2VlbiB0aG9zZSBkbWFfZmVuY2Ug
-Y2FsbGJhY2tzIGJlaW5nIHVzZWQgaW4gaTkxNS4NCg0KSSdtIGFza2luZyBiZWNhdXNlIGluIFJ1
-c3QgRG1hRmVuY2UgSSBkaXNjb3ZlcmVkIHRoYXQgaGF2aW5nIHRob3NlDQpjYWxsYmFja3MgaW4g
-dGhlIGZpcnN0IHBsYWNlIGNyZWF0ZXMgdGhlIGxpZmUgdGltZSBwcm9ibGVtcyBDaHJpc3RpYW4N
-CmFkZHJlc3NlcyBpbiB0aGlzIHNlcmllcy4NCg0KSSB0aGluayB3ZSBoYWQgYmVndW4gYnJhaW5z
-dG9ybWluZyB3aGV0aGVyIHJlbW92aW5nIGdldF9kcml2ZXJfbmFtZSgpDQphbmQgZ2V0X3RpbWVs
-aW5lX25hbWUoKSBpbiBkbWFfZmVuY2UncyBiYWNrZW5kX29wcyB3b3VsZCBiZSB0aGUgY2xlYW5l
-cg0KdGhpbmcgdG8gZG8sIGNvbXBhcmVkIHRvIHRoZSBSQ1UgZ3VhcmRzLg0KDQoNClAuDQoNCl9f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1z
-aWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1
-YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJv
-Lm9yZwo=
+Hi Matt,
+
+On Wed, Nov 26, 2025 at 03:56:32PM -0800, Matthew Brost wrote:
+> On Wed, Nov 26, 2025 at 11:56:57PM +0100, Andi Shyti wrote:
+> > > @@ -85,7 +85,6 @@ void xe_hw_fence_irq_finish(struct xe_hw_fence_irq *irq)
+> > > @@ -93,9 +92,9 @@ void xe_hw_fence_irq_finish(struct xe_hw_fence_irq *irq)
+> > >  		spin_lock_irqsave(&irq->lock, flags);
+> > >  		list_for_each_entry_safe(fence, next, &irq->pending, irq_link) {
+> > >  			list_del_init(&fence->irq_link);
+> > > -			err = dma_fence_signal_locked(&fence->dma);
+> > 
+> > why don't we do
+> > 
+> > XE_WARN_ON(dma_fence_signal_locked(..))
+> > 
+> 
+> IIRC the above statement can compile out. So the patch looks correct to me.
+
+you have defined XE_WARN_ON as WARN_ON that should always
+evaluate the content and, depending on the configuration, it
+prints the logs or not.
+
+What I don't like from this patch is that we end up checking
+twice for the DMA_FENCE_FLAG_SIGNALED_BIT bit.
+
+Thanks,
+Andi
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
