@@ -2,64 +2,102 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 8ExvDaUB4WmJoQAAu9opvQ
+	id qIXIMaoB4WmJoQAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:35:01 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:35:06 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id F2590410F21
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:35:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 756E1410F28
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:35:06 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0F70B40A99
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:35:00 +0000 (UTC)
-Received: from bali.collaboradmins.com (bali.collaboradmins.com [148.251.105.195])
-	by lists.linaro.org (Postfix) with ESMTPS id 25D5C3F80B
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 28 Nov 2025 14:27:19 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 8BD5E4459B
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:35:05 +0000 (UTC)
+Received: from fhigh-b1-smtp.messagingengine.com (fhigh-b1-smtp.messagingengine.com [202.12.124.152])
+	by lists.linaro.org (Postfix) with ESMTPS id D808B3F85D
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 28 Nov 2025 19:45:02 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=collabora.com header.s=mail header.b=VWeWGmEY;
-	spf=pass (lists.linaro.org: domain of boris.brezillon@collabora.com designates 148.251.105.195 as permitted sender) smtp.mailfrom=boris.brezillon@collabora.com;
-	dmarc=pass (policy=none) header.from=collabora.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1764340038;
-	bh=MCNZ7/JOKVOKMS2Ye0Z5CGLQlCRGTTYsDLTxzMvltaE=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=VWeWGmEYeGIgOvnLOSv8vEZiGfLixdNRBrF3Bgr0AQUVMMk6cw7rC3fmfJScOHhk0
-	 dq3yDCG0wySHJ0aZbKRoxq0re1kYfYMGz3whg8KFAuKb5XNE9DLT5nB71E51SK/Cf2
-	 nU88JdaCMFOf/JFtsbIkvVK/L4VXruBPjCG4JH+y31ngZIHhAqW8x/WXC5RaGIiwIz
-	 ys2oaPzY/4viwi7a5+jNUkoheY6zfcvJSf+O49BorhP0pEa/0c+Mp/VcXdioCRFuRR
-	 zAelT7RVIaYa9P/7f4yeLE3FDFRXQD8ExFh2rZc7tqfsDgRgBQiJBEP2wg5bE0Nm1G
-	 S3cnWYoaDhB2g==
-Received: from fedora (unknown [IPv6:2a01:e0a:2c:6930:d919:a6e:5ea1:8a9f])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: bbrezillon)
-	by bali.collaboradmins.com (Postfix) with ESMTPSA id A7BC717E0EDB;
-	Fri, 28 Nov 2025 15:27:16 +0100 (CET)
-Date: Fri, 28 Nov 2025 15:27:13 +0100
-From: Boris Brezillon <boris.brezillon@collabora.com>
-To: Alice Ryhl <aliceryhl@google.com>
-Message-ID: <20251128152713.15bf1c37@fedora>
-In-Reply-To: <20251128-gpuvm-rust-v1-3-ebf66bf234e0@google.com>
-References: <20251128-gpuvm-rust-v1-0-ebf66bf234e0@google.com>
-	<20251128-gpuvm-rust-v1-3-ebf66bf234e0@google.com>
-Organization: Collabora
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.51; x86_64-redhat-linux-gnu)
+	dkim=pass header.d=shazbot.org header.s=fm3 header.b=V81EV6Ig;
+	dkim=pass header.d=messagingengine.com header.s=fm1 header.b="o dbFk64";
+	spf=pass (lists.linaro.org: domain of alex@shazbot.org designates 202.12.124.152 as permitted sender) smtp.mailfrom=alex@shazbot.org;
+	dmarc=pass (policy=none) header.from=shazbot.org
+Received: from phl-compute-06.internal (phl-compute-06.internal [10.202.2.46])
+	by mailfhigh.stl.internal (Postfix) with ESMTP id 3ED8A7A07D6;
+	Fri, 28 Nov 2025 14:45:02 -0500 (EST)
+Received: from phl-mailfrontend-01 ([10.202.2.162])
+  by phl-compute-06.internal (MEProxy); Fri, 28 Nov 2025 14:45:02 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=shazbot.org; h=
+	cc:cc:content-transfer-encoding:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm3; t=1764359102;
+	 x=1764445502; bh=mFJPp3he5bKOdHbL7iltjchRS9EPwpMYVau74+gkFUE=; b=
+	V81EV6IgzoPoo41bQFggdHF53ocwk+Gs+sBunW3xqvk13yNtrufRrcAjtjNGg4Th
+	nIlAwBVl+KTgj3OHB9nI3FDRWS7theJ9K4GwtmUJ35Hc/BcfHVjI1ozgd8fuKzIu
+	R3IYVUrB08Paa4kEef5+1ZTrLRdsSvzG3OSlR5GQFwYorsYcVjZxgomLLC+WDTlr
+	jTNImTxchKwBD8UzSJ1wTIaYoCrt32JJOBDGp9oFKmmDki6YXBTMz75hGTLJLBEK
+	7OtSkR+EfxWtAD5pQuCNlc1kWae4QlDwH27uqfw6sFIQhmr4u3N94DbTAUdFk3Eb
+	t0HuHGdRwozuseQ3zzxyiQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:feedback-id:feedback-id
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1764359102; x=
+	1764445502; bh=mFJPp3he5bKOdHbL7iltjchRS9EPwpMYVau74+gkFUE=; b=o
+	dbFk64xFUz7Sg0hyv+fVOI8E3K+sj63ZpinESSKvMSNtJnhtoci3PqdvY7k/5rjW
+	HIf4VR1UddBZgALVP/vBO1PRg0BY1ReYtGK09h8GsBlkFimMhI+vyV3PdGlhEOIt
+	qOnW3KR5oFr1+YHriPWixw9Vi6+uyKmJvILoKRMGs23XItQIEnKPlwDsgzYst/am
+	pBiKOAIRgsqaDflZPDpnyCVFX6PBgDFyMKTrLYtrImaDk2+jlsAufjk1vvvrS5Zg
+	tVgE3jLRtm7xpF+ufB3nQXBTxjAzP1qK4VjLkzWSSzhxzx3ngRLhsn9WKs9cD0w1
+	96Z2tkdj6Ldj1dHg8OAvQ==
+X-ME-Sender: <xms:vfspad6yIjiSKyCW1m-K0jx3sYoDuYBHVKwt6TnVsWvQqNkeEx5sbg>
+    <xme:vfspaQHkoaxYH70JoEQOJEN2v9G1odlG9pi5p8M3bwNAxfyabGGVM7OO6qfSptoE2
+    F6mbMT5j9SbY-JuFv1OpXTm9vNKNhbClkAcZ4MrLby5xCKnGYv7>
+X-ME-Received: <xmr:vfspaX2CHSKhHzAgTj5gKxMKooWNdBzdtS2N0421HAAcYU7ZTETxEIbV>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdeggddvhedtjeehucetufdoteggodetrf
+    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
+    rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
+    gurhepfffhvfevuffkjghfgggtgfesthejredttddtvdenucfhrhhomheptehlvgigucgh
+    ihhllhhirghmshhonhcuoegrlhgvgiesshhhrgiisghothdrohhrgheqnecuggftrfgrth
+    htvghrnhephedvtdeuveejudffjeefudfhueefjedvtefgffdtieeiudfhjeejhffhfeeu
+    vedunecuffhomhgrihhnpehkvghrnhgvlhdrohhrghenucevlhhushhtvghrufhiiigvpe
+    dtnecurfgrrhgrmhepmhgrihhlfhhrohhmpegrlhgvgiesshhhrgiisghothdrohhrghdp
+    nhgspghrtghpthhtohepudefpdhmohguvgepshhmthhpohhuthdprhgtphhtthhopegrmh
+    grshhtrhhosehfsgdrtghomhdprhgtphhtthhopehsuhhmihhtrdhsvghmfigrlheslhhi
+    nhgrrhhordhorhhgpdhrtghpthhtoheptghhrhhishhtihgrnhdrkhhovghnihhgsegrmh
+    gurdgtohhmpdhrtghpthhtoheplhgvohhnsehkvghrnhgvlhdrohhrghdprhgtphhtthho
+    pehjghhgseiiihgvphgvrdgtrgdprhgtphhtthhopehkvghvihhnrdhtihgrnhesihhnth
+    gvlhdrtghomhdprhgtphhtthhopehnihgtohhlihhntgesnhhvihguihgrrdgtohhmpdhr
+    tghpthhtoheplhhinhhugidqmhgvughirgesvhhgvghrrdhkvghrnhgvlhdrohhrghdprh
+    gtphhtthhopegurhhiqdguvghvvghlsehlihhsthhsrdhfrhgvvgguvghskhhtohhprdho
+    rhhg
+X-ME-Proxy: <xmx:vfspaVocJ1krkbmCjKBD2AguK5QMNwj-_uyC7ipyhDbUjsaCynq2qg>
+    <xmx:vfspacOBkyqnB4CgxMFP3k4sNAedI2KxMg5607ChGXV59CpXSJQT8Q>
+    <xmx:vfspafXxB6J2xO-zngFiAZBKxpbEvKGXSB8jyjhowr7CDYtFWSg34w>
+    <xmx:vfspaXu0W-dhKMQg21_V272bqiBa8kMgmXDfzdXL3bmKEOGqOnJJAQ>
+    <xmx:vvspaQyZX1cqH3oyFc0moWoh315DbLZutHd_U5PthUpqWI3zFdrKPEii>
+Feedback-ID: i03f14258:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
+ 28 Nov 2025 14:45:00 -0500 (EST)
+Date: Fri, 28 Nov 2025 12:44:47 -0700
+From: Alex Williamson <alex@shazbot.org>
+To: Alex Mastro <amastro@fb.com>
+Message-ID: <20251128124447.0c5156b5.alex@shazbot.org>
+In-Reply-To: <20251125-dma-buf-overflow-v1-1-b70ea1e6c4ba@fb.com>
+References: <20251125-dma-buf-overflow-v1-1-b70ea1e6c4ba@fb.com>
 MIME-Version: 1.0
 X-Spamd-Bar: ---
-X-MailFrom: boris.brezillon@collabora.com
+X-MailFrom: alex@shazbot.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: MVLULDBY5OZ6472JOQRZHB3FFHXF2WF7
-X-Message-ID-Hash: MVLULDBY5OZ6472JOQRZHB3FFHXF2WF7
-X-Mailman-Approved-At: Thu, 16 Apr 2026 15:07:25 +0000
-CC: Danilo Krummrich <dakr@kernel.org>, Daniel Almeida <daniel.almeida@collabora.com>, Matthew Brost <matthew.brost@intel.com>, Thomas =?UTF-8?B?SGVsbHN0csO2bQ==?= <thomas.hellstrom@linux.intel.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Steven Price <steven.price@arm.com>, Liviu Dudau <liviu.dudau@arm.com>, Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, =?UTF-8?B?QmrDtnJu?= Roy Baron <bjorn3_gh@protonmail.com>, Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, Trevor Gross <tmgross@umich.edu>, Frank Binns <frank.binns@imgtec.com>, Matt Coster <matt.coster@imgtec.com>, Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>, Jessica Zhang <jessica.zhang@oss.qualcomm.com>, Sean Paul <sean@p
- oorly.run>, Marijn Suijten <marijn.suijten@somainline.org>, Lyude Paul <lyude@redhat.com>, Lucas De Marchi <lucas.demarchi@intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org, linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org, intel-xe@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+Message-ID-Hash: 3LYWHCN3TIUJ3MYUIZQMNPUJFDFVFUS3
+X-Message-ID-Hash: 3LYWHCN3TIUJ3MYUIZQMNPUJFDFVFUS3
+X-Mailman-Approved-At: Thu, 16 Apr 2026 15:07:26 +0000
+CC: Sumit Semwal <sumit.semwal@linaro.org>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Leon Romanovsky <leon@kernel.org>, Jason Gunthorpe <jgg@ziepe.ca>, Kevin Tian <kevin.tian@intel.com>, Nicolin Chen <nicolinc@nvidia.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, kvm@vger.kernel.org, Ankit Agrawal <ankita@nvidia.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 3/4] drm/gpuvm: use const for drm_gpuva_op_* ptrs
+Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf: fix integer overflow in fill_sg_entry() for buffers >= 8GiB
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MVLULDBY5OZ6472JOQRZHB3FFHXF2WF7/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3LYWHCN3TIUJ3MYUIZQMNPUJFDFVFUS3/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -68,119 +106,77 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [3.59 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	DATE_IN_PAST(1.00)[3337];
-	R_DKIM_REJECT(1.00)[collabora.com:s=mail];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+X-Spamd-Result: default: False [1.59 / 15.00];
+	DATE_IN_PAST(1.00)[3331];
+	MID_CONTAINS_FROM(1.00)[];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[collabora.com : SPF not aligned (relaxed),none];
+	DMARC_POLICY_SOFTFAIL(0.10)[shazbot.org : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[3];
-	RCPT_COUNT_TWELVE(0.00)[41];
-	MIME_TRACE(0.00)[0:+];
-	HAS_ORG_HEADER(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.604];
-	FROM_NEQ_ENVFROM(0.00)[boris.brezillon@collabora.com,linaro-mm-sig-bounces@lists.linaro.org];
+	RCPT_COUNT_TWELVE(0.00)[13];
 	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[kernel.org,collabora.com,intel.com,linux.intel.com,suse.de,gmail.com,ffwll.ch,arm.com,garyguo.net,protonmail.com,umich.edu,imgtec.com,oss.qualcomm.com,linux.dev,p oorly.run,somainline.org,redhat.com,linaro.org,amd.com,lists.freedesktop.org,vger.kernel.org,lists.linaro.org];
+	NEURAL_SPAM(0.00)[0.682];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[alex@shazbot.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DKIM_TRACE(0.00)[collabora.com:-];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,collabora.com:email]
-X-Rspamd-Queue-Id: F2590410F21
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,fb.com:email,linaro.org:email,shazbot.org:mid]
+X-Rspamd-Queue-Id: 756E1410F28
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Fri, 28 Nov 2025 14:14:17 +0000
-Alice Ryhl <aliceryhl@google.com> wrote:
+On Tue, 25 Nov 2025 17:11:18 -0800
+Alex Mastro <amastro@fb.com> wrote:
 
-> These methods just read the values stored in the op pointers without
-> modifying them, so it is appropriate to use const ptrs here.
+> fill_sg_entry() splits large DMA buffers into multiple scatter-gather
+> entries, each holding up to UINT_MAX bytes. When calculating the DMA
+> address for entries beyond the second one, the expression (i * UINT_MAX)
+> causes integer overflow due to 32-bit arithmetic.
 > 
-> This allows us to avoid const -> mut pointer casts in Rust.
+> This manifests when the input arg length >= 8 GiB results in looping for
+> i >= 2.
 > 
-> Signed-off-by: Alice Ryhl <aliceryhl@google.com>
-
-Reviewed-by: Boris Brezillon <boris.brezillon@collabora.com>
-
+> Fix by casting i to dma_addr_t before multiplication.
+> 
+> Fixes: 3aa31a8bb11e ("dma-buf: provide phys_vec to scatter-gather mapping routine")
+> Signed-off-by: Alex Mastro <amastro@fb.com>
 > ---
->  drivers/gpu/drm/drm_gpuvm.c | 6 +++---
->  include/drm/drm_gpuvm.h     | 8 ++++----
->  2 files changed, 7 insertions(+), 7 deletions(-)
+> More color about how I discovered this in [1] for the commit at [2]:
 > 
-> diff --git a/drivers/gpu/drm/drm_gpuvm.c b/drivers/gpu/drm/drm_gpuvm.c
-> index 9cd06c7600dc32ceee0f0beb5e3daf31698a66b3..e06b58aabb8ea6ebd92c625583ae2852c9d2caf1 100644
-> --- a/drivers/gpu/drm/drm_gpuvm.c
-> +++ b/drivers/gpu/drm/drm_gpuvm.c
-> @@ -2283,7 +2283,7 @@ EXPORT_SYMBOL_GPL(drm_gpuvm_interval_empty);
->  void
->  drm_gpuva_map(struct drm_gpuvm *gpuvm,
->  	      struct drm_gpuva *va,
-> -	      struct drm_gpuva_op_map *op)
-> +	      const struct drm_gpuva_op_map *op)
->  {
->  	drm_gpuva_init_from_op(va, op);
->  	drm_gpuva_insert(gpuvm, va);
-> @@ -2303,7 +2303,7 @@ EXPORT_SYMBOL_GPL(drm_gpuva_map);
->  void
->  drm_gpuva_remap(struct drm_gpuva *prev,
->  		struct drm_gpuva *next,
-> -		struct drm_gpuva_op_remap *op)
-> +		const struct drm_gpuva_op_remap *op)
->  {
->  	struct drm_gpuva *va = op->unmap->va;
->  	struct drm_gpuvm *gpuvm = va->vm;
-> @@ -2330,7 +2330,7 @@ EXPORT_SYMBOL_GPL(drm_gpuva_remap);
->   * Removes the &drm_gpuva associated with the &drm_gpuva_op_unmap.
->   */
->  void
-> -drm_gpuva_unmap(struct drm_gpuva_op_unmap *op)
-> +drm_gpuva_unmap(const struct drm_gpuva_op_unmap *op)
->  {
->  	drm_gpuva_remove(op->va);
->  }
-> diff --git a/include/drm/drm_gpuvm.h b/include/drm/drm_gpuvm.h
-> index 0d3fc1f6cac9966a42f3bc82b0b491bfefaf5b96..655bd9104ffb24170fca14dfa034ee79f5400930 100644
-> --- a/include/drm/drm_gpuvm.h
-> +++ b/include/drm/drm_gpuvm.h
-> @@ -1121,7 +1121,7 @@ void drm_gpuva_ops_free(struct drm_gpuvm *gpuvm,
->  			struct drm_gpuva_ops *ops);
->  
->  static inline void drm_gpuva_init_from_op(struct drm_gpuva *va,
-> -					  struct drm_gpuva_op_map *op)
-> +					  const struct drm_gpuva_op_map *op)
->  {
->  	va->va.addr = op->va.addr;
->  	va->va.range = op->va.range;
-> @@ -1265,13 +1265,13 @@ int drm_gpuvm_sm_unmap_exec_lock(struct drm_gpuvm *gpuvm, struct drm_exec *exec,
->  
->  void drm_gpuva_map(struct drm_gpuvm *gpuvm,
->  		   struct drm_gpuva *va,
-> -		   struct drm_gpuva_op_map *op);
-> +		   const struct drm_gpuva_op_map *op);
->  
->  void drm_gpuva_remap(struct drm_gpuva *prev,
->  		     struct drm_gpuva *next,
-> -		     struct drm_gpuva_op_remap *op);
-> +		     const struct drm_gpuva_op_remap *op);
->  
-> -void drm_gpuva_unmap(struct drm_gpuva_op_unmap *op);
-> +void drm_gpuva_unmap(const struct drm_gpuva_op_unmap *op);
->  
->  /**
->   * drm_gpuva_op_remap_to_unmap_range() - Helper to get the start and range of
+> [1] https://lore.kernel.org/all/aSZHO6otK0Heh+Qj@devgpu015.cco6.facebook.com
+> [2] https://lore.kernel.org/all/20251120-dmabuf-vfio-v9-6-d7f71607f371@nvidia.com
+> ---
+>  drivers/dma-buf/dma-buf-mapping.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/dma-buf/dma-buf-mapping.c b/drivers/dma-buf/dma-buf-mapping.c
+> index b4819811a64a..b7352e609fbd 100644
+> --- a/drivers/dma-buf/dma-buf-mapping.c
+> +++ b/drivers/dma-buf/dma-buf-mapping.c
+> @@ -24,7 +24,7 @@ static struct scatterlist *fill_sg_entry(struct scatterlist *sgl, size_t length,
+>  		 * does not require the CPU list for mapping or unmapping.
+>  		 */
+>  		sg_set_page(sgl, NULL, 0, 0);
+> -		sg_dma_address(sgl) = addr + i * UINT_MAX;
+> +		sg_dma_address(sgl) = addr + (dma_addr_t)i * UINT_MAX;
+>  		sg_dma_len(sgl) = len;
+>  		sgl = sg_next(sgl);
+>  	}
 > 
 
+Applied to vfio next branch for v6.19.  Thanks,
+
+Alex
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
