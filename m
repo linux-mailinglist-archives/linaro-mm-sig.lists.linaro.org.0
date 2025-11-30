@@ -2,309 +2,160 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id SIqqHrAB4WmJoQAAu9opvQ
+	id 6Ff2KLUB4WmJoQAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:35:12 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:35:17 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id EA6AF410F2F
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:35:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 82601410F36
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:35:17 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 192DF445A5
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:35:11 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.14])
-	by lists.linaro.org (Postfix) with ESMTPS id E2DBC3F85D
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 28 Nov 2025 20:02:07 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 99AF4445AE
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:35:16 +0000 (UTC)
+Received: from mail-lf1-f42.google.com (mail-lf1-f42.google.com [209.85.167.42])
+	by lists.linaro.org (Postfix) with ESMTPS id 57F013F757
+	for <linaro-mm-sig@lists.linaro.org>; Sun, 30 Nov 2025 10:54:50 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=lC4UdA6r;
-	spf=pass (lists.linaro.org: domain of matthew.brost@intel.com designates 198.175.65.14 as permitted sender) smtp.mailfrom=matthew.brost@intel.com;
-	dmarc=pass (policy=none) header.from=intel.com;
-	arc=reject ("signature check failed: fail, {[1] = sig:microsoft.com:reject}")
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1764360127; x=1795896127;
-  h=date:from:to:cc:subject:message-id:references:
-   content-transfer-encoding:in-reply-to:mime-version;
-  bh=MOBjPJBp8SAq5DpZ/ptjgHzbc8aAaAn/XdRwM5y7sCg=;
-  b=lC4UdA6r+6D0lsKjFfsX7Z+ejrI2Rkof6I3+sme4LmhalE02VXsJU4js
-   y6ckTsy8gbjfpsXfmb/5EnF3zV2K0rNx+JqLu+t4FaA9SKbUDpXt/LWFE
-   MZm8n6Z1D81tAmuZk1u2zsR4B4owmFA0/uwjK9itDAuoszdgvU20gzrXa
-   +BzCvdr1VywMJDvEfSK0UVAWKlLVoEmHOzRGxeadVRa+MCWsCYhBXgYU8
-   QhPhgCvd8Ydh25ANpI/uIN3zfsdn+9Z4mIzQ4Y31dInlKSAUGdAwJVc3x
-   6DfGBeBddQMFdGOrgyuITOv7U4MsWs0uxBuUMtVnr1ypuiTEvwQx8+Y1A
-   g==;
-X-CSE-ConnectionGUID: 3nrGL9iKSYyvKhYkh9QvBQ==
-X-CSE-MsgGUID: WScFOC9hSb6Cevpwr5A2fg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11627"; a="70256206"
-X-IronPort-AV: E=Sophos;i="6.20,234,1758610800";
-   d="scan'208";a="70256206"
-Received: from fmviesa010.fm.intel.com ([10.60.135.150])
-  by orvoesa106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Nov 2025 12:02:06 -0800
-X-CSE-ConnectionGUID: GJWcecTkSNy/62MQk2TKHw==
-X-CSE-MsgGUID: Fh87YhBlQEWur9Vjuqz3hw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.20,234,1758610800";
-   d="scan'208";a="194311552"
-Received: from orsmsx902.amr.corp.intel.com ([10.22.229.24])
-  by fmviesa010.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Nov 2025 12:02:06 -0800
-Received: from ORSMSX902.amr.corp.intel.com (10.22.229.24) by
- ORSMSX902.amr.corp.intel.com (10.22.229.24) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.29; Fri, 28 Nov 2025 12:02:04 -0800
-Received: from ORSEDG901.ED.cps.intel.com (10.7.248.11) by
- ORSMSX902.amr.corp.intel.com (10.22.229.24) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.29 via Frontend Transport; Fri, 28 Nov 2025 12:02:04 -0800
-Received: from CH5PR02CU005.outbound.protection.outlook.com (40.107.200.11) by
- edgegateway.intel.com (134.134.137.111) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.29; Fri, 28 Nov 2025 12:02:04 -0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=rTzlSjRgHT7IKpAtpD+3DbBzfCOtmTKzoPnrd47yk6og2qNXkJUQtSYdtET7t/ThMfoWzZ6wsmpAhra9+des8ZnzYOnkEfK3Oms77D2QzbTJhFQ0lLVFDgg8NVnWN2FpIZ4dNf5uwRmSPbtOruu3B3NeXADfK2A3zbNZTbKGtAAMNe10deis3g3A8xUDioaEgJhfTHfZbjIgh3qDsa3pWWQwkwUeXQfkBsQXZSCWLC1omqRDON3QDvZNG0CaNej0BbQDvHPQdwx9m1Vm0mzyAmdt0vv51Xp6oMgyhci8JqUDCQmGX9gKmR6NbL1TFZ9spxoIIeDyXxvIhSFVewZpWg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2d3ez9o/GwElTZfY/PA4LMjxfHttxv6lcraorXwl2vo=;
- b=yts1uDpRhckLk+dHjyx9cn4KxVNLcKrK/GRbDF0hS8KPLAYdHqIF8Lnx7+B1k6dXZ5eZ+Mt+L4ztW1rbudmveD0Fw/nq6ALahoHspVTtlwEYNWqAalj406K97BEFQnI58/E2xd67eMQyEgduP1oDGl2cCaQ32xaCicYqCDsWL3LGUCEItGLHafjLKhMAcEUsge8YaKwCN4j17DiFiBqDxdUmxCmyKXKRlNdIVIgQl2wQHlZWPCinU8iglRA2QOAJMwNAnYHK6X96I+JFRZIpf75saG6fq+MhFX7mExtcyTKTtL/LcKuHSK/ylU8j0uNuaZEjFLvaOjn+6i6lJJeZzw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Received: from PH7PR11MB6522.namprd11.prod.outlook.com (2603:10b6:510:212::12)
- by PH7PR11MB8455.namprd11.prod.outlook.com (2603:10b6:510:30d::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.17; Fri, 28 Nov
- 2025 20:02:01 +0000
-Received: from PH7PR11MB6522.namprd11.prod.outlook.com
- ([fe80::9e94:e21f:e11a:332]) by PH7PR11MB6522.namprd11.prod.outlook.com
- ([fe80::9e94:e21f:e11a:332%7]) with mapi id 15.20.9366.012; Fri, 28 Nov 2025
- 20:02:01 +0000
-Date: Fri, 28 Nov 2025 12:01:57 -0800
-From: Matthew Brost <matthew.brost@intel.com>
-To: <phasta@kernel.org>
-Message-ID: <aSn/tXWKuA+y1A4a@lstrano-desk.jf.intel.com>
-References: <20251126131914.149445-2-phasta@kernel.org>
- <20251126131914.149445-3-phasta@kernel.org>
- <aSctt3QFiEIB61Gr@lstrano-desk.jf.intel.com>
- <aScxGDYeNeN1WYja@lstrano-desk.jf.intel.com>
- <f1864f6d-8403-406d-81a0-00a71495cae8@amd.com>
- <35189892c0cb774155e2012d41371b4d3f8e7d0f.camel@mailbox.org>
- <adfd840e-fcc8-4cdb-8fd8-d0e48ee32247@amd.com>
- <89c04c8b3ca0fadf73452ca20ffd61cb106d762a.camel@mailbox.org>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Disposition: inline
-In-Reply-To: <89c04c8b3ca0fadf73452ca20ffd61cb106d762a.camel@mailbox.org>
-X-ClientProxiedBy: MW4PR03CA0059.namprd03.prod.outlook.com
- (2603:10b6:303:8e::34) To PH7PR11MB6522.namprd11.prod.outlook.com
- (2603:10b6:510:212::12)
+	dkim=pass header.d=linaro.org header.s=google header.b=iqHwHsuu;
+	spf=pass (lists.linaro.org: domain of linus.walleij@linaro.org designates 209.85.167.42 as permitted sender) smtp.mailfrom=linus.walleij@linaro.org;
+	dmarc=pass (policy=none) header.from=linaro.org
+Received: by mail-lf1-f42.google.com with SMTP id 2adb3069b0e04-5942bac322dso3364569e87.0
+        for <linaro-mm-sig@lists.linaro.org>; Sun, 30 Nov 2025 02:54:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1764500089; x=1765104889; darn=lists.linaro.org;
+        h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+         :date:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=dOSBjcoOnlyTQvfFFh+eu9Zfh6ZQd1i1HR+OFbVxZQc=;
+        b=iqHwHsuun9XFHP9cbqpVU4lbPntnB3aPP/me8eo6ZL3lPRcE5MhI+/WcVSXd4QIoht
+         Bt2IqWym0pDKWw6Y4SaWG8GF2erbwxitEYxM05UHstcO3szhQdkAoYKRZLxOUwTrQgPI
+         kBXFKhIKZPU2jsx950s2sn/Aty9/9I4z/qiro1TBRb/dXOyjHcYuih9ZInIrJbRopH9b
+         NP9JHtQ1N5TJwK0/2bmpUSqTAiFczyEyomBGZph5/fiGv3kiFltGMYHgOAajc4vivD/0
+         H46aR2GGXhv41A8LZrtN+R58lJrIOswhwgxM7ahZZ8kYyFRGJAQfs+TZoiQ9tWiAl3sS
+         zqbg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1764500089; x=1765104889;
+        h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+         :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=dOSBjcoOnlyTQvfFFh+eu9Zfh6ZQd1i1HR+OFbVxZQc=;
+        b=JrZmr1uoSuzn8VhiO1VxAlHtVzk2yzXVNrtA3EzcTxwj0zU2l3Ts5GBCdI/EKxkoH5
+         4hYpjhIM5TY65Sb9cP43LJljiMyi58i3/SSPwRKJYIiZS6FzKp2zGspGKuS8pbc38nrL
+         gLZglXkV9ZpTvCZg4g9xyXdGQ5Yj3FqM80xzgTXztnziuXjIYM/QgJLXbgz1R+FWUfu0
+         obpXG3UQ4MS1PdLEe7Lx8g4MU/kyBcEdMuHULT1/qAAY87aHX33gQ2o9y7qYccAAEHJf
+         CaUUHsZg0roh9iz4m/BQTUkNnsWB9D69zhho6qWK2ZQ7JKkm+BKmvf25xFiQiFBEcH8/
+         J7HQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVQE/VLHftDnDUyX+CGpKgLi6w4OS3RCrit1tMDrI7PqRQ6XlTpEBFBdAhTggqVB7ViBeD+/ZCbbzep3Xbn@lists.linaro.org
+X-Gm-Message-State: AOJu0YzlDziWTXWT/SV2Fk8co8nVEIieMzgQDsvXwd6gVtqntYRwaBLk
+	o7/EWzHpXr/V9Syng1fhJo4VxhAoPORVSQKzxy5qZZ7UEgl9Zkk+ZUkB1LInhU+EBceHyw==
+X-Gm-Gg: ASbGncukvJcZf3r2/SwMNgDIERJ5l4+jDZKHP66GohI4VKXoiieyNfjIa6OhBJ/vhC4
+	qVVSt8CwiI4fVcUvm+tAZUotApE5XoeYIeuFRUCmV+pLIDudbIR+1Uka5ixHr3GPbxMj+sGIOGI
+	B5JqnH14mQ4k02I93NxqBsiB1xnmOnZFnsi2xHLDu2FtGb1bpeWh1hvHpFQ/atwpx+sEm0StZvO
+	vO9wG3z9xkwDGiZJlLqeJ8XaUPJZA9rmpHsKB60fEONAh8WTK1DDPAdbmq31MtPd0/Mxjkz7KlM
+	7th+DKn+kUQ3ipiIyCV9Hq14Zy53yFB33JUrEE+LZHZN6ydx5nGodNzo9sATesyCtQ+rTnGexOl
+	/BqHK/QJOY6U+9Ouom/g8G3+IwHNqWH//JTUfRM4wLsyvAo73ojFxJ1KzNLDpdgXXxN9oo/bxVp
+	UuWMeQGQUQZ0LnDL0pbgfl9g==
+X-Google-Smtp-Source: AGHT+IFq1IN29e+3yywBpe9PVvbAinfdw0+qXi1MtIWv/v8nCdlDFCMMUU2tdkAh+KiyaMZkqBd+jw==
+X-Received: by 2002:a05:6512:3096:b0:594:546c:431f with SMTP id 2adb3069b0e04-596a3ee5548mr11152417e87.49.1764500088979;
+        Sun, 30 Nov 2025 02:54:48 -0800 (PST)
+Received: from [192.168.1.140] ([85.235.12.238])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-596bfa48cc8sm2710565e87.83.2025.11.30.02.54.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 30 Nov 2025 02:54:48 -0800 (PST)
+From: Linus Walleij <linus.walleij@linaro.org>
+Date: Sun, 30 Nov 2025 11:54:48 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR11MB6522:EE_|PH7PR11MB8455:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2debb5b3-f71d-465c-051e-08de2eb8fe6e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|7416014|376014|1800799024|7053199007;
-X-Microsoft-Antispam-Message-Info: =?iso-8859-1?Q?R3nzNtkUIqE21La52wItEzAvfZahgIFBiZO94m9xhFcYxVISBQ4peN1jTj?=
- =?iso-8859-1?Q?mXbPFlflzA0FnyL7EBfWPVbBYmVNtnZLkMhf21kjC1/TBTBiTQsV2sj+tK?=
- =?iso-8859-1?Q?Lb7bkx4Rjh7TydkuD7j1t3ZSArLBVtGtn/W4ZaBac7B8O7HZAWeLU5O5KZ?=
- =?iso-8859-1?Q?eyKBRZEmhwpDJCsYCKJj1AGX8vhrhSoHObcXMZ24R3TKBwxerwqV9TYLfR?=
- =?iso-8859-1?Q?FL9Y/7uAy/Bq0UblOOI2ddcth6iait5rzQh5o+7EyBLO9dlZ3Q5TO86cEv?=
- =?iso-8859-1?Q?lO8OpdjRZTt+cwEP3ig0hKCEnzZQ67M7KKLOIbF3RVnkRl1VWLHmx/bD2U?=
- =?iso-8859-1?Q?+QsWduPU+c6EEtgvXj5XmVfw/alssFUwoXE2UydkMLXTJtJAPTl4aFh/Ov?=
- =?iso-8859-1?Q?eoWIEbv0PecX4JpHPGeqRVll4qWvhgQ8KlNnEMf/nW7s5flYgrxcEWvlvK?=
- =?iso-8859-1?Q?6VZdBPoQwHzGOqnJUuE38sG2M1SDJJFr9uwVT3zEWJBVmV9rfkOahVa3FB?=
- =?iso-8859-1?Q?waz0XxsuvL3FoFoIRlxP7zKeHKexTiUovqRcPi9E6d78eEeI2z9JhAeVQQ?=
- =?iso-8859-1?Q?8h4I8QaOeEyJTEChAvOITX/33PyDZ5JVVVU3BItHhneU+j5FQNJRj2RTYO?=
- =?iso-8859-1?Q?wFycmtvfB2FEzSRaeiByLlfswZYCUehqhu0SVoqijdvbCdCCxhAjyRlVNB?=
- =?iso-8859-1?Q?YltQGHNbD04UrdjQ+vk0aZemNucOejYrhzhhCEjd2KeGcjr8K4VUSIBHCM?=
- =?iso-8859-1?Q?jBqLxzxSACp32HjQ8hLc78BMFALIMtZpMAR2bk1mH6bkUidj/4AdBLzb28?=
- =?iso-8859-1?Q?aKCW2YfQbaiEoJ47Ts6HrPJCEWS9rP5W8j/TKr95T8Xb2AIjGc+/D17i0b?=
- =?iso-8859-1?Q?XVjsh1HEHONEfsWpYdbQHvBgPkJfEpCRWIBHzeU+djyMqoBJlaF4DgPgrw?=
- =?iso-8859-1?Q?NxX1GFYbWPJStCEza1ml7GLjoSnmZaCqFCnZYYP6h1gohF4fp4jSgU1xc/?=
- =?iso-8859-1?Q?qaendU5s5WlpNvcYbtDWbLWairI56i4enTAXaRkUufEkxZU3dKItaXhBWJ?=
- =?iso-8859-1?Q?oyeisJ4npGkxaMwtHuRtMqROdh0mWH6RaMXt1n398cf39EnJVHsw7lgygD?=
- =?iso-8859-1?Q?NcrnSQ/a6QLu1xbEd/CcFaOcEXIG9n3A18Vqvaxc0QnznFDJ2VoH8iK5kT?=
- =?iso-8859-1?Q?jrzxKWwqc29xWJ6tJz82NSzBu8H37hwLZmvtAYSLqEH06fPM7wtUBYNJ8v?=
- =?iso-8859-1?Q?eb+pFsanE/DseR71ejn3U/cAFvd1eWUX5tNEBPmQ6j9FWRPqgszV3yqJTa?=
- =?iso-8859-1?Q?XMS61/f0sr1xRKhWdp03YF10iX92p7un7LhaMFZ+Cjb0R7mVORq/ahHb/9?=
- =?iso-8859-1?Q?NLxegOKpexhhFG03vO+s/dZpsF6ZslCaFBTpkxELnipuafN3WM9WgYtMBq?=
- =?iso-8859-1?Q?Qkecflv/zJsOein5JgiDJFCZtl7vNwiX5AFJUQ=3D=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR11MB6522.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(7416014)(376014)(1800799024)(7053199007);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?iso-8859-1?Q?2X+eT5NGI/2pB3SRvc31R4EWCgTys8N5yGsVBa4O3I242u3YMLJ5B+Vwer?=
- =?iso-8859-1?Q?3rVXem6P/tE9EmlWISEl0KDDo477U59nMs0/sPhv91u4athw5z/ymkb18B?=
- =?iso-8859-1?Q?d47BPILdwj5cIajyIoE1Vws3FRPZuIUO929yLPSA2EXfGNKHj0SQk2Q1HD?=
- =?iso-8859-1?Q?bxp7d5QEHw2xeMt+LErjqf8sDyuXhc8lJxmzAl3tSpbMdfKdSOwCnAFmD8?=
- =?iso-8859-1?Q?JWc/7eVkwysarQuk+mtsYnF7ShWG9j35sYmPntgKfvwQ9iW1hY3Yxq+VLx?=
- =?iso-8859-1?Q?KPErNpLh4odN/YK6c3FgWSjnAS4zPdgyvHAJ5sPsiImIhJGUP2SG+4oD6g?=
- =?iso-8859-1?Q?1e75NQFACi6MczASlFbk7I3/XI7pl5gjXQa9R+7gR5SRJg0Rgp8PNvngZx?=
- =?iso-8859-1?Q?XXIVgBxWmG3NjTK1/749t3Xi5JcFyPqlqvathIVOmMvalTJCGENyonPrOD?=
- =?iso-8859-1?Q?FdhYC0+A1TqQJI0YyTvYe49xz0gSI/1ZVHwZGF31GrpS2UHJ3I7iJ2/+SO?=
- =?iso-8859-1?Q?penSfyuhkFy7kQet0DAuII37WPqIlfDMg165zkAHeU1X0TKROkdpTPNUlq?=
- =?iso-8859-1?Q?BPrmq1Lcj2nUYWs1NCqMIRNEEYA87QuTIzCc/EoPirpvRIAgQ0q5zW4MoJ?=
- =?iso-8859-1?Q?vUnl2Dnkwd8yCDOZA+cHLd92x6NFWKAEhfSYx3Us8Wq1zwM68FusMPKWxB?=
- =?iso-8859-1?Q?Oml+Pja9Yyk0hcjCWJGz4HDr5KTW2ac4OIPT0daBaaNQdeBhIHxsBaRZG6?=
- =?iso-8859-1?Q?yQ2ES3iHQVXjP01I7KsSHcejzhJxZZNRUNka1ApyalwxAIXDvcAYZ8iF7l?=
- =?iso-8859-1?Q?r00tUKSC6B93cX8ZUSEPEOpS/Z3WA8xlKszsoBOv39O79LQOnyuQMSVCx5?=
- =?iso-8859-1?Q?LhPxbHKzjppZR+Yx5+B1XJq3zQfMRkfabuYOyh0qRNhvuyf4BE/87ROY1b?=
- =?iso-8859-1?Q?/Q1wbVtYW6YN6YW6FDMYrr/iBZZsEfcIHhu3hJdgmlGAThO5LgmDSI0/b1?=
- =?iso-8859-1?Q?tZogsl4W5uC6TQW1kTs0mSDgQoh4oHr7mqozIeRMhcfliBervyidIT1OWD?=
- =?iso-8859-1?Q?9aaKvcEjvlYLKpeMqqFiZWM0MAO1fXBIIntNtHXJS+HPKj1yWJMTjjkldo?=
- =?iso-8859-1?Q?uDZRTqt7aQi1ChS2bOelf2Ao4J2F0sc+whnlxF8KEbIieEztQxtGETJhfV?=
- =?iso-8859-1?Q?xYaZ5DPnKJEsjZGih6Mm5IkGvg7L/aw2lc9EUD8rmIacYqZSkyvUoHUKWK?=
- =?iso-8859-1?Q?Xf2Gpf66dTHjiQ9zbT6kRXmBtviIYhjltetcaiaHRxq4X8uask8kM8kH1A?=
- =?iso-8859-1?Q?M5ASp4ft3L4gC4+G80/XXZALIrUzEfxMR4sg5vCMb4mP3c6z2mgd26O3Ww?=
- =?iso-8859-1?Q?+vhLu6Jur7HJLBkDbLUCirvGit42BtFk6Q8Q9oTgyiJY7JyVKHDMsEztcc?=
- =?iso-8859-1?Q?G/rawMZG2E2JaUv8Zq7dG5+L1FSPSmtVN3c9+d/dl92upSvAB5gRsKqsYJ?=
- =?iso-8859-1?Q?TrWlPBUs2C8Nvp+g6I9Q9B0gfx5y7RiXIjLf2jknhWsRdRUcEhNs2O6xuX?=
- =?iso-8859-1?Q?bjinHLBCUK7pNrXkzpbe+/pqBBqHviK1MFmTW6cnT/oOe4BtToZpxoCWvS?=
- =?iso-8859-1?Q?5PECLuMCLThnK/u5IUzwOyrqjDKDyvThrfK3D6vTAFezKXacMnACEoBg?=
- =?iso-8859-1?Q?=3D=3D?=
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2debb5b3-f71d-465c-051e-08de2eb8fe6e
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR11MB6522.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Nov 2025 20:02:01.7621
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: dt2fiaMkhQEKy3JZGkxgwpQbOk3SWPq+rUDLU5k6365ZHr/nwHb8d1emqBH4k1b8W5H9ZVMrlYseeX08vOnOBg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR11MB8455
-X-OriginatorOrg: intel.com
-X-Spamd-Bar: -----
-X-MailFrom: matthew.brost@intel.com
+Message-Id: <20251130-dma-buf-heap-clear-page-v1-1-a8dcea2a88ee@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x2MQQqDMBAAvyJ7dsFsU7F+RXrYxE2zYDUkWAri3
+ w0eB2bmgCJZpcDYHJDlp0W3tYJpG/CR14+gzpWBOnoaQy+cv4xuDxiFE/pFOGPiqpEdnKNHL9Z
+ bqHXKEvR/n6f3eV4/1KeyaQAAAA==
+X-Change-ID: 20251129-dma-buf-heap-clear-page-248bb236e4c4
+To: Sumit Semwal <sumit.semwal@linaro.org>,
+ Benjamin Gaignard <benjamin.gaignard@collabora.com>,
+ Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>,
+ "T.J. Mercier" <tjmercier@google.com>,
+ =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+X-Mailer: b4 0.14.3
+X-Spamd-Bar: ---
+X-MailFrom: linus.walleij@linaro.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: AFZOWHWLNFVYMDURCJU55XTC7SC4QEWA
-X-Message-ID-Hash: AFZOWHWLNFVYMDURCJU55XTC7SC4QEWA
-X-Mailman-Approved-At: Thu, 16 Apr 2026 15:07:26 +0000
-CC: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Sumit Semwal <sumit.semwal@linaro.org>, Gustavo Padovan <gustavo@padovan.org>, Felix Kuehling <Felix.Kuehling@amd.com>, Alex Deucher <alexander.deucher@amd.com>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Jani Nikula <jani.nikula@linux.intel.com>, Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Tvrtko Ursulin <tursulin@ursulin.net>, Huang Rui <ray.huang@amd.com>, Matthew Auld <matthew.auld@intel.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Lucas De Marchi <lucas.demarchi@intel.com>, Thomas =?iso-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, intel-xe@lists.freedeskt
- op.org, rust-for-linux@vger.kernel.org, Tvrtko Ursulin <tvrtko.ursulin@igalia.com>
+Message-ID-Hash: D3RIGYNZMT7FITCNY5FZOXY4HBWN3YEE
+X-Message-ID-Hash: D3RIGYNZMT7FITCNY5FZOXY4HBWN3YEE
+X-Mailman-Approved-At: Thu, 16 Apr 2026 15:07:27 +0000
+CC: linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Linus Walleij <linus.walleij@linaro.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 1/6] dma-buf/dma-fence: Add dma_fence_test_signaled_flag()
+Subject: [Linaro-mm-sig] [PATCH] dma-buf: heaps: Clear CMA pages with clear_page()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AFZOWHWLNFVYMDURCJU55XTC7SC4QEWA/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/D3RIGYNZMT7FITCNY5FZOXY4HBWN3YEE/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Transfer-Encoding: quoted-printable
-X-Spamd-Result: default: False [2.59 / 15.00];
-	DATE_IN_PAST(1.00)[3331];
-	R_DKIM_REJECT(1.00)[intel.com:s=Intel];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [-0.01 / 15.00];
+	DATE_IN_PAST(1.00)[3292];
+	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
 	MAILLIST(-0.20)[mailman];
-	DMARC_POLICY_SOFTFAIL(0.10)[intel.com : SPF not aligned (relaxed),none];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[28];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FREEMAIL_CC(0.00)[amd.com,linaro.org,padovan.org,gmail.com,ffwll.ch,linux.intel.com,intel.com,ursulin.net,kernel.org,suse.de,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.freedeskt,igalia.com];
-	RCVD_TLS_LAST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email,lstrano-desk.jf.intel.com:mid,igalia.com:email,patchwork.freedesktop.org:url,intel.com:email];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.240];
-	FROM_NEQ_ENVFROM(0.00)[matthew.brost@intel.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:-];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	ARC_NA(0.00)[];
+	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	MISSING_XM_UA(0.00)[];
-	RCVD_COUNT_SEVEN(0.00)[9]
-X-Rspamd-Queue-Id: EA6AF410F2F
+	RCPT_COUNT_SEVEN(0.00)[10];
+	NEURAL_SPAM(0.00)[0.597];
+	FROM_NEQ_ENVFROM(0.00)[linus.walleij@linaro.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:mid,linaro.org:email];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[]
+X-Rspamd-Queue-Id: 82601410F36
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Thu, Nov 27, 2025 at 11:16:26AM +0100, Philipp Stanner wrote:
-> On Thu, 2025-11-27 at 11:01 +0100, Christian K=F6nig wrote:
-> > On 11/27/25 10:16, Philipp Stanner wrote:
-> > > On Thu, 2025-11-27 at 09:11 +0100, Christian K=F6nig wrote:
-> > > > On 11/26/25 17:55, Matthew Brost wrote:
-> > > > > On Wed, Nov 26, 2025 at 08:41:27AM -0800, Matthew Brost wrote:
-> > > > > > On Wed, Nov 26, 2025 at 02:19:10PM +0100, Philipp Stanner wrote:
-> > > > > > > The dma_fence framework checks at many places whether the sig=
-naled flag
-> > > > > > > of a fence is already set. The code can be simplified and mad=
-e more
-> > > > > > > readable by providing a helper function for that.
-> > > > > > >=20
-> > > > > > > Add dma_fence_test_signaled_flag(), which only checks whether=
- a fence is
-> > > > > > > signaled. Use it internally.
-> > > > > > >=20
-> > > > > > > Suggested-by: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>
-> > > > > > > Signed-off-by: Philipp Stanner <phasta@kernel.org>
-> > > > > >=20
-> > > > > > This is a nice cleanp:
-> > > > > > Reviewed-by: Matthew Brost <matthew.brost@intel.com>
-> > > > > >=20
-> > > > > > > ---
-> > > > > > > =A0drivers/dma-buf/dma-fence.c | 19 +++++++++----------
-> > > > > > > =A0include/linux/dma-fence.h=A0=A0 | 24 +++++++++++++++++++++=
-+--
-> > > > > > > =A02 files changed, 31 insertions(+), 12 deletions(-)
-> > > > > > >=20
-> > > > > > > diff --git a/drivers/dma-buf/dma-fence.c b/drivers/dma-buf/dm=
-a-fence.c
-> > > > > > > index 39e6f93dc310..25117a906846 100644
-> > > > > > > --- a/drivers/dma-buf/dma-fence.c
-> > > > > > > +++ b/drivers/dma-buf/dma-fence.c
-> > > > > > > @@ -372,8 +372,7 @@ int dma_fence_signal_timestamp_locked(str=
-uct dma_fence *fence,
-> > > > > > > =A0
-> > > > > > > =A0	lockdep_assert_held(fence->lock);
-> > > > > > > =A0
-> > > > > > > -	if (unlikely(test_and_set_bit(DMA_FENCE_FLAG_SIGNALED_BIT,
-> > > > > > > -				=A0=A0=A0=A0=A0 &fence->flags)))
-> > > > >=20
-> > > > > I need to read a little better, I think this change isn't quite r=
-ight.
-> > > > > The original code is test and set, the updated code is test only =
-(i.e.,
-> > > > > you are missing the set step). So maybe just leave this line as i=
-s.
-> > > >=20
-> > > > Oh, good point! I've totally missed that as well.
-> > >=20
-> > > Oh dear; I also just saw it when opening the mail client ._.
-> > >=20
-> > > >=20
-> > > > But that means that this patch set hasn't even been smoke tested.
-> > >=20
-> > > I've built it and did some basic testing with my Nouveau system. Any
-> > > suggestions? Do you have a CI that one can trigger?
+clear_page() translates into memset(*p, 0, PAGE_SIZE) on some
+architectures, but on the major architectures it will call
+an optimized assembly snippet so use this instead of open
+coding a memset().
 
-Intel's Xe list will trigger CI - you are authorized to trigger that
-flow. Navigate to Intel's list patchworks [1], find your series and see
-the results. It is noisy, so also certainly to say failure but I let you
-know if anything is actually a problem.
+Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
+---
+ drivers/dma-buf/heaps/cma_heap.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Matt
+diff --git a/drivers/dma-buf/heaps/cma_heap.c b/drivers/dma-buf/heaps/cma_heap.c
+index 0df007111975..9eaff80050f2 100644
+--- a/drivers/dma-buf/heaps/cma_heap.c
++++ b/drivers/dma-buf/heaps/cma_heap.c
+@@ -315,7 +315,7 @@ static struct dma_buf *cma_heap_allocate(struct dma_heap *heap,
+ 		while (nr_clear_pages > 0) {
+ 			void *vaddr = kmap_local_page(page);
+ 
+-			memset(vaddr, 0, PAGE_SIZE);
++			clear_page(vaddr);
+ 			kunmap_local(vaddr);
+ 			/*
+ 			 * Avoid wasting time zeroing memory if the process
 
-[1] https://patchwork.freedesktop.org/project/intel-xe/series/?ordering=3D-=
-last_updated
+---
+base-commit: 3a8660878839faadb4f1a6dd72c3179c1df56787
+change-id: 20251129-dma-buf-heap-clear-page-248bb236e4c4
 
-> >=20
-> > DMA-buf has CONFIG_DMABUF_SELFTESTS which should be able to catch thing=
-s like that.
-> >=20
-> > But even running Nouveau should have found this since basically no fenc=
-e at would signal any more.
->=20
-> They will signal and execute their callbacks, but all is_signaled()
-> checks are then broken.
->=20
-> Thx for the feedback, I'll be more careful with changes like those and
-> test more extensively.
->=20
-> P.
+Best regards,
+-- 
+Linus Walleij <linus.walleij@linaro.org>
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
