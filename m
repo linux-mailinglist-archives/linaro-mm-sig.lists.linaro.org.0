@@ -2,208 +2,227 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sHpdO7sB4WmJoQAAu9opvQ
+	id IMqiJ8MB4WmJoQAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:35:23 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:35:31 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id E1B72410F3D
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:35:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 502AF410F45
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:35:31 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id F0826445E6
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:35:21 +0000 (UTC)
-Received: from invmail4.hynix.com (exvmail4.hynix.com [166.125.252.92])
-	by lists.linaro.org (Postfix) with ESMTP id 326BF3F815
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  1 Dec 2025 07:18:35 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 64895443EA
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:35:30 +0000 (UTC)
+Received: from PH0PR06CU001.outbound.protection.outlook.com (mail-westus3azon11011059.outbound.protection.outlook.com [40.107.208.59])
+	by lists.linaro.org (Postfix) with ESMTPS id 0D4F93F80B
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  1 Dec 2025 09:20:56 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=none;
-	spf=pass (lists.linaro.org: domain of byungchul@sk.com designates 166.125.252.92 as permitted sender) smtp.mailfrom=byungchul@sk.com;
-	dmarc=none
-X-AuditID: a67dfc5b-c2dff70000001609-83-692d41486292
-Date: Mon, 1 Dec 2025 16:18:27 +0900
-From: Byungchul Park <byungchul@sk.com>
-To: Matthew Wilcox <willy@infradead.org>
-Message-ID: <20251201071827.GA70324@system.software.com>
-References: <20251002081247.51255-1-byungchul@sk.com>
- <20251002081247.51255-45-byungchul@sk.com>
- <20251119105312.GA11582@system.software.com>
- <aR3WHf9QZ_dizNun@casper.infradead.org>
+	dkim=pass header.d=Nvidia.com header.s=selector2 header.b=ASxw0RCW;
+	spf=pass (lists.linaro.org: domain of nirmoyd@nvidia.com designates 40.107.208.59 as permitted sender) smtp.mailfrom=nirmoyd@nvidia.com;
+	dmarc=pass (policy=reject) header.from=nvidia.com;
+	arc=pass ("microsoft.com:s=arcselector10001:i=1")
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=r6xqZRR+w+GAwhLs8Lbv3YRATScMrklc1sjayuihT7gcIpHwGCvuySmldNCndTQwqYn+e+4sUvBKzKzcTXKIKXC/HCuVTO/P3Vwr/E8Y9aIMIEKK1e4D0ahEU7uE9C3MUl4tU7W0ekzXDA3ADh84niOA/CjFVnLV17iaeufx2nkGLe5EppSBFj6PPtB69tTcjKLBIhtsaZ8Ib99F6ZIZ1+XgyEnm3la27qJshGhz8ECVWeqMy247fw0I9mGPP057w5+obcz65ujSSkYZ6CG6wFMjUjEBJdoUr3X0tGXXOWqRPpQIybDfEErtQ2lcEmFWnxrLPT66Y+qgH23yBYDxDQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=s8mPR5CRXGdC+GCT3JS8pnbhb5XGaHg0GwzpaasRb4M=;
+ b=FFR95bCWECLPTagcxd6D4fiK+Vx5F+Xi+Inp3vSOgjBYCt5/xSh3jjorCQBwNW79n+t5dY+4rQJD+uJhlDAezo0RGaperTFXmHVQcYGP0ZuwLqZpRGe+GvpO094QlTD8hxRczDrDU88sG85SjLWqCVBHgwTT0G1cRFxVEA+wn4ixpq3Xz2WVL7hd0R67/yRIDutGcrHVo7PtIg9XgVSK003dWoGqlI4/XxCiqcJFNHLis7ggqQNYzeODKJ6P2/eV8YZYj8CXukefbdy9C2XL7D66ELSqYvA+BjX9AxXftsRIlOHIXEQ56HsS3eoQEWr4GKrvJPIOKLm8UiIEXLTacg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.117.161) smtp.rcpttodomain=linaro.org smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=s8mPR5CRXGdC+GCT3JS8pnbhb5XGaHg0GwzpaasRb4M=;
+ b=ASxw0RCW9gtBNBCk5D0enBoPiGFCRdJ6yFzOxE+ziZ3T+3uXwrSXRBn3j9+mS9LCb1oF9qGZm0hmsGvbHnISmTzJDNVZaH+jAmF8K97U3w9GCcKCIVJUfIahiOKIUa7ZwhQfuIJW9kXQ/afuYB5uO+/DtPL4ELNNXqHN1mZcrt9PIHIop/KmTFcnQsDqf9i+Y7GtxAgALzxG4u4WJ6id5iqG6THSHY14V+BOh1WdlIVidTw011KmfX/kWVQjeE8srG5hX7TqfYAmJTNLGC6wpMojGt24/eBm9ybzLCchZAHzqup/j7D7/C4vEQKCZF3JB4bZUSsM6SWinkKxj17yqA==
+Received: from PH7PR10CA0011.namprd10.prod.outlook.com (2603:10b6:510:23d::12)
+ by MN2PR12MB4095.namprd12.prod.outlook.com (2603:10b6:208:1d1::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.17; Mon, 1 Dec
+ 2025 09:20:52 +0000
+Received: from CO1PEPF000044F6.namprd21.prod.outlook.com
+ (2603:10b6:510:23d:cafe::2f) by PH7PR10CA0011.outlook.office365.com
+ (2603:10b6:510:23d::12) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9366.17 via Frontend Transport; Mon,
+ 1 Dec 2025 09:20:45 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
+ smtp.mailfrom=nvidia.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.161) by
+ CO1PEPF000044F6.mail.protection.outlook.com (10.167.241.196) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9412.0 via Frontend Transport; Mon, 1 Dec 2025 09:20:51 +0000
+Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
+ (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 1 Dec
+ 2025 01:20:26 -0800
+Received: from [10.221.129.205] (10.126.231.35) by rnnvmail201.nvidia.com
+ (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 1 Dec
+ 2025 01:20:23 -0800
+Message-ID: <f00bdc19-58cd-45a6-a57d-7b7612197c71@nvidia.com>
+Date: Mon, 1 Dec 2025 10:20:21 +0100
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <aR3WHf9QZ_dizNun@casper.infradead.org>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-X-Brightmail-Tracker: H4sIAAAAAAAAA02SbUxTZxTHfe597tPbjppr5+QO3OLqFjYcbDg+nET34pLF6zcz/KDbktnI
-	jXQrxRRFWGLCpih2jkGXQiwvwTK6hncBCYidlWGxvsSCDDoDxWoHY6WSCK1vtbV3xsxvv5z/
-	P7+ckxyWVtWTFFar3y8a9BqdmiiwIpRkzdi2JUP7/qm5JAgvl2Oo62wj4OloRTATLkdQNhDH
-	8MTkkkHc4UJQPWqiYakrRiD4xz0EZn+AwKLtBIL5i1thMrKAwBaIURBwHkNQY/YgcNh/IHAj
-	sBLGw4sE3OYfCYRG6yi420WgvtaE4HBTJ4HRYJSCqWoTBTO2WQw18wSqTydDbc1hCh7aWmRw
-	tWkKQ9SfBfHGAnC1zslg+mczBrdvgoHgrInAzMhRBpbH/RSUnw1j6L6TCBw3N8DJhikC5xxu
-	DOVPlhG4+m9TcKLrDAO+tjgDpbX3GRhr9WC44rqE4frZdgaaJ0cp8N/yMtBz7SoNkYpU8FT9
-	xIC38m8E7XetidMjNhps4UUZjDkbqU9yhftlFVho6emjhLaGNiQ8fmRCQlllgo70HBSarywQ
-	4VH4TyJUXcsQBizTMqGx+4BwZDjECD32dKHp3Dwl3Ax+KHS3HCfbN3yh2Jwr6rRFouG9j3Yr
-	8qYrl/G+wdeLLWMfl6LZZCOSszyXzdtb/eQ5zw0ZKYkx9yZf7/DJJCZcGu/1PqSNiGVXc2/z
-	C70bjUjB0pw1lW+/fIGROi9zOj4y3PFfX8kBf+P3DloqqbhBxI8fPc08C1bx7pMBLDHNpfPe
-	2DwlSWkulf8txkpjeWKHv6zHaIlf4dbzzr4RSvLw3G05750M0c8WfZW/YPfiSsRZXtBaXtBa
-	/tc2IroFqbT6onyNVpedmVei1xZn7inI70aJp7Udin7Zj+55coYQxyJ1kvISvKtVMZqiwpL8
-	IcSztHq1Ul2cGClzNSXfiYaCrw0HdGLhEEplsTpZuTFyMFfF7dXsF78VxX2i4XlKsfKUUtQ8
-	8XiJ8772zs6R6Bvu2L++rcKEHHfZ085s7t/DpH1a7ZFT/3yQs2bTul2bhCyS6VxheaniutM9
-	8v3ayRWXnb+49Au/horOH+q9deer7OBSThyqjNt2ftbQa36rJnJqQCXboewbXptdxzWtubjl
-	85S8CiZ9av3gg3XWVbs7v3mwMupT48I8TVY6bSjUPAXJGGhesAMAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA01Sa0xTZxjOd77vXOhWc8ZYOIFkP+rM0Igbi0ve3S8/1i8zW/ZvixpHM462
-	tlzSYge6LVxkYFlYaVKILUxWY2VQELlFJCUVJ5s6xFIvbLMi2IGMW8IKCpR27ZZl/nnzvM/l
-	zfPjFXByhE0TdHmFsjFPY1BxCqL48LXyTPpOpu7FR20quFXqI7AcriLQcMbDQVXncRaut7ci
-	GF+uQvBw3Ymhoi9GYMM2xEN49XceYt4hBHV+GwZPdykDf3VEOZi9uITAPhHioH6mlMCi+xsE
-	jiknDzOX1DA/3s9CLDjNwO2VOQTuUJSBkK8SwUadHk64ujhYHx7BUG+/juD7iSCGBx1xsXvo
-	LgJvcxkHf1h7MARCm+DG8iIHl+3VHMz7GxhY6OCgqczLQqPThqD85BkO6ho7CfTdO8+DfzbC
-	wJ06GwOtnR/AuHuKwFWri4n3i7vOpoKzvpyJjwcM2Nv6GVh1t/Dwy8k7BNwlW8A5HGBhstnB
-	Q2QiC2JN+TDUOs1D8Fs7gfb5EfZtO6IPK2oIbenqZWjF6AZHPd95EF1fsyEaPlWOaYU1vl6c
-	W8T0aNfn9NTVOY6uLd/kqHelidArLonWDmfSPkeQp0cHfuM/enW34vUc2aAzy8YX3sxWaIPW
-	MCnof7bIMfpWCZpKtaAkQRJ3StODFiaBific1Oi9yycwJz4vjY2tYgsShBQxQ5rrfsmCFAIW
-	XelS25ULbMLztGiQVn5s/8evFEEKDLTjhClZ7EfSja/Psv8KT0mXj4dIAmNxmzQWnWESR7GY
-	Lp2OCgk6Kd7hV1clTuBnxM2Sr/cnxoqUjsfSjsfSjv/TTQi3oBRdnjlXozO8vMOk1xbn6Yp2
-	fJaf24niP+n+MlJ7DoUD6kEkCkj1pNKXtV2XzGrMpuLcQSQJWJWiVBXFKWWOpviwbMz/1HjI
-	IJsGUbpAVKnK9z+Ws5PFA5pCWS/LBbLxP5URktJK0KUv+gw379uqLT0/74vM9h47uLB1tDn7
-	vVfozO0cbYqbS8uoqVnV7iI7B7aqf2iIXdsYOFK2J0N9f+Keb61Mv3tL4ea9ud1Lfx6RGw9W
-	F+yvqZy/9u4bS/vMh4NVZv9X0U88PXseHTpREqhd2zSyt239Qv2Cfpf3Ftq/3R89P3nsiUm1
-	ipi0mqxt2GjS/A2TVMQejwMAAA==
-X-CFilter-Loop: Reflected
-X-Spamd-Bar: -
-X-MailFrom: byungchul@sk.com
+User-Agent: Mozilla Thunderbird
+To: Linus Walleij <linus.walleij@linaro.org>, Sumit Semwal
+	<sumit.semwal@linaro.org>, Benjamin Gaignard
+	<benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>,
+	John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>,
+	=?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+References: <20251130-dma-buf-heap-clear-page-v1-1-a8dcea2a88ee@linaro.org>
+Content-Language: en-US
+From: Nirmoy Das <nirmoyd@nvidia.com>
+In-Reply-To: <20251130-dma-buf-heap-clear-page-v1-1-a8dcea2a88ee@linaro.org>
+X-Originating-IP: [10.126.231.35]
+X-ClientProxiedBy: rnnvmail203.nvidia.com (10.129.68.9) To
+ rnnvmail201.nvidia.com (10.129.68.8)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PEPF000044F6:EE_|MN2PR12MB4095:EE_
+X-MS-Office365-Filtering-Correlation-Id: 31a4a39b-3955-4bb5-e315-08de30baebe1
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|36860700013|82310400026|7416014|376014|1800799024|7053199007;
+X-Microsoft-Antispam-Message-Info: 
+	=?utf-8?B?emtLQmV6dUhYZWl6QmVqU2dtREtCcVpnbGs5VGpYV0xqcHZXYjhnSnAwdk90?=
+ =?utf-8?B?Wm11YlV6bHdLYTh6MlBxb3d5UFUxcFNPejBIaE1RUkU5eFU2blhleWM4Nmxk?=
+ =?utf-8?B?eFY1YmVnWmdNZk1rR1RWbzRqLzlTbjhETzdubEppazF2RmFoOHFOT0Zid1VD?=
+ =?utf-8?B?czJUK3cxWmk1WkU0NXIyUmVNajFJbGFnUVFXaW5qdmhtN2o4L2t4Yzl3cmY5?=
+ =?utf-8?B?dk9rT2VyN2hWeWxkSFhBOWdwZjI4R0hjRHoxWTMwWTEvL0lEZDh1ZVRIbDZ3?=
+ =?utf-8?B?QXRCellGQkU0ckRWRmlheHVhWXlLbk1icjNudkpobStRS213Y0lHRm1XWHpa?=
+ =?utf-8?B?eUMvQjNXMk1vYWRHVTBERHNzbmJzcXJXaG5ZQ3ltN0Zub0FaVjQrZUhJS3FY?=
+ =?utf-8?B?RzFpZU1FY2N3VVpNVDdZeHgvdVpRSVd5U2JVYnJlRE9nZFozZkZBZHJhTjBr?=
+ =?utf-8?B?TnN2YnVDRC9SSXVMaFJRQmhDaVBWRlcwcUhLV09QSkljQzFMR0F3ekxXYU5M?=
+ =?utf-8?B?STVLV0JhcVo2SXRPSXdyYzBGLzJvSDVIeksvT1p3cUpHQlA3QUMzdXl4YWxu?=
+ =?utf-8?B?d2ZYT2xNd3lPWGkvQlgxc1BSNnBMQjFwS2hQL3lsNVdXbmlTSjFMS3pkNmVV?=
+ =?utf-8?B?b0pBN2NCR1RSelowMlVBbXdGa05zdC9obFQ1MUY0eTZicEw0ZTQrNDFZUmJI?=
+ =?utf-8?B?V05abkNueEtQYW9vaVVaeVV3QjlTVjdEcFlBcWlpSThXZGFxa1JzamR6NTJM?=
+ =?utf-8?B?SHphNnFRcjhneEJwZmVZWTB1UnZUQ2U5elUwbXZWbmVZSnY2Y3JEZkNDRzVz?=
+ =?utf-8?B?cXAwRkNQN1kvR0VtWTBTeDRSeC8vMW1jLzBnaEtsZWRRa2dXQkloRUhSSDdS?=
+ =?utf-8?B?SzR1QzExc0JONFQxc1laREVScFVTVVdQcksxekRBVlJocVZpT1hBUllhdk1C?=
+ =?utf-8?B?b20xK0RiVWozRWw5R0I4VkJsNlNuVXR3V005bForYm5QalRwcDhBbGRwbFdD?=
+ =?utf-8?B?dFlYK2QvbDFzVlVKSGJTdHpMMUNpSDRmd0VqSm81c0wweGpzb2JmUndqSmZS?=
+ =?utf-8?B?ZUp4d0ZLWkhaL0hYK01KOFZ6dFRtMUtRSzhEYXdDRDc4cXlNYmR2SCtKQkwx?=
+ =?utf-8?B?T2R0enNjTDN5RFdBcGlYcjJpQkJqbzNiemlWOCsyUXVrU3ZJdXN4dkFXL2Ra?=
+ =?utf-8?B?ZDVWU3k3QXFpRnIxZFpOZmQ5bHNqWCszcVA4SzN4blVSL2NocDlCVUxiUjI2?=
+ =?utf-8?B?VHI1aFJ5VG05Sm1pVDhSUWNRN2RaN0lWSVc5R0NTdDV6bm5VaExJUS8vaUxH?=
+ =?utf-8?B?TmQ3ZWhBMTZ1MXhSUi9lR1lhMG5CbkZ1UDV4K2FCVStUU1BiZHJBVXVIblcw?=
+ =?utf-8?B?UmpJaVhQWUExTTZQL0hYcHFZeFFGcVJGTFAyRTJYQWQxdkJGbEtscjJsM1JQ?=
+ =?utf-8?B?Qk9jOHVkWkJQOURsdDRzL1UzOG92dXEzV25raUlpcjBJUEpFdUVxQU50R0NK?=
+ =?utf-8?B?SGxMQlpORU1DcGJaSlBHMTlydnFQN3F0SzJrVmgyRWtZcHR4aXVRY1NXMjNH?=
+ =?utf-8?B?TnJkZ3RVOHR0MDlNRFcvUS9HS3UzU1drOEdaejVvTmlJRXI2Zml3VTA5K0Q4?=
+ =?utf-8?B?NWR3VlBsY0JaUncxSVIwdXNiTWFpMGZCUDl4ZzdJY2JOWlBGcjNhb3pUNUY4?=
+ =?utf-8?B?Zm4vS2RxMVJROTNrb3pyT3VWcUpJSER4WWJ3RXJlR2lFa1U4VlArcXFDSm1F?=
+ =?utf-8?B?QWRUdEhZMGxHYk9FSzJjcHE4WHVmSkxidGN4a2pGMjhGMHd6SnAzaWNOclZ4?=
+ =?utf-8?B?VEgvWGpNaTBwUUc1NklYZjBDb2ZtSWYyVEZsQ1BpSnJvVE44TFNxUmJnQkNF?=
+ =?utf-8?B?bWRnVEsvVk53eWpFYkNycFB3MXlTcVBHS1pnMXlyNExpN1FNK21WaTRRc0pE?=
+ =?utf-8?B?SVdzemdvZDBUekIvZjBIdkcvK0NzYWFuK1VJb1lBZURvSW1VNmhJdFphTitn?=
+ =?utf-8?B?YTlGaVRXRU9yc3RaanB4Q3ZDNEdQd250ZU1CQ20xd1Z5L2NnK1J2V1lsZjVW?=
+ =?utf-8?B?SFppN3c3d2NZSE1aMWo4bk5TKzBhakltbUl4MnJMZkxiSVVqNmJ1QzRtN3d2?=
+ =?utf-8?Q?GNMM=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:216.228.117.161;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:dc6edge2.nvidia.com;CAT:NONE;SFS:(13230040)(36860700013)(82310400026)(7416014)(376014)(1800799024)(7053199007);DIR:OUT;SFP:1101;
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Dec 2025 09:20:51.1791
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 31a4a39b-3955-4bb5-e315-08de30baebe1
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.117.161];Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	CO1PEPF000044F6.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4095
+X-Spamd-Bar: -----
+X-MailFrom: nirmoyd@nvidia.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: K4TO2HB4EIA7NZXWWXDY6T5DWGV543WW
-X-Message-ID-Hash: K4TO2HB4EIA7NZXWWXDY6T5DWGV543WW
-X-Mailman-Approved-At: Thu, 16 Apr 2026 15:07:27 +0000
-CC: linux-kernel@vger.kernel.org, kernel_team@skhynix.com, torvalds@linux-foundation.org, damien.lemoal@opensource.wdc.com, linux-ide@vger.kernel.org, adilger.kernel@dilger.ca, linux-ext4@vger.kernel.org, mingo@redhat.com, peterz@infradead.org, will@kernel.org, tglx@linutronix.de, rostedt@goodmis.org, joel@joelfernandes.org, sashal@kernel.org, daniel.vetter@ffwll.ch, duyuyang@gmail.com, johannes.berg@intel.com, tj@kernel.org, tytso@mit.edu, david@fromorbit.com, amir73il@gmail.com, gregkh@linuxfoundation.org, kernel-team@lge.com, linux-mm@kvack.org, akpm@linux-foundation.org, mhocko@kernel.org, minchan@kernel.org, hannes@cmpxchg.org, vdavydov.dev@gmail.com, sj@kernel.org, jglisse@redhat.com, dennis@kernel.org, cl@linux.com, penberg@kernel.org, rientjes@google.com, vbabka@suse.cz, ngupta@vflare.org, linux-block@vger.kernel.org, josef@toxicpanda.com, linux-fsdevel@vger.kernel.org, jack@suse.cz, jlayton@kernel.org, dan.j.williams@intel.com, hch@infradead.org, djwong@kernel.org, dri-devel
- @lists.freedesktop.org, rodrigosiqueiramelo@gmail.com, melissa.srw@gmail.com, hamohammed.sa@gmail.com, harry.yoo@oracle.com, chris.p.wilson@intel.com, gwan-gyeong.mun@intel.com, max.byungchul.park@gmail.com, boqun.feng@gmail.com, longman@redhat.com, yunseong.kim@ericsson.com, ysk@kzalloc.com, yeoreum.yun@arm.com, netdev@vger.kernel.org, matthew.brost@intel.com, her0gyugyu@gmail.com, corbet@lwn.net, catalin.marinas@arm.com, bp@alien8.de, dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com, luto@kernel.org, sumit.semwal@linaro.org, gustavo@padovan.org, christian.koenig@amd.com, andi.shyti@kernel.org, arnd@arndb.de, lorenzo.stoakes@oracle.com, Liam.Howlett@oracle.com, rppt@kernel.org, surenb@google.com, mcgrof@kernel.org, petr.pavlu@suse.com, da.gomez@kernel.org, samitolvanen@google.com, paulmck@kernel.org, frederic@kernel.org, neeraj.upadhyay@kernel.org, joelagnelf@nvidia.com, josh@joshtriplett.org, urezki@gmail.com, mathieu.desnoyers@efficios.com, jiangshanlai@gmail.com, qiang
- .zhang@linux.dev, juri.lelli@redhat.com, vincent.guittot@linaro.org, dietmar.eggemann@arm.com, bsegall@google.com, mgorman@suse.de, vschneid@redhat.com, chuck.lever@oracle.com, neil@brown.name, okorniev@redhat.com, Dai.Ngo@oracle.com, tom@talpey.com, trondmy@kernel.org, anna@kernel.org, kees@kernel.org, bigeasy@linutronix.de, clrkwllms@kernel.org, mark.rutland@arm.com, ada.coupriediaz@arm.com, kristina.martsenko@arm.com, wangkefeng.wang@huawei.com, broonie@kernel.org, kevin.brodsky@arm.com, dwmw@amazon.co.uk, shakeel.butt@linux.dev, ast@kernel.org, ziy@nvidia.com, yuzhao@google.com, baolin.wang@linux.alibaba.com, usamaarif642@gmail.com, joel.granados@kernel.org, richard.weiyang@gmail.com, geert+renesas@glider.be, tim.c.chen@linux.intel.com, linux@treblig.org, alexander.shishkin@linux.intel.com, lillian@star-ark.net, chenhuacai@kernel.org, francesco@valla.it, guoweikang.kernel@gmail.com, link@vivo.com, jpoimboe@kernel.org, masahiroy@kernel.org, brauner@kernel.org, thomas.weissschuh@l
- inutronix.de, oleg@redhat.com, mjguzik@gmail.com, andrii@kernel.org, wangfushuai@baidu.com, linux-doc@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-i2c@vger.kernel.org, linux-arch@vger.kernel.org, linux-modules@vger.kernel.org, rcu@vger.kernel.org, linux-nfs@vger.kernel.org, linux-rt-devel@lists.linux.dev
+Message-ID-Hash: F7YCZSX2NWP3REPJVOD675GOL5IEHIPJ
+X-Message-ID-Hash: F7YCZSX2NWP3REPJVOD675GOL5IEHIPJ
+X-Mailman-Approved-At: Thu, 16 Apr 2026 15:07:28 +0000
+CC: linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v17 44/47] dept: introduce APIs to set page usage and use subclasses_evt for the usage
+Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf: heaps: Clear CMA pages with clear_page()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/K4TO2HB4EIA7NZXWWXDY6T5DWGV543WW/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/F7YCZSX2NWP3REPJVOD675GOL5IEHIPJ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [1.99 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	DATE_IN_PAST(1.00)[3272];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+X-Spamd-Result: default: False [4.49 / 15.00];
+	DMARC_POLICY_REJECT(2.00)[nvidia.com : SPF not aligned (relaxed),reject];
+	DATE_IN_PAST(1.00)[3270];
+	R_DKIM_REJECT(1.00)[Nvidia.com:s=selector2];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,skhynix.com,linux-foundation.org,opensource.wdc.com,dilger.ca,redhat.com,infradead.org,kernel.org,linutronix.de,goodmis.org,joelfernandes.org,ffwll.ch,gmail.com,intel.com,mit.edu,fromorbit.com,linuxfoundation.org,lge.com,kvack.org,cmpxchg.org,linux.com,google.com,suse.cz,vflare.org,toxicpanda.com,lists.freedesktop.org,oracle.com,ericsson.com,kzalloc.com,arm.com,lwn.net,alien8.de,linux.intel.com,zytor.com,linaro.org,padovan.org,amd.com,arndb.de,suse.com,nvidia.com,joshtriplett.org,efficios.com,linux.dev,suse.de,brown.name,talpey.com,huawei.com,amazon.co.uk,linux.alibaba.com,glider.be,treblig.org,star-ark.net,valla.it,vivo.com,l,baidu.com,lists.infradead.org,lists.linaro.org,lists.linux.dev];
-	DMARC_NA(0.00)[sk.com];
-	FROM_HAS_DN(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email,nvidia.com:mid,nvidia.com:email];
+	SUSPICIOUS_AUTH_ORIGIN(0.00)[];
+	GREYLIST(0.00)[pass,meta];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[Nvidia.com:-];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_NEQ_ENVFROM(0.00)[byungchul@sk.com,linaro-mm-sig-bounces@lists.linaro.org];
+	HAS_XOIP(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[nirmoyd@nvidia.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[149];
-	R_DKIM_NA(0.00)[];
-	NEURAL_HAM(-0.00)[-0.951];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,renesas];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email,system.software.com:mid]
-X-Rspamd-Queue-Id: E1B72410F3D
+	NEURAL_HAM(-0.00)[-0.765];
+	RCPT_COUNT_SEVEN(0.00)[10];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	RCVD_COUNT_SEVEN(0.00)[7]
+X-Rspamd-Queue-Id: 502AF410F45
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Wed, Nov 19, 2025 at 02:37:17PM +0000, Matthew Wilcox wrote:
-> On Wed, Nov 19, 2025 at 07:53:12PM +0900, Byungchul Park wrote:
-> > On Thu, Oct 02, 2025 at 05:12:44PM +0900, Byungchul Park wrote:
-> > > False positive reports have been observed since dept works with the
-> > > assumption that all the pages have the same dept class, but the class
-> > > should be split since the problematic call paths are different depending
-> > > on what the page is used for.
-> > >
-> > > At least, ones in block device's address_space and ones in regular
-> > > file's address_space have exclusively different usages.
-> > >
-> > > Thus, define usage candidates like:
-> > >
-> > >    DEPT_PAGE_REGFILE_CACHE /* page in regular file's address_space */
-> > >    DEPT_PAGE_BDEV_CACHE    /* page in block device's address_space */
-> > >    DEPT_PAGE_DEFAULT       /* the others */
-> >
-> > 1. I'd like to annotate a page to DEPT_PAGE_REGFILE_CACHE when the page
-> >    starts to be associated with a page cache for fs data.
-> >
-> > 2. And I'd like to annotate a page to DEPT_PAGE_BDEV_CACHE when the page
-> >    starts to be associated with meta data of fs e.g. super block.
-> >
-> > 3. Lastly, I'd like to reset the annotated value if any, that has been
-> >    set in the page, when the page ends the assoication with either page
-> >    cache or meta block of fs e.g. freeing the page.
-> >
-> > Can anyone suggest good places in code for the annotation 1, 2, 3?  It'd
-> > be totally appreciated. :-)
-> 
-> I don't think it makes sense to track lock state in the page (nor
-> folio).  Partly bcause there's just so many of them, but also because
-> the locking rules don't really apply to individual folios so much as
-> they do to the mappings (or anon_vmas) that contain folios.
 
-I've been trying to fully understand what you meant but maybe failed.
-
-FWIW, dept is working based on classification, not instance by instance,
-that is similar to lockdep.  This patch is for resolving issues that
-might come from the fact that there is a **single class** for PG_locked,
-by splitting the class to several ones according to their usages.
-
-> If you're looking to find deadlock scenarios, I think it makes more
-> sense to track all folio locks in a given mapping as the same lock
-> type rather than track each folio's lock status.
-> 
-> For example, let's suppose we did something like this in the
-> page fault path:
-> 
-> Look up and lock a folio (we need folios locked to insert them into
-> the page tables to avoid a race with truncate)
-> Try to allocate a page table
-> Go into reclaim, attempt to reclaim a folio from this mapping
-
-I think you are talking about nested lock patterns involving PG_locked.
-
-Even though dept can do much more jobs than just tracking nested lock
-patterns within a single context, of course, nested lock patterns
-involving PG_locked should be handled appropriately, maybe with the
-useful information you gave.  When I work on handling nested locks esp.
-involving PG_locked, I will try to get you again.  Thanks.
-
-However, I have no choice but to keep this approach for the **single
-class** issue.  Feel free to ask if any.
-
-	Byungchul
-
-> We ought to detect that as a potential deadlock, regardless of which
-> folio in the mapping we attempt to reclaim.  So can we track folio
-> locking at the mapping/anon_vma level instead?
-> 
+On 30.11.25 11:54, Linus Walleij wrote:
+> clear_page() translates into memset(*p, 0, PAGE_SIZE) on some
+> architectures, but on the major architectures it will call
+> an optimized assembly snippet so use this instead of open
+> coding a memset().
+>
+> Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
+Reviewed-by: Nirmoy Das <nirmoyd@nvidia.com>
 > ---
-> 
-> My current understanding of folio locking rules:
-> 
-> If you hold a lock on folio A, you can take a lock on folio B if:
-> 
-> 1. A->mapping == B->mapping and A->index < B->index
->    (for example writeback; we take locks on all folios to be written
->     back in order)
-> 2. !S_ISBLK(A->mapping->host) and S_ISBLK(B->mapping->host)
-> 3. S_ISREG(A->mapping->host) and S_ISREG(B->mapping->host) with
->    inode_lock() held on both and A->index < B->index
->    (the remap_range code)
+>   drivers/dma-buf/heaps/cma_heap.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/drivers/dma-buf/heaps/cma_heap.c b/drivers/dma-buf/heaps/cma_heap.c
+> index 0df007111975..9eaff80050f2 100644
+> --- a/drivers/dma-buf/heaps/cma_heap.c
+> +++ b/drivers/dma-buf/heaps/cma_heap.c
+> @@ -315,7 +315,7 @@ static struct dma_buf *cma_heap_allocate(struct dma_heap *heap,
+>   		while (nr_clear_pages > 0) {
+>   			void *vaddr = kmap_local_page(page);
+>   
+> -			memset(vaddr, 0, PAGE_SIZE);
+> +			clear_page(vaddr);
+>   			kunmap_local(vaddr);
+>   			/*
+>   			 * Avoid wasting time zeroing memory if the process
+>
+> ---
+> base-commit: 3a8660878839faadb4f1a6dd72c3179c1df56787
+> change-id: 20251129-dma-buf-heap-clear-page-248bb236e4c4
+>
+> Best regards,
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
