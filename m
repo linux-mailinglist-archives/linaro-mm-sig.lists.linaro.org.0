@@ -2,333 +2,531 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9769ECA8C7C
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 05 Dec 2025 19:25:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 897C6CA9DFA
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 06 Dec 2025 03:04:56 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A9E733F98A
-	for <lists+linaro-mm-sig@lfdr.de>; Fri,  5 Dec 2025 18:25:40 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.13])
-	by lists.linaro.org (Postfix) with ESMTPS id B93713F8E9
-	for <linaro-mm-sig@lists.linaro.org>; Fri,  5 Dec 2025 18:25:23 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C914140105
+	for <lists+linaro-mm-sig@lfdr.de>; Sat,  6 Dec 2025 02:04:52 +0000 (UTC)
+Received: from mail-ua1-f65.google.com (mail-ua1-f65.google.com [209.85.222.65])
+	by lists.linaro.org (Postfix) with ESMTPS id 4542B3F7D7
+	for <linaro-mm-sig@lists.linaro.org>; Sat,  6 Dec 2025 02:04:36 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=DEPUqGde;
-	spf=pass (lists.linaro.org: domain of michael.j.ruhl@intel.com designates 198.175.65.13 as permitted sender) smtp.mailfrom=michael.j.ruhl@intel.com;
-	dmarc=pass (policy=none) header.from=intel.com;
-	arc=pass ("microsoft.com:s=arcselector10001:i=1")
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1764959124; x=1796495124;
-  h=from:to:subject:date:message-id:references:in-reply-to:
-   content-transfer-encoding:mime-version;
-  bh=60RRZZAXAUyFvA/5I4jYImgT8FzKvjUh4lnnIkoElJM=;
-  b=DEPUqGdeNlBqDccKn0yLcaJtOLxQ3AZJSHxdePvvcjXrXKcKb7Rmbhbh
-   zzODpIyzIaeB/WD8xfZseR35S+LX94yXhVslePo7RqliYjC5xxi4ZK25y
-   n51zcC1h29N7CrH3lqXhUSzvIVVd/rM1CZMI+ke19lnnvuO00LTTRFOV6
-   5jGleQCC8sEf6PjKyRwUrX8qiYxCKsTv4IByIvNiT5YHp3kKP8BBh9R9I
-   vLsysxypD7iy/DMoZe70gzdGm2YBtqXQzN315++AKCbnpIdYqQbXVeMO8
-   sS7sTPJ2xUKBOaZOoOd0t3szZ1g44tt7BhwOwFunKy+ASEbJ4rZdJQ34R
-   A==;
-X-CSE-ConnectionGUID: GrTya125SpqCXV9FAvay4A==
-X-CSE-MsgGUID: 4yKrU4isRDaxwa8JUfPhrA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11633"; a="78109284"
-X-IronPort-AV: E=Sophos;i="6.20,252,1758610800";
-   d="scan'208";a="78109284"
-Received: from orviesa005.jf.intel.com ([10.64.159.145])
-  by orvoesa105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Dec 2025 10:25:20 -0800
-X-CSE-ConnectionGUID: DB6XWYoTS8Wl8402VJQA1w==
-X-CSE-MsgGUID: uUy8PXVURyGh9KP+6+u9iA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.20,252,1758610800";
-   d="scan'208";a="200499638"
-Received: from fmsmsx903.amr.corp.intel.com ([10.18.126.92])
-  by orviesa005.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Dec 2025 10:25:20 -0800
-Received: from FMSMSX901.amr.corp.intel.com (10.18.126.90) by
- fmsmsx903.amr.corp.intel.com (10.18.126.92) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.29; Fri, 5 Dec 2025 10:25:19 -0800
-Received: from fmsedg902.ED.cps.intel.com (10.1.192.144) by
- FMSMSX901.amr.corp.intel.com (10.18.126.90) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.29 via Frontend Transport; Fri, 5 Dec 2025 10:25:19 -0800
-Received: from SN4PR0501CU005.outbound.protection.outlook.com (40.93.194.10)
- by edgegateway.intel.com (192.55.55.82) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.29; Fri, 5 Dec 2025 10:25:18 -0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Nu8CYU/TbGfQYi9sp1goDTomABIChFi+HGfqLyH9HEtv9UPnWkxF7LunszdGRRy6Duu3pzCexFA+iAUO3EHzK9XuO9nXHgP41oywp8T0TX7agy2MsYkkKIfSIkpTYUVV4U3owndYWA5zs65jv3tHs88W7isegc7PS2BFhNiC7z0JCtCmaDreCGVW4GunGkMHzCfP0isniMgQvbct04PjUFEwudwtvYKCiQ2xThnUcLvUDNsZ/EnnJFzUolPY3F0dG14mYewXndnVa1BNkOZCUpPimnX+ErBhNytOIDHz5uEpUW10ZQnUmPemBlycvZ/QU979jgbOVX1PJwyQNYa21g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=60RRZZAXAUyFvA/5I4jYImgT8FzKvjUh4lnnIkoElJM=;
- b=T/icx301cy0NucfGxKqTdzi8l6Jfme/SCo7YW5a932cZA6F1ylLGZmQKrMzjdsDVYcq5EZ5lcgQw1XFd4z1rPLBvglqubA520l/V64LLJOkBE4q+K8fC6G6d8IGJ6oc7dMThRR4C1FamiQ8EU38iSEqX9bQbU7pRy8qsIBxLAnhWf006Eq0Dt+kvKsJvtnfLHOyryE0Tl46O0RU50HIArNwzSlD3/0mPaoPuo+34fxF6N1Y6Y8rx1HYCdYNDddfR9KYfDeThf8vpyVBoSH9UgcEB5b55TeMIPcZswIGgfroHQUazkS86Q0ZSO3+IUeeLy5hGTRvfsOnhBW3hhQQecA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Received: from IA1PR11MB6418.namprd11.prod.outlook.com (2603:10b6:208:3aa::18)
- by SJ0PR11MB5790.namprd11.prod.outlook.com (2603:10b6:a03:422::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.9; Fri, 5 Dec
- 2025 18:25:14 +0000
-Received: from IA1PR11MB6418.namprd11.prod.outlook.com
- ([fe80::68b8:5391:865e:a83]) by IA1PR11MB6418.namprd11.prod.outlook.com
- ([fe80::68b8:5391:865e:a83%2]) with mapi id 15.20.9388.011; Fri, 5 Dec 2025
- 18:25:14 +0000
-From: "Ruhl, Michael J" <michael.j.ruhl@intel.com>
-To: "Ruhl, Michael J" <michael.j.ruhl@intel.com>,
-	=?utf-8?B?Q2hyaXN0aWFuIEvDtm5pZw==?= <ckoenig.leichtzumerken@gmail.com>,
-	"Auld, Matthew" <matthew.auld@intel.com>, "linux-media@vger.kernel.org"
-	<linux-media@vger.kernel.org>, "dri-devel@lists.freedesktop.org"
-	<dri-devel@lists.freedesktop.org>, "linaro-mm-sig@lists.linaro.org"
-	<linaro-mm-sig@lists.linaro.org>, "simona.vetter@ffwll.ch"
-	<simona.vetter@ffwll.ch>
-Thread-Topic: [PATCH 1/2] dma-buf: improve sg_table debugging hack v3
-Thread-Index: AQHcZef8cMFbsvg/aE2xRC96RvXeprUTM9KggAApL+A=
-Date: Fri, 5 Dec 2025 18:25:14 +0000
-Message-ID: <IA1PR11MB641817BDC348839815581744C1A7A@IA1PR11MB6418.namprd11.prod.outlook.com>
-References: <20251205130604.1582-1-christian.koenig@amd.com>
- <IA1PR11MB64181483C8F0AF277B2A874AC1A7A@IA1PR11MB6418.namprd11.prod.outlook.com>
-In-Reply-To: <IA1PR11MB64181483C8F0AF277B2A874AC1A7A@IA1PR11MB6418.namprd11.prod.outlook.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: IA1PR11MB6418:EE_|SJ0PR11MB5790:EE_
-x-ms-office365-filtering-correlation-id: 8a8d81fd-4385-4c95-96a3-08de342ba27e
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;ARA:13230040|366016|376014|1800799024|38070700021;
-x-microsoft-antispam-message-info: =?utf-8?B?ZDZ5dkNvcDN0Y3lzeUJyNWdMNWIxNVJ4RTFQSExWdFFOZUNMNEp4MWc4bmxa?=
- =?utf-8?B?QXRsbGxCZHQ0T29NWkhJVXFkTjgwbHBCMHMySXZxV0c5eXZzbG9TUXV2MlJQ?=
- =?utf-8?B?NmdtNER5U2ZqbW0vbjAvcGxHYW1tanUvaVVvc2xBSmw5VkczbW41Z3lUNTRt?=
- =?utf-8?B?ekEzOG9JWUdGMjJiVXRGL2c5aWZZVlBQN29jekdDZDlGUDZCaEMzVS9adGli?=
- =?utf-8?B?SjhsTEl1QWNmR3B2ME9qekI0UGxsVTVTaEpWc1QvVUNqdmppNm5PclpqSlMr?=
- =?utf-8?B?NlIvYmNxK3RvZ29IK2Z6ZHMrZjVWMys4VjB0RVNUTWVpcFRqL01RZGlEOVRH?=
- =?utf-8?B?TkRZZ04veUNYRy9yTnBWUk52dlkxbDlKekFTS3lBT2prKzh3a0FnYUt2TWVv?=
- =?utf-8?B?WEVlZFFkOUM1M0poUk0wb21BbTRiM01qVjE2ZktXNTBMVFgxc3oyeUxkdVNo?=
- =?utf-8?B?b2ZURjIzbGZwaE5rd1oxQjUvWFBNWWNlczc0eEpqUkd1d2JBbTNLdy9kYVBY?=
- =?utf-8?B?WDVSMVJscWNZYVN3U3FJWHdrbmtWU0R2MkVqaldTZXBqVmUxYXBYWmp6WmRH?=
- =?utf-8?B?VkRERi9HY3c5ZmttbHViVTkzSU1ZdHcwaGMvRnhidmwwWEgrM2V2VFpxNUcw?=
- =?utf-8?B?RUxwU0VldEpETlNjWVE5d0hIREpBTENwZDZUTUd4QzY5Y28rc1pQZWcwbHdq?=
- =?utf-8?B?cWp5UVhxbzNFL1VMOWpoTjZSLzlQdmhtQU5ObVVKU0tiYTBKUmZJeTNiaGNM?=
- =?utf-8?B?clo1QWpOQklGb29OMFJhcTN0T3lsUTVTOWJiZU9mTmVjYlRPZnF3NmU4T3gv?=
- =?utf-8?B?SkZ5dW9OK1hqSnloQU1kQzFpcmdDU0pjZGVUN0FBcnBJY1ZBcTd4b2Yxa2E4?=
- =?utf-8?B?QytoSkxYZzBTaGdGOStLcnNQcWx0QjVKbXZTK0pBK3pWK0pHYkZOajk2ajNX?=
- =?utf-8?B?RHM5VTZBQTJBRi9PWDdXazZTcXdFMXlDbmpzZWtYUjRaQ3VJMUtEOFc1am8x?=
- =?utf-8?B?SWh6SXRXSlU4RHVyb0dRdzJwWE5FMi9CdlJCQlIrR0RjTzNOL2QvWU9HNWRZ?=
- =?utf-8?B?eVYvZmxtaVJmaUN5ZG1yV3Y1ZmNhT0laT2lpK0UxZWk1SkxEcVVRY3ZzdVM3?=
- =?utf-8?B?dXkzamd1R1gyNnk2OFozV0tsU201ZDByTzZ4Ry9pbDV5WGZudk5NeW1VMkFN?=
- =?utf-8?B?dmNmcGFaS0xYdXlwSlY3YVJaMjQ1RDBXOFJrcVZVSFMrbXFFelhxWlFFMHVq?=
- =?utf-8?B?S2w4OVRham85ZnAwQVhMYWpkcXNYbzc4MVdCRUVqdVkybXBEV3o1ZzVkeWo4?=
- =?utf-8?B?Q2gzYVJtWkczSTNhcXdualp3ZFkyM28reHhlN21NQkRTcTZ1dDJ6NUVQOFA0?=
- =?utf-8?B?d2pRTWVzOW9ULzZRVzBzUXB1N2t2S1hySGplVlRIUnRTTWF1OEh6R296ektq?=
- =?utf-8?B?SFcxcXBrazQwMlREVmFidWZaTGtubXNnREVCVW51dmQxaTRoMWpqOUg5TjRa?=
- =?utf-8?B?SitRWThValJ5ejhQK3JjT1BHOGdRMzVZWEIyOE9RY1VIYTR4d1QrdmJ6Y0xk?=
- =?utf-8?B?MkZ1dUJLRHY4VzdlV0U3Y2IralNYMm9yY1J5WlA3cVF0R3p1bzFaU1U0RTVh?=
- =?utf-8?B?Si9qcXRKb3BLY3M1VDF3OVhpc2pTZ2NtWWJYSStZOE1nUUNtNmRITzlBQWFR?=
- =?utf-8?B?Y3ROaDBZbzZhdGRPaVh6UzJDUGtKNkxUOVBQclFaVmJLL05mQkYzcVA0RXFp?=
- =?utf-8?B?bGZLRThteS9TdlB6OGN0ZVh5NkVkWVIrVEw3NWlBOHl4ME5DZ0JtNXhGVDJN?=
- =?utf-8?B?UFhBYTNmWHhjWHQrSGZ3OElrbDdQdmVZREpQUzJ4WUN1VU5TdGY4VmNNRktC?=
- =?utf-8?B?SHlkVDg5engxMVZTcHArV1lnem92TTBxZ0ZiSmVQTTRVb1NDK1ZvaVFmZGwr?=
- =?utf-8?B?Z1lnZHltdDhhSmttTU9YYlRRZkdnWVZFOFMyQ2tJRnlGeG5ISWtoRFhSTFNr?=
- =?utf-8?B?SXNJWG1QZzJVeHZyNEc3cVNUU0w2UVBkcFFYS3pIYnd5VmMyd2JnMjdjd2g1?=
- =?utf-8?Q?UwzjY4?=
-x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA1PR11MB6418.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(38070700021);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?Qm1TN1pIdFI2MGpCZmNpSjFnWU5HZWVXN0dPNW9WL0s1RjBTT1NHb0tKNGxl?=
- =?utf-8?B?TVErOXphakwvOElrUis4Zm5MeTBYTHBOZTlTN0FDT3lWRVFvZnJZajBWU3E2?=
- =?utf-8?B?UGZyWW54aG8xK3dmZ1NjVE1xL0ZLbktzeUNmQ2NKbEpLM001LzAvV3lZeXNq?=
- =?utf-8?B?cmFKa09ETytHdE5PSlh0MDlSdFJUYmVVcTRsOXJQOFl1Q3lCNUo2U2UzVDcv?=
- =?utf-8?B?MzlDM3pTRGtiem8wYStwVXJaeEs5cmJqTTdpTFZNd2RQYlBYY09GMXNIUGVM?=
- =?utf-8?B?b2tTTTBJbFZQVXpaTnR4SFZ2ZDBVNVh1S3dVS0xJdFd2ejRmczVzNzNyMURX?=
- =?utf-8?B?Q01wQ1N0cWZGK2t5MEgvVzRFRXlRRkN1LzJpeXlZcTdZV0lZRnF5cmNNOERt?=
- =?utf-8?B?SXRzM3NvYk9lUzhzakNwdjhvNSt5emlkVGVkSWJjbmkvRGNySUpSMzJRNUxv?=
- =?utf-8?B?S1VjYTFqNStDSEhNRUk1UnhrMml5NzN5dGRvc3pBRXJiTlNYNG1wSEUyRnRY?=
- =?utf-8?B?dW11bE9JQWdWODVmQWQxSHpiUGFXZFVHMGdRSWNWUmRSb3diQjBKYWQwOXky?=
- =?utf-8?B?ejFKQXBiSGx6VGhSWWFGallvM2RraFZzSUF2K1k2M05LYStTKyswbCtsTzlX?=
- =?utf-8?B?SEN1UGQ1dGlCZ2VCZDR5TVlHY3U1QURkTGpQTWhudVlaWkVoSXIvckh3bTgw?=
- =?utf-8?B?NVRsVU5TZUxOcDAybUR1WVBSc00wNXdWMXdyYkh3Zk5weFZNL1NMT2hXYXlk?=
- =?utf-8?B?NFBaUmdqTEZIOEt3c0RUK1dHYnpwU3BFQmRsYkh3OTUvTVI4S3UxUnY5YzNJ?=
- =?utf-8?B?cFNNRUxoN0VzRjRNa0JrQUpTckY1WXMwU3c0eWdHV1owYVltUjBoMC91c0JU?=
- =?utf-8?B?dk9CRHlxeG12Y253T1E4WElnRU1ua3B6SW9NdktmeU0rSmF2bVU2UW9WUXcy?=
- =?utf-8?B?aHJpVXRaWHQyRWtnK0RlUDYrT3gvcTNUZUNjTmFndmFIcHZwV04rcXV0VGIw?=
- =?utf-8?B?MWJiSTgvWWZsKzBrdHVZaG9nOHVIcDZ4UEpPT1NPdUtuUmNpc3RtUlRQVHJj?=
- =?utf-8?B?NG4yRGVXaEtnMndkK0pIVUtyWU9BS3d4QzQzZTRLSnhsUG9yMGtud0ZDRnY5?=
- =?utf-8?B?M0xwOEdjdmNsaWRvK1dmbnFOWVRsaitZamJSclVmcXFrUVd2TlhIUzhRaXNj?=
- =?utf-8?B?UFRWalIvejJWcEFYcFBteUhFNG9LU2V3OFVLQlpjbG9Ha3J1dGlwaW9YVjEw?=
- =?utf-8?B?VTlPYytPWnoyMzVoMnlCdU1UaGgyWnlTNURaL0Z3ZkxLa0g4SWdkbml1WUJU?=
- =?utf-8?B?OHU3ZmdJcXdBeFZFajYyQU9WN0hiSWZuMkJtK2ZpTUlSVFZHcDFzNnpEUVY0?=
- =?utf-8?B?a0I5bjNLNWNkZjBLYUROYThyN0pzRzZuaGdSS282UldkT3ppdUhncUNRUURt?=
- =?utf-8?B?cEl6a2o3eHNucFdnZmU5Y1ZLcUhaN1h4cllhNVcvL2Q0eUVQYmxxbzV5MzhS?=
- =?utf-8?B?TFJYK2xyOVh2QnhFb0Zrd0VpVUtHTnMwUkFMY3JYN21FbGZ3ZDVYTnozWVNs?=
- =?utf-8?B?dFlpam1xMm5jYVJSL09XR1psOHFnUFJ4WmJUWUd5Vm1mQ2toU28yNEQxM2U4?=
- =?utf-8?B?VnRWS1pXM3FQOUxFcVFvK2dZTjRhdDZqQm4wWkRDQ1B2VkxXRStzVndTak8y?=
- =?utf-8?B?aFZtbFNIRHFKV1FxbDBtNnZ3ekp3M3lUbHRuQ3FZTTB5MXpBZEJsc3JGNnhZ?=
- =?utf-8?B?Y0xMcEY3THFYZkxubG81MzVWS2ZQZzZXWTAzUmF2SDJCcXRrRjBucUwzbTJR?=
- =?utf-8?B?S3RRWm4zVWlhTjZVdm1wT2JtekMvdmxiZy9VRGJOUXNhanpMYXFWUFpYUmVY?=
- =?utf-8?B?MEhhL0ZZZGpicEd1MFU1M0tKUXFZL29zNXJvMU9odDFiQ2ZUbFZFbE1IODM1?=
- =?utf-8?B?Q29GU1AxblZsSzE0NWxLYUJHZm1EdysyQXJuMG9SL1ZkUEFIa2wwZXlDS1A5?=
- =?utf-8?B?K3BGSFdMSXJmMkdDRWZLRldaLzlvcW9USGIxK0VRemZocktCL2dZbVl5UHRq?=
- =?utf-8?B?aC9yRkhvNUtEeWVPbkhmaXRNRkF4eklZRWpoZEhGallkZG1Ga2RpVThmZldk?=
- =?utf-8?Q?Z1j/MdYz+YT3shRVstSAQLEgp?=
-Content-Type: text/plain; charset="utf-8"
+	dkim=pass header.d=gmail.com header.s=20230601 header.b="Rq/Nj+u7";
+	spf=pass (lists.linaro.org: domain of bagasdotme@gmail.com designates 209.85.222.65 as permitted sender) smtp.mailfrom=bagasdotme@gmail.com;
+	dmarc=pass (policy=none) header.from=gmail.com
+Received: by mail-ua1-f65.google.com with SMTP id a1e0cc1a2514c-937268fe284so1743560241.0
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 05 Dec 2025 18:04:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1764986676; x=1765591476; darn=lists.linaro.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=ikbW0KTFV2Hrw3Ofr3+X6/ogNZDuDLj9J6B0i4MyxZI=;
+        b=Rq/Nj+u7+qQGl+NDjs7tNq4UROk9vGyf9QewzqHO1ifCSBPBHc7X79ek42JgOBmzdF
+         fG279RJxhf/rPM6ZQNenpc4+Nsoq3qYpjd9drggz4wuhmrCwEyTgqnRk0l9bGglmp+gA
+         H2Q/ldD2GijW1yN6jgt7QqBjdQ7SFBRNvSqRl6KvwSL/MU21sr54aMZk0cRVgI1RA0EU
+         TIsd8Hz9DfzjBv7kN1EOZw034mWQ+ZoltwXD5mTkIAmcyOQ7uF+ga/VSn9R3Fb2rp3vG
+         nkfcaKsoDW9BA92u0ObMg6e2mw7dMA/tc5iUOxgmj8BKBuQrbfQX2gt8g+d+iTWHeICk
+         WwIg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1764986676; x=1765591476;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=ikbW0KTFV2Hrw3Ofr3+X6/ogNZDuDLj9J6B0i4MyxZI=;
+        b=TjTXQXb1NlFoKHrIgmtXoWP/YQ8zl4FuSvREvcxZ/rMkaW4MbVscFMWu1yvWTVYUV/
+         6y5ayYCnEnEGfAofok2Zruzgx4DvTvs0AK3iVy3u/xvNz0e3GXFIHSW/gSkLKcIANQeF
+         K5lqVMNr1ulwclmgs1jK2iu+7ORiWLr/iQFtq2+oRxmoIMc8LFSiDgNSKQKHi3NIFdg/
+         eN3L0rsCw6Ox4hFMstP6JQoBhGBfA/F3vTF9eQPBfehap32PnLb6QobzbX0D5RU8Dozs
+         JoCdIjT+vZmgsBv+IZP6zbSAfpQNoLmnVd1JkCoTk2McK2sAMKPpD6z4+RyT2Q3LPfOm
+         r05Q==
+X-Forwarded-Encrypted: i=1; AJvYcCUK/UJOwjWzb7bvsCHwoYAJvdc2OQe0bfj4WHqDT5snSMqV4XeSpz/XZJ8xl4UCjoy3vHNX1nWNVZheLKoJ@lists.linaro.org
+X-Gm-Message-State: AOJu0Ywh9S6F26aON0g3bylIqxy+xOPwp9V48oBGldqF2o8/5x5tstFk
+	yOoGgVFDcxMG/kTHjMNbs5jTsmKeCNuaIbjsfcXYKt7upet8xtwwUiGH
+X-Gm-Gg: ASbGncsc7c+t+nkD2/X9xZcyNT7rC7hbq4Vv79QTnFRYl0e1Ka8FLVWtfNW6+yRGNRP
+	O774tCOCAlVLASj8C1oR8T5VPX+taq3P0fpOpj+d4gZrHlWSZ0p3tmQHeSL6vg/lL3DUsM8D3QF
+	cUZZ5HgJo3lmjYdPWbO0EzgJJCt1chk8TRWCvmLRzLBxQPjgkPEFA79PlX2z1qAya6IDIjBrOBy
+	1RMljr1nmhYM1aWl0oT0b3oacnbkWniCstzb/l39RXKwLnDc21NySr7Oku+w9+aqiCiMU1JS9r4
+	nGFlBy216ZE9XCgYTuXxkZAtzJN6/qYfmhlw+mhQlcBjfo8a5ZRJn+t4EL4C6pTOCa4Uh2j5Ggf
+	mEhORi0Sc5GNmXQsSxlQqitID0+9yaFzPfg2NZ7T55rHPmgp00GjSCZJNYJa32NI0l6SdPaB79V
+	sPd4918Ld+GkgCLFcXRdk4gA==
+X-Google-Smtp-Source: AGHT+IEr3Q6a4CN4+olI+Mt242gDsAIL3w56EYKxscpKjh4CXmUdmYBy6PKk8nZmUVIj5FdxLRUi1Q==
+X-Received: by 2002:a17:90b:3fc4:b0:32e:64ca:e84e with SMTP id 98e67ed59e1d1-349a254f6f8mr705096a91.15.1764980727972;
+        Fri, 05 Dec 2025 16:25:27 -0800 (PST)
+Received: from archie.me ([210.87.74.117])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-349a28cdf5asm360525a91.4.2025.12.05.16.25.26
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 05 Dec 2025 16:25:27 -0800 (PST)
+Received: by archie.me (Postfix, from userid 1000)
+	id C8B35421860F; Sat, 06 Dec 2025 07:25:22 +0700 (WIB)
+Date: Sat, 6 Dec 2025 07:25:22 +0700
+From: Bagas Sanjaya <bagasdotme@gmail.com>
+To: Byungchul Park <byungchul@sk.com>, linux-kernel@vger.kernel.org
+Message-ID: <aTN38kJjBftxnjm9@archie.me>
+References: <20251205071855.72743-1-byungchul@sk.com>
+ <20251205071855.72743-26-byungchul@sk.com>
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: IA1PR11MB6418.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8a8d81fd-4385-4c95-96a3-08de342ba27e
-X-MS-Exchange-CrossTenant-originalarrivaltime: 05 Dec 2025 18:25:14.7382
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: bJZ8VBEl8xlt1sj0deNLpbvhnCo5hfVXb63sZhv5mC7G/YijN+Wa9mwED1fYv9np2C3kZS9kKRCNPZd61xCy+Ky0Jkv9PkkWTgLFjilm7l0=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR11MB5790
-X-OriginatorOrg: intel.com
+In-Reply-To: <20251205071855.72743-26-byungchul@sk.com>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-7.90 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
-	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
-	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector10001:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:198.175.65.0/26];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	MIME_GOOD(-0.10)[text/plain];
-	MIME_BASE64_TEXT(0.10)[];
-	DKIM_TRACE(0.00)[intel.com:+];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	MISSING_XM_UA(0.00)[];
+X-Spamd-Result: default: False [-4.10 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
+	SIGNED_PGP(-2.00)[];
+	FORGED_RECIPIENTS(2.00)[m:byungchul@sk.com,m:linux-kernel@vger.kernel.org,m:kernel_team@skhynix.com,m:torvalds@linux-foundation.org,m:damien.lemoal@opensource.wdc.com,m:linux-ide@vger.kernel.org,m:adilger.kernel@dilger.ca,m:linux-ext4@vger.kernel.org,m:mingo@redhat.com,m:peterz@infradead.org,m:will@kernel.org,m:tglx@linutronix.de,m:rostedt@goodmis.org,m:joel@joelfernandes.org,m:sashal@kernel.org,m:daniel.vetter@ffwll.ch,m:duyuyang@gmail.com,m:johannes.berg@intel.com,m:tj@kernel.org,m:tytso@mit.edu,m:willy@infradead.org,m:david@fromorbit.com,m:amir73il@gmail.com,m:gregkh@linuxfoundation.org,m:kernel-team@lge.com,m:linux-mm@kvack.org,m:akpm@linux-foundation.org,m:mhocko@kernel.org,m:minchan@kernel.org,m:hannes@cmpxchg.org,m:vdavydov.dev@gmail.com,m:sj@kernel.org,m:jglisse@redhat.com,m:dennis@kernel.org,m:cl@linux.com,m:penberg@kernel.org,m:rientjes@google.com,m:vbabka@suse.cz,m:ngupta@vflare.org,m:linux-block@vger.kernel.org,m:josef@toxicpanda.com,m:linux-fsdevel@vger.kernel.org,m:jac
+ k@suse.cz,m:jlayton@kernel.org,m:dan.j.williams@intel.com,m:hch@infradead.org,m:djwong@kernel.org,m:dri-devel@lists.freedesktop.org,m:rodrigosiqueiramelo@gmail.com,m:melissa.srw@gmail.com,m:hamohammed.sa@gmail.com,m:harry.yoo@oracle.com,m:chris.p.wilson@intel.com,m:gwan-gyeong.mun@intel.com,m:max.byungchul.park@gmail.com,m:boqun.feng@gmail.com,m:longman@redhat.com,m:yunseong.kim@ericsson.com,m:ysk@kzalloc.com,m:yeoreum.yun@arm.com,m:netdev@vger.kernel.org,m:matthew.brost@intel.com,m:her0gyugyu@gmail.com,m:corbet@lwn.net,m:catalin.marinas@arm.com,m:bp@alien8.de,m:x86@kernel.org,m:hpa@zytor.com,m:luto@kernel.org,m:sumit.semwal@linaro.org,m:gustavo@padovan.org,m:christian.koenig@amd.com,m:andi.shyti@kernel.org,m:arnd@arndb.de,m:lorenzo.stoakes@oracle.com,m:Liam.Howlett@oracle.com,m:rppt@kernel.org,m:surenb@google.com,m:mcgrof@kernel.org,m:petr.pavlu@suse.com,m:da.gomez@kernel.org,m:samitolvanen@google.com,m:paulmck@kernel.org,m:frederic@kernel.org,m:neeraj.upadhyay@kernel.org,m:joelagn
+ elf@nvidia.com,m:josh@joshtriplett.org,m:urezki@gmail.com,m:mathieu.desnoyers@efficios.com,m:jiangshanlai@gmail.com,m:qiang.zhang@linux.dev,m:juri.lelli@redhat.com,m:vincent.guittot@linaro.org,m:dietmar.eggemann@arm.com,m:bsegall@google.com,m:mgorman@suse.de,m:vschneid@redhat.com,m:chuck.lever@oracle.com,m:neil@brown.name,s:linaro-mm-sig@lists.linaro.org];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	MIME_GOOD(-0.20)[multipart/signed,text/plain];
 	TO_DN_SOME(0.00)[];
-	BLOCKLISTDE_FAIL(0.00)[198.175.65.13:server fail];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_SEVEN(0.00)[7];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_TO(0.00)[intel.com,gmail.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,ffwll.ch];
-	FROM_EQ_ENVFROM(0.00)[];
+	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.222.65:from];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	ARC_NA(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[skhynix.com,linux-foundation.org,opensource.wdc.com,vger.kernel.org,dilger.ca,redhat.com,infradead.org,kernel.org,linutronix.de,goodmis.org,joelfernandes.org,ffwll.ch,gmail.com,intel.com,mit.edu,fromorbit.com,linuxfoundation.org,lge.com,kvack.org,cmpxchg.org,linux.com,google.com,suse.cz,vflare.org,toxicpanda.com,lists.freedesktop.org,oracle.com,ericsson.com,kzalloc.com,arm.com,lwn.net,alien8.de,zytor.com,linaro.org,padovan.org,amd.com,arndb.de,suse.com,nvidia.com,joshtriplett.org,efficios.com,linux.dev,suse.de,brown.name,talpey.com,huawei.com,amazon.co.uk,linux.alibaba.com,glider.be,linux.intel.com,treblig.org,star-ark.net,valla.it,vivo.com,baidu.com,lists.infradead.org,lists.linaro.org,lists.linux.dev,qq.com,ownmail.net,sang-engineering.com,linux-m68k.org,garyguo.net,protonmail.com,umich.edu];
+	NEURAL_HAM(-0.00)[-1.000];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_COUNT_SEVEN(0.00)[7]
+	RCPT_COUNT_GT_50(0.00)[165];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	RCVD_COUNT_THREE(0.00)[3];
+	DKIM_TRACE(0.00)[gmail.com:+]
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: B93713F8E9
-X-Spamd-Bar: -------
-Message-ID-Hash: 3LW2PNVFUYHU5JLA25TXLZTOGRA42PDW
-X-Message-ID-Hash: 3LW2PNVFUYHU5JLA25TXLZTOGRA42PDW
-X-MailFrom: michael.j.ruhl@intel.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+X-Rspamd-Queue-Id: 4542B3F7D7
+X-Spamd-Bar: ----
+Message-ID-Hash: 3JSOMFL5NEXU2MOQY52MXX574IRB3W5S
+X-Message-ID-Hash: 3JSOMFL5NEXU2MOQY52MXX574IRB3W5S
+X-MailFrom: bagasdotme@gmail.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: kernel_team@skhynix.com, torvalds@linux-foundation.org, damien.lemoal@opensource.wdc.com, linux-ide@vger.kernel.org, adilger.kernel@dilger.ca, linux-ext4@vger.kernel.org, mingo@redhat.com, peterz@infradead.org, will@kernel.org, tglx@linutronix.de, rostedt@goodmis.org, joel@joelfernandes.org, sashal@kernel.org, daniel.vetter@ffwll.ch, duyuyang@gmail.com, johannes.berg@intel.com, tj@kernel.org, tytso@mit.edu, willy@infradead.org, david@fromorbit.com, amir73il@gmail.com, gregkh@linuxfoundation.org, kernel-team@lge.com, linux-mm@kvack.org, akpm@linux-foundation.org, mhocko@kernel.org, minchan@kernel.org, hannes@cmpxchg.org, vdavydov.dev@gmail.com, sj@kernel.org, jglisse@redhat.com, dennis@kernel.org, cl@linux.com, penberg@kernel.org, rientjes@google.com, vbabka@suse.cz, ngupta@vflare.org, linux-block@vger.kernel.org, josef@toxicpanda.com, linux-fsdevel@vger.kernel.org, jack@suse.cz, jlayton@kernel.org, dan.j.williams@intel.com, hch@infradead.org, djwong@kernel.org, dri-devel@lists.fr
+ eedesktop.org, rodrigosiqueiramelo@gmail.com, melissa.srw@gmail.com, hamohammed.sa@gmail.com, harry.yoo@oracle.com, chris.p.wilson@intel.com, gwan-gyeong.mun@intel.com, max.byungchul.park@gmail.com, boqun.feng@gmail.com, longman@redhat.com, yunseong.kim@ericsson.com, ysk@kzalloc.com, yeoreum.yun@arm.com, netdev@vger.kernel.org, matthew.brost@intel.com, her0gyugyu@gmail.com, corbet@lwn.net, catalin.marinas@arm.com, bp@alien8.de, x86@kernel.org, hpa@zytor.com, luto@kernel.org, sumit.semwal@linaro.org, gustavo@padovan.org, christian.koenig@amd.com, andi.shyti@kernel.org, arnd@arndb.de, lorenzo.stoakes@oracle.com, Liam.Howlett@oracle.com, rppt@kernel.org, surenb@google.com, mcgrof@kernel.org, petr.pavlu@suse.com, da.gomez@kernel.org, samitolvanen@google.com, paulmck@kernel.org, frederic@kernel.org, neeraj.upadhyay@kernel.org, joelagnelf@nvidia.com, josh@joshtriplett.org, urezki@gmail.com, mathieu.desnoyers@efficios.com, jiangshanlai@gmail.com, qiang.zhang@linux.dev, juri.lelli@redhat.co
+ m, vincent.guittot@linaro.org, dietmar.eggemann@arm.com, bsegall@google.com, mgorman@suse.de, vschneid@redhat.com, chuck.lever@oracle.com, neil@brown.name, okorniev@redhat.com, Dai.Ngo@oracle.com, tom@talpey.com, trondmy@kernel.org, anna@kernel.org, kees@kernel.org, bigeasy@linutronix.de, clrkwllms@kernel.org, mark.rutland@arm.com, ada.coupriediaz@arm.com, kristina.martsenko@arm.com, wangkefeng.wang@huawei.com, broonie@kernel.org, kevin.brodsky@arm.com, dwmw@amazon.co.uk, shakeel.butt@linux.dev, ast@kernel.org, ziy@nvidia.com, yuzhao@google.com, baolin.wang@linux.alibaba.com, usamaarif642@gmail.com, joel.granados@kernel.org, richard.weiyang@gmail.com, geert+renesas@glider.be, tim.c.chen@linux.intel.com, linux@treblig.org, alexander.shishkin@linux.intel.com, lillian@star-ark.net, chenhuacai@kernel.org, francesco@valla.it, guoweikang.kernel@gmail.com, link@vivo.com, jpoimboe@kernel.org, masahiroy@kernel.org, brauner@kernel.org, thomas.weissschuh@linutronix.de, oleg@redhat.com, mjguzik
+ @gmail.com, andrii@kernel.org, wangfushuai@baidu.com, linux-doc@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-i2c@vger.kernel.org, linux-arch@vger.kernel.org, linux-modules@vger.kernel.org, rcu@vger.kernel.org, linux-nfs@vger.kernel.org, linux-rt-devel@lists.linux.dev, 2407018371@qq.com, dakr@kernel.org, miguel.ojeda.sandonis@gmail.com, neilb@ownmail.net, wsa+renesas@sang-engineering.com, dave.hansen@intel.com, geert@linux-m68k.org, ojeda@kernel.org, alex.gaynor@gmail.com, gary@garyguo.net, bjorn3_gh@protonmail.com, lossin@kernel.org, a.hindborg@kernel.org, aliceryhl@google.com, tmgross@umich.edu, rust-for-linux@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 1/2] dma-buf: improve sg_table debugging hack v3
+Subject: [Linaro-mm-sig] Re: [PATCH v18 25/42] dept: add documents for dept
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3LW2PNVFUYHU5JLA25TXLZTOGRA42PDW/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3JSOMFL5NEXU2MOQY52MXX574IRB3W5S/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8001084837357132071=="
 
-Pi0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+RnJvbTogZHJpLWRldmVsIDxkcmktZGV2ZWwt
-Ym91bmNlc0BsaXN0cy5mcmVlZGVza3RvcC5vcmc+IE9uIEJlaGFsZiBPZiBSdWhsLA0KPk1pY2hh
-ZWwgSg0KPlNlbnQ6IEZyaWRheSwgRGVjZW1iZXIgNSwgMjAyNSAxMTowMiBBTQ0KPlRvOiBDaHJp
-c3RpYW4gS8O2bmlnIDxja29lbmlnLmxlaWNodHp1bWVya2VuQGdtYWlsLmNvbT47IEF1bGQsIE1h
-dHRoZXcNCj48bWF0dGhldy5hdWxkQGludGVsLmNvbT47IGxpbnV4LW1lZGlhQHZnZXIua2VybmVs
-Lm9yZzsgZHJpLQ0KPmRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZzsgbGluYXJvLW1tLXNpZ0Bs
-aXN0cy5saW5hcm8ub3JnOw0KPnNpbW9uYS52ZXR0ZXJAZmZ3bGwuY2gNCj5TdWJqZWN0OiBSRTog
-W1BBVENIIDEvMl0gZG1hLWJ1ZjogaW1wcm92ZSBzZ190YWJsZSBkZWJ1Z2dpbmcgaGFjayB2Mw0K
-Pg0KPj4tLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPj5Gcm9tOiBkcmktZGV2ZWwgPGRyaS1k
-ZXZlbC1ib3VuY2VzQGxpc3RzLmZyZWVkZXNrdG9wLm9yZz4gT24gQmVoYWxmIE9mDQo+PkNocmlz
-dGlhbiBLw7ZuaWcNCj4+U2VudDogRnJpZGF5LCBEZWNlbWJlciA1LCAyMDI1IDg6MDYgQU0NCj4+
-VG86IEF1bGQsIE1hdHRoZXcgPG1hdHRoZXcuYXVsZEBpbnRlbC5jb20+OyBsaW51eC1tZWRpYUB2
-Z2VyLmtlcm5lbC5vcmc7DQo+PmRyaS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmc7IGxpbmFy
-by1tbS1zaWdAbGlzdHMubGluYXJvLm9yZzsNCj4+c2ltb25hLnZldHRlckBmZndsbC5jaDsgUnVo
-bCwgTWljaGFlbCBKIDxtaWNoYWVsLmoucnVobEBpbnRlbC5jb20+DQo+PlN1YmplY3Q6IFtQQVRD
-SCAxLzJdIGRtYS1idWY6IGltcHJvdmUgc2dfdGFibGUgZGVidWdnaW5nIGhhY2sgdjMNCj4+DQo+
-PlRoaXMgZGVidWdnaW5nIGhhY2sgaXMgaW1wb3J0YW50IHRvIGVuZm9yY2UgdGhlIHJ1bGUgdGhh
-dCBpbXBvcnRlcnMNCj4+c2hvdWxkICpuZXZlciogdG91Y2ggdGhlIHVuZGVybHlpbmcgc3RydWN0
-IHBhZ2Ugb2YgdGhlIGV4cG9ydGVyLg0KPj4NCj4+SW5zdGVhZCBvZiBqdXN0IG1hbmdsaW5nIHRo
-ZSBwYWdlIGxpbmsgY3JlYXRlIGEgY29weSBvZiB0aGUgc2dfdGFibGUNCj4+YnV0IG9ubHkgY29w
-eSBvdmVyIHRoZSBETUEgYWRkcmVzc2VzIGFuZCBub3QgdGhlIHBhZ2VzLg0KPj4NCj4+VGhpcyB3
-aWxsIGNhdXNlIGEgTlVMTCBwb2ludGVyIGRlLXJlZmVyZW5jZSBpZiB0aGUgaW1wb3J0ZXIgdHJp
-ZXMgdG8NCj4+dG91Y2ggdGhlIHN0cnVjdCBwYWdlLiBTdGlsbCBxdWl0ZSBhIGhhY2sgYnV0IHRo
-aXMgYXQgbGVhc3QgYWxsb3dzIHRoZQ0KPj5leHBvcnRlciB0byBwcm9wZXJseSBrZWVwcyBpdCdz
-IHNnX3RhYmxlIGludGFjdCB3aGlsZSBhbGxvd2luZyB0aGUNCj4+RE1BLWJ1ZiBtYWludGFpbmVy
-IHRvIGZpbmQgYW5kIGZpeCBtaXNiZWhhdmluZyBpbXBvcnRlcnMgYW5kIGZpbmFsbHkNCj4+c3dp
-dGNoIG92ZXIgdG8gdXNpbmcgYSBkaWZmZXJlbnQgZGF0YSBzdHJ1Y3R1cmUgaW4gdGhlIGZ1dHVy
-ZS4NCj4+DQo+PnYyOiBpbXByb3ZlIHRoZSBoYWNrIGZ1cnRoZXIgYnkgdXNpbmcgYSB3cmFwcGVy
-IHN0cnVjdHVyZSBhbmQgZXhwbGFpbmluZw0KPj50aGUgYmFja2dyb3VuZCBhIGJpdCBtb3JlIGlu
-IHRoZSBjb21taXQgbWVzc2FnZS4NCj4+djM6IGZpeCBzb21lIHdoaXRlc3BhY2UgaXNzdWVzLCB1
-c2Ugc2dfYXNzaWduX3BhZ2UoKS4NCj4+DQo+PlNpZ25lZC1vZmYtYnk6IENocmlzdGlhbiBLw7Zu
-aWcgPGNocmlzdGlhbi5rb2VuaWdAYW1kLmNvbT4NCj4+UmV2aWV3ZWQtYnk6IE1pY2hhZWwgSi4g
-UnVobCA8bWljaGFlbC5qLnJ1aGxAaW50ZWwuY29tPiAodjEpDQo+Pi0tLQ0KPj4gZHJpdmVycy9k
-bWEtYnVmL2RtYS1idWYuYyB8IDc0ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKystLS0N
-Cj4tLQ0KPj4tLS0NCj4+IDEgZmlsZSBjaGFuZ2VkLCA2MCBpbnNlcnRpb25zKCspLCAxNCBkZWxl
-dGlvbnMoLSkNCj4+DQo+PmRpZmYgLS1naXQgYS9kcml2ZXJzL2RtYS1idWYvZG1hLWJ1Zi5jIGIv
-ZHJpdmVycy9kbWEtYnVmL2RtYS1idWYuYw0KPj5pbmRleCAyMzA1YmIyY2MxZjEuLjk0NGY0MTAz
-YjVjYyAxMDA2NDQNCj4+LS0tIGEvZHJpdmVycy9kbWEtYnVmL2RtYS1idWYuYw0KPj4rKysgYi9k
-cml2ZXJzL2RtYS1idWYvZG1hLWJ1Zi5jDQo+PkBAIC0zNSw2ICszNSwxMiBAQA0KPj4NCj4+ICNp
-bmNsdWRlICJkbWEtYnVmLXN5c2ZzLXN0YXRzLmgiDQo+Pg0KPj4rLyogV3JhcHBlciB0byBoaWRl
-IHRoZSBzZ190YWJsZSBwYWdlIGxpbmsgZnJvbSB0aGUgaW1wb3J0ZXIgKi8NCj4+K3N0cnVjdCBk
-bWFfYnVmX3NnX3RhYmxlX3dyYXBwZXIgew0KPj4rCXN0cnVjdCBzZ190YWJsZSAqb3JpZ2luYWw7
-DQo+PisJc3RydWN0IHNnX3RhYmxlIHdyYXBwZXI7DQo+Pit9Ow0KPj4rDQo+PiBzdGF0aWMgaW5s
-aW5lIGludCBpc19kbWFfYnVmX2ZpbGUoc3RydWN0IGZpbGUgKik7DQo+Pg0KPj4gc3RhdGljIERF
-RklORV9NVVRFWChkbWFidWZfbGlzdF9tdXRleCk7DQo+PkBAIC04MjgsMjEgKzgzNCw1OSBAQCB2
-b2lkIGRtYV9idWZfcHV0KHN0cnVjdCBkbWFfYnVmICpkbWFidWYpDQo+PiB9DQo+PiBFWFBPUlRf
-U1lNQk9MX05TX0dQTChkbWFfYnVmX3B1dCwgIkRNQV9CVUYiKTsNCj4+DQo+Pi1zdGF0aWMgdm9p
-ZCBtYW5nbGVfc2dfdGFibGUoc3RydWN0IHNnX3RhYmxlICpzZ190YWJsZSkNCj4+K3N0YXRpYyBp
-bnQgZG1hX2J1Zl9tYW5nbGVfc2dfdGFibGUoc3RydWN0IHNnX3RhYmxlICoqc2dfdGFibGUpDQo+
-DQo+eW91IGFyZSBub3QgcmVhbGx5IG1hbmdsaW5nIHRoaXMgYW55bW9yZS4uLg0KPg0KPmRtYV9i
-dWZfY2xvbmVfc2dfdGFibGUoKQ0KPmRtYV9idWZfdW5jbG9uZV9zZ190YWJsZSgpDQo+DQo+bWF5
-YmU/DQo+DQo+DQo+PiB7DQo+Pi0jaWZkZWYgQ09ORklHX0RNQUJVRl9ERUJVRw0KPj4tCWludCBp
-Ow0KPj4tCXN0cnVjdCBzY2F0dGVybGlzdCAqc2c7DQo+Pi0NCj4+LQkvKiBUbyBjYXRjaCBhYnVz
-ZSBvZiB0aGUgdW5kZXJseWluZyBzdHJ1Y3QgcGFnZSBieSBpbXBvcnRlcnMgbWl4DQo+Pi0JICog
-dXAgdGhlIGJpdHMsIGJ1dCB0YWtlIGNhcmUgdG8gcHJlc2VydmUgdGhlIGxvdyBTR18gYml0cyB0
-bw0KPj4tCSAqIG5vdCBjb3JydXB0IHRoZSBzZ3QuIFRoZSBtaXhpbmcgaXMgdW5kb25lIG9uIHVu
-bWFwDQo+Pi0JICogYmVmb3JlIHBhc3NpbmcgdGhlIHNndCBiYWNrIHRvIHRoZSBleHBvcnRlci4N
-Cj4+KwlzdHJ1Y3Qgc2NhdHRlcmxpc3QgKnRvX3NnLCAqZnJvbV9zZzsNCj4+KwlzdHJ1Y3Qgc2df
-dGFibGUgKmZyb20gPSAqc2dfdGFibGU7DQo+PisJc3RydWN0IGRtYV9idWZfc2dfdGFibGVfd3Jh
-cHBlciAqdG87DQo+PisJaW50IGksIHJldDsNCj4+Kw0KPj4rCWlmICghSVNfRU5BQkxFRChDT05G
-SUdfRE1BQlVGX0RFQlVHKSkNCj4+KwkJcmV0dXJuIDA7DQo+PisNCj4+KwkvKg0KPj4rCSAqIFRv
-IGNhdGNoIGFidXNlIG9mIHRoZSB1bmRlcmx5aW5nIHN0cnVjdCBwYWdlIGJ5IGltcG9ydGVycyBj
-b3B5IHRoZQ0KPj4rCSAqIHNnX3RhYmxlIHdpdGhvdXQgY29weWluZyB0aGUgcGFnZV9saW5rIGFu
-ZCBnaXZlIG9ubHkgdGhlIGNvcHkgYmFjaw0KPj50bw0KPj4rCSAqIHRoZSBpbXBvcnRlci4NCj4+
-IAkgKi8NCj4+LQlmb3JfZWFjaF9zZ3RhYmxlX3NnKHNnX3RhYmxlLCBzZywgaSkNCj4+LQkJc2ct
-PnBhZ2VfbGluayBePSB+MHhmZlVMOw0KPj4tI2VuZGlmDQo+PisJdG8gPSBremFsbG9jKHNpemVv
-ZigqdG8pLCBHRlBfS0VSTkVMKTsNCj4+KwlpZiAoIXRvKQ0KPj4rCQlyZXR1cm4gLUVOT01FTTsN
-Cj4+Kw0KPj4rCXJldCA9IHNnX2FsbG9jX3RhYmxlKCZ0by0+d3JhcHBlciwgZnJvbS0+bmVudHMs
-IEdGUF9LRVJORUwpOw0KPj4rCWlmIChyZXQpDQo+PisJCWdvdG8gZnJlZV90bzsNCj4+Kw0KPj4r
-CXRvX3NnID0gdG8tPndyYXBwZXIuc2dsOw0KPj4rCWZvcl9lYWNoX3NndGFibGVfZG1hX3NnKGZy
-b20sIGZyb21fc2csIGkpIHsNCj4+KwkJdG9fc2ctPm9mZnNldCA9IDA7DQo+PisJCXRvX3NnLT5s
-ZW5ndGggPSAwOw0KPj4rCQlzZ19hc3NpZ25fcGFnZSh0b19zZywgTlVMTCk7DQo+DQo+c2dfc2V0
-X3BhZ2UodG9fc2csIE5VTEwsIDAsIDApOyA/DQoNCkp1c3Qgd2h5IHlvdSBhcmUgdXNpbmcgdGhp
-cyBvbmUuLi4gaWdub3JlIHRoaXMgdGhvdWdodC4uLg0KDQo+SnVzdCB0aG91Z2h0cy4uLiBUaGlz
-IGxvb2tzIHJlYXNvbmFibGUgdG8gbWUuDQo+DQo+V2l0aCBvciB3aXRob3V0IHRoZXNlIGNoYW5n
-ZXM6DQo+DQo+UmV2aWV3ZWQtYnk6IE1pY2hhZWwgSi4gUnVobCA8bWljaGFlbC5qLnJ1aGxAaW50
-ZWwuY29tPg0KPg0KPk0NCj4NCj4+KwkJc2dfZG1hX2FkZHJlc3ModG9fc2cpID0gc2dfZG1hX2Fk
-ZHJlc3MoZnJvbV9zZyk7DQo+PisJCXNnX2RtYV9sZW4odG9fc2cpID0gc2dfZG1hX2xlbihmcm9t
-X3NnKTsNCj4+KwkJdG9fc2cgPSBzZ19uZXh0KHRvX3NnKTsNCj4+Kwl9DQo+Pg0KPj4rCXRvLT5v
-cmlnaW5hbCA9IGZyb207DQo+PisJKnNnX3RhYmxlID0gJnRvLT53cmFwcGVyOw0KPj4rCXJldHVy
-biAwOw0KPj4rDQo+PitmcmVlX3RvOg0KPj4rCWtmcmVlKHRvKTsNCj4+KwlyZXR1cm4gcmV0Ow0K
-Pj4rfQ0KPj4rDQo+PitzdGF0aWMgdm9pZCBkbWFfYnVmX2RlbWFuZ2xlX3NnX3RhYmxlKHN0cnVj
-dCBzZ190YWJsZSAqKnNnX3RhYmxlKQ0KPj4rew0KPj4rCXN0cnVjdCBkbWFfYnVmX3NnX3RhYmxl
-X3dyYXBwZXIgKmNvcHk7DQo+PisNCj4+KwlpZiAoIUlTX0VOQUJMRUQoQ09ORklHX0RNQUJVRl9E
-RUJVRykpDQo+PisJCXJldHVybjsNCj4+Kw0KPj4rCWNvcHkgPSBjb250YWluZXJfb2YoKnNnX3Rh
-YmxlLCB0eXBlb2YoKmNvcHkpLCB3cmFwcGVyKTsNCj4+Kwkqc2dfdGFibGUgPSBjb3B5LT5vcmln
-aW5hbDsNCj4+KwlzZ19mcmVlX3RhYmxlKCZjb3B5LT53cmFwcGVyKTsNCj4+KwlrZnJlZShjb3B5
-KTsNCj4+IH0NCj4+DQo+PiBzdGF0aWMgaW5saW5lIGJvb2wNCj4+QEAgLTExMzksNyArMTE4Myw5
-IEBAIHN0cnVjdCBzZ190YWJsZSAqZG1hX2J1Zl9tYXBfYXR0YWNobWVudChzdHJ1Y3QNCj4+ZG1h
-X2J1Zl9hdHRhY2htZW50ICphdHRhY2gsDQo+PiAJCWlmIChyZXQgPCAwKQ0KPj4gCQkJZ290byBl
-cnJvcl91bm1hcDsNCj4+IAl9DQo+Pi0JbWFuZ2xlX3NnX3RhYmxlKHNnX3RhYmxlKTsNCj4+Kwly
-ZXQgPSBkbWFfYnVmX21hbmdsZV9zZ190YWJsZSgmc2dfdGFibGUpOw0KPj4rCWlmIChyZXQpDQo+
-PisJCWdvdG8gZXJyb3JfdW5tYXA7DQo+Pg0KPj4gCWlmIChJU19FTkFCTEVEKENPTkZJR19ETUFf
-QVBJX0RFQlVHKSkgew0KPj4gCQlzdHJ1Y3Qgc2NhdHRlcmxpc3QgKnNnOw0KPj5AQCAtMTIyMCw3
-ICsxMjY2LDcgQEAgdm9pZCBkbWFfYnVmX3VubWFwX2F0dGFjaG1lbnQoc3RydWN0DQo+PmRtYV9i
-dWZfYXR0YWNobWVudCAqYXR0YWNoLA0KPj4NCj4+IAlkbWFfcmVzdl9hc3NlcnRfaGVsZChhdHRh
-Y2gtPmRtYWJ1Zi0+cmVzdik7DQo+Pg0KPj4tCW1hbmdsZV9zZ190YWJsZShzZ190YWJsZSk7DQo+
-PisJZG1hX2J1Zl9kZW1hbmdsZV9zZ190YWJsZSgmc2dfdGFibGUpOw0KPj4gCWF0dGFjaC0+ZG1h
-YnVmLT5vcHMtPnVubWFwX2RtYV9idWYoYXR0YWNoLCBzZ190YWJsZSwgZGlyZWN0aW9uKTsNCj4+
-DQo+PiAJaWYgKGRtYV9idWZfcGluX29uX21hcChhdHRhY2gpKQ0KPj4tLQ0KPj4yLjQzLjANCg0K
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1t
-LXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVu
-c3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5h
-cm8ub3JnCg==
+
+--===============8001084837357132071==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="tsFx90K4YzyOMDd5"
+Content-Disposition: inline
+
+
+--tsFx90K4YzyOMDd5
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Dec 05, 2025 at 04:18:38PM +0900, Byungchul Park wrote:
+> Add documents describing the concept and APIs of dept.
+>=20
+> Signed-off-by: Byungchul Park <byungchul@sk.com>
+> ---
+>  Documentation/dev-tools/dept.rst     | 778 +++++++++++++++++++++++++++
+>  Documentation/dev-tools/dept_api.rst | 125 +++++
+
+You forget to add toctree entries:
+
+---- >8 ----
+diff --git a/Documentation/dev-tools/index.rst b/Documentation/dev-tools/in=
+dex.rst
+index 4b8425e348abd1..02c858f5ed1fa2 100644
+--- a/Documentation/dev-tools/index.rst
++++ b/Documentation/dev-tools/index.rst
+@@ -22,6 +22,8 @@ Documentation/process/debugging/index.rst
+    clang-format
+    coccinelle
+    sparse
++   dept
++   dept_api
+    kcov
+    gcov
+    kasan
+
+> +Lockdep detects a deadlock by checking lock acquisition order.  For
+> +example, a graph to track acquisition order built by lockdep might look
+> +like:
+> +
+> +.. literal::
+> +
+> +   A -> B -
+> +           \
+> +            -> E
+> +           /
+> +   C -> D -
+> +
+> +   where 'A -> B' means that acquisition A is prior to acquisition B
+> +   with A still held.
+
+Use code-block directive for literal code blocks:
+
+---- >8 ----
+diff --git a/Documentation/dev-tools/dept.rst b/Documentation/dev-tools/dep=
+t.rst
+index 333166464543d7..8394c4ea81bc2a 100644
+--- a/Documentation/dev-tools/dept.rst
++++ b/Documentation/dev-tools/dept.rst
+@@ -10,7 +10,7 @@ Lockdep detects a deadlock by checking lock acquisition o=
+rder.  For
+ example, a graph to track acquisition order built by lockdep might look
+ like:
+=20
+-.. literal::
++.. code-block::
+=20
+    A -> B -
+            \
+@@ -25,7 +25,7 @@ Lockdep keeps adding each new acquisition order into the =
+graph at
+ runtime.  For example, 'E -> C' will be added when the two locks have
+ been acquired in the order, E and then C.  The graph will look like:
+=20
+-.. literal::
++.. code-block::
+=20
+        A -> B -
+                \
+@@ -41,7 +41,7 @@ been acquired in the order, E and then C.  The graph will=
+ look like:
+=20
+ This graph contains a subgraph that demonstrates a loop like:
+=20
+-.. literal::
++.. code-block::
+=20
+                 -> E -
+                /      \
+@@ -76,7 +76,7 @@ e.g. irq context, normal process context, wq worker conte=
+xt, or so on.
+=20
+ Can lockdep detect the following deadlock?
+=20
+-.. literal::
++.. code-block::
+=20
+    context X	   context Y	   context Z
+=20
+@@ -91,7 +91,7 @@ Can lockdep detect the following deadlock?
+=20
+ No.  What about the following?
+=20
+-.. literal::
++.. code-block::
+=20
+    context X		   context Y
+=20
+@@ -116,7 +116,7 @@ What leads a deadlock
+ A deadlock occurs when one or multi contexts are waiting for events that
+ will never happen.  For example:
+=20
+-.. literal::
++.. code-block::
+=20
+    context X	   context Y	   context Z
+=20
+@@ -148,7 +148,7 @@ In terms of dependency:
+=20
+ Dependency graph reflecting this example will look like:
+=20
+-.. literal::
++.. code-block::
+=20
+     -> C -> A -> B -
+    /                \
+@@ -171,7 +171,7 @@ Introduce DEPT
+ DEPT(DEPendency Tracker) tracks wait and event instead of lock
+ acquisition order so as to recognize the following situation:
+=20
+-.. literal::
++.. code-block::
+=20
+    context X	   context Y	   context Z
+=20
+@@ -186,7 +186,7 @@ acquisition order so as to recognize the following situ=
+ation:
+ and builds up a dependency graph at runtime that is similar to lockdep.
+ The graph might look like:
+=20
+-.. literal::
++.. code-block::
+=20
+     -> C -> A -> B -
+    /                \
+@@ -199,7 +199,7 @@ DEPT keeps adding each new dependency into the graph at=
+ runtime.  For
+ example, 'B -> D' will be added when event D occurrence is a
+ prerequisite to reaching event B like:
+=20
+-.. literal::
++.. code-block::
+=20
+    context W
+=20
+@@ -211,7 +211,7 @@ prerequisite to reaching event B like:
+=20
+ After the addition, the graph will look like:
+=20
+-.. literal::
++.. code-block::
+=20
+                      -> D
+                     /
+@@ -236,7 +236,7 @@ How DEPT works
+ Let's take a look how DEPT works with the 1st example in the section
+ 'Limitation of lockdep'.
+=20
+-.. literal::
++.. code-block::
+=20
+    context X	   context Y	   context Z
+=20
+@@ -256,7 +256,7 @@ event.
+=20
+ Adding comments to describe DEPT's view in detail:
+=20
+-.. literal::
++.. code-block::
+=20
+    context X	   context Y	   context Z
+=20
+@@ -293,7 +293,7 @@ Adding comments to describe DEPT's view in detail:
+=20
+ Let's build up dependency graph with this example.  Firstly, context X:
+=20
+-.. literal::
++.. code-block::
+=20
+    context X
+=20
+@@ -304,7 +304,7 @@ Let's build up dependency graph with this example.  Fir=
+stly, context X:
+=20
+ There are no events to create dependency.  Next, context Y:
+=20
+-.. literal::
++.. code-block::
+=20
+    context Y
+=20
+@@ -332,7 +332,7 @@ event A cannot be triggered if wait B cannot be awakene=
+d by event B.
+ Therefore, we can say event A depends on event B, say, 'A -> B'.  The
+ graph will look like after adding the dependency:
+=20
+-.. literal::
++.. code-block::
+=20
+    A -> B
+=20
+@@ -340,7 +340,7 @@ graph will look like after adding the dependency:
+=20
+ Lastly, context Z:
+=20
+-.. literal::
++.. code-block::
+=20
+    context Z
+=20
+@@ -362,7 +362,7 @@ triggered if wait A cannot be awakened by event A.  The=
+refore, we can
+ say event B depends on event A, say, 'B -> A'.  The graph will look like
+ after adding the dependency:
+=20
+-.. literal::
++.. code-block::
+=20
+     -> A -> B -
+    /           \
+@@ -386,7 +386,7 @@ Interpret DEPT report
+=20
+ The following is the same example in the section 'How DEPT works'.
+=20
+-.. literal::
++.. code-block::
+=20
+    context X	   context Y	   context Z
+=20
+@@ -425,7 +425,7 @@ We can simplify this by labeling each waiting point wit=
+h [W], each
+ point where its event's context starts with [S] and each event with [E].
+ This example will look like after the labeling:
+=20
+-.. literal::
++.. code-block::
+=20
+    context X	   context Y	   context Z
+=20
+@@ -443,7 +443,7 @@ DEPT uses the symbols [W], [S] and [E] in its report as=
+ described above.
+ The following is an example reported by DEPT for a real problem in
+ practice.
+=20
+-.. literal::
++.. code-block::
+=20
+    Link: https://lore.kernel.org/lkml/6383cde5-cf4b-facf-6e07-1378a485657d=
+@I-love.SAKURA.ne.jp/#t
+    Link: https://lore.kernel.org/lkml/1674268856-31807-1-git-send-email-by=
+ungchul.park@lge.com/
+@@ -646,7 +646,7 @@ practice.
+=20
+ Let's take a look at the summary that is the most important part.
+=20
+-.. literal::
++.. code-block::
+=20
+    ---------------------------------------------------
+    summary
+@@ -669,7 +669,7 @@ Let's take a look at the summary that is the most impor=
+tant part.
+=20
+ The summary shows the following scenario:
+=20
+-.. literal::
++.. code-block::
+=20
+    context A	   context B	   context ?(unknown)
+=20
+@@ -684,7 +684,7 @@ The summary shows the following scenario:
+=20
+ Adding comments to describe DEPT's view in detail:
+=20
+-.. literal::
++.. code-block::
+=20
+    context A	   context B	   context ?(unknown)
+=20
+@@ -711,7 +711,7 @@ Adding comments to describe DEPT's view in detail:
+=20
+ Let's build up dependency graph with this report. Firstly, context A:
+=20
+-.. literal::
++.. code-block::
+=20
+    context A
+=20
+@@ -735,7 +735,7 @@ unlock(&ni->ni_lock:0) depends on folio_unlock(&f1), sa=
+y,
+=20
+ The graph will look like after adding the dependency:
+=20
+-.. literal::
++.. code-block::
+=20
+    unlock(&ni->ni_lock:0) -> folio_unlock(&f1)
+=20
+@@ -743,7 +743,7 @@ The graph will look like after adding the dependency:
+=20
+ Secondly, context B:
+=20
+-.. literal::
++.. code-block::
+=20
+    context B
+=20
+@@ -762,7 +762,7 @@ folio_unlock(&f1) depends on unlock(&ni->ni_lock:0), sa=
+y,
+=20
+ The graph will look like after adding the dependency:
+=20
+-.. literal::
++.. code-block::
+=20
+     -> unlock(&ni->ni_lock:0) -> folio_unlock(&f1) -
+    /                                                \
+
+> +Limitation of lockdep
+> +---------------------
+> +
+> +Lockdep deals with a deadlock by typical lock e.g. spinlock and mutex,
+> +that are supposed to be released within the acquisition context.
+> +However, when it comes to a deadlock by folio lock that is not supposed
+> +to be released within the acquisition context or other general
+> +synchronization mechanisms, lockdep doesn't work.
+> +
+> +NOTE:  In this document, 'context' refers to any type of unique context
+> +e.g. irq context, normal process context, wq worker context, or so on.
+> +
+> +Can lockdep detect the following deadlock?
+> +
+> +.. literal::
+> +
+> +   context X	   context Y	   context Z
+> +
+> +		   mutex_lock A
+> +   folio_lock B
+> +		   folio_lock B <- DEADLOCK
+> +				   mutex_lock A <- DEADLOCK
+> +				   folio_unlock B
+> +		   folio_unlock B
+> +		   mutex_unlock A
+> +				   mutex_unlock A
+> +
+> +No.  What about the following?
+> +
+> +.. literal::
+> +
+> +   context X		   context Y
+> +
+> +			   mutex_lock A
+> +   mutex_lock A <- DEADLOCK
+> +			   wait_for_complete B <- DEADLOCK
+> +   complete B
+> +			   mutex_unlock A
+> +   mutex_unlock A
+> +
+> +No.
+
+One unanswered question from my v17 review [1]: You explain in "How DEPT wo=
+rks"
+section how DEPT detects deadlock in the first example (the former with thr=
+ee
+contexts). Can you do the same on the second example (the latter with two
+contexts)?
+
+Thanks.
+
+[1]: https://lore.kernel.org/linux-doc/aN84jKyrE1BumpLj@archie.me/
+
+--=20
+An old man doll... just what I always wanted! - Clara
+
+--tsFx90K4YzyOMDd5
+Content-Type: application/pgp-signature; name=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCaTN37QAKCRD2uYlJVVFO
+o40gAP9yWQe507aOQ9xG+y3WznUbz9K0gxVdcJgmBzyPkuLdOAD/SjStuxrT6yQi
+Wd1X9MlzPBf7sPwdNC1xXihj1C/n6go=
+=b9ga
+-----END PGP SIGNATURE-----
+
+--tsFx90K4YzyOMDd5--
+
+--===============8001084837357132071==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============8001084837357132071==--
