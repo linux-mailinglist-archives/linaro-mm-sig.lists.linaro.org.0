@@ -2,655 +2,203 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id aFO9IncD4WmJoQAAu9opvQ
+	id cFzXOH8D4WmJoQAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:42:47 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:42:55 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 042F14111E1
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:42:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 54DCD4111F7
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:42:55 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B94D644BA2
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:42:45 +0000 (UTC)
-Received: from BN1PR04CU002.outbound.protection.outlook.com (mail-eastus2azon11010017.outbound.protection.outlook.com [52.101.56.17])
-	by lists.linaro.org (Postfix) with ESMTPS id DF64A3F970
-	for <linaro-mm-sig@lists.linaro.org>; Fri,  5 Dec 2025 16:27:39 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5EC9F44BA8
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:42:54 +0000 (UTC)
+Received: from mail-ot1-f79.google.com (mail-ot1-f79.google.com [209.85.210.79])
+	by lists.linaro.org (Postfix) with ESMTPS id CA2FE3F91C
+	for <linaro-mm-sig@lists.linaro.org>; Sat,  6 Dec 2025 01:19:27 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=ti.com header.s=selector1 header.b=HcdheTRK;
-	spf=pass (lists.linaro.org: domain of d-qiu@ti.com designates 52.101.56.17 as permitted sender) smtp.mailfrom=d-qiu@ti.com;
-	dmarc=pass (policy=quarantine) header.from=ti.com;
-	arc=pass ("microsoft.com:s=arcselector10001:i=1")
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=J7+/57W+Amen6X161m1P4SMfbwy9XXRKUxCsV/61Irt/Eu3iCNzKxjNocSZBfpgZq9oWQQ4DxX0Fv6JcOlsCqA3sbJcmmLaSsrgNz9WgzlVrSYTvATX5lCMVIEJheS00W2pabN+V9U6UP+DVEn5XFnsRE9G2VTL0xT26CZNo6iXZaf6LiFACDODKpYANG0LuKTtdeR+kjp43iJ8SS0+bPPtECvnZPygO+kpcj9RB80JokAj2jkWj2QiAwHmGvo02mYquYNbTq0ATRSEMuNVr+AVB5lQnMKSqfJ7pln+8oaVg7/46xPXfSf+eZbqyW3YILF4tcC2V10zzvNWiJG7vKw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vdKqZujOhWa4CsQXlegyNtSZ7ISvJ0jRdS63h421GNQ=;
- b=LXc9J3PPlxp9qjlVwq9kB6qt+HeWNZewpPULFMda+jdgXhaaKekvwNlPALokuU5UkXMxj2XVu8V77umP/8a0IED93LdYAUl4GRRL9VFIg/Ov00I4nHleZjefnea04MDIsq2EhdsKcoJuVOdg6djQ9sk2flnrwhcOrxxg39Hf0AcKvYGGCY3danjWOa7xCQQv43Yv/00+kvAtZn1n5d+vx7GIdTHNxRY7jleUOHE8NDQFXaMPBpYP27uXD1XnDPeG/AiSWg598nQSXhO7nVCrxz1OjKWm544hrbKjLRhjo/vZPqMvoJE0Mn926sDgMGcgsI8CZNWwXsDxqEmpQ78dXQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=lists.linaro.org smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vdKqZujOhWa4CsQXlegyNtSZ7ISvJ0jRdS63h421GNQ=;
- b=HcdheTRKWfzVopXnVruGVLHeNxOLXdZKHUby89P7cUGurCWigiTNEiB/E2VpAtBtIUPBIh55ppkxHD67dGOiQwOVigMuFVyKPVCODemyrH8iYkkbt4PiEFEkZbGoqJ0kv1WU78aJWae7dY8CccdL6IQqve/ED50V9UN+E8R3FsE=
-Received: from CH0PR03CA0441.namprd03.prod.outlook.com (2603:10b6:610:10e::34)
- by DS0PR10MB6797.namprd10.prod.outlook.com (2603:10b6:8:13d::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.11; Fri, 5 Dec
- 2025 16:27:37 +0000
-Received: from DS3PEPF000099DC.namprd04.prod.outlook.com
- (2603:10b6:610:10e:cafe::95) by CH0PR03CA0441.outlook.office365.com
- (2603:10b6:610:10e::34) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9388.9 via Frontend Transport; Fri, 5
- Dec 2025 16:27:24 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- DS3PEPF000099DC.mail.protection.outlook.com (10.167.17.198) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9412.4 via Frontend Transport; Fri, 5 Dec 2025 16:27:36 +0000
-Received: from DLEE211.ent.ti.com (157.170.170.113) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 5 Dec
- 2025 10:27:30 -0600
-Received: from DLEE203.ent.ti.com (157.170.170.78) by DLEE211.ent.ti.com
- (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 5 Dec
- 2025 10:27:29 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE203.ent.ti.com
- (157.170.170.78) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 5 Dec 2025 10:27:29 -0600
-Received: from [10.247.23.136] (lt5cd3044tj5.dhcp.ti.com [10.247.23.136])
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5B5GRSQa3577388;
-	Fri, 5 Dec 2025 10:27:28 -0600
-Message-ID: <f0a961cb-d0ec-4f53-8c51-5b1c5bba8b1a@ti.com>
-Date: Fri, 5 Dec 2025 10:27:28 -0600
+	dkim=none;
+	spf=pass (lists.linaro.org: domain of 3n4QzaQkbAMY4ABwmxxq3m11up.s00sxq64q3o0z5qz5.o0y@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com designates 209.85.210.79 as permitted sender) smtp.mailfrom=3n4QzaQkbAMY4ABwmxxq3m11up.s00sxq64q3o0z5qz5.o0y@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com;
+	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=appspotmail.com (policy=none)
+Received: by mail-ot1-f79.google.com with SMTP id 46e09a7af769-7c6cb7bf71bso3104327a34.0
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 05 Dec 2025 17:19:27 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1764983967; x=1765588767;
+        h=to:from:subject:message-id:date:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=iamnrkElp7j3TjhockSVR4ojhUOK2ChBJfnCvlBuTjI=;
+        b=rz2qplQ+jVHmV9yKt76pqfmMPVGXkg0KT9+AdNwJ6YVFGRGoA7B/ogt0Lu6OsdP77Y
+         zffS22RRzz8UYy0rdNxbgJjmJ5YsWn+DYpcKjKGFdV3S7Qlwb2OlpTsp4fUNR9Ygm8GE
+         tgDGiH37te1SLdqdNLD7f0Yad36/+G63P/hhSVImANUFPgmS0ef1wm15PScTwSqvHi7L
+         iGR7ueBoSOF4iSr+kuhgRHNqYYzZ9ujx5KJSJZDcXoPhHOok8XFdQfoS18QJo9DhPB9a
+         uCK9SDXufGKYV57gYQjzsr6C/YG2mBdLdeW/jPbeuj06eAoNP5ze2YNZfbw6Vria77dp
+         jDJA==
+X-Forwarded-Encrypted: i=1; AJvYcCU2FSs4ncx+5XU10CJZcEQMUfv37dvA4fkWW63Nu02kG8DemomeIZwN3kZgUR4qOrv2twWBJ3zsaapeIdLc@lists.linaro.org
+X-Gm-Message-State: AOJu0YwaXaPVzaYoFd7ViCaVFSHWSRDb2KggaxzG02HQbqPCAkEMlRb5
+	ExZ520JAIWUOyHed6XTIN6lmtOvQdEv00rRULPFV4q7HnKABhm+xGZpvMyH21ZBum2rEQhdMUC/
+	3nPALUf0ffDoFo8MwM+l+cMy0DfFgFjEu7nBqAXCKVJ6neIvz8B1SlssqSYY=
+X-Google-Smtp-Source: AGHT+IFTXBAiajNCFxz6p22lgnqCsewrHy8l5CrMbwVzmSF0kEp1CYnit5k/Ep3FZ7GrUryFn1zjUnrbHOfW4JgI/VmPkCkDcaZq
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Roger Quadros <rogerq@kernel.org>, Siddharth Vadapalli
-	<s-vadapalli@ti.com>, Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller"
-	<davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski
-	<kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Alexei Starovoitov
-	<ast@kernel.org>, Daniel Borkmann <daniel@iogearbox.net>, "Jesper Dangaard
- Brouer" <hawk@kernel.org>, John Fastabend <john.fastabend@gmail.com>, "Sumit
- Semwal" <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?=
-	<christian.koenig@amd.com>, Stanislav Fomichev <sdf@fomichev.me>, "Simon
- Horman" <horms@kernel.org>
-References: <20251109-am65-cpsw-xdp-zc-v2-0-858f60a09d12@kernel.org>
- <20251109-am65-cpsw-xdp-zc-v2-5-858f60a09d12@kernel.org>
-Content-Language: en-US
-From: "Qiu, Daolin" <d-qiu@ti.com>
-In-Reply-To: <20251109-am65-cpsw-xdp-zc-v2-5-858f60a09d12@kernel.org>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS3PEPF000099DC:EE_|DS0PR10MB6797:EE_
-X-MS-Office365-Filtering-Correlation-Id: e1b71f4b-8070-41a5-e3e1-08de341b33c6
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|7416014|82310400026|376014|1800799024|36860700013|921020;
-X-Microsoft-Antispam-Message-Info: 
-	=?utf-8?B?QTdqQ3RLZll6SHFiYU5hRGJlTStQYStnREUzTWhheUgyb3N4V0EyZWdOSUNv?=
- =?utf-8?B?NFJzN1lqWE9LOW5qdFNDZ3VhOUZxS21Ld1A3a3BkUGV5Z215NHdBUCt5Y1d0?=
- =?utf-8?B?Z2lnVmk0YWU1SERKQTVLQUlNU0lLUjNORVpNZUF5Zi9rbWE2ZGZ1RXJqMXhj?=
- =?utf-8?B?MnhrNzdROGExZjdTV3pCT2t5MzVjSTNyeHUvQldRcDVBclU3LzNqUjRROTEr?=
- =?utf-8?B?NjVjMnd3b0tUZHhiR1FzY0grNnFjRkxMM0xFelVqVTZWOThkYWpYUFJnZUhP?=
- =?utf-8?B?MmlRQkI3ZVpFUEJwVEdJMVRDNWhsa1Jyeit2R1JoUGdlQjNzREg1eVBuZnY4?=
- =?utf-8?B?T0ZSY2R3WVk5T3FFMklIYTh6MGdXT2VXZ2sxOGdSQ2poTFR0eU5LZDgzSmlY?=
- =?utf-8?B?NUthMTBDaHl1VTlDZDBvNkFxVERGUG50SWRTbWdtb0plcTQvQ0MyVEY4N2Nu?=
- =?utf-8?B?TTBwMFo3V1ovRGovRWhrV3U0T2Z6RHBPVXRDOFk5dkpMWnRsQm4vM1l5U1Zn?=
- =?utf-8?B?bmVHMG1MbklSV3Jpb2FJdDUwSHFGQW9DRFY1eW9nVVJMU2IwSTI4SzBtbHdn?=
- =?utf-8?B?NGppL1JVMTZkUHZZRmdIdlA5MXlxNE5hdEVNSmt0Tm96b3YxbjloZW1PQUMv?=
- =?utf-8?B?QU1wS2hlcE5vdGVETDNVbVplWjNvU2FQamxETVJIclgrQlYwVmNWV0VmVGdG?=
- =?utf-8?B?emFPM0xYTEdSbmdHRmJUcHFpK3JnM2xGQzdaOW41V2xjTVBMalhKWDkwTGpQ?=
- =?utf-8?B?WkpiV01QeHpyWjZUUGhjQ0ZpYzJVZzIzQmZhdkdFSURrbEpybU5jd0p2anQr?=
- =?utf-8?B?M1FRS1ZlckV5U1F6NjVXMlV0L3lvK0VMd0FCczlhTlR1Y1o0Y0dpRFlJZzIy?=
- =?utf-8?B?RGdxditZL1dtTUM0RFcxYkNBSEZDMnFUZXpWR0x5TVZ4WG1XbHVTS1A5L3Fs?=
- =?utf-8?B?U1hmYkFMRjNnUEx3RnE0OENyK2R4dFhEOG94emdGMmNNa01JVUtuTTJPY3JZ?=
- =?utf-8?B?QU5McGg4NXlMVk9wLzlCUVYxUW4wYXJwNEhUL2FzMlhuWlNIWFBLWVIwQ2NQ?=
- =?utf-8?B?eXFrUGgrRnhOMHFIL3lTWVpsbHdWQ284OG5xZGhCcnBMYWhpV3FGd0IrUldj?=
- =?utf-8?B?V21RblJNckpobTFTcVZLSkpsV2xpdjExdmdUbHptOFRxUitqcGplQW5GT1F2?=
- =?utf-8?B?Yzd3aWthWFI3OVkwZXRldU5TZ0xVMjBBLzRzdElmQ3R5ekUwVVVnV2NJOFNH?=
- =?utf-8?B?WDMzdWJkQVJqcDlmM2ZYZGJMTFNiOWNTZGlmd3pCNitoc215RWFDdXZwTHdU?=
- =?utf-8?B?eFZlR2svbnIvWWhVT1V6WXdjNysydTJZK0lZUVhOa2JpcTJnTGlKN2VhMnpi?=
- =?utf-8?B?SVpVS25hbU1HZ2pBS0tXM3JaRzl2bWcvMk1Hb1dKRjJYQWlaV3hELzNtSFJC?=
- =?utf-8?B?TVVsWFpTeE5Ya1J4NzFNMm9relB6aFpURStsS2pJZFJ4d1YyajdYZFpTUkJC?=
- =?utf-8?B?YU1oU2lvTyttbEdFZG9jWGdmb0lwZkx6R1Q3MWRNZDA0SnNWVnp2YnhYLzNz?=
- =?utf-8?B?djJXbXJ5UGtkUm5hZWJYL2NscFB5WlBXQmhXL1M3dmVWZGwvVWRFODYrRnNr?=
- =?utf-8?B?bG83LzllL2F6Q1p4MTBoOE52RmhVVkp0dmhxU1N1RlN4T3VTekpYclMwb0U1?=
- =?utf-8?B?QktYblNJTEhZRDVjMWQ2QlVCTzV5WlcweFRadVpRazJRTTZ5MFRZNStIU1or?=
- =?utf-8?B?SUE4bEY4NnIvNi9zN0Qyb25tWXB2SktBczJCODlWQVpvTkNBN3hWTDVOK0wr?=
- =?utf-8?B?UzQvakkrUjR1b2k4YnlOZ0kxRlh4L2g3MTZpcS91d3Z6L0IxVTBaQVBYQmRw?=
- =?utf-8?B?YitUYnkrMmRXai9GRXc0YTlKN0psMTRwZ0xLVzNIOExDVE81SW8wcWt4UWdz?=
- =?utf-8?B?V0VLNEJ5YTk3b2wvR0crUWRCUmNNZGxOQlpzMXNIMDE4SnBZaFNaREpENEgy?=
- =?utf-8?B?WEtkZ1NIdnhhZHc3QlNBYlRyZ2M2VTEydEkyVVNVNVF2L3FKcXo3TnUwY2VZ?=
- =?utf-8?Q?CHv5Fa?=
-X-Forefront-Antispam-Report: 
-	CIP:198.47.23.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet201.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(7416014)(82310400026)(376014)(1800799024)(36860700013)(921020);DIR:OUT;SFP:1101;
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Dec 2025 16:27:36.9771
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e1b71f4b-8070-41a5-e3e1-08de341b33c6
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.195];Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	DS3PEPF000099DC.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR10MB6797
-X-Spamd-Bar: ---
-X-MailFrom: d-qiu@ti.com
+X-Received: by 2002:a05:6820:f03:b0:659:9a49:8fcd with SMTP id
+ 006d021491bc7-6599a9774f2mr508232eaf.70.1764983967246; Fri, 05 Dec 2025
+ 17:19:27 -0800 (PST)
+Date: Fri, 05 Dec 2025 17:19:27 -0800
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <6933849f.a70a0220.243dc6.0026.GAE@google.com>
+From: syzbot <syzbot+4317d7108e14e5d56308@syzkaller.appspotmail.com>
+To: christian.koenig@amd.com, dri-devel@lists.freedesktop.org,
+	linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org,
+	linux-media@vger.kernel.org, sumit.semwal@linaro.org,
+	syzkaller-bugs@googlegroups.com
+X-Spamd-Bar: --
+X-MailFrom: 3n4QzaQkbAMY4ABwmxxq3m11up.s00sxq64q3o0z5qz5.o0y@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: XNQYZVJCRZQXOBDCNXU4WN2QURVQYDCH
-X-Message-ID-Hash: XNQYZVJCRZQXOBDCNXU4WN2QURVQYDCH
+Message-ID-Hash: VNCTR45H3JETKZ6EQRBT5IRNR7DXVNZ5
+X-Message-ID-Hash: VNCTR45H3JETKZ6EQRBT5IRNR7DXVNZ5
 X-Mailman-Approved-At: Thu, 16 Apr 2026 15:12:37 +0000
-CC: srk@ti.com, Meghana Malladi <m-malladi@ti.com>, netdev@vger.kernel.org, linux-kernel@vger.kernel.org, bpf@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH net-next v2 5/7] net: ethernet: ti: am65-cpsw: Add AF_XDP zero copy for TX
+Subject: [Linaro-mm-sig] [syzbot] [media?] [dri?] WARNING in dma_buf_vmap
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XNQYZVJCRZQXOBDCNXU4WN2QURVQYDCH/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VNCTR45H3JETKZ6EQRBT5IRNR7DXVNZ5/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [7.49 / 15.00];
-	INTRODUCTION(2.00)[];
-	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_QUARANTINE(1.50)[ti.com : SPF not aligned (relaxed),quarantine];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
-	R_DKIM_REJECT(1.00)[ti.com:s=selector1];
-	DATE_IN_PAST(1.00)[3167];
-	MAILLIST(-0.20)[mailman];
+X-Spamd-Result: default: False [1.59 / 15.00];
+	URI_HIDDEN_PATH(1.00)[https://syzkaller.appspot.com/x/.config?x=a1db0fea040c2a9f];
+	DATE_IN_PAST(1.00)[3158];
 	R_SPF_ALLOW(-0.20)[+mx:c];
+	MAILLIST(-0.20)[mailman];
+	DMARC_POLICY_SOFTFAIL(0.10)[appspotmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FREEMAIL_TO(0.00)[kernel.org,ti.com,lunn.ch,davemloft.net,google.com,redhat.com,iogearbox.net,gmail.com,linaro.org,amd.com,fomichev.me];
-	GREYLIST(0.00)[pass,meta];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[ti.com:mid,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns];
-	DKIM_TRACE(0.00)[ti.com:-];
+	ARC_NA(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de,4317d7108e14e5d56308];
+	RCVD_TLS_LAST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[d-qiu@ti.com,linaro-mm-sig-bounces@lists.linaro.org];
+	RCVD_COUNT_THREE(0.00)[3];
+	MISSING_XM_UA(0.00)[];
+	SUBJECT_HAS_QUESTION(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TO_DN_NONE(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[syzbot@syzkaller.appspotmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.259];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,netdev];
-	MID_RHS_MATCH_FROM(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	RCVD_COUNT_SEVEN(0.00)[9]
-X-Rspamd-Queue-Id: 042F14111E1
-X-Rspamd-Action: add header
+	NEURAL_HAM(-0.00)[-0.999];
+	RCPT_COUNT_SEVEN(0.00)[7];
+	R_DKIM_NA(0.00)[];
+	REDIRECTOR_URL(0.00)[goo.gl];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email,storage.googleapis.com:url,googlegroups.com:email,goo.gl:url]
+X-Rspamd-Queue-Id: 54DCD4111F7
+X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spam: Yes
+
+Hello,
+
+syzbot found the following issue on:
+
+HEAD commit:    1d18101a644e Merge tag 'kernel-6.19-rc1.cred' of git://git..
+git tree:       upstream
+console output: https://syzkaller.appspot.com/x/log.txt?x=13fba192580000
+kernel config:  https://syzkaller.appspot.com/x/.config?x=a1db0fea040c2a9f
+dashboard link: https://syzkaller.appspot.com/bug?extid=4317d7108e14e5d56308
+compiler:       Debian clang version 20.1.8 (++20250708063551+0c9f909b7976-1~exp1~20250708183702.136), Debian LLD 20.1.8
+syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=1055e2b4580000
+C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=16ddf484580000
+
+Downloadable assets:
+disk image (non-bootable): https://storage.googleapis.com/syzbot-assets/d900f083ada3/non_bootable_disk-1d18101a.raw.xz
+vmlinux: https://storage.googleapis.com/syzbot-assets/98f78b52cccd/vmlinux-1d18101a.xz
+kernel image: https://storage.googleapis.com/syzbot-assets/7a8898061bfb/bzImage-1d18101a.xz
+
+IMPORTANT: if you fix the issue, please add the following tag to the commit:
+Reported-by: syzbot+4317d7108e14e5d56308@syzkaller.appspotmail.com
+
+Total swap = 124996kB
+393083 pages RAM
+0 pages HighMem/MovableOnly
+184478 pages reserved
+0 pages cma reserved
+------------[ cut here ]------------
+WARNING: CPU: 0 PID: 5488 at drivers/dma-buf/dma-buf.c:1536 dma_buf_vmap+0x306/0x3b0 drivers/dma-buf/dma-buf.c:1536
+Modules linked in:
+CPU: 0 UID: 0 PID: 5488 Comm: syz.0.17 Not tainted syzkaller #0 PREEMPT(full) 
+Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS 1.16.3-debian-1.16.3-2~bpo12+1 04/01/2014
+RIP: 0010:dma_buf_vmap+0x306/0x3b0 drivers/dma-buf/dma-buf.c:1536
+Code: 64 05 cc e8 0c 99 d7 fb 90 0f 0b 90 b8 ea ff ff ff eb bc e8 fc 98 d7 fb 90 0f 0b 90 e9 0d fe ff ff e8 ee 98 d7 fb 44 89 f0 90 <0f> 0b 90 49 bd 00 00 00 00 00 fc ff df eb 91 e8 c6 9c 61 05 48 c7
+RSP: 0018:ffffc90002bbf3a0 EFLAGS: 00010293
+RAX: 00000000fffffff4 RBX: ffff888000e02428 RCX: ffff888000eb4900
+RDX: 0000000000000000 RSI: 00000000fffffff4 RDI: 0000000000000000
+RBP: ffffc90002bbf450 R08: ffffc90002bbf227 R09: 1ffff92000577e44
+R10: dffffc0000000000 R11: fffff52000577e45 R12: ffffffff85ea4500
+R13: ffff888000e02430 R14: 00000000fffffff4 R15: 1ffff110001c0485
+FS:  0000555591ecc500(0000) GS:ffff88808d722000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 000055859af10a08 CR3: 00000000589bb000 CR4: 0000000000352ef0
+Call Trace:
+ <TASK>
+ drm_gem_shmem_vmap_locked+0x14c/0x790 drivers/gpu/drm/drm_gem_shmem_helper.c:354
+ drm_gem_vmap_locked drivers/gpu/drm/drm_gem.c:1279 [inline]
+ drm_gem_vmap+0x10a/0x1d0 drivers/gpu/drm/drm_gem.c:1321
+ drm_gem_fb_vmap+0xaa/0x8d0 drivers/gpu/drm/drm_gem_framebuffer_helper.c:368
+ drm_atomic_helper_prepare_planes+0x2d6/0xb60 drivers/gpu/drm/drm_atomic_helper.c:2760
+ drm_atomic_helper_commit+0x19a/0xb10 drivers/gpu/drm/drm_atomic_helper.c:2189
+ drm_atomic_commit+0x262/0x2c0 drivers/gpu/drm/drm_atomic.c:1577
+ drm_atomic_helper_update_plane+0x248/0x3b0 drivers/gpu/drm/drm_atomic_helper.c:3348
+ drm_mode_cursor_universal drivers/gpu/drm/drm_plane.c:1256 [inline]
+ drm_mode_cursor_common+0xb7e/0x12d0 drivers/gpu/drm/drm_plane.c:1315
+ drm_mode_cursor_ioctl+0xbf/0x110 drivers/gpu/drm/drm_plane.c:1365
+ drm_ioctl_kernel+0x2cf/0x390 drivers/gpu/drm/drm_ioctl.c:797
+ drm_ioctl+0x67f/0xb10 drivers/gpu/drm/drm_ioctl.c:894
+ vfs_ioctl fs/ioctl.c:51 [inline]
+ __do_sys_ioctl fs/ioctl.c:597 [inline]
+ __se_sys_ioctl+0xfc/0x170 fs/ioctl.c:583
+ do_syscall_x64 arch/x86/entry/syscall_64.c:63 [inline]
+ do_syscall_64+0xfa/0xfa0 arch/x86/entry/syscall_64.c:94
+ entry_SYSCALL_64_after_hwframe+0x77/0x7f
+RIP: 0033:0x7fcd9898f7c9
+Code: ff ff c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 40 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007ffe37777948 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 00007fcd98be5fa0 RCX: 00007fcd9898f7c9
+RDX: 0000200000000280 RSI: 00000000c01c64a3 RDI: 0000000000000003
+RBP: 00007ffe377779a0 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000002
+R13: 00007fcd98be5fa0 R14: 00007fcd98be5fa0 R15: 0000000000000003
+ </TASK>
 
 
-Hi Roger,
+---
+This report is generated by a bot. It may contain errors.
+See https://goo.gl/tpsmEJ for more information about syzbot.
+syzbot engineers can be reached at syzkaller@googlegroups.com.
 
-My name is Daolin (a colleague of Meghana's).
+syzbot will keep track of this issue. See:
+https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
 
-This is my first time responding to a Linux Kernel mailing list so 
-please be patient if I'm potentially violating any conventions or rules 
-in my message.
+If the report is already addressed, let syzbot know by replying with:
+#syz fix: exact-commit-title
 
-Recently, I've encountered the same kernel crash that Meghana faced 
-(https://gist.github.com/MeghanaMalladiTI/784fd2262d95b19fe9573c553c4a6a24 
-) when I was testing the eth1 interface of the CPSW with your patches on 
-an AM62x EVM and found a potential source of the problem (see below).
+If you want syzbot to run the reproducer, reply with:
+#syz test: git://repo/address.git branch-or-commit-hash
+If you attach or paste a git patch, syzbot will apply it before testing.
 
-On 11/9/2025 3:37 PM, Roger Quadros wrote:
-> Add zero copy support to TX path.
->
-> Introduce xsk_pool and xsk_port_id to struct am65_cpsw_tx_chn.
-> This way we can quickly check if the flow is setup as XSK pool
-> and for which port.
->
-> If the TX channel is setup as XSK pool then get the frames from
-> the pool and send it to the TX channel.
->
-> Signed-off-by: Roger Quadros <rogerq@kernel.org>
-> ---
->   drivers/net/ethernet/ti/am65-cpsw-nuss.c | 171 ++++++++++++++++++++++++++++---
->   drivers/net/ethernet/ti/am65-cpsw-nuss.h |   5 +
->   drivers/net/ethernet/ti/am65-cpsw-xdp.c  |  11 +-
->   3 files changed, 171 insertions(+), 16 deletions(-)
->
-> diff --git a/drivers/net/ethernet/ti/am65-cpsw-nuss.c b/drivers/net/ethernet/ti/am65-cpsw-nuss.c
-> index afc0c8836fe242d8bf47ce9bcd3e6b725ca37bf9..2e06e7df23ad5249786d081e51434f87dd2a76b5 100644
-> --- a/drivers/net/ethernet/ti/am65-cpsw-nuss.c
-> +++ b/drivers/net/ethernet/ti/am65-cpsw-nuss.c
-> @@ -758,6 +758,8 @@ void am65_cpsw_destroy_txq(struct am65_cpsw_common *common, int id)
->   	k3_udma_glue_reset_tx_chn(tx_chn->tx_chn, tx_chn,
->   				  am65_cpsw_nuss_tx_cleanup);
->   	k3_udma_glue_disable_tx_chn(tx_chn->tx_chn);
-> +	tx_chn->xsk_pool = NULL;
-> +	tx_chn->xsk_port_id = -EINVAL;
->   }
->   
->   static void am65_cpsw_destroy_txqs(struct am65_cpsw_common *common)
-> @@ -786,12 +788,25 @@ static void am65_cpsw_destroy_txqs(struct am65_cpsw_common *common)
->   int am65_cpsw_create_txq(struct am65_cpsw_common *common, int id)
->   {
->   	struct am65_cpsw_tx_chn *tx_chn = &common->tx_chns[id];
-> -	int ret;
-> +	int port, ret;
->   
->   	ret = k3_udma_glue_enable_tx_chn(tx_chn->tx_chn);
->   	if (ret)
->   		return ret;
->   
-> +	/* get first port with XSK pool & XDP program set */
-> +	for (port = 0; port < common->port_num; port++) {
-> +		if (!common->ports[port].ndev)
-> +			continue;
-> +
-> +		tx_chn->xsk_pool = am65_cpsw_xsk_get_pool(&common->ports[port],
-> +							  id);
-> +		if (tx_chn->xsk_pool)
-> +			break;
-> +	}
-> +
-> +	tx_chn->xsk_port_id = tx_chn->xsk_pool ?
-> +			      common->ports[port].port_id : -EINVAL;
->   	napi_enable(&tx_chn->napi_tx);
->   
->   	return 0;
-> @@ -892,15 +907,18 @@ static void am65_cpsw_nuss_rx_cleanup(void *data, dma_addr_t desc_dma)
->   }
->   
->   static void am65_cpsw_nuss_xmit_free(struct am65_cpsw_tx_chn *tx_chn,
-> -				     struct cppi5_host_desc_t *desc)
-> +				     struct cppi5_host_desc_t *desc,
-> +				     enum am65_cpsw_tx_buf_type buf_type)
->   {
->   	struct cppi5_host_desc_t *first_desc, *next_desc;
->   	dma_addr_t buf_dma, next_desc_dma;
->   	u32 buf_dma_len;
->   
->   	first_desc = desc;
-> -	next_desc = first_desc;
-> +	if (buf_type == AM65_CPSW_TX_BUF_TYPE_XSK_TX)
-> +		goto free_pool;
->   
-> +	next_desc = first_desc;
->   	cppi5_hdesc_get_obuf(first_desc, &buf_dma, &buf_dma_len);
->   	k3_udma_glue_tx_cppi5_to_dma_addr(tx_chn->tx_chn, &buf_dma);
->   
-> @@ -923,6 +941,7 @@ static void am65_cpsw_nuss_xmit_free(struct am65_cpsw_tx_chn *tx_chn,
->   		k3_cppi_desc_pool_free(tx_chn->desc_pool, next_desc);
->   	}
->   
-> +free_pool:
->   	k3_cppi_desc_pool_free(tx_chn->desc_pool, first_desc);
->   }
->   
-> @@ -932,21 +951,32 @@ static void am65_cpsw_nuss_tx_cleanup(void *data, dma_addr_t desc_dma)
->   	enum am65_cpsw_tx_buf_type buf_type;
->   	struct am65_cpsw_tx_swdata *swdata;
->   	struct cppi5_host_desc_t *desc_tx;
-> +	struct xsk_buff_pool *xsk_pool;
->   	struct xdp_frame *xdpf;
->   	struct sk_buff *skb;
->   
->   	desc_tx = k3_cppi_desc_pool_dma2virt(tx_chn->desc_pool, desc_dma);
->   	swdata = cppi5_hdesc_get_swdata(desc_tx);
->   	buf_type = am65_cpsw_nuss_buf_type(tx_chn, desc_dma);
-> -	if (buf_type == AM65_CPSW_TX_BUF_TYPE_SKB) {
-> +	switch (buf_type) {
-> +	case AM65_CPSW_TX_BUF_TYPE_SKB:
->   		skb = swdata->skb;
->   		dev_kfree_skb_any(skb);
-> -	} else {
-> +		break;
-> +	case AM65_CPSW_TX_BUF_TYPE_XDP_TX:
-> +	case AM65_CPSW_TX_BUF_TYPE_XDP_NDO:
->   		xdpf = swdata->xdpf;
->   		xdp_return_frame(xdpf);
-> +		break;
-> +	case AM65_CPSW_TX_BUF_TYPE_XSK_TX:
-> +		xsk_pool = swdata->xsk_pool;
-> +		xsk_tx_completed(xsk_pool, 1);
-> +		break;
-> +	default:
-> +		break;
->   	}
->   
-> -	am65_cpsw_nuss_xmit_free(tx_chn, desc_tx);
-> +	am65_cpsw_nuss_xmit_free(tx_chn, desc_tx, buf_type);
->   }
->   
->   static struct sk_buff *am65_cpsw_build_skb(void *page_addr,
-> @@ -1189,6 +1219,82 @@ static int am65_cpsw_nuss_ndo_slave_open(struct net_device *ndev)
->   	return ret;
->   }
->   
-> +static int am65_cpsw_xsk_xmit_zc(struct net_device *ndev,
-> +				 struct am65_cpsw_tx_chn *tx_chn)
-> +{
-> +	struct am65_cpsw_common *common = tx_chn->common;
-> +	struct xsk_buff_pool *pool = tx_chn->xsk_pool;
-> +	struct xdp_desc *xdp_descs = pool->tx_descs;
-> +	struct cppi5_host_desc_t *host_desc;
-> +	struct am65_cpsw_tx_swdata *swdata;
-> +	dma_addr_t dma_desc, dma_buf;
-> +	int num_tx = 0, pkt_len;
-> +	int descs_avail, ret;
-> +	int i;
-> +
-> +	descs_avail = k3_cppi_desc_pool_avail(tx_chn->desc_pool);
-> +	/* ensure that TX ring is not filled up by XDP, always MAX_SKB_FRAGS
-> +	 * will be available for normal TX path and queue is stopped there if
-> +	 * necessary
-> +	 */
-> +	if (descs_avail <= MAX_SKB_FRAGS)
-> +		return 0;
-> +
-> +	descs_avail -= MAX_SKB_FRAGS;
-> +	descs_avail = xsk_tx_peek_release_desc_batch(pool, descs_avail);
-> +
-> +	for (i = 0; i < descs_avail; i++) {
-> +		host_desc = k3_cppi_desc_pool_alloc(tx_chn->desc_pool);
-> +		if (unlikely(!host_desc))
-> +			break;
-> +
-> +		am65_cpsw_nuss_set_buf_type(tx_chn, host_desc,
-> +					    AM65_CPSW_TX_BUF_TYPE_XSK_TX);
-> +		dma_buf = xsk_buff_raw_get_dma(pool, xdp_descs[i].addr);
-> +		pkt_len = xdp_descs[i].len;
-> +		xsk_buff_raw_dma_sync_for_device(pool, dma_buf, pkt_len);
-> +
-> +		cppi5_hdesc_init(host_desc, CPPI5_INFO0_HDESC_EPIB_PRESENT,
-> +				 AM65_CPSW_NAV_PS_DATA_SIZE);
-> +		cppi5_hdesc_set_pkttype(host_desc, AM65_CPSW_CPPI_TX_PKT_TYPE);
-> +		cppi5_hdesc_set_pktlen(host_desc, pkt_len);
-> +		cppi5_desc_set_pktids(&host_desc->hdr, 0,
-> +				      AM65_CPSW_CPPI_TX_FLOW_ID);
-> +		cppi5_desc_set_tags_ids(&host_desc->hdr, 0,
-> +					tx_chn->xsk_port_id);
-> +
-> +		k3_udma_glue_tx_dma_to_cppi5_addr(tx_chn->tx_chn, &dma_buf);
-> +		cppi5_hdesc_attach_buf(host_desc, dma_buf, pkt_len, dma_buf,
-> +				       pkt_len);
-> +
-> +		swdata = cppi5_hdesc_get_swdata(host_desc);
-> +		swdata->ndev = ndev;
-> +		swdata->xsk_pool = pool;
-> +
-> +		dma_desc = k3_cppi_desc_pool_virt2dma(tx_chn->desc_pool,
-> +						      host_desc);
-> +		if (AM65_CPSW_IS_CPSW2G(common)) {
-> +			ret = k3_udma_glue_push_tx_chn(tx_chn->tx_chn,
-> +						       host_desc, dma_desc);
-> +		} else {
-> +			spin_lock_bh(&tx_chn->lock);
-> +			ret = k3_udma_glue_push_tx_chn(tx_chn->tx_chn,
-> +						       host_desc, dma_desc);
-> +			spin_unlock_bh(&tx_chn->lock);
-> +		}
-> +
-> +		if (ret) {
-> +			ndev->stats.tx_errors++;
-> +			k3_cppi_desc_pool_free(tx_chn->desc_pool, host_desc);
-> +			break;
-> +		}
-> +
-> +		num_tx++;
-> +	}
-> +
-> +	return num_tx;
-> +}
-> +
->   static int am65_cpsw_xdp_tx_frame(struct net_device *ndev,
->   				  struct am65_cpsw_tx_chn *tx_chn,
->   				  struct xdp_frame *xdpf,
-> @@ -1716,15 +1822,19 @@ static int am65_cpsw_nuss_tx_compl_packets(struct am65_cpsw_common *common,
->   	struct netdev_queue *netif_txq;
->   	unsigned int total_bytes = 0;
->   	struct net_device *ndev;
-> +	int xsk_frames_done = 0;
->   	struct xdp_frame *xdpf;
->   	unsigned int pkt_len;
->   	struct sk_buff *skb;
->   	dma_addr_t desc_dma;
->   	int res, num_tx = 0;
-> +	int xsk_tx = 0;
->   
->   	tx_chn = &common->tx_chns[chn];
->   
->   	while (true) {
-> +		pkt_len = 0;
-> +
->   		if (!single_port)
->   			spin_lock(&tx_chn->lock);
->   		res = k3_udma_glue_pop_tx_chn(tx_chn->tx_chn, &desc_dma);
-> @@ -1746,25 +1856,36 @@ static int am65_cpsw_nuss_tx_compl_packets(struct am65_cpsw_common *common,
->   		swdata = cppi5_hdesc_get_swdata(desc_tx);
->   		ndev = swdata->ndev;
->   		buf_type = am65_cpsw_nuss_buf_type(tx_chn, desc_dma);
-> -		if (buf_type == AM65_CPSW_TX_BUF_TYPE_SKB) {
-> +		switch (buf_type) {
-> +		case AM65_CPSW_TX_BUF_TYPE_SKB:
->   			skb = swdata->skb;
->   			am65_cpts_tx_timestamp(tx_chn->common->cpts, skb);
->   			pkt_len = skb->len;
->   			napi_consume_skb(skb, budget);
-> -		} else {
-> +			total_bytes += pkt_len;
-> +			break;
-> +		case AM65_CPSW_TX_BUF_TYPE_XDP_TX:
-> +		case AM65_CPSW_TX_BUF_TYPE_XDP_NDO:
->   			xdpf = swdata->xdpf;
->   			pkt_len = xdpf->len;
-> +			total_bytes += pkt_len;
->   			if (buf_type == AM65_CPSW_TX_BUF_TYPE_XDP_TX)
->   				xdp_return_frame_rx_napi(xdpf);
->   			else
->   				xdp_return_frame(xdpf);
-> +			break;
-> +		case AM65_CPSW_TX_BUF_TYPE_XSK_TX:
-> +			pkt_len = cppi5_hdesc_get_pktlen(desc_tx);
-> +			xsk_frames_done++;
-> +			break;
-> +		default:
-> +			break;
->   		}
->   
-> -		total_bytes += pkt_len;
->   		num_tx++;
-> -		am65_cpsw_nuss_xmit_free(tx_chn, desc_tx);
-> +		am65_cpsw_nuss_xmit_free(tx_chn, desc_tx, buf_type);
->   		dev_sw_netstats_tx_add(ndev, 1, pkt_len);
-> -		if (!single_port) {
-> +		if (!single_port && buf_type != AM65_CPSW_TX_BUF_TYPE_XSK_TX) {
->   			/* as packets from multi ports can be interleaved
->   			 * on the same channel, we have to figure out the
->   			 * port/queue at every packet and report it/wake queue.
-> @@ -1781,6 +1902,19 @@ static int am65_cpsw_nuss_tx_compl_packets(struct am65_cpsw_common *common,
->   		am65_cpsw_nuss_tx_wake(tx_chn, ndev, netif_txq);
->   	}
->   
-> +	if (tx_chn->xsk_pool) {
-> +		if (xsk_frames_done)
-> +			xsk_tx_completed(tx_chn->xsk_pool, xsk_frames_done);
-> +
-> +		if (xsk_uses_need_wakeup(tx_chn->xsk_pool))
-> +			xsk_set_tx_need_wakeup(tx_chn->xsk_pool);
-> +
-> +		ndev = common->ports[tx_chn->xsk_port_id].ndev;
+If you want to overwrite report's subsystems, reply with:
+#syz set subsystems: new-subsystem
+(See the list of subsystem names on the web dashboard)
 
-I found that the source of the crash is likely due to ndev being a null 
-pointer. This can be proved by adding some print statements, see 
-https://gist.github.com/dao-qiu/817e8ee1098a517eab5b2f1b1681382d for my 
-print statements and the resulting log.
+If the report is a duplicate of another one, reply with:
+#syz dup: exact-subject-of-another-report
 
-I noticed that when eth1 is used, the xsk_port_id is 2. I'm assuming 
-common->ports[] is 0-indexed so I was wondering if the null pointer may 
-be due to indexing beyond the port array size. I'm also assuming 
-common->port_num will give the total expected number of ports that is 
-possible for indexing common->ports[] but I haven't tried printing it 
-out yet.
-
-To test my theory, I modified "ndev = common->ports[tx_chn->xsk_port_id 
-- 1].ndev;" to include the tx_chn->xsk_port_id - 1 and the crash appears 
-to not happen anymore.
-
-Along the same lines, when eth0 is used and xsk_port_id is 1, would this 
-be inadvertently setting the ndev for eth1 instead? When testing eth0, 
-the crash does not happen.
-
-Please let me know if you agree if this might be the problem.
-
-> +		netif_txq = netdev_get_tx_queue(ndev, chn);
-> +		txq_trans_cond_update(netif_txq);
-> +		xsk_tx = am65_cpsw_xsk_xmit_zc(ndev, tx_chn);
-> +	}
-> +
->   	dev_dbg(dev, "%s:%u pkt:%d\n", __func__, chn, num_tx);
->   
->   	return num_tx;
-> @@ -1791,7 +1925,11 @@ static enum hrtimer_restart am65_cpsw_nuss_tx_timer_callback(struct hrtimer *tim
->   	struct am65_cpsw_tx_chn *tx_chns =
->   			container_of(timer, struct am65_cpsw_tx_chn, tx_hrtimer);
->   
-> -	enable_irq(tx_chns->irq);
-> +	if (tx_chns->irq_disabled) {
-> +		tx_chns->irq_disabled = false;
-> +		enable_irq(tx_chns->irq);
-> +	}
-> +
->   	return HRTIMER_NORESTART;
->   }
->   
-> @@ -1811,7 +1949,8 @@ static int am65_cpsw_nuss_tx_poll(struct napi_struct *napi_tx, int budget)
->   			hrtimer_start(&tx_chn->tx_hrtimer,
->   				      ns_to_ktime(tx_chn->tx_pace_timeout),
->   				      HRTIMER_MODE_REL_PINNED);
-> -		} else {
-> +		} else if (tx_chn->irq_disabled) {
-> +			tx_chn->irq_disabled = false;
->   			enable_irq(tx_chn->irq);
->   		}
->   	}
-> @@ -1834,6 +1973,7 @@ static irqreturn_t am65_cpsw_nuss_tx_irq(int irq, void *dev_id)
->   {
->   	struct am65_cpsw_tx_chn *tx_chn = dev_id;
->   
-> +	tx_chn->irq_disabled = true;
->   	disable_irq_nosync(irq);
->   	napi_schedule(&tx_chn->napi_tx);
->   
-> @@ -1998,14 +2138,14 @@ static netdev_tx_t am65_cpsw_nuss_ndo_slave_xmit(struct sk_buff *skb,
->   	return NETDEV_TX_OK;
->   
->   err_free_descs:
-> -	am65_cpsw_nuss_xmit_free(tx_chn, first_desc);
-> +	am65_cpsw_nuss_xmit_free(tx_chn, first_desc, AM65_CPSW_TX_BUF_TYPE_SKB);
->   err_free_skb:
->   	ndev->stats.tx_dropped++;
->   	dev_kfree_skb_any(skb);
->   	return NETDEV_TX_OK;
->   
->   busy_free_descs:
-> -	am65_cpsw_nuss_xmit_free(tx_chn, first_desc);
-> +	am65_cpsw_nuss_xmit_free(tx_chn, first_desc, AM65_CPSW_TX_BUF_TYPE_SKB);
->   busy_stop_q:
->   	netif_tx_stop_queue(netif_txq);
->   	return NETDEV_TX_BUSY;
-> @@ -2259,6 +2399,7 @@ static const struct net_device_ops am65_cpsw_nuss_netdev_ops = {
->   	.ndo_xdp_xmit		= am65_cpsw_ndo_xdp_xmit,
->   	.ndo_hwtstamp_get       = am65_cpsw_nuss_hwtstamp_get,
->   	.ndo_hwtstamp_set       = am65_cpsw_nuss_hwtstamp_set,
-> +	.ndo_xsk_wakeup		= am65_cpsw_xsk_wakeup,
->   };
->   
->   static void am65_cpsw_disable_phy(struct phy *phy)
-> diff --git a/drivers/net/ethernet/ti/am65-cpsw-nuss.h b/drivers/net/ethernet/ti/am65-cpsw-nuss.h
-> index 2bf4d12f92764706719cc1d65001dbb53da58c38..ac2d9d32e95b932665131a317df8316cb6cb7f96 100644
-> --- a/drivers/net/ethernet/ti/am65-cpsw-nuss.h
-> +++ b/drivers/net/ethernet/ti/am65-cpsw-nuss.h
-> @@ -72,6 +72,7 @@ enum am65_cpsw_tx_buf_type {
->   	AM65_CPSW_TX_BUF_TYPE_SKB,
->   	AM65_CPSW_TX_BUF_TYPE_XDP_TX,
->   	AM65_CPSW_TX_BUF_TYPE_XDP_NDO,
-> +	AM65_CPSW_TX_BUF_TYPE_XSK_TX,
->   };
->   
->   struct am65_cpsw_host {
-> @@ -97,6 +98,9 @@ struct am65_cpsw_tx_chn {
->   	unsigned char dsize_log2;
->   	char tx_chn_name[128];
->   	u32 rate_mbps;
-> +	struct xsk_buff_pool *xsk_pool;
-> +	int xsk_port_id;
-> +	bool irq_disabled;
->   };
->   
->   struct am65_cpsw_rx_flow {
-> @@ -118,6 +122,7 @@ struct am65_cpsw_tx_swdata {
->   	union {
->   		struct sk_buff *skb;
->   		struct xdp_frame *xdpf;
-> +		struct xsk_buff_pool *xsk_pool;
->   	};
->   };
->   
-> diff --git a/drivers/net/ethernet/ti/am65-cpsw-xdp.c b/drivers/net/ethernet/ti/am65-cpsw-xdp.c
-> index 0e37c27f77720713430a3e70f6c4b3dfb048cfc0..9adf13056f70fea36d9aeac157b7da0cae2c011e 100644
-> --- a/drivers/net/ethernet/ti/am65-cpsw-xdp.c
-> +++ b/drivers/net/ethernet/ti/am65-cpsw-xdp.c
-> @@ -109,8 +109,10 @@ int am65_cpsw_xsk_wakeup(struct net_device *ndev, u32 qid, u32 flags)
->   	struct am65_cpsw_common *common = am65_ndev_to_common(ndev);
->   	struct am65_cpsw_port *port = am65_ndev_to_port(ndev);
->   	struct am65_cpsw_rx_flow *rx_flow;
-> +	struct am65_cpsw_tx_chn *tx_ch;
->   
->   	rx_flow = &common->rx_chns.flows[qid];
-> +	tx_ch = &common->tx_chns[qid];
->   
->   	if (!netif_running(ndev) || !netif_carrier_ok(ndev))
->   		return -ENETDOWN;
-> @@ -121,9 +123,16 @@ int am65_cpsw_xsk_wakeup(struct net_device *ndev, u32 qid, u32 flags)
->   	if (qid >= common->rx_ch_num_flows || qid >= common->tx_ch_num)
->   		return -EINVAL;
->   
-> -	if (!rx_flow->xsk_pool)
-> +	if (!rx_flow->xsk_pool && !tx_ch->xsk_pool)
->   		return -EINVAL;
->   
-> +	if (flags & XDP_WAKEUP_TX) {
-> +		if (!napi_if_scheduled_mark_missed(&tx_ch->napi_tx)) {
-> +			if (likely(napi_schedule_prep(&tx_ch->napi_tx)))
-> +				__napi_schedule(&tx_ch->napi_tx);
-> +		}
-> +	}
-> +
->   	if (flags & XDP_WAKEUP_RX) {
->   		if (!napi_if_scheduled_mark_missed(&rx_flow->napi_rx)) {
->   			if (likely(napi_schedule_prep(&rx_flow->napi_rx)))
-
-Best regards,
-
-Daolin
-
-Texas Instruments Sitara MPU Systems Applications
-
+If you want to undo deduplication, reply with:
+#syz undup
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
