@@ -2,102 +2,101 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +PerBIkD4WmJoQAAu9opvQ
+	id OM4HEJoD4WmJoQAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:43:05 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:43:22 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 996BC411206
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:43:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C95FD41121D
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:43:21 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A673B44BB4
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:43:03 +0000 (UTC)
-Received: from fout-b3-smtp.messagingengine.com (fout-b3-smtp.messagingengine.com [202.12.124.146])
-	by lists.linaro.org (Postfix) with ESMTPS id 49BCC3F848
-	for <linaro-mm-sig@lists.linaro.org>; Sat,  6 Dec 2025 13:43:01 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 8DB6444BBE
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:43:20 +0000 (UTC)
+Received: from mx07-00376f01.pphosted.com (mx07-00376f01.pphosted.com [185.132.180.163])
+	by lists.linaro.org (Postfix) with ESMTPS id 327663F6F2
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  8 Dec 2025 09:12:00 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=jannau.net header.s=fm3 header.b=nEndZ23B;
-	dkim=pass header.d=messagingengine.com header.s=fm1 header.b=odThNdki;
-	spf=pass (lists.linaro.org: domain of j@jannau.net designates 202.12.124.146 as permitted sender) smtp.mailfrom=j@jannau.net;
-	dmarc=none
-Received: from phl-compute-01.internal (phl-compute-01.internal [10.202.2.41])
-	by mailfout.stl.internal (Postfix) with ESMTP id 5AFF31D000B2;
-	Sat,  6 Dec 2025 08:43:00 -0500 (EST)
-Received: from phl-mailfrontend-02 ([10.202.2.163])
-  by phl-compute-01.internal (MEProxy); Sat, 06 Dec 2025 08:43:01 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jannau.net; h=cc
-	:cc:content-type:content-type:date:date:from:from:in-reply-to
-	:in-reply-to:message-id:mime-version:references:reply-to:subject
-	:subject:to:to; s=fm3; t=1765028580; x=1765114980; bh=t4o08eCYHl
-	EJY6FVGVNnMYAccSZ4Ut22BuwBX+NWmfA=; b=nEndZ23BKZ81fbvX8guKKtaYq0
-	MN1GPl51//5L095iWH3zhIq65aKrcutyVQoJYBe4KYkJi6b7+WtEUNr6QfbhCrVx
-	hvq3uwZpdjpz0fEHtDLNc0LxKeocblBreFJw8MWNM00gbk86CyX04V9Y0GWJx/WB
-	nxvJH0WLLN2TrQ/anPAchR6f5KJR+L06hEesrB8kqRlWsKtM1oGKu8nhy9o9JU32
-	ADjbFC0OpNtQGsdU9OJ0+j/u8ERdCj353nPUS/F+T9hgzCbvEMvglPx7MyKxe+wt
-	YYRpWLJIl/cJwA5+vc07QwgS3JkVMl84vocCdbKla51aFivP2mkZwFDEEahg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-type:content-type:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:subject:subject:to
-	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=
-	1765028580; x=1765114980; bh=t4o08eCYHlEJY6FVGVNnMYAccSZ4Ut22Buw
-	BX+NWmfA=; b=odThNdkidIdTuUAu/SA6FCQsysFAq8IUORAwGJvabMZ/RGqzeFi
-	zyUfQs+hpYaaJjZQnEQvv8tHmRNFvxPlLeX622sbE6J4zeLIKLvY45VD7j55SJd/
-	KWbxh7YhXv+jt8gYeXHQcsUGSSZ9DmjTtdqUAsl2SjiZcmTLW7SM29V/h1Gitj62
-	dlZV20nq6tr5D56ev9L0m27VENAsQjZtHUqS9yhzJhJbtyfKp1UHLRCqmuMZNxwe
-	fsLoo2iXb92byBYT60WaFv0Y6wmx4LFX//O1vvpr5vDDCeJQ5Mwe2m+oMSlObBmM
-	Ujqi/riVA3JzyQb4ILxKBKPufgkQyKML9eA==
-X-ME-Sender: <xms:4zI0abi6s9dIIQLYHHlxQYORgkLJ6bwOXzx17w7ZUKcr18z9VHPVxA>
-    <xme:4zI0aZGHmOreMOwmlPMoEUamZf8IUjhgyWDYapxoqA7sUqfriT-LCWAfyd74DLc-1
-    mI1Nvf6zg2G2uOGRft7kn9thucdpFbFDI7H0sO1PUZiEdNUx7L-V5g>
-X-ME-Received: <xmr:4zI0aeDT8drWuSbEK5qSXG_OHoJDXAdghurPCAli4zJvG7KGeI4XEh_yJ2bdr5Rht7fMmO5UHQ4UNNonkMOqu-PbBnFikqIfFms>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefgedrtddtgdduuddtkecutefuodetggdotefrod
-    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
-    ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
-    hrpeffhffvvefukfhfgggtuggjsehttdertddttdejnecuhfhrohhmpeflrghnnhgvucfi
-    rhhunhgruhcuoehjsehjrghnnhgruhdrnhgvtheqnecuggftrfgrthhtvghrnhepgfdvff
-    evleegudejfeefheehkeehleehfefgjefffeetudegtefhuedufeehfeetnecuvehluhhs
-    thgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepjhesjhgrnhhnrghurd
-    hnvghtpdhnsggprhgtphhtthhopedviedpmhhouggvpehsmhhtphhouhhtpdhrtghpthht
-    oheplhihuhguvgesrhgvughhrghtrdgtohhmpdhrtghpthhtohepughrihdquggvvhgvlh
-    eslhhishhtshdrfhhrvggvuggvshhkthhophdrohhrghdprhgtphhtthhopehruhhsthdq
-    fhhorhdqlhhinhhugiesvhhgvghrrdhkvghrnhgvlhdrohhrghdprhgtphhtthhopegrlh
-    hitggvrhihhhhlsehgohhoghhlvgdrtghomhdprhgtphhtthhopegurghnihgvlhdrrghl
-    mhgvihgurgestgholhhlrggsohhrrgdrtghomhdprhgtphhtthhopegurghkrheskhgvrh
-    hnvghlrdhorhhgpdhrtghpthhtoheplhhinhhugidqkhgvrhhnvghlsehvghgvrhdrkhgv
-    rhhnvghlrdhorhhgpdhrtghpthhtoheplhhinhgrsegrshgrhhhilhhinhgrrdhnvghtpd
-    hrtghpthhtohepohhjvggurgeskhgvrhhnvghlrdhorhhg
-X-ME-Proxy: <xmx:4zI0aV-8rGL69jnGDjKnwKtYygMWhOARJD2aB_6XLENuZEhwAPehZQ>
-    <xmx:4zI0aRhKrlxzRNFIl2g0wtE9aaaiUaeZEai3W55nCFyVKU1jMxJytQ>
-    <xmx:4zI0aea0K5UKJEpvIYsxqgYXz74Ywl-0WeiCfl-FtEetqaMwA_MasQ>
-    <xmx:4zI0aTQC7yp5KdqGYNXR-dDE7MiOrFkJ0cze8A0yrjRXajHWMgV3Xg>
-    <xmx:5DI0aV-tlYWhqVuYKxAFDsB6tyTFw6bx4vaElocBckUxQE-NVYZVJwJD>
-Feedback-ID: i47b949f6:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sat,
- 6 Dec 2025 08:42:58 -0500 (EST)
-Date: Sat, 6 Dec 2025 14:42:57 +0100
-From: Janne Grunau <j@jannau.net>
-To: Lyude Paul <lyude@redhat.com>
-Message-ID: <20251206134257.GA1097212@robin.jannau.net>
-References: <20251202220924.520644-1-lyude@redhat.com>
- <20251202220924.520644-3-lyude@redhat.com>
+	dkim=pass header.d=imgtec.com header.s=dk201812 header.b=XkFRSWq7;
+	spf=pass (lists.linaro.org: domain of Alessio.Belle@imgtec.com designates 185.132.180.163 as permitted sender) smtp.mailfrom=Alessio.Belle@imgtec.com;
+	dmarc=pass (policy=none) header.from=imgtec.com
+Received: from pps.filterd (m0168889.ppops.net [127.0.0.1])
+	by mx07-00376f01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5B850Tbn2975655;
+	Mon, 8 Dec 2025 09:11:35 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=imgtec.com; h=cc
+	:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=dk201812; bh=wpFVK3UISYSElB0YPQplDND
+	D+w2ntkyKIuex+dcdKdk=; b=XkFRSWq7ISEdT0owV3iIcVh6O6idCG0kQqYoCLZ
+	Bk+orgp2cHOIXsks5NUoWIs7vHovml0mapWnx9+/3rdqd7ZM2ehfAUkzdQtUwF1F
+	TrfwLMs6BzgCMK8iJAvDHXj4wmdipRGRDmwXwhiHZxMORQABz9jdGE7nDF/1r24P
+	Cb282+JfoVUSoXfUlUNqlQ45dFImpb2c5q0GHm9V5/tgo+Utz0sXX9kG6Q730VHM
+	7Zj5lAcVTkuWX0mZBwdUXHnuQm+5j5OT5e9C3FJYZHsiXXe2xVCf0xlzUwuVW8Z9
+	zKuUZj4fMGRSorEznYuGFx5/6aO2wGyXamz3CEJVb2E4a4Q==
+Received: from hhmail01.hh.imgtec.org (83-244-153-141.cust-83.exponential-e.net [83.244.153.141])
+	by mx07-00376f01.pphosted.com (PPS) with ESMTPS id 4avdeuh9j6-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Mon, 08 Dec 2025 09:11:35 +0000 (GMT)
+Received: from NP-A-BELLE.kl.imgtec.org (172.25.10.180) by
+ HHMAIL01.hh.imgtec.org (10.100.10.19) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.29; Mon, 8 Dec 2025 09:11:33 +0000
+From: Alessio Belle <alessio.belle@imgtec.com>
+Date: Mon, 8 Dec 2025 09:11:00 +0000
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20251202220924.520644-3-lyude@redhat.com>
+Message-ID: <20251208-no-export-pm-fw-obj-v1-1-83ab12c61693@imgtec.com>
+X-B4-Tracking: v=1; b=H4sIACOWNmkC/x3MTQqAIBBA4avErBtI+yG6SrSwHGuCVDQqkO6et
+ PwW7yWIFJgiDEWCQBdHdjZDlAUsm7IrIetskJVshZA9Wof0eBdO9AeaG928o6JFdXWjta4U5NI
+ HMvz813F63w/am9gnZQAAAA==
+X-Change-ID: 20251128-no-export-pm-fw-obj-aeca634ddd0a
+To: Frank Binns <frank.binns@imgtec.com>,
+        Matt Coster
+	<matt.coster@imgtec.com>,
+        Alexandru Dadu <alexandru.dadu@imgtec.com>,
+        "Maarten Lankhorst" <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard
+	<mripard@kernel.org>,
+        Thomas Zimmermann <tzimmermann@suse.de>,
+        David Airlie
+	<airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Sumit Semwal
+	<sumit.semwal@linaro.org>,
+        =?utf-8?q?Christian_K=C3=B6nig?=
+	<christian.koenig@amd.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1765185093; l=1842;
+ i=alessio.belle@imgtec.com; s=20251208; h=from:subject:message-id;
+ bh=pRDHXPgpdsEZVoNu6zceAf+FuiNHKGRgZl9xJRBdWfw=;
+ b=YOnbre475voi9oiZiHLXTC1zdIE6xMbV5ZTNMNa5tOZBHV9madHV4FSZgssiHVP+q59YkS713
+ YNjLi3LFs5nA5w2mhKYV3HV1bfWX/UiaFwozmBnSARJ7/ybVo+uyh2n
+X-Developer-Key: i=alessio.belle@imgtec.com; a=ed25519;
+ pk=2Vtuk+GKBRjwMqIHpKk+Gx6zl7cgtq0joszcOc0zF4g=
+X-Originating-IP: [172.25.10.180]
+X-Authority-Analysis: v=2.4 cv=UvZu9uwB c=1 sm=1 tr=0 ts=69369647 cx=c_pps
+ a=AKOq//PuzOIrVTIF9yBwbA==:117 a=AKOq//PuzOIrVTIF9yBwbA==:17
+ a=D1vns6AIKIwA:10 a=IkcTkHD0fZMA:10 a=wP3pNCr1ah4A:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=r_1tXGB3AAAA:8 a=dJ_P6b1NyDTtC6ShgzQA:9
+ a=QEXdDO2ut3YA:10 a=t8nPyN_e6usw4ciXM-Pk:22
+X-Proofpoint-ORIG-GUID: ixADbrjbHhqrhQ9-1lh3lOEklf8Yl6aL
+X-Proofpoint-GUID: ixADbrjbHhqrhQ9-1lh3lOEklf8Yl6aL
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjA4MDA3NiBTYWx0ZWRfXxESxm0h3BKcT
+ VTocXGUnolFXKF/sdGBqrDGOoU++hzl6lEpv8Y8qKBulmYAwJVPkOIFVXiu+pRfKrLpZL6avkXC
+ r0mWnpxTjI9LJU41AlLudbYO3GnglwApeb/IYl8xM+3WvWj0J31m/FifaK0wRPQ8wy0Uf5i99Px
+ bBShfC+leTIHacR4gMBvy0uHcLwKavCWoSjx7dOlkqp5wKOJpd28NQNTPxplmTmceCcK4p1VKyX
+ 2hQvS2dvVVdYwi10ZOf0ACYfqpXyIPWFIxnFDQo82oAAXbOIaFAvDlzQQU4ODghOy3M8Q0gkBW8
+ EQ+svuoqJc0RWQWAe3twgioTdClgo5vvDInpIl5SfxanZhV/ir+fQmvpmytv8eeT2xmB1zud6YR
+ c5BtLFXGcDEG1iIrwfWlfoFJ2HddTg==
 X-Spamd-Bar: ---
-X-MailFrom: j@jannau.net
+X-MailFrom: Alessio.Belle@imgtec.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 6NMOVJ4TTA4EK63M32W7TP52FDJEU7HE
-X-Message-ID-Hash: 6NMOVJ4TTA4EK63M32W7TP52FDJEU7HE
+Message-ID-Hash: HDODZOFH6ZPNXWQGAI7YKWQBB5YV3TNL
+X-Message-ID-Hash: HDODZOFH6ZPNXWQGAI7YKWQBB5YV3TNL
 X-Mailman-Approved-At: Thu, 16 Apr 2026 15:12:38 +0000
-CC: dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org, Alice Ryhl <aliceryhl@google.com>, Daniel Almeida <daniel.almeida@collabora.com>, Danilo Krummrich <dakr@kernel.org>, linux-kernel@vger.kernel.org, Asahi Lina <lina@asahilina.net>, Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, =?utf-8?B?QmrDtnJu?= Roy Baron <bjorn3_gh@protonmail.com>, Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, Trevor Gross <tmgross@umich.edu>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Asahi Lina <lina+kernel@asahilina.net>, Viresh Kumar <viresh.kumar@linaro.org>, Tamir Duberstein <tamird@gmail.com>, FUJITA Tomonori <fujita.tomonori@gmail.com>, Krishna Ketan Rai <prafulrai522@gmail.com>, "open list:DMA BUFFER SHARING FRAMEWORK:Keyword:bdma_(?:buf|fence|resv)b" <linux-media@vger
- .kernel.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK:Keyword:bdma_(?:buf|fence|resv)b" <linaro-mm-sig@lists.linaro.org>
+CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Alessio Belle <alessio.belle@imgtec.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v6 2/8] rust: helpers: Add bindings/wrappers for dma_resv_lock
+Subject: [Linaro-mm-sig] [PATCH] drm/imagination: Disallow exporting of PM/FW protected objects
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6NMOVJ4TTA4EK63M32W7TP52FDJEU7HE/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HDODZOFH6ZPNXWQGAI7YKWQBB5YV3TNL/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -106,106 +105,88 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [1.99 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	DATE_IN_PAST(1.00)[3146];
+X-Spamd-Result: default: False [1.59 / 15.00];
+	DATE_IN_PAST(1.00)[3102];
+	R_DKIM_REJECT(1.00)[imgtec.com:s=dk201812];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
+	DMARC_POLICY_SOFTFAIL(0.10)[imgtec.com : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[lists.freedesktop.org,vger.kernel.org,google.com,collabora.com,kernel.org,asahilina.net,gmail.com,garyguo.net,protonmail.com,umich.edu,linaro.org,amd.com,linuxfoundation.org,vger .kernel.org,lists.linaro.org];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DMARC_NA(0.00)[jannau.net];
-	ARC_NA(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[26];
 	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	SUSPICIOUS_AUTH_ORIGIN(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_TO(0.00)[imgtec.com,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com];
+	ARC_NA(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MISSING_XM_UA(0.00)[];
 	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
-	FROM_NEQ_ENVFROM(0.00)[j@jannau.net,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_NEQ_ENVFROM(0.00)[alessio.belle@imgtec.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
-	NEURAL_SPAM(0.00)[0.992];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,kernel];
+	DKIM_TRACE(0.00)[imgtec.com:-];
+	HAS_XOIP(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	NEURAL_HAM(-0.00)[-0.859];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[asahilina.net:email,collabora.com:email,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,robin.jannau.net:mid]
-X-Rspamd-Queue-Id: 996BC411206
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,imgtec.com:mid,imgtec.com:email]
+X-Rspamd-Queue-Id: C95FD41121D
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Tue, Dec 02, 2025 at 05:03:28PM -0500, Lyude Paul wrote:
-> From: Asahi Lina <lina@asahilina.net>
-> 
-> This is just for basic usage in the DRM shmem abstractions for implied
-> locking, not intended as a full DMA Reservation abstraction yet.
-> 
-> Signed-off-by: Asahi Lina <lina@asahilina.net>
-> Signed-off-by: Daniel Almeida <daniel.almeida@collabora.com>
-> Reviewed-by: Alice Ryhl <aliceryhl@google.com>
-> Signed-off-by: Lyude Paul <lyude@redhat.com>
-> ---
->  rust/bindings/bindings_helper.h |  1 +
->  rust/helpers/dma-resv.c         | 13 +++++++++++++
->  rust/helpers/helpers.c          |  1 +
->  3 files changed, 15 insertions(+)
->  create mode 100644 rust/helpers/dma-resv.c
-> 
-> diff --git a/rust/bindings/bindings_helper.h b/rust/bindings/bindings_helper.h
-> index 2e43c66635a2c..07f79e125c329 100644
-> --- a/rust/bindings/bindings_helper.h
-> +++ b/rust/bindings/bindings_helper.h
-> @@ -48,6 +48,7 @@
->  #include <linux/cpumask.h>
->  #include <linux/cred.h>
->  #include <linux/debugfs.h>
-> +#include <linux/dma-resv.h>
->  #include <linux/device/faux.h>
->  #include <linux/dma-direction.h>
->  #include <linux/dma-mapping.h>
+These objects are meant to be used by the GPU firmware or by the PM unit
+within the GPU, in which case they may contain physical addresses.
 
-nit: alphabetical order
+This adds a layer of protection against exposing potentially exploitable
+information outside of the driver.
 
-> diff --git a/rust/helpers/dma-resv.c b/rust/helpers/dma-resv.c
-> new file mode 100644
-> index 0000000000000..05501cb814513
-> --- /dev/null
-> +++ b/rust/helpers/dma-resv.c
-> @@ -0,0 +1,13 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +
-> +#include <linux/dma-resv.h>
-> +
-> +int rust_helper_dma_resv_lock(struct dma_resv *obj, struct ww_acquire_ctx *ctx)
-> +{
-> +	return dma_resv_lock(obj, ctx);
-> +}
-> +
-> +void rust_helper_dma_resv_unlock(struct dma_resv *obj)
-> +{
-> +	dma_resv_unlock(obj);
-> +}
-> diff --git a/rust/helpers/helpers.c b/rust/helpers/helpers.c
-> index 551da6c9b5064..36d40f911345c 100644
-> --- a/rust/helpers/helpers.c
-> +++ b/rust/helpers/helpers.c
-> @@ -25,6 +25,7 @@
->  #include "cred.c"
->  #include "device.c"
->  #include "dma.c"
-> +#include "dma-resv.c"
->  #include "drm.c"
->  #include "err.c"
->  #include "irq.c"
+Fixes: ff5f643de0bf ("drm/imagination: Add GEM and VM related code")
+Signed-off-by: Alessio Belle <alessio.belle@imgtec.com>
+---
+ drivers/gpu/drm/imagination/pvr_gem.c | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-with that fixed
+diff --git a/drivers/gpu/drm/imagination/pvr_gem.c b/drivers/gpu/drm/imagination/pvr_gem.c
+index a66cf082af24..c07c9a915190 100644
+--- a/drivers/gpu/drm/imagination/pvr_gem.c
++++ b/drivers/gpu/drm/imagination/pvr_gem.c
+@@ -28,6 +28,16 @@ static void pvr_gem_object_free(struct drm_gem_object *obj)
+ 	drm_gem_shmem_object_free(obj);
+ }
+ 
++static struct dma_buf *pvr_gem_export(struct drm_gem_object *obj, int flags)
++{
++	struct pvr_gem_object *pvr_obj = gem_to_pvr_gem(obj);
++
++	if (pvr_obj->flags & DRM_PVR_BO_PM_FW_PROTECT)
++		return ERR_PTR(-EPERM);
++
++	return drm_gem_prime_export(obj, flags);
++}
++
+ static int pvr_gem_mmap(struct drm_gem_object *gem_obj, struct vm_area_struct *vma)
+ {
+ 	struct pvr_gem_object *pvr_obj = gem_to_pvr_gem(gem_obj);
+@@ -42,6 +52,7 @@ static int pvr_gem_mmap(struct drm_gem_object *gem_obj, struct vm_area_struct *v
+ static const struct drm_gem_object_funcs pvr_gem_object_funcs = {
+ 	.free = pvr_gem_object_free,
+ 	.print_info = drm_gem_shmem_object_print_info,
++	.export = pvr_gem_export,
+ 	.pin = drm_gem_shmem_object_pin,
+ 	.unpin = drm_gem_shmem_object_unpin,
+ 	.get_sg_table = drm_gem_shmem_object_get_sg_table,
 
-Reviewed-by: Janne Grunau <j@jananu.net>
+---
+base-commit: ca2583412306ceda9304a7c4302fd9efbf43e963
+change-id: 20251128-no-export-pm-fw-obj-aeca634ddd0a
 
-Janne
+Best regards,
+-- 
+Alessio Belle <alessio.belle@imgtec.com>
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
