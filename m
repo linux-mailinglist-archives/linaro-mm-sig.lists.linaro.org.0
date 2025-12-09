@@ -2,531 +2,313 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 897C6CA9DFA
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 06 Dec 2025 03:04:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 35C6ACB0716
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 09 Dec 2025 16:46:27 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C914140105
-	for <lists+linaro-mm-sig@lfdr.de>; Sat,  6 Dec 2025 02:04:52 +0000 (UTC)
-Received: from mail-ua1-f65.google.com (mail-ua1-f65.google.com [209.85.222.65])
-	by lists.linaro.org (Postfix) with ESMTPS id 4542B3F7D7
-	for <linaro-mm-sig@lists.linaro.org>; Sat,  6 Dec 2025 02:04:36 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B954D3F915
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  9 Dec 2025 15:46:23 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.20])
+	by lists.linaro.org (Postfix) with ESMTPS id 697BA3F828
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  9 Dec 2025 15:46:07 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20230601 header.b="Rq/Nj+u7";
-	spf=pass (lists.linaro.org: domain of bagasdotme@gmail.com designates 209.85.222.65 as permitted sender) smtp.mailfrom=bagasdotme@gmail.com;
-	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-ua1-f65.google.com with SMTP id a1e0cc1a2514c-937268fe284so1743560241.0
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 05 Dec 2025 18:04:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1764986676; x=1765591476; darn=lists.linaro.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=ikbW0KTFV2Hrw3Ofr3+X6/ogNZDuDLj9J6B0i4MyxZI=;
-        b=Rq/Nj+u7+qQGl+NDjs7tNq4UROk9vGyf9QewzqHO1ifCSBPBHc7X79ek42JgOBmzdF
-         fG279RJxhf/rPM6ZQNenpc4+Nsoq3qYpjd9drggz4wuhmrCwEyTgqnRk0l9bGglmp+gA
-         H2Q/ldD2GijW1yN6jgt7QqBjdQ7SFBRNvSqRl6KvwSL/MU21sr54aMZk0cRVgI1RA0EU
-         TIsd8Hz9DfzjBv7kN1EOZw034mWQ+ZoltwXD5mTkIAmcyOQ7uF+ga/VSn9R3Fb2rp3vG
-         nkfcaKsoDW9BA92u0ObMg6e2mw7dMA/tc5iUOxgmj8BKBuQrbfQX2gt8g+d+iTWHeICk
-         WwIg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764986676; x=1765591476;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=ikbW0KTFV2Hrw3Ofr3+X6/ogNZDuDLj9J6B0i4MyxZI=;
-        b=TjTXQXb1NlFoKHrIgmtXoWP/YQ8zl4FuSvREvcxZ/rMkaW4MbVscFMWu1yvWTVYUV/
-         6y5ayYCnEnEGfAofok2Zruzgx4DvTvs0AK3iVy3u/xvNz0e3GXFIHSW/gSkLKcIANQeF
-         K5lqVMNr1ulwclmgs1jK2iu+7ORiWLr/iQFtq2+oRxmoIMc8LFSiDgNSKQKHi3NIFdg/
-         eN3L0rsCw6Ox4hFMstP6JQoBhGBfA/F3vTF9eQPBfehap32PnLb6QobzbX0D5RU8Dozs
-         JoCdIjT+vZmgsBv+IZP6zbSAfpQNoLmnVd1JkCoTk2McK2sAMKPpD6z4+RyT2Q3LPfOm
-         r05Q==
-X-Forwarded-Encrypted: i=1; AJvYcCUK/UJOwjWzb7bvsCHwoYAJvdc2OQe0bfj4WHqDT5snSMqV4XeSpz/XZJ8xl4UCjoy3vHNX1nWNVZheLKoJ@lists.linaro.org
-X-Gm-Message-State: AOJu0Ywh9S6F26aON0g3bylIqxy+xOPwp9V48oBGldqF2o8/5x5tstFk
-	yOoGgVFDcxMG/kTHjMNbs5jTsmKeCNuaIbjsfcXYKt7upet8xtwwUiGH
-X-Gm-Gg: ASbGncsc7c+t+nkD2/X9xZcyNT7rC7hbq4Vv79QTnFRYl0e1Ka8FLVWtfNW6+yRGNRP
-	O774tCOCAlVLASj8C1oR8T5VPX+taq3P0fpOpj+d4gZrHlWSZ0p3tmQHeSL6vg/lL3DUsM8D3QF
-	cUZZ5HgJo3lmjYdPWbO0EzgJJCt1chk8TRWCvmLRzLBxQPjgkPEFA79PlX2z1qAya6IDIjBrOBy
-	1RMljr1nmhYM1aWl0oT0b3oacnbkWniCstzb/l39RXKwLnDc21NySr7Oku+w9+aqiCiMU1JS9r4
-	nGFlBy216ZE9XCgYTuXxkZAtzJN6/qYfmhlw+mhQlcBjfo8a5ZRJn+t4EL4C6pTOCa4Uh2j5Ggf
-	mEhORi0Sc5GNmXQsSxlQqitID0+9yaFzPfg2NZ7T55rHPmgp00GjSCZJNYJa32NI0l6SdPaB79V
-	sPd4918Ld+GkgCLFcXRdk4gA==
-X-Google-Smtp-Source: AGHT+IEr3Q6a4CN4+olI+Mt242gDsAIL3w56EYKxscpKjh4CXmUdmYBy6PKk8nZmUVIj5FdxLRUi1Q==
-X-Received: by 2002:a17:90b:3fc4:b0:32e:64ca:e84e with SMTP id 98e67ed59e1d1-349a254f6f8mr705096a91.15.1764980727972;
-        Fri, 05 Dec 2025 16:25:27 -0800 (PST)
-Received: from archie.me ([210.87.74.117])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-349a28cdf5asm360525a91.4.2025.12.05.16.25.26
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 05 Dec 2025 16:25:27 -0800 (PST)
-Received: by archie.me (Postfix, from userid 1000)
-	id C8B35421860F; Sat, 06 Dec 2025 07:25:22 +0700 (WIB)
-Date: Sat, 6 Dec 2025 07:25:22 +0700
-From: Bagas Sanjaya <bagasdotme@gmail.com>
-To: Byungchul Park <byungchul@sk.com>, linux-kernel@vger.kernel.org
-Message-ID: <aTN38kJjBftxnjm9@archie.me>
-References: <20251205071855.72743-1-byungchul@sk.com>
- <20251205071855.72743-26-byungchul@sk.com>
+	dkim=pass header.d=intel.com header.s=Intel header.b=RoPRAADk;
+	spf=pass (lists.linaro.org: domain of oliver.sang@intel.com designates 198.175.65.20 as permitted sender) smtp.mailfrom=oliver.sang@intel.com;
+	dmarc=pass (policy=none) header.from=intel.com;
+	arc=reject ("signature check failed: fail, {[1] = sig:microsoft.com:reject}")
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1765295168; x=1796831168;
+  h=date:from:to:cc:subject:message-id:in-reply-to:
+   mime-version;
+  bh=z9eX3eS+xxNklkoAzx3NQ5eeuasOPbESQo0lnxBdteA=;
+  b=RoPRAADkfqCyhh8GnAKnqXg7egSfGQ6FARUqwB6MdOnUmBVDAf+cnrgL
+   hAFGDPPVjjb+qCTf9nj+TD2axlMYZyp+BQD64mj/5feeu28nP3sGMAtza
+   ZRslAlI2Me/zleAmcfiWn0rWuJG+MocP4HIjeK6w5lczZhIBcSWzQvFoi
+   /KBl8QHraqk8AuRsYVISszcTUbQcQH9/a/8MlJ/1yrY2EfRixi6NNUIC6
+   0S6wKz6TzmWnS7dJI32bRyOTxgMsm9xfJeeC+ixAxpH5Y0wns08cvCO91
+   ikdDysydCzfeTImuXldMG32Ob5HihWP2ggDg//WNmX1t309gMDep9BHXD
+   A==;
+X-CSE-ConnectionGUID: Cdk1kXmPQGqZCDJel/Mylg==
+X-CSE-MsgGUID: MLKGWL4+Rx2miDOfWgJb1A==
+X-IronPort-AV: E=McAfee;i="6800,10657,11637"; a="66976507"
+X-IronPort-AV: E=Sophos;i="6.20,261,1758610800";
+   d="scan'208";a="66976507"
+Received: from orviesa001.jf.intel.com ([10.64.159.141])
+  by orvoesa112.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Dec 2025 07:46:06 -0800
+X-CSE-ConnectionGUID: 4czGdzVIQJqB9bp8hhRAaQ==
+X-CSE-MsgGUID: xVvZryQWQ4+9GtvKr9LtrA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.20,261,1758610800";
+   d="scan'208";a="233660213"
+Received: from orsmsx903.amr.corp.intel.com ([10.22.229.25])
+  by orviesa001.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Dec 2025 07:46:06 -0800
+Received: from ORSMSX902.amr.corp.intel.com (10.22.229.24) by
+ ORSMSX903.amr.corp.intel.com (10.22.229.25) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.29; Tue, 9 Dec 2025 07:46:05 -0800
+Received: from ORSEDG903.ED.cps.intel.com (10.7.248.13) by
+ ORSMSX902.amr.corp.intel.com (10.22.229.24) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.29 via Frontend Transport; Tue, 9 Dec 2025 07:46:05 -0800
+Received: from CY3PR05CU001.outbound.protection.outlook.com (40.93.201.62) by
+ edgegateway.intel.com (134.134.137.113) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.29; Tue, 9 Dec 2025 07:46:05 -0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=GJsfsY4SMMSfqsnRZBZSjlbKu/NAhSHOwiZHMwLLKulglr2vGN8mQlhMOD09u43OCYsfzVwbDa65WnrXwf7V7GlqNB+l04DzHGf6Uwh5IdocnfOt4AhG7XsmprjH7GAZ/ucC/6vw8nbWjb0MkzdG6/J1+v2YruoLkvGPAOiTZY/O3ph9yGZ1tiKEDbJjRujxGBfIP6lOxGDEY1Lw6XIGTHcHHdZJOzPT0+hUBIp6EnNVp71+S3TkvrYf31yBU1LZKZreXyQ1Xdc9r2W8aqZtQCLfKJLUn9e4HV7eDt6W7PdoSDA4s9PTOFcu6QlEaFUiL4QTJ7zGZUYKqxDSTkGdBQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=DZisnF9nRxWnrmQa6pUtk/j+tDZMDvBDDsC/pIsDPRc=;
+ b=BFPIttfcBTswqAxyrRtyUNhaoEnL08CKtx9BPq1zQrFesEhVdbqgSQn8aPWRQi0ulI765LkTQ0+en7+FDTXBrp9If/T9oKCPXdwZb7AkUJldFQ8JHoG20QS+M8CInHqfz+yN8empPgIuGI2CRXkQfFLMCBvVGoXmGV+orzugamfc1YPHVcSkp1Vpfkv9AM7z4svZDavs50sPHBr83tpLWoqN0Gw2+QQcnAR7FT89p7+5Yk6gFUIm4oDFbXbtUHEhTpxNuMX0BpJapQhgJHc+VFgt3DXgVup5/KA2pSL3iZdnTNU+REbthFe6jPiQhVHZHNUQPFEEerhwMmcaTk3E5w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Received: from LV3PR11MB8603.namprd11.prod.outlook.com (2603:10b6:408:1b6::9)
+ by DS7PR11MB8808.namprd11.prod.outlook.com (2603:10b6:8:257::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9412.7; Tue, 9 Dec
+ 2025 15:46:03 +0000
+Received: from LV3PR11MB8603.namprd11.prod.outlook.com
+ ([fe80::4622:29cf:32b:7e5c]) by LV3PR11MB8603.namprd11.prod.outlook.com
+ ([fe80::4622:29cf:32b:7e5c%5]) with mapi id 15.20.9412.005; Tue, 9 Dec 2025
+ 15:46:02 +0000
+Date: Tue, 9 Dec 2025 23:45:51 +0800
+From: kernel test robot <oliver.sang@intel.com>
+To: Philipp Stanner <phasta@kernel.org>
+Message-ID: <202512092317.8cf778a-lkp@intel.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20251125104443.82974-2-phasta@kernel.org>
+X-ClientProxiedBy: KL1PR01CA0074.apcprd01.prod.exchangelabs.com
+ (2603:1096:820:2::14) To LV3PR11MB8603.namprd11.prod.outlook.com
+ (2603:10b6:408:1b6::9)
 MIME-Version: 1.0
-In-Reply-To: <20251205071855.72743-26-byungchul@sk.com>
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: LV3PR11MB8603:EE_|DS7PR11MB8808:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8e8e1cec-5d24-4aee-b275-08de373a0ebe
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|7416014|1800799024|366016|7053199007;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?KG/zLaQSOh4SsHRz7ZqEyLqjNIn0PQmiZCenxphip61vpWKry1UaZZueGn0n?=
+ =?us-ascii?Q?nr0dkdHcJ1rrRuBRSFKp95ex0dXqe8jaj4OShmEzXJe4DBGab/7Pwfy32Gab?=
+ =?us-ascii?Q?si+lR7RBMZ+XDWFmoXSvio7pULfoJeP8So41ExF3WpEURpBZZOapDt8XbIzl?=
+ =?us-ascii?Q?S68qmcenN3JjDG750JbRsX9a58y9xbvGgmcJPwq+BATGq+K7Sd4qhKo3RWDw?=
+ =?us-ascii?Q?pGXwziCy5tak/pwR3cQVvwwdQljBSjozpPNj6MyoO2Papuq9YavbZE1XkrUa?=
+ =?us-ascii?Q?a8l9XYwddHvmOmZWjYt6gZ11Dg050qZVVQrlwQw426eq28fB19VOdNgk+1TB?=
+ =?us-ascii?Q?TAzAMpBc+m5zMj8WqGPBoiS6caA5cE+SEhxarKLdfuvVK/9c2OSPWDEuzYSP?=
+ =?us-ascii?Q?G1Mu1a54nFh9rPkC1O2VvjWhe+QutwCQFvVHL7CxN7tQtIhXozOXd8vs6Q/M?=
+ =?us-ascii?Q?JeREmBlt4M/4WWyoY88kBkLVEksw2+rNbwqFYOVoaZ0cONPL/JM8W2csI2Vi?=
+ =?us-ascii?Q?jBr6cFeLiimqX+fOtdH/xAn92AIaz5zwcHMdOHP2JqiVjgIJEO2KLJM4SyOR?=
+ =?us-ascii?Q?9Ge9+sruYG5fabD+vcY8NQGYQJordxBKD3CDHd3454TguQ7dDX6H5+xEE3iq?=
+ =?us-ascii?Q?6TQzOaalGaMT9dQp5cKH+BdzrBnkLkKT+E7OZo8oljmhuI2zKp6hivrGoHVo?=
+ =?us-ascii?Q?vYo+cyER8qPNyJRJAldvk1hmekcbiNiTcEWwzoqsIZ8/O8sQ2UQ7+J3bibgl?=
+ =?us-ascii?Q?7B9E5XGxyFqZCiTvZNhlNSd4YNax0J567nZgGbHchaNO3p1LMeeqTVZwT/r8?=
+ =?us-ascii?Q?OJLCbkRpkJpzHybpMlQhdBVSmJSwWdB8PlkUphfz7GWlF+HEPM5ir+M2S/jC?=
+ =?us-ascii?Q?9GcnhdJjQYM4DU3CwfKhX7pnaUoU5/xDgkbsGIRLfW+Y6pqkfbK8QZrRuB94?=
+ =?us-ascii?Q?QymS5lsX4D39cPUCo71bXtw3cdZrii2qidtUzkIQ8K4+tyRqZCDxi214tlgx?=
+ =?us-ascii?Q?yyrQnzxRYiJfYOW/xcCNVco+eyhSmH5Zu4M1naO8jw8hprz/qckUo5Ww71ym?=
+ =?us-ascii?Q?M5yNB+3PCnsdE5nG6t5w/1LkPgEguUNJ6yz6rWO4qqeXMpFKoXxyb0Vh/S84?=
+ =?us-ascii?Q?f5yuMlXwRDk1s/auWegL/P319fWayU1UlLojP4JxoYwEzrdENvVsyfiBTRDU?=
+ =?us-ascii?Q?DhXuR6Ntbm59H3sGSvSeQXj00l/nFhH5oT4JaBsvPDNa81e7CttjFBzErMmF?=
+ =?us-ascii?Q?0gh7X1Ebf3ZYO5DrPSxzyOAdaptqjcBzEpK6JFrMXFJsPy04cx/6Qm4cglaX?=
+ =?us-ascii?Q?cmMRL7jgQwszkVvGOF4DeDngOMEruaOz7pGb1yY6Cf1x6VzLF83RR769/xVJ?=
+ =?us-ascii?Q?yXY2ANCUSLuDVNKE08K/Q0utVUkc5J5OtUtsANvpsQyn5Cnl9Ktz9EE6s3RQ?=
+ =?us-ascii?Q?PNpk6nGIvAU7mT61Evr8tWToDY9PcdfA58oZsJvg36Y727FK47zpdQ=3D=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LV3PR11MB8603.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(1800799024)(366016)(7053199007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Cp+H1y5Ldil8Cp5bH95SUyajWGqKcZuC8F//yDNgbZCohH3nDMXNbikaghSx?=
+ =?us-ascii?Q?OHmVKTyyXXPr/16iiYmcoCWbsxxIrrMemE/uVhIAwp/o6ETELjVlc/5AUxx8?=
+ =?us-ascii?Q?2JTR9P6hA5Eu91DsAO3Vwi1uS5l18qHDReyzo5+jD5Q9mB+cVCuvK5fKgSRr?=
+ =?us-ascii?Q?yKwygpDN8aNshVR4opLU65cv53+R4aiUy30+f6VjZUf6lxExbqNTqNf7wL9y?=
+ =?us-ascii?Q?PNyGvUuGBj+qGC561ykeE0rpaGdvBtIKiRPIgfdrvvJyC+/L1iLdunATHjbX?=
+ =?us-ascii?Q?pL0ZFbPXuPXDG8NRafeEncEMdibg0Bh4aRJdo9SdfaH37kCv9t+I1dSWUuqh?=
+ =?us-ascii?Q?CIitEuAlNQ2lJ4ci+GYdJ7h9CEjki1jYSjj96izTEGuVEPgVtg2/9Q2+Ppiq?=
+ =?us-ascii?Q?4ptg48FhwUlVJCgPSvlctJGQA7EQyH+UeDnvUu6BRkzZUyn3UyYTFVEQMXk9?=
+ =?us-ascii?Q?Ez9Syfn18GISAPZF12vQtRdqg+t79xaTI5tf42fB0Ml6kXEzm1UWWM719Uwf?=
+ =?us-ascii?Q?6YUtxrxdbfk8J4ZVCZSBIxGNas1HokdSBLuHDEbSSSSXzJKhZecnUT3jse6q?=
+ =?us-ascii?Q?WsX8W6q/P4wnJJJBXRXiob8bueFp4xhmz4VqxTTU18NlzCTtvY8kB3YORoxu?=
+ =?us-ascii?Q?63hon5MbMf5ebU3LkCXu3Jvb8o5HExYUS1sA4w1CjKbiLSiVYyUM7zShv0uW?=
+ =?us-ascii?Q?sbiMzqshDac+6Tehbiipv6kMzjqp0Dh0burff2h+P3mfnGE12aulloesNOv9?=
+ =?us-ascii?Q?QOwAenkAwkkfyk2eoL+o8BndHli2YbGGSCt1oPvtzanhdBnXSOqlVlcVmofr?=
+ =?us-ascii?Q?if6ofb4LrnjSqYpGKfYI09vzK/JziXHNz1I8UTaGgvNr6VquckK7j/i9xOjY?=
+ =?us-ascii?Q?GEuL4j41+B5SjEDDO48O2dSpx/gQJbK/RM8jUNzVhV4r4j+2EloieswJEbJg?=
+ =?us-ascii?Q?EZjye8buoKn7DHFUqwYagCuRF/X4y9mQJ/ILf080IS4ahjYGm5xcGLLz3M21?=
+ =?us-ascii?Q?ThyZWl8ps4G03zlEEvwgMgncyS2l5GoJVB4zD2YXCTARUXPFRzSXpf5XosqU?=
+ =?us-ascii?Q?7WWjqwcmDD5HXLjCIzH33IWENhYVBXrPgXAc1UQZRMx99IambCpc3rgYej2v?=
+ =?us-ascii?Q?Kajxb0XxD070bQTAwQHIQyL5KrB81mCrcpq4UhwMGnIie/0v343b/86zAuxG?=
+ =?us-ascii?Q?QpJB9PjeEeXU4lpxVuBrZhk0D8S3mKx/xzSZrpolC+XOTxWDKYOJkElqVBVb?=
+ =?us-ascii?Q?Y2u8DAKc5C+kYNn8f2A7i/RnhD7C5Gj4ijCzLrrm4DfNYBCNeXz8XI+XKe24?=
+ =?us-ascii?Q?v6eleXuza1E4QSS5o1vizdvh3KbbkgVw/WTnjN2CVglIPtRKHhd0PvENDC2p?=
+ =?us-ascii?Q?cLgM1ppFIrongr+WfcFAEkK2qsBpfQ0AXKLUWixSiZ5exCdK5vZzhT1edA+o?=
+ =?us-ascii?Q?whVCHMsYTUw7S3OjOZSEZIjfTCJqud/o88WcNpg3FuhakOYXDko5lM82bWls?=
+ =?us-ascii?Q?rTRV0yGgVxrMPb7kts22AfqQSKudn8o/GRlnIf4HdtI8BqVBH86VbI6prd/6?=
+ =?us-ascii?Q?14578dZAoZersWa/tncET9rpG1l+efgKcS4JgJ3MUni+Ltx5OaGTnCkdNFLi?=
+ =?us-ascii?Q?YA=3D=3D?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8e8e1cec-5d24-4aee-b275-08de373a0ebe
+X-MS-Exchange-CrossTenant-AuthSource: LV3PR11MB8603.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Dec 2025 15:46:02.9437
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 1qhTQGtzAskQNtJV//nQ/B7GaR6BLiz/eQo1w95SEeUXNzHNQEzjEDZl5q7gvuLQAT2DQwQrRLk5uruq9tv7Ww==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR11MB8808
+X-OriginatorOrg: intel.com
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-4.10 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
-	SIGNED_PGP(-2.00)[];
-	FORGED_RECIPIENTS(2.00)[m:byungchul@sk.com,m:linux-kernel@vger.kernel.org,m:kernel_team@skhynix.com,m:torvalds@linux-foundation.org,m:damien.lemoal@opensource.wdc.com,m:linux-ide@vger.kernel.org,m:adilger.kernel@dilger.ca,m:linux-ext4@vger.kernel.org,m:mingo@redhat.com,m:peterz@infradead.org,m:will@kernel.org,m:tglx@linutronix.de,m:rostedt@goodmis.org,m:joel@joelfernandes.org,m:sashal@kernel.org,m:daniel.vetter@ffwll.ch,m:duyuyang@gmail.com,m:johannes.berg@intel.com,m:tj@kernel.org,m:tytso@mit.edu,m:willy@infradead.org,m:david@fromorbit.com,m:amir73il@gmail.com,m:gregkh@linuxfoundation.org,m:kernel-team@lge.com,m:linux-mm@kvack.org,m:akpm@linux-foundation.org,m:mhocko@kernel.org,m:minchan@kernel.org,m:hannes@cmpxchg.org,m:vdavydov.dev@gmail.com,m:sj@kernel.org,m:jglisse@redhat.com,m:dennis@kernel.org,m:cl@linux.com,m:penberg@kernel.org,m:rientjes@google.com,m:vbabka@suse.cz,m:ngupta@vflare.org,m:linux-block@vger.kernel.org,m:josef@toxicpanda.com,m:linux-fsdevel@vger.kernel.org,m:jac
- k@suse.cz,m:jlayton@kernel.org,m:dan.j.williams@intel.com,m:hch@infradead.org,m:djwong@kernel.org,m:dri-devel@lists.freedesktop.org,m:rodrigosiqueiramelo@gmail.com,m:melissa.srw@gmail.com,m:hamohammed.sa@gmail.com,m:harry.yoo@oracle.com,m:chris.p.wilson@intel.com,m:gwan-gyeong.mun@intel.com,m:max.byungchul.park@gmail.com,m:boqun.feng@gmail.com,m:longman@redhat.com,m:yunseong.kim@ericsson.com,m:ysk@kzalloc.com,m:yeoreum.yun@arm.com,m:netdev@vger.kernel.org,m:matthew.brost@intel.com,m:her0gyugyu@gmail.com,m:corbet@lwn.net,m:catalin.marinas@arm.com,m:bp@alien8.de,m:x86@kernel.org,m:hpa@zytor.com,m:luto@kernel.org,m:sumit.semwal@linaro.org,m:gustavo@padovan.org,m:christian.koenig@amd.com,m:andi.shyti@kernel.org,m:arnd@arndb.de,m:lorenzo.stoakes@oracle.com,m:Liam.Howlett@oracle.com,m:rppt@kernel.org,m:surenb@google.com,m:mcgrof@kernel.org,m:petr.pavlu@suse.com,m:da.gomez@kernel.org,m:samitolvanen@google.com,m:paulmck@kernel.org,m:frederic@kernel.org,m:neeraj.upadhyay@kernel.org,m:joelagn
- elf@nvidia.com,m:josh@joshtriplett.org,m:urezki@gmail.com,m:mathieu.desnoyers@efficios.com,m:jiangshanlai@gmail.com,m:qiang.zhang@linux.dev,m:juri.lelli@redhat.com,m:vincent.guittot@linaro.org,m:dietmar.eggemann@arm.com,m:bsegall@google.com,m:mgorman@suse.de,m:vschneid@redhat.com,m:chuck.lever@oracle.com,m:neil@brown.name,s:linaro-mm-sig@lists.linaro.org];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
-	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.222.65:from];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+X-Spamd-Result: default: False [-6.00 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
+	BAYES_HAM(-3.00)[100.00%];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:198.175.65.0/26];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	MIME_GOOD(-0.10)[text/plain];
+	ASN(0.00)[asn:4983, ipnet:198.175.64.0/23, country:US];
+	DKIM_TRACE(0.00)[intel.com:+];
+	MIME_TRACE(0.00)[0:+];
 	MISSING_XM_UA(0.00)[];
-	ARC_NA(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_ENVFROM(0.00)[gmail.com];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[skhynix.com,linux-foundation.org,opensource.wdc.com,vger.kernel.org,dilger.ca,redhat.com,infradead.org,kernel.org,linutronix.de,goodmis.org,joelfernandes.org,ffwll.ch,gmail.com,intel.com,mit.edu,fromorbit.com,linuxfoundation.org,lge.com,kvack.org,cmpxchg.org,linux.com,google.com,suse.cz,vflare.org,toxicpanda.com,lists.freedesktop.org,oracle.com,ericsson.com,kzalloc.com,arm.com,lwn.net,alien8.de,zytor.com,linaro.org,padovan.org,amd.com,arndb.de,suse.com,nvidia.com,joshtriplett.org,efficios.com,linux.dev,suse.de,brown.name,talpey.com,huawei.com,amazon.co.uk,linux.alibaba.com,glider.be,linux.intel.com,treblig.org,star-ark.net,valla.it,vivo.com,baidu.com,lists.infradead.org,lists.linaro.org,lists.linux.dev,qq.com,ownmail.net,sang-engineering.com,linux-m68k.org,garyguo.net,protonmail.com,umich.edu];
+	RCPT_COUNT_TWELVE(0.00)[14];
+	BLOCKLISTDE_FAIL(0.00)[198.175.65.20:server fail,2603:10b6:408:1b6::9:server fail,40.93.201.62:server fail];
 	NEURAL_HAM(-0.00)[-1.000];
+	TO_DN_SOME(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[165];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	RCVD_COUNT_THREE(0.00)[3];
-	DKIM_TRACE(0.00)[gmail.com:+]
+	RCVD_COUNT_SEVEN(0.00)[7]
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 4542B3F7D7
-X-Spamd-Bar: ----
-Message-ID-Hash: 3JSOMFL5NEXU2MOQY52MXX574IRB3W5S
-X-Message-ID-Hash: 3JSOMFL5NEXU2MOQY52MXX574IRB3W5S
-X-MailFrom: bagasdotme@gmail.com
+X-Rspamd-Queue-Id: 697BA3F828
+X-Spamd-Bar: ------
+Message-ID-Hash: 2TI5RVEYKUKQCJ7AOETXGFZU7NEPQCZU
+X-Message-ID-Hash: 2TI5RVEYKUKQCJ7AOETXGFZU7NEPQCZU
+X-MailFrom: oliver.sang@intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: kernel_team@skhynix.com, torvalds@linux-foundation.org, damien.lemoal@opensource.wdc.com, linux-ide@vger.kernel.org, adilger.kernel@dilger.ca, linux-ext4@vger.kernel.org, mingo@redhat.com, peterz@infradead.org, will@kernel.org, tglx@linutronix.de, rostedt@goodmis.org, joel@joelfernandes.org, sashal@kernel.org, daniel.vetter@ffwll.ch, duyuyang@gmail.com, johannes.berg@intel.com, tj@kernel.org, tytso@mit.edu, willy@infradead.org, david@fromorbit.com, amir73il@gmail.com, gregkh@linuxfoundation.org, kernel-team@lge.com, linux-mm@kvack.org, akpm@linux-foundation.org, mhocko@kernel.org, minchan@kernel.org, hannes@cmpxchg.org, vdavydov.dev@gmail.com, sj@kernel.org, jglisse@redhat.com, dennis@kernel.org, cl@linux.com, penberg@kernel.org, rientjes@google.com, vbabka@suse.cz, ngupta@vflare.org, linux-block@vger.kernel.org, josef@toxicpanda.com, linux-fsdevel@vger.kernel.org, jack@suse.cz, jlayton@kernel.org, dan.j.williams@intel.com, hch@infradead.org, djwong@kernel.org, dri-devel@lists.fr
- eedesktop.org, rodrigosiqueiramelo@gmail.com, melissa.srw@gmail.com, hamohammed.sa@gmail.com, harry.yoo@oracle.com, chris.p.wilson@intel.com, gwan-gyeong.mun@intel.com, max.byungchul.park@gmail.com, boqun.feng@gmail.com, longman@redhat.com, yunseong.kim@ericsson.com, ysk@kzalloc.com, yeoreum.yun@arm.com, netdev@vger.kernel.org, matthew.brost@intel.com, her0gyugyu@gmail.com, corbet@lwn.net, catalin.marinas@arm.com, bp@alien8.de, x86@kernel.org, hpa@zytor.com, luto@kernel.org, sumit.semwal@linaro.org, gustavo@padovan.org, christian.koenig@amd.com, andi.shyti@kernel.org, arnd@arndb.de, lorenzo.stoakes@oracle.com, Liam.Howlett@oracle.com, rppt@kernel.org, surenb@google.com, mcgrof@kernel.org, petr.pavlu@suse.com, da.gomez@kernel.org, samitolvanen@google.com, paulmck@kernel.org, frederic@kernel.org, neeraj.upadhyay@kernel.org, joelagnelf@nvidia.com, josh@joshtriplett.org, urezki@gmail.com, mathieu.desnoyers@efficios.com, jiangshanlai@gmail.com, qiang.zhang@linux.dev, juri.lelli@redhat.co
- m, vincent.guittot@linaro.org, dietmar.eggemann@arm.com, bsegall@google.com, mgorman@suse.de, vschneid@redhat.com, chuck.lever@oracle.com, neil@brown.name, okorniev@redhat.com, Dai.Ngo@oracle.com, tom@talpey.com, trondmy@kernel.org, anna@kernel.org, kees@kernel.org, bigeasy@linutronix.de, clrkwllms@kernel.org, mark.rutland@arm.com, ada.coupriediaz@arm.com, kristina.martsenko@arm.com, wangkefeng.wang@huawei.com, broonie@kernel.org, kevin.brodsky@arm.com, dwmw@amazon.co.uk, shakeel.butt@linux.dev, ast@kernel.org, ziy@nvidia.com, yuzhao@google.com, baolin.wang@linux.alibaba.com, usamaarif642@gmail.com, joel.granados@kernel.org, richard.weiyang@gmail.com, geert+renesas@glider.be, tim.c.chen@linux.intel.com, linux@treblig.org, alexander.shishkin@linux.intel.com, lillian@star-ark.net, chenhuacai@kernel.org, francesco@valla.it, guoweikang.kernel@gmail.com, link@vivo.com, jpoimboe@kernel.org, masahiroy@kernel.org, brauner@kernel.org, thomas.weissschuh@linutronix.de, oleg@redhat.com, mjguzik
- @gmail.com, andrii@kernel.org, wangfushuai@baidu.com, linux-doc@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-i2c@vger.kernel.org, linux-arch@vger.kernel.org, linux-modules@vger.kernel.org, rcu@vger.kernel.org, linux-nfs@vger.kernel.org, linux-rt-devel@lists.linux.dev, 2407018371@qq.com, dakr@kernel.org, miguel.ojeda.sandonis@gmail.com, neilb@ownmail.net, wsa+renesas@sang-engineering.com, dave.hansen@intel.com, geert@linux-m68k.org, ojeda@kernel.org, alex.gaynor@gmail.com, gary@garyguo.net, bjorn3_gh@protonmail.com, lossin@kernel.org, a.hindborg@kernel.org, aliceryhl@google.com, tmgross@umich.edu, rust-for-linux@vger.kernel.org
+CC: oe-lkp@lists.linux.dev, lkp@intel.com, Tvrtko Ursulin <tvrtko.ursulin@igalia.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Sumit Semwal <sumit.semwal@linaro.org>, Gustavo Padovan <gustavo@padovan.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Daniel Almeida <daniel.almeida@collabora.com>, linux-kernel@vger.kernel.org, Philipp Stanner <phasta@kernel.org>, oliver.sang@intel.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v18 25/42] dept: add documents for dept
+Subject: [Linaro-mm-sig] Re: [PATCH 1/2] dma-buf: Add __dma_fence_is_signaled()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3JSOMFL5NEXU2MOQY52MXX574IRB3W5S/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2TI5RVEYKUKQCJ7AOETXGFZU7NEPQCZU/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============8001084837357132071=="
-
-
---===============8001084837357132071==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="tsFx90K4YzyOMDd5"
-Content-Disposition: inline
-
-
---tsFx90K4YzyOMDd5
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, Dec 05, 2025 at 04:18:38PM +0900, Byungchul Park wrote:
-> Add documents describing the concept and APIs of dept.
->=20
-> Signed-off-by: Byungchul Park <byungchul@sk.com>
-> ---
->  Documentation/dev-tools/dept.rst     | 778 +++++++++++++++++++++++++++
->  Documentation/dev-tools/dept_api.rst | 125 +++++
-
-You forget to add toctree entries:
-
----- >8 ----
-diff --git a/Documentation/dev-tools/index.rst b/Documentation/dev-tools/in=
-dex.rst
-index 4b8425e348abd1..02c858f5ed1fa2 100644
---- a/Documentation/dev-tools/index.rst
-+++ b/Documentation/dev-tools/index.rst
-@@ -22,6 +22,8 @@ Documentation/process/debugging/index.rst
-    clang-format
-    coccinelle
-    sparse
-+   dept
-+   dept_api
-    kcov
-    gcov
-    kasan
-
-> +Lockdep detects a deadlock by checking lock acquisition order.  For
-> +example, a graph to track acquisition order built by lockdep might look
-> +like:
-> +
-> +.. literal::
-> +
-> +   A -> B -
-> +           \
-> +            -> E
-> +           /
-> +   C -> D -
-> +
-> +   where 'A -> B' means that acquisition A is prior to acquisition B
-> +   with A still held.
-
-Use code-block directive for literal code blocks:
-
----- >8 ----
-diff --git a/Documentation/dev-tools/dept.rst b/Documentation/dev-tools/dep=
-t.rst
-index 333166464543d7..8394c4ea81bc2a 100644
---- a/Documentation/dev-tools/dept.rst
-+++ b/Documentation/dev-tools/dept.rst
-@@ -10,7 +10,7 @@ Lockdep detects a deadlock by checking lock acquisition o=
-rder.  For
- example, a graph to track acquisition order built by lockdep might look
- like:
-=20
--.. literal::
-+.. code-block::
-=20
-    A -> B -
-            \
-@@ -25,7 +25,7 @@ Lockdep keeps adding each new acquisition order into the =
-graph at
- runtime.  For example, 'E -> C' will be added when the two locks have
- been acquired in the order, E and then C.  The graph will look like:
-=20
--.. literal::
-+.. code-block::
-=20
-        A -> B -
-                \
-@@ -41,7 +41,7 @@ been acquired in the order, E and then C.  The graph will=
- look like:
-=20
- This graph contains a subgraph that demonstrates a loop like:
-=20
--.. literal::
-+.. code-block::
-=20
-                 -> E -
-                /      \
-@@ -76,7 +76,7 @@ e.g. irq context, normal process context, wq worker conte=
-xt, or so on.
-=20
- Can lockdep detect the following deadlock?
-=20
--.. literal::
-+.. code-block::
-=20
-    context X	   context Y	   context Z
-=20
-@@ -91,7 +91,7 @@ Can lockdep detect the following deadlock?
-=20
- No.  What about the following?
-=20
--.. literal::
-+.. code-block::
-=20
-    context X		   context Y
-=20
-@@ -116,7 +116,7 @@ What leads a deadlock
- A deadlock occurs when one or multi contexts are waiting for events that
- will never happen.  For example:
-=20
--.. literal::
-+.. code-block::
-=20
-    context X	   context Y	   context Z
-=20
-@@ -148,7 +148,7 @@ In terms of dependency:
-=20
- Dependency graph reflecting this example will look like:
-=20
--.. literal::
-+.. code-block::
-=20
-     -> C -> A -> B -
-    /                \
-@@ -171,7 +171,7 @@ Introduce DEPT
- DEPT(DEPendency Tracker) tracks wait and event instead of lock
- acquisition order so as to recognize the following situation:
-=20
--.. literal::
-+.. code-block::
-=20
-    context X	   context Y	   context Z
-=20
-@@ -186,7 +186,7 @@ acquisition order so as to recognize the following situ=
-ation:
- and builds up a dependency graph at runtime that is similar to lockdep.
- The graph might look like:
-=20
--.. literal::
-+.. code-block::
-=20
-     -> C -> A -> B -
-    /                \
-@@ -199,7 +199,7 @@ DEPT keeps adding each new dependency into the graph at=
- runtime.  For
- example, 'B -> D' will be added when event D occurrence is a
- prerequisite to reaching event B like:
-=20
--.. literal::
-+.. code-block::
-=20
-    context W
-=20
-@@ -211,7 +211,7 @@ prerequisite to reaching event B like:
-=20
- After the addition, the graph will look like:
-=20
--.. literal::
-+.. code-block::
-=20
-                      -> D
-                     /
-@@ -236,7 +236,7 @@ How DEPT works
- Let's take a look how DEPT works with the 1st example in the section
- 'Limitation of lockdep'.
-=20
--.. literal::
-+.. code-block::
-=20
-    context X	   context Y	   context Z
-=20
-@@ -256,7 +256,7 @@ event.
-=20
- Adding comments to describe DEPT's view in detail:
-=20
--.. literal::
-+.. code-block::
-=20
-    context X	   context Y	   context Z
-=20
-@@ -293,7 +293,7 @@ Adding comments to describe DEPT's view in detail:
-=20
- Let's build up dependency graph with this example.  Firstly, context X:
-=20
--.. literal::
-+.. code-block::
-=20
-    context X
-=20
-@@ -304,7 +304,7 @@ Let's build up dependency graph with this example.  Fir=
-stly, context X:
-=20
- There are no events to create dependency.  Next, context Y:
-=20
--.. literal::
-+.. code-block::
-=20
-    context Y
-=20
-@@ -332,7 +332,7 @@ event A cannot be triggered if wait B cannot be awakene=
-d by event B.
- Therefore, we can say event A depends on event B, say, 'A -> B'.  The
- graph will look like after adding the dependency:
-=20
--.. literal::
-+.. code-block::
-=20
-    A -> B
-=20
-@@ -340,7 +340,7 @@ graph will look like after adding the dependency:
-=20
- Lastly, context Z:
-=20
--.. literal::
-+.. code-block::
-=20
-    context Z
-=20
-@@ -362,7 +362,7 @@ triggered if wait A cannot be awakened by event A.  The=
-refore, we can
- say event B depends on event A, say, 'B -> A'.  The graph will look like
- after adding the dependency:
-=20
--.. literal::
-+.. code-block::
-=20
-     -> A -> B -
-    /           \
-@@ -386,7 +386,7 @@ Interpret DEPT report
-=20
- The following is the same example in the section 'How DEPT works'.
-=20
--.. literal::
-+.. code-block::
-=20
-    context X	   context Y	   context Z
-=20
-@@ -425,7 +425,7 @@ We can simplify this by labeling each waiting point wit=
-h [W], each
- point where its event's context starts with [S] and each event with [E].
- This example will look like after the labeling:
-=20
--.. literal::
-+.. code-block::
-=20
-    context X	   context Y	   context Z
-=20
-@@ -443,7 +443,7 @@ DEPT uses the symbols [W], [S] and [E] in its report as=
- described above.
- The following is an example reported by DEPT for a real problem in
- practice.
-=20
--.. literal::
-+.. code-block::
-=20
-    Link: https://lore.kernel.org/lkml/6383cde5-cf4b-facf-6e07-1378a485657d=
-@I-love.SAKURA.ne.jp/#t
-    Link: https://lore.kernel.org/lkml/1674268856-31807-1-git-send-email-by=
-ungchul.park@lge.com/
-@@ -646,7 +646,7 @@ practice.
-=20
- Let's take a look at the summary that is the most important part.
-=20
--.. literal::
-+.. code-block::
-=20
-    ---------------------------------------------------
-    summary
-@@ -669,7 +669,7 @@ Let's take a look at the summary that is the most impor=
-tant part.
-=20
- The summary shows the following scenario:
-=20
--.. literal::
-+.. code-block::
-=20
-    context A	   context B	   context ?(unknown)
-=20
-@@ -684,7 +684,7 @@ The summary shows the following scenario:
-=20
- Adding comments to describe DEPT's view in detail:
-=20
--.. literal::
-+.. code-block::
-=20
-    context A	   context B	   context ?(unknown)
-=20
-@@ -711,7 +711,7 @@ Adding comments to describe DEPT's view in detail:
-=20
- Let's build up dependency graph with this report. Firstly, context A:
-=20
--.. literal::
-+.. code-block::
-=20
-    context A
-=20
-@@ -735,7 +735,7 @@ unlock(&ni->ni_lock:0) depends on folio_unlock(&f1), sa=
-y,
-=20
- The graph will look like after adding the dependency:
-=20
--.. literal::
-+.. code-block::
-=20
-    unlock(&ni->ni_lock:0) -> folio_unlock(&f1)
-=20
-@@ -743,7 +743,7 @@ The graph will look like after adding the dependency:
-=20
- Secondly, context B:
-=20
--.. literal::
-+.. code-block::
-=20
-    context B
-=20
-@@ -762,7 +762,7 @@ folio_unlock(&f1) depends on unlock(&ni->ni_lock:0), sa=
-y,
-=20
- The graph will look like after adding the dependency:
-=20
--.. literal::
-+.. code-block::
-=20
-     -> unlock(&ni->ni_lock:0) -> folio_unlock(&f1) -
-    /                                                \
-
-> +Limitation of lockdep
-> +---------------------
-> +
-> +Lockdep deals with a deadlock by typical lock e.g. spinlock and mutex,
-> +that are supposed to be released within the acquisition context.
-> +However, when it comes to a deadlock by folio lock that is not supposed
-> +to be released within the acquisition context or other general
-> +synchronization mechanisms, lockdep doesn't work.
-> +
-> +NOTE:  In this document, 'context' refers to any type of unique context
-> +e.g. irq context, normal process context, wq worker context, or so on.
-> +
-> +Can lockdep detect the following deadlock?
-> +
-> +.. literal::
-> +
-> +   context X	   context Y	   context Z
-> +
-> +		   mutex_lock A
-> +   folio_lock B
-> +		   folio_lock B <- DEADLOCK
-> +				   mutex_lock A <- DEADLOCK
-> +				   folio_unlock B
-> +		   folio_unlock B
-> +		   mutex_unlock A
-> +				   mutex_unlock A
-> +
-> +No.  What about the following?
-> +
-> +.. literal::
-> +
-> +   context X		   context Y
-> +
-> +			   mutex_lock A
-> +   mutex_lock A <- DEADLOCK
-> +			   wait_for_complete B <- DEADLOCK
-> +   complete B
-> +			   mutex_unlock A
-> +   mutex_unlock A
-> +
-> +No.
-
-One unanswered question from my v17 review [1]: You explain in "How DEPT wo=
-rks"
-section how DEPT detects deadlock in the first example (the former with thr=
-ee
-contexts). Can you do the same on the second example (the latter with two
-contexts)?
-
-Thanks.
-
-[1]: https://lore.kernel.org/linux-doc/aN84jKyrE1BumpLj@archie.me/
-
---=20
-An old man doll... just what I always wanted! - Clara
-
---tsFx90K4YzyOMDd5
-Content-Type: application/pgp-signature; name=signature.asc
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCaTN37QAKCRD2uYlJVVFO
-o40gAP9yWQe507aOQ9xG+y3WznUbz9K0gxVdcJgmBzyPkuLdOAD/SjStuxrT6yQi
-Wd1X9MlzPBf7sPwdNC1xXihj1C/n6go=
-=b9ga
------END PGP SIGNATURE-----
-
---tsFx90K4YzyOMDd5--
-
---===============8001084837357132071==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+
+
+
+Hello,
+
+kernel test robot noticed "Oops:general_protection_fault,probably_for_non-canonical_address#:#[##]SMP_KASAN_PTI" on:
+
+commit: 142f20971642be40507d3a0bc94e905e251db81a ("[PATCH 1/2] dma-buf: Add __dma_fence_is_signaled()")
+url: https://github.com/intel-lab-lkp/linux/commits/Philipp-Stanner/dma-buf-dma-fence-Unify-return-codes-for-signalled-fences/20251125-184735
+base: git://linuxtv.org/sailus/media_tree.git master
+patch link: https://lore.kernel.org/all/20251125104443.82974-2-phasta@kernel.org/
+patch subject: [PATCH 1/2] dma-buf: Add __dma_fence_is_signaled()
+
+in testcase: lkvs
+version: lkvs-x86_64-6505b18-1_20251124
+with following parameters:
+
+	test: rapl-client
+
+
+
+config: x86_64-rhel-9.4-func
+compiler: gcc-14
+test machine: 4 threads Intel(R) Core(TM) i5-6500 CPU @ 3.20GHz (Skylake) with 32G memory
+
+(please refer to attached dmesg/kmsg for entire log/backtrace)
+
+
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <oliver.sang@intel.com>
+| Closes: https://lore.kernel.org/oe-lkp/202512092317.8cf778a-lkp@intel.com
+
+
+[   46.662293][  T179] i915 0000:00:02.0: vgaarb: VGA decodes changed: olddecodes=io+mem,decodes=io+mem:owns=io+mem
+[   46.680656][   T40] sd 1:0:0:0: [sda] Preferred minimum I/O size 4096 bytes
+[   46.682302][   T59] i915 0000:00:02.0: Direct firmware load for i915/skl_dmc_ver1_27.bin failed with error -2
+[   46.698362][   T59] i915 0000:00:02.0: [drm] Failed to load DMC firmware i915/skl_dmc_ver1_27.bin (-ENOENT). Disabling runtime power management.
+[   46.711256][   T59] i915 0000:00:02.0: [drm] DMC firmware homepage: https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
+[   46.725941][   T12] Oops: general protection fault, probably for non-canonical address 0xdffffc01544551ba: 0000 [#1] SMP KASAN PTI
+[   46.725953][  T179] ------------[ cut here ]------------
+[   46.737600][   T12] KASAN: probably user-memory-access in range [0x0000000aa22a8dd0-0x0000000aa22a8dd7]
+[   46.737612][   T12] CPU: 3 UID: 0 PID: 12 Comm: kworker/u16:0 Tainted: G S        I         6.18.0-rc5-00236-g142f20971642 #1 PREEMPT(voluntary)
+[   46.742889][  T179] Fence 0000:00:02.0:[i915]:9:2 released with pending signals!
+[   46.752212][   T12] Tainted: [S]=CPU_OUT_OF_SPEC, [I]=FIRMWARE_WORKAROUND
+[   46.752217][   T12] Hardware name: Dell Inc. OptiPlex 7040/0Y7WYT, BIOS 1.1.1 10/07/2015
+[   46.752220][   T12] Workqueue: i915 __i915_gem_free_work [i915]
+[   46.765216][  T179] WARNING: CPU: 0 PID: 179 at drivers/dma-buf/dma-fence.c:555 dma_fence_release (kbuild/src/consumer/drivers/dma-buf/dma-fence.c:555 (discriminator 1))
+[   46.772517][   T12]
+[   46.772521][   T12] RIP: 0010:__list_add_valid_or_report (kbuild/src/consumer/lib/list_debug.c:29)
+[   46.772528][   T12] Code: 8b 98 fe 48 89 d3 48 85 d2 0f 84 af 8b 98 fe 4c 8d 62 08 48 89 fd 49 89 f5 48 b8 00 00 00 00 00 fc ff df 4c 89 e2 48 c1 ea 03 <80> 3c 02 00 0f 85 b7 00 00 00 4c 39 6b 08 75 43 48 b8 00 00 00 00
+All code
+========
+   0:	8b 98 fe 48 89 d3    	mov    -0x2c76b702(%rax),%ebx
+   6:	48 85 d2             	test   %rdx,%rdx
+   9:	0f 84 af 8b 98 fe    	je     0xfffffffffe988bbe
+   f:	4c 8d 62 08          	lea    0x8(%rdx),%r12
+  13:	48 89 fd             	mov    %rdi,%rbp
+  16:	49 89 f5             	mov    %rsi,%r13
+  19:	48 b8 00 00 00 00 00 	movabs $0xdffffc0000000000,%rax
+  20:	fc ff df 
+  23:	4c 89 e2             	mov    %r12,%rdx
+  26:	48 c1 ea 03          	shr    $0x3,%rdx
+  2a:*	80 3c 02 00          	cmpb   $0x0,(%rdx,%rax,1)		<-- trapping instruction
+  2e:	0f 85 b7 00 00 00    	jne    0xeb
+  34:	4c 39 6b 08          	cmp    %r13,0x8(%rbx)
+  38:	75 43                	jne    0x7d
+  3a:	48                   	rex.W
+  3b:	b8 00 00 00 00       	mov    $0x0,%eax
+
+Code starting with the faulting instruction
+===========================================
+   0:	80 3c 02 00          	cmpb   $0x0,(%rdx,%rax,1)
+   4:	0f 85 b7 00 00 00    	jne    0xc1
+   a:	4c 39 6b 08          	cmp    %r13,0x8(%rbx)
+   e:	75 43                	jne    0x53
+  10:	48                   	rex.W
+  11:	b8 00 00 00 00       	mov    $0x0,%eax
+[   46.779267][  T179] Modules linked in:
+[   46.787293][   T12] RSP: 0018:ffffc9000010fac8 EFLAGS: 00010003
+[   46.787300][   T12] RAX: dffffc0000000000 RBX: 0000000aa22a8dcf RCX: ffffffff82f5859d
+[   46.793179][  T179]  platform_profile
+[   46.803018][   T12] RDX: 00000001544551ba RSI: ffff88884fde5c90 RDI: ffffc9000010fb50
+[   46.803023][   T12] RBP: ffffc9000010fb50 R08: 0000000000000000 R09: ffffed1109fbcb96
+[   46.803025][   T12] R10: ffff88884fde5cb7 R11: fefefefefefefeff R12: 0000000aa22a8dd7
+[   46.805219][  T179]  sd_mod
+[   46.811413][   T12] R13: ffff88884fde5c90 R14: ffff88884fde5c90 R15: 0000000aa22a8dcf
+[   46.811417][   T12] FS:  0000000000000000(0000) GS:ffff888848e3e000(0000) knlGS:0000000000000000
+[   46.811419][   T12] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   46.830755][  T179]  intel_rapl_common
+[   46.834463][   T12] CR2: 00007f3bc83ae000 CR3: 0000000868388002 CR4: 00000000003726f0
+[   46.834467][   T12] Call Trace:
+[   46.834469][   T12]  <TASK>
+[   46.840348][  T179]  snd_hda_core
+[   46.848115][   T12]  dma_fence_default_wait (kbuild/src/consumer/include/linux/list.h:158 (discriminator 1) kbuild/src/consumer/include/linux/list.h:177 (discriminator 1) kbuild/src/consumer/drivers/dma-buf/dma-fence.c:800 (discriminator 1))
+[   46.851758][  T179]  x86_pkg_temp_thermal
+[   46.859527][   T12]  ? __pfx_dma_fence_default_wait (kbuild/src/consumer/drivers/dma-buf/dma-fence.c:778)
+
+
+The kernel config and materials to reproduce are available at:
+https://download.01.org/0day-ci/archive/20251209/202512092317.8cf778a-lkp@intel.com
+
+
+
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============8001084837357132071==--
