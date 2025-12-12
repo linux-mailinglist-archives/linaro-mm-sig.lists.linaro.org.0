@@ -2,69 +2,69 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id CFrDAhwE4Wn6oQAAu9opvQ
+	id gNgQACIE4Wn6oQAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:45:32 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:45:38 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 179E7411305
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:45:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8B3F4411313
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:45:37 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2519040F51
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:45:30 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.19])
-	by lists.linaro.org (Postfix) with ESMTPS id 78E553F8F3
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 12 Dec 2025 13:02:52 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 4F12E40F97
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:45:36 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.17])
+	by lists.linaro.org (Postfix) with ESMTPS id 81D963F900
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 12 Dec 2025 13:21:10 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=H7+yW4ix;
-	spf=pass (lists.linaro.org: domain of karol.wachowski@linux.intel.com designates 192.198.163.19 as permitted sender) smtp.mailfrom=karol.wachowski@linux.intel.com;
+	dkim=pass header.d=intel.com header.s=Intel header.b="CzZ/bptu";
+	spf=pass (lists.linaro.org: domain of karol.wachowski@linux.intel.com designates 192.198.163.17 as permitted sender) smtp.mailfrom=karol.wachowski@linux.intel.com;
 	dmarc=pass (policy=none) header.from=intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1765544573; x=1797080573;
+  t=1765545671; x=1797081671;
   h=from:to:cc:subject:date:message-id:mime-version:
    content-transfer-encoding;
-  bh=YEBOz3WUfoKaWSqW4r05weDnBaMaH/OmIaDjtvIjbRQ=;
-  b=H7+yW4ixQn269amj2Sm6Txcf5V4UcOkK/2Pc9ZmojjQMMncPUMe0AdvR
-   Wrhu5KbWlSWv2euM53CI85FIgLcN/V5UulJBnS8yMA4+RM1dRLCgrst9A
-   TpF+X2kyFmbko0tByIjxDpDx37xYIQiRBwF/5GgAFxvgsLEN57GFItEXp
-   zqbjzVxt+iW31wU9x9XLa7Nb4pbAFfAp8eNgohdJnVpPcS1ggLgLGoD76
-   Z3AqfBThdZXNauYrok6l9xYLYYpv0ESYIW/feRKmun+tC+p39l01V5vj1
-   pW37uEK5kvu0G44vR+qdrkGCRSpqzid4InV71cH8T+LyGmI4v3LwqyQue
-   A==;
-X-CSE-ConnectionGUID: g06Ks5RPTS2p1tTEJe7dOw==
-X-CSE-MsgGUID: NxtCjczQRm+kvKz9szGIWQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11639"; a="66539071"
+  bh=Xw4J35AXVe0tIkMKb4FDDQucWVWj6fFu2dpxmn3jH6M=;
+  b=CzZ/bptuN+7S87rdQp2KHHPmCch8RfGdCWoF1xro4hm4HqykzhRn1V4y
+   a+ptKR/gdvYqtv0wXHtbbVCI5PLdzcGu36kvHEkJV+miZSRmgPZ5XQW5m
+   1tq7qP8p12OzY0kvYrDvUs8LVbAoz5TCjDpczHfWhjuYTlglFAbeMj0eE
+   uNGmG2NbnRfgXJdr0xRDhprXuT2ue1OyFE3vz5JP+miG2hBBvUlhNGwyj
+   OkgWduL4qLmPrcWxQmqHrFri20o7Np56runzxsAMFO2Fn62gjlQVZb294
+   8XiRAic1u7iAPOUBgpeubx6wpwezlu35kqTnlYvLNEF2uXdmNGzD8QyYT
+   Q==;
+X-CSE-ConnectionGUID: 6K6ONBnKThOc0JgsPKOGWA==
+X-CSE-MsgGUID: KtbWHqH3Rga3tLTUeIy3Bw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11639"; a="67431205"
 X-IronPort-AV: E=Sophos;i="6.21,143,1763452800";
-   d="scan'208";a="66539071"
-Received: from orviesa009.jf.intel.com ([10.64.159.149])
-  by fmvoesa113.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Dec 2025 05:02:51 -0800
-X-CSE-ConnectionGUID: kzLuCUjFTyO0KEp7jDFCGg==
-X-CSE-MsgGUID: eTWyjr/ARm+BUld+22sFWA==
+   d="scan'208";a="67431205"
+Received: from fmviesa007.fm.intel.com ([10.60.135.147])
+  by fmvoesa111.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Dec 2025 05:21:10 -0800
+X-CSE-ConnectionGUID: 1HmC4w25RVOQZLSEfMTe6A==
+X-CSE-MsgGUID: gWX8bhMzTvedXw/eKlj1pQ==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.21,143,1763452800";
-   d="scan'208";a="196839214"
+   d="scan'208";a="196695487"
 Received: from pl-npu-pc-kwachow.igk.intel.com ([10.91.220.239])
-  by orviesa009-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Dec 2025 05:02:48 -0800
+  by fmviesa007-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Dec 2025 05:21:06 -0800
 From: Karol Wachowski <karol.wachowski@linux.intel.com>
 To: David.Francis@amd.com
-Date: Fri, 12 Dec 2025 14:02:38 +0100
-Message-ID: <20251212130238.472833-1-karol.wachowski@linux.intel.com>
+Date: Fri, 12 Dec 2025 14:20:52 +0100
+Message-ID: <20251212132052.474096-1-karol.wachowski@linux.intel.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 X-Spamd-Bar: -----
 X-MailFrom: karol.wachowski@linux.intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 4M3VUMECXREUPZ2PMPS6XZBF3UBLXUZS
-X-Message-ID-Hash: 4M3VUMECXREUPZ2PMPS6XZBF3UBLXUZS
+Message-ID-Hash: HYDTEFQ5F5QJIYIFV732Y2TMZS44MTWB
+X-Message-ID-Hash: HYDTEFQ5F5QJIYIFV732Y2TMZS44MTWB
 X-Mailman-Approved-At: Thu, 16 Apr 2026 15:12:49 +0000
 CC: felix.kuehling@amd.com, christian.koenig@amd.com, maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de, airlied@gmail.com, simona@ffwll.ch, sumit.semwal@linaro.org, andrzej.kacprowski@linux.intel.com, maciej.falkowski@linux.intel.com, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, stable@vger.kernel.org, Karol Wachowski <karol.wachowski@linux.intel.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH] drm: Fix object leak in DRM_IOCTL_GEM_CHANGE_HANDLE
+Subject: [Linaro-mm-sig] [PATCH v2] drm: Fix object leak in DRM_IOCTL_GEM_CHANGE_HANDLE
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4M3VUMECXREUPZ2PMPS6XZBF3UBLXUZS/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HYDTEFQ5F5QJIYIFV732Y2TMZS44MTWB/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -94,12 +94,12 @@ X-Spamd-Result: default: False [2.59 / 15.00];
 	FROM_NEQ_ENVFROM(0.00)[karol.wachowski@linux.intel.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.138];
+	NEURAL_HAM(-0.00)[-0.143];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,intel.com:email,linaro.org:email]
-X-Rspamd-Queue-Id: 179E7411305
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,intel.com:email]
+X-Rspamd-Queue-Id: 8B3F4411313
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
@@ -111,32 +111,31 @@ prime buffers.
 Fixes: 53096728b891 ("drm: Add DRM prime interface to reassign GEM handle")
 Signed-off-by: Karol Wachowski <karol.wachowski@linux.intel.com>
 ---
- drivers/gpu/drm/drm_gem.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+Changes between v1 and v2:
+ - move setting ret value under if branch as suggested in review
+ - add Cc: stable 6.18+
+---
+ drivers/gpu/drm/drm_gem.c | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/gpu/drm/drm_gem.c b/drivers/gpu/drm/drm_gem.c
-index ca1956608261..e150bc1ce65a 100644
+index ca1956608261..bcc08a6aebf8 100644
 --- a/drivers/gpu/drm/drm_gem.c
 +++ b/drivers/gpu/drm/drm_gem.c
-@@ -1001,7 +1001,7 @@ int drm_gem_change_handle_ioctl(struct drm_device *dev, void *data,
- {
- 	struct drm_gem_change_handle *args = data;
- 	struct drm_gem_object *obj;
--	int ret;
-+	int ret = 0;
- 
- 	if (!drm_core_check_feature(dev, DRIVER_GEM))
- 		return -EOPNOTSUPP;
-@@ -1011,7 +1011,7 @@ int drm_gem_change_handle_ioctl(struct drm_device *dev, void *data,
+@@ -1010,8 +1010,10 @@ int drm_gem_change_handle_ioctl(struct drm_device *dev, void *data,
+ 	if (!obj)
  		return -ENOENT;
  
- 	if (args->handle == args->new_handle)
+-	if (args->handle == args->new_handle)
 -		return 0;
++	if (args->handle == args->new_handle) {
++		ret = 0;
 +		goto out;
++	}
  
  	mutex_lock(&file_priv->prime.lock);
  
-@@ -1043,6 +1043,8 @@ int drm_gem_change_handle_ioctl(struct drm_device *dev, void *data,
+@@ -1043,6 +1045,8 @@ int drm_gem_change_handle_ioctl(struct drm_device *dev, void *data,
  
  out_unlock:
  	mutex_unlock(&file_priv->prime.lock);
