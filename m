@@ -2,159 +2,154 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id yAq4GjgE4Wn6oQAAu9opvQ
+	id Ced9NJwI4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:46:00 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:04:44 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id F3C8B41132F
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:45:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 50E6041151B
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:04:44 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0CDAB4105C
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:45:59 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.19])
-	by lists.linaro.org (Postfix) with ESMTPS id 301973F8F3
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 12 Dec 2025 13:46:16 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3D463405D2
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:04:43 +0000 (UTC)
+Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
+	by lists.linaro.org (Postfix) with ESMTPS id A7E643F992
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 12 Dec 2025 19:37:56 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=H1gc+1Fz;
-	spf=pass (lists.linaro.org: domain of maciej.falkowski@linux.intel.com designates 198.175.65.19 as permitted sender) smtp.mailfrom=maciej.falkowski@linux.intel.com;
-	dmarc=pass (policy=none) header.from=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1765547177; x=1797083177;
-  h=message-id:date:mime-version:subject:to:cc:references:
-   from:in-reply-to:content-transfer-encoding;
-  bh=5AjYJ+usLGldY0sqsj+QPEYvL8hFOcyY02OqJHrK/XQ=;
-  b=H1gc+1FzzZ4D93pFgWXuF61Vpyn69ePMVcdD8qP7tyjqvSK0TW/PlXa1
-   IjXhGv2u9o0n1BQCsnVVUCulYBhYwqtA8siq156RJMicBfpErYLETTiLW
-   e9JdYouVihIAVQmJwvgu8bojFNylJKV0pjIN+IPqtrCraxwzl91IbbWrN
-   PEXwrfdlUHidd2WPal/49vsyqJdaTPagzIjV03wJrJamEaW65GPSZE1eY
-   gOZ1bPEtw3xQe8IuCeVPcwapHoHcEd4U90jd2TBnsPTzfyQ5p4KNk+oEu
-   8NcDHPb+pCfFR5ypZ1oAusJJW3QQ5nNUHDyd6p6gV7KxPtpgx9CoPJQUr
-   w==;
-X-CSE-ConnectionGUID: Zf5jTzv8SXO/vphfq8ROlg==
-X-CSE-MsgGUID: YWSjWwOgTAa55FCATwXiPA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11640"; a="67425408"
-X-IronPort-AV: E=Sophos;i="6.21,143,1763452800";
-   d="scan'208";a="67425408"
-Received: from fmviesa001.fm.intel.com ([10.60.135.141])
-  by orvoesa111.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Dec 2025 05:46:16 -0800
-X-CSE-ConnectionGUID: jf15fWK2RxefXMkCuR2kYw==
-X-CSE-MsgGUID: SqFyhRDCQTuLY/wGZ1dcpQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.21,143,1763452800";
-   d="scan'208";a="228148011"
-Received: from mfalkows-mobl.ger.corp.intel.com (HELO [10.246.17.246]) ([10.246.17.246])
-  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Dec 2025 05:46:12 -0800
-Message-ID: <d1f1bba5-3961-4420-8e99-8948089f374a@linux.intel.com>
-Date: Fri, 12 Dec 2025 14:44:41 +0100
+	dkim=pass header.d=kernel-dk.20230601.gappssmtp.com header.s=20230601 header.b=zHCnlNeY;
+	spf=pass (lists.linaro.org: domain of axboe@kernel.dk designates 209.85.216.54 as permitted sender) smtp.mailfrom=axboe@kernel.dk;
+	dmarc=none
+Received: by mail-pj1-f54.google.com with SMTP id 98e67ed59e1d1-343ea89896eso1593194a91.2
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 12 Dec 2025 11:37:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=kernel-dk.20230601.gappssmtp.com; s=20230601; t=1765568276; x=1766173076; darn=lists.linaro.org;
+        h=content-transfer-encoding:mime-version:date:message-id:subject
+         :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=StTVbGf1mPsXgZZ3d28QJjsQQzKmymRGuXpSNQalBC0=;
+        b=zHCnlNeYKTfAcouL/jwJYdpgMJZIrOB3i3GnyU9zDa2DZbBrwqJpladpx41lVYDNfZ
+         B/51VoZnxNcr/uyrXgrZF4Qudfshcxq+FLRsdcaRT+phqkLs6NGerCVI7SlIHcDcQicf
+         xknHb6tlDYtlYr46cUgf4QdXezD52IaeF80Qi4oXcNReVCoJ7GyxvTeC4lwvwzGg7pbe
+         f3HpzUwGiCAqmk5CclIbeXq07yRcUNg5JB7E3sNG8HCYvsmMyelfEDuLUpJ86tUBfVyM
+         pG8TbxQEzUONPQGnIDJaLMyXvIfFIwbMQrDYugh7gPhPO7k+iVJ20ZqOemATXdBAPXjB
+         mJ7g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1765568276; x=1766173076;
+        h=content-transfer-encoding:mime-version:date:message-id:subject
+         :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=StTVbGf1mPsXgZZ3d28QJjsQQzKmymRGuXpSNQalBC0=;
+        b=jC6Smw3sFrDN2Eh6XUrBN7RvNlG4oBGTNOsBaVD2UzwahSZ47xsEgNIxdCkP8mf4H2
+         4LFNGg2EcY3+imxdVeZXijSwDWkWDygYShLZPVflZ4ELWJq2/dI/LUpEZtPsebZaP/DV
+         kwj1J7exrgtHaLCuCCn/akjYwu+dQyExB+qcy/oGYUI9lWIvx3NUtOzhlk5JboPdsfs4
+         E1siG3bKs1y0OLr6a+LgGqcUqdUeAciq8Ml4/onziBhvH0AoErH3SHRYFkShjOhRrpTu
+         JdkXiTRiMzMiOD/PUfIXvfTysQBAQ/ZCe8qCeldUjRgiVMiY3KhNczl2DOrxNRcXr+ca
+         GW1g==
+X-Forwarded-Encrypted: i=1; AJvYcCW2OsMEk1JsO7qEdDWP5fub+MzvmSvEm0NwhmpWRhVO53H9baVTokll+bQNDlK0MvoNDWg/GPOwSZqOyfiO@lists.linaro.org
+X-Gm-Message-State: AOJu0YyQzehVu165ADyIwgC4AMLVYKDZ9BG8bTSd6Iksgq6AdO5Nbw1X
+	CMZVbRXaNgkqxkGGsX1O0wz19CYDBRT3OxBhNQRvvIqsVuhraBi4QPhwXEdceTzUfDA=
+X-Gm-Gg: AY/fxX68OQcCsdpUjqxHlhmsPoGVuUcUckrpqdASaKLKl7LlGRcPWvC1gv/LB34oCjy
+	pyMS1+qkRllkUI6PQgKMriNZUH9NYKDGuoNnqztAg7tVeRRRqg27W579v5CMbikbsLYYzZVT5qV
+	brjnxMqCH6qpA8acKDJyDlNIpVt+kQDsBU4A+EyEYeXVQUMoIl7ybqky3zElVLKDjFCfeI3rOXw
+	zCF+pPoyKMToM58y8Wq73Z7Iu7AUUSFzPo4phMm7uIPQkjN0QemX+xEHEtDTBSXCmORViBLP3IU
+	8azhZakjSKK+4JCYW78CCkb58J/hAYDbh8WihmfHLvQSY0jZaMmiExMNgvCPLEKkm8xYNl3ZR8t
+	bK0goI3XghaBdqQgedocqgWcnWnCELKGFVtXc+mbCQux13MA0UJkAUHI5RUk70Ivi14b88E4AuZ
+	owejPKbhhMoo69kKEuLSdIl1qBlRZAY2L5o1ijH6pgwX6KZHPBlydCFZSL
+X-Google-Smtp-Source: AGHT+IGRg2Nd8ny+lEY1UTB7dhC5oApF/NmRzRo0kswvAor/xhBJns1Qxh+lICHO2/Y0nRHD/a4u7Q==
+X-Received: by 2002:a05:7022:e1c:b0:11e:354:32cb with SMTP id a92af1059eb24-11f34c39abemr3023356c88.49.1765568275584;
+        Fri, 12 Dec 2025 11:37:55 -0800 (PST)
+Received: from [127.0.0.1] (221x255x142x61.ap221.ftth.ucom.ne.jp. [221.255.142.61])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-11f2e2b4867sm20294552c88.6.2025.12.12.11.37.51
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 12 Dec 2025 11:37:54 -0800 (PST)
+From: Jens Axboe <axboe@kernel.dk>
+To: linux-block@vger.kernel.org, io-uring@vger.kernel.org,
+ Pavel Begunkov <asml.silence@gmail.com>
+In-Reply-To: <cover.1763725387.git.asml.silence@gmail.com>
+References: <cover.1763725387.git.asml.silence@gmail.com>
+Message-Id: <176556827123.851918.9976241171726294701.b4-ty@kernel.dk>
+Date: Fri, 12 Dec 2025 12:37:51 -0700
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Karol Wachowski <karol.wachowski@linux.intel.com>, David.Francis@amd.com,
- christian.koenig@amd.com
-References: <20251212134133.475218-1-karol.wachowski@linux.intel.com>
-Content-Language: en-US
-From: "Falkowski, Maciej" <maciej.falkowski@linux.intel.com>
-In-Reply-To: <20251212134133.475218-1-karol.wachowski@linux.intel.com>
-X-Spamd-Bar: -------
-X-MailFrom: maciej.falkowski@linux.intel.com
+X-Mailer: b4 0.14.3
+X-Spamd-Bar: --
+X-MailFrom: axboe@kernel.dk
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: NKHJR6QEW24BKLJHBCGFWNEMNZFMMQEU
-X-Message-ID-Hash: NKHJR6QEW24BKLJHBCGFWNEMNZFMMQEU
-X-Mailman-Approved-At: Thu, 16 Apr 2026 15:12:51 +0000
-CC: felix.kuehling@amd.com, maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de, airlied@gmail.com, simona@ffwll.ch, sumit.semwal@linaro.org, andrzej.kacprowski@linux.intel.com, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, stable@vger.kernel.org
+Message-ID-Hash: PB2EISH7IQSHTPVDZ3C32V6NJQCAIQI6
+X-Message-ID-Hash: PB2EISH7IQSHTPVDZ3C32V6NJQCAIQI6
+X-Mailman-Approved-At: Thu, 16 Apr 2026 16:04:40 +0000
+CC: Vishal Verma <vishal1.verma@intel.com>, tushar.gohad@intel.com, Keith Busch <kbusch@kernel.org>, Christoph Hellwig <hch@lst.de>, Sagi Grimberg <sagi@grimberg.me>, Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Andrew Morton <akpm@linux-foundation.org>, Sumit Semwal <sumit.semwal@linaro.org>, =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, linux-kernel@vger.kernel.org, linux-nvme@lists.infradead.org, linux-fsdevel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3] drm: Fix object leak in DRM_IOCTL_GEM_CHANGE_HANDLE
+Subject: [Linaro-mm-sig] Re: (subset) [RFC v2 00/11] Add dmabuf read/write via io_uring
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NKHJR6QEW24BKLJHBCGFWNEMNZFMMQEU/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PB2EISH7IQSHTPVDZ3C32V6NJQCAIQI6/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [1.59 / 15.00];
-	DATE_IN_PAST(1.00)[3002];
-	R_DKIM_REJECT(1.00)[intel.com:s=Intel];
+X-Spamd-Result: default: False [1.99 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	DATE_IN_PAST(1.00)[2996];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx:c];
-	DMARC_POLICY_SOFTFAIL(0.10)[intel.com : SPF not aligned (relaxed),none];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[vger.kernel.org,gmail.com];
 	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	FREEMAIL_CC(0.00)[amd.com,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,linaro.org,lists.freedesktop.org,vger.kernel.org,lists.linaro.org];
-	DKIM_TRACE(0.00)[intel.com:-];
+	DMARC_NA(0.00)[kernel.dk];
+	RCPT_COUNT_TWELVE(0.00)[19];
+	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[maciej.falkowski@linux.intel.com,linaro-mm-sig-bounces@lists.linaro.org];
+	NEURAL_SPAM(0.00)[0.879];
+	FROM_NEQ_ENVFROM(0.00)[axboe@kernel.dk,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.245];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,intel.com:email,linux.intel.com:mid,linaro.org:email]
-X-Rspamd-Queue-Id: F3C8B41132F
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email]
+X-Rspamd-Queue-Id: 50E6041151B
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On 12/12/2025 2:41 PM, Karol Wachowski wrote:
 
-> Add missing drm_gem_object_put() call when drm_gem_object_lookup()
-> successfully returns an object. This fixes a GEM object reference
-> leak that can prevent driver modules from unloading when using
-> prime buffers.
->
-> Fixes: 53096728b891 ("drm: Add DRM prime interface to reassign GEM handle")
-> Cc: <stable@vger.kernel.org> # v6.18+
-> Signed-off-by: Karol Wachowski <karol.wachowski@linux.intel.com>
-> ---
-> Changes between v3 and v2:
->   - correctly add CC: tag this time
->
-> Changes between v1 and v2:
->   - move setting ret value under if branch as suggested in review
->   - add Cc: stable 6.18+
-> ---
->   drivers/gpu/drm/drm_gem.c | 8 ++++++--
->   1 file changed, 6 insertions(+), 2 deletions(-)
->
-> diff --git a/drivers/gpu/drm/drm_gem.c b/drivers/gpu/drm/drm_gem.c
-> index ca1956608261..bcc08a6aebf8 100644
-> --- a/drivers/gpu/drm/drm_gem.c
-> +++ b/drivers/gpu/drm/drm_gem.c
-> @@ -1010,8 +1010,10 @@ int drm_gem_change_handle_ioctl(struct drm_device *dev, void *data,
->   	if (!obj)
->   		return -ENOENT;
->   
-> -	if (args->handle == args->new_handle)
-> -		return 0;
-> +	if (args->handle == args->new_handle) {
-> +		ret = 0;
-> +		goto out;
-> +	}
->   
->   	mutex_lock(&file_priv->prime.lock);
->   
-> @@ -1043,6 +1045,8 @@ int drm_gem_change_handle_ioctl(struct drm_device *dev, void *data,
->   
->   out_unlock:
->   	mutex_unlock(&file_priv->prime.lock);
-> +out:
-> +	drm_gem_object_put(obj);
->   
->   	return ret;
->   }
-Reviewed-by: Maciej Falkowski <maciej.falkowski@linux.intel.com>
+On Sun, 23 Nov 2025 22:51:20 +0000, Pavel Begunkov wrote:
+> Picking up the work on supporting dmabuf in the read/write path. There
+> are two main changes. First, it doesn't pass a dma addresss directly by
+> rather wraps it into an opaque structure, which is extended and
+> understood by the target driver.
+> 
+> The second big change is support for dynamic attachments, which added a
+> good part of complexity (see Patch 5). I kept the main machinery in nvme
+> at first, but move_notify can ask to kill the dma mapping asynchronously,
+> and any new IO would need to wait during submission, thus it was moved
+> to blk-mq. That also introduced an extra callback layer b/w driver and
+> blk-mq.
+> 
+> [...]
+
+Applied, thanks!
+
+[03/11] block: move around bio flagging helpers
+        commit: d9f514d3e6ee48c34d70d637479b4c9384832d4f
+
+Best regards,
+-- 
+Jens Axboe
+
+
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
