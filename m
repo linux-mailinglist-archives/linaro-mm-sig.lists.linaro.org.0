@@ -2,243 +2,151 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id EEXtKxUE4Wn6oQAAu9opvQ
+	id CFrDAhwE4Wn6oQAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:45:25 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:45:32 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5F9334112FC
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:45:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 179E7411305
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:45:31 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 185F740F77
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:45:24 +0000 (UTC)
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
-	by lists.linaro.org (Postfix) with ESMTPS id BE2483F9B4
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 12 Dec 2025 01:56:11 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 2519040F51
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:45:30 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.19])
+	by lists.linaro.org (Postfix) with ESMTPS id 78E553F8F3
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 12 Dec 2025 13:02:52 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20230601 header.b=d2nrAS+u;
-	spf=pass (lists.linaro.org: domain of asml.silence@gmail.com designates 209.85.214.171 as permitted sender) smtp.mailfrom=asml.silence@gmail.com;
-	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-29ba9249e9dso9846075ad.3
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 11 Dec 2025 17:56:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765504571; x=1766109371; darn=lists.linaro.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=ZJsiZe/XqcKJjkVqYeKzXPFPwj1/tSmTc15CXhIwXUk=;
-        b=d2nrAS+uM7LahrtqxNkIOyuwmc695aHmwsFBgcfzKeJj1Pn1m0tTrFqw7dLjiUImWZ
-         mi+QiAr9JdcDyACH9yVSYjs2bpH2tWfv1lXQXb0MuPbutiBmxzKykHsYKcWWf1Vi6sAQ
-         7AM99U0qxQuwOrmTe9Rl6mUSG70AiM3eBSS5U1GpqXTmfd7wO3HSRf3A4E8p4EZHqgqP
-         aR4u61UCS4SACac0GBFwGaLKjnDV+E5MjolY4F/zNyyQcSz3oaXdFUATvd/Jo6MFDAgu
-         AqPucpOFVYShoQy+cyTTlBjM38xTyCeevbz3gQcOehTHAsHqfTYF83R6hDD7qf1h02py
-         AAAg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765504571; x=1766109371;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=ZJsiZe/XqcKJjkVqYeKzXPFPwj1/tSmTc15CXhIwXUk=;
-        b=M8qfyc8OPHCbgDpYtNewBN/KaSBEK8EibEUc2eHI3bxnMGGIqoxb2x8G9+r5ceTFtO
-         ljPkKNgtesnerorYmzdR4gdGF1Ub0ryhGVFTrBsFCkX0VTK/SO4AQkR66s9N9fX4xeCl
-         S+DBS1rUM30aogNxUQXK1W4IZRkbol3+XzIHXJd1XHwQm1wx4F6fXZb1ViqVx+MBxDgT
-         g+qbRynCplX76iwkoFq+Ri09mQRvTM91HWQL4Ou5TS1emggdb+fRlHJ4NGvPBCEfPinC
-         8ojT5Hy6LnZsxITeH2Y2lt8g3jLnpm8hnSuRTEDeRwELTCOGcpA3fHGaWG3Kiu7bnbOG
-         tY8w==
-X-Forwarded-Encrypted: i=1; AJvYcCUQaBM+ZxzOkGqVBavoDxx3eVPBHe1lTNaEgd++3cUscULGZqJUJhsp4tgBMAPX+Jj/WuMB/3ji7tEbyUk8@lists.linaro.org
-X-Gm-Message-State: AOJu0YyGac8GpRrZl61XAtW0yna4rIpC1Sitj3AUEDanChQ6DQYPr5oS
-	vlqjSOlCeoB0eu7HzjtUfNJA5Z7nihl0G84tmcTWxjn/YhPRwmVS9aSv
-X-Gm-Gg: AY/fxX65ETGuSPFHkkQc8OKT2gli+ZKsdh8QwHNoQu/TW6y7B7Tkozw1B9gD3W+bz3S
-	Ia3BE2eddbqtxv8j30Cove+3Zrzp58s03yy5oZ22I9wbjvFvq/cZg+Gr6yMneQuOfi1Zt/j15Ni
-	cYFQA4li6Xmlv0gDM+NFziU2KM/Kqd9WRUSlS96NbZNtC6fnV6UICoj5bcJm77S/a0IwKbaOFg5
-	erjPpmPvo5erJ67EpjpLAX5urqALr3rHTRJ42G1Nnqx59CTrhxwto+U7jYoasDCf66QLLLm7Jb9
-	5YamH/XhSByfjI4Whn8jOWOxD+lCabn9lJ+RTo4YjTrNfTigr2HLwIrKWbNSwBB+OEaB9jcARDT
-	oPdzwvJnb2zD8RQ7FIWrlio3K3rzWHanX4o53pheKH7v8/3WbzCkOjXhtxDCYDRBxNoxeBvhJoN
-	MH+PrHNKbfUZBKx8wekUsXHP/ecsS7vPT6MbmqF49r9MS045elnjFpCGM5QG3Y8fVYEEHu9xHG3
-	rziEzijrHyWRW4pDYo++TNHLrLWdMH3IT4feKgPSQi7xiZB0Fg=
-X-Google-Smtp-Source: AGHT+IHrNZHNZ799rRWGx+LvO7XaRwwtcVkWXSf4q+3pQ1pJSMCA4DafAXljIyZfD2BV+qpIbTHyew==
-X-Received: by 2002:a17:902:d4c9:b0:29e:ba45:350e with SMTP id d9443c01a7336-29f23cd48c2mr6283765ad.44.1765504570758;
-        Thu, 11 Dec 2025 17:56:10 -0800 (PST)
-Received: from [10.200.8.97] (fs98a57d9c.tkyc007.ap.nuro.jp. [152.165.125.156])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29eea016ac2sm36260535ad.49.2025.12.11.17.56.05
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 11 Dec 2025 17:56:10 -0800 (PST)
-Message-ID: <eb72c089-a6ba-48df-a215-af35d5dd808b@gmail.com>
-Date: Fri, 12 Dec 2025 01:56:16 +0000
+	dkim=pass header.d=intel.com header.s=Intel header.b=H7+yW4ix;
+	spf=pass (lists.linaro.org: domain of karol.wachowski@linux.intel.com designates 192.198.163.19 as permitted sender) smtp.mailfrom=karol.wachowski@linux.intel.com;
+	dmarc=pass (policy=none) header.from=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1765544573; x=1797080573;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=YEBOz3WUfoKaWSqW4r05weDnBaMaH/OmIaDjtvIjbRQ=;
+  b=H7+yW4ixQn269amj2Sm6Txcf5V4UcOkK/2Pc9ZmojjQMMncPUMe0AdvR
+   Wrhu5KbWlSWv2euM53CI85FIgLcN/V5UulJBnS8yMA4+RM1dRLCgrst9A
+   TpF+X2kyFmbko0tByIjxDpDx37xYIQiRBwF/5GgAFxvgsLEN57GFItEXp
+   zqbjzVxt+iW31wU9x9XLa7Nb4pbAFfAp8eNgohdJnVpPcS1ggLgLGoD76
+   Z3AqfBThdZXNauYrok6l9xYLYYpv0ESYIW/feRKmun+tC+p39l01V5vj1
+   pW37uEK5kvu0G44vR+qdrkGCRSpqzid4InV71cH8T+LyGmI4v3LwqyQue
+   A==;
+X-CSE-ConnectionGUID: g06Ks5RPTS2p1tTEJe7dOw==
+X-CSE-MsgGUID: NxtCjczQRm+kvKz9szGIWQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11639"; a="66539071"
+X-IronPort-AV: E=Sophos;i="6.21,143,1763452800";
+   d="scan'208";a="66539071"
+Received: from orviesa009.jf.intel.com ([10.64.159.149])
+  by fmvoesa113.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Dec 2025 05:02:51 -0800
+X-CSE-ConnectionGUID: kzLuCUjFTyO0KEp7jDFCGg==
+X-CSE-MsgGUID: eTWyjr/ARm+BUld+22sFWA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.21,143,1763452800";
+   d="scan'208";a="196839214"
+Received: from pl-npu-pc-kwachow.igk.intel.com ([10.91.220.239])
+  by orviesa009-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Dec 2025 05:02:48 -0800
+From: Karol Wachowski <karol.wachowski@linux.intel.com>
+To: David.Francis@amd.com
+Date: Fri, 12 Dec 2025 14:02:38 +0100
+Message-ID: <20251212130238.472833-1-karol.wachowski@linux.intel.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Christoph Hellwig <hch@infradead.org>
-References: <cover.1763725387.git.asml.silence@gmail.com>
- <51cddd97b31d80ec8842a88b9f3c9881419e8a7b.1763725387.git.asml.silence@gmail.com>
- <aTFo-7ufbyZnEUzd@infradead.org>
-Content-Language: en-US
-From: Pavel Begunkov <asml.silence@gmail.com>
-In-Reply-To: <aTFo-7ufbyZnEUzd@infradead.org>
-X-Spamd-Bar: ---
-X-MailFrom: asml.silence@gmail.com
+X-Spamd-Bar: -----
+X-MailFrom: karol.wachowski@linux.intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 4YRHJBFXZEE4O3IEBSUHDN6QDH7PJHFU
-X-Message-ID-Hash: 4YRHJBFXZEE4O3IEBSUHDN6QDH7PJHFU
-X-Mailman-Approved-At: Thu, 16 Apr 2026 15:12:48 +0000
-CC: linux-block@vger.kernel.org, io-uring@vger.kernel.org, Vishal Verma <vishal1.verma@intel.com>, tushar.gohad@intel.com, Keith Busch <kbusch@kernel.org>, Jens Axboe <axboe@kernel.dk>, Christoph Hellwig <hch@lst.de>, Sagi Grimberg <sagi@grimberg.me>, Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Andrew Morton <akpm@linux-foundation.org>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, linux-kernel@vger.kernel.org, linux-nvme@lists.infradead.org, linux-fsdevel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+Message-ID-Hash: 4M3VUMECXREUPZ2PMPS6XZBF3UBLXUZS
+X-Message-ID-Hash: 4M3VUMECXREUPZ2PMPS6XZBF3UBLXUZS
+X-Mailman-Approved-At: Thu, 16 Apr 2026 15:12:49 +0000
+CC: felix.kuehling@amd.com, christian.koenig@amd.com, maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de, airlied@gmail.com, simona@ffwll.ch, sumit.semwal@linaro.org, andrzej.kacprowski@linux.intel.com, maciej.falkowski@linux.intel.com, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, stable@vger.kernel.org, Karol Wachowski <karol.wachowski@linux.intel.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [RFC v2 05/11] block: add infra to handle dmabuf tokens
+Subject: [Linaro-mm-sig] [PATCH] drm: Fix object leak in DRM_IOCTL_GEM_CHANGE_HANDLE
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4YRHJBFXZEE4O3IEBSUHDN6QDH7PJHFU/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4M3VUMECXREUPZ2PMPS6XZBF3UBLXUZS/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [0.59 / 15.00];
-	DATE_IN_PAST(1.00)[3013];
-	MAILLIST(-0.20)[mailman];
+X-Spamd-Result: default: False [2.59 / 15.00];
+	DATE_IN_PAST(1.00)[3002];
+	MID_CONTAINS_FROM(1.00)[];
+	R_DKIM_REJECT(1.00)[intel.com:s=Intel];
 	R_SPF_ALLOW(-0.20)[+mx:c];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
+	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[intel.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[amd.com,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,linaro.org,lists.freedesktop.org,vger.kernel.org,lists.linaro.org];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	ARC_NA(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	ARC_NA(0.00)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[20];
-	MIME_TRACE(0.00)[0:+];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email];
-	NEURAL_SPAM(0.00)[0.371];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FROM_NEQ_ENVFROM(0.00)[asmlsilence@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	DKIM_TRACE(0.00)[intel.com:-];
+	FROM_NEQ_ENVFROM(0.00)[karol.wachowski@linux.intel.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-0.138];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	TO_DN_SOME(0.00)[]
-X-Rspamd-Queue-Id: 5F9334112FC
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,intel.com:email,linaro.org:email]
+X-Rspamd-Queue-Id: 179E7411305
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On 12/4/25 10:56, Christoph Hellwig wrote:
-> On Sun, Nov 23, 2025 at 10:51:25PM +0000, Pavel Begunkov wrote:
-...
->> +	struct request_queue *q = bdev_get_queue(file_bdev(file));
->> +
->> +	if (!(file->f_flags & O_DIRECT))
->> +		return ERR_PTR(-EINVAL);
-> 
-> Shouldn't the O_DIRECT check be in the caller?
+Add missing drm_gem_object_put() call when drm_gem_object_lookup()
+successfully returns an object. This fixes a GEM object reference
+leak that can prevent driver modules from unloading when using
+prime buffers.
 
-If the interface will get implemented e.g. for net at some point, it
-won't be O_DIRECT. If you want some extra safety for fs implementing
-it, I can add sth like below in the common path:
+Fixes: 53096728b891 ("drm: Add DRM prime interface to reassign GEM handle")
+Signed-off-by: Karol Wachowski <karol.wachowski@linux.intel.com>
+---
+ drivers/gpu/drm/drm_gem.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-if (reg_or_block_file(file))
-	// check O_DIRECT
-
-> And a high-level comment explaining the fencing logic would be nice
-> as well.
-
-I'll add some comments around
-
-...
->> +static inline
->> +struct blk_mq_dma_map *blk_mq_get_token_map(struct blk_mq_dma_token *token)
-> 
-> Really odd return value / scope formatting.
-
-static inline struct blk_mq_dma_map
-*blk_mq_get_token_map(...)
-
-Do you prefer this? It's too long to sanely fit it in
-either way. Though I didn't have this problem in v3.
-
-  
->> +{
->> +	struct blk_mq_dma_map *map;
->> +
->> +	guard(rcu)();
->> +
->> +	map = rcu_dereference(token->map);
->> +	if (unlikely(!map || !percpu_ref_tryget_live_rcu(&map->refs)))
->> +		return NULL;
->> +	return map;
-> 
-> Please use good old rcu_read_unlock to make this readable.
-
-Come on, it's pretty readable and less error prone, especially
-for longer functions. Maybe you prefer scoped guards?
-
-scoped_guard(rcu) {
-	map = token->map;
-	if (!map)
-		return;
-}
-
-...
->> +blk_status_t blk_rq_assign_dma_map(struct request *rq,
->> +				   struct blk_mq_dma_token *token)
->> +{
->> +	struct blk_mq_dma_map *map;
->> +
->> +	map = blk_mq_get_token_map(token);
->> +	if (map)
->> +		goto complete;
->> +
->> +	if (rq->cmd_flags & REQ_NOWAIT)
->> +		return BLK_STS_AGAIN;
->> +
->> +	map = blk_mq_create_dma_map(token);
->> +	if (IS_ERR(map))
->> +		return BLK_STS_RESOURCE;
-> 
-> Having a few comments, that say this is creating the map lazily
-> would probably helper the reader.  Also why not keep the !map
-> case in the branch, as the map case should be the fast path and
-> thus usually be straight line in the function?
-> 
->> +void blk_mq_dma_map_move_notify(struct blk_mq_dma_token *token)
->> +{
->> +	blk_mq_dma_map_remove(token);
->> +}
-> 
-> Is there a good reason for having this blk_mq_dma_map_move_notify
-> wrapper?
-
-I was reused it before and reusing in the next iteration, maybe
-v2 wasn't for some reason.
-
-> 
->> +	if (bio_flagged(bio, BIO_DMA_TOKEN)) {
->> +		struct blk_mq_dma_token *token;
->> +		blk_status_t ret;
->> +
->> +		token = dma_token_to_blk_mq(bio->dma_token);
->> +		ret = blk_rq_assign_dma_map(rq, token);
->> +		if (ret) {
->> +			if (ret == BLK_STS_AGAIN) {
->> +				bio_wouldblock_error(bio);
->> +			} else {
->> +				bio->bi_status = BLK_STS_RESOURCE;
->> +				bio_endio(bio);
->> +			}
->> +			goto queue_exit;
->> +		}
->> +	}
-> 
-> Any reason to not just keep the dma_token_to_blk_mq?  Also why is this
-> overriding non-BLK_STS_AGAIN errors with BLK_STS_RESOURCE?
-
-Yeah, it should've been errno_to_blk_status()
-
+diff --git a/drivers/gpu/drm/drm_gem.c b/drivers/gpu/drm/drm_gem.c
+index ca1956608261..e150bc1ce65a 100644
+--- a/drivers/gpu/drm/drm_gem.c
++++ b/drivers/gpu/drm/drm_gem.c
+@@ -1001,7 +1001,7 @@ int drm_gem_change_handle_ioctl(struct drm_device *dev, void *data,
+ {
+ 	struct drm_gem_change_handle *args = data;
+ 	struct drm_gem_object *obj;
+-	int ret;
++	int ret = 0;
+ 
+ 	if (!drm_core_check_feature(dev, DRIVER_GEM))
+ 		return -EOPNOTSUPP;
+@@ -1011,7 +1011,7 @@ int drm_gem_change_handle_ioctl(struct drm_device *dev, void *data,
+ 		return -ENOENT;
+ 
+ 	if (args->handle == args->new_handle)
+-		return 0;
++		goto out;
+ 
+ 	mutex_lock(&file_priv->prime.lock);
+ 
+@@ -1043,6 +1043,8 @@ int drm_gem_change_handle_ioctl(struct drm_device *dev, void *data,
+ 
+ out_unlock:
+ 	mutex_unlock(&file_priv->prime.lock);
++out:
++	drm_gem_object_put(obj);
+ 
+ 	return ret;
+ }
 -- 
-Pavel Begunkov
+2.43.0
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
