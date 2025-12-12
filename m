@@ -2,157 +2,533 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4HKCIKMI4WnoogAAu9opvQ
+	id uNlZI6kI4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:04:51 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:04:57 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 377BA411522
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:04:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 22D7F411529
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:04:57 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4E2654095F
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:04:50 +0000 (UTC)
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
-	by lists.linaro.org (Postfix) with ESMTPS id 054BD3F992
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 12 Dec 2025 20:10:56 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3D0E2409BE
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:04:56 +0000 (UTC)
+Received: from CY7PR03CU001.outbound.protection.outlook.com (mail-westcentralusazon11010005.outbound.protection.outlook.com [40.93.198.5])
+	by lists.linaro.org (Postfix) with ESMTPS id 1D4283F992
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 12 Dec 2025 20:37:55 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel-dk.20230601.gappssmtp.com header.s=20230601 header.b=nrSNZPmf;
-	spf=pass (lists.linaro.org: domain of axboe@kernel.dk designates 209.85.214.170 as permitted sender) smtp.mailfrom=axboe@kernel.dk;
-	dmarc=none
-Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-29efd139227so18234115ad.1
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 12 Dec 2025 12:10:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=kernel-dk.20230601.gappssmtp.com; s=20230601; t=1765570255; x=1766175055; darn=lists.linaro.org;
-        h=content-transfer-encoding:in-reply-to:content-language:from
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=gsVed5WgXtZPXSfJ2PXjLRbNCmFwRAyF31OH8siBSJw=;
-        b=nrSNZPmfTdeFC5eQTLQqLbDY7b0zgtH2aDKdGXhiM34/qSIE08VljBo/b63A9gP3q8
-         UtOiCG/d6m0RJ6l+1k3xylb3nXNPZmuDDIjziE+o8Ycj5wz8Ab3YdYaRb0dNk0d711jQ
-         Du50Urw3MN1l4xmu5Qtz6NdDdpGsKxN0YhGksTbY3rpMmFAwulEm1L2h1pnkPpgFs3Vo
-         9G4fYxDs9zi9NCXgmC+f+xqqFSUgSl2pVwKF88iqZGjWRhuYi4otPyvKm1kwakvdXjfJ
-         6uqQdGj4v/ZtqJgPVz7WA3dmpT74QaiMDWNzr0Vhm+QzsCI9alOM6EVhCAF/CxTbUq8U
-         ed9g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765570255; x=1766175055;
-        h=content-transfer-encoding:in-reply-to:content-language:from
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=gsVed5WgXtZPXSfJ2PXjLRbNCmFwRAyF31OH8siBSJw=;
-        b=JI98/tJCjINnbxuCVuHZBaH7Kc8LA2z5BMcIisnSmsJ78OkSRgF3ZcrJ49PeGand2g
-         2VV6KVYUAHFl1PvrF+A3+NwrtK6O9xijq35z2vXibdFfSPB+Z2tVGwujPS+lywVg4amh
-         fGvJ+KwLyBVAaqphUxh7hJPSEJoaFyK1njpHXhckmRCGSAVmyPOpAH1XRPAEF/tgOX2f
-         EaOh6QZjitbEZ2Gu3RdoyMaIT7LGHpG7e5+q92Qj20m+fwu3MNWQrL1xZdA8FupVopFV
-         fOugw1HoskvQW6k98yDzxIs9yAAPvDsShhmePyGUUGk+EGKVnZdTBjezb38rWspnrUOw
-         urWw==
-X-Forwarded-Encrypted: i=1; AJvYcCWoUrXaTpvnhgy+d7I7Qi9UndmSJ2aaREs5W+T79wQu7SLjBkEfUplrsHZvbVWXiTi1eYswCyuV7PdLWcgA@lists.linaro.org
-X-Gm-Message-State: AOJu0YyRHPjBpQoOTpLdanN/XCEPwGc9wdTzOLZbmQIJgzepQvOa9Sqr
-	t3kyhcK7MoZqZaMVkfqHpPQh9cFhTZhryPALvwcJRcq75MT/sVSRehTPIaNfTDgWhWQ=
-X-Gm-Gg: AY/fxX4M0yn2C2yNYdsAKtE/ZvvIY8uv3HJKN+oax0ywOXO+mSfbZRdtuChB67RC4am
-	gHc+S/9g0B8uBF2J0CtIdTF3q+r/FBUlRBWh5J/QD4EddzRWzvodiU48SQmUeFnXSaDMnuMdgvs
-	EABSL6xNDJaD6zshtymd+v20GIOSSk0I4seBSI+z8804B6S/CXI0TwlHmRjG+uf9K7o80fY1dNf
-	KMlve3zDu3oSZFqu+48jssmE/Mk27kmFrSw1o9FRzcNlLL94aZ+bLvY9LPH+7cPaJ51xrHKa7Vb
-	/b02zMnK9H9sy5aBw9ogGig5GAo41b/kxv2JwpiJKacwoV4EuoPFosUewjyr97XCOW48VSaa+Ra
-	Zqh+FYCnTEF2h7WmX9AyogwV/AkGaGx4ekghjDazObB41Lh0LVEjzUJwg7s3T8znElSS0zYiNCX
-	SZaQ0zpwz3aBAfJI/GGtcuiCXSDHNPtGL5zvPmjWuu8nwtPsKeNg==
-X-Google-Smtp-Source: AGHT+IH4YKlBbDeLqTy95z05gm75S6dqOblA2F2FrB859WtV1ZEekn7/gpBPyoL8TMFo+3JpfAzaQQ==
-X-Received: by 2002:a17:902:f688:b0:29f:29a8:608b with SMTP id d9443c01a7336-29f29a861cemr19807075ad.13.1765570255065;
-        Fri, 12 Dec 2025 12:10:55 -0800 (PST)
-Received: from [172.20.4.188] (221x255x142x61.ap221.ftth.ucom.ne.jp. [221.255.142.61])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29ee9d38c7fsm62825655ad.39.2025.12.12.12.10.51
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 12 Dec 2025 12:10:54 -0800 (PST)
-Message-ID: <2729b31b-ba58-4f32-b71a-75bd07524ac8@kernel.dk>
-Date: Fri, 12 Dec 2025 13:10:50 -0700
+	dkim=pass header.d=ti.com header.s=selector1 header.b=cNFco3qX;
+	spf=pass (lists.linaro.org: domain of d-qiu@ti.com designates 40.93.198.5 as permitted sender) smtp.mailfrom=d-qiu@ti.com;
+	dmarc=pass (policy=quarantine) header.from=ti.com;
+	arc=pass ("microsoft.com:s=arcselector10001:i=1")
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=o5ns6XR9cgJ8A9GsPaFHguSgiIHFT4yBpUCetIBjToDwwY/Wxg8eHR6uHZYFzJTzLd5LeFCqmogHDdQyGeIs2oFjcFXpEpfuA3O+NiI0CWHaRiq+msSekrro3qE7AccE64TOBDikKTNnHNjEjhZGb8iJ2g/Vj6o6jN7sPs/6jJkhmJ80jD7lb80K/SPfBTzrAvibH4jVECsJACffg941yr4JRCtQnkqUeU62nsYb/Ia5sGG2wDoArInUQjX5scxwS+2sb+DXzG1t0ped2lTTzO4Ievg2qTM1hpHUXfRDtH0F1DM+P/FWeBge6E1wOEx8IZfozdzPgLnr+zMi8e2gDw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=2hpL+zaQVVgrHgQgJCJIsP9uWX9/wlBAdLhoHe+VD5E=;
+ b=LXjJLOzeOI/h5eLJ7QqEY8ablxz4PEIU7kqq8TyqpJTfF6VrveQjNFnB0YDihqcT/abHqNRRnWBRJFy1re6wbP82T+9Bdeg6GSnh3Y3f5twsJFxiItp4JGCIPDQNNIh35cicb4+iJrN5PoDe3KY/XN1MNTmGmQkmHROPMy9iyXzvd02UhWC3PK+D1pS+Qr6bjo53Wls5Ept6CHRgRmWQ6FrQpzqf8GULncQEuq/a89b+efgYWrzt/TMw6nzLprHkjZ5c45s6IGN1T83OKvRHQlu/r4kaLuOoE/15tXrwzCfNnFhgoUVvOVgD/4exhLDUOC2OstxWtZcsJVvWlFa3tw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.194) smtp.rcpttodomain=lists.linaro.org smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=2hpL+zaQVVgrHgQgJCJIsP9uWX9/wlBAdLhoHe+VD5E=;
+ b=cNFco3qXNBAeAPjLfpDKcj4Jc3LuTxLjhxfVUu57bGfTokOmPF1TEucAPsmjPAXRGpetw1OyDYbqerPebm6yqHcON32a35WsBbFtQCLBRoJRvu0uG781u5thm/WWIuL6h2OC31AvpsDX6X1Jv47yG7QVbuRTm2d7/+aX1VhajTU=
+Received: from CH0P220CA0020.NAMP220.PROD.OUTLOOK.COM (2603:10b6:610:ef::33)
+ by MW4PR10MB6559.namprd10.prod.outlook.com (2603:10b6:303:228::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9412.8; Fri, 12 Dec
+ 2025 20:37:53 +0000
+Received: from DS3PEPF000099DA.namprd04.prod.outlook.com
+ (2603:10b6:610:ef:cafe::85) by CH0P220CA0020.outlook.office365.com
+ (2603:10b6:610:ef::33) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9412.10 via Frontend Transport; Fri,
+ 12 Dec 2025 20:37:31 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ DS3PEPF000099DA.mail.protection.outlook.com (10.167.17.11) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9412.4 via Frontend Transport; Fri, 12 Dec 2025 20:37:52 +0000
+Received: from DLEE200.ent.ti.com (157.170.170.75) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 12 Dec
+ 2025 14:37:50 -0600
+Received: from DLEE204.ent.ti.com (157.170.170.84) by DLEE200.ent.ti.com
+ (157.170.170.75) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 12 Dec
+ 2025 14:37:49 -0600
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE204.ent.ti.com
+ (157.170.170.84) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Fri, 12 Dec 2025 14:37:49 -0600
+Received: from [10.247.31.238] (lt5cd3044tj5.dhcp.ti.com [10.247.31.238])
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5BCKbn0l2724558;
+	Fri, 12 Dec 2025 14:37:49 -0600
+Message-ID: <124a24dd-14ce-4401-ba13-b6c2acbaf829@ti.com>
+Date: Fri, 12 Dec 2025 14:37:48 -0600
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Pavel Begunkov <asml.silence@gmail.com>,
- Christoph Hellwig <hch@infradead.org>
-References: <cover.1763725387.git.asml.silence@gmail.com>
- <6cb3193d3249ab5ca54e8aecbfc24086db09b753.1763725387.git.asml.silence@gmail.com>
- <aTFl290ou0_RIT6-@infradead.org>
- <4ed581b6-af0f-49e6-8782-63f85e02503c@gmail.com>
-From: Jens Axboe <axboe@kernel.dk>
+To: Roger Quadros <rogerq@kernel.org>, Siddharth Vadapalli
+	<s-vadapalli@ti.com>, Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller"
+	<davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski
+	<kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Alexei Starovoitov
+	<ast@kernel.org>, Daniel Borkmann <daniel@iogearbox.net>, "Jesper Dangaard
+ Brouer" <hawk@kernel.org>, John Fastabend <john.fastabend@gmail.com>, "Sumit
+ Semwal" <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?=
+	<christian.koenig@amd.com>, Stanislav Fomichev <sdf@fomichev.me>, "Simon
+ Horman" <horms@kernel.org>
+References: <20251109-am65-cpsw-xdp-zc-v2-0-858f60a09d12@kernel.org>
+ <20251109-am65-cpsw-xdp-zc-v2-3-858f60a09d12@kernel.org>
 Content-Language: en-US
-In-Reply-To: <4ed581b6-af0f-49e6-8782-63f85e02503c@gmail.com>
-X-Spamd-Bar: ---
-X-MailFrom: axboe@kernel.dk
+From: "Qiu, Daolin" <d-qiu@ti.com>
+In-Reply-To: <20251109-am65-cpsw-xdp-zc-v2-3-858f60a09d12@kernel.org>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS3PEPF000099DA:EE_|MW4PR10MB6559:EE_
+X-MS-Office365-Filtering-Correlation-Id: 95e2c799-5feb-4e93-1de4-08de39be52bc
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|7416014|376014|1800799024|36860700013|82310400026|921020;
+X-Microsoft-Antispam-Message-Info: 
+	=?utf-8?B?OERpVk5nSzFLazZrelZzc3hLMVE2WTh5MlVzS3h4dENrcC9JRjVycWRuZGRx?=
+ =?utf-8?B?ZGF2eHBZY2c1UktjWHp3RERLUkxGNjNHcW5LZnlob0ZET05aN2tIcjR0Vjk4?=
+ =?utf-8?B?bjE4MWJteXE3RFJUcVdueVN5NWE0YXlKbm9kWWVuZFZsMUR0OEIvbmtjWW1y?=
+ =?utf-8?B?OGZiNk9QOG5lVzlnQVJuMzJrK012Q3dkQmRXbXFwQ0ZvVEZXcjBjMlRRTFdO?=
+ =?utf-8?B?M0hnL25RUnNSNnlhbThPQ21mTFdoRnRoakNyU3RYdHJTQnVnYkN4aGtBZ29i?=
+ =?utf-8?B?eEgxTWpZeVRtR3ZURDhUWEVXTDRqN3R0c0t6MjhBZjlmeGJzS0t2aEluTGk3?=
+ =?utf-8?B?OURkMkg4aW1BMXlLRDd1UkRHeTZlcVc3VGM0ZHdKcXFhRnB4NWZMbEIxOUFY?=
+ =?utf-8?B?bElrT0ZjRVliSzJ6MTBwSmo3K0h4b1BCVXpyNzFyU2ZTK3lrNjNCb0d2ODBT?=
+ =?utf-8?B?ZGErdmo2Qy9Ea3BGR3pMZG82TjdjZGErMUxWZTJaUG9xL29RTHEvd2VDTXRh?=
+ =?utf-8?B?cTBjcVphcmIzejZnaWJQRG9KTXFWczIxbzRQVkpZaksxd1VuaGJYaVkvQzRR?=
+ =?utf-8?B?b3dZb1JoVkNjbFo0b1NRdmIrTzl3MWdEejVHS0JuVUVRNHQrVkMyZFpvN0tC?=
+ =?utf-8?B?OUtJTzNrU3ZpOS82WUNCNXNWL25xbzZjdlZhS2Z1YTVZeWdsTEVkYVBIVlRV?=
+ =?utf-8?B?eWZuZDRwSk9xZ3FvNFdqZktHQ0NPTDAwRTBvd25zdGRneDg0TkhRck44QXdZ?=
+ =?utf-8?B?OTJkU2RhVW1kcFZIZDhtVENrWVI3THREWHN3bDlqazdUNkJCb2JuUEhRZWdh?=
+ =?utf-8?B?V05OeUFUME9JZ0l1bFUvaDV5aTFuamVKYkpibFlwV2FkSFVjZXBwdkY4bVZ3?=
+ =?utf-8?B?SzlOT2EwNnJHN1NhanNHVnBORC9rclJJS3JlbytMKzZtakJhQ0Z3aklHZVpR?=
+ =?utf-8?B?UC8wU1pBcE9qaXdMWFFPbkVKMkQxQmRWZUloNUZqTFVuWWJIYmtCdW5aNmJR?=
+ =?utf-8?B?YmtBRFY4RE5ZOVNjdDJhOGdySFplSmRXQlRPWmJQcDRIcWlUUmZ3SG5kcWsr?=
+ =?utf-8?B?U2pkZ0R4VzQ0Q1Rtbi9NazYzRjhQb1FDbksramtpT2xjR1VRRmIrM2k5aTAy?=
+ =?utf-8?B?eE5NdE0veUJIQkxIYm15cHV1S294UWptaFkxUHdjRC83YVJzamR3azk5L0FJ?=
+ =?utf-8?B?QnU2Zks5ejhHckU0UFRKVnpaZno4ZE1udHJIb2hTRWo5cjZxSW5EMTJkNzAr?=
+ =?utf-8?B?Z1NsUGw3Vyt4UGJPQkN6K3M3REwwaVpRMVZ1KzExSHpWSmhFaTR2eitxaFN4?=
+ =?utf-8?B?RFg1ZytzT25FMk9sMWdPS01SZUFwOVl2RDBDbXE0RFNScFIvL3RDSTdzaUtp?=
+ =?utf-8?B?dFk1OHc1YXRTd3Jub0gyRFVPeXl2ZjdnLyswcHhyd0NBNkd2Y0t1UjYxSm5w?=
+ =?utf-8?B?d3F5T2R5N3NmYXNGait6RkVzbWhnWlk3WDBhSkZ0SlhiQnYvM1V4ZVhRbEV5?=
+ =?utf-8?B?a2Izb1hPYUQ3QUl6YXE1aHJtZmlucWlreDRqbE5FTjZiSnBRbnY2cUppdTlK?=
+ =?utf-8?B?M3J5SGpPYmtyd0hDREFCNFZMQkRHMXh0Rkh6Y1JOT3VXVDBuYVlGS28rYkZN?=
+ =?utf-8?B?R3ZUWkNjRk8xOVB6dVR6Ukx0RDVqUytuaVd3L2ozV2FiQXh4MmxWVnR6b2I0?=
+ =?utf-8?B?VkQ4ZDZnNERLVlZNT0h0ZFhacnl6WGlNdk1IckdjZUc2QmY2UjJxd1NSZjBE?=
+ =?utf-8?B?WitLWjdmaWhlb1NEc3ZKd2lic1Fmcm9VTVZBaTE0ZXdybmNyckZ1ZUNLMXpL?=
+ =?utf-8?B?ZFFaUDhsTTFQQXRsTHM0cjc4TUxxb3RkZTJHN0lXUURteEpuYlRMYUxCNHNx?=
+ =?utf-8?B?SkJYdFdVWkNNSWlsUmR5MmF4VTFjdDdWZ1QvMXdkZm0wRWNNU2dndm9KaUJh?=
+ =?utf-8?B?d2VIczlWM21TREVrMnUxcXJmQ01oT1F2K2UrWmpuWGlUQWMwUzVnWUtlaWY5?=
+ =?utf-8?B?empCUUIxMVpoM3JjbGkxZWc0QmNjQzBNdGhOQVJjd2ZtZmpZU0R0SG93R3Zh?=
+ =?utf-8?B?YmVDZnlqekRhRU1OcGpUbXdtN2NoTkoyd0RyRHpPOGhSNWpFQVp5bzhvL0xt?=
+ =?utf-8?Q?SKFlEjnOPRdZ9zhQDUhp3nKG/?=
+X-Forefront-Antispam-Report: 
+	CIP:198.47.23.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet200.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(7416014)(376014)(1800799024)(36860700013)(82310400026)(921020);DIR:OUT;SFP:1101;
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Dec 2025 20:37:52.7046
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 95e2c799-5feb-4e93-1de4-08de39be52bc
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.194];Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	DS3PEPF000099DA.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR10MB6559
+X-Spamd-Bar: -----
+X-MailFrom: d-qiu@ti.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: EPN7X5OOKUDV6SK6XGJ5VGHOI65HCVI4
-X-Message-ID-Hash: EPN7X5OOKUDV6SK6XGJ5VGHOI65HCVI4
-X-Mailman-Approved-At: Thu, 16 Apr 2026 16:04:40 +0000
-CC: linux-block@vger.kernel.org, io-uring@vger.kernel.org, tushar.gohad@intel.com, Keith Busch <kbusch@kernel.org>, Christoph Hellwig <hch@lst.de>, Sagi Grimberg <sagi@grimberg.me>, Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Andrew Morton <akpm@linux-foundation.org>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, linux-kernel@vger.kernel.org, linux-nvme@lists.infradead.org, linux-fsdevel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+Message-ID-Hash: AVMKC2KGZTYVOSOBKVM2EK3FPWRSPPWH
+X-Message-ID-Hash: AVMKC2KGZTYVOSOBKVM2EK3FPWRSPPWH
+X-Mailman-Approved-At: Thu, 16 Apr 2026 16:04:41 +0000
+CC: srk@ti.com, Meghana Malladi <m-malladi@ti.com>, netdev@vger.kernel.org, linux-kernel@vger.kernel.org, bpf@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, "Muralidharan, Neelima" <neelima@ti.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [RFC v2 03/11] block: move around bio flagging helpers
+Subject: [Linaro-mm-sig] Re: [PATCH net-next v2 3/7] net: ethernet: ti: am65-cpsw: add XSK pool helpers
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EPN7X5OOKUDV6SK6XGJ5VGHOI65HCVI4/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AVMKC2KGZTYVOSOBKVM2EK3FPWRSPPWH/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [1.99 / 15.00];
+X-Spamd-Result: default: False [5.49 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
+	DMARC_POLICY_QUARANTINE(1.50)[ti.com : SPF not aligned (relaxed),quarantine];
+	R_DKIM_REJECT(1.00)[ti.com:s=selector1];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
 	DATE_IN_PAST(1.00)[2995];
-	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx:c];
+	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	DMARC_NA(0.00)[kernel.dk];
-	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_TO(0.00)[gmail.com,infradead.org];
-	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[19];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_TO(0.00)[kernel.org,ti.com,lunn.ch,davemloft.net,google.com,redhat.com,iogearbox.net,gmail.com,linaro.org,amd.com,fomichev.me];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	GREYLIST(0.00)[pass,meta];
+	RCPT_COUNT_TWELVE(0.00)[24];
+	MIME_TRACE(0.00)[0:+];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns];
+	DKIM_TRACE(0.00)[ti.com:-];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_SPAM(0.00)[0.858];
-	FROM_NEQ_ENVFROM(0.00)[axboe@kernel.dk,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_NEQ_ENVFROM(0.00)[d-qiu@ti.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-0.328];
+	TAGGED_RCPT(0.00)[linaro-mm-sig,netdev];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lst.de:email,linaro.org:email]
-X-Rspamd-Queue-Id: 377BA411522
+	RCVD_COUNT_SEVEN(0.00)[9]
+X-Rspamd-Queue-Id: 22D7F411529
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On 12/11/25 6:08 PM, Pavel Begunkov wrote:
-> On 12/4/25 10:43, Christoph Hellwig wrote:
->> On Sun, Nov 23, 2025 at 10:51:23PM +0000, Pavel Begunkov wrote:
->>> We'll need bio_flagged() earlier in bio.h in the next patch, move it
->>> together with all related helpers, and mark the bio_flagged()'s bio
->>> argument as const.
->>>
->>> Signed-off-by: Pavel Begunkov <asml.silence@gmail.com>
->>
->> Looks good:
->>
->> Reviewed-by: Christoph Hellwig <hch@lst.de>
->>
->> Maybe ask Jens to queue it up ASAP to get it out of the way?
-> 
-> I was away, so a bit late for that. I definitely wouldn't
-> mind if Jens pulls it in, but for a separate patch I'd need
-> to justify it, and I don't think it brings anything
-> meaningful in itself.
 
-I like getting prep stuff like that out of the way, and honestly the
-patch makes sense on its own anyway as it's always nicer to have related
-code closer together.
+Hi Roger,
 
--- 
-Jens Axboe
+On 11/9/2025 3:37 PM, Roger Quadros wrote:
+> To prepare for XSK zero copy support, add XSK pool
+> helpers in a new file am65-cpsw-xdp.c
+>
+> As queues are shared between ports we can no longer
+> support the case where zero copy (XSK Pool) is enabled
+> for the queue on one port but not for other ports.
+>
+> Current solution is to drop the packet if Zero copy
+> is not enabled for that port + queue but enabled for
+> some other port + same queue.
+
+I've been evaluating a use-case where one CPSW port is using XDP zero 
+copy to pass EtherCAT frames to and from the userspace. The other CPSW 
+port is a non-XDP zero copy port is used for connection to another PC 
+running an IDE to monitor and configure the EtherCAT userspace 
+application on the AM62x EVM.
+
+According to the design described in this patch, I'm no longer able to 
+connect to the IDE when the EtherCAT port is set up for XDP zero copy. 
+Beyond just this use-case, there might be plenty of other use-cases 
+where both non-XDP zero copy ports and XDP zero copy enabled ports need 
+to be simultaneously used.
+
+For this reason, I think there should be some change implemented so that 
+the traffic on the non-XDP zero copy port does not get dropped. Is there 
+a way to workaround the CPSW hardware limitation (shared queues between 
+ports)?
+
+One idea I was thinking is to configure multiple rx flows (enabled by 
+the patch series in 
+https://lore.kernel.org/all/20250514-am65-cpsw-rx-class-v4-0-5202d8119241@kernel.org/) 
+and perhaps map each flow to a particular port? Since these rx flows 
+aren't true hardware queues, I don't know if that would not be possible 
+with the way XDP zero copy uses queues.
+
+Please let me know what you think.
+
+>
+> xdp_zc_queues bitmap tracks if queue is setup as XSK
+> pool and xsk_port_id array tracks which port the XSK
+> queue is assigned to for zero copy.
+>
+> Signed-off-by: Roger Quadros <rogerq@kernel.org>
+> ---
+>   drivers/net/ethernet/ti/Makefile         |   2 +-
+>   drivers/net/ethernet/ti/am65-cpsw-nuss.c |  21 ++++--
+>   drivers/net/ethernet/ti/am65-cpsw-nuss.h |  20 +++++
+>   drivers/net/ethernet/ti/am65-cpsw-xdp.c  | 122 +++++++++++++++++++++++++++++++
+>   4 files changed, 156 insertions(+), 9 deletions(-)
+>
+> diff --git a/drivers/net/ethernet/ti/Makefile b/drivers/net/ethernet/ti/Makefile
+> index 93c0a4d0e33a6fb725ad61c3ec0eab87d2d3f61a..96585a28fc7d73f61b888e5d1587d5123875db31 100644
+> --- a/drivers/net/ethernet/ti/Makefile
+> +++ b/drivers/net/ethernet/ti/Makefile
+> @@ -29,7 +29,7 @@ keystone_netcp_ethss-y := netcp_ethss.o netcp_sgmii.o netcp_xgbepcsr.o cpsw_ale.
+>   obj-$(CONFIG_TI_K3_CPPI_DESC_POOL) += k3-cppi-desc-pool.o
+>   
+>   obj-$(CONFIG_TI_K3_AM65_CPSW_NUSS) += ti-am65-cpsw-nuss.o
+> -ti-am65-cpsw-nuss-y := am65-cpsw-nuss.o cpsw_sl.o am65-cpsw-ethtool.o cpsw_ale.o
+> +ti-am65-cpsw-nuss-y := am65-cpsw-nuss.o cpsw_sl.o am65-cpsw-ethtool.o cpsw_ale.o am65-cpsw-xdp.o
+>   ti-am65-cpsw-nuss-$(CONFIG_TI_AM65_CPSW_QOS) += am65-cpsw-qos.o
+>   ti-am65-cpsw-nuss-$(CONFIG_TI_K3_AM65_CPSW_SWITCHDEV) += am65-cpsw-switchdev.o
+>   obj-$(CONFIG_TI_K3_AM65_CPTS) += am65-cpts.o
+> diff --git a/drivers/net/ethernet/ti/am65-cpsw-nuss.c b/drivers/net/ethernet/ti/am65-cpsw-nuss.c
+> index f9e2286efa29bbb7056fda1fc82c38b479aae8bd..46523be93df27710be77b288c36c1a0f66d8ca8d 100644
+> --- a/drivers/net/ethernet/ti/am65-cpsw-nuss.c
+> +++ b/drivers/net/ethernet/ti/am65-cpsw-nuss.c
+> @@ -58,9 +58,6 @@
+>   
+>   #define AM65_CPSW_MAX_PORTS	8
+>   
+> -#define AM65_CPSW_MIN_PACKET_SIZE	VLAN_ETH_ZLEN
+> -#define AM65_CPSW_MAX_PACKET_SIZE	2024
+> -
+>   #define AM65_CPSW_REG_CTL		0x004
+>   #define AM65_CPSW_REG_STAT_PORT_EN	0x014
+>   #define AM65_CPSW_REG_PTYPE		0x018
+> @@ -505,7 +502,7 @@ static inline void am65_cpsw_put_page(struct am65_cpsw_rx_flow *flow,
+>   static void am65_cpsw_nuss_rx_cleanup(void *data, dma_addr_t desc_dma);
+>   static void am65_cpsw_nuss_tx_cleanup(void *data, dma_addr_t desc_dma);
+>   
+> -static void am65_cpsw_destroy_rxq(struct am65_cpsw_common *common, int id, bool retain_page_pool)
+> +void am65_cpsw_destroy_rxq(struct am65_cpsw_common *common, int id, bool retain_page_pool)
+>   {
+>   	struct am65_cpsw_rx_chn *rx_chn = &common->rx_chns;
+>   	struct am65_cpsw_rx_flow *flow;
+> @@ -554,7 +551,7 @@ static void am65_cpsw_destroy_rxqs(struct am65_cpsw_common *common, bool retain_
+>   	k3_udma_glue_disable_rx_chn(common->rx_chns.rx_chn);
+>   }
+>   
+> -static int am65_cpsw_create_rxq(struct am65_cpsw_common *common, int id)
+> +int am65_cpsw_create_rxq(struct am65_cpsw_common *common, int id)
+>   {
+>   	struct am65_cpsw_rx_chn *rx_chn = &common->rx_chns;
+>   	struct page_pool_params pp_params = {
+> @@ -663,7 +660,7 @@ static int am65_cpsw_create_rxqs(struct am65_cpsw_common *common)
+>   	return ret;
+>   }
+>   
+> -static void am65_cpsw_destroy_txq(struct am65_cpsw_common *common, int id)
+> +void am65_cpsw_destroy_txq(struct am65_cpsw_common *common, int id)
+>   {
+>   	struct am65_cpsw_tx_chn *tx_chn = &common->tx_chns[id];
+>   
+> @@ -697,7 +694,7 @@ static void am65_cpsw_destroy_txqs(struct am65_cpsw_common *common)
+>   		am65_cpsw_destroy_txq(common, id);
+>   }
+>   
+> -static int am65_cpsw_create_txq(struct am65_cpsw_common *common, int id)
+> +int am65_cpsw_create_txq(struct am65_cpsw_common *common, int id)
+>   {
+>   	struct am65_cpsw_tx_chn *tx_chn = &common->tx_chns[id];
+>   	int ret;
+> @@ -1327,7 +1324,7 @@ static int am65_cpsw_nuss_rx_packets(struct am65_cpsw_rx_flow *flow,
+>   	dma_unmap_single(rx_chn->dma_dev, buf_dma, buf_dma_len, DMA_FROM_DEVICE);
+>   	k3_cppi_desc_pool_free(rx_chn->desc_pool, desc_rx);
+>   
+> -	if (port->xdp_prog) {
+> +	if (am65_cpsw_xdp_is_enabled(port)) {
+>   		xdp_init_buff(&xdp, PAGE_SIZE, &port->xdp_rxq[flow->id]);
+>   		xdp_prepare_buff(&xdp, page_addr, AM65_CPSW_HEADROOM,
+>   				 pkt_len, false);
+> @@ -1961,6 +1958,9 @@ static int am65_cpsw_ndo_bpf(struct net_device *ndev, struct netdev_bpf *bpf)
+>   	switch (bpf->command) {
+>   	case XDP_SETUP_PROG:
+>   		return am65_cpsw_xdp_prog_setup(ndev, bpf->prog);
+> +	case XDP_SETUP_XSK_POOL:
+> +		return am65_cpsw_xsk_setup_pool(ndev, bpf->xsk.pool,
+> +						bpf->xsk.queue_id);
+>   	default:
+>   		return -EINVAL;
+>   	}
+> @@ -3553,7 +3553,12 @@ static int am65_cpsw_nuss_probe(struct platform_device *pdev)
+>   	common = devm_kzalloc(dev, sizeof(struct am65_cpsw_common), GFP_KERNEL);
+>   	if (!common)
+>   		return -ENOMEM;
+> +
+>   	common->dev = dev;
+> +	common->xdp_zc_queues = devm_bitmap_zalloc(dev, AM65_CPSW_MAX_QUEUES,
+> +						   GFP_KERNEL);
+> +	if (!common->xdp_zc_queues)
+> +		return -ENOMEM;
+>   
+>   	of_id = of_match_device(am65_cpsw_nuss_of_mtable, dev);
+>   	if (!of_id)
+> diff --git a/drivers/net/ethernet/ti/am65-cpsw-nuss.h b/drivers/net/ethernet/ti/am65-cpsw-nuss.h
+> index 917c37e4e89bd933d3001f6c35a62db01cd8da4c..31789b5e5e1fc96be20cce17234d0e16cdcea796 100644
+> --- a/drivers/net/ethernet/ti/am65-cpsw-nuss.h
+> +++ b/drivers/net/ethernet/ti/am65-cpsw-nuss.h
+> @@ -23,8 +23,14 @@ struct am65_cpts;
+>   
+>   #define AM65_CPSW_MAX_QUEUES	8	/* both TX & RX */
+>   
+> +#define AM65_CPSW_MIN_PACKET_SIZE	VLAN_ETH_ZLEN
+> +#define AM65_CPSW_MAX_PACKET_SIZE	2024
+> +
+>   #define AM65_CPSW_PORT_VLAN_REG_OFFSET	0x014
+>   
+> +#define AM65_CPSW_RX_DMA_ATTR	(DMA_ATTR_SKIP_CPU_SYNC |\
+> +				 DMA_ATTR_WEAK_ORDERING)
+> +
+>   struct am65_cpsw_slave_data {
+>   	bool				mac_only;
+>   	struct cpsw_sl			*mac_sl;
+> @@ -190,6 +196,9 @@ struct am65_cpsw_common {
+>   	unsigned char switch_id[MAX_PHYS_ITEM_ID_LEN];
+>   	/* only for suspend/resume context restore */
+>   	u32			*ale_context;
+> +	/* XDP Zero Copy */
+> +	unsigned long		*xdp_zc_queues;
+> +	int			xsk_port_id[AM65_CPSW_MAX_QUEUES];
+>   };
+>   
+>   struct am65_cpsw_ndev_priv {
+> @@ -228,4 +237,15 @@ int am65_cpsw_nuss_update_tx_rx_chns(struct am65_cpsw_common *common,
+>   
+>   bool am65_cpsw_port_dev_check(const struct net_device *dev);
+>   
+> +int am65_cpsw_create_rxq(struct am65_cpsw_common *common, int id);
+> +void am65_cpsw_destroy_rxq(struct am65_cpsw_common *common, int id, bool retain_page_pool);
+> +int am65_cpsw_create_txq(struct am65_cpsw_common *common, int id);
+> +void am65_cpsw_destroy_txq(struct am65_cpsw_common *common, int id);
+> +int am65_cpsw_xsk_setup_pool(struct net_device *ndev,
+> +			     struct xsk_buff_pool *pool, u16 qid);
+> +int am65_cpsw_xsk_wakeup(struct net_device *ndev, u32 qid, u32 flags);
+> +static inline bool am65_cpsw_xdp_is_enabled(struct am65_cpsw_port *port)
+> +{
+> +	return !!READ_ONCE(port->xdp_prog);
+> +}
+>   #endif /* AM65_CPSW_NUSS_H_ */
+> diff --git a/drivers/net/ethernet/ti/am65-cpsw-xdp.c b/drivers/net/ethernet/ti/am65-cpsw-xdp.c
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..89f43f7c83db35dba96621bae930172e0fc85b6a
+> --- /dev/null
+> +++ b/drivers/net/ethernet/ti/am65-cpsw-xdp.c
+> @@ -0,0 +1,122 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/* Texas Instruments K3 AM65 Ethernet Switch SubSystem Driver
+> + *
+> + * Copyright (C) 2025 Texas Instruments Incorporated - http://www.ti.com/
+> + *
+> + */
+> +
+> +#include <net/xsk_buff_pool.h>
+> +#include <net/xdp_sock_drv.h>
+> +#include "am65-cpsw-nuss.h"
+> +
+> +static int am65_cpsw_xsk_pool_enable(struct am65_cpsw_port *port,
+> +				     struct xsk_buff_pool *pool, u16 qid)
+> +{
+> +	struct am65_cpsw_common *common = port->common;
+> +	struct am65_cpsw_rx_chn *rx_chn;
+> +	bool need_update;
+> +	u32 frame_size;
+> +	int ret;
+> +
+> +	/*
+> +	 * As queues are shared between ports we can no longer
+> +	 * support the case where zero copy (XSK Pool) is enabled
+> +	 * for the queue on one port but not for other ports.
+> +	 *
+> +	 * Current solution is to drop the packet if Zero copy
+> +	 * is not enabled for that port + queue but enabled for
+> +	 * some other port + same queue.
+> +	 */
+> +	if (test_bit(qid, common->xdp_zc_queues))
+> +		return -EINVAL;
+> +
+> +	rx_chn = &common->rx_chns;
+> +	if (qid >= common->rx_ch_num_flows || qid >= common->tx_ch_num)
+> +		return -EINVAL;
+> +
+> +	frame_size = xsk_pool_get_rx_frame_size(pool);
+> +	if (frame_size < AM65_CPSW_MAX_PACKET_SIZE)
+> +		return -EOPNOTSUPP;
+> +
+> +	ret = xsk_pool_dma_map(pool, rx_chn->dma_dev, AM65_CPSW_RX_DMA_ATTR);
+> +	if (ret) {
+> +		netdev_err(port->ndev, "Failed to map xsk pool\n");
+> +		return ret;
+> +	}
+> +
+> +	need_update = common->usage_count &&
+> +		      am65_cpsw_xdp_is_enabled(port);
+> +	if (need_update) {
+> +		am65_cpsw_destroy_rxq(common, qid, true);
+> +		am65_cpsw_destroy_txq(common, qid);
+> +	}
+> +
+> +	set_bit(qid, common->xdp_zc_queues);
+> +	common->xsk_port_id[qid] = port->port_id;
+> +	if (need_update) {
+> +		am65_cpsw_create_rxq(common, qid);
+> +		am65_cpsw_create_txq(common, qid);
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int am65_cpsw_xsk_pool_disable(struct am65_cpsw_port *port,
+> +				      struct xsk_buff_pool *pool, u16 qid)
+> +{
+> +	struct am65_cpsw_common *common = port->common;
+> +	bool need_update;
+> +
+> +	if (qid >= common->rx_ch_num_flows || qid >= common->tx_ch_num)
+> +		return -EINVAL;
+> +
+> +	if (!test_bit(qid, common->xdp_zc_queues))
+> +		return -EINVAL;
+> +
+> +	pool = xsk_get_pool_from_qid(port->ndev, qid);
+> +	if (!pool)
+> +		return -EINVAL;
+> +
+> +	need_update = common->usage_count && am65_cpsw_xdp_is_enabled(port);
+> +	if (need_update) {
+> +		am65_cpsw_destroy_rxq(common, qid, true);
+> +		am65_cpsw_destroy_txq(common, qid);
+> +		synchronize_rcu();
+> +	}
+> +
+> +	xsk_pool_dma_unmap(pool, AM65_CPSW_RX_DMA_ATTR);
+> +	clear_bit(qid, common->xdp_zc_queues);
+> +	common->xsk_port_id[qid] = -EINVAL;
+> +	if (need_update) {
+> +		am65_cpsw_create_rxq(common, qid);
+> +		am65_cpsw_create_txq(common, qid);
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +int am65_cpsw_xsk_setup_pool(struct net_device *ndev,
+> +			     struct xsk_buff_pool *pool, u16 qid)
+> +{
+> +	struct am65_cpsw_port *port = am65_ndev_to_port(ndev);
+> +
+> +	return pool ? am65_cpsw_xsk_pool_enable(port, pool, qid) :
+> +		      am65_cpsw_xsk_pool_disable(port, pool, qid);
+> +}
+> +
+> +int am65_cpsw_xsk_wakeup(struct net_device *ndev, u32 qid, u32 flags)
+> +{
+> +	struct am65_cpsw_common *common = am65_ndev_to_common(ndev);
+> +	struct am65_cpsw_port *port = am65_ndev_to_port(ndev);
+> +
+> +	if (!netif_running(ndev) || !netif_carrier_ok(ndev))
+> +		return -ENETDOWN;
+> +
+> +	if (!am65_cpsw_xdp_is_enabled(port))
+> +		return -EINVAL;
+> +
+> +	if (qid >= common->rx_ch_num_flows || qid >= common->tx_ch_num)
+> +		return -EINVAL;
+> +
+> +	return 0;
+> +}
+
+Best regards,
+
+Daolin
+
+Texas Instruments Sitara MPU Systems Applications
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
