@@ -2,63 +2,63 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5BD8DCBD8FC
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 15 Dec 2025 12:41:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 33703CBD9AA
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 15 Dec 2025 12:49:15 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7CFEA40150
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 15 Dec 2025 11:41:24 +0000 (UTC)
-Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
-	by lists.linaro.org (Postfix) with ESMTPS id 7AA3F4010F
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 15 Dec 2025 11:39:23 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 54F2640143
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 15 Dec 2025 11:49:14 +0000 (UTC)
+Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
+	by lists.linaro.org (Postfix) with ESMTPS id EB37B3F9D9
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 15 Dec 2025 11:48:42 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20230601 header.b=EzAYT+gV;
-	spf=pass (lists.linaro.org: domain of bagasdotme@gmail.com designates 209.85.216.42 as permitted sender) smtp.mailfrom=bagasdotme@gmail.com;
+	dkim=pass header.d=gmail.com header.s=20230601 header.b=CfHgf203;
+	spf=pass (lists.linaro.org: domain of bagasdotme@gmail.com designates 209.85.214.175 as permitted sender) smtp.mailfrom=bagasdotme@gmail.com;
 	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-pj1-f42.google.com with SMTP id 98e67ed59e1d1-34ab8e0df53so3455291a91.3
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 15 Dec 2025 03:39:23 -0800 (PST)
+Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-2a087b2a9c0so23629415ad.0
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 15 Dec 2025 03:48:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765798763; x=1766403563; darn=lists.linaro.org;
+        d=gmail.com; s=20230601; t=1765799322; x=1766404122; darn=lists.linaro.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=c1jHunOtVkIwedmQvRsrzJgL7loZmMhygmTOE5iX6PY=;
-        b=EzAYT+gVmccUOqpwFlZvS1X0HsW14p1Q8Y2zNgkKOT90lYeso0L8XyXZ5cQaKLOKtK
-         ve3eHvco3c0BDUV4zXfWO/OTDUnjcgoVpyqWL3NGZMKiT+lGiUCsVFH96jWk82U/EgV/
-         XrHePadzNy1BjlP6VJ2ZhNqqfkEEF69tCKNNry5q0uPLln/4zIApJqbD6RULQEVEGU8c
-         mL4Ea1OA/A6WnsX7ycVHCjVwuTjvb5c1dw8QQVlFWHwRuk/FHtjD2kjN7Q+dq4pXLvJ9
-         3yNsFtZZLR/1BvfXdEvfDCMtu6RjzZr7WA6+eLtAl3tc06KMHnLOeqsNSA5gCfD1A5V7
-         rtrw==
+        bh=6HauKBmXABfepG7VVzo5pWgXSZcUBePm/ZvLfsSGC9U=;
+        b=CfHgf203HC0SQstM4nIDEmj0jETc6s+UmFHdgAjCQy+1udZ+ZDlMGkclCZddouGRKr
+         Ki7fPaYUlIRGC4muRJw8PszSIlbNqyr+JfB14l8knV+WMJtoD1QWzVZB7fHYWcpkqBe2
+         j8hEUzG7oblw9NEQb+l0T5MUEaSoUucmKJ0m9tOAy2mTEPQLz3xVlsUahMGaMtVUZm81
+         gC2xaQtSCzWI575c65yJEmDrBr1JCmwWDpqQqrByBylaXH1HjMfdblRtQp2P02/VSUYg
+         pY0bY+0mROyuWIGuPb2UtYqSc0mTMTWvso56/OxsW6Z0o0yXJxjEPxO+0fu4aJMrfA60
+         nmcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765798763; x=1766403563;
+        d=1e100.net; s=20230601; t=1765799322; x=1766404122;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=c1jHunOtVkIwedmQvRsrzJgL7loZmMhygmTOE5iX6PY=;
-        b=Gov1gT+Cbl4hJ/O4Eh2OjeKvLKmtpHDDKEgTVm0HuRlZUcYdd6QBMoiHMe5O50zjam
-         uMSt+QXJ7a19tErpd6zQwkC4XeldsCF+t1/cDdZCzvKREoDbFpxxffMI9NfQOCcAFg28
-         HM92zGP73OKIWF6TeUS+vJTFTodLM+MFluVp8IQI2RZY5ZVBDJZPFVpzD/6hjn7RSKBa
-         luD/jkNDyRVrWyMczfpRKVfVK42Zj8+7ZVekec++k6iJGyGSkeKzXyR8bmWEHnr/w4tM
-         C4Kzb55xlB9y/qkpsKuSPYYFpdUm/YdCurCJmCv8DvnB81YXnZwYZPfBKhenY/G6Gtiq
-         BWvQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXFX7QsCVg9CLoLIXkm0EK8E+uDYIhBcjiwNxqRp4HYTh5a9+ZD5PX2fHjNzED3gPJHyuaOHhOUBGIyY4Ts@lists.linaro.org
-X-Gm-Message-State: AOJu0YxxX9z9vO5FIJhLj4yuoEc8ncZQgHyTfImoFEEiL8/djbEFfAeA
-	AkDcFCBri3/IguIA4mM+vg6BoBWBF9aPaBVja595k1FgJoq8hzHuVAoS
-X-Gm-Gg: AY/fxX476REMSBnTg/NhUncedNAGpbYpRf69lUB4AT2femMTuTtlmL5noCZp4r5RuAZ
-	o5K5FaAK+knU66V57VJSFdLL5fvwlh/tbtKPTmoWDUVVpPxFZLtEgStme967iMwbTDMGbSHiMWS
-	hTVP++jOxkX4MILMuRTlpFirfL58ZHKRvD5fPcbPDFsuH0nQsLYP4+VEN7363AzoSXdEQbPXOM4
-	E3I4DxXTvtf63TqvIpYkkE06DrGzVKH8VLLT+cWjvWCrqJpeoeRO+CKKF1teQuBE2ufB8lJvOhj
-	qkJ2B0AWWDDqkvu6Op2HMjHIVhTCuuB8K012Jtzy5ewH0oxh2Us3HzElzg0HEuM0+cWyDmDp9GV
-	iB2UtbS7Rp/hJ/39nL+ViBhIXuV3lFD41A9XWx0cgSCk5+6OLTT4/Euwt5jHvzKzF7UMzs2fdz2
-	dGaX55hTCoz9o=
-X-Google-Smtp-Source: AGHT+IGkBlvtTJJI36YenJR2Mj5A83uVH+1orPi0BLwAvata7acR5hue/qogcd9VSy03MC0if9MWYQ==
-X-Received: by 2002:a17:902:dad1:b0:2a0:b066:3f55 with SMTP id d9443c01a7336-2a0b06646d5mr58199625ad.10.1765798762558;
-        Mon, 15 Dec 2025 03:39:22 -0800 (PST)
+        bh=6HauKBmXABfepG7VVzo5pWgXSZcUBePm/ZvLfsSGC9U=;
+        b=Tq7xbRlb1IkksQkg9aWELXr1KcGHvCzr4hWs5lW/KjNb43AkkPg9WByfdOxZSLVJLx
+         Zn//4KJ3kquBfB6xIGybTLcaaHYzA7Hi2jhuYH8SVg9JI3expsyOjrlu+SCfg7lZmTgz
+         WMC/EiNFP+4RD+2XLqIGxxTl+/KTxwkOTFUMyp8TxYwr6rBlmE/QaEgh9w4P+ixzm3Az
+         Tbb5nDkFjqClAFg/7RFIOkGAsxoXeeZLJ4KQNRgQ+sYN4hr3d1LTBo3yeGDeb7hnJvi5
+         8DTIdkWzb4wi4VVuxWqSciBTQe0RMLn1i8/wNFn7tgA8TbfNI1ldW8n1wRAUGVNFUeBW
+         eIJg==
+X-Forwarded-Encrypted: i=1; AJvYcCXV8rkJKjyTKMUEsAr3aTma2EkU2UEfbeKVGTySqO4m+qs8ZHCU5aWvbT8XtlUQBB1ycy6FxkGRoLrcRO56@lists.linaro.org
+X-Gm-Message-State: AOJu0YzNsiBbW2z0x4hEICi1gtB+sK9WLuABvvTZVCFfH4vurDst/3Ah
+	t6C7HIybZ7coePyFqmcqdZBG0+p74+q1SQWU/lKKHGA/mzL7ywYK9O2j
+X-Gm-Gg: AY/fxX6nWL6sIOI37UCVGV3uIoX/8VJ7zLTE3WZi5AfaX1KqpJV7c2oA5wRoF/CQPI4
+	llma5hGC4/eC5mFSRXXUsvRYOE1kh1YePwAMrYpiAqPHQr96IjVT/EjW+1b+24st7kM6uHwhaZQ
+	Fhl5c2qtiuZA5aWFP0rAv+iXpCdGcQWCaExnHGH92NoGU7qcX+ZJRJDj4u5IsSi/RHjMCWUcpkq
+	84ELKaBcaBMHy5Iukm3X6Aku9JxaOWKDoDi4QCYQzwKgvujLUIuh98tHc7ktVFCPqnIyd3ChbYk
+	usW5or37EQMxHBel3BKYtSOwP9l+No50Pp0gH81b8PfS68IAhyaUB50FGGNUCVKfXSQcXzj2wgx
+	iyiiABfpFdcm/PoUBZF7cth4Np8cZzTQ2IrV8NphXVxF1VjuDkRxOJWJBvTG3NlR/Tn2F9foAvb
+	/6mUZJGMvWYos=
+X-Google-Smtp-Source: AGHT+IHfPz2x7Vw5nYSquN5rdr59IqpuimzSW/oHADfYTkii49T/33BfFck+CRU3WD2YFqFgGY1MBw==
+X-Received: by 2002:a17:902:ccc8:b0:2a0:823f:4da6 with SMTP id d9443c01a7336-2a0823f4e6bmr66287715ad.50.1765799322057;
+        Mon, 15 Dec 2025 03:48:42 -0800 (PST)
 Received: from archie.me ([210.87.74.117])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29ee9d394easm129684215ad.25.2025.12.15.03.39.14
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29f271bc8a0sm97458185ad.92.2025.12.15.03.48.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 15 Dec 2025 03:39:18 -0800 (PST)
+        Mon, 15 Dec 2025 03:48:41 -0800 (PST)
 Received: by archie.me (Postfix, from userid 1000)
-	id DE7F144588D6; Mon, 15 Dec 2025 18:39:06 +0700 (WIB)
+	id 1E64B44588D7; Mon, 15 Dec 2025 18:39:06 +0700 (WIB)
 From: Bagas Sanjaya <bagasdotme@gmail.com>
 To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
 	Linux AMDGPU <amd-gfx@lists.freedesktop.org>,
@@ -71,26 +71,26 @@ To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
 	Linux Memory Management List <linux-mm@kvack.org>,
 	Linux Network Bridge <bridge@lists.linux.dev>,
 	Linux Networking <netdev@vger.kernel.org>
-Date: Mon, 15 Dec 2025 18:38:57 +0700
-Message-ID: <20251215113903.46555-10-bagasdotme@gmail.com>
+Date: Mon, 15 Dec 2025 18:38:58 +0700
+Message-ID: <20251215113903.46555-11-bagasdotme@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20251215113903.46555-1-bagasdotme@gmail.com>
 References: <20251215113903.46555-1-bagasdotme@gmail.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1238; i=bagasdotme@gmail.com; h=from:subject; bh=g0JdaQypaND4lTcW0ZqbYUYcFFa4BCtHp67rCXQ3qdI=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDJn2n4OZ3cRMgut038Q1Mvx+WnR34qt26aRSjxQZU2vjg 6FirXs7SlkYxLgYZMUUWSYl8jWd3mUkcqF9rSPMHFYmkCEMXJwCMJFN+xkZVrl1e0394/7u+RLu +RrXLfO4ZDZ3GN7cIROa8FQ8sjv1CCPD78WiQS1yNZrTC6Ti9OZz7YjK/sxnP51XNFzRTCM96w0 nAA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1065; i=bagasdotme@gmail.com; h=from:subject; bh=UEs/C9BYSnit6YUYNsXI/TPVZ8wlbVWtOoMfZCt2Czk=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDJn2n4P/rZd71fJeeea2Y6ze7l+/BUWfvZxbPVvJ7FLhc b8Ca2nfjlIWBjEuBlkxRZZJiXxNp3cZiVxoX+sIM4eVCWQIAxenAEzkQCXDH065v1Nu7J+SJNXm fKBEpbzzpEZrbklCWe8WSUFLrulTkhn+J33s75ffwvJ3fu98iUql0+pnUqJKXmg5a8ursxTsZFv IBQA=
 X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.60 / 15.00];
+X-Spamd-Result: default: False [-2.50 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.216.42:from];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
 	MIME_GOOD(-0.10)[text/plain];
-	RCPT_COUNT_GT_50(0.00)[86];
 	RCVD_COUNT_THREE(0.00)[3];
+	RCPT_COUNT_GT_50(0.00)[86];
+	URIBL_BLOCKED(0.00)[mail-pl1-f175.google.com:rdns,mail-pl1-f175.google.com:helo];
 	ARC_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	TO_DN_SOME(0.00)[];
@@ -99,7 +99,7 @@ X-Spamd-Result: default: False [-2.60 / 15.00];
 	FROM_EQ_ENVFROM(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	FREEMAIL_CC(0.00)[amd.com,igalia.com,gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de,intel.com,zeniv.linux.org.uk,suse.cz,linaro.org,google.com,redhat.com,linux.alibaba.com,linux-foundation.org,blackwall.org,nvidia.com,davemloft.net,infradead.org,oracle.com,ionos.com,linux.ibm.com,arm.com,linux.dev,konsulko.se,brown.name,collabora.com,cumulusnetworks.com,208suo.com,cdjrlc.com,inspur.com,gvernon.com];
-	BLOCKLISTDE_FAIL(0.00)[210.87.74.117:server fail];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.214.175:from];
 	NEURAL_HAM(-0.00)[-1.000];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
@@ -108,10 +108,10 @@ X-Spamd-Result: default: False [-2.60 / 15.00];
 	FREEMAIL_ENVFROM(0.00)[gmail.com];
 	FROM_HAS_DN(0.00)[]
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 7AA3F4010F
+X-Rspamd-Queue-Id: EB37B3F9D9
 X-Spamd-Bar: --
-Message-ID-Hash: HIYMINLFCGWRSCBVYGPCHIAKKNHJ2A7Y
-X-Message-ID-Hash: HIYMINLFCGWRSCBVYGPCHIAKKNHJ2A7Y
+Message-ID-Hash: CD6SXE6I6BO4IVICABKFFY5BSSA2XL37
+X-Message-ID-Hash: CD6SXE6I6BO4IVICABKFFY5BSSA2XL37
 X-MailFrom: bagasdotme@gmail.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
@@ -120,9 +120,9 @@ CC: Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>, Rodrig
   Vlastimil Babka <vbabka@suse.cz>, Kent Overstreet <kent.overstreet@linux.dev>, Vitaly Wool <vitaly.wool@konsulko.se>, Harry Yoo <harry.yoo@oracle.com>, Mateusz Guzik <mjguzik@gmail.com>, NeilBrown <neil@brown.name>, Amir Goldstein <amir73il@gmail.com>, Jeff Layton <jlayton@kernel.org>, Ivan Lipski <ivan.lipski@amd.com>, Tao Zhou <tao.zhou1@amd.com>, YiPeng Chai <YiPeng.Chai@amd.com>, Hawking Zhang <Hawking.Zhang@amd.com>, Lyude Paul <lyude@redhat.com>, Daniel Almeida <daniel.almeida@collabora.com>, Luben Tuikov <luben.tuikov@amd.com>, Matthew Auld <matthew.auld@intel.com>, Roopa Prabhu <roopa@cumulusnetworks.com>, Mao Zhu <zhumao001@208suo.com>, Shaomin Deng <dengshaomin@cdjrlc.com>, Charles Han <hanchunchao@inspur.com>, Jilin Yuan <yuanjilin@cdjrlc.com>, Swaraj Gaikwad <swarajgaikwad1925@gmail.com>, George Anthony Vernon <contact@gvernon.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 09/14] drm/amd/display: Don't use kernel-doc comment in dc_register_software_state struct
+Subject: [Linaro-mm-sig] [PATCH 10/14] drm/amdgpu: Describe @AMD_IP_BLOCK_TYPE_RAS in amd_ip_block_type enum
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HIYMINLFCGWRSCBVYGPCHIAKKNHJ2A7Y/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CD6SXE6I6BO4IVICABKFFY5BSSA2XL37/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -134,30 +134,28 @@ Content-Transfer-Encoding: 7bit
 
 Sphinx reports kernel-doc warning:
 
-WARNING: ./drivers/gpu/drm/amd/display/dc/dc.h:2796 This comment starts with '/**', but isn't a kernel-doc comment. Refer to Documentation/doc-guide/kernel-doc.rst
- * Software state variables used to program register fields across the display pipeline
+WARNING: ./drivers/gpu/drm/amd/include/amd_shared.h:113 Enum value 'AMD_IP_BLOCK_TYPE_RAS' not described in enum 'amd_ip_block_type'
 
-Don't use kernel-doc comment syntax to fix it.
+Describe the value to fix it.
 
-Fixes: b0ff344fe70cd2 ("drm/amd/display: Add interface to capture expected HW state from SW state")
+Fixes: 7169e706c82d7b ("drm/amdgpu: Add ras module ip block to amdgpu discovery")
 Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
 ---
- drivers/gpu/drm/amd/display/dc/dc.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/gpu/drm/amd/include/amd_shared.h | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/gpu/drm/amd/display/dc/dc.h b/drivers/gpu/drm/amd/display/dc/dc.h
-index 29edfa51ea2cc0..0a9758a042586f 100644
---- a/drivers/gpu/drm/amd/display/dc/dc.h
-+++ b/drivers/gpu/drm/amd/display/dc/dc.h
-@@ -2793,7 +2793,7 @@ void dc_get_underflow_debug_data_for_otg(struct dc *dc, int primary_otg_inst, st
- 
- void dc_get_power_feature_status(struct dc *dc, int primary_otg_inst, struct power_features *out_data);
- 
--/**
-+/*
-  * Software state variables used to program register fields across the display pipeline
-  */
- struct dc_register_software_state {
+diff --git a/drivers/gpu/drm/amd/include/amd_shared.h b/drivers/gpu/drm/amd/include/amd_shared.h
+index 17945094a13834..d8ed3799649172 100644
+--- a/drivers/gpu/drm/amd/include/amd_shared.h
++++ b/drivers/gpu/drm/amd/include/amd_shared.h
+@@ -89,6 +89,7 @@ enum amd_apu_flags {
+ * @AMD_IP_BLOCK_TYPE_VPE: Video Processing Engine
+ * @AMD_IP_BLOCK_TYPE_UMSCH_MM: User Mode Scheduler for Multimedia
+ * @AMD_IP_BLOCK_TYPE_ISP: Image Signal Processor
++* @AMD_IP_BLOCK_TYPE_RAS: RAS
+ * @AMD_IP_BLOCK_TYPE_NUM: Total number of IP block types
+ */
+ enum amd_ip_block_type {
 -- 
 An old man doll... just what I always wanted! - Clara
 
