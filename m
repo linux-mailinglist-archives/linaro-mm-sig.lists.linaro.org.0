@@ -2,63 +2,63 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 02ADECBD995
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 15 Dec 2025 12:48:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 99376CBD9C2
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 15 Dec 2025 12:49:49 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E5426400FF
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 15 Dec 2025 11:48:56 +0000 (UTC)
-Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
-	by lists.linaro.org (Postfix) with ESMTPS id BE9093F78A
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 15 Dec 2025 11:48:40 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B17B340151
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 15 Dec 2025 11:49:48 +0000 (UTC)
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
+	by lists.linaro.org (Postfix) with ESMTPS id 9F11F400FF
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 15 Dec 2025 11:48:45 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20230601 header.b=ftH5NvTX;
-	spf=pass (lists.linaro.org: domain of bagasdotme@gmail.com designates 209.85.214.174 as permitted sender) smtp.mailfrom=bagasdotme@gmail.com;
+	dkim=pass header.d=gmail.com header.s=20230601 header.b="m1UQz1A/";
+	spf=pass (lists.linaro.org: domain of bagasdotme@gmail.com designates 209.85.216.42 as permitted sender) smtp.mailfrom=bagasdotme@gmail.com;
 	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-pl1-f174.google.com with SMTP id d9443c01a7336-2a07f8dd9cdso19640625ad.1
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 15 Dec 2025 03:48:40 -0800 (PST)
+Received: by mail-pj1-f42.google.com with SMTP id 98e67ed59e1d1-34ca40c1213so337191a91.0
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 15 Dec 2025 03:48:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765799320; x=1766404120; darn=lists.linaro.org;
+        d=gmail.com; s=20230601; t=1765799325; x=1766404125; darn=lists.linaro.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=JUAs+7T6aM5YvKJFQXSXqoVkTtSxZtzq470O+YaXF94=;
-        b=ftH5NvTXpibvp8vBGywPqMVt0wAtGltlAQJunQvWajneyMefDe0dujV0EqVTtKYmaR
-         Vv075juN1YMSPeqji6FzJfzBKmle2VR5CrT3ZA+iXi6FGxbL5IXaPv1IhitDvwpuFuDw
-         /eQaw5yHL+G8CoMi9OD+OsE1SEINJ1RXbWKQ+K1K4JuCzQ86DLqKdhZTlpkGTxldyZI7
-         /AhqWzSDfvIzTNegDVg+/1XW3u9f+E9y+oQg/DR5//bU2/38q+nsm7QB6bXMUaWUnkVz
-         dFue4Wia8ihA910xoBuo8Q0nBqgv425gYDtsHkJDQEggT7VKQTeGobhtr9MGsaOLEGQI
-         zoxA==
+        bh=HPi/WFWmImBnVQgsxNvJvJyvieXM1xBFzKoWis67Gg4=;
+        b=m1UQz1A/9lcmtZtPVQycR+NACx9grE5EDyrWgW3wG0cd3IgaLmEZAz6L73M6MVL207
+         DhQTDLG7LvTk6XlBFKvZ04kz34lmIRxCQ5zsVxllYqtv9NxNJsgFfYNFMcO3s21gEkr+
+         S8GNlXekp0+ZrckV0o62XBi5ZeMA6PfRSWiGJ8y8CgU5DRmXIcBjqsErg5Cp9L2Z+bsz
+         QKVfNamQtT5XdbLDQul7+Ckl2LSWQNayLaCfBJu7mteuqXP4d5vmSuBZnnTbfYk4BQlk
+         S7hgoXxfqzXVlx6DngTXuuz/GQyxxhFTLlIFYetVnPalmIajFm8SQ/pDyDCIFLeOVnAU
+         lfRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765799320; x=1766404120;
+        d=1e100.net; s=20230601; t=1765799325; x=1766404125;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=JUAs+7T6aM5YvKJFQXSXqoVkTtSxZtzq470O+YaXF94=;
-        b=AStSEich+PZXkozjZzSwhiLWXaC9yl/zFHThig2NnBO+sGwFoYfi9N8fTz/EdNK0mO
-         NHz0CO4Ip7NbZzbMwVstlzBigOuALmN20D25J1wfjOD2L2oXEg/110dMHknEPYv5qlwy
-         5xY851F1YX3PW5hNxorWrk4+UH1wQoaokLV2Es6Zdda6+tTLgevn9vklgUoNxQMbjD0a
-         5KJ3IJwAWxLHoeVcDMIh6iioYD6D2xfu4VuKTOgGIkVmtJN5Z144hn4emNGD1hftaVlA
-         jHesNhvhysXVtfjjZIpO2NSVdX+E/qOjr1Yr5P7voZhBdtop61Rg5h+Ni54W8YrCpB+W
-         WUow==
-X-Forwarded-Encrypted: i=1; AJvYcCWqyKsmRqB1E6SUrTZc0vjRLxStT2IK3iZQkQo/Yy5Sz1kaniMECQNZzFfaCYx8TsHX3qHOHHScw6U858wJ@lists.linaro.org
-X-Gm-Message-State: AOJu0YxE15TPVw+9zpgfvwm3dTvDWBograrOUN5ReUZpJHQE9PE6aisB
-	D5N3U4PIspoeUvWGWk43igt3dsNHiFi64PkjUXU0IHOrJ+vqKc8813nT
-X-Gm-Gg: AY/fxX6ARan2Eqd1zUD9kghTneZeyxGG6qxnS6gs2k1IAo5wz8I1paPn+nJ3i2AVc6r
-	yjHxswTz3nq8QT2PeIQaR0sgs6XpKsspHZC1izobpVd5yf3s4itkLzwuc/U7jeSyOKp7mPsA5OT
-	DYsxEBL+Aisq+mLpEe1T1wxMY09cxH72JZYpdkrQWMHyXcjb7ck2sJDyg426uxi/6HUkg3fqSVT
-	mlzxq22EfyVmgHArX0UgBSMp22Pz3d4TfXUAS5400RJj5goL5sfvH2XFiqc9y2yktLBE+QGN7p4
-	S/3aYoCsRqYSkzFjD/aWLrcH8shZSdChaMPsULuOnxYAEQKZMjZO/ZBnVJUpNN0yEDhC089/3+D
-	HlGOr0Ba6VGbV5Q/cjN8i047Y+Sly7QuSn80dFSl2SX0q0eIOyslpOr3qIcIOabeFWinvxFzP5E
-	M4FRXaa+zkhRw=
-X-Google-Smtp-Source: AGHT+IEA4ldqjntSU1IZe10aX19mQKLjoCVDqCMnCNeqo44SOanRLtLHyqhQX8MxC8RVHbAWKM2xrg==
-X-Received: by 2002:a17:903:1a2e:b0:2a0:b02b:2105 with SMTP id d9443c01a7336-2a0b02b228amr63659225ad.56.1765799319837;
-        Mon, 15 Dec 2025 03:48:39 -0800 (PST)
+        bh=HPi/WFWmImBnVQgsxNvJvJyvieXM1xBFzKoWis67Gg4=;
+        b=t3ugP1SI9gfQnnL+6moRZyPNIV/DxYHkueHWguDPpCUDtqjCkA54C6IHkZOldesNZc
+         U7kQtCW3+CS+S/DRAOGb4JbXhHCpPA4lAJlKFkULjgbEYk66mFZxjRr1yoOP6dOXeg4v
+         kZLj8Sy/MAFZpzl6te2RhVvIRG8T5gtkYslGd/faKVI00OeKSW6GjYFw15kWLn3JtQEf
+         1I1o2GjxlrImp8nKxHjYw/Wl4AX3NzIAUYuwKeb/g/+HhssUE31ueJDIBS5tcfXEgBak
+         76PQbBzIJXIoBa5Ma2GCySicmBOTpdASAcYgXjac39TmfgI/mKkv6dwXMuXjGLen0Fvx
+         Ifkg==
+X-Forwarded-Encrypted: i=1; AJvYcCVsWy2w4fsrr5UiOdUUXX71lq6aA3ULFW/3EboYkHH99RnzBGj7fIu0006KV5qtmbfnCHjMm3sQ6TrzJBo2@lists.linaro.org
+X-Gm-Message-State: AOJu0Ywmr4QjZdvltubhyzAV88hCuYvT3lgqqItEI5mBmHNZdX+QO/Hf
+	r7LvOB5tLzmDG3V5yAN+hLAk3ZVs7uKivXlPdizTP/2SAHcOTbbnEYU0
+X-Gm-Gg: AY/fxX4LcLvAFV4Njt2kUTc65xB8YKK9Y57YOs9/hBedSr3Q32VuCH1uTMetTPmqte6
+	Cit3U3X7gZoD6Llq4NWyD4VSTRKrlNVpw8+0j9EkQoy5Y45GO+J0fpo+entIDfrk5/wc6dC9hfX
+	60DA0+sN6dZ0ApWZsQbSQ4nCpbcu6tKGgOTd+4qglTj1qP2xVETUwq3WjF/yIYu6q+wUe9X7/5/
+	Tsqt82OqBQKliq0xIKskpmQC9LTmmRHoR/i/Ys0FKy5uckpc/Ur+R2U0zmOe7dvWf4Gko7OZmQL
+	JV4UKUVUDoF8wXo0fFvfbb7LJl9szo2a9untw37smJpGJ+5iPIm1Ei88qYdj5qUimwzg1FgcLCW
+	9QXFHP2EgcWEnVvrs41C8X/PYTwyu8v5vvFfWlERz13/EsSZZ13O0danIahc0T0etggLXAP43hg
+	MvBUE5sxUnkO6oTvtOvTHmmg==
+X-Google-Smtp-Source: AGHT+IHySr1buuGxwyvRmyNwB1yX2aGVZnCno4j9FG3NSChYg8gy/QOhSf79+qyZQv+BzWWdtgvcAQ==
+X-Received: by 2002:a17:90b:388a:b0:340:be40:fe0c with SMTP id 98e67ed59e1d1-34abe4a6b3amr9032481a91.36.1765799324639;
+        Mon, 15 Dec 2025 03:48:44 -0800 (PST)
 Received: from archie.me ([210.87.74.117])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a0867ebe9dsm77190525ad.40.2025.12.15.03.48.39
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-34abe3ba59bsm9003471a91.7.2025.12.15.03.48.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 15 Dec 2025 03:48:39 -0800 (PST)
+        Mon, 15 Dec 2025 03:48:42 -0800 (PST)
 Received: by archie.me (Postfix, from userid 1000)
-	id 46E2D447330A; Mon, 15 Dec 2025 18:39:06 +0700 (WIB)
+	id 60C6F447330B; Mon, 15 Dec 2025 18:39:07 +0700 (WIB)
 From: Bagas Sanjaya <bagasdotme@gmail.com>
 To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
 	Linux AMDGPU <amd-gfx@lists.freedesktop.org>,
@@ -71,27 +71,27 @@ To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
 	Linux Memory Management List <linux-mm@kvack.org>,
 	Linux Network Bridge <bridge@lists.linux.dev>,
 	Linux Networking <netdev@vger.kernel.org>
-Date: Mon, 15 Dec 2025 18:39:00 +0700
-Message-ID: <20251215113903.46555-13-bagasdotme@gmail.com>
+Date: Mon, 15 Dec 2025 18:39:01 +0700
+Message-ID: <20251215113903.46555-14-bagasdotme@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20251215113903.46555-1-bagasdotme@gmail.com>
 References: <20251215113903.46555-1-bagasdotme@gmail.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=982; i=bagasdotme@gmail.com; h=from:subject; bh=kdwYayfiPuGdbX+6/rKZkI1jkonQkDY24KG3T7ZKuZA=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDJn2n4Pfzvv2aMJ6/2fiW3RmVPTpTFSM/fBW4Nu0ikdP3 J/+EMyq6ShlYRDjYpAVU2SZlMjXdHqXkciF9rWOMHNYmUCGMHBxCsBENP8y/FN2WnBW9dYhDc+y QzUe+4R7v/wRO/L/c0NDkJC4klf71CqG3yyrLnq/ur5px+nadXME75rW9sxVOp7eMOmL58xwZZ6 TlnwA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1611; i=bagasdotme@gmail.com; h=from:subject; bh=j4BXJJMKUhATWUahdKX0lx9i399WYlQDn9Ep3/iweMY=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDJn2n0OumS5gNW5/3GqYe0vV4BnvxdVlFyqnrRPWP9PpP u3FMcecjlIWBjEuBlkxRZZJiXxNp3cZiVxoX+sIM4eVCWQIAxenAEykPJ/hF9Pft9/+BqzKa/W8 rdg9vSMz5a6N4PnTByKYzgTJnWZ/P5Hhn+aKvLS4vrtB9w7NNb77cZZgzZ2+T776O+w93L/xls2 5xAgA
 X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-2.60 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
+	BAYES_HAM(-3.00)[100.00%];
 	MID_CONTAINS_FROM(1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
 	R_MISSING_CHARSET(0.50)[];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.214.174:from];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.216.42:from];
 	MIME_GOOD(-0.10)[text/plain];
 	FREEMAIL_FROM(0.00)[gmail.com];
 	RCVD_TLS_LAST(0.00)[];
-	URIBL_BLOCKED(0.00)[mail-pl1-f174.google.com:rdns,mail-pl1-f174.google.com:helo];
+	URIBL_BLOCKED(0.00)[mail-pj1-f42.google.com:rdns,mail-pj1-f42.google.com:helo];
 	ARC_NA(0.00)[];
 	TO_DN_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
@@ -109,10 +109,10 @@ X-Spamd-Result: default: False [-2.60 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	FROM_HAS_DN(0.00)[]
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: BE9093F78A
+X-Rspamd-Queue-Id: 9F11F400FF
 X-Spamd-Bar: --
-Message-ID-Hash: YCD2J4W3CUOKDVPOJUACQJRC3G54NXDY
-X-Message-ID-Hash: YCD2J4W3CUOKDVPOJUACQJRC3G54NXDY
+Message-ID-Hash: 7E4G73TEUBIJ4FDATV3FQGE2C5DCVUME
+X-Message-ID-Hash: 7E4G73TEUBIJ4FDATV3FQGE2C5DCVUME
 X-MailFrom: bagasdotme@gmail.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
@@ -121,9 +121,9 @@ CC: Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>, Rodrig
   Vlastimil Babka <vbabka@suse.cz>, Kent Overstreet <kent.overstreet@linux.dev>, Vitaly Wool <vitaly.wool@konsulko.se>, Harry Yoo <harry.yoo@oracle.com>, Mateusz Guzik <mjguzik@gmail.com>, NeilBrown <neil@brown.name>, Amir Goldstein <amir73il@gmail.com>, Jeff Layton <jlayton@kernel.org>, Ivan Lipski <ivan.lipski@amd.com>, Tao Zhou <tao.zhou1@amd.com>, YiPeng Chai <YiPeng.Chai@amd.com>, Hawking Zhang <Hawking.Zhang@amd.com>, Lyude Paul <lyude@redhat.com>, Daniel Almeida <daniel.almeida@collabora.com>, Luben Tuikov <luben.tuikov@amd.com>, Matthew Auld <matthew.auld@intel.com>, Roopa Prabhu <roopa@cumulusnetworks.com>, Mao Zhu <zhumao001@208suo.com>, Shaomin Deng <dengshaomin@cdjrlc.com>, Charles Han <hanchunchao@inspur.com>, Jilin Yuan <yuanjilin@cdjrlc.com>, Swaraj Gaikwad <swarajgaikwad1925@gmail.com>, George Anthony Vernon <contact@gvernon.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 12/14] drm/scheduler: Describe @result in drm_sched_job_done()
+Subject: [Linaro-mm-sig] [PATCH 13/14] drm/gpusvm: Fix drm_gpusvm_pages_valid_unlocked() kernel-doc comment
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YCD2J4W3CUOKDVPOJUACQJRC3G54NXDY/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7E4G73TEUBIJ4FDATV3FQGE2C5DCVUME/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -133,30 +133,38 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Sphinx reports kernel-doc warning:
+Commit 6364afd532bcab ("drm/gpusvm: refactor core API to use pages struct")
+renames drm_gpusvm_range_pages_valid_unlocked() to
+drm_gpusvm_pages_valid_unlocked(), but its kernel-doc comment gets
+stale, hence kernel-doc complains:
 
-WARNING: ./drivers/gpu/drm/scheduler/sched_main.c:367 function parameter 'result' not described in 'drm_sched_job_done'
+WARNING: ./drivers/gpu/drm/drm_gpusvm.c:1229 function parameter 'svm_pages' not described in 'drm_gpusvm_pages_valid_unlocked'
+WARNING: ./drivers/gpu/drm/drm_gpusvm.c:1229 expecting prototype for drm_gpusvm_range_pages_valid_unlocked(). Prototype was for drm_gpusvm_pages_valid_unlocked() instead
 
-Describe @result parameter to fix it.
+Fix them up.
 
-Fixes: 539f9ee4b52a8b ("drm/scheduler: properly forward fence errors")
+Fixes: 6364afd532bcab ("drm/gpusvm: refactor core API to use pages struct")
 Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
 ---
- drivers/gpu/drm/scheduler/sched_main.c | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/gpu/drm/drm_gpusvm.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/gpu/drm/scheduler/sched_main.c b/drivers/gpu/drm/scheduler/sched_main.c
-index 1d4f1b822e7b76..4f844087fd48eb 100644
---- a/drivers/gpu/drm/scheduler/sched_main.c
-+++ b/drivers/gpu/drm/scheduler/sched_main.c
-@@ -361,6 +361,7 @@ static void drm_sched_run_free_queue(struct drm_gpu_scheduler *sched)
+diff --git a/drivers/gpu/drm/drm_gpusvm.c b/drivers/gpu/drm/drm_gpusvm.c
+index 73e550c8ff8c98..fcfbe8c062bf6d 100644
+--- a/drivers/gpu/drm/drm_gpusvm.c
++++ b/drivers/gpu/drm/drm_gpusvm.c
+@@ -1216,9 +1216,9 @@ bool drm_gpusvm_range_pages_valid(struct drm_gpusvm *gpusvm,
+ EXPORT_SYMBOL_GPL(drm_gpusvm_range_pages_valid);
+ 
  /**
-  * drm_sched_job_done - complete a job
-  * @s_job: pointer to the job which is done
-+ * @result: job result
+- * drm_gpusvm_range_pages_valid_unlocked() - GPU SVM range pages valid unlocked
++ * drm_gpusvm_pages_valid_unlocked() - GPU SVM range pages valid unlocked
+  * @gpusvm: Pointer to the GPU SVM structure
+- * @range: Pointer to the GPU SVM range structure
++ * @svm_pages: Pointer to the GPU SVM pages
   *
-  * Finish the job's fence and resubmit the work items.
-  */
+  * This function determines if a GPU SVM range pages are valid. Expected be
+  * called without holding gpusvm->notifier_lock.
 -- 
 An old man doll... just what I always wanted! - Clara
 
