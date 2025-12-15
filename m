@@ -2,63 +2,63 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 33703CBD9AA
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 15 Dec 2025 12:49:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id F1456CBD90B
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 15 Dec 2025 12:41:38 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 54F2640143
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 15 Dec 2025 11:49:14 +0000 (UTC)
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
-	by lists.linaro.org (Postfix) with ESMTPS id EB37B3F9D9
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 15 Dec 2025 11:48:42 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 1D64340157
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 15 Dec 2025 11:41:38 +0000 (UTC)
+Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
+	by lists.linaro.org (Postfix) with ESMTPS id 2F705400CE
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 15 Dec 2025 11:39:24 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20230601 header.b=CfHgf203;
-	spf=pass (lists.linaro.org: domain of bagasdotme@gmail.com designates 209.85.214.175 as permitted sender) smtp.mailfrom=bagasdotme@gmail.com;
+	dkim=pass header.d=gmail.com header.s=20230601 header.b=TFzHulks;
+	spf=pass (lists.linaro.org: domain of bagasdotme@gmail.com designates 209.85.214.173 as permitted sender) smtp.mailfrom=bagasdotme@gmail.com;
 	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-2a087b2a9c0so23629415ad.0
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 15 Dec 2025 03:48:42 -0800 (PST)
+Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-2a0c09bb78cso8844565ad.0
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 15 Dec 2025 03:39:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765799322; x=1766404122; darn=lists.linaro.org;
+        d=gmail.com; s=20230601; t=1765798763; x=1766403563; darn=lists.linaro.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=6HauKBmXABfepG7VVzo5pWgXSZcUBePm/ZvLfsSGC9U=;
-        b=CfHgf203HC0SQstM4nIDEmj0jETc6s+UmFHdgAjCQy+1udZ+ZDlMGkclCZddouGRKr
-         Ki7fPaYUlIRGC4muRJw8PszSIlbNqyr+JfB14l8knV+WMJtoD1QWzVZB7fHYWcpkqBe2
-         j8hEUzG7oblw9NEQb+l0T5MUEaSoUucmKJ0m9tOAy2mTEPQLz3xVlsUahMGaMtVUZm81
-         gC2xaQtSCzWI575c65yJEmDrBr1JCmwWDpqQqrByBylaXH1HjMfdblRtQp2P02/VSUYg
-         pY0bY+0mROyuWIGuPb2UtYqSc0mTMTWvso56/OxsW6Z0o0yXJxjEPxO+0fu4aJMrfA60
-         nmcQ==
+        bh=TrKHAwDmwEWPzZzAT0wzFml+5He+R0bXqVhPFRZE9SA=;
+        b=TFzHulkszZkkBQCftSfpxM+ntYShqKDTZ2kj2RtaYOCOgouzvwj5Epe9OPPmACOPwD
+         27oxrFptZft3GYBHBcQF9vFkKQW8Q9H4kE9liRBPZ7bgrcmSfLyVrjmjpw/Ao6FOxu0C
+         RwQ6OcxhkQdQOn0EF1Kq/D63Z9YgCkOA4KJREjesLQBdCwlVWWRTK88NkbId5v6bmvmA
+         unHOK4UdJd1lMI3gxJaYCMODpvqhLZLvku8YBcXDuQHjRbT7NmT1d4nnK/9U5AhX9u2t
+         rnJBp/8TA79b9IXDv8h9BZvmkPak8oy7+49RAgm04vDnxAQyWqRCC8BReLI3wa+I1Bdp
+         AHPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765799322; x=1766404122;
+        d=1e100.net; s=20230601; t=1765798763; x=1766403563;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=6HauKBmXABfepG7VVzo5pWgXSZcUBePm/ZvLfsSGC9U=;
-        b=Tq7xbRlb1IkksQkg9aWELXr1KcGHvCzr4hWs5lW/KjNb43AkkPg9WByfdOxZSLVJLx
-         Zn//4KJ3kquBfB6xIGybTLcaaHYzA7Hi2jhuYH8SVg9JI3expsyOjrlu+SCfg7lZmTgz
-         WMC/EiNFP+4RD+2XLqIGxxTl+/KTxwkOTFUMyp8TxYwr6rBlmE/QaEgh9w4P+ixzm3Az
-         Tbb5nDkFjqClAFg/7RFIOkGAsxoXeeZLJ4KQNRgQ+sYN4hr3d1LTBo3yeGDeb7hnJvi5
-         8DTIdkWzb4wi4VVuxWqSciBTQe0RMLn1i8/wNFn7tgA8TbfNI1ldW8n1wRAUGVNFUeBW
-         eIJg==
-X-Forwarded-Encrypted: i=1; AJvYcCXV8rkJKjyTKMUEsAr3aTma2EkU2UEfbeKVGTySqO4m+qs8ZHCU5aWvbT8XtlUQBB1ycy6FxkGRoLrcRO56@lists.linaro.org
-X-Gm-Message-State: AOJu0YzNsiBbW2z0x4hEICi1gtB+sK9WLuABvvTZVCFfH4vurDst/3Ah
-	t6C7HIybZ7coePyFqmcqdZBG0+p74+q1SQWU/lKKHGA/mzL7ywYK9O2j
-X-Gm-Gg: AY/fxX6nWL6sIOI37UCVGV3uIoX/8VJ7zLTE3WZi5AfaX1KqpJV7c2oA5wRoF/CQPI4
-	llma5hGC4/eC5mFSRXXUsvRYOE1kh1YePwAMrYpiAqPHQr96IjVT/EjW+1b+24st7kM6uHwhaZQ
-	Fhl5c2qtiuZA5aWFP0rAv+iXpCdGcQWCaExnHGH92NoGU7qcX+ZJRJDj4u5IsSi/RHjMCWUcpkq
-	84ELKaBcaBMHy5Iukm3X6Aku9JxaOWKDoDi4QCYQzwKgvujLUIuh98tHc7ktVFCPqnIyd3ChbYk
-	usW5or37EQMxHBel3BKYtSOwP9l+No50Pp0gH81b8PfS68IAhyaUB50FGGNUCVKfXSQcXzj2wgx
-	iyiiABfpFdcm/PoUBZF7cth4Np8cZzTQ2IrV8NphXVxF1VjuDkRxOJWJBvTG3NlR/Tn2F9foAvb
-	/6mUZJGMvWYos=
-X-Google-Smtp-Source: AGHT+IHfPz2x7Vw5nYSquN5rdr59IqpuimzSW/oHADfYTkii49T/33BfFck+CRU3WD2YFqFgGY1MBw==
-X-Received: by 2002:a17:902:ccc8:b0:2a0:823f:4da6 with SMTP id d9443c01a7336-2a0823f4e6bmr66287715ad.50.1765799322057;
-        Mon, 15 Dec 2025 03:48:42 -0800 (PST)
+        bh=TrKHAwDmwEWPzZzAT0wzFml+5He+R0bXqVhPFRZE9SA=;
+        b=JfetZIy15ZBj+sXmyqnIvtz/yCMbMS5Z9XRAIvQQnt+lG2ILRdno9vq5jn5dyJBDQk
+         PEVrhj8Kqh/MPR2yG77g6d7W53c7xNlRYDM3dTYcaP7ClGb0I8yJn5zPlpiU6puC+IQQ
+         Rgf2oA0fXqkLpqfiCXs+qWd9IhVgDTAgCPil6v5jX68+a2hL1C55I1i2aspOGXgudf8e
+         hyjzzNV8wTdzR5Yfo9Lnl7inotQar9iGSj7CBS61j5zBdyjYx/unCtpr7qrjcYkuZLef
+         yUiG9vX2RuxYl83Tn2soyehyABb6UudnHXD519TTSSmee9StSy5QccDdvTYQEOs0Z07F
+         4Ueg==
+X-Forwarded-Encrypted: i=1; AJvYcCXRv+lxlF21HXABV4nIExI7WOdCCXJtXkGMZqRIBkMRBoyIv0rfrLEMYhNPuUMc8AIRSpVx4miLrc34U7NJ@lists.linaro.org
+X-Gm-Message-State: AOJu0Yz/CNHhDizcZAr2u7CMiwpn/hrbPm6p442kzmTWR2fxKm8eZKPK
+	w0mTU6u9HgJQB+C7Diqf9Z1mTuMOKCj10VzyEsA2EWlO2V5O8PsY2KuF
+X-Gm-Gg: AY/fxX64LAfxqDFCIgldgIJT0HdKRTfEa3dGjdRm8CWhwulwZOkry+gVq+d+weqbT9d
+	wHHBCUqt62/+J6+96Q1F6b2/nETfDJMMS1FSpFnDji/Go/8kkitJ+mTyg3Kvw1JSpsjOfryy8t+
+	r6S81WQcK5PGGYhDdUkK+9rXko3YCTMpJVekz5+MXSfC5+vZrRoFul+XfF2RiSrbWRYNj0ucvuF
+	4VIeDPhhrlY/+g832FqFrqgryXiQWXFjCMcNN3nnumJQfbxejiXB5OB8Q3LN82FHyKPuB5FjRAf
+	Ffx96HM2bZAgmaA4WHkwtjTewqCXldQPXUUYef1cCYxFd4l9ZfbNhho5KfjBaigOWr8xJOLztEE
+	ANA5ETavwtEYyKMjK94Ee9ONjeAeigwnaxaC73Ej1PXB9SsCQHhruNT1qzk/VKagPwhtWtGncor
+	a32lMLt3A4F+I=
+X-Google-Smtp-Source: AGHT+IGEKo7pUOqZ/Msgj5pboeIPXCGG8SyTdVwEqd2zfEZHqjnoFfxwhdJcfbexnC7zJuC88ktUrA==
+X-Received: by 2002:a17:903:1988:b0:2a0:d0ae:454d with SMTP id d9443c01a7336-2a0d0ae4b49mr35282785ad.22.1765798763267;
+        Mon, 15 Dec 2025 03:39:23 -0800 (PST)
 Received: from archie.me ([210.87.74.117])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29f271bc8a0sm97458185ad.92.2025.12.15.03.48.41
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a0f58d7c27sm27523715ad.24.2025.12.15.03.39.14
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 15 Dec 2025 03:48:41 -0800 (PST)
+        Mon, 15 Dec 2025 03:39:18 -0800 (PST)
 Received: by archie.me (Postfix, from userid 1000)
-	id 1E64B44588D7; Mon, 15 Dec 2025 18:39:06 +0700 (WIB)
+	id 357B044588D8; Mon, 15 Dec 2025 18:39:06 +0700 (WIB)
 From: Bagas Sanjaya <bagasdotme@gmail.com>
 To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
 	Linux AMDGPU <amd-gfx@lists.freedesktop.org>,
@@ -71,47 +71,48 @@ To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
 	Linux Memory Management List <linux-mm@kvack.org>,
 	Linux Network Bridge <bridge@lists.linux.dev>,
 	Linux Networking <netdev@vger.kernel.org>
-Date: Mon, 15 Dec 2025 18:38:58 +0700
-Message-ID: <20251215113903.46555-11-bagasdotme@gmail.com>
+Date: Mon, 15 Dec 2025 18:38:59 +0700
+Message-ID: <20251215113903.46555-12-bagasdotme@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20251215113903.46555-1-bagasdotme@gmail.com>
 References: <20251215113903.46555-1-bagasdotme@gmail.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1065; i=bagasdotme@gmail.com; h=from:subject; bh=UEs/C9BYSnit6YUYNsXI/TPVZ8wlbVWtOoMfZCt2Czk=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDJn2n4P/rZd71fJeeea2Y6ze7l+/BUWfvZxbPVvJ7FLhc b8Ca2nfjlIWBjEuBlkxRZZJiXxNp3cZiVxoX+sIM4eVCWQIAxenAEzkQCXDH065v1Nu7J+SJNXm fKBEpbzzpEZrbklCWe8WSUFLrulTkhn+J33s75ffwvJ3fu98iUql0+pnUqJKXmg5a8ursxTsZFv IBQA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1239; i=bagasdotme@gmail.com; h=from:subject; bh=NBybN5/snlW67CYY0LDf5z9mjlB8/ZE5MQWmfMjzEtk=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDJn2n4OX/nxidPxCa7t5fuOD8HMfrQSuP1hub/O7ZcKpR 3k2jWdLOkpZGMS4GGTFFFkmJfI1nd5lJHKhfa0jzBxWJpAhDFycAjCRtAcM/yunTjs9ydWYJypu wYcH6cfFNi1X5dYSuyPxxuv3me1JcpKMDBs+vU9uutHzrUbncPwy+73MjZlbOwIfHrr54bGU4uz aOwwA
 X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.50 / 15.00];
+X-Spamd-Result: default: False [-2.60 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_MISSING_CHARSET(0.50)[];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
 	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.214.173:from];
 	MIME_GOOD(-0.10)[text/plain];
-	RCVD_COUNT_THREE(0.00)[3];
-	RCPT_COUNT_GT_50(0.00)[86];
-	URIBL_BLOCKED(0.00)[mail-pl1-f175.google.com:rdns,mail-pl1-f175.google.com:helo];
-	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
 	FREEMAIL_FROM(0.00)[gmail.com];
-	FROM_EQ_ENVFROM(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	URIBL_BLOCKED(0.00)[mail-pl1-f173.google.com:rdns,mail-pl1-f173.google.com:helo];
+	ARC_NA(0.00)[];
+	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_THREE(0.00)[3];
 	FREEMAIL_CC(0.00)[amd.com,igalia.com,gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de,intel.com,zeniv.linux.org.uk,suse.cz,linaro.org,google.com,redhat.com,linux.alibaba.com,linux-foundation.org,blackwall.org,nvidia.com,davemloft.net,infradead.org,oracle.com,ionos.com,linux.ibm.com,arm.com,linux.dev,konsulko.se,brown.name,collabora.com,cumulusnetworks.com,208suo.com,cdjrlc.com,inspur.com,gvernon.com];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.214.175:from];
-	NEURAL_HAM(-0.00)[-1.000];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	DKIM_TRACE(0.00)[gmail.com:+];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
 	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	RCPT_COUNT_GT_50(0.00)[86];
+	BLOCKLISTDE_FAIL(0.00)[210.87.74.117:server fail];
+	NEURAL_HAM(-0.00)[-1.000];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	FROM_HAS_DN(0.00)[]
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: EB37B3F9D9
+X-Rspamd-Queue-Id: 2F705400CE
 X-Spamd-Bar: --
-Message-ID-Hash: CD6SXE6I6BO4IVICABKFFY5BSSA2XL37
-X-Message-ID-Hash: CD6SXE6I6BO4IVICABKFFY5BSSA2XL37
+Message-ID-Hash: A25UG4UWTGAZY5CP3R7JGJPUHRUO3IUF
+X-Message-ID-Hash: A25UG4UWTGAZY5CP3R7JGJPUHRUO3IUF
 X-MailFrom: bagasdotme@gmail.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
@@ -120,9 +121,9 @@ CC: Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>, Rodrig
   Vlastimil Babka <vbabka@suse.cz>, Kent Overstreet <kent.overstreet@linux.dev>, Vitaly Wool <vitaly.wool@konsulko.se>, Harry Yoo <harry.yoo@oracle.com>, Mateusz Guzik <mjguzik@gmail.com>, NeilBrown <neil@brown.name>, Amir Goldstein <amir73il@gmail.com>, Jeff Layton <jlayton@kernel.org>, Ivan Lipski <ivan.lipski@amd.com>, Tao Zhou <tao.zhou1@amd.com>, YiPeng Chai <YiPeng.Chai@amd.com>, Hawking Zhang <Hawking.Zhang@amd.com>, Lyude Paul <lyude@redhat.com>, Daniel Almeida <daniel.almeida@collabora.com>, Luben Tuikov <luben.tuikov@amd.com>, Matthew Auld <matthew.auld@intel.com>, Roopa Prabhu <roopa@cumulusnetworks.com>, Mao Zhu <zhumao001@208suo.com>, Shaomin Deng <dengshaomin@cdjrlc.com>, Charles Han <hanchunchao@inspur.com>, Jilin Yuan <yuanjilin@cdjrlc.com>, Swaraj Gaikwad <swarajgaikwad1925@gmail.com>, George Anthony Vernon <contact@gvernon.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 10/14] drm/amdgpu: Describe @AMD_IP_BLOCK_TYPE_RAS in amd_ip_block_type enum
+Subject: [Linaro-mm-sig] [PATCH 11/14] drm/gem/shmem: Describe @shmem and @size parameters
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CD6SXE6I6BO4IVICABKFFY5BSSA2XL37/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/A25UG4UWTGAZY5CP3R7JGJPUHRUO3IUF/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -132,30 +133,33 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Sphinx reports kernel-doc warning:
+Sphinx reports kernel-doc warnings:
 
-WARNING: ./drivers/gpu/drm/amd/include/amd_shared.h:113 Enum value 'AMD_IP_BLOCK_TYPE_RAS' not described in enum 'amd_ip_block_type'
+WARNING: ./drivers/gpu/drm/drm_gem_shmem_helper.c:104 function parameter 'shmem' not described in 'drm_gem_shmem_init'
+WARNING: ./drivers/gpu/drm/drm_gem_shmem_helper.c:104 function parameter 'size' not described in 'drm_gem_shmem_init'
 
-Describe the value to fix it.
+Describe the parameters.
 
-Fixes: 7169e706c82d7b ("drm/amdgpu: Add ras module ip block to amdgpu discovery")
+Fixes: e3f4bdaf2c5bfe ("drm/gem/shmem: Extract drm_gem_shmem_init() from drm_gem_shmem_create()")
 Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
 ---
- drivers/gpu/drm/amd/include/amd_shared.h | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/gpu/drm/drm_gem_shmem_helper.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/gpu/drm/amd/include/amd_shared.h b/drivers/gpu/drm/amd/include/amd_shared.h
-index 17945094a13834..d8ed3799649172 100644
---- a/drivers/gpu/drm/amd/include/amd_shared.h
-+++ b/drivers/gpu/drm/amd/include/amd_shared.h
-@@ -89,6 +89,7 @@ enum amd_apu_flags {
- * @AMD_IP_BLOCK_TYPE_VPE: Video Processing Engine
- * @AMD_IP_BLOCK_TYPE_UMSCH_MM: User Mode Scheduler for Multimedia
- * @AMD_IP_BLOCK_TYPE_ISP: Image Signal Processor
-+* @AMD_IP_BLOCK_TYPE_RAS: RAS
- * @AMD_IP_BLOCK_TYPE_NUM: Total number of IP block types
- */
- enum amd_ip_block_type {
+diff --git a/drivers/gpu/drm/drm_gem_shmem_helper.c b/drivers/gpu/drm/drm_gem_shmem_helper.c
+index 93b9cff89080f9..7f73900abcbb9d 100644
+--- a/drivers/gpu/drm/drm_gem_shmem_helper.c
++++ b/drivers/gpu/drm/drm_gem_shmem_helper.c
+@@ -96,7 +96,8 @@ static int __drm_gem_shmem_init(struct drm_device *dev, struct drm_gem_shmem_obj
+ /**
+  * drm_gem_shmem_init - Initialize an allocated object.
+  * @dev: DRM device
+- * @obj: The allocated shmem GEM object.
++ * @shmem: The allocated shmem GEM object.
++ * @size: shmem GEM object size
+  *
+  * Returns:
+  * 0 on success, or a negative error code on failure.
 -- 
 An old man doll... just what I always wanted! - Clara
 
