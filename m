@@ -2,63 +2,63 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 801DCCBD89F
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 15 Dec 2025 12:39:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id F327BCBD8C3
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 15 Dec 2025 12:39:55 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2A2AA3FDAE
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 15 Dec 2025 11:39:27 +0000 (UTC)
-Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
-	by lists.linaro.org (Postfix) with ESMTPS id B1E333F78A
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 15 Dec 2025 11:39:10 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 195BE40145
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 15 Dec 2025 11:39:55 +0000 (UTC)
+Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
+	by lists.linaro.org (Postfix) with ESMTPS id 37C213F78A
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 15 Dec 2025 11:39:12 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20230601 header.b="khmk/1kR";
-	spf=pass (lists.linaro.org: domain of bagasdotme@gmail.com designates 209.85.216.48 as permitted sender) smtp.mailfrom=bagasdotme@gmail.com;
+	dkim=pass header.d=gmail.com header.s=20230601 header.b=RImWvd8j;
+	spf=pass (lists.linaro.org: domain of bagasdotme@gmail.com designates 209.85.210.178 as permitted sender) smtp.mailfrom=bagasdotme@gmail.com;
 	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-pj1-f48.google.com with SMTP id 98e67ed59e1d1-34c565c3673so620697a91.0
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 15 Dec 2025 03:39:10 -0800 (PST)
+Received: by mail-pf1-f178.google.com with SMTP id d2e1a72fcca58-7f89d0b37f0so404919b3a.0
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 15 Dec 2025 03:39:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765798750; x=1766403550; darn=lists.linaro.org;
+        d=gmail.com; s=20230601; t=1765798751; x=1766403551; darn=lists.linaro.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=SOExJIUd6SMMpu9ecZcijfoRnX+3TKAUcxRzAMDO5OU=;
-        b=khmk/1kR/GkA5WbtS7FR8rgwQ7sxFC3ZE0bu4p2hbojePEJ4jODU+54AF84+PYpxWz
-         bzCrCc5qMVs/Y5m1YFCmTedkbfTvF0HtOOBhRTG26eotybJYCqeqEXUY2602hHFwnBsw
-         JNNsRGA9H9GKsZJinPBySFI6rKCBKpbslRUXc2lQ7dW7+Y/95+ug6rclmUZ7cmAtlnm1
-         JzHSWRwMpIdtrxHEtqdDpEbVzb55UlkdNiEzB4cDr7syO+cM/DmTqb7t5CcHPcgUw4wE
-         2YYFkHaDVJxhJR55BRLaBbnQfPZhQqdrgCsltPbG5M741XqrGmrR+BKTkqihas1Q36Ej
-         D2uw==
+        bh=H6vVzDCLpyU2LgSSSdcXlxGJ4GVOIz+XeeVoTvfPkdk=;
+        b=RImWvd8jFeJpvTB8ww1QeIXHcQcNO9WgEiVkVMish6vARPXU3K/CJPS9iYJS/G5oL/
+         lRY6SlEgHap14zqTk9n0lUoi7NEVynXHKKyWSextbab3etx8miMkK6R4l8AqhtNwshH1
+         qis+FNcjc6XQ5gE/NTtI29rMCDu2km6VA9h3JboIbg3fWhCOCLesVXY0iaUJbpjVq7mG
+         mOaNqZhq/flyhooHtR+OA2LDdRJc6TnMnPDofOcnlUkYHZ7dsP2KCDoEAvdTLMv4vyqq
+         7mmz7YtD7vAcZgakznS0ryZ526IH20+kuNoVflXf0o62K1u2oRZz/uVb5b+h0uDjLUwf
+         lGXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765798750; x=1766403550;
+        d=1e100.net; s=20230601; t=1765798751; x=1766403551;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=SOExJIUd6SMMpu9ecZcijfoRnX+3TKAUcxRzAMDO5OU=;
-        b=SgCZj95+JMmNxx8uJnFmyOQh4rxpNkKPr34ToZCuMLdfzzGAm19TOHSjoB4FYkhSpr
-         uuA0K+O4KLYEOuRv6j/kjAZzLUyTbtQcgNHZiSulW6T+7EWqVKxpiacIeSozBQWF7/xO
-         czO6tNuoGrofAvvIfnQnYfQ+vbniwR9+MpSLmOtXkkpw3YoF+gv2CK8Y6lOzRQb0nM+n
-         fl+OTzkSaBgc5t5zKTc8XKMfGO3QQtzLmfvkb3CaYoceCzqyUFvP8fCZuj9ZuptYIcrH
-         /FBeMieLTqzfmFnO5UtGQQGaRo0F84JgPSSIrIAKwcJhpxmALXYSU9bM50eEU2/wq2po
-         9tgw==
-X-Forwarded-Encrypted: i=1; AJvYcCXlYRVmq1lWWbiFiYqVdCdWN4Chb2GTqeHEZwsOX4NUUH2PB0L+uPp43wI4rbjFqGmZNO0jIQRpjyUvSpPZ@lists.linaro.org
-X-Gm-Message-State: AOJu0YxSDE2NNdiVRZrsDJtSDobyF5VbGc5TBNhDYAMRQk+Mv+pEIm+t
-	XAvN66k/f5549yz9LPY8BB5dpcJiJp4JPRcX78C39iR3n0pW+VRIGBVy
-X-Gm-Gg: AY/fxX5jw5ECsbWZdROe309MHEdiX67MCyxxBwYrNtVYix5NHP3luHwX37pom5Mc0BQ
-	bbITecL9Bz4iUbdYl1+0CzbXvA4kwGyH0gLf12UC9F0wDfiV4LGQFxXnB5Ohpu6oBEQYPZ+dV2Z
-	a9BsdIRf7UrW6p1P2ZoutYhn42xMFIFZN6Lvlf+tSc5kNjNxDQf9YYannLm70o2DoiALsLQlxAY
-	wHMl4ASX+53Jv2IuZo4kfcvJB4v+1BI6GtoCuQi5bNx0UiiYWjKNDQuwNbqjsJPKq/oZmy26hA7
-	/U/k8nT8h0RCDdWd4KtWYpOPvv/sOqqWcOj+5wWTnLKbWLf+Okb7f+bMaf815VC0T1Tmy3dEYKp
-	DAcZchIMgPBJyE3aO4RJrw91iPOp5Kk868LRIqwHJsPDGG4Slx5Tiwqs9Mfp3zwLB69ZVBG36Xe
-	77mNYOi57uwnnALMg6z4x/Lg==
-X-Google-Smtp-Source: AGHT+IEi7Much+ynnSaGi+9pLWL2hRrocApHWp5vBqFK1ft2pjcvnQtgIu8VXEyupMREgh2/mG55NA==
-X-Received: by 2002:a17:90b:2e03:b0:341:1a50:2ea9 with SMTP id 98e67ed59e1d1-34a926d9c70mr13163422a91.16.1765798749780;
-        Mon, 15 Dec 2025 03:39:09 -0800 (PST)
+        bh=H6vVzDCLpyU2LgSSSdcXlxGJ4GVOIz+XeeVoTvfPkdk=;
+        b=q9TXYrO9M9LJ1LOGs1xJs7W+ABhd4v9cjiqeUJ+hDbDNUZceu1XJ2m1Pv9FaR97hvx
+         eJeBjJLOjkWUCgC/VCsa9rTRXLVyJKjlSUc7oG27KmDrMyvH2418sjiT/tuYcqnuhL8w
+         AxpSzwRnPv1n5DqaKPdGEGO15tZjg6g9bEJi1J4Zqdue3X0rtPy2X20u3kmU5mYHg1Zs
+         cDscFJYoGEvFfUkAtjO2biFc5JJ6Zv7VxBbQPtblpEsg09ctKKDIG7VqSImh75wRaWyM
+         6NR5GNXV0QPdwfYu7/R1ejgREWyj90glEMqfi41tpYq2TwfvdHgBEViuZCEqe5iIYTjP
+         ZXYQ==
+X-Forwarded-Encrypted: i=1; AJvYcCWFUkeAe6vbcWWbhVsDLh10fG7VNJD8naiyt7N2J/YlR6UWMbr4YLHQuiMr3l4t7K4LkuGLetv3tjNjwEa2@lists.linaro.org
+X-Gm-Message-State: AOJu0YyNdcsdXpQEWWq0Y03xbRPzD/KpQr+CjGyVjfNYsmgAIdWvdBUc
+	YiI1xOFHLKb1W5AXYEHPnBdophj5ADXlITm82sxBhX/pAsVHpXZyzsNU
+X-Gm-Gg: AY/fxX4C4A675eacGknZ+TlfZgGWUztGE2F1eWi+9eUDsmzVMUlKCgXWuv+zMn9gpjo
+	4uZl7mQMryRRPUvP/d4dV6YGc/vR6nd8nrMOzU8FZOyjl1KhqMKFZCDYkE5xk2r1iV+qFs+qKv5
+	aAOUgWG+A77bEnzu0cZAfcpNFPL3LmO99dvEXl4GA7uJXOovXq42A1TNnP4lQP1+/pSirdbDiRG
+	qCkwrThFgYnihC773OTlRMLvjS2OJ+Ej4L8oWDQl3UdgaAmqTC7uhJ5w5WkY0+BEKAUxM8dnJjD
+	kpkTuz+vHIqgHsaZy2T7C5/pkio9svnAMh+MWo4bECd9naxIYD9W6mt0Ts6lVr3z1kSDzL0Qt9v
+	QPHrznlcJQWBZV1io46KqopTInE0aMcavgBzv4XXkVC7zGvFHBgWWEpPPLCHE6Z+CeRYOxKFPMV
+	OxPjQwsS03r8U=
+X-Google-Smtp-Source: AGHT+IFlU3I+cKXX8C9kVGFzGiJyAz7/LTk2+tkj0Oiyk+q1A92AqVW93jQniiO/3heM3uCR/CKzzA==
+X-Received: by 2002:a05:6a20:728e:b0:366:14b0:4b16 with SMTP id adf61e73a8af0-369aa740ecamr11005465637.33.1765798751132;
+        Mon, 15 Dec 2025 03:39:11 -0800 (PST)
 Received: from archie.me ([210.87.74.117])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-34abe294a00sm9273005a91.12.2025.12.15.03.39.07
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29ee9b3850csm133388085ad.17.2025.12.15.03.39.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 15 Dec 2025 03:39:08 -0800 (PST)
+        Mon, 15 Dec 2025 03:39:10 -0800 (PST)
 Received: by archie.me (Postfix, from userid 1000)
-	id EAE05444B390; Mon, 15 Dec 2025 18:39:05 +0700 (WIB)
+	id 1D26D444B391; Mon, 15 Dec 2025 18:39:05 +0700 (WIB)
 From: Bagas Sanjaya <bagasdotme@gmail.com>
 To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
 	Linux AMDGPU <amd-gfx@lists.freedesktop.org>,
@@ -71,23 +71,23 @@ To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
 	Linux Memory Management List <linux-mm@kvack.org>,
 	Linux Network Bridge <bridge@lists.linux.dev>,
 	Linux Networking <netdev@vger.kernel.org>
-Date: Mon, 15 Dec 2025 18:38:49 +0700
-Message-ID: <20251215113903.46555-2-bagasdotme@gmail.com>
+Date: Mon, 15 Dec 2025 18:38:50 +0700
+Message-ID: <20251215113903.46555-3-bagasdotme@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20251215113903.46555-1-bagasdotme@gmail.com>
 References: <20251215113903.46555-1-bagasdotme@gmail.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=962; i=bagasdotme@gmail.com; h=from:subject; bh=yvRLY8BHqBHKchvPjcPm3zDNVddYxArgXi7Qv6PDXBI=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDJn2n4MeLjlRVOvo/zL51uM7fT8nbubcy37qLGeos8/kb VKe75YIdJSyMIhxMciKKbJMSuRrOr3LSORC+1pHmDmsTCBDGLg4BWAiGosZ/mm4fru/UqLr5XIZ H96Qry1BDLd3LedR2Gkharj+Q1jej2pGhm7zlf21hfvmpVcxGBvN2yCmrfs71+wCw2eFqbVucQl NvAA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=950; i=bagasdotme@gmail.com; h=from:subject; bh=zaXx2zRxHwtjfsFTgY05kdIMv0UeQBx9b1FFiByYYYk=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDJn2n4N0b+unPg8UXJx6+/+iP9I7pV1rdBYrPMm9NqGYl enCm2OnOkpZGMS4GGTFFFkmJfI1nd5lJHKhfa0jzBxWJpAhDFycAjCR246MDN8qzkf5GvF8u6h8 fK78A+u9Z2vjTS5MNJ2mcnT+/S07J0sxMvTNsLugLdEgeebaKl/Lt7ZFnv2pX8UvGPzINA+RNZw /gQsA
 X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-2.60 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
+	BAYES_HAM(-3.00)[100.00%];
 	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.216.48:from];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.210.178:from];
 	MIME_GOOD(-0.10)[text/plain];
 	MIME_TRACE(0.00)[0:+];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
@@ -107,10 +107,10 @@ X-Spamd-Result: default: False [-2.60 / 15.00];
 	RCVD_COUNT_THREE(0.00)[3];
 	DKIM_TRACE(0.00)[gmail.com:+]
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: B1E333F78A
+X-Rspamd-Queue-Id: 37C213F78A
 X-Spamd-Bar: --
-Message-ID-Hash: Q7726FTYVCJZPEV665DW7OBXBNR6CZGJ
-X-Message-ID-Hash: Q7726FTYVCJZPEV665DW7OBXBNR6CZGJ
+Message-ID-Hash: KQYP7TJQMIBDXPWMPOHBUGE66MMHWCWV
+X-Message-ID-Hash: KQYP7TJQMIBDXPWMPOHBUGE66MMHWCWV
 X-MailFrom: bagasdotme@gmail.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
@@ -119,9 +119,9 @@ CC: Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>, Rodrig
   Vlastimil Babka <vbabka@suse.cz>, Kent Overstreet <kent.overstreet@linux.dev>, Vitaly Wool <vitaly.wool@konsulko.se>, Harry Yoo <harry.yoo@oracle.com>, Mateusz Guzik <mjguzik@gmail.com>, NeilBrown <neil@brown.name>, Amir Goldstein <amir73il@gmail.com>, Jeff Layton <jlayton@kernel.org>, Ivan Lipski <ivan.lipski@amd.com>, Tao Zhou <tao.zhou1@amd.com>, YiPeng Chai <YiPeng.Chai@amd.com>, Hawking Zhang <Hawking.Zhang@amd.com>, Lyude Paul <lyude@redhat.com>, Daniel Almeida <daniel.almeida@collabora.com>, Luben Tuikov <luben.tuikov@amd.com>, Matthew Auld <matthew.auld@intel.com>, Roopa Prabhu <roopa@cumulusnetworks.com>, Mao Zhu <zhumao001@208suo.com>, Shaomin Deng <dengshaomin@cdjrlc.com>, Charles Han <hanchunchao@inspur.com>, Jilin Yuan <yuanjilin@cdjrlc.com>, Swaraj Gaikwad <swarajgaikwad1925@gmail.com>, George Anthony Vernon <contact@gvernon.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 01/14] genalloc: Describe @start_addr parameter in genpool_algo_t
+Subject: [Linaro-mm-sig] [PATCH 02/14] mm: Describe @flags parameter in memalloc_flags_save()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/Q7726FTYVCJZPEV665DW7OBXBNR6CZGJ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KQYP7TJQMIBDXPWMPOHBUGE66MMHWCWV/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -133,28 +133,28 @@ Content-Transfer-Encoding: 7bit
 
 Sphinx reports kernel-doc warning:
 
-WARNING: ./include/linux/genalloc.h:52 function parameter 'start_addr' not described in 'genpool_algo_t'
+WARNING: ./include/linux/sched/mm.h:332 function parameter 'flags' not described in 'memalloc_flags_save'
 
-Describe @start_addr to fix it.
+Describe @flags to fix it.
 
-Fixes: 52fbf1134d4792 ("lib/genalloc.c: fix allocation of aligned buffer from non-aligned chunk")
+Fixes: 3f6d5e6a468d02 ("mm: introduce memalloc_flags_{save,restore}")
 Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
 ---
- include/linux/genalloc.h | 1 +
+ include/linux/sched/mm.h | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/include/linux/genalloc.h b/include/linux/genalloc.h
-index 0bd581003cd5df..0ee23ddd0acd3a 100644
---- a/include/linux/genalloc.h
-+++ b/include/linux/genalloc.h
-@@ -44,6 +44,7 @@ struct gen_pool;
-  * @nr: The number of zeroed bits we're looking for
-  * @data: optional additional data used by the callback
-  * @pool: the pool being allocated from
-+ * @start_addr: chunk start address
-  */
- typedef unsigned long (*genpool_algo_t)(unsigned long *map,
- 			unsigned long size,
+diff --git a/include/linux/sched/mm.h b/include/linux/sched/mm.h
+index 0e1d73955fa511..95d0040df58413 100644
+--- a/include/linux/sched/mm.h
++++ b/include/linux/sched/mm.h
+@@ -325,6 +325,7 @@ static inline void might_alloc(gfp_t gfp_mask)
+ 
+ /**
+  * memalloc_flags_save - Add a PF_* flag to current->flags, save old value
++ * @flags: Flags to add.
+  *
+  * This allows PF_* flags to be conveniently added, irrespective of current
+  * value, and then the old version restored with memalloc_flags_restore().
 -- 
 An old man doll... just what I always wanted! - Clara
 
