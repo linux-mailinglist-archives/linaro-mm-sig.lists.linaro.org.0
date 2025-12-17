@@ -2,145 +2,167 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WNI9EIgJ4WnoogAAu9opvQ
+	id AHf5KpcJ4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:08:40 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:08:55 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id E8CA14115D6
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:08:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 639484115ED
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:08:55 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0115540508
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:08:39 +0000 (UTC)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
-	by lists.linaro.org (Postfix) with ESMTPS id 6BFFA3F8EF
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 17 Dec 2025 00:10:14 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 68F7F40500
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:08:54 +0000 (UTC)
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+	by lists.linaro.org (Postfix) with ESMTPS id EBE403F8EF
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 17 Dec 2025 10:25:28 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=ZirnAmXZ;
-	spf=pass (lists.linaro.org: domain of david@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=david@kernel.org;
-	dmarc=pass (policy=quarantine) header.from=kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by tor.source.kernel.org (Postfix) with ESMTP id 2A7AC60137;
-	Wed, 17 Dec 2025 00:10:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E25A3C4CEF1;
-	Wed, 17 Dec 2025 00:09:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1765930213;
-	bh=IYStEoceGdUEi75BLoyEocdK6CZd2MmP8jcIyjKww1A=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=ZirnAmXZntKqQ0k4HUVwGi1YqYVeSoRhusTvAg73iV3t9VVhPLhTsXP1tLDbaSb3X
-	 apvbKAHL3nFZTB2DUvWUBOX+UygqSJYs36Bd1f/rfWT+X9JMBmkS+Z4Wsm60tfypPv
-	 GS7Tpivbn3/VRYA1dgSeETWVHA1rgJBpOT1XBDXFvwhAlgRHtrUpCfUpnd2vhbxQ9J
-	 GuBCrHKguP92bD8aEvceF0rTOXp/QF/r7HHua7AwcZZXwfttaEectmb6IpwvlGO7ty
-	 at+2FhZS6ng5dxpbwMuR7D3MansmP2/DRx7Hi/COKlO2DR5FQE+MxflxWjz660r+Gi
-	 JlpZXjBBbQaqw==
-Message-ID: <56acbfc1-51d7-4245-91ea-45bd9e4b2e29@kernel.org>
-Date: Wed, 17 Dec 2025 01:09:53 +0100
+	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=MnTyjjuM;
+	spf=pass (lists.linaro.org: domain of lbulwahn@redhat.com designates 170.10.129.124 as permitted sender) smtp.mailfrom=lbulwahn@redhat.com;
+	dmarc=pass (policy=quarantine) header.from=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1765967128;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=smHdiTegAULuGhXNBZg/bX/26IPaO/x2LiGtrg1VjdM=;
+	b=MnTyjjuMf7e1dHMhG/Ca2U7O25YbWRlmao6fKkoX4QeKmPnh6gUq9Lhe3cATD9ItQ6OecL
+	ExUXSdYLBWSuRhJur8QHKRn03uyLYoWE4kans1AXQmrCM9Yf8Q1Uoqx0BEVc4v5/mmutG5
+	AUyeLbYhqw03E5SwG9VvaQBAQP5UQdg=
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-441-w8BuovdROg-n406CuoR6Ug-1; Wed, 17 Dec 2025 05:25:27 -0500
+X-MC-Unique: w8BuovdROg-n406CuoR6Ug-1
+X-Mimecast-MFC-AGG-ID: w8BuovdROg-n406CuoR6Ug_1765967126
+Received: by mail-wm1-f71.google.com with SMTP id 5b1f17b1804b1-4775f51ce36so44603265e9.1
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 17 Dec 2025 02:25:26 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1765967126; x=1766571926;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=smHdiTegAULuGhXNBZg/bX/26IPaO/x2LiGtrg1VjdM=;
+        b=BRuyMX+FWsrnNf0NUBkzPeVq/D8+RaFnrxNuBuIr4SZQd+sPeZhqC4qC5BHglsUUgV
+         gJamZEoswBllZAYpTpSbRyUkM4BY6nkwMmUEoWN5JOVRmrTLxXn2uaPotfrq8BziPcsz
+         mTOPFWJtBwuNuNz2VEn2GY0DJja+Lat0+2v8FD5ArSIggPW8jMgJ/bZJ9DW/Ri4DBwB2
+         olhz/TGteCErh16Rb8pL6tKKCat5Lyv8/m95wb+BUYLdOES1MkyNaQPFM5zx0g+JvS4z
+         y8BR2O8NDKekZ8PRdJpyhybS734BDhyguwm3eI3x2tedFi6s/BIKA/qqGo5kG62EKcpN
+         Nolg==
+X-Forwarded-Encrypted: i=1; AJvYcCWHKSYzpuxLYpA9mA9aO/ChZQ4FGLA1LWUzACNg4VSSBRw5ejA+THayV+diPP0ItQHMYLyOzvcteaQb7xS/@lists.linaro.org
+X-Gm-Message-State: AOJu0YxhhbJvr9/NjMdFBgDjIJzHcpg4y+wmz5CCTC+C14sC+FP3/Nm7
+	t8xXr+XBxffjB6PSew974b2Vj52/uTMwJwcqSAlA+JJ0abBq5X/wC9C9FCPPsrW+hR99LaXmYSl
+	17CH8l8oLLp9LR9xAQ6pXrlOm4CqMkVKAlxi6K4ZHW8bYCJOt0d25YZj1yqN+NZaUnizY
+X-Gm-Gg: AY/fxX7WV1xVmbeJ+hVOx96mEb7rGeCmebU+FS74yFfJObDRS0316A6KndPN8cVu32q
+	O6iaPf1Nz5xGGboNvfV66pi1BeYQt4sVAAXXc8u8mkuq6S8U1JHjjhfo6HiM8By0d2t94nfXQLz
+	nXCn6MKY3oFQSfum2HFDbVPwnTS3w6DAZ96XZsp/uDxh//XJ4N1hYXTxpa/ORCeEZ80cF45YYUP
+	LsNxK+uHmgn5xfedbnYOpihof56dZBne3aTvIftaxqDkCfHKGJaaLtO0BtFfzEmxlwz1uQjxmPm
+	ifmS/njY1+jn2Eig32X0Eu3nJnwvBGbjHVBTDrXKRicwIUTbCgfSDXxVuoe40vuVg4YV6nHv92r
+	BKmlbgGXkO0h6eWSEaDkmlP7shEeozQ1/9MUUYOsfvktQJ8vzHALs4NcrEuo=
+X-Received: by 2002:a05:600c:5254:b0:46e:37fe:f0e6 with SMTP id 5b1f17b1804b1-47a8f90d28bmr183475065e9.30.1765967125964;
+        Wed, 17 Dec 2025 02:25:25 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHv94oYFukoKO/fNpwSZWIAqty2A+HqHfndysVYm5pmz3lseu6l1OSQncA0MKLpd0JpALSjTg==
+X-Received: by 2002:a05:600c:5254:b0:46e:37fe:f0e6 with SMTP id 5b1f17b1804b1-47a8f90d28bmr183474695e9.30.1765967125517;
+        Wed, 17 Dec 2025 02:25:25 -0800 (PST)
+Received: from lbulwahn-thinkpadx1carbongen12.rmtde.csb ([2a02:810d:7e01:ef00:1622:5a48:afdc:799f])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47bdc1e6ca3sm30491045e9.12.2025.12.17.02.25.24
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 17 Dec 2025 02:25:24 -0800 (PST)
+From: Lukas Bulwahn <lbulwahn@redhat.com>
+X-Google-Original-From: Lukas Bulwahn <lukas.bulwahn@redhat.com>
+To: Sumit Semwal <sumit.semwal@linaro.org>,
+	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+	"Michael J . Ruhl" <michael.j.ruhl@intel.com>,
+	linux-media@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	linaro-mm-sig@lists.linaro.org
+Date: Wed, 17 Dec 2025 11:25:22 +0100
+Message-ID: <20251217102522.2790298-1-lukas.bulwahn@redhat.com>
+X-Mailer: git-send-email 2.51.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Bagas Sanjaya <bagasdotme@gmail.com>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Linux AMDGPU <amd-gfx@lists.freedesktop.org>,
- Linux DRI Development <dri-devel@lists.freedesktop.org>,
- Linux Filesystems Development <linux-fsdevel@vger.kernel.org>,
- Linux Media <linux-media@vger.kernel.org>, linaro-mm-sig@lists.linaro.org,
- kasan-dev@googlegroups.com,
- Linux Virtualization <virtualization@lists.linux.dev>,
- Linux Memory Management List <linux-mm@kvack.org>,
- Linux Network Bridge <bridge@lists.linux.dev>,
- Linux Networking <netdev@vger.kernel.org>
-References: <20251215113903.46555-1-bagasdotme@gmail.com>
- <20251215113903.46555-6-bagasdotme@gmail.com>
-From: "David Hildenbrand (Red Hat)" <david@kernel.org>
-Content-Language: en-US
-In-Reply-To: <20251215113903.46555-6-bagasdotme@gmail.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: 5exX32yv6BoKeVYc34bfxAGBPSMmFsYl2gCkv-k8j_A_1765967126
+X-Mimecast-Originator: redhat.com
 X-Spamd-Bar: ----
-X-MailFrom: david@kernel.org
+X-MailFrom: lbulwahn@redhat.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 4KFD7ZOFEERZS2JVJT4QJBETPFVXUPZJ
-X-Message-ID-Hash: 4KFD7ZOFEERZS2JVJT4QJBETPFVXUPZJ
-X-Mailman-Approved-At: Thu, 16 Apr 2026 16:04:49 +0000
-CC: Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>, Rodrigo Siqueira <siqueira@igalia.com>, Alex Deucher <alexander.deucher@amd.com>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Matthew Brost <matthew.brost@intel.com>, Danilo Krummrich <dakr@kernel.org>, Philipp Stanner <phasta@kernel.org>, Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>, Sumit Semwal <sumit.semwal@linaro.org>, Alexander Potapenko <glider@google.com>, Marco Elver <elver@google.com>, Dmitry Vyukov <dvyukov@google.com>, "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>, Xuan Zhuo <xuanzhuo@linux.alibaba.com>, =?UTF-8?Q?Eugenio_P=C3=A9rez?= <eperezma@redhat.com>, Andrew Morton <akpm@linux-foundation.org>, Ul
- adzislau Rezki <urezki@gmail.com>, Nikolay Aleksandrov <razor@blackwall.org>, Ido Schimmel <idosch@nvidia.com>, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, Taimur Hassan <Syed.Hassan@amd.com>, Wayne Lin <Wayne.Lin@amd.com>, Alex Hung <alex.hung@amd.com>, Aurabindo Pillai <aurabindo.pillai@amd.com>, Dillon Varone <Dillon.Varone@amd.com>, George Shen <george.shen@amd.com>, Aric Cyr <aric.cyr@amd.com>, Cruise Hung <Cruise.Hung@amd.com>, Mario Limonciello <mario.limonciello@amd.com>, Sunil Khatri <sunil.khatri@amd.com>, Dominik Kaszewski <dominik.kaszewski@amd.com>, Peter Zijlstra <peterz@infradead.org>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, Max Kellermann <max.kellermann@ionos.com>, "Nysal Jan K.A." <nysal@linux.ibm.com>, Ryan Roberts <ryan.roberts@arm.com>, Alexey Skidanov <alexey.skidanov@intel.com>, Vlastimil Babka <vbabka@suse.cz>, Kent Overst
- reet <kent.overstreet@linux.dev>, Vitaly Wool <vitaly.wool@konsulko.se>, Harry Yoo <harry.yoo@oracle.com>, Mateusz Guzik <mjguzik@gmail.com>, NeilBrown <neil@brown.name>, Amir Goldstein <amir73il@gmail.com>, Jeff Layton <jlayton@kernel.org>, Ivan Lipski <ivan.lipski@amd.com>, Tao Zhou <tao.zhou1@amd.com>, YiPeng Chai <YiPeng.Chai@amd.com>, Hawking Zhang <Hawking.Zhang@amd.com>, Lyude Paul <lyude@redhat.com>, Daniel Almeida <daniel.almeida@collabora.com>, Luben Tuikov <luben.tuikov@amd.com>, Matthew Auld <matthew.auld@intel.com>, Roopa Prabhu <roopa@cumulusnetworks.com>, Mao Zhu <zhumao001@208suo.com>, Shaomin Deng <dengshaomin@cdjrlc.com>, Charles Han <hanchunchao@inspur.com>, Jilin Yuan <yuanjilin@cdjrlc.com>, Swaraj Gaikwad <swarajgaikwad1925@gmail.com>, George Anthony Vernon <contact@gvernon.com>
+Message-ID-Hash: AXNMON3QCOUAD7SSXH473FRMASUILI3U
+X-Message-ID-Hash: AXNMON3QCOUAD7SSXH473FRMASUILI3U
+X-Mailman-Approved-At: Thu, 16 Apr 2026 16:04:50 +0000
+CC: kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org, Lukas Bulwahn <lukas.bulwahn@redhat.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 05/14] mm, kfence: Describe @slab parameter in __kfence_obj_info()
+Subject: [Linaro-mm-sig] [PATCH] dma-buf: really enable DMABUF_DEBUG by default on DEBUG kernels
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4KFD7ZOFEERZS2JVJT4QJBETPFVXUPZJ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AXNMON3QCOUAD7SSXH473FRMASUILI3U/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Type: text/plain; charset="us-ascii"; x-default="true"
 Content-Transfer-Encoding: 7bit
 X-Spamd-Result: default: False [2.99 / 15.00];
-	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
-	R_DKIM_REJECT(1.00)[kernel.org:s=k20201202];
-	DATE_IN_PAST(1.00)[2895];
-	MAILLIST(-0.20)[mailman];
+	DMARC_POLICY_QUARANTINE(1.50)[redhat.com : SPF not aligned (relaxed),quarantine];
+	DATE_IN_PAST(1.00)[2885];
+	R_DKIM_REJECT(1.00)[redhat.com:s=mimecast20190719];
 	R_SPF_ALLOW(-0.20)[+mx:c];
+	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FREEMAIL_TO(0.00)[gmail.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,googlegroups.com,lists.linux.dev,kvack.org];
-	FREEMAIL_CC(0.00)[amd.com,igalia.com,gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de,intel.com,zeniv.linux.org.uk,suse.cz,linaro.org,google.com,redhat.com,linux.alibaba.com,linux-foundation.org,blackwall.org,nvidia.com,davemloft.net,infradead.org,oracle.com,ionos.com,linux.ibm.com,arm.com,linux.dev,konsulko.se,brown.name,collabora.com,cumulusnetworks.com,208suo.com,cdjrlc.com,inspur.com,gvernon.com];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
+	DKIM_TRACE(0.00)[redhat.com:-];
 	FROM_HAS_DN(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	ARC_NA(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.587];
-	RCPT_COUNT_GT_50(0.00)[85];
-	FROM_NEQ_ENVFROM(0.00)[david@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
-	DKIM_TRACE(0.00)[kernel.org:-];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[lbulwahn@redhat.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.846];
+	RCPT_COUNT_SEVEN(0.00)[9];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: E8CA14115D6
+X-Rspamd-Queue-Id: 639484115ED
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On 12/15/25 12:38, Bagas Sanjaya wrote:
-> Sphinx reports kernel-doc warning:
-> 
-> WARNING: ./include/linux/kfence.h:220 function parameter 'slab' not described in '__kfence_obj_info'
-> 
-> Fix it by describing @slab parameter.
-> 
-> Fixes: 2dfe63e61cc31e ("mm, kfence: support kmem_dump_obj() for KFENCE objects")
-> Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
-> ---
->   include/linux/kfence.h | 1 +
->   1 file changed, 1 insertion(+)
-> 
-> diff --git a/include/linux/kfence.h b/include/linux/kfence.h
-> index 0ad1ddbb8b996a..e5822f6e7f2794 100644
-> --- a/include/linux/kfence.h
-> +++ b/include/linux/kfence.h
-> @@ -211,6 +211,7 @@ struct kmem_obj_info;
->    * __kfence_obj_info() - fill kmem_obj_info struct
->    * @kpp: kmem_obj_info to be filled
->    * @object: the object
-> + * @slab: the slab
->    *
->    * Return:
->    * * false - not a KFENCE object
+From: Lukas Bulwahn <lukas.bulwahn@redhat.com>
 
-Acked-by: David Hildenbrand (Red Hat) <david@kernel.org>
+The intent of commit 646013f513f3 ("dma-buf: enable DMABUF_DEBUG by default
+on DEBUG kernels") is clear, but it mixes up the config option name. The
+config option for kernel debugging is named DEBUG_KERNEL, not DEBUG.
 
+Fix up the DMABUF_DEBUG definition to use the intended name.
+
+Fixes: 646013f513f3 ("dma-buf: enable DMABUF_DEBUG by default on DEBUG kernels")
+Signed-off-by: Lukas Bulwahn <lukas.bulwahn@redhat.com>
+---
+ drivers/dma-buf/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/dma-buf/Kconfig b/drivers/dma-buf/Kconfig
+index fdd823e446cc..426c9ad3364f 100644
+--- a/drivers/dma-buf/Kconfig
++++ b/drivers/dma-buf/Kconfig
+@@ -55,7 +55,7 @@ config DMABUF_MOVE_NOTIFY
+ config DMABUF_DEBUG
+ 	bool "DMA-BUF debug checks"
+ 	depends on DMA_SHARED_BUFFER
+-	default y if DEBUG
++	default y if DEBUG_KERNEL
+ 	help
+ 	  This option enables additional checks for DMA-BUF importers and
+ 	  exporters. Specifically it validates that importers do not peek at the
 -- 
-Cheers
+2.51.1
 
-David
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
