@@ -2,234 +2,191 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id yBxRAYUK4WnoogAAu9opvQ
+	id 4M2IGY0K4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:12:53 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:13:01 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id CC511411709
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:12:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1EAC6411710
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:13:01 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DEA3F443EE
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:12:51 +0000 (UTC)
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	by lists.linaro.org (Postfix) with ESMTPS id 597D03F789
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 19 Dec 2025 15:59:05 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 39FBB40A5D
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:13:00 +0000 (UTC)
+Received: from mail-wm1-f73.google.com (mail-wm1-f73.google.com [209.85.128.73])
+	by lists.linaro.org (Postfix) with ESMTPS id ABB224013F
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 20 Dec 2025 09:48:19 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=OyuHZIEK;
-	dkim=pass header.d=redhat.com header.s=google header.b=cQJ8Fc58;
-	spf=pass (lists.linaro.org: domain of mripard@redhat.com designates 170.10.133.124 as permitted sender) smtp.mailfrom=mripard@redhat.com;
-	dmarc=pass (policy=quarantine) header.from=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1766159945;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=NuVKMRCOXiL/q8JSNbJx7Vrep0Xak1sDKET9rwhN+f4=;
-	b=OyuHZIEKOnyfHa/vpYEk6ZyMvAfy8VigjrgqwaEa/wQKOO4d0gKBOKYEnA86aQJ+KN9gV9
-	ggRJapH84X+KQuCDTPJ3YBq+/mJRN845FLOVNN7SDAVveV6x/4tBfvDkfv1H23G0olb/Yo
-	70VZup5SY3ehCfEzQrJZki5pHUZDSsg=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-518-HF9e8erMMAqsJhRW0TUU9Q-1; Fri, 19 Dec 2025 10:59:01 -0500
-X-MC-Unique: HF9e8erMMAqsJhRW0TUU9Q-1
-X-Mimecast-MFC-AGG-ID: HF9e8erMMAqsJhRW0TUU9Q_1766159940
-Received: by mail-wr1-f70.google.com with SMTP id ffacd0b85a97d-430fdc1fff8so969338f8f.3
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 19 Dec 2025 07:59:01 -0800 (PST)
+	dkim=pass header.d=google.com header.s=20230601 header.b=CfQYY7HA;
+	spf=pass (lists.linaro.org: domain of 34nBGaQkKDS8LWTNPcjSWRZZRWP.NZXWTYLcZ-XX-dTRWTded.WTYLcZ.ZcR@flex--aliceryhl.bounces.google.com designates 209.85.128.73 as permitted sender) smtp.mailfrom=34nBGaQkKDS8LWTNPcjSWRZZRWP.NZXWTYLcZ-XX-dTRWTded.WTYLcZ.ZcR@flex--aliceryhl.bounces.google.com;
+	dmarc=pass (policy=reject) header.from=google.com
+Received: by mail-wm1-f73.google.com with SMTP id 5b1f17b1804b1-477c49f273fso32938045e9.3
+        for <linaro-mm-sig@lists.linaro.org>; Sat, 20 Dec 2025 01:48:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1766159940; x=1766764740; darn=lists.linaro.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=NuVKMRCOXiL/q8JSNbJx7Vrep0Xak1sDKET9rwhN+f4=;
-        b=cQJ8Fc58CLVih3saPemcOZQf1jrEbh8jrOWTOv3keZOehlxAh+QNCwHkl4sTbA9qeS
-         qwBrc/h36TYoItcNBkjNsLuQfI+OZfw9vscqj4cNPEWNXOIc6uS3YDMMR2r+nOWKAEMl
-         0kl0SFH3prgjI5KfQM9SXBc7oX6Ejq9TLUDmkEnYEQ0d5EeF1WgXjBySRjt1O9CxFzhy
-         1j8RlNFGqr9pNa7YKvPIdZQ/1yJmlBhivqf2R230hss8eYX4tFZY0oHMOldWh7Ah3cKA
-         8fnill7j2FMXbDSEnJGNQ0CtgUPckGbD4k71MFh9VJBVEAajMtAVjm7javJ0lJx2d+yk
-         AIdg==
+        d=google.com; s=20230601; t=1766224099; x=1766828899; darn=lists.linaro.org;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:from:to:cc:subject:date:message-id:reply-to;
+        bh=qOW4PnpVwJ1a1ow90wBbPY5V5qFqMGNXJlCYoRRToZ8=;
+        b=CfQYY7HACckW0lKoLfNBv3H6s6+ZZG6buBwynYRwPO3XlFpVPIP9Y4qbXXT9Uj6bXJ
+         EyjGFEZ0AhgE/2U4EnBgPHuH1Iw8KQCjJtmai1kWcXaZcAwahaDnsF6dEEIKFi0gTpoB
+         dhEIVWrNY6vAVIrHYbieZQBCRl+HYTiUnqOxyocrVgrq/xQr+u5XsugMrHdOXuDV5zHj
+         a1Mu14+bK0JKcgfWO5i03bc3zsJZwu/mFHESnUR051yVS8MD4DjpXqrLKWdWIyGX4WmN
+         BJEK7eXCTuE8U5CitqakeHx35OmxzKGMrXfWdbFdB2m41dVF4rOJaJ1b9Xyrn8cz2/pJ
+         nzUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766159940; x=1766764740;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=NuVKMRCOXiL/q8JSNbJx7Vrep0Xak1sDKET9rwhN+f4=;
-        b=CY/Z3jJsCiYl7lV+qkGtjqWL55bd+OUrWJa6jMtmktMYi6QM3+EU5K7ABI+YkFrHtM
-         r+a0bEDb2coHLeJcduif7sR7qht3eeoGlGoqGQzkb0UJAoyihIS/BlT4V3R2ufcMernL
-         X7tOxzYoKlod2bQMs8ZEowBA+omIM4BdAkbL1KrYdOEqrF6dLrPxW4FB1ViSCmNJJdLP
-         5vtvttgPvMk6RZRK/Cu8P0nXhdTamiT2ZC3zarGBtqQOEBczfUk3Fw49fn42s0bc3UKu
-         Mk6/rPFW0HY5zBJ9xWDFWICAE8PYdH73I3J5WXmEdlgYhBEu/jXdeRt8Bd+gYhE8U5QE
-         /JLQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXtI4uDiYALGL9jWqlLpwCnbDIilRsmOyaLpJ+uAoDI7p2s2BaCXOXEivQs+u8GNhNFnSQ4o+J2Co2cLkMY@lists.linaro.org
-X-Gm-Message-State: AOJu0YziRB4trN3CBAiSdUEPY6zNtqUzp8Shbtch9qytrBjz2HmsheG3
-	Kkjjlr2Mmm7+ZW7GRnV1CqRs19/ApqGn/Zf9zObJHBYainbbAWjsT16rd1xrNhBYK+uFLEZii5P
-	kqNQt4Zd/BgFu+LDzFh3QoqkSGqQcbhIO5gf0veZRI+/nqr+UMZDBdOF2PU7j41hBzg00
-X-Gm-Gg: AY/fxX73SFKsWLj25T8Fj414azZXK+0QstnU6OVeH0H1dMvQoFS3uwDzkwCrr2iD/Vt
-	9TzYJsoJ2WoN3yXfRRqpr91l7NUw2ozFkY7CgD6fLzylAfok7J96e6sxkwU5SlsT3B4im99ct6g
-	PiS0NbCnIQKIEqa+aN0/BfL9qpYnjWTaBX9+njOyxWWpg+c9e39IpNkJUf2B5PTBHr3mKi8+gS+
-	ZJnr70lm46c1eQQ+TcITs4pDhR4BIsHmi4OExAOjR8tR0BR6dQI4+zusxcJkvwwWd7ly7kQcTZ7
-	g8ZVapV39BLIqXaAzkBa1ZtCQy4GKJYRbIwNzehd3UkW9u0Gbb+tkFq4pf5TXA==
-X-Received: by 2002:a05:600c:8710:b0:475:da13:2568 with SMTP id 5b1f17b1804b1-47d19592102mr31215145e9.25.1766159940203;
-        Fri, 19 Dec 2025 07:59:00 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGz4saKUE5xlJBqdu6Gk7rmDOjerDoiXpYwJNHDHvTSpuZXU0uy6ESaJF6LqfbEUnkQVRXGsw==
-X-Received: by 2002:a05:600c:8710:b0:475:da13:2568 with SMTP id 5b1f17b1804b1-47d19592102mr31214855e9.25.1766159939720;
-        Fri, 19 Dec 2025 07:58:59 -0800 (PST)
-Received: from localhost ([2a01:e0a:b25:f902::ff])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47d192e88f5sm49165545e9.0.2025.12.19.07.58.58
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 19 Dec 2025 07:58:59 -0800 (PST)
-Date: Fri, 19 Dec 2025 16:58:58 +0100
-From: Maxime Ripard <mripard@redhat.com>
-To: Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>
-Message-ID: <20251219-cuddly-platinum-cormorant-ae6d0e@houat>
-References: <20251211193106.755485-2-echanude@redhat.com>
- <CABdmKX2MPhw121ZG8V+f-XoOReUsCdmcug-cWDg=3WZcJ=NHHA@mail.gmail.com>
- <20251215-sepia-husky-of-eternity-ecf0ce@penduick>
- <07cdcce2-7724-4fe9-8032-258f6161e71d@amd.com>
- <20251215-garnet-cheetah-of-adventure-ca6fdc@penduick>
- <ef52d9e9-6abe-421a-98f8-f96353652e1e@amd.com>
- <20251219-large-daffy-monkey-74665d@houat>
- <5eda1755-865c-4bb0-a1a0-a4e6dac5388c@amd.com>
-MIME-Version: 1.0
-In-Reply-To: <5eda1755-865c-4bb0-a1a0-a4e6dac5388c@amd.com>
-X-Spamd-Bar: -----
-X-MailFrom: mripard@redhat.com
+        d=1e100.net; s=20230601; t=1766224099; x=1766828899;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=qOW4PnpVwJ1a1ow90wBbPY5V5qFqMGNXJlCYoRRToZ8=;
+        b=LEjApcinq6cbaSjMqok7fQiBbq6LWrmnUxfVx71bLZwo2jHwIdvRP2xu1tTLDt/auL
+         rRRDroqUC0wnrfgFAqtFlHFBSMwbvlXR9BlMaPyb4hPzZ9yVXA7kAFuJ7QXpOPsVi97r
+         4zlTqDrXnRsfWL3VtxkESaD+qNe2qWNGvPWfzjZHB+NXR0um/AvBz3HG9pidU/unfGlo
+         WbUGyYIR5FyppYK0NjDQl/ve68Pls0KpTrAVhf/woOOLdHGQi8KP83fGwdsPdXEmmO/s
+         6w7k1FL34Q8CP6VhfO/rxy4Cfz/zvOHq/YUn94XV7SMeqtZ7QLgt0BMtWamm+DFdZsef
+         pOAQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXgjBuVi0WtTOjpAtzsW7M0ykTZMH/zW7NEzaSv/SMiqD28B8wGeHv61SZk0ufSRhWRDLm1gaMGYoKHIyvg@lists.linaro.org
+X-Gm-Message-State: AOJu0YzcvINqzqEoqXljUJ9EXPgX1yjZZcL21D4IeG9acQVbLwhA69RQ
+	0+2JXPoDPI8ahVfkCUdAyDinzwGLp7jUH68jFd8ZYKFNFx3MDEyanNN8Rtr7o/+1C1EkcBYEdaf
+	Aga/X70wAH0TTuBQScw==
+X-Google-Smtp-Source: AGHT+IF/wwyCbmZKrb9+OJuirDYtRZw2m8SWoZaJ0QqeIqy0vt7I3G/xdsnBsD2ylGONwHmPG8Ly7PYUfnT9IJg=
+X-Received: from wmbjp12.prod.google.com ([2002:a05:600c:558c:b0:475:decb:4c4d])
+ (user=aliceryhl job=prod-delivery.src-stubby-dispatcher) by
+ 2002:a05:600c:608d:b0:477:93f7:bbc5 with SMTP id 5b1f17b1804b1-47d195667d6mr53518855e9.10.1766224098608;
+ Sat, 20 Dec 2025 01:48:18 -0800 (PST)
+Date: Sat, 20 Dec 2025 09:48:17 +0000
+In-Reply-To: <DF2AXQ67412G.33JOX2CF0VFCK@kernel.org>
+Mime-Version: 1.0
+References: <20251128-gpuvm-rust-v1-0-ebf66bf234e0@google.com>
+ <20251128-gpuvm-rust-v1-4-ebf66bf234e0@google.com> <DF2AXQ67412G.33JOX2CF0VFCK@kernel.org>
+Message-ID: <aUZw4fpWRUWFsb9r@google.com>
+From: Alice Ryhl <aliceryhl@google.com>
+To: Danilo Krummrich <dakr@kernel.org>
+X-Spamd-Bar: ---
+X-MailFrom: 34nBGaQkKDS8LWTNPcjSWRZZRWP.NZXWTYLcZ-XX-dTRWTded.WTYLcZ.ZcR@flex--aliceryhl.bounces.google.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: SVT6DO65SQKLWB77LXW7AMA6GTUC4WPL
-X-Message-ID-Hash: SVT6DO65SQKLWB77LXW7AMA6GTUC4WPL
-X-Mailman-Approved-At: Thu, 16 Apr 2026 16:05:05 +0000
-CC: "T.J. Mercier" <tjmercier@google.com>, Eric Chanudet <echanude@redhat.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, "open list:MEMORY MANAGEMENT" <linux-mm@kvack.org>
+Message-ID-Hash: LTRWHJ6KTJUHIXNZMZBYQBTBIQMA4VSS
+X-Message-ID-Hash: LTRWHJ6KTJUHIXNZMZBYQBTBIQMA4VSS
+X-Mailman-Approved-At: Thu, 16 Apr 2026 16:05:06 +0000
+CC: Daniel Almeida <daniel.almeida@collabora.com>, Matthew Brost <matthew.brost@intel.com>, Thomas =?utf-8?Q?Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Boris Brezillon <boris.brezillon@collabora.com>, Steven Price <steven.price@arm.com>, Liviu Dudau <liviu.dudau@arm.com>, Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, =?utf-8?B?QmrDtnJu?= Roy Baron <bjorn3_gh@protonmail.com>, Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, Trevor Gross <tmgross@umich.edu>, Frank Binns <frank.binns@imgtec.com>, Matt Coster <matt.coster@imgtec.com>, Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>, Jessica Zhang <jessica.zhang@oss.qualcomm.com>, Sean P
+ aul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>, Lyude Paul <lyude@redhat.com>, Lucas De Marchi <lucas.demarchi@intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org, linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org, intel-xe@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Asahi Lina <lina+kernel@asahilina.net>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf: system_heap: account for system heap allocation in memcg
+Subject: [Linaro-mm-sig] Re: [PATCH 4/4] rust: drm: add GPUVM immediate mode abstraction
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SVT6DO65SQKLWB77LXW7AMA6GTUC4WPL/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LTRWHJ6KTJUHIXNZMZBYQBTBIQMA4VSS/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============3803655355912171443=="
-X-Spamd-Result: default: False [1.39 / 15.00];
-	SIGNED_PGP(-2.00)[];
-	DMARC_POLICY_QUARANTINE(1.50)[redhat.com : SPF not aligned (relaxed),quarantine];
-	R_DKIM_REJECT(1.00)[redhat.com:s=mimecast20190719];
-	DATE_IN_PAST(1.00)[2832];
-	MID_RHS_NOT_FQDN(0.50)[];
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [4.49 / 15.00];
+	DMARC_POLICY_REJECT(2.00)[google.com : SPF not aligned (relaxed), No valid DKIM,reject];
+	SUSPICIOUS_RECIPS(1.50)[];
+	DATE_IN_PAST(1.00)[2814];
+	MV_CASE(0.50)[];
 	MAILLIST(-0.20)[mailman];
-	MIME_GOOD(-0.20)[multipart/mixed,multipart/signed,text/plain];
 	R_SPF_ALLOW(-0.20)[+mx:c];
+	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	MIME_TRACE(0.00)[0:+,1:+,2:+,3:~,4:+];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[42];
+	RCVD_COUNT_THREE(0.00)[3];
+	GREYLIST(0.00)[pass,meta];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[collabora.com,intel.com,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,arm.com,garyguo.net,protonmail.com,umich.edu,imgtec.com,oss.qualcomm.com,linux.dev,poorly.run,somainline.org,redhat.com,linaro.org,amd.com,lists.freedesktop.org,vger.kernel.org,lists.linaro.org,asahilina.net];
 	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[12];
-	DKIM_TRACE(0.00)[redhat.com:-];
-	MISSING_XM_UA(0.00)[];
+	NEURAL_SPAM(0.00)[0.999];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FROM_NEQ_ENVFROM(0.00)[mripard@redhat.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[aliceryhl@google.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.659];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	MID_RHS_MATCH_FROM(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	TAGGED_RCPT(0.00)[linaro-mm-sig,kernel];
+	MISSING_XM_UA(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: CC511411709
+X-Rspamd-Queue-Id: 1EAC6411710
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
+On Fri, Dec 19, 2025 at 04:35:00PM +0100, Danilo Krummrich wrote:
+> On Fri Nov 28, 2025 at 3:14 PM CET, Alice Ryhl wrote:
+> > +    /// Returns a [`GpuVmBoObtain`] for the provided GEM object.
+> > +    #[inline]
+> > +    pub fn obtain(
+> > +        &self,
+> > +        obj: &T::Object,
+> > +        data: impl PinInit<T::VmBoData>,
+> > +    ) -> Result<GpuVmBoObtain<T>, AllocError> {
+> > +        Ok(GpuVmBoAlloc::new(self, obj, data)?.obtain())
+> > +    }
+> 
+> Does this method make sense? We usually preallocate a VM_BO, then enter the
+> fence signalling critical path and then obtain the VM_BO.
 
---===============3803655355912171443==
-Content-Type: multipart/signed; micalg=pgp-sha384;
-	protocol="application/pgp-signature"; boundary="62gvz4x3u7aurz3v"
-Content-Disposition: inline
+Hmm, but there is something tricky here. When do we add it to the extobj
+list, then? If we add it before starting the critical path, then we must
+also call drm_gpuvm_bo_obtain_prealloc() before starting the critical
+path because obtain must happen before drm_gpuvm_bo_extobj_add(). And
+adding it to extobj after signalling the fence seems error prone.
 
+And besides, adding it to the extobj list before the critical path
+means that we can have drm_gpuvm_exec_lock() lock the new BO without
+having to do anything special - it's simply in the extobj list by the
+time we call drm_gpuvm_exec_lock().
 
---62gvz4x3u7aurz3v
-Content-Type: text/plain; protected-headers=v1; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH] dma-buf: system_heap: account for system heap allocation
- in memcg
-MIME-Version: 1.0
+> > +impl<T: DriverGpuVm> DerefMut for GpuVmCore<T> {
+> > +    #[inline]
+> > +    fn deref_mut(&mut self) -> &mut T {
+> > +        // SAFETY: By the type invariants we may access `core`.
+> > +        unsafe { &mut *self.0.core.get() }
+> > +    }
+> > +}
+> 
+> Hm..it seems more natural to me to deref to &GpuVm<T> and provide data() and
+> data_mut().
 
-On Fri, Dec 19, 2025 at 02:50:50PM +0100, Christian K=F6nig wrote:
-> On 12/19/25 11:25, Maxime Ripard wrote:
-> > On Mon, Dec 15, 2025 at 03:53:22PM +0100, Christian K=F6nig wrote:
-> >> On 12/15/25 14:59, Maxime Ripard wrote:
-> ...
-> >>>>> The shared ownership is indeed broken, but it's not more or less br=
-oken
-> >>>>> than, say, memfd + udmabuf, and I'm sure plenty of others.
-> >>>>>
-> >>>>> So we really improve the common case, but only make the "advanced"
-> >>>>> slightly more broken than it already is.
-> >>>>>
-> >>>>> Would you disagree?
-> >>>>
-> >>>> I strongly disagree. As far as I can see there is a huge chance we
-> >>>> break existing use cases with that.
-> >>>
-> >>> Which ones? And what about the ones that are already broken?
-> >>
-> >> Well everybody that expects that driver resources are *not* accounted =
-to memcg.
-> >=20
-> > Which is a thing only because these buffers have never been accounted
-> > for in the first place.
->=20
-> Yeah, completely agree. By not accounting it for such a long time we
-> ended up with people depending on this behavior.
->=20
-> Not nice, but that's what it is.
->=20
-> > So I guess the conclusion is that we shouldn't
-> > even try to do memory accounting, because someone somewhere might not
-> > expect that one of its application would take too much RAM in the
-> > system?
->=20
-> Well we do need some kind of solution to the problem. Either having
-> some setting where you say "This memcg limit is inclusive/exclusive
-> device driver allocated memory" or have a completely separate limit
-> for device driver allocated memory.
+That's fair.
 
-A device driver memory specific limit sounds like a good idea because it
-would make it easier to bridge the gap with dmem.
+> > +impl<T: DriverGpuVm> Drop for GpuVmBoAlloc<T> {
+> > +    #[inline]
+> > +    fn drop(&mut self) {
+> > +        // SAFETY: It's safe to perform a deferred put in any context.
+> > +        unsafe { bindings::drm_gpuvm_bo_put_deferred(self.as_raw()) };
+> 
+> This does not need to be deferred, no?
 
-Happy holidays,
-Maxime
+I think what I *actually* want to call here is
 
---62gvz4x3u7aurz3v
-Content-Type: application/pgp-signature; name="signature.asc"
+	kref_put(&self->kref, drm_gpuvm_bo_destroy_not_in_lists_kref);
 
------BEGIN PGP SIGNATURE-----
+like what drm_gpuvm_bo_obtain_prealloc() does as of the first patch in
+this series.
 
-iJUEABMJAB0WIQTkHFbLp4ejekA/qfgnX84Zoj2+dgUCaUV2PQAKCRAnX84Zoj2+
-doBbAYCwC6GM+nDbVQ+qPSj3EG6TPcebfy5+uYyIL8SOICJl/3ohBlkB/AN0k0qs
-+sZn+aYBewZWQxkmfc2iSOFLjm35fV4hD2oDDGu74kWLPPrJefPelEf0OooFJoux
-CX9E84nf8Q==
-=seo3
------END PGP SIGNATURE-----
+> > +    }
+> > +}
+> > +
+> > +/// A [`GpuVmBo`] object in the GEM list.
+> > +///
+> > +/// # Invariants
+> > +///
+> > +/// Points at a `drm_gpuvm_bo` that contains a valid `T::VmBoData` and is present in the gem list.
+> > +pub struct GpuVmBoObtain<T: DriverGpuVm>(NonNull<GpuVmBo<T>>);
+> 
+> How is this different from GpuVmBo? The only object that is not in the GEM list
+> should be GpuVmBoAlloc, i.e. the preallocated one.
 
---62gvz4x3u7aurz3v--
+The difference is whether there is pointer indirection or not.
 
+This type is morally an ARef<GpuVm<T>>, except I don't expose any way
+to increment the refcount.
 
---===============3803655355912171443==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+Alice
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============3803655355912171443==--
-
