@@ -2,65 +2,65 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gKDnOKYK4WnoogAAu9opvQ
+	id YDFVMqwK4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:13:26 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:13:32 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id A0D45411735
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:13:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 417C6411743
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:13:32 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C300D44781
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:13:25 +0000 (UTC)
-Received: from mail-oo1-f69.google.com (mail-oo1-f69.google.com [209.85.161.69])
-	by lists.linaro.org (Postfix) with ESMTPS id 070BF3F7AA
-	for <linaro-mm-sig@lists.linaro.org>; Sat, 20 Dec 2025 19:22:40 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 4B70F4485A
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:13:31 +0000 (UTC)
+Received: from mail-ot1-f69.google.com (mail-ot1-f69.google.com [209.85.210.69])
+	by lists.linaro.org (Postfix) with ESMTPS id D8C62400FF
+	for <linaro-mm-sig@lists.linaro.org>; Sun, 21 Dec 2025 01:24:36 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
 	dkim=none;
-	spf=pass (lists.linaro.org: domain of 3f_dGaQkbANoOUVG6HHAN6LLE9.CKKCHAQOAN8KJPAJP.8KI@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com designates 209.85.161.69 as permitted sender) smtp.mailfrom=3f_dGaQkbANoOUVG6HHAN6LLE9.CKKCHAQOAN8KJPAJP.8KI@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com;
+	spf=pass (lists.linaro.org: domain of 3VExHaQkbAFsLRSD3EE7K3IIB6.9HH9E7NL7K5HGM7GM.5HF@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com designates 209.85.210.69 as permitted sender) smtp.mailfrom=3VExHaQkbAFsLRSD3EE7K3IIB6.9HH9E7NL7K5HGM7GM.5HF@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com;
 	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=appspotmail.com (policy=none)
-Received: by mail-oo1-f69.google.com with SMTP id 006d021491bc7-65b31ec93e7so4746374eaf.3
-        for <linaro-mm-sig@lists.linaro.org>; Sat, 20 Dec 2025 11:22:40 -0800 (PST)
+Received: by mail-ot1-f69.google.com with SMTP id 46e09a7af769-7c7028db074so6384708a34.1
+        for <linaro-mm-sig@lists.linaro.org>; Sat, 20 Dec 2025 17:24:36 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766258559; x=1766863359;
+        d=1e100.net; s=20230601; t=1766280276; x=1766885076;
         h=cc:to:from:subject:message-id:in-reply-to:date:mime-version
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=wXBuMKsbM+KwTrBICDHBdfzXtgBQf2h5Z/6bZ4D2vbk=;
-        b=WLmtJBDJ5o7tHLsbi9g8TMpnNomgFjlIqjzQhbMyjOmPjeTOccBNVQN8EJl3gtmasN
-         iaQYQw7thcXzFfUV7SpZn85eiyWYUNPNoENEdgtLD8S6OmceGTfHNmwIaV5kCCR9iYcV
-         U9mw2C9ResLKBa/sb2g19DHsiEB1HvVclRSU+h9uzIbZPmTClQ7abRu9vLBaX+ZkXwf7
-         Fz6UcLW+iXItyLQqJUs+JXDLPEtx2C7EigDR+GI0VKEZrUjKadPG8t2u1HO8OUN3dVED
-         jdHNgiZABKlt5UsdsTwRHjrHtahTTy0l8ruMmACiPio1DTI1O8uPyHe3Vzn8GOJ1GA0U
-         TGCg==
-X-Forwarded-Encrypted: i=1; AJvYcCVVYTDJkqSIkbP1W74BUI4dD18/89KOMCe4wbmmOU028UEdw+H1q5L4F2T6A+CNufLYrEVQp3eekbBrLxtI@lists.linaro.org
-X-Gm-Message-State: AOJu0YxCPQosUbqnV7fwH7+b8G0FpgQt0IuStg7SEVUXLlt8F7dghPcK
-	MkvUzhHwQMEs1fY2n1rIWnkWxpcCumNP3nUFeFCJUnvi+gsLPwCR6fn3T+j5KFm/AeTQ/dacNHU
-	incQP8vjJE7jW4e/2kMKuwi/tPWZ/le7pHjz1D+QSCDw5LFYxA1WvGsvA6fY=
-X-Google-Smtp-Source: AGHT+IEFvvW4sFfICXsBjWL7HLiwQzByWYxuBpxiryOzRSkiF+Rs7HQiqXIBG29DxZUQGipiZQleuih4ce9em2r6jbf6FZrMgkh0
+        bh=DlaivU6khbq+H4gGSGhiP4ZojYz6+EckF6yCmLt2N4M=;
+        b=XnDQiGufWaTl9GLC4F5JJ0gCIJQfrTsUp5JfQ+iX/MERoVFWR5B/Ovdcey1NaO4g+o
+         rk+2XMIDSunG2ZVNTox3trNP2SsRzO0+AUS901ueV4+iB13UcC77r5gTyYN32swbQfcV
+         qgTHV4IxakdLEUK2PhKOskCJ1zS0KQ2SFLVanbd4LG9XPY3+XP/nmOJwtdyO/TzziD5o
+         8X4kWc+7slmb4Y9mjvtT3n56umWHB1ucfRTEN6eadpsLcX4cczmTC09oiaW2aoYEs2dM
+         ehvNW7GdCfTu1y5PDchDGeaeSebQ+KcgRecYolbRgWr/iW5o2kviweeujI9g08LCg8FR
+         ygaw==
+X-Forwarded-Encrypted: i=1; AJvYcCWHTKbPWExTqfkr+2nU56G5wV8nKZOlTndecvpKQ4uFt3woqygAn8msTQKzDM6RD6ivYRCW1qswZ3Iy2BB1@lists.linaro.org
+X-Gm-Message-State: AOJu0YxDtp0EzdG05l95czYL4Wm6SYEM75X7rVTEo8UysbcMFU5PGIwh
+	F2sxfzen1BwlsSWofUe4RIO54i+EKzQ6ea7moTUH8IOWR8ZkNvloSJTZX1CCQo2f1p94qaZgFUj
+	n+DpPrWNXYKZp0sdU68gzbn8LWccc+6c2R8qXpwsF8CbCaXxiQqQSf6gyxYE=
+X-Google-Smtp-Source: AGHT+IH+3U0qxpXqSt2znP5azbSRtxeGiVcScp7xuFDXGkI7KaBiwhRhA56N66pgM47IIb6IgFNwUuSwgjmLVQsyft8Gz5mZYCuO
 MIME-Version: 1.0
-X-Received: by 2002:a05:6820:2291:b0:659:9a49:8f25 with SMTP id
- 006d021491bc7-65d0ea9c905mr2793790eaf.54.1766258559494; Sat, 20 Dec 2025
- 11:22:39 -0800 (PST)
-Date: Sat, 20 Dec 2025 11:22:39 -0800
+X-Received: by 2002:a05:6820:2223:b0:659:9a49:8f2d with SMTP id
+ 006d021491bc7-65d0eae1f9fmr3113949eaf.62.1766280276329; Sat, 20 Dec 2025
+ 17:24:36 -0800 (PST)
+Date: Sat, 20 Dec 2025 17:24:36 -0800
 In-Reply-To: <20251220192210.399423-1-szymonwilczek@gmx.com>
 X-Google-Appengine-App-Id: s~syzkaller
 X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <6946f77f.050a0220.1b4e0c.0023.GAE@google.com>
+Message-ID: <69474c54.a70a0220.25eec0.006a.GAE@google.com>
 From: syzbot <syzbot@syzkaller.appspotmail.com>
 To: szymonwilczek@gmx.com
-X-Spamd-Bar: --
-X-MailFrom: 3f_dGaQkbANoOUVG6HHAN6LLE9.CKKCHAQOAN8KJPAJP.8KI@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com
+X-Spamd-Bar: ---
+X-MailFrom: 3VExHaQkbAFsLRSD3EE7K3IIB6.9HH9E7NL7K5HGM7GM.5HF@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: KME6VIMCDI2RBEUBW7L5DYC2U3OASVTN
-X-Message-ID-Hash: KME6VIMCDI2RBEUBW7L5DYC2U3OASVTN
-X-Mailman-Approved-At: Thu, 16 Apr 2026 16:05:08 +0000
+Message-ID-Hash: OZKFB73WPFRCMWWGAF3KSA2OAO7K5BQ2
+X-Message-ID-Hash: OZKFB73WPFRCMWWGAF3KSA2OAO7K5BQ2
+X-Mailman-Approved-At: Thu, 16 Apr 2026 16:05:09 +0000
 CC: christian.koenig@amd.com, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, sumit.semwal@linaro.org, syzkaller-bugs@googlegroups.com, szymonwilczek@gmx.com
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf: fix WARNING in dma_buf_vmap
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KME6VIMCDI2RBEUBW7L5DYC2U3OASVTN/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OZKFB73WPFRCMWWGAF3KSA2OAO7K5BQ2/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -70,7 +70,7 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 X-Spamd-Result: default: False [0.59 / 15.00];
-	DATE_IN_PAST(1.00)[2804];
+	DATE_IN_PAST(1.00)[2798];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
@@ -86,7 +86,7 @@ X-Spamd-Result: default: False [0.59 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	MISSING_XM_UA(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.992];
+	NEURAL_HAM(-0.00)[-0.988];
 	TO_DN_NONE(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[syzbot@syzkaller.appspotmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
@@ -94,8 +94,8 @@ X-Spamd-Result: default: False [0.59 / 15.00];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	RCPT_COUNT_SEVEN(0.00)[9];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,gmx.com:email,linaro.org:email]
-X-Rspamd-Queue-Id: A0D45411735
+	DBL_BLOCKED_OPENRESOLVER(0.00)[googlegroups.com:email,lists.linaro.org:helo,lists.linaro.org:rdns,gmx.com:email,linaro.org:email]
+X-Rspamd-Queue-Id: 417C6411743
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
@@ -129,6 +129,10 @@ X-Rspamd-Server: lfdr
 > -- 
 > 2.52.0
 >
+> -- 
+> You received this message because you are subscribed to the Google Groups "syzkaller-bugs" group.
+> To unsubscribe from this group and stop receiving emails from it, send an email to syzkaller-bugs+unsubscribe@googlegroups.com.
+> To view this discussion visit https://groups.google.com/d/msgid/syzkaller-bugs/20251220192210.399423-1-szymonwilczek%40gmx.com.
 
 I see the command but can't find the corresponding bug.
 The email is sent to  syzbot+HASH@syzkaller.appspotmail.com address
