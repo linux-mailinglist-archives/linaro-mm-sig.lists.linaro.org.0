@@ -2,161 +2,448 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id QDj9JTwL4WnoogAAu9opvQ
+	id CMX1D0IL4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:15:56 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:16:02 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6141A411809
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:15:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D0551411810
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:16:01 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7615840963
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:15:55 +0000 (UTC)
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
-	by lists.linaro.org (Postfix) with ESMTPS id 2D32E3F83D
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  6 Jan 2026 19:51:17 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E8256409AB
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:16:00 +0000 (UTC)
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+	by lists.linaro.org (Postfix) with ESMTPS id 426513F795
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  7 Jan 2026 12:19:04 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20230601 header.b=R6GJz3fO;
-	spf=pass (lists.linaro.org: domain of asml.silence@gmail.com designates 209.85.221.51 as permitted sender) smtp.mailfrom=asml.silence@gmail.com;
-	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-42fbc544b09so877510f8f.1
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 06 Jan 2026 11:51:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1767729076; x=1768333876; darn=lists.linaro.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=ovZgk8PxCrhilP9ak1FB2YkidalwKuZZczfXtCx59dw=;
-        b=R6GJz3fOzXzITQrJM5y4X2HtV9eZNNsl/iHRv1Y/U3mT9QAIZZmakluVAgKNQnts1z
-         +cGTNFNY1WhYCMG6BwUcKYaMynC9uBHPR0vq+tqJagR/pqQZ7zhxouU94qnqCUk5/0Tu
-         wijPdL5aVMR33B09wtPBpx3PeNalzaRbLx4CtAAzrEes8ROJBhtijHZ5HxdPycuJgk04
-         CH5i8WBWTsFTRTTWWTRzrWOISWPc1hqxY2tMfgALcBTgYTYMlT9XN8ygXWHEzVGvMGKC
-         mp8ygyvbz6DuxRL6tntyRyI6FyXJ8jNz7t7bJxP945wn41QjjoCZoJSbXjL2bok5UcHl
-         4PgA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767729076; x=1768333876;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=ovZgk8PxCrhilP9ak1FB2YkidalwKuZZczfXtCx59dw=;
-        b=qMjd+bgY/qqlWUhULWQ+fnZhRJ/v2rVT+tXT2AS8bydUzUbokRr7qRLOZ6RYL5/lkE
-         VW0ELvERkPovW4W2/+qeWdjI7RHFHEoBhYJhal4SIVTIgtokukRr3jZo4D5zy9yzCryM
-         TXf7MUuZBEoyOLH9Nola8rDVE27SLMgHw7nm0+QYfDnSwXwh6Cb8m82g55BamkzJsmOs
-         45OsIHmYQ3Alr78LTwyZKSdB0Xgjt/8YAtvC34JvtCleWoLtnlIirm71e8Gy+R+FQms1
-         xsvkw6R8/AXvk9pWIApcX/0VGRsgot/jC4NSPJR+nfauR7LyI+8kDhVwoV8wNqnMu5GY
-         Xe6g==
-X-Forwarded-Encrypted: i=1; AJvYcCXHxtnGDyqqsXLwXJgUH111VOZbdwWXwsQXCcE9/v+kiTGwIgEdq7V0B6Cua8wiNRJkvYs8E0UQ5zySPOsK@lists.linaro.org
-X-Gm-Message-State: AOJu0YzSIrIiTUR0EhPg+ErsewzZflBYKzUIxnfyXz2DmXMp0AYZIZf6
-	weogtDGYorO9iUJLdQ4JJNoIyLLeJTbrMpGpGqG6kAoU5S3GQ40IDOUt
-X-Gm-Gg: AY/fxX7iOVhhmpMmhm36suM6eM6nZhIlWLO7sPPjJ5JZkT+6bUN/apVUdGC3Qbq30K/
-	zhA/ZAJmj/PpOjXQbChfBhe6MZfPcH7XFFV5Yrz9uyq0S5ibkF2tOtIhtiEQ71y1Glbt923L1vT
-	PbOQW6QGBSW/QT4q09n9TXJPKCdcd5QxOgrBSPvyAucJzD5HBXr8wOZEm1h6OAQrzy6AcBM5Olv
-	UV5Yo/2QW2excsubaNrsyc0FzaZYuf6/o6kLHnxYtB2GnLQE6NPu2ayXmAjnGS35TFSBepVOzhA
-	Te/XmdKmCLGb7YTbHBC+LTYod8PzONm3X+Ln4/orjcYDW+8MdueH/NQI96BY1RTo1rJtijm+a1s
-	1Isodb87znKIzkQJVr66A1qCHbIHvJmW8wjnnYeaWlXEKqbtq96mOhqGCwAa5e07jwyFoLC58n3
-	shE14bbxUnx4u/U0Ix7tUKWvKNShcnGSIHrbnuCnjVGQOb4nTBq+a4FrsN0D+lz9/MMnTzEl6uy
-	c8rurTYWjFv3/g4U/oM7G/MyXUR6Z8zV0rq0i3BylsuVgIC5C6p8/DpdRsvfmKD
-X-Google-Smtp-Source: AGHT+IFFym+HTWb6WhRU4bKfzHds67XbzvjVQ0ncM7+fS6yOVWLogcdaslK7a3BF15xU4e7GXQY5lg==
-X-Received: by 2002:a5d:5f51:0:b0:430:fdb8:8510 with SMTP id ffacd0b85a97d-432c3790ca4mr333772f8f.24.1767729076041;
-        Tue, 06 Jan 2026 11:51:16 -0800 (PST)
-Received: from ?IPV6:2a01:4b00:bd21:4f00:7cc6:d3ca:494:116c? ([2a01:4b00:bd21:4f00:7cc6:d3ca:494:116c])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-432bd0e19bfsm6241105f8f.18.2026.01.06.11.51.15
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 06 Jan 2026 11:51:15 -0800 (PST)
-Message-ID: <a96e327d-3fef-4d08-87e9-c65866223967@gmail.com>
-Date: Tue, 6 Jan 2026 19:51:12 +0000
+	dkim=pass header.d=suse.com header.s=susede1 header.b=WbN1bj2N;
+	dkim=pass header.d=suse.com header.s=susede1 header.b=WbN1bj2N;
+	spf=pass (lists.linaro.org: domain of petr.pavlu@suse.com designates 195.135.223.131 as permitted sender) smtp.mailfrom=petr.pavlu@suse.com;
+	dmarc=pass (policy=quarantine) header.from=suse.com
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by smtp-out2.suse.de (Postfix) with ESMTPS id 641AC5BCCE;
+	Wed,  7 Jan 2026 12:19:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1767788342; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=1InH04BUhqu6lMlLWmyVtPrVr0o1jtu64a/MC1vmWxY=;
+	b=WbN1bj2NvmY+V7Jbi20SxuPQ/UHWer8r4OTn44HlYNZmRxL49sd5CkaVo8uYo4gmuSSJ0J
+	BbG+fRPzp1IReqgI6ZW/1fIGwbhzwQBSSzSEChftWtxrh9efKEwtUAeT4Yl3KXbLVAQYtU
+	i+p23blbGZYpxaaQSFnTz0TZ5Vu09JQ=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1767788342; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=1InH04BUhqu6lMlLWmyVtPrVr0o1jtu64a/MC1vmWxY=;
+	b=WbN1bj2NvmY+V7Jbi20SxuPQ/UHWer8r4OTn44HlYNZmRxL49sd5CkaVo8uYo4gmuSSJ0J
+	BbG+fRPzp1IReqgI6ZW/1fIGwbhzwQBSSzSEChftWtxrh9efKEwtUAeT4Yl3KXbLVAQYtU
+	i+p23blbGZYpxaaQSFnTz0TZ5Vu09JQ=
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id F2AF53EA63;
+	Wed,  7 Jan 2026 12:19:00 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+	by imap1.dmz-prg2.suse.org with ESMTPSA
+	id auvPOjRPXmnfRAAAD6G6ig
+	(envelope-from <petr.pavlu@suse.com>); Wed, 07 Jan 2026 12:19:00 +0000
+Message-ID: <7afb6666-43b6-4d17-b875-e585c7a5ac99@suse.com>
+Date: Wed, 7 Jan 2026 13:19:00 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Ming Lei <ming.lei@redhat.com>, Christoph Hellwig <hch@lst.de>
-References: <cover.1763725387.git.asml.silence@gmail.com>
- <74d689540fa200fe37f1a930165357a92fe9e68c.1763725387.git.asml.silence@gmail.com>
- <7b2017f4-02a3-482a-a173-bb16b895c0cb@amd.com>
- <20251204110709.GA22971@lst.de>
- <0571ca61-7b17-4167-83eb-4269bd0459fe@amd.com>
- <20251204131025.GA26860@lst.de> <aVnFnzRYWC_Y5zHg@fedora>
+To: Byungchul Park <byungchul@sk.com>
+References: <20251205071855.72743-1-byungchul@sk.com>
+ <20251205071855.72743-35-byungchul@sk.com>
 Content-Language: en-US
-From: Pavel Begunkov <asml.silence@gmail.com>
-In-Reply-To: <aVnFnzRYWC_Y5zHg@fedora>
+From: Petr Pavlu <petr.pavlu@suse.com>
+In-Reply-To: <20251205071855.72743-35-byungchul@sk.com>
+X-Spam-Level: 
+X-Spam-Flag: NO
+X-Spam-Score: -0.80
 X-Spamd-Bar: ---
-X-MailFrom: asml.silence@gmail.com
+X-MailFrom: petr.pavlu@suse.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: BKUGJX5VYVCBTFS53DGGS372QAKQUQC4
-X-Message-ID-Hash: BKUGJX5VYVCBTFS53DGGS372QAKQUQC4
+Message-ID-Hash: 6YZFALTUTESREL5IQK4ST3BKGMTC6YPA
+X-Message-ID-Hash: 6YZFALTUTESREL5IQK4ST3BKGMTC6YPA
 X-Mailman-Approved-At: Thu, 16 Apr 2026 16:11:47 +0000
-CC: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, linux-block@vger.kernel.org, io-uring@vger.kernel.org, Vishal Verma <vishal1.verma@intel.com>, tushar.gohad@intel.com, Keith Busch <kbusch@kernel.org>, Jens Axboe <axboe@kernel.dk>, Sagi Grimberg <sagi@grimberg.me>, Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Andrew Morton <akpm@linux-foundation.org>, Sumit Semwal <sumit.semwal@linaro.org>, linux-kernel@vger.kernel.org, linux-nvme@lists.infradead.org, linux-fsdevel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+CC: kernel_team@skhynix.com, torvalds@linux-foundation.org, damien.lemoal@opensource.wdc.com, linux-ide@vger.kernel.org, adilger.kernel@dilger.ca, linux-ext4@vger.kernel.org, mingo@redhat.com, peterz@infradead.org, will@kernel.org, tglx@linutronix.de, rostedt@goodmis.org, joel@joelfernandes.org, sashal@kernel.org, daniel.vetter@ffwll.ch, duyuyang@gmail.com, johannes.berg@intel.com, tj@kernel.org, tytso@mit.edu, willy@infradead.org, david@fromorbit.com, amir73il@gmail.com, gregkh@linuxfoundation.org, kernel-team@lge.com, linux-mm@kvack.org, akpm@linux-foundation.org, mhocko@kernel.org, minchan@kernel.org, hannes@cmpxchg.org, vdavydov.dev@gmail.com, sj@kernel.org, jglisse@redhat.com, dennis@kernel.org, cl@linux.com, penberg@kernel.org, rientjes@google.com, vbabka@suse.cz, ngupta@vflare.org, linux-block@vger.kernel.org, josef@toxicpanda.com, linux-fsdevel@vger.kernel.org, jack@suse.cz, jlayton@kernel.org, dan.j.williams@intel.com, hch@infradead.org, djwong@kernel.org, dri-devel@lists.fr
+ eedesktop.org, rodrigosiqueiramelo@gmail.com, melissa.srw@gmail.com, hamohammed.sa@gmail.com, harry.yoo@oracle.com, chris.p.wilson@intel.com, gwan-gyeong.mun@intel.com, max.byungchul.park@gmail.com, boqun.feng@gmail.com, longman@redhat.com, yunseong.kim@ericsson.com, ysk@kzalloc.com, yeoreum.yun@arm.com, netdev@vger.kernel.org, matthew.brost@intel.com, her0gyugyu@gmail.com, corbet@lwn.net, catalin.marinas@arm.com, bp@alien8.de, x86@kernel.org, hpa@zytor.com, luto@kernel.org, sumit.semwal@linaro.org, gustavo@padovan.org, christian.koenig@amd.com, andi.shyti@kernel.org, arnd@arndb.de, lorenzo.stoakes@oracle.com, Liam.Howlett@oracle.com, rppt@kernel.org, surenb@google.com, mcgrof@kernel.org, da.gomez@kernel.org, samitolvanen@google.com, paulmck@kernel.org, frederic@kernel.org, neeraj.upadhyay@kernel.org, joelagnelf@nvidia.com, josh@joshtriplett.org, urezki@gmail.com, mathieu.desnoyers@efficios.com, jiangshanlai@gmail.com, qiang.zhang@linux.dev, juri.lelli@redhat.com, vincent.guittot@li
+ naro.org, dietmar.eggemann@arm.com, bsegall@google.com, mgorman@suse.de, vschneid@redhat.com, chuck.lever@oracle.com, neil@brown.name, okorniev@redhat.com, Dai.Ngo@oracle.com, tom@talpey.com, trondmy@kernel.org, anna@kernel.org, kees@kernel.org, bigeasy@linutronix.de, clrkwllms@kernel.org, mark.rutland@arm.com, ada.coupriediaz@arm.com, kristina.martsenko@arm.com, wangkefeng.wang@huawei.com, broonie@kernel.org, kevin.brodsky@arm.com, dwmw@amazon.co.uk, shakeel.butt@linux.dev, ast@kernel.org, ziy@nvidia.com, yuzhao@google.com, baolin.wang@linux.alibaba.com, usamaarif642@gmail.com, joel.granados@kernel.org, richard.weiyang@gmail.com, geert+renesas@glider.be, tim.c.chen@linux.intel.com, linux@treblig.org, alexander.shishkin@linux.intel.com, lillian@star-ark.net, chenhuacai@kernel.org, francesco@valla.it, guoweikang.kernel@gmail.com, link@vivo.com, jpoimboe@kernel.org, masahiroy@kernel.org, brauner@kernel.org, thomas.weissschuh@linutronix.de, oleg@redhat.com, mjguzik@gmail.com, andrii@ke
+ rnel.org, wangfushuai@baidu.com, linux-doc@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-i2c@vger.kernel.org, linux-arch@vger.kernel.org, linux-modules@vger.kernel.org, rcu@vger.kernel.org, linux-nfs@vger.kernel.org, linux-rt-devel@lists.linux.dev, 2407018371@qq.com, dakr@kernel.org, miguel.ojeda.sandonis@gmail.com, neilb@ownmail.net, bagasdotme@gmail.com, wsa+renesas@sang-engineering.com, dave.hansen@intel.com, geert@linux-m68k.org, ojeda@kernel.org, alex.gaynor@gmail.com, gary@garyguo.net, bjorn3_gh@protonmail.com, lossin@kernel.org, a.hindborg@kernel.org, aliceryhl@google.com, tmgross@umich.edu, rust-for-linux@vger.kernel.org, linux-kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [RFC v2 01/11] file: add callback for pre-mapping dmabuf
+Subject: [Linaro-mm-sig] Re: [PATCH v18 34/42] dept: add module support for struct dept_event_site and dept_event_site_dep
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/BKUGJX5VYVCBTFS53DGGS372QAKQUQC4/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6YZFALTUTESREL5IQK4ST3BKGMTC6YPA/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
-X-Spamd-Result: default: False [0.69 / 15.00];
-	DATE_IN_PAST(1.00)[2396];
-	MAILLIST(-0.20)[mailman];
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [4.49 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[suse.com : SPF not aligned (relaxed),quarantine];
+	SUSPICIOUS_RECIPS(1.50)[];
+	R_DKIM_REJECT(1.00)[suse.com:s=susede1];
+	DATE_IN_PAST(1.00)[2379];
 	R_SPF_ALLOW(-0.20)[+mx:c];
-	MIME_BASE64_TEXT(0.10)[];
+	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[20];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	FREEMAIL_CC(0.00)[skhynix.com,linux-foundation.org,opensource.wdc.com,vger.kernel.org,dilger.ca,redhat.com,infradead.org,kernel.org,linutronix.de,goodmis.org,joelfernandes.org,ffwll.ch,gmail.com,intel.com,mit.edu,fromorbit.com,linuxfoundation.org,lge.com,kvack.org,cmpxchg.org,linux.com,google.com,suse.cz,vflare.org,toxicpanda.com,lists.fr,oracle.com,ericsson.com,kzalloc.com,arm.com,lwn.net,alien8.de,zytor.com,linaro.org,padovan.org,amd.com,arndb.de,nvidia.com,joshtriplett.org,efficios.com,linux.dev,li,suse.de,brown.name,talpey.com,huawei.com,amazon.co.uk,linux.alibaba.com,glider.be,linux.intel.com,treblig.org,star-ark.net,valla.it,vivo.com,ke,baidu.com,lists.infradead.org,lists.linaro.org,lists.linux.dev,qq.com,ownmail.net,sang-engineering.com,linux-m68k.org,garyguo.net,protonmail.com,umich.edu];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	FROM_NEQ_ENVFROM(0.00)[asmlsilence@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
+	GREYLIST(0.00)[pass,meta];
+	ARC_NA(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.799];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[suse.com:-];
+	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[165];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[petr.pavlu@suse.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.358];
+	TAGGED_RCPT(0.00)[linaro-mm-sig,renesas];
 	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: 6141A411809
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,suse.com:mid,linaro.org:email,sk.com:email]
+X-Rspamd-Queue-Id: D0551411810
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-T24gMS80LzI2IDAxOjQyLCBNaW5nIExlaSB3cm90ZToNCj4gT24gVGh1LCBEZWMgMDQsIDIwMjUg
-YXQgMDI6MTA6MjVQTSArMDEwMCwgQ2hyaXN0b3BoIEhlbGx3aWcgd3JvdGU6DQo+PiBPbiBUaHUs
-IERlYyAwNCwgMjAyNSBhdCAxMjowOTo0NlBNICswMTAwLCBDaHJpc3RpYW4gS8O2bmlnIHdyb3Rl
-Og0KPj4+PiBJIGZpbmQgdGhlIG5hbWluZyBwcmV0dHkgY29uZnVzaW5nIGEgd2VsbC4gIEJ1dCB3
-aGF0IHRoaXMgZG9lcyBpcyB0bw0KPj4+PiB0ZWxsIHRoZSBmaWxlIHN5c3RlbS9kcml2ZXIgdGhh
-dCBpdCBzaG91bGQgZXhwZWN0IGEgZnV0dXJlDQo+Pj4+IHJlYWRfaXRlci93cml0ZV9pdGVyIG9w
-ZXJhdGlvbiB0aGF0IHRha2VzIGRhdGEgZnJvbSAvIHB1dHMgZGF0YSBpbnRvDQo+Pj4+IHRoZSBk
-bWFidWYgcGFzc2VkIHRvIHRoaXMgb3BlcmF0aW9uLg0KPj4+DQo+Pj4gVGhhdCBleHBsYW5hdGlv
-biBtYWtlcyBtdWNoIG1vcmUgc2Vuc2UuDQo+Pj4NCj4+PiBUaGUgcmVtYWluaW5nIHF1ZXN0aW9u
-IGlzIHdoeSBkb2VzIHRoZSB1bmRlcmx5aW5nIGZpbGUgc3lzdGVtIC8gZHJpdmVyDQo+Pj4gbmVl
-ZHMgdG8ga25vdyB0aGF0IGl0IHdpbGwgZ2V0IGFkZHJlc3NlcyBmcm9tIGEgRE1BLWJ1Zj8NCj4+
-DQo+PiBUaGlzIGV2ZW50dWFsbHkgZW5kcyB1cCBjYWxsaW5nIGRtYV9idWZfZHluYW1pY19hdHRh
-Y2ggYW5kIHByb3ZpZGVzDQo+PiBhIHdheSB0byBmaW5kIHRoZSBkbWFfYnVmX2F0dGFjaG1lbnQg
-bGF0ZXIgaW4gdGhlIEkvTyBwYXRoLg0KPiANCj4gTWF5YmUgaXQgY2FuIGJlIG5hbWVkIGFzIC0+
-ZG1hX2J1Zl9hdHRhY2goKT8gIEZvciB3aXJpbmcgZG1hLWJ1ZiBhbmQgdGhlDQo+IGltcG9ydGVy
-IHNpZGUobnZtZSkuDQo+IA0KPiBCdXQgSSBhbSB3b25kZXJpbmcgd2h5IG5vdCBtYWtlIGl0IGFz
-IG9uZSBzdWJzeXN0ZW0gaW50ZXJmYWNlLCBzdWNoIGFzIG52bWUNCj4gaW9jdGwsIHRoZW4gdGhl
-IHdob2xlIGltcGxlbWVudGF0aW9uIGNhbiBiZSBzaW1wbGlmaWVkIGEgbG90LiBJdCBpcyByZWFz
-b25hYmxlDQo+IGJlY2F1c2Ugc3Vic3lzdGVtIGlzIGV4YWN0bHkgdGhlIHNpZGUgZm9yIGNvbnN1
-bWluZy9pbXBvcnRpbmcgdGhlIGRtYS1idWYuDQoNCkl0J3Mgbm90IGFuIG52bWUgc3BlY2lmaWMg
-aW50ZXJmYWNlLCBhbmQgc28gYSBmaWxlIG9wIHdhcyBtdWNoIG1vcmUNCmNvbnZlbmllbnQuIEFu
-ZCBpb2N0bHMgZm9yIHJlZ2lzdGVyaW5nIGl0IGludG8gaW9fdXJpbmcgd291bGQgYWxzbyBiZQ0K
-cHJvYmxlbWF0aWMuIEkgc2ltcGxpZmllZCBzb21lIG9mIHRoZSBsYXllcmluZyBmb3IgdGhlIG5l
-eHQgdmVyc2lvbiwNCmJ1dCBtb3N0IG9mIHRoZSBjb21wbGV4aXR5IGNvbWVzIGZyb20gaGFuZGxp
-bmcgaW4gYmxrLW1xLWRtYS10b2tlbi5oLA0KaXQnZCBiZSBzYW1lIGV2ZW4gaWYgbWFkZSBudm1l
-IHNwZWNpZmljLiBJbiBmYWN0LCBJIGhhZCBpdCBhbGwgZmlyc3QNCmluIG52bWUgYnV0IHRoZW4g
-aGFkIHRvIG1vdmUgdG8gYmxvY2svIGJlY2F1c2Ugb2Ygc2xlZXBpbmcuDQoNCi0tIA0KUGF2ZWwg
-QmVndW5rb3YNCg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5h
-cm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2
-ZUBsaXN0cy5saW5hcm8ub3JnCg==
+On 12/5/25 8:18 AM, Byungchul Park wrote:
+> struct dept_event_site and struct dept_event_site_dep have been
+> introduced to track dependencies between multi event sites for a single
+> wait, that will be loaded to data segment.  Plus, a custom section,
+> '.dept.event_sites', also has been introduced to keep pointers to the
+> objects to make sure all the event sites defined exist in code.
+> 
+> dept should work with the section and segment of module.  Add the
+> support to handle the section and segment properly whenever modules are
+> loaded and unloaded.
+> 
+> Signed-off-by: Byungchul Park <byungchul@sk.com>
+
+Below are a few comments from the module loader perspective.
+
+> ---
+>  include/linux/dept.h     | 14 +++++++
+>  include/linux/module.h   |  5 +++
+>  kernel/dependency/dept.c | 79 +++++++++++++++++++++++++++++++++++-----
+>  kernel/module/main.c     | 15 ++++++++
+>  4 files changed, 103 insertions(+), 10 deletions(-)
+> 
+> diff --git a/include/linux/dept.h b/include/linux/dept.h
+> index 44083e6651ab..c796cdceb04e 100644
+> --- a/include/linux/dept.h
+> +++ b/include/linux/dept.h
+> @@ -166,6 +166,11 @@ struct dept_event_site {
+>  	struct dept_event_site		*bfs_parent;
+>  	struct list_head		bfs_node;
+>  
+> +	/*
+> +	 * for linking all dept_event_site's
+> +	 */
+> +	struct list_head		all_node;
+> +
+>  	/*
+>  	 * flag indicating the event is not only declared but also
+>  	 * actually used in code
+> @@ -182,6 +187,11 @@ struct dept_event_site_dep {
+>  	 */
+>  	struct list_head		dep_node;
+>  	struct list_head		dep_rev_node;
+> +
+> +	/*
+> +	 * for linking all dept_event_site_dep's
+> +	 */
+> +	struct list_head		all_node;
+>  };
+>  
+>  #define DEPT_EVENT_SITE_INITIALIZER(es)					\
+> @@ -193,6 +203,7 @@ struct dept_event_site_dep {
+>  	.bfs_gen = 0,							\
+>  	.bfs_parent = NULL,						\
+>  	.bfs_node = LIST_HEAD_INIT((es).bfs_node),			\
+> +	.all_node = LIST_HEAD_INIT((es).all_node),			\
+>  	.used = false,							\
+>  }
+>  
+> @@ -202,6 +213,7 @@ struct dept_event_site_dep {
+>  	.recover_site = NULL,						\
+>  	.dep_node = LIST_HEAD_INIT((esd).dep_node),			\
+>  	.dep_rev_node = LIST_HEAD_INIT((esd).dep_rev_node),		\
+> +	.all_node = LIST_HEAD_INIT((esd).all_node),			\
+>  }
+>  
+>  struct dept_event_site_init {
+> @@ -225,6 +237,7 @@ extern void dept_init(void);
+>  extern void dept_task_init(struct task_struct *t);
+>  extern void dept_task_exit(struct task_struct *t);
+>  extern void dept_free_range(void *start, unsigned int sz);
+> +extern void dept_mark_event_site_used(void *start, void *end);
+
+Nit: The coding style recommends not using the extern keyword with
+function declarations.
+
+https://www.kernel.org/doc/html/v6.19-rc4/process/coding-style.html#function-prototypes
+
+>  
+>  extern void dept_map_init(struct dept_map *m, struct dept_key *k, int sub_u, const char *n);
+>  extern void dept_map_reinit(struct dept_map *m, struct dept_key *k, int sub_u, const char *n);
+> @@ -288,6 +301,7 @@ struct dept_event_site { };
+>  #define dept_task_init(t)				do { } while (0)
+>  #define dept_task_exit(t)				do { } while (0)
+>  #define dept_free_range(s, sz)				do { } while (0)
+> +#define dept_mark_event_site_used(s, e)			do { } while (0)
+>  
+>  #define dept_map_init(m, k, su, n)			do { (void)(n); (void)(k); } while (0)
+>  #define dept_map_reinit(m, k, su, n)			do { (void)(n); (void)(k); } while (0)
+> diff --git a/include/linux/module.h b/include/linux/module.h
+> index d80c3ea57472..29885ba91951 100644
+> --- a/include/linux/module.h
+> +++ b/include/linux/module.h
+> @@ -29,6 +29,7 @@
+>  #include <linux/srcu.h>
+>  #include <linux/static_call_types.h>
+>  #include <linux/dynamic_debug.h>
+> +#include <linux/dept.h>
+>  
+>  #include <linux/percpu.h>
+>  #include <asm/module.h>
+> @@ -588,6 +589,10 @@ struct module {
+>  #ifdef CONFIG_DYNAMIC_DEBUG_CORE
+>  	struct _ddebug_info dyndbg_info;
+>  #endif
+> +#ifdef CONFIG_DEPT
+> +	struct dept_event_site **dept_event_sites;
+> +	unsigned int num_dept_event_sites;
+> +#endif
+>  } ____cacheline_aligned __randomize_layout;
+>  #ifndef MODULE_ARCH_INIT
+>  #define MODULE_ARCH_INIT {}
+
+My understanding is that entries in the .dept.event_sites section are
+added by the dept_event_site_used() macro and they are pointers to the
+dept_event_site_init struct, not dept_event_site.
+
+> diff --git a/kernel/dependency/dept.c b/kernel/dependency/dept.c
+> index b14400c4f83b..07d883579269 100644
+> --- a/kernel/dependency/dept.c
+> +++ b/kernel/dependency/dept.c
+> @@ -984,6 +984,9 @@ static void bfs(void *root, struct bfs_ops *ops, void *in, void **out)
+>   * event sites.
+>   */
+>  
+> +static LIST_HEAD(dept_event_sites);
+> +static LIST_HEAD(dept_event_site_deps);
+> +
+>  /*
+>   * Print all events in the circle.
+>   */
+> @@ -2043,6 +2046,33 @@ static void del_dep_rcu(struct rcu_head *rh)
+>  	preempt_enable();
+>  }
+>  
+> +/*
+> + * NOTE: Must be called with dept_lock held.
+> + */
+> +static void disconnect_event_site_dep(struct dept_event_site_dep *esd)
+> +{
+> +	list_del_rcu(&esd->dep_node);
+> +	list_del_rcu(&esd->dep_rev_node);
+> +}
+> +
+> +/*
+> + * NOTE: Must be called with dept_lock held.
+> + */
+> +static void disconnect_event_site(struct dept_event_site *es)
+> +{
+> +	struct dept_event_site_dep *esd, *next_esd;
+> +
+> +	list_for_each_entry_safe(esd, next_esd, &es->dep_head, dep_node) {
+> +		list_del_rcu(&esd->dep_node);
+> +		list_del_rcu(&esd->dep_rev_node);
+> +	}
+> +
+> +	list_for_each_entry_safe(esd, next_esd, &es->dep_rev_head, dep_rev_node) {
+> +		list_del_rcu(&esd->dep_node);
+> +		list_del_rcu(&esd->dep_rev_node);
+> +	}
+> +}
+> +
+>  /*
+>   * NOTE: Must be called with dept_lock held.
+>   */
+> @@ -2384,6 +2414,8 @@ void dept_free_range(void *start, unsigned int sz)
+>  {
+>  	struct dept_task *dt = dept_task();
+>  	struct dept_class *c, *n;
+> +	struct dept_event_site_dep *esd, *next_esd;
+> +	struct dept_event_site *es, *next_es;
+>  	unsigned long flags;
+>  
+>  	if (unlikely(!dept_working()))
+> @@ -2405,6 +2437,24 @@ void dept_free_range(void *start, unsigned int sz)
+>  	while (unlikely(!dept_lock()))
+>  		cpu_relax();
+>  
+> +	list_for_each_entry_safe(esd, next_esd, &dept_event_site_deps, all_node) {
+> +		if (!within((void *)esd, start, sz))
+> +			continue;
+> +
+> +		disconnect_event_site_dep(esd);
+> +		list_del(&esd->all_node);
+> +	}
+> +
+> +	list_for_each_entry_safe(es, next_es, &dept_event_sites, all_node) {
+> +		if (!within((void *)es, start, sz) &&
+> +		    !within(es->name, start, sz) &&
+> +		    !within(es->func_name, start, sz))
+> +			continue;
+> +
+> +		disconnect_event_site(es);
+> +		list_del(&es->all_node);
+> +	}
+> +
+>  	list_for_each_entry_safe(c, n, &dept_classes, all_node) {
+>  		if (!within((void *)c->key, start, sz) &&
+>  		    !within(c->name, start, sz))
+> @@ -3337,6 +3387,7 @@ void __dept_recover_event(struct dept_event_site_dep *esd,
+>  
+>  	list_add(&esd->dep_node, &es->dep_head);
+>  	list_add(&esd->dep_rev_node, &rs->dep_rev_head);
+> +	list_add(&esd->all_node, &dept_event_site_deps);
+>  	check_recover_dl_bfs(esd);
+>  unlock:
+>  	dept_unlock();
+> @@ -3347,6 +3398,23 @@ EXPORT_SYMBOL_GPL(__dept_recover_event);
+>  
+>  #define B2KB(B) ((B) / 1024)
+>  
+> +void dept_mark_event_site_used(void *start, void *end)
+
+Nit: I suggest that dept_mark_event_site_used() take pointers to
+dept_event_site_init, which would catch the type mismatch with
+module::dept_event_sites.
+
+> +{
+> +	struct dept_event_site_init **evtinitpp;
+> +
+> +	for (evtinitpp = (struct dept_event_site_init **)start;
+> +	     evtinitpp < (struct dept_event_site_init **)end;
+> +	     evtinitpp++) {
+> +		(*evtinitpp)->evt_site->used = true;
+> +		(*evtinitpp)->evt_site->func_name = (*evtinitpp)->func_name;
+> +		list_add(&(*evtinitpp)->evt_site->all_node, &dept_event_sites);
+> +
+> +		pr_info("dept_event_site %s@%s is initialized.\n",
+> +				(*evtinitpp)->evt_site->name,
+> +				(*evtinitpp)->evt_site->func_name);
+> +	}
+> +}
+> +
+>  extern char __dept_event_sites_start[], __dept_event_sites_end[];
+
+Related to the above, __dept_event_sites_start and
+__dept_event_sites_end can already be properly typed here.
+
+>  
+>  /*
+> @@ -3356,20 +3424,11 @@ extern char __dept_event_sites_start[], __dept_event_sites_end[];
+>  void __init dept_init(void)
+>  {
+>  	size_t mem_total = 0;
+> -	struct dept_event_site_init **evtinitpp;
+>  
+>  	/*
+>  	 * dept recover dependency tracking works from now on.
+>  	 */
+> -	for (evtinitpp = (struct dept_event_site_init **)__dept_event_sites_start;
+> -	     evtinitpp < (struct dept_event_site_init **)__dept_event_sites_end;
+> -	     evtinitpp++) {
+> -		(*evtinitpp)->evt_site->used = true;
+> -		(*evtinitpp)->evt_site->func_name = (*evtinitpp)->func_name;
+> -		pr_info("dept_event %s@%s is initialized.\n",
+> -				(*evtinitpp)->evt_site->name,
+> -				(*evtinitpp)->evt_site->func_name);
+> -	}
+> +	dept_mark_event_site_used(__dept_event_sites_start, __dept_event_sites_end);
+>  	dept_recover_ready = true;
+>  
+>  	local_irq_disable();
+> diff --git a/kernel/module/main.c b/kernel/module/main.c
+> index 03ed63f2adf0..82448cdb8ed7 100644
+> --- a/kernel/module/main.c
+> +++ b/kernel/module/main.c
+> @@ -2720,6 +2720,11 @@ static int find_module_sections(struct module *mod, struct load_info *info)
+>  						&mod->dyndbg_info.num_classes);
+>  #endif
+>  
+> +#ifdef CONFIG_DEPT
+> +	mod->dept_event_sites = section_objs(info, ".dept.event_sites",
+> +					sizeof(*mod->dept_event_sites),
+> +					&mod->num_dept_event_sites);
+> +#endif
+>  	return 0;
+>  }
+>  
+> @@ -3346,6 +3351,14 @@ static int early_mod_check(struct load_info *info, int flags)
+>  	return err;
+>  }
+>  
+> +static void dept_mark_event_site_used_module(struct module *mod)
+> +{
+> +#ifdef CONFIG_DEPT
+> +	dept_mark_event_site_used(mod->dept_event_sites,
+> +			     mod->dept_event_sites + mod->num_dept_event_sites);
+> +#endif
+> +}
+> +
+
+It seems to me that the .dept.event_sites section can be discarded after
+the module is initialized. In this case, the section should be prefixed
+by ".init" and its address can be obtained at the point of use in
+dept_mark_event_site_used_module(), without needing to store it inside
+the module struct.
+
+Additionally, what is the reason that the dept_event_site_init data is
+not stored in the .dept.event_sites section directly and it requires
+a level of indirection?
+
+In general, for my own understanding, I also wonder whether the check to
+determine that a dept_event_site is used needs to be done at runtime, or
+if it could be done at build time by objtool/modpost.
+
+>  /*
+>   * Allocate and load the module: note that size of section 0 is always
+>   * zero, and we rely on this for optional sections.
+> @@ -3508,6 +3521,8 @@ static int load_module(struct load_info *info, const char __user *uargs,
+>  	/* Done! */
+>  	trace_module_load(mod);
+>  
+> +	dept_mark_event_site_used_module(mod);
+> +
+>  	return do_init_module(mod);
+>  
+>   sysfs_cleanup:
+
+-- 
+Thanks,
+Petr
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
