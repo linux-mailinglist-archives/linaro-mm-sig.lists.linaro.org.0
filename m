@@ -1,80 +1,66 @@
 Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
-Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5645FCE859E
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 30 Dec 2025 00:39:33 +0100 (CET)
+Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
+	by mail.lfdr.de (Postfix) with ESMTPS id B83FDCFC2B9
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 07 Jan 2026 07:19:02 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4B2494013F
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 29 Dec 2025 23:39:32 +0000 (UTC)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
-	by lists.linaro.org (Postfix) with ESMTPS id 3E58F3F76D
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 29 Dec 2025 23:39:27 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 573AB40164
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  7 Jan 2026 06:19:01 +0000 (UTC)
+Received: from verein.lst.de (verein.lst.de [213.95.11.211])
+	by lists.linaro.org (Postfix) with ESMTPS id AEEC03F795
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  7 Jan 2026 06:18:56 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=icO1QuhO;
-	spf=pass (lists.linaro.org: domain of robh@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=robh@kernel.org;
-	dmarc=pass (policy=quarantine) header.from=kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by tor.source.kernel.org (Postfix) with ESMTP id ACFE56000A;
-	Mon, 29 Dec 2025 23:39:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 25287C4CEF7;
-	Mon, 29 Dec 2025 23:39:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1767051566;
-	bh=EmSJ5RDGVomtHdjap3p2iZ3idrkRaL1n89LOHs60OJQ=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=icO1QuhOjcRTRYphaT9ckAEZt0a0F+8OshHNBctrUvrJXtiiy7JaMhapPmNeMdbbH
-	 FxF/OsXFQt969xNxNdQtlo2E5D0g43ylTD/qTFQf8pfELCjts7u+xl9lxFMgFc4nwb
-	 XH+1qzLXwx6wQKy7+NXrxQpJD0N6Rp+NTLaKPtkzC3tlxnQns8GrJjZ2HWgNdHOrbH
-	 nP+wLabskLg8g0/SDbxwZvpG9xIbWVosokA3/pdLKS4HKzoGwB4WAVYe9XXZS+TkdB
-	 mrRMRwFEn5eHYbKrCWo402kuwyHMpxP6G8soqrjfkKkummYcTTccAb4cTtNqcbZrSf
-	 zdJXogqnZM0gw==
-Date: Mon, 29 Dec 2025 17:39:25 -0600
-From: Rob Herring <robh@kernel.org>
-To: Alain Volmat <alain.volmat@foss.st.com>
-Message-ID: <20251229233925.GA2796847-robh@kernel.org>
-References: <20251218-stm32-dcmi-dma-chaining-v1-0-39948ca6cbf6@foss.st.com>
- <20251218-stm32-dcmi-dma-chaining-v1-9-39948ca6cbf6@foss.st.com>
+	dkim=none;
+	dmarc=pass (policy=none) header.from=lst.de;
+	spf=pass (lists.linaro.org: domain of hch@lst.de designates 213.95.11.211 as permitted sender) smtp.mailfrom=hch@lst.de
+Received: by verein.lst.de (Postfix, from userid 2407)
+	id 3B3B6227A87; Wed,  7 Jan 2026 07:18:52 +0100 (CET)
+Date: Wed, 7 Jan 2026 07:18:51 +0100
+From: Christoph Hellwig <hch@lst.de>
+To: Pavel Begunkov <asml.silence@gmail.com>
+Message-ID: <20260107061851.GA15324@lst.de>
+References: <cover.1763725387.git.asml.silence@gmail.com> <74d689540fa200fe37f1a930165357a92fe9e68c.1763725387.git.asml.silence@gmail.com> <7b2017f4-02a3-482a-a173-bb16b895c0cb@amd.com> <20251204110709.GA22971@lst.de> <0571ca61-7b17-4167-83eb-4269bd0459fe@amd.com> <20251204131025.GA26860@lst.de> <aVnFnzRYWC_Y5zHg@fedora> <a96e327d-3fef-4d08-87e9-c65866223967@gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20251218-stm32-dcmi-dma-chaining-v1-9-39948ca6cbf6@foss.st.com>
-X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-3.00 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.4.254];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+In-Reply-To: <a96e327d-3fef-4d08-87e9-c65866223967@gmail.com>
+User-Agent: Mutt/1.5.17 (2007-11-01)
+X-Rspamd-Queue-Id: AEEC03F795
+X-Spamd-Bar: ---
+X-Spamd-Result: default: False [-3.60 / 15.00];
+	BAYES_HAM(-3.00)[99.98%];
+	DMARC_POLICY_ALLOW(-0.50)[lst.de,none];
+	R_SPF_ALLOW(-0.20)[+ip4:213.95.11.211];
+	ONCE_RECEIVED(0.20)[];
 	MIME_GOOD(-0.10)[text/plain];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.0.0/19, country:SG];
-	RCPT_COUNT_TWELVE(0.00)[16];
+	FREEMAIL_TO(0.00)[gmail.com];
 	ARC_NA(0.00)[];
+	RCVD_COUNT_ONE(0.00)[1];
+	ASN(0.00)[asn:12337, ipnet:213.95.0.0/16, country:DE];
 	MIME_TRACE(0.00)[0:+];
-	MISSING_XM_UA(0.00)[];
-	BLOCKLISTDE_FAIL(0.00)[172.105.4.254:server fail,100.75.92.58:server fail];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[foss.st.com,kernel.org,gmail.com,linaro.org,amd.com,vger.kernel.org,st-md-mailman.stormreply.com,lists.infradead.org,lists.freedesktop.org,lists.linaro.org];
-	TO_DN_SOME(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	R_DKIM_NA(0.00)[];
+	NEURAL_HAM(-0.00)[-0.954];
 	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[21];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	DKIM_TRACE(0.00)[kernel.org:+]
+	RCVD_TLS_LAST(0.00)[];
+	DNSWL_BLOCKED(0.00)[213.95.11.211:from];
+	URIBL_BLOCKED(0.00)[verein.lst.de:helo,verein.lst.de:rdns];
+	TO_DN_SOME(0.00)[]
+X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 3E58F3F76D
-X-Spamd-Bar: --
-Message-ID-Hash: ZHCEJMVUMFNYKWJ4TKZHY57WJV6VES7F
-X-Message-ID-Hash: ZHCEJMVUMFNYKWJ4TKZHY57WJV6VES7F
-X-MailFrom: robh@kernel.org
+Message-ID-Hash: YSFLKE54NKKCDP33AH2SIGJACGBKLL4V
+X-Message-ID-Hash: YSFLKE54NKKCDP33AH2SIGJACGBKLL4V
+X-MailFrom: hch@lst.de
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Hugues Fruchet <hugues.fruchet@foss.st.com>, Mauro Carvalho Chehab <mchehab@kernel.org>, Maxime Coquelin <mcoquelin.stm32@gmail.com>, Alexandre Torgue <alexandre.torgue@foss.st.com>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, linux-media@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com, linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+CC: Ming Lei <ming.lei@redhat.com>, Christoph Hellwig <hch@lst.de>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, linux-block@vger.kernel.org, io-uring@vger.kernel.org, Vishal Verma <vishal1.verma@intel.com>, tushar.gohad@intel.com, Keith Busch <kbusch@kernel.org>, Jens Axboe <axboe@kernel.dk>, Sagi Grimberg <sagi@grimberg.me>, Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Andrew Morton <akpm@linux-foundation.org>, Sumit Semwal <sumit.semwal@linaro.org>, linux-kernel@vger.kernel.org, linux-nvme@lists.infradead.org, linux-fsdevel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 09/12] dt-bindings: media: st: dcmi: add DMA-MDMA chaining properties
+Subject: [Linaro-mm-sig] Re: [RFC v2 01/11] file: add callback for pre-mapping dmabuf
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZHCEJMVUMFNYKWJ4TKZHY57WJV6VES7F/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YSFLKE54NKKCDP33AH2SIGJACGBKLL4V/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -84,54 +70,19 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Thu, Dec 18, 2025 at 07:44:49PM +0100, Alain Volmat wrote:
-> Add properties update and new sram property necessary in order
-> to enable the DMA-MDMA chaining.
-> 
-> Signed-off-by: Alain Volmat <alain.volmat@foss.st.com>
-> ---
->  Documentation/devicetree/bindings/media/st,stm32-dcmi.yaml | 13 ++++++++++++-
->  1 file changed, 12 insertions(+), 1 deletion(-)
-> 
-> diff --git a/Documentation/devicetree/bindings/media/st,stm32-dcmi.yaml b/Documentation/devicetree/bindings/media/st,stm32-dcmi.yaml
-> index 34147127192f..ccaa2d0a2669 100644
-> --- a/Documentation/devicetree/bindings/media/st,stm32-dcmi.yaml
-> +++ b/Documentation/devicetree/bindings/media/st,stm32-dcmi.yaml
-> @@ -27,11 +27,14 @@ properties:
->        - const: mclk
->  
->    dmas:
-> -    maxItems: 1
-> +    minItems: 1
-> +    maxItems: 2
->  
->    dma-names:
->      items:
->        - const: tx
-> +      - const: mdma_tx
-> +    minItems: 1
->  
->    resets:
->      maxItems: 1
-> @@ -40,6 +43,14 @@ properties:
->      minItems: 1
->      maxItems: 2
->  
-> +  sram:
-> +    $ref: /schemas/types.yaml#/definitions/phandle
-> +    description:
-> +      phandles to a reserved SRAM region which is used as temporary
+On Tue, Jan 06, 2026 at 07:51:12PM +0000, Pavel Begunkov wrote:
+>> But I am wondering why not make it as one subsystem interface, such as nvme
+>> ioctl, then the whole implementation can be simplified a lot. It is reasonable
+>> because subsystem is exactly the side for consuming/importing the dma-buf.
+>
+> It's not an nvme specific interface, and so a file op was much more
+> convenient.
 
-phandle to...
+It is the much better abstraction.  Also the nvme subsystems is not
+an actor, and registering things to the subsystems does not work.
+The nvme controller is the entity that does the dma mapping, and this
+interface works very well for that.
 
-> +      storage memory between DMA and MDMA engines.
-
-> +      The region should be defined as child nodes of the AHB SRAM node
-> +      as per the generic bindings in Documentation/devicetree/bindings/sram/sram.yaml
-
-Drop this sentence.
-
-Rob
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
