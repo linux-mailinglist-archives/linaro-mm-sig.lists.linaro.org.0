@@ -2,145 +2,116 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2238BD1EA76
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 14 Jan 2026 13:09:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id F29E7D1EB13
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 14 Jan 2026 13:18:28 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3879E40145
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 14 Jan 2026 12:09:12 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.19])
-	by lists.linaro.org (Postfix) with ESMTPS id EC96540145
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 14 Jan 2026 12:09:06 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 10E6B401AE
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 14 Jan 2026 12:18:28 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+	by lists.linaro.org (Postfix) with ESMTPS id 5E9B83E90F
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 14 Jan 2026 12:18:23 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=ccZ62Qnt;
-	spf=pass (lists.linaro.org: domain of jani.nikula@intel.com designates 192.198.163.19 as permitted sender) smtp.mailfrom=jani.nikula@intel.com;
-	dmarc=pass (policy=none) header.from=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1768392547; x=1799928547;
-  h=from:to:cc:subject:in-reply-to:references:date:
-   message-id:mime-version;
-  bh=EYswg02gjuvqs73LUDwN0ChfKC/BQKKnQB+oeLlaqiM=;
-  b=ccZ62QnttDIQuKNRrPINyW3NcuVpRv7Tb/nL9yvhw60jFURL4IIPnyZU
-   8kWpTYW/vlPhIvBbpDD+++HqzmWWqe/3OpRIkvLxyxHJ4hGZa9dfdEWx0
-   wYpCkEcNUAaVvfuhxUK6iOgyc6Fw9I019VndSt8rYXUEbaHVosvECmSQv
-   7ZfArwOTMAf/Dt1tOu3rMMCv9xtWyjQEnANaHH+IUQLHbDemOvjjKL+j9
-   e52jPr+DvyEIr1BRoiIsnPFesTUCp2sbesyKpnjg1U9HbwDEO7lZ5XKvC
-   G5rVsuIfN9Ot8MkKdwwz0qD35LwUVK50zAdJMdG6/xaNt52AlUTQt4n/z
-   g==;
-X-CSE-ConnectionGUID: 3iUZFvAuQLW7kKXFC9mMqg==
-X-CSE-MsgGUID: ekVkNqyJSmeDcXf5VRIexA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11670"; a="68697372"
-X-IronPort-AV: E=Sophos;i="6.21,225,1763452800";
-   d="scan'208";a="68697372"
-Received: from fmviesa008.fm.intel.com ([10.60.135.148])
-  by fmvoesa113.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Jan 2026 04:09:06 -0800
-X-CSE-ConnectionGUID: YfId4127RIiRbKbn/2MR/A==
-X-CSE-MsgGUID: voMxLI1LSL+SxXySXk3osg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.21,225,1763452800";
-   d="scan'208";a="204943430"
-Received: from klitkey1-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.246.94])
-  by fmviesa008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Jan 2026 04:08:59 -0800
-From: Jani Nikula <jani.nikula@linux.intel.com>
-To: Tomeu Vizoso <tomeu@tomeuvizoso.net>, Nishanth Menon <nm@ti.com>,
- "Andrew F. Davis" <afd@ti.com>, Randolph Sapp <rs@ti.com>, Jonathan
- Humphreys <j-humphreys@ti.com>, Andrei Aldea <a-aldea@ti.com>, Chirag
- Shilwant <c-shilwant@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, Tero
- Kristo <kristo@kernel.org>, Rob Herring <robh@kernel.org>, Krzysztof
- Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Oded
- Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Sumit
- Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?Q?K=C3=B6nig?=
- <christian.koenig@amd.com>
-In-Reply-To: <20260113-thames-v1-2-99390026937c@tomeuvizoso.net>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park,
- 6 krs Bertel Jungin Aukio 5, 02600 Espoo, Finland
-References: <20260113-thames-v1-0-99390026937c@tomeuvizoso.net>
- <20260113-thames-v1-2-99390026937c@tomeuvizoso.net>
-Date: Wed, 14 Jan 2026 14:08:56 +0200
-Message-ID: <5d2167dd7c898afdb374429a9dca8d262967d125@intel.com>
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=VtHY2A2P;
+	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=leon@kernel.org;
+	dmarc=pass (policy=quarantine) header.from=kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by sea.source.kernel.org (Postfix) with ESMTP id B27CA43C65;
+	Wed, 14 Jan 2026 12:18:22 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F3159C16AAE;
+	Wed, 14 Jan 2026 12:18:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1768393102;
+	bh=kphkpO43U3xs8Hu/vDSQXNFGwyRGtpggdrrNZNCgHek=;
+	h=Date:From:To:Subject:References:In-Reply-To:From;
+	b=VtHY2A2PoHXvJAI3LMSsL+HyLEeHCtSGgKPp6a+dXtGF+CLsybGNKbmvKBUBWia3N
+	 WzDOaC8LZwddJrTiwDuAvztJ2Cj6lbzW1QhIsPa2Yj7gshUYGiE+UnyC+TOrtdMm/g
+	 w1z2AAwKhhUC2jnihuALXEURtgZdp20+biBdG4c3/EUMr7V2orcFxiAsimeIxtOnKS
+	 fLsmHd7cMnVsC8ycZcOC8GfU+l75TBXsIJOO7clPXSbuJAuxBDrzz2EjRR1ts6eoAt
+	 WlTQrxGaNTudz8vRy+m7KhkdV2QM6ewUI891wPgHouxLWeGmg1Hv3j8OlX/YjyDn48
+	 v0y4wibp7fC8w==
+Date: Wed, 14 Jan 2026 14:18:19 +0200
+From: Leon Romanovsky <leon@kernel.org>
+To: Alex Williamson <alex@shazbot.org>, linux-media@vger.kernel.org,
+	dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
+	linux-kernel@vger.kernel.org, iommu@lists.linux.dev,
+	kvm@vger.kernel.org, Sumit Semwal <sumit.semwal@linaro.org>,
+	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+	Jason Gunthorpe <jgg@ziepe.ca>, Kevin Tian <kevin.tian@intel.com>,
+	Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>,
+	Robin Murphy <robin.murphy@arm.com>,
+	Yishai Hadas <yishaih@nvidia.com>,
+	Shameer Kolothum <skolothumtho@nvidia.com>,
+	Ankit Agrawal <ankita@nvidia.com>,
+	Matthew Wilcox <willy@infradead.org>, Jens Axboe <axboe@kernel.dk>
+Message-ID: <20260114121819.GB10680@unreal>
+References: <20260107-convert-to-pvec-v1-1-6e3ab8079708@nvidia.com>
 MIME-Version: 1.0
-X-Rspamd-Queue-Id: EC96540145
-X-Spamd-Bar: ------
-X-Spamd-Result: default: False [-6.20 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
-	BAYES_HAM(-3.00)[99.99%];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_MISSING_CHARSET(0.50)[];
-	FORGED_SENDER(0.30)[jani.nikula@linux.intel.com,jani.nikula@intel.com];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip4:192.198.163.0/26:c];
+Content-Disposition: inline
+In-Reply-To: <20260107-convert-to-pvec-v1-1-6e3ab8079708@nvidia.com>
+X-Rspamd-Queue-Id: 5E9B83E90F
+X-Spamd-Bar: ---
+X-Spamd-Result: default: False [-3.50 / 15.00];
+	BAYES_HAM(-3.00)[99.98%];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.252.31];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MIME_GOOD(-0.10)[text/plain];
-	RCPT_COUNT_TWELVE(0.00)[24];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	ARC_NA(0.00)[];
-	HAS_ORG_HEADER(0.00)[];
-	ASN(0.00)[asn:4983, ipnet:192.198.162.0/23, country:US];
-	DWL_DNSWL_BLOCKED(0.00)[intel.com:dkim];
-	NEURAL_HAM(-0.00)[-0.999];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_NEQ_ENVFROM(0.00)[jani.nikula@linux.intel.com,jani.nikula@intel.com];
-	FROM_HAS_DN(0.00)[];
 	MISSING_XM_UA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[19];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ARC_NA(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	TO_DN_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	DWL_DNSWL_BLOCKED(0.00)[kernel.org:dkim];
+	RCVD_COUNT_TWO(0.00)[2];
+	DNSWL_BLOCKED(0.00)[100.75.92.58:received];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	DNSWL_BLOCKED(0.00)[192.198.163.19:from];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:+]
+	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: T3VDQWLHUV4IULHBLAPUFLSVEACBABFD
-X-Message-ID-Hash: T3VDQWLHUV4IULHBLAPUFLSVEACBABFD
-X-MailFrom: jani.nikula@intel.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: linux-arm-kernel@lists.infradead.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Tomeu Vizoso <tomeu@tomeuvizoso.net>
+Message-ID-Hash: KUHFTMYTU746C75UNR7WDACHFLV7MXN3
+X-Message-ID-Hash: KUHFTMYTU746C75UNR7WDACHFLV7MXN3
+X-MailFrom: leon@kernel.org
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 2/5] accel/thames: Add driver for the C7x DSPs in TI SoCs
+Subject: [Linaro-mm-sig]  Re: types: reuse common =?utf-8?q?phys=5Fvec_type_instead_of_DMABUF_open=E2=80=91coded?= variant
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/T3VDQWLHUV4IULHBLAPUFLSVEACBABFD/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KUHFTMYTU746C75UNR7WDACHFLV7MXN3/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Tue, 13 Jan 2026, Tomeu Vizoso <tomeu@tomeuvizoso.net> wrote:
-> diff --git a/drivers/accel/Makefile b/drivers/accel/Makefile
-> index 1d3a7251b950f39e2ae600a2fc07a3ef7e41831e..8472989cbe22746f1e7292d2401fa0f7424a6c15 100644
-> --- a/drivers/accel/Makefile
-> +++ b/drivers/accel/Makefile
-> @@ -5,4 +5,5 @@ obj-$(CONFIG_DRM_ACCEL_ARM_ETHOSU)	+= ethosu/
->  obj-$(CONFIG_DRM_ACCEL_HABANALABS)	+= habanalabs/
->  obj-$(CONFIG_DRM_ACCEL_IVPU)		+= ivpu/
->  obj-$(CONFIG_DRM_ACCEL_QAIC)		+= qaic/
-> -obj-$(CONFIG_DRM_ACCEL_ROCKET)		+= rocket/
-> \ No newline at end of file
-> +obj-$(CONFIG_DRM_ACCEL_ROCKET)		+= rocket/
-> +obj-$(CONFIG_DRM_ACCEL_THAMES)		+= thames/
-> \ No newline at end of file
-
-Maybe add the newline while at it.
-
-> diff --git a/drivers/accel/thames/thames_core.c b/drivers/accel/thames/thames_core.c
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..92af1d68063116bcfa28a33960cbe829029fc1bf
-> --- /dev/null
-> +++ b/drivers/accel/thames/thames_core.c
-> @@ -0,0 +1,155 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +/* Copyright 2026 Texas Instruments Incorporated - https://www.ti.com/ */
-> +
-> +#include "linux/remoteproc.h"
-
-Ditto here about <> not "".
-
-
--- 
-Jani Nikula, Intel
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gV2VkLCBKYW4gMDcsIDIwMjYgYXQgMTE6MTQ6MTRBTSArMDIwMCwgTGVvbiBSb21hbm92c2t5
+IHdyb3RlOg0KPiBGcm9tOiBMZW9uIFJvbWFub3Zza3kgPGxlb25yb0BudmlkaWEuY29tPg0KPiAN
+Cj4gQWZ0ZXIgY29tbWl0IGZjZjQ2M2I5MmEwOCAoInR5cGVzOiBtb3ZlIHBoeXNfdmVjIGRlZmlu
+aXRpb24gdG8gY29tbW9uIGhlYWRlciIpLA0KPiB3ZSBjYW4gdXNlIHRoZSBzaGFyZWQgcGh5c192
+ZWMgdHlwZSBpbnN0ZWFkIG9mIHRoZSBETUFCVUbigJFzcGVjaWZpYw0KPiBkbWFfYnVmX3BoeXNf
+dmVjLCB3aGljaCBkdXBsaWNhdGVkIHRoZSBzYW1lIHN0cnVjdHVyZSBhbmQgc2VtYW50aWNzLg0K
+PiANCj4gU2lnbmVkLW9mZi1ieTogTGVvbiBSb21hbm92c2t5IDxsZW9ucm9AbnZpZGlhLmNvbT4N
+Cj4gLS0tDQo+IEFsZXgsDQo+IA0KPiBBY2NvcmRpbmcgdG8gZGlmZnN0YXQsIFZGSU8gaXMgdGhl
+IHN1YnN5c3RlbSB3aXRoIHRoZSBsYXJnZXN0IHNldCBvZiBjaGFuZ2VzLA0KPiBzbyBpdCB3b3Vs
+ZCBiZSBncmVhdCBpZiB5b3UgY291bGQgdGFrZSBpdCB0aHJvdWdoIHlvdXIgdHJlZS4NCj4gDQo+
+IFRoZSBzZXJpZXMgaXMgYmFzZWQgb24gdGhlIGZvci03LjAvYmxrLXB2ZWMgc2hhcmVkIGJyYW5j
+aCBmcm9tIEplbnM6DQo+IGh0dHBzOi8vZ2l0Lmtlcm5lbC5vcmcvcHViL3NjbS9saW51eC9rZXJu
+ZWwvZ2l0L2F4Ym9lL2xpbnV4LmdpdC9sb2cvP2g9Zm9yLTcuMC9ibGstcHZlYw0KPiANCj4gVGhh
+bmtzDQo+IC0tLQ0KDQpBbGV4LA0KDQpDb3VsZCB5b3UgcGxlYXNlIG1vdmUgdGhpcyBwYXRjaCBm
+b3J3YXJkPyBXZSBoYXZlIHRoZSBSRE1BIHNlcmllcyBbMV0gdGhhdA0KZGVwZW5kcyBvbiB0aGlz
+IHJlbmFtZSwgYW5kIEkgd291bGQgbGlrZSB0byBiYXNlIGl0IG9uIHRoZSBzaGFyZWQgYnJhbmNo
+Lg0KDQpbMV0gaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvYWxsLzIwMjYwMTA4LWRtYWJ1Zi1leHBv
+cnQtdjEtMC02ZDQ3ZDQ2NTgwZDNAbnZpZGlhLmNvbS8NCg0KVGhhbmtzDQpfX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcg
+bGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2Vu
+ZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
