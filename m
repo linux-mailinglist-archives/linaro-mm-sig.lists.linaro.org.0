@@ -2,205 +2,195 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gBjIOvYL4WnoogAAu9opvQ
+	id 6OdnJ/wL4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:19:02 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:19:08 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id ADE87411919
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:19:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5939F411927
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:19:08 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id BC786405D1
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:19:01 +0000 (UTC)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
-	by lists.linaro.org (Postfix) with ESMTPS id CD5943E90F
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 14 Jan 2026 12:40:36 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 6061B405D3
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:19:07 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+	by lists.linaro.org (Postfix) with ESMTPS id 6492C3E90F
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 14 Jan 2026 12:59:49 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=Dm2TZgAR;
-	spf=pass (lists.linaro.org: domain of phasta@mailbox.org designates 80.241.56.171 as permitted sender) smtp.mailfrom=phasta@mailbox.org;
-	dmarc=pass (policy=reject) header.from=mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [IPv6:2001:67c:2050:b231:465::102])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4drm1F5T3Cz9v3Z;
-	Wed, 14 Jan 2026 13:40:33 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
-	t=1768394434; h=from:from:reply-to:reply-to:subject:subject:date:date:
-	 message-id:message-id:to:to:cc:cc:mime-version:mime-version:
-	 content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=YYwk5I7lCjtpTJxINlVPUjkdn63pKMy0eMV22ROGxik=;
-	b=Dm2TZgAR7SeAtIzgfB4iUY8y+nae71U4SBJLnH4xKBERkjFeAOQ4Vbbh8cw4dAjtdIotE2
-	pOk82rr3hoT9fx9YP1lHVY2YqsSca0+hHU4umkuTbpILHEu1IAHzMKrR2eqXCmI53hIYfr
-	+TzXAyV+VSJEJtjTkiS5rCWl2oSMtkcfl899ctRCxN+EQX2nuD1Rs54GluqxHmDKK/gHhy
-	hqVUqmtmUtPiP5fQhy/rfIi3lYcpr/p/ZPkk1FUbZzkx+UmiUTB5U6Tgg1IqZK3mQwczrm
-	hqQJfXFIRZFpsQteyldJs3an+dC3DdV/Lo+I0ibDBzjNCRfCvY6Fs/GdP34eOQ==
-Message-ID: <6afa04f1f5f0908216e9b2bdca26cdd5954ddf69.camel@mailbox.org>
-From: Philipp Stanner <phasta@mailbox.org>
-To: Christian =?ISO-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>,
-	phasta@kernel.org, tursulin@ursulin.net, matthew.brost@intel.com,
-	sumit.semwal@linaro.org
-Date: Wed, 14 Jan 2026 13:40:28 +0100
-In-Reply-To: <b9c8ec64-ed96-4eaf-9e30-a98dfdd26b5a@gmail.com>
-References: <20260113152125.47380-1-christian.koenig@amd.com>
-	 <20260113152125.47380-11-christian.koenig@amd.com>
-	 <c8c362d73d4f2cff9be685184186a6f3368939f1.camel@mailbox.org>
-	 <b9c8ec64-ed96-4eaf-9e30-a98dfdd26b5a@gmail.com>
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=jZjS9zsC;
+	spf=pass (lists.linaro.org: domain of david@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=david@kernel.org;
+	dmarc=pass (policy=quarantine) header.from=kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by sea.source.kernel.org (Postfix) with ESMTP id BA70B4415D;
+	Wed, 14 Jan 2026 12:59:48 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 62F17C4CEF7;
+	Wed, 14 Jan 2026 12:59:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1768395588;
+	bh=2ciTmIsSF6ir6Fs6b26xcjWBNYW3JUmbkKGuRcyQpPY=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=jZjS9zsCl13WtaMFQGlitZVCg2C6jZHZTbbylp9PT0iQ5yi0psg8M81wXlYXUH4i5
+	 d3d+XtYyHVOzQjf9fEMATku1Kf+ZWMTvyI/iTWxhNG6OOQX+b/awgLPmuoDWUrsR1k
+	 Oh9o7C0QREl6zUz2W5nKIuObxCotCYsBYXhgcjE2PqO3aMVNsnC8+B1zxin1nzFAuP
+	 Tl8FkFtqGkB464MivgC9DqlJIrB3mM/GquDGxttTU7PIaDoQy5J/t2zbv7GfeAk0f6
+	 OeEtt0cArfKOVVCAd9YhETcKP2hmMdvlWyVvQRSlx4NUtfKJLuBm60bBza1EE+G6y8
+	 lgYpkjKoKN4yQ==
+Message-ID: <7f9fa27e-261f-4416-9a64-414d8130e5cb@kernel.org>
+Date: Wed, 14 Jan 2026 13:59:43 +0100
 MIME-Version: 1.0
-X-MBO-RS-ID: 19447328edda3a80dec
-X-MBO-RS-META: uoerzmctcnsz5dy4t6i8okrcdaps8uxf
-X-Spamd-Bar: ----
-X-MailFrom: phasta@mailbox.org
+User-Agent: Mozilla Thunderbird
+To: Barry Song <21cnbao@gmail.com>, Uladzislau Rezki <urezki@gmail.com>
+References: <20251215053050.11599-1-21cnbao@gmail.com>
+ <aUQJEa643lQAGK6s@milan>
+ <CAGsJ_4zwqbg889+CTtO8XLQZu+rFs-m6+kANKO78-TAf4zjjaA@mail.gmail.com>
+From: "David Hildenbrand (Red Hat)" <david@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=david@kernel.org; keydata=
+ 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
+In-Reply-To: <CAGsJ_4zwqbg889+CTtO8XLQZu+rFs-m6+kANKO78-TAf4zjjaA@mail.gmail.com>
+X-Spamd-Bar: ---
+X-MailFrom: david@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: F5RF6CG3G64EVQTARBB4XDVKKNVBKO6Q
-X-Message-ID-Hash: F5RF6CG3G64EVQTARBB4XDVKKNVBKO6Q
-X-Mailman-Approved-At: Thu, 16 Apr 2026 16:12:02 +0000
-CC: dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+Message-ID-Hash: GVUWRJDEWTVJZTBJWLA3VGYLJZMEMT6F
+X-Message-ID-Hash: GVUWRJDEWTVJZTBJWLA3VGYLJZMEMT6F
+X-Mailman-Approved-At: Thu, 16 Apr 2026 16:12:03 +0000
+CC: akpm@linux-foundation.org, linux-mm@kvack.org, dri-devel@lists.freedesktop.org, jstultz@google.com, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, Barry Song <v-songbaohua@oppo.com>, Sumit Semwal <sumit.semwal@linaro.org>, Maxime Ripard <mripard@kernel.org>, Tangquan Zheng <zhengtangquan@oppo.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Reply-To: phasta@kernel.org
-Subject: [Linaro-mm-sig] Re: [PATCH 10/10] drm/sched: use inline locks for the drm-sched-fence v2
+Subject: [Linaro-mm-sig] Re: [PATCH] mm/vmalloc: map contiguous pages in batches for vmap() whenever possible
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/F5RF6CG3G64EVQTARBB4XDVKKNVBKO6Q/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GVUWRJDEWTVJZTBJWLA3VGYLJZMEMT6F/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-X-Spamd-Result: default: False [5.09 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[mailbox.org : SPF not aligned (relaxed),reject];
-	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[mailbox.org:s=mail20150812];
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [2.99 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
+	R_DKIM_REJECT(1.00)[kernel.org:s=k20201202];
 	DATE_IN_PAST(1.00)[2211];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	TO_DN_SOME(0.00)[];
-	GREYLIST(0.00)[pass,meta];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[gmail.com];
 	ARC_NA(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com,kernel.org,ursulin.net,intel.com,linaro.org];
-	DKIM_TRACE(0.00)[mailbox.org:-];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	NEURAL_HAM(-0.00)[-0.902];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[phasta@mailbox.org,linaro-mm-sig-bounces@lists.linaro.org];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCPT_COUNT_TWELVE(0.00)[13];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[kernel.org:-];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-0.937];
+	FROM_NEQ_ENVFROM(0.00)[david@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
-	HAS_REPLYTO(0.00)[phasta@kernel.org];
-	RCPT_COUNT_SEVEN(0.00)[7];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,mailbox.org:mid,linaro.org:email,amd.com:email]
-X-Rspamd-Queue-Id: ADE87411919
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
+X-Rspamd-Queue-Id: 5939F411927
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-T24gV2VkLCAyMDI2LTAxLTE0IGF0IDEyOjMwICswMTAwLCBDaHJpc3RpYW4gS8O2bmlnIHdyb3Rl
-Og0KPiBPbiAxLzEzLzI2IDE3OjEyLCBQaGlsaXBwIFN0YW5uZXIgd3JvdGU6DQo+ID4gT24gVHVl
-LCAyMDI2LTAxLTEzIGF0IDE2OjE2ICswMTAwLCBDaHJpc3RpYW4gS8O2bmlnIHdyb3RlOg0KPiA+
-ID4gVXNpbmcgdGhlIGlubGluZSBsb2NrIGlzIG5vdyB0aGUgcmVjb21tZW5kZWQgd2F5IGZvciBk
-bWFfZmVuY2UgaW1wbGVtZW50YXRpb25zLg0KPiA+ID4gDQo+ID4gPiBGb3IgdGhlIHNjaGVkdWxl
-ciBmZW5jZSB1c2UgdGhlIGlubGluZSBsb2NrIGZvciB0aGUgc2NoZWR1bGVkIGZlbmNlIHBhcnQN
-Cj4gPiA+IGFuZCB0aGVuIHRoZSBsb2NrIGZyb20gdGhlIHNjaGVkdWxlZCBmZW5jZSBhcyBleHRl
-cm5hbCBsb2NrIGZvciB0aGUgZmluaXNoZWQgZmVuY2UuDQo+ID4gPiANCj4gPiA+IFRoaXMgd2F5
-IHRoZXJlIGlzIG5vIGZ1bmN0aW9uYWwgZGlmZmVyZW5jZSwgZXhjZXB0IGZvciBzYXZpbmcgdGhl
-IHNwYWNlDQo+ID4gPiBmb3IgdGhlIHNlcGFyYXRlIGxvY2suDQo+ID4gPiANCj4gPiA+IHYyOiBy
-ZS13b3JrIHRoZSBwYXRjaCB0byBhdm9pZCBhbnkgZnVuY3Rpb25hbCBkaWZmZXJlbmNlDQo+ID4g
-DQo+ID4gKmNvdWdoIGNvdWdoKg0KPiA+IA0KPiA+ID4gDQo+ID4gPiBTaWduZWQtb2ZmLWJ5OiBD
-aHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+DQo+ID4gPiAtLS0NCj4g
-PiA+IMKgZHJpdmVycy9ncHUvZHJtL3NjaGVkdWxlci9zY2hlZF9mZW5jZS5jIHwgNiArKystLS0N
-Cj4gPiA+IMKgaW5jbHVkZS9kcm0vZ3B1X3NjaGVkdWxlci5owqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgIHwgNCAtLS0tDQo+ID4gPiDCoDIgZmlsZXMgY2hhbmdlZCwgMyBpbnNlcnRpb25zKCspLCA3
-IGRlbGV0aW9ucygtKQ0KPiA+ID4gDQo+ID4gPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJt
-L3NjaGVkdWxlci9zY2hlZF9mZW5jZS5jIGIvZHJpdmVycy9ncHUvZHJtL3NjaGVkdWxlci9zY2hl
-ZF9mZW5jZS5jDQo+ID4gPiBpbmRleCA3MjRkNzc2OTQyNDYuLjExMjY3NzIzMWY5YSAxMDA2NDQN
-Cj4gPiA+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9zY2hlZHVsZXIvc2NoZWRfZmVuY2UuYw0KPiA+
-ID4gKysrIGIvZHJpdmVycy9ncHUvZHJtL3NjaGVkdWxlci9zY2hlZF9mZW5jZS5jDQo+ID4gPiBA
-QCAtMjE3LDcgKzIxNyw2IEBAIHN0cnVjdCBkcm1fc2NoZWRfZmVuY2UgKmRybV9zY2hlZF9mZW5j
-ZV9hbGxvYyhzdHJ1Y3QgZHJtX3NjaGVkX2VudGl0eSAqZW50aXR5LA0KPiA+ID4gwqANCj4gPiA+
-IMKgCWZlbmNlLT5vd25lciA9IG93bmVyOw0KPiA+ID4gwqAJZmVuY2UtPmRybV9jbGllbnRfaWQg
-PSBkcm1fY2xpZW50X2lkOw0KPiA+ID4gLQlzcGluX2xvY2tfaW5pdCgmZmVuY2UtPmxvY2spOw0K
-PiA+ID4gwqANCj4gPiA+IMKgCXJldHVybiBmZW5jZTsNCj4gPiA+IMKgfQ0KPiA+ID4gQEAgLTIz
-MCw5ICsyMjksMTAgQEAgdm9pZCBkcm1fc2NoZWRfZmVuY2VfaW5pdChzdHJ1Y3QgZHJtX3NjaGVk
-X2ZlbmNlICpmZW5jZSwNCj4gPiA+IMKgCWZlbmNlLT5zY2hlZCA9IGVudGl0eS0+cnEtPnNjaGVk
-Ow0KPiA+ID4gwqAJc2VxID0gYXRvbWljX2luY19yZXR1cm4oJmVudGl0eS0+ZmVuY2Vfc2VxKTsN
-Cj4gPiA+IMKgCWRtYV9mZW5jZV9pbml0KCZmZW5jZS0+c2NoZWR1bGVkLCAmZHJtX3NjaGVkX2Zl
-bmNlX29wc19zY2hlZHVsZWQsDQo+ID4gPiAtCQnCoMKgwqDCoMKgwqAgJmZlbmNlLT5sb2NrLCBl
-bnRpdHktPmZlbmNlX2NvbnRleHQsIHNlcSk7DQo+ID4gPiArCQnCoMKgwqDCoMKgwqAgTlVMTCwg
-ZW50aXR5LT5mZW5jZV9jb250ZXh0LCBzZXEpOw0KPiA+ID4gwqAJZG1hX2ZlbmNlX2luaXQoJmZl
-bmNlLT5maW5pc2hlZCwgJmRybV9zY2hlZF9mZW5jZV9vcHNfZmluaXNoZWQsDQo+ID4gPiAtCQnC
-oMKgwqDCoMKgwqAgJmZlbmNlLT5sb2NrLCBlbnRpdHktPmZlbmNlX2NvbnRleHQgKyAxLCBzZXEp
-Ow0KPiA+ID4gKwkJwqDCoMKgwqDCoMKgIGRtYV9mZW5jZV9zcGlubG9jaygmZmVuY2UtPnNjaGVk
-dWxlZCksDQo+ID4gDQo+ID4gSSB0aGluayB3aGlsZSB5b3UgYXJlIGNvcnJlY3QgdGhhdCB0aGlz
-IGlzIG5vIGZ1bmN0aW9uYWwgZGlmZmVyZW5jZSwgaXQNCj4gPiBpcyBzdGlsbCBhIGJhZCBpZGVh
-IHdoaWNoIHZpb2xhdGVzIHRoZSBlbnRpcmUgaWRlYSBvZiB5b3VyIHNlcmllczoNCj4gPiANCj4g
-PiBBbGwgZmVuY2VzIGFyZSBub3cgaW5kZXBlbmRlbnQgZnJvbSBlYWNoIG90aGVyIGFuZCB0aGUg
-ZmVuY2UgY29udGV4dCDigJMNCj4gPiBleGNlcHQgZm9yIHRob3NlIHR3by4NCj4gPiANCj4gPiBT
-b21lIGZlbmNlcyBhcmUgbW9yZSBlcXVhbCB0aGFuIG90aGVycyA7KQ0KPiANCj4gWWVhaCwgSSB3
-YXMgZ29pbmcgYmFjayBhbmQgZm9ydGggb25jZSBtb3JlIGlmIEkgc2hvdWxkIGtlZXAgdGhpcyBw
-YXRjaCBhdCBhbGwgb3IganVzdCBkcm9wIGl0Lg0KPiANCj4gPiBCeSBpbXBsZW1lbnRpbmcgdGhp
-cywgeW91IHdvdWxkIGFsc28gc2hvdyB0byBwZW9wbGUgYnJvd3NpbmcgdGhlIGNvZGUNCj4gPiB0
-aGF0IGl0IGNhbiBiZSBhIGdvb2QgaWRlYSBvciBjYW4gYmUgZG9uZSB0byBoYXZlIGZlbmNlcyBz
-aGFyZSBsb2Nrcy4NCj4gPiBEbyB5b3Ugd2FudCB0aGF0Pw0KPiANCj4gR29vZCBxdWVzdGlvbi4g
-Rm9yIGFsbW9zdCBhbGwgY2FzZXMgd2UgZG9uJ3Qgd2FudCB0aGlzLCBidXQgb25jZSBtb3JlIHRo
-ZSBzY2hlZHVsZXIgaXMgc3BlY2lhbC4NCj4gDQo+IEluIHRoZSBzY2hlZHVsZXIgd2UgaGF2ZSB0
-d28gZmVuY2VzIGluIG9uZSwgdGhlIHNjaGVkdWxlZCBvbmUgYW5kIHRoZSBmaW5pc2hlZCBvbmUu
-DQo+IA0KPiBTbyBoZXJlIGl0IHRlY2huaWNhbGx5IG1ha2VzIHNlbnNlIHRvIGhhdmUgdGhpcyBj
-b25zdHJ1Y3QgdG8gYmUgZGVmZW5zaXZlLg0KPiANCj4gQnV0IG9uIHRoZSBvdGhlciBoYW5kIGl0
-IGhhcyBubyBwcmFjdGljYWwgdmFsdWUgYmVjYXVzZSBpdCBzdGlsbCBkb2Vzbid0IGFsbG93IHVz
-IHRvIHVubG9hZCB0aGUgc2NoZWR1bGVyIG1vZHVsZS4gV2Ugd291bGQgbmVlZCBhIG11Y2ggd2lk
-ZXIgcmV3b3JrIGZvciBiZWluZyBhYmxlIHRvIGRvIHRoYXQuDQo+IA0KPiBTbyBtYXliZSBJIHNo
-b3VsZCBqdXN0IHJlYWxseSBkcm9wIHRoaXMgcGF0Y2ggb3IgYXQgbGVhc3Qga2VlcCBpdCBiYWNr
-IHVudGlsIHdlIGhhZCB0aW1lIHRvIGZpZ3VyZSBvdXQgd2hhdCB0aGUgbmV4dCBzdGVwcyBhcmUu
-DQo+IA0KPiA+IEFzIGZhciBhcyBJIGhhdmUgbGVhcm5lZCBmcm9tIHlvdSBhbmQgb3VyIGRpc2N1
-c3Npb25zLCB0aGF0IHdvdWxkIGJlIGENCj4gPiB2ZXJ5IGJvbWJhc3RpYyB2aW9sYXRpb24gb2Yg
-dGhlIHNhY3JlZCAiZG1hLWZlbmNlLXJ1bGVzIi4NCj4gDQo+IFdlbGwgdXNpbmcgdGhlIGlubGlu
-ZSBmZW5jZSBpcyAib25seSIgYSBzdHJvbmcgcmVjb21tZW5kYXRpb24uIEl0J3Mgbm90IGFzIGhl
-YXZ5IGFzIHRoZSBzaWduYWxpbmcgcnVsZXMgYmVjYXVzZSB3aGVuIHlvdSBtZXNzIHVwIHRob3Nl
-IHlvdSBjYW4gZWFzaWx5IGtpbGwgdGhlIHdob2xlIHN5c3RlbS4NCj4gDQo+ID4gSSBiZWxpZXZl
-IGl0J3MgZGVmaW5pdGVseSB3b3J0aCBzYWNyaWZpY2luZyBzb21lIGJ5dGVzIHNvIHRoYXQgdGhv
-c2UNCj4gPiB0d28gZmVuY2VzIGdldCBmdWxseSBkZWNvdXBsZWQuIFdobyB3aWxsIGhhdmUgaXQg
-b24gdGhlaXIgcmFkYXIgdGhhdA0KPiA+IHRoZXkgYXJlIHNwZWNpYWw/IFRoaW5rIGFib3V0IGZ1
-dHVyZSByZXdvcmtzLg0KPiANCj4gVGhpcyBkb2Vzbid0IGV2ZW4gc2F2ZSBhbnkgYnl0ZXMsIG15
-IHRoaW5raW5nIHdhcyBtb3JlIHRoYXQgdGhpcyBpcyB0aGUgbW9yZSBkZWZlbnNpdmUgYXBwcm9h
-Y2ggc2hvdWxkIGFueWJvZHkgdXNlIHRoZSBzcGlubG9jayBwb2ludGVyIGZyb20gdGhlIHNjaGVk
-dWxlciBmZW5jZSB0byBkbyBzb21lIGxvY2tpbmcuDQo+IA0KDQpVc2luZyB0aGUgc2NoZWR1bGVy
-J3MgaW50ZXJuYWwgbG9ja3MgaXMgbm90IGxlZ2FsIChhbnltb3JlKS4gV2l0aCB0aGUNCnNjaGVk
-X2ZlbmNlIGl0J3MgYSBiaXQgc3BlY2lhbCB0aG91Z2ggYmVjYXVzZSB0aGF0IGlzIHRoZQ0Kc3lu
-Y2hyb25pemF0aW9uIG9iamVjdCBmb3IgdGhlIGRyaXZlciwgYWN0dWFsbHkuIFNvIEkgZG9uJ3Qg
-a25vdw0KZWl0aGVyLg0KDQpJIHdvdWxkIHNheSBlaXRoZXIgc2VwYXJhdGUgdGhlIGxvY2tzLCBv
-ciBkcm9wIHRoZSBwYXRjaCBhcyB5b3UNCnN1Z2dlc3QuDQoNCg0KUC4NCg0KPiA+IEJlc2lkZXMg
-dGhhdCwgbm8gb2JqZWN0aW9ucyBmcm9tIG15IHNpZGUuDQo+IA0KPiBUaGFua3MsDQo+IENocmlz
-dGlhbi4NCj4gDQo+ID4gDQo+ID4gDQo+ID4gUC4NCj4gPiANCj4gPiA+ICsJCcKgwqDCoMKgwqDC
-oCBlbnRpdHktPmZlbmNlX2NvbnRleHQgKyAxLCBzZXEpOw0KPiA+ID4gwqB9DQo+ID4gPiDCoA0K
-PiA+ID4gwqBtb2R1bGVfaW5pdChkcm1fc2NoZWRfZmVuY2Vfc2xhYl9pbml0KTsNCj4gPiA+IGRp
-ZmYgLS1naXQgYS9pbmNsdWRlL2RybS9ncHVfc2NoZWR1bGVyLmggYi9pbmNsdWRlL2RybS9ncHVf
-c2NoZWR1bGVyLmgNCj4gPiA+IGluZGV4IDc4ZTA3YzI1MDdjNy4uYWQzNzA0Njg1MTYzIDEwMDY0
-NA0KPiA+ID4gLS0tIGEvaW5jbHVkZS9kcm0vZ3B1X3NjaGVkdWxlci5oDQo+ID4gPiArKysgYi9p
-bmNsdWRlL2RybS9ncHVfc2NoZWR1bGVyLmgNCj4gPiA+IEBAIC0yOTcsMTAgKzI5Nyw2IEBAIHN0
-cnVjdCBkcm1fc2NoZWRfZmVuY2Ugew0KPiA+ID4gwqDCoMKgwqDCoMKgwqDCoMKgICogYmVsb25n
-cyB0by4NCj4gPiA+IMKgwqDCoMKgwqDCoMKgwqDCoCAqLw0KPiA+ID4gwqAJc3RydWN0IGRybV9n
-cHVfc2NoZWR1bGVyCSpzY2hlZDsNCj4gPiA+IC3CoMKgwqDCoMKgwqDCoCAvKioNCj4gPiA+IC3C
-oMKgwqDCoMKgwqDCoMKgICogQGxvY2s6IHRoZSBsb2NrIHVzZWQgYnkgdGhlIHNjaGVkdWxlZCBh
-bmQgdGhlIGZpbmlzaGVkIGZlbmNlcy4NCj4gPiA+IC3CoMKgwqDCoMKgwqDCoMKgICovDQo+ID4g
-PiAtCXNwaW5sb2NrX3QJCQlsb2NrOw0KPiA+ID4gwqDCoMKgwqDCoMKgwqDCoCAvKioNCj4gPiA+
-IMKgwqDCoMKgwqDCoMKgwqDCoCAqIEBvd25lcjogam9iIG93bmVyIGZvciBkZWJ1Z2dpbmcNCj4g
-PiA+IMKgwqDCoMKgwqDCoMKgwqDCoCAqLw0KPiA+IA0KPiANCg0KX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3Qg
-LS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4g
-ZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
+On 12/18/25 21:05, Barry Song wrote:
+> [...]
+>>>
+>>> +static inline int get_vmap_batch_order(struct page **pages,
+>>> +             unsigned int stride, unsigned int max_steps, unsigned int idx)
+>>> +{
+>>> +     int nr_pages = 1;
+>>> +
+>>> +     /*
+>>> +      * Currently, batching is only supported in vmap_pages_range
+>>> +      * when page_shift == PAGE_SHIFT.
+>>> +      */
+>>> +     if (stride != 1)
+>>> +             return 0;
+>>> +
+>>> +     nr_pages = compound_nr(pages[idx]);
+>>> +     if (nr_pages == 1)
+>>> +             return 0;
+>>> +     if (max_steps < nr_pages)
+>>> +             return 0;
+>>> +
+>>> +     if (num_pages_contiguous(&pages[idx], nr_pages) == nr_pages)
+>>> +             return compound_order(pages[idx]);
+>>> +     return 0;
+>>> +}
+>>> +
+>> Can we instead look at this as: it can be that we have continues
+>> set of pages let's find out. I mean if we do not stick just to
+>> compound pages.
+> 
+> We use PageCompound(pages[0]) and compound_nr() as quick
+> filters to skip checking the contiguous count, and this is
+> now the intended use case. Always checking contiguity might
+> cause a slight regression, I guess.
+> 
+> BTW, do we have a strong use case where GFP_COMP or folio is
+> not used, yet the pages are physically contiguous?
+
+It usually happens by accident :)
+
+E.g., allocate 2 pages and because we had to split an order-1 page into 
+two order-0 pages, we get both of them.
+
+Using num_pages_contiguous() only might indeed be nicer, but then we 
+have to add some handling for getting aligned ranges (start and size 
+aligned to order) ... so not sure if that is worth it.
+
+-- 
+Cheers
+
+David
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
