@@ -2,98 +2,95 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id ABDC7D1CB28
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 14 Jan 2026 07:41:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2E790D1CC5B
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 14 Jan 2026 08:13:30 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7245540175
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 14 Jan 2026 06:41:29 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.13])
-	by lists.linaro.org (Postfix) with ESMTPS id 4E7183F6FF
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 14 Jan 2026 06:41:21 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 281F93E90F
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 14 Jan 2026 07:13:29 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.17])
+	by lists.linaro.org (Postfix) with ESMTPS id 49E063E90F
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 14 Jan 2026 07:13:23 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b="JqqY/iqe";
-	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 198.175.65.13 as permitted sender) smtp.mailfrom=lkp@intel.com;
+	dkim=pass header.d=intel.com header.s=Intel header.b=ejQXypYe;
+	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 192.198.163.17 as permitted sender) smtp.mailfrom=lkp@intel.com;
 	dmarc=pass (policy=none) header.from=intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1768372882; x=1799908882;
+  t=1768374804; x=1799910804;
   h=date:from:to:cc:subject:message-id:references:
    mime-version:in-reply-to;
-  bh=XpxsGPlLj5NM4VDI7W0Vxow+OTTiPnZzejvjUQVlmf8=;
-  b=JqqY/iqeOOvWUvCigFwRkhVpZc34aXJyZd5rViw10xdmkbW7lXhNtsYy
-   a1i+7HNdcTh9otvikbHVg9fT/1FvCQKjrE5XHDCI5jl+fwLMhjpOl1HMY
-   eCthKGF/tY4WbzdhBtRBPiF+YCr1UyCYv1HZ7pzMWE9Ny3dCICSBZ6h4N
-   VrVHprzQivOq2tH7XPFI2jlQAr2Ckpf8FvVCIcliBogC1hH5ejyX2N2w3
-   aIdbS/HWMkifbcJxaMf7ZYjIvRIcNFlrx4UFeHZveB7DwLEOZv3CTE9ZH
-   aTJVv3e0vziC0YwNLUlp5s9qKa6bESje+OVdijs5qWWEde+V/6CuzxAWl
-   Q==;
-X-CSE-ConnectionGUID: McGLA0I7TR+ANErR89Evvw==
-X-CSE-MsgGUID: xMcJTsleSx20XoDEpugSNA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11670"; a="80777749"
+  bh=B1i3RGrMn24RmFoQ6OZ5PlSAfVLwdXHdm5Wr+tCH83k=;
+  b=ejQXypYe5VQz/wQXPcUv0au7HM25LaP3NINiZgDp7Nb0zf2MhW1x+Kwb
+   +hLyhMU7z3qFGH+xtWpNw6OdG7HCeepI8+dFwBCChjCaf1FSu93QGZ8Nr
+   YMNBBLBdKHroeMts3xCDbL7/YY4SdeKUvYgQNLkZ0EYV/90JOjv6zNzBf
+   K15Wp4Bb/i2kUEKB7ALk25e1cXxmbe1zhalks/Z9B0UxGpSjgICklqGFa
+   uE5v3mCPb8zuXZ+odyx11q3wHIsBgQQoIMxtb0Ux+GLGdwBjTnwvU5OGZ
+   KguF1cplkpyL6sYerT4kQOTUgJ6aT3JowurRJBXokV2PhANo6Ik3/28E5
+   A==;
+X-CSE-ConnectionGUID: PbcM6qaxQJSrThdL9S4dVQ==
+X-CSE-MsgGUID: 5cRR6QWJRJ+ycBiftlILkQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11670"; a="69577189"
 X-IronPort-AV: E=Sophos;i="6.21,225,1763452800";
-   d="scan'208";a="80777749"
-Received: from fmviesa002.fm.intel.com ([10.60.135.142])
-  by orvoesa105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Jan 2026 22:41:20 -0800
-X-CSE-ConnectionGUID: Li1sWpUOTPeHOoMTNEmoIw==
-X-CSE-MsgGUID: k9fAY+zpRnqecC2vExlfZw==
+   d="scan'208";a="69577189"
+Received: from fmviesa003.fm.intel.com ([10.60.135.143])
+  by fmvoesa111.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Jan 2026 23:13:22 -0800
+X-CSE-ConnectionGUID: rdcFbvxzTmKOdXk1PYbxcw==
+X-CSE-MsgGUID: LFZsELyYRUSJLhQCO+80AA==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.21,225,1763452800";
-   d="scan'208";a="227745806"
 Received: from lkp-server01.sh.intel.com (HELO 765f4a05e27f) ([10.239.97.150])
-  by fmviesa002.fm.intel.com with ESMTP; 13 Jan 2026 22:41:17 -0800
+  by fmviesa003.fm.intel.com with ESMTP; 13 Jan 2026 23:13:20 -0800
 Received: from kbuild by 765f4a05e27f with local (Exim 4.98.2)
 	(envelope-from <lkp@intel.com>)
-	id 1vfuZ9-00000000FwK-1ZET;
-	Wed, 14 Jan 2026 06:41:15 +0000
-Date: Wed, 14 Jan 2026 14:40:23 +0800
+	id 1vfv49-00000000Fya-46Ny;
+	Wed, 14 Jan 2026 07:13:17 +0000
+Date: Wed, 14 Jan 2026 15:13:02 +0800
 From: kernel test robot <lkp@intel.com>
 To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>,
 	phasta@mailbox.org, tursulin@ursulin.net, matthew.brost@intel.com,
 	sumit.semwal@linaro.org
-Message-ID: <202601141517.1B4n6bXr-lkp@intel.com>
+Message-ID: <202601141412.WQDwevjM-lkp@intel.com>
 References: <20260113152125.47380-6-christian.koenig@amd.com>
 MIME-Version: 1.0
 Content-Disposition: inline
 In-Reply-To: <20260113152125.47380-6-christian.koenig@amd.com>
-X-Rspamd-Queue-Id: 4E7183F6FF
+X-Rspamd-Queue-Id: 49E063E90F
 X-Spamd-Bar: ------
 X-Spamd-Result: default: False [-6.00 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
 	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
+	BAYES_HAM(-3.00)[100.00%];
 	MID_CONTAINS_FROM(1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
 	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip4:198.175.65.0/26];
+	R_SPF_ALLOW(-0.20)[+ip4:192.198.163.0/26];
 	MIME_GOOD(-0.10)[text/plain];
-	FREEMAIL_TO(0.00)[gmail.com,mailbox.org,ursulin.net,intel.com,linaro.org];
-	MIME_TRACE(0.00)[0:+];
 	ARC_NA(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:4983, ipnet:198.175.64.0/23, country:US];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	DWL_DNSWL_BLOCKED(0.00)[intel.com:dkim];
+	ASN(0.00)[asn:4983, ipnet:192.198.162.0/23, country:US];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[gmail.com,mailbox.org,ursulin.net,intel.com,linaro.org];
 	NEURAL_HAM(-0.00)[-1.000];
+	TO_DN_SOME(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[8];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	DNSWL_BLOCKED(0.00)[198.175.65.13:from];
+	DNSWL_BLOCKED(0.00)[192.198.163.17:from];
 	RCVD_COUNT_THREE(0.00)[3];
 	DKIM_TRACE(0.00)[intel.com:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: 2KY6M5TDTGPWMVN54NQWDVSOPV4UIA7T
-X-Message-ID-Hash: 2KY6M5TDTGPWMVN54NQWDVSOPV4UIA7T
+Message-ID-Hash: HJM7PRJ2UTDQOEMQN6WWNPFLUYO7SXQK
+X-Message-ID-Hash: HJM7PRJ2UTDQOEMQN6WWNPFLUYO7SXQK
 X-MailFrom: lkp@intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+CC: oe-kbuild-all@lists.linux.dev, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH 05/10] dma-buf: inline spinlock for fence protection v4
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2KY6M5TDTGPWMVN54NQWDVSOPV4UIA7T/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HJM7PRJ2UTDQOEMQN6WWNPFLUYO7SXQK/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -118,75 +115,102 @@ url:    https://github.com/intel-lab-lkp/linux/commits/Christian-K-nig/dma-buf-a
 base:   https://gitlab.freedesktop.org/drm/misc/kernel.git drm-misc-next
 patch link:    https://lore.kernel.org/r/20260113152125.47380-6-christian.koenig%40amd.com
 patch subject: [PATCH 05/10] dma-buf: inline spinlock for fence protection v4
-config: x86_64-rhel-9.4-rust (https://download.01.org/0day-ci/archive/20260114/202601141517.1B4n6bXr-lkp@intel.com/config)
-compiler: clang version 20.1.8 (https://github.com/llvm/llvm-project 87f0227cb60147a26a1eeb4fb06e3b505e9c7261)
-rustc: rustc 1.88.0 (6b00bc388 2025-06-23)
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20260114/202601141517.1B4n6bXr-lkp@intel.com/reproduce)
+config: x86_64-buildonly-randconfig-004-20260114 (https://download.01.org/0day-ci/archive/20260114/202601141412.WQDwevjM-lkp@intel.com/config)
+compiler: gcc-14 (Debian 14.2.0-19) 14.2.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20260114/202601141412.WQDwevjM-lkp@intel.com/reproduce)
 
 If you fix the issue in a separate patch/commit (i.e. not just a new version of
 the same patch/commit), kindly add following tags
 | Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202601141517.1B4n6bXr-lkp@intel.com/
+| Closes: https://lore.kernel.org/oe-kbuild-all/202601141412.WQDwevjM-lkp@intel.com/
 
 All errors (new ones prefixed by >>):
 
->> drivers/gpu/drm/i915/gt/intel_breadcrumbs.c:151:29: error: no member named 'lock' in 'struct dma_fence'
+   In file included from arch/x86/include/asm/bug.h:193,
+                    from arch/x86/include/asm/alternative.h:9,
+                    from arch/x86/include/asm/segment.h:6,
+                    from arch/x86/include/asm/ptrace.h:5,
+                    from arch/x86/include/asm/math_emu.h:5,
+                    from arch/x86/include/asm/processor.h:13,
+                    from include/linux/sched.h:13,
+                    from include/linux/kthread.h:6,
+                    from drivers/gpu/drm/i915/gt/intel_breadcrumbs.c:6:
+   drivers/gpu/drm/i915/gt/intel_breadcrumbs.c: In function '__dma_fence_signal__notify':
+>> drivers/gpu/drm/i915/gt/intel_breadcrumbs.c:151:34: error: 'struct dma_fence' has no member named 'lock'
      151 |         lockdep_assert_held(fence->lock);
-         |                             ~~~~~  ^
-   include/linux/lockdep.h:392:46: note: expanded from macro 'lockdep_assert_held'
-     392 | #define lockdep_assert_held(l)                  do { (void)(l); } while (0)
-         |                                                             ^
-   1 error generated.
+         |                                  ^~
+   include/asm-generic/bug.h:205:32: note: in definition of macro 'WARN_ON'
+     205 |         int __ret_warn_on = !!(condition);                              \
+         |                                ^~~~~~~~~
+   include/linux/lockdep.h:285:9: note: in expansion of macro 'lockdep_assert'
+     285 |         lockdep_assert(lockdep_is_held(l) != LOCK_STATE_NOT_HELD)
+         |         ^~~~~~~~~~~~~~
+   include/linux/lockdep.h:285:24: note: in expansion of macro 'lockdep_is_held'
+     285 |         lockdep_assert(lockdep_is_held(l) != LOCK_STATE_NOT_HELD)
+         |                        ^~~~~~~~~~~~~~~
+   drivers/gpu/drm/i915/gt/intel_breadcrumbs.c:151:9: note: in expansion of macro 'lockdep_assert_held'
+     151 |         lockdep_assert_held(fence->lock);
+         |         ^~~~~~~~~~~~~~~~~~~
 --
->> drivers/gpu/drm/i915/i915_active.c:1048:27: error: no member named 'lock' in 'struct dma_fence'
+   In file included from include/linux/debugobjects.h:6,
+                    from drivers/gpu/drm/i915/i915_active.c:7:
+   drivers/gpu/drm/i915/i915_active.c: In function '__i915_active_fence_set':
+>> drivers/gpu/drm/i915/i915_active.c:1048:32: error: 'struct dma_fence' has no member named 'lock'
     1048 |         spin_lock_irqsave(fence->lock, flags);
-         |                           ~~~~~  ^
-   include/linux/spinlock.h:381:39: note: expanded from macro 'spin_lock_irqsave'
-     381 |         raw_spin_lock_irqsave(spinlock_check(lock), flags);     \
-         |                                              ^~~~
-   include/linux/spinlock.h:244:34: note: expanded from macro 'raw_spin_lock_irqsave'
+         |                                ^~
+   include/linux/spinlock.h:244:48: note: in definition of macro 'raw_spin_lock_irqsave'
      244 |                 flags = _raw_spin_lock_irqsave(lock);   \
          |                                                ^~~~
-   drivers/gpu/drm/i915/i915_active.c:1050:26: error: no member named 'lock' in 'struct dma_fence'
+   drivers/gpu/drm/i915/i915_active.c:1048:9: note: in expansion of macro 'spin_lock_irqsave'
+    1048 |         spin_lock_irqsave(fence->lock, flags);
+         |         ^~~~~~~~~~~~~~~~~
+   drivers/gpu/drm/i915/i915_active.c:1050:38: error: 'struct dma_fence' has no member named 'lock'
     1050 |                 spin_lock_nested(prev->lock, SINGLE_DEPTH_NESTING);
-         |                                  ~~~~  ^
-   include/linux/spinlock.h:366:38: note: expanded from macro 'spin_lock_nested'
-     366 |         raw_spin_lock_nested(spinlock_check(lock), subclass);   \
-         |                                             ^~~~
-   include/linux/spinlock.h:235:37: note: expanded from macro 'raw_spin_lock_nested'
-     235 |         _raw_spin_lock(((void)(subclass), (lock)))
-         |                                            ^~~~
-   drivers/gpu/drm/i915/i915_active.c:1064:22: error: no member named 'lock' in 'struct dma_fence'
+         |                                      ^~
+   include/linux/spinlock.h:221:31: note: in definition of macro 'raw_spin_lock_nested'
+     221 |         _raw_spin_lock_nested(lock, subclass)
+         |                               ^~~~
+   drivers/gpu/drm/i915/i915_active.c:1050:17: note: in expansion of macro 'spin_lock_nested'
+    1050 |                 spin_lock_nested(prev->lock, SINGLE_DEPTH_NESTING);
+         |                 ^~~~~~~~~~~~~~~~
+   drivers/gpu/drm/i915/i915_active.c:1064:41: error: 'struct dma_fence' has no member named 'lock'
     1064 |                         spin_unlock(prev->lock);
-         |                                     ~~~~  ^
-   drivers/gpu/drm/i915/i915_active.c:1067:33: error: no member named 'lock' in 'struct dma_fence'
+         |                                         ^~
+   drivers/gpu/drm/i915/i915_active.c:1067:45: error: 'struct dma_fence' has no member named 'lock'
     1067 |                 spin_unlock_irqrestore(fence->lock, flags);
-         |                                        ~~~~~  ^
-   drivers/gpu/drm/i915/i915_active.c:1072:28: error: no member named 'lock' in 'struct dma_fence'
+         |                                             ^~
+   drivers/gpu/drm/i915/i915_active.c:1072:40: error: 'struct dma_fence' has no member named 'lock'
     1072 |                 spin_lock_irqsave(fence->lock, flags);
-         |                                   ~~~~~  ^
-   include/linux/spinlock.h:381:39: note: expanded from macro 'spin_lock_irqsave'
-     381 |         raw_spin_lock_irqsave(spinlock_check(lock), flags);     \
-         |                                              ^~~~
-   include/linux/spinlock.h:244:34: note: expanded from macro 'raw_spin_lock_irqsave'
+         |                                        ^~
+   include/linux/spinlock.h:244:48: note: in definition of macro 'raw_spin_lock_irqsave'
      244 |                 flags = _raw_spin_lock_irqsave(lock);   \
          |                                                ^~~~
-   drivers/gpu/drm/i915/i915_active.c:1074:27: error: no member named 'lock' in 'struct dma_fence'
+   drivers/gpu/drm/i915/i915_active.c:1072:17: note: in expansion of macro 'spin_lock_irqsave'
+    1072 |                 spin_lock_irqsave(fence->lock, flags);
+         |                 ^~~~~~~~~~~~~~~~~
+   drivers/gpu/drm/i915/i915_active.c:1074:46: error: 'struct dma_fence' has no member named 'lock'
     1074 |                         spin_lock_nested(prev->lock, SINGLE_DEPTH_NESTING);
-         |                                          ~~~~  ^
-   include/linux/spinlock.h:366:38: note: expanded from macro 'spin_lock_nested'
-     366 |         raw_spin_lock_nested(spinlock_check(lock), subclass);   \
-         |                                             ^~~~
-   include/linux/spinlock.h:235:37: note: expanded from macro 'raw_spin_lock_nested'
-     235 |         _raw_spin_lock(((void)(subclass), (lock)))
-         |                                            ^~~~
-   drivers/gpu/drm/i915/i915_active.c:1091:21: error: no member named 'lock' in 'struct dma_fence'
+         |                                              ^~
+   include/linux/spinlock.h:221:31: note: in definition of macro 'raw_spin_lock_nested'
+     221 |         _raw_spin_lock_nested(lock, subclass)
+         |                               ^~~~
+   drivers/gpu/drm/i915/i915_active.c:1074:25: note: in expansion of macro 'spin_lock_nested'
+    1074 |                         spin_lock_nested(prev->lock, SINGLE_DEPTH_NESTING);
+         |                         ^~~~~~~~~~~~~~~~
+   drivers/gpu/drm/i915/i915_active.c:1091:33: error: 'struct dma_fence' has no member named 'lock'
     1091 |                 spin_unlock(prev->lock); /* serialise with prev->cb_list */
-         |                             ~~~~  ^
-   drivers/gpu/drm/i915/i915_active.c:1094:32: error: no member named 'lock' in 'struct dma_fence'
+         |                                 ^~
+   drivers/gpu/drm/i915/i915_active.c:1094:37: error: 'struct dma_fence' has no member named 'lock'
     1094 |         spin_unlock_irqrestore(fence->lock, flags);
-         |                                ~~~~~  ^
-   8 errors generated.
+         |                                     ^~
+   In file included from drivers/gpu/drm/i915/i915_active.c:1174:
+   drivers/gpu/drm/i915/selftests/i915_active.c: In function 'active_flush':
+>> drivers/gpu/drm/i915/selftests/i915_active.c:326:28: error: 'struct dma_fence' has no member named 'lock'
+     326 |         spin_lock_irq(fence->lock);
+         |                            ^~
+   drivers/gpu/drm/i915/selftests/i915_active.c:328:30: error: 'struct dma_fence' has no member named 'lock'
+     328 |         spin_unlock_irq(fence->lock); /* serialise with fence->cb_list */
+         |                              ^~
 
 
 vim +151 drivers/gpu/drm/i915/gt/intel_breadcrumbs.c
