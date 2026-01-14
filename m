@@ -2,45 +2,45 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id BF61DD1EA2E
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 14 Jan 2026 13:05:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2238BD1EA76
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 14 Jan 2026 13:09:13 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id D31D1401B1
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 14 Jan 2026 12:05:03 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
-	by lists.linaro.org (Postfix) with ESMTPS id 0611C3E90F
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 14 Jan 2026 12:04:55 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3879E40145
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 14 Jan 2026 12:09:12 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.19])
+	by lists.linaro.org (Postfix) with ESMTPS id EC96540145
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 14 Jan 2026 12:09:06 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=bTleEYBv;
-	spf=pass (lists.linaro.org: domain of jani.nikula@intel.com designates 198.175.65.21 as permitted sender) smtp.mailfrom=jani.nikula@intel.com;
+	dkim=pass header.d=intel.com header.s=Intel header.b=ccZ62Qnt;
+	spf=pass (lists.linaro.org: domain of jani.nikula@intel.com designates 192.198.163.19 as permitted sender) smtp.mailfrom=jani.nikula@intel.com;
 	dmarc=pass (policy=none) header.from=intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1768392297; x=1799928297;
+  t=1768392547; x=1799928547;
   h=from:to:cc:subject:in-reply-to:references:date:
    message-id:mime-version;
-  bh=8Vys6z8x451y8jCfmv4tHJdqji+vE+8qZ4G6/y7V1fs=;
-  b=bTleEYBvTPwiLQ7JdoJfPVn5CnnqxLFhU0cJXLT/WCocWWV+IrIsxH9Y
-   m0O+NZ88XyF+18CNPzRXV+VuIKzKFJndh2UouFGnHK9RfHykWen8hM8Im
-   PECNs5SOYDUMPhMAWf8HbHONDZDsw9jmPT9dqONtaIK1DCp6WyyL82VuX
-   Zz+6jMwMlMN02c2QjbeqHSXes9D9feSJOieYOPG5rpAUDvOI6rLE7hGLU
-   bjjZ/Z/vDvGUICwkPtxPbV8EW/++9bKIrK8N4YTpLbW8kU1guoQY1ubiV
-   7p7sjp6LuDgrBeVkI0uCHxM5QBqbrGD/Fka48fmiW5GEl6U2SqTahuao1
-   A==;
-X-CSE-ConnectionGUID: wA+RBVQyQ5C8MC6ksC9cug==
-X-CSE-MsgGUID: F28DnXlPR8Kw8VEoLaiMIA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11670"; a="69608379"
+  bh=EYswg02gjuvqs73LUDwN0ChfKC/BQKKnQB+oeLlaqiM=;
+  b=ccZ62QnttDIQuKNRrPINyW3NcuVpRv7Tb/nL9yvhw60jFURL4IIPnyZU
+   8kWpTYW/vlPhIvBbpDD+++HqzmWWqe/3OpRIkvLxyxHJ4hGZa9dfdEWx0
+   wYpCkEcNUAaVvfuhxUK6iOgyc6Fw9I019VndSt8rYXUEbaHVosvECmSQv
+   7ZfArwOTMAf/Dt1tOu3rMMCv9xtWyjQEnANaHH+IUQLHbDemOvjjKL+j9
+   e52jPr+DvyEIr1BRoiIsnPFesTUCp2sbesyKpnjg1U9HbwDEO7lZ5XKvC
+   G5rVsuIfN9Ot8MkKdwwz0qD35LwUVK50zAdJMdG6/xaNt52AlUTQt4n/z
+   g==;
+X-CSE-ConnectionGUID: 3iUZFvAuQLW7kKXFC9mMqg==
+X-CSE-MsgGUID: ekVkNqyJSmeDcXf5VRIexA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11670"; a="68697372"
 X-IronPort-AV: E=Sophos;i="6.21,225,1763452800";
-   d="scan'208";a="69608379"
-Received: from orviesa001.jf.intel.com ([10.64.159.141])
-  by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Jan 2026 04:04:56 -0800
-X-CSE-ConnectionGUID: L5TFJIbzQHuz1awGSe6Qmg==
-X-CSE-MsgGUID: UaaRHJhvTS+nCq8qGoc/sQ==
+   d="scan'208";a="68697372"
+Received: from fmviesa008.fm.intel.com ([10.60.135.148])
+  by fmvoesa113.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Jan 2026 04:09:06 -0800
+X-CSE-ConnectionGUID: YfId4127RIiRbKbn/2MR/A==
+X-CSE-MsgGUID: voMxLI1LSL+SxXySXk3osg==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.21,225,1763452800";
-   d="scan'208";a="242205696"
+   d="scan'208";a="204943430"
 Received: from klitkey1-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.246.94])
-  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Jan 2026 04:04:48 -0800
+  by fmviesa008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Jan 2026 04:08:59 -0800
 From: Jani Nikula <jani.nikula@linux.intel.com>
 To: Tomeu Vizoso <tomeu@tomeuvizoso.net>, Nishanth Menon <nm@ti.com>,
  "Andrew F. Davis" <afd@ti.com>, Randolph Sapp <rs@ti.com>, Jonathan
@@ -51,55 +51,54 @@ To: Tomeu Vizoso <tomeu@tomeuvizoso.net>, Nishanth Menon <nm@ti.com>,
  Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Sumit
  Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?Q?K=C3=B6nig?=
  <christian.koenig@amd.com>
-In-Reply-To: <20260113-thames-v1-4-99390026937c@tomeuvizoso.net>
+In-Reply-To: <20260113-thames-v1-2-99390026937c@tomeuvizoso.net>
 Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park,
  6 krs Bertel Jungin Aukio 5, 02600 Espoo, Finland
 References: <20260113-thames-v1-0-99390026937c@tomeuvizoso.net>
- <20260113-thames-v1-4-99390026937c@tomeuvizoso.net>
-Date: Wed, 14 Jan 2026 14:04:44 +0200
-Message-ID: <1acdffd8f05eae0a3531d43d3919d8bd4558f37a@intel.com>
+ <20260113-thames-v1-2-99390026937c@tomeuvizoso.net>
+Date: Wed, 14 Jan 2026 14:08:56 +0200
+Message-ID: <5d2167dd7c898afdb374429a9dca8d262967d125@intel.com>
 MIME-Version: 1.0
-X-Rspamd-Queue-Id: 0611C3E90F
+X-Rspamd-Queue-Id: EC96540145
 X-Spamd-Bar: ------
-X-Spamd-Result: default: False [-6.90 / 15.00];
+X-Spamd-Result: default: False [-6.20 / 15.00];
 	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
 	BAYES_HAM(-3.00)[99.99%];
-	R_MISSING_CHARSET(0.50)[];
-	RCVD_DKIM_ARC_DNSWL_MED(-0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_MISSING_CHARSET(0.50)[];
 	FORGED_SENDER(0.30)[jani.nikula@linux.intel.com,jani.nikula@intel.com];
-	RCVD_IN_DNSWL_MED(-0.20)[198.175.65.21:from];
 	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip4:198.175.65.0/26];
+	R_SPF_ALLOW(-0.20)[+ip4:192.198.163.0/26:c];
 	MIME_GOOD(-0.10)[text/plain];
 	RCPT_COUNT_TWELVE(0.00)[24];
-	FROM_NEQ_ENVFROM(0.00)[jani.nikula@linux.intel.com,jani.nikula@intel.com];
 	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
 	TO_DN_SOME(0.00)[];
+	ARC_NA(0.00)[];
 	HAS_ORG_HEADER(0.00)[];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
+	ASN(0.00)[asn:4983, ipnet:192.198.162.0/23, country:US];
 	DWL_DNSWL_BLOCKED(0.00)[intel.com:dkim];
 	NEURAL_HAM(-0.00)[-0.999];
-	RCVD_TLS_LAST(0.00)[];
-	ASN(0.00)[asn:4983, ipnet:198.175.64.0/23, country:US];
-	DKIM_TRACE(0.00)[intel.com:+];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_NEQ_ENVFROM(0.00)[jani.nikula@linux.intel.com,jani.nikula@intel.com];
+	FROM_HAS_DN(0.00)[];
 	MISSING_XM_UA(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[]
+	RCVD_TLS_LAST(0.00)[];
+	DNSWL_BLOCKED(0.00)[192.198.163.19:from];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	DKIM_TRACE(0.00)[intel.com:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: Z3QIZLHGNVELWHLXHYTBZU6U3OJB6DRN
-X-Message-ID-Hash: Z3QIZLHGNVELWHLXHYTBZU6U3OJB6DRN
+Message-ID-Hash: T3VDQWLHUV4IULHBLAPUFLSVEACBABFD
+X-Message-ID-Hash: T3VDQWLHUV4IULHBLAPUFLSVEACBABFD
 X-MailFrom: jani.nikula@intel.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: linux-arm-kernel@lists.infradead.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Tomeu Vizoso <tomeu@tomeuvizoso.net>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 4/5] accel/thames: Add IOCTL for job submission
+Subject: [Linaro-mm-sig] Re: [PATCH 2/5] accel/thames: Add driver for the C7x DSPs in TI SoCs
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/Z3QIZLHGNVELWHLXHYTBZU6U3OJB6DRN/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/T3VDQWLHUV4IULHBLAPUFLSVEACBABFD/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -110,22 +109,34 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
 On Tue, 13 Jan 2026, Tomeu Vizoso <tomeu@tomeuvizoso.net> wrote:
-> +#include "linux/dev_printk.h"
+> diff --git a/drivers/accel/Makefile b/drivers/accel/Makefile
+> index 1d3a7251b950f39e2ae600a2fc07a3ef7e41831e..8472989cbe22746f1e7292d2401fa0f7424a6c15 100644
+> --- a/drivers/accel/Makefile
+> +++ b/drivers/accel/Makefile
+> @@ -5,4 +5,5 @@ obj-$(CONFIG_DRM_ACCEL_ARM_ETHOSU)	+= ethosu/
+>  obj-$(CONFIG_DRM_ACCEL_HABANALABS)	+= habanalabs/
+>  obj-$(CONFIG_DRM_ACCEL_IVPU)		+= ivpu/
+>  obj-$(CONFIG_DRM_ACCEL_QAIC)		+= qaic/
+> -obj-$(CONFIG_DRM_ACCEL_ROCKET)		+= rocket/
+> \ No newline at end of file
+> +obj-$(CONFIG_DRM_ACCEL_ROCKET)		+= rocket/
+> +obj-$(CONFIG_DRM_ACCEL_THAMES)		+= thames/
+> \ No newline at end of file
 
-Random drive-by comment, please use <> instead of "" for include/
-headers.
+Maybe add the newline while at it.
 
-> +#include <drm/drm_file.h>
-> +#include <drm/drm_gem.h>
-> +#include <drm/drm_print.h>
-> +#include <drm/thames_accel.h>
-> +#include <linux/platform_device.h>
+> diff --git a/drivers/accel/thames/thames_core.c b/drivers/accel/thames/thames_core.c
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..92af1d68063116bcfa28a33960cbe829029fc1bf
+> --- /dev/null
+> +++ b/drivers/accel/thames/thames_core.c
+> @@ -0,0 +1,155 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/* Copyright 2026 Texas Instruments Incorporated - https://www.ti.com/ */
+> +
+> +#include "linux/remoteproc.h"
 
-In general, I think it will make everyone's life easier in the long run
-if the include directives are grouped and sorted.
-
-BR,
-Jani.
+Ditto here about <> not "".
 
 
 -- 
