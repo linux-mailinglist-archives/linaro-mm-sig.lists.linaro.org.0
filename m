@@ -2,195 +2,218 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 6OdnJ/wL4WnoogAAu9opvQ
+	id 6FtgMwQM4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:19:08 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:19:16 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5939F411927
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:19:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 53F0B41193C
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:19:16 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 6061B405D3
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:19:07 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 6492C3E90F
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 14 Jan 2026 12:59:49 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 63CCB404E9
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:19:15 +0000 (UTC)
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+	by lists.linaro.org (Postfix) with ESMTPS id D2AAA3F777
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 14 Jan 2026 15:47:13 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=jZjS9zsC;
-	spf=pass (lists.linaro.org: domain of david@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=david@kernel.org;
-	dmarc=pass (policy=quarantine) header.from=kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id BA70B4415D;
-	Wed, 14 Jan 2026 12:59:48 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 62F17C4CEF7;
-	Wed, 14 Jan 2026 12:59:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1768395588;
-	bh=2ciTmIsSF6ir6Fs6b26xcjWBNYW3JUmbkKGuRcyQpPY=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=jZjS9zsCl13WtaMFQGlitZVCg2C6jZHZTbbylp9PT0iQ5yi0psg8M81wXlYXUH4i5
-	 d3d+XtYyHVOzQjf9fEMATku1Kf+ZWMTvyI/iTWxhNG6OOQX+b/awgLPmuoDWUrsR1k
-	 Oh9o7C0QREl6zUz2W5nKIuObxCotCYsBYXhgcjE2PqO3aMVNsnC8+B1zxin1nzFAuP
-	 Tl8FkFtqGkB464MivgC9DqlJIrB3mM/GquDGxttTU7PIaDoQy5J/t2zbv7GfeAk0f6
-	 OeEtt0cArfKOVVCAd9YhETcKP2hmMdvlWyVvQRSlx4NUtfKJLuBm60bBza1EE+G6y8
-	 lgYpkjKoKN4yQ==
-Message-ID: <7f9fa27e-261f-4416-9a64-414d8130e5cb@kernel.org>
-Date: Wed, 14 Jan 2026 13:59:43 +0100
+	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=atgBWzbc;
+	spf=pass (lists.linaro.org: domain of echanude@redhat.com designates 170.10.129.124 as permitted sender) smtp.mailfrom=echanude@redhat.com;
+	dmarc=pass (policy=quarantine) header.from=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1768405633;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=gzUsW5No6dGH8ZciSrcNEaMmqaGyJ5Qr5Ou1SRqIt3k=;
+	b=atgBWzbckNjWqh6t8NYCS+s2aackK2SnNwftKP/gPpoUL5kiQ3HmBf6t1EgmdyN5oQLqte
+	QTieSQCzYsFSd14Ce7zNYy1OgUl2mZsO/yUvqXR4j0t2v320u5r36XetRKPu7KEEyEgLXQ
+	PiiXddxYfilkNNyshlkt/iJhFbSYUW0=
+Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
+ [209.85.219.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-155-Z0_QVerwM5O1ryRjKvagsA-1; Wed, 14 Jan 2026 10:47:10 -0500
+X-MC-Unique: Z0_QVerwM5O1ryRjKvagsA-1
+X-Mimecast-MFC-AGG-ID: Z0_QVerwM5O1ryRjKvagsA_1768405629
+Received: by mail-qv1-f71.google.com with SMTP id 6a1803df08f44-890805821c0so310183006d6.3
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 14 Jan 2026 07:47:10 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1768405629; x=1769010429;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=gzUsW5No6dGH8ZciSrcNEaMmqaGyJ5Qr5Ou1SRqIt3k=;
+        b=Y3Rv5Y9mjVO+SU0FukRNdgah0dDIAzsQ2V11c80/LRkZGMX+tE5lejH3VMNYB7ynna
+         upHJnYtKs3JxAKStk7TsQHcZJuFF3qQEVNGI2QVxAd2VMaQuAxdZnzPwfuGE1ec1BT6k
+         HJGnCl+9QhOSUm7y5RQe03OuJ5FrM1ftEuQ5b2yDUttI7BIhJxbCAVCze4I3RJMlZGGz
+         bpwM/cAxvz6IpHiHqs4TjbreWhgamaDDeVgtiu9GhPM9MeexabyUzoLbRwhO5GjFwVyf
+         MicNZMUqmSNucVw6shPqcTFfIFS7EFPzIEUTiKufTnDHKHk9FH9WzBMTgSHaJL7Xt+qi
+         HXAg==
+X-Forwarded-Encrypted: i=1; AJvYcCVEqXjoCOej1WFtu4s/0N30hIL5fLcKkRpkF77HjDNO51n9IPmkCKK1SeFZMMaoo/gKNzUFgnFVbHtD18Mn@lists.linaro.org
+X-Gm-Message-State: AOJu0YxIXllwHy1DhenY+69v2BXLScdEaVcmKTUKUlNh5+ifdpdC5ksA
+	sPea8+50vSDdoFsuJPnc+ha1BDzt4hRgDvq5Sl8vupou4C1gbzIYZ3MVbQn+Q9XmKr70LdFbi9j
+	trA9uzObz70ROShjof82hyTFaiKT09ZJqbTmSs6kXzgtPR3NNmQdddsOe7GLIU1VE1oIj
+X-Gm-Gg: AY/fxX66ysZ1Z9lYoaJGkhmCmOOKy/51KHkDWOwiZYs2PinxXDouNNy7np7WzWFJp9c
+	TGEctjN9xoUh01G9sj17C+r0wtSj5t201v/Pq5rxx7sGsBAE0lirsjgbRzPxOeoZIEaLhfaCABK
+	eZzIuZKo7adpgSHuep+NCLZuyXyJyhVDoV0w0lTWFoOl72nzgEo38OY7WFwvWO/NhUY3ii6wi3N
+	v8+jMvGViltlvqVBkfYPtFJChwk7egIQkk7RmjrUVFTp+Xtq9qLN8kq0AkCjgrKZPBdioGqGb0N
+	IU4DEJ8CClMcmhmBGrzUtHCLIJ+UdSwWmfsQ1K0n8eHHwzQWssG9qgaborZ77KzPIDDVS8zqutY
+	Fv1KEouaLJEJe4nO2FWtgqfeGfOtt+Ih7bWIJtpNSVgE0hbkP/Uc=
+X-Received: by 2002:a05:6214:1242:b0:889:7c5b:8134 with SMTP id 6a1803df08f44-89274367e44mr36520816d6.27.1768405629291;
+        Wed, 14 Jan 2026 07:47:09 -0800 (PST)
+X-Received: by 2002:a05:6214:1242:b0:889:7c5b:8134 with SMTP id 6a1803df08f44-89274367e44mr36520486d6.27.1768405628751;
+        Wed, 14 Jan 2026 07:47:08 -0800 (PST)
+Received: from localhost (pool-100-17-20-16.bstnma.fios.verizon.net. [100.17.20.16])
+        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-890772682besm179575456d6.50.2026.01.14.07.47.07
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 14 Jan 2026 07:47:08 -0800 (PST)
+Date: Wed, 14 Jan 2026 10:47:07 -0500
+From: Eric Chanudet <echanude@redhat.com>
+To: Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>
+Message-ID: <urjkdpeypk2uln6lkfi3fd54aqjlrirq23idl7wrnouuhox5rh@amxjnxrqs4lq>
+References: <20260113-dmabuf-heap-system-memcg-v2-0-e85722cc2f24@redhat.com>
+ <20260113-dmabuf-heap-system-memcg-v2-2-e85722cc2f24@redhat.com>
+ <7a0fcf24-09de-4f6e-8a0b-7b631b1315bb@amd.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Barry Song <21cnbao@gmail.com>, Uladzislau Rezki <urezki@gmail.com>
-References: <20251215053050.11599-1-21cnbao@gmail.com>
- <aUQJEa643lQAGK6s@milan>
- <CAGsJ_4zwqbg889+CTtO8XLQZu+rFs-m6+kANKO78-TAf4zjjaA@mail.gmail.com>
-From: "David Hildenbrand (Red Hat)" <david@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=david@kernel.org; keydata=
- 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
-In-Reply-To: <CAGsJ_4zwqbg889+CTtO8XLQZu+rFs-m6+kANKO78-TAf4zjjaA@mail.gmail.com>
+In-Reply-To: <7a0fcf24-09de-4f6e-8a0b-7b631b1315bb@amd.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: nAR7KJMsDj2zmx5qwtSFFti6vPPUVPadvmfOlLlUfSU_1768405629
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
 X-Spamd-Bar: ---
-X-MailFrom: david@kernel.org
+X-MailFrom: echanude@redhat.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: GVUWRJDEWTVJZTBJWLA3VGYLJZMEMT6F
-X-Message-ID-Hash: GVUWRJDEWTVJZTBJWLA3VGYLJZMEMT6F
+Message-ID-Hash: WEY4SIHEPIC6NAESYAKKRKDRUKS26ES6
+X-Message-ID-Hash: WEY4SIHEPIC6NAESYAKKRKDRUKS26ES6
 X-Mailman-Approved-At: Thu, 16 Apr 2026 16:12:03 +0000
-CC: akpm@linux-foundation.org, linux-mm@kvack.org, dri-devel@lists.freedesktop.org, jstultz@google.com, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, Barry Song <v-songbaohua@oppo.com>, Sumit Semwal <sumit.semwal@linaro.org>, Maxime Ripard <mripard@kernel.org>, Tangquan Zheng <zhengtangquan@oppo.com>
+CC: Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Maxime Ripard <mripard@redhat.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] mm/vmalloc: map contiguous pages in batches for vmap() whenever possible
+Subject: [Linaro-mm-sig] Re: [PATCH v2 2/2] dma-buf: system_heap: account for system heap allocation in memcg
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GVUWRJDEWTVJZTBJWLA3VGYLJZMEMT6F/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WEY4SIHEPIC6NAESYAKKRKDRUKS26ES6/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [2.99 / 15.00];
-	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
-	R_DKIM_REJECT(1.00)[kernel.org:s=k20201202];
-	DATE_IN_PAST(1.00)[2211];
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+X-Spamd-Result: default: False [3.49 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[redhat.com : SPF not aligned (relaxed),quarantine];
+	R_DKIM_REJECT(1.00)[redhat.com:s=mimecast20190719];
+	DATE_IN_PAST(1.00)[2208];
+	MID_RHS_NOT_FQDN(0.50)[];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FREEMAIL_TO(0.00)[gmail.com];
-	ARC_NA(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	RCPT_COUNT_TWELVE(0.00)[13];
+	RCVD_TLS_LAST(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[kernel.org:-];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	ARC_NA(0.00)[];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.937];
-	FROM_NEQ_ENVFROM(0.00)[david@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
+	DKIM_TRACE(0.00)[redhat.com:-];
 	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.815];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[echanude@redhat.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[11];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	MISSING_XM_UA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
-X-Rspamd-Queue-Id: 5939F411927
+X-Rspamd-Queue-Id: 53F0B41193C
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On 12/18/25 21:05, Barry Song wrote:
-> [...]
->>>
->>> +static inline int get_vmap_batch_order(struct page **pages,
->>> +             unsigned int stride, unsigned int max_steps, unsigned int idx)
->>> +{
->>> +     int nr_pages = 1;
->>> +
->>> +     /*
->>> +      * Currently, batching is only supported in vmap_pages_range
->>> +      * when page_shift == PAGE_SHIFT.
->>> +      */
->>> +     if (stride != 1)
->>> +             return 0;
->>> +
->>> +     nr_pages = compound_nr(pages[idx]);
->>> +     if (nr_pages == 1)
->>> +             return 0;
->>> +     if (max_steps < nr_pages)
->>> +             return 0;
->>> +
->>> +     if (num_pages_contiguous(&pages[idx], nr_pages) == nr_pages)
->>> +             return compound_order(pages[idx]);
->>> +     return 0;
->>> +}
->>> +
->> Can we instead look at this as: it can be that we have continues
->> set of pages let's find out. I mean if we do not stick just to
->> compound pages.
-> 
-> We use PageCompound(pages[0]) and compound_nr() as quick
-> filters to skip checking the contiguous count, and this is
-> now the intended use case. Always checking contiguity might
-> cause a slight regression, I guess.
-> 
-> BTW, do we have a strong use case where GFP_COMP or folio is
-> not used, yet the pages are physically contiguous?
+On Wed, Jan 14, 2026 at 11:38:27AM +0100, Christian K=F6nig wrote:
+> On 1/13/26 22:32, Eric Chanudet wrote:
+> > The system dma-buf heap lets userspace allocate buffers from the page
+> > allocator. However, these allocations are not accounted for in memcg,
+> > allowing processes to escape limits that may be configured.
+> >=20
+> > Pass __GFP_ACCOUNT for system heap allocations, based on the
+> > dma_heap.mem_accounting parameter, to use memcg and account for them.
+> >=20
+> > Signed-off-by: Eric Chanudet <echanude@redhat.com>
+> > ---
+> >  drivers/dma-buf/heaps/system_heap.c | 9 +++++++--
+> >  1 file changed, 7 insertions(+), 2 deletions(-)
+> >=20
+> > diff --git a/drivers/dma-buf/heaps/system_heap.c b/drivers/dma-buf/heap=
+s/system_heap.c
+> > index 4c782fe33fd497a74eb5065797259576f9b651b6..139b50df64ed4c4a6fdd69f=
+25fe48324fbe2c481 100644
+> > --- a/drivers/dma-buf/heaps/system_heap.c
+> > +++ b/drivers/dma-buf/heaps/system_heap.c
+> > @@ -52,6 +52,8 @@ static gfp_t order_flags[] =3D {HIGH_ORDER_GFP, HIGH_=
+ORDER_GFP, LOW_ORDER_GFP};
+> >  static const unsigned int orders[] =3D {8, 4, 0};
+> >  #define NUM_ORDERS ARRAY_SIZE(orders)
+> > =20
+> > +extern bool mem_accounting;
+>=20
+> Please define that in some header. Apart from that looks good technically.
 
-It usually happens by accident :)
+Thank you for the review, I can move it to linux/dma-heap.h in a v3
+since it's intended for other heaps as well.
 
-E.g., allocate 2 pages and because we had to split an order-1 page into 
-two order-0 pages, we get both of them.
+> But after the discussion it sounds more and more like we don't want to ac=
+count device driver allocated memory in memcg at all.
 
-Using num_pages_contiguous() only might indeed be nicer, but then we 
-have to add some handling for getting aligned ranges (start and size 
-aligned to order) ... so not sure if that is worth it.
+>From the threads in v1 I thought adding the switch left open a
+consideration to use memcg with driver allocated memory for userspace,
+even with the known caveats that implies. Re-reading your last reply[1],
+that's not quite the case it sounds like.
 
--- 
-Cheers
+Best,
 
-David
+[1] https://lore.kernel.org/all/e38d87d3-a114-43f9-be93-03e9b9f40844@amd.co=
+m/
+
+>=20
+> Regards,
+> Christian.
+>=20
+>=20
+> > +
+> >  static int dup_sg_table(struct sg_table *from, struct sg_table *to)
+> >  {
+> >  	struct scatterlist *sg, *new_sg;
+> > @@ -320,14 +322,17 @@ static struct page *alloc_largest_available(unsig=
+ned long size,
+> >  {
+> >  	struct page *page;
+> >  	int i;
+> > +	gfp_t flags;
+> > =20
+> >  	for (i =3D 0; i < NUM_ORDERS; i++) {
+> >  		if (size <  (PAGE_SIZE << orders[i]))
+> >  			continue;
+> >  		if (max_order < orders[i])
+> >  			continue;
+> > -
+> > -		page =3D alloc_pages(order_flags[i], orders[i]);
+> > +		flags =3D order_flags[i];
+> > +		if (mem_accounting)
+> > +			flags |=3D __GFP_ACCOUNT;
+> > +		page =3D alloc_pages(flags, orders[i]);
+> >  		if (!page)
+> >  			continue;
+> >  		return page;
+> >=20
+>=20
+
+--=20
+Eric Chanudet
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
