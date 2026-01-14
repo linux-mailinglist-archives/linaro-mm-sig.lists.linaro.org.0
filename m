@@ -2,34 +2,34 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 05615D20E9C
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 14 Jan 2026 19:54:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E1A5FD20F8D
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 14 Jan 2026 20:06:47 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id F0166401E9
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 14 Jan 2026 18:54:17 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id F2007401CC
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 14 Jan 2026 19:06:46 +0000 (UTC)
 Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
-	by lists.linaro.org (Postfix) with ESMTPS id 6A4EE3F7A8
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 14 Jan 2026 18:54:11 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 1A3A93F6F4
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 14 Jan 2026 19:06:41 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=infradead.org header.s=bombadil.20210309 header.b=Kr8yrggs;
+	dkim=pass header.d=infradead.org header.s=bombadil.20210309 header.b=TrjKq+vQ;
 	spf=none (lists.linaro.org: domain of rdunlap@infradead.org has no SPF policy when checking 198.137.202.133) smtp.mailfrom=rdunlap@infradead.org;
 	dmarc=pass (policy=none) header.from=infradead.org
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
 	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
-	bh=zcnIuWiSTIZZ0AACUI8rXLp5eXesHA5I/iZOlgjvMlE=; b=Kr8yrggslKb45qc/SMU7bLtOZc
-	a6T5AL0DkJtLc0OCBqC/g6HwDweR62qhUZxxhORr9CwZNktdGapst2q5mhiPHGB7dbbWv2BiJHjXl
-	hgSsok1QzcLKnrw4WYOMblinhb6RZlAz+7RBcEsnMYfxhB5I05Rm8Qr4seGQXFbhvj1qMwKcx/OKA
-	J2QPocAQIsQd14OoTLWOLzXP9cW3hWSWc19e5Mj2DZt4vvtWMEHhMx73rkY97IjDHWNa9DpxJ2K75
-	K/w4rfwnHP6J9x8r6omNzfDgqcGV41BCnSwenOZYkNLxmZDmnb/5Z/1qbtbT1jkrP+Aiigwpm6khl
-	LrNPOcHg==;
+	bh=MqYY9HoGox5VJhwTh0fKFFPWA1fKcL3f/K/VaXSx/pQ=; b=TrjKq+vQePymuAoxR+5z1RQxz6
+	CLbbYgQCRyLwYwFhevpQgzdNUiSSmd2pWZTEav9dqY+vchO0hlVsJmIlU67i3o2S5055FUZkodK3z
+	5KQfjqRoWWd6jIxr7+wyclxu/3HL+K2s5S2PNDMKzeuwh55Gi/4hv1t9U4EQQgpE8G865ra4Uqdbe
+	TUMSZlgL4G/5Sk7wJLTQR7v02zb32YQcY1ri6RcKmgnWzfWtbs82DzxbmigDAOmxdnKAb1WzuSRqK
+	EnBALR97rIR0sHT6uFrMor4EQ67y/KuyqV6tSeZg5ZjUx9orExAWeTnT9NYg6KqUgF/oCZYZKFQnM
+	hYqZgedA==;
 Received: from [50.53.43.113] (helo=[192.168.254.34])
 	by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
-	id 1vg60K-0000000AOJo-1FEC;
-	Wed, 14 Jan 2026 18:54:04 +0000
-Message-ID: <d5ff6967-ddf4-42df-840e-d960f7fab257@infradead.org>
-Date: Wed, 14 Jan 2026 10:54:03 -0800
+	id 1vg6CS-0000000AQO2-1ik6;
+	Wed, 14 Jan 2026 19:06:36 +0000
+Message-ID: <6ec2b90e-c6e9-444d-926a-68d19f42acba@infradead.org>
+Date: Wed, 14 Jan 2026 11:06:34 -0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Tomeu Vizoso <tomeu@tomeuvizoso.net>, Nishanth Menon <nm@ti.com>,
@@ -46,11 +46,11 @@ To: Tomeu Vizoso <tomeu@tomeuvizoso.net>, Nishanth Menon <nm@ti.com>,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
  Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>
 References: <20260114-thames-v2-0-e94a6636e050@tomeuvizoso.net>
- <20260114-thames-v2-2-e94a6636e050@tomeuvizoso.net>
+ <20260114-thames-v2-4-e94a6636e050@tomeuvizoso.net>
 Content-Language: en-US
 From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <20260114-thames-v2-2-e94a6636e050@tomeuvizoso.net>
-X-Rspamd-Queue-Id: 6A4EE3F7A8
+In-Reply-To: <20260114-thames-v2-4-e94a6636e050@tomeuvizoso.net>
+X-Rspamd-Queue-Id: 1A3A93F6F4
 X-Spamd-Bar: ---
 X-Spamd-Result: default: False [-3.60 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
@@ -77,16 +77,16 @@ X-Spamd-Result: default: False [-3.60 / 15.00];
 	DKIM_TRACE(0.00)[infradead.org:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: SX62PBMGJXD7KKZXQ6I2NEP7G3SGA4WV
-X-Message-ID-Hash: SX62PBMGJXD7KKZXQ6I2NEP7G3SGA4WV
+Message-ID-Hash: SR2RUB5WJRKOYAQZP7FYCSEGXYVJNVHM
+X-Message-ID-Hash: SR2RUB5WJRKOYAQZP7FYCSEGXYVJNVHM
 X-MailFrom: rdunlap@infradead.org
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: linux-arm-kernel@lists.infradead.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 2/5] accel/thames: Add driver for the C7x DSPs in TI SoCs
+Subject: [Linaro-mm-sig] Re: [PATCH v2 4/5] accel/thames: Add IOCTL for job submission
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SX62PBMGJXD7KKZXQ6I2NEP7G3SGA4WV/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SR2RUB5WJRKOYAQZP7FYCSEGXYVJNVHM/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -99,144 +99,98 @@ Content-Transfer-Encoding: 7bit
 
 
 On 1/14/26 12:46 AM, Tomeu Vizoso wrote:
-> Some SoCs from Texas Instruments contain DSPs that can be used for
-> general compute tasks.
+> Using the DRM GPU scheduler infrastructure, with a scheduler for each
+> core.
 > 
-> This driver provides a drm/accel UABI to userspace for submitting jobs
-> to the DSP cores and managing the input, output and intermediate memory.
+> Contexts are created in all cores, and buffers mapped to all of them as
+> well, so all cores are ready to execute any job.
+> 
+> The job submission code was initially based on Panfrost.
+> 
+> v2:
+> - Add thames_accel.h UAPI header (Robert Nelson).
 > 
 > Signed-off-by: Tomeu Vizoso <tomeu@tomeuvizoso.net>
 > ---
->  Documentation/accel/thames/index.rst |  28 +++++
->  MAINTAINERS                          |   9 ++
->  drivers/accel/Kconfig                |   1 +
->  drivers/accel/Makefile               |   3 +-
->  drivers/accel/thames/Kconfig         |  26 +++++
->  drivers/accel/thames/Makefile        |   9 ++
->  drivers/accel/thames/thames_core.c   | 155 ++++++++++++++++++++++++++
->  drivers/accel/thames/thames_core.h   |  53 +++++++++
->  drivers/accel/thames/thames_device.c |  93 ++++++++++++++++
->  drivers/accel/thames/thames_device.h |  46 ++++++++
->  drivers/accel/thames/thames_drv.c    | 155 ++++++++++++++++++++++++++
->  drivers/accel/thames/thames_drv.h    |  21 ++++
->  drivers/accel/thames/thames_ipc.h    | 204 +++++++++++++++++++++++++++++++++++
->  drivers/accel/thames/thames_rpmsg.c  | 155 ++++++++++++++++++++++++++
->  drivers/accel/thames/thames_rpmsg.h  |  27 +++++
->  15 files changed, 984 insertions(+), 1 deletion(-)
+>  drivers/accel/thames/Makefile       |   1 +
+>  drivers/accel/thames/thames_core.c  |   6 +
+>  drivers/accel/thames/thames_drv.c   |  19 ++
+>  drivers/accel/thames/thames_job.c   | 463 ++++++++++++++++++++++++++++++++++++
+>  drivers/accel/thames/thames_job.h   |  51 ++++
+>  drivers/accel/thames/thames_rpmsg.c |  52 ++++
+>  include/uapi/drm/thames_accel.h     |  54 +++++
+>  7 files changed, 646 insertions(+)
 > 
 
-> diff --git a/drivers/accel/Makefile b/drivers/accel/Makefile
-> index 1d3a7251b950f39e2ae600a2fc07a3ef7e41831e..8472989cbe22746f1e7292d2401fa0f7424a6c15 100644
-> --- a/drivers/accel/Makefile
-> +++ b/drivers/accel/Makefile
-> @@ -5,4 +5,5 @@ obj-$(CONFIG_DRM_ACCEL_ARM_ETHOSU)	+= ethosu/
->  obj-$(CONFIG_DRM_ACCEL_HABANALABS)	+= habanalabs/
->  obj-$(CONFIG_DRM_ACCEL_IVPU)		+= ivpu/
->  obj-$(CONFIG_DRM_ACCEL_QAIC)		+= qaic/
-> -obj-$(CONFIG_DRM_ACCEL_ROCKET)		+= rocket/
-> \ No newline at end of file
-> +obj-$(CONFIG_DRM_ACCEL_ROCKET)		+= rocket/
-> +obj-$(CONFIG_DRM_ACCEL_THAMES)		+= thames/
-> \ No newline at end of file
 
-Please eliminate these warnings.
+> diff --git a/include/uapi/drm/thames_accel.h b/include/uapi/drm/thames_accel.h
+> index 0a5a5e5f6637ab474e9effbb6db29c1dd95e56b5..5b35e50826ed95bfcc3709bef33416d2b6d11c70 100644
+> --- a/include/uapi/drm/thames_accel.h
+> +++ b/include/uapi/drm/thames_accel.h
 
-
-> diff --git a/drivers/accel/thames/thames_ipc.h b/drivers/accel/thames/thames_ipc.h> new file mode 100644
-> index 0000000000000000000000000000000000000000..60297b4bc2ffd990315cb735a96a23429d390f43
-> --- /dev/null
-> +++ b/drivers/accel/thames/thames_ipc.h
-> @@ -0,0 +1,204 @@
-> +/* SPDX-License-Identifier: GPL-2.0-only */
-> +/*
-> + * Copyright 2026 Texas Instruments Incorporated - https://www.ti.com/
+> @@ -75,6 +78,55 @@ struct drm_thames_bo_mmap_offset {
+>  	__u64 offset;
+>  };
+>  
+> +/**
+> + * struct drm_thames_job - A job to be run on the NPU
 > + *
-> + * This header defines the RPMSG message structures exchanged between
-> + * the Linux kernel (host) and the C7x DSP (remote) firmware for the
-> + * Thames DRM/accel driver.
-> + */
-> +
-> +#ifndef _THAMES_IPC_H
-> +#define _THAMES_IPC_H
-> +
-> +#ifdef __KERNEL__
-> +#include <linux/types.h>
-> +#else
-> +#include <stdint.h>
-> +typedef uint8_t __u8;
-> +typedef uint16_t __u16;
-> +typedef uint32_t __u32;
-> +typedef uint64_t __u64;
-> +#endif
-> +
-> +#define THAMES_SERVICE_NAME "thames-service"
-> +
-> +/**
-> + * @THAMES_MSG_TYPE: Simplified message type enumeration
+> + * The kernel will schedule the execution of this job taking into account its
+> + * dependencies with other jobs. All tasks in the same job will be executed
+> + * sequentially on the same core, to benefit from memory residency in SRAM.
 > + */
 
-"/**" means "this is kernel-doc format", which should look like:
+Please make these comments full-fledged kernel-doc comments.
+E.g.:
 
-/**
- * enum thames_msg_type - Simplified message type enumeration
- */
+> +struct drm_thames_job {
+> +	/** Input: BO handle for kernel. */
 
-and then each enum value should be documented as well.
+	/** @kernel: input: BO handle for kernel. */
 
-> +enum thames_msg_type {
-> +	/* --- Host (Kernel) -> Remote (DSP) --- */
-> +	THAMES_MSG_PING = 0x100, /* Ping message to test communication */
-> +	THAMES_MSG_CONTEXT_OP, /* Create/destroy context */
-> +	THAMES_MSG_BO_OP, /* Map/unmap buffer objects */
-> +	THAMES_MSG_SUBMIT_JOB, /* Submit job for execution */
+> +	__u32 kernel;
 > +
-> +	/* --- Remote (DSP) -> Host (Kernel) --- */
-> +	THAMES_MSG_PING_RESPONSE = 0x200,
-> +	THAMES_MSG_CONTEXT_OP_RESPONSE,
-> +	THAMES_MSG_BO_OP_RESPONSE,
-> +	THAMES_MSG_SUBMIT_JOB_RESPONSE,
+> +	/** Input: Size in bytes of the compiled kernel. */
+> +	__u32 kernel_size;
+> +
+> +	/** Input: BO handle for params BO. */
+> +	__u32 params;
+> +
+> +	/** Input: Size in bytes of the params BO. */
+> +	__u32 params_size;
+> +
+> +	/** Input: Pointer to a u32 array of the BOs that are read by the job. */
+> +	__u64 in_bo_handles;
+> +
+> +	/** Input: Pointer to a u32 array of the BOs that are written to by the job. */
+> +	__u64 out_bo_handles;
+> +
+> +	/** Input: Number of input BO handles passed in (size is that times 4). */
+> +	__u32 in_bo_handle_count;
+> +
+> +	/** Input: Number of output BO handles passed in (size is that times 4). */
+> +	__u32 out_bo_handle_count;
 > +};
 > +
 > +/**
-> + * @THAMES_CONTEXT_OP: Context operation types
-
- * enum thames_context_op - Context operations types
-
+> + * struct drm_thames_submit - ioctl argument for submitting commands to the NPU.
+> + *
+> + * The kernel will schedule the execution of these jobs in dependency order.
 > + */
-> +enum thames_context_op {
-> +	THAMES_CONTEXT_CREATE = 0,
-> +	THAMES_CONTEXT_DESTROY,
+
+Same here.
+
+> +struct drm_thames_submit {
+> +	/** Input: Pointer to an array of struct drm_thames_job. */
+> +	__u64 jobs;
+> +
+> +	/** Input: Number of jobs passed in. */
+> +	__u32 job_count;
+> +
+> +	/** Reserved, must be zero. */
+> +	__u32 pad;
 > +};
 > +
-> +/**
-> + * @THAMES_BO_OP: Buffer Object operation types
-
- * enum thames_bo_op - Buffer Object operation types
-
-> + */
-> +enum thames_bo_op {
-> +	THAMES_BO_MAP = 0,
-> +	THAMES_BO_UNMAP,
-> +};
-> +
-> +/**
-> + * @THAMES_RESP_STATUS: Response status codes
-
- * enum thames_resp_status - Response status codes
-
-> + */
-> +enum thames_resp_status {
-> +	THAMES_RESP_SUCCESS = 0,
-> +	THAMES_RESP_ERR_GENERIC = 1,
-> +	THAMES_RESP_ERR_NOMEM = 2,
-> +	THAMES_RESP_ERR_INVAL = 3,
-> +	THAMES_RESP_ERR_NO_CTX = 4,
-> +	THAMES_RESP_ERR_MMU = 5,
-> +	THAMES_RESP_ERR_JOB_TIMEOUT = 6,
-> +};
-
-Or you could just use "/*" so that they aren't considered as
-kernel-doc.
 
 
 -- 
