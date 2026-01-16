@@ -2,75 +2,75 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id eBHSFzoM4WnoogAAu9opvQ
+	id WHhQOT8M4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:20:10 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:20:15 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1C0D241198F
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:20:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C9060411996
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:20:15 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2BAC8404EC
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:20:09 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D76AB40503
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:20:14 +0000 (UTC)
 Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	by lists.linaro.org (Postfix) with ESMTPS id F05A2401B4
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 16 Jan 2026 20:06:37 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 5FE51401BE
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 16 Jan 2026 20:06:40 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=Dg0U2ryx;
+	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=DSP7+4mq;
 	spf=pass (lists.linaro.org: domain of echanude@redhat.com designates 170.10.133.124 as permitted sender) smtp.mailfrom=echanude@redhat.com;
 	dmarc=pass (policy=quarantine) header.from=redhat.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1768593997;
+	s=mimecast20190719; t=1768594000;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=twwZ6029cLkDAYezw98Z3f9QT2dYne/kukXgOmvL3oQ=;
-	b=Dg0U2ryxpEGmD3kaDOKxWNF8Q7hthcuBEJNS8dJvtQKUNKgc86O+u5NkH2xkGed9UWFbU2
-	VHSADqBhY1joSzIpNX+Iclu9BPmra+dR9gPUENYyVrhl5Bc79edtub0Fv1JkpzdEX3cPZI
-	htI/bEa932lajUWcjKABfVYe+R0USZE=
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
- [209.85.222.199]) by relay.mimecast.com with ESMTP with STARTTLS
+	bh=PAII7mTGSKHnVbVtbYqYnUY14STvK0vS9h+9Pl6qxlo=;
+	b=DSP7+4mqJjxPlLvRnUf+fE+xGTiRVv/irHBBicGD4PTkTIrrSklfDUEaczP88QgeSsrC04
+	m7rd/B6SK9mivlVTxrNzKd2Vj+4mE2D0l7hUuIyjvykMNLiPS1Ovt+rpOu+FTju6F02Ot2
+	YWo3wQKnRWda8gn7420PalAPf57fhSw=
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
+ [209.85.160.197]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-106-IXaDwz6zPxW9kCbWYYC4PA-1; Fri, 16 Jan 2026 15:06:36 -0500
-X-MC-Unique: IXaDwz6zPxW9kCbWYYC4PA-1
-X-Mimecast-MFC-AGG-ID: IXaDwz6zPxW9kCbWYYC4PA_1768593996
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-8c52d3be24cso342958985a.0
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 16 Jan 2026 12:06:36 -0800 (PST)
+ us-mta-522-nFJpHDxjOFWNxDb8DBHyYA-1; Fri, 16 Jan 2026 15:06:38 -0500
+X-MC-Unique: nFJpHDxjOFWNxDb8DBHyYA-1
+X-Mimecast-MFC-AGG-ID: nFJpHDxjOFWNxDb8DBHyYA_1768593998
+Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-5013be25d41so75568721cf.1
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 16 Jan 2026 12:06:38 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768593996; x=1769198796;
+        d=1e100.net; s=20230601; t=1768593998; x=1769198798;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=twwZ6029cLkDAYezw98Z3f9QT2dYne/kukXgOmvL3oQ=;
-        b=a3KZQ1lkeeptuTap23bakTFuJMbkwc3uV5C33doKnWMZJZrJHLQP4KEIqgffwFSOXH
-         +UrAjRD/6c4NgNSmlh13T9fLk5Jo9alwDXLrUQv+SzaMzEj+MuKELAibmP+aG3+pbWXj
-         bZdqD9kNWhOUrKomucKc3m3lEoAtA7mDvbVkSsCtePvIhFP+t4RfXhoGMXQM1h2dUQZk
-         2wom8NqRJmRDyzwDJ9mJCamFvor0wK7eO4Q+SdaLdccCCZbfd8ZFJhkoS6YDEYt08QJu
-         6tfP50Mt5eThTMxym4jSFlEJW1zEPsnDT17mOs7rQ2ROu6aqfgzTg9TPNhKi/d63eavb
-         +BcQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXh2S3++wYSd3y8Kx9duXRBKMnIOP1eqrsfWZ6Q7Smj7Y1gkPTwrg7vG28BP78HP4QwZWTnZcpPSp9iW4og@lists.linaro.org
-X-Gm-Message-State: AOJu0YwbzQ6+t9RrFhKfZO0vzjyG+5UcoAt/8nhzAFjorsU0hzOdPoT7
-	XDsISmY3QWN2N2XZNkTOCSgaXQlAza+dGX8fkMSa2u1EWkDPs17jrXk5MwVzn5nx4JmJHoQGhs9
-	R5qDPORLtyBCpalMr9Z9ldraW/IDcFuW5ZdInUD8mqTr9v2tvTKvZ950vG8S9ndKOX+v4
-X-Gm-Gg: AY/fxX4BV40obM3MPlAdDt0m9jizJFa7f8Kq2OMl/8dJBe9awyMM4JTILvbrUCL9EaE
-	TFecCd00AGn+dbMS1qu/j8eHcLjfDXDmbrGV1uc92nbgIJpiGH9tdZ8Sk+NIQu0f329FdwLDbiW
-	RyxV7qiCdgb4+own89xTbkAKjFkbJGJXbimtzBfPD0xg8cPvpCdkp41prhfcLhcnKkrd6frDfcN
-	PL+406SOQCxGylF05w3QYeZc1uZkNye6HUnTgYFTSNEqd0+JojUNYkJMwA9vl/E96pW6luDZVm2
-	NySrZF0I1RlJqxcAcs/92We2hu2yv4LqvzMs7Wx5SQakL6TFkdUpCa7xj39d72aR+0jBIq9fF91
-	VdfPTnVX0H/iFJVpX+rVtThc0hPZ02hK240MEYkcjjNGi7aRGynA=
-X-Received: by 2002:a05:620a:45a8:b0:88f:e620:21cd with SMTP id af79cd13be357-8c6a67b093emr567595385a.62.1768593995553;
-        Fri, 16 Jan 2026 12:06:35 -0800 (PST)
-X-Received: by 2002:a05:620a:45a8:b0:88f:e620:21cd with SMTP id af79cd13be357-8c6a67b093emr567588885a.62.1768593994868;
-        Fri, 16 Jan 2026 12:06:34 -0800 (PST)
+        bh=PAII7mTGSKHnVbVtbYqYnUY14STvK0vS9h+9Pl6qxlo=;
+        b=V5xL2ILdttDXjZYcl/qsJZ2yNboICVkADrEfCKJGAhhWMOLtL8LdOcl8QTc4sBW60J
+         1dZtWJ6gWFluvHLW3UEXre0pYgVO+frQi1Wzm99RlmnTtb75DtV5Zr0OxjKdMMsuYFWE
+         oFo3J+dNne1Up86I8e/9LPzR8I8atbgZJk9hLpwtb95uaQ8+ksDjbtqmVKKK4wOO7d53
+         lSdmbk7Q1imX5DgfSXNDDjiSz7qr3FS4/+n3ROsNoe4dn+zgeQmFU3XOKwCryxxyoUfz
+         ucJiTEjnyGEyrpiT+iNLL8fydPD4NFE5u0Yh1X7OAXnLyHn70C8F9WtF421IFyvfwZfP
+         lIWQ==
+X-Forwarded-Encrypted: i=1; AJvYcCWt9U9ecKCvdAHV2u0WG8ECJ2iW1OSdqRqSrhXgH8YmFH3JAguSkRjRiri5pNVLLPdlC5iiERY0F82d+xai@lists.linaro.org
+X-Gm-Message-State: AOJu0YyfsiQHvT7BwIonF1/GpcCXx/Gd+y9dmbcrIOrFeuSfqakIBiR1
+	NMe7HNmgKFYbLOW2k+6txQ7Nq2HYw1GyAfh82fANvWG7OmE6UjbiI7io0o7XJzLO1dWHgOx/JDk
+	POS5U/aB0aqqtdC590dyZy/RMQKxH6r1IzSqqa5p9S3qtLD5Ih81FEaceIrVqzrfPMFGR
+X-Gm-Gg: AY/fxX6hQhB6BU2TS02G5CPGOYExO75klVKxFHRl5W3OZhjnOuaPD93slKfRgL59agy
+	fKRve2qOve83IPkQAb2oPW9Lk1CoMQMRLKxeE49tSn18oB6O2oiesWEy+zgEolM0FSXP6cBM82F
+	R2KuXt6kqsf9gc9AvKwqYegZ8a0wI7WRIpqOQkAV9AN46oEDunCCjPbhvDQD5iFHeUsh3yzhVEk
+	R4NkSECpO0d6tl2Xud45mrAdZ7fAZqnoq1RVWptTmlbFK6YmFoJ5xQG3NpmOsJqxlfh/SwosNrP
+	ndnpB1az2prXnVjsluWUpMW0u8vWsHI/Abue20FdgahOXX+ksnubjavpMpey7Z7yXlEXuBuuc8x
+	oBoZ59A5MIw8BCgOU46ai+dmWeebCtVuzVmlfUhFILQ6y1D23E5s=
+X-Received: by 2002:ac8:588f:0:b0:4f3:5816:bd8d with SMTP id d75a77b69052e-502a179ca4fmr63770311cf.62.1768593997947;
+        Fri, 16 Jan 2026 12:06:37 -0800 (PST)
+X-Received: by 2002:ac8:588f:0:b0:4f3:5816:bd8d with SMTP id d75a77b69052e-502a179ca4fmr63769841cf.62.1768593997449;
+        Fri, 16 Jan 2026 12:06:37 -0800 (PST)
 Received: from localhost (pool-100-17-20-16.bstnma.fios.verizon.net. [100.17.20.16])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-8c6a71bf2b0sm297117485a.12.2026.01.16.12.06.33
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-502a1efb0b2sm28738281cf.29.2026.01.16.12.06.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 16 Jan 2026 12:06:33 -0800 (PST)
+        Fri, 16 Jan 2026 12:06:35 -0800 (PST)
 From: Eric Chanudet <echanude@redhat.com>
-Date: Fri, 16 Jan 2026 15:05:38 -0500
+Date: Fri, 16 Jan 2026 15:05:39 -0500
 MIME-Version: 1.0
-Message-Id: <20260116-dmabuf-heap-system-memcg-v3-1-ecc6b62cc446@redhat.com>
+Message-Id: <20260116-dmabuf-heap-system-memcg-v3-2-ecc6b62cc446@redhat.com>
 References: <20260116-dmabuf-heap-system-memcg-v3-0-ecc6b62cc446@redhat.com>
 In-Reply-To: <20260116-dmabuf-heap-system-memcg-v3-0-ecc6b62cc446@redhat.com>
 To: Sumit Semwal <sumit.semwal@linaro.org>,
@@ -81,21 +81,21 @@ To: Sumit Semwal <sumit.semwal@linaro.org>,
  Maxime Ripard <mripard@redhat.com>
 X-Mailer: b4 0.14.2
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: OgFXgzleMHTN2cvkMuqeHd848cDtDtqQBgy_DmI-ZTM_1768593996
+X-Mimecast-MFC-PROC-ID: co_pdVjupChUgs_6lr2bDbTkMyiw20uI30HviUQp4bw_1768593998
 X-Mimecast-Originator: redhat.com
 X-Spamd-Bar: ----
 X-MailFrom: echanude@redhat.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 3ZBSNBEQAKB2TWKCZNN5W7ASV6WLCW3K
-X-Message-ID-Hash: 3ZBSNBEQAKB2TWKCZNN5W7ASV6WLCW3K
-X-Mailman-Approved-At: Thu, 16 Apr 2026 16:12:08 +0000
+Message-ID-Hash: EJ3K2ZJBYIEO3OXNZIXT36TL2EV6EXIR
+X-Message-ID-Hash: EJ3K2ZJBYIEO3OXNZIXT36TL2EV6EXIR
+X-Mailman-Approved-At: Thu, 16 Apr 2026 16:12:09 +0000
 CC: linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, Eric Chanudet <echanude@redhat.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v3 1/2] dma-buf: heaps: add parameter to account allocations using cgroup
+Subject: [Linaro-mm-sig] [PATCH v3 2/2] dma-buf: system_heap: account for system heap allocation in memcg
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3ZBSNBEQAKB2TWKCZNN5W7ASV6WLCW3K/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EJ3K2ZJBYIEO3OXNZIXT36TL2EV6EXIR/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -126,53 +126,51 @@ X-Spamd-Result: default: False [2.99 / 15.00];
 	FROM_NEQ_ENVFROM(0.00)[echanude@redhat.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.794];
+	NEURAL_HAM(-0.00)[-0.813];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
-X-Rspamd-Queue-Id: 1C0D241198F
+X-Rspamd-Queue-Id: C9060411996
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Add a parameter to enable dma-buf heaps allocation accounting using
-cgroup for heaps that implement it. It is disabled by default as doing
-so incurs caveats based on how memcg currently accounts for shared
-buffers.
+The system dma-buf heap lets userspace allocate buffers from the page
+allocator. However, these allocations are not accounted for in memcg,
+allowing processes to escape limits that may be configured.
+
+Pass __GFP_ACCOUNT for system heap allocations, based on the
+dma_heap.mem_accounting parameter, to use memcg and account for them.
 
 Signed-off-by: Eric Chanudet <echanude@redhat.com>
 ---
- drivers/dma-buf/dma-heap.c | 5 +++++
- include/linux/dma-heap.h   | 2 ++
- 2 files changed, 7 insertions(+)
+ drivers/dma-buf/heaps/system_heap.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/dma-buf/dma-heap.c b/drivers/dma-buf/dma-heap.c
-index 8ab49924f8b71a0272dc89a609539a429feaf6c8..d230ddeb24e0fa1f2d51cb5d2868ec54fc8376a8 100644
---- a/drivers/dma-buf/dma-heap.c
-+++ b/drivers/dma-buf/dma-heap.c
-@@ -49,6 +49,11 @@ static dev_t dma_heap_devt;
- static struct class *dma_heap_class;
- static DEFINE_XARRAY_ALLOC(dma_heap_minors);
+diff --git a/drivers/dma-buf/heaps/system_heap.c b/drivers/dma-buf/heaps/system_heap.c
+index 4c782fe33fd497a74eb5065797259576f9b651b6..4049d042afa14ec2f4d034f59f1740600a20c1e5 100644
+--- a/drivers/dma-buf/heaps/system_heap.c
++++ b/drivers/dma-buf/heaps/system_heap.c
+@@ -320,14 +320,17 @@ static struct page *alloc_largest_available(unsigned long size,
+ {
+ 	struct page *page;
+ 	int i;
++	gfp_t flags;
  
-+bool __read_mostly mem_accounting;
-+module_param(mem_accounting, bool, 0444);
-+MODULE_PARM_DESC(mem_accounting,
-+		 "Enable cgroup-based memory accounting for dma-buf heap allocations (default=false).");
-+
- static int dma_heap_buffer_alloc(struct dma_heap *heap, size_t len,
- 				 u32 fd_flags,
- 				 u64 heap_flags)
-diff --git a/include/linux/dma-heap.h b/include/linux/dma-heap.h
-index 27d15f60950a2093e592be1b961c02e672826e58..648328a64b27eaf25c8b18809a02c6410cbbffde 100644
---- a/include/linux/dma-heap.h
-+++ b/include/linux/dma-heap.h
-@@ -46,4 +46,6 @@ const char *dma_heap_get_name(struct dma_heap *heap);
- 
- struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_info);
- 
-+extern bool mem_accounting;
-+
- #endif /* _DMA_HEAPS_H */
+ 	for (i = 0; i < NUM_ORDERS; i++) {
+ 		if (size <  (PAGE_SIZE << orders[i]))
+ 			continue;
+ 		if (max_order < orders[i])
+ 			continue;
+-
+-		page = alloc_pages(order_flags[i], orders[i]);
++		flags = order_flags[i];
++		if (mem_accounting)
++			flags |= __GFP_ACCOUNT;
++		page = alloc_pages(flags, orders[i]);
+ 		if (!page)
+ 			continue;
+ 		return page;
 
 -- 
 2.52.0
