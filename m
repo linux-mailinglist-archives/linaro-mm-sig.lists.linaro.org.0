@@ -2,948 +2,359 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cGOMLGIM4WnoogAAu9opvQ
+	id GGuFBmsM4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:20:50 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:20:59 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 334124119C9
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:20:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B90394119DE
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:20:58 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3F12B404E9
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:20:49 +0000 (UTC)
-Received: from mail-lf1-f46.google.com (mail-lf1-f46.google.com [209.85.167.46])
-	by lists.linaro.org (Postfix) with ESMTPS id B2BFD3F79D
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 19 Jan 2026 15:14:35 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C114D404FF
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:20:57 +0000 (UTC)
+Received: from fhigh-a3-smtp.messagingengine.com (fhigh-a3-smtp.messagingengine.com [103.168.172.154])
+	by lists.linaro.org (Postfix) with ESMTPS id 1DDFA3F6FF
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 19 Jan 2026 20:39:41 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=ursulin.net header.s=google header.b=UZTaheuS;
-	spf=pass (lists.linaro.org: domain of tursulin@ursulin.net designates 209.85.167.46 as permitted sender) smtp.mailfrom=tursulin@ursulin.net;
-	dmarc=none
-Received: by mail-lf1-f46.google.com with SMTP id 2adb3069b0e04-59b7bb3b913so5134794e87.1
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 19 Jan 2026 07:14:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ursulin.net; s=google; t=1768835674; x=1769440474; darn=lists.linaro.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=HnmwmV5MkJdvnRmjIwpcGJ5JhugTZOTPUzNJVyKYP9A=;
-        b=UZTaheuSzcWaMbDggQLOprQqa8TXu4sHzYjlbfEA0HklhWUPUeDI2T7Y9pMNaue5sx
-         s9WOR9kuiRHuHsEeFraf32VShDRvFgFwNa37NJez/jubRhNMOZoYo2H7aydZicxn92Ic
-         SVXEWK8rG8oPCsTqO2kTEoKum9pNfOODbD27O699B6Jb3j6VyWmrmBfM/2SR7aVYo7ek
-         ZVjDOGdyPofT8Z7njHd2kqAff1FApyDYPqP7clmjr/EXD2/8etN1FY1964LwD34v7MDT
-         9kCSjSkPtg4flpZXAgZUdGKhGaShQMQKC0LBwRYEu8Ru+x9w6GLdepG7ohFiy8se+KqI
-         mVbQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768835674; x=1769440474;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=HnmwmV5MkJdvnRmjIwpcGJ5JhugTZOTPUzNJVyKYP9A=;
-        b=ihCkmgQ8KY7JQn+c7jib2ohFASk5Wbvt74dfZo5oyfiaBceZ3mdd6Cg5GAHvqIF4BS
-         aUpObvhxj24BLal8NSahh+GjTbnPZq94n2uf/gaPItDrB9kQ451a20weAyJ2WQ8LCgnC
-         nx0OqDWDDHiLQP9Nqfp98NyTsPkt0Hjwf1ZLZ7+Mld+nRqUSOUtXOP+8ZS+I4v9CVbCu
-         dF1BmaV6gES17k/EkYDELJmTguQnIh2uqRnQfsdHyW/PbYtUMKIkRFVXnXtC+Ae4VTDm
-         KcCobH6OBY0wnnUSpsFq/OBDa/QFomCXuOs6qh9fRHg91sJVFL1FHhFQnV8VlkmqUUs1
-         DJqw==
-X-Forwarded-Encrypted: i=1; AJvYcCU4pabbfoTJeZOl/NeqFt9HNCufpraFzYvo3bJR7vycB6SROIFT4aKo7NIKEKPZoQcb10FowyyCB8GNPzqn@lists.linaro.org
-X-Gm-Message-State: AOJu0Yz8Dux1ssPHLMCEA9DIXfQ7FD+cRRZMVacrYqjq8YRTm3wteDN3
-	kRfVskxuqC83YzYUEsZHchXvO19ad/UttzHE0eJLj6Vz3TufKrJ2aHUgVlTOTBTjLaeBaABSZDh
-	6jRzZMnM=
-X-Gm-Gg: AY/fxX5LE9rzTMSNpPZJIj3EfaspoCzAznYNNZfs4IAj3RIhjLQ85xd83ulg+DXstnR
-	XDD2O24F9FnA1BfKR+4HMYLQzc0/GNWYCdwfpNcaWi+8irJs8+GbAohsA4fBxjZvaYqNMgLrsJS
-	CGYtaUiGE0nwlyggGHTLDCAs2VnOiP/AdJlKDeDz5Ij9Je8q2Oou8po2JVITznqhbcDdJyokL3N
-	H9HV6rI1+9FHJshDskiadMLfguN5TzBm2K4T6RK1cQCoI2sfN4klx8Nuq7uX3dm6tqCUjWjvsav
-	3p1gcJ0UO9UzE1Ht9KTpzzZK/B2bAuK8oGQ1QyjEQhttctUES9ciEN1QlmVp/eaHcqefS+W0VYm
-	nW9nxE9ft14TpvuCMFqV9+OhyNTHVfujmwzBT9jccil0R3spreiWPIq5uoqT6F7/huYtzfsQ4OX
-	eYJUz000iBTh/rcg/T0PHtFOCDnf77sSdo
-X-Received: by 2002:adf:fec8:0:b0:435:71fe:5852 with SMTP id ffacd0b85a97d-43571fe5881mr8721313f8f.14.1768829181296;
-        Mon, 19 Jan 2026 05:26:21 -0800 (PST)
-Received: from [192.168.0.101] ([90.240.106.137])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-435699271easm23310642f8f.14.2026.01.19.05.26.20
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 19 Jan 2026 05:26:20 -0800 (PST)
-Message-ID: <1f58335a-d9a4-4667-98a4-8023c587711c@ursulin.net>
-Date: Mon, 19 Jan 2026 13:26:19 +0000
+	dkim=pass header.d=shazbot.org header.s=fm1 header.b="P1XnC/36";
+	dkim=pass header.d=messagingengine.com header.s=fm2 header.b="U b2M62R";
+	spf=pass (lists.linaro.org: domain of alex@shazbot.org designates 103.168.172.154 as permitted sender) smtp.mailfrom=alex@shazbot.org;
+	dmarc=pass (policy=none) header.from=shazbot.org
+Received: from phl-compute-04.internal (phl-compute-04.internal [10.202.2.44])
+	by mailfhigh.phl.internal (Postfix) with ESMTP id 0641114003D8;
+	Mon, 19 Jan 2026 15:39:41 -0500 (EST)
+Received: from phl-frontend-04 ([10.202.2.163])
+  by phl-compute-04.internal (MEProxy); Mon, 19 Jan 2026 15:39:41 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=shazbot.org; h=
+	cc:cc:content-transfer-encoding:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm1; t=1768855181;
+	 x=1768941581; bh=FBdWTk6CLd7WzHVr+BniKWIMiLwjgEIx9h33mejtkC4=; b=
+	P1XnC/36fYykJJ9hnqqSF7UNj0QHCjJgtc8y3GJ6ukEpTAJqf56qB0vn4rQdanq/
+	ofjcBtKyivy1Km7zJZYqh9Zp5VXsG1knNw2ILGRIiuKRz4AeO0+i/yIsTJER3fWp
+	CjeX4jMzosIIICpTRnolIew+Ew/06hKDsFVgcazeS6/Dl4+bTBfa2hmJyU5Mf9hs
+	4THLLOq5lg+WVCwHIdvFK45O+I12DJ4OuSu6kW1nflmCl2ilYHwM7EbQXTYW4gR4
+	7p8tefrcMbcrc0YnW8JstgfX9dScl/jwqyi+gKdmsO3L6rnL+A2lgBz0zzG68F4K
+	9YcRVwhbBNq76aXa5M6Vkw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:feedback-id:feedback-id
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1768855181; x=
+	1768941581; bh=FBdWTk6CLd7WzHVr+BniKWIMiLwjgEIx9h33mejtkC4=; b=U
+	b2M62REKHprj2NiRN7bNn/j7uYcseRMwk/iE7FqETvSL8QPL8fWor1aqIiZfT0vi
+	pkHbIm0ydLrQdMkr7ECyMdeWa/3dNWYklYMAufrzZUzb7w/yxw8AbmN6vu6sGwJ3
+	v2eS7eXk+YH8FtTQezbtgvmtwLZzmmZdYN9YbZnME2P0BMa+eo0qTzeEj3ewf9uA
+	knfSQtuGOm7SdAK8q70kAmlBcXUE7qyDwgGl1kkGGKb3k3kfZh2VWYZOHHYTLhX3
+	d5qUCEmTc3S/Q1Ea8jg1X9nPe4kUuXeBfxUVOm6I0xrHtlLHup9cJOs6QyiVx/7o
+	iUphbhdNvvNSmKwmLs75w==
+X-ME-Sender: <xms:i5ZuafTUgcayBDnaDZ8yDTipSw_jpQebmpIGZZLmXkFXWppyWBZgdA>
+    <xme:i5ZuaVq7XJDTnZZ7v2BbwMlv4oBszoWhusrocVsnkZEFnlg0fdlvesIaiT8mx4lHe
+    LsTaqweB6LSC2T2-8GJZzbdpVEhq81yFAlta-SXK4knx-F-gE-MHA>
+X-ME-Received: <xmr:i5ZuadbpEr4MLpr4RVFVKR8cig5phbMu9010vXXUbNhDA7uXnG3ujsX4It0>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefgedrtddtgddufeekheegucetufdoteggodetrf
+    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
+    rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
+    gurhepfffhvfevuffkjghfofggtgfgsehtqhertdertdejnecuhfhrohhmpeetlhgvgicu
+    hghilhhlihgrmhhsohhnuceorghlvgigsehshhgriigsohhtrdhorhhgqeenucggtffrrg
+    htthgvrhhnpeetuefgleefhfdvueegffdtffevhfffgfffiedutdetgffhheejtdekfeek
+    ieehgfenucffohhmrghinhepkhgvrhhnvghlrdhorhhgnecuvehluhhsthgvrhfuihiivg
+    eptdenucfrrghrrghmpehmrghilhhfrhhomheprghlvgigsehshhgriigsohhtrdhorhhg
+    pdhnsggprhgtphhtthhopeduledpmhhouggvpehsmhhtphhouhhtpdhrtghpthhtoheplh
+    gvohhnsehkvghrnhgvlhdrohhrghdprhgtphhtthhopehlihhnuhigqdhmvgguihgrsehv
+    ghgvrhdrkhgvrhhnvghlrdhorhhgpdhrtghpthhtohepughrihdquggvvhgvlheslhhish
+    htshdrfhhrvggvuggvshhkthhophdrohhrghdprhgtphhtthhopehlihhnrghrohdqmhhm
+    qdhsihhgsehlihhsthhsrdhlihhnrghrohdrohhrghdprhgtphhtthhopehlihhnuhigqd
+    hkvghrnhgvlhesvhhgvghrrdhkvghrnhgvlhdrohhrghdprhgtphhtthhopehiohhmmhhu
+    sehlihhsthhsrdhlihhnuhigrdguvghvpdhrtghpthhtohepkhhvmhesvhhgvghrrdhkvg
+    hrnhgvlhdrohhrghdprhgtphhtthhopehsuhhmihhtrdhsvghmfigrlheslhhinhgrrhho
+    rdhorhhgpdhrtghpthhtoheptghhrhhishhtihgrnhdrkhhovghnihhgsegrmhgurdgtoh
+    hm
+X-ME-Proxy: <xmx:i5ZuaQQjb-1iZXZxx1XoHH3oBltF_1jZw1Uy74MVDv4Tx3SNVeQk2A>
+    <xmx:i5Zuabdni7r3rs7uS6cXUPkdvZDTtpYo7_QmJaG6qi9KXhEi6ZOZ2g>
+    <xmx:i5Zuafl8sE7RC1vxkqw9TpG6v9zgIXmZQydq7x8z2MeThz34ntXLeA>
+    <xmx:i5ZuaQilZLD1rPx47evUb8GhlOIopeOC1mJTBX-cqbxpd3WFlZEkkA>
+    <xmx:jZZuaYE6MQFViaKOq8g2Z3Bl3liKI28dVxcFL6GsTsdDSO9ji5U-6dwm>
+Feedback-ID: i03f14258:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
+ 19 Jan 2026 15:39:38 -0500 (EST)
+Date: Mon, 19 Jan 2026 13:38:38 -0700
+From: Alex Williamson <alex@shazbot.org>
+To: Leon Romanovsky <leon@kernel.org>
+Message-ID: <20260119133838.66203b01@shazbot.org>
+In-Reply-To: <20260107-convert-to-pvec-v1-1-6e3ab8079708@nvidia.com>
+References: <20260107-convert-to-pvec-v1-1-6e3ab8079708@nvidia.com>
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.51; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Tomeu Vizoso <tomeu@tomeuvizoso.net>, Nishanth Menon <nm@ti.com>,
- "Andrew F. Davis" <afd@ti.com>, Randolph Sapp <rs@ti.com>,
- Jonathan Humphreys <j-humphreys@ti.com>, Andrei Aldea <a-aldea@ti.com>,
- Chirag Shilwant <c-shilwant@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
- Tero Kristo <kristo@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Oded Gabbay <ogabbay@kernel.org>,
- Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- Robert Nelson <robertcnelson@gmail.com>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>
-References: <20260114-thames-v2-0-e94a6636e050@tomeuvizoso.net>
- <20260114-thames-v2-4-e94a6636e050@tomeuvizoso.net>
-Content-Language: en-GB
-From: Tvrtko Ursulin <tursulin@ursulin.net>
-In-Reply-To: <20260114-thames-v2-4-e94a6636e050@tomeuvizoso.net>
-X-Spamd-Bar: ---
-X-MailFrom: tursulin@ursulin.net
+X-Spamd-Bar: ----
+X-MailFrom: alex@shazbot.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: GXI3EOALXYAXYY5C7XFGURWJSXO6EFCS
-X-Message-ID-Hash: GXI3EOALXYAXYY5C7XFGURWJSXO6EFCS
-X-Mailman-Approved-At: Thu, 16 Apr 2026 16:12:11 +0000
-CC: linux-arm-kernel@lists.infradead.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+Message-ID-Hash: FAPD4IXZAD7OD36ODOBHRLRJS4XEMDDJ
+X-Message-ID-Hash: FAPD4IXZAD7OD36ODOBHRLRJS4XEMDDJ
+X-Mailman-Approved-At: Thu, 16 Apr 2026 16:12:12 +0000
+CC: linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, iommu@lists.linux.dev, kvm@vger.kernel.org, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Jason Gunthorpe <jgg@ziepe.ca>, Kevin Tian <kevin.tian@intel.com>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, Yishai Hadas <yishaih@nvidia.com>, Shameer Kolothum <skolothumtho@nvidia.com>, Ankit Agrawal <ankita@nvidia.com>, Matthew Wilcox <willy@infradead.org>, Jens Axboe <axboe@kernel.dk>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 4/5] accel/thames: Add IOCTL for job submission
+Subject: [Linaro-mm-sig]  Re: types: reuse common phys_vec type instead of DMABUF =?utf-8?b?b3BlbuKAkWNvZGVk?= variant
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GXI3EOALXYAXYY5C7XFGURWJSXO6EFCS/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FAPD4IXZAD7OD36ODOBHRLRJS4XEMDDJ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [1.99 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	DATE_IN_PAST(1.00)[2090];
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+X-Spamd-Result: default: False [0.69 / 15.00];
+	DATE_IN_PAST(1.00)[2083];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
+	MIME_BASE64_TEXT(0.10)[];
+	DMARC_POLICY_SOFTFAIL(0.10)[shazbot.org : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	DMARC_NA(0.00)[ursulin.net];
-	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_TO(0.00)[tomeuvizoso.net,ti.com,kernel.org,lwn.net,linaro.org,amd.com,gmail.com,ffwll.ch,linux.intel.com,suse.de];
-	MIME_TRACE(0.00)[0:+];
 	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[29];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_SPAM(0.00)[0.849];
-	FROM_NEQ_ENVFROM(0.00)[tursulin@ursulin.net,linaro-mm-sig-bounces@lists.linaro.org];
+	RCPT_COUNT_TWELVE(0.00)[19];
+	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[alex@shazbot.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.814];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,dt];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[ursulin.net:mid,linaro.org:email,reset.work:url,tomeuvizoso.net:email,lists.linaro.org:helo,lists.linaro.org:rdns,ti.com:url]
-X-Rspamd-Queue-Id: 334124119C9
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.freedesktop.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,nvidia.com:email,amd.com:email,linaro.org:email,intel.com:email,infradead.org:email,arm.com:email,8bytes.org:email,kernel.dk:email,shazbot.org:mid,shazbot.org:email]
+X-Rspamd-Queue-Id: B90394119DE
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-
-On 14/01/2026 08:46, Tomeu Vizoso wrote:
-> Using the DRM GPU scheduler infrastructure, with a scheduler for each
-> core.
-> 
-> Contexts are created in all cores, and buffers mapped to all of them as
-> well, so all cores are ready to execute any job.
-> 
-> The job submission code was initially based on Panfrost.
-> 
-> v2:
-> - Add thames_accel.h UAPI header (Robert Nelson).
-> 
-> Signed-off-by: Tomeu Vizoso <tomeu@tomeuvizoso.net>
-> ---
->   drivers/accel/thames/Makefile       |   1 +
->   drivers/accel/thames/thames_core.c  |   6 +
->   drivers/accel/thames/thames_drv.c   |  19 ++
->   drivers/accel/thames/thames_job.c   | 463 ++++++++++++++++++++++++++++++++++++
->   drivers/accel/thames/thames_job.h   |  51 ++++
->   drivers/accel/thames/thames_rpmsg.c |  52 ++++
->   include/uapi/drm/thames_accel.h     |  54 +++++
->   7 files changed, 646 insertions(+)
-> 
-> diff --git a/drivers/accel/thames/Makefile b/drivers/accel/thames/Makefile
-> index 0051e319f2e4966de72bc342d5b6e40b2890c006..b6c4516f8250e3d442f22e80d609cb1be2970128 100644
-> --- a/drivers/accel/thames/Makefile
-> +++ b/drivers/accel/thames/Makefile
-> @@ -7,4 +7,5 @@ thames-y := \
->   	thames_device.o \
->   	thames_drv.o \
->   	thames_gem.o \
-> +	thames_job.o \
->   	thames_rpmsg.o
-> diff --git a/drivers/accel/thames/thames_core.c b/drivers/accel/thames/thames_core.c
-> index 92af1d68063116bcfa28a33960cbe829029fc1bf..5b96b25d287096803e034fcd4261d51795871543 100644
-> --- a/drivers/accel/thames/thames_core.c
-> +++ b/drivers/accel/thames/thames_core.c
-> @@ -13,6 +13,7 @@
->   
->   #include "thames_core.h"
->   #include "thames_device.h"
-> +#include "thames_job.h"
->   #include "thames_rpmsg.h"
->   
->   /* Shift to convert bytes to megabytes (divide by 1048576) */
-> @@ -115,11 +116,16 @@ int thames_core_init(struct thames_core *core)
->   	if (err)
->   		return err;
->   
-> +	err = thames_job_init(core);
-> +	if (err)
-> +		return err;
-> +
->   	return 0;
->   }
->   
->   void thames_core_fini(struct thames_core *core)
->   {
-> +	thames_job_fini(core);
->   	thames_rpmsg_fini(core);
->   }
->   
-> diff --git a/drivers/accel/thames/thames_drv.c b/drivers/accel/thames/thames_drv.c
-> index d9ea2cab80e89cd13b1422a17635a15b7f16fa4f..1ff01428e6c80765cb741ae45c67971b7b0f28c8 100644
-> --- a/drivers/accel/thames/thames_drv.c
-> +++ b/drivers/accel/thames/thames_drv.c
-> @@ -14,6 +14,7 @@
->   #include "thames_drv.h"
->   #include "thames_core.h"
->   #include "thames_gem.h"
-> +#include "thames_job.h"
->   #include "thames_ipc.h"
->   
->   static struct platform_device *drm_dev;
-> @@ -38,8 +39,22 @@ static int thames_open(struct drm_device *dev, struct drm_file *file)
->   
->   	file->driver_priv = thames_priv;
->   
-> +	ret = thames_job_open(thames_priv);
-> +	if (ret)
-> +		goto err_free;
-> +
-> +	ret = thames_context_create(thames_priv);
-> +	if (ret) {
-> +		dev_err(dev->dev, "Failed to create context for client: %d", ret);
-> +		goto err_close_job;
-> +	}
-> +
->   	return 0;
->   
-> +err_close_job:
-> +	thames_job_close(thames_priv);
-> +err_free:
-> +	kfree(thames_priv);
->   err_put_mod:
->   	module_put(THIS_MODULE);
->   	return ret;
-> @@ -49,6 +64,9 @@ static void thames_postclose(struct drm_device *dev, struct drm_file *file)
->   {
->   	struct thames_file_priv *thames_priv = file->driver_priv;
->   
-> +	thames_context_destroy(thames_priv);
-> +
-> +	thames_job_close(thames_priv);
->   	kfree(thames_priv);
->   	module_put(THIS_MODULE);
->   }
-> @@ -57,6 +75,7 @@ static const struct drm_ioctl_desc thames_drm_driver_ioctls[] = {
->   #define THAMES_IOCTL(n, func) DRM_IOCTL_DEF_DRV(THAMES_##n, thames_ioctl_##func, 0)
->   	THAMES_IOCTL(BO_CREATE, bo_create),
->   	THAMES_IOCTL(BO_MMAP_OFFSET, bo_mmap_offset),
-> +	THAMES_IOCTL(SUBMIT, submit),
->   };
->   
->   DEFINE_DRM_ACCEL_FOPS(thames_accel_driver_fops);
-> diff --git a/drivers/accel/thames/thames_job.c b/drivers/accel/thames/thames_job.c
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..bd8f8fa1783cf10c5e71c8f2ce5fcc880a9b150b
-> --- /dev/null
-> +++ b/drivers/accel/thames/thames_job.c
-> @@ -0,0 +1,463 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +/* Copyright 2019 Linaro, Ltd, Rob Herring <robh@kernel.org> */
-> +/* Copyright 2019 Collabora ltd. */
-> +/* Copyright 2024-2025 Tomeu Vizoso <tomeu@tomeuvizoso.net> */
-> +/* Copyright 2026 Texas Instruments Incorporated - https://www.ti.com/ */
-> +
-> +#include "linux/dev_printk.h"
-> +#include <drm/drm_file.h>
-> +#include <drm/drm_gem.h>
-> +#include <drm/drm_print.h>
-> +#include <drm/thames_accel.h>
-> +#include <linux/platform_device.h>
-> +
-> +#include "thames_core.h"
-> +#include "thames_device.h"
-> +#include "thames_drv.h"
-> +#include "thames_gem.h"
-> +#include "thames_job.h"
-> +#include "thames_rpmsg.h"
-> +
-> +#define JOB_TIMEOUT_MS 500
-> +
-> +static struct thames_job *to_thames_job(struct drm_sched_job *sched_job)
-> +{
-> +	return container_of(sched_job, struct thames_job, base);
-> +}
-> +
-> +static const char *thames_fence_get_driver_name(struct dma_fence *fence)
-> +{
-> +	return "thames";
-> +}
-> +
-> +static const char *thames_fence_get_timeline_name(struct dma_fence *fence)
-> +{
-> +	return "thames";
-> +}
-> +
-> +static const struct dma_fence_ops thames_fence_ops = {
-> +	.get_driver_name = thames_fence_get_driver_name,
-> +	.get_timeline_name = thames_fence_get_timeline_name,
-> +};
-> +
-> +static struct dma_fence *thames_fence_create(struct thames_core *core)
-> +{
-> +	struct dma_fence *fence;
-> +
-> +	fence = kzalloc(sizeof(*fence), GFP_KERNEL);
-> +	if (!fence)
-> +		return ERR_PTR(-ENOMEM);
-> +
-> +	dma_fence_init(fence, &thames_fence_ops, &core->fence_lock, core->fence_context,
-> +		       ++core->emit_seqno);
-> +
-> +	return fence;
-> +}
-> +
-> +static void thames_job_hw_submit(struct thames_core *core, struct thames_job *job)
-> +{
-> +	int ret;
-> +
-> +	/* Don't queue the job if a reset is in progress */
-> +	if (atomic_read(&core->reset.pending))
-> +		return;
-> +
-> +	ret = thames_rpmsg_send_submit_job(core, job->file_priv->context_id, job->job_id,
-> +					   to_thames_bo(job->kernel)->iova, job->kernel_size,
-> +					   to_thames_bo(job->params)->iova, job->params_size,
-> +					   &job->ipc_sequence);
-> +
-> +	if (ret) {
-> +		dev_err(core->dev, "Failed to submit kernel to DSP core %d\n", core->index);
-> +		return;
-> +	}
-> +}
-> +
-> +static int thames_acquire_object_fences(struct drm_gem_object **bos, int bo_count,
-> +					struct drm_sched_job *job, bool is_write)
-> +{
-> +	int i, ret;
-> +
-> +	for (i = 0; i < bo_count; i++) {
-> +		ret = dma_resv_reserve_fences(bos[i]->resv, 1);
-> +		if (ret)
-> +			return ret;
-> +
-> +		ret = drm_sched_job_add_implicit_dependencies(job, bos[i], is_write);
-> +		if (ret)
-> +			return ret;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static void thames_attach_object_fences(struct drm_gem_object **bos, int bo_count,
-> +					struct dma_fence *fence)
-> +{
-> +	int i;
-> +
-> +	for (i = 0; i < bo_count; i++)
-> +		dma_resv_add_fence(bos[i]->resv, fence, DMA_RESV_USAGE_WRITE);
-> +}
-> +
-> +static int thames_job_push(struct thames_job *job)
-> +{
-> +	struct thames_device *tdev = job->tdev;
-> +	struct drm_gem_object **bos;
-> +	struct ww_acquire_ctx acquire_ctx;
-> +	int ret = 0;
-> +
-> +	dev_dbg(tdev->ddev.dev, "Pushing job with %u in BOs and %u out BOs\n", job->in_bo_count,
-> +		job->out_bo_count);
-> +	bos = kvmalloc_array(job->in_bo_count + job->out_bo_count, sizeof(void *), GFP_KERNEL);
-> +	memcpy(bos, job->in_bos, job->in_bo_count * sizeof(void *));
-> +	memcpy(&bos[job->in_bo_count], job->out_bos, job->out_bo_count * sizeof(void *));
-> +
-> +	ret = drm_gem_lock_reservations(bos, job->in_bo_count + job->out_bo_count, &acquire_ctx);
-> +	if (ret)
-> +		goto err;
-> +
-> +	scoped_guard(mutex, &tdev->sched_lock)
-> +	{
-> +		drm_sched_job_arm(&job->base);
-> +
-> +		job->inference_done_fence = dma_fence_get(&job->base.s_fence->finished);
-> +
-> +		ret = thames_acquire_object_fences(job->in_bos, job->in_bo_count, &job->base,
-> +						   false);
-> +		if (ret)
-> +			goto err_unlock;
-> +
-> +		ret = thames_acquire_object_fences(job->out_bos, job->out_bo_count, &job->base,
-> +						   true);
-> +		if (ret)
-> +			goto err_unlock;
-> +
-> +		kref_get(&job->refcount); /* put by scheduler job completion */
-> +
-> +		drm_sched_entity_push_job(&job->base);
-> +	}
-> +
-> +	thames_attach_object_fences(job->out_bos, job->out_bo_count, job->inference_done_fence);
-> +
-> +err_unlock:
-> +	drm_gem_unlock_reservations(bos, job->in_bo_count + job->out_bo_count, &acquire_ctx);
-> +err:
-> +	kvfree(bos);
-> +
-> +	return ret;
-> +}
-> +
-> +static void thames_job_cleanup(struct kref *ref)
-> +{
-> +	struct thames_job *job = container_of(ref, struct thames_job, refcount);
-> +	struct thames_device *tdev = job->tdev;
-> +	unsigned int i;
-> +
-> +	dma_fence_put(job->done_fence);
-> +	dma_fence_put(job->inference_done_fence);
-> +
-> +	ida_free(&tdev->job_ida, job->job_id);
-> +
-> +	if (job->kernel)
-> +		drm_gem_object_put(job->kernel);
-> +
-> +	if (job->params)
-> +		drm_gem_object_put(job->params);
-> +
-> +	if (job->in_bos) {
-> +		for (i = 0; i < job->in_bo_count; i++)
-> +			drm_gem_object_put(job->in_bos[i]);
-> +
-> +		kvfree(job->in_bos);
-> +	}
-> +
-> +	if (job->out_bos) {
-> +		for (i = 0; i < job->out_bo_count; i++)
-> +			drm_gem_object_put(job->out_bos[i]);
-> +
-> +		kvfree(job->out_bos);
-> +	}
-> +
-> +	kfree(job);
-> +}
-> +
-> +static void thames_job_put(struct thames_job *job)
-> +{
-> +	kref_put(&job->refcount, thames_job_cleanup);
-> +}
-> +
-> +static void thames_job_free(struct drm_sched_job *sched_job)
-> +{
-> +	struct thames_job *job = to_thames_job(sched_job);
-> +
-> +	drm_sched_job_cleanup(sched_job);
-> +
-> +	thames_job_put(job);
-> +}
-> +
-> +static struct thames_core *sched_to_core(struct thames_device *tdev,
-> +					 struct drm_gpu_scheduler *sched)
-> +{
-> +	unsigned int core;
-> +
-> +	for (core = 0; core < tdev->num_cores; core++) {
-> +		if (&tdev->cores[core].sched == sched)
-> +			return &tdev->cores[core];
-> +	}
-> +
-> +	return NULL;
-> +}
-> +
-> +static struct dma_fence *thames_job_run(struct drm_sched_job *sched_job)
-> +{
-> +	struct thames_job *job = to_thames_job(sched_job);
-> +	struct thames_device *tdev = job->tdev;
-> +	struct thames_core *core = sched_to_core(tdev, sched_job->sched);
-> +	struct dma_fence *fence = NULL;
-> +
-> +	if (unlikely(job->base.s_fence->finished.error))
-> +		return NULL;
-> +
-> +	fence = thames_fence_create(core);
-> +	if (IS_ERR(fence))
-> +		return fence;
-> +
-> +	if (job->done_fence)
-> +		dma_fence_put(job->done_fence);
-> +	job->done_fence = dma_fence_get(fence);
-> +
-> +	scoped_guard(mutex, &core->job_lock)
-> +	{
-> +		core->in_flight_job = job;
-> +		thames_job_hw_submit(core, job);
-> +	}
-> +
-> +	return fence;
-> +}
-> +
-> +static void thames_reset(struct thames_core *core, struct drm_sched_job *bad)
-> +{
-> +	if (!atomic_read(&core->reset.pending))
-> +		return;
-> +
-> +	drm_sched_stop(&core->sched, bad);
-> +	scoped_guard(mutex, &core->job_lock) core->in_flight_job = NULL;
-> +	thames_core_reset(core);
-> +	atomic_set(&core->reset.pending, 0);
-> +	drm_sched_start(&core->sched, 0);
-> +}
-> +
-> +static enum drm_gpu_sched_stat thames_job_timedout(struct drm_sched_job *sched_job)
-> +{
-> +	struct thames_job *job = to_thames_job(sched_job);
-> +	struct thames_device *tdev = job->tdev;
-> +	struct thames_core *core = sched_to_core(tdev, sched_job->sched);
-> +
-> +	if (!core) {
-> +		dev_err(tdev->ddev.dev, "Failed to find core for timed out job\n");
-> +		return DRM_GPU_SCHED_STAT_NONE;
-> +	}
-> +
-> +	dev_err(core->dev, "Job %u timed out on DSP core %d\n", job->job_id, core->index);
-> +
-> +	atomic_set(&core->reset.pending, 1);
-> +	thames_reset(core, sched_job);
-> +
-> +	return DRM_GPU_SCHED_STAT_RESET;
-> +}
-> +
-> +static void thames_reset_work(struct work_struct *work)
-> +{
-> +	struct thames_core *core;
-> +
-> +	core = container_of(work, struct thames_core, reset.work);
-> +	thames_reset(core, NULL);
-> +}
-> +
-> +static const struct drm_sched_backend_ops thames_sched_ops = { .run_job = thames_job_run,
-> +							       .timedout_job = thames_job_timedout,
-> +							       .free_job = thames_job_free };
-> +
-> +int thames_job_init(struct thames_core *core)
-> +{
-> +	struct drm_sched_init_args args = {
-> +		.ops = &thames_sched_ops,
-> +		.num_rqs = DRM_SCHED_PRIORITY_COUNT,
-> +		.credit_limit = 1,
-> +		.timeout = msecs_to_jiffies(JOB_TIMEOUT_MS),
-> +		.name = dev_name(core->dev),
-> +		.dev = core->dev,
-> +	};
-> +	int ret;
-> +
-> +	INIT_WORK(&core->reset.work, thames_reset_work);
-> +	spin_lock_init(&core->fence_lock);
-> +	mutex_init(&core->job_lock);
-> +
-> +	core->reset.wq = alloc_ordered_workqueue("thames-reset-%d", 0, core->index);
-> +	if (!core->reset.wq)
-> +		return -ENOMEM;
-> +
-> +	core->fence_context = dma_fence_context_alloc(1);
-> +
-> +	args.timeout_wq = core->reset.wq;
-> +	ret = drm_sched_init(&core->sched, &args);
-> +	if (ret) {
-> +		dev_err(core->dev, "Failed to create scheduler: %d.", ret);
-> +		destroy_workqueue(core->reset.wq);
-> +		return ret;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +void thames_job_fini(struct thames_core *core)
-> +{
-> +	drm_sched_fini(&core->sched);
-> +
-> +	cancel_work_sync(&core->reset.work);
-> +	destroy_workqueue(core->reset.wq);
-> +}
-> +
-> +int thames_job_open(struct thames_file_priv *thames_priv)
-> +{
-> +	struct thames_device *tdev = thames_priv->tdev;
-> +	struct drm_gpu_scheduler **scheds =
-> +		kmalloc_array(tdev->num_cores, sizeof(*scheds), GFP_KERNEL);
-> +	unsigned int core;
-> +	int ret;
-> +
-> +	for (core = 0; core < tdev->num_cores; core++)
-> +		scheds[core] = &tdev->cores[core].sched;
-> +
-> +	ret = drm_sched_entity_init(&thames_priv->sched_entity, DRM_SCHED_PRIORITY_NORMAL, scheds,
-> +				    tdev->num_cores, NULL);
-> +	if (WARN_ON(ret))
-> +		return ret;
-> +
-> +	return 0;
-> +}
-> +
-> +void thames_job_close(struct thames_file_priv *thames_priv)
-> +{
-> +	struct drm_sched_entity *entity = &thames_priv->sched_entity;
-> +
-> +	kfree(entity->sched_list);
-> +	drm_sched_entity_destroy(entity);
-> +}
-> +
-> +static int thames_ioctl_submit_job(struct drm_device *dev, struct drm_file *file,
-> +				   struct drm_thames_job *job)
-> +{
-> +	struct thames_device *tdev = to_thames_device(dev);
-> +	struct thames_file_priv *file_priv = file->driver_priv;
-> +	struct thames_job *tjob = NULL;
-> +	int ret = 0;
-> +
-> +	tjob = kzalloc(sizeof(*tjob), GFP_KERNEL);
-> +	if (!tjob)
-> +		return -ENOMEM;
-> +
-> +	kref_init(&tjob->refcount);
-> +
-> +	tjob->tdev = tdev;
-> +	tjob->file_priv = file_priv;
-> +
-> +	tjob->job_id = ida_alloc_min(&tdev->job_ida, 1, GFP_KERNEL);
-> +	if (tjob->job_id < 0)
-> +		goto out_put_job;
-> +
-> +	ret = drm_sched_job_init(&tjob->base, &file_priv->sched_entity, 1, NULL, file->client_id);
-> +	if (ret)
-> +		goto out_put_job;
-> +
-> +	tjob->kernel = drm_gem_object_lookup(file, job->kernel);
-> +	if (!tjob->kernel) {
-> +		ret = -ENOENT;
-> +		goto out_cleanup_job;
-> +	}
-> +
-> +	tjob->kernel_size = job->kernel_size;
-> +
-> +	if (job->params) {
-> +		tjob->params = drm_gem_object_lookup(file, job->params);
-> +		if (!tjob->params) {
-> +			ret = -ENOENT;
-> +			goto out_cleanup_job;
-> +		}
-> +		tjob->params_size = job->params_size;
-> +	}
-> +
-> +	ret = drm_gem_objects_lookup(file, u64_to_user_ptr(job->in_bo_handles),
-> +				     job->in_bo_handle_count, &tjob->in_bos);
-> +	if (ret)
-> +		goto out_cleanup_job;
-> +
-> +	tjob->in_bo_count = job->in_bo_handle_count;
-> +
-> +	ret = drm_gem_objects_lookup(file, u64_to_user_ptr(job->out_bo_handles),
-> +				     job->out_bo_handle_count, &tjob->out_bos);
-> +	if (ret)
-> +		goto out_cleanup_job;
-> +
-> +	tjob->out_bo_count = job->out_bo_handle_count;
-> +
-> +	ret = thames_job_push(tjob);
-> +
-> +out_cleanup_job:
-> +	if (ret)
-> +		drm_sched_job_cleanup(&tjob->base);
-> +out_put_job:
-> +	thames_job_put(tjob);
-> +
-> +	return ret;
-> +}
-> +
-> +#define THAMES_MAX_JOBS_PER_SUBMIT 256
-> +
-> +int thames_ioctl_submit(struct drm_device *dev, void *data, struct drm_file *file)
-> +{
-> +	struct drm_thames_submit *args = data;
-> +	struct drm_thames_job *jobs;
-> +	size_t jobs_size;
-> +	int ret = 0;
-> +	unsigned int i = 0;
-> +
-> +	if (args->pad)
-> +		return -EINVAL;
-> +
-> +	if (args->job_count == 0)
-> +		return -EINVAL;
-> +
-> +	if (args->job_count > THAMES_MAX_JOBS_PER_SUBMIT) {
-> +		dev_err(dev->dev, "Job count %u exceeds maximum %u\n", args->job_count,
-> +			THAMES_MAX_JOBS_PER_SUBMIT);
-> +		return -EINVAL;
-> +	}
-> +
-> +	jobs_size = array_size(args->job_count, sizeof(*jobs));
-> +	if (jobs_size == SIZE_MAX)
-> +		return -EINVAL;
-> +
-> +	jobs = kvmalloc_array(args->job_count, sizeof(*jobs), GFP_KERNEL);
-> +	if (!jobs)
-> +		return -ENOMEM;
-> +
-> +	if (copy_from_user(jobs, u64_to_user_ptr(args->jobs), jobs_size)) {
-> +		ret = -EFAULT;
-> +		drm_dbg(dev, "Failed to copy incoming job array\n");
-> +		goto exit;
-> +	}
-
-Just a drive by comment - above looks like a potential candidate for 
-vmemdup_array_user. Or even just go one by one and avoid the allocation.
-
-Regards,
-
-Tvrtko
-
-> +
-> +	for (i = 0; i < args->job_count; i++) {
-> +		ret = thames_ioctl_submit_job(dev, file, &jobs[i]);
-> +		if (ret)
-> +			break;
-> +	}
-> +
-> +exit:
-> +	kvfree(jobs);
-> +
-> +	return ret;
-> +}
-> diff --git a/drivers/accel/thames/thames_job.h b/drivers/accel/thames/thames_job.h
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..3bfd2c779d9b783624a25e6d06368f3e1daf569e
-> --- /dev/null
-> +++ b/drivers/accel/thames/thames_job.h
-> @@ -0,0 +1,51 @@
-> +/* SPDX-License-Identifier: GPL-2.0-only */
-> +/* Copyright 2024-2025 Tomeu Vizoso <tomeu@tomeuvizoso.net> */
-> +/* Copyright 2026 Texas Instruments Incorporated - https://www.ti.com/ */
-> +
-> +#ifndef __THAMES_JOB_H__
-> +#define __THAMES_JOB_H__
-> +
-> +#include <drm/drm_drv.h>
-> +#include <drm/gpu_scheduler.h>
-> +
-> +#include "thames_core.h"
-> +#include "thames_drv.h"
-> +
-> +struct thames_job {
-> +	struct drm_sched_job base;
-> +
-> +	struct thames_device *tdev;
-> +	struct thames_file_priv *file_priv;
-> +
-> +	u32 job_id;
-> +	u32 ipc_sequence;
-> +
-> +	struct drm_gem_object *kernel;
-> +	size_t kernel_size;
-> +
-> +	struct drm_gem_object *params;
-> +	size_t params_size;
-> +
-> +	struct drm_gem_object **in_bos;
-> +	u32 in_bo_count;
-> +
-> +	struct drm_gem_object **out_bos;
-> +	u32 out_bo_count;
-> +
-> +	/* Fence to be signaled by drm-sched once its done with the job */
-> +	struct dma_fence *inference_done_fence;
-> +
-> +	/* Fence to be signaled by rpmsg handler when the job is complete. */
-> +	struct dma_fence *done_fence;
-> +
-> +	struct kref refcount;
-> +};
-> +
-> +int thames_ioctl_submit(struct drm_device *dev, void *data, struct drm_file *file);
-> +
-> +int thames_job_init(struct thames_core *core);
-> +void thames_job_fini(struct thames_core *core);
-> +int thames_job_open(struct thames_file_priv *thames_priv);
-> +void thames_job_close(struct thames_file_priv *thames_priv);
-> +
-> +#endif
-> diff --git a/drivers/accel/thames/thames_rpmsg.c b/drivers/accel/thames/thames_rpmsg.c
-> index a25465295a177877c5ca2b3c93f52d8288863797..9747690e0f84fe00d605ad0e708d597da2240d97 100644
-> --- a/drivers/accel/thames/thames_rpmsg.c
-> +++ b/drivers/accel/thames/thames_rpmsg.c
-> @@ -11,6 +11,7 @@
->   #include "thames_core.h"
->   #include "thames_device.h"
->   #include "thames_ipc.h"
-> +#include "thames_job.h"
->   
->   #define THAMES_PING_TEST_PATTERN 0xDEADBEEF
->   #define THAMES_PING_TIMEOUT_MS 5000
-> @@ -71,6 +72,36 @@ static int thames_rpmsg_callback(struct rpmsg_device *rpdev, void *data, int len
->   		ida_free(&core->tdev->ipc_seq_ida, hdr->seq);
->   		break;
->   
-> +	case THAMES_MSG_SUBMIT_JOB_RESPONSE: {
-> +		struct thames_job *job;
-> +
-> +		scoped_guard(mutex, &core->job_lock)
-> +		{
-> +			job = core->in_flight_job;
-> +			if (!job) {
-> +				dev_err(&rpdev->dev,
-> +					"Received job response but no job in flight\n");
-> +				ida_free(&core->tdev->ipc_seq_ida, hdr->seq);
-> +				return -EINVAL;
-> +			}
-> +
-> +			if (hdr->seq != job->ipc_sequence) {
-> +				dev_err(&rpdev->dev,
-> +					"Job response sequence mismatch: got %u, expected %u\n",
-> +					hdr->seq, job->ipc_sequence);
-> +				ida_free(&core->tdev->ipc_seq_ida, hdr->seq);
-> +				return -EINVAL;
-> +			}
-> +
-> +			dma_fence_signal(job->done_fence);
-> +			core->in_flight_job = NULL;
-> +		}
-> +
-> +		ida_free(&core->tdev->ipc_seq_ida, hdr->seq);
-> +
-> +		break;
-> +	}
-> +
->   	default:
->   		dev_warn(&rpdev->dev, "Unknown message type: %u\n", hdr->type);
->   		break;
-> @@ -191,6 +222,27 @@ int thames_rpmsg_send_unmap_bo(struct thames_core *core, u32 context_id, u32 bo_
->   	return thames_rpmsg_send_raw(core, &msg, sizeof(msg));
->   }
->   
-> +int thames_rpmsg_send_submit_job(struct thames_core *core, u32 context_id, u32 job_id,
-> +				 u64 kernel_iova, u64 kernel_size, u64 args_iova, u64 args_size,
-> +				 u32 *sequence)
-> +{
-> +	struct thames_msg_submit_job msg = {};
-> +
-> +	msg.hdr.type = THAMES_MSG_SUBMIT_JOB;
-> +	msg.hdr.seq = ida_alloc(&core->tdev->ipc_seq_ida, GFP_KERNEL);
-> +	msg.hdr.len = sizeof(msg);
-> +	msg.context_id = context_id;
-> +	msg.job_id = job_id;
-> +	msg.kernel_iova = kernel_iova;
-> +	msg.kernel_size = kernel_size;
-> +	msg.args_iova = args_iova;
-> +	msg.args_size = args_size;
-> +
-> +	*sequence = msg.hdr.seq;
-> +
-> +	return thames_rpmsg_send_raw(core, &msg, sizeof(msg));
-> +}
-> +
->   int thames_rpmsg_ping_test(struct thames_core *core)
->   {
->   	const u32 test_data = THAMES_PING_TEST_PATTERN;
-> diff --git a/include/uapi/drm/thames_accel.h b/include/uapi/drm/thames_accel.h
-> index 0a5a5e5f6637ab474e9effbb6db29c1dd95e56b5..5b35e50826ed95bfcc3709bef33416d2b6d11c70 100644
-> --- a/include/uapi/drm/thames_accel.h
-> +++ b/include/uapi/drm/thames_accel.h
-> @@ -28,6 +28,9 @@ enum drm_thames_ioctl_id {
->   	 * mmap to map a GEM object.
->   	 */
->   	DRM_THAMES_BO_MMAP_OFFSET,
-> +
-> +	/** @DRM_THAMES_SUBMIT: Submit a job and BOs to run. */
-> +	DRM_THAMES_SUBMIT,
->   };
->   
->   /**
-> @@ -75,6 +78,55 @@ struct drm_thames_bo_mmap_offset {
->   	__u64 offset;
->   };
->   
-> +/**
-> + * struct drm_thames_job - A job to be run on the NPU
-> + *
-> + * The kernel will schedule the execution of this job taking into account its
-> + * dependencies with other jobs. All tasks in the same job will be executed
-> + * sequentially on the same core, to benefit from memory residency in SRAM.
-> + */
-> +struct drm_thames_job {
-> +	/** Input: BO handle for kernel. */
-> +	__u32 kernel;
-> +
-> +	/** Input: Size in bytes of the compiled kernel. */
-> +	__u32 kernel_size;
-> +
-> +	/** Input: BO handle for params BO. */
-> +	__u32 params;
-> +
-> +	/** Input: Size in bytes of the params BO. */
-> +	__u32 params_size;
-> +
-> +	/** Input: Pointer to a u32 array of the BOs that are read by the job. */
-> +	__u64 in_bo_handles;
-> +
-> +	/** Input: Pointer to a u32 array of the BOs that are written to by the job. */
-> +	__u64 out_bo_handles;
-> +
-> +	/** Input: Number of input BO handles passed in (size is that times 4). */
-> +	__u32 in_bo_handle_count;
-> +
-> +	/** Input: Number of output BO handles passed in (size is that times 4). */
-> +	__u32 out_bo_handle_count;
-> +};
-> +
-> +/**
-> + * struct drm_thames_submit - ioctl argument for submitting commands to the NPU.
-> + *
-> + * The kernel will schedule the execution of these jobs in dependency order.
-> + */
-> +struct drm_thames_submit {
-> +	/** Input: Pointer to an array of struct drm_thames_job. */
-> +	__u64 jobs;
-> +
-> +	/** Input: Number of jobs passed in. */
-> +	__u32 job_count;
-> +
-> +	/** Reserved, must be zero. */
-> +	__u32 pad;
-> +};
-> +
->   /**
->    * DRM_IOCTL_THAMES() - Build a thames IOCTL number
->    * @__access: Access type. Must be R, W or RW.
-> @@ -95,6 +147,8 @@ enum {
->   		DRM_IOCTL_THAMES(WR, BO_CREATE, bo_create),
->   	DRM_IOCTL_THAMES_BO_MMAP_OFFSET =
->   		DRM_IOCTL_THAMES(WR, BO_MMAP_OFFSET, bo_mmap_offset),
-> +	DRM_IOCTL_THAMES_SUBMIT =
-> +		DRM_IOCTL_THAMES(WR, SUBMIT, submit),
->   };
->   
->   #if defined(__cplusplus)
-> 
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gV2VkLCAgNyBKYW4gMjAyNiAxMToxNDoxNCArMDIwMA0KTGVvbiBSb21hbm92c2t5IDxsZW9u
+QGtlcm5lbC5vcmc+IHdyb3RlOg0KDQo+IEZyb206IExlb24gUm9tYW5vdnNreSA8bGVvbnJvQG52
+aWRpYS5jb20+DQo+IA0KPiBBZnRlciBjb21taXQgZmNmNDYzYjkyYTA4ICgidHlwZXM6IG1vdmUg
+cGh5c192ZWMgZGVmaW5pdGlvbiB0byBjb21tb24gaGVhZGVyIiksDQo+IHdlIGNhbiB1c2UgdGhl
+IHNoYXJlZCBwaHlzX3ZlYyB0eXBlIGluc3RlYWQgb2YgdGhlIERNQUJVRuKAkXNwZWNpZmljDQo+
+IGRtYV9idWZfcGh5c192ZWMsIHdoaWNoIGR1cGxpY2F0ZWQgdGhlIHNhbWUgc3RydWN0dXJlIGFu
+ZCBzZW1hbnRpY3MuDQo+IA0KPiBTaWduZWQtb2ZmLWJ5OiBMZW9uIFJvbWFub3Zza3kgPGxlb25y
+b0BudmlkaWEuY29tPg0KPiAtLS0NCj4gQWxleCwNCj4gDQo+IEFjY29yZGluZyB0byBkaWZmc3Rh
+dCwgVkZJTyBpcyB0aGUgc3Vic3lzdGVtIHdpdGggdGhlIGxhcmdlc3Qgc2V0IG9mIGNoYW5nZXMs
+DQo+IHNvIGl0IHdvdWxkIGJlIGdyZWF0IGlmIHlvdSBjb3VsZCB0YWtlIGl0IHRocm91Z2ggeW91
+ciB0cmVlLg0KPiANCj4gVGhlIHNlcmllcyBpcyBiYXNlZCBvbiB0aGUgZm9yLTcuMC9ibGstcHZl
+YyBzaGFyZWQgYnJhbmNoIGZyb20gSmVuczoNCj4gaHR0cHM6Ly9naXQua2VybmVsLm9yZy9wdWIv
+c2NtL2xpbnV4L2tlcm5lbC9naXQvYXhib2UvbGludXguZ2l0L2xvZy8/aD1mb3ItNy4wL2Jsay1w
+dmVjDQoNCkFwcGxpZWQgdG8gdmZpbyBuZXh0IGJyYW5jaCBmb3IgdjYuMjAvNy4wIGFuZCBwdXNo
+ZWQgdGFnDQpjb21tb25fcGh5c192ZWNfdmlhX3ZmaW8gaW5jbHVkaW5nIHRoaXMgY29tbWl0IGFu
+ZCBkZXBlbmRlbmN5Lg0KVGhhbmtzLA0KDQpBbGV4DQoNCg0KPiAtLS0NCj4gQ2M6IGxpbnV4LW1l
+ZGlhQHZnZXIua2VybmVsLm9yZw0KPiBDYzogZHJpLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9y
+Zw0KPiBDYzogbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnDQo+IENjOiBsaW51eC1rZXJu
+ZWxAdmdlci5rZXJuZWwub3JnDQo+IENjOiBpb21tdUBsaXN0cy5saW51eC5kZXYNCj4gQ2M6IGt2
+bUB2Z2VyLmtlcm5lbC5vcmcNCj4gVG86IFN1bWl0IFNlbXdhbCA8c3VtaXQuc2Vtd2FsQGxpbmFy
+by5vcmc+DQo+IFRvOiBDaHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+
+DQo+IFRvOiBKYXNvbiBHdW50aG9ycGUgPGpnZ0B6aWVwZS5jYT4NCj4gVG86IEtldmluIFRpYW4g
+PGtldmluLnRpYW5AaW50ZWwuY29tPg0KPiBUbzogSm9lcmcgUm9lZGVsIDxqb3JvQDhieXRlcy5v
+cmc+DQo+IFRvOiBXaWxsIERlYWNvbiA8d2lsbEBrZXJuZWwub3JnPg0KPiBUbzogUm9iaW4gTXVy
+cGh5IDxyb2Jpbi5tdXJwaHlAYXJtLmNvbT4NCj4gVG86IFlpc2hhaSBIYWRhcyA8eWlzaGFpaEBu
+dmlkaWEuY29tPg0KPiBUbzogU2hhbWVlciBLb2xvdGh1bSA8c2tvbG90aHVtdGhvQG52aWRpYS5j
+b20+DQo+IFRvOiBBbmtpdCBBZ3Jhd2FsIDxhbmtpdGFAbnZpZGlhLmNvbT4NCj4gVG86IEFsZXgg
+V2lsbGlhbXNvbiA8YWxleEBzaGF6Ym90Lm9yZz4NCj4gQ2M6IE1hdHRoZXcgV2lsY294IDx3aWxs
+eUBpbmZyYWRlYWQub3JnPg0KPiBDYzogSmVucyBBeGJvZSA8YXhib2VAa2VybmVsLmRrPg0KPiAt
+LS0NCj4gIGRyaXZlcnMvZG1hLWJ1Zi9kbWEtYnVmLW1hcHBpbmcuYyAgICAgICB8ICA2ICsrKy0t
+LQ0KPiAgZHJpdmVycy9pb21tdS9pb21tdWZkL2lvX3BhZ2V0YWJsZS5oICAgIHwgIDIgKy0NCj4g
+IGRyaXZlcnMvaW9tbXUvaW9tbXVmZC9pb21tdWZkX3ByaXZhdGUuaCB8ICA1ICsrLS0tDQo+ICBk
+cml2ZXJzL2lvbW11L2lvbW11ZmQvcGFnZXMuYyAgICAgICAgICAgfCAgNCArKy0tDQo+ICBkcml2
+ZXJzL2lvbW11L2lvbW11ZmQvc2VsZnRlc3QuYyAgICAgICAgfCAgMiArLQ0KPiAgZHJpdmVycy92
+ZmlvL3BjaS9udmdyYWNlLWdwdS9tYWluLmMgICAgIHwgIDIgKy0NCj4gIGRyaXZlcnMvdmZpby9w
+Y2kvdmZpb19wY2lfZG1hYnVmLmMgICAgICB8ICA4ICsrKystLS0tDQo+ICBpbmNsdWRlL2xpbnV4
+L2RtYS1idWYtbWFwcGluZy5oICAgICAgICAgfCAgMiArLQ0KPiAgaW5jbHVkZS9saW51eC9kbWEt
+YnVmLmggICAgICAgICAgICAgICAgIHwgMTAgLS0tLS0tLS0tLQ0KPiAgaW5jbHVkZS9saW51eC92
+ZmlvX3BjaV9jb3JlLmggICAgICAgICAgIHwgMTMgKysrKysrLS0tLS0tLQ0KPiAgMTAgZmlsZXMg
+Y2hhbmdlZCwgMjEgaW5zZXJ0aW9ucygrKSwgMzMgZGVsZXRpb25zKC0pDQo+IA0KPiBkaWZmIC0t
+Z2l0IGEvZHJpdmVycy9kbWEtYnVmL2RtYS1idWYtbWFwcGluZy5jIGIvZHJpdmVycy9kbWEtYnVm
+L2RtYS1idWYtbWFwcGluZy5jDQo+IGluZGV4IGI3MzUyZTYwOWZiZC4uMTc0Njc3ZmFhNTc3IDEw
+MDY0NA0KPiAtLS0gYS9kcml2ZXJzL2RtYS1idWYvZG1hLWJ1Zi1tYXBwaW5nLmMNCj4gKysrIGIv
+ZHJpdmVycy9kbWEtYnVmL2RtYS1idWYtbWFwcGluZy5jDQo+IEBAIC0zMyw4ICszMyw4IEBAIHN0
+YXRpYyBzdHJ1Y3Qgc2NhdHRlcmxpc3QgKmZpbGxfc2dfZW50cnkoc3RydWN0IHNjYXR0ZXJsaXN0
+ICpzZ2wsIHNpemVfdCBsZW5ndGgsDQo+ICB9DQo+ICANCj4gIHN0YXRpYyB1bnNpZ25lZCBpbnQg
+Y2FsY19zZ19uZW50cyhzdHJ1Y3QgZG1hX2lvdmFfc3RhdGUgKnN0YXRlLA0KPiAtCQkJCSAgc3Ry
+dWN0IGRtYV9idWZfcGh5c192ZWMgKnBoeXNfdmVjLA0KPiAtCQkJCSAgc2l6ZV90IG5yX3Jhbmdl
+cywgc2l6ZV90IHNpemUpDQo+ICsJCQkJICBzdHJ1Y3QgcGh5c192ZWMgKnBoeXNfdmVjLCBzaXpl
+X3QgbnJfcmFuZ2VzLA0KPiArCQkJCSAgc2l6ZV90IHNpemUpDQo+ICB7DQo+ICAJdW5zaWduZWQg
+aW50IG5lbnRzID0gMDsNCj4gIAlzaXplX3QgaTsNCj4gQEAgLTkxLDcgKzkxLDcgQEAgc3RydWN0
+IGRtYV9idWZfZG1hIHsNCj4gICAqLw0KPiAgc3RydWN0IHNnX3RhYmxlICpkbWFfYnVmX3BoeXNf
+dmVjX3RvX3NndChzdHJ1Y3QgZG1hX2J1Zl9hdHRhY2htZW50ICphdHRhY2gsDQo+ICAJCQkJCSBz
+dHJ1Y3QgcDJwZG1hX3Byb3ZpZGVyICpwcm92aWRlciwNCj4gLQkJCQkJIHN0cnVjdCBkbWFfYnVm
+X3BoeXNfdmVjICpwaHlzX3ZlYywNCj4gKwkJCQkJIHN0cnVjdCBwaHlzX3ZlYyAqcGh5c192ZWMs
+DQo+ICAJCQkJCSBzaXplX3QgbnJfcmFuZ2VzLCBzaXplX3Qgc2l6ZSwNCj4gIAkJCQkJIGVudW0g
+ZG1hX2RhdGFfZGlyZWN0aW9uIGRpcikNCj4gIHsNCj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvaW9t
+bXUvaW9tbXVmZC9pb19wYWdldGFibGUuaCBiL2RyaXZlcnMvaW9tbXUvaW9tbXVmZC9pb19wYWdl
+dGFibGUuaA0KPiBpbmRleCAxNGNkMDUyZmQzMjAuLjI3ZTNlMzExZDM5NSAxMDA2NDQNCj4gLS0t
+IGEvZHJpdmVycy9pb21tdS9pb21tdWZkL2lvX3BhZ2V0YWJsZS5oDQo+ICsrKyBiL2RyaXZlcnMv
+aW9tbXUvaW9tbXVmZC9pb19wYWdldGFibGUuaA0KPiBAQCAtMjAyLDcgKzIwMiw3IEBAIHN0cnVj
+dCBpb3B0X3BhZ2VzX2RtYWJ1Zl90cmFjayB7DQo+ICANCj4gIHN0cnVjdCBpb3B0X3BhZ2VzX2Rt
+YWJ1ZiB7DQo+ICAJc3RydWN0IGRtYV9idWZfYXR0YWNobWVudCAqYXR0YWNoOw0KPiAtCXN0cnVj
+dCBkbWFfYnVmX3BoeXNfdmVjIHBoeXM7DQo+ICsJc3RydWN0IHBoeXNfdmVjIHBoeXM7DQo+ICAJ
+LyogQWx3YXlzIFBBR0VfU0laRSBhbGlnbmVkICovDQo+ICAJdW5zaWduZWQgbG9uZyBzdGFydDsN
+Cj4gIAlzdHJ1Y3QgbGlzdF9oZWFkIHRyYWNrZXI7DQo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2lv
+bW11L2lvbW11ZmQvaW9tbXVmZF9wcml2YXRlLmggYi9kcml2ZXJzL2lvbW11L2lvbW11ZmQvaW9t
+bXVmZF9wcml2YXRlLmgNCj4gaW5kZXggZWI2ZDFhNzBmNjczLi42YWMxOTY1MTk5ZTkgMTAwNjQ0
+DQo+IC0tLSBhL2RyaXZlcnMvaW9tbXUvaW9tbXVmZC9pb21tdWZkX3ByaXZhdGUuaA0KPiArKysg
+Yi9kcml2ZXJzL2lvbW11L2lvbW11ZmQvaW9tbXVmZF9wcml2YXRlLmgNCj4gQEAgLTIwLDcgKzIw
+LDYgQEAgc3RydWN0IGlvbW11X2dyb3VwOw0KPiAgc3RydWN0IGlvbW11X29wdGlvbjsNCj4gIHN0
+cnVjdCBpb21tdWZkX2RldmljZTsNCj4gIHN0cnVjdCBkbWFfYnVmX2F0dGFjaG1lbnQ7DQo+IC1z
+dHJ1Y3QgZG1hX2J1Zl9waHlzX3ZlYzsNCj4gIA0KPiAgc3RydWN0IGlvbW11ZmRfc3dfbXNpX21h
+cCB7DQo+ICAJc3RydWN0IGxpc3RfaGVhZCBzd19tc2lfaXRlbTsNCj4gQEAgLTcxOCw3ICs3MTcs
+NyBAQCBpbnQgX19pbml0IGlvbW11ZmRfdGVzdF9pbml0KHZvaWQpOw0KPiAgdm9pZCBpb21tdWZk
+X3Rlc3RfZXhpdCh2b2lkKTsNCj4gIGJvb2wgaW9tbXVmZF9zZWxmdGVzdF9pc19tb2NrX2Rldihz
+dHJ1Y3QgZGV2aWNlICpkZXYpOw0KPiAgaW50IGlvbW11ZmRfdGVzdF9kbWFfYnVmX2lvbW11ZmRf
+bWFwKHN0cnVjdCBkbWFfYnVmX2F0dGFjaG1lbnQgKmF0dGFjaG1lbnQsDQo+IC0JCQkJICAgICBz
+dHJ1Y3QgZG1hX2J1Zl9waHlzX3ZlYyAqcGh5cyk7DQo+ICsJCQkJICAgICBzdHJ1Y3QgcGh5c192
+ZWMgKnBoeXMpOw0KPiAgI2Vsc2UNCj4gIHN0YXRpYyBpbmxpbmUgdm9pZCBpb21tdWZkX3Rlc3Rf
+c3l6X2NvbnZfaW92YV9pZChzdHJ1Y3QgaW9tbXVmZF91Y21kICp1Y21kLA0KPiAgCQkJCQkJIHVu
+c2lnbmVkIGludCBpb2FzX2lkLA0KPiBAQCAtNzQyLDcgKzc0MSw3IEBAIHN0YXRpYyBpbmxpbmUg
+Ym9vbCBpb21tdWZkX3NlbGZ0ZXN0X2lzX21vY2tfZGV2KHN0cnVjdCBkZXZpY2UgKmRldikNCj4g
+IH0NCj4gIHN0YXRpYyBpbmxpbmUgaW50DQo+ICBpb21tdWZkX3Rlc3RfZG1hX2J1Zl9pb21tdWZk
+X21hcChzdHJ1Y3QgZG1hX2J1Zl9hdHRhY2htZW50ICphdHRhY2htZW50LA0KPiAtCQkJCSBzdHJ1
+Y3QgZG1hX2J1Zl9waHlzX3ZlYyAqcGh5cykNCj4gKwkJCQkgc3RydWN0IHBoeXNfdmVjICpwaHlz
+KQ0KPiAgew0KPiAgCXJldHVybiAtRU9QTk9UU1VQUDsNCj4gIH0NCj4gZGlmZiAtLWdpdCBhL2Ry
+aXZlcnMvaW9tbXUvaW9tbXVmZC9wYWdlcy5jIGIvZHJpdmVycy9pb21tdS9pb21tdWZkL3BhZ2Vz
+LmMNCj4gaW5kZXggZGJlNTFlY2I5YTIwLi5iYWJhYmQ1NjRjZjkgMTAwNjQ0DQo+IC0tLSBhL2Ry
+aXZlcnMvaW9tbXUvaW9tbXVmZC9wYWdlcy5jDQo+ICsrKyBiL2RyaXZlcnMvaW9tbXUvaW9tbXVm
+ZC9wYWdlcy5jDQo+IEBAIC0xMDc3LDcgKzEwNzcsNyBAQCBzdGF0aWMgaW50IHBmbl9yZWFkZXJf
+dXNlcl91cGRhdGVfcGlubmVkKHN0cnVjdCBwZm5fcmVhZGVyX3VzZXIgKnVzZXIsDQo+ICB9DQo+
+ICANCj4gIHN0cnVjdCBwZm5fcmVhZGVyX2RtYWJ1ZiB7DQo+IC0Jc3RydWN0IGRtYV9idWZfcGh5
+c192ZWMgcGh5czsNCj4gKwlzdHJ1Y3QgcGh5c192ZWMgcGh5czsNCj4gIAl1bnNpZ25lZCBsb25n
+IHN0YXJ0X29mZnNldDsNCj4gIH07DQo+ICANCj4gQEAgLTE0NjAsNyArMTQ2MCw3IEBAIHN0YXRp
+YyBzdHJ1Y3QgZG1hX2J1Zl9hdHRhY2hfb3BzIGlvcHRfZG1hYnVmX2F0dGFjaF9yZXZva2Vfb3Bz
+ID0gew0KPiAgICovDQo+ICBzdGF0aWMgaW50DQo+ICBzeW1fdmZpb19wY2lfZG1hX2J1Zl9pb21t
+dWZkX21hcChzdHJ1Y3QgZG1hX2J1Zl9hdHRhY2htZW50ICphdHRhY2htZW50LA0KPiAtCQkJCSBz
+dHJ1Y3QgZG1hX2J1Zl9waHlzX3ZlYyAqcGh5cykNCj4gKwkJCQkgc3RydWN0IHBoeXNfdmVjICpw
+aHlzKQ0KPiAgew0KPiAgCXR5cGVvZigmdmZpb19wY2lfZG1hX2J1Zl9pb21tdWZkX21hcCkgZm47
+DQo+ICAJaW50IHJjOw0KPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9pb21tdS9pb21tdWZkL3NlbGZ0
+ZXN0LmMgYi9kcml2ZXJzL2lvbW11L2lvbW11ZmQvc2VsZnRlc3QuYw0KPiBpbmRleCA1NTBmZjM2
+ZGVjM2EuLjk4OWQ4YzRjNjBhNyAxMDA2NDQNCj4gLS0tIGEvZHJpdmVycy9pb21tdS9pb21tdWZk
+L3NlbGZ0ZXN0LmMNCj4gKysrIGIvZHJpdmVycy9pb21tdS9pb21tdWZkL3NlbGZ0ZXN0LmMNCj4g
+QEAgLTIwMDIsNyArMjAwMiw3IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZG1hX2J1Zl9vcHMgaW9t
+bXVmZF90ZXN0X2RtYWJ1Zl9vcHMgPSB7DQo+ICB9Ow0KPiAgDQo+ICBpbnQgaW9tbXVmZF90ZXN0
+X2RtYV9idWZfaW9tbXVmZF9tYXAoc3RydWN0IGRtYV9idWZfYXR0YWNobWVudCAqYXR0YWNobWVu
+dCwNCj4gLQkJCQkgICAgIHN0cnVjdCBkbWFfYnVmX3BoeXNfdmVjICpwaHlzKQ0KPiArCQkJCSAg
+ICAgc3RydWN0IHBoeXNfdmVjICpwaHlzKQ0KPiAgew0KPiAgCXN0cnVjdCBpb21tdWZkX3Rlc3Rf
+ZG1hX2J1ZiAqcHJpdiA9IGF0dGFjaG1lbnQtPmRtYWJ1Zi0+cHJpdjsNCj4gIA0KPiBkaWZmIC0t
+Z2l0IGEvZHJpdmVycy92ZmlvL3BjaS9udmdyYWNlLWdwdS9tYWluLmMgYi9kcml2ZXJzL3ZmaW8v
+cGNpL252Z3JhY2UtZ3B1L21haW4uYw0KPiBpbmRleCA4NGQxNDJhNDdlYzYuLmEwZjRlZGQ2YTMw
+YiAxMDA2NDQNCj4gLS0tIGEvZHJpdmVycy92ZmlvL3BjaS9udmdyYWNlLWdwdS9tYWluLmMNCj4g
+KysrIGIvZHJpdmVycy92ZmlvL3BjaS9udmdyYWNlLWdwdS9tYWluLmMNCj4gQEAgLTc4NCw3ICs3
+ODQsNyBAQCBudmdyYWNlX2dwdV93cml0ZShzdHJ1Y3QgdmZpb19kZXZpY2UgKmNvcmVfdmRldiwN
+Cj4gIHN0YXRpYyBpbnQgbnZncmFjZV9nZXRfZG1hYnVmX3BoeXMoc3RydWN0IHZmaW9fcGNpX2Nv
+cmVfZGV2aWNlICpjb3JlX3ZkZXYsDQo+ICAJCQkJICAgc3RydWN0IHAycGRtYV9wcm92aWRlciAq
+KnByb3ZpZGVyLA0KPiAgCQkJCSAgIHVuc2lnbmVkIGludCByZWdpb25faW5kZXgsDQo+IC0JCQkJ
+ICAgc3RydWN0IGRtYV9idWZfcGh5c192ZWMgKnBoeXNfdmVjLA0KPiArCQkJCSAgIHN0cnVjdCBw
+aHlzX3ZlYyAqcGh5c192ZWMsDQo+ICAJCQkJICAgc3RydWN0IHZmaW9fcmVnaW9uX2RtYV9yYW5n
+ZSAqZG1hX3JhbmdlcywNCj4gIAkJCQkgICBzaXplX3QgbnJfcmFuZ2VzKQ0KPiAgew0KPiBkaWZm
+IC0tZ2l0IGEvZHJpdmVycy92ZmlvL3BjaS92ZmlvX3BjaV9kbWFidWYuYyBiL2RyaXZlcnMvdmZp
+by9wY2kvdmZpb19wY2lfZG1hYnVmLmMNCj4gaW5kZXggZDRkMGY3ZDA4YzUzLi45YTg0YzIzOGMw
+MTMgMTAwNjQ0DQo+IC0tLSBhL2RyaXZlcnMvdmZpby9wY2kvdmZpb19wY2lfZG1hYnVmLmMNCj4g
+KysrIGIvZHJpdmVycy92ZmlvL3BjaS92ZmlvX3BjaV9kbWFidWYuYw0KPiBAQCAtMTQsNyArMTQs
+NyBAQCBzdHJ1Y3QgdmZpb19wY2lfZG1hX2J1ZiB7DQo+ICAJc3RydWN0IHZmaW9fcGNpX2NvcmVf
+ZGV2aWNlICp2ZGV2Ow0KPiAgCXN0cnVjdCBsaXN0X2hlYWQgZG1hYnVmc19lbG07DQo+ICAJc2l6
+ZV90IHNpemU7DQo+IC0Jc3RydWN0IGRtYV9idWZfcGh5c192ZWMgKnBoeXNfdmVjOw0KPiArCXN0
+cnVjdCBwaHlzX3ZlYyAqcGh5c192ZWM7DQo+ICAJc3RydWN0IHAycGRtYV9wcm92aWRlciAqcHJv
+dmlkZXI7DQo+ICAJdTMyIG5yX3JhbmdlczsNCj4gIAl1OCByZXZva2VkIDogMTsNCj4gQEAgLTk0
+LDcgKzk0LDcgQEAgc3RhdGljIGNvbnN0IHN0cnVjdCBkbWFfYnVmX29wcyB2ZmlvX3BjaV9kbWFi
+dWZfb3BzID0gew0KPiAgICogICAgd2lsbCBmYWlsIGlmIGl0IGlzIGN1cnJlbnRseSByZXZva2Vk
+DQo+ICAgKi8NCj4gIGludCB2ZmlvX3BjaV9kbWFfYnVmX2lvbW11ZmRfbWFwKHN0cnVjdCBkbWFf
+YnVmX2F0dGFjaG1lbnQgKmF0dGFjaG1lbnQsDQo+IC0JCQkJIHN0cnVjdCBkbWFfYnVmX3BoeXNf
+dmVjICpwaHlzKQ0KPiArCQkJCSBzdHJ1Y3QgcGh5c192ZWMgKnBoeXMpDQo+ICB7DQo+ICAJc3Ry
+dWN0IHZmaW9fcGNpX2RtYV9idWYgKnByaXY7DQo+ICANCj4gQEAgLTExNiw3ICsxMTYsNyBAQCBp
+bnQgdmZpb19wY2lfZG1hX2J1Zl9pb21tdWZkX21hcChzdHJ1Y3QgZG1hX2J1Zl9hdHRhY2htZW50
+ICphdHRhY2htZW50LA0KPiAgfQ0KPiAgRVhQT1JUX1NZTUJPTF9GT1JfTU9EVUxFUyh2ZmlvX3Bj
+aV9kbWFfYnVmX2lvbW11ZmRfbWFwLCAiaW9tbXVmZCIpOw0KPiAgDQo+IC1pbnQgdmZpb19wY2lf
+Y29yZV9maWxsX3BoeXNfdmVjKHN0cnVjdCBkbWFfYnVmX3BoeXNfdmVjICpwaHlzX3ZlYywNCj4g
+K2ludCB2ZmlvX3BjaV9jb3JlX2ZpbGxfcGh5c192ZWMoc3RydWN0IHBoeXNfdmVjICpwaHlzX3Zl
+YywNCj4gIAkJCQlzdHJ1Y3QgdmZpb19yZWdpb25fZG1hX3JhbmdlICpkbWFfcmFuZ2VzLA0KPiAg
+CQkJCXNpemVfdCBucl9yYW5nZXMsIHBoeXNfYWRkcl90IHN0YXJ0LA0KPiAgCQkJCXBoeXNfYWRk
+cl90IGxlbikNCj4gQEAgLTE0OCw3ICsxNDgsNyBAQCBFWFBPUlRfU1lNQk9MX0dQTCh2ZmlvX3Bj
+aV9jb3JlX2ZpbGxfcGh5c192ZWMpOw0KPiAgaW50IHZmaW9fcGNpX2NvcmVfZ2V0X2RtYWJ1Zl9w
+aHlzKHN0cnVjdCB2ZmlvX3BjaV9jb3JlX2RldmljZSAqdmRldiwNCj4gIAkJCQkgIHN0cnVjdCBw
+MnBkbWFfcHJvdmlkZXIgKipwcm92aWRlciwNCj4gIAkJCQkgIHVuc2lnbmVkIGludCByZWdpb25f
+aW5kZXgsDQo+IC0JCQkJICBzdHJ1Y3QgZG1hX2J1Zl9waHlzX3ZlYyAqcGh5c192ZWMsDQo+ICsJ
+CQkJICBzdHJ1Y3QgcGh5c192ZWMgKnBoeXNfdmVjLA0KPiAgCQkJCSAgc3RydWN0IHZmaW9fcmVn
+aW9uX2RtYV9yYW5nZSAqZG1hX3JhbmdlcywNCj4gIAkJCQkgIHNpemVfdCBucl9yYW5nZXMpDQo+
+ICB7DQo+IGRpZmYgLS1naXQgYS9pbmNsdWRlL2xpbnV4L2RtYS1idWYtbWFwcGluZy5oIGIvaW5j
+bHVkZS9saW51eC9kbWEtYnVmLW1hcHBpbmcuaA0KPiBpbmRleCBhM2MwY2UyZDNhNDIuLjA5YmRl
+M2Y3NDhlNCAxMDA2NDQNCj4gLS0tIGEvaW5jbHVkZS9saW51eC9kbWEtYnVmLW1hcHBpbmcuaA0K
+PiArKysgYi9pbmNsdWRlL2xpbnV4L2RtYS1idWYtbWFwcGluZy5oDQo+IEBAIC05LDcgKzksNyBA
+QA0KPiAgDQo+ICBzdHJ1Y3Qgc2dfdGFibGUgKmRtYV9idWZfcGh5c192ZWNfdG9fc2d0KHN0cnVj
+dCBkbWFfYnVmX2F0dGFjaG1lbnQgKmF0dGFjaCwNCj4gIAkJCQkJIHN0cnVjdCBwMnBkbWFfcHJv
+dmlkZXIgKnByb3ZpZGVyLA0KPiAtCQkJCQkgc3RydWN0IGRtYV9idWZfcGh5c192ZWMgKnBoeXNf
+dmVjLA0KPiArCQkJCQkgc3RydWN0IHBoeXNfdmVjICpwaHlzX3ZlYywNCj4gIAkJCQkJIHNpemVf
+dCBucl9yYW5nZXMsIHNpemVfdCBzaXplLA0KPiAgCQkJCQkgZW51bSBkbWFfZGF0YV9kaXJlY3Rp
+b24gZGlyKTsNCj4gIHZvaWQgZG1hX2J1Zl9mcmVlX3NndChzdHJ1Y3QgZG1hX2J1Zl9hdHRhY2ht
+ZW50ICphdHRhY2gsIHN0cnVjdCBzZ190YWJsZSAqc2d0LA0KPiBkaWZmIC0tZ2l0IGEvaW5jbHVk
+ZS9saW51eC9kbWEtYnVmLmggYi9pbmNsdWRlL2xpbnV4L2RtYS1idWYuaA0KPiBpbmRleCAwYmM0
+OTIwOTAyMzcuLjQwMGE1MzExMzY4ZSAxMDA2NDQNCj4gLS0tIGEvaW5jbHVkZS9saW51eC9kbWEt
+YnVmLmgNCj4gKysrIGIvaW5jbHVkZS9saW51eC9kbWEtYnVmLmgNCj4gQEAgLTUzMSwxNiArNTMx
+LDYgQEAgc3RydWN0IGRtYV9idWZfZXhwb3J0X2luZm8gew0KPiAgCXZvaWQgKnByaXY7DQo+ICB9
+Ow0KPiAgDQo+IC0vKioNCj4gLSAqIHN0cnVjdCBkbWFfYnVmX3BoeXNfdmVjIC0gZGVzY3JpYmUg
+Y29udGludW91cyBjaHVuayBvZiBtZW1vcnkNCj4gLSAqIEBwYWRkcjogICBwaHlzaWNhbCBhZGRy
+ZXNzIG9mIHRoYXQgY2h1bmsNCj4gLSAqIEBsZW46ICAgICBMZW5ndGggb2YgdGhpcyBjaHVuaw0K
+PiAtICovDQo+IC1zdHJ1Y3QgZG1hX2J1Zl9waHlzX3ZlYyB7DQo+IC0JcGh5c19hZGRyX3QgcGFk
+ZHI7DQo+IC0Jc2l6ZV90IGxlbjsNCj4gLX07DQo+IC0NCj4gIC8qKg0KPiAgICogREVGSU5FX0RN
+QV9CVUZfRVhQT1JUX0lORk8gLSBoZWxwZXIgbWFjcm8gZm9yIGV4cG9ydGVycw0KPiAgICogQG5h
+bWU6IGV4cG9ydC1pbmZvIG5hbWUNCj4gZGlmZiAtLWdpdCBhL2luY2x1ZGUvbGludXgvdmZpb19w
+Y2lfY29yZS5oIGIvaW5jbHVkZS9saW51eC92ZmlvX3BjaV9jb3JlLmgNCj4gaW5kZXggNzA2ODc3
+Zjk5OGZmLi4yYWMyODhiYjJjNjAgMTAwNjQ0DQo+IC0tLSBhL2luY2x1ZGUvbGludXgvdmZpb19w
+Y2lfY29yZS5oDQo+ICsrKyBiL2luY2x1ZGUvbGludXgvdmZpb19wY2lfY29yZS5oDQo+IEBAIC0y
+OCw3ICsyOCw2IEBADQo+ICBzdHJ1Y3QgdmZpb19wY2lfY29yZV9kZXZpY2U7DQo+ICBzdHJ1Y3Qg
+dmZpb19wY2lfcmVnaW9uOw0KPiAgc3RydWN0IHAycGRtYV9wcm92aWRlcjsNCj4gLXN0cnVjdCBk
+bWFfYnVmX3BoeXNfdmVjOw0KPiAgc3RydWN0IGRtYV9idWZfYXR0YWNobWVudDsNCj4gIA0KPiAg
+c3RydWN0IHZmaW9fcGNpX2V2ZW50ZmQgew0KPiBAQCAtNjIsMjUgKzYxLDI1IEBAIHN0cnVjdCB2
+ZmlvX3BjaV9kZXZpY2Vfb3BzIHsNCj4gIAlpbnQgKCpnZXRfZG1hYnVmX3BoeXMpKHN0cnVjdCB2
+ZmlvX3BjaV9jb3JlX2RldmljZSAqdmRldiwNCj4gIAkJCSAgICAgICBzdHJ1Y3QgcDJwZG1hX3By
+b3ZpZGVyICoqcHJvdmlkZXIsDQo+ICAJCQkgICAgICAgdW5zaWduZWQgaW50IHJlZ2lvbl9pbmRl
+eCwNCj4gLQkJCSAgICAgICBzdHJ1Y3QgZG1hX2J1Zl9waHlzX3ZlYyAqcGh5c192ZWMsDQo+ICsJ
+CQkgICAgICAgc3RydWN0IHBoeXNfdmVjICpwaHlzX3ZlYywNCj4gIAkJCSAgICAgICBzdHJ1Y3Qg
+dmZpb19yZWdpb25fZG1hX3JhbmdlICpkbWFfcmFuZ2VzLA0KPiAgCQkJICAgICAgIHNpemVfdCBu
+cl9yYW5nZXMpOw0KPiAgfTsNCj4gIA0KPiAgI2lmIElTX0VOQUJMRUQoQ09ORklHX1ZGSU9fUENJ
+X0RNQUJVRikNCj4gLWludCB2ZmlvX3BjaV9jb3JlX2ZpbGxfcGh5c192ZWMoc3RydWN0IGRtYV9i
+dWZfcGh5c192ZWMgKnBoeXNfdmVjLA0KPiAraW50IHZmaW9fcGNpX2NvcmVfZmlsbF9waHlzX3Zl
+YyhzdHJ1Y3QgcGh5c192ZWMgKnBoeXNfdmVjLA0KPiAgCQkJCXN0cnVjdCB2ZmlvX3JlZ2lvbl9k
+bWFfcmFuZ2UgKmRtYV9yYW5nZXMsDQo+ICAJCQkJc2l6ZV90IG5yX3JhbmdlcywgcGh5c19hZGRy
+X3Qgc3RhcnQsDQo+ICAJCQkJcGh5c19hZGRyX3QgbGVuKTsNCj4gIGludCB2ZmlvX3BjaV9jb3Jl
+X2dldF9kbWFidWZfcGh5cyhzdHJ1Y3QgdmZpb19wY2lfY29yZV9kZXZpY2UgKnZkZXYsDQo+ICAJ
+CQkJICBzdHJ1Y3QgcDJwZG1hX3Byb3ZpZGVyICoqcHJvdmlkZXIsDQo+ICAJCQkJICB1bnNpZ25l
+ZCBpbnQgcmVnaW9uX2luZGV4LA0KPiAtCQkJCSAgc3RydWN0IGRtYV9idWZfcGh5c192ZWMgKnBo
+eXNfdmVjLA0KPiArCQkJCSAgc3RydWN0IHBoeXNfdmVjICpwaHlzX3ZlYywNCj4gIAkJCQkgIHN0
+cnVjdCB2ZmlvX3JlZ2lvbl9kbWFfcmFuZ2UgKmRtYV9yYW5nZXMsDQo+ICAJCQkJICBzaXplX3Qg
+bnJfcmFuZ2VzKTsNCj4gICNlbHNlDQo+ICBzdGF0aWMgaW5saW5lIGludA0KPiAtdmZpb19wY2lf
+Y29yZV9maWxsX3BoeXNfdmVjKHN0cnVjdCBkbWFfYnVmX3BoeXNfdmVjICpwaHlzX3ZlYywNCj4g
+K3ZmaW9fcGNpX2NvcmVfZmlsbF9waHlzX3ZlYyhzdHJ1Y3QgcGh5c192ZWMgKnBoeXNfdmVjLA0K
+PiAgCQkJICAgIHN0cnVjdCB2ZmlvX3JlZ2lvbl9kbWFfcmFuZ2UgKmRtYV9yYW5nZXMsDQo+ICAJ
+CQkgICAgc2l6ZV90IG5yX3JhbmdlcywgcGh5c19hZGRyX3Qgc3RhcnQsDQo+ICAJCQkgICAgcGh5
+c19hZGRyX3QgbGVuKQ0KPiBAQCAtODksNyArODgsNyBAQCB2ZmlvX3BjaV9jb3JlX2ZpbGxfcGh5
+c192ZWMoc3RydWN0IGRtYV9idWZfcGh5c192ZWMgKnBoeXNfdmVjLA0KPiAgfQ0KPiAgc3RhdGlj
+IGlubGluZSBpbnQgdmZpb19wY2lfY29yZV9nZXRfZG1hYnVmX3BoeXMoDQo+ICAJc3RydWN0IHZm
+aW9fcGNpX2NvcmVfZGV2aWNlICp2ZGV2LCBzdHJ1Y3QgcDJwZG1hX3Byb3ZpZGVyICoqcHJvdmlk
+ZXIsDQo+IC0JdW5zaWduZWQgaW50IHJlZ2lvbl9pbmRleCwgc3RydWN0IGRtYV9idWZfcGh5c192
+ZWMgKnBoeXNfdmVjLA0KPiArCXVuc2lnbmVkIGludCByZWdpb25faW5kZXgsIHN0cnVjdCBwaHlz
+X3ZlYyAqcGh5c192ZWMsDQo+ICAJc3RydWN0IHZmaW9fcmVnaW9uX2RtYV9yYW5nZSAqZG1hX3Jh
+bmdlcywgc2l6ZV90IG5yX3JhbmdlcykNCj4gIHsNCj4gIAlyZXR1cm4gLUVPUE5PVFNVUFA7DQo+
+IEBAIC0yMjgsNiArMjI3LDYgQEAgc3RhdGljIGlubGluZSBib29sIGlzX2FsaWduZWRfZm9yX29y
+ZGVyKHN0cnVjdCB2bV9hcmVhX3N0cnVjdCAqdm1hLA0KPiAgfQ0KPiAgDQo+ICBpbnQgdmZpb19w
+Y2lfZG1hX2J1Zl9pb21tdWZkX21hcChzdHJ1Y3QgZG1hX2J1Zl9hdHRhY2htZW50ICphdHRhY2ht
+ZW50LA0KPiAtCQkJCSBzdHJ1Y3QgZG1hX2J1Zl9waHlzX3ZlYyAqcGh5cyk7DQo+ICsJCQkJIHN0
+cnVjdCBwaHlzX3ZlYyAqcGh5cyk7DQo+ICANCj4gICNlbmRpZiAvKiBWRklPX1BDSV9DT1JFX0gg
+Ki8NCj4gDQo+IC0tLQ0KPiBiYXNlLWNvbW1pdDogZmNmNDYzYjkyYTA4Njg2ZDFhZWIxZTY2Njc0
+YTcyZWI3YThiZmI5Yg0KPiBjaGFuZ2UtaWQ6IDIwMjYwMTA3LWNvbnZlcnQtdG8tcHZlYy1iZjA0
+ZGZjZjNkMTINCj4gDQo+IEJlc3QgcmVnYXJkcywNCj4gLS0gIA0KPiBMZW9uIFJvbWFub3Zza3kg
+PGxlb25yb0BudmlkaWEuY29tPg0KPiANCj4gDQoNCl9fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFy
+by1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRv
+IGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
