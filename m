@@ -2,174 +2,186 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id EBCDAD3C400
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 Jan 2026 10:46:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D3BDDD3C648
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 Jan 2026 11:57:06 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id CAF173FDAE
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 Jan 2026 09:46:12 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id B97513F732
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 20 Jan 2026 09:46:05 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B955D3F70D
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 Jan 2026 10:57:05 +0000 (UTC)
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+	by lists.linaro.org (Postfix) with ESMTPS id B9FE93F70D
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 20 Jan 2026 10:56:59 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=dLp9ReyQ;
-	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=leon@kernel.org;
-	dmarc=pass (policy=quarantine) header.from=kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id 1D0BC41908;
-	Tue, 20 Jan 2026 09:46:05 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0B94BC16AAE;
-	Tue, 20 Jan 2026 09:46:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1768902365;
-	bh=xwqfvmhHmuW9plUqJwJFOo0A9JPdncx7ymGaNl95+yo=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=dLp9ReyQRpZBQ1HsP4UfwVvklS8InFrF5hZROHOsUQf2ANERezVMKk+6yLg6Ao4g3
-	 bLcG3imT0sMt+H8fCaljcj6H6q3C49oKM5UFuq9mCGfKKoc58e7IfUyEjHp9yyDWly
-	 YIKTxAK65ASJJqdGUsUzRrjLdUxxrZkSb5a45Yin99EzC3KcC/KU54U44uAJoCTHCk
-	 /GXbSQK/AWWMtHtI6tfkHgvO0RI0YfUByVjh5FRuPknr3l7QRpVrbBG7WUGy8+TysZ
-	 sOw9jD1XrRQTSSUqXvrM/yMlG1kzWM8fP+8vKPFCkbcyIu4rYCttJvTje8CuUxTa6t
-	 RL0gf/JISbozw==
-Date: Tue, 20 Jan 2026 11:45:59 +0200
-From: Leon Romanovsky <leon@kernel.org>
-To: Jason Gunthorpe <jgg@ziepe.ca>
-Message-ID: <20260120094559.GR13201@unreal>
-References: <20260118-dmabuf-revoke-v2-0-a03bb27c0875@nvidia.com>
- <20260118-dmabuf-revoke-v2-2-a03bb27c0875@nvidia.com>
- <20260119164421.GF961572@ziepe.ca>
+	dkim=pass header.d=gmail.com header.s=20230601 header.b="Q9gPacV/";
+	spf=pass (lists.linaro.org: domain of ckoenig.leichtzumerken@gmail.com designates 209.85.128.50 as permitted sender) smtp.mailfrom=ckoenig.leichtzumerken@gmail.com;
+	dmarc=pass (policy=none) header.from=gmail.com
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-4801c314c84so32739295e9.0
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 20 Jan 2026 02:56:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1768906619; x=1769511419; darn=lists.linaro.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=dEORR3284U70dvlcfkxCpvGm9I9oOaxPh+wqNvOupwk=;
+        b=Q9gPacV/cfRtOY5mwP+OzFLbpiXzjPes+MPKsnHC8RfTK25TwNnfgVBR6Wdl89RmqR
+         D0tc0mukUMfWv1lxDnnRvoZV9xVOopLvLQCqEsTRoABaGxjS7xXF1MPnwwc125EuGsEU
+         pauUYeh3cKqe2V/KxvURVDUsIqQLlLMnKnxNSHzLSVWIUClxF+cj5p36y0J8U1p762fF
+         36tNnGIgHe0a0I9sv53rFrzcrvmRf5R1PKwQWp1HywwuQaAf2nrep+Ihit/JWLHQSzpc
+         UCmNiaLJ4DsgqQR1GStqHtqK9PzYK1I4acEWWJJdJniuVur/LW7m2nV7HS8GVtBODvQm
+         ZdVA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1768906619; x=1769511419;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=dEORR3284U70dvlcfkxCpvGm9I9oOaxPh+wqNvOupwk=;
+        b=bApTml6OllTfMTLe0Nf9AsVyBGRaBDPIdLBLxbrVt/BK2wDuPRSwT5lGCZw9Qsn72P
+         IHRtlKionqOEgp/5oOpGq5TR+yrVqKMw1Pt1mYYAKWjI5hfQfvgJqJwBwDEV4JGCGSMa
+         iPe1xSNuV2ptSVmQTgOQPPkXilY0hWZ0KdZdoHpd734FlFd6d9UCZ5cE5DpSXVqqWTeN
+         QqxX0lo6oKizezHjL6qACqnmIKe+O8dIN1UqzuUX5VsjkX4o4HNINba4hm2uGHLRseqA
+         XYRv4tXLAYeJtmc1PqWMZxj3BbSe0lMvJvcfL62CbaS9LaMXOGtY0lYU1XIWNG+WVrWz
+         4nHA==
+X-Forwarded-Encrypted: i=1; AJvYcCVdwC0ogJS7xjGLVPwah/kZv0xWaugxTLfYxWRe3vaAxYeR6j+2m7fqgrLIz9qIWowTryAyyh5g14y3TbbJ@lists.linaro.org
+X-Gm-Message-State: AOJu0YxxLtTAyYz/MEp8x4AyriVk7uT/DsfgJJZYxgoD5GbAlf0DrlIK
+	/RgVpigPOtX+RMBe3jq5Wza9h99JTGlq94QKY1UEFHgJSkuHnea8degl
+X-Gm-Gg: AY/fxX64ga9IotBHuqwBGKTuzNnAT1HbDGV5nKsVA9nmky9A7eeQ+lmM+2VFiRduqMY
+	T6QpUylSA2+rwq6IAhHN41UiUQ7Wn83ZNnzzHzKnK/rfXAdNGAHvUeW21z20e0MCkTGYUXt9KlK
+	oRFRUuBZUx/jzrJiBbMqdw91+9ZbVVAGdf/8HBrrmj5iUQVjlOotSmbZWPlQn5NP1fVyB+Ypelg
+	NLLQbT2mX/YhdBpk3kYbwneU8aEkHWJn88dHxR0OYAh5He70QIo6pDedBv7bhH94zYI7ofWuRlX
+	pxRTigEBt/GBboPTZ0ZNSvk5f977mD3PeYBhkQxgnXuY5MCTvpe6zb/f+Ocbn5VbjQY9PMkZFlK
+	W23mAtFq8fmffsdgCwCu7EwBK7KVQj68SwVk8r46qU1u1vDkDYstK3y/tIB35kqcjm48F1HXfmU
+	MSoR6QYz1gZCWNtJA4gbIQFWW5
+X-Received: by 2002:a05:600c:c178:b0:477:a977:b8c5 with SMTP id 5b1f17b1804b1-4801e34cd0emr204143915e9.31.1768906618439;
+        Tue, 20 Jan 2026 02:56:58 -0800 (PST)
+Received: from able.fritz.box ([2a00:e180:1563:d000:1067:f6c4:3bf8:ea8a])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4801fe67780sm99418105e9.16.2026.01.20.02.56.57
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 20 Jan 2026 02:56:57 -0800 (PST)
+From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
+X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
+To: phasta@mailbox.org,
+	tursulin@ursulin.net,
+	matthew.brost@intel.com,
+	sumit.semwal@linaro.org
+Date: Tue, 20 Jan 2026 11:54:39 +0100
+Message-ID: <20260120105655.7134-1-christian.koenig@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20260119164421.GF961572@ziepe.ca>
-X-Rspamd-Queue-Id: B97513F732
-X-Spamd-Bar: ---
-X-Spamd-Result: default: False [-3.50 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.252.31];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+X-Rspamd-Queue-Id: B9FE93F70D
+X-Spamd-Bar: --
+X-Spamd-Result: default: False [-2.71 / 15.00];
+	BAYES_HAM(-2.93)[99.69%];
+	R_MIXED_CHARSET(0.71)[subject];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_MISSING_CHARSET(0.50)[];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	MIME_GOOD(-0.10)[text/plain];
-	DNSWL_BLOCKED(0.00)[172.234.252.31:from,100.75.92.58:received];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	ARC_NA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[31];
-	MIME_TRACE(0.00)[0:+];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FREEMAIL_CC(0.00)[linaro.org,amd.com,gmail.com,ffwll.ch,redhat.com,collabora.com,chromium.org,linux.intel.com,kernel.org,suse.de,intel.com,8bytes.org,arm.com,shazbot.org,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.linux.dev];
-	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	SUBJECT_HAS_EXCLAIM(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[6];
+	TO_DN_NONE(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
-	TO_DN_SOME(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+]
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	DNSWL_BLOCKED(0.00)[2a00:e180:1563:d000:1067:f6c4:3bf8:ea8a:received,209.85.128.50:from];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.50:from];
+	NEURAL_HAM(-0.00)[-1.000];
+	FROM_HAS_DN(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: GU5LL5FHNEMGEEGR2MCCEENFQ64MOC3G
-X-Message-ID-Hash: GU5LL5FHNEMGEEGR2MCCEENFQ64MOC3G
-X-MailFrom: leon@kernel.org
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Alex Deucher <alexander.deucher@amd.com>, Simona Vetter <simona@ffwll.ch>, Gerd Hoffmann <kraxel@redhat.com>, Dmitry Osipenko <dmitry.osipenko@collabora.com>, Gurchetan Singh <gurchetansingh@chromium.org>, Chia-I Wu <olvaffe@gmail.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Lucas De Marchi <lucas.demarchi@intel.com>, Thomas =?iso-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Kevin Tian <kevin.tian@intel.com>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, Alex Williamson <alex@shazbot.org>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, amd-gfx@lists.freedesktop.org, virtualization@lists.linux.dev, intel-xe@
- lists.freedesktop.org, linux-rdma@vger.kernel.org, iommu@lists.linux.dev, kvm@vger.kernel.org
+Message-ID-Hash: AWWJXVWXCMTST7IRISW5QMQKZANI5S6V
+X-Message-ID-Hash: AWWJXVWXCMTST7IRISW5QMQKZANI5S6V
+X-MailFrom: ckoenig.leichtzumerken@gmail.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 2/4] dma-buf: Document revoke semantics
+Subject: [Linaro-mm-sig] Independence for dma_fences! v6
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GU5LL5FHNEMGEEGR2MCCEENFQ64MOC3G/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AWWJXVWXCMTST7IRISW5QMQKZANI5S6V/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-T24gTW9uLCBKYW4gMTksIDIwMjYgYXQgMTI6NDQ6MjFQTSAtMDQwMCwgSmFzb24gR3VudGhvcnBl
-IHdyb3RlOg0KPiBPbiBTdW4sIEphbiAxOCwgMjAyNiBhdCAwMjowODo0NlBNICswMjAwLCBMZW9u
-IFJvbWFub3Zza3kgd3JvdGU6DQo+ID4gRnJvbTogTGVvbiBSb21hbm92c2t5IDxsZW9ucm9AbnZp
-ZGlhLmNvbT4NCj4gPiANCj4gPiBEb2N1bWVudCBhIERNQS1idWYgcmV2b2tlIG1lY2hhbmlzbSB0
-aGF0IGFsbG93cyBhbiBleHBvcnRlciB0byBleHBsaWNpdGx5DQo+ID4gaW52YWxpZGF0ZSAoImtp
-bGwiKSBhIHNoYXJlZCBidWZmZXIgYWZ0ZXIgaXQgaGFzIGJlZW4gaGFuZGVkIG91dCB0bw0KPiA+
-IGltcG9ydGVycy4gT25jZSByZXZva2VkLCBhbGwgZnVydGhlciBDUFUgYW5kIGRldmljZSBhY2Nl
-c3MgaXMgYmxvY2tlZCwgYW5kDQo+ID4gaW1wb3J0ZXJzIGNvbnNpc3RlbnRseSBvYnNlcnZlIGZh
-aWx1cmUuDQo+ID4gDQo+ID4gVGhpcyByZXF1aXJlcyBib3RoIGltcG9ydGVycyBhbmQgZXhwb3J0
-ZXJzIHRvIGhvbm9yIHRoZSByZXZva2UgY29udHJhY3QuDQo+ID4gDQo+ID4gRm9yIGltcG9ydGVy
-cywgdGhpcyBtZWFucyBpbXBsZW1lbnRpbmcgLmludmFsaWRhdGVfbWFwcGluZ3MoKSBhbmQgY2Fs
-bGluZw0KPiA+IGRtYV9idWZfcGluKCkgYWZ0ZXIgdGhlIERNQeKAkWJ1ZiBpcyBhdHRhY2hlZCB0
-byB2ZXJpZnkgdGhlIGV4cG9ydGVy4oCZcyBzdXBwb3J0DQo+ID4gZm9yIHJldm9jYXRpb24uDQo+
-ID4gDQo+ID4gRm9yIGV4cG9ydGVycywgdGhpcyBtZWFucyBpbXBsZW1lbnRpbmcgdGhlIC5waW4o
-KSBjYWxsYmFjaywgd2hpY2ggY2hlY2tzDQo+ID4gdGhlIERNQeKAkWJ1ZiBhdHRhY2htZW50IGZv
-ciBhIHZhbGlkIHJldm9rZSBpbXBsZW1lbnRhdGlvbi4NCj4gPiANCj4gPiBTaWduZWQtb2ZmLWJ5
-OiBMZW9uIFJvbWFub3Zza3kgPGxlb25yb0BudmlkaWEuY29tPg0KPiA+IC0tLQ0KPiA+ICBpbmNs
-dWRlL2xpbnV4L2RtYS1idWYuaCB8IDE5ICsrKysrKysrKysrKysrKysrKysNCj4gPiAgMSBmaWxl
-IGNoYW5nZWQsIDE5IGluc2VydGlvbnMoKykNCj4gPiANCj4gPiBkaWZmIC0tZ2l0IGEvaW5jbHVk
-ZS9saW51eC9kbWEtYnVmLmggYi9pbmNsdWRlL2xpbnV4L2RtYS1idWYuaA0KPiA+IGluZGV4IDFi
-Mzk3NjM1Yzc5My4uZTBiYzBiNzExOWY1IDEwMDY0NA0KPiA+IC0tLSBhL2luY2x1ZGUvbGludXgv
-ZG1hLWJ1Zi5oDQo+ID4gKysrIGIvaW5jbHVkZS9saW51eC9kbWEtYnVmLmgNCj4gPiBAQCAtNTc5
-LDYgKzU3OSwyNSBAQCBzdGF0aWMgaW5saW5lIGJvb2wgZG1hX2J1Zl9pc19keW5hbWljKHN0cnVj
-dCBkbWFfYnVmICpkbWFidWYpDQo+ID4gIAlyZXR1cm4gISFkbWFidWYtPm9wcy0+cGluOw0KPiA+
-ICB9DQo+ID4gIA0KPiA+ICsvKioNCj4gPiArICogZG1hX2J1Zl9hdHRhY2htZW50X2lzX3Jldm9r
-ZSAtIGNoZWNrIGlmIGEgRE1BLWJ1ZiBpbXBvcnRlciBpbXBsZW1lbnRzDQo+ID4gKyAqIHJldm9r
-ZSBzZW1hbnRpY3MuDQo+ID4gKyAqIEBhdHRhY2g6IHRoZSBETUEtYnVmIGF0dGFjaG1lbnQgdG8g
-Y2hlY2sNCj4gPiArICoNCj4gPiArICogUmV0dXJucyB0cnVlIGlmIERNQS1idWYgaW1wb3J0ZXIg
-aG9ub3JzIHJldm9rZSBzZW1hbnRpY3MsIHdoaWNoIGlzDQo+ID4gKyAqIG5lZ290aWF0ZWQgd2l0
-aCB0aGUgZXhwb3J0ZXIsIGJ5IG1ha2luZyBzdXJlIHRoYXQgaW1wb3J0ZXIgaW1wbGVtZW50cw0K
-PiA+ICsgKiAuaW52YWxpZGF0ZV9tYXBwaW5ncygpIGNhbGxiYWNrIGFuZCBjYWxscyB0byBkbWFf
-YnVmX3BpbigpIGFmdGVyDQo+ID4gKyAqIERNQS1idWYgYXR0YWNoLg0KPiA+ICsgKi8NCj4gDQo+
-IEkgdGhpbmsgdGhpcyBjbGFyaWZpY2F0aW9uIHNob3VsZCBhbHNvIGhhdmUgY29tbWVudCB0bw0K
-PiBkbWFfYnVmX21vdmVfbm90aWZ5KCkuIE1heWJlIGxpa2UgdGhpczoNCj4gDQo+IEBAIC0xMzI0
-LDcgKzEzMjQsMTggQEAgRVhQT1JUX1NZTUJPTF9OU19HUEwoZG1hX2J1Zl9zZ3RfdW5tYXBfYXR0
-YWNobWVudF91bmxvY2tlZCwgIkRNQV9CVUYiKTsNCj4gICAqIEBkbWFidWY6ICAgIFtpbl0gICAg
-YnVmZmVyIHdoaWNoIGlzIG1vdmluZw0KPiAgICoNCj4gICAqIEluZm9ybXMgYWxsIGF0dGFjaG1l
-bnRzIHRoYXQgdGhleSBuZWVkIHRvIGRlc3Ryb3kgYW5kIHJlY3JlYXRlIGFsbCB0aGVpcg0KPiAt
-ICogbWFwcGluZ3MuDQo+ICsgKiBtYXBwaW5ncy4gSWYgdGhlIGF0dGFjaG1lbnQgaXMgZHluYW1p
-YyB0aGVuIHRoZSBkeW5hbWljIGltcG9ydGVyIGlzIGV4cGVjdGVkDQo+ICsgKiB0byBpbnZhbGlk
-YXRlIGFueSBjYWNoZXMgaXQgaGFzIG9mIHRoZSBtYXBwaW5nIHJlc3VsdCBhbmQgcGVyZm9ybSBh
-IG5ldw0KPiArICogbWFwcGluZyByZXF1ZXN0IGJlZm9yZSBhbGxvd2luZyBIVyB0byBkbyBhbnkg
-ZnVydGhlciBETUEuDQo+ICsgKg0KPiArICogSWYgdGhlIGF0dGFjaG1lbnQgaXMgcGlubmVkIHRo
-ZW4gdGhpcyBpbmZvcm1zIHRoZSBwaW5uZWQgaW1wb3J0ZXIgdGhhdA0KPiArICogdGhlIHVuZGVy
-bHlpbmcgbWFwcGluZyBpcyBubyBsb25nZXIgYXZhaWxhYmxlLiBQaW5uZWQgaW1wb3J0ZXJzIG1h
-eSB0YWtlDQo+ICsgKiB0aGlzIGlzIGFzIGEgcGVybWFuZW50IHJldm9jYXRpb24gc28gZXhwb3J0
-ZXJzIHNob3VsZCBub3QgdHJpZ2dlciBpdA0KPiArICogbGlnaHRseS4NCj4gKyAqDQo+ICsgKiBG
-b3IgbGVnYWN5IHBpbm5lZCBpbXBvcnRlcnMgdGhhdCBjYW5ub3Qgc3VwcG9ydCBpbnZhbGlkYXRp
-b24gdGhpcyBpcyBhIE5PUC4NCj4gKyAqIERyaXZlcnMgY2FuIGNhbGwgZG1hX2J1Zl9hdHRhY2ht
-ZW50X2lzX3Jldm9rZSgpIHRvIGRldGVybWluZSBpZiB0aGUNCj4gKyAqIGltcG9ydGVyIHN1cHBv
-cnRzIHRoaXMuDQo+ICAgKi8NCj4gDQo+IEFsc28gaXQgd291bGQgYmUgbmljZSB0byBkb2N1bWVu
-dCB3aGF0IENocmlzdGlhbiBwb2ludGVkIG91dCByZWdhcmRpbmcNCj4gZmVuY2VzIGFmdGVyIG1v
-dmVfbm90aWZ5Lg0KDQpJIGFkZGVkIHRoaXMgY29tbWVudCB0b286DQpkaWZmIC0tZ2l0IGEvZHJp
-dmVycy9kbWEtYnVmL2RtYS1idWYuYyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtYnVmLmMNCmluZGV4
-IDZkZDcwZjdiOTkyZC4uNDc4MTI3ZGM2M2U5IDEwMDY0NA0KLS0tIGEvZHJpdmVycy9kbWEtYnVm
-L2RtYS1idWYuYw0KKysrIGIvZHJpdmVycy9kbWEtYnVmL2RtYS1idWYuYw0KQEAgLTEyNTMsNiAr
-MTI1MywxMCBAQCBFWFBPUlRfU1lNQk9MX05TX0dQTChkbWFfYnVmX3VubWFwX2F0dGFjaG1lbnRf
-dW5sb2NrZWQsICJETUFfQlVGIik7DQogICogRm9yIGxlZ2FjeSBwaW5uZWQgaW1wb3J0ZXJzIHRo
-YXQgY2Fubm90IHN1cHBvcnQgaW52YWxpZGF0aW9uIHRoaXMgaXMgYSBOT1AuDQogICogRHJpdmVy
-cyBjYW4gY2FsbCBkbWFfYnVmX2F0dGFjaF9yZXZvY2FibGUoKSB0byBkZXRlcm1pbmUgaWYgdGhl
-IGltcG9ydGVyDQogICogc3VwcG9ydHMgdGhpcy4NCisgKg0KKyAqIE5PVEU6IFRoZSBpbnZhbGlk
-YXRpb24gdHJpZ2dlcnMgYXN5bmNocm9ub3VzIEhXIG9wZXJhdGlvbiBhbmQgdGhlIGNhbGxlcnMN
-CisgKiBuZWVkIHRvIHdhaXQgZm9yIHRoaXMgb3BlcmF0aW9uIHRvIGNvbXBsZXRlIGJ5IGNhbGxp
-bmcNCisgKiB0byBkbWFfcmVzdl93YWl0X3RpbWVvdXQoKS4NCiAgKi8NCiB2b2lkIGRtYV9idWZf
-bW92ZV9ub3RpZnkoc3RydWN0IGRtYV9idWYgKmRtYWJ1ZikNCiB7DQoNCj4gDQo+ID4gK3N0YXRp
-YyBpbmxpbmUgYm9vbA0KPiA+ICtkbWFfYnVmX2F0dGFjaG1lbnRfaXNfcmV2b2tlKHN0cnVjdCBk
-bWFfYnVmX2F0dGFjaG1lbnQgKmF0dGFjaCkNCj4gPiArew0KPiA+ICsJcmV0dXJuIElTX0VOQUJM
-RUQoQ09ORklHX0RNQUJVRl9NT1ZFX05PVElGWSkgJiYNCj4gPiArCSAgICAgICBkbWFfYnVmX2lz
-X2R5bmFtaWMoYXR0YWNoLT5kbWFidWYpICYmDQo+ID4gKwkgICAgICAgKGF0dGFjaC0+aW1wb3J0
-ZXJfb3BzICYmDQo+ID4gKwkJYXR0YWNoLT5pbXBvcnRlcl9vcHMtPmludmFsaWRhdGVfbWFwcGlu
-Z3MpOw0KPiA+ICt9DQo+IA0KPiBBbmQgSSBkb24ndCB0aGluayB3ZSBzaG91bGQgdXNlIGEgTlVM
-TCBpbnZhbGlkYXRlX21hcHBpbmdzIGZ1bmN0aW9uDQo+IHBvaW50ZXIgdG8gc2lnbmFsIHRoaXMu
-DQo+IA0KPiBJdCBzb3VuZHMgbGlrZSB0aGUgZGlyZWN0aW9uIGlzIHRvIHJlcXVpcmUgaW1wb3J0
-ZXJzIHRvIHN1cHBvcnQNCj4gbW92ZV9ub3RpZnksIHNvIHdlIHNob3VsZCBub3QgbWFrZSBpdCBl
-YXN5IHRvIGp1c3QgZHJvcCBhIE5VTEwgaW4gdGhlDQo+IG9wcyBzdHJ1Y3QgdG8gZ2V0IG91dCBv
-ZiB0aGUgZGVzaXJlZCBjb25maWd1cmF0aW9uLg0KPiANCj4gSSBzdWdnZXN0IGRlZmluaW5nIGEg
-ZnVuY3Rpb24NCj4gImRtYV9idWZfdW5zdXBwb3J0ZWRfaW52YWxpZGF0ZV9tYXBwaW5ncyIgYW5k
-IHVzZQ0KPiBFWFBPUlRfU1lNQk9MX0ZPUl9NT0RVTEVTIHNvIG9ubHkgUkRNQSBjYW4gdXNlIGl0
-LiBUaGVuIGNoZWNrIGZvciB0aGF0DQo+IGFsb25nIHdpdGggTlVMTCBpbXBvcnRlcl9vcHMgdG8g
-Y292ZXIgdGhlIHR3byBjYXNlcyB3aGVyZSBpdCBpcyBub3QNCj4gYWxsb3dlZC4NCj4gDQo+IFRo
-ZSBvbmx5IHJlYXNvbiBSRE1BIGhhcyB0byB1c2UgZG1hX2J1Zl9keW5hbWljX2F0dGFjaCgpIGlz
-IHRvIHNldCB0aGUNCj4gYWxsb3dfcDJwPXRydWUgLi4NCg0KV2lsbCBkby4NCg0KPiANCj4gSmFz
-b24NCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFy
-by1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpU
-byB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMu
-bGluYXJvLm9yZwo=
+Hi everyone,
+
+dma_fences have ever lived under the tyranny dictated by the module
+lifetime of their issuer, leading to crashes should anybody still holding
+a reference to a dma_fence when the module of the issuer was unloaded.
+
+The basic problem is that when buffer are shared between drivers
+dma_fence objects can leak into external drivers and stay there even
+after they are signaled. The dma_resv object for example only lazy releases
+dma_fences.
+
+So what happens is that when the module who originally created the dma_fence
+unloads the dma_fence_ops function table becomes unavailable as well and so
+any attempt to release the fence crashes the system.
+
+Previously various approaches have been discussed, including changing the
+locking semantics of the dma_fence callbacks (by me) as well as using the
+drm scheduler as intermediate layer (by Sima) to disconnect dma_fences
+from their actual users, but none of them are actually solving all problems.
+
+Tvrtko did some really nice prerequisite work by protecting the returned
+strings of the dma_fence_ops by RCU. This way dma_fence creators where
+able to just wait for an RCU grace period after fence signaling before
+they could be save to free those data structures.
+
+Now this patch set here goes a step further and protects the whole
+dma_fence_ops structure by RCU, so that after the fence signals the
+pointer to the dma_fence_ops is set to NULL when there is no wait nor
+release callback given. All functionality which use the dma_fence_ops
+reference are put inside an RCU critical section, except for the
+deprecated issuer specific wait and of course the optional release
+callback.
+
+Additional to the RCU changes the lock protecting the dma_fence state
+previously had to be allocated external. This set here now changes the
+functionality to make that external lock optional and allows dma_fences
+to use an inline lock and be self contained.
+
+v4:
+
+Rebases the whole set on upstream changes, especially the cleanup
+from Philip in patch "drm/amdgpu: independence for the amdkfd_fence!".
+
+Adding two patches which brings the DMA-fence self tests up to date.
+The first selftest changes removes the mock_wait and so actually starts
+testing the default behavior instead of some hacky implementation in the
+test. This one got upstreamed independent of this set.
+The second drops the mock_fence as well and tests the new RCU and inline
+spinlock functionality.
+
+v5:
+
+Rebase on top of drm-misc-next instead of drm-tip, leave out all driver
+changes for now since those should go through the driver specific paths
+anyway.
+
+Address a few more review comments, especially some rebase mess and
+typos. And finally fix one more bug found by AMDs CI system.
+
+v6:
+
+Minor style changes, re-ordered patch #1, dropped the scheduler fence
+change for now
+
+Please review and comment,
+Christian.
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
