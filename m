@@ -2,38 +2,38 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id EKVyKDjOcGkOaAAAu9opvQ
+	id IGdcKynOcGkOaAAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jan 2026 14:01:44 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jan 2026 14:01:29 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3CF6657457
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jan 2026 14:01:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 629AF57450
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jan 2026 14:01:29 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 55BFD3F774
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jan 2026 13:01:43 +0000 (UTC)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
-	by lists.linaro.org (Postfix) with ESMTPS id ED893401CE
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 21 Jan 2026 13:00:05 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7FCAD3F6FF
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jan 2026 13:01:28 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+	by lists.linaro.org (Postfix) with ESMTPS id EF1E94014F
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 21 Jan 2026 12:59:58 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=XiD5Mw8d;
-	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=leon@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=NA7uryHE;
+	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=leon@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by tor.source.kernel.org (Postfix) with ESMTP id 5075060053;
-	Wed, 21 Jan 2026 13:00:05 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EE989C116D0;
-	Wed, 21 Jan 2026 13:00:03 +0000 (UTC)
+	by sea.source.kernel.org (Postfix) with ESMTP id 6A60D43BEA;
+	Wed, 21 Jan 2026 12:59:58 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7CB17C19424;
+	Wed, 21 Jan 2026 12:59:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1769000405;
-	bh=tkBWbuPcCcp/u7j2SLPWnxsR4yn6Id6uZvGXefafQVg=;
+	s=k20201202; t=1769000398;
+	bh=vLjazFYFrcdZwtehxf7gnTv1xyibOoNdpX1K34q0p3I=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=XiD5Mw8d/xml0FH5gdmZRlHA4aqR6JveYCrrTDcuzyZ8kXqorfmqTk0E2cd2aFlBt
-	 IlyaERqz/4+Csnj0W4X3sPWUI0vbrjrgEL0V0anU1ZWHg3tzvQ51QR6kUlpeWNHigz
-	 /6RxVyfBlfEh48rUkNs9u4d+7M8ZsMYk4KBuyFSmmNeFgcNiBYRQFbz4vz8RuQrqKY
-	 auHzS5OkYP2LlC6XzGHo2c9H1BmRrxt6eMjDollxj61ne6mII8UwDp3yRoV+SqJ9s8
-	 rxCQH4EJGsUoAN6qzjYdeDerw+95p8+z+ILF5ZfB9wY+I1YInEeUO4Awvob9xoaXY2
-	 4zfXVFobpIydg==
+	b=NA7uryHE9iDwVHrzumlE7t+lD0n+J50JcM2WsmP8rdBM5V740UnFfQSpZd3zEgQlO
+	 3KuJZ6ov0sgy0kSEri4J3GcU92CTaacv1iawToZP3zTfDkLPoCbRlTEsUsBEe52rEc
+	 H47Ac15N2NaKplHUwls8z7+InCqBENsxsXQF8/RCGnFXRTDFrKhCbgA2GMXnHQyxSU
+	 LyMRfAJwBN8olNZH3eI4jquRR8lckL3LXaGHHC4SUsFUZT5VjOEGNCySBpArnoBXn3
+	 rVWTFBcdxQK1AlCtQ3m2cgXv4OCxHy8eDXYIXsRQUkN7bFS8HznJU9Rs3eJu7usZDz
+	 eXLD+zUaulSww==
 From: Leon Romanovsky <leon@kernel.org>
 To: Sumit Semwal <sumit.semwal@linaro.org>,
 	=?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
@@ -60,25 +60,25 @@ To: Sumit Semwal <sumit.semwal@linaro.org>,
 	Alex Williamson <alex@shazbot.org>,
 	Ankit Agrawal <ankita@nvidia.com>,
 	Vivek Kasireddy <vivek.kasireddy@intel.com>
-Date: Wed, 21 Jan 2026 14:59:15 +0200
-Message-ID: <20260121-dmabuf-revoke-v4-7-d311cbc8633d@nvidia.com>
+Date: Wed, 21 Jan 2026 14:59:16 +0200
+Message-ID: <20260121-dmabuf-revoke-v4-8-d311cbc8633d@nvidia.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260121-dmabuf-revoke-v4-0-d311cbc8633d@nvidia.com>
 References: <20260121-dmabuf-revoke-v4-0-d311cbc8633d@nvidia.com>
 MIME-Version: 1.0
 X-Mailer: b4 0.15-dev-a6db3
 X-Spamd-Bar: ----
-Message-ID-Hash: FTSL2GGXEUQSNE4QPO52AWUAQWI6RPS2
-X-Message-ID-Hash: FTSL2GGXEUQSNE4QPO52AWUAQWI6RPS2
+Message-ID-Hash: XC2N75P7MYIQEN7ZCIRMVHO4WHSWWLBI
+X-Message-ID-Hash: XC2N75P7MYIQEN7ZCIRMVHO4WHSWWLBI
 X-MailFrom: leon@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, amd-gfx@lists.freedesktop.org, virtualization@lists.linux.dev, intel-xe@lists.freedesktop.org, linux-rdma@vger.kernel.org, iommu@lists.linux.dev, kvm@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v4 7/8] vfio: Wait for dma-buf invalidation to complete
+Subject: [Linaro-mm-sig] [PATCH v4 8/8] vfio: Validate dma-buf revocation semantics
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FTSL2GGXEUQSNE4QPO52AWUAQWI6RPS2/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XC2N75P7MYIQEN7ZCIRMVHO4WHSWWLBI/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -111,45 +111,34 @@ X-Spamd-Result: default: False [1.99 / 15.00];
 	RCVD_TLS_LAST(0.00)[];
 	FREEMAIL_TO(0.00)[linaro.org,amd.com,gmail.com,ffwll.ch,redhat.com,collabora.com,chromium.org,linux.intel.com,kernel.org,suse.de,intel.com,ziepe.ca,8bytes.org,arm.com,shazbot.org,nvidia.com];
 	DKIM_TRACE(0.00)[kernel.org:-]
-X-Rspamd-Queue-Id: 3CF6657457
+X-Rspamd-Queue-Id: 629AF57450
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 From: Leon Romanovsky <leonro@nvidia.com>
 
-dma-buf invalidation is performed asynchronously by hardware, so VFIO must
-wait until all affected objects have been fully invalidated.
+Use the new dma_buf_attach_revocable() helper to restrict attachments to
+importers that support mapping invalidation.
 
-Fixes: 5d74781ebc86 ("vfio/pci: Add dma-buf export support for MMIO regions")
 Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
 ---
- drivers/vfio/pci/vfio_pci_dmabuf.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ drivers/vfio/pci/vfio_pci_dmabuf.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
 diff --git a/drivers/vfio/pci/vfio_pci_dmabuf.c b/drivers/vfio/pci/vfio_pci_dmabuf.c
-index 362e3d149817..5fceefc40e27 100644
+index 5fceefc40e27..85056a5a3faf 100644
 --- a/drivers/vfio/pci/vfio_pci_dmabuf.c
 +++ b/drivers/vfio/pci/vfio_pci_dmabuf.c
-@@ -321,6 +321,9 @@ void vfio_pci_dma_buf_move(struct vfio_pci_core_device *vdev, bool revoked)
- 			dma_resv_lock(priv->dmabuf->resv, NULL);
- 			priv->revoked = revoked;
- 			dma_buf_invalidate_mappings(priv->dmabuf);
-+			dma_resv_wait_timeout(priv->dmabuf->resv,
-+					      DMA_RESV_USAGE_BOOKKEEP, false,
-+					      MAX_SCHEDULE_TIMEOUT);
- 			dma_resv_unlock(priv->dmabuf->resv);
- 		}
- 		fput(priv->dmabuf->file);
-@@ -342,6 +345,9 @@ void vfio_pci_dma_buf_cleanup(struct vfio_pci_core_device *vdev)
- 		priv->vdev = NULL;
- 		priv->revoked = true;
- 		dma_buf_invalidate_mappings(priv->dmabuf);
-+		dma_resv_wait_timeout(priv->dmabuf->resv,
-+				      DMA_RESV_USAGE_BOOKKEEP, false,
-+				      MAX_SCHEDULE_TIMEOUT);
- 		dma_resv_unlock(priv->dmabuf->resv);
- 		vfio_device_put_registration(&vdev->vdev);
- 		fput(priv->dmabuf->file);
+@@ -31,6 +31,9 @@ static int vfio_pci_dma_buf_attach(struct dma_buf *dmabuf,
+ 	if (priv->revoked)
+ 		return -ENODEV;
+ 
++	if (!dma_buf_attach_revocable(attachment))
++		return -EOPNOTSUPP;
++
+ 	return 0;
+ }
+ 
 
 -- 
 2.52.0
