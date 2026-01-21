@@ -2,70 +2,75 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id kGoNFuXhcGkhawAAu9opvQ
+	id UJawGGLjcGk+awAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jan 2026 15:25:41 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jan 2026 15:32:02 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id AC0F258637
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jan 2026 15:25:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EB6FE58785
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jan 2026 15:32:01 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id BF9B4401B1
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jan 2026 14:25:39 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 321613F6FF
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 21 Jan 2026 14:25:34 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id EF5BA3F70E
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jan 2026 14:32:00 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+	by lists.linaro.org (Postfix) with ESMTPS id EC65D3F70E
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 21 Jan 2026 14:31:54 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=ge0gfH42;
-	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=leon@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=KqhQkB0H;
+	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=leon@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id 9D7BC40A2E;
-	Wed, 21 Jan 2026 14:25:33 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B46B1C4CEF1;
-	Wed, 21 Jan 2026 14:25:32 +0000 (UTC)
+	by tor.source.kernel.org (Postfix) with ESMTP id 88F98600AD;
+	Wed, 21 Jan 2026 14:31:54 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A2629C4CEF1;
+	Wed, 21 Jan 2026 14:31:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1769005533;
-	bh=Z1b1OV+NsXvKxZL5y0yjDvYw+BPD/t+tNec7lO1yOeQ=;
+	s=k20201202; t=1769005914;
+	bh=PeR5g4KP8x/lJhIeGe2dDKX2Op8R7HIZRzZ9ayHsJco=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=ge0gfH42x3ObIVHqMUppthrzucjXvd0sKFBBGu4TSY+DEJrnvIfuVNOm/mqKYdhDY
-	 yRDoNVy9wGFl4Ut19lSeYJrZe1wCJhZj8ub12kLqzIUXGFSWsV2rP3hdPPT/s+/Bzd
-	 CNaQbyUxt0oTU0nSQY9kuHTyvAqfiinywrhwtEMUV9GHruLOW8ZAKWIwXf2aeNTpP2
-	 re5/XOlW/nicBV4K88fU1PWmqnjNVT5UYqPTrWW4KLfK4zZvyO+aP+i6vFjcIWCD3y
-	 /TbHj97MVtfL42yJ9golJbaNDyXRlaBRj2ChbMR7xPn3wzQIArZQpFbMw80UjQAQRs
-	 hWPGykweNH8jA==
-Date: Wed, 21 Jan 2026 16:25:28 +0200
+	b=KqhQkB0HZ1m+DKmEb4iOkwxeDGvAPNkuGn61XTxaCqhuL9qVbUQfxtrTwPujoAdVb
+	 VrWiUmPtEeUvE9nGyKANKxMoUIMS0e5nHQ31T+VEQXUu37yer/5Hzj5XuurNOilyo2
+	 +YYGfaIa3Dbj0S4Qd6g3VaXA17/1wzg6rpzqnlrG4nsV8pQRcJ1G7Oj+N6BLxO/rpy
+	 nVcDdV+4eAHtYRPFNU2TGJOODjbr6a9NoxnTowpmmzFAyZbPWVMuabJ0YV3hjf1iNz
+	 8aDY8IqPHmmGAsQTtHkqpxZzOBU4w+H2paxEDwGUBatWmmBD4eAn1X2NjKOH85/uBz
+	 eYXBSWhDgDLeQ==
+Date: Wed, 21 Jan 2026 16:31:50 +0200
 From: Leon Romanovsky <leon@kernel.org>
-To: Pranjal Shrivastava <praan@google.com>
-Message-ID: <20260121142528.GC13201@unreal>
-References: <20260121-dmabuf-revoke-v4-0-d311cbc8633d@nvidia.com>
- <20260121-dmabuf-revoke-v4-8-d311cbc8633d@nvidia.com>
- <20260121134712.GZ961572@ziepe.ca>
- <aXDhJ89Yru577jeY@google.com>
+To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
+Message-ID: <20260121143150.GD13201@unreal>
+References: <20260120-dmabuf-revoke-v3-0-b7e0b07b8214@nvidia.com>
+ <20260120-dmabuf-revoke-v3-3-b7e0b07b8214@nvidia.com>
+ <4fe42e7e-846c-4aae-8274-3e9a5e7f9a6d@amd.com>
+ <20260121091423.GY13201@unreal>
+ <7cfe0495-f654-4f9d-8194-fa5717eeafff@amd.com>
+ <20260121131852.GX961572@ziepe.ca>
+ <8a8ba092-6cfa-41d2-8137-e5e9d917e914@amd.com>
+ <20260121135948.GB961572@ziepe.ca>
+ <8689345b-241a-47f4-8e9a-61cde285bf8b@amd.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <aXDhJ89Yru577jeY@google.com>
+In-Reply-To: <8689345b-241a-47f4-8e9a-61cde285bf8b@amd.com>
 X-Spamd-Bar: ---
-Message-ID-Hash: DEHTQIS3U4IZQETM4ZF37AUOZVAFG74K
-X-Message-ID-Hash: DEHTQIS3U4IZQETM4ZF37AUOZVAFG74K
+Message-ID-Hash: J4DEYCICE3YYUMLOGAAQZVQANNZD4XGD
+X-Message-ID-Hash: J4DEYCICE3YYUMLOGAAQZVQANNZD4XGD
 X-MailFrom: leon@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Jason Gunthorpe <jgg@ziepe.ca>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Alex Deucher <alexander.deucher@amd.com>, Simona Vetter <simona@ffwll.ch>, Gerd Hoffmann <kraxel@redhat.com>, Dmitry Osipenko <dmitry.osipenko@collabora.com>, Gurchetan Singh <gurchetansingh@chromium.org>, Chia-I Wu <olvaffe@gmail.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Lucas De Marchi <lucas.demarchi@intel.com>, Thomas =?iso-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Kevin Tian <kevin.tian@intel.com>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, Felix Kuehling <Felix.Kuehling@amd.com>, Alex Williamson <alex@shazbot.org>, Ankit Agrawal <ankita@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, linux-media@vger.kernel.org, dri-devel@list
- s.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, amd-gfx@lists.freedesktop.org, virtualization@lists.linux.dev, intel-xe@lists.freedesktop.org, linux-rdma@vger.kernel.org, iommu@lists.linux.dev, kvm@vger.kernel.org
+CC: Jason Gunthorpe <jgg@ziepe.ca>, Sumit Semwal <sumit.semwal@linaro.org>, Alex Deucher <alexander.deucher@amd.com>, Simona Vetter <simona@ffwll.ch>, Gerd Hoffmann <kraxel@redhat.com>, Dmitry Osipenko <dmitry.osipenko@collabora.com>, Gurchetan Singh <gurchetansingh@chromium.org>, Chia-I Wu <olvaffe@gmail.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Lucas De Marchi <lucas.demarchi@intel.com>, Thomas =?iso-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Kevin Tian <kevin.tian@intel.com>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, Felix Kuehling <Felix.Kuehling@amd.com>, Alex Williamson <alex@shazbot.org>, Ankit Agrawal <ankita@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel
+ @vger.kernel.org, amd-gfx@lists.freedesktop.org, virtualization@lists.linux.dev, intel-xe@lists.freedesktop.org, linux-rdma@vger.kernel.org, iommu@lists.linux.dev, kvm@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v4 8/8] vfio: Validate dma-buf revocation semantics
+Subject: [Linaro-mm-sig] Re: [PATCH v3 3/7] dma-buf: Document RDMA non-ODP invalidate_mapping() special case
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DEHTQIS3U4IZQETM4ZF37AUOZVAFG74K/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/J4DEYCICE3YYUMLOGAAQZVQANNZD4XGD/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 X-Spamd-Result: default: False [2.49 / 15.00];
 	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
 	R_DKIM_REJECT(1.00)[kernel.org:s=k20201202];
@@ -79,9 +84,9 @@ X-Spamd-Result: default: False [2.49 / 15.00];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	ARC_NA(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	RCPT_COUNT_TWELVE(0.00)[34];
+	RCPT_COUNT_TWELVE(0.00)[33];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[ziepe.ca,linaro.org,amd.com,ffwll.ch,redhat.com,collabora.com,chromium.org,gmail.com,linux.intel.com,kernel.org,suse.de,intel.com,8bytes.org,arm.com,shazbot.org,nvidia.com,vger.kernel.org,list,lists.linaro.org,lists.freedesktop.org,lists.linux.dev];
+	FREEMAIL_CC(0.00)[ziepe.ca,linaro.org,amd.com,ffwll.ch,redhat.com,collabora.com,chromium.org,gmail.com,linux.intel.com,kernel.org,suse.de,intel.com,8bytes.org,arm.com,shazbot.org,nvidia.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.linux.dev];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[leon@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
@@ -91,74 +96,80 @@ X-Spamd-Result: default: False [2.49 / 15.00];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,lists.linaro.org:rdns,lists.linaro.org:helo,linaro.org:email]
-X-Rspamd-Queue-Id: AC0F258637
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email]
+X-Rspamd-Queue-Id: EB6FE58785
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Wed, Jan 21, 2026 at 02:22:31PM +0000, Pranjal Shrivastava wrote:
-> On Wed, Jan 21, 2026 at 09:47:12AM -0400, Jason Gunthorpe wrote:
-> > On Wed, Jan 21, 2026 at 02:59:16PM +0200, Leon Romanovsky wrote:
-> > > From: Leon Romanovsky <leonro@nvidia.com>
-> > > 
-> > > Use the new dma_buf_attach_revocable() helper to restrict attachments to
-> > > importers that support mapping invalidation.
-> > > 
-> > > Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
-> > > ---
-> > >  drivers/vfio/pci/vfio_pci_dmabuf.c | 3 +++
-> > >  1 file changed, 3 insertions(+)
-> > > 
-> > > diff --git a/drivers/vfio/pci/vfio_pci_dmabuf.c b/drivers/vfio/pci/vfio_pci_dmabuf.c
-> > > index 5fceefc40e27..85056a5a3faf 100644
-> > > --- a/drivers/vfio/pci/vfio_pci_dmabuf.c
-> > > +++ b/drivers/vfio/pci/vfio_pci_dmabuf.c
-> > > @@ -31,6 +31,9 @@ static int vfio_pci_dma_buf_attach(struct dma_buf *dmabuf,
-> > >  	if (priv->revoked)
-> > >  		return -ENODEV;
-> > >  
-> > > +	if (!dma_buf_attach_revocable(attachment))
-> > > +		return -EOPNOTSUPP;
-> > > +
-> > >  	return 0;
-> > >  }
-> > 
-> > We need to push an urgent -rc fix to implement a pin function here
-> > that always fails. That was missed and it means things like rdma can
-> > import vfio when the intention was to block that. It would be bad for
-> > that uAPI mistake to reach a released kernel.
-> > 
-> > It's tricky that NULL pin ops means "I support pin" :|
-> > 
-> 
-> I've been wondering about this for a while now, I've been sitting on the
-> following:
-> 
-> diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
-> index a4d8f2ff94e4..962bce959366 100644
-> --- a/drivers/dma-buf/dma-buf.c
-> +++ b/drivers/dma-buf/dma-buf.c
-> @@ -1133,6 +1133,8 @@ int dma_buf_pin(struct dma_buf_attachment *attach)
-> 
->         if (dmabuf->ops->pin)
->                 ret = dmabuf->ops->pin(attach);
-> +       else
-> +               ret = -EOPNOTSUPP;
-> 
->         return ret;
->  }
-> 
-> But didn't get a chance to dive in the history yet. I thought there's a
-> good reason we didn't have it? Would it break exisitng dmabuf users?
+On Wed, Jan 21, 2026 at 03:15:46PM +0100, Christian K=F6nig wrote:
+> On 1/21/26 14:59, Jason Gunthorpe wrote:
+> > On Wed, Jan 21, 2026 at 02:52:53PM +0100, Christian K=F6nig wrote:
+> >> On 1/21/26 14:18, Jason Gunthorpe wrote:
+> >>> On Wed, Jan 21, 2026 at 10:17:16AM +0100, Christian K=F6nig wrote:
+> >>>> The whole idea is to make invalidate_mappings truly optional.
+> >>>
+> >>> But it's not really optional! It's absence means we are ignoring UAF
+> >>> security issues when the exporters do their move_notify() and nothing
+> >>> happens.
+> >>
+> >> No that is unproblematic.
+> >>
+> >> See the invalidate_mappings callback just tells the importer that
+> >> the mapping in question can't be relied on any more.
+> >>
+> >> But the mapping is truly freed only by the importer calling
+> >> dma_buf_unmap_attachment().
+> >>
+> >> In other words the invalidate_mappings give the signal to the
+> >> importer to disable all operations and the
+> >> dma_buf_unmap_attachment() is the signal from the importer that the
+> >> housekeeping structures can be freed and the underlying address
+> >> space or backing object re-used.
+> >=20
+> > I see
+> >=20
+> > Can we document this please, I haven't seen this scheme described
+> > anyhwere.
+> >=20
+> > And let's clarify what I said in my other email that this new revoke
+> > semantic is not just a signal to maybe someday unmap but a hard
+> > barrier that it must be done once the fences complete, similar to
+> > non-pinned importers.
+>=20
+> Well, I would avoid that semantics.
+>=20
+> Even when the exporter requests the mapping to be invalidated it does not=
+ mean that the mapping can go away immediately.
+>=20
+> It's fine when accesses initiated after an invalidation and then waiting =
+for fences go into nirvana and have undefined results, but they should not =
+trigger PCI AER, warnings from the IOMMU or even worse end up in some MMIO =
+BAR of a newly attached devices.
+>=20
+> So if the exporter wants to be 100% sure that nobody is using the mapping=
+ any more then it needs to wait for the importer to call dma_buf_unmap_atta=
+chment().
+>=20
+> > The cover letter should be clarified with this understanding too.
+>=20
+> Yeah, completely agree. We really need to flash out that semantics in the=
+ documentation.
 
-Probably every importer which called to dma_buf_pin() while connecting
-to existing exporters as many in tree implementation don't have ->pin()
-implemented.
+Someone knowledgeable needs to document this properly, either in the code  =
+
+or in the official documentation. A cover letter is not the right place for=
+ =20
+subtle design decisions.
 
 Thanks
 
-> 
-> Praan
+>=20
+> Regards,
+> Christian.
+>=20
+> >=20
+> > Jason
+>=20
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
