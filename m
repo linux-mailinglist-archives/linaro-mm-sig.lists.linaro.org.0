@@ -2,167 +2,171 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cGcmLyeecGlyYgAAu9opvQ
+	id oMPmKAmncGlyYgAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jan 2026 10:36:39 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jan 2026 11:14:33 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3E7525481A
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jan 2026 10:36:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3072555081
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jan 2026 11:14:33 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 43401401B1
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jan 2026 09:36:38 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.10])
-	by lists.linaro.org (Postfix) with ESMTPS id 345673F70E
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 21 Jan 2026 09:36:32 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 29D3F401B1
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jan 2026 10:14:32 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+	by lists.linaro.org (Postfix) with ESMTPS id 76BBB3F6BD
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 21 Jan 2026 10:14:27 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=FSyJ3XAB;
-	spf=pass (lists.linaro.org: domain of thomas.hellstrom@linux.intel.com designates 198.175.65.10 as permitted sender) smtp.mailfrom=thomas.hellstrom@linux.intel.com;
-	dmarc=pass (policy=none) header.from=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1768988193; x=1800524193;
-  h=message-id:subject:from:to:cc:date:in-reply-to:
-   references:content-transfer-encoding:mime-version;
-  bh=qL9iu/H5hpUrP/X6+ggfEAqN7pCzi7K6vLcfE1tY/YA=;
-  b=FSyJ3XABb80ljOMJ/9cIeF4UIV7Wc08X14kjDXKRuftGTzDNK8Y4X2XU
-   0G8v+Lw7k+ZdcnX6uh1X7aps7oAyREQK69o1aniGj9cRsYwPO2P0zaguP
-   J189q6oXW3mck9vrMwe9CwMB9R9XKgVcwOCqu9AeJry6dK+w5Ibi+Bnys
-   u9iZifGC4W9P4rKzsOERVWoduqxsEuWQ78b0Tpf71xlU6pRr2PFjTFnnD
-   5VxsGpsG1zJ+h8CcG7nf0h7SGz2ghRvCFZbWe2/TaBNJY6w/Au5by0s1R
-   B8kqxDw4x3eTiRlWWGK9sy3nJ/c2RvADXVd5KxfiZ6fN667wW1sCN1uht
-   w==;
-X-CSE-ConnectionGUID: t4YnEEAPQy63FB9PB28ITA==
-X-CSE-MsgGUID: rWESL7KwQcWFtLKtKEry6w==
-X-IronPort-AV: E=McAfee;i="6800,10657,11677"; a="87624101"
-X-IronPort-AV: E=Sophos;i="6.21,242,1763452800";
-   d="scan'208";a="87624101"
-Received: from fmviesa008.fm.intel.com ([10.60.135.148])
-  by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Jan 2026 01:36:31 -0800
-X-CSE-ConnectionGUID: 60Hy4B3ETOyz27yzkkUGrg==
-X-CSE-MsgGUID: Cg2+ahF4Sdui1FjdHXerRA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.21,242,1763452800";
-   d="scan'208";a="206639396"
-Received: from egrumbac-mobl6.ger.corp.intel.com (HELO [10.245.245.107]) ([10.245.245.107])
-  by fmviesa008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Jan 2026 01:36:24 -0800
-Message-ID: <107464758df9444a465a3a9e387f5a42827aff51.camel@linux.intel.com>
-From: Thomas =?ISO-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>
-To: Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Leon
- Romanovsky <leon@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Alex
- Deucher	 <alexander.deucher@amd.com>, David Airlie <airlied@gmail.com>,
- Simona Vetter	 <simona@ffwll.ch>, Gerd Hoffmann <kraxel@redhat.com>, Dmitry
- Osipenko	 <dmitry.osipenko@collabora.com>, Gurchetan Singh
- <gurchetansingh@chromium.org>,  Chia-I Wu <olvaffe@gmail.com>, Maarten
- Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard	
- <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Lucas De
- Marchi	 <lucas.demarchi@intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Jason Gunthorpe <jgg@ziepe.ca>, Kevin Tian <kevin.tian@intel.com>, Joerg
- Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Robin Murphy
- <robin.murphy@arm.com>, Felix Kuehling	 <Felix.Kuehling@amd.com>, Alex
- Williamson <alex@shazbot.org>, Ankit Agrawal	 <ankita@nvidia.com>, Vivek
- Kasireddy <vivek.kasireddy@intel.com>
-Date: Wed, 21 Jan 2026 10:36:09 +0100
-In-Reply-To: <b129f0c1-b61e-4efb-9e25-d8cdadaca1b3@amd.com>
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=N5mnHwlZ;
+	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=leon@kernel.org;
+	dmarc=pass (policy=quarantine) header.from=kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by sea.source.kernel.org (Postfix) with ESMTP id DABD4408DC;
+	Wed, 21 Jan 2026 10:14:26 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F0DD7C19422;
+	Wed, 21 Jan 2026 10:14:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1768990466;
+	bh=Tfo/OWueoKu8rex7Tl9fDhj3HYw8PFEJM2EofHNagw8=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=N5mnHwlZ4VBOzCaF2qAu+DjTaYQWAFbky4+JT2mBLPGjrNKxQ+fM9k9d6IllOUceW
+	 j1tAd0RJdJnA6QxkAhArkPbFRodriKbgtOU4tbyG0Ur1/cdjnP09GyrxTAfwHP4xnP
+	 X2So8WSV2cSYLZ1AZt0vyY20Gne5NDjhKQIqOjY28If9yXQcsOj1ST1qi7+CzWJcpx
+	 Bps75wKKBhcc5ddkolv1NkPvv+0fB5Nv0q0I8EgTvOodoH6D+g2E7dAFxYKe7BHlLR
+	 hPLlN+CWPcGoGBCvh/VKV743I73C6D0fJrJ2uaTEJdSDWeaB+0vclUS32VmzRQQIbg
+	 QHhoM3gbQHIKg==
+Date: Wed, 21 Jan 2026 12:14:21 +0200
+From: Leon Romanovsky <leon@kernel.org>
+To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
+Message-ID: <20260121101421.GZ13201@unreal>
 References: <20260120-dmabuf-revoke-v3-0-b7e0b07b8214@nvidia.com>
-	 <20260120-dmabuf-revoke-v3-6-b7e0b07b8214@nvidia.com>
-	 <b129f0c1-b61e-4efb-9e25-d8cdadaca1b3@amd.com>
-Organization: Intel Sweden AB, Registration Number: 556189-6027
-User-Agent: Evolution 3.58.2 (3.58.2-1.fc43) 
+ <20260120-dmabuf-revoke-v3-2-b7e0b07b8214@nvidia.com>
+ <24c7a7e6-b1bd-4407-b62d-4d9ea4cdeee4@amd.com>
 MIME-Version: 1.0
-X-Spamd-Bar: ---------
-Message-ID-Hash: 6WSWDEJGR4MSMU4FMBDQFSBFCBYINJLX
-X-Message-ID-Hash: 6WSWDEJGR4MSMU4FMBDQFSBFCBYINJLX
-X-MailFrom: thomas.hellstrom@linux.intel.com
+Content-Disposition: inline
+In-Reply-To: <24c7a7e6-b1bd-4407-b62d-4d9ea4cdeee4@amd.com>
+X-Spamd-Bar: ---
+Message-ID-Hash: AMAQ4ZFZGKL2O4BMV7TZYRB7CQPNHK6Z
+X-Message-ID-Hash: AMAQ4ZFZGKL2O4BMV7TZYRB7CQPNHK6Z
+X-MailFrom: leon@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, amd-gfx@lists.freedesktop.org, virtualization@lists.linux.dev, intel-xe@lists.freedesktop.org, linux-rdma@vger.kernel.org, iommu@lists.linux.dev, kvm@vger.kernel.org
+CC: Sumit Semwal <sumit.semwal@linaro.org>, Alex Deucher <alexander.deucher@amd.com>, Simona Vetter <simona@ffwll.ch>, Gerd Hoffmann <kraxel@redhat.com>, Dmitry Osipenko <dmitry.osipenko@collabora.com>, Gurchetan Singh <gurchetansingh@chromium.org>, Chia-I Wu <olvaffe@gmail.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Lucas De Marchi <lucas.demarchi@intel.com>, Thomas =?iso-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Jason Gunthorpe <jgg@ziepe.ca>, Kevin Tian <kevin.tian@intel.com>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, Felix Kuehling <Felix.Kuehling@amd.com>, Alex Williamson <alex@shazbot.org>, Ankit Agrawal <ankita@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel
+ @vger.kernel.org, amd-gfx@lists.freedesktop.org, virtualization@lists.linux.dev, intel-xe@lists.freedesktop.org, linux-rdma@vger.kernel.org, iommu@lists.linux.dev, kvm@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3 6/7] vfio: Wait for dma-buf invalidation to complete
+Subject: [Linaro-mm-sig] Re: [PATCH v3 2/7] dma-buf: Always build with DMABUF_MOVE_NOTIFY
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6WSWDEJGR4MSMU4FMBDQFSBFCBYINJLX/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AMAQ4ZFZGKL2O4BMV7TZYRB7CQPNHK6Z/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-X-Spamd-Result: default: False [0.69 / 15.00];
-	R_DKIM_REJECT(1.00)[intel.com:s=Intel];
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+X-Spamd-Result: default: False [2.49 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
+	R_DKIM_REJECT(1.00)[kernel.org:s=k20201202];
+	MID_RHS_NOT_FQDN(0.50)[];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[intel.com : SPF not aligned (relaxed),none];
-	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_TO(0.00)[amd.com,kernel.org,linaro.org,gmail.com,ffwll.ch,redhat.com,collabora.com,chromium.org,linux.intel.com,suse.de,intel.com,ziepe.ca,8bytes.org,arm.com,shazbot.org,nvidia.com];
-	RCVD_COUNT_THREE(0.00)[4];
-	HAS_ORG_HEADER(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[34];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[thomas.hellstrom@linux.intel.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	ARC_NA(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCPT_COUNT_TWELVE(0.00)[33];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[linaro.org,amd.com,ffwll.ch,redhat.com,collabora.com,chromium.org,gmail.com,linux.intel.com,kernel.org,suse.de,intel.com,ziepe.ca,8bytes.org,arm.com,shazbot.org,nvidia.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.linux.dev];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[leon@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:-];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DKIM_TRACE(0.00)[intel.com:-];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[amd.com:email,nvidia.com:email,linaro.org:email,linux.intel.com:mid,lists.linaro.org:rdns,lists.linaro.org:helo]
-X-Rspamd-Queue-Id: 3E7525481A
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,amd.com:email,nvidia.com:email]
+X-Rspamd-Queue-Id: 3072555081
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-SGksIENocmlzdGlhbiwNCg0KT24gV2VkLCAyMDI2LTAxLTIxIGF0IDEwOjIwICswMTAwLCBDaHJp
-c3RpYW4gS8O2bmlnIHdyb3RlOg0KPiBPbiAxLzIwLzI2IDE1OjA3LCBMZW9uIFJvbWFub3Zza3kg
-d3JvdGU6DQo+ID4gRnJvbTogTGVvbiBSb21hbm92c2t5IDxsZW9ucm9AbnZpZGlhLmNvbT4NCj4g
-PiANCj4gPiBkbWEtYnVmIGludmFsaWRhdGlvbiBpcyBwZXJmb3JtZWQgYXN5bmNocm9ub3VzbHkg
-YnkgaGFyZHdhcmUsIHNvDQo+ID4gVkZJTyBtdXN0DQo+ID4gd2FpdCB1bnRpbCBhbGwgYWZmZWN0
-ZWQgb2JqZWN0cyBoYXZlIGJlZW4gZnVsbHkgaW52YWxpZGF0ZWQuDQo+ID4gDQo+ID4gRml4ZXM6
-IDVkNzQ3ODFlYmM4NiAoInZmaW8vcGNpOiBBZGQgZG1hLWJ1ZiBleHBvcnQgc3VwcG9ydCBmb3Ig
-TU1JTw0KPiA+IHJlZ2lvbnMiKQ0KPiA+IFNpZ25lZC1vZmYtYnk6IExlb24gUm9tYW5vdnNreSA8
-bGVvbnJvQG52aWRpYS5jb20+DQo+IA0KPiBSZXZpZXdlZC1ieTogQ2hyaXN0aWFuIEvDtm5pZyA8
-Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPg0KPiANCj4gUGxlYXNlIGFsc28ga2VlcCBpbiBtaW5k
-IHRoYXQgdGhlIHdoaWxlIHRoaXMgd2FpdCBmb3IgYWxsIGZlbmNlcyBmb3INCj4gY29ycmVjdG5l
-c3MgeW91IGFsc28gbmVlZCB0byBrZWVwIHRoZSBtYXBwaW5nIHZhbGlkIHVudGlsDQo+IGRtYV9i
-dWZfdW5tYXBfYXR0YWNobWVudCgpIHdhcyBjYWxsZWQuDQoNCkknbSB3b25kZXJpbmcgc2hvdWxk
-bid0IHdlIHJlcXVpcmUgRE1BX1JFU1ZfVVNBR0VfQk9PS0tFRVAgaGVyZSwgYXMNCiphbnkqIHVu
-c2lnbmFsZWQgZmVuY2UgY291bGQgaW5kaWNhdGUgYWNjZXNzIHRocm91Z2ggdGhlIG1hcD8NCg0K
-L1Rob21hcw0KDQo+IA0KPiBJbiBvdGhlciB3b3JkcyB5b3UgY2FuIG9ubHkgcmVkaXJlY3QgdGhl
-IERNQS1hZGRyZXNzZXMgcHJldmlvdXNseQ0KPiBnaXZlbiBvdXQgaW50byBuaXJ2YW5hIChvciBh
-IGR1bW15IG1lbW9yeSBvciBzaW1pbGFyKSwgYnV0IHlvdSBzdGlsbA0KPiBuZWVkIHRvIGF2b2lk
-IHJlLXVzaW5nIHRoZW0gZm9yIHNvbWV0aGluZyBlbHNlLg0KPiANCj4gUmVnYXJkcywNCj4gQ2hy
-aXN0aWFuLg0KPiANCj4gPiAtLS0NCj4gPiDCoGRyaXZlcnMvdmZpby9wY2kvdmZpb19wY2lfZG1h
-YnVmLmMgfCA1ICsrKysrDQo+ID4gwqAxIGZpbGUgY2hhbmdlZCwgNSBpbnNlcnRpb25zKCspDQo+
-ID4gDQo+ID4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvdmZpby9wY2kvdmZpb19wY2lfZG1hYnVmLmMN
-Cj4gPiBiL2RyaXZlcnMvdmZpby9wY2kvdmZpb19wY2lfZG1hYnVmLmMNCj4gPiBpbmRleCBkNGQw
-ZjdkMDhjNTMuLjMzYmM2YTE5MDlkZCAxMDA2NDQNCj4gPiAtLS0gYS9kcml2ZXJzL3ZmaW8vcGNp
-L3ZmaW9fcGNpX2RtYWJ1Zi5jDQo+ID4gKysrIGIvZHJpdmVycy92ZmlvL3BjaS92ZmlvX3BjaV9k
-bWFidWYuYw0KPiA+IEBAIC0zMjEsNiArMzIxLDkgQEAgdm9pZCB2ZmlvX3BjaV9kbWFfYnVmX21v
-dmUoc3RydWN0DQo+ID4gdmZpb19wY2lfY29yZV9kZXZpY2UgKnZkZXYsIGJvb2wgcmV2b2tlZCkN
-Cj4gPiDCoAkJCWRtYV9yZXN2X2xvY2socHJpdi0+ZG1hYnVmLT5yZXN2LCBOVUxMKTsNCj4gPiDC
-oAkJCXByaXYtPnJldm9rZWQgPSByZXZva2VkOw0KPiA+IMKgCQkJZG1hX2J1Zl9tb3ZlX25vdGlm
-eShwcml2LT5kbWFidWYpOw0KPiA+ICsJCQlkbWFfcmVzdl93YWl0X3RpbWVvdXQocHJpdi0+ZG1h
-YnVmLT5yZXN2LA0KPiA+ICsJCQkJCcKgwqDCoMKgwqANCj4gPiBETUFfUkVTVl9VU0FHRV9LRVJO
-RUwsIGZhbHNlLA0KPiA+ICsJCQkJCcKgwqDCoMKgwqANCj4gPiBNQVhfU0NIRURVTEVfVElNRU9V
-VCk7DQo+ID4gwqAJCQlkbWFfcmVzdl91bmxvY2socHJpdi0+ZG1hYnVmLT5yZXN2KTsNCj4gPiDC
-oAkJfQ0KPiA+IMKgCQlmcHV0KHByaXYtPmRtYWJ1Zi0+ZmlsZSk7DQo+ID4gQEAgLTM0Miw2ICsz
-NDUsOCBAQCB2b2lkIHZmaW9fcGNpX2RtYV9idWZfY2xlYW51cChzdHJ1Y3QNCj4gPiB2ZmlvX3Bj
-aV9jb3JlX2RldmljZSAqdmRldikNCj4gPiDCoAkJcHJpdi0+dmRldiA9IE5VTEw7DQo+ID4gwqAJ
-CXByaXYtPnJldm9rZWQgPSB0cnVlOw0KPiA+IMKgCQlkbWFfYnVmX21vdmVfbm90aWZ5KHByaXYt
-PmRtYWJ1Zik7DQo+ID4gKwkJZG1hX3Jlc3Zfd2FpdF90aW1lb3V0KHByaXYtPmRtYWJ1Zi0+cmVz
-diwNCj4gPiBETUFfUkVTVl9VU0FHRV9LRVJORUwsDQo+ID4gKwkJCQnCoMKgwqDCoMKgIGZhbHNl
-LA0KPiA+IE1BWF9TQ0hFRFVMRV9USU1FT1VUKTsNCj4gPiDCoAkJZG1hX3Jlc3ZfdW5sb2NrKHBy
-aXYtPmRtYWJ1Zi0+cmVzdik7DQo+ID4gwqAJCXZmaW9fZGV2aWNlX3B1dF9yZWdpc3RyYXRpb24o
-JnZkZXYtPnZkZXYpOw0KPiA+IMKgCQlmcHV0KHByaXYtPmRtYWJ1Zi0+ZmlsZSk7DQo+ID4gDQpf
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0t
-c2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5z
-dWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFy
-by5vcmcK
+On Wed, Jan 21, 2026 at 09:55:38AM +0100, Christian K=F6nig wrote:
+> On 1/20/26 15:07, Leon Romanovsky wrote:
+> > From: Leon Romanovsky <leonro@nvidia.com>
+> >=20
+> > DMABUF_MOVE_NOTIFY was introduced in 2018 and has been marked as
+> > experimental and disabled by default ever since. Six years later,
+> > all new importers implement this callback.
+> >=20
+> > It is therefore reasonable to drop CONFIG_DMABUF_MOVE_NOTIFY and
+> > always build DMABUF with support for it enabled.
+> >=20
+> > Suggested-by: Christian K=F6nig <christian.koenig@amd.com>
+> > Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
+> > ---
+> >  drivers/dma-buf/Kconfig                     | 12 ------------
+> >  drivers/dma-buf/dma-buf.c                   | 12 ++----------
+> >  drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.c | 10 +++-------
+> >  drivers/gpu/drm/amd/amdkfd/Kconfig          |  2 +-
+> >  drivers/gpu/drm/xe/tests/xe_dma_buf.c       |  3 +--
+> >  drivers/gpu/drm/xe/xe_dma_buf.c             | 12 ++++--------
+> >  6 files changed, 11 insertions(+), 40 deletions(-)
+> >=20
+> > diff --git a/drivers/dma-buf/Kconfig b/drivers/dma-buf/Kconfig
+> > index b46eb8a552d7..84d5e9b24e20 100644
+> > --- a/drivers/dma-buf/Kconfig
+> > +++ b/drivers/dma-buf/Kconfig
+> > @@ -40,18 +40,6 @@ config UDMABUF
+> >  	  A driver to let userspace turn memfd regions into dma-bufs.
+> >  	  Qemu can use this to create host dmabufs for guest framebuffers.
+> > =20
+> > -config DMABUF_MOVE_NOTIFY
+> > -	bool "Move notify between drivers (EXPERIMENTAL)"
+> > -	default n
+> > -	depends on DMA_SHARED_BUFFER
+> > -	help
+> > -	  Don't pin buffers if the dynamic DMA-buf interface is available on
+> > -	  both the exporter as well as the importer. This fixes a security
+> > -	  problem where userspace is able to pin unrestricted amounts of memo=
+ry
+> > -	  through DMA-buf.
+> > -	  This is marked experimental because we don't yet have a consistent
+> > -	  execution context and memory management between drivers.
+> > -
+> >  config DMABUF_DEBUG
+> >  	bool "DMA-BUF debug checks"
+> >  	depends on DMA_SHARED_BUFFER
+> > diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
+> > index 59cc647bf40e..cd3b60ce4863 100644
+> > --- a/drivers/dma-buf/dma-buf.c
+> > +++ b/drivers/dma-buf/dma-buf.c
+> > @@ -837,18 +837,10 @@ static void mangle_sg_table(struct sg_table *sg_t=
+able)
+> > =20
+> >  }
+> > =20
+> > -static inline bool
+> > -dma_buf_attachment_is_dynamic(struct dma_buf_attachment *attach)
+>=20
+> I would rather like to keep the wrapper and even add some explanation wha=
+t it means when true is returned.
+
+We have different opinion here. I don't like single line functions which
+are called only twice. I'll keep this function to ensure progress the
+series.
+
+Thanks
+
+>=20
+> Apart from that looks good to me.
+>=20
+> Regards,
+> Christian.
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
