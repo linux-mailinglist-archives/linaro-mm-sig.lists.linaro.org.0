@@ -2,38 +2,38 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MBsTKcvNcGkOaAAAu9opvQ
+	id iOkcJtzNcGkOaAAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jan 2026 13:59:55 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jan 2026 14:00:12 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2E00F573C9
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jan 2026 13:59:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 006F157414
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jan 2026 14:00:11 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3FC8040175
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jan 2026 12:59:54 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 0819540175
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jan 2026 13:00:11 +0000 (UTC)
 Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 5F64C401B1
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 21 Jan 2026 12:59:36 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 1E0D1401B6
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 21 Jan 2026 12:59:40 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=BGjZ1JOP;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=uP7N2HLH;
 	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=leon@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id B7990443B3;
-	Wed, 21 Jan 2026 12:59:35 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F3DFAC116D0;
-	Wed, 21 Jan 2026 12:59:34 +0000 (UTC)
+	by sea.source.kernel.org (Postfix) with ESMTP id 9149244179;
+	Wed, 21 Jan 2026 12:59:39 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C613BC116D0;
+	Wed, 21 Jan 2026 12:59:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1769000375;
-	bh=OGYKw47EaUqM/lWyK5JqNggda0T3gP3mV7IvIl6ZhwE=;
+	s=k20201202; t=1769000379;
+	bh=6Ho+uRDyXSgxTDE+1RTrMPsGvWWn+f2uKPQhY0bRRoU=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=BGjZ1JOPPaa9dH3TdPvpuc7F2tx7w3NsHYC5BuTxjEkAw+r5Lm0OxI9fU7M8P68MN
-	 cV7Cr5guXE1OuvX7sCAt0nCl07gdSJSUQZqVVaQocMSBLUiPpxZWe+btb6Hh06kDuD
-	 eNbId410/V7XM43xHH/mtFX6FcQSNA4UTF+Z0W5dTVNUTAk+RBV0JPNvbMJVZ7FjoF
-	 WiJc7Mxp++ndGzbEeMUOfiXBs4PKfe15nL4koGIilbVicq/QCazTzFSPNnTkht0muf
-	 C3cu0DHfPJUWCfnkxmq6kUpAT2/QmpQg675gFz4G590yjpDQt+4QeDdOSrStjqMyH0
-	 pQjykChYncv2w==
+	b=uP7N2HLH9HGFbRCEtRnar6HBTQ5giBQXH3s7VAilbpNceFpmAJHTlmemRXNzJmgEv
+	 1MvZGTnhXYQIUfLHwj8Ul71/7FAgNrnqfcK92TgxTe0aWuEebGcfUKLxd9rVsggsHv
+	 sPCURz+nfBhDAXHSDXjh1fJYQMd4j7/aUUgNwVexcs2EBhsLR9URsuVtQZEtogFJ42
+	 5ckbhCNU+RU/JEQJZF2xVcs7nqt9bKjA6CRweQldIiVQlUpl4m/10COBwBqAYYxUpx
+	 PWfpraQoJmSx1WluigzBSHVU+q5bvTeX2uxZs+vJ+Bipj/he54FrSfF6Gq8KudIbZy
+	 M6YFuOJtKiYeQ==
 From: Leon Romanovsky <leon@kernel.org>
 To: Sumit Semwal <sumit.semwal@linaro.org>,
 	=?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
@@ -60,213 +60,194 @@ To: Sumit Semwal <sumit.semwal@linaro.org>,
 	Alex Williamson <alex@shazbot.org>,
 	Ankit Agrawal <ankita@nvidia.com>,
 	Vivek Kasireddy <vivek.kasireddy@intel.com>
-Date: Wed, 21 Jan 2026 14:59:09 +0200
-Message-ID: <20260121-dmabuf-revoke-v4-1-d311cbc8633d@nvidia.com>
+Date: Wed, 21 Jan 2026 14:59:10 +0200
+Message-ID: <20260121-dmabuf-revoke-v4-2-d311cbc8633d@nvidia.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260121-dmabuf-revoke-v4-0-d311cbc8633d@nvidia.com>
 References: <20260121-dmabuf-revoke-v4-0-d311cbc8633d@nvidia.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
 X-Mailer: b4 0.15-dev-a6db3
 X-Spamd-Bar: ----
-Message-ID-Hash: EZBLBGXCXJMAYHSRTWZ2RGTAAQETBROO
-X-Message-ID-Hash: EZBLBGXCXJMAYHSRTWZ2RGTAAQETBROO
+Message-ID-Hash: QSIE7FGRQOFU6BV5CUZGFQGYN3G6S7F7
+X-Message-ID-Hash: QSIE7FGRQOFU6BV5CUZGFQGYN3G6S7F7
 X-MailFrom: leon@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, amd-gfx@lists.freedesktop.org, virtualization@lists.linux.dev, intel-xe@lists.freedesktop.org, linux-rdma@vger.kernel.org, iommu@lists.linux.dev, kvm@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v4 1/8] dma-buf: Rename .move_notify() callback to a clearer identifier
+Subject: [Linaro-mm-sig] [PATCH v4 2/8] dma-buf: Rename dma_buf_move_notify() to dma_buf_invalidate_mappings()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EZBLBGXCXJMAYHSRTWZ2RGTAAQETBROO/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QSIE7FGRQOFU6BV5CUZGFQGYN3G6S7F7/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Transfer-Encoding: base64
-X-Spamd-Result: default: False [2.09 / 15.00];
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [1.99 / 15.00];
 	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
 	R_DKIM_REJECT(1.00)[kernel.org:s=k20201202];
-	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx:c];
+	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	ARC_NA(0.00)[];
-	FREEMAIL_TO(0.00)[linaro.org,amd.com,gmail.com,ffwll.ch,redhat.com,collabora.com,chromium.org,linux.intel.com,kernel.org,suse.de,intel.com,ziepe.ca,8bytes.org,arm.com,shazbot.org,nvidia.com];
-	RCPT_COUNT_TWELVE(0.00)[35];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[leon@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:-];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,nvidia.com:email,nvidia.com:mid,linaro.org:email]
-X-Rspamd-Queue-Id: 2E00F573C9
+	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	RCPT_COUNT_TWELVE(0.00)[35];
+	TO_DN_SOME(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,nvidia.com:email,nvidia.com:mid,linaro.org:email];
+	FROM_NEQ_ENVFROM(0.00)[leon@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_TO(0.00)[linaro.org,amd.com,gmail.com,ffwll.ch,redhat.com,collabora.com,chromium.org,linux.intel.com,kernel.org,suse.de,intel.com,ziepe.ca,8bytes.org,arm.com,shazbot.org,nvidia.com];
+	DKIM_TRACE(0.00)[kernel.org:-]
+X-Rspamd-Queue-Id: 006F157414
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-RnJvbTogTGVvbiBSb21hbm92c2t5IDxsZW9ucm9AbnZpZGlhLmNvbT4NCg0KUmVuYW1lIHRoZSAu
-bW92ZV9ub3RpZnkoKSBjYWxsYmFjayB0byAuaW52YWxpZGF0ZV9tYXBwaW5ncygpIHRvIG1ha2Ug
-aXRzDQpwdXJwb3NlIGV4cGxpY2l0IGFuZCBoaWdobGlnaHQgdGhhdCBpdCBpcyByZXNwb25zaWJs
-ZSBmb3IgaW52YWxpZGF0aW5nDQpleGlzdGluZyBtYXBwaW5ncy4NCg0KU3VnZ2VzdGVkLWJ5OiBD
-aHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+DQpSZXZpZXdlZC1ieTog
-Q2hyaXN0aWFuIEvDtm5pZyA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPg0KU2lnbmVkLW9mZi1i
-eTogTGVvbiBSb21hbm92c2t5IDxsZW9ucm9AbnZpZGlhLmNvbT4NCi0tLQ0KIGRyaXZlcnMvZG1h
-LWJ1Zi9kbWEtYnVmLmMgICAgICAgICAgICAgICAgICAgfCA2ICsrKy0tLQ0KIGRyaXZlcnMvZ3B1
-L2RybS9hbWQvYW1kZ3B1L2FtZGdwdV9kbWFfYnVmLmMgfCA0ICsrLS0NCiBkcml2ZXJzL2dwdS9k
-cm0vdmlydGlvL3ZpcnRncHVfcHJpbWUuYyAgICAgIHwgMiArLQ0KIGRyaXZlcnMvZ3B1L2RybS94
-ZS90ZXN0cy94ZV9kbWFfYnVmLmMgICAgICAgfCA2ICsrKy0tLQ0KIGRyaXZlcnMvZ3B1L2RybS94
-ZS94ZV9kbWFfYnVmLmMgICAgICAgICAgICAgfCAyICstDQogZHJpdmVycy9pbmZpbmliYW5kL2Nv
-cmUvdW1lbV9kbWFidWYuYyAgICAgICB8IDQgKystLQ0KIGRyaXZlcnMvaW5maW5pYmFuZC9ody9t
-bHg1L21yLmMgICAgICAgICAgICAgfCAyICstDQogZHJpdmVycy9pb21tdS9pb21tdWZkL3BhZ2Vz
-LmMgICAgICAgICAgICAgICB8IDIgKy0NCiBpbmNsdWRlL2xpbnV4L2RtYS1idWYuaCAgICAgICAg
-ICAgICAgICAgICAgIHwgNiArKystLS0NCiA5IGZpbGVzIGNoYW5nZWQsIDE3IGluc2VydGlvbnMo
-KyksIDE3IGRlbGV0aW9ucygtKQ0KDQpkaWZmIC0tZ2l0IGEvZHJpdmVycy9kbWEtYnVmL2RtYS1i
-dWYuYyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtYnVmLmMNCmluZGV4IGVkYWE5ZTRlZTRhZS4uNTlj
-YzY0N2JmNDBlIDEwMDY0NA0KLS0tIGEvZHJpdmVycy9kbWEtYnVmL2RtYS1idWYuYw0KKysrIGIv
-ZHJpdmVycy9kbWEtYnVmL2RtYS1idWYuYw0KQEAgLTk0OCw3ICs5NDgsNyBAQCBkbWFfYnVmX2R5
-bmFtaWNfYXR0YWNoKHN0cnVjdCBkbWFfYnVmICpkbWFidWYsIHN0cnVjdCBkZXZpY2UgKmRldiwN
-CiAJaWYgKFdBUk5fT04oIWRtYWJ1ZiB8fCAhZGV2KSkNCiAJCXJldHVybiBFUlJfUFRSKC1FSU5W
-QUwpOw0KIA0KLQlpZiAoV0FSTl9PTihpbXBvcnRlcl9vcHMgJiYgIWltcG9ydGVyX29wcy0+bW92
-ZV9ub3RpZnkpKQ0KKwlpZiAoV0FSTl9PTihpbXBvcnRlcl9vcHMgJiYgIWltcG9ydGVyX29wcy0+
-aW52YWxpZGF0ZV9tYXBwaW5ncykpDQogCQlyZXR1cm4gRVJSX1BUUigtRUlOVkFMKTsNCiANCiAJ
-YXR0YWNoID0ga3phbGxvYyhzaXplb2YoKmF0dGFjaCksIEdGUF9LRVJORUwpOw0KQEAgLTEwNTUs
-NyArMTA1NSw3IEBAIEVYUE9SVF9TWU1CT0xfTlNfR1BMKGRtYV9idWZfcGluLCAiRE1BX0JVRiIp
-Ow0KICAqDQogICogVGhpcyB1bnBpbnMgYSBidWZmZXIgcGlubmVkIGJ5IGRtYV9idWZfcGluKCkg
-YW5kIGFsbG93cyB0aGUgZXhwb3J0ZXIgdG8gbW92ZQ0KICAqIGFueSBtYXBwaW5nIG9mIEBhdHRh
-Y2ggYWdhaW4gYW5kIGluZm9ybSB0aGUgaW1wb3J0ZXIgdGhyb3VnaA0KLSAqICZkbWFfYnVmX2F0
-dGFjaF9vcHMubW92ZV9ub3RpZnkuDQorICogJmRtYV9idWZfYXR0YWNoX29wcy5pbnZhbGlkYXRl
-X21hcHBpbmdzLg0KICAqLw0KIHZvaWQgZG1hX2J1Zl91bnBpbihzdHJ1Y3QgZG1hX2J1Zl9hdHRh
-Y2htZW50ICphdHRhY2gpDQogew0KQEAgLTEyNjIsNyArMTI2Miw3IEBAIHZvaWQgZG1hX2J1Zl9t
-b3ZlX25vdGlmeShzdHJ1Y3QgZG1hX2J1ZiAqZG1hYnVmKQ0KIA0KIAlsaXN0X2Zvcl9lYWNoX2Vu
-dHJ5KGF0dGFjaCwgJmRtYWJ1Zi0+YXR0YWNobWVudHMsIG5vZGUpDQogCQlpZiAoYXR0YWNoLT5p
-bXBvcnRlcl9vcHMpDQotCQkJYXR0YWNoLT5pbXBvcnRlcl9vcHMtPm1vdmVfbm90aWZ5KGF0dGFj
-aCk7DQorCQkJYXR0YWNoLT5pbXBvcnRlcl9vcHMtPmludmFsaWRhdGVfbWFwcGluZ3MoYXR0YWNo
-KTsNCiB9DQogRVhQT1JUX1NZTUJPTF9OU19HUEwoZG1hX2J1Zl9tb3ZlX25vdGlmeSwgIkRNQV9C
-VUYiKTsNCiANCmRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vYW1kL2FtZGdwdS9hbWRncHVf
-ZG1hX2J1Zi5jIGIvZHJpdmVycy9ncHUvZHJtL2FtZC9hbWRncHUvYW1kZ3B1X2RtYV9idWYuYw0K
-aW5kZXggZTIyY2ZhN2M2ZDMyLi44NjM0NTQxNDhiMjggMTAwNjQ0DQotLS0gYS9kcml2ZXJzL2dw
-dS9kcm0vYW1kL2FtZGdwdS9hbWRncHVfZG1hX2J1Zi5jDQorKysgYi9kcml2ZXJzL2dwdS9kcm0v
-YW1kL2FtZGdwdS9hbWRncHVfZG1hX2J1Zi5jDQpAQCAtNDUwLDcgKzQ1MCw3IEBAIGFtZGdwdV9k
-bWFfYnVmX2NyZWF0ZV9vYmooc3RydWN0IGRybV9kZXZpY2UgKmRldiwgc3RydWN0IGRtYV9idWYg
-KmRtYV9idWYpDQogfQ0KIA0KIC8qKg0KLSAqIGFtZGdwdV9kbWFfYnVmX21vdmVfbm90aWZ5IC0g
-JmF0dGFjaC5tb3ZlX25vdGlmeSBpbXBsZW1lbnRhdGlvbg0KKyAqIGFtZGdwdV9kbWFfYnVmX21v
-dmVfbm90aWZ5IC0gJmF0dGFjaC5pbnZhbGlkYXRlX21hcHBpbmdzIGltcGxlbWVudGF0aW9uDQog
-ICoNCiAgKiBAYXR0YWNoOiB0aGUgRE1BLWJ1ZiBhdHRhY2htZW50DQogICoNCkBAIC01MjEsNyAr
-NTIxLDcgQEAgYW1kZ3B1X2RtYV9idWZfbW92ZV9ub3RpZnkoc3RydWN0IGRtYV9idWZfYXR0YWNo
-bWVudCAqYXR0YWNoKQ0KIA0KIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZG1hX2J1Zl9hdHRhY2hfb3Bz
-IGFtZGdwdV9kbWFfYnVmX2F0dGFjaF9vcHMgPSB7DQogCS5hbGxvd19wZWVyMnBlZXIgPSB0cnVl
-LA0KLQkubW92ZV9ub3RpZnkgPSBhbWRncHVfZG1hX2J1Zl9tb3ZlX25vdGlmeQ0KKwkuaW52YWxp
-ZGF0ZV9tYXBwaW5ncyA9IGFtZGdwdV9kbWFfYnVmX21vdmVfbm90aWZ5DQogfTsNCiANCiAvKioN
-CmRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vdmlydGlvL3ZpcnRncHVfcHJpbWUuYyBiL2Ry
-aXZlcnMvZ3B1L2RybS92aXJ0aW8vdmlydGdwdV9wcmltZS5jDQppbmRleCBjZTQ5MjgyMTk4Y2Iu
-LjE5Yzc4ZGQyY2E3NyAxMDA2NDQNCi0tLSBhL2RyaXZlcnMvZ3B1L2RybS92aXJ0aW8vdmlydGdw
-dV9wcmltZS5jDQorKysgYi9kcml2ZXJzL2dwdS9kcm0vdmlydGlvL3ZpcnRncHVfcHJpbWUuYw0K
-QEAgLTI4OCw3ICsyODgsNyBAQCBzdGF0aWMgdm9pZCB2aXJ0Z3B1X2RtYV9idWZfbW92ZV9ub3Rp
-Znkoc3RydWN0IGRtYV9idWZfYXR0YWNobWVudCAqYXR0YWNoKQ0KIA0KIHN0YXRpYyBjb25zdCBz
-dHJ1Y3QgZG1hX2J1Zl9hdHRhY2hfb3BzIHZpcnRncHVfZG1hX2J1Zl9hdHRhY2hfb3BzID0gew0K
-IAkuYWxsb3dfcGVlcjJwZWVyID0gdHJ1ZSwNCi0JLm1vdmVfbm90aWZ5ID0gdmlydGdwdV9kbWFf
-YnVmX21vdmVfbm90aWZ5DQorCS5pbnZhbGlkYXRlX21hcHBpbmdzID0gdmlydGdwdV9kbWFfYnVm
-X21vdmVfbm90aWZ5DQogfTsNCiANCiBzdHJ1Y3QgZHJtX2dlbV9vYmplY3QgKnZpcnRncHVfZ2Vt
-X3ByaW1lX2ltcG9ydChzdHJ1Y3QgZHJtX2RldmljZSAqZGV2LA0KZGlmZiAtLWdpdCBhL2RyaXZl
-cnMvZ3B1L2RybS94ZS90ZXN0cy94ZV9kbWFfYnVmLmMgYi9kcml2ZXJzL2dwdS9kcm0veGUvdGVz
-dHMveGVfZG1hX2J1Zi5jDQppbmRleCA1ZGY5OGRlNWJhM2MuLjFmMmNjYTVjMmY4MSAxMDA2NDQN
-Ci0tLSBhL2RyaXZlcnMvZ3B1L2RybS94ZS90ZXN0cy94ZV9kbWFfYnVmLmMNCisrKyBiL2RyaXZl
-cnMvZ3B1L2RybS94ZS90ZXN0cy94ZV9kbWFfYnVmLmMNCkBAIC0yMyw3ICsyMyw3IEBAIHN0YXRp
-YyBib29sIHAycF9lbmFibGVkKHN0cnVjdCBkbWFfYnVmX3Rlc3RfcGFyYW1zICpwYXJhbXMpDQog
-c3RhdGljIGJvb2wgaXNfZHluYW1pYyhzdHJ1Y3QgZG1hX2J1Zl90ZXN0X3BhcmFtcyAqcGFyYW1z
-KQ0KIHsNCiAJcmV0dXJuIElTX0VOQUJMRUQoQ09ORklHX0RNQUJVRl9NT1ZFX05PVElGWSkgJiYg
-cGFyYW1zLT5hdHRhY2hfb3BzICYmDQotCQlwYXJhbXMtPmF0dGFjaF9vcHMtPm1vdmVfbm90aWZ5
-Ow0KKwkJcGFyYW1zLT5hdHRhY2hfb3BzLT5pbnZhbGlkYXRlX21hcHBpbmdzOw0KIH0NCiANCiBz
-dGF0aWMgdm9pZCBjaGVja19yZXNpZGVuY3koc3RydWN0IGt1bml0ICp0ZXN0LCBzdHJ1Y3QgeGVf
-Ym8gKmV4cG9ydGVkLA0KQEAgLTYwLDcgKzYwLDcgQEAgc3RhdGljIHZvaWQgY2hlY2tfcmVzaWRl
-bmN5KHN0cnVjdCBrdW5pdCAqdGVzdCwgc3RydWN0IHhlX2JvICpleHBvcnRlZCwNCiANCiAJLyoN
-CiAJICogRXZpY3QgZXhwb3J0ZXIuIEV2aWN0aW5nIHRoZSBleHBvcnRlZCBibyB3aWxsDQotCSAq
-IGV2aWN0IGFsc28gdGhlIGltcG9ydGVkIGJvIHRocm91Z2ggdGhlIG1vdmVfbm90aWZ5KCkgZnVu
-Y3Rpb25hbGl0eSBpZg0KKwkgKiBldmljdCBhbHNvIHRoZSBpbXBvcnRlZCBibyB0aHJvdWdoIHRo
-ZSBpbnZhbGlkYXRlX21hcHBpbmdzKCkgZnVuY3Rpb25hbGl0eSBpZg0KIAkgKiBpbXBvcnRlciBp
-cyBvbiBhIGRpZmZlcmVudCBkZXZpY2UuIElmIHRoZXkncmUgb24gdGhlIHNhbWUgZGV2aWNlLA0K
-IAkgKiB0aGUgZXhwb3J0ZXIgYW5kIHRoZSBpbXBvcnRlciBzaG91bGQgYmUgdGhlIHNhbWUgYm8u
-DQogCSAqLw0KQEAgLTE5OCw3ICsxOTgsNyBAQCBzdGF0aWMgdm9pZCB4ZV90ZXN0X2RtYWJ1Zl9p
-bXBvcnRfc2FtZV9kcml2ZXIoc3RydWN0IHhlX2RldmljZSAqeGUpDQogDQogc3RhdGljIGNvbnN0
-IHN0cnVjdCBkbWFfYnVmX2F0dGFjaF9vcHMgbm9wMnBfYXR0YWNoX29wcyA9IHsNCiAJLmFsbG93
-X3BlZXIycGVlciA9IGZhbHNlLA0KLQkubW92ZV9ub3RpZnkgPSB4ZV9kbWFfYnVmX21vdmVfbm90
-aWZ5DQorCS5pbnZhbGlkYXRlX21hcHBpbmdzID0geGVfZG1hX2J1Zl9tb3ZlX25vdGlmeQ0KIH07
-DQogDQogLyoNCmRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0veGUveGVfZG1hX2J1Zi5jIGIv
-ZHJpdmVycy9ncHUvZHJtL3hlL3hlX2RtYV9idWYuYw0KaW5kZXggN2M3NGEzMWQ0NDg2Li4xYjlj
-ZDA0M2U1MTcgMTAwNjQ0DQotLS0gYS9kcml2ZXJzL2dwdS9kcm0veGUveGVfZG1hX2J1Zi5jDQor
-KysgYi9kcml2ZXJzL2dwdS9kcm0veGUveGVfZG1hX2J1Zi5jDQpAQCAtMjg3LDcgKzI4Nyw3IEBA
-IHN0YXRpYyB2b2lkIHhlX2RtYV9idWZfbW92ZV9ub3RpZnkoc3RydWN0IGRtYV9idWZfYXR0YWNo
-bWVudCAqYXR0YWNoKQ0KIA0KIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZG1hX2J1Zl9hdHRhY2hfb3Bz
-IHhlX2RtYV9idWZfYXR0YWNoX29wcyA9IHsNCiAJLmFsbG93X3BlZXIycGVlciA9IHRydWUsDQot
-CS5tb3ZlX25vdGlmeSA9IHhlX2RtYV9idWZfbW92ZV9ub3RpZnkNCisJLmludmFsaWRhdGVfbWFw
-cGluZ3MgPSB4ZV9kbWFfYnVmX21vdmVfbm90aWZ5DQogfTsNCiANCiAjaWYgSVNfRU5BQkxFRChD
-T05GSUdfRFJNX1hFX0tVTklUX1RFU1QpDQpkaWZmIC0tZ2l0IGEvZHJpdmVycy9pbmZpbmliYW5k
-L2NvcmUvdW1lbV9kbWFidWYuYyBiL2RyaXZlcnMvaW5maW5pYmFuZC9jb3JlL3VtZW1fZG1hYnVm
-LmMNCmluZGV4IDBlYzJlNDEyMGNjOS4uZDc3YTczOWNmZTdhIDEwMDY0NA0KLS0tIGEvZHJpdmVy
-cy9pbmZpbmliYW5kL2NvcmUvdW1lbV9kbWFidWYuYw0KKysrIGIvZHJpdmVycy9pbmZpbmliYW5k
-L2NvcmUvdW1lbV9kbWFidWYuYw0KQEAgLTEyOSw3ICsxMjksNyBAQCBpYl91bWVtX2RtYWJ1Zl9n
-ZXRfd2l0aF9kbWFfZGV2aWNlKHN0cnVjdCBpYl9kZXZpY2UgKmRldmljZSwNCiAJaWYgKGNoZWNr
-X2FkZF9vdmVyZmxvdyhvZmZzZXQsICh1bnNpZ25lZCBsb25nKXNpemUsICZlbmQpKQ0KIAkJcmV0
-dXJuIHJldDsNCiANCi0JaWYgKHVubGlrZWx5KCFvcHMgfHwgIW9wcy0+bW92ZV9ub3RpZnkpKQ0K
-KwlpZiAodW5saWtlbHkoIW9wcyB8fCAhb3BzLT5pbnZhbGlkYXRlX21hcHBpbmdzKSkNCiAJCXJl
-dHVybiByZXQ7DQogDQogCWRtYWJ1ZiA9IGRtYV9idWZfZ2V0KGZkKTsNCkBAIC0xOTUsNyArMTk1
-LDcgQEAgaWJfdW1lbV9kbWFidWZfdW5zdXBwb3J0ZWRfbW92ZV9ub3RpZnkoc3RydWN0IGRtYV9i
-dWZfYXR0YWNobWVudCAqYXR0YWNoKQ0KIA0KIHN0YXRpYyBzdHJ1Y3QgZG1hX2J1Zl9hdHRhY2hf
-b3BzIGliX3VtZW1fZG1hYnVmX2F0dGFjaF9waW5uZWRfb3BzID0gew0KIAkuYWxsb3dfcGVlcjJw
-ZWVyID0gdHJ1ZSwNCi0JLm1vdmVfbm90aWZ5ID0gaWJfdW1lbV9kbWFidWZfdW5zdXBwb3J0ZWRf
-bW92ZV9ub3RpZnksDQorCS5pbnZhbGlkYXRlX21hcHBpbmdzID0gaWJfdW1lbV9kbWFidWZfdW5z
-dXBwb3J0ZWRfbW92ZV9ub3RpZnksDQogfTsNCiANCiBzdHJ1Y3QgaWJfdW1lbV9kbWFidWYgKg0K
-ZGlmZiAtLWdpdCBhL2RyaXZlcnMvaW5maW5pYmFuZC9ody9tbHg1L21yLmMgYi9kcml2ZXJzL2lu
-ZmluaWJhbmQvaHcvbWx4NS9tci5jDQppbmRleCAzMjVmYTA0Y2JlOGEuLjk3MDk5ZDNiMTY4OCAx
-MDA2NDQNCi0tLSBhL2RyaXZlcnMvaW5maW5pYmFuZC9ody9tbHg1L21yLmMNCisrKyBiL2RyaXZl
-cnMvaW5maW5pYmFuZC9ody9tbHg1L21yLmMNCkBAIC0xNjIwLDcgKzE2MjAsNyBAQCBzdGF0aWMg
-dm9pZCBtbHg1X2liX2RtYWJ1Zl9pbnZhbGlkYXRlX2NiKHN0cnVjdCBkbWFfYnVmX2F0dGFjaG1l
-bnQgKmF0dGFjaCkNCiANCiBzdGF0aWMgc3RydWN0IGRtYV9idWZfYXR0YWNoX29wcyBtbHg1X2li
-X2RtYWJ1Zl9hdHRhY2hfb3BzID0gew0KIAkuYWxsb3dfcGVlcjJwZWVyID0gMSwNCi0JLm1vdmVf
-bm90aWZ5ID0gbWx4NV9pYl9kbWFidWZfaW52YWxpZGF0ZV9jYiwNCisJLmludmFsaWRhdGVfbWFw
-cGluZ3MgPSBtbHg1X2liX2RtYWJ1Zl9pbnZhbGlkYXRlX2NiLA0KIH07DQogDQogc3RhdGljIHN0
-cnVjdCBpYl9tciAqDQpkaWZmIC0tZ2l0IGEvZHJpdmVycy9pb21tdS9pb21tdWZkL3BhZ2VzLmMg
-Yi9kcml2ZXJzL2lvbW11L2lvbW11ZmQvcGFnZXMuYw0KaW5kZXggZGJlNTFlY2I5YTIwLi43NmY5
-MDBmYTE2ODcgMTAwNjQ0DQotLS0gYS9kcml2ZXJzL2lvbW11L2lvbW11ZmQvcGFnZXMuYw0KKysr
-IGIvZHJpdmVycy9pb21tdS9pb21tdWZkL3BhZ2VzLmMNCkBAIC0xNDUxLDcgKzE0NTEsNyBAQCBz
-dGF0aWMgdm9pZCBpb3B0X3Jldm9rZV9ub3RpZnkoc3RydWN0IGRtYV9idWZfYXR0YWNobWVudCAq
-YXR0YWNoKQ0KIA0KIHN0YXRpYyBzdHJ1Y3QgZG1hX2J1Zl9hdHRhY2hfb3BzIGlvcHRfZG1hYnVm
-X2F0dGFjaF9yZXZva2Vfb3BzID0gew0KIAkuYWxsb3dfcGVlcjJwZWVyID0gdHJ1ZSwNCi0JLm1v
-dmVfbm90aWZ5ID0gaW9wdF9yZXZva2Vfbm90aWZ5LA0KKwkuaW52YWxpZGF0ZV9tYXBwaW5ncyA9
-IGlvcHRfcmV2b2tlX25vdGlmeSwNCiB9Ow0KIA0KIC8qDQpkaWZmIC0tZ2l0IGEvaW5jbHVkZS9s
-aW51eC9kbWEtYnVmLmggYi9pbmNsdWRlL2xpbnV4L2RtYS1idWYuaA0KaW5kZXggMGJjNDkyMDkw
-MjM3Li4xYjM5NzYzNWM3OTMgMTAwNjQ0DQotLS0gYS9pbmNsdWRlL2xpbnV4L2RtYS1idWYuaA0K
-KysrIGIvaW5jbHVkZS9saW51eC9kbWEtYnVmLmgNCkBAIC00MDcsNyArNDA3LDcgQEAgc3RydWN0
-IGRtYV9idWYgew0KIAkgKiAgIHRocm91Z2ggdGhlIGRldmljZS4NCiAJICoNCiAJICogLSBEeW5h
-bWljIGltcG9ydGVycyBzaG91bGQgc2V0IGZlbmNlcyBmb3IgYW55IGFjY2VzcyB0aGF0IHRoZXkg
-Y2FuJ3QNCi0JICogICBkaXNhYmxlIGltbWVkaWF0ZWx5IGZyb20gdGhlaXIgJmRtYV9idWZfYXR0
-YWNoX29wcy5tb3ZlX25vdGlmeQ0KKwkgKiAgIGRpc2FibGUgaW1tZWRpYXRlbHkgZnJvbSB0aGVp
-ciAmZG1hX2J1Zl9hdHRhY2hfb3BzLmludmFsaWRhdGVfbWFwcGluZ3MNCiAJICogICBjYWxsYmFj
-ay4NCiAJICoNCiAJICogSU1QT1JUQU5UOg0KQEAgLTQ1OCw3ICs0NTgsNyBAQCBzdHJ1Y3QgZG1h
-X2J1Zl9hdHRhY2hfb3BzIHsNCiAJYm9vbCBhbGxvd19wZWVyMnBlZXI7DQogDQogCS8qKg0KLQkg
-KiBAbW92ZV9ub3RpZnk6IFtvcHRpb25hbF0gbm90aWZpY2F0aW9uIHRoYXQgdGhlIERNQS1idWYg
-aXMgbW92aW5nDQorCSAqIEBpbnZhbGlkYXRlX21hcHBpbmdzOiBbb3B0aW9uYWxdIG5vdGlmaWNh
-dGlvbiB0aGF0IHRoZSBETUEtYnVmIGlzIG1vdmluZw0KIAkgKg0KIAkgKiBJZiB0aGlzIGNhbGxi
-YWNrIGlzIHByb3ZpZGVkIHRoZSBmcmFtZXdvcmsgY2FuIGF2b2lkIHBpbm5pbmcgdGhlDQogCSAq
-IGJhY2tpbmcgc3RvcmUgd2hpbGUgbWFwcGluZ3MgZXhpc3RzLg0KQEAgLTQ3NSw3ICs0NzUsNyBA
-QCBzdHJ1Y3QgZG1hX2J1Zl9hdHRhY2hfb3BzIHsNCiAJICogTmV3IG1hcHBpbmdzIGNhbiBiZSBj
-cmVhdGVkIGFmdGVyIHRoaXMgY2FsbGJhY2sgcmV0dXJucywgYW5kIHdpbGwNCiAJICogcG9pbnQg
-dG8gdGhlIG5ldyBsb2NhdGlvbiBvZiB0aGUgRE1BLWJ1Zi4NCiAJICovDQotCXZvaWQgKCptb3Zl
-X25vdGlmeSkoc3RydWN0IGRtYV9idWZfYXR0YWNobWVudCAqYXR0YWNoKTsNCisJdm9pZCAoKmlu
-dmFsaWRhdGVfbWFwcGluZ3MpKHN0cnVjdCBkbWFfYnVmX2F0dGFjaG1lbnQgKmF0dGFjaCk7DQog
-fTsNCiANCiAvKioNCg0KLS0gDQoyLjUyLjANCg0KX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJv
-LW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8g
-bGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
+From: Leon Romanovsky <leonro@nvidia.com>
+
+Along with renaming the .move_notify() callback, rename the corresponding
+dma-buf core function. This makes the expected behavior clear to exporters
+calling this function.
+
+Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
+---
+ drivers/dma-buf/dma-buf.c                  | 8 ++++----
+ drivers/gpu/drm/amd/amdgpu/amdgpu_object.c | 2 +-
+ drivers/gpu/drm/xe/xe_bo.c                 | 2 +-
+ drivers/iommu/iommufd/selftest.c           | 2 +-
+ drivers/vfio/pci/vfio_pci_dmabuf.c         | 4 ++--
+ include/linux/dma-buf.h                    | 2 +-
+ 6 files changed, 10 insertions(+), 10 deletions(-)
+
+diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
+index 59cc647bf40e..e12db540c413 100644
+--- a/drivers/dma-buf/dma-buf.c
++++ b/drivers/dma-buf/dma-buf.c
+@@ -912,7 +912,7 @@ dma_buf_pin_on_map(struct dma_buf_attachment *attach)
+  * 3. Exporters must hold the dma-buf reservation lock when calling these
+  *    functions:
+  *
+- *     - dma_buf_move_notify()
++ *     - dma_buf_invalidate_mappings()
+  */
+ 
+ /**
+@@ -1247,14 +1247,14 @@ void dma_buf_unmap_attachment_unlocked(struct dma_buf_attachment *attach,
+ EXPORT_SYMBOL_NS_GPL(dma_buf_unmap_attachment_unlocked, "DMA_BUF");
+ 
+ /**
+- * dma_buf_move_notify - notify attachments that DMA-buf is moving
++ * dma_buf_invalidate_mappings - notify attachments that DMA-buf is moving
+  *
+  * @dmabuf:	[in]	buffer which is moving
+  *
+  * Informs all attachments that they need to destroy and recreate all their
+  * mappings.
+  */
+-void dma_buf_move_notify(struct dma_buf *dmabuf)
++void dma_buf_invalidate_mappings(struct dma_buf *dmabuf)
+ {
+ 	struct dma_buf_attachment *attach;
+ 
+@@ -1264,7 +1264,7 @@ void dma_buf_move_notify(struct dma_buf *dmabuf)
+ 		if (attach->importer_ops)
+ 			attach->importer_ops->invalidate_mappings(attach);
+ }
+-EXPORT_SYMBOL_NS_GPL(dma_buf_move_notify, "DMA_BUF");
++EXPORT_SYMBOL_NS_GPL(dma_buf_invalidate_mappings, "DMA_BUF");
+ 
+ /**
+  * DOC: cpu access
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
+index e08f58de4b17..f73dc99d1887 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
+@@ -1270,7 +1270,7 @@ void amdgpu_bo_move_notify(struct ttm_buffer_object *bo,
+ 
+ 	if (abo->tbo.base.dma_buf && !drm_gem_is_imported(&abo->tbo.base) &&
+ 	    old_mem && old_mem->mem_type != TTM_PL_SYSTEM)
+-		dma_buf_move_notify(abo->tbo.base.dma_buf);
++		dma_buf_invalidate_mappings(abo->tbo.base.dma_buf);
+ 
+ 	/* move_notify is called before move happens */
+ 	trace_amdgpu_bo_move(abo, new_mem ? new_mem->mem_type : -1,
+diff --git a/drivers/gpu/drm/xe/xe_bo.c b/drivers/gpu/drm/xe/xe_bo.c
+index bf4ee976b680..7d02cd9a8501 100644
+--- a/drivers/gpu/drm/xe/xe_bo.c
++++ b/drivers/gpu/drm/xe/xe_bo.c
+@@ -819,7 +819,7 @@ static int xe_bo_move_notify(struct xe_bo *bo,
+ 
+ 	/* Don't call move_notify() for imported dma-bufs. */
+ 	if (ttm_bo->base.dma_buf && !ttm_bo->base.import_attach)
+-		dma_buf_move_notify(ttm_bo->base.dma_buf);
++		dma_buf_invalidate_mappings(ttm_bo->base.dma_buf);
+ 
+ 	/*
+ 	 * TTM has already nuked the mmap for us (see ttm_bo_unmap_virtual),
+diff --git a/drivers/iommu/iommufd/selftest.c b/drivers/iommu/iommufd/selftest.c
+index 550ff36dec3a..f60cbd5328cc 100644
+--- a/drivers/iommu/iommufd/selftest.c
++++ b/drivers/iommu/iommufd/selftest.c
+@@ -2081,7 +2081,7 @@ static int iommufd_test_dmabuf_revoke(struct iommufd_ucmd *ucmd, int fd,
+ 	priv = dmabuf->priv;
+ 	dma_resv_lock(dmabuf->resv, NULL);
+ 	priv->revoked = revoked;
+-	dma_buf_move_notify(dmabuf);
++	dma_buf_invalidate_mappings(dmabuf);
+ 	dma_resv_unlock(dmabuf->resv);
+ 
+ err_put:
+diff --git a/drivers/vfio/pci/vfio_pci_dmabuf.c b/drivers/vfio/pci/vfio_pci_dmabuf.c
+index d4d0f7d08c53..362e3d149817 100644
+--- a/drivers/vfio/pci/vfio_pci_dmabuf.c
++++ b/drivers/vfio/pci/vfio_pci_dmabuf.c
+@@ -320,7 +320,7 @@ void vfio_pci_dma_buf_move(struct vfio_pci_core_device *vdev, bool revoked)
+ 		if (priv->revoked != revoked) {
+ 			dma_resv_lock(priv->dmabuf->resv, NULL);
+ 			priv->revoked = revoked;
+-			dma_buf_move_notify(priv->dmabuf);
++			dma_buf_invalidate_mappings(priv->dmabuf);
+ 			dma_resv_unlock(priv->dmabuf->resv);
+ 		}
+ 		fput(priv->dmabuf->file);
+@@ -341,7 +341,7 @@ void vfio_pci_dma_buf_cleanup(struct vfio_pci_core_device *vdev)
+ 		list_del_init(&priv->dmabufs_elm);
+ 		priv->vdev = NULL;
+ 		priv->revoked = true;
+-		dma_buf_move_notify(priv->dmabuf);
++		dma_buf_invalidate_mappings(priv->dmabuf);
+ 		dma_resv_unlock(priv->dmabuf->resv);
+ 		vfio_device_put_registration(&vdev->vdev);
+ 		fput(priv->dmabuf->file);
+diff --git a/include/linux/dma-buf.h b/include/linux/dma-buf.h
+index 1b397635c793..d5c3ce2b3aa4 100644
+--- a/include/linux/dma-buf.h
++++ b/include/linux/dma-buf.h
+@@ -600,7 +600,7 @@ struct sg_table *dma_buf_map_attachment(struct dma_buf_attachment *,
+ 					enum dma_data_direction);
+ void dma_buf_unmap_attachment(struct dma_buf_attachment *, struct sg_table *,
+ 				enum dma_data_direction);
+-void dma_buf_move_notify(struct dma_buf *dma_buf);
++void dma_buf_invalidate_mappings(struct dma_buf *dma_buf);
+ int dma_buf_begin_cpu_access(struct dma_buf *dma_buf,
+ 			     enum dma_data_direction dir);
+ int dma_buf_end_cpu_access(struct dma_buf *dma_buf,
+
+-- 
+2.52.0
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
