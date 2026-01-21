@@ -2,113 +2,110 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qIB/JVTVcGkOaAAAu9opvQ
+	id 6I+fLunYcGmraQAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jan 2026 14:32:04 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jan 2026 14:47:21 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 33530578E7
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jan 2026 14:32:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4774157CEC
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jan 2026 14:47:21 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 45C7940175
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jan 2026 13:31:57 +0000 (UTC)
-Received: from mail-qt1-f181.google.com (mail-qt1-f181.google.com [209.85.160.181])
-	by lists.linaro.org (Postfix) with ESMTPS id 94AC53F6FF
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 21 Jan 2026 13:31:51 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 4DF953F774
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jan 2026 13:47:20 +0000 (UTC)
+Received: from mail-qk1-f169.google.com (mail-qk1-f169.google.com [209.85.222.169])
+	by lists.linaro.org (Postfix) with ESMTPS id 1D6863F70E
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 21 Jan 2026 13:47:14 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=ziepe.ca header.s=google header.b=j3xh5Y8s;
-	spf=pass (lists.linaro.org: domain of jgg@ziepe.ca designates 209.85.160.181 as permitted sender) smtp.mailfrom=jgg@ziepe.ca;
+	dkim=pass header.d=ziepe.ca header.s=google header.b=h6v5+Mbp;
+	spf=pass (lists.linaro.org: domain of jgg@ziepe.ca designates 209.85.222.169 as permitted sender) smtp.mailfrom=jgg@ziepe.ca;
 	dmarc=none
-Received: by mail-qt1-f181.google.com with SMTP id d75a77b69052e-5014e1312c6so32017371cf.2
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 21 Jan 2026 05:31:51 -0800 (PST)
+Received: by mail-qk1-f169.google.com with SMTP id af79cd13be357-8c655e0ee70so695406585a.3
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 21 Jan 2026 05:47:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ziepe.ca; s=google; t=1769002311; x=1769607111; darn=lists.linaro.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=aX294P4TliS2B0BrPhrC1yfpgvWNBReUGID/aL6TSBE=;
-        b=j3xh5Y8sKWbJKDXFbKRorfVa4AZCNWOpRPfnU5+xykvFS57KQr6viaMD5EDJDXA2OM
-         mNdzRPVqOMrmg4llodFuyZqRPNabR5Z4YC+/FVfWFR4jllrPwvbiVa4QzIyiJM00MmOB
-         /wvlaLZCS0S2/Bi7SsuCikkpSybfdZHyLYIBZmnxs/60+uZWKijeYiwPkaZbjKgbCMY6
-         7AzsC7z/6jRENqSluuZoLqOBwAz5naYGcU8x6PHDC23fVNBeT1fTtGj0/+ynWJRIngSE
-         bKRKbnHSl6OxlimOnIf1ywl2JVxofhLvzVdxQ3OSFIHY69e7yf5mc1RG6p+341dYA+Ph
-         OOHg==
+        d=ziepe.ca; s=google; t=1769003234; x=1769608034; darn=lists.linaro.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=yPFd5kAX+x+JPapHwkry8xE9pec/AtWEm0UrVlklyxQ=;
+        b=h6v5+Mbp3Z1rAM4V/z+KdiKC8haVnb9ccm/EKBEbvlQdoNz92FkPIY8470/v3JsEd0
+         WpRd/NoR5nkEqO6SSAMT0kFCyQ2YSjwWgAliuU3grRHhJnHT6k8RgXNfKC1fA8XB2ZVr
+         9vL+w+nk8ZHsdWFrX2p2Hq5Q+pIc24P9dvz0KNWdvoTtrrE+mIiUDtTuXZ9373q7Zq0d
+         +Wa+JgKTpuG7wfy3YZmiB3sO0i7FRxjHwMHH/FjWjZ/ZK6++Ke4ZNWD9PEKYikmNJZGr
+         Sj4+RxN8Pi9CLQTqNKVMMiIW7uBJ1Hrwa283jZdtX0SJgMLFAdwgrroqINhzLWAjfJZU
+         5NUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769002311; x=1769607111;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=aX294P4TliS2B0BrPhrC1yfpgvWNBReUGID/aL6TSBE=;
-        b=seJngBpmGypmRBFXDG0zsBly43T+acmadh0a0Ase0UAXSk3CLybRXW6dYxht4tdGI5
-         eFj+lyrG9OBFose7d55qj++Ptq/Lz19zOMdNEg0g5eEcalODWuOxYUCRVBHhzlcfpqy/
-         4Burs5D97PgwMcNjbzp6SLXkc1HbLT0ziFpMZClJFozSM8BbCM4CPwp/akGrgGXsv6iI
-         R42GoqJAvDuw1MQQSquMWwy+HXKhezMs93GEJbCYdurxtdpS+Uk7oxucUdBvYdfdjd5z
-         Aihh+EkCAFFoCFkbMFyL/uMMPBwDuOWWvIYDSoWhtKk1a0SOOv5U/DZaX8iP4hjqTJFF
-         16GA==
-X-Forwarded-Encrypted: i=1; AJvYcCXIBJjPXi3bAG/mQF08BDUSU5Hl8So2NE3GZbIvq/kvWM1oFj00o8hxkscH6VfGmRKG4NfX4jwPhHsusgZY@lists.linaro.org
-X-Gm-Message-State: AOJu0Yyd4SgHUmxrZhpr1PVoztM7EpJXtrDWPv+VMB5fb8LOlJfFIcCo
-	xtXaLuV7yb2+nmjLG2NEEF24W7WodTh4OunfCK4Jyx0/uj2KXgb1LeWm0o/Djh5PmL8=
-X-Gm-Gg: AZuq6aIMbLWwLP6CpIKRBIo6VlHgwBLPxeluiQzj8JUtHpHu2/xVRXcBYqEvBEyPRnv
-	D99i+L9IjLZPjDDeFctXJntcShXykNNjw/m9CcUcAiaXHbgDWlsIm1t09V2hBTYcjbFotRfHEfW
-	YZKyf+mEGS6IWj9jbVDiumgbgvEMf7gpRSflkHmnKt42MdIpS1ghOm+kv3GJQO8BayapKGQQEdh
-	bDTYmajWKZyUlNAurJVshXc7CtCu/DNlIx02dHmUX5Sc1O/h8HJX4syztrO0rrXstA5FvCvs/wC
-	PavEyrw+zMe8v3RPtz5KWObgMz5LHDxUivP3BPvKkmUbLzpkJw+PGYxO+JS+ej+Cro85LbKQpVP
-	PlxJ6Do/Ry50o6hj1mIixoKNpjCbH73GsCKISH9rEfF69BHqRXGqc3CN+YELP6+Sx2ZLBtP6M1O
-	gXQCPufg8fFTUO8JmYh6puWcwGEHbCZmnMJg/np2bprYxbuTwow8myQRuy/1ODYNcSDVcvdgAjE
-	EEujA==
-X-Received: by 2002:a05:622a:1aa1:b0:4ee:2200:409e with SMTP id d75a77b69052e-502d82772a6mr67009251cf.4.1769002308002;
-        Wed, 21 Jan 2026 05:31:48 -0800 (PST)
+        d=1e100.net; s=20230601; t=1769003234; x=1769608034;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=yPFd5kAX+x+JPapHwkry8xE9pec/AtWEm0UrVlklyxQ=;
+        b=nGRVVC9xY5l6MJ8doi1ipghXi/PlasqRv91GHjMKl5GAU3HiR+lcFBrjpGIO82nByO
+         b7DqqETdeOu98uFXwu5fBAB4tc1WzRbAYTU124s7NGOSbT9Dc5RG3oN2MDC26c8vghxw
+         6jKNqGe6/V1S3oCwFPKrnVbHghyBBUSJc/AEJsOGSN2I7buSW7yGZwMTpDMI697wnUKb
+         2qzioKmnc97uS8guc6GQnEIg8V3GO1zzjWgX35TxQdBchARnVaYoBZc8xMb8YlHcllkO
+         PwjVj6stYUuzlmFlsR0kvxESBD6sCzORUsa09OFEASc6+/FdtyVTWpahdMgQYXO2OBlz
+         78JQ==
+X-Forwarded-Encrypted: i=1; AJvYcCX9o1Nx1nIbox/iYUIlLGmMOTGh/3smnLrJZ6MMFzSLRgDlNUVJE9BSijOHzviO2R0icoE+Q/oGKYn3GrX6@lists.linaro.org
+X-Gm-Message-State: AOJu0Yzaf+wcbTCNLdzc4Zuo/nktU+df0QBps/1Yqj5J4HPnrEiJUTEV
+	8xvv9vxLTT95tZOW4uZgckOPQ7NLgs+shxN5md5Dkc2i7TDqW6OFb0tFYV01TnicL90=
+X-Gm-Gg: AZuq6aLyUvygECkf8LExFKLLWPglkvC2+FvwiWKtdXMLo9FMCpNAHnW/d/Lg1RBAdJa
+	n4LcJDoLchFqu6Fk6ky4v41uZkxxDxsoHExwcQ8gUC1glLiLfdwxmTqKThvi79tFxEUoq/TGsEj
+	Km7DrjIH/aijwJK2VHUZU9cLfdsjg++kWllZQdyNCdzzziKxJpvfwdZVheyDMA/w4CP/3MuH+C5
+	2wGgEWF7SK1cy2TVomrLW6wccb428w5xOMZJyquFNLrnIuptN3NhWiT6Jf4oVQ3bpd6xkinic+e
+	hONcWbgt4ETzIVSbakBBMZN5a/V/Pw3mEvcz6KJZILh4u0BYFVIatJXq/0WlmFsFWEMDnc/A10G
+	GXZfN1WIgEVj1+ibKwKNiOeOooCe9VqlHzhhH7FN/KydkrSxDPBNwfFEIkILA0b96jTgUolThMJ
+	v7I0z3+iyFE2tQ6zBIj8dQm7Gajb8R/HMgLRCtrFi8dtASTAsdBLy4MvoSpzB6Bv6+qjI7XbYqB
+	lXgxA==
+X-Received: by 2002:a05:620a:4003:b0:8b2:f090:b167 with SMTP id af79cd13be357-8c6ccdbf81fmr639187685a.24.1769003233554;
+        Wed, 21 Jan 2026 05:47:13 -0800 (PST)
 Received: from ziepe.ca (hlfxns017vw-142-162-112-119.dhcp-dynamic.fibreop.ns.bellaliant.net. [142.162.112.119])
-        by smtp.gmail.com with ESMTPSA id d75a77b69052e-502a1f1c1c4sm108692291cf.33.2026.01.21.05.31.47
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-8c6a71ab288sm1307247385a.6.2026.01.21.05.47.12
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 21 Jan 2026 05:31:47 -0800 (PST)
+        Wed, 21 Jan 2026 05:47:12 -0800 (PST)
 Received: from jgg by wakko with local (Exim 4.97)
 	(envelope-from <jgg@ziepe.ca>)
-	id 1viYJG-00000006Dbm-2x5v;
-	Wed, 21 Jan 2026 09:31:46 -0400
-Date: Wed, 21 Jan 2026 09:31:46 -0400
+	id 1viYYC-00000006Dum-1GTZ;
+	Wed, 21 Jan 2026 09:47:12 -0400
+Date: Wed, 21 Jan 2026 09:47:12 -0400
 From: Jason Gunthorpe <jgg@ziepe.ca>
-To: Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>
-Message-ID: <20260121133146.GY961572@ziepe.ca>
-References: <20260120-dmabuf-revoke-v3-0-b7e0b07b8214@nvidia.com>
- <20260120-dmabuf-revoke-v3-6-b7e0b07b8214@nvidia.com>
- <b129f0c1-b61e-4efb-9e25-d8cdadaca1b3@amd.com>
+To: Leon Romanovsky <leon@kernel.org>
+Message-ID: <20260121134712.GZ961572@ziepe.ca>
+References: <20260121-dmabuf-revoke-v4-0-d311cbc8633d@nvidia.com>
+ <20260121-dmabuf-revoke-v4-8-d311cbc8633d@nvidia.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <b129f0c1-b61e-4efb-9e25-d8cdadaca1b3@amd.com>
+In-Reply-To: <20260121-dmabuf-revoke-v4-8-d311cbc8633d@nvidia.com>
 X-Spamd-Bar: ---
-Message-ID-Hash: RCBBDHKCJZNTXGPAVGF4NQVXRBFLCZOW
-X-Message-ID-Hash: RCBBDHKCJZNTXGPAVGF4NQVXRBFLCZOW
+Message-ID-Hash: 6WHVQLC62BPKXDHQOVMTNFAMTNBNAOXZ
+X-Message-ID-Hash: 6WHVQLC62BPKXDHQOVMTNFAMTNBNAOXZ
 X-MailFrom: jgg@ziepe.ca
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Leon Romanovsky <leon@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Alex Deucher <alexander.deucher@amd.com>, Simona Vetter <simona@ffwll.ch>, Gerd Hoffmann <kraxel@redhat.com>, Dmitry Osipenko <dmitry.osipenko@collabora.com>, Gurchetan Singh <gurchetansingh@chromium.org>, Chia-I Wu <olvaffe@gmail.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Lucas De Marchi <lucas.demarchi@intel.com>, Thomas =?utf-8?Q?Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Kevin Tian <kevin.tian@intel.com>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, Felix Kuehling <Felix.Kuehling@amd.com>, Alex Williamson <alex@shazbot.org>, Ankit Agrawal <ankita@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kerne
- l@vger.kernel.org, amd-gfx@lists.freedesktop.org, virtualization@lists.linux.dev, intel-xe@lists.freedesktop.org, linux-rdma@vger.kernel.org, iommu@lists.linux.dev, kvm@vger.kernel.org
+CC: Sumit Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Alex Deucher <alexander.deucher@amd.com>, Simona Vetter <simona@ffwll.ch>, Gerd Hoffmann <kraxel@redhat.com>, Dmitry Osipenko <dmitry.osipenko@collabora.com>, Gurchetan Singh <gurchetansingh@chromium.org>, Chia-I Wu <olvaffe@gmail.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Lucas De Marchi <lucas.demarchi@intel.com>, Thomas =?utf-8?Q?Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Kevin Tian <kevin.tian@intel.com>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, Felix Kuehling <Felix.Kuehling@amd.com>, Alex Williamson <alex@shazbot.org>, Ankit Agrawal <ankita@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists
+ .linaro.org, linux-kernel@vger.kernel.org, amd-gfx@lists.freedesktop.org, virtualization@lists.linux.dev, intel-xe@lists.freedesktop.org, linux-rdma@vger.kernel.org, iommu@lists.linux.dev, kvm@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3 6/7] vfio: Wait for dma-buf invalidation to complete
+Subject: [Linaro-mm-sig] Re: [PATCH v4 8/8] vfio: Validate dma-buf revocation semantics
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RCBBDHKCJZNTXGPAVGF4NQVXRBFLCZOW/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6WHVQLC62BPKXDHQOVMTNFAMTNBNAOXZ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-X-Spamd-Result: default: False [0.59 / 15.00];
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [0.49 / 15.00];
 	R_DKIM_REJECT(1.00)[ziepe.ca:s=google];
-	R_SPF_ALLOW(-0.20)[+mx];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	DMARC_NA(0.00)[ziepe.ca];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	ARC_NA(0.00)[];
-	FREEMAIL_CC(0.00)[kernel.org,linaro.org,amd.com,ffwll.ch,redhat.com,collabora.com,chromium.org,gmail.com,linux.intel.com,suse.de,intel.com,8bytes.org,arm.com,shazbot.org,nvidia.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.linux.dev];
+	FREEMAIL_CC(0.00)[linaro.org,amd.com,ffwll.ch,redhat.com,collabora.com,chromium.org,gmail.com,linux.intel.com,kernel.org,suse.de,intel.com,8bytes.org,arm.com,shazbot.org,nvidia.com,vger.kernel.org,lists.freedesktop.org,lists,lists.linux.dev];
 	RCPT_COUNT_TWELVE(0.00)[33];
 	MIME_TRACE(0.00)[0:+];
 	DKIM_TRACE(0.00)[ziepe.ca:-];
@@ -122,38 +119,44 @@ X-Spamd-Result: default: False [0.59 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,lists.linaro.org:rdns,lists.linaro.org:helo,amd.com:email,ziepe.ca:mid,linaro.org:email]
-X-Rspamd-Queue-Id: 33530578E7
+	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,ziepe.ca:mid,linaro.org:email]
+X-Rspamd-Queue-Id: 4774157CEC
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-T24gV2VkLCBKYW4gMjEsIDIwMjYgYXQgMTA6MjA6NTFBTSArMDEwMCwgQ2hyaXN0aWFuIEvDtm5p
-ZyB3cm90ZToNCj4gT24gMS8yMC8yNiAxNTowNywgTGVvbiBSb21hbm92c2t5IHdyb3RlOg0KPiA+
-IEZyb206IExlb24gUm9tYW5vdnNreSA8bGVvbnJvQG52aWRpYS5jb20+DQo+ID4gDQo+ID4gZG1h
-LWJ1ZiBpbnZhbGlkYXRpb24gaXMgcGVyZm9ybWVkIGFzeW5jaHJvbm91c2x5IGJ5IGhhcmR3YXJl
-LCBzbyBWRklPIG11c3QNCj4gPiB3YWl0IHVudGlsIGFsbCBhZmZlY3RlZCBvYmplY3RzIGhhdmUg
-YmVlbiBmdWxseSBpbnZhbGlkYXRlZC4NCj4gPiANCj4gPiBGaXhlczogNWQ3NDc4MWViYzg2ICgi
-dmZpby9wY2k6IEFkZCBkbWEtYnVmIGV4cG9ydCBzdXBwb3J0IGZvciBNTUlPIHJlZ2lvbnMiKQ0K
-PiA+IFNpZ25lZC1vZmYtYnk6IExlb24gUm9tYW5vdnNreSA8bGVvbnJvQG52aWRpYS5jb20+DQo+
-IA0KPiBSZXZpZXdlZC1ieTogQ2hyaXN0aWFuIEvDtm5pZyA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQu
-Y29tPg0KPiANCj4gUGxlYXNlIGFsc28ga2VlcCBpbiBtaW5kIHRoYXQgdGhlIHdoaWxlIHRoaXMg
-d2FpdCBmb3IgYWxsIGZlbmNlcyBmb3INCj4gY29ycmVjdG5lc3MgeW91IGFsc28gbmVlZCB0byBr
-ZWVwIHRoZSBtYXBwaW5nIHZhbGlkIHVudGlsDQo+IGRtYV9idWZfdW5tYXBfYXR0YWNobWVudCgp
-IHdhcyBjYWxsZWQuDQoNCkNhbiB5b3UgZWxhYm9yYXRlIG9uIHRoaXMgbW9yZT8NCg0KSSB0aGlu
-ayB3aGF0IHdlIHdhbnQgZm9yIGRtYV9idWZfYXR0YWNoX3Jldm9jYWJsZSgpIGlzIHRoZSBzdHJv
-bmcNCmd1YXJlbnRlZSB0aGF0IHRoZSBpbXBvcnRlciBzdG9wcyBkb2luZyBhbGwgYWNjZXNzIHRv
-IHRoZSBtZW1vcnkgb25jZQ0KdGhpcyBzZXF1ZW5jZSBpcyBjb21wbGV0ZWQgYW5kIHRoZSBleHBv
-cnRlciBjYW4gcmVseSBvbiBpdC4gSSBkb24ndA0KdGhpbmsgdGhpcyB3b3JrcyBhbnkgb3RoZXIg
-d2F5Lg0KDQpUaGlzIGlzIGFscmVhZHkgdHJ1ZSBmb3IgZHluYW1pYyBtb3ZlIGNhcGFibGUgaW1w
-b3J0ZXJzLCByaWdodD8NCg0KRm9yIHRoZSBub24tcmV2b2NhYmxlIGltcG9ydGVycyBJIGNhbiBz
-ZWUgdGhlIGludmFsaWRhdGUgc2VxdWVuY2UgaXMNCm1vcmUgb2YgYW4gYWR2aXNvcnkgdGhpbmcg
-YW5kIHlvdSBjYW4ndCBrbm93IHRoZSBhY2Nlc3MgaXMgZ29uZSB1bnRpbA0KdGhlIG1hcCBpcyB1
-bmRvbmUuDQoNCj4gSW4gb3RoZXIgd29yZHMgeW91IGNhbiBvbmx5IHJlZGlyZWN0IHRoZSBETUEt
-YWRkcmVzc2VzIHByZXZpb3VzbHkNCj4gZ2l2ZW4gb3V0IGludG8gbmlydmFuYSAob3IgYSBkdW1t
-eSBtZW1vcnkgb3Igc2ltaWxhciksIGJ1dCB5b3Ugc3RpbGwNCj4gbmVlZCB0byBhdm9pZCByZS11
-c2luZyB0aGVtIGZvciBzb21ldGhpbmcgZWxzZS4NCg0KRG9lcyBhbnkgZHJpdmVyIGRvIHRoaXM/
-IElmIHlvdSB1bmxvYWQvcmVsb2FkIGEgR1BVIGRyaXZlciBpdCBpcw0KZ29pbmcgdG8gcmUtdXNl
-IHRoZSBhZGRyZXNzZXMgaGFuZGVkIG91dD8NCg0KSmFzb24NCl9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0t
-IGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVt
-YWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+On Wed, Jan 21, 2026 at 02:59:16PM +0200, Leon Romanovsky wrote:
+> From: Leon Romanovsky <leonro@nvidia.com>
+> 
+> Use the new dma_buf_attach_revocable() helper to restrict attachments to
+> importers that support mapping invalidation.
+> 
+> Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
+> ---
+>  drivers/vfio/pci/vfio_pci_dmabuf.c | 3 +++
+>  1 file changed, 3 insertions(+)
+> 
+> diff --git a/drivers/vfio/pci/vfio_pci_dmabuf.c b/drivers/vfio/pci/vfio_pci_dmabuf.c
+> index 5fceefc40e27..85056a5a3faf 100644
+> --- a/drivers/vfio/pci/vfio_pci_dmabuf.c
+> +++ b/drivers/vfio/pci/vfio_pci_dmabuf.c
+> @@ -31,6 +31,9 @@ static int vfio_pci_dma_buf_attach(struct dma_buf *dmabuf,
+>  	if (priv->revoked)
+>  		return -ENODEV;
+>  
+> +	if (!dma_buf_attach_revocable(attachment))
+> +		return -EOPNOTSUPP;
+> +
+>  	return 0;
+>  }
+
+We need to push an urgent -rc fix to implement a pin function here
+that always fails. That was missed and it means things like rdma can
+import vfio when the intention was to block that. It would be bad for
+that uAPI mistake to reach a released kernel.
+
+It's tricky that NULL pin ops means "I support pin" :|
+
+Jason
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
