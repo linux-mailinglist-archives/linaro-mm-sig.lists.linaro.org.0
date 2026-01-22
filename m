@@ -2,45 +2,45 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cM1pIRkN4WnoogAAu9opvQ
+	id aHNTFx8N4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:23:53 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:23:59 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B2B1411AC2
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:23:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F31AA411AD0
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:23:58 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3260443BB1
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:23:52 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 27D6E3F830
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 22 Jan 2026 16:10:42 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id AD2064141E
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:23:57 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+	by lists.linaro.org (Postfix) with ESMTPS id C2E603F830
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 22 Jan 2026 16:10:44 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=uTGUpU3Z;
-	spf=pass (lists.linaro.org: domain of thierry.reding@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=thierry.reding@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=aNmNHAwh;
+	spf=pass (lists.linaro.org: domain of thierry.reding@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=thierry.reding@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id 9B48C44404;
-	Thu, 22 Jan 2026 16:10:41 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0395BC2BCAF;
-	Thu, 22 Jan 2026 16:10:40 +0000 (UTC)
+	by tor.source.kernel.org (Postfix) with ESMTP id 82E8F60130;
+	Thu, 22 Jan 2026 16:10:44 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D3D3AC116C6;
+	Thu, 22 Jan 2026 16:10:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1769098241;
-	bh=03W+miu9snDAt7mFvXpzGvadHlBQWH/FakrfAMWKksA=;
+	s=k20201202; t=1769098244;
+	bh=QijF92eYDRa+yIK2vhm3tFsLRnjMqoXf04XxHtZ1MqA=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=uTGUpU3ZmFiFvnjDXKELVR1KdEj2L7iy6TSUNG9eYUXeIteqryu0VBNTFn9B3W1a6
-	 hjZGmjAuLTXkBVKn+uWqQfrFkscEMjBipQgzR0Ic/gDLWHXfwb7GtnI5Yp13zlzMtJ
-	 i5uKRoBz8IAsSCEkbnweSF+AcfjkxnaOA0Z/KKTuAfgiYJs/Azupp1VUfCSl7txw8T
-	 BfIVNQerwdBwKwDYx1V85Fps4MFUwOcOWC94GZit9kYDF+vW1CpUAMjkmdn29+RyHP
-	 6NnTuC97wKAoi5VkqI6OFrEpyv3EcC7sGn1pL4QV+e7KOvNG3Kj0tftF19Jw8DTjTT
-	 xvpJA4fIdhQdQ==
+	b=aNmNHAwh6+Ee4JCUL4XYjXlSPA2GuhsMMlfHRnFJ6eE5hI52R5FhC4VvVlVsVK+JO
+	 lSQ5dkSapp/JDxlyK2cEO8GQZP7Q/9+d4PHDlMoUX3+KX2V/V7GN+pFy+nXWOnPAjB
+	 U5/uIxdgKucOEy9mOvYK6rmUaFPTD88lcW7WPzYuGyyQibKL/6Mn9MKWAfFdAM8lR8
+	 t1wh6jYr2oHCbwVJ5PEK7wNKP1q36BAZHinnOMwwLtL8Ax95HNWPVSne5iLwxdxxD/
+	 26apQxbErgrDUBUos5ALL/Cc5k44dWIBDqG3h0M/k/DTF8X3yvxvmRlpzUN4w9Z2Ai
+	 vYcGFh2zIDG9Q==
 From: Thierry Reding <thierry.reding@kernel.org>
 To: Thierry Reding <thierry.reding@kernel.org>,
 	David Airlie <airlied@gmail.com>,
 	Simona Vetter <simona@ffwll.ch>,
 	Sumit Semwal <sumit.semwal@linaro.org>
-Date: Thu, 22 Jan 2026 17:10:08 +0100
-Message-ID: <20260122161009.3865888-10-thierry.reding@kernel.org>
+Date: Thu, 22 Jan 2026 17:10:09 +0100
+Message-ID: <20260122161009.3865888-11-thierry.reding@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260122161009.3865888-1-thierry.reding@kernel.org>
 References: <20260122161009.3865888-1-thierry.reding@kernel.org>
@@ -49,15 +49,15 @@ X-Spamd-Bar: --
 X-MailFrom: thierry.reding@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: BDG7G3ZBHZPL24TU3R45VWNC5IVMDVM3
-X-Message-ID-Hash: BDG7G3ZBHZPL24TU3R45VWNC5IVMDVM3
+Message-ID-Hash: EULC5PTBN6NW6HJ4PIUK6BO5CQP5YEVK
+X-Message-ID-Hash: EULC5PTBN6NW6HJ4PIUK6BO5CQP5YEVK
 X-Mailman-Approved-At: Thu, 16 Apr 2026 16:12:27 +0000
 CC: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T . J . Mercier" <tjmercier@google.com>, Andrew Morton <akpm@linux-foundation.org>, David Hildenbrand <david@redhat.com>, Mike Rapoport <rppt@kernel.org>, Sumit Garg <sumit.garg@kernel.org>, dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, linux-tegra@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-mm@kvack.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v2 09/10] arm64: tegra: Hook up VPR to host1x
+Subject: [Linaro-mm-sig] [PATCH v2 10/10] arm64: tegra: Hook up VPR to the GPU
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/BDG7G3ZBHZPL24TU3R45VWNC5IVMDVM3/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EULC5PTBN6NW6HJ4PIUK6BO5CQP5YEVK/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -87,53 +87,44 @@ X-Spamd-Result: default: False [5.49 / 15.00];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:-];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_PROHIBIT(0.00)[0.236.52.192:email];
+	DBL_PROHIBIT(0.00)[1.3.102.64:email];
 	FROM_NEQ_ENVFROM(0.00)[thierry.reding@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.415];
+	NEURAL_HAM(-0.00)[-0.432];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig,dt];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email,0.234.17.224:email]
-X-Rspamd-Queue-Id: 1B2B1411AC2
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,nvidia.com:email,lists.linaro.org:helo,lists.linaro.org:rdns,2.98.90.0:email]
+X-Rspamd-Queue-Id: F31AA411AD0
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 From: Thierry Reding <treding@nvidia.com>
 
-The host1x needs access to the VPR region, so make sure to reference it
-via the memory-region property.
+The GPU needs to be idled before the VPR can be resized and unidled
+afterwards. Associate it with the VPR using the standard memory-region
+device tree property.
 
 Signed-off-by: Thierry Reding <treding@nvidia.com>
 ---
- arch/arm64/boot/dts/nvidia/tegra234.dtsi | 6 ++++++
- 1 file changed, 6 insertions(+)
+ arch/arm64/boot/dts/nvidia/tegra234.dtsi | 3 +++
+ 1 file changed, 3 insertions(+)
 
 diff --git a/arch/arm64/boot/dts/nvidia/tegra234.dtsi b/arch/arm64/boot/dts/nvidia/tegra234.dtsi
-index 5f67d9b57226..cfffa4f2f196 100644
+index cfffa4f2f196..21db5d107bc4 100644
 --- a/arch/arm64/boot/dts/nvidia/tegra234.dtsi
 +++ b/arch/arm64/boot/dts/nvidia/tegra234.dtsi
-@@ -4474,6 +4474,9 @@ vic@15340000 {
- 				interconnect-names = "dma-mem", "write";
- 				iommus = <&smmu_niso1 TEGRA234_SID_VIC>;
- 				dma-coherent;
+@@ -5338,6 +5338,9 @@ gpu@17000000 {
+ 			 <&bpmp TEGRA234_CLK_GPC1CLK>;
+ 		clock-names = "sys", "gpc0", "gpc1";
+ 		resets = <&bpmp TEGRA234_RESET_GPU>;
 +
-+				memory-region = <&vpr>;
-+				memory-region-names = "protected";
- 			};
++		memory-region-names = "protected";
++		memory-region = <&vpr>;
+ 	};
  
- 			nvdec@15480000 {
-@@ -4492,6 +4495,9 @@ nvdec@15480000 {
- 				iommus = <&smmu_niso1 TEGRA234_SID_NVDEC>;
- 				dma-coherent;
- 
-+				memory-region = <&vpr>;
-+				memory-region-names = "protected";
-+
- 				nvidia,memory-controller = <&mc>;
- 
- 				/*
+ 	sram@40000000 {
 -- 
 2.52.0
 
