@@ -2,87 +2,193 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id IP/SIfMP4WnoogAAu9opvQ
+	id cK4LNfsP4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:36:03 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:36:11 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 476A0411BEB
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:36:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2E115411BF2
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:36:11 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 16C474410D
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:36:02 +0000 (UTC)
-Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
-	by lists.linaro.org (Postfix) with ESMTPS id 617333F758
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 26 Jan 2026 20:54:07 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3B55A44370
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:36:10 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.17])
+	by lists.linaro.org (Postfix) with ESMTPS id C170F3F7C4
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 27 Jan 2026 06:03:57 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=google.com header.s=20230601 header.b=cx3BsTMz;
-	spf=pass (lists.linaro.org: domain of praan@google.com designates 209.85.214.179 as permitted sender) smtp.mailfrom=praan@google.com;
-	dmarc=pass (policy=reject) header.from=google.com
-Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-2a0d06cfa93so3235ad.1
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 26 Jan 2026 12:54:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1769460846; x=1770065646; darn=lists.linaro.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=Hzbl67LvVO3G9O2kTwPWCnjF6/j6A2BV5AiFShhPhBU=;
-        b=cx3BsTMzQT1W5U2Kd6mqdugzPzE7oXnuVn4x2c+EDCok+SEkESypI6owHKiR20QGAl
-         D6PgcaTpT94u7EQKw1adBD/ZBoXePRqtF5L0jZUwlw1MpIkGD9BsMv2CbUdjg9KS8+4A
-         a9kXk5G4bt2fM/qz7CgIQYTMGeLWu2kG6wn4yfEq75Y12HLqGUrHZ9x2nTgVW+wY5x/X
-         00s/w6Sg3YPG/nRxjFxRw5mMd6WlP/XeSxg8UK5JOqgRoETPW0UDGj0rPriLhZdsSUrg
-         iuMJiFJ+EDwJ2s4ucZlP5j8DBodIrlTzYwVNqEkuB2ZiHfhglTqhZpFrpaERzl0k621s
-         MUyw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769460846; x=1770065646;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Hzbl67LvVO3G9O2kTwPWCnjF6/j6A2BV5AiFShhPhBU=;
-        b=wMyeriTz6U63OnULPHlIG7kw29aA+i/tBAvqGBNaFWEz1LNjWvbTrhkwil5A9+eWnB
-         VnFiDVblPfAMnIR8dNZeQroDh6/RxtrlalHOe5rFBgmqKxECu1qm7YcFxnaShBD/jPrs
-         x/EWQMOjatUrXquhkQjTlHRz4lf5iC0Ba0mqjy1FWYqVt9dmdFf75jWLzBve9jFdj52d
-         rN5snvOZ9RYRWPKOoEGowIh0QblKiG7rnx3M9T8eQFo/zd6m3cLVutGFeMDa2NWvMr+T
-         /j8YxArAbgMwxQCN2Yp5oAt4Xp60vu/YfwosOHa+X1C/nZJgpGTV7Sw1nshCsFyCiFKu
-         ntiA==
-X-Forwarded-Encrypted: i=1; AJvYcCX3BX0E9vO9TSG8FwDCBN3N3S9NRg9k9HYHeyqdAFr1qYYL/0yp8AMKIm/ExkERlngWbThz5EhBAVdY+gRA@lists.linaro.org
-X-Gm-Message-State: AOJu0YxJGLQAgRQXgqYTNR5oqN5xbA3zZQS7IjOVXRjZ7QqE7QhANlsl
-	yTGH3PZGNaOQvBJcBXTdpC2HT1T0v7ZTD8luRMsUAz0zXDDuAuDaWhRDUcxY9ofyaQ==
-X-Gm-Gg: AZuq6aJMiPYSUJOW/ND7l6RPseP61bgg7HgKyH+Pjnq1gIEGTbyrwIpsceSsvOZVbFM
-	v9ATYRvgpLSTi2XzFmce5Y3Viv6N57vVgRSRZYzGfx2pdTxtFnXe3KZJyhkW757UdHqlbu1lKBU
-	m2kr4u0meGRklUoCuhzuKzdaPP+uiRiNkiqLHMmiiKWGpVWDGa88r+uFJeS9GkhfD3fzUigi5iJ
-	TVugOdGP909aF3tJMNs3MOQGreP125hRcOW8FfwEndAJQE0zX6ex6RdVTURAtW/3x/YIdPvFG2P
-	CIfbmxZJFIfxhoy2ScQf0R5LF7BSVBVA/hEJ9Gd0F+IxgueT9MzzEXXYZRmkHBjJ4J3c1bQARDt
-	Mz6lawXZuphqsoJYGHZEFHmBCQM8Hw2B5ooXX+JNXEGIwa4/HGJAiyKRmQ1SqzSKAaTG1OL5Max
-	2YbwKTfOEHTk3LHkQqOQyI0lzBsCiuQOXtm4jXCpthubAamUZr
-X-Received: by 2002:a17:903:1cc:b0:295:5405:46be with SMTP id d9443c01a7336-2a8447fe3b6mr3809735ad.1.1769460846094;
-        Mon, 26 Jan 2026 12:54:06 -0800 (PST)
-Received: from google.com (222.245.187.35.bc.googleusercontent.com. [35.187.245.222])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a802fda160sm94991165ad.88.2026.01.26.12.53.59
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 26 Jan 2026 12:54:05 -0800 (PST)
-Date: Mon, 26 Jan 2026 20:53:57 +0000
-From: Pranjal Shrivastava <praan@google.com>
-To: Leon Romanovsky <leon@kernel.org>
-Message-ID: <aXfUZcSEr9N18o6w@google.com>
-References: <20260124-dmabuf-revoke-v5-0-f98fca917e96@nvidia.com>
- <20260124-dmabuf-revoke-v5-4-f98fca917e96@nvidia.com>
+	dkim=pass header.d=intel.com header.s=Intel header.b=RfJ5WYh2;
+	spf=pass (lists.linaro.org: domain of vivek.kasireddy@intel.com designates 192.198.163.17 as permitted sender) smtp.mailfrom=vivek.kasireddy@intel.com;
+	arc=pass ("microsoft.com:s=arcselector10001:i=1");
+	dmarc=pass (policy=none) header.from=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1769493838; x=1801029838;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=i0ivp9oEqDDj940ahqY0QQlMcyhQbf18QE+cG3c7H3Q=;
+  b=RfJ5WYh2t9ShtNSIlu1XGDFui7/zatSTpsmZ7SIhfXfFbad4Br+7WxiC
+   S928DrKMAQSqc803zaiQ47WWTrLi4iVXLO7tvULifrdkbrhNMheOSgmRy
+   xH3kdAa6xXeYota0TLc1CzM8+KoZs4cLWKX6dNtES9ATSNp+apdicCTbo
+   6qp62kfeFbkLzCpGIFhVV4TrTvoaC69rEB2+1gmPo23PTsco+sQiPqsFe
+   s+a4/O4SKYz5m9xURYv9PPx+ko8CpQ/C1N3Bq/M0Vcm3SKjso/RZ3TSRw
+   /D+yasJI5L6vQGGdFJeyDLNZqbI1a/pyryjD7VzwsbwFwxi3p+VGnt32w
+   Q==;
+X-CSE-ConnectionGUID: 1qMSXlJUTD24NgX5PNdq/g==
+X-CSE-MsgGUID: FjEwm2qXQuKUBLADg1f38w==
+X-IronPort-AV: E=McAfee;i="6800,10657,11683"; a="70582265"
+X-IronPort-AV: E=Sophos;i="6.21,256,1763452800";
+   d="scan'208";a="70582265"
+Received: from orviesa010.jf.intel.com ([10.64.159.150])
+  by fmvoesa111.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Jan 2026 22:03:57 -0800
+X-CSE-ConnectionGUID: WmNMHBLuQIC0gqLA4+/XrA==
+X-CSE-MsgGUID: L4COUfupTKC4V8M1ZLQhfg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.21,256,1763452800";
+   d="scan'208";a="207119481"
+Received: from fmsmsx902.amr.corp.intel.com ([10.18.126.91])
+  by orviesa010.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Jan 2026 22:03:56 -0800
+Received: from FMSMSX902.amr.corp.intel.com (10.18.126.91) by
+ fmsmsx902.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.35; Mon, 26 Jan 2026 22:03:55 -0800
+Received: from fmsedg902.ED.cps.intel.com (10.1.192.144) by
+ FMSMSX902.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.35 via Frontend Transport; Mon, 26 Jan 2026 22:03:55 -0800
+Received: from MW6PR02CU001.outbound.protection.outlook.com (52.101.48.10) by
+ edgegateway.intel.com (192.55.55.82) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.35; Mon, 26 Jan 2026 22:03:54 -0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=cueBADZK8Y7RUzsu6V0eGsvTu2D3vQAyhY35xTvogdYLlSU+/opQC+EUkJV/stZXDIV5KQmq6Tp46jWAY1CUbWHy1PG2mMxzmFm3cu4agkfUK8NQ/9dLyPNKT5ksf+k0MDfJ++tJ8zRQq1WWtWOGKMtrQU5RUbGn3f1UGQfaa9oeUkh8zeIyXw2tnxhLiAF3hnWsQCDaZ9PNE0aYruIbBH8n3QDH76QNIm6JcMz42C5Z6S7EpEqdUvbXyIj82ILNUk4+pOS0j/bTbS8YAVERZ565Tv3Se3xxm/J3rK3qU2kwzL5uQztO9yEZdV3oyZ/ecSUZxTqZKqvL6vT3eJNXAg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=BJZeYEP0mo5OcvPE7AuZlH/yDn+SET/V5lvZWu5sP7g=;
+ b=vYVs6LlqjTcMb3zq4iVmMAnJhRim//M4sERFuAYK9q4p++GV1NPOpH1+ZFV8k+okXXxvN7Miykhzp56Avx7ce3XZmCcyR1iv3xabicm5blir6cOlIdljBF7a50AftjmcbEZ6JokRuT3PZThzgOELzot+A48dk84SW0wrw1bPqG1dMs0A7WlfMmIwcrwiclMAIYnJ/IaJhTgdFwpvwXdyoJFp3FXRG/kIaNmEX1oEAJqkzGCYGrjw1gYuDQG0l3BDZPTUM+GLFu9YrDq7Ue3oNbIr2p5LtNzR6wNfwjv9tKvP7I+i36yzOZKDWO+dWsrjPrzeY4NfYDnNK6VzG/GIVg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Received: from IA0PR11MB7185.namprd11.prod.outlook.com (2603:10b6:208:432::20)
+ by DM3PPFAB693A2AC.namprd11.prod.outlook.com (2603:10b6:f:fc00::f43) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9542.14; Tue, 27 Jan
+ 2026 06:03:50 +0000
+Received: from IA0PR11MB7185.namprd11.prod.outlook.com
+ ([fe80::9f37:cb81:5463:300e]) by IA0PR11MB7185.namprd11.prod.outlook.com
+ ([fe80::9f37:cb81:5463:300e%5]) with mapi id 15.20.9564.006; Tue, 27 Jan 2026
+ 06:03:50 +0000
+From: "Kasireddy, Vivek" <vivek.kasireddy@intel.com>
+To: Jason Gunthorpe <jgg@nvidia.com>
+Thread-Topic: [RFC v2 0/8] dma-buf: Add support for mapping dmabufs via
+ interconnects
+Thread-Index: AQHcRvz4E9hXyspRBUGk9qxvPpLsUbTYR6AAgAFminCAAQoeAIAAh4hggIWnr4CAAfJrYA==
+Date: Tue, 27 Jan 2026 06:03:50 +0000
+Message-ID: <IA0PR11MB71850C389E26BC1AE7453552F890A@IA0PR11MB7185.namprd11.prod.outlook.com>
+References: <20251027044712.1676175-1-vivek.kasireddy@intel.com>
+ <20251029002726.GA1092494@nvidia.com>
+ <IA0PR11MB7185E85E1CFAA04485768E30F8FBA@IA0PR11MB7185.namprd11.prod.outlook.com>
+ <20251030134310.GR1018328@nvidia.com>
+ <CH3PR11MB71772DF7DC3776F838AA8CC8F8F8A@CH3PR11MB7177.namprd11.prod.outlook.com>
+ <20260123225057.GH1134360@nvidia.com>
+In-Reply-To: <20260123225057.GH1134360@nvidia.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: IA0PR11MB7185:EE_|DM3PPFAB693A2AC:EE_
+x-ms-office365-filtering-correlation-id: 248d0f0f-e997-45c5-3efb-08de5d69d7d8
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;ARA:13230040|376014|7416014|366016|1800799024|38070700021;
+x-microsoft-antispam-message-info: =?iso-8859-1?Q?u1GjatsDieemRWnP/1yG2QlE1mdXDZOxRVqXB2VulALoytmGwQUrfeBQe3?=
+ =?iso-8859-1?Q?RMRHDPP3rRlNz0CWae1KTPqA1PWfeAmPjSxnYEtVlm+hpIrj+J4WE2jsOC?=
+ =?iso-8859-1?Q?36H1TO6Wa4maDA/w+SCj3CWoH465aWYzPdRjmxxC5CUB2C7SjiWPz/bzHz?=
+ =?iso-8859-1?Q?SsvT0BXBmaqcEycRKEEBfr6u8d8xsxUtVGowFCFXTWYOkQ66+J/mr00Yxk?=
+ =?iso-8859-1?Q?5QRUucviFoSzRPGYPlwzGvpX1WNAdWQtcEN7WkU8KVfbXqdxRyehVwxEVb?=
+ =?iso-8859-1?Q?dOaHNSJtdCP66uqj+razLv1XZVhQvDvfpYnsBYZL5bpacLsMspd2UMVZ/t?=
+ =?iso-8859-1?Q?UbJYK80SoxjFbTl/Z6nBXrB8eTmw8PYdiEn/6beUwwoiUb2Yj05TerBTLI?=
+ =?iso-8859-1?Q?8i2s7xi2kr+fHAKT98APP3PilFGjETtVGmHD5/d/06MNXCos/3oCjZb/fy?=
+ =?iso-8859-1?Q?ZpFIGgUjyN5IU5I2yg96QSL2gNot+ndGqvBy//MZHtktGXQCK1K+0YhwcT?=
+ =?iso-8859-1?Q?IGoIHFqujuEl+Y0zk1lDv+S7uE6J7rtuXZfl9FaktF+nGJXgJiaUhwrHU7?=
+ =?iso-8859-1?Q?ymMmMmkflavaJHcvvOdMGlYlAV7xyVn5VoK6B9U9Gyxx+0UHSquXJJXaXv?=
+ =?iso-8859-1?Q?szaO38tVROuKkkprc+yTDTafg9MLOcqSvusgX4L/XZ611FG+EJ/xEGZ725?=
+ =?iso-8859-1?Q?04gvykyMVdiXW8cYLsE6m+hu9aDqxPGpKl2zQcytgJlEwT1op/8zjF8KQs?=
+ =?iso-8859-1?Q?IOs8i13zWHerCW4Xp93gXVP/I5aLZhZHfV+rEDhBSTFJH64BJAAwDnIdIs?=
+ =?iso-8859-1?Q?cSWR0Zip/6t26JHDkDvi2hzYQMz/rtnlsOaeM6IXdLckFkjNvh7sdzCYjC?=
+ =?iso-8859-1?Q?OtIKB/uGZAd7Oma1owKrdnMlDgXmyC2isZCNrgMWsEcSsjg1V+LMg3rkbw?=
+ =?iso-8859-1?Q?oLwxpqF5uSDbh24a1l0K91wzLSRxV7yggsHSrMlaMuc/kATh2H7a5M8Aga?=
+ =?iso-8859-1?Q?XxZIYD0uh3DcP2q+iciGN31yVbc4LCdIo074egWZ3BYU6IazuSnqwSGJg3?=
+ =?iso-8859-1?Q?HV77LspyDrbSWIzbUs5T5XY+Ud7HU4XdOCU9UuxKHWdqgFqRV4+8h6NVeb?=
+ =?iso-8859-1?Q?Iwe5veTNiT8zJpqjGomXOlwokGNXLFHfyuL1uYoOI4YZoGsmkG3RZLpsIf?=
+ =?iso-8859-1?Q?9CbtxsHeKr7GpeIDQZ1zqrtaJfJKxr5PuyskFPa1cBqrTdmyYQS87DSZDT?=
+ =?iso-8859-1?Q?+g5TLSOEAOrIxL7z2qd5dMvxndx8TTzAc7R12VCU7Sgf+EQeyBCyHYp/GL?=
+ =?iso-8859-1?Q?bqpQHCIKH9PYdy6gr1mAwjnXBBCzscF789EI5lvs4XhB7dy7PEt9BXC1oi?=
+ =?iso-8859-1?Q?F/M7tXLYhdpObIuf6iXMHi8bPbKbGaRm+u468IGoRnEkxWbYDLoATwXd8G?=
+ =?iso-8859-1?Q?c/yfR++JYEhSjp6JgkQKJ5ExCkVgwO/wpjRtOi6AfN7g1el2VIV8a1NtCg?=
+ =?iso-8859-1?Q?r9Z4HZJQVgrAlIiwm9R6RftGlbMkIEiSv/hgjQMqOzI+p8sSNB7recyULb?=
+ =?iso-8859-1?Q?VFZ3g8BOJSMgwrgp7GDiwMT7WyadHnPTM3MXQ7P1ClDYa+lpO6aFkpQRW6?=
+ =?iso-8859-1?Q?JiHcpcaGx10f+fR5/t8tqSjLzvQDiqyj3V7YXjACbMdh5c7UmCdTZ+x8Zq?=
+ =?iso-8859-1?Q?0eOqxWYLoUgU+HX+AfE=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA0PR11MB7185.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(366016)(1800799024)(38070700021);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?dNiYG1yRBrh1L/m0zijnt7qndHzBcPDT+XnGCRqtdUjIkAyAvFVPaiqMWt?=
+ =?iso-8859-1?Q?tbRR/Fc3eoZU5wDvMfzADk3lcnJ19qotufykGy6WJqN25J7ffshoxAG1G4?=
+ =?iso-8859-1?Q?qgD1Pdpy63aUBTr5ogOU0oUBHhxoM5A1sAHpsvsN144ywW32CGvK+h8+lH?=
+ =?iso-8859-1?Q?RFYDmiDK62MiQp1/vGd1/iMf59EasF6kJW70RxstPtbsZ3rYyhW1HXvbZ0?=
+ =?iso-8859-1?Q?SElZ3SUCD8j/pm2AeyaD/a7tSTB2C8zHSv9aF9vJyTeoUhode7OqgxTf5A?=
+ =?iso-8859-1?Q?8hRwS85nY6/L2XAtwZCa5t0AliUDBWVn4y/+ijD8N3zmdUsRkSwla9wnrv?=
+ =?iso-8859-1?Q?vzZkTdJR+DXYd96KTJURYLKWgxsSXQ/GMMi7GbaRZosUaUJN3IHFXuWOrh?=
+ =?iso-8859-1?Q?qMwhEHW1gsaoQvGhT4cYiZyUZ8o2BzBax5/wDXTwniiwLqV9sWss3gE2TR?=
+ =?iso-8859-1?Q?LEqkntd9K2JMW71gcjey8NRWP0WXjt9X2dEFx5y4qgMJWLWMnqiXifkmxu?=
+ =?iso-8859-1?Q?Q9yegMuYyi+/9QJoyO+RosDhHCJQ2nxJDnYzoVBONZMjz+dHI+dqsPHgUZ?=
+ =?iso-8859-1?Q?ezfSRUaSgCf5JiyjS5BborGFM3IC3xrCXs/fnva4AmIKPc0luCvVxHGYDy?=
+ =?iso-8859-1?Q?Amk9nJ45NqQT5gnG2jaCbyIxajpn4gZXLzfmR200v4Vk9x8t0Q2WTCSjiq?=
+ =?iso-8859-1?Q?AMYe//yyE7yrq9CkOG8e2L58zzEt18ZjIO4yHh9R6rS2ZeUcS7llUOKumm?=
+ =?iso-8859-1?Q?BEPVZ8RsZQnDUVSGKA2auO3W/v45COZ3U88kPf1MlkBervPw4B+CWmuldT?=
+ =?iso-8859-1?Q?9C8uFUa80sp+kJ4b8HP8MC847HTdlJqW3snr83GvJnV5ia2bW57UMF79Mn?=
+ =?iso-8859-1?Q?831ij7u8qRE3vJe93ya9dX70pwtntUVVfmHr1ekqCfvvQifXspX3pYjMfa?=
+ =?iso-8859-1?Q?7rRqO9/TdcDH7eaisxdu2iI5Mb0u5syS1L62SAXcpeC3ke0Xh/aVYqbeP0?=
+ =?iso-8859-1?Q?/xTl5DsagFgew7zoJ1Jy2psfW7F8W8wzmG3umYkLjuOuJvvxh+DpBhgAW7?=
+ =?iso-8859-1?Q?dFIuSK4I3YW/DmbLm+u7i7qU6/WYymgvegObIkKMcut+WFF4IF/JuYQvSR?=
+ =?iso-8859-1?Q?xS1ZHCc5KHrR0b+jRy3Fqvay4nav0v66N2yOWNSJ2yvXztdaedgSmy01RC?=
+ =?iso-8859-1?Q?abBm4JC8B9pvXQlI9Y6u2omAo80OO8mLyH/94k779r52ciN0SwxQYj5WZR?=
+ =?iso-8859-1?Q?bkaCLcm6+z9kIUwsv1noMF4A3B6K2WDkNwaCH0jyuVi4NQNJeHqor8kVdl?=
+ =?iso-8859-1?Q?lY9PdnzupwXHa3SSriR0PCdzhZJFOQjuD68Jok6+1ThQhzNVwecNKJ0pi7?=
+ =?iso-8859-1?Q?lYsiNRnEHQNdZa+ERxL6NkzpvoRMTahELe1KX8oz5isCn+MBUHrhDj5iXf?=
+ =?iso-8859-1?Q?lJS77/7R++wtkg7qpYq87xF8DvWCOPLkBLJynwkuvanpoFesTFcRbQo+EC?=
+ =?iso-8859-1?Q?lG40Mky5niliCxTk8rqPyegrLoD+8aPdT9yRg5Yk+SjNeNRTq3NopJRhgS?=
+ =?iso-8859-1?Q?Ug69GarrUamkrThBcqFdDW60ug3vE2pX50PJl3S0ILF4fhHUVs4ISXXB+2?=
+ =?iso-8859-1?Q?VoOi6EbsK8JJEubvALBhKtxZIAZrhx8fa0R5gqjUN1SXjagwI6NZxsYk1p?=
+ =?iso-8859-1?Q?bOa0lggB5U/5RJ/Io3ZErQf7rd0oESsV2aXmVaK4NDFB4NQf5tPwTZ2Uf+?=
+ =?iso-8859-1?Q?CFLI970OCcxIPXgmvO6OUBIMBHqkpOrB3j8K6mpvuwZexY0NWhJVmMZ9lJ?=
+ =?iso-8859-1?Q?04ia4Wnfag=3D=3D?=
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20260124-dmabuf-revoke-v5-4-f98fca917e96@nvidia.com>
-X-Spamd-Bar: ----
-X-MailFrom: praan@google.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: IA0PR11MB7185.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 248d0f0f-e997-45c5-3efb-08de5d69d7d8
+X-MS-Exchange-CrossTenant-originalarrivaltime: 27 Jan 2026 06:03:50.7273
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 33sa4yXnXDPTed/z2FKky5OF4WQI9eGMeHMJ2tSeuG+h9APsri0cg3uQwrcgcyxHSc5b55kTCS1UzoGxTRRSuAnosbZvAPUh6f9yWGSgtCk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM3PPFAB693A2AC
+X-OriginatorOrg: intel.com
+X-Spamd-Bar: ----------
+X-MailFrom: vivek.kasireddy@intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: LB5VFW62ON4XCH2WWSE22DAKR4GH2NJN
-X-Message-ID-Hash: LB5VFW62ON4XCH2WWSE22DAKR4GH2NJN
-X-Mailman-Approved-At: Thu, 16 Apr 2026 16:35:52 +0000
-CC: Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Alex Deucher <alexander.deucher@amd.com>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Gerd Hoffmann <kraxel@redhat.com>, Dmitry Osipenko <dmitry.osipenko@collabora.com>, Gurchetan Singh <gurchetansingh@chromium.org>, Chia-I Wu <olvaffe@gmail.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Lucas De Marchi <lucas.demarchi@intel.com>, Thomas =?iso-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Jason Gunthorpe <jgg@ziepe.ca>, Kevin Tian <kevin.tian@intel.com>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, Felix Kuehling <Felix.Kuehling@amd.com>, Alex Williamson <alex@shazbot.org>, Ankit Agrawal <ankita@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, linux-med
- ia@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, amd-gfx@lists.freedesktop.org, virtualization@lists.linux.dev, intel-xe@lists.freedesktop.org, linux-rdma@vger.kernel.org, iommu@lists.linux.dev, kvm@vger.kernel.org
+Message-ID-Hash: A4SR47N3GHYFTEQOD5IRKMEJZZHBTX7P
+X-Message-ID-Hash: A4SR47N3GHYFTEQOD5IRKMEJZZHBTX7P
+X-Mailman-Approved-At: Thu, 16 Apr 2026 16:35:53 +0000
+CC: Leon Romanovsky <leonro@nvidia.com>, Christian Koenig <christian.koenig@amd.com>, Sumit Semwal <sumit.semwal@linaro.org>, =?iso-8859-1?Q?Thomas_Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>, Simona Vetter <simona.vetter@ffwll.ch>, "Brost, Matthew" <matthew.brost@intel.com>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "intel-xe@lists.freedesktop.org" <intel-xe@lists.freedesktop.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v5 4/8] vfio: Wait for dma-buf invalidation to complete
+Subject: [Linaro-mm-sig] Re: [RFC v2 0/8] dma-buf: Add support for mapping dmabufs via interconnects
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LB5VFW62ON4XCH2WWSE22DAKR4GH2NJN/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/A4SR47N3GHYFTEQOD5IRKMEJZZHBTX7P/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -91,224 +197,72 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [2.49 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[google.com : SPF not aligned (relaxed), No valid DKIM,reject];
-	DATE_IN_PAST(1.00)[1915];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+X-Spamd-Result: default: False [2.59 / 15.00];
+	DATE_IN_PAST(1.00)[1906];
+	R_DKIM_REJECT(1.00)[intel.com:s=Intel];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[intel.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FREEMAIL_CC(0.00)[linaro.org,amd.com,gmail.com,ffwll.ch,redhat.com,collabora.com,chromium.org,linux.intel.com,kernel.org,suse.de,intel.com,ziepe.ca,8bytes.org,arm.com,shazbot.org,nvidia.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.linux.dev];
-	RCPT_COUNT_TWELVE(0.00)[35];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	ARC_NA(0.00)[];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email,IA0PR11MB7185.namprd11.prod.outlook.com:mid];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[praan@google.com,linaro-mm-sig-bounces@lists.linaro.org];
+	NEURAL_HAM(-0.00)[-0.774];
+	FROM_NEQ_ENVFROM(0.00)[vivek.kasireddy@intel.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
-	NEURAL_SPAM(0.00)[0.939];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	DKIM_TRACE(0.00)[intel.com:-];
+	RCPT_COUNT_SEVEN(0.00)[11];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: 476A0411BEB
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	MISSING_XM_UA(0.00)[];
+	RCVD_COUNT_SEVEN(0.00)[9]
+X-Rspamd-Queue-Id: 2E115411BF2
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Sat, Jan 24, 2026 at 09:14:16PM +0200, Leon Romanovsky wrote:
-> From: Leon Romanovsky <leonro@nvidia.com>
+> Subject: Re: [RFC v2 0/8] dma-buf: Add support for mapping dmabufs via
+> interconnects
 > 
-> dma-buf invalidation is handled asynchronously by the hardware, so VFIO
-> must wait until all affected objects have been fully invalidated.
+> On Fri, Oct 31, 2025 at 05:15:32AM +0000, Kasireddy, Vivek wrote:
+> > > So the next steps would be to make all the exporters directly declare
+> > > a SGT and then remove the SGT related ops from dma_ops itself and
+> > > remove the compat sgt in the attach logic. This is not hard, it is all
+> > > simple mechanical work.
 > 
-> In addition, the dma-buf exporter is expecting that all importers unmap any
-> buffers they previously mapped.
+> > IMO, this SGT compatibility stuff should ideally be a separate follow-on
+> > effort (and patch series) that would also probably include updates to
+> > various drivers to add the SGT mapping type.
 > 
-> Fixes: 5d74781ebc86 ("vfio/pci: Add dma-buf export support for MMIO regions")
-> Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
-> ---
->  drivers/vfio/pci/vfio_pci_dmabuf.c | 71 ++++++++++++++++++++++++++++++++++++--
->  1 file changed, 68 insertions(+), 3 deletions(-)
+> I've beeen working on this idea and have updated my github here:
 > 
-> diff --git a/drivers/vfio/pci/vfio_pci_dmabuf.c b/drivers/vfio/pci/vfio_pci_dmabuf.c
-> index d8ceafabef48..485515629fe4 100644
-> --- a/drivers/vfio/pci/vfio_pci_dmabuf.c
-> +++ b/drivers/vfio/pci/vfio_pci_dmabuf.c
-> @@ -17,6 +17,8 @@ struct vfio_pci_dma_buf {
->  	struct dma_buf_phys_vec *phys_vec;
->  	struct p2pdma_provider *provider;
->  	u32 nr_ranges;
-> +	struct kref kref;
-> +	struct completion comp;
->  	u8 revoked : 1;
->  };
->  
-> @@ -44,27 +46,46 @@ static int vfio_pci_dma_buf_attach(struct dma_buf *dmabuf,
->  	return 0;
->  }
->  
-> +static void vfio_pci_dma_buf_done(struct kref *kref)
-> +{
-> +	struct vfio_pci_dma_buf *priv =
-> +		container_of(kref, struct vfio_pci_dma_buf, kref);
-> +
-> +	complete(&priv->comp);
-> +}
-> +
->  static struct sg_table *
->  vfio_pci_dma_buf_map(struct dma_buf_attachment *attachment,
->  		     enum dma_data_direction dir)
->  {
->  	struct vfio_pci_dma_buf *priv = attachment->dmabuf->priv;
-> +	struct sg_table *ret;
->  
->  	dma_resv_assert_held(priv->dmabuf->resv);
->  
->  	if (priv->revoked)
->  		return ERR_PTR(-ENODEV);
->  
-> -	return dma_buf_phys_vec_to_sgt(attachment, priv->provider,
-> -				       priv->phys_vec, priv->nr_ranges,
-> -				       priv->size, dir);
-> +	ret = dma_buf_phys_vec_to_sgt(attachment, priv->provider,
-> +				      priv->phys_vec, priv->nr_ranges,
-> +				      priv->size, dir);
-> +	if (IS_ERR(ret))
-> +		return ret;
-> +
-> +	kref_get(&priv->kref);
-> +	return ret;
->  }
->  
->  static void vfio_pci_dma_buf_unmap(struct dma_buf_attachment *attachment,
->  				   struct sg_table *sgt,
->  				   enum dma_data_direction dir)
->  {
-> +	struct vfio_pci_dma_buf *priv = attachment->dmabuf->priv;
-> +
-> +	dma_resv_assert_held(priv->dmabuf->resv);
-> +
->  	dma_buf_free_sgt(attachment, sgt, dir);
-> +	kref_put(&priv->kref, vfio_pci_dma_buf_done);
->  }
->  
->  static void vfio_pci_dma_buf_release(struct dma_buf *dmabuf)
-> @@ -287,6 +308,9 @@ int vfio_pci_core_feature_dma_buf(struct vfio_pci_core_device *vdev, u32 flags,
->  		goto err_dev_put;
->  	}
->  
-> +	kref_init(&priv->kref);
-> +	init_completion(&priv->comp);
-> +
->  	/* dma_buf_put() now frees priv */
->  	INIT_LIST_HEAD(&priv->dmabufs_elm);
->  	down_write(&vdev->memory_lock);
-> @@ -326,6 +350,8 @@ void vfio_pci_dma_buf_move(struct vfio_pci_core_device *vdev, bool revoked)
->  	lockdep_assert_held_write(&vdev->memory_lock);
->  
->  	list_for_each_entry_safe(priv, tmp, &vdev->dmabufs, dmabufs_elm) {
-> +		unsigned long wait;
-> +
->  		if (!get_file_active(&priv->dmabuf->file))
->  			continue;
->  
-> @@ -333,7 +359,37 @@ void vfio_pci_dma_buf_move(struct vfio_pci_core_device *vdev, bool revoked)
->  			dma_resv_lock(priv->dmabuf->resv, NULL);
->  			priv->revoked = revoked;
->  			dma_buf_invalidate_mappings(priv->dmabuf);
-> +			dma_resv_wait_timeout(priv->dmabuf->resv,
-> +					      DMA_RESV_USAGE_BOOKKEEP, false,
-> +					      MAX_SCHEDULE_TIMEOUT);
->  			dma_resv_unlock(priv->dmabuf->resv);
-> +			if (revoked) {
-> +				kref_put(&priv->kref, vfio_pci_dma_buf_done);
-> +				/* Let's wait till all DMA unmap are completed. */
-> +				wait = wait_for_completion_timeout(
-> +					&priv->comp, secs_to_jiffies(1));
+>  https://github.com/jgunthorpe/linux/commits/dmabuf_map_type/
+> 
+> I still need to run it through what testing I can do here, but it goes
+> all the way and converts everything into SGT mapping type, all
+> drivers. I think this shows the idea works.
+> 
+> I'm hoping to post it next week if the revoke thing settles down and I
+> can complete some more checking.
+> 
+> We can discuss how to break it up along with get feedback if people
+> are happy with the idea.
+> 
+> It looks like it turns out fairly well, I didn't find anything
+> surprising along the way at least.
+Great! Looking forward to the patches!
 
-Is the 1-second constant sufficient for all hardware, or should the 
-invalidate_mappings() contract require the callback to block until 
-speculative reads are strictly fenced? I'm wondering about a case where
-a device's firmware has a high response latency, perhaps due to internal
-management tasks like error recovery or thermal and it exceeds the 1s 
-timeout. 
-
-If the device is in the middle of a large DMA burst and the firmware is
-slow to flush the internal pipelines to a fully "quiesced"
-read-and-discard state, reclaiming the memory at exactly 1.001 seconds
-risks triggering platform-level faults..
-
-Since the wen explicitly permit these speculative reads until unmap is
-complete, relying on a hardcoded timeout in the exporter seems to 
-introduce a hardware-dependent race condition that could compromise
-system stability via IOMMU errors or AER faults. 
-
-Should the importer instead be required to guarantee that all 
-speculative access has ceased before the invalidation call returns?
-
-Thanks
-Praan
-
-> +				/*
-> +				 * If you see this WARN_ON, it means that
-> +				 * importer didn't call unmap in response to
-> +				 * dma_buf_invalidate_mappings() which is not
-> +				 * allowed.
-> +				 */
-> +				WARN(!wait,
-> +				     "Timed out waiting for DMABUF unmap, importer has a broken invalidate_mapping()");
-> +			} else {
-> +				/*
-> +				 * Kref is initialize again, because when revoke
-> +				 * was performed the reference counter was decreased
-> +				 * to zero to trigger completion.
-> +				 */
-> +				kref_init(&priv->kref);
-> +				/*
-> +				 * There is no need to wait as no mapping was
-> +				 * performed when the previous status was
-> +				 * priv->revoked == true.
-> +				 */
-> +				reinit_completion(&priv->comp);
-> +			}
->  		}
->  		fput(priv->dmabuf->file);
->  	}
-> @@ -346,6 +402,8 @@ void vfio_pci_dma_buf_cleanup(struct vfio_pci_core_device *vdev)
->  
->  	down_write(&vdev->memory_lock);
->  	list_for_each_entry_safe(priv, tmp, &vdev->dmabufs, dmabufs_elm) {
-> +		unsigned long wait;
-> +
->  		if (!get_file_active(&priv->dmabuf->file))
->  			continue;
->  
-> @@ -354,7 +412,14 @@ void vfio_pci_dma_buf_cleanup(struct vfio_pci_core_device *vdev)
->  		priv->vdev = NULL;
->  		priv->revoked = true;
->  		dma_buf_invalidate_mappings(priv->dmabuf);
-> +		dma_resv_wait_timeout(priv->dmabuf->resv,
-> +				      DMA_RESV_USAGE_BOOKKEEP, false,
-> +				      MAX_SCHEDULE_TIMEOUT);
->  		dma_resv_unlock(priv->dmabuf->resv);
-> +		kref_put(&priv->kref, vfio_pci_dma_buf_done);
-> +		wait = wait_for_completion_timeout(&priv->comp,
-> +						   secs_to_jiffies(1));
-> +		WARN_ON(!wait);
->  		vfio_device_put_registration(&vdev->vdev);
->  		fput(priv->dmabuf->file);
->  	}
+Thanks,
+Vivek
 > 
-> -- 
-> 2.52.0
-> 
-> 
+> Thanks,
+> Jason
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
