@@ -2,227 +2,184 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qG+MC6VFeGmqpAEAu9opvQ
+	id OAuWCEl+eGkFqQEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 27 Jan 2026 05:57:09 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 27 Jan 2026 09:58:49 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id B1F2B8FE97
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 27 Jan 2026 05:57:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9F7649161E
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 27 Jan 2026 09:58:48 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5885B401CE
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 27 Jan 2026 04:57:07 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.17])
-	by lists.linaro.org (Postfix) with ESMTPS id 401193F70D
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 27 Jan 2026 04:57:00 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 629723F7FC
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 27 Jan 2026 08:58:47 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+	by lists.linaro.org (Postfix) with ESMTPS id 3C0D43F726
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 27 Jan 2026 08:58:42 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=P3HfF2Vv;
-	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 192.198.163.17 as permitted sender) smtp.mailfrom=lkp@intel.com;
-	dmarc=pass (policy=none) header.from=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1769489820; x=1801025820;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=gdAbZco7AYOgBCqpBkUvDwk4XLCrRqIpAeLK1rwSmtI=;
-  b=P3HfF2Vv7Mnu4drYKqmRF+fpK66QP9I/KQMjMG2rkPeACJ7UpJJQiF8Z
-   z9N+TgIeMWewizM/SPw9rhIaO4yfYrtNfF1duf0izgxbihzVNHLXaFYtZ
-   khm8H3wr9++03/hYp2UOaXhy6fUNitjbGx7W/jViE7+2sntHhFKw7x9vB
-   yIzY8MepTEMun4AHT86cqmqCD9o7Pk8hH5QVJik63zv9z5BRxrdwe22PD
-   y4V+ZUDB3R8Q87ckeKntwWxl5+nKL4oKAEa5D3lh0C866VdSBqyAFlYxI
-   BVdEWeyg3w1/9oxFVToSOb9pnR6kQ6XeuYbgk6+lueL+7cMgxIA0IPPeA
-   g==;
-X-CSE-ConnectionGUID: wytYyM+XQL2e09PX7bJemQ==
-X-CSE-MsgGUID: 9OtN8n1FQ02ml1JlwXyzXA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11683"; a="70576395"
-X-IronPort-AV: E=Sophos;i="6.21,256,1763452800";
-   d="scan'208";a="70576395"
-Received: from orviesa010.jf.intel.com ([10.64.159.150])
-  by fmvoesa111.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Jan 2026 20:56:56 -0800
-X-CSE-ConnectionGUID: YKkVOZHhR3ePQucQF9Ts6g==
-X-CSE-MsgGUID: 1ddyYHuPTq6JtQO7mril+A==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.21,256,1763452800";
-   d="scan'208";a="207103832"
-Received: from lkp-server01.sh.intel.com (HELO 765f4a05e27f) ([10.239.97.150])
-  by orviesa010.jf.intel.com with ESMTP; 26 Jan 2026 20:56:53 -0800
-Received: from kbuild by 765f4a05e27f with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1vkb8E-00000000Y0Q-2Q01;
-	Tue, 27 Jan 2026 04:56:50 +0000
-Date: Tue, 27 Jan 2026 12:56:48 +0800
-From: kernel test robot <lkp@intel.com>
-To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>,
-	phasta@mailbox.org, tursulin@ursulin.net, matthew.brost@intel.com,
-	sumit.semwal@linaro.org
-Message-ID: <202601271204.Yb3rgz99-lkp@intel.com>
-References: <20260120105655.7134-6-christian.koenig@amd.com>
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=bAB6hl7o;
+	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=leon@kernel.org;
+	dmarc=pass (policy=quarantine) header.from=kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by tor.source.kernel.org (Postfix) with ESMTP id 773E7600AD;
+	Tue, 27 Jan 2026 08:58:41 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 78ED1C16AAE;
+	Tue, 27 Jan 2026 08:58:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1769504321;
+	bh=m9sbIqU1XdlQnXm2tN68nmeagKR1Wrmm8XlTuHQ4gaQ=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=bAB6hl7oG53Z5NaRzppvV3aOmPWOsOx1U7WgjZAo/MByByWmhGqS4/O2kekR1OMyx
+	 mQTdVm9JsHILgUhUwCbN+yCY9zG/a3nAgGHREqz1o1Pu9NxUGN+qD4JhJvYQSHJ2h7
+	 DV0HRAarEmmVN4jkgeMBb2Li/CSIYgQAKa9BuAwLgoIuh6wIe8Ni0EAOjTUz2TSSgV
+	 IoN120Zlz1QJqEpCVMMH0v6BbyexGT8q2SrPZ/0x/7ClhwrYYGyc62I432RUDP+jZB
+	 H67MwBVZ42sQtwFhWN9msXincpCyPWj5NNsEcIwurDVEKKOJDyyuPND7LvAPGvSJuT
+	 T2lnuSKLEB1pQ==
+Date: Tue, 27 Jan 2026 10:58:35 +0200
+From: Leon Romanovsky <leon@kernel.org>
+To: Pranjal Shrivastava <praan@google.com>
+Message-ID: <20260127085835.GQ13967@unreal>
+References: <20260124-dmabuf-revoke-v5-0-f98fca917e96@nvidia.com>
+ <20260124-dmabuf-revoke-v5-4-f98fca917e96@nvidia.com>
+ <aXfUZcSEr9N18o6w@google.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260120105655.7134-6-christian.koenig@amd.com>
-X-Spamd-Bar: ------
-Message-ID-Hash: XYK27SZKN4P5JYXNSQ2FKI24FEIQZEKX
-X-Message-ID-Hash: XYK27SZKN4P5JYXNSQ2FKI24FEIQZEKX
-X-MailFrom: lkp@intel.com
+In-Reply-To: <aXfUZcSEr9N18o6w@google.com>
+X-Spamd-Bar: ---
+Message-ID-Hash: SSY75L4BDRKVON7SSXH3HJYD6TVI7XWO
+X-Message-ID-Hash: SSY75L4BDRKVON7SSXH3HJYD6TVI7XWO
+X-MailFrom: leon@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: oe-kbuild-all@lists.linux.dev, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+CC: Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Alex Deucher <alexander.deucher@amd.com>, Simona Vetter <simona@ffwll.ch>, Gerd Hoffmann <kraxel@redhat.com>, Dmitry Osipenko <dmitry.osipenko@collabora.com>, Gurchetan Singh <gurchetansingh@chromium.org>, Chia-I Wu <olvaffe@gmail.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Lucas De Marchi <lucas.demarchi@intel.com>, Thomas =?iso-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Jason Gunthorpe <jgg@ziepe.ca>, Kevin Tian <kevin.tian@intel.com>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, Felix Kuehling <Felix.Kuehling@amd.com>, Alex Williamson <alex@shazbot.org>, Ankit Agrawal <ankita@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, linux-media@vger.kernel.org, dri-devel@list
+ s.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, amd-gfx@lists.freedesktop.org, virtualization@lists.linux.dev, intel-xe@lists.freedesktop.org, linux-rdma@vger.kernel.org, iommu@lists.linux.dev, kvm@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 5/9] dma-buf: inline spinlock for fence protection v4
+Subject: [Linaro-mm-sig] Re: [PATCH v5 4/8] vfio: Wait for dma-buf invalidation to complete
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XYK27SZKN4P5JYXNSQ2FKI24FEIQZEKX/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SSY75L4BDRKVON7SSXH3HJYD6TVI7XWO/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [3.09 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[intel.com:s=Intel];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [2.59 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
+	R_DKIM_REJECT(1.00)[kernel.org:s=k20201202];
+	MID_RHS_NOT_FQDN(0.50)[];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[intel.com : SPF not aligned (relaxed),none];
+	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FREEMAIL_TO(0.00)[gmail.com,mailbox.org,ursulin.net,intel.com,linaro.org];
-	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FROM_NEQ_ENVFROM(0.00)[lkp@intel.com,linaro-mm-sig-bounces@lists.linaro.org];
-	DKIM_TRACE(0.00)[intel.com:-];
-	RCPT_COUNT_SEVEN(0.00)[8];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	ARC_NA(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCPT_COUNT_TWELVE(0.00)[34];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[linaro.org,amd.com,ffwll.ch,redhat.com,collabora.com,chromium.org,gmail.com,linux.intel.com,kernel.org,suse.de,intel.com,ziepe.ca,8bytes.org,arm.com,shazbot.org,nvidia.com,vger.kernel.org,list,lists.linaro.org,lists.freedesktop.org,lists.linux.dev];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-0.938];
+	FROM_NEQ_ENVFROM(0.00)[leon@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:-];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[01.org:url,intel.com:mid,intel.com:email,linaro.org:email]
-X-Rspamd-Queue-Id: B1F2B8FE97
+	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email]
+X-Rspamd-Queue-Id: 9F7649161E
 X-Rspamd-Action: no action
 
-Hi Christian,
-
-kernel test robot noticed the following build errors:
-
-[auto build test ERROR on drm-misc/drm-misc-next]
-[also build test ERROR on drm-xe/drm-xe-next drm-tip/drm-tip next-20260126]
-[cannot apply to linus/master v6.19-rc7]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
-
-url:    https://github.com/intel-lab-lkp/linux/commits/Christian-K-nig/dma-buf-protected-fence-ops-by-RCU-v5/20260120-195535
-base:   https://gitlab.freedesktop.org/drm/misc/kernel.git drm-misc-next
-patch link:    https://lore.kernel.org/r/20260120105655.7134-6-christian.koenig%40amd.com
-patch subject: [PATCH 5/9] dma-buf: inline spinlock for fence protection v4
-config: x86_64-rhel-9.4 (https://download.01.org/0day-ci/archive/20260127/202601271204.Yb3rgz99-lkp@intel.com/config)
-compiler: gcc-14 (Debian 14.2.0-19) 14.2.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20260127/202601271204.Yb3rgz99-lkp@intel.com/reproduce)
-
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202601271204.Yb3rgz99-lkp@intel.com/
-
-All errors (new ones prefixed by >>):
-
-   In file included from include/linux/spinlock.h:63,
-                    from include/linux/sched.h:37,
-                    from include/linux/kthread.h:6,
-                    from drivers/gpu/drm/i915/gt/intel_breadcrumbs.c:6:
-   drivers/gpu/drm/i915/gt/intel_breadcrumbs.c: In function '__dma_fence_signal__notify':
->> drivers/gpu/drm/i915/gt/intel_breadcrumbs.c:151:34: error: 'struct dma_fence' has no member named 'lock'
-     151 |         lockdep_assert_held(fence->lock);
-         |                                  ^~
-   include/linux/lockdep.h:392:61: note: in definition of macro 'lockdep_assert_held'
-     392 | #define lockdep_assert_held(l)                  do { (void)(l); } while (0)
-         |                                                             ^
---
-   In file included from include/linux/debugobjects.h:6,
-                    from drivers/gpu/drm/i915/i915_active.c:7:
-   drivers/gpu/drm/i915/i915_active.c: In function '__i915_active_fence_set':
->> drivers/gpu/drm/i915/i915_active.c:1048:32: error: 'struct dma_fence' has no member named 'lock'
-    1048 |         spin_lock_irqsave(fence->lock, flags);
-         |                                ^~
-   include/linux/spinlock.h:244:48: note: in definition of macro 'raw_spin_lock_irqsave'
-     244 |                 flags = _raw_spin_lock_irqsave(lock);   \
-         |                                                ^~~~
-   drivers/gpu/drm/i915/i915_active.c:1048:9: note: in expansion of macro 'spin_lock_irqsave'
-    1048 |         spin_lock_irqsave(fence->lock, flags);
-         |         ^~~~~~~~~~~~~~~~~
-   drivers/gpu/drm/i915/i915_active.c:1050:38: error: 'struct dma_fence' has no member named 'lock'
-    1050 |                 spin_lock_nested(prev->lock, SINGLE_DEPTH_NESTING);
-         |                                      ^~
-   include/linux/spinlock.h:235:44: note: in definition of macro 'raw_spin_lock_nested'
-     235 |         _raw_spin_lock(((void)(subclass), (lock)))
-         |                                            ^~~~
-   drivers/gpu/drm/i915/i915_active.c:1050:17: note: in expansion of macro 'spin_lock_nested'
-    1050 |                 spin_lock_nested(prev->lock, SINGLE_DEPTH_NESTING);
-         |                 ^~~~~~~~~~~~~~~~
-   drivers/gpu/drm/i915/i915_active.c:1064:41: error: 'struct dma_fence' has no member named 'lock'
-    1064 |                         spin_unlock(prev->lock);
-         |                                         ^~
-   drivers/gpu/drm/i915/i915_active.c:1067:45: error: 'struct dma_fence' has no member named 'lock'
-    1067 |                 spin_unlock_irqrestore(fence->lock, flags);
-         |                                             ^~
-   drivers/gpu/drm/i915/i915_active.c:1072:40: error: 'struct dma_fence' has no member named 'lock'
-    1072 |                 spin_lock_irqsave(fence->lock, flags);
-         |                                        ^~
-   include/linux/spinlock.h:244:48: note: in definition of macro 'raw_spin_lock_irqsave'
-     244 |                 flags = _raw_spin_lock_irqsave(lock);   \
-         |                                                ^~~~
-   drivers/gpu/drm/i915/i915_active.c:1072:17: note: in expansion of macro 'spin_lock_irqsave'
-    1072 |                 spin_lock_irqsave(fence->lock, flags);
-         |                 ^~~~~~~~~~~~~~~~~
-   drivers/gpu/drm/i915/i915_active.c:1074:46: error: 'struct dma_fence' has no member named 'lock'
-    1074 |                         spin_lock_nested(prev->lock, SINGLE_DEPTH_NESTING);
-         |                                              ^~
-   include/linux/spinlock.h:235:44: note: in definition of macro 'raw_spin_lock_nested'
-     235 |         _raw_spin_lock(((void)(subclass), (lock)))
-         |                                            ^~~~
-   drivers/gpu/drm/i915/i915_active.c:1074:25: note: in expansion of macro 'spin_lock_nested'
-    1074 |                         spin_lock_nested(prev->lock, SINGLE_DEPTH_NESTING);
-         |                         ^~~~~~~~~~~~~~~~
-   drivers/gpu/drm/i915/i915_active.c:1091:33: error: 'struct dma_fence' has no member named 'lock'
-    1091 |                 spin_unlock(prev->lock); /* serialise with prev->cb_list */
-         |                                 ^~
-   drivers/gpu/drm/i915/i915_active.c:1094:37: error: 'struct dma_fence' has no member named 'lock'
-    1094 |         spin_unlock_irqrestore(fence->lock, flags);
-         |                                     ^~
-
-
-vim +151 drivers/gpu/drm/i915/gt/intel_breadcrumbs.c
-
-0152b3b3f49b36 Chris Wilson 2019-05-08  144  
-0152b3b3f49b36 Chris Wilson 2019-05-08  145  static void
-f2cb60e9a3881e Chris Wilson 2019-08-17  146  __dma_fence_signal__notify(struct dma_fence *fence,
-f2cb60e9a3881e Chris Wilson 2019-08-17  147  			   const struct list_head *list)
-0152b3b3f49b36 Chris Wilson 2019-05-08  148  {
-0152b3b3f49b36 Chris Wilson 2019-05-08  149  	struct dma_fence_cb *cur, *tmp;
-0152b3b3f49b36 Chris Wilson 2019-05-08  150  
-0152b3b3f49b36 Chris Wilson 2019-05-08 @151  	lockdep_assert_held(fence->lock);
-0152b3b3f49b36 Chris Wilson 2019-05-08  152  
-f2cb60e9a3881e Chris Wilson 2019-08-17  153  	list_for_each_entry_safe(cur, tmp, list, node) {
-0152b3b3f49b36 Chris Wilson 2019-05-08  154  		INIT_LIST_HEAD(&cur->node);
-0152b3b3f49b36 Chris Wilson 2019-05-08  155  		cur->func(fence, cur);
-0152b3b3f49b36 Chris Wilson 2019-05-08  156  	}
-0152b3b3f49b36 Chris Wilson 2019-05-08  157  }
-0152b3b3f49b36 Chris Wilson 2019-05-08  158  
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gTW9uLCBKYW4gMjYsIDIwMjYgYXQgMDg6NTM6NTdQTSArMDAwMCwgUHJhbmphbCBTaHJpdmFz
+dGF2YSB3cm90ZToNCj4gT24gU2F0LCBKYW4gMjQsIDIwMjYgYXQgMDk6MTQ6MTZQTSArMDIwMCwg
+TGVvbiBSb21hbm92c2t5IHdyb3RlOg0KPiA+IEZyb206IExlb24gUm9tYW5vdnNreSA8bGVvbnJv
+QG52aWRpYS5jb20+DQo+ID4gDQo+ID4gZG1hLWJ1ZiBpbnZhbGlkYXRpb24gaXMgaGFuZGxlZCBh
+c3luY2hyb25vdXNseSBieSB0aGUgaGFyZHdhcmUsIHNvIFZGSU8NCj4gPiBtdXN0IHdhaXQgdW50
+aWwgYWxsIGFmZmVjdGVkIG9iamVjdHMgaGF2ZSBiZWVuIGZ1bGx5IGludmFsaWRhdGVkLg0KPiA+
+IA0KPiA+IEluIGFkZGl0aW9uLCB0aGUgZG1hLWJ1ZiBleHBvcnRlciBpcyBleHBlY3RpbmcgdGhh
+dCBhbGwgaW1wb3J0ZXJzIHVubWFwIGFueQ0KPiA+IGJ1ZmZlcnMgdGhleSBwcmV2aW91c2x5IG1h
+cHBlZC4NCj4gPiANCj4gPiBGaXhlczogNWQ3NDc4MWViYzg2ICgidmZpby9wY2k6IEFkZCBkbWEt
+YnVmIGV4cG9ydCBzdXBwb3J0IGZvciBNTUlPIHJlZ2lvbnMiKQ0KPiA+IFNpZ25lZC1vZmYtYnk6
+IExlb24gUm9tYW5vdnNreSA8bGVvbnJvQG52aWRpYS5jb20+DQo+ID4gLS0tDQo+ID4gIGRyaXZl
+cnMvdmZpby9wY2kvdmZpb19wY2lfZG1hYnVmLmMgfCA3MSArKysrKysrKysrKysrKysrKysrKysr
+KysrKysrKysrKysrKystLQ0KPiA+ICAxIGZpbGUgY2hhbmdlZCwgNjggaW5zZXJ0aW9ucygrKSwg
+MyBkZWxldGlvbnMoLSkNCg0KPC4uLj4NCg0KPiA+IEBAIC0zMzMsNyArMzU5LDM3IEBAIHZvaWQg
+dmZpb19wY2lfZG1hX2J1Zl9tb3ZlKHN0cnVjdCB2ZmlvX3BjaV9jb3JlX2RldmljZSAqdmRldiwg
+Ym9vbCByZXZva2VkKQ0KPiA+ICAJCQlkbWFfcmVzdl9sb2NrKHByaXYtPmRtYWJ1Zi0+cmVzdiwg
+TlVMTCk7DQo+ID4gIAkJCXByaXYtPnJldm9rZWQgPSByZXZva2VkOw0KPiA+ICAJCQlkbWFfYnVm
+X2ludmFsaWRhdGVfbWFwcGluZ3MocHJpdi0+ZG1hYnVmKTsNCj4gPiArCQkJZG1hX3Jlc3Zfd2Fp
+dF90aW1lb3V0KHByaXYtPmRtYWJ1Zi0+cmVzdiwNCj4gPiArCQkJCQkgICAgICBETUFfUkVTVl9V
+U0FHRV9CT09LS0VFUCwgZmFsc2UsDQo+ID4gKwkJCQkJICAgICAgTUFYX1NDSEVEVUxFX1RJTUVP
+VVQpOw0KPiA+ICAJCQlkbWFfcmVzdl91bmxvY2socHJpdi0+ZG1hYnVmLT5yZXN2KTsNCj4gPiAr
+CQkJaWYgKHJldm9rZWQpIHsNCj4gPiArCQkJCWtyZWZfcHV0KCZwcml2LT5rcmVmLCB2ZmlvX3Bj
+aV9kbWFfYnVmX2RvbmUpOw0KPiA+ICsJCQkJLyogTGV0J3Mgd2FpdCB0aWxsIGFsbCBETUEgdW5t
+YXAgYXJlIGNvbXBsZXRlZC4gKi8NCj4gPiArCQkJCXdhaXQgPSB3YWl0X2Zvcl9jb21wbGV0aW9u
+X3RpbWVvdXQoDQo+ID4gKwkJCQkJJnByaXYtPmNvbXAsIHNlY3NfdG9famlmZmllcygxKSk7DQo+
+IA0KPiBJcyB0aGUgMS1zZWNvbmQgY29uc3RhbnQgc3VmZmljaWVudCBmb3IgYWxsIGhhcmR3YXJl
+LCBvciBzaG91bGQgdGhlIA0KPiBpbnZhbGlkYXRlX21hcHBpbmdzKCkgY29udHJhY3QgcmVxdWly
+ZSB0aGUgY2FsbGJhY2sgdG8gYmxvY2sgdW50aWwgDQo+IHNwZWN1bGF0aXZlIHJlYWRzIGFyZSBz
+dHJpY3RseSBmZW5jZWQ/IEknbSB3b25kZXJpbmcgYWJvdXQgYSBjYXNlIHdoZXJlDQo+IGEgZGV2
+aWNlJ3MgZmlybXdhcmUgaGFzIGEgaGlnaCByZXNwb25zZSBsYXRlbmN5LCBwZXJoYXBzIGR1ZSB0
+byBpbnRlcm5hbA0KPiBtYW5hZ2VtZW50IHRhc2tzIGxpa2UgZXJyb3IgcmVjb3Zlcnkgb3IgdGhl
+cm1hbCBhbmQgaXQgZXhjZWVkcyB0aGUgMXMgDQo+IHRpbWVvdXQuIA0KPiANCj4gSWYgdGhlIGRl
+dmljZSBpcyBpbiB0aGUgbWlkZGxlIG9mIGEgbGFyZ2UgRE1BIGJ1cnN0IGFuZCB0aGUgZmlybXdh
+cmUgaXMNCj4gc2xvdyB0byBmbHVzaCB0aGUgaW50ZXJuYWwgcGlwZWxpbmVzIHRvIGEgZnVsbHkg
+InF1aWVzY2VkIg0KPiByZWFkLWFuZC1kaXNjYXJkIHN0YXRlLCByZWNsYWltaW5nIHRoZSBtZW1v
+cnkgYXQgZXhhY3RseSAxLjAwMSBzZWNvbmRzDQo+IHJpc2tzIHRyaWdnZXJpbmcgcGxhdGZvcm0t
+bGV2ZWwgZmF1bHRzLi4NCj4gDQo+IFNpbmNlIHRoZSB3ZW4gZXhwbGljaXRseSBwZXJtaXQgdGhl
+c2Ugc3BlY3VsYXRpdmUgcmVhZHMgdW50aWwgdW5tYXAgaXMNCj4gY29tcGxldGUsIHJlbHlpbmcg
+b24gYSBoYXJkY29kZWQgdGltZW91dCBpbiB0aGUgZXhwb3J0ZXIgc2VlbXMgdG8gDQo+IGludHJv
+ZHVjZSBhIGhhcmR3YXJlLWRlcGVuZGVudCByYWNlIGNvbmRpdGlvbiB0aGF0IGNvdWxkIGNvbXBy
+b21pc2UNCj4gc3lzdGVtIHN0YWJpbGl0eSB2aWEgSU9NTVUgZXJyb3JzIG9yIEFFUiBmYXVsdHMu
+IA0KPiANCj4gU2hvdWxkIHRoZSBpbXBvcnRlciBpbnN0ZWFkIGJlIHJlcXVpcmVkIHRvIGd1YXJh
+bnRlZSB0aGF0IGFsbCANCj4gc3BlY3VsYXRpdmUgYWNjZXNzIGhhcyBjZWFzZWQgYmVmb3JlIHRo
+ZSBpbnZhbGlkYXRpb24gY2FsbCByZXR1cm5zPw0KDQpJdCBpcyBndWFyYW50ZWVkIGJ5IHRoZSBk
+bWFfcmVzdl93YWl0X3RpbWVvdXQoKSBjYWxsIGFib3ZlLiBUaGF0IGNhbGwgZW5zdXJlcw0KdGhh
+dCB0aGUgaGFyZHdhcmUgaGFzIGNvbXBsZXRlZCBhbGwgcGVuZGluZyBvcGVyYXRpb25zLiBUaGUg
+MeKAkXNlY29uZCBkZWxheSBpcw0KbWVhbnQgdG8gY2F0Y2ggY2FzZXMgd2hlcmUgYW4gaW4ta2Vy
+bmVsIERNQSB1bm1hcCBjYWxsIGlzIG1pc3NpbmcsIHdoaWNoIHNob3VsZA0Kbm90IHRyaWdnZXIg
+YW55IERNQSBhY3Rpdml0eSBhdCB0aGF0IHBvaW50Lg0KDQpTbyB5ZXMsIG9uZSBzZWNvbmQgaXMg
+bW9yZSB0aGFuIHN1ZmZpY2llbnQuDQoNClRoYW5rcw0KDQo+IA0KPiBUaGFua3MNCj4gUHJhYW4N
+Cj4gDQo+ID4gKwkJCQkvKg0KPiA+ICsJCQkJICogSWYgeW91IHNlZSB0aGlzIFdBUk5fT04sIGl0
+IG1lYW5zIHRoYXQNCj4gPiArCQkJCSAqIGltcG9ydGVyIGRpZG4ndCBjYWxsIHVubWFwIGluIHJl
+c3BvbnNlIHRvDQo+ID4gKwkJCQkgKiBkbWFfYnVmX2ludmFsaWRhdGVfbWFwcGluZ3MoKSB3aGlj
+aCBpcyBub3QNCj4gPiArCQkJCSAqIGFsbG93ZWQuDQo+ID4gKwkJCQkgKi8NCj4gPiArCQkJCVdB
+Uk4oIXdhaXQsDQo+ID4gKwkJCQkgICAgICJUaW1lZCBvdXQgd2FpdGluZyBmb3IgRE1BQlVGIHVu
+bWFwLCBpbXBvcnRlciBoYXMgYSBicm9rZW4gaW52YWxpZGF0ZV9tYXBwaW5nKCkiKTsNCj4gPiAr
+CQkJfSBlbHNlIHsNCj4gPiArCQkJCS8qDQo+ID4gKwkJCQkgKiBLcmVmIGlzIGluaXRpYWxpemUg
+YWdhaW4sIGJlY2F1c2Ugd2hlbiByZXZva2UNCj4gPiArCQkJCSAqIHdhcyBwZXJmb3JtZWQgdGhl
+IHJlZmVyZW5jZSBjb3VudGVyIHdhcyBkZWNyZWFzZWQNCj4gPiArCQkJCSAqIHRvIHplcm8gdG8g
+dHJpZ2dlciBjb21wbGV0aW9uLg0KPiA+ICsJCQkJICovDQo+ID4gKwkJCQlrcmVmX2luaXQoJnBy
+aXYtPmtyZWYpOw0KPiA+ICsJCQkJLyoNCj4gPiArCQkJCSAqIFRoZXJlIGlzIG5vIG5lZWQgdG8g
+d2FpdCBhcyBubyBtYXBwaW5nIHdhcw0KPiA+ICsJCQkJICogcGVyZm9ybWVkIHdoZW4gdGhlIHBy
+ZXZpb3VzIHN0YXR1cyB3YXMNCj4gPiArCQkJCSAqIHByaXYtPnJldm9rZWQgPT0gdHJ1ZS4NCj4g
+PiArCQkJCSAqLw0KPiA+ICsJCQkJcmVpbml0X2NvbXBsZXRpb24oJnByaXYtPmNvbXApOw0KPiA+
+ICsJCQl9DQo+ID4gIAkJfQ0KPiA+ICAJCWZwdXQocHJpdi0+ZG1hYnVmLT5maWxlKTsNCj4gPiAg
+CX0NCj4gPiBAQCAtMzQ2LDYgKzQwMiw4IEBAIHZvaWQgdmZpb19wY2lfZG1hX2J1Zl9jbGVhbnVw
+KHN0cnVjdCB2ZmlvX3BjaV9jb3JlX2RldmljZSAqdmRldikNCj4gPiAgDQo+ID4gIAlkb3duX3dy
+aXRlKCZ2ZGV2LT5tZW1vcnlfbG9jayk7DQo+ID4gIAlsaXN0X2Zvcl9lYWNoX2VudHJ5X3NhZmUo
+cHJpdiwgdG1wLCAmdmRldi0+ZG1hYnVmcywgZG1hYnVmc19lbG0pIHsNCj4gPiArCQl1bnNpZ25l
+ZCBsb25nIHdhaXQ7DQo+ID4gKw0KPiA+ICAJCWlmICghZ2V0X2ZpbGVfYWN0aXZlKCZwcml2LT5k
+bWFidWYtPmZpbGUpKQ0KPiA+ICAJCQljb250aW51ZTsNCj4gPiAgDQo+ID4gQEAgLTM1NCw3ICs0
+MTIsMTQgQEAgdm9pZCB2ZmlvX3BjaV9kbWFfYnVmX2NsZWFudXAoc3RydWN0IHZmaW9fcGNpX2Nv
+cmVfZGV2aWNlICp2ZGV2KQ0KPiA+ICAJCXByaXYtPnZkZXYgPSBOVUxMOw0KPiA+ICAJCXByaXYt
+PnJldm9rZWQgPSB0cnVlOw0KPiA+ICAJCWRtYV9idWZfaW52YWxpZGF0ZV9tYXBwaW5ncyhwcml2
+LT5kbWFidWYpOw0KPiA+ICsJCWRtYV9yZXN2X3dhaXRfdGltZW91dChwcml2LT5kbWFidWYtPnJl
+c3YsDQo+ID4gKwkJCQkgICAgICBETUFfUkVTVl9VU0FHRV9CT09LS0VFUCwgZmFsc2UsDQo+ID4g
+KwkJCQkgICAgICBNQVhfU0NIRURVTEVfVElNRU9VVCk7DQo+ID4gIAkJZG1hX3Jlc3ZfdW5sb2Nr
+KHByaXYtPmRtYWJ1Zi0+cmVzdik7DQo+ID4gKwkJa3JlZl9wdXQoJnByaXYtPmtyZWYsIHZmaW9f
+cGNpX2RtYV9idWZfZG9uZSk7DQo+ID4gKwkJd2FpdCA9IHdhaXRfZm9yX2NvbXBsZXRpb25fdGlt
+ZW91dCgmcHJpdi0+Y29tcCwNCj4gPiArCQkJCQkJICAgc2Vjc190b19qaWZmaWVzKDEpKTsNCj4g
+PiArCQlXQVJOX09OKCF3YWl0KTsNCj4gPiAgCQl2ZmlvX2RldmljZV9wdXRfcmVnaXN0cmF0aW9u
+KCZ2ZGV2LT52ZGV2KTsNCj4gPiAgCQlmcHV0KHByaXYtPmRtYWJ1Zi0+ZmlsZSk7DQo+ID4gIAl9
+DQo+ID4gDQo+ID4gLS0gDQo+ID4gMi41Mi4wDQo+ID4gDQo+ID4gDQo+IA0KX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5n
+IGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNl
+bmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
