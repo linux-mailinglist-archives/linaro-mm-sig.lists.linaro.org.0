@@ -2,51 +2,51 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id yMAELF+qfGkaOQIAu9opvQ
+	id b+j6J8irfGlsOQIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 30 Jan 2026 13:55:59 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 30 Jan 2026 14:02:00 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 28116BAC4C
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 30 Jan 2026 13:55:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6AF40BAD5B
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 30 Jan 2026 14:01:55 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id EB8243F99C
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 30 Jan 2026 12:55:57 +0000 (UTC)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
-	by lists.linaro.org (Postfix) with ESMTPS id BF8FF3F720
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 30 Jan 2026 12:55:51 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 63A5B40171
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 30 Jan 2026 13:01:53 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+	by lists.linaro.org (Postfix) with ESMTPS id 48D363F7C4
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 30 Jan 2026 13:01:36 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=WJzfef1m;
-	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=leon@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=NifBrC6N;
+	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=leon@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by tor.source.kernel.org (Postfix) with ESMTP id E21C46001A;
-	Fri, 30 Jan 2026 12:55:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E03C8C4CEF7;
-	Fri, 30 Jan 2026 12:55:49 +0000 (UTC)
+	by sea.source.kernel.org (Postfix) with ESMTP id 79A6C44113;
+	Fri, 30 Jan 2026 13:01:35 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 34801C4CEF7;
+	Fri, 30 Jan 2026 13:01:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1769777750;
-	bh=TRVxNgALhdVq3UF72R4/tO5tMWCJQNOfxrwhinpqw5Y=;
+	s=k20201202; t=1769778095;
+	bh=G9gqcm5xvvohqtK7Hn6zZekh4h/DHomGvNcfw1+6iRI=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=WJzfef1mFWJvqqhgoKwPzjVYx5BqBw33sBFl2eKDp/Pfvj7OIsA58ekqM8jdY3BK0
-	 73Zf1ip4BeZTomQHhEjAraKiVgniCQCWfXnfLxvj9a/O/9oU8Z9NkWoMKtCCTYeCFF
-	 p2oXro+vc40lycbeKRa73+LghlplIp7Ams11CYwswNZzSY/7PwnmIoPtYvMVs9gpe8
-	 yx38R1aQxwUojvoiPQaCUXtWo6l8WJdKvIUidBM6L71DxpGdbxjw95NVRiDXP8aj08
-	 Scro6rXSvN7lLNXRce64nJxQhqvN5iJEhuGUtC+eZIxMtOGr27eOhNa4t+m02fVjfH
-	 M/lOMNd6BTANA==
-Date: Fri, 30 Jan 2026 14:55:45 +0200
+	b=NifBrC6N9IdxcdIqlbLTrHVC34TgjUy8tFu+8gsA8K04kfGHFlRId0Fwx0sVA7YXj
+	 m1SG4yWIlHuUPz78RzlapuF7YENxIdsTS3/tehFYWKg3xM1KqHAigpk7CtIM5S9X0B
+	 zkTYYLzL61zodPhrmUG5sgxFDL4WwXQnv0lCastQLGnEnRfDGqqJLDAuyfWqErBs0Z
+	 E3aOzmmKa2KuIDIBmnSNYqi0R16rBLgyr1308Yo2VEFcG0oO6iN/M6C+McO2ttZrN1
+	 FUIUGT8Bg4X681eJYxB3qV7hPJhy3EaSAkWEQH/NPFUNwFb5RWkC3CORC/lqjuPOZI
+	 7wA7gzOJFC1mg==
+Date: Fri, 30 Jan 2026 15:01:31 +0200
 From: Leon Romanovsky <leon@kernel.org>
 To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
-Message-ID: <20260130125545.GN10992@unreal>
+Message-ID: <20260130130131.GO10992@unreal>
 References: <20260124-dmabuf-revoke-v5-0-f98fca917e96@nvidia.com>
- <20260124-dmabuf-revoke-v5-5-f98fca917e96@nvidia.com>
- <3dec1de0-0e5b-4a47-b2cc-949edea16328@amd.com>
+ <20260124-dmabuf-revoke-v5-4-f98fca917e96@nvidia.com>
+ <31872c87-5cba-4081-8196-72cc839c6122@amd.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <3dec1de0-0e5b-4a47-b2cc-949edea16328@amd.com>
+In-Reply-To: <31872c87-5cba-4081-8196-72cc839c6122@amd.com>
 X-Spamd-Bar: ---
-Message-ID-Hash: NMDTCU36GVIOTDGMX53QETPGZ7VBTBGP
-X-Message-ID-Hash: NMDTCU36GVIOTDGMX53QETPGZ7VBTBGP
+Message-ID-Hash: BZ26N2LC7VGRVHTWHUTJIMKHU7LZYSKL
+X-Message-ID-Hash: BZ26N2LC7VGRVHTWHUTJIMKHU7LZYSKL
 X-MailFrom: leon@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
@@ -54,9 +54,9 @@ CC: Sumit Semwal <sumit.semwal@linaro.org>, Alex Deucher <alexander.deucher@amd.
  @vger.kernel.org, amd-gfx@lists.freedesktop.org, virtualization@lists.linux.dev, intel-xe@lists.freedesktop.org, linux-rdma@vger.kernel.org, iommu@lists.linux.dev, kvm@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v5 5/8] dma-buf: Make .invalidate_mapping() truly optional
+Subject: [Linaro-mm-sig] Re: [PATCH v5 4/8] vfio: Wait for dma-buf invalidation to complete
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NMDTCU36GVIOTDGMX53QETPGZ7VBTBGP/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/BZ26N2LC7VGRVHTWHUTJIMKHU7LZYSKL/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -91,108 +91,257 @@ X-Spamd-Result: default: False [2.49 / 15.00];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RSPAMD_EMAILBL_FAIL(0.00)[linaro-mm-sig-leave.lists.linaro.org:query timed out];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,nvidia.com:email]
-X-Rspamd-Queue-Id: 28116BAC4C
+	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
+X-Rspamd-Queue-Id: 6AF40BAD5B
 X-Rspamd-Action: no action
 
-On Fri, Jan 30, 2026 at 09:30:05AM +0100, Christian K=F6nig wrote:
+On Fri, Jan 30, 2026 at 09:30:59AM +0100, Christian K=F6nig wrote:
 > On 1/24/26 20:14, Leon Romanovsky wrote:
 > > From: Leon Romanovsky <leonro@nvidia.com>
 > >=20
-> > The .invalidate_mapping() callback is documented as optional, yet it
-> > effectively became mandatory whenever importer_ops were provided. This
-> > led to cases where RDMA non-ODP code had to supply an empty stub.
+> > dma-buf invalidation is handled asynchronously by the hardware, so VFIO
+> > must wait until all affected objects have been fully invalidated.
 > >=20
-> > Relax the checks in the dma-buf core so the callback can be omitted,
-> > allowing RDMA code to drop the unnecessary function.
+> > In addition, the dma-buf exporter is expecting that all importers unmap=
+ any
+> > buffers they previously mapped.
 > >=20
-> > Removing the stub allows the next patch to tell that RDMA does not supp=
-ort
-> > .invalidate_mapping() by checking for a NULL op.
-> >=20
+> > Fixes: 5d74781ebc86 ("vfio/pci: Add dma-buf export support for MMIO reg=
+ions")
 > > Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
 > > ---
-> >  drivers/dma-buf/dma-buf.c             |  6 ++----
-> >  drivers/infiniband/core/umem_dmabuf.c | 13 -------------
-> >  2 files changed, 2 insertions(+), 17 deletions(-)
+> >  drivers/vfio/pci/vfio_pci_dmabuf.c | 71 ++++++++++++++++++++++++++++++=
+++++++--
+> >  1 file changed, 68 insertions(+), 3 deletions(-)
 > >=20
-> > diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
-> > index cd68c1c0bfd7..1629312d364a 100644
-> > --- a/drivers/dma-buf/dma-buf.c
-> > +++ b/drivers/dma-buf/dma-buf.c
-> > @@ -947,9 +947,6 @@ dma_buf_dynamic_attach(struct dma_buf *dmabuf, stru=
-ct device *dev,
-> >  	if (WARN_ON(!dmabuf || !dev))
-> >  		return ERR_PTR(-EINVAL);
+> > diff --git a/drivers/vfio/pci/vfio_pci_dmabuf.c b/drivers/vfio/pci/vfio=
+_pci_dmabuf.c
+> > index d8ceafabef48..485515629fe4 100644
+> > --- a/drivers/vfio/pci/vfio_pci_dmabuf.c
+> > +++ b/drivers/vfio/pci/vfio_pci_dmabuf.c
+> > @@ -17,6 +17,8 @@ struct vfio_pci_dma_buf {
+> >  	struct dma_buf_phys_vec *phys_vec;
+> >  	struct p2pdma_provider *provider;
+> >  	u32 nr_ranges;
+> > +	struct kref kref;
+> > +	struct completion comp;
+> >  	u8 revoked : 1;
+> >  };
 > > =20
-> > -	if (WARN_ON(importer_ops && !importer_ops->invalidate_mappings))
-> > -		return ERR_PTR(-EINVAL);
-> > -
-> >  	attach =3D kzalloc(sizeof(*attach), GFP_KERNEL);
-> >  	if (!attach)
-> >  		return ERR_PTR(-ENOMEM);
-> > @@ -1260,7 +1257,8 @@ void dma_buf_invalidate_mappings(struct dma_buf *=
-dmabuf)
-> >  	dma_resv_assert_held(dmabuf->resv);
-> > =20
-> >  	list_for_each_entry(attach, &dmabuf->attachments, node)
-> > -		if (attach->importer_ops)
-> > +		if (attach->importer_ops &&
-> > +		    attach->importer_ops->invalidate_mappings)
-> >  			attach->importer_ops->invalidate_mappings(attach);
+> > @@ -44,27 +46,46 @@ static int vfio_pci_dma_buf_attach(struct dma_buf *=
+dmabuf,
+> >  	return 0;
 > >  }
-> >  EXPORT_SYMBOL_NS_GPL(dma_buf_invalidate_mappings, "DMA_BUF");
-> > diff --git a/drivers/infiniband/core/umem_dmabuf.c b/drivers/infiniband=
-/core/umem_dmabuf.c
-> > index d77a739cfe7a..256e34c15e6b 100644
-> > --- a/drivers/infiniband/core/umem_dmabuf.c
-> > +++ b/drivers/infiniband/core/umem_dmabuf.c
-> > @@ -129,9 +129,6 @@ ib_umem_dmabuf_get_with_dma_device(struct ib_device=
- *device,
-> >  	if (check_add_overflow(offset, (unsigned long)size, &end))
-> >  		return ret;
 > > =20
-> > -	if (unlikely(!ops || !ops->invalidate_mappings))
+> > +static void vfio_pci_dma_buf_done(struct kref *kref)
+> > +{
+> > +	struct vfio_pci_dma_buf *priv =3D
+> > +		container_of(kref, struct vfio_pci_dma_buf, kref);
+> > +
+> > +	complete(&priv->comp);
+> > +}
+> > +
+> >  static struct sg_table *
+> >  vfio_pci_dma_buf_map(struct dma_buf_attachment *attachment,
+> >  		     enum dma_data_direction dir)
+> >  {
+> >  	struct vfio_pci_dma_buf *priv =3D attachment->dmabuf->priv;
+> > +	struct sg_table *ret;
+> > =20
+> >  	dma_resv_assert_held(priv->dmabuf->resv);
+> > =20
+> >  	if (priv->revoked)
+> >  		return ERR_PTR(-ENODEV);
+> > =20
+> > -	return dma_buf_phys_vec_to_sgt(attachment, priv->provider,
+> > -				       priv->phys_vec, priv->nr_ranges,
+> > -				       priv->size, dir);
+> > +	ret =3D dma_buf_phys_vec_to_sgt(attachment, priv->provider,
+> > +				      priv->phys_vec, priv->nr_ranges,
+> > +				      priv->size, dir);
+> > +	if (IS_ERR(ret))
+> > +		return ret;
+> > +
+> > +	kref_get(&priv->kref);
+> > +	return ret;
+> >  }
+> > =20
+> >  static void vfio_pci_dma_buf_unmap(struct dma_buf_attachment *attachme=
+nt,
+> >  				   struct sg_table *sgt,
+> >  				   enum dma_data_direction dir)
+> >  {
+> > +	struct vfio_pci_dma_buf *priv =3D attachment->dmabuf->priv;
+> > +
+> > +	dma_resv_assert_held(priv->dmabuf->resv);
+> > +
+> >  	dma_buf_free_sgt(attachment, sgt, dir);
+> > +	kref_put(&priv->kref, vfio_pci_dma_buf_done);
+> >  }
+> > =20
+> >  static void vfio_pci_dma_buf_release(struct dma_buf *dmabuf)
+> > @@ -287,6 +308,9 @@ int vfio_pci_core_feature_dma_buf(struct vfio_pci_c=
+ore_device *vdev, u32 flags,
+> >  		goto err_dev_put;
+> >  	}
+> > =20
+> > +	kref_init(&priv->kref);
+> > +	init_completion(&priv->comp);
+> > +
+> >  	/* dma_buf_put() now frees priv */
+> >  	INIT_LIST_HEAD(&priv->dmabufs_elm);
+> >  	down_write(&vdev->memory_lock);
+> > @@ -326,6 +350,8 @@ void vfio_pci_dma_buf_move(struct vfio_pci_core_dev=
+ice *vdev, bool revoked)
+> >  	lockdep_assert_held_write(&vdev->memory_lock);
+> > =20
+> >  	list_for_each_entry_safe(priv, tmp, &vdev->dmabufs, dmabufs_elm) {
+> > +		unsigned long wait;
+> > +
+> >  		if (!get_file_active(&priv->dmabuf->file))
+> >  			continue;
+> > =20
+> > @@ -333,7 +359,37 @@ void vfio_pci_dma_buf_move(struct vfio_pci_core_de=
+vice *vdev, bool revoked)
+> >  			dma_resv_lock(priv->dmabuf->resv, NULL);
+> >  			priv->revoked =3D revoked;
+> >  			dma_buf_invalidate_mappings(priv->dmabuf);
+> > +			dma_resv_wait_timeout(priv->dmabuf->resv,
+> > +					      DMA_RESV_USAGE_BOOKKEEP, false,
+> > +					      MAX_SCHEDULE_TIMEOUT);
+> >  			dma_resv_unlock(priv->dmabuf->resv);
+> > +			if (revoked) {
+> > +				kref_put(&priv->kref, vfio_pci_dma_buf_done);
+> > +				/* Let's wait till all DMA unmap are completed. */
+> > +				wait =3D wait_for_completion_timeout(
+> > +					&priv->comp, secs_to_jiffies(1));
+> > +				/*
+> > +				 * If you see this WARN_ON, it means that
+> > +				 * importer didn't call unmap in response to
+> > +				 * dma_buf_invalidate_mappings() which is not
+> > +				 * allowed.
+> > +				 */
+> > +				WARN(!wait,
+> > +				     "Timed out waiting for DMABUF unmap, importer has a broken in=
+validate_mapping()");
 >=20
-> You should probably keep "if (unlikely(!ops)).." here.
+> You can do the revoke to do your resource management, for example re-use =
+the backing store for something else.
+>=20
+> But it is mandatory that you keep the mapping around indefinitely until t=
+he importer closes it.
+>=20
+> Before that you can't do things like runtime PM or remove or anything whi=
+ch would make the DMA addresses invalid.
+>=20
+> As far as I can see vfio_pci_dma_buf_move() is used exactly for that use =
+case so this here is an absolutely clear NAK from my side for this approach.
+>=20
+> You can either split up the functionality of vfio_pci_dma_buf_move() into=
+ vfio_pci_dma_buf_invalidate_mappings() and vfio_pci_dma_buf_flush() and th=
+en call the later whenever necessary or you keep it in one function and blo=
+ck everybody until the importer has dropped all mappings.
 
-The unlikely is useless in this path.
+No problem, I can change it to be:
+
+diff --git a/drivers/vfio/pci/vfio_pci_dmabuf.c b/drivers/vfio/pci/vfio_pci=
+_dmabuf.c
+index d087d018d547..53772a84c93b 100644
+--- a/drivers/vfio/pci/vfio_pci_dmabuf.c
++++ b/drivers/vfio/pci/vfio_pci_dmabuf.c
+@@ -357,23 +357,7 @@ void vfio_pci_dma_buf_move(struct vfio_pci_core_device=
+ *vdev, bool revoked)
+                        dma_resv_unlock(priv->dmabuf->resv);
+                        if (revoked) {
+                                kref_put(&priv->kref, vfio_pci_dma_buf_done=
+);
+-                               /*
+-                                * Let's wait for 1 second till all DMA unm=
+ap
+-                                * are completed. It is supposed to catch d=
+ma-buf
+-                                * importers which lied about their support
+-                                * of dmabuf revoke. See dma_buf_invalidate=
+_mappings()
+-                                * for the expected behaviour.
+-                                */
+-                               wait =3D wait_for_completion_timeout(
+-                                       &priv->comp, secs_to_jiffies(1));
+-                               /*
+-                                * If you see this WARN_ON, it means that
+-                                * importer didn't call unmap in response to
+-                                * dma_buf_invalidate_mappings() which is n=
+ot
+-                                * allowed.
+-                                */
+-                               WARN(!wait,
+-                                    "Timed out waiting for DMABUF unmap, i=
+mporter has a broken invalidate_mapping()");
++                               wait_for_completion(&priv->comp);
+                        } else {
+                                /*
+                                 * Kref is initialize again, because when r=
+evoke
+
+Do you want me to send v6?
+
+Thanks
 
 >=20
-> Apart from that the patch looks good to me.
+> > +			} else {
+> > +				/*
+> > +				 * Kref is initialize again, because when revoke
+> > +				 * was performed the reference counter was decreased
+> > +				 * to zero to trigger completion.
+> > +				 */
+> > +				kref_init(&priv->kref);
+> > +				/*
+> > +				 * There is no need to wait as no mapping was
+> > +				 * performed when the previous status was
+> > +				 * priv->revoked =3D=3D true.
+> > +				 */
+> > +				reinit_completion(&priv->comp);
+> > +			}
+> >  		}
+> >  		fput(priv->dmabuf->file);
+>=20
+> This is also extremely questionable. Why doesn't the dmabuf have a refere=
+nce while on the linked list?
 >=20
 > Regards,
 > Christian.
 >=20
-> > -		return ret;
-> > -
-> >  	dmabuf =3D dma_buf_get(fd);
-> >  	if (IS_ERR(dmabuf))
-> >  		return ERR_CAST(dmabuf);
-> > @@ -184,18 +181,8 @@ struct ib_umem_dmabuf *ib_umem_dmabuf_get(struct i=
-b_device *device,
-> >  }
-> >  EXPORT_SYMBOL(ib_umem_dmabuf_get);
+> >  	}
+> > @@ -346,6 +402,8 @@ void vfio_pci_dma_buf_cleanup(struct vfio_pci_core_=
+device *vdev)
 > > =20
-> > -static void
-> > -ib_umem_dmabuf_unsupported_move_notify(struct dma_buf_attachment *atta=
-ch)
-> > -{
-> > -	struct ib_umem_dmabuf *umem_dmabuf =3D attach->importer_priv;
-> > -
-> > -	ibdev_warn_ratelimited(umem_dmabuf->umem.ibdev,
-> > -			       "Invalidate callback should not be called when memory is pin=
-ned\n");
-> > -}
-> > -
-> >  static struct dma_buf_attach_ops ib_umem_dmabuf_attach_pinned_ops =3D {
-> >  	.allow_peer2peer =3D true,
-> > -	.invalidate_mappings =3D ib_umem_dmabuf_unsupported_move_notify,
-> >  };
+> >  	down_write(&vdev->memory_lock);
+> >  	list_for_each_entry_safe(priv, tmp, &vdev->dmabufs, dmabufs_elm) {
+> > +		unsigned long wait;
+> > +
+> >  		if (!get_file_active(&priv->dmabuf->file))
+> >  			continue;
 > > =20
-> >  struct ib_umem_dmabuf *
+> > @@ -354,7 +412,14 @@ void vfio_pci_dma_buf_cleanup(struct vfio_pci_core=
+_device *vdev)
+> >  		priv->vdev =3D NULL;
+> >  		priv->revoked =3D true;
+> >  		dma_buf_invalidate_mappings(priv->dmabuf);
+> > +		dma_resv_wait_timeout(priv->dmabuf->resv,
+> > +				      DMA_RESV_USAGE_BOOKKEEP, false,
+> > +				      MAX_SCHEDULE_TIMEOUT);
+> >  		dma_resv_unlock(priv->dmabuf->resv);
+> > +		kref_put(&priv->kref, vfio_pci_dma_buf_done);
+> > +		wait =3D wait_for_completion_timeout(&priv->comp,
+> > +						   secs_to_jiffies(1));
+> > +		WARN_ON(!wait);
+> >  		vfio_device_put_registration(&vdev->vdev);
+> >  		fput(priv->dmabuf->file);
+> >  	}
 > >=20
+>=20
 >=20
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
