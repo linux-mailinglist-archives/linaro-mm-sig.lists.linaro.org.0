@@ -2,38 +2,38 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id CJRSL76UfWnQSgIAu9opvQ
+	id iB0sKdGUfWnQSgIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 31 Jan 2026 06:35:58 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 31 Jan 2026 06:36:17 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B1E2C0D4F
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 31 Jan 2026 06:35:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4B410C0D76
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 31 Jan 2026 06:36:17 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B000F401D9
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 31 Jan 2026 05:35:57 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5BF573F961
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 31 Jan 2026 05:36:16 +0000 (UTC)
 Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 6E878401DD
-	for <linaro-mm-sig@lists.linaro.org>; Sat, 31 Jan 2026 05:34:51 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 0C551401D3
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 31 Jan 2026 05:34:55 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=BF0tdCFE;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=uJdD3UUT;
 	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=leon@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id E44E340632;
-	Sat, 31 Jan 2026 05:34:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2CEB5C4CEF1;
-	Sat, 31 Jan 2026 05:34:50 +0000 (UTC)
+	by sea.source.kernel.org (Postfix) with ESMTP id 7A2494387C;
+	Sat, 31 Jan 2026 05:34:54 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B07C1C19422;
+	Sat, 31 Jan 2026 05:34:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1769837690;
-	bh=3D3OvmHdl7CtonK+GTGLGOQGYsGv5xRF/fJKjHtWrds=;
+	s=k20201202; t=1769837694;
+	bh=lXD3Rfmrq9ID2Phy2qOuoiFRYX7CFuqYnX/mCIn2d/Y=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=BF0tdCFE4Ogubos9I38VfcVq+hY4Vax+5vxviEYob5Hri9lCp9r9CBO8JX0ZGobQE
-	 63bwT4oItwwCY6UfPN8IEt7gwO4IWbeux0QeqQpXUJrwavRvSK7axD8cV5Tsa/CHHX
-	 yJ6wxI8mnbqshjmHCN0FbNPmRmFbY651emPOZJz+e4DHnDEgVMFOg02KfyhloSXy7u
-	 UYGeIp1zul1OMlSdg6ZuvfoUWb66UwpdRvgt3An0KOjCjZGMk3Sae50iyMaFQ+qRfY
-	 6C1c/ehRJueilGHCjZsZNV/vY32PM9cr8fC0qT4P/2pyJC+CmYIY/62SsMLfsKsmg9
-	 D0kSh5i7jvZuA==
+	b=uJdD3UUTvFVZ1bRRWcfac7E2Miig22lWJ0Vdj0fqat20b+afqAxwxDcGADCeOe6r+
+	 dSULAUUKTv9DRSSwjGE8Jh1hvQaT83fJdQ8X4+t40pSbEGaU2gXVPQMvEE79tNYFs6
+	 0SR8//5HGdjJYUVS8hHjCSwBt9DycPFUSm6jcidAT1fADs4ETvGOW1H5bOLzMr/F95
+	 zCrJ7XrYRxny/BEYqw205a2U01qNka3wt0hY2vohqW/17+cstkTE5GgWPnV4+LlrMJ
+	 v2xIGQlWMfA/+QHXJv153fzHFZyXdOAbArLuKXEEJzgQ+vpGLpGBxfemJXLQ5LxmN9
+	 yeUh1saKO3Y/w==
 From: Leon Romanovsky <leon@kernel.org>
 To: Sumit Semwal <sumit.semwal@linaro.org>,
 	=?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
@@ -60,207 +60,99 @@ To: Sumit Semwal <sumit.semwal@linaro.org>,
 	Alex Williamson <alex@shazbot.org>,
 	Ankit Agrawal <ankita@nvidia.com>,
 	Vivek Kasireddy <vivek.kasireddy@intel.com>
-Date: Sat, 31 Jan 2026 07:34:16 +0200
-Message-ID: <20260131-dmabuf-revoke-v7-6-463d956bd527@nvidia.com>
+Date: Sat, 31 Jan 2026 07:34:17 +0200
+Message-ID: <20260131-dmabuf-revoke-v7-7-463d956bd527@nvidia.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260131-dmabuf-revoke-v7-0-463d956bd527@nvidia.com>
 References: <20260131-dmabuf-revoke-v7-0-463d956bd527@nvidia.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 X-Mailer: b4 0.15-dev-47773
 X-Spamd-Bar: ----
-Message-ID-Hash: VG6ONZS75UX22MZVCYE22NDDT6TUJM7X
-X-Message-ID-Hash: VG6ONZS75UX22MZVCYE22NDDT6TUJM7X
+Message-ID-Hash: WT35KCUTJPC2JAPZ2RPGAQBCTB5T6HHM
+X-Message-ID-Hash: WT35KCUTJPC2JAPZ2RPGAQBCTB5T6HHM
 X-MailFrom: leon@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, amd-gfx@lists.freedesktop.org, virtualization@lists.linux.dev, intel-xe@lists.freedesktop.org, linux-rdma@vger.kernel.org, iommu@lists.linux.dev, kvm@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v7 6/8] dma-buf: Add dma_buf_attach_revocable()
+Subject: [Linaro-mm-sig] [PATCH v7 7/8] vfio: Permit VFIO to work with pinned importers
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VG6ONZS75UX22MZVCYE22NDDT6TUJM7X/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WT35KCUTJPC2JAPZ2RPGAQBCTB5T6HHM/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [1.99 / 15.00];
+X-Spamd-Result: default: False [2.09 / 15.00];
 	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
 	R_DKIM_REJECT(1.00)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+mx:c];
+	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	FREEMAIL_TO(0.00)[linaro.org,amd.com,gmail.com,ffwll.ch,redhat.com,collabora.com,chromium.org,linux.intel.com,kernel.org,suse.de,intel.com,ziepe.ca,8bytes.org,arm.com,shazbot.org,nvidia.com];
-	FROM_HAS_DN(0.00)[];
 	ARC_NA(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCPT_COUNT_TWELVE(0.00)[35];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
 	FROM_NEQ_ENVFROM(0.00)[leon@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:-];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:mid,nvidia.com:email,lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
-X-Rspamd-Queue-Id: 8B1E2C0D4F
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,amd.com:email,linaro.org:email,shazbot.org:email,intel.com:email,nvidia.com:mid,nvidia.com:email]
+X-Rspamd-Queue-Id: 4B410C0D76
 X-Rspamd-Action: no action
 
-From: Leon Romanovsky <leonro@nvidia.com>
-
-Some exporters need a flow to synchronously revoke access to the DMA-buf
-by importers. Once revoke is completed the importer is not permitted to
-touch the memory otherwise they may get IOMMU faults, AERs, or worse.
-
-DMA-buf today defines a revoke flow, for both pinned and dynamic
-importers, which is broadly:
-
-	dma_resv_lock(dmabuf->resv, NULL);
-	// Prevent new mappings from being established
-	priv->revoked = true;
-
-	// Tell all importers to eventually unmap
-	dma_buf_invalidate_mappings(dmabuf);
-
-	// Wait for any inprogress fences on the old mapping
-	dma_resv_wait_timeout(dmabuf->resv,
-			      DMA_RESV_USAGE_BOOKKEEP, false,
-			      MAX_SCHEDULE_TIMEOUT);
-	dma_resv_unlock(dmabuf->resv, NULL);
-
-	// Wait for all importers to complete unmap
-	wait_for_completion(&priv->unmapped_comp);
-
-This works well, and an importer that continues to access the DMA-buf
-after unmapping it is very buggy.
-
-However, the final wait for unmap is effectively unbounded. Several
-importers do not support invalidate_mappings() at all and won't unmap
-until userspace triggers it.
-
-This unbounded wait is not suitable for exporters like VFIO and RDMA tha
-need to issue revoke as part of their normal operations.
-
-Add dma_buf_attach_revocable() to allow exporters to determine the
-difference between importers that can complete the above in bounded time,
-and those that can't. It can be called inside the exporter's attach op to
-reject incompatible importers.
-
-Document these details about how dma_buf_invalidate_mappings() works and
-what the required sequence is to achieve a full revocation.
-
-Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
----
- drivers/dma-buf/dma-buf.c | 48 ++++++++++++++++++++++++++++++++++++++++++++++-
- include/linux/dma-buf.h   |  9 +++------
- 2 files changed, 50 insertions(+), 7 deletions(-)
-
-diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
-index 1629312d364a..f0e05227bda8 100644
---- a/drivers/dma-buf/dma-buf.c
-+++ b/drivers/dma-buf/dma-buf.c
-@@ -1242,13 +1242,59 @@ void dma_buf_unmap_attachment_unlocked(struct dma_buf_attachment *attach,
- }
- EXPORT_SYMBOL_NS_GPL(dma_buf_unmap_attachment_unlocked, "DMA_BUF");
- 
-+/**
-+ * dma_buf_attach_revocable - check if a DMA-buf importer implements
-+ * revoke semantics.
-+ * @attach: the DMA-buf attachment to check
-+ *
-+ * Returns true if the DMA-buf importer can support the revoke sequence
-+ * explained in dma_buf_invalidate_mappings() within bounded time. Meaning the
-+ * importer implements invalidate_mappings() and ensures that unmap is called as
-+ * a result.
-+ */
-+bool dma_buf_attach_revocable(struct dma_buf_attachment *attach)
-+{
-+	return attach->importer_ops &&
-+	       attach->importer_ops->invalidate_mappings;
-+}
-+EXPORT_SYMBOL_NS_GPL(dma_buf_attach_revocable, "DMA_BUF");
-+
- /**
-  * dma_buf_invalidate_mappings - notify attachments that DMA-buf is moving
-  *
-  * @dmabuf:	[in]	buffer which is moving
-  *
-  * Informs all attachments that they need to destroy and recreate all their
-- * mappings.
-+ * mappings. If the attachment is dynamic then the dynamic importer is expected
-+ * to invalidate any caches it has of the mapping result and perform a new
-+ * mapping request before allowing HW to do any further DMA.
-+ *
-+ * If the attachment is pinned then this informs the pinned importer that the
-+ * underlying mapping is no longer available. Pinned importers may take this is
-+ * as a permanent revocation and never establish new mappings so exporters
-+ * should not trigger it lightly.
-+ *
-+ * Upon return importers may continue to access the DMA-buf memory. The caller
-+ * must do two additional waits to ensure that the memory is no longer being
-+ * accessed:
-+ *  1) Until dma_resv_wait_timeout() retires fences the importer is allowed to
-+ *     fully access the memory.
-+ *  2) Until the importer calls unmap it is allowed to speculatively
-+ *     read-and-discard the memory. It must not write to the memory.
-+ *
-+ * A caller wishing to use dma_buf_invalidate_mappings() to fully stop access to
-+ * the DMA-buf must wait for both. Dynamic callers can often use just the first.
-+ *
-+ * All importers providing a invalidate_mappings() op must ensure that unmap is
-+ * called within bounded time after the op.
-+ *
-+ * Pinned importers that do not support a invalidate_mappings() op will
-+ * eventually perform unmap when they are done with the buffer, which may be an
-+ * ubounded time from calling this function. dma_buf_attach_revocable() can be
-+ * used to prevent such importers from attaching.
-+ *
-+ * Importers are free to request a new mapping in parallel as this function
-+ * returns.
-  */
- void dma_buf_invalidate_mappings(struct dma_buf *dmabuf)
- {
-diff --git a/include/linux/dma-buf.h b/include/linux/dma-buf.h
-index d5c3ce2b3aa4..84a7ec8f5359 100644
---- a/include/linux/dma-buf.h
-+++ b/include/linux/dma-buf.h
-@@ -468,12 +468,8 @@ struct dma_buf_attach_ops {
- 	 * called with this lock held as well. This makes sure that no mapping
- 	 * is created concurrently with an ongoing move operation.
- 	 *
--	 * Mappings stay valid and are not directly affected by this callback.
--	 * But the DMA-buf can now be in a different physical location, so all
--	 * mappings should be destroyed and re-created as soon as possible.
--	 *
--	 * New mappings can be created after this callback returns, and will
--	 * point to the new location of the DMA-buf.
-+	 * See the kdoc for dma_buf_invalidate_mappings() for details on the
-+	 * required behavior.
- 	 */
- 	void (*invalidate_mappings)(struct dma_buf_attachment *attach);
- };
-@@ -601,6 +597,7 @@ struct sg_table *dma_buf_map_attachment(struct dma_buf_attachment *,
- void dma_buf_unmap_attachment(struct dma_buf_attachment *, struct sg_table *,
- 				enum dma_data_direction);
- void dma_buf_invalidate_mappings(struct dma_buf *dma_buf);
-+bool dma_buf_attach_revocable(struct dma_buf_attachment *attach);
- int dma_buf_begin_cpu_access(struct dma_buf *dma_buf,
- 			     enum dma_data_direction dir);
- int dma_buf_end_cpu_access(struct dma_buf *dma_buf,
-
--- 
-2.52.0
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+RnJvbTogTGVvbiBSb21hbm92c2t5IDxsZW9ucm9AbnZpZGlhLmNvbT4NCg0KVGlsbCBub3cgVkZJ
+TyBoYXMgcmVqZWN0ZWQgcGlubmVkIGltcG9ydGVycywgbGFyZ2VseSB0byBhdm9pZCBiZWluZyB1
+c2VkDQp3aXRoIHRoZSBSRE1BIHBpbm5lZCBpbXBvcnRlciB0aGF0IGNhbm5vdCBoYW5kbGUgYSBt
+b3ZlX25vdGlmeSgpIHRvIHJldm9rZQ0KYWNjZXNzLg0KDQpVc2luZyBkbWFfYnVmX2F0dGFjaF9y
+ZXZvY2FibGUoKSBpdCBjYW4gdGVsbCB0aGUgZGlmZmVyZW5jZSBiZXR3ZWVuIHBpbm5lZA0KaW1w
+b3J0ZXJzIHRoYXQgc3VwcG9ydCB0aGUgZmxvdyBkZXNjcmliZWQgaW4gZG1hX2J1Zl9pbnZhbGlk
+YXRlX21hcHBpbmdzKCkNCmFuZCB0aG9zZSB0aGF0IGRvbid0Lg0KDQpUaHVzIHBlcm1pdCBjb21w
+YXRpYmxlIHBpbm5lZCBpbXBvcnRlcnMuDQoNClRoaXMgaXMgb25lIG9mIHR3byBpdGVtcyBJT01N
+VUZEIHJlcXVpcmVzIHRvIHJlbW92ZSBpdHMgcHJpdmF0ZSBpbnRlcmZhY2UNCnRvIFZGSU8ncyBk
+bWEtYnVmLg0KDQpSZXZpZXdlZC1ieTogS2V2aW4gVGlhbiA8a2V2aW4udGlhbkBpbnRlbC5jb20+
+DQpSZXZpZXdlZC1ieTogQWxleCBXaWxsaWFtc29uIDxhbGV4QHNoYXpib3Qub3JnPg0KUmV2aWV3
+ZWQtYnk6IENocmlzdGlhbiBLw7ZuaWcgPGNocmlzdGlhbi5rb2VuaWdAYW1kLmNvbT4NClNpZ25l
+ZC1vZmYtYnk6IExlb24gUm9tYW5vdnNreSA8bGVvbnJvQG52aWRpYS5jb20+DQotLS0NCiBkcml2
+ZXJzL3ZmaW8vcGNpL3ZmaW9fcGNpX2RtYWJ1Zi5jIHwgMTUgKysrLS0tLS0tLS0tLS0tDQogMSBm
+aWxlIGNoYW5nZWQsIDMgaW5zZXJ0aW9ucygrKSwgMTIgZGVsZXRpb25zKC0pDQoNCmRpZmYgLS1n
+aXQgYS9kcml2ZXJzL3ZmaW8vcGNpL3ZmaW9fcGNpX2RtYWJ1Zi5jIGIvZHJpdmVycy92ZmlvL3Bj
+aS92ZmlvX3BjaV9kbWFidWYuYw0KaW5kZXggNzhkNDdlMjYwZjM0Li5hNWZiODBlMDY4ZWUgMTAw
+NjQ0DQotLS0gYS9kcml2ZXJzL3ZmaW8vcGNpL3ZmaW9fcGNpX2RtYWJ1Zi5jDQorKysgYi9kcml2
+ZXJzL3ZmaW8vcGNpL3ZmaW9fcGNpX2RtYWJ1Zi5jDQpAQCAtMjIsMTYgKzIyLDYgQEAgc3RydWN0
+IHZmaW9fcGNpX2RtYV9idWYgew0KIAl1OCByZXZva2VkIDogMTsNCiB9Ow0KIA0KLXN0YXRpYyBp
+bnQgdmZpb19wY2lfZG1hX2J1Zl9waW4oc3RydWN0IGRtYV9idWZfYXR0YWNobWVudCAqYXR0YWNo
+bWVudCkNCi17DQotCXJldHVybiAtRU9QTk9UU1VQUDsNCi19DQotDQotc3RhdGljIHZvaWQgdmZp
+b19wY2lfZG1hX2J1Zl91bnBpbihzdHJ1Y3QgZG1hX2J1Zl9hdHRhY2htZW50ICphdHRhY2htZW50
+KQ0KLXsNCi0JLyogRG8gbm90aGluZyAqLw0KLX0NCi0NCiBzdGF0aWMgaW50IHZmaW9fcGNpX2Rt
+YV9idWZfYXR0YWNoKHN0cnVjdCBkbWFfYnVmICpkbWFidWYsDQogCQkJCSAgIHN0cnVjdCBkbWFf
+YnVmX2F0dGFjaG1lbnQgKmF0dGFjaG1lbnQpDQogew0KQEAgLTQzLDYgKzMzLDkgQEAgc3RhdGlj
+IGludCB2ZmlvX3BjaV9kbWFfYnVmX2F0dGFjaChzdHJ1Y3QgZG1hX2J1ZiAqZG1hYnVmLA0KIAlp
+ZiAocHJpdi0+cmV2b2tlZCkNCiAJCXJldHVybiAtRU5PREVWOw0KIA0KKwlpZiAoIWRtYV9idWZf
+YXR0YWNoX3Jldm9jYWJsZShhdHRhY2htZW50KSkNCisJCXJldHVybiAtRU9QTk9UU1VQUDsNCisN
+CiAJcmV0dXJuIDA7DQogfQ0KIA0KQEAgLTEwNyw4ICsxMDAsNiBAQCBzdGF0aWMgdm9pZCB2Zmlv
+X3BjaV9kbWFfYnVmX3JlbGVhc2Uoc3RydWN0IGRtYV9idWYgKmRtYWJ1ZikNCiB9DQogDQogc3Rh
+dGljIGNvbnN0IHN0cnVjdCBkbWFfYnVmX29wcyB2ZmlvX3BjaV9kbWFidWZfb3BzID0gew0KLQku
+cGluID0gdmZpb19wY2lfZG1hX2J1Zl9waW4sDQotCS51bnBpbiA9IHZmaW9fcGNpX2RtYV9idWZf
+dW5waW4sDQogCS5hdHRhY2ggPSB2ZmlvX3BjaV9kbWFfYnVmX2F0dGFjaCwNCiAJLm1hcF9kbWFf
+YnVmID0gdmZpb19wY2lfZG1hX2J1Zl9tYXAsDQogCS51bm1hcF9kbWFfYnVmID0gdmZpb19wY2lf
+ZG1hX2J1Zl91bm1hcCwNCg0KLS0gDQoyLjUyLjANCg0KX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGlu
+YXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwg
+dG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
