@@ -2,333 +2,345 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id UA5mNm8Q4WnoogAAu9opvQ
+	id qAZSInUQ4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:38:07 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:38:13 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7AC4F411C7D
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:38:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 47716411C94
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:38:12 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8D18B44AF7
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:38:06 +0000 (UTC)
-Received: from CY7PR03CU001.outbound.protection.outlook.com (mail-westcentralusazon11010032.outbound.protection.outlook.com [40.93.198.32])
-	by lists.linaro.org (Postfix) with ESMTPS id A769B401B6
-	for <linaro-mm-sig@lists.linaro.org>; Sun,  1 Feb 2026 14:35:30 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 072D844B17
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:38:12 +0000 (UTC)
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+	by lists.linaro.org (Postfix) with ESMTPS id 7234E3F677
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  2 Feb 2026 10:12:42 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=Nvidia.com header.s=selector2 header.b=Dlmm23tp;
-	spf=pass (lists.linaro.org: domain of edwards@nvidia.com designates 40.93.198.32 as permitted sender) smtp.mailfrom=edwards@nvidia.com;
-	arc=pass ("microsoft.com:s=arcselector10001:i=1");
-	dmarc=pass (policy=reject) header.from=nvidia.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=IUGfmJ3cL4GgpEWMN/koMmZPJL/AsnU/wO6Wd8XWCHtbotNHSxTY7U19PcOqMdC2rqwpg4CcIMRnUj5sAOR9ISIawqI/4DvGvnAf+9sRUZBHolRcqmWmnWqVNGw1szWbiE7xe+qc5jWnWvoYl0J3eUK3V2hSqx99w11dnMq37hhMIUr+i1PzKcCysCBkIdNFMuf2dbOhruW8sGOdmnPchgG9epeUIqDL42XzIbJv1qQ37OClwusXIc5CpKFpLriD4JBUqCVZYE+IbrTRGQGdDADbiHAxzDymk+l7UTTpsmGzeT/drYVWv7t1EXdlBJJoLOSg7yK5xXjFAKwbSdgYwA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=etM0H50chfQ8pMIhJKKZEvR9cAJMMGv8G3uw51dJjes=;
- b=fMNSJLOpTfdvTb8gENBm9AOvSJBZJHSTcIr3mrTOT7JwVYH0oW8AeKwsvcgccLROxqdR4q8V1Wwkh5/18M7bOGqwTwD90ip/Xh71oYaFlGi+hu6E+SfZNFoqRTVn9XefAFuMxNAtNj7fr5q+vm8Bb6pPPiypSUEWXw++ySrhm05kzg7aehttKiFtd1JhzAOEl8E+TV+/eJSAr8Uk9PQ32cDwsB+UXKOKE6feZVV1KJJz3LS4Rlpjz34UnITtkCs7HBeA+0/lrJme/JpzA0BCWQpPmytzl/uTtqvKl66Czj4Q1CLl1ZE5Bc+r5aWQsVa7K/wUWu/eANZbpAFVjtXUBA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.117.160) smtp.rcpttodomain=ziepe.ca smtp.mailfrom=nvidia.com;
- dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=etM0H50chfQ8pMIhJKKZEvR9cAJMMGv8G3uw51dJjes=;
- b=Dlmm23tpB1ZakClBNGJiMCPVfy7rxpZg+HJbcQuzC/9lT7q0kpWzTFvUNMYy2P+9z7ccfBYVtxg0CComvcQzK2QU65kVwbvba4mkTUku9JNASq064aL4GXuUrhalHbIX8cTD0HfMER7nAN1EUwsY7/6IUVwr/237q9axAZuT/kPbYcReNZEQ4MQiNyVO+jqU7+VjZlv7OzLAEqTRhz1zPtjdNRMoUKNK9z4RVmycgRZyLBQHddxv13cPn8yrI5b0CWcPkf5tVw9fzP7EwPcV6ESIYk2CxDLiV03jnZmR0/RHMEnr+xPo0BPzU2i572txSTInpLkBlpScJdk04BwUKQ==
-Received: from MN2PR01CA0024.prod.exchangelabs.com (2603:10b6:208:10c::37) by
- IA0PR12MB8277.namprd12.prod.outlook.com (2603:10b6:208:3de::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.16; Sun, 1 Feb
- 2026 14:35:24 +0000
-Received: from BN3PEPF0000B070.namprd21.prod.outlook.com
- (2603:10b6:208:10c:cafe::4) by MN2PR01CA0024.outlook.office365.com
- (2603:10b6:208:10c::37) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9564.15 via Frontend Transport; Sun,
- 1 Feb 2026 14:35:24 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
- smtp.mailfrom=nvidia.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=nvidia.com;
-Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.117.160) by
- BN3PEPF0000B070.mail.protection.outlook.com (10.167.243.75) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9587.0 via Frontend Transport; Sun, 1 Feb 2026 14:35:24 +0000
-Received: from rnnvmail203.nvidia.com (10.129.68.9) by mail.nvidia.com
- (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Sun, 1 Feb
- 2026 06:35:07 -0800
-Received: from rnnvmail204.nvidia.com (10.129.68.6) by rnnvmail203.nvidia.com
- (10.129.68.9) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Sun, 1 Feb
- 2026 06:35:07 -0800
-Received: from c-237-169-180-181.mtl.labs.mlnx (10.127.8.12) by
- mail.nvidia.com (10.129.68.6) with Microsoft SMTP Server id 15.2.2562.20 via
- Frontend Transport; Sun, 1 Feb 2026 06:35:03 -0800
-From: Edward Srouji <edwards@nvidia.com>
-Date: Sun, 1 Feb 2026 16:34:06 +0200
+	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=c1J3hUex;
+	dkim=pass header.d=redhat.com header.s=google header.b=cFZKPOXG;
+	spf=pass (lists.linaro.org: domain of mripard@redhat.com designates 170.10.133.124 as permitted sender) smtp.mailfrom=mripard@redhat.com;
+	dmarc=pass (policy=quarantine) header.from=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1770027162;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=T8trzVS4ZUCHrBPpOVXGPFbB+m6G0A2WMMBaMJLn58s=;
+	b=c1J3hUexP3c8TKmy7G1BL+02diZtlGzmE4nUvaczA9Uo2rvOTNWaWECRY4xk+7SbPxTQ7p
+	/RiTOWgnMZIjG4P7pU1kvswtSgIifb8Zr6yKSr9qtW2FTgeJBiOQBXG1vdUNwyNT2+nr4f
+	Roo0rG0Sovp6RvhTubx5UCnXTl3dQO0=
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-336-0qTXEzMfNHOhkJp86old8w-1; Mon, 02 Feb 2026 05:12:40 -0500
+X-MC-Unique: 0qTXEzMfNHOhkJp86old8w-1
+X-Mimecast-MFC-AGG-ID: 0qTXEzMfNHOhkJp86old8w_1770027159
+Received: by mail-wr1-f69.google.com with SMTP id ffacd0b85a97d-430fe16b481so2780180f8f.3
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 02 Feb 2026 02:12:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=redhat.com; s=google; t=1770027159; x=1770631959; darn=lists.linaro.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=T8trzVS4ZUCHrBPpOVXGPFbB+m6G0A2WMMBaMJLn58s=;
+        b=cFZKPOXGeZjZ7C/XqcLP74fAJ3J8xiqW10mGU6ZT6wREROmmzWb1Pz7BZ7Gw9geZIm
+         cNcYZQRGXWygsZ5nYHE/DP5L2h3GUB0+3HkCDDI3Ql15i27wuKPjoKRUThtVPI2EKlEn
+         oR8PANQeeXe8JEdnN3oQxrUIIUs7vmDk/KYcA2j0i4GbxWmnQ12m3PjAUshSEahmDvy2
+         d8G2qgp4jzwIeMVFmZ0Bdf6UylvE6CqqjFDhjEtqHfrPsL53pkzNUbkNUNb5+Cln11g2
+         IkARkKblWdzgMsmEtWndUOF8OK0E1xnEoUreDkTkqhbCAXKik1xbMwZoKCLM+ztHwyVA
+         MXtg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1770027159; x=1770631959;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=T8trzVS4ZUCHrBPpOVXGPFbB+m6G0A2WMMBaMJLn58s=;
+        b=NNGipYv8x/4iFtpbSBTMy++08y0xsk6Rnt7UEa+j8+crPqxAGo+GMj59pxxPYPn78q
+         lLKKAY5W5tVbhuln464cT6EI+ekBcFo8mJLaBWa0OX+1eyGXHSIkgIeTFOyAv5o7dpyB
+         bsH+lFTAiRRkFEl7BMj3EY4KzwvIF77zwaB0ASrEb2MT7tjYVRjMVtF6ZIN6tpKgzMXv
+         RYw9DuvgsZEST78Ov4dRWoT9992B45phJ3NBN9Rd2KXXR5G5pI+KIso1H9GCQydYHLHO
+         eY+342AqUlUamkQXbJRoxlDpBgTNg5Rz/L60gboWvKAY0MVkDb1Fu9TmiZRN/jzmFx8U
+         DN4w==
+X-Forwarded-Encrypted: i=1; AJvYcCVsU6NEXP34YMfHFj1XA2SQqnWBe/DNyQaO1SsBIKyHnhCqQX9DVmaU1T5e9c1+7pHBmesEp4D40WmlbAaY@lists.linaro.org
+X-Gm-Message-State: AOJu0YzJNm4GWEVlUUn+sRLD94DWv0rn1uvEO2CwOZM24KLiOx4rDbwS
+	98ADXvm1Kb4MaieUyb62MUaNjOPL4McyFY67z+/iRb72IAt70PInWEtF4hi8j6pez5QnjLzT4iD
+	PcMlFYTRK9tjXNdGQ6Und+kOkilkTTycaZfbNlmlHubwm4zSxh9gp0MNHReQ0JgGwvYvk
+X-Gm-Gg: AZuq6aI/DH45ZO1ICZSQfDbJyvwRs8g/h/8F2TQcLlhaqYUHYIkW6L3XuOtVTxKI1qS
+	+WalPEUMTR4OO13mqYq6Q24JNjHGCZv0bv0sr8BjlS/6aHJUMJlb17+reQHEW2WcF5XgJFlitAp
+	k1enTQGspqxLav8OtMWbaWpbjzEyBN9Lwgj3TCcONsNktGc1elbgIa1pqUfSG5KLxsFEZTBQgSa
+	Ba9HrcS1nrvsrxeydlAdzSEnmtRSEqSy6pCflWG7bGvmhnj4bW5UExqmd03c6Qm9WmAsb2643d4
+	xj8gCsASmBLBDCv8p3LWHforloU0vgqaE+XRkNCPlhIouZ3r1LFp4UKqXDOIOw==
+X-Received: by 2002:a05:600c:6092:b0:47a:7fdd:2906 with SMTP id 5b1f17b1804b1-482db45441fmr144478635e9.12.1770027158988;
+        Mon, 02 Feb 2026 02:12:38 -0800 (PST)
+X-Received: by 2002:a05:600c:6092:b0:47a:7fdd:2906 with SMTP id 5b1f17b1804b1-482db45441fmr144478255e9.12.1770027158488;
+        Mon, 02 Feb 2026 02:12:38 -0800 (PST)
+Received: from localhost ([2a01:e0a:b25:f902::ff])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4806cddffe9sm555222985e9.4.2026.02.02.02.12.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 02 Feb 2026 02:12:37 -0800 (PST)
+Date: Mon, 2 Feb 2026 11:12:37 +0100
+From: Maxime Ripard <mripard@redhat.com>
+To: Eric Chanudet <echanude@redhat.com>
+Message-ID: <20260202-wealthy-quick-cow-8c5421@houat>
+References: <20260130-dmabuf-heap-cma-dmem-v1-1-3647ea993e99@redhat.com>
 MIME-Version: 1.0
-Message-ID: <20260201-dmabuf-export-v3-3-da238b614fe3@nvidia.com>
-References: <20260201-dmabuf-export-v3-0-da238b614fe3@nvidia.com>
-In-Reply-To: <20260201-dmabuf-export-v3-0-da238b614fe3@nvidia.com>
-To: Jason Gunthorpe <jgg@ziepe.ca>, Leon Romanovsky <leon@kernel.org>, "Sumit
- Semwal" <sumit.semwal@linaro.org>, =?utf-8?q?Christian_K=C3=B6nig?=
-	<christian.koenig@amd.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1769956492; l=3906;
- i=edwards@nvidia.com; s=20251029; h=from:subject:message-id;
- bh=hrI5fWihP4FczMXXbh00GHcjyD2++jtKryVnX4Jyft4=;
- b=vdLJOY5jw3ITJG9c/JjQ1/0LF/XJdq1Q0EkPwU+TptD4zzP7IOJMhEvdyACZ/FCu3JwaYggt/
- NpJY/1MhBOPCmwtMaMlahk6icMGm5zsWBxr3Frmhc2HCEies2lh5jLi
-X-Developer-Key: i=edwards@nvidia.com; a=ed25519;
- pk=VME+d2WbMZT5AY+AolKh2XIdrnXWUwwzz/XLQ3jXgDM=
-X-NV-OnPremToCloud: ExternallySecured
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF0000B070:EE_|IA0PR12MB8277:EE_
-X-MS-Office365-Filtering-Correlation-Id: dba21f91-ed40-4db8-c324-08de619f22f9
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|36860700013|1800799024|376014|82310400026;
-X-Microsoft-Antispam-Message-Info: 
-	=?utf-8?B?dHM5T2d1c0Vydk9PQ0tVMzc4NjVnSHFSRUUyODEreUhONmdRME43dlFUY0RE?=
- =?utf-8?B?elZKT0FhenI1MDliKzdVTnRUd1Z2RkVSNFRxZGY3R3RUa0R5UjRSWmpWUEJk?=
- =?utf-8?B?WTBYWEgrYWFIcHJieEQzUDY4MVVCQ3ROVnRCTFIwR0hPZ1E1QyttUEpUOXJU?=
- =?utf-8?B?OU9HOWQxVzdyRVpVR1o4cnVTekcvSGdDa2tjYVBTYnVpZ0swRDQ5VXpmUnZj?=
- =?utf-8?B?TzdJNko0MFR5RExVYkovWTl2L1JIeHNxK3paUFlJUlNkVGFBMU8vbEVuaWRC?=
- =?utf-8?B?cnk5RnNpcjIyd3hoNE0rS29uM3ZKN1c0T1o0aktyb0JGd1VsaHhPYlU4dXJJ?=
- =?utf-8?B?V2pSYS9JRkRObGo0UGRJanE3bVF3aTBnZFpRMVpONU5DeXRZam9CYU1KUnQ2?=
- =?utf-8?B?ZE1vMUJOYmNSY0dhV1FIdFRTZWMxSVF5enR1TDd1Z0g4aC9HWTgyQWRXdnFn?=
- =?utf-8?B?TllYREZDTGtZMXl6Y2pmTGdrUmtVekQ2WVVPb0VzaVBBWHIyM051Q3pRRHVN?=
- =?utf-8?B?Q2phYlpTU0pzRHlEcEJ6azB0cEJJcXorWjFBeXJLSE12Wnc5cFNhbVFLTXpH?=
- =?utf-8?B?QytvelhMVUZST3drQWkyMUZyYXdua2lJUDYrTUVYWEtvNTlBcWlUUWFiaEpR?=
- =?utf-8?B?bzVFVkV3VnZKMHFZK3hrMnovaWtQVnljNUw3UXJ3QktHT1kveTF6VjU3SVZl?=
- =?utf-8?B?d2tjQlVxU2RrUXpXZHQ0bUhUUzV0MWRGQ0RwUmphT3R0THlZaHZGRnNIVDdm?=
- =?utf-8?B?VWNrVkhkV01MZ3laOU1Cd2o5Sy9VdHV6dFQ3aHRSYzVWYStTL2k0VHFUQnpH?=
- =?utf-8?B?SmdLbk9uS3phMDhXQ2hCeUkrelRLSU5LMSsrR3hOSlhSSkJKUjQ2d1BwQ3Jw?=
- =?utf-8?B?bFdleVJiNmVrZW11MFdvR1BjQ28yVWVkR211anliY0JKaXFjMEdzU3gxeUN6?=
- =?utf-8?B?bDhmNjdIcVh1UzlZWmJHazh0d2UzZGE1ckxYQmlWaWI5aE5Hd29abjBiSmFG?=
- =?utf-8?B?QlovSnZzbFdzN0d3dTdlSlBHQzRtZzBab044QS9rcHFOTW1WeWI5cUhQSWwv?=
- =?utf-8?B?SFp3VWlwejZwSXp0YVJKRi9ncDlGVE1RQWhkTGFWR1NLZ3ZBTERhQWhna0wz?=
- =?utf-8?B?MWtQVytnbll0ZXpHdE1KQ2Urb1ZxckNCNTZidE1FdDNPK2VHSVIwSGV4anZm?=
- =?utf-8?B?OEpHVU5SV0FuelpONFVOYmtteE80YTVDdHZtdWZCaUNVRS9yWFRjRmtILzR0?=
- =?utf-8?B?QmptNE1lUkw4Nml1d3pVS21zVU5pTC9YZHB5RmdXT0pFWjBWaTNTZHlwR0NT?=
- =?utf-8?B?WEFjRDZGcy9nWFJtcVZnMWVLVDEvcXRwMTZaVHpKeFk0dC84clhxU1ZzQUJE?=
- =?utf-8?B?Yy9JN0M2dEFtU2ZFZXhSdUJhb1dmVXdLc0pHMWlkK1pqNE0wTXRGcm1oOWwv?=
- =?utf-8?B?Q0R0YmhVdXlDbHhYeDFlb2lwL3V1TWtRVGJpNUZGc2o3K2ZqNmwxMm9wdlZK?=
- =?utf-8?B?ajczNjBTdkFES0pYMDVHcG1xRmtwcEpmeEY2OTJZUThLT3NtWkQ1cHZrL1oy?=
- =?utf-8?B?bXBUWW1jTXdKZWd4bUU0eGxZQ2hYaGVIV1RSbi9MQVFENlNJdDhIZU53Qkw2?=
- =?utf-8?B?QkZyRC96WmlCUXNnSkxTbDJiemJqbm5CM2ZNSGpyU0lOTCtsem5sc2lMd2da?=
- =?utf-8?B?a042ZUxoTDQ3aUdUSE1kRkhVNjgvd0NOdU1aZEJNNVJjSlgxT0ovMFZ4bzAz?=
- =?utf-8?B?cmdnSXFKVkd5U2JkU0hWcGZMb21Va2RmOTI1c2dGaUNHaXlxK2p4ZXN1bWt3?=
- =?utf-8?B?anlEVTZPdm44N3JzSlljd24zc2hXZXZ5VXgwTE1ESHpHV3QvNStEOGhybFFY?=
- =?utf-8?B?Z0VKaDcyOHA0WnJvSDdrSFp3SWRnbDRDYVFRdHV0WmRwQlZBeHZKYjZYa2pq?=
- =?utf-8?B?Y3FFekRtUmxXZ2crTGtORkFnSHdoeHAzVElJU2JCU3dzdGtGeE5VT0dFT2ty?=
- =?utf-8?B?YkxiTGdiZGZ3aVN0M0VXTXRSdW1kUEVKMVk5WEJkZWZJV2JxVjZ0eEF1bVR2?=
- =?utf-8?B?L2kxT3g2RTR5SWNxOG9PSkpUUXpIUzRETkVmN0NVOU51aS95V2VDcVJ0Z2Nx?=
- =?utf-8?B?c09sOXJqRkx4SVFKNVBITEd3MGR2dThDeGxwN0ZsNFFCUEdBd2piaVFHbGU2?=
- =?utf-8?B?S0hIRUEvQ1QvSWsvUFNGTFNMdExTUDIrZE5qV21vYTZZV1JZKzQ4MnhpZno2?=
- =?utf-8?B?MkFldWlaa3MwOXc4LzhUaDFKMFF3PT0=?=
-X-Forefront-Antispam-Report: 
-	CIP:216.228.117.160;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:dc6edge1.nvidia.com;CAT:NONE;SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	0+kHjo5gv891JuMXnKTsNxp3fwyX/3m7ODA8376tip/IRzZeV2g9+9bMaCWaU3pqSzyu4uZM+nok4/g/bAnE9D+/lJiinqizy877kygvf4bohIxfcqryN1j+k5VMg7bUqV2kt7oSiGQkkAr43v8yYG+LKg8Hxo/9xvIuN4/xMcqMNrPQ5hMrjPnW5OFzJNHHajsOjFs5fe9DgpeBx0Vud4hn1wptpB+bGIHfquAfFPK5KPgt0ANEaOnP/1HJIPEtPwdqJs1j2CIEJjhuombZ70EtpfrM0cAZrIsLbxjNugbHnWgqlOxBhnXAzZZ7l+9Hp/sx2dWk1NKC0747LDK6IeQEfByIKb1H9mr+1jpboBr5MdUr/ixha4j+j9QcluoBPLxb88V9wFpfCKsWFTaeUNk+qPuSXElbgexZx2JZWwkxlS5dCmM9ZWm7e2zel8ww
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Feb 2026 14:35:24.5831
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: dba21f91-ed40-4db8-c324-08de619f22f9
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.117.160];Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	BN3PEPF0000B070.namprd21.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB8277
+In-Reply-To: <20260130-dmabuf-heap-cma-dmem-v1-1-3647ea993e99@redhat.com>
 X-Spamd-Bar: -----
-X-MailFrom: edwards@nvidia.com
+X-MailFrom: mripard@redhat.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: FWSAXKK6Y6YLFZIRRY4TKFCMXKGT4DKB
-X-Message-ID-Hash: FWSAXKK6Y6YLFZIRRY4TKFCMXKGT4DKB
+Message-ID-Hash: GGJKTKK7QGPKIPRTWCB4SKWSPVMBUADN
+X-Message-ID-Hash: GGJKTKK7QGPKIPRTWCB4SKWSPVMBUADN
 X-Mailman-Approved-At: Thu, 16 Apr 2026 16:36:01 +0000
-CC: linux-kernel@vger.kernel.org, linux-rdma@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Yishai Hadas <yishaih@nvidia.com>, Edward Srouji <edwards@nvidia.com>
+CC: Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, Albert Esteve <aesteve@redhat.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH rdma-next v3 3/3] RDMA/mlx5: Implement DMABUF export ops
+Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf: heaps: cma: register a dmem region for each cma heap
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FWSAXKK6Y6YLFZIRRY4TKFCMXKGT4DKB/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GGJKTKK7QGPKIPRTWCB4SKWSPVMBUADN/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [4.49 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[nvidia.com : SPF not aligned (relaxed),reject];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
-	DATE_IN_PAST(1.00)[1778];
-	R_DKIM_REJECT(1.00)[Nvidia.com:s=selector2];
+Content-Type: multipart/mixed; boundary="===============7118898028492949707=="
+X-Spamd-Result: default: False [1.39 / 15.00];
+	SIGNED_PGP(-2.00)[];
+	DMARC_POLICY_QUARANTINE(1.50)[redhat.com : SPF not aligned (relaxed),quarantine];
+	R_DKIM_REJECT(1.00)[redhat.com:s=mimecast20190719];
+	DATE_IN_PAST(1.00)[1758];
+	MID_RHS_NOT_FQDN(0.50)[];
 	MAILLIST(-0.20)[mailman];
+	MIME_GOOD(-0.20)[multipart/mixed,multipart/signed,text/plain];
 	R_SPF_ALLOW(-0.20)[+mx:c];
-	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:mid,nvidia.com:email,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	GREYLIST(0.00)[pass,meta];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[Nvidia.com:-];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	MIME_TRACE(0.00)[0:+,1:+,2:+,3:~,4:+];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	DKIM_TRACE(0.00)[redhat.com:-];
+	MISSING_XM_UA(0.00)[];
 	TO_DN_SOME(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[edwards@nvidia.com,linaro-mm-sig-bounces@lists.linaro.org];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[mripard@redhat.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.721];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	MID_RHS_MATCH_FROM(0.00)[];
+	NEURAL_HAM(-0.00)[-0.793];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	RCVD_COUNT_SEVEN(0.00)[8]
-X-Rspamd-Queue-Id: 7AC4F411C7D
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
+X-Rspamd-Queue-Id: 47716411C94
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-From: Yishai Hadas <yishaih@nvidia.com>
 
-Enable p2pdma on the mlx5 PCI device to allow DMABUF-based peer-to-peer
-DMA mappings.
+--===============7118898028492949707==
+Content-Type: multipart/signed; micalg=pgp-sha384;
+	protocol="application/pgp-signature"; boundary="ourfsz72devil6zd"
+Content-Disposition: inline
 
-Add implementation of the mmap_get_pfns and pgoff_to_mmap_entry device
-operations required for DMABUF support in the mlx5 RDMA driver.
 
-The pgoff_to_mmap_entry operation converts a page offset to the
-corresponding rdma_user_mmap_entry by extracting the command and index
-from the offset and looking it up in the ucontext's mmap_xa.
+--ourfsz72devil6zd
+Content-Type: text/plain; protected-headers=v1; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH] dma-buf: heaps: cma: register a dmem region for each cma
+ heap
+MIME-Version: 1.0
 
-The mmap_get_pfns operation retrieves the physical address and length
-from the mmap entry and obtains the p2pdma provider for the underlying
-PCI device, which is needed for peer-to-peer DMA operations with
-DMABUFs.
+Hi,
 
-Signed-off-by: Yishai Hadas <yishaih@nvidia.com>
-Signed-off-by: Edward Srouji <edwards@nvidia.com>
----
- drivers/infiniband/hw/mlx5/main.c | 72 +++++++++++++++++++++++++++++++++++++++
- 1 file changed, 72 insertions(+)
+On Fri, Jan 30, 2026 at 05:55:30PM -0500, Eric Chanudet wrote:
+> The cma dma-buf heaps let userspace allocate buffers in CMA regions
+> without enforcing limits. Register a dmem region per cma heap and charge
+> against it when allocating a buffer in a cma heap.
+>=20
+> For the default cma region, two heaps may be created for the same cma
+> range:
+> commit 854acbe75ff4 ("dma-buf: heaps: Give default CMA heap a fixed name")
+>   Introduced /dev/dma_heap/default_cma_region
+> commit 4f5f8baf7341 ("dma-buf: heaps: cma: Create CMA heap for each CMA
+>                       reserved region")
+>   Created a CMA heap for each CMA region, which might create a duplicate
+>   heap to the default one, e.g:
+>     /dev/dma_heap/default_cma_region
+>     /dev/dma_heap/reserved
+>=20
+> Removing the legacy heap would break user API. So handle the special
+> case by using one dmem between the two heaps to account charges
+> correctly.
+>=20
+> Signed-off-by: Eric Chanudet <echanude@redhat.com>
+> ---
+> In continuation with introducing cgroup for the system heap[1], this
+> behavior is enabled based on dma_heap.mem_accounting, disabled by
+> default.
+>=20
+> dmem is chosen for CMA heaps as it allows limits to be set for each
+> region backing each heap. There is one caveat for the default cma range
+> that may accessible through two different cma heaps, which is treated as
+> a special case.
+>=20
+> [1] https://lore.kernel.org/all/20260116-dmabuf-heap-system-memcg-v3-0-ec=
+c6b62cc446@redhat.com/
+> ---
+>  drivers/dma-buf/heaps/cma_heap.c | 51 ++++++++++++++++++++++++++++++++++=
+++----
+>  1 file changed, 46 insertions(+), 5 deletions(-)
+>=20
+> diff --git a/drivers/dma-buf/heaps/cma_heap.c b/drivers/dma-buf/heaps/cma=
+_heap.c
+> index 49cc45fb42dd7200c3c14384bcfdbe85323454b1..608af8ad6bce7fe0321da6d8f=
+1b65a69f5d8d950 100644
+> --- a/drivers/dma-buf/heaps/cma_heap.c
+> +++ b/drivers/dma-buf/heaps/cma_heap.c
+> @@ -27,6 +27,7 @@
+>  #include <linux/scatterlist.h>
+>  #include <linux/slab.h>
+>  #include <linux/vmalloc.h>
+> +#include <linux/cgroup_dmem.h>
+> =20
+>  #define DEFAULT_CMA_NAME "default_cma_region"
+> =20
+> @@ -46,7 +47,9 @@ int __init dma_heap_cma_register_heap(struct cma *cma)
+>  struct cma_heap {
+>  	struct dma_heap *heap;
+>  	struct cma *cma;
+> +	struct dmem_cgroup_region *cg;
+>  };
+> +static struct dmem_cgroup_region *default_cma_cg;
+> =20
+>  struct cma_heap_buffer {
+>  	struct cma_heap *heap;
+> @@ -58,6 +61,7 @@ struct cma_heap_buffer {
+>  	pgoff_t pagecount;
+>  	int vmap_cnt;
+>  	void *vaddr;
+> +	struct dmem_cgroup_pool_state *pool;
+>  };
+> =20
+>  struct dma_heap_attachment {
+> @@ -276,6 +280,7 @@ static void cma_heap_dma_buf_release(struct dma_buf *=
+dmabuf)
+>  	kfree(buffer->pages);
+>  	/* release memory */
+>  	cma_release(cma_heap->cma, buffer->cma_pages, buffer->pagecount);
+> +	dmem_cgroup_uncharge(buffer->pool, buffer->len);
+>  	kfree(buffer);
+>  }
+> =20
+> @@ -319,9 +324,16 @@ static struct dma_buf *cma_heap_allocate(struct dma_=
+heap *heap,
+>  	if (align > CONFIG_CMA_ALIGNMENT)
+>  		align =3D CONFIG_CMA_ALIGNMENT;
+> =20
+> +	if (mem_accounting) {
+> +		ret =3D dmem_cgroup_try_charge(cma_heap->cg, size,
+> +					     &buffer->pool, NULL);
+> +		if (ret)
+> +			goto free_buffer;
+> +	}
+>
+>  	cma_pages =3D cma_alloc(cma_heap->cma, pagecount, align, false);
+>  	if (!cma_pages)
+> -		goto free_buffer;
+> +		goto uncharge_cgroup;
+> =20
+>  	/* Clear the cma pages */
+>  	if (PageHighMem(cma_pages)) {
+> @@ -376,6 +388,8 @@ static struct dma_buf *cma_heap_allocate(struct dma_h=
+eap *heap,
+>  	kfree(buffer->pages);
+>  free_cma:
+>  	cma_release(cma_heap->cma, cma_pages, pagecount);
+> +uncharge_cgroup:
+> +	dmem_cgroup_uncharge(buffer->pool, size);
 
-diff --git a/drivers/infiniband/hw/mlx5/main.c b/drivers/infiniband/hw/mlx5/main.c
-index e81080622283..f97c86c96d83 100644
---- a/drivers/infiniband/hw/mlx5/main.c
-+++ b/drivers/infiniband/hw/mlx5/main.c
-@@ -2446,6 +2446,70 @@ static int mlx5_ib_mmap_clock_info_page(struct mlx5_ib_dev *dev,
- 			      virt_to_page(dev->mdev->clock_info));
- }
- 
-+static int phys_addr_to_bar(struct pci_dev *pdev, phys_addr_t pa)
-+{
-+	resource_size_t start, end;
-+	int bar;
-+
-+	for (bar = 0; bar < PCI_STD_NUM_BARS; bar++) {
-+		/* Skip BARs not present or not memory-mapped */
-+		if (!(pci_resource_flags(pdev, bar) & IORESOURCE_MEM))
-+			continue;
-+
-+		start = pci_resource_start(pdev, bar);
-+		end = pci_resource_end(pdev, bar);
-+
-+		if (!start || !end)
-+			continue;
-+
-+		if (pa >= start && pa <= end)
-+			return bar;
-+	}
-+
-+	return -1;
-+}
-+
-+static int mlx5_ib_mmap_get_pfns(struct rdma_user_mmap_entry *entry,
-+				 struct dma_buf_phys_vec *phys_vec,
-+				 struct p2pdma_provider **provider)
-+{
-+	struct mlx5_user_mmap_entry *mentry = to_mmmap(entry);
-+	struct pci_dev *pdev = to_mdev(entry->ucontext->device)->mdev->pdev;
-+	int bar;
-+
-+	phys_vec->paddr = mentry->address;
-+	phys_vec->len = entry->npages * PAGE_SIZE;
-+
-+	bar = phys_addr_to_bar(pdev, phys_vec->paddr);
-+	if (bar < 0)
-+		return -EINVAL;
-+
-+	*provider = pcim_p2pdma_provider(pdev, bar);
-+	/* If the kernel was not compiled with CONFIG_PCI_P2PDMA the
-+	 * functionality is not supported.
-+	 */
-+	if (!*provider)
-+		return -EOPNOTSUPP;
-+
-+	return 0;
-+}
-+
-+static struct rdma_user_mmap_entry *
-+mlx5_ib_pgoff_to_mmap_entry(struct ib_ucontext *ucontext, off_t pg_off)
-+{
-+	unsigned long entry_pgoff;
-+	unsigned long idx;
-+	u8 command;
-+
-+	pg_off = pg_off >> PAGE_SHIFT;
-+	command = get_command(pg_off);
-+	idx = get_extended_index(pg_off);
-+
-+	entry_pgoff = command << 16 | idx;
-+
-+	return rdma_user_mmap_entry_get_pgoff(ucontext, entry_pgoff);
-+}
-+
- static void mlx5_ib_mmap_free(struct rdma_user_mmap_entry *entry)
- {
- 	struct mlx5_user_mmap_entry *mentry = to_mmmap(entry);
-@@ -4360,7 +4424,13 @@ static int mlx5_ib_stage_init_init(struct mlx5_ib_dev *dev)
- 	if (err)
- 		goto err_mp;
- 
-+	err = pcim_p2pdma_init(mdev->pdev);
-+	if (err && err != -EOPNOTSUPP)
-+		goto err_dd;
-+
- 	return 0;
-+err_dd:
-+	mlx5_ib_data_direct_cleanup(dev);
- err_mp:
- 	mlx5_ib_cleanup_multiport_master(dev);
- err:
-@@ -4412,11 +4482,13 @@ static const struct ib_device_ops mlx5_ib_dev_ops = {
- 	.map_mr_sg_pi = mlx5_ib_map_mr_sg_pi,
- 	.mmap = mlx5_ib_mmap,
- 	.mmap_free = mlx5_ib_mmap_free,
-+	.mmap_get_pfns = mlx5_ib_mmap_get_pfns,
- 	.modify_cq = mlx5_ib_modify_cq,
- 	.modify_device = mlx5_ib_modify_device,
- 	.modify_port = mlx5_ib_modify_port,
- 	.modify_qp = mlx5_ib_modify_qp,
- 	.modify_srq = mlx5_ib_modify_srq,
-+	.pgoff_to_mmap_entry = mlx5_ib_pgoff_to_mmap_entry,
- 	.pre_destroy_cq = mlx5_ib_pre_destroy_cq,
- 	.poll_cq = mlx5_ib_poll_cq,
- 	.post_destroy_cq = mlx5_ib_post_destroy_cq,
+Should we make that conditional on mem_accounting =3D=3D true ?
 
--- 
-2.47.1
+>  free_buffer:
+>  	kfree(buffer);
+> =20
+> @@ -390,25 +404,52 @@ static int __init __add_cma_heap(struct cma *cma, c=
+onst char *name)
+>  {
+>  	struct dma_heap_export_info exp_info;
+>  	struct cma_heap *cma_heap;
+> +	struct dmem_cgroup_region *region;
+> +	int ret;
+> =20
+>  	cma_heap =3D kzalloc(sizeof(*cma_heap), GFP_KERNEL);
+>  	if (!cma_heap)
+>  		return -ENOMEM;
+>  	cma_heap->cma =3D cma;
+> =20
+> +	/*
+> +	 * If two heaps are created for the default cma region, use the same
+> +	 * dmem for them. They both use the same memory pool.
+> +	 */
+> +	if (dev_get_cma_area(NULL) =3D=3D cma && default_cma_cg)
+> +		region =3D default_cma_cg;
+> +	else {
+> +		region =3D dmem_cgroup_register_region(cma_get_size(cma), "cma/%s", na=
+me);
+> +		if (IS_ERR(region)) {
+> +			ret =3D PTR_ERR(region);
+> +			goto free_cma_heap;
+> +		}
+> +	}
+> +	cma_heap->cg =3D region;
+> +
+
+I'm not sure it's the best way to go with this. We want to track all
+relevant CMA allocations going forward, in the heaps and elsewhere.
+
+If we were to do what you suggest, an allocation in, say, DRM or v4l2
+wouldn't be tracked in the same region than one in the heaps, while we
+want to have it cumulated.
+
+I think we'd be better off if we created a dmem region for each CMA
+region in the system, but we would charge from the heap so we don't
+account for every allocation.
+
+I don't think we can register the dmem region when the CMA area is
+initialized though, since it will probably be too early in the kernel
+boot and SLAB isn't around yet.
+
+But since we would need an accessor to get a dmem region from a cma
+region, we could do something like check if a dmem eregion already
+exists for that cma region, and allocate one otherwise. Or have a
+secondary initcall to allocate all dmem regions.
+
+Maxime
+
+--ourfsz72devil6zd
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iJUEABMJAB0WIQTkHFbLp4ejekA/qfgnX84Zoj2+dgUCaYB4kAAKCRAnX84Zoj2+
+dqPBAX9oydlm9YZRNx1uUYcnGj8czxCI9/nwwv3lTG3vB/96CaCaciG72JRvyD2+
+YtcMBPEBf2UZP8KVV1tDJ+oujyCdJZXIsjWxMc55iL7AcfydJqlROACsQSaGrLgZ
+L+gEjF3czQ==
+=dD0c
+-----END PGP SIGNATURE-----
+
+--ourfsz72devil6zd--
+
+
+--===============7118898028492949707==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============7118898028492949707==--
+
