@@ -2,172 +2,248 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WJpqEYYQ4WnoogAAu9opvQ
+	id qBQtDIwQ4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:38:30 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:38:36 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id CB268411CA3
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:38:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 99F04411CB2
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:38:35 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id D832B44B47
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:38:28 +0000 (UTC)
-Received: from mail-lf1-f51.google.com (mail-lf1-f51.google.com [209.85.167.51])
-	by lists.linaro.org (Postfix) with ESMTPS id DC8D23F795
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  3 Feb 2026 05:05:02 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5F60A44B6B
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:38:34 +0000 (UTC)
+Received: from PH8PR06CU001.outbound.protection.outlook.com (mail-westus3azon11012006.outbound.protection.outlook.com [40.107.209.6])
+	by lists.linaro.org (Postfix) with ESMTPS id 74E2E3F795
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  3 Feb 2026 10:25:25 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=canonical-com.20230601.gappssmtp.com header.s=20230601 header.b=t4CcEFP2;
-	spf=pass (lists.linaro.org: domain of acelan@gmail.com designates 209.85.167.51 as permitted sender) smtp.mailfrom=acelan@gmail.com;
-	arc=pass ("google.com:s=arc-20240605:i=1");
-	dmarc=fail reason="SPF not aligned (relaxed), DKIM not aligned (relaxed)" header.from=canonical.com (policy=reject)
-Received: by mail-lf1-f51.google.com with SMTP id 2adb3069b0e04-59dd263bf42so5431739e87.0
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 02 Feb 2026 21:05:02 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770095102; cv=none;
-        d=google.com; s=arc-20240605;
-        b=ZTTuzIcAPe5DNN2tQyWAk57IuwlmJyTlTnd05W92a0qsdCqKbYy0HAMngQbxMTqR4Y
-         HREQds/W8z5URjZ7Yap/r1NsvPb2V8OXiUXKDHgx3KNqxtlSDA3MCQPtRrjeLENuJ1do
-         1UTCrUUv0aNxNHRL+g/FWPnB2DN9aSVhF8LGsdcPelg+JkEpyEk+mTX8AUECX++2U/eR
-         IEdM674TKYgIaDsTYySzPQo9Wjga9YDk20TzElUFM+pFdTuuVnslSQilcFOULGRj+taK
-         GHozVGuBr1e5cwqrdAGcnlAvTbNRAaEdXqpDRqY/HEtowXQJtM53osqiFdMQ+xheBJmo
-         H69Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=R8Uq40im68Bsn440IXZslpowd8o1+PpzUOCwvDYaiRc=;
-        fh=kwOLlrfF5e4YYE8Mz0+wHseozvHzCbldZBAHbtOfN5M=;
-        b=fXuwEjD3ssxJ5r0t514QgtuTieBIrx4TZfhOicDibozz6PiyUwedhFD3bN8Rxtz0ej
-         DAOEAd92XbCH0BWwLe/FfBg++5d/pru/Py8UZFPd5FlwkdtdrmY5UMo3OQkFfwPrprzt
-         Uf5jrKJuZUZkDjyQCF6igE9dcy81cRh8cEgt+PuP9RIkJxcxvIet7+9RMhan6BTnukJa
-         13ysWMsjPEmCC7kZlzo5IQI0XoRK2tF8cbtQWciJi2dsomRQ12mW1QCR0NT+zlj/sB2l
-         0mMKoeOqM83Rx+ebCz+MKwWfbqWHLV6VRZaqaJjaAxhKj4SLTs0Iqgm3R9WUSJpf6+u3
-         zifg==;
-        darn=lists.linaro.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=canonical-com.20230601.gappssmtp.com; s=20230601; t=1770095102; x=1770699902; darn=lists.linaro.org;
-        h=content-transfer-encoding:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=R8Uq40im68Bsn440IXZslpowd8o1+PpzUOCwvDYaiRc=;
-        b=t4CcEFP2InX0ytKfqnU1nUCEj1c1ilTgl+L12rZiiTirhvrcasYj24c6idGqYKcTO0
-         UGL2Lr3iwLqLA4mM6UGdhWndp7qsOAt0k1EIQvEFHJbiRwIrEmNq0H10EUDVfxYXdh/e
-         F7dwnAe4CwfH2QR0bEinWw2G8cGDBs8v+LmHCwlqCQYDkbAx6CyHt/Cu1EZjTTy6z6ZM
-         9CRK20wS6F8SgwoEsegD3EoICFtdWMfoO9KYHlLGN4anKhGr1H62uap+P5MqKFApBzcw
-         Hl5cIyobrWMP2u+oSZdCd+dmgTOaojR8lqZZJhcP1DYVpOzrcXqjoPh2yDyzMm3j4xRT
-         vAXQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770095102; x=1770699902;
-        h=content-transfer-encoding:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=R8Uq40im68Bsn440IXZslpowd8o1+PpzUOCwvDYaiRc=;
-        b=v6wudfv+TdFjthwYLrNwJzCw6jMlxysaLls5w+L8fZv1q9TzhrZTQmt1NOuXRZ7OQV
-         C4S78FMlTrnqN4LaDD5f2ZcY8+Jkmw0rykteZflaLU9Xpvve6bxzLvg1n5pzmy5ddbcQ
-         Ebagjsdjd1HrV2FlizK13Zdd17VdPqAVcYb7IE+1NOBe092uZXBii8ZI+pIwFAsymaL0
-         WUFdFi729VlC5UWjTA2a8G4anQVUo6f2HVvmr6cx+U4823LRvOfkVohlNBb/X9aztogq
-         Wv0XiTZfV7tiY5SAGxaW3OAdieX2C4SiO4oZF2AdKsgJb/uxYAD/E21CsAck263/xzu1
-         MbGQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVLQ45AXL3Nca1ptX/P0jh0+TglPDOhUQ8wokf6EiHoa2r5gsO8LQEM+b1R+6osVaikXbaga3Wo+ZTQAEM4@lists.linaro.org
-X-Gm-Message-State: AOJu0YwL3HNZCgkzt8lUgpJjKkK8ktyXpO6bWNfhwUbbMBnQfW3hz0Ct
-	YuRcaLJlcTvLMqmJ8YCM+I7KxF+y3AumwRdDBdeTSNHDs3zNiluOdixkn9shWy8V+jkFzabVMwy
-	eNVTZ8fHy1zzg0MWuIZ/Fq97cR6yRNM4=
-X-Gm-Gg: AZuq6aIeqTuwByTO4hpUwCmk79vFKefsjTvc1tkCncOcXQBgg9+ncyof5iCaMKri0FM
-	0QWwS/2+r9IftY9KTteZkAwQkaIoM3sQx+qPjckDyphSG9SXloPKXuoS6YCTIufQn14zQ/Pv9xB
-	KeLcXLjyZQJ4MQGxsw4vQi7CgvhBoOV5Ll/jBw4+DjvlaJuS+ak42W/5w3A648lCpkE22PUn1FR
-	GHlqwKbV2HHsRr2SCiwWaLbSSnmW7wH4t0dpgBpMHf5eNSrnlxycN0y5rWGWDKaQo6HJGVI
-X-Received: by 2002:a05:6512:12c4:b0:59e:1813:76ae with SMTP id
- 2adb3069b0e04-59e181378f9mr4300091e87.44.1770095101318; Mon, 02 Feb 2026
- 21:05:01 -0800 (PST)
+	dkim=pass header.d=amd.com header.s=selector1 header.b=auS91Ck7;
+	spf=pass (lists.linaro.org: domain of Pierre-eric.Pelloux-prayer@amd.com designates 40.107.209.6 as permitted sender) smtp.mailfrom=Pierre-eric.Pelloux-prayer@amd.com;
+	arc=pass ("microsoft.com:s=arcselector10001:i=1");
+	dmarc=pass (policy=quarantine) header.from=amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=hxi4m/mP0PszHkmxbLT4AhqfWHtvErAnnec+7ZV/KcOu8SwC/jHzi1UnToi65Cy31I3ytYUZl06FXbAACHYZmm4N4HgK1OhpuMMx+8/8Vx2I7Ft8KVuTTrjxLvEmKi5fgSsEWPNegAru2HdY/7cjlhjfhU/UZNVguCMAR98wtsTTLsl7qcIHISanthiLOBFAfDljJIukLgZM7PeJdcDHiZoNl3NyG8wKqnpIy7TU3KptFjj7mxmvTcPFNYOjD5nOAEAKjuV+g9olKnLbSPPrTrxzDTHWf8taBZwrnk6tWNgOhCHzYeRMOV7Cq4rNlxz8j8iZ/ZNHFPTvV9f5/9O1hw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=d8WY7YcI/p4C+q5bgWanWfKoUrUG7WoUSict9dlxtx8=;
+ b=hB+DKILtFnUSJQRq++qKXHwXqJhab9GctCvq3GiAIrON4nXNUxQQno/zY1TVmMKoVnpAc0U3uIR6IQIKlJ0efzYRKv2HVrOO/xlDy27DodzweS1SpUlisRYp8v6scTT/UY2uWWEonGKDcy4uNJcSFTRWN9BJLewEyDgKepfrlaMGepvaINqGun+a9TmZHaBavIPGbBsnQj/wcbL8CgPqp6m6Y5AtVxPweqlaHPY7FI4nuUOMMgk6FgTdgtN4CANZ/rNhkigbPdES44Db+urDj4IVgFAP3f5H1v75RXJielCL/tMmZ0KDPbiYyHPCUeJHlyyhjgdPTgoG5GdWulQtsA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=gmail.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=d8WY7YcI/p4C+q5bgWanWfKoUrUG7WoUSict9dlxtx8=;
+ b=auS91Ck7PMCaT3qdwOxvMphuY5oJBGZ8IAeUb6gs1z/zyPpYLVFe9NLACxryLM+FZxupbEClXW9pkFV23lzM4lFkA5TnED74xwINvW7wftn7T6qjWSJ9bbPNdyBSANlwb4rMdnPtzRaburINc9RKKpdckabeQCD3cV80GFD0FmM=
+Received: from BY1P220CA0009.NAMP220.PROD.OUTLOOK.COM (2603:10b6:a03:59d::7)
+ by DS0PR12MB8788.namprd12.prod.outlook.com (2603:10b6:8:14f::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.16; Tue, 3 Feb
+ 2026 10:25:16 +0000
+Received: from CO1PEPF000075F4.namprd03.prod.outlook.com
+ (2603:10b6:a03:59d:cafe::bf) by BY1P220CA0009.outlook.office365.com
+ (2603:10b6:a03:59d::7) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9587.12 via Frontend Transport; Tue,
+ 3 Feb 2026 10:25:17 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ CO1PEPF000075F4.mail.protection.outlook.com (10.167.249.43) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9587.10 via Frontend Transport; Tue, 3 Feb 2026 10:25:16 +0000
+Received: from FRAPPELLOUX01-WSLPUB.amd.com (10.180.168.240) by
+ satlexmb07.amd.com (10.181.42.216) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.17; Tue, 3 Feb 2026 04:25:11 -0600
+From: Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>
+To: 
+Date: Tue, 3 Feb 2026 11:22:07 +0100
+Message-ID: <20260203102236.3456-1-pierre-eric.pelloux-prayer@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260114011917.241196-1-acelan.kao@canonical.com>
-In-Reply-To: <20260114011917.241196-1-acelan.kao@canonical.com>
-From: AceLan Kao <acelan.kao@canonical.com>
-Date: Tue, 3 Feb 2026 13:04:49 +0800
-X-Gm-Features: AZwV_Qi2T0EhTqZVBJiCZ6adKX1ZiJrDZb_bikoYUAtxh6o1wMI284ojl7lLFWc
-Message-ID: <CAMz9Wg8ez3U3qbB5AbyA_8QUkEoPyejyAhyy82+xwiH8wxi1Jw@mail.gmail.com>
-To: Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
-	linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org,
-	linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
-X-Spamd-Bar: --
-X-MailFrom: acelan@gmail.com
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: satlexmb08.amd.com (10.181.42.217) To satlexmb07.amd.com
+ (10.181.42.216)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PEPF000075F4:EE_|DS0PR12MB8788:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2de1fa52-1d52-4b50-411a-08de630e8625
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|82310400026|36860700013|376014|1800799024|13003099007;
+X-Microsoft-Antispam-Message-Info: 
+	=?utf-8?B?RmRpZERBenFpL3NyVkJuWFp5bjFwelAzYjVnd1lOQkxTT1FoT25vYkREcFNC?=
+ =?utf-8?B?VmsrUTBQVDYyVExKeStVWUFadFg3SEZRVlcvRU5Jc1JGeXNNZEtmd0puaG4w?=
+ =?utf-8?B?dzR1bTN6MnRJV0tncFdjWmhQNUhNUlNPY1VXbjlsd3g1STBQR0lUZEN5bm9i?=
+ =?utf-8?B?dnpGTEpPRkk3a1BKMzFaVmxRTCtMYU13ZmRUY29BL1E3NmR2OCsyOE5WSXpT?=
+ =?utf-8?B?OGhNdTVkOThVVjVHT3dnaWczdEVKRkFsZVZYaGRTcnB0LzJhTDNNOXQ1c2oy?=
+ =?utf-8?B?SGEwNmVVcXpKYjdqZmxFei9UandFMEg3VnJ4S3Z4TnZJZWd6R2c1UXplWWFP?=
+ =?utf-8?B?TCt5d1h0VWtSdGliNWZOcFE3OHRyUVFIOXdhZXRFR2hPWFA4L0ZOWnhGM1V2?=
+ =?utf-8?B?eDBSZkZxN004am56b3JYM2VVV3VTamlsaU53VmdhR0hBOW8rcWVVWmpqYWRV?=
+ =?utf-8?B?NCttclEzVFZSWHRRY1RIUmhDTk9raVNrQ1RMcUZLU281MzUreEluc2R3L3ox?=
+ =?utf-8?B?NkxNQVhwR3RtRi8rSFNyWkRqdW93QXZDL2xGYWF6U3dQYUlIUG92WmNmYVdG?=
+ =?utf-8?B?SWJRcnZZU252cmM3U2ljZE0yekNNOWZ0YmxSZVFSamF5ckY4b1Z2VUZDMFBS?=
+ =?utf-8?B?N2NUbCtScUxDV01IRmM3TjBOZWxLMEhYcTNkTWo1MUdPOEVkMWRnRjBUTGNz?=
+ =?utf-8?B?aWlGcmFHT29ta1FjZW1hYUpuTmVlTHpZbmdtZEhtRnNsTXN4ci94UFNuVjN3?=
+ =?utf-8?B?TWhXUTkrUnU4ZkxVUEppUHExb2VGYnkzeHQ0L0tKanFJL0FrQWVFTy9VdjJ3?=
+ =?utf-8?B?TzRzdFFya0FEaHVkengyMHRaYlVDT3Jxa3FEVWxRME1wTVZOMjluVVdvYVht?=
+ =?utf-8?B?a0w4Y1NZZFk0RkFqb3Zpc2JURWc4U0lUeXRlVlRuWlZ4UFdoOGtoL3hodi81?=
+ =?utf-8?B?bkltN3RPcm14RGxNTnNkRkVIRFBoRlBxT24wZDAxL3EzY1NGSjdXOHhPVHBR?=
+ =?utf-8?B?RWtkcER1MGx3TTNKd0RRRWpmTjZjbmM5ZXcxNnBWTEV1NE4vYkZKdVVpN2wv?=
+ =?utf-8?B?OFZZWlh2RGZSaFlxdG1MVVBPdFVPVXYvRzNabW0zNUdwYVo2WjBkVWRiR0gx?=
+ =?utf-8?B?Z1VEVmtnaU1Lb3VWNFNuVVdGOWZpSjhCN1JTdUhJYm1pemJkc1FtVGhsbk9R?=
+ =?utf-8?B?VGQ2cWpsUS9ZbTRWRWZSNjFYVytqcVZxOUJPQ3BuejE3bzdrQmhDUXJVVERq?=
+ =?utf-8?B?TXBEdUh3Q0Z2SHhqMXBOT2FiWWFzUTdkaVV1cVdYL1JQSTBVWmJNL01Lc2o2?=
+ =?utf-8?B?UXdweFNDOEpsa3pUQStuSjA5cmQ1Y253ekRmaktLUXdsSmNGc3FHZFAvS1li?=
+ =?utf-8?B?QkZtYXRmaUkxQVh5UUVrRkpJdGpNUVRuc0RONy9GSXcyeGhJRzdPaDdJLzVC?=
+ =?utf-8?B?V3E3V0ZZaGFsM05rMHRnOWpkek5Ua0ZmMGJEMi9HcTZaYUpxWkVlY3V0MTNp?=
+ =?utf-8?B?NE81bVV5Y2pBdUk2QWFnSHVwMXFncHJOY2F5USsrVVJGeFljZVQxU2R6Q243?=
+ =?utf-8?B?WTMrRHJYYVhRdXloNDVmTS8zYkhOZUJyZDBwNHpFWEZoMllORXRSQy8vSW5I?=
+ =?utf-8?B?dlhxUVNCeERFelgzbm9Wa25ycXU1a0w2UmpTV2ZKaW9lU2lFYkEvb2lFaW9i?=
+ =?utf-8?B?QXdlelFhNnc4R0pMZzZmT3J0dGE4OGlvME54Mm11cHBBTHFhRmNGVUtEZHlt?=
+ =?utf-8?B?VjQxeEJ6blZJL1NtMTRsc0JSVEJjdk54UzdjUHFXcnhSZEg4cFNHRVZ0NTV1?=
+ =?utf-8?B?Q2FFelVoaGFTN1FERXBZcmFTcXVFK1lhbzczNXV5VjBOYXB2L21GR0RIOVdH?=
+ =?utf-8?B?V0lIT1VwSWdVemRaeGo1Zng0RnUwamhYUnJoRjFOcng1dmlOeDN1Y2NoelRE?=
+ =?utf-8?B?MzZFOGp1SDU3dE9HcjhnNGxjUVlWeHllbkRyRWN2N2RXMHJrRG5pRnZCSUFZ?=
+ =?utf-8?B?S3hUWkdmNkl3TXRYZXR1UDR2TFdacmY2VjNuWHE1WTRLTVhPekxpcU5yS01m?=
+ =?utf-8?B?OHNQUTJFZ255ck1oU3FLcHNyR0RyYnFIclFwZy9ONlVuZG0ydGJYT0o4Yk9W?=
+ =?utf-8?B?UFZ5RWE0dzBsQzJtUVFPYk8zR2wveWpPTDdGT2NpcWNJMGlUdTZ0NFNQKzI5?=
+ =?utf-8?B?SFE9PQ==?=
+X-Forefront-Antispam-Report: 
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700013)(376014)(1800799024)(13003099007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	XytBm3qqOuP93kKlttE+MMBE5wERrAVaH+Pc2vpH2sdfNDriIkaPaBlxqXYS1CDHUBxwulYDttjIqirpKKXPeX9vuPQPqAp6ax45fXkevP7R9IfjV9Eiw3AN93EJx1V7IJxW0kf8lS82ZYeVxuMIyOvJj6VY9EXbwQF2/KfRQs30T1RSB5AKQjeS1CEUvZJynOEOrqoqwsidnHR39aHkoD85EfUVJ43ZwmuFKVftGwQDMjUsKauDqT7sv786uxx5rLpCGKgXBgepMpSiQmLTbcgMOhzj6877ZBkcrgW7ksMG1+UTNNZXj/dHid2WnBRx0/L1e2raPi0SGNmqUtw1vojJq5VWGj48sJY+zUOK8bIr7EXw4V625HqBPQlUIkzQArBJMTX+2VEQn5xHAI54qxp9FNDrhRGcv2nlOPkhqrMDlknkLT/4vuxJ9aCSD0iq
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2026 10:25:16.3384
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2de1fa52-1d52-4b50-411a-08de630e8625
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	CO1PEPF000075F4.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB8788
+X-Spamd-Bar: ----
+X-MailFrom: Pierre-eric.Pelloux-prayer@amd.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: CW5KTCEIFG2UBO5QUTQ2W6G2IJ4KRJZ7
-X-Message-ID-Hash: CW5KTCEIFG2UBO5QUTQ2W6G2IJ4KRJZ7
-X-Mailman-Approved-At: Thu, 16 Apr 2026 16:36:02 +0000
+Message-ID-Hash: IHMATYO24EPIGUTDITNXM2FK25POOHEA
+X-Message-ID-Hash: IHMATYO24EPIGUTDITNXM2FK25POOHEA
+X-Mailman-Approved-At: Thu, 16 Apr 2026 16:36:03 +0000
+CC: Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Alex Deucher <alexander.deucher@amd.com>, David Airlie <airlied@gmail.com>, Felix Kuehling <Felix.Kuehling@amd.com>, Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf: set SB_I_NOEXEC and SB_I_NODEV on dmabuf filesystem
+Subject: [Linaro-mm-sig] [PATCH v4 00/12] drm/amdgpu: use all SDMA instances for TTM clears and moves
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CW5KTCEIFG2UBO5QUTQ2W6G2IJ4KRJZ7/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/IHMATYO24EPIGUTDITNXM2FK25POOHEA/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-X-Spamd-Result: default: False [3.59 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[canonical.com : SPF not aligned (relaxed), No valid DKIM,reject];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:google.com:reject}];
-	DATE_IN_PAST(1.00)[1739];
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [4.99 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[amd.com : SPF not aligned (relaxed),quarantine];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
+	DATE_IN_PAST(1.00)[1734];
+	R_DKIM_REJECT(1.00)[amd.com:s=selector1];
+	MID_CONTAINS_FROM(1.00)[];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
-	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	FROM_HAS_DN(0.00)[];
+	GREYLIST(0.00)[pass,meta];
+	SUSPICIOUS_AUTH_ORIGIN(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[14];
+	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.984];
-	TO_DN_SOME(0.00)[];
+	FREEMAIL_CC(0.00)[amd.com,gmail.com,ffwll.ch,linaro.org,lists.freedesktop.org,lists.linaro.org,vger.kernel.org];
+	DKIM_TRACE(0.00)[amd.com:-];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email,canonical.com:email,mail.gmail.com:mid,acelan.idv.tw:url];
-	FROM_NEQ_ENVFROM(0.00)[acelan.kao@canonical.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	FROM_NEQ_ENVFROM(0.00)[pierre-eric.pelloux-prayer@amd.com,linaro-mm-sig-bounces@lists.linaro.org];
+	TO_DN_SOME(0.00)[];
+	HAS_XOIP(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	RCPT_COUNT_FIVE(0.00)[6];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3]
-X-Rspamd-Queue-Id: CB268411CA3
+	NEURAL_HAM(-0.00)[-0.993];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email,amd.com:mid,gitlab.freedesktop.org:url,lists.freedesktop.org:url]
+X-Rspamd-Queue-Id: 99F04411CB2
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Q2hpYS1MaW4gS2FvIChBY2VMYW4pIDxhY2VsYW4ua2FvQGNhbm9uaWNhbC5jb20+IOaWvCAyMDI2
-5bm0MeaciDE05pel6YCx5LiJIOS4iuWNiDk6MTnlr6vpgZPvvJoNCj4NCj4gVGhlIFZGUyBub3cg
-d2FybnMgaWYgYW4gaW5vZGUgZmxhZ2dlZCB3aXRoIFNfQU5PTl9JTk9ERSBpcyBsb2NhdGVkIG9u
-IGENCj4gZmlsZXN5c3RlbSB0aGF0IGRvZXMgbm90IGhhdmUgU0JfSV9OT0VYRUMgc2V0LiBkbWFi
-dWYgaW5vZGVzIGFyZQ0KPiBjcmVhdGVkIHVzaW5nIGFsbG9jX2Fub25faW5vZGUoKSwgd2hpY2gg
-c2V0cyBTX0FOT05fSU5PREUuDQo+DQo+IFRoaXMgdHJpZ2dlcnMgYSB3YXJuaW5nIGluIHBhdGhf
-bm9leGVjKCkgd2hlbiBhIGRtYWJ1ZiBpcyBtbWFwcGVkLCBmb3INCj4gZXhhbXBsZSBieSBHU3Ry
-ZWFtZXIncyB2NGwyc3JjIGVsZW1lbnQuDQo+DQo+IFsgICA2MC4wNjEzMjhdIFdBUk5JTkc6IENQ
-VTogMiBQSUQ6IDI4MDMgYXQgZnMvZXhlYy5jOjEyNSBwYXRoX25vZXhlYysweGEwLzB4ZDANCj4g
-Li4uDQo+IFsgICA2MC4wNjE2MzddICBkb19tbWFwKzB4MmI1LzB4NjgwDQo+DQo+IFRoZSB3YXJu
-aW5nIHdhcyBpbnRyb2R1Y2VkIGJ5IGNvbW1pdCAxZTdhYjZmNjc4MjQgKCJhbm9uX2lub2RlOiBy
-ZXdvcmsNCj4gYXNzZXJ0aW9ucyIpIHdoaWNoIGFkZGVkIGVuZm9yY2VtZW50IHRoYXQgYW5vbnlt
-b3VzIGlub2RlcyBtdXN0IGJlIG9uDQo+IGZpbGVzeXN0ZW1zIHdpdGggU0JfSV9OT0VYRUMgc2V0
-Lg0KPg0KPiBGaXggdGhpcyBieSBzZXR0aW5nIFNCX0lfTk9FWEVDIGFuZCBTQl9JX05PREVWIG9u
-IHRoZSBkbWFidWYgZmlsZXN5c3RlbQ0KPiBjb250ZXh0LCBmb2xsb3dpbmcgdGhlIHNhbWUgcGF0
-dGVybiBhcyBjb21taXQgY2U3NDE5YjZjZjIzZCAoImFub25faW5vZGU6DQo+IHJhaXNlIFNCX0lf
-Tk9ERVYgYW5kIFNCX0lfTk9FWEVDIikgYW5kIGNvbW1pdCA5OGY5OTM5NGExMDRjICgic2VjcmV0
-bWVtOg0KPiB1c2UgU0JfSV9OT0VYRUMiKS4NCj4NCj4gU2lnbmVkLW9mZi1ieTogQ2hpYS1MaW4g
-S2FvIChBY2VMYW4pIDxhY2VsYW4ua2FvQGNhbm9uaWNhbC5jb20+DQo+IC0tLQ0KPiAgZHJpdmVy
-cy9kbWEtYnVmL2RtYS1idWYuYyB8IDIgKysNCj4gIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlv
-bnMoKykNCj4NCj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtYnVmLmMgYi9kcml2
-ZXJzL2RtYS1idWYvZG1hLWJ1Zi5jDQo+IGluZGV4IGE0ZDhmMmZmOTRlNDYuLmRlYTc5YWFhYjEw
-Y2UgMTAwNjQ0DQo+IC0tLSBhL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtYnVmLmMNCj4gKysrIGIvZHJp
-dmVycy9kbWEtYnVmL2RtYS1idWYuYw0KPiBAQCAtMjIxLDYgKzIyMSw4IEBAIHN0YXRpYyBpbnQg
-ZG1hX2J1Zl9mc19pbml0X2NvbnRleHQoc3RydWN0IGZzX2NvbnRleHQgKmZjKQ0KPiAgICAgICAg
-IGlmICghY3R4KQ0KPiAgICAgICAgICAgICAgICAgcmV0dXJuIC1FTk9NRU07DQo+ICAgICAgICAg
-Y3R4LT5kb3BzID0gJmRtYV9idWZfZGVudHJ5X29wczsNCj4gKyAgICAgICBmYy0+c19pZmxhZ3Mg
-fD0gU0JfSV9OT0VYRUM7DQo+ICsgICAgICAgZmMtPnNfaWZsYWdzIHw9IFNCX0lfTk9ERVY7DQo+
-ICAgICAgICAgcmV0dXJuIDA7DQo+ICB9DQo+DQo+IC0tDQo+IDIuNTEuMA0KPg0KQSBnZW50bGUg
-cGluZywgcGxlYXNlIHJldmlldyB0aGlzIHBhdGNoLCB0aGFua3MuDQoNCi0tIA0KQ2hpYS1MaW4g
-S2FvKEFjZUxhbikNCmh0dHA6Ly9ibG9nLmFjZWxhbi5pZHYudHcvDQpFLU1haWw6IGFjZWxhbi5r
-YW9BVGNhbm9uaWNhbC5jb20gKHMvQVQvQC8pDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8t
-bW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBs
-aW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+The drm/ttm patch modifies TTM to support multiple contexts for the pipelined moves.
+
+Then amdgpu/ttm is updated to express dependencies between jobs explicitely,
+instead of relying on the ordering of execution guaranteed by the use of a single
+instance.
+With all of this in place, we can use multiple entities, with each having access
+to the available SDMA instances.
+
+This rework also gives the opportunity to merge the clear functions into a single
+one and to optimize a bit GART usage.
+
+Since v3 some patches have been already reviewed and merged separately:
+- https://lists.freedesktop.org/archives/amd-gfx/2026-January/137747.html
+- https://gitlab.freedesktop.org/drm/kernel/-/commit/ddf055b80a544d6f36f77be5f0c6d3c80177d57c
+This version depend on them.
+
+v3: https://lists.freedesktop.org/archives/dri-devel/2025-November/537830.html
+
+Pierre-Eric Pelloux-Prayer (12):
+  drm/amdgpu: allocate clear entities dynamically
+  drm/amdgpu: allocate move entities dynamically
+  drm/amdgpu: round robin through clear_entities in amdgpu_fill_buffer
+  drm/amdgpu: use TTM_NUM_MOVE_FENCES when reserving fences
+  drm/amdgpu: use multiple entities in amdgpu_move_blit
+  drm/amdgpu: pass all the sdma scheds to amdgpu_mman
+  drm/amdgpu: only use working sdma schedulers for ttm
+  drm/amdgpu: create multiple clear/move ttm entities
+  drm/amdgpu: give ttm entities access to all the sdma scheds
+  drm/amdgpu: get rid of amdgpu_ttm_clear_buffer
+  drm/amdgpu: rename amdgpu_fill_buffer as amdgpu_ttm_clear_buffer
+  drm/amdgpu: split amdgpu_ttm_set_buffer_funcs_status in 2 funcs
+
+ drivers/gpu/drm/amd/amdgpu/amdgpu.h           |   2 +
+ drivers/gpu/drm/amd/amdgpu/amdgpu_cs.c        |   5 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_device.c    |  16 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gmc.c       |   4 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_object.c    |  17 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c       | 329 ++++++++++--------
+ drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.h       |  29 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vkms.c      |   6 +-
+ drivers/gpu/drm/amd/amdgpu/cik_sdma.c         |  13 +-
+ drivers/gpu/drm/amd/amdgpu/sdma_v2_4.c        |   8 +-
+ drivers/gpu/drm/amd/amdgpu/sdma_v3_0.c        |   8 +-
+ drivers/gpu/drm/amd/amdgpu/sdma_v4_0.c        |  15 +-
+ drivers/gpu/drm/amd/amdgpu/sdma_v4_4_2.c      |  12 +-
+ drivers/gpu/drm/amd/amdgpu/sdma_v5_0.c        |  11 +-
+ drivers/gpu/drm/amd/amdgpu/sdma_v5_2.c        |  14 +-
+ drivers/gpu/drm/amd/amdgpu/sdma_v6_0.c        |   5 +-
+ drivers/gpu/drm/amd/amdgpu/sdma_v7_0.c        |   5 +-
+ drivers/gpu/drm/amd/amdgpu/sdma_v7_1.c        |  12 +-
+ drivers/gpu/drm/amd/amdgpu/si_dma.c           |  12 +-
+ drivers/gpu/drm/amd/amdkfd/kfd_migrate.c      |   5 +-
+ drivers/gpu/drm/amd/amdkfd/kfd_svm.c          |   3 +-
+ .../amd/display/amdgpu_dm/amdgpu_dm_plane.c   |   6 +-
+ .../drm/amd/display/amdgpu_dm/amdgpu_dm_wb.c  |   6 +-
+ 23 files changed, 300 insertions(+), 243 deletions(-)
+
+-- 
+2.43.0
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
