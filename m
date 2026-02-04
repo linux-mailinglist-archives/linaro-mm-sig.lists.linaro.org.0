@@ -2,49 +2,50 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id QEHaNRjLgGl3AgMAu9opvQ
+	id yP3fLGsAg2keggMAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 02 Feb 2026 17:04:40 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 04 Feb 2026 09:16:43 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6A658CEA0A
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 02 Feb 2026 17:04:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3F968E3031
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 04 Feb 2026 09:16:43 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 569EC3F808
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  2 Feb 2026 16:04:39 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id EE6E63F722
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  4 Feb 2026 08:16:41 +0000 (UTC)
 Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
-	by lists.linaro.org (Postfix) with ESMTPS id 5358A3F7AC
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  2 Feb 2026 16:04:33 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 2EC103F756
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  4 Feb 2026 08:16:35 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b="f/aB5C6X";
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b="C8gh/pKq";
 	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=leon@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by tor.source.kernel.org (Postfix) with ESMTP id B0F16600BB;
-	Mon,  2 Feb 2026 16:04:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C63C6C116C6;
-	Mon,  2 Feb 2026 16:04:31 +0000 (UTC)
+	by tor.source.kernel.org (Postfix) with ESMTP id 427AB60127;
+	Wed,  4 Feb 2026 08:16:34 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 55C9FC4CEF7;
+	Wed,  4 Feb 2026 08:16:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1770048272;
-	bh=7imNtjuPs1te+Kisp0FjgtPNX3MVFkhCCfZGQjL0zdE=;
+	s=k20201202; t=1770192994;
+	bh=WxXDZS2gldEUv9hekLIDTwnn7p4L/bRv9DrzbhJlydY=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=f/aB5C6XvMX7ySgFLbkB7nsbkNjnx01Vj3syyHczl0oLlRz9+pP1I+iCDjrW/iGE/
-	 O7AQHu69UN3T+TU5FuhDC1Gqg+whGbB6rUX5kvnaFYduFi4aQqmdZskSdFLIsH+yV/
-	 3WVLf9QxlXUBZ/YCuEJD7DKWz4xBbcsnh3zo8X8aT698GMC9lUyGwKC82KAXlXEAK+
-	 YSvnfx0cc6lZCbWhfI0bW1MJi2So9rZTK5TNjLGe78XaGFRLlFEPJTrTLXTdK+R0LO
-	 aJrihNOOGO4iUaVjnls8WcA2+TFWeUMSBuRwtDAFQoNTDAthUbI/n2zQR/DAnDLQwF
-	 kG55IL5/qUQWQ==
-Date: Mon, 2 Feb 2026 18:04:25 +0200
+	b=C8gh/pKqW818z793jik11p+RF2eKWnDcp1gWr/jawmdvjsCileab1iXvIktQu5ed+
+	 a5etFyS7OvZ37MJ6nsVJNDLqEY8KXIl6crwOW6WukBc3/4pdvqOxbSikvU4DVweI8p
+	 +Ug/VnOlDi1yrmRFGPo7MYhqBTBH3VhlsOcrmTpk6Agpjgx0WdkEXD2ACy0FoqhGhC
+	 EzURj9FItdFt4arK3CPzaVxx5epO06ezuNSWSFgtCVRIGXZkFEFAr6m/zSCbixOPdY
+	 mze1siTSphF/Jt71N0OqCQS1vG5a2SGtDtP0qRsECfsTkGJMGH9grnUEkjBJ9VmoKW
+	 9WYJKyb0fY6jg==
+Date: Wed, 4 Feb 2026 10:16:30 +0200
 From: Leon Romanovsky <leon@kernel.org>
 To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
-Message-ID: <20260202160425.GO34749@unreal>
+Message-ID: <20260204081630.GA6771@unreal>
 References: <20260131-dmabuf-revoke-v7-0-463d956bd527@nvidia.com>
+ <20260202160425.GO34749@unreal>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260131-dmabuf-revoke-v7-0-463d956bd527@nvidia.com>
+In-Reply-To: <20260202160425.GO34749@unreal>
 X-Spamd-Bar: ---
-Message-ID-Hash: 2K7ALS65W62NLDHMXE364EQFJQ7LBYJO
-X-Message-ID-Hash: 2K7ALS65W62NLDHMXE364EQFJQ7LBYJO
+Message-ID-Hash: XJ2H2QUONICZ55532LM4KE2333HQA77G
+X-Message-ID-Hash: XJ2H2QUONICZ55532LM4KE2333HQA77G
 X-MailFrom: leon@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
@@ -54,7 +55,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH v7 0/8] dma-buf: Use revoke mechanism to invalidate shared buffers
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2K7ALS65W62NLDHMXE364EQFJQ7LBYJO/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XJ2H2QUONICZ55532LM4KE2333HQA77G/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -82,7 +83,7 @@ X-Spamd-Result: default: False [2.49 / 15.00];
 	DKIM_TRACE(0.00)[kernel.org:-];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
+	NEURAL_HAM(-0.00)[-0.986];
 	FROM_NEQ_ENVFROM(0.00)[leon@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
@@ -91,49 +92,58 @@ X-Spamd-Result: default: False [2.49 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	MISSING_XM_UA(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email]
-X-Rspamd-Queue-Id: 6A658CEA0A
+X-Rspamd-Queue-Id: 3F968E3031
 X-Rspamd-Action: no action
 
-On Sat, Jan 31, 2026 at 07:34:10AM +0200, Leon Romanovsky wrote:
-> Changelog:
-> v7:
-
-<...>
-
-> Leon Romanovsky (8):
->       dma-buf: Rename .move_notify() callback to a clearer identifier
->       dma-buf: Rename dma_buf_move_notify() to dma_buf_invalidate_mappings()
->       dma-buf: Always build with DMABUF_MOVE_NOTIFY
->       vfio: Wait for dma-buf invalidation to complete
->       dma-buf: Make .invalidate_mapping() truly optional
->       dma-buf: Add dma_buf_attach_revocable()
->       vfio: Permit VFIO to work with pinned importers
->       iommufd: Add dma_buf_pin()
+On Mon, Feb 02, 2026 at 06:04:25PM +0200, Leon Romanovsky wrote:
+> On Sat, Jan 31, 2026 at 07:34:10AM +0200, Leon Romanovsky wrote:
+> > Changelog:
+> > v7:
 > 
->  drivers/dma-buf/Kconfig                     | 12 -----
->  drivers/dma-buf/dma-buf.c                   | 69 ++++++++++++++++++++-----
->  drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.c | 14 ++---
->  drivers/gpu/drm/amd/amdgpu/amdgpu_object.c  |  2 +-
->  drivers/gpu/drm/amd/amdkfd/Kconfig          |  2 +-
->  drivers/gpu/drm/virtio/virtgpu_prime.c      |  2 +-
->  drivers/gpu/drm/xe/tests/xe_dma_buf.c       |  7 ++-
->  drivers/gpu/drm/xe/xe_bo.c                  |  2 +-
->  drivers/gpu/drm/xe/xe_dma_buf.c             | 14 ++---
->  drivers/infiniband/core/umem_dmabuf.c       | 13 -----
->  drivers/infiniband/hw/mlx5/mr.c             |  2 +-
->  drivers/iommu/iommufd/pages.c               | 11 +++-
->  drivers/iommu/iommufd/selftest.c            |  2 +-
->  drivers/vfio/pci/vfio_pci_dmabuf.c          | 80 ++++++++++++++++++++++-------
->  include/linux/dma-buf.h                     | 17 +++---
->  15 files changed, 153 insertions(+), 96 deletions(-)
+> <...>
+> 
+> > Leon Romanovsky (8):
+> >       dma-buf: Rename .move_notify() callback to a clearer identifier
+> >       dma-buf: Rename dma_buf_move_notify() to dma_buf_invalidate_mappings()
+> >       dma-buf: Always build with DMABUF_MOVE_NOTIFY
+> >       vfio: Wait for dma-buf invalidation to complete
+> >       dma-buf: Make .invalidate_mapping() truly optional
+> >       dma-buf: Add dma_buf_attach_revocable()
+> >       vfio: Permit VFIO to work with pinned importers
+> >       iommufd: Add dma_buf_pin()
+> > 
+> >  drivers/dma-buf/Kconfig                     | 12 -----
+> >  drivers/dma-buf/dma-buf.c                   | 69 ++++++++++++++++++++-----
+> >  drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.c | 14 ++---
+> >  drivers/gpu/drm/amd/amdgpu/amdgpu_object.c  |  2 +-
+> >  drivers/gpu/drm/amd/amdkfd/Kconfig          |  2 +-
+> >  drivers/gpu/drm/virtio/virtgpu_prime.c      |  2 +-
+> >  drivers/gpu/drm/xe/tests/xe_dma_buf.c       |  7 ++-
+> >  drivers/gpu/drm/xe/xe_bo.c                  |  2 +-
+> >  drivers/gpu/drm/xe/xe_dma_buf.c             | 14 ++---
+> >  drivers/infiniband/core/umem_dmabuf.c       | 13 -----
+> >  drivers/infiniband/hw/mlx5/mr.c             |  2 +-
+> >  drivers/iommu/iommufd/pages.c               | 11 +++-
+> >  drivers/iommu/iommufd/selftest.c            |  2 +-
+> >  drivers/vfio/pci/vfio_pci_dmabuf.c          | 80 ++++++++++++++++++++++-------
+> >  include/linux/dma-buf.h                     | 17 +++---
+> >  15 files changed, 153 insertions(+), 96 deletions(-)
+> 
+> Christian,
+> 
+> Given the ongoing discussion around patch v5, I'm a bit unclear on the
+> current state. Is the series ready for merging, or do you need me to
+> rework anything further?
 
 Christian,
 
-Given the ongoing discussion around patch v5, I'm a bit unclear on the
-current state. Is the series ready for merging, or do you need me to
-rework anything further?
+Let's not miss the merge window for work that is already ready.
 
 Thanks
+
+> 
+> Thanks
+> 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
