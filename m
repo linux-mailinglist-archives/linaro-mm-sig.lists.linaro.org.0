@@ -2,28 +2,28 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id EDRkKlGNhGl43QMAu9opvQ
+	id INliEmaNhGl43QMAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 05 Feb 2026 13:30:09 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 05 Feb 2026 13:30:30 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 48087F2804
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 05 Feb 2026 13:30:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 044E5F282E
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 05 Feb 2026 13:30:29 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4B7A6401F6
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  5 Feb 2026 12:30:08 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C1D47402BB
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  5 Feb 2026 12:30:28 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DA754401D9
-	for <linaro-mm-sig@lists.linaro.org>; Thu,  5 Feb 2026 12:29:49 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id BC355401EB
+	for <linaro-mm-sig@lists.linaro.org>; Thu,  5 Feb 2026 12:30:10 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: benjaminlucas0a@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Thu, 05 Feb 2026 12:29:49 -0000
-Message-ID: <177029458989.3414884.3254886881842425501@lists.linaro.org>
+Date: Thu, 05 Feb 2026 12:30:10 -0000
+Message-ID: <177029461076.3416324.7208034488267380480@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: 552OZO3BKNH2XKN5TXATO6MBAVQIQFGW
-X-Message-ID-Hash: 552OZO3BKNH2XKN5TXATO6MBAVQIQFGW
+Message-ID-Hash: L7VF4F4AXYWBA3D4ZWTRG7XH4K2RG2J7
+X-Message-ID-Hash: L7VF4F4AXYWBA3D4ZWTRG7XH4K2RG2J7
 X-MailFrom: benjaminlucas0a@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
@@ -31,7 +31,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] How to Recover Lost or Scammed Cryptocurrency, visit OPTIMISTIC HACKER GAIUS
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/552OZO3BKNH2XKN5TXATO6MBAVQIQFGW/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/L7VF4F4AXYWBA3D4ZWTRG7XH4K2RG2J7/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -64,8 +64,8 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	R_DKIM_NA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,linaro.org:email]
-X-Rspamd-Queue-Id: 48087F2804
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid]
+X-Rspamd-Queue-Id: 044E5F282E
 X-Rspamd-Action: no action
 
 T1BUSU1JU1RJQyBIQUNLRVIgR0FJVVMgaXMgYSBwcm9mZXNzaW9uYWwgY3J5cHRvIHJlY292ZXJ5
