@@ -2,103 +2,103 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cNtgMLoQ4WnoogAAu9opvQ
+	id 6DwpAsMQ4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:39:22 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:39:31 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 99B43411CF2
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:39:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ABC30411CFA
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:39:30 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5FDB444BD7
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:39:21 +0000 (UTC)
-Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
-	by lists.linaro.org (Postfix) with ESMTPS id 1EDBD3F7F8
-	for <linaro-mm-sig@lists.linaro.org>; Fri,  6 Feb 2026 15:03:27 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id BE31D44BE0
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:39:29 +0000 (UTC)
+Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
+	by lists.linaro.org (Postfix) with ESMTPS id 613C53F7F8
+	for <linaro-mm-sig@lists.linaro.org>; Fri,  6 Feb 2026 15:06:13 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20230601 header.b=cQtsrRtO;
-	spf=pass (lists.linaro.org: domain of anuj1072538@gmail.com designates 209.85.208.41 as permitted sender) smtp.mailfrom=anuj1072538@gmail.com;
+	dkim=pass header.d=gmail.com header.s=20230601 header.b=VMD1XdOp;
+	spf=pass (lists.linaro.org: domain of anuj1072538@gmail.com designates 209.85.208.52 as permitted sender) smtp.mailfrom=anuj1072538@gmail.com;
 	arc=pass ("google.com:s=arc-20240605:i=1");
 	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-ed1-f41.google.com with SMTP id 4fb4d7f45d1cf-658cc45847cso3284001a12.0
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 06 Feb 2026 07:03:27 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770390206; cv=none;
+Received: by mail-ed1-f52.google.com with SMTP id 4fb4d7f45d1cf-65814266b08so3477165a12.3
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 06 Feb 2026 07:06:13 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1770390372; cv=none;
         d=google.com; s=arc-20240605;
-        b=DhUi3nGKqlfpvUFPo3RT7EfjvoI97bGkSy+q8i8GHKXIjSHOA5JDHy1vm1BgNYxd8A
-         kpO306lzw8OJYT2wbu7KCRaoUcpR801929QAubuDWudJH+mxzpyh3KMd/FXgHax6wMnG
-         3x57XwaxKjGX/i+VcBNJNx+kpujn2RY3JdcJXXgq7JmWIISD/SDgobbBOfQnL/ZAAElB
-         o3e6KuOMzJWO/9H+AQIz/O8oJlDnTcSRmXD9kVt5SXf/dJB14Kf2iJt0dfosWFUs3A3s
-         MHg9dj/vdeRNBumew/UB4pEkUmtBsLay/dsgsV0ifccUeCF9DpFZ01b3CXUxCYwG1R9q
-         z6lg==
+        b=fyaeNbAmv0GBpqXOv4XO3/9c7iLT3iIt1H3Y83AcUqGXNdNHJZknEjcRcgKKXEkSlY
+         5xbwQWBNzVfft5x8pxShhgjc0NBQLIo79oEH0/fooSqlWeaGdeSkMC/AQSwBFMy0KVWZ
+         9LK8hPFS6ZBFaDNByGDm7eV5GWtnJkeFgErChmiVBuJjfdjvfmdyqR/rN/AYWhKgB4VE
+         3AcS1DmmyPkk7Y9Fdog1pOKUmk52Drmo9MQkA1Q1aPdQtMxJsSNkEr6jr4fSwJH4FSG6
+         Gj+FXEJOYFYv+jW5jgb1X0E+KIyh7SqkwgSaKZnfAOige95wAeCbS9MeN8KVEdFevZ+G
+         jujg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:dkim-signature;
-        bh=cbNYgILYh6T0L6GkBJIakhSOuBf8eodDKh7A+HpUyVc=;
-        fh=A+U+9mXYo8WWuOJz5b8X3ddwD6/XRwiNOuRr4BWqzFM=;
-        b=C94ZzyrjmJzPCIufTjCDYBt7NOz/R7mzgEY4P39Ox+DOU6OpQD1eDLP79OEFa8A3pJ
-         5mXo17OSjcAJZDgT92jQxPCgCvPL9K5QK1FhareEV+E3gRnG4b6VS0TszvufAu8+O6aY
-         lwYf4QkCcFd0F+tjbWgt8OPbBBuJ+NIJ4MIDXTR9a+JKeM3zY6v1ryZx6DU6q0WBCIRo
-         aIkcErDRaKODo65iuHFGkle76MW6gyi7N6qlHm3S01dkiRkad5KNDw1D7Zh5mqRTz8dA
-         p2KxSIyE42W3ocXU0FdBokmqAwUQbjGQxdVVEmnBlVwVFphBUbVBpywOefG3NrTeoMSp
-         tdzA==;
+        bh=hGQBxRDZvTlf47Wu9lDxdnyR2cqQuj+x+M/+cDeQX7w=;
+        fh=VYq1H8yRDfOVd4K7vzdvcT/gwwOASSzHlPtNAdydYfA=;
+        b=FsdnkN7+npXZJMx514fi9sMjbHlKrFFXp95wRVQj3Eva1QmZM86Aom4xpMfmgSXCRS
+         YfBEXDBfqfzdUEedjolzbMbzzP+QeMcUDL+NAUnivvvE+YfQJiTWoLCoaSr2YI2GNQVD
+         h2BS2kVb7fIx2fStcJ4afWemd8/Knksz0i6Z7KONZIJneJ+Hlxi6KBkyeBgkL0iX4j4M
+         yPav3djTFTSITlVHvr0ryTkanIOmTUBwMo+MxnLcOTbqRtfV03jLygrt5DSbod6Gr4tq
+         qEvHIeTb9lFn4svPNipuCWGLEE8P+e/1GfQ/ievFlBFmUtEgmtMgEUrG6SNhn6SrNUXp
+         gw0A==;
         darn=lists.linaro.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770390206; x=1770995006; darn=lists.linaro.org;
+        d=gmail.com; s=20230601; t=1770390372; x=1770995172; darn=lists.linaro.org;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=cbNYgILYh6T0L6GkBJIakhSOuBf8eodDKh7A+HpUyVc=;
-        b=cQtsrRtOB/qOc1k7peJVO8jzY3p4bQWZh8h7bjxVlhyMG3HIMYY1aKi6yCJJOEi9Eo
-         nraYTUYm9vyWLq7PvZ0psjK+lUdXdAL/TWrzzts2p47LXzMuLe8WzxUeS5EdGe2KCIVD
-         kE1x++dn08J0eo+KriXpMBYE0RtiyuBmoM0ax1GkN0CvE+s0JJ/n/I0FLiQeQI9wjkPT
-         KNSyURCklHD0LgxtQ5msM0E6MQsSWS9LLZkYZQp3dcP15TWLb8rmlJrjAxQxZhBP8leB
-         zuKKZAtff//sU/TN1HZ7SOY4YcyX2CmnOXH6RhpngvwlZP77R8t9rQodY2UC+63gyefq
-         39cg==
+        bh=hGQBxRDZvTlf47Wu9lDxdnyR2cqQuj+x+M/+cDeQX7w=;
+        b=VMD1XdOpzHlu7XCNd+hJlucYNP8O/NEr2nY/DJqwbh1fIlwoU1xeTTqQrxF2LKCL4j
+         OqkLqd63vJm+qJBIzaiISn3n0ypmfwSwClvbQSQfckNrqQBLO1go6qOP3XkVRaPyMTz7
+         qCv58TFYYDDWXvty3ffivpObfGrxuq/evd1wD8nSjGRfDsm1krdkpE2yD2ENXXRUtW2j
+         7+OhULOzg/nqOjxZA1gTdp64OjJWYrE4ETM/P7F0IZ0/8WOLeFPLV+kGoOINlCH8gbpR
+         Br7AA/BOBg1RGrTVQiNtOesKvSPcysT7JCz3kH+Nz8ikYtuVXbec4LjXZ7u+MkaMlh3D
+         lKsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770390206; x=1770995006;
+        d=1e100.net; s=20230601; t=1770390372; x=1770995172;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=cbNYgILYh6T0L6GkBJIakhSOuBf8eodDKh7A+HpUyVc=;
-        b=l5f0WFN86Bl7P/UIJ9pWPV0KPJI+UMTpNjl4uWVTGa2jnJD5lQdwJuT7FPEC7n1XlV
-         6Tgp2urpNmxNqT7KcvwnnMwzz8GFpDW/Yfol5+IeaPB29DVIAkcN4iyFcHJNWOZWf2/a
-         x8w7xxxmsL0gjsI77nObpCRF9cdCXsV3djZZ4x+WBPnZQsWP5Riqr5uICcccRn7eVGP5
-         NEVuacuJfiLypnUwcBmWs/c/Lh+dUeRjfSLX/V0T46fp+72c2YYeOBRuAtgbG5yHTmN7
-         SpgH1O1gfg2nfnkrgf4FP+T8KR4jFbzOiYHiGVVRqjYEeXRwgpIbtwAKmuzNczZjv7am
-         N/1Q==
-X-Forwarded-Encrypted: i=1; AJvYcCUtgyl+Xfsgh1v69aH4ttHfZJ0U2sppmPTHIorTJcggYFZgT7ulNGgSuBwV3DlaZdbw2l5xMLBmfOIIZK0d@lists.linaro.org
-X-Gm-Message-State: AOJu0YxGZ5TxvUM8OeMtskZaRQh63k92K+iYaaFYVDC+Hbx+sOizFF5I
-	ZTo57UD18Hpu596FbY/OvA80q5d/pAWR6dC63H/QM12zUDBL3HufKuBagGwX44Kp+myvm5BFgSd
-	BDtQXqTxfu+XLU6GDoqOh/fxRayseaA==
-X-Gm-Gg: AZuq6aJ/oNQ1zDoVC+IhHqpg5iChE03Tv8y3WuPJCm+zJE4iu/YoFh8CYuMJVK1z+IM
-	qs2QEP+Grunujm2Zbqris1cy9z+0lx65hW1b3O2xokuy+yhdoLwnSSeAAD884hboUtaNgGiqFXn
-	Vl6X9HKj66V6U0JBDZIKqX5aoOQxQKAIvLz5YyDMStiH2QbT2YYc/3q3sR6Z0PObh7rw4VCuUPH
-	MKRQez2XC/3zSixheGVU73d5HcFpd5SoLNGLFtfR3DAOJ6QVShhnR4t8T90d6Qc4LDl9QvMO6Wn
-	mq1WYhhE/EhPci6A6u5Wc78e/S2dX/+cGR6cUKfbPRi9iCFTXZK7LIT9DQ==
-X-Received: by 2002:a05:6402:3583:b0:659:4383:c491 with SMTP id
- 4fb4d7f45d1cf-65984193946mr1569160a12.33.1770390205748; Fri, 06 Feb 2026
- 07:03:25 -0800 (PST)
+        bh=hGQBxRDZvTlf47Wu9lDxdnyR2cqQuj+x+M/+cDeQX7w=;
+        b=GGqCtzAoPwtUV+UUIAVyUlM8zbv//okzp+H1h3+1tlOnFto6MYXHv4k4Pvx08EvGBk
+         BOsuoZeUfD71aTYCF4QHGvmEEhTlAWljGgVXnmC7mooH5A3RACVVcAgSfP0TjaPrGpTO
+         dB1kSTljVTuveeeAZylCoATI/8kX2V8W2QIJTDEp2dXQVwQhCPI989R/eh6sEoPSBOOK
+         n5JpxtwHrx6JxRFK+ifWohKAPMYSdThF9tXoQYl8Wb2khIg0+fPCha221qx8iROxuZNE
+         tOAao7rLlzrjhseuQCxixwc7nBz6xSGAMAG/r8DNPf5lCkfRqE/md5BgmDHvU9Yfzujp
+         zbTQ==
+X-Forwarded-Encrypted: i=1; AJvYcCX28yjsLI+gSB75QpzT2Or1UFXPc3J4/c/BdcDZlVUzxj7l8OCVUwwdEdj0Za1q23Obmvom9rzkHz03zHNl@lists.linaro.org
+X-Gm-Message-State: AOJu0YzINFhARNYnatD87xyuUlh4L9TN6g9PEm5mft0x0oMYmuvp1aY7
+	7DlP4ARPB6CKZebOjaOCv8MofSWvRBhBB0HWvcFDcSK0WYWTybXPwtB0FrM+FQdHwS6Ub/1kd7H
+	alT52nnNxt9nrYWe3VXGAO0cRz2Gorg==
+X-Gm-Gg: AZuq6aIJa34rFJXmpnf+fyw03lQNYbCLqpTkh+4rhTGJlhlW1yALFhUFJXVkN8osAIB
+	DyO6pLvfAUJwzCbAk3NyLmGxkAq9rQaY4jPaRy6VUxDz8pGsBl5lncnIkz1jZ5oJuInFCIZnuXt
+	oxsHgHHLvhqj6SbZEGbWW07H2LCWTQjgkS2grnBxfy0gcVisvob7dOWj/ekMTXQ7tdzGeCRH4Du
+	zOB5x+lyhKft3Fw84Y2mhwlaVoqV3Soj3YODfIebr66Ebw3jDZxqpt0Di3pcLSLtoUr7H8wDBiY
+	NFkJBu30YB7qiZC/k7k68iTjwblNERR8WH1obECCyFSE7f98/hAAdhAj3VwIgbjJe+5V
+X-Received: by 2002:a05:6402:5113:b0:658:dbf:d1a0 with SMTP id
+ 4fb4d7f45d1cf-659841a2f31mr1582224a12.30.1770390372219; Fri, 06 Feb 2026
+ 07:06:12 -0800 (PST)
 MIME-Version: 1.0
-References: <cover.1763725387.git.asml.silence@gmail.com> <f57269489c4d6f670ab1f9de4d0764030d8d080c.1763725387.git.asml.silence@gmail.com>
-In-Reply-To: <f57269489c4d6f670ab1f9de4d0764030d8d080c.1763725387.git.asml.silence@gmail.com>
+References: <cover.1763725387.git.asml.silence@gmail.com> <12530de6d1907afb44be3e76e7668b935f1fd441.1763725387.git.asml.silence@gmail.com>
+In-Reply-To: <12530de6d1907afb44be3e76e7668b935f1fd441.1763725387.git.asml.silence@gmail.com>
 From: Anuj gupta <anuj1072538@gmail.com>
-Date: Fri, 6 Feb 2026 20:32:47 +0530
-X-Gm-Features: AZwV_QgZhDOY8h13FRDtMZqnV6_xaqir1VOWq2MTchb4BXyrN5R68VQhosU9bGY
-Message-ID: <CACzX3Av_g5g=ssfSjHzkosEj7DMU=+xY5fpdU-zYGYc0cUWPSA@mail.gmail.com>
+Date: Fri, 6 Feb 2026 20:35:34 +0530
+X-Gm-Features: AZwV_QhZUfBhtu2huNeoyo9GkYijd3hbyMiyHPwiXwArHA1o3azl0x64XYjc0yI
+Message-ID: <CACzX3AuNL0g_VvxMSbUu185rvn97+NpZqOVj246-9q9hAVPa9g@mail.gmail.com>
 To: Pavel Begunkov <asml.silence@gmail.com>
 X-Spamd-Bar: ----
 X-MailFrom: anuj1072538@gmail.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: GQPPJ2UKTMN5KFJMAQ5VFYICPUYF2FDS
-X-Message-ID-Hash: GQPPJ2UKTMN5KFJMAQ5VFYICPUYF2FDS
+Message-ID-Hash: H3AYK2AUWG3B325PDOUAFCRRCLNH3TNJ
+X-Message-ID-Hash: H3AYK2AUWG3B325PDOUAFCRRCLNH3TNJ
 X-Mailman-Approved-At: Thu, 16 Apr 2026 16:36:07 +0000
 CC: linux-block@vger.kernel.org, io-uring@vger.kernel.org, Vishal Verma <vishal1.verma@intel.com>, tushar.gohad@intel.com, Keith Busch <kbusch@kernel.org>, Jens Axboe <axboe@kernel.dk>, Christoph Hellwig <hch@lst.de>, Sagi Grimberg <sagi@grimberg.me>, Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Andrew Morton <akpm@linux-foundation.org>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, linux-kernel@vger.kernel.org, linux-nvme@lists.infradead.org, linux-fsdevel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [RFC v2 02/11] iov_iter: introduce iter type for pre-registered dma
+Subject: [Linaro-mm-sig] Re: [RFC v2 04/11] block: introduce dma token backed bio type
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GQPPJ2UKTMN5KFJMAQ5VFYICPUYF2FDS/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/H3AYK2AUWG3B325PDOUAFCRRCLNH3TNJ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -132,27 +132,28 @@ X-Spamd-Result: default: False [3.09 / 15.00];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	MISSING_XM_UA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	NEURAL_SPAM(0.00)[0.982];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,mail.gmail.com:mid]
-X-Rspamd-Queue-Id: 99B43411CF2
+	NEURAL_SPAM(0.00)[0.932];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,mail.gmail.com:mid,lists.linaro.org:helo,lists.linaro.org:rdns]
+X-Rspamd-Queue-Id: ABC30411CFA
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-> +void iov_iter_dma_token(struct iov_iter *i, unsigned int direction,
-> +                       struct dma_token *token,
-> +                       loff_t off, size_t count)
-> +{
-> +       WARN_ON(direction & ~(READ | WRITE));
-> +       *i = (struct iov_iter){
-> +               .iter_type = ITER_DMA_TOKEN,
-> +               .data_source = direction,
-> +               .dma_token = token,
-> +               .iov_offset = 0,
+> @@ -328,6 +328,29 @@ int bio_split_io_at(struct bio *bio, const struct queue_limits *lim,
+>         unsigned nsegs = 0, bytes = 0, gaps = 0;
+>         struct bvec_iter iter;
+>
+> +       if (bio_flagged(bio, BIO_DMA_TOKEN)) {
+> +               int offset = offset_in_page(bio->bi_iter.bi_bvec_done);
+> +
+> +               nsegs = ALIGN(bio->bi_iter.bi_size + offset, PAGE_SIZE);
+> +               nsegs >>= PAGE_SHIFT;
+> +
+> +               if (offset & lim->dma_alignment || bytes & len_align_mask)
+> +                       return -EINVAL;
 
-nit: iov_offset is getting below too. can get rid of this one.
-> +               .count = count,
-> +               .iov_offset = off,
-> +       };
+bytes == 0 is a dead check here. Probably you would like to check the
+length of the first and last segment to match with what the normal path
+below is doing.
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
