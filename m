@@ -2,86 +2,89 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 2CLCONYQ4WnoogAAu9opvQ
+	id iJPLJ9sQ4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:39:50 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:39:55 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id BA9A8411D0F
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:39:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 51DDD411D1E
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:39:55 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id CD77344C6B
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:39:48 +0000 (UTC)
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
-	by lists.linaro.org (Postfix) with ESMTPS id 6ACFD3F7EA
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  9 Feb 2026 15:38:11 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 2464B44C70
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:39:54 +0000 (UTC)
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+	by lists.linaro.org (Postfix) with ESMTPS id 6F7113F910
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  9 Feb 2026 15:38:12 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=resnulli-us.20230601.gappssmtp.com header.s=20230601 header.b=bsAILgKJ;
-	spf=none (lists.linaro.org: domain of jiri@resnulli.us has no SPF policy when checking 209.85.128.48) smtp.mailfrom=jiri@resnulli.us;
+	dkim=pass header.d=resnulli-us.20230601.gappssmtp.com header.s=20230601 header.b=B8wajBkE;
+	spf=none (lists.linaro.org: domain of jiri@resnulli.us has no SPF policy when checking 209.85.128.45) smtp.mailfrom=jiri@resnulli.us;
 	dmarc=none
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-4806dffc64cso39710595e9.1
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 09 Feb 2026 07:38:11 -0800 (PST)
+Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-48329eb96a7so13019155e9.3
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 09 Feb 2026 07:38:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=resnulli-us.20230601.gappssmtp.com; s=20230601; t=1770651490; x=1771256290; darn=lists.linaro.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=BiucukKgd6A5IEwlte0sQaw8GOuaez4s0BdPuzMpI0U=;
-        b=bsAILgKJIAP62EB5j9jfeo3RPxAU34s4bQjl9fDYYvvO0PKwHUz+rVdntHCyPTjIDc
-         jDk+S+OydUriDbB+Gf0rgwMxGeB6p40y4GBt9ZlKlndshYiPLDhHWWXKwzP4rJqUg1Rh
-         gI0WTAmqzQy7mRl8AaCpXTdupVZk4sXSycxRAuRveBU1nSXhE4Ipx/OzXU/iHUqjG3V+
-         CnjBzmrBPu7oJucbFKrhwXf7xCqh8xuAlfYw5yIjB7Nf0nCFg0tLoBz+lN3MnbtgNOvM
-         lYor+if1prZieK97Yyi+kOyhJCsO6qZLxz+AJv/ytMCunSpvwGGkIxBG44iJ0aDZ2ggz
-         jBWA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770651490; x=1771256290;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=resnulli-us.20230601.gappssmtp.com; s=20230601; t=1770651491; x=1771256291; darn=lists.linaro.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=BiucukKgd6A5IEwlte0sQaw8GOuaez4s0BdPuzMpI0U=;
-        b=FACWCFXMrAunUnK6jSobsBQR8LhEjt5AfKNNwsL/aVhwlhLMLpaPkrSufQJLbewJgt
-         IiXxne09Ij4sxrV7FHYywOXKh3MnEChRO2xNESzYKkjvwskAJh/2ENM90q5khszB0pS6
-         9WOuDFMtG5HSLk2cV1jOeEsXSHE7sBe4u78wg5dOBnBge2zXN08H4tyO/cpnuSMCHhPn
-         dlC39AMZJHlU1bkgyyGePdjtI4OtVBRk7PdqNB6w442Q78NsXcaJbDmzQoM5qUZD7Vi0
-         lsNMKx31txq9dpV27g7diu3ryfudTi/JWHuOKLLKFVelJqtoTgSkTTe0888RBwMaTQaM
-         t+nw==
-X-Forwarded-Encrypted: i=1; AJvYcCW0+zgANpJuimNHxVDI3KiryWncSDFzgA5zhND7rGkhnT//x/Pk50G8sUxuA8zXcvhp2IJazLTQUwNRrntv@lists.linaro.org
-X-Gm-Message-State: AOJu0Yz0ukyJUn3HpihfmdpNhDVJqAKuQn9xW6nQxylMaH5VyxmvbNhW
-	B2LR7kYM/KoG0foC7KSkBH2DE2V/X4lss87L8olfKE2lpT/uJ7YjALFOhLAacG7xk+0=
-X-Gm-Gg: AZuq6aKUYCfrqxMkt6YQox9abvPrQqGuw3Mql9fUGkGFFyysLWrV44xRB6pCMSlvXnn
-	O4AE/ISGdkwGlsp8XM37nBUJd6Du4NTSmU9OoCeYGNT4jRggTxXr0imW9huh+hzmqR5THBSx3uK
-	3URrBPQXL1p7MynqbD27Md8GndWS2rSdJId5JTjSs/daLWcKpTHSaiWtFZReWBX9yswvujjUlrK
-	uGeemmc6asDurIs9pgHTHpePu7pl0LD7+vBWU1JdfLeIuSANoF8v1budLXg96VtU2eEAo1AUqU+
-	iTgW2WtyufqGjuJzL1rs1JWQL/O5XcMprqgS7Gl35JMC1hoXkdWfggSCL3DCo4Qn5AbyBc7V/OV
-	2RKGs49rlTAd190p0JE6wwwrypvdvrElFTpdWMUccrHJAIX7xHa5KBm/18H4SEfRW9s+HxuyVuC
-	Ziu/wR/dy7oCTM
-X-Received: by 2002:a05:600c:621a:b0:480:6852:8d94 with SMTP id 5b1f17b1804b1-4832097e2b0mr178535855e9.27.1770651490292;
-        Mon, 09 Feb 2026 07:38:10 -0800 (PST)
+        bh=Jk99TzIHNfOaBko9b1E43IwPHNs+vzenJUms8qd4tnM=;
+        b=B8wajBkEh5G3cPzSzevhIcAuQIHlW9t1ZA5iGBVRPP/KsJGyKA0Zsh9KYDa1ePYXqz
+         VRk/0THl8lKYr1DiBhQMhBbG/sZQfOHfvcmJe8LjbhP+ZvsSKbEM0w3TdYRXB78lh4Pr
+         OyHZLWFXMKkdyMibR2FxIUDsHwnlPHrnMW9hKe8FZRHSBDV1abnGFSq4YYXaYWHdOMXA
+         BXNg8hS4FYy+jP3ADa4TcM0OpgX4BGgOaNvjvHEsJKJxaWVQuR8MXnVGpkb+wFThSrYM
+         gra/2vNJtBQ9itUWpUjKsEbB0mWp9hoibXKQoruGeN3/ZsaGLBVzsBQVY95j4sRJz/6U
+         /dGA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1770651491; x=1771256291;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=Jk99TzIHNfOaBko9b1E43IwPHNs+vzenJUms8qd4tnM=;
+        b=aVaSMXmMoCX/xljxu0F+J1iOvybngaRlTZgVcn/IvvxfWcM7LnB0YQMWnG3exXbsoy
+         kI7x2tA6bwXo1rSHRAQU5A4d/wcXbSqy4hxal9OrTlSSReIYBojecfyrPJNOugSw7zGJ
+         vqv9WMpmsbtW+DHPLXay7Pv08O7ts0Og/R4EY/Cj+r/A8LdtPeoF9nbqzKeDL4OfeCG+
+         R04YlKBM9i6S+6kd9Biwygd8spUS754U77vLtmyyGBfQL0h9XNh4NhQuDYKx0CaMO7n/
+         A2wSJ1J3bJ47wLOiaIgZpKVm1WwmKhIwO1xxa7pMn/IbyFP0P2ZG/N5jCAOsivTJyDAH
+         /6Sw==
+X-Forwarded-Encrypted: i=1; AJvYcCWd6erJw8qUxIandVoKp9kwnBVT+oQcEdxYIoPupZaHUYAHZAaCAGntinjqWYj3oC0ktLrwFJqstKx0iCC3@lists.linaro.org
+X-Gm-Message-State: AOJu0YzuI8cGkAODl7zhVZNphbF/nM0cmMN8sRB4jcq11x/pSWMLCDIB
+	7pQaOyg93qEQoV1d52nSz0U9bK1hy/pgIdmQmZXzxM5rxpRlpOh0ObEHIPvtOYJT1yI=
+X-Gm-Gg: AZuq6aK9MNhqw5/IpUEGN1CwCbh+NmXw+Yiw7bSwXuuSc3CSE3KXTLkd+pH+ici1cgQ
+	Os5sHQd5F3IFuEZvggPKGB1rRzUJNmkTS9dxhA8Ysj7+Ko+i6mcWjlAA3uGkABI49ox6vJlRUSf
+	KiInf00yh7yV3U/v9s7eQ6Vj7onCmpvoXH9huThPFR6619j0gMNF2isE6//bAMq6Q3bgeehVoSF
+	nL7tS2GOGAI4hWDSuiKe880DQA8I7y4L/vAcwUXbZhRvD0uhrWbJKBrqb0lsGk172YJxPBeHMIf
+	gEoVrjg/aXrmb/2b3U2R69i6FvvIf9TAh9tQrgpKLx24cLdn9l9l3R2fF8cKc0rrhPSM5OU3FSZ
+	D6OLmFBcmNyawrUSf+RWcv6j5vqHu2G+UbimEpCr5dFfxRHTaO3dlZz26mwaJtYvUiyNulybJd9
+	AdCg==
+X-Received: by 2002:a05:600c:6592:b0:47e:e7e5:ff32 with SMTP id 5b1f17b1804b1-483209c6dd4mr181313355e9.34.1770651491431;
+        Mon, 09 Feb 2026 07:38:11 -0800 (PST)
 Received: from localhost ([85.163.81.98])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48317d8341csm329338275e9.13.2026.02.09.07.38.09
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4376a78d796sm11560760f8f.20.2026.02.09.07.38.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 09 Feb 2026 07:38:09 -0800 (PST)
+        Mon, 09 Feb 2026 07:38:11 -0800 (PST)
 From: Jiri Pirko <jiri@resnulli.us>
 To: dri-devel@lists.freedesktop.org,
 	linaro-mm-sig@lists.linaro.org,
 	iommu@lists.linux.dev,
 	linux-media@vger.kernel.org
-Date: Mon,  9 Feb 2026 16:38:04 +0100
-Message-ID: <20260209153809.250835-1-jiri@resnulli.us>
+Date: Mon,  9 Feb 2026 16:38:05 +0100
+Message-ID: <20260209153809.250835-2-jiri@resnulli.us>
 X-Mailer: git-send-email 2.51.1
+In-Reply-To: <20260209153809.250835-1-jiri@resnulli.us>
+References: <20260209153809.250835-1-jiri@resnulli.us>
 MIME-Version: 1.0
 X-Spamd-Bar: -
 X-MailFrom: jiri@resnulli.us
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: B2W6BD3CFKHAE37RL46OETQFYZYERDSP
-X-Message-ID-Hash: B2W6BD3CFKHAE37RL46OETQFYZYERDSP
+Message-ID-Hash: OWKZK6VBHPDMVTUZRBV7YY3QUP3ZXVJC
+X-Message-ID-Hash: OWKZK6VBHPDMVTUZRBV7YY3QUP3ZXVJC
 X-Mailman-Approved-At: Thu, 16 Apr 2026 16:36:09 +0000
 CC: sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, Brian.Starkey@arm.com, jstultz@google.com, tjmercier@google.com, christian.koenig@amd.com, robin.murphy@arm.com, jgg@ziepe.ca, leon@kernel.org, sean.anderson@linux.dev, ptesarik@suse.com, catalin.marinas@arm.com, aneesh.kumar@kernel.org, suzuki.poulose@arm.com, steven.price@arm.com, thomas.lendacky@amd.com, john.allen@amd.com, ashish.kalra@amd.com, suravee.suthikulpanit@amd.com, linux-coco@lists.linux.dev
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 0/5] dma-buf: heaps: system: add an option to allocate explicitly decrypted memory
+Subject: [Linaro-mm-sig] [PATCH 1/5] dma-mapping: avoid random addr value print out on error path
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/B2W6BD3CFKHAE37RL46OETQFYZYERDSP/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OWKZK6VBHPDMVTUZRBV7YY3QUP3ZXVJC/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -111,56 +114,39 @@ X-Spamd-Result: default: False [1.49 / 15.00];
 	TO_DN_NONE(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[jiri@resnulli.us,linaro-mm-sig-bounces@lists.linaro.org];
 	RCPT_COUNT_TWELVE(0.00)[24];
-	NEURAL_HAM(-0.00)[-0.581];
+	NEURAL_HAM(-0.00)[-0.808];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
-X-Rspamd-Queue-Id: BA9A8411D0F
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,nvidia.com:email]
+X-Rspamd-Queue-Id: 51DDD411D1E
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 From: Jiri Pirko <jiri@nvidia.com>
 
-Confidential computing (CoCo) VMs/guests, such as AMD SEV and Intel TDX,
-run with encrypted/protected memory which creates a challenge
-for devices that do not support DMA to it (no TDISP support).
+dma_addr is unitialized in dma_direct_map_phys() when swiotlb is forced
+and DMA_ATTR_MMIO is set which leads to random value print out in
+warning. Fix that by just returning DMA_MAPPING_ERROR.
 
-For kernel-only DMA operations, swiotlb bounce buffering provides a
-transparent solution by copying data through decrypted memory.
-However, the only way to get this memory into userspace is via the DMA
-API's dma_alloc_pages()/dma_mmap_pages() type interfaces which limits
-the use of the memory to a single DMA device, and is incompatible with
-pin_user_pages().
+Fixes: e53d29f957b3 ("dma-mapping: convert dma_direct_*map_page to be phys_addr_t based")
+Signed-off-by: Jiri Pirko <jiri@nvidia.com>
+---
+ kernel/dma/direct.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-These limitations are particularly problematic for the RDMA subsystem
-which makes heavy use of pin_user_pages() and expects flexible memory
-usage between many different DMA devices.
-
-This patch series enables userspace to explicitly request decrypted
-(shared) memory allocations from the dma-buf system heap.
-Userspace can mmap this memory and pass the dma-buf fd to other
-existing importers such as RDMA or DRM devices to access the
-memory. The DMA API is improved to allow the dma heap exporter to DMA
-map the shared memory to each importing device.
-
-Jiri Pirko (5):
-  dma-mapping: avoid random addr value print out on error path
-  dma-mapping: introduce DMA_ATTR_CC_DECRYPTED for pre-decrypted memory
-  dma-buf: heaps: use designated initializer for exp_info
-  dma-buf: heaps: allow heap to specify valid heap flags
-  dma-buf: heaps: system: add an option to allocate explicitly decrypted
-    memory
-
- drivers/dma-buf/dma-heap.c          |  5 +-
- drivers/dma-buf/heaps/cma_heap.c    |  7 ++-
- drivers/dma-buf/heaps/system_heap.c | 96 ++++++++++++++++++++++++++---
- include/linux/dma-heap.h            |  3 +
- include/linux/dma-mapping.h         |  7 +++
- include/trace/events/dma.h          |  3 +-
- include/uapi/linux/dma-heap.h       | 12 +++-
- kernel/dma/direct.h                 | 14 ++++-
- 8 files changed, 128 insertions(+), 19 deletions(-)
-
+diff --git a/kernel/dma/direct.h b/kernel/dma/direct.h
+index da2fadf45bcd..62f0d9d0ba02 100644
+--- a/kernel/dma/direct.h
++++ b/kernel/dma/direct.h
+@@ -88,7 +88,7 @@ static inline dma_addr_t dma_direct_map_phys(struct device *dev,
+ 
+ 	if (is_swiotlb_force_bounce(dev)) {
+ 		if (attrs & DMA_ATTR_MMIO)
+-			goto err_overflow;
++			return DMA_MAPPING_ERROR;
+ 
+ 		return swiotlb_map(dev, phys, size, dir, attrs);
+ 	}
 -- 
 2.51.1
 
