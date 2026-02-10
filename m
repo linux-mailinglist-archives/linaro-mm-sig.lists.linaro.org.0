@@ -2,76 +2,92 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id UDKuKXIei2n7QAAAu9opvQ
+	id 4PfUIBcoi2m6QQAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 10 Feb 2026 13:02:58 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 10 Feb 2026 13:44:07 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1AA3111A856
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 10 Feb 2026 13:02:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E90DB11AF73
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 10 Feb 2026 13:44:06 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C9DF33F9B3
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 10 Feb 2026 12:02:56 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.18])
-	by lists.linaro.org (Postfix) with ESMTPS id 8B70D3F721
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 10 Feb 2026 12:02:48 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B65263F770
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 10 Feb 2026 12:44:05 +0000 (UTC)
+Received: from mail-qk1-f175.google.com (mail-qk1-f175.google.com [209.85.222.175])
+	by lists.linaro.org (Postfix) with ESMTPS id 03F9D3F721
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 10 Feb 2026 12:43:59 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=EhZk1PNL;
-	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 198.175.65.18 as permitted sender) smtp.mailfrom=lkp@intel.com;
-	dmarc=pass (policy=none) header.from=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1770724969; x=1802260969;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=kAPSTtOVfJfIS9jV+CgJZlMJ295jsAmJD3EnF4QdBNw=;
-  b=EhZk1PNL07SiiRUYjCgxbtOyzfIT7Bpt+qsY3Wslzgiyb9Z+djVa6VmH
-   dqh3g+dFqRL277tDYkb+D9dDAfF8FNR+zjyKu8fXpghhTFE61O6+cmHQw
-   U3I8mbXu148LHmgXKqCu0Q88ex0n7Upyua5Np6u/QX9CLWubjGqN5InzM
-   +DG9tLDadBXqBwlWFOtn27QtPnbr8OCdPnWSzmrA+lX17wC7eBTCxPcOK
-   bHxQhIQYu06XfLz3W2uiVZY7lrQgL6Dew50cK66VRT7SaGkXZn3SHk/ER
-   UkXrcpBx4tdcfAW+HNRXZ/g7mw15NyqNQfMf3izSZy1faqgAUwhMo1F68
-   A==;
-X-CSE-ConnectionGUID: 1DtQZZQQS4u/rQhu3z/5fQ==
-X-CSE-MsgGUID: n4l2PE5xQFOi5VilEwBMAw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11696"; a="71893912"
-X-IronPort-AV: E=Sophos;i="6.21,283,1763452800";
-   d="scan'208";a="71893912"
-Received: from orviesa006.jf.intel.com ([10.64.159.146])
-  by orvoesa110.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Feb 2026 04:02:48 -0800
-X-CSE-ConnectionGUID: FHhtlCbwTlSbN4KSJ4eG9Q==
-X-CSE-MsgGUID: ouaiq7hVRwuooZ1RvfqwTw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.21,283,1763452800";
-   d="scan'208";a="211003400"
-Received: from lkp-server01.sh.intel.com (HELO 765f4a05e27f) ([10.239.97.150])
-  by orviesa006.jf.intel.com with ESMTP; 10 Feb 2026 04:02:40 -0800
-Received: from kbuild by 765f4a05e27f with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1vpmRw-00000000oyu-1ZR6;
-	Tue, 10 Feb 2026 12:02:36 +0000
-Date: Tue, 10 Feb 2026 20:02:02 +0800
-From: kernel test robot <lkp@intel.com>
-To: Jiri Pirko <jiri@resnulli.us>, dri-devel@lists.freedesktop.org,
-	linaro-mm-sig@lists.linaro.org, iommu@lists.linux.dev,
-	linux-media@vger.kernel.org
-Message-ID: <202602101926.lsquJdb1-lkp@intel.com>
-References: <20260209153809.250835-6-jiri@resnulli.us>
+	dkim=pass header.d=ziepe.ca header.s=google header.b=O5Gi0iOm;
+	spf=pass (lists.linaro.org: domain of jgg@ziepe.ca designates 209.85.222.175 as permitted sender) smtp.mailfrom=jgg@ziepe.ca;
+	dmarc=none
+Received: by mail-qk1-f175.google.com with SMTP id af79cd13be357-8c59bce68a1so55336085a.0
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 10 Feb 2026 04:43:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ziepe.ca; s=google; t=1770727438; x=1771332238; darn=lists.linaro.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=N5ebXMgdbEnP2n7MqO77VYCN9M2l8thAEykxr97Y/HU=;
+        b=O5Gi0iOmz65qs3Wop++Tpmh3egK1l7AeNO2mLdjwl492HbMy0x1VE/tbSeJT0/SiDQ
+         aFc2rM+m1LF9oEaviV3azI40s0Uxyb1RFPH9cfkndSdVx+1SSgDbUrUgCe5WJwGh2eS1
+         kwCYHxOWbD6IrGQnDrmx7mL110uzbyhftt/Qc2yacaz8AgNRgrHaAKoTXew+rzWA3dvK
+         rfHkTPMMAjvKp3dJAupIriVVJNSCqAZsZtMhC+BGubQMdp0aj8gcB8hojsL0ObGBzllY
+         OZX+c3gmYgzBu/5As0RYBF+BOsZixn+8uE4tfw+czZ39+yiDUbxO2cf6b4om+qp8fyat
+         I9wQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1770727438; x=1771332238;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=N5ebXMgdbEnP2n7MqO77VYCN9M2l8thAEykxr97Y/HU=;
+        b=YzdJ0arEwxuXFtLJxoD9UP2Srb3gIrd9wA4Q7BiY1omft15kuLjSsBRBYXHwggTS+h
+         vf+tfSSWy6TZAmURbj/UWl582xflnldGH5sla20ToYps3wYwFMnWinwe3YKz1F1r+Qqb
+         Ql3a0JncdmSoklk+OMFY1eu27twgWqu9+w3b9z5GSR4E6RZQscSvkJmGTiF84lBs3m4J
+         IKYsaKI+bOrXHH4zgRScJw6wj6IJa759ejWW0zsFm2UJQPeE3FCpGS5QmjK+LuIIJSHq
+         VwBnkOZeqfY1H0s+Gbx8tlF/fX9eLJzYQtLmblk3m80256217iQDl46mrZVGsHCl8LbU
+         V4Ug==
+X-Forwarded-Encrypted: i=1; AJvYcCUJ9MObGqV5ygu2VhieEVvkTrkKfLZQW8+im5QtlYOXIv+yOvF1xFZ+owO91+h37ijzwkCwYn4x5quIog1Q@lists.linaro.org
+X-Gm-Message-State: AOJu0YyePhqNJ9kDAcgVSpf0e+8+LPSLT0TpddN04/44Gg+M7bYYr1yq
+	83WjM+06X6VClHhNl/aaJoD5EdcrOFJJ8Zf7YT3FfjwkVtNrEzf8h2+f/kNSzOYJNvk=
+X-Gm-Gg: AZuq6aJwCvBxvVryafiKvA3/vrhe1ldtPLr38GWH6fdF9Zle6bczbUbxguFjaPC6OOA
+	6oKt66Wga3SX8oAipmIMrBi7IqWFt5BjhXSF4vZ3bUE6D90UNXoAvsTM4z3d8YvUM8AIudu1cU5
+	x0zySXwpRBXBJevWab+1TqKdyQyTfN8MSsnHh+ZjNomazXpLgAaGsujEEUrByYxwl1lIunIy9Ll
+	87ydljxB1DE10ip6vypaeVEByuPeBDMvyND4JItj1dK+l0Hluoxl31IkNHRSg41OA7nx+T0ToVc
+	iRfsA7iPto6CqyL1LAtLmwU0n9iFt6sNVmr3EtoAW9r/CiCAoz7aargUsVfBmGNnm/yjwbAOx/B
+	J3NKpkEI73BPTtZuc1xj4uefMsrNrvTg1gArCL+vWyrBt2IejJLm4KZUWge+dDxcibj3G1AHsis
+	3W1cTg17klVcetxpH+hlVvjqWI9MgzOStrces1JlV9pj2Gf/YhOaPlH5EjX83BbCEV86wLYpm3V
+	azX7Q4=
+X-Received: by 2002:a05:620a:40c7:b0:8ca:55:ac60 with SMTP id af79cd13be357-8caf16ec83amr1829777785a.78.1770727438524;
+        Tue, 10 Feb 2026 04:43:58 -0800 (PST)
+Received: from ziepe.ca (hlfxns017vw-142-162-112-119.dhcp-dynamic.fibreop.ns.bellaliant.net. [142.162.112.119])
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-8caf9ee8593sm1019180385a.36.2026.02.10.04.43.57
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 10 Feb 2026 04:43:57 -0800 (PST)
+Received: from jgg by wakko with local (Exim 4.97)
+	(envelope-from <jgg@ziepe.ca>)
+	id 1vpn5x-0000000315A-13dh;
+	Tue, 10 Feb 2026 08:43:57 -0400
+Date: Tue, 10 Feb 2026 08:43:57 -0400
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Jiri Pirko <jiri@resnulli.us>
+Message-ID: <20260210124357.GD943673@ziepe.ca>
+References: <20260209153809.250835-1-jiri@resnulli.us>
+ <20260209153809.250835-5-jiri@resnulli.us>
+ <CANDhNCoHEZsNRmU+3z5AbeAy05H7PTtUdTq1apNd5k0f9hWW8A@mail.gmail.com>
+ <20260210002927.GC943673@ziepe.ca>
+ <tgvdjszwxggr53digbmddcbxvupzl4xcoprofkgrs2kgf6rknx@44ebljjpghjm>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260209153809.250835-6-jiri@resnulli.us>
-X-Spamd-Bar: -------
-Message-ID-Hash: VUOKXKOSMAMKNW67HUQC3SZ4S5HW2KT3
-X-Message-ID-Hash: VUOKXKOSMAMKNW67HUQC3SZ4S5HW2KT3
-X-MailFrom: lkp@intel.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev, sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, Brian.Starkey@arm.com, jstultz@google.com, tjmercier@google.com, christian.koenig@amd.com, robin.murphy@arm.com, jgg@ziepe.ca, leon@kernel.org, sean.anderson@linux.dev, ptesarik@suse.com, catalin.marinas@arm.com, aneesh.kumar@kernel.org, suzuki.poulose@arm.com, steven.price@arm.com, thomas.lendacky@amd.com, john.allen@amd.com, ashish.kalra@amd.com, suravee.suthikulpanit@amd.com, linux-coco@lists.linux.dev
+In-Reply-To: <tgvdjszwxggr53digbmddcbxvupzl4xcoprofkgrs2kgf6rknx@44ebljjpghjm>
+X-Spamd-Bar: ---
+Message-ID-Hash: OX6T6XC76UXL7VNXLONCZ2JJ557T2YMS
+X-Message-ID-Hash: OX6T6XC76UXL7VNXLONCZ2JJ557T2YMS
+X-MailFrom: jgg@ziepe.ca
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: John Stultz <jstultz@google.com>, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, iommu@lists.linux.dev, linux-media@vger.kernel.org, sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, Brian.Starkey@arm.com, tjmercier@google.com, christian.koenig@amd.com, robin.murphy@arm.com, leon@kernel.org, sean.anderson@linux.dev, ptesarik@suse.com, catalin.marinas@arm.com, aneesh.kumar@kernel.org, suzuki.poulose@arm.com, steven.price@arm.com, thomas.lendacky@amd.com, john.allen@amd.com, ashish.kalra@amd.com, suravee.suthikulpanit@amd.com, linux-coco@lists.linux.dev
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 5/5] dma-buf: heaps: system: add an option to allocate explicitly decrypted memory
+Subject: [Linaro-mm-sig] Re: [PATCH 4/5] dma-buf: heaps: allow heap to specify valid heap flags
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VUOKXKOSMAMKNW67HUQC3SZ4S5HW2KT3/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OX6T6XC76UXL7VNXLONCZ2JJ557T2YMS/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -81,103 +97,48 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [1.59 / 15.00];
-	R_DKIM_REJECT(1.00)[intel.com:s=Intel];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [0.49 / 15.00];
+	R_DKIM_REJECT(1.00)[ziepe.ca:s=google];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx];
-	DMARC_POLICY_SOFTFAIL(0.10)[intel.com : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	ARC_NA(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	MIME_TRACE(0.00)[0:+];
-	MISSING_XM_UA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[27];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:mid,intel.com:email,linaro.org:email];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[lkp@intel.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	RCVD_COUNT_FIVE(0.00)[5];
-	RCVD_TLS_LAST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	DKIM_TRACE(0.00)[intel.com:-]
-X-Rspamd-Queue-Id: 1AA3111A856
+	RCVD_TLS_LAST(0.00)[];
+	DMARC_NA(0.00)[ziepe.ca];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	ARC_NA(0.00)[];
+	DKIM_TRACE(0.00)[ziepe.ca:-];
+	RCPT_COUNT_TWELVE(0.00)[24];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	TO_DN_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[jgg@ziepe.ca,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
+X-Rspamd-Queue-Id: E90DB11AF73
 X-Rspamd-Action: no action
 
-Hi Jiri,
+On Tue, Feb 10, 2026 at 10:14:08AM +0100, Jiri Pirko wrote:
 
-kernel test robot noticed the following build errors:
+> >I'd advocate that the right design is for userspace to positively
+> >signal via this flag that it wants/accepts shared memory and without
+> >the flag shared memory should never be returned.
+> 
+> We can have the same behaviour with the separate heap, can't we?
+> Userpace positively signals it wants/accepts the shared memory by
+> choosing "system_cc_decrypted" heap name.
 
-[auto build test ERROR on drm-misc/drm-misc-next]
-[also build test ERROR on drm-tip/drm-tip trace/for-next linus/master v6.19]
-[cannot apply to next-20260209]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
+So what do the other heap names do? Always private? Do you ever get
+heaps that are unknowably private or shared (eg MMIO backed?)
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Jiri-Pirko/dma-mapping-avoid-random-addr-value-print-out-on-error-path/20260209-234013
-base:   https://gitlab.freedesktop.org/drm/misc/kernel.git drm-misc-next
-patch link:    https://lore.kernel.org/r/20260209153809.250835-6-jiri%40resnulli.us
-patch subject: [PATCH 5/5] dma-buf: heaps: system: add an option to allocate explicitly decrypted memory
-config: s390-allmodconfig (https://download.01.org/0day-ci/archive/20260210/202602101926.lsquJdb1-lkp@intel.com/config)
-compiler: clang version 18.1.8 (https://github.com/llvm/llvm-project 3b5b5c1ec4a3095ab096dd780e84d7ab81f3d7ff)
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20260210/202602101926.lsquJdb1-lkp@intel.com/reproduce)
-
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202602101926.lsquJdb1-lkp@intel.com/
-
-All errors (new ones prefixed by >>):
-
->> drivers/dma-buf/heaps/system_heap.c:66:8: error: call to undeclared function 'set_memory_decrypted'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-      66 |         ret = set_memory_decrypted(addr, nr_pages);
-         |               ^
->> drivers/dma-buf/heaps/system_heap.c:80:8: error: call to undeclared function 'set_memory_encrypted'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-      80 |         ret = set_memory_encrypted(addr, nr_pages);
-         |               ^
-   2 errors generated.
-
-
-vim +/set_memory_decrypted +66 drivers/dma-buf/heaps/system_heap.c
-
-    59	
-    60	static int system_heap_set_page_decrypted(struct page *page)
-    61	{
-    62		unsigned long addr = (unsigned long)page_address(page);
-    63		unsigned int nr_pages = 1 << compound_order(page);
-    64		int ret;
-    65	
-  > 66		ret = set_memory_decrypted(addr, nr_pages);
-    67		if (ret)
-    68			pr_warn_ratelimited("dma-buf system heap: failed to decrypt page at %p\n",
-    69					    page_address(page));
-    70	
-    71		return ret;
-    72	}
-    73	
-    74	static int system_heap_set_page_encrypted(struct page *page)
-    75	{
-    76		unsigned long addr = (unsigned long)page_address(page);
-    77		unsigned int nr_pages = 1 << compound_order(page);
-    78		int ret;
-    79	
-  > 80		ret = set_memory_encrypted(addr, nr_pages);
-    81		if (ret)
-    82			pr_warn_ratelimited("dma-buf system heap: failed to re-encrypt page at %p, leaking memory\n",
-    83					    page_address(page));
-    84	
-    85		return ret;
-    86	}
-    87	
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+Jason
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
