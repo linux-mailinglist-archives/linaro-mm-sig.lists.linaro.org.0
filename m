@@ -2,153 +2,182 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 8KUtGaAHi2kdPQAAu9opvQ
+	id UDKuKXIei2n7QAAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 10 Feb 2026 11:25:36 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 10 Feb 2026 13:02:58 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 01B77119A21
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 10 Feb 2026 11:25:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1AA3111A856
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 10 Feb 2026 13:02:57 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E2C423F721
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 10 Feb 2026 10:25:34 +0000 (UTC)
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
-	by lists.linaro.org (Postfix) with ESMTPS id E67553F9B3
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 10 Feb 2026 10:22:42 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C9DF33F9B3
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 10 Feb 2026 12:02:56 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.18])
+	by lists.linaro.org (Postfix) with ESMTPS id 8B70D3F721
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 10 Feb 2026 12:02:48 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20230601 header.b=hwyhuGoA;
-	spf=pass (lists.linaro.org: domain of ckoenig.leichtzumerken@gmail.com designates 209.85.221.47 as permitted sender) smtp.mailfrom=ckoenig.leichtzumerken@gmail.com;
-	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-4359228b7c6so2542382f8f.2
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 10 Feb 2026 02:22:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770718962; x=1771323762; darn=lists.linaro.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=GLWyZeyXsbIZSumeJDMiBvdpxO3idF+WenF3yOzVdKw=;
-        b=hwyhuGoAIvyiEaVp8Qc+dKYzEhnaYUdyCZVV+Qdx3AyfTjumUQl5sEEcPRBZSuOreo
-         UpPfmF+BZDJ8ko0DjHObUe8Fu9GMvb9ZRh9bMko2pwxPXyoEJXeZzu2/wz9Jc0dEVpnZ
-         9F1cdaY+lLfT6YfZguBUng1t8fUT1Rl0iES2R1XuveNS3i+1K1DI2U2EcHzLpl0Db8jJ
-         PSbpCo9cJTGr4TVR6iw0ZULg+EGUWb8qm/uniNjpnN6JyuT37M7+O0y/bkcGm4TeOCH5
-         YaaGelvrA1XXclrgpu2qjB10OWy5DAJr5LrlVSQqF0IYrt+2CsU8qzLUaJ2L+3dnFFCx
-         sqdw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770718962; x=1771323762;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=GLWyZeyXsbIZSumeJDMiBvdpxO3idF+WenF3yOzVdKw=;
-        b=rerRh/KizRXOEo6+Fu7qcW9+R/IgkfsEuia2xuzcknv+emtMrr5QfuuJhYr3hBOkTk
-         0Jj8myIpmEEPovwmln3L4Ie99cE/NNvb1ELtoIbL/g+ei9z5cmfZX7bgIRivyE50tC6i
-         ZhiL04YGhYK7K/5uzDM/Ap3CHoabHjNpeDSpAKRZy2iTl6WPJUPSMF2OkmHdGDA9AhIz
-         PjmOx0qHK6mbxw8nmsFjOy2kYoBjuftmqEOJH4MOJhurRrUKTQ6+LFoy9ViMJmbYEBMi
-         o6Xw3AZizMPrPXQOAcum8DmWvQkjW+xwv5bTevZH7U3xldWzya/0FxgIrc0uFd4wCl9s
-         EtGQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXBTVgygwL2su5mKFG51pteYgmk8qODlM6buCEKRog+te01joKlP/55UpfCEiVldt+9vHI4CBWMr1Kr+Qbg@lists.linaro.org
-X-Gm-Message-State: AOJu0Yx/vun9QPCD/WXra1ZITb2PFB/68vW/DDGgeCszZwN7+1G5ksPe
-	gMfafwHps7D5EUe8rRJWPraWJ21e5a7dHacpCYiUR+0+gTGf8J+zynsf
-X-Gm-Gg: AZuq6aJ7Ns6ti2hfbxDoI7byljgA7tX4/pkGCdgXb6+AyjIGRg36mmhEIRvWmrW3VIQ
-	8L886L9JFjl+anxgmlaoOzFnyi3ffK4L8MQKT9Nk5OEILDEcWofM679Ni2N3nEeu7aFu9Eoj9sY
-	jHBhVXY8w1RuO1vgkWsB3CpXiOVtrT+SU4xCPbuErsrPyegAuP57gHl9AitribJy+75P/vkMqyu
-	HGvyqSYR++btHUIghq13razPEUh/EiN6U+LiCozvjezXqneQMmiwxVXSxBQj6po7BLce3zEtHie
-	mCuaM4KoL4hpXUIYanuT/s2pu5Q8mSNNPTEFMmoYr40FG9MieP4xzoBDPHEbJeWk8YPMESpGwwv
-	49K9qE5n10obusGn/0MtCx8EEOa09crqgcTVmSaDKGvobRNBNo35T8merUCH286wxrbs2VIxtDm
-	mA2vskgOfHnara/LWpoL/tg7xKKOI9n/sghe4b
-X-Received: by 2002:a05:600c:6290:b0:47e:e78a:c834 with SMTP id 5b1f17b1804b1-48320226676mr231371165e9.34.1770718961647;
-        Tue, 10 Feb 2026 02:22:41 -0800 (PST)
-Received: from able.fritz.box ([2a00:e180:152a:6000:83ca:11f0:7e35:a75d])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4834d5d8ebfsm81549605e9.2.2026.02.10.02.22.41
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 10 Feb 2026 02:22:41 -0800 (PST)
-From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
-X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
-To: phasta@mailbox.org,
-	matthew.brost@intel.com,
-	sumit.semwal@linaro.org
-Date: Tue, 10 Feb 2026 11:02:03 +0100
-Message-ID: <20260210102232.1642-9-christian.koenig@amd.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260210102232.1642-1-christian.koenig@amd.com>
-References: <20260210102232.1642-1-christian.koenig@amd.com>
+	dkim=pass header.d=intel.com header.s=Intel header.b=EhZk1PNL;
+	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 198.175.65.18 as permitted sender) smtp.mailfrom=lkp@intel.com;
+	dmarc=pass (policy=none) header.from=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1770724969; x=1802260969;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=kAPSTtOVfJfIS9jV+CgJZlMJ295jsAmJD3EnF4QdBNw=;
+  b=EhZk1PNL07SiiRUYjCgxbtOyzfIT7Bpt+qsY3Wslzgiyb9Z+djVa6VmH
+   dqh3g+dFqRL277tDYkb+D9dDAfF8FNR+zjyKu8fXpghhTFE61O6+cmHQw
+   U3I8mbXu148LHmgXKqCu0Q88ex0n7Upyua5Np6u/QX9CLWubjGqN5InzM
+   +DG9tLDadBXqBwlWFOtn27QtPnbr8OCdPnWSzmrA+lX17wC7eBTCxPcOK
+   bHxQhIQYu06XfLz3W2uiVZY7lrQgL6Dew50cK66VRT7SaGkXZn3SHk/ER
+   UkXrcpBx4tdcfAW+HNRXZ/g7mw15NyqNQfMf3izSZy1faqgAUwhMo1F68
+   A==;
+X-CSE-ConnectionGUID: 1DtQZZQQS4u/rQhu3z/5fQ==
+X-CSE-MsgGUID: n4l2PE5xQFOi5VilEwBMAw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11696"; a="71893912"
+X-IronPort-AV: E=Sophos;i="6.21,283,1763452800";
+   d="scan'208";a="71893912"
+Received: from orviesa006.jf.intel.com ([10.64.159.146])
+  by orvoesa110.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Feb 2026 04:02:48 -0800
+X-CSE-ConnectionGUID: FHhtlCbwTlSbN4KSJ4eG9Q==
+X-CSE-MsgGUID: ouaiq7hVRwuooZ1RvfqwTw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.21,283,1763452800";
+   d="scan'208";a="211003400"
+Received: from lkp-server01.sh.intel.com (HELO 765f4a05e27f) ([10.239.97.150])
+  by orviesa006.jf.intel.com with ESMTP; 10 Feb 2026 04:02:40 -0800
+Received: from kbuild by 765f4a05e27f with local (Exim 4.98.2)
+	(envelope-from <lkp@intel.com>)
+	id 1vpmRw-00000000oyu-1ZR6;
+	Tue, 10 Feb 2026 12:02:36 +0000
+Date: Tue, 10 Feb 2026 20:02:02 +0800
+From: kernel test robot <lkp@intel.com>
+To: Jiri Pirko <jiri@resnulli.us>, dri-devel@lists.freedesktop.org,
+	linaro-mm-sig@lists.linaro.org, iommu@lists.linux.dev,
+	linux-media@vger.kernel.org
+Message-ID: <202602101926.lsquJdb1-lkp@intel.com>
+References: <20260209153809.250835-6-jiri@resnulli.us>
 MIME-Version: 1.0
-X-Spamd-Bar: ----
-Message-ID-Hash: SEC6VUPZNTXUZD2WXBRM54L3QYBI7K76
-X-Message-ID-Hash: SEC6VUPZNTXUZD2WXBRM54L3QYBI7K76
-X-MailFrom: ckoenig.leichtzumerken@gmail.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+Content-Disposition: inline
+In-Reply-To: <20260209153809.250835-6-jiri@resnulli.us>
+X-Spamd-Bar: -------
+Message-ID-Hash: VUOKXKOSMAMKNW67HUQC3SZ4S5HW2KT3
+X-Message-ID-Hash: VUOKXKOSMAMKNW67HUQC3SZ4S5HW2KT3
+X-MailFrom: lkp@intel.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev, sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, Brian.Starkey@arm.com, jstultz@google.com, tjmercier@google.com, christian.koenig@amd.com, robin.murphy@arm.com, jgg@ziepe.ca, leon@kernel.org, sean.anderson@linux.dev, ptesarik@suse.com, catalin.marinas@arm.com, aneesh.kumar@kernel.org, suzuki.poulose@arm.com, steven.price@arm.com, thomas.lendacky@amd.com, john.allen@amd.com, ashish.kalra@amd.com, suravee.suthikulpanit@amd.com, linux-coco@lists.linux.dev
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 8/8] dma-buf: use inline lock for the dma-fence-chain
+Subject: [Linaro-mm-sig] Re: [PATCH 5/5] dma-buf: heaps: system: add an option to allocate explicitly decrypted memory
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SEC6VUPZNTXUZD2WXBRM54L3QYBI7K76/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VUOKXKOSMAMKNW67HUQC3SZ4S5HW2KT3/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.69 / 15.00];
-	R_DKIM_REJECT(1.00)[gmail.com:s=20230601];
+X-Spamd-Result: default: False [1.59 / 15.00];
+	R_DKIM_REJECT(1.00)[intel.com:s=Intel];
+	MID_CONTAINS_FROM(1.00)[];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx:c];
-	MIME_BASE64_TEXT(0.10)[];
+	R_SPF_ALLOW(-0.20)[+mx];
+	DMARC_POLICY_SOFTFAIL(0.10)[intel.com : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FROM_HAS_DN(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_FROM(0.00)[gmail.com];
 	ARC_NA(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:-];
-	RCPT_COUNT_FIVE(0.00)[5];
-	TO_DN_NONE(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[ckoenigleichtzumerken@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	MISSING_XM_UA(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[27];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:mid,intel.com:email,linaro.org:email];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,igalia.com:email,linaro.org:email,amd.com:mid,amd.com:email]
-X-Rspamd-Queue-Id: 01B77119A21
+	FROM_NEQ_ENVFROM(0.00)[lkp@intel.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	RCVD_COUNT_FIVE(0.00)[5];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	DKIM_TRACE(0.00)[intel.com:-]
+X-Rspamd-Queue-Id: 1AA3111A856
 X-Rspamd-Action: no action
 
-VXNpbmcgdGhlIGlubGluZSBsb2NrIGlzIG5vdyB0aGUgcmVjb21tZW5kZWQgd2F5IGZvciBkbWFf
-ZmVuY2UNCmltcGxlbWVudGF0aW9ucy4NCg0KU28gdXNlIHRoaXMgYXBwcm9hY2ggZm9yIHRoZSBm
-cmFtZXdvcmsncyBpbnRlcm5hbCBmZW5jZXMgYXMgd2VsbC4NCg0KQWxzbyBzYXZlcyBhYm91dCA0
-IGJ5dGVzIGZvciB0aGUgZXh0ZXJuYWwgc3BpbmxvY2suDQoNClNpZ25lZC1vZmYtYnk6IENocmlz
-dGlhbiBLw7ZuaWcgPGNocmlzdGlhbi5rb2VuaWdAYW1kLmNvbT4NClJldmlld2VkLWJ5OiBUdnJ0
-a28gVXJzdWxpbiA8dHZydGtvLnVyc3VsaW5AaWdhbGlhLmNvbT4NClJldmlld2VkLWJ5OiBQaGls
-aXBwIFN0YW5uZXIgPHBoYXN0YUBrZXJuZWwub3JnPg0KLS0tDQogZHJpdmVycy9kbWEtYnVmL2Rt
-YS1mZW5jZS1jaGFpbi5jIHwgMyArLS0NCiBpbmNsdWRlL2xpbnV4L2RtYS1mZW5jZS1jaGFpbi5o
-ICAgfCAxIC0NCiAyIGZpbGVzIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAzIGRlbGV0aW9ucygt
-KQ0KDQpkaWZmIC0tZ2l0IGEvZHJpdmVycy9kbWEtYnVmL2RtYS1mZW5jZS1jaGFpbi5jIGIvZHJp
-dmVycy9kbWEtYnVmL2RtYS1mZW5jZS1jaGFpbi5jDQppbmRleCBhOGE5MGFjZjRmMzQuLmE3MDc3
-OTJiNjAyNSAxMDA2NDQNCi0tLSBhL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtZmVuY2UtY2hhaW4uYw0K
-KysrIGIvZHJpdmVycy9kbWEtYnVmL2RtYS1mZW5jZS1jaGFpbi5jDQpAQCAtMjQ1LDcgKzI0NSw2
-IEBAIHZvaWQgZG1hX2ZlbmNlX2NoYWluX2luaXQoc3RydWN0IGRtYV9mZW5jZV9jaGFpbiAqY2hh
-aW4sDQogCXN0cnVjdCBkbWFfZmVuY2VfY2hhaW4gKnByZXZfY2hhaW4gPSB0b19kbWFfZmVuY2Vf
-Y2hhaW4ocHJldik7DQogCXVpbnQ2NF90IGNvbnRleHQ7DQogDQotCXNwaW5fbG9ja19pbml0KCZj
-aGFpbi0+bG9jayk7DQogCXJjdV9hc3NpZ25fcG9pbnRlcihjaGFpbi0+cHJldiwgcHJldik7DQog
-CWNoYWluLT5mZW5jZSA9IGZlbmNlOw0KIAljaGFpbi0+cHJldl9zZXFubyA9IDA7DQpAQCAtMjYx
-LDcgKzI2MCw3IEBAIHZvaWQgZG1hX2ZlbmNlX2NoYWluX2luaXQoc3RydWN0IGRtYV9mZW5jZV9j
-aGFpbiAqY2hhaW4sDQogCQkJc2Vxbm8gPSBtYXgocHJldi0+c2Vxbm8sIHNlcW5vKTsNCiAJfQ0K
-IA0KLQlkbWFfZmVuY2VfaW5pdDY0KCZjaGFpbi0+YmFzZSwgJmRtYV9mZW5jZV9jaGFpbl9vcHMs
-ICZjaGFpbi0+bG9jaywNCisJZG1hX2ZlbmNlX2luaXQ2NCgmY2hhaW4tPmJhc2UsICZkbWFfZmVu
-Y2VfY2hhaW5fb3BzLCBOVUxMLA0KIAkJCSBjb250ZXh0LCBzZXFubyk7DQogDQogCS8qDQpkaWZm
-IC0tZ2l0IGEvaW5jbHVkZS9saW51eC9kbWEtZmVuY2UtY2hhaW4uaCBiL2luY2x1ZGUvbGludXgv
-ZG1hLWZlbmNlLWNoYWluLmgNCmluZGV4IDY4YzNjMWU0MTAxNC4uZDM5Y2U3YTJlNTk5IDEwMDY0
-NA0KLS0tIGEvaW5jbHVkZS9saW51eC9kbWEtZmVuY2UtY2hhaW4uaA0KKysrIGIvaW5jbHVkZS9s
-aW51eC9kbWEtZmVuY2UtY2hhaW4uaA0KQEAgLTQ2LDcgKzQ2LDYgQEAgc3RydWN0IGRtYV9mZW5j
-ZV9jaGFpbiB7DQogCQkgKi8NCiAJCXN0cnVjdCBpcnFfd29yayB3b3JrOw0KIAl9Ow0KLQlzcGlu
-bG9ja190IGxvY2s7DQogfTsNCiANCiANCi0tIA0KMi40My4wDQoNCl9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0
-IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFu
-IGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+Hi Jiri,
+
+kernel test robot noticed the following build errors:
+
+[auto build test ERROR on drm-misc/drm-misc-next]
+[also build test ERROR on drm-tip/drm-tip trace/for-next linus/master v6.19]
+[cannot apply to next-20260209]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
+
+url:    https://github.com/intel-lab-lkp/linux/commits/Jiri-Pirko/dma-mapping-avoid-random-addr-value-print-out-on-error-path/20260209-234013
+base:   https://gitlab.freedesktop.org/drm/misc/kernel.git drm-misc-next
+patch link:    https://lore.kernel.org/r/20260209153809.250835-6-jiri%40resnulli.us
+patch subject: [PATCH 5/5] dma-buf: heaps: system: add an option to allocate explicitly decrypted memory
+config: s390-allmodconfig (https://download.01.org/0day-ci/archive/20260210/202602101926.lsquJdb1-lkp@intel.com/config)
+compiler: clang version 18.1.8 (https://github.com/llvm/llvm-project 3b5b5c1ec4a3095ab096dd780e84d7ab81f3d7ff)
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20260210/202602101926.lsquJdb1-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202602101926.lsquJdb1-lkp@intel.com/
+
+All errors (new ones prefixed by >>):
+
+>> drivers/dma-buf/heaps/system_heap.c:66:8: error: call to undeclared function 'set_memory_decrypted'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+      66 |         ret = set_memory_decrypted(addr, nr_pages);
+         |               ^
+>> drivers/dma-buf/heaps/system_heap.c:80:8: error: call to undeclared function 'set_memory_encrypted'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+      80 |         ret = set_memory_encrypted(addr, nr_pages);
+         |               ^
+   2 errors generated.
+
+
+vim +/set_memory_decrypted +66 drivers/dma-buf/heaps/system_heap.c
+
+    59	
+    60	static int system_heap_set_page_decrypted(struct page *page)
+    61	{
+    62		unsigned long addr = (unsigned long)page_address(page);
+    63		unsigned int nr_pages = 1 << compound_order(page);
+    64		int ret;
+    65	
+  > 66		ret = set_memory_decrypted(addr, nr_pages);
+    67		if (ret)
+    68			pr_warn_ratelimited("dma-buf system heap: failed to decrypt page at %p\n",
+    69					    page_address(page));
+    70	
+    71		return ret;
+    72	}
+    73	
+    74	static int system_heap_set_page_encrypted(struct page *page)
+    75	{
+    76		unsigned long addr = (unsigned long)page_address(page);
+    77		unsigned int nr_pages = 1 << compound_order(page);
+    78		int ret;
+    79	
+  > 80		ret = set_memory_encrypted(addr, nr_pages);
+    81		if (ret)
+    82			pr_warn_ratelimited("dma-buf system heap: failed to re-encrypt page at %p, leaking memory\n",
+    83					    page_address(page));
+    84	
+    85		return ret;
+    86	}
+    87	
+
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
