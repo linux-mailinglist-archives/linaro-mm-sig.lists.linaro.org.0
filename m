@@ -2,38 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id Ck4lN9exjGlLsQAAu9opvQ
+	id SCQxNfWxjGlLsQAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 11 Feb 2026 17:44:07 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 11 Feb 2026 17:44:37 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 66411126442
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 11 Feb 2026 17:44:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 72DF3126467
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 11 Feb 2026 17:44:37 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3D78C401D8
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 11 Feb 2026 16:44:06 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 8679340140
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 11 Feb 2026 16:44:36 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 763EE3F9D9
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 11 Feb 2026 16:43:31 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 692283F910
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 11 Feb 2026 16:44:07 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: "Eddie Jolley" <eddiejolley9@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Wed, 11 Feb 2026 16:43:31 -0000
-Message-ID: <177082821148.3669728.4767111757873338405@lists.linaro.org>
-In-Reply-To: <177082776371.3658948.2456904693284874112@lists.linaro.org>
-References: <177082776371.3658948.2456904693284874112@lists.linaro.org>
+Date: Wed, 11 Feb 2026 16:44:07 -0000
+Message-ID: <177082824742.3669728.12491205996858030749@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: T6RQZTOCCTA56KXRC74SSTMWDPVHOGCC
-X-Message-ID-Hash: T6RQZTOCCTA56KXRC74SSTMWDPVHOGCC
+Message-ID-Hash: 5GOJT57AQFGOOZCMZBFQWF5MNF7C6GX2
+X-Message-ID-Hash: 5GOJT57AQFGOOZCMZBFQWF5MNF7C6GX2
 X-MailFrom: eddiejolley9@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: HOW TO FIND A LEGITIMATE CRYPTO RECOVERY EXPERT; Contact iFORCE HACKER RECOVERY
+Subject: [Linaro-mm-sig] Best Crypto Bitcoin Recovery Service | Best Crypto Asset Recovery Service Hire iFORCE HACKER RECOVERY
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/T6RQZTOCCTA56KXRC74SSTMWDPVHOGCC/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5GOJT57AQFGOOZCMZBFQWF5MNF7C6GX2/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -65,8 +63,8 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	RCVD_TLS_LAST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	R_DKIM_NA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,linaro.org:email]
-X-Rspamd-Queue-Id: 66411126442
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid]
+X-Rspamd-Queue-Id: 72DF3126467
 X-Rspamd-Action: no action
 
 SSBzcGVudCBhIGxvdCBvZiB0aW1lIHJlc2VhcmNoaW5nIHdheXMgdG8gcmVjb3ZlciBzdG9sZW4g
@@ -79,7 +77,9 @@ IGJhY2ssIGJ1dCBteSBoYWNrZWQgc29jaWFsIG1lZGlhIGFjY291bnRzIHdlcmUgYWxzbyByZXN0
 b3JlZC4gSWYgeW91IGV2ZXIgZmluZCB5b3Vyc2VsZiBpbiBhIHNpbWlsYXIgc2l0dWF0aW9uLCBk
 b24ndCBzdHJlc3PigJRqdXN0IGNvbnRhY3QgaUZvcmNlIEhhY2tlciBSZWNvdmVyeS4gVGhleSBj
 YW4gaGVscCB5b3UgcmVjb3ZlciBldmVyeXRoaW5nIHlvdeKAmXZlIGxvc3QgZnJvbSBoYWNraW5n
-IGluY2lkZW50cy4NCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGlu
-YXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVh
-dmVAbGlzdHMubGluYXJvLm9yZwo=
+IGluY2lkZW50cy7CoCANCldlYnNpdGU6wqBodCB0cHM6Ly9pZm9yY2VoYWNrZXJzLiBjbyBtDQpX
+aGF0c0FwcDogKzEgMjQwLTgwMy0zNzA2wqDCoA0KRW1haWw6wqBpZm9yY2VoayBAIGNvbnN1bHRh
+bnQuIGMgb20NCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+CkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJv
+Lm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVA
+bGlzdHMubGluYXJvLm9yZwo=
