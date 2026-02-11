@@ -2,28 +2,28 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +LCCM7ivjGl/sAAAu9opvQ
+	id MEviGgawjGkDsQAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 11 Feb 2026 17:35:04 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 11 Feb 2026 17:36:22 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6CDF91262EF
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 11 Feb 2026 17:35:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0BE69126349
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 11 Feb 2026 17:36:21 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3D3C8401B8
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 11 Feb 2026 16:35:03 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E38A73F910
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 11 Feb 2026 16:36:20 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8FBBD3F99C
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 11 Feb 2026 16:34:41 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id ADCDD3F91B
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 11 Feb 2026 16:36:03 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: wsuttles6@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Wed, 11 Feb 2026 16:34:41 -0000
-Message-ID: <177082768158.3658037.16447653269690733578@lists.linaro.org>
+Date: Wed, 11 Feb 2026 16:36:03 -0000
+Message-ID: <177082776371.3658948.2456904693284874112@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: FZ6BXXEDGAMQGQB3ECIUTB6JFPJRHUSX
-X-Message-ID-Hash: FZ6BXXEDGAMQGQB3ECIUTB6JFPJRHUSX
+Message-ID-Hash: YDKXAX4NXENFLS7FFRIGRSZKK3V7GTAK
+X-Message-ID-Hash: YDKXAX4NXENFLS7FFRIGRSZKK3V7GTAK
 X-MailFrom: wsuttles6@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
@@ -31,7 +31,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] HOW TO FIND A LEGITIMATE CRYPTO RECOVERY EXPERT; Contact iFORCE HACKER RECOVERY
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FZ6BXXEDGAMQGQB3ECIUTB6JFPJRHUSX/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YDKXAX4NXENFLS7FFRIGRSZKK3V7GTAK/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -63,8 +63,8 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	R_DKIM_NA(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email]
-X-Rspamd-Queue-Id: 6CDF91262EF
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid]
+X-Rspamd-Queue-Id: 0BE69126349
 X-Rspamd-Action: no action
 
 aUZvcmNlIEhhY2tlcsKgUmVjb3ZlcnkgYXJlIHNlYXNvbmVkIGNyeXB0b2N1cnJlbmN5IHNwZWNp
