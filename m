@@ -2,143 +2,203 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id AO/TLV4R4WnoogAAu9opvQ
+	id GEFnIWwR4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:42:06 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:42:20 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4105B411DDA
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:42:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2871F411DE2
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:42:20 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id F40F944ED5
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:42:04 +0000 (UTC)
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
-	by lists.linaro.org (Postfix) with ESMTPS id 6C7CD4015B
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 12 Feb 2026 12:52:49 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 371B944F23
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:42:19 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+	by lists.linaro.org (Postfix) with ESMTPS id EF156401D9
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 12 Feb 2026 14:44:14 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=resnulli-us.20230601.gappssmtp.com header.s=20230601 header.b=Ovdm1jOI;
-	spf=none (lists.linaro.org: domain of jiri@resnulli.us has no SPF policy when checking 209.85.128.52) smtp.mailfrom=jiri@resnulli.us;
-	dmarc=none
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4832701b9b7so37007385e9.2
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 12 Feb 2026 04:52:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=resnulli-us.20230601.gappssmtp.com; s=20230601; t=1770900768; x=1771505568; darn=lists.linaro.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=4Kxk/oZj66kgQZma0vQzJuBIOHCjFotulhU3mIzhZds=;
-        b=Ovdm1jOIsKo8hD6/cQTadpKkfm0SiACq4cgp3hnRGTEOqJosnNSt/5NHjFAZMLSNba
-         AHMsmd0wUfVWAFO5FrS8MyKPyLZci9Jypr4k5WdNvnYE0DXBfWHbaE8fKewVxGdQr9lw
-         IlbzF0qqqrOea8uwA7NYkoSLUt0zhfKvZGpPrOCxwjJXadHcDjLev1RKQ5eo7QKqE3ec
-         MMRk0i0tuZLplJX2pqC6HLeaSroOxggwI8vs9svkDjov4wLq7h7l+qpoui4jfByS4hAR
-         O7EerRdP8/KAAYmfcWjuy6QRY82Tc96FWltsCCrK+QcUaZRBeKXc+ibI3wRWH0zELj2f
-         iJeQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770900768; x=1771505568;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=4Kxk/oZj66kgQZma0vQzJuBIOHCjFotulhU3mIzhZds=;
-        b=fbUPwgJpH80b4wG+CPL8r6mVOfFfY1SYYsDUeIW6ApQJuu3WBJZQ6dfs6TQcq2Ci/A
-         3QnEOROtR35YsUJfufjFqyRWt6jwbXvuZE9J23TY8yr24dU+PNqsjUrHBdsHl5afoaf5
-         Poqef7xfEq+mmFi27DkDJUR3EkpgGlBn48WjfHTT+fS0KalV9payoVDHJjiw2bZRzWhu
-         3hCc8+MWabptpx82OxCDzk92Jepg7a82KT/JsU6Gh6hkgdHpkQD88VmJ0wz5byndjWks
-         ltjpTlEP8gxPoduOsbUB8/HBeHSaKQoAkMd68IeA1NfQbXRg/qgyCLS4rGGYi6TTWApd
-         Cnkg==
-X-Forwarded-Encrypted: i=1; AJvYcCV5nlh7jqYbk4QyaCazV4hnP464xos0cRRtpqEMVIT7wK9HKQNGVuhYu7HrxYvyV9OW/vHiY3em2MlZsliG@lists.linaro.org
-X-Gm-Message-State: AOJu0YxDEaT4UpZnmXkJxHjSJca4KystoIZr1qAetrJonb2c4OzV7tib
-	R14u0VGaJctD0MpeoizTlmWRpTJ6LRQNljgaHwKakx0/oEYiZ9APqyMEtdW9Fafx/pM=
-X-Gm-Gg: AZuq6aLg5hL3/t8qkYQ+BEVJ/zb0MoTKduMnGo+iNNneTDo0N8JJk2YR3cwQMB7qE/v
-	vTu1DlNReV/So2NOS836Gt1RA3bI/g3HKupvEhHOUo7ecfG3uewoPCGMudy1rYYdr3iQHxgly0X
-	idF/uCe6iWC6qPI3gwcbGW8ka9n/WB1TYbIjWfbUn3L8ZsErnTwr27B/DruYclGTpiu1UB97zLt
-	E7ns3usetRJeEbt9yDmNOOnBLOUyXix2obVKXAcDhkq4rvVIvsWneZGY+i9cG+6+o3QTjov4cyh
-	PqM2tdVOlnembXnHavF/DGQopKfhSWxElYnjJeW9QZLTo96E6cxYLMCfQgjrGJFMPZu3/Hgr2I6
-	aSOfj9kRy17ia1rw6srCZxIHgvzhb+SfKRMUZuXs6l2ZXB0tLGzARpjGH3x+nm9kSNmzz5VKxdp
-	Z8zmsQG58Qe+ZoRltW6lpmhH+G1m9jas0=
-X-Received: by 2002:a05:600c:348d:b0:475:dd9a:f791 with SMTP id 5b1f17b1804b1-48365716704mr34218785e9.28.1770900768396;
-        Thu, 12 Feb 2026 04:52:48 -0800 (PST)
-Received: from FV6GYCPJ69 ([208.127.45.21])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4835ba7b8d9sm40786535e9.15.2026.02.12.04.52.45
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 12 Feb 2026 04:52:47 -0800 (PST)
-Date: Thu, 12 Feb 2026 13:52:44 +0100
-From: Jiri Pirko <jiri@resnulli.us>
-To: Marek Szyprowski <m.szyprowski@samsung.com>
-Message-ID: <magsa5bqxraftni5z7ixrwfojh3htpws7bhiebj4rdtqn4ewce@rnf2rzfelqim>
-References: <20260209153809.250835-1-jiri@resnulli.us>
- <CGME20260209153816eucas1p22befaa2c5ef3c6d5e67956eea08424ed@eucas1p2.samsung.com>
- <20260209153809.250835-2-jiri@resnulli.us>
- <621783e8-d77d-4f29-bda0-ef487dd27b5b@samsung.com>
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=XkxyqDfd;
+	spf=pass (lists.linaro.org: domain of thierry.reding@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=thierry.reding@kernel.org;
+	dmarc=pass (policy=quarantine) header.from=kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by tor.source.kernel.org (Postfix) with ESMTP id 6209A6001A;
+	Thu, 12 Feb 2026 14:44:14 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 87E5AC4CEF7;
+	Thu, 12 Feb 2026 14:44:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1770907454;
+	bh=wsRfq4JQHV9EhUjp6BlIKRlXnA1FZ0qmUD3BISX7I1E=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=XkxyqDfdIbc2bvCV2VBTnKQn9x0JFcTOZBtBFX9PB8A/2SpUcIM1nvBYIKLVp7Lmm
+	 lQadF0urGbstpA3g9OASJ+foqHw327u6Sa3rSgYzmtxZDbIqF8POCkoZL6HQ0uzA2n
+	 euVz7mNjkB/EnKj7QbbU4yEvU27No5zuj7siNzFWGIA4qqv9MeuF4DWoOhsyqGj+nQ
+	 YedwoFYYkkwAZIeXxE7U+M5M9UiuoXGQY1TTFXZs0kXeg0mCoNz2Ssbs09aLyqB1I6
+	 cG5j7sYjeMmNkVYyk0RePGcka/JK5TRHwlAEYq3Nqj2STN4KtIFqQSP7/eQ+SwpDmV
+	 N3yMaDkmI1QQQ==
+Date: Thu, 12 Feb 2026 15:44:11 +0100
+From: Thierry Reding <thierry.reding@kernel.org>
+To: Maxime Ripard <mripard@redhat.com>
+Message-ID: <aY3j57xvdOY09EwQ@orome>
+References: <20260122161009.3865888-1-thierry.reding@kernel.org>
+ <20260122161009.3865888-5-thierry.reding@kernel.org>
+ <20260123-active-witty-rabbit-0fc5b9@houat>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <621783e8-d77d-4f29-bda0-ef487dd27b5b@samsung.com>
-X-Spamd-Bar: --
-X-MailFrom: jiri@resnulli.us
+In-Reply-To: <20260123-active-witty-rabbit-0fc5b9@houat>
+X-Spamd-Bar: -----
+X-MailFrom: thierry.reding@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 2NUJIMYP3AIDM4PQQTSPWGON63FXENVJ
-X-Message-ID-Hash: 2NUJIMYP3AIDM4PQQTSPWGON63FXENVJ
+Message-ID-Hash: U2L2GZESWDXSI6YWCAJMNYGWKFXJBRIL
+X-Message-ID-Hash: U2L2GZESWDXSI6YWCAJMNYGWKFXJBRIL
 X-Mailman-Approved-At: Thu, 16 Apr 2026 16:36:19 +0000
-CC: dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, iommu@lists.linux.dev, linux-media@vger.kernel.org, sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, Brian.Starkey@arm.com, jstultz@google.com, tjmercier@google.com, christian.koenig@amd.com, robin.murphy@arm.com, jgg@ziepe.ca, leon@kernel.org, sean.anderson@linux.dev, ptesarik@suse.com, catalin.marinas@arm.com, aneesh.kumar@kernel.org, suzuki.poulose@arm.com, steven.price@arm.com, thomas.lendacky@amd.com, john.allen@amd.com, ashish.kalra@amd.com, suravee.suthikulpanit@amd.com, linux-coco@lists.linux.dev
+CC: David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T . J . Mercier" <tjmercier@google.com>, Andrew Morton <akpm@linux-foundation.org>, David Hildenbrand <david@redhat.com>, Mike Rapoport <rppt@kernel.org>, Sumit Garg <sumit.garg@kernel.org>, dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, linux-tegra@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-mm@kvack.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 1/5] dma-mapping: avoid random addr value print out on error path
+Subject: [Linaro-mm-sig] Re: [PATCH v2 04/10] mm/cma: Allow dynamically creating CMA areas
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2NUJIMYP3AIDM4PQQTSPWGON63FXENVJ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/U2L2GZESWDXSI6YWCAJMNYGWKFXJBRIL/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-X-Spamd-Result: default: False [0.99 / 15.00];
-	DATE_IN_PAST(1.00)[1515];
+Content-Type: multipart/mixed; boundary="===============7553087108623231218=="
+X-Spamd-Result: default: False [2.89 / 15.00];
+	SIGNED_PGP(-2.00)[];
+	SUSPICIOUS_RECIPS(1.50)[];
+	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
+	DATE_IN_PAST(1.00)[1513];
+	R_DKIM_REJECT(1.00)[kernel.org:s=k20201202];
 	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
-	MIME_GOOD(-0.10)[text/plain];
+	MIME_GOOD(-0.20)[multipart/mixed,multipart/signed,text/plain];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	HAS_LIST_UNSUB(-0.01)[];
-	FROM_HAS_DN(0.00)[];
-	DMARC_NA(0.00)[resnulli.us];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
 	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[25];
 	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[20];
+	MIME_TRACE(0.00)[0:+,1:+,2:+,3:~,4:+];
+	FREEMAIL_CC(0.00)[gmail.com,ffwll.ch,linaro.org,kernel.org,collabora.com,arm.com,google.com,linux-foundation.org,redhat.com,lists.freedesktop.org,vger.kernel.org,lists.linaro.org,kvack.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.995];
-	FROM_NEQ_ENVFROM(0.00)[jiri@resnulli.us,linaro-mm-sig-bounces@lists.linaro.org];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	NEURAL_HAM(-0.00)[-0.982];
+	FROM_NEQ_ENVFROM(0.00)[thierry.reding@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:-];
+	TAGGED_RCPT(0.00)[linaro-mm-sig,dt];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,nvidia.com:email,lists.linaro.org:helo,lists.linaro.org:rdns,samsung.com:email]
-X-Rspamd-Queue-Id: 4105B411DDA
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,nvidia.com:email,lists.linaro.org:helo,lists.linaro.org:rdns]
+X-Rspamd-Queue-Id: 2871F411DE2
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Thu, Feb 12, 2026 at 12:03:49PM +0100, m.szyprowski@samsung.com wrote:
->On 09.02.2026 16:38, Jiri Pirko wrote:
->> From: Jiri Pirko <jiri@nvidia.com>
->>
->> dma_addr is unitialized in dma_direct_map_phys() when swiotlb is forced
->> and DMA_ATTR_MMIO is set which leads to random value print out in
->> warning. Fix that by just returning DMA_MAPPING_ERROR.
->>
->> Fixes: e53d29f957b3 ("dma-mapping: convert dma_direct_*map_page to be ph=
-ys_addr_t based")
->> Signed-off-by: Jiri Pirko <jiri@nvidia.com>
->
->I will take this patch when=A0v7.0-rc1 is out, as this fix=A0definitely ha=
-s=20
->to be applied regardless of the discussion about the remaining patches.
 
-Makes sense. Thanks!
+--===============7553087108623231218==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="glr5iu7kbaysq2rw"
+Content-Disposition: inline
+
+
+--glr5iu7kbaysq2rw
+Content-Type: text/plain; protected-headers=v1; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH v2 04/10] mm/cma: Allow dynamically creating CMA areas
+MIME-Version: 1.0
+
+On Fri, Jan 23, 2026 at 02:25:16PM +0100, Maxime Ripard wrote:
+> On Thu, Jan 22, 2026 at 05:10:03PM +0100, Thierry Reding wrote:
+> > From: Thierry Reding <treding@nvidia.com>
+> >=20
+> > There is no technical reason why there should be a limited number of CMA
+> > regions, so extract some code into helpers and use them to create extra
+> > functions (cma_create() and cma_free()) that allow creating and freeing,
+> > respectively, CMA regions dynamically at runtime.
+> >=20
+> > The static array of CMA areas cannot be replaced by dynamically created
+> > areas because for many of them, allocation must not fail and some cases
+> > may need to initialize them before the slab allocator is even available.
+> > To account for this, keep these "early" areas in a separate list and
+> > track the dynamic areas in a separate list.
+> >=20
+> > Signed-off-by: Thierry Reding <treding@nvidia.com>
+>=20
+> AFAIU, this won't create a new cma heap when registering. This goes
+> against the recent work we did to create one for every cma region.
+>=20
+> I guess, since you have a driver that would explicitly handle that
+> region, we should create some kind of opt-out mechanism, but by default,
+> we should still create such a heap.
+
+It sounds like there's a bit of a conflict between what you want to
+achieve and what this series attempts to do.
+
+The way I see it, the CMA code is more of a helper that gives you a
+specific functionality set. Exposing each CMA area as a heap that
+userspace can allocate from seems like a bad idea to me.
+
+Without knowing anything specific about a CMA area you don't know if it
+makes sense to expose it as a heap. Given that there is very little
+information associated with a CMA area there's only so much guessing
+that you can do. I think it'd be more sensible to make CMA areas opt-in
+to have a heap created for them rather than requiring opt-out. Exposing
+a heap publicly applies only to a (potentially) small subset of all CMA
+areas, albeit at the moment it may seem that that is what it's primarily
+used for.
+
+In fact, for this particular driver nobody must allocate from any of the
+CMA regions associated with the heap driver outside of that heap driver,
+simply because the heap driver maintains meta data about these CMA
+regions for things to work. If we allow access to it from anywhere,
+things are eventually going to explode.
+
+> That being said, it's not clear to me why the heap driver uses CMA in
+> the first place.
+
+We use CMA as a way of reclaiming memory if needed. The heap that we
+create is meant to be resizable, so that when nothing uses the heap, the
+memory can be reused for other purposes. However, when memory is
+allocated from the heap, we need to reclaim that memory for the heap and
+relocate any buffers allocated from the region somewhere else. CMA does
+all of that for us, so it seemed like the logical choice for this.
+
+Thierry
+
+--glr5iu7kbaysq2rw
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCgAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmmN5zgACgkQ3SOs138+
+s6FSqRAAwWGzG1UjDgVwyR+isYP6DrFMGbojEtczHFxgKElBKoFjjqtdmpN97XRD
+7MIc1C6LGCLoJa++YXy7ZlL24CTzYRohVBnmy/Hygdz2uoaeW7GdR0M31slI/lG4
+TpliCL/GXNi1ZhmE8BjykmsEqgjHG+PH9Vd1/VEgo/5DoaX3uc+8TndO9hqh/Jgh
+gFScFbr/VRKDx8wdWyhOsWN4Nm52uJBCPbhJ8dGv4iabMopEwOlLpcm32aFNWMHv
+El8zIIeGzfw9lfWm2WZvtO8heFn3R0kT5yw4opDc7STvO7k6fC/ZQWbg86FR71/e
+DtrHMcjjg+75TIZemvKQwPrshL7CAdwcaNnT+QxVKE0oqHxjoIonRsUkEaTrFKyE
+6n6eqR8+enCtH3hamWE6rFocZQzL5zXxqILwbzeAR/4CBtXBh3pZL4SH6V0cye9h
+jci5Lfjh2SiLSggSKXsTBgrCLCvz8DuapM8GEtfkRS1YoKrix+uGe0nj+J3uAx+U
+SyvOCMoTb+WWQNOyNBMpS2Wk3KcNDMuadOtuxbZa1BInxUBOktPn/km1vJgiO0au
+5sWtH6xSgLF50qbTEFRVg+Pz31LIT+TZSA6L2gj5EmD1gKZeefPCtkiBgDZdsvwk
+KAejAHsfMS0kibucCHIgTg6cjifaVKfFVtiBh3BX8ZuSmmlqnOM=
+=TTIe
+-----END PGP SIGNATURE-----
+
+--glr5iu7kbaysq2rw--
+
+--===============7553087108623231218==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============7553087108623231218==--
