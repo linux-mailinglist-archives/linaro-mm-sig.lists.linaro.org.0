@@ -2,185 +2,179 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id EEvnF0kS4WnoogAAu9opvQ
+	id yJZMNk4S4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:46:01 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:46:06 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1897C411F00
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:46:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 60DB8411F07
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:46:06 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C4BED44F3E
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:45:59 +0000 (UTC)
-Received: from AS8PR04CU009.outbound.protection.outlook.com (mail-westeuropeazon11011061.outbound.protection.outlook.com [52.101.70.61])
-	by lists.linaro.org (Postfix) with ESMTPS id 081703F9AC
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 16 Feb 2026 15:02:44 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 6FA5544904
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:46:05 +0000 (UTC)
+Received: from AM0PR02CU008.outbound.protection.outlook.com (mail-westeuropeazon11013050.outbound.protection.outlook.com [52.101.72.50])
+	by lists.linaro.org (Postfix) with ESMTPS id 137993F78B
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 16 Feb 2026 15:27:05 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=NXP1.onmicrosoft.com header.s=selector1-NXP1-onmicrosoft-com header.b=Ar4Q0rDT;
-	spf=pass (lists.linaro.org: domain of larisa.grigore@oss.nxp.com designates 52.101.70.61 as permitted sender) smtp.mailfrom=larisa.grigore@oss.nxp.com;
+	dkim=pass header.d=NXP1.onmicrosoft.com header.s=selector1-NXP1-onmicrosoft-com header.b=UUJDXdrM;
+	spf=pass (lists.linaro.org: domain of daniel.baluta@oss.nxp.com designates 52.101.72.50 as permitted sender) smtp.mailfrom=daniel.baluta@oss.nxp.com;
 	arc=pass ("microsoft.com:s=arcselector10001:i=1");
 	dmarc=pass (policy=none) header.from=nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=B9OpqAScS/nvCHB2+Ay14mHbvaPOCws0leo1AhT2gVu2X2gO/GXa7i1UTnikxZ+HLLhiVoKF+DX17rlbYtvxeFXHMB8hViFG5FnD2Bo36UX1ExEHjFI8AW8RxOD9nMcnZ+vOG+4S+KdkeaDlxoGGVsALomSC9lliRWfLzINP8NVhdaMY/C9Y/g+8qX7j2OpWD6746s5PGWF0/+IIp9O9sotcjmwmubdGeYBL9k8zztRRxq+/I6wiQPi2IRpDkzpOSY/0o/fWXU3ou2UKIb4fmk9U5OM+IA+RbftMU2+po17lSbjE/quVicnjsoBh+yJGvjl19J6JvwcTwMSg9JH6Nw==
+ b=ODsKYQ/DHwT2VcQd9MgI8dXOWXkQotK9N93z1NMX+lRd+vkWNH5yTxYODM3ab5Jsz8AvCYKQaaExWU/HyuNmMIwDUcForoHZY9z51+SQmQQaecy+//02qLCnE6L6Wy7Ygrovv3utw/RAPyhVnaSPsWt8DC3WzqwrxRO+W+KGuwyFUtvBNaLTq8U3SEnFgsKQ6+xBYUAsT6scyoj7LRynjGssu+wsHTD1XYkNUWF0Lr5KDvQNeOq6+ktC4QC7BwWjm5inuaO+yi4EYji8t8hF1X9e3OeoGZ1acjrMO3LZg4/7LSmx+UPCsthSDnMzLDcVgxfcvOIz3jXGUiMFjLFVVg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=KmX5oU8/dmKxwsz/rnUDA4IdPqZitxkBszm0hKYibNc=;
- b=yYOuCVzKzeHSxLHXXMOOCQs0okBsoH0vckT59Nt0hNUwn0ZqF6dw6v6nZ5IX8Mz34Tt9bQh6BtGR6uNjXqBgGtD9MQENrSIABXM2d/eYy5I3smrNwKg12+oX9f57eJEBla4dY8l/1WWqG9LEFcKzT9VoeyNfonKr/1QVagaFFyYZwOzp+kJYIqjpHeyKUXs6JpPfXH3FpNbNveovkmnltIHufuxUSlMv0aKedDmJ3tKuUn53d4Dr2qDpvXoPEoSYx8JOkDl++iQbzYPiThwMLBg7dXZiTI8p8Sf6W1I0DT2N5Y0FsVVHLjki7trTA68Y9HZIi7cTvjxK1gGKjh/9tw==
+ bh=IlQVEyJW9yK9OgCR5/aOJe52tQue4cjArJ9sqOfqheg=;
+ b=nM5mHEsZeZpZLSxi47+dcpK6MiuwflQnhGlTa+PhKjKCV7V0aaImjqc8xVuoKuPNu5FWvlgosG7PJp+AyBanNInxwJwhu4/A8f7SrCbj/lCpvBYA8QKhiy2Gt24JF2rezt5Abo4rfeRiyKshpePFXA5r2UwMlQ5vL0tvWw0N2vVkBIpAtifhiPYbMb9Rw7EKuxmekW3Hj8lD/zq1L2TIggCC/fbWT/LBpB0lTWfrVRGlba1cq0ygT8RKn/XdJ9hszqN074oMwv6zY0G+X34WqBI6P3mUTEdNgBg44bBm3ayL934D2ofNHxwE/bjH8qtD1RAVl02EBTu4JV7PuzoF8A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=KmX5oU8/dmKxwsz/rnUDA4IdPqZitxkBszm0hKYibNc=;
- b=Ar4Q0rDTPZZLttTHbM9qdTAC0Lxy/87004V+M57wBo/iceDjT2m5PZyEbnlrIFdniMVnRqqN/n6CENhfWn8OUN5WB9PkgCCcq0hqSJt73HNMB2vMSYBDl/SCeYvk+eOUcj8pPadF87+8PwpSyPd+D4sSSUVecdR7cb+NGq//Vf2jzmwuzCrCu+Tou9p6UUIBwPxs77m2C0ptpObKrm62vQ6gzPKTWsZ3pzercOav4W+fdBuunJgVmGTuKMVEsyNJ5d8wHCW1RQjEpTHO1D6MtSDfZPKbHrBhkUvUrXYlmaMlY9MkwRj5dhsQXq6hYkxXpynJ1Da/1MYqPktGc0Atnw==
-Received: from PA4PR04MB9224.eurprd04.prod.outlook.com (2603:10a6:102:2a3::5)
- by DU4PR04MB12026.eurprd04.prod.outlook.com (2603:10a6:10:643::14) with
+ bh=IlQVEyJW9yK9OgCR5/aOJe52tQue4cjArJ9sqOfqheg=;
+ b=UUJDXdrM5l149QWzB9k2lies5ebUb4ZvuDfyg5ONlVz9BW5ijXP3oissj5IzPd2DEcIA6zSBjC6FQAMzG+lad5iYRvo4T0JODmMNVBPC01L30R0fLuyw/6R5gNO8DMzTs8DQ7XAzpD4YyaCs5GwNhzIJ2+mpXuXMQc8OjSrLhnG1Afsk1gvPOEa5l1Prm9EPJjuKxzK5OTply3zh5zyTxkXz+7KaRdFW0sH19QH8XqxQpD4kvcSZyrWEK8nNkd0gXfwQgUWmmY1fovJwnUN6OQbO2EAxnHW/f+rSUe9CnpD6ZYw2O05AI/3n5BY1HUh8xdw1aXdgMOE2GZW8whnu4Q==
+Received: from AS8PR04MB8247.eurprd04.prod.outlook.com (2603:10a6:20b:3f2::13)
+ by DUZPR04MB9746.eurprd04.prod.outlook.com (2603:10a6:10:4b1::14) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.16; Mon, 16 Feb
- 2026 15:02:41 +0000
-Received: from PA4PR04MB9224.eurprd04.prod.outlook.com
- ([fe80::8e54:4d38:df79:fd63]) by PA4PR04MB9224.eurprd04.prod.outlook.com
- ([fe80::8e54:4d38:df79:fd63%7]) with mapi id 15.20.9587.017; Mon, 16 Feb 2026
- 15:02:41 +0000
-From: Larisa Grigore <larisa.grigore@oss.nxp.com>
-To: gregkh@linuxfoundation.org,
-	jirislaby@kernel.org,
-	robh@kernel.org,
-	krzk+dt@kernel.org,
-	conor+dt@kernel.org,
-	sumit.semwal@linaro.org,
-	christian.koenig@amd.com,
-	chester62515@gmail.com,
-	cosmin.stoica@nxp.com,
-	adrian.nitu@freescale.com,
-	stefan-gabriel.mirea@nxp.com,
-	Mihaela.Martinas@freescale.com
-Date: Mon, 16 Feb 2026 16:02:05 +0100
-Message-ID: <20260216150205.212318-14-larisa.grigore@oss.nxp.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260216150205.212318-1-larisa.grigore@oss.nxp.com>
+ 2026 15:26:59 +0000
+Received: from AS8PR04MB8247.eurprd04.prod.outlook.com
+ ([fe80::e99:f504:ce75:9bed]) by AS8PR04MB8247.eurprd04.prod.outlook.com
+ ([fe80::e99:f504:ce75:9bed%3]) with mapi id 15.20.9611.013; Mon, 16 Feb 2026
+ 15:26:59 +0000
+Message-ID: <5c0251b6-5228-4077-a21f-4da179949b90@oss.nxp.com>
+Date: Mon, 16 Feb 2026 17:29:57 +0200
+User-Agent: Mozilla Thunderbird
+To: Larisa Grigore <larisa.grigore@oss.nxp.com>, gregkh@linuxfoundation.org,
+ jirislaby@kernel.org, robh@kernel.org, krzk+dt@kernel.org,
+ conor+dt@kernel.org, sumit.semwal@linaro.org, christian.koenig@amd.com,
+ chester62515@gmail.com, cosmin.stoica@nxp.com, adrian.nitu@freescale.com,
+ stefan-gabriel.mirea@nxp.com, Mihaela.Martinas@freescale.com
 References: <20260216150205.212318-1-larisa.grigore@oss.nxp.com>
-X-ClientProxiedBy: FR4P281CA0171.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:b7::18) To PA4PR04MB9224.eurprd04.prod.outlook.com
- (2603:10a6:102:2a3::5)
+ <20260216150205.212318-10-larisa.grigore@oss.nxp.com>
+Content-Language: en-US
+From: Daniel Baluta <daniel.baluta@oss.nxp.com>
+In-Reply-To: <20260216150205.212318-10-larisa.grigore@oss.nxp.com>
+X-ClientProxiedBy: AM8P191CA0029.EURP191.PROD.OUTLOOK.COM
+ (2603:10a6:20b:21a::34) To AS8PR04MB8247.eurprd04.prod.outlook.com
+ (2603:10a6:20b:3f2::13)
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA4PR04MB9224:EE_|DU4PR04MB12026:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1d4636d3-d615-45d3-fa77-08de6d6c6e86
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8247:EE_|DUZPR04MB9746:EE_
+X-MS-Office365-Filtering-Correlation-Id: bc7249b8-6c07-4ed4-aefb-08de6d6fd37c
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|366016|376014|19092799006|1800799024|7416014|921020;
+	BCL:0;ARA:13230040|366016|376014|7416014|19092799006|1800799024|921020;
 X-Microsoft-Antispam-Message-Info: 
-	=?utf-8?B?N1NIMkpXK0F6TmdjN09mTmVoZ29WeVR6SGw4ZW9SZ211MkZsSUFBd2dpeGRC?=
- =?utf-8?B?RXY1bi9MVmhsditvY2d2TjJUTUhhNVZpR2JBZStGdEZMbi9JclVEQnRXS0lN?=
- =?utf-8?B?Njh2bXcyTEcwa21aY3F1RlNTSFhtT3RycWNJMFRRQmpubTRiOW5kZ1l3TWl0?=
- =?utf-8?B?UUJKU29oR01UblJkY3NqZlE5bGJIYVdlM1hBam5ZTEhzRnJNS25seDlQd1c0?=
- =?utf-8?B?ckExZmtDdkV0WDA2U1JwQzY4cFNOdEViOTJ1dFl6T2xLUEhxVU5kZTQzN0FC?=
- =?utf-8?B?ZHFuYUxrWStEaG90VUhlOU4yWFVCVUVwRGhHTTBuOHhoYUxOQUtsZ0VvdzQw?=
- =?utf-8?B?YnFHc3hMWm9OcW5pbzU2SEpQeTJIUnowUEZqS3lqTXVvNkJYNVdVQ09PU3dn?=
- =?utf-8?B?eXdacDNFbEVESXJ6Qit5ZWVSVWRxZXJIbk9SdlA3cEdzNytBSlFXOVpCM3Ns?=
- =?utf-8?B?UkVVTGtOYmxOSk40MFN3K3I2WldMNDlucjl0MVZJREd1TTh1NUVWWGdlNVUw?=
- =?utf-8?B?bktqellOMy96VTNEYXhxdEJCQmJrT085QTNsK1dQTmpMUkd3U2VhRTVUZ05z?=
- =?utf-8?B?My9Idnlab3plUVY2MXhiTHJvQlhQLzNQUU5vdjNoY1hnbm5lcDg0dlk1bGNB?=
- =?utf-8?B?cFgxbVdFMVI4NTJRUXFuZFdjMXROekV6RjZIYzhGdmZGY3YvUGRyNWlmZk9N?=
- =?utf-8?B?Q1pPR1o5SE5LOWV5ejRFcEV4bzB2Tis0dDlQOHY3SHJQMkRIRHluTmdmdGV4?=
- =?utf-8?B?aXVGMzQ1VGN1TlE2R29vY3NDZHg3Z0d3cG1vbnQwbi85T1BXU3MrV1FmQXlv?=
- =?utf-8?B?YmpIUTZyemZWbHBRQWFsdUx3aG1zanNCck9MeXFSUy9UaldjYkg1eUE5M0ZL?=
- =?utf-8?B?M3pqcGxMdTFITWllOTZ6MTVjVEozbEFEVlNTUytHMWZJcVo0UFNvTWtNSUJE?=
- =?utf-8?B?S3paZ2t5TTY0YVdocytLOXBuT0JCQ1NpUitTT29ZcThueTRpTzNyWlFRMHlC?=
- =?utf-8?B?N09hdnl1Y3A3SC9TTTdacTNiOWpKSnEweGcrQWZJZXB3NzdLWWVaMms1a1cw?=
- =?utf-8?B?Q1IwYlh5Ykg5c0hENXhrbTR4c1RXMUg1cFZjbUJVUWYwVlZuVXdHYW5mdFM5?=
- =?utf-8?B?OStLT3hyZC9VbWs5cTJQZmlIWWZpMnZXMkNJUGc1aytSSEcxZml0MFNVTStP?=
- =?utf-8?B?NFlnRlhjamlVVEczaDZNVUNTTFRyMFhJRk5JbFZET1JucGt2ZTFUc0FTRG1E?=
- =?utf-8?B?ckc3WFJGVTVSWnpROGYxZCtrUStKMnhpZzczTEt6UVgvc2tRRGp6VzlSR3hq?=
- =?utf-8?B?bUVRbkRGT2psR21Bc2puZng2dU41d3Q5VW5GSSt5K2ZidUh6czJlQ0cwZXJz?=
- =?utf-8?B?NGV2UzhXbXJxWUswSy9uMFdyOFNxVktlemh3ZDRvem9weWxpQzBnN0hyRVlT?=
- =?utf-8?B?V3VFZXNySnBQZkJ3QmJSeW8rVDVqOTFIczBNS1krbndQaW9RVmdxQlFrSE8x?=
- =?utf-8?B?V3hZa1dMUkI0MllPdHY2Vnd4dlFjREExQkNISGVVMzgzc2llT3ROSmszNTBO?=
- =?utf-8?B?V1hvU011WTd5OEVocnYvdkFxZ0xmNFpJSXdJaEhLQ25YRmFZR3dURlU2RkhI?=
- =?utf-8?B?L011WHdad2g3bUlYTXc0cGdqVTJlR25TVWF5dlh1RHovbzBQUFZyRS9MQ2hh?=
- =?utf-8?B?ck15ZURnV0ZrczlRc2trSFJJbjN6VEpvbjM1eG1ITUI0NWJ1ME1TS3oxaUVu?=
- =?utf-8?B?TG5BOWtlSTBZbk05cGNnRTVBYzA3dzh5RWp3TnVEVDRnS3hRdHNJTFkvL2Rh?=
- =?utf-8?B?Y3JrYWw0M1dtR3BjeXhsV2o2SDVkT1V6RVV3Y043OWhxUW02SThvcU5HeEhW?=
- =?utf-8?B?OEV3b1Y4NjdzTnFiN0gyVE8vVHF0dElIM2l4Ylc4YlRidThCdmpmK1g0Nmxz?=
- =?utf-8?B?NnRDNlhRVE9uc1pxWkN6Qy84VWgvTzFoN05Iek5VaEFnQ200R01abWwyU3Rl?=
- =?utf-8?B?Q0xYUUh5cVB0MnJSbUhqT1B0S0lrUVpOZ1BMdWlsekFhOWc2alIrU0dXQ2NL?=
- =?utf-8?B?TmdneFRPSHc1QnZLVWthMjdtbmkvVkZKTnRvVHRaUkZpYWlzcFdVazhEMGZx?=
- =?utf-8?B?Q3A1NnBEUHgvclBBQmNhWXZCd3V1RWFUcXhLVUhyd1R4eVJHWmp5bURkS3VI?=
- =?utf-8?B?ZEE9PQ==?=
+	=?utf-8?B?amsra1o0OVlhZ1o3YWlzMkxFQmh6bnUzMHk3UXMrR2FjZTYzSzg2STF2ei9V?=
+ =?utf-8?B?SUJhWnhPdlhuVFR2SkZvU3lEWWFqTGp2Zy8yaW9oU2JoMjdGa2pja2V1bnov?=
+ =?utf-8?B?UDc1VGxNelFQUU9GYy90aU1SVW83eXFJL2dYVVp3Vzk0QkE1ZTVrWEo4KzRk?=
+ =?utf-8?B?elRQL0Z0Wm9XbXVHelkwSjdTb2x1MDR1ODhDWXRhWVNNYjArQlRjOGl2YWR0?=
+ =?utf-8?B?S1k2UWxoTmdtKzVWNDBlQmhGT2krZVhqOVduRnByMStEVm5odEFGazZvM2lo?=
+ =?utf-8?B?Z2lRWjN2M0d3N3U0VDZwckNPWXdGd1JlTlU3aHoyRnlkQVRHY0xhQndwN1kr?=
+ =?utf-8?B?SGlyVGRONnBlUUZKTnljYUxoSGIyMmhld2Vudm1mbUJ6ZHd6Tml5VC9WdXkz?=
+ =?utf-8?B?N2RvU0pRQkJDaTYwWVc2S1ZyK2hTN3Z3OWVpdmlxeEtsR0E1RmdTVDhXRGY0?=
+ =?utf-8?B?RjIwVWpaRFNqS1NsNitvbDA5a3BwNDNaNGZSaUVqTjF0NG1HVGhXYkV6Q09P?=
+ =?utf-8?B?SFk0bUh3MW1uWFV2UTFKdHpZeHZISEl6VEVBek5kTHBUcFZPdzR4dU5HL2Zr?=
+ =?utf-8?B?RTdVNDZ0QmU2eUlTWUhTUUZVSWFNMDNqRlI4QmlnSG5RaTlVYi9yNHliQTBM?=
+ =?utf-8?B?bUozeWZzQVlDOXFXZUtieUg4K0pndGtLTHVhZGc4ZVkyb3ZmVE42SmJRdDhx?=
+ =?utf-8?B?ZkFWdjFvWTJGTXdXamtZbDRRQzlpc0lkZkNyWHdRaFVpKytQcENPNEdYM1ll?=
+ =?utf-8?B?MXdOb0FQcXZ5dEo4NWlvbWY4anRBOFJVYURkU0cybWVYRWN0aWxzaEsycklF?=
+ =?utf-8?B?VkMyTFNDdDVFL0J6Nkd6R3YvdVFCQWFoWlYrTFY2Wk5CTzE4akxzSGNESmFs?=
+ =?utf-8?B?VzE3aEtmSEZVemNYWWkwKzNEQmt6VEdRbCtjdEtPbXpURVhrVDhPK1owV253?=
+ =?utf-8?B?RDROSjRPWTczaXVSRzFTeHF3Z1FmdjFRWUV3MHdnc0xpRVAyRWdjYzVHTDJi?=
+ =?utf-8?B?WVlNbU1rQ29WZ1J2NDJsN3VSUTU1T1RYaitiZjBObHI3N1FNc1JNUHNpZ01I?=
+ =?utf-8?B?UU55bk9IUUZOYVc3ZEQ3NENkSm5KVjhPWWpOcUVLdEZ6V3BucnZDWEU5OUUz?=
+ =?utf-8?B?UTFBdGpmZkVSaXVZVzh1dzdBVGpVRitGS0l3bTNoM0k1RGZNaDYwSlFWUURx?=
+ =?utf-8?B?MUhueGJ0ckdKM0V6cUt6Njh5cXAzR2dQK0hTSzJUVHlTdWhtRVBtM3ExN0U1?=
+ =?utf-8?B?ZFpVallvVC9nNzFnR0xKL1UyMmxKNUtvbEh5QXZ0a0FPeUZGNDJHQmdtTWZK?=
+ =?utf-8?B?cHpsdnMrTTJ0Y21jOXRndzdiTnQzWDNzWlVuSDNTL0Y5QjhxamxCK1ZWdEp2?=
+ =?utf-8?B?MjFJRWgzd1NtT2NJNDNqU3hMa1BMRTVEcXRES0N2ZHBudWZKdnQ5MFEzKzM4?=
+ =?utf-8?B?anV4RlRnMGhxWkRqT1ozNnJtTDZZazZVNHFxc2ZsTkkvSVlBV0srenVJT1Z1?=
+ =?utf-8?B?T3BnRFlFRWZDb0JlTnlkSjVhZ1NESFZ0bWdqVHFPNXBlNkVNdmlCZmx6OVEz?=
+ =?utf-8?B?VW9hRWhlM1JSR2Q4Q3RMTE1RQnpUTU1TQXZhUUFUUStrN2hqWHliNDVyY0RF?=
+ =?utf-8?B?NHFxWWcwWFVDTjltSGkyZFk0UFJsRVViRXUwWTNTNndSL2RHWlB5VG1kTytx?=
+ =?utf-8?B?MkYxc3BwRWIxL3hySDNjQUluOGNEV210R1ZiYlpLQjBJYWN5UThXZ2k2SzBV?=
+ =?utf-8?B?d2JBdGprVEJlOGx5QW42UXBWY0piZnZSbzdGOXI4cGpCbVJlbTdZcXZrSlRS?=
+ =?utf-8?B?Q2ltLzJTb0NJcXZWakVyWjdxRE1xMy9pdzJCaXA5MzdCSE9UQnRTR2hVRnNU?=
+ =?utf-8?B?V05zemFyblBsODRqQTBwNWxPYmtoUHNQRUozKzRMcHZQWkdwVzJxb3ZZWUlx?=
+ =?utf-8?B?WDRNOWsxYkg5UXBadjhraTR6eXFUakhZcGdOK2lqMFpFVnk1dml1c2cyQ3Bv?=
+ =?utf-8?B?V253cmJCL0lMWnJlRXlCVzBReHZ1NDRLRE5WOERWeW50MXhiNjRtUzdYL0Nl?=
+ =?utf-8?B?RkNXUWdpdXpDQm13cU52ZnJDeUEya3dGOUx0Vm1YaFNFTGlWVElaU3FrdkJR?=
+ =?utf-8?B?RVl0alRQWWs4cEFPQ09SejcxNVhGeWhZL0szTkhoa3Z2L2hCWTVRT21DbFBr?=
+ =?utf-8?Q?Q4XTmyA8LcgjWWU+bzt7Oyg=3D?=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PA4PR04MB9224.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(19092799006)(1800799024)(7416014)(921020);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR04MB8247.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(7416014)(19092799006)(1800799024)(921020);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?VWZVa2xrSFM1QUMxZSs0cExkOXZUQUE4T3dEdU10WGgyWWZ0RVRGbGd2OUhv?=
- =?utf-8?B?a3J1TitZUWJGMWF4d09RYzZwSENHWnNVU0UzdHFrRUtDMmVTMHVCWEZrSExv?=
- =?utf-8?B?SnlyNGxZWE9XczZEbUJDdGxCVUMxRE9pM1ZmYlpUMk53VFJWNktLSnRjR0VB?=
- =?utf-8?B?VytVQlpOVmJGRmhXejlwWWJXVCsvc2VvQ0lsZDNQdFppeGM0OGNwZWZRd3dF?=
- =?utf-8?B?WXV0cVpMYlBJcVdqclBIM2pMR2dsVStXc256aHBxMWNiRXNZWVlrbHQ2cWRR?=
- =?utf-8?B?anZpeHZ2NmNLTWpJdVB6SzcrRDNxQ1BVc2ZpS0RrQ1JRek53S2thb3BoSVp1?=
- =?utf-8?B?LzllWTFxcTVucEM5ckJiWFRlM2pnZldRaDV4SW8rSXpPcmN2NWcvamlYVjY2?=
- =?utf-8?B?end1bHYvVHAwZlpybWdPdi82RWYyL29MNDJ1TE5wRGhONnNhUWRxZXhheDlE?=
- =?utf-8?B?VHZSd0R2ZXhsRXozNUZzeXFuQlo1UHlIcTY3WDArM3VydEV5UXErVjk5ZzFO?=
- =?utf-8?B?SjlyUWpoSyt0cDBSRk4yVE1sV2FqNXlCU09WbkRUWGJXcHdGNDRLbU1lM3pX?=
- =?utf-8?B?a1FCM2piZW1ESDdERDZ5a0RYb0t2ekxNb212SmozdTZHUjI5Wnd5UlZaSzJZ?=
- =?utf-8?B?RnV6R3cvVUlMZFdLdjBHMGdBM1pkTDNYeHhib2xFMG1TZkUvcFVmRDhQMUhL?=
- =?utf-8?B?ZEYwOTM4K1cwRFJGdVNoZnNpd0pBQUJVUGIrdC9BaUhFLzAyVURQb3ZWWjUy?=
- =?utf-8?B?eGxtMHpxQ0JkZFViSGY3amtIRGdvRlB5NUMzL2hOVVJvaDhabFJlVDhKcngw?=
- =?utf-8?B?Z1V2ZGtZK0lObjZ2YUljVTVRYy9RTzFHdXk0UkE0S2crV1RtcHo3eE4xMk9t?=
- =?utf-8?B?VG9IaCtkRUM0dEE1aXIrS1ZqZjVMcGo1QWx4dkI3em04Tm05d2ZlRXhHSEk5?=
- =?utf-8?B?ZkVYT0NMcVFMdDdZK0poTHRxbmNSZ1NPWlk2cVNtRkFzVzRyeDRJRmVzRHRE?=
- =?utf-8?B?RVVhNHl6Uk8xVlBlNjArWHh5bmhpRnUwdnNZZFlraW9yT2FZTW1vdzRqeWJ0?=
- =?utf-8?B?Y3FiSDBTMkpvekhObjFFakdtRnhWSlFjRlVDb1d6bXhSOFBmb1NyRkROM281?=
- =?utf-8?B?R1lGc3pNV3NnakxwcjVmelVWK2o1TjJxVWpHbXFUTlZPdUpyK3l1c0xOekFH?=
- =?utf-8?B?dmhqczl0Ky9YY0hORGV2bXJMZEZ6SWdVZUVzWDAySTFjcmFMOTZOU1FiQ09P?=
- =?utf-8?B?akpZRlo2ZnVnYyt1K2RtQUtUS1pKY2xaZkowZXUzUkVCK3ovQmN3S3c5UUZn?=
- =?utf-8?B?RWJTTXBBRkpoVElXK05kWitBLzlSMXdkSFEvMm9IR1MxcUdWY2JnTEc1OGVa?=
- =?utf-8?B?b1FJUXBRYys0L1k5a29Ic1E1QngvYlk5djlyM0NxRTQvZHo0cWpVUDg4bXhx?=
- =?utf-8?B?VEd4dUhRc1hiUnM5dXRLY1RxWklYVXh5Mlh5eGNMOUlCWWVNSFdJenlBamNC?=
- =?utf-8?B?UjRQM1NRMXorMkx2bzBYaU5JMlk2dGNyMndmdmFpTjlrZ2ZGTFhtYS9talBa?=
- =?utf-8?B?TXJ0MGlLSlZMeHdxK2oxNExjYVkwQitXSSs1eFZoZFRuaUQrdXpTT1ppQXZW?=
- =?utf-8?B?b2xUc0RWWnZUcjV0Z0Jhdm5XSFpiNWtnVGVQdW9iTXVkMnhHWHh2Z1krTFhq?=
- =?utf-8?B?ZTU1cHQzeW94QndMMjNkb3hjS0p1UWJWMDIrZjV0ODc4VnRSNk81T1pEVitX?=
- =?utf-8?B?Q1RrbnJGUitsU0xjeGJDTzMxT2JDZlA0Z25rWXBMa2pWc25vTjc5WHl3WStt?=
- =?utf-8?B?UVVqaEZNYmlwVm9xLzdlRzR1c3BOc0NGRVBxOFBtNTFPSXZUdEJhM0IwcGhs?=
- =?utf-8?B?S2FRZjFIRmhoT3NBYm9aTDFtRlRlNTV4RnE5MW9TV2F2SC9obW90UGdWbi9M?=
- =?utf-8?B?bi84Tk9TK3BSUml4YTE0alFGbklyRThVbFJUdWpVKzFiZmQvRmRLbEljUG1Q?=
- =?utf-8?B?ZUJuZlVCQTVsN1BXYlhMTG92Tkxub2dBbW93QXJJRDJSb0xDejlGWHRsRTBh?=
- =?utf-8?B?bW92a1F1Qm1MRWx0RTZ3Q2toREZIY0tTL3l1eHRCdWc0eW1zUStyTit2bVU5?=
- =?utf-8?B?dTE0a1BDZEt2VUdCY2JSUVRrS3d3WDdPMUVzamVzeUl6NFVoZklKZEYxTmJO?=
- =?utf-8?B?UkdUbm9jMXg2VU1oakwxMEdtWjRVcGp4OUIrYmdlOWZrR3Qzc2I3R3hoZFJo?=
- =?utf-8?B?T09CR2hQM1ZXdm9BdTk4NGFrWlJmekVVM1dybmNYTGsrQWpoSm9PekpBcUtt?=
- =?utf-8?B?R3lvaGhkNHJwWFdxd2RTR3hIbndmdnFtM2Y0ZnQ3bnJ2U21xbnhHeCtYMXBE?=
- =?utf-8?Q?7RnBK52+9W6GcMZk=3D?=
+	=?utf-8?B?ci9tSkltUytMVURWTEhFY3ZFNmZLYU1JTWg4a1VNRlVHdGZYeUxobFpGWTAy?=
+ =?utf-8?B?TENaVEx4WGc5T2MwTUZYZlZXL3Z0VUZqZXZHeVM5ZnVVSjJZMmJ4UWI5aGtY?=
+ =?utf-8?B?WEJ1RWtmdWg4Vi90bmZSdW5CbDA1b2x1bnlzSlljalJNNDRhM1U4WElKcnFq?=
+ =?utf-8?B?YlNxaUxxckhpYTZ3cm1ZV1dnekRXdUl5enV2bFk5Q1lKdXZhQm1NcDVob3Za?=
+ =?utf-8?B?b2V0YjBDRk4zcXNleTVuQ2xTalhPUHdyK2s5NU13TTZ5eXpRK1F4SHNtYklS?=
+ =?utf-8?B?YlJrTXNuMDVmL1lJb3hGbUNENVZkWXJvNTFLTmdnUVVidU5mSElob25xQlcz?=
+ =?utf-8?B?QkY4RXUvNWtvTHJQdldjdmtsb0NtaGpQQlhucHd2am1JdkNGTHdPTm9xVi94?=
+ =?utf-8?B?VjFLaE1MQ0swWExUa3RwZ011NlRRLzNSY1dNc0ZLRzNhMTUwNmFNKzM0SXg3?=
+ =?utf-8?B?LzFaWW9pTlJnbFJYS25MNDc2eTJWMnJ1Vk1lbk9reHhESHpmLzZkNHdwZ0sw?=
+ =?utf-8?B?R3g3TG9kb1R5VEFTSnVmZS9FNUlidGlvN0plc1l4ZDlhZThDZDN0WDhGTTIr?=
+ =?utf-8?B?cGNkMTdYNUV1Y093SjVlaFphK0NneXV3WVA4QnB6RGt3VnRVd1VFZnN3QUIw?=
+ =?utf-8?B?Sm10TFRQTTN4VU1ycGxTc2ZGRm9zZEpzeDJaaDlQVWhRUVNUVDhLOHY4QzFy?=
+ =?utf-8?B?MjBNbHB4MFZTeG9JcXJ6QlZxM3FUUXFDdFV3RDljZG11VjdUd1QwZ3FVVVp4?=
+ =?utf-8?B?MG1VM2VpZ21MbE9yUkJsa1NENE13MVNWcFB1dnQzekJ1Q2VyMUJXNjBwZS85?=
+ =?utf-8?B?QVBhMVUvQ05UODdPTTBhbEJSYjNvTDdWYktoTUtEdG9EMXFOWWxaa1h2a1Iz?=
+ =?utf-8?B?a2svZWx6NUVPTFIvUVV4TjlKUjBUQXpHeGg5NWxUYWhvOFlkamFmU1pCRzFU?=
+ =?utf-8?B?TDVDa2h0dEppWVBtN1JISnliVjhNUjBvK1UyVnpycFhFWU9SZVMrWlVDQTlH?=
+ =?utf-8?B?aW9rN1pDU1FGbU9EcnRLZDNiQzQvUkY4enlMU2pHUXJWUVRYbis5SkpnS1gy?=
+ =?utf-8?B?OVlLRGdSeWI4UDRESk9oMG5GK2t0Y0JadmVhOUhiZWU2QjJKNHo1ZDJzZWFq?=
+ =?utf-8?B?ZVBUWW83WEUvWFZabU5ZU0N3eWdZZEViTE9KL2tVTXRKYjlVK01MN2VDU2hq?=
+ =?utf-8?B?TU9uOTRkWUdJWjNtYUxId0NCZTVvQUVzMXNNbElTbS9NbkVtZlUzUmFSakU0?=
+ =?utf-8?B?K1g4QnA3NEFBMDh1ZUVRakNTczlPZS9kWmpweXloSXE2UitLUHBwTHEwU2ND?=
+ =?utf-8?B?OWt4dmxma2w3SEdQYllWMDN1QUgrSmZnaVRRRmlIY3h0ZWpOQWFDQ29HUzJu?=
+ =?utf-8?B?WVpsYktNdUNGMWduZnl4NTI1ekJ4RjJnZkN2Vk55MmJ0eEtnZEJncVpwWjZu?=
+ =?utf-8?B?bWpxWmY2RHk5TkhWWmdIU3c2eklyODRsc2d6Nmg3aTUzL3VNQjlra2xnSnMw?=
+ =?utf-8?B?czBhQjR4NXRhRWhzTU9PTHRXTWNpMW5LdXkvdUJQdVFmYnpZemNUbmFLS0xW?=
+ =?utf-8?B?RUlxOVNrN1lRNGhXdlVjeHN6cXdvTlJrTTh1NVNQUUZCTlVXUzdNdVRUWXhT?=
+ =?utf-8?B?ejRNRDJXUlU1MVNRS051ZUF3bXh5SFkraUNNYVA5R3dKY0NVdWZyemdmK1BM?=
+ =?utf-8?B?d213YVYvYUdWbVBXcmlqbHBwemNXRm5BMWJLYXdjTExRODJEdHZTcnEwd2ZD?=
+ =?utf-8?B?VXRXY01NNVUyK2dNeTF0dlIvdHpaY1JVNGtxeFpXYzkzNXFpS1lOaW85TzFC?=
+ =?utf-8?B?eEdsSWEwOUVURkZvcG43Vk9OU0dqSDh5WmRaUTg2aFA3MDA3OXQvdTlmSTZn?=
+ =?utf-8?B?QjRzSlFvSEUvYjAzZVNoV2FlY1h1TUI0UUttZ0NVUmZpZ1hqOTZsem50Vm9U?=
+ =?utf-8?B?NTNJZWJoOEpTQUxhdHVudWtXeGxXZ05BWTVhVzFTY2FEN1FpQ2lsL0JoMkI2?=
+ =?utf-8?B?ekZOeG9wYUt0Z3ZIM2ZpM3FFOU4xLy83Zkh5VzZFdWo1QjRIaVFXZUxHeWZw?=
+ =?utf-8?B?ZVNGem9xWEVEYThlYmJ1WnA2QmZWc1Z5RHNQbFoxTkhjWWRjMVZLaHJBcUhQ?=
+ =?utf-8?B?N2tOcGRGbklmcVcxUjJVVzNyV1NNS1NEQm8rZFk0RUQrRjNGTDc3OW9ManBj?=
+ =?utf-8?B?dDlXeWUxVE9mb1VxSTA3dVQrY0hSVWV2dUNGcmdxUjFkVmVkeldLVFEvUHgx?=
+ =?utf-8?B?YVpMZmhIQWxJM2d4Q0FWcnJTQ3hjWitHTjVYN3RDakZ5Um44bEI2SXppdWlV?=
+ =?utf-8?B?RGRCRHIzbzB4eTlRMXIvN2FNVHFhM3lmTVEvOTd6OSt5MnRRdm8wdz09?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1d4636d3-d615-45d3-fa77-08de6d6c6e86
-X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB9224.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: bc7249b8-6c07-4ed4-aefb-08de6d6fd37c
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8247.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Feb 2026 15:02:41.3107
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Feb 2026 15:26:59.1940
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: SU1V07VkUQKopWg6u0wMheJpClYNbBmpP4Z478RkVeKtnacZ8RrHcjqa955PhLetvjR/qYQJE1cPaBWP38vMyA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR04MB12026
+X-MS-Exchange-CrossTenant-UserPrincipalName: qBsqMBg5MZmHqInQlhZYl0WQgvNvxHW9mjkikn2WGh2pLv/mdM671SHJ7mci/KxjfgVknvEdc8KWGoGnBMLV7A==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DUZPR04MB9746
 X-Spamd-Bar: ----
-X-MailFrom: larisa.grigore@oss.nxp.com
+X-MailFrom: daniel.baluta@oss.nxp.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: RCMXGQNDTCD3Q327H4YXKRILR5LRIBTV
-X-Message-ID-Hash: RCMXGQNDTCD3Q327H4YXKRILR5LRIBTV
+Message-ID-Hash: 4BEGJQQWFKH7BVMP5NHOQ4A6XH3AJH7H
+X-Message-ID-Hash: 4BEGJQQWFKH7BVMP5NHOQ4A6XH3AJH7H
 X-Mailman-Approved-At: Thu, 16 Apr 2026 16:40:24 +0000
-CC: linux-kernel@vger.kernel.org, linux-serial@vger.kernel.org, devicetree@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, s32@nxp.com, imx@lists.linux.dev, clizzi@redhat.com, aruizrui@redhat.com, eballetb@redhat.com, echanude@redhat.com, jkangas@redhat.com, Radu Pirea <radu-nicolae.pirea@nxp.com>, Larisa Grigore <larisa.grigore@oss.nxp.com>
+CC: linux-kernel@vger.kernel.org, linux-serial@vger.kernel.org, devicetree@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, s32@nxp.com, imx@lists.linux.dev, clizzi@redhat.com, aruizrui@redhat.com, eballetb@redhat.com, echanude@redhat.com, jkangas@redhat.com, Radu Pirea <radu-nicolae.pirea@nxp.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 13/13] serial: linflexuart: Avoid stopping DMA during receive operations
+Subject: [Linaro-mm-sig] Re: [PATCH 09/13] dt-bindings: serial: fsl-linflexuart: add dma properties
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RCMXGQNDTCD3Q327H4YXKRILR5LRIBTV/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4BEGJQQWFKH7BVMP5NHOQ4A6XH3AJH7H/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -189,280 +183,68 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [5.09 / 15.00];
+X-Spamd-Result: default: False [4.09 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	R_DKIM_REJECT(1.00)[NXP1.onmicrosoft.com:s=selector1-NXP1-onmicrosoft-com];
 	DATE_IN_PAST(1.00)[1417];
-	MID_CONTAINS_FROM(1.00)[];
 	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx];
-	DMARC_POLICY_SOFTFAIL(0.10)[nxp.com : SPF not aligned (relaxed),none];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[nxp.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	GREYLIST(0.00)[pass,meta];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_TO(0.00)[linuxfoundation.org,kernel.org,linaro.org,amd.com,gmail.com,nxp.com,freescale.com];
-	RCPT_COUNT_TWELVE(0.00)[27];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.049];
-	FROM_NEQ_ENVFROM(0.00)[larisa.grigore@oss.nxp.com,linaro-mm-sig-bounces@lists.linaro.org];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,dt];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	RCPT_COUNT_TWELVE(0.00)[27];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	GREYLIST(0.00)[pass,meta];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[oss.nxp.com,linuxfoundation.org,kernel.org,linaro.org,amd.com,gmail.com,nxp.com,freescale.com];
+	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[NXP1.onmicrosoft.com:-];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nxp.com:email,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,oss.nxp.com:mid]
-X-Rspamd-Queue-Id: 1897C411F00
+	MID_RHS_MATCH_FROM(0.00)[];
+	NEURAL_HAM(-0.00)[-0.924];
+	FROM_NEQ_ENVFROM(0.00)[daniel.baluta@oss.nxp.com,linaro-mm-sig-bounces@lists.linaro.org];
+	TO_DN_SOME(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig,dt];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	REDIRECTOR_URL(0.00)[aka.ms];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[nxp.com:email,lists.linaro.org:helo,lists.linaro.org:rdns,oss.nxp.com:mid,aka.ms:url,linaro.org:email]
+X-Rspamd-Queue-Id: 60DB8411F07
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-From: Radu Pirea <radu-nicolae.pirea@nxp.com>
 
-Replace DMA single transactions with DMA cyclic transactions. Characters
-may be lost between two single DMA transactions if the CPU is running at
-lower frequencies.
+On 2/16/26 17:02, Larisa Grigore wrote:
+> [You don't often get email from larisa.grigore@oss.nxp.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+>
+> From: Radu Pirea <radu-nicolae.pirea@nxp.com>
+>
+> Add 'dmas' and 'dma-names' properties to describe optional DMA support
+> for RX and TX channels in the LINFlexD UART controller.
+>
+> This allows the device tree to specify DMA channels used for UART data
+> transfers. If not specified, the driver will fall to interrupt-based
+> operations.
+>
+> Signed-off-by: Radu Pirea <radu-nicolae.pirea@nxp.com>
+> Co-developed-by: Larisa Grigore <larisa.grigore@oss.nxp.com>
+> Signed-off-by: Larisa Grigore <larisa.grigore@oss.nxp.com>
+
+If both of you worked on this patch then the last lines must read:
+
+Co-developed-by: Radu Pirea <radu-nicolae.pirea@nxp.com>
 
 Signed-off-by: Radu Pirea <radu-nicolae.pirea@nxp.com>
-Co-developed-by: Larisa Grigore <larisa.grigore@oss.nxp.com>
-Signed-off-by: Larisa Grigore <larisa.grigore@oss.nxp.com>
----
- drivers/tty/serial/fsl_linflexuart.c | 119 +++++++++++++++------------
- 1 file changed, 68 insertions(+), 51 deletions(-)
 
-diff --git a/drivers/tty/serial/fsl_linflexuart.c b/drivers/tty/serial/fsl_linflexuart.c
-index dff37c68cff0..4598c7ff669e 100644
---- a/drivers/tty/serial/fsl_linflexuart.c
-+++ b/drivers/tty/serial/fsl_linflexuart.c
-@@ -6,6 +6,7 @@
-  * Copyright 2017-2019, 2021-2022, 2025 NXP
-  */
- 
-+#include <linux/circ_buf.h>
- #include <linux/clk.h>
- #include <linux/console.h>
- #include <linux/dma-mapping.h>
-@@ -180,7 +181,7 @@ struct linflex_port {
- 	dma_addr_t		dma_rx_buf_bus;
- 	dma_cookie_t		dma_tx_cookie;
- 	dma_cookie_t		dma_rx_cookie;
--	unsigned char		*dma_rx_buf_virt;
-+	struct circ_buf		dma_rx_ring_buf;
- 	unsigned int		dma_tx_bytes;
- 	int			dma_tx_in_progress;
- 	int			dma_rx_in_progress;
-@@ -210,28 +211,63 @@ to_linflex_port(struct uart_port *uart)
- 	return container_of(uart, struct linflex_port, port);
- }
- 
--static void linflex_copy_rx_to_tty(struct linflex_port *lfport,
--				   struct tty_port *tty, int count)
-+static void linflex_copy_rx_to_tty(struct linflex_port *lfport)
- {
--	size_t copied;
--
--	lfport->port.icount.rx += count;
-+	struct circ_buf *ring_buf = &lfport->dma_rx_ring_buf;
-+	struct tty_port *port = &lfport->port.state->port;
-+	size_t count, received = 0, copied = 0;
-+	struct dma_tx_state state;
-+	enum dma_status dmastat;
-+	int new_head;
- 
--	if (!tty) {
-+	if (!port) {
- 		dev_err(lfport->port.dev, "No tty port\n");
- 		return;
- 	}
- 
-+	dmastat = dmaengine_tx_status(lfport->dma_rx_chan, lfport->dma_rx_cookie, &state);
-+	if (dmastat == DMA_ERROR) {
-+		dev_err(lfport->port.dev, "Rx DMA transfer failed!\n");
-+		return;
-+	}
-+
-+	new_head = FSL_UART_RX_DMA_BUFFER_SIZE - state.residue;
-+	if (ring_buf->head == new_head)
-+		return;
-+
-+	ring_buf->head = new_head;
- 	dma_sync_single_for_cpu(lfport->port.dev, lfport->dma_rx_buf_bus,
- 				FSL_UART_RX_DMA_BUFFER_SIZE, DMA_FROM_DEVICE);
--	copied = tty_insert_flip_string(tty,
--					((unsigned char *)(lfport->dma_rx_buf_virt)),
--					count);
- 
--	if (copied != count) {
--		WARN_ON(1);
--		dev_err(lfport->port.dev, "RxData copy to tty layer failed\n");
-+	if (ring_buf->head > FSL_UART_RX_DMA_BUFFER_SIZE)
-+		dev_err_once(lfport->port.dev,
-+			     "Circular buffer head bigger than the buffer size\n");
-+
-+	if (ring_buf->head < ring_buf->tail) {
-+		count = FSL_UART_RX_DMA_BUFFER_SIZE - ring_buf->tail;
-+		received += count;
-+		copied += tty_insert_flip_string(port, ring_buf->buf + ring_buf->tail, count);
-+		ring_buf->tail = 0;
-+		lfport->port.icount.rx += count;
- 	}
-+
-+	if (ring_buf->head > ring_buf->tail) {
-+		count = ring_buf->head - ring_buf->tail;
-+		received += count;
-+		copied += tty_insert_flip_string(port, ring_buf->buf + ring_buf->tail, count);
-+		if (ring_buf->head >= FSL_UART_RX_DMA_BUFFER_SIZE)
-+			ring_buf->head = 0;
-+		ring_buf->tail = ring_buf->head;
-+		lfport->port.icount.rx += count;
-+	}
-+
-+	if (copied != received)
-+		dev_err_once(lfport->port.dev, "RxData copy to tty layer failed\n");
-+
-+	dma_sync_single_for_device(lfport->port.dev, lfport->dma_rx_buf_bus,
-+				   FSL_UART_RX_DMA_BUFFER_SIZE,
-+				   DMA_FROM_DEVICE);
-+	tty_flip_buffer_push(port);
- }
- 
- static void linflex_enable_dma_rx(struct uart_port *port)
-@@ -348,8 +384,6 @@ static void _linflex_stop_rx(struct uart_port *port)
- static void linflex_stop_rx(struct uart_port *port)
- {
- 	struct linflex_port *lfport = to_linflex_port(port);
--	struct dma_tx_state state;
--	unsigned int count;
- 
- 	_linflex_stop_rx(port);
- 
-@@ -357,14 +391,12 @@ static void linflex_stop_rx(struct uart_port *port)
- 		return;
- 
- 	dmaengine_pause(lfport->dma_rx_chan);
--	dmaengine_tx_status(lfport->dma_rx_chan,
--			    lfport->dma_rx_cookie, &state);
-+	linflex_copy_rx_to_tty(lfport);
-+	lfport->dma_rx_ring_buf.head = 0;
-+	lfport->dma_rx_ring_buf.tail = 0;
- 	dmaengine_terminate_all(lfport->dma_rx_chan);
--	count = FSL_UART_RX_DMA_BUFFER_SIZE - state.residue;
- 
- 	lfport->dma_rx_in_progress = 0;
--	linflex_copy_rx_to_tty(lfport, &port->state->port, count);
--	tty_flip_buffer_push(&port->state->port);
- }
- 
- static void linflex_put_char(struct uart_port *sport, unsigned char c)
-@@ -501,11 +533,12 @@ static int linflex_dma_rx(struct linflex_port *lfport)
- 	dma_sync_single_for_device(lfport->port.dev, lfport->dma_rx_buf_bus,
- 				   FSL_UART_RX_DMA_BUFFER_SIZE,
- 				   DMA_FROM_DEVICE);
--	lfport->dma_rx_desc = dmaengine_prep_slave_single(lfport->dma_rx_chan,
--							  lfport->dma_rx_buf_bus,
--							  FSL_UART_RX_DMA_BUFFER_SIZE,
--							  DMA_DEV_TO_MEM, DMA_PREP_INTERRUPT |
--							  DMA_CTRL_ACK);
-+	lfport->dma_rx_desc =
-+		dmaengine_prep_dma_cyclic(lfport->dma_rx_chan,
-+					  lfport->dma_rx_buf_bus,
-+					  FSL_UART_RX_DMA_BUFFER_SIZE,
-+					  FSL_UART_RX_DMA_BUFFER_SIZE / 2,
-+					  DMA_DEV_TO_MEM, DMA_PREP_INTERRUPT);
- 
- 	if (!lfport->dma_rx_desc) {
- 		dev_err(lfport->port.dev, "Not able to get desc for rx\n");
-@@ -525,11 +558,8 @@ static int linflex_dma_rx(struct linflex_port *lfport)
- static void linflex_dma_rx_complete(void *arg)
- {
- 	struct linflex_port *lfport = arg;
--	struct tty_port *port = &lfport->port.state->port;
- 	unsigned long flags;
- 
--	timer_delete_sync(&lfport->timer);
--
- 	uart_port_lock_irqsave(&lfport->port, &flags);
- 
- 	/* stopped before? */
-@@ -538,34 +568,17 @@ static void linflex_dma_rx_complete(void *arg)
- 		return;
- 	}
- 
--	lfport->dma_rx_in_progress = 0;
--	linflex_copy_rx_to_tty(lfport, port, FSL_UART_RX_DMA_BUFFER_SIZE);
--	tty_flip_buffer_push(port);
--	linflex_dma_rx(lfport);
-+	linflex_copy_rx_to_tty(lfport);
- 
- 	uart_port_unlock_irqrestore(&lfport->port, flags);
--
- 	mod_timer(&lfport->timer, jiffies + lfport->dma_rx_timeout);
- }
- 
- static void linflex_timer_func(struct timer_list *t)
- {
- 	struct linflex_port *lfport = timer_container_of(lfport, t, timer);
--	unsigned long flags;
--
--	uart_port_lock_irqsave(&lfport->port, &flags);
- 
--	/* stopped before? */
--	if (!lfport->dma_rx_in_progress) {
--		uart_port_unlock_irqrestore(&lfport->port, flags);
--		return;
--	}
--
--	linflex_stop_rx(&lfport->port);
--	linflex_dma_rx(lfport);
--
--	uart_port_unlock_irqrestore(&lfport->port, flags);
--	mod_timer(&lfport->timer, jiffies + lfport->dma_rx_timeout);
-+	linflex_dma_rx_complete(lfport);
- }
- 
- static void _linflex_start_tx(struct uart_port *port)
-@@ -827,8 +840,8 @@ static int linflex_dma_rx_request(struct uart_port *port)
- {
- 	struct linflex_port *lfport = to_linflex_port(port);
- 	struct dma_slave_config dma_rx_sconfig;
--	unsigned char *dma_buf;
- 	dma_addr_t dma_bus;
-+	char *dma_buf;
- 	int ret;
- 
- 	dma_buf = devm_kmalloc(port->dev, FSL_UART_RX_DMA_BUFFER_SIZE,
-@@ -860,7 +873,9 @@ static int linflex_dma_rx_request(struct uart_port *port)
- 		return ret;
- 	}
- 
--	lfport->dma_rx_buf_virt = dma_buf;
-+	lfport->dma_rx_ring_buf.buf = dma_buf;
-+	lfport->dma_rx_ring_buf.head = 0;
-+	lfport->dma_rx_ring_buf.tail = 0;
- 	lfport->dma_rx_buf_bus = dma_bus;
- 	lfport->dma_rx_in_progress = 0;
- 
-@@ -883,10 +898,12 @@ static void linflex_dma_rx_free(struct uart_port *port)
- 
- 	dma_unmap_single(lfport->port.dev, lfport->dma_rx_buf_bus,
- 			 FSL_UART_RX_DMA_BUFFER_SIZE, DMA_FROM_DEVICE);
--	devm_kfree(lfport->port.dev, lfport->dma_rx_buf_virt);
-+	devm_kfree(lfport->port.dev, lfport->dma_rx_ring_buf.buf);
- 
- 	lfport->dma_rx_buf_bus = 0;
--	lfport->dma_rx_buf_virt = NULL;
-+	lfport->dma_rx_ring_buf.buf = NULL;
-+	lfport->dma_rx_ring_buf.head = 0;
-+	lfport->dma_rx_ring_buf.tail = 0;
- }
- 
- static int linflex_startup(struct uart_port *port)
--- 
-2.47.0
+Co-developed-by: Larisa Grigore <larisa.grigore@oss.nxp.com>
+
+Signed-off-by: Larisa Grigore <larisa.grigore@oss.nxp.com>
+
+
+See: https://docs.kernel.org/process/submitting-patches.html
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
