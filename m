@@ -2,29 +2,29 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id iC0wGh9Vk2lD3gEAu9opvQ
+	id yIYPEC5Vk2lD3gEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Feb 2026 18:34:23 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Feb 2026 18:34:38 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0366E146BC3
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Feb 2026 18:34:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CE2DA146BCA
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Feb 2026 18:34:37 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 136A7401F7
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Feb 2026 17:34:22 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id EB349402C4
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Feb 2026 17:34:36 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 800FC3F61F
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 16 Feb 2026 17:34:05 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 595C33FDB2
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 16 Feb 2026 17:34:18 +0000 (UTC)
 MIME-Version: 1.0
 From: amandahaynes109@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Mon, 16 Feb 2026 17:34:05 -0000
-Message-ID: <177126324552.289396.6458043265805940217@lists.linaro.org>
-In-Reply-To: <177082759603.3655232.14882729059140960137@lists.linaro.org>
-References: <177082759603.3655232.14882729059140960137@lists.linaro.org>
+Date: Mon, 16 Feb 2026 17:34:18 -0000
+Message-ID: <177126325836.289754.17231397575509871292@lists.linaro.org>
+In-Reply-To: <177029446525.3412559.2906664609378061484@lists.linaro.org>
+References: <177029446525.3412559.2906664609378061484@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: U4J6MJG62MGDPNLBLFFZGXMP5F5HQT5E
-X-Message-ID-Hash: U4J6MJG62MGDPNLBLFFZGXMP5F5HQT5E
+Message-ID-Hash: SMF2UGDKBFWZ4XD7PVVSSH6HQUMD5FN3
+X-Message-ID-Hash: SMF2UGDKBFWZ4XD7PVVSSH6HQUMD5FN3
 X-MailFrom: amandahaynes109@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
@@ -32,7 +32,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: How to Recover Lost or Scammed Cryptocurrency, visit OPTIMISTIC HACKER GAIUS
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/U4J6MJG62MGDPNLBLFFZGXMP5F5HQT5E/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SMF2UGDKBFWZ4XD7PVVSSH6HQUMD5FN3/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -65,7 +65,7 @@ X-Spamd-Result: default: False [0.59 / 15.00];
 	R_DKIM_NA(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,reposolsa.com:url,email.com:email,linaro.org:email]
-X-Rspamd-Queue-Id: 0366E146BC3
+X-Rspamd-Queue-Id: CE2DA146BCA
 X-Rspamd-Action: no action
 
 The team called (Reposolsa Recovery)
