@@ -2,37 +2,37 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id UNORGFRVk2lD3gEAu9opvQ
+	id sJMKG21Vk2lD3gEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Feb 2026 18:35:16 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Feb 2026 18:35:41 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id F04EF146BF4
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Feb 2026 18:35:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 07013146C03
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Feb 2026 18:35:40 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 19283402D0
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Feb 2026 17:35:15 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E8021402D7
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Feb 2026 17:35:39 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 803BA3F61F
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 16 Feb 2026 17:34:58 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 2AC9D3FDB2
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 16 Feb 2026 17:35:24 +0000 (UTC)
 MIME-Version: 1.0
 From: amandahaynes109@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Mon, 16 Feb 2026 17:34:58 -0000
-Message-ID: <177126329852.290911.8380651356172939973@lists.linaro.org>
-In-Reply-To: <177108633871.1215843.14889416107670263394@lists.linaro.org>
-References: <177108633871.1215843.14889416107670263394@lists.linaro.org>
+Date: Mon, 16 Feb 2026 17:35:24 -0000
+Message-ID: <177126332417.291601.6951552237939284191@lists.linaro.org>
+In-Reply-To: <24443e02-886e-48e2-911e-e4093d251155@kernel.org>
+References: <24443e02-886e-48e2-911e-e4093d251155@kernel.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: IB3EA2HT75HZUGQQDYRKP7QUVF2TYYH3
-X-Message-ID-Hash: IB3EA2HT75HZUGQQDYRKP7QUVF2TYYH3
+Message-ID-Hash: UQUIV6GBDZF34Y75KKI2Z4HOQB4OGCFG
+X-Message-ID-Hash: UQUIV6GBDZF34Y75KKI2Z4HOQB4OGCFG
 X-MailFrom: amandahaynes109@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: Best Crypto Recovery Services Providers; Top Firm to Retrieve Lost Cryptocurrency
+Subject: [Linaro-mm-sig] Re: [PATCH 08/13] dt-bindings: serial: fsl-linflexuart: add clock input properties
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/IB3EA2HT75HZUGQQDYRKP7QUVF2TYYH3/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UQUIV6GBDZF34Y75KKI2Z4HOQB4OGCFG/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -65,7 +65,7 @@ X-Spamd-Result: default: False [0.59 / 15.00];
 	R_DKIM_NA(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,reposolsa.com:url,email.com:email,linaro.org:email]
-X-Rspamd-Queue-Id: F04EF146BF4
+X-Rspamd-Queue-Id: 07013146C03
 X-Rspamd-Action: no action
 
 The team called (Reposolsa Recovery)
