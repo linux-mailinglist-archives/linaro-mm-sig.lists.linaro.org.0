@@ -2,40 +2,40 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WG5rGV8zk2lx2gEAu9opvQ
+	id AKBQCoMzk2lx2gEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Feb 2026 16:10:23 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Feb 2026 16:10:59 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id D2CFC1452B8
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Feb 2026 16:10:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B520D1452E8
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Feb 2026 16:10:58 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B4FD5400F6
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Feb 2026 15:10:21 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9DE2E400F6
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Feb 2026 15:10:57 +0000 (UTC)
 Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
-	by lists.linaro.org (Postfix) with ESMTPS id 5320D3F61F
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 16 Feb 2026 15:10:16 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id B0BE83F61F
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 16 Feb 2026 15:10:52 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=dzkqb9ha;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=DMougBDf;
 	spf=pass (lists.linaro.org: domain of krzk@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=krzk@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by tor.source.kernel.org (Postfix) with ESMTP id CEDF4600B0;
-	Mon, 16 Feb 2026 15:10:15 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CA8BBC116C6;
-	Mon, 16 Feb 2026 15:10:09 +0000 (UTC)
+	by tor.source.kernel.org (Postfix) with ESMTP id 46803600C4;
+	Mon, 16 Feb 2026 15:10:52 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 23D96C116C6;
+	Mon, 16 Feb 2026 15:10:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1771254615;
-	bh=PUweeCUH60125T8ScaJwvVCmsOWOZrHPj5UmkoPC0Go=;
+	s=k20201202; t=1771254652;
+	bh=OlztcMC0eVRsKXKtyYoyiNyW7I1vqat7vjnVFJhepxI=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=dzkqb9hayVH/V1Q/F2im8HKVJmcis0ytaGSjVOhb/TVYnDuMb8gs8PdDHpaC8XNPp
-	 TsgsbWBbdOwihe6yHAng8+sq2ZCg8op/JWFvWsz+/TxGdCnYAd3rzovVXEHeV9a398
-	 d/PEB9HI/Q3xFHxjqpXHOYCAtnUJ7I4wxYHcqLnjsZdh56mqHkXX5ALkFgXqUE8Iiq
-	 cs+1+73ONN6nmn3iczsrIX+967XA5OUapJhPVXAW1JZq+uJ/gytTVGKwIjaZwj/rzK
-	 zIml24L4iVHKdLRoXfAcM6rRJS9keO+GzHMHVsdutIch207Mtb0IU/ghSq4QpYtU2T
-	 Jcf0oNmEH9t4w==
-Message-ID: <24443e02-886e-48e2-911e-e4093d251155@kernel.org>
-Date: Mon, 16 Feb 2026 16:10:07 +0100
+	b=DMougBDfE6VrLTrxM2AWjOhtP8+F1grSaI1X4D2sKDw3Of5Kf3b8avUVVlRp7V7oK
+	 9OEpDUA+L7o10PhpurjlVb+Owc9oOa4RgWORdb+LXVcZaET3jf774rLR42ZlpCP10D
+	 jVi2xX4/69h+hL4PTQj4aWz5JdF/aKusUwpWeO3/dqANDIYb2yaYRBLUfGRgcvlqB9
+	 8DVADzYVcrGZ9SuJazAgIMhLiMjuVQsWAJoYDpzkF8cV5QsWYxgaLWohITTnt5R5yH
+	 HnbwBo8/yFGjF26Hxjobj+v+cdKgpc6royeyFhlDFWaFPTWzZvGPt3ooRS45J8Zxco
+	 oHa0giLnZ71kg==
+Message-ID: <be18bbef-02f1-416b-ad2a-739261b3cd97@kernel.org>
+Date: Mon, 16 Feb 2026 16:10:44 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Larisa Grigore <larisa.grigore@oss.nxp.com>, gregkh@linuxfoundation.org,
@@ -44,7 +44,7 @@ To: Larisa Grigore <larisa.grigore@oss.nxp.com>, gregkh@linuxfoundation.org,
  chester62515@gmail.com, cosmin.stoica@nxp.com, adrian.nitu@freescale.com,
  stefan-gabriel.mirea@nxp.com, Mihaela.Martinas@freescale.com
 References: <20260216150205.212318-1-larisa.grigore@oss.nxp.com>
- <20260216150205.212318-9-larisa.grigore@oss.nxp.com>
+ <20260216150205.212318-10-larisa.grigore@oss.nxp.com>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
@@ -90,18 +90,18 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  jWt87ecuHlpL3uuQ0ZZNWqHgZoQLXoqC2ZV5KrtKWb/jyiFX/sxSrodALf0zf+tfHv0FZWT2
  zHjUqd0t4njD/UOsuIMOQn4Ig0SdivYPfZukb5cdasKJukG1NOpbW7yRNivaCnfZz6dTawXw
  XRIV/KDsHQiyVxKvN73bThKhONkcX2LWuD928tAR6XMM2G5ovxLe09vuOzzfTWQDsm++9UKF a/A=
-In-Reply-To: <20260216150205.212318-9-larisa.grigore@oss.nxp.com>
+In-Reply-To: <20260216150205.212318-10-larisa.grigore@oss.nxp.com>
 X-Spamd-Bar: ---
-Message-ID-Hash: UD6U6PYPJMKZ66E4CARQTMEXMCAG66EB
-X-Message-ID-Hash: UD6U6PYPJMKZ66E4CARQTMEXMCAG66EB
+Message-ID-Hash: 42GLFZESVWT7OLSRHMPZ25E4KSHM52AY
+X-Message-ID-Hash: 42GLFZESVWT7OLSRHMPZ25E4KSHM52AY
 X-MailFrom: krzk@kernel.org
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: linux-kernel@vger.kernel.org, linux-serial@vger.kernel.org, devicetree@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, s32@nxp.com, imx@lists.linux.dev, clizzi@redhat.com, aruizrui@redhat.com, eballetb@redhat.com, echanude@redhat.com, jkangas@redhat.com, Radu Pirea <radu-nicolae.pirea@nxp.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 08/13] dt-bindings: serial: fsl-linflexuart: add clock input properties
+Subject: [Linaro-mm-sig] Re: [PATCH 09/13] dt-bindings: serial: fsl-linflexuart: add dma properties
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UD6U6PYPJMKZ66E4CARQTMEXMCAG66EB/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/42GLFZESVWT7OLSRHMPZ25E4KSHM52AY/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -116,7 +116,7 @@ X-Spamd-Result: default: False [3.49 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	R_DKIM_REJECT(1.00)[kernel.org:s=k20201202];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
@@ -136,70 +136,27 @@ X-Spamd-Result: default: False [3.49 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig,dt];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[401c8000:email,nxp.com:email,linaro.org:email]
-X-Rspamd-Queue-Id: D2CFC1452B8
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,nxp.com:email,lists.linaro.org:helo,lists.linaro.org:rdns]
+X-Rspamd-Queue-Id: B520D1452E8
 X-Rspamd-Action: no action
 
 On 16/02/2026 16:02, Larisa Grigore wrote:
 > From: Radu Pirea <radu-nicolae.pirea@nxp.com>
 > 
-> Add optional support for the two clock inputs used by the LINFlexD UART
-> controller:
-> - "lin": LIN_BAUD_CLK
-> - "ipg": LINFLEXD_CLK
+> Add 'dmas' and 'dma-names' properties to describe optional DMA support
+> for RX and TX channels in the LINFlexD UART controller.
+
+Same question as in other patch about existing devices.
+
 > 
-> The clock inputs are kept optional to maintain compatibility with the
-> S32V234 platform.
-
-Does S32V234 have the clocks? I don't understand the "maintain
-compatibility" in this context. Either you have or you have not clocks,
-which should be expressed in schema (: false, see example schema).
-
+> This allows the device tree to specify DMA channels used for UART data
+> transfers. If not specified, the driver will fall to interrupt-based
+> operations.
 > 
 > Signed-off-by: Radu Pirea <radu-nicolae.pirea@nxp.com>
 > Co-developed-by: Larisa Grigore <larisa.grigore@oss.nxp.com>
 > Signed-off-by: Larisa Grigore <larisa.grigore@oss.nxp.com>
 > ---
->  .../bindings/serial/fsl,s32-linflexuart.yaml   | 18 ++++++++++++++++++
->  1 file changed, 18 insertions(+)
-> 
-> diff --git a/Documentation/devicetree/bindings/serial/fsl,s32-linflexuart.yaml b/Documentation/devicetree/bindings/serial/fsl,s32-linflexuart.yaml
-> index 4171f524a928..885f0b1b3492 100644
-> --- a/Documentation/devicetree/bindings/serial/fsl,s32-linflexuart.yaml
-> +++ b/Documentation/devicetree/bindings/serial/fsl,s32-linflexuart.yaml
-> @@ -34,6 +34,14 @@ properties:
->    interrupts:
->      maxItems: 1
->  
-> +  clocks:
-> +    maxItems: 2
-> +
-> +  clock-names:
-> +    items:
-> +      - const: lin
-> +      - const: ipg
-> +
->  required:
->    - compatible
->    - reg
-> @@ -48,3 +56,13 @@ examples:
->          reg = <0x40053000 0x1000>;
->          interrupts = <0 59 4>;
->      };
-> +
-> +  - |
-> +    serial@401c8000 {
-> +        compatible = "nxp,s32g2-linflexuart",
-> +                     "fsl,s32v234-linflexuart";
-> +        reg = <0x401C8000 0x3000>;
-> +        interrupts = <0 82 1>;
-> +        clocks = <&clks 14>, <&clks 13>;
-> +        clock-names = "lin", "ipg";
-
-Just add the clocks to existing example. No need for new example for
-each new property.
-
-> +    };
 
 
 Best regards,
