@@ -2,36 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +GS6EOqvlGkPGgIAu9opvQ
+	id 6K9OCvmvlGkPGgIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 17 Feb 2026 19:14:02 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 17 Feb 2026 19:14:17 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id CDFD514EF77
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 17 Feb 2026 19:14:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B963614EF7E
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 17 Feb 2026 19:14:16 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B4191402B0
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 17 Feb 2026 18:14:00 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C8EDE402D8
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 17 Feb 2026 18:14:15 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 56868401EB
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 17 Feb 2026 18:13:46 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 424C3401E1
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 17 Feb 2026 18:13:49 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-From: aubreyasher46@gmail.com
+From: masoncaleb2a@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Tue, 17 Feb 2026 18:13:46 -0000
-Message-ID: <177135202635.1435791.15407518428023984036@lists.linaro.org>
+Date: Tue, 17 Feb 2026 18:13:49 -0000
+Message-ID: <177135202926.1436364.15993119627142584271@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: OB2QK2P3KBO7LDSSSSJM6MJWNMUSDS4D
-X-Message-ID-Hash: OB2QK2P3KBO7LDSSSSJM6MJWNMUSDS4D
-X-MailFrom: aubreyasher46@gmail.com
+Message-ID-Hash: 4NEOUGEUPEJ4D7DNTDJGWVQAOK5W5OYG
+X-Message-ID-Hash: 4NEOUGEUPEJ4D7DNTDJGWVQAOK5W5OYG
+X-MailFrom: masoncaleb2a@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] World Best Cryptocurrency Recovery Service Top Review Autopsy Mainnet Recovery
+Subject: [Linaro-mm-sig] World Best Cryptocurrency Recovery Agency Top Review Autopsy Mainnet Recovery
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OB2QK2P3KBO7LDSSSSJM6MJWNMUSDS4D/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4NEOUGEUPEJ4D7DNTDJGWVQAOK5W5OYG/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -54,7 +54,7 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	FROM_NO_DN(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	FREEMAIL_FROM(0.00)[gmail.com];
-	FROM_NEQ_ENVFROM(0.00)[aubreyasher46@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_NEQ_ENVFROM(0.00)[masoncaleb2a@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_NONE(0.00)[];
@@ -63,8 +63,8 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	R_DKIM_NA(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,autopsymainnetsolutions.com:url,autopsymainnetsolutions.com:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,autospyrec.site:url,ic3.gov:url]
-X-Rspamd-Queue-Id: CDFD514EF77
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,ic3.gov:url,autopsymainnetsolutions.com:url,autopsymainnetsolutions.com:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,autospyrec.site:url]
+X-Rspamd-Queue-Id: B963614EF7E
 X-Rspamd-Action: no action
 
 TG9zaW5nIGNyeXB0b2N1cnJlbmN5IHRvIHNjYW1zLCBwaGlzaGluZywgZmFrZSBpbnZlc3RtZW50
