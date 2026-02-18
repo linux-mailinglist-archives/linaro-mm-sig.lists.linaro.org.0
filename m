@@ -2,75 +2,75 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id IBiRE7IS4WnoogAAu9opvQ
+	id qL7/B74S4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:47:46 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:47:58 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id F4095411F84
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:47:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DA3AA411F8C
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:47:57 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 1539D40511
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:47:45 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E66253F807
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:47:56 +0000 (UTC)
 Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-	by lists.linaro.org (Postfix) with ESMTPS id DCF40402B1
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 18 Feb 2026 17:15:01 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 227AC402B1
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 18 Feb 2026 17:15:05 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=avf7wLd1;
+	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=IUYGgHHC;
 	spf=pass (lists.linaro.org: domain of echanude@redhat.com designates 170.10.129.124 as permitted sender) smtp.mailfrom=echanude@redhat.com;
 	dmarc=pass (policy=quarantine) header.from=redhat.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1771434901;
+	s=mimecast20190719; t=1771434904;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=VXUqFvDgr/GgZzXRZIRhwXqtA/ygCg24XF2XyoDsQa8=;
-	b=avf7wLd12v+orlKzEG9kpaNixDaX0SD0XOpY39OvVRaC2G4ElReFEGS7QVoHCXpKg40QJx
-	cBN/XBrr6tYHcj/GxmRyuxNIIlIle8TxFpyIucQs35zNhpUlEb9GVZMETmwXtlu9ZCW3gi
-	KYkDibxtfdNol2Cn/P1TBjwo0rqbhGI=
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
- [209.85.222.200]) by relay.mimecast.com with ESMTP with STARTTLS
+	bh=42FtUK8DRzgqq7HgnylfgEXKEQfWmOW3Tw8CmlqQgJI=;
+	b=IUYGgHHCy36LGtPIudFHAmrLD5P/hAFxd0EXCCklHj7xF80ceN6eobU5zsoBd96uBJZvqL
+	LArhMJHbz4g3SJf1VIripW36Ju/vSLQGl5k3ZLSxdWOLX6SsC6slDl3vwTx5cVtVEbu+0R
+	T/HBjaZbtyiwSKTvT6U87cXSLi0j5M4=
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
+ [209.85.222.199]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-47-ijyBmIfoOTK0zndL-Sa07A-1; Wed, 18 Feb 2026 12:15:00 -0500
-X-MC-Unique: ijyBmIfoOTK0zndL-Sa07A-1
-X-Mimecast-MFC-AGG-ID: ijyBmIfoOTK0zndL-Sa07A_1771434900
-Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-8c70cff1da5so11042485a.2
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 18 Feb 2026 09:15:00 -0800 (PST)
+ us-mta-41-UcTF_UF3MUWFtsKsiSAg_A-1; Wed, 18 Feb 2026 12:15:03 -0500
+X-MC-Unique: UcTF_UF3MUWFtsKsiSAg_A-1
+X-Mimecast-MFC-AGG-ID: UcTF_UF3MUWFtsKsiSAg_A_1771434903
+Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-8c70e610242so14655285a.2
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 18 Feb 2026 09:15:03 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771434900; x=1772039700;
+        d=1e100.net; s=20230601; t=1771434903; x=1772039703;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=VXUqFvDgr/GgZzXRZIRhwXqtA/ygCg24XF2XyoDsQa8=;
-        b=toJTHaNgeBlSZT9QDtD9XvuPpbLXo1mpEJ3LswvlKJoLtRxQEo3wPB7CylWEvIbBHN
-         sToyUChA0/HpZuMT8PFJiuZGxLgJMUBaaGLIDJmgAcvfJY9wEET1VNf7fT+cPxAMx/np
-         tiRjj1OtpOxz2odm3e0n2AiDTpSwqqLdQ++oUM+tq7ner5K+qbESe+nrDcdXhAB8nqoJ
-         KgupFpND8KmPBmDMQHjOM2ypnqoCkjNG0J7Q1SGFBNWhct3F32nbe2ZvHLUG0DfW3sbv
-         002bSt2O1x3AgWZf/qOtXqzSfzUeP5Xqi6l5Gb5J6s6Ve/nxRMsxZh7/pYX71T1X4tJd
-         6W9Q==
-X-Forwarded-Encrypted: i=1; AJvYcCXhvp340CaffxwdMOvx6r6Xy4SH0qrkVEhT/a8wj7fxc8UQ/egmpjOHyPrup+FrfZy0u7ycoA9Mp90L+aNZ@lists.linaro.org
-X-Gm-Message-State: AOJu0YwtfYQCsq5NLrC2dnwoagzcgAHMxSltRFww6UZLMb3m78jXPOUq
-	zc1APIyPeQqEAbz1tvj28XcOIL072ElfxBbGmyTqs6csemg0zxV+RD2Rm3HCGr0rSl71frJFzNA
-	HI9IXpcwpT7tsoN+gcuCf1SN07owVNub1rXZVmRO5nP1u6W1nAETdt85c1NJh6xw778Ct
-X-Gm-Gg: AZuq6aKLLRcTF6XzM0ZFTVeLfxp/8MEK6c6HKz0O8sqhkuWC8tiUHC1sSsWfjDcAQ6+
-	Apm0K7DELTvmNENhEvxc940iUK1RsSagyEGBxmMyssHNbIdfP3r2VkOdRwCnicxSuqBycO5CIHT
-	6urlclBG23mZUQrgjWt0/wK6LqmDFVbhO1Rib1UsjNDEduGCeH/OaA2bZd7X6LHaXVXMf4fj365
-	obBWNvNBm09VgAuSXFQ8mAQ6BLNPy/FoYWIp5Gv1Vyk0mWS6n3eJhPgzMfVA9FunYXmMycZc6Bw
-	dlUqtiEBuzlbS6ZfU2cjtV9LBAzioSxhaT6oRLeTV3kOaIoo2kAg3Bmx1Xz+0fyWZabRL8zzMok
-	X/z846NSf+ds0lqySkD1+gTsZUCBBvaANoz5bEViuD7pFXsU7tJHVIfFTnY6r1o4=
-X-Received: by 2002:a05:620a:7081:b0:8c7:fdc:e871 with SMTP id af79cd13be357-8cb408629c4mr2086848385a.34.1771434899694;
-        Wed, 18 Feb 2026 09:14:59 -0800 (PST)
-X-Received: by 2002:a05:620a:7081:b0:8c7:fdc:e871 with SMTP id af79cd13be357-8cb408629c4mr2086841985a.34.1771434899177;
-        Wed, 18 Feb 2026 09:14:59 -0800 (PST)
+        bh=42FtUK8DRzgqq7HgnylfgEXKEQfWmOW3Tw8CmlqQgJI=;
+        b=NUq0dinTyhhnGcjaGX/Q85euSE6CQTio8zXD8yMwP+sOXl3Y/1Aod2xm0rHNFoiNoi
+         Vxz4kl4FNV+EtgpLluJa8Jb/EcReqOplHc2OqxcHYw3OE5ezF/pGe6AfKdrsdGly5rUT
+         Q8okRE6+eX0uCNoKscQ0hCFaDKHT+qhR/q1gl2TBqQHmsgb98y7Y+RFsGhaQd2kjOpEy
+         f5IK/Dn+PLkczAhMKzaocQ5gB3JMAPxeMEhcrRMOvmRVXc8e4HH+ZAL3sjoOdJhX0NGn
+         ro24T6Vb6U3TRBi8qE3VhiZqEbdQV/Ag2rsiQTJXfp1vzYW/MuR5TuLo53THgDiEOZOU
+         pDLA==
+X-Forwarded-Encrypted: i=1; AJvYcCXIHnZQLND26Eg+cn7HtjJso4/6LmWnZj4AkbTdzoFKhZj0rgrWaji4m7mNgNlU8DBdRzXXy/SncEmE9txY@lists.linaro.org
+X-Gm-Message-State: AOJu0YzcVOfcFYt0C4q6AirHilaPA+IXj5oshaNZtS5K1njSRWJZakJq
+	DnqY/we0EefZpDNoUFDAVz9W/L5XajiIYk1rpHq3WJbp7sp4s6gYZa4sgtWzBVTEd8zVvfYCfLE
+	vlISMismLp0+82JAFK1CqBfbF6KQj5lN1QjXodWGSJ5sAzsVQKiYBuUnzkSEa09LMMsjE
+X-Gm-Gg: AZuq6aIBzg7HDsKMKZI3PgbNKgiVl2ihfJkFV0XJJt5J0fbEnoM66Fq06Dccy32UWKb
+	phRUXsm8XHvd9H/kVpEfLaUkMW5JzT/F7izs1Rl7b26HfPmK7rilAoQNQALykeG1hAkwkfg1Cs1
+	XCwh/UNPhcKOrBOV3zNqjEkkq7qa/rTe60iXGuOnxGGQN+kQu2Y6tY534g0+ZsV8aDDmcFjUwU1
+	DDM6d5Zet1Poi8Nc8rjrg2cyKjBo9SxV6Am9IN4fuBEpXLrb287hrWEiUcc2+n65XevGQ4mdx6p
+	wdWq0ObrsuY7XVnVrS35u8G8TYWRG44GHZgZal/XfoUmXiQYwAMt2n8DToUrESsP7c1FWjwMViD
+	WGmW6NVClhg/LbH59HO3ShUdTuftuINCUx3a6YUzhlm2i/TFphA7h/PoUWMcFuIM=
+X-Received: by 2002:a05:620a:294b:b0:8ca:2cf9:819c with SMTP id af79cd13be357-8cb423c2500mr1979540485a.40.1771434902629;
+        Wed, 18 Feb 2026 09:15:02 -0800 (PST)
+X-Received: by 2002:a05:620a:294b:b0:8ca:2cf9:819c with SMTP id af79cd13be357-8cb423c2500mr1979531285a.40.1771434901901;
+        Wed, 18 Feb 2026 09:15:01 -0800 (PST)
 Received: from localhost (pool-100-17-19-56.bstnma.fios.verizon.net. [100.17.19.56])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-89949b3d543sm57039066d6.16.2026.02.18.09.14.58
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-8cb3a3e9adesm1523117985a.49.2026.02.18.09.14.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 18 Feb 2026 09:14:58 -0800 (PST)
+        Wed, 18 Feb 2026 09:15:00 -0800 (PST)
 From: Eric Chanudet <echanude@redhat.com>
-Date: Wed, 18 Feb 2026 12:14:10 -0500
+Date: Wed, 18 Feb 2026 12:14:11 -0500
 MIME-Version: 1.0
-Message-Id: <20260218-dmabuf-heap-cma-dmem-v2-1-b249886fb7b2@redhat.com>
+Message-Id: <20260218-dmabuf-heap-cma-dmem-v2-2-b249886fb7b2@redhat.com>
 References: <20260218-dmabuf-heap-cma-dmem-v2-0-b249886fb7b2@redhat.com>
 In-Reply-To: <20260218-dmabuf-heap-cma-dmem-v2-0-b249886fb7b2@redhat.com>
 To: Sumit Semwal <sumit.semwal@linaro.org>,
@@ -86,21 +86,21 @@ To: Sumit Semwal <sumit.semwal@linaro.org>,
  Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>
 X-Mailer: b4 0.14.2
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: lGU_f5RzgeZy6W4Q9Bb7HJwIqvxLnqu8mco0jXnEzAg_1771434900
+X-Mimecast-MFC-PROC-ID: n9nS3kjk54JmRd0v5o2C2bnbM_c_vprom83oTCplzi0_1771434903
 X-Mimecast-Originator: redhat.com
 X-Spamd-Bar: ----
 X-MailFrom: echanude@redhat.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: SCYHF4DCU4KQ7QJNEPQH5FMWXXMZQNB7
-X-Message-ID-Hash: SCYHF4DCU4KQ7QJNEPQH5FMWXXMZQNB7
+Message-ID-Hash: 5SXG4YKJFRYCES4GA3HACT6QTP24OK62
+X-Message-ID-Hash: 5SXG4YKJFRYCES4GA3HACT6QTP24OK62
 X-Mailman-Approved-At: Thu, 16 Apr 2026 16:40:31 +0000
 CC: linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, Maxime Ripard <mripard@redhat.com>, Albert Esteve <aesteve@redhat.com>, linux-mm@kvack.org, Eric Chanudet <echanude@redhat.com>, Maxime Ripard <mripard@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v2 1/3] cma: Register dmem region for each cma region
+Subject: [Linaro-mm-sig] [PATCH v2 2/3] cma: Provide accessor to cma dmem region
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SCYHF4DCU4KQ7QJNEPQH5FMWXXMZQNB7/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5SXG4YKJFRYCES4GA3HACT6QTP24OK62/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -131,83 +131,66 @@ X-Spamd-Result: default: False [2.99 / 15.00];
 	FROM_NEQ_ENVFROM(0.00)[echanude@redhat.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.887];
+	NEURAL_HAM(-0.00)[-0.901];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: F4095411F84
+X-Rspamd-Queue-Id: DA3AA411F8C
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 From: Maxime Ripard <mripard@kernel.org>
 
-Now that the dmem cgroup has been merged, we need to create memory
-regions for each allocator devices might allocate DMA memory from.
+Consumers of the CMA API will have to know which CMA region their device
+allocate from in order for them to charge the memory allocation in the
+right one.
 
-Since CMA is one of these allocators, we need to create such a region.
-CMA can deal with multiple regions though, so we'll need to create a
-dmem region per CMA region.
+Let's provide an accessor for that region.
 
 Signed-off-by: Maxime Ripard <mripard@kernel.org>
 Signed-off-by: Eric Chanudet <echanude@redhat.com>
 ---
- mm/cma.c | 13 ++++++++++++-
- mm/cma.h |  3 +++
- 2 files changed, 15 insertions(+), 1 deletion(-)
+ include/linux/cma.h | 9 +++++++++
+ mm/cma.c            | 7 +++++++
+ 2 files changed, 16 insertions(+)
 
+diff --git a/include/linux/cma.h b/include/linux/cma.h
+index 62d9c1cf632652489ccd9e01bf1370f2b1f3c249..8ece66c35e9e640b98db4b24a9bd118ad07ec082 100644
+--- a/include/linux/cma.h
++++ b/include/linux/cma.h
+@@ -77,4 +77,13 @@ static inline bool cma_validate_zones(struct cma *cma)
+ }
+ #endif
+ 
++#if IS_ENABLED(CONFIG_CGROUP_DMEM)
++struct dmem_cgroup_region *cma_get_dmem_cgroup_region(struct cma *cma);
++#else /* CONFIG_CGROUP_DMEM */
++static inline struct dmem_cgroup_region *cma_get_dmem_cgroup_region(struct cma *cma)
++{
++	return NULL;
++}
++#endif /* CONFIG_CGROUP_DMEM */
++
+ #endif
 diff --git a/mm/cma.c b/mm/cma.c
-index 813e6dc7b0954864c9ef8cf7adc6a2293241de47..78016647d512868cd87bc2c1a52dd2295acaaf01 100644
+index 78016647d512868cd87bc2c1a52dd2295acaaf01..c8b0de1da3e71bd6b8ab749ab58eb27446a1657e 100644
 --- a/mm/cma.c
 +++ b/mm/cma.c
-@@ -25,6 +25,7 @@
- #include <linux/string_choices.h>
- #include <linux/log2.h>
- #include <linux/cma.h>
-+#include <linux/cgroup_dmem.h>
- #include <linux/highmem.h>
- #include <linux/io.h>
- #include <linux/kmemleak.h>
-@@ -142,6 +143,15 @@ static void __init cma_activate_area(struct cma *cma)
- 	int allocrange, r;
- 	struct cma_memrange *cmr;
- 	unsigned long bitmap_count, count;
-+	struct dmem_cgroup_region *region;
-+
-+	region = dmem_cgroup_register_region(cma_get_size(cma), "cma/%s", cma->name);
-+	if (IS_ERR(region))
-+		goto out;
-+
-+#ifdef CONFIG_CGROUP_DMEM
-+	cma->dmem_cgrp_region = region;
-+#endif
+@@ -53,6 +53,13 @@ const char *cma_get_name(const struct cma *cma)
+ 	return cma->name;
+ }
  
- 	for (allocrange = 0; allocrange < cma->nranges; allocrange++) {
- 		cmr = &cma->ranges[allocrange];
-@@ -183,7 +193,8 @@ static void __init cma_activate_area(struct cma *cma)
- cleanup:
- 	for (r = 0; r < allocrange; r++)
- 		bitmap_free(cma->ranges[r].bitmap);
--
-+	dmem_cgroup_unregister_region(region);
-+out:
- 	/* Expose all pages to the buddy, they are useless for CMA. */
- 	if (!test_bit(CMA_RESERVE_PAGES_ON_ERROR, &cma->flags)) {
- 		for (r = 0; r < allocrange; r++) {
-diff --git a/mm/cma.h b/mm/cma.h
-index c70180c36559c295d837725e26596cf546cd8b7e..e91bedcb17be8c9e0d31aea1b67c0db36315536d 100644
---- a/mm/cma.h
-+++ b/mm/cma.h
-@@ -62,6 +62,9 @@ struct cma {
- 	unsigned long flags;
- 	/* NUMA node (NUMA_NO_NODE if unspecified) */
- 	int nid;
-+#ifdef CONFIG_CGROUP_DMEM
-+	struct dmem_cgroup_region *dmem_cgrp_region;
-+#endif
- };
- 
- enum cma_flags {
++#if IS_ENABLED(CONFIG_CGROUP_DMEM)
++struct dmem_cgroup_region *cma_get_dmem_cgroup_region(struct cma *cma)
++{
++	return cma->dmem_cgrp_region;
++}
++#endif /* CONFIG_CGROUP_DMEM */
++
+ static unsigned long cma_bitmap_aligned_mask(const struct cma *cma,
+ 					     unsigned int align_order)
+ {
 
 -- 
 2.52.0
