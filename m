@@ -2,244 +2,272 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id kMIJMHcS4WnoogAAu9opvQ
+	id 8B9oBX0S4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:46:47 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:46:53 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5AEDF411F3A
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:46:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B5167411F49
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:46:52 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7653940514
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:46:46 +0000 (UTC)
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-	by lists.linaro.org (Postfix) with ESMTPS id E989A3F806
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 18 Feb 2026 10:56:57 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D33B5404E2
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:46:51 +0000 (UTC)
+Received: from PA4PR04CU001.outbound.protection.outlook.com (mail-francecentralazon11013016.outbound.protection.outlook.com [40.107.162.16])
+	by lists.linaro.org (Postfix) with ESMTPS id ED5273F7EC
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 18 Feb 2026 11:59:10 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=cU24d4+r;
-	dkim=pass header.d=redhat.com header.s=google header.b="W6aLzzh/";
-	spf=pass (lists.linaro.org: domain of mripard@redhat.com designates 170.10.129.124 as permitted sender) smtp.mailfrom=mripard@redhat.com;
-	dmarc=pass (policy=quarantine) header.from=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1771412217;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=g5EhFzRS9kh8aYP/2UGoHhJQm5CJn7dpEnQsAb/ZMSE=;
-	b=cU24d4+rQUm2uGbHlnP1g2cSEJgrTg4WyjJfNexcjCJ3rBDQ1yGVHBo0QKRZ7EyHF51VOK
-	m6rjaJjCyeJPhiVxPMqB+NN95jNMLeMcxdgEefAekypN308VxETZ8WGXPiOVxUHZ7j9Bwy
-	mqUdLzBxddSdCCb4IhZsrkuHBpoCnAg=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-589-N1CbxenOMVKt6YkvJ_nSSA-1; Wed, 18 Feb 2026 05:56:55 -0500
-X-MC-Unique: N1CbxenOMVKt6YkvJ_nSSA-1
-X-Mimecast-MFC-AGG-ID: N1CbxenOMVKt6YkvJ_nSSA_1771412214
-Received: by mail-wr1-f69.google.com with SMTP id ffacd0b85a97d-435a2de6ec0so3564839f8f.0
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 18 Feb 2026 02:56:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1771412214; x=1772017014; darn=lists.linaro.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=g5EhFzRS9kh8aYP/2UGoHhJQm5CJn7dpEnQsAb/ZMSE=;
-        b=W6aLzzh/X4B/WIOoIjsOY8dINyNndzSFnaytfV5TFaNI8Ld7vaWa20An1CV4a1LepA
-         uQCY8xqzG0g+OyayB6oX+GlaK0zlRx9/Z4QOCy2tmwNJfSYlNS76VzYRYjyc6PA9/tN9
-         t6Nm9cglbLzLk63xFmWHBHTmGY49bmfPWKRKlrdnbf24rnYkxIzNv+N8378nhWHHCBx+
-         Igmue/mvBkB2Tj9vnlp+5ba9goVIgNR+nzqNP2uc6cu/TAmfeAbRiv9BZSukE/3jIPBE
-         7kqO3ds+p2kS0xZZP/zScvyEcxme0XZgZ0Hx2QynhKdTWWyHwHo+rxtaM4ZvneQWqyQk
-         H6Xg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771412214; x=1772017014;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=g5EhFzRS9kh8aYP/2UGoHhJQm5CJn7dpEnQsAb/ZMSE=;
-        b=rM/hl+4pdo6cFNqDbVaIMQlu80oWlCmdEqpyQUBjwh8ROVCy9Mp1Fft+JxRsnfE39X
-         OFc9XNtnaUDaDXcAQK+agidMYEi1TtjYQr3m56couQnrKEmgTeWMprz/vFq7WXEPwo9u
-         fBDh3E0xqbmHapqIjIcAbp8z/wj+pD8p1OEWp4iYW80Mk3ovGGEPNyA6CYW0/MIf/536
-         LcJooFgpu8KZRJONaPXke79lqmWkOEAoBjg5zEhBpZzriyyxuEtEsf3BR/+jX9gRCq1V
-         kbzi3X8QU75o1WG16aaHUq4q1/L8wHnCwEP9+juochdk3fMqWMDdwM6s3I14SuN5dREe
-         DCKA==
-X-Forwarded-Encrypted: i=1; AJvYcCXWlLCf1Ir23VbMmXjT2DlI53boXeZs16uRSfPwMdIQhYDve+/Vwp0s+45Oad63yHeYPoTZ26SrlVtv0e1i@lists.linaro.org
-X-Gm-Message-State: AOJu0YxwB7TBkLpbxPy+dqKzSwXt3a0Nhc3fwQ2ZtldMRR5KyFAsuHWK
-	a+qM/tmDZ/wQC787YI7f5Td4dvv1emY+8MiXB525bAlh93lfLGQ/8R3ykRKYky8zKETsMoT2Prw
-	EX45Koa7IBvHr3MqUJSlM6H9wx44JbXuLmp7cdURmNK43Jh/h72pq4PPQruHLvtn+jedH
-X-Gm-Gg: AZuq6aI3gDcQ//aZWJWtIjPFAIomHps5c0JRXImuQVTdunTgeZK8NP9EuNzl0O96QXQ
-	r/BQzxYtDBfWkqPz/IhAocp6gNHymGDd+Jxx4hDdU1j0dHvbICFkgQ8uxFfNfb7n/kV3QknjA/7
-	Vmvf0BYwV994FOpdct/D+PeqEtaEzrGw+CCFFXA2Px7V1ZECMlZu7fjAPwT3woPTtB7QYfWmJmA
-	DkheuonMvUFQIlkkVcOojnyBatILdldVPbIjHXIvfykgAr8OTESRxcaqPbe6uvG/BMZhutFvxjk
-	CYD9Dl/p15AVdfv48aoY7O8/WzKPVDfZogUqDFD8/JdbSh3tgrDxaWWV7YuevZSB7+J/7nTmNg=
-	=
-X-Received: by 2002:a05:6000:2c0c:b0:437:8ff8:fea3 with SMTP id ffacd0b85a97d-4379db66593mr24384200f8f.21.1771412214098;
-        Wed, 18 Feb 2026 02:56:54 -0800 (PST)
-X-Received: by 2002:a05:6000:2c0c:b0:437:8ff8:fea3 with SMTP id ffacd0b85a97d-4379db66593mr24384146f8f.21.1771412213558;
-        Wed, 18 Feb 2026 02:56:53 -0800 (PST)
-Received: from localhost ([2a01:e0a:b25:f902::ff])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43796abc85csm40735722f8f.22.2026.02.18.02.56.52
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 18 Feb 2026 02:56:53 -0800 (PST)
-Date: Wed, 18 Feb 2026 11:56:52 +0100
-From: Maxime Ripard <mripard@redhat.com>
-To: Thierry Reding <thierry.reding@kernel.org>
-Message-ID: <20260218-magnificent-flying-coucal-a4f1c0@houat>
-References: <20260122161009.3865888-1-thierry.reding@kernel.org>
- <20260122161009.3865888-8-thierry.reding@kernel.org>
- <20260123-slim-seal-of-luxury-bdb58b@houat>
- <aY3oyMhkbxhgMbfi@orome>
+	dkim=pass header.d=NXP1.onmicrosoft.com header.s=selector1-NXP1-onmicrosoft-com header.b="OlSgX/mL";
+	spf=pass (lists.linaro.org: domain of larisa.grigore@oss.nxp.com designates 40.107.162.16 as permitted sender) smtp.mailfrom=larisa.grigore@oss.nxp.com;
+	arc=pass ("microsoft.com:s=arcselector10001:i=1");
+	dmarc=pass (policy=none) header.from=nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=KcnRY61oF7go2I4ihLiIT5d6V2oQYZfjYXS41ewVP13s6jAVPLld6BMWepBJuwH4GUeZ3peQ2Ske2jPQbdd5yQY7UIf716gJMRoAycfGN/tsYk5SLEWazVA1/ERs1sERvMbEpSPC8QHc8bQFXduBli7tXN9wCUTqXKS6aVoxtu7wfIdka9ZyGM+Cx9hJhQdoLqXKRJbxsQ/SK7DUuZ/TSo9NujolRL1Q5sDQt+EADseC4QCphHM7iI1byBeecIMOstVokIhRZl1ZKrf7syjeNrnhy+UalGtMKEPf4pTKf415Q0qTrYKGFpxn2ltI7Vav3HwmgLuo0KiZlTzBR4jcBg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=M7X/MJKp8/PIf82tpGKdqdN3yg6js2Df5FS4DxXoRgs=;
+ b=rS9pRE78X2O62LkEJy53StEl+jOgPnoye//XuqAbMCIJ1mW/vUcrtEOGgjF9o8LiG+4WEf4qIegFR2+nl6OGGjznx5eBvR1A0TsWxB30fvtHiQqz1rZZOKz0AM8wadi3DqzdY2kP7G1S6aqtAEjUeY4fhnv7y2EgPx86EuFQXIH7b6GXcNasurzRhnMK0QJ4lyjH88cuN6hGq6tXGGj7Ax77nN0x8iJopI6za/u6u2kjvb9aaHRifFuTCqKDFZ4N3u/7CCy1W1zdjSGsGFkHX7zEcjPm+n3U/TKbppDITa+C/2hHS+bxV7B2X1ICB8ffAFld/02KhB0RR1CPBNVrZg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=M7X/MJKp8/PIf82tpGKdqdN3yg6js2Df5FS4DxXoRgs=;
+ b=OlSgX/mL/kIq+Jd1x5XegL/5a8LHqMQiMB+c6T9GpjqJmGpSMEtlf1/18VU2SuCPUGYgz9jLJTye1O/uQU0mN715HKJ58MAu8QxyU7xKgohsYmQeclRtbkr5yqKJOrkxViM8kHybUudjf0bcnngFwNqYUX1KMrPnCLx7tm6IgwU1it/02G4O5hasFYjqf33V3v/jqwPLGmpLMk39xlbGtIiq2FlSf7A/McetEv4H65/Fbaxzuuusgr8tqEZJ58MFlNwAYfFIyk34V8cEFTc5SL1D87acJcikgmmHa2Obx1IMOXtW8407kScFTyXmF4F/ZH4wAhz0/VNoi3iA7dgLFw==
+Received: from PA4PR04MB9224.eurprd04.prod.outlook.com (2603:10a6:102:2a3::5)
+ by AS8PR04MB8181.eurprd04.prod.outlook.com (2603:10a6:20b:3f5::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.13; Wed, 18 Feb
+ 2026 11:59:07 +0000
+Received: from PA4PR04MB9224.eurprd04.prod.outlook.com
+ ([fe80::8e54:4d38:df79:fd63]) by PA4PR04MB9224.eurprd04.prod.outlook.com
+ ([fe80::8e54:4d38:df79:fd63%7]) with mapi id 15.20.9632.010; Wed, 18 Feb 2026
+ 11:59:07 +0000
+Message-ID: <0c02809d-2108-4261-ae36-c68cc7a169e1@oss.nxp.com>
+Date: Wed, 18 Feb 2026 13:58:58 +0200
+User-Agent: Mozilla Thunderbird
+To: Frank Li <Frank.li@nxp.com>
+References: <20260216150205.212318-1-larisa.grigore@oss.nxp.com>
+ <20260216150205.212318-2-larisa.grigore@oss.nxp.com>
+ <aZN7Hx_aK4ta1ksL@lizhi-Precision-Tower-5810>
+Content-Language: en-US
+From: Larisa Ileana Grigore <larisa.grigore@oss.nxp.com>
+In-Reply-To: <aZN7Hx_aK4ta1ksL@lizhi-Precision-Tower-5810>
+X-ClientProxiedBy: AS4P189CA0045.EURP189.PROD.OUTLOOK.COM
+ (2603:10a6:20b:5dd::17) To PA4PR04MB9224.eurprd04.prod.outlook.com
+ (2603:10a6:102:2a3::5)
 MIME-Version: 1.0
-In-Reply-To: <aY3oyMhkbxhgMbfi@orome>
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA4PR04MB9224:EE_|AS8PR04MB8181:EE_
+X-MS-Office365-Filtering-Correlation-Id: 995bfb67-9f64-47c2-e9ec-08de6ee51eb7
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|1800799024|7416014|376014|366016|19092799006;
+X-Microsoft-Antispam-Message-Info: 
+	=?utf-8?B?UTVrVkVaUm9JZngvL3lPZytYdU11RnFsM2tXaHoxY3lVMGRZT3QrS3N5ZjNr?=
+ =?utf-8?B?a0drakZXUnNVa3Y5Mnlvc1NyWm5INEpWRURHdFNDa2JoVDV5UVBwZzZSNzdi?=
+ =?utf-8?B?YkFvTWNhWWxSMFBEWWJpSXYyRVpVODliLzJ5OVczN0RXREg0SlJsN1Z6UVVJ?=
+ =?utf-8?B?ZXYyandNT2JrNUZhRWxTcFhNYkJibVEvR0VyNFZwbnpNeUJjOW80Y3RzQUxi?=
+ =?utf-8?B?VzkxTnB4eXo1eHA2OTFzYmJZQVhtckVja0I1a2dCK2crVXZONjluYWxJY1li?=
+ =?utf-8?B?K0J1ejE0WFBtaFUvVStnT1ZuSXYySy9adE1MQTdTTUtieDd1WUhmS0phNlNT?=
+ =?utf-8?B?VldXYURsQ1IvNUx3bXZ1SU5Bek5UV05GS3NuNEJTVDRTcVZyU2l3UkdyNDRs?=
+ =?utf-8?B?LzEyVjdTSzJVRnNvTWMyUzg3dHBYVVhlYmxHMTdqT25FYXNoMWJYQ3UvcjNa?=
+ =?utf-8?B?a3U4TEpYU1o3cTZab1FJZTcyeHlnTitzMHJoRkJEZjRwTEJabkRaaW94T0Qx?=
+ =?utf-8?B?NFlDVXFsaGZWck1QNTluUUVqTDFXMy9VczFlSkV3UDd4L1lzT1NkZ1BQbTRl?=
+ =?utf-8?B?N0F5OWc3V2k0WVMwbUNnVzRpNWhiNDkrSVd3LzhTMzY4TU5scVZIZG51L1d1?=
+ =?utf-8?B?aDN5Q1pOaWhGaVlPczZ5dTB2QjNjRUh0WldMVUVGY3lkQ2V3U1ZSaDVBb2pD?=
+ =?utf-8?B?M3dsY0toUTZzamxtZWpaT2hkK1FkaWtFLzUrcHc4UnROWmg4NHVtYVVqZXJX?=
+ =?utf-8?B?dWJnamI1ajY5blljOTJXbDZjUTRqOXBlbHR5aGNaOG9vNXVrMkRaMThKcW9v?=
+ =?utf-8?B?QXN0ZkdYTHhPUUZ5RisxV0JEU1Q3aHc0cFEzTFBGNDJGZUR2dFZMdnptTEJO?=
+ =?utf-8?B?RjNNSDdPZkJzVDdPbTFMYWRoa2E1OEFTWmh3SGRLWXlPT1FsbHF2TlA0VEhh?=
+ =?utf-8?B?N0hzZ1gwZEt2M1I3emYySTFGMW1wSEVLQytqM3YvdXRWOEN6NDhjTkdsM0Fy?=
+ =?utf-8?B?VmxUVFkvL1pSbnJLNmNmTW5WL1IxVGNQRFdweFhNMjQ1ZVE2Ynk5amkxVU1i?=
+ =?utf-8?B?UVlRZ0NOYkFRdU5hL2hUWUhmVG4rRnFYb2NtNk4zQnE1dmFWclA4RHlLcFhl?=
+ =?utf-8?B?bGExUkE1R0xyOGpWMHZhVVVFdlBwUUZTL1N4eXE3NktTdUNaekptdXEyYlRr?=
+ =?utf-8?B?NFdjbk1pZVFseXhpbDNBT1doa3J3NXcwSVoweWtSVnFxajd2NS9jR3hRRThZ?=
+ =?utf-8?B?dE42Uy8ySkJDc2JpOG5EZHpHdHY2ZnpOWFZ5Nkw3eTlreFFQMmp4UFZlWWNl?=
+ =?utf-8?B?bHo2bUt1blhra005NzdLUWphYXZPTFZ6MndXSm1XMXpudGJ5M1REQisxdTBl?=
+ =?utf-8?B?bk54SnAzbjY4WWJlbUFQYkw1NVUxNUJhTFY5ZXZtNHlWQUVUeUkzMzJwTTMz?=
+ =?utf-8?B?TE5OZU1kVldJeTZlUnhwbmN0M3ZlU2kxTDNRNWNGSWFHdUZpOWxYaVFYdTJN?=
+ =?utf-8?B?VDlZWTZQcVR5TGR3dFh0ZlBJTlBoZjJoTW1OZzF5RFE2MGpCeXdGUVZ4QXd3?=
+ =?utf-8?B?VzNtbFE1QzVPQzBFSEU1cmZqT2ZvYWNwVVI4UzB4VXMwL1ZqTndtMEpET2U0?=
+ =?utf-8?B?OWYybTZrQWNLQkRPSkh5QVF0RDRSeWJ6blAyZkhqZTgrR1hyS2lnNVVleE5q?=
+ =?utf-8?B?emQ0UVN4ZStqQmpyRjMxcjlZdGZlVlJJSm15citJZlZTMFZoQ2xuQWs0Tnpt?=
+ =?utf-8?B?U3NHMWF3VDQ5TUlBaG5neXFKbzVrbm5ERmtnend3YWwrVVN5d3lKK2RuMjVo?=
+ =?utf-8?B?amN3QkRkRWZnRWpaL0x0Qkpkd29jY2lZOHlMK1JJWDJjTW90Y1AyczlIZU1J?=
+ =?utf-8?B?UWFXbTJXcms4bHlIOElwa21EVVBsbFJFWWhqckdocGw0dmpNcHIrc1RYU2dm?=
+ =?utf-8?B?ZnVFQnB4b3lycFFyTTFidzFubkx3WlFTT2pJbkk4RW1NTXRjVVBvaTZPL3E0?=
+ =?utf-8?B?UnEydlpWU2FyUW9KTC81VG9IYXdtaE1UVEUvMkEzdnN5aCtzdjEzNExtdTUx?=
+ =?utf-8?B?eDdselNtbG4wczhNa0tYY1ZQWlRkTmNacnpyVlZEdXltM1N6ZDNnUDZRTVhQ?=
+ =?utf-8?Q?81+M=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PA4PR04MB9224.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(7416014)(376014)(366016)(19092799006);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?WkNsNzZXU1pPaTBVd041NE4yS1A1c3FWTUdaaVlyY2l6TVg1VnJwd2w2WlZu?=
+ =?utf-8?B?Sm1DU0tHc2huL1pGMzhabVArN25Kd0RmZGlxQkZGRURtbGd2Y0cxRmdmWEts?=
+ =?utf-8?B?Y2ltVFh3eG95Q0g5VG55Z2RMZTE3S25jMzJvWmZpU0hqWU85ZTNSa2J4VUlB?=
+ =?utf-8?B?NmVBQmpMTlUrZ1lrKzd1NHJWR1dHcEQ0c0ZHVmZGMVRKNnpyQ2RmbXM0UFRl?=
+ =?utf-8?B?SE92TDRNbGtYeWVYbHNPQXBCWHNGckpXY05NZXo4L3doYjJjQlFxVkQySllK?=
+ =?utf-8?B?MVJWSEJ6YXZZdlhQOWp1UEdLUlNjcXRZSnN0WjRPRUJPc0I2eEZEUVJKcmdp?=
+ =?utf-8?B?UExWSDdaTzgvVDRsNzNyQUlLLy84V2wvVVNPQXpvVG5ML3NpRjc3N1BrLy9T?=
+ =?utf-8?B?aitwdFVRczRHTUpNVVdHdUx4WVFlWGtodW50WmJ2dGVPTzFnMytmQTFRSnlS?=
+ =?utf-8?B?a1lkb1U5eC82WHFsZ3Z2Mktkc0EyQ0M4RkgrZ1dWTSsxY3VWWjllandvVUtp?=
+ =?utf-8?B?VzdaNkNkeW5sZE5jamVOcGljS1JDSC9nTkh1Z2RCOEJsZXZNNnJwSmhIYlNB?=
+ =?utf-8?B?TndFV3FaVnM0NEZvQ09rSEJRUnVja1p0M2htY3d3Q2RGckh4WlBneU50SGI3?=
+ =?utf-8?B?RkVrbit3cHRhZ2hnL2V6Szc3bnI5RzRDWDlpbFdNL1ZMTlZ5ZldraWRuYmk0?=
+ =?utf-8?B?Q2IrMzZ5Ylo3b2xNVUIxRGRyZ015aEx4UVdMWnZLK2RSTGVUNi9tVnZ5bXhN?=
+ =?utf-8?B?cGlTL1ZoVFdpL3Z6TjJlOGtQOGd0VmhJdk0rZjA0ZVZaMklIWTZpZ09PdVFh?=
+ =?utf-8?B?WmdTeFNka2RYRzB5a0JhVmxaNnVWSGllSkYzRjU0bE9RQXlFVnYyUmRyMWlR?=
+ =?utf-8?B?U2JJak5iK0ZvekNObHh2bTNVOHV5Nk9VUWFPZ1g4UWJ4a2VScFUxeGYrR2FZ?=
+ =?utf-8?B?T1FUUlBiN2hHVUo4azRHS0NNck45dWJVYVlvdExaMWRxbzJ4dStBb1NQdjRt?=
+ =?utf-8?B?VHZvYnpvMGltYVo1WXZXVjlaOFcvVlpMNEVpZEtnM25RYlBSWldWUWdXb0JF?=
+ =?utf-8?B?QURYQUYvdUZVNm5jUzlYZTJ1aHJJb1BiYWo1TUZiRFowZEZMdnhjMVVnbGY0?=
+ =?utf-8?B?MlJMTkRmNXNiTXoyNUx4ODNmdVBMVmZtODk1aC8rQlkzaWswVGRIb0tzYVVS?=
+ =?utf-8?B?WCt1MmJuTzc4VDVPQndPSHkzRTJndjNOYk9RTlJxRlQzcWh3Z1RXSU9hYk5v?=
+ =?utf-8?B?Q3VBbDVJSVRac0Q2djNUSWlZZDZRajJ1OTFRMXNQU1ZORy8rM1RDd3ZqN1ll?=
+ =?utf-8?B?WTROMXM2NHJLcnRzVTlQM0RZR2phMHl1Rlk5N29KYUFVbU1laWgxcHFaKzli?=
+ =?utf-8?B?SHhQZDVTdHJQR2hyeXdoU2VyR0thUmZrY0orMjVweGg0aWs5Z1pnS3RlUzd5?=
+ =?utf-8?B?TloxanVUcmZmQVRDY1hoN285RGpaWVlzbE9YSi8weW94QjVwN0dLK3kzUHd5?=
+ =?utf-8?B?SFpoV1cySjBKaGs2cHBRQjlQSWhVMEFPNTFoM3A4VWdaWnRGU2N6WUNudVJ5?=
+ =?utf-8?B?SVJRNFJhbGVtcU1LcmtZZDNLdFZtd1ErU1hrNkhmWGxGTEtCRnNLOEVibHFy?=
+ =?utf-8?B?bHQvY0R5eVFUaGVmdFN2RXVvVHdpbFU4UEQ3SHZwS2M4eXlxSjBKWVVtSlFG?=
+ =?utf-8?B?dDZCTEw4WjJ2Sk9BRHRza1ZDNmRJZWpIYzdiaXA4SWp2dDA1eWRWNnpiY3ps?=
+ =?utf-8?B?NXBwN1F0VkZtRWZ5ekY3eVI5YW1vcVF0T0RjUjN0RFUrUkJpTjRIVzBPWnZk?=
+ =?utf-8?B?dzZhMy9CQi9qVXgrbU9leW5TZUdzVmFWTXBDNUYrY0lZQWFiemM5VVd3MHV5?=
+ =?utf-8?B?SkZER1Z0eTJCa1FpOUVGYkFjQzFCWkJjRU1wdWxvQ0dGRVMyUzVGaktFS296?=
+ =?utf-8?B?ZFZaWEZNSk81ZmR0blBxQmhWZG1CdmNqODdXejIvNUl6Z1dINmtHZ1g0ditt?=
+ =?utf-8?B?aEFZZDdhSFI2cytKR1o1Rk5CT1lYRTFWcXVLeUl1d0pMR0o2d0J4V1RTYWQ1?=
+ =?utf-8?B?aEk4M0NOUTVobXk3dnBFSm50TUpZOVI0N3c0OUk0eHp6U3EzdnN3T01IQ3k1?=
+ =?utf-8?B?KzNENFBFMVkwckltU0ViUjZ4elhMM2o2dlF6WnI5TUtEaW5vMWF1cXYwOWM0?=
+ =?utf-8?B?bjhKdVZ1MFRLQ1ovc3QwRlQwaEJ1QWhTR1JuVXlUTWRiS1NISHhCbHoza090?=
+ =?utf-8?B?S1Z2WmJzRGlURnA1ekpRdGVoSFR1d2NLZGd1MVVZeFdFWjQxMXlmaHBhRjh0?=
+ =?utf-8?B?V0NuU1lBTnFEZDNCbm9wR0s3RU9QVXp2WWFaQTc5NXRkQ1FNeEtoUT09?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 995bfb67-9f64-47c2-e9ec-08de6ee51eb7
+X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB9224.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Feb 2026 11:59:07.8486
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: zJ1DWgTE8AeMuf0jD+Jserr0C7ainTTYSU8ljoEk21o3aZOqwaeBwfUBerrY7KPBWPirIZ40yzzvP6ftxstDTQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8181
 X-Spamd-Bar: -----
-X-MailFrom: mripard@redhat.com
+X-MailFrom: larisa.grigore@oss.nxp.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 7W47DHQ3T5CIMLCPEKLDUJOWE3GO7YCB
-X-Message-ID-Hash: 7W47DHQ3T5CIMLCPEKLDUJOWE3GO7YCB
+Message-ID-Hash: UE72ES465KXNWOYCNS5JW5F5CRLY4XQN
+X-Message-ID-Hash: UE72ES465KXNWOYCNS5JW5F5CRLY4XQN
 X-Mailman-Approved-At: Thu, 16 Apr 2026 16:40:27 +0000
-CC: David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T . J . Mercier" <tjmercier@google.com>, Andrew Morton <akpm@linux-foundation.org>, David Hildenbrand <david@redhat.com>, Mike Rapoport <rppt@kernel.org>, Sumit Garg <sumit.garg@kernel.org>, dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, linux-tegra@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-mm@kvack.org
+CC: gregkh@linuxfoundation.org, jirislaby@kernel.org, robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, sumit.semwal@linaro.org, christian.koenig@amd.com, chester62515@gmail.com, cosmin.stoica@nxp.com, adrian.nitu@freescale.com, stefan-gabriel.mirea@nxp.com, Mihaela.Martinas@freescale.com, linux-kernel@vger.kernel.org, linux-serial@vger.kernel.org, devicetree@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, s32@nxp.com, imx@lists.linux.dev, clizzi@redhat.com, aruizrui@redhat.com, eballetb@redhat.com, echanude@redhat.com, jkangas@redhat.com, Radu Pirea <radu-nicolae.pirea@nxp.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 07/10] arm64: tegra: Add VPR placeholder node on Tegra234
+Subject: [Linaro-mm-sig] Re: [PATCH 01/13] serial: linflexuart: Fix locking in set_termios
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7W47DHQ3T5CIMLCPEKLDUJOWE3GO7YCB/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UE72ES465KXNWOYCNS5JW5F5CRLY4XQN/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============3647058736107006215=="
-X-Spamd-Result: default: False [6.69 / 15.00];
-	SEM_URIBL(3.50)[0.0.0.0:email];
-	SIGNED_PGP(-2.00)[];
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [4.09 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_QUARANTINE(1.50)[redhat.com : SPF not aligned (relaxed),quarantine];
-	DATE_IN_PAST(1.00)[1373];
-	R_DKIM_REJECT(1.00)[redhat.com:s=mimecast20190719];
-	MID_RHS_NOT_FQDN(0.50)[];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
+	DATE_IN_PAST(1.00)[1372];
+	R_DKIM_REJECT(1.00)[NXP1.onmicrosoft.com:s=selector1-NXP1-onmicrosoft-com];
 	MAILLIST(-0.20)[mailman];
-	MIME_GOOD(-0.20)[multipart/mixed,multipart/signed,text/plain];
-	BAD_REP_POLICIES(0.10)[];
+	R_SPF_ALLOW(-0.20)[+mx:c];
+	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[nxp.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[27];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
 	GREYLIST(0.00)[pass,meta];
-	RCPT_COUNT_TWELVE(0.00)[20];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	MIME_TRACE(0.00)[0:+,1:+,2:+,3:~,4:+];
-	ARC_NA(0.00)[];
-	FREEMAIL_CC(0.00)[gmail.com,ffwll.ch,linaro.org,kernel.org,collabora.com,arm.com,google.com,linux-foundation.org,redhat.com,lists.freedesktop.org,vger.kernel.org,lists.linaro.org,kvack.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	NEURAL_HAM(-0.00)[-0.477];
-	FROM_NEQ_ENVFROM(0.00)[mripard@redhat.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[redhat.com:-];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,dt];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	R_SPF_ALLOW(0.00)[+mx:c];
-	MISSING_XM_UA(0.00)[];
+	FREEMAIL_CC(0.00)[linuxfoundation.org,kernel.org,linaro.org,amd.com,gmail.com,nxp.com,freescale.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.linux.dev,redhat.com];
+	DKIM_TRACE(0.00)[NXP1.onmicrosoft.com:-];
+	NEURAL_HAM(-0.00)[-0.837];
+	FROM_NEQ_ENVFROM(0.00)[larisa.grigore@oss.nxp.com,linaro-mm-sig-bounces@lists.linaro.org];
+	TO_DN_SOME(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,0.0.0.0:email]
-X-Rspamd-Queue-Id: 5AEDF411F3A
-X-Rspamd-Action: add header
+	TAGGED_RCPT(0.00)[linaro-mm-sig,dt];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email,oss.nxp.com:mid,nxp.com:email]
+X-Rspamd-Queue-Id: B5167411F49
+X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spam: Yes
 
+On 2/16/2026 10:16 PM, Frank Li wrote:
+> On Mon, Feb 16, 2026 at 04:01:53PM +0100, Larisa Grigore wrote:
+>> From: Radu Pirea <radu-nicolae.pirea@nxp.com>
+>>
+>> Take the port->lock when set_termios is called, otherwise if characters
+>> are sent while IP is in init mode, the IP will hang in an uncertain
+>> state.
+> 
+> According to patch, you move it before read(UARTCR). can explain why hang?
+> 
+> Frank
 
---===============3647058736107006215==
-Content-Type: multipart/signed; micalg=pgp-sha384;
-	protocol="application/pgp-signature"; boundary="3lkrnqpcfmpi4l5q"
-Content-Disposition: inline
+Hello Frank,
 
+Thanks for the review! This change was made to not let anyone send 
+characters (for example calling `linflex_console_putchar`) while 
+LINFlexD is entering INIT mode. The INIT mode is entered when setting 
+LINFLEXD_LINCR1_INIT in LINCR1. UARTCR should also be protected with a 
+lock since it can be modified from different other places.
+I will update the commit description.
 
---3lkrnqpcfmpi4l5q
-Content-Type: text/plain; protected-headers=v1; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH v2 07/10] arm64: tegra: Add VPR placeholder node on
- Tegra234
-MIME-Version: 1.0
-
-On Thu, Feb 12, 2026 at 03:51:29PM +0100, Thierry Reding wrote:
-> On Fri, Jan 23, 2026 at 02:28:50PM +0100, Maxime Ripard wrote:
-> > On Thu, Jan 22, 2026 at 05:10:06PM +0100, Thierry Reding wrote:
-> > > From: Thierry Reding <treding@nvidia.com>
-> > >=20
-> > > This node contains two sets of properties, one for the case where the
-> > > VPR is resizable (in which case the VPR region will be dynamically
-> > > allocated at boot time) and another case where the VPR is fixed in si=
-ze
-> > > and initialized by early firmware.
-> > >=20
-> > > The firmware running on the device is responsible for updating the no=
-de
-> > > with the real physical address for the fixed VPR case and remove the
-> > > properties needed only for resizable VPR. Similarly, if the VPR is
-> > > resizable, the firmware should remove the "reg" property since it is =
-no
-> > > longer needed.
-> > >=20
-> > > Signed-off-by: Thierry Reding <treding@nvidia.com>
-> > > ---
-> > >  arch/arm64/boot/dts/nvidia/tegra234.dtsi | 34 ++++++++++++++++++++++=
-++
-> > >  1 file changed, 34 insertions(+)
-> > >=20
-> > > diff --git a/arch/arm64/boot/dts/nvidia/tegra234.dtsi b/arch/arm64/bo=
-ot/dts/nvidia/tegra234.dtsi
-> > > index 850c473235e3..62a5dfde9e38 100644
-> > > --- a/arch/arm64/boot/dts/nvidia/tegra234.dtsi
-> > > +++ b/arch/arm64/boot/dts/nvidia/tegra234.dtsi
-> > > @@ -29,6 +29,40 @@ aliases {
-> > >  		i2c8 =3D &dp_aux_ch3_i2c;
-> > >  	};
-> > > =20
-> > > +	reserved-memory {
-> > > +		#address-cells =3D <2>;
-> > > +		#size-cells =3D <2>;
-> > > +		ranges;
-> > > +
-> > > +		vpr: video-protection-region@0 {
-> > > +			compatible =3D "nvidia,tegra-video-protection-region";
-> >=20
-> > The heap name doesn't follow the documented convention, see
-> > https://docs.kernel.org/userspace-api/dma-buf-heaps.html#naming-convent=
-ion
->=20
-> I could change this to protected@0, which would make the name of the
-> exported heap "protected".
-
-protected-video would work too, but yeah, as long as it's unique, this
-works.
-
-Maxime
-
---3lkrnqpcfmpi4l5q
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iJUEABMJAB0WIQTkHFbLp4ejekA/qfgnX84Zoj2+dgUCaZWa7wAKCRAnX84Zoj2+
-dvUhAYCm3FfvWk95XHH2FpeLOwuwKc6yGIbEd2DSsZvfEyoEj29SyLApBrBuUbbF
-1e/ifR4BgM0QdBWXEmJb3YcqxnY/OdqsBvatOWUWz2hoGC3/GAFLKTRWhVfS1lbP
-wk++E+B39w==
-=Z//1
------END PGP SIGNATURE-----
-
---3lkrnqpcfmpi4l5q--
-
-
---===============3647058736107006215==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+Regards,
+Larisa
+>>
+>> Fixes: 09864c1cdf5c ("tty: serial: Add linflexuart driver for S32V234")
+>> Signed-off-by: Radu Pirea <radu-nicolae.pirea@nxp.com>
+>> Signed-off-by: Larisa Grigore <larisa.grigore@oss.nxp.com>
+>> ---
+>>   drivers/tty/serial/fsl_linflexuart.c | 4 ++--
+>>   1 file changed, 2 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/drivers/tty/serial/fsl_linflexuart.c b/drivers/tty/serial/fsl_linflexuart.c
+>> index e70a56de1fce..5a410e2d56ac 100644
+>> --- a/drivers/tty/serial/fsl_linflexuart.c
+>> +++ b/drivers/tty/serial/fsl_linflexuart.c
+>> @@ -407,6 +407,8 @@ linflex_set_termios(struct uart_port *port, struct ktermios *termios,
+>>   	unsigned long cr, old_cr, cr1;
+>>   	unsigned int old_csize = old ? old->c_cflag & CSIZE : CS8;
+>>
+>> +	uart_port_lock_irqsave(port, &flags);
+>> +
+>>   	cr = readl(port->membase + UARTCR);
+>>   	old_cr = cr;
+>>
+>> @@ -475,8 +477,6 @@ linflex_set_termios(struct uart_port *port, struct ktermios *termios,
+>>   		cr &= ~LINFLEXD_UARTCR_PCE;
+>>   	}
+>>
+>> -	uart_port_lock_irqsave(port, &flags);
+>> -
+>>   	port->read_status_mask = 0;
+>>
+>>   	if (termios->c_iflag & INPCK)
+>> --
+>> 2.47.0
+>>
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============3647058736107006215==--
-
