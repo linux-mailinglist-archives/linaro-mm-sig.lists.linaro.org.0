@@ -2,248 +2,304 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id GIpfCJQS4WnoogAAu9opvQ
+	id KNVLNJwS4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:47:16 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:47:24 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id B6A43411F66
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:47:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 50A6E411F6D
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:47:24 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id CC5BB405D5
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:47:14 +0000 (UTC)
-Received: from AS8PR04CU009.outbound.protection.outlook.com (mail-westeuropeazon11011052.outbound.protection.outlook.com [52.101.70.52])
-	by lists.linaro.org (Postfix) with ESMTPS id 5136D3F806
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 18 Feb 2026 14:44:51 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5B53E40519
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:47:23 +0000 (UTC)
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+	by lists.linaro.org (Postfix) with ESMTPS id 88F3B401B8
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 18 Feb 2026 15:08:30 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=NXP1.onmicrosoft.com header.s=selector1-NXP1-onmicrosoft-com header.b=LrT2BxUW;
-	spf=pass (lists.linaro.org: domain of larisa.grigore@oss.nxp.com designates 52.101.70.52 as permitted sender) smtp.mailfrom=larisa.grigore@oss.nxp.com;
-	arc=pass ("microsoft.com:s=arcselector10001:i=1");
-	dmarc=pass (policy=none) header.from=nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=iwgyCh47qBlxBrvjIvZ1o7lLfJAoU+K/PIy0yZ4fOPvDK0MdvHoeCiTj7WBSmvGSEKHc41QhFd9B0aajyRkANih593Wu9T8ZTtmg4MrDeLLwo5yl3d1EVvwdX0DPVNwNGA54pw6iyAsMGGnFvcMguFwubJi5xBQwySStBNQGnlOlX9zS+dEuiBe9dwpKlc34oNLokoZ8yieNTFFmaeKtzQCNOVD4gT2RDErF2GN4PtIE1aqh+HSFfVKYx32oK7cEqrrdcmCt+WJJdHwXm5bu1JeC/KTb0mhXBFKg8CUhp3Zypql5QQjtcSb5v/1dJxMhLbN6T5MUy9thqF2d9Uq+wQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=s7JDhkuViaNJf0LTbeKnefAOIBX3yOP9uLfCEFDNgMw=;
- b=GkeJCOF0CsjGhXJaPEymFx1VNor+X0SA9fduTTX8mZR/PbuvVDOdrrutR0wXRI+4lwECXzusd667SPN6dIfQGYlK3OY7wpVA6xKHv8no5JksDhANZ5LCOTkMxZCX7Sno3crvRDOSMa/8OwJ17XDhhpXFQghIEn6xT/lBazQYEon2Tt4APMr+XqK8ZFBfART2NyLbCCgKiho++T0sMRYv8PQL9/f/MruJghtmnZXouhfytJ4kTEYPDJw2GGbtO2ZKkCDIY873jYaqNU/EseLPLrQZygmGmyX3knIiqNBIUxx9AYWJiWPWNOb/Zx9Zv+4gdkOgLKF66yo6i19LC7usiw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=s7JDhkuViaNJf0LTbeKnefAOIBX3yOP9uLfCEFDNgMw=;
- b=LrT2BxUW3q213QNMTww1FW/f2jncYIxsDa0WCekO2h2eG/f522TMAAFsj9DoTM91Fa4Y8l1HCAr8TS2fhj8Slke8wNn0n4TgmVhkyRety+bdjgHJc02CnGsyPGslYQ4hunBe06MBjqbDzBBkCx3eJWubp5Rp6R/X77cgASuV/sCGO4hhBbnehYZUFKmWFXBTRNZATWnMTdRQ+YfBuhQlLRn4uPOX5LR/IFndB8hi3N9r6pE72TrJt9JrGCN0YYMRJmWZpZjwMJNkhoTKd+0q5qLWWN4A7fI4d33/nf6sMEv/88cdwjeT4exwt24mkGIHmj8lmUdFN2gHQRXKhubTGQ==
-Received: from PA4PR04MB9224.eurprd04.prod.outlook.com (2603:10a6:102:2a3::5)
- by PAWPR04MB9807.eurprd04.prod.outlook.com (2603:10a6:102:384::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.13; Wed, 18 Feb
- 2026 14:44:48 +0000
-Received: from PA4PR04MB9224.eurprd04.prod.outlook.com
- ([fe80::8e54:4d38:df79:fd63]) by PA4PR04MB9224.eurprd04.prod.outlook.com
- ([fe80::8e54:4d38:df79:fd63%7]) with mapi id 15.20.9632.010; Wed, 18 Feb 2026
- 14:44:47 +0000
-Message-ID: <4ad41c4c-3319-403b-93c7-c52a58658e84@oss.nxp.com>
-Date: Wed, 18 Feb 2026 16:44:44 +0200
-User-Agent: Mozilla Thunderbird
-To: Krzysztof Kozlowski <krzk@kernel.org>, gregkh@linuxfoundation.org,
- jirislaby@kernel.org, robh@kernel.org, krzk+dt@kernel.org,
- conor+dt@kernel.org, sumit.semwal@linaro.org, christian.koenig@amd.com,
- chester62515@gmail.com, cosmin.stoica@nxp.com, adrian.nitu@freescale.com,
- stefan-gabriel.mirea@nxp.com, Mihaela.Martinas@freescale.com
-References: <20260216150205.212318-1-larisa.grigore@oss.nxp.com>
- <20260216150205.212318-10-larisa.grigore@oss.nxp.com>
- <be18bbef-02f1-416b-ad2a-739261b3cd97@kernel.org>
-Content-Language: en-US
-From: Larisa Ileana Grigore <larisa.grigore@oss.nxp.com>
-In-Reply-To: <be18bbef-02f1-416b-ad2a-739261b3cd97@kernel.org>
-X-ClientProxiedBy: AS4P190CA0058.EURP190.PROD.OUTLOOK.COM
- (2603:10a6:20b:656::7) To PA4PR04MB9224.eurprd04.prod.outlook.com
- (2603:10a6:102:2a3::5)
+	dkim=pass header.d=suse.com header.s=susede1 header.b=gldyKQL6;
+	dkim=pass header.d=suse.com header.s=susede1 header.b=gldyKQL6;
+	spf=pass (lists.linaro.org: domain of petr.pavlu@suse.com designates 195.135.223.131 as permitted sender) smtp.mailfrom=petr.pavlu@suse.com;
+	dmarc=pass (policy=quarantine) header.from=suse.com
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by smtp-out2.suse.de (Postfix) with ESMTPS id 36DB15BD20;
+	Wed, 18 Feb 2026 15:08:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1771427308; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=5lyt323+HbZYpoX64Rl3vcxfunKzUx7dWbFHruMcR5o=;
+	b=gldyKQL6ACDQdncmwMAad+Z99WShbTJgDNbsPhcbC0DQiA3KedeIyVic93hD8vv78dtV5k
+	mpXWOEOKQDyHkeA1GRi52v9RwnG2zVxhkBv7o7JMU+8dwRIwmS7XltK2XFgm+L7TqcdAoi
+	1nUoIbVbEo1ghf+4y8+Ad7p6+tMf3RI=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1771427308; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=5lyt323+HbZYpoX64Rl3vcxfunKzUx7dWbFHruMcR5o=;
+	b=gldyKQL6ACDQdncmwMAad+Z99WShbTJgDNbsPhcbC0DQiA3KedeIyVic93hD8vv78dtV5k
+	mpXWOEOKQDyHkeA1GRi52v9RwnG2zVxhkBv7o7JMU+8dwRIwmS7XltK2XFgm+L7TqcdAoi
+	1nUoIbVbEo1ghf+4y8+Ad7p6+tMf3RI=
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 8B3DA3EA65;
+	Wed, 18 Feb 2026 15:08:27 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+	by imap1.dmz-prg2.suse.org with ESMTPSA
+	id 4AnNIevVlWkRRwAAD6G6ig
+	(envelope-from <petr.pavlu@suse.com>); Wed, 18 Feb 2026 15:08:27 +0000
+Message-ID: <7765df86-b08a-4f70-900d-4b4d85c07d49@suse.com>
+Date: Wed, 18 Feb 2026 16:08:19 +0100
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA4PR04MB9224:EE_|PAWPR04MB9807:EE_
-X-MS-Office365-Filtering-Correlation-Id: ba3a630d-6dd6-4b91-488b-08de6efc436e
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|376014|7416014|366016|19092799006|921020;
-X-Microsoft-Antispam-Message-Info: 
-	=?utf-8?B?YXM5emZkK2orN3lxRitmUEs1ZUg2SVZDemJUR0hsVlRpcFZmZjNKL2ZjaGpQ?=
- =?utf-8?B?ZFhQYUhNS0o4UGlDZlowczdXK3NMcDI1dTFFbWo4MDZjcXoza2wrTnBMTEw4?=
- =?utf-8?B?djB4TDZ0UjI1VzBiaDFYeDltUzlIem12RlM3V1JUTFU1NXpoYU1NQ3QyZW43?=
- =?utf-8?B?cSsvV2FoODMvekNEUHAwQXhWbjVhU05TeDhFUHFMR3g3YjEyWkVLMzVwODRX?=
- =?utf-8?B?d0hZSFhBMnNVK0p2TGxZYUFrTlNGelFmVDJlRFJLRmxrUHFDQmk0cTZCUmRu?=
- =?utf-8?B?bml3YWVhZHlpeXRRNHFNOUN3UXNtdndjbFZvSUdPN2dDOG4vQW41UDV5WFdH?=
- =?utf-8?B?SC9ic281MHBXQ2h3UTdGOEZTRTZzT3RrdzRTY1gvWE5TREp5RU41R3FON05i?=
- =?utf-8?B?YWJwUEd4OHZhVThLS25UQnhhRkpWOTJDandPQ0NTMlVTMHpmWHhrODM4OEhP?=
- =?utf-8?B?UVlub1g2ZU9FWUdQTkx4c2dwcGdid0xzNVhNeXlPODl5OUxtV2RFOUQ4SnZL?=
- =?utf-8?B?UVo5VzQ0NDRQd242dWp0TGJNQ2tuVFo5YWRJdUpyNHViK2QwWXJLWHpiZDZq?=
- =?utf-8?B?REFXL3J4VmpjcFZkM2hhNCtOa1hOMk5FRjFLbWpkVjE0TWpCREdNREJlSThs?=
- =?utf-8?B?Rk5GdGRlaWgzUVZiZnJ0L29pUlh3cHhSRExrUzJ3OHBDclBDMnRDMFFKUDJa?=
- =?utf-8?B?d1Rod1FQeXg1YzUxclhPYlpJcWtBanhvV3VXWU1jUnN3TmttMkRWL096MDN4?=
- =?utf-8?B?eld1emFzVHBZY3JGZnk4VVRQK3diRUxWaFdtNTEzRjdOdFhTWlpQSTY2ZHFr?=
- =?utf-8?B?L3hrazlwVStmSVpOQmJWK1V5WHJuUXZjUU04TGcxcnphTmpuOWpFTXZZc05q?=
- =?utf-8?B?dVNNcGxGRGpBcDBCbEdzU0F3OUh1Ym5jd3ppNlE5Y3dkUldOVHZicUF3blpR?=
- =?utf-8?B?ZXA0azJjOUx1Qmo1TDN0S09vaHBianpOOG9oa1ZXRjZlbzEyZ2daOWl0cEp3?=
- =?utf-8?B?eUlYMFJjSHNxZ2diUi9NNWkzeUU5T3gwdDd3eE1ETU1OcWRrelVobFZGZVM4?=
- =?utf-8?B?K0NvN0p6bGhKRDdJT2RiWXpLVVRCQ1A3UEVNRXJ1cnhJdTI4bnJTcDB0b0ZT?=
- =?utf-8?B?QTg2c2tPZzc4YlV0N3NpQ2o2UGVZR2IrYWxzQk5QMGlVQ0JSZTZSeExWb1BT?=
- =?utf-8?B?TTBKVDlzbitoRHZGZ2FKVnVqc0FRVUx2SkRuckNXS1RWQ2VQUHR5OXBqdWQ1?=
- =?utf-8?B?VGw0aTExZ2VtNGVQQmVnck1NdjRBOUdlTURlMXovcHVUMnR2Z2puOCtjZVR5?=
- =?utf-8?B?K2x2OERHTkxaSHczaFhtNEt6Tm5HRnZ0MGxsWlRtSHpkMU5zRU16MS94SXFt?=
- =?utf-8?B?cW1kd3I4UHlvUHBNS2NrNGI2WWlYQngvZ1NSUkdQb2R1Z3FpUnRVZDB1T3Vi?=
- =?utf-8?B?aVB4UzZuSjBleXZmK25LbE5yc3hqTHgzYTl3WW5GYU9xL3BSWUNiZXVKN0tv?=
- =?utf-8?B?TEo1UGwyYzBMYWNjcXJFUkNwT1NtcmVYK2hmbDRScmNMd3NQb1YzTnV5dit0?=
- =?utf-8?B?ckpaMHJsd2g5ZUVEa1dLTHpQcnVYR0JMaXduc0pTZkh4c2I3RGcweGVqRFd5?=
- =?utf-8?B?NW5OaWUwUjlpd25wM05jS0Q4Z3REYWtJMlVTS3dzSEpGczBUZnM4blJabmNT?=
- =?utf-8?B?ck9EZ3puQWY4OVgybkdEWjhjVENScHpKQmU0UTJCN3NWZ2xPek5aVjdWMkxG?=
- =?utf-8?B?endxMmtzOWYrLy9tT2lEa2VxUUhlSGV1L0NTTjZJQndScEliRmppNHo0bUgx?=
- =?utf-8?B?eUJIbE9xUHJKTE5TMSt4TVdtWVdpYVFBQXVwTU8zRld1SDNlZVBGK0FOOU5h?=
- =?utf-8?B?TGxrUTJYRzJ6ekhWMFlON3VQbHh2cVI0YkcvR3R3MzBjYVNPTGF0ZW5tczR5?=
- =?utf-8?B?RFZ5VklxQ2t4bU5TajllOFJ1VE1zZFhqRlY0WWdYWDlWM2FDVm1DbzVZTkdC?=
- =?utf-8?B?YXBCMS83Q2lWdS94L2hEOHk2S00zOVN3a1MyaXhXUmZ6YzVDSWJ5U09PelFk?=
- =?utf-8?B?N05JcHN3K0YzbVpMR3JUZVc3VkpPeXVUTmt1ZG5QS1BCRHNlUXlPQzg0eDNT?=
- =?utf-8?B?SXRKbVdkSjNtRlVjNms3WDV6RTNrL0NYYXQvRlBVdVJQRlROUU9ScmFkU3d3?=
- =?utf-8?B?Zmc9PQ==?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PA4PR04MB9224.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(7416014)(366016)(19092799006)(921020);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?MWRITFB5N0pBc2c0eHRnWjJYQmkyQnF3SjhVZHpqNHpQalpqWngvd05KNXdq?=
- =?utf-8?B?SHBxaEtaU1F5VEJhYTd1bjMycUhZVVZUZG9USHk5TTVnRXQrSjRnaU8yb3pP?=
- =?utf-8?B?STZ5U3ZFOXpGbmFnYXM0MnJpL3R0SWZuVXVtK21rK3lCMmtOTzkxeUxsM24v?=
- =?utf-8?B?N0oxVjkvTGxnV3FvNWJmaDROa3M3T0NqTHhLN2s5dUdUYzBzV0dwT3pLSTBK?=
- =?utf-8?B?STFwS01MaEg4N3RwQ1FuNXZKSk50Y2hFek9SVGxoSy9OcVNxM2FMSWpRS21n?=
- =?utf-8?B?bUhFUnJkWlIyTzAxUXROZXE2OWdqTzV1eGtmM0xjZ1ZaeWJ5NjhVUHRrVzhH?=
- =?utf-8?B?a2Z4QXpHUEQ0dTNLb29UalFjV3g3ajJRUERKOXlSbnVZUUlxZlE0NkxmbHhS?=
- =?utf-8?B?QkRBNDZpUkZGc1U1eDl4ZEdHdmpac3Q4MWJmTTRPcm02OFdXWnV3TGlVaWJ6?=
- =?utf-8?B?QktYNjVWSy9mN0ZBYllvemtLYmJTeUMwbkJhVjg2a3hrdHZuTTVXcFhXRkhV?=
- =?utf-8?B?MDArdytvNlF4VXE0NHR6QnpnYkFsZmZtd2JHQ2JTNkZMNnJ1WCtNZnduU0xJ?=
- =?utf-8?B?cmFWWDh0Zmk1N25wNExUK3g1YUpRR2M5c3Z1bXA5d25aeXNhdll3ZGNGTkJw?=
- =?utf-8?B?LzdXZVBkb3RuZG81TkRMS0pKMlI5L21JTjNIamVaVzF3VFBqRWNEa3dhSERx?=
- =?utf-8?B?ZW1yRFhDWWhOVmVEV3djK00vcTFESHFUZXYwdmozdjgwOTR3d1RwaW5JczZx?=
- =?utf-8?B?ZnhmOGJKMXd1RkFickdhUk1USEI5VmN5V2ZmeHcxbWxOMXlKUDVDVDNNbmJz?=
- =?utf-8?B?MEl0YmozUEQ2emd1M2ZMdHZqaDY1a3hIYXoxUmtod3ZEREdHUVZrN1Z3Slpx?=
- =?utf-8?B?YWN4cTQ2MXR0ZmtXMXViVEFoQm5lMmNBOWNnTEcwZTZpRU1lTFhDMElHUnp2?=
- =?utf-8?B?M1k1QmdhSDZqZlJiMmNOZloyNFJOYWx1VTNIVnhPS0dYT1J1ejhLVzNNUTU3?=
- =?utf-8?B?V3VvVm9oajRuSDlybGVNQnhtTm1WekRUN3hJbldiTzJabXZrMkpyVkpyWlor?=
- =?utf-8?B?Zm9zcUpOMnd6UUVITnl2aTdPYkNlSko1SWYyY1B0MkJDU2x3ODZUU1p1OHFK?=
- =?utf-8?B?YUpiUTZYSFQ2VXAvdStqZC92YVNWdkdTcWkxSkg0WUg1UVIzYy9SQkN5UzVr?=
- =?utf-8?B?Q1k3aUFjSzRBR293all2R2R2TFA4a3o3OGJHVlIyYjd4bi9YdzBuQmJOTHFD?=
- =?utf-8?B?U0duaEZUMlJ5aFU1aDZFSXU4SkR6UXdyTHZpMVJWYllhYUl3ZVJ5bHRac3hw?=
- =?utf-8?B?cm5oU09HS294cFFLYnJMVWxROGN1c25lcEpjZnJUcVBqMVk1OGVQdzBPVXVJ?=
- =?utf-8?B?dnJLSHBFS3VVYUNROFZBOEIyenpGSU8yTzkrYWdSUlNlUjJXaStVNmpPOG5i?=
- =?utf-8?B?SXRPTko4UzFmSkQ3aVFnVGpmdzgxZEJnV0ZoVVVnTXhRS1BSTmJSNEwxK2tG?=
- =?utf-8?B?bkFNQXFPNm9DcDVVUkJhbW5RS3NGcmNCamJnL0d0TVB2WUMyaWxPbWhiRmVl?=
- =?utf-8?B?bzU0RlVtYnhFc2NsNFU4WHBCZVBranNSVHhCUnZLTmNDaDFhZjVmeXAySzdq?=
- =?utf-8?B?ZC8rc2RZVVFRYzR1L3JVcXlhaHBRc3VBL2ptTCtpUUJlYkt5K3BROFpmTVlU?=
- =?utf-8?B?cVB0QnJ1Q3M2S29OQ2VZTzMyM3lYNVArT2ZUN0NTMXBrd0NMcjljS2xQSVds?=
- =?utf-8?B?bjBsd25KY3RoWnQ5ZUlXblVSaTZlR3VMdEhHbGJhZ2hJWlh5aVNMNGpDOXJ1?=
- =?utf-8?B?dVVOOGdYRjZoTkN4RDJjVzRSeVJuWjlEcis5dWN6QWUvWjdQZlp1TnZieGN2?=
- =?utf-8?B?SmJaUS9jL3BadWF0QUhrZVl0NmtqVDRFVjYvbkMzUENnOWhoNGdQcWZnQTh3?=
- =?utf-8?B?b3Q5T0taOWUvTmNadkcwWmhLblhpSUlxTTVNODlLZjRqbTdoc0prVnBuV1JM?=
- =?utf-8?B?RGtZVi9EWkR6TGFmQVA2aUt1TUxJSjlST21ncC9mdngrVTZTeXN0OTZqa2NX?=
- =?utf-8?B?c1ZEclRBQzBPRzA5ODJEMC9kUzBzV2o3Mk5mTm4zaEMzZUIrWVcySzVqalZD?=
- =?utf-8?B?RmFWaTRGbEFPM3RUNjZNWGpSajhEVjl2MFowMmFPamRuU2Raa0RxRGZ5M1hq?=
- =?utf-8?B?UUJpcTdQckdmd2ZNeVpkWUgwcDJQSGZ5enJiYnNvRGZOcTdsMU9KNGs4a1Qv?=
- =?utf-8?B?QzZ0QWtONDlQU1M2ZmlLekVTZ3hMTlFNbEN4SWZPRlpCUkhCOVBRUmdaQm9D?=
- =?utf-8?B?U2xFMG1rVGhqb3JnamxzaTB5MjNBZmlzNVN0UVBmdW9majF2cEVadz09?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ba3a630d-6dd6-4b91-488b-08de6efc436e
-X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB9224.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Feb 2026 14:44:47.8436
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: oAIJ37jUgf50An52oUGLEdVnDPzhHFeeebqfYrHX1oHkbUhCe91NQoZdVY72LiHoEak0y7nZXglsWkDt4fuC8g==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR04MB9807
-X-Spamd-Bar: ----
-X-MailFrom: larisa.grigore@oss.nxp.com
+User-Agent: Mozilla Thunderbird
+To: Byungchul Park <byungchul@sk.com>
+References: <20251205071855.72743-1-byungchul@sk.com>
+ <20251205071855.72743-35-byungchul@sk.com>
+ <7afb6666-43b6-4d17-b875-e585c7a5ac99@suse.com>
+ <20260213055006.GA55430@system.software.com>
+Content-Language: en-US
+From: Petr Pavlu <petr.pavlu@suse.com>
+In-Reply-To: <20260213055006.GA55430@system.software.com>
+X-Spam-Flag: NO
+X-Spam-Score: -1.01
+X-Spam-Level: 
+X-Spamd-Bar: --
+X-MailFrom: petr.pavlu@suse.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 2VYJNBGKYLYX32QRVCMW3CXA4DTHOISD
-X-Message-ID-Hash: 2VYJNBGKYLYX32QRVCMW3CXA4DTHOISD
-X-Mailman-Approved-At: Thu, 16 Apr 2026 16:40:29 +0000
-CC: linux-kernel@vger.kernel.org, linux-serial@vger.kernel.org, devicetree@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, s32@nxp.com, imx@lists.linux.dev, clizzi@redhat.com, aruizrui@redhat.com, eballetb@redhat.com, echanude@redhat.com, jkangas@redhat.com, Radu Pirea <radu-nicolae.pirea@nxp.com>
+Message-ID-Hash: B7SUTKLBLAEIOYUCU3HYPPXE7OKOXWTF
+X-Message-ID-Hash: B7SUTKLBLAEIOYUCU3HYPPXE7OKOXWTF
+X-Mailman-Approved-At: Thu, 16 Apr 2026 16:40:30 +0000
+CC: kernel_team@skhynix.com, torvalds@linux-foundation.org, damien.lemoal@opensource.wdc.com, linux-ide@vger.kernel.org, adilger.kernel@dilger.ca, linux-ext4@vger.kernel.org, mingo@redhat.com, peterz@infradead.org, will@kernel.org, tglx@linutronix.de, rostedt@goodmis.org, joel@joelfernandes.org, sashal@kernel.org, daniel.vetter@ffwll.ch, duyuyang@gmail.com, johannes.berg@intel.com, tj@kernel.org, tytso@mit.edu, willy@infradead.org, david@fromorbit.com, amir73il@gmail.com, gregkh@linuxfoundation.org, kernel-team@lge.com, linux-mm@kvack.org, akpm@linux-foundation.org, mhocko@kernel.org, minchan@kernel.org, hannes@cmpxchg.org, vdavydov.dev@gmail.com, sj@kernel.org, jglisse@redhat.com, dennis@kernel.org, cl@linux.com, penberg@kernel.org, rientjes@google.com, vbabka@suse.cz, ngupta@vflare.org, linux-block@vger.kernel.org, josef@toxicpanda.com, linux-fsdevel@vger.kernel.org, jack@suse.cz, jlayton@kernel.org, dan.j.williams@intel.com, hch@infradead.org, djwong@kernel.org, dri-devel@lists.fr
+ eedesktop.org, rodrigosiqueiramelo@gmail.com, melissa.srw@gmail.com, hamohammed.sa@gmail.com, harry.yoo@oracle.com, chris.p.wilson@intel.com, gwan-gyeong.mun@intel.com, max.byungchul.park@gmail.com, boqun.feng@gmail.com, longman@redhat.com, yunseong.kim@ericsson.com, ysk@kzalloc.com, yeoreum.yun@arm.com, netdev@vger.kernel.org, matthew.brost@intel.com, her0gyugyu@gmail.com, corbet@lwn.net, catalin.marinas@arm.com, bp@alien8.de, x86@kernel.org, hpa@zytor.com, luto@kernel.org, sumit.semwal@linaro.org, gustavo@padovan.org, christian.koenig@amd.com, andi.shyti@kernel.org, arnd@arndb.de, lorenzo.stoakes@oracle.com, Liam.Howlett@oracle.com, rppt@kernel.org, surenb@google.com, mcgrof@kernel.org, da.gomez@kernel.org, samitolvanen@google.com, paulmck@kernel.org, frederic@kernel.org, neeraj.upadhyay@kernel.org, joelagnelf@nvidia.com, josh@joshtriplett.org, urezki@gmail.com, mathieu.desnoyers@efficios.com, jiangshanlai@gmail.com, qiang.zhang@linux.dev, juri.lelli@redhat.com, vincent.guittot@li
+ naro.org, dietmar.eggemann@arm.com, bsegall@google.com, mgorman@suse.de, vschneid@redhat.com, chuck.lever@oracle.com, neil@brown.name, okorniev@redhat.com, Dai.Ngo@oracle.com, tom@talpey.com, trondmy@kernel.org, anna@kernel.org, kees@kernel.org, bigeasy@linutronix.de, clrkwllms@kernel.org, mark.rutland@arm.com, ada.coupriediaz@arm.com, kristina.martsenko@arm.com, wangkefeng.wang@huawei.com, broonie@kernel.org, kevin.brodsky@arm.com, dwmw@amazon.co.uk, shakeel.butt@linux.dev, ast@kernel.org, ziy@nvidia.com, yuzhao@google.com, baolin.wang@linux.alibaba.com, usamaarif642@gmail.com, joel.granados@kernel.org, richard.weiyang@gmail.com, geert+renesas@glider.be, tim.c.chen@linux.intel.com, linux@treblig.org, alexander.shishkin@linux.intel.com, lillian@star-ark.net, chenhuacai@kernel.org, francesco@valla.it, guoweikang.kernel@gmail.com, link@vivo.com, jpoimboe@kernel.org, masahiroy@kernel.org, brauner@kernel.org, thomas.weissschuh@linutronix.de, oleg@redhat.com, mjguzik@gmail.com, andrii@ke
+ rnel.org, wangfushuai@baidu.com, linux-doc@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-i2c@vger.kernel.org, linux-arch@vger.kernel.org, linux-modules@vger.kernel.org, rcu@vger.kernel.org, linux-nfs@vger.kernel.org, linux-rt-devel@lists.linux.dev, 2407018371@qq.com, dakr@kernel.org, miguel.ojeda.sandonis@gmail.com, neilb@ownmail.net, bagasdotme@gmail.com, wsa+renesas@sang-engineering.com, dave.hansen@intel.com, geert@linux-m68k.org, ojeda@kernel.org, alex.gaynor@gmail.com, gary@garyguo.net, bjorn3_gh@protonmail.com, lossin@kernel.org, a.hindborg@kernel.org, aliceryhl@google.com, tmgross@umich.edu, rust-for-linux@vger.kernel.org, linux-kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 09/13] dt-bindings: serial: fsl-linflexuart: add dma properties
+Subject: [Linaro-mm-sig] Re: [PATCH v18 34/42] dept: add module support for struct dept_event_site and dept_event_site_dep
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2VYJNBGKYLYX32QRVCMW3CXA4DTHOISD/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/B7SUTKLBLAEIOYUCU3HYPPXE7OKOXWTF/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [4.09 / 15.00];
+X-Spamd-Result: default: False [4.49 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[suse.com : SPF not aligned (relaxed),quarantine];
 	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[NXP1.onmicrosoft.com:s=selector1-NXP1-onmicrosoft-com];
-	DATE_IN_PAST(1.00)[1370];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
+	R_DKIM_REJECT(1.00)[suse.com:s=susede1];
+	DATE_IN_PAST(1.00)[1369];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[nxp.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	GREYLIST(0.00)[pass,meta];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_TO(0.00)[kernel.org,linuxfoundation.org,linaro.org,amd.com,gmail.com,nxp.com,freescale.com];
-	RCPT_COUNT_TWELVE(0.00)[27];
-	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[skhynix.com,linux-foundation.org,opensource.wdc.com,vger.kernel.org,dilger.ca,redhat.com,infradead.org,kernel.org,linutronix.de,goodmis.org,joelfernandes.org,ffwll.ch,gmail.com,intel.com,mit.edu,fromorbit.com,linuxfoundation.org,lge.com,kvack.org,cmpxchg.org,linux.com,google.com,suse.cz,vflare.org,toxicpanda.com,lists.fr,oracle.com,ericsson.com,kzalloc.com,arm.com,lwn.net,alien8.de,zytor.com,linaro.org,padovan.org,amd.com,arndb.de,nvidia.com,joshtriplett.org,efficios.com,linux.dev,li,suse.de,brown.name,talpey.com,huawei.com,amazon.co.uk,linux.alibaba.com,glider.be,linux.intel.com,treblig.org,star-ark.net,valla.it,vivo.com,ke,baidu.com,lists.infradead.org,lists.linaro.org,lists.linux.dev,qq.com,ownmail.net,sang-engineering.com,linux-m68k.org,garyguo.net,protonmail.com,umich.edu];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[NXP1.onmicrosoft.com:-];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[larisa.grigore@oss.nxp.com,linaro-mm-sig-bounces@lists.linaro.org];
+	GREYLIST(0.00)[pass,meta];
+	ARC_NA(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,dt];
-	NEURAL_SPAM(0.00)[0.074];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[suse.com:-];
+	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[165];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[petr.pavlu@suse.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nxp.com:email,oss.nxp.com:mid,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: B6A43411F66
+	NEURAL_HAM(-0.00)[-0.867];
+	TAGGED_RCPT(0.00)[linaro-mm-sig,renesas];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,sk.com:email,suse.com:mid]
+X-Rspamd-Queue-Id: 50A6E411F6D
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On 2/16/2026 5:10 PM, Krzysztof Kozlowski wrote:
-> On 16/02/2026 16:02, Larisa Grigore wrote:
->> From: Radu Pirea <radu-nicolae.pirea@nxp.com>
+On 2/13/26 6:50 AM, Byungchul Park wrote:
+> On Wed, Jan 07, 2026 at 01:19:00PM +0100, Petr Pavlu wrote:
+>> On 12/5/25 8:18 AM, Byungchul Park wrote:
+>>> struct dept_event_site and struct dept_event_site_dep have been
+>>> introduced to track dependencies between multi event sites for a single
+>>> wait, that will be loaded to data segment.  Plus, a custom section,
+>>> '.dept.event_sites', also has been introduced to keep pointers to the
+>>> objects to make sure all the event sites defined exist in code.
+>>>
+>>> dept should work with the section and segment of module.  Add the
+>>> support to handle the section and segment properly whenever modules are
+>>> loaded and unloaded.
+>>>
+>>> Signed-off-by: Byungchul Park <byungchul@sk.com>
 >>
->> Add 'dmas' and 'dma-names' properties to describe optional DMA support
->> for RX and TX channels in the LINFlexD UART controller.
+>> Below are a few comments from the module loader perspective.
 > 
-> Same question as in other patch about existing devices.
->
-I will update the bindings so that `dmas`/`dma-names` are optional for 
-S32G and not present on S32V234. Would this be acceptable?
+> Sorry about the late reply.  I've been going through some major life
+> changes lately. :(
+> 
+> Thank you sooooo~ much for your helpful feedback.  I will leave my
+> opinion below.
+> 
+[...]
+>>> diff --git a/kernel/dependency/dept.c b/kernel/dependency/dept.c
+>>> index b14400c4f83b..07d883579269 100644
+>>> --- a/kernel/dependency/dept.c
+>>> +++ b/kernel/dependency/dept.c
+>>> @@ -984,6 +984,9 @@ static void bfs(void *root, struct bfs_ops *ops, void *in, void **out)
+>>>   * event sites.
+>>>   */
+>>>
+>>> +static LIST_HEAD(dept_event_sites);
+>>> +static LIST_HEAD(dept_event_site_deps);
+>>> +
+>>>  /*
+>>>   * Print all events in the circle.
+>>>   */
+>>> @@ -2043,6 +2046,33 @@ static void del_dep_rcu(struct rcu_head *rh)
+>>>       preempt_enable();
+>>>  }
+>>>
+>>> +/*
+>>> + * NOTE: Must be called with dept_lock held.
+>>> + */
+>>> +static void disconnect_event_site_dep(struct dept_event_site_dep *esd)
+>>> +{
+>>> +     list_del_rcu(&esd->dep_node);
+>>> +     list_del_rcu(&esd->dep_rev_node);
+>>> +}
+>>> +
+>>> +/*
+>>> + * NOTE: Must be called with dept_lock held.
+>>> + */
+>>> +static void disconnect_event_site(struct dept_event_site *es)
+>>> +{
+>>> +     struct dept_event_site_dep *esd, *next_esd;
+>>> +
+>>> +     list_for_each_entry_safe(esd, next_esd, &es->dep_head, dep_node) {
+>>> +             list_del_rcu(&esd->dep_node);
+>>> +             list_del_rcu(&esd->dep_rev_node);
+>>> +     }
+>>> +
+>>> +     list_for_each_entry_safe(esd, next_esd, &es->dep_rev_head, dep_rev_node) {
+>>> +             list_del_rcu(&esd->dep_node);
+>>> +             list_del_rcu(&esd->dep_rev_node);
+>>> +     }
+>>> +}
+>>> +
+>>>  /*
+>>>   * NOTE: Must be called with dept_lock held.
+>>>   */
+>>> @@ -2384,6 +2414,8 @@ void dept_free_range(void *start, unsigned int sz)
+>>>  {
+>>>       struct dept_task *dt = dept_task();
+>>>       struct dept_class *c, *n;
+>>> +     struct dept_event_site_dep *esd, *next_esd;
+>>> +     struct dept_event_site *es, *next_es;
+>>>       unsigned long flags;
+>>>
+>>>       if (unlikely(!dept_working()))
+>>> @@ -2405,6 +2437,24 @@ void dept_free_range(void *start, unsigned int sz)
+>>>       while (unlikely(!dept_lock()))
+>>>               cpu_relax();
+>>>
+>>> +     list_for_each_entry_safe(esd, next_esd, &dept_event_site_deps, all_node) {
+>>> +             if (!within((void *)esd, start, sz))
+>>> +                     continue;
+>>> +
+>>> +             disconnect_event_site_dep(esd);
+>>> +             list_del(&esd->all_node);
+>>> +     }
+>>> +
+>>> +     list_for_each_entry_safe(es, next_es, &dept_event_sites, all_node) {
+>>> +             if (!within((void *)es, start, sz) &&
+>>> +                 !within(es->name, start, sz) &&
+>>> +                 !within(es->func_name, start, sz))
+>>> +                     continue;
+>>> +
+>>> +             disconnect_event_site(es);
+>>> +             list_del(&es->all_node);
+>>> +     }
+>>> +
+>>>       list_for_each_entry_safe(c, n, &dept_classes, all_node) {
+>>>               if (!within((void *)c->key, start, sz) &&
+>>>                   !within(c->name, start, sz))
+>>> @@ -3337,6 +3387,7 @@ void __dept_recover_event(struct dept_event_site_dep *esd,
+>>>
+>>>       list_add(&esd->dep_node, &es->dep_head);
+>>>       list_add(&esd->dep_rev_node, &rs->dep_rev_head);
+>>> +     list_add(&esd->all_node, &dept_event_site_deps);
+>>>       check_recover_dl_bfs(esd);
+>>>  unlock:
+>>>       dept_unlock();
+>>> @@ -3347,6 +3398,23 @@ EXPORT_SYMBOL_GPL(__dept_recover_event);
+>>>
+>>>  #define B2KB(B) ((B) / 1024)
+>>>
+>>> +void dept_mark_event_site_used(void *start, void *end)
+>>
+>> Nit: I suggest that dept_mark_event_site_used() take pointers to
+>> dept_event_site_init, which would catch the type mismatch with
+> 
+> IMO, this is the easiest way to get all the pointers from start to the
+> end, or I can't get the number of the pointers.  It's similar to the
+> initcalls section for device drivers.
 
+This was a minor suggestion.. The idea is to simply change the function
+signature to:
+
+void dept_mark_event_site_used(struct dept_event_site_init **start,
+			       struct dept_event_site_init **end))
+
+This way, the compiler can provide proper type checking to ensure that
+correct pointers are passed to dept_mark_event_site_used(). It would
+catch the type mismatch with module::dept_event_sites.
+
+> 
+>> module::dept_event_sites.
+>>
+>>> +{
+>>> +     struct dept_event_site_init **evtinitpp;
+>>> +
+>>> +     for (evtinitpp = (struct dept_event_site_init **)start;
+>>> +          evtinitpp < (struct dept_event_site_init **)end;
+>>> +          evtinitpp++) {
+>>> +             (*evtinitpp)->evt_site->used = true;
+>>> +             (*evtinitpp)->evt_site->func_name = (*evtinitpp)->func_name;
+>>> +             list_add(&(*evtinitpp)->evt_site->all_node, &dept_event_sites);
+>>> +
+>>> +             pr_info("dept_event_site %s@%s is initialized.\n",
+>>> +                             (*evtinitpp)->evt_site->name,
+>>> +                             (*evtinitpp)->evt_site->func_name);
+>>> +     }
+>>> +}
+>>> +
+>>>  extern char __dept_event_sites_start[], __dept_event_sites_end[];
+>>
+>> Related to the above, __dept_event_sites_start and
+>> __dept_event_sites_end can already be properly typed here.
+> 
+> How can I get the number of the pointers?
+
+Similarly here, changing the code to:
+
+extern struct dept_event_site_init *__dept_event_sites_start[], *__dept_event_sites_end[];
+
+It is the same for the initcalls you mentioned. The declarations of
+their start/end symbols are also already properly typed as
+initcall_entry_t[] in include/linux/init.h.
+
+-- 
 Thanks,
-Larisa
->>
->> This allows the device tree to specify DMA channels used for UART data
->> transfers. If not specified, the driver will fall to interrupt-based
->> operations.
->>
->> Signed-off-by: Radu Pirea <radu-nicolae.pirea@nxp.com>
->> Co-developed-by: Larisa Grigore <larisa.grigore@oss.nxp.com>
->> Signed-off-by: Larisa Grigore <larisa.grigore@oss.nxp.com>
->> ---
-> 
-> 
-> Best regards,
-> Krzysztof
-
+Petr
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
