@@ -2,89 +2,107 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KNVLNJwS4WnoogAAu9opvQ
+	id MJ5nBqcS4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:47:24 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:47:35 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 50A6E411F6D
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:47:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A095F411F75
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:47:34 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5B53E40519
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:47:23 +0000 (UTC)
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
-	by lists.linaro.org (Postfix) with ESMTPS id 88F3B401B8
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 18 Feb 2026 15:08:30 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B9D0540705
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:47:33 +0000 (UTC)
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+	by lists.linaro.org (Postfix) with ESMTPS id C4986402AE
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 18 Feb 2026 17:15:00 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=suse.com header.s=susede1 header.b=gldyKQL6;
-	dkim=pass header.d=suse.com header.s=susede1 header.b=gldyKQL6;
-	spf=pass (lists.linaro.org: domain of petr.pavlu@suse.com designates 195.135.223.131 as permitted sender) smtp.mailfrom=petr.pavlu@suse.com;
-	dmarc=pass (policy=quarantine) header.from=suse.com
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by smtp-out2.suse.de (Postfix) with ESMTPS id 36DB15BD20;
-	Wed, 18 Feb 2026 15:08:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1771427308; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=5lyt323+HbZYpoX64Rl3vcxfunKzUx7dWbFHruMcR5o=;
-	b=gldyKQL6ACDQdncmwMAad+Z99WShbTJgDNbsPhcbC0DQiA3KedeIyVic93hD8vv78dtV5k
-	mpXWOEOKQDyHkeA1GRi52v9RwnG2zVxhkBv7o7JMU+8dwRIwmS7XltK2XFgm+L7TqcdAoi
-	1nUoIbVbEo1ghf+4y8+Ad7p6+tMf3RI=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1771427308; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=5lyt323+HbZYpoX64Rl3vcxfunKzUx7dWbFHruMcR5o=;
-	b=gldyKQL6ACDQdncmwMAad+Z99WShbTJgDNbsPhcbC0DQiA3KedeIyVic93hD8vv78dtV5k
-	mpXWOEOKQDyHkeA1GRi52v9RwnG2zVxhkBv7o7JMU+8dwRIwmS7XltK2XFgm+L7TqcdAoi
-	1nUoIbVbEo1ghf+4y8+Ad7p6+tMf3RI=
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 8B3DA3EA65;
-	Wed, 18 Feb 2026 15:08:27 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
-	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id 4AnNIevVlWkRRwAAD6G6ig
-	(envelope-from <petr.pavlu@suse.com>); Wed, 18 Feb 2026 15:08:27 +0000
-Message-ID: <7765df86-b08a-4f70-900d-4b4d85c07d49@suse.com>
-Date: Wed, 18 Feb 2026 16:08:19 +0100
+	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=YSMjRkq7;
+	spf=pass (lists.linaro.org: domain of echanude@redhat.com designates 170.10.133.124 as permitted sender) smtp.mailfrom=echanude@redhat.com;
+	dmarc=pass (policy=quarantine) header.from=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1771434900;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=xm1Nmfmv6nKrRksdRVhDRN/vEcg8hHt9kLWtxxaZhMo=;
+	b=YSMjRkq7hUm60KdJ5Pu5kIGYhCT/81QFixY/3Xc8W7niG/KiP6wMDEy0mr6HOODgsDp7Q+
+	fuFJg0YY7jU1HZUjJvyLhsFtXSmZz5rC/R8tX74w0StopzH/BO0I4rRJp3GojUYFpoDTx9
+	GlT157no/AISC/zJm9Pu5lFa0wXWA+g=
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
+ [209.85.219.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-18-VFL1fl68MhG3vS-UmJleGg-1; Wed, 18 Feb 2026 12:14:59 -0500
+X-MC-Unique: VFL1fl68MhG3vS-UmJleGg-1
+X-Mimecast-MFC-AGG-ID: VFL1fl68MhG3vS-UmJleGg_1771434898
+Received: by mail-qv1-f72.google.com with SMTP id 6a1803df08f44-89463017976so1615176d6.2
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 18 Feb 2026 09:14:59 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1771434898; x=1772039698;
+        h=cc:to:content-transfer-encoding:mime-version:message-id:date
+         :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=xm1Nmfmv6nKrRksdRVhDRN/vEcg8hHt9kLWtxxaZhMo=;
+        b=DhU642cFowqCWWU6pwU3mBiicMqlhkdwazdfTNyqPDSgWmrbGjx8N5OwqjoEh3neqV
+         pvbfFsbbbC1cvJh235u7K0bkKYXMDnNeloahs8YGCauCmjN2jEb9/79ATj6CUEe/wiIr
+         b+iRBmjRpVWS3H850KhXNMyJy5sycRTRsyE3XIT1vksfRlZnRH8C8YVJPEAN755Ql2CV
+         v/XrUm1twWBM2eu33iTr7dLrnjn2J/uvKz7AiHakHRjG0VI3TbsWrXOq6hg0J3CaDz/4
+         dsGMWmPmX7/DjGX0j03ZD/4/8eFNpGTVeR9V2Dis0ldIfBJdZiuzi9k+OMUGlgFXky1R
+         pMmA==
+X-Forwarded-Encrypted: i=1; AJvYcCWCTh/XpXONtSN6f8gTGpXEVBrnLpGPiY6BIsgwGUxbK9bGywOAOdM4yrpVDMLHUu2tGAePLYB8dKUfCmgm@lists.linaro.org
+X-Gm-Message-State: AOJu0YxY0LFr9Bnq4IdnVbhMIy4HgMP0BGx6sV0kpWHesAJnIGEGXETc
+	mUiGecrQhf4NcA3kS9s6Voh8+Chh1vKmYCyLT19k7kSPB++8AiSVmASJIN2WQc12W7Vav+NCS72
+	POFKGwg5QJ+07V0R7liazujtYF29Q7cidLRSw9mF9g+qfpy4vqrlmVRu/TkvgX4robPeV
+X-Gm-Gg: AZuq6aJSJfoKWIChxrgWWV6DgIcpfriNJfT4O2653rajFRy61IB4DXTWknhcCAM3raR
+	NAYQKpL9/fVRJaAFEyHlJ1cSGiRGNFCsbI7G/NwJUxXYFlwneMh2/8k3qq40jZvLudoA9p9nlgu
+	re4StDhKQpp5LQsdR/7YTr4HdNmXjILQCjomqdc771wp96fEAVSZf7DNmEo53G+/cksj/aTMIDG
+	eW7xNq2unCueguDc+6qzxUWrYn08VSNz6ap5jbe4wrlpbMIr0SIl05ZDxTT19IPIqve+SkukY+m
+	SoTwadS4TEnwT539jveaO8KKsoKMmn8Rpq0i1q/juD9MA+eIibglqrRbjBX3bkm0Z50/g92FTAF
+	nAAQb56AcZSkRZkk+6RKlOsNV61zrkEP6v7cDJ19bLJkVzkVRh0pP0sARkSF24yA=
+X-Received: by 2002:a05:6214:c21:b0:894:73b9:d31c with SMTP id 6a1803df08f44-8974047b86cmr215132976d6.33.1771434898344;
+        Wed, 18 Feb 2026 09:14:58 -0800 (PST)
+X-Received: by 2002:a05:6214:c21:b0:894:73b9:d31c with SMTP id 6a1803df08f44-8974047b86cmr215132386d6.33.1771434897854;
+        Wed, 18 Feb 2026 09:14:57 -0800 (PST)
+Received: from localhost (pool-100-17-19-56.bstnma.fios.verizon.net. [100.17.19.56])
+        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-8971cca6fddsm186357896d6.19.2026.02.18.09.14.57
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 18 Feb 2026 09:14:57 -0800 (PST)
+From: Eric Chanudet <echanude@redhat.com>
+Date: Wed, 18 Feb 2026 12:14:09 -0500
+Message-Id: <20260218-dmabuf-heap-cma-dmem-v2-0-b249886fb7b2@redhat.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Byungchul Park <byungchul@sk.com>
-References: <20251205071855.72743-1-byungchul@sk.com>
- <20251205071855.72743-35-byungchul@sk.com>
- <7afb6666-43b6-4d17-b875-e585c7a5ac99@suse.com>
- <20260213055006.GA55430@system.software.com>
-Content-Language: en-US
-From: Petr Pavlu <petr.pavlu@suse.com>
-In-Reply-To: <20260213055006.GA55430@system.software.com>
-X-Spam-Flag: NO
-X-Spam-Score: -1.01
-X-Spam-Level: 
-X-Spamd-Bar: --
-X-MailFrom: petr.pavlu@suse.com
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/23NQQ6CMBCF4auQWTumLQSpK+5hWIx0arsokBYbD
+ eHuVuLS5feS+WeDxNFzgmu1QeTsk5+nAnWqYHQ0PRi9KQYlVCuk6tAEuj8tOqYFx0DFHNA2Ugl
+ SxjbUQTldIlv/OrK3odj5tM7xfXzJ8rv+grX4H8wSJdZtc2HSumat+8jG0Xoe5wDDvu8fvz0pl
+ 7kAAAA=
+X-Change-ID: 20260128-dmabuf-heap-cma-dmem-f4120a2df4a8
+To: Sumit Semwal <sumit.semwal@linaro.org>,
+ Benjamin Gaignard <benjamin.gaignard@collabora.com>,
+ Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>,
+ "T.J. Mercier" <tjmercier@google.com>,
+ =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ David Hildenbrand <david@kernel.org>,
+ Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
+ "Liam R. Howlett" <Liam.Howlett@oracle.com>,
+ Vlastimil Babka <vbabka@suse.cz>, Mike Rapoport <rppt@kernel.org>,
+ Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>
+X-Mailer: b4 0.14.2
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: _kRiHcQ1GMI6CiwKN0aUFVlUYVeD86k445byLsvfzVg_1771434898
+X-Mimecast-Originator: redhat.com
+X-Spamd-Bar: ----
+X-MailFrom: echanude@redhat.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: B7SUTKLBLAEIOYUCU3HYPPXE7OKOXWTF
-X-Message-ID-Hash: B7SUTKLBLAEIOYUCU3HYPPXE7OKOXWTF
+Message-ID-Hash: KE5LXPMKQIXXAOIK6EUQBWMPNN2R74XM
+X-Message-ID-Hash: KE5LXPMKQIXXAOIK6EUQBWMPNN2R74XM
 X-Mailman-Approved-At: Thu, 16 Apr 2026 16:40:30 +0000
-CC: kernel_team@skhynix.com, torvalds@linux-foundation.org, damien.lemoal@opensource.wdc.com, linux-ide@vger.kernel.org, adilger.kernel@dilger.ca, linux-ext4@vger.kernel.org, mingo@redhat.com, peterz@infradead.org, will@kernel.org, tglx@linutronix.de, rostedt@goodmis.org, joel@joelfernandes.org, sashal@kernel.org, daniel.vetter@ffwll.ch, duyuyang@gmail.com, johannes.berg@intel.com, tj@kernel.org, tytso@mit.edu, willy@infradead.org, david@fromorbit.com, amir73il@gmail.com, gregkh@linuxfoundation.org, kernel-team@lge.com, linux-mm@kvack.org, akpm@linux-foundation.org, mhocko@kernel.org, minchan@kernel.org, hannes@cmpxchg.org, vdavydov.dev@gmail.com, sj@kernel.org, jglisse@redhat.com, dennis@kernel.org, cl@linux.com, penberg@kernel.org, rientjes@google.com, vbabka@suse.cz, ngupta@vflare.org, linux-block@vger.kernel.org, josef@toxicpanda.com, linux-fsdevel@vger.kernel.org, jack@suse.cz, jlayton@kernel.org, dan.j.williams@intel.com, hch@infradead.org, djwong@kernel.org, dri-devel@lists.fr
- eedesktop.org, rodrigosiqueiramelo@gmail.com, melissa.srw@gmail.com, hamohammed.sa@gmail.com, harry.yoo@oracle.com, chris.p.wilson@intel.com, gwan-gyeong.mun@intel.com, max.byungchul.park@gmail.com, boqun.feng@gmail.com, longman@redhat.com, yunseong.kim@ericsson.com, ysk@kzalloc.com, yeoreum.yun@arm.com, netdev@vger.kernel.org, matthew.brost@intel.com, her0gyugyu@gmail.com, corbet@lwn.net, catalin.marinas@arm.com, bp@alien8.de, x86@kernel.org, hpa@zytor.com, luto@kernel.org, sumit.semwal@linaro.org, gustavo@padovan.org, christian.koenig@amd.com, andi.shyti@kernel.org, arnd@arndb.de, lorenzo.stoakes@oracle.com, Liam.Howlett@oracle.com, rppt@kernel.org, surenb@google.com, mcgrof@kernel.org, da.gomez@kernel.org, samitolvanen@google.com, paulmck@kernel.org, frederic@kernel.org, neeraj.upadhyay@kernel.org, joelagnelf@nvidia.com, josh@joshtriplett.org, urezki@gmail.com, mathieu.desnoyers@efficios.com, jiangshanlai@gmail.com, qiang.zhang@linux.dev, juri.lelli@redhat.com, vincent.guittot@li
- naro.org, dietmar.eggemann@arm.com, bsegall@google.com, mgorman@suse.de, vschneid@redhat.com, chuck.lever@oracle.com, neil@brown.name, okorniev@redhat.com, Dai.Ngo@oracle.com, tom@talpey.com, trondmy@kernel.org, anna@kernel.org, kees@kernel.org, bigeasy@linutronix.de, clrkwllms@kernel.org, mark.rutland@arm.com, ada.coupriediaz@arm.com, kristina.martsenko@arm.com, wangkefeng.wang@huawei.com, broonie@kernel.org, kevin.brodsky@arm.com, dwmw@amazon.co.uk, shakeel.butt@linux.dev, ast@kernel.org, ziy@nvidia.com, yuzhao@google.com, baolin.wang@linux.alibaba.com, usamaarif642@gmail.com, joel.granados@kernel.org, richard.weiyang@gmail.com, geert+renesas@glider.be, tim.c.chen@linux.intel.com, linux@treblig.org, alexander.shishkin@linux.intel.com, lillian@star-ark.net, chenhuacai@kernel.org, francesco@valla.it, guoweikang.kernel@gmail.com, link@vivo.com, jpoimboe@kernel.org, masahiroy@kernel.org, brauner@kernel.org, thomas.weissschuh@linutronix.de, oleg@redhat.com, mjguzik@gmail.com, andrii@ke
- rnel.org, wangfushuai@baidu.com, linux-doc@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-i2c@vger.kernel.org, linux-arch@vger.kernel.org, linux-modules@vger.kernel.org, rcu@vger.kernel.org, linux-nfs@vger.kernel.org, linux-rt-devel@lists.linux.dev, 2407018371@qq.com, dakr@kernel.org, miguel.ojeda.sandonis@gmail.com, neilb@ownmail.net, bagasdotme@gmail.com, wsa+renesas@sang-engineering.com, dave.hansen@intel.com, geert@linux-m68k.org, ojeda@kernel.org, alex.gaynor@gmail.com, gary@garyguo.net, bjorn3_gh@protonmail.com, lossin@kernel.org, a.hindborg@kernel.org, aliceryhl@google.com, tmgross@umich.edu, rust-for-linux@vger.kernel.org, linux-kernel@vger.kernel.org
+CC: linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, Maxime Ripard <mripard@redhat.com>, Albert Esteve <aesteve@redhat.com>, linux-mm@kvack.org, Eric Chanudet <echanude@redhat.com>, Maxime Ripard <mripard@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v18 34/42] dept: add module support for struct dept_event_site and dept_event_site_dep
+Subject: [Linaro-mm-sig] [PATCH v2 0/3] dma-buf: heaps: cma: enable dmem cgroup accounting
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/B7SUTKLBLAEIOYUCU3HYPPXE7OKOXWTF/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KE5LXPMKQIXXAOIK6EUQBWMPNN2R74XM/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -93,213 +111,82 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [4.49 / 15.00];
-	DMARC_POLICY_QUARANTINE(1.50)[suse.com : SPF not aligned (relaxed),quarantine];
-	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[suse.com:s=susede1];
-	DATE_IN_PAST(1.00)[1369];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+X-Spamd-Result: default: False [2.99 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[redhat.com : SPF not aligned (relaxed),quarantine];
+	R_DKIM_REJECT(1.00)[redhat.com:s=mimecast20190719];
+	DATE_IN_PAST(1.00)[1367];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[skhynix.com,linux-foundation.org,opensource.wdc.com,vger.kernel.org,dilger.ca,redhat.com,infradead.org,kernel.org,linutronix.de,goodmis.org,joelfernandes.org,ffwll.ch,gmail.com,intel.com,mit.edu,fromorbit.com,linuxfoundation.org,lge.com,kvack.org,cmpxchg.org,linux.com,google.com,suse.cz,vflare.org,toxicpanda.com,lists.fr,oracle.com,ericsson.com,kzalloc.com,arm.com,lwn.net,alien8.de,zytor.com,linaro.org,padovan.org,amd.com,arndb.de,nvidia.com,joshtriplett.org,efficios.com,linux.dev,li,suse.de,brown.name,talpey.com,huawei.com,amazon.co.uk,linux.alibaba.com,glider.be,linux.intel.com,treblig.org,star-ark.net,valla.it,vivo.com,ke,baidu.com,lists.infradead.org,lists.linaro.org,lists.linux.dev,qq.com,ownmail.net,sang-engineering.com,linux-m68k.org,garyguo.net,protonmail.com,umich.edu];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	GREYLIST(0.00)[pass,meta];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	ARC_NA(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[23];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[suse.com:-];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[165];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FROM_NEQ_ENVFROM(0.00)[petr.pavlu@suse.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.867];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,renesas];
-	MID_RHS_MATCH_FROM(0.00)[];
+	DKIM_TRACE(0.00)[redhat.com:-];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[echanude@redhat.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.701];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,sk.com:email,suse.com:mid]
-X-Rspamd-Queue-Id: 50A6E411F6D
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
+X-Rspamd-Queue-Id: A095F411F75
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On 2/13/26 6:50 AM, Byungchul Park wrote:
-> On Wed, Jan 07, 2026 at 01:19:00PM +0100, Petr Pavlu wrote:
->> On 12/5/25 8:18 AM, Byungchul Park wrote:
->>> struct dept_event_site and struct dept_event_site_dep have been
->>> introduced to track dependencies between multi event sites for a single
->>> wait, that will be loaded to data segment.  Plus, a custom section,
->>> '.dept.event_sites', also has been introduced to keep pointers to the
->>> objects to make sure all the event sites defined exist in code.
->>>
->>> dept should work with the section and segment of module.  Add the
->>> support to handle the section and segment properly whenever modules are
->>> loaded and unloaded.
->>>
->>> Signed-off-by: Byungchul Park <byungchul@sk.com>
->>
->> Below are a few comments from the module loader perspective.
-> 
-> Sorry about the late reply.  I've been going through some major life
-> changes lately. :(
-> 
-> Thank you sooooo~ much for your helpful feedback.  I will leave my
-> opinion below.
-> 
-[...]
->>> diff --git a/kernel/dependency/dept.c b/kernel/dependency/dept.c
->>> index b14400c4f83b..07d883579269 100644
->>> --- a/kernel/dependency/dept.c
->>> +++ b/kernel/dependency/dept.c
->>> @@ -984,6 +984,9 @@ static void bfs(void *root, struct bfs_ops *ops, void *in, void **out)
->>>   * event sites.
->>>   */
->>>
->>> +static LIST_HEAD(dept_event_sites);
->>> +static LIST_HEAD(dept_event_site_deps);
->>> +
->>>  /*
->>>   * Print all events in the circle.
->>>   */
->>> @@ -2043,6 +2046,33 @@ static void del_dep_rcu(struct rcu_head *rh)
->>>       preempt_enable();
->>>  }
->>>
->>> +/*
->>> + * NOTE: Must be called with dept_lock held.
->>> + */
->>> +static void disconnect_event_site_dep(struct dept_event_site_dep *esd)
->>> +{
->>> +     list_del_rcu(&esd->dep_node);
->>> +     list_del_rcu(&esd->dep_rev_node);
->>> +}
->>> +
->>> +/*
->>> + * NOTE: Must be called with dept_lock held.
->>> + */
->>> +static void disconnect_event_site(struct dept_event_site *es)
->>> +{
->>> +     struct dept_event_site_dep *esd, *next_esd;
->>> +
->>> +     list_for_each_entry_safe(esd, next_esd, &es->dep_head, dep_node) {
->>> +             list_del_rcu(&esd->dep_node);
->>> +             list_del_rcu(&esd->dep_rev_node);
->>> +     }
->>> +
->>> +     list_for_each_entry_safe(esd, next_esd, &es->dep_rev_head, dep_rev_node) {
->>> +             list_del_rcu(&esd->dep_node);
->>> +             list_del_rcu(&esd->dep_rev_node);
->>> +     }
->>> +}
->>> +
->>>  /*
->>>   * NOTE: Must be called with dept_lock held.
->>>   */
->>> @@ -2384,6 +2414,8 @@ void dept_free_range(void *start, unsigned int sz)
->>>  {
->>>       struct dept_task *dt = dept_task();
->>>       struct dept_class *c, *n;
->>> +     struct dept_event_site_dep *esd, *next_esd;
->>> +     struct dept_event_site *es, *next_es;
->>>       unsigned long flags;
->>>
->>>       if (unlikely(!dept_working()))
->>> @@ -2405,6 +2437,24 @@ void dept_free_range(void *start, unsigned int sz)
->>>       while (unlikely(!dept_lock()))
->>>               cpu_relax();
->>>
->>> +     list_for_each_entry_safe(esd, next_esd, &dept_event_site_deps, all_node) {
->>> +             if (!within((void *)esd, start, sz))
->>> +                     continue;
->>> +
->>> +             disconnect_event_site_dep(esd);
->>> +             list_del(&esd->all_node);
->>> +     }
->>> +
->>> +     list_for_each_entry_safe(es, next_es, &dept_event_sites, all_node) {
->>> +             if (!within((void *)es, start, sz) &&
->>> +                 !within(es->name, start, sz) &&
->>> +                 !within(es->func_name, start, sz))
->>> +                     continue;
->>> +
->>> +             disconnect_event_site(es);
->>> +             list_del(&es->all_node);
->>> +     }
->>> +
->>>       list_for_each_entry_safe(c, n, &dept_classes, all_node) {
->>>               if (!within((void *)c->key, start, sz) &&
->>>                   !within(c->name, start, sz))
->>> @@ -3337,6 +3387,7 @@ void __dept_recover_event(struct dept_event_site_dep *esd,
->>>
->>>       list_add(&esd->dep_node, &es->dep_head);
->>>       list_add(&esd->dep_rev_node, &rs->dep_rev_head);
->>> +     list_add(&esd->all_node, &dept_event_site_deps);
->>>       check_recover_dl_bfs(esd);
->>>  unlock:
->>>       dept_unlock();
->>> @@ -3347,6 +3398,23 @@ EXPORT_SYMBOL_GPL(__dept_recover_event);
->>>
->>>  #define B2KB(B) ((B) / 1024)
->>>
->>> +void dept_mark_event_site_used(void *start, void *end)
->>
->> Nit: I suggest that dept_mark_event_site_used() take pointers to
->> dept_event_site_init, which would catch the type mismatch with
-> 
-> IMO, this is the easiest way to get all the pointers from start to the
-> end, or I can't get the number of the pointers.  It's similar to the
-> initcalls section for device drivers.
+An earlier series[1] from Maxime introduced dmem to the cma allocator in
+an attempt to use it generally for dma-buf. Restart from there and apply
+the charge in the narrower context of the CMA dma-buf heap instead.
 
-This was a minor suggestion.. The idea is to simply change the function
-signature to:
+In line with introducing cgroup to the system heap[2], this behavior is
+enabled based on dma_heap.mem_accounting, disabled by default.
 
-void dept_mark_event_site_used(struct dept_event_site_init **start,
-			       struct dept_event_site_init **end))
+dmem is chosen for CMA heaps as it allows limits to be set for each
+region backing each heap. The charge is only put in the dma-buf heap for
+now as it guaranties it can be accounted against a userspace process
+that requested the allocation.
 
-This way, the compiler can provide proper type checking to ensure that
-correct pointers are passed to dept_mark_event_site_used(). It would
-catch the type mismatch with module::dept_event_sites.
+[1] https://lore.kernel.org/all/20250310-dmem-cgroups-v1-0-2984c1bc9312@kernel.org/
+[2] https://lore.kernel.org/all/20260116-dmabuf-heap-system-memcg-v3-0-ecc6b62cc446@redhat.com/
 
-> 
->> module::dept_event_sites.
->>
->>> +{
->>> +     struct dept_event_site_init **evtinitpp;
->>> +
->>> +     for (evtinitpp = (struct dept_event_site_init **)start;
->>> +          evtinitpp < (struct dept_event_site_init **)end;
->>> +          evtinitpp++) {
->>> +             (*evtinitpp)->evt_site->used = true;
->>> +             (*evtinitpp)->evt_site->func_name = (*evtinitpp)->func_name;
->>> +             list_add(&(*evtinitpp)->evt_site->all_node, &dept_event_sites);
->>> +
->>> +             pr_info("dept_event_site %s@%s is initialized.\n",
->>> +                             (*evtinitpp)->evt_site->name,
->>> +                             (*evtinitpp)->evt_site->func_name);
->>> +     }
->>> +}
->>> +
->>>  extern char __dept_event_sites_start[], __dept_event_sites_end[];
->>
->> Related to the above, __dept_event_sites_start and
->> __dept_event_sites_end can already be properly typed here.
-> 
-> How can I get the number of the pointers?
+Signed-off-by: Eric Chanudet <echanude@redhat.com>
+---
+Changes in v2:
+- Rebase on Maxime's introduction of dmem to the cma allocator:
+  https://lore.kernel.org/all/20250310-dmem-cgroups-v1-0-2984c1bc9312@kernel.org/
+- Remove the dmem region registration from the cma dma-buf heap
+- Remove the misplaced logic for the default region.
+- Link to v1: https://lore.kernel.org/r/20260130-dmabuf-heap-cma-dmem-v1-1-3647ea993e99@redhat.com
 
-Similarly here, changing the code to:
+---
+Eric Chanudet (1):
+      dma-buf: heaps: cma: charge each cma heap's dmem
 
-extern struct dept_event_site_init *__dept_event_sites_start[], *__dept_event_sites_end[];
+Maxime Ripard (2):
+      cma: Register dmem region for each cma region
+      cma: Provide accessor to cma dmem region
 
-It is the same for the initcalls you mentioned. The declarations of
-their start/end symbols are also already properly typed as
-initcall_entry_t[] in include/linux/init.h.
+ drivers/dma-buf/heaps/cma_heap.c | 15 ++++++++++++++-
+ include/linux/cma.h              |  9 +++++++++
+ mm/cma.c                         | 20 +++++++++++++++++++-
+ mm/cma.h                         |  3 +++
+ 4 files changed, 45 insertions(+), 2 deletions(-)
+---
+base-commit: 948e195dfaa56e48eabda591f97630502ff7e27e
+change-id: 20260128-dmabuf-heap-cma-dmem-f4120a2df4a8
 
+Best regards,
 -- 
-Thanks,
-Petr
+Eric Chanudet <echanude@redhat.com>
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
