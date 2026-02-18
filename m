@@ -2,592 +2,208 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id kH98N5YGlWmmKAIAu9opvQ
+	id 8DVKOt6+lWkfUgIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 18 Feb 2026 01:23:50 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 18 Feb 2026 14:30:06 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9D288152409
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 18 Feb 2026 01:23:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 654F9156A80
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 18 Feb 2026 14:30:06 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id AAAD640975
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 18 Feb 2026 00:14:22 +0000 (UTC)
-Received: from MW6PR02CU001.outbound.protection.outlook.com (mail-westus2azon11012022.outbound.protection.outlook.com [52.101.48.22])
-	by lists.linaro.org (Postfix) with ESMTPS id 93146401D7
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 18 Feb 2026 00:12:07 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 0C43C40150
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 18 Feb 2026 13:30:05 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+	by lists.linaro.org (Postfix) with ESMTPS id 5638C3F7EC
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 18 Feb 2026 13:30:02 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=Nvidia.com header.s=selector2 header.b=HGAQ71Nm;
-	spf=pass (lists.linaro.org: domain of jgg@nvidia.com designates 52.101.48.22 as permitted sender) smtp.mailfrom=jgg@nvidia.com;
-	arc=pass ("microsoft.com:s=arcselector10001:i=1");
-	dmarc=pass (policy=reject) header.from=nvidia.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=xRuXTpowU325I6aHidq0+5VL4c7MhNpx3Ft494pxvgjLR4rO7KhMZ4T3wlT2O9VuXcy2VMOHednbHS6voBIMF/yewIhly10YciLtHWuaoyky2K9m4yY8OvcXw6woCAARaUyyIZZURsUCqAxuIWKjM7nvgRldHRNqWfZz7vvFSLvGzEdI9vSLAbHf5r3sIEcOQwA4TRkcePRSIT3Y0f53PPbgsSXfrzuE6w4HCbLvpBA+mKaTJJKgcf+KZhdVpYOp2DURyKIvBVlFymelvufsOR+9X/t/wVuLUvgU0H8AC3YIDZNTLxEL0wo3iWxZuP9P2IaGbko8hphkH6SD7vcDFw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=itUYym2ovXT+DG6afKb0oF612w9PvR+OFrY1R3Y4e1w=;
- b=jB563RqqlnILv3nZYCxfec4L6uzYKWC+m/pNV6WN9+Fg/d2B1BgKMPryTKBmC5Dtuhh/M3+fynKV5JYU8VZlf1D7Fb5dSWbTX285lphW3GD6irWMQ1m76ycU7DjEULM5lRjUvhxHQyKPZUM/gZ2k+z9alfPVrB8myArLIdBKT0Bmzlx5t+o9q0isDM85OJzoHDz4+bdb/TlenFH8+rYpnxRcJfhWGrmuHBTGrnWqxVr+NEFv2U0nBYUmoa3+VR6V38gVwqrXJZrc/+TWE1P/E5FKqcmHXTjSbPkIpCshtCUzSjRISYOhwOuXce041a5hgcktH+hZoI+l3U7W1F3o9g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=itUYym2ovXT+DG6afKb0oF612w9PvR+OFrY1R3Y4e1w=;
- b=HGAQ71NmXlYcFUyVHClGBrKD6MiiOZYOykJMXc3UI76k3pYcsHQU6hlJMAXq/wL11Kn8Qfn/CSsZmyPtDR+b85ZV/UdA5IcClajcdPlkjuPMmEHKOECzU+FgdXdbuKXs2n+IVYlC17f7L9/Fue9nFu2Tr2q3uwz/lkybkwhzaUnqhInrs4+xsL82pX8zhgesRm5AXVajFI0ZKQ+WRzrDudMsiWOC2Aodd3h1GR57xyZCIo6VGGXEUoecY6sy1fvXd8U6Kn3jgpKmN02H+1J8VB01SbLLCwWGpnI8oVY1wsfLMsnljdEZtFDcnAkGkQlTh2vyuQMlF9PgAmmS3zM4LA==
-Received: from LV8PR12MB9620.namprd12.prod.outlook.com (2603:10b6:408:2a1::19)
- by IA0PR12MB8421.namprd12.prod.outlook.com (2603:10b6:208:40f::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.16; Wed, 18 Feb
- 2026 00:12:02 +0000
-Received: from LV8PR12MB9620.namprd12.prod.outlook.com
- ([fe80::299d:f5e0:3550:1528]) by LV8PR12MB9620.namprd12.prod.outlook.com
- ([fe80::299d:f5e0:3550:1528%5]) with mapi id 15.20.9611.013; Wed, 18 Feb 2026
- 00:12:02 +0000
-From: Jason Gunthorpe <jgg@nvidia.com>
-To: 
-Date: Tue, 17 Feb 2026 20:11:57 -0400
-Message-ID: <26-v1-b5cab63049c0+191af-dmabuf_map_type_jgg@nvidia.com>
-In-Reply-To: <0-v1-b5cab63049c0+191af-dmabuf_map_type_jgg@nvidia.com>
-References: 
-X-ClientProxiedBy: BL1PR13CA0237.namprd13.prod.outlook.com
- (2603:10b6:208:2bf::32) To LV8PR12MB9620.namprd12.prod.outlook.com
- (2603:10b6:408:2a1::19)
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=hQXgmrs1;
+	spf=pass (lists.linaro.org: domain of krzk@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=krzk@kernel.org;
+	dmarc=pass (policy=quarantine) header.from=kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by tor.source.kernel.org (Postfix) with ESMTP id D4D666132D;
+	Wed, 18 Feb 2026 13:30:01 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3D00EC19424;
+	Wed, 18 Feb 2026 13:29:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1771421401;
+	bh=gN2cljJea4XLY82kVunjPVPH2WX7LYqJDp0lJ1rpnJE=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=hQXgmrs1Qlib2Iq+e1k/vkhWvMgVnJzznWpXjKLKlL/k+U6Tv2xdc10MIVg/SeCDM
+	 A66aqE5wdPpuA5lTlGH60KZ0ZkszhElLCWKFSjtPvfAQkVmYcuhim3wEn+6JjbOJ3S
+	 CgqItgBO+/0Zz/5xyOfURJ6rhOX58rpT2RyVXY3PV2l6/m1wkzMcN1gHGt8Wq2oyAk
+	 LggaivlXv0p5S8ianw7fhxrVvurLmiSsCQt0MqR7ibOzj5kmVXiosLSTUrFIiv1ULe
+	 1h69+BXZAAztSjkxDEOWwl00dfgmEHtRvKxwHhRS6tpZNfNtp4CcSEavVs/fKwledH
+	 OtF7zRlwkP7mQ==
+Message-ID: <b7adddfc-db7a-466d-a2e8-72bc6a87ae81@kernel.org>
+Date: Wed, 18 Feb 2026 14:29:54 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV8PR12MB9620:EE_|IA0PR12MB8421:EE_
-X-MS-Office365-Filtering-Correlation-Id: dfaeef1e-59c7-4b37-4fd3-08de6e8255b1
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|7416014|1800799024;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?oUZd8tXaFXddOJjRrh/YVYfQMtxiAWiu5ULfRhDvZmpCbkWHEDr3f2IvVNwm?=
- =?us-ascii?Q?Q0bAste815ai64D4cr6zBba56MRufNz7N/XQBcArGxxQdBx1yVBRpWB3rF36?=
- =?us-ascii?Q?bOXRu0Qxn8BsjVfOabcWwSF+UjLkAHxxbDap7tWEUuPNBYE8i9a8tacyZSpC?=
- =?us-ascii?Q?bVeAMG1Ccnyqqm1GjNyBHbwrdYt9QaiICTfM42j28AIRcWqX5lWTnvB+na7a?=
- =?us-ascii?Q?HQ1KoVZDmRvvPMpnBsag1Iwv5FB3RS+7w4RoTbKSaGo923TUhuPfurM8q6ft?=
- =?us-ascii?Q?ZcBuKMbiODIB0lF62O7AQN79WUVLJTynYQJG8s1IjNuiLKc+TjeWlG+rzCPE?=
- =?us-ascii?Q?17ho6nxqJh8bvssiTrUeQjBYpmD2WeVVvC66iAVOXPxuV/gJUV9y/M/XRZW6?=
- =?us-ascii?Q?NqWocgeoDjWKqwrgG2U7XzZmud/e67t1+oQ8igDsXFwlKzPz+w4ceRawfJ8k?=
- =?us-ascii?Q?bCHNbcUcib+193aD4zvr8wUXEqQ76FI6xOj7JxIzGGcn7gQ5NeKiMRFOZgq9?=
- =?us-ascii?Q?blfAEYUVhN4PoTNXdgPQb4YDDdw0GEjf3OO13KjxoanMkfRBpKttgQbT0vVJ?=
- =?us-ascii?Q?8li9mOBcM8cCnQd7GBd91OGia562WvsbwzcXXuWW+LkrbgeKLTc5I8fPjwt+?=
- =?us-ascii?Q?XMQUGAeunKTVNwUIw4oJAQ2uUGsohLV5KQFrcY3bs80Qnd8SN7stdEbtBgTO?=
- =?us-ascii?Q?yHXz70HkHo4d+L7u0V7fBv8IwyyNEq2wRK6I9MP9rqC33XFe+TLeLjJKdBXL?=
- =?us-ascii?Q?tFOKDQ855mD7oOqIJjEG3ZjO2/ozhNt6ufhIYhceWW4DJAhX4x7FRPtAj+oY?=
- =?us-ascii?Q?sicvUQaZTGgdgxF1isTCTYKptaN0h6BCWpVt7YVLW7Pp5Cu5XDdghYmEoH1G?=
- =?us-ascii?Q?/8FlRHmCrxMrjh6e/bI5BP+G+nC5gCNJ+Oc467mjmu8BS8xUmGLtWMuY2tc4?=
- =?us-ascii?Q?KHYzcSmHhW2hlyB4Zr+P7t0sS58knMsLBQ4rlGGeo0p3aNJIenK6yph2oy+f?=
- =?us-ascii?Q?0CjaWd2zRTGMjy/a560DQ3PqCPXW/GOiyvtZ/Gh5XyM7cF8nZ9G74KcY2PgJ?=
- =?us-ascii?Q?Zk3N2u5T+plIQi/Petrt4YcoO94eBdsaVnHnrz8/uC53E3BRLOnEJHSxXAMR?=
- =?us-ascii?Q?3ir0WvYKCScf39JGtQJI3r/gpl2rPCjCXM2pyTrW8zeYO2eyN4dq4I9jzhAd?=
- =?us-ascii?Q?AZlxKkY5wC7NJyRngCfqOAQ+dbtqkGyJ8kcZk9owiI/lSisMjb+UWogFpTz8?=
- =?us-ascii?Q?YERBoffomAX3oXCTmqOkbGiEAhWWiD0ZDl6CmI1HNTJqliCd6cqEjtu3Kapw?=
- =?us-ascii?Q?i2gIJv6CTHeHL6GpguCgrricc49NQnWirL7sggcw4YnDjTwg9MXTjKM0Z+oY?=
- =?us-ascii?Q?SV4Ibl8UAr3kcuNDgXLJmFOcUqaAXoMzzH2X7u0Kvygi4b/ZkUxByWLM1yTZ?=
- =?us-ascii?Q?VUx8v8l7ayCOtK8+hOsoMdQcEC2PcEHRIrNeQsAMydaBgGhUzcOiw2OS0obv?=
- =?us-ascii?Q?9HVtYwdfCRIibb3w3szEV9k8OJ0feWeBeM29iRHRWEs+beY5k7KqDX8GQiHB?=
- =?us-ascii?Q?eycBaINtkO0acPvpMiw=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LV8PR12MB9620.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(7416014)(1800799024);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?1RIrupWxqZuDuRnx7RpjT961vhy6gFOPOSKd390E3qYagh4P+QUVoT4qVpHE?=
- =?us-ascii?Q?L1XBQYAmPZ2LGXgVtTLjfRaF9/ByMW4MHtu+muz1KjjRLzBhksNi/8PFc/OD?=
- =?us-ascii?Q?1xb7Qxz9FtQ1KLVU/NUZEQrMp1nshQMvu1xvgmODphqAOys+8J/XFa1lfq5J?=
- =?us-ascii?Q?le0t1E8iZabZUBAtzcahqOtEhHZc/qZWg/lq2aiITjLjDg2gu74Vryw5O9lg?=
- =?us-ascii?Q?/cCuqHCG4IFfOpsVw9qLEwId2TB1g/u3geHI6kygzgX5XF73gCdx3xZ7EJE+?=
- =?us-ascii?Q?B6i1avEl1CTE6oYVtnM5Sgxso+Y0YyfUcprRU0Saiuq9ugYYeZYd2swgKaJm?=
- =?us-ascii?Q?bE+FTrbuIdYEWtJYzmeru6Gct5ac5ErqtNs3c5cjRC8exbpYouBTfH/cVwFT?=
- =?us-ascii?Q?hgKYvOrH1/yCqaPXoeFQMGYIFKWYCZbM2/xqy2LZu2LCNLa155pCRdFNaMts?=
- =?us-ascii?Q?8prdrBnSq5gLkddd4MmOTUuB3Y+lbVSfUa9Fjksqhf/Dj0dCGpp0/xEdwK4F?=
- =?us-ascii?Q?YfkwjHecMmBM6ZEomcHWB+Ara955GUHb/z6irlEnngff+10nBroIk/R3Vnap?=
- =?us-ascii?Q?eFFgCe7US/yt5aRWxZef2imntOuqFXBHJWZ1PVKYbqkzbSgUXcL3NKHM6K/8?=
- =?us-ascii?Q?JvQTWWf0QGKOu36pCzb+P3EkFWAw9COmVCz/yng4sU4IDw1nx2vNIOdpiHui?=
- =?us-ascii?Q?F41VkD3nKpbcFDNVQX7RXPClODEzoBPdjzrKUn5Dy0pwVDwnlBffLXhxOfm7?=
- =?us-ascii?Q?tx0LpgJBklTjIyLup+3QN/1q3p/kCy2XgtPt6q63/zKyPlNfBJM0DoEzduhX?=
- =?us-ascii?Q?+0l0bQDKrWttitKSr61Y38ywdrL6VskULDVc3xQQzn4u2J8e6mojGKfMCHcG?=
- =?us-ascii?Q?uaf7IHBlLUUWLcnM0ud2KkCXv5LifGsSSEBJrWGy+6QpqEPUjcVzbK2y7dYD?=
- =?us-ascii?Q?2R3dxyX+E0syMWeVfOR1kt6mfCrxdYXkb/t1e7QpgP2UNGOZjJ99XDxFFcJA?=
- =?us-ascii?Q?JpXPuahiBKSXsuW/RmS0tlFGDF4j0t0gGsz/yBJ8Mgax3N8KQbbADbvxMxkW?=
- =?us-ascii?Q?TtJpYrDnkfAUBdslEHPOj50q++0q8xMS2fvJYt7P/DE//sKwqTINx5wbOKMv?=
- =?us-ascii?Q?BxN0qINYBsffP3wPFT+AsLis1xLCNTxNOeClb+Fe9sxnB84K7n8wc7Wj4yEN?=
- =?us-ascii?Q?PAWAwDCzGK25tNQQWFQNmORl2IS6Pp+QOuvzrU6vqokWa+kAsyzoRqEPXmp6?=
- =?us-ascii?Q?YK4duuSorDzNCu0/TXaKDBYthaUE+/ID+zvE3yufMtG3tGi4W11buVIs6UxL?=
- =?us-ascii?Q?3G2dROPRZZ7iUVtC32Kw+9OdYZboGUQ3c1oOx1DK8qvx6+6HWCK+Z3wrD8t7?=
- =?us-ascii?Q?6Cp3vRLn0khUmqmt9pe8pEcNozH8Frec3xQGYjppkc9dSMEmaj/nqZke3DQU?=
- =?us-ascii?Q?hV301HuTbasHYIB/bL6u9hkRC+1dPgySENeORcLd6qq2IUqQE4sToCPGG/XV?=
- =?us-ascii?Q?8DVIC7XrHn6gg6s3KM5coAUejz8xFvkIY7MZp9hmsfLskhIANgSJUDCDoI1F?=
- =?us-ascii?Q?N0JdTS7zKVGk7k5Rk3XLrDF7fvWTKJrO+qbFsoBk6UHZMCFVKBKHTemHBbA4?=
- =?us-ascii?Q?0GOo7a1EwpVLyp8Fzu3NESb5VBJqeZs3Qzz5vqxkIexKoO9ZL9nINGSGnMVB?=
- =?us-ascii?Q?I/NMC3JeKIcl8R2jKgS//3JZl78ZGbmo50O89Vj/svXbzA4glP7r6HSg4Cuk?=
- =?us-ascii?Q?1+dp8x6p+g=3D=3D?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: dfaeef1e-59c7-4b37-4fd3-08de6e8255b1
-X-MS-Exchange-CrossTenant-AuthSource: LV8PR12MB9620.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Feb 2026 00:11:59.7886
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 5YUgiDTST81uVYhrt7SiEEBqUTL3T/Mybq+vs+kIAgD4NsIpnmMbxZjdj2D9iaDI
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB8421
+User-Agent: Mozilla Thunderbird
+To: Larisa Ileana Grigore <larisa.grigore@oss.nxp.com>,
+ gregkh@linuxfoundation.org, jirislaby@kernel.org, robh@kernel.org,
+ krzk+dt@kernel.org, conor+dt@kernel.org, sumit.semwal@linaro.org,
+ christian.koenig@amd.com, chester62515@gmail.com, cosmin.stoica@nxp.com,
+ adrian.nitu@freescale.com, stefan-gabriel.mirea@nxp.com,
+ Mihaela.Martinas@freescale.com
+References: <20260216150205.212318-1-larisa.grigore@oss.nxp.com>
+ <20260216150205.212318-9-larisa.grigore@oss.nxp.com>
+ <24443e02-886e-48e2-911e-e4093d251155@kernel.org>
+ <e9c214be-840a-43fe-b24d-610fe90269b2@oss.nxp.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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 a/A=
+In-Reply-To: <e9c214be-840a-43fe-b24d-610fe90269b2@oss.nxp.com>
 X-Spamd-Bar: ---
-Message-ID-Hash: LBMHGUHGMULXCB55WJNEA4IGNCPXYC2X
-X-Message-ID-Hash: LBMHGUHGMULXCB55WJNEA4IGNCPXYC2X
-X-MailFrom: jgg@nvidia.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Christian Koenig <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, intel-xe@lists.freedesktop.org, iommu@lists.linux.dev, Kevin Tian <kevin.tian@intel.com>, Leon Romanovsky <leonro@nvidia.com>, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org, Matthew Brost <matthew.brost@intel.com>, Simona Vetter <simona.vetter@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Thomas Hellstrom <thomas.hellstrom@linux.intel.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>
+Message-ID-Hash: P77SQMVQ4JSU4XWGY3DKTM43PONNMRUT
+X-Message-ID-Hash: P77SQMVQ4JSU4XWGY3DKTM43PONNMRUT
+X-MailFrom: krzk@kernel.org
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: linux-kernel@vger.kernel.org, linux-serial@vger.kernel.org, devicetree@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, s32@nxp.com, imx@lists.linux.dev, clizzi@redhat.com, aruizrui@redhat.com, eballetb@redhat.com, echanude@redhat.com, jkangas@redhat.com, Radu Pirea <radu-nicolae.pirea@nxp.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH RFC 26/26] dma-buf: Add kunit tests for mapping type
+Subject: [Linaro-mm-sig] Re: [PATCH 08/13] dt-bindings: serial: fsl-linflexuart: add clock input properties
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LBMHGUHGMULXCB55WJNEA4IGNCPXYC2X/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/P77SQMVQ4JSU4XWGY3DKTM43PONNMRUT/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [4.49 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[nvidia.com : SPF not aligned (relaxed),reject];
-	MID_CONTAINS_FROM(1.00)[];
-	R_DKIM_REJECT(1.00)[Nvidia.com:s=selector2];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+X-Spamd-Result: default: False [3.59 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
+	R_DKIM_REJECT(1.00)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MAILLIST(-0.20)[mailman];
+	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[13];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	GREYLIST(0.00)[pass,meta];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	DKIM_TRACE(0.00)[Nvidia.com:-];
+	FREEMAIL_TO(0.00)[oss.nxp.com,linuxfoundation.org,kernel.org,linaro.org,amd.com,gmail.com,nxp.com,freescale.com];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[27];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jgg@nvidia.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	MISSING_XM_UA(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[krzk@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:-];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig,dt];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,nvidia.com:mid,nvidia.com:email]
-X-Rspamd-Queue-Id: 9D288152409
+	DBL_BLOCKED_OPENRESOLVER(0.00)[nxp.com:email,401c8000:email,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
+X-Rspamd-Queue-Id: 654F9156A80
 X-Rspamd-Action: no action
 
-Some basic coverage of common flows:
- - Check dma_buf_match_mapping()'s rules. These choices effectively
-   become driver facing API and it would be a pain to change them later
- - Test the dma_bug_sgt attachment flow to see that the new wrappers work
-
-Signed-off-by: Jason Gunthorpe <jgg@nvidia.com>
----
- drivers/dma-buf/Makefile         |   1 +
- drivers/dma-buf/st-dma-mapping.c | 373 +++++++++++++++++++++++++++++++
- 2 files changed, 374 insertions(+)
- create mode 100644 drivers/dma-buf/st-dma-mapping.c
-
-diff --git a/drivers/dma-buf/Makefile b/drivers/dma-buf/Makefile
-index 12c86da25866c1..0ba311be8d3547 100644
---- a/drivers/dma-buf/Makefile
-+++ b/drivers/dma-buf/Makefile
-@@ -12,6 +12,7 @@ dmabuf_kunit-y := \
- 	st-dma-fence.o \
- 	st-dma-fence-chain.o \
- 	st-dma-fence-unwrap.o \
-+	st-dma-mapping.o \
- 	st-dma-resv.o
- 
- obj-$(CONFIG_DMABUF_KUNIT_TEST) += dmabuf_kunit.o
-diff --git a/drivers/dma-buf/st-dma-mapping.c b/drivers/dma-buf/st-dma-mapping.c
-new file mode 100644
-index 00000000000000..1bccfe43a576d0
---- /dev/null
-+++ b/drivers/dma-buf/st-dma-mapping.c
-@@ -0,0 +1,373 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * KUnit tests for dma_buf_match_mapping()
-+ */
-+
-+#include <kunit/device.h>
-+#include <kunit/test.h>
-+#include <linux/dma-buf.h>
-+#include <linux/dma-buf-mapping.h>
-+#include <linux/errno.h>
-+
-+/* Mock tracking state -- reset before each test */
-+static bool mock_match_called;
-+static const struct dma_buf_mapping_match *mock_match_exp_arg;
-+static const struct dma_buf_mapping_match *mock_match_imp_arg;
-+static int mock_match_ret;
-+
-+static bool mock_finish_called;
-+static const struct dma_buf_match_args *mock_finish_args_arg;
-+static const struct dma_buf_mapping_match *mock_finish_exp_arg;
-+static const struct dma_buf_mapping_match *mock_finish_imp_arg;
-+
-+static int reset_mock_state(struct kunit *test)
-+{
-+	mock_match_called = false;
-+	mock_match_exp_arg = NULL;
-+	mock_match_imp_arg = NULL;
-+	mock_match_ret = 0;
-+	mock_finish_called = false;
-+	mock_finish_args_arg = NULL;
-+	mock_finish_exp_arg = NULL;
-+	mock_finish_imp_arg = NULL;
-+	return 0;
-+}
-+
-+static int mock_match(struct dma_buf *dmabuf,
-+		      const struct dma_buf_mapping_match *exp,
-+		      const struct dma_buf_mapping_match *imp)
-+{
-+	mock_match_called = true;
-+	mock_match_exp_arg = exp;
-+	mock_match_imp_arg = imp;
-+	return mock_match_ret;
-+}
-+
-+static void mock_finish_match(struct dma_buf_match_args *args,
-+			      const struct dma_buf_mapping_match *exp,
-+			      const struct dma_buf_mapping_match *imp)
-+{
-+	mock_finish_called = true;
-+	mock_finish_args_arg = args;
-+	mock_finish_exp_arg = exp;
-+	mock_finish_imp_arg = imp;
-+
-+	/* Test doesn't always set attach */
-+	if (args->attach)
-+		args->attach->map_type = (struct dma_buf_mapping_match){
-+			.type = exp->type,
-+			.exp_ops = exp->exp_ops,
-+		};
-+}
-+
-+/* Type with both match and finish_match callbacks */
-+static struct dma_buf_mapping_type mock_type_a = {
-+	.name = "mock_type_a",
-+	.match = mock_match,
-+	.finish_match = mock_finish_match,
-+};
-+
-+/* Second type -- distinct pointer identity from A */
-+static struct dma_buf_mapping_type mock_type_b = {
-+	.name = "mock_type_b",
-+	.match = mock_match,
-+	.finish_match = mock_finish_match,
-+};
-+
-+static void test_match_fail(struct kunit *test)
-+{
-+	struct dma_buf_mapping_match matches[] = { { .type = &mock_type_a } };
-+	struct dma_buf_mapping_match exp[] = { { .type = &mock_type_b } };
-+	struct dma_buf_match_args args = {
-+		.imp_matches = matches,
-+		.imp_len = ARRAY_SIZE(matches),
-+	};
-+
-+	/* Zero-length exporter array returns -EINVAL */
-+	KUNIT_EXPECT_EQ(test, dma_buf_match_mapping(&args, NULL, 0), -EINVAL);
-+	KUNIT_EXPECT_FALSE(test, mock_match_called);
-+	KUNIT_EXPECT_FALSE(test, mock_finish_called);
-+
-+	/* Zero-length importer array returns -EINVAL */
-+	args = (struct dma_buf_match_args){};
-+	KUNIT_EXPECT_EQ(test,
-+			dma_buf_match_mapping(&args, matches,
-+					      ARRAY_SIZE(matches)),
-+			-EINVAL);
-+	KUNIT_EXPECT_FALSE(test, mock_match_called);
-+	KUNIT_EXPECT_FALSE(test, mock_finish_called);
-+
-+	/* Different types produce no match */
-+	KUNIT_EXPECT_EQ(test,
-+			dma_buf_match_mapping(&args, exp, ARRAY_SIZE(exp)),
-+			-EINVAL);
-+	KUNIT_EXPECT_FALSE(test, mock_match_called);
-+	KUNIT_EXPECT_FALSE(test, mock_finish_called);
-+}
-+
-+/* When type->match() is NULL same types always match */
-+static void test_match_no_match_callback(struct kunit *test)
-+{
-+	static struct dma_buf_mapping_type mock_type_no_match = {
-+		.name = "mock_type_no_match",
-+		.finish_match = mock_finish_match,
-+	};
-+	struct dma_buf_mapping_match matches[] = {
-+		{ .type = &mock_type_no_match }
-+	};
-+	struct dma_buf_match_args args = {
-+		.imp_matches = matches,
-+		.imp_len = ARRAY_SIZE(matches),
-+	};
-+
-+	KUNIT_EXPECT_EQ(
-+		test,
-+		dma_buf_match_mapping(&args, matches, ARRAY_SIZE(matches)), 0);
-+	KUNIT_EXPECT_FALSE(test, mock_match_called);
-+	KUNIT_EXPECT_TRUE(test, mock_finish_called);
-+	KUNIT_EXPECT_PTR_EQ(test, mock_finish_args_arg, &args);
-+	KUNIT_EXPECT_PTR_EQ(test, mock_finish_exp_arg, &matches[0]);
-+	KUNIT_EXPECT_PTR_EQ(test, mock_finish_imp_arg, &matches[0]);
-+}
-+
-+static void test_match_callback_returns(struct kunit *test)
-+{
-+	struct dma_buf_mapping_match matches[] = { { .type = &mock_type_a } };
-+	struct dma_buf_match_args args = {
-+		.imp_matches = matches,
-+		.imp_len = ARRAY_SIZE(matches),
-+	};
-+
-+	/* type->match() returns -EOPNOTSUPP. Skips to next */
-+	mock_match_ret = -EOPNOTSUPP;
-+	KUNIT_EXPECT_EQ(test,
-+			dma_buf_match_mapping(&args, matches,
-+					      ARRAY_SIZE(matches)),
-+			-EINVAL);
-+	KUNIT_EXPECT_TRUE(test, mock_match_called);
-+	KUNIT_EXPECT_FALSE(test, mock_finish_called);
-+
-+	/* type->match() returns an error code. Stops immediately, returns code */
-+	mock_match_ret = -ENOMEM;
-+	KUNIT_EXPECT_EQ(test,
-+			dma_buf_match_mapping(&args, matches,
-+					      ARRAY_SIZE(matches)),
-+			-ENOMEM);
-+	KUNIT_EXPECT_TRUE(test, mock_match_called);
-+	KUNIT_EXPECT_FALSE(test, mock_finish_called);
-+}
-+
-+/* Multiple importers. First exporter compatible type wins */
-+static void test_match_exporter_priority(struct kunit *test)
-+{
-+	struct dma_buf_mapping_match exp1[2] = {
-+		{ .type = &mock_type_a },
-+		{ .type = &mock_type_b },
-+	};
-+	struct dma_buf_mapping_match exp2[] = { { .type = &mock_type_b } };
-+	struct dma_buf_mapping_match imp[2] = {
-+		{ .type = &mock_type_a },
-+		{ .type = &mock_type_b },
-+	};
-+	struct dma_buf_match_args args = {
-+		.imp_matches = imp,
-+		.imp_len = ARRAY_SIZE(imp),
-+	};
-+
-+	/* First matches */
-+	KUNIT_EXPECT_EQ(
-+		test, dma_buf_match_mapping(&args, exp1, ARRAY_SIZE(exp1)), 0);
-+	KUNIT_EXPECT_TRUE(test, mock_finish_called);
-+	KUNIT_EXPECT_PTR_EQ(test, mock_finish_exp_arg, &exp1[0]);
-+	KUNIT_EXPECT_PTR_EQ(test, mock_finish_imp_arg, &imp[0]);
-+
-+	/* Second matches */
-+	KUNIT_EXPECT_EQ(
-+		test, dma_buf_match_mapping(&args, exp2, ARRAY_SIZE(exp2)), 0);
-+	KUNIT_EXPECT_TRUE(test, mock_finish_called);
-+	KUNIT_EXPECT_PTR_EQ(test, mock_finish_exp_arg, &exp2[0]);
-+	KUNIT_EXPECT_PTR_EQ(test, mock_finish_imp_arg, &imp[1]);
-+}
-+
-+/* Multiple exporters. First exporter compatible type wins */
-+static void test_match_importer_priority(struct kunit *test)
-+{
-+	struct dma_buf_mapping_match exp[] = {
-+		{ .type = &mock_type_a },
-+		{ .type = &mock_type_b },
-+	};
-+	struct dma_buf_mapping_match imp1[] = { { .type = &mock_type_b } };
-+	struct dma_buf_mapping_match imp2[] = {
-+		{ .type = &mock_type_b },
-+		{ .type = &mock_type_a },
-+	};
-+	struct dma_buf_match_args args = {
-+		.imp_matches = imp1,
-+		.imp_len = ARRAY_SIZE(imp1),
-+	};
-+
-+	/* Single importer */
-+	KUNIT_EXPECT_EQ(test,
-+			dma_buf_match_mapping(&args, exp, ARRAY_SIZE(exp)), 0);
-+	KUNIT_EXPECT_TRUE(test, mock_finish_called);
-+	KUNIT_EXPECT_PTR_EQ(test, mock_finish_exp_arg, &exp[1]);
-+	KUNIT_EXPECT_PTR_EQ(test, mock_finish_imp_arg, &imp1[0]);
-+
-+	/* Two importers, skipping the first */
-+	args = (struct dma_buf_match_args){
-+		.imp_matches = imp2,
-+		.imp_len = ARRAY_SIZE(imp2),
-+	};
-+	KUNIT_EXPECT_EQ(test,
-+			dma_buf_match_mapping(&args, exp, ARRAY_SIZE(exp)), 0);
-+	KUNIT_EXPECT_TRUE(test, mock_finish_called);
-+	KUNIT_EXPECT_PTR_EQ(test, mock_finish_exp_arg, &exp[0]);
-+	KUNIT_EXPECT_PTR_EQ(test, mock_finish_imp_arg, &imp2[1]);
-+}
-+
-+static void mock_dmabuf_release(struct dma_buf *dmabuf)
-+{
-+}
-+
-+static struct sg_table *mock_map_dma_buf(struct dma_buf_attachment *attach,
-+					 enum dma_data_direction dir)
-+{
-+	return ERR_PTR(-ENODEV);
-+}
-+
-+static void mock_unmap_dma_buf(struct dma_buf_attachment *attach,
-+			       struct sg_table *sgt,
-+			       enum dma_data_direction dir)
-+{
-+}
-+
-+static const struct dma_buf_mapping_sgt_exp_ops mock_sgt_ops = {
-+	.map_dma_buf = mock_map_dma_buf,
-+	.unmap_dma_buf = mock_unmap_dma_buf,
-+};
-+
-+static const struct dma_buf_ops mock_dmabuf_simple_sgt_ops = {
-+	.release = mock_dmabuf_release,
-+	DMA_BUF_SIMPLE_SGT_EXP_MATCH(mock_map_dma_buf, mock_unmap_dma_buf),
-+};
-+
-+static int mock_dmabuf_match_mapping(struct dma_buf_match_args *args)
-+{
-+	struct dma_buf_mapping_match sgt_match[2];
-+	unsigned int num_match = 0;
-+
-+	sgt_match[num_match++] =
-+		(struct dma_buf_mapping_match){ .type = &mock_type_a };
-+
-+	sgt_match[num_match++] = DMA_BUF_EMAPPING_SGT(&mock_sgt_ops);
-+
-+	return dma_buf_match_mapping(args, sgt_match, ARRAY_SIZE(sgt_match));
-+}
-+
-+static const struct dma_buf_ops mock_dmabuf_two_exp_ops = {
-+	.release = mock_dmabuf_release,
-+	.match_mapping = mock_dmabuf_match_mapping,
-+};
-+
-+struct dma_exporter {
-+	const struct dma_buf_ops *ops;
-+	const char *desc;
-+};
-+
-+static struct dma_buf *mock_dmabuf_export(const struct dma_buf_ops *ops)
-+{
-+	DEFINE_DMA_BUF_EXPORT_INFO(exp_info);
-+
-+	exp_info.ops = ops;
-+	exp_info.size = PAGE_SIZE;
-+	exp_info.priv = ERR_PTR(-EINVAL);
-+	return dma_buf_export(&exp_info);
-+}
-+
-+/*
-+ * Check that a simple SGT exporter with single_exporter_match works with
-+ * dma_buf_sgt_attach()
-+ */
-+static void test_sgt_attach(struct kunit *test)
-+{
-+	const struct dma_exporter *param = test->param_value;
-+	struct dma_buf *dmabuf;
-+	struct dma_buf_attachment *attach;
-+	struct device *dev;
-+
-+	dev = kunit_device_register(test, "dma-buf-test");
-+	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, dev);
-+
-+	dmabuf = mock_dmabuf_export(param->ops);
-+	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, dmabuf);
-+
-+	attach = dma_buf_sgt_attach(dmabuf, dev);
-+	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, attach);
-+
-+	KUNIT_EXPECT_PTR_EQ(test, attach->map_type.type,
-+			    &dma_buf_mapping_sgt_type);
-+	KUNIT_EXPECT_PTR_EQ(test, dma_buf_sgt_dma_device(attach), dev);
-+	KUNIT_EXPECT_FALSE(test, dma_buf_sgt_p2p_allowed(attach));
-+
-+	dma_buf_detach(dmabuf, attach);
-+	dma_buf_put(dmabuf);
-+}
-+
-+static void mock_move_notify(struct dma_buf_attachment *attach)
-+{
-+}
-+
-+static const struct dma_buf_attach_ops mock_importer_ops = {
-+	.move_notify = &mock_move_notify,
-+};
-+
-+/* Check a dynamic attach with a non-sgt mapping type */
-+static void test_mock_attach(struct kunit *test)
-+{
-+	struct dma_buf_mapping_match imp[] = { { .type = &mock_type_a } };
-+	struct dma_buf *dmabuf;
-+	struct dma_buf_attachment *attach;
-+	struct device *dev;
-+
-+	dev = kunit_device_register(test, "dma-buf-test");
-+	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, dev);
-+
-+	dmabuf = mock_dmabuf_export(&mock_dmabuf_two_exp_ops);
-+	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, dmabuf);
-+
-+	attach = dma_buf_mapping_attach(dmabuf, imp, ARRAY_SIZE(imp),
-+					&mock_importer_ops, NULL);
-+	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, attach);
-+
-+	KUNIT_EXPECT_PTR_EQ(test, attach->map_type.type, &mock_type_a);
-+
-+	dma_buf_detach(dmabuf, attach);
-+	dma_buf_put(dmabuf);
-+}
-+
-+static const struct dma_exporter dma_exporter_params[] = {
-+	{ &mock_dmabuf_simple_sgt_ops, "simple_sgt" },
-+	{ &mock_dmabuf_two_exp_ops, "two_exp" },
-+};
-+KUNIT_ARRAY_PARAM_DESC(dma_exporter, dma_exporter_params, desc);
-+
-+static struct kunit_case dma_mapping_cases[] = {
-+	KUNIT_CASE(test_match_fail),
-+	KUNIT_CASE(test_match_no_match_callback),
-+	KUNIT_CASE(test_match_callback_returns),
-+	KUNIT_CASE(test_match_exporter_priority),
-+	KUNIT_CASE(test_match_importer_priority),
-+	KUNIT_CASE_PARAM(test_sgt_attach, dma_exporter_gen_params),
-+	KUNIT_CASE(test_mock_attach),
-+	{}
-+};
-+
-+static struct kunit_suite dma_mapping_test_suite = {
-+	.name = "dma-buf-mapping",
-+	.init = reset_mock_state,
-+	.test_cases = dma_mapping_cases,
-+};
-+
-+kunit_test_suite(dma_mapping_test_suite);
-+
-+MODULE_IMPORT_NS("DMA_BUF");
--- 
-2.43.0
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gMTgvMDIvMjAyNiAxNDoyNiwgTGFyaXNhIElsZWFuYSBHcmlnb3JlIHdyb3RlOg0KPiBPbiAy
+LzE2LzIwMjYgNToxMCBQTSwgS3J6eXN6dG9mIEtvemxvd3NraSB3cm90ZToNCj4+IE9uIDE2LzAy
+LzIwMjYgMTY6MDIsIExhcmlzYSBHcmlnb3JlIHdyb3RlOg0KPj4+IEZyb206IFJhZHUgUGlyZWEg
+PHJhZHUtbmljb2xhZS5waXJlYUBueHAuY29tPg0KPj4+DQo+Pj4gQWRkIG9wdGlvbmFsIHN1cHBv
+cnQgZm9yIHRoZSB0d28gY2xvY2sgaW5wdXRzIHVzZWQgYnkgdGhlIExJTkZsZXhEIFVBUlQNCj4+
+PiBjb250cm9sbGVyOg0KPj4+IC0gImxpbiI6IExJTl9CQVVEX0NMSw0KPj4+IC0gImlwZyI6IExJ
+TkZMRVhEX0NMSw0KPj4+DQo+Pj4gVGhlIGNsb2NrIGlucHV0cyBhcmUga2VwdCBvcHRpb25hbCB0
+byBtYWludGFpbiBjb21wYXRpYmlsaXR5IHdpdGggdGhlDQo+Pj4gUzMyVjIzNCBwbGF0Zm9ybS4N
+Cj4+DQo+PiBEb2VzIFMzMlYyMzQgaGF2ZSB0aGUgY2xvY2tzPyBJIGRvbid0IHVuZGVyc3RhbmQg
+dGhlICJtYWludGFpbg0KPj4gY29tcGF0aWJpbGl0eSIgaW4gdGhpcyBjb250ZXh0LiBFaXRoZXIg
+eW91IGhhdmUgb3IgeW91IGhhdmUgbm90IGNsb2NrcywNCj4+IHdoaWNoIHNob3VsZCBiZSBleHBy
+ZXNzZWQgaW4gc2NoZW1hICg6IGZhbHNlLCBzZWUgZXhhbXBsZSBzY2hlbWEpLg0KPj4NCj4gSGVs
+bG8gS3J6eXN6dG9mLA0KPiANCj4gVGhhbmtzIGZvciBwb2ludGluZyB0aGlzIG91dCEgSSB3aWxs
+IHVwZGF0ZSBib3RoIHRoZSBzY2hlbWEgYW5kIHRoZSANCj4gY29tbWl0IGRlc2NyaXB0aW9uLg0K
+PiBTMzJWMjM0IGRvZXMgbm90IGV4cG9zZSB0aGVzZSBjbG9ja3MgaW4gaXRzIGRldmljZSB0cmVl
+4oCUb24gdGhpcyBwbGF0Zm9ybSANCj4gdGhlIExJTkZsZXhEIGNsb2NrcyBhcmUgc2V0IHVwIGFu
+ZCBlbmFibGVkIGJ5IFXigJFCb290LCBzbyB0aGV5IGFyZSBub3QgDQo+IGF2YWlsYWJsZSB0byB0
+aGUga2VybmVsLg0KDQpTbyB0aGVyZSBhcmUgY2xvY2tzLiBEVFMgaXMgYmVpbmcgdXNlZCBieSBi
+b290bG9hZGVyLCBzbyBob3cgYm9vdGxvYWRlcg0KaXMgZ29pbmcgdG8gc2V0IHVwIGNsb2NrcyBm
+b3IgUzMyVjIzNCBpZiBubyBvbmUgcHJvdmlkZXMgdGhlbT8NCg0KVGhpcyBsb29rcyBsaWtlIGJ1
+Z2d5L2luY29tcGxldGUgYXBwcm9hY2gsIGFsdGhvdWdoIEkgdW5kZXJzdGFuZCB0aGF0DQp0aGUg
+b3JpZ2luYWwgYmluZGluZyBoYWQgdGhlIGlzc3VlLg0KDQoNCj4gVGhlIGNoYW5nZXMgaW4gdGhp
+cyBwYXRjaCBhcmUgaW50ZW5kZWQgc3BlY2lmaWNhbGx5IGZvciBTMzJHMi9HMywgd2hlcmUgDQo+
+IHRoZSBjbG9ja3MgYXJlIHByb3ZpZGVkIGluIHRoZSBEVCBhbmQgcmVxdWlyZWQgYnkgdGhlIGRy
+aXZlci4NCj4gDQo+Pj4NCj4+PiBTaWduZWQtb2ZmLWJ5OiBSYWR1IFBpcmVhIDxyYWR1LW5pY29s
+YWUucGlyZWFAbnhwLmNvbT4NCj4+PiBDby1kZXZlbG9wZWQtYnk6IExhcmlzYSBHcmlnb3JlIDxs
+YXJpc2EuZ3JpZ29yZUBvc3MubnhwLmNvbT4NCj4+PiBTaWduZWQtb2ZmLWJ5OiBMYXJpc2EgR3Jp
+Z29yZSA8bGFyaXNhLmdyaWdvcmVAb3NzLm54cC5jb20+DQo+Pj4gLS0tDQo+Pj4gICAuLi4vYmlu
+ZGluZ3Mvc2VyaWFsL2ZzbCxzMzItbGluZmxleHVhcnQueWFtbCAgIHwgMTggKysrKysrKysrKysr
+KysrKysrDQo+Pj4gICAxIGZpbGUgY2hhbmdlZCwgMTggaW5zZXJ0aW9ucygrKQ0KPj4+DQo+Pj4g
+ZGlmZiAtLWdpdCBhL0RvY3VtZW50YXRpb24vZGV2aWNldHJlZS9iaW5kaW5ncy9zZXJpYWwvZnNs
+LHMzMi1saW5mbGV4dWFydC55YW1sIGIvRG9jdW1lbnRhdGlvbi9kZXZpY2V0cmVlL2JpbmRpbmdz
+L3NlcmlhbC9mc2wsczMyLWxpbmZsZXh1YXJ0LnlhbWwNCj4+PiBpbmRleCA0MTcxZjUyNGE5Mjgu
+Ljg4NWYwYjFiMzQ5MiAxMDA2NDQNCj4+PiAtLS0gYS9Eb2N1bWVudGF0aW9uL2RldmljZXRyZWUv
+YmluZGluZ3Mvc2VyaWFsL2ZzbCxzMzItbGluZmxleHVhcnQueWFtbA0KPj4+ICsrKyBiL0RvY3Vt
+ZW50YXRpb24vZGV2aWNldHJlZS9iaW5kaW5ncy9zZXJpYWwvZnNsLHMzMi1saW5mbGV4dWFydC55
+YW1sDQo+Pj4gQEAgLTM0LDYgKzM0LDE0IEBAIHByb3BlcnRpZXM6DQo+Pj4gICAgIGludGVycnVw
+dHM6DQo+Pj4gICAgICAgbWF4SXRlbXM6IDENCj4+PiAgIA0KPj4+ICsgIGNsb2NrczoNCj4+PiAr
+ICAgIG1heEl0ZW1zOiAyDQo+Pj4gKw0KPj4+ICsgIGNsb2NrLW5hbWVzOg0KPj4+ICsgICAgaXRl
+bXM6DQo+Pj4gKyAgICAgIC0gY29uc3Q6IGxpbg0KPj4+ICsgICAgICAtIGNvbnN0OiBpcGcNCj4+
+PiArDQo+Pj4gICByZXF1aXJlZDoNCj4+PiAgICAgLSBjb21wYXRpYmxlDQo+Pj4gICAgIC0gcmVn
+DQo+Pj4gQEAgLTQ4LDMgKzU2LDEzIEBAIGV4YW1wbGVzOg0KPj4+ICAgICAgICAgICByZWcgPSA8
+MHg0MDA1MzAwMCAweDEwMDA+Ow0KPj4+ICAgICAgICAgICBpbnRlcnJ1cHRzID0gPDAgNTkgND47
+DQo+Pj4gICAgICAgfTsNCj4+PiArDQo+Pj4gKyAgLSB8DQo+Pj4gKyAgICBzZXJpYWxANDAxYzgw
+MDAgew0KPj4+ICsgICAgICAgIGNvbXBhdGlibGUgPSAibnhwLHMzMmcyLWxpbmZsZXh1YXJ0IiwN
+Cj4+PiArICAgICAgICAgICAgICAgICAgICAgImZzbCxzMzJ2MjM0LWxpbmZsZXh1YXJ0IjsNCj4+
+PiArICAgICAgICByZWcgPSA8MHg0MDFDODAwMCAweDMwMDA+Ow0KPj4+ICsgICAgICAgIGludGVy
+cnVwdHMgPSA8MCA4MiAxPjsNCj4+PiArICAgICAgICBjbG9ja3MgPSA8JmNsa3MgMTQ+LCA8JmNs
+a3MgMTM+Ow0KPj4+ICsgICAgICAgIGNsb2NrLW5hbWVzID0gImxpbiIsICJpcGciOw0KPj4NCj4+
+IEp1c3QgYWRkIHRoZSBjbG9ja3MgdG8gZXhpc3RpbmcgZXhhbXBsZS4gTm8gbmVlZCBmb3IgbmV3
+IGV4YW1wbGUgZm9yDQo+PiBlYWNoIG5ldyBwcm9wZXJ0eS4NCj4+DQo+Pj4gKyAgICB9Ow0KPiAN
+Cj4gVGhlIGV4aXN0aW5nIG5vZGUgcmVmZXJzIHRvIFMzMlYyMzQgd2hpY2ggZG9lcyBub3QgZXhw
+b3NlIGFueSBjbG9jayANCj4gcHJvcGVydGllcyBpbiBpdHMgZGV2aWNlIHRyZWUuIEJlY2F1c2Ug
+b2YgdGhpcywgSSBjb3VsZG7igJl0IGV4dGVuZCB0aGF0IA0KDQpZb3UganVzdCBzYWlkIFMzMlYy
+MzQgaGFzIGNsb2Nrcy4uLg0KDQo+IGV4YW1wbGUgd2l0aCBjbG9ja3MgYW5kIGNsb2NrLW5hbWVz
+LiBUaGUgYWRkaXRpb25hbCBleGFtcGxlIGlzIHRoZXJlIA0KPiBvbmx5IHRvIGlsbHVzdHJhdGUg
+dGhlIFMzMkcyIGNhc2UsIHdoZXJlIHRoZSBjbG9ja3MgYXJlIHJlcXVpcmVkIGFuZCANCj4gYWN0
+dWFsbHkgcHJlc2VudCBpbiB0aGUgZGV2aWNlIHRyZWUuIFNob3VsZCBJIHJlbW92ZSBpdD8NCj4g
+DQo+IEJlc3QgcmVnYXJkcywNCj4gTGFyaXNhDQo+Pg0KPj4gQmVzdCByZWdhcmRzLA0KPj4gS3J6
+eXN6dG9mDQo+IA0KDQoNCkJlc3QgcmVnYXJkcywNCktyenlzenRvZg0KX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxp
+c3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQg
+YW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
