@@ -2,36 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id OHWIOKp+l2kOzQIAu9opvQ
+	id 8FoHF79+l2kOzQIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 19 Feb 2026 22:20:42 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 19 Feb 2026 22:21:03 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 66CE8162B76
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 19 Feb 2026 22:20:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D80B3162B86
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 19 Feb 2026 22:21:02 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 453513F7E5
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 19 Feb 2026 21:20:41 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E8441402B4
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 19 Feb 2026 21:21:01 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C406B3F7E5
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 19 Feb 2026 21:20:29 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 926153F7E5
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 19 Feb 2026 21:20:50 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-From: masoncaleb2a@gmail.com
+From: angelaasher62@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Thu, 19 Feb 2026 21:20:29 -0000
-Message-ID: <177153602980.3991844.13280153141599676244@lists.linaro.org>
+Date: Thu, 19 Feb 2026 21:20:50 -0000
+Message-ID: <177153605059.3992517.8805573843047926380@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: NWMKFGGPVCBWJ4MQZ6XYLHDF4FJD3ACJ
-X-Message-ID-Hash: NWMKFGGPVCBWJ4MQZ6XYLHDF4FJD3ACJ
-X-MailFrom: masoncaleb2a@gmail.com
+Message-ID-Hash: AIC65KWYDGVOOCRDT4D5KUPPY36LMDN2
+X-Message-ID-Hash: AIC65KWYDGVOOCRDT4D5KUPPY36LMDN2
+X-MailFrom: angelaasher62@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Accredited Cryptocurrency Recovery Agency Delivering Elite Recovery Services
+Subject: [Linaro-mm-sig] Genuine And Trusted Crypto Recovery Company With Proven Process
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NWMKFGGPVCBWJ4MQZ6XYLHDF4FJD3ACJ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AIC65KWYDGVOOCRDT4D5KUPPY36LMDN2/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -49,7 +49,7 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[masoncaleb2a@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_NEQ_ENVFROM(0.00)[angelaasher62@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	ARC_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
@@ -65,7 +65,7 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	R_DKIM_NA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[autopsymainnetsolutions.com:url,autopsymainnetsolutions.com:email,autospyrec.site:url,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,linaro.org:email]
-X-Rspamd-Queue-Id: 66CE8162B76
+X-Rspamd-Queue-Id: D80B3162B86
 X-Rspamd-Action: no action
 
 VGhlIGNyeXB0b2N1cnJlbmN5IHJlY292ZXJ5IGluZHVzdHJ5IGluIDIwMjYgaXMgb25lIG9mIHRo
