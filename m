@@ -2,37 +2,35 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id INAqJgQxmGkzCQMAu9opvQ
+	id 8OlXHi0xmGkzCQMAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 20 Feb 2026 11:01:40 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 20 Feb 2026 11:02:21 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8943116695D
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 20 Feb 2026 11:01:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 31ADC166995
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 20 Feb 2026 11:02:20 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8800F402B2
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 20 Feb 2026 10:01:38 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 13148402C9
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 20 Feb 2026 10:02:20 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C19453F758
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 20 Feb 2026 10:00:36 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 8D45A3F9B2
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 20 Feb 2026 10:02:06 +0000 (UTC)
 MIME-Version: 1.0
 From: josiahdavidson1122@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Fri, 20 Feb 2026 10:00:36 -0000
-Message-ID: <177158163679.394945.5247232077700647902@lists.linaro.org>
-In-Reply-To: <177082824742.3669728.12491205996858030749@lists.linaro.org>
-References: <177082824742.3669728.12491205996858030749@lists.linaro.org>
+Date: Fri, 20 Feb 2026 10:02:06 -0000
+Message-ID: <177158172657.395276.12470003156716191051@lists.linaro.org>
 User-Agent: HyperKitty on http://lists-ec2.96boards.org/
-Message-ID-Hash: LGXDUZUCB6CPYNRUGBRR5WT5KNWHER26
-X-Message-ID-Hash: LGXDUZUCB6CPYNRUGBRR5WT5KNWHER26
+Message-ID-Hash: IRH5VK4PB4KG6TCXVPGEU45JNM4I6RFI
+X-Message-ID-Hash: IRH5VK4PB4KG6TCXVPGEU45JNM4I6RFI
 X-MailFrom: josiahdavidson1122@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: Best Crypto Bitcoin Recovery Service | Best Crypto Asset Recovery Service Hire iFORCE HACKER RECOVERY
+Subject: [Linaro-mm-sig] USDT BTC & ETH LOST TO SCAMMER ONLINE VISIT AUTOTECH RECOVERY COMPANY FOR HELP
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LGXDUZUCB6CPYNRUGBRR5WT5KNWHER26/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/IRH5VK4PB4KG6TCXVPGEU45JNM4I6RFI/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -44,32 +42,30 @@ Content-Transfer-Encoding: 7bit
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [0.59 / 15.00];
 	MID_RHS_MATCH_TO(1.00)[];
-	R_SPF_ALLOW(-0.20)[+mx];
 	MAILLIST(-0.20)[mailman];
-	MIME_GOOD(-0.10)[text/plain];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
+	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_ONE(0.00)[1];
-	ARC_NA(0.00)[];
 	FROM_NO_DN(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	FREEMAIL_FROM(0.00)[gmail.com];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.992];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
+	RCPT_COUNT_ONE(0.00)[1];
+	ARC_NA(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
 	FROM_NEQ_ENVFROM(0.00)[josiahdavidson1122@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_NONE(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	R_DKIM_NA(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.992];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email]
-X-Rspamd-Queue-Id: 8943116695D
+X-Rspamd-Queue-Id: 31ADC166995
 X-Rspamd-Action: no action
-
-USDT&ETH LOST TO SCAMMER ONLINE VISIT AUTOTECH RECOVERY COMPANY FOR HELP
 
 I am writing to wholeheartedly endorse the exceptional services of Autotech Recovery Company, a company that specializes in recovering lost cryptocurrencies. My experience with them was nothing short of phenomenal, and I am grateful for their expertise and professionalism in retrieving my stolen crypto assets.
 I fell victim to a cryptocurrency scam after meeting a supposed "friend" through a YouTube video. This individual gained my trust over time, and I unfortunately invested a significant amount of money in a fake cryptocurrency scheme. It wasn't until I tried to withdraw my funds that I realized I had been scammed. The perpetrators had vanished, leaving me with a substantial financial loss and a deep sense of frustration.
