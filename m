@@ -2,76 +2,76 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id CKWJFMXAmWlDWgMAu9opvQ
+	id SFMWEk7PmWl6WwMAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 21 Feb 2026 15:27:17 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 21 Feb 2026 16:29:18 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id DFBE316D069
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 21 Feb 2026 15:27:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C490516D2A9
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 21 Feb 2026 16:29:17 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A23F6401EA
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 21 Feb 2026 14:27:15 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 63D68402DC
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 21 Feb 2026 15:29:16 +0000 (UTC)
 Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.16])
-	by lists.linaro.org (Postfix) with ESMTPS id 9F109401EA
-	for <linaro-mm-sig@lists.linaro.org>; Sat, 21 Feb 2026 14:27:12 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 63676402DC
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 21 Feb 2026 15:29:14 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=QfxRrLBc;
+	dkim=pass header.d=intel.com header.s=Intel header.b=nZJVS4Ct;
 	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 192.198.163.16 as permitted sender) smtp.mailfrom=lkp@intel.com;
 	dmarc=pass (policy=none) header.from=intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1771684032; x=1803220032;
+  t=1771687754; x=1803223754;
   h=date:from:to:cc:subject:message-id:references:
    mime-version:in-reply-to;
-  bh=7qmlvR0Yq0nrTCBBuGiyvxnV7w579oImjS5HrfNKpuQ=;
-  b=QfxRrLBcb/b1yg4l7rMZG/eDEofcA0mdYZuXAyINUF72bDcDR3yMGzgQ
-   hNOGMQbqrPf0Ny3vaEKWifzyTAsaZM4CFt2ExnUafmplWURJLL3z5VL04
-   EwP3Ys71G0a3qGjxe0j/r8R1ZUx+2X1pGboXocBWFhSgJ3wcTgYBQr4op
-   KtakUoQdHI9XL0wOWFHB7WrQPasI68XYTb1egiWoADw1+FC6Pc905kWi6
-   TvMaU3xaYze16RN6lG6UMtmr+7QljurBQcALaxZUz7LRR02WzXEiONlbu
-   99CPvI0p29FWDqqyhRravRSp94QXvdMFFYInwP/yuwntOd0DtHh7xiqRt
-   Q==;
-X-CSE-ConnectionGUID: eCaz+qtnQre3CEmc91cEvw==
-X-CSE-MsgGUID: 5Q1RjYiEQYmPXb3W3AOOqg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11708"; a="60322792"
+  bh=4JjL0l+nLorUxDyMz8O1wmqKirNzDbDtAXWdXi0Ls+U=;
+  b=nZJVS4CtTQ551KSDmChha+hE2HdPxxl6wjPzB2xFxY3E7qDB4XK2NVAx
+   PvBv9ty95xmQ4c5djvdlVCuIR6Lx+UFoGl7amE2lTNDtXsZw8CbZbmy+y
+   4WM0MKj4/LmY7JJm6+FuQSTVlQihrEe13SrPSITJ/KPGPxLl2238SoGH3
+   7Xu5RjiDbS7rmelHJ0Evlo89VJ2SEsD/ba7YcNIo3bRCPIgiZ9hJr2RgJ
+   +RpjS78iiBdEFfG0G7L7aF7LKEr28UELBiPyXiFVUPiduaoYwBBUGryFQ
+   seqjFJLVJFROPQf1E8BZK2zuhqV06kdCNiocSVIJkwPCEEWOBvcvIpd29
+   w==;
+X-CSE-ConnectionGUID: +9fhNxBTQBSee/zSOuutdw==
+X-CSE-MsgGUID: w3e5IXK2QKuGkhTqgUWdXg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11708"; a="60324290"
 X-IronPort-AV: E=Sophos;i="6.21,304,1763452800";
-   d="scan'208";a="60322792"
-Received: from orviesa006.jf.intel.com ([10.64.159.146])
-  by fmvoesa110.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Feb 2026 06:27:11 -0800
-X-CSE-ConnectionGUID: 0rvlshFARF2eV5jB7Xv0XQ==
-X-CSE-MsgGUID: lFBHB36jS8WwZ9Rzjgyl8A==
+   d="scan'208";a="60324290"
+Received: from fmviesa002.fm.intel.com ([10.60.135.142])
+  by fmvoesa110.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Feb 2026 07:29:13 -0800
+X-CSE-ConnectionGUID: nWVBhHZ8Q/2hQ5l00AfygQ==
+X-CSE-MsgGUID: 5d11ktmXSq2b4fYgGqpTmw==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.21,304,1763452800";
-   d="scan'208";a="214217038"
+   d="scan'208";a="238074591"
 Received: from lkp-server01.sh.intel.com (HELO 765f4a05e27f) ([10.239.97.150])
-  by orviesa006.jf.intel.com with ESMTP; 21 Feb 2026 06:27:09 -0800
+  by fmviesa002.fm.intel.com with ESMTP; 21 Feb 2026 07:29:11 -0800
 Received: from kbuild by 765f4a05e27f with local (Exim 4.98.2)
 	(envelope-from <lkp@intel.com>)
-	id 1vtnwo-000000014xw-3qfK;
-	Sat, 21 Feb 2026 14:27:06 +0000
-Date: Sat, 21 Feb 2026 22:26:41 +0800
+	id 1vtour-0000000150W-29yC;
+	Sat, 21 Feb 2026 15:29:09 +0000
+Date: Sat, 21 Feb 2026 23:28:50 +0800
 From: kernel test robot <lkp@intel.com>
 To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>,
 	phasta@mailbox.org, matthew.brost@intel.com,
 	sumit.semwal@linaro.org
-Message-ID: <202602212224.vH1Jr91w-lkp@intel.com>
-References: <20260219160822.1529-2-christian.koenig@amd.com>
+Message-ID: <202602212322.qKZcoRK3-lkp@intel.com>
+References: <20260219160822.1529-3-christian.koenig@amd.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260219160822.1529-2-christian.koenig@amd.com>
+In-Reply-To: <20260219160822.1529-3-christian.koenig@amd.com>
 X-Spamd-Bar: ------
-Message-ID-Hash: WDTXOM6FRVWX3IRMMPVG4M6XE57VBTLC
-X-Message-ID-Hash: WDTXOM6FRVWX3IRMMPVG4M6XE57VBTLC
+Message-ID-Hash: ZENCFYKN755AUIPTLMA5FPRC57NNMIJP
+X-Message-ID-Hash: ZENCFYKN755AUIPTLMA5FPRC57NNMIJP
 X-MailFrom: lkp@intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: oe-kbuild-all@lists.linux.dev, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 1/8] dma-buf: protected fence ops by RCU v7
+Subject: [Linaro-mm-sig] Re: [PATCH 2/8] dma-buf: detach fence ops on signal v2
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WDTXOM6FRVWX3IRMMPVG4M6XE57VBTLC/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZENCFYKN755AUIPTLMA5FPRC57NNMIJP/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -107,8 +107,8 @@ X-Spamd-Result: default: False [3.09 / 15.00];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[01.org:url,gitlab.freedesktop.org:url,git-scm.com:url,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: DFBE316D069
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,intel.com:mid,intel.com:email,01.org:url,git-scm.com:url,gitlab.freedesktop.org:url]
+X-Rspamd-Queue-Id: C490516D2A9
 X-Rspamd-Action: no action
 
 Hi Christian,
@@ -123,42 +123,87 @@ https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
 url:    https://github.com/intel-lab-lkp/linux/commits/Christian-K-nig/dma-buf-detach-fence-ops-on-signal-v2/20260220-010804
 base:   https://gitlab.freedesktop.org/drm/misc/kernel.git drm-misc-next
-patch link:    https://lore.kernel.org/r/20260219160822.1529-2-christian.koenig%40amd.com
-patch subject: [PATCH 1/8] dma-buf: protected fence ops by RCU v7
-config: m68k-randconfig-r111-20260221 (https://download.01.org/0day-ci/archive/20260221/202602212224.vH1Jr91w-lkp@intel.com/config)
-compiler: m68k-linux-gcc (GCC) 8.5.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20260221/202602212224.vH1Jr91w-lkp@intel.com/reproduce)
+patch link:    https://lore.kernel.org/r/20260219160822.1529-3-christian.koenig%40amd.com
+patch subject: [PATCH 2/8] dma-buf: detach fence ops on signal v2
+config: hexagon-randconfig-r121-20260221 (https://download.01.org/0day-ci/archive/20260221/202602212322.qKZcoRK3-lkp@intel.com/config)
+compiler: clang version 23.0.0git (https://github.com/llvm/llvm-project e86750b29fa0ff207cd43213d66dabe565417638)
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20260221/202602212322.qKZcoRK3-lkp@intel.com/reproduce)
 
 If you fix the issue in a separate patch/commit (i.e. not just a new version of
 the same patch/commit), kindly add following tags
 | Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202602212224.vH1Jr91w-lkp@intel.com/
+| Closes: https://lore.kernel.org/oe-kbuild-all/202602212322.qKZcoRK3-lkp@intel.com/
 
 sparse warnings: (new ones prefixed by >>)
->> drivers/gpu/drm/drm_crtc.c:161:9: sparse: sparse: incompatible types in comparison expression (different address spaces):
-   drivers/gpu/drm/drm_crtc.c:161:9: sparse:    struct dma_fence_ops const [noderef] __rcu *
-   drivers/gpu/drm/drm_crtc.c:161:9: sparse:    struct dma_fence_ops const *
---
-   drivers/gpu/drm/scheduler/sched_fence.c:241:1: sparse: sparse: bad integer constant expression
-   drivers/gpu/drm/scheduler/sched_fence.c:241:1: sparse: sparse: static assertion failed: "MODULE_INFO(description, ...) contains embedded NUL byte"
-   drivers/gpu/drm/scheduler/sched_fence.c:242:1: sparse: sparse: bad integer constant expression
-   drivers/gpu/drm/scheduler/sched_fence.c:242:1: sparse: sparse: static assertion failed: "MODULE_INFO(license, ...) contains embedded NUL byte"
->> drivers/gpu/drm/scheduler/sched_fence.c:198:20: sparse: sparse: incompatible types in comparison expression (different address spaces):
-   drivers/gpu/drm/scheduler/sched_fence.c:198:20: sparse:    struct dma_fence_ops const [noderef] __rcu *
-   drivers/gpu/drm/scheduler/sched_fence.c:198:20: sparse:    struct dma_fence_ops const *
-   drivers/gpu/drm/scheduler/sched_fence.c:201:20: sparse: sparse: incompatible types in comparison expression (different address spaces):
-   drivers/gpu/drm/scheduler/sched_fence.c:201:20: sparse:    struct dma_fence_ops const [noderef] __rcu *
-   drivers/gpu/drm/scheduler/sched_fence.c:201:20: sparse:    struct dma_fence_ops const *
+   drivers/dma-buf/dma-fence.c:1051:38: sparse: sparse: incorrect type in initializer (different address spaces) @@     expected char const [noderef] __rcu *timeline @@     got char * @@
+   drivers/dma-buf/dma-fence.c:1051:38: sparse:     expected char const [noderef] __rcu *timeline
+   drivers/dma-buf/dma-fence.c:1051:38: sparse:     got char *
+   drivers/dma-buf/dma-fence.c:1052:36: sparse: sparse: incorrect type in initializer (different address spaces) @@     expected char const [noderef] __rcu *driver @@     got char * @@
+   drivers/dma-buf/dma-fence.c:1052:36: sparse:     expected char const [noderef] __rcu *driver
+   drivers/dma-buf/dma-fence.c:1052:36: sparse:     got char *
+   drivers/dma-buf/dma-fence.c: note: in included file (through include/trace/trace_events.h, include/trace/define_trace.h, include/trace/events/dma_fence.h):
+   include/trace/events/dma_fence.h:17:1: sparse: sparse: dereference of noderef expression
+   include/trace/events/dma_fence.h:17:1: sparse: sparse: dereference of noderef expression
+   include/trace/events/dma_fence.h:17:1: sparse: sparse: dereference of noderef expression
+   include/trace/events/dma_fence.h:17:1: sparse: sparse: dereference of noderef expression
+   include/trace/events/dma_fence.h:17:1: sparse: sparse: dereference of noderef expression
+   include/trace/events/dma_fence.h:17:1: sparse: sparse: dereference of noderef expression
+>> drivers/dma-buf/dma-fence.c:379:19: sparse: sparse: dereference of noderef expression
+   drivers/dma-buf/dma-fence.c:379:43: sparse: sparse: dereference of noderef expression
 
-vim +161 drivers/gpu/drm/drm_crtc.c
+vim +379 drivers/dma-buf/dma-fence.c
 
-35f8cc3b9a92c6 Gustavo Padovan 2016-12-06  158  
-6d6003c4b613c9 Gustavo Padovan 2016-11-15  159  static struct drm_crtc *fence_to_crtc(struct dma_fence *fence)
-6d6003c4b613c9 Gustavo Padovan 2016-11-15  160  {
-6d6003c4b613c9 Gustavo Padovan 2016-11-15 @161  	BUG_ON(fence->ops != &drm_crtc_fence_ops);
-6d6003c4b613c9 Gustavo Padovan 2016-11-15  162  	return container_of(fence->lock, struct drm_crtc, fence_lock);
-6d6003c4b613c9 Gustavo Padovan 2016-11-15  163  }
-6d6003c4b613c9 Gustavo Padovan 2016-11-15  164  
+   345	
+   346	
+   347	/**
+   348	 * dma_fence_signal_timestamp_locked - signal completion of a fence
+   349	 * @fence: the fence to signal
+   350	 * @timestamp: fence signal timestamp in kernel's CLOCK_MONOTONIC time domain
+   351	 *
+   352	 * Signal completion for software callbacks on a fence, this will unblock
+   353	 * dma_fence_wait() calls and run all the callbacks added with
+   354	 * dma_fence_add_callback(). Can be called multiple times, but since a fence
+   355	 * can only go from the unsignaled to the signaled state and not back, it will
+   356	 * only be effective the first time. Set the timestamp provided as the fence
+   357	 * signal timestamp.
+   358	 *
+   359	 * Unlike dma_fence_signal_timestamp(), this function must be called with
+   360	 * &dma_fence.lock held.
+   361	 */
+   362	void dma_fence_signal_timestamp_locked(struct dma_fence *fence,
+   363					      ktime_t timestamp)
+   364	{
+   365		struct dma_fence_cb *cur, *tmp;
+   366		struct list_head cb_list;
+   367	
+   368		lockdep_assert_held(fence->lock);
+   369	
+   370		if (unlikely(test_and_set_bit(DMA_FENCE_FLAG_SIGNALED_BIT,
+   371					      &fence->flags)))
+   372			return;
+   373	
+   374		/*
+   375		 * When neither a release nor a wait operation is specified set the ops
+   376		 * pointer to NULL to allow the fence structure to become independent
+   377		 * from who originally issued it.
+   378		 */
+ > 379		if (!fence->ops->release && !fence->ops->wait)
+   380			RCU_INIT_POINTER(fence->ops, NULL);
+   381	
+   382		/* Stash the cb_list before replacing it with the timestamp */
+   383		list_replace(&fence->cb_list, &cb_list);
+   384	
+   385		fence->timestamp = timestamp;
+   386		set_bit(DMA_FENCE_FLAG_TIMESTAMP_BIT, &fence->flags);
+   387		trace_dma_fence_signaled(fence);
+   388	
+   389		list_for_each_entry_safe(cur, tmp, &cb_list, node) {
+   390			INIT_LIST_HEAD(&cur->node);
+   391			cur->func(fence, cur);
+   392		}
+   393	}
+   394	EXPORT_SYMBOL(dma_fence_signal_timestamp_locked);
+   395	
 
 -- 
 0-DAY CI Kernel Test Service
