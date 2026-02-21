@@ -2,212 +2,86 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id SFMWEk7PmWl6WwMAu9opvQ
+	id RnMYDIz5mWmuXgMAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 21 Feb 2026 16:29:18 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 21 Feb 2026 19:29:32 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id C490516D2A9
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 21 Feb 2026 16:29:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 98DC416D800
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 21 Feb 2026 19:29:31 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 63D68402DC
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 21 Feb 2026 15:29:16 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.16])
-	by lists.linaro.org (Postfix) with ESMTPS id 63676402DC
-	for <linaro-mm-sig@lists.linaro.org>; Sat, 21 Feb 2026 15:29:14 +0000 (UTC)
-Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=nZJVS4Ct;
-	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 192.198.163.16 as permitted sender) smtp.mailfrom=lkp@intel.com;
-	dmarc=pass (policy=none) header.from=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1771687754; x=1803223754;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=4JjL0l+nLorUxDyMz8O1wmqKirNzDbDtAXWdXi0Ls+U=;
-  b=nZJVS4CtTQ551KSDmChha+hE2HdPxxl6wjPzB2xFxY3E7qDB4XK2NVAx
-   PvBv9ty95xmQ4c5djvdlVCuIR6Lx+UFoGl7amE2lTNDtXsZw8CbZbmy+y
-   4WM0MKj4/LmY7JJm6+FuQSTVlQihrEe13SrPSITJ/KPGPxLl2238SoGH3
-   7Xu5RjiDbS7rmelHJ0Evlo89VJ2SEsD/ba7YcNIo3bRCPIgiZ9hJr2RgJ
-   +RpjS78iiBdEFfG0G7L7aF7LKEr28UELBiPyXiFVUPiduaoYwBBUGryFQ
-   seqjFJLVJFROPQf1E8BZK2zuhqV06kdCNiocSVIJkwPCEEWOBvcvIpd29
-   w==;
-X-CSE-ConnectionGUID: +9fhNxBTQBSee/zSOuutdw==
-X-CSE-MsgGUID: w3e5IXK2QKuGkhTqgUWdXg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11708"; a="60324290"
-X-IronPort-AV: E=Sophos;i="6.21,304,1763452800";
-   d="scan'208";a="60324290"
-Received: from fmviesa002.fm.intel.com ([10.60.135.142])
-  by fmvoesa110.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Feb 2026 07:29:13 -0800
-X-CSE-ConnectionGUID: nWVBhHZ8Q/2hQ5l00AfygQ==
-X-CSE-MsgGUID: 5d11ktmXSq2b4fYgGqpTmw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.21,304,1763452800";
-   d="scan'208";a="238074591"
-Received: from lkp-server01.sh.intel.com (HELO 765f4a05e27f) ([10.239.97.150])
-  by fmviesa002.fm.intel.com with ESMTP; 21 Feb 2026 07:29:11 -0800
-Received: from kbuild by 765f4a05e27f with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1vtour-0000000150W-29yC;
-	Sat, 21 Feb 2026 15:29:09 +0000
-Date: Sat, 21 Feb 2026 23:28:50 +0800
-From: kernel test robot <lkp@intel.com>
-To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>,
-	phasta@mailbox.org, matthew.brost@intel.com,
-	sumit.semwal@linaro.org
-Message-ID: <202602212322.qKZcoRK3-lkp@intel.com>
-References: <20260219160822.1529-3-christian.koenig@amd.com>
+	by lists.linaro.org (Postfix) with ESMTP id D62D840473
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 21 Feb 2026 18:29:29 +0000 (UTC)
+Received: from lists.linaro.org (localhost [127.0.0.1])
+	by lists.linaro.org (Postfix) with ESMTP id 1536A4044E
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 21 Feb 2026 18:29:22 +0000 (UTC)
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20260219160822.1529-3-christian.koenig@amd.com>
-X-Spamd-Bar: ------
-Message-ID-Hash: ZENCFYKN755AUIPTLMA5FPRC57NNMIJP
-X-Message-ID-Hash: ZENCFYKN755AUIPTLMA5FPRC57NNMIJP
-X-MailFrom: lkp@intel.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: oe-kbuild-all@lists.linux.dev, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+From: rubsmit280@gmail.com
+To: linaro-mm-sig@lists.linaro.org
+Date: Sat, 21 Feb 2026 18:29:22 -0000
+Message-ID: <177169856208.1811081.4271938946374164324@lists.linaro.org>
+User-Agent: HyperKitty on http://lists.linaro.org/
+Message-ID-Hash: GXMIZENBKHIMCVOL6YMPPPNW5BJ442YL
+X-Message-ID-Hash: GXMIZENBKHIMCVOL6YMPPPNW5BJ442YL
+X-MailFrom: rubsmit280@gmail.com
+X-Mailman-Rule-Hits: member-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 2/8] dma-buf: detach fence ops on signal v2
+Subject: [Linaro-mm-sig] How Can I Contact a Cryptocurrency Recovery Company? Employ iFORCE HACKER RECOVERY
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZENCFYKN755AUIPTLMA5FPRC57NNMIJP/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GXMIZENBKHIMCVOL6YMPPPNW5BJ442YL/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [3.09 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[intel.com:s=Intel];
-	MID_CONTAINS_FROM(1.00)[];
-	MAILLIST(-0.20)[mailman];
+X-Spamd-Result: default: False [0.69 / 15.00];
+	MID_RHS_MATCH_TO(1.00)[];
 	R_SPF_ALLOW(-0.20)[+mx];
+	MAILLIST(-0.20)[mailman];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[intel.com : SPF not aligned (relaxed),none];
+	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FREEMAIL_TO(0.00)[gmail.com,mailbox.org,intel.com,linaro.org];
 	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
 	ARC_NA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.973];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FROM_NEQ_ENVFROM(0.00)[lkp@intel.com,linaro-mm-sig-bounces@lists.linaro.org];
-	DKIM_TRACE(0.00)[intel.com:-];
-	RCPT_COUNT_SEVEN(0.00)[7];
+	RCPT_COUNT_ONE(0.00)[1];
+	SUBJECT_HAS_QUESTION(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	TO_DN_NONE(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_NEQ_ENVFROM(0.00)[rubsmit280@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_NO_DN(0.00)[];
+	NEURAL_HAM(-0.00)[-0.996];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,intel.com:mid,intel.com:email,01.org:url,git-scm.com:url,gitlab.freedesktop.org:url]
-X-Rspamd-Queue-Id: C490516D2A9
+	R_DKIM_NA(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email]
+X-Rspamd-Queue-Id: 98DC416D800
 X-Rspamd-Action: no action
 
-Hi Christian,
-
-kernel test robot noticed the following build warnings:
-
-[auto build test WARNING on drm-misc/drm-misc-next]
-[cannot apply to drm-i915/for-linux-next drm-i915/for-linux-next-fixes drm-xe/drm-xe-next linus/master v6.19 next-20260220]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
-
-url:    https://github.com/intel-lab-lkp/linux/commits/Christian-K-nig/dma-buf-detach-fence-ops-on-signal-v2/20260220-010804
-base:   https://gitlab.freedesktop.org/drm/misc/kernel.git drm-misc-next
-patch link:    https://lore.kernel.org/r/20260219160822.1529-3-christian.koenig%40amd.com
-patch subject: [PATCH 2/8] dma-buf: detach fence ops on signal v2
-config: hexagon-randconfig-r121-20260221 (https://download.01.org/0day-ci/archive/20260221/202602212322.qKZcoRK3-lkp@intel.com/config)
-compiler: clang version 23.0.0git (https://github.com/llvm/llvm-project e86750b29fa0ff207cd43213d66dabe565417638)
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20260221/202602212322.qKZcoRK3-lkp@intel.com/reproduce)
-
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202602212322.qKZcoRK3-lkp@intel.com/
-
-sparse warnings: (new ones prefixed by >>)
-   drivers/dma-buf/dma-fence.c:1051:38: sparse: sparse: incorrect type in initializer (different address spaces) @@     expected char const [noderef] __rcu *timeline @@     got char * @@
-   drivers/dma-buf/dma-fence.c:1051:38: sparse:     expected char const [noderef] __rcu *timeline
-   drivers/dma-buf/dma-fence.c:1051:38: sparse:     got char *
-   drivers/dma-buf/dma-fence.c:1052:36: sparse: sparse: incorrect type in initializer (different address spaces) @@     expected char const [noderef] __rcu *driver @@     got char * @@
-   drivers/dma-buf/dma-fence.c:1052:36: sparse:     expected char const [noderef] __rcu *driver
-   drivers/dma-buf/dma-fence.c:1052:36: sparse:     got char *
-   drivers/dma-buf/dma-fence.c: note: in included file (through include/trace/trace_events.h, include/trace/define_trace.h, include/trace/events/dma_fence.h):
-   include/trace/events/dma_fence.h:17:1: sparse: sparse: dereference of noderef expression
-   include/trace/events/dma_fence.h:17:1: sparse: sparse: dereference of noderef expression
-   include/trace/events/dma_fence.h:17:1: sparse: sparse: dereference of noderef expression
-   include/trace/events/dma_fence.h:17:1: sparse: sparse: dereference of noderef expression
-   include/trace/events/dma_fence.h:17:1: sparse: sparse: dereference of noderef expression
-   include/trace/events/dma_fence.h:17:1: sparse: sparse: dereference of noderef expression
->> drivers/dma-buf/dma-fence.c:379:19: sparse: sparse: dereference of noderef expression
-   drivers/dma-buf/dma-fence.c:379:43: sparse: sparse: dereference of noderef expression
-
-vim +379 drivers/dma-buf/dma-fence.c
-
-   345	
-   346	
-   347	/**
-   348	 * dma_fence_signal_timestamp_locked - signal completion of a fence
-   349	 * @fence: the fence to signal
-   350	 * @timestamp: fence signal timestamp in kernel's CLOCK_MONOTONIC time domain
-   351	 *
-   352	 * Signal completion for software callbacks on a fence, this will unblock
-   353	 * dma_fence_wait() calls and run all the callbacks added with
-   354	 * dma_fence_add_callback(). Can be called multiple times, but since a fence
-   355	 * can only go from the unsignaled to the signaled state and not back, it will
-   356	 * only be effective the first time. Set the timestamp provided as the fence
-   357	 * signal timestamp.
-   358	 *
-   359	 * Unlike dma_fence_signal_timestamp(), this function must be called with
-   360	 * &dma_fence.lock held.
-   361	 */
-   362	void dma_fence_signal_timestamp_locked(struct dma_fence *fence,
-   363					      ktime_t timestamp)
-   364	{
-   365		struct dma_fence_cb *cur, *tmp;
-   366		struct list_head cb_list;
-   367	
-   368		lockdep_assert_held(fence->lock);
-   369	
-   370		if (unlikely(test_and_set_bit(DMA_FENCE_FLAG_SIGNALED_BIT,
-   371					      &fence->flags)))
-   372			return;
-   373	
-   374		/*
-   375		 * When neither a release nor a wait operation is specified set the ops
-   376		 * pointer to NULL to allow the fence structure to become independent
-   377		 * from who originally issued it.
-   378		 */
- > 379		if (!fence->ops->release && !fence->ops->wait)
-   380			RCU_INIT_POINTER(fence->ops, NULL);
-   381	
-   382		/* Stash the cb_list before replacing it with the timestamp */
-   383		list_replace(&fence->cb_list, &cb_list);
-   384	
-   385		fence->timestamp = timestamp;
-   386		set_bit(DMA_FENCE_FLAG_TIMESTAMP_BIT, &fence->flags);
-   387		trace_dma_fence_signaled(fence);
-   388	
-   389		list_for_each_entry_safe(cur, tmp, &cb_list, node) {
-   390			INIT_LIST_HEAD(&cur->node);
-   391			cur->func(fence, cur);
-   392		}
-   393	}
-   394	EXPORT_SYMBOL(dma_fence_signal_timestamp_locked);
-   395	
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+aUZPUkNFIEhBQ0tFUiBSRUNPVkVSWSBpcyBhIHByb2Zlc3Npb25hbCBjcnlwdG9jdXJyZW5jeSBy
+ZWNvdmVyeSBhZ2VuY3kgdGhhdCBzcGVjaWFsaXplcyBpbiB0cmFja2luZyBkb3duIGRpZ2l0YWwg
+YXNzZXRzLCByZWNvdmVyaW5nIHN0b2xlbiBVU0RULCBhbmQgcmVjb3ZlcmluZyBtaXNwbGFjZWQg
+Qml0Y29pbi4gVGhleSBhc3Npc3QgaW4gbG9jYXRpbmcgYW5kIHJlc3RvcmluZyBsb3N0IG9yIHVu
+cmVhY2hhYmxlIGNyeXB0b2N1cnJlbmN5IGJ5IHVzaW5nIHNvcGhpc3RpY2F0ZWQgYmxvY2tjaGFp
+biBhbmFseXRpY3MgYW5kIGludmVzdGlnYXRpdmUgdGVjaG5pcXVlcy4gVGhleSBwcm92aWRlIGZy
+YW5rIGFzc2Vzc21lbnRzIGFuZCB0cnVzdHdvcnRoeSBhc3Npc3RhbmNlIHRvIHBlb3BsZSBhbmQg
+Y29tcGFuaWVzIGFmZmVjdGVkIGJ5IGNyeXB0b2N1cnJlbmN5IGxvc3NlcywgYW5kIHRoZXkgYXJl
+IHJlbm93bmVkIGZvciB0aGVpciBldGhpY2FsIHN0YW5kYXJkcyBhbmQgb3BlbiBjb21tdW5pY2F0
+aW9uLiDCoA0KTGVhcm4gTW9yZSBBYm91dCBpRk9SQ0UgSEFDS0VSIFJFQ09WRVJZwqDCoA0KV2Vi
+c2l0ZTrCoGh0IHRwc8KgOi8vIGlmb3JjZWhhY2tlcnMuIGNvIG0NCldoYXRzQXBwOiArMSAyNDAt
+ODAzLTM3MDbCoMKgDQpFbWFpbDrCoGlmb3JjZWhrIEAgY29uc3VsdGFudC4gYyBvbQ0KX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBt
+YWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2Ny
+aWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3Jn
+Cg==
