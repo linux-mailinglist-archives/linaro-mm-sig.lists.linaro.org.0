@@ -2,36 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KLj0Kq8mmmnfZAMAu9opvQ
+	id sGKRM7YmmmnfZAMAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 21 Feb 2026 22:42:07 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 21 Feb 2026 22:42:14 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3952A16DF51
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 21 Feb 2026 22:42:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8BE5E16DF58
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 21 Feb 2026 22:42:14 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 500C4400F6
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 21 Feb 2026 21:42:06 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id A621F4046B
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 21 Feb 2026 21:42:13 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7329E4046B
-	for <linaro-mm-sig@lists.linaro.org>; Sat, 21 Feb 2026 21:41:54 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7417540464
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 21 Feb 2026 21:41:56 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-From: masoncaleb2a@gmail.com
+From: angelaasher62@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Sat, 21 Feb 2026 21:41:54 -0000
-Message-ID: <177171011446.1949689.11434421654070632431@lists.linaro.org>
+Date: Sat, 21 Feb 2026 21:41:56 -0000
+Message-ID: <177171011647.1948385.1431506277598468072@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: V5JWINGZQHHMB6VHJ7O7CGL6Z2QQRJJH
-X-Message-ID-Hash: V5JWINGZQHHMB6VHJ7O7CGL6Z2QQRJJH
-X-MailFrom: masoncaleb2a@gmail.com
+Message-ID-Hash: 2FGR6TYUL6GOGNXMD2BHIC2LHYRMFPKV
+X-Message-ID-Hash: 2FGR6TYUL6GOGNXMD2BHIC2LHYRMFPKV
+X-MailFrom: angelaasher62@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] RELIABLE CRYPTO RECOVERY SERVICES WITH HIGH SUCCESS RATE
+Subject: [Linaro-mm-sig] HOW TO GET REFUND AFTER CRYPTOCURRENCY SCAM INCIDENT
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/V5JWINGZQHHMB6VHJ7O7CGL6Z2QQRJJH/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2FGR6TYUL6GOGNXMD2BHIC2LHYRMFPKV/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -54,7 +54,7 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	MIME_TRACE(0.00)[0:+];
 	FREEMAIL_FROM(0.00)[gmail.com];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[masoncaleb2a@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_NEQ_ENVFROM(0.00)[angelaasher62@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	RCPT_COUNT_ONE(0.00)[1];
 	TO_DN_NONE(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
@@ -64,7 +64,7 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	RCVD_TLS_LAST(0.00)[];
 	NEURAL_HAM(-0.00)[-0.964];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[]
-X-Rspamd-Queue-Id: 3952A16DF51
+X-Rspamd-Queue-Id: 8BE5E16DF58
 X-Rspamd-Action: no action
 
 QXMgY3J5cHRvY3VycmVuY2llcyBjb250aW51ZSB0byByZXNoYXBlIGZpbmFuY2UgaW4gMjAyNiwg
