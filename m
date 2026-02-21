@@ -2,36 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4MnWGp4lmmnCZAMAu9opvQ
+	id OM0aOqUlmmnCZAMAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 21 Feb 2026 22:37:34 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 21 Feb 2026 22:37:41 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id E2DCB16DEBB
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 21 Feb 2026 22:37:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A1BD616DEC2
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 21 Feb 2026 22:37:41 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id F2F0C40479
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 21 Feb 2026 21:37:32 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B86DF4048B
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 21 Feb 2026 21:37:40 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 43B264047A
-	for <linaro-mm-sig@lists.linaro.org>; Sat, 21 Feb 2026 21:37:12 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 141884047C
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 21 Feb 2026 21:37:13 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-From: "ezra Jack" <jackezra585@gmail.com>
+From: "Mata Marcus" <matamarcus1a@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Sat, 21 Feb 2026 21:37:12 -0000
-Message-ID: <177170983227.1944588.1902092815093940792@lists.linaro.org>
+Date: Sat, 21 Feb 2026 21:37:13 -0000
+Message-ID: <177170983308.1944588.5132093991239442985@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: FEAQ27C3NIQBDJIA4ZDCBQTBHDQNKKGZ
-X-Message-ID-Hash: FEAQ27C3NIQBDJIA4ZDCBQTBHDQNKKGZ
-X-MailFrom: jackezra585@gmail.com
+Message-ID-Hash: 2ZF3YADILL4C6CYZMNO25QJYHHDIF6VM
+X-Message-ID-Hash: 2ZF3YADILL4C6CYZMNO25QJYHHDIF6VM
+X-MailFrom: matamarcus1a@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] HOW TO SECURE LOST CRYPTOCURRENCY USING EXPERT GUIDANCE
+Subject: [Linaro-mm-sig] TRUSTED CRYPTO FRAUD RECOVERY COMPANY FOR LOST FUNDS
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FEAQ27C3NIQBDJIA4ZDCBQTBHDQNKKGZ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2ZF3YADILL4C6CYZMNO25QJYHHDIF6VM/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -58,14 +58,14 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	RCPT_COUNT_ONE(0.00)[1];
 	RCVD_COUNT_TWO(0.00)[2];
-	FROM_NEQ_ENVFROM(0.00)[jackezra585@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_NEQ_ENVFROM(0.00)[matamarcus1a@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_NONE(0.00)[];
 	R_DKIM_NA(0.00)[];
 	NEURAL_HAM(-0.00)[-0.964];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[autospyrec.site:url,co.site:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,linaro.org:email,autopsymainnetsolutions.com:url,autopsymainnetsolutions.com:email]
-X-Rspamd-Queue-Id: E2DCB16DEBB
+X-Rspamd-Queue-Id: A1BD616DEC2
 X-Rspamd-Action: no action
 
 QXMgY3J5cHRvY3VycmVuY2llcyBjb250aW51ZSB0byByZXNoYXBlIGZpbmFuY2UgaW4gMjAyNiwg
