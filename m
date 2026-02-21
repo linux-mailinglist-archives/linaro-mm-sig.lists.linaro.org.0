@@ -2,36 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +Mv+KMMlmmnCZAMAu9opvQ
+	id EOC/HcslmmnCZAMAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 21 Feb 2026 22:38:11 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 21 Feb 2026 22:38:19 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2979D16DED7
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 21 Feb 2026 22:38:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EA86216DEDE
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 21 Feb 2026 22:38:18 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 370A440478
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 21 Feb 2026 21:38:10 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 0143C40457
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 21 Feb 2026 21:38:18 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id ED12B40456
-	for <linaro-mm-sig@lists.linaro.org>; Sat, 21 Feb 2026 21:37:26 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 4F59F40479
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 21 Feb 2026 21:37:30 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-From: angelaasher62@gmail.com
+From: masoncaleb2a@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Sat, 21 Feb 2026 21:37:26 -0000
-Message-ID: <177170984696.1945212.8916941343786627581@lists.linaro.org>
+Date: Sat, 21 Feb 2026 21:37:30 -0000
+Message-ID: <177170985032.1945207.10029255802135603842@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: SVB42ZYLWJQYYQR7PTMYABLG6H6Q6JXH
-X-Message-ID-Hash: SVB42ZYLWJQYYQR7PTMYABLG6H6Q6JXH
-X-MailFrom: angelaasher62@gmail.com
+Message-ID-Hash: D7L2XN4LGAB45EABUROFF437H32M5KV2
+X-Message-ID-Hash: D7L2XN4LGAB45EABUROFF437H32M5KV2
+X-MailFrom: masoncaleb2a@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] COMPLETE GUIDE TO CRYPTO SCAM RECOVERY AND FUND RESTORATION
+Subject: [Linaro-mm-sig] HOW TO RECLAIM LOST CRYPTO THROUGH RECOVERY SERVICES
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SVB42ZYLWJQYYQR7PTMYABLG6H6Q6JXH/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/D7L2XN4LGAB45EABUROFF437H32M5KV2/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -49,7 +49,7 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[angelaasher62@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_NEQ_ENVFROM(0.00)[masoncaleb2a@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	ARC_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
@@ -65,7 +65,7 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	R_DKIM_NA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[autospyrec.site:url,co.site:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,linaro.org:email,autopsymainnetsolutions.com:url,autopsymainnetsolutions.com:email]
-X-Rspamd-Queue-Id: 2979D16DED7
+X-Rspamd-Queue-Id: EA86216DEDE
 X-Rspamd-Action: no action
 
 QXMgY3J5cHRvY3VycmVuY2llcyBjb250aW51ZSB0byByZXNoYXBlIGZpbmFuY2UgaW4gMjAyNiwg
