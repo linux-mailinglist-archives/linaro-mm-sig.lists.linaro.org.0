@@ -2,36 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id kJYvHQLzmmk/oAMAu9opvQ
+	id KPrMGgLzmmk/oAMAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
 	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 13:13:54 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 044FC16F036
+	by mail.lfdr.de (Postfix) with ESMTPS id F351F16F035
 	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 13:13:53 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2544140471
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 12:08:17 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 0B10040470
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 12:08:46 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id AFA57401E2
-	for <linaro-mm-sig@lists.linaro.org>; Sun, 22 Feb 2026 12:08:09 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 40609401E2
+	for <linaro-mm-sig@lists.linaro.org>; Sun, 22 Feb 2026 12:08:39 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: mengkwai654@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Sun, 22 Feb 2026 12:08:09 -0000
-Message-ID: <177176208971.2597468.17664465521493193500@lists.linaro.org>
+Date: Sun, 22 Feb 2026 12:08:39 -0000
+Message-ID: <177176211926.2597705.9847161867363069464@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: 5XDG5FTTYMVL5YBB4R3EYLKOF6AE4OML
-X-Message-ID-Hash: 5XDG5FTTYMVL5YBB4R3EYLKOF6AE4OML
+Message-ID-Hash: 7IOQHFZFKIKINLRQN4H7ZTRITZ2T5T7M
+X-Message-ID-Hash: 7IOQHFZFKIKINLRQN4H7ZTRITZ2T5T7M
 X-MailFrom: mengkwai654@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] GET LEGAL AND PROFESSIONAL CRYPTOCURRENCY RECOVERY SERVICES WITH TECHY FORCE CYBER RETRIEVAL
+Subject: [Linaro-mm-sig] LEGITIMATE CRYPTO RECOVERY COMPANY; BEST BITCOIN RECOVERY EXPERT| HIRE TECHY FORCE CYBER RETRIEVAL
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5XDG5FTTYMVL5YBB4R3EYLKOF6AE4OML/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7IOQHFZFKIKINLRQN4H7ZTRITZ2T5T7M/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -45,20 +45,20 @@ X-Spamd-Result: default: False [7.69 / 15.00];
 	INTRODUCTION(2.00)[];
 	MID_RHS_MATCH_TO(1.00)[];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	GREYLIST(0.00)[pass,body];
+	GREYLIST(0.00)[pass,meta];
 	ARC_NA(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FREEMAIL_FROM(0.00)[gmail.com];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	NEURAL_SPAM(0.00)[0.204];
 	RCPT_COUNT_ONE(0.00)[1];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	NEURAL_SPAM(0.00)[0.203];
+	FREEMAIL_FROM(0.00)[gmail.com];
 	TO_DN_NONE(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
 	FROM_NEQ_ENVFROM(0.00)[mengkwai654@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
@@ -68,7 +68,7 @@ X-Spamd-Result: default: False [7.69 / 15.00];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	FROM_NO_DN(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid]
-X-Rspamd-Queue-Id: 044FC16F036
+X-Rspamd-Queue-Id: F351F16F035
 X-Rspamd-Action: add header
 X-Spam: Yes
 
