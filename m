@@ -2,30 +2,30 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KJeGHusvm2nBuwMAu9opvQ
+	id mJvaFPgvm2nBuwMAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 17:33:47 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 17:34:00 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 28B4316FA4F
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 17:33:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E41B316FA56
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 17:33:59 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 45AB340471
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 16:33:46 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id F367C401D9
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 16:33:58 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2CA59401D3
-	for <linaro-mm-sig@lists.linaro.org>; Sun, 22 Feb 2026 16:33:40 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 6676B401D3
+	for <linaro-mm-sig@lists.linaro.org>; Sun, 22 Feb 2026 16:33:50 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: patricklucas0522@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Sun, 22 Feb 2026 16:33:40 -0000
-Message-ID: <177177802018.2801851.5454501871110019650@lists.linaro.org>
-In-Reply-To: <177161810241.841749.17435097408924772187@lists.linaro.org>
-References: <177161810241.841749.17435097408924772187@lists.linaro.org>
+Date: Sun, 22 Feb 2026 16:33:50 -0000
+Message-ID: <177177803041.2802117.7179245888812914901@lists.linaro.org>
+In-Reply-To: <177176823134.2676358.10813699316617248283@lists.linaro.org>
+References: <177176823134.2676358.10813699316617248283@lists.linaro.org>
 User-Agent: HyperKitty on http://lists-ec2.96boards.org/
-Message-ID-Hash: SCBP2QYYMQPNM42E3VIQUA2AGPYO2EYT
-X-Message-ID-Hash: SCBP2QYYMQPNM42E3VIQUA2AGPYO2EYT
+Message-ID-Hash: 3EWKNVIGW2RWG2TRJSKQE7VD2Q5VHWMX
+X-Message-ID-Hash: 3EWKNVIGW2RWG2TRJSKQE7VD2Q5VHWMX
 X-MailFrom: patricklucas0522@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
@@ -33,7 +33,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: Hire A Crypto Recovery Specialist; Recover Scammed Crypto With iForce Hacker Recovery
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SCBP2QYYMQPNM42E3VIQUA2AGPYO2EYT/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3EWKNVIGW2RWG2TRJSKQE7VD2Q5VHWMX/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -67,7 +67,7 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	R_DKIM_NA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,linaro.org:email]
-X-Rspamd-Queue-Id: 28B4316FA4F
+X-Rspamd-Queue-Id: E41B316FA56
 X-Rspamd-Action: no action
 
 QmVzdCBDcnlwdG8gUmVjb3ZlcnkgU2VydmljZXMgY29uc3VsdCBPUFRJTUlTVElDIEhBQ0tFUiBH
