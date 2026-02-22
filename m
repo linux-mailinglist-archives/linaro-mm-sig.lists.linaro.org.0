@@ -2,37 +2,35 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id G26vJPJem2kmywMAu9opvQ
+	id UEX2GRlfm2kmywMAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 20:54:26 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 20:55:05 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 12563170393
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 20:54:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id F1CFA17039C
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 20:55:04 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E63F840469
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 19:54:24 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 0D4FC40445
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 19:55:04 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 094673F6F8
-	for <linaro-mm-sig@lists.linaro.org>; Sun, 22 Feb 2026 19:54:18 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id DC7B13F6F8
+	for <linaro-mm-sig@lists.linaro.org>; Sun, 22 Feb 2026 19:54:57 +0000 (UTC)
 MIME-Version: 1.0
 From: karenschafer030@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Sun, 22 Feb 2026 19:54:18 -0000
-Message-ID: <177179005803.2976433.5333609629546990534@lists.linaro.org>
-In-Reply-To: <177082804090.3664785.3769574509414310786@lists.linaro.org>
-References: <177082804090.3664785.3769574509414310786@lists.linaro.org>
+Date: Sun, 22 Feb 2026 19:54:57 -0000
+Message-ID: <177179009790.2976433.8649871500042553203@lists.linaro.org>
 User-Agent: HyperKitty on http://lists-ec2.96boards.org/
-Message-ID-Hash: TRLCQQR3OETZXH5MJOCZOAADLTAYZHQ7
-X-Message-ID-Hash: TRLCQQR3OETZXH5MJOCZOAADLTAYZHQ7
+Message-ID-Hash: EKWJQ2FZS7GZT3R45PKQR42YQLUOC3S3
+X-Message-ID-Hash: EKWJQ2FZS7GZT3R45PKQR42YQLUOC3S3
 X-MailFrom: karenschafer030@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: Hire A Crypto Recovery Specialist; Recover Scammed Crypto With iForce Hacker Recovery
+Subject: [Linaro-mm-sig] Cryptocurrency Scam Recovery Services; Top Firm to Recover Lost Crypto, Bitcoin, Lost Wallet, Consult ZEUS CRYPTO RECOVERY SERVICES
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TRLCQQR3OETZXH5MJOCZOAADLTAYZHQ7/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EKWJQ2FZS7GZT3R45PKQR42YQLUOC3S3/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -44,34 +42,30 @@ Content-Transfer-Encoding: 7bit
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [0.59 / 15.00];
 	MID_RHS_MATCH_TO(1.00)[];
-	R_SPF_ALLOW(-0.20)[+mx];
 	MAILLIST(-0.20)[mailman];
-	MIME_GOOD(-0.10)[text/plain];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
+	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_ONE(0.00)[1];
-	ARC_NA(0.00)[];
 	FROM_NO_DN(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	FREEMAIL_FROM(0.00)[gmail.com];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.992];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
+	RCPT_COUNT_ONE(0.00)[1];
+	ARC_NA(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
 	FROM_NEQ_ENVFROM(0.00)[karenschafer030@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_NONE(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	R_DKIM_NA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid]
-X-Rspamd-Queue-Id: 12563170393
+	RCVD_TLS_LAST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.992];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,linaro.org:email]
+X-Rspamd-Queue-Id: F1CFA17039C
 X-Rspamd-Action: no action
-
-Cryptocurrency Scam Recovery Services; Consult ZEUS CRYPTO RECOVERY SERVICES
-
-
 
 ZEUS CRYPTO RECOVERY SERVICES is a specialized digital asset recovery and blockchain intelligence firm dedicated to helping individuals and organizations reclaim lost, stolen, or inaccessible cryptocurrency funds.
 
