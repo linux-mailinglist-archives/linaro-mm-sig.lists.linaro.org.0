@@ -2,36 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gN3DJEEzm2mbvQMAu9opvQ
+	id mJHuCkgzm2mbvQMAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 17:48:01 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 17:48:08 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4CAA916FBDD
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 17:48:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id ABB3116FBE4
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 17:48:07 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5F62C401D3
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 16:48:00 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id BBD6D3F9AD
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 16:48:06 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 773C740457
-	for <linaro-mm-sig@lists.linaro.org>; Sun, 22 Feb 2026 16:47:27 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 0917D40457
+	for <linaro-mm-sig@lists.linaro.org>; Sun, 22 Feb 2026 16:47:30 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-From: "Sandra Lopez" <sandralopezs1aa@gmail.com>
+From: "Mata Marcus" <matamarcus1a@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Sun, 22 Feb 2026 16:47:27 -0000
-Message-ID: <177177884748.2814644.11760579062595776278@lists.linaro.org>
+Date: Sun, 22 Feb 2026 16:47:30 -0000
+Message-ID: <177177885003.2813698.12930617016343836565@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: 2PGLJ3A37KU3SITBFGSIBTNJACQOMLOD
-X-Message-ID-Hash: 2PGLJ3A37KU3SITBFGSIBTNJACQOMLOD
-X-MailFrom: sandralopezs1aa@gmail.com
+Message-ID-Hash: 53WW2UHRVU7KO4S6LTGWC2AVDWQMQ4GB
+X-Message-ID-Hash: 53WW2UHRVU7KO4S6LTGWC2AVDWQMQ4GB
+X-MailFrom: matamarcus1a@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] LEGITIMATE AND GOOD TOP 6 BEST CRYPTOCURRENCY RECOVERY AGENCY WORLDWIDE WITH TRUSTED EXPERT SERVICE
+Subject: [Linaro-mm-sig] LEGITIMATE AND GOOD TOP 7 BEST CRYPTOCURRENCY RECOVERY AGENCY WORLDWIDE WITH TRUSTED EXPERT SERVICE
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2PGLJ3A37KU3SITBFGSIBTNJACQOMLOD/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/53WW2UHRVU7KO4S6LTGWC2AVDWQMQ4GB/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -58,14 +58,14 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	RCPT_COUNT_ONE(0.00)[1];
 	RCVD_COUNT_TWO(0.00)[2];
-	FROM_NEQ_ENVFROM(0.00)[sandralopezs1aa@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_NEQ_ENVFROM(0.00)[matamarcus1a@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_NONE(0.00)[];
 	R_DKIM_NA(0.00)[];
 	NEURAL_HAM(-0.00)[-0.964];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,autopsymainnetsolutions.com:url,autopsymainnetsolutions.com:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,autospyrec.site:url]
-X-Rspamd-Queue-Id: 4CAA916FBDD
+	DBL_BLOCKED_OPENRESOLVER(0.00)[autospyrec.site:url,linaro.org:email,autopsymainnetsolutions.com:url,autopsymainnetsolutions.com:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid]
+X-Rspamd-Queue-Id: ABB3116FBE4
 X-Rspamd-Action: no action
 
 QXMgY3J5cHRvY3VycmVuY2llcyBjb250aW51ZSB0byByZXNoYXBlIGZpbmFuY2UgaW4gMjAyNiwg
