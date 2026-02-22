@@ -2,76 +2,91 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id SK09CSR0m2lXzwMAu9opvQ
+	id 3On6G/KDm2nf0wMAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 22:24:52 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 23:32:18 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id A6BF41706D1
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 22:24:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B2663170999
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 23:32:17 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 86DFD40469
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 21:24:50 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7DE5140464
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 22:32:16 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id D2C4B3F6F8
-	for <linaro-mm-sig@lists.linaro.org>; Sun, 22 Feb 2026 21:24:43 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 625553F6F8
+	for <linaro-mm-sig@lists.linaro.org>; Sun, 22 Feb 2026 22:32:09 +0000 (UTC)
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-From: lawrence001944@gmail.com
+From: "Rosemary Birsan" <rosemarybirsan@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Sun, 22 Feb 2026 21:24:43 -0000
-Message-ID: <177179548385.3052537.656285508574179442@lists.linaro.org>
-In-Reply-To: <177126332417.291601.6951552237939284191@lists.linaro.org>
-References: <177126332417.291601.6951552237939284191@lists.linaro.org>
+Date: Sun, 22 Feb 2026 22:32:09 -0000
+Message-ID: <177179952939.3106052.10183668588381831134@lists.linaro.org>
+In-Reply-To: <177171630535.2033838.5067393009744396472@lists.linaro.org>
+References: <177171630535.2033838.5067393009744396472@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: ARNKJWRS5NIKKYJPGC52YYXLLWN2JRB5
-X-Message-ID-Hash: ARNKJWRS5NIKKYJPGC52YYXLLWN2JRB5
-X-MailFrom: lawrence001944@gmail.com
+Message-ID-Hash: OOEYDYKMUWE7TYK32NONW6WFTIOM4QSH
+X-Message-ID-Hash: OOEYDYKMUWE7TYK32NONW6WFTIOM4QSH
+X-MailFrom: rosemarybirsan@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 08/13] dt-bindings: serial: fsl-linflexuart: add clock input properties
+Subject: [Linaro-mm-sig] Re: TRUSTED EXPERTS ONLINE RECOVERY SOLUTIONS//ALMIGHTY RECOVERY COIN
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ARNKJWRS5NIKKYJPGC52YYXLLWN2JRB5/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OOEYDYKMUWE7TYK32NONW6WFTIOM4QSH/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.59 / 15.00];
+X-Spamd-Result: default: False [10.99 / 15.00];
+	SPAM_FLAG(5.00)[];
+	ABUSE_SURBL(5.00)[almightyrecoveryco.wixsite.com:url];
 	MID_RHS_MATCH_TO(1.00)[];
-	R_SPF_ALLOW(-0.20)[+mx];
 	MAILLIST(-0.20)[mailman];
-	MIME_GOOD(-0.10)[text/plain];
+	MIME_BASE64_TEXT(0.10)[];
 	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
+	MIME_GOOD(-0.10)[text/plain];
+	BAD_REP_POLICIES(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_ONE(0.00)[1];
-	ARC_NA(0.00)[];
-	FROM_NO_DN(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	FREEMAIL_FROM(0.00)[gmail.com];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.992];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_NEQ_ENVFROM(0.00)[lawrence001944@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	TO_DN_NONE(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	GREYLIST(0.00)[pass,meta];
+	RCPT_COUNT_ONE(0.00)[1];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	NEURAL_SPAM(0.00)[0.211];
+	ARC_NA(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_NEQ_ENVFROM(0.00)[rosemarybirsan@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_NONE(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	R_DKIM_NA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[wirelesswebrecovery.com:url,wirelesswebrecovery.com:email,linaro.org:email]
-X-Rspamd-Queue-Id: A6BF41706D1
-X-Rspamd-Action: no action
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	R_SPF_ALLOW(0.00)[+mx];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,almightyrecoveryco.wixsite.com:url]
+X-Rspamd-Queue-Id: B2663170999
+X-Rspamd-Action: add header
+X-Spam: Yes
 
-What you need is the best recovery expert. Wireless Web Recovery can help you get out from under your crypto theft methods. The bitcoin investing industry is full of scammers, and despite people's best efforts to make enormous gains, they regularly end up losing money. No one can defeat these people's cunning schemes because of their intelligence. They typically offer contact agreements and put you in a group with others who have already made investments to tempt you to invest your hard-earned money. I invested my money as advised, then a few days later I discovered that IDMining had taken it. I appreciate Wireless Web Recovery assistance in helping me reclaim my BTC from these cyber crooks. I firmly guarantee that using Wireless Web Recovery service to retrieve your stolen BTC back will be safe. Talk with a representative today on: Email: info@wirelesswebrecovery.com
-Website: wirelesswebrecovery.com
-Whatsapp: +447549958672
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+SGlyZSBhIFJlYWwgSGFja2VyOiDCoEFsbWlnaHR5IFJlY292ZXJ5IEV4cGVydA0KDQpJIGhlYXJ0
+aWx5IHJlY29tbWVuZCBBbG1pZ2h0eSBCaXRjb2luIFJlY292ZXJ5IGlmIHlvdSdyZSBmZWVsaW5n
+IGRlc3BhaXIgYWZ0ZXIgbG9zaW5nIHlvdXIgYml0Y29pbnMuIEFmdGVyIGxvc2luZyBteSBiaXRj
+b2luLCBJIGJlbGlldmVkIG15IG1vbmV5IHdhcyBsb3N0IGZvcmV2ZXIsIHdoaWNoIHB1dCBtZSBp
+biBhIGRpZmZpY3VsdCBwcmVkaWNhbWVudC4gSSdtIGdsYWQgSSBjaG9zZSB0byBnaXZlIEFsbWln
+aHR5IFJlY292ZXJ5IGEgdHJ5LiBUaGV5IGFzc2lzdGVkIG1lIGluIHJlY292ZXJpbmcgbXkgYml0
+Y29pbnMuIFRoZSBwcm9jZXNzIHdhcyBzaW1wbGUsIGFuZCB0aGV5IGtlcHQgbWUgdXBkYXRlZCBh
+dCBldmVyeSBzdGFnZS4gSWYgeW91IGFyZSBoYXZpbmcgYSBzaW1pbGFyIHByb2JsZW0sIGl0IGlz
+IGhpZ2hseSByZWNvbW1lbmRlZCB0aGF0IHlvdSBjb250YWN0IHRoZW0uDQpFbWFpbDogYWxtaWdo
+dHlyZWNvdmVyeWNvaW5AbWFpbC5jb20NCg0KV2Vic2l0ZTogYWxtaWdodHlyZWNvdmVyeWNvLndp
+eHNpdGUuY29tL2FsbWlnaHR5LXJlY292ZXJ5LWNvDQoNCldoYXRzQXBwLiArNTMgNTEgNTUgNjk2
+OQ0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJv
+LW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRv
+IHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5s
+aW5hcm8ub3JnCg==
