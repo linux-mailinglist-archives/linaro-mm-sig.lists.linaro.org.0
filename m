@@ -2,36 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id CKHzOtU7m2nvwQMAu9opvQ
+	id OIshEd87m2nvwQMAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 18:24:37 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 18:24:47 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id AA0B316FE66
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 18:24:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BB08716FE6D
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 18:24:46 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C1E1B3F9AD
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 17:24:36 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id CBE86401E2
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 17:24:45 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 6D4483F9AD
-	for <linaro-mm-sig@lists.linaro.org>; Sun, 22 Feb 2026 17:24:05 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 994364047A
+	for <linaro-mm-sig@lists.linaro.org>; Sun, 22 Feb 2026 17:24:07 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-From: florabenson93@gmail.com
+From: angelaasher62@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Sun, 22 Feb 2026 17:24:05 -0000
-Message-ID: <177178104544.2851695.2749172779423453204@lists.linaro.org>
+Date: Sun, 22 Feb 2026 17:24:07 -0000
+Message-ID: <177178104762.2851695.9587897859157642341@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: B7FFRAQIB46MQRQE2Q6LP2QVP54CRKVK
-X-Message-ID-Hash: B7FFRAQIB46MQRQE2Q6LP2QVP54CRKVK
-X-MailFrom: florabenson93@gmail.com
+Message-ID-Hash: 4KS53A4MCAWNTM4BH7RLUSJJGNM3HYCW
+X-Message-ID-Hash: 4KS53A4MCAWNTM4BH7RLUSJJGNM3HYCW
+X-MailFrom: angelaasher62@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Who is the best reliable Crypto Recovery expert on the web?
+Subject: [Linaro-mm-sig] HOW TO RECOVER STOLEN CRYPTOCURRENCY: COMPLETE GUIDE ON RECOVERY OF STOLEN CRYPTOCURRENCY ASSETS
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/B7FFRAQIB46MQRQE2Q6LP2QVP54CRKVK/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4KS53A4MCAWNTM4BH7RLUSJJGNM3HYCW/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -40,33 +40,32 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Transfer-Encoding: base64
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [1.69 / 15.00];
+X-Spamd-Result: default: False [0.69 / 15.00];
 	MID_RHS_MATCH_TO(1.00)[];
-	SUBJECT_ENDS_QUESTION(1.00)[];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx:c];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
-	MIME_GOOD(-0.10)[text/plain];
 	MIME_BASE64_TEXT(0.10)[];
+	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[angelaasher62@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	ARC_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	RCPT_COUNT_ONE(0.00)[1];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_NEQ_ENVFROM(0.00)[florabenson93@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	FROM_NO_DN(0.00)[];
+	RCPT_COUNT_ONE(0.00)[1];
 	TO_DN_NONE(0.00)[];
-	R_DKIM_NA(0.00)[];
-	NEURAL_HAM(-0.00)[-0.962];
+	RCVD_COUNT_TWO(0.00)[2];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.964];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	R_DKIM_NA(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,linaro.org:email,autopsymainnetsolutions.com:url,autopsymainnetsolutions.com:email,autospyrec.site:url]
-X-Rspamd-Queue-Id: AA0B316FE66
+X-Rspamd-Queue-Id: BB08716FE6D
 X-Rspamd-Action: no action
 
 QXMgY3J5cHRvY3VycmVuY2llcyBjb250aW51ZSB0byByZXNoYXBlIGZpbmFuY2UgaW4gMjAyNiwg
