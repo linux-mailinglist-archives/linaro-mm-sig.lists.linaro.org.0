@@ -2,36 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4ERlNPUzm2kIvgMAu9opvQ
+	id uHV3Bf8zm2kIvgMAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 17:51:01 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 17:51:11 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 71C8D16FC43
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 17:51:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C222016FC4A
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 17:51:10 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8A58D401D9
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 16:51:00 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D681B401D3
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 16:51:09 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 1A7C8401D3
-	for <linaro-mm-sig@lists.linaro.org>; Sun, 22 Feb 2026 16:50:37 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 222A43F803
+	for <linaro-mm-sig@lists.linaro.org>; Sun, 22 Feb 2026 16:50:40 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-From: "Sandra Lopez" <sandralopezs1aa@gmail.com>
+From: "Mata Marcus" <matamarcus1a@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Sun, 22 Feb 2026 16:50:37 -0000
-Message-ID: <177177903710.2819359.13384370868498397942@lists.linaro.org>
+Date: Sun, 22 Feb 2026 16:50:40 -0000
+Message-ID: <177177904013.2819359.17484673519444977419@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: 3EFI2G4YAHJADVQTCEY47VBONVLAFO45
-X-Message-ID-Hash: 3EFI2G4YAHJADVQTCEY47VBONVLAFO45
-X-MailFrom: sandralopezs1aa@gmail.com
+Message-ID-Hash: YZIMSGQWLLRUBBNCH7HFES34HB7WGFBK
+X-Message-ID-Hash: YZIMSGQWLLRUBBNCH7HFES34HB7WGFBK
+X-MailFrom: matamarcus1a@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] LEGITIMATE AND GOOD TOP 6 BEST CRYPTOCURRENCY RECOVERY FIRM WORLDWIDE WITH TRUSTED EXPERT SERVICE
+Subject: [Linaro-mm-sig] LEGITIMATE AND GOOD TOP 7 BEST CRYPTOCURRENCY RECOVERY FIRM WORLDWIDE WITH TRUSTED EXPERT SERVICE
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3EFI2G4YAHJADVQTCEY47VBONVLAFO45/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YZIMSGQWLLRUBBNCH7HFES34HB7WGFBK/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -58,14 +58,14 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	RCPT_COUNT_ONE(0.00)[1];
 	RCVD_COUNT_TWO(0.00)[2];
-	FROM_NEQ_ENVFROM(0.00)[sandralopezs1aa@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_NEQ_ENVFROM(0.00)[matamarcus1a@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_NONE(0.00)[];
 	R_DKIM_NA(0.00)[];
 	NEURAL_HAM(-0.00)[-0.964];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[autopsymainnetsolutions.com:url,autopsymainnetsolutions.com:email,linaro.org:email,autospyrec.site:url,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid]
-X-Rspamd-Queue-Id: 71C8D16FC43
+X-Rspamd-Queue-Id: C222016FC4A
 X-Rspamd-Action: no action
 
 QXMgY3J5cHRvY3VycmVuY2llcyBjb250aW51ZSB0byByZXNoYXBlIGZpbmFuY2UgaW4gMjAyNiwg
