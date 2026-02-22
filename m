@@ -2,36 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qPvIC6Mym2k0vAMAu9opvQ
+	id mJntA6wym2k0vAMAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 17:45:23 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 17:45:32 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id A689C16FB9B
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 17:45:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BCFDD16FBA3
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 17:45:31 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id BEE9540445
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 16:45:21 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D851C401D3
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 16:45:30 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 40D0B40475
-	for <linaro-mm-sig@lists.linaro.org>; Sun, 22 Feb 2026 16:44:38 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 8224F401D9
+	for <linaro-mm-sig@lists.linaro.org>; Sun, 22 Feb 2026 16:44:41 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-From: "Mata Marcus" <matamarcus1a@gmail.com>
+From: "ezra Jack" <jackezra585@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Sun, 22 Feb 2026 16:44:38 -0000
-Message-ID: <177177867826.2812585.8601738709393557831@lists.linaro.org>
+Date: Sun, 22 Feb 2026 16:44:41 -0000
+Message-ID: <177177868153.2812379.8504642689303716253@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: XR4W5CKBKQ3IJ4NJJFVFLK64OWCKO7GA
-X-Message-ID-Hash: XR4W5CKBKQ3IJ4NJJFVFLK64OWCKO7GA
-X-MailFrom: matamarcus1a@gmail.com
+Message-ID-Hash: M23VD4J6XXCG5WTRCX2RYACOJNMHPSZB
+X-Message-ID-Hash: M23VD4J6XXCG5WTRCX2RYACOJNMHPSZB
+X-MailFrom: jackezra585@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] LEGITIMATE AND GOOD TOP 7 BEST CRYPTOCURRENCY RECOVERY EXPERT WORLDWIDE WITH TRUSTED EXPERT SERVICE
+Subject: [Linaro-mm-sig] LEGITIMATE AND GOOD TOP 8 BEST CRYPTOCURRENCY RECOVERY EXPERT WORLDWIDE WITH TRUSTED EXPERT SERVICE
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XR4W5CKBKQ3IJ4NJJFVFLK64OWCKO7GA/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/M23VD4J6XXCG5WTRCX2RYACOJNMHPSZB/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -58,14 +58,14 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	RCPT_COUNT_ONE(0.00)[1];
 	RCVD_COUNT_TWO(0.00)[2];
-	FROM_NEQ_ENVFROM(0.00)[matamarcus1a@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_NEQ_ENVFROM(0.00)[jackezra585@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_NONE(0.00)[];
 	R_DKIM_NA(0.00)[];
 	NEURAL_HAM(-0.00)[-0.964];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[autospyrec.site:url,autopsymainnetsolutions.com:url,autopsymainnetsolutions.com:email,linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid]
-X-Rspamd-Queue-Id: A689C16FB9B
+X-Rspamd-Queue-Id: BCFDD16FBA3
 X-Rspamd-Action: no action
 
 QXMgY3J5cHRvY3VycmVuY2llcyBjb250aW51ZSB0byByZXNoYXBlIGZpbmFuY2UgaW4gMjAyNiwg
