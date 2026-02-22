@@ -2,36 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KIsuLV41m2mMvgMAu9opvQ
+	id gGnXFlI3m2kAwAMAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 17:57:02 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 18:05:22 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 731D116FCD2
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 17:57:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D0E5E16FD6F
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 18:05:21 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 850AF4043C
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 16:57:01 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id A83BD4044E
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 22 Feb 2026 17:05:20 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2DFB3401D9
-	for <linaro-mm-sig@lists.linaro.org>; Sun, 22 Feb 2026 16:56:03 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id A20FC3F803
+	for <linaro-mm-sig@lists.linaro.org>; Sun, 22 Feb 2026 17:05:13 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-From: "Theodore Henry" <theodorehenry1a@gmail.com>
+From: "Jane Pamela" <pamelajane395@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Sun, 22 Feb 2026 16:56:03 -0000
-Message-ID: <177177936318.2823414.8853367158505434992@lists.linaro.org>
+Date: Sun, 22 Feb 2026 17:05:13 -0000
+Message-ID: <177177991365.2832248.16832414586076877112@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: LMWGIBGEAMZ5SHDJSF5LWQTNXVQMW7NO
-X-Message-ID-Hash: LMWGIBGEAMZ5SHDJSF5LWQTNXVQMW7NO
-X-MailFrom: theodorehenry1a@gmail.com
+Message-ID-Hash: B6LCSYBDRGS4X6HCM5PPPMEJKYRMQ5N2
+X-Message-ID-Hash: B6LCSYBDRGS4X6HCM5PPPMEJKYRMQ5N2
+X-MailFrom: pamelajane395@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] LEGITIMATE AND GOOD TOP 9 BEST CRYPTOCURRENCY RECOVERY SPECIALIST WORLDWIDE WITH TRUSTED EXPERT SERVICE
+Subject: [Linaro-mm-sig] HOW TO GET THE BEST & LEGIT CRYPTO \ BITCOIN RECOVERY SERVICES-AUTOPSY MAINNET RECOVERY
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LMWGIBGEAMZ5SHDJSF5LWQTNXVQMW7NO/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/B6LCSYBDRGS4X6HCM5PPPMEJKYRMQ5N2/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -42,7 +42,7 @@ Content-Transfer-Encoding: base64
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [0.69 / 15.00];
 	MID_RHS_MATCH_TO(1.00)[];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
@@ -50,22 +50,22 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	ARC_NA(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	ARC_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_ONE(0.00)[1];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	RCPT_COUNT_ONE(0.00)[1];
+	FREEMAIL_FROM(0.00)[gmail.com];
 	RCVD_COUNT_TWO(0.00)[2];
-	FROM_NEQ_ENVFROM(0.00)[theodorehenry1a@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_NEQ_ENVFROM(0.00)[pamelajane395@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_NONE(0.00)[];
 	R_DKIM_NA(0.00)[];
-	NEURAL_HAM(-0.00)[-0.964];
+	NEURAL_HAM(-0.00)[-0.965];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[autopsymainnetsolutions.com:url,autopsymainnetsolutions.com:email,autospyrec.site:url,linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid]
-X-Rspamd-Queue-Id: 731D116FCD2
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,linaro.org:email,autospyrec.site:url,autopsymainnetsolutions.com:url,autopsymainnetsolutions.com:email]
+X-Rspamd-Queue-Id: D0E5E16FD6F
 X-Rspamd-Action: no action
 
 QXMgY3J5cHRvY3VycmVuY2llcyBjb250aW51ZSB0byByZXNoYXBlIGZpbmFuY2UgaW4gMjAyNiwg
