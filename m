@@ -2,72 +2,72 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id CFQuGwwT4WnoogAAu9opvQ
+	id YFc4GhUT4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:49:16 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:49:25 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 17C81412001
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:49:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D877F41200A
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:49:24 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 32E4C448F1
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:49:15 +0000 (UTC)
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
-	by lists.linaro.org (Postfix) with ESMTPS id 534CB3F7DE
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Feb 2026 09:51:40 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E851240514
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:49:23 +0000 (UTC)
+Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com [209.85.128.67])
+	by lists.linaro.org (Postfix) with ESMTPS id A293A3F7DE
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Feb 2026 09:51:41 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=resnulli-us.20230601.gappssmtp.com header.s=20230601 header.b=oI8TSv74;
-	spf=none (lists.linaro.org: domain of jiri@resnulli.us has no SPF policy when checking 209.85.128.54) smtp.mailfrom=jiri@resnulli.us;
+	dkim=pass header.d=resnulli-us.20230601.gappssmtp.com header.s=20230601 header.b=y+Xhb9Ux;
+	spf=none (lists.linaro.org: domain of jiri@resnulli.us has no SPF policy when checking 209.85.128.67) smtp.mailfrom=jiri@resnulli.us;
 	dmarc=none
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-483a2338616so25610545e9.0
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Feb 2026 01:51:40 -0800 (PST)
+Received: by mail-wm1-f67.google.com with SMTP id 5b1f17b1804b1-48334ee0aeaso29904475e9.1
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Feb 2026 01:51:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=resnulli-us.20230601.gappssmtp.com; s=20230601; t=1771840299; x=1772445099; darn=lists.linaro.org;
+        d=resnulli-us.20230601.gappssmtp.com; s=20230601; t=1771840301; x=1772445101; darn=lists.linaro.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=jZyzh76/vi/WA0Mw21DKfbc+O5VrV1Ds2EV/BZWk6NE=;
-        b=oI8TSv74Q0Jc7XCZxxBwg8NXwQg4RDkfwWLDmNjoptKOgqzOfRd+7DC6M2oXyy9pFQ
-         CPZuiigxTQIgxpP2o0arv+f+rswJ6niq2RQ/q1KISCuF9/pseMdUdqso5ewBZLYhw53A
-         F/L6lAoqon8zMxN1KqoE6Jm/haLBG9WiInhoYE9CTgkDVSJB+KBsZq77cU73/wyAWOa1
-         GW7yeLhAFC5Ylmld+LwWOt40Q6nr6oYdO8qVG7bG4uBSPIn1n3BBf5aKb/sx59sdTcjA
-         lIkLZHqDl++uocKT7rE6Yg/znth/k7or5s8lSGh0k+2qOsdDy3FBFUHbwSyUx9dRijx5
-         IPTQ==
+        bh=mF8Zav5NAo2mpAKEgaciFJ2LFKzg7+sHGDJbJ7B58Uk=;
+        b=y+Xhb9Uxds3/lhS+b4GL1IlZww2906rnQBt2KwSw5OhI4X/DNaCnJWEsbgVi+9NQKq
+         mVIlUFXoCtwlioBrZzlU8Uk6fXv1tN4TGrWtXMaC68oacCl1dsqIev8+UoBCh0o9pHGY
+         9ueke3DcK8s1ZcSGE8TyzpgLpW9YDDwyaNYKzMK5UW8aIGUzljNcWzv5eRP+3o1Dnaiz
+         5D2iqqdrkUofkJ6xw+yWXT28dwzefPMwhe2qRNFgYbg5CpNhHP8ruYbLGFQ/ek5ajkWs
+         jbodMkaigSeZ2i0DVZRh+6OZswj7nKggOi1OhuBDPjDJzs7ihpqGRNSrfoB+gyz0I5t5
+         uymg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771840299; x=1772445099;
+        d=1e100.net; s=20230601; t=1771840301; x=1772445101;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=jZyzh76/vi/WA0Mw21DKfbc+O5VrV1Ds2EV/BZWk6NE=;
-        b=wiJxaOBeatjxy193I7/3d2MizwcKpXf1blqXaNZib0WOnTRzbFw66yvbwbcJN3jX3G
-         HKz8+bWShh7lFxU+fKoaLozIB4aNNIni0S90BnpGpNicLmxEPtqQH7L1eWE+tI+QQtQe
-         34nSCF2NDMntn2rZf1E0fTd4XgTjCf0dYie6lOWq+V102vYNown5Q3E5EtuxUwNyCivV
-         AXZzc+Rgj3Y3vdXZDjMXVjVfqlTtn/byJtlZ3k4Rif6yrJaZUTkiUuGA9RZenT48Lrfi
-         C434sIJpj3bikbqMM9z3hB/gf6s4nwpI3tqtQIIgRkRW5NFSdSINF2NDBIlXFaxVWB2M
-         75AQ==
-X-Forwarded-Encrypted: i=1; AJvYcCV0yVsBzV57AqAApXuXoMyUao+c8GguH53jihaGFWUw+Gx4ITWVFBlJlgUv7PyvA1i3J2Nznn9wAXhFJ7NF@lists.linaro.org
-X-Gm-Message-State: AOJu0YwHnQEeT5P04vU9Xg79+ynWyXbTkBjqEdj5w2Vx1GN7aR74WF6W
-	bteYMuMOYnHBnrQRFwafczgSd+qa0bZQ8+UazB9S8hnJaCFEjnBMSewYeoCHDczWw8g=
-X-Gm-Gg: AZuq6aLL87m4/JCmItywv1CC+YGJaIedIlqUuusdGy5aRJ6Laxv9vS7Hc5SuI7ghCGD
-	ZjyU504YFx84IXWZTvuF5IG/3EzAdJCqTLpTLq/sM0BjoEPJQPUFuphSkhQDkH3BsTooAGtHj0t
-	yYDElOQd8a1Bh+PApDHSgWcfERUJlEGZ64bPHSUQL4eJqor5ATARGd0c/f99QqO6ndOnTwztcGe
-	iV9sVKwyYeQj5CWKYH9Y1VdeLVAIriAWtPKCIjWOmf1uuDqFFS870EEg7huxryCwfX9v5eX0/V2
-	s7hl5ljTIQY0Ogydk6tmcbMQCds4rQpIfspNmrRvzTtHxq4Y/UU27yMIE/pO5pjUSfcK8WPoWoL
-	4kUnYBse0l3nSYq4zmm3VAgsgdYh3p0TQx+gRZnHjfHNj0DnVwVQrrJvchb03g+fvUaHuBKK1VW
-	alWYRfJ3LG+M1jCuLICSoasNTA
-X-Received: by 2002:a05:600c:1e1d:b0:483:456a:514b with SMTP id 5b1f17b1804b1-483a95befe5mr129473145e9.12.1771840299027;
-        Mon, 23 Feb 2026 01:51:39 -0800 (PST)
+        bh=mF8Zav5NAo2mpAKEgaciFJ2LFKzg7+sHGDJbJ7B58Uk=;
+        b=M+uFZPiwJZI/OB1QzG370ZLnbUtkwMGpiO6sKbZqrtzemmQk8F8wp3tXNeYTPRYTGf
+         9kHxO1oolhi+P4ERhRqQsrW9jC55u2LJUTI511xK0xBrdegX2mnkLCB+2ITtb+Xn/jAV
+         VxtFzqFYDuRCU98i02jden1Ln6vbk+RrHMti/EHeZKluhlQckT/0xK4GARdMF6dr0KzP
+         QAgtz81vxKpxKPjhcYZygsTpPHvql+qXhukib9LNg3Vkq402wimKQmXBY4k5nQGgNYfs
+         SrRghKrLt365TUfzzfHGRJA9tlo2VOoxgH1eUBVnTp8c3N09OQJbV59mtxZlnQ4TCeSD
+         nl4w==
+X-Forwarded-Encrypted: i=1; AJvYcCUMnZZTPQMt03QCETE/n92vOsEYtdcAnFravYrYej5o8LbYt6Uf1NDMO3KhGJkKI07dSkdt6n4Fzdd88gdS@lists.linaro.org
+X-Gm-Message-State: AOJu0YwV9fE1VtH7nchuRNBXxE5tDFL4/iM8ARYW4/TbWSPFBlGdMi84
+	QrlOKGPzDsFbTANntOqr3SxcT03AZR71/oe5iFIQ1Si7XZV+uRatEA0iwJ+8OY6bpxc=
+X-Gm-Gg: AZuq6aI9x5HZg5GKm2uMTakCOF1B2YPSXNvB6XJfG2VY90j1WaMoJHJidcIu/lKKl4X
+	lteZcfchfyBAQb+wLzQkrvC62H7+YJVtctQKa3UO052UcTCr1THW+rAH+cxDpBwLh7yHEIzMwwp
+	tVEDWom9V3qGY44CDoNTqtf2ar/DM7ewVmBYADRzzcNN4Z4HfRZA+K8QnpCWn/7AcpBwhN9L9f8
+	lU5lLIS/Px4AubDMsrk5E8dKwL3TIoVC1fGY93DJgYs2EmO+U9Q+wVyGZcHwbUZpI50OQ5ftXqR
+	YtYtAltZN7LqWIwpA8CVbeFdZG5RiWahhUh0SestyK138BnAslqFq33a685QXRXDza9OAWqER3q
+	ujSqY6772pOOVuxpFOSVXetvdZXbKt4m/Z95dRvpin1XI7Tw745OaSHu1N79VaXSu6wtRnvMjYI
+	/PCNyrAqpjwTke0g==
+X-Received: by 2002:a05:600c:c4a5:b0:483:7783:5382 with SMTP id 5b1f17b1804b1-483a95e6b64mr115865615e9.27.1771840300410;
+        Mon, 23 Feb 2026 01:51:40 -0800 (PST)
 Received: from localhost ([85.163.81.98])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-483a31b3e0dsm397848795e9.1.2026.02.23.01.51.38
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-483a9caadedsm152604565e9.10.2026.02.23.01.51.39
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 23 Feb 2026 01:51:38 -0800 (PST)
+        Mon, 23 Feb 2026 01:51:40 -0800 (PST)
 From: Jiri Pirko <jiri@resnulli.us>
 To: dri-devel@lists.freedesktop.org,
 	linaro-mm-sig@lists.linaro.org,
 	iommu@lists.linux.dev,
 	linux-media@vger.kernel.org
-Date: Mon, 23 Feb 2026 10:51:35 +0100
-Message-ID: <20260223095136.225277-2-jiri@resnulli.us>
+Date: Mon, 23 Feb 2026 10:51:36 +0100
+Message-ID: <20260223095136.225277-3-jiri@resnulli.us>
 X-Mailer: git-send-email 2.51.1
 In-Reply-To: <20260223095136.225277-1-jiri@resnulli.us>
 References: <20260223095136.225277-1-jiri@resnulli.us>
@@ -76,15 +76,15 @@ X-Spamd-Bar: -
 X-MailFrom: jiri@resnulli.us
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: UICTT4FWRFUEFBV2HBNSNN553A7W5FIL
-X-Message-ID-Hash: UICTT4FWRFUEFBV2HBNSNN553A7W5FIL
-X-Mailman-Approved-At: Thu, 16 Apr 2026 16:40:37 +0000
+Message-ID-Hash: DSW65EFQZVXI2WP2Z3OUBXAMZ3XIG5N2
+X-Message-ID-Hash: DSW65EFQZVXI2WP2Z3OUBXAMZ3XIG5N2
+X-Mailman-Approved-At: Thu, 16 Apr 2026 16:40:38 +0000
 CC: sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, Brian.Starkey@arm.com, jstultz@google.com, tjmercier@google.com, christian.koenig@amd.com, robin.murphy@arm.com, jgg@ziepe.ca, leon@kernel.org, sean.anderson@linux.dev, ptesarik@suse.com, catalin.marinas@arm.com, aneesh.kumar@kernel.org, suzuki.poulose@arm.com, steven.price@arm.com, thomas.lendacky@amd.com, john.allen@amd.com, ashish.kalra@amd.com, suravee.suthikulpanit@amd.com, linux-coco@lists.linux.dev
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v2 1/2] dma-mapping: introduce DMA_ATTR_CC_DECRYPTED for pre-decrypted memory
+Subject: [Linaro-mm-sig] [PATCH v2 2/2] dma-buf: heaps: system: add system_cc_decrypted heap for explicitly decrypted memory
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UICTT4FWRFUEFBV2HBNSNN553A7W5FIL/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DSW65EFQZVXI2WP2Z3OUBXAMZ3XIG5N2/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -114,102 +114,332 @@ X-Spamd-Result: default: False [1.49 / 15.00];
 	TO_DN_NONE(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[jiri@resnulli.us,linaro-mm-sig-bounces@lists.linaro.org];
 	RCPT_COUNT_TWELVE(0.00)[24];
-	NEURAL_HAM(-0.00)[-0.798];
+	NEURAL_HAM(-0.00)[-0.262];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,nvidia.com:email,resnulli.us:mid]
-X-Rspamd-Queue-Id: 17C81412001
+	DBL_BLOCKED_OPENRESOLVER(0.00)[resnulli.us:mid,lists.linaro.org:helo,lists.linaro.org:rdns,exp_info.name:url,nvidia.com:email,ti.com:email,linaro.org:email]
+X-Rspamd-Queue-Id: D877F41200A
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 From: Jiri Pirko <jiri@nvidia.com>
 
-Current CC designs don't place a vIOMMU in front of untrusted devices.
-Instead, the DMA API forces all untrusted device DMA through swiotlb
-bounce buffers (is_swiotlb_force_bounce()) which copies data into
-decrypted memory on behalf of the device.
+Add a new "system_cc_decrypted" dma-buf heap to allow userspace to
+allocate decrypted (shared) memory for confidential computing (CoCo)
+VMs.
 
-When a caller has already arranged for the memory to be decrypted
-via set_memory_decrypted(), the DMA API needs to know so it can map
-directly using the unencrypted physical address rather than bounce
-buffering. Following the pattern of DMA_ATTR_MMIO, add
-DMA_ATTR_CC_DECRYPTED for this purpose. Like the MMIO case, only the
-caller knows what kind of memory it has and must inform the DMA API
-for it to work correctly.
+On CoCo VMs, guest memory is encrypted by default. The hardware uses an
+encryption bit in page table entries (C-bit on AMD SEV, "shared" bit on
+Intel TDX) to control whether a given memory access is encrypted or
+decrypted. The kernel's direct map is set up with encryption enabled,
+so pages returned by alloc_pages() are encrypted in the direct map
+by default. To make this memory usable for devices that do not support
+DMA to encrypted memory (no TDISP support), it has to be explicitly
+decrypted. A couple of things are needed to properly handle
+decrypted memory for the dma-buf use case:
+
+- set_memory_decrypted() on the direct map after allocation:
+  Besides clearing the encryption bit in the direct map PTEs, this
+  also notifies the hypervisor about the page state change. On free,
+  the inverse set_memory_encrypted() must be called before returning
+  pages to the allocator. If re-encryption fails, pages
+  are intentionally leaked to prevent decrypted memory from being
+  reused as private.
+
+- pgprot_decrypted() for userspace and kernel virtual mappings:
+  Any new mapping of the decrypted pages, be it to userspace via
+  mmap or to kernel vmalloc space via vmap, creates PTEs independent
+  of the direct map. These must also have the encryption bit cleared,
+  otherwise accesses through them would see encrypted (garbage) data.
+
+- DMA_ATTR_CC_DECRYPTED for DMA mapping:
+  Since the pages are already decrypted, the DMA API needs to be
+  informed via DMA_ATTR_CC_DECRYPTED so it can map them correctly
+  as unencrypted for device access.
+
+On non-CoCo VMs, the system_cc_decrypted heap is not registered
+to prevent misuse by userspace that does not understand
+the security implications of explicitly decrypted memory.
 
 Signed-off-by: Jiri Pirko <jiri@nvidia.com>
 ---
 v1->v2:
-- rebased on top of recent dma-mapping-fixes
+- fixed build errors on s390 by including mem_encrypt.h
+- converted system heap flag implementation to a separate heap
 ---
- include/linux/dma-mapping.h |  6 ++++++
- include/trace/events/dma.h  |  3 ++-
- kernel/dma/direct.h         | 14 +++++++++++---
- 3 files changed, 19 insertions(+), 4 deletions(-)
+ drivers/dma-buf/heaps/system_heap.c | 103 ++++++++++++++++++++++++++--
+ include/linux/dma-heap.h            |   1 +
+ include/uapi/linux/dma-heap.h       |   3 +-
+ 3 files changed, 100 insertions(+), 7 deletions(-)
 
-diff --git a/include/linux/dma-mapping.h b/include/linux/dma-mapping.h
-index 29973baa0581..ae3d85e494ec 100644
---- a/include/linux/dma-mapping.h
-+++ b/include/linux/dma-mapping.h
-@@ -85,6 +85,12 @@
-  * a cacheline must have this attribute for this to be considered safe.
+diff --git a/drivers/dma-buf/heaps/system_heap.c b/drivers/dma-buf/heaps/system_heap.c
+index b3650d8fd651..a525e9aaaffa 100644
+--- a/drivers/dma-buf/heaps/system_heap.c
++++ b/drivers/dma-buf/heaps/system_heap.c
+@@ -10,17 +10,25 @@
+  *	Andrew F. Davis <afd@ti.com>
   */
- #define DMA_ATTR_CPU_CACHE_CLEAN	(1UL << 11)
-+/*
-+ * DMA_ATTR_CC_DECRYPTED: Indicates memory that has been explicitly decrypted
-+ * (shared) for confidential computing guests. The caller must have
-+ * called set_memory_decrypted(). A struct page is required.
-+ */
-+#define DMA_ATTR_CC_DECRYPTED	(1UL << 12)
  
- /*
-  * A dma_addr_t can hold any valid DMA or bus address for the platform.  It can
-diff --git a/include/trace/events/dma.h b/include/trace/events/dma.h
-index 33e99e792f1a..b8082d5177c4 100644
---- a/include/trace/events/dma.h
-+++ b/include/trace/events/dma.h
-@@ -32,7 +32,8 @@ TRACE_DEFINE_ENUM(DMA_NONE);
- 		{ DMA_ATTR_ALLOC_SINGLE_PAGES, "ALLOC_SINGLE_PAGES" }, \
- 		{ DMA_ATTR_NO_WARN, "NO_WARN" }, \
- 		{ DMA_ATTR_PRIVILEGED, "PRIVILEGED" }, \
--		{ DMA_ATTR_MMIO, "MMIO" })
-+		{ DMA_ATTR_MMIO, "MMIO" }, \
-+		{ DMA_ATTR_CC_DECRYPTED, "CC_DECRYPTED" })
++#include <linux/cc_platform.h>
+ #include <linux/dma-buf.h>
+ #include <linux/dma-mapping.h>
+ #include <linux/dma-heap.h>
+ #include <linux/err.h>
+ #include <linux/highmem.h>
++#include <linux/mem_encrypt.h>
+ #include <linux/mm.h>
++#include <linux/set_memory.h>
+ #include <linux/module.h>
++#include <linux/pgtable.h>
+ #include <linux/scatterlist.h>
+ #include <linux/slab.h>
+ #include <linux/vmalloc.h>
  
- DECLARE_EVENT_CLASS(dma_map,
- 	TP_PROTO(struct device *dev, phys_addr_t phys_addr, dma_addr_t dma_addr,
-diff --git a/kernel/dma/direct.h b/kernel/dma/direct.h
-index e89f175e9c2d..c047a9d0fda3 100644
---- a/kernel/dma/direct.h
-+++ b/kernel/dma/direct.h
-@@ -84,16 +84,24 @@ static inline dma_addr_t dma_direct_map_phys(struct device *dev,
- 	dma_addr_t dma_addr;
++struct system_heap_priv {
++	bool decrypted;
++};
++
+ struct system_heap_buffer {
+ 	struct dma_heap *heap;
+ 	struct list_head attachments;
+@@ -29,6 +37,7 @@ struct system_heap_buffer {
+ 	struct sg_table sg_table;
+ 	int vmap_cnt;
+ 	void *vaddr;
++	bool decrypted;
+ };
  
- 	if (is_swiotlb_force_bounce(dev)) {
--		if (attrs & DMA_ATTR_MMIO)
--			return DMA_MAPPING_ERROR;
-+		if (!(attrs & DMA_ATTR_CC_DECRYPTED)) {
-+			if (attrs & DMA_ATTR_MMIO)
-+				return DMA_MAPPING_ERROR;
+ struct dma_heap_attachment {
+@@ -36,6 +45,7 @@ struct dma_heap_attachment {
+ 	struct sg_table table;
+ 	struct list_head list;
+ 	bool mapped;
++	bool decrypted;
+ };
  
--		return swiotlb_map(dev, phys, size, dir, attrs);
-+			return swiotlb_map(dev, phys, size, dir, attrs);
-+		}
-+	} else if (attrs & DMA_ATTR_CC_DECRYPTED) {
-+		return DMA_MAPPING_ERROR;
+ #define LOW_ORDER_GFP (GFP_HIGHUSER | __GFP_ZERO)
+@@ -52,6 +62,34 @@ static gfp_t order_flags[] = {HIGH_ORDER_GFP, HIGH_ORDER_GFP, LOW_ORDER_GFP};
+ static const unsigned int orders[] = {8, 4, 0};
+ #define NUM_ORDERS ARRAY_SIZE(orders)
+ 
++static int system_heap_set_page_decrypted(struct page *page)
++{
++	unsigned long addr = (unsigned long)page_address(page);
++	unsigned int nr_pages = 1 << compound_order(page);
++	int ret;
++
++	ret = set_memory_decrypted(addr, nr_pages);
++	if (ret)
++		pr_warn_ratelimited("dma-buf system heap: failed to decrypt page at %p\n",
++				    page_address(page));
++
++	return ret;
++}
++
++static int system_heap_set_page_encrypted(struct page *page)
++{
++	unsigned long addr = (unsigned long)page_address(page);
++	unsigned int nr_pages = 1 << compound_order(page);
++	int ret;
++
++	ret = set_memory_encrypted(addr, nr_pages);
++	if (ret)
++		pr_warn_ratelimited("dma-buf system heap: failed to re-encrypt page at %p, leaking memory\n",
++				    page_address(page));
++
++	return ret;
++}
++
+ static int dup_sg_table(struct sg_table *from, struct sg_table *to)
+ {
+ 	struct scatterlist *sg, *new_sg;
+@@ -90,6 +128,7 @@ static int system_heap_attach(struct dma_buf *dmabuf,
+ 	a->dev = attachment->dev;
+ 	INIT_LIST_HEAD(&a->list);
+ 	a->mapped = false;
++	a->decrypted = buffer->decrypted;
+ 
+ 	attachment->priv = a;
+ 
+@@ -119,9 +158,11 @@ static struct sg_table *system_heap_map_dma_buf(struct dma_buf_attachment *attac
+ {
+ 	struct dma_heap_attachment *a = attachment->priv;
+ 	struct sg_table *table = &a->table;
++	unsigned long attrs;
+ 	int ret;
+ 
+-	ret = dma_map_sgtable(attachment->dev, table, direction, 0);
++	attrs = a->decrypted ? DMA_ATTR_CC_DECRYPTED : 0;
++	ret = dma_map_sgtable(attachment->dev, table, direction, attrs);
+ 	if (ret)
+ 		return ERR_PTR(ret);
+ 
+@@ -188,8 +229,13 @@ static int system_heap_mmap(struct dma_buf *dmabuf, struct vm_area_struct *vma)
+ 	unsigned long addr = vma->vm_start;
+ 	unsigned long pgoff = vma->vm_pgoff;
+ 	struct scatterlist *sg;
++	pgprot_t prot;
+ 	int i, ret;
+ 
++	prot = vma->vm_page_prot;
++	if (buffer->decrypted)
++		prot = pgprot_decrypted(prot);
++
+ 	for_each_sgtable_sg(table, sg, i) {
+ 		unsigned long n = sg->length >> PAGE_SHIFT;
+ 
+@@ -206,8 +252,7 @@ static int system_heap_mmap(struct dma_buf *dmabuf, struct vm_area_struct *vma)
+ 		if (addr + size > vma->vm_end)
+ 			size = vma->vm_end - addr;
+ 
+-		ret = remap_pfn_range(vma, addr, page_to_pfn(page),
+-				size, vma->vm_page_prot);
++		ret = remap_pfn_range(vma, addr, page_to_pfn(page), size, prot);
+ 		if (ret)
+ 			return ret;
+ 
+@@ -225,6 +270,7 @@ static void *system_heap_do_vmap(struct system_heap_buffer *buffer)
+ 	struct page **pages = vmalloc(sizeof(struct page *) * npages);
+ 	struct page **tmp = pages;
+ 	struct sg_page_iter piter;
++	pgprot_t prot;
+ 	void *vaddr;
+ 
+ 	if (!pages)
+@@ -235,7 +281,10 @@ static void *system_heap_do_vmap(struct system_heap_buffer *buffer)
+ 		*tmp++ = sg_page_iter_page(&piter);
  	}
  
- 	if (attrs & DMA_ATTR_MMIO) {
- 		dma_addr = phys;
- 		if (unlikely(!dma_capable(dev, dma_addr, size, false)))
- 			goto err_overflow;
-+	} else if (attrs & DMA_ATTR_CC_DECRYPTED) {
-+		dma_addr = phys_to_dma_unencrypted(dev, phys);
-+		if (unlikely(!dma_capable(dev, dma_addr, size, false)))
-+			goto err_overflow;
- 	} else {
- 		dma_addr = phys_to_dma(dev, phys);
- 		if (unlikely(!dma_capable(dev, dma_addr, size, true)) ||
+-	vaddr = vmap(pages, npages, VM_MAP, PAGE_KERNEL);
++	prot = PAGE_KERNEL;
++	if (buffer->decrypted)
++		prot = pgprot_decrypted(prot);
++	vaddr = vmap(pages, npages, VM_MAP, prot);
+ 	vfree(pages);
+ 
+ 	if (!vaddr)
+@@ -296,6 +345,14 @@ static void system_heap_dma_buf_release(struct dma_buf *dmabuf)
+ 	for_each_sgtable_sg(table, sg, i) {
+ 		struct page *page = sg_page(sg);
+ 
++		/*
++		 * Intentionally leak pages that cannot be re-encrypted
++		 * to prevent decrypted memory from being reused.
++		 */
++		if (buffer->decrypted &&
++		    system_heap_set_page_encrypted(page))
++			continue;
++
+ 		__free_pages(page, compound_order(page));
+ 	}
+ 	sg_free_table(table);
+@@ -347,6 +404,8 @@ static struct dma_buf *system_heap_allocate(struct dma_heap *heap,
+ 	DEFINE_DMA_BUF_EXPORT_INFO(exp_info);
+ 	unsigned long size_remaining = len;
+ 	unsigned int max_order = orders[0];
++	struct system_heap_priv *priv = dma_heap_get_drvdata(heap);
++	bool decrypted = priv->decrypted;
+ 	struct dma_buf *dmabuf;
+ 	struct sg_table *table;
+ 	struct scatterlist *sg;
+@@ -362,6 +421,7 @@ static struct dma_buf *system_heap_allocate(struct dma_heap *heap,
+ 	mutex_init(&buffer->lock);
+ 	buffer->heap = heap;
+ 	buffer->len = len;
++	buffer->decrypted = decrypted;
+ 
+ 	INIT_LIST_HEAD(&pages);
+ 	i = 0;
+@@ -396,6 +456,14 @@ static struct dma_buf *system_heap_allocate(struct dma_heap *heap,
+ 		list_del(&page->lru);
+ 	}
+ 
++	if (decrypted) {
++		for_each_sgtable_sg(table, sg, i) {
++			ret = system_heap_set_page_decrypted(sg_page(sg));
++			if (ret)
++				goto free_pages;
++		}
++	}
++
+ 	/* create the dmabuf */
+ 	exp_info.exp_name = dma_heap_get_name(heap);
+ 	exp_info.ops = &system_heap_buf_ops;
+@@ -413,6 +481,13 @@ static struct dma_buf *system_heap_allocate(struct dma_heap *heap,
+ 	for_each_sgtable_sg(table, sg, i) {
+ 		struct page *p = sg_page(sg);
+ 
++		/*
++		 * Intentionally leak pages that cannot be re-encrypted
++		 * to prevent decrypted memory from being reused.
++		 */
++		if (buffer->decrypted &&
++		    system_heap_set_page_encrypted(p))
++			continue;
+ 		__free_pages(p, compound_order(p));
+ 	}
+ 	sg_free_table(table);
+@@ -428,6 +503,14 @@ static const struct dma_heap_ops system_heap_ops = {
+ 	.allocate = system_heap_allocate,
+ };
+ 
++static struct system_heap_priv system_heap_priv = {
++	.decrypted = false,
++};
++
++static struct system_heap_priv system_heap_cc_decrypted_priv = {
++	.decrypted = true,
++};
++
+ static int __init system_heap_create(void)
+ {
+ 	struct dma_heap_export_info exp_info;
+@@ -435,8 +518,18 @@ static int __init system_heap_create(void)
+ 
+ 	exp_info.name = "system";
+ 	exp_info.ops = &system_heap_ops;
+-	exp_info.priv = NULL;
++	exp_info.priv = &system_heap_priv;
++
++	sys_heap = dma_heap_add(&exp_info);
++	if (IS_ERR(sys_heap))
++		return PTR_ERR(sys_heap);
++
++	if (IS_ENABLED(CONFIG_HIGHMEM) ||
++	    !cc_platform_has(CC_ATTR_MEM_ENCRYPT))
++		return 0;
+ 
++	exp_info.name = "system_cc_decrypted";
++	exp_info.priv = &system_heap_cc_decrypted_priv;
+ 	sys_heap = dma_heap_add(&exp_info);
+ 	if (IS_ERR(sys_heap))
+ 		return PTR_ERR(sys_heap);
+diff --git a/include/linux/dma-heap.h b/include/linux/dma-heap.h
+index 648328a64b27..d97b668413c1 100644
+--- a/include/linux/dma-heap.h
++++ b/include/linux/dma-heap.h
+@@ -10,6 +10,7 @@
+ #define _DMA_HEAPS_H
+ 
+ #include <linux/types.h>
++#include <uapi/linux/dma-heap.h>
+ 
+ struct dma_heap;
+ 
+diff --git a/include/uapi/linux/dma-heap.h b/include/uapi/linux/dma-heap.h
+index a4cf716a49fa..ab95bb355ed5 100644
+--- a/include/uapi/linux/dma-heap.h
++++ b/include/uapi/linux/dma-heap.h
+@@ -18,8 +18,7 @@
+ /* Valid FD_FLAGS are O_CLOEXEC, O_RDONLY, O_WRONLY, O_RDWR */
+ #define DMA_HEAP_VALID_FD_FLAGS (O_CLOEXEC | O_ACCMODE)
+ 
+-/* Currently no heap flags */
+-#define DMA_HEAP_VALID_HEAP_FLAGS (0ULL)
++#define DMA_HEAP_VALID_HEAP_FLAGS (0)
+ 
+ /**
+  * struct dma_heap_allocation_data - metadata passed from userspace for
 -- 
 2.51.1
 
