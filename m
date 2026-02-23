@@ -2,36 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cPbQJ2fGnGnJKAQAu9opvQ
+	id oLz8KHDGnGnJKAQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 23 Feb 2026 22:28:07 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 23 Feb 2026 22:28:16 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2B39E17D950
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 23 Feb 2026 22:28:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 252ED17D958
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 23 Feb 2026 22:28:16 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 45C5F40488
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 23 Feb 2026 21:28:06 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3CEC04047F
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 23 Feb 2026 21:28:15 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E600C4047C
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Feb 2026 21:27:47 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 48B5340482
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Feb 2026 21:27:51 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-From: "Sandra Lopez" <sandralopezs1aa@gmail.com>
+From: "Mata Marcus" <matamarcus1a@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Mon, 23 Feb 2026 21:27:47 -0000
-Message-ID: <177188206794.4127691.1228661384973417657@lists.linaro.org>
+Date: Mon, 23 Feb 2026 21:27:51 -0000
+Message-ID: <177188207129.4127198.1870046889598456403@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: SJIQ4Q27IA5NWNVCTJYJ4IHVDFTZQISX
-X-Message-ID-Hash: SJIQ4Q27IA5NWNVCTJYJ4IHVDFTZQISX
-X-MailFrom: sandralopezs1aa@gmail.com
+Message-ID-Hash: 3IBNRI4FOYFONUKUXTZXAL3XRNBCX6CE
+X-Message-ID-Hash: 3IBNRI4FOYFONUKUXTZXAL3XRNBCX6CE
+X-MailFrom: matamarcus1a@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] =?utf-8?q?How_To_retrieve_funds_lost_to_crypto_investment_and_trading_scams_=E2=80=93_Visit_-_Autopsy_Mainnet_Recovery?=
+Subject: [Linaro-mm-sig] Where to hire a crypto recovery service / Legitimate Crypto Recovery Service - Autopsy Mainnet Recovery
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SJIQ4Q27IA5NWNVCTJYJ4IHVDFTZQISX/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3IBNRI4FOYFONUKUXTZXAL3XRNBCX6CE/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -58,14 +58,14 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	RCPT_COUNT_ONE(0.00)[1];
 	RCVD_COUNT_TWO(0.00)[2];
-	FROM_NEQ_ENVFROM(0.00)[sandralopezs1aa@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_NEQ_ENVFROM(0.00)[matamarcus1a@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_NONE(0.00)[];
 	R_DKIM_NA(0.00)[];
 	NEURAL_HAM(-0.00)[-0.964];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,linaro.org:email,autopsymainnetsolutions.com:url,autopsymainnetsolutions.com:email,autospyrec.site:url]
-X-Rspamd-Queue-Id: 2B39E17D950
+X-Rspamd-Queue-Id: 252ED17D958
 X-Rspamd-Action: no action
 
 QXMgY3J5cHRvY3VycmVuY2llcyBjb250aW51ZSB0byByZXNoYXBlIGZpbmFuY2UgaW4gMjAyNiwg
