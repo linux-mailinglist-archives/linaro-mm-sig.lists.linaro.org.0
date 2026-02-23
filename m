@@ -2,88 +2,86 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id uMfsC/8S4WnoogAAu9opvQ
+	id IEoXHwcT4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:49:03 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:49:11 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id B24E6411FF3
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:49:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 16B73411FFA
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:49:11 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id BAD66448A7
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:49:01 +0000 (UTC)
-Received: from invmail4.hynix.com (exvmail4.hynix.com [166.125.252.92])
-	by lists.linaro.org (Postfix) with ESMTP id AAB093F7C9
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Feb 2026 00:33:37 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 2A62940514
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:49:10 +0000 (UTC)
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+	by lists.linaro.org (Postfix) with ESMTPS id 1ADB33F7DE
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Feb 2026 09:51:39 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=none;
-	dmarc=none;
-	spf=pass (lists.linaro.org: domain of byungchul@sk.com designates 166.125.252.92 as permitted sender) smtp.mailfrom=byungchul@sk.com
-X-AuditID: a67dfc5b-c45ff70000001609-4c-699ba05f2957
-Date: Mon, 23 Feb 2026 09:33:30 +0900
-From: Byungchul Park <byungchul@sk.com>
-To: Petr Pavlu <petr.pavlu@suse.com>
-Message-ID: <20260223003330.GB44876@system.software.com>
-References: <20251205071855.72743-1-byungchul@sk.com>
- <20251205071855.72743-35-byungchul@sk.com>
- <7afb6666-43b6-4d17-b875-e585c7a5ac99@suse.com>
- <20260213055006.GA55430@system.software.com>
- <7765df86-b08a-4f70-900d-4b4d85c07d49@suse.com>
+	dkim=pass header.d=resnulli-us.20230601.gappssmtp.com header.s=20230601 header.b=guOTxV7Z;
+	spf=none (lists.linaro.org: domain of jiri@resnulli.us has no SPF policy when checking 209.85.128.53) smtp.mailfrom=jiri@resnulli.us;
+	dmarc=none
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-4836e3288cdso27287495e9.0
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Feb 2026 01:51:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=resnulli-us.20230601.gappssmtp.com; s=20230601; t=1771840298; x=1772445098; darn=lists.linaro.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=J9P/hiUK/l/iV+NBMdNBP19LQ/+lioTm29Bruktj9zQ=;
+        b=guOTxV7ZmTDek4bJyyNrFmukRSF5dG6bSjhN9Cl5FQMGBvAA8X4HqjKCH5ETupG6k6
+         /0cUthLrwQcyHQsjgZAp0T7/o0fgM3V5fUXTFITsUI9LlWFEnG/vVCP+rPgABsKU7mGP
+         z1PmoLEsxxiOk0nCL6s8N6ttWV2mgG6jVb1UJRyCSRqPTNT3HV3xtI3wbfkB4wN9qQEP
+         2+GHr4l0QRlB1STGM1G/sTVyonojPx3+0N/NYmSqB31AFf3k5z9uy5CjjDNSzP64S7XU
+         x4bwtQzP2gpJ9SBLfyXASYCasIHZYwBqfztWlWH43e8HFlU0v1mdggNR9W1sFpu1wcXF
+         JjdQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1771840298; x=1772445098;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=J9P/hiUK/l/iV+NBMdNBP19LQ/+lioTm29Bruktj9zQ=;
+        b=RAI4A3IHxy+V3bgLbZ7t40d7ndDgr1vtr4SP9olowFsWL6I6WlRhkx6alJCBjQgiaQ
+         PHJiSbXX6t55FjI82oO+mh2vpDFOsjk9Ikbs2HH1/L5CJxb12q03Q4syBzkFAwTByHY8
+         fLGD/Dx9K7XvAbezT8F11MLsJE285Yp5vTDQq13/LJknp0Yu5G1q66oJydiqsNfqNwD8
+         YavfLu13CQhjQf+8Fyh/502EXkhGYQA6t+hfIs5UMCVvY1ol7YUV7AypANRsTZdn41I9
+         ZqOhbUAnpi9C+pxPkGd1g+kfkgAdhvJnJp4jnfh+/3XjGy5sxsQ2jC3IgfALGbKrCRw1
+         oWGg==
+X-Forwarded-Encrypted: i=1; AJvYcCUIGPEkHLgLjNigsxzGS7KqZSjUdjkzyWFIP4KZizlxI5AnaWPGq0mpf1aqxkaAYW7+UTGrFBtGm8Cfjhw0@lists.linaro.org
+X-Gm-Message-State: AOJu0Yy1m2yH4M9beTdLN+BSzjAnZIuEAYmavjn2BzvOxuL4NVP//sgb
+	CHZpPdI+mN02MKxMtlcu9YDeifInjc1wIsssxynpCMvjw2vDCV9NyeilOt6PE6SoGs8=
+X-Gm-Gg: AZuq6aI1A0xjhx2VO79UZp7asL62EebkMExYR5F4ZGBsJOGQ02wdfNJZuIGloGLQUhK
+	ZmJet8lxfsI1HRpxmqw/pMH32/0th0zMiLbGRFDOTxGXgNYNnBgPShN6fL2bg+6sKyL2lWTtVDF
+	tPNooq3yZnFPaAmZToYJiLkRpF6g2dWDJ4dVpP+ShFI01E+BPVirZgP6y9u0oyhO918K0I877tt
+	rdITZbLetjnI2Z6I6QDEkJd538OpYk/4NG9JKE7bo4AiJQtLMI5mQhgWuac+RxrZFOXVa43vkJt
+	q/HqHVT+ZB0xyrl9YRNcmijti63mAfJp4RvlcO4WCaWIWLj73DgVLE9eJ95FIWys8kbDPZ1rYue
+	b5xkL3sYzhYCCYw6zJO9NFcA3NKsYOY0gcq6AdSP2iRnG1z5e/FvfTECYRtqlmmFrB8Ec/JS+hF
+	+g+AWqurTFwTXtIA==
+X-Received: by 2002:a05:600c:8b5b:b0:483:a352:b4e4 with SMTP id 5b1f17b1804b1-483a949e600mr141861245e9.6.1771840297668;
+        Mon, 23 Feb 2026 01:51:37 -0800 (PST)
+Received: from localhost ([85.163.81.98])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-483a9caadedsm152601835e9.10.2026.02.23.01.51.36
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 23 Feb 2026 01:51:37 -0800 (PST)
+From: Jiri Pirko <jiri@resnulli.us>
+To: dri-devel@lists.freedesktop.org,
+	linaro-mm-sig@lists.linaro.org,
+	iommu@lists.linux.dev,
+	linux-media@vger.kernel.org
+Date: Mon, 23 Feb 2026 10:51:34 +0100
+Message-ID: <20260223095136.225277-1-jiri@resnulli.us>
+X-Mailer: git-send-email 2.51.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <7765df86-b08a-4f70-900d-4b4d85c07d49@suse.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-X-Brightmail-Tracker: H4sIAAAAAAAAA02SbUxbVRjHPffce3tpqLnWLR4h0a1ojOjQ6WKebI26D8b7ZZHMxWwzy9bJ
-	zWhWXiwMh/GFkTE7XBBLKK4MZei6SkvGypi8j9EA1tEUSp1lg7UspbVhgHZjhLSAvRjjvjz5
-	5X9++T/Ph8NhZQObxmnzi0V9vkanYuW0fC61acuhxnrtq1c6N8FkIMTAuUt2FgKLBgRL8XoM
-	FZ1rNDxYvi0D05gRg3/0Gob7rasszDpjCOqiJ2hYsJxBEB18F+YC3QysTUUosIRWKVgxHYUf
-	mtqSqukvFuJuD4a62lEEsWgQQa+1nIWZ6nYM46HHwVX7NQvzrSw0lvcy0FBvRNAZ7JLB2GyC
-	gkmTkQKbYxcELGEablQ3UVDb0k3BsqVZBvXucQYS01vBdecmA7NhY/L44VMM/FIWlIFjYhDB
-	A980BYauRRp6b70E50/9RENPr4uGoY67FIx3nWPhTGs7A3fsawx4baM0XIr4KXCZf6bhtvsb
-	GXi6Whi48McYBdNBPwNt7hEMLfNNLNTMhxHMPrTgt3OEpYoqWqjwrrCC/Xs7Eiqqk8N5bwEL
-	F27cY4Vv3VuETvOUTDjZd0smNDqOCW3WTOHHniglOJpPs4IjZpQJ5+N/YqFyzkdlZ+6Xq3NE
-	nbZE1L/y5iF5brjqMi6ceON4x2R2GfruxUqUwhF+G/mqz05VIm6dR5ycFNP888TWV4UkZvkX
-	iN+/jCVlA/8c8d7dWYnkHOZNzxBXm4GRnCd5HXHW/L1eo+CB2GMbpVjJLyLinnhPYgX/BHGd
-	DdESYz6T+Fej6zrm08nFVU7CFF5N5gaflYyNfAbpvzpMSZsIH04hM2dj6N+DnybXrX66GvHm
-	R1rNj7Sa/29tRLgZKbX5JXkarW5bVm5pvvZ41kcFeQ6U/LSWzxMfdqDY6PsDiOeQKlXRv2DW
-	KhlNSVFp3gAiHFZtUMTjyUiRoyn9VNQXHNQf04lFAyido1VPKV57+EmOkj+iKRaPimKhqP/v
-	leJS0spQzcXI6Z0a9UrDO+URT6jQMLX5A+Tbv08ZGPY4bTvSfAePBKeyjCM96ScHUq/byIli
-	9b7X72//LD6z6ctd1w7Evyioae5+2fqYujbbuofvX0lEfmUMDsvu3Ycz9k7u3X7TGPmNqTJ4
-	NzMRQ6Juj29HyONVfuxsX4rHhtIPDGW89buKLsrVbM3E+iLNP7WxGd+wAwAA
-X-Brightmail-Tracker: H4sIAAAAAAAAA02SfUwbdRjHfe53vR6NZ86ubOeImnU2TsxejM48iXNxxrhzZnPinHFZ3Kq7
-	SEMpWzvZGDECtVrREKhpGe3QilIXqG5rGY4tVUIdAweRDiegvGym1hFgnUBZoJTaMzHunyff
-	53k+n+T542GJel6xkjWYDktmk96oZVS0asdT1rX7vB7Dhrn4/Wi3vYfDY1EF/lreTmNi1k7j
-	iVN+BlOe75RoD9QpsGuggsa+b5sBxxJ2wNtJD0FbW5rGlKNTibPzvyvRWQ6YDnUCuiIOgoN9
-	PxD0t5RTOHN6icGJ8DSg83qUwdrxchrjvk8A3TGPEscvbsWpsQsKTI/8ReHA3CSgL7pEYbT9
-	Q8CUqwA/bwhmdNctBpO9PxOsdfYBfnF9hOD0+DXAls5RwNDJCgb/rD5LsD96D/6SiDPY7fyY
-	wanICQpvnmbQWxFSYKRnArDe4wCM/Rai0PrlKQZd9QEa266dV2JkYpHCYZeDwubAdhzzxWi8
-	XN1AZc7NUGdWoKfWSmXKDQqd31ygcN7XpHymEcTbtipabAq2UqLtSooR/Z/5QUwuOECcbbQS
-	0VadacOTcSK+HzwiNl6eZMSFxFVGDM15afGnBkH86qMFSqzpXSu2uUeUO7fsUW06IBkNxZJ5
-	/eb9qvxY1RlycOjJo+eGd5bB8UcqgWUF/gmhJ8xWQhZL8zqh+fsqkDPDPywMDs4TGdHwDwlX
-	/thSCSqW8K4HhO6gXSEzy3ijEP70b0pmOB4F/3S2PFbzCRB6h16SM8ffK3TXRWk5Ez5XGFwa
-	/xcnfI7w9RIrxyx+kzB18UGZyOZXC+2tl6hq4Nx3yO47ZPf/shdIE2gMpuJCvcG4cZ2lIL/E
-	ZDi67q2iwgBkHtL37mLNOZjt39oBPAvau7lb93kMaoW+2FJS2AECS7QaLpl0G9TcAX3JMclc
-	tM/8jlGydEAOS2tXcNtek/ar+bf1h6UCSToomf/bUmzWyjJ481i6LLZo1nj7D63GILf8lR6z
-	LlTwslN/12R6d9zZ0jXQym6eXnboyO6hIrixUTHzqu+F0tIPXr/KWbcnt+19uk633vNjIO/x
-	Ndl5nGn5s6N7F3TdeaZHzz9X6grtmtmVU3Pp+eNrVrV0rdqjC2t6TcWjG07mvng2MpBqrLe9
-	kU7f1NKWfP1jucRs0f8DOc5IfIwDAAA=
-X-CFilter-Loop: Reflected
 X-Spamd-Bar: -
-X-MailFrom: byungchul@sk.com
+X-MailFrom: jiri@resnulli.us
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: NQPJ76GZWWZI73ZGN6HMBW3FCXFDQIZN
-X-Message-ID-Hash: NQPJ76GZWWZI73ZGN6HMBW3FCXFDQIZN
-X-Mailman-Approved-At: Thu, 16 Apr 2026 16:40:36 +0000
-CC: kernel_team@skhynix.com, torvalds@linux-foundation.org, damien.lemoal@opensource.wdc.com, linux-ide@vger.kernel.org, adilger.kernel@dilger.ca, linux-ext4@vger.kernel.org, mingo@redhat.com, peterz@infradead.org, will@kernel.org, tglx@linutronix.de, rostedt@goodmis.org, joel@joelfernandes.org, sashal@kernel.org, daniel.vetter@ffwll.ch, duyuyang@gmail.com, johannes.berg@intel.com, tj@kernel.org, tytso@mit.edu, willy@infradead.org, david@fromorbit.com, amir73il@gmail.com, gregkh@linuxfoundation.org, kernel-team@lge.com, linux-mm@kvack.org, akpm@linux-foundation.org, mhocko@kernel.org, minchan@kernel.org, hannes@cmpxchg.org, vdavydov.dev@gmail.com, sj@kernel.org, jglisse@redhat.com, dennis@kernel.org, cl@linux.com, penberg@kernel.org, rientjes@google.com, vbabka@suse.cz, ngupta@vflare.org, linux-block@vger.kernel.org, josef@toxicpanda.com, linux-fsdevel@vger.kernel.org, jack@suse.cz, jlayton@kernel.org, dan.j.williams@intel.com, hch@infradead.org, djwong@kernel.org, dri-devel@lists.fr
- eedesktop.org, rodrigosiqueiramelo@gmail.com, melissa.srw@gmail.com, hamohammed.sa@gmail.com, harry.yoo@oracle.com, chris.p.wilson@intel.com, gwan-gyeong.mun@intel.com, max.byungchul.park@gmail.com, boqun.feng@gmail.com, longman@redhat.com, yunseong.kim@ericsson.com, ysk@kzalloc.com, yeoreum.yun@arm.com, netdev@vger.kernel.org, matthew.brost@intel.com, her0gyugyu@gmail.com, corbet@lwn.net, catalin.marinas@arm.com, bp@alien8.de, x86@kernel.org, hpa@zytor.com, luto@kernel.org, sumit.semwal@linaro.org, gustavo@padovan.org, christian.koenig@amd.com, andi.shyti@kernel.org, arnd@arndb.de, lorenzo.stoakes@oracle.com, Liam.Howlett@oracle.com, rppt@kernel.org, surenb@google.com, mcgrof@kernel.org, da.gomez@kernel.org, samitolvanen@google.com, paulmck@kernel.org, frederic@kernel.org, neeraj.upadhyay@kernel.org, joelagnelf@nvidia.com, josh@joshtriplett.org, urezki@gmail.com, mathieu.desnoyers@efficios.com, jiangshanlai@gmail.com, qiang.zhang@linux.dev, juri.lelli@redhat.com, vincent.guittot@li
- naro.org, dietmar.eggemann@arm.com, bsegall@google.com, mgorman@suse.de, vschneid@redhat.com, chuck.lever@oracle.com, neil@brown.name, okorniev@redhat.com, Dai.Ngo@oracle.com, tom@talpey.com, trondmy@kernel.org, anna@kernel.org, kees@kernel.org, bigeasy@linutronix.de, clrkwllms@kernel.org, mark.rutland@arm.com, ada.coupriediaz@arm.com, kristina.martsenko@arm.com, wangkefeng.wang@huawei.com, broonie@kernel.org, kevin.brodsky@arm.com, dwmw@amazon.co.uk, shakeel.butt@linux.dev, ast@kernel.org, ziy@nvidia.com, yuzhao@google.com, baolin.wang@linux.alibaba.com, usamaarif642@gmail.com, joel.granados@kernel.org, richard.weiyang@gmail.com, geert+renesas@glider.be, tim.c.chen@linux.intel.com, linux@treblig.org, alexander.shishkin@linux.intel.com, lillian@star-ark.net, chenhuacai@kernel.org, francesco@valla.it, guoweikang.kernel@gmail.com, link@vivo.com, jpoimboe@kernel.org, masahiroy@kernel.org, brauner@kernel.org, thomas.weissschuh@linutronix.de, oleg@redhat.com, mjguzik@gmail.com, andrii@ke
- rnel.org, wangfushuai@baidu.com, linux-doc@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-i2c@vger.kernel.org, linux-arch@vger.kernel.org, linux-modules@vger.kernel.org, rcu@vger.kernel.org, linux-nfs@vger.kernel.org, linux-rt-devel@lists.linux.dev, 2407018371@qq.com, dakr@kernel.org, miguel.ojeda.sandonis@gmail.com, neilb@ownmail.net, bagasdotme@gmail.com, wsa+renesas@sang-engineering.com, dave.hansen@intel.com, geert@linux-m68k.org, ojeda@kernel.org, alex.gaynor@gmail.com, gary@garyguo.net, bjorn3_gh@protonmail.com, lossin@kernel.org, a.hindborg@kernel.org, aliceryhl@google.com, tmgross@umich.edu, rust-for-linux@vger.kernel.org, linux-kernel@vger.kernel.org
+Message-ID-Hash: VDZEWXUJ7Z3AXTGZKESZZEFRI7C2WWN7
+X-Message-ID-Hash: VDZEWXUJ7Z3AXTGZKESZZEFRI7C2WWN7
+X-Mailman-Approved-At: Thu, 16 Apr 2026 16:40:37 +0000
+CC: sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, Brian.Starkey@arm.com, jstultz@google.com, tjmercier@google.com, christian.koenig@amd.com, robin.murphy@arm.com, jgg@ziepe.ca, leon@kernel.org, sean.anderson@linux.dev, ptesarik@suse.com, catalin.marinas@arm.com, aneesh.kumar@kernel.org, suzuki.poulose@arm.com, steven.price@arm.com, thomas.lendacky@amd.com, john.allen@amd.com, ashish.kalra@amd.com, suravee.suthikulpanit@amd.com, linux-coco@lists.linux.dev
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v18 34/42] dept: add module support for struct dept_event_site and dept_event_site_dep
+Subject: [Linaro-mm-sig] [PATCH v2 0/2] dma-buf: heaps: system: add an option to allocate explicitly decrypted memory
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NQPJ76GZWWZI73ZGN6HMBW3FCXFDQIZN/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VDZEWXUJ7Z3AXTGZKESZZEFRI7C2WWN7/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -92,214 +90,85 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [1.99 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	DATE_IN_PAST(1.00)[1264];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+X-Spamd-Result: default: False [1.49 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
+	DATE_IN_PAST(1.00)[1254];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	DMARC_NA(0.00)[resnulli.us];
 	ARC_NA(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_CC(0.00)[skhynix.com,linux-foundation.org,opensource.wdc.com,vger.kernel.org,dilger.ca,redhat.com,infradead.org,kernel.org,linutronix.de,goodmis.org,joelfernandes.org,ffwll.ch,gmail.com,intel.com,mit.edu,fromorbit.com,linuxfoundation.org,lge.com,kvack.org,cmpxchg.org,linux.com,google.com,suse.cz,vflare.org,toxicpanda.com,lists.fr,oracle.com,ericsson.com,kzalloc.com,arm.com,lwn.net,alien8.de,zytor.com,linaro.org,padovan.org,amd.com,arndb.de,nvidia.com,joshtriplett.org,efficios.com,linux.dev,li,suse.de,brown.name,talpey.com,huawei.com,amazon.co.uk,linux.alibaba.com,glider.be,linux.intel.com,treblig.org,star-ark.net,valla.it,vivo.com,ke,baidu.com,lists.infradead.org,lists.linaro.org,lists.linux.dev,qq.com,ownmail.net,sang-engineering.com,linux-m68k.org,garyguo.net,protonmail.com,umich.edu];
-	DMARC_NA(0.00)[sk.com];
-	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_NEQ_ENVFROM(0.00)[byungchul@sk.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[165];
-	R_DKIM_NA(0.00)[];
-	NEURAL_HAM(-0.00)[-0.995];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,renesas];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email,sk.com:email]
-X-Rspamd-Queue-Id: B24E6411FF3
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	TO_DN_NONE(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[jiri@resnulli.us,linaro-mm-sig-bounces@lists.linaro.org];
+	RCPT_COUNT_TWELVE(0.00)[24];
+	NEURAL_HAM(-0.00)[-0.610];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,resnulli.us:mid,lists.linaro.org:helo,lists.linaro.org:rdns,nvidia.com:email]
+X-Rspamd-Queue-Id: 16B73411FFA
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Wed, Feb 18, 2026 at 04:08:19PM +0100, Petr Pavlu wrote:
-> On 2/13/26 6:50 AM, Byungchul Park wrote:
-> > On Wed, Jan 07, 2026 at 01:19:00PM +0100, Petr Pavlu wrote:
-> >> On 12/5/25 8:18 AM, Byungchul Park wrote:
-> >>> struct dept_event_site and struct dept_event_site_dep have been
-> >>> introduced to track dependencies between multi event sites for a single
-> >>> wait, that will be loaded to data segment.  Plus, a custom section,
-> >>> '.dept.event_sites', also has been introduced to keep pointers to the
-> >>> objects to make sure all the event sites defined exist in code.
-> >>>
-> >>> dept should work with the section and segment of module.  Add the
-> >>> support to handle the section and segment properly whenever modules are
-> >>> loaded and unloaded.
-> >>>
-> >>> Signed-off-by: Byungchul Park <byungchul@sk.com>
-> >>
-> >> Below are a few comments from the module loader perspective.
-> >
-> > Sorry about the late reply.  I've been going through some major life
-> > changes lately. :(
-> >
-> > Thank you sooooo~ much for your helpful feedback.  I will leave my
-> > opinion below.
-> >
-> [...]
-> >>> diff --git a/kernel/dependency/dept.c b/kernel/dependency/dept.c
-> >>> index b14400c4f83b..07d883579269 100644
-> >>> --- a/kernel/dependency/dept.c
-> >>> +++ b/kernel/dependency/dept.c
-> >>> @@ -984,6 +984,9 @@ static void bfs(void *root, struct bfs_ops *ops, void *in, void **out)
-> >>>   * event sites.
-> >>>   */
-> >>>
-> >>> +static LIST_HEAD(dept_event_sites);
-> >>> +static LIST_HEAD(dept_event_site_deps);
-> >>> +
-> >>>  /*
-> >>>   * Print all events in the circle.
-> >>>   */
-> >>> @@ -2043,6 +2046,33 @@ static void del_dep_rcu(struct rcu_head *rh)
-> >>>       preempt_enable();
-> >>>  }
-> >>>
-> >>> +/*
-> >>> + * NOTE: Must be called with dept_lock held.
-> >>> + */
-> >>> +static void disconnect_event_site_dep(struct dept_event_site_dep *esd)
-> >>> +{
-> >>> +     list_del_rcu(&esd->dep_node);
-> >>> +     list_del_rcu(&esd->dep_rev_node);
-> >>> +}
-> >>> +
-> >>> +/*
-> >>> + * NOTE: Must be called with dept_lock held.
-> >>> + */
-> >>> +static void disconnect_event_site(struct dept_event_site *es)
-> >>> +{
-> >>> +     struct dept_event_site_dep *esd, *next_esd;
-> >>> +
-> >>> +     list_for_each_entry_safe(esd, next_esd, &es->dep_head, dep_node) {
-> >>> +             list_del_rcu(&esd->dep_node);
-> >>> +             list_del_rcu(&esd->dep_rev_node);
-> >>> +     }
-> >>> +
-> >>> +     list_for_each_entry_safe(esd, next_esd, &es->dep_rev_head, dep_rev_node) {
-> >>> +             list_del_rcu(&esd->dep_node);
-> >>> +             list_del_rcu(&esd->dep_rev_node);
-> >>> +     }
-> >>> +}
-> >>> +
-> >>>  /*
-> >>>   * NOTE: Must be called with dept_lock held.
-> >>>   */
-> >>> @@ -2384,6 +2414,8 @@ void dept_free_range(void *start, unsigned int sz)
-> >>>  {
-> >>>       struct dept_task *dt = dept_task();
-> >>>       struct dept_class *c, *n;
-> >>> +     struct dept_event_site_dep *esd, *next_esd;
-> >>> +     struct dept_event_site *es, *next_es;
-> >>>       unsigned long flags;
-> >>>
-> >>>       if (unlikely(!dept_working()))
-> >>> @@ -2405,6 +2437,24 @@ void dept_free_range(void *start, unsigned int sz)
-> >>>       while (unlikely(!dept_lock()))
-> >>>               cpu_relax();
-> >>>
-> >>> +     list_for_each_entry_safe(esd, next_esd, &dept_event_site_deps, all_node) {
-> >>> +             if (!within((void *)esd, start, sz))
-> >>> +                     continue;
-> >>> +
-> >>> +             disconnect_event_site_dep(esd);
-> >>> +             list_del(&esd->all_node);
-> >>> +     }
-> >>> +
-> >>> +     list_for_each_entry_safe(es, next_es, &dept_event_sites, all_node) {
-> >>> +             if (!within((void *)es, start, sz) &&
-> >>> +                 !within(es->name, start, sz) &&
-> >>> +                 !within(es->func_name, start, sz))
-> >>> +                     continue;
-> >>> +
-> >>> +             disconnect_event_site(es);
-> >>> +             list_del(&es->all_node);
-> >>> +     }
-> >>> +
-> >>>       list_for_each_entry_safe(c, n, &dept_classes, all_node) {
-> >>>               if (!within((void *)c->key, start, sz) &&
-> >>>                   !within(c->name, start, sz))
-> >>> @@ -3337,6 +3387,7 @@ void __dept_recover_event(struct dept_event_site_dep *esd,
-> >>>
-> >>>       list_add(&esd->dep_node, &es->dep_head);
-> >>>       list_add(&esd->dep_rev_node, &rs->dep_rev_head);
-> >>> +     list_add(&esd->all_node, &dept_event_site_deps);
-> >>>       check_recover_dl_bfs(esd);
-> >>>  unlock:
-> >>>       dept_unlock();
-> >>> @@ -3347,6 +3398,23 @@ EXPORT_SYMBOL_GPL(__dept_recover_event);
-> >>>
-> >>>  #define B2KB(B) ((B) / 1024)
-> >>>
-> >>> +void dept_mark_event_site_used(void *start, void *end)
-> >>
-> >> Nit: I suggest that dept_mark_event_site_used() take pointers to
-> >> dept_event_site_init, which would catch the type mismatch with
-> >
-> > IMO, this is the easiest way to get all the pointers from start to the
-> > end, or I can't get the number of the pointers.  It's similar to the
-> > initcalls section for device drivers.
-> 
-> This was a minor suggestion.. The idea is to simply change the function
-> signature to:
-> 
-> void dept_mark_event_site_used(struct dept_event_site_init **start,
->                                struct dept_event_site_init **end))
+From: Jiri Pirko <jiri@nvidia.com>
 
-I got what you meant.  I will.  Thanks.
+Confidential computing (CoCo) VMs/guests, such as AMD SEV and Intel TDX,
+run with encrypted/protected memory which creates a challenge
+for devices that do not support DMA to it (no TDISP support).
 
-	Byungchul
+For kernel-only DMA operations, swiotlb bounce buffering provides a
+transparent solution by copying data through decrypted memory.
+However, the only way to get this memory into userspace is via the DMA
+API's dma_alloc_pages()/dma_mmap_pages() type interfaces which limits
+the use of the memory to a single DMA device, and is incompatible with
+pin_user_pages().
 
-> This way, the compiler can provide proper type checking to ensure that
-> correct pointers are passed to dept_mark_event_site_used(). It would
-> catch the type mismatch with module::dept_event_sites.
-> 
-> >
-> >> module::dept_event_sites.
-> >>
-> >>> +{
-> >>> +     struct dept_event_site_init **evtinitpp;
-> >>> +
-> >>> +     for (evtinitpp = (struct dept_event_site_init **)start;
-> >>> +          evtinitpp < (struct dept_event_site_init **)end;
-> >>> +          evtinitpp++) {
-> >>> +             (*evtinitpp)->evt_site->used = true;
-> >>> +             (*evtinitpp)->evt_site->func_name = (*evtinitpp)->func_name;
-> >>> +             list_add(&(*evtinitpp)->evt_site->all_node, &dept_event_sites);
-> >>> +
-> >>> +             pr_info("dept_event_site %s@%s is initialized.\n",
-> >>> +                             (*evtinitpp)->evt_site->name,
-> >>> +                             (*evtinitpp)->evt_site->func_name);
-> >>> +     }
-> >>> +}
-> >>> +
-> >>>  extern char __dept_event_sites_start[], __dept_event_sites_end[];
-> >>
-> >> Related to the above, __dept_event_sites_start and
-> >> __dept_event_sites_end can already be properly typed here.
-> >
-> > How can I get the number of the pointers?
-> 
-> Similarly here, changing the code to:
-> 
-> extern struct dept_event_site_init *__dept_event_sites_start[], *__dept_event_sites_end[];
-> 
-> It is the same for the initcalls you mentioned. The declarations of
-> their start/end symbols are also already properly typed as
-> initcall_entry_t[] in include/linux/init.h.
-> 
-> --
-> Thanks,
-> Petr
+These limitations are particularly problematic for the RDMA subsystem
+which makes heavy use of pin_user_pages() and expects flexible memory
+usage between many different DMA devices.
+
+This patch series enables userspace to explicitly request decrypted
+(shared) memory allocations from the dma-buf system heap.
+Userspace can mmap this memory and pass the dma-buf fd to other
+existing importers such as RDMA or DRM devices to access the
+memory. The DMA API is improved to allow the dma heap exporter to DMA
+map the shared memory to each importing device.
+
+---
+v1->v2:
+ patch1:
+  - rebased on top of recent dma-mapping-fixes
+ patch2:
+  - fixed build errors on s390 by including mem_encrypt.h
+  - converted system heap flag implementation to a separate heap
+
+Based on dma-mapping-fixes HEAD d5b5e8149af0f5efed58653cbebf1cb3258ce49a
+
+Jiri Pirko (2):
+  dma-mapping: introduce DMA_ATTR_CC_DECRYPTED for pre-decrypted memory
+  dma-buf: heaps: system: add system_cc_decrypted heap for explicitly
+    decrypted memory
+
+ drivers/dma-buf/heaps/system_heap.c | 103 ++++++++++++++++++++++++++--
+ include/linux/dma-heap.h            |   1 +
+ include/linux/dma-mapping.h         |   6 ++
+ include/trace/events/dma.h          |   3 +-
+ include/uapi/linux/dma-heap.h       |   3 +-
+ kernel/dma/direct.h                 |  14 +++-
+ 6 files changed, 119 insertions(+), 11 deletions(-)
+
+-- 
+2.51.1
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
