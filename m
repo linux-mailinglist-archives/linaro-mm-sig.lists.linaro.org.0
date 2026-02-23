@@ -2,130 +2,133 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 0NfdBvMT4WnoogAAu9opvQ
+	id uAw4CPwT4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:53:07 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:53:16 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id AE997412137
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:53:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D1BA9412145
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:53:15 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A9F1A44DC0
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:53:05 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 981E244DDD
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:53:14 +0000 (UTC)
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	by lists.linaro.org (Postfix) with ESMTPS id 789CF3F80C
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Feb 2026 22:40:32 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id D65773F803
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Feb 2026 22:41:49 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=qualcomm.com header.s=qcppdkim1 header.b=CIL0pWDy;
-	dkim=pass header.d=oss.qualcomm.com header.s=google header.b=koEUqAO8;
+	dkim=pass header.d=qualcomm.com header.s=qcppdkim1 header.b=UqxJBeZr;
+	dkim=pass header.d=oss.qualcomm.com header.s=google header.b=QthpDRwA;
 	spf=pass (lists.linaro.org: domain of dmitry.baryshkov@oss.qualcomm.com designates 205.220.180.131 as permitted sender) smtp.mailfrom=dmitry.baryshkov@oss.qualcomm.com;
 	dmarc=pass (policy=reject) header.from=qualcomm.com
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 61NILQPp3732694
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Feb 2026 22:40:32 GMT
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 61NIHmqa322185
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Feb 2026 22:41:49 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=u/ELNB5NNSNmVG1lAxOxXYaU
-	P/G6z2rnLtuVVe2l8Dc=; b=CIL0pWDyAHnR5vXk18SDZA7lb6nyCoTjULcjQfez
-	Fd8EZfTPq5EtM25/5Al218WuFiIs1Mds6C/q0/EfPi6fYF11Kjzwx6jCUAbIgDF3
-	A1rfdspmIF8aTktTYjxCTIWXiOVT49AQe6OgVD/d7sqgV9sm429j8EW2IRKZz4jR
-	fB5J9wnQcdSkjZaVqOSd5qSOwTco8FKnmcALeH23N4obi36U1A7KduH1zlGlZF0v
-	fzA8y6OA1hpylxOWNBU4cB3CfpjfygvgTMTuSKgbyOZQlcaUIs+2f9R6JhJfZLxW
-	zAHG0AR/GsaSlxM7FdpK2WFea2c5ABblEUPd36w12xuwXA==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4cgn7ta45x-1
+	:references:subject:to; s=qcppdkim1; bh=AyHH7QcVrx7/d/Pc5HmpEFyc
+	TB7iy4eLl8RPthi6BKQ=; b=UqxJBeZrdU/+HWoz57Jsz5OGQVVAWwhBjkkReBnM
+	znYBmNaTaRZGpuZhz7FyFz+WMKoWazbntOR+ec/5k/EJVTBMqgTMcgo7rFv0h8Iw
+	XdOhutI9faQnvYCkm6mP+1Kd6PUqlMPkM8s8XwwBmRVS4g5u5yQUOdKMmQtYMgzi
+	ZFyxbQT2h5UlRY/O5RUWPPxnMKT7wj4bAzCzT5ovcR01y2uay4wfuENWyM56LLaB
+	HewbVsGgnFFTIQHaCasjtePqb0Ad+WJthHI8w3QeISWAww3VujFiKji1G4ot6uw0
+	1yteuL+sy6paHYOY5NXaN6D4btbz4lVrj3tv6Ix0oKOFsA==
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4cgn8y24c7-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Feb 2026 22:40:31 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-8cb390a0c4eso1905452385a.1
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Feb 2026 14:40:31 -0800 (PST)
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Feb 2026 22:41:49 +0000 (GMT)
+Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-8cb403842b6so4986421185a.1
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Feb 2026 14:41:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1771886431; x=1772491231; darn=lists.linaro.org;
+        d=oss.qualcomm.com; s=google; t=1771886509; x=1772491309; darn=lists.linaro.org;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=u/ELNB5NNSNmVG1lAxOxXYaUP/G6z2rnLtuVVe2l8Dc=;
-        b=koEUqAO8jXGywVN6khITRrPjYAC13R/kV5C3Ecf+GtyDtCPiJ4aNgcyHCa9JsnjCiA
-         Vv9eX75qjRJJ4k8884LkbRsEm6BgaeKifPG1HtpFFuvhZ5mCTnNIuAkd5+Y3rH03L/en
-         XO8vzQzMdi+iRcG5TOjNqytwntK8K1JsrMnwb7dQ+ngQnKc9hm5ZcW4tjMwepNcMgh4d
-         jzV/E8YCTi+ZcWVDXywHGFJcUXzfrSXn3EBwzaOSnfxf2Lph0KXZne3mgr00LWNTyN5S
-         cFPBwDt3+n2zM1dLFTwmUvasG6PLfIjmIj8eJP5tyG8isqc+BQvIZEpIYC2kDPolbR9w
-         SuQw==
+        bh=AyHH7QcVrx7/d/Pc5HmpEFycTB7iy4eLl8RPthi6BKQ=;
+        b=QthpDRwA2X7qRdI5z6NaUroYS4a5E4PtoRIFF8QYCTxbYclSC60LUYKEzisA/NZLr2
+         BfQdW9Ug/nmABEOIe37PQpdrIiCsZaVpGRdWhKajTXwVV0UQHLFv56Z8zdA8QFBwtQbX
+         C2y7CGZEJIWf3cfZyzi5LjwpEe6tfMPqazmRi0fesr1ZxprW6Ka8aT+staUQGRW7/z5x
+         VhWwjI5Y/6gOtV2RXzmj0CGZwlZLFl2ql8Pti6A7rgAD8eJzn/KAd/tW7TeFJgfARl1Y
+         6FIkBaYevFp93tOqfcCqq2iBPZtYw2C1se6a+pkg1Gl1I5CEbl734qclhCAdp1g1yKsg
+         /qew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771886431; x=1772491231;
+        d=1e100.net; s=20230601; t=1771886509; x=1772491309;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=u/ELNB5NNSNmVG1lAxOxXYaUP/G6z2rnLtuVVe2l8Dc=;
-        b=UdFDxXT4WI9GkFxuxRR9SXj1bresUz7WsDHIJRl1QedTNqWF5PNhngHVvdutqzmfYC
-         k4MLz64k7ZVoG0R51Nu2W1gZ99Tf+FS/N26Xm4MslDbcUYLbOysskr8uBly+UTSZreaM
-         ljEyovnGX3abTvuc04GVykOY92CvKrkOISjuw23G7P6vlpTkMOmYnHGoSGnGyHMH1hqV
-         OqWJLko6kNlhoeplbn7fmpLkTKm2jl0/N5Np9TYqytJSKUgRGgGVeylz0aeD/+Rc/h4x
-         V71NpLHtRUG8ID6m8tL0bZuVfG3gLCRKq44n26tsoI8g0LB21eRIwgM6+74kC95UNbcf
-         D0hQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWLSh3isl4bHUcjoruS0LPuueQq/+cMmFyM3DnbDqIveGNpMW/wK27T0povqLDcSh3dpfqX4vJyvA5DyYPP@lists.linaro.org
-X-Gm-Message-State: AOJu0YxnLLSMHufhAVfE4+Tw/yx5+uXZIA2OGzLHGJbDCL29C4tQQ6Lv
-	PHFVzPxmUbxWGiix/AzhAq/THlPP0trjLbx0Q9shNSc03/JHYFRhJdKduIOH3jnrP71LX6k//fC
-	UCXHFTDkrAedoHaCa6JuSqrH6SDQP/5vYawyn7k+94Q4GOqaXF0Mf+dVX+qB73g6e98J4kg==
-X-Gm-Gg: AZuq6aKNNKLEZ0RxFllOCDdkcbMTkeiEC89KnSxTpoqVRwaAkRJ4WoEwmo1kIFM1ACu
-	sVr3E+9VqWc7hRK1sA2oq6/zJ/K+8mkCRIHW39Thyw+fh26OPTvqfSNKv0nyy/6sR3b3OFcq6GV
-	I4VutouAeC71VRewNrz2a/005w6Bx+/G/4/biNFuMm4Fl9F12E+hhS0Tg0yXzGLDkN5M/gi7o6C
-	2qFStdgzefIUdV9Wd3C2vAbYmajITurVKNgcPrjbC1PdcpzZM+IVMQFYp7EoQ2RHlYmZa0ZzuB9
-	MmzMxOysY8Us0vSs87zy7aItQJPKVFNhi7aft+zGR2aw/8O4lC8K7u/qrwa6JUGu1mBFC9jouvR
-	KOTLm2BxeEmGigojHjMjZxg7+m7OdIEpntls8E7OO8QkFhwPSPFZMCz9oLitplltObNy01fe3nd
-	iHUN0ypyt1wurm99OxlUufpHmREQSALljdEGc=
-X-Received: by 2002:a05:620a:f15:b0:8c5:2d4c:4f0e with SMTP id af79cd13be357-8cb8c9fd576mr1266005085a.25.1771886431266;
-        Mon, 23 Feb 2026 14:40:31 -0800 (PST)
-X-Received: by 2002:a05:620a:f15:b0:8c5:2d4c:4f0e with SMTP id af79cd13be357-8cb8c9fd576mr1266002285a.25.1771886430804;
-        Mon, 23 Feb 2026 14:40:30 -0800 (PST)
+        bh=AyHH7QcVrx7/d/Pc5HmpEFycTB7iy4eLl8RPthi6BKQ=;
+        b=uZrqewtIBwqrmr0bHSO5pKJFdZLUlhPsr9Kh/iUuEbiggR9MKN1pKVRzjPeQMOWcP/
+         8Xs6iH11o92cZodggx+qPAedkyKtRWLZlt53mB7i9/7SW3hyGxNHc6NahDJWHzCYhB0Z
+         XaKixyZ5QHfRBSCfihtg+sMzPI/P98Gy+7YZ8EGcZHZXYXRsiP5MBcPEZW/H2g3q58Yb
+         p/wK5fcNSSySFldTW/BOTnGtM9Xwh6IabH+qpxzMJREybLSast+dRMTE/aSoqAg49a1W
+         KJtrlRsbc3OOdKcKJlQBVOgSGvMl+BrD7v/NniwnOXBldxfFqsePwjPnDNPmiCxe3NMC
+         3Obw==
+X-Forwarded-Encrypted: i=1; AJvYcCVHsN3/jTqLj/A2ko7WbooqJHaA3F0/6pCZkmdtKgc03NBWxDIkp/cFyLgd7SddaNfUl5RPvVBmJqSN/v0D@lists.linaro.org
+X-Gm-Message-State: AOJu0Yw3ZaCSmOqAlf/wQy+XmV4mtsZhz5jwQYGZmRv5ZhHMiN1YZQj+
+	o87oO32uC+Ey8/z48458WPEYJfcqLVPVmZAoTJ4bMPu6rresgzZ6Vu59UwZVZfRPAU87movetee
+	2Uee1pfQO4Oe+7QzMdlgyDFukjtyEO2kE3gzoAxmvQh3oixzVYaM5RmMZhauNX5o8yg862Q==
+X-Gm-Gg: AZuq6aI5tE6nFNUe059zbCgfwq9qreHT3PoymQXQKnK0WSOVw6wN5NLFmeNQfATEDLs
+	bj4cmxNu51/vG6LqLX5Cm+fUv2/eHL4fF5HO6HgU2vQpEPvuuyeg5isA84F5qWG6ZSLrbjNECKp
+	+Lsjc81l2bp8jNXRiw+dUU6pyVhI5eRm/6QBqAGYQS/yLwNY4VzZMpow9tfm3pCtPj3YFg1L1hd
+	S0xgTT1B/JjRyGkEPYQxv0SpHZ1OnUeaJqd0a56phv09DjbCl9lz6+3fRZxRm46WJCFx/r8eSIq
+	4cKkOC0BH/4VSRL4qKoyfI/b0VAaMKU00ai8vfH25wCg4yIz9wb64oT4GhGFJwybIv7/YqadxkH
+	jBmseqZredy2gUXxeVq7dm2EnTVJ6yt91TUoFshO9nJ6cV6jp2eq5VZJQ+URD1QSWXlO9Z+LdNc
+	XHZalkDfeITAGXKdDz2qA/GkyQfFvVQ7CKgnQ=
+X-Received: by 2002:a05:620a:440f:b0:8b2:d72d:e41c with SMTP id af79cd13be357-8cb8c9d2d25mr1211392985a.5.1771886508700;
+        Mon, 23 Feb 2026 14:41:48 -0800 (PST)
+X-Received: by 2002:a05:620a:440f:b0:8b2:d72d:e41c with SMTP id af79cd13be357-8cb8c9d2d25mr1211390585a.5.1771886508209;
+        Mon, 23 Feb 2026 14:41:48 -0800 (PST)
 Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-389a78b4a45sm18140691fa.13.2026.02.23.14.40.28
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5a0eeb4cbf5sm1818985e87.91.2026.02.23.14.41.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 23 Feb 2026 14:40:28 -0800 (PST)
-Date: Tue, 24 Feb 2026 00:40:25 +0200
+        Mon, 23 Feb 2026 14:41:47 -0800 (PST)
+Date: Tue, 24 Feb 2026 00:41:44 +0200
 From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
-Message-ID: <zideovhb7djvsbydqmdyxbgh6cte7xc5ouhm6gsreww6klqqae@o6w6wd4tic4r>
+To: Bjorn Andersson <andersson@kernel.org>
+Message-ID: <x3ebegi74hx3a2okxnjipgsrgkbncmtwnusxtv7mc66nfih2qu@jdxc4ry2n2gb>
 References: <20260224-qda-firstpost-v1-0-fe46a9c1a046@oss.qualcomm.com>
- <20260224-qda-firstpost-v1-18-fe46a9c1a046@oss.qualcomm.com>
+ <20260224-qda-firstpost-v1-3-fe46a9c1a046@oss.qualcomm.com>
+ <tqsdbijgjomrn7fq3sdz7v2axwxqvbccpjh4fmvod4kbrq7pod@af3igw5dx66p>
+ <lyco6vkfjlerri55ldyn6fbhihbkhnuolifddcnscevybsztq7@ljhjln2ynmid>
+ <r7eko65ua2ofyejqf6ipnh6jm4s76f4mqy6a4msgmlraz4xuec@uymfzc65dbng>
+ <oe4ho45dxtwjjjsqj6nd4op3gh7dz2pqwsuuhgqpdbf5hym645@smg3g4evqmge>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260224-qda-firstpost-v1-18-fe46a9c1a046@oss.qualcomm.com>
-X-Authority-Analysis: v=2.4 cv=c5OmgB9l c=1 sm=1 tr=0 ts=699cd75f cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+In-Reply-To: <oe4ho45dxtwjjjsqj6nd4op3gh7dz2pqwsuuhgqpdbf5hym645@smg3g4evqmge>
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjIzMDE5NyBTYWx0ZWRfX5EeiNvDuRhJa
+ RmoL0YkrVhRZqY8BDe7pgtBFQSvcIYFnW0ZQJZviTsmT07B+mK2T9jQwxryOimceEmHadr3KNOF
+ Ulp+gW37nazYPkqGOtyitkziphTWZaUHCRvNCLRzEBGvSawrLkYy2Rv0JFazwPEuEJUxaUiyjKx
+ GQ9K++OCbqTP8/jTSCIyiU48ecOeJ7c7uhdWjT/XgAk+konhrLzBCt+ZOGaxRYY27Bbj5aZeKKS
+ pyq8yk2SWdAQlXP8WmYDqXOyEQpwe4+JpM4sZbqTPP/ppfPvwmOldqXnY6rVWWu1Ut0RCOxK6y6
+ W3BgnoJT6k3Eh3kpgqmAJkBNZ/dgCP3+2a1dT2sVAuj6sbkwmt+7Gy89/mzlXI5vNdoLNoFvCs7
+ 6XSXVKJnAn0T60rmEoyzdMhrH2qipgpTtLUiw+3RMWD0hx8LdZbRI7kqzLrjWcbryoAOLkYAQNk
+ ykwzVvTs+zZ4fuys2Zg==
+X-Authority-Analysis: v=2.4 cv=edYwvrEH c=1 sm=1 tr=0 ts=699cd7ad cx=c_pps
+ a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
  a=HzLeVaNsDn8A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=EUspDBNiAAAA:8
- a=VwQbUJbxAAAA:8 a=e5mUnYsNAAAA:8 a=gmMn6fPPSMme9wD3190A:9 a=CjuIK1q_8ugA:10
- a=NFOGd7dJGGMPyQGDc5-O:22 a=Vxmtnl_E_bksehYqCbjh:22
-X-Proofpoint-GUID: cbY0mKeSEhgp4XRdRYcex2kvZZMOUhnr
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjIzMDE5NyBTYWx0ZWRfX5QtVFAkLfQic
- eqPzFtvMTwzT1S8Wcsy0BTCJwOJNzu2ydHAbjDe2gKmn/0HicVCSHKQm81uNh42JUElN1ADOi+w
- jwiek43HIoBMsi/86uqGRpmPqy7JsysnOz/1jkxh8orrUzONmdrzlnlTuNE9O+m3IiYzg4q2BWG
- xKLtxPomVhC1LCIlOMZPeao9Is19CV62wfqLt3kLm4Z+CJ2lCHBMh49Bs9GlOFMSpyRu4/fXiHe
- SRhV3n4L8QHF2n6CT5jyJF3w/jmDA8jU6r8x9ZMU6ft+3gZ9ieWBNc0E8zxuQdhAyks9iuSiqeB
- U7VmPKFAV23bgegFnrsV5YIqwW1IbVTIdo6KvsGT2xRtTJn77Y6zifc26tRmUMV5vkfV1+/ChSC
- h7zU8qgi7YIlFMFBHRh46F+NVOVqJO1d5fkecF7Xoir1m48prIhXJQTe2IsUBjOEZGFGJyTFUw+
- zomwghCFjQMHdrRxTZg==
-X-Proofpoint-ORIG-GUID: cbY0mKeSEhgp4XRdRYcex2kvZZMOUhnr
+ a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=-Sm6rUxn0lnaPTpFYlgA:9
+ a=CjuIK1q_8ugA:10 a=PEH46H7Ffwr30OY-TuGO:22
+X-Proofpoint-GUID: tH0Eoz19ayjXDLy_2eLtsJobc4RXPXUz
+X-Proofpoint-ORIG-GUID: tH0Eoz19ayjXDLy_2eLtsJobc4RXPXUz
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-02-23_05,2026-02-23_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 impostorscore=0 malwarescore=0 lowpriorityscore=0 adultscore=0
- clxscore=1015 bulkscore=0 spamscore=0 suspectscore=0 priorityscore=1501
+ adultscore=0 malwarescore=0 phishscore=0 clxscore=1015 priorityscore=1501
+ spamscore=0 impostorscore=0 bulkscore=0 suspectscore=0 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2602130000 definitions=main-2602230197
-X-Spamd-Bar: -----
+X-Spamd-Bar: ---
 X-MailFrom: dmitry.baryshkov@oss.qualcomm.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: V5WUJZSY74LN5FN47NHMQZM2VTLNRATH
-X-Message-ID-Hash: V5WUJZSY74LN5FN47NHMQZM2VTLNRATH
+Message-ID-Hash: D33BKUYMTDVD7OFHGGQKNLN23VTK3N2Z
+X-Message-ID-Hash: D33BKUYMTDVD7OFHGGQKNLN23VTK3N2Z
 X-Mailman-Approved-At: Thu, 16 Apr 2026 16:40:54 +0000
-CC: Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, iommu@lists.linux.dev, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>, Bharath Kumar <quic_bkumar@quicinc.com>, Chenna Kesava Raju <quic_chennak@quicinc.com>
+CC: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>, Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, iommu@lists.linux.dev, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>, Bharath Kumar <quic_bkumar@quicinc.com>, Chenna Kesava Raju <quic_chennak@quicinc.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH RFC 18/18] MAINTAINERS: Add MAINTAINERS entry for QDA driver
+Subject: [Linaro-mm-sig] Re: [PATCH RFC 03/18] accel/qda: Add RPMsg transport for Qualcomm DSP accelerator
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/V5WUJZSY74LN5FN47NHMQZM2VTLNRATH/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/D33BKUYMTDVD7OFHGGQKNLN23VTK3N2Z/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -143,8 +146,8 @@ X-Spamd-Result: default: False [3.99 / 15.00];
 	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[kernel.org,lwn.net,linuxfoundation.org,8bytes.org,arm.com,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,lists.freedesktop.org,vger.kernel.org,lists.linux.dev,lists.linaro.org,oss.qualcomm.com,quicinc.com];
-	RCPT_COUNT_TWELVE(0.00)[24];
+	FREEMAIL_CC(0.00)[oss.qualcomm.com,kernel.org,lwn.net,linuxfoundation.org,8bytes.org,arm.com,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,lists.freedesktop.org,vger.kernel.org,lists.linux.dev,lists.linaro.org,quicinc.com];
+	RCPT_COUNT_TWELVE(0.00)[25];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	ARC_NA(0.00)[];
@@ -161,54 +164,65 @@ X-Spamd-Result: default: False [3.99 / 15.00];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.freedesktop.org:email,qualcomm.com:email,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: AE997412137
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
+X-Rspamd-Queue-Id: D1BA9412145
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Tue, Feb 24, 2026 at 12:39:12AM +0530, Ekansh Gupta wrote:
-> Add a new MAINTAINERS entry for the Qualcomm DSP Accelerator (QDA)
-> driver. The entry lists the primary maintainer, the linux-arm-msm and
-> dri-devel mailing lists, and covers all source files under
-> drivers/accel/qda, Documentation/accel/qda and the UAPI header
-> include/uapi/drm/qda_accel.h.
+On Mon, Feb 23, 2026 at 04:25:08PM -0600, Bjorn Andersson wrote:
+> On Tue, Feb 24, 2026 at 12:12:32AM +0200, Dmitry Baryshkov wrote:
+> > On Mon, Feb 23, 2026 at 03:50:32PM -0600, Bjorn Andersson wrote:
+> > > On Mon, Feb 23, 2026 at 11:23:13PM +0200, Dmitry Baryshkov wrote:
+> > > > On Tue, Feb 24, 2026 at 12:38:57AM +0530, Ekansh Gupta wrote:
+> > > [..]
+> > > > > diff --git a/drivers/accel/qda/qda_drv.h b/drivers/accel/qda/qda_drv.h
+> > > [..]
+> > > > > +/* Error logging - always logs and tracks errors */
+> > > > > +#define qda_err(qdev, fmt, ...) do { \
+> > > > > +	struct device *__dev = qda_get_log_device(qdev); \
+> > > > > +	if (__dev) \
+> > > > > +		dev_err(__dev, "[%s] " fmt, __func__, ##__VA_ARGS__); \
+> > > > > +	else \
+> > > > > +		pr_err(DRIVER_NAME ": [%s] " fmt, __func__, ##__VA_ARGS__); \
+> > > > 
+> > > > What /why? You are under drm, so you can use drm_* helpers instead.
+> > > > 
+> > > 
+> > > In particular, rather than rolling our own wrappers around standard
+> > > functions, just use dev_err() whenever you have a struct device. And for
+> > > something like fastrpc - life starts at some probe() and ends at some
+> > > remove() so that should be always.
+> > 
+> > I'd say differently. For the DRM devices the life cycle is centered
+> > around the DRM device (which can outlive platform device for multiple
+> > reasons). So, please start by registering the DRM accel device and using
+> > it for all the logging (and btw for private data management too).
+> > 
 > 
-> This ensures that patches to the QDA driver and its public API are
-> tracked and routed to the appropriate reviewers as the driver is
-> integrated into the DRM accel subsystem.
+> There are no platform_devices here, but tomato tomato... What defines
+> the life cycle of the DRM device then? Might it linger because clients
+> are holding open handles to it?
 
-Please add it in the first patch.
+Yes.
 
 > 
-> Signed-off-by: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
-> ---
->  MAINTAINERS | 9 +++++++++
->  1 file changed, 9 insertions(+)
+> Note that the fastrpc service is coming and going, as the remoteproc
+> starts and stops.
+
+Even one more reason to use drm_device for life cycle management
+instead of manually inventing the wheel.
+
 > 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 71f76fddebbf..78b8b82a6370 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -21691,6 +21691,15 @@ S:	Maintained
->  F:	Documentation/devicetree/bindings/crypto/qcom-qce.yaml
->  F:	drivers/crypto/qce/
->  
-> +QUALCOMM DSP ACCELERATOR (QDA) DRIVER
-> +M:	Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
-> +L:	linux-arm-msm@vger.kernel.org
-> +L:	dri-devel@lists.freedesktop.org
-> +S:	Supported
-> +F:	Documentation/accel/qda/
-> +F:	drivers/accel/qda/
-> +F:	include/uapi/drm/qda_accel.h
-> +
->  QUALCOMM EMAC GIGABIT ETHERNET DRIVER
->  M:	Timur Tabi <timur@kernel.org>
->  L:	netdev@vger.kernel.org
+> Regards,
+> Bjorn
 > 
-> -- 
-> 2.34.1
-> 
+> > > 
+> > > Regards,
+> > > Bjorn
+> > 
+> > -- 
+> > With best wishes
+> > Dmitry
 
 -- 
 With best wishes
