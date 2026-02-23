@@ -2,89 +2,89 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gGGWKJUT4WnoogAAu9opvQ
+	id mEpyMp8T4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:51:33 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:51:43 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3BCD64120C2
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:51:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 47D8C4120CB
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:51:43 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E8BC644BE5
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:51:31 +0000 (UTC)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	by lists.linaro.org (Postfix) with ESMTPS id 1730A4047F
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Feb 2026 19:11:16 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 67FC644BEE
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:51:42 +0000 (UTC)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	by lists.linaro.org (Postfix) with ESMTPS id 8E9BE4047F
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Feb 2026 19:11:23 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=qualcomm.com header.s=qcppdkim1 header.b=PIS0rMcE;
-	dkim=pass header.d=oss.qualcomm.com header.s=google header.b=edS5YL3P;
-	spf=pass (lists.linaro.org: domain of ekansh.gupta@oss.qualcomm.com designates 205.220.180.131 as permitted sender) smtp.mailfrom=ekansh.gupta@oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.s=qcppdkim1 header.b=Cd8dPuZp;
+	dkim=pass header.d=oss.qualcomm.com header.s=google header.b=HpjFWF45;
+	spf=pass (lists.linaro.org: domain of ekansh.gupta@oss.qualcomm.com designates 205.220.168.131 as permitted sender) smtp.mailfrom=ekansh.gupta@oss.qualcomm.com;
 	dmarc=pass (policy=reject) header.from=qualcomm.com
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 61NJ0uGB3732832
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Feb 2026 19:11:15 GMT
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 61NH4goi910757
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Feb 2026 19:11:22 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	/8fFZehduIFTGd4qCuwHVKAUzJ2Ctw4RrkqPCbZ/59E=; b=PIS0rMcEGxe9OCe/
-	61zEZ5Yss1GD9dMG7fC9eNOvlee47iCkm7vyqfLTMhW03EILhyUfzHBT50Ez/Wdh
-	rT+yy0E82JueK+JezRaao6MP6LQBqN9OSzydfaKSlFWTr67hnSgpJo95j41tLnUZ
-	pdtsHAXIEDjqwNsdksr7UQ6eHb5RQXtfQs0Gvk491eE9dGnCr1aAVvQFb8QCQZwQ
-	+ZP3jq4ki4hygXRZnh8xL1Yh50iNQrKTNDWyl9YXeg7MVMVP4JV3ESXtEtauivoe
-	LX5yDiyaWcpNH2r+NarxMqF80yZtv+XEPZdN2c6s3Dk5yhHuwIkAx8BzPX4PBe36
-	zxNDDw==
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com [209.85.214.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4cgn7t9mbh-1
+	HZaGUVE53+HTX2lkLB5p1TySzSvMtZiR+5hs3hFD9wg=; b=Cd8dPuZpje7fWAeT
+	yxEByrcBsGi2F4lNVI3AN3QzaOy78t674wtLxB/yvNOdLIbP5svl4HTOc+hjxBT6
+	WP4tuHywwZiyPjlRRGwSqZ/xUzE9XCLpU/sjFypeaRDyGBhWy4tMV2E3iJtWJ8tK
+	UTl5hLEGABFHDUOSJ72j9YWqoickDpBkBDv0IU4Vh8NENuF1xG8W9uqvWhBa0gGE
+	NJUfA7wnOujWFe4MNQSDPZlaHXrqoCMhzFMAlPOfWF8YQiFkfHkEzBAkODtZmuXI
+	SmlGXBn6NmuKSOFi0npMihEmvAviMxO3p4/OlT2MHyAF8rJvs+VjFkwIPaV/Mqmj
+	/EhmPw==
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4cgtyj8d8m-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Feb 2026 19:11:15 +0000 (GMT)
-Received: by mail-pl1-f197.google.com with SMTP id d9443c01a7336-2ad44941ea2so28840535ad.1
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Feb 2026 11:11:15 -0800 (PST)
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Feb 2026 19:11:22 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-2aad60525deso341592975ad.1
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Feb 2026 11:11:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1771873874; x=1772478674; darn=lists.linaro.org;
+        d=oss.qualcomm.com; s=google; t=1771873881; x=1772478681; darn=lists.linaro.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=/8fFZehduIFTGd4qCuwHVKAUzJ2Ctw4RrkqPCbZ/59E=;
-        b=edS5YL3P3mEAGU9dbkn/zpw76mO05KJxAEPoKIS50Wo9Ta/OhU7rgYJlvsPqXlqk/1
-         K1163oQI20TaVB7LMbeJzrCINbKgZWgojhrv+hjSHPOAEOdw3C8kTl7oj+JJFo2Sj5Rs
-         5KCLQMAix50p96bfm6qrrXWcrn+ihPm9hzrW1jYQKPzGvt+639H+yhWsOjBWLQhlSnxh
-         qqs1rLMlimby+6/IrbrLgnLuv6tNaNXjE4yk6KCKRRKdDH6HJfBK85pJowQWd5jP4cTb
-         IuYmpjEzZP3yb6rHwgmPEOQK/r7fTbBJwCArWaKuxJntaG3JJNA5KyY/1grV/kuisEQf
-         +h4A==
+        bh=HZaGUVE53+HTX2lkLB5p1TySzSvMtZiR+5hs3hFD9wg=;
+        b=HpjFWF45NHn3o/EL4tqe8/oBt8vG2lZx9GZnlw+YMiwsq+21CJ/cJsUcOhAi7VwT3B
+         vwBVwiW9965J4qRR0lmi9nvrKtR4AGDWN3iiMLjHQ15wqbeYOFU47MLHP1PYPqFLpbSU
+         hn1G/urd32NI0sXlf2+xwqkT+rX1xPMMBRe5ib3bx8sgn7KEa7gLbSqu3O+lXFx0nKTY
+         5HK+nIGeLRy5hmqH7KqE3Zhsw3DASWyXAj4dGulK3JkhZn5ys5p4YOpMDgQCE9ONLxJM
+         lz2ezDoZDLANLx0LpR/k+JZ4tNbdhcaVH842zY153SbRg4R/H0OveEbfEgsrryuMd0YH
+         p4zQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771873874; x=1772478674;
+        d=1e100.net; s=20230601; t=1771873881; x=1772478681;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=/8fFZehduIFTGd4qCuwHVKAUzJ2Ctw4RrkqPCbZ/59E=;
-        b=ShIKc9kst67ui4OLWLTs4PifSg6eADKhI9ivIPmez+U+lmVquPp1UMuGhQCwDNZrqH
-         dzfbcxM2MPorWXStiVK1luNLGCy+DAWsMbQhf4udJbhk4CyiI+5bTWqo90TG6dzqAay3
-         IdreNwaJ7FqNtR+nPo0MGYZp1BFKguzTaGmilZoYfHeIVX3+1VpRqlHf40KSUiCVqN8x
-         RpVaBkl7eP2orI6lRT4+hBS9DQmnAsEICDGAM1h6uX3sDsOyRcv3hiJ7gYOpAVAA5qdY
-         MpKZeOx+t1W7S0rL74sOBvZYfZt8VPK5sDu7k7D3j2IvyNvzLK+aeb/ru82Q4RZqFlrX
-         l9ZA==
-X-Forwarded-Encrypted: i=1; AJvYcCUbSECw2hWViOa2QkkR005i0hbz+QxN5gYyEfCxmmhFWOIQD9JOb+bP9JXUO5NokJYPHHkfjfbHE7OQEYiE@lists.linaro.org
-X-Gm-Message-State: AOJu0YwfZmJFS2VNoYpjQdv2+Z1x60T9f2LaQDuv5vbQ0kQf6Yg0k2TG
-	KiHeM34Egwj38zUS+wEuWavIWJc60+79PALyDttUvpHo5gpzjwFRvt78YitO7MITtaVtrHCOBas
-	5ZCLjxJXfdvZHkpuNXfti/A9loib9ANPTWj3eX6OjzTTh3GVZC3p1CcYG8GzRKKeSAiIjTA==
-X-Gm-Gg: ATEYQzw5CVWNJmKMczuPg4MGvJZlzvSxXAGrcYMJi4tt76/FKINMOwThxSVg8dHYBeM
-	KQVXPdGmw6NtLq0eRQdf63IsDiBEq7268W5h/KZ0Sr3J//JUJzSe9D/0pQRgOxeJctqvmtna4r+
-	BCGyLTlJpV5x7yw+I90LdYHdX9RpsSkjO4Felvd5q2H1q9BFUgPO7uLtpy2JhAbTf51zVFdClYn
-	wpK8ULdSez+IIVguIMeriND7VBJFMXnWxZr0f6pQrYF2qzYq2nmJiDgc9IPdwQ4sfJ5ucRJgs1e
-	+Gbe93eJe/42mJMiEnHBCo6fJJwvAZZ58d4weNU8jhjPlkS5GlNZwYH7buxd/rpZNruHM4ZAUet
-	gI5SF+CGGMPxvoNDc7mVFrL4MsdPKXGz6kO9bo4BbohPlFnzv/bffsg==
-X-Received: by 2002:a17:903:2a8f:b0:2aa:d630:cd5d with SMTP id d9443c01a7336-2ad74549302mr83071365ad.44.1771873873873;
-        Mon, 23 Feb 2026 11:11:13 -0800 (PST)
-X-Received: by 2002:a17:903:2a8f:b0:2aa:d630:cd5d with SMTP id d9443c01a7336-2ad74549302mr83070975ad.44.1771873873320;
-        Mon, 23 Feb 2026 11:11:13 -0800 (PST)
+        bh=HZaGUVE53+HTX2lkLB5p1TySzSvMtZiR+5hs3hFD9wg=;
+        b=WHYwDhnRxi9zbNP3auHqDhH34rxBMjGdlv1jTyLV4ZY1ujdjGecGBQcrl/SoJMzs2p
+         t/tFvyHIwVZVEn9tbzGAftqZvRq2QFPC2akmOCp1qbxJz180y0VmFidIObwfdBClnD5n
+         wLSGEAVWEf8okXVrCGXrEZTisUP5mPwDrt7jrrvVXl64EreOM1nMBFFopNsThX6lnQRA
+         4bIYwp7dpNKT/vhdl/0jxEefanqylJdYqa0eavdPYQG+pgL03JproENzaUjKAgcPPi/S
+         UYf4++ilqU2EIUdUaMdztTKumbRfBZkCAdCCbVJQVcsFt7nqTC4iMMrRU9jetA/YaKwJ
+         /mKA==
+X-Forwarded-Encrypted: i=1; AJvYcCVZkuTqUUDFo2DILPJQATRk+Q0Dx76KZEIhJDSbLzyU7DUEtjOf9M1V83SyAtjAz8+1eCMTYZfZJxGT5Vvh@lists.linaro.org
+X-Gm-Message-State: AOJu0Yx4Sm+3wgWlXo9mSLZLHqDCPropw9Yr7P5SN9WRRzfotl8S4+hu
+	rQuFwdJKvhFjhPj0kKRMfN1/QkmsyvGEBJPiRIw9A3TLUA5RWF2SEYI7ypRG8XZiNtotGUMRuNw
+	ekolKr7FkGH+lm9Y5kTG/0qbOJ5O9ptorHrnvtE7+h2M3GWtHFdbO8ekRIeEAhqcHtl63fw==
+X-Gm-Gg: ATEYQzxWXtt4pxNeSil5HU+LCv3ePYaERsyZFKZ/t0Ni7KIOqSJ7ocfDmyYg1+fPkXv
+	qu0fxHqmUc0djQFMx8ykLaPsDdCsotcSlswY37Uns6oWImHpUewZyt/ctlIGeVkSGrBB0Eh8pNV
+	Fq2PezU5g3L03cvDrTLqX9O3Ih3zMSA45wLF3dgi3sfPR9UCHBINiPbBQHjiR2p4DkuHt/4iWnc
+	IGvO5cZiK25KqRrtyU1sb4XHsqVVbrDRfopwopKY0uuGGMmksxPFNCxlmGfwlWizi2uvoQ0+15T
+	t0ip5paV63HY5iYZAJ2238TlMDt2OyOJcC0CKQILAPekA55g6KOF6vJmSERrdnGYqW1BcsxZ5zp
+	xRWMyua1L23MrnlNfAJ26ORMEx9WrAZiIkEtNOWpl9/tFaoJbKU4UGA==
+X-Received: by 2002:a17:902:ce0c:b0:2aa:d04b:73af with SMTP id d9443c01a7336-2ad744e0f51mr85545155ad.30.1771873881315;
+        Mon, 23 Feb 2026 11:11:21 -0800 (PST)
+X-Received: by 2002:a17:902:ce0c:b0:2aa:d04b:73af with SMTP id d9443c01a7336-2ad744e0f51mr85544695ad.30.1771873880713;
+        Mon, 23 Feb 2026 11:11:20 -0800 (PST)
 Received: from hu-ekangupt-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ad74e34e18sm83501505ad.10.2026.02.23.11.11.06
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ad74e34e18sm83501505ad.10.2026.02.23.11.11.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 23 Feb 2026 11:11:12 -0800 (PST)
+        Mon, 23 Feb 2026 11:11:20 -0800 (PST)
 From: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
-Date: Tue, 24 Feb 2026 00:39:09 +0530
+Date: Tue, 24 Feb 2026 00:39:10 +0530
 MIME-Version: 1.0
-Message-Id: <20260224-qda-firstpost-v1-15-fe46a9c1a046@oss.qualcomm.com>
+Message-Id: <20260224-qda-firstpost-v1-16-fe46a9c1a046@oss.qualcomm.com>
 References: <20260224-qda-firstpost-v1-0-fe46a9c1a046@oss.qualcomm.com>
 In-Reply-To: <20260224-qda-firstpost-v1-0-fe46a9c1a046@oss.qualcomm.com>
 To: Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
@@ -97,50 +97,51 @@ To: Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
         Sumit Semwal <sumit.semwal@linaro.org>,
         =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1771873753; l=13841;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1771873753; l=17200;
  i=ekansh.gupta@oss.qualcomm.com; s=20260223; h=from:subject:message-id;
- bh=rXImOerPPCRcLM/PrX4s5yCQxV6omJBtcCXYYEPRUAw=;
- b=K7TZp9Cqi+95pJ85mje+lWbGWCgDb+g/W1Zyj12HTTRexDM7MxAocuPC2VOxk30Og47ocX6mS
- FtJZjOrluUrDFYpfSmz3UrDnIo7y4y9US8jertx7oWmO6X5WLOb1d5E
+ bh=In824aYdTZtiBe3D/1mBer+pKP5XT1pFDVVL+e0V4wY=;
+ b=4X9x+B3ZUgfatV9QCIxkEcWhNzkJJNPP5aWlq8gxklcmqruDEuqwEAGcBDXH+tT8om5k5Ab4I
+ GyWBHirqRMnCCiAu7HVTDlFCVn/vGDp8b5GhSihOLsGdlv5FVVRi0/9
 X-Developer-Key: i=ekansh.gupta@oss.qualcomm.com; a=ed25519;
  pk=n0SepARizye+pYjhjg1RA5J+Nq4+IJbyRcBybU+/ERQ=
-X-Authority-Analysis: v=2.4 cv=c5OmgB9l c=1 sm=1 tr=0 ts=699ca653 cx=c_pps
- a=cmESyDAEBpBGqyK7t0alAg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Authority-Analysis: v=2.4 cv=Jq/8bc4C c=1 sm=1 tr=0 ts=699ca65a cx=c_pps
+ a=IZJwPbhc+fLeJZngyXXI0A==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=HzLeVaNsDn8A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=EUspDBNiAAAA:8 a=AEM1BfxD9CAojFsgHjQA:9 a=QEXdDO2ut3YA:10
- a=1OuFwYUASf3TG4hYMiVC:22
-X-Proofpoint-GUID: YBhj6ta98XZ9muwD-uK2t1QWQTMpmrxs
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjIzMDE2NiBTYWx0ZWRfXzUHNkW8Fm2XC
- ef+hnaFXa7PCEdHuvnN2RhxYm54dMSYUhF1ic+ukuZv+nZ5Dy3H8RoabjSkw5MC4mcyoDjVf+JW
- HqgyZyavsLbJybmu1fivRRzxAEr1BCUPh4WWBPrGOZ9YrL9Je6ecFVCUsXydI4IDoE/H4SaKwxY
- /efe25pkh5edlbRFyoXTjkQRju07xGi2gEalFbl3tJmwINZ/8R5LybJhX2UQ7KdWJEfqmJdgs9L
- uCJuXV2fWyyM6F0iFnTMf8xE4KpHlyXRDH9ECVzJE37k8e93QlbYl1Tbg4nI5LUcb7jODfmqxnS
- D+BJGYq1Hmjje4Gc/fQGTiJNsTO6HBOKrjyotNd9urPkMCqyZJ8VDdZy/4iD4EmP4l8DbkyuG8s
- I+sPir6jk3YnwPoEGQ1gBgBStpfvKH0ZbE2resQ1SIf/p+TPiKBOVQwU+XTiQA2UscUfqZg1qT7
- OFRqI0fDmgJexJdnVAA==
-X-Proofpoint-ORIG-GUID: YBhj6ta98XZ9muwD-uK2t1QWQTMpmrxs
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=EUspDBNiAAAA:8 a=rEPeaROu6cVHm8VQ6AkA:9 a=VNHnRFp1g_w2UU4Q:21
+ a=QEXdDO2ut3YA:10 a=uG9DUKGECoFWVXl0Dc02:22
+X-Proofpoint-ORIG-GUID: 344yY74g251fNQG0zJYNgqmhLF-BEJeK
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjIzMDE2NiBTYWx0ZWRfX90iYjL60oDDe
+ qCg06WhM8OYPtwIC5OKkg9E3SPaLkqq72VDdSSLiNH3wXQtY8+uLARpKLnkWsXUyAPVZXFj8oQu
+ l/cJxFWDIdQeXE/pItrCPyclBJU0UneQWYjswYy7Qsp8eRcUgy8vtGBREOcd26l/12bBgkv6PQ8
+ 6RLswC11HdMwU497FsnaAtHI6dm1Ka9iF0kQrmnS/AwR4l3Z9vTKoZ6yQhFOhedTWS9OgZqrOQ1
+ Oq2FD+zvgYV1fRR+8Mys8lrQ5QIlS7POXxYoBEtxoo5KeNYPhj3b6TqKLLCdPKUBvjPrD1VGfJA
+ 0X29OzeecMe7dB6HY8QDd9sBqu3aooOyBOd/fl/S+L69oj539PBmfm4goL8ZXH4OLIN+pjDYBLK
+ jC6DYoCoEDC0sJ4iEe4UeAcpuS7PWHRTnigSnFODRP3yLf9XQG5VjM0VWDaRCaFXiz2i9xFUU3b
+ MX2flHvT44KbMCBJr2w==
+X-Proofpoint-GUID: 344yY74g251fNQG0zJYNgqmhLF-BEJeK
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-02-23_04,2026-02-23_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 impostorscore=0 malwarescore=0 lowpriorityscore=0 adultscore=0
- clxscore=1015 bulkscore=0 spamscore=0 suspectscore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2602130000 definitions=main-2602230166
+ clxscore=1011 lowpriorityscore=0 malwarescore=0 priorityscore=1501
+ spamscore=0 adultscore=0 phishscore=0 suspectscore=0 impostorscore=0
+ bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2602130000
+ definitions=main-2602230166
 X-Spamd-Bar: ----
 X-MailFrom: ekansh.gupta@oss.qualcomm.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: S2CK7I5MK7P3WIOSBSWM3UUHNHZYXMI4
-X-Message-ID-Hash: S2CK7I5MK7P3WIOSBSWM3UUHNHZYXMI4
-X-Mailman-Approved-At: Thu, 16 Apr 2026 16:40:46 +0000
+Message-ID-Hash: IZKLX453PJFVSEMCO3MSDR7WWW5NCAAG
+X-Message-ID-Hash: IZKLX453PJFVSEMCO3MSDR7WWW5NCAAG
+X-Mailman-Approved-At: Thu, 16 Apr 2026 16:40:47 +0000
 CC: dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, iommu@lists.linux.dev, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>, Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, Bharath Kumar <quic_bkumar@quicinc.com>, Chenna Kesava Raju <quic_chennak@quicinc.com>, Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH RFC 15/18] accel/qda: Add FastRPC DSP process creation support
+Subject: [Linaro-mm-sig] [PATCH RFC 16/18] accel/qda: Add FastRPC-based DSP memory mapping support
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/S2CK7I5MK7P3WIOSBSWM3UUHNHZYXMI4/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/IZKLX453PJFVSEMCO3MSDR7WWW5NCAAG/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -171,401 +172,539 @@ X-Spamd-Result: default: False [3.49 / 15.00];
 	FROM_NEQ_ENVFROM(0.00)[ekansh.gupta@oss.qualcomm.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	NEURAL_HAM(-0.00)[-0.996];
+	NEURAL_HAM(-0.00)[-0.995];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	MID_RHS_MATCH_FROM(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,qualcomm.com:email,oss.qualcomm.com:mid,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: 3BCD64120C2
+	DBL_BLOCKED_OPENRESOLVER(0.00)[qualcomm.com:email,oss.qualcomm.com:mid,lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
+X-Rspamd-Queue-Id: 47D8C4120CB
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Add support for creating a DSP process through the QDA FastRPC
-interface. A new DRM_QDA_INIT_CREATE ioctl accepts a qda_init_create
-structure describing the executable image, process attributes and
-optional signature. The driver allocates a GEM-backed initialization
-buffer, prepares a fastrpc_create_process_inbuf and a single
-fastrpc_phy_page entry pointing to the initialization memory and
-packages these into a set of FastRPC arguments.
+Add a DRM_QDA_MAP ioctl and supporting FastRPC plumbing to map GEM
+backed buffers into the DSP virtual address space. The new
+qda_mem_map UAPI structure allows userspace to request legacy MMAP
+style mappings or handle-based MEM_MAP mappings with attributes, and
+encodes flags, offsets and optional virtual address hints that are
+forwarded to the DSP.
 
-The FastRPC core gains FASTRPC_RMID_INIT_CREATE and
-FASTRPC_RMID_INIT_CREATE_ATTR method identifiers along with a
-fastrpc_prepare_args_init_create() helper that reads the
-qda_init_create parameters from user space, validates the ELF length,
-optionally verifies a GEM handle for the image and fills a
-FASTRPC_CREATE_PROCESS_NARGS-sized fastrpc_invoke_args array. The
-scalars value is built from the FastRPC method id and buffer counts
-so that the existing overlap and packing logic can treat process
-creation like any other call.
+On the FastRPC side new method identifiers FASTRPC_RMID_INIT_MMAP
+and FASTRPC_RMID_INIT_MEM_MAP are introduced together with message
+structures for map requests and responses. The fastrpc_prepare_args
+path is extended to build the appropriate request headers, serialize
+the physical page information derived from a GEM object into a
+fastrpc_phy_page array and pack the arguments into the shared message
+buffer used by the existing invoke infrastructure.
 
-On the IOCTL side qda_ioctl_create() forwards requests to
-fastrpc_invoke() with the INIT_CREATE method id, ensuring that the
-message buffer, per-process initialization memory and RPMsg
-transport are reused for process creation in the same way as attach,
-release and dynamic invocation. This patch lays the groundwork for
-loading and running DSP user PDs under the QDA driver.
+The qda_ioctl_mmap() handler dispatches mapping requests based on the
+qda_mem_map request type, reusing the generic fastrpc_invoke()
+machinery and the RPMsg transport to communicate with the DSP. This
+provides the foundation for explicit buffer mapping into the DSP
+address space for subsequent FastRPC calls, aligned with the
+traditional FastRPC user space model.
 
 Signed-off-by: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
 ---
+ arch/arm64/configs/defconfig    |   2 +
  drivers/accel/qda/qda_drv.c     |   1 +
- drivers/accel/qda/qda_drv.h     |   2 +
- drivers/accel/qda/qda_fastrpc.c | 109 ++++++++++++++++++++++++++++++++++++++++
- drivers/accel/qda/qda_fastrpc.h |  31 ++++++++++++
- drivers/accel/qda/qda_ioctl.c   |  28 ++++++++++-
- drivers/accel/qda/qda_ioctl.h   |  13 +++++
- include/uapi/drm/qda_accel.h    |  29 ++++++++++-
- 7 files changed, 211 insertions(+), 2 deletions(-)
+ drivers/accel/qda/qda_fastrpc.c | 217 ++++++++++++++++++++++++++++++++++++++++
+ drivers/accel/qda/qda_fastrpc.h |  64 ++++++++++++
+ drivers/accel/qda/qda_ioctl.c   |  24 +++++
+ drivers/accel/qda/qda_ioctl.h   |  13 +++
+ include/uapi/drm/qda_accel.h    |  44 +++++++-
+ 7 files changed, 364 insertions(+), 1 deletion(-)
 
+diff --git a/arch/arm64/configs/defconfig b/arch/arm64/configs/defconfig
+index b67d5b1fc45b..e53a7984c9be 100644
+--- a/arch/arm64/configs/defconfig
++++ b/arch/arm64/configs/defconfig
+@@ -1046,6 +1046,8 @@ CONFIG_DRM_TIDSS=m
+ CONFIG_DRM_ZYNQMP_DPSUB=m
+ CONFIG_DRM_ZYNQMP_DPSUB_AUDIO=y
+ CONFIG_DRM_POWERVR=m
++CONFIG_DRM_ACCEL=y
++CONFIG_DRM_ACCEL_QDA=m
+ CONFIG_FB=y
+ CONFIG_FB_EFI=y
+ CONFIG_FB_MODE_HELPERS=y
 diff --git a/drivers/accel/qda/qda_drv.c b/drivers/accel/qda/qda_drv.c
-index f94f780ea50a..2b080d5d51c5 100644
+index 2b080d5d51c5..5f43c97ebc25 100644
 --- a/drivers/accel/qda/qda_drv.c
 +++ b/drivers/accel/qda/qda_drv.c
-@@ -162,6 +162,7 @@ static const struct drm_ioctl_desc qda_ioctls[] = {
- 	DRM_IOCTL_DEF_DRV(QDA_GEM_CREATE, qda_ioctl_gem_create, 0),
+@@ -163,6 +163,7 @@ static const struct drm_ioctl_desc qda_ioctls[] = {
  	DRM_IOCTL_DEF_DRV(QDA_GEM_MMAP_OFFSET, qda_ioctl_gem_mmap_offset, 0),
  	DRM_IOCTL_DEF_DRV(QDA_INIT_ATTACH, qda_ioctl_attach, 0),
-+	DRM_IOCTL_DEF_DRV(QDA_INIT_CREATE, qda_ioctl_create, 0),
+ 	DRM_IOCTL_DEF_DRV(QDA_INIT_CREATE, qda_ioctl_create, 0),
++	DRM_IOCTL_DEF_DRV(QDA_MAP, qda_ioctl_mmap, 0),
  	DRM_IOCTL_DEF_DRV(QDA_INVOKE, qda_ioctl_invoke, 0),
  };
  
-diff --git a/drivers/accel/qda/qda_drv.h b/drivers/accel/qda/qda_drv.h
-index bb1d1e82036a..950e8d44995d 100644
---- a/drivers/accel/qda/qda_drv.h
-+++ b/drivers/accel/qda/qda_drv.h
-@@ -48,6 +48,8 @@ struct qda_user {
- 	u32 client_id;
- 	/* Back-pointer to device structure */
- 	struct qda_dev *qda_dev;
-+	/* GEM object for PD initialization memory */
-+	struct qda_gem_obj *init_mem_gem_obj;
- };
- 
- /**
 diff --git a/drivers/accel/qda/qda_fastrpc.c b/drivers/accel/qda/qda_fastrpc.c
-index a48b255ffb1b..f03dcf7e21e4 100644
+index f03dcf7e21e4..25b5d53ba2d6 100644
 --- a/drivers/accel/qda/qda_fastrpc.c
 +++ b/drivers/accel/qda/qda_fastrpc.c
-@@ -487,6 +487,36 @@ int fastrpc_internal_invoke_unpack(struct fastrpc_invoke_context *ctx,
+@@ -487,6 +487,40 @@ int fastrpc_internal_invoke_unpack(struct fastrpc_invoke_context *ctx,
  	return err;
  }
  
-+static void setup_create_process_args(struct fastrpc_invoke_args *args,
-+				      struct fastrpc_create_process_inbuf *inbuf,
-+				      struct qda_init_create *init,
-+				      struct fastrpc_phy_page *pages)
++static int  fastrpc_return_result_mem_map(struct fastrpc_invoke_context *ctx, char __user *argp)
 +{
-+	args[0].ptr = (u64)(uintptr_t)inbuf;
-+	args[0].length = sizeof(*inbuf);
-+	args[0].fd = -1;
++	struct qda_mem_map margs;
++	struct fastrpc_map_rsp_msg *rsp_msg;
++	int err;
 +
-+	args[1].ptr = (u64)(uintptr_t)current->comm;
-+	args[1].length = inbuf->namelen;
-+	args[1].fd = -1;
++	rsp_msg = ctx->rsp;
 +
-+	args[2].ptr = (u64)init->file;
-+	args[2].length = inbuf->filelen;
-+	args[2].fd = init->filefd;
++	err = copy_from_user_or_kernel(&margs, argp, sizeof(margs));
++	if (err)
++		return err;
 +
-+	args[3].ptr = (u64)(uintptr_t)pages;
-+	args[3].length = 1 * sizeof(*pages);
-+	args[3].fd = -1;
++	margs.vaddrout = rsp_msg->vaddrout;
 +
-+	args[4].ptr = (u64)(uintptr_t)&inbuf->attrs;
-+	args[4].length = sizeof(inbuf->attrs);
-+	args[4].fd = -1;
++	err = copy_to_user_or_kernel(argp, &margs, sizeof(margs));
++	return err;
++}
 +
-+	args[5].ptr = (u64)(uintptr_t)&inbuf->siglen;
-+	args[5].length = sizeof(inbuf->siglen);
-+	args[5].fd = -1;
++int fastrpc_return_result(struct fastrpc_invoke_context *ctx, char __user *argp)
++{
++	int err = 0;
++
++	switch (ctx->type) {
++	case FASTRPC_RMID_INIT_MMAP:
++	case FASTRPC_RMID_INIT_MEM_MAP:
++		err = fastrpc_return_result_mem_map(ctx, argp);
++		break;
++	default:
++		break;
++	}
++
++	return err;
++}
++
+ static void setup_create_process_args(struct fastrpc_invoke_args *args,
+ 				      struct fastrpc_create_process_inbuf *inbuf,
+ 				      struct qda_init_create *init,
+@@ -517,6 +551,29 @@ static void setup_create_process_args(struct fastrpc_invoke_args *args,
+ 	args[5].fd = -1;
+ }
+ 
++static int setup_mmap_pages(struct drm_file *file_priv, int fd, struct fastrpc_phy_page *pages)
++{
++	struct drm_gem_object *gem_obj;
++	struct qda_gem_obj *qda_gem_obj;
++	int err;
++
++	if (fd <= 0) {
++		pages->addr = 0;
++		pages->size = 0;
++		return 0;
++	}
++
++	err = get_gem_obj_from_handle(file_priv, fd, &gem_obj);
++	if (err)
++		return err;
++
++	qda_gem_obj = to_qda_gem_obj(gem_obj);
++	setup_pages_from_gem_obj(qda_gem_obj, pages);
++
++	drm_gem_object_put(gem_obj);
++	return 0;
 +}
 +
  static int fastrpc_prepare_args_init_attach(struct fastrpc_invoke_context *ctx)
  {
  	struct fastrpc_invoke_args *args;
-@@ -554,6 +584,80 @@ static int fastrpc_prepare_args_invoke(struct fastrpc_invoke_context *ctx, char
- 	return 0;
+@@ -658,6 +715,160 @@ static int fastrpc_prepare_args_init_create(struct fastrpc_invoke_context *ctx,
+ 	return err;
  }
  
-+static int fastrpc_prepare_args_init_create(struct fastrpc_invoke_context *ctx, char __user *argp)
++static int fastrpc_prepare_args_map(struct fastrpc_invoke_context *ctx, char __user *argp)
 +{
-+	struct qda_init_create init;
++	struct qda_mem_map margs;
 +	struct fastrpc_invoke_args *args;
-+	struct fastrpc_create_process_inbuf *inbuf;
++	void *req, *rsp;
++	struct fastrpc_map_req_msg *req_msg;
++	struct fastrpc_map_rsp_msg *rsp_msg;
 +	int err;
-+	u32 sc;
-+	struct drm_gem_object *file_gem_obj = NULL;
 +
-+	args = kcalloc(FASTRPC_CREATE_PROCESS_NARGS, sizeof(*args), GFP_KERNEL);
++	err = copy_from_user_or_kernel(&margs, argp, sizeof(margs));
++	if (err)
++		return err;
++
++	args = kzalloc_objs(*args, 3, GFP_KERNEL);
 +	if (!args)
 +		return -ENOMEM;
 +
-+	ctx->input_pages = kcalloc(1, sizeof(*ctx->input_pages), GFP_KERNEL);
-+	if (!ctx->input_pages) {
++	req = kzalloc_obj(*req_msg, GFP_KERNEL);
++	if (!req) {
 +		err = -ENOMEM;
 +		goto err_free_args;
 +	}
++	req_msg = (struct fastrpc_map_req_msg *)req;
 +
-+	ctx->inbuf =  kcalloc(1, sizeof(*inbuf), GFP_KERNEL);
-+	if (!ctx->inbuf) {
++	rsp = kzalloc_obj(*rsp_msg, GFP_KERNEL);
++	if (!rsp) {
 +		err = -ENOMEM;
-+		goto err_free_input_pages;
++		goto err_free_req;
 +	}
-+	inbuf = ctx->inbuf;
++	rsp_msg = (struct fastrpc_map_rsp_msg *)rsp;
 +
-+	err = copy_from_user_or_kernel(&init, argp, sizeof(init));
++	ctx->input_pages = kzalloc_objs(*ctx->input_pages, 1, GFP_KERNEL);
++	if (!ctx->input_pages) {
++		err = -ENOMEM;
++		goto err_free_rsp;
++	}
++
++	req_msg->client_id = ctx->client_id;
++	req_msg->flags = margs.flags;
++	req_msg->vaddr = margs.vaddrin;
++	req_msg->num = sizeof(*ctx->input_pages);
++
++	args[0].ptr = (u64)(uintptr_t)req;
++	args[0].length = sizeof(*req_msg);
++
++	err = setup_mmap_pages(ctx->file_priv, margs.fd, ctx->input_pages);
 +	if (err)
-+		goto err_free_inbuf;
++		goto err_free_input_pages;
 +
-+	if (init.filelen > INIT_FILELEN_MAX) {
-+		err = -EINVAL;
-+		goto err_free_inbuf;
-+	}
-+	inbuf->client_id = ctx->client_id;
-+	inbuf->namelen = strlen(current->comm) + 1;
-+	inbuf->filelen = init.filelen;
-+	inbuf->pageslen = 1;
-+	inbuf->attrs = init.attrs;
-+	inbuf->siglen = init.siglen;
++	args[1].ptr = (u64)(uintptr_t)ctx->input_pages;
++	args[1].length = sizeof(*ctx->input_pages);
 +
-+	setup_pages_from_gem_obj(ctx->init_mem_gem_obj, &ctx->input_pages[0]);
++	args[2].ptr = (u64)(uintptr_t)rsp;
++	args[2].length = sizeof(*rsp_msg);
 +
-+	if (init.filelen && init.filefd) {
-+		err = get_gem_obj_from_handle(ctx->file_priv, init.filefd, &file_gem_obj);
-+		if (err) {
-+			err = -EINVAL;
-+			goto err_free_inbuf;
-+		}
-+		drm_gem_object_put(file_gem_obj);
-+	}
-+
-+	setup_create_process_args(args, inbuf, &init, ctx->input_pages);
-+
-+	sc = FASTRPC_SCALARS(FASTRPC_RMID_INIT_CREATE, 4, 0);
-+	if (init.attrs)
-+		sc = FASTRPC_SCALARS(FASTRPC_RMID_INIT_CREATE_ATTR, 4, 0);
-+	ctx->sc = sc;
++	ctx->sc = FASTRPC_SCALARS(FASTRPC_RMID_INIT_MMAP, 2, 1);
 +	ctx->args = args;
++	ctx->req = req;
++	ctx->rsp = rsp;
 +	ctx->handle = FASTRPC_INIT_HANDLE;
 +
 +	return 0;
 +
-+err_free_inbuf:
-+	kfree(ctx->inbuf);
-+	ctx->inbuf = NULL;
 +err_free_input_pages:
 +	kfree(ctx->input_pages);
 +	ctx->input_pages = NULL;
++err_free_rsp:
++	kfree(rsp);
++err_free_req:
++	kfree(req);
 +err_free_args:
 +	kfree(args);
 +	return err;
 +}
 +
++static int fastrpc_prepare_args_mem_map_attr(struct fastrpc_invoke_context *ctx, char __user *argp)
++{
++	struct qda_mem_map margs;
++	struct fastrpc_invoke_args *args;
++	void *req, *rsp;
++	struct fastrpc_mem_map_req_msg *req_msg;
++	struct fastrpc_map_rsp_msg *rsp_msg;
++	int err;
++
++	err = copy_from_user_or_kernel(&margs, argp, sizeof(margs));
++	if (err)
++		return err;
++
++	args = kzalloc_objs(*args, 4, GFP_KERNEL);
++	if (!args)
++		return -ENOMEM;
++
++	req = kzalloc_obj(*req_msg, GFP_KERNEL);
++	if (!req) {
++		kfree(args);
++		return -ENOMEM;
++	}
++	req_msg = (struct fastrpc_mem_map_req_msg *)req;
++
++	rsp = kzalloc_obj(*rsp_msg, GFP_KERNEL);
++	if (!rsp) {
++		kfree(args);
++		kfree(req);
++		return -ENOMEM;
++	}
++	rsp_msg = (struct fastrpc_map_rsp_msg *)rsp;
++
++	ctx->input_pages = kzalloc_objs(*ctx->input_pages, 1, GFP_KERNEL);
++	if (!ctx->input_pages) {
++		kfree(args);
++		kfree(req);
++		kfree(rsp);
++		return -ENOMEM;
++	}
++
++	req_msg->client_id = ctx->client_id;
++	req_msg->fd = margs.fd;
++	req_msg->offset = margs.offset;
++	req_msg->flags = margs.flags;
++	req_msg->vaddrin = margs.vaddrin;
++	req_msg->num = sizeof(*ctx->input_pages);
++	req_msg->data_len = 0;
++
++	args[0].ptr = (u64)(uintptr_t)req;
++	args[0].length = sizeof(*req_msg);
++
++	err = setup_mmap_pages(ctx->file_priv, margs.fd, ctx->input_pages);
++	if (err) {
++		kfree(args);
++		kfree(req);
++		kfree(rsp);
++		kfree(ctx->input_pages);
++		ctx->input_pages = NULL;
++		return err;
++	}
++
++	args[1].ptr = (u64)(uintptr_t)ctx->input_pages;
++	args[1].length = sizeof(*ctx->input_pages);
++
++	args[2].ptr = (u64)(uintptr_t)ctx->input_pages;
++	args[2].length = 0;
++
++	args[3].ptr = (u64)(uintptr_t)rsp;
++	args[3].length = sizeof(*rsp_msg);
++
++	ctx->sc = FASTRPC_SCALARS(FASTRPC_RMID_INIT_MEM_MAP, 3, 1);
++	ctx->args = args;
++	ctx->req = req;
++	ctx->rsp = rsp;
++	ctx->handle = FASTRPC_INIT_HANDLE;
++
++	return 0;
++}
++
  int fastrpc_prepare_args(struct fastrpc_invoke_context *ctx, char __user *argp)
  {
  	int err;
-@@ -569,6 +673,11 @@ int fastrpc_prepare_args(struct fastrpc_invoke_context *ctx, char __user *argp)
- 	case FASTRPC_RMID_INVOKE_DYNAMIC:
- 		err = fastrpc_prepare_args_invoke(ctx, argp);
+@@ -678,6 +889,12 @@ int fastrpc_prepare_args(struct fastrpc_invoke_context *ctx, char __user *argp)
+ 		ctx->pd = USER_PD;
+ 		err = fastrpc_prepare_args_init_create(ctx, argp);
  		break;
-+	case FASTRPC_RMID_INIT_CREATE:
-+	case FASTRPC_RMID_INIT_CREATE_ATTR:
-+		ctx->pd = USER_PD;
-+		err = fastrpc_prepare_args_init_create(ctx, argp);
++	case FASTRPC_RMID_INIT_MMAP:
++		err = fastrpc_prepare_args_map(ctx, argp);
++		break;
++	case FASTRPC_RMID_INIT_MEM_MAP:
++		err = fastrpc_prepare_args_mem_map_attr(ctx, argp);
 +		break;
  	default:
  		return -EINVAL;
  	}
 diff --git a/drivers/accel/qda/qda_fastrpc.h b/drivers/accel/qda/qda_fastrpc.h
-index bcadf9437a36..a8deb7efec86 100644
+index a8deb7efec86..b45ccc77d9d1 100644
 --- a/drivers/accel/qda/qda_fastrpc.h
 +++ b/drivers/accel/qda/qda_fastrpc.h
-@@ -122,6 +122,27 @@ struct fastrpc_invoke_buf {
- 	u32 pgidx;
- };
- 
-+/**
-+ * struct fastrpc_create_process_inbuf - Input buffer for process creation
-+ *
-+ * This structure defines the input buffer format for creating a new
-+ * process on the remote DSP.
-+ */
-+struct fastrpc_create_process_inbuf {
-+	/* Client identifier for the session */
-+	int client_id;
-+	/* Length of the process name string */
-+	u32 namelen;
-+	/* Length of the shell file */
-+	u32 filelen;
-+	/* Length of the pages list */
-+	u32 pageslen;
-+	/* Process attributes flags */
-+	u32 attrs;
-+	/* Length of the signature data */
-+	u32 siglen;
-+};
-+
- /**
-  * struct qda_msg - Message structure for FastRPC communication
-  *
-@@ -226,6 +247,8 @@ struct fastrpc_invoke_context {
- 	struct qda_gem_obj *msg_gem_obj;
- 	/* DRM file private data */
- 	struct drm_file *file_priv;
-+	/* GEM object for PD initialization memory */
-+	struct qda_gem_obj *init_mem_gem_obj;
- 	/* Pointer to request buffer */
- 	void *req;
- 	/* Pointer to response buffer */
-@@ -237,6 +260,8 @@ struct fastrpc_invoke_context {
+@@ -260,8 +260,10 @@ struct fastrpc_invoke_context {
  /* Remote Method ID table - identifies initialization and control operations */
  #define FASTRPC_RMID_INIT_ATTACH	0	/* Attach to DSP session */
  #define FASTRPC_RMID_INIT_RELEASE	1	/* Release DSP session */
-+#define FASTRPC_RMID_INIT_CREATE	6	/* Create DSP process */
-+#define FASTRPC_RMID_INIT_CREATE_ATTR	7	/* Create DSP process with attributes */
++#define FASTRPC_RMID_INIT_MMAP		4	/* Map memory region to DSP */
+ #define FASTRPC_RMID_INIT_CREATE	6	/* Create DSP process */
+ #define FASTRPC_RMID_INIT_CREATE_ATTR	7	/* Create DSP process with attributes */
++#define FASTRPC_RMID_INIT_MEM_MAP	10	/* Map DMA buffer with attributes to DSP */
  #define FASTRPC_RMID_INVOKE_DYNAMIC	0xFFFFFFFF	/* Dynamic method invocation */
  
  /* Common handle for initialization operations */
-@@ -244,6 +269,12 @@ struct fastrpc_invoke_context {
+@@ -276,6 +278,59 @@ struct fastrpc_invoke_context {
+ /* Maximum initialization file size (4MB) */
+ #define INIT_FILELEN_MAX		(4 * 1024 * 1024)
  
- /* Protection Domain(PD) ids */
- #define ROOT_PD		(0)
-+#define USER_PD		(1)
++/* Message structures for internal FastRPC calls */
 +
-+/* Number of arguments for process creation */
-+#define FASTRPC_CREATE_PROCESS_NARGS	6
-+/* Maximum initialization file size (4MB) */
-+#define INIT_FILELEN_MAX		(4 * 1024 * 1024)
- 
++/**
++ * struct fastrpc_mem_map_req_msg - Memory map request message with attributes
++ *
++ * This message structure is sent to the DSP to request mapping
++ * of a DMA buffer with custom attributes (ATTR request).
++ */
++struct fastrpc_mem_map_req_msg {
++	/* Client identifier for the session */
++	s32 client_id;
++	/* Handle of the buffer */
++	s32 fd;
++	/* Offset within the buffer */
++	s32 offset;
++	/* Mapping flags */
++	u32 flags;
++	/* Virtual address hint for mapping */
++	u64 vaddrin;
++	/* Pages in the mapping */
++	s32 num;
++	/* Length of additional data */
++	s32 data_len;
++};
++
++/**
++ * struct fastrpc_map_req_msg - Legacy memory map request message
++ *
++ * This message structure is sent to the DSP to request mapping
++ * of a DMA buffer into the DSP's virtual address space.
++ */
++struct fastrpc_map_req_msg {
++	/* Client identifier for the session */
++	s32 client_id;
++	/* Mapping flags */
++	u32 flags;
++	/* Virtual address hint for mapping */
++	u64 vaddr;
++	/* Pages in the mapping */
++	s32 num;
++};
++
++/**
++ * struct fastrpc_map_rsp_msg - Memory map response message
++ *
++ * This message structure is returned by the DSP after successfully
++ * mapping a buffer, providing the virtual address for future access.
++ */
++struct fastrpc_map_rsp_msg {
++	/* DSP virtual address assigned to the mapped buffer */
++	u64 vaddrout;
++};
++
  /**
   * fastrpc_context_free - Free an invocation context
-diff --git a/drivers/accel/qda/qda_ioctl.c b/drivers/accel/qda/qda_ioctl.c
-index e90aceabd30d..477112ad6664 100644
---- a/drivers/accel/qda/qda_ioctl.c
-+++ b/drivers/accel/qda/qda_ioctl.c
-@@ -122,7 +122,7 @@ static int fastrpc_invoke(int type, struct drm_device *dev, void *data,
- 	struct fastrpc_invoke_context *ctx;
- 	struct drm_gem_object *gem_obj;
- 	int err;
--	size_t hdr_size;
-+	size_t hdr_size, initmem_size = 4 * 1024 * 1024;
- 
- 	err = qda_validate_and_get_context(dev, file_priv, &qdev, &qda_user);
- 	if (err)
-@@ -142,6 +142,22 @@ static int fastrpc_invoke(int type, struct drm_device *dev, void *data,
- 	ctx->file_priv = file_priv;
- 	ctx->client_id = qda_user->client_id;
- 
-+	if (type == FASTRPC_RMID_INIT_CREATE) {
-+		struct drm_gem_object *gem_obj;
-+
-+		gem_obj = qda_gem_create_object(qdev->drm_dev, qdev->drm_priv->iommu_mgr,
-+						initmem_size, file_priv);
-+		if (IS_ERR(gem_obj)) {
-+			err = PTR_ERR(gem_obj);
-+			goto err_context_free;
-+		}
-+
-+		ctx->init_mem_gem_obj = to_qda_gem_obj(gem_obj);
-+		qda_user->init_mem_gem_obj = ctx->init_mem_gem_obj;
-+	} else if (type == FASTRPC_RMID_INIT_RELEASE) {
-+		ctx->init_mem_gem_obj = qda_user->init_mem_gem_obj;
-+	}
-+
- 	err = fastrpc_prepare_args(ctx, (char __user *)data);
- 	if (err)
- 		goto err_context_free;
-@@ -177,6 +193,11 @@ static int fastrpc_invoke(int type, struct drm_device *dev, void *data,
- 		goto err_context_free;
- 
- err_context_free:
-+	if (type == FASTRPC_RMID_INIT_RELEASE && qda_user->init_mem_gem_obj) {
-+		drm_gem_object_put(&qda_user->init_mem_gem_obj->base);
-+		qda_user->init_mem_gem_obj = NULL;
-+	}
-+
- 	fastrpc_context_put_id(ctx, qdev);
- 	kref_put(&ctx->refcount, fastrpc_context_free);
- 
-@@ -197,3 +218,8 @@ int qda_ioctl_invoke(struct drm_device *dev, void *data, struct drm_file *file_p
- {
- 	return fastrpc_invoke(FASTRPC_RMID_INVOKE_DYNAMIC, dev, data, file_priv);
- }
-+
-+int qda_ioctl_create(struct drm_device *dev, void *data, struct drm_file *file_priv)
-+{
-+	return fastrpc_invoke(FASTRPC_RMID_INIT_CREATE, dev, data, file_priv);
-+}
-diff --git a/drivers/accel/qda/qda_ioctl.h b/drivers/accel/qda/qda_ioctl.h
-index e186c5183171..181ed50b19dc 100644
---- a/drivers/accel/qda/qda_ioctl.h
-+++ b/drivers/accel/qda/qda_ioctl.h
-@@ -76,4 +76,17 @@ int fastrpc_release_current_dsp_process(struct qda_dev *qdev, struct drm_file *f
+  * @ref: Reference counter for the context
+@@ -332,4 +387,13 @@ int fastrpc_internal_invoke_pack(struct fastrpc_invoke_context *ctx, struct qda_
   */
- int qda_ioctl_invoke(struct drm_device *dev, void *data, struct drm_file *file_priv);
+ int fastrpc_internal_invoke_unpack(struct fastrpc_invoke_context *ctx, struct qda_msg *msg);
  
 +/**
-+ * qda_ioctl_create - Create a DSP process
++ * fastrpc_return_result - Return invocation result to user-space
++ * @ctx: FastRPC invocation context
++ * @argp: User-space pointer to return result
++ *
++ * Returns: 0 on success, negative error code on failure
++ */
++int fastrpc_return_result(struct fastrpc_invoke_context *ctx, char __user *argp);
++
+ #endif /* __QDA_FASTRPC_H__ */
+diff --git a/drivers/accel/qda/qda_ioctl.c b/drivers/accel/qda/qda_ioctl.c
+index 477112ad6664..4eb932e2c9ae 100644
+--- a/drivers/accel/qda/qda_ioctl.c
++++ b/drivers/accel/qda/qda_ioctl.c
+@@ -192,6 +192,10 @@ static int fastrpc_invoke(int type, struct drm_device *dev, void *data,
+ 	if (err)
+ 		goto err_context_free;
+ 
++	err = fastrpc_return_result(ctx, (char __user *)data);
++	if (err)
++		goto err_context_free;
++
+ err_context_free:
+ 	if (type == FASTRPC_RMID_INIT_RELEASE && qda_user->init_mem_gem_obj) {
+ 		drm_gem_object_put(&qda_user->init_mem_gem_obj->base);
+@@ -223,3 +227,23 @@ int qda_ioctl_create(struct drm_device *dev, void *data, struct drm_file *file_p
+ {
+ 	return fastrpc_invoke(FASTRPC_RMID_INIT_CREATE, dev, data, file_priv);
+ }
++
++int qda_ioctl_mmap(struct drm_device *dev, void *data, struct drm_file *file_priv)
++{
++	struct qda_mem_map *map_req;
++
++	if (!data)
++		return -EINVAL;
++
++	map_req = (struct qda_mem_map *)data;
++
++	switch (map_req->request) {
++	case QDA_MAP_REQUEST_LEGACY:
++		return fastrpc_invoke(FASTRPC_RMID_INIT_MMAP, dev, data, file_priv);
++	case QDA_MAP_REQUEST_ATTR:
++		return fastrpc_invoke(FASTRPC_RMID_INIT_MEM_MAP, dev, data, file_priv);
++	default:
++		qda_err(NULL, "Invalid map request type: %u\n", map_req->request);
++		return -EINVAL;
++	}
++}
+diff --git a/drivers/accel/qda/qda_ioctl.h b/drivers/accel/qda/qda_ioctl.h
+index 181ed50b19dc..d402d6715b41 100644
+--- a/drivers/accel/qda/qda_ioctl.h
++++ b/drivers/accel/qda/qda_ioctl.h
+@@ -89,4 +89,17 @@ int qda_ioctl_invoke(struct drm_device *dev, void *data, struct drm_file *file_p
+  */
+ int qda_ioctl_create(struct drm_device *dev, void *data, struct drm_file *file_priv);
+ 
++/**
++ * qda_ioctl_mmap - Map memory to DSP address space
 + * @dev: DRM device structure
-+ * @data: User-space data containing process creation parameters
++ * @data: User-space data containing memory mapping parameters
 + * @file_priv: DRM file private data
 + *
-+ * This IOCTL handler creates a new process on the DSP, loading the
-+ * specified executable and initializing its runtime environment.
++ * This IOCTL handler maps a DMA buffer into the DSP's virtual address
++ * space, enabling the DSP to access the buffer during remote calls.
 + *
 + * Return: 0 on success, negative error code on failure
 + */
-+int qda_ioctl_create(struct drm_device *dev, void *data, struct drm_file *file_priv);
++int qda_ioctl_mmap(struct drm_device *dev, void *data, struct drm_file *file_priv);
 +
  #endif /* _QDA_IOCTL_H */
 diff --git a/include/uapi/drm/qda_accel.h b/include/uapi/drm/qda_accel.h
-index 01072a9d0a91..2b7f500db52c 100644
+index 2b7f500db52c..9151ba7adfaf 100644
 --- a/include/uapi/drm/qda_accel.h
 +++ b/include/uapi/drm/qda_accel.h
-@@ -22,7 +22,8 @@ extern "C" {
- #define DRM_QDA_GEM_CREATE		0x01
+@@ -23,7 +23,8 @@ extern "C" {
  #define DRM_QDA_GEM_MMAP_OFFSET	0x02
  #define DRM_QDA_INIT_ATTACH		0x03
--/* Indexes 0x04 to 0x06 are reserved for other requests */
-+#define DRM_QDA_INIT_CREATE		0x04
-+/* Indexes 0x05-0x06 are reserved for other requests */
+ #define DRM_QDA_INIT_CREATE		0x04
+-/* Indexes 0x05-0x06 are reserved for other requests */
++#define DRM_QDA_MAP			0x05
++/* 0x06 is reserved for other request */
  #define DRM_QDA_INVOKE			0x07
  
  /*
-@@ -38,6 +39,8 @@ extern "C" {
- #define DRM_IOCTL_QDA_GEM_MMAP_OFFSET	DRM_IOWR(DRM_COMMAND_BASE + DRM_QDA_GEM_MMAP_OFFSET, \
- 						 struct drm_qda_gem_mmap_offset)
+@@ -41,9 +42,14 @@ extern "C" {
  #define DRM_IOCTL_QDA_INIT_ATTACH	DRM_IO(DRM_COMMAND_BASE + DRM_QDA_INIT_ATTACH)
-+#define DRM_IOCTL_QDA_INIT_CREATE	DRM_IOWR(DRM_COMMAND_BASE + DRM_QDA_INIT_CREATE, \
-+						 struct qda_init_create)
+ #define DRM_IOCTL_QDA_INIT_CREATE	DRM_IOWR(DRM_COMMAND_BASE + DRM_QDA_INIT_CREATE, \
+ 						 struct qda_init_create)
++#define DRM_IOCTL_QDA_MAP		DRM_IOWR(DRM_COMMAND_BASE + DRM_QDA_MAP, struct qda_mem_map)
  #define DRM_IOCTL_QDA_INVOKE		DRM_IOWR(DRM_COMMAND_BASE + DRM_QDA_INVOKE, \
  						 struct qda_invoke_args)
  
-@@ -116,6 +119,30 @@ struct qda_invoke_args {
- 	__u64 args;
++/* Request type definitions for qda_mem_map */
++#define QDA_MAP_REQUEST_LEGACY    1  /* Legacy MMAP operation */
++#define QDA_MAP_REQUEST_ATTR      2  /* Handle-based MEM_MAP operation with attributes */
++
+ /**
+  * struct drm_qda_query - Device information query structure
+  * @dsp_name: Name of DSP (e.g., "adsp", "cdsp", "cdsp1", "gdsp0", "gdsp1")
+@@ -143,6 +149,42 @@ struct qda_init_create {
+ 	__u64 file;
  };
  
 +/**
-+ * struct qda_init_create - Accelerator process initialization parameters
-+ * @filelen: Length of the ELF file in bytes
-+ * @filefd: File descriptor containing the ELF file
-+ * @attrs: Process attributes flags
-+ * @siglen: Length of signature data in bytes
-+ * @file: Pointer to ELF file data if not using filefd
++ * struct qda_mem_map - Memory mapping request structure
++ * @request: Request type (QDA_MAP_REQUEST_LEGACY or QDA_MAP_REQUEST_ATTR)
++ * @flags: Mapping flags for DSP (cache attributes, permissions)
++ * @fd: Handle of the buffer to map
++ * @attrs: Mapping attributes (used for ATTR request)
++ * @offset: Offset within buffer (used for ATTR request)
++ * @reserved: Reserved for alignment/future use
++ * @vaddrin: Optional virtual address hint for mapping
++ * @size: Size of the memory region to map in bytes
++ * @vaddrout: Output DSP virtual address after successful mapping
 + *
-+ * This structure is used with DRM_IOCTL_QDA_INIT_CREATE to initialize
-+ * a new process on the accelerator. The process code is provided either
-+ * via a file descriptor (filefd, typically a GEM object) or a direct
-+ * pointer (file). Set file to 0 if using filefd.
++ * This structure is used to request mapping of a DMA buffer into the
++ * DSP's virtual address space. The DSP will map the buffer according
++ * to the specified flags and return the virtual address in vaddrout.
 + *
-+ * The attrs field contains bit flags for debug mode, privileged execution,
-+ * and other process attributes.
++ * For QDA_MAP_REQUEST_LEGACY (value 1):
++ *   - Uses fields: fd, flags, vaddrin, size, vaddrout
++ *   - Legacy MMAP operation for backward compatibility
++ *
++ * For QDA_MAP_REQUEST_ATTR (value 2):
++ *   - Uses all fields including attrs and offset
++ *   - FD-based MEM_MAP operation with custom SMMU attributes
 + */
-+struct qda_init_create {
-+	__u32 filelen;
-+	__s32 filefd;
++struct qda_mem_map {
++	__u32 request;
++	__u32 flags;
++	__s32 fd;
 +	__u32 attrs;
-+	__u32 siglen;
-+	__u64 file;
++	__u32 offset;
++	__u32 reserved;
++	__u64 vaddrin;
++	__u64 size;
++	__u64 vaddrout;
 +};
 +
  #if defined(__cplusplus)
