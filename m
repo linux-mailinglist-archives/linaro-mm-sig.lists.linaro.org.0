@@ -2,108 +2,108 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +KVvMwEU4WnoogAAu9opvQ
+	id eGkREgoU4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:53:21 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:53:30 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9443241214D
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:53:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DF575412155
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:53:29 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5E80C44E6B
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:53:20 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 04D4344EC3
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:53:29 +0000 (UTC)
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	by lists.linaro.org (Postfix) with ESMTPS id 981353F803
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Feb 2026 22:45:03 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id E1AEF3F827
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Feb 2026 22:49:15 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=qualcomm.com header.s=qcppdkim1 header.b=RxwZI8N7;
-	dkim=pass header.d=oss.qualcomm.com header.s=google header.b=AHd627oS;
+	dkim=pass header.d=qualcomm.com header.s=qcppdkim1 header.b=jgYaXKe1;
+	dkim=pass header.d=oss.qualcomm.com header.s=google header.b=gO62LUoZ;
 	spf=pass (lists.linaro.org: domain of dmitry.baryshkov@oss.qualcomm.com designates 205.220.180.131 as permitted sender) smtp.mailfrom=dmitry.baryshkov@oss.qualcomm.com;
 	dmarc=pass (policy=reject) header.from=qualcomm.com
 Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 61NIeLCJ3698130
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Feb 2026 22:45:03 GMT
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 61NIkRnq3698602
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Feb 2026 22:49:15 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=4uwG+VSOUPiQWFQC4n/buq2e
-	c1Jxta6TBA66E35NxDU=; b=RxwZI8N7h8IyqIggGJxquVH3UCDbV1q5LiSJ+ilt
-	DdciWWZZ87rygoZLFTX7IFnxwhjw3a2NekubPTReBbZdvT5/4SSjyEZb+WDNYh8A
-	WQ8gdZL650EWkFAtysqxYKeuW8qApHFcT2N74xuR4TKihkr/XGpCrAqdNYDAxs/1
-	NT49p75lSokhEFFtzG1AVZFQmoeq3548hEiK7Iw7IhrArm4kDLXTLXWIURFHHJWi
-	f4G+rooV2wwz+HpS0+nJec8gygbF88Xa8UpYvzXt/UceJ+BeoiwcqyxKG4b6W0ho
-	FxvSAPylmmsj5J5FZAGJVokXdrAbR8YEUY10TUTO78Pghg==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4cgn81a4sh-1
+	:references:subject:to; s=qcppdkim1; bh=IxyS7IiUwnZk4M8j2FTACcTO
+	tmYuJKogn0322cRLchI=; b=jgYaXKe10ei+VDIUlMgJn/SRuxKYMLLJ1Di2YX+t
+	9A6aHUl10WOftpULKAemW2iVpnmTkQ1cfUZ2PcmezxdBD3LZuGLnSHIaRYWyhiPg
+	oAZmP2884fWE8AuFgScfFKLzKWYuD41FtJonDi7eYJ7Z4BJZUjLotVeI5Ng9epzt
+	PuX5ZsT0W8oBtSqxKwhgnnoGH3hUicFk93ZVMsBSFwHqi+apPEXbPzSBiCP+vlKu
+	PME6V/b7h2MvEKFuUCTcuf7bml1Qh3vcynTvhKVssxhVjGTKXY/fbT1MfjqfcBtI
+	xSm/NCR3THrDIi83cfrr3/2qPzc+nwJEElJwRWmTAWWQEQ==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4cgn81a526-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Feb 2026 22:45:03 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-8c70ab7f67fso3468723085a.3
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Feb 2026 14:45:02 -0800 (PST)
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Feb 2026 22:49:15 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-8c71304beb4so3386539385a.3
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Feb 2026 14:49:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1771886702; x=1772491502; darn=lists.linaro.org;
+        d=oss.qualcomm.com; s=google; t=1771886955; x=1772491755; darn=lists.linaro.org;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=4uwG+VSOUPiQWFQC4n/buq2ec1Jxta6TBA66E35NxDU=;
-        b=AHd627oS8N2PZWCCag7Wb31JDxObJmFv87BWxi4A6vGGC+g4kmyUdein2bkJPuN+Jv
-         6P/vkFvnPCLs7qk261S+foT38u6uSK2C4681S7ugrVKHo7YSrm7evYBchLQHnYvH9/rL
-         D+hB1Svz6EDoVmokhzQHqK+bwWLaeFdl3HMwGpAdGsc8QGCn4JBfQqOIRXXpeasLJLgd
-         eTu5Avkh3jBxtOoZ4RerLN7AgaqLtoTzN8rdSbltqlGKAYs1XHBK3EyMsaN1KKUJxCft
-         K8SVHFBaVtcgm/I0HLGucAhcnxEwRCz3xOA2N9Rho8+H0Ny/FB+hhXmshU6DgcLiSGPn
-         ODHw==
+        bh=IxyS7IiUwnZk4M8j2FTACcTOtmYuJKogn0322cRLchI=;
+        b=gO62LUoZjAAD70J30pwGff31cM9Mh6Y2i5UEHOcs7FsdZzrQax01jbpv/pUzJowUL9
+         Q/048la+htIPNqupRoOShj01GWLLq1AqTS2xUY5ym/hWMm9SMk1mQvMO6vNfvPcp75NW
+         mZCuL0UdXMx6WxjXCRqvt/vCZi/BXZ+R9d88sRB+Xkr9yNbJ1U9t5qu3j+u1HfEdU6nB
+         ctVqgOPbzhebV5s+NSz+xm0p7+PB91iI5Oj/emsNw3lGJRc2ZJBc5ohHhr4Hk1gBBO7N
+         l5fODPV+J5/1M8/3F6VHuLyC+TfSiQyO5Xh/MMaAfS4Z5hxTbCseVvY4m2+0c1Hsmy4M
+         EVag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771886702; x=1772491502;
+        d=1e100.net; s=20230601; t=1771886955; x=1772491755;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=4uwG+VSOUPiQWFQC4n/buq2ec1Jxta6TBA66E35NxDU=;
-        b=ZfuwtCfMSFvmird16PJuIsesK7WQGscCh+Wu03rRQjTilsCOzmM5e0krpo+vxeSIwn
-         sQUbbOZWPxFdHASouKZi04VKg4jQ0zsAnu/FLkG0NLSjj998oyN/ilYQzlM76OMh7ShJ
-         UxNMWAnssn67deoGU47qsfEF1M3FLlhTHWpYVfENnliIzg0zNa7kERaQOks7uSnPKfHy
-         hV9XJbwoc0bs2OOg8yYnENwd7cKNbNZAGdB4G7LJ5QAnPvQS3hljksIFZLXrGg3MmNGF
-         YPETIIqkT8woEj4SQdE9wX2/BQ6Ph9zOXefiTWABIwz+fj1cioM/bH+zGpZ2dYPHGrIA
-         si6A==
-X-Forwarded-Encrypted: i=1; AJvYcCUmN817NX6XRbdgnEh2LsZKkLJDotVxysopdeCdicpWlEcXetFiuhSvzgJuPokD36DtYx0n47KlSSiEjNyR@lists.linaro.org
-X-Gm-Message-State: AOJu0YzuVARRks38+r6qutA2C4HfB4pc+sb77u+cmH1vc7EQ2nbiPr2f
-	9vDexkNII+ai255/8Q57G+xh2k7kd4hsX2EI9rhYcP8IDiMJ10IOuYHErYBH0EGX4sypntkoUlQ
-	ARpug7Ner1+6sbLOLrmHMgppX1CNP5I78AYj5qbihHT7KTpoOlZIjnYKTofuzX6dbSxnkZg==
-X-Gm-Gg: AZuq6aIuDs2OVHRE6D9pRzUinZ8/MWly1mlB83/LV0msMasAbkDCuPpWOpbSM/n2CVI
-	azGO46t22dnCcV4C0Wr/OYJca3w7QpSBTVY9dtKCZEv96TLkj44r4j0PYhMeUyDTEirO3/cpWtv
-	vZlDcVImZ5ROqdrZ9qtRAoMTCddnWwZ3e+ePUne9uKl2q7wPzqij72cp7KtojRo3ytQXDtOEG/8
-	xikKEEzZai+AqIOCg/zMXWi8+wJ0CS2CNvK+S26ZzS2ZpGh7A8dVj8i7cQgaZRontnhtB+aNGy7
-	XsRvvCtBQcURSzJ6Gqnrcq/GelJEGXnBFCx3zKoezH3D7YgHDOG7cAm95onnk+z7Ol3c8S7JkwT
-	I7fdXcqpM6HOb2BmbUKARz/Z3/uk4uKw6+97T/+svNX37HHYVKAAzT7Evg27c9TxvBuaeYf/h4A
-	nUVMRNj0PzN2yCo2G5hTy0vblaM63wH+HzImo=
-X-Received: by 2002:a05:620a:4727:b0:8ca:2bab:a0f9 with SMTP id af79cd13be357-8cb8c9dfd2bmr1406786285a.1.1771886702341;
-        Mon, 23 Feb 2026 14:45:02 -0800 (PST)
-X-Received: by 2002:a05:620a:4727:b0:8ca:2bab:a0f9 with SMTP id af79cd13be357-8cb8c9dfd2bmr1406783685a.1.1771886701837;
-        Mon, 23 Feb 2026 14:45:01 -0800 (PST)
+        bh=IxyS7IiUwnZk4M8j2FTACcTOtmYuJKogn0322cRLchI=;
+        b=ReDllvu4guD+ussqtVc29Kqk1+BfdQiAJKXO5yWlCz0SFFpbj+SDQcTtcnaL+9y1kG
+         0gepKlj/VIwr4AigNFFldirjw9WRw0hncP1LOoLU971DZZEjvE0xsVUewhR7Ya84+ooi
+         cCpfF+N5O0srUofhH8x9HF7422covaCahNv/tAR6D1kwXIFlHdccjI+DpJTGfUYFU76m
+         dKB1ruka7iUvEZU9sX+bgHKpJcp6klaA8lFa4GhCwjXF7cAKszLv121S6/rAxiscDGUk
+         Pgsz88eeltp+4ygeAgBw5kTXRlKf3IgQWFXlnZz6ySc2Dtfn26vbJ9EXnAK0slKUDEd1
+         4FFA==
+X-Forwarded-Encrypted: i=1; AJvYcCV/ySvy0qD4T5rYw8pEl6rHveH6xKMF0LhXN0kNrPTM1K0ODzo1fkTJoJLyzWwhTEoiZNWf8zMn88etNz4d@lists.linaro.org
+X-Gm-Message-State: AOJu0YxvPWFj4SwTFmXoba665VeZgGcLiyCNSYp96PR+hT8PcwdHJyr2
+	7VqhjIWuQC7yyU6wLnXwf+VG24+OFOy6koO6Lb5pEzeafqJd4hO+QjM9O7qYLjTnUWB+HQagibn
+	K9PVANrQqGWWQuS9xkh023sFF9ZEDNM9Kpx/XJYvnoQMc3KtMvudJcqK+Z5OnXTEArMlGZg==
+X-Gm-Gg: AZuq6aLL0MViBuKXSxnRloHILVzeF1EhPG8XUrihNasIgmpnyaBknMTTlzI3pOonZR2
+	DKnl3KkUZgWNFiCJ9eD169PkZcjsMQ4/pIIKdirssu6sx6VfUe/qCbnNna9iq1BslzqlKLQWjf0
+	1eiJMX5uk4swHfPzaZwkuva9C0Yhs2J7HBRRT7fRzA3SSjiDL1YclFRUp9F/SrvfNPOonOhJMIx
+	dxV5dldUjwICQk07HCFKmt7Tc6K5yXcdA/HN0PvrNy+LrQbt1lVDCnB+owREXHgXE8cGPOisReM
+	Fly9cgVNWTLOBNF9905a6VYWbz/3ZC21R0W2dfnAD+MZdMp0M2zC8l43EtkAhg9MhpJCr3Rb7TY
+	ZyBG0jBoPgXdfNy/YU7wZQCBv0SjBirW94wAK5Io7vlnCRGfzWCl7fApb5ihR2dCwlzv9Bi9Doa
+	QndPkPLcCY0vRVd8E6J+SoYlrMGUZX/uycWZM=
+X-Received: by 2002:a05:620a:1921:b0:8c7:f62:21c7 with SMTP id af79cd13be357-8cb8c9ebdc6mr1299797385a.20.1771886954686;
+        Mon, 23 Feb 2026 14:49:14 -0800 (PST)
+X-Received: by 2002:a05:620a:1921:b0:8c7:f62:21c7 with SMTP id af79cd13be357-8cb8c9ebdc6mr1299793585a.20.1771886954113;
+        Mon, 23 Feb 2026 14:49:14 -0800 (PST)
 Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5a0eeb3e9a2sm1832057e87.55.2026.02.23.14.44.59
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5a0eeb45c38sm1807487e87.73.2026.02.23.14.49.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 23 Feb 2026 14:45:01 -0800 (PST)
-Date: Tue, 24 Feb 2026 00:44:58 +0200
+        Mon, 23 Feb 2026 14:49:13 -0800 (PST)
+Date: Tue, 24 Feb 2026 00:49:11 +0200
 From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 To: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
-Message-ID: <ox7jnqkjo3frhbgpp63sse7ram72obihe4qlbbn4z22wbw4szr@7pzoeecdvsyg>
+Message-ID: <x3s26yr7oy2dokp4plsp67yndr7o4ps6nuj7i4zjze77ifljux@ap537se6npfg>
 References: <20260224-qda-firstpost-v1-0-fe46a9c1a046@oss.qualcomm.com>
- <20260224-qda-firstpost-v1-4-fe46a9c1a046@oss.qualcomm.com>
+ <20260224-qda-firstpost-v1-5-fe46a9c1a046@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260224-qda-firstpost-v1-4-fe46a9c1a046@oss.qualcomm.com>
-X-Proofpoint-GUID: xWyUMs11Hx4OQIakdOCM2NixhS_SgcEa
-X-Proofpoint-ORIG-GUID: xWyUMs11Hx4OQIakdOCM2NixhS_SgcEa
-X-Authority-Analysis: v=2.4 cv=CbsFJbrl c=1 sm=1 tr=0 ts=699cd86f cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+In-Reply-To: <20260224-qda-firstpost-v1-5-fe46a9c1a046@oss.qualcomm.com>
+X-Proofpoint-GUID: SYLYQ1QqJ43lgk8Dr90UTUiYLudCf7qU
+X-Proofpoint-ORIG-GUID: SYLYQ1QqJ43lgk8Dr90UTUiYLudCf7qU
+X-Authority-Analysis: v=2.4 cv=CbsFJbrl c=1 sm=1 tr=0 ts=699cd96b cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
  a=HzLeVaNsDn8A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
  a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22 a=EUspDBNiAAAA:8
- a=m81VUDHjpZwfiQc3ckkA:9 a=CjuIK1q_8ugA:10 a=IoWCM6iH3mJn3m4BftBB:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjIzMDE5NyBTYWx0ZWRfXxAJJVtbyo23I
- bFxf4Nlya1tpLaowpjd48wmManIP0SVN0SMmS8C3GT8Pi18KunZ5HMq1DYTZSVBS3d9J7WGAvat
- 18KPumjRtNHiujcMpbK34sWa1x9bc0+mujhaLIcLIoEqyEo3DiBDYzYdVzBUHbX7e7u5LmF4Z96
- +YwcqXuR2hp19RCUdb33sAkdH7sN9SKhhNtmqawDiLb15o9mA87Dfu8HunxydBc6WEbd/XT3Me1
- d/PGpJKOk//Wo5lKgsEf6SXMte1h3YC11Ue1KwoKlNHI4/x+53IgjnQJwh2ZEfDylrueVbNxB7R
- gLohlG14EzAgIMdAK5/Yhi8KJS8RyczlQTrfRCdOz3CiMA366iIclbMYv92qYm3CRN2+BjZIv9z
- mXgLoxKt2Pmd1lwHriTuBYfiybjp4VO8SeXV8PN3GZ+h+mEVxg3pzqdFm/ENmiQfN11W5A6/1eu
- O7MI9guIwEjiXRzjuJw==
+ a=Cz5CYKkr5BOHp3dh53AA:9 a=CjuIK1q_8ugA:10 a=bTQJ7kPSJx9SKPbeHEYW:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjIzMDE5OSBTYWx0ZWRfX9zIuHTpPuRYa
+ ucu5BXXWNKTTW3QlXR5iSi2iuA9bcXY4tkMeup71eXKg+70mhNlswjtUI4LgIwphuCoqb0VLyQg
+ o084cczmXg6FRuS/avuGv5ECJmTOW3gSccsCRChq9WOLdeUes3MTUAzxNJxNXh0t5jgV4PSf3ZK
+ oSXlbzwcXLutLvWQxKWLsUDDBNqIjYmHOTFB3WgJq+/dzYTt2PpvpTVX0PCQ/YIfCdni2a/Ko5g
+ X82sJj8N4Zy4WHry7eRDVnFbCfqw3xhYc3kvoC5/bxjhsjwU/RgwMjnbunIvX0RdcznqPJKrQtO
+ wRu0I6S7Mbkr+blpFAV3Mr3CTGe3tktCPJ4iTmgNZOLP0Q6bse6mzKNtghlvCpDVV1kJwUOz61N
+ qRL3w6nXIa8SSxjgRUz2hIj45HJFmYln3e2sOGviVsGSe3DIMbxmgB0tpmM/g5/kW3iGudL1Ics
+ rHRT19JTsZq067nC5bQ==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-02-23_05,2026-02-23_03,2025-10-01_01
@@ -112,20 +112,20 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
  suspectscore=0 phishscore=0 spamscore=0 malwarescore=0 clxscore=1015
  bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
  adjust=0 reason=mlx scancount=1 engine=8.22.0-2602130000
- definitions=main-2602230197
-X-Spamd-Bar: ---
+ definitions=main-2602230199
+X-Spamd-Bar: -----
 X-MailFrom: dmitry.baryshkov@oss.qualcomm.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: SERHRCHBEYLXGKLUOPNRDH3JOXGKRKTI
-X-Message-ID-Hash: SERHRCHBEYLXGKLUOPNRDH3JOXGKRKTI
+Message-ID-Hash: 3J5Y5OK3MTYC7WQFZEBYIRSUVXU7IQUG
+X-Message-ID-Hash: 3J5Y5OK3MTYC7WQFZEBYIRSUVXU7IQUG
 X-Mailman-Approved-At: Thu, 16 Apr 2026 16:40:55 +0000
 CC: Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, iommu@lists.linux.dev, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>, Bharath Kumar <quic_bkumar@quicinc.com>, Chenna Kesava Raju <quic_chennak@quicinc.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH RFC 04/18] accel/qda: Add built-in compute CB bus for QDA and integrate with IOMMU
+Subject: [Linaro-mm-sig] Re: [PATCH RFC 05/18] accel/qda: Create compute CB devices on QDA compute bus
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SERHRCHBEYLXGKLUOPNRDH3JOXGKRKTI/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3J5Y5OK3MTYC7WQFZEBYIRSUVXU7IQUG/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -161,169 +161,353 @@ X-Spamd-Result: default: False [3.99 / 15.00];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email,qualcomm.com:email]
-X-Rspamd-Queue-Id: 9443241214D
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,qualcomm.com:email,lists.linaro.org:helo,lists.linaro.org:rdns]
+X-Rspamd-Queue-Id: DF575412155
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Tue, Feb 24, 2026 at 12:38:58AM +0530, Ekansh Gupta wrote:
-> Introduce a built-in compute context-bank (CB) bus used by the Qualcomm
-> DSP accelerator (QDA) driver to represent DSP CB devices that require
-> IOMMU configuration. This separates the CB bus from the QDA driver and
-> allows QDA to remain a loadable module while the bus is always built-in.
-
-Why? What is the actual problem that you are trying to solve?
-
+On Tue, Feb 24, 2026 at 12:38:59AM +0530, Ekansh Gupta wrote:
+> Add support for creating compute context-bank (CB) devices under
+> the QDA compute bus based on child nodes of the FastRPC RPMsg
+> device tree node. Each DT child with compatible
+> "qcom,fastrpc-compute-cb" is turned into a QDA-owned struct
+> device on qda_cb_bus_type.
 > 
-> A new bool Kconfig symbol DRM_ACCEL_QDA_COMPUTE_BUS is added and is
-
-Don't describe the patch contents. Please.
-
-> selected by the main DRM_ACCEL_QDA driver. The parent accel Makefile is
-> updated to descend into the QDA directory for both built-in and module
-> builds so that the CB bus is compiled into vmlinux while the driver
-> remains modular.
+> A new qda_cb_dev structure and cb_devs list in qda_dev track these
+> CB devices. qda_populate_child_devices() walks the DT children
+> during QDA RPMsg probe, creates CB devices, configures their DMA
+> and IOMMU settings using of_dma_configure(), and associates a SID
+> from the "reg" property when present.
 > 
-> The CB bus is registered at postcore_initcall() time and is exposed to
-> the IOMMU core through iommu_buses[] in the same way as the Tegra
-> host1x context-bus. This enables later patches to create CB devices on
-> this bus and obtain IOMMU domains for them.
+> On RPMsg remove, qda_unpopulate_child_devices() tears down all CB
+> devices, removing them from their IOMMU groups if present and
+> unregistering the devices. This prepares the ground for using CB
+> devices as IOMMU endpoints for DSP compute workloads in later
+> patches.
 
-Note, there is nothing QDA-specific in this patch. Please explain, why
-the bus is QDA-specific? Can we generalize it?
+Are we loosing the nsessions support?
 
 > 
 > Signed-off-by: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
 > ---
->  drivers/accel/Makefile              |  1 +
->  drivers/accel/qda/Kconfig           |  5 +++++
->  drivers/accel/qda/Makefile          |  2 ++
->  drivers/accel/qda/qda_compute_bus.c | 23 +++++++++++++++++++++++
->  drivers/iommu/iommu.c               |  4 ++++
->  include/linux/qda_compute_bus.h     | 22 ++++++++++++++++++++++
->  6 files changed, 57 insertions(+)
+>  drivers/accel/qda/Makefile    |   1 +
+>  drivers/accel/qda/qda_cb.c    | 150 ++++++++++++++++++++++++++++++++++++++++++
+>  drivers/accel/qda/qda_cb.h    |  26 ++++++++
+>  drivers/accel/qda/qda_drv.h   |   3 +
+>  drivers/accel/qda/qda_rpmsg.c |  40 +++++++++++
+>  5 files changed, 220 insertions(+)
 > 
-> diff --git a/drivers/accel/Makefile b/drivers/accel/Makefile
-> index 58c08dd5f389..9ed843cd293f 100644
-> --- a/drivers/accel/Makefile
-> +++ b/drivers/accel/Makefile
-> @@ -6,4 +6,5 @@ obj-$(CONFIG_DRM_ACCEL_HABANALABS)	+= habanalabs/
->  obj-$(CONFIG_DRM_ACCEL_IVPU)		+= ivpu/
->  obj-$(CONFIG_DRM_ACCEL_QAIC)		+= qaic/
->  obj-$(CONFIG_DRM_ACCEL_QDA)		+= qda/
-> +obj-$(CONFIG_DRM_ACCEL_QDA_COMPUTE_BUS) += qda/
->  obj-$(CONFIG_DRM_ACCEL_ROCKET)		+= rocket/
-> \ No newline at end of file
-> diff --git a/drivers/accel/qda/Kconfig b/drivers/accel/qda/Kconfig
-> index 484d21ff1b55..ef1fa384efbe 100644
-> --- a/drivers/accel/qda/Kconfig
-> +++ b/drivers/accel/qda/Kconfig
-> @@ -3,11 +3,16 @@
->  # Qualcomm DSP accelerator driver
->  #
->  
-> +
-> +config DRM_ACCEL_QDA_COMPUTE_BUS
-> +	bool
-> +
->  config DRM_ACCEL_QDA
->  	tristate "Qualcomm DSP accelerator"
->  	depends on DRM_ACCEL
->  	depends on ARCH_QCOM || COMPILE_TEST
->  	depends on RPMSG
-> +	select DRM_ACCEL_QDA_COMPUTE_BUS
->  	help
->  	  Enables the DRM-based accelerator driver for Qualcomm's Hexagon DSPs.
->  	  This driver provides a standardized interface for offloading computational
 > diff --git a/drivers/accel/qda/Makefile b/drivers/accel/qda/Makefile
-> index e7f23182589b..242684ef1af7 100644
+> index 242684ef1af7..4aded20b6bc2 100644
 > --- a/drivers/accel/qda/Makefile
 > +++ b/drivers/accel/qda/Makefile
-> @@ -8,3 +8,5 @@ obj-$(CONFIG_DRM_ACCEL_QDA)	:= qda.o
+> @@ -8,5 +8,6 @@ obj-$(CONFIG_DRM_ACCEL_QDA)	:= qda.o
 >  qda-y := \
 >  	qda_drv.o \
 >  	qda_rpmsg.o \
-> +
-> +obj-$(CONFIG_DRM_ACCEL_QDA_COMPUTE_BUS) += qda_compute_bus.o
-> diff --git a/drivers/accel/qda/qda_compute_bus.c b/drivers/accel/qda/qda_compute_bus.c
+> +	qda_cb.o \
+>  
+>  obj-$(CONFIG_DRM_ACCEL_QDA_COMPUTE_BUS) += qda_compute_bus.o
+> diff --git a/drivers/accel/qda/qda_cb.c b/drivers/accel/qda/qda_cb.c
 > new file mode 100644
-> index 000000000000..1d9c39948fb5
+> index 000000000000..77a2d8cae076
 > --- /dev/null
-> +++ b/drivers/accel/qda/qda_compute_bus.c
-> @@ -0,0 +1,23 @@
+> +++ b/drivers/accel/qda/qda_cb.c
+> @@ -0,0 +1,150 @@
 > +// SPDX-License-Identifier: GPL-2.0-only
 > +// Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+> +#include <linux/dma-mapping.h>
 > +#include <linux/device.h>
-> +#include <linux/init.h>
+> +#include <linux/of.h>
+> +#include <linux/of_device.h>
+> +#include <linux/iommu.h>
+> +#include <linux/slab.h>
+> +#include "qda_drv.h"
+> +#include "qda_cb.h"
 > +
-> +struct bus_type qda_cb_bus_type = {
-> +	.name = "qda-compute-cb",
-> +};
-> +EXPORT_SYMBOL_GPL(qda_cb_bus_type);
-> +
-> +static int __init qda_cb_bus_init(void)
+> +static void qda_cb_dev_release(struct device *dev)
 > +{
-> +	int err;
+> +	kfree(dev);
+
+Do you need to put the reference on the OF node?
+
+> +}
 > +
-> +	err = bus_register(&qda_cb_bus_type);
-> +	if (err < 0) {
-> +		pr_err("qda-compute-cb bus registration failed: %d\n", err);
-> +		return err;
+> +static int qda_configure_cb_iommu(struct device *cb_dev, struct device_node *cb_node)
+> +{
+> +	int ret;
+> +
+> +	qda_dbg(NULL, "Configuring DMA/IOMMU for CB device %s\n", dev_name(cb_dev));
+> +
+> +	/* Use of_dma_configure which handles both DMA and IOMMU configuration */
+> +	ret = of_dma_configure(cb_dev, cb_node, true);
+> +	if (ret) {
+> +		qda_err(NULL, "of_dma_configure failed for %s: %d\n", dev_name(cb_dev), ret);
+> +		return ret;
 > +	}
+> +
+> +	qda_dbg(NULL, "DMA/IOMMU configured successfully for CB device %s\n", dev_name(cb_dev));
 > +	return 0;
 > +}
 > +
-> +postcore_initcall(qda_cb_bus_init);
-> diff --git a/drivers/iommu/iommu.c b/drivers/iommu/iommu.c
-> index 4926a43118e6..5dee912686ee 100644
-> --- a/drivers/iommu/iommu.c
-> +++ b/drivers/iommu/iommu.c
-> @@ -33,6 +33,7 @@
->  #include <trace/events/iommu.h>
->  #include <linux/sched/mm.h>
->  #include <linux/msi.h>
-> +#include <linux/qda_compute_bus.h>
->  #include <uapi/linux/iommufd.h>
->  
->  #include "dma-iommu.h"
-> @@ -178,6 +179,9 @@ static const struct bus_type * const iommu_buses[] = {
->  #ifdef CONFIG_CDX_BUS
->  	&cdx_bus_type,
->  #endif
-> +#ifdef CONFIG_DRM_ACCEL_QDA_COMPUTE_BUS
-> +	&qda_cb_bus_type,
-> +#endif
->  };
->  
->  /*
-> diff --git a/include/linux/qda_compute_bus.h b/include/linux/qda_compute_bus.h
+> +static int qda_cb_setup_device(struct qda_dev *qdev, struct device *cb_dev)
+> +{
+> +	int rc;
+> +	u32 sid, pa_bits = 32;
+> +
+> +	qda_dbg(qdev, "Setting up CB device %s\n", dev_name(cb_dev));
+> +
+> +	if (of_property_read_u32(cb_dev->of_node, "reg", &sid)) {
+> +		qda_dbg(qdev, "No 'reg' property found, defaulting SID to 0\n");
+> +		sid = 0;
+
+Don't do the job of the schema validator. Are there nodes without reg?
+No.
+
+> +	}
+> +
+> +	rc = dma_set_mask(cb_dev, DMA_BIT_MASK(pa_bits));
+> +	if (rc) {
+> +		qda_err(qdev, "%d bit DMA enable failed: %d\n", pa_bits, rc);
+> +		return rc;
+> +	}
+> +
+> +	qda_dbg(qdev, "CB device setup complete - SID: %u, PA bits: %u\n", sid, pa_bits);
+> +
+> +	return 0;
+> +}
+> +
+> +int qda_create_cb_device(struct qda_dev *qdev, struct device_node *cb_node)
+> +{
+> +	struct device *cb_dev;
+> +	int ret;
+> +	u32 sid = 0;
+> +	struct qda_cb_dev *entry;
+> +
+> +	qda_dbg(qdev, "Creating CB device for node: %s\n", cb_node->name);
+> +
+> +	of_property_read_u32(cb_node, "reg", &sid);
+> +
+> +	cb_dev = kzalloc_obj(*cb_dev, GFP_KERNEL);
+> +	if (!cb_dev)
+> +		return -ENOMEM;
+> +
+> +	device_initialize(cb_dev);
+> +	cb_dev->parent = qdev->dev;
+> +	cb_dev->bus = &qda_cb_bus_type; /* Use our custom bus type for IOMMU handling */
+> +	cb_dev->release = qda_cb_dev_release;
+> +	dev_set_name(cb_dev, "qda-cb-%s-%u", qdev->dsp_name, sid);
+> +
+> +	qda_dbg(qdev, "Initialized CB device: %s\n", dev_name(cb_dev));
+> +
+> +	cb_dev->of_node = of_node_get(cb_node);
+> +
+> +	cb_dev->dma_mask = &cb_dev->coherent_dma_mask;
+> +	cb_dev->coherent_dma_mask = DMA_BIT_MASK(32);
+> +
+> +	dev_set_drvdata(cb_dev->parent, qdev);
+> +
+> +	ret = device_add(cb_dev);
+> +	if (ret) {
+> +		qda_err(qdev, "Failed to add CB device for SID %u: %d\n", sid, ret);
+> +		goto cleanup_device_init;
+> +	}
+> +
+> +	qda_dbg(qdev, "CB device added to system\n");
+> +
+> +	ret = qda_configure_cb_iommu(cb_dev, cb_node);
+> +	if (ret) {
+> +		qda_err(qdev, "IOMMU configuration failed: %d\n", ret);
+> +		goto cleanup_device_add;
+> +	}
+> +
+> +	ret = qda_cb_setup_device(qdev, cb_dev);
+> +	if (ret) {
+> +		qda_err(qdev, "CB device setup failed: %d\n", ret);
+> +		goto cleanup_device_add;
+> +	}
+> +
+> +	entry = kzalloc(sizeof(*entry), GFP_KERNEL);
+> +	if (!entry) {
+> +		ret = -ENOMEM;
+> +		goto cleanup_device_add;
+> +	}
+> +
+> +	entry->dev = cb_dev;
+> +	list_add_tail(&entry->node, &qdev->cb_devs);
+> +
+> +	qda_dbg(qdev, "Successfully created CB device for SID %u\n", sid);
+> +	return 0;
+> +
+> +cleanup_device_add:
+> +	device_del(cb_dev);
+> +cleanup_device_init:
+> +	of_node_put(cb_dev->of_node);
+> +	put_device(cb_dev);
+> +	return ret;
+> +}
+> +
+> +void qda_destroy_cb_device(struct device *cb_dev)
+> +{
+> +	struct iommu_group *group;
+> +
+> +	if (!cb_dev) {
+> +		qda_dbg(NULL, "NULL CB device passed to destroy\n");
+> +		return;
+> +	}
+> +
+> +	qda_dbg(NULL, "Destroying CB device %s\n", dev_name(cb_dev));
+> +
+> +	group = iommu_group_get(cb_dev);
+> +	if (group) {
+> +		qda_dbg(NULL, "Removing %s from IOMMU group\n", dev_name(cb_dev));
+> +		iommu_group_remove_device(cb_dev);
+> +		iommu_group_put(group);
+> +	}
+> +
+> +	of_node_put(cb_dev->of_node);
+> +	cb_dev->of_node = NULL;
+> +	device_unregister(cb_dev);
+> +
+> +	qda_dbg(NULL, "CB device %s destroyed\n", dev_name(cb_dev));
+> +}
+> diff --git a/drivers/accel/qda/qda_cb.h b/drivers/accel/qda/qda_cb.h
 > new file mode 100644
-> index 000000000000..807122d84e3f
+> index 000000000000..a4ae9fef142e
 > --- /dev/null
-> +++ b/include/linux/qda_compute_bus.h
-> @@ -0,0 +1,22 @@
+> +++ b/drivers/accel/qda/qda_cb.h
+> @@ -0,0 +1,26 @@
 > +/* SPDX-License-Identifier: GPL-2.0-only */
 > +/*
 > + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 > + */
 > +
-> +#ifndef __QDA_COMPUTE_BUS_H__
-> +#define __QDA_COMPUTE_BUS_H__
+> +#ifndef __QDA_CB_H__
+> +#define __QDA_CB_H__
 > +
 > +#include <linux/device.h>
+> +#include <linux/of.h>
+> +#include <linux/list.h>
+> +#include <linux/qda_compute_bus.h>
+> +#include "qda_drv.h"
+> +
+> +struct qda_cb_dev {
+> +	struct list_head node;
+> +	struct device *dev;
+> +};
 > +
 > +/*
-> + * Custom bus type for QDA compute context bank (CB) devices
-> + *
-> + * This bus type is used for manually created CB devices that represent
-> + * IOMMU context banks. The custom bus allows proper IOMMU configuration
-> + * and device management for these virtual devices.
+> + * Compute bus (CB) device management
 > + */
-> +#ifdef CONFIG_DRM_ACCEL_QDA_COMPUTE_BUS
-> +extern struct bus_type qda_cb_bus_type;
-> +#endif
+> +int qda_create_cb_device(struct qda_dev *qdev, struct device_node *cb_node);
+> +void qda_destroy_cb_device(struct device *cb_dev);
 > +
-> +#endif /* __QDA_COMPUTE_BUS_H__ */
+> +#endif /* __QDA_CB_H__ */
+> diff --git a/drivers/accel/qda/qda_drv.h b/drivers/accel/qda/qda_drv.h
+> index bec2d31ca1bb..eb732b7d8091 100644
+> --- a/drivers/accel/qda/qda_drv.h
+> +++ b/drivers/accel/qda/qda_drv.h
+> @@ -7,6 +7,7 @@
+>  #define __QDA_DRV_H__
+>  
+>  #include <linux/device.h>
+> +#include <linux/list.h>
+>  #include <linux/mutex.h>
+>  #include <linux/rpmsg.h>
+>  #include <linux/xarray.h>
+> @@ -26,6 +27,8 @@ struct qda_dev {
+>  	atomic_t removing;
+>  	/* Name of the DSP (e.g., "cdsp", "adsp") */
+>  	char dsp_name[16];
+> +	/* Compute context-bank (CB) child devices */
+> +	struct list_head cb_devs;
+>  };
+>  
+>  /**
+> diff --git a/drivers/accel/qda/qda_rpmsg.c b/drivers/accel/qda/qda_rpmsg.c
+> index a8b24a99ca13..5a57384de6a2 100644
+> --- a/drivers/accel/qda/qda_rpmsg.c
+> +++ b/drivers/accel/qda/qda_rpmsg.c
+> @@ -7,6 +7,7 @@
+>  #include <linux/of_device.h>
+>  #include "qda_drv.h"
+>  #include "qda_rpmsg.h"
+> +#include "qda_cb.h"
+>  
+>  static int qda_rpmsg_init(struct qda_dev *qdev)
+>  {
+> @@ -25,11 +26,42 @@ static struct qda_dev *alloc_and_init_qdev(struct rpmsg_device *rpdev)
+>  
+>  	qdev->dev = &rpdev->dev;
+>  	qdev->rpdev = rpdev;
+> +	INIT_LIST_HEAD(&qdev->cb_devs);
+>  
+>  	qda_dbg(qdev, "Allocated and initialized qda_dev\n");
+>  	return qdev;
+>  }
+>  
+> +static void qda_unpopulate_child_devices(struct qda_dev *qdev)
+> +{
+> +	struct qda_cb_dev *entry, *tmp;
+> +
+> +	list_for_each_entry_safe(entry, tmp, &qdev->cb_devs, node) {
+> +		list_del(&entry->node);
+> +		qda_destroy_cb_device(entry->dev);
+> +		kfree(entry);
+
+Why can't you embed struct device into a structure together with the
+list_node (and possibly some other data?)?
+
+> +	}
+> +}
+> +
+> +static int qda_populate_child_devices(struct qda_dev *qdev, struct device_node *parent_node)
+> +{
+> +	struct device_node *child;
+> +	int count = 0, success = 0;
+> +
+> +	for_each_child_of_node(parent_node, child) {
+> +		if (of_device_is_compatible(child, "qcom,fastrpc-compute-cb")) {
+> +			count++;
+> +			if (qda_create_cb_device(qdev, child) == 0) {
+> +				success++;
+> +				qda_dbg(qdev, "Created CB device for node: %s\n", child->name);
+> +			} else {
+> +				qda_err(qdev, "Failed to create CB device for: %s\n", child->name);
+
+Don't loose the error code. Instead please return it to the caller.
+
+> +			}
+> +		}
+> +	}
+> +	return success > 0 ? 0 : (count > 0 ? -ENODEV : 0);
+> +}
+> +
+>  static int qda_rpmsg_cb(struct rpmsg_device *rpdev, void *data, int len, void *priv, u32 src)
+>  {
+>  	/* Dummy function for rpmsg driver */
+> @@ -48,6 +80,7 @@ static void qda_rpmsg_remove(struct rpmsg_device *rpdev)
+>  	qdev->rpdev = NULL;
+>  	mutex_unlock(&qdev->lock);
+>  
+> +	qda_unpopulate_child_devices(qdev);
+>  	qda_deinit_device(qdev);
+>  
+>  	qda_info(qdev, "RPMsg device removed\n");
+> @@ -83,6 +116,13 @@ static int qda_rpmsg_probe(struct rpmsg_device *rpdev)
+>  	if (ret)
+>  		return ret;
+>  
+> +	ret = qda_populate_child_devices(qdev, rpdev->dev.of_node);
+> +	if (ret) {
+> +		qda_err(qdev, "Failed to populate child devices: %d\n", ret);
+> +		qda_deinit_device(qdev);
+> +		return ret;
+> +	}
+> +
+>  	qda_info(qdev, "QDA RPMsg probe completed successfully for %s\n", qdev->dsp_name);
+>  	return 0;
+>  }
 > 
 > -- 
 > 2.34.1
