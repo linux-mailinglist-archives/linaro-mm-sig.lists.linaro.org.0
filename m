@@ -2,96 +2,86 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id YFsxIvES4WnoogAAu9opvQ
+	id SDlaOPkS4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:48:49 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:48:57 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2C12A411FE4
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:48:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4279C411FEC
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:48:57 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 45EB6404F1
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:48:48 +0000 (UTC)
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-	by lists.linaro.org (Postfix) with ESMTPS id 4D4513F75B
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 19 Feb 2026 17:21:27 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 54F26404E2
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:48:56 +0000 (UTC)
+Received: from invmail4.hynix.com (exvmail4.skhynix.com [166.125.252.92])
+	by lists.linaro.org (Postfix) with ESMTP id DC0893F7C9
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Feb 2026 00:32:15 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=RCydY3dT;
-	spf=pass (lists.linaro.org: domain of echanude@redhat.com designates 170.10.129.124 as permitted sender) smtp.mailfrom=echanude@redhat.com;
-	dmarc=pass (policy=quarantine) header.from=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1771521687;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=a+MlxWO2a/5NxxDnoLl6rDcBacWRef25tqpr85yXgBM=;
-	b=RCydY3dT5Jp4U4g1nemVhH64THAWDmlvyGQ3FaoONVfx2dx6Qlmkrzrap1h2QUfB9fiuV+
-	lD3EHW4pVGKPc4vXXKRSYffU7151knNUkee6Sq6rMkn5NrYZxKgF6yAbyhdztaNUDQpBBT
-	UzCpyfatzJCnkpizn6nsKx2uBnfLgIg=
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
- [209.85.160.200]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-593-K73ZbGhOMlC4msN1Wi6IJA-1; Thu, 19 Feb 2026 12:21:25 -0500
-X-MC-Unique: K73ZbGhOMlC4msN1Wi6IJA-1
-X-Mimecast-MFC-AGG-ID: K73ZbGhOMlC4msN1Wi6IJA_1771521685
-Received: by mail-qt1-f200.google.com with SMTP id d75a77b69052e-506b4bdde91so115988601cf.2
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 19 Feb 2026 09:21:25 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771521685; x=1772126485;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=a+MlxWO2a/5NxxDnoLl6rDcBacWRef25tqpr85yXgBM=;
-        b=p8KDnXPpqBbXzPRo4OxXRHXmjlG8HDmwWg/0ZCgLiH9rImmHboV0rRzjBjpYZp6JY2
-         7m1/zCg0ed23q1is0lO+KQW/ZI2rvMXkmAWS0lMFYdwzkqYpXk3tGwcZ+9iWtWYecXtW
-         MWLFm3k2WCKwZpyRAI3ol9yNOKwQv+2OZC8RhmS8VFifUzs2gxDH/xDjLAcS1SoZNuqE
-         FghyKnsA3adtA+w/9s/I1eryxYSBNgFz2Cww5UiqrrlvA9NvXa64jvvvQjbH/r0V1rlT
-         1pam06RpYoDAN4oDYKExIXvduxUZT87OZpzWiOxWu9ciKH1QSA0kEJvccEfS7z5Uw6Ob
-         62ZQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXArnNxve0iMqIIuVM375AqESKtI0ZEMTju2dkjy+oWkidazCZENiHlQk1xKW7cbxGfIz3RB5rtbzoBoz2G@lists.linaro.org
-X-Gm-Message-State: AOJu0YwNi6rE6Zh91lnoLNkQsesh+GudMuHZk7PNIkBe96kTfxQCjjqi
-	e4MqG9R3MrcwKCpc5SB+q0JmUkLPzN36eMSqGN9uQ8X3uEiIuq2u3TL5IlkwLBTqlpJuSHXcwVT
-	OYOD0eJQwi4O1z0eG0Xytx0cQ4nX4GSa8iXizMEijNZSxXJk2HNk1HP9Oc8jed4BruE7X
-X-Gm-Gg: AZuq6aJlU1Bl1mRiL5GN1BdkmjAklfXTp4HCQjuIgc4hHL2HyT9QS148AZiONl+k2rv
-	ahsq+4QvzYcpEs5a3JqQuJamrOSLjKbGXAmQ/Q7O4xqjUqx9he/YRakImKFcMY6toVWeCx73KqS
-	brBkfUuwZp7YNpaAde3QFLkWWcmS03qqjqm25wiTIOGzQTwd1lwHWcTjZus/o7qcnPyJnmwlK6f
-	r6tcdL15OyMopheixyyZhVKe1AioDBjwhYC7KkjfqmtTjce4kGEiC+WUt2T6/KVmcUupzrYLn//
-	/zliaezkS93Jz3gXvOdO5I87ce6N6JhdRhuv8AuAdb0RdwoKqLRZPI02UJjH6DrMhgD65SXVakC
-	L0JJ2g1wu6UvSfXqef2co2KXSFozzRc6R9j/10xeDL/TXrVq5rrIyI5xif3XoQyA=
-X-Received: by 2002:a05:620a:4148:b0:8cb:3f0e:7740 with SMTP id af79cd13be357-8cb79f3269dmr425872285a.51.1771521685062;
-        Thu, 19 Feb 2026 09:21:25 -0800 (PST)
-X-Received: by 2002:a05:620a:4148:b0:8cb:3f0e:7740 with SMTP id af79cd13be357-8cb79f3269dmr425866385a.51.1771521684499;
-        Thu, 19 Feb 2026 09:21:24 -0800 (PST)
-Received: from localhost (pool-100-17-19-56.bstnma.fios.verizon.net. [100.17.19.56])
-        by smtp.gmail.com with ESMTPSA id d75a77b69052e-50684b94e9fsm210902201cf.24.2026.02.19.09.21.23
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 19 Feb 2026 09:21:24 -0800 (PST)
-Date: Thu, 19 Feb 2026 12:21:23 -0500
-From: Eric Chanudet <echanude@redhat.com>
-To: Maxime Ripard <mripard@redhat.com>
-Message-ID: <aZdEMlKE_kGheI-b@fedora>
-References: <20260218-dmabuf-heap-cma-dmem-v2-0-b249886fb7b2@redhat.com>
- <20260218-dmabuf-heap-cma-dmem-v2-3-b249886fb7b2@redhat.com>
- <20260219-illustrious-tungsten-starfish-5dad8c@houat>
+	dkim=none;
+	dmarc=none;
+	spf=pass (lists.linaro.org: domain of byungchul@sk.com designates 166.125.252.92 as permitted sender) smtp.mailfrom=byungchul@sk.com
+X-AuditID: a67dfc5b-c45ff70000001609-c0-699ba00d57c1
+Date: Mon, 23 Feb 2026 09:32:07 +0900
+From: Byungchul Park <byungchul@sk.com>
+To: Dirk Behme <dirk.behme@gmx.de>
+Message-ID: <20260223003207.GA44876@system.software.com>
+References: <20251205071855.72743-1-byungchul@sk.com>
+ <20251205071855.72743-32-byungchul@sk.com>
+ <ab0b9f9c-3a05-42f3-b4a7-ddb6ab0d37a4@gmx.de>
 MIME-Version: 1.0
-In-Reply-To: <20260219-illustrious-tungsten-starfish-5dad8c@houat>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: TNg0YUTJcYRkVMvaa5TZEcZD1NTyt8erSrKbg5oYOPQ_1771521685
-X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-X-Spamd-Bar: ---
-X-MailFrom: echanude@redhat.com
+In-Reply-To: <ab0b9f9c-3a05-42f3-b4a7-ddb6ab0d37a4@gmx.de>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Brightmail-Tracker: H4sIAAAAAAAAA02Sa0yTZxTH87x3GupeOpFHmS6pQROm9RKTHZdlMSbL3i9zW/xgoonayCs0
+	QMUWuXiJXGokRATqSmc7sUCoRGpEFKmZdR2deIG6drjRlRasqWjDEMZaHOG2dsTMLyf//P45
+	v5wPhyNl3zGrOJW6UNSolXlyRkJJxpObNkotZtXmke7NEBgJ0/B7uZOCWLSKgnlzNwsjsSoE
+	0ZkhFgzlCBYdvQh8nh9JsN0qJ+DvjgUGxlxTCAyhMAOR+19A2HkWwVjDJAOz7l9IMBo8CJpC
+	QRKmIs8Q3OodRuBoq2DgRV0XCaahwzAQXgZPYxMMvO5gwFLhoOGSWY9g1O8goLLlOgMNlzop
+	8I7NERBo0BPQ3vkl9NU1E2CMxLsbaWA2VhLx8YoAw7UfCJixXmWhvyVAgbUsA563mViYC22B
+	YK2BgrFRPQPRpyECbOdGSXD4P4KLjQEG7joeUVA1H0XQa39OwLmOLhqGbYs0eJx9NPza7qGg
+	r/chBUPuWhZaB70EhJ754m19Db0jS3hz5jwl2BptSIi2VpKC688JUtDdLBYc0xZKeNyMhXr3
+	RuGOKcgKk3/tF3T3/Kxg6Twm6H4ep4WbbZlCy90IITRNxeivN+yVfJol5qmKRM2mzw5Kcu58
+	62IKLiSXDOpyy1CFpBolcZjfhofdV5i32VVhZasRx1F8Bh7xZicww6/HPt8MmcDLeTnuCuxI
+	YJJvX4MHxksS+X0+F9+/Pf+fRcoDbg5H6Gok4WS8HmGv6wKxVKTgRxfD1NJyJvYtRIiEk+TT
+	8ZUFLoGT+E+wq/sMncip/FrsvP2ASHgw70/Cw9bL5NKZK/FPbT6qDvGmd7Smd7Sm/7UWRF5F
+	MpW6KF+pytumyClVq0oUh47kd6L4v1pPze2zoynP7h7Ec0ieLHVOmFQyWlmkLc3vQZgj5cul
+	s7NxJM1Slh4XNUcOaI7lidoelM5R8jTp1uniLBmfrSwUc0WxQNS8bQkuaVUZWjYPGfu3qxST
+	A2tOptt1J/4QK92DT/pTTm21N77Sr17dX7ryn49TB2vKdiZ7wydSUrdfvjYaXEx7WH84c12s
+	etG4W63Y89X3ZEvsvWlF64ZvWPPn8NsHsQ/vvTz7+ugh5LfXnD94XL5zz5NdaM649vSKuuzp
+	dcag9k3BrrQDxfLC2hVySpuj3JJJarTKfwENi1eBqwMAAA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA02SbUxTZxTH8zzP7e1tQ821YLjo4ofqYmIibmaa4yRK9mHe7P0TOr+MRq5y
+	VyimVQZOYyk065hZsK4ltMoQtVugvpXXznQjNOAcM7ZWRzPBalaRhiJMWhmtpWtjlvnl5H/+
+	//M7OR8OQ5RJyWpG1B4WdFp1lYqWU/KPdjRuyutwiG8MTJeA2XQCJsIRCfzRMERBIm6m4MwV
+	Fw1px4AUzO42Cfw6bqTAf7kbQThhRrCYchAweTIUpC2jUogv3ZeCtQFBxjuKwBawEAj5fyHg
+	6m3AsHB1mYYZ3zME1kcRGlqjDRTMOU8isE85pBAd2Q2z4esSyEw+wTD+PIbAGVnGEBn6CkHa
+	poHvO3uyuG2ehtSt2wRarX4E5x5NEngWfYigd/QBAu+PRhoet/QRsN8/AMHICribmKPhpvUb
+	GmYDZzA8vUpDh9ErgcDvMwjOOiwIpv70Ymg8f4UG21k3BZ6HP0khMPMCw4TNgqHb/SGEnVMU
+	jLV04uzJ2alrheBobcTZMo3Beuk6LnUiftH0LcV39fRj3nQnTfOudhfiU0kL4uMXGwlvasm2
+	vtgc4Zt6vuAvjsVoPpm4R/Pe5x0U/1snx1/4Oon5U7c28R77pPSTd/bJSyqEKrFW0G3eWS6v
+	9Hznow+dzqsbb9IYkFHejGQMx77F+YxOaTNiGIp9nQsHDuZsmt3AhUJLJGcXsCqub6I0ZxO2
+	ey0XnK3L6XxWw430p+mcVrDAdUaikmYkZ5SsBXEB32n8MljJ3WyLUC/hjVxoOYpzOwm7hvth
+	mcnZMvZtzjdgkuT0KnYdN9R/A7cghf0V2v4Kbf+f7kCkCxWI2tpqtVi1tVivqazXinXF+2uq
+	3Sj7kc7jL04Nonhw9zBiGaTKU8wXOUSlRF2rr68eRhxDVAWKVMouKhUV6vqjgq7mM92RKkE/
+	jNYwlKpQ8d4eoVzJHlQfFjSCcEjQ/ZdiRrbagPJJHDyfip/vCZTtcpfn9cnW73C1/82Qnr1d
+	wS+Xap7mG8rOtZaGmv7SJsvmNYsFI0Xr321P/bz1yMKqf1zFK/C1bbEwGZx+PCiDxPumtfqg
+	v7332F3PvnuGGydjbQuWiqLeO2Mf6Oq2vLaue0vKf+Dj6Inthl0lhRHz9kyGFWMqSl+pfnMj
+	0enV/wJlLv3cjQMAAA==
+X-CFilter-Loop: Reflected
+X-Spamd-Bar: -
+X-MailFrom: byungchul@sk.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: QXL3QOYOYOHERJON3HITNBQQMY7AIOIM
-X-Message-ID-Hash: QXL3QOYOYOHERJON3HITNBQQMY7AIOIM
-X-Mailman-Approved-At: Thu, 16 Apr 2026 16:40:35 +0000
-CC: Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Andrew Morton <akpm@linux-foundation.org>, David Hildenbrand <david@kernel.org>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, "Liam R. Howlett" <Liam.Howlett@oracle.com>, Vlastimil Babka <vbabka@suse.cz>, Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, Albert Esteve <aesteve@redhat.com>, linux-mm@kvack.org
+Message-ID-Hash: D3JXWAV7HCWXUO7KAN6UCDI37JOI64W3
+X-Message-ID-Hash: D3JXWAV7HCWXUO7KAN6UCDI37JOI64W3
+X-Mailman-Approved-At: Thu, 16 Apr 2026 16:40:36 +0000
+CC: linux-kernel@vger.kernel.org, kernel_team@skhynix.com, torvalds@linux-foundation.org, damien.lemoal@opensource.wdc.com, linux-ide@vger.kernel.org, adilger.kernel@dilger.ca, linux-ext4@vger.kernel.org, mingo@redhat.com, peterz@infradead.org, will@kernel.org, tglx@linutronix.de, rostedt@goodmis.org, joel@joelfernandes.org, sashal@kernel.org, daniel.vetter@ffwll.ch, duyuyang@gmail.com, johannes.berg@intel.com, tj@kernel.org, tytso@mit.edu, willy@infradead.org, david@fromorbit.com, amir73il@gmail.com, gregkh@linuxfoundation.org, kernel-team@lge.com, linux-mm@kvack.org, akpm@linux-foundation.org, mhocko@kernel.org, minchan@kernel.org, hannes@cmpxchg.org, vdavydov.dev@gmail.com, sj@kernel.org, jglisse@redhat.com, dennis@kernel.org, cl@linux.com, penberg@kernel.org, rientjes@google.com, vbabka@suse.cz, ngupta@vflare.org, linux-block@vger.kernel.org, josef@toxicpanda.com, linux-fsdevel@vger.kernel.org, jack@suse.cz, jlayton@kernel.org, dan.j.williams@intel.com, hch@infradead.org, djwong@
+ kernel.org, dri-devel@lists.freedesktop.org, rodrigosiqueiramelo@gmail.com, melissa.srw@gmail.com, hamohammed.sa@gmail.com, harry.yoo@oracle.com, chris.p.wilson@intel.com, gwan-gyeong.mun@intel.com, max.byungchul.park@gmail.com, boqun.feng@gmail.com, longman@redhat.com, yunseong.kim@ericsson.com, ysk@kzalloc.com, yeoreum.yun@arm.com, netdev@vger.kernel.org, matthew.brost@intel.com, her0gyugyu@gmail.com, corbet@lwn.net, catalin.marinas@arm.com, bp@alien8.de, x86@kernel.org, hpa@zytor.com, luto@kernel.org, sumit.semwal@linaro.org, gustavo@padovan.org, christian.koenig@amd.com, andi.shyti@kernel.org, arnd@arndb.de, lorenzo.stoakes@oracle.com, Liam.Howlett@oracle.com, rppt@kernel.org, surenb@google.com, mcgrof@kernel.org, petr.pavlu@suse.com, da.gomez@kernel.org, samitolvanen@google.com, paulmck@kernel.org, frederic@kernel.org, neeraj.upadhyay@kernel.org, joelagnelf@nvidia.com, josh@joshtriplett.org, urezki@gmail.com, mathieu.desnoyers@efficios.com, jiangshanlai@gmail.com, qiang.zhang@l
+ inux.dev, juri.lelli@redhat.com, vincent.guittot@linaro.org, dietmar.eggemann@arm.com, bsegall@google.com, mgorman@suse.de, vschneid@redhat.com, chuck.lever@oracle.com, neil@brown.name, okorniev@redhat.com, Dai.Ngo@oracle.com, tom@talpey.com, trondmy@kernel.org, anna@kernel.org, kees@kernel.org, bigeasy@linutronix.de, clrkwllms@kernel.org, mark.rutland@arm.com, ada.coupriediaz@arm.com, kristina.martsenko@arm.com, wangkefeng.wang@huawei.com, broonie@kernel.org, kevin.brodsky@arm.com, dwmw@amazon.co.uk, shakeel.butt@linux.dev, ast@kernel.org, ziy@nvidia.com, yuzhao@google.com, baolin.wang@linux.alibaba.com, usamaarif642@gmail.com, joel.granados@kernel.org, richard.weiyang@gmail.com, geert+renesas@glider.be, tim.c.chen@linux.intel.com, linux@treblig.org, alexander.shishkin@linux.intel.com, lillian@star-ark.net, chenhuacai@kernel.org, francesco@valla.it, guoweikang.kernel@gmail.com, link@vivo.com, jpoimboe@kernel.org, masahiroy@kernel.org, brauner@kernel.org, thomas.weissschuh@linutroni
+ x.de, oleg@redhat.com, mjguzik@gmail.com, andrii@kernel.org, wangfushuai@baidu.com, linux-doc@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-i2c@vger.kernel.org, linux-arch@vger.kernel.org, linux-modules@vger.kernel.org, rcu@vger.kernel.org, linux-nfs@vger.kernel.org, linux-rt-devel@lists.linux.dev, 2407018371@qq.com, dakr@kernel.org, miguel.ojeda.sandonis@gmail.com, neilb@ownmail.net, bagasdotme@gmail.com, wsa+renesas@sang-engineering.com, dave.hansen@intel.com, geert@linux-m68k.org, ojeda@kernel.org, alex.gaynor@gmail.com, gary@garyguo.net, bjorn3_gh@protonmail.com, lossin@kernel.org, a.hindborg@kernel.org, aliceryhl@google.com, tmgross@umich.edu, rust-for-linux@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 3/3] dma-buf: heaps: cma: charge each cma heap's dmem
+Subject: [Linaro-mm-sig] Re: [PATCH v18 31/42] dept: assign unique dept_key to each distinct wait_for_completion() caller
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QXL3QOYOYOHERJON3HITNBQQMY7AIOIM/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/D3JXWAV7HCWXUO7KAN6UCDI37JOI64W3/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -100,116 +90,79 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [3.49 / 15.00];
-	DMARC_POLICY_QUARANTINE(1.50)[redhat.com : SPF not aligned (relaxed),quarantine];
-	R_DKIM_REJECT(1.00)[redhat.com:s=mimecast20190719];
-	DATE_IN_PAST(1.00)[1343];
-	MID_RHS_NOT_FQDN(0.50)[];
-	MAILLIST(-0.20)[mailman];
+X-Spamd-Result: default: False [1.99 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	DATE_IN_PAST(1.00)[1264];
 	R_SPF_ALLOW(-0.20)[+mx:c];
+	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	FROM_HAS_DN(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[gmx.de];
 	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[21];
-	DKIM_TRACE(0.00)[redhat.com:-];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	DMARC_NA(0.00)[sk.com];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FROM_NEQ_ENVFROM(0.00)[echanude@redhat.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[vger.kernel.org,skhynix.com,linux-foundation.org,opensource.wdc.com,dilger.ca,redhat.com,infradead.org,kernel.org,linutronix.de,goodmis.org,joelfernandes.org,ffwll.ch,gmail.com,intel.com,mit.edu,fromorbit.com,linuxfoundation.org,lge.com,kvack.org,cmpxchg.org,linux.com,google.com,suse.cz,vflare.org,toxicpanda.com, kernel.org,lists.freedesktop.org,oracle.com,ericsson.com,kzalloc.com,arm.com,lwn.net,alien8.de,zytor.com,linaro.org,padovan.org,amd.com,arndb.de,suse.com,nvidia.com,joshtriplett.org,efficios.com,l,suse.de,brown.name,talpey.com,huawei.com,amazon.co.uk,linux.dev,linux.alibaba.com,glider.be,linux.intel.com,treblig.org,star-ark.net,valla.it,vivo.com,linutroni,baidu.com,lists.infradead.org,lists.linaro.org,lists.linux.dev,qq.com,ownmail.net,sang-engineering.com,linux-m68k.org,garyguo.net,protonmail.com,umich.edu];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.969];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	MISSING_XM_UA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: 2C12A411FE4
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_NEQ_ENVFROM(0.00)[byungchul@sk.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[166];
+	R_DKIM_NA(0.00)[];
+	NEURAL_HAM(-0.00)[-0.998];
+	TAGGED_RCPT(0.00)[linaro-mm-sig,renesas];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sk.com:email,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
+X-Rspamd-Queue-Id: 4279C411FEC
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Thu, Feb 19, 2026 at 10:16:37AM +0100, Maxime Ripard wrote:
-> Hi,
-> 
-> On Wed, Feb 18, 2026 at 12:14:12PM -0500, Eric Chanudet wrote:
-> > The cma dma-buf heaps let userspace allocate buffers in CMA regions
-> > without enforcing limits. Since each cma region registers in dmem,
-> > charge against it when allocating a buffer in a cma heap.
-> > 
-> > Signed-off-by: Eric Chanudet <echanude@redhat.com>
+On Sun, Feb 15, 2026 at 07:42:05AM +0100, Dirk Behme wrote:
+> On 05.12.25 08:18, Byungchul Park wrote:
+> > wait_for_completion() can be used at various points in the code and it's
+> > very hard to distinguish wait_for_completion()s between different usages.
+> > Using a single dept_key for all the wait_for_completion()s could trigger
+> > false positive reports.
+> >
+> > Assign unique dept_key to each distinct wait_for_completion() caller to
+> > avoid false positive reports.
+> >
+> > While at it, add a rust helper for wait_for_completion() to avoid build
+> > errors.
+> >
+> > Signed-off-by: Byungchul Park <byungchul@sk.com>
 > > ---
-> >  drivers/dma-buf/heaps/cma_heap.c | 15 ++++++++++++++-
-> >  1 file changed, 14 insertions(+), 1 deletion(-)
-> > 
-> > diff --git a/drivers/dma-buf/heaps/cma_heap.c b/drivers/dma-buf/heaps/cma_heap.c
-> > index 49cc45fb42dd7200c3c14384bcfdbe85323454b1..bbd4f9495808da19256d97bd6a4dca3e1b0a30a0 100644
-> > --- a/drivers/dma-buf/heaps/cma_heap.c
-> > +++ b/drivers/dma-buf/heaps/cma_heap.c
-> > @@ -27,6 +27,7 @@
-> >  #include <linux/scatterlist.h>
-> >  #include <linux/slab.h>
-> >  #include <linux/vmalloc.h>
-> > +#include <linux/cgroup_dmem.h>
-> >  
-> >  #define DEFAULT_CMA_NAME "default_cma_region"
-> >  
-> > @@ -58,6 +59,7 @@ struct cma_heap_buffer {
-> >  	pgoff_t pagecount;
-> >  	int vmap_cnt;
-> >  	void *vaddr;
-> > +	struct dmem_cgroup_pool_state *pool;
-> 
-> I guess we should add an #if IS_ENABLED #endif guard for dmem?
-> 
-
-Sure, I saw the other user (ttm) didn't, but that makes sense as the
-field is useless if dmem is not enabled.
-
-> >  };
-> >  
-> >  struct dma_heap_attachment {
-> > @@ -276,6 +278,7 @@ static void cma_heap_dma_buf_release(struct dma_buf *dmabuf)
-> >  	kfree(buffer->pages);
-> >  	/* release memory */
-> >  	cma_release(cma_heap->cma, buffer->cma_pages, buffer->pagecount);
-> > +	dmem_cgroup_uncharge(buffer->pool, buffer->len);
-> >  	kfree(buffer);
+> >  include/linux/completion.h | 100 +++++++++++++++++++++++++++++++------
+> >  kernel/sched/completion.c  |  60 +++++++++++-----------
+> >  rust/helpers/completion.c  |   5 ++
+> >  3 files changed, 120 insertions(+), 45 deletions(-)
+> >
+> ...
+> > diff --git a/rust/helpers/completion.c b/rust/helpers/completion.c
+> > index b2443262a2ae..5bae5e749def 100644
+> > --- a/rust/helpers/completion.c
+> > +++ b/rust/helpers/completion.c
+> > @@ -6,3 +6,8 @@ void rust_helper_init_completion(struct completion *x)
+> >  {
+> >       init_completion(x);
 > >  }
-> >  
-> > @@ -319,9 +322,17 @@ static struct dma_buf *cma_heap_allocate(struct dma_heap *heap,
-> >  	if (align > CONFIG_CMA_ALIGNMENT)
-> >  		align = CONFIG_CMA_ALIGNMENT;
-> >  
-> > +	if (mem_accounting) {
-> > +		ret = dmem_cgroup_try_charge(
-> > +			cma_get_dmem_cgroup_region(cma_heap->cma), size,
-> > +			&buffer->pool, NULL);
+> > +
+> > +void rust_helper_wait_for_completion(struct completion *x)
 > 
-> This alone doesn't call for a new version, but adhering to the kernel
-> coding style would look like this:
+> Please add `__rust_helper`:
+
+I will.  Thanks.
+
+	Byungchul
 > 
-> +		ret = dmem_cgroup_try_charge(cma_get_dmem_cgroup_region(cma_heap->cma),
-> +					     size, &buffer->pool, NULL);
-
-Will add to v3 with the other changes.
-
-Thanks,
-
+> https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/commit/rust/helpers/completion.c?h=next-20260213&id=1c7a6f48f7eeb3014584d2fc55fc67f0cbaeef69
 > 
-> It looks good to me otherwise,
-> Acked-by: Maxime Ripard <mripard@kernel.org>
+> Best regards
 > 
-> Maxime
-
-
-
--- 
-Eric Chanudet
-
+> Dirk
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
