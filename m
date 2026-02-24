@@ -2,36 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 6GAFB0IXnmmwTQQAu9opvQ
+	id KHEDJ0gXnmmwTQQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 24 Feb 2026 22:25:22 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 24 Feb 2026 22:25:28 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9296218CB48
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 24 Feb 2026 22:25:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2607F18CB50
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 24 Feb 2026 22:25:28 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id AB0354049D
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 24 Feb 2026 21:25:20 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3E99640499
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 24 Feb 2026 21:25:27 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 346F840493
+	by lists.linaro.org (Postfix) with ESMTP id 6FCCE40498
 	for <linaro-mm-sig@lists.linaro.org>; Tue, 24 Feb 2026 21:24:51 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-From: aubreyasher46@gmail.com
+From: codykayson983@gmail.com
 To: linaro-mm-sig@lists.linaro.org
 Date: Tue, 24 Feb 2026 21:24:51 -0000
-Message-ID: <177196829121.1068200.14057699801362318315@lists.linaro.org>
+Message-ID: <177196829145.1067476.9831777241900443321@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: AVFO6JXEFDWMG63TZKILVKNECCREG5HV
-X-Message-ID-Hash: AVFO6JXEFDWMG63TZKILVKNECCREG5HV
-X-MailFrom: aubreyasher46@gmail.com
+Message-ID-Hash: UAU4EUQJ7DFXAKDKDTQUXHUQQHDNFDHC
+X-Message-ID-Hash: UAU4EUQJ7DFXAKDKDTQUXHUQQHDNFDHC
+X-MailFrom: codykayson983@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] What Defines A Legitimate Cryptocurrency Recovery Service Institution
+Subject: [Linaro-mm-sig] Which Is The Best Reputable Crypto Recovery Service Firm
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AVFO6JXEFDWMG63TZKILVKNECCREG5HV/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UAU4EUQJ7DFXAKDKDTQUXHUQQHDNFDHC/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -49,7 +49,7 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[aubreyasher46@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_NEQ_ENVFROM(0.00)[codykayson983@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	ARC_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
@@ -64,8 +64,8 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	R_DKIM_NA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[autopsymainnetsolutions.com:url,autopsymainnetsolutions.com:email,linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,autospyrec.site:url]
-X-Rspamd-Queue-Id: 9296218CB48
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,autospyrec.site:url,autopsymainnetsolutions.com:url,autopsymainnetsolutions.com:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid]
+X-Rspamd-Queue-Id: 2607F18CB50
 X-Rspamd-Action: no action
 
 QXMgY3J5cHRvY3VycmVuY2llcyBjb250aW51ZSB0byByZXNoYXBlIGZpbmFuY2UgaW4gMjAyNiwg
