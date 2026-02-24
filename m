@@ -2,36 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 8LT4FmIXnmmcTQQAu9opvQ
+	id CNOkKmgXnmmcTQQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 24 Feb 2026 22:25:54 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 24 Feb 2026 22:26:00 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id CE96A18CB6D
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 24 Feb 2026 22:25:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6804E18CB7C
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 24 Feb 2026 22:26:00 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id D7FF440498
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 24 Feb 2026 21:25:52 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7063E4049E
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 24 Feb 2026 21:25:59 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E33ED4048B
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 24 Feb 2026 21:24:56 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7296A4048B
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 24 Feb 2026 21:25:00 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-From: "ezra Jack" <jackezra585@gmail.com>
+From: "Theodore Henry" <theodorehenry1a@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Tue, 24 Feb 2026 21:24:56 -0000
-Message-ID: <177196829692.1068200.8673081387016527078@lists.linaro.org>
+Date: Tue, 24 Feb 2026 21:25:00 -0000
+Message-ID: <177196830046.1067476.2030612244137692594@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: 32IOZVHWUZLPBEHTXLXFY24MZQBFKXNR
-X-Message-ID-Hash: 32IOZVHWUZLPBEHTXLXFY24MZQBFKXNR
-X-MailFrom: jackezra585@gmail.com
+Message-ID-Hash: OEQIW52ABFSNEBJUZQ5M3MCOSAY5CCGL
+X-Message-ID-Hash: OEQIW52ABFSNEBJUZQ5M3MCOSAY5CCGL
+X-MailFrom: theodorehenry1a@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Who Offers Best Reputable Crypto Recovery Company Services Worldwide
+Subject: [Linaro-mm-sig] What Are The Top Bitcoin Recovery Service Experts Today
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/32IOZVHWUZLPBEHTXLXFY24MZQBFKXNR/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OEQIW52ABFSNEBJUZQ5M3MCOSAY5CCGL/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -58,14 +58,14 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	RCPT_COUNT_ONE(0.00)[1];
 	RCVD_COUNT_TWO(0.00)[2];
-	FROM_NEQ_ENVFROM(0.00)[jackezra585@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_NEQ_ENVFROM(0.00)[theodorehenry1a@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_NONE(0.00)[];
 	R_DKIM_NA(0.00)[];
 	NEURAL_HAM(-0.00)[-0.986];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,autospyrec.site:url,autopsymainnetsolutions.com:url,autopsymainnetsolutions.com:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid]
-X-Rspamd-Queue-Id: CE96A18CB6D
+X-Rspamd-Queue-Id: 6804E18CB7C
 X-Rspamd-Action: no action
 
 QXMgY3J5cHRvY3VycmVuY2llcyBjb250aW51ZSB0byByZXNoYXBlIGZpbmFuY2UgaW4gMjAyNiwg
