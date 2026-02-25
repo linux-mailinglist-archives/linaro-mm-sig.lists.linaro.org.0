@@ -2,35 +2,35 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id uOitH0OEn2mVcgQAu9opvQ
+	id 2OQlMXaEn2mVcgQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 00:22:43 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 00:23:34 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1F32E19EBD0
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 00:22:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 54CAA19EC2F
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 00:23:34 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 24D903F756
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Feb 2026 23:22:42 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 656EF3F962
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Feb 2026 23:23:33 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 15C603F70C
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Feb 2026 23:22:36 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id CB8163F70C
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Feb 2026 23:23:26 +0000 (UTC)
 MIME-Version: 1.0
 From: hamtonbecky@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Wed, 25 Feb 2026 23:22:36 -0000
-Message-ID: <177206175608.2646712.10686091078159950823@lists.linaro.org>
+Date: Wed, 25 Feb 2026 23:23:26 -0000
+Message-ID: <177206180683.2647534.14660487061755384672@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: K3FK5M4YK6VOMI7PAYTVREK3CRWHWEPI
-X-Message-ID-Hash: K3FK5M4YK6VOMI7PAYTVREK3CRWHWEPI
+Message-ID-Hash: MD5IF2HVWEYCO4IUYNCXGL6NJSDWHRND
+X-Message-ID-Hash: MD5IF2HVWEYCO4IUYNCXGL6NJSDWHRND
 X-MailFrom: hamtonbecky@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Phishing Attacks on Wallets: How Hackers Drain Your Crypto in Minutes Cryptera Chain Signals
+Subject: [Linaro-mm-sig] Fake Investment Platforms: Anatomy of a Rug Pull Scam Cryptera Chain Signals
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/K3FK5M4YK6VOMI7PAYTVREK3CRWHWEPI/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MD5IF2HVWEYCO4IUYNCXGL6NJSDWHRND/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -63,42 +63,39 @@ X-Spamd-Result: default: False [0.59 / 15.00];
 	R_DKIM_NA(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	NEURAL_HAM(-0.00)[-0.998];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,crypterachainsignals.com:url,crypterachainsignals.com:email]
-X-Rspamd-Queue-Id: 1F32E19EBD0
+	DBL_BLOCKED_OPENRESOLVER(0.00)[crypterachainsignals.com:url,crypterachainsignals.com:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,linaro.org:email]
+X-Rspamd-Queue-Id: 54CAA19EC2F
 X-Rspamd-Action: no action
 
-Phishing remains one of the most common ways scammers steal crypto often through fake websites, malicious emails, or compromised links.
-1. The Bait
-Victims receive urgent messages: "Your wallet is at risk verify here" or fake airdrop/claim links from trusted projects.
+Scammers launch bogus trading/investment sites promising guaranteed returns, then vanish with deposits.
+1. Luring Victims
+Ads on social media or Telegram promote "AI trading bots" or "exclusive funds."
 
-Clicking leads to spoofed sites mimicking MetaMask, Ledger, or exchanges.
-Users enter seed phrases, private keys, or approve malicious transactions.
+Victims sign up and deposit crypto via provided wallets.
 
-2. Instant Drainage
-Once credentials or approvals are obtained:
+2. Controlled Environment
+Fake interfaces show rising balances to encourage more investment.
 
-Scammers sweep funds to their address.
-Drainers auto-transfer everything (tokens, NFTs).
+Withdrawals blocked with excuses ("taxes," "verification").
 
-3. Rapid Laundering
-Funds move fast:
+3. The Exit Scam
+When enough funds accumulate:
 
-Split and peeled into smaller amounts.
-Bridged to other chains.
-Mixed or swapped to break links.
+Site goes offline.
+Funds transferred out rapidly.
 
-4. Cash-Out
-Deposited to exchanges, often KYC-bypassed via layered accounts.
+4. Obfuscation & Cash-Out
+Similar to other scams: splitting, mixing, chain-hopping, then exchange fiat off-ramps.
 Where Tracing Can Intervene
-Phishing thefts leave clear on-chain trails if reported quickly.
+Many platforms use traceable patterns (e.g., repeated deposit addresses).
 
-Real-Time Monitoring: Track outgoing sweeps and downstream hops.
-Pattern Recognition: Identify common drainer signatures or exchange deposit clusters.
-Freeze Potential: Exchanges can halt if illicit origin proven early.
+Early Alerts: Monitor for sudden outflows.
+Clustering: Group related wallets to reveal operators.
+Legal Leverage: Evidence supports civil or criminal action.
 
-Firms like Cryptera Chain Signals (CCS) excel at rapid phishing investigations, using AI-powered tracing to follow funds across chains and facilitate exchange freezes. In 2026, they've helped recover significant portions in time-sensitive cases.
-Visit https://www.crypterachainsignals.com/ for crypto scam recovery support, or email info@crypterachainsignals.com to get started.
-Protect yourself with hardware wallets and bookmark verification never enter seeds online.
+Cryptera Chain Signals (CCS) analyzes these platforms' transaction histories, traces to exchanges, and supports recovery efforts with detailed reports and partnerships.
+For help with fake investment scams, head to https://www.crypterachainsignals.com/ or contact info@crypterachainsignals.com.
+Research platforms thoroughly check audits, team transparency, and community feedback.
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
