@@ -2,103 +2,103 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id iJX2BC9Tn2mraAQAu9opvQ
+	id 4BKvCYhTn2nXaAQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Feb 2026 20:53:19 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Feb 2026 20:54:48 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9BA4C19CF32
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Feb 2026 20:53:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 97EC319CF5A
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Feb 2026 20:54:47 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9A80E402AF
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Feb 2026 19:53:17 +0000 (UTC)
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
-	by lists.linaro.org (Postfix) with ESMTPS id 4B06A401AF
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Feb 2026 19:53:15 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 6C0B9401AF
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Feb 2026 19:54:46 +0000 (UTC)
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+	by lists.linaro.org (Postfix) with ESMTPS id B4447401AF
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Feb 2026 19:54:44 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=google.com header.s=20230601 header.b=xWLouGJI;
-	spf=pass (lists.linaro.org: domain of tjmercier@google.com designates 209.85.128.51 as permitted sender) smtp.mailfrom=tjmercier@google.com;
+	dkim=pass header.d=google.com header.s=20230601 header.b=ZfL09FaT;
+	spf=pass (lists.linaro.org: domain of tjmercier@google.com designates 209.85.128.48 as permitted sender) smtp.mailfrom=tjmercier@google.com;
 	arc=pass ("google.com:s=arc-20240605:i=1");
 	dmarc=pass (policy=reject) header.from=google.com
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-48371d2f661so12305e9.1
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Feb 2026 11:53:15 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1772049194; cv=none;
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-48371d2f661so12565e9.1
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Feb 2026 11:54:44 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1772049284; cv=none;
         d=google.com; s=arc-20240605;
-        b=B3brhcbAvUhLcEzyeGJpmvp6wa7Z81pWWBK/gwMTmfk5YSjMvQSvHIronrnH5t/0dT
-         mBGKIIfRQW7xEu3o5VznxxMbqOx8HkXB9x3L+cUGU/Ng4o7Zln7VGaVOKDvBLZeoZO9I
-         c/sLoKdyp4Z7oEG6v4Js/YKryabDO9EnUHN0/4UGXIKG6zZveTcdwqT0gqACT2CdJRAb
-         Y6S8QGXVb5JYXzIxQLsdCkGihP7oi16V3txpXSrR75KezrhIIkXMuqxZeMq61Hha/9+O
-         oXTL6Z0am5to9qJ+VKlrre08JiDLh22hd+3m70h3rwfdBJtldaKFZS2F9j7jD//GX3vo
-         t24Q==
+        b=VBZ6FJCD4E98hqwIBJIJRfrzzPjENAodK2TONlQ3GJ0tz2exsDMoxnpY7/7zPsIKeG
+         mRyvw6NoVkJI71syIpXjGDydtrEOLoe+fUhT9JC8d2KjXZiEl1McNqQXk9N+wgVn8g9W
+         Gw2wb0UQGtOobSDNJ3Vcs20GdStfj/CyLoR9QFk9FP4ATOuMr7Vxvn6KY2OQXzpSvg3m
+         w3IH7RFKpPqTE24Ybvs8eX15DiQWCEd5Em1CW/Q69+P/L1yiAuW8cAlKPV7tYHNGpPYN
+         vP330zNXQr+g/LHoSKljO3y+SOzLIdTR0tw56kkMHDlflzQd1Ky9aMoQV8b1mJYCIHAf
+         VSzw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:dkim-signature;
-        bh=hACZJJD++mSXl52TK006Yejdc4mpWUq5FI/WaqBAg/g=;
-        fh=hS1KgIYZFdG0gUOhk1Lno5bapoTs42TNsoBJe56Ip3M=;
-        b=LG50ZQwS1iFigtLmyguABvNxNoEl1qNCvwTgQVJkzOBviIYGMLX6p66DRKpQdBF+Qu
-         iExcskFyUdFx7cF7uYoSRxppT27gGYvzaM1yjpGtuPduITcwLiJrXlh7X1in0f36Efju
-         D0xFA1YYVFJmBcoUkcEwWPnN2HNarotbcIcrMsnkB30IfhYGf60l3FXC1PgtXfvb4amf
-         sw/hYDeZnx6MVPo3x+r/SX8FLvuSdw1YRBQlTcRB3vO0+Bq96lFbCyXhXkfwG5uODLAB
-         BzZHl88F8LGqmnNM/Xm+wXGsNJB8BAs67LvNZ1+6ouo1rhV/AfXsJ3C5yFW2atg8kykw
-         pM2Q==;
+        bh=5kHOrLDbHDmcLU0mU/NKuQBxgp05tP5/RxjExBXg+n4=;
+        fh=gyI1xuvr9G+Aa9u9iW52RCPCo3NPAWzauR4JSSD6uyQ=;
+        b=SnTib/H0VcC2VduDDpe/IKFelp6PRw1JD+Wh66nPbvSJt2MSMvrTmFld5TCVF5j/1O
+         pLelaF0Qv9ARgHTv0XB0dGv67IrGVPvFevdqz+nPiynffU0RKJDNBN6TslnYSSRkYpSS
+         vkOV80DcoGjGB51GeTCo1DppkfoYJ3l3SQFDv3Ox9w3Mb6RVLHawWv24HqMplT1afAFN
+         TQOPweyGu1qaqspPmxK8mGytVl1hE/qvULEW72lfXCPxjZlSSHCaDNJjaYIN7wXC2dXi
+         j0PgbIs7wPTgTBnN9RBgAKa2oALI1heQwy+LExa/WASD9rZ2ryAxwRiuEbS4IXtkjO0y
+         0t5A==;
         darn=lists.linaro.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1772049194; x=1772653994; darn=lists.linaro.org;
+        d=google.com; s=20230601; t=1772049284; x=1772654084; darn=lists.linaro.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=hACZJJD++mSXl52TK006Yejdc4mpWUq5FI/WaqBAg/g=;
-        b=xWLouGJIKKOdgovxthoXsc7oNLeaOYwG/4oUEjGslSZryPn9NYoTQXZwMaBQKJgMgB
-         541n4pDQ6pvDRCue3HaKExrc/MbYdVVw9k60g6y/onYQ4UkxmQ/fQbXp3ekrhoLwfZcV
-         vW8Nd5DOQvieYFEsVL3DWWf38cVQpYRl7th57g6xty0XgVRiXapNBEldMgd5g8QTW+eY
-         Z31hFAlf0o6flkSMCa8eWLWAheX/9mNUP62GrhinWuOuZbCSf/lBpvCvr2NumD9wrYLU
-         xZmkwF+xmJX4ovgBuwkkQ97+BFYMn3MqkNv2Y7CgwDTCnfA5Vgyr1LdjeahYF4Fglpvk
-         dzLg==
+        bh=5kHOrLDbHDmcLU0mU/NKuQBxgp05tP5/RxjExBXg+n4=;
+        b=ZfL09FaT1YVgQcaUB01VhvGo0eTiwr2ZwGLFqqYyfwKIGVJOT9k8rgS9qYpjRIwvYQ
+         QBns/BlyGEfJj0bc76WJakawuyva+xMlow5NMorjl6/2mielxmKjHkU22ngs7w3vMj2R
+         jYez32R5B9s2CL75K7Xtbsmk5jds8ciSoX6S6LxHcTMk7HJToJomcKAIM9+csziEaOer
+         vuXY6X7wiCmzsBy7KxRpAITg805Edbdbb1IGwp8e0n3WcOv+OCchcVSqeOr/tfYj2VgA
+         JRB+5qV+uHtai+HGfPG1+2pC/FPBa+eLNZl8pVWzzabZf9z7ODCF7XwFHsAFYtGrVw+4
+         tjIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772049194; x=1772653994;
+        d=1e100.net; s=20230601; t=1772049284; x=1772654084;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=hACZJJD++mSXl52TK006Yejdc4mpWUq5FI/WaqBAg/g=;
-        b=d+v7Mysin4XO/S3fqI7879aZpxcT1/r9Lt5swW9JLLlzNeZ5mqPZkJ3L1Z68nGmL+o
-         wgXNzH7572tp3N6tfTHpOlLRcHalWcG2kavvksU+7lp3SrYxbUGHU0mu29hTNYNq1oqh
-         U54cHmLMYrya4InhGY8Oyl/TKMETws9fngGo2i6Pcpc02g2inOqB7WSyGk6W4efaMEoV
-         K0u++GiSmJ83Nbc8do91j7LLcrzq1NyJ9zf847qJ33ARAiF2J4A0k5ePxddSsqurJhoJ
-         YauiVeSAcjG7nYYEox3xWZW/SExWPIIXf/skCcE7BRJK2pk64RY+QkKm9DsudQoW6b07
-         l3oQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUEoWZ7QsrH07t4FSqtuDVr5h27E8umnZvuJFnivIaQ4CA7wobpJw2HXqt/jvW69RMIR6i9jGj3NftQTSoe@lists.linaro.org
-X-Gm-Message-State: AOJu0Yx++IalDDFlRaUF1U+f+HfEaEyzcRf7/pXI4Pto2+X2J3D82Bhf
-	uDZ8yKPlMLxfIeMusnoynsL3rjlsNyuIWFQNKmZqMvNTnR/36k8R9dM1ykswt2kZUuHa9a5/GLi
-	CIqB/617sSmloFTr6uKqhvZPlF9e5AzKhrSaicqGV
-X-Gm-Gg: ATEYQzysk/w1yBDHiVjYtnJb/I02+ZUAhWJw+H6kQd8v3aBh2ugDxzd7IhJI5tFFzDG
-	kr3w35LPDds5iMl+I8YtQOJmTIJxNxU7GAcBOewF7V+FqQ+zW9B8mlq6UgMtyrHF3fRDiyg6xdP
-	TjV+zEmwHusjeE2pTce4aoZn++x3lHI2ytFGSZNUvKHSSFFL/U0xFGhOZOHU1bZMSskwJrqZWau
-	dyjhKSa7fCwwPAhl0gsyx0eiwA80PYVsa4JVl5aUd16sv07+xgfJ0TmQpspSmGR9osifbHuxnWJ
-	h6EX91cdgxm0VK/CiKDVtBqXgxsuvDytkqBCrK6rZ/2brG7U/+gpQV7x0oaOEge10RBWEw==
-X-Received: by 2002:a05:600c:214:b0:480:683f:743d with SMTP id
- 5b1f17b1804b1-483c318c6b5mr64755e9.14.1772049193912; Wed, 25 Feb 2026
- 11:53:13 -0800 (PST)
+        bh=5kHOrLDbHDmcLU0mU/NKuQBxgp05tP5/RxjExBXg+n4=;
+        b=lVMtA03w4EhmJsRx8hNWGsDzxEHvoO9/v+D7FVpRvUI/sbVXaNQ1vz63gAvnWMxZy1
+         ARh81xNKfWBLeFDpw7g2gArr8JlQTjAhKnvymDdn180iLkMPlqqJFJZuSEKdT0p79Csv
+         ff+MQuEALvkgXev0AbbbLXFHE89ZXNfB1++bjADGW3P9N6h0B7j5ue9tjm4agJcJLbwF
+         g/WxoD5DFV+TRrYNixVQhA7kxPOAalgb5BVwgn8vjsmNKasmJLj91MQgRFVk7med7XLg
+         NLi9afqvB033heYQjL+WxnbIxpQLsbOjYEOyXTP7bsHWJpNjeuQrftvMnxrYugvAxypB
+         UCMw==
+X-Forwarded-Encrypted: i=1; AJvYcCWA8a+GRfecJcFU0SGphxCDBxxUNIicITXTlxQeK+yuoTi7F2QfQntnXxRo5vu3bX+nf/LtV7xN1+HXlyn6@lists.linaro.org
+X-Gm-Message-State: AOJu0Yzqe0y9+/qE67qlH3qexXEeWvH4fjnvYOkxcbYE1SWgfjlUHoBL
+	iyjcO+mAsqZRN27vnfu+aVygbl21evYB38r8oiTUw7dTkZ5yC/zimyFtq1Mj+SzoKvnlq2MSiMA
+	JF/BHOG7DQqqppiv4IuPgLXBIspzFmg/1OxTTHcsT
+X-Gm-Gg: ATEYQzwiE2c5XS1YTfRJEWLGXCSbNBiQjpQK+nH72AtYaiuc3n/39ypKJy/bB+gNB29
+	wjOnkxw7MYh4N5smXz2OrZPfYkYXanWuNhrFncMw2ahB1I25ATpvuu2JE/064DxD7cxSM7BwcQJ
+	+ijbmPc1q9bxwPvgQzmiLRi3WKDWFx4ME0oL6epfjQ1u50Ria+ZHnu7qosF7LekZnmkNIFlwOnJ
+	z5gf0dFsgZa0QU2NVp7/xTJuXG11TQe0o4Sj6xdGL+nLJstynjjClc3digwO6cPZ2L0Lp2ulHxW
+	tA9oAVGcuQNTuhRYmxpdClXUKahP5KeL3CgTQrB+U3a86L3yT/CZ9UMbV4oVODemmkqgzw==
+X-Received: by 2002:a05:600c:a011:b0:47d:7304:d759 with SMTP id
+ 5b1f17b1804b1-483c31a1fbfmr90505e9.15.1772049283315; Wed, 25 Feb 2026
+ 11:54:43 -0800 (PST)
 MIME-Version: 1.0
-References: <20260225-dma-buf-heaps-as-modules-v1-0-2109225a090d@kernel.org> <20260225-dma-buf-heaps-as-modules-v1-5-2109225a090d@kernel.org>
-In-Reply-To: <20260225-dma-buf-heaps-as-modules-v1-5-2109225a090d@kernel.org>
+References: <20260225-dma-buf-heaps-as-modules-v1-0-2109225a090d@kernel.org> <20260225-dma-buf-heaps-as-modules-v1-6-2109225a090d@kernel.org>
+In-Reply-To: <20260225-dma-buf-heaps-as-modules-v1-6-2109225a090d@kernel.org>
 From: "T.J. Mercier" <tjmercier@google.com>
-Date: Wed, 25 Feb 2026 11:53:01 -0800
-X-Gm-Features: AaiRm53o2gSjT2_weYbg6Rd6sN6ASK7REyXNCnGoEQl1VXmkJdy1tVVm-ZBs7YY
-Message-ID: <CABdmKX2KfL6q2nNAkZJ3r-Pp5JPq-sj2VpQp5bU5Hct68bedwg@mail.gmail.com>
+Date: Wed, 25 Feb 2026 11:54:31 -0800
+X-Gm-Features: AaiRm51QwXByHIj_4EAMjL0iJavUr_3DqvTRveBK0_qkEAD8H59M0Ces2LdyWWw
+Message-ID: <CABdmKX26Q-DXsLEMbvsYbw_JotHpGk3zFDccAJaqir4aSBdt0w@mail.gmail.com>
 To: Maxime Ripard <mripard@kernel.org>
 X-Spamd-Bar: ----
-Message-ID-Hash: 3YYCPNMZSMIXASMPEM5NWPG3M5ZQMHRI
-X-Message-ID-Hash: 3YYCPNMZSMIXASMPEM5NWPG3M5ZQMHRI
+Message-ID-Hash: SCKFACVWJ67TKFSFMU7POZ4KA6Y2IE5G
+X-Message-ID-Hash: SCKFACVWJ67TKFSFMU7POZ4KA6Y2IE5G
 X-MailFrom: tjmercier@google.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Robin Murphy <robin.murphy@arm.com>, Andrew Morton <akpm@linux-foundation.org>, David Hildenbrand <david@kernel.org>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, "Liam R. Howlett" <Liam.Howlett@oracle.com>, Vlastimil Babka <vbabka@suse.cz>, Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, iommu@lists.linux.dev, linux-mm@kvack.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 5/7] dma-buf: heaps: Export mem_accounting parameter
+Subject: [Linaro-mm-sig] Re: [PATCH 6/7] dma-buf: heaps: cma: Turn the heap into a module
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3YYCPNMZSMIXASMPEM5NWPG3M5ZQMHRI/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SCKFACVWJ67TKFSFMU7POZ4KA6Y2IE5G/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -128,22 +128,25 @@ X-Spamd-Result: default: False [3.59 / 15.00];
 	FROM_NEQ_ENVFROM(0.00)[tjmercier@google.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[google.com:-];
-	NEURAL_HAM(-0.00)[-0.986];
+	NEURAL_HAM(-0.00)[-0.984];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,mail.gmail.com:mid,linaro.org:email]
-X-Rspamd-Queue-Id: 9BA4C19CF32
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,mail.gmail.com:mid,lists.linaro.org:helo,lists.linaro.org:rdns]
+X-Rspamd-Queue-Id: 97EC319CF5A
 X-Rspamd-Action: no action
 
 T24gV2VkLCBGZWIgMjUsIDIwMjYgYXQgODo0MuKAr0FNIE1heGltZSBSaXBhcmQgPG1yaXBhcmRA
-a2VybmVsLm9yZz4gd3JvdGU6DQo+DQo+IFRoZSBtZW1fYWNjb3VudGluZyBrZXJuZWwgcGFyYW1l
-dGVyIGlzIHVzZWQgYnkgaGVhcHMgdG8ga25vdyBpZiB0aGV5DQo+IHNob3VsZCBhY2NvdW50IGFs
-bG9jYXRpb25zIGluIHRoZWlyIHJlc3BlY3RpdmUgY2dyb3VwIGNvbnRyb2xsZXJzLg0KPg0KPiBT
-aW5jZSB3ZSdyZSBnb2luZyB0byBhbGxvdyBoZWFwcyB0byBjb21waWxlIGFzIG1vZHVsZXMsIHdl
-IG5lZWQgdG8NCj4gZXhwb3J0IHRoYXQgdmFyaWFibGUuDQo+DQo+IFNpZ25lZC1vZmYtYnk6IE1h
-eGltZSBSaXBhcmQgPG1yaXBhcmRAa2VybmVsLm9yZz4NCg0KUmV2aWV3ZWQtYnk6IFQuSi4gTWVy
-Y2llciA8dGptZXJjaWVyQGdvb2dsZS5jb20+DQpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8t
-bW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBs
-aW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+a2VybmVsLm9yZz4gd3JvdGU6DQo+DQo+IE5vdyB0aGF0IGFsbCB0aGUgc3ltYm9scyB1c2VkIGJ5
+IHRoZSBDTUEgaGVhcCBhcmUgZXhwb3J0ZWQsIHR1cm5pbmcgdGhlDQo+IENNQSBoZWFwIGludG8g
+YSBtb2R1bGUgYmVjb21lcyBwcmV0dHkgZWFzeTogd2UganVzdCBuZWVkIHRvIGFkZCB0aGUNCj4g
+dXN1YWwgTU9EVUxFXyogbWFjcm9zLCBpbXBvcnQgdGhlIHByb3BlciBuYW1lc3BhY2VzIGFuZCBj
+aGFuZ2UgdGhlDQo+IEtjb25maWcgc3ltYm9sIHRvIGEgdHJpc3RhdGUuDQo+DQo+IFNpZ25lZC1v
+ZmYtYnk6IE1heGltZSBSaXBhcmQgPG1yaXBhcmRAa2VybmVsLm9yZz4NCg0KSXQnZCBiZSBnb29k
+IHRvIGFkZCBhIG5vdGUgdGhhdCBoZWFwIG1vZHVsZXMgY2FuJ3QgYmUgdW5sb2FkZWQgKHVubGVz
+cw0Kd2UgYWRkIG1vcmUgY29kZSB0byB2ZXJpZnkgdGhlcmUgYXJlIG5vIGxpdmUgaGVhcCBhbGxv
+Y2F0aW9ucykuIFdpdGgNCnRoYXQ6DQoNClJldmlld2VkLWJ5OiBULkouIE1lcmNpZXIgPHRqbWVy
+Y2llckBnb29nbGUuY29tPg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0
+cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNp
+Zy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
