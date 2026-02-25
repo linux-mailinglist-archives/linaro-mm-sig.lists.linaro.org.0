@@ -2,36 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +EQeHUtin2lRagQAu9opvQ
+	id 4F+JDrhin2lRagQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Feb 2026 21:57:47 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Feb 2026 21:59:36 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3085819D7E3
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Feb 2026 21:57:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C7F7C19D838
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Feb 2026 21:59:35 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 421BF402AF
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Feb 2026 20:57:46 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C2E6D402BB
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Feb 2026 20:59:34 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8804D3F753
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Feb 2026 20:57:38 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9624B3F69B
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Feb 2026 20:59:27 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: henrylevi287@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Wed, 25 Feb 2026 20:57:38 -0000
-Message-ID: <177205305855.2482809.9621148019843067324@lists.linaro.org>
+Date: Wed, 25 Feb 2026 20:59:27 -0000
+Message-ID: <177205316760.2486145.16155714242199184874@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: XINPNJEQUX6QUQYODAKEU52BUVB7LDX5
-X-Message-ID-Hash: XINPNJEQUX6QUQYODAKEU52BUVB7LDX5
+Message-ID-Hash: FLOCDUIGBSCUHTK2ODGQDMZ3ASIWCJLK
+X-Message-ID-Hash: FLOCDUIGBSCUHTK2ODGQDMZ3ASIWCJLK
 X-MailFrom: henrylevi287@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] BEST AND LEGITIMATE TOP 2 GOOD CRYPTO RECOVERY EXPERT TRUSTED
+Subject: [Linaro-mm-sig] TOP 1 BEST CRYPTOCURRENCY RECOVERY COMPANY CHAINX HACKER SOLUTIONS TOP CHOICE FOR 2026
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XINPNJEQUX6QUQYODAKEU52BUVB7LDX5/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FLOCDUIGBSCUHTK2ODGQDMZ3ASIWCJLK/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -45,27 +45,28 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_BASE64_TEXT(0.10)[];
-	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
+	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[henrylevi287@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
-	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	URIBL_MULTI_FAIL(0.00)[linaro.org:server fail,lists.linaro.org:server fail,chainxhacksolution.com:server fail,co.site:server fail];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FROM_NO_DN(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_NEQ_ENVFROM(0.00)[henrylevi287@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	RCPT_COUNT_ONE(0.00)[1];
 	TO_DN_NONE(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	R_DKIM_NA(0.00)[];
 	NEURAL_HAM(-0.00)[-0.991];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	R_DKIM_NA(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,chainxhacksolution.com:url,co.site:email,linaro.org:email]
-X-Rspamd-Queue-Id: 3085819D7E3
+	DBL_BLOCKED_OPENRESOLVER(0.00)[co.site:email]
+X-Rspamd-Queue-Id: C7F7C19D838
 X-Rspamd-Action: no action
 
 QXMgY3J5cHRvY3VycmVuY2llcyBjb250aW51ZSB0byByZXNoYXBlIGZpbmFuY2UgaW4gMjAyNiwg
