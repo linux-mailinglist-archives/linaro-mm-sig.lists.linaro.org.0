@@ -2,152 +2,106 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id kH+5GH6Cn2lrcgQAu9opvQ
+	id qPXmG/+Dn2mVcgQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 00:15:10 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 00:21:35 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id F1F6519EA23
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 00:15:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 07ED719EB8D
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 00:21:34 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id EF8EC3F70C
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Feb 2026 23:15:08 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 041283F756
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Feb 2026 23:21:34 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0253F3F756
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Feb 2026 23:15:02 +0000 (UTC)
-Content-Type: text/plain; charset="utf-8"
+	by lists.linaro.org (Postfix) with ESMTP id 7B6BD3F753
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Feb 2026 23:21:27 +0000 (UTC)
 MIME-Version: 1.0
 From: hamtonbecky@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Wed, 25 Feb 2026 23:15:02 -0000
-Message-ID: <177206130200.2636769.13446261146655541408@lists.linaro.org>
+Date: Wed, 25 Feb 2026 23:21:27 -0000
+Message-ID: <177206168749.2644459.332938505591197720@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: HWQOHNFLDNRW7DRFI5MMH3TCLFHKVFUK
-X-Message-ID-Hash: HWQOHNFLDNRW7DRFI5MMH3TCLFHKVFUK
+Message-ID-Hash: DIT27GT75BBINWFX6PE3JLAAQOFNWUJ4
+X-Message-ID-Hash: DIT27GT75BBINWFX6PE3JLAAQOFNWUJ4
 X-MailFrom: hamtonbecky@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Inside a Crypto Scam: How Stolen Funds Move Across the Blockchain Cryptera Chain Signals
+Subject: [Linaro-mm-sig] Romance Scams in Crypto: The Slow Burn Theft Exposed
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HWQOHNFLDNRW7DRFI5MMH3TCLFHKVFUK/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DIT27GT75BBINWFX6PE3JLAAQOFNWUJ4/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.69 / 15.00];
+X-Spamd-Result: default: False [0.59 / 15.00];
 	MID_RHS_MATCH_TO(1.00)[];
-	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx];
-	MIME_BASE64_TEXT(0.10)[];
+	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[hamtonbecky@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	RCPT_COUNT_ONE(0.00)[1];
 	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	FROM_NO_DN(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	TO_DN_NONE(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.982];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	R_DKIM_NA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid]
-X-Rspamd-Queue-Id: F1F6519EA23
+	FREEMAIL_FROM(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.997];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_NEQ_ENVFROM(0.00)[hamtonbecky@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	TO_DN_NONE(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	R_DKIM_NA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,linaro.org:email]
+X-Rspamd-Queue-Id: 07ED719EB8D
 X-Rspamd-Action: no action
 
-SW5zaWRlIGEgQ3J5cHRvIFNjYW06IEhvdyBTdG9sZW4gRnVuZHMgTW92ZSBBY3Jvc3MgdGhlIEJs
-b2NrY2hhaW4NClRoZSBjcnlwdG9jdXJyZW5jeSBlY29zeXN0ZW0gb2ZmZXJzIGluY3JlZGlibGUg
-aW5ub3ZhdGlvbiwgYnV0IGl0IGFsc28gYXR0cmFjdHMgc29waGlzdGljYXRlZCBzY2FtbWVycyB3
-aG8gZXhwbG9pdCBpdHMgcHNldWRvbnltaXR5IGFuZCBnbG9iYWwgbmF0dXJlLiBVbmRlcnN0YW5k
-aW5nIGhvdyBzdG9sZW4gZnVuZHMgbW92ZSBhY3Jvc3MgdGhlIGJsb2NrY2hhaW4gaXMga2V5IHRv
-IGdyYXNwaW5nIHdoeSByZWNvdmVyeSBpcyBjaGFsbGVuZ2luZ+KAlGFuZCB3aGVyZSBpbnRlcnZl
-bnRpb24gcmVtYWlucyBwb3NzaWJsZS4gVGhpcyBhcnRpY2xlIGJyZWFrcyBkb3duIGEgdHlwaWNh
-bCBjcnlwdG8gc2NhbSBmbG93LCBzdGVwIGJ5IHN0ZXAuDQoxLiBWaWN0aW0gU2VuZHMgRnVuZHMN
-ClRoZSBzY2FtIG9mdGVuIGJlZ2lucyB3aXRoIHNvY2lhbCBlbmdpbmVlcmluZzogYSBmYWtlIGlu
-dmVzdG1lbnQgb3Bwb3J0dW5pdHksIHJvbWFuY2Ugc2NhbSwgcGhpc2hpbmcgYXR0YWNrLCBvciBp
-bXBlcnNvbmF0aW9uIG9mIGEgbGVnaXRpbWF0ZSBwcm9qZWN0LiBUaGUgdmljdGltIHRyYW5zZmVy
-cyBjcnlwdG9jdXJyZW5jeSAoZS5nLiwgQml0Y29pbiwgRXRoZXJldW0sIFVTRFQpIGRpcmVjdGx5
-IHRvIGEgd2FsbGV0IGFkZHJlc3MgY29udHJvbGxlZCBieSB0aGUgc2NhbW1lci4NCg0KT24gdGhl
-IGJsb2NrY2hhaW4sIHRoaXMgYXBwZWFycyBhcyBhIHN0cmFpZ2h0Zm9yd2FyZCBvdXRib3VuZCB0
-cmFuc2FjdGlvbiBmcm9tIHRoZSB2aWN0aW0ncyB3YWxsZXQgdG8gdGhlIHNjYW1tZXIncyBpbml0
-aWFsIHJlY2VpdmluZyBhZGRyZXNzLg0KRnVuZHMgYXJlIG5vdyBpbiB0aGUgc2NhbW1lcidzIGNv
-bnRyb2wsIGJ1dCB0aGUgdHJhbnNhY3Rpb24gaXMgcGVybWFuZW50bHkgcmVjb3JkZWQgb24gdGhl
-IHB1YmxpYyBsZWRnZXIuDQoNCjIuIFNjYW1tZXIgU3BsaXRzIFdhbGxldHMNClRvIG9ic2N1cmUg
-dGhlIHRyYWlsLCBzY2FtbWVycyByYXJlbHkga2VlcCBmdW5kcyBpbiBvbmUgcGxhY2UuIEltbWVk
-aWF0ZWx5IGFmdGVyIHJlY2VpcHQsIHRoZXkgc3BsaXQgdGhlIHN0b2xlbiBhbW91bnQgYWNyb3Nz
-IG11bHRpcGxlIG5ldyB3YWxsZXRzIChhIHRlY2huaXF1ZSBjYWxsZWQgInBlZWxpbmciIG9yIGRp
-c3RyaWJ1dGlvbikuDQoNCkZvciBleGFtcGxlLCBhICQxMDAsMDAwIHRoZWZ0IG1pZ2h0IGJlIGRp
-dmlkZWQgaW50byAxMOKAkzUwIHNtYWxsZXIgdHJhbnNmZXJzIHRvIGZyZXNoIGFkZHJlc3Nlcy4N
-ClRoaXMgY3JlYXRlcyBhIGZhbi1vdXQgcGF0dGVybjogb25lIGlucHV0IHRyYW5zYWN0aW9uIGJy
-YW5jaGVzIGludG8gbWFueSBvdXRwdXRzLg0KU2NhbW1lcnMgdXNlIGF1dG9tYXRlZCBzY3JpcHRz
-IG9yICJwZWVsIGNoYWlucyIgdG8gbWFrZSB0cmFja2luZyBtb3JlIGxhYm9yLWludGVuc2l2ZS4N
-Cg0KMy4gTWl4aW5nIC8gSG9wcGluZyBDaGFpbnMNCk5leHQgY29tZXMgb2JmdXNjYXRpb24uIFNj
-YW1tZXJzIGVtcGxveSB0ZWNobmlxdWVzIHRvIGJyZWFrIHRoZSBkaXJlY3QgbGluayBiZXR3ZWVu
-IHRoZSBpbml0aWFsIHJlY2VpcHQgYW5kIGZpbmFsIGNhc2gtb3V0Lg0KDQpNaXhlcnMvVHVtYmxl
-cnM6IFNlcnZpY2VzIChkZWNlbnRyYWxpemVkIG9yIHNhbmN0aW9uZWQgb25lcykgc2h1ZmZsZSBm
-dW5kcyB3aXRoIG90aGVycywgbWFraW5nIGl0IGhhcmQgdG8gbGluayBpbnB1dHMgdG8gb3V0cHV0
-cy4NCkNoYWluIEhvcHBpbmc6IEZ1bmRzIGFyZSBzd2FwcGVkIG9yIGJyaWRnZWQgdG8gYW5vdGhl
-ciBibG9ja2NoYWluIChlLmcuLCBFdGhlcmV1bSDihpIgQmluYW5jZSBTbWFydCBDaGFpbiDihpIg
-U29sYW5hKSB2aWEgY3Jvc3MtY2hhaW4gYnJpZGdlcyBvciBERVhzLiBFYWNoIGhvcCBhZGRzIGNv
-bXBsZXhpdHksIGFzIGludmVzdGlnYXRvcnMgbXVzdCB0cmFjayBhY3Jvc3MgZGlmZmVyZW50IGxl
-ZGdlcnMuDQpQcml2YWN5IENvaW5zOiBDb252ZXJzaW9uIHRvIE1vbmVybyAoWE1SKSBvciBzaW1p
-bGFyIGNvaW5zIGJyZWFrcyB0cmFjZWFiaWxpdHkgZHVlIHRvIGJ1aWx0LWluIHByaXZhY3kgZmVh
-dHVyZXMgbGlrZSByaW5nIHNpZ25hdHVyZXMuDQoNClRoZXNlIHN0ZXBzIGNhbiBvY2N1ciB3aXRo
-aW4gbWludXRlcyB0byBob3VycywgbGV2ZXJhZ2luZyB0aGUgMjQvNyBuYXR1cmUgb2YgY3J5cHRv
-IG1hcmtldHMuDQo0LiBFeGNoYW5nZSBDYXNoLU91dA0KVGhlIGZpbmFsIHN0YWdlIGlzIGZpYXQg
-Y29udmVyc2lvbi4gU2NhbW1lcnMgbW92ZSBjbGVhbmVkIGZ1bmRzIHRvIGNlbnRyYWxpemVkIGV4
-Y2hhbmdlcyAoQ0VYcykgdGhhdCBzdXBwb3J0IGZpYXQgb2ZmLXJhbXBzLg0KDQpGdW5kcyBhcmUg
-ZGVwb3NpdGVkIHRvIGV4Y2hhbmdlLWNvbnRyb2xsZWQgZGVwb3NpdCBhZGRyZXNzZXMuDQpTY2Ft
-bWVycyB0cmFkZSBvciB3aXRoZHJhdyB0byBiYW5rIGFjY291bnRzLCBvZnRlbiB1c2luZyBLWUMt
-d2VhayBleGNoYW5nZXMsIG11bGVzLCBvciBsYXllcmVkIGFjY291bnRzIGluIGp1cmlzZGljdGlv
-bnMgd2l0aCBsYXggZW5mb3JjZW1lbnQuDQpPbmNlIGZpYXQgaXMgd2l0aGRyYXduLCByZWNvdmVy
-eSBiZWNvbWVzIGV4dHJlbWVseSBkaWZmaWN1bHQgd2l0aG91dCBsYXcgZW5mb3JjZW1lbnQgaW50
-ZXJ2ZW50aW9uLg0KDQpXaGVyZSBUcmFjaW5nIENhbiBJbnRlcnZlbmUNCkJsb2NrY2hhaW4ncyB0
-cmFuc3BhcmVuY3kgaXMgYSBkb3VibGUtZWRnZWQgc3dvcmQ6IHdoaWxlIGl0IGVuYWJsZXMgc2Nh
-bXMsIGl0IGFsc28gYWxsb3dzIHRyYWNpbmcgaWYgYWN0ZWQgdXBvbiBxdWlja2x5Lg0KDQpFYXJs
-eSBJbnRlcnZlbnRpb246IElmIHZpY3RpbXMgcmVwb3J0IGltbWVkaWF0ZWx5ICh3aXRoaW4gaG91
-cnMvZGF5cyksIGludmVzdGlnYXRvcnMgY2FuIG1vbml0b3IgZG93bnN0cmVhbSBhZGRyZXNzZXMg
-aW4gcmVhbCB0aW1lLg0KRXhjaGFuZ2UgRnJlZXplczogTWFueSBjb21wbGlhbnQgQ0VYcyAoZS5n
-LiwgQmluYW5jZSwgQ29pbmJhc2UpIGNvb3BlcmF0ZSB3aXRoIGxhdyBlbmZvcmNlbWVudCBvciBx
-dWFsaWZpZWQgaW52ZXN0aWdhdG9ycyB0byBmcmVlemUgc3VzcGljaW91cyBkZXBvc2l0cyBpZiBw
-cm92aWRlZCB3aXRoIGV2aWRlbmNlIG9mIGlsbGljaXQgb3JpZ2luLg0KQ2x1c3RlcmluZyAmIEF0
-dHJpYnV0aW9uOiBBZHZhbmNlZCBhbmFseXRpY3MgZ3JvdXAgYWRkcmVzc2VzIGNvbnRyb2xsZWQg
-YnkgdGhlIHNhbWUgZW50aXR5LCBkZWFub255bWl6ZSB2aWEgb2ZmLWNoYWluIGRhdGEgKGUuZy4s
-IElQIGxvZ3MsIGV4Y2hhbmdlIEtZQyksIGFuZCBmbGFnIGhpZ2gtcmlzayBwYXR0ZXJucy4NCg0K
-QmxvY2tjaGFpbiBpbnZlc3RpZ2F0aW9uIGZpcm1zIGxpa2UgQ3J5cHRlcmEgQ2hhaW4gU2lnbmFs
-cyAoQ0NTKSBhbmFseXplIHRyYW5zYWN0aW9uIHBhdGhzIHRvIGlkZW50aWZ5IGV4Y2hhbmdlIGVu
-ZHBvaW50cyB3aGVyZSBmdW5kcyBtYXkgc3RpbGwgYmUgYWN0aW9uYWJsZS4gU3BlY2lhbGl6aW5n
-IGluIGNyeXB0byByZWNvdmVyeSwgZGlnaXRhbCBmcmF1ZCBpbnZlc3RpZ2F0aW9uLCBhbmQgYmxv
-Y2tjaGFpbiBmb3JlbnNpY3MsIHRoZXkgbWFwIGZ1bmQgZmxvd3MsIGNsdXN0ZXIgcmVsYXRlZCBh
-ZGRyZXNzZXMsIGFuZCBsZXZlcmFnZSBwYXJ0bmVyc2hpcHMgd2l0aCBleGNoYW5nZXMgYW5kIGF1
-dGhvcml0aWVzIHRvIHB1cnN1ZSBmcmVlemVzIG9yIHJlY292ZXJpZXMgYmVmb3JlIGZ1bmRzIGFy
-ZSBmdWxseSBsYXVuZGVyZWQuIFdpdGggYSBwcm92ZW4gdHJhY2sgcmVjb3JkIChpbmNsdWRpbmcg
-aHVuZHJlZHMgb2Ygc3VjY2Vzc2Z1bCBjYXNlcyBoaWdobGlnaHRlZCBpbiAyMDI2IHJldmlld3Mp
-LCB0aGV5IGhlbHAgdmljdGltcyBuYXZpZ2F0ZSB0aGUgcHJvY2VzcyBwcm9mZXNzaW9uYWxseS4N
-CkZvciBhc3Npc3RhbmNlIHdpdGggY3J5cHRvY3VycmVuY3kgc2NhbSBpbnZlc3RpZ2F0aW9ucyBv
-ciBhc3NldCByZWNvdmVyeSwgdmlzaXQgdGhlIENyeXB0ZXJhIENoYWluIFNpZ25hbHMgd2Vic2l0
-ZSBhdCBodHRwczovL3d3dy5jcnlwdGVyYWNoYWluc2lnbmFscy5jb20vLiBZb3UgY2FuIGNvbnRh
-Y3QgdGhlbSBkaXJlY3RseSB0aHJvdWdoIHRoZWlyIHNpdGUgZm9yIHN1cHBvcnQgKHRoZXkgcHJv
-dmlkZSBzZWN1cmUgaW5xdWlyeSBmb3JtcyBhbmQgZGV0YWlscyBsaWtlIGluZm9AY3J5cHRlcmFj
-aGFpbnNpZ25hbHMuY29tKS4NCkNyeXB0byBzY2FtcyBldm9sdmUgcmFwaWRseSwgYnV0IHN3aWZ0
-IHJlcG9ydGluZyBhbmQgZXhwZXJ0IGJsb2NrY2hhaW4gYW5hbHlzaXMgcmVtYWluIHRoZSBiZXN0
-IGRlZmVuc2VzLiBBbHdheXMgdmVyaWZ5IG9wcG9ydHVuaXRpZXMsIHVzZSBoYXJkd2FyZSB3YWxs
-ZXRzLCBlbmFibGUgMkZBL211bHRpc2lnIHdoZXJlIHBvc3NpYmxlLCBhbmQgbmV2ZXIgc2VuZCBm
-dW5kcyB0byB1bnNvbGljaXRlZCBhZGRyZXNzZXMuIElmIHZpY3RpbWl6ZWQsIGFjdCBmYXN04oCU
-dGltZSBpcyBjcml0aWNhbCBpbiB0cmFjaW5nIHN0b2xlbiBhc3NldHMuDQpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcg
-bGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2Vu
-ZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+The rise of cryptocurrency has amplified romance scams, where fraudsters build emotional trust over weeks or months before requesting funds. These "pig butchering" operations are particularly devastating because victims often send large sums willingly.
+1. Building False Trust
+Scammers create fake profiles on dating apps or social media, posing as successful investors or entrepreneurs. They share "proof" of crypto gains to lure victims into trading platforms they control.
+
+Conversations escalate to "exclusive opportunities" like private presales or high-yield pools.
+Victims are guided to deposit crypto into wallets or fake exchanges.
+
+2. The Extraction Phase
+Once trust is established, scammers pressure victims to invest more, promising quick returns.
+
+Funds go to scammer-controlled addresses.
+Fake dashboards show fabricated profits to encourage further deposits.
+
+3. Obfuscation Tactics
+After extraction, funds are quickly moved:
+
+Split across dozens of wallets.
+Hopped through bridges to privacy-focused chains.
+Mixed via services or converted to privacy coins like Monero.
+
+4. Final Laundering
+Cleaned funds hit centralized exchanges for fiat withdrawal, often via mule accounts.
+
+Recovery window closes fast once converted.
+
+Where Tracing Can Intervene
+Quick action is essential in romance scams due to the emotional manipulation factor.
+
+Immediate Reporting: Preserve all chat logs, transaction IDs, and screenshots.
+Blockchain Analysis: Trace patterns like repeated small deposits or specific bridge usage.
+Exchange Cooperation: Provide evidence to freeze incoming deposits.
+
+Blockchain investigation firms like Cryptera Chain Signals (CCS) specialize in tracing romance scam funds through complex paths, identifying endpoints, and assisting with freeze requests. With advanced forensics and a track record of hundreds of recoveries (including 2026 cases), they help victims map flows and pursue actionable steps before full laundering.
+For professional help with romance scam or crypto fraud recovery, visit the Cryptera Chain Signals website at https://www.crypterachainsignals.com/. Contact them directly via email at info@crypterachainsignals.com or through their secure inquiry form.
+Emotional scams hurt deeply, but blockchain transparency offers hope act swiftly and seek expert help.
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
