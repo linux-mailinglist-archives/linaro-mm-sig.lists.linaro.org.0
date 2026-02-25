@@ -2,391 +2,342 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id kMoJFJoU4WlRpAAAu9opvQ
+	id CPV7IqMU4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:55:54 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:56:03 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id DA21141223D
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:55:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2CB4441224B
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:56:02 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id EC8A945121
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:55:52 +0000 (UTC)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	by lists.linaro.org (Postfix) with ESMTPS id 6EB86400F4
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Feb 2026 17:17:44 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E87C745124
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:56:01 +0000 (UTC)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	by lists.linaro.org (Postfix) with ESMTPS id A6F293F69B
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Feb 2026 17:57:03 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=qualcomm.com header.s=qcppdkim1 header.b=KiWpLnMw;
-	dkim=pass header.d=oss.qualcomm.com header.s=google header.b=NVyBcn74;
-	spf=pass (lists.linaro.org: domain of dmitry.baryshkov@oss.qualcomm.com designates 205.220.168.131 as permitted sender) smtp.mailfrom=dmitry.baryshkov@oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.s=qcppdkim1 header.b=arfaW0Tf;
+	dkim=pass header.d=oss.qualcomm.com header.s=google header.b=eDLj04gQ;
+	spf=pass (lists.linaro.org: domain of ekansh.gupta@oss.qualcomm.com designates 205.220.180.131 as permitted sender) smtp.mailfrom=ekansh.gupta@oss.qualcomm.com;
 	dmarc=pass (policy=reject) header.from=qualcomm.com
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 61PEkZSO3041200
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Feb 2026 17:17:43 GMT
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 61PH4bCK1363583
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Feb 2026 17:57:03 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	zlhhBeBDZHYroAhwpgIufMaWgUYA4mcK1NKdH2dwIU4=; b=KiWpLnMwbAFkAHaz
-	89bFWXsfuqfI69YBtIJSlf5qugU+40wlRvv5baioME5yzga3digRu8fT1cE3s/FY
-	hL2PfPgCqykveDZ+Lz2VyB/lCQAyoZ0svQBTXH8rQVDfBzaCiojgbAnFfdBf1Sip
-	a7df93bZQlT+unXcLtfpXjiqIvx6AIO4Le8/LiHzNGV18oad7SOkubvEIhvAeEa2
-	JMweihFR8NRd0+/WuZyKOLzOJch16TUelt3MYCv+u8l9oYO8gVKubedOcbbAJvsf
-	2VVNRZ2hm7MYhdbSFxLf2EIc8jO1HelXBn7yktbJYip6uZvo/v//oS03iqIcA8I0
-	Ahy8DQ==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4cj350gj34-1
+	mvsIZr9qVQn4O36RmaOABy93+YNGrflCz5PAS8IaKgM=; b=arfaW0TfHpQRAiB3
+	YUxT/Mpf4RJwDwolsP9sX29dPvyxychIKRB9uk3QWcvfIvPnf76Au4Ap0J0MtKmp
+	Ze9/v68hrjcyQXPrUuBM6LMvUf0y+jhkpgjL3BfNPmM1etkC2bFeEh0xtXHYs3Iw
+	KbYZLJ9kKLbzaHkzQ6bCZkaBF1JuEJYxE4aIHwo+TLG5D+2ilhXVbKenaa+9Op6b
+	86VmMxFX5qs9EYajYu8sptVauXO6ZYMx5Gtw/gXYrN0GG1MGybh6Uz/fTKUCFeKF
+	tc+h+u7qxTLLtxON7DNtQlwXa+TsD3HBcXyEpXIqQMRQ2ynyjb4DUyoBxq1JiH4O
+	miUARA==
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4chp15b1xw-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Feb 2026 17:17:43 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-8cb706313beso977284385a.3
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Feb 2026 09:17:43 -0800 (PST)
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Feb 2026 17:57:03 +0000 (GMT)
+Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2aad6045810so70152135ad.3
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Feb 2026 09:57:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1772039862; x=1772644662; darn=lists.linaro.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=zlhhBeBDZHYroAhwpgIufMaWgUYA4mcK1NKdH2dwIU4=;
-        b=NVyBcn748F51qNxbd8IuWM0i7ZE81qlWE2MJVp1FWUmcz0zvVn8ci/22sOZ61zoD6W
-         ej/o8xXy1XdLy4++lYD8gqUQPCppSM3FWyGW57v7E5Iq7DL5szAsqeDkhbQzN8nrloaD
-         VRl419q++8fppD4dAKCcM+1EKmlRKpqdCZql+00qmZNsm+KbKxsTL9/vzMQ9oDcSsa0q
-         imW0bd8QS+xnUFI22aDV3U/ECgdL71x/h6SUNemyb9dICU2MKeJSwz+5PjxGoGgLmW+x
-         ymm5gR1TKnFr9ShrXHF+A48X9iMQRY+lxRdR1RKNySzXaZdg2G+OZpdi8Hau8juBOCj0
-         jEjw==
+        d=oss.qualcomm.com; s=google; t=1772042222; x=1772647022; darn=lists.linaro.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=mvsIZr9qVQn4O36RmaOABy93+YNGrflCz5PAS8IaKgM=;
+        b=eDLj04gQJf3dyeEsFTs2u8flYqqI9AZIR71huZXwgSP/W+EKYeYdaWD4VL6UWVfZGl
+         pCwvB3B1lrFqINlKAftiqe8lH8LwQVC7AcWHG002iXAQ6SQC25lfxYm4W9XidETYck5I
+         6SM8V47Gd2E6DSRR4zgZ9kEUqe96o81+Kpz0co+cNsIvLICS81ZJCz6cZTiClWwARDYW
+         MiFP2j412uBHO59dBV5Oxdw5L7Wnc/tzGbcHWWKvBN2ntaI15KeBWRi/hEG2949C3g69
+         iujEpgxnk7djrRLJO6DKX2aRLUlpl22bVHa+42u/1870WDxQCt4eLR23LFF0R/rBL1nA
+         6Szg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772039862; x=1772644662;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=zlhhBeBDZHYroAhwpgIufMaWgUYA4mcK1NKdH2dwIU4=;
-        b=I19Z1gYlkQy0pCbA2BAtjGFfw4AkoovhmlyR4JNYZth8QW2H7rvwa9XIprYfK0IxK+
-         U6yQxBftNX5ZhHnhfpKNqmrmo7Ab6kLRTRi2ZnpgjLkMGuS/IyJWDyBVcDjUydmwF143
-         UM6xoBOK/58jKosCXzFEJpZ0f8ZRfltd9cYMK5HUjMIuE0LdhHQbkKaWi9tXV3dpuQwu
-         qe7D+utjoQGa0cM06srwsEnXy4e0mgfX2mjHw8sDRbdAotLsspCLOwScLc0zvtM0MHwN
-         N3im1PFTT0SU7sizgLltVcKAtVt6AlvVoQIlwL591SICQNlYBRxzS9A3b8t5QXVobdOh
-         Yw7g==
-X-Forwarded-Encrypted: i=1; AJvYcCUC8+pOCgE0BMQ1ilxAwNKTYchvbA6wIJU94nQgVJpmm3W2ZhXaCvWk7klb/oDKgHvIfBl7FgxlKcEj+CSv@lists.linaro.org
-X-Gm-Message-State: AOJu0Yz+VqwC+W9lMIxmu60xxhhOFbBND6ieeFMg+5Q5pCB8Q7wh1yxn
-	Yyt9niWHGNuKgl8Ezmvxh4WgH4RKD+0IOEDUvsgvd0w3X6jFU/Of65BOjMlb2f4aUGoeALb0W6u
-	MxiM8LhXrxxPEukmME7gFLIHqDNEgHfzB7Dv54V78gMk0FnZnw9DdoXcgBQ9DnPx8ud3PmA==
-X-Gm-Gg: ATEYQzx7o9/b+jOlzZQP6LiSzbX0Oqv1BLW5jm17QDAABZ8t2qpHkJMDMx9jGxVYzBE
-	UpGvGT+G8PnCx5BM28dGQWUMK6Vdu6Dr9h5n3ntYAQRDh0e4dAF5oDqz4pL75Nz321blhXerwJA
-	G0CXLt75iM4F6YUQnC6a2Bq6uJ2W+XvPiH0eK0UnpFFzYDG3Lp4YsyClj7Agq/FuWdt9oW9/DJN
-	hYQ8J/CJJqU1xMhyTbst5Pzhz5cPHe41VfkkSiiGUaZ8cOk6hADO8WCH2kincjZL8iOT2++Cbpo
-	QbTybUArqdMXxKaqUfYQEMlN8X4CDpjN4z/KpSLc+hTvHzhxEn8Ajd42sG+OMCoURYed81A5Vke
-	uYzTGteZvhBF4G4E1XB8fVhb55ZhxxW/bHyh+OeA4W9dTJ71CiPilYWjUA6i8+m9ekubWJdENr4
-	QtijViISO6QWgcazwGKoLAoxTfdUfaelonuJc=
-X-Received: by 2002:a05:620a:3712:b0:8c6:adfc:48fe with SMTP id af79cd13be357-8cb8c9fe778mr2045653185a.23.1772039862006;
-        Wed, 25 Feb 2026 09:17:42 -0800 (PST)
-X-Received: by 2002:a05:620a:3712:b0:8c6:adfc:48fe with SMTP id af79cd13be357-8cb8c9fe778mr2045644185a.23.1772039861293;
-        Wed, 25 Feb 2026 09:17:41 -0800 (PST)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5a0eeb16344sm3159248e87.37.2026.02.25.09.17.40
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Feb 2026 09:17:40 -0800 (PST)
-Date: Wed, 25 Feb 2026 19:17:38 +0200
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
-Message-ID: <en5tdgemre7vq5qihe6wnkbrro24vtzwfxwqrpnrrmugxoszs7@x2ox64zeznvd>
-References: <20260224-qda-firstpost-v1-0-fe46a9c1a046@oss.qualcomm.com>
- <20260224-qda-firstpost-v1-1-fe46a9c1a046@oss.qualcomm.com>
- <jyd3ufisoz4xcfe2dvu26odesaz2czj22jn46qswkzz6ocg4zu@6krzvyvirkmo>
- <ceba8973-4fb7-4497-aebf-dd41f2d2eaa5@oss.qualcomm.com>
+        d=1e100.net; s=20230601; t=1772042222; x=1772647022;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=mvsIZr9qVQn4O36RmaOABy93+YNGrflCz5PAS8IaKgM=;
+        b=MrKpUGcAxRmdflqWERE75do4fqq4vj56TBviy355MimswX5SYqzDLzbDCX3PEWQOjZ
+         y9ZNfD/2lfIoGXml0ki1t1kenS1fKpTvB2Kv1ncMnMnHzd4+WYMIPnt2Lo0zsflaJuJD
+         XVOiqncth08KrowGg1GpBHHbiiEOAlYe3UyoVU50lddrS9vFzwuVZQcA30MjYwjE7r+I
+         vrVRLAlgtGd6ZIh37RIFyP8tETWqUbBmkTjeTeJ2qrb4yvYqbO1XoLcnnUb8KYM+VKfp
+         P++gFpbeiitEf6W/lJbWL0VUI125RA6raDEz+oLO8DCbS6qbQ/yhZUQlI1s2yarqrmZ1
+         anUg==
+X-Forwarded-Encrypted: i=1; AJvYcCXwPwWexS0oBHlqtX6TyYZEeMykov+KqwoCetKObMrdSAiUC862xcWZz1TpSie4B+XUEm7rogvk1ZTrhGx9@lists.linaro.org
+X-Gm-Message-State: AOJu0YwoQCJ9bG1dsRyL4dhoMSeMvALgbmh9URUzj1a7QOJcsbfzjQgJ
+	YVCe0zIgwx8/vKzkcRbOsNSw4WpM57YSLhnDjzqjPCQCNILWGW3OYT4jP9y216H6AYLUrsiUrjE
+	0WbktBI4KXirq5kzZjvejDojDxyJSBzSuHR64I/FZsUM3VPhP93A19Qc7FNvvbx0sCVdgOw==
+X-Gm-Gg: ATEYQzzD2Y9LC/DRgbW0dxsZlN3YZK6AIMFJS5PAdJSlxulXVPaizBDTvVjpiZ6/UXe
+	VXnhs//RzLroLWe3rZ1yFvo0173FocTqarGkpNAM+wRX5CYWe7nqse1hcsqb7WaerLy3x9MQX5j
+	nePSEe2UwpManXWmf7GPa24jssvL7CZ31nqhK0k5Jd25k6vMJjjORfsFceRyt4cs9U3e2NwoO3b
+	wxnpKN4j8VdsKHizvgAwUCuMPjXooUk4kSTY000oiUwTgg+xBaHpHgLdj2fs0azK+hcbl49+U02
+	ZaK4t+Oe4KQUJjM1nkrLhbXUlCVgW9CfEnzaN43nCTpLd4x/UIZcE0EqFUgI+S4nedCJklskIK5
+	wbddWGN94WCLEulP+Bos5mZuM3ji4eRt6ZQ/6QxmvbCvCihHcWm4=
+X-Received: by 2002:a17:902:e80c:b0:2a1:388d:8ef3 with SMTP id d9443c01a7336-2ad7444e7fcmr172411615ad.18.1772042222016;
+        Wed, 25 Feb 2026 09:57:02 -0800 (PST)
+X-Received: by 2002:a17:902:e80c:b0:2a1:388d:8ef3 with SMTP id d9443c01a7336-2ad7444e7fcmr172411335ad.18.1772042221493;
+        Wed, 25 Feb 2026 09:57:01 -0800 (PST)
+Received: from [192.168.1.5] ([171.61.227.247])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ad74f5daf5sm135513705ad.24.2026.02.25.09.56.54
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 25 Feb 2026 09:57:00 -0800 (PST)
+Message-ID: <e82443ff-f6c1-4b8e-b573-f4620dd0f17c@oss.qualcomm.com>
+Date: Wed, 25 Feb 2026 23:26:52 +0530
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <ceba8973-4fb7-4497-aebf-dd41f2d2eaa5@oss.qualcomm.com>
-X-Proofpoint-GUID: -s2dzjJRL9MNjRSVjOQ-DuyIlk5zIHwf
-X-Authority-Analysis: v=2.4 cv=Zs/g6t7G c=1 sm=1 tr=0 ts=699f2eb7 cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
- a=HzLeVaNsDn8A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=VwQbUJbxAAAA:8
- a=EUspDBNiAAAA:8 a=xDAtTkWTXggOwAMwgdAA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=IoWCM6iH3mJn3m4BftBB:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjI1MDE2NSBTYWx0ZWRfX+5Q6V76BGaRI
- skULV4c76oXL09WvCQ+JzyKjo7W3uAKAglyxt4AQmMMHyXEOm9cixi3t6vpPPvNz5eHxq52ujbO
- tOmOvI24iqsNCiCzVCEDgGeItc96oxfnZYx7RAFRoBLK7mcVLh0vLLltLavXhxh629NFwvtqV1c
- oBBPyZveZTxAe8GDrtSUEtdHoDWUP/ic7yiJtq8l6dmPeZOJZJIXT3KfSIwi7OeAlUeiIQdfVW5
- QZN5JBiaIpCXQna3lfCupOguqAH1meDUW9dvROTJfrlhOIteSSR7yi8YUBGQoQEOl6IA0qpY8/0
- v/hQcpexhEcNbsXpkZRnusTcG3LlR1a6CM097K9GH8cB+VR3N7TR7DJ60+fTx3Xm9/CS0o2DqFL
- akB+0f+CLrt6bvQbjGAGvx60Ee+gOU3+qvibIq3MINdL7PxHpVxlaD5IFsqMt01FgXz/KMIiWvY
- taVUv4QiZLBSidt/NWQ==
-X-Proofpoint-ORIG-GUID: -s2dzjJRL9MNjRSVjOQ-DuyIlk5zIHwf
+User-Agent: Mozilla Thunderbird
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+References: <20260224-qda-firstpost-v1-0-fe46a9c1a046@oss.qualcomm.com>
+ <20260224-qda-firstpost-v1-4-fe46a9c1a046@oss.qualcomm.com>
+ <ox7jnqkjo3frhbgpp63sse7ram72obihe4qlbbn4z22wbw4szr@7pzoeecdvsyg>
+Content-Language: en-US
+From: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
+In-Reply-To: <ox7jnqkjo3frhbgpp63sse7ram72obihe4qlbbn4z22wbw4szr@7pzoeecdvsyg>
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjI1MDE3MiBTYWx0ZWRfXy5cTPueaJMeK
+ 0T3ABNmd4JdDeXnrMrQD39mEOYjDA6azdtDhnIrX3gJFvBZBqv+gHZZS4lEiqxuus5h+9psPY1S
+ hI7LcCH2yRh+x/YGAMkJsuf78xKPIAnioBvz9PvLtYTq8v+wob6ahnIeNuY+kv8KQZE/Wjwid5D
+ sHRfkbhvbn2DxpEc3uGAdPn5Nc383zNYQOsfUalXRKEIMCMoOA83gzbdApPOKo3j0c/Azo/VQra
+ iwJjFgUGvKzcVo4IRrg3jrl9xm+gPdJPyWcFuQ0ABrbSgTItthC8cglvAOpQnbKKEC91Q4InH6k
+ 433Nx/128zmPz+OODBLD9qSQ/A5R+qqSsaj7fUuChiZQaFeCz5qtxIkzrnO0IHy4B+0xnwL6EFh
+ 72/Hhu9esWhNWn9D8Wg65JaE47pZFQa5suPzbK6GRBeR+UhZ2YTomkpICk+FGKUz50lpxSJCcfE
+ OjIsQlhuIBOQIF4M+ww==
+X-Proofpoint-GUID: BNHuE7X4QfffH4ijlnIb-jy53JlZnZHA
+X-Proofpoint-ORIG-GUID: BNHuE7X4QfffH4ijlnIb-jy53JlZnZHA
+X-Authority-Analysis: v=2.4 cv=etXSD4pX c=1 sm=1 tr=0 ts=699f37ef cx=c_pps
+ a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=CLJ8B99oKJtQbdnoKiLypA==:17
+ a=IkcTkHD0fZMA:10 a=HzLeVaNsDn8A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=EUspDBNiAAAA:8 a=_kSkizocug0RL_Hz-QYA:9 a=QEXdDO2ut3YA:10
+ a=GvdueXVYPmCkWapjIL-Q:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-02-25_02,2026-02-25_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 lowpriorityscore=0 adultscore=0 bulkscore=0 impostorscore=0
- clxscore=1015 priorityscore=1501 malwarescore=0 suspectscore=0 phishscore=0
+ clxscore=1015 lowpriorityscore=0 impostorscore=0 adultscore=0 malwarescore=0
+ suspectscore=0 bulkscore=0 phishscore=0 spamscore=0 priorityscore=1501
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2602130000 definitions=main-2602250165
-X-Spamd-Bar: -----
-X-MailFrom: dmitry.baryshkov@oss.qualcomm.com
+ reason=mlx scancount=1 engine=8.22.0-2602130000 definitions=main-2602250172
+X-Spamd-Bar: ----
+X-MailFrom: ekansh.gupta@oss.qualcomm.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: PZ2SUEM4TZYL3JZLB2I6IHWTC25C4FXX
-X-Message-ID-Hash: PZ2SUEM4TZYL3JZLB2I6IHWTC25C4FXX
+Message-ID-Hash: WI4SNBT3Z7SFHDPFRPCTMRHGEOCSLFWC
+X-Message-ID-Hash: WI4SNBT3Z7SFHDPFRPCTMRHGEOCSLFWC
 X-Mailman-Approved-At: Thu, 16 Apr 2026 16:41:07 +0000
-CC: Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, iommu@lists.linux.dev, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>, Bharath Kumar <quic_bkumar@quicinc.com>, Chenna Kesava Raju <quic_chennak@quicinc.com>
+CC: Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, iommu@lists.linux.dev, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>, Bharath Kumar <quic_bkumar@quicinc.com>, Chenna Kesava Raju <quic_chennak@quicinc.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH RFC 01/18] accel/qda: Add Qualcomm QDA DSP accelerator driver docs
+Subject: [Linaro-mm-sig] Re: [PATCH RFC 04/18] accel/qda: Add built-in compute CB bus for QDA and integrate with IOMMU
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PZ2SUEM4TZYL3JZLB2I6IHWTC25C4FXX/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WI4SNBT3Z7SFHDPFRPCTMRHGEOCSLFWC/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-X-Spamd-Result: default: False [4.09 / 15.00];
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [3.49 / 15.00];
 	DMARC_POLICY_REJECT(2.00)[qualcomm.com : SPF not aligned (relaxed),reject];
 	R_DKIM_REJECT(1.00)[qualcomm.com:s=qcppdkim1];
-	DATE_IN_PAST(1.00)[1199];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+	DATE_IN_PAST(1.00)[1198];
 	MAILLIST(-0.20)[mailman];
-	MIME_BASE64_TEXT(0.10)[];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	FREEMAIL_CC(0.00)[kernel.org,lwn.net,linuxfoundation.org,8bytes.org,arm.com,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,lists.freedesktop.org,vger.kernel.org,lists.linux.dev,lists.linaro.org,oss.qualcomm.com,quicinc.com];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[24];
 	RCVD_TLS_LAST(0.00)[];
 	ARC_NA(0.00)[];
-	FREEMAIL_CC(0.00)[kernel.org,lwn.net,linuxfoundation.org,8bytes.org,arm.com,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,lists.freedesktop.org,vger.kernel.org,lists.linux.dev,lists.linaro.org,oss.qualcomm.com,quicinc.com];
+	DKIM_TRACE(0.00)[qualcomm.com:-];
+	RCPT_COUNT_TWELVE(0.00)[24];
 	MIME_TRACE(0.00)[0:+];
-	GREYLIST(0.00)[pass,meta];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[6];
-	NEURAL_HAM(-0.00)[-1.000];
-	FROM_NEQ_ENVFROM(0.00)[dmitry.baryshkov@oss.qualcomm.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_NEQ_ENVFROM(0.00)[ekansh.gupta@oss.qualcomm.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[qualcomm.com:-];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MISSING_XM_UA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[qualcomm.com:email,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: DA21141223D
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	MID_RHS_MATCH_FROM(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[oss.qualcomm.com:mid,qualcomm.com:email,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
+X-Rspamd-Queue-Id: 2CB4441224B
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-T24gV2VkLCBGZWIgMjUsIDIwMjYgYXQgMDc6Mjc6NDdQTSArMDUzMCwgRWthbnNoIEd1cHRhIHdy
-b3RlOg0KPiANCj4gDQo+IE9uIDIvMjQvMjAyNiAyOjQ3IEFNLCBEbWl0cnkgQmFyeXNoa292IHdy
-b3RlOg0KPiA+IE9uIFR1ZSwgRmViIDI0LCAyMDI2IGF0IDEyOjM4OjU1QU0gKzA1MzAsIEVrYW5z
-aCBHdXB0YSB3cm90ZToNCj4gPj4gQWRkIGluaXRpYWwgZG9jdW1lbnRhdGlvbiBmb3IgdGhlIFF1
-YWxjb21tIERTUCBBY2NlbGVyYXRvciAoUURBKSBkcml2ZXINCj4gPj4gaW50ZWdyYXRlZCBpbiB0
-aGUgRFJNIGFjY2VsIHN1YnN5c3RlbS4NCj4gPj4NCj4gPj4gVGhlIG5ldyBkb2NzIGludHJvZHVj
-ZSBRREEgYXMgYSBEUk0vYWNjZWwtYmFzZWQgaW1wbGVtZW50YXRpb24gb2YNCj4gPj4gSGV4YWdv
-biBEU1Agb2ZmbG9hZCB0aGF0IGlzIGludGVuZGVkIGFzIGEgbW9kZXJuIGFsdGVybmF0aXZlIHRv
-IHRoZQ0KPiA+PiBsZWdhY3kgRmFzdFJQQyBkcml2ZXIgaW4gZHJpdmVycy9taXNjLiBUaGUgdGV4
-dCBkZXNjcmliZXMgdGhlIGRyaXZlcg0KPiA+PiBtb3RpdmF0aW9uLCBoaWdoLWxldmVsIGFyY2hp
-dGVjdHVyZSBhbmQgaW50ZXJhY3Rpb24gd2l0aCBJT01NVSBjb250ZXh0DQo+ID4+IGJhbmtzLCBH
-RU0tYmFzZWQgYnVmZmVyIG1hbmFnZW1lbnQgYW5kIHRoZSBSUE1zZyB0cmFuc3BvcnQuDQo+ID4+
-DQo+ID4+IFRoZSB1c2VyLXNwYWNlIGZhY2luZyBzZWN0aW9uIGRvY3VtZW50cyB0aGUgbWFpbiBR
-REEgSU9DVExzIHVzZWQgdG8NCj4gPj4gZXN0YWJsaXNoIERTUCBzZXNzaW9ucywgbWFuYWdlIEdF
-TSBidWZmZXIgb2JqZWN0cyBhbmQgaW52b2tlIHJlbW90ZQ0KPiA+PiBwcm9jZWR1cmVzIHVzaW5n
-IHRoZSBGYXN0UlBDIHByb3RvY29sLCBhbG9uZyB3aXRoIGEgdHlwaWNhbCBsaWZlY3ljbGUNCj4g
-Pj4gZXhhbXBsZSBmb3IgYXBwbGljYXRpb25zLg0KPiA+Pg0KPiA+PiBGaW5hbGx5LCB0aGUgZHJp
-dmVyIGlzIHdpcmVkIGludG8gdGhlIENvbXB1dGUgQWNjZWxlcmF0b3JzDQo+ID4+IGRvY3VtZW50
-YXRpb24gaW5kZXggdW5kZXIgRG9jdW1lbnRhdGlvbi9hY2NlbCwgYW5kIGEgYnJpZWYgZGVidWdn
-aW5nDQo+ID4+IHNlY3Rpb24gc2hvd3MgaG93IHRvIGVuYWJsZSBkeW5hbWljIGRlYnVnIGZvciB0
-aGUgUURBIGltcGxlbWVudGF0aW9uLg0KPiA+Pg0KPiA+PiBTaWduZWQtb2ZmLWJ5OiBFa2Fuc2gg
-R3VwdGEgPGVrYW5zaC5ndXB0YUBvc3MucXVhbGNvbW0uY29tPg0KPiA+PiAtLS0NCj4gPj4gIERv
-Y3VtZW50YXRpb24vYWNjZWwvaW5kZXgucnN0ICAgICB8ICAgMSArDQo+ID4+ICBEb2N1bWVudGF0
-aW9uL2FjY2VsL3FkYS9pbmRleC5yc3QgfCAgMTQgKysrKysNCj4gPj4gIERvY3VtZW50YXRpb24v
-YWNjZWwvcWRhL3FkYS5yc3QgICB8IDEyOSArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
-KysrKysrKw0KPiA+PiAgMyBmaWxlcyBjaGFuZ2VkLCAxNDQgaW5zZXJ0aW9ucygrKQ0KPiA+Pg0K
-PiA+PiBkaWZmIC0tZ2l0IGEvRG9jdW1lbnRhdGlvbi9hY2NlbC9pbmRleC5yc3QgYi9Eb2N1bWVu
-dGF0aW9uL2FjY2VsL2luZGV4LnJzdA0KPiA+PiBpbmRleCBjYmM3ZDRjMzg3NmEuLjU5MDFlYTdm
-Nzg0YyAxMDA2NDQNCj4gPj4gLS0tIGEvRG9jdW1lbnRhdGlvbi9hY2NlbC9pbmRleC5yc3QNCj4g
-Pj4gKysrIGIvRG9jdW1lbnRhdGlvbi9hY2NlbC9pbmRleC5yc3QNCj4gPj4gQEAgLTEwLDQgKzEw
-LDUgQEAgQ29tcHV0ZSBBY2NlbGVyYXRvcnMNCj4gPj4gICAgIGludHJvZHVjdGlvbg0KPiA+PiAg
-ICAgYW1keGRuYS9pbmRleA0KPiA+PiAgICAgcWFpYy9pbmRleA0KPiA+PiArICAgcWRhL2luZGV4
-DQo+ID4+ICAgICByb2NrZXQvaW5kZXgNCj4gPj4gZGlmZiAtLWdpdCBhL0RvY3VtZW50YXRpb24v
-YWNjZWwvcWRhL2luZGV4LnJzdCBiL0RvY3VtZW50YXRpb24vYWNjZWwvcWRhL2luZGV4LnJzdA0K
-PiA+PiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiA+PiBpbmRleCAwMDAwMDAwMDAwMDAuLmJjZTE4
-OGYyMTExNw0KPiA+PiAtLS0gL2Rldi9udWxsDQo+ID4+ICsrKyBiL0RvY3VtZW50YXRpb24vYWNj
-ZWwvcWRhL2luZGV4LnJzdA0KPiA+PiBAQCAtMCwwICsxLDE0IEBADQo+ID4+ICsuLiBTUERYLUxp
-Y2Vuc2UtSWRlbnRpZmllcjogR1BMLTIuMC1vbmx5DQo+ID4+ICsNCj4gPj4gKz09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PQ0KPiA+PiArIGFjY2VsL3FkYSBRdWFsY29tbSBEU1AgRHJpdmVy
-DQo+ID4+ICs9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0NCj4gPj4gKw0KPiA+PiArVGhl
-ICoqYWNjZWwvcWRhKiogZHJpdmVyIHByb3ZpZGVzIHN1cHBvcnQgZm9yIFF1YWxjb21tIEhleGFn
-b24gRFNQcyAoRGlnaXRhbA0KPiA+PiArU2lnbmFsIFByb2Nlc3NvcnMpIHdpdGhpbiB0aGUgRFJN
-IGFjY2VsZXJhdG9yIGZyYW1ld29yay4gSXQgc2VydmVzIGFzIGEgbW9kZXJuDQo+ID4+ICtyZXBs
-YWNlbWVudCBmb3IgdGhlIGxlZ2FjeSBGYXN0UlBDIGRyaXZlciwgb2ZmZXJpbmcgaW1wcm92ZWQg
-cmVzb3VyY2UgbWFuYWdlbWVudA0KPiA+PiArYW5kIHN0YW5kYXJkIHN1YnN5c3RlbSBpbnRlZ3Jh
-dGlvbi4NCj4gPj4gKw0KPiA+PiArLi4gdG9jdHJlZTo6DQo+ID4+ICsNCj4gPj4gKyAgIHFkYQ0K
-PiA+PiBkaWZmIC0tZ2l0IGEvRG9jdW1lbnRhdGlvbi9hY2NlbC9xZGEvcWRhLnJzdCBiL0RvY3Vt
-ZW50YXRpb24vYWNjZWwvcWRhL3FkYS5yc3QNCj4gPj4gbmV3IGZpbGUgbW9kZSAxMDA2NDQNCj4g
-Pj4gaW5kZXggMDAwMDAwMDAwMDAwLi43NDIxNTk4NDFiOTUNCj4gPj4gLS0tIC9kZXYvbnVsbA0K
-PiA+PiArKysgYi9Eb2N1bWVudGF0aW9uL2FjY2VsL3FkYS9xZGEucnN0DQo+ID4+IEBAIC0wLDAg
-KzEsMTI5IEBADQo+ID4+ICsuLiBTUERYLUxpY2Vuc2UtSWRlbnRpZmllcjogR1BMLTIuMC1vbmx5
-DQo+ID4+ICsNCj4gPj4gKz09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0NCj4gPj4g
-K1F1YWxjb21tIEhleGFnb24gRFNQIChRREEpIERyaXZlcg0KPiA+PiArPT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PQ0KPiA+PiArDQo+ID4+ICtJbnRyb2R1Y3Rpb24NCj4gPj4gKz09
-PT09PT09PT09PQ0KPiA+PiArDQo+ID4+ICtUaGUgKipRREEqKiAoUXVhbGNvbW0gRFNQIEFjY2Vs
-ZXJhdG9yKSBkcml2ZXIgaXMgYSBuZXcgRFJNLWJhc2VkDQo+ID4+ICthY2NlbGVyYXRvciBkcml2
-ZXIgZm9yIFF1YWxjb21tJ3MgSGV4YWdvbiBEU1BzLiBJdCBwcm92aWRlcyBhIHN0YW5kYXJkaXpl
-ZA0KPiA+PiAraW50ZXJmYWNlIGZvciB1c2VyLXNwYWNlIGFwcGxpY2F0aW9ucyB0byBvZmZsb2Fk
-IGNvbXB1dGF0aW9uYWwgdGFza3MgcmFuZ2luZw0KPiA+PiArZnJvbSBhdWRpbyBwcm9jZXNzaW5n
-IGFuZCBzZW5zb3Igb2ZmbG9hZCB0byBjb21wdXRlciB2aXNpb24gYW5kIEFJDQo+ID4+ICtpbmZl
-cmVuY2UgdG8gdGhlIEhleGFnb24gRFNQcyBmb3VuZCBvbiBRdWFsY29tbSBTb0NzLg0KPiA+PiAr
-DQo+ID4+ICtUaGlzIGRyaXZlciBpcyBkZXNpZ25lZCB0byBhbGlnbiB3aXRoIHRoZSBMaW51eCBr
-ZXJuZWwncyBtb2Rlcm4gKipDb21wdXRlDQo+ID4+ICtBY2NlbGVyYXRvcnMqKiBzdWJzeXN0ZW0g
-KGBkcml2ZXJzL2FjY2VsL2ApLCBwcm92aWRpbmcgYSByb2J1c3QgYW5kIG1vZHVsYXINCj4gPj4g
-K2FsdGVybmF0aXZlIHRvIHRoZSBsZWdhY3kgRmFzdFJQQyBkcml2ZXIgaW4gYGRyaXZlcnMvbWlz
-Yy9gLCBvZmZlcmluZw0KPiA+PiAraW1wcm92ZWQgcmVzb3VyY2UgbWFuYWdlbWVudCBhbmQgYmV0
-dGVyIGludGVncmF0aW9uIHdpdGggc3RhbmRhcmQga2VybmVsDQo+ID4+ICtzdWJzeXN0ZW1zLg0K
-PiA+PiArDQo+ID4+ICtNb3RpdmF0aW9uDQo+ID4+ICs9PT09PT09PT09DQo+ID4+ICsNCj4gPj4g
-K1RoZSBleGlzdGluZyBGYXN0UlBDIGltcGxlbWVudGF0aW9uIGluIHRoZSBrZXJuZWwgdXRpbGl6
-ZXMgYSBjdXN0b20gY2hhcmFjdGVyDQo+ID4+ICtkZXZpY2UgYW5kIGxhY2tzIGludGVncmF0aW9u
-IHdpdGggbW9kZXJuIGtlcm5lbCBtZW1vcnkgbWFuYWdlbWVudCBmcmFtZXdvcmtzLg0KPiA+PiAr
-VGhlIFFEQSBkcml2ZXIgYWRkcmVzc2VzIHRoZXNlIGxpbWl0YXRpb25zIGJ5Og0KPiA+PiArDQo+
-ID4+ICsxLiAgKipBZG9wdGluZyB0aGUgRFJNIGFjY2VsIEZyYW1ld29yayoqOiBMZXZlcmFnaW5n
-IHN0YW5kYXJkIHVBUElzIGZvciBkZXZpY2UNCj4gPj4gKyAgICBtYW5hZ2VtZW50LCBqb2Igc3Vi
-bWlzc2lvbiwgYW5kIHN5bmNocm9uaXphdGlvbi4NCj4gPj4gKzIuICAqKlV0aWxpemluZyBHRU0g
-Zm9yIE1lbW9yeSoqOiBQcm92aWRpbmcgcHJvcGVyIGJ1ZmZlciBvYmplY3QgbWFuYWdlbWVudCwN
-Cj4gPj4gKyAgICBpbmNsdWRpbmcgRE1BLUJVRiBpbXBvcnQvZXhwb3J0IGNhcGFiaWxpdGllcy4N
-Cj4gPj4gKzMuICAqKkltcHJvdmluZyBJc29sYXRpb24qKjogVXNpbmcgSU9NTVUgY29udGV4dCBi
-YW5rcyB0byBlbmZvcmNlIG1lbW9yeQ0KPiA+PiArICAgIGlzb2xhdGlvbiBiZXR3ZWVuIGRpZmZl
-cmVudCBEU1AgdXNlciBzZXNzaW9ucy4NCj4gPj4gKw0KPiA+PiArS2V5IEZlYXR1cmVzDQo+ID4+
-ICs9PT09PT09PT09PT0NCj4gPj4gKw0KPiA+PiArKiAgICoqU3RhbmRhcmQgQWNjZWxlcmF0b3Ig
-SW50ZXJmYWNlKio6IEV4cG9zZXMgYSBzdGFuZGFyZCBjaGFyYWN0ZXIgZGV2aWNlDQo+ID4+ICsg
-ICAgbm9kZSAoZS5nLiwgYC9kZXYvYWNjZWwvYWNjZWwwYCkgdmlhIHRoZSBEUk0gc3Vic3lzdGVt
-Lg0KPiA+PiArKiAgICoqVW5pZmllZCBPZmZsb2FkIFN1cHBvcnQqKjogU3VwcG9ydHMgYWxsIERT
-UCBkb21haW5zIChBRFNQLCBDRFNQLCBTRFNQLA0KPiA+PiArICAgIEdEU1ApIHZpYSBhIHNpbmds
-ZSBkcml2ZXIgYXJjaGl0ZWN0dXJlLg0KPiA+PiArKiAgICoqRmFzdFJQQyBQcm90b2NvbCoqOiBJ
-bXBsZW1lbnRzIHRoZSByZWxpYWJsZSBSZW1vdGUgUHJvY2VkdXJlIENhbGwNCj4gPj4gKyAgICAo
-RmFzdFJQQykgcHJvdG9jb2wgZm9yIGNvbW11bmljYXRpb24gYmV0d2VlbiB0aGUgYXBwbGljYXRp
-b24gcHJvY2Vzc29yDQo+ID4+ICsgICAgYW5kIERTUC4NCj4gPj4gKyogICAqKkRNQS1CVUYgSW50
-ZXJvcCoqOiBTZWFtbGVzcyBzaGFyaW5nIG9mIG1lbW9yeSBidWZmZXJzIGJldHdlZW4gdGhlIERT
-UA0KPiA+PiArICAgIGFuZCBvdGhlciBtdWx0aW1lZGlhIHN1YnN5c3RlbXMgKEdQVSwgQ2FtZXJh
-LCBWaWRlbykgdmlhIHN0YW5kYXJkIERNQS1CVUZzLg0KPiA+PiArKiAgICoqTW9kdWxhciBEZXNp
-Z24qKjogQ2xlYW4gc2VwYXJhdGlvbiBiZXR3ZWVuIHRoZSBjb3JlIERSTSBsb2dpYywgdGhlIG1l
-bW9yeQ0KPiA+PiArICAgIG1hbmFnZXIsIGFuZCB0aGUgUlBNc2ctYmFzZWQgdHJhbnNwb3J0IGxh
-eWVyLg0KPiA+PiArDQo+ID4+ICtBcmNoaXRlY3R1cmUNCj4gPj4gKz09PT09PT09PT09PQ0KPiA+
-PiArDQo+ID4+ICtUaGUgUURBIGRyaXZlciBpcyBjb21wb3NlZCBvZiBzZXZlcmFsIG1vZHVsYXIg
-Y29tcG9uZW50czoNCj4gPj4gKw0KPiA+PiArMS4gICoqQ29yZSBEcml2ZXIgKGBxZGFfZHJ2YCkq
-KjogTWFuYWdlcyBkZXZpY2UgcmVnaXN0cmF0aW9uLCBmaWxlIG9wZXJhdGlvbnMsDQo+ID4+ICsg
-ICAgYW5kIGJyaWRnZXMgdGhlIGRyaXZlciB3aXRoIHRoZSBEUk0gYWNjZWxlcmF0b3Igc3Vic3lz
-dGVtLg0KPiA+PiArMi4gICoqTWVtb3J5IE1hbmFnZXIgKGBxZGFfbWVtb3J5X21hbmFnZXJgKSoq
-OiBBIGZsZXhpYmxlIG1lbW9yeSBtYW5hZ2VtZW50DQo+ID4+ICsgICAgbGF5ZXIgdGhhdCBoYW5k
-bGVzIElPTU1VIGNvbnRleHQgYmFua3MuIEl0IHN1cHBvcnRzIHBsdWdnYWJsZSBiYWNrZW5kcw0K
-PiA+PiArICAgIChzdWNoIGFzIERNQS1jb2hlcmVudCkgdG8gYWRhcHQgdG8gZGlmZmVyZW50IFNv
-QyBtZW1vcnkgYXJjaGl0ZWN0dXJlcy4NCj4gPj4gKzMuICAqKkdFTSBTdWJzeXN0ZW0qKjogSW1w
-bGVtZW50cyB0aGUgRFJNIEdFTSBpbnRlcmZhY2UgZm9yIGJ1ZmZlciBtYW5hZ2VtZW50Og0KPiA+
-PiArDQo+ID4+ICsgICAgKiAqKmBxZGFfZ2VtYCoqOiBDb3JlIEdFTSBvYmplY3QgbWFuYWdlbWVu
-dCwgaW5jbHVkaW5nIGFsbG9jYXRpb24sIG1tYXANCj4gPj4gKyAgICAgIG9wZXJhdGlvbnMsIGFu
-ZCBidWZmZXIgbGlmZWN5Y2xlIG1hbmFnZW1lbnQuDQo+ID4+ICsgICAgKiAqKmBxZGFfcHJpbWVg
-Kio6IFBSSU1FIGltcG9ydCBmdW5jdGlvbmFsaXR5IGZvciBETUEtQlVGIGludGVyb3BlcmFiaWxp
-dHksDQo+ID4+ICsgICAgICBlbmFibGluZyBzZWFtbGVzcyBidWZmZXIgc2hhcmluZyB3aXRoIG90
-aGVyIGtlcm5lbCBzdWJzeXN0ZW1zLg0KPiA+PiArDQo+ID4+ICs0LiAgKipUcmFuc3BvcnQgTGF5
-ZXIgKGBxZGFfcnBtc2dgKSoqOiBBYnN0cmFjdGlvbiBvdmVyIHRoZSBSUE1zZyBmcmFtZXdvcmsN
-Cj4gPj4gKyAgICB0byBoYW5kbGUgbG93LWxldmVsIG1lc3NhZ2UgcGFzc2luZyB3aXRoIHRoZSBE
-U1AgZmlybXdhcmUuDQo+ID4+ICs1LiAgKipDb21wdXRlIEJ1cyAoYHFkYV9jb21wdXRlX2J1c2Ap
-Kio6IEEgY3VzdG9tIHZpcnR1YWwgYnVzIHVzZWQgdG8NCj4gPj4gKyAgICBlbnVtZXJhdGUgYW5k
-IG1hbmFnZSB0aGUgc3BlY2lmaWMgY29tcHV0ZSBjb250ZXh0IGJhbmtzIGRlZmluZWQgaW4gdGhl
-DQo+ID4+ICsgICAgZGV2aWNlIHRyZWUuDQo+ID4gSSdtIHJlYWxseSBub3Qgc3VyZSBpZiBpdCdz
-IGEgYm9udXMgb3Igbm90LiBJJ20gd2FpdGluZyBmb3IgaW9tbXUtbWFwDQo+ID4gaW1wcm92ZW1l
-bnRzIHRvIGxhbmQgdG8gc2VuZCBwYXRjaGVzIHJld29ya2luZyBGYXN0UlBDIENCIGZyb20gdXNp
-bmcNCj4gPiBwcm9iZSBpbnRvIGJlaW5nIGNyZWF0ZWQgYnkgdGhlIG1haW4gZHJpdmVyOiBpdCB3
-b3VsZCByZW1vdmUgc29tZSBvZiB0aGUNCj4gPiBwb3NzaWJsZSByYWNlIGNvbmRpdGlvbnMgYmV0
-d2VlbiBtYWluIGRyaXZlciBmaW5pc2hpbmcgcHJvYmUgYW5kIHRoZSBDQg0KPiA+IGRldmljZXMg
-cHJvYmluZyBpbiB0aGUgYmFja2dyb3VuZC4NCj4gPg0KPiA+IFdoYXQncyB0aGUgYWN0dWFsIGJl
-bmVmaXQgb2YgdGhlIENCIGJ1cz8NCj4gSSB0cmllZCBmb2xsb3dpbmcgdGhlIFRlZ3JhIGhvc3Qx
-eCBsb2dpYyBoZXJlIGFzIHdhcyBkaXNjdXNzZWQgaGVyZVsxXS4gTXkgdW5kZXJzdGFuZGluZyBp
-cyB0aGF0DQo+IHdpdGggdGhpcyB0aGUgQ0Igd2lsbCBiZWNvbWUgbW9yZSBtYW5hZ2VhYmxlIHJl
-ZHVjaW5nIHRoZSBzY29wZSBvZiByYWNlcyB0aGF0IGV4aXN0cyBpbiB0aGUNCj4gY3VycmVudCBm
-YXN0cnBjIGRyaXZlci4NCg0KSXQncyBuaWNlLCBidXQgdGhlbiBpdCBjYW4gYWxzbyBiZSB1c2Vk
-IGJ5IHRoZSBleGlzdGluZyBmYXN0cnBjIGRyaXZlci4NCldvdWxkIHlvdSBtaW5kIHNwbGl0dGlu
-ZyBpdCB0byBhIHNlcGFyYXRlIGNoYW5nZXNldCBhbmQgc3VibWl0dGluZyBpdD8NCg0KPiANCj4g
-VGhhdCBzYWlkLCBJJ20gbm90IGNvbXBsZXRlbHkgYXdhcmUgYWJvdXQgdGhlIGlvbW11LW1hcCBp
-bXByb3ZlbWVudHMuIElzIGl0IHRoZSBvbmUNCj4gYmVpbmcgZGlzY3Vzc2VkIGZvciB0aGlzIHBh
-dGNoWzJdPyBJZiBpdCBoZWxwcyBpbiBtYWluIGRyaXZlciB0byBjcmVhdGUgQ0IgZGV2aWNlcyBk
-aXJlY3RseSwgdGhlbiBJDQo+IHdvdWxkIGJlIGhhcHB5IHRvIGFkYXB0IHRoZSBkZXNpZ24uDQoN
-ClRoYXQgd291bGQgbW9zdGx5IG1lYW4gYSBjaGFuZ2UgdG8gdGhlIHdheSB3ZSBkZXNjcmliZSBD
-QnMgKHVzaW5nIHRoZQ0KcHJvcGVydHkgaW5zdGVhZCBvZiB0aGUgaW4tdHJlZSBzdWJkZXZpY2Vz
-KS4gQW55d2F5LCBhcyBJIHdyb3RlLCBwbGVhc2UNCnN1Ym1pdCBpdCBzZXBhcmF0ZWx5Lg0KDQo+
-IA0KPiBbMV0gaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvYWxsLzI0NWQ2MDJmLTMwMzctNGFlMy05
-YWY5LWQ5OGYzNzI1OGFhZUBvc3MucXVhbGNvbW0uY29tLw0KPiBbMl0gaHR0cHM6Ly9sb3JlLmtl
-cm5lbC5vcmcvYWxsLzIwMjYwMTI2LWthYW5hcGFsaS1pcmlzLXYxLTMtZTI2NDYyNDZiZmMxQG9z
-cy5xdWFsY29tbS5jb20vDQo+ID4NCj4gPj4gKzYuICAqKkZhc3RSUEMgQ29yZSAoYHFkYV9mYXN0
-cnBjYCkqKjogSW1wbGVtZW50cyB0aGUgcHJvdG9jb2wgbG9naWMgZm9yDQo+ID4+ICsgICAgbWFy
-c2hhbGxpbmcgYXJndW1lbnRzIGFuZCBoYW5kbGluZyByZW1vdGUgaW52b2NhdGlvbnMuDQo+ID4+
-ICsNCj4gPj4gK1VzZXItU3BhY2UgQVBJDQo+ID4+ICs9PT09PT09PT09PT09PQ0KPiA+PiArDQo+
-ID4+ICtUaGUgZHJpdmVyIGV4cG9zZXMgYSBzZXQgb2YgRFJNLWNvbXBsaWFudCBJT0NUTHMuIE5v
-dGUgdGhhdCB0aGVzZSBhcmUgZGVzaWduZWQNCj4gPj4gK3RvIGJlIGZhbWlsaWFyIHRvIGV4aXN0
-aW5nIEZhc3RSUEMgdXNlcnMgd2hpbGUgYWRoZXJpbmcgdG8gRFJNIHN0YW5kYXJkcy4NCj4gPj4g
-Kw0KPiA+PiArKiAgIGBEUk1fSU9DVExfUURBX1FVRVJZYDogUXVlcnkgRFNQIHR5cGUgKGUuZy4s
-ICJjZHNwIiwgImFkc3AiKQ0KPiA+PiArICAgIGFuZCBjYXBhYmlsaXRpZXMuDQo+ID4+ICsqICAg
-YERSTV9JT0NUTF9RREFfSU5JVF9BVFRBQ0hgOiBBdHRhY2ggYSB1c2VyIHNlc3Npb24gdG8gdGhl
-IERTUCdzIHByb3RlY3Rpb24NCj4gPj4gKyAgICBkb21haW4uDQo+ID4+ICsqICAgYERSTV9JT0NU
-TF9RREFfSU5JVF9DUkVBVEVgOiBJbml0aWFsaXplIGEgbmV3IHByb2Nlc3MgY29udGV4dCBvbiB0
-aGUgRFNQLg0KPiA+IFlvdSBuZWVkIHRvIGV4cGxhaW4gdGhlIGRpZmZlcmVuY2UgYmV0d2VlbiB0
-aGVzZSB0d28uDQo+IEFjay4NCj4gPg0KPiA+PiArKiAgIGBEUk1fSU9DVExfUURBX0lOVk9LRWA6
-IFN1Ym1pdCBhIHJlbW90ZSBtZXRob2QgaW52b2NhdGlvbiAodGhlIHByaW1hcnkNCj4gPj4gKyAg
-ICBleGVjdXRpb24gdW5pdCkuDQo+ID4+ICsqICAgYERSTV9JT0NUTF9RREFfR0VNX0NSRUFURWA6
-IEFsbG9jYXRlIGEgR0VNIGJ1ZmZlciBvYmplY3QgZm9yIERTUCB1c2FnZS4NCj4gPj4gKyogICBg
-RFJNX0lPQ1RMX1FEQV9HRU1fTU1BUF9PRkZTRVRgOiBSZXRyaWV2ZSBtbWFwIG9mZnNldHMgZm9y
-IG1lbW9yeSBtYXBwaW5nLg0KPiA+PiArKiAgIGBEUk1fSU9DVExfUURBX01BUGAgLyBgRFJNX0lP
-Q1RMX1FEQV9NVU5NQVBgOiBNYXAgb3IgdW5tYXAgYnVmZmVycyBpbnRvIHRoZQ0KPiA+PiArICAg
-IERTUCdzIHZpcnR1YWwgYWRkcmVzcyBzcGFjZS4NCj4gPiBEbyB3ZSBuZWVkIHRvIG1ha2UgdGhp
-cyBzZXBhcmF0ZT8gQ2FuIHdlIG1hcC91bm1hcCBidWZmZXJzIG9uIHRoZWlyDQo+ID4gdXNhZ2U/
-IE9yIHdoZW4gdGhleSBhcmUgY3JlYXRlZD8gSSdtIHRoaW5raW5nIGFib3V0IHRoYXQgdGhlDQo+
-ID4gdmlydHVhbGl6YXRpb24uIA0KPiBUaGUgbGliIHByb3ZpZGVzIHdheXMoZmFzdHJwY19tbWFw
-L3JlbW90ZV9tbWFwNjQpIGZvciB1c2VycyB0byBtYXAvdW5tYXAgdGhlDQo+IGJ1ZmZlcnMgb24g
-RFNQIGFzIHBlciBwcm9jZXNzZXMgcmVxdWlyZW1lbnQuIFRoZSBpb2N0bHMgYXJlIGFkZGVkIHRv
-IHN1cHBvcnQgdGhlIHNhbWUuDQoNCklmIHRoZSBidWZmZXJzIGFyZSBtYXBwZWQsIHRoZW4gbGli
-cmFyeSBjYWxscyBiZWNvbWUgZW1wdHkgY2FsbHMuIExldCdzDQpmb2N1cyBvbiB0aGUgQVBJIGZp
-cnN0IGFuZCBhZGFwdCB0byB0aGUgbGlicmFyeSBsYXRlciBvbi4NCg0KPiA+IEFuIGFsdGVybmF0
-aXZlIGFwcHJvYWNoIHdvdWxkIGJlIHRvIG1lcmdlDQo+ID4gR0VUX01NQVBfT0ZGU0VUIHdpdGgg
-X01BUDogb25jZSB5b3UgbWFwIGl0IHRvIHRoZSBEU1AgbWVtb3J5LCB5b3Ugd2lsbA0KPiA+IGdl
-dCB0aGUgb2Zmc2V0LiANCj4gX01BUCBpcyBub3QgbmVlZCBmb3IgYWxsIHRoZSBidWZmZXJzLiBN
-b3N0IG9mIHRoZSByZW1vdGUgY2FsbCBidWZmZXJzIHRoYXQgYXJlIHBhc3NlZCB0byBEU1ANCj4g
-YXJlIGF1dG9tYXRpY2FsbHkgbWFwcGVkIGJ5IERTUCBiZWZvcmUgaW52b2tpbmcgdGhlIERTUCBp
-bXBsZW1lbnRhdGlvbiBzbyB0aGUgdXNlci1zcGFjZQ0KPiBkb2VzIG5vdCBuZWVkIHRvIGNhbGwg
-X01BUCBmb3IgdGhlc2UuDQoNCklzIHRoZXJlIGEgcmVhc29uIGZvciB0aGF0PyBJJ2QgcmVhbGx5
-IHByZWZlciBpZiB3ZSBjaGFuZ2UgaXQsIG1ha2luZyBpdA0KbW9yZSBlZmZlY3RpdmUgYW5kIG1v
-cmUgY29udHJvbGxhYmxlLiANCg0KPiANCj4gU29tZSBidWZmZXJzKGUuZy4sIHNoYXJlZCBwZXJz
-aXN0ZW50IGJ1ZmZlcnMpIGRvIHJlcXVpcmUgZXhwbGljaXQgbWFwcGluZywgd2hpY2ggaXMgd2h5
-DQo+IE1BUC9NVU5NQVAgZXhpc3RzIGluIEZhc3RSUEMuDQo+IA0KPiBCZWNhdXNlIG9mIHRoaXMg
-YmVoYXZpb3JhbCBkaWZmZXJlbmNlLCBtZXJnaW5nIEdFVF9NTUFQX09GRlNFVCB3aXRoIE1BUCBp
-cyBub3QgYWNjdXJhdGUuDQo+IEdFVF9NTUFQX09GRlNFVCBpcyBmb3IgQ1BV4oCRc2lkZSBtbWFw
-IHZpYSBHRU0sIHdoZXJlYXMgTUFQIGlzIHNwZWNpZmljYWxseSBmb3IgRFNQDQo+IHZpcnR1YWwg
-YWRkcmVzcyBhc3NpZ25tZW50Lg0KPiA+DQo+ID4+ICsNCj4gPj4gK1VzYWdlIEV4YW1wbGUNCj4g
-Pj4gKz09PT09PT09PT09PT0NCj4gPj4gKw0KPiA+PiArQSB0eXBpY2FsIGxpZmVjeWNsZSBmb3Ig
-YSB1c2VyLXNwYWNlIGFwcGxpY2F0aW9uOg0KPiA+PiArDQo+ID4+ICsxLiAgKipEaXNjb3Zlcnkq
-KjogT3BlbiBgL2Rldi9hY2NlbC9hY2NlbCpgIGFuZCBjaGVjaw0KPiA+PiArICAgIGBEUk1fSU9D
-VExfUURBX1FVRVJZYCB0byBmaW5kIHRoZSBkZXNpcmVkIERTUCAoZS5nLiwgQ0RTUCBmb3INCj4g
-Pj4gKyAgICBjb21wdXRlIHdvcmtsb2FkcykuDQo+ID4+ICsyLiAgKipJbml0aWFsaXphdGlvbioq
-OiBDYWxsIGBEUk1fSU9DVExfUURBX0lOSVRfQVRUQUNIYCBhbmQNCj4gPj4gKyAgICBgRFJNX0lP
-Q1RMX1FEQV9JTklUX0NSRUFURWAgdG8gZXN0YWJsaXNoIGEgc2Vzc2lvbi4NCj4gPj4gKzMuICAq
-Kk1lbW9yeSoqOiBBbGxvY2F0ZSBidWZmZXJzIHZpYSBgRFJNX0lPQ1RMX1FEQV9HRU1fQ1JFQVRF
-YCBvciBpbXBvcnQNCj4gPj4gKyAgICBETUEtQlVGcyAoUFJJTUUgZmQpIGZyb20gb3RoZXIgZHJp
-dmVycyB1c2luZyBgRFJNX0lPQ1RMX1BSSU1FX0ZEX1RPX0hBTkRMRWAuDQo+ID4+ICs0LiAgKipF
-eGVjdXRpb24qKjogVXNlIGBEUk1fSU9DVExfUURBX0lOVk9LRWAgdG8gcGFzcyBhcmd1bWVudHMg
-YW5kIGV4ZWN1dGUNCj4gPj4gKyAgICBmdW5jdGlvbnMgb24gdGhlIERTUC4NCj4gPj4gKzUuICAq
-KkNsZWFudXAqKjogQ2xvc2UgZmlsZSBkZXNjcmlwdG9ycyB0byBhdXRvbWF0aWNhbGx5IHJlbGVh
-c2UgcmVzb3VyY2VzIGFuZA0KPiA+PiArICAgIGRldGFjaCB0aGUgc2Vzc2lvbi4NCj4gPj4gKw0K
-PiA+PiArSW50ZXJuYWwgSW1wbGVtZW50YXRpb24NCj4gPj4gKz09PT09PT09PT09PT09PT09PT09
-PT09DQo+ID4+ICsNCj4gPj4gK01lbW9yeSBNYW5hZ2VtZW50DQo+ID4+ICstLS0tLS0tLS0tLS0t
-LS0tLQ0KPiA+PiArVGhlIGRyaXZlcidzIG1lbW9yeSBtYW5hZ2VyIGNyZWF0ZXMgdmlydHVhbCAi
-SU9NTVUgZGV2aWNlcyIgdGhhdCBtYXAgdG8NCj4gPj4gK2hhcmR3YXJlIGNvbnRleHQgYmFua3Mu
-IFRoaXMgYWxsb3dzIHRoZSBkcml2ZXIgdG8gbWFuYWdlIG11bHRpcGxlIGlzb2xhdGVkDQo+ID4+
-ICthZGRyZXNzIHNwYWNlcy4gVGhlIGltcGxlbWVudGF0aW9uIGN1cnJlbnRseSB1c2VzIGEgKipE
-TUEtY29oZXJlbnQgYmFja2VuZCoqDQo+ID4+ICt0byBlbnN1cmUgZGF0YSBjb25zaXN0ZW5jeSBi
-ZXR3ZWVuIHRoZSBDUFUgYW5kIERTUCB3aXRob3V0IG1hbnVhbCBjYWNoZQ0KPiA+PiArbWFpbnRl
-bmFuY2UgaW4gbW9zdCBjYXNlcy4NCj4gPj4gKw0KPiA+PiArRGVidWdnaW5nDQo+ID4+ICs9PT09
-PT09PT0NCj4gPj4gK1RoZSBkcml2ZXIgaW5jbHVkZXMgZXh0ZW5zaXZlIGR5bmFtaWMgZGVidWcg
-c3VwcG9ydC4gRW5hYmxlIGl0IHZpYSB0aGUNCj4gPj4gK2tlcm5lbCdzIGR5bmFtaWMgZGVidWcg
-Y29udHJvbDoNCj4gPj4gKw0KPiA+PiArLi4gY29kZS1ibG9jazo6IGJhc2gNCj4gPj4gKw0KPiA+
-PiArICAgIGVjaG8gImZpbGUgZHJpdmVycy9hY2NlbC9xZGEvKiArcCIgPiAvc3lzL2tlcm5lbC9k
-ZWJ1Zy9keW5hbWljX2RlYnVnL2NvbnRyb2wNCj4gPiBQbGVhc2UgYWRkIGRvY3VtZW50YXRpb24g
-b24gaG93IHRvIGJ1aWxkIHRoZSB0ZXN0IGFwcHMgYW5kIGhvdyB0byBsb2FkDQo+ID4gdGhlbSB0
-byB0aGUgRFNQLg0KPiBBY2suDQo+ID4NCj4gPj4gLS0gDQo+ID4+IDIuMzQuMQ0KPiA+Pg0KPiAN
-Cg0KLS0gDQpXaXRoIGJlc3Qgd2lzaGVzDQpEbWl0cnkNCl9fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxp
-bmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWls
-IHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+
+
+On 2/24/2026 4:14 AM, Dmitry Baryshkov wrote:
+> On Tue, Feb 24, 2026 at 12:38:58AM +0530, Ekansh Gupta wrote:
+>> Introduce a built-in compute context-bank (CB) bus used by the Qualcomm
+>> DSP accelerator (QDA) driver to represent DSP CB devices that require
+>> IOMMU configuration. This separates the CB bus from the QDA driver and
+>> allows QDA to remain a loadable module while the bus is always built-in.
+> Why? What is the actual problem that you are trying to solve?
+Bus needs to be built-in as it is being used by iommu driver. I'll add more details here.
+>
+>> A new bool Kconfig symbol DRM_ACCEL_QDA_COMPUTE_BUS is added and is
+> Don't describe the patch contents. Please.
+Ack.
+>
+>> selected by the main DRM_ACCEL_QDA driver. The parent accel Makefile is
+>> updated to descend into the QDA directory for both built-in and module
+>> builds so that the CB bus is compiled into vmlinux while the driver
+>> remains modular.
+>>
+>> The CB bus is registered at postcore_initcall() time and is exposed to
+>> the IOMMU core through iommu_buses[] in the same way as the Tegra
+>> host1x context-bus. This enables later patches to create CB devices on
+>> this bus and obtain IOMMU domains for them.
+> Note, there is nothing QDA-specific in this patch. Please explain, why
+> the bus is QDA-specific? Can we generalize it?
+I needed a custom bus here to use for the compute cb devices for iommu
+configurations, I don't see any reason to keep it QDA-specific. The only requirement
+is that this should be enabled built in whenever QDA is enabled.
+
+But if I keep it generic, where should this be placed? Should it be accel(or drm?) specific?
+
+>
+>> Signed-off-by: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
+>> ---
+>>  drivers/accel/Makefile              |  1 +
+>>  drivers/accel/qda/Kconfig           |  5 +++++
+>>  drivers/accel/qda/Makefile          |  2 ++
+>>  drivers/accel/qda/qda_compute_bus.c | 23 +++++++++++++++++++++++
+>>  drivers/iommu/iommu.c               |  4 ++++
+>>  include/linux/qda_compute_bus.h     | 22 ++++++++++++++++++++++
+>>  6 files changed, 57 insertions(+)
+>>
+>> diff --git a/drivers/accel/Makefile b/drivers/accel/Makefile
+>> index 58c08dd5f389..9ed843cd293f 100644
+>> --- a/drivers/accel/Makefile
+>> +++ b/drivers/accel/Makefile
+>> @@ -6,4 +6,5 @@ obj-$(CONFIG_DRM_ACCEL_HABANALABS)	+= habanalabs/
+>>  obj-$(CONFIG_DRM_ACCEL_IVPU)		+= ivpu/
+>>  obj-$(CONFIG_DRM_ACCEL_QAIC)		+= qaic/
+>>  obj-$(CONFIG_DRM_ACCEL_QDA)		+= qda/
+>> +obj-$(CONFIG_DRM_ACCEL_QDA_COMPUTE_BUS) += qda/
+>>  obj-$(CONFIG_DRM_ACCEL_ROCKET)		+= rocket/
+>> \ No newline at end of file
+>> diff --git a/drivers/accel/qda/Kconfig b/drivers/accel/qda/Kconfig
+>> index 484d21ff1b55..ef1fa384efbe 100644
+>> --- a/drivers/accel/qda/Kconfig
+>> +++ b/drivers/accel/qda/Kconfig
+>> @@ -3,11 +3,16 @@
+>>  # Qualcomm DSP accelerator driver
+>>  #
+>>  
+>> +
+>> +config DRM_ACCEL_QDA_COMPUTE_BUS
+>> +	bool
+>> +
+>>  config DRM_ACCEL_QDA
+>>  	tristate "Qualcomm DSP accelerator"
+>>  	depends on DRM_ACCEL
+>>  	depends on ARCH_QCOM || COMPILE_TEST
+>>  	depends on RPMSG
+>> +	select DRM_ACCEL_QDA_COMPUTE_BUS
+>>  	help
+>>  	  Enables the DRM-based accelerator driver for Qualcomm's Hexagon DSPs.
+>>  	  This driver provides a standardized interface for offloading computational
+>> diff --git a/drivers/accel/qda/Makefile b/drivers/accel/qda/Makefile
+>> index e7f23182589b..242684ef1af7 100644
+>> --- a/drivers/accel/qda/Makefile
+>> +++ b/drivers/accel/qda/Makefile
+>> @@ -8,3 +8,5 @@ obj-$(CONFIG_DRM_ACCEL_QDA)	:= qda.o
+>>  qda-y := \
+>>  	qda_drv.o \
+>>  	qda_rpmsg.o \
+>> +
+>> +obj-$(CONFIG_DRM_ACCEL_QDA_COMPUTE_BUS) += qda_compute_bus.o
+>> diff --git a/drivers/accel/qda/qda_compute_bus.c b/drivers/accel/qda/qda_compute_bus.c
+>> new file mode 100644
+>> index 000000000000..1d9c39948fb5
+>> --- /dev/null
+>> +++ b/drivers/accel/qda/qda_compute_bus.c
+>> @@ -0,0 +1,23 @@
+>> +// SPDX-License-Identifier: GPL-2.0-only
+>> +// Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+>> +#include <linux/device.h>
+>> +#include <linux/init.h>
+>> +
+>> +struct bus_type qda_cb_bus_type = {
+>> +	.name = "qda-compute-cb",
+>> +};
+>> +EXPORT_SYMBOL_GPL(qda_cb_bus_type);
+>> +
+>> +static int __init qda_cb_bus_init(void)
+>> +{
+>> +	int err;
+>> +
+>> +	err = bus_register(&qda_cb_bus_type);
+>> +	if (err < 0) {
+>> +		pr_err("qda-compute-cb bus registration failed: %d\n", err);
+>> +		return err;
+>> +	}
+>> +	return 0;
+>> +}
+>> +
+>> +postcore_initcall(qda_cb_bus_init);
+>> diff --git a/drivers/iommu/iommu.c b/drivers/iommu/iommu.c
+>> index 4926a43118e6..5dee912686ee 100644
+>> --- a/drivers/iommu/iommu.c
+>> +++ b/drivers/iommu/iommu.c
+>> @@ -33,6 +33,7 @@
+>>  #include <trace/events/iommu.h>
+>>  #include <linux/sched/mm.h>
+>>  #include <linux/msi.h>
+>> +#include <linux/qda_compute_bus.h>
+>>  #include <uapi/linux/iommufd.h>
+>>  
+>>  #include "dma-iommu.h"
+>> @@ -178,6 +179,9 @@ static const struct bus_type * const iommu_buses[] = {
+>>  #ifdef CONFIG_CDX_BUS
+>>  	&cdx_bus_type,
+>>  #endif
+>> +#ifdef CONFIG_DRM_ACCEL_QDA_COMPUTE_BUS
+>> +	&qda_cb_bus_type,
+>> +#endif
+>>  };
+>>  
+>>  /*
+>> diff --git a/include/linux/qda_compute_bus.h b/include/linux/qda_compute_bus.h
+>> new file mode 100644
+>> index 000000000000..807122d84e3f
+>> --- /dev/null
+>> +++ b/include/linux/qda_compute_bus.h
+>> @@ -0,0 +1,22 @@
+>> +/* SPDX-License-Identifier: GPL-2.0-only */
+>> +/*
+>> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+>> + */
+>> +
+>> +#ifndef __QDA_COMPUTE_BUS_H__
+>> +#define __QDA_COMPUTE_BUS_H__
+>> +
+>> +#include <linux/device.h>
+>> +
+>> +/*
+>> + * Custom bus type for QDA compute context bank (CB) devices
+>> + *
+>> + * This bus type is used for manually created CB devices that represent
+>> + * IOMMU context banks. The custom bus allows proper IOMMU configuration
+>> + * and device management for these virtual devices.
+>> + */
+>> +#ifdef CONFIG_DRM_ACCEL_QDA_COMPUTE_BUS
+>> +extern struct bus_type qda_cb_bus_type;
+>> +#endif
+>> +
+>> +#endif /* __QDA_COMPUTE_BUS_H__ */
+>>
+>> -- 
+>> 2.34.1
+>>
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
