@@ -2,28 +2,28 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id eLxNHoYQn2neYgQAu9opvQ
+	id bVaaIYYQn2nMYwQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
 	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Feb 2026 16:08:54 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0EB3219937C
+	by mail.lfdr.de (Postfix) with ESMTPS id 0EB6619937D
 	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Feb 2026 16:08:53 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 6E852404AB
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Feb 2026 15:00:01 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D7DB5404A7
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Feb 2026 15:03:02 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 618CF3F797
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Feb 2026 14:59:55 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D692F40498
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Feb 2026 15:02:34 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: noahivan35@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Wed, 25 Feb 2026 14:59:55 -0000
-Message-ID: <177203159539.2081241.14668474940261272649@lists.linaro.org>
+Date: Wed, 25 Feb 2026 15:02:34 -0000
+Message-ID: <177203175487.2084098.13715548193934958947@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: OG5IRWPTCMD6ESAW3NTBL5AD4GTAKMXW
-X-Message-ID-Hash: OG5IRWPTCMD6ESAW3NTBL5AD4GTAKMXW
+Message-ID-Hash: 6SM3U7WW5ZC6SXK3OWWKNSJMC43ROX54
+X-Message-ID-Hash: 6SM3U7WW5ZC6SXK3OWWKNSJMC43ROX54
 X-MailFrom: noahivan35@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
@@ -31,7 +31,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] CONSULT A LICENSED CRYPTOCURRENCY RECOVERY EXPERT= REACH OUT TO SALVAGE ASSET RECOVERY
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OG5IRWPTCMD6ESAW3NTBL5AD4GTAKMXW/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6SM3U7WW5ZC6SXK3OWWKNSJMC43ROX54/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -68,7 +68,7 @@ X-Spamd-Result: default: False [7.69 / 15.00];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	FROM_NO_DN(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email]
-X-Rspamd-Queue-Id: 0EB3219937C
+X-Rspamd-Queue-Id: 0EB6619937D
 X-Rspamd-Action: add header
 X-Spam: Yes
 
