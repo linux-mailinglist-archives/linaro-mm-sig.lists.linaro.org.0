@@ -2,27 +2,27 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id oIkfL5eIn2mmcgQAu9opvQ
+	id ENnVHZ2In2mmcgQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 00:41:11 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 00:41:17 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5B9A619EE83
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 00:41:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 50FB819EE9C
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 00:41:17 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 6E3583F6F8
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Feb 2026 23:41:10 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 679EC3F79A
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Feb 2026 23:41:16 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4F6D13F6F8
+	by lists.linaro.org (Postfix) with ESMTP id CC4B63F6F8
 	for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Feb 2026 23:41:03 +0000 (UTC)
 MIME-Version: 1.0
 From: hamtonbecky@gmail.com
 To: linaro-mm-sig@lists.linaro.org
 Date: Wed, 25 Feb 2026 23:41:03 -0000
-Message-ID: <177206286332.2669148.4134258598950278223@lists.linaro.org>
+Message-ID: <177206286383.2668635.1201898600195905741@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: PLHJJ6JF5QWZ7V5RVOB7YKMS37SGXBMJ
-X-Message-ID-Hash: PLHJJ6JF5QWZ7V5RVOB7YKMS37SGXBMJ
+Message-ID-Hash: GVX5JNK6KHRPMYEIBPP6RVLKNEEARVTP
+X-Message-ID-Hash: GVX5JNK6KHRPMYEIBPP6RVLKNEEARVTP
 X-MailFrom: hamtonbecky@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
@@ -30,7 +30,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Cryptera Chain Signals Guide to Ethereum Wallet Recovery
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PLHJJ6JF5QWZ7V5RVOB7YKMS37SGXBMJ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GVX5JNK6KHRPMYEIBPP6RVLKNEEARVTP/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -62,9 +62,9 @@ X-Spamd-Result: default: False [0.59 / 15.00];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	R_DKIM_NA(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.998];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,crypterachainsignals.com:url,crypterachainsignals.com:email,linaro.org:email]
-X-Rspamd-Queue-Id: 5B9A619EE83
+	NEURAL_HAM(-0.00)[-0.997];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[crypterachainsignals.com:url,crypterachainsignals.com:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,linaro.org:email]
+X-Rspamd-Queue-Id: 50FB819EE9C
 X-Rspamd-Action: no action
 
 Ethereum wallet recovery poses unique challenges, but Cryptera Chain Signals' guide simplifies it. In 2026, with ETH's ecosystem expanding, their expertise ensures lost access does not mean permanent loss.
