@@ -2,35 +2,35 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +JeXCjqHn2mmcgQAu9opvQ
+	id 4C9aLGWHn2mmcgQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 00:35:22 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 00:36:05 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id B92FA19EDEF
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 00:35:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 47DFF19EDF9
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 00:36:05 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C83133F7C3
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Feb 2026 23:35:20 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 590723F6F8
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Feb 2026 23:36:04 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B7B133F6F8
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Feb 2026 23:35:14 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C536A3F6F8
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Feb 2026 23:35:57 +0000 (UTC)
 MIME-Version: 1.0
 From: hamtonbecky@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Wed, 25 Feb 2026 23:35:14 -0000
-Message-ID: <177206251475.2662074.6265544147563024326@lists.linaro.org>
+Date: Wed, 25 Feb 2026 23:35:57 -0000
+Message-ID: <177206255780.2662006.6523709917428715728@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: P4LNLTK6EMPLELZ2ZV7A2KBGUP3LI6OY
-X-Message-ID-Hash: P4LNLTK6EMPLELZ2ZV7A2KBGUP3LI6OY
+Message-ID-Hash: 6VO2FKFE3NBTR3URYDA3DG5XHLLKMB6K
+X-Message-ID-Hash: 6VO2FKFE3NBTR3URYDA3DG5XHLLKMB6K
 X-MailFrom: hamtonbecky@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Exchange Hacks: Lessons from Major Breaches and Recovery Paths Cryptera Chain Signals
+Subject: [Linaro-mm-sig] Pump and Dump Schemes: Manipulating Altcoins for Profit Cryptera Chain Signals
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/P4LNLTK6EMPLELZ2ZV7A2KBGUP3LI6OY/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6VO2FKFE3NBTR3URYDA3DG5XHLLKMB6K/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -64,25 +64,23 @@ X-Spamd-Result: default: False [0.59 / 15.00];
 	RCVD_TLS_LAST(0.00)[];
 	NEURAL_HAM(-0.00)[-0.998];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,crypterachainsignals.com:url,crypterachainsignals.com:email,linaro.org:email]
-X-Rspamd-Queue-Id: B92FA19EDEF
+X-Rspamd-Queue-Id: 47DFF19EDF9
 X-Rspamd-Action: no action
 
-Centralized exchanges remain prime targets, with hacks like the 2025 Ronin breach teaching hard lessons. This explores mechanics, prevention, and post-hack recovery.
-1. Vulnerability Exploitation
-Hackers target hot wallets or APIs via social engineering or code flaws.
-Breaches expose private keys, enabling mass withdrawals.
-2. Initial Fund Movement
-Stolen assets are split rapidly, avoiding exchange blacklists.
-3. Advanced Obfuscation
-Chain hops and mixers launder, with conversions to stablecoins.
-Educatively, exchanges now use multi-sig for security.
-4. Cash-Out Challenges
-Funds reach fiat via peer-to-peer or weak-KYC platforms.
+Pump and dumps artificially inflate then crash altcoin prices, preying on FOMO. This educates on spotting and recovering from them.
+1. Group Coordination
+Telegram groups signal buys, pumping volumes.
+2. Price Manipulation
+Insiders sell at peaks, dumping on retail.
+3. Fund Handling
+Proceeds split, hopped, mixed.
+4. Regulatory Gaps
+Cash-outs exploit lax oversight.
 Where Tracing Can Intervene
-Exchange cooperation allows freezes; forensics trace paths.
-Cryptera Chain Signals aids in hack recoveries, mapping flows for 2026 successes.
-Reach out at https://www.crypterachainsignals.com/ or info@crypterachainsignals.com.
-Diversify holdings and enable 2FA.
+Patterns reveal groups; tracing enables claims.
+Cryptera Chain Signals traces dumps, supporting recoveries in 2026.
+Visit https://www.crypterachainsignals.com/ or email info@crypterachainsignals.com.
+Trade fundamentally, avoid hype.
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
