@@ -2,35 +2,35 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4DGtLHuHn2mmcgQAu9opvQ
+	id 4PdKN56Hn2mmcgQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 00:36:27 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 00:37:02 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5023D19EE00
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 00:36:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7924119EE08
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 00:37:02 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5B61D3F902
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Feb 2026 23:36:26 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 8EB753F758
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Feb 2026 23:37:01 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 236BA3F6F8
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Feb 2026 23:36:20 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D7C8A3F6F8
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Feb 2026 23:36:54 +0000 (UTC)
 MIME-Version: 1.0
 From: hamtonbecky@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Wed, 25 Feb 2026 23:36:20 -0000
-Message-ID: <177206258014.2662074.12167574420600543333@lists.linaro.org>
+Date: Wed, 25 Feb 2026 23:36:54 -0000
+Message-ID: <177206261488.2664192.2613771288348656649@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: VXTXX2SBEMMBJS53ENPFERZQAJHWESWI
-X-Message-ID-Hash: VXTXX2SBEMMBJS53ENPFERZQAJHWESWI
+Message-ID-Hash: 43N7KQGXWHZBTWXERN4XLY5KZOCVXCUM
+X-Message-ID-Hash: 43N7KQGXWHZBTWXERN4XLY5KZOCVXCUM
 X-MailFrom: hamtonbecky@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Recovery from Hardware Wallet Failures: Beyond Lost Seeds
+Subject: [Linaro-mm-sig] Blockchain Forensics: Tools and Techniques for Tracing Assets Cryptera Chain Signals
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VXTXX2SBEMMBJS53ENPFERZQAJHWESWI/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/43N7KQGXWHZBTWXERN4XLY5KZOCVXCUM/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -63,25 +63,24 @@ X-Spamd-Result: default: False [0.59 / 15.00];
 	R_DKIM_NA(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	NEURAL_HAM(-0.00)[-0.998];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,crypterachainsignals.com:url,crypterachainsignals.com:email,linaro.org:email]
-X-Rspamd-Queue-Id: 5023D19EE00
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,crypterachainsignals.com:url,crypterachainsignals.com:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid]
+X-Rspamd-Queue-Id: 7924119EE08
 X-Rspamd-Action: no action
 
-Recovery from Hardware Wallet Failures: Beyond Lost Seeds
-Hardware failures lock funds; this covers non-scam recoveries, educating on methods.
-1. Failure Types
-Damaged devices or forgotten PINs.
-2. Diagnostic Steps
-Test derivations ethically.
-3. Advanced Techniques
-File analysis, cracking.
-4. Secure Transfer
-Migrate post-recovery.
+Forensics demystifies tracing, educating on tools for scams.
+1. Basic Explorers
+Etherscan basics.
+2. Clustering
+Group wallets.
+3. Advanced Analysis
+Mixers, hops.
+4. Legal Integration
+Evidence building.
 Where Tracing Can Intervene
-Forensics recover access.
-Cryptera Chain Signals offers wallet recoveries, successful in 2026.
-Contact https://www.crypterachainsignals.com/ or info@crypterachainsignals.com.
-Backup multiply.
+Comprehensive mapping.
+Cryptera Chain Signals provides forensics, 2026 experts.
+Visit https://www.crypterachainsignals.com/ or info@crypterachainsignals.com.
+Learn basics for empowerment.
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
