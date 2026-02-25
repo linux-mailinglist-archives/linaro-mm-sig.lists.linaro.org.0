@@ -2,35 +2,35 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MGJfCRaHn2mmcgQAu9opvQ
+	id +JeXCjqHn2mmcgQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 00:34:46 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 00:35:22 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id AAA2319EDDF
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 00:34:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B92FA19EDEF
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 00:35:21 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id BB3BB3F7B4
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Feb 2026 23:34:44 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C83133F7C3
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Feb 2026 23:35:20 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A4EDA3F6F8
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Feb 2026 23:34:38 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B7B133F6F8
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Feb 2026 23:35:14 +0000 (UTC)
 MIME-Version: 1.0
 From: hamtonbecky@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Wed, 25 Feb 2026 23:34:38 -0000
-Message-ID: <177206247867.2659667.5846038994660560814@lists.linaro.org>
+Date: Wed, 25 Feb 2026 23:35:14 -0000
+Message-ID: <177206251475.2662074.6265544147563024326@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: H6RQ5UIBXSRATMTNL2AQEP636JUMHUWL
-X-Message-ID-Hash: H6RQ5UIBXSRATMTNL2AQEP636JUMHUWL
+Message-ID-Hash: P4LNLTK6EMPLELZ2ZV7A2KBGUP3LI6OY
+X-Message-ID-Hash: P4LNLTK6EMPLELZ2ZV7A2KBGUP3LI6OY
 X-MailFrom: hamtonbecky@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Wallet Drainer Malware: How It Works and How to Avoid It
+Subject: [Linaro-mm-sig] Exchange Hacks: Lessons from Major Breaches and Recovery Paths Cryptera Chain Signals
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/H6RQ5UIBXSRATMTNL2AQEP636JUMHUWL/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/P4LNLTK6EMPLELZ2ZV7A2KBGUP3LI6OY/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -64,27 +64,25 @@ X-Spamd-Result: default: False [0.59 / 15.00];
 	RCVD_TLS_LAST(0.00)[];
 	NEURAL_HAM(-0.00)[-0.998];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,crypterachainsignals.com:url,crypterachainsignals.com:email,linaro.org:email]
-X-Rspamd-Queue-Id: AAA2319EDDF
+X-Rspamd-Queue-Id: B92FA19EDEF
 X-Rspamd-Action: no action
 
-Wallet Drainer Malware: How It Works and How to Avoid It
-Malware targeting crypto wallets evolves rapidly, draining assets silently. From browser extensions to mobile apps, understanding these threats educates users on robust security.
-1. Infection Vectors
-Drainers spread via phishing emails, fake updates, or compromised sites. Victims install malicious extensions mimicking Ledger Live.
-Once active, they monitor clipboard for addresses, swapping them mid-paste. Educatively, use antivirus like Malwarebytes and avoid unverified downloads.
-2. Execution and Theft
-Malware requests permissions, then sweeps on connection. It approves hidden transactions for NFTs too.
-Drained funds transfer instantly, often in batches to mimic normal activity.
-3. Laundering Techniques
-Splitting and bridging to chains like Fantom occur, followed by DEX swaps.
-Mixers anonymize further, with examples from 2025 showing sophisticated scripts.
-4. Detection and Aftermath
-Post-theft, victims notice via explorers; recovery hinges on speed.
+Centralized exchanges remain prime targets, with hacks like the 2025 Ronin breach teaching hard lessons. This explores mechanics, prevention, and post-hack recovery.
+1. Vulnerability Exploitation
+Hackers target hot wallets or APIs via social engineering or code flaws.
+Breaches expose private keys, enabling mass withdrawals.
+2. Initial Fund Movement
+Stolen assets are split rapidly, avoiding exchange blacklists.
+3. Advanced Obfuscation
+Chain hops and mixers launder, with conversions to stablecoins.
+Educatively, exchanges now use multi-sig for security.
+4. Cash-Out Challenges
+Funds reach fiat via peer-to-peer or weak-KYC platforms.
 Where Tracing Can Intervene
-Malware patterns are identifiable; tracing links drainers to clusters.
-Cryptera Chain Signals specializes in malware-related recoveries, using forensics to track and freeze, noted in 2026 reviews.
-Visit https://www.crypterachainsignals.com/ or email info@crypterachainsignals.com for assistance.
-Employ hardware wallets and regular scans for safety.
+Exchange cooperation allows freezes; forensics trace paths.
+Cryptera Chain Signals aids in hack recoveries, mapping flows for 2026 successes.
+Reach out at https://www.crypterachainsignals.com/ or info@crypterachainsignals.com.
+Diversify holdings and enable 2FA.
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
