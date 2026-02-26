@@ -2,42 +2,42 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cGyIIhkX4WnoogAAu9opvQ
+	id aLnpAyIX4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:06:33 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:06:42 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 01F15412548
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:06:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B9BF741254F
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:06:41 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 115CB406F0
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:06:32 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D579A445D6
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:06:40 +0000 (UTC)
 Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id E12FA3F8EC
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Feb 2026 16:07:46 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 6F0843F8EC
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Feb 2026 16:07:59 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=KwAsXlRo;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=P5Qat2ea;
 	spf=pass (lists.linaro.org: domain of jlayton@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=jlayton@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id 656224404F;
+	by sea.source.kernel.org (Postfix) with ESMTP id D2F3841B33;
+	Thu, 26 Feb 2026 16:07:58 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7F8EBC2BCB3;
 	Thu, 26 Feb 2026 16:07:46 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 182BFC19424;
-	Thu, 26 Feb 2026 16:07:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772122066;
-	bh=87RomnifO0cL5ulL+HismKZkw+RwFQPeGoOI69KOx40=;
+	s=k20201202; t=1772122078;
+	bh=fTlsE7xIWGKtPxu9A4dIX/2EfFegpqcLPW063s/2aCU=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=KwAsXlRovpo0h09a4MZbAKFc9uk/4A+aQTF4aProFCmuL6hG40MvhhxJUI+VqfRud
-	 O6lcHDeBshiWkZIDgRdaxnaj+C8AFUJ8rOsvkPj8ib0pFg4RybCP12WGycXssGRPxa
-	 Y/xp2kWbPY1WqWMEVzYgJzKmhnM6MZrgeBQmZGeQodKg6IrAj1UkJKygD1YzzHn800
-	 2KSHklBObDd+M72oyka/zzgTKj/HvjXOsXi5hwZU4h9ENuru/sXV6fqZycHFM07/gy
-	 TXu1xft5ywD39PmN4it9lfO1rB+zJedqmopTLvG6GcEsbLoqlHekI8H2PY5/Dz/XKO
-	 EXxVq4IYq56zw==
+	b=P5Qat2eaWeMJWSNbtbPb7TpssYG2R9fYa73uH36IJRKkrjh/Bv+fUfpwN6cP9WDq9
+	 UT4+i5Gplk4UtP6zP3QUJ95kSeNbpg1idRA3kc/O68WXwQ3VtlA/HFA6zMAAwobJ88
+	 MhMK5aZ9YYDr+dTtfzliJkxCykXqTGOn2lyIJzveFELASHMhX8mb3bNd9QYi8cYmeV
+	 avQAyurn9qwP+hebKlrqi6PAtiUo9AZqYQNfMY4powCPRWIebRYpLD43nSebNYj1Hw
+	 BdzPaR1JP0OGe1R2ueyC7P/JMDMQsO2oQpV72QpsrDqjDNFAvatfTaCDrYaVhhTtk/
+	 UJ2zcdhYUN0mw==
 From: Jeff Layton <jlayton@kernel.org>
-Date: Thu, 26 Feb 2026 10:55:57 -0500
+Date: Thu, 26 Feb 2026 10:55:58 -0500
 MIME-Version: 1.0
-Message-Id: <20260226-iino-u64-v1-55-ccceff366db9@kernel.org>
+Message-Id: <20260226-iino-u64-v1-56-ccceff366db9@kernel.org>
 References: <20260226-iino-u64-v1-0-ccceff366db9@kernel.org>
 In-Reply-To: <20260226-iino-u64-v1-0-ccceff366db9@kernel.org>
 To: Alexander Viro <viro@zeniv.linux.org.uk>,
@@ -113,36 +113,36 @@ To: Alexander Viro <viro@zeniv.linux.org.uk>,
  James Clark <james.clark@linaro.org>, "Darrick J. Wong" <djwong@kernel.org>,
  Martin Schiller <ms@dev.tdt.de>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1424; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=87RomnifO0cL5ulL+HismKZkw+RwFQPeGoOI69KOx40=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpoG0SgH+gJAN29PyQUVILDrGJ9juPunMjNerJ8
- p9n6L8XweWJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaBtEgAKCRAADmhBGVaC
- FbzND/0RW8OwdDIsMNP/tE/3wHlHzbrhC6zVA5x3k2XukHz7HwfDr/1AV6nP0+2rs1tmoxOCBKd
- uB3bC8zaWu2bOdmlNB9AJp3YtiZ29kD1TqBZi1fg1uq98Y/F/YDGSspkxIMu+tzuTcHFRtSvSH+
- IDpK337hFool4tBRuBOST6DrvXm4ihW7o/zqDFmgaHeyGIDcdBbFcKIxKOW/ed+5ntAUUpCTw6S
- WArcCdtpB+8odYkpEtb8hvj0sWMIjlyxxNrrW4J4XRzKGcpx9s3vB00xdJzCpRnJ29X09oG9ccg
- +h4daAbfsXU83CBHtze+Y4734lKaOKw62NnpIOhMZIMYloPgKNEFOTW632ULNN5gWWaucAc/OjE
- VcXPJeL90s+LzWRjIxIqZNYEZzGcQLv1xUM2ji5x1ieTov8j07uiFW/SZtoylEhw2qKExhXny0Y
- B4T8eiCR3m4FwoK0/kWQJwZ8wkZP+ZWlMtJ7B4cUavNhFHR3KpsAajcjpAd39hYsLMh0SszZaTM
- awizdyLsgkfNtdVqMmGQgIHN4K2CS6rGe/1MWiNMu6vcdBTvw1FEWSCzJHb+ZV4mXxYAIVewcMo
- Tm+/Akh931ithtTOjIZe3mE3UFxpvTvcptAA47mL0syU01j4yq0zP683Uhp3KJk7UeNzlCO1Nn8
- UAMj/f2rI4uvZhQ==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=837; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=fTlsE7xIWGKtPxu9A4dIX/2EfFegpqcLPW063s/2aCU=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpoG0SMsGdpHT/6AyJ46OU8MjGpSyFuqiOdnoRG
+ f97y3cZtQ+JAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaBtEgAKCRAADmhBGVaC
+ FV5GD/0frD8N2TX7MN9ww3xhGZMnd4dWX9d+yK6vEV5xACRIttjaQ2/Ik8mZ3s6QPAhMBo9E2/Q
+ t8hsDnDufvG0W+XVW1sHNUwxNxVSgFNW5CSyRnV8G6AmGYVP1RCNqp3xYFXm6XW+t9FEmmCil1Q
+ cc4UDYvzQskcL3uWsEFbYgkBRZO7VHcmjJIzmGULLv7LHeYGjldonwahUsaUPOidLRuLMN5sDWS
+ XNtG/abqnOGQXl+g4W2wGBgADJ4VNDp/mmZI+Taw2+hyoiE5Pwvj+PfTOuBoEZVt3blA6zTfmcg
+ bU08yjsWyKFleE1X7lIrRCA+dPzSDfdtnJMQKfQSSTm2hLhz4HVku/YYqKILPPd3xwGOEtvB1ZY
+ JDaHMmHUGAFoZ4zSz9yQi5PKTFkSpHKjS7ddZ9SPAAF5PEnBPpCv5BApbrq8+7kBbFH3Vmh+GIx
+ W+G1+Nhr1IR0jIQY4q1x8bZUOtbtiAlU0zQwv+scQGLf891dde//IjznORtfE6g0QclGRHS3UJ6
+ YTm1cYrCjF14aSUiT5QGghXtgzer6uOrdXyKjuGOFOc5Py4660JUMayozrKUTgjPdRLimGMNO1M
+ eVe9CVDJIN5mKJzi2B0ZO8jK2PXzJE3gH129N/iSj10aWI8Ut4JNlXdM2kTn5CUKiWDOAW6PP9B
+ 5THgnVzAVl5CBVQ==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 X-Spamd-Bar: -
 X-MailFrom: jlayton@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: TNZEEAPYPXBQR6EEEUTJS5VONZYDLLKI
-X-Message-ID-Hash: TNZEEAPYPXBQR6EEEUTJS5VONZYDLLKI
-X-Mailman-Approved-At: Thu, 16 Apr 2026 16:47:56 +0000
+Message-ID-Hash: Y7GYWZMWF63UQHQYIPKV74QZC7INEH6S
+X-Message-ID-Hash: Y7GYWZMWF63UQHQYIPKV74QZC7INEH6S
+X-Mailman-Approved-At: Thu, 16 Apr 2026 16:47:57 +0000
 CC: linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, nvdimm@lists.linux.dev, fsverity@lists.linux.dev, linux-mm@kvack.org, netfs@lists.linux.dev, linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net, linux-nfs@vger.kernel.org, linux-cifs@vger.kernel.org, samba-technical@lists.samba.org, linux-nilfs@vger.kernel.org, v9fs@lists.linux.dev, linux-afs@lists.infradead.org, autofs@vger.kernel.org, ceph-devel@vger.kernel.org, codalist@coda.cs.cmu.edu, ecryptfs@vger.kernel.org, linux-mtd@lists.infradead.org, jfs-discussion@lists.sourceforge.net, ntfs3@lists.linux.dev, ocfs2-devel@lists.linux.dev, devel@lists.orangefs.org, linux-unionfs@vger.kernel.org, apparmor@lists.ubuntu.com, linux-security-module@vger.kernel.org, linux-integrity@vger.kernel.org, selinux@vger.kernel.org, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, netdev@vger.kernel.org, linux-perf-
  users@vger.kernel.org, linux-fscrypt@vger.kernel.org, linux-xfs@vger.kernel.org, linux-hams@vger.kernel.org, linux-x25@vger.kernel.org, Jeff Layton <jlayton@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 55/61] uprobes: update format strings for u64 i_ino
+Subject: [Linaro-mm-sig] [PATCH 56/61] dma-buf: update format string for u64 i_ino
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TNZEEAPYPXBQR6EEEUTJS5VONZYDLLKI/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/Y7GYWZMWF63UQHQYIPKV74QZC7INEH6S/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -171,7 +171,7 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.334];
+	NEURAL_HAM(-0.00)[-0.442];
 	RCPT_COUNT_GT_50(0.00)[146];
 	FROM_NEQ_ENVFROM(0.00)[jlayton@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
 	DKIM_TRACE(0.00)[kernel.org:-];
@@ -180,40 +180,31 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
-X-Rspamd-Queue-Id: 01F15412548
+X-Rspamd-Queue-Id: B9BF741254F
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Update %lx to %llx in uprobe warning messages for printing
-inode->i_ino, since i_ino is now u64.
+Update %lu to %llu in debugfs seq_printf for printing i_ino, since
+i_ino is now u64.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- kernel/events/uprobes.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/dma-buf/dma-buf.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/kernel/events/uprobes.c b/kernel/events/uprobes.c
-index 923b24b321cc0fbdecaf016645cdac0457a74463..4084e926e284487ea7e28b63721797b20f0dfefd 100644
---- a/kernel/events/uprobes.c
-+++ b/kernel/events/uprobes.c
-@@ -344,7 +344,7 @@ __update_ref_ctr(struct mm_struct *mm, unsigned long vaddr, short d)
- static void update_ref_ctr_warn(struct uprobe *uprobe,
- 				struct mm_struct *mm, short d)
- {
--	pr_warn("ref_ctr %s failed for inode: 0x%lx offset: "
-+	pr_warn("ref_ctr %s failed for inode: 0x%llx offset: "
- 		"0x%llx ref_ctr_offset: 0x%llx of mm: 0x%p\n",
- 		d > 0 ? "increment" : "decrement", uprobe->inode->i_ino,
- 		(unsigned long long) uprobe->offset,
-@@ -982,7 +982,7 @@ static struct uprobe *insert_uprobe(struct uprobe *uprobe)
- static void
- ref_ctr_mismatch_warn(struct uprobe *cur_uprobe, struct uprobe *uprobe)
- {
--	pr_warn("ref_ctr_offset mismatch. inode: 0x%lx offset: 0x%llx "
-+	pr_warn("ref_ctr_offset mismatch. inode: 0x%llx offset: 0x%llx "
- 		"ref_ctr_offset(old): 0x%llx ref_ctr_offset(new): 0x%llx\n",
- 		uprobe->inode->i_ino, (unsigned long long) uprobe->offset,
- 		(unsigned long long) cur_uprobe->ref_ctr_offset,
+diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
+index 11711874a325b954940fb289f09936de0152e683..8c16c8c425cc84cf379d7f790d054e140471c8ac 100644
+--- a/drivers/dma-buf/dma-buf.c
++++ b/drivers/dma-buf/dma-buf.c
+@@ -1708,7 +1708,7 @@ static int dma_buf_debug_show(struct seq_file *s, void *unused)
+ 
+ 
+ 		spin_lock(&buf_obj->name_lock);
+-		seq_printf(s, "%08zu\t%08x\t%08x\t%08ld\t%s\t%08lu\t%s\n",
++		seq_printf(s, "%08zu\t%08x\t%08x\t%08ld\t%s\t%08llu\t%s\n",
+ 				buf_obj->size,
+ 				buf_obj->file->f_flags, buf_obj->file->f_mode,
+ 				file_count(buf_obj->file),
 
 -- 
 2.53.0
