@@ -2,42 +2,42 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id uO3rGGIW4WmRpAAAu9opvQ
+	id 2AkAHmgW4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:03:30 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:03:36 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 27001412488
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:03:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EE75441248F
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:03:35 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 341D345725
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:03:29 +0000 (UTC)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
-	by lists.linaro.org (Postfix) with ESMTPS id B03BF3F85D
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Feb 2026 16:02:47 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 09DBB45744
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:03:35 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+	by lists.linaro.org (Postfix) with ESMTPS id E9A833F85D
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Feb 2026 16:02:59 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=Ji2YnR8m;
-	spf=pass (lists.linaro.org: domain of jlayton@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=jlayton@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=TbQmzaY0;
+	spf=pass (lists.linaro.org: domain of jlayton@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=jlayton@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by tor.source.kernel.org (Postfix) with ESMTP id 24CC36184C;
-	Thu, 26 Feb 2026 16:02:47 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 662A7C2BCB6;
-	Thu, 26 Feb 2026 16:02:34 +0000 (UTC)
+	by sea.source.kernel.org (Postfix) with ESMTP id 5D9734178D;
+	Thu, 26 Feb 2026 16:02:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 04B50C116C6;
+	Thu, 26 Feb 2026 16:02:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772121766;
-	bh=fIoK69cdEWEBP2I83U9z6r8DTMmEfNeiFVnV/oaeX78=;
+	s=k20201202; t=1772121779;
+	bh=OQCOf5ab2K1mQ+xHyh4YDX8Wu4WoXlx58z+ZGgzTgGo=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=Ji2YnR8mQ5wad/oF0jPuW9nL/OPwCpL6+zKMmv0H19n9XnotdFO3o3e3rUCEDhb9Z
-	 1WF/KkwzM64ExlHBH0B69S4s2meMjQx9vWjoA/AkZ80bU81SsuAlI2fXJwJraJ238b
-	 zH7VVtRkcRXHsnWSJaF5568UCrPS7PThaFg9NlqqN+urXCQoEZRdyaUzrdrxBCUO2E
-	 7I82X6Y5bVSyvS9s81e5aPbOZ1Dp3A7Hecs7W8mEzGL4plcq6VYIkCD9jx4XfbbS7i
-	 sO8wk3aypDF8Sqbh28vP5BmlyYB77S1ZnMG8ghlFhEhkRk5jxxg9jMGGDMylpiV/ff
-	 015uIipzZyWwA==
+	b=TbQmzaY0ToimFSGEqqBviXqxwD0bsQQunPHBe4Esrx7faWGcGcQAWK/x89VfMQARu
+	 MAF416OE8SaAb2kDCB7GYV73dZyAtE7pa8T2thN0ZQYwZJZIRrTkGi0HdyKSLBqHE9
+	 jk83XUg+9Dw0B8v5uK8+g6si9Q1VjGUchf+JZ3VQz4A4Z97Fo7oCUECQKvtOtqz6Qm
+	 8apXth+/R3hmpE/a0ui3v6v/JU0Ca2KazJu3UX2LW3h8VyEakwzX0ai1eFnGVuADkm
+	 16lHS2lWUcEpC3DciJr9rb7jPw0FQlx8BFdmvHSTJW9e5mFcKhS5/Mz51lf0ofiEAK
+	 FxcCtypCuKNww==
 From: Jeff Layton <jlayton@kernel.org>
-Date: Thu, 26 Feb 2026 10:55:33 -0500
+Date: Thu, 26 Feb 2026 10:55:34 -0500
 MIME-Version: 1.0
-Message-Id: <20260226-iino-u64-v1-31-ccceff366db9@kernel.org>
+Message-Id: <20260226-iino-u64-v1-32-ccceff366db9@kernel.org>
 References: <20260226-iino-u64-v1-0-ccceff366db9@kernel.org>
 In-Reply-To: <20260226-iino-u64-v1-0-ccceff366db9@kernel.org>
 To: Alexander Viro <viro@zeniv.linux.org.uk>,
@@ -113,36 +113,36 @@ To: Alexander Viro <viro@zeniv.linux.org.uk>,
  James Clark <james.clark@linaro.org>, "Darrick J. Wong" <djwong@kernel.org>,
  Martin Schiller <ms@dev.tdt.de>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=7381; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=fIoK69cdEWEBP2I83U9z6r8DTMmEfNeiFVnV/oaeX78=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpoG0MrWn95OY2IvrlnUkZNzB5OKGldbHxaeOhx
- 6fnNYyqTCaJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaBtDAAKCRAADmhBGVaC
- FTUQD/48IgCmYwuVS4Syo6OsAn79pnl/D+n76rrtbnabt+Gej6so4CnUg14EOIdtAOICigP2EiV
- LrN/eA1QXBz+cgGpZ+Bp+uYstZEXVE4wj85CNn3345fs/O8Twwy59xmFxPLabFN+2rhMKDFRUVB
- qZHd1/KAm3NDhhTnrF12i7q6W6qeY6ACZvT5gYalYp289/OgmM50p12JHBIxViZOGjK9yW9ZJ5k
- 6C8j82F0K6aqnKKDaAlwZ5G4swXcYaRLDSCKLfeErd/1ggu8jObCi+H25F6gwuAsQD2TEC+bRgP
- +xT3s+NtSrG3Cf0Q/Kim3XDDQc7abwcwqij61zu07WrcrGMBJCsaUvJqb73ZKWekCHuuEurPyC2
- A60TdWIk2ox9QpZhNSdCY7UyXhyPqdBCpKB3TAPA7g8osE4Siu/sPGrhS6yaxcl72XJu6kFBODo
- y2D23z9768RuMBc07LSCgxsuYStiKlUuplXWVStRZ1nQqm5i9ktn7YPXuFtmTY4HqnsfVMaDgjY
- G3ZTx5towv6Y6QxYKbTVv3Eu/VDTdtWWHhf+o4H1YT4TtWRumFVxwiGrd712o3hs/2ccYsV2sJm
- qbvTzz3JyAjyloZygBQkSVIGL8QK+PeRmEtzUJ/e1SzB51SUxA85NK9dyRNGtX+eOX/PCgt7gVU
- oQbY/jqG9WlxSQg==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1010; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=OQCOf5ab2K1mQ+xHyh4YDX8Wu4WoXlx58z+ZGgzTgGo=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpoG0MytO42ubVkDA1oR7CCr2K7tCY0oxaOdcl7
+ ubGW17+fNeJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaBtDAAKCRAADmhBGVaC
+ FaSRD/9QZxi4U+dSi8DJ94se4LGWC4f3gLm7EreqnTo0S5Uw1lXf085M+yMl8fOGQP5j5HOXAMZ
+ zlV4QOZrgcvv5qbNR/Uu1bIqTr4GHSHKyJRhb4qtl3XVVD9OJjwjulJPWUWGWTAHWJvUamYmUAG
+ hXgGEUQxxU7+fHHrNObtVo80fQXdhXwCy3VHQYpZzJk3fRfkWehkcjrhq1KUn/mE4E/q73FuL4J
+ iIFJxiycMuoF2Nk1tPnVZdml8zdN7phdfKQ1IIwhTz7fPC3lwhJk0JJ0yT3UloXDRA+RGIR+DaV
+ l+3GuzqonpW6vsTlD21OALuHKEIrn0a/+TuUgceZzb7iJwss2Y3sdItY7U5JCxFUVrrjhGUXJbh
+ NBMZAccD4ydwd2qrAcM5vQID6YReX//sqI3yMQnV3NbXdzPPC0BS3YXFtsVDcfm6AJHANVxOIXf
+ 78Am9OXq7FDfhsbMlJumVawUiJXcUQ1G9ykIA6+7J6RhjnJuWt+sB81Mzr9QKnmqs3BWIXvJPOl
+ e46W5ho5QdNKcbtaP3D9LL2RWW8okhwpDeWBatMG+8dYr5WeCcVq1uJkjKj5c57uIwz3Ah8/X59
+ /CWaZqu9q9XJKqkwLn6kHAdDG7FDvv5IiCzUKq3JfCR0eg7y49iFkuBkwgYzMQMDMucgUs9EoKw
+ V5YG7u/5qThqmSQ==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
-X-Spamd-Bar: --
+X-Spamd-Bar: -
 X-MailFrom: jlayton@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: XNPOHMSWT3P5WHSQYTMQQEC4VATV2EMZ
-X-Message-ID-Hash: XNPOHMSWT3P5WHSQYTMQQEC4VATV2EMZ
-X-Mailman-Approved-At: Thu, 16 Apr 2026 16:47:45 +0000
+Message-ID-Hash: PP4OY4YM3HHQJXPAYF4V6JY3ULYDTTPF
+X-Message-ID-Hash: PP4OY4YM3HHQJXPAYF4V6JY3ULYDTTPF
+X-Mailman-Approved-At: Thu, 16 Apr 2026 16:47:46 +0000
 CC: linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, nvdimm@lists.linux.dev, fsverity@lists.linux.dev, linux-mm@kvack.org, netfs@lists.linux.dev, linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net, linux-nfs@vger.kernel.org, linux-cifs@vger.kernel.org, samba-technical@lists.samba.org, linux-nilfs@vger.kernel.org, v9fs@lists.linux.dev, linux-afs@lists.infradead.org, autofs@vger.kernel.org, ceph-devel@vger.kernel.org, codalist@coda.cs.cmu.edu, ecryptfs@vger.kernel.org, linux-mtd@lists.infradead.org, jfs-discussion@lists.sourceforge.net, ntfs3@lists.linux.dev, ocfs2-devel@lists.linux.dev, devel@lists.orangefs.org, linux-unionfs@vger.kernel.org, apparmor@lists.ubuntu.com, linux-security-module@vger.kernel.org, linux-integrity@vger.kernel.org, selinux@vger.kernel.org, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, netdev@vger.kernel.org, linux-perf-
  users@vger.kernel.org, linux-fscrypt@vger.kernel.org, linux-xfs@vger.kernel.org, linux-hams@vger.kernel.org, linux-x25@vger.kernel.org, Jeff Layton <jlayton@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 31/61] ext2: update format strings for u64 i_ino
+Subject: [Linaro-mm-sig] [PATCH 32/61] freevxfs: update format strings for u64 i_ino
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XNPOHMSWT3P5WHSQYTMQQEC4VATV2EMZ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PP4OY4YM3HHQJXPAYF4V6JY3ULYDTTPF/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -171,7 +171,7 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.258];
+	NEURAL_HAM(-0.00)[-0.384];
 	RCPT_COUNT_GT_50(0.00)[146];
 	FROM_NEQ_ENVFROM(0.00)[jlayton@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
 	DKIM_TRACE(0.00)[kernel.org:-];
@@ -180,192 +180,37 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
-X-Rspamd-Queue-Id: 27001412488
+X-Rspamd-Queue-Id: EE75441248F
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Update format strings and local variable types in ext2 for the
+Update format strings and local variable types in freevxfs for the
 i_ino type change from unsigned long to u64.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- fs/ext2/dir.c    | 10 +++++-----
- fs/ext2/ialloc.c |  9 +++++----
- fs/ext2/inode.c  |  2 +-
- fs/ext2/xattr.c  | 14 +++++++-------
- 4 files changed, 18 insertions(+), 17 deletions(-)
+ fs/freevxfs/vxfs_bmap.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/fs/ext2/dir.c b/fs/ext2/dir.c
-index 395fc36c089b7bb6360a8326727bd5606c7e2476..278d4be8ecbe7790204b5ba985a7ce088fadb181 100644
---- a/fs/ext2/dir.c
-+++ b/fs/ext2/dir.c
-@@ -141,7 +141,7 @@ static bool ext2_check_folio(struct folio *folio, int quiet, char *kaddr)
- Ebadsize:
- 	if (!quiet)
- 		ext2_error(sb, __func__,
--			"size of directory #%lu is not a multiple "
-+			"size of directory #%llu is not a multiple "
- 			"of chunk size", dir->i_ino);
- 	goto fail;
- Eshort:
-@@ -160,7 +160,7 @@ static bool ext2_check_folio(struct folio *folio, int quiet, char *kaddr)
- 	error = "inode out of bounds";
- bad_entry:
- 	if (!quiet)
--		ext2_error(sb, __func__, "bad entry in directory #%lu: : %s - "
-+		ext2_error(sb, __func__, "bad entry in directory #%llu: : %s - "
- 			"offset=%llu, inode=%lu, rec_len=%d, name_len=%d",
- 			dir->i_ino, error, folio_pos(folio) + offs,
- 			(unsigned long) le32_to_cpu(p->inode),
-@@ -170,7 +170,7 @@ static bool ext2_check_folio(struct folio *folio, int quiet, char *kaddr)
- 	if (!quiet) {
- 		p = (ext2_dirent *)(kaddr + offs);
- 		ext2_error(sb, "ext2_check_folio",
--			"entry in directory #%lu spans the page boundary"
-+			"entry in directory #%llu spans the page boundary"
- 			"offset=%llu, inode=%lu",
- 			dir->i_ino, folio_pos(folio) + offs,
- 			(unsigned long) le32_to_cpu(p->inode));
-@@ -281,7 +281,7 @@ ext2_readdir(struct file *file, struct dir_context *ctx)
+diff --git a/fs/freevxfs/vxfs_bmap.c b/fs/freevxfs/vxfs_bmap.c
+index 26d367e3668da0cfd916881c7a07c047a7ef1bf5..cde52187bb7e3dcc05a45b1032994b579d4e4974 100644
+--- a/fs/freevxfs/vxfs_bmap.c
++++ b/fs/freevxfs/vxfs_bmap.c
+@@ -260,12 +260,12 @@ vxfs_bmap1(struct inode *ip, long iblock)
+ 	if (VXFS_ISIMMED(vip))
+ 		goto unsupp;
  
- 		if (IS_ERR(kaddr)) {
- 			ext2_error(sb, __func__,
--				   "bad page in #%lu",
-+				   "bad page in #%llu",
- 				   inode->i_ino);
- 			ctx->pos += PAGE_SIZE - offset;
- 			return PTR_ERR(kaddr);
-@@ -383,7 +383,7 @@ struct ext2_dir_entry_2 *ext2_find_entry (struct inode *dir,
- 		/* next folio is past the blocks we've got */
- 		if (unlikely(n > (dir->i_blocks >> (PAGE_SHIFT - 9)))) {
- 			ext2_error(dir->i_sb, __func__,
--				"dir %lu size %lld exceeds block count %llu",
-+				"dir %llu size %lld exceeds block count %llu",
- 				dir->i_ino, dir->i_size,
- 				(unsigned long long)dir->i_blocks);
- 			goto out;
-diff --git a/fs/ext2/ialloc.c b/fs/ext2/ialloc.c
-index fdf63e9c6e7caa6d5267c25faa6c293622f00627..bf21b57cf98cd5f90e1177454a8fd5cca482c2f8 100644
---- a/fs/ext2/ialloc.c
-+++ b/fs/ext2/ialloc.c
-@@ -169,9 +169,10 @@ static void ext2_preread_inode(struct inode *inode)
- 	unsigned long block_group;
- 	unsigned long offset;
- 	unsigned long block;
-+	unsigned int ino = inode->i_ino;
- 	struct ext2_group_desc * gdp;
+-	printk(KERN_WARNING "vxfs: inode %ld has no valid orgtype (%x)\n",
++	printk(KERN_WARNING "vxfs: inode %lld has no valid orgtype (%x)\n",
+ 			ip->i_ino, vip->vii_orgtype);
+ 	BUG();
  
--	block_group = (inode->i_ino - 1) / EXT2_INODES_PER_GROUP(inode->i_sb);
-+	block_group = (ino - 1) / EXT2_INODES_PER_GROUP(inode->i_sb);
- 	gdp = ext2_get_group_desc(inode->i_sb, block_group, NULL);
- 	if (gdp == NULL)
- 		return;
-@@ -179,7 +180,7 @@ static void ext2_preread_inode(struct inode *inode)
- 	/*
- 	 * Figure out the offset within the block group inode table
- 	 */
--	offset = ((inode->i_ino - 1) % EXT2_INODES_PER_GROUP(inode->i_sb)) *
-+	offset = ((ino - 1) % EXT2_INODES_PER_GROUP(inode->i_sb)) *
- 				EXT2_INODE_SIZE(inode->i_sb);
- 	block = le32_to_cpu(gdp->bg_inode_table) +
- 				(offset >> EXT2_BLOCK_SIZE_BITS(inode->i_sb));
-@@ -381,7 +382,7 @@ static int find_group_other(struct super_block *sb, struct inode *parent)
- 	 *
- 	 * So add our directory's i_ino into the starting point for the hash.
- 	 */
--	group = (group + parent->i_ino) % ngroups;
-+	group = (group + (unsigned int)parent->i_ino) % ngroups;
- 
- 	/*
- 	 * Use a quadratic hash to find a group with a free inode and some
-@@ -589,7 +590,7 @@ struct inode *ext2_new_inode(struct inode *dir, umode_t mode,
- 		goto fail_free_drop;
- 
- 	mark_inode_dirty(inode);
--	ext2_debug("allocating inode %lu\n", inode->i_ino);
-+	ext2_debug("allocating inode %llu\n", inode->i_ino);
- 	ext2_preread_inode(inode);
- 	return inode;
- 
-diff --git a/fs/ext2/inode.c b/fs/ext2/inode.c
-index dbfe9098a1245d97ba97cff24395754197043c33..819fa81901b79e0ef4e01e428445bd8d8cc01e68 100644
---- a/fs/ext2/inode.c
-+++ b/fs/ext2/inode.c
-@@ -1152,7 +1152,7 @@ static void ext2_free_branches(struct inode *inode, __le32 *p, __le32 *q, int de
- 			 */ 
- 			if (!bh) {
- 				ext2_error(inode->i_sb, "ext2_free_branches",
--					"Read failure, inode=%ld, block=%ld",
-+					"Read failure, inode=%lld, block=%ld",
- 					inode->i_ino, nr);
- 				continue;
- 			}
-diff --git a/fs/ext2/xattr.c b/fs/ext2/xattr.c
-index c885dcc3bd0d180c4c3f0945ca23ed8ce569ef10..e7f87d1514458f14252702119e1c065a28ea3d73 100644
---- a/fs/ext2/xattr.c
-+++ b/fs/ext2/xattr.c
-@@ -227,7 +227,7 @@ ext2_xattr_get(struct inode *inode, int name_index, const char *name,
- 	if (!ext2_xattr_header_valid(HDR(bh))) {
- bad_block:
- 		ext2_error(inode->i_sb, "ext2_xattr_get",
--			"inode %ld: bad block %d", inode->i_ino,
-+			"inode %llu: bad block %d", inode->i_ino,
- 			EXT2_I(inode)->i_file_acl);
- 		error = -EIO;
- 		goto cleanup;
-@@ -313,7 +313,7 @@ ext2_xattr_list(struct dentry *dentry, char *buffer, size_t buffer_size)
- 	if (!ext2_xattr_header_valid(HDR(bh))) {
- bad_block:
- 		ext2_error(inode->i_sb, "ext2_xattr_list",
--			"inode %ld: bad block %d", inode->i_ino,
-+			"inode %llu: bad block %d", inode->i_ino,
- 			EXT2_I(inode)->i_file_acl);
- 		error = -EIO;
- 		goto cleanup;
-@@ -454,7 +454,7 @@ ext2_xattr_set(struct inode *inode, int name_index, const char *name,
- 		if (!ext2_xattr_header_valid(header)) {
- bad_block:
- 			ext2_error(sb, "ext2_xattr_set",
--				"inode %ld: bad block %d", inode->i_ino, 
-+				"inode %llu: bad block %d", inode->i_ino,
- 				   EXT2_I(inode)->i_file_acl);
- 			error = -EIO;
- 			goto cleanup;
-@@ -833,7 +833,7 @@ ext2_xattr_delete_inode(struct inode *inode)
- 
- 	if (!ext2_data_block_valid(sbi, EXT2_I(inode)->i_file_acl, 1)) {
- 		ext2_error(inode->i_sb, "ext2_xattr_delete_inode",
--			"inode %ld: xattr block %d is out of data blocks range",
-+			"inode %lld: xattr block %d is out of data blocks range",
- 			inode->i_ino, EXT2_I(inode)->i_file_acl);
- 		goto cleanup;
- 	}
-@@ -841,14 +841,14 @@ ext2_xattr_delete_inode(struct inode *inode)
- 	bh = sb_bread(inode->i_sb, EXT2_I(inode)->i_file_acl);
- 	if (!bh) {
- 		ext2_error(inode->i_sb, "ext2_xattr_delete_inode",
--			"inode %ld: block %d read error", inode->i_ino,
-+			"inode %llu: block %d read error", inode->i_ino,
- 			EXT2_I(inode)->i_file_acl);
- 		goto cleanup;
- 	}
- 	ea_bdebug(bh, "b_count=%d", atomic_read(&(bh->b_count)));
- 	if (!ext2_xattr_header_valid(HDR(bh))) {
- 		ext2_error(inode->i_sb, "ext2_xattr_delete_inode",
--			"inode %ld: bad block %d", inode->i_ino,
-+			"inode %llu: bad block %d", inode->i_ino,
- 			EXT2_I(inode)->i_file_acl);
- 		goto cleanup;
- 	}
-@@ -952,7 +952,7 @@ ext2_xattr_cache_find(struct inode *inode, struct ext2_xattr_header *header)
- 		bh = sb_bread(inode->i_sb, ce->e_value);
- 		if (!bh) {
- 			ext2_error(inode->i_sb, "ext2_xattr_cache_find",
--				"inode %ld: block %ld read error",
-+				"inode %lld: block %ld read error",
- 				inode->i_ino, (unsigned long) ce->e_value);
- 		} else {
- 			lock_buffer(bh);
+ unsupp:
+-	printk(KERN_WARNING "vxfs: inode %ld has an unsupported orgtype (%x)\n",
++	printk(KERN_WARNING "vxfs: inode %lld has an unsupported orgtype (%x)\n",
+ 			ip->i_ino, vip->vii_orgtype);
+ 	return 0;
+ }
 
 -- 
 2.53.0
