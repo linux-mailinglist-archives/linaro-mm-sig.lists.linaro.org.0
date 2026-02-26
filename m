@@ -2,37 +2,37 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 0IonI4wX4WnoogAAu9opvQ
+	id 0BvoOpMX4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:08:28 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:08:35 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1DF734125C6
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:08:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7A1F94125DE
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:08:35 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 28BC944F18
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:08:27 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 84DB44475A
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:08:34 +0000 (UTC)
 Received: from mx1.manguebit.org (mx1.manguebit.org [143.255.12.172])
-	by lists.linaro.org (Postfix) with ESMTPS id B74433F8EE
+	by lists.linaro.org (Postfix) with ESMTPS id B6ABB3F8EC
 	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Feb 2026 16:58:45 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=manguebit.org header.s=dkim header.b=ulkKHiYz;
+	dkim=pass header.d=manguebit.org header.s=dkim header.b=nlx+CJv1;
 	spf=pass (lists.linaro.org: domain of pc@manguebit.org designates 143.255.12.172 as permitted sender) smtp.mailfrom=pc@manguebit.org;
 	dmarc=pass (policy=quarantine) header.from=manguebit.org
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=manguebit.org; s=dkim; h=Content-Type:MIME-Version:Date:References:
 	In-Reply-To:Subject:Cc:To:From:Message-ID:Sender:Reply-To:
 	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=lHNPvXjvxrRY/KHE3atTkGQgKEoBn4K5FRw/b5IfwZY=; b=ulkKHiYzv6I+6IIa14ftoupjDe
-	J6D5Nic3w9+LTbwjPerGaRkKolwfy2KcZUzYubTFBR1C6YfViQ9IzWzOqE1PMBvOSLtWvDqYWHDkS
-	e8YKhk2RZVgK/kgJGqWlaX1VlOeT5XV51JNx7TY19yYOoCL9WPMfL7DEx3UWQDxjJXBn4KZXjEq/L
-	QYbtmeNM6AGz7YQoWObfC/Wgr1ca8Ha69hN8dnEa+b8qtPVTc9YoU/4JL/CqWgk9ghL/akGLMqNBo
-	zcPi7YHA7wTZsVYKJPKxzvhBKFb5Xcdj6osXFB4VEMUpfmqou7ST10TYaQkSCLGoa+WvRtMN6QWb5
-	s7cLVI5g==;
+	bh=GBAAeNpvfWupATD/Mqi5LhBKxQa5mgBWtQkeTAghv8U=; b=nlx+CJv1x/UuNttwKXynH0qJFV
+	GGPlyhyb56jCAmfo2Dkhao6Akb/whBUWKrLHAtLp2UnbAxsZRiEEnc/PA6a02dlJyun7VB/WjZ/4Y
+	gSNeA6HN4mQbMGOcTdkRiDsoEk5l6Ssb6qUdMgoH7JYTbpZDll0K3Gc9Sl8LgYozq3/3dgHYhmDwe
+	fRUIm7haKSMEmY1/NzzgcvEuyT7l/TJWKX2NJMO7AKfx12ThZPHB/q8MyHq+NyeW4NqEFdN0DjrLH
+	BhCTcfbtcrlXDP67PmPWXw2HF4zz7VIOb15e9g0uBhXA6DI+uxHuKzWDbVQB6y2V+HCbHUW7dwsue
+	9tQXYUVA==;
 Received: from pc by mx1.manguebit.org with local (Exim 4.99.1)
-	id 1vvegP-00000000rdH-33sy;
-	Thu, 26 Feb 2026 13:57:49 -0300
-Message-ID: <5687bdf62ddd20660394eb0d7dabb96a@manguebit.org>
+	id 1vvegu-00000000rdY-0Taa;
+	Thu, 26 Feb 2026 13:58:20 -0300
+Message-ID: <8dcf2c77013a0de245c4417eb4726752@manguebit.org>
 From: Paulo Alcantara <pc@manguebit.org>
 To: Jeff Layton <jlayton@kernel.org>, Alexander Viro
  <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Jan
@@ -94,25 +94,25 @@ To: Jeff Layton <jlayton@kernel.org>, Alexander Viro
  <jolsa@kernel.org>, Ian Rogers <irogers@google.com>, Adrian Hunter
  <adrian.hunter@intel.com>, James Clark <james.clark@linaro.org>, "Darrick
  J. Wong" <djwong@kernel.org>, Martin Schiller <ms@dev.tdt.de>
-In-Reply-To: <20260226-iino-u64-v1-13-ccceff366db9@kernel.org>
+In-Reply-To: <20260226-iino-u64-v1-14-ccceff366db9@kernel.org>
 References: <20260226-iino-u64-v1-0-ccceff366db9@kernel.org>
- <20260226-iino-u64-v1-13-ccceff366db9@kernel.org>
-Date: Thu, 26 Feb 2026 13:57:49 -0300
+ <20260226-iino-u64-v1-14-ccceff366db9@kernel.org>
+Date: Thu, 26 Feb 2026 13:58:19 -0300
 MIME-Version: 1.0
 X-Spamd-Bar: -
 X-MailFrom: pc@manguebit.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: KIMAMUMPD7QMTLJUNVV75VMDL2SNBRLK
-X-Message-ID-Hash: KIMAMUMPD7QMTLJUNVV75VMDL2SNBRLK
-X-Mailman-Approved-At: Thu, 16 Apr 2026 16:48:02 +0000
+Message-ID-Hash: PY6H2SVKEFQULWD3JFEGTBFBVTR7SWM7
+X-Message-ID-Hash: PY6H2SVKEFQULWD3JFEGTBFBVTR7SWM7
+X-Mailman-Approved-At: Thu, 16 Apr 2026 16:48:03 +0000
 CC: linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, nvdimm@lists.linux.dev, fsverity@lists.linux.dev, linux-mm@kvack.org, netfs@lists.linux.dev, linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net, linux-nfs@vger.kernel.org, linux-cifs@vger.kernel.org, samba-technical@lists.samba.org, linux-nilfs@vger.kernel.org, v9fs@lists.linux.dev, linux-afs@lists.infradead.org, autofs@vger.kernel.org, ceph-devel@vger.kernel.org, codalist@coda.cs.cmu.edu, ecryptfs@vger.kernel.org, linux-mtd@lists.infradead.org, jfs-discussion@lists.sourceforge.net, ntfs3@lists.linux.dev, ocfs2-devel@lists.linux.dev, devel@lists.orangefs.org, linux-unionfs@vger.kernel.org, apparmor@lists.ubuntu.com, linux-security-module@vger.kernel.org, linux-integrity@vger.kernel.org, selinux@vger.kernel.org, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, netdev@vger.kernel.org, linux-perf-
  users@vger.kernel.org, linux-fscrypt@vger.kernel.org, linux-xfs@vger.kernel.org, linux-hams@vger.kernel.org, linux-x25@vger.kernel.org, Jeff Layton <jlayton@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 13/61] smb: store full 64-bit uniqueid in i_ino
+Subject: [Linaro-mm-sig] Re: [PATCH 14/61] smb: remove cifs_uniqueid_to_ino_t()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KIMAMUMPD7QMTLJUNVV75VMDL2SNBRLK/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PY6H2SVKEFQULWD3JFEGTBFBVTR7SWM7/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -141,7 +141,7 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.711];
+	NEURAL_HAM(-0.00)[-0.683];
 	RCPT_COUNT_GT_50(0.00)[146];
 	FROM_NEQ_ENVFROM(0.00)[pc@manguebit.org,linaro-mm-sig-bounces@lists.linaro.org];
 	DKIM_TRACE(0.00)[manguebit.org:-];
@@ -150,25 +150,25 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	MISSING_XM_UA(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
-X-Rspamd-Queue-Id: 1DF734125C6
+X-Rspamd-Queue-Id: 7A1F94125DE
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 Jeff Layton <jlayton@kernel.org> writes:
 
-> With i_ino now u64, CIFS/SMB can store the full 64-bit uniqueid in
-> i_ino without the XOR-folding hack previously needed on 32-bit
-> architectures.
+> Now that i_ino is u64, cifs_uniqueid_to_ino_t() is a trivial identity
+> function. Remove it and use fattr->cf_uniqueid directly at both call
+> sites.
 >
-> - Simplify cifs_uniqueid_to_ino_t() to return u64 directly
-> - Update hash variable type in cifs_get_inode_info()
-> - Update format strings from %lu to %llu
+> Also remove the now-unused #include <linux/hash.h>, which was only
+> needed for the old XOR-folding logic.
 >
 > Signed-off-by: Jeff Layton <jlayton@kernel.org>
 > ---
->  fs/smb/client/cifsfs.h | 12 +++---------
->  fs/smb/client/inode.c  |  4 ++--
->  2 files changed, 5 insertions(+), 11 deletions(-)
+>  fs/smb/client/cifsfs.h  | 11 -----------
+>  fs/smb/client/inode.c   |  2 +-
+>  fs/smb/client/readdir.c |  2 +-
+>  3 files changed, 2 insertions(+), 13 deletions(-)
 
 Acked-by: Paulo Alcantara (Red Hat) <pc@manguebit.org>
 _______________________________________________
