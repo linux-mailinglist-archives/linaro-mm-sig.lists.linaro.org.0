@@ -2,40 +2,40 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id YEz2DJ4Y4WmmpAAAu9opvQ
+	id KJqhD6oY4WmmpAAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:13:02 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:13:14 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0042C4126E5
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:13:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E27534126EC
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:13:13 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 103B6457F1
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:13:01 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 2EED43F962
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Feb 2026 22:45:55 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 091E745802
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:13:13 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+	by lists.linaro.org (Postfix) with ESMTPS id 60D763F7DA
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Feb 2026 22:52:06 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=BwPRsluw;
-	spf=pass (lists.linaro.org: domain of dlemoal@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=dlemoal@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=EWJc2Uz6;
+	spf=pass (lists.linaro.org: domain of dlemoal@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=dlemoal@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id 4F73E438A6;
-	Thu, 26 Feb 2026 22:45:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DCE84C116C6;
-	Thu, 26 Feb 2026 22:45:33 +0000 (UTC)
+	by tor.source.kernel.org (Postfix) with ESMTP id AC9B3600AA;
+	Thu, 26 Feb 2026 22:52:05 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5F89BC116C6;
+	Thu, 26 Feb 2026 22:51:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772145954;
-	bh=6uKDFBvN4DDY9XeohP+RP+WtJXai/wgD+w8aBy8ELuI=;
+	s=k20201202; t=1772146325;
+	bh=pajDmz5yp010hi/+QMkuQbHFrnu7ZcaVGRjn0wxtp+k=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=BwPRsluwO3QANQshXwh32wR+hN95/ZQaqzcFJ2RER/i7epF+sSCYFo1KMXHOGf2R3
-	 tsLZpVKPhp6IYFncinO3pBIsCgu+rwpVvIo+0zjgm2iq8YIleJaPf8qGesVW5FdwrW
-	 Y5g7WUES2Mh6BiqhQR5w2ll+Cp6d1rgxOG/dhhV4E6xF4vMFhgwVRQ/1Ucgz8zHYT7
-	 7zI5Snsyyyon3Xpvj3HPGliG9ZUJpLobrX1MAnnbxvWUr9WMlrzKtKu7XY0mI84whC
-	 FEYZ5B/15gnGjYg5Ru8NFUa29UtrV2uULQrsiaYP8uXtKD59C94w045b6ZIGP74ugy
-	 vi3my4tvrpUOA==
-Message-ID: <6a5fb35d-b0d1-4d47-bb92-c176f5e12a40@kernel.org>
-Date: Fri, 27 Feb 2026 07:45:32 +0900
+	b=EWJc2Uz6oM/U5lpFUSm3GfVgR4cldZrHPbo/JbNPiCo7a9Qet3NPwP5d/g2F9Z/eY
+	 PULzCCLSyJn39yRAPsdhfy+RdiF52vi9KQubOdZlNMxkN2YEKcSZEHQQHEwBCv8UDq
+	 aUBFV4GAaYKK9ceshTeB/l1Olc+NGJM3RsiAcavnfuqg+7yXrgam32eowwkzRFvJiO
+	 netZZv71AIv/PMFlHfmi9NAn7OA57Ds8pdoFOxBLCi6KvwtN5EM8l5UroXTz7+zS0y
+	 Jdi0ImLclB5JNz4xYwfY9d0QUSMNEpHwhSScYgT0H9rCBdMCBOXzjYqnr0oZ0b2JRV
+	 uc6mB11PL9OGw==
+Message-ID: <104bcaf3-42ba-4eec-98c1-fe3afa7fcc41@kernel.org>
+Date: Fri, 27 Feb 2026 07:51:43 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Jeff Layton <jlayton@kernel.org>, Alexander Viro
@@ -108,25 +108,25 @@ To: Jeff Layton <jlayton@kernel.org>, Alexander Viro
  <james.clark@linaro.org>, "Darrick J. Wong" <djwong@kernel.org>,
  Martin Schiller <ms@dev.tdt.de>
 References: <20260226-iino-u64-v1-0-ccceff366db9@kernel.org>
- <20260226-iino-u64-v1-50-ccceff366db9@kernel.org>
+ <20260226-iino-u64-v1-3-ccceff366db9@kernel.org>
 Content-Language: en-US
 From: Damien Le Moal <dlemoal@kernel.org>
 Organization: Western Digital Research
-In-Reply-To: <20260226-iino-u64-v1-50-ccceff366db9@kernel.org>
+In-Reply-To: <20260226-iino-u64-v1-3-ccceff366db9@kernel.org>
 X-Spamd-Bar: -
 X-MailFrom: dlemoal@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: GOWANFKP3CWUMYBINXIRU7WGQR2APLVU
-X-Message-ID-Hash: GOWANFKP3CWUMYBINXIRU7WGQR2APLVU
+Message-ID-Hash: 6XZSA3YF4UP25FKAKE5BX2R47KLAR5AP
+X-Message-ID-Hash: 6XZSA3YF4UP25FKAKE5BX2R47KLAR5AP
 X-Mailman-Approved-At: Thu, 16 Apr 2026 16:51:03 +0000
 CC: linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, nvdimm@lists.linux.dev, fsverity@lists.linux.dev, linux-mm@kvack.org, netfs@lists.linux.dev, linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net, linux-nfs@vger.kernel.org, linux-cifs@vger.kernel.org, samba-technical@lists.samba.org, linux-nilfs@vger.kernel.org, v9fs@lists.linux.dev, linux-afs@lists.infradead.org, autofs@vger.kernel.org, ceph-devel@vger.kernel.org, codalist@coda.cs.cmu.edu, ecryptfs@vger.kernel.org, linux-mtd@lists.infradead.org, jfs-discussion@lists.sourceforge.net, ntfs3@lists.linux.dev, ocfs2-devel@lists.linux.dev, devel@lists.orangefs.org, linux-unionfs@vger.kernel.org, apparmor@lists.ubuntu.com, linux-security-module@vger.kernel.org, linux-integrity@vger.kernel.org, selinux@vger.kernel.org, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, netdev@vger.kernel.org, linux-perf-
  users@vger.kernel.org, linux-fscrypt@vger.kernel.org, linux-xfs@vger.kernel.org, linux-hams@vger.kernel.org, linux-x25@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 50/61] zonefs: update format strings for u64 i_ino
+Subject: [Linaro-mm-sig] Re: [PATCH 03/61] trace: update VFS-layer trace events for u64 i_ino
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GOWANFKP3CWUMYBINXIRU7WGQR2APLVU/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6XZSA3YF4UP25FKAKE5BX2R47KLAR5AP/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -159,23 +159,45 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	FROM_NEQ_ENVFROM(0.00)[dlemoal@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:-];
-	NEURAL_HAM(-0.00)[-0.596];
+	NEURAL_HAM(-0.00)[-0.437];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	MID_RHS_MATCH_FROM(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
-X-Rspamd-Queue-Id: 0042C4126E5
+X-Rspamd-Queue-Id: E27534126EC
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 On 2/27/26 00:55, Jeff Layton wrote:
-> Update format strings and local variable types in zonefs for the
-> i_ino type change from unsigned long to u64.
+> Update trace event definitions in VFS-layer trace headers to use u64
+> instead of ino_t/unsigned long for inode number fields, and change
+> format strings from %lu/%lx to %llu/%llx to match.
+> 
+> This is needed because i_ino is now u64. Changing trace event field
+> types changes the binary trace format, but the self-describing format
+> metadata handles this transparently for modern trace-cmd and perf.
+> 
+> Files updated:
+>   - cachefiles.h, filelock.h, filemap.h, fs_dax.h, fsverity.h,
+>     hugetlbfs.h, netfs.h, readahead.h, timestamp.h, writeback.h
 > 
 > Signed-off-by: Jeff Layton <jlayton@kernel.org>
 
-Acked-by: Damien Le Moal <dlemoal@kernel.org>
+[...]
+
+> @@ -726,7 +726,7 @@ TRACE_EVENT(balance_dirty_pages,
+>  		  __entry->pause,	/* ms */
+>  		  __entry->period,	/* ms */
+>  		  __entry->think,	/* ms */
+> -		  (unsigned long)__entry->cgroup_ino
+> +		  (unsigned long long)__entry->cgroup_ino
+
+Do we really need this cast here ? (same comment for the following events).
+
+Other than this, this looks OK to me.
+
+Reviewed-by: Damien Le Moal <dlemoal@kernel.org>
 
 -- 
 Damien Le Moal
