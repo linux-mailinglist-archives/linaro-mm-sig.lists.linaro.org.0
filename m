@@ -2,165 +2,121 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id yGA+JTwV4WnoogAAu9opvQ
+	id SMYjHkQV4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:58:36 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:58:44 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2D1D0412317
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:58:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CD9EC41231E
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:58:43 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4006F451BF
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:58:35 +0000 (UTC)
-Received: from inva021.nxp.com (inva021.nxp.com [92.121.34.21])
-	by lists.linaro.org (Postfix) with ESMTPS id 992783F9B4
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Feb 2026 13:41:08 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E19B2453E6
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:58:42 +0000 (UTC)
+Received: from out-179.mta1.migadu.com (out-179.mta1.migadu.com [95.215.58.179])
+	by lists.linaro.org (Postfix) with ESMTPS id DEEC43F824
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Feb 2026 13:45:51 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=none;
-	dmarc=pass (policy=none) header.from=nxp.com;
-	spf=pass (lists.linaro.org: domain of ruxandra.radulescu@nxp.com designates 92.121.34.21 as permitted sender) smtp.mailfrom=ruxandra.radulescu@nxp.com
-Received: from inva021.nxp.com (localhost [127.0.0.1])
-	by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id DCC8620151F;
-	Thu, 26 Feb 2026 14:41:07 +0100 (CET)
-Received: from inva024.eu-rdc02.nxp.com (inva024.eu-rdc02.nxp.com [134.27.226.22])
-	by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id CD44920153B;
-	Thu, 26 Feb 2026 14:41:07 +0100 (CET)
-Received: from lsv15149.swis.ro-buh01.nxp.com (lsv15149.swis.ro-buh01.nxp.com [10.162.246.145])
-	by inva024.eu-rdc02.nxp.com (Postfix) with ESMTP id 22DA22035B;
-	Thu, 26 Feb 2026 14:41:06 +0100 (CET)
-From: Ioana Ciocoi-Radulescu <ruxandra.radulescu@nxp.com>
-Date: Thu, 26 Feb 2026 15:40:48 +0200
+	dkim=pass header.d=linux.dev header.s=key1 header.b=vajud8Gg;
+	spf=pass (lists.linaro.org: domain of shakeel.butt@linux.dev designates 95.215.58.179 as permitted sender) smtp.mailfrom=shakeel.butt@linux.dev;
+	dmarc=pass (policy=none) header.from=linux.dev
+Date: Thu, 26 Feb 2026 05:45:30 -0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+	t=1772113550;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=dkIMrpYm1KdU3cU9ItJMZ6NttQZCM67l72DH8n80OYE=;
+	b=vajud8GgT9YD52qua+5kbAsn1oe1msd/UJT+JLadvyyKmV6nd6QrfsG3Ptke+6XOJCq0UQ
+	FF67owIaltxgRWsC03zZafdS9jeMvQ0c96JpnSdzKqkaP8upii2KeCA7cZDWHY1cpzJEtS
+	Hw0OGY+MjxwUrFqDy3UK5cIfcO1+ayo=
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+From: Shakeel Butt <shakeel.butt@linux.dev>
+To: Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>
+Message-ID: <aaBNYqv2xJ4QEyh4@linux.dev>
+References: <20260218-dmabuf-heap-cma-dmem-v2-0-b249886fb7b2@redhat.com>
+ <CABdmKX0LpKJ9tw48oQh7=3CF0UR5uFtgo0OMwQhHBB40LnijyQ@mail.gmail.com>
+ <a446b598-5041-450b-aaa9-3c39a09ff6a0@amd.com>
+ <20260224-solemn-spider-of-serendipity-0d8b94@houat>
+ <56400505-8a13-4cb2-864c-cb785e4b38d4@amd.com>
+ <CAPM=9ty5mbMAVHPO4mRy1jKGnpChr7gK6uMtco2=j7MMJGpZdg@mail.gmail.com>
+ <d1b287c9-46ff-4345-a410-7e1cfefb5c66@amd.com>
 MIME-Version: 1.0
-Message-Id: <20260226-neutron-v1-9-46eccb3bb50a@nxp.com>
-References: <20260226-neutron-v1-0-46eccb3bb50a@nxp.com>
-In-Reply-To: <20260226-neutron-v1-0-46eccb3bb50a@nxp.com>
-To: Oded Gabbay <ogabbay@kernel.org>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Sumit Semwal <sumit.semwal@linaro.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Frank Li <Frank.Li@nxp.com>,
- =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1772113256; l=1689;
- i=ruxandra.radulescu@nxp.com; s=20260204; h=from:subject:message-id;
- bh=4tUFBDNFe36c+mcDJ/TUmnKANKlcvCmSziTeWU5kAHY=;
- b=i4gdK2fWXKlkKm+telHbxNq04X/A+NXwzbBH9AwpDRh87tKHmqQ+L+rNqeCY6UkJFgGxmeDUF
- +rSE8KSbNgBBucn0Qom0GzJhb2QD3OLVA/acP8Se/lmSVTQOpR/ywtv
-X-Developer-Key: i=ruxandra.radulescu@nxp.com; a=ed25519;
- pk=zoq4b4OYR0c4faAH97xoTxdr6vfR8OvPbS+Cx0XhIBY=
-X-Virus-Scanned: ClamAV using ClamSMTP
+Content-Disposition: inline
+In-Reply-To: <d1b287c9-46ff-4345-a410-7e1cfefb5c66@amd.com>
+X-Migadu-Flow: FLOW_OUT
 X-Spamd-Bar: ---
-X-MailFrom: ruxandra.radulescu@nxp.com
+X-MailFrom: shakeel.butt@linux.dev
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: VGPJFBD5JKYLDCO6RHOYINBQYFIXBTUZ
-X-Message-ID-Hash: VGPJFBD5JKYLDCO6RHOYINBQYFIXBTUZ
-X-Mailman-Approved-At: Thu, 16 Apr 2026 16:47:28 +0000
-CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, devicetree@vger.kernel.org, imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Jiwei Fu <jiwei.fu@nxp.com>, Forrest Shi <xuelin.shi@nxp.com>, Alexandru Taran <alexandru.taran@nxp.com>, Ioana Ciocoi-Radulescu <ruxandra.radulescu@nxp.com>
+Message-ID-Hash: MOIB5PTBUF7EZD6OZMAJAMU5W7ZATBYN
+X-Message-ID-Hash: MOIB5PTBUF7EZD6OZMAJAMU5W7ZATBYN
+X-Mailman-Approved-At: Thu, 16 Apr 2026 16:47:29 +0000
+CC: Dave Airlie <airlied@gmail.com>, Maxime Ripard <mripard@redhat.com>, "T.J. Mercier" <tjmercier@google.com>, Eric Chanudet <echanude@redhat.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, Andrew Morton <akpm@linux-foundation.org>, David Hildenbrand <david@kernel.org>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, "Liam R. Howlett" <Liam.Howlett@oracle.com>, Vlastimil Babka <vbabka@suse.cz>, Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, Albert Esteve <aesteve@redhat.com>, linux-mm@kvack.org, Yosry Ahmed <yosryahmed@google.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 9/9] arm64: dts: imx95: Add Neutron node
+Subject: [Linaro-mm-sig] Re: [PATCH v2 0/3] dma-buf: heaps: cma: enable dmem cgroup accounting
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VGPJFBD5JKYLDCO6RHOYINBQYFIXBTUZ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MOIB5PTBUF7EZD6OZMAJAMU5W7ZATBYN/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [2.09 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+X-Spamd-Result: default: False [1.69 / 15.00];
 	DATE_IN_PAST(1.00)[1179];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+	R_DKIM_REJECT(1.00)[linux.dev:s=key1];
 	MAILLIST(-0.20)[mailman];
-	DMARC_POLICY_SOFTFAIL(0.10)[nxp.com : SPF not aligned (relaxed), No valid DKIM,none];
+	R_SPF_ALLOW(-0.20)[+mx:c];
+	DMARC_POLICY_SOFTFAIL(0.10)[linux.dev : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
+	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_TO(0.00)[kernel.org,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,nxp.com,amd.com];
-	RCPT_COUNT_TWELVE(0.00)[24];
-	MIME_TRACE(0.00)[0:+];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[24];
+	FREEMAIL_CC(0.00)[gmail.com,redhat.com,google.com,linaro.org,collabora.com,arm.com,linux-foundation.org,kernel.org,oracle.com,suse.cz,suse.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,kvack.org];
+	MIME_TRACE(0.00)[0:+];
 	ARC_NA(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FROM_NEQ_ENVFROM(0.00)[ruxandra.radulescu@nxp.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.994];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_NEQ_ENVFROM(0.00)[shakeel.butt@linux.dev,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[linux.dev:-];
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	MID_RHS_MATCH_FROM(0.00)[];
-	R_DKIM_NA(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,dt];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nxp.com:mid,nxp.com:email,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,4e090dc0:email]
-X-Rspamd-Queue-Id: 2D1D0412317
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.dev:mid,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
+X-Rspamd-Queue-Id: CD9EC41231E
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Add the node for Neutron NPU. Also add a reserved memory region
-for allocating Neutron buffers, which have a 1MB alignment
-constraint.
-
-Signed-off-by: Jiwei Fu <jiwei.fu@nxp.com>
-Signed-off-by: Ioana Ciocoi-Radulescu <ruxandra.radulescu@nxp.com>
----
- arch/arm64/boot/dts/freescale/imx95.dtsi | 28 ++++++++++++++++++++++++++++
- 1 file changed, 28 insertions(+)
-
-diff --git a/arch/arm64/boot/dts/freescale/imx95.dtsi b/arch/arm64/boot/dts/freescale/imx95.dtsi
-index 55e2da094c88..7a41bb50d650 100644
---- a/arch/arm64/boot/dts/freescale/imx95.dtsi
-+++ b/arch/arm64/boot/dts/freescale/imx95.dtsi
-@@ -336,6 +336,19 @@ sram1: sram@204c0000 {
- 		#size-cells = <1>;
- 	};
- 
-+	reserved-memory {
-+		#address-cells = <2>;
-+		#size-cells = <2>;
-+		ranges;
-+
-+		neutron_pool: neutron-pool {
-+			compatible = "shared-dma-pool";
-+			size = <0x0 0x8000000>;
-+			alignment = <0x0 0x100000>;
-+			reusable;
-+		};
-+	};
-+
- 	firmware {
- 		scmi {
- 			compatible = "arm,scmi";
-@@ -2181,5 +2194,20 @@ ddr-pmu@4e090dc0 {
- 			reg = <0x0 0x4e090dc0 0x0 0x200>;
- 			interrupts = <GIC_SPI 91 IRQ_TYPE_LEVEL_HIGH>;
- 		};
-+
-+		neutron: neutron@4ab00000 {
-+			compatible = "nxp,imx95-neutron";
-+			reg = <0x0 0x4ab00000 0x0 0x00000400>,
-+			      <0x0 0x4ab10000 0x0 0x00010000>,
-+			      <0x0 0x4ab08000 0x0 0x00008000>;
-+			reg-names = "regs", "itcm", "dtcm";
-+			memory-region = <&neutron_pool>;
-+			interrupts = <GIC_SPI 318 IRQ_TYPE_LEVEL_HIGH>;
-+			clocks = <&scmi_clk IMX95_CLK_NPU>,
-+				 <&scmi_clk IMX95_CLK_NPUAPB>;
-+			clock-names = "npu", "npu_apb";
-+			power-domains = <&scmi_devpd IMX95_PD_NPU>;
-+			iommus = <&smmu 0xd>;
-+		};
- 	};
- };
-
--- 
-2.34.1
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gVGh1LCBGZWIgMjYsIDIwMjYgYXQgMTI6MzI6NDJQTSArMDEwMCwgQ2hyaXN0aWFuIEvDtm5p
+ZyB3cm90ZToNCj4gT24gMi8yNi8yNiAwMDo0MywgRGF2ZSBBaXJsaWUgd3JvdGU6DQo+ID4+Pj4N
+Cj4gDQo+ID4gSWYgc29tZXRoaW5nIGlzIGluIHRoZSBtYWluIG1lbW9yeSBwb29sLCBpdCBzaG91
+bGQgYmUgYWNjb3VudGVkIGZvcg0KPiA+IHVzaW5nIG1lbWNnLiBZb3UgY2Fubm90IHJlbW92ZSBt
+ZW1vcnkgZnJvbSB0aGUgbWFpbiBtZW1vcnkgcG9vbA0KPiA+IHdpdGhvdXQgYWNjb3VudGluZyBm
+b3IgaXQuDQo+IA0KPiBUaGF0J3Mgd2hhdCBJJ20gc3Ryb25nbHkgZGlzYWdyZWVpbmcgb24uIFNl
+ZSB0aGUgcGFnZSBjYWNoZSBpcyBub3QgYWNjb3VudGVkIHRvIG1lbWNnIGVpdGhlciwgc28gd2hl
+biB5b3Ugb3BlbiBhIGZpbGUgYW5kIHRoZSBrZXJuZWwgY2FjaGVzIHRoZSBiYWNraW5nIHBhZ2Vz
+IHRoYXQgZG9lc24ndCByZWR1Y2UgdGhlIGFtb3VudCB5b3UgY2FuIGFsbG9jYXRlIHRocm91Z2gg
+bWFsbG9jLCBkb2Vzbid0IGl0Pw0KDQpQYWdlIGNhY2hlIGlzIGFjY291bnRlZC9jaGFyZ2VkIHRv
+IG1lbWNnIGFuZCB1c3VhbGx5IGl0IGlzIHJlY2xhaW1hYmxlIG1lYW5pbmcNCml0IG1vc3QgcHJv
+YmFibHkgZG9lc24ndCByZWR1Y2UgdGhlIGFtb3VudCBvZiBhbm9uIG1lbW9yeSB5b3UgY2FuIGFs
+bG9jYXRlLg0KDQo+IA0KPiBGb3IgZEdQVXMgR1RUIGlzIGJhc2ljYWxseSBqdXN0IHRoZSBmYWxs
+YmFjayB3aGVuIHlvdSBvdmVyIGFsbG9jYXRlIGxvY2FsIG1lbW9yeSAocGx1cyBhIGZldyB0aGlu
+Z3MgZm9yIHVwbG9hZHMpLg0KPiANCj4gSW4gb3RoZXIgd29yZHMgc3lzdGVtIG1lbW9yeSBiZWNv
+bWVzIHRoZSBzd2FwIG9mIGRldmljZSBsb2NhbCBtZW1vcnkuIEp1c3QgdGhpbmsgYWJvdXQgd2h5
+IG1lbWNnIGRvZXNuJ3QgbGltaXRzIHN3YXAgYnV0IG9ubHkgaG93IG11Y2ggaXMgc3dhcHBlZCBv
+dXQuDQoNCldoYXQgZG9lcyAibWVtY2cgZG9lc24ndCBsaW1pdHMgc3dhcCIgbWVhbj8NCg0KX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNp
+ZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vi
+c2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8u
+b3JnCg==
