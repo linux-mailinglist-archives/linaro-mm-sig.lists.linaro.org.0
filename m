@@ -2,65 +2,106 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MNXuKboX4WmmpAAAu9opvQ
+	id gPhdFbEX4WmmpAAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:09:14 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:09:05 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 78098412602
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:09:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DE5464125FB
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:09:04 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 88975451BF
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:09:13 +0000 (UTC)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
-	by lists.linaro.org (Postfix) with ESMTPS id B7E2E3F824
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Feb 2026 17:11:31 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E8C0C45186
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:09:03 +0000 (UTC)
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+	by lists.linaro.org (Postfix) with ESMTPS id 004A03F824
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Feb 2026 17:11:16 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=E3tX7V52;
-	spf=pass (lists.linaro.org: domain of ebiggers@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=ebiggers@kernel.org;
-	dmarc=pass (policy=quarantine) header.from=kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by tor.source.kernel.org (Postfix) with ESMTP id 4F42F60130;
-	Thu, 26 Feb 2026 17:11:31 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 08ECDC116C6;
-	Thu, 26 Feb 2026 17:11:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772125891;
-	bh=3dAA5ZbqJT7nwllRfPjMUGsvCGPozu8oVFO1mvJ5dEc=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=E3tX7V52KB6ZIJnP5EQdhqgy5dbKcrV70/QCeZSG5YUuzRLOU+GbRZmX6xI4LhGtP
-	 wOXKgVOEGXCHkK++zmkeJMtBqtKCjhlPY9alH2plEcWMyc/+JruvQe/ULMst4wOymh
-	 nDzI/JthZUc1ArkfqTnsbTii+EsbmW01L1yt93ujYlqg1GfqmC/g2KYWO31qnMDbPk
-	 FxQFRrSaO/8hGA0+QF9AzNgVLnF1AwZWTfLY9FdBBu8qD4Kpl+bNqe0C8k3woJlKdL
-	 I1HYF27ry7vXZCPDZXr9QkUK5PXS6FJq9mSwSkTHDtPmiekIgusGiaKcrTXd2CWShL
-	 tQSNWq/Ti7sBA==
-Date: Thu, 26 Feb 2026 09:10:36 -0800
-From: Eric Biggers <ebiggers@kernel.org>
+	dkim=pass header.d=suse.cz header.s=susede2_rsa header.b=bLq8scXn;
+	dkim=pass header.d=suse.cz header.s=susede2_ed25519 header.b=AUyzYfQ9;
+	dkim=pass header.d=suse.cz header.s=susede2_rsa header.b=bLq8scXn;
+	dkim=pass header.d=suse.cz header.s=susede2_ed25519 header.b=AUyzYfQ9;
+	spf=pass (lists.linaro.org: domain of jack@suse.cz designates 195.135.223.131 as permitted sender) smtp.mailfrom=jack@suse.cz;
+	dmarc=none
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by smtp-out2.suse.de (Postfix) with ESMTPS id A6EE11FA8E;
+	Thu, 26 Feb 2026 17:11:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+	t=1772125874; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=M8csZr2EQgc5N3LRaH5ivagOwuXzf8UvC8RjMLY1sRU=;
+	b=bLq8scXnwXC0vwEJ5ilKWXpiGzWGXINIRxQGuAPYznnzF8dJ7yEAGsRN1FXFSCo0wMOtEw
+	R1r7iRQfHNM8PtehEoACNOxGhhYttQpUUfNxxp1s2Wvc9j05A7FUEFY5faSoAqQhjduxby
+	hGwdqMrN8ovxNjwcyfxmNJZvL2UdNBA=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+	s=susede2_ed25519; t=1772125874;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=M8csZr2EQgc5N3LRaH5ivagOwuXzf8UvC8RjMLY1sRU=;
+	b=AUyzYfQ90XcSZmOs/v84BZ0D0IAVBm4VSfgx0h3wTW4vNmvkFtLxsrW/okGqwdCnF/6uEc
+	+rRoz6E13pCoehCw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+	t=1772125874; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=M8csZr2EQgc5N3LRaH5ivagOwuXzf8UvC8RjMLY1sRU=;
+	b=bLq8scXnwXC0vwEJ5ilKWXpiGzWGXINIRxQGuAPYznnzF8dJ7yEAGsRN1FXFSCo0wMOtEw
+	R1r7iRQfHNM8PtehEoACNOxGhhYttQpUUfNxxp1s2Wvc9j05A7FUEFY5faSoAqQhjduxby
+	hGwdqMrN8ovxNjwcyfxmNJZvL2UdNBA=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+	s=susede2_ed25519; t=1772125874;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=M8csZr2EQgc5N3LRaH5ivagOwuXzf8UvC8RjMLY1sRU=;
+	b=AUyzYfQ90XcSZmOs/v84BZ0D0IAVBm4VSfgx0h3wTW4vNmvkFtLxsrW/okGqwdCnF/6uEc
+	+rRoz6E13pCoehCw==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 8EC4B3EA62;
+	Thu, 26 Feb 2026 17:11:14 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+	by imap1.dmz-prg2.suse.org with ESMTPSA
+	id cu1uIrJ+oGlERwAAD6G6ig
+	(envelope-from <jack@suse.cz>); Thu, 26 Feb 2026 17:11:14 +0000
+Received: by quack3.suse.cz (Postfix, from userid 1000)
+	id 1EDF2A0A27; Thu, 26 Feb 2026 18:11:06 +0100 (CET)
+Date: Thu, 26 Feb 2026 18:11:06 +0100
+From: Jan Kara <jack@suse.cz>
 To: Jeff Layton <jlayton@kernel.org>
-Message-ID: <20260226171036.GB2251@sol>
+Message-ID: <6exhq5gjvef5obfsqwkxfcpl2sjqmlv7klrzolodzpcjolgrmd@ds42ulhod7pw>
 References: <20260226-iino-u64-v1-0-ccceff366db9@kernel.org>
- <20260226-iino-u64-v1-57-ccceff366db9@kernel.org>
+ <20260226-iino-u64-v1-3-ccceff366db9@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260226-iino-u64-v1-57-ccceff366db9@kernel.org>
+In-Reply-To: <20260226-iino-u64-v1-3-ccceff366db9@kernel.org>
+X-Spam-Flag: NO
+X-Spam-Score: -0.51
+X-Spam-Level: 
 X-Spamd-Bar: -
-X-MailFrom: ebiggers@kernel.org
+X-MailFrom: jack@suse.cz
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: K4GUB2TS43CLW6OJPBWF2J6VH5OD3V23
-X-Message-ID-Hash: K4GUB2TS43CLW6OJPBWF2J6VH5OD3V23
+Message-ID-Hash: N6YVDAW5KX6Z3F3UHTRQBIZHYBNXTFAE
+X-Message-ID-Hash: N6YVDAW5KX6Z3F3UHTRQBIZHYBNXTFAE
 X-Mailman-Approved-At: Thu, 16 Apr 2026 16:48:05 +0000
-CC: Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>, Steven Rostedt <rostedt@goodmis.org>, Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Dan Williams <dan.j.williams@intel.com>, Matthew Wilcox <willy@infradead.org>, "Theodore Y. Ts'o" <tytso@mit.edu>, Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>, David Hildenbrand <david@kernel.org>, David Howells <dhowells@redhat.com>, Paulo Alcantara <pc@manguebit.org>, Andreas Dilger <adilger.kernel@dilger.ca>, Jan Kara <jack@suse.com>, Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>, Trond Myklebust <trondmy@kernel.org>, Anna Schumaker <anna@kernel.org>, Chuck Lever <chuck.lever@oracle.com>, NeilBrown <neil@brown.name>, Olga Kornievskaia <okorniev@redhat.com>, Dai Ngo <Dai.Ngo@oracle.com>, Tom Talpey <tom@talpey.com>, Steve French <sfrench@samba.org>, Ronnie Sahlberg <ronniesahlberg@gmail.com>, Shyam Prasa
- d N <sprasad@microsoft.com>, Bharath SM <bharathsm@microsoft.com>, Alexander Aring <alex.aring@gmail.com>, Ryusuke Konishi <konishi.ryusuke@gmail.com>, Viacheslav Dubeyko <slava@dubeyko.com>, Eric Van Hensbergen <ericvh@kernel.org>, Latchesar Ionkov <lucho@ionkov.net>, Dominique Martinet <asmadeus@codewreck.org>, Christian Schoenebeck <linux_oss@crudebyte.com>, David Sterba <dsterba@suse.com>, Marc Dionne <marc.dionne@auristor.com>, Ian Kent <raven@themaw.net>, Luis de Bethencourt <luisbg@kernel.org>, Salah Triki <salah.triki@gmail.com>, "Tigran A. Aivazian" <aivazian.tigran@gmail.com>, Ilya Dryomov <idryomov@gmail.com>, Alex Markuze <amarkuze@redhat.com>, Jan Harkes <jaharkes@cs.cmu.edu>, coda@cs.cmu.edu, Nicolas Pitre <nico@fluxnic.net>, Tyler Hicks <code@tyhicks.com>, Amir Goldstein <amir73il@gmail.com>, Christoph Hellwig <hch@infradead.org>, John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>, Yangtao Li <frank.li@vivo.com>, Mikulas Patocka <mikulas@artax.karlin.mff.cuni.cz
- >, David Woodhouse <dwmw2@infradead.org>, Richard Weinberger <richard@nod.at>, Dave Kleikamp <shaggy@kernel.org>, Konstantin Komarov <almaz.alexandrovich@paragon-software.com>, Mark Fasheh <mark@fasheh.com>, Joel Becker <jlbec@evilplan.org>, Joseph Qi <joseph.qi@linux.alibaba.com>, Mike Marshall <hubcap@omnibond.com>, Martin Brandenburg <martin@omnibond.com>, Miklos Szeredi <miklos@szeredi.hu>, Anders Larsen <al@alarsen.net>, Zhihao Cheng <chengzhihao1@huawei.com>, Damien Le Moal <dlemoal@kernel.org>, Naohiro Aota <naohiro.aota@wdc.com>, Johannes Thumshirn <jth@kernel.org>, John Johansen <john.johansen@canonical.com>, Paul Moore <paul@paul-moore.com>, James Morris <jmorris@namei.org>, "Serge E. Hallyn" <serge@hallyn.com>, Mimi Zohar <zohar@linux.ibm.com>, Roberto Sassu <roberto.sassu@huawei.com>, Dmitry Kasatkin <dmitry.kasatkin@gmail.com>, Eric Snowberg <eric.snowberg@oracle.com>, Fan Wu <wufan@kernel.org>, Stephen Smalley <stephen.smalley.work@gmail.com>, Ondrej Mosnacek <omosnace
- @redhat.com>, Casey Schaufler <casey@schaufler-ca.com>, Alex Deucher <alexander.deucher@amd.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Eric Dumazet <edumazet@google.com>, Kuniyuki Iwashima <kuniyu@google.com>, Paolo Abeni <pabeni@redhat.com>, Willem de Bruijn <willemb@google.com>, "David S. Miller" <davem@davemloft.net>, Jakub Kicinski <kuba@kernel.org>, Simon Horman <horms@kernel.org>, Oleg Nesterov <oleg@redhat.com>, Peter Zijlstra <peterz@infradead.org>, Ingo Molnar <mingo@redhat.com>, Arnaldo Carvalho de Melo <acme@kernel.org>, Namhyung Kim <namhyung@kernel.org>, Mark Rutland <mark.rutland@arm.com>, Alexander Shishkin <alexander.shishkin@linux.intel.com>, Jiri Olsa <jolsa@kernel.org>, Ian Rogers <irogers@google.com>, Adrian Hunter <adrian.hunter@intel.com>, James Clark <james.clark@linaro.org>, "Darrick J. Wong" <djwong@kernel.org>, Martin Schiller
-  <ms@dev.tdt.de>, linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, nvdimm@lists.linux.dev, fsverity@lists.linux.dev, linux-mm@kvack.org, netfs@lists.linux.dev, linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net, linux-nfs@vger.kernel.org, linux-cifs@vger.kernel.org, samba-technical@lists.samba.org, linux-nilfs@vger.kernel.org, v9fs@lists.linux.dev, linux-afs@lists.infradead.org, autofs@vger.kernel.org, ceph-devel@vger.kernel.org, codalist@coda.cs.cmu.edu, ecryptfs@vger.kernel.org, linux-mtd@lists.infradead.org, jfs-discussion@lists.sourceforge.net, ntfs3@lists.linux.dev, ocfs2-devel@lists.linux.dev, devel@lists.orangefs.org, linux-unionfs@vger.kernel.org, apparmor@lists.ubuntu.com, linux-security-module@vger.kernel.org, linux-integrity@vger.kernel.org, selinux@vger.kernel.org, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, netdev@vger.kernel.o
- rg, linux-perf-users@vger.kernel.org, linux-fscrypt@vger.kernel.org, linux-xfs@vger.kernel.org, linux-hams@vger.kernel.org, linux-x25@vger.kernel.org
+CC: Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>, Steven Rostedt <rostedt@goodmis.org>, Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Dan Williams <dan.j.williams@intel.com>, Matthew Wilcox <willy@infradead.org>, Eric Biggers <ebiggers@kernel.org>, "Theodore Y. Ts'o" <tytso@mit.edu>, Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>, David Hildenbrand <david@kernel.org>, David Howells <dhowells@redhat.com>, Paulo Alcantara <pc@manguebit.org>, Andreas Dilger <adilger.kernel@dilger.ca>, Jan Kara <jack@suse.com>, Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>, Trond Myklebust <trondmy@kernel.org>, Anna Schumaker <anna@kernel.org>, Chuck Lever <chuck.lever@oracle.com>, NeilBrown <neil@brown.name>, Olga Kornievskaia <okorniev@redhat.com>, Dai Ngo <Dai.Ngo@oracle.com>, Tom Talpey <tom@talpey.com>, Steve French <sfrench@samba.org>, Ronnie Sahlberg <ro
+ nniesahlberg@gmail.com>, Shyam Prasad N <sprasad@microsoft.com>, Bharath SM <bharathsm@microsoft.com>, Alexander Aring <alex.aring@gmail.com>, Ryusuke Konishi <konishi.ryusuke@gmail.com>, Viacheslav Dubeyko <slava@dubeyko.com>, Eric Van Hensbergen <ericvh@kernel.org>, Latchesar Ionkov <lucho@ionkov.net>, Dominique Martinet <asmadeus@codewreck.org>, Christian Schoenebeck <linux_oss@crudebyte.com>, David Sterba <dsterba@suse.com>, Marc Dionne <marc.dionne@auristor.com>, Ian Kent <raven@themaw.net>, Luis de Bethencourt <luisbg@kernel.org>, Salah Triki <salah.triki@gmail.com>, "Tigran A. Aivazian" <aivazian.tigran@gmail.com>, Ilya Dryomov <idryomov@gmail.com>, Alex Markuze <amarkuze@redhat.com>, Jan Harkes <jaharkes@cs.cmu.edu>, coda@cs.cmu.edu, Nicolas Pitre <nico@fluxnic.net>, Tyler Hicks <code@tyhicks.com>, Amir Goldstein <amir73il@gmail.com>, Christoph Hellwig <hch@infradead.org>, John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>, Yangtao Li <frank.li@vivo.com>, Mikulas Patoc
+ ka <mikulas@artax.karlin.mff.cuni.cz>, David Woodhouse <dwmw2@infradead.org>, Richard Weinberger <richard@nod.at>, Dave Kleikamp <shaggy@kernel.org>, Konstantin Komarov <almaz.alexandrovich@paragon-software.com>, Mark Fasheh <mark@fasheh.com>, Joel Becker <jlbec@evilplan.org>, Joseph Qi <joseph.qi@linux.alibaba.com>, Mike Marshall <hubcap@omnibond.com>, Martin Brandenburg <martin@omnibond.com>, Miklos Szeredi <miklos@szeredi.hu>, Anders Larsen <al@alarsen.net>, Zhihao Cheng <chengzhihao1@huawei.com>, Damien Le Moal <dlemoal@kernel.org>, Naohiro Aota <naohiro.aota@wdc.com>, Johannes Thumshirn <jth@kernel.org>, John Johansen <john.johansen@canonical.com>, Paul Moore <paul@paul-moore.com>, James Morris <jmorris@namei.org>, "Serge E. Hallyn" <serge@hallyn.com>, Mimi Zohar <zohar@linux.ibm.com>, Roberto Sassu <roberto.sassu@huawei.com>, Dmitry Kasatkin <dmitry.kasatkin@gmail.com>, Eric Snowberg <eric.snowberg@oracle.com>, Fan Wu <wufan@kernel.org>, Stephen Smalley <stephen.smalley.work@g
+ mail.com>, Ondrej Mosnacek <omosnace@redhat.com>, Casey Schaufler <casey@schaufler-ca.com>, Alex Deucher <alexander.deucher@amd.com>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Eric Dumazet <edumazet@google.com>, Kuniyuki Iwashima <kuniyu@google.com>, Paolo Abeni <pabeni@redhat.com>, Willem de Bruijn <willemb@google.com>, "David S. Miller" <davem@davemloft.net>, Jakub Kicinski <kuba@kernel.org>, Simon Horman <horms@kernel.org>, Oleg Nesterov <oleg@redhat.com>, Peter Zijlstra <peterz@infradead.org>, Ingo Molnar <mingo@redhat.com>, Arnaldo Carvalho de Melo <acme@kernel.org>, Namhyung Kim <namhyung@kernel.org>, Mark Rutland <mark.rutland@arm.com>, Alexander Shishkin <alexander.shishkin@linux.intel.com>, Jiri Olsa <jolsa@kernel.org>, Ian Rogers <irogers@google.com>, Adrian Hunter <adrian.hunter@intel.com>, James Clark <james.clark@linaro.org>, "Darrick J. Wong" <djw
+ ong@kernel.org>, Martin Schiller <ms@dev.tdt.de>, linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, nvdimm@lists.linux.dev, fsverity@lists.linux.dev, linux-mm@kvack.org, netfs@lists.linux.dev, linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net, linux-nfs@vger.kernel.org, linux-cifs@vger.kernel.org, samba-technical@lists.samba.org, linux-nilfs@vger.kernel.org, v9fs@lists.linux.dev, linux-afs@lists.infradead.org, autofs@vger.kernel.org, ceph-devel@vger.kernel.org, codalist@coda.cs.cmu.edu, ecryptfs@vger.kernel.org, linux-mtd@lists.infradead.org, jfs-discussion@lists.sourceforge.net, ntfs3@lists.linux.dev, ocfs2-devel@lists.linux.dev, devel@lists.orangefs.org, linux-unionfs@vger.kernel.org, apparmor@lists.ubuntu.com, linux-security-module@vger.kernel.org, linux-integrity@vger.kernel.org, selinux@vger.kernel.org, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.
+ linaro.org, netdev@vger.kernel.org, linux-perf-users@vger.kernel.org, linux-fscrypt@vger.kernel.org, linux-xfs@vger.kernel.org, linux-hams@vger.kernel.org, linux-x25@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 57/61] fscrypt: update format strings for u64 i_ino
+Subject: [Linaro-mm-sig] Re: [PATCH 03/61] trace: update VFS-layer trace events for u64 i_ino
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/K4GUB2TS43CLW6OJPBWF2J6VH5OD3V23/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/N6YVDAW5KX6Z3F3UHTRQBIZHYBNXTFAE/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -69,58 +110,109 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [4.99 / 15.00];
-	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
+X-Spamd-Result: default: False [3.49 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
+	R_DKIM_REJECT(1.00)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
 	DATE_IN_PAST(1.00)[1175];
-	R_DKIM_REJECT(1.00)[kernel.org:s=k20201202];
 	MID_RHS_NOT_FQDN(0.50)[];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	TO_DN_SOME(0.00)[];
-	GREYLIST(0.00)[pass,meta];
 	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	DMARC_NA(0.00)[suse.cz];
 	ARC_NA(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
+	FREEMAIL_CC(0.00)[zeniv.linux.org.uk,kernel.org,suse.cz,goodmis.org,efficios.com,intel.com,infradead.org,mit.edu,linux.dev,suse.de,redhat.com,manguebit.org,dilger.ca,suse.com,oracle.com,brown.name,talpey.com,samba.org,gmail.com,microsoft.com,dubeyko.com,ionkov.net,codewreck.org,crudebyte.com,auristor.com,themaw.net,cs.cmu.edu,fluxnic.net,tyhicks.com,physik.fu-berlin.de,vivo.com,artax.karlin.mff.cuni.cz,nod.at,paragon-software.com,fasheh.com,evilplan.org,linux.alibaba.com,omnibond.com,szeredi.hu,alarsen.net,huawei.com,wdc.com,canonical.com,paul-moore.com,namei.org,hallyn.com,linux.ibm.com,g mail.com,schaufler-ca.com,amd.com,ffwll.ch,linaro.org,google.com,davemloft.net,arm.com,linux.intel.com,dev.tdt.de,vger.kernel.org,lists.linux.dev,kvack.org,lists.sourceforge.net,lists.samba.org,lists.infradead.org,coda.cs.cmu.edu,lists.orangefs.org,lists.ubuntu.com,lists.freedesktop.org,lists];
+	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:-];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.980];
-	RCPT_COUNT_GT_50(0.00)[145];
-	FROM_NEQ_ENVFROM(0.00)[ebiggers@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
-	FREEMAIL_CC(0.00)[zeniv.linux.org.uk,kernel.org,suse.cz,goodmis.org,efficios.com,intel.com,infradead.org,mit.edu,linux.dev,suse.de,redhat.com,manguebit.org,dilger.ca,suse.com,oracle.com,brown.name,talpey.com,samba.org,gmail.com,microsoft.com,dubeyko.com,ionkov.net,codewreck.org,crudebyte.com,auristor.com,themaw.net,cs.cmu.edu,fluxnic.net,tyhicks.com,physik.fu-berlin.de,vivo.com,artax.karlin.mff.cuni.cz,nod.at,paragon-software.com,fasheh.com,evilplan.org,linux.alibaba.com,omnibond.com,szeredi.hu,alarsen.net,huawei.com,wdc.com,canonical.com,paul-moore.com,namei.org,hallyn.com,linux.ibm.com,schaufler-ca.com,amd.com,ffwll.ch,linaro.org,google.com,davemloft.net,arm.com,linux.intel.com,dev.tdt.de,vger.kernel.org,lists.linux.dev,kvack.org,lists.sourceforge.net,lists.samba.org,lists.infradead.org,coda.cs.cmu.edu,lists.orangefs.org,lists.ubuntu.com,lists.freedesktop.org,lists.linaro.org,vger.kernel.o];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[146];
+	RCVD_COUNT_FIVE(0.00)[6];
+	FROM_NEQ_ENVFROM(0.00)[jack@suse.cz,linaro-mm-sig-bounces@lists.linaro.org];
+	DKIM_TRACE(0.00)[suse.cz:-];
+	NEURAL_HAM(-0.00)[-0.991];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
-X-Rspamd-Queue-Id: 78098412602
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,suse.com:email,linaro.org:email]
+X-Rspamd-Queue-Id: DE5464125FB
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Thu, Feb 26, 2026 at 10:55:59AM -0500, Jeff Layton wrote:
-> Update format strings from %lu to %llu for inode->i_ino now that
-> i_ino is u64 instead of unsigned long.
+On Thu 26-02-26 10:55:05, Jeff Layton wrote:
+> Update trace event definitions in VFS-layer trace headers to use u64
+> instead of ino_t/unsigned long for inode number fields, and change
+> format strings from %lu/%lx to %llu/%llx to match.
+> 
+> This is needed because i_ino is now u64. Changing trace event field
+> types changes the binary trace format, but the self-describing format
+> metadata handles this transparently for modern trace-cmd and perf.
+> 
+> Files updated:
+>   - cachefiles.h, filelock.h, filemap.h, fs_dax.h, fsverity.h,
+>     hugetlbfs.h, netfs.h, readahead.h, timestamp.h, writeback.h
 > 
 > Signed-off-by: Jeff Layton <jlayton@kernel.org>
-> ---
->  fs/crypto/crypto.c   | 2 +-
->  fs/crypto/hooks.c    | 2 +-
->  fs/crypto/keysetup.c | 2 +-
->  3 files changed, 3 insertions(+), 3 deletions(-)
 
-check_for_busy_inodes() needs to be updated too.  It copies i_ino to a
-local variable of type 'unsigned long', then prints it with %lu.
+...
 
-Seems that there needs to be a search for other code that copies i_ino
-to a local variable, as this issue is unlikely to be unique to here.
+> diff --git a/include/trace/events/writeback.h b/include/trace/events/writeback.h
+> index 4d3d8c8f3a1bc3e5ef10fc96e3c6dbbd0cf00c98..cc7651749eb3ce1123cb3ea9496f0803a0f4c1a0 100644
+> --- a/include/trace/events/writeback.h
+> +++ b/include/trace/events/writeback.h
+> @@ -67,7 +67,7 @@ DECLARE_EVENT_CLASS(writeback_folio_template,
+>  
+>  	TP_STRUCT__entry (
+>  		__array(char, name, 32)
+> -		__field(ino_t, ino)
+> +		__field(u64, ino)
+>  		__field(pgoff_t, index)
+>  	),
+>  
+> @@ -79,9 +79,9 @@ DECLARE_EVENT_CLASS(writeback_folio_template,
+>  		__entry->index = folio->index;
+>  	),
+>  
+> -	TP_printk("bdi %s: ino=%lu index=%lu",
+> +	TP_printk("bdi %s: ino=%llu index=%lu",
+>  		__entry->name,
+> -		(unsigned long)__entry->ino,
+> +		(unsigned long long)__entry->ino,
 
-- Eric
+No need for explicit typing to ULL?
+
+>  		__entry->index
+>  	)
+>  );
+> @@ -108,7 +108,7 @@ DECLARE_EVENT_CLASS(writeback_dirty_inode_template,
+>  
+>  	TP_STRUCT__entry (
+>  		__array(char, name, 32)
+> -		__field(ino_t, ino)
+> +		__field(u64, ino)
+>  		__field(unsigned long, state)
+>  		__field(unsigned long, flags)
+>  	),
+> @@ -123,9 +123,9 @@ DECLARE_EVENT_CLASS(writeback_dirty_inode_template,
+>  		__entry->flags		= flags;
+>  	),
+>  
+> -	TP_printk("bdi %s: ino=%lu state=%s flags=%s",
+> +	TP_printk("bdi %s: ino=%llu state=%s flags=%s",
+>  		__entry->name,
+> -		(unsigned long)__entry->ino,
+> +		(unsigned long long)__entry->ino,
+
+And here as well? And many times below as well...
+
+								Honza
+-- 
+Jan Kara <jack@suse.com>
+SUSE Labs, CR
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
