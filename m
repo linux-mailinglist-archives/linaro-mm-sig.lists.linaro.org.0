@@ -2,261 +2,522 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id UPVzI88U4WnoogAAu9opvQ
+	id 2DbNBdYU4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:56:47 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:56:54 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0E81741227E
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:56:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A5225412285
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 18:56:53 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 13ED345190
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:56:46 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id AE4EC451BF
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:56:52 +0000 (UTC)
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	by lists.linaro.org (Postfix) with ESMTPS id 5AB603F753
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Feb 2026 23:18:33 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id A6AD53F786
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Feb 2026 08:39:08 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=qualcomm.com header.s=qcppdkim1 header.b=JpmL+CkW;
-	dkim=pass header.d=oss.qualcomm.com header.s=google header.b=h1VQiKCc;
-	spf=pass (lists.linaro.org: domain of trilokkumar.soni@oss.qualcomm.com designates 205.220.180.131 as permitted sender) smtp.mailfrom=trilokkumar.soni@oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.s=qcppdkim1 header.b=dACNMrlA;
+	dkim=pass header.d=oss.qualcomm.com header.s=google header.b=Y7hsSVH5;
+	spf=pass (lists.linaro.org: domain of ekansh.gupta@oss.qualcomm.com designates 205.220.180.131 as permitted sender) smtp.mailfrom=ekansh.gupta@oss.qualcomm.com;
 	dmarc=pass (policy=reject) header.from=qualcomm.com
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 61PH2Llb3100894
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Feb 2026 23:18:33 GMT
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 61Q4V7qe2996693
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Feb 2026 08:39:08 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	k1ncu6ArYzJhC1oWtoKaTbf490HS3AonBnLenM3Jd0c=; b=JpmL+CkWYUP0rhkq
-	yvcnpyP/EsHfwQoW0K88N1JAwbxTi+LLkZjH9DnYvIiobtYH5J/g8+9NO85fBMy2
-	kviXPZxgDBjU9X/GvP4DBmN+EQ3kZmoyKjP7w6eVnJVJzNDhRfpq2IsfE81WQkuh
-	SqGKaB0hOvmonmXYz8t/bTRs9L/qyP0J6vhfIpk7hwpr4X/Oa++bWNC8h1FEQnM0
-	aRUSD8losKzsY6bDy0GwTFFfO5k1NBw/RQLoC5/2zk+aY+Gn89MIwAMaa4NJeH2v
-	SO1uWYK0vdnDIr369SYLjwZ1kJxo32PT1fieroRk0aGGqmVEoRy2LpCjqL1JCwzX
-	OLvqSw==
-Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4cj54p9283-1
+	WAf2lFWJkeZZmog0R5l/0t54shFe/JIkci8HejhVV/E=; b=dACNMrlAA6SnWB49
+	/U85VgY6dPieg8kAp+l733U2BOVsVLzC5aQrlIxGE8UEudM88OioPpNx5wrxMOP2
+	7ZWCSxETgJVWKydVkTt7X5qrSbgCznrokCHzpN4OwFKYVoqyrVAq4oN5byRjPlAZ
+	9TkpwWmw3Z+y21kCyimkHbaUTq9/LQGV/skbMtdBxzugPg5dWcuWwERGdOxXFdHQ
+	O125QlavaJMxj8YN4EYRCoDakbDKrqY8P50e0Y4B+o1bxODioicj65zZWMUqqZ6I
+	zbF6PUGBHDKi47dBsvIQ7BdocAzXHJYsPwg84Kfy1Q2P+WpXPUomxQuzioz5Etnh
+	VSseuQ==
+Received: from mail-pf1-f200.google.com (mail-pf1-f200.google.com [209.85.210.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4chyv9khtx-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Feb 2026 23:18:32 +0000 (GMT)
-Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-2bd3bf5dde4so208229eec.1
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Feb 2026 15:18:32 -0800 (PST)
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Feb 2026 08:39:08 +0000 (GMT)
+Received: by mail-pf1-f200.google.com with SMTP id d2e1a72fcca58-824a8b2fbadso2235894b3a.3
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Feb 2026 00:39:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1772061512; x=1772666312; darn=lists.linaro.org;
+        d=oss.qualcomm.com; s=google; t=1772095147; x=1772699947; darn=lists.linaro.org;
         h=content-transfer-encoding:in-reply-to:from:content-language
          :references:cc:to:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=k1ncu6ArYzJhC1oWtoKaTbf490HS3AonBnLenM3Jd0c=;
-        b=h1VQiKCcc46nFNv/SL1HHHorhGNFUcXQxAmpCi9+ZUPCeiu0dBh7JgNh2bNSpl3rrW
-         +eUGfY2Mdx/fVHmqCVE15B/v7OJSmF5ONoPxCcNIA2Ww+7G1QAvP0pCyhcInLbqf3hC+
-         7+irzTaiHeHw08Uw0ZgOtgR+rCWs8/jbacmiFPN2wkxYYGCVeAoYMssI/U5Vga5Y7YMB
-         Acb0pmreQlXwAvjYRZN19MxfvKanOMaBCpoUEe+bxaxTW8xJf8dikgUonYhiFXW6bJNO
-         iQS/qdHA2oLmkVBMMSzMYS8NCGyyql6LGtpVzM1Hc5nEJNAmNtBVsVey+Xuhbzpy1Ekg
-         3uqw==
+        bh=WAf2lFWJkeZZmog0R5l/0t54shFe/JIkci8HejhVV/E=;
+        b=Y7hsSVH5c2k3dnAX354RG5qWwxayEKwxSRfzxA1wh1KLSHn7mUK8MOFCiZQkZ1VFfn
+         Hf3b79VtyFLHBNte3u4UAFL3f9cd95zfxCRu13jPtYRsrUu2gpN5QrbZFGv5NK4Nci7j
+         2MAvG42xhMr80ESrxm6+RAyM9jTVTWFpNIXwqPPN89MHCK3QgX57LbsUYnKpfItnuCbP
+         Yi2/7tfbuzW+1Osf6c9rMwOSjW3aQlybDeKPet/HspFRTjZzNMYOR3b/rx2LRdNeJH6S
+         1pvPuYebco83Acd2V3+jxAhKb0xLOHRRuZUBznQCp7kYfTiuAmA8/leIFA3cWlZ+Z9bt
+         ts5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772061512; x=1772666312;
+        d=1e100.net; s=20230601; t=1772095147; x=1772699947;
         h=content-transfer-encoding:in-reply-to:from:content-language
          :references:cc:to:subject:user-agent:mime-version:date:message-id
          :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=k1ncu6ArYzJhC1oWtoKaTbf490HS3AonBnLenM3Jd0c=;
-        b=Dh0XjYBbOyzOgyWbY05t7Qh/xn02nD4VgY5cO8AEaj2OLP0OEByZ0dTHS6FO/F3pUM
-         EyxJ5xC73FoGf+aGsWAPtTFDJjZ0MV+LnsAxOkisbEZ7Zk8lnnX9AJTwH3+8jB5MxMdD
-         OBd2UNS7pj+xlwKrHe4gDRAM8dMAYFuE7fhojVGyHFOJzyErYpNfzAdmgGn8K5q1m1uA
-         N9TER2rAW0rOrYaCrwsFyMpDKxt9TTUbOxxcHStvwI5Yw+IICVJ7in94oM9RjN6Va8kd
-         PTG4ecq9oAcGUuj+9ICBiFnXTRCxyeX+Iigfhq2IWikiTZMmpkss5jYSfHy2QODj/Zmv
-         mkCg==
-X-Forwarded-Encrypted: i=1; AJvYcCUBQsPSFiMdrA2TfQUrpLTdDKGUnWZvVXdk6lgZch/16kFoaxaIY771X2fBPPXJoLCVYfU9p78T4f7tLtqj@lists.linaro.org
-X-Gm-Message-State: AOJu0YykRTN5g+T2ZkqBeKPcp0juMUdcxUnHiFCrR5zV0TGu4mBwZ2HH
-	RjzYrKKioZJdhN4UMcI8n37P5dpwqQ+grbzyjhoerdnx76FEtzEOjVGPj/nHRQdVIDBroOOy6CT
-	QUi1+7nBPeGNCi/lJ1ls/99jXcJUzo3xF4pNlHaxwCHfTjkZcH+YIfBt34akXqvdJ+WgR9A==
-X-Gm-Gg: ATEYQzy6catGsDwiqbyuetDYTWHXVpcg2Rvun8EZJt9nL/3KTeTgfycyY8Mg09G8phL
-	o6BLbB6uVDnGGSharz4hl+1cg6/7REsIR32yf6jZGE/df6sXoeitNaqJAjNrUNJsZt0zdSZ22pH
-	4X2FqUcPlmmU543K965FZEDuQUHX/xhAtY+M3nw4ZAyQFyXjLCB0U5W2Ze64P9KD3Hulx7m+wBo
-	VfdjSVVmG+UtmxR6q/TRAFJGCeuJMYMtmpwplFm64Enk7ltg1WXE/WWYhLvUJxiQgMPv/P71RAk
-	u28CU6Lx7j92JEo9WNWrptlAb1InQHjgxY4R3EMrW86LfUcmEn5XkmMspcporpk4kwPjzDu0uOF
-	idwolaxQsuywZbozAAry7PkWMOEq7kGLLf07MxqKpEphejpTTqLJjfqCQqxMffqJ4ZXoYXE8/jU
-	YpEEgn
-X-Received: by 2002:a05:7300:538e:b0:2b7:1abc:a6eb with SMTP id 5a478bee46e88-2bdcbf4440dmr892785eec.7.1772061511672;
-        Wed, 25 Feb 2026 15:18:31 -0800 (PST)
-X-Received: by 2002:a05:7300:538e:b0:2b7:1abc:a6eb with SMTP id 5a478bee46e88-2bdcbf4440dmr892750eec.7.1772061510969;
-        Wed, 25 Feb 2026 15:18:30 -0800 (PST)
-Received: from [10.134.65.116] (i-global254.qualcomm.com. [199.106.103.254])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2bdd1cf0115sm357385eec.8.2026.02.25.15.18.29
+        bh=WAf2lFWJkeZZmog0R5l/0t54shFe/JIkci8HejhVV/E=;
+        b=MuazKZ5Q5iWeVQ/TkaAjnqgxK1o0FLf/4xIVG5E7+uJ+U6qJlbQYAEmjXW/mW7ah8H
+         G01NUXl8ioapeo/1bnhyOgFGyqbhrcpcCOf40TLGVgYorOHmFTKD9Ax8G91h8VRDTDtr
+         N7E73x7Onfop46Y01NATIsXj6iXK89EVaOgpaNaKbn+Kn9/9uYMwqZZS9PL9ZrGMDQQA
+         nVjkAfJjZlwWMOySoTH0emnq3qmyE+DAdZZevePx6jyccMf/JHFgKy0a37ZbhrAHHaTs
+         xE91kXQsxGj6+mFK8ouxCe+SM1K4zapdQ8Cgj5GLLaG9JBjgAXcwZpguwi4lRhX4XCB9
+         G+CQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVRCChstnNgXaMprp53KqAgElrmPz40MBkD6OQnFy6xL/Xuvfj9fSddMQrlZnLgEuIAxANERMV97tJ8umV7@lists.linaro.org
+X-Gm-Message-State: AOJu0Yy4P8Tg0+6S4hvlygB/uB9eyelvs/QVprYWYtnb3qEl+62hUKO3
+	bLviGrMYBuz8KpLluPUo5KFPxQadRsh3QAQ3K4mrV1tKsfyAm6mfJSN6mhZPwyHtIPfJlNsUAEh
+	P4M8mRi7Rxvxsjx847g10nEs9/mF/6ZnNi6vwtzv5AQf3VAlBfYJQsL2fCeim24UHXxMtrw==
+X-Gm-Gg: ATEYQzy7ZRG8ZgYmvGDErP+uYJ00khk9Zxl8MNClBLMcGlguwjG3vFPShcW99l+5AQc
+	vYkb8qYfBVC1uAGT5Av7zGzLQeKIuuIGb/N07kg+olSBiH8hvGczHwoyUtjZWN+qdcBf3n/R/VN
+	fveCT4nNkNMFC8Qim4BVt8dpJ0RztQQzG4gO8JKV+KrnoPrcwe//5pqfEC+1+NGEWYysgn8JRVa
+	42Ty8LUUBNrmrpCk0uhkgMNJw7JyKQU3KbhNU57mjqevQys63xDFaXWoIhWDgsT42acKaCO2/Qq
+	NrFQwh6f9rZPjQ3nSDSSzKH7RsvId+aeBK7e239G8GKfP8fC0sxbkuQ4fwyO2VqWr2AFMvlh4H0
+	AtT08AGBvrfBdu+xdO0fEqaMFigfP/dNjoApit+5NoOYJp6tnrQ==
+X-Received: by 2002:a05:6a00:3d48:b0:823:1cc6:d60a with SMTP id d2e1a72fcca58-82733672a72mr3351042b3a.2.1772095146928;
+        Thu, 26 Feb 2026 00:39:06 -0800 (PST)
+X-Received: by 2002:a05:6a00:3d48:b0:823:1cc6:d60a with SMTP id d2e1a72fcca58-82733672a72mr3350990b3a.2.1772095146324;
+        Thu, 26 Feb 2026 00:39:06 -0800 (PST)
+Received: from [10.206.99.28] ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8273a088517sm1538103b3a.65.2026.02.26.00.38.58
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 25 Feb 2026 15:18:30 -0800 (PST)
-Message-ID: <3f06453a-ac7e-46e0-8d37-e0f9980b438d@oss.qualcomm.com>
-Date: Wed, 25 Feb 2026 15:18:29 -0800
+        Thu, 26 Feb 2026 00:39:05 -0800 (PST)
+Message-ID: <57937a68-7f22-4ca1-8980-0be12cf06c66@oss.qualcomm.com>
+Date: Thu, 26 Feb 2026 14:08:57 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 References: <20260224-qda-firstpost-v1-0-fe46a9c1a046@oss.qualcomm.com>
- <20260224-qda-firstpost-v1-1-fe46a9c1a046@oss.qualcomm.com>
- <e94ce683-d47c-4c8e-8b26-cd327c891cc8@oss.qualcomm.com>
- <5a278b02-f2ad-408b-b0ad-f2297817bd7e@oss.qualcomm.com>
- <opjniedtfhkv7vlb57g3xyikcfkxelthx3lmspmypws4vxz4oc@4uypmmf4t6fb>
- <4e4b50fe-1091-451e-b854-f7b061ebd88d@oss.qualcomm.com>
- <jmv4jkwku5x5acxno3vyar4cozl3makdz6vzdyjsitf2vtyhp6@cxtl7zmaayvq>
+ <20260224-qda-firstpost-v1-5-fe46a9c1a046@oss.qualcomm.com>
+ <x3s26yr7oy2dokp4plsp67yndr7o4ps6nuj7i4zjze77ifljux@ap537se6npfg>
 Content-Language: en-US
-From: Trilok Soni <trilokkumar.soni@oss.qualcomm.com>
-In-Reply-To: <jmv4jkwku5x5acxno3vyar4cozl3makdz6vzdyjsitf2vtyhp6@cxtl7zmaayvq>
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjI1MDIyMiBTYWx0ZWRfX/29JFAUlNLx9
- +muEsNw+nbQzSVd5CPl70mrPaqAZQEK75Xpuu8wEbkaXyJfFK+sLwaSBROttsVDxrmizr9WNwgX
- ZhQJxynzKQNdbuw368bC5nzIULGUSYpIoUFJB4QN1meYMrBwTQMWiT7Q+IAtLGsMTpxwqJDADRM
- Y1qgODSMg+MHzCdk5Kc4IzyoK5pHvLRmT2YTPNT62NUrYE3nR98+yLI2ksCMkZLK7szQHblWzOr
- pfJrI79IuvXjAQf9Q6HgbpathTYRQkIrRvOH37EWTA46uIY5PyKiwHwcp0eABfTCsFL8Qi2yyoO
- jOlQL2X0+wLXT3v7mIkSgqOhNzAsDxG3dI4d+WPkq8DHiwI6mRRrK1UlzR4jv/R8kAwCdK4nduQ
- oLTOI7TLgtU6QEegnwbCHdt/jLdV/tVL57d0eFD4RGu0MardwDySXgOo3nKgocv2/QOtwe5saAH
- teDR/gWWRdIzom/cJdA==
-X-Proofpoint-GUID: zLEK-x2zvRikOMbfVKDLwotJjQlmatf0
-X-Authority-Analysis: v=2.4 cv=I5Bohdgg c=1 sm=1 tr=0 ts=699f8348 cx=c_pps
- a=cFYjgdjTJScbgFmBucgdfQ==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
+From: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
+In-Reply-To: <x3s26yr7oy2dokp4plsp67yndr7o4ps6nuj7i4zjze77ifljux@ap537se6npfg>
+X-Proofpoint-ORIG-GUID: yNw2J93KvzuF_jysOJaXPxtr6X4DUd5m
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjI2MDA3NyBTYWx0ZWRfX4qbsAhxT9ske
+ jLOLP8qvk4DQkul60F7wMFdlZLMRCaXLMrGC20iCswLOOg0nSCsMe4iMRmBgzwc9+DNb2Nc8WAz
+ hyTGiPYmDAyTWompHX03nHi/XgkXJYbE7FmQICZ9jpkqMYs3cCdqjH+n2NjsFKrnqtO40giFbE7
+ v3q34vdny/eVq9/8py+6KqjpWrUdZsj+0+YTCkp/MIfjyFysI5RcN5N5SS4Xf7vUBH25PDSLafo
+ iyvjcdH2wf6e3aS7XZhwRr5G8UILhWj7uHb8Hr5sBKU5C0PngLwdbrrG5cJjiCOLMXeNfvcuZar
+ F+Q3g2wppbDaMvN73l0YWQxVZbayZJMcqtub4Z8uxGbpJUaf9A6+bfuVYqTLeU7jokCtJ9HrTKu
+ 2Xiam/d2vR6kciDlHWu7iq6+mLL4kJfB/q0o4BE6aIhD38lEk6if/auLX1Hm+cmn9Lft0hi0Me0
+ /a9VVEH+ywY1wp46Fcg==
+X-Authority-Analysis: v=2.4 cv=GZwaXAXL c=1 sm=1 tr=0 ts=69a006ac cx=c_pps
+ a=mDZGXZTwRPZaeRUbqKGCBw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=HzLeVaNsDn8A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=AmUwcyaVtIZmdcZSVHAA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=scEy_gLbYbu1JhEsrz4S:22
-X-Proofpoint-ORIG-GUID: zLEK-x2zvRikOMbfVKDLwotJjQlmatf0
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=EUspDBNiAAAA:8 a=DUi5Cioa4Bt8-YlJvggA:9 a=QEXdDO2ut3YA:10
+ a=zc0IvFSfCIW2DFIPzwfm:22
+X-Proofpoint-GUID: yNw2J93KvzuF_jysOJaXPxtr6X4DUd5m
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-02-25_04,2026-02-25_01,2025-10-01_01
+ definitions=2026-02-25_04,2026-02-25_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 adultscore=0 malwarescore=0 impostorscore=0 phishscore=0
- spamscore=0 priorityscore=1501 bulkscore=0 lowpriorityscore=0 suspectscore=0
+ spamscore=0 priorityscore=1501 bulkscore=0 impostorscore=0 lowpriorityscore=0
+ malwarescore=0 phishscore=0 suspectscore=0 adultscore=0 clxscore=1015
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2602130000 definitions=main-2602250222
-X-Spamd-Bar: ---
-X-MailFrom: trilokkumar.soni@oss.qualcomm.com
+ reason=mlx scancount=1 engine=8.22.0-2602130000 definitions=main-2602260077
+X-Spamd-Bar: ------
+X-MailFrom: ekansh.gupta@oss.qualcomm.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: OZPZFJDNSTVOTXLJY7QYMWAZQVVYH5BX
-X-Message-ID-Hash: OZPZFJDNSTVOTXLJY7QYMWAZQVVYH5BX
-X-Mailman-Approved-At: Thu, 16 Apr 2026 16:47:21 +0000
-CC: Bjorn Andersson <andersson@kernel.org>, Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>, Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, iommu@lists.linux.dev, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>, Bharath Kumar <quic_bkumar@quicinc.com>, Chenna Kesava Raju <quic_chennak@quicinc.com>
+Message-ID-Hash: VHLS6YXMJ4EGD4GMQ6S4TAWGLVVMRJDS
+X-Message-ID-Hash: VHLS6YXMJ4EGD4GMQ6S4TAWGLVVMRJDS
+X-Mailman-Approved-At: Thu, 16 Apr 2026 16:47:22 +0000
+CC: Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, iommu@lists.linux.dev, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>, Bharath Kumar <quic_bkumar@quicinc.com>, Chenna Kesava Raju <quic_chennak@quicinc.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH RFC 01/18] accel/qda: Add Qualcomm QDA DSP accelerator driver docs
+Subject: [Linaro-mm-sig] Re: [PATCH RFC 05/18] accel/qda: Create compute CB devices on QDA compute bus
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OZPZFJDNSTVOTXLJY7QYMWAZQVVYH5BX/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VHLS6YXMJ4EGD4GMQ6S4TAWGLVVMRJDS/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-X-Spamd-Result: default: False [3.59 / 15.00];
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [3.49 / 15.00];
 	DMARC_POLICY_REJECT(2.00)[qualcomm.com : SPF not aligned (relaxed),reject];
-	DATE_IN_PAST(1.00)[1193];
 	R_DKIM_REJECT(1.00)[qualcomm.com:s=qcppdkim1];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+	DATE_IN_PAST(1.00)[1184];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[26];
-	FREEMAIL_CC(0.00)[kernel.org,oss.qualcomm.com,lwn.net,linuxfoundation.org,8bytes.org,arm.com,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,lists.freedesktop.org,vger.kernel.org,lists.linux.dev,lists.linaro.org,quicinc.com];
-	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[kernel.org,lwn.net,linuxfoundation.org,8bytes.org,arm.com,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,lists.freedesktop.org,vger.kernel.org,lists.linux.dev,lists.linaro.org,oss.qualcomm.com,quicinc.com];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	ARC_NA(0.00)[];
 	DKIM_TRACE(0.00)[qualcomm.com:-];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	RCPT_COUNT_TWELVE(0.00)[24];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[6];
-	FROM_NEQ_ENVFROM(0.00)[trilokkumar.soni@oss.qualcomm.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_NEQ_ENVFROM(0.00)[ekansh.gupta@oss.qualcomm.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[oss.qualcomm.com:mid,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: 0E81741227E
+	DBL_BLOCKED_OPENRESOLVER(0.00)[qualcomm.com:email,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,oss.qualcomm.com:mid]
+X-Rspamd-Queue-Id: A5225412285
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-T24gMi8yNS8yMDI2IDExOjQwIEFNLCBEbWl0cnkgQmFyeXNoa292IHdyb3RlOg0KPiBPbiBXZWQs
-IEZlYiAyNSwgMjAyNiBhdCAxMToxNjoyNkFNIC0wODAwLCBUcmlsb2sgU29uaSB3cm90ZToNCj4+
-IE9uIDIvMjUvMjAyNiA3OjEyIEFNLCBCam9ybiBBbmRlcnNzb24gd3JvdGU6DQo+Pj4gT24gV2Vk
-LCBGZWIgMjUsIDIwMjYgYXQgMDc6NDc6MDhQTSArMDUzMCwgRWthbnNoIEd1cHRhIHdyb3RlOg0K
-Pj4+Pg0KPj4+Pg0KPj4+PiBPbiAyLzI0LzIwMjYgOTowMyBBTSwgVHJpbG9rIFNvbmkgd3JvdGU6
-DQo+Pj4+PiBPbiAyLzIzLzIwMjYgMTE6MDggQU0sIEVrYW5zaCBHdXB0YSB3cm90ZToNCj4+Pj4+
-PiBBZGQgaW5pdGlhbCBkb2N1bWVudGF0aW9uIGZvciB0aGUgUXVhbGNvbW0gRFNQIEFjY2VsZXJh
-dG9yIChRREEpIGRyaXZlcg0KPj4+Pj4+IGludGVncmF0ZWQgaW4gdGhlIERSTSBhY2NlbCBzdWJz
-eXN0ZW0uDQo+Pj4+Pj4NCj4+Pj4+PiBUaGUgbmV3IGRvY3MgaW50cm9kdWNlIFFEQSBhcyBhIERS
-TS9hY2NlbC1iYXNlZCBpbXBsZW1lbnRhdGlvbiBvZg0KPj4+Pj4+IEhleGFnb24gRFNQIG9mZmxv
-YWQgdGhhdCBpcyBpbnRlbmRlZCBhcyBhIG1vZGVybiBhbHRlcm5hdGl2ZSB0byB0aGUNCj4+Pj4+
-PiBsZWdhY3kgRmFzdFJQQyBkcml2ZXIgaW4gZHJpdmVycy9taXNjLiBUaGUgdGV4dCBkZXNjcmli
-ZXMgdGhlIGRyaXZlcg0KPj4+Pj4+IG1vdGl2YXRpb24sIGhpZ2gtbGV2ZWwgYXJjaGl0ZWN0dXJl
-IGFuZCBpbnRlcmFjdGlvbiB3aXRoIElPTU1VIGNvbnRleHQNCj4+Pj4+PiBiYW5rcywgR0VNLWJh
-c2VkIGJ1ZmZlciBtYW5hZ2VtZW50IGFuZCB0aGUgUlBNc2cgdHJhbnNwb3J0Lg0KPj4+Pj4+DQo+
-Pj4+Pj4gVGhlIHVzZXItc3BhY2UgZmFjaW5nIHNlY3Rpb24gZG9jdW1lbnRzIHRoZSBtYWluIFFE
-QSBJT0NUTHMgdXNlZCB0bw0KPj4+Pj4+IGVzdGFibGlzaCBEU1Agc2Vzc2lvbnMsIG1hbmFnZSBH
-RU0gYnVmZmVyIG9iamVjdHMgYW5kIGludm9rZSByZW1vdGUNCj4+Pj4+PiBwcm9jZWR1cmVzIHVz
-aW5nIHRoZSBGYXN0UlBDIHByb3RvY29sLCBhbG9uZyB3aXRoIGEgdHlwaWNhbCBsaWZlY3ljbGUN
-Cj4+Pj4+PiBleGFtcGxlIGZvciBhcHBsaWNhdGlvbnMuDQo+Pj4+Pj4NCj4+Pj4+PiBGaW5hbGx5
-LCB0aGUgZHJpdmVyIGlzIHdpcmVkIGludG8gdGhlIENvbXB1dGUgQWNjZWxlcmF0b3JzDQo+Pj4+
-Pj4gZG9jdW1lbnRhdGlvbiBpbmRleCB1bmRlciBEb2N1bWVudGF0aW9uL2FjY2VsLCBhbmQgYSBi
-cmllZiBkZWJ1Z2dpbmcNCj4+Pj4+PiBzZWN0aW9uIHNob3dzIGhvdyB0byBlbmFibGUgZHluYW1p
-YyBkZWJ1ZyBmb3IgdGhlIFFEQSBpbXBsZW1lbnRhdGlvbi4NCj4+Pj4+IFNvIGV4aXN0aW5nIGFw
-cGxpY2F0aW9ucyB3cml0dGVuIG92ZXIgY2hhcmFjdGVyIGRldmljZSBVQVBJIG5lZWRzIHRvIGJl
-DQo+Pj4+PiByZXdyaXR0ZW4gb3ZlciBuZXcgVUFQSSBhbmQgaXQgd2lsbCBiZSBicm9rZW4gb25j
-ZSB0aGlzIGRyaXZlciBnZXRzDQo+Pj4+PiBtZXJnZWQ/IEFyZSB3ZSBnb2luZyB0byBrZWVwIGJv
-dGggdGhlIGRyaXZlcnMgaW4gdGhlIExpbnV4IGtlcm5lbA0KPj4+Pj4gYW5kIG5vdCBkZXByZWNh
-dGUgdGhlIC9jaGFyIGRldmljZSBvbmU/IA0KPj4+Pj4NCj4+Pj4+IElzIFF1YWxjb21tIGdvaW5n
-IHRvIHByb3ZpZGUgdGhlIHdyYXBwZXIgbGlicmFyeSBpbiB0aGUgdXNlcnNwYWNlDQo+Pj4+PiBz
-byB0aGF0IGV4aXN0aW5nIGFwcGxpY2F0aW9ucyBieSBvdXIgY3VzdG9tZXJzIGFuZCBkZXZlbG9w
-ZXJzDQo+Pj4+PiBrZWVwIHdvcmtpbmcgdy8gdGhlIG5ld2VyIGtlcm5lbCBpZiB0aGUgY2hhciBp
-bnRlcmZhY2UgYmFzZWQNCj4+Pj4+IGRyaXZlciBnZXRzIGRlcHJlY2F0ZWQ/IEl0IGlzIG5vdCBj
-bGVhciBmcm9tIHlvdXIgdGV4dCBhYm92ZS4gDQo+Pj4+IFRoYW5rcyBmb3IgcmFpc2luZyB0aGlz
-LCBUcmlsb2suDQo+Pj4+DQo+Pj4+IFRoaXMgaXMgb25lIG9mIHRoZSBvcGVuIGl0ZW1zIHRoYXQg
-SSBoYXZlLiBJJ20gbm90IGV4YWN0bHkgc3VyZSB3aGF0IHdvdWxkIGJlIHRoZQ0KPj4+PiBhY2Nl
-cHRhYmxlIHdheSBmb3IgdGhpcy7CoA0KPj4+Pg0KPj4+PiBBcyB5b3UgbWVudGlvbmVkLCBhcHBs
-aWNhdGlvbnMgdGhhdCByZWx5IG9uIC9kZXYvZmFzdHJwYyogbWlnaHQgbm90IHdvcmsgb24gUURB
-DQo+Pj4+IHdpdGhvdXQgbW9kaWZpY2F0aW9uLg0KPj4+Pg0KPj4+PiBJIHdhcyB0aGlua2luZyBp
-biB0aGUgc2FtZSBsaW5lcyBhcyB5b3UgaGF2ZSBtZW50aW9uZWQgYW5kwqAgaGF2aW5nIHNvbWUg
-c2hpbS9jb21wYXQNCj4+Pj4gZHJpdmVyIHRvIHRyYW5zbGF0ZSBGYXN0UlBDIFVBUEkgdG8gUURB
-LiBUaGUgY29tcGF0IGRyaXZlciB3b3VsZCBleHBvc2UgdGhlIGV4aXN0aW5nDQo+Pj4+IGNoYXJh
-Y3RlciBkZXZpY2VzIGFuZCByb3V0ZSB0aGUgY2FsbHMgdG8gUURBLiBUaGUgY29tcGF0IGRyaXZl
-ciBjb3VsZCBiZSBidWlsdCB2aWEgS2NvbmZpZy4NCj4+Pj4NCj4+Pg0KPj4+IFRoaXMgaXMgYSBm
-dW5kYW1lbnRhbCByZXF1aXJlbWVudCwgeW91IG5lZWQgdG8gYWRkcmVzcyB0aGlzIGluIG9yZGVy
-IGZvcg0KPj4+IHRoaXMgdG8gbW92ZSBmb3J3YXJkLg0KPj4+DQo+Pj4gV2hpY2ggbWFrZXMgbWUg
-d29uZGVyIGlmIGl0IHdvdWxkIGJlIHBvc3NpYmxlIHRvIHJlYWNoIGFuIGFjY2VsIGRyaXZlcg0K
-Pj4+IHRocm91Z2ggaW5jcmVtZW50YWwgdHJhbnNpdGlvbiBvZiB0aGUgY3VycmVudCBkcml2ZXIs
-IGluc3RlYWQgb2YganVzdA0KPj4+IGRyb3BwaW5nIGluIGEgZmV3IHRob3VzYW5kIGxpbmVzIG9m
-IG5ldyBjb2RlL2Rlc2lnbi4NCj4+Pg0KPj4+PiBIb3dldmVyLCBJIGhhdmVu4oCZdCBlbmNvdW50
-ZXJlZCBhbiBleGFtcGxlIG9mIHN1Y2ggYSBVQVBJ4oCRdHJhbnNsYXRpb24gZHJpdmVyIGluIHRo
-ZSBrZXJuZWwNCj4+Pj4gYmVmb3JlLCBzbyBJIHdvdWxkIHdhbnQgZ3VpZGFuY2UgZnJvbSBtYWlu
-dGFpbmVycyBvbiB3aGV0aGVyIHRoaXMgaXMgYW4gYWNjZXB0YWJsZQ0KPj4+PiBtb2RlbCBvciBu
-b3QuDQo+Pj4+DQo+Pj4+IFJlZ2FyZGluZyB5b3VyIHF1ZXN0aW9uIGFib3V0IGxpYnJhcnksIGFs
-bCB0aGUgQVBJcyBleHBvc2VkIGJ5IGdpdGh1Yi9mYXN0cnBjIGxpYnJhcnkgYXJlIGtlcHQNCj4+
-Pj4gdW5jaGFuZ2VkIGluIHRlcm1zIG9mIGRlZmluaXRpb25zIGFuZCBleHBlY3RhdGlvbi4gVGhl
-IHNhbWUgcHJvamVjdCBjYW4gYmUgYnVpbGQgZm9yIGJvdGgNCj4+Pj4gRmFzdFJQQyBhbmQgUURB
-IGJhc2VkIG9uIGNvbmZpZ3VyZSBvcHRpb25zLiBTbywgdGhlIGFwcGxpY2F0aW9ucyB1c2luZyBn
-aXRodWIvZmFzdHJwYyBzaG91bGQNCj4+Pj4gbm90IGZhY2UgYW55IHByb2JsZW0gaWYgdGhlIGxp
-YnMgaXMgYnVpbHQgd2l0aCBwcm9wZXIgY29uZmlndXJlIG9wdGlvbnMuDQo+Pj4+DQo+Pj4NCj4+
-PiBZb3UncmUgYXNzdW1pbmcgdGhhdCB0aGUga2VybmVsIGFuZCB1c2Vyc3BhY2UgYXJlIGEgdW5p
-ZmllZCBwaWVjZSBvZg0KPj4+IHNvZnR3YXJlLCB0aGV5IGFyZSBub3QuIEl0IG11c3QgYmUgcG9z
-c2libGUgZm9yIG1lIHRvIGluc3RhbGwgYSBuZXcNCj4+PiBrZXJuZWwgcGFja2FnZSB3aXRob3V0
-IGhhdmluZyB0byByZXBsYWNlIHRoZSB1c2Vyc3BhY2UgbGlicmFyaWVzLg0KPj4NCj4+IFRoYW5r
-IHlvdSBCam9ybiBmb3IgcHJvdmlkaW5nIHRoZSBpbnB1dHMuIA0KPj4NCj4+IEkgYWxzbyBmb3Jl
-c2VlIHRoYXQgd2Ugd2lsbCBiZSBzdG9wIGFkZGluZyAob3IgYWxyZWFkeSBoYXBwZW5lZCkgbmV3
-IGZlYXR1cmVzDQo+PiBpbnRvIHRoZSBleGlzdGluZyBmYXN0cnBjIGRyaXZlciwgc28gY2FsbGlu
-ZyB0aGUgbmV3IGRyaXZlciBhcyBhbiBhbHRlcm5hdGl2ZQ0KPj4gaXMgaW4gb3ZlcnNvbGQgY2F0
-ZWdvcnkuDQo+Pg0KPj4gWW91IGFyZSBwcmV0dHkgbXVjaCBiZWdhbiB0aGUgZGVwcmVjYXRpbmcg
-dGhlIGV4aXN0aW5nIGZhc3RycGMgZHJpdmVyLCBzbyBsZXQncw0KPj4ganVzdCBtZW50aW9uIGl0
-IGlmIHRoYXQgaXMgdGhlIGNhc2UgYW5kIHByb3ZpZGUgbWlncmF0aW9uL3NoaW0gcGF0aCBzbyB0
-aGF0DQo+PiBleGlzdGluZyBiaW5hcmllcyBkb2Vzbid0IGJyZWFrLg0KPiANCj4gSSBhZ3JlZSB0
-aGF0IHdlIG5lZWQgYSBtaWdyYXRpb24gcGF0aCwgYnV0IEknZCByZWFsbHkgZm9jdXMgb24gaXQg
-YWZ0ZXINCj4gZ2V0dGluZyBhdCBsZWFzdCBiYXNpYyBwYXJ0cyBvZiB0aGUgUURBIHJldmlld2Vk
-IGFuZCBhZ3JlZWQgdXBvbi4NCj4gT3RoZXJ3aXNlIHRoZSBzaGltIGxheWVyIHdpbGwgYmUgcmV3
-b3JrZWQgYWdhaW4gYW5kIGFnYWluIHdpdGggbm8NCj4gaW1tZWRpYXRlIGFkZGVkIGJlbmVmaXQu
-DQo+IA0KDQpJIGFtIGZpbmUgd2l0aCB0aGUgcmV2aWV3IHRvIGJlIGNvbnRpbnVlZCwgdGhpcyBp
-cyBSRkMgc2VyaWVzIGFueXdheS4gV2Ugc2hvdWxkIGFsc28gZGVjaWRlDQp0aGUgZGVzaWduIG9m
-IHRoZSBzaGltIGxheWVyIGhlcmUgYXMgd2VsbC4gSSBwcmVmZXIgdG8gbm90IGhhdmUgbXVsdGlw
-bGUNClJGQyByZXZpc2lvbnMgaGVyZSBpZiB3ZSBkb24ndCBhZ3JlZSBvbiB0aGUgYmFzaWMgcmVx
-dWlyZW1lbnRzIHdoaWNoDQpsZWFkcyB0byBhY2NlcHRhbmNlIG9mIHRoaXMgbmV3IGRyaXZlci4g
-DQoNCi0tLVRyaWxvayBTb25pDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxp
-c3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0t
-c2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+
+
+On 2/24/2026 4:19 AM, Dmitry Baryshkov wrote:
+> On Tue, Feb 24, 2026 at 12:38:59AM +0530, Ekansh Gupta wrote:
+>> Add support for creating compute context-bank (CB) devices under
+>> the QDA compute bus based on child nodes of the FastRPC RPMsg
+>> device tree node. Each DT child with compatible
+>> "qcom,fastrpc-compute-cb" is turned into a QDA-owned struct
+>> device on qda_cb_bus_type.
+>>
+>> A new qda_cb_dev structure and cb_devs list in qda_dev track these
+>> CB devices. qda_populate_child_devices() walks the DT children
+>> during QDA RPMsg probe, creates CB devices, configures their DMA
+>> and IOMMU settings using of_dma_configure(), and associates a SID
+>> from the "reg" property when present.
+>>
+>> On RPMsg remove, qda_unpopulate_child_devices() tears down all CB
+>> devices, removing them from their IOMMU groups if present and
+>> unregistering the devices. This prepares the ground for using CB
+>> devices as IOMMU endpoints for DSP compute workloads in later
+>> patches.
+> Are we loosing the nsessions support?
+Yes, it's not part of this series. I'll try bringing that as well.
+>
+>> Signed-off-by: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
+>> ---
+>>  drivers/accel/qda/Makefile    |   1 +
+>>  drivers/accel/qda/qda_cb.c    | 150 ++++++++++++++++++++++++++++++++++++++++++
+>>  drivers/accel/qda/qda_cb.h    |  26 ++++++++
+>>  drivers/accel/qda/qda_drv.h   |   3 +
+>>  drivers/accel/qda/qda_rpmsg.c |  40 +++++++++++
+>>  5 files changed, 220 insertions(+)
+>>
+>> diff --git a/drivers/accel/qda/Makefile b/drivers/accel/qda/Makefile
+>> index 242684ef1af7..4aded20b6bc2 100644
+>> --- a/drivers/accel/qda/Makefile
+>> +++ b/drivers/accel/qda/Makefile
+>> @@ -8,5 +8,6 @@ obj-$(CONFIG_DRM_ACCEL_QDA)	:= qda.o
+>>  qda-y := \
+>>  	qda_drv.o \
+>>  	qda_rpmsg.o \
+>> +	qda_cb.o \
+>>  
+>>  obj-$(CONFIG_DRM_ACCEL_QDA_COMPUTE_BUS) += qda_compute_bus.o
+>> diff --git a/drivers/accel/qda/qda_cb.c b/drivers/accel/qda/qda_cb.c
+>> new file mode 100644
+>> index 000000000000..77a2d8cae076
+>> --- /dev/null
+>> +++ b/drivers/accel/qda/qda_cb.c
+>> @@ -0,0 +1,150 @@
+>> +// SPDX-License-Identifier: GPL-2.0-only
+>> +// Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+>> +#include <linux/dma-mapping.h>
+>> +#include <linux/device.h>
+>> +#include <linux/of.h>
+>> +#include <linux/of_device.h>
+>> +#include <linux/iommu.h>
+>> +#include <linux/slab.h>
+>> +#include "qda_drv.h"
+>> +#include "qda_cb.h"
+>> +
+>> +static void qda_cb_dev_release(struct device *dev)
+>> +{
+>> +	kfree(dev);
+> Do you need to put the reference on the OF node?
+Reference put is happening as part of qda_destroy_cb_device.
+>
+>> +}
+>> +
+>> +static int qda_configure_cb_iommu(struct device *cb_dev, struct device_node *cb_node)
+>> +{
+>> +	int ret;
+>> +
+>> +	qda_dbg(NULL, "Configuring DMA/IOMMU for CB device %s\n", dev_name(cb_dev));
+>> +
+>> +	/* Use of_dma_configure which handles both DMA and IOMMU configuration */
+>> +	ret = of_dma_configure(cb_dev, cb_node, true);
+>> +	if (ret) {
+>> +		qda_err(NULL, "of_dma_configure failed for %s: %d\n", dev_name(cb_dev), ret);
+>> +		return ret;
+>> +	}
+>> +
+>> +	qda_dbg(NULL, "DMA/IOMMU configured successfully for CB device %s\n", dev_name(cb_dev));
+>> +	return 0;
+>> +}
+>> +
+>> +static int qda_cb_setup_device(struct qda_dev *qdev, struct device *cb_dev)
+>> +{
+>> +	int rc;
+>> +	u32 sid, pa_bits = 32;
+>> +
+>> +	qda_dbg(qdev, "Setting up CB device %s\n", dev_name(cb_dev));
+>> +
+>> +	if (of_property_read_u32(cb_dev->of_node, "reg", &sid)) {
+>> +		qda_dbg(qdev, "No 'reg' property found, defaulting SID to 0\n");
+>> +		sid = 0;
+> Don't do the job of the schema validator. Are there nodes without reg?
+> No.
+Ack.
+>
+>> +	}
+>> +
+>> +	rc = dma_set_mask(cb_dev, DMA_BIT_MASK(pa_bits));
+>> +	if (rc) {
+>> +		qda_err(qdev, "%d bit DMA enable failed: %d\n", pa_bits, rc);
+>> +		return rc;
+>> +	}
+>> +
+>> +	qda_dbg(qdev, "CB device setup complete - SID: %u, PA bits: %u\n", sid, pa_bits);
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +int qda_create_cb_device(struct qda_dev *qdev, struct device_node *cb_node)
+>> +{
+>> +	struct device *cb_dev;
+>> +	int ret;
+>> +	u32 sid = 0;
+>> +	struct qda_cb_dev *entry;
+>> +
+>> +	qda_dbg(qdev, "Creating CB device for node: %s\n", cb_node->name);
+>> +
+>> +	of_property_read_u32(cb_node, "reg", &sid);
+>> +
+>> +	cb_dev = kzalloc_obj(*cb_dev, GFP_KERNEL);
+>> +	if (!cb_dev)
+>> +		return -ENOMEM;
+>> +
+>> +	device_initialize(cb_dev);
+>> +	cb_dev->parent = qdev->dev;
+>> +	cb_dev->bus = &qda_cb_bus_type; /* Use our custom bus type for IOMMU handling */
+>> +	cb_dev->release = qda_cb_dev_release;
+>> +	dev_set_name(cb_dev, "qda-cb-%s-%u", qdev->dsp_name, sid);
+>> +
+>> +	qda_dbg(qdev, "Initialized CB device: %s\n", dev_name(cb_dev));
+>> +
+>> +	cb_dev->of_node = of_node_get(cb_node);
+>> +
+>> +	cb_dev->dma_mask = &cb_dev->coherent_dma_mask;
+>> +	cb_dev->coherent_dma_mask = DMA_BIT_MASK(32);
+>> +
+>> +	dev_set_drvdata(cb_dev->parent, qdev);
+>> +
+>> +	ret = device_add(cb_dev);
+>> +	if (ret) {
+>> +		qda_err(qdev, "Failed to add CB device for SID %u: %d\n", sid, ret);
+>> +		goto cleanup_device_init;
+>> +	}
+>> +
+>> +	qda_dbg(qdev, "CB device added to system\n");
+>> +
+>> +	ret = qda_configure_cb_iommu(cb_dev, cb_node);
+>> +	if (ret) {
+>> +		qda_err(qdev, "IOMMU configuration failed: %d\n", ret);
+>> +		goto cleanup_device_add;
+>> +	}
+>> +
+>> +	ret = qda_cb_setup_device(qdev, cb_dev);
+>> +	if (ret) {
+>> +		qda_err(qdev, "CB device setup failed: %d\n", ret);
+>> +		goto cleanup_device_add;
+>> +	}
+>> +
+>> +	entry = kzalloc(sizeof(*entry), GFP_KERNEL);
+>> +	if (!entry) {
+>> +		ret = -ENOMEM;
+>> +		goto cleanup_device_add;
+>> +	}
+>> +
+>> +	entry->dev = cb_dev;
+>> +	list_add_tail(&entry->node, &qdev->cb_devs);
+>> +
+>> +	qda_dbg(qdev, "Successfully created CB device for SID %u\n", sid);
+>> +	return 0;
+>> +
+>> +cleanup_device_add:
+>> +	device_del(cb_dev);
+>> +cleanup_device_init:
+>> +	of_node_put(cb_dev->of_node);
+>> +	put_device(cb_dev);
+>> +	return ret;
+>> +}
+>> +
+>> +void qda_destroy_cb_device(struct device *cb_dev)
+>> +{
+>> +	struct iommu_group *group;
+>> +
+>> +	if (!cb_dev) {
+>> +		qda_dbg(NULL, "NULL CB device passed to destroy\n");
+>> +		return;
+>> +	}
+>> +
+>> +	qda_dbg(NULL, "Destroying CB device %s\n", dev_name(cb_dev));
+>> +
+>> +	group = iommu_group_get(cb_dev);
+>> +	if (group) {
+>> +		qda_dbg(NULL, "Removing %s from IOMMU group\n", dev_name(cb_dev));
+>> +		iommu_group_remove_device(cb_dev);
+>> +		iommu_group_put(group);
+>> +	}
+>> +
+>> +	of_node_put(cb_dev->of_node);
+>> +	cb_dev->of_node = NULL;
+>> +	device_unregister(cb_dev);
+>> +
+>> +	qda_dbg(NULL, "CB device %s destroyed\n", dev_name(cb_dev));
+>> +}
+>> diff --git a/drivers/accel/qda/qda_cb.h b/drivers/accel/qda/qda_cb.h
+>> new file mode 100644
+>> index 000000000000..a4ae9fef142e
+>> --- /dev/null
+>> +++ b/drivers/accel/qda/qda_cb.h
+>> @@ -0,0 +1,26 @@
+>> +/* SPDX-License-Identifier: GPL-2.0-only */
+>> +/*
+>> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+>> + */
+>> +
+>> +#ifndef __QDA_CB_H__
+>> +#define __QDA_CB_H__
+>> +
+>> +#include <linux/device.h>
+>> +#include <linux/of.h>
+>> +#include <linux/list.h>
+>> +#include <linux/qda_compute_bus.h>
+>> +#include "qda_drv.h"
+>> +
+>> +struct qda_cb_dev {
+>> +	struct list_head node;
+>> +	struct device *dev;
+>> +};
+>> +
+>> +/*
+>> + * Compute bus (CB) device management
+>> + */
+>> +int qda_create_cb_device(struct qda_dev *qdev, struct device_node *cb_node);
+>> +void qda_destroy_cb_device(struct device *cb_dev);
+>> +
+>> +#endif /* __QDA_CB_H__ */
+>> diff --git a/drivers/accel/qda/qda_drv.h b/drivers/accel/qda/qda_drv.h
+>> index bec2d31ca1bb..eb732b7d8091 100644
+>> --- a/drivers/accel/qda/qda_drv.h
+>> +++ b/drivers/accel/qda/qda_drv.h
+>> @@ -7,6 +7,7 @@
+>>  #define __QDA_DRV_H__
+>>  
+>>  #include <linux/device.h>
+>> +#include <linux/list.h>
+>>  #include <linux/mutex.h>
+>>  #include <linux/rpmsg.h>
+>>  #include <linux/xarray.h>
+>> @@ -26,6 +27,8 @@ struct qda_dev {
+>>  	atomic_t removing;
+>>  	/* Name of the DSP (e.g., "cdsp", "adsp") */
+>>  	char dsp_name[16];
+>> +	/* Compute context-bank (CB) child devices */
+>> +	struct list_head cb_devs;
+>>  };
+>>  
+>>  /**
+>> diff --git a/drivers/accel/qda/qda_rpmsg.c b/drivers/accel/qda/qda_rpmsg.c
+>> index a8b24a99ca13..5a57384de6a2 100644
+>> --- a/drivers/accel/qda/qda_rpmsg.c
+>> +++ b/drivers/accel/qda/qda_rpmsg.c
+>> @@ -7,6 +7,7 @@
+>>  #include <linux/of_device.h>
+>>  #include "qda_drv.h"
+>>  #include "qda_rpmsg.h"
+>> +#include "qda_cb.h"
+>>  
+>>  static int qda_rpmsg_init(struct qda_dev *qdev)
+>>  {
+>> @@ -25,11 +26,42 @@ static struct qda_dev *alloc_and_init_qdev(struct rpmsg_device *rpdev)
+>>  
+>>  	qdev->dev = &rpdev->dev;
+>>  	qdev->rpdev = rpdev;
+>> +	INIT_LIST_HEAD(&qdev->cb_devs);
+>>  
+>>  	qda_dbg(qdev, "Allocated and initialized qda_dev\n");
+>>  	return qdev;
+>>  }
+>>  
+>> +static void qda_unpopulate_child_devices(struct qda_dev *qdev)
+>> +{
+>> +	struct qda_cb_dev *entry, *tmp;
+>> +
+>> +	list_for_each_entry_safe(entry, tmp, &qdev->cb_devs, node) {
+>> +		list_del(&entry->node);
+>> +		qda_destroy_cb_device(entry->dev);
+>> +		kfree(entry);
+> Why can't you embed struct device into a structure together with the
+> list_node (and possibly some other data?)?
+I'll check this.
+>
+>> +	}
+>> +}
+>> +
+>> +static int qda_populate_child_devices(struct qda_dev *qdev, struct device_node *parent_node)
+>> +{
+>> +	struct device_node *child;
+>> +	int count = 0, success = 0;
+>> +
+>> +	for_each_child_of_node(parent_node, child) {
+>> +		if (of_device_is_compatible(child, "qcom,fastrpc-compute-cb")) {
+>> +			count++;
+>> +			if (qda_create_cb_device(qdev, child) == 0) {
+>> +				success++;
+>> +				qda_dbg(qdev, "Created CB device for node: %s\n", child->name);
+>> +			} else {
+>> +				qda_err(qdev, "Failed to create CB device for: %s\n", child->name);
+> Don't loose the error code. Instead please return it to the caller.
+Ack.
+>
+>> +			}
+>> +		}
+>> +	}
+>> +	return success > 0 ? 0 : (count > 0 ? -ENODEV : 0);
+>> +}
+>> +
+>>  static int qda_rpmsg_cb(struct rpmsg_device *rpdev, void *data, int len, void *priv, u32 src)
+>>  {
+>>  	/* Dummy function for rpmsg driver */
+>> @@ -48,6 +80,7 @@ static void qda_rpmsg_remove(struct rpmsg_device *rpdev)
+>>  	qdev->rpdev = NULL;
+>>  	mutex_unlock(&qdev->lock);
+>>  
+>> +	qda_unpopulate_child_devices(qdev);
+>>  	qda_deinit_device(qdev);
+>>  
+>>  	qda_info(qdev, "RPMsg device removed\n");
+>> @@ -83,6 +116,13 @@ static int qda_rpmsg_probe(struct rpmsg_device *rpdev)
+>>  	if (ret)
+>>  		return ret;
+>>  
+>> +	ret = qda_populate_child_devices(qdev, rpdev->dev.of_node);
+>> +	if (ret) {
+>> +		qda_err(qdev, "Failed to populate child devices: %d\n", ret);
+>> +		qda_deinit_device(qdev);
+>> +		return ret;
+>> +	}
+>> +
+>>  	qda_info(qdev, "QDA RPMsg probe completed successfully for %s\n", qdev->dsp_name);
+>>  	return 0;
+>>  }
+>>
+>> -- 
+>> 2.34.1
+>>
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
