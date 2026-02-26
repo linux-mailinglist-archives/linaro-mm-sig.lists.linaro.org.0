@@ -2,40 +2,40 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id YBqrDIUkoGkDfwQAu9opvQ
+	id uMYXMuwkoGkDfwQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 11:46:29 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 11:48:12 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id BE6D51A47CC
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 11:46:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5E4D21A485F
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 11:48:12 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B964B3F7E4
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 10:46:27 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 8C8BE3F7E4
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Feb 2026 10:46:25 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5EA653F80A
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 10:48:11 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+	by lists.linaro.org (Postfix) with ESMTPS id 51F073F80A
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Feb 2026 10:48:09 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=Z9W416l3;
-	spf=pass (lists.linaro.org: domain of krzk@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=krzk@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=qJ6529rW;
+	spf=pass (lists.linaro.org: domain of krzk@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=krzk@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id DA83040B85;
-	Thu, 26 Feb 2026 10:46:24 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A95DBC116C6;
-	Thu, 26 Feb 2026 10:46:19 +0000 (UTC)
+	by tor.source.kernel.org (Postfix) with ESMTP id E80F060097;
+	Thu, 26 Feb 2026 10:48:08 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 93307C116C6;
+	Thu, 26 Feb 2026 10:48:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772102784;
-	bh=RvgwqJ5lHgVsbH3VM1TF53+jbTgfmgEMcEMpt6E6IKc=;
+	s=k20201202; t=1772102888;
+	bh=XRep2NB9xXFreBQtfenTV58tF1y78/xLokYZhpOoJFA=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=Z9W416l3lvUFB5co/SPsHLWdDZJQ+8I5Yidnhl0eXEvnsYvwK9UAYEMLjW7QOisbO
-	 gLImo1eBRutyFpsEyl1JdxpLbvVfabIctJH1uDQAKVP2K8/6EjSYMVOP+VXZP9v8eR
-	 WCMwZGyx8JnGMMoqYZuKm24QXLxvTwzx8M8zcu774hCEEAVZc1yspD9TUy1brTj1mW
-	 lFe1rjNM74gCva35CPBQhmZ8duAHerJjd4adAxr5MlxpvGd7wutmoZLrYx+1XpunjN
-	 4LLN36el7W/yNaQ15UCG3A0DospBmY+sS26ClVvlt2GSHbRQP4waY5dAtMnoIPWBNk
-	 XwSBJF/hcMmWA==
-Message-ID: <d719b5de-5aa1-4f80-8f19-06b7ed9bc145@kernel.org>
-Date: Thu, 26 Feb 2026 11:46:17 +0100
+	b=qJ6529rWz6QsJygtfHs2XpkS7BVGInqh1y4KCYK1KC56+f2sIYe3RKAWwx6yAulh/
+	 jQIjHB+9BxtDMC9gdDeaBjg1S1Ln8WFRsTbR4PxB+XXCcIWObNIv0z3BV63JsWajgx
+	 SC6isDtR20M/64wSv60Nj61WGuA/L60xVlML3s678g5x11bCSZsD+p5dOZoJ+e4L1C
+	 Tcr7fq+D8YN5W6G2bh2bHctbKzIMOeLUP87hZnjbDXcYfr2mFY7po8Yh1u3IekVgRL
+	 yScDUSGRS455E2xHeS8RBk1kaaFOd7WW+3Ka8ENmrGqgiIu1/4NU3jzU4vUkCHYON8
+	 E+MJJTyAyid0g==
+Message-ID: <fd7a2ac7-796a-4cdb-a55f-91e42f08109c@kernel.org>
+Date: Thu, 26 Feb 2026 11:48:01 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
@@ -48,7 +48,7 @@ To: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
  Sumit Semwal <sumit.semwal@linaro.org>,
  =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
 References: <20260224-qda-firstpost-v1-0-fe46a9c1a046@oss.qualcomm.com>
- <20260224-qda-firstpost-v1-4-fe46a9c1a046@oss.qualcomm.com>
+ <20260224-qda-firstpost-v1-16-fe46a9c1a046@oss.qualcomm.com>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
@@ -94,18 +94,18 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  jWt87ecuHlpL3uuQ0ZZNWqHgZoQLXoqC2ZV5KrtKWb/jyiFX/sxSrodALf0zf+tfHv0FZWT2
  zHjUqd0t4njD/UOsuIMOQn4Ig0SdivYPfZukb5cdasKJukG1NOpbW7yRNivaCnfZz6dTawXw
  XRIV/KDsHQiyVxKvN73bThKhONkcX2LWuD928tAR6XMM2G5ovxLe09vuOzzfTWQDsm++9UKF a/A=
-In-Reply-To: <20260224-qda-firstpost-v1-4-fe46a9c1a046@oss.qualcomm.com>
+In-Reply-To: <20260224-qda-firstpost-v1-16-fe46a9c1a046@oss.qualcomm.com>
 X-Spamd-Bar: ---
-Message-ID-Hash: PNZJS33QGONLFKKRDTWVEHN7CTB2JZFI
-X-Message-ID-Hash: PNZJS33QGONLFKKRDTWVEHN7CTB2JZFI
+Message-ID-Hash: CDDJO6RHR7GWLLXHCE3E24K2NE3ENKOL
+X-Message-ID-Hash: CDDJO6RHR7GWLLXHCE3E24K2NE3ENKOL
 X-MailFrom: krzk@kernel.org
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, iommu@lists.linux.dev, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>, Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, Bharath Kumar <quic_bkumar@quicinc.com>, Chenna Kesava Raju <quic_chennak@quicinc.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH RFC 04/18] accel/qda: Add built-in compute CB bus for QDA and integrate with IOMMU
+Subject: [Linaro-mm-sig] Re: [PATCH RFC 16/18] accel/qda: Add FastRPC-based DSP memory mapping support
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PNZJS33QGONLFKKRDTWVEHN7CTB2JZFI/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CDDJO6RHR7GWLLXHCE3E24K2NE3ENKOL/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -119,7 +119,7 @@ X-Spamd-Result: default: False [1.99 / 15.00];
 	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
 	R_DKIM_REJECT(1.00)[kernel.org:s=k20201202];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
@@ -140,40 +140,51 @@ X-Spamd-Result: default: False [1.99 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[qualcomm.com:email,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: BE6D51A47CC
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,qualcomm.com:email,linaro.org:email]
+X-Rspamd-Queue-Id: 5E4D21A485F
 X-Rspamd-Action: no action
 
-On 23/02/2026 20:08, Ekansh Gupta wrote:
-> Introduce a built-in compute context-bank (CB) bus used by the Qualcomm
-> DSP accelerator (QDA) driver to represent DSP CB devices that require
-> IOMMU configuration. This separates the CB bus from the QDA driver and
-> allows QDA to remain a loadable module while the bus is always built-in.
+On 23/02/2026 20:09, Ekansh Gupta wrote:
+> Add a DRM_QDA_MAP ioctl and supporting FastRPC plumbing to map GEM
+> backed buffers into the DSP virtual address space. The new
+> qda_mem_map UAPI structure allows userspace to request legacy MMAP
+> style mappings or handle-based MEM_MAP mappings with attributes, and
+> encodes flags, offsets and optional virtual address hints that are
+> forwarded to the DSP.
 > 
-> A new bool Kconfig symbol DRM_ACCEL_QDA_COMPUTE_BUS is added and is
-> selected by the main DRM_ACCEL_QDA driver. The parent accel Makefile is
-> updated to descend into the QDA directory for both built-in and module
-> builds so that the CB bus is compiled into vmlinux while the driver
-> remains modular.
+> On the FastRPC side new method identifiers FASTRPC_RMID_INIT_MMAP
+> and FASTRPC_RMID_INIT_MEM_MAP are introduced together with message
+> structures for map requests and responses. The fastrpc_prepare_args
+> path is extended to build the appropriate request headers, serialize
+> the physical page information derived from a GEM object into a
+> fastrpc_phy_page array and pack the arguments into the shared message
+> buffer used by the existing invoke infrastructure.
 > 
-> The CB bus is registered at postcore_initcall() time and is exposed to
-> the IOMMU core through iommu_buses[] in the same way as the Tegra
-> host1x context-bus. This enables later patches to create CB devices on
-> this bus and obtain IOMMU domains for them.
+> The qda_ioctl_mmap() handler dispatches mapping requests based on the
+> qda_mem_map request type, reusing the generic fastrpc_invoke()
+> machinery and the RPMsg transport to communicate with the DSP. This
+> provides the foundation for explicit buffer mapping into the DSP
+> address space for subsequent FastRPC calls, aligned with the
+> traditional FastRPC user space model.
 > 
 > Signed-off-by: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
 > ---
->  drivers/accel/Makefile              |  1 +
->  drivers/accel/qda/Kconfig           |  5 +++++
->  drivers/accel/qda/Makefile          |  2 ++
->  drivers/accel/qda/qda_compute_bus.c | 23 +++++++++++++++++++++++
->  drivers/iommu/iommu.c               |  4 ++++
->  include/linux/qda_compute_bus.h     | 22 ++++++++++++++++++++++
+>  arch/arm64/configs/defconfig    |   2 +
 
-Do not combine independent work into one patch.
+Not relevan there. Don't stuff other subsystem code into your patches.
+Especially without any reasons (your commit msg must explain WHY you are
+doing things).
 
-Also, your patch has clear patch warnings, so please review it BEFORE
-you send.
+>  drivers/accel/qda/qda_drv.c     |   1 +
+>  drivers/accel/qda/qda_fastrpc.c | 217 ++++++++++++++++++++++++++++++++++++++++
+>  drivers/accel/qda/qda_fastrpc.h |  64 ++++++++++++
+>  drivers/accel/qda/qda_ioctl.c   |  24 +++++
+>  drivers/accel/qda/qda_ioctl.h   |  13 +++
+>  include/uapi/drm/qda_accel.h    |  44 +++++++-
+>  7 files changed, 364 insertions(+), 1 deletion(-)
+> 
+
+
 
 Best regards,
 Krzysztof
