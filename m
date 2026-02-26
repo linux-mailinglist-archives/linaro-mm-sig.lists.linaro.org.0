@@ -2,42 +2,42 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id UJjMNr4V4WnoogAAu9opvQ
+	id yGdwGcgV4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:00:46 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:00:56 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 778CD4123A4
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:00:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 25C794123AE
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:00:56 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7AA9644170
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:00:45 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3C71C455D4
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:00:55 +0000 (UTC)
 Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 868073F824
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Feb 2026 15:59:01 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 1BAA93F824
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Feb 2026 15:59:14 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=LDYCUhyk;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=ghaIMgZ0;
 	spf=pass (lists.linaro.org: domain of jlayton@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=jlayton@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id 067DF4458D;
+	by sea.source.kernel.org (Postfix) with ESMTP id 8568B44329;
+	Thu, 26 Feb 2026 15:59:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 21497C2BCB2;
 	Thu, 26 Feb 2026 15:59:01 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7611EC2BCB1;
-	Thu, 26 Feb 2026 15:58:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772121540;
-	bh=L7XUWaooTPJJGvd9q6jSAUTNKJML0XZHotIv5n8H4j4=;
+	s=k20201202; t=1772121553;
+	bh=/dIyAeV0SWp+d5wV41a2YQTvW0T+tDEAvSeW39MxQrw=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=LDYCUhykrUdWv3Pvas2rdur0i6GL1s/gViKIjWTYOQk415nXtcRy1qub/d8XbSUUM
-	 D+/aIzVlWqyiVLePUBCzKm79lnQ1Xr/wPlu8hJz+p30Ci3TFMeSOk2X8J6c0Q6CD4P
-	 wqxpbdVNoiUFgiqF3pP6i9tkGZpZiFsHB2ZNh7AULTRNWpNsa6ywW5AUy1dN2Kcfe/
-	 Vx5kFsXJbZRj/SIYHdOcyOOJCt2ZrUoavPeoIuA6h1ix26kDvpcIxPd9hWIadzGtzi
-	 je2BpQkmmncKfavwQ3rkUY8N8k7blVwDs4zRekpa7E2wuHdmSCgnhha8D4eMzH/c5i
-	 ELYCW2P9Sj9NQ==
+	b=ghaIMgZ0Kc9sSFxLqN3M3k3TK+60uJC0pPBBx9i2Lxpt0oo/B72RlYrHZ5doKyEj4
+	 p/nyNLpPDIidxOkEnm7U3/35E11ov0+Rb0jIejiEJmkHCz0aVwJZRyvIN1zXco/Yjz
+	 d6H2cjgr2HTg0vooB26P2lu8M8somfn6uC4kg8yaF3AKM7eZGMimt73uTMiqXnPm0N
+	 yhIX1ErPK7xbvUpa2Y3UR81NlDwbK+tc3MCOm3fD704u1tguf4hCtEdOipJWTvG+90
+	 W0dnZ3lqQTX5vShOId2hTZvCGE6hOF7cSapC3LXaJJboq6djJCIAwfUZQXky+bBZKX
+	 KEYsgUDdZmazA==
 From: Jeff Layton <jlayton@kernel.org>
-Date: Thu, 26 Feb 2026 10:55:15 -0500
+Date: Thu, 26 Feb 2026 10:55:16 -0500
 MIME-Version: 1.0
-Message-Id: <20260226-iino-u64-v1-13-ccceff366db9@kernel.org>
+Message-Id: <20260226-iino-u64-v1-14-ccceff366db9@kernel.org>
 References: <20260226-iino-u64-v1-0-ccceff366db9@kernel.org>
 In-Reply-To: <20260226-iino-u64-v1-0-ccceff366db9@kernel.org>
 To: Alexander Viro <viro@zeniv.linux.org.uk>,
@@ -113,36 +113,36 @@ To: Alexander Viro <viro@zeniv.linux.org.uk>,
  James Clark <james.clark@linaro.org>, "Darrick J. Wong" <djwong@kernel.org>,
  Martin Schiller <ms@dev.tdt.de>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2164; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=L7XUWaooTPJJGvd9q6jSAUTNKJML0XZHotIv5n8H4j4=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpoG0HunOlD0IWmS5NY8qKmprauVZ/+4AaY/kFb
- 2frMDh17OOJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaBtBwAKCRAADmhBGVaC
- FWspD/9kh7G8p9Lzfl68UqO9nfBVJdbhEa18mWKyCpykfsHfHVCWcZlNY8T54jBx2zYSKQAm200
- 1Z0WRIhfDjcGIOJIuO1X9JkMJk74ESENbCRK1QIf+n2vy9a5+cGUx1mEKpvq0E5TqwAXHAOoFC6
- 3NSHGd431TY35kp8fNX9Pv8z2qXr/BrZtf64mNkWZ+/pgmbU4lwAMmANpFvRPRnZqDD4h55PgKa
- lRo93MwRT/GFVpdhyvySZu0ylZqlFqaKbT+XlbjplF26+5RjXAyunICxi6rDIPXVGD+aibZ7EPn
- dM3dAr+QTk+c4IRV6A1q2wP27vVBRHznWmq5Z7eCnNBGaaIG8v+XzuAkLBejSZi7qst5JE4qtvd
- CC2R1LYEW6s5Jgvz/eOxoK3G4Fr/Lbqcn2BVBH5846qvSmHY/tv+80Svxawf31ts+zo8j3TcCyA
- 3Bb3UAA6oh6ycWf79FO6g6bY5UQpB1HNGB0wUIW7DiG2qplnSGUTlZQuhos0ulGYVhDfOziO0by
- eGvFmxwnDmQm47WJ3l6yO+WZ865DhG4wuBmhoMjmQ/e8qkfYmrpArIHr2WNzFK9Hl+9tCXAz3oN
- +BFn6v+B/UueV6kf5rFpJzAJiyu3TKMJH4KK2uGs1vnYofltFVpo96fk1iXzdofYRCPQa9M4uut
- SbvrPRHyi0Vl/Dw==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2241; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=/dIyAeV0SWp+d5wV41a2YQTvW0T+tDEAvSeW39MxQrw=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpoG0HEnCSKK/SHb3sYW/c+eUblqdBA7d53olyL
+ 4HBWYDiVJmJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaBtBwAKCRAADmhBGVaC
+ FZpYEACU6I0oc4IB+ERKTJODeo5sUbUQRcurbkTkmeBdHU+MAD5YdiZ6z83x8OfcmpXWliPk5Ya
+ u7AmLMTAsggh98Rh4QxIO+fwJLpw4ZIK1sEPEhfrzx2Mgoa9MXxpfxwLrHMTDktm0UmImLGKuIf
+ yIsqBYSeqK50NLbrZmGWoz6GnXH2YyhrZboFMWnt3vm2eKyCA2IfY5cpb8RmBEzOhc2MIYSUKJp
+ c1vDjKmB5HdCEbItlJxl0T+SLOrSQSDwqM2tt75fI2d0FL4k36/L5myAi/kfDy85B/w7xVV6VpB
+ EPgaEOCOTjEOfCNsZ3dMpzRZ1OxTuEfuYWvqD/qrQYx30qYjjv2BTr6x8/8i0AjFF2MxCT6cMUF
+ JEtme2MWU9XZ6fOnYlbsXvScqGY89Xrq0gULrm//VGWgzKBiZRLR9JDj+rpklL65JZvEyXG9ODI
+ v2DH1wdJq7wy+QuXfNJrHleTpkA1Efl7+FFi1OBwkJVrdFEKMDxkFUDYJlRUXEFaZqcaBZZwazU
+ QjNwVDsgfKk44TmlVoSyAOa9vYw/0LYojdfN8/k6ojhYSAyaCwmTTWi8n7vY7cgmuqoJXf+DuEV
+ bTHCuOqlSQp/scKU84C72kyiBfqs3OKPxgoG0kfTlDICkZK3DbX/LfyRxd4grRdimZjMkLQgkOf
+ Qzu15dS5Cp6Qypw==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
-X-Spamd-Bar: -
+X-Spamd-Bar: --
 X-MailFrom: jlayton@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: QH6EURJP3RMHRKY4RQ2ICE6BFXS65RHL
-X-Message-ID-Hash: QH6EURJP3RMHRKY4RQ2ICE6BFXS65RHL
-X-Mailman-Approved-At: Thu, 16 Apr 2026 16:47:36 +0000
+Message-ID-Hash: IECQNDNGJWMVNT4MVGY5FVFEBPKX2227
+X-Message-ID-Hash: IECQNDNGJWMVNT4MVGY5FVFEBPKX2227
+X-Mailman-Approved-At: Thu, 16 Apr 2026 16:47:37 +0000
 CC: linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, nvdimm@lists.linux.dev, fsverity@lists.linux.dev, linux-mm@kvack.org, netfs@lists.linux.dev, linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net, linux-nfs@vger.kernel.org, linux-cifs@vger.kernel.org, samba-technical@lists.samba.org, linux-nilfs@vger.kernel.org, v9fs@lists.linux.dev, linux-afs@lists.infradead.org, autofs@vger.kernel.org, ceph-devel@vger.kernel.org, codalist@coda.cs.cmu.edu, ecryptfs@vger.kernel.org, linux-mtd@lists.infradead.org, jfs-discussion@lists.sourceforge.net, ntfs3@lists.linux.dev, ocfs2-devel@lists.linux.dev, devel@lists.orangefs.org, linux-unionfs@vger.kernel.org, apparmor@lists.ubuntu.com, linux-security-module@vger.kernel.org, linux-integrity@vger.kernel.org, selinux@vger.kernel.org, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, netdev@vger.kernel.org, linux-perf-
  users@vger.kernel.org, linux-fscrypt@vger.kernel.org, linux-xfs@vger.kernel.org, linux-hams@vger.kernel.org, linux-x25@vger.kernel.org, Jeff Layton <jlayton@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 13/61] smb: store full 64-bit uniqueid in i_ino
+Subject: [Linaro-mm-sig] [PATCH 14/61] smb: remove cifs_uniqueid_to_ino_t()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QH6EURJP3RMHRKY4RQ2ICE6BFXS65RHL/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/IECQNDNGJWMVNT4MVGY5FVFEBPKX2227/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -171,7 +171,7 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.244];
+	NEURAL_HAM(-0.00)[-0.321];
 	RCPT_COUNT_GT_50(0.00)[146];
 	FROM_NEQ_ENVFROM(0.00)[jlayton@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
 	DKIM_TRACE(0.00)[kernel.org:-];
@@ -180,70 +180,74 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
-X-Rspamd-Queue-Id: 778CD4123A4
+X-Rspamd-Queue-Id: 25C794123AE
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-With i_ino now u64, CIFS/SMB can store the full 64-bit uniqueid in
-i_ino without the XOR-folding hack previously needed on 32-bit
-architectures.
+Now that i_ino is u64, cifs_uniqueid_to_ino_t() is a trivial identity
+function. Remove it and use fattr->cf_uniqueid directly at both call
+sites.
 
-- Simplify cifs_uniqueid_to_ino_t() to return u64 directly
-- Update hash variable type in cifs_get_inode_info()
-- Update format strings from %lu to %llu
+Also remove the now-unused #include <linux/hash.h>, which was only
+needed for the old XOR-folding logic.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- fs/smb/client/cifsfs.h | 12 +++---------
- fs/smb/client/inode.c  |  4 ++--
- 2 files changed, 5 insertions(+), 11 deletions(-)
+ fs/smb/client/cifsfs.h  | 11 -----------
+ fs/smb/client/inode.c   |  2 +-
+ fs/smb/client/readdir.c |  2 +-
+ 3 files changed, 2 insertions(+), 13 deletions(-)
 
 diff --git a/fs/smb/client/cifsfs.h b/fs/smb/client/cifsfs.h
-index e320d39b01f5eca8033cc516f6f1a2f07276676c..4a1f18022c711a7ff5b141d08ec6cac8483a6b6a 100644
+index 4a1f18022c711a7ff5b141d08ec6cac8483a6b6a..f71b490b548c0274f314dd0dc76bf570ee3cfd09 100644
 --- a/fs/smb/client/cifsfs.h
 +++ b/fs/smb/client/cifsfs.h
-@@ -14,18 +14,12 @@
+@@ -9,19 +9,8 @@
+ #ifndef _CIFSFS_H
+ #define _CIFSFS_H
+ 
+-#include <linux/hash.h>
+-
  #define ROOT_I 2
  
- /*
-- * ino_t is 32-bits on 32-bit arch. We have to squash the 64-bit value down
-- * so that it will fit. We use hash_64 to convert the value to 31 bits, and
-- * then add 1, to ensure that we don't end up with a 0 as the value.
-+ * With i_ino being u64, we can store the full 64-bit uniqueid directly.
-  */
--static inline ino_t
-+static inline u64
- cifs_uniqueid_to_ino_t(u64 fileid)
- {
--	if ((sizeof(ino_t)) < (sizeof(u64)))
--		return (ino_t)hash_64(fileid, (sizeof(ino_t) * 8) - 1) + 1;
+-/*
+- * With i_ino being u64, we can store the full 64-bit uniqueid directly.
+- */
+-static inline u64
+-cifs_uniqueid_to_ino_t(u64 fileid)
+-{
+-	return fileid;
+-}
 -
--	return (ino_t)fileid;
--
-+	return fileid;
- }
- 
  static inline void cifs_set_time(struct dentry *dentry, unsigned long time)
+ {
+ 	dentry->d_fsdata = (void *) time;
 diff --git a/fs/smb/client/inode.c b/fs/smb/client/inode.c
-index d4d3cfeb6c90ee6dc71fcd9a8de31a1785cbb9ef..102e7615b658726551e9b01ba25065d1f0c505ac 100644
+index 102e7615b658726551e9b01ba25065d1f0c505ac..a82f4fbf8146572e522080bcd7df41153403978d 100644
 --- a/fs/smb/client/inode.c
 +++ b/fs/smb/client/inode.c
-@@ -1611,13 +1611,13 @@ inode_has_hashed_dentries(struct inode *inode)
- struct inode *
- cifs_iget(struct super_block *sb, struct cifs_fattr *fattr)
- {
--	unsigned long hash;
-+	u64 hash;
- 	struct inode *inode;
- 
- retry_iget5_locked:
+@@ -1618,7 +1618,7 @@ cifs_iget(struct super_block *sb, struct cifs_fattr *fattr)
  	cifs_dbg(FYI, "looking for uniqueid=%llu\n", fattr->cf_uniqueid);
  
--	/* hash down to 32-bits on 32-bit arch */
-+	/* With u64 i_ino, we can use the full uniqueid */
- 	hash = cifs_uniqueid_to_ino_t(fattr->cf_uniqueid);
+ 	/* With u64 i_ino, we can use the full uniqueid */
+-	hash = cifs_uniqueid_to_ino_t(fattr->cf_uniqueid);
++	hash = fattr->cf_uniqueid;
  
  	inode = iget5_locked(sb, hash, cifs_find_inode, cifs_init_inode, fattr);
+ 	if (inode) {
+diff --git a/fs/smb/client/readdir.c b/fs/smb/client/readdir.c
+index 8615a8747b7f0127a781b9b3795535df4c9b73cd..cec74bd2e2302c3baeba8d7e1348ba5114d4b1e4 100644
+--- a/fs/smb/client/readdir.c
++++ b/fs/smb/client/readdir.c
+@@ -919,7 +919,7 @@ static bool cifs_dir_emit(struct dir_context *ctx,
+ {
+ 	size_t delta_bytes = 0;
+ 	bool rc, added = false;
+-	ino_t ino = cifs_uniqueid_to_ino_t(fattr->cf_uniqueid);
++	ino_t ino = fattr->cf_uniqueid;
+ 
+ 	rc = dir_emit(ctx, name, namelen, ino, fattr->cf_dtype);
+ 	if (!rc)
 
 -- 
 2.53.0
