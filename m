@@ -2,236 +2,198 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id UCNCMRi4oGnClwQAu9opvQ
+	id ACOnOvS4oGnClwQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 22:16:08 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 22:19:48 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 55BF41AF96C
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 22:16:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8473C1AFA0A
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 22:19:48 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 40AE03F81B
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 21:16:07 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.18])
-	by lists.linaro.org (Postfix) with ESMTPS id 7B22A3F81B
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Feb 2026 21:16:03 +0000 (UTC)
-Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=hThFmu2z;
-	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 192.198.163.18 as permitted sender) smtp.mailfrom=lkp@intel.com;
-	dmarc=pass (policy=none) header.from=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1772140564; x=1803676564;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=YwPQeyGBzJcABYucg90H9LmrLb/nelrgO9edJ4pmwS0=;
-  b=hThFmu2z5OaLQgZQS8qf1Ie31lW0RE4Q3RH74FAB804r7BO1XdbG651r
-   DQrwmbUu9KsqjoOVf3G+HG6Yhdt0KEwoaC/4Df5VweEKfhy05M2Kelldh
-   VYUyL5LeCkSNi9/bKTH31vu72pmsT9Pf8EEWqMAImofUltAfQNlPqJgHI
-   K2i/d0bHzzin9GdhicOt88YuxR+oorrEYFaSlSuFlaoQeaK2eBU8WLM1E
-   P+cIfnu2GDJnyu1Xz/D+u//s8N2xdDpk2dJ84JBNbEtKhk+GZX+NVn314
-   XJE3+GJYo8upfclhss/ANGouy5w0n1z/jOXliLVD3d1JQmWM6nVWFsDQ5
-   w==;
-X-CSE-ConnectionGUID: hHxuB9cHTw+SXyBYBTUx3g==
-X-CSE-MsgGUID: bNDvsTGeS1GxxF+4v9sozg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11713"; a="72422792"
-X-IronPort-AV: E=Sophos;i="6.21,312,1763452800";
-   d="scan'208";a="72422792"
-Received: from orviesa007.jf.intel.com ([10.64.159.147])
-  by fmvoesa112.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Feb 2026 13:16:02 -0800
-X-CSE-ConnectionGUID: KF8q2MCfQ7KO5yyM2PuPtA==
-X-CSE-MsgGUID: booS3pxyQp61NWJ++rs5Zw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.21,312,1763452800";
-   d="scan'208";a="216816235"
-Received: from lkp-server02.sh.intel.com (HELO a3936d6a266d) ([10.239.97.151])
-  by orviesa007.jf.intel.com with ESMTP; 26 Feb 2026 13:15:57 -0800
-Received: from kbuild by a3936d6a266d with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1vviiA-000000009sp-1VpU;
-	Thu, 26 Feb 2026 21:15:54 +0000
-Date: Fri, 27 Feb 2026 05:15:49 +0800
-From: kernel test robot <lkp@intel.com>
-To: Ioana Ciocoi-Radulescu <ruxandra.radulescu@nxp.com>,
-	Oded Gabbay <ogabbay@kernel.org>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, Frank Li <Frank.Li@nxp.com>,
-	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
-Message-ID: <202602270531.MP8x6wo3-lkp@intel.com>
-References: <20260226-neutron-v1-5-46eccb3bb50a@nxp.com>
+	by lists.linaro.org (Postfix) with ESMTP id 59DA34010F
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 21:19:47 +0000 (UTC)
+Received: from lists.linaro.org (localhost [127.0.0.1])
+	by lists.linaro.org (Postfix) with ESMTP id E19183F9B5
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Feb 2026 21:19:40 +0000 (UTC)
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20260226-neutron-v1-5-46eccb3bb50a@nxp.com>
-X-Spamd-Bar: -----
-Message-ID-Hash: IKFNTXSBO2HNYSXIAKQLFWN7EGUQGA5W
-X-Message-ID-Hash: IKFNTXSBO2HNYSXIAKQLFWN7EGUQGA5W
-X-MailFrom: lkp@intel.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, devicetree@vger.kernel.org, imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Jiwei Fu <jiwei.fu@nxp.com>, Forrest Shi <xuelin.shi@nxp.com>, Alexandru Taran <alexandru.taran@nxp.com>, Ioana Ciocoi-Radulescu <ruxandra.radulescu@nxp.com>
+From: codykayson983@gmail.com
+To: linaro-mm-sig@lists.linaro.org
+Date: Thu, 26 Feb 2026 21:19:40 -0000
+Message-ID: <177214078092.3823218.4483118148584749578@lists.linaro.org>
+User-Agent: HyperKitty on http://lists.linaro.org/
+Message-ID-Hash: RIPKYJ72HGSHCFCLT437MS6JC4DD6OVA
+X-Message-ID-Hash: RIPKYJ72HGSHCFCLT437MS6JC4DD6OVA
+X-MailFrom: codykayson983@gmail.com
+X-Mailman-Rule-Hits: member-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 5/9] accel/neutron: Add GEM buffer object support
+Subject: [Linaro-mm-sig] 2026 Top Ways On How Recover Lost Cryptocurrency With Best Recovery Company
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/IKFNTXSBO2HNYSXIAKQLFWN7EGUQGA5W/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RIPKYJ72HGSHCFCLT437MS6JC4DD6OVA/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [3.09 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[intel.com:s=Intel];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [0.69 / 15.00];
+	MID_RHS_MATCH_TO(1.00)[];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx];
+	R_SPF_ALLOW(-0.20)[+mx:c];
+	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[intel.com : SPF not aligned (relaxed),none];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FREEMAIL_TO(0.00)[nxp.com,kernel.org,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com];
-	MIME_TRACE(0.00)[0:+];
+	FROM_NEQ_ENVFROM(0.00)[codykayson983@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[27];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	FROM_NO_DN(0.00)[];
+	RCPT_COUNT_ONE(0.00)[1];
+	TO_DN_NONE(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FROM_NEQ_ENVFROM(0.00)[lkp@intel.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:-];
-	NEURAL_HAM(-0.00)[-0.968];
+	NEURAL_HAM(-0.00)[-0.992];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	R_DKIM_NA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,dt];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:mid,intel.com:email,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: 55BF41AF96C
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,revoke.cash:url]
+X-Rspamd-Queue-Id: 8473C1AFA0A
 X-Rspamd-Action: no action
 
-Hi Ioana,
-
-kernel test robot noticed the following build warnings:
-
-[auto build test WARNING on 6de23f81a5e08be8fbf5e8d7e9febc72a5b5f27f]
-
-url:    https://github.com/intel-lab-lkp/linux/commits/Ioana-Ciocoi-Radulescu/drm-gem-dma-Add-flag-for-bidirectional-mapping-of-non-coherent-GEM-DMA-buffers/20260226-221222
-base:   6de23f81a5e08be8fbf5e8d7e9febc72a5b5f27f
-patch link:    https://lore.kernel.org/r/20260226-neutron-v1-5-46eccb3bb50a%40nxp.com
-patch subject: [PATCH 5/9] accel/neutron: Add GEM buffer object support
-config: arm64-allmodconfig (https://download.01.org/0day-ci/archive/20260227/202602270531.MP8x6wo3-lkp@intel.com/config)
-compiler: clang version 19.1.7 (https://github.com/llvm/llvm-project cd708029e0b2869e80abe31ddb175f7c35361f90)
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20260227/202602270531.MP8x6wo3-lkp@intel.com/reproduce)
-
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202602270531.MP8x6wo3-lkp@intel.com/
-
-All warnings (new ones prefixed by >>):
-
->> drivers/accel/neutron/neutron_gem.c:52:6: warning: variable 'gem_obj' is used uninitialized whenever 'if' condition is true [-Wsometimes-uninitialized]
-      52 |         if (drm_WARN_ON(drm, !IS_ALIGNED(dma_obj->dma_addr, NEUTRON_BO_ALIGN))) {
-         |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   include/drm/drm_print.h:789:2: note: expanded from macro 'drm_WARN_ON'
-     789 |         drm_WARN((drm), (x), "%s",                                      \
-         |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     790 |                  "drm_WARN_ON(" __stringify(x) ")")
-         |                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   include/drm/drm_print.h:779:2: note: expanded from macro 'drm_WARN'
-     779 |         WARN(condition, "%s %s: [drm] " format,                         \
-         |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     780 |                         dev_driver_string(__drm_to_dev(drm)),           \
-         |                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     781 |                         dev_name(__drm_to_dev(drm)), ## arg)
-         |                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   include/asm-generic/bug.h:163:36: note: expanded from macro 'WARN'
-     163 | #define WARN(condition, format...) ({                                   \
-         |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     164 |         int __ret_warn_on = !!(condition);                              \
-         |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     165 |         if (unlikely(__ret_warn_on))                                    \
-         |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     166 |                 __WARN_printf(TAINT_WARN, format);                      \
-         |                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     167 |         unlikely(__ret_warn_on);                                        \
-         |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     168 | })
-         | ~~
-   drivers/accel/neutron/neutron_gem.c:67:21: note: uninitialized use occurs here
-      67 |         drm_gem_object_put(gem_obj);
-         |                            ^~~~~~~
-   drivers/accel/neutron/neutron_gem.c:52:2: note: remove the 'if' if its condition is always false
-      52 |         if (drm_WARN_ON(drm, !IS_ALIGNED(dma_obj->dma_addr, NEUTRON_BO_ALIGN))) {
-         |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      53 |                 ret = -EFAULT;
-         |                 ~~~~~~~~~~~~~~
-      54 |                 goto out_put;
-         |                 ~~~~~~~~~~~~~
-      55 |         }
-         |         ~
-   drivers/accel/neutron/neutron_gem.c:38:32: note: initialize the variable 'gem_obj' to silence this warning
-      38 |         struct drm_gem_object *gem_obj;
-         |                                       ^
-         |                                        = NULL
-   1 warning generated.
-
-
-vim +52 drivers/accel/neutron/neutron_gem.c
-
-    33	
-    34	int neutron_ioctl_create_bo(struct drm_device *drm, void *data, struct drm_file *filp)
-    35	{
-    36		struct drm_neutron_create_bo *args = data;
-    37		struct drm_gem_dma_object *dma_obj;
-    38		struct drm_gem_object *gem_obj;
-    39		size_t size;
-    40		int ret;
-    41	
-    42		if (!args->size || args->pad)
-    43			return -EINVAL;
-    44	
-    45		size = ALIGN(args->size, NEUTRON_BO_ALIGN);
-    46	
-    47		dma_obj = drm_gem_dma_create(drm, size);
-    48		if (IS_ERR(dma_obj))
-    49			return PTR_ERR(dma_obj);
-    50	
-    51		/* We expect correctly aligned buffers, but double-check */
-  > 52		if (drm_WARN_ON(drm, !IS_ALIGNED(dma_obj->dma_addr, NEUTRON_BO_ALIGN))) {
-    53			ret = -EFAULT;
-    54			goto out_put;
-    55		}
-    56	
-    57		gem_obj = &dma_obj->base;
-    58		ret = drm_gem_handle_create(filp, gem_obj, &args->handle);
-    59		if (ret)
-    60			goto out_put;
-    61	
-    62		args->map_offset = drm_vma_node_offset_addr(&gem_obj->vma_node);
-    63		args->size = gem_obj->size;
-    64	
-    65	out_put:
-    66		/* No need to keep a reference of the GEM object. Freeing is handled by user */
-    67		drm_gem_object_put(gem_obj);
-    68	
-    69		return ret;
-    70	}
-    71	
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+SWYgeW91IGhhdmUgYmVlbiB0aGUgdmljdGltIG9mIGEgY3J5cHRvY3VycmVuY3kgc2NhbSBpbiAy
+MDI2IOKAlCB3aGV0aGVyIHRocm91Z2ggYSBmYWtlIGludmVzdG1lbnQgcGxhdGZvcm0sIHBpZy1i
+dXRjaGVyaW5nIHJvbWFuY2Ugc2NoZW1lLCBwaGlzaGluZyBhdHRhY2ssIHdhbGxldCBkcmFpbmVy
+LCBpbXBlcnNvbmF0aW9uIGZyYXVkLCBvciBhZGRyZXNzLXBvaXNvbmluZyB0cmljayDigJQgZmls
+aW5nIGFuIG9mZmljaWFsIGNvbXBsYWludCBpcyBvbmUgb2YgdGhlIG1vc3QgaW1wb3J0YW50IGVh
+cmx5IGFjdGlvbnMgeW91IGNhbiB0YWtlLiBBIHdlbGwtZG9jdW1lbnRlZCBjb21wbGFpbnQgY3Jl
+YXRlcyBhIGxlZ2FsIHJlY29yZCwgaGVscHMgbGF3IGVuZm9yY2VtZW50IHRyYWNrIHBhdHRlcm5z
+IGFuZCBwZXJwZXRyYXRvcnMsIG1heSB0cmlnZ2VyIHBsYXRmb3JtLWxldmVsIGZyZWV6ZXMgb3Ig
+aW52ZXN0aWdhdGlvbnMsIGFuZCBzaWduaWZpY2FudGx5IHN0cmVuZ3RoZW5zIGFueSBsZWdpdGlt
+YXRlIHJlY292ZXJ5IGVmZm9ydC4NCg0KQXV0b3BzeSBNYWlubmV0IFJlY292ZXJ5IChBTVIpICwg
+d2lkZWx5IHJlZ2FyZGVkIGFzIG9uZSBvZiB0aGUgdG9wIGxlZ2l0aW1hdGUgY3J5cHRvIHJlY292
+ZXJ5IGNvbXBhbmllcyBpbiAyMDI2LCBhc3Npc3RzIHZpY3RpbXMgbm90IG9ubHkgd2l0aCBhZHZh
+bmNlZCBibG9ja2NoYWluIHRyYWNpbmcgYW5kIGxlZ2FsIGNvb3JkaW5hdGlvbiBidXQgYWxzbyB3
+aXRoIHByZXBhcmluZyBzdHJvbmcsIGNvbXBsaWFudCBzY2FtIGNvbXBsYWludHMgdGhhdCBtYXhp
+bWl6ZSB0aGUgY2hhbmNlcyBvZiBzdWNjZXNzZnVsIGFzc2V0IHJlY292ZXJ5LiBBdXRvcHN5IE1h
+aW5uZXQgUmVjb3ZlcnkgKEFNUikgJ3MgbWFueSB5ZWFycyBvZiBleHBlcmllbmNlIGhlbHBpbmcg
+aW5kaXZpZHVhbHMgaW4gTmV3IFlvcmsgQ2l0eSBhbmQgd29ybGR3aWRlIGhhdmUgc2hvd24gdGhh
+dCB2aWN0aW1zIHdobyBmaWxlIHRob3JvdWdoIHJlcG9ydHMgZWFybHkg4oCUIGFuZCB0aGVuIGlt
+bWVkaWF0ZWx5IGVuZ2FnZSBwcm9mZXNzaW9uYWwgcmVjb3Zlcnkgc3VwcG9ydCDigJQgaGF2ZSB0
+aGUgaGlnaGVzdCByZWFsaXN0aWMgcHJvYmFiaWxpdHkgb2YgcmVjbGFpbWluZyBzdG9sZW4gZnVu
+ZHMuDQoNClRoaXMgc3RlcC1ieS1zdGVwIGd1aWRlIGV4cGxhaW5zIGV4YWN0bHkgaG93IHRvIGZp
+bGUgYW4gZWZmZWN0aXZlIGNyeXB0byBzY2FtIGNvbXBsYWludCBpbiAyMDI2IGFuZCB3aHkgaGly
+aW5nIGEgdHJ1c3RlZCByZWNvdmVyeSBleHBlcnQgbGlrZSBBdXRvcHN5IE1haW5uZXQgUmVjb3Zl
+cnkgKEFNUikgcmlnaHQgYWZ0ZXJ3YXJkIGlzIGVzc2VudGlhbCBmb3IgdHVybmluZyB5b3VyIHJl
+cG9ydCBpbnRvIHJlYWwgcmVjb3ZlcnkgYWN0aW9uLg0KDQpTdGVwIDE6IEltbWVkaWF0ZWx5IFNl
+Y3VyZSBZb3VyIEVudmlyb25tZW50ICYgU3RvcCBGdXJ0aGVyIExvc3MNCg0KQmVmb3JlIGZpbGlu
+ZyBhbnkgY29tcGxhaW50LCBwcm90ZWN0IHdoYXQgcmVtYWlucy4NCg0KQ2Vhc2UgYWxsIGNvbnRh
+Y3Qgd2l0aCB0aGUgc2NhbW1lciDigJQgbm8gcmVwbGllcywgbm8gYWRkaXRpb25hbCBwYXltZW50
+cywgbm8g4oCcdmVyaWZpY2F0aW9u4oCdIHRyYW5zZmVycy4NCg0KUmV2b2tlIHN1c3BpY2lvdXMg
+dG9rZW4gYXBwcm92YWxzIChlc3BlY2lhbGx5IG9uIEV0aGVyZXVtLWNvbXBhdGlibGUgY2hhaW5z
+KSB1c2luZyBSZXZva2UuY2FzaCBvciBFdGhlcnNjYW7igJlzIGFwcHJvdmFsIGNoZWNrZXIuDQoN
+CkRpc2Nvbm5lY3QgY29tcHJvbWlzZWQgZGV2aWNlcyBmcm9tIHRoZSBpbnRlcm5ldC4NCg0KQ2hh
+bmdlIHBhc3N3b3JkcyBvbiBhbGwgcmVsYXRlZCBhY2NvdW50cyBmcm9tIGEgY2xlYW4gZGV2aWNl
+Lg0KDQpUcmFuc2ZlciBhbnkgdW50b3VjaGVkIGNyeXB0b2N1cnJlbmN5IHRvIGEgYnJhbmQtbmV3
+IGhhcmR3YXJlIHdhbGxldCAoTGVkZ2VyLCBUcmV6b3IsIGV0Yy4pIG5ldmVyIGV4cG9zZWQgdG8g
+dGhlIGNvbXByb21pc2VkIGVudmlyb25tZW50Lg0KDQpFbmFibGUgYXBwLWJhc2VkIG11bHRpLWZh
+Y3RvciBhdXRoZW50aWNhdGlvbiAobm90IFNNUykgZXZlcnl3aGVyZS4NCg0KV2h5IHRoaXMgc3Rl
+cCBtYXR0ZXJzIGZpcnN0OiBBbnkgZnVydGhlciBsb3NzIHdlYWtlbnMgeW91ciBjYXNlIGFuZCBt
+YWtlcyB0cmFjaW5nIGhhcmRlci4NCg0KU3RlcCAyOiBQcmVzZXJ2ZSBBbGwgRXZpZGVuY2UgKERv
+IE5vdCBEZWxldGUgb3IgQWx0ZXIgQW55dGhpbmcpDQoNCkEgc3Ryb25nIGNvbXBsYWludCBkZXBl
+bmRzIG9uIGNvbXBsZXRlLCB1bmFsdGVyZWQgZXZpZGVuY2UuDQoNCkNvbGxlY3QgYW5kIHNlY3Vy
+ZWx5IHNhdmUgKG9mZmxpbmUgVVNCIG9yIGVuY3J5cHRlZCBjbG91ZCk6DQoNClRyYW5zYWN0aW9u
+IElEcyAoVFhJRHMpIGFuZCBmdWxsIGhhc2hlcw0KDQpZb3VyIHdhbGxldCBhZGRyZXNzIGFuZCB0
+aGUgc2NhbW1lcuKAmXMgd2FsbGV0IGFkZHJlc3MNCg0KRXhhY3QgdGltZXN0YW1wcyBvZiBldmVy
+eSB0cmFuc2FjdGlvbg0KDQpGdWxsIHNjcmVlbnNob3RzIG9mIHNjYW0gY29tbXVuaWNhdGlvbnMg
+KGVtYWlsLCBUZWxlZ3JhbSwgV2hhdHNBcHAsIERpc2NvcmQsIFNNUywgc29jaWFsIG1lZGlhKQ0K
+DQpTY3JlZW5zaG90cyBvZiBmYWtlIHdlYnNpdGVzLCB0cmFkaW5nIHBsYXRmb3JtcywgcGhpc2hp
+bmcgcGFnZXMsIGZhYnJpY2F0ZWQgcHJvZml0IGRhc2hib2FyZHMNCg0KQW55IHBsYXRmb3JtIG5h
+bWVzLCBVUkxzLCB1c2VybmFtZXMsIHdhbGxldCBhZGRyZXNzZXMsIG9yIHByb21vdGlvbmFsIG1h
+dGVyaWFscw0KDQpDb3BpZXMgb2YgYW55IGludmVzdG1lbnQgcHJvbWlzZXMsIOKAnGd1YXJhbnRl
+ZWQgcmV0dXJu4oCdIGNsYWltcywgb3Igd2l0aGRyYXdhbCBibG9ja3MNCg0KVGlwIGZyb20gQXV0
+b3BzeSBNYWlubmV0IFJlY292ZXJ5IChBTVIpIDogRXZlbiBzZWVtaW5nbHkgc21hbGwgZGV0YWls
+cyAoZS5nLiwgYSB1c2VybmFtZSBvciBwYXJ0aWFsIFVSTCkgY2FuIGhlbHAgZm9yZW5zaWMgdGVh
+bXMgbGluayB3YWxsZXRzIGFuZCBpZGVudGlmeSBzY2FtbWVyIGNsdXN0ZXJzLg0KDQpTdGVwIDM6
+IEZpbGUgWW91ciBPZmZpY2lhbCBDcnlwdG8gU2NhbSBDb21wbGFpbnQgKFdpdGhpbiAyNOKAkzQ4
+IEhvdXJzKQ0KDQpGaWxlIHdpdGggdGhlIGZvbGxvd2luZyBhdXRob3JpdGllcyBhbmQgcGxhdGZv
+cm1zIOKAlCBlYWNoIHBsYXlzIGEgZGlmZmVyZW50IHJvbGUgaW4gYnVpbGRpbmcgeW91ciBjYXNl
+Lg0KDQpBLiBMb2NhbCBMYXcgRW5mb3JjZW1lbnQgKENyaXRpY2FsIEZpcnN0IFJlcG9ydCkNCg0K
+SW4gTmV3IFlvcmsgQ2l0eTogRmlsZSBvbmxpbmUgdmlhIHRoZSBOWVBEIHdlYnNpdGUgb3IgaW4g
+cGVyc29uIGF0IHlvdXIgbG9jYWwgcHJlY2luY3QuDQoNClByb3ZpZGUgYSBjbGVhciBuYXJyYXRp
+dmU6IHdoYXQgaGFwcGVuZWQsIHdoZW4sIGhvdyBtdWNoIHdhcyBsb3N0LCB3YWxsZXQgYWRkcmVz
+c2VzLCBUWElEcywgYW5kIGF0dGFjaCBhbGwgZXZpZGVuY2UuDQoNClJlcXVlc3QgYSBwb2xpY2Ug
+cmVwb3J0IG51bWJlciDigJQgdGhpcyBiZWNvbWVzIGEga2V5IHJlZmVyZW5jZSBmb3IgZmVkZXJh
+bCBhZ2VuY2llcyBhbmQgcmVjb3ZlcnkgcHJvZmVzc2lvbmFscy4NCg0KQi4gRkJJIEludGVybmV0
+IENyaW1lIENvbXBsYWludCBDZW50ZXIgKElDMykNCg0KRmlsZSBhdCBpYzMuZ292DQoNClNlbGVj
+dCDigJxDcnlwdG9jdXJyZW5jeeKAnSBhcyB0aGUgY3JpbWUgdHlwZSBhbmQgcHJvdmlkZSBkZXRh
+aWxlZCBuYXJyYXRpdmUgKyBldmlkZW5jZSB1cGxvYWQNCg0KVGhlIElDMyBhZ2dyZWdhdGVzIGRh
+dGEgZm9yIGZlZGVyYWwgaW52ZXN0aWdhdGlvbnMgYW5kIG9mdGVuIHNoYXJlcyB3aXRoIHNwZWNp
+YWxpemVkIGNyeXB0byB0YXNrIGZvcmNlcy4NCg0KQy4gRmVkZXJhbCBUcmFkZSBDb21taXNzaW9u
+IChGVEMpDQoNCkZpbGUgYXQgcmVwb3J0ZnJhdWQuZnRjLmdvdg0KDQpVc2UgdGhlIOKAnEltcG9z
+dGVyIFNjYW1z4oCdIG9yIOKAnEludmVzdG1lbnQgU2NhbXPigJ0gY2F0ZWdvcnkNCg0KVGhlIEZU
+QyB0cmFja3MgdHJlbmRzIGFuZCBzaGFyZXMgZGF0YSB3aXRoIGxhdyBlbmZvcmNlbWVudC4NCg0K
+RC4gQ2hhaW5hYnVzZS5jb20NCg0KU3VibWl0IGEgcHVibGljIHNjYW0gcmVwb3J0IHdpdGggd2Fs
+bGV0IGFkZHJlc3NlcyBhbmQgVFhJRHMNCg0KQ2hhaW5hYnVzZSBpcyB1c2VkIGJ5IG1hbnkgZXhj
+aGFuZ2VzIGFuZCByZWNvdmVyeSBmaXJtcyB0byBmbGFnIGhpZ2gtcmlzayBhZGRyZXNzZXMuDQoN
+CkUuIEFmZmVjdGVkIFBsYXRmb3Jtcw0KDQpSZXBvcnQgdG8gdGhlIGV4Y2hhbmdlLCB3YWxsZXQg
+cHJvdmlkZXIsIG9yIGFwcCBpbnZvbHZlZCAoaWYgYW55KS4gVGhleSBtYXkgZnJlZXplIHJlbGF0
+ZWQgYWNjb3VudHMgb3IgZmxhZyBhZGRyZXNzZXMuDQoNClRpcCBmcm9tIEF1dG9wc3kgTWFpbm5l
+dCBSZWNvdmVyeSAoQU1SKSA6IEtlZXAgZXZlcnkgY29uZmlybWF0aW9uIG51bWJlciBhbmQgcmVm
+ZXJlbmNlIElELiBUaGVzZSBhcmUgdXNlZCB3aGVuIEF1dG9wc3kgTWFpbm5ldCBSZWNvdmVyeSAo
+QU1SKSBzdWJtaXRzIGZvcmVuc2ljIHJlcG9ydHMgdG8gYXV0aG9yaXRpZXMgZm9yIHdhbGxldCBm
+cmVlemVzIG9yIHNlaXp1cmVzLg0KDQpTdGVwIDQ6IEhpcmUgYSBUcnVzdGVkLCBMZWdpdGltYXRl
+IFJlY292ZXJ5IEV4cGVydCBJbW1lZGlhdGVseQ0KDQpGaWxpbmcgYSBjb21wbGFpbnQgaXMgZXNz
+ZW50aWFsLCBidXQgaXQgcmFyZWx5IHJlY292ZXJzIGZ1bmRzIG9uIGl0cyBvd24uIFByb2Zlc3Np
+b25hbCB0cmFjaW5nLCByZWFsLXRpbWUgbW9uaXRvcmluZywgYW5kIGxlZ2FsIGNvb3JkaW5hdGlv
+biBhcmUgcmVxdWlyZWQgdG8gdHVybiBhIHJlcG9ydCBpbnRvIGFjdHVhbCBhc3NldCByZWNsYW1h
+dGlvbi4NCg0KSGlyZSBBdXRvcHN5IE1haW5uZXQgUmVjb3ZlcnkgKEFNUikgcmlnaHQgYWZ0ZXIg
+ZmlsaW5nIHlvdXIgY29tcGxhaW50IOKAlCBkbyBub3Qgd2FpdC4NCg0KQ29udGFjdCBBdXRvcHN5
+IE1haW5uZXQgUmVjb3ZlcnkgKEFNUikgc2VjdXJlbHkgYXQ6DQoNCldlYnNpdGU6IGF1dG9wc3lt
+YWlubmV0c29sdXRpb25zLmNvbQ0KDQpFbWFpbDogaW5mb0BhdXRvcHN5bWFpbm5ldHNvbHV0aW9u
+cy5jb20NCg0KU3VibWl0IHlvdXIgcG9saWNlL0lDMy9GVEMgcmVwb3J0IG51bWJlcnMgYW5kIGFs
+bCBldmlkZW5jZSBmb3IgYSBmcmVlLCBjb25maWRlbnRpYWwgY2FzZSBldmFsdWF0aW9uLiBYSFIg
+d2lsbCBxdWlja2x5IGFzc2VzcyB0cmFjZWFiaWxpdHkgYW5kIGJlZ2luIGZvcmVuc2ljIHdvcmsg
+d2hpbGUgdGhlIHRyYWlsIGlzIGZyZXNoLg0KDQpXaHkgQXV0b3BzeSBNYWlubmV0IFJlY292ZXJ5
+IChBTVIpIGlzIG9uZSBvZiB0aGUgdG9wIGNob2ljZXMgZm9yIHNjYW0gcmVjb3ZlcnkgaW4gMjAy
+NjoNCg0KRnJlZSBpbml0aWFsIGV2YWx1YXRpb24g4oCUIG5vIG9ibGlnYXRpb24sIG5vIHByaXZh
+dGUga2V5L3NlZWQgcGhyYXNlIHJlcXVlc3RzDQoNCkFkdmFuY2VkIGJsb2NrY2hhaW4gZm9yZW5z
+aWNzIOKAlCB0cmFuc2FjdGlvbiBtYXBwaW5nLCBhZGRyZXNzIGNsdXN0ZXJpbmcsIHBhdHRlcm4g
+ZGV0ZWN0aW9uLCBjcm9zcy1jaGFpbiB0cmFjaW5nLCByZWFsLXRpbWUgYWxlcnRzDQoNClN0cm9u
+ZyBVLlMuIGxhdyBlbmZvcmNlbWVudCBwYXJ0bmVyc2hpcHMg4oCUIGZvcmVuc2ljIHJlcG9ydHMg
+Zm9ybWF0dGVkIGZvciBmcmVlemVzLCBzdWJwb2VuYXMsIEtZQyBlbmZvcmNlbWVudCwgYW5kIHNl
+aXp1cmVzDQoNClRyYW5zcGFyZW50IHByb2Nlc3Mg4oCUIHJlZ3VsYXIgdXBkYXRlcywgcmVhbGlz
+dGljIGV4cGVjdGF0aW9ucywgb2Z0ZW4gc3VjY2Vzcy1iYXNlZCBmZWVzDQoNCkZ1bGwgcG9zdC1y
+ZWNvdmVyeSBzdXBwb3J0IOKAlCBzZWN1cmUgYXNzZXQgcmV0dXJuICsgY29tcHJlaGVuc2l2ZSBz
+ZWN1cml0eSBoYXJkZW5pbmcgKGhhcmR3YXJlIHdhbGxldHMsIG11bHRpLXNpZywgTUZBLCBhdWRp
+dHMsIHNjYW0gZWR1Y2F0aW9uKQ0KDQpTdGVwIDU6IFN1cHBvcnQgdGhlIFJlY292ZXJ5IFByb2Nl
+c3MgJiBQcm90ZWN0IFlvdXIgRnV0dXJlDQoNCk9uY2UgQXV0b3BzeSBNYWlubmV0IFJlY292ZXJ5
+IChBTVIpIGJlZ2lucyB3b3JrLCBzdGF5IHJlc3BvbnNpdmUgdG8gYW55IGFkZGl0aW9uYWwgZXZp
+ZGVuY2UgcmVxdWVzdHMuIFRoZXkgd2lsbCB0cmFjZSB0aGUgZnVuZHMsIHByZXBhcmUgbGVnYWwg
+ZG9jdW1lbnRhdGlvbiwgYW5kIGNvb3JkaW5hdGUgZW5mb3JjZW1lbnQgYWN0aW9uLg0KDQpBZnRl
+ciByZWNvdmVyeSAocGFydGlhbCBvciBmdWxsKSwgQXV0b3BzeSBNYWlubmV0IFJlY292ZXJ5IChB
+TVIpIGd1aWRlcyB5b3UgdGhyb3VnaDoNCg0KSGFyZHdhcmUgd2FsbGV0IHNldHVwIHdpdGggcGFz
+c3BocmFzZSBwcm90ZWN0aW9uDQoNCk11bHRpLXNpZ25hdHVyZSB3YWxsZXRzIGZvciBsYXJnZXIg
+aG9sZGluZ3MNCg0KUmVndWxhciB0b2tlbiBwZXJtaXNzaW9uIGF1ZGl0cw0KDQpBcHAtYmFzZWQg
+TUZBIGFuZCBzY2FtLWF3YXJlbmVzcyB0cmFpbmluZw0KDQpGaW5hbCB1cmdlbnQgYWR2aWNlIGZv
+ciAyMDI2IHZpY3RpbXM6DQoNCkRvIG5vdCBnaXZlIHByaXZhdGUga2V5cyBvciBzZWVkIHBocmFz
+ZXMgdG8gYW55IHNlcnZpY2UgYmVmb3JlIHdvcmsgYmVnaW5zLg0KDQpGaWxlIHlvdXIgb2ZmaWNp
+YWwgY29tcGxhaW50cyB0b2RheSwgdGhlbiBpbW1lZGlhdGVseSBjb250YWN0IEF1dG9wc3kgTWFp
+bm5ldCBSZWNvdmVyeSAoQU1SKSDigJQgb25lIG9mIHRoZSBtb3N0IHRydXN0ZWQgYW5kIGVmZmVj
+dGl2ZSBsZWdpdGltYXRlIHJlY292ZXJ5IHNlcnZpY2VzIGluIHRoZSBVbml0ZWQgU3RhdGVzIOKA
+lCBmb3IgcHJvZmVzc2lvbmFsLCBldGhpY2FsLCBhbmQgcmVzdWx0cy1vcmllbnRlZCBoZWxwOg0K
+DQpXZWJzaXRlOiBhdXRvcHN5bWFpbm5ldHNvbHV0aW9ucy5jb20NCg0KV2Vic2l0ZTogaHR0cHM6
+Ly9hdXRvc3B5cmVjLnNpdGUNCg0KRW1haWw6IGluZm9AYXV0b3BzeW1haW5uZXRzb2x1dGlvbnMu
+Y29tDQoNCllvdXIgc3RvbGVuIGNyeXB0b2N1cnJlbmN5IG1heSBzdGlsbCBiZSB0cmFjZWFibGUu
+IEFjdCBub3cuIFByZXNlcnZlIHlvdXIgZXZpZGVuY2UuIENob29zZSB0cnVzdC4gUmVjbGFpbSB5
+b3VyIGFzc2V0cy4NCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGlu
+YXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVh
+dmVAbGlzdHMubGluYXJvLm9yZwo=
