@@ -2,28 +2,28 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id EKsFOkcIoGm4fQQAu9opvQ
+	id yIIuBE4IoGm4fQQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 09:45:59 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 09:46:06 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8D44E1A2CE5
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 09:45:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D600A1A2CFC
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 09:46:05 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A64A33F9B5
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 08:45:58 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D81963F9B5
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 08:46:04 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E20093F824
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Feb 2026 08:45:51 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7B3C53F7E4
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Feb 2026 08:45:52 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: henrylevi287@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Thu, 26 Feb 2026 08:45:51 -0000
-Message-ID: <177209555192.3207893.7234456680571715395@lists.linaro.org>
+Date: Thu, 26 Feb 2026 08:45:52 -0000
+Message-ID: <177209555250.3208323.11873322594820723245@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: 32KSKEBMUFL57FEAUL5L3NDNEXMFKEIV
-X-Message-ID-Hash: 32KSKEBMUFL57FEAUL5L3NDNEXMFKEIV
+Message-ID-Hash: 5U5TJQGLQL5ANSIYJYL43RV7GA2IETH5
+X-Message-ID-Hash: 5U5TJQGLQL5ANSIYJYL43RV7GA2IETH5
 X-MailFrom: henrylevi287@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
@@ -31,7 +31,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] TOP 12 BEST CRYPTOCURRENCY RECOVERY AGENCY FOR VICTIMS EXPERIENCING CRYPTO LOSSES
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/32KSKEBMUFL57FEAUL5L3NDNEXMFKEIV/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5U5TJQGLQL5ANSIYJYL43RV7GA2IETH5/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -60,12 +60,12 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	TO_DN_NONE(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.991];
+	NEURAL_HAM(-0.00)[-0.990];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	R_DKIM_NA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[chainxhacksolution.com:url,linaro.org:email,co.site:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid]
-X-Rspamd-Queue-Id: 8D44E1A2CE5
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,linaro.org:email,co.site:email,chainxhacksolution.com:url]
+X-Rspamd-Queue-Id: D600A1A2CFC
 X-Rspamd-Action: no action
 
 QXMgY3J5cHRvY3VycmVuY2llcyBjb250aW51ZSB0byByZXNoYXBlIGZpbmFuY2UgaW4gMjAyNiwg
