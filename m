@@ -2,42 +2,42 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 0DS/EyoX4WnoogAAu9opvQ
+	id aNPMFTIX4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:06:50 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:06:58 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id B7952412556
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:06:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 21AF6412564
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:06:57 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C5C3C44905
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:06:48 +0000 (UTC)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
-	by lists.linaro.org (Postfix) with ESMTPS id 11F423F8EC
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Feb 2026 16:08:12 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D194F4496F
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:06:56 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+	by lists.linaro.org (Postfix) with ESMTPS id 5E0E33F8EC
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Feb 2026 16:08:24 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b="N/iU9fkY";
-	spf=pass (lists.linaro.org: domain of jlayton@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=jlayton@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=k5dYSDIB;
+	spf=pass (lists.linaro.org: domain of jlayton@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=jlayton@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by tor.source.kernel.org (Postfix) with ESMTP id 745C86013C;
+	by sea.source.kernel.org (Postfix) with ESMTP id B85EA4090F;
+	Thu, 26 Feb 2026 16:08:23 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6370AC2BCAF;
 	Thu, 26 Feb 2026 16:08:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id ECC59C19423;
-	Thu, 26 Feb 2026 16:07:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772122091;
-	bh=QVP/A0Wr2Abx3BWIf3M/CTqVpPmV8SXmSE5S4tBQdB8=;
+	s=k20201202; t=1772122103;
+	bh=DKhApmyz97hHNqRDBfnn+HmbPok4RTPICktaKEFjeAw=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=N/iU9fkY7C+X0gBA8Fi8wI+B9cgJ3ZSt6kN4EuqYE+eP8vng3qyDWNfsyIhvtKLdH
-	 b+b4Aulfg3FxrO0Nm/YcWTCOcXO8KCjAYbQRgQ7mVqFUqT4sm4WDf0eBVloGkV76Qr
-	 nzuEqM5tBQz8ltYFpBlQxn9/JiVP72na6rLnacqYsI4nNdpxGTgdAMyZLHYRXq/4hX
-	 iUesVZMqUqLc1V+1j2OQrGrDnS19dzjRGvGlWMVyWmletccEF567lF82pATRt0e1O/
-	 TjpBPU5Ieg1IbZKo5hjqzncuK/qa9dvo9N2Li7BzU0aNxcuEYodPJfkpyZdtWwQ3zU
-	 M4VIYqh/JOBMg==
+	b=k5dYSDIBAPQzqW+BguNSbxXsI77/BBR1Zqkb2GTl5B+wNZoLV877xFojJINgg+Hfc
+	 UrOVLQI/YLOUBa4a3ST9a0Igdn6L8rKk+lTiknPRPXqyYw1a4Ly58655gQuh8GP9Y9
+	 rs4kvUwYSS+RyO9nii4FBh0CFg9GIl8SJdAnjcjlt/dTjcLvW0ePiFCs7YE0MHvU60
+	 DC6hyGIImi5K1WDNQGddQrz0a2NwQ8qfapAn52bH5aHlz6kpMX6qiGAwc3l5RsMMi5
+	 TWpwAqf4c35siWMewXwkgGem7qGmVkQMu6wwPk3bFQPYe1ZnYG7S+4zzzLfGJLMoyL
+	 yuwTxLt9qHLnQ==
 From: Jeff Layton <jlayton@kernel.org>
-Date: Thu, 26 Feb 2026 10:55:59 -0500
+Date: Thu, 26 Feb 2026 10:56:00 -0500
 MIME-Version: 1.0
-Message-Id: <20260226-iino-u64-v1-57-ccceff366db9@kernel.org>
+Message-Id: <20260226-iino-u64-v1-58-ccceff366db9@kernel.org>
 References: <20260226-iino-u64-v1-0-ccceff366db9@kernel.org>
 In-Reply-To: <20260226-iino-u64-v1-0-ccceff366db9@kernel.org>
 To: Alexander Viro <viro@zeniv.linux.org.uk>,
@@ -113,36 +113,36 @@ To: Alexander Viro <viro@zeniv.linux.org.uk>,
  James Clark <james.clark@linaro.org>, "Darrick J. Wong" <djwong@kernel.org>,
  Martin Schiller <ms@dev.tdt.de>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2279; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=QVP/A0Wr2Abx3BWIf3M/CTqVpPmV8SXmSE5S4tBQdB8=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpoG0Sq+j7M9feeeWsEEfnIcsU2CbAxEDqyZD2b
- 80+R1w14vOJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaBtEgAKCRAADmhBGVaC
- FVKJEAC5sid11Go6fuJI7CWXgk/4O9Urmq5+faYtXDswS3e3Xney5z3y6yARF5s8jF6mfhgzQla
- vQ5vaTZ4z5mXQy/RAzR9sUFhWtITbMTuDCT5t/OkYsBp8k7TwPqeEVypA51Ep4SVoYatBJBiLQf
- 2fat2kabGqKEdxfCFhYZ/T/0dQV3iRAt9D43qR/WxIm6MSoTlo9YHWCG91yTvgD0CJW04McaD9e
- nABf28Ev6HbF1zoK9hLfjRiwAC29acMvnrI3Im5gXXzJ3e46OOwusoMZtJhXXd2agPTunLgXcRl
- +/ycDsR+Tty6dLu6VAPvTR3bnQezZb781kcYoTcQIWu/ddCkKz0VN6tP3bv0JkLuXRGp5oMuJvs
- FLd0RNjIJ8Ld9Cxg6Okd724968ObOXOBed5IGmMNSiyI1onguOK2GPh5Y4UcuvhDl3Hb9B3YLPv
- GQoEkhHN0x/lNXU8GCxcaTPkOHjEdaymP6yleBH4f2aw30WmtBhphVmnABJ3EIHcDVimT+dukC3
- 7UJg7jQn/8YGDHpTw5kC/uLPLgLMuwHYtsmRsnrvs61gYC+3Qtk3Y7gYe4FIJx76xaByCFyzY87
- rBIQo95KFdLZQVVKUfEH8H44JnZ0KGwlz9muKgqItA3T9f5veP4BQOKpi5i+iTywd4a4kYDOPcK
- EQzZuVxQyu+fRsA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=793; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=DKhApmyz97hHNqRDBfnn+HmbPok4RTPICktaKEFjeAw=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpoG0ShJVaxVP99hosE1VCTn8mUr4e1D55bkFMr
+ JLwUwTrQ8WJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaBtEgAKCRAADmhBGVaC
+ FW1wD/9n4D6Ggc73Uc+iboQycTz+zQzDx3YB6SvNvw5tExXkQWrmbQHXWE0jl7c6Vv/TMM5TYO9
+ XX6CptmWBNF0kABjqGkwrvHTDy/oyVFDYPaS78W5JcqRlHO+So3SlR23AEn9lhJAdZzlSzuZq+u
+ HzC3jaM5bQPJnbqqli463SyTOrMsBafb9RJYiHZJQsFE20MzfSqd5dIHjuKKTjil+qsqBx0H4vj
+ a3jlcDRGPwnJQ16+G1JcSgAbtFVslpI/FpVdkpOQItQ8Smhsffm5rqsWL3rKZVMbbc5+nwn4s6D
+ a3hxXNGxqd+96VN4BQUZ9f9pUlGCJOuj7Kc9nTOAadOsCObc52ugfbdTfElrTl7JLLTMXOx24SL
+ IQnmSBSw3tVQNQHOfdkYiiHKD9GjmZZtwYGU/X8jf+c0cejzd7lqJr+1k24qEFL5rNA8EicGvmo
+ UhNG0XQ7IWd9ji4Tn1Hnjb6iqL1cugOk4rx1ms9l4An0V5SjLmDJDtl04mdxf+3CYLhw7zN+bXb
+ Tj2y70Cdw++wiRSHr4B+1EHhS0mGBjuy9GC3CImYWdDJt1sMdK46feI5rvC5EpK+O7++Boc36rL
+ /5Z9a/w9FwsXha3/fp8uwVNalc/hucFqX7HnNt9MRtb3RIMdwskorXYS2D90WUhctvSUvMRRbM3
+ rmbMtROf0z871BA==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 X-Spamd-Bar: --
 X-MailFrom: jlayton@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: BRYB66YGCMTA7WQIF7QHYV73LMQO32EW
-X-Message-ID-Hash: BRYB66YGCMTA7WQIF7QHYV73LMQO32EW
+Message-ID-Hash: SH37MYFD66PTVMF6UKLCDYF6LZYJXK6Q
+X-Message-ID-Hash: SH37MYFD66PTVMF6UKLCDYF6LZYJXK6Q
 X-Mailman-Approved-At: Thu, 16 Apr 2026 16:47:58 +0000
 CC: linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, nvdimm@lists.linux.dev, fsverity@lists.linux.dev, linux-mm@kvack.org, netfs@lists.linux.dev, linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net, linux-nfs@vger.kernel.org, linux-cifs@vger.kernel.org, samba-technical@lists.samba.org, linux-nilfs@vger.kernel.org, v9fs@lists.linux.dev, linux-afs@lists.infradead.org, autofs@vger.kernel.org, ceph-devel@vger.kernel.org, codalist@coda.cs.cmu.edu, ecryptfs@vger.kernel.org, linux-mtd@lists.infradead.org, jfs-discussion@lists.sourceforge.net, ntfs3@lists.linux.dev, ocfs2-devel@lists.linux.dev, devel@lists.orangefs.org, linux-unionfs@vger.kernel.org, apparmor@lists.ubuntu.com, linux-security-module@vger.kernel.org, linux-integrity@vger.kernel.org, selinux@vger.kernel.org, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, netdev@vger.kernel.org, linux-perf-
  users@vger.kernel.org, linux-fscrypt@vger.kernel.org, linux-xfs@vger.kernel.org, linux-hams@vger.kernel.org, linux-x25@vger.kernel.org, Jeff Layton <jlayton@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 57/61] fscrypt: update format strings for u64 i_ino
+Subject: [Linaro-mm-sig] [PATCH 58/61] fsverity: update format string for u64 i_ino
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/BRYB66YGCMTA7WQIF7QHYV73LMQO32EW/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SH37MYFD66PTVMF6UKLCDYF6LZYJXK6Q/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -171,7 +171,7 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.302];
+	NEURAL_HAM(-0.00)[-0.284];
 	RCPT_COUNT_GT_50(0.00)[146];
 	FROM_NEQ_ENVFROM(0.00)[jlayton@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
 	DKIM_TRACE(0.00)[kernel.org:-];
@@ -180,59 +180,31 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
-X-Rspamd-Queue-Id: B7952412556
+X-Rspamd-Queue-Id: 21AF6412564
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Update format strings from %lu to %llu for inode->i_ino now that
+Update format string from %lu to %llu for inode->i_ino now that
 i_ino is u64 instead of unsigned long.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- fs/crypto/crypto.c   | 2 +-
- fs/crypto/hooks.c    | 2 +-
- fs/crypto/keysetup.c | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ fs/verity/init.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/fs/crypto/crypto.c b/fs/crypto/crypto.c
-index 07f9cbfe3ea4115b8fcc881ae5154b3c3e898c04..570a2231c945a6c649cf8dc3b457f0b55657e0c3 100644
---- a/fs/crypto/crypto.c
-+++ b/fs/crypto/crypto.c
-@@ -365,7 +365,7 @@ void fscrypt_msg(const struct inode *inode, const char *level,
+diff --git a/fs/verity/init.c b/fs/verity/init.c
+index d6520660858386d3b7d69b20a459dc27d8017a5f..3aa55dec88fc919792a2cb4be476f8481ef78a9e 100644
+--- a/fs/verity/init.c
++++ b/fs/verity/init.c
+@@ -50,7 +50,7 @@ void fsverity_msg(const struct inode *inode, const char *level,
  	vaf.fmt = fmt;
  	vaf.va = &args;
- 	if (inode && inode->i_ino)
--		printk("%sfscrypt (%s, inode %lu): %pV\n",
-+		printk("%sfscrypt (%s, inode %llu): %pV\n",
+ 	if (inode)
+-		printk("%sfs-verity (%s, inode %lu): %pV\n",
++		printk("%sfs-verity (%s, inode %llu): %pV\n",
  		       level, inode->i_sb->s_id, inode->i_ino, &vaf);
- 	else if (inode)
- 		printk("%sfscrypt (%s): %pV\n", level, inode->i_sb->s_id, &vaf);
-diff --git a/fs/crypto/hooks.c b/fs/crypto/hooks.c
-index b97de0d1430fd6ec764f4a758dffe00263496118..a7a8a3f581a0460537f5ff955bc8b5d30573a033 100644
---- a/fs/crypto/hooks.c
-+++ b/fs/crypto/hooks.c
-@@ -62,7 +62,7 @@ int fscrypt_file_open(struct inode *inode, struct file *filp)
- 	dentry_parent = dget_parent(dentry);
- 	if (!fscrypt_has_permitted_context(d_inode(dentry_parent), inode)) {
- 		fscrypt_warn(inode,
--			     "Inconsistent encryption context (parent directory: %lu)",
-+			     "Inconsistent encryption context (parent directory: %llu)",
- 			     d_inode(dentry_parent)->i_ino);
- 		err = -EPERM;
- 	}
-diff --git a/fs/crypto/keysetup.c b/fs/crypto/keysetup.c
-index 40fa05688d3a1d4aa33d29e9508441faf4bca933..df58ca4a5e3cb1df94e2f08e3f3b093c33368993 100644
---- a/fs/crypto/keysetup.c
-+++ b/fs/crypto/keysetup.c
-@@ -91,7 +91,7 @@ select_encryption_mode(const union fscrypt_policy *policy,
- 	if (S_ISDIR(inode->i_mode) || S_ISLNK(inode->i_mode))
- 		return &fscrypt_modes[fscrypt_policy_fnames_mode(policy)];
- 
--	WARN_ONCE(1, "fscrypt: filesystem tried to load encryption info for inode %lu, which is not encryptable (file type %d)\n",
-+	WARN_ONCE(1, "fscrypt: filesystem tried to load encryption info for inode %llu, which is not encryptable (file type %d)\n",
- 		  inode->i_ino, (inode->i_mode & S_IFMT));
- 	return ERR_PTR(-EINVAL);
- }
+ 	else
+ 		printk("%sfs-verity: %pV\n", level, &vaf);
 
 -- 
 2.53.0
