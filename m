@@ -2,42 +2,42 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id YG2kOKEV4WnoogAAu9opvQ
+	id MN5OOawV4WnoogAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:00:17 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:00:28 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7D75A412387
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:00:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6D9C941238F
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:00:28 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8AC1045537
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:00:16 +0000 (UTC)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
-	by lists.linaro.org (Postfix) with ESMTPS id DDA383F824
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Feb 2026 15:58:23 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 793104097D
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:00:27 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+	by lists.linaro.org (Postfix) with ESMTPS id 796D83F824
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Feb 2026 15:58:36 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=dCt3uwXV;
-	spf=pass (lists.linaro.org: domain of jlayton@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=jlayton@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=GmrdppOH;
+	spf=pass (lists.linaro.org: domain of jlayton@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=jlayton@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by tor.source.kernel.org (Postfix) with ESMTP id 788B16013E;
+	by sea.source.kernel.org (Postfix) with ESMTP id E1C5240E31;
+	Thu, 26 Feb 2026 15:58:35 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6A1D7C116C6;
 	Thu, 26 Feb 2026 15:58:23 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E5FE1C19424;
-	Thu, 26 Feb 2026 15:58:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772121503;
-	bh=LdZkgMiSMRyY7w4wkYXYbMfPdYZGHhFy6fPC/XGukhU=;
+	s=k20201202; t=1772121515;
+	bh=YA3Mtm5mPmkVjL6hFtey9KMWh3gSaYq2MagoP4LN3/A=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=dCt3uwXVqrIJKbQvl3uX9/gup6SlY+mQqX91Ad9vd7S8op6Yd+KnCAZfqT4OSuZ5h
-	 bFGxqPsbtlVvSFA4/Lcr/ut8yak5t5k7WCf1y5xyJDtumk+D//S9Di9nluiniHliYC
-	 n6eVHA0dgSRDHNycrjK4MqfgaELytBs0GHEHSXiF38hbEWVUj9xLFXhbX16GPBXJMZ
-	 EWNLIPkjbNzqBFPY4qkwolYq3Ss4/8HVyAO6aOFGde9RPZDyI3a7asDXIiMWO1moUp
-	 C5DzD0aiQOnrsnc3jTtDPTUBA6EVUpdOUkm5ZK+MlUq+bpXUpYb2af9356FNFx49bL
-	 9plvVtOi3V43A==
+	b=GmrdppOHVxTK6LjwPJUDCRCr56MTlrDltKbBC7kjaIBy7u7PeoWA2d5cbdi8vYlRo
+	 VHH6W1mETt+muiHQyBLKRS1eZbP/x+JD6/mcHLZuSB8JM4wlewRNxTu/nz8RTZ9yXJ
+	 OlrwKNA8ElMmnLoZXapQor9EiTxscN/HV2SjnSL+OmKYSyHZCtpJAm0sP/MTOBXdfE
+	 gbU9CW1TQFNiUrpBDEaUSBy040cvPOdWtoayIKmOghN2yBTZB/HVVZxNYX1eHVaeAY
+	 jn4G/B3doACFrs0XhKmGU+BQSamXDsqOL1QBEcsX8vnDPTCT4BiLmZrP1qK3iI48Ip
+	 K8p7OmEZiI0Xg==
 From: Jeff Layton <jlayton@kernel.org>
-Date: Thu, 26 Feb 2026 10:55:12 -0500
+Date: Thu, 26 Feb 2026 10:55:13 -0500
 MIME-Version: 1.0
-Message-Id: <20260226-iino-u64-v1-10-ccceff366db9@kernel.org>
+Message-Id: <20260226-iino-u64-v1-11-ccceff366db9@kernel.org>
 References: <20260226-iino-u64-v1-0-ccceff366db9@kernel.org>
 In-Reply-To: <20260226-iino-u64-v1-0-ccceff366db9@kernel.org>
 To: Alexander Viro <viro@zeniv.linux.org.uk>,
@@ -113,36 +113,36 @@ To: Alexander Viro <viro@zeniv.linux.org.uk>,
  James Clark <james.clark@linaro.org>, "Darrick J. Wong" <djwong@kernel.org>,
  Martin Schiller <ms@dev.tdt.de>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3342; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=LdZkgMiSMRyY7w4wkYXYbMfPdYZGHhFy6fPC/XGukhU=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpoG0GsDBsYnVAsr/6aY+OdwYGWSxrZsM8EJuxC
- Q78RgWfUx+JAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaBtBgAKCRAADmhBGVaC
- Few+D/4mutU81rl2n75boDhsJKJUaSJoujeBAfusAFqLjMdwyXIMSpj4L7+chJ7lo0OoNZKL9Tz
- FJ/WpcytXS5tASm4LU5ttoves66soBtPT/e9jqIden5a+xNYd2xdMQz2GkYLU8UoEDMKz2B4FWi
- bbXP1cdIi+Gs1L00idufQp9klca91ib/uh4ZDWmILa66KtgJiqpNT8IW/FZ+rRbL4DxXzX9Odyw
- xY3XP2mOemu+oUKNHuaVtKqd/mo7+/mrtnfTxGbycSCIYvUq4xZiWRa2HaeeW9mJ9AW8PgceRxS
- Xe+5t/g4fR7ybGLeaa1lxM441cQIrG2VjJMCglE62qoaOPbG1U7nhQQbq49cVdXftZu3qvqe08b
- xZZ1Zb1Xj2BLi+1LZc2hU083aHI6YGhzjD/uu33zfHrY43PjKARDtU8ke1+4BWZ7SDJgXlNXqqT
- +XlOWV4PRKQoQcLIhLJZMRvGpY5Uf2fAN5IWLCUcXxUG73lbx2woNUdFTxa7siP3V5FgljMFZIh
- ud/Fy3p+krV0hwTknttuuV+JC1OGV4wXj6aIOpmLjOd7gQy1p8SNSdR6SL+XZg7OsWQZCRqSZpH
- 4xHedLHyQldZ+1gf5fEeSO+f7vru2AwppvkFyWar5ihu7zNrouABbWaJDO0QkNsPsXetXqyntDa
- PQTg7n2ICcFlcnw==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1279; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=YA3Mtm5mPmkVjL6hFtey9KMWh3gSaYq2MagoP4LN3/A=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpoG0Gs4nMQ7L6lsVYVbz9tP+3htrQ7f3vsiUCO
+ jWU1x0BBJeJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaBtBgAKCRAADmhBGVaC
+ FXJ0D/4idsXZVMw5wmoMDDtM6AOQkegw7aKpmJucAxThq9u28V0k5Lv/tKuxcDyaWp0Qk98pcC1
+ THlFYaoMkc7byE0+Hmcgkxdo4IjLCDtLHlxmvrOiLmHSJ9UZto07rvtQGD04R4aWGxQ8/7/zFUv
+ hWrQSVnKGkxCPRx6Yvr/mE4SJtsKsq4qoEsz3uFUqYkCPHEPZ0rSLvS5NUSTn1T2J4NlrLbX8ak
+ 1ja3HKzV6IfA6E/G8N8UoRcGMgU0YfRykto3QM87/x3SZ7azd0hInC6OippwGXjP8o2hVEhCNle
+ YQYOI1St4BAmtt9kX7Bmsl/DANMUbS/+UgPJ5ku38ohJLC7JBwo9DN60feaXlcIvK88km2kzqYW
+ CuXGRMXz9e+SOjoxR7PNYr1cgU3XVjDyya4Kkc8AG2Rze32VPYSO3BMa4zPE0eRWWjIZt3m9UNx
+ dKQtLQ4NuBOhba+BvvkX0SHwDZ7+z11cDz7yZDaaekU48wtWD4neVYf4Jsr+agoF6HRJgZ1+eht
+ sTxSLr20OypdDn/AOhDecQymubNDOQ8GANzIZrnciGCoC5AMCUpzbuB2GKKeP86s9hupVnHOM8S
+ 4+EiSz/H3rEasjtRAfLXqUMKHjs1F0BtsyDNUr4UT/WQdlwLXpLyvqHTEcp9U3ja60cqNUEWkhj
+ xA71KUF6JLqqfLg==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 X-Spamd-Bar: --
 X-MailFrom: jlayton@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: CEDCPIXVYZQRF4VQFF55IFE7FH7APO4X
-X-Message-ID-Hash: CEDCPIXVYZQRF4VQFF55IFE7FH7APO4X
+Message-ID-Hash: WLZMZXRLVWZOQKKCH4DAWSIH4HWYZ7NI
+X-Message-ID-Hash: WLZMZXRLVWZOQKKCH4DAWSIH4HWYZ7NI
 X-Mailman-Approved-At: Thu, 16 Apr 2026 16:47:35 +0000
 CC: linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, nvdimm@lists.linux.dev, fsverity@lists.linux.dev, linux-mm@kvack.org, netfs@lists.linux.dev, linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net, linux-nfs@vger.kernel.org, linux-cifs@vger.kernel.org, samba-technical@lists.samba.org, linux-nilfs@vger.kernel.org, v9fs@lists.linux.dev, linux-afs@lists.infradead.org, autofs@vger.kernel.org, ceph-devel@vger.kernel.org, codalist@coda.cs.cmu.edu, ecryptfs@vger.kernel.org, linux-mtd@lists.infradead.org, jfs-discussion@lists.sourceforge.net, ntfs3@lists.linux.dev, ocfs2-devel@lists.linux.dev, devel@lists.orangefs.org, linux-unionfs@vger.kernel.org, apparmor@lists.ubuntu.com, linux-security-module@vger.kernel.org, linux-integrity@vger.kernel.org, selinux@vger.kernel.org, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, netdev@vger.kernel.org, linux-perf-
  users@vger.kernel.org, linux-fscrypt@vger.kernel.org, linux-xfs@vger.kernel.org, linux-hams@vger.kernel.org, linux-x25@vger.kernel.org, Jeff Layton <jlayton@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 10/61] nfs: remove nfs_compat_user_ino64()
+Subject: [Linaro-mm-sig] [PATCH 11/61] nfs: remove enable_ino64 module parameter
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CEDCPIXVYZQRF4VQFF55IFE7FH7APO4X/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WLZMZXRLVWZOQKKCH4DAWSIH4HWYZ7NI/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -171,7 +171,7 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.330];
+	NEURAL_HAM(-0.00)[-0.467];
 	RCPT_COUNT_GT_50(0.00)[146];
 	FROM_NEQ_ENVFROM(0.00)[jlayton@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
 	DKIM_TRACE(0.00)[kernel.org:-];
@@ -179,94 +179,48 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
-X-Rspamd-Queue-Id: 7D75A412387
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email,swb.de:email]
+X-Rspamd-Queue-Id: 6D9C941238F
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Now that i_ino is u64, the VFS stat path handles 64-bit inode numbers
-natively. The truncation to 32-bit st_ino (with -EOVERFLOW) is handled
-by cp_new_stat() and cp_compat_stat() in the generic stat code, so the
-NFS-specific XOR-folding hack is no longer needed.
+The enable_ino64 module parameter controlled whether NFS presented
+64-bit or XOR-folded 32-bit inode numbers to userspace. With i_ino now
+being u64 and the compat folding function removed, this parameter has
+no remaining consumers.
 
-Remove nfs_compat_user_ino64() and have callers pass the full 64-bit
-fileid directly to stat->ino and dir_emit(), both of which accept u64.
+Remove the parameter, the NFS_64_BIT_INODE_NUMBERS_ENABLED macro, and
+the enable_ino64 variable.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- fs/nfs/dir.c           |  2 +-
- fs/nfs/inode.c         | 25 +------------------------
- include/linux/nfs_fs.h |  1 -
- 3 files changed, 2 insertions(+), 26 deletions(-)
+ fs/nfs/inode.c | 6 ------
+ 1 file changed, 6 deletions(-)
 
-diff --git a/fs/nfs/dir.c b/fs/nfs/dir.c
-index ddc3789363a5f8a2ef0169e37aa2292d075092c4..a9ef74d0cff8de58a42be9c2c94af428a347bb2e 100644
---- a/fs/nfs/dir.c
-+++ b/fs/nfs/dir.c
-@@ -1107,7 +1107,7 @@ static void nfs_do_filldir(struct nfs_readdir_descriptor *desc,
- 
- 		ent = &array->array[i];
- 		if (!dir_emit(desc->ctx, ent->name, ent->name_len,
--		    nfs_compat_user_ino64(ent->ino), ent->d_type)) {
-+		    ent->ino, ent->d_type)) {
- 			desc->eob = true;
- 			break;
- 		}
 diff --git a/fs/nfs/inode.c b/fs/nfs/inode.c
-index d88f5689548bcb4e27d6087a49b525762fbaa9e2..1a7d7bafbb623ab603b8c517628343463277e096 100644
+index 1a7d7bafbb623ab603b8c517628343463277e096..8743f3bd96a7b5915ae892abe731f159a7055d40 100644
 --- a/fs/nfs/inode.c
 +++ b/fs/nfs/inode.c
-@@ -77,29 +77,6 @@ int nfs_wait_bit_killable(struct wait_bit_key *key, int mode)
- }
- EXPORT_SYMBOL_GPL(nfs_wait_bit_killable);
+@@ -57,11 +57,6 @@
  
--/**
-- * nfs_compat_user_ino64 - returns the user-visible inode number
-- * @fileid: 64-bit fileid
-- *
-- * This function returns a 32-bit inode number if the boot parameter
-- * nfs.enable_ino64 is zero.
-- */
--u64 nfs_compat_user_ino64(u64 fileid)
--{
--#ifdef CONFIG_COMPAT
--	compat_ulong_t ino;
--#else	
--	unsigned long ino;
--#endif
--
--	if (enable_ino64)
--		return fileid;
--	ino = fileid;
--	if (sizeof(ino) < sizeof(fileid))
--		ino ^= fileid >> (sizeof(fileid)-sizeof(ino)) * 8;
--	return ino;
--}
--
- int nfs_drop_inode(struct inode *inode)
- {
- 	return NFS_STALE(inode) || inode_generic_drop(inode);
-@@ -1061,7 +1038,7 @@ int nfs_getattr(struct mnt_idmap *idmap, const struct path *path,
- 	stat->result_mask = nfs_get_valid_attrmask(inode) | request_mask;
+ #define NFSDBG_FACILITY		NFSDBG_VFS
  
- 	generic_fillattr(&nop_mnt_idmap, request_mask, inode, stat);
--	stat->ino = nfs_compat_user_ino64(NFS_FILEID(inode));
-+	stat->ino = NFS_FILEID(inode);
- 	stat->change_cookie = inode_peek_iversion_raw(inode);
- 	stat->attributes_mask |= STATX_ATTR_CHANGE_MONOTONIC;
- 	if (server->change_attr_type != NFS4_CHANGE_TYPE_IS_UNDEFINED)
-diff --git a/include/linux/nfs_fs.h b/include/linux/nfs_fs.h
-index 816670562d17b3f46ec2d22d4f9412e42f7e1a3b..d721a8acbb449666941ec19b18386b42c152db10 100644
---- a/include/linux/nfs_fs.h
-+++ b/include/linux/nfs_fs.h
-@@ -472,7 +472,6 @@ extern void nfs_file_set_open_context(struct file *filp, struct nfs_open_context
- extern void nfs_file_clear_open_context(struct file *flip);
- extern struct nfs_lock_context *nfs_get_lock_context(struct nfs_open_context *ctx);
- extern void nfs_put_lock_context(struct nfs_lock_context *l_ctx);
--extern u64 nfs_compat_user_ino64(u64 fileid);
- extern void nfs_fattr_init(struct nfs_fattr *fattr);
- extern void nfs_fattr_set_barrier(struct nfs_fattr *fattr);
- extern unsigned long nfs_inc_attr_generation_counter(void);
+-#define NFS_64_BIT_INODE_NUMBERS_ENABLED	1
+-
+-/* Default is to see 64-bit inode numbers */
+-static bool enable_ino64 = NFS_64_BIT_INODE_NUMBERS_ENABLED;
+-
+ static int nfs_update_inode(struct inode *, struct nfs_fattr *);
+ 
+ static struct kmem_cache * nfs_inode_cachep;
+@@ -2770,7 +2765,6 @@ static void __exit exit_nfs_fs(void)
+ MODULE_AUTHOR("Olaf Kirch <okir@monad.swb.de>");
+ MODULE_DESCRIPTION("NFS client support");
+ MODULE_LICENSE("GPL");
+-module_param(enable_ino64, bool, 0644);
+ 
+ module_init(init_nfs_fs)
+ module_exit(exit_nfs_fs)
 
 -- 
 2.53.0
