@@ -2,36 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MKQqEBC5oGnClwQAu9opvQ
+	id oJUdLxW5oGnClwQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 22:20:16 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 22:20:21 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD1A41AFA50
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 22:20:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 854601AFA59
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 22:20:21 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9726B401B1
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 21:20:14 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9522340172
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Feb 2026 21:20:20 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 29B693F9B5
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Feb 2026 21:19:55 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id DDA8A3F9BA
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Feb 2026 21:20:03 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-From: "Sandra Lopez" <sandralopezs1aa@gmail.com>
+From: "Mata Marcus" <matamarcus1a@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Thu, 26 Feb 2026 21:19:55 -0000
-Message-ID: <177214079516.3824718.1613253502272517577@lists.linaro.org>
+Date: Thu, 26 Feb 2026 21:20:03 -0000
+Message-ID: <177214080390.3822782.4403657304480944401@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: 3PE45C6RZKTNCBDB2LAUXVZINRJBYTYO
-X-Message-ID-Hash: 3PE45C6RZKTNCBDB2LAUXVZINRJBYTYO
-X-MailFrom: sandralopezs1aa@gmail.com
+Message-ID-Hash: IU6MR3J4NW2YUM4TOM6NB7RE327CDAOV
+X-Message-ID-Hash: IU6MR3J4NW2YUM4TOM6NB7RE327CDAOV
+X-MailFrom: matamarcus1a@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] 2026 Best Ways To Retrieve Stolen Cryptocurrency Through Recovery Service
+Subject: [Linaro-mm-sig] 2026 Effective Methods To Reclaim Scammed Crypto Using Recovery Experts
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3PE45C6RZKTNCBDB2LAUXVZINRJBYTYO/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/IU6MR3J4NW2YUM4TOM6NB7RE327CDAOV/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -58,14 +58,14 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	RCPT_COUNT_ONE(0.00)[1];
 	RCVD_COUNT_TWO(0.00)[2];
-	FROM_NEQ_ENVFROM(0.00)[sandralopezs1aa@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_NEQ_ENVFROM(0.00)[matamarcus1a@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_NONE(0.00)[];
 	R_DKIM_NA(0.00)[];
 	NEURAL_HAM(-0.00)[-0.991];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[autopsymainnetsolutions.com:url,autopsymainnetsolutions.com:email,linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,revoke.cash:url,ftc.gov:url,autospyrec.site:url,ic3.gov:url]
-X-Rspamd-Queue-Id: BD1A41AFA50
+	DBL_BLOCKED_OPENRESOLVER(0.00)[ic3.gov:url,autospyrec.site:url,autopsymainnetsolutions.com:url,autopsymainnetsolutions.com:email,linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,revoke.cash:url,ftc.gov:url]
+X-Rspamd-Queue-Id: 854601AFA59
 X-Rspamd-Action: no action
 
 SWYgeW91IGhhdmUgYmVlbiB0aGUgdmljdGltIG9mIGEgY3J5cHRvY3VycmVuY3kgc2NhbSBpbiAy
