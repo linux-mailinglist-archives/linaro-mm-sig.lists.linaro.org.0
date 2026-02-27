@@ -2,42 +2,42 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KHACAe2aoWl8ugQAu9opvQ
+	id kN4qB/KaoWl8ugQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 27 Feb 2026 14:23:57 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 27 Feb 2026 14:24:02 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8C4B71B7983
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 27 Feb 2026 14:23:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E6AAE1B798B
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 27 Feb 2026 14:24:01 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5647F401CF
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 27 Feb 2026 13:23:55 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id EC408401E8
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 27 Feb 2026 13:23:34 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 04D703F9BE
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 27 Feb 2026 13:24:01 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+	by lists.linaro.org (Postfix) with ESMTPS id AA3663F949
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 27 Feb 2026 13:23:37 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=VzPAG66Y;
-	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=mripard@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=ecpMkkuU;
+	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=mripard@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id 5F9BB44468;
-	Fri, 27 Feb 2026 13:23:34 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B7F08C116C6;
-	Fri, 27 Feb 2026 13:23:33 +0000 (UTC)
+	by tor.source.kernel.org (Postfix) with ESMTP id 5BDCA60126;
+	Fri, 27 Feb 2026 13:23:37 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A6C2BC19423;
+	Fri, 27 Feb 2026 13:23:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772198614;
-	bh=DVrZa0opFACOmunPNX4g6dx/xvzbq4g8Ca2Z3xTFR0o=;
+	s=k20201202; t=1772198617;
+	bh=uocFqI6buKhD72I9T9guormXJl46wyFDpX9g7jostug=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=VzPAG66Yq1LbChnheWalbgxhOhB2UyDr91D0n07b9ONxD2FRP83YtjXiyOJSCUjoQ
-	 z6THRn9HOSPfUmJL50h5oZWcDGSMsVYkhDpuYw5f5OoH9nUBbQ26ViRJriYWa1nDNl
-	 LOLQTj9GO7fU6h4gSTxtpmVrSDGxxxwYmOVOg64YiyZJF6/QVDlfvIrIUzDxOsc9UO
-	 1QrCsl/Nw/7OhTUnkIcLx92ZvAkn159yrtFx2Sh8CInV7LYXoApmC6CFTE3vZXCshU
-	 kUQQMo4tItRZVDObIp4SV9DuVA23SOifYSkP0b84RKR+6St8MY3x1nwQFF61Y+cU4N
-	 ARGN/6wMZY7yg==
+	b=ecpMkkuUspj/gJIru8op3fzbNPWELjGitExJdq/w7/qfHqcC4CNuEzgaZG1stLgsv
+	 79jSbCbuKccznKaAR8fVwA+5q18KVaVRgEj/aeOcOdyyLL+NhD6m6mYTCJFWFAQNRo
+	 vs+L46uRiOU83XtQHbHdgb9QML4jqT7c6Gmtv/2R+2EOz7Al2pWMMWX+RIZGIaxUBd
+	 24FDoKikk7LdLS2jiTvt1niMukJYZND8Tn9IKZwMB/1rlQjAUn43JA/TlZ59izSgwt
+	 szKjgxFMFue/OWXvQFcXJDIEgTH/j1TzFqK1uX/VEqrJDchUSR8dr8Ue7EoiQ1NWsh
+	 EY5BIZT8ta9jg==
 From: Maxime Ripard <mripard@kernel.org>
-Date: Fri, 27 Feb 2026 14:15:45 +0100
+Date: Fri, 27 Feb 2026 14:15:46 +0100
 MIME-Version: 1.0
-Message-Id: <20260227-dma-buf-heaps-as-modules-v2-6-454aee7e06cc@kernel.org>
+Message-Id: <20260227-dma-buf-heaps-as-modules-v2-7-454aee7e06cc@kernel.org>
 References: <20260227-dma-buf-heaps-as-modules-v2-0-454aee7e06cc@kernel.org>
 In-Reply-To: <20260227-dma-buf-heaps-as-modules-v2-0-454aee7e06cc@kernel.org>
 To: Sumit Semwal <sumit.semwal@linaro.org>,
@@ -54,26 +54,26 @@ To: Sumit Semwal <sumit.semwal@linaro.org>,
  Vlastimil Babka <vbabka@suse.cz>, Mike Rapoport <rppt@kernel.org>,
  Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=909; i=mripard@kernel.org;
- h=from:subject:message-id; bh=DVrZa0opFACOmunPNX4g6dx/xvzbq4g8Ca2Z3xTFR0o=;
- b=owGbwMvMwCmsHn9OcpHtvjLG02pJDJkLZ+1yVxR4r8SsqfG4YUbymZtxh5QTV5x3FZ5eq2ZdN
- f3spD9cHVNZGIQ5GWTFFFmeyISdXt6+uMrBfuUPmDmsTCBDGLg4BWAit9cxNhz99LzjYaOKvtgn
- BfFNfaG/c/jiF8RMjZm0aoP+jrdPo/xu/9/+5un+I8yPNUw9DA4aMjI2vKzz6js8Z9JFB4ksrin
- fJ1neaHy1ZalfqKXhk42yS4qCg2Lm3RPPOvSgeOn+qZ5ZWpaeAA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1114; i=mripard@kernel.org;
+ h=from:subject:message-id; bh=uocFqI6buKhD72I9T9guormXJl46wyFDpX9g7jostug=;
+ b=owGbwMvMwCmsHn9OcpHtvjLG02pJDJkLZ+2Ki8n9kLHCV18veOuNicIeLwMiOv1Xl98WSn+67
+ XbO1WzxjqksDMKcDLJiiixPZMJOL29fXOVgv/IHzBxWJpAhDFycAjCRLSGMDQes1d02GbyXm2tv
+ IRfKObu+Z/vdzpO2tZYbUsPeRFvGnJm3MG3Cntl63Fpl+vkr2NafZmz4J25xLKUpJWdzkeDfwk8
+ NO842Hvv6WLVwotMLn80bM75ahwjp36jZG2z8xefg4Y8x9x8CAA==
 X-Developer-Key: i=mripard@kernel.org; a=openpgp;
  fpr=BE5675C37E818C8B5764241C254BCFC56BF6CE8D
 X-Spamd-Bar: ----
-Message-ID-Hash: FR6GWV4BWVFDK4DULQHQGUQNKNBFSSKD
-X-Message-ID-Hash: FR6GWV4BWVFDK4DULQHQGUQNKNBFSSKD
+Message-ID-Hash: XDP37SVKBVVVVPU2AHIQAOHSBK45OLQ7
+X-Message-ID-Hash: XDP37SVKBVVVVPU2AHIQAOHSBK45OLQ7
 X-MailFrom: mripard@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, iommu@lists.linux.dev, linux-mm@kvack.org, Maxime Ripard <mripard@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v2 6/9] mm: cma: Export cma_get_name
+Subject: [Linaro-mm-sig] [PATCH v2 7/9] dma-buf: heaps: Export mem_accounting parameter
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FR6GWV4BWVFDK4DULQHQGUQNKNBFSSKD/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XDP37SVKBVVVVPU2AHIQAOHSBK45OLQ7/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -107,38 +107,38 @@ X-Spamd-Result: default: False [1.99 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
-X-Rspamd-Queue-Id: 8C4B71B7983
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
+X-Rspamd-Queue-Id: E6AAE1B798B
 X-Rspamd-Action: no action
 
-The CMA dma-buf heap uses the cma_get_name() function to get the name of
-the heap instance it's going to create.
+The mem_accounting kernel parameter is used by heaps to know if they
+should account allocations in their respective cgroup controllers.
 
-However, this function is not exported. Since we want to turn the CMA
-heap into a module, let's export it.
+Since we're going to allow heaps to compile as modules, we need to
+export that variable.
 
 Reviewed-by: T.J. Mercier <tjmercier@google.com>
 Signed-off-by: Maxime Ripard <mripard@kernel.org>
 ---
- mm/cma.c | 1 +
+ drivers/dma-buf/dma-heap.c | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/mm/cma.c b/mm/cma.c
-index be142b473f3bd41b9c7d8ba4397f018f6993d962..550effb9c4e01cc488b5744fe61d55a5b70a6d6c 100644
---- a/mm/cma.c
-+++ b/mm/cma.c
-@@ -50,10 +50,11 @@ unsigned long cma_get_size(const struct cma *cma)
+diff --git a/drivers/dma-buf/dma-heap.c b/drivers/dma-buf/dma-heap.c
+index ac5f8685a649496c0e1c6decbf263b63fa472d04..a76bf3f8b071a3d5bf39a8513f31e9e8aa16e02f 100644
+--- a/drivers/dma-buf/dma-heap.c
++++ b/drivers/dma-buf/dma-heap.c
+@@ -51,10 +51,11 @@ static DEFINE_XARRAY_ALLOC(dma_heap_minors);
  
- const char *cma_get_name(const struct cma *cma)
- {
- 	return cma->name;
- }
-+EXPORT_SYMBOL_GPL(cma_get_name);
+ bool __read_mostly mem_accounting;
+ module_param(mem_accounting, bool, 0444);
+ MODULE_PARM_DESC(mem_accounting,
+ 		 "Enable cgroup-based memory accounting for dma-buf heap allocations (default=false).");
++EXPORT_SYMBOL_NS_GPL(mem_accounting, "DMA_BUF_HEAP");
  
- static unsigned long cma_bitmap_aligned_mask(const struct cma *cma,
- 					     unsigned int align_order)
+ static int dma_heap_buffer_alloc(struct dma_heap *heap, size_t len,
+ 				 u32 fd_flags,
+ 				 u64 heap_flags)
  {
- 	if (align_order <= cma->order_per_bit)
 
 -- 
 2.53.0
