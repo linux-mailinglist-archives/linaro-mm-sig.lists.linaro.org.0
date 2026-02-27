@@ -2,36 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id OBgGMdr4oGmboQQAu9opvQ
+	id GJMkHKL5oGlXogQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 27 Feb 2026 02:52:26 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 27 Feb 2026 02:55:46 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 645641B1A4D
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 27 Feb 2026 02:52:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0DD021B1AA9
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 27 Feb 2026 02:55:46 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 745D140154
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 27 Feb 2026 01:52:25 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 1732C3F90B
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 27 Feb 2026 01:55:45 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B557A3F962
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 27 Feb 2026 01:52:19 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7DEEA3F90B
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 27 Feb 2026 01:55:39 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: hamtonbecky@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Fri, 27 Feb 2026 01:52:19 -0000
-Message-ID: <177215713974.4039006.2794829011589947030@lists.linaro.org>
+Date: Fri, 27 Feb 2026 01:55:39 -0000
+Message-ID: <177215733951.4041688.14273402063194959389@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: 7SVH44LUAX4K6LIRNMM7GBJBQGLG7BA3
-X-Message-ID-Hash: 7SVH44LUAX4K6LIRNMM7GBJBQGLG7BA3
+Message-ID-Hash: N43XHUXYJWVZFJC5FT7HV4MLC27ITQJ4
+X-Message-ID-Hash: N43XHUXYJWVZFJC5FT7HV4MLC27ITQJ4
 X-MailFrom: hamtonbecky@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Top Trusted Financial and Crypto Recovery Firms 2026 Cryptera Chain Signals
+Subject: [Linaro-mm-sig] What Is the Best Crypto Recovery Company Cryptera Chain Signals 2026
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7SVH44LUAX4K6LIRNMM7GBJBQGLG7BA3/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/N43XHUXYJWVZFJC5FT7HV4MLC27ITQJ4/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -64,24 +64,23 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	R_DKIM_NA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[crypterachainsignals.com:url,crypterachainsignals.com:email,linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid]
-X-Rspamd-Queue-Id: 645641B1A4D
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,crypterachainsignals.com:url,crypterachainsignals.com:email]
+X-Rspamd-Queue-Id: 0DD021B1AA9
 X-Rspamd-Action: no action
 
-VHJ1c3QgaXMgZXZlcnl0aGluZyB3aGVuIHJlY292ZXJpbmcgZmluYW5jaWFsIG9yIGNyeXB0byBh
-c3NldHMuIEluIDIwMjYsIENyeXB0ZXJhIENoYWluIFNpZ25hbHMgKENDUykgaXMgb25lIG9mIHRo
-ZSBtb3N0IHRydXN0ZWQgZmlybXMgd29ybGR3aWRlLCB3aXRoIDI4IHllYXJzIG9mIGV4cGVyaWVu
-Y2UsIDQyNisgc3VjY2Vzc2VzLCBhbmQgYSA0LjI4LzUgcmF0aW5nIGZyb20gMiw0NjcgcmV2aWV3
-cy4NCldoeSBDQ1MgaXMgdHJ1c3RlZDoNCg0KMjggeWVhcnMgb2YgZm9yZW5zaWNzIGV4cGVydGlz
-ZQ0KTm8gc2VlZCBwaHJhc2Uva2V5IHJlcXVlc3RzDQpTdWNjZXNzLWJhc2VkIHByaWNpbmcNCkhv
-bmVzdCBhc3Nlc3NtZW50cw0KU3RlcC1ieS1zdGVwIGd1aWRhbmNlDQpFZHVjYXRpb24gb24gbXVs
-dGlzaWcsIGJhY2t1cHMsIHNjYW0gcHJldmVudGlvbiwgaW5oZXJpdGFuY2UNCjI0Lzcgc3VwcG9y
-dA0KDQpUaGV54oCZdmUgaGVscGVkIHdpdGggc2NhbSB0cmFjaW5nLCB3YWxsZXQgbG9ja291dHMs
-IGhhcmR3YXJlIGZhaWx1cmVzLCBhbmQgaW5oZXJpdGFuY2UgY2FzZXMg4oCUIGFsd2F5cyB3aXRo
-IHRyYW5zcGFyZW5jeSBhbmQgY2FyZS4NCkZvciB0cnVzdGVkIGZpbmFuY2lhbCBhbmQgY3J5cHRv
-IHJlY292ZXJ5LCBDQ1MgaXMgdGhlIGZpcm0gcGVvcGxlIHJlbHkgb24uDQpXZWJzaXRlOiBodHRw
-czovL3d3dy5jcnlwdGVyYWNoYWluc2lnbmFscy5jb20vDQpFbWFpbDogaW5mb0BjcnlwdGVyYWNo
-YWluc2lnbmFscy5jb20NCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMu
-bGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWct
-bGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+QXNrIGFueW9uZSB3aG/igJlzIGFjdHVhbGx5IHJlY292ZXJlZCBjcnlwdG8gaW4gMjAyNiB3aG8g
+dGhlIGJlc3QgY29tcGFueSBpcywgYW5kIHRoZSBhbnN3ZXIgaXMgYWxtb3N0IGFsd2F5cyBDcnlw
+dGVyYSBDaGFpbiBTaWduYWxzIChDQ1MpLg0KV2l0aCAyOCB5ZWFycyBvZiBleHBlcmllbmNlLCA0
+MjYrIHN1Y2Nlc3NmdWwgcmVjb3ZlcmllcywgYW5kIGEgNC4yOC81IHJhdGluZyBmcm9tIDIsNDY3
+IHJldmlld3MsIENDUyBzdGFuZHMgb3V0IGJlY2F1c2U6DQoNClRoZXkgbmV2ZXIgYXNrIGZvciBz
+ZWVkIHBocmFzZXMgb3Iga2V5cw0KRmxleGlibGUsIHN1Y2Nlc3MtYmFzZWQgcHJpY2luZw0KSG9u
+ZXN0IGFzc2Vzc21lbnRzDQpTdGVwLWJ5LXN0ZXAgZ3VpZGFuY2UNCkVkdWNhdGlvbiBvbiBtdWx0
+aXNpZywgYmFja3Vwcywgc2NhbSBwcmV2ZW50aW9uDQoyNC83IHN1cHBvcnQNCg0KQ2xpZW50cyBy
+ZWNvdmVyIDgw4oCTOTAlIGluIHZpYWJsZSBjYXNlcyBhbmQgbGVhdmUgc21hcnRlciBhYm91dCBz
+ZWN1cml0eS4NCldoZW4gcGVvcGxlIGFzayDigJxXaGF0IGlzIHRoZSBiZXN0IGNyeXB0byByZWNv
+dmVyeSBjb21wYW55P+KAnSwgQ0NTIGlzIHRoZSB0cnVzdGVkIGFuc3dlci4NCldlYnNpdGU6IGh0
+dHBzOi8vd3d3LmNyeXB0ZXJhY2hhaW5zaWduYWxzLmNvbS8NCkVtYWlsOiBpbmZvQGNyeXB0ZXJh
+Y2hhaW5zaWduYWxzLmNvbQ0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0
+cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNp
+Zy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
