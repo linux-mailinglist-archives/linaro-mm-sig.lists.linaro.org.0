@@ -2,27 +2,27 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WEoiO+MkomnZ0AQAu9opvQ
+	id kIZ6CvkkomnZ0AQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 00:12:35 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 00:12:57 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 871C31BEE84
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 00:12:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BEB591BEE93
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 00:12:56 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 95A38401F0
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 27 Feb 2026 23:12:34 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D3E8B401C5
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 27 Feb 2026 23:12:55 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8A5153F8EE
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 27 Feb 2026 23:12:28 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 2DECE3F8EE
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 27 Feb 2026 23:12:49 +0000 (UTC)
 MIME-Version: 1.0
 From: afrinsultana782445782445@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Fri, 27 Feb 2026 23:12:28 -0000
-Message-ID: <177223394856.917278.7956300221657740322@lists.linaro.org>
+Date: Fri, 27 Feb 2026 23:12:49 -0000
+Message-ID: <177223396918.917430.4653393549958437568@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: 6Y72NDPUWO3GCLAY6NQ53CQYSZOAQZG7
-X-Message-ID-Hash: 6Y72NDPUWO3GCLAY6NQ53CQYSZOAQZG7
+Message-ID-Hash: VNIGWRDBLNSWIHKANW3CIBK6P4CTNVVE
+X-Message-ID-Hash: VNIGWRDBLNSWIHKANW3CIBK6P4CTNVVE
 X-MailFrom: afrinsultana782445782445@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
@@ -30,7 +30,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Abortion pills in doha WhatsApp (+966543202731 Get Cytotec
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6Y72NDPUWO3GCLAY6NQ53CQYSZOAQZG7/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VNIGWRDBLNSWIHKANW3CIBK6P4CTNVVE/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -64,7 +64,7 @@ X-Spamd-Result: default: False [0.59 / 15.00];
 	RCVD_TLS_LAST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid]
-X-Rspamd-Queue-Id: 871C31BEE84
+X-Rspamd-Queue-Id: BEB591BEE93
 X-Rspamd-Action: no action
 
 Abortion pills in doha WhatsApp (+966543202731 Get Cytotec
