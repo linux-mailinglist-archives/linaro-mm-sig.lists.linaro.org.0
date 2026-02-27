@@ -2,40 +2,40 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id SG67FTQZ4WmmpAAAu9opvQ
+	id 6AnyFkEZ4WmmpAAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:15:32 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:15:45 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id D889B412788
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:15:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C794741278F
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:15:44 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E3E2D45935
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:15:30 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D173444B93
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:15:43 +0000 (UTC)
 Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 9716A40154
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 27 Feb 2026 20:42:21 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id DD37640154
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 27 Feb 2026 20:42:29 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=EqFMTeCp;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=UhCktEIb;
 	spf=pass (lists.linaro.org: domain of david@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=david@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id 0444542B7F;
-	Fri, 27 Feb 2026 20:42:21 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 85DDFC116C6;
-	Fri, 27 Feb 2026 20:42:15 +0000 (UTC)
+	by sea.source.kernel.org (Postfix) with ESMTP id 5A47742B7F;
+	Fri, 27 Feb 2026 20:42:29 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3C769C19423;
+	Fri, 27 Feb 2026 20:42:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772224940;
-	bh=tF4I9uEanrrL49/IrO6k2ajtwrnArvy+ifACjY+WOKQ=;
+	s=k20201202; t=1772224949;
+	bh=HoDEtvg3GBOF96zWJnOOBK0G0fY86adGkY74DzxijNk=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=EqFMTeCpdccKnHFagxHFbfSZQ7k83CljVOzyZNeUfdyD5/mWD7u8MvVh7fCUgkah6
-	 H5XXuZNBOtuHNKlEiJIXFCilFFUA00P+ElZDSCxcO4Jp176slvu996zA0Y+0qpgWP4
-	 HID/JnTAICa2VPlzJykgPb/KYcRWluRLNPQxRJqB6x5hfiqaQ3DrSRF7nBuIRXkX+u
-	 FkRUS2xrbs9z3+dTD1Armjnrkb5xWJX/bqRAl9/naIpHU1EOr7WOCI/BmmMoSMDMus
-	 q9/iMX+dbLeLlP7ucuiOXbvdtsm1SWAlgb66xTsm1Ty/tVUzd5QQr73g6DGTTIu6/8
-	 QfpgILk9fYYUA==
-Message-ID: <cea5eb0a-6f8d-44e8-b60b-ecd1f7ee059a@kernel.org>
-Date: Fri, 27 Feb 2026 21:42:13 +0100
+	b=UhCktEIbAUDL9Zi2WQd3Bw9EURAPYLxkgEpK+CsepI+fOXULQE8JgHg1vl8KSTp23
+	 BLuUmlh415T01I4XECWLf4lkEYQfVTIHjBO1HWl+Gf1rcinKdsgi9q7UwyEy2uBgBc
+	 hdRSm4apydFPE08ex7f+FZgXbuXgU9FwuiYun8IavC+GtzddnGybOqXkl5ls345ewn
+	 1ojFHG8uNnNykR7DiXj331XVtk2Yj3w9NkeK9R7V6ZwqzrjhjI6ABcik8pxPGllw2/
+	 E+sRfHHAd4s2IFqMfo3SutLJVK9Zai0c+7IyApDHYdVKmZtnH7qYlA0rvLp2XdKx+m
+	 JSQkELTwQxkyQ==
+Message-ID: <8393137b-7eb8-4cfe-8963-ddd5ff75ef4b@kernel.org>
+Date: Fri, 27 Feb 2026 21:42:23 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Maxime Ripard <mripard@kernel.org>, Sumit Semwal
@@ -52,7 +52,7 @@ To: Maxime Ripard <mripard@kernel.org>, Sumit Semwal
  <vbabka@suse.cz>, Mike Rapoport <rppt@kernel.org>,
  Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>
 References: <20260227-dma-buf-heaps-as-modules-v2-0-454aee7e06cc@kernel.org>
- <20260227-dma-buf-heaps-as-modules-v2-4-454aee7e06cc@kernel.org>
+ <20260227-dma-buf-heaps-as-modules-v2-5-454aee7e06cc@kernel.org>
 From: "David Hildenbrand (Arm)" <david@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=david@kernel.org; keydata=
@@ -99,20 +99,20 @@ Autocrypt: addr=david@kernel.org; keydata=
  3iyY2Nsd7JxfKu1PRhCGwXzRw5TlfEsoRI7V9A8isUCoqE2Dzh3FvYHVeX4Us+bRL/oqareJ
  CIFqgYMyvHj7Q06kTKmauOe4Nf0l0qEkIuIzfoLJ3qr5UyXc2hLtWyT9Ir+lYlX9efqh7mOY
  qIws/H2t
-In-Reply-To: <20260227-dma-buf-heaps-as-modules-v2-4-454aee7e06cc@kernel.org>
-X-Spamd-Bar: ---
+In-Reply-To: <20260227-dma-buf-heaps-as-modules-v2-5-454aee7e06cc@kernel.org>
+X-Spamd-Bar: ----
 X-MailFrom: david@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: SIB2XHGMEDP3SCUUSLOSY6DYYO6QM2MM
-X-Message-ID-Hash: SIB2XHGMEDP3SCUUSLOSY6DYYO6QM2MM
+Message-ID-Hash: DS3KQJJVU4WKKRKDRTCQYATHNUEENZ6D
+X-Message-ID-Hash: DS3KQJJVU4WKKRKDRTCQYATHNUEENZ6D
 X-Mailman-Approved-At: Thu, 16 Apr 2026 16:51:12 +0000
 CC: linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, iommu@lists.linux.dev, linux-mm@kvack.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 4/9] mm: cma: Export dev_get_cma_area()
+Subject: [Linaro-mm-sig] Re: [PATCH v2 5/9] mm: cma: Export cma_alloc and cma_release
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SIB2XHGMEDP3SCUUSLOSY6DYYO6QM2MM/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DS3KQJJVU4WKKRKDRTCQYATHNUEENZ6D/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -138,7 +138,7 @@ X-Spamd-Result: default: False [2.99 / 15.00];
 	DKIM_TRACE(0.00)[kernel.org:-];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.985];
+	NEURAL_HAM(-0.00)[-0.984];
 	FROM_NEQ_ENVFROM(0.00)[david@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
@@ -147,22 +147,54 @@ X-Spamd-Result: default: False [2.99 / 15.00];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
-X-Rspamd-Queue-Id: D889B412788
+X-Rspamd-Queue-Id: C794741278F
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 On 2/27/26 14:15, Maxime Ripard wrote:
-> The CMA dma-buf heap uses the dev_get_cma_area() function to retrieve
-> the default contiguous area.
+> The CMA dma-buf heap uses cma_alloc() and cma_release() to allocate and
+> free, respectively, its CMA buffers.
 > 
-> Now that this function is no longer inlined, and since we want to turn
-> the CMA heap into a module, let's export it.
+> However, these functions are not exported. Since we want to turn the CMA
+> heap into a module, let's export them both.
 > 
+> Reviewed-by: T.J. Mercier <tjmercier@google.com>
 > Signed-off-by: Maxime Ripard <mripard@kernel.org>
 > ---
->  kernel/dma/contiguous.c | 1 +
+>  mm/cma.c | 2 ++
+>  1 file changed, 2 insertions(+)
+> 
+> diff --git a/mm/cma.c b/mm/cma.c
+> index 94b5da468a7d719e5144d33b06bcc7619c0fbcc9..be142b473f3bd41b9c7d8ba4397f018f6993d962 100644
+> --- a/mm/cma.c
+> +++ b/mm/cma.c
+> @@ -949,10 +949,11 @@ struct page *cma_alloc(struct cma *cma, unsigned long count,
+>  	if (page)
+>  		set_pages_refcounted(page, count);
+>  
+>  	return page;
+>  }
+> +EXPORT_SYMBOL_GPL(cma_alloc);
+>  
+>  static struct cma_memrange *find_cma_memrange(struct cma *cma,
+>  		const struct page *pages, unsigned long count)
+>  {
+>  	struct cma_memrange *cmr = NULL;
+> @@ -1025,10 +1026,11 @@ bool cma_release(struct cma *cma, const struct page *pages,
+>  
+>  	__cma_release_frozen(cma, cmr, pages, count);
+>  
+>  	return true;
+>  }
+> +EXPORT_SYMBOL_GPL(cma_release);
+>  
+>  bool cma_release_frozen(struct cma *cma, const struct page *pages,
+>  		unsigned long count)
+>  {
+>  	struct cma_memrange *cmr;
+> 
 
-The prefix of the patch should likely not be "mm: cma: " :)
+Acked-by: David Hildenbrand (Arm) <david@kernel.org>
 
 -- 
 Cheers,
