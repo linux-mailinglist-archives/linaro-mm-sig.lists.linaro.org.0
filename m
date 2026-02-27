@@ -2,91 +2,90 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gNvWEz3qoGnynwQAu9opvQ
+	id sPcjG9rqoGnynwQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 27 Feb 2026 01:50:05 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 27 Feb 2026 01:52:42 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id D95A71B14E8
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 27 Feb 2026 01:50:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 087241B153F
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 27 Feb 2026 01:52:41 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DE84C3F9BE
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 27 Feb 2026 00:50:03 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id F0573401B1
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 27 Feb 2026 00:52:40 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A33173F70A
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 27 Feb 2026 00:49:56 +0000 (UTC)
-Content-Type: text/plain; charset="utf-8"
+	by lists.linaro.org (Postfix) with ESMTP id 3D2D33F962
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 27 Feb 2026 00:52:34 +0000 (UTC)
 MIME-Version: 1.0
 From: hamtonbecky@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Fri, 27 Feb 2026 00:49:56 -0000
-Message-ID: <177215339666.3992268.10866562410447643001@lists.linaro.org>
+Date: Fri, 27 Feb 2026 00:52:34 -0000
+Message-ID: <177215355424.3995075.14606739260790316063@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: Z3MXPNRFJJOHTZDCBTLK3ADII5XCWD37
-X-Message-ID-Hash: Z3MXPNRFJJOHTZDCBTLK3ADII5XCWD37
+Message-ID-Hash: ITJHBBIXB5UWSQU3Y6H5C6XMNGXKEWLS
+X-Message-ID-Hash: ITJHBBIXB5UWSQU3Y6H5C6XMNGXKEWLS
 X-MailFrom: hamtonbecky@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Cross-Chain Bridge Exploits: Following the Money After DeFi Hacks
+Subject: [Linaro-mm-sig] NFT Scams: From Minting Frauds to Wash Trading Schemes
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/Z3MXPNRFJJOHTZDCBTLK3ADII5XCWD37/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ITJHBBIXB5UWSQU3Y6H5C6XMNGXKEWLS/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.69 / 15.00];
+X-Spamd-Result: default: False [0.59 / 15.00];
 	MID_RHS_MATCH_TO(1.00)[];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx];
-	MIME_BASE64_TEXT(0.10)[];
-	MIME_GOOD(-0.10)[text/plain];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
+	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[hamtonbecky@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	FROM_NO_DN(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	MIME_TRACE(0.00)[0:+];
 	RCPT_COUNT_ONE(0.00)[1];
 	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FROM_NO_DN(0.00)[];
 	FREEMAIL_FROM(0.00)[gmail.com];
+	FROM_NEQ_ENVFROM(0.00)[hamtonbecky@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_NONE(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.986];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	R_DKIM_NA(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[crypterachainsignals.com:url,crypterachainsignals.com:email,linaro.org:email]
-X-Rspamd-Queue-Id: D95A71B14E8
+	RCVD_TLS_LAST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.997];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,crypterachainsignals.com:url,crypterachainsignals.com:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid]
+X-Rspamd-Queue-Id: 087241B153F
 X-Rspamd-Action: no action
 
-RGVGaSBicmlkZ2VzIGFyZSBmcmVxdWVudCBoYWNrIHRhcmdldHMsIHdpdGggYmlsbGlvbnMgc3Rv
-bGVuIGhpc3RvcmljYWxseeKAlGZ1bmRzIG9mdGVuIHRyYWNlYWJsZSBkZXNwaXRlIGNvbXBsZXhp
-dHkuDQoxLiBUaGUgRXhwbG9pdA0KSGFja2VycyBleHBsb2l0IHZ1bG5lcmFiaWxpdGllcyBpbiBi
-cmlkZ2UgY29udHJhY3RzLg0KDQpEcmFpbiBsaXF1aWRpdHkgcG9vbHMgb3IgbWludCB1bmF1dGhv
-cml6ZWQgdG9rZW5zLg0KDQoyLiBJbW1lZGlhdGUgTW92ZW1lbnQNClN0b2xlbiBhc3NldHMgYnJp
-ZGdlZCBiYWNrIG9yIHN3YXBwZWQuDQoNClNwbGl0IGFjcm9zcyB3YWxsZXRzLg0KTGF1bmRlcmVk
-IHZpYSBtaXhlcnMvREVYcy4NCg0KMy4gTGF1bmRlcmluZyBQYXRoDQpGdW5kcyBob3AgY2hhaW5z
-LCBjb252ZXJ0IHRvIHN0YWJsZWNvaW5zLCB0aGVuIHRvIGV4Y2hhbmdlcy4NCjQuIENhc2gtT3V0
-IEF0dGVtcHRzDQpNYW55IGhpdCBjZW50cmFsaXplZCBwbGF0Zm9ybXMgZXZlbnR1YWxseS4NCldo
-ZXJlIFRyYWNpbmcgQ2FuIEludGVydmVuZQ0KQnJpZGdlcyBsZWF2ZSBkZXRhaWxlZCB0cmFpbHMu
-DQoNCk11bHRpLUNoYWluIEFuYWx5c2lzOiBUcmFjayBhY3Jvc3MgZWNvc3lzdGVtcy4NClRhaW50
-IFRyYWNraW5nOiBGbGFnIHRhaW50ZWQgZnVuZHMgYXQgZXhjaGFuZ2VzLg0KQ29tbXVuaXR5L0RB
-TyBGcmVlemVzOiBTb21lIHByb3RvY29scyBmcmVlemUuDQoNCkNyeXB0ZXJhIENoYWluIFNpZ25h
-bHMgKENDUykgcHJvdmlkZXMgZXhwZXJ0IG11bHRpLWNoYWluIGZvcmVuc2ljcyBmb3IgaGFjayB2
-aWN0aW1zIGFuZCBwcm9qZWN0cywgaWRlbnRpZnlpbmcgcGF0aHMgYW5kIGFpZGluZyBmcmVlemVz
-L3JlY292ZXJpZXMuDQpGb3IgRGVGaSBoYWNrIG9yIGV4cGxvaXQgcmVjb3Zlcnkgc3VwcG9ydCwg
-dmlzaXQgaHR0cHM6Ly93d3cuY3J5cHRlcmFjaGFpbnNpZ25hbHMuY29tLyBvciBlbWFpbCBpbmZv
-QGNyeXB0ZXJhY2hhaW5zaWduYWxzLmNvbS4NClVzZSBhdWRpdGVkIGJyaWRnZXMsIGRpdmVyc2lm
-eSwgYW5kIHN0YXkgaW5mb3JtZWQgb24gc2VjdXJpdHkgYWxlcnRzLg0KX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxp
-c3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQg
-YW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
+NFT Scams: From Minting Frauds to Wash Trading Schemes
+The non-fungible token (NFT) market exploded in popularity, but with it came a wave of scams exploiting creators and collectors alike. From fake minting sites to artificial hype, understanding these schemes is crucial for anyone venturing into digital collectibles. This article dissects common NFT frauds, their mechanics, and potential recovery strategies, emphasizing the importance of due diligence in this volatile space.
+1. Fake Minting and Launch Scams
+Scammers often create counterfeit NFT projects mimicking legitimate ones, complete with stolen artwork and hype on social media. Victims are lured to mint NFTs on fraudulent websites that promise exclusivity or low gas fees.
+These sites typically require connecting a wallet and approving transactions, but instead of minting, they drain funds or steal approvals for unlimited transfers. For instance, a fake Bored Ape Yacht Club drop might siphon Ethereum directly. The blockchain records this as a standard transfer, but the victim loses control instantly. Educatively, always verify project links through official channels and use tools like Etherscan to check contract interactions before approving.
+2. Rug Pulls in NFT Collections
+Once a collection gains traction, scammers execute a "rug pull" by abandoning the project after collecting mint fees. They hype roadmaps with promises of utilities like metaverse access or airdrops, only to sell off their holdings and delete social accounts.
+Funds from mints are pooled in a smart contract, then drained via hidden backdoors. This creates a sudden price crash, leaving holders with worthless tokens. Real-world examples include projects that raised millions in 2025 only to vanish, highlighting the need for auditing contracts via platforms like Certik. Scammers split proceeds across wallets to evade immediate detection, often using automated bots for efficiency.
+3. Wash Trading and Market Manipulation
+To inflate perceived value, scammers engage in wash trading: buying and selling NFTs between controlled wallets to fake volume and drive up floor prices. This attracts genuine buyers who then face dumps.
+On marketplaces like OpenSea, this appears as rapid trades, but blockchain analysis reveals clustered addresses. Privacy tools like mixers are then used to obscure funds, hopping to chains like Polygon for lower fees. Educatively, tools like Dune Analytics can reveal unnatural trading patterns, helping investors spot fakes before committing.
+4. Secondary Market Thefts and Phishing
+Even after purchase, NFTs are targeted via phishing for wallet credentials or through malicious Discord bots. Stolen items are quickly flipped on other marketplaces or laundered as collateral in DeFi loans.
+Funds from sales follow familiar paths: splitting, chain-hopping to Solana or Avalanche, and cashing out via exchanges. Once in fiat, tracing becomes a legal matter, underscoring the global challenge of NFT fraud.
+Where Tracing Can Intervene
+NFT scams leave digital footprints that experts can exploit if acted on promptly. Early reporting allows monitoring of token transfers and wallet clusters. Marketplaces often freeze suspicious listings upon evidence, while chain analysis identifies endpoints.
+Blockchain investigation firms like Cryptera Chain Signals specialize in NFT fraud tracing, mapping token movements across marketplaces and chains to pinpoint recovery opportunities. With expertise in forensics and partnerships with platforms, they assist in freezing assets and building cases for law enforcement, boasting numerous successes in 2026 recoveries.
+For professional assistance with NFT scam investigations or asset recovery, visit the Cryptera Chain Signals website at https://www.crypterachainsignals.com/. You can contact them directly via email at info@crypterachainsignals.com or through their secure inquiry form.
+Navigating NFTs requires skepticism: verify creators, audit contracts, and use secure wallets. If scammed, document everything and seek help immediately to maximize recovery chances.
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
