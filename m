@@ -2,164 +2,265 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 6MagFA1eoWmksQQAu9opvQ
+	id sBEUFnRsoWm6swQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 27 Feb 2026 10:04:13 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 27 Feb 2026 11:05:40 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id D69041B4E48
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 27 Feb 2026 10:04:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B8C661B5BF0
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 27 Feb 2026 11:05:39 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DA13E3F6F0
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 27 Feb 2026 09:04:11 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 049993F6F0
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 27 Feb 2026 09:04:09 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9B9A13F6F0
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 27 Feb 2026 10:05:38 +0000 (UTC)
+Received: from SJ2PR03CU001.outbound.protection.outlook.com (mail-westusazon11012058.outbound.protection.outlook.com [52.101.43.58])
+	by lists.linaro.org (Postfix) with ESMTPS id 707443F6F0
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 27 Feb 2026 10:05:36 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=bV3DNDdY;
-	spf=pass (lists.linaro.org: domain of conor@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=conor@kernel.org;
-	dmarc=pass (policy=quarantine) header.from=kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id 5CDE74451F;
-	Fri, 27 Feb 2026 09:04:08 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BE6E0C116C6;
-	Fri, 27 Feb 2026 09:04:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772183048;
-	bh=ULqmscrmRYbb7GaDQ1iw2PdzZRP98XQa3VtXm4mRQjU=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=bV3DNDdY9xhWKrvNO/Wuy+ina1DeOPshRfqwbuTvmPjwRx4yGWjfQVOgUGjL9uVMz
-	 jn9nl5F9K8IhoNQLMCgFUH+GwmMQjIB5QuGp7Bt2NGg+KO+KkooOYyQUKMC14i5Hbn
-	 U+rwxMtwtNNVF6xJ8KqiYPYB8xqqE5zPgytc64riiVotu95z9lGEZbQtVqXrVuOewd
-	 XNCpS2TWddFXJVBwHUJe+rl3evQjIJlQSeutsmpSHggaEe8uGS62b8/FNSMNSKTmTH
-	 lmoxE/xzS2yUe7U3f8TvMsax/mz/zTfFJ6W0NylHRtRMeUr05tjwISn8pY1SmERF+f
-	 D83rEBW+zmhKA==
-Date: Fri, 27 Feb 2026 09:04:01 +0000
-From: Conor Dooley <conor@kernel.org>
-To: Daniel Baluta <daniel.baluta@oss.nxp.com>
-Message-ID: <20260227-shakable-mummified-ba7bb54e0e05@spud>
-References: <20260226-neutron-v1-0-46eccb3bb50a@nxp.com>
- <20260226-neutron-v1-3-46eccb3bb50a@nxp.com>
- <20260226-unthread-reformat-92b855c4acf9@spud>
- <16172163-8aef-4d94-be62-70e159aae182@oss.nxp.com>
+	dkim=pass header.d=amd.com header.s=selector1 header.b="bA/BA7HU";
+	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 52.101.43.58 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
+	arc=pass ("microsoft.com:s=arcselector10001:i=1");
+	dmarc=pass (policy=quarantine) header.from=amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=wqcMN/ivMj1km2uuThlSyfuoDmP84juJqbOrcaZUzQ8+YK4iHYYQnJva1Lhe4QDv0BEg95ffGtwViNB+sBzRLqmhidKCxvQFT5x1+KonOnc9BXD2fT+IsIs5GxsaMxpJyV6C3ejUY+8fkp5jV4eNuREnaP3SP9ihex42miudKm9UaFGkwaOzLXgeShsIT/D7TDRxmVhZmXlTfvp8EUIYqjtZyvlM9rRy8ddOSwzqjECgJYlmMbe6yVX2YhXo/nq7lSCsmIdqO39ndVQwpCOrYKgEhGKZfa0SKw3kWJyFjjPn7XiK492aUWxVc/4sxqL3LrObpvMlxGNdxvnZkPwy5w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=YlxmKmuDeIDjHL9kwblbR4uINzVEeovOWU4h1/4ROaA=;
+ b=SfNr3zSSHb2HamFcSSZ/HDp42OliTeSpE/o4cAJKHMBK3uT7yW0IPiaCW9XvHTWdBQzUGTx540j5XeZklIyFLMeQVWgBQze8pxLMIz1Jal0wyCEbccWdUmkc6YnGMjfPsQ/30gkZABw2haaWJ11MGkf8O4gmTtE+mh5C8cnEVqZXI671q94XBtlwhDR+/9FwlwZ3bbam/RT7AAQke63bJKdStNUjeXKwUckRLoVOv6n4EGQf2qpOo0pahbQV7q2SDLxDaN2UqMkkqZN4zFf0a3ZRbMTJgXn/HeqnD70q89CU+5i43T6XjY/lexB+nz7Z5UATV71trlapyShw+STiyg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=YlxmKmuDeIDjHL9kwblbR4uINzVEeovOWU4h1/4ROaA=;
+ b=bA/BA7HUQoR23zTx1Oj0e4S1UeLgsJSd86zKB4tnJsJygD+cI1rv+ASIsAYFfFYxyksBp7nCr8L29wkka7h2I8z70Sjc+LdblaTNSoBIB8fwnTwpz5ZmS/pmtn3VI9C+Qecry/so4IngMUPhKzoxo+g04Dt1Qy/I5Hw2JGpvwB0=
+Received: from PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
+ by MW4PR12MB5628.namprd12.prod.outlook.com (2603:10b6:303:185::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.16; Fri, 27 Feb
+ 2026 10:05:34 +0000
+Received: from PH7PR12MB5685.namprd12.prod.outlook.com
+ ([fe80::ce69:cfae:774d:a65c]) by PH7PR12MB5685.namprd12.prod.outlook.com
+ ([fe80::ce69:cfae:774d:a65c%5]) with mapi id 15.20.9632.017; Fri, 27 Feb 2026
+ 10:05:33 +0000
+Message-ID: <f75088c6-5795-49cc-8932-ea46c2223d74@amd.com>
+Date: Fri, 27 Feb 2026 11:05:24 +0100
+User-Agent: Mozilla Thunderbird
+To: Matt Evans <mattev@meta.com>, Alex Williamson <alex@shazbot.org>,
+ Leon Romanovsky <leon@kernel.org>, Jason Gunthorpe <jgg@nvidia.com>,
+ Alex Mastro <amastro@fb.com>, Mahmoud Adam <mngyadam@amazon.de>,
+ David Matlack <dmatlack@google.com>
+References: <20260226202211.929005-1-mattev@meta.com>
+ <20260226202211.929005-5-mattev@meta.com>
+Content-Language: en-US
+From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+In-Reply-To: <20260226202211.929005-5-mattev@meta.com>
+X-ClientProxiedBy: YT4PR01CA0291.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:10e::15) To PH7PR12MB5685.namprd12.prod.outlook.com
+ (2603:10b6:510:13c::22)
 MIME-Version: 1.0
-In-Reply-To: <16172163-8aef-4d94-be62-70e159aae182@oss.nxp.com>
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|MW4PR12MB5628:EE_
+X-MS-Office365-Filtering-Correlation-Id: f874b616-714c-46c9-7f12-08de75e7be79
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|1800799024|366016|7416014|376014|7053199007;
+X-Microsoft-Antispam-Message-Info: 
+	buk4rNddqrtQSpIqSVI4x0wPIR/a1qezMGO5SQayFZZLt4CCRvbRdEKIxRvHube9leP9esMMLApYEpclXfNtq9Ths2JAjdahcxS++A6lcIShK5sdhOHSU4CTWMjh2y8Y32X4/1NlIO6LPxKCyeQZuGGHBgyJfnazT2jh2AwWET1nqU3Avf81KYwH5vYr3d5fkJdgfe/rnDYH5C3iGG7L20lFCrBnCEEf/q3SMhuux1KzjmTJ0GaXNNuhKY5I0/RAxqLXS0u1UI2ZuIOlV1qKBgsPb62USbG/FCiPLLTLGtfZARSo5bSsgEqcGxmhyvAPCZ8oOWrg96f3T3tu0HXKeHXijGbjw/rPIE0Mcc7rMvYraQcZ+YbPbXkNpPy+dyGGEeZeV4r8j1mO3ROI7M/CiTKjM/+6VOsiA2cabAZClCOi/X4flckdvlJBYvySNYHO6FVCTSMsWRflMWWOzFSGj2Q2X23a6TRaZQgT4H3FBymU6+ZWK67XcHijynTpAN527da44YTIHb2ON1J7kPYajNadDhCcl2bCO/SU4cLoV+qwiRrOVEOF6DSH7GDf0y1dM1aTTPCnkrdt9rGOw6BwmxuzfsB1aDQLgUZ36bRmYtoj3+uG5Os/0cRHT1z6XLCa+zHF4pwGQpOBD5S8tvFGdb0IIVq+k1y0CEoXaOWhRbAlP9QgN508D5EKC5p+t9+yyuiArGZzfl3O8NPc1nWHeDEMqUWfV/UKDm2oZUguhOE=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB5685.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(7416014)(376014)(7053199007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?TkI3YmVqaUYxdks2eUtFMWppSFNuUlhSZ2h0cXBYczhzWHhERWZJNHVUb1Jj?=
+ =?utf-8?B?ZTRtcG5oemQ3djJJdlg4N2toNTN6bkZTTTJrbFYzOVNXYlRPSXVQRitURTRR?=
+ =?utf-8?B?WXNjTHJwQk1KcjhOZkZ1RnZOcHpOckQ2QnhXajAreGZrdHQ1eWwwaGpmdGZo?=
+ =?utf-8?B?ODl4aURGMldxcHUzeTl5aUVkZ2hsVENLcmJqOFhMSDJ5U1EzczBqazg1bXNZ?=
+ =?utf-8?B?NGlSYkUxM0RaSXE0ejgzaUNXVkVCWkszQ3FSUWdmQ1B2cFdRdGd3QUdmSWsv?=
+ =?utf-8?B?S25mSUJIUDNnYUpodVdpYXNyeEoxOW95TElFQnJsNGVtRU1VaDZGVXZncFY4?=
+ =?utf-8?B?bWpYa1diMnkzcXBmOEhjdmQxTzNkQWVrRmtVaTl6dC9OTmNuOU84UTNOYU1u?=
+ =?utf-8?B?d0NZR2VLZDJ1R0xtaDFmcklabDY0a1BVaU5FbWorOEVtdDRSNDB5UVd1S21m?=
+ =?utf-8?B?UG5rL0ZRQ0Rpa3BsTVhZRGw4aWwrejBMOG5LdUZoSmhOQWduUHB2Zks4YXlQ?=
+ =?utf-8?B?WElCSUp6RVYyWTRwU211RWdTa0g0cHJUUHV4dy9vT092ZFNBNGdjdU9TUEly?=
+ =?utf-8?B?YUtrZjllbGdJQmIyeU5MMVNtUkRZR2JBQ3BnTDArbXRldEsyei92d2N6d2p0?=
+ =?utf-8?B?K3kyY21BQlhvVWFEQ0djZ0VOcHlEREpvWm0zeXZVMXNqOG9uUE1MTmtBY3Ex?=
+ =?utf-8?B?TEd4Q2U3V21YU3ZORXh2UWxBc2FnS2NFb1AzVDlwekZzeWJmd0xrTElrVVBl?=
+ =?utf-8?B?c0U1SStvUlZiRlhISlpsYVZvTFUxdGVabEtVWks5UkxSdTFpYzQyNEprczRm?=
+ =?utf-8?B?WnhrTVE0UHVML0xaRDlpdFRXY1FKa2VRUFJIM0pVNGpyNTFpNEVBYUtWY1Y3?=
+ =?utf-8?B?bVZCUUExVFlqQnRhSm00SjJYMEZVZXhSUmdXUWROQ1hselFkdlM2aHpHL2Vz?=
+ =?utf-8?B?bGNJWUxyaXJGalZFdG5VdndzRHR0bVVrQm9QUHFvM0JSYVE3U0NRMUFqN2V3?=
+ =?utf-8?B?WW1DLzM3VW51dmU2cGQ5eFlsVEp2WGFaYW4xN2RXRDFucHd0Q3RuYUVRNFlR?=
+ =?utf-8?B?L3NsWG42Y0ZEUHFWc1R3UGxsWmg4OEZHdlFaVUtnYzZoMzJwQytUT2JIMXZJ?=
+ =?utf-8?B?WVBLSW91MFUySlFBTk9HeHpwdHY4WTRXN2dJMHRyTU4vY3Vwa0hSMHQzZ2JU?=
+ =?utf-8?B?aUVDcmJjNTVrZUgyVnRBNUZKYktuNGprUndLbW5QckRYUUVJNFdsN2o2ZXRU?=
+ =?utf-8?B?N0dRZWlaWUVCcE5lWC84eHdVblVGMFVmaEREMTJXL29MaGcyd1NaVXNsVkhK?=
+ =?utf-8?B?OS9nb00ySDBzdjhiVm9zRGtRTXcvZnBaSHNKamhGUHBCY3lFRnFWQy80dmFD?=
+ =?utf-8?B?dzRxdS92eGhqeWpMY1dSUHBhblBRYXhmK1VJKzVFdkdiMGFQamNncW15MHha?=
+ =?utf-8?B?VUUrUmVSd3hzQlhRS1hhOHY1dEhmZDZJNzVVQ0c1QkNtbXlDTjVMTmZrR2FK?=
+ =?utf-8?B?VWU1MFFrOFNOd1Q2d3FXOStndm9vY0swN2M1dFJURUlFVW5nMlZTbGtrTHEz?=
+ =?utf-8?B?STRESElhbkU3S2pOdVhsMmRIaXZ6QnplTkxzbk5mM29FMjAyTDdVOS9YSjhP?=
+ =?utf-8?B?MXU2VXF2MXhTMWhENXY2cDNFQWZ0VHVmdDFiTkJrSE5UOXFXekJtNVJwT3lz?=
+ =?utf-8?B?TllGVDNTL3hSQWR2a2NOZ0FRNW1oMXlCZVF6LzJIaUpGT3NpQlFIZjFYQ3Rq?=
+ =?utf-8?B?a0dMTmtOR2hLN1NUTWRpWWhqQzg1MDhoUVhkam1jUDhqM004VVhKVE41djNv?=
+ =?utf-8?B?VXF3TGNwZU5xVXNjNTdnOUsyZllpVExpMlY4RDNrRDduVHhyTDJSaUI0VjhL?=
+ =?utf-8?B?UWR4QXpLdHl5dHhUSkY2em5qaHdVSEtMYjVTMUlXelBtT2Q0V0J1cGxyZUV6?=
+ =?utf-8?B?UmhCTHFHOEVKektHTE1aVDh6QVRpTGpnSGpYQlZ4RHVEV0QrU0Z1U0QwNTNX?=
+ =?utf-8?B?TDJlOGR1SXA4K2xtWHF2aGxncHBJV1BDVDJPVGR3WkVvSURlWHFwNWZZbGxn?=
+ =?utf-8?B?NDRHaGVCQ2owTDRGSjZCbElKTDA5MTBueDQzTGI0UlhCb3lRMFh6Um5ONUdL?=
+ =?utf-8?B?LzZhc2JNK3lxQm9iOHdMaFJwK01vQk11OFIvTkh0dW5CYXBibGljQzNtbzhC?=
+ =?utf-8?B?MDBFTXI5UDNaOE1lRVZaeVA0ZzRPQjM2SjZpWE5QSUk4TmZoeFhHN3IwWmI0?=
+ =?utf-8?B?RU02NDFaUW56UUtLMGMrc29UVFdldWpSYTRvRGtQdDNrOWxKU2V1QXJ6S0hB?=
+ =?utf-8?Q?cmUXtQZGRD600YRkEr?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f874b616-714c-46c9-7f12-08de75e7be79
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5685.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Feb 2026 10:05:33.0887
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: /5pIozMZIUIGUR2ZxLVc9Gdc6arNylA+fwGXwVAJ86ZVsE2Hr44w1+bRp3xhrOKb
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB5628
 X-Spamd-Bar: -----
-Message-ID-Hash: UWHCDBKIT7A7UUZNXMQ3F3P4AADOCL2S
-X-Message-ID-Hash: UWHCDBKIT7A7UUZNXMQ3F3P4AADOCL2S
-X-MailFrom: conor@kernel.org
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Ioana Ciocoi-Radulescu <ruxandra.radulescu@nxp.com>, Oded Gabbay <ogabbay@kernel.org>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Frank Li <Frank.Li@nxp.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, devicetree@vger.kernel.org, imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Jiwei Fu <jiwei.fu@nxp.com>, Forrest Shi <xuelin.shi@nxp.com>, Alexandru Taran <alexandru.taran@nxp.com>
+Message-ID-Hash: N52PSZIQIGANA3VPJTI5XUH3MCL6VGVO
+X-Message-ID-Hash: N52PSZIQIGANA3VPJTI5XUH3MCL6VGVO
+X-MailFrom: Christian.Koenig@amd.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Kevin Tian <kevin.tian@intel.com>, Ankit Agrawal <ankita@nvidia.com>, Pranjal Shrivastava <praan@google.com>, Alistair Popple <apopple@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 3/9] dt-bindings: npu: Add bindings for NXP Neutron
+Subject: [Linaro-mm-sig] Re: [RFC PATCH 4/7] dma-buf: uapi: Mechanism to revoke DMABUFs via ioctl()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UWHCDBKIT7A7UUZNXMQ3F3P4AADOCL2S/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/N52PSZIQIGANA3VPJTI5XUH3MCL6VGVO/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============4049201384440144255=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [1.89 / 15.00];
-	SIGNED_PGP(-2.00)[];
-	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
-	R_DKIM_REJECT(1.00)[kernel.org:s=k20201202];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+X-Spamd-Result: default: False [2.99 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[amd.com : SPF not aligned (relaxed),quarantine];
+	R_DKIM_REJECT(1.00)[amd.com:s=selector1];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MAILLIST(-0.20)[mailman];
-	MIME_GOOD(-0.20)[multipart/mixed,multipart/signed,text/plain];
+	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+,1:+,2:+,3:~,4:+];
-	RCVD_COUNT_THREE(0.00)[4];
-	RCPT_COUNT_TWELVE(0.00)[25];
-	FREEMAIL_CC(0.00)[nxp.com,kernel.org,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,lists.freedesktop.org,vger.kernel.org,lists.linux.dev,lists.infradead.org,lists.linaro.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.870];
-	FROM_NEQ_ENVFROM(0.00)[conor@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:-];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,dt];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[amd.com:mid];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[19];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email]
-X-Rspamd-Queue-Id: D69041B4E48
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[christian.koenig@amd.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	NEURAL_HAM(-0.00)[-0.991];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[amd.com:-]
+X-Rspamd-Queue-Id: B8C661B5BF0
 X-Rspamd-Action: no action
 
+On 2/26/26 21:22, Matt Evans wrote:
+> Add a new dma-buf ioctl() op, DMA_BUF_IOCTL_REVOKE, connected to a new
+> (optional) dma_buf_ops callback, revoke().  An exporter receiving this
+> will _permanently_ revoke the DMABUF, meaning it can no longer be
+> mapped/attached/mmap()ed.  It also guarantees that existing
+> importers have been detached (e.g. via move_notify) and all mappings
+> made inaccessible.
+> 
+> This is useful for lifecycle management in scenarios where a process
+> has created a DMABUF representing a resource, then delegated it to
+> a client process; access to the resource is revoked when the client is
+> deemed "done", and the resource can be safely re-used elsewhere.
 
---===============4049201384440144255==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="HGUIQTmEq3BO0PCt"
-Content-Disposition: inline
+Well that means revoking from the importer side. That absolutely doesn't make sense to me.
 
+Why would you do that?
 
---HGUIQTmEq3BO0PCt
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Regards,
+Christian.
 
-On Fri, Feb 27, 2026 at 08:45:29AM +0200, Daniel Baluta wrote:
-> On 2/26/26 20:20, Conor Dooley wrote:
-> [..]
-> >> +  - |
-> >> +    #include <dt-bindings/interrupt-controller/arm-gic.h>
-> >> +    #include <dt-bindings/interrupt-controller/irq.h>
-> >> +
-> >> +    bus {
-> >> +      #address-cells =3D <2>;
-> >> +      #size-cells =3D <2>;
-> >> +
-> >> +      neutron@4ab00000 {
-> > "neutron" is not a generic node name. This should be something like
-> > "accelerator" or similar.
-> >
-> The only dts nodes I could find using accel subsystem are from rockhip. A=
-nd they use npu@
->=20
-> e.g:
->=20
-> =BB=A0 =A0 =A0 =A0rknn_core_0: npu@fdab0000 {
-> =BB=A0 =A0 =A0 =A0=BB=A0 =A0 =A0 =A0compatible =3D "rockchip,rk3588-rknn-=
-core";
->=20
-> Also, Ethos-U64 introduced by Rob with [1] is using npu@.
->=20
-> So, I think we should go wit that. I haven't seen any document to standar=
-dize the naming.
-
-accelerator, npu, makes no difference to me, so sure.
-
---HGUIQTmEq3BO0PCt
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCaaFeAQAKCRB4tDGHoIJi
-0jXWAQDkJ0uqFe0zBBD97N8Nc9W1uspEgrsZpTqEwgxIVIlnKwD/SKBKuEJxP5os
-9i6n1nocp64AivMzqCek95MinbTDIgQ=
-=lAaA
------END PGP SIGNATURE-----
-
---HGUIQTmEq3BO0PCt--
-
---===============4049201384440144255==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+> 
+> Signed-off-by: Matt Evans <mattev@meta.com>
+> ---
+>  drivers/dma-buf/dma-buf.c    |  5 +++++
+>  include/linux/dma-buf.h      | 22 ++++++++++++++++++++++
+>  include/uapi/linux/dma-buf.h |  1 +
+>  3 files changed, 28 insertions(+)
+> 
+> diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
+> index edaa9e4ee4ae..b9b315317f2d 100644
+> --- a/drivers/dma-buf/dma-buf.c
+> +++ b/drivers/dma-buf/dma-buf.c
+> @@ -561,6 +561,11 @@ static long dma_buf_ioctl(struct file *file,
+>         case DMA_BUF_IOCTL_IMPORT_SYNC_FILE:
+>                 return dma_buf_import_sync_file(dmabuf, (const void __user *)arg);
+>  #endif
+> +       case DMA_BUF_IOCTL_REVOKE:
+> +               if (dmabuf->ops->revoke)
+> +                       return dmabuf->ops->revoke(dmabuf);
+> +               else
+> +                       return -EINVAL;
+> 
+>         default:
+>                 return -ENOTTY;
+> diff --git a/include/linux/dma-buf.h b/include/linux/dma-buf.h
+> index 0bc492090237..a68c9ad7aebd 100644
+> --- a/include/linux/dma-buf.h
+> +++ b/include/linux/dma-buf.h
+> @@ -277,6 +277,28 @@ struct dma_buf_ops {
+> 
+>         int (*vmap)(struct dma_buf *dmabuf, struct iosys_map *map);
+>         void (*vunmap)(struct dma_buf *dmabuf, struct iosys_map *map);
+> +
+> +       /**
+> +        * @revoke:
+> +        *
+> +        * This callback is invoked from a userspace
+> +        * DMA_BUF_IOCTL_REVOKE operation, and requests that access to
+> +        * the buffer is immediately and permanently revoked.  On
+> +        * successful return, the buffer is not accessible through any
+> +        * mmap() or dma-buf import.  The request fails if the buffer
+> +        * is pinned; otherwise, the exporter marks the buffer as
+> +        * inaccessible and uses the move_notify callback to inform
+> +        * importers of the change.  The buffer is permanently
+> +        * disabled, and the exporter must refuse all map, mmap,
+> +        * attach, etc. requests.
+> +        *
+> +        * Returns:
+> +        *
+> +        * 0 on success, or a negative error code on failure:
+> +        * -ENODEV if the associated device no longer exists/is closed.
+> +        * -EBADFD if the buffer has already been revoked.
+> +        */
+> +       int (*revoke)(struct dma_buf *dmabuf);
+>  };
+> 
+>  /**
+> diff --git a/include/uapi/linux/dma-buf.h b/include/uapi/linux/dma-buf.h
+> index 5a6fda66d9ad..84bf2dd2d0f3 100644
+> --- a/include/uapi/linux/dma-buf.h
+> +++ b/include/uapi/linux/dma-buf.h
+> @@ -178,5 +178,6 @@ struct dma_buf_import_sync_file {
+>  #define DMA_BUF_SET_NAME_B     _IOW(DMA_BUF_BASE, 1, __u64)
+>  #define DMA_BUF_IOCTL_EXPORT_SYNC_FILE _IOWR(DMA_BUF_BASE, 2, struct dma_buf_export_sync_file)
+>  #define DMA_BUF_IOCTL_IMPORT_SYNC_FILE _IOW(DMA_BUF_BASE, 3, struct dma_buf_import_sync_file)
+> +#define DMA_BUF_IOCTL_REVOKE   _IO(DMA_BUF_BASE, 4)
+> 
+>  #endif
+> --
+> 2.47.3
+> 
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============4049201384440144255==--
