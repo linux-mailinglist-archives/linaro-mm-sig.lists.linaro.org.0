@@ -2,35 +2,35 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sPcjG9rqoGnynwQAu9opvQ
+	id QD+OH4rtoGlroAQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 27 Feb 2026 01:52:42 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 27 Feb 2026 02:04:10 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 087241B153F
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 27 Feb 2026 01:52:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EFE181B1616
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 27 Feb 2026 02:04:09 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id F0573401B1
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 27 Feb 2026 00:52:40 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C94663F9BA
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 27 Feb 2026 01:04:08 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3D2D33F962
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 27 Feb 2026 00:52:34 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 929363F962
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 27 Feb 2026 01:04:02 +0000 (UTC)
 MIME-Version: 1.0
 From: hamtonbecky@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Fri, 27 Feb 2026 00:52:34 -0000
-Message-ID: <177215355424.3995075.14606739260790316063@lists.linaro.org>
+Date: Fri, 27 Feb 2026 01:04:02 -0000
+Message-ID: <177215424259.4003219.14554608324632552631@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: ITJHBBIXB5UWSQU3Y6H5C6XMNGXKEWLS
-X-Message-ID-Hash: ITJHBBIXB5UWSQU3Y6H5C6XMNGXKEWLS
+Message-ID-Hash: W5C2ST5QP742DWPFVKJW555KCXECDTOJ
+X-Message-ID-Hash: W5C2ST5QP742DWPFVKJW555KCXECDTOJ
 X-MailFrom: hamtonbecky@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] NFT Scams: From Minting Frauds to Wash Trading Schemes
+Subject: [Linaro-mm-sig] DeFi Yield Farming Traps: High Returns or Total Wipeouts?
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ITJHBBIXB5UWSQU3Y6H5C6XMNGXKEWLS/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/W5C2ST5QP742DWPFVKJW555KCXECDTOJ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -40,52 +40,53 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.59 / 15.00];
+X-Spamd-Result: default: False [1.59 / 15.00];
+	SUBJECT_ENDS_QUESTION(1.00)[];
 	MID_RHS_MATCH_TO(1.00)[];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+	R_SPF_ALLOW(-0.20)[+mx];
 	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FROM_NO_DN(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_ONE(0.00)[1];
-	ARC_NA(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	FROM_NEQ_ENVFROM(0.00)[hamtonbecky@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_ONE(0.00)[1];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	FREEMAIL_FROM(0.00)[gmail.com];
 	TO_DN_NONE(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	FROM_NO_DN(0.00)[];
+	NEURAL_HAM(-0.00)[-0.999];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	R_DKIM_NA(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.997];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,crypterachainsignals.com:url,crypterachainsignals.com:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid]
-X-Rspamd-Queue-Id: 087241B153F
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,linaro.org:email,crypterachainsignals.com:url,crypterachainsignals.com:email]
+X-Rspamd-Queue-Id: EFE181B1616
 X-Rspamd-Action: no action
 
-NFT Scams: From Minting Frauds to Wash Trading Schemes
-The non-fungible token (NFT) market exploded in popularity, but with it came a wave of scams exploiting creators and collectors alike. From fake minting sites to artificial hype, understanding these schemes is crucial for anyone venturing into digital collectibles. This article dissects common NFT frauds, their mechanics, and potential recovery strategies, emphasizing the importance of due diligence in this volatile space.
-1. Fake Minting and Launch Scams
-Scammers often create counterfeit NFT projects mimicking legitimate ones, complete with stolen artwork and hype on social media. Victims are lured to mint NFTs on fraudulent websites that promise exclusivity or low gas fees.
-These sites typically require connecting a wallet and approving transactions, but instead of minting, they drain funds or steal approvals for unlimited transfers. For instance, a fake Bored Ape Yacht Club drop might siphon Ethereum directly. The blockchain records this as a standard transfer, but the victim loses control instantly. Educatively, always verify project links through official channels and use tools like Etherscan to check contract interactions before approving.
-2. Rug Pulls in NFT Collections
-Once a collection gains traction, scammers execute a "rug pull" by abandoning the project after collecting mint fees. They hype roadmaps with promises of utilities like metaverse access or airdrops, only to sell off their holdings and delete social accounts.
-Funds from mints are pooled in a smart contract, then drained via hidden backdoors. This creates a sudden price crash, leaving holders with worthless tokens. Real-world examples include projects that raised millions in 2025 only to vanish, highlighting the need for auditing contracts via platforms like Certik. Scammers split proceeds across wallets to evade immediate detection, often using automated bots for efficiency.
-3. Wash Trading and Market Manipulation
-To inflate perceived value, scammers engage in wash trading: buying and selling NFTs between controlled wallets to fake volume and drive up floor prices. This attracts genuine buyers who then face dumps.
-On marketplaces like OpenSea, this appears as rapid trades, but blockchain analysis reveals clustered addresses. Privacy tools like mixers are then used to obscure funds, hopping to chains like Polygon for lower fees. Educatively, tools like Dune Analytics can reveal unnatural trading patterns, helping investors spot fakes before committing.
-4. Secondary Market Thefts and Phishing
-Even after purchase, NFTs are targeted via phishing for wallet credentials or through malicious Discord bots. Stolen items are quickly flipped on other marketplaces or laundered as collateral in DeFi loans.
-Funds from sales follow familiar paths: splitting, chain-hopping to Solana or Avalanche, and cashing out via exchanges. Once in fiat, tracing becomes a legal matter, underscoring the global challenge of NFT fraud.
+DeFi Yield Farming Traps: High Returns or Total Wipeouts?
+Decentralized finance (DeFi) promises passive income through yield farming, but many protocols are riddled with risks, including outright scams. High APYs often mask exploitable code or exit strategies, leading to massive losses. This piece explores yield farming pitfalls, educating users on safer participation while highlighting recovery avenues.
+1. Luring with Unrealistic Yields
+Scammers launch DeFi protocols advertising yields over 1000% APY, drawing liquidity providers with token rewards. Victims deposit pairs like ETH-USDT into pools, staking LP tokens for farm tokens.
+These yields stem from inflationary emissions, unsustainable without constant inflows. Educatively, legitimate projects like Aave offer modest, risk-adjusted returns; anything hyperbolic warrants scrutiny. Check tokenomics on sites like DefiLlama for emission schedules and TVL authenticity.
+2. Smart Contract Vulnerabilities and Exploits
+Many scams embed flaws in contracts, allowing devs to mint unlimited tokens or drain pools. Flash loan attacks amplify this, borrowing to manipulate prices then repaying in one transaction.
+Post-exploit, funds are swiftly moved: split into smaller batches, bridged to chains like Arbitrum, and swapped to stablecoins. Understanding oracles (e.g., Chainlink) helps spot manipulation-prone setups, as faulty price feeds enable arbitrage scams.
+3. Impermanent Loss and Rug Pull Mechanics
+Yield farmers face impermanent loss from price volatility, but scammers exacerbate it by dumping farm tokens, crashing values. In rug pulls, liquidity is removed suddenly, stranding providers.
+Funds then undergo obfuscation: mixing via decentralized services, converting to privacy coins, or layering through multiple DEXs. Real cases from 2025 show how anonymous teams vanish, leaving code audits as a key preventive measure.
+4. Laundering and Exit Strategies
+Cleaned assets hit CEXs for fiat, using accounts in low-regulation areas. Mules or nested wallets add layers, making tracing multifaceted.
+Educatively, monitoring on-chain metrics like holder distribution via tools like Nansen can flag concentration risks indicative of scams.
 Where Tracing Can Intervene
-NFT scams leave digital footprints that experts can exploit if acted on promptly. Early reporting allows monitoring of token transfers and wallet clusters. Marketplaces often freeze suspicious listings upon evidence, while chain analysis identifies endpoints.
-Blockchain investigation firms like Cryptera Chain Signals specialize in NFT fraud tracing, mapping token movements across marketplaces and chains to pinpoint recovery opportunities. With expertise in forensics and partnerships with platforms, they assist in freezing assets and building cases for law enforcement, boasting numerous successes in 2026 recoveries.
-For professional assistance with NFT scam investigations or asset recovery, visit the Cryptera Chain Signals website at https://www.crypterachainsignals.com/. You can contact them directly via email at info@crypterachainsignals.com or through their secure inquiry form.
-Navigating NFTs requires skepticism: verify creators, audit contracts, and use secure wallets. If scammed, document everything and seek help immediately to maximize recovery chances.
+DeFi's open ledgers enable detailed tracing, especially pre-cash-out. Interventions include smart contract freezes (if upgradable) or exchange alerts.
+Cryptera Chain Signals excels in DeFi scam forensics, analyzing contract interactions and fund flows to identify actionable points. Their 2026 track record includes recovering farmed assets through chain mapping and authority collaborations.
+Visit https://www.crypterachainsignals.com/ for DeFi recovery support, or email info@crypterachainsignals.com to initiate help.
+Approach DeFi with audited protocols, diversified stakes, and exit plans. Education mitigates risks, turning potential traps into opportunities.
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
