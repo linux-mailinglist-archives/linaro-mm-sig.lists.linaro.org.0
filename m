@@ -2,28 +2,28 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id SOGNFtAUo2mJ9gQAu9opvQ
+	id 6MCPF9sUo2mJ9gQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 17:16:16 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 17:16:27 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 274F81C43B2
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 17:16:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EC46E1C43B9
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 17:16:26 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 33AF8451BC
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 16:16:15 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 02059451CA
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 16:16:26 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id CE2B1402DB
-	for <linaro-mm-sig@lists.linaro.org>; Sat, 28 Feb 2026 16:16:08 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 49B1544482
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 28 Feb 2026 16:16:20 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: "Free Fire" <freefiretg7878@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Sat, 28 Feb 2026 16:16:08 -0000
-Message-ID: <177229536884.1828734.12376784947399856813@lists.linaro.org>
+Date: Sat, 28 Feb 2026 16:16:20 -0000
+Message-ID: <177229538030.1830012.5047971901355801328@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: WJLTZNWLEWLBJAVU4I62FPLNPG3LSLD6
-X-Message-ID-Hash: WJLTZNWLEWLBJAVU4I62FPLNPG3LSLD6
+Message-ID-Hash: UNGMAPWDPCBRCX24KERMGIP4SDLFRD4H
+X-Message-ID-Hash: UNGMAPWDPCBRCX24KERMGIP4SDLFRD4H
 X-MailFrom: freefiretg7878@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
@@ -31,7 +31,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] =?utf-8?q?Abortion_pills_in_doha_=E2=98=8E=EF=B8=8F_=28+966563089064_=29_Cytotec_qatar?=
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WJLTZNWLEWLBJAVU4I62FPLNPG3LSLD6/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UNGMAPWDPCBRCX24KERMGIP4SDLFRD4H/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -64,12 +64,14 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	R_DKIM_NA(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid]
-X-Rspamd-Queue-Id: 274F81C43B2
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,linaro.org:email]
+X-Rspamd-Queue-Id: EC46E1C43B9
 X-Rspamd-Action: no action
 
 QWJvcnRpb24gcGlsbHMgaW4gZG9oYSDimI7vuI8gKCs5NjY1NjMwODkwNjQgKSBDeXRvdGVjIHFh
-dGFyDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5h
-cm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcK
-VG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3Rz
-LmxpbmFyby5vcmcK
+dGFyIEFib3J0aW9uIHBpbGxzIGluIGRvaGEg4piO77iPICgrOTY2NTYzMDg5MDY0ICkgQ3l0b3Rl
+YyBxYXRhciBBYm9ydGlvbiBwaWxscyBpbiBkb2hhIOKYju+4jyAoKzk2NjU2MzA4OTA2NCApIEN5
+dG90ZWMgcWF0YXINCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGlu
+YXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVh
+dmVAbGlzdHMubGluYXJvLm9yZwo=
