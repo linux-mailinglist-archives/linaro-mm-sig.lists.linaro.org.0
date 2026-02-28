@@ -2,27 +2,27 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4NFvJFwYo2mJ9gQAu9opvQ
+	id gI68FmQYo2mJ9gQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 17:31:24 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 17:31:32 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4DA031C4573
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 17:31:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 310521C457A
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 17:31:32 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4048845578
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 16:31:23 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 376FA45587
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 16:31:31 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 226F74553E
-	for <linaro-mm-sig@lists.linaro.org>; Sat, 28 Feb 2026 16:31:17 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 1720D45548
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 28 Feb 2026 16:31:25 +0000 (UTC)
 MIME-Version: 1.0
 From: "Free Fire" <freefiretg7878@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Sat, 28 Feb 2026 16:31:17 -0000
-Message-ID: <177229627714.1844866.10080444099798181555@lists.linaro.org>
+Date: Sat, 28 Feb 2026 16:31:25 -0000
+Message-ID: <177229628509.1844866.6667371142720060425@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: 3ZTPAXCS3LAO4IB42ZO2GBCUVMHPEN6O
-X-Message-ID-Hash: 3ZTPAXCS3LAO4IB42ZO2GBCUVMHPEN6O
+Message-ID-Hash: SXNDIIQZJIJ25CWD5YYMWQNG3YRBFB7Y
+X-Message-ID-Hash: SXNDIIQZJIJ25CWD5YYMWQNG3YRBFB7Y
 X-MailFrom: freefiretg7878@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
@@ -30,7 +30,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Abortion pills dubai (+971568630682 ) Mifepristone pills in UAE sharjah Ajman Abu Dhabi
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3ZTPAXCS3LAO4IB42ZO2GBCUVMHPEN6O/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SXNDIIQZJIJ25CWD5YYMWQNG3YRBFB7Y/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -64,7 +64,7 @@ X-Spamd-Result: default: False [0.59 / 15.00];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	R_DKIM_NA(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,linaro.org:email]
-X-Rspamd-Queue-Id: 4DA031C4573
+X-Rspamd-Queue-Id: 310521C457A
 X-Rspamd-Action: no action
 
 Abortion pills dubai (+971568630682 ) Mifepristone pills in UAE sharjah Ajman Abu Dhabi Abortion pills dubai (+971568630682 ) Mifepristone pills in UAE sharjah Ajman Abu Dhabi Abortion pills dubai (+971568630682 ) Mifepristone pills in UAE sharjah Ajman Abu Dhabi Abortion pills dubai (+971568630682 ) Mifepristone pills in UAE sharjah Ajman Abu Dhabi Abortion pills dubai (+971568630682 ) Mifepristone pills in UAE sharjah Ajman Abu Dhabi
