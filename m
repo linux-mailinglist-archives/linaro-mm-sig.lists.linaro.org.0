@@ -2,28 +2,28 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id kCUIOFgWo2mJ9gQAu9opvQ
+	id IL8qI24Wo2mJ9gQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 17:22:48 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 17:23:10 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6CECC1C4438
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 17:22:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 48E161C443F
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 17:23:10 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5A822453C2
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 16:22:47 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5A024453D3
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 16:23:09 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 57CF745217
-	for <linaro-mm-sig@lists.linaro.org>; Sat, 28 Feb 2026 16:22:40 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 934FE45234
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 28 Feb 2026 16:23:01 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: "Free Fire" <freefiretg7878@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Sat, 28 Feb 2026 16:22:40 -0000
-Message-ID: <177229576035.1836735.10696914768695992513@lists.linaro.org>
+Date: Sat, 28 Feb 2026 16:23:01 -0000
+Message-ID: <177229578160.1836735.1704293617691356480@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: JTCKCAJLQ2M6KUJRNZIW5UM7F6LTNJ3U
-X-Message-ID-Hash: JTCKCAJLQ2M6KUJRNZIW5UM7F6LTNJ3U
+Message-ID-Hash: ZEIJEO4MWPCZP7N6EQ3J7U434XDOIOCD
+X-Message-ID-Hash: ZEIJEO4MWPCZP7N6EQ3J7U434XDOIOCD
 X-MailFrom: freefiretg7878@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
@@ -31,7 +31,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] =?utf-8?q?Abortion_pills_in_doha_=E2=98=8E=EF=B8=8F_=28+966563089064_=29_Cytotec_qatar?=
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JTCKCAJLQ2M6KUJRNZIW5UM7F6LTNJ3U/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZEIJEO4MWPCZP7N6EQ3J7U434XDOIOCD/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -64,8 +64,8 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	R_DKIM_NA(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid]
-X-Rspamd-Queue-Id: 6CECC1C4438
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,linaro.org:email]
+X-Rspamd-Queue-Id: 48E161C443F
 X-Rspamd-Action: no action
 
 QWJvcnRpb24gcGlsbHMgaW4gZG9oYSDimI7vuI8gKCs5NjY1NjMwODkwNjQgKSBDeXRvdGVjIHFh
