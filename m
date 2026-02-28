@@ -2,27 +2,27 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id yLKQHFIYo2mJ9gQAu9opvQ
+	id 4NFvJFwYo2mJ9gQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 17:31:14 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 17:31:24 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 44D9E1C4554
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 17:31:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4DA031C4573
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 17:31:24 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 59E6045548
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 16:31:13 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 4048845578
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 16:31:23 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E479D45539
-	for <linaro-mm-sig@lists.linaro.org>; Sat, 28 Feb 2026 16:31:06 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 226F74553E
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 28 Feb 2026 16:31:17 +0000 (UTC)
 MIME-Version: 1.0
 From: "Free Fire" <freefiretg7878@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Sat, 28 Feb 2026 16:31:06 -0000
-Message-ID: <177229626693.1844866.18219728790518620371@lists.linaro.org>
+Date: Sat, 28 Feb 2026 16:31:17 -0000
+Message-ID: <177229627714.1844866.10080444099798181555@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: PXTGMA6IZ2T7ZZLSKCRO3BG2FFPT5X6G
-X-Message-ID-Hash: PXTGMA6IZ2T7ZZLSKCRO3BG2FFPT5X6G
+Message-ID-Hash: 3ZTPAXCS3LAO4IB42ZO2GBCUVMHPEN6O
+X-Message-ID-Hash: 3ZTPAXCS3LAO4IB42ZO2GBCUVMHPEN6O
 X-MailFrom: freefiretg7878@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
@@ -30,7 +30,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Abortion pills dubai (+971568630682 ) Mifepristone pills in UAE sharjah Ajman Abu Dhabi
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PXTGMA6IZ2T7ZZLSKCRO3BG2FFPT5X6G/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3ZTPAXCS3LAO4IB42ZO2GBCUVMHPEN6O/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -64,10 +64,10 @@ X-Spamd-Result: default: False [0.59 / 15.00];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	R_DKIM_NA(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,linaro.org:email]
-X-Rspamd-Queue-Id: 44D9E1C4554
+X-Rspamd-Queue-Id: 4DA031C4573
 X-Rspamd-Action: no action
 
-Abortion pills dubai (+971568630682 ) Mifepristone pills in UAE sharjah Ajman Abu Dhabi Abortion pills dubai (+971568630682 ) Mifepristone pills in UAE sharjah Ajman Abu Dhabi Abortion pills dubai (+971568630682 ) Mifepristone pills in UAE sharjah Ajman Abu Dhabi Abortion pills dubai (+971568630682 ) Mifepristone pills in UAE sharjah Ajman Abu Dhabi
+Abortion pills dubai (+971568630682 ) Mifepristone pills in UAE sharjah Ajman Abu Dhabi Abortion pills dubai (+971568630682 ) Mifepristone pills in UAE sharjah Ajman Abu Dhabi Abortion pills dubai (+971568630682 ) Mifepristone pills in UAE sharjah Ajman Abu Dhabi Abortion pills dubai (+971568630682 ) Mifepristone pills in UAE sharjah Ajman Abu Dhabi Abortion pills dubai (+971568630682 ) Mifepristone pills in UAE sharjah Ajman Abu Dhabi
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
