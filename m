@@ -2,27 +2,27 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id yFEmH5qTommt4AQAu9opvQ
+	id kF9mBKOTommt4AQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 08:04:58 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 08:05:07 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1A49B1C0C7C
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 08:04:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DC12F1C0C85
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 08:05:06 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 36107401CF
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 07:04:57 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 03E52401CF
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 07:05:06 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9CBDF402B7
-	for <linaro-mm-sig@lists.linaro.org>; Sat, 28 Feb 2026 07:04:50 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 95CB83F907
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 28 Feb 2026 07:04:59 +0000 (UTC)
 MIME-Version: 1.0
 From: "Ribul Ahmed" <ribulahmed7878@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Sat, 28 Feb 2026 07:04:50 -0000
-Message-ID: <177226229064.1311730.11185211328702997826@lists.linaro.org>
+Date: Sat, 28 Feb 2026 07:04:59 -0000
+Message-ID: <177226229961.1311232.1753337605490122054@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: A2KVF7KNSVDQW7Z5YSFQWLC44GV5PWUN
-X-Message-ID-Hash: A2KVF7KNSVDQW7Z5YSFQWLC44GV5PWUN
+Message-ID-Hash: KV774HYGBUHPLJZD3EWF54TVJF27MLRN
+X-Message-ID-Hash: KV774HYGBUHPLJZD3EWF54TVJF27MLRN
 X-MailFrom: ribulahmed7878@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
@@ -30,7 +30,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Cytotec In DAMMAM!!+919387128459!!Abortion Available Medicine For Sale In DAMMAM^^
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/A2KVF7KNSVDQW7Z5YSFQWLC44GV5PWUN/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KV774HYGBUHPLJZD3EWF54TVJF27MLRN/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -65,7 +65,7 @@ X-Spamd-Result: default: False [0.59 / 15.00];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,linaro.org:email]
-X-Rspamd-Queue-Id: 1A49B1C0C7C
+X-Rspamd-Queue-Id: DC12F1C0C85
 X-Rspamd-Action: no action
 
 Cytotec In DAMMAM!!+919387128459!!Abortion Available Medicine For Sale In DAMMAM^^
