@@ -2,35 +2,35 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mINOLPueomko4gQAu9opvQ
+	id KF7PCSWfomko4gQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 08:53:31 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 08:54:13 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8BCAB1C1467
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 08:53:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B82301C1486
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 08:54:12 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A7C6B40473
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 07:53:30 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 928E24048B
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 07:54:11 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3F5BD402E0
-	for <linaro-mm-sig@lists.linaro.org>; Sat, 28 Feb 2026 07:53:13 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 11C0F401F6
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 28 Feb 2026 07:54:06 +0000 (UTC)
 MIME-Version: 1.0
 From: "Ribul Ahmed" <ribulahmed7878@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Sat, 28 Feb 2026 07:53:13 -0000
-Message-ID: <177226519325.1359732.18103301094208933383@lists.linaro.org>
+Date: Sat, 28 Feb 2026 07:54:06 -0000
+Message-ID: <177226524607.1362078.628790641396674333@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: E3LB4JPVB3PMWFUS6NIQN7XY35T2E5ME
-X-Message-ID-Hash: E3LB4JPVB3PMWFUS6NIQN7XY35T2E5ME
+Message-ID-Hash: FMXTSCT4FJIFHMFFWT4EL35CPQVZZSTN
+X-Message-ID-Hash: FMXTSCT4FJIFHMFFWT4EL35CPQVZZSTN
 X-MailFrom: ribulahmed7878@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Abortion Pills Clinic in Dammam| +919387128459| - Abortion Pills in Dammam,Cytotec in Dammam,Saudi Arabia.
+Subject: [Linaro-mm-sig] Abortion Pills Clinic in Dammam| +919387128459| - Abortion Pills in Riyadh,Cytotec in Jeddah,Saudi Arabia.
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/E3LB4JPVB3PMWFUS6NIQN7XY35T2E5ME/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FMXTSCT4FJIFHMFFWT4EL35CPQVZZSTN/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -64,10 +64,10 @@ X-Spamd-Result: default: False [0.59 / 15.00];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	R_DKIM_NA(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid]
-X-Rspamd-Queue-Id: 8BCAB1C1467
+X-Rspamd-Queue-Id: B82301C1486
 X-Rspamd-Action: no action
 
-Abortion Pills Clinic in Dammam| +919387128459| - Abortion Pills in Dammam,Cytotec in Dammam,Saudi Arabia.
+Abortion Pills Clinic in Dammam| +919387128459| - Abortion Pills in Riyadh,Cytotec in Jeddah,Saudi Arabia.
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
