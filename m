@@ -2,36 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4DgOLvp6o2nJEQUAu9opvQ
+	id iLPYHQB7o2nJEQUAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 01 Mar 2026 00:32:10 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 01 Mar 2026 00:32:16 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6D18A1C9BC5
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 01 Mar 2026 00:32:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E8461C9BCC
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 01 Mar 2026 00:32:16 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 86E1947137
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 23:32:09 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5EF9E4715F
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 23:32:15 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9987E46783
-	for <linaro-mm-sig@lists.linaro.org>; Sat, 28 Feb 2026 23:31:53 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id ACD6B46D6C
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 28 Feb 2026 23:31:57 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-From: "ezra Jack" <jackezra585@gmail.com>
+From: "Theodore Henry" <theodorehenry1a@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Sat, 28 Feb 2026 23:31:53 -0000
-Message-ID: <177232151362.2223785.969179979956744778@lists.linaro.org>
+Date: Sat, 28 Feb 2026 23:31:57 -0000
+Message-ID: <177232151770.2222219.7332638292118280925@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: N3TEHIHXO3764KPFJBOYFRWRXFCUQBMJ
-X-Message-ID-Hash: N3TEHIHXO3764KPFJBOYFRWRXFCUQBMJ
-X-MailFrom: jackezra585@gmail.com
+Message-ID-Hash: OMQZLYOTEXU7GLXYA6TN6CZAEWEILMCP
+X-Message-ID-Hash: OMQZLYOTEXU7GLXYA6TN6CZAEWEILMCP
+X-MailFrom: theodorehenry1a@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] 7 Most Credible Cryptocurrency Recovery Agency - Best Crypto Recovery Specialist
+Subject: [Linaro-mm-sig] 8 Most Credible Cryptocurrency Recovery Agency - Best Crypto Recovery Specialist
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/N3TEHIHXO3764KPFJBOYFRWRXFCUQBMJ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OMQZLYOTEXU7GLXYA6TN6CZAEWEILMCP/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -58,14 +58,14 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	RCPT_COUNT_ONE(0.00)[1];
 	RCVD_COUNT_TWO(0.00)[2];
-	FROM_NEQ_ENVFROM(0.00)[jackezra585@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_NEQ_ENVFROM(0.00)[theodorehenry1a@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_NONE(0.00)[];
 	R_DKIM_NA(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,linaro.org:email,autopsymainnetsolutions.com:email]
-X-Rspamd-Queue-Id: 6D18A1C9BC5
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,autopsymainnetsolutions.com:email]
+X-Rspamd-Queue-Id: 4E8461C9BCC
 X-Rspamd-Action: no action
 
 TGVnaXRpbWF0ZSBjcnlwdG8gcmVjb3Zlcnkgc2VydmljZXMgYXMgb2YgMjAyNiBBdXRvcHN5IE1h
