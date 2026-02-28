@@ -2,27 +2,27 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id oPJ9Ersbo2le9wQAu9opvQ
+	id UOcQJsIbo2le9wQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 17:45:47 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 17:45:54 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id E26DC1C4675
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 17:45:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 717621C467C
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 17:45:54 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 017D445633
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 16:45:46 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7CA2845645
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 16:45:53 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3B8E4455F4
-	for <linaro-mm-sig@lists.linaro.org>; Sat, 28 Feb 2026 16:45:26 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 2A68F455F7
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 28 Feb 2026 16:45:29 +0000 (UTC)
 MIME-Version: 1.0
 From: khnnhamza9@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Sat, 28 Feb 2026 16:45:26 -0000
-Message-ID: <177229712624.1858199.12060883742877292560@lists.linaro.org>
+Date: Sat, 28 Feb 2026 16:45:29 -0000
+Message-ID: <177229712917.1858199.15176463596677152538@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: ZEMLWNFYOC25DQE3JBNHX2NI7U6T4H5M
-X-Message-ID-Hash: ZEMLWNFYOC25DQE3JBNHX2NI7U6T4H5M
+Message-ID-Hash: CO7IGHVSFXWWHVFXX3DFQO7XMK6FAV5L
+X-Message-ID-Hash: CO7IGHVSFXWWHVFXX3DFQO7XMK6FAV5L
 X-MailFrom: khnnhamza9@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
@@ -30,7 +30,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Abortion pills in Ras al Khaimah | +971551319425 | Cytotec pills in Sharjah UAE
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZEMLWNFYOC25DQE3JBNHX2NI7U6T4H5M/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CO7IGHVSFXWWHVFXX3DFQO7XMK6FAV5L/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -64,7 +64,7 @@ X-Spamd-Result: default: False [0.59 / 15.00];
 	RCVD_TLS_LAST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid]
-X-Rspamd-Queue-Id: E26DC1C4675
+X-Rspamd-Queue-Id: 717621C467C
 X-Rspamd-Action: no action
 
 Abortion pills in Dubai | +971551319425 | Cytotec pills in Sharjah UAE Abortion pills in Dubai | +971551319425 | Cytotec pills in Sharjah UAE Abortion pills in Dubai | +971551319425 | Cytotec pills in Sharjah UAE Abortion pills in Dubai | +971551319425 | Cytotec pills in Sharjah UAE Abortion pills in Dubai | +971551319425 | Cytotec pills in Sharjah UAE
