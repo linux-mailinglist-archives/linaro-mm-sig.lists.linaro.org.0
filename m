@@ -2,28 +2,28 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id ODmkNacgo2mC9wQAu9opvQ
+	id QCYkIK4go2mC9wQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 18:06:47 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 18:06:54 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id B1FA91C4BA1
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 18:06:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 261CB1C4BA8
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 18:06:54 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C44C74720E
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 17:06:46 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 2CD9347222
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 28 Feb 2026 17:06:53 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 507CA47157
-	for <linaro-mm-sig@lists.linaro.org>; Sat, 28 Feb 2026 17:05:26 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 4D94447157
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 28 Feb 2026 17:05:29 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: khnnhamza9@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Sat, 28 Feb 2026 17:05:26 -0000
-Message-ID: <177229832632.1886144.3030827729030112661@lists.linaro.org>
+Date: Sat, 28 Feb 2026 17:05:29 -0000
+Message-ID: <177229832931.1888221.17866273907752139016@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: 7XY7G2FDESXOKJ7FVMAQW3X3Z7K36ZVO
-X-Message-ID-Hash: 7XY7G2FDESXOKJ7FVMAQW3X3Z7K36ZVO
+Message-ID-Hash: G6TMT2QBYAVUUBNFROYWMPYNJSCPOKZM
+X-Message-ID-Hash: G6TMT2QBYAVUUBNFROYWMPYNJSCPOKZM
 X-MailFrom: khnnhamza9@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
@@ -31,7 +31,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] =?utf-8?b?TXRwIEtpdCBQcmljZXMgU2hhcmphaOKZu++4j+KchXwrfCApKSkr6qeFKeKck3wrOTcxNTUxMzE5NDI16qeFKSgoIHzilpDimbvvuI/imIVBYm9ydGlvbiBQaWxscyBTYWxlIGluIER1YmFpL1NoYXJqYWgvQWwgQWluIFVBRQ==?=
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7XY7G2FDESXOKJ7FVMAQW3X3Z7K36ZVO/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/G6TMT2QBYAVUUBNFROYWMPYNJSCPOKZM/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -65,7 +65,7 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	R_DKIM_NA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,linaro.org:email]
-X-Rspamd-Queue-Id: B1FA91C4BA1
+X-Rspamd-Queue-Id: 261CB1C4BA8
 X-Rspamd-Action: no action
 
 Q2l0eSBvZiBkdWJhaSDimbvvuI/inIV8K3wgKSkpK+qnhSninJN8Kzk3MTU1MTMxOTQyNeqnhSko
