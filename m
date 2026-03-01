@@ -2,48 +2,48 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id iJr9G1qMpGlfkAUAu9opvQ
+	id 6MFRCWOMpGlrkAUAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 01 Mar 2026 19:58:34 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 01 Mar 2026 19:58:43 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id E89B81D12C6
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 01 Mar 2026 19:58:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D4CA51D12D4
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 01 Mar 2026 19:58:42 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id EE8FB44587
-	for <lists+linaro-mm-sig@lfdr.de>; Sun,  1 Mar 2026 18:58:32 +0000 (UTC)
-Received: from CH4PR04CU002.outbound.protection.outlook.com (mail-northcentralusazon11013044.outbound.protection.outlook.com [40.107.201.44])
-	by lists.linaro.org (Postfix) with ESMTPS id 7AF3840483
-	for <linaro-mm-sig@lists.linaro.org>; Sun,  1 Mar 2026 18:58:05 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id DCB4444589
+	for <lists+linaro-mm-sig@lfdr.de>; Sun,  1 Mar 2026 18:58:41 +0000 (UTC)
+Received: from CY7PR03CU001.outbound.protection.outlook.com (mail-westcentralusazon11010049.outbound.protection.outlook.com [40.93.198.49])
+	by lists.linaro.org (Postfix) with ESMTPS id 1630544592
+	for <linaro-mm-sig@lists.linaro.org>; Sun,  1 Mar 2026 18:58:12 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=Nvidia.com header.s=selector2 header.b=BVpaB6Eu;
-	spf=pass (lists.linaro.org: domain of jgg@nvidia.com designates 40.107.201.44 as permitted sender) smtp.mailfrom=jgg@nvidia.com;
+	dkim=pass header.d=Nvidia.com header.s=selector2 header.b=Yn4EDM7R;
+	spf=pass (lists.linaro.org: domain of jgg@nvidia.com designates 40.93.198.49 as permitted sender) smtp.mailfrom=jgg@nvidia.com;
 	arc=pass ("microsoft.com:s=arcselector10001:i=1");
 	dmarc=pass (policy=reject) header.from=nvidia.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ns0rvvhZaIUUebxbk4v45NXBVYYK2W/z7mx32oAGWZbIKKrGjJ4NDY0XuFuto/Curvztt4OXKpxxDrFhBQuljstHkDUSsVt1o2MKvynoJkwUmMt3i8b4pRNM/4+TFXt3iBamtoQ86tLA6SPbQpG4MRAICG/pnwUoIpzmR3NsAMFZojEdeK9ESI3VMi5wloM9Tvx4VCkJ0OZr5My7a6GWWGxO2UPhflxEWaPHYuuxG12Z6FMd+390uC+JxlIWL22Uj7ievaqgVxsrPQxAPS/NeW7VJNwXi+rBL3HAQnJ8i/HAJlc6PTsbF/uKp4MZ5dTwqygAGUOwauKXWN18sj7/UQ==
+ b=spX+GVgnZ5bgMkMbbVtqGfYERd/1EykJCbeNb+l2anjzpNCrOl6WbMN0LBQUx39BN6/WhvtrgkydLk387nksMvDBKdG+SUA5e902MFWEtvvA9K3LlfifpK5jRq/e7chtQNWTL8B5uwjzLys3/wcAqfB+GxJ5kR2FbJx3AUNoyNy1PaoOYmF4xuDTpr8VA1dAB/2zrKz60kEBE0VsIX00U3YoXsoszf1WmBH4xSGucgNmDkbyw8VFc1uMeH+6/JjwH50hZuUCcftWuJiTnVQBhnD+f5mDYfv11TiuIfWou2u0GlHDNsZlSVj0e7EW5b5ZAW0Rw2EprtAuFwf+ucGb6A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=3DZNcxOD1jpsUjrV9l+z5rGHQTc15PlZFbLDCINc2Xg=;
- b=LrAo4kr/2cZHr8y1t61ZtG0WSKPpMTDzc4C9t6tTYGADrR+eqVlV19pbpdj0SUJxg72CGuzaMMRkXArFU4KERfTonRUu7j1AKelCXkaxlPjMzikn8MWhyRIMEwgRlscCv0pLPhekB393xNf7yPj43C/HwJppUtZmEliQbCvZjB5GqXHv443Eb1y0Mn1ZAlTmvzF4FtN0nFyhVWLIx7wIQIwf83TzYDFPdbmmHbQLYgURYgR7uio+AlnnW7Lbj6cxFyUOmbSJ3KWYoxZBO4wrIRgLwVCllxhjnbW9Zq9G/yvs6ezBFwAV9tx7y5L3Jifa1hF7clE9fg9ogVB51LGBFQ==
+ bh=80zMS60hsdJ7ItPrD+7bzS9Cfj6rMNVNXpv27z9H9Rc=;
+ b=KP1Hc2L2aY6uZKuf9CMBtDeKZSz+uUIxQHdb3civvngGnVhQ7EvUmbTl5X8ddR1Z6oyAo/f6zH3dbNjtBUu7EuKUDv89/1VDj3t/zz42dLX3mhGDI0j58MpTk/4XhzVRCOPA9KEApqVeqdOEwZfHM4CdgXzqkbWxIsE/fvCLhfQsE+Dwz+G4pD2i3FKdHlPPx125hxRs71kPx5bLUGSq2bf3BumxpCFEXSOFcSso3s1r87jXooDJFwgBaM9Yf7pTZMDlhnHMQLN5Puu2BPqCOk4Qi8sgmr8CUYZizX+aWbORujYULgyuOMA6Y7VDYO7NWPS/uJynTxDWOXOs7IAS8Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
  dkim=pass header.d=nvidia.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3DZNcxOD1jpsUjrV9l+z5rGHQTc15PlZFbLDCINc2Xg=;
- b=BVpaB6Eu7lWQEmP1IAXJi45NedzOb0wQzGl8Lzea6iRehVzjBXvKK5W2Cy4hLXWEG3bIEskRHJPmCbBChqQZcyIGhca4TkfDMTjk+H0hhocJK25qcpyK3mTOwsWqzmSM3ePfD9jJCXH7Vn2axK/5OEvtqOgrX/UheP/5hMKbaYOYYmIx5gba4VED/Si+cXqR1WQiDb8ECwuxiyjx0EEP235FOwNmrghqV8JWHn+l4Wtz1OgSzQ9aCIhjOwQgmsFRulCimH5apz/Yu/pk6AIfrGM6HXx7t+HWeQ1kQG3PeYm0K6/aw6SWSYj14z9a7gUEcIsEEGtMHFGdnSB4B6/4XQ==
+ bh=80zMS60hsdJ7ItPrD+7bzS9Cfj6rMNVNXpv27z9H9Rc=;
+ b=Yn4EDM7R4uVv+Fv4QtDc2f1VDAxSPCMvo8TTrNrywy8DWe+xFX19ShHFFBwNwKAV3ClXbTv8BcivAE9+xzzdECiPnjyiFT6X/ZS7XDTx2uXAY57MZ6q+VO4kGbRNXz3fwOKFPfzvoUpkzlkWDacg2WVKj3zCJLjxsFogAjnoxz7QBOIlqg/LROA/eZe9DMApibs+5Z/sUdCSjlmRMKwSvaWHxsYkauW3eaD7lOoZ6/bPQyoDCXiskUgiT6WkOPu5P0WMPx47ejY+O+xhgpphmyQJuZ32kuagXDCj2vhhAQqMyVN04krTliucyKJQVHM9vUzNt3dI43F0R21UpB2xCQ==
 Received: from LV8PR12MB9620.namprd12.prod.outlook.com (2603:10b6:408:2a1::19)
  by BL1PR12MB5993.namprd12.prod.outlook.com (2603:10b6:208:399::9) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.18; Sun, 1 Mar
- 2026 18:58:00 +0000
+ 2026 18:58:02 +0000
 Received: from LV8PR12MB9620.namprd12.prod.outlook.com
  ([fe80::299d:f5e0:3550:1528]) by LV8PR12MB9620.namprd12.prod.outlook.com
  ([fe80::299d:f5e0:3550:1528%5]) with mapi id 15.20.9654.014; Sun, 1 Mar 2026
- 18:58:00 +0000
+ 18:58:02 +0000
 From: Jason Gunthorpe <jgg@nvidia.com>
 To: David Airlie <airlied@gmail.com>,
 	=?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
@@ -57,826 +57,419 @@ To: David Airlie <airlied@gmail.com>,
 	Simona Vetter <simona@ffwll.ch>,
 	Sumit Semwal <sumit.semwal@linaro.org>,
 	Tvrtko Ursulin <tursulin@ursulin.net>
-Date: Sun,  1 Mar 2026 14:57:55 -0400
-Message-ID: <3-v1-0a349a394eff+14110-dmabuf_kunit_jgg@nvidia.com>
+Date: Sun,  1 Mar 2026 14:57:56 -0400
+Message-ID: <4-v1-0a349a394eff+14110-dmabuf_kunit_jgg@nvidia.com>
 In-Reply-To: <0-v1-0a349a394eff+14110-dmabuf_kunit_jgg@nvidia.com>
 References: 
-X-ClientProxiedBy: BLAPR03CA0156.namprd03.prod.outlook.com
- (2603:10b6:208:32f::29) To LV8PR12MB9620.namprd12.prod.outlook.com
+X-ClientProxiedBy: BL1PR13CA0389.namprd13.prod.outlook.com
+ (2603:10b6:208:2c0::34) To LV8PR12MB9620.namprd12.prod.outlook.com
  (2603:10b6:408:2a1::19)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: LV8PR12MB9620:EE_|BL1PR12MB5993:EE_
-X-MS-Office365-Filtering-Correlation-Id: 95bfcaae-02b4-4e5e-23f4-08de77c47496
+X-MS-Office365-Filtering-Correlation-Id: 40ad3113-64dd-4532-6c2c-08de77c47545
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
 	BCL:0;ARA:13230040|376014|7416014|366016|1800799024|921020;
 X-Microsoft-Antispam-Message-Info: 
-	DAOaOTp1HYL0wWdgxc4RYeL+nOPswqK7C8semsK7TmGtsg0Z8yVpJEBZ8UUpbhTHEHXGhN5Hpea1s7z6Z451xpgyfSva6vD51W3T2PLyrGMOFamU+HFgAQnu9xciRfF2w+fHF05kNbAmIu51tJcf34fMh5TNQ+KFqSqkHstJbxe3DICC9RNzjZtWOLNhwsCrP9s/GswDmRjArHouBgN9ST2HN2KbJXiT7jgp/K53vEZVtvhgByM0v4ItDFpy181iSu+DZBPQjo5npe16ZlfHWRlx+rSLKMGUTpL/rXSLBhVD6kBa698q6g4EkIzTsG1BPLW6/G+qJhTeL0KhPPW0FN1q925mRKw7asRABq6aE//Ohs8Riwzka3AtL/9V6AiLJQrnBrqxEeK8dViAWaPFj0o1SfxcDt2MBdtUmEnYjlFhSMD3nbLsELvGSmQFu33Jf+2cBFcVulTn0mn8Kh434loKvcQI/HUW5p5C+H4/PwAuoLl1x1GWfEJmLer7C/ZOrDYlFlTcNrJqcbk9+Y+FgaBNurMrxMsPXq1ZqJwOh0Fn8ytE7LkVhOxZxsOxTG15WzlArxvi/siQBB+jBV7IkgGB7uozZrUeUwFl3Ar2PZbwmDdihxrVsrdaZqAr8Ckbn6jQpPzlyJKpwX+OV6HUOE78HO8Dj0FqwisXHtpMLSyPSxap32drDEt/P8lG23/ogN810iU4qYQPqHkF0yYsWztZmZrdmr8lVHkGtz042ognrVFy1DX6MLHTsVAegEJoYs0JLvcKVrAe+5ICS17Zww==
+	nA0K2GVUYrGN7t/uxKMQM3XB36FuR2w0DFh2Qf7VmiCxOrzleY6b2/Sl2M2b5I+CDcp0kMryPNEHcVR2P3z+BoInsZL3+vcO/AerbAWAYomX0GwSEz0EniDC+Da35CsRsXOMpuy7j3Ynl6D1qNavlKKponGGaY29cpPiFBr9Oe383vJoSXTPHM8GQ1orCgNrXZekGnUAnrUtw2DVDifzGyElf5lPqJmZw6lCA3AZx39l+TUjQm/0XV3gPbbeFx6o9WFLopVZzzsBZzB+Xqc0jQg5S36rzn5hRKYKRWxnGsVaw80BfM2Sm1+LIF5Tb0OxsFNVa1LFUyhpTVWqntOav1ByqRaLD1hs+fMh8q9ompiLCzK7KCymbpCjj6vCwTtx2onvKfADOffZ6J1uz8InXOMGOmq+O7PiwSjpl82VJEvRMMm8hTh6klFv08qTyvdO3OoMof8oVIqGVxZ14Ai4wP2hhwConGrb8Ik33ZEWJwbpKIlDbvR9WvQ9tYyG3mLNp3VB3VgTXpkjuNGfYWsfwzQbbTG3UolJZbHHPjkFi8eB3y/EayVYjv9PiCoG1/QG8VZ70ODHx91+OsgOV4W0Ts/47v5p8Qmt75sab6ck52xMaQVz55/sPFFyZXWTmUlW7J8Vsc/s4xbIzS/XVNo0GkEuazrvNyz7zlwBpfSEsBuvytncwjylCPqYmMwmhM+fv1NKFLkmlYOF9AM9uQGews+IwhzO5fCpitth2X4Xbaws+Gt+8kq4ySxgo8nf5kJq0pQvlHrQPowo518F/T8Vcw==
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LV8PR12MB9620.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(366016)(1800799024)(921020);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?R2fdbAPYFR5mkwAqieNDBXuqcie/QaY8lqEFKjmUKTODuHj1JAcGSS5HIrQ5?=
- =?us-ascii?Q?+B/DRjCHooAgHwGjfMCrrKaRUKc16joNXR3QsZJ2Xh9PwSzEuJJKugPGhP0L?=
- =?us-ascii?Q?0K/9JVl1f2jPZXMNd7vUVJFxXY5w5M2jsy9Mn459P61u6zMC57nTFPX8mIHW?=
- =?us-ascii?Q?NzTX5BgMoKfc6tmeSXsEJnkPZhtRut3hn8inZdEWsvKBEbyoORNnH0g8iYVu?=
- =?us-ascii?Q?6Ab9iLJ+Ym3cLc5bWS4DP2yP1vZWVCvzFmXjbCXOnFlU3DRrpUyZEs+FYeyE?=
- =?us-ascii?Q?wZ7JZediOEbm5Ubvzi8ivNP9BzY3QjJynNNKrpf9o1unZEmu5QYe3DCqUmXi?=
- =?us-ascii?Q?JOh9RulyKyaFiWAq5adMHaflf/01XJD5nlV4FrmmVMdf/YYKbM6Tbrgzp1GH?=
- =?us-ascii?Q?CbcfZGc2AXPSQBgiKrcyA0Aaib5XUWvDagAfrIyMJDXR564caIYRSLgdWayH?=
- =?us-ascii?Q?CCbHByIT2bZbIiXd40OUSDubFurxu7rMA+N6OmKYvAttO3oytaA0aKqvJAlv?=
- =?us-ascii?Q?vJvg8XzOvqqLbCkrkG0uvfHd/EL96Z8veWAPFxYUeWqq9yWNOjqs3NdPv6zU?=
- =?us-ascii?Q?jxROaigk2hjeMB/Hg0/bVibg8HOdokyHwCr2jnxhtEgMs+JxxbXuo1JcjgWu?=
- =?us-ascii?Q?J22VJK9p9rxhFCGqguP74StOqYwPZqnug8d2XH8PcNy1OHlGLnIooMwNQtwG?=
- =?us-ascii?Q?9CdX2+/WA6kZZyosXPvU1u2Q7jMRDKELwNH8vu6G1Z+MN3by0XdPAuD2thA4?=
- =?us-ascii?Q?qtaPNc5Nlces7yNR9smNf3gNIc1zVh/P60DokmSlJK9bKFNKfbtRUY5dhod0?=
- =?us-ascii?Q?plFCI9I35lJKQz5Znx3wUIOuQduFIAor1B+eKjL3tONvHqIEeP+3dbov1FzF?=
- =?us-ascii?Q?VtqaMdMthpktUt1MUKo+uWfLHQI68Mt3DEZFDVYJUN7sDVtspxzEf+Z44xTm?=
- =?us-ascii?Q?SJu3dgTuriBnM+WJpbFUMhhcshiLRaDwZSUS30XczZauLnbe2S6cDcKqR7Zl?=
- =?us-ascii?Q?9ppyamLXBg4+KB4N+dz5hcsdAD4OYwgP+Wy2/i/urNyF4RSfaNXqiG3Vlyoz?=
- =?us-ascii?Q?6nQL6kPI1Cd2DYHXBae5m3jYHYemoMI2VtxawJRJSm0lAScbLFVfcHfNVTZ4?=
- =?us-ascii?Q?Ka+7vfUs4uCtnkTgjm7zaO53aHN7J+LObbfHuprSlo4dOflqGxSh6Qnta4+J?=
- =?us-ascii?Q?aTWV9BhphyoR5ffu3LZY9sS4t+rRdaaxrw2EZzazUZ1MjDPq2KDYYIbC3b4A?=
- =?us-ascii?Q?e0s7EN30zB2sDUNnWIZzT5EXb/Xq2suJxBrulYFvomJeCL+jF5369ZogTr8R?=
- =?us-ascii?Q?J3JFLMgRDnDpGBSjtmRYAHTUdQn2EjD7NeT0W09vbp3c/jjuJegVQEjSPTFc?=
- =?us-ascii?Q?b9fT1l/MjWrVsq3AD2NBB57VU5N4lrmK9D+4FH83S2oCYNxMJ1YtFqFFfrfy?=
- =?us-ascii?Q?0PmgfBVEdSq2Rj5/pCL7G6+0uoOO+tqkHl49fDbRZKjiavVr+x/oPoMaGDVN?=
- =?us-ascii?Q?dmleJu26IPcNdT/FM40GEk5j54njGd8r/54NBoiklJigFjfHCv8SDni4xnJd?=
- =?us-ascii?Q?k6VfBCGGscffmx0jGg2rUd5A6YkgB5OBar3k1X5THjNaGSG8rOVptIeViNZt?=
- =?us-ascii?Q?30XZ8qrLQSD4FClyJLexfUTPsaWuw8/YDAMs2aTt2XjSPw5+ep86G9bn886N?=
- =?us-ascii?Q?FrcsWtF9GKgvoz7Nu/Yy3i4ckvWTb8/44/+8hF+TBP2f05NYqgke9BHsWIUx?=
- =?us-ascii?Q?Vt+hf7EBEw=3D=3D?=
+	=?utf-8?B?Z0xJYm1nUjhjS0lsMXMzeXVCQm1nY3dKbmpqWDBJWGRZU0tTRTFrV0MwTVZ3?=
+ =?utf-8?B?ZHVFaGdWSTE4S1dkZStlcmdqY25DdTMrb1RRR0pUTGpFQ2daZWtNQ0tmTUVV?=
+ =?utf-8?B?QjVpVDdFanhkUXZ4R25vUFppWSthQlJzdCttdzBEa2hkM3U0bXA0a3plV0lH?=
+ =?utf-8?B?citEa2tadVlBdFp3VWFyWEVmc0hkU09qSklpL1I2dzhCQkxKZHFLK0sxNkcz?=
+ =?utf-8?B?SmVHU01nODZ3WkwrRk81SjkxZGpFdFEwZkhuR2ZEdXI2UERpUXJNMGhSVmxQ?=
+ =?utf-8?B?cUJyKzA0UnV1dkFBZzQxZUMzUk1ubjdJanVsYzJ4c2xGM3pWMDlwZHNzQzRl?=
+ =?utf-8?B?aU5sY0R4bytYcVAwZEJpZEl0VElFRjVsdWFQK3FVT1pxeVkzVFpPS3E1UEhi?=
+ =?utf-8?B?UHMybXY4VkFXNzVjYmNIRy9GL1lEZkI2SEJjNlJ6RHBBTmVkb0IwNXpiNmo2?=
+ =?utf-8?B?UFk3S2ZQUmFCeFNJQUY1L1psZUtrTkxFbXRwYXg5SkIremxkMlpTZzlFbm9J?=
+ =?utf-8?B?Q3R2OEZLcG05ai9YNXByekFwMVNoelhvWmd0dHlUcEJORnVHRkxZN0JzdGxi?=
+ =?utf-8?B?amZFZlZjSnJmWHFDWjdFK2Q1ZS92emo5enA4eVd3cFNvMGJ1UmhDVzd1eFJ2?=
+ =?utf-8?B?QjUxek1ISHBlUVlJUndmd21RWExadDdxWktMWmhQU2daRXpNUjF0WjJwcVhH?=
+ =?utf-8?B?ZWxHY2xUejVlWFdHQUdIL1pVVWkwbm4zL2h3RGI4VkgvTUVKMXFyYzRva0lX?=
+ =?utf-8?B?b2FPNFhiRVo4SDN1bkwvSXVzZ2l3S25VZHcvU3JnZDVHK2R1NmdEaWVUbTdO?=
+ =?utf-8?B?THJ3ZGZoVmt1UkFTQVppb0FsT1VoNk1zcjJTU3drL3FsdmE0WlBpZ1QyMlgx?=
+ =?utf-8?B?UFg2d2lMSDJoS1BJdElRYml3bGVlc2hpTTVFSTcyUndlclpKZzFMNGptUVV2?=
+ =?utf-8?B?Nm52eHhBWTlsN2FvLythZVkxV0czbTN4YzNhK0Y0NE9UOGdjRmtYbEEybmRq?=
+ =?utf-8?B?MjE1RFJKUHlYUUJES08vb1VXQVpWWmtoN1dnQmhLVmkxWUtHQVNmR2I5VDE2?=
+ =?utf-8?B?emtrTkdIbXEzeVE3dmlvL3FGNEpOdEMwMVdTakplSzFiWlNHQ3BVYXFGTVZX?=
+ =?utf-8?B?SzVQOUdVS2w3R1h5UzM0OVdjKy9wR1NRVU5BTjZ5bUV1aktSS1VpUVNXMGhm?=
+ =?utf-8?B?Ym5ac0t4UUNuTDF6akpDdWhZalVaWjNpd0FRanUxK2hPMUZKc2NxTGtaMzh0?=
+ =?utf-8?B?NXg2TjRjaFVBNUpFeXA5MjM5MXNQaUQ5OFVhZG03SXc1ZEFQaWp2L1JvSmlt?=
+ =?utf-8?B?cm8rN1M5RDRDOEloem9rdVlQMVpCcFlDYVFjeFFaNWYxYlZaVGdVWWRRYlR3?=
+ =?utf-8?B?Q3lCQUVucWRsRUVMSVNKWjJWVFlDcVhJdkViYlRldmZjSEg1VVRuaGN3ZS9s?=
+ =?utf-8?B?MUc3N256RzFVT1JFMkZndnVHYnBPMW1qSFhGaWNUb0dob21tQmw1TWY3VUg2?=
+ =?utf-8?B?Sks5UW05elhISDdCUElYMHU1b0xTL2xFbldTUkRrbnc5UkRCcGV6KzR6WHk0?=
+ =?utf-8?B?d3BDTDQ1d1lwU004WXFGcUJTb0tvd1NPc2VQYVZ6bnJBMFNZdGtRNU5uTW5V?=
+ =?utf-8?B?b3NTOTdmZDRiZ0E5SFBBd1p5dGJFUXN1MDZHL2VrQlFMVXo5blVkcTlzN0FB?=
+ =?utf-8?B?SVVrZVVwNDlYc3BCVWtLcVN1d21LbnR5UkZkeFlFVzE0SmpBNFh4K3dDKzlJ?=
+ =?utf-8?B?OEhVeDl1Tk1UZ2U4dVVhYmZWRU81V0RoUTBoZ1ZQNnROVUVYRDRuUmZOeVlz?=
+ =?utf-8?B?L1YydlFxTDV1N2VBNU1nK1dTb1hhdG5hRTlyWW9ueTB4UXBQeHVoOXQ2bGg5?=
+ =?utf-8?B?VGkxOTlSTklnNFRRVFp0S0MxbytWNUFBU3JuRUUxNE5MdVdXa3dxVUxxMERI?=
+ =?utf-8?B?TU0vdEd0TTBvS25zQzU5Yk52cWxHY2FINWk1M21JcFZudkxjSEpvZjZITnJQ?=
+ =?utf-8?B?ak5YSXNHTjJWajBaR1ErNmg5TnM3TTI0NHdxaC81WUxlM3ArV25GOTNacW5t?=
+ =?utf-8?B?enJucDFNS0M3NFZsaU5QNzhyemhhM3B4N3NCOWZvNnBQTHBGMjJ3cVNtV3ZT?=
+ =?utf-8?B?UkJySlpSV3hLZUV5ZDg0cFJERG4zdWhBUEhEaTNuZUlIYjRreUs5NGE5c094?=
+ =?utf-8?B?bkhIM2NzZE9haWRKOWpGemlWM0loSGpTTi9EcXB5U09oYzc4U0tZeVRsL1Rm?=
+ =?utf-8?B?LzVxd3pCQjZKTHdmNk5MY3czM3lnWGZWZmNvQ2tyRHlJcEt0UGM3Z0F4VEZx?=
+ =?utf-8?Q?f08TYIBbj8w25xCaaB?=
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 95bfcaae-02b4-4e5e-23f4-08de77c47496
+X-MS-Exchange-CrossTenant-Network-Message-Id: 40ad3113-64dd-4532-6c2c-08de77c47545
 X-MS-Exchange-CrossTenant-AuthSource: LV8PR12MB9620.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Mar 2026 18:57:59.3575
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Mar 2026 18:58:00.6729
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: kIIqxMisUSLIc6CvSu5vbAuKZcV1NfSLRhSWQswYjMfklCx1hz4cn15ESlRAYrWQ
+X-MS-Exchange-CrossTenant-UserPrincipalName: D9mhPacgMT19sH8J9bJnmFIJtGya7jursMFXRq2EI+qLOlWKkx+HPFG/C0PCLSJM
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5993
-X-Spamd-Bar: -----
-Message-ID-Hash: W3QOTMVM35E5Y4KIXBPPUSRMOHRO7J3M
-X-Message-ID-Hash: W3QOTMVM35E5Y4KIXBPPUSRMOHRO7J3M
+X-Spamd-Bar: ------
+Message-ID-Hash: SYU6HRRJVHANXBNNZCUB4FJJX4VDDSN3
+X-Message-ID-Hash: SYU6HRRJVHANXBNNZCUB4FJJX4VDDSN3
 X-MailFrom: jgg@nvidia.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: patches@lists.linux.dev
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 3/5] dma-buf: Change st-dma-fence-unwrap.c to use kunit
+Subject: [Linaro-mm-sig] [PATCH 4/5] dma-buf: Change st-dma-fence-chain.c to use kunit
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/W3QOTMVM35E5Y4KIXBPPUSRMOHRO7J3M/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SYU6HRRJVHANXBNNZCUB4FJJX4VDDSN3/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [4.49 / 15.00];
+X-Spamd-Result: default: False [4.59 / 15.00];
 	DMARC_POLICY_REJECT(2.00)[nvidia.com : SPF not aligned (relaxed),reject];
-	MID_CONTAINS_FROM(1.00)[];
-	R_DKIM_REJECT(1.00)[Nvidia.com:s=selector2];
 	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
-	MAILLIST(-0.20)[mailman];
+	R_DKIM_REJECT(1.00)[Nvidia.com:s=selector2];
+	MID_CONTAINS_FROM(1.00)[];
 	R_SPF_ALLOW(-0.20)[+mx:c];
+	MAILLIST(-0.20)[mailman];
+	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[13];
+	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
 	FREEMAIL_TO(0.00)[gmail.com,amd.com,lists.freedesktop.org,linux.intel.com,lists.linaro.org,vger.kernel.org,intel.com,ffwll.ch,linaro.org,ursulin.net];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	GREYLIST(0.00)[pass,meta];
-	DKIM_TRACE(0.00)[Nvidia.com:-];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jgg@nvidia.com,linaro-mm-sig-bounces@lists.linaro.org];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[13];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.998];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	NEURAL_HAM(-0.00)[-0.990];
+	FROM_NEQ_ENVFROM(0.00)[jgg@nvidia.com,linaro-mm-sig-bounces@lists.linaro.org];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MISSING_XM_UA(0.00)[];
+	DKIM_TRACE(0.00)[Nvidia.com:-];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:mid,nvidia.com:email,lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
-X-Rspamd-Queue-Id: E89B81D12C6
+X-Rspamd-Queue-Id: D4CA51D12D4
 X-Rspamd-Action: no action
 
-Modernize the open coded test framework by using kunit.
-
-Signed-off-by: Jason Gunthorpe <jgg@nvidia.com>
----
- drivers/dma-buf/Makefile              |   4 +-
- drivers/dma-buf/selftests.h           |   1 -
- drivers/dma-buf/st-dma-fence-unwrap.c | 290 +++++++++++---------------
- 3 files changed, 129 insertions(+), 166 deletions(-)
-
-diff --git a/drivers/dma-buf/Makefile b/drivers/dma-buf/Makefile
-index 37c94562e677ca..65bda1b7cc73eb 100644
---- a/drivers/dma-buf/Makefile
-+++ b/drivers/dma-buf/Makefile
-@@ -9,13 +9,13 @@ obj-$(CONFIG_UDMABUF)		+= udmabuf.o
- 
- dmabuf_selftests-y := \
- 	selftest.o \
--	st-dma-fence-chain.o \
--	st-dma-fence-unwrap.o
-+	st-dma-fence-chain.o
- 
- obj-$(CONFIG_DMABUF_SELFTESTS)	+= dmabuf_selftests.o
- 
- dmabuf_kunit-y := \
- 	st-dma-fence.o \
-+	st-dma-fence-unwrap.o \
- 	st-dma-resv.o
- 
- obj-$(CONFIG_DMABUF_KUNIT_TEST) += dmabuf_kunit.o
-diff --git a/drivers/dma-buf/selftests.h b/drivers/dma-buf/selftests.h
-index 0a348a5cbbebc7..7104cf0cce26d1 100644
---- a/drivers/dma-buf/selftests.h
-+++ b/drivers/dma-buf/selftests.h
-@@ -11,4 +11,3 @@
-  */
- selftest(sanitycheck, __sanitycheck__) /* keep first (igt selfcheck) */
- selftest(dma_fence_chain, dma_fence_chain)
--selftest(dma_fence_unwrap, dma_fence_unwrap)
-diff --git a/drivers/dma-buf/st-dma-fence-unwrap.c b/drivers/dma-buf/st-dma-fence-unwrap.c
-index 9c74195f47fd33..51c87869b7b82c 100644
---- a/drivers/dma-buf/st-dma-fence-unwrap.c
-+++ b/drivers/dma-buf/st-dma-fence-unwrap.c
-@@ -4,13 +4,12 @@
-  * Copyright (C) 2022 Advanced Micro Devices, Inc.
-  */
- 
-+#include <kunit/test.h>
- #include <linux/dma-fence.h>
- #include <linux/dma-fence-array.h>
- #include <linux/dma-fence-chain.h>
- #include <linux/dma-fence-unwrap.h>
- 
--#include "selftest.h"
--
- #define CHAIN_SZ (4 << 10)
- 
- struct mock_fence {
-@@ -97,52 +96,45 @@ static struct dma_fence *mock_chain(struct dma_fence *prev,
- 	return &f->base;
- }
- 
--static int sanitycheck(void *arg)
-+static void test_sanitycheck(struct kunit *test)
- {
- 	struct dma_fence *f, *chain, *array;
--	int err = 0;
- 
- 	f = mock_fence();
--	if (!f)
--		return -ENOMEM;
-+	KUNIT_ASSERT_NOT_NULL(test, f);
- 
- 	dma_fence_enable_sw_signaling(f);
- 
- 	array = mock_array(1, f);
--	if (!array)
--		return -ENOMEM;
-+	KUNIT_ASSERT_NOT_NULL(test, array);
- 
- 	chain = mock_chain(NULL, array);
--	if (!chain)
--		return -ENOMEM;
-+	KUNIT_ASSERT_NOT_NULL(test, chain);
- 
- 	dma_fence_put(chain);
--	return err;
- }
- 
--static int unwrap_array(void *arg)
-+static void test_unwrap_array(struct kunit *test)
- {
- 	struct dma_fence *fence, *f1, *f2, *array;
- 	struct dma_fence_unwrap iter;
--	int err = 0;
- 
- 	f1 = mock_fence();
--	if (!f1)
--		return -ENOMEM;
-+	KUNIT_ASSERT_NOT_NULL(test, f1);
- 
- 	dma_fence_enable_sw_signaling(f1);
- 
- 	f2 = mock_fence();
- 	if (!f2) {
-+		KUNIT_FAIL(test, "Failed to create mock fence");
- 		dma_fence_put(f1);
--		return -ENOMEM;
-+		return;
- 	}
- 
- 	dma_fence_enable_sw_signaling(f2);
- 
- 	array = mock_array(2, f1, f2);
--	if (!array)
--		return -ENOMEM;
-+	KUNIT_ASSERT_NOT_NULL(test, array);
- 
- 	dma_fence_unwrap_for_each(fence, &iter, array) {
- 		if (fence == f1) {
-@@ -150,43 +142,37 @@ static int unwrap_array(void *arg)
- 		} else if (fence == f2) {
- 			f2 = NULL;
- 		} else {
--			pr_err("Unexpected fence!\n");
--			err = -EINVAL;
-+			KUNIT_FAIL(test, "Unexpected fence!");
- 		}
- 	}
- 
--	if (f1 || f2) {
--		pr_err("Not all fences seen!\n");
--		err = -EINVAL;
--	}
-+	if (f1 || f2)
-+		KUNIT_FAIL(test, "Not all fences seen!");
- 
- 	dma_fence_put(array);
--	return err;
- }
- 
--static int unwrap_chain(void *arg)
-+static void test_unwrap_chain(struct kunit *test)
- {
- 	struct dma_fence *fence, *f1, *f2, *chain;
- 	struct dma_fence_unwrap iter;
--	int err = 0;
- 
- 	f1 = mock_fence();
--	if (!f1)
--		return -ENOMEM;
-+	KUNIT_ASSERT_NOT_NULL(test, f1);
- 
- 	dma_fence_enable_sw_signaling(f1);
- 
- 	f2 = mock_fence();
- 	if (!f2) {
-+		KUNIT_FAIL(test, "Failed to create mock fence");
- 		dma_fence_put(f1);
--		return -ENOMEM;
-+		return;
- 	}
- 
- 	dma_fence_enable_sw_signaling(f2);
- 
- 	chain = mock_chain(f1, f2);
--	if (!chain)
--		return -ENOMEM;
-+	KUNIT_ASSERT_NOT_NULL(test, chain);
- 
- 	dma_fence_unwrap_for_each(fence, &iter, chain) {
- 		if (fence == f1) {
-@@ -194,47 +180,40 @@ static int unwrap_chain(void *arg)
- 		} else if (fence == f2) {
- 			f2 = NULL;
- 		} else {
--			pr_err("Unexpected fence!\n");
--			err = -EINVAL;
-+			KUNIT_FAIL(test, "Unexpected fence!");
- 		}
- 	}
- 
--	if (f1 || f2) {
--		pr_err("Not all fences seen!\n");
--		err = -EINVAL;
--	}
-+	if (f1 || f2)
-+		KUNIT_FAIL(test, "Not all fences seen!");
- 
- 	dma_fence_put(chain);
--	return err;
- }
- 
--static int unwrap_chain_array(void *arg)
-+static void test_unwrap_chain_array(struct kunit *test)
- {
- 	struct dma_fence *fence, *f1, *f2, *array, *chain;
- 	struct dma_fence_unwrap iter;
--	int err = 0;
- 
- 	f1 = mock_fence();
--	if (!f1)
--		return -ENOMEM;
-+	KUNIT_ASSERT_NOT_NULL(test, f1);
- 
- 	dma_fence_enable_sw_signaling(f1);
- 
- 	f2 = mock_fence();
- 	if (!f2) {
-+		KUNIT_FAIL(test, "Failed to create mock fence");
- 		dma_fence_put(f1);
--		return -ENOMEM;
-+		return;
- 	}
- 
- 	dma_fence_enable_sw_signaling(f2);
- 
- 	array = mock_array(2, f1, f2);
--	if (!array)
--		return -ENOMEM;
-+	KUNIT_ASSERT_NOT_NULL(test, array);
- 
- 	chain = mock_chain(NULL, array);
--	if (!chain)
--		return -ENOMEM;
-+	KUNIT_ASSERT_NOT_NULL(test, chain);
- 
- 	dma_fence_unwrap_for_each(fence, &iter, chain) {
- 		if (fence == f1) {
-@@ -242,35 +221,29 @@ static int unwrap_chain_array(void *arg)
- 		} else if (fence == f2) {
- 			f2 = NULL;
- 		} else {
--			pr_err("Unexpected fence!\n");
--			err = -EINVAL;
-+			KUNIT_FAIL(test, "Unexpected fence!");
- 		}
- 	}
- 
--	if (f1 || f2) {
--		pr_err("Not all fences seen!\n");
--		err = -EINVAL;
--	}
-+	if (f1 || f2)
-+		KUNIT_FAIL(test, "Not all fences seen!");
- 
- 	dma_fence_put(chain);
--	return err;
- }
- 
--static int unwrap_merge(void *arg)
-+static void test_unwrap_merge(struct kunit *test)
- {
- 	struct dma_fence *fence, *f1, *f2, *f3;
- 	struct dma_fence_unwrap iter;
--	int err = 0;
- 
- 	f1 = mock_fence();
--	if (!f1)
--		return -ENOMEM;
-+	KUNIT_ASSERT_NOT_NULL(test, f1);
- 
- 	dma_fence_enable_sw_signaling(f1);
- 
- 	f2 = mock_fence();
- 	if (!f2) {
--		err = -ENOMEM;
-+		KUNIT_FAIL(test, "Failed to create mock fence");
- 		goto error_put_f1;
- 	}
- 
-@@ -278,7 +251,7 @@ static int unwrap_merge(void *arg)
- 
- 	f3 = dma_fence_unwrap_merge(f1, f2);
- 	if (!f3) {
--		err = -ENOMEM;
-+		KUNIT_FAIL(test, "Failed to merge fences");
- 		goto error_put_f2;
- 	}
- 
-@@ -290,39 +263,33 @@ static int unwrap_merge(void *arg)
- 			dma_fence_put(f2);
- 			f2 = NULL;
- 		} else {
--			pr_err("Unexpected fence!\n");
--			err = -EINVAL;
-+			KUNIT_FAIL(test, "Unexpected fence!");
- 		}
- 	}
- 
--	if (f1 || f2) {
--		pr_err("Not all fences seen!\n");
--		err = -EINVAL;
--	}
-+	if (f1 || f2)
-+		KUNIT_FAIL(test, "Not all fences seen!");
- 
- 	dma_fence_put(f3);
- error_put_f2:
- 	dma_fence_put(f2);
- error_put_f1:
- 	dma_fence_put(f1);
--	return err;
- }
- 
--static int unwrap_merge_duplicate(void *arg)
-+static void test_unwrap_merge_duplicate(struct kunit *test)
- {
- 	struct dma_fence *fence, *f1, *f2;
- 	struct dma_fence_unwrap iter;
--	int err = 0;
- 
- 	f1 = mock_fence();
--	if (!f1)
--		return -ENOMEM;
-+	KUNIT_ASSERT_NOT_NULL(test, f1);
- 
- 	dma_fence_enable_sw_signaling(f1);
- 
- 	f2 = dma_fence_unwrap_merge(f1, f1);
- 	if (!f2) {
--		err = -ENOMEM;
-+		KUNIT_FAIL(test, "Failed to merge fences");
- 		goto error_put_f1;
- 	}
- 
-@@ -331,41 +298,35 @@ static int unwrap_merge_duplicate(void *arg)
- 			dma_fence_put(f1);
- 			f1 = NULL;
- 		} else {
--			pr_err("Unexpected fence!\n");
--			err = -EINVAL;
-+			KUNIT_FAIL(test, "Unexpected fence!");
- 		}
- 	}
- 
--	if (f1) {
--		pr_err("Not all fences seen!\n");
--		err = -EINVAL;
--	}
-+	if (f1)
-+		KUNIT_FAIL(test, "Not all fences seen!");
- 
- 	dma_fence_put(f2);
- error_put_f1:
- 	dma_fence_put(f1);
--	return err;
- }
- 
--static int unwrap_merge_seqno(void *arg)
-+static void test_unwrap_merge_seqno(struct kunit *test)
- {
- 	struct dma_fence *fence, *f1, *f2, *f3, *f4;
- 	struct dma_fence_unwrap iter;
--	int err = 0;
- 	u64 ctx[2];
- 
- 	ctx[0] = dma_fence_context_alloc(1);
- 	ctx[1] = dma_fence_context_alloc(1);
- 
- 	f1 = __mock_fence(ctx[1], 1);
--	if (!f1)
--		return -ENOMEM;
-+	KUNIT_ASSERT_NOT_NULL(test, f1);
- 
- 	dma_fence_enable_sw_signaling(f1);
- 
- 	f2 = __mock_fence(ctx[1], 2);
- 	if (!f2) {
--		err = -ENOMEM;
-+		KUNIT_FAIL(test, "Failed to create mock fence");
- 		goto error_put_f1;
- 	}
- 
-@@ -373,7 +334,7 @@ static int unwrap_merge_seqno(void *arg)
- 
- 	f3 = __mock_fence(ctx[0], 1);
- 	if (!f3) {
--		err = -ENOMEM;
-+		KUNIT_FAIL(test, "Failed to create mock fence");
- 		goto error_put_f2;
- 	}
- 
-@@ -381,7 +342,7 @@ static int unwrap_merge_seqno(void *arg)
- 
- 	f4 = dma_fence_unwrap_merge(f1, f2, f3);
- 	if (!f4) {
--		err = -ENOMEM;
-+		KUNIT_FAIL(test, "Failed to merge fences");
- 		goto error_put_f3;
- 	}
- 
-@@ -393,15 +354,12 @@ static int unwrap_merge_seqno(void *arg)
- 			dma_fence_put(f2);
- 			f2 = NULL;
- 		} else {
--			pr_err("Unexpected fence!\n");
--			err = -EINVAL;
-+			KUNIT_FAIL(test, "Unexpected fence!");
- 		}
- 	}
- 
--	if (f2 || f3) {
--		pr_err("Not all fences seen!\n");
--		err = -EINVAL;
--	}
-+	if (f2 || f3)
-+		KUNIT_FAIL(test, "Not all fences seen!");
- 
- 	dma_fence_put(f4);
- error_put_f3:
-@@ -410,40 +368,41 @@ static int unwrap_merge_seqno(void *arg)
- 	dma_fence_put(f2);
- error_put_f1:
- 	dma_fence_put(f1);
--	return err;
- }
- 
--static int unwrap_merge_order(void *arg)
-+static void test_unwrap_merge_order(struct kunit *test)
- {
- 	struct dma_fence *fence, *f1, *f2, *a1, *a2, *c1, *c2;
- 	struct dma_fence_unwrap iter;
--	int err = 0;
- 
- 	f1 = mock_fence();
--	if (!f1)
--		return -ENOMEM;
-+	KUNIT_ASSERT_NOT_NULL(test, f1);
- 
- 	dma_fence_enable_sw_signaling(f1);
- 
- 	f2 = mock_fence();
- 	if (!f2) {
-+		KUNIT_FAIL(test, "Failed to create mock fence");
- 		dma_fence_put(f1);
--		return -ENOMEM;
-+		return;
- 	}
- 
- 	dma_fence_enable_sw_signaling(f2);
- 
- 	a1 = mock_array(2, f1, f2);
--	if (!a1)
--		return -ENOMEM;
-+	KUNIT_ASSERT_NOT_NULL(test, a1);
- 
- 	c1 = mock_chain(NULL, dma_fence_get(f1));
--	if (!c1)
-+	if (!c1) {
-+		KUNIT_FAIL(test, "Failed to create chain");
- 		goto error_put_a1;
-+	}
- 
- 	c2 = mock_chain(c1, dma_fence_get(f2));
--	if (!c2)
-+	if (!c2) {
-+		KUNIT_FAIL(test, "Failed to create chain");
- 		goto error_put_a1;
-+	}
- 
- 	/*
- 	 * The fences in the chain are the same as in a1 but in oposite order,
-@@ -455,63 +414,64 @@ static int unwrap_merge_order(void *arg)
- 		if (fence == f1) {
- 			f1 = NULL;
- 			if (!f2)
--				pr_err("Unexpected order!\n");
-+				KUNIT_FAIL(test, "Unexpected order!");
- 		} else if (fence == f2) {
- 			f2 = NULL;
- 			if (f1)
--				pr_err("Unexpected order!\n");
-+				KUNIT_FAIL(test, "Unexpected order!");
- 		} else {
--			pr_err("Unexpected fence!\n");
--			err = -EINVAL;
-+			KUNIT_FAIL(test, "Unexpected fence!");
- 		}
- 	}
- 
--	if (f1 || f2) {
--		pr_err("Not all fences seen!\n");
--		err = -EINVAL;
--	}
-+	if (f1 || f2)
-+		KUNIT_FAIL(test, "Not all fences seen!");
- 
- 	dma_fence_put(a2);
--	return err;
-+	return;
- 
- error_put_a1:
- 	dma_fence_put(a1);
--	return -ENOMEM;
- }
- 
--static int unwrap_merge_complex(void *arg)
-+static void test_unwrap_merge_complex(struct kunit *test)
- {
- 	struct dma_fence *fence, *f1, *f2, *f3, *f4, *f5;
- 	struct dma_fence_unwrap iter;
--	int err = -ENOMEM;
- 
- 	f1 = mock_fence();
--	if (!f1)
--		return -ENOMEM;
-+	KUNIT_ASSERT_NOT_NULL(test, f1);
- 
- 	dma_fence_enable_sw_signaling(f1);
- 
- 	f2 = mock_fence();
--	if (!f2)
-+	if (!f2) {
-+		KUNIT_FAIL(test, "Failed to create mock fence");
- 		goto error_put_f1;
-+	}
- 
- 	dma_fence_enable_sw_signaling(f2);
- 
- 	f3 = dma_fence_unwrap_merge(f1, f2);
--	if (!f3)
-+	if (!f3) {
-+		KUNIT_FAIL(test, "Failed to merge fences");
- 		goto error_put_f2;
-+	}
- 
- 	/* The resulting array has the fences in reverse */
- 	f4 = mock_array(2, dma_fence_get(f2), dma_fence_get(f1));
--	if (!f4)
-+	if (!f4) {
-+		KUNIT_FAIL(test, "Failed to create array");
- 		goto error_put_f3;
-+	}
- 
- 	/* Signaled fences should be filtered, the two arrays merged. */
- 	f5 = dma_fence_unwrap_merge(f3, f4, dma_fence_get_stub());
--	if (!f5)
-+	if (!f5) {
-+		KUNIT_FAIL(test, "Failed to merge fences");
- 		goto error_put_f4;
-+	}
- 
--	err = 0;
- 	dma_fence_unwrap_for_each(fence, &iter, f5) {
- 		if (fence == f1) {
- 			dma_fence_put(f1);
-@@ -520,15 +480,12 @@ static int unwrap_merge_complex(void *arg)
- 			dma_fence_put(f2);
- 			f2 = NULL;
- 		} else {
--			pr_err("Unexpected fence!\n");
--			err = -EINVAL;
-+			KUNIT_FAIL(test, "Unexpected fence!");
- 		}
- 	}
- 
--	if (f1 || f2) {
--		pr_err("Not all fences seen!\n");
--		err = -EINVAL;
--	}
-+	if (f1 || f2)
-+		KUNIT_FAIL(test, "Not all fences seen!");
- 
- 	dma_fence_put(f5);
- error_put_f4:
-@@ -539,56 +496,64 @@ static int unwrap_merge_complex(void *arg)
- 	dma_fence_put(f2);
- error_put_f1:
- 	dma_fence_put(f1);
--	return err;
- }
- 
--static int unwrap_merge_complex_seqno(void *arg)
-+static void test_unwrap_merge_complex_seqno(struct kunit *test)
- {
- 	struct dma_fence *fence, *f1, *f2, *f3, *f4, *f5, *f6, *f7;
- 	struct dma_fence_unwrap iter;
--	int err = -ENOMEM;
- 	u64 ctx[2];
- 
- 	ctx[0] = dma_fence_context_alloc(1);
- 	ctx[1] = dma_fence_context_alloc(1);
- 
- 	f1 = __mock_fence(ctx[0], 2);
--	if (!f1)
--		return -ENOMEM;
-+	KUNIT_ASSERT_NOT_NULL(test, f1);
- 
- 	dma_fence_enable_sw_signaling(f1);
- 
- 	f2 = __mock_fence(ctx[1], 1);
--	if (!f2)
-+	if (!f2) {
-+		KUNIT_FAIL(test, "Failed to create mock fence");
- 		goto error_put_f1;
-+	}
- 
- 	dma_fence_enable_sw_signaling(f2);
- 
- 	f3 = __mock_fence(ctx[0], 1);
--	if (!f3)
-+	if (!f3) {
-+		KUNIT_FAIL(test, "Failed to create mock fence");
- 		goto error_put_f2;
-+	}
- 
- 	dma_fence_enable_sw_signaling(f3);
- 
- 	f4 = __mock_fence(ctx[1], 2);
--	if (!f4)
-+	if (!f4) {
-+		KUNIT_FAIL(test, "Failed to create mock fence");
- 		goto error_put_f3;
-+	}
- 
- 	dma_fence_enable_sw_signaling(f4);
- 
- 	f5 = mock_array(2, dma_fence_get(f1), dma_fence_get(f2));
--	if (!f5)
-+	if (!f5) {
-+		KUNIT_FAIL(test, "Failed to create array");
- 		goto error_put_f4;
-+	}
- 
- 	f6 = mock_array(2, dma_fence_get(f3), dma_fence_get(f4));
--	if (!f6)
-+	if (!f6) {
-+		KUNIT_FAIL(test, "Failed to create array");
- 		goto error_put_f5;
-+	}
- 
- 	f7 = dma_fence_unwrap_merge(f5, f6);
--	if (!f7)
-+	if (!f7) {
-+		KUNIT_FAIL(test, "Failed to merge fences");
- 		goto error_put_f6;
-+	}
- 
--	err = 0;
- 	dma_fence_unwrap_for_each(fence, &iter, f7) {
- 		if (fence == f1 && f4) {
- 			dma_fence_put(f1);
-@@ -597,15 +562,12 @@ static int unwrap_merge_complex_seqno(void *arg)
- 			dma_fence_put(f4);
- 			f4 = NULL;
- 		} else {
--			pr_err("Unexpected fence!\n");
--			err = -EINVAL;
-+			KUNIT_FAIL(test, "Unexpected fence!");
- 		}
- 	}
- 
--	if (f1 || f4) {
--		pr_err("Not all fences seen!\n");
--		err = -EINVAL;
--	}
-+	if (f1 || f4)
-+		KUNIT_FAIL(test, "Not all fences seen!");
- 
- 	dma_fence_put(f7);
- error_put_f6:
-@@ -620,23 +582,25 @@ static int unwrap_merge_complex_seqno(void *arg)
- 	dma_fence_put(f2);
- error_put_f1:
- 	dma_fence_put(f1);
--	return err;
- }
- 
--int dma_fence_unwrap(void)
--{
--	static const struct subtest tests[] = {
--		SUBTEST(sanitycheck),
--		SUBTEST(unwrap_array),
--		SUBTEST(unwrap_chain),
--		SUBTEST(unwrap_chain_array),
--		SUBTEST(unwrap_merge),
--		SUBTEST(unwrap_merge_duplicate),
--		SUBTEST(unwrap_merge_seqno),
--		SUBTEST(unwrap_merge_order),
--		SUBTEST(unwrap_merge_complex),
--		SUBTEST(unwrap_merge_complex_seqno),
--	};
-+static struct kunit_case dma_fence_unwrap_cases[] = {
-+	KUNIT_CASE(test_sanitycheck),
-+	KUNIT_CASE(test_unwrap_array),
-+	KUNIT_CASE(test_unwrap_chain),
-+	KUNIT_CASE(test_unwrap_chain_array),
-+	KUNIT_CASE(test_unwrap_merge),
-+	KUNIT_CASE(test_unwrap_merge_duplicate),
-+	KUNIT_CASE(test_unwrap_merge_seqno),
-+	KUNIT_CASE(test_unwrap_merge_order),
-+	KUNIT_CASE(test_unwrap_merge_complex),
-+	KUNIT_CASE(test_unwrap_merge_complex_seqno),
-+	{}
-+};
- 
--	return subtests(tests, NULL);
--}
-+static struct kunit_suite dma_fence_unwrap_test_suite = {
-+	.name = "dma-buf-fence-unwrap",
-+	.test_cases = dma_fence_unwrap_cases,
-+};
-+
-+kunit_test_suite(dma_fence_unwrap_test_suite);
--- 
-2.43.0
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+TW9kZXJuaXplIHRoZSBvcGVuIGNvZGVkIHRlc3QgZnJhbWV3b3JrIGJ5IHVzaW5nIGt1bml0Lg0K
+DQpTaWduZWQtb2ZmLWJ5OiBKYXNvbiBHdW50aG9ycGUgPGpnZ0BudmlkaWEuY29tPg0KLS0tDQog
+ZHJpdmVycy9kbWEtYnVmL01ha2VmaWxlICAgICAgICAgICAgIHwgICA0ICstDQogZHJpdmVycy9k
+bWEtYnVmL3NlbGZ0ZXN0cy5oICAgICAgICAgIHwgICAxIC0NCiBkcml2ZXJzL2RtYS1idWYvc3Qt
+ZG1hLWZlbmNlLWNoYWluLmMgfCAyMTcgKysrKysrKysrKysrLS0tLS0tLS0tLS0tLS0tDQogMyBm
+aWxlcyBjaGFuZ2VkLCA5OCBpbnNlcnRpb25zKCspLCAxMjQgZGVsZXRpb25zKC0pDQoNCmRpZmYg
+LS1naXQgYS9kcml2ZXJzL2RtYS1idWYvTWFrZWZpbGUgYi9kcml2ZXJzL2RtYS1idWYvTWFrZWZp
+bGUNCmluZGV4IDY1YmRhMWI3Y2M3M2ViLi5jOTdhYjJkMDFhN2U2OCAxMDA2NDQNCi0tLSBhL2Ry
+aXZlcnMvZG1hLWJ1Zi9NYWtlZmlsZQ0KKysrIGIvZHJpdmVycy9kbWEtYnVmL01ha2VmaWxlDQpA
+QCAtOCwxMyArOCwxMyBAQCBvYmotJChDT05GSUdfU1dfU1lOQykJCSs9IHN3X3N5bmMubyBzeW5j
+X2RlYnVnLm8NCiBvYmotJChDT05GSUdfVURNQUJVRikJCSs9IHVkbWFidWYubw0KIA0KIGRtYWJ1
+Zl9zZWxmdGVzdHMteSA6PSBcDQotCXNlbGZ0ZXN0Lm8gXA0KLQlzdC1kbWEtZmVuY2UtY2hhaW4u
+bw0KKwlzZWxmdGVzdC5vDQogDQogb2JqLSQoQ09ORklHX0RNQUJVRl9TRUxGVEVTVFMpCSs9IGRt
+YWJ1Zl9zZWxmdGVzdHMubw0KIA0KIGRtYWJ1Zl9rdW5pdC15IDo9IFwNCiAJc3QtZG1hLWZlbmNl
+Lm8gXA0KKwlzdC1kbWEtZmVuY2UtY2hhaW4ubyBcDQogCXN0LWRtYS1mZW5jZS11bndyYXAubyBc
+DQogCXN0LWRtYS1yZXN2Lm8NCiANCmRpZmYgLS1naXQgYS9kcml2ZXJzL2RtYS1idWYvc2VsZnRl
+c3RzLmggYi9kcml2ZXJzL2RtYS1idWYvc2VsZnRlc3RzLmgNCmluZGV4IDcxMDRjZjBjY2UyNmQx
+Li4zN2I3MjUxODQxMjc4ZSAxMDA2NDQNCi0tLSBhL2RyaXZlcnMvZG1hLWJ1Zi9zZWxmdGVzdHMu
+aA0KKysrIGIvZHJpdmVycy9kbWEtYnVmL3NlbGZ0ZXN0cy5oDQpAQCAtMTAsNCArMTAsMyBAQA0K
+ICAqIFRlc3RzIGFyZSBleGVjdXRlZCBpbiBvcmRlciBieSBpZ3QvZG1hYnVmX3NlbGZ0ZXN0DQog
+ICovDQogc2VsZnRlc3Qoc2FuaXR5Y2hlY2ssIF9fc2FuaXR5Y2hlY2tfXykgLyoga2VlcCBmaXJz
+dCAoaWd0IHNlbGZjaGVjaykgKi8NCi1zZWxmdGVzdChkbWFfZmVuY2VfY2hhaW4sIGRtYV9mZW5j
+ZV9jaGFpbikNCmRpZmYgLS1naXQgYS9kcml2ZXJzL2RtYS1idWYvc3QtZG1hLWZlbmNlLWNoYWlu
+LmMgYi9kcml2ZXJzL2RtYS1idWYvc3QtZG1hLWZlbmNlLWNoYWluLmMNCmluZGV4IDgyMTAyM2Rk
+MzRkZjY4Li5hMzAyM2QzZmVkYzlkOCAxMDA2NDQNCi0tLSBhL2RyaXZlcnMvZG1hLWJ1Zi9zdC1k
+bWEtZmVuY2UtY2hhaW4uYw0KKysrIGIvZHJpdmVycy9kbWEtYnVmL3N0LWRtYS1mZW5jZS1jaGFp
+bi5jDQpAQCAtNCw2ICs0LDcgQEANCiAgKiBDb3B5cmlnaHQgwqkgMjAxOSBJbnRlbCBDb3Jwb3Jh
+dGlvbg0KICAqLw0KIA0KKyNpbmNsdWRlIDxrdW5pdC90ZXN0Lmg+DQogI2luY2x1ZGUgPGxpbnV4
+L2RlbGF5Lmg+DQogI2luY2x1ZGUgPGxpbnV4L2RtYS1mZW5jZS5oPg0KICNpbmNsdWRlIDxsaW51
+eC9kbWEtZmVuY2UtY2hhaW4uaD4NCkBAIC0xNSw4ICsxNiw2IEBADQogI2luY2x1ZGUgPGxpbnV4
+L3NwaW5sb2NrLmg+DQogI2luY2x1ZGUgPGxpbnV4L3JhbmRvbS5oPg0KIA0KLSNpbmNsdWRlICJz
+ZWxmdGVzdC5oIg0KLQ0KICNkZWZpbmUgQ0hBSU5fU1ogKDQgPDwgMTApDQogDQogc3RhdGljIHN0
+cnVjdCBrbWVtX2NhY2hlICpzbGFiX2ZlbmNlczsNCkBAIC03NCwyNyArNzMsMjMgQEAgc3RhdGlj
+IHN0cnVjdCBkbWFfZmVuY2UgKm1vY2tfY2hhaW4oc3RydWN0IGRtYV9mZW5jZSAqcHJldiwNCiAJ
+cmV0dXJuICZmLT5iYXNlOw0KIH0NCiANCi1zdGF0aWMgaW50IHNhbml0eWNoZWNrKHZvaWQgKmFy
+ZykNCitzdGF0aWMgdm9pZCB0ZXN0X3Nhbml0eWNoZWNrKHN0cnVjdCBrdW5pdCAqdGVzdCkNCiB7
+DQogCXN0cnVjdCBkbWFfZmVuY2UgKmYsICpjaGFpbjsNCi0JaW50IGVyciA9IDA7DQogDQogCWYg
+PSBtb2NrX2ZlbmNlKCk7DQotCWlmICghZikNCi0JCXJldHVybiAtRU5PTUVNOw0KKwlLVU5JVF9B
+U1NFUlRfTk9UX05VTEwodGVzdCwgZik7DQogDQogCWNoYWluID0gbW9ja19jaGFpbihOVUxMLCBm
+LCAxKTsNCiAJaWYgKGNoYWluKQ0KIAkJZG1hX2ZlbmNlX2VuYWJsZV9zd19zaWduYWxpbmcoY2hh
+aW4pOw0KIAllbHNlDQotCQllcnIgPSAtRU5PTUVNOw0KKwkJS1VOSVRfRkFJTCh0ZXN0LCAiRmFp
+bGVkIHRvIGNyZWF0ZSBjaGFpbiIpOw0KIA0KIAlkbWFfZmVuY2Vfc2lnbmFsKGYpOw0KIAlkbWFf
+ZmVuY2VfcHV0KGYpOw0KIA0KIAlkbWFfZmVuY2VfcHV0KGNoYWluKTsNCi0NCi0JcmV0dXJuIGVy
+cjsNCiB9DQogDQogc3RydWN0IGZlbmNlX2NoYWlucyB7DQpAQCAtMTc2LDcgKzE3MSw3IEBAIHN0
+YXRpYyB2b2lkIGZlbmNlX2NoYWluc19maW5pKHN0cnVjdCBmZW5jZV9jaGFpbnMgKmZjKQ0KIAlr
+dmZyZWUoZmMtPmNoYWlucyk7DQogfQ0KIA0KLXN0YXRpYyBpbnQgZmluZF9zZXFubyh2b2lkICph
+cmcpDQorc3RhdGljIHZvaWQgdGVzdF9maW5kX3NlcW5vKHN0cnVjdCBrdW5pdCAqdGVzdCkNCiB7
+DQogCXN0cnVjdCBmZW5jZV9jaGFpbnMgZmM7DQogCXN0cnVjdCBkbWFfZmVuY2UgKmZlbmNlOw0K
+QEAgLTE4NCwxNCArMTc5LDEzIEBAIHN0YXRpYyBpbnQgZmluZF9zZXFubyh2b2lkICphcmcpDQog
+CWludCBpOw0KIA0KIAllcnIgPSBmZW5jZV9jaGFpbnNfaW5pdCgmZmMsIDY0LCBzZXFub19pbmMp
+Ow0KLQlpZiAoZXJyKQ0KLQkJcmV0dXJuIGVycjsNCisJS1VOSVRfQVNTRVJUX0VRX01TRyh0ZXN0
+LCBlcnIsIDAsICJGYWlsZWQgdG8gaW5pdCBmZW5jZSBjaGFpbnMiKTsNCiANCiAJZmVuY2UgPSBk
+bWFfZmVuY2VfZ2V0KGZjLnRhaWwpOw0KIAllcnIgPSBkbWFfZmVuY2VfY2hhaW5fZmluZF9zZXFu
+bygmZmVuY2UsIDApOw0KIAlkbWFfZmVuY2VfcHV0KGZlbmNlKTsNCiAJaWYgKGVycikgew0KLQkJ
+cHJfZXJyKCJSZXBvcnRlZCAlZCBmb3IgZmluZF9zZXFubygwKSFcbiIsIGVycik7DQorCQlLVU5J
+VF9GQUlMKHRlc3QsICJSZXBvcnRlZCAlZCBmb3IgZmluZF9zZXFubygwKSEiLCBlcnIpOw0KIAkJ
+Z290byBlcnI7DQogCX0NCiANCkBAIC0yMDAsMTQgKzE5NCwxMyBAQCBzdGF0aWMgaW50IGZpbmRf
+c2Vxbm8odm9pZCAqYXJnKQ0KIAkJZXJyID0gZG1hX2ZlbmNlX2NoYWluX2ZpbmRfc2Vxbm8oJmZl
+bmNlLCBpICsgMSk7DQogCQlkbWFfZmVuY2VfcHV0KGZlbmNlKTsNCiAJCWlmIChlcnIpIHsNCi0J
+CQlwcl9lcnIoIlJlcG9ydGVkICVkIGZvciBmaW5kX3NlcW5vKCVkOiVkKSFcbiIsDQotCQkJICAg
+ICAgIGVyciwgZmMuY2hhaW5fbGVuZ3RoICsgMSwgaSArIDEpOw0KKwkJCUtVTklUX0ZBSUwodGVz
+dCwgIlJlcG9ydGVkICVkIGZvciBmaW5kX3NlcW5vKCVkOiVkKSEiLA0KKwkJCQkgICBlcnIsIGZj
+LmNoYWluX2xlbmd0aCArIDEsIGkgKyAxKTsNCiAJCQlnb3RvIGVycjsNCiAJCX0NCiAJCWlmIChm
+ZW5jZSAhPSBmYy5jaGFpbnNbaV0pIHsNCi0JCQlwcl9lcnIoIkluY29ycmVjdCBmZW5jZSByZXBv
+cnRlZCBieSBmaW5kX3NlcW5vKCVkOiVkKVxuIiwNCi0JCQkgICAgICAgZmMuY2hhaW5fbGVuZ3Ro
+ICsgMSwgaSArIDEpOw0KLQkJCWVyciA9IC1FSU5WQUw7DQorCQkJS1VOSVRfRkFJTCh0ZXN0LCAi
+SW5jb3JyZWN0IGZlbmNlIHJlcG9ydGVkIGJ5IGZpbmRfc2Vxbm8oJWQ6JWQpIiwNCisJCQkJICAg
+ZmMuY2hhaW5fbGVuZ3RoICsgMSwgaSArIDEpOw0KIAkJCWdvdG8gZXJyOw0KIAkJfQ0KIA0KQEAg
+LTIxNSwxMiArMjA4LDExIEBAIHN0YXRpYyBpbnQgZmluZF9zZXFubyh2b2lkICphcmcpDQogCQll
+cnIgPSBkbWFfZmVuY2VfY2hhaW5fZmluZF9zZXFubygmZmVuY2UsIGkgKyAxKTsNCiAJCWRtYV9m
+ZW5jZV9wdXQoZmVuY2UpOw0KIAkJaWYgKGVycikgew0KLQkJCXByX2VycigiRXJyb3IgcmVwb3J0
+ZWQgZm9yIGZpbmRpbmcgc2VsZlxuIik7DQorCQkJS1VOSVRfRkFJTCh0ZXN0LCAiRXJyb3IgcmVw
+b3J0ZWQgZm9yIGZpbmRpbmcgc2VsZiIpOw0KIAkJCWdvdG8gZXJyOw0KIAkJfQ0KIAkJaWYgKGZl
+bmNlICE9IGZjLmNoYWluc1tpXSkgew0KLQkJCXByX2VycigiSW5jb3JyZWN0IGZlbmNlIHJlcG9y
+dGVkIGJ5IGZpbmQgc2VsZlxuIik7DQotCQkJZXJyID0gLUVJTlZBTDsNCisJCQlLVU5JVF9GQUlM
+KHRlc3QsICJJbmNvcnJlY3QgZmVuY2UgcmVwb3J0ZWQgYnkgZmluZCBzZWxmIik7DQogCQkJZ290
+byBlcnI7DQogCQl9DQogDQpAQCAtMjI4LDkgKzIyMCw4IEBAIHN0YXRpYyBpbnQgZmluZF9zZXFu
+byh2b2lkICphcmcpDQogCQllcnIgPSBkbWFfZmVuY2VfY2hhaW5fZmluZF9zZXFubygmZmVuY2Us
+IGkgKyAyKTsNCiAJCWRtYV9mZW5jZV9wdXQoZmVuY2UpOw0KIAkJaWYgKCFlcnIpIHsNCi0JCQlw
+cl9lcnIoIkVycm9yIG5vdCByZXBvcnRlZCBmb3IgZnV0dXJlIGZlbmNlOiBmaW5kX3NlcW5vKCVk
+OiVkKSFcbiIsDQotCQkJICAgICAgIGkgKyAxLCBpICsgMik7DQotCQkJZXJyID0gLUVJTlZBTDsN
+CisJCQlLVU5JVF9GQUlMKHRlc3QsICJFcnJvciBub3QgcmVwb3J0ZWQgZm9yIGZ1dHVyZSBmZW5j
+ZTogZmluZF9zZXFubyglZDolZCkhIiwNCisJCQkJICAgaSArIDEsIGkgKyAyKTsNCiAJCQlnb3Rv
+IGVycjsNCiAJCX0NCiANCkBAIC0yMzgsMzEgKzIyOSwyOCBAQCBzdGF0aWMgaW50IGZpbmRfc2Vx
+bm8odm9pZCAqYXJnKQ0KIAkJZXJyID0gZG1hX2ZlbmNlX2NoYWluX2ZpbmRfc2Vxbm8oJmZlbmNl
+LCBpKTsNCiAJCWRtYV9mZW5jZV9wdXQoZmVuY2UpOw0KIAkJaWYgKGVycikgew0KLQkJCXByX2Vy
+cigiRXJyb3IgcmVwb3J0ZWQgZm9yIHByZXZpb3VzIGZlbmNlIVxuIik7DQorCQkJS1VOSVRfRkFJ
+TCh0ZXN0LCAiRXJyb3IgcmVwb3J0ZWQgZm9yIHByZXZpb3VzIGZlbmNlISIpOw0KIAkJCWdvdG8g
+ZXJyOw0KIAkJfQ0KIAkJaWYgKGkgPiAwICYmIGZlbmNlICE9IGZjLmNoYWluc1tpIC0gMV0pIHsN
+Ci0JCQlwcl9lcnIoIkluY29ycmVjdCBmZW5jZSByZXBvcnRlZCBieSBmaW5kX3NlcW5vKCVkOiVk
+KVxuIiwNCi0JCQkgICAgICAgaSArIDEsIGkpOw0KLQkJCWVyciA9IC1FSU5WQUw7DQorCQkJS1VO
+SVRfRkFJTCh0ZXN0LCAiSW5jb3JyZWN0IGZlbmNlIHJlcG9ydGVkIGJ5IGZpbmRfc2Vxbm8oJWQ6
+JWQpIiwNCisJCQkJICAgaSArIDEsIGkpOw0KIAkJCWdvdG8gZXJyOw0KIAkJfQ0KIAl9DQogDQog
+ZXJyOg0KIAlmZW5jZV9jaGFpbnNfZmluaSgmZmMpOw0KLQlyZXR1cm4gZXJyOw0KIH0NCiANCi1z
+dGF0aWMgaW50IGZpbmRfc2lnbmFsZWQodm9pZCAqYXJnKQ0KK3N0YXRpYyB2b2lkIHRlc3RfZmlu
+ZF9zaWduYWxlZChzdHJ1Y3Qga3VuaXQgKnRlc3QpDQogew0KIAlzdHJ1Y3QgZmVuY2VfY2hhaW5z
+IGZjOw0KIAlzdHJ1Y3QgZG1hX2ZlbmNlICpmZW5jZTsNCiAJaW50IGVycjsNCiANCiAJZXJyID0g
+ZmVuY2VfY2hhaW5zX2luaXQoJmZjLCAyLCBzZXFub19pbmMpOw0KLQlpZiAoZXJyKQ0KLQkJcmV0
+dXJuIGVycjsNCisJS1VOSVRfQVNTRVJUX0VRX01TRyh0ZXN0LCBlcnIsIDAsICJGYWlsZWQgdG8g
+aW5pdCBmZW5jZSBjaGFpbnMiKTsNCiANCiAJZG1hX2ZlbmNlX3NpZ25hbChmYy5mZW5jZXNbMF0p
+Ow0KIA0KQEAgLTI3MCwzNyArMjU4LDMzIEBAIHN0YXRpYyBpbnQgZmluZF9zaWduYWxlZCh2b2lk
+ICphcmcpDQogCWVyciA9IGRtYV9mZW5jZV9jaGFpbl9maW5kX3NlcW5vKCZmZW5jZSwgMSk7DQog
+CWRtYV9mZW5jZV9wdXQoZmVuY2UpOw0KIAlpZiAoZXJyKSB7DQotCQlwcl9lcnIoIlJlcG9ydGVk
+ICVkIGZvciBmaW5kX3NlcW5vKCkhXG4iLCBlcnIpOw0KKwkJS1VOSVRfRkFJTCh0ZXN0LCAiUmVw
+b3J0ZWQgJWQgZm9yIGZpbmRfc2Vxbm8oKSEiLCBlcnIpOw0KIAkJZ290byBlcnI7DQogCX0NCiAN
+CiAJaWYgKGZlbmNlICYmIGZlbmNlICE9IGZjLmNoYWluc1swXSkgew0KLQkJcHJfZXJyKCJJbmNv
+cnJlY3QgY2hhaW4tZmVuY2Uuc2Vxbm86JWxsZCByZXBvcnRlZCBmb3IgY29tcGxldGVkIHNlcW5v
+OjFcbiIsDQotCQkgICAgICAgZmVuY2UtPnNlcW5vKTsNCisJCUtVTklUX0ZBSUwodGVzdCwgIklu
+Y29ycmVjdCBjaGFpbi1mZW5jZS5zZXFubzolbGxkIHJlcG9ydGVkIGZvciBjb21wbGV0ZWQgc2Vx
+bm86MSIsDQorCQkJICAgZmVuY2UtPnNlcW5vKTsNCiANCiAJCWRtYV9mZW5jZV9nZXQoZmVuY2Up
+Ow0KIAkJZXJyID0gZG1hX2ZlbmNlX2NoYWluX2ZpbmRfc2Vxbm8oJmZlbmNlLCAxKTsNCiAJCWRt
+YV9mZW5jZV9wdXQoZmVuY2UpOw0KIAkJaWYgKGVycikNCi0JCQlwcl9lcnIoIlJlcG9ydGVkICVk
+IGZvciBmaW5kaW5nIHNlbGYhXG4iLCBlcnIpOw0KLQ0KLQkJZXJyID0gLUVJTlZBTDsNCisJCQlL
+VU5JVF9GQUlMKHRlc3QsICJSZXBvcnRlZCAlZCBmb3IgZmluZGluZyBzZWxmISIsIGVycik7DQog
+CX0NCiANCiBlcnI6DQogCWZlbmNlX2NoYWluc19maW5pKCZmYyk7DQotCXJldHVybiBlcnI7DQog
+fQ0KIA0KLXN0YXRpYyBpbnQgZmluZF9vdXRfb2Zfb3JkZXIodm9pZCAqYXJnKQ0KK3N0YXRpYyB2
+b2lkIHRlc3RfZmluZF9vdXRfb2Zfb3JkZXIoc3RydWN0IGt1bml0ICp0ZXN0KQ0KIHsNCiAJc3Ry
+dWN0IGZlbmNlX2NoYWlucyBmYzsNCiAJc3RydWN0IGRtYV9mZW5jZSAqZmVuY2U7DQogCWludCBl
+cnI7DQogDQogCWVyciA9IGZlbmNlX2NoYWluc19pbml0KCZmYywgMywgc2Vxbm9faW5jKTsNCi0J
+aWYgKGVycikNCi0JCXJldHVybiBlcnI7DQorCUtVTklUX0FTU0VSVF9FUV9NU0codGVzdCwgZXJy
+LCAwLCAiRmFpbGVkIHRvIGluaXQgZmVuY2UgY2hhaW5zIik7DQogDQogCWRtYV9mZW5jZV9zaWdu
+YWwoZmMuZmVuY2VzWzFdKTsNCiANCkBAIC0zMDgsNyArMjkyLDcgQEAgc3RhdGljIGludCBmaW5k
+X291dF9vZl9vcmRlcih2b2lkICphcmcpDQogCWVyciA9IGRtYV9mZW5jZV9jaGFpbl9maW5kX3Nl
+cW5vKCZmZW5jZSwgMik7DQogCWRtYV9mZW5jZV9wdXQoZmVuY2UpOw0KIAlpZiAoZXJyKSB7DQot
+CQlwcl9lcnIoIlJlcG9ydGVkICVkIGZvciBmaW5kX3NlcW5vKCkhXG4iLCBlcnIpOw0KKwkJS1VO
+SVRfRkFJTCh0ZXN0LCAiUmVwb3J0ZWQgJWQgZm9yIGZpbmRfc2Vxbm8oKSEiLCBlcnIpOw0KIAkJ
+Z290byBlcnI7DQogCX0NCiANCkBAIC0zMTksMTYgKzMwMywxMiBAQCBzdGF0aWMgaW50IGZpbmRf
+b3V0X29mX29yZGVyKHZvaWQgKmFyZykNCiAJICogd2Ugc2hvdWxkIGdldCBhcyBmZW5jZSB0byB3
+YWl0IHVwb24gKGZlbmNlIDIgYmVpbmcgZ2FyYmFnZQ0KIAkgKiBjb2xsZWN0ZWQgZHVyaW5nIHRo
+ZSB0cmF2ZXJzYWwgb2YgdGhlIGNoYWluKS4NCiAJICovDQotCWlmIChmZW5jZSAhPSBmYy5jaGFp
+bnNbMF0pIHsNCi0JCXByX2VycigiSW5jb3JyZWN0IGNoYWluLWZlbmNlLnNlcW5vOiVsbGQgcmVw
+b3J0ZWQgZm9yIGNvbXBsZXRlZCBzZXFubzoyXG4iLA0KLQkJICAgICAgIGZlbmNlID8gZmVuY2Ut
+PnNlcW5vIDogMCk7DQotDQotCQllcnIgPSAtRUlOVkFMOw0KLQl9DQorCWlmIChmZW5jZSAhPSBm
+Yy5jaGFpbnNbMF0pDQorCQlLVU5JVF9GQUlMKHRlc3QsICJJbmNvcnJlY3QgY2hhaW4tZmVuY2Uu
+c2Vxbm86JWxsZCByZXBvcnRlZCBmb3IgY29tcGxldGVkIHNlcW5vOjIiLA0KKwkJCSAgIGZlbmNl
+ID8gZmVuY2UtPnNlcW5vIDogMCk7DQogDQogZXJyOg0KIAlmZW5jZV9jaGFpbnNfZmluaSgmZmMp
+Ow0KLQlyZXR1cm4gZXJyOw0KIH0NCiANCiBzdGF0aWMgdWludDY0X3Qgc2Vxbm9faW5jMih1bnNp
+Z25lZCBpbnQgaSkNCkBAIC0zMzYsNyArMzE2LDcgQEAgc3RhdGljIHVpbnQ2NF90IHNlcW5vX2lu
+YzIodW5zaWduZWQgaW50IGkpDQogCXJldHVybiAyICogaSArIDI7DQogfQ0KIA0KLXN0YXRpYyBp
+bnQgZmluZF9nYXAodm9pZCAqYXJnKQ0KK3N0YXRpYyB2b2lkIHRlc3RfZmluZF9nYXAoc3RydWN0
+IGt1bml0ICp0ZXN0KQ0KIHsNCiAJc3RydWN0IGZlbmNlX2NoYWlucyBmYzsNCiAJc3RydWN0IGRt
+YV9mZW5jZSAqZmVuY2U7DQpAQCAtMzQ0LDI0ICszMjQsMjIgQEAgc3RhdGljIGludCBmaW5kX2dh
+cCh2b2lkICphcmcpDQogCWludCBpOw0KIA0KIAllcnIgPSBmZW5jZV9jaGFpbnNfaW5pdCgmZmMs
+IDY0LCBzZXFub19pbmMyKTsNCi0JaWYgKGVycikNCi0JCXJldHVybiBlcnI7DQorCUtVTklUX0FT
+U0VSVF9FUV9NU0codGVzdCwgZXJyLCAwLCAiRmFpbGVkIHRvIGluaXQgZmVuY2UgY2hhaW5zIik7
+DQogDQogCWZvciAoaSA9IDA7IGkgPCBmYy5jaGFpbl9sZW5ndGg7IGkrKykgew0KIAkJZmVuY2Ug
+PSBkbWFfZmVuY2VfZ2V0KGZjLnRhaWwpOw0KIAkJZXJyID0gZG1hX2ZlbmNlX2NoYWluX2ZpbmRf
+c2Vxbm8oJmZlbmNlLCAyICogaSArIDEpOw0KIAkJZG1hX2ZlbmNlX3B1dChmZW5jZSk7DQogCQlp
+ZiAoZXJyKSB7DQotCQkJcHJfZXJyKCJSZXBvcnRlZCAlZCBmb3IgZmluZF9zZXFubyglZDolZCkh
+XG4iLA0KLQkJCSAgICAgICBlcnIsIGZjLmNoYWluX2xlbmd0aCArIDEsIDIgKiBpICsgMSk7DQor
+CQkJS1VOSVRfRkFJTCh0ZXN0LCAiUmVwb3J0ZWQgJWQgZm9yIGZpbmRfc2Vxbm8oJWQ6JWQpISIs
+DQorCQkJCSAgIGVyciwgZmMuY2hhaW5fbGVuZ3RoICsgMSwgMiAqIGkgKyAxKTsNCiAJCQlnb3Rv
+IGVycjsNCiAJCX0NCiAJCWlmIChmZW5jZSAhPSBmYy5jaGFpbnNbaV0pIHsNCi0JCQlwcl9lcnIo
+IkluY29ycmVjdCBmZW5jZS5zZXFubzolbGxkIHJlcG9ydGVkIGJ5IGZpbmRfc2Vxbm8oJWQ6JWQp
+XG4iLA0KLQkJCSAgICAgICBmZW5jZS0+c2Vxbm8sDQotCQkJICAgICAgIGZjLmNoYWluX2xlbmd0
+aCArIDEsDQotCQkJICAgICAgIDIgKiBpICsgMSk7DQotCQkJZXJyID0gLUVJTlZBTDsNCisJCQlL
+VU5JVF9GQUlMKHRlc3QsICJJbmNvcnJlY3QgZmVuY2Uuc2Vxbm86JWxsZCByZXBvcnRlZCBieSBm
+aW5kX3NlcW5vKCVkOiVkKSIsDQorCQkJCSAgIGZlbmNlLT5zZXFubywNCisJCQkJICAgZmMuY2hh
+aW5fbGVuZ3RoICsgMSwNCisJCQkJICAgMiAqIGkgKyAxKTsNCiAJCQlnb3RvIGVycjsNCiAJCX0N
+CiANCkBAIC0zNjksMTkgKzM0NywxNyBAQCBzdGF0aWMgaW50IGZpbmRfZ2FwKHZvaWQgKmFyZykN
+CiAJCWVyciA9IGRtYV9mZW5jZV9jaGFpbl9maW5kX3NlcW5vKCZmZW5jZSwgMiAqIGkgKyAyKTsN
+CiAJCWRtYV9mZW5jZV9wdXQoZmVuY2UpOw0KIAkJaWYgKGVycikgew0KLQkJCXByX2VycigiRXJy
+b3IgcmVwb3J0ZWQgZm9yIGZpbmRpbmcgc2VsZlxuIik7DQorCQkJS1VOSVRfRkFJTCh0ZXN0LCAi
+RXJyb3IgcmVwb3J0ZWQgZm9yIGZpbmRpbmcgc2VsZiIpOw0KIAkJCWdvdG8gZXJyOw0KIAkJfQ0K
+IAkJaWYgKGZlbmNlICE9IGZjLmNoYWluc1tpXSkgew0KLQkJCXByX2VycigiSW5jb3JyZWN0IGZl
+bmNlIHJlcG9ydGVkIGJ5IGZpbmQgc2VsZlxuIik7DQotCQkJZXJyID0gLUVJTlZBTDsNCisJCQlL
+VU5JVF9GQUlMKHRlc3QsICJJbmNvcnJlY3QgZmVuY2UgcmVwb3J0ZWQgYnkgZmluZCBzZWxmIik7
+DQogCQkJZ290byBlcnI7DQogCQl9DQogCX0NCiANCiBlcnI6DQogCWZlbmNlX2NoYWluc19maW5p
+KCZmYyk7DQotCXJldHVybiBlcnI7DQogfQ0KIA0KIHN0cnVjdCBmaW5kX3JhY2Ugew0KQEAgLTQz
+Nyw3ICs0MTMsNyBAQCBzdGF0aWMgaW50IF9fZmluZF9yYWNlKHZvaWQgKmFyZykNCiAJcmV0dXJu
+IGVycjsNCiB9DQogDQotc3RhdGljIGludCBmaW5kX3JhY2Uodm9pZCAqYXJnKQ0KK3N0YXRpYyB2
+b2lkIHRlc3RfZmluZF9yYWNlKHN0cnVjdCBrdW5pdCAqdGVzdCkNCiB7DQogCXN0cnVjdCBmaW5k
+X3JhY2UgZGF0YTsNCiAJaW50IG5jcHVzID0gbnVtX29ubGluZV9jcHVzKCk7DQpAQCAtNDQ3LDEy
+ICs0MjMsMTEgQEAgc3RhdGljIGludCBmaW5kX3JhY2Uodm9pZCAqYXJnKQ0KIAlpbnQgaTsNCiAN
+CiAJZXJyID0gZmVuY2VfY2hhaW5zX2luaXQoJmRhdGEuZmMsIENIQUlOX1NaLCBzZXFub19pbmMp
+Ow0KLQlpZiAoZXJyKQ0KLQkJcmV0dXJuIGVycjsNCisJS1VOSVRfQVNTRVJUX0VRX01TRyh0ZXN0
+LCBlcnIsIDAsICJGYWlsZWQgdG8gaW5pdCBmZW5jZSBjaGFpbnMiKTsNCiANCiAJdGhyZWFkcyA9
+IGttYWxsb2Nfb2JqcygqdGhyZWFkcywgbmNwdXMpOw0KIAlpZiAoIXRocmVhZHMpIHsNCi0JCWVy
+ciA9IC1FTk9NRU07DQorCQlLVU5JVF9GQUlMKHRlc3QsICJGYWlsZWQgdG8gYWxsb2NhdGUgdGhy
+ZWFkcyBhcnJheSIpOw0KIAkJZ290byBlcnI7DQogCX0NCiANCkBAIC00ODYsNzQgKzQ2MSw2NyBA
+QCBzdGF0aWMgaW50IGZpbmRfcmFjZSh2b2lkICphcmcpDQogCQkJY291bnQrKzsNCiAJcHJfaW5m
+bygiQ29tcGxldGVkICVsdSBjeWNsZXNcbiIsIGNvdW50KTsNCiANCisJS1VOSVRfRVhQRUNUX0VR
+KHRlc3QsIGVyciwgMCk7DQorDQogZXJyOg0KIAlmZW5jZV9jaGFpbnNfZmluaSgmZGF0YS5mYyk7
+DQotCXJldHVybiBlcnI7DQogfQ0KIA0KLXN0YXRpYyBpbnQgc2lnbmFsX2ZvcndhcmQodm9pZCAq
+YXJnKQ0KK3N0YXRpYyB2b2lkIHRlc3Rfc2lnbmFsX2ZvcndhcmQoc3RydWN0IGt1bml0ICp0ZXN0
+KQ0KIHsNCiAJc3RydWN0IGZlbmNlX2NoYWlucyBmYzsNCiAJaW50IGVycjsNCiAJaW50IGk7DQog
+DQogCWVyciA9IGZlbmNlX2NoYWluc19pbml0KCZmYywgNjQsIHNlcW5vX2luYyk7DQotCWlmIChl
+cnIpDQotCQlyZXR1cm4gZXJyOw0KKwlLVU5JVF9BU1NFUlRfRVFfTVNHKHRlc3QsIGVyciwgMCwg
+IkZhaWxlZCB0byBpbml0IGZlbmNlIGNoYWlucyIpOw0KIA0KIAlmb3IgKGkgPSAwOyBpIDwgZmMu
+Y2hhaW5fbGVuZ3RoOyBpKyspIHsNCiAJCWRtYV9mZW5jZV9zaWduYWwoZmMuZmVuY2VzW2ldKTsN
+CiANCiAJCWlmICghZG1hX2ZlbmNlX2lzX3NpZ25hbGVkKGZjLmNoYWluc1tpXSkpIHsNCi0JCQlw
+cl9lcnIoImNoYWluWyVkXSBub3Qgc2lnbmFsZWQhXG4iLCBpKTsNCi0JCQllcnIgPSAtRUlOVkFM
+Ow0KKwkJCUtVTklUX0ZBSUwodGVzdCwgImNoYWluWyVkXSBub3Qgc2lnbmFsZWQhIiwgaSk7DQog
+CQkJZ290byBlcnI7DQogCQl9DQogDQogCQlpZiAoaSArIDEgPCBmYy5jaGFpbl9sZW5ndGggJiYN
+CiAJCSAgICBkbWFfZmVuY2VfaXNfc2lnbmFsZWQoZmMuY2hhaW5zW2kgKyAxXSkpIHsNCi0JCQlw
+cl9lcnIoImNoYWluWyVkXSBpcyBzaWduYWxlZCFcbiIsIGkpOw0KLQkJCWVyciA9IC1FSU5WQUw7
+DQorCQkJS1VOSVRfRkFJTCh0ZXN0LCAiY2hhaW5bJWRdIGlzIHNpZ25hbGVkISIsIGkpOw0KIAkJ
+CWdvdG8gZXJyOw0KIAkJfQ0KIAl9DQogDQogZXJyOg0KIAlmZW5jZV9jaGFpbnNfZmluaSgmZmMp
+Ow0KLQlyZXR1cm4gZXJyOw0KIH0NCiANCi1zdGF0aWMgaW50IHNpZ25hbF9iYWNrd2FyZCh2b2lk
+ICphcmcpDQorc3RhdGljIHZvaWQgdGVzdF9zaWduYWxfYmFja3dhcmQoc3RydWN0IGt1bml0ICp0
+ZXN0KQ0KIHsNCiAJc3RydWN0IGZlbmNlX2NoYWlucyBmYzsNCiAJaW50IGVycjsNCiAJaW50IGk7
+DQogDQogCWVyciA9IGZlbmNlX2NoYWluc19pbml0KCZmYywgNjQsIHNlcW5vX2luYyk7DQotCWlm
+IChlcnIpDQotCQlyZXR1cm4gZXJyOw0KKwlLVU5JVF9BU1NFUlRfRVFfTVNHKHRlc3QsIGVyciwg
+MCwgIkZhaWxlZCB0byBpbml0IGZlbmNlIGNoYWlucyIpOw0KIA0KIAlmb3IgKGkgPSBmYy5jaGFp
+bl9sZW5ndGg7IGktLTsgKSB7DQogCQlkbWFfZmVuY2Vfc2lnbmFsKGZjLmZlbmNlc1tpXSk7DQog
+DQogCQlpZiAoaSA+IDAgJiYgZG1hX2ZlbmNlX2lzX3NpZ25hbGVkKGZjLmNoYWluc1tpXSkpIHsN
+Ci0JCQlwcl9lcnIoImNoYWluWyVkXSBpcyBzaWduYWxlZCFcbiIsIGkpOw0KLQkJCWVyciA9IC1F
+SU5WQUw7DQorCQkJS1VOSVRfRkFJTCh0ZXN0LCAiY2hhaW5bJWRdIGlzIHNpZ25hbGVkISIsIGkp
+Ow0KIAkJCWdvdG8gZXJyOw0KIAkJfQ0KIAl9DQogDQogCWZvciAoaSA9IDA7IGkgPCBmYy5jaGFp
+bl9sZW5ndGg7IGkrKykgew0KIAkJaWYgKCFkbWFfZmVuY2VfaXNfc2lnbmFsZWQoZmMuY2hhaW5z
+W2ldKSkgew0KLQkJCXByX2VycigiY2hhaW5bJWRdIHdhcyBub3Qgc2lnbmFsZWQhXG4iLCBpKTsN
+Ci0JCQllcnIgPSAtRUlOVkFMOw0KKwkJCUtVTklUX0ZBSUwodGVzdCwgImNoYWluWyVkXSB3YXMg
+bm90IHNpZ25hbGVkISIsIGkpOw0KIAkJCWdvdG8gZXJyOw0KIAkJfQ0KIAl9DQogDQogZXJyOg0K
+IAlmZW5jZV9jaGFpbnNfZmluaSgmZmMpOw0KLQlyZXR1cm4gZXJyOw0KIH0NCiANCiBzdGF0aWMg
+aW50IF9fd2FpdF9mZW5jZV9jaGFpbnModm9pZCAqYXJnKQ0KQEAgLTU2Niw3ICs1MzQsNyBAQCBz
+dGF0aWMgaW50IF9fd2FpdF9mZW5jZV9jaGFpbnModm9pZCAqYXJnKQ0KIAlyZXR1cm4gMDsNCiB9
+DQogDQotc3RhdGljIGludCB3YWl0X2ZvcndhcmQodm9pZCAqYXJnKQ0KK3N0YXRpYyB2b2lkIHRl
+c3Rfd2FpdF9mb3J3YXJkKHN0cnVjdCBrdW5pdCAqdGVzdCkNCiB7DQogCXN0cnVjdCBmZW5jZV9j
+aGFpbnMgZmM7DQogCXN0cnVjdCB0YXNrX3N0cnVjdCAqdHNrOw0KQEAgLTU3NCwxMiArNTQyLDEx
+IEBAIHN0YXRpYyBpbnQgd2FpdF9mb3J3YXJkKHZvaWQgKmFyZykNCiAJaW50IGk7DQogDQogCWVy
+ciA9IGZlbmNlX2NoYWluc19pbml0KCZmYywgQ0hBSU5fU1osIHNlcW5vX2luYyk7DQotCWlmIChl
+cnIpDQotCQlyZXR1cm4gZXJyOw0KKwlLVU5JVF9BU1NFUlRfRVFfTVNHKHRlc3QsIGVyciwgMCwg
+IkZhaWxlZCB0byBpbml0IGZlbmNlIGNoYWlucyIpOw0KIA0KIAl0c2sgPSBrdGhyZWFkX3J1bihf
+X3dhaXRfZmVuY2VfY2hhaW5zLCAmZmMsICJkbWFidWYvd2FpdCIpOw0KIAlpZiAoSVNfRVJSKHRz
+aykpIHsNCi0JCWVyciA9IFBUUl9FUlIodHNrKTsNCisJCUtVTklUX0ZBSUwodGVzdCwgIkZhaWxl
+ZCB0byBjcmVhdGUga3RocmVhZCIpOw0KIAkJZ290byBlcnI7DQogCX0NCiAJZ2V0X3Rhc2tfc3Ry
+dWN0KHRzayk7DQpAQCAtNTg5LDEzICs1NTYsMTMgQEAgc3RhdGljIGludCB3YWl0X2ZvcndhcmQo
+dm9pZCAqYXJnKQ0KIAkJZG1hX2ZlbmNlX3NpZ25hbChmYy5mZW5jZXNbaV0pOw0KIA0KIAllcnIg
+PSBrdGhyZWFkX3N0b3BfcHV0KHRzayk7DQorCUtVTklUX0VYUEVDVF9FUSh0ZXN0LCBlcnIsIDAp
+Ow0KIA0KIGVycjoNCiAJZmVuY2VfY2hhaW5zX2ZpbmkoJmZjKTsNCi0JcmV0dXJuIGVycjsNCiB9
+DQogDQotc3RhdGljIGludCB3YWl0X2JhY2t3YXJkKHZvaWQgKmFyZykNCitzdGF0aWMgdm9pZCB0
+ZXN0X3dhaXRfYmFja3dhcmQoc3RydWN0IGt1bml0ICp0ZXN0KQ0KIHsNCiAJc3RydWN0IGZlbmNl
+X2NoYWlucyBmYzsNCiAJc3RydWN0IHRhc2tfc3RydWN0ICp0c2s7DQpAQCAtNjAzLDEyICs1NzAs
+MTEgQEAgc3RhdGljIGludCB3YWl0X2JhY2t3YXJkKHZvaWQgKmFyZykNCiAJaW50IGk7DQogDQog
+CWVyciA9IGZlbmNlX2NoYWluc19pbml0KCZmYywgQ0hBSU5fU1osIHNlcW5vX2luYyk7DQotCWlm
+IChlcnIpDQotCQlyZXR1cm4gZXJyOw0KKwlLVU5JVF9BU1NFUlRfRVFfTVNHKHRlc3QsIGVyciwg
+MCwgIkZhaWxlZCB0byBpbml0IGZlbmNlIGNoYWlucyIpOw0KIA0KIAl0c2sgPSBrdGhyZWFkX3J1
+bihfX3dhaXRfZmVuY2VfY2hhaW5zLCAmZmMsICJkbWFidWYvd2FpdCIpOw0KIAlpZiAoSVNfRVJS
+KHRzaykpIHsNCi0JCWVyciA9IFBUUl9FUlIodHNrKTsNCisJCUtVTklUX0ZBSUwodGVzdCwgIkZh
+aWxlZCB0byBjcmVhdGUga3RocmVhZCIpOw0KIAkJZ290byBlcnI7DQogCX0NCiAJZ2V0X3Rhc2tf
+c3RydWN0KHRzayk7DQpAQCAtNjE4LDEwICs1ODQsMTAgQEAgc3RhdGljIGludCB3YWl0X2JhY2t3
+YXJkKHZvaWQgKmFyZykNCiAJCWRtYV9mZW5jZV9zaWduYWwoZmMuZmVuY2VzW2ldKTsNCiANCiAJ
+ZXJyID0ga3RocmVhZF9zdG9wX3B1dCh0c2spOw0KKwlLVU5JVF9FWFBFQ1RfRVEodGVzdCwgZXJy
+LCAwKTsNCiANCiBlcnI6DQogCWZlbmNlX2NoYWluc19maW5pKCZmYyk7DQotCXJldHVybiBlcnI7
+DQogfQ0KIA0KIHN0YXRpYyB2b2lkIHJhbmRvbWlzZV9mZW5jZXMoc3RydWN0IGZlbmNlX2NoYWlu
+cyAqZmMpDQpAQCAtNjQwLDcgKzYwNiw3IEBAIHN0YXRpYyB2b2lkIHJhbmRvbWlzZV9mZW5jZXMo
+c3RydWN0IGZlbmNlX2NoYWlucyAqZmMpDQogCX0NCiB9DQogDQotc3RhdGljIGludCB3YWl0X3Jh
+bmRvbSh2b2lkICphcmcpDQorc3RhdGljIHZvaWQgdGVzdF93YWl0X3JhbmRvbShzdHJ1Y3Qga3Vu
+aXQgKnRlc3QpDQogew0KIAlzdHJ1Y3QgZmVuY2VfY2hhaW5zIGZjOw0KIAlzdHJ1Y3QgdGFza19z
+dHJ1Y3QgKnRzazsNCkBAIC02NDgsMTQgKzYxNCwxMyBAQCBzdGF0aWMgaW50IHdhaXRfcmFuZG9t
+KHZvaWQgKmFyZykNCiAJaW50IGk7DQogDQogCWVyciA9IGZlbmNlX2NoYWluc19pbml0KCZmYywg
+Q0hBSU5fU1osIHNlcW5vX2luYyk7DQotCWlmIChlcnIpDQotCQlyZXR1cm4gZXJyOw0KKwlLVU5J
+VF9BU1NFUlRfRVFfTVNHKHRlc3QsIGVyciwgMCwgIkZhaWxlZCB0byBpbml0IGZlbmNlIGNoYWlu
+cyIpOw0KIA0KIAlyYW5kb21pc2VfZmVuY2VzKCZmYyk7DQogDQogCXRzayA9IGt0aHJlYWRfcnVu
+KF9fd2FpdF9mZW5jZV9jaGFpbnMsICZmYywgImRtYWJ1Zi93YWl0Iik7DQogCWlmIChJU19FUlIo
+dHNrKSkgew0KLQkJZXJyID0gUFRSX0VSUih0c2spOw0KKwkJS1VOSVRfRkFJTCh0ZXN0LCAiRmFp
+bGVkIHRvIGNyZWF0ZSBrdGhyZWFkIik7DQogCQlnb3RvIGVycjsNCiAJfQ0KIAlnZXRfdGFza19z
+dHJ1Y3QodHNrKTsNCkBAIC02NjUsMjkgKzYzMCwxNCBAQCBzdGF0aWMgaW50IHdhaXRfcmFuZG9t
+KHZvaWQgKmFyZykNCiAJCWRtYV9mZW5jZV9zaWduYWwoZmMuZmVuY2VzW2ldKTsNCiANCiAJZXJy
+ID0ga3RocmVhZF9zdG9wX3B1dCh0c2spOw0KKwlLVU5JVF9FWFBFQ1RfRVEodGVzdCwgZXJyLCAw
+KTsNCiANCiBlcnI6DQogCWZlbmNlX2NoYWluc19maW5pKCZmYyk7DQotCXJldHVybiBlcnI7DQog
+fQ0KIA0KLWludCBkbWFfZmVuY2VfY2hhaW4odm9pZCkNCitzdGF0aWMgaW50IGRtYV9mZW5jZV9j
+aGFpbl9zdWl0ZV9pbml0KHN0cnVjdCBrdW5pdF9zdWl0ZSAqc3VpdGUpDQogew0KLQlzdGF0aWMg
+Y29uc3Qgc3RydWN0IHN1YnRlc3QgdGVzdHNbXSA9IHsNCi0JCVNVQlRFU1Qoc2FuaXR5Y2hlY2sp
+LA0KLQkJU1VCVEVTVChmaW5kX3NlcW5vKSwNCi0JCVNVQlRFU1QoZmluZF9zaWduYWxlZCksDQot
+CQlTVUJURVNUKGZpbmRfb3V0X29mX29yZGVyKSwNCi0JCVNVQlRFU1QoZmluZF9nYXApLA0KLQkJ
+U1VCVEVTVChmaW5kX3JhY2UpLA0KLQkJU1VCVEVTVChzaWduYWxfZm9yd2FyZCksDQotCQlTVUJU
+RVNUKHNpZ25hbF9iYWNrd2FyZCksDQotCQlTVUJURVNUKHdhaXRfZm9yd2FyZCksDQotCQlTVUJU
+RVNUKHdhaXRfYmFja3dhcmQpLA0KLQkJU1VCVEVTVCh3YWl0X3JhbmRvbSksDQotCX07DQotCWlu
+dCByZXQ7DQotDQogCXByX2luZm8oInNpemVvZihkbWFfZmVuY2VfY2hhaW4pPSV6dVxuIiwNCiAJ
+CXNpemVvZihzdHJ1Y3QgZG1hX2ZlbmNlX2NoYWluKSk7DQogDQpAQCAtNjk2LDkgKzY0NiwzNCBA
+QCBpbnQgZG1hX2ZlbmNlX2NoYWluKHZvaWQpDQogCQkJCSBTTEFCX0hXQ0FDSEVfQUxJR04pOw0K
+IAlpZiAoIXNsYWJfZmVuY2VzKQ0KIAkJcmV0dXJuIC1FTk9NRU07DQotDQotCXJldCA9IHN1YnRl
+c3RzKHRlc3RzLCBOVUxMKTsNCi0NCi0Ja21lbV9jYWNoZV9kZXN0cm95KHNsYWJfZmVuY2VzKTsN
+Ci0JcmV0dXJuIHJldDsNCisJcmV0dXJuIDA7DQogfQ0KKw0KK3N0YXRpYyB2b2lkIGRtYV9mZW5j
+ZV9jaGFpbl9zdWl0ZV9leGl0KHN0cnVjdCBrdW5pdF9zdWl0ZSAqc3VpdGUpDQorew0KKwlrbWVt
+X2NhY2hlX2Rlc3Ryb3koc2xhYl9mZW5jZXMpOw0KK30NCisNCitzdGF0aWMgc3RydWN0IGt1bml0
+X2Nhc2UgZG1hX2ZlbmNlX2NoYWluX2Nhc2VzW10gPSB7DQorCUtVTklUX0NBU0UodGVzdF9zYW5p
+dHljaGVjayksDQorCUtVTklUX0NBU0UodGVzdF9maW5kX3NlcW5vKSwNCisJS1VOSVRfQ0FTRSh0
+ZXN0X2ZpbmRfc2lnbmFsZWQpLA0KKwlLVU5JVF9DQVNFKHRlc3RfZmluZF9vdXRfb2Zfb3JkZXIp
+LA0KKwlLVU5JVF9DQVNFKHRlc3RfZmluZF9nYXApLA0KKwlLVU5JVF9DQVNFKHRlc3RfZmluZF9y
+YWNlKSwNCisJS1VOSVRfQ0FTRSh0ZXN0X3NpZ25hbF9mb3J3YXJkKSwNCisJS1VOSVRfQ0FTRSh0
+ZXN0X3NpZ25hbF9iYWNrd2FyZCksDQorCUtVTklUX0NBU0UodGVzdF93YWl0X2ZvcndhcmQpLA0K
+KwlLVU5JVF9DQVNFKHRlc3Rfd2FpdF9iYWNrd2FyZCksDQorCUtVTklUX0NBU0UodGVzdF93YWl0
+X3JhbmRvbSksDQorCXt9DQorfTsNCisNCitzdGF0aWMgc3RydWN0IGt1bml0X3N1aXRlIGRtYV9m
+ZW5jZV9jaGFpbl90ZXN0X3N1aXRlID0gew0KKwkubmFtZSA9ICJkbWEtYnVmLWZlbmNlLWNoYWlu
+IiwNCisJLnN1aXRlX2luaXQgPSBkbWFfZmVuY2VfY2hhaW5fc3VpdGVfaW5pdCwNCisJLnN1aXRl
+X2V4aXQgPSBkbWFfZmVuY2VfY2hhaW5fc3VpdGVfZXhpdCwNCisJLnRlc3RfY2FzZXMgPSBkbWFf
+ZmVuY2VfY2hhaW5fY2FzZXMsDQorfTsNCisNCitrdW5pdF90ZXN0X3N1aXRlKGRtYV9mZW5jZV9j
+aGFpbl90ZXN0X3N1aXRlKTsNCi0tIA0KMi40My4wDQoNCl9fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxp
+bmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWls
+IHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
