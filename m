@@ -2,28 +2,28 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id oK7+L7GVpGmxkwUAu9opvQ
+	id UMDGKMeVpGmxkwUAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 01 Mar 2026 20:38:25 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 01 Mar 2026 20:38:47 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3F6751D160B
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 01 Mar 2026 20:38:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2D05A1D1613
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 01 Mar 2026 20:38:47 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0793F44C45
-	for <lists+linaro-mm-sig@lfdr.de>; Sun,  1 Mar 2026 19:38:24 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3924544C54
+	for <lists+linaro-mm-sig@lfdr.de>; Sun,  1 Mar 2026 19:38:46 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 1281244BD3
-	for <linaro-mm-sig@lists.linaro.org>; Sun,  1 Mar 2026 19:38:17 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D0ECF44BD3
+	for <linaro-mm-sig@lists.linaro.org>; Sun,  1 Mar 2026 19:38:39 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: "emirate stoners" <emiratestoners@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Sun, 01 Mar 2026 19:38:17 -0000
-Message-ID: <177239389707.3341419.6231266743429740471@lists.linaro.org>
+Date: Sun, 01 Mar 2026 19:38:39 -0000
+Message-ID: <177239391985.3341419.16495162395045571794@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: KA3EXGQXJD5NCEMSRXVXFY225VES72JC
-X-Message-ID-Hash: KA3EXGQXJD5NCEMSRXVXFY225VES72JC
+Message-ID-Hash: KMO5LPSG6MPDZMEYSOF7IV72WHTNR6P5
+X-Message-ID-Hash: KMO5LPSG6MPDZMEYSOF7IV72WHTNR6P5
 X-MailFrom: emiratestoners@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
@@ -31,7 +31,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] WhatsApp +447438 969225 Buy weed in Umm al-Qaiwain, Buy weed in Fujairah, Buy weed in Ajman,
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KA3EXGQXJD5NCEMSRXVXFY225VES72JC/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KMO5LPSG6MPDZMEYSOF7IV72WHTNR6P5/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -43,7 +43,7 @@ X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [0.69 / 15.00];
 	MID_RHS_MATCH_TO(1.00)[];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+	R_SPF_ALLOW(-0.20)[+mx];
 	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	MIME_GOOD(-0.10)[text/plain];
 	MIME_BASE64_TEXT(0.10)[];
@@ -51,11 +51,11 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_ONE(0.00)[1];
 	ARC_NA(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+];
 	TO_DN_NONE(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
 	FROM_NEQ_ENVFROM(0.00)[emiratestoners@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
@@ -64,8 +64,8 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	R_DKIM_NA(0.00)[];
 	REDIRECTOR_URL(0.00)[goo.gl];
-	RCPT_COUNT_ONE(0.00)[1]
-X-Rspamd-Queue-Id: 3F6751D160B
+	FREEMAIL_FROM(0.00)[gmail.com]
+X-Rspamd-Queue-Id: 2D05A1D1613
 X-Rspamd-Action: no action
 
 V2hhdHNBcHArNDQ3NDM4IDk2OTIyNSBCdXkgd2VlZCBpbiBEdWJhaSwgQnV5IHdlZWQgaW4gQWJ1
