@@ -2,42 +2,42 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cKV2Gccb4WmmpAAAu9opvQ
+	id 0FnCDs0b4WmmpAAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:26:31 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:26:37 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1EC9B412AC2
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:26:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D1F63412AC9
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:26:36 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2A83044FA8
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:26:30 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E66D444FC8
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:26:35 +0000 (UTC)
 Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
-	by lists.linaro.org (Postfix) with ESMTPS id 22A494017B
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  2 Mar 2026 20:38:12 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 8D1F34017B
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  2 Mar 2026 20:38:26 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=dfihw1jF;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=XuSlDM4w;
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	spf=pass (lists.linaro.org: domain of jlayton@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=jlayton@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by tor.source.kernel.org (Postfix) with ESMTP id B137D60145;
+	by tor.source.kernel.org (Postfix) with ESMTP id 0D4466013F;
+	Mon,  2 Mar 2026 20:38:26 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9DA41C19423;
 	Mon,  2 Mar 2026 20:38:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 490D7C2BC9E;
-	Mon,  2 Mar 2026 20:37:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772483891;
-	bh=dnPu98PpOBsxLD5hcLK4mgf9NbKurHnG2PHV/YVPMtE=;
+	s=k20201202; t=1772483905;
+	bh=KNPTuBj6JODO+UF3sDdvTtrB3bvqvQCLfGB8wqrZcAY=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=dfihw1jFSIdvvofM7GeczTRZaGjN56IVko/RjWryiRlHmabpPZmIfpljOJ2J9MNOV
-	 ys0IDuA6hyXtNpLSD2zuRcDoVU/QLP7NlQ3Ef9jE+J8bRYhSKrBKc3JqiKI3zZiRQf
-	 Cdu1+/pJ2+qo+qXqDf3bRWM7JI3BxxucWbSP5c0+7xYBk+8f8BOmCFC/cctg83T9iw
-	 6MUxikSWx/kJCJgX/mbJrJmLC3xowGW+PwD3vA3NivcNM6sfK0x43czxIYsP6PktEY
-	 KhKMBNMYfkJiICleMUUBg0ZVsV+gi0abWrxcL/3dVrICnxMxJygieV9huNAKdzhf+Q
-	 1CEdudwrsxe+g==
+	b=XuSlDM4wnU6cCPWdfuQZzSfcOelvABCzcEfM4ltWJtLByYlM/VIi3u3EaI5qzsKOT
+	 4jrMfpB6c0ng91tIt3cPdC3iLZ53e873UGXYhat7jDAN6GLHavNRzlaqJF1gwzm2GN
+	 FQ/YiWekPqxQZX+yPaaOtbjUSrFW8AH1xpabdAVbKUOUV6DDviSjRujv26q9zV1Cn8
+	 dCr23XYgJQi1XIIqArL6faVhwzfAPni67NNWXsiTcqAUbx3Xit7MK+wf6cA4nUNumh
+	 tJC70xaUqYDALBwWMnqCM3orLjKibsBBhPMYvB0vueqT1AwvT3vnLlzLK/yMc6eR9A
+	 vWejBDQ5F32AA==
 From: Jeff Layton <jlayton@kernel.org>
-Date: Mon, 02 Mar 2026 15:24:39 -0500
+Date: Mon, 02 Mar 2026 15:24:40 -0500
 MIME-Version: 1.0
-Message-Id: <20260302-iino-u64-v2-55-e5388800dae0@kernel.org>
+Message-Id: <20260302-iino-u64-v2-56-e5388800dae0@kernel.org>
 References: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
 In-Reply-To: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
 To: Alexander Viro <viro@zeniv.linux.org.uk>,
@@ -130,36 +130,36 @@ To: Alexander Viro <viro@zeniv.linux.org.uk>,
  Jesper Dangaard Brouer <hawk@kernel.org>,
  John Fastabend <john.fastabend@gmail.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3328; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=dnPu98PpOBsxLD5hcLK4mgf9NbKurHnG2PHV/YVPMtE=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBppfH97wgCsVXgRJvPbO7D9YfwDtQeOfAz7v61x
- OuSsVRyaqaJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaXx/QAKCRAADmhBGVaC
- FT5qD/9WD46NwA8dANhwhXI+E4wgQ2ujvVgqswNVOt/R0A3KIx0sWulEaOIVfb0S5FhqLDrP0g8
- O0nsiKplGgwCYCETurJGyhKlKT3Hs5NMI+PMPNHbHDEummbv973D/kH9gzHzg28yaYLCxBEkXxr
- WN10jr1wEowWdjCJkQepvboyqOMMphj/mMqpwI/oaUyNOTilpa2TaMSQypi8qXY5tFyPWAoVZEm
- 1gafS/GnYTOLOuvdBmxV00tHamx+t24MobT4a+bXvq+W1le30GP/PZq8XNUEIGAVssSdSK8jlCv
- V9hxJbB6ouLnkbYzPUy2wzaeyNHM+T2wZ2zW+e1zP9+sxk8cp3nHhoT4kKfZ2aRnmSQxEUMoGf1
- C+xlt3Ko9v+UoVeYS46O44bFTxxfQjVYFqlHK0X7hv0fRr8vo+OGzmWNX2YopKnaVxWvcTOgmvK
- VUionH4RvddXKuFr7wkk7h9HPsU1IIrpQn/DO9boSCZKCmn+0+P808UszU176RwChBwc5wIdmAK
- 97bikNaDuaAHX3GPGyo4TzY9azrw/+7t/X5pIsfbRpJ+s9gJE246v9pS3SXnM3x07Hu9gpUjJ2K
- e24X9IhPT9nnEQbjLHrTrbB9ufKbvzg1uI/0emWw7jPTLCJOf1nxHIBi0rAn7v39h1caBc0EMZ+
- 1r9FSwPv866FIaw==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=820; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=KNPTuBj6JODO+UF3sDdvTtrB3bvqvQCLfGB8wqrZcAY=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBppfH+Gi5aMv1hqlu7WIpcniOaGSe4LY3o19SOE
+ gzV5OhOq76JAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaXx/gAKCRAADmhBGVaC
+ FeKGEADStbHNuE8fe2Clpi4JmXKZc//qA9cmXQXztEHJVGe533GHokIOnjmdvSvJjvyXs+kKuA+
+ ZuRJFOK02dmFOOjFCMw7nWz9HzRwL933c+U570XCbYSygaDvQfXThR6hk7tZ00Ay4dkOocJALoB
+ c6zWW+OLA9ZeVBEApwnV2taISeIN+eiVINwtrUe1Av5i3Mesi1It/0AUOYqOMaXc+QemaoCJ68G
+ kMDfEA58hENR1B/9DArlzNyZ1lWTfAMgv42hqIyZNrCUjS9TQhrEkJTU+LXELV6rB2vSai2Tioj
+ ZDp7SR/v2Jyi3NdGWbZQbULd5Hy7j8SkimdodHT0NprVYVG9JuMH5Us5W5DpNvzcOxzYFYeUqTa
+ JKvLR3O5IXiIqNRXfGV/MJIAPtewN827vUYcsMM2iZZuionSzwS3TN8pqekevc5E8XkPnp2vMjA
+ y31e+0KXzxHoXgXvlXBiEyrdRw7FldZUw0KFabsht7k1pRYM9eLUogbfTJkWJ+wlKGdtpqps19t
+ upjs3+aQoNZQu7LmYct2y8b56/1d5nyr6rhXs4fKGHyWlQFi9rGRYaN+SzlFtgYuYkZXIdrJWaJ
+ JltXmqf6WJ/xuxd1GCg8/D7IOX8zpb4mpUB37ETNBLGFeA+fXCiV+MlMI+hhqO/aZpLh1T9QqlV
+ 7mzbtG0PlwC9oEw==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 X-Spamd-Bar: --
 X-MailFrom: jlayton@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: F7RU62HE4H63GVMYWXKDVTJ44KDORNHI
-X-Message-ID-Hash: F7RU62HE4H63GVMYWXKDVTJ44KDORNHI
-X-Mailman-Approved-At: Thu, 16 Apr 2026 16:56:45 +0000
+Message-ID-Hash: ZN3ANXH4OW3DNHXTOONM2UK37RK3IIJN
+X-Message-ID-Hash: ZN3ANXH4OW3DNHXTOONM2UK37RK3IIJN
+X-Mailman-Approved-At: Thu, 16 Apr 2026 16:56:46 +0000
 CC: linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, nvdimm@lists.linux.dev, fsverity@lists.linux.dev, linux-mm@kvack.org, netfs@lists.linux.dev, linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net, linux-nfs@vger.kernel.org, linux-cifs@vger.kernel.org, samba-technical@lists.samba.org, linux-nilfs@vger.kernel.org, v9fs@lists.linux.dev, linux-afs@lists.infradead.org, autofs@vger.kernel.org, ceph-devel@vger.kernel.org, codalist@coda.cs.cmu.edu, ecryptfs@vger.kernel.org, linux-mtd@lists.infradead.org, jfs-discussion@lists.sourceforge.net, ntfs3@lists.linux.dev, ocfs2-devel@lists.linux.dev, devel@lists.orangefs.org, linux-unionfs@vger.kernel.org, apparmor@lists.ubuntu.com, linux-security-module@vger.kernel.org, linux-integrity@vger.kernel.org, selinux@vger.kernel.org, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, netdev@vger.kernel.org, linux-perf-
  users@vger.kernel.org, linux-fscrypt@vger.kernel.org, linux-xfs@vger.kernel.org, linux-hams@vger.kernel.org, linux-x25@vger.kernel.org, audit@vger.kernel.org, linux-bluetooth@vger.kernel.org, linux-can@vger.kernel.org, linux-sctp@vger.kernel.org, bpf@vger.kernel.org, Jeff Layton <jlayton@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v2 055/110] fscrypt: use PRIino format for i_ino
+Subject: [Linaro-mm-sig] [PATCH v2 056/110] fsverity: use PRIino format for i_ino
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/F7RU62HE4H63GVMYWXKDVTJ44KDORNHI/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZN3ANXH4OW3DNHXTOONM2UK37RK3IIJN/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -188,7 +188,7 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.271];
+	NEURAL_HAM(-0.00)[-0.287];
 	RCPT_COUNT_GT_50(0.00)[172];
 	FROM_NEQ_ENVFROM(0.00)[jlayton@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
 	DKIM_TRACE(0.00)[kernel.org:-];
@@ -196,86 +196,32 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
-X-Rspamd-Queue-Id: 1EC9B412AC2
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
+X-Rspamd-Queue-Id: D1F63412AC9
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Convert fscrypt i_ino format strings to use the PRIino format macro in
-preparation for the widening of i_ino via kino_t.  Also change the
-temporary variable in check_for_busy_inodes() to be kino_t in
-preparation of the same change.
+Convert fsverity i_ino format strings to use the PRIino format
+macro in preparation for the widening of i_ino via kino_t.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- fs/crypto/crypto.c   | 2 +-
- fs/crypto/hooks.c    | 2 +-
- fs/crypto/keyring.c  | 4 ++--
- fs/crypto/keysetup.c | 2 +-
- 4 files changed, 5 insertions(+), 5 deletions(-)
+ fs/verity/init.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/fs/crypto/crypto.c b/fs/crypto/crypto.c
-index 07f9cbfe3ea4115b8fcc881ae5154b3c3e898c04..4fc2990642fd3ee385a9919183cbb0f1c5ba6a58 100644
---- a/fs/crypto/crypto.c
-+++ b/fs/crypto/crypto.c
-@@ -365,7 +365,7 @@ void fscrypt_msg(const struct inode *inode, const char *level,
+diff --git a/fs/verity/init.c b/fs/verity/init.c
+index d6520660858386d3b7d69b20a459dc27d8017a5f..5f6a7b4f0a34aedebfcaffc2be53e00b23976217 100644
+--- a/fs/verity/init.c
++++ b/fs/verity/init.c
+@@ -50,7 +50,7 @@ void fsverity_msg(const struct inode *inode, const char *level,
  	vaf.fmt = fmt;
  	vaf.va = &args;
- 	if (inode && inode->i_ino)
--		printk("%sfscrypt (%s, inode %lu): %pV\n",
-+		printk("%sfscrypt (%s, inode %" PRIino "u): %pV\n",
+ 	if (inode)
+-		printk("%sfs-verity (%s, inode %lu): %pV\n",
++		printk("%sfs-verity (%s, inode %" PRIino "u): %pV\n",
  		       level, inode->i_sb->s_id, inode->i_ino, &vaf);
- 	else if (inode)
- 		printk("%sfscrypt (%s): %pV\n", level, inode->i_sb->s_id, &vaf);
-diff --git a/fs/crypto/hooks.c b/fs/crypto/hooks.c
-index b97de0d1430fd6ec764f4a758dffe00263496118..f41809f1f1ed0b1ed78b85a4a987ec9e6cbcfa9d 100644
---- a/fs/crypto/hooks.c
-+++ b/fs/crypto/hooks.c
-@@ -62,7 +62,7 @@ int fscrypt_file_open(struct inode *inode, struct file *filp)
- 	dentry_parent = dget_parent(dentry);
- 	if (!fscrypt_has_permitted_context(d_inode(dentry_parent), inode)) {
- 		fscrypt_warn(inode,
--			     "Inconsistent encryption context (parent directory: %lu)",
-+			     "Inconsistent encryption context (parent directory: %" PRIino "u)",
- 			     d_inode(dentry_parent)->i_ino);
- 		err = -EPERM;
- 	}
-diff --git a/fs/crypto/keyring.c b/fs/crypto/keyring.c
-index 9ec6e5ef0947eff394166d8af438a808cc8a4b2b..c0a2568a88cf6318877dec0f5379c5c8511c00f8 100644
---- a/fs/crypto/keyring.c
-+++ b/fs/crypto/keyring.c
-@@ -969,8 +969,8 @@ static int check_for_busy_inodes(struct super_block *sb,
- {
- 	struct list_head *pos;
- 	size_t busy_count = 0;
--	unsigned long ino;
- 	char ino_str[50] = "";
-+	kino_t ino;
- 
- 	spin_lock(&mk->mk_decrypted_inodes_lock);
- 
-@@ -994,7 +994,7 @@ static int check_for_busy_inodes(struct super_block *sb,
- 
- 	/* If the inode is currently being created, ino may still be 0. */
- 	if (ino)
--		snprintf(ino_str, sizeof(ino_str), ", including ino %lu", ino);
-+		snprintf(ino_str, sizeof(ino_str), ", including ino %" PRIino "u", ino);
- 
- 	fscrypt_warn(NULL,
- 		     "%s: %zu inode(s) still busy after removing key with %s %*phN%s",
-diff --git a/fs/crypto/keysetup.c b/fs/crypto/keysetup.c
-index 40fa05688d3a1d4aa33d29e9508441faf4bca933..b30630f2c6a4e341c72af0db6aa173f59f742fa1 100644
---- a/fs/crypto/keysetup.c
-+++ b/fs/crypto/keysetup.c
-@@ -91,7 +91,7 @@ select_encryption_mode(const union fscrypt_policy *policy,
- 	if (S_ISDIR(inode->i_mode) || S_ISLNK(inode->i_mode))
- 		return &fscrypt_modes[fscrypt_policy_fnames_mode(policy)];
- 
--	WARN_ONCE(1, "fscrypt: filesystem tried to load encryption info for inode %lu, which is not encryptable (file type %d)\n",
-+	WARN_ONCE(1, "fscrypt: filesystem tried to load encryption info for inode %" PRIino "u, which is not encryptable (file type %d)\n",
- 		  inode->i_ino, (inode->i_mode & S_IFMT));
- 	return ERR_PTR(-EINVAL);
- }
+ 	else
+ 		printk("%sfs-verity: %pV\n", level, &vaf);
 
 -- 
 2.53.0
