@@ -2,42 +2,42 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cG1FAIsc4WmmpAAAu9opvQ
+	id 6EBELpMc4WmmpAAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:29:47 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:29:55 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6EB38412B8F
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:29:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 42159412B96
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:29:55 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 777FD453FC
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:29:45 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5A3614540E
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:29:54 +0000 (UTC)
 Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 3C22540171
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  2 Mar 2026 20:43:56 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id AAB574016D
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  2 Mar 2026 20:44:10 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b="Dhc0/IGx";
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=jQmcfG0R;
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	spf=pass (lists.linaro.org: domain of jlayton@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=jlayton@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id A29A844343;
+	by sea.source.kernel.org (Postfix) with ESMTP id 1A74E41AF3;
+	Mon,  2 Mar 2026 20:44:10 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B38FAC2BCB1;
 	Mon,  2 Mar 2026 20:43:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 63AE0C19423;
-	Mon,  2 Mar 2026 20:43:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772484235;
-	bh=UOAEYynzD6EMQO6Y3DFiwCQHZhBo1KFizd/HOCrLZgw=;
+	s=k20201202; t=1772484250;
+	bh=4w4fA6dhQCNf/APQlOMjiisq4usxy5N0JbGQrOBIfHY=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=Dhc0/IGxPCWnAO0jbCZROqeyev75wTetSuhR6IVoinPu4E1gWULuPW4d5RiCaQGEq
-	 AFbJS55ArLRvwhpdmdATFnAdV0GUJHkRI3c8w1lWlz3ULpT5gMFFEEoZv5zxdEh+a7
-	 kWoTA8Mk05bOqAWXdm3f3WCB6WTdqX7BD86y6lIXQKLSwMy3JakIrO9m47wKxJP4JF
-	 KPqpqKefVELZWgjK5sG4D+uYNah9CKSQNKZQKj2pY81fYHyBvUMEVBQSlmrCirpWP2
-	 8HzfNIdRTpBmtfbpFzPS9EKOpiBjNqjl/Nju19PccEHTVt4QgowIaIMeaHdzeWBE0+
-	 /SqM2z5f7dvRQ==
+	b=jQmcfG0R/etcu4AtMgMzx+6210wFhdpzx4VBtstHwijAJj1WcqKYoqHi3c823/EVj
+	 Ol3vXOlW+2Qb8OOE9xV95XfwG1RNKVkg3U5GT/GCa+j07aCaZQqkao3eJvzjW0kiMy
+	 Wa/BWUsqX3j2iqdLgs5Sfl+ck23zI0IPSbXYuvRfNAp/ktx0Xbs772zxKVXp1HG0yV
+	 I/95mI2VKXBLL7b5P1JjuZuqoj49S0kTem6ElXk8GHhSY2rhrAqxUa41c3p+snu513
+	 sFY6f11xyykIkDW5gFwyNCfFpdJABbA4RO0j6qHKfjnfhsi+ggsS1Ea7ZGD7KWzjbS
+	 wBNsB+g4/56fQ==
 From: Jeff Layton <jlayton@kernel.org>
-Date: Mon, 02 Mar 2026 15:25:03 -0500
+Date: Mon, 02 Mar 2026 15:25:04 -0500
 MIME-Version: 1.0
-Message-Id: <20260302-iino-u64-v2-79-e5388800dae0@kernel.org>
+Message-Id: <20260302-iino-u64-v2-80-e5388800dae0@kernel.org>
 References: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
 In-Reply-To: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
 To: Alexander Viro <viro@zeniv.linux.org.uk>,
@@ -130,36 +130,36 @@ To: Alexander Viro <viro@zeniv.linux.org.uk>,
  Jesper Dangaard Brouer <hawk@kernel.org>,
  John Fastabend <john.fastabend@gmail.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2351; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=UOAEYynzD6EMQO6Y3DFiwCQHZhBo1KFizd/HOCrLZgw=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBppfIEOuphnEavDEIC3+G9bP/yGebCzlr8YPYv6
- f7CLhYHSnWJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaXyBAAKCRAADmhBGVaC
- FTOOEACXi4R2sd3xPPG8cv+3X/RfWdB69ekqMDYPyJQsUVp6n/yLGDiQtqcTUVfgmrBB+6AJfRc
- YvpZ4LYwGC/BOekpbEQMk/XhiiLvGO5X9Uu8z3giqLLoQN/4f5oLT0F0Evqf1T87s33bKV4IXQG
- dl3gDdHNA/IK3VCypwTH4d6HIR/jmnIvEMwDOuwSPc9rezoO12Mn07KPTb/5r2ZOCP9cqiOgeFP
- 8LLRk4PwVfkg1MC+BirRPJ/TVcYIIj3OgrHimnANR+BqG9u9avtjVDTTZ4eJfRBUlLTRGqMpACK
- FTA/g/fmcCr3LujF1e6yqKdEBaEIpi8N6ShH8dbh08vCuRiriFQd6Ty4jS/Cwn8i8BXIs60W4tf
- zy6N4OdstOOea6o5cLIKf0LjXynUSwR1YOv/LtkqsRa0gFXvPo+Iw9mLx2mSzEkYvxRzfhClFhf
- KfEoeOggJflUZdvIuYRnc5RuqCu9Ce0iDQmEfrmAUD2Xe7sZa4kfmQPVUJbG4vB12lyTueZHPmw
- 1ZxUfjFGzwwk2epkGp2/HFuwDeYbYbVDNz3AqQ+6IUDkwr773Dt1lAhomV2+/xE2euDce/ytt1g
- OxRCuhXWvvLoDd92q7M5PNh/vGHe5FtHtwx/XaxI9w/OBs0+Izqtj1WHqE/4lL8IDUevPGhzYf+
- ekbd6QBV6PaqQWQ==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1604; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=4w4fA6dhQCNf/APQlOMjiisq4usxy5N0JbGQrOBIfHY=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBppfIFUSBYm47jl/gQ5ZybZZz5mjBR7fn61c9UJ
+ rlM0RlJ2i+JAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaXyBQAKCRAADmhBGVaC
+ FbY2D/9aXK0BLLKkuyBGYm022HPboICg++WR7xeq0N25AFYA/jmyqK/9ldEChVQT/4P8hjRV6Ey
+ o3mU/en6afvPYKoDsolzdVN5UjcEHlqWfyzrTr7m81pFC8474syuuwKbLbp6e4jfF/aLNJQqpmO
+ ty2qbxqkBeqhZQAvg/i56PfIbeUCTFkn4lSm+74r75wu2w0aI9nNO1sAsHGSBLs1vlX6Ct64Hs0
+ Pkdrg3FDTaxzTA19bPk5YFZzi59YzBraWmHaH+GD0elt/94yfsdbzCmLpvtAvH4tJ0JvrzbxmsV
+ 8PpViqm7enuNr5fzS5sUvG2/SrQqK0kTjDsoCsRUQe1pdkVYBjCSiz8UIP/M3yJnxd3eFKFWnFl
+ P3r5/SCwkcD8S/ssmV0sdbxg2tskt1jG0nvAdaiotALMlyMxsgj9fqj7y4E5w5B0ZQ2w/Lrvxbx
+ HkL7JPjcfvw75xyFUfvqjUe2nG5lDorbOTHl8QhvNmpbvf+U/kxYcydrnnoZoTumiP3MIEQG1nr
+ w7uc+AqtP3O4GjJPN4liIyi6x2huu+tBp1YyphFEf7AIldVbKWJdLM55AX7D4FJTdbZ59HU+Srb
+ F3X+X96KD3v97gUsh5nT9ALqIEAJJKR/uKUK0hRPaqRDElMeDtSqB9KCyeBdNh1UGG8ofnHxI14
+ 4JbqwB06oLNknyw==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 X-Spamd-Bar: --
 X-MailFrom: jlayton@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: JXYO262GQKC6KLL4XUOMWJDG5MODBOZH
-X-Message-ID-Hash: JXYO262GQKC6KLL4XUOMWJDG5MODBOZH
+Message-ID-Hash: 57T7HMILQXZL6QRIFVCBJULCK3QQKITU
+X-Message-ID-Hash: 57T7HMILQXZL6QRIFVCBJULCK3QQKITU
 X-Mailman-Approved-At: Thu, 16 Apr 2026 16:56:57 +0000
 CC: linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, nvdimm@lists.linux.dev, fsverity@lists.linux.dev, linux-mm@kvack.org, netfs@lists.linux.dev, linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net, linux-nfs@vger.kernel.org, linux-cifs@vger.kernel.org, samba-technical@lists.samba.org, linux-nilfs@vger.kernel.org, v9fs@lists.linux.dev, linux-afs@lists.infradead.org, autofs@vger.kernel.org, ceph-devel@vger.kernel.org, codalist@coda.cs.cmu.edu, ecryptfs@vger.kernel.org, linux-mtd@lists.infradead.org, jfs-discussion@lists.sourceforge.net, ntfs3@lists.linux.dev, ocfs2-devel@lists.linux.dev, devel@lists.orangefs.org, linux-unionfs@vger.kernel.org, apparmor@lists.ubuntu.com, linux-security-module@vger.kernel.org, linux-integrity@vger.kernel.org, selinux@vger.kernel.org, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, netdev@vger.kernel.org, linux-perf-
  users@vger.kernel.org, linux-fscrypt@vger.kernel.org, linux-xfs@vger.kernel.org, linux-hams@vger.kernel.org, linux-x25@vger.kernel.org, audit@vger.kernel.org, linux-bluetooth@vger.kernel.org, linux-can@vger.kernel.org, linux-sctp@vger.kernel.org, bpf@vger.kernel.org, Jeff Layton <jlayton@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v2 079/110] ecryptfs: replace PRIino with %llu/%llx format strings
+Subject: [Linaro-mm-sig] [PATCH v2 080/110] efs: replace PRIino with %llu/%llx format strings
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JXYO262GQKC6KLL4XUOMWJDG5MODBOZH/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/57T7HMILQXZL6QRIFVCBJULCK3QQKITU/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -188,7 +188,7 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.145];
+	NEURAL_HAM(-0.00)[-0.283];
 	RCPT_COUNT_GT_50(0.00)[172];
 	FROM_NEQ_ENVFROM(0.00)[jlayton@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
 	DKIM_TRACE(0.00)[kernel.org:-];
@@ -197,63 +197,49 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: 6EB38412B8F
+X-Rspamd-Queue-Id: 42159412B96
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 Now that i_ino is u64 and the PRIino format macro has been removed,
-replace all uses in ecryptfs with the concrete format strings.
+replace all uses in efs with the concrete format strings.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- fs/ecryptfs/crypto.c | 6 +++---
- fs/ecryptfs/file.c   | 2 +-
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ fs/efs/inode.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/fs/ecryptfs/crypto.c b/fs/ecryptfs/crypto.c
-index 015b2e4ee11cba5b734d1f8fcd851accfa8f0481..f25c9a49e251a591695a143f64d1a81c5211ec18 100644
---- a/fs/ecryptfs/crypto.c
-+++ b/fs/ecryptfs/crypto.c
-@@ -1313,7 +1313,7 @@ int ecryptfs_read_metadata(struct dentry *ecryptfs_dentry)
- 		rc = ecryptfs_read_xattr_region(page_virt, ecryptfs_inode);
- 		if (rc) {
- 			printk(KERN_DEBUG "Valid eCryptfs headers not found in "
--			       "file header region or xattr region, inode %" PRIino "u\n",
-+			       "file header region or xattr region, inode %llu\n",
- 				ecryptfs_inode->i_ino);
- 			rc = -EINVAL;
- 			goto out;
-@@ -1323,7 +1323,7 @@ int ecryptfs_read_metadata(struct dentry *ecryptfs_dentry)
- 						ECRYPTFS_DONT_VALIDATE_HEADER_SIZE);
- 		if (rc) {
- 			printk(KERN_DEBUG "Valid eCryptfs headers not found in "
--			       "file xattr region either, inode %" PRIino "u\n",
-+			       "file xattr region either, inode %llu\n",
- 				ecryptfs_inode->i_ino);
- 			rc = -EINVAL;
- 		}
-@@ -1335,7 +1335,7 @@ int ecryptfs_read_metadata(struct dentry *ecryptfs_dentry)
- 			       "crypto metadata only in the extended attribute "
- 			       "region, but eCryptfs was mounted without "
- 			       "xattr support enabled. eCryptfs will not treat "
--			       "this like an encrypted file, inode %" PRIino "u\n",
-+			       "this like an encrypted file, inode %llu\n",
- 				ecryptfs_inode->i_ino);
- 			rc = -EINVAL;
- 		}
-diff --git a/fs/ecryptfs/file.c b/fs/ecryptfs/file.c
-index 9eff00cfbc46c5fbd599252dcc4434fceafb7223..49b0fbe0428a2d202434ce4b5fd7d82d2a63cf58 100644
---- a/fs/ecryptfs/file.c
-+++ b/fs/ecryptfs/file.c
-@@ -253,7 +253,7 @@ static int ecryptfs_open(struct inode *inode, struct file *file)
- 	if (rc)
- 		goto out_put;
- 	ecryptfs_printk(KERN_DEBUG, "inode w/ addr = [0x%p], i_ino = "
--			"[0x%.16" PRIino "x] size: [0x%.16llx]\n", inode, inode->i_ino,
-+			"[0x%.16llx] size: [0x%.16llx]\n", inode, inode->i_ino,
- 			(unsigned long long)i_size_read(inode));
- 	goto out;
- out_put:
+diff --git a/fs/efs/inode.c b/fs/efs/inode.c
+index a21a03f7e5790aed95738b1a0c0f1edcc84848e8..4b132729e6385de196e156400d17a86ed04dc2f4 100644
+--- a/fs/efs/inode.c
++++ b/fs/efs/inode.c
+@@ -132,7 +132,7 @@ struct inode *efs_iget(struct super_block *super, unsigned long ino)
+ 	for(i = 0; i < EFS_DIRECTEXTENTS; i++) {
+ 		extent_copy(&(efs_inode->di_u.di_extents[i]), &(in->extents[i]));
+ 		if (i < in->numextents && in->extents[i].cooked.ex_magic != 0) {
+-			pr_warn("extent %d has bad magic number in inode %" PRIino "u\n",
++			pr_warn("extent %d has bad magic number in inode %llu\n",
+ 				i, inode->i_ino);
+ 			brelse(bh);
+ 			goto read_inode_error;
+@@ -140,7 +140,7 @@ struct inode *efs_iget(struct super_block *super, unsigned long ino)
+ 	}
+ 
+ 	brelse(bh);
+-	pr_debug("efs_iget(): inode %" PRIino "u, extents %d, mode %o\n",
++	pr_debug("efs_iget(): inode %llu, extents %d, mode %o\n",
+ 		 inode->i_ino, in->numextents, inode->i_mode);
+ 	switch (inode->i_mode & S_IFMT) {
+ 		case S_IFDIR: 
+@@ -171,7 +171,7 @@ struct inode *efs_iget(struct super_block *super, unsigned long ino)
+ 	return inode;
+         
+ read_inode_error:
+-	pr_warn("failed to read inode %" PRIino "u\n", inode->i_ino);
++	pr_warn("failed to read inode %llu\n", inode->i_ino);
+ 	iget_failed(inode);
+ 	return ERR_PTR(-EIO);
+ }
 
 -- 
 2.53.0
