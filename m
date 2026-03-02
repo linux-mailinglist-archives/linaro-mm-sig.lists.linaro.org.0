@@ -2,42 +2,42 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mBDJM3sc4WmmpAAAu9opvQ
+	id IDqMBYIc4WmmpAAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:29:31 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:29:38 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9AB6B412B81
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:29:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8BB78412B88
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:29:37 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id AB727453D9
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:29:30 +0000 (UTC)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
-	by lists.linaro.org (Postfix) with ESMTPS id B510440171
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  2 Mar 2026 20:43:27 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id A7803453E5
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:29:36 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+	by lists.linaro.org (Postfix) with ESMTPS id E030C40171
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  2 Mar 2026 20:43:41 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=hoeN8F+8;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b="GyUE/vAD";
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (lists.linaro.org: domain of jlayton@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=jlayton@kernel.org
+	spf=pass (lists.linaro.org: domain of jlayton@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=jlayton@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by tor.source.kernel.org (Postfix) with ESMTP id 27C9C6057A;
+	by sea.source.kernel.org (Postfix) with ESMTP id 4C0E94174A;
+	Mon,  2 Mar 2026 20:43:41 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 154C0C19425;
 	Mon,  2 Mar 2026 20:43:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BA83EC19423;
-	Mon,  2 Mar 2026 20:43:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772484206;
-	bh=E9x8941cFYkkPM2coZD9zVcuOCPVEOS5pYhXjktUHSA=;
+	s=k20201202; t=1772484221;
+	bh=VipzHX+Kr9eDABZYeJk6DXBkX8DLxI2R5jnS1ony64M=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=hoeN8F+8pRAf9JkOzIWMAJSY2FfOz94jU6CTs2zxgOl+xJ+3k4KxdRRofktbXTlU0
-	 avE3DLhw50Abvgdpwzxt+awb+9BEwbmKyeQbwOLT6tTqXlzUQpjF8hN4ufqepo5e+f
-	 mu7vASnsMFrT1AQKRponbKIzj0L+sEnW9qCRA6Q7IAOlvv2k5xwAskBXpn/bZ8+CHB
-	 akmOePFfZ2CT6q7QoKUseCW7pJ7zERTkCgNlmCsD3Yi1NBa66e2L+p9v56CvWQsHCl
-	 6ykdjVPOAdA3CCLLfNbfOHeO3T9UKmaQlupm0+DyrjRbBFsPNJAbZQMOy6Nf6x627L
-	 YZiO2yv0x2hPQ==
+	b=GyUE/vAD7KzUY+7p+6OmzJggORJGIyVREtyftkpl10eY2gxWch503ETBsS4wCHIT1
+	 62MZajxbDK2+GuySOwLeZahfA/Ps8QLVRgyph++jY9+uLBX7YeSFNkrvESE+Y1kjHG
+	 YiHhSdAyiald82Pd99zhkXqo6vqkhCPD9r0lpWAOb/kAW8p0qJgwUA6yqMtIzF62xl
+	 sRDysRmrUVr5kNd2wqV4/laZwY1jJyIKNVXByAbROAP4l38TPMI8NAxfgzqZ1SYf/s
+	 lLM3lfoPrclW8CEygf6/FU7krXV9mW99CkiVhlAKJsEKBWWofOi1SqStPAXfzd5zcg
+	 dQd1a/KDab6bQ==
 From: Jeff Layton <jlayton@kernel.org>
-Date: Mon, 02 Mar 2026 15:25:01 -0500
+Date: Mon, 02 Mar 2026 15:25:02 -0500
 MIME-Version: 1.0
-Message-Id: <20260302-iino-u64-v2-77-e5388800dae0@kernel.org>
+Message-Id: <20260302-iino-u64-v2-78-e5388800dae0@kernel.org>
 References: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
 In-Reply-To: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
 To: Alexander Viro <viro@zeniv.linux.org.uk>,
@@ -130,36 +130,36 @@ To: Alexander Viro <viro@zeniv.linux.org.uk>,
  Jesper Dangaard Brouer <hawk@kernel.org>,
  John Fastabend <john.fastabend@gmail.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1332; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=E9x8941cFYkkPM2coZD9zVcuOCPVEOS5pYhXjktUHSA=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBppfIEZTf/vVG7rCO0GISKr6bG7qFPwsWNvSGfV
- DgwQ0GqVpyJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaXyBAAKCRAADmhBGVaC
- FdeOD/9mavLRdZWi8JF/UCUT1BO815ovqktK7rbeu7A+SO2b5LLvmF5UNzRhOJKYv4PsZtgkgLM
- rCCNKWh0LNeWQznAQaDBGyWCl4AerRgy5sx7jprpxqx5r/y7RPZ6c+8bAe4Vs/n/j3mo467qMuU
- s6BryzSaD6RfZD26fgc7HOXXCbNUXC17wJMceT1X7E1v1OyTtApy0g6FxxGsAAibJRIL3gkvOHK
- c5zSJPCmgdUtsZaSbfChmIQgWzIrfRkPWxNpyjP70nQVHA/4fW1DbhBVwxRMCOe8LEJje52DBnX
- Q3mN09c3n1HvihvADRlCnvywgT2rUzTt07w9VDdxF6dszrqxwjFqdfgDZ0JW3Stt56v6MdWJoTw
- H/RuiKgOfHSL8XRINJa30qogYsNX98ulLVumE+pMKHc5UNcDoRiTArL++T3OdeAKgCkVBKqQ6v2
- ZuZk3/5VtLWLkkUZnxzvL3oTm+jv4VMXt9SO/LqmvelzRb1PNYzKTKV+aXy8yKYaLGxzoFMmA+5
- 1BbnjKJdBV304PSdQraws32OjEW0c/3rHJF6rpAMbT91NGUTWHpDjQadCJf0ndC06cqgfYNB6rg
- 3KMHPYL6QhoTgjv69gV10Khk8Sln3xsWGcAztnWpXXo2gPeqmufqwjtQA7xd8Gf3tIImjdfYrGM
- HDsAhv3R6h4VJBg==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=876; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=VipzHX+Kr9eDABZYeJk6DXBkX8DLxI2R5jnS1ony64M=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBppfIEChGs6AwJHM9PcHc3H1I/xxqGIk65ZS7xZ
+ yEW4qgpENOJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaXyBAAKCRAADmhBGVaC
+ FTijEACkfQg4sZvZGPKPlw/OjLHzSIaxMDkyWX+Dxmfd8ktn9hI69X91bCmCML6O56ilJSkp2Mx
+ xfgiC2NDUbZaRMumgnemmv/0CeiN1n1o3hFCaJY5JUHUrJrHNvd3Ei5ELm+m8qSI8lpH7b66D8B
+ 3E2QcAeGYNoxD69FgeaOSRFTRztCC68g2e1gdT/sGBaLQDWyCOE7Wc+xK0Qe3EagqrrUedInoK0
+ kYnxsYoTuCD2Vy98DcuILDzEE7y2wR+zvPitJ/qQISjXuxMObSopJWLHLC7TpL2IwW9t87siF12
+ WSxVzSoh/WY61jRE+sFIukPOX0lW5/ajdNO9f82kLr1ClpN0w4gWQbt7p9x0s2WagnfHuovxzWN
+ 1HY3t+EAcaIYbA9UiLxiQY2XsW6OdFeVzQDtqysCCPM9VlULMMXh79oNhFPJMBohHmHbH82iBBa
+ wpZsYSmUZDem5L7WrQU9dl0kjd9GoykXnln+2enjQTO7vP6YABTdqnCwjNOTslJNgiHr9r10tsG
+ vHAj8E8cKfFKZeAr9+9N37Vq9RhNS4xlrNNIINaab+uGhkU0YFNge1h+EVHqvtcMpBf4Jb2wwqs
+ kwb7Gvr/KosDfFhdl6UD5h2cHOIod/bddYSfwLB3AaZl7DyHGpq35B17sDwXSEAUOJV6RiqGfHd
+ 6LwaZCyFH0ivbtg==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
-X-Spamd-Bar: --
+X-Spamd-Bar: -
 X-MailFrom: jlayton@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 3HM6TTFCSFYTRMWPOZDWNJ5IO3IF4A67
-X-Message-ID-Hash: 3HM6TTFCSFYTRMWPOZDWNJ5IO3IF4A67
+Message-ID-Hash: WD3X54ERH5L3JQ7VSXRP24IY6GNTCKMB
+X-Message-ID-Hash: WD3X54ERH5L3JQ7VSXRP24IY6GNTCKMB
 X-Mailman-Approved-At: Thu, 16 Apr 2026 16:56:56 +0000
 CC: linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, nvdimm@lists.linux.dev, fsverity@lists.linux.dev, linux-mm@kvack.org, netfs@lists.linux.dev, linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net, linux-nfs@vger.kernel.org, linux-cifs@vger.kernel.org, samba-technical@lists.samba.org, linux-nilfs@vger.kernel.org, v9fs@lists.linux.dev, linux-afs@lists.infradead.org, autofs@vger.kernel.org, ceph-devel@vger.kernel.org, codalist@coda.cs.cmu.edu, ecryptfs@vger.kernel.org, linux-mtd@lists.infradead.org, jfs-discussion@lists.sourceforge.net, ntfs3@lists.linux.dev, ocfs2-devel@lists.linux.dev, devel@lists.orangefs.org, linux-unionfs@vger.kernel.org, apparmor@lists.ubuntu.com, linux-security-module@vger.kernel.org, linux-integrity@vger.kernel.org, selinux@vger.kernel.org, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, netdev@vger.kernel.org, linux-perf-
  users@vger.kernel.org, linux-fscrypt@vger.kernel.org, linux-xfs@vger.kernel.org, linux-hams@vger.kernel.org, linux-x25@vger.kernel.org, audit@vger.kernel.org, linux-bluetooth@vger.kernel.org, linux-can@vger.kernel.org, linux-sctp@vger.kernel.org, bpf@vger.kernel.org, Jeff Layton <jlayton@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v2 077/110] coda: replace PRIino with %llu/%llx format strings
+Subject: [Linaro-mm-sig] [PATCH v2 078/110] cramfs: replace PRIino with %llu/%llx format strings
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3HM6TTFCSFYTRMWPOZDWNJ5IO3IF4A67/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WD3X54ERH5L3JQ7VSXRP24IY6GNTCKMB/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -188,7 +188,7 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.324];
+	NEURAL_HAM(-0.00)[-0.360];
 	RCPT_COUNT_GT_50(0.00)[172];
 	FROM_NEQ_ENVFROM(0.00)[jlayton@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
 	DKIM_TRACE(0.00)[kernel.org:-];
@@ -196,46 +196,32 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
-X-Rspamd-Queue-Id: 9AB6B412B81
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
+X-Rspamd-Queue-Id: 8BB78412B88
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 Now that i_ino is u64 and the PRIino format macro has been removed,
-replace all uses in coda with the concrete format strings.
+replace all uses in cramfs with the concrete format strings.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- fs/coda/dir.c   | 2 +-
- fs/coda/inode.c | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ fs/cramfs/inode.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/fs/coda/dir.c b/fs/coda/dir.c
-index b9e1674a8493e5578a04e4f8165ba30dc3b225b4..d6b9fc3cc1ca9d581a26de48971db60abcb26af4 100644
---- a/fs/coda/dir.c
-+++ b/fs/coda/dir.c
-@@ -533,7 +533,7 @@ int coda_revalidate_inode(struct inode *inode)
- 		coda_vattr_to_iattr(inode, &attr);
- 
- 		if ((old_mode & S_IFMT) != (inode->i_mode & S_IFMT)) {
--			pr_warn("inode %" PRIino "u, fid %s changed type!\n",
-+			pr_warn("inode %llu, fid %s changed type!\n",
- 				inode->i_ino, coda_f2s(&(cii->c_fid)));
- 		}
- 
-diff --git a/fs/coda/inode.c b/fs/coda/inode.c
-index 964b9558cdb2e622eb9903974a10a6c5e561886e..40b43866e6a5496682453b227972e89e539960ff 100644
---- a/fs/coda/inode.c
-+++ b/fs/coda/inode.c
-@@ -257,7 +257,7 @@ static int coda_fill_super(struct super_block *sb, struct fs_context *fc)
- 		goto error;
- 	} 
- 
--	pr_info("%s: rootinode is %" PRIino "u dev %s\n",
-+	pr_info("%s: rootinode is %llu dev %s\n",
- 		__func__, root->i_ino, root->i_sb->s_id);
- 	sb->s_root = d_make_root(root);
- 	if (!sb->s_root) {
+diff --git a/fs/cramfs/inode.c b/fs/cramfs/inode.c
+index 624c5ed0ceff2e4d3e964401e3cfb82154c719ae..4edbfccd0bbea39a1babd289afb1d8b985570eeb 100644
+--- a/fs/cramfs/inode.c
++++ b/fs/cramfs/inode.c
+@@ -125,7 +125,7 @@ static struct inode *get_cramfs_inode(struct super_block *sb,
+ 				old_decode_dev(cramfs_inode->size));
+ 		break;
+ 	default:
+-		printk(KERN_DEBUG "CRAMFS: Invalid file type 0%04o for inode %" PRIino "u.\n",
++		printk(KERN_DEBUG "CRAMFS: Invalid file type 0%04o for inode %llu.\n",
+ 		       inode->i_mode, inode->i_ino);
+ 		iget_failed(inode);
+ 		return ERR_PTR(-EIO);
 
 -- 
 2.53.0
