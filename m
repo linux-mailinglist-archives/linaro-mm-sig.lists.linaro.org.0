@@ -2,36 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id SMYRITo8pWne6QUAu9opvQ
+	id WMeVE1I8pWne6QUAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 02 Mar 2026 08:28:58 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 02 Mar 2026 08:29:22 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 035891D3E78
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 02 Mar 2026 08:28:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C76FA1D3E7F
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 02 Mar 2026 08:29:21 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 13B263F901
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  2 Mar 2026 07:28:57 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D1FB33F727
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  2 Mar 2026 07:29:20 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8603A3ED23
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  2 Mar 2026 07:28:50 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D8F123F727
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  2 Mar 2026 07:29:13 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: "emirate stoners" <emiratestoners@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Mon, 02 Mar 2026 07:28:50 -0000
-Message-ID: <177243653054.3897208.9151688969694626311@lists.linaro.org>
+Date: Mon, 02 Mar 2026 07:29:13 -0000
+Message-ID: <177243655388.3897865.10381345094849910061@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: EGSSCZFS7FU3TSD4QCPNNSIWICS3GSAG
-X-Message-ID-Hash: EGSSCZFS7FU3TSD4QCPNNSIWICS3GSAG
+Message-ID-Hash: GOISJXBUB53W27UDR5ZZIVHPBCGFMU54
+X-Message-ID-Hash: GOISJXBUB53W27UDR5ZZIVHPBCGFMU54
 X-MailFrom: emiratestoners@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] WhatsApp +447438 969225 where can i find weed, cocaine, hash,mdma in dubai as a tourist?
+Subject: [Linaro-mm-sig] WhatsApp +447438 969225 weed, cocaine, hash, cystal, mdma for sell in uae, dubai, saudi arabia, qatar, oman, kuwait
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EGSSCZFS7FU3TSD4QCPNNSIWICS3GSAG/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GOISJXBUB53W27UDR5ZZIVHPBCGFMU54/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -40,34 +40,33 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Transfer-Encoding: base64
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [1.69 / 15.00];
+X-Spamd-Result: default: False [0.69 / 15.00];
 	MID_RHS_MATCH_TO(1.00)[];
-	SUBJECT_ENDS_QUESTION(1.00)[];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ARC_NA(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	REDIRECTOR_URL(0.00)[goo.gl];
-	RCPT_COUNT_ONE(0.00)[1];
 	RCVD_COUNT_TWO(0.00)[2];
 	FROM_NEQ_ENVFROM(0.00)[emiratestoners@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	RCPT_COUNT_ONE(0.00)[1];
 	TO_DN_NONE(0.00)[];
 	R_DKIM_NA(0.00)[];
-	NEURAL_HAM(-0.00)[-0.811];
+	NEURAL_HAM(-0.00)[-0.974];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid]
-X-Rspamd-Queue-Id: 035891D3E78
+X-Rspamd-Queue-Id: C76FA1D3E7F
 X-Rspamd-Action: no action
 
 V2hhdHNBcHArNDQ3NDM4IDk2OTIyNSAgQnV5IHdlZWQgaW4gRHViYWksIEJ1eSB3ZWVkIGluIEFi
