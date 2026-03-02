@@ -2,36 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id IKhuAK50pWkNBgYAu9opvQ
+	id oDQUDbx0pWkNBgYAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 02 Mar 2026 12:29:50 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 02 Mar 2026 12:30:04 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8F2171D7825
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 02 Mar 2026 12:29:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AEA3B1D783B
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 02 Mar 2026 12:30:03 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A629F3F910
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  2 Mar 2026 11:29:48 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id AA5023F907
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  2 Mar 2026 11:30:02 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7F2443F795
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  2 Mar 2026 11:29:42 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 6B2373F795
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  2 Mar 2026 11:29:56 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-From: "Jasper Ryder" <jasperryder783@gmail.com>
+From: "Maxx Billy" <billymaxx70@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Mon, 02 Mar 2026 11:29:42 -0000
-Message-ID: <177245098251.4110657.11210857470106245303@lists.linaro.org>
+Date: Mon, 02 Mar 2026 11:29:56 -0000
+Message-ID: <177245099643.4109855.1788096932249544952@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: W2WS2IAHILBKA7G5YMIONRZMGT5WLDM4
-X-Message-ID-Hash: W2WS2IAHILBKA7G5YMIONRZMGT5WLDM4
-X-MailFrom: jasperryder783@gmail.com
+Message-ID-Hash: PX5KER72WGBXQLANT5CTEM3NRJOUG7UR
+X-Message-ID-Hash: PX5KER72WGBXQLANT5CTEM3NRJOUG7UR
+X-MailFrom: billymaxx70@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Who can help me recover my Bitcoin?
+Subject: [Linaro-mm-sig] How to recover scammed cryptocurrency?
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/W2WS2IAHILBKA7G5YMIONRZMGT5WLDM4/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PX5KER72WGBXQLANT5CTEM3NRJOUG7UR/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -58,15 +58,15 @@ X-Spamd-Result: default: False [1.69 / 15.00];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCPT_COUNT_ONE(0.00)[1];
 	RCVD_COUNT_TWO(0.00)[2];
-	FROM_NEQ_ENVFROM(0.00)[jasperryder783@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_NEQ_ENVFROM(0.00)[billymaxx70@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	TO_DN_NONE(0.00)[];
 	R_DKIM_NA(0.00)[];
 	NEURAL_HAM(-0.00)[-0.412];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[co.site:email,linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,bcrexperts.com:url]
-X-Rspamd-Queue-Id: 8F2171D7825
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,bcrexperts.com:url,linaro.org:email,co.site:email]
+X-Rspamd-Queue-Id: AEA3B1D783B
 X-Rspamd-Action: no action
 
 Q1JZUFRPIFNDQU0gUkVDT1ZFUlkgU0VSVklDRSAyMDI2OiBCSVRDUkFDSyBSRUNPVkVSWSBFWFBF
