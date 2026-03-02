@@ -2,36 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MMv8IMJ8pWm6CAYAu9opvQ
+	id CJ6SK9J8pWm6CAYAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 02 Mar 2026 13:04:18 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 02 Mar 2026 13:04:34 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E8201D80C9
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 02 Mar 2026 13:04:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 245F51D80E5
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 02 Mar 2026 13:04:33 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 30F9A3F962
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  2 Mar 2026 12:04:17 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id EAF03400FB
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  2 Mar 2026 12:04:32 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 34D4F3F76A
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  2 Mar 2026 12:04:11 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 09C553F76A
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  2 Mar 2026 12:04:27 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-From: "Jack Owen" <jackowen112211@gmail.com>
+From: "Abraham Ambrose" <abrahamambrose38@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Mon, 02 Mar 2026 12:04:11 -0000
-Message-ID: <177245305121.4143595.2126722450435104423@lists.linaro.org>
+Date: Mon, 02 Mar 2026 12:04:27 -0000
+Message-ID: <177245306703.4142682.9008938819748321129@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: P2Q55Y3XEIV3RMLYOZPXL6RENOBBXQIC
-X-Message-ID-Hash: P2Q55Y3XEIV3RMLYOZPXL6RENOBBXQIC
-X-MailFrom: jackowen112211@gmail.com
+Message-ID-Hash: KKPHQS4Z57JW3Y5ZZJU7NGDJRVNAWUPZ
+X-Message-ID-Hash: KKPHQS4Z57JW3Y5ZZJU7NGDJRVNAWUPZ
+X-MailFrom: abrahamambrose38@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Who Delivers Reliable Crypto Asset Recovery Services?
+Subject: [Linaro-mm-sig] What Are the Most Trusted Names in Crypto Recovery?
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/P2Q55Y3XEIV3RMLYOZPXL6RENOBBXQIC/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KKPHQS4Z57JW3Y5ZZJU7NGDJRVNAWUPZ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -58,15 +58,15 @@ X-Spamd-Result: default: False [1.69 / 15.00];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCPT_COUNT_ONE(0.00)[1];
 	RCVD_COUNT_TWO(0.00)[2];
-	FROM_NEQ_ENVFROM(0.00)[jackowen112211@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_NEQ_ENVFROM(0.00)[abrahamambrose38@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	TO_DN_NONE(0.00)[];
 	R_DKIM_NA(0.00)[];
-	NEURAL_HAM(-0.00)[-0.412];
+	NEURAL_HAM(-0.00)[-0.408];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[co.site:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,bcrexperts.com:url]
-X-Rspamd-Queue-Id: 1E8201D80C9
+	DBL_BLOCKED_OPENRESOLVER(0.00)[bcrexperts.com:url,linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,co.site:email]
+X-Rspamd-Queue-Id: 245F51D80E5
 X-Rspamd-Action: no action
 
 Q1JZUFRPIFNDQU0gUkVDT1ZFUlkgU0VSVklDRSAyMDI2OiBCSVRDUkFDSyBSRUNPVkVSWSBFWFBF
