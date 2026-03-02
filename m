@@ -2,601 +2,975 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sLXaKNsZ4WmmpAAAu9opvQ
+	id ECRWEeIZ4Wn3pAAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:18:19 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:18:26 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 37EAE412850
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:18:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AE53341285E
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:18:25 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 309AF44831
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:18:18 +0000 (UTC)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	by lists.linaro.org (Postfix) with ESMTPS id 5209D3ED23
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  2 Mar 2026 09:19:14 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 6FA6E448D3
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:18:24 +0000 (UTC)
+Received: from DB3PR0202CU003.outbound.protection.outlook.com (mail-northeuropeazon11010031.outbound.protection.outlook.com [52.101.84.31])
+	by lists.linaro.org (Postfix) with ESMTPS id ED7D83ED23
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  2 Mar 2026 09:31:17 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=qualcomm.com header.s=qcppdkim1 header.b=EFm4GnQF;
-	dkim=pass header.d=oss.qualcomm.com header.s=google header.b=M6LgmI+X;
-	spf=pass (lists.linaro.org: domain of ekansh.gupta@oss.qualcomm.com designates 205.220.168.131 as permitted sender) smtp.mailfrom=ekansh.gupta@oss.qualcomm.com;
-	dmarc=pass (policy=reject) header.from=qualcomm.com
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6226h9Qc2504591
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 2 Mar 2026 09:19:13 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	Hu1r9kUvL3mb3BG//yDOjldAxOmMHnSWiAbYHBnlNe8=; b=EFm4GnQF//FJm0Cb
-	7QN2oPku0Tt3ka4f5pZk7sfoJHcqNOiqZ8KPZdpedv4DGMuDaG9/KYQjbfxEwd0x
-	bfmOaqwq83Y8Fg+/w0W9/+e5+LBWPIRrxZNiRTQGZvpSXwjqrQX7IFlu9MEhWtob
-	lRr+WVNbcVNy62dM1QyW8hCc7mpEyp0vna8qIuyltjRH63oV7drEom34PLoHZmFS
-	uWdI46YgUkQKAFAXy3Hvf0hT88YY9KQLmL/sAXlLkNR5i7up2Jt7/xdzO5EOGYVn
-	pTvEd1AOe3E9uJ6ixMud2aJ+FyHXi7nuebh2+GQSnu2L4M7jpI5ifDRc9qIVXk/v
-	SczH4w==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4cn5herjqq-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 02 Mar 2026 09:19:13 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-3597b55adebso1127002a91.2
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 02 Mar 2026 01:19:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1772443152; x=1773047952; darn=lists.linaro.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=Hu1r9kUvL3mb3BG//yDOjldAxOmMHnSWiAbYHBnlNe8=;
-        b=M6LgmI+XdRL1njYjawlC+LGrpdNSiITlJ/VH9Auw5VTsDWIkdDkLYOq7HmVMmjia/Z
-         jihIJA5z4oky30B2jcrRf2hGhab8tjB1Px43u4i8bF8p4MzSOyqgQwPAheRHk8vbQDgM
-         qc1IzKUTiG/kQiHuco66rcxPWEkyNZDN2lRMTKTPse0BMotxmfekcd8p5kY7b5tYmMAb
-         ezB2mqm+80vjtfE8EdFza98m7XayXWz6Np60HeSQiurexMvA1mInqzl5FE45JD88uuHh
-         DImALOkmFov46lb4+vROr3YT1rdy/DwtljpaGRdJ17X1MWWdxWH4WBZbr4nN0pMQ+Wjr
-         PJlw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772443152; x=1773047952;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Hu1r9kUvL3mb3BG//yDOjldAxOmMHnSWiAbYHBnlNe8=;
-        b=fUty4NOhzZb/k2p9/ERw1fFTOiFWwY2ZrF5UoDdjOeVvfhUE97yGb3XuzIqkTfrng4
-         5ViTd1Cx80aFiraX/MfNVcTSpKRuQfWOn9OUVR9ATb1uQARdhluSFhmbkY1/TsOYKoTJ
-         zYr3VIeoxJHlCER8iZJrq/drWsx8PAOHryUHpOHx3FvK1U0cH/RSrTz7xaO5/gzi4JZo
-         SESj/ykpMbcplBJlBStewmZcWa7he5wWuMKjlbi7L97gPVyLYHVxQt2aD7K0hOFiyrVC
-         x7mdT6s29rlyebo2AVt15GWw6ShN8t1h5xbH7er5XlyzSwY1a0f7K31OZ2Tl7zV5qz1r
-         rM1w==
-X-Forwarded-Encrypted: i=1; AJvYcCVGlmlxW4WeZ3XptYTErObP5G3oXd8Lh2wxxtaRo5LyZdSc1tnBpn6QJThzsuu8XEsfetH5xno0S/KtcTnk@lists.linaro.org
-X-Gm-Message-State: AOJu0YxSCy1WIbCidAEtbqwurZHACTX4jgrFFAXNKHDqeja95JmHxRJK
-	AhSl8OuHtzAAf8Bd+uruh5skVvE80Se+rx4UvfTJmcvkI1fUc2dKTbgOu6JV1tE3nZAW78cmYWn
-	37zvPxofz34qH2hAww20fYOuZXBsMaiH5tx8NqNs4bYDSla3YKCP+xxcfd3NGYj66kii1vg==
-X-Gm-Gg: ATEYQzyS+wcqGXMJoe7XElX1mOJrIzBl4Lc1JxhJE//BeuZ8rEyxl+nrivhRDL5XtxA
-	DipngSyRCvZzxdv+xrMZJDxAXlTHSwbyQtuRrPLti/E6zVl+RNQlDJxk9ARvMUN5q3opDoz/b94
-	QrtpGody7dE+gNJfmn7nGmJ+xZjrvKFqD0wlESzND4iaWxn1tzrDZtPgrhSUWfPVgwxRQTDtZEN
-	0+xwp1h7PP15dwW6E9/TK9SStIF8AacaIon8uPNaZkC64Ph6fBqROayXPxzE/DG2iRWGho/SJAg
-	1jtEi+yOEpSDFshr8MkUFfRFOjC7z132ix0iZAZpwiwjKwuGOXFlRI6UPXG0lb6sfLTaJqwdfzg
-	b6yzIG7DNqvYAkZSI1EcvMA2inH7Y0ZF7maHvHHmOE/fLQ1WEjA==
-X-Received: by 2002:a17:90b:5710:b0:359:d54:846f with SMTP id 98e67ed59e1d1-35965c382e5mr8938209a91.7.1772443152199;
-        Mon, 02 Mar 2026 01:19:12 -0800 (PST)
-X-Received: by 2002:a17:90b:5710:b0:359:d54:846f with SMTP id 98e67ed59e1d1-35965c382e5mr8938170a91.7.1772443151479;
-        Mon, 02 Mar 2026 01:19:11 -0800 (PST)
-Received: from [10.206.99.28] ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-c70fa632ddesm11569931a12.13.2026.03.02.01.19.03
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 02 Mar 2026 01:19:10 -0800 (PST)
-Message-ID: <1f140186-534c-4b4e-b68a-6c9b8d8511e2@oss.qualcomm.com>
-Date: Mon, 2 Mar 2026 14:49:02 +0530
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Matthew Brost <matthew.brost@intel.com>
-References: <20260224-qda-firstpost-v1-0-fe46a9c1a046@oss.qualcomm.com>
- <20260224-qda-firstpost-v1-12-fe46a9c1a046@oss.qualcomm.com>
- <aZ1m0wOA9EBbJr+x@lstrano-desk.jf.intel.com>
+	dkim=pass header.d=nxp.com header.s=selector1 header.b=SfRyNhO8;
+	spf=pass (lists.linaro.org: domain of ruxandra.radulescu@nxp.com designates 52.101.84.31 as permitted sender) smtp.mailfrom=ruxandra.radulescu@nxp.com;
+	arc=pass ("microsoft.com:s=arcselector10001:i=1");
+	dmarc=pass (policy=none) header.from=nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=MZPdUl8f3wOImFGxHyt6vUD740C4aYCUtC7HFxyGfBpcJX5X5M8a3Vjs2Gy3EZ38a4OaqRg8x8CB3jFzy1TQWzRmP6E2QRF+cPa/nLsNxNctWBBcsrX9mNck9R+MenVrMkBoMSkXb50iTIpiT2OD+Mh52JF0pig7zWEh5KHeO1PgkIDR0Zkn15A27JVUnP7aSRrlAVcaOVdwTnB5Rj/KciQSZx+1v6aeUysHhIwMRDuO4c23HBtv6fJtR6iOHPIzYInB2UL9GT3hz/f+nKH0nqvEiaRvhv/3N54Yb1lpPZ2obc6Mx1U/a95CkvRF+CaiXn1B88L0k4CEDv1efl+5jw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=2Z2MEal57E/MTI/ujDs/dv1j64I+XQXiqIB/ndGpi1w=;
+ b=UscAtMNoK5JDlbh4x/++oyKW8pPn9ydcCFjwci5Xr8UQgRa7PdQWlk5GE6YPhqzkfyyzR2nYGo41aODVqY6fqoIg7NcitzQJz5bHIVLzfh6CZ4EMlIIOhSg1/yUGZRiRks9fM52lqiByslGWC6pVB9icj5VegOg6u1/ejlkUnEAXgEYN4osHfYajx/+CHfwAPnyBEaPQxS9+97col5E2zbZCx2nxQQfLilZpy8T0fF7s3/5Ce9MNjmh3UUPETn95dUVntoLs8FYDaltnWrEfif44eaahrSbHqyp0AQbNvpaO0rQtRn0K1qDbR6YczsnPm8uWbuqNj0RfvV4YbyKruQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=2Z2MEal57E/MTI/ujDs/dv1j64I+XQXiqIB/ndGpi1w=;
+ b=SfRyNhO8ZtNfsTdG+EpCvZAXiZwXbPtGylFPAQUbgtfUgCPGcUWIkYtYbXZdhXQDyPF890R/1oZVa4ZH+FHtE4TKKELVUzHu5iZ3su+5/Uw2cqSxWW9fqxOomjo9XbiuBXz1KBINpnpoSN3tFgjZWNO0aruIqQZXBnMSDtle7VQ7w46AW1SnIfjB9uqms9Z9PMJG3mAzkj43LJQxRRbzZizOAc3nOykkHSDdr0gNLYyah8EeE3pDXX3kubSu9OpUW0mQrZ6C3Qsu1S73ieF2afZiwreEQwt8gBYaV2VEFNh3h5aujXHfM5LmSzpUVe9D1fUVGduOca68sVu1a49NfQ==
+Received: from DB9PR04MB9426.eurprd04.prod.outlook.com (2603:10a6:10:36a::14)
+ by GV2PR04MB11685.eurprd04.prod.outlook.com (2603:10a6:150:2a7::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.18; Mon, 2 Mar
+ 2026 09:31:15 +0000
+Received: from DB9PR04MB9426.eurprd04.prod.outlook.com
+ ([fe80::9024:608b:852c:f484]) by DB9PR04MB9426.eurprd04.prod.outlook.com
+ ([fe80::9024:608b:852c:f484%6]) with mapi id 15.20.9654.020; Mon, 2 Mar 2026
+ 09:31:14 +0000
+From: Ioana Ciocoi Radulescu <ruxandra.radulescu@nxp.com>
+To: =?iso-8859-1?Q?Christian_K=F6nig?= <christian.koenig@amd.com>, Oded Gabbay
+	<ogabbay@kernel.org>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Sumit
+ Semwal <sumit.semwal@linaro.org>, Rob Herring <robh@kernel.org>, Krzysztof
+ Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Frank Li
+	<frank.li@nxp.com>
+Thread-Topic: [PATCH 7/9] accel/neutron: Add job submission IOCTL
+Thread-Index: AQHcpyWRaHKAnAfS3US/TiAeRiQXwLWVEtCAgAXsqlA=
+Date: Mon, 2 Mar 2026 09:31:14 +0000
+Message-ID: 
+ <DB9PR04MB9426D1359D0E005C8EE04505947EA@DB9PR04MB9426.eurprd04.prod.outlook.com>
+References: <20260226-neutron-v1-0-46eccb3bb50a@nxp.com>
+ <20260226-neutron-v1-7-46eccb3bb50a@nxp.com>
+ <09364420-1044-4c9b-9907-b92b06653eaf@amd.com>
+In-Reply-To: <09364420-1044-4c9b-9907-b92b06653eaf@amd.com>
+Accept-Language: en-US
 Content-Language: en-US
-From: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
-In-Reply-To: <aZ1m0wOA9EBbJr+x@lstrano-desk.jf.intel.com>
-X-Authority-Analysis: v=2.4 cv=BI++bVQG c=1 sm=1 tr=0 ts=69a55611 cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=Yq5XynenixoA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=EUspDBNiAAAA:8 a=1G5y5cYhTVX6dOpLAt0A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-GUID: uI2jZ-rGAvWu272w78j1-wM6QFJfvOom
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzAyMDA3OCBTYWx0ZWRfX6h+4TnXlhQO8
- IvbyNFeXhwLy+9RzV8CK9xPOfTUwrh4IzlKT8Yfqs6nnNIqwVL3ju5GB4+oWHDOcsNQP0EOTp1Z
- HN40X8vZsFVy+ihWDAoGsMBeBCovrvlYICdjxQP2tsmYb51d+B13pJR22XsYqWXWZjbI/LymVkf
- b7GWaLtPuBx6BGuotCrXduiyQf95Tdp5sNW8b/mdrX0Q5YindoXcXAAY/Q2Z5YMyRtHVft/37zv
- ION+xqcTZLawCK8ZIVjC4ZDx0TnmUUPLML8YKzUqDyq3BvR/Z2pjYNixfAuI703hs4V/jnFWx2L
- B7i5khUNLZssO0i+cjW9lwZEvPQg1OOJxrE5n9KmvXgse/TLv4WJM+v3CCXPAHF96cDH4+n+Fez
- SPe4arYkAukMqUoZWCe/GT32BkhhAj9N51HsxTDQ5xh7YObWXdDc0jnVoB7FRsEQhrlkIbOsb6b
- 6XAGelXboJS+Jo9EO+A==
-X-Proofpoint-ORIG-GUID: uI2jZ-rGAvWu272w78j1-wM6QFJfvOom
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-03-02_02,2026-02-27_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 clxscore=1015 lowpriorityscore=0 bulkscore=0 phishscore=0
- spamscore=0 adultscore=0 impostorscore=0 priorityscore=1501 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2602130000 definitions=main-2603020078
-X-Spamd-Bar: ------
-X-MailFrom: ekansh.gupta@oss.qualcomm.com
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DB9PR04MB9426:EE_|GV2PR04MB11685:EE_
+x-ms-office365-filtering-correlation-id: f6fda990-281f-4018-267a-08de783e7328
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: 
+ BCL:0;ARA:13230040|376014|7416014|19092799006|1800799024|366016|921020|38070700021;
+x-microsoft-antispam-message-info: 
+ 9ZaioStopPJMWl35AacocHfo34BN6t5rbI0G+DC255Iaw6WFxbNgSffMCLWzzPCXwJGk2VaBp7uWzRyw7KWsgjU5lCetNErwvhYkf9Ie8ce9bYQt9jjwAme73eaH/c+x2Kr9crZYKrDEKZUvtR6hBYGwKZUW0IEx/vFzgm/TI0Q6w6R1hhY8ZEjFNC+sf8Sqel35rCpaRhTdhtxqQQGRDtmhdfqzyUFE0L68HO0VX31aYmG+lWJlOV/J2csEbbXCKptnHNIIXPY1Ql4gxof/pDDVQ+Ct8Whp8lIkBF8RgGnEJk/BeFQ1V/oDAhygZeb3o8ptb4thlCMH08bD4Jq6O1qhAztQSWUjREE7HG7ufDIgbkMbvLWJbpQxr/R9OkWK2mPTlCG+oPpVXjxnp2a5YQLtS+v9v+2BMsfiuJxShT8WXsO5sMmrL5kWCq5EwavrYczo95N/Y5EATNqzjaDptr2e2EysZ8wDzPVy4wD6q6PjcG9X9m/AdszEqtzYNPWwFiLREcNEQHCggZGx0t8GbCqxQBm98+94LCsJq7kADfWnYfjVyV4xqTD/c/vmwQ7r+LY5gFNmYgbVwfGtHmacAbdqilNOG99cST99Q5tDImt+sSv6l9hagGjjZwUl06rF3dK0Dh4fm/Ui9N8HRCiiVqlFvVCNQ7nehjsnkBvjRacQVJE82Fe8x/OZeEX1jaslenJcbJ2+KP53p6sp0flvigKPh6riwvzpQliMiQT/lcy5k4duBc36Irqu9iit2FL6qy0m3Rnthx9yUkdn9CHbnwkrF5W5FTxbko1hF14HP7UEtzuRn6s5HxF1ELBAwcfp
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB9PR04MB9426.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(19092799006)(1800799024)(366016)(921020)(38070700021);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?iso-8859-1?Q?I+vtZikRtEmcvQcMACI8k6K//bb11FMC6LpecBH71Ahcb1fRSD2M2pgzje?=
+ =?iso-8859-1?Q?/GqaZkUtBA3S9abKH9R/H+bzLm0U35DbHxmxO1KzQ2BU2FOKvgh/mLh6WP?=
+ =?iso-8859-1?Q?QlcIp+PTPNuXFWfoMxAQG/hb8rSB2TLcbwfkeDZ/8YfU1UEaqIkoaMob0I?=
+ =?iso-8859-1?Q?BKA9W4qqHOzlQ85KVu8axyuz5OrqAsvS4RvIsCrUVuMz+FDrpJ4+EX98Bo?=
+ =?iso-8859-1?Q?Vly8R/5JIrPAvCCR/uC7rlH4KQ1L5bYzE76lzYGFAAEMY2slOpk9PDbzjQ?=
+ =?iso-8859-1?Q?GWqKbOm2zChbraXcIZZXhXxzuaKgzM1FA7Xp9t3rL1/j0yHRHc4UWlW0s1?=
+ =?iso-8859-1?Q?onIHIwK0QqFkdIhyytZRlV+6WZvFb9TDaWHd4ED/AqoneN2Ywra+jPKbfB?=
+ =?iso-8859-1?Q?SWFY0gD5rnC/vk2OHfUmQbJfhA8k41vON46ZRmBD0M1alCCrxkqUpNeaZv?=
+ =?iso-8859-1?Q?oi9f6O1ANnxjaJkHab59EMlbk3nUmIJk3v+QGtsZvAxTAsSRu5es+aMBAJ?=
+ =?iso-8859-1?Q?PANPgnlpxXcmktLY58EECbDl+SmTVTG9psVcwEbGqAm9Dxcd1tMUTYwCYx?=
+ =?iso-8859-1?Q?13yD617X9xBP5CceVK1R5AXt6HE52czoL0QGQgggUH2Yr02eflvq6sm+PB?=
+ =?iso-8859-1?Q?BXM3A3MlTT2i18jvF7mPqUtvvY/SEpkabURoeUAs4ymrpWg8+v+OEp44RK?=
+ =?iso-8859-1?Q?dxJd3X1V+rXOnIcrnasSrPx7lKJ+TO0pVXCyZ2h44bwyQv7AtGiUg8skJW?=
+ =?iso-8859-1?Q?3OkAvmtf63muPpT22+omV25vY+l2Qgh7AMowJg8eCVH/yNHWx2Zp1/r8e3?=
+ =?iso-8859-1?Q?zME1clqWco6TJ9u9bfOXxRST9BrUGTF61I92tH5VRdZTNBWxpLT/D/uaVx?=
+ =?iso-8859-1?Q?gEwqS/pR8IZHrjSxcHyT3IQElA7K3hO23cWK7VfZY/AkAIVYHiqAg+2UAm?=
+ =?iso-8859-1?Q?driVa7C0tlu+ZFnscEOPwnKOna23Q6oA1bKjwKs9UgY5Ux/kYa/iuk9Eh4?=
+ =?iso-8859-1?Q?+F0abRZgP5e8k5ho+qFpKlUgiYoLwXKOTKrOZlNPnr2CN/UK3J1cuaYrSy?=
+ =?iso-8859-1?Q?bNs48mfyit3NXwnzOfSdGUURyUExZLC2sex+YdpfH1U5Aun61MxjCWgQaE?=
+ =?iso-8859-1?Q?y2XLg/dmLLxwbfIUmAQDZWLJwq5UicRWWRjJu7DFHRXw6AFJnpC5ONhFXK?=
+ =?iso-8859-1?Q?CWC6iasKdE2exlQ+CZFaQw3S46qMgUYdpZVrYM/D+fRQrLTdswSGWSDlT0?=
+ =?iso-8859-1?Q?pBDj6bC6QEdM9lxhx1CRLBnmTzRYNSWeneZzjzUotPB2F6SZoMWWGPSaWM?=
+ =?iso-8859-1?Q?IXU2UwRzFraByBSCIL/+e6G27MLv6iC4Kp30SfcEMJT3EBTBdvKLzZpKhE?=
+ =?iso-8859-1?Q?Cs4SaFA0fp7LHttU8kwvTdlvqVKJESUz6BYNFCVM8VuWfaBtkoUruykCVB?=
+ =?iso-8859-1?Q?AU0mdCrf32wTDgvoZx3+tt591aUc/RBWuEotoIo4vPTaBGjXH/MVDOpZWe?=
+ =?iso-8859-1?Q?9LI7nv36/Rdl+WO9CFrsPouXV4G34jBUAHgQ/tQmwPIMFU6B5WH1+kR/vF?=
+ =?iso-8859-1?Q?d3p46+z6wovPi9NkcXTfYEfsdDIk87FXqntIzca9Tl0oOUhjITo4TCnrwy?=
+ =?iso-8859-1?Q?r5OtC4S23KQDUL+2OBzVsQKWJSS1nyn8+mcPr3czm25CSrPnni4Rvvy1kj?=
+ =?iso-8859-1?Q?wpvkyTTOqHZv81PPFybd7wI+ORgnjH6aSrhido5w5PlEruDykmipv+sXsx?=
+ =?iso-8859-1?Q?b4s8vr2A7gPgMxaOlozJHYdzPJn1JI48VuXdCoeNms/xoHn5QLCZCcQjm/?=
+ =?iso-8859-1?Q?EykAtIgHtw=3D=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
+MIME-Version: 1.0
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR04MB9426.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f6fda990-281f-4018-267a-08de783e7328
+X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Mar 2026 09:31:14.7456
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 04ri3rALIGnm4+yd8mwfcZokMYcr5CEnFVPAAQHiAPRzXYNc40ji1dWFqJONqS/rcFKDNOmL6PccOmBkuFqL6A2VKnRlsRZPKusfrdfdlYU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR04MB11685
+X-Spamd-Bar: -------
+X-MailFrom: ruxandra.radulescu@nxp.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: DR6MV4EL3UOA35IPPTQJP2GUPRXCMJ7D
-X-Message-ID-Hash: DR6MV4EL3UOA35IPPTQJP2GUPRXCMJ7D
-X-Mailman-Approved-At: Thu, 16 Apr 2026 16:51:22 +0000
-CC: Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, iommu@lists.linux.dev, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>, Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, Bharath Kumar <quic_bkumar@quicinc.com>, Chenna Kesava Raju <quic_chennak@quicinc.com>
+Message-ID-Hash: QPMW77SFFMSBXLV7BGM3JSIGFHKFGZXN
+X-Message-ID-Hash: QPMW77SFFMSBXLV7BGM3JSIGFHKFGZXN
+X-Mailman-Approved-At: Thu, 16 Apr 2026 16:51:23 +0000
+CC: "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>, "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>, "imx@lists.linux.dev" <imx@lists.linux.dev>, "linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, Jiwei Fu <jiwei.fu@nxp.com>, Forrest Shi <xuelin.shi@nxp.com>, Alexandru Iulian Taran <alexandru.taran@nxp.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH RFC 12/18] accel/qda: Add PRIME dma-buf import support
+Subject: [Linaro-mm-sig] Re: [PATCH 7/9] accel/neutron: Add job submission IOCTL
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DR6MV4EL3UOA35IPPTQJP2GUPRXCMJ7D/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YNDSKXOL2A3JJ4DG53LBX7EWPHV2XQW6/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-X-Spamd-Result: default: False [3.59 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[qualcomm.com : SPF not aligned (relaxed),reject];
+Content-Transfer-Encoding: quoted-printable
+X-Spamd-Result: default: False [4.09 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
+	R_DKIM_REJECT(1.00)[nxp.com:s=selector1];
 	DATE_IN_PAST(1.00)[1087];
-	R_DKIM_REJECT(1.00)[qualcomm.com:s=qcppdkim1];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_BASE64_TEXT(0.10)[];
+	DMARC_POLICY_SOFTFAIL(0.10)[nxp.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[25];
-	FREEMAIL_CC(0.00)[kernel.org,lwn.net,linuxfoundation.org,8bytes.org,arm.com,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,lists.freedesktop.org,vger.kernel.org,lists.linux.dev,lists.linaro.org,oss.qualcomm.com,quicinc.com];
-	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[23];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	DKIM_TRACE(0.00)[qualcomm.com:-];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	FROM_NEQ_ENVFROM(0.00)[ekansh.gupta@oss.qualcomm.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	GREYLIST(0.00)[pass,meta];
+	MIME_TRACE(0.00)[0:+];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	FREEMAIL_TO(0.00)[amd.com,kernel.org,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,nxp.com];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,qualcomm.com:email,oss.qualcomm.com:mid,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: 37EAE412850
+	DKIM_TRACE(0.00)[nxp.com:-];
+	NEURAL_HAM(-0.00)[-0.846];
+	FROM_NEQ_ENVFROM(0.00)[ruxandra.radulescu@nxp.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig,dt];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	REDIRECTOR_URL(0.00)[aka.ms];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[nxp.com:email,lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
+X-Rspamd-Queue-Id: AE53341285E
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-DQoNCk9uIDIvMjQvMjAyNiAyOjIyIFBNLCBNYXR0aGV3IEJyb3N0IHdyb3RlOg0KPiBPbiBUdWUs
-IEZlYiAyNCwgMjAyNiBhdCAxMjozOTowNkFNICswNTMwLCBFa2Fuc2ggR3VwdGEgd3JvdGU6DQo+
-PiBBZGQgUFJJTUUgZG1hLWJ1ZiBpbXBvcnQgc3VwcG9ydCBmb3IgUURBIEdFTSBidWZmZXIgb2Jq
-ZWN0cyBhbmQgaW50ZWdyYXRlDQo+PiBpdCB3aXRoIHRoZSBleGlzdGluZyBwZXItcHJvY2VzcyBt
-ZW1vcnkgbWFuYWdlciBhbmQgSU9NTVUgZGV2aWNlIG1vZGVsLg0KPj4NCj4+IFRoZSBpbXBsZW1l
-bnRhdGlvbiBleHRlbmRzIHFkYV9nZW1fb2JqIHRvIHJlcHJlc2VudCBpbXBvcnRlZCBkbWEtYnVm
-cywNCj4+IGluY2x1ZGluZyBkbWFfYnVmIHJlZmVyZW5jZXMsIGF0dGFjaG1lbnQgc3RhdGUsIHNj
-YXR0ZXItZ2F0aGVyIHRhYmxlcw0KPj4gYW5kIGFuIGltcG9ydGVkIERNQSBhZGRyZXNzIHVzZWQg
-Zm9yIERTUC1mYWNpbmcgYm9vay1rZWVwaW5nLiBUaGUNCj4+IHFkYV9nZW1fcHJpbWVfaW1wb3J0
-KCkgcGF0aCBoYW5kbGVzIHJlaW1wb3J0cyBvZiBidWZmZXJzIG9yaWdpbmFsbHkNCj4+IGV4cG9y
-dGVkIGJ5IFFEQSBhcyB3ZWxsIGFzIGltcG9ydHMgb2YgZXh0ZXJuYWwgZG1hLWJ1ZnMsIGF0dGFj
-aGluZyB0aGVtDQo+PiB0byB0aGUgYXNzaWduZWQgSU9NTVUgZGV2aWNlIGFuZCBtYXBwaW5nIHRo
-ZW0gdGhyb3VnaCB0aGUgbWVtb3J5IG1hbmFnZXINCj4+IGZvciBEU1AgYWNjZXNzLiBUaGUgR0VN
-IGZyZWUgcGF0aCBpcyB1cGRhdGVkIHRvIHVubWFwIGFuZCBkZXRhY2gNCj4+IGltcG9ydGVkIGJ1
-ZmZlcnMgd2hpbGUgcHJlc2VydmluZyB0aGUgZXhpc3RpbmcgYmVoYXZpb3VyIGZvciBsb2NhbGx5
-DQo+PiBhbGxvY2F0ZWQgbWVtb3J5Lg0KPj4NCj4+IFRoZSBQUklNRSBmZC10by1oYW5kbGUgcGF0
-aCBpcyBpbXBsZW1lbnRlZCBpbiBxZGFfcHJpbWVfZmRfdG9faGFuZGxlKCksDQo+PiB3aGljaCBy
-ZWNvcmRzIHRoZSBjYWxsaW5nIGRybV9maWxlIGluIGEgZHJpdmVyLXByaXZhdGUgaW1wb3J0IGNv
-bnRleHQNCj4+IGJlZm9yZSBpbnZva2luZyB0aGUgY29yZSBEUk0gaGVscGVycy4gVGhlIEdFTSBp
-bXBvcnQgY2FsbGJhY2sgcmV0cmlldmVzDQo+PiB0aGlzIGNvbnRleHQgdG8gZW5zdXJlIHRoYXQg
-YW4gSU9NTVUgZGV2aWNlIGlzIGFzc2lnbmVkIHRvIHRoZSBwcm9jZXNzDQo+PiBhbmQgdGhhdCBp
-bXBvcnRlZCBidWZmZXJzIGZvbGxvdyB0aGUgc2FtZSBwZXItcHJvY2VzcyBJT01NVSBzZWxlY3Rp
-b24NCj4+IHJ1bGVzIGFzIG5hdGl2ZWx5IGFsbG9jYXRlZCBHRU0gb2JqZWN0cy4NCj4+DQo+PiBU
-aGlzIHBhdGNoIHByZXBhcmVzIHRoZSBkcml2ZXIgZm9yIGludGVyb3BlcmFibGUgYnVmZmVyIHNo
-YXJpbmcgYmV0d2Vlbg0KPj4gUURBIGFuZCBvdGhlciBkbWEtYnVmIGNhcGFibGUgc3Vic3lzdGVt
-cyB3aGlsZSBrZWVwaW5nIElPTU1VIG1hcHBpbmcgYW5kDQo+PiBsaWZldGltZSBoYW5kbGluZyBj
-b25zaXN0ZW50IHdpdGggdGhlIGV4aXN0aW5nIEdFTSBhbGxvY2F0aW9uIGZsb3cuDQo+Pg0KPj4g
-U2lnbmVkLW9mZi1ieTogRWthbnNoIEd1cHRhIDxla2Fuc2guZ3VwdGFAb3NzLnF1YWxjb21tLmNv
-bT4NCj4+IC0tLQ0KPj4gIGRyaXZlcnMvYWNjZWwvcWRhL01ha2VmaWxlICAgICAgICAgICAgIHwg
-ICAxICsNCj4+ICBkcml2ZXJzL2FjY2VsL3FkYS9xZGFfZHJ2LmMgICAgICAgICAgICB8ICAgOCAr
-Kw0KPj4gIGRyaXZlcnMvYWNjZWwvcWRhL3FkYV9kcnYuaCAgICAgICAgICAgIHwgICA0ICsNCj4+
-ICBkcml2ZXJzL2FjY2VsL3FkYS9xZGFfZ2VtLmMgICAgICAgICAgICB8ICA2MCArKysrKysrLS0t
-DQo+PiAgZHJpdmVycy9hY2NlbC9xZGEvcWRhX2dlbS5oICAgICAgICAgICAgfCAgMTAgKysNCj4+
-ICBkcml2ZXJzL2FjY2VsL3FkYS9xZGFfaW9jdGwuYyAgICAgICAgICB8ICAgNyArKw0KPj4gIGRy
-aXZlcnMvYWNjZWwvcWRhL3FkYV9pb2N0bC5oICAgICAgICAgIHwgIDE1ICsrKw0KPj4gIGRyaXZl
-cnMvYWNjZWwvcWRhL3FkYV9tZW1vcnlfbWFuYWdlci5jIHwgIDQyICsrKysrKy0NCj4+ICBkcml2
-ZXJzL2FjY2VsL3FkYS9xZGFfbWVtb3J5X21hbmFnZXIuaCB8ICAxNCArKysNCj4+ICBkcml2ZXJz
-L2FjY2VsL3FkYS9xZGFfcHJpbWUuYyAgICAgICAgICB8IDE5NCArKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKysrKysNCj4+ICBkcml2ZXJzL2FjY2VsL3FkYS9xZGFfcHJpbWUuaCAgICAgICAg
-ICB8ICA0MyArKysrKysrKw0KPj4gIDExIGZpbGVzIGNoYW5nZWQsIDM3NyBpbnNlcnRpb25zKCsp
-LCAyMSBkZWxldGlvbnMoLSkNCj4+DQo+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9hY2NlbC9xZGEv
-TWFrZWZpbGUgYi9kcml2ZXJzL2FjY2VsL3FkYS9NYWtlZmlsZQ0KPj4gaW5kZXggODhjMzI0ZmEz
-ODJjLi44Mjg2ZjUyNzk3NDggMTAwNjQ0DQo+PiAtLS0gYS9kcml2ZXJzL2FjY2VsL3FkYS9NYWtl
-ZmlsZQ0KPj4gKysrIGIvZHJpdmVycy9hY2NlbC9xZGEvTWFrZWZpbGUNCj4+IEBAIC0xMyw1ICsx
-Myw2IEBAIHFkYS15IDo9IFwNCj4+ICAJcWRhX2lvY3RsLm8gXA0KPj4gIAlxZGFfZ2VtLm8gXA0K
-Pj4gIAlxZGFfbWVtb3J5X2RtYS5vIFwNCj4+ICsJcWRhX3ByaW1lLm8gXA0KPj4gIA0KPj4gIG9i
-ai0kKENPTkZJR19EUk1fQUNDRUxfUURBX0NPTVBVVEVfQlVTKSArPSBxZGFfY29tcHV0ZV9idXMu
-bw0KPj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvYWNjZWwvcWRhL3FkYV9kcnYuYyBiL2RyaXZlcnMv
-YWNjZWwvcWRhL3FkYV9kcnYuYw0KPj4gaW5kZXggMGRkMGUyYmIyYzBmLi40YWRlZTAwYjFmMmMg
-MTAwNjQ0DQo+PiAtLS0gYS9kcml2ZXJzL2FjY2VsL3FkYS9xZGFfZHJ2LmMNCj4+ICsrKyBiL2Ry
-aXZlcnMvYWNjZWwvcWRhL3FkYV9kcnYuYw0KPj4gQEAgLTEwLDkgKzEwLDExIEBADQo+PiAgI2lu
-Y2x1ZGUgPGRybS9kcm1fZ2VtLmg+DQo+PiAgI2luY2x1ZGUgPGRybS9kcm1faW9jdGwuaD4NCj4+
-ICAjaW5jbHVkZSA8ZHJtL3FkYV9hY2NlbC5oPg0KPj4gKyNpbmNsdWRlIDxkcm0vZHJtX3ByaW1l
-Lmg+DQo+PiAgDQo+PiAgI2luY2x1ZGUgInFkYV9kcnYuaCINCj4+ICAjaW5jbHVkZSAicWRhX2dl
-bS5oIg0KPj4gKyNpbmNsdWRlICJxZGFfcHJpbWUuaCINCj4+ICAjaW5jbHVkZSAicWRhX2lvY3Rs
-LmgiDQo+PiAgI2luY2x1ZGUgInFkYV9ycG1zZy5oIg0KPj4gIA0KPj4gQEAgLTE2Niw2ICsxNjgs
-OCBAQCBzdGF0aWMgc3RydWN0IGRybV9kcml2ZXIgcWRhX2RybV9kcml2ZXIgPSB7DQo+PiAgCS5w
-b3N0Y2xvc2UJCT0gcWRhX3Bvc3RjbG9zZSwNCj4+ICAJLmlvY3RscyA9IHFkYV9pb2N0bHMsDQo+
-PiAgCS5udW1faW9jdGxzID0gQVJSQVlfU0laRShxZGFfaW9jdGxzKSwNCj4+ICsJLmdlbV9wcmlt
-ZV9pbXBvcnQgPSBxZGFfZ2VtX3ByaW1lX2ltcG9ydCwNCj4+ICsJLnByaW1lX2ZkX3RvX2hhbmRs
-ZSA9IHFkYV9pb2N0bF9wcmltZV9mZF90b19oYW5kbGUsDQo+PiAgCS5uYW1lID0gRFJJVkVSX05B
-TUUsDQo+PiAgCS5kZXNjID0gIlF1YWxjb21tIERTUCBBY2NlbGVyYXRvciBEcml2ZXIiLA0KPj4g
-IH07DQo+PiBAQCAtMTc0LDYgKzE3OCw3IEBAIHN0YXRpYyB2b2lkIGNsZWFudXBfZHJtX3ByaXZh
-dGUoc3RydWN0IHFkYV9kZXYgKnFkZXYpDQo+PiAgew0KPj4gIAlpZiAocWRldi0+ZHJtX3ByaXYp
-IHsNCj4+ICAJCXFkYV9kYmcocWRldiwgIkNsZWFuaW5nIHVwIERSTSBwcml2YXRlIGRhdGFcbiIp
-Ow0KPj4gKwkJbXV0ZXhfZGVzdHJveSgmcWRldi0+ZHJtX3ByaXYtPmltcG9ydF9sb2NrKTsNCj4+
-ICAJCWtmcmVlKHFkZXYtPmRybV9wcml2KTsNCj4+ICAJfQ0KPj4gIH0NCj4+IEBAIC0yNDAsNiAr
-MjQ1LDkgQEAgc3RhdGljIGludCBpbml0X2RybV9wcml2YXRlKHN0cnVjdCBxZGFfZGV2ICpxZGV2
-KQ0KPj4gIAlpZiAoIXFkZXYtPmRybV9wcml2KQ0KPj4gIAkJcmV0dXJuIC1FTk9NRU07DQo+PiAg
-DQo+PiArCW11dGV4X2luaXQoJnFkZXYtPmRybV9wcml2LT5pbXBvcnRfbG9jayk7DQo+PiArCXFk
-ZXYtPmRybV9wcml2LT5jdXJyZW50X2ltcG9ydF9maWxlX3ByaXYgPSBOVUxMOw0KPj4gKw0KPj4g
-IAlxZGFfZGJnKHFkZXYsICJEUk0gcHJpdmF0ZSBkYXRhIGluaXRpYWxpemVkIHN1Y2Nlc3NmdWxs
-eVxuIik7DQo+PiAgCXJldHVybiAwOw0KPj4gIH0NCj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2Fj
-Y2VsL3FkYS9xZGFfZHJ2LmggYi9kcml2ZXJzL2FjY2VsL3FkYS9xZGFfZHJ2LmgNCj4+IGluZGV4
-IDhhMmNkNDc0OTU4Yi4uYmIwZGQ3ZTI4NGM2IDEwMDY0NA0KPj4gLS0tIGEvZHJpdmVycy9hY2Nl
-bC9xZGEvcWRhX2Rydi5oDQo+PiArKysgYi9kcml2ZXJzL2FjY2VsL3FkYS9xZGFfZHJ2LmgNCj4+
-IEBAIC02NCw2ICs2NCwxMCBAQCBzdHJ1Y3QgcWRhX2RybV9wcml2IHsNCj4+ICAJc3RydWN0IHFk
-YV9tZW1vcnlfbWFuYWdlciAqaW9tbXVfbWdyOw0KPj4gIAkvKiBCYWNrLXBvaW50ZXIgdG8gcWRh
-X2RldiAqLw0KPj4gIAlzdHJ1Y3QgcWRhX2RldiAqcWRldjsNCj4+ICsJLyogTG9jayBwcm90ZWN0
-aW5nIGltcG9ydCBjb250ZXh0ICovDQo+PiArCXN0cnVjdCBtdXRleCBpbXBvcnRfbG9jazsNCj4+
-ICsJLyogQ3VycmVudCBmaWxlX3ByaXYgZHVyaW5nIHByaW1lIGltcG9ydCAqLw0KPj4gKwlzdHJ1
-Y3QgZHJtX2ZpbGUgKmN1cnJlbnRfaW1wb3J0X2ZpbGVfcHJpdjsNCj4+ICB9Ow0KPj4gIA0KPj4g
-IC8qIHN0cnVjdCBxZGFfZGV2IC0gTWFpbiBkZXZpY2Ugc3RydWN0dXJlIGZvciBRREEgZHJpdmVy
-ICovDQo+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9hY2NlbC9xZGEvcWRhX2dlbS5jIGIvZHJpdmVy
-cy9hY2NlbC9xZGEvcWRhX2dlbS5jDQo+PiBpbmRleCBiYmQ1NGUyNTAyZDMuLjM3Mjc5ZThiNDZm
-ZSAxMDA2NDQNCj4+IC0tLSBhL2RyaXZlcnMvYWNjZWwvcWRhL3FkYV9nZW0uYw0KPj4gKysrIGIv
-ZHJpdmVycy9hY2NlbC9xZGEvcWRhX2dlbS5jDQo+PiBAQCAtOCw2ICs4LDcgQEANCj4+ICAjaW5j
-bHVkZSAicWRhX2dlbS5oIg0KPj4gICNpbmNsdWRlICJxZGFfbWVtb3J5X21hbmFnZXIuaCINCj4+
-ICAjaW5jbHVkZSAicWRhX21lbW9yeV9kbWEuaCINCj4+ICsjaW5jbHVkZSAicWRhX3ByaW1lLmgi
-DQo+PiAgDQo+PiAgc3RhdGljIGludCB2YWxpZGF0ZV9nZW1fb2JqX2Zvcl9tbWFwKHN0cnVjdCBx
-ZGFfZ2VtX29iaiAqcWRhX2dlbV9vYmopDQo+PiAgew0KPj4gQEAgLTE1LDIzICsxNiwyOSBAQCBz
-dGF0aWMgaW50IHZhbGlkYXRlX2dlbV9vYmpfZm9yX21tYXAoc3RydWN0IHFkYV9nZW1fb2JqICpx
-ZGFfZ2VtX29iaikNCj4+ICAJCXFkYV9lcnIoTlVMTCwgIkludmFsaWQgR0VNIG9iamVjdCBzaXpl
-XG4iKTsNCj4+ICAJCXJldHVybiAtRUlOVkFMOw0KPj4gIAl9DQo+PiAtCWlmICghcWRhX2dlbV9v
-YmotPmlvbW11X2RldiB8fCAhcWRhX2dlbV9vYmotPmlvbW11X2Rldi0+ZGV2KSB7DQo+PiAtCQlx
-ZGFfZXJyKE5VTEwsICJBbGxvY2F0ZWQgYnVmZmVyIG1pc3NpbmcgSU9NTVUgZGV2aWNlXG4iKTsN
-Cj4+IC0JCXJldHVybiAtRUlOVkFMOw0KPj4gLQl9DQo+PiAtCWlmICghcWRhX2dlbV9vYmotPmlv
-bW11X2Rldi0+ZGV2KSB7DQo+PiAtCQlxZGFfZXJyKE5VTEwsICJBbGxvY2F0ZWQgYnVmZmVyIG1p
-c3NpbmcgSU9NTVUgZGV2aWNlXG4iKTsNCj4+IC0JCXJldHVybiAtRUlOVkFMOw0KPj4gLQl9DQo+
-PiAtCWlmICghcWRhX2dlbV9vYmotPnZpcnQpIHsNCj4+IC0JCXFkYV9lcnIoTlVMTCwgIkFsbG9j
-YXRlZCBidWZmZXIgbWlzc2luZyB2aXJ0dWFsIGFkZHJlc3NcbiIpOw0KPj4gLQkJcmV0dXJuIC1F
-SU5WQUw7DQo+PiAtCX0NCj4+IC0JaWYgKHFkYV9nZW1fb2JqLT5kbWFfYWRkciA9PSAwKSB7DQo+
-PiAtCQlxZGFfZXJyKE5VTEwsICJBbGxvY2F0ZWQgYnVmZmVyIG1pc3NpbmcgRE1BIGFkZHJlc3Nc
-biIpOw0KPj4gLQkJcmV0dXJuIC1FSU5WQUw7DQo+PiArCWlmIChxZGFfZ2VtX29iai0+aXNfaW1w
-b3J0ZWQpIHsNCj4+ICsJCWlmICghcWRhX2dlbV9vYmotPnNndCkgew0KPj4gKwkJCXFkYV9lcnIo
-TlVMTCwgIkltcG9ydGVkIGJ1ZmZlciBtaXNzaW5nIHNndFxuIik7DQo+PiArCQkJcmV0dXJuIC1F
-SU5WQUw7DQo+PiArCQl9DQo+PiArCQlpZiAoIXFkYV9nZW1fb2JqLT5pb21tdV9kZXYgfHwgIXFk
-YV9nZW1fb2JqLT5pb21tdV9kZXYtPmRldikgew0KPj4gKwkJCXFkYV9lcnIoTlVMTCwgIkltcG9y
-dGVkIGJ1ZmZlciBtaXNzaW5nIElPTU1VIGRldmljZVxuIik7DQo+PiArCQkJcmV0dXJuIC1FSU5W
-QUw7DQo+PiArCQl9DQo+PiArCX0gZWxzZSB7DQo+PiArCQlpZiAoIXFkYV9nZW1fb2JqLT5pb21t
-dV9kZXYgfHwgIXFkYV9nZW1fb2JqLT5pb21tdV9kZXYtPmRldikgew0KPj4gKwkJCXFkYV9lcnIo
-TlVMTCwgIkFsbG9jYXRlZCBidWZmZXIgbWlzc2luZyBJT01NVSBkZXZpY2VcbiIpOw0KPj4gKwkJ
-CXJldHVybiAtRUlOVkFMOw0KPj4gKwkJfQ0KPj4gKwkJaWYgKCFxZGFfZ2VtX29iai0+dmlydCkg
-ew0KPj4gKwkJCXFkYV9lcnIoTlVMTCwgIkFsbG9jYXRlZCBidWZmZXIgbWlzc2luZyB2aXJ0dWFs
-IGFkZHJlc3NcbiIpOw0KPj4gKwkJCXJldHVybiAtRUlOVkFMOw0KPj4gKwkJfQ0KPj4gKwkJaWYg
-KHFkYV9nZW1fb2JqLT5kbWFfYWRkciA9PSAwKSB7DQo+PiArCQkJcWRhX2VycihOVUxMLCAiQWxs
-b2NhdGVkIGJ1ZmZlciBtaXNzaW5nIERNQSBhZGRyZXNzXG4iKTsNCj4+ICsJCQlyZXR1cm4gLUVJ
-TlZBTDsNCj4+ICsJCX0NCj4+ICAJfQ0KPj4gLQ0KPj4gIAlyZXR1cm4gMDsNCj4+ICB9DQo+PiAg
-DQo+PiBAQCAtNjAsOSArNjcsMjEgQEAgdm9pZCBxZGFfZ2VtX2ZyZWVfb2JqZWN0KHN0cnVjdCBk
-cm1fZ2VtX29iamVjdCAqZ2VtX29iaikNCj4+ICAJc3RydWN0IHFkYV9nZW1fb2JqICpxZGFfZ2Vt
-X29iaiA9IHRvX3FkYV9nZW1fb2JqKGdlbV9vYmopOw0KPj4gIAlzdHJ1Y3QgcWRhX2RybV9wcml2
-ICpkcm1fcHJpdiA9IGdldF9kcm1fcHJpdl9mcm9tX2RldmljZShnZW1fb2JqLT5kZXYpOw0KPj4g
-IA0KPj4gLQlpZiAocWRhX2dlbV9vYmotPnZpcnQpIHsNCj4+IC0JCWlmIChkcm1fcHJpdiAmJiBk
-cm1fcHJpdi0+aW9tbXVfbWdyKQ0KPj4gKwlpZiAocWRhX2dlbV9vYmotPmlzX2ltcG9ydGVkKSB7
-DQo+PiArCQlpZiAocWRhX2dlbV9vYmotPmF0dGFjaG1lbnQgJiYgcWRhX2dlbV9vYmotPnNndCkN
-Cj4+ICsJCQlkbWFfYnVmX3VubWFwX2F0dGFjaG1lbnRfdW5sb2NrZWQocWRhX2dlbV9vYmotPmF0
-dGFjaG1lbnQsDQo+PiArCQkJCQkJCSAgcWRhX2dlbV9vYmotPnNndCwgRE1BX0JJRElSRUNUSU9O
-QUwpOw0KPj4gKwkJaWYgKHFkYV9nZW1fb2JqLT5hdHRhY2htZW50KQ0KPj4gKwkJCWRtYV9idWZf
-ZGV0YWNoKHFkYV9nZW1fb2JqLT5kbWFfYnVmLCBxZGFfZ2VtX29iai0+YXR0YWNobWVudCk7DQo+
-PiArCQlpZiAocWRhX2dlbV9vYmotPmRtYV9idWYpDQo+PiArCQkJZG1hX2J1Zl9wdXQocWRhX2dl
-bV9vYmotPmRtYV9idWYpOw0KPj4gKwkJaWYgKHFkYV9nZW1fb2JqLT5pb21tdV9kZXYgJiYgZHJt
-X3ByaXYgJiYgZHJtX3ByaXYtPmlvbW11X21ncikNCj4+ICAJCQlxZGFfbWVtb3J5X21hbmFnZXJf
-ZnJlZShkcm1fcHJpdi0+aW9tbXVfbWdyLCBxZGFfZ2VtX29iaik7DQo+PiArCX0gZWxzZSB7DQo+
-PiArCQlpZiAocWRhX2dlbV9vYmotPnZpcnQpIHsNCj4+ICsJCQlpZiAoZHJtX3ByaXYgJiYgZHJt
-X3ByaXYtPmlvbW11X21ncikNCj4+ICsJCQkJcWRhX21lbW9yeV9tYW5hZ2VyX2ZyZWUoZHJtX3By
-aXYtPmlvbW11X21nciwgcWRhX2dlbV9vYmopOw0KPj4gKwkJfQ0KPj4gIAl9DQo+PiAgDQo+PiAg
-CWRybV9nZW1fb2JqZWN0X3JlbGVhc2UoZ2VtX29iaik7DQo+PiBAQCAtMTc0LDYgKzE5MywxMSBA
-QCBzdHJ1Y3QgZHJtX2dlbV9vYmplY3QgKnFkYV9nZW1fY3JlYXRlX29iamVjdChzdHJ1Y3QgZHJt
-X2RldmljZSAqZHJtX2RldiwNCj4+ICAJcWRhX2dlbV9vYmogPSBxZGFfZ2VtX2FsbG9jX29iamVj
-dChkcm1fZGV2LCBhbGlnbmVkX3NpemUpOw0KPj4gIAlpZiAoSVNfRVJSKHFkYV9nZW1fb2JqKSkN
-Cj4+ICAJCXJldHVybiAoc3RydWN0IGRybV9nZW1fb2JqZWN0ICopcWRhX2dlbV9vYmo7DQo+PiAr
-CXFkYV9nZW1fb2JqLT5pc19pbXBvcnRlZCA9IGZhbHNlOw0KPj4gKwlxZGFfZ2VtX29iai0+ZG1h
-X2J1ZiA9IE5VTEw7DQo+PiArCXFkYV9nZW1fb2JqLT5hdHRhY2htZW50ID0gTlVMTDsNCj4+ICsJ
-cWRhX2dlbV9vYmotPnNndCA9IE5VTEw7DQo+PiArCXFkYV9nZW1fb2JqLT5pbXBvcnRlZF9kbWFf
-YWRkciA9IDA7DQo+PiAgDQo+PiAgCXJldCA9IHFkYV9tZW1vcnlfbWFuYWdlcl9hbGxvYyhpb21t
-dV9tZ3IsIHFkYV9nZW1fb2JqLCBmaWxlX3ByaXYpOw0KPj4gIAlpZiAocmV0KSB7DQo+PiBkaWZm
-IC0tZ2l0IGEvZHJpdmVycy9hY2NlbC9xZGEvcWRhX2dlbS5oIGIvZHJpdmVycy9hY2NlbC9xZGEv
-cWRhX2dlbS5oDQo+PiBpbmRleCBjYmQ1ZDBhNThmYTQuLjM1NjZjNWIyYWQ4OCAxMDA2NDQNCj4+
-IC0tLSBhL2RyaXZlcnMvYWNjZWwvcWRhL3FkYV9nZW0uaA0KPj4gKysrIGIvZHJpdmVycy9hY2Nl
-bC9xZGEvcWRhX2dlbS5oDQo+PiBAQCAtMzEsNiArMzEsMTYgQEAgc3RydWN0IHFkYV9nZW1fb2Jq
-IHsNCj4+ICAJc2l6ZV90IHNpemU7DQo+PiAgCS8qIElPTU1VIGRldmljZSB0aGF0IHBlcmZvcm1l
-ZCB0aGUgYWxsb2NhdGlvbiAqLw0KPj4gIAlzdHJ1Y3QgcWRhX2lvbW11X2RldmljZSAqaW9tbXVf
-ZGV2Ow0KPj4gKwkvKiBUcnVlIGlmIGJ1ZmZlciBpcyBpbXBvcnRlZCwgZmFsc2UgaWYgYWxsb2Nh
-dGVkICovDQo+PiArCWJvb2wgaXNfaW1wb3J0ZWQ7DQo+PiArCS8qIFJlZmVyZW5jZSB0byBpbXBv
-cnRlZCBkbWFfYnVmICovDQo+PiArCXN0cnVjdCBkbWFfYnVmICpkbWFfYnVmOw0KPj4gKwkvKiBE
-TUEgYnVmIGF0dGFjaG1lbnQgKi8NCj4+ICsJc3RydWN0IGRtYV9idWZfYXR0YWNobWVudCAqYXR0
-YWNobWVudDsNCj4+ICsJLyogU2NhdHRlci1nYXRoZXIgdGFibGUgKi8NCj4+ICsJc3RydWN0IHNn
-X3RhYmxlICpzZ3Q7DQo+PiArCS8qIERNQSBhZGRyZXNzIG9mIGltcG9ydGVkIGJ1ZmZlciAqLw0K
-Pj4gKwlkbWFfYWRkcl90IGltcG9ydGVkX2RtYV9hZGRyOw0KPj4gIH07DQo+PiAgDQo+PiAgLyoN
-Cj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2FjY2VsL3FkYS9xZGFfaW9jdGwuYyBiL2RyaXZlcnMv
-YWNjZWwvcWRhL3FkYV9pb2N0bC5jDQo+PiBpbmRleCBlZjNjOWM2OTFjYjcuLmQ5MTk4MzA0OGQ2
-YyAxMDA2NDQNCj4+IC0tLSBhL2RyaXZlcnMvYWNjZWwvcWRhL3FkYV9pb2N0bC5jDQo+PiArKysg
-Yi9kcml2ZXJzL2FjY2VsL3FkYS9xZGFfaW9jdGwuYw0KPj4gQEAgLTUsNiArNSw3IEBADQo+PiAg
-I2luY2x1ZGUgPGRybS9xZGFfYWNjZWwuaD4NCj4+ICAjaW5jbHVkZSAicWRhX2Rydi5oIg0KPj4g
-ICNpbmNsdWRlICJxZGFfaW9jdGwuaCINCj4+ICsjaW5jbHVkZSAicWRhX3ByaW1lLmgiDQo+PiAg
-DQo+PiAgc3RhdGljIGludCBxZGFfdmFsaWRhdGVfYW5kX2dldF9jb250ZXh0KHN0cnVjdCBkcm1f
-ZGV2aWNlICpkZXYsIHN0cnVjdCBkcm1fZmlsZSAqZmlsZV9wcml2LA0KPj4gIAkJCQkJc3RydWN0
-IHFkYV9kZXYgKipxZGV2LCBzdHJ1Y3QgcWRhX3VzZXIgKipxZGFfdXNlcikNCj4+IEBAIC03OCwz
-ICs3OSw5IEBAIGludCBxZGFfaW9jdGxfZ2VtX21tYXBfb2Zmc2V0KHN0cnVjdCBkcm1fZGV2aWNl
-ICpkZXYsIHZvaWQgKmRhdGEsIHN0cnVjdCBkcm1fZmlsDQo+PiAgCWRybV9nZW1fb2JqZWN0X3B1
-dChnZW1fb2JqKTsNCj4+ICAJcmV0dXJuIHJldDsNCj4+ICB9DQo+PiArDQo+PiAraW50IHFkYV9p
-b2N0bF9wcmltZV9mZF90b19oYW5kbGUoc3RydWN0IGRybV9kZXZpY2UgKmRldiwgc3RydWN0IGRy
-bV9maWxlICpmaWxlX3ByaXYsIGludCBwcmltZV9mZCwNCj4+ICsJCQkJIHUzMiAqaGFuZGxlKQ0K
-Pj4gK3sNCj4+ICsJcmV0dXJuIHFkYV9wcmltZV9mZF90b19oYW5kbGUoZGV2LCBmaWxlX3ByaXYs
-IHByaW1lX2ZkLCBoYW5kbGUpOw0KPj4gK30NCj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2FjY2Vs
-L3FkYS9xZGFfaW9jdGwuaCBiL2RyaXZlcnMvYWNjZWwvcWRhL3FkYV9pb2N0bC5oDQo+PiBpbmRl
-eCA2YmYzYmNkMjhjMGUuLmQ0NTQyNTZmNWZjNSAxMDA2NDQNCj4+IC0tLSBhL2RyaXZlcnMvYWNj
-ZWwvcWRhL3FkYV9pb2N0bC5oDQo+PiArKysgYi9kcml2ZXJzL2FjY2VsL3FkYS9xZGFfaW9jdGwu
-aA0KPj4gQEAgLTIzLDQgKzIzLDE5IEBADQo+PiAgICovDQo+PiAgaW50IHFkYV9pb2N0bF9xdWVy
-eShzdHJ1Y3QgZHJtX2RldmljZSAqZGV2LCB2b2lkICpkYXRhLCBzdHJ1Y3QgZHJtX2ZpbGUgKmZp
-bGVfcHJpdik7DQo+PiAgDQo+PiArLyoqDQo+PiArICogcWRhX2lvY3RsX3ByaW1lX2ZkX3RvX2hh
-bmRsZSAtIElPQ1RMIGhhbmRsZXIgZm9yIFBSSU1FIEZEIHRvIGhhbmRsZSBjb252ZXJzaW9uDQo+
-PiArICogQGRldjogRFJNIGRldmljZSBzdHJ1Y3R1cmUNCj4+ICsgKiBAZmlsZV9wcml2OiBEUk0g
-ZmlsZSBwcml2YXRlIGRhdGENCj4+ICsgKiBAcHJpbWVfZmQ6IEZpbGUgZGVzY3JpcHRvciBvZiB0
-aGUgUFJJTUUgYnVmZmVyDQo+PiArICogQGhhbmRsZTogT3V0cHV0IHBhcmFtZXRlciBmb3IgdGhl
-IEdFTSBoYW5kbGUNCj4+ICsgKg0KPj4gKyAqIFRoaXMgSU9DVEwgaGFuZGxlciBjb252ZXJ0cyBh
-IFBSSU1FIGZpbGUgZGVzY3JpcHRvciB0byBhIEdFTSBoYW5kbGUuDQo+PiArICogSXQgc2VydmVz
-IGFzIGJvdGggdGhlIERSTSBkcml2ZXIgY2FsbGJhY2sgYW5kIGNhbiBiZSB1c2VkIGRpcmVjdGx5
-Lg0KPj4gKyAqDQo+PiArICogUmV0dXJuOiAwIG9uIHN1Y2Nlc3MsIG5lZ2F0aXZlIGVycm9yIGNv
-ZGUgb24gZmFpbHVyZQ0KPj4gKyAqLw0KPj4gK2ludCBxZGFfaW9jdGxfcHJpbWVfZmRfdG9faGFu
-ZGxlKHN0cnVjdCBkcm1fZGV2aWNlICpkZXYsIHN0cnVjdCBkcm1fZmlsZSAqZmlsZV9wcml2LA0K
-Pj4gKwkJCQkgaW50IHByaW1lX2ZkLCB1MzIgKmhhbmRsZSk7DQo+PiArDQo+PiAgI2VuZGlmIC8q
-IF9RREFfSU9DVExfSCAqLw0KPj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvYWNjZWwvcWRhL3FkYV9t
-ZW1vcnlfbWFuYWdlci5jIGIvZHJpdmVycy9hY2NlbC9xZGEvcWRhX21lbW9yeV9tYW5hZ2VyLmMN
-Cj4+IGluZGV4IGUyMjU2Njc1NTdlZS4uM2ZkMjBmMTdjNTdiIDEwMDY0NA0KPj4gLS0tIGEvZHJp
-dmVycy9hY2NlbC9xZGEvcWRhX21lbW9yeV9tYW5hZ2VyLmMNCj4+ICsrKyBiL2RyaXZlcnMvYWNj
-ZWwvcWRhL3FkYV9tZW1vcnlfbWFuYWdlci5jDQo+PiBAQCAtMTU0LDggKzE1NCw4IEBAIHN0YXRp
-YyBzdHJ1Y3QgcWRhX2lvbW11X2RldmljZSAqZ2V0X3Byb2Nlc3NfaW9tbXVfZGV2aWNlKHN0cnVj
-dCBxZGFfbWVtb3J5X21hbmFnDQo+PiAgCXJldHVybiBxZGFfcHJpdi0+YXNzaWduZWRfaW9tbXVf
-ZGV2Ow0KPj4gIH0NCj4+ICANCj4+IC1zdGF0aWMgaW50IHFkYV9tZW1vcnlfbWFuYWdlcl9hc3Np
-Z25fZGV2aWNlKHN0cnVjdCBxZGFfbWVtb3J5X21hbmFnZXIgKm1lbV9tZ3IsDQo+PiAtCQkJCQkg
-ICAgc3RydWN0IGRybV9maWxlICpmaWxlX3ByaXYpDQo+PiAraW50IHFkYV9tZW1vcnlfbWFuYWdl
-cl9hc3NpZ25fZGV2aWNlKHN0cnVjdCBxZGFfbWVtb3J5X21hbmFnZXIgKm1lbV9tZ3IsDQo+PiAr
-CQkJCSAgICAgc3RydWN0IGRybV9maWxlICpmaWxlX3ByaXYpDQo+PiAgew0KPj4gIAlzdHJ1Y3Qg
-cWRhX2ZpbGVfcHJpdiAqcWRhX3ByaXY7DQo+PiAgCXN0cnVjdCBxZGFfaW9tbXVfZGV2aWNlICpz
-ZWxlY3RlZF9kZXYgPSBOVUxMOw0KPj4gQEAgLTIyMyw2ICsyMjMsMzUgQEAgc3RhdGljIHN0cnVj
-dCBxZGFfaW9tbXVfZGV2aWNlICpnZXRfb3JfYXNzaWduX2lvbW11X2RldmljZShzdHJ1Y3QgcWRh
-X21lbW9yeV9tYW4NCj4+ICAJcmV0dXJuIE5VTEw7DQo+PiAgfQ0KPj4gIA0KPj4gK3N0YXRpYyBp
-bnQgcWRhX21lbW9yeV9tYW5hZ2VyX21hcF9pbXBvcnRlZChzdHJ1Y3QgcWRhX21lbW9yeV9tYW5h
-Z2VyICptZW1fbWdyLA0KPj4gKwkJCQkJICAgc3RydWN0IHFkYV9nZW1fb2JqICpnZW1fb2JqLA0K
-Pj4gKwkJCQkJICAgc3RydWN0IHFkYV9pb21tdV9kZXZpY2UgKmlvbW11X2RldikNCj4+ICt7DQo+
-PiArCXN0cnVjdCBzY2F0dGVybGlzdCAqc2c7DQo+PiArCWRtYV9hZGRyX3QgZG1hX2FkZHI7DQo+
-PiArCWludCByZXQgPSAwOw0KPj4gKw0KPj4gKwlpZiAoIWdlbV9vYmotPmlzX2ltcG9ydGVkIHx8
-ICFnZW1fb2JqLT5zZ3QgfHwgIWlvbW11X2Rldikgew0KPj4gKwkJcWRhX2VycihOVUxMLCAiSW52
-YWxpZCBwYXJhbWV0ZXJzIGZvciBpbXBvcnRlZCBidWZmZXIgbWFwcGluZ1xuIik7DQo+PiArCQly
-ZXR1cm4gLUVJTlZBTDsNCj4+ICsJfQ0KPj4gKw0KPj4gKwlnZW1fb2JqLT5pb21tdV9kZXYgPSBp
-b21tdV9kZXY7DQo+PiArDQo+PiArCXNnID0gZ2VtX29iai0+c2d0LT5zZ2w7DQo+PiArCWlmIChz
-Zykgew0KPj4gKwkJZG1hX2FkZHIgPSBzZ19kbWFfYWRkcmVzcyhzZyk7DQo+PiArCQlkbWFfYWRk
-ciArPSAoKHU2NClpb21tdV9kZXYtPnNpZCA8PCAzMik7DQo+PiArDQo+PiArCQlnZW1fb2JqLT5p
-bXBvcnRlZF9kbWFfYWRkciA9IGRtYV9hZGRyOw0KPj4gKwl9IGVsc2Ugew0KPj4gKwkJcWRhX2Vy
-cihOVUxMLCAiSW52YWxpZCBzY2F0dGVyLWdhdGhlciBsaXN0IGZvciBpbXBvcnRlZCBidWZmZXJc
-biIpOw0KPj4gKwkJcmV0ID0gLUVJTlZBTDsNCj4+ICsJfQ0KPj4gKw0KPj4gKwlyZXR1cm4gcmV0
-Ow0KPj4gK30NCj4+ICsNCj4+ICBpbnQgcWRhX21lbW9yeV9tYW5hZ2VyX2FsbG9jKHN0cnVjdCBx
-ZGFfbWVtb3J5X21hbmFnZXIgKm1lbV9tZ3IsIHN0cnVjdCBxZGFfZ2VtX29iaiAqZ2VtX29iaiwN
-Cj4+ICAJCQkgICAgIHN0cnVjdCBkcm1fZmlsZSAqZmlsZV9wcml2KQ0KPj4gIHsNCj4+IEBAIC0y
-NDgsNyArMjc3LDEwIEBAIGludCBxZGFfbWVtb3J5X21hbmFnZXJfYWxsb2Moc3RydWN0IHFkYV9t
-ZW1vcnlfbWFuYWdlciAqbWVtX21nciwgc3RydWN0IHFkYV9nZW1fDQo+PiAgCQlyZXR1cm4gLUVO
-T01FTTsNCj4+ICAJfQ0KPj4gIA0KPj4gLQlyZXQgPSBxZGFfZG1hX2FsbG9jKHNlbGVjdGVkX2Rl
-diwgZ2VtX29iaiwgc2l6ZSk7DQo+PiArCWlmIChnZW1fb2JqLT5pc19pbXBvcnRlZCkNCj4+ICsJ
-CXJldCA9IHFkYV9tZW1vcnlfbWFuYWdlcl9tYXBfaW1wb3J0ZWQobWVtX21nciwgZ2VtX29iaiwg
-c2VsZWN0ZWRfZGV2KTsNCj4+ICsJZWxzZQ0KPj4gKwkJcmV0ID0gcWRhX2RtYV9hbGxvYyhzZWxl
-Y3RlZF9kZXYsIGdlbV9vYmosIHNpemUpOw0KPj4gIA0KPj4gIAlpZiAocmV0KSB7DQo+PiAgCQlx
-ZGFfZXJyKE5VTEwsICJBbGxvY2F0aW9uIGZhaWxlZDogc2l6ZT0lenUsIGRldmljZV9pZD0ldSwg
-cmV0PSVkXG4iLA0KPj4gQEAgLTI2OCw2ICszMDAsMTAgQEAgdm9pZCBxZGFfbWVtb3J5X21hbmFn
-ZXJfZnJlZShzdHJ1Y3QgcWRhX21lbW9yeV9tYW5hZ2VyICptZW1fbWdyLCBzdHJ1Y3QgcWRhX2dl
-bV8NCj4+ICAJCXJldHVybjsNCj4+ICAJfQ0KPj4gIA0KPj4gKwlpZiAoZ2VtX29iai0+aXNfaW1w
-b3J0ZWQpIHsNCj4+ICsJCXFkYV9kYmcoTlVMTCwgIkZyZWVkIGltcG9ydGVkIGJ1ZmZlciB0cmFj
-a2luZyAobm8gRE1BIGZyZWUgbmVlZGVkKVxuIik7DQo+PiArCQlyZXR1cm47DQo+PiArCX0NCj4+
-ICAJcWRhX2RtYV9mcmVlKGdlbV9vYmopOw0KPj4gIH0NCj4+ICANCj4+IGRpZmYgLS1naXQgYS9k
-cml2ZXJzL2FjY2VsL3FkYS9xZGFfbWVtb3J5X21hbmFnZXIuaCBiL2RyaXZlcnMvYWNjZWwvcWRh
-L3FkYV9tZW1vcnlfbWFuYWdlci5oDQo+PiBpbmRleCBiYWM0NDI4NGVmOTguLmY2Yzc5NjNjZWM0
-MiAxMDA2NDQNCj4+IC0tLSBhL2RyaXZlcnMvYWNjZWwvcWRhL3FkYV9tZW1vcnlfbWFuYWdlci5o
-DQo+PiArKysgYi9kcml2ZXJzL2FjY2VsL3FkYS9xZGFfbWVtb3J5X21hbmFnZXIuaA0KPj4gQEAg
-LTEwNiw2ICsxMDYsMjAgQEAgaW50IHFkYV9tZW1vcnlfbWFuYWdlcl9yZWdpc3Rlcl9kZXZpY2Uo
-c3RydWN0IHFkYV9tZW1vcnlfbWFuYWdlciAqbWVtX21nciwNCj4+ICB2b2lkIHFkYV9tZW1vcnlf
-bWFuYWdlcl91bnJlZ2lzdGVyX2RldmljZShzdHJ1Y3QgcWRhX21lbW9yeV9tYW5hZ2VyICptZW1f
-bWdyLA0KPj4gIAkJCQkJICBzdHJ1Y3QgcWRhX2lvbW11X2RldmljZSAqaW9tbXVfZGV2KTsNCj4+
-ICANCj4+ICsvKioNCj4+ICsgKiBxZGFfbWVtb3J5X21hbmFnZXJfYXNzaWduX2RldmljZSgpIC0g
-QXNzaWduIGFuIElPTU1VIGRldmljZSB0byBhIHByb2Nlc3MNCj4+ICsgKiBAbWVtX21ncjogUG9p
-bnRlciB0byBtZW1vcnkgbWFuYWdlcg0KPj4gKyAqIEBmaWxlX3ByaXY6IERSTSBmaWxlIHByaXZh
-dGUgZGF0YSBmb3IgcHJvY2VzcyBhc3NvY2lhdGlvbg0KPj4gKyAqDQo+PiArICogQXNzaWducyBh
-biBJT01NVSBkZXZpY2UgdG8gdGhlIGNhbGxpbmcgcHJvY2Vzcy4gSWYgdGhlIHByb2Nlc3MgYWxy
-ZWFkeSBoYXMNCj4+ICsgKiBhIGRldmljZSBhc3NpZ25lZCwgcmV0dXJucyBzdWNjZXNzLiBJZiBh
-bm90aGVyIGZpbGUgZGVzY3JpcHRvciBmcm9tIHRoZSBzYW1lDQo+PiArICogUElEIGhhcyBhIGRl
-dmljZSwgcmV1c2VzIGl0LiBPdGhlcndpc2UsIGZpbmRzIGFuIGF2YWlsYWJsZSBkZXZpY2UgYW5k
-IGFzc2lnbnMgaXQuDQo+PiArICoNCj4+ICsgKiBSZXR1cm46IDAgb24gc3VjY2VzcywgbmVnYXRp
-dmUgZXJyb3IgY29kZSBvbiBmYWlsdXJlDQo+PiArICovDQo+PiAraW50IHFkYV9tZW1vcnlfbWFu
-YWdlcl9hc3NpZ25fZGV2aWNlKHN0cnVjdCBxZGFfbWVtb3J5X21hbmFnZXIgKm1lbV9tZ3IsDQo+
-PiArCQkJCSAgICAgc3RydWN0IGRybV9maWxlICpmaWxlX3ByaXYpOw0KPj4gKw0KPj4gIC8qKg0K
-Pj4gICAqIHFkYV9tZW1vcnlfbWFuYWdlcl9hbGxvYygpIC0gQWxsb2NhdGUgbWVtb3J5IGZvciBh
-IEdFTSBvYmplY3QNCj4+ICAgKiBAbWVtX21ncjogUG9pbnRlciB0byBtZW1vcnkgbWFuYWdlcg0K
-Pj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvYWNjZWwvcWRhL3FkYV9wcmltZS5jIGIvZHJpdmVycy9h
-Y2NlbC9xZGEvcWRhX3ByaW1lLmMNCj4+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+PiBpbmRleCAw
-MDAwMDAwMDAwMDAuLjNkMjM4NDJlNDhiYg0KPj4gLS0tIC9kZXYvbnVsbA0KPj4gKysrIGIvZHJp
-dmVycy9hY2NlbC9xZGEvcWRhX3ByaW1lLmMNCj4+IEBAIC0wLDAgKzEsMTk0IEBADQo+PiArLy8g
-U1BEWC1MaWNlbnNlLUlkZW50aWZpZXI6IEdQTC0yLjAtb25seQ0KPj4gKy8vIENvcHlyaWdodCAo
-YykgUXVhbGNvbW0gVGVjaG5vbG9naWVzLCBJbmMuIGFuZC9vciBpdHMgc3Vic2lkaWFyaWVzLg0K
-Pj4gKyNpbmNsdWRlIDxkcm0vZHJtX2dlbS5oPg0KPj4gKyNpbmNsdWRlIDxkcm0vZHJtX3ByaW1l
-Lmg+DQo+PiArI2luY2x1ZGUgPGxpbnV4L3NsYWIuaD4NCj4+ICsjaW5jbHVkZSA8bGludXgvZG1h
-LW1hcHBpbmcuaD4NCj4+ICsjaW5jbHVkZSAicWRhX2Rydi5oIg0KPj4gKyNpbmNsdWRlICJxZGFf
-Z2VtLmgiDQo+PiArI2luY2x1ZGUgInFkYV9wcmltZS5oIg0KPj4gKyNpbmNsdWRlICJxZGFfbWVt
-b3J5X21hbmFnZXIuaCINCj4+ICsNCj4+ICtzdGF0aWMgc3RydWN0IGRybV9nZW1fb2JqZWN0ICpj
-aGVja19vd25fYnVmZmVyKHN0cnVjdCBkcm1fZGV2aWNlICpkZXYsIHN0cnVjdCBkbWFfYnVmICpk
-bWFfYnVmKQ0KPj4gK3sNCj4+ICsJaWYgKGRtYV9idWYtPnByaXYpIHsNCj4+ICsJCXN0cnVjdCBk
-cm1fZ2VtX29iamVjdCAqZXhpc3RpbmdfZ2VtID0gZG1hX2J1Zi0+cHJpdjsNCj4gUmFuZG9tbHkg
-bG9va2luZyBhdCB5b3VyIGRyaXZlciDigJQgeW914oCZdmUgYnJva2VuIHRoZSBkbWEtYnVmIGNy
-b3NzLWRyaXZlcg0KPiBjb250cmFjdCBoZXJlLiBIb3cgZG8geW91IGtub3cgZG1hX2J1Zi0+cHJp
-diBpcyBhIHN0cnVjdCBkcm1fZ2VtX29iamVjdD8NCj4gWW91IGRvbuKAmXQsIGJlY2F1c2UgdGhh
-dCBpcyBhc3NpZ25lZCBieSB0aGUgZXhwb3J0ZXIsIGFuZCB1c2Vyc3BhY2UgY291bGQNCj4gcGFz
-cyBpbiBhIGRtYS1idWYgZnJvbSBhbm90aGVyIGRldmljZSBhbmQgYmxvdyB1cCB5b3VyIGRyaXZl
-ci4NCj4NCj4gSSB0aGluayB5b3UganVzdCB3YW50IHRvIGNhbGwgZHJtX2dlbV9pc19wcmltZV9l
-eHBvcnRlZF9kbWFfYnVmKCkgaGVyZQ0KPiBiZWZvcmUgZG9pbmcgYW55dGhpbmcuDQo+DQo+IFRo
-ZSByZXN0IG9mIHRoaXMgZG1hLWJ1ZiBjb2RlIGFsc28gbG9va3MgaGlnaGx5IHF1ZXN0aW9uYWJs
-ZS4gSeKAmWQgc3R1ZHkNCj4gaG93IG90aGVyIGRyaXZlcnMgaW1wbGVtZW50IHRoZWlyIGRtYS1i
-dWYgcGF0aHMgYW5kIHVzZSB0aG9zZSBhcyBhDQo+IHJlZmVyZW5jZSB0byBpbXByb3ZlIHlvdXJz
-Lg0KPg0KPiBNYXR0DQpJIGhhZCB0aGlzIGNvbmNlcm4gd2hpbGUgZGV2ZWxvcGluZyB0aGlzIHBh
-dGNoIGJ1dCBJIHdhcyBub3QgYWJsZSB0byBmaW5kIHRoZSByaWdodCB3YXkNCnRvIGhhbmRsZSB0
-aGlzLiBJJ2xsIGxvb2sgaW50byBkcm1fZ2VtX2lzX3ByaW1lX2V4cG9ydGVkX2RtYV9idWYoKSBh
-bmQgc2VlIGlmIGl0IGZpdHMNCmhlcmUuIEZvciB0aGUgcmVzdCBvZiB0aGUgZG1hLWJ1ZiwgdGhl
-IG1hcHBpbmcgcGFydCBpcyBzb21ldGhpbmcgd2hlcmUgSSBjb3VsZCBub3Qgc2VlIG15DQpyZXF1
-aXJlbWVudHMgb24gYW55IG90aGVyIGRyaXZlcihtYXBwaW5nIHRvIGlvbW11IGRldmljZSksIHNv
-IEkgbWlnaHQgYmUgdHJ5aW5nIHRvDQppbXBsZW1lbnQgc29tZXRoaW5nIG5ldyBoZXJlLiBUaGF0
-IGJlaW5nIHNhaWQsIEknbGwgZ28gdGhyb3VnaCBzb21lIG1vcmUgZHJpdmVycyBhbmQNCmNoZWNr
-IGlmIG15IGRtYS1idWYgY291bGQgYmUgaW1wcm92ZWQuDQoNClRoYW5rcyBmb3IgdGhlIHJldmll
-dyBhbmQgeW91ciBzdWdnZXN0aW9uLCBNYXR0Lg0KPg0KPj4gKw0KPj4gKwkJaWYgKGV4aXN0aW5n
-X2dlbS0+ZGV2ID09IGRldikgew0KPj4gKwkJCXN0cnVjdCBxZGFfZ2VtX29iaiAqZXhpc3Rpbmdf
-cWRhX2dlbSA9IHRvX3FkYV9nZW1fb2JqKGV4aXN0aW5nX2dlbSk7DQo+PiArDQo+PiArCQkJaWYg
-KCFleGlzdGluZ19xZGFfZ2VtLT5pc19pbXBvcnRlZCkgew0KPj4gKwkJCQlkcm1fZ2VtX29iamVj
-dF9nZXQoZXhpc3RpbmdfZ2VtKTsNCj4+ICsJCQkJcmV0dXJuIGV4aXN0aW5nX2dlbTsNCj4+ICsJ
-CQl9DQo+PiArCQl9DQo+PiArCX0NCj4+ICsJcmV0dXJuIE5VTEw7DQo+PiArfQ0KPj4gKw0KPj4g
-K3N0YXRpYyBzdHJ1Y3QgcWRhX2lvbW11X2RldmljZSAqZ2V0X2lvbW11X2RldmljZV9mb3JfaW1w
-b3J0KHN0cnVjdCBxZGFfZHJtX3ByaXYgKmRybV9wcml2LA0KPj4gKwkJCQkJCQkgICAgc3RydWN0
-IGRybV9maWxlICoqZmlsZV9wcml2X291dCwNCj4+ICsJCQkJCQkJICAgIHN0cnVjdCBxZGFfZGV2
-ICpxZGV2KQ0KPj4gK3sNCj4+ICsJc3RydWN0IGRybV9maWxlICpmaWxlX3ByaXY7DQo+PiArCXN0
-cnVjdCBxZGFfZmlsZV9wcml2ICpxZGFfZmlsZV9wcml2Ow0KPj4gKwlzdHJ1Y3QgcWRhX2lvbW11
-X2RldmljZSAqaW9tbXVfZGV2ID0gTlVMTDsNCj4+ICsJaW50IHJldDsNCj4+ICsNCj4+ICsJZmls
-ZV9wcml2ID0gZHJtX3ByaXYtPmN1cnJlbnRfaW1wb3J0X2ZpbGVfcHJpdjsNCj4+ICsJKmZpbGVf
-cHJpdl9vdXQgPSBmaWxlX3ByaXY7DQo+PiArDQo+PiArCWlmICghZmlsZV9wcml2IHx8ICFmaWxl
-X3ByaXYtPmRyaXZlcl9wcml2KQ0KPj4gKwkJcmV0dXJuIE5VTEw7DQo+PiArDQo+PiArCXFkYV9m
-aWxlX3ByaXYgPSAoc3RydWN0IHFkYV9maWxlX3ByaXYgKilmaWxlX3ByaXYtPmRyaXZlcl9wcml2
-Ow0KPj4gKwlpb21tdV9kZXYgPSBxZGFfZmlsZV9wcml2LT5hc3NpZ25lZF9pb21tdV9kZXY7DQo+
-PiArDQo+PiArCWlmICghaW9tbXVfZGV2KSB7DQo+PiArCQlyZXQgPSBxZGFfbWVtb3J5X21hbmFn
-ZXJfYXNzaWduX2RldmljZShkcm1fcHJpdi0+aW9tbXVfbWdyLCBmaWxlX3ByaXYpOw0KPj4gKwkJ
-aWYgKHJldCkgew0KPj4gKwkJCXFkYV9lcnIocWRldiwgIkZhaWxlZCB0byBhc3NpZ24gSU9NTVUg
-ZGV2aWNlOiAlZFxuIiwgcmV0KTsNCj4+ICsJCQlyZXR1cm4gTlVMTDsNCj4+ICsJCX0NCj4+ICsN
-Cj4+ICsJCWlvbW11X2RldiA9IHFkYV9maWxlX3ByaXYtPmFzc2lnbmVkX2lvbW11X2RldjsNCj4+
-ICsJfQ0KPj4gKw0KPj4gKwlyZXR1cm4gaW9tbXVfZGV2Ow0KPj4gK30NCj4+ICsNCj4+ICtzdGF0
-aWMgaW50IHNldHVwX2RtYV9idWZfbWFwcGluZyhzdHJ1Y3QgcWRhX2dlbV9vYmogKnFkYV9nZW1f
-b2JqLCBzdHJ1Y3QgZG1hX2J1ZiAqZG1hX2J1ZiwNCj4+ICsJCQkJIHN0cnVjdCBkZXZpY2UgKmF0
-dGFjaF9kZXYsIHN0cnVjdCBxZGFfZGV2ICpxZGV2KQ0KPj4gK3sNCj4+ICsJc3RydWN0IGRtYV9i
-dWZfYXR0YWNobWVudCAqYXR0YWNobWVudDsNCj4+ICsJc3RydWN0IHNnX3RhYmxlICpzZ3Q7DQo+
-PiArCWludCByZXQ7DQo+PiArDQo+PiArCWF0dGFjaG1lbnQgPSBkbWFfYnVmX2F0dGFjaChkbWFf
-YnVmLCBhdHRhY2hfZGV2KTsNCj4+ICsJaWYgKElTX0VSUihhdHRhY2htZW50KSkgew0KPj4gKwkJ
-cmV0ID0gUFRSX0VSUihhdHRhY2htZW50KTsNCj4+ICsJCXFkYV9lcnIocWRldiwgIkZhaWxlZCB0
-byBhdHRhY2ggZG1hX2J1ZjogJWRcbiIsIHJldCk7DQo+PiArCQlyZXR1cm4gcmV0Ow0KPj4gKwl9
-DQo+PiArCXFkYV9nZW1fb2JqLT5hdHRhY2htZW50ID0gYXR0YWNobWVudDsNCj4+ICsNCj4+ICsJ
-c2d0ID0gZG1hX2J1Zl9tYXBfYXR0YWNobWVudF91bmxvY2tlZChhdHRhY2htZW50LCBETUFfQklE
-SVJFQ1RJT05BTCk7DQo+PiArCWlmIChJU19FUlIoc2d0KSkgew0KPj4gKwkJcmV0ID0gUFRSX0VS
-UihzZ3QpOw0KPj4gKwkJcWRhX2VycihxZGV2LCAiRmFpbGVkIHRvIG1hcCBkbWFfYnVmIGF0dGFj
-aG1lbnQ6ICVkXG4iLCByZXQpOw0KPj4gKwkJZG1hX2J1Zl9kZXRhY2goZG1hX2J1ZiwgYXR0YWNo
-bWVudCk7DQo+PiArCQlyZXR1cm4gcmV0Ow0KPj4gKwl9DQo+PiArCXFkYV9nZW1fb2JqLT5zZ3Qg
-PSBzZ3Q7DQo+PiArDQo+PiArCXJldHVybiAwOw0KPj4gK30NCj4+ICsNCj4+ICtzdHJ1Y3QgZHJt
-X2dlbV9vYmplY3QgKnFkYV9nZW1fcHJpbWVfaW1wb3J0KHN0cnVjdCBkcm1fZGV2aWNlICpkZXYs
-IHN0cnVjdCBkbWFfYnVmICpkbWFfYnVmKQ0KPj4gK3sNCj4+ICsJc3RydWN0IHFkYV9kcm1fcHJp
-diAqZHJtX3ByaXY7DQo+PiArCXN0cnVjdCBxZGFfZ2VtX29iaiAqcWRhX2dlbV9vYmo7DQo+PiAr
-CXN0cnVjdCBkcm1fZmlsZSAqZmlsZV9wcml2Ow0KPj4gKwlzdHJ1Y3QgcWRhX2lvbW11X2Rldmlj
-ZSAqaW9tbXVfZGV2Ow0KPj4gKwlzdHJ1Y3QgcWRhX2RldiAqcWRldjsNCj4+ICsJc3RydWN0IGRy
-bV9nZW1fb2JqZWN0ICpleGlzdGluZ19nZW07DQo+PiArCXNpemVfdCBhbGlnbmVkX3NpemU7DQo+
-PiArCWludCByZXQ7DQo+PiArDQo+PiArCWRybV9wcml2ID0gZ2V0X2RybV9wcml2X2Zyb21fZGV2
-aWNlKGRldik7DQo+PiArCWlmICghZHJtX3ByaXYgfHwgIWRybV9wcml2LT5pb21tdV9tZ3IpIHsN
-Cj4+ICsJCXFkYV9lcnIoTlVMTCwgIkludmFsaWQgZHJtX3ByaXYgb3IgaW9tbXVfbWdyXG4iKTsN
-Cj4+ICsJCXJldHVybiBFUlJfUFRSKC1FSU5WQUwpOw0KPj4gKwl9DQo+PiArDQo+PiArCXFkZXYg
-PSBkcm1fcHJpdi0+cWRldjsNCj4+ICsNCj4+ICsJZXhpc3RpbmdfZ2VtID0gY2hlY2tfb3duX2J1
-ZmZlcihkZXYsIGRtYV9idWYpOw0KPj4gKwlpZiAoZXhpc3RpbmdfZ2VtKQ0KPj4gKwkJcmV0dXJu
-IGV4aXN0aW5nX2dlbTsNCj4+ICsNCj4+ICsJaW9tbXVfZGV2ID0gZ2V0X2lvbW11X2RldmljZV9m
-b3JfaW1wb3J0KGRybV9wcml2LCAmZmlsZV9wcml2LCBxZGV2KTsNCj4+ICsJaWYgKCFpb21tdV9k
-ZXYgfHwgIWlvbW11X2Rldi0+ZGV2KSB7DQo+PiArCQlxZGFfZXJyKHFkZXYsICJObyBJT01NVSBk
-ZXZpY2UgYXNzaWduZWQgZm9yIHByaW1lIGltcG9ydFxuIik7DQo+PiArCQlyZXR1cm4gRVJSX1BU
-UigtRU5PREVWKTsNCj4+ICsJfQ0KPj4gKw0KPj4gKwlxZGFfZGJnKHFkZXYsICJVc2luZyBJT01N
-VSBkZXZpY2UgJXUgZm9yIHByaW1lIGltcG9ydFxuIiwgaW9tbXVfZGV2LT5pZCk7DQo+PiArDQo+
-PiArCWFsaWduZWRfc2l6ZSA9IFBBR0VfQUxJR04oZG1hX2J1Zi0+c2l6ZSk7DQo+PiArCXFkYV9n
-ZW1fb2JqID0gcWRhX2dlbV9hbGxvY19vYmplY3QoZGV2LCBhbGlnbmVkX3NpemUpOw0KPj4gKwlp
-ZiAoSVNfRVJSKHFkYV9nZW1fb2JqKSkNCj4+ICsJCXJldHVybiAoc3RydWN0IGRybV9nZW1fb2Jq
-ZWN0ICopcWRhX2dlbV9vYmo7DQo+PiArDQo+PiArCXFkYV9nZW1fb2JqLT5pc19pbXBvcnRlZCA9
-IHRydWU7DQo+PiArCXFkYV9nZW1fb2JqLT5kbWFfYnVmID0gZG1hX2J1ZjsNCj4+ICsJcWRhX2dl
-bV9vYmotPnZpcnQgPSBOVUxMOw0KPj4gKwlxZGFfZ2VtX29iai0+ZG1hX2FkZHIgPSAwOw0KPj4g
-KwlxZGFfZ2VtX29iai0+aW1wb3J0ZWRfZG1hX2FkZHIgPSAwOw0KPj4gKwlxZGFfZ2VtX29iai0+
-aW9tbXVfZGV2ID0gaW9tbXVfZGV2Ow0KPj4gKw0KPj4gKwlnZXRfZG1hX2J1ZihkbWFfYnVmKTsN
-Cj4+ICsNCj4+ICsJcmV0ID0gc2V0dXBfZG1hX2J1Zl9tYXBwaW5nKHFkYV9nZW1fb2JqLCBkbWFf
-YnVmLCBpb21tdV9kZXYtPmRldiwgcWRldik7DQo+PiArCWlmIChyZXQpDQo+PiArCQlnb3RvIGVy
-cl9wdXRfZG1hX2J1ZjsNCj4+ICsNCj4+ICsJcmV0ID0gcWRhX21lbW9yeV9tYW5hZ2VyX2FsbG9j
-KGRybV9wcml2LT5pb21tdV9tZ3IsIHFkYV9nZW1fb2JqLCBmaWxlX3ByaXYpOw0KPj4gKwlpZiAo
-cmV0KSB7DQo+PiArCQlxZGFfZXJyKHFkZXYsICJGYWlsZWQgdG8gYWxsb2NhdGUgSU9NTVUgbWFw
-cGluZzogJWRcbiIsIHJldCk7DQo+PiArCQlnb3RvIGVycl91bm1hcDsNCj4+ICsJfQ0KPj4gKw0K
-Pj4gKwlxZGFfZGJnKHFkZXYsICJQcmltZSBpbXBvcnQgY29tcGxldGVkIHN1Y2Nlc3NmdWxseSBz
-aXplPSV6dVxuIiwgYWxpZ25lZF9zaXplKTsNCj4+ICsJcmV0dXJuICZxZGFfZ2VtX29iai0+YmFz
-ZTsNCj4+ICsNCj4+ICtlcnJfdW5tYXA6DQo+PiArCWRtYV9idWZfdW5tYXBfYXR0YWNobWVudF91
-bmxvY2tlZChxZGFfZ2VtX29iai0+YXR0YWNobWVudCwNCj4+ICsJCQkJCSAgcWRhX2dlbV9vYmot
-PnNndCwgRE1BX0JJRElSRUNUSU9OQUwpOw0KPj4gKwlkbWFfYnVmX2RldGFjaChkbWFfYnVmLCBx
-ZGFfZ2VtX29iai0+YXR0YWNobWVudCk7DQo+PiArZXJyX3B1dF9kbWFfYnVmOg0KPj4gKwlkbWFf
-YnVmX3B1dChkbWFfYnVmKTsNCj4+ICsJcWRhX2dlbV9jbGVhbnVwX29iamVjdChxZGFfZ2VtX29i
-aik7DQo+PiArCXJldHVybiBFUlJfUFRSKHJldCk7DQo+PiArfQ0KPj4gKw0KPj4gK2ludCBxZGFf
-cHJpbWVfZmRfdG9faGFuZGxlKHN0cnVjdCBkcm1fZGV2aWNlICpkZXYsIHN0cnVjdCBkcm1fZmls
-ZSAqZmlsZV9wcml2LA0KPj4gKwkJCSAgIGludCBwcmltZV9mZCwgdTMyICpoYW5kbGUpDQo+PiAr
-ew0KPj4gKwlzdHJ1Y3QgcWRhX2RybV9wcml2ICpkcm1fcHJpdjsNCj4+ICsJc3RydWN0IHFkYV9k
-ZXYgKnFkZXY7DQo+PiArCWludCByZXQ7DQo+PiArDQo+PiArCWRybV9wcml2ID0gZ2V0X2RybV9w
-cml2X2Zyb21fZGV2aWNlKGRldik7DQo+PiArCWlmICghZHJtX3ByaXYpIHsNCj4+ICsJCXFkYV9k
-YmcoTlVMTCwgIkZhaWxlZCB0byBnZXQgZHJtX3ByaXYgZnJvbSBkZXZpY2VcbiIpOw0KPj4gKwkJ
-cmV0dXJuIC1FSU5WQUw7DQo+PiArCX0NCj4+ICsNCj4+ICsJcWRldiA9IGRybV9wcml2LT5xZGV2
-Ow0KPj4gKw0KPj4gKwlpZiAoZmlsZV9wcml2ICYmIGZpbGVfcHJpdi0+ZHJpdmVyX3ByaXYpIHsN
-Cj4+ICsJCXN0cnVjdCBxZGFfZmlsZV9wcml2ICpxZGFfZmlsZV9wcml2Ow0KPj4gKw0KPj4gKwkJ
-cWRhX2ZpbGVfcHJpdiA9IChzdHJ1Y3QgcWRhX2ZpbGVfcHJpdiAqKWZpbGVfcHJpdi0+ZHJpdmVy
-X3ByaXY7DQo+PiArCX0gZWxzZSB7DQo+PiArCQlxZGFfZGJnKHFkZXYsICJDYWxsZWQgd2l0aCBO
-VUxMIGZpbGVfcHJpdiBvciBkcml2ZXJfcHJpdlxuIik7DQo+PiArCX0NCj4+ICsNCj4+ICsJbXV0
-ZXhfbG9jaygmZHJtX3ByaXYtPmltcG9ydF9sb2NrKTsNCj4+ICsJZHJtX3ByaXYtPmN1cnJlbnRf
-aW1wb3J0X2ZpbGVfcHJpdiA9IGZpbGVfcHJpdjsNCj4+ICsNCj4+ICsJcmV0ID0gZHJtX2dlbV9w
-cmltZV9mZF90b19oYW5kbGUoZGV2LCBmaWxlX3ByaXYsIHByaW1lX2ZkLCBoYW5kbGUpOw0KPj4g
-Kw0KPj4gKwlkcm1fcHJpdi0+Y3VycmVudF9pbXBvcnRfZmlsZV9wcml2ID0gTlVMTDsNCj4+ICsJ
-bXV0ZXhfdW5sb2NrKCZkcm1fcHJpdi0+aW1wb3J0X2xvY2spOw0KPj4gKw0KPj4gKwlpZiAoIXJl
-dCkNCj4+ICsJCXFkYV9kYmcocWRldiwgIkNvbXBsZXRlZCB3aXRoIHJldD0lZCwgaGFuZGxlPSV1
-XG4iLCByZXQsICpoYW5kbGUpOw0KPj4gKwllbHNlDQo+PiArCQlxZGFfZGJnKHFkZXYsICJDb21w
-bGV0ZWQgd2l0aCByZXQ9JWRcbiIsIHJldCk7DQo+PiArDQo+PiArCXJldHVybiByZXQ7DQo+PiAr
-fQ0KPj4gKw0KPj4gK01PRFVMRV9JTVBPUlRfTlMoIkRNQV9CVUYiKTsNCj4+IGRpZmYgLS1naXQg
-YS9kcml2ZXJzL2FjY2VsL3FkYS9xZGFfcHJpbWUuaCBiL2RyaXZlcnMvYWNjZWwvcWRhL3FkYV9w
-cmltZS5oDQo+PiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPj4gaW5kZXggMDAwMDAwMDAwMDAwLi45
-Mzk5MDI0NTRkY2QNCj4+IC0tLSAvZGV2L251bGwNCj4+ICsrKyBiL2RyaXZlcnMvYWNjZWwvcWRh
-L3FkYV9wcmltZS5oDQo+PiBAQCAtMCwwICsxLDQzIEBADQo+PiArLyogU1BEWC1MaWNlbnNlLUlk
-ZW50aWZpZXI6IEdQTC0yLjAtb25seSAqLw0KPj4gKy8qDQo+PiArICogQ29weXJpZ2h0IChjKSBR
-dWFsY29tbSBUZWNobm9sb2dpZXMsIEluYy4gYW5kL29yIGl0cyBzdWJzaWRpYXJpZXMuDQo+PiAr
-ICovDQo+PiArDQo+PiArI2lmbmRlZiBfUURBX1BSSU1FX0gNCj4+ICsjZGVmaW5lIF9RREFfUFJJ
-TUVfSA0KPj4gKw0KPj4gKyNpbmNsdWRlIDxkcm0vZHJtX2RldmljZS5oPg0KPj4gKyNpbmNsdWRl
-IDxkcm0vZHJtX2ZpbGUuaD4NCj4+ICsjaW5jbHVkZSA8ZHJtL2RybV9nZW0uaD4NCj4+ICsjaW5j
-bHVkZSA8bGludXgvZG1hLWJ1Zi5oPg0KPj4gKw0KPj4gKy8qKg0KPj4gKyAqIHFkYV9nZW1fcHJp
-bWVfaW1wb3J0IC0gSW1wb3J0IGEgRE1BLUJVRiBhcyBhIEdFTSBvYmplY3QNCj4+ICsgKiBAZGV2
-OiBEUk0gZGV2aWNlIHN0cnVjdHVyZQ0KPj4gKyAqIEBkbWFfYnVmOiBETUEtQlVGIHRvIGltcG9y
-dA0KPj4gKyAqDQo+PiArICogVGhpcyBmdW5jdGlvbiBpbXBvcnRzIGFuIGV4dGVybmFsIERNQS1C
-VUYgaW50byB0aGUgUURBIGRyaXZlciBhcyBhIEdFTQ0KPj4gKyAqIG9iamVjdC4gSXQgaGFuZGxl
-cyBib3RoIHJlLWltcG9ydHMgb2YgYnVmZmVycyBvcmlnaW5hbGx5IGZyb20gdGhpcyBkcml2ZXIN
-Cj4+ICsgKiBhbmQgaW1wb3J0cyBvZiBleHRlcm5hbCBidWZmZXJzIGZyb20gb3RoZXIgZHJpdmVy
-cy4NCj4+ICsgKg0KPj4gKyAqIFJldHVybjogUG9pbnRlciB0byB0aGUgaW1wb3J0ZWQgR0VNIG9i
-amVjdCBvbiBzdWNjZXNzLCBFUlJfUFRSIG9uIGZhaWx1cmUNCj4+ICsgKi8NCj4+ICtzdHJ1Y3Qg
-ZHJtX2dlbV9vYmplY3QgKnFkYV9nZW1fcHJpbWVfaW1wb3J0KHN0cnVjdCBkcm1fZGV2aWNlICpk
-ZXYsIHN0cnVjdCBkbWFfYnVmICpkbWFfYnVmKTsNCj4+ICsNCj4+ICsvKioNCj4+ICsgKiBxZGFf
-cHJpbWVfZmRfdG9faGFuZGxlIC0gQ29yZSBpbXBsZW1lbnRhdGlvbiBmb3IgUFJJTUUgRkQgdG8g
-R0VNIGhhbmRsZSBjb252ZXJzaW9uDQo+PiArICogQGRldjogRFJNIGRldmljZSBzdHJ1Y3R1cmUN
-Cj4+ICsgKiBAZmlsZV9wcml2OiBEUk0gZmlsZSBwcml2YXRlIGRhdGENCj4+ICsgKiBAcHJpbWVf
-ZmQ6IEZpbGUgZGVzY3JpcHRvciBvZiB0aGUgUFJJTUUgYnVmZmVyDQo+PiArICogQGhhbmRsZTog
-T3V0cHV0IHBhcmFtZXRlciBmb3IgdGhlIEdFTSBoYW5kbGUNCj4+ICsgKg0KPj4gKyAqIFRoaXMg
-Y29yZSBmdW5jdGlvbiBzZXRzIHVwIHRoZSBuZWNlc3NhcnkgY29udGV4dCBiZWZvcmUgY2FsbGlu
-ZyB0aGUNCj4+ICsgKiBEUk0gZnJhbWV3b3JrJ3MgcHJpbWUgRkQgdG8gaGFuZGxlIGNvbnZlcnNp
-b24uIEl0IGVuc3VyZXMgcHJvcGVyIElPTU1VDQo+PiArICogZGV2aWNlIGFzc2lnbm1lbnQgYW5k
-IHRyYWNraW5nIGZvciB0aGUgaW1wb3J0IG9wZXJhdGlvbi4NCj4+ICsgKg0KPj4gKyAqIFJldHVy
-bjogMCBvbiBzdWNjZXNzLCBuZWdhdGl2ZSBlcnJvciBjb2RlIG9uIGZhaWx1cmUNCj4+ICsgKi8N
-Cj4+ICtpbnQgcWRhX3ByaW1lX2ZkX3RvX2hhbmRsZShzdHJ1Y3QgZHJtX2RldmljZSAqZGV2LCBz
-dHJ1Y3QgZHJtX2ZpbGUgKmZpbGVfcHJpdiwNCj4+ICsJCQkgICBpbnQgcHJpbWVfZmQsIHUzMiAq
-aGFuZGxlKTsNCj4+ICsNCj4+ICsjZW5kaWYgLyogX1FEQV9QUklNRV9IICovDQo+Pg0KPj4gLS0g
-DQo+PiAyLjM0LjENCj4+DQoNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlz
-dHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1z
-aWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+On Thursday, February 26, 2026 at 5:00 PM, Christian K=F6nig wrote:
+> On 2/26/26 14:40, Ioana Ciocoi-Radulescu wrote:
+> > [Sie erhalten nicht h=E4ufig E-Mails von ruxandra.radulescu@nxp.com.
+> > Weitere Informationen, warum dies wichtig ist, finden Sie unter
+> > https://aka.ms/LearnAboutSenderIdentification ]
+> >
+> > Neutron can execute a single job at a time. For now, only inference
+> > jobs are supported. Each job has exactly one BO associated with it.
+> >
+> > When submitting a job, user also provides a syncobj handle on which it
+> > will wait for job completion.
+> >
+> > We use the DRM GPU scheduler for job management. Large part of the job
+> > submission code is based on the example of the ethosu driver.
+> >
+> > Signed-off-by: Jiwei Fu <jiwei.fu@nxp.com>
+> > Signed-off-by: Ioana Ciocoi-Radulescu <ruxandra.radulescu@nxp.com>
+> > ---
+> >  drivers/accel/neutron/Makefile         |   1 +
+> >  drivers/accel/neutron/neutron_device.c |   8 +-
+> >  drivers/accel/neutron/neutron_device.h |  21 ++
+> > drivers/accel/neutron/neutron_driver.c |  28 ++-
+> >  drivers/accel/neutron/neutron_driver.h |   3 +
+> >  drivers/accel/neutron/neutron_job.c    | 367
+> +++++++++++++++++++++++++++++++++
+> >  drivers/accel/neutron/neutron_job.h    |  45 ++++
+> >  include/uapi/drm/neutron_accel.h       |  51 +++++
+> >  8 files changed, 519 insertions(+), 5 deletions(-)
+> >
+> > diff --git a/drivers/accel/neutron/Makefile
+> > b/drivers/accel/neutron/Makefile index 192ed896a9f9..ac6dd576521c
+> > 100644
+> > --- a/drivers/accel/neutron/Makefile
+> > +++ b/drivers/accel/neutron/Makefile
+> > @@ -6,4 +6,5 @@ neutron-y :=3D \
+> >         neutron_driver.o \
+> >         neutron_device.o \
+> >         neutron_gem.o \
+> > +       neutron_job.o \
+> >         neutron_mailbox.o
+> > diff --git a/drivers/accel/neutron/neutron_device.c
+> > b/drivers/accel/neutron/neutron_device.c
+> > index e5c09105be99..571ec906ad72 100644
+> > --- a/drivers/accel/neutron/neutron_device.c
+> > +++ b/drivers/accel/neutron/neutron_device.c
+> > @@ -7,6 +7,7 @@
+> >  #include <linux/iopoll.h>
+> >
+> >  #include "neutron_device.h"
+> > +#include "neutron_job.h"
+> >  #include "neutron_mailbox.h"
+> >
+> >  void neutron_enable_irq(struct neutron_device *ndev) @@ -32,9 +33,14
+> > @@ void neutron_handle_irq(struct neutron_device *ndev)
+> >         /* Write 1 to clear */
+> >         writel_relaxed(appstatus & APPSTATUS_CLEAR_MASK,
+> > NEUTRON_REG(ndev, APPSTATUS));
+> >
+> > -       if (appstatus & APPSTATUS_FAULTCAUSE_MASK)
+> > +       if (appstatus & APPSTATUS_FAULTCAUSE_MASK) {
+> >                 dev_err(ndev->dev, "Neutron halted due to fault: 0x%lx\=
+n",
+> >                         FIELD_GET(APPSTATUS_FAULTCAUSE_MASK,
+> > appstatus));
+> > +               return neutron_job_err_handler(ndev);
+> > +       }
+> > +
+> > +       if (appstatus & APPSTATUS_INFDONE)
+> > +               neutron_job_done_handler(ndev);
+> >  }
+> >
+> >  #define neutron_boot_done(appctrl) \
+> > diff --git a/drivers/accel/neutron/neutron_device.h
+> > b/drivers/accel/neutron/neutron_device.h
+> > index 8e4df7462d82..0ed72965774d 100644
+> > --- a/drivers/accel/neutron/neutron_device.h
+> > +++ b/drivers/accel/neutron/neutron_device.h
+> > @@ -9,8 +9,10 @@
+> >  #include <linux/spinlock.h>
+> >  #include <linux/bits.h>
+> >  #include <drm/drm_device.h>
+> > +#include <drm/gpu_scheduler.h>
+> >
+> >  struct clk_bulk_data;
+> > +struct neutron_job;
+> >
+> >  #define NEUTRON_FIRMWARE_NAME          "NeutronFirmware.elf"
+> >
+> > @@ -92,6 +94,13 @@ enum neutron_mem_id {
+> >   * @clks: Neutron clocks
+> >   * @num_clks: Number of clocks
+> >   * @flags: Software flags used by driver
+> > + * @fence_lock: DMA fence lock
+> > + * @sched: GPU scheduler
+> > + * @sched_lock: Scheduler lock, for neutron_push_job
+> > + * @fence_context: Fence context
+> > + * @job_seqno: Job sequence number
+> > + * @job_lock: Job lock, for active_job handling
+> > + * @active_job: Currently active job
+> >   */
+> >  struct neutron_device {
+> >         struct drm_device base;
+> > @@ -103,6 +112,18 @@ struct neutron_device {
+> >         struct clk_bulk_data *clks;
+> >         int num_clks;
+> >         u32 flags;
+> > +
+> > +       /* For dma_fence */
+> > +       spinlock_t fence_lock;
+>=20
+> I've just pushed a patch set to drm-misc-next which makes the fence_lock
+> superflous in most cases. Just provide NULL as lock when calling to
+> dma_fence_init().
+
+Thanks, I'll update for v2.
+
+>=20
+> > +       struct drm_gpu_scheduler sched;
+> > +       /* For neutron_push_job */
+> > +       struct mutex sched_lock;
+> > +       u64 fence_context;
+> > +       u64 job_seqno;
+> > +
+> > +       /* For active_job handling */
+> > +       struct mutex job_lock;
+> > +       struct neutron_job *active_job;
+> >  };
+> >
+> >  #define to_neutron_device(drm) \
+> > diff --git a/drivers/accel/neutron/neutron_driver.c
+> > b/drivers/accel/neutron/neutron_driver.c
+> > index c9a18bf52037..ceae1f7e8359 100644
+> > --- a/drivers/accel/neutron/neutron_driver.c
+> > +++ b/drivers/accel/neutron/neutron_driver.c
+> > @@ -19,40 +19,53 @@
+> >  #include "neutron_device.h"
+> >  #include "neutron_driver.h"
+> >  #include "neutron_gem.h"
+> > +#include "neutron_job.h"
+> >
+> >  #define NEUTRON_SUSPEND_DELAY_MS 1000
+> >
+> >  static const struct drm_ioctl_desc neutron_drm_ioctls[] =3D {
+> >         DRM_IOCTL_DEF_DRV(NEUTRON_CREATE_BO,
+> neutron_ioctl_create_bo, 0),
+> >         DRM_IOCTL_DEF_DRV(NEUTRON_SYNC_BO, neutron_ioctl_sync_bo, 0),
+> > +       DRM_IOCTL_DEF_DRV(NEUTRON_SUBMIT_JOB,
+> > + neutron_ioctl_submit_job, 0),
+> >  };
+> >
+> >  static int neutron_open(struct drm_device *drm, struct drm_file
+> > *file)  {
+> >         struct neutron_device *ndev =3D to_neutron_device(drm);
+> >         struct neutron_file_priv *npriv;
+> > +       int ret;
+> >
+> >         npriv =3D kzalloc_obj(*npriv);
+> >         if (!npriv)
+> >                 return -ENOMEM;
+> >
+> >         npriv->ndev =3D ndev;
+> > -       file->driver_priv =3D npriv;
+> >
+> > +       ret =3D neutron_job_open(npriv);
+> > +       if (ret)
+> > +               goto err_free;
+> > +
+> > +       file->driver_priv =3D npriv;
+> >         return 0;
+> > +
+> > +err_free:
+> > +       kfree(npriv);
+> > +       return ret;
+> >  }
+> >
+> >  static void neutron_postclose(struct drm_device *drm, struct drm_file
+> > *file)  {
+> >         struct neutron_file_priv *npriv =3D file->driver_priv;
+> >
+> > +       neutron_job_close(npriv);
+> >         kfree(npriv);
+> >  }
+> >
+> >  DEFINE_DRM_ACCEL_FOPS(neutron_drm_driver_fops);
+> >
+> >  static const struct drm_driver neutron_drm_driver =3D {
+> > -       .driver_features        =3D DRIVER_COMPUTE_ACCEL | DRIVER_GEM,
+> > +       .driver_features        =3D DRIVER_COMPUTE_ACCEL | DRIVER_GEM |
+> > +                                 DRIVER_SYNCOBJ,
+> >         .name                   =3D "neutron",
+> >         .desc                   =3D "NXP Neutron driver",
+> >         .major                  =3D 1,
+> > @@ -151,19 +164,25 @@ static int neutron_probe(struct platform_device
+> *pdev)
+> >                 return ret;
+> >         }
+> >
+> > -       ret =3D devm_pm_runtime_enable(dev);
+> > +       ret =3D neutron_job_init(ndev);
+> >         if (ret)
+> >                 goto free_reserved;
+> >
+> > +       ret =3D devm_pm_runtime_enable(dev);
+> > +       if (ret)
+> > +               goto free_job;
+> > +
+> >         pm_runtime_set_autosuspend_delay(dev,
+> NEUTRON_SUSPEND_DELAY_MS);
+> >         pm_runtime_use_autosuspend(dev);
+> >
+> >         ret =3D drm_dev_register(&ndev->base, 0);
+> >         if (ret)
+> > -               goto free_reserved;
+> > +               goto free_job;
+> >
+> >         return 0;
+> >
+> > +free_job:
+> > +       neutron_job_fini(ndev);
+> >  free_reserved:
+> >         of_reserved_mem_device_release(&pdev->dev);
+> >
+> > @@ -175,6 +194,7 @@ static void neutron_remove(struct platform_device
+> *pdev)
+> >         struct neutron_device *ndev =3D platform_get_drvdata(pdev);
+> >
+> >         drm_dev_unregister(&ndev->base);
+> > +       neutron_job_fini(ndev);
+> >         of_reserved_mem_device_release(&pdev->dev);
+> >  }
+> >
+> > diff --git a/drivers/accel/neutron/neutron_driver.h
+> > b/drivers/accel/neutron/neutron_driver.h
+> > index cd52b5eb2d27..b709de74105a 100644
+> > --- a/drivers/accel/neutron/neutron_driver.h
+> > +++ b/drivers/accel/neutron/neutron_driver.h
+> > @@ -4,10 +4,13 @@
+> >  #ifndef __NEUTRON_DRIVER_H__
+> >  #define __NEUTRON_DRIVER_H__
+> >
+> > +#include <drm/gpu_scheduler.h>
+> > +
+> >  struct neutron_device;
+> >
+> >  struct neutron_file_priv {
+> >         struct neutron_device *ndev;
+> > +       struct drm_sched_entity sched_entity;
+> >  };
+> >
+> >  #endif /* __NEUTRON_DRIVER_H__ */
+> > diff --git a/drivers/accel/neutron/neutron_job.c
+> > b/drivers/accel/neutron/neutron_job.c
+> > new file mode 100644
+> > index 000000000000..316e361166a2
+> > --- /dev/null
+> > +++ b/drivers/accel/neutron/neutron_job.c
+> > @@ -0,0 +1,367 @@
+> > +// SPDX-License-Identifier: GPL-2.0+
+> > +/* Copyright 2025-2026 NXP */
+> > +
+> > +#include <linux/delay.h>
+> > +#include <linux/pm_runtime.h>
+> > +#include <drm/drm_file.h>
+> > +#include <drm/drm_print.h>
+> > +#include <drm/drm_gem_dma_helper.h>
+> > +#include <drm/neutron_accel.h>
+> > +
+> > +#include "neutron_driver.h"
+> > +#include "neutron_device.h"
+> > +#include "neutron_gem.h"
+> > +#include "neutron_mailbox.h"
+> > +#include "neutron_job.h"
+> > +
+> > +#define NEUTRON_JOB_TIMEOUT_MS 5000
+> > +
+> > +static const char *neutron_fence_get_driver_name(struct dma_fence
+> > +*fence) {
+> > +       return "neutron";
+> > +}
+> > +
+> > +static const char *neutron_fence_get_timeline_name(struct dma_fence
+> > +*fence) {
+> > +       return "neutron-npu";
+> > +}
+> > +
+> > +static const struct dma_fence_ops neutron_fence_ops =3D {
+> > +       .get_driver_name =3D neutron_fence_get_driver_name,
+> > +       .get_timeline_name =3D neutron_fence_get_timeline_name, };
+> > +
+> > +static void neutron_hw_submit(struct neutron_job *job) {
+> > +       struct neutron_device *ndev =3D job->ndev;
+> > +       struct neutron_mbox_cmd cmd =3D {0};
+> > +       u32 base_l, base_h;
+> > +       u64 base_addr;
+> > +       int ret;
+> > +
+> > +       switch (job->type) {
+> > +       case DRM_NEUTRON_JOB_INFERENCE:
+> > +               cmd.id =3D NEUTRON_CMD_INFERENCE;
+> > +               cmd.args[0] =3D job->inference.tensor_offset;
+> > +               cmd.args[1] =3D job->inference.microcode_offset;
+> > +               cmd.args[2] =3D job->inference.tensor_count;
+> > +               break;
+> > +       default:
+> > +               dev_WARN(ndev->dev, "Unknown job type: %d\n", job->type=
+);
+> > +               return;
+> > +       }
+> > +
+> > +       base_addr =3D to_drm_gem_dma_obj(job->bo)->dma_addr;
+> > +       base_l =3D lower_32_bits(base_addr);
+> > +       base_h =3D upper_32_bits(base_addr);
+> > +
+> > +       writel_relaxed(base_l, NEUTRON_REG(ndev, BASEDDRL));
+> > +       writel_relaxed(base_l, NEUTRON_REG(ndev, BASEINOUTL));
+> > +       writel_relaxed(base_l, NEUTRON_REG(ndev, BASESPILLL));
+> > +       writel_relaxed(base_h, NEUTRON_REG(ndev, BASEDDRH));
+> > +       writel_relaxed(base_h, NEUTRON_REG(ndev, BASEINOUTH));
+> > +       writel_relaxed(base_h, NEUTRON_REG(ndev, BASESPILLH));
+> > +
+> > +       ret =3D neutron_mbox_send_cmd(ndev, &cmd);
+> > +       if (ret) {
+> > +               /* Nothing we can do here, we'll reset the device on ti=
+meout */
+> > +               dev_err(ndev->dev, "Failed to submit job, device is bus=
+y\n");
+> > +       }
+> > +}
+> > +
+> > +void neutron_job_err_handler(struct neutron_device *ndev) {
+> > +       guard(mutex)(&ndev->job_lock);
+> > +
+> > +       if (ndev->active_job)
+> > +               drm_sched_fault(&ndev->sched); }
+> > +
+> > +void neutron_job_done_handler(struct neutron_device *ndev) {
+> > +       struct neutron_mbox_state state;
+> > +
+> > +       neutron_mbox_read_state(ndev, &state);
+> > +       if (state.status !=3D NEUTRON_FW_STATUS_DONE) {
+> > +               dev_err(ndev->dev, "Inconsistent firmware state: status=
+ 0x%x, err
+> 0x%x\n",
+> > +                       state.status, state.err_code);
+> > +               return neutron_job_err_handler(ndev);
+> > +       }
+> > +
+> > +       if (state.err_code !=3D 0)
+> > +               dev_warn(ndev->dev, "Job finished with error: 0x%x\n",
+> > +                        state.err_code);
+>=20
+> Not mandatory but you might also want to forward that as error to your
+> dma_fence, see dma_fence_set_error().
+
+Ok, will do that.
+
+>=20
+> > +
+> > +       /* Reset Neutron internal state to prepare for next inference */
+> > +       neutron_mbox_reset_state(ndev);
+> > +
+> > +       scoped_guard(mutex, &ndev->job_lock) {
+> > +               if (ndev->active_job) {
+> > +                       dma_fence_signal(ndev->active_job->neutron_fenc=
+e);
+> > +                       ndev->active_job =3D NULL;
+> > +               }
+> > +       }
+> > +}
+> > +
+> > +static void neutron_cleanup_job(struct kref *ref) {
+> > +       struct neutron_job *job =3D container_of(ref, struct
+> > +neutron_job, refcnt);
+> > +
+> > +       pm_runtime_put_autosuspend(job->ndev->base.dev);
+> > +
+> > +       dma_fence_put(job->neutron_fence);
+> > +       dma_fence_put(job->sched_fence);
+> > +       drm_gem_object_put(job->bo);
+> > +       drm_syncobj_put(job->syncobj);
+> > +
+> > +       kfree(job);
+> > +}
+> > +
+> > +static void neutron_put_job(struct neutron_job *job) {
+> > +       kref_put(&job->refcnt, neutron_cleanup_job); }
+> > +
+> > +static void neutron_free_job(struct drm_sched_job *sched_job) {
+> > +       struct neutron_job *job =3D to_neutron_job(sched_job);
+> > +
+> > +       drm_sched_job_cleanup(sched_job);
+> > +       neutron_put_job(job);
+> > +}
+> > +
+> > +static struct dma_fence *neutron_run_job(struct drm_sched_job
+> > +*sched_job) {
+> > +       struct neutron_job *job =3D to_neutron_job(sched_job);
+> > +       struct dma_fence *fence =3D job->neutron_fence;
+> > +       struct neutron_device *ndev =3D job->ndev;
+> > +
+> > +       if (unlikely(job->base.s_fence->finished.error))
+> > +               return NULL;
+> > +
+> > +       dma_fence_init(fence, &neutron_fence_ops, &ndev->fence_lock,
+> > +                      ndev->fence_context, ++ndev->job_seqno);
+> > +       dma_fence_get(fence);
+> > +
+> > +       scoped_guard(mutex, &ndev->job_lock) {
+> > +               ndev->active_job =3D job;
+> > +               neutron_hw_submit(job);
+> > +       }
+> > +
+> > +       return fence;
+> > +}
+> > +
+> > +static enum drm_gpu_sched_stat neutron_timedout_job(struct
+> > +drm_sched_job *sched_job) {
+> > +       struct neutron_job *job =3D to_neutron_job(sched_job);
+> > +       struct neutron_device *ndev =3D job->ndev;
+> > +       struct neutron_mbox_state state;
+> > +
+> > +       /* We assume Neutron is stuck, retrieve current state and reset=
+ */
+> > +       neutron_mbox_read_state(ndev, &state);
+> > +       dev_err(ndev->dev, "Neutron timedout, status: 0x%x, err: 0x%x\n=
+",
+> > +               state.status, state.err_code);
+> > +
+> > +       drm_sched_stop(&ndev->sched, sched_job);
+> > +
+> > +       scoped_guard(mutex, &ndev->job_lock)
+> > +               ndev->active_job =3D NULL;
+> > +
+> > +       pm_runtime_force_suspend(ndev->dev);
+> > +       pm_runtime_force_resume(ndev->dev);
+> > +
+> > +       drm_sched_start(&ndev->sched, 0);
+> > +
+> > +       return DRM_GPU_SCHED_STAT_RESET; }
+> > +
+> > +static void neutron_cancel_job(struct drm_sched_job *sched_job) {
+> > +       struct neutron_job *job =3D to_neutron_job(sched_job);
+> > +       struct neutron_device *ndev =3D job->ndev;
+> > +
+> > +       guard(mutex)(&ndev->job_lock);
+> > +
+> > +       if (!dma_fence_is_signaled(job->neutron_fence)) {
+> > +               dma_fence_set_error(job->neutron_fence, -ECANCELED);
+> > +               dma_fence_signal(job->neutron_fence);
+> > +       }
+> > +}
+> > +
+> > +static const struct drm_sched_backend_ops neutron_sched_ops =3D {
+> > +       .run_job =3D neutron_run_job,
+> > +       .free_job =3D neutron_free_job,
+> > +       .timedout_job =3D neutron_timedout_job,
+> > +       .cancel_job =3D neutron_cancel_job, };
+> > +
+> > +int neutron_job_init(struct neutron_device *ndev) {
+> > +       const struct drm_sched_init_args args =3D {
+> > +               .ops =3D &neutron_sched_ops,
+> > +               .num_rqs =3D DRM_SCHED_PRIORITY_COUNT,
+> > +               .credit_limit =3D 1,
+> > +               .timeout =3D msecs_to_jiffies(NEUTRON_JOB_TIMEOUT_MS),
+> > +               .name =3D dev_name(ndev->dev),
+> > +               .dev =3D ndev->dev,
+> > +       };
+> > +       int ret;
+> > +
+> > +       ret =3D devm_mutex_init(ndev->dev, &ndev->sched_lock);
+> > +       if (ret)
+> > +               return ret;
+> > +       ret =3D devm_mutex_init(ndev->dev, &ndev->job_lock);
+> > +       if (ret)
+> > +               return ret;
+> > +       spin_lock_init(&ndev->fence_lock);
+> > +
+> > +       ndev->fence_context =3D dma_fence_context_alloc(1);
+> > +
+> > +       ret =3D drm_sched_init(&ndev->sched, &args);
+> > +       if (ret)
+> > +               dev_err(ndev->dev, "Error creating DRM scheduler\n");
+> > +
+> > +       return ret;
+> > +}
+> > +
+> > +void neutron_job_fini(struct neutron_device *ndev) {
+> > +       drm_sched_fini(&ndev->sched);
+> > +}
+> > +
+> > +int neutron_job_open(struct neutron_file_priv *npriv) {
+> > +       struct neutron_device *ndev =3D npriv->ndev;
+> > +       struct drm_gpu_scheduler *sched =3D &ndev->sched;
+> > +       int ret;
+> > +
+> > +       ret =3D drm_sched_entity_init(&npriv->sched_entity,
+> > +                                   DRM_SCHED_PRIORITY_NORMAL,
+> > +                                   &sched, 1, NULL);
+> > +       if (ret)
+> > +               dev_err(ndev->dev, "Error creating scheduler
+> > + entity\n");
+> > +
+> > +       return ret;
+> > +}
+> > +
+> > +void neutron_job_close(struct neutron_file_priv *npriv) {
+> > +       drm_sched_entity_destroy(&npriv->sched_entity);
+> > +}
+> > +
+> > +static int neutron_push_job(struct neutron_job *job) {
+> > +       struct neutron_device *ndev =3D job->ndev;
+> > +       struct ww_acquire_ctx acquire_ctx;
+> > +       int ret;
+> > +
+> > +       ret =3D drm_gem_lock_reservations(&job->bo, 1, &acquire_ctx);
+> > +       if (ret)
+> > +               return ret;
+> > +
+> > +       ret =3D dma_resv_reserve_fences(job->bo->resv, 1);
+> > +       if (ret)
+> > +               goto out_unlock_res;
+> > +
+> > +       ret =3D drm_sched_job_add_implicit_dependencies(&job->base, job=
+->bo,
+> true);
+> > +       if (ret)
+> > +               goto out_unlock_res;
+> > +
+> > +       ret =3D pm_runtime_resume_and_get(ndev->base.dev);
+> > +       if (ret)
+> > +               goto out_unlock_res;
+> > +
+> > +       scoped_guard(mutex, &ndev->sched_lock) {
+> > +               drm_sched_job_arm(&job->base);
+> > +
+> > +               job->sched_fence =3D dma_fence_get(&job->base.s_fence->=
+finished);
+> > +               drm_syncobj_replace_fence(job->syncobj,
+> > + job->sched_fence);
+> > +
+> > +               kref_get(&job->refcnt);
+> > +               drm_sched_entity_push_job(&job->base);
+> > +
+> > +               dma_resv_add_fence(job->bo->resv, job->sched_fence,
+> > +                                  DMA_RESV_USAGE_WRITE);
+> > +       }
+> > +
+> > +out_unlock_res:
+> > +       drm_gem_unlock_reservations(&job->bo, 1, &acquire_ctx);
+> > +
+> > +       return ret;
+> > +}
+> > +
+> > +int neutron_ioctl_submit_job(struct drm_device *drm, void *data,
+> > +struct drm_file *filp) {
+> > +       struct neutron_device *ndev =3D to_neutron_device(drm);
+> > +       struct neutron_file_priv *npriv =3D filp->driver_priv;
+> > +       struct drm_neutron_submit_job *args =3D data;
+> > +       struct neutron_job *job;
+> > +       int ret;
+> > +
+> > +       if (args->pad)
+> > +               return -EINVAL;
+> > +
+> > +       job =3D kzalloc_obj(*job);
+> > +       if (!job)
+> > +               return -ENOMEM;
+> > +
+> > +       job->ndev =3D ndev;
+> > +       kref_init(&job->refcnt);
+> > +
+> > +       job->neutron_fence =3D kzalloc_obj(*job->neutron_fence);
+> > +       if (!job->neutron_fence) {
+> > +               ret =3D -ENOMEM;
+> > +               goto out_free_job;
+> > +       }
+> > +
+> > +       switch (args->type) {
+> > +       case DRM_NEUTRON_JOB_INFERENCE:
+> > +               memcpy(&job->inference, &args->inference,
+> > +                      sizeof(args->inference));
+> > +               break;
+> > +       default:
+> > +               dev_dbg(ndev->dev, "Invalid job type %d\n", args->type);
+> > +               ret =3D -EINVAL;
+> > +               goto out_free_fence;
+> > +       }
+> > +
+> > +       job->bo =3D drm_gem_object_lookup(filp, args->bo_handle);
+> > +       if (!job->bo) {
+> > +               dev_dbg(ndev->dev, "Invalid BO handle\n");
+> > +               ret =3D -ENOENT;
+> > +               goto out_free_fence;
+> > +       }
+> > +
+> > +       job->syncobj =3D drm_syncobj_find(filp, args->syncobj_handle);
+> > +       if (!job->syncobj) {
+> > +               dev_dbg(ndev->dev, "Invalid syncobj handle\n");
+> > +               ret =3D -ENOENT;
+> > +               goto out_put_gem;
+> > +       }
+> > +
+> > +       ret =3D drm_sched_job_init(&job->base, &npriv->sched_entity, 1,=
+ NULL,
+> > +                                filp->client_id);
+> > +       if (ret)
+> > +               goto out_put_syncobj;
+> > +
+> > +       ret =3D neutron_push_job(job);
+> > +       if (ret)
+> > +               goto out_sched_cleanup;
+> > +
+> > +       neutron_put_job(job);
+> > +
+> > +       return 0;
+> > +
+> > +out_sched_cleanup:
+> > +       drm_sched_job_cleanup(&job->base);
+> > +out_put_syncobj:
+> > +       drm_syncobj_put(job->syncobj);
+> > +out_put_gem:
+> > +       drm_gem_object_put(job->bo);
+> > +out_free_fence:
+> > +       kfree(job->neutron_fence);
+> > +out_free_job:
+> > +       kfree(job);
+> > +
+> > +       return ret;
+> > +}
+> > diff --git a/drivers/accel/neutron/neutron_job.h
+> > b/drivers/accel/neutron/neutron_job.h
+> > new file mode 100644
+> > index 000000000000..bb7773aeb218
+> > --- /dev/null
+> > +++ b/drivers/accel/neutron/neutron_job.h
+> > @@ -0,0 +1,45 @@
+> > +/* SPDX-License-Identifier: GPL-2.0+ */
+> > +/* Copyright 2025-2026 NXP */
+> > +
+> > +#ifndef __NEUTRON_JOB_H__
+> > +#define __NEUTRON_JOB_H__
+> > +
+> > +#include <linux/kref.h>
+> > +#include <drm/drm_gem.h>
+> > +#include <drm/drm_syncobj.h>
+> > +#include <drm/gpu_scheduler.h>
+> > +#include <drm/neutron_accel.h>
+> > +
+> > +#include "neutron_driver.h"
+> > +
+> > +struct neutron_device;
+> > +struct neutron_file_priv;
+> > +
+> > +struct neutron_job {
+> > +       struct drm_sched_job base;
+> > +       struct neutron_device *ndev;
+> > +       struct dma_fence *neutron_fence;
+>=20
+> > +       struct dma_fence *sched_fence;
+>=20
+> That looks superflous to me. You should always have the scheduler fence
+> through the base.
+
+Ok.
+
+>=20
+> > +       struct drm_syncobj *syncobj;
+>=20
+> Why do you want to keep the syncobj around?
+
+No good enough reason, I'll remove it from job structure.
+
+>=20
+>=20
+> Apart from those notes looks pretty good to me, but I'm a bit disapointed=
+ that
+> there isn't any DMA-buf support to review :)
+
+Thanks for reviewing!
+Ioana
+
+>=20
+> Regards,
+> Christian.
+>=20
+> > +       struct drm_gem_object *bo;
+> > +       enum drm_neutron_job_type type;
+> > +       union {
+> > +               struct drm_neutron_inference_job inference;
+> > +       };
+> > +       struct kref refcnt;
+> > +};
+> > +
+> > +#define to_neutron_job(job) \
+> > +       container_of(job, struct neutron_job, base)
+> > +
+> > +int neutron_job_init(struct neutron_device *dev); void
+> > +neutron_job_fini(struct neutron_device *dev); int
+> > +neutron_job_open(struct neutron_file_priv *npriv); void
+> > +neutron_job_close(struct neutron_file_priv *npriv);
+> > +
+> > +void neutron_job_done_handler(struct neutron_device *dev); void
+> > +neutron_job_err_handler(struct neutron_device *dev);
+> > +
+> > +int neutron_ioctl_submit_job(struct drm_device *dev, void *data,
+> > +struct drm_file *filp);
+> > +
+> > +#endif /* __NEUTRON_JOB_H__ */
+> > diff --git a/include/uapi/drm/neutron_accel.h
+> > b/include/uapi/drm/neutron_accel.h
+> > index 2f5639f2e0e8..a9e5682709d2 100644
+> > --- a/include/uapi/drm/neutron_accel.h
+> > +++ b/include/uapi/drm/neutron_accel.h
+> > @@ -15,10 +15,12 @@ extern "C" {
+> >   *
+> >   * @DRM_NEUTRON_CREATE_BO: Create a buffer object
+> >   * @DRM_NEUTRON_SYNC_BO: Sync (parts of) the buffer object memory
+> > + * @DRM_NEUTRON_SUBMIT_JOB: Submit a job to the device
+> >   */
+> >  enum drm_neutron_ioctl {
+> >         DRM_NEUTRON_CREATE_BO =3D 0,
+> >         DRM_NEUTRON_SYNC_BO,
+> > +       DRM_NEUTRON_SUBMIT_JOB,
+> >  };
+> >
+> >  /**
+> > @@ -64,6 +66,51 @@ struct drm_neutron_sync_bo {
+> >         __u64 offset;
+> >  };
+> >
+> > +/**
+> > + * enum drm_neutron_job_type - Type of job to submit to Neutron
+> > +device
+> > + *
+> > + * @DRM_NEUTRON_JOB_INFERENCE: Inference job  */ enum
+> > +drm_neutron_job_type {
+> > +       DRM_NEUTRON_JOB_INFERENCE =3D 0, };
+> > +
+> > +/**
+> > + * struct drm_neutron_inference_job - Inference job descriptor
+> > + *
+> > + * @tensor_offset: Offset of tensor array inside job BO
+> > + * @microcode_offset: Microcode offset inside BO
+> > + * @tensor_count: Number of valid tensors
+> > + * @pad: MBZ
+> > + */
+> > +struct drm_neutron_inference_job {
+> > +       __u32 tensor_offset;
+> > +       __u32 microcode_offset;
+> > +       __u32 tensor_count;
+> > +       __u32 pad[5];
+> > +};
+> > +
+> > +/**
+> > + * struct drm_neutron_submit_job - Submit a job to Neutron device
+> > + *
+> > + * @type: Job type, one of enum drm_neutron_job_type
+> > + * @bo_handle: BO handle for this job
+> > + * @inference: Inference job descriptor (when type is
+> > +DRM_NEUTRON_JOB_INFERENCE)
+> > + * @reserved: Reserved for future job types
+> > + * @syncobj_handle: Handle of syncobj on which user waits for job
+> > +completion
+> > + * @pad: MBZ
+> > + */
+> > +struct drm_neutron_submit_job {
+> > +       __u32 type;
+> > +       __u32 bo_handle;
+> > +       union {
+> > +               struct drm_neutron_inference_job inference;
+> > +               __u32 reserved[8];
+> > +       };
+> > +       __u32 syncobj_handle;
+> > +       __u32 pad;
+> > +};
+> > +
+> >  #define DRM_IOCTL_NEUTRON_CREATE_BO \
+> >         DRM_IOWR(DRM_COMMAND_BASE + DRM_NEUTRON_CREATE_BO, \
+> >                  struct drm_neutron_create_bo) @@ -72,6 +119,10 @@
+> > struct drm_neutron_sync_bo {
+> >         DRM_IOWR(DRM_COMMAND_BASE + DRM_NEUTRON_SYNC_BO, \
+> >                  struct drm_neutron_sync_bo)
+> >
+> > +#define DRM_IOCTL_NEUTRON_SUBMIT_JOB \
+> > +       DRM_IOWR(DRM_COMMAND_BASE + DRM_NEUTRON_SUBMIT_JOB,
+> \
+> > +                struct drm_neutron_submit_job)
+> > +
+> >  #if defined(__cplusplus)
+> >  }
+> >  #endif
+> >
+> > --
+> > 2.34.1
+> >
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
