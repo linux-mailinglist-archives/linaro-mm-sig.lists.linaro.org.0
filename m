@@ -2,36 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id iN6BEjx3pWkNBgYAu9opvQ
+	id TmnZIGF3pWkpCAYAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 02 Mar 2026 12:40:44 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 02 Mar 2026 12:41:21 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id D82CD1D7A27
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 02 Mar 2026 12:40:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1648D1D7A7F
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 02 Mar 2026 12:41:20 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E68D63F910
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  2 Mar 2026 11:40:42 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id CDB5C3F9BF
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  2 Mar 2026 11:41:19 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7EF5A3ED23
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  2 Mar 2026 11:40:36 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7CFA13ED23
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  2 Mar 2026 11:41:13 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-From: "Maxx Billy" <billymaxx70@gmail.com>
+From: "Jack Owen" <jackowen112211@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Mon, 02 Mar 2026 11:40:36 -0000
-Message-ID: <177245163651.4120876.8549347611377943853@lists.linaro.org>
+Date: Mon, 02 Mar 2026 11:41:13 -0000
+Message-ID: <177245167351.4122978.15438295738615525702@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: OQXV3BBVRIWN2ITJ22KN4BZVOJOWNVN3
-X-Message-ID-Hash: OQXV3BBVRIWN2ITJ22KN4BZVOJOWNVN3
-X-MailFrom: billymaxx70@gmail.com
+Message-ID-Hash: BPRTLEVM5XBQHC4PRKYYUO3Y2BYYZRL5
+X-Message-ID-Hash: BPRTLEVM5XBQHC4PRKYYUO3Y2BYYZRL5
+X-MailFrom: jackowen112211@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Which Companies Specialize in Ethical Crypto Recovery?
+Subject: [Linaro-mm-sig] Who Are the Most Reliable Crypto Fund Recovery Experts?
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OQXV3BBVRIWN2ITJ22KN4BZVOJOWNVN3/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/BPRTLEVM5XBQHC4PRKYYUO3Y2BYYZRL5/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -58,15 +58,15 @@ X-Spamd-Result: default: False [1.69 / 15.00];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCPT_COUNT_ONE(0.00)[1];
 	RCVD_COUNT_TWO(0.00)[2];
-	FROM_NEQ_ENVFROM(0.00)[billymaxx70@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_NEQ_ENVFROM(0.00)[jackowen112211@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	TO_DN_NONE(0.00)[];
 	R_DKIM_NA(0.00)[];
 	NEURAL_HAM(-0.00)[-0.412];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,linaro.org:email,bcrexperts.com:url,co.site:email]
-X-Rspamd-Queue-Id: D82CD1D7A27
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,bcrexperts.com:url,linaro.org:email,co.site:email]
+X-Rspamd-Queue-Id: 1648D1D7A7F
 X-Rspamd-Action: no action
 
 Q1JZUFRPIFNDQU0gUkVDT1ZFUlkgU0VSVklDRSAyMDI2OiBCSVRDUkFDSyBSRUNPVkVSWSBFWFBF
