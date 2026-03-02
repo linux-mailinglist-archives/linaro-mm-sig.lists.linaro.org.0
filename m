@@ -2,40 +2,40 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id uCPkA+kd4WlbpQAAu9opvQ
+	id GFbkFu4d4WlbpQAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:35:37 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:35:42 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id BC9AE412D5D
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:35:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 31BDC412D6D
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:35:42 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 74FCB45889
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:35:35 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 3A2783F69B
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  2 Mar 2026 22:58:21 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 4086D4589B
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:35:41 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+	by lists.linaro.org (Postfix) with ESMTPS id 96A5A3F69B
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  2 Mar 2026 22:58:46 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=p0GsC9wo;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=efMzfnop;
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (lists.linaro.org: domain of dlemoal@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=dlemoal@kernel.org
+	spf=pass (lists.linaro.org: domain of dlemoal@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=dlemoal@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id 4098643FCE;
-	Mon,  2 Mar 2026 22:58:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 65343C19423;
-	Mon,  2 Mar 2026 22:57:55 +0000 (UTC)
+	by tor.source.kernel.org (Postfix) with ESMTP id D4E2F60123;
+	Mon,  2 Mar 2026 22:58:45 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 998A6C19425;
+	Mon,  2 Mar 2026 22:58:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772492300;
-	bh=dSvaafq7s+HEj/Y72jLuoeKNRy1B3Rikjpm6NcM7diE=;
+	s=k20201202; t=1772492325;
+	bh=Aim55mS4QOPHiq3lGIrwAq6clR3sCfuIHZBW63a7sLU=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=p0GsC9woFCUKtxDwipZDfc1GU9rUyiVi0vJPYP2u+0lYlFaKaiE4wvtujTtUsUSSG
-	 y9tJP1pMFCSZdbVlZJsp/30PmZ1S1faPO832d6Ub6IMUIFkIp8SCUMEnJc2IJ8q+Ka
-	 ZpyDlt5SN2HnUNutEs6KYH5Vx0HXoq7KvmUrZbG2IxG5LEgsEnTMz87mdm/+x6Ju03
-	 1GI4Matlc31LEhXo5LtVUEq5GJUiz63iWVRgT2s1o3D5+9nJtUMseF11lElVDkS1f/
-	 DQZuLjZC0NNLwbtBL3D60LeHl8deT4SR0u9RtbK2+hz+nll+4jjYRTC9U8dXhLefK3
-	 ACgo7vVXPcUag==
-Message-ID: <8f2d476f-5c2a-48d5-8e20-998c06d7ea88@kernel.org>
-Date: Tue, 3 Mar 2026 07:57:53 +0900
+	b=efMzfnopH2WSmNEYj3Hb820DIXfhzmcNJQ+sj/RP5P5QhetapCfR9yKeXE3Q32qWL
+	 YVb9vOAaaOxUE3OlnOU5qf5pp6AHKS/GqlvGT2NTaXOtfg8ico+u9+NLobylZ9jGe5
+	 LIRJTz6mbzZrhcM3c/rF6WYhaGgyQIy0R+sbukSxUfdpvrrZqMaAAPwWkFe+MDR+Vo
+	 V/3L9nVrysUo3+FPRD9XrnVjqJAs9NpsT26I97mvOAs/um3Zb5oulM1EyoABscyNmC
+	 z6PR0/q/hUZXduKPkmtA4rzmBEcDgyq0zy09oPANN6tF4vzCXJvY2VgdQ9jrOAeA8T
+	 /AhcQbZn+87sw==
+Message-ID: <d13b3907-3bdf-4a13-bebd-dc6081d40600@kernel.org>
+Date: Tue, 3 Mar 2026 07:58:10 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Jeff Layton <jlayton@kernel.org>, Alexander Viro
@@ -125,25 +125,25 @@ To: Jeff Layton <jlayton@kernel.org>, Alexander Viro
  Jesper Dangaard Brouer <hawk@kernel.org>,
  John Fastabend <john.fastabend@gmail.com>
 References: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
- <20260302-iino-u64-v2-48-e5388800dae0@kernel.org>
+ <20260302-iino-u64-v2-100-e5388800dae0@kernel.org>
 Content-Language: en-US
 From: Damien Le Moal <dlemoal@kernel.org>
 Organization: Western Digital Research
-In-Reply-To: <20260302-iino-u64-v2-48-e5388800dae0@kernel.org>
+In-Reply-To: <20260302-iino-u64-v2-100-e5388800dae0@kernel.org>
 X-Spamd-Bar: -
 X-MailFrom: dlemoal@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 2KN57VPEESC5OI6LD2KUDIZRGXKDWJZH
-X-Message-ID-Hash: 2KN57VPEESC5OI6LD2KUDIZRGXKDWJZH
+Message-ID-Hash: THIQDPSO3HVQ37VOKXMUDORQFI4IE7QF
+X-Message-ID-Hash: THIQDPSO3HVQ37VOKXMUDORQFI4IE7QF
 X-Mailman-Approved-At: Thu, 16 Apr 2026 16:57:17 +0000
 CC: linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, nvdimm@lists.linux.dev, fsverity@lists.linux.dev, linux-mm@kvack.org, netfs@lists.linux.dev, linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net, linux-nfs@vger.kernel.org, linux-cifs@vger.kernel.org, samba-technical@lists.samba.org, linux-nilfs@vger.kernel.org, v9fs@lists.linux.dev, linux-afs@lists.infradead.org, autofs@vger.kernel.org, ceph-devel@vger.kernel.org, codalist@coda.cs.cmu.edu, ecryptfs@vger.kernel.org, linux-mtd@lists.infradead.org, jfs-discussion@lists.sourceforge.net, ntfs3@lists.linux.dev, ocfs2-devel@lists.linux.dev, devel@lists.orangefs.org, linux-unionfs@vger.kernel.org, apparmor@lists.ubuntu.com, linux-security-module@vger.kernel.org, linux-integrity@vger.kernel.org, selinux@vger.kernel.org, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, netdev@vger.kernel.org, linux-perf-
  users@vger.kernel.org, linux-fscrypt@vger.kernel.org, linux-xfs@vger.kernel.org, linux-hams@vger.kernel.org, linux-x25@vger.kernel.org, audit@vger.kernel.org, linux-bluetooth@vger.kernel.org, linux-can@vger.kernel.org, linux-sctp@vger.kernel.org, bpf@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 048/110] zonefs: use PRIino format for i_ino
+Subject: [Linaro-mm-sig] Re: [PATCH v2 100/110] zonefs: replace PRIino with %llu/%llx format strings
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2KN57VPEESC5OI6LD2KUDIZRGXKDWJZH/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/THIQDPSO3HVQ37VOKXMUDORQFI4IE7QF/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -176,24 +176,23 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	FROM_NEQ_ENVFROM(0.00)[dlemoal@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:-];
-	NEURAL_HAM(-0.00)[-0.595];
+	NEURAL_HAM(-0.00)[-0.586];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	MID_RHS_MATCH_FROM(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: BC9AE412D5D
+X-Rspamd-Queue-Id: 31BDC412D6D
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On 3/3/26 05:24, Jeff Layton wrote:
-> Convert zonefs i_ino format strings to use the PRIino format
-> macro in preparation for the widening of i_ino via kino_t.
+On 3/3/26 05:25, Jeff Layton wrote:
+> Now that i_ino is u64 and the PRIino format macro has been removed,
+> replace all uses in zonefs with the concrete format strings.
 > 
 > Signed-off-by: Jeff Layton <jlayton@kernel.org>
 
 Acked-by: Damien Le Moal <dlemoal@kernel.org>
-
 
 -- 
 Damien Le Moal
