@@ -2,36 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id EMjyKjF4pWlbCAYAu9opvQ
+	id mKb5ElF4pWlbCAYAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 02 Mar 2026 12:44:49 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 02 Mar 2026 12:45:21 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4630D1D7C4C
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 02 Mar 2026 12:44:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D670B1D7C7B
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 02 Mar 2026 12:45:20 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 18B9D3F901
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  2 Mar 2026 11:44:48 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E0F89400FB
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  2 Mar 2026 11:45:19 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 550843F727
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  2 Mar 2026 11:44:41 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 39DE43F727
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  2 Mar 2026 11:45:14 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-From: mileyaustin497@gmail.com
+From: "Jasper Ryder" <jasperryder783@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Mon, 02 Mar 2026 11:44:41 -0000
-Message-ID: <177245188134.4125799.4607630316072498077@lists.linaro.org>
+Date: Mon, 02 Mar 2026 11:45:14 -0000
+Message-ID: <177245191423.4126167.9077894605671284792@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: L3BJPCGKSRMOT4W2SLBDZMH6BJVTJ7FJ
-X-Message-ID-Hash: L3BJPCGKSRMOT4W2SLBDZMH6BJVTJ7FJ
-X-MailFrom: mileyaustin497@gmail.com
+Message-ID-Hash: C6ZJF2WFNNOWCOQKYHA3DUQZVYSAJL6V
+X-Message-ID-Hash: C6ZJF2WFNNOWCOQKYHA3DUQZVYSAJL6V
+X-MailFrom: jasperryder783@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Which Crypto Recovery Experts Are Highly Recommended?
+Subject: [Linaro-mm-sig] Which Organizations Offer Trusted Crypto Recovery Solutions?
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/L3BJPCGKSRMOT4W2SLBDZMH6BJVTJ7FJ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/C6ZJF2WFNNOWCOQKYHA3DUQZVYSAJL6V/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -44,29 +44,29 @@ X-Spamd-Result: default: False [1.69 / 15.00];
 	MID_RHS_MATCH_TO(1.00)[];
 	SUBJECT_ENDS_QUESTION(1.00)[];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+	R_SPF_ALLOW(-0.20)[+mx];
+	MIME_BASE64_TEXT(0.10)[];
 	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	ARC_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
 	RCPT_COUNT_ONE(0.00)[1];
+	ARC_NA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
 	RCVD_COUNT_TWO(0.00)[2];
-	FROM_NEQ_ENVFROM(0.00)[mileyaustin497@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_NO_DN(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[jasperryder783@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	TO_DN_NONE(0.00)[];
 	R_DKIM_NA(0.00)[];
-	NEURAL_HAM(-0.00)[-0.415];
+	NEURAL_HAM(-0.00)[-0.408];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,co.site:email,linaro.org:email,bcrexperts.com:url]
-X-Rspamd-Queue-Id: 4630D1D7C4C
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,linaro.org:email,co.site:email,bcrexperts.com:url]
+X-Rspamd-Queue-Id: D670B1D7C7B
 X-Rspamd-Action: no action
 
 Q1JZUFRPIFNDQU0gUkVDT1ZFUlkgU0VSVklDRSAyMDI2OiBCSVRDUkFDSyBSRUNPVkVSWSBFWFBF
