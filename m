@@ -2,36 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sKbyGtJ3pWkNBgYAu9opvQ
+	id MJu+AuB3pWlbCAYAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 02 Mar 2026 12:43:14 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 02 Mar 2026 12:43:28 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 022521D7B58
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 02 Mar 2026 12:43:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B54801D7BB6
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 02 Mar 2026 12:43:27 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 110DD3ED23
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  2 Mar 2026 11:43:13 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B67083F962
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  2 Mar 2026 11:43:26 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2A1A03ED23
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  2 Mar 2026 11:43:06 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 01BEE3ED23
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  2 Mar 2026 11:43:21 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-From: "Jasper Ryder" <jasperryder783@gmail.com>
+From: "Maxx Billy" <billymaxx70@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Mon, 02 Mar 2026 11:43:06 -0000
-Message-ID: <177245178617.4124732.16542752316548657407@lists.linaro.org>
+Date: Mon, 02 Mar 2026 11:43:21 -0000
+Message-ID: <177245180100.4123146.12281365848249005625@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: CJZ3QJGZOLFGUQGVPJY4VBWTOZFKTVN4
-X-Message-ID-Hash: CJZ3QJGZOLFGUQGVPJY4VBWTOZFKTVN4
-X-MailFrom: jasperryder783@gmail.com
+Message-ID-Hash: XRB4L3MRFJD2AAFBQOOJGD3DAIPYF2XX
+X-Message-ID-Hash: XRB4L3MRFJD2AAFBQOOJGD3DAIPYF2XX
+X-MailFrom: billymaxx70@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] What Are the Most Dependable Crypto Asset Recovery Companies?
+Subject: [Linaro-mm-sig] What Are the Best-Rated Cryptocurrency Recovery Providers?
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CJZ3QJGZOLFGUQGVPJY4VBWTOZFKTVN4/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XRB4L3MRFJD2AAFBQOOJGD3DAIPYF2XX/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -58,15 +58,15 @@ X-Spamd-Result: default: False [1.69 / 15.00];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCPT_COUNT_ONE(0.00)[1];
 	RCVD_COUNT_TWO(0.00)[2];
-	FROM_NEQ_ENVFROM(0.00)[jasperryder783@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_NEQ_ENVFROM(0.00)[billymaxx70@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	TO_DN_NONE(0.00)[];
 	R_DKIM_NA(0.00)[];
-	NEURAL_HAM(-0.00)[-0.415];
+	NEURAL_HAM(-0.00)[-0.408];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[bcrexperts.com:url,co.site:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,linaro.org:email]
-X-Rspamd-Queue-Id: 022521D7B58
+	DBL_BLOCKED_OPENRESOLVER(0.00)[co.site:email,lists.linaro.org:rdns,lists.linaro.org:helo,lists.linaro.org:mid,linaro.org:email,bcrexperts.com:url]
+X-Rspamd-Queue-Id: B54801D7BB6
 X-Rspamd-Action: no action
 
 Q1JZUFRPIFNDQU0gUkVDT1ZFUlkgU0VSVklDRSAyMDI2OiBCSVRDUkFDSyBSRUNPVkVSWSBFWFBF
