@@ -2,42 +2,42 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KJLLJF4b4WmmpAAAu9opvQ
+	id qJWdFWQb4WmmpAAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:24:46 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:24:52 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0C8E0412A39
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:24:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D7BAC412A40
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:24:51 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 1F67B44C82
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:24:45 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id DD9D944D0B
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:24:50 +0000 (UTC)
 Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 5B47C40173
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  2 Mar 2026 20:35:05 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id A69C040173
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  2 Mar 2026 20:35:19 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=SZnKWjhh;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=pLx8cGjt;
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	spf=pass (lists.linaro.org: domain of jlayton@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=jlayton@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id C3E6C43FD9;
+	by sea.source.kernel.org (Postfix) with ESMTP id 1DAD0400CD;
+	Mon,  2 Mar 2026 20:35:19 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DBABBC2BCB2;
 	Mon,  2 Mar 2026 20:35:04 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8FA61C19423;
-	Mon,  2 Mar 2026 20:34:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772483704;
-	bh=RKZuUpYb4VtVZY0tH0L18QSUQGxUCRV4jJmOJLJer90=;
+	s=k20201202; t=1772483719;
+	bh=U3KpNq06HVb6xR2bnjz6Ns7LWxuPeJzECvQHHCOjgKk=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=SZnKWjhhLKLCOwfXZfRvrOlHQATC4wmHKSpLaBQfHZNgeCqumK05mKsxFCUqX+HYK
-	 A81tD+yqVOnm9s15f3Lm7VADbRBNrD7yTihefXqKDq3Mxe31M5vtcmMS3pJUzmTSrB
-	 V0414pYxtBvqe0AhQm5wloTuTIx1yhiKvOGwInIJfrrbROKGSMOGvnKUCKOqTCQWSg
-	 aelcfW2o4Dz/ryjizLUHw4C8TnG/DqA0MkhLUO5QAE3MzaXz7VVJaltXxxZRSTHm/w
-	 yvLrlgvXWeo+mafAqSheqS3hKXEP+lY4FT9GJgkeELS7Ry0TuorMYWKFqrzdFfEt5L
-	 OQTjyzwJ13u7A==
+	b=pLx8cGjty4Av7EvuFhZGm06zvE+fJEx/T6LdYbGuWr1Kpn7VXQ8VwYafXrDnbdGA8
+	 OTOcSvmMteKhRNPpONLMHZ9/j7peBuet7bN0a8VyXX0fAXV0iclQHv6kh9HVu6MIAm
+	 DlrESCS7LYO7JztMixwR443j4hsExnSBrlTNcOxXedAyisLMpuFOTIuFnz/YpGcexf
+	 EqeOXJEst0+5/M01sL0p2V5J6uYtPzLZFYEn5MkFmPwm9+8PjR8FoiXMPOQNNV1CUx
+	 stv6xhWEG1bjNnN73vUPFdKCdrpxy4w6DkjhvId8+HpV7G1x2tNA7/wd1c47mEsp/8
+	 59qfVJ1WsOLMw==
 From: Jeff Layton <jlayton@kernel.org>
-Date: Mon, 02 Mar 2026 15:24:26 -0500
+Date: Mon, 02 Mar 2026 15:24:27 -0500
 MIME-Version: 1.0
-Message-Id: <20260302-iino-u64-v2-42-e5388800dae0@kernel.org>
+Message-Id: <20260302-iino-u64-v2-43-e5388800dae0@kernel.org>
 References: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
 In-Reply-To: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
 To: Alexander Viro <viro@zeniv.linux.org.uk>,
@@ -130,36 +130,36 @@ To: Alexander Viro <viro@zeniv.linux.org.uk>,
  Jesper Dangaard Brouer <hawk@kernel.org>,
  John Fastabend <john.fastabend@gmail.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2615; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=RKZuUpYb4VtVZY0tH0L18QSUQGxUCRV4jJmOJLJer90=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBppfH5iFQBv8bFDBGTskC/qmqUoyRayl4RP3EIs
- HIhZ7GnlZOJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaXx+QAKCRAADmhBGVaC
- FSYuD/9KUJo+A9x9CqKLjm3IT49I0BM1OGM6z/GI0KzplOX4l8uCoNg4oTvUPK9h3EN9pfGfbuW
- Fpg05zCdywvEum0pxOxTHWX2MEapQDU/3CIwe/G4R9SCD74ti0kl5PAfd+YTOxEesyxhtEy773E
- 8VBgA2Ca/DcoCYrAfJC6Is0SoaFBio0qig/JUiCKUX1jV8ChLSUStO9OuQ5XwafI8cQtFfmqgKP
- cFMH9EsyKw7kAsb+0wS7PvsukcGuTTNUuz+lg/TU2nK+4HcBqsIiSdlhXx9mig0Oj1otHB6+Uc5
- WmAhdnJdFl3XHxFEVRdyuGyxdRBF7fqll5lx1/dnlzQGKJLFo3ILagKqERFvChq3jVxJTsJ1Q0/
- 1MVfVNA0TgjhP3sOFFe0fEiBqqOGv5uQUhU3WknYVFsSCnio0rRpwhWlPG4iwj/aHfT/Y9eIi/Z
- ObSixQ09/kvkhmv4j4tCDnNQVTriAthi1yDdqvwvuEAv3bPCwNs3Gva4Kv26GFhbNyiYHLwPkog
- nDWFwwiUMMKMOngjBrMNjMAE9i2/CKRtcoPaykpf09W2vVii4JVNEqEyZTXxN+hyf0NA9vGh0dJ
- U5K1GFTKPj5rz45k4+yWSeU+ZKDcZpMWfvFlySY4TxnBnb/2+9GceaFGoMLwJYJAOpY3YsGAxPE
- gfeAKoddOxoBSbg==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1304; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=U3KpNq06HVb6xR2bnjz6Ns7LWxuPeJzECvQHHCOjgKk=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBppfH6tGlXo9qnz4TnjlgdQUVua3GSVfoKz23su
+ VdlF9QDcUSJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaXx+gAKCRAADmhBGVaC
+ FeRJEACqBomLSQl899X2tkLcb+Mqxa+0zQydlhBs5zMB3tLj1dC4mhQ3qXhr9GZdy2QuDdEXvR6
+ vXwurD8v/1nTDZLG9XQLSP8sRIixE4Em8uwyHAWIP2OVXlWoxwX6pPlfuUdwwq926PANjPdM5vO
+ 4ddU2YnYdZLplqR56VOCioDxob7oxZQLRlwnGiWF6d2kQsZsQMwKl5NeUX1T8S9Co60DP6zd/3f
+ ZLGej4CuVQEvn9zjEuTmnISBcYIBpPI5S2scJ+scU4e2YO4IxDD6DsBxQgZCnmgkJGGlLIPe4E8
+ cL2iVaAoC/C2m54CnBY4Ukj5o7qSQ0Txck0LuTfS26luzsaQlJ0KthqjxLtbeMfDV9aPjfCrzO9
+ 9R/LMA+z4YvyDAmsihoaRFWArYKK9ZvFw431NvDIrMiJan87FIiFVHzc2qYHsTgT89T5bIradyh
+ UdKj4iemeH8I9WXXW2+a1CMagwjFrhg/LxDFYV2MNhqgFHOVn8xYIbUOfzoG00EiSoV+f6HAEJp
+ C7lLp+ZQuJW3Ok5eXfNGbu+wP5FJT37ql+u7/pRYeNl5ecwnFVXSch6rB78FSwpHdCHjPuPirlg
+ Zfrmgto7pAcwfM9ZJxlgrSDPdpReleRhXjit8C2IkQigtXJ7UHT9AOLH+wCEUM4TgnWXHnVoXPE
+ /cNmeh0F91M/fAQ==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 X-Spamd-Bar: -
 X-MailFrom: jlayton@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: QJT3ZDKHHPKQU4D4FMI3SXSALELEDMMV
-X-Message-ID-Hash: QJT3ZDKHHPKQU4D4FMI3SXSALELEDMMV
+Message-ID-Hash: ZUDQ333XVN3YQTNKGX7IIOUK3XODINP2
+X-Message-ID-Hash: ZUDQ333XVN3YQTNKGX7IIOUK3XODINP2
 X-Mailman-Approved-At: Thu, 16 Apr 2026 16:56:39 +0000
 CC: linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, nvdimm@lists.linux.dev, fsverity@lists.linux.dev, linux-mm@kvack.org, netfs@lists.linux.dev, linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net, linux-nfs@vger.kernel.org, linux-cifs@vger.kernel.org, samba-technical@lists.samba.org, linux-nilfs@vger.kernel.org, v9fs@lists.linux.dev, linux-afs@lists.infradead.org, autofs@vger.kernel.org, ceph-devel@vger.kernel.org, codalist@coda.cs.cmu.edu, ecryptfs@vger.kernel.org, linux-mtd@lists.infradead.org, jfs-discussion@lists.sourceforge.net, ntfs3@lists.linux.dev, ocfs2-devel@lists.linux.dev, devel@lists.orangefs.org, linux-unionfs@vger.kernel.org, apparmor@lists.ubuntu.com, linux-security-module@vger.kernel.org, linux-integrity@vger.kernel.org, selinux@vger.kernel.org, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, netdev@vger.kernel.org, linux-perf-
  users@vger.kernel.org, linux-fscrypt@vger.kernel.org, linux-xfs@vger.kernel.org, linux-hams@vger.kernel.org, linux-x25@vger.kernel.org, audit@vger.kernel.org, linux-bluetooth@vger.kernel.org, linux-can@vger.kernel.org, linux-sctp@vger.kernel.org, bpf@vger.kernel.org, Jeff Layton <jlayton@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v2 042/110] overlayfs: use PRIino format for i_ino
+Subject: [Linaro-mm-sig] [PATCH v2 043/110] qnx4: use PRIino format for i_ino
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QJT3ZDKHHPKQU4D4FMI3SXSALELEDMMV/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZUDQ333XVN3YQTNKGX7IIOUK3XODINP2/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -188,7 +188,7 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.261];
+	NEURAL_HAM(-0.00)[-0.335];
 	RCPT_COUNT_GT_50(0.00)[172];
 	FROM_NEQ_ENVFROM(0.00)[jlayton@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
 	DKIM_TRACE(0.00)[kernel.org:-];
@@ -197,68 +197,43 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: 0C8E0412A39
+X-Rspamd-Queue-Id: D7BAC412A40
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Convert overlayfs i_ino format strings to use the PRIino format
+Convert qnx4 i_ino format strings to use the PRIino format
 macro in preparation for the widening of i_ino via kino_t.
+
+Also correct signed format specifiers to unsigned, since inode
+numbers are unsigned values.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- fs/overlayfs/export.c | 2 +-
- fs/overlayfs/namei.c  | 4 ++--
- fs/overlayfs/util.c   | 2 +-
- 3 files changed, 4 insertions(+), 4 deletions(-)
+ fs/qnx4/inode.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/fs/overlayfs/export.c b/fs/overlayfs/export.c
-index 83f80fdb156749e65a4ea0ab708cbff338dacdad..a17d55db8ebfab7e47f122eade22b96505392b05 100644
---- a/fs/overlayfs/export.c
-+++ b/fs/overlayfs/export.c
-@@ -262,7 +262,7 @@ static int ovl_dentry_to_fid(struct ovl_fs *ofs, struct inode *inode,
- 	return err;
+diff --git a/fs/qnx4/inode.c b/fs/qnx4/inode.c
+index 8aeb63d397cfd6c87b7862f0dc7a34cdfdf02f9b..1226de01f2d3c1d79fc054f2b882fdca2d9d78ff 100644
+--- a/fs/qnx4/inode.c
++++ b/fs/qnx4/inode.c
+@@ -62,7 +62,7 @@ static int qnx4_get_block( struct inode *inode, sector_t iblock, struct buffer_h
+ {
+ 	unsigned long phys;
  
- fail:
--	pr_warn_ratelimited("failed to encode file handle (ino=%lu, err=%i)\n",
-+	pr_warn_ratelimited("failed to encode file handle (ino=%" PRIino "u, err=%i)\n",
- 			    inode->i_ino, err);
- 	goto out;
+-	QNX4DEBUG((KERN_INFO "qnx4: qnx4_get_block inode=[%ld] iblock=[%ld]\n",inode->i_ino,iblock));
++	QNX4DEBUG((KERN_INFO "qnx4: qnx4_get_block inode=[%" PRIino "u] iblock=[%ld]\n", inode->i_ino, iblock));
+ 
+ 	phys = qnx4_block_map( inode, iblock );
+ 	if ( phys ) {
+@@ -128,7 +128,7 @@ unsigned long qnx4_block_map( struct inode *inode, long iblock )
+ 			brelse( bh );
+ 	}
+ 
+-	QNX4DEBUG((KERN_INFO "qnx4: mapping block %ld of inode %ld = %ld\n",iblock,inode->i_ino,block));
++	QNX4DEBUG((KERN_INFO "qnx4: mapping block %ld of inode %" PRIino "u = %ld\n", iblock, inode->i_ino, block));
+ 	return block;
  }
-diff --git a/fs/overlayfs/namei.c b/fs/overlayfs/namei.c
-index d8dd4b0529843bc20e4efc1924c2be3b5712b343..6cab72d7f70611a83bba433c769323a8954a61d4 100644
---- a/fs/overlayfs/namei.c
-+++ b/fs/overlayfs/namei.c
-@@ -591,7 +591,7 @@ int ovl_verify_origin_xattr(struct ovl_fs *ofs, struct dentry *dentry,
  
- fail:
- 	inode = d_inode(real);
--	pr_warn_ratelimited("failed to verify %s (%pd2, ino=%lu, err=%i)\n",
-+	pr_warn_ratelimited("failed to verify %s (%pd2, ino=%" PRIino "u, err=%i)\n",
- 			    is_upper ? "upper" : "origin", real,
- 			    inode ? inode->i_ino : 0, err);
- 	goto out;
-@@ -831,7 +831,7 @@ struct dentry *ovl_lookup_index(struct ovl_fs *ofs, struct dentry *upper,
- 			index = NULL;
- 			goto out;
- 		}
--		pr_warn_ratelimited("failed inode index lookup (ino=%lu, key=%.*s, err=%i);\n"
-+		pr_warn_ratelimited("failed inode index lookup (ino=%" PRIino "u, key=%.*s, err=%i);\n"
- 				    "overlayfs: mount with '-o index=off' to disable inodes index.\n",
- 				    d_inode(origin)->i_ino, name.len, name.name,
- 				    err);
-diff --git a/fs/overlayfs/util.c b/fs/overlayfs/util.c
-index 3f1b763a8bb4cb842e5d5cebffbee6b8dbe01de9..536504e9803e6457fb7d248036263da446569051 100644
---- a/fs/overlayfs/util.c
-+++ b/fs/overlayfs/util.c
-@@ -1092,7 +1092,7 @@ static void ovl_cleanup_index(struct dentry *dentry)
- 	got_write = true;
- 	inode = d_inode(upperdentry);
- 	if (!S_ISDIR(inode->i_mode) && inode->i_nlink != 1) {
--		pr_warn_ratelimited("cleanup linked index (%pd2, ino=%lu, nlink=%u)\n",
-+		pr_warn_ratelimited("cleanup linked index (%pd2, ino=%" PRIino "u, nlink=%u)\n",
- 				    upperdentry, inode->i_ino, inode->i_nlink);
- 		/*
- 		 * We either have a bug with persistent union nlink or a lower
 
 -- 
 2.53.0
