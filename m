@@ -2,110 +2,110 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sNi7Blof4Wl0pQAAu9opvQ
+	id mJ8lOWIf4Wl0pQAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:41:46 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:41:54 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id D8CFE41312B
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:41:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9D6A6413143
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:41:54 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E98C445CC8
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:41:44 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 685024557F
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:41:53 +0000 (UTC)
 Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	by lists.linaro.org (Postfix) with ESMTPS id 011193F69B
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  3 Mar 2026 13:13:07 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id ED77F3F69B
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  3 Mar 2026 13:20:39 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=f062MBur;
-	dkim=pass header.d=redhat.com header.s=google header.b=bnXHuqVt;
+	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=avWNFnwG;
+	dkim=pass header.d=redhat.com header.s=google header.b=FeHyqRXT;
 	dmarc=pass (policy=quarantine) header.from=redhat.com;
 	spf=pass (lists.linaro.org: domain of mripard@redhat.com designates 170.10.133.124 as permitted sender) smtp.mailfrom=mripard@redhat.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1772543587;
+	s=mimecast20190719; t=1772544039;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=5qYfoI6IhVhwhSZGcHAz8lUbAzhXZJ/rjYc5L9rs8fk=;
-	b=f062MBurugz94+nJwzN8eKrz3ldAidzMeD7Tf9N7NeBw+F9wKhT/YU1DVDZ+LFyDE81wm6
-	b9dSS7xcqDsLdMfCRodFP2L386hdZok7f+W3+HVIyCQubhcIXvQhUe6FFFFSdhhCAo5m+q
-	1JL1+8PsfKkyZ3tNK8a+oFJ5/Mc6mXY=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
+	bh=8HeSeolQ1fBhOJOln5m5tn/ig4w91f0rYiMidADsnM8=;
+	b=avWNFnwG0KrQf5G4rLUqPi7gHHVTxahuPE1V8ehsP9PNeQEINV2TI38Dy1C7ngJvKhfr8P
+	D3RvbFZiYKZHoHMixNCRoeWcvq8mt3PRpkgaA/uQRO/+m4LDRV2GhXz29SstFpdldmV1Wz
+	MbIuejYBEnAjGGxIHYFEat6RLvtPmHA=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-358--bk2SAPFMf6lqbmNF7-C1w-1; Tue, 03 Mar 2026 08:13:06 -0500
-X-MC-Unique: -bk2SAPFMf6lqbmNF7-C1w-1
-X-Mimecast-MFC-AGG-ID: -bk2SAPFMf6lqbmNF7-C1w_1772543585
-Received: by mail-wm1-f72.google.com with SMTP id 5b1f17b1804b1-4837246211bso67853565e9.0
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 03 Mar 2026 05:13:05 -0800 (PST)
+ us-mta-12-YSnjv65sNnqZkkPmmcwbQQ-1; Tue, 03 Mar 2026 08:20:38 -0500
+X-MC-Unique: YSnjv65sNnqZkkPmmcwbQQ-1
+X-Mimecast-MFC-AGG-ID: YSnjv65sNnqZkkPmmcwbQQ_1772544037
+Received: by mail-wr1-f70.google.com with SMTP id ffacd0b85a97d-439b20722e3so1130153f8f.0
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 03 Mar 2026 05:20:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1772543585; x=1773148385; darn=lists.linaro.org;
+        d=redhat.com; s=google; t=1772544037; x=1773148837; darn=lists.linaro.org;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=5qYfoI6IhVhwhSZGcHAz8lUbAzhXZJ/rjYc5L9rs8fk=;
-        b=bnXHuqVtMC7zvE2cR2GNsYBN8dTshZot/gwnT5vyOuk9L24gJRrndMvZB4GaOTpZ8H
-         pEnCJ5M/rXZFHE2X222YwchsfVvAqyWjrcel/s/Qb7merQDosH+QK7mlr6tDfSGD3K5V
-         COtdbctehgfloVw3Y30okTTHeaGrqHUJt7UBxvUczVllGWl9hei/RLtWFionI1PnXNN3
-         rqleW/iHRjkon/u5VECSlVBWaOPKMzAXCMVyrZ+vYJ1WkQa4gtQGoIsBY59rd+WrH+jp
-         sSgh4DILsa0ako2vTOiUZI+u7qZVrHrlI00j2USI2wYW9RtNKF6WkZtkQeiuMy7K9iU8
-         mPvQ==
+        bh=8HeSeolQ1fBhOJOln5m5tn/ig4w91f0rYiMidADsnM8=;
+        b=FeHyqRXTE8x06qgGakZiQOj0BeFe5cuV58JR2UmCAOPAtb9DENAWXDtcmX38pW9WJH
+         uLxD/y+lFjUWKAC2gqI/DNfxv1OWD/UQGKidj5PDgJvMidxlbXTAl3VoyKkU9PBcCp0m
+         bV68tCv8TYHlhdHs4ND2Z54AIGVIslAnk6ApWd0VkHeLSb3bG5yPCxmosQjtqp4QXAB/
+         iRJP6r0l2j1ULaXxuOZq7XEjl+MPa/1yQOlwhq1qf14guEb2XMJlLHFFYvDWSuanhsy1
+         M8jHC754G7GGDRFCc4Lbk7fSLCR3wEhVEAwtmZ1t1DrtsGfMS41XAmNLcpmtwpea46m9
+         6HIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772543585; x=1773148385;
+        d=1e100.net; s=20230601; t=1772544037; x=1773148837;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=5qYfoI6IhVhwhSZGcHAz8lUbAzhXZJ/rjYc5L9rs8fk=;
-        b=TQs1yweALtJGCBT8BYV/Y7RtgfFTYCwBHDFArCDddv9sI6rxPGp2dw9tDyPHEEqp3k
-         5hC6UktB2vsSmS/IMEvc845WQxk7fV41MS5QpIQdIynRerHUQeoWC7GxhZYKrPKCiQGb
-         wOdNYFGX9zbkZgXOjiCkZiu+TmWSO2jWjs29TQ2kJ/mIIQiWvSqrJ/ava9qO2dSwkQ/C
-         KdXMEFDdrPR+tSxzSbjv9an26ag3rG/bbFXqUvRLAi1xMJfgMmWW17/cfD4Dh7WWkt8V
-         fw2nASCbDpTAl/SDp9hYMRAGWJPA0oQrdiU6VWpLxSlq/iLJ77BYorXEbPULu17GG9Q2
-         ASNA==
-X-Forwarded-Encrypted: i=1; AJvYcCWTYycdC/G/mk2AIcu3PcrMLowhcmBw9u8tHhVKe4+oh6/0enlzd9F0umz69E4diFf/vk39YuM1ob5kskUD@lists.linaro.org
-X-Gm-Message-State: AOJu0YwKUc7/yvsMPrEPPWLJ0QMzU7BW3iHBw1V1iBNKAY/G6uvBpKKC
-	nYYrwjGCrG2xDef75f/4KYLW5sR3SuSx7BmHFJ5yEBCOCdHDkhREW8m3XMjfieg8muMEuzw6J8E
-	UJTteUl9iztjRpaR9HQQEwFIZ59Ppgprc1UU0ke2KCH6QQnzoYNvG+gvTfedX6Qt9I2il
-X-Gm-Gg: ATEYQzynEDUFLrPSQ4UA/eriKWoKJZHSahEooR5c7uu7TtE5txKxbxOXnzKFzEZVehy
-	Nmfh2Vnwy7VmQIQLqMWHRc0Htn+ZF+cjqE2NZ6UdemcRfojWUWsEgNdnlQ5NwD85COVzAcdGyQN
-	hKSILWQT/nXUodKHxh47/uuH88dyYnnCY3BmzmUgg+SwkJJn4eLpCI/CgJL0tiIkooUAuJ5YS1e
-	ASH31bAGDAbRN3rGy9GKLduFwR5pnnvPoz8JSXEOkQmKEO1gtbxjVDj2wj8DPsrB1L2g6WNui0+
-	6iy2BnhGgWM1MPX4jtLsxzTLqPI1mxbnwzHpv4s6Zw2HJmwbt6wgWdaOdMagHy4DLyCOdiIasA=
+        bh=8HeSeolQ1fBhOJOln5m5tn/ig4w91f0rYiMidADsnM8=;
+        b=nX2eUpTXs1ww2cshIxcyixLGOoe/9VIkywOzl6Q4lDqTplkt4VQe9bYIfCKZw9Hq2L
+         hHLdMQPpOVBIbqBEm3ZGwE7rU639jgt1M/MTgIWKwy1PP7bKGmzg7wSxDXhXPBzWZoeg
+         /AWlUCSULTJXCwuxP8d5/lzMqqYX3ZpH1HgwhsKe8fm0CNpxqNewPnPeA6HlnmFEz4gw
+         IdlW3CR43VFAKFVGC54TVm0lxAbiZhDG7/SflTghqHutrEILsjPqGqv8k5spKxdji6yu
+         ppW1k/JsmxfYrGyBW8gyBlVIzD1v7Ie8at7saP4KchsnMeIIxZVKelqpHFJMOMzUz+Lf
+         T02A==
+X-Forwarded-Encrypted: i=1; AJvYcCVOlpYg+I+u84ILBLpJtjtYelLflgTieYvwZhXdefIh94TUym+IrH734ddE5tGFIQLA4Pq19npe/ZIW9Vc3@lists.linaro.org
+X-Gm-Message-State: AOJu0YyD9pOFGyUXLLOofbAxrzgrL86pEvzGNPVnMvjWuMof7t6LL1DD
+	j4LD6pimyAjbpE30OBxu8/Q1QA1sYP46i2vj4xLokia4u1Sn5ZrZh3VQU9y3c3lewGhwMao5Gag
+	r8regP3b9YvAGjo+L0R5vls4SbEb25swNJRDvXm8JpkYGDvY5K65hkq5uU8Y6CcODE89t
+X-Gm-Gg: ATEYQzwyHn8uk1IOQBNG+zwY2ucjykS2ev/RnfOmJw5EGoUoFmLg3oCqJ0u2ioUu8BO
+	Kna5hlEn8Ux19IYpYVFhzObhU2Gz/tUQG8XYj/OSyJ2VrX54SiuD+kpCG+JwwQ3m6ZY4/uEmuUG
+	YcaWhCYqKljPruGGDzpp3Ae239mWELO/f/rh0ip5VRUBZEBLrSw0ugsWPt1igd1grA5W1W+9VdX
+	x9m1ZjI/VLnA6f7rPBnzqsXPZlduinvSs0SroMla72xlhG4U59BiExskLChIWvrtXzuELIDjWay
+	cIJHpX0qaiz2byUYWx45G+8QilPJKK56HtfY6OqYdN1Bbxm2zuCAKsylVVfs6pjUbg3sY/g1yw=
 	=
-X-Received: by 2002:a05:600c:1393:b0:483:498f:7963 with SMTP id 5b1f17b1804b1-483c9c1f8fcmr272330295e9.26.1772543584834;
-        Tue, 03 Mar 2026 05:13:04 -0800 (PST)
-X-Received: by 2002:a05:600c:1393:b0:483:498f:7963 with SMTP id 5b1f17b1804b1-483c9c1f8fcmr272329585e9.26.1772543584305;
-        Tue, 03 Mar 2026 05:13:04 -0800 (PST)
+X-Received: by 2002:a05:6000:25c6:b0:439:c14b:2100 with SMTP id ffacd0b85a97d-439c14b22d7mr3433787f8f.12.1772544036651;
+        Tue, 03 Mar 2026 05:20:36 -0800 (PST)
+X-Received: by 2002:a05:6000:25c6:b0:439:c14b:2100 with SMTP id ffacd0b85a97d-439c14b22d7mr3433696f8f.12.1772544036002;
+        Tue, 03 Mar 2026 05:20:36 -0800 (PST)
 Received: from localhost ([2a01:e0a:b25:f902::ff])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48512692c14sm17392055e9.7.2026.03.03.05.13.03
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439af926c53sm24022288f8f.8.2026.03.03.05.20.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 03 Mar 2026 05:13:03 -0800 (PST)
-Date: Tue, 3 Mar 2026 14:13:02 +0100
+        Tue, 03 Mar 2026 05:20:35 -0800 (PST)
+Date: Tue, 3 Mar 2026 14:20:34 +0100
 From: Maxime Ripard <mripard@redhat.com>
 To: Albert Esteve <aesteve@redhat.com>
-Message-ID: <20260303-weightless-crafty-hyrax-bdf1ca@houat>
+Message-ID: <20260303-rigorous-cow-of-saturation-23f87b@houat>
 References: <20260303-b4-dmabuf-heap-coherent-rmem-v2-0-65a4653b3378@redhat.com>
- <20260303-b4-dmabuf-heap-coherent-rmem-v2-3-65a4653b3378@redhat.com>
+ <20260303-b4-dmabuf-heap-coherent-rmem-v2-4-65a4653b3378@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20260303-b4-dmabuf-heap-coherent-rmem-v2-3-65a4653b3378@redhat.com>
-X-Spamd-Bar: --------
+In-Reply-To: <20260303-b4-dmabuf-heap-coherent-rmem-v2-4-65a4653b3378@redhat.com>
+X-Spamd-Bar: ------
 X-MailFrom: mripard@redhat.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 7XWGXPZVEMF4S3SLLM7JXVVRWSSBWS7T
-X-Message-ID-Hash: 7XWGXPZVEMF4S3SLLM7JXVVRWSSBWS7T
-X-Mailman-Approved-At: Thu, 16 Apr 2026 17:00:20 +0000
+Message-ID-Hash: 4GQB62CWUNADUEORUUV2CNJWVIJ72A7S
+X-Message-ID-Hash: 4GQB62CWUNADUEORUUV2CNJWVIJ72A7S
+X-Mailman-Approved-At: Thu, 16 Apr 2026 17:00:21 +0000
 CC: Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Robin Murphy <robin.murphy@arm.com>, Rob Herring <robh@kernel.org>, Saravana Kannan <saravanak@kernel.org>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, iommu@lists.linux.dev, devicetree@vger.kernel.org, echanude@redhat.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 3/6] of_reserved_mem: add a helper for rmem device_init op
+Subject: [Linaro-mm-sig] Re: [PATCH v2 4/6] dma-buf: heaps: Add Coherent heap to dmabuf heaps
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7XWGXPZVEMF4S3SLLM7JXVVRWSSBWS7T/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4GQB62CWUNADUEORUUV2CNJWVIJ72A7S/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============1346694405166835359=="
+Content-Type: multipart/mixed; boundary="===============1215482395879443053=="
 X-Spamd-Result: default: False [1.39 / 15.00];
 	SIGNED_PGP(-2.00)[];
 	DMARC_POLICY_QUARANTINE(1.50)[redhat.com : SPF not aligned (relaxed),quarantine];
@@ -130,117 +130,232 @@ X-Spamd-Result: default: False [1.39 / 15.00];
 	FROM_NEQ_ENVFROM(0.00)[mripard@redhat.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.974];
+	NEURAL_HAM(-0.00)[-0.973];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: D8CFE41312B
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
+X-Rspamd-Queue-Id: 9D6A6413143
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 
---===============1346694405166835359==
+--===============1215482395879443053==
 Content-Type: multipart/signed; micalg=pgp-sha384;
-	protocol="application/pgp-signature"; boundary="6eyb3mm7ilqztbmi"
+	protocol="application/pgp-signature"; boundary="3oyzr26awgsnuxvr"
 Content-Disposition: inline
 
 
---6eyb3mm7ilqztbmi
+--3oyzr26awgsnuxvr
 Content-Type: text/plain; protected-headers=v1; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH v2 3/6] of_reserved_mem: add a helper for rmem
- device_init op
+Subject: Re: [PATCH v2 4/6] dma-buf: heaps: Add Coherent heap to dmabuf heaps
 MIME-Version: 1.0
 
-On Tue, Mar 03, 2026 at 01:33:46PM +0100, Albert Esteve wrote:
-> Add a helper function wrapping internal reserved memory
-> device_init call and expose it externally.
+Hi,
+
+On Tue, Mar 03, 2026 at 01:33:47PM +0100, Albert Esteve wrote:
+> Add a dma-buf heap for DT coherent reserved-memory
+> (i.e., 'shared-dma-pool' without 'reusable' property),
+> exposing one heap per region for userspace buffers.
 >=20
-> Use the new helper function within of_reserved_mem_device_init_by_idx().
+> The heap binds the heap device to each memory region so
+> coherent allocations use the correct dev->dma_mem, and
+> it defers registration until module_init when normal
+> allocators are available.
 >=20
 > Signed-off-by: Albert Esteve <aesteve@redhat.com>
 > ---
->  drivers/of/of_reserved_mem.c    | 27 +++++++++++++++++++++++----
->  include/linux/of_reserved_mem.h |  8 ++++++++
->  2 files changed, 31 insertions(+), 4 deletions(-)
+>  drivers/dma-buf/dma-heap.c            |   4 +-
+>  drivers/dma-buf/heaps/Kconfig         |   9 +
+>  drivers/dma-buf/heaps/Makefile        |   1 +
+>  drivers/dma-buf/heaps/coherent_heap.c | 426 ++++++++++++++++++++++++++++=
+++++++
+>  include/linux/dma-heap.h              |  11 +
+>  include/linux/dma-map-ops.h           |   7 +
+>  6 files changed, 456 insertions(+), 2 deletions(-)
 >=20
-> diff --git a/drivers/of/of_reserved_mem.c b/drivers/of/of_reserved_mem.c
-> index 1fd28f8056108..3a350bef8f11e 100644
-> --- a/drivers/of/of_reserved_mem.c
-> +++ b/drivers/of/of_reserved_mem.c
-> @@ -605,6 +605,28 @@ struct rmem_assigned_device {
->  static LIST_HEAD(of_rmem_assigned_device_list);
->  static DEFINE_MUTEX(of_rmem_assigned_device_mutex);
+> diff --git a/drivers/dma-buf/dma-heap.c b/drivers/dma-buf/dma-heap.c
+> index 88189d4e48561..ba87e5ac16ae2 100644
+> --- a/drivers/dma-buf/dma-heap.c
+> +++ b/drivers/dma-buf/dma-heap.c
+> @@ -390,8 +390,8 @@ struct dma_heap *dma_heap_add(const struct dma_heap_e=
+xport_info *exp_info)
 > =20
-> +/**
-> + * of_reserved_mem_device_init_with_mem() - assign reserved memory regio=
-n to
-> + *					    given device
-> + * @dev:	Pointer to the device to configure
-> + * @rmem:	Reserved memory region to assign
-> + *
-> + * This function assigns respective DMA-mapping operations based on the
-> + * reserved memory region already provided in @rmem to the @dev device,
-> + * without walking DT nodes.
-> + *
-> + * Returns error code or zero on success.
-> + */
-> +int of_reserved_mem_device_init_with_mem(struct device *dev,
-> +					 struct reserved_mem *rmem)
+>  	heap =3D dma_heap_create(exp_info);
+>  	if (IS_ERR(heap)) {
+> -		pr_err("dma_heap: failed to create heap (%d)\n", PTR_ERR(heap));
+> -		return PTR_ERR(heap);
+> +		pr_err("dma_heap: failed to create heap (%ld)\n", PTR_ERR(heap));
+> +		return ERR_CAST(heap);
+
+This looks unrelated and should possibly be squashed into the previous
+patch that introduces dma_heap_create()?
+
+> +static int coherent_heap_init_dma_mask(struct device *dev)
 > +{
-> +	if (!dev || !rmem || !rmem->ops || !rmem->ops->device_init)
+> +	int ret;
+> +
+> +	ret =3D dma_coerce_mask_and_coherent(dev, DMA_BIT_MASK(64));
+> +	if (!ret)
+> +		return 0;
+> +
+> +	/* Fallback to 32-bit DMA mask */
+> +	return dma_coerce_mask_and_coherent(dev, DMA_BIT_MASK(32));
+> +}
+
+Why do you need to mess with the DMA mask? I'd expect that device to be
+able to access everything.
+
+> +static int __coherent_heap_register(struct reserved_mem *rmem)
+> +{
+> +	struct dma_heap_export_info exp_info;
+> +	struct coherent_heap *coh_heap;
+> +	struct device *heap_dev;
+> +	int ret;
+> +
+> +	if (!rmem || !rmem->name)
 > +		return -EINVAL;
 > +
-> +	return rmem->ops->device_init(rmem, dev);
-> +}
-> +EXPORT_SYMBOL_GPL(of_reserved_mem_device_init_with_mem);
+> +	coh_heap =3D kzalloc_obj(*coh_heap);
+> +	if (!coh_heap)
+> +		return -ENOMEM;
 > +
->  /**
->   * of_reserved_mem_device_init_by_idx() - assign reserved memory region =
-to
->   *					  given device
-> @@ -643,14 +665,11 @@ int of_reserved_mem_device_init_by_idx(struct devic=
-e *dev,
->  	rmem =3D of_reserved_mem_lookup(target);
->  	of_node_put(target);
-> =20
-> -	if (!rmem || !rmem->ops || !rmem->ops->device_init)
-> -		return -EINVAL;
-> -
->  	rd =3D kmalloc_obj(struct rmem_assigned_device);
->  	if (!rd)
->  		return -ENOMEM;
-> =20
-> -	ret =3D rmem->ops->device_init(rmem, dev);
-> +	ret =3D of_reserved_mem_device_init_with_mem(dev, rmem);
->  	if (ret =3D=3D 0) {
->  		rd->dev =3D dev;
->  		rd->rmem =3D rmem;
+> +	coh_heap->rmem =3D rmem;
+> +	coh_heap->name =3D kstrdup(rmem->name, GFP_KERNEL);
+> +	if (!coh_heap->name) {
+> +		ret =3D -ENOMEM;
+> +		goto free_coherent_heap;
+> +	}
+> +
+> +	exp_info.name =3D coh_heap->name;
+> +	exp_info.ops =3D &coherent_heap_ops;
+> +	exp_info.priv =3D coh_heap;
+> +
+> +	coh_heap->heap =3D dma_heap_create(&exp_info);
+> +	if (IS_ERR(coh_heap->heap)) {
+> +		ret =3D PTR_ERR(coh_heap->heap);
+> +		goto free_name;
+> +	}
+> +
+> +	heap_dev =3D dma_heap_get_dev(coh_heap->heap);
+> +	ret =3D coherent_heap_init_dma_mask(heap_dev);
+> +	if (ret) {
+> +		pr_err("coherent_heap: failed to set DMA mask (%d)\n", ret);
+> +		goto destroy_heap;
+> +	}
+> +
+> +	ret =3D of_reserved_mem_device_init_with_mem(heap_dev, rmem);
+> +	if (ret) {
+> +		pr_err("coherent_heap: failed to initialize memory (%d)\n", ret);
+> +		goto destroy_heap;
+> +	}
+> +
+> +	ret =3D dma_heap_register(coh_heap->heap);
+> +	if (ret) {
+> +		pr_err("coherent_heap: failed to register heap (%d)\n", ret);
+> +		goto destroy_heap;
+> +	}
 
-I think you need to take the allocation of rd, and everything below.
-Otherwise, your device, despite being attechd, wouldn't be listed
-anywhere.
+I guess it's more of a comment about your previous patch, but it's not
+clear to me why you needed to split dma_heap_add into dma_heap_create /
+_register. Can you expand a bit?
+
+> diff --git a/include/linux/dma-heap.h b/include/linux/dma-heap.h
+> index 1b0ea43ba66c3..77e6cb66ffce1 100644
+> --- a/include/linux/dma-heap.h
+> +++ b/include/linux/dma-heap.h
+> @@ -9,10 +9,12 @@
+>  #ifndef _DMA_HEAPS_H
+>  #define _DMA_HEAPS_H
+> =20
+> +#include <linux/errno.h>
+>  #include <linux/types.h>
+> =20
+>  struct dma_heap;
+>  struct device;
+> +struct reserved_mem;
+> =20
+>  /**
+>   * struct dma_heap_ops - ops to operate on a given heap
+> @@ -53,4 +55,13 @@ struct dma_heap *dma_heap_add(const struct dma_heap_ex=
+port_info *exp_info);
+> =20
+>  extern bool mem_accounting;
+> =20
+> +#if IS_ENABLED(CONFIG_DMABUF_HEAPS_COHERENT)
+> +int dma_heap_coherent_register(struct reserved_mem *rmem);
+> +#else
+> +static inline int dma_heap_coherent_register(struct reserved_mem *rmem)
+> +{
+> +	return -EOPNOTSUPP;
+> +}
+> +#endif
+> +
+>  #endif /* _DMA_HEAPS_H */
+
+Do you still need that now that you switched to an iterator-like
+function?
+
+> diff --git a/include/linux/dma-map-ops.h b/include/linux/dma-map-ops.h
+> index 60b63756df821..c87e5e44e5383 100644
+> --- a/include/linux/dma-map-ops.h
+> +++ b/include/linux/dma-map-ops.h
+> @@ -12,6 +12,7 @@
+> =20
+>  struct cma;
+>  struct iommu_ops;
+> +struct reserved_mem;
+> =20
+>  struct dma_map_ops {
+>  	void *(*alloc)(struct device *dev, size_t size,
+> @@ -161,6 +162,7 @@ int dma_alloc_from_dev_coherent(struct device *dev, s=
+size_t size,
+>  int dma_release_from_dev_coherent(struct device *dev, int order, void *v=
+addr);
+>  int dma_mmap_from_dev_coherent(struct device *dev, struct vm_area_struct=
+ *vma,
+>  		void *cpu_addr, size_t size, int *ret);
+> +struct reserved_mem *dma_coherent_get_reserved_region(unsigned int idx);
+>  #else
+>  static inline int dma_declare_coherent_memory(struct device *dev,
+>  		phys_addr_t phys_addr, dma_addr_t device_addr, size_t size)
+> @@ -172,6 +174,11 @@ static inline int dma_declare_coherent_memory(struct=
+ device *dev,
+>  #define dma_release_from_dev_coherent(dev, order, vaddr) (0)
+>  #define dma_mmap_from_dev_coherent(dev, vma, vaddr, order, ret) (0)
+>  static inline void dma_release_coherent_memory(struct device *dev) { }
+> +static inline
+> +struct reserved_mem *dma_coherent_get_reserved_region(unsigned int idx)
+> +{
+> +	return NULL;
+> +}
+>  #endif /* CONFIG_DMA_DECLARE_COHERENT */
+> =20
+>  #ifdef CONFIG_DMA_GLOBAL_POOL
+
+To preserve bisectability, you shouldn't do it that way. Introduce this
+function into a preliminary patch, and then use it in this one.
 
 Maxime
 
---6eyb3mm7ilqztbmi
+--3oyzr26awgsnuxvr
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iJUEABMJAB0WIQTkHFbLp4ejekA/qfgnX84Zoj2+dgUCaabeWQAKCRAnX84Zoj2+
-dobdAYD53cfYylVyAMmjYQNu5L2HhH4nvwgXPsXDn+F4I5VP5R8b4pw9vf6buYC3
-VoNwMQ4BfRUwUB8fZ2DXMX2IzVK3CXj6DaDP6OvnbvuzEI1Mw7ev9Mpzd14engew
-qmADP+lGrA==
-=WwGV
+iJUEABMJAB0WIQTkHFbLp4ejekA/qfgnX84Zoj2+dgUCaabgIgAKCRAnX84Zoj2+
+dpoAAYDbvla5ginFJZBwWscCdbzpqxZu0Nmn5Wmi+a860nETKwKEQNqs0s5JuwUy
+LJBvBPIBf3AhBVl15Ze7xHfd358n8N5AmjXfB9uhtuZLkCNeqTzjr/j0hj5xhQ45
+SMroDA+cOQ==
+=6R14
 -----END PGP SIGNATURE-----
 
---6eyb3mm7ilqztbmi--
+--3oyzr26awgsnuxvr--
 
 
---===============1346694405166835359==
+--===============1215482395879443053==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -250,5 +365,5 @@ _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
 
---===============1346694405166835359==--
+--===============1215482395879443053==--
 
