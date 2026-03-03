@@ -2,57 +2,55 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id GNAQL0zVpmnHWgAAu9opvQ
+	id CI6nIVXVpmnHWgAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 03 Mar 2026 13:34:20 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 03 Mar 2026 13:34:29 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4AA3F1EF7EE
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 03 Mar 2026 13:34:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id F3D071EF804
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 03 Mar 2026 13:34:28 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 1F6263F727
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  3 Mar 2026 12:34:19 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B0DD33F727
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  3 Mar 2026 12:34:27 +0000 (UTC)
 Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	by lists.linaro.org (Postfix) with ESMTPS id C6F843F727
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  3 Mar 2026 12:34:16 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 6556C400FB
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  3 Mar 2026 12:34:24 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=FU+1ke5T;
+	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=U8jZ7cMi;
 	dmarc=pass (policy=quarantine) header.from=redhat.com;
 	spf=pass (lists.linaro.org: domain of aesteve@redhat.com designates 170.10.133.124 as permitted sender) smtp.mailfrom=aesteve@redhat.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1772541256;
+	s=mimecast20190719; t=1772541264;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=U6xhLiQFL+mbcgfrby6QpV2yp3OnQ8VMri8wk6ood+Y=;
-	b=FU+1ke5TUtOAVxArozDxDeBNMYoaGH7POrsOFamq1gsxePKKvvuwwBY8mWLgMZd9FTS7vr
-	mG/QtY9AnGOhZ5k7JayBpp05f0c3CiZSH6Rqe14hTnivCqQJVK7CsaoOY4V0G6weKEh2fM
-	aNO19pL3DovDWuKBNAcD03LOy5ePHUc=
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=YW5SxBIIgkWx2jwEXG8osOzGtmkFwVM71Xjy+8ygUKo=;
+	b=U8jZ7cMi4VkHQfgwu0aZvVJdDzba29zwg4ZdeoAzj9hRxmR5S+Ie7XzdqS8zYYyeN5JL9w
+	wKkSjfSWDtq8V2scq1kTOZelFANl3h8Vp6K2/EafpW8VDsHEqmtO7bDLZQBDA85T1gbzbx
+	gu+vPTBIoU30IvCDaq720Ra39/dBPAk=
+Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-470-cN6t_CJ8MaSdHHuavs01GA-1; Tue,
- 03 Mar 2026 07:34:13 -0500
-X-MC-Unique: cN6t_CJ8MaSdHHuavs01GA-1
-X-Mimecast-MFC-AGG-ID: cN6t_CJ8MaSdHHuavs01GA_1772541251
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-384-t6iJc4AkPQu8r09LjPv5Jw-1; Tue,
+ 03 Mar 2026 07:34:19 -0500
+X-MC-Unique: t6iJc4AkPQu8r09LjPv5Jw-1
+X-Mimecast-MFC-AGG-ID: t6iJc4AkPQu8r09LjPv5Jw_1772541257
 Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 827351956089;
-	Tue,  3 Mar 2026 12:34:10 +0000 (UTC)
+	by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 439B3180025B;
+	Tue,  3 Mar 2026 12:34:17 +0000 (UTC)
 Received: from [192.168.1.153] (unknown [10.44.32.231])
-	by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id DBF6530001B9;
-	Tue,  3 Mar 2026 12:34:03 +0000 (UTC)
+	by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 26F2830001B9;
+	Tue,  3 Mar 2026 12:34:10 +0000 (UTC)
 From: Albert Esteve <aesteve@redhat.com>
-Date: Tue, 03 Mar 2026 13:33:43 +0100
-Message-Id: <20260303-b4-dmabuf-heap-coherent-rmem-v2-0-65a4653b3378@redhat.com>
+Date: Tue, 03 Mar 2026 13:33:44 +0100
 MIME-Version: 1.0
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/33NQQ7CIBCF4as0s3ZMmTaNuPIepgsKg7CgNICNp
- undxSZuXf5v8b0NMifPGa7NBolXn32ca9CpAe3U/GD0pjZQS0NL1OHUowlqelp0rBbU0XHiuWA
- KHFAKazpJg7IsoRJLYutfB38fazufS0zv420V3/UH9//hVaBAYy3bviN5UfqW2DhVzjoGGPd9/
- wAJXkgtyQAAAA==
-X-Change-ID: 20260223-b4-dmabuf-heap-coherent-rmem-91fd3926afe9
+Message-Id: <20260303-b4-dmabuf-heap-coherent-rmem-v2-1-65a4653b3378@redhat.com>
+References: <20260303-b4-dmabuf-heap-coherent-rmem-v2-0-65a4653b3378@redhat.com>
+In-Reply-To: <20260303-b4-dmabuf-heap-coherent-rmem-v2-0-65a4653b3378@redhat.com>
 To: Sumit Semwal <sumit.semwal@linaro.org>,
  Benjamin Gaignard <benjamin.gaignard@collabora.com>,
  Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>,
@@ -61,116 +59,185 @@ To: Sumit Semwal <sumit.semwal@linaro.org>,
  Marek Szyprowski <m.szyprowski@samsung.com>,
  Robin Murphy <robin.murphy@arm.com>, Rob Herring <robh@kernel.org>,
  Saravana Kannan <saravanak@kernel.org>
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1772541243; l=2748;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1772541243; l=3358;
  i=aesteve@redhat.com; s=20260303; h=from:subject:message-id;
- bh=IPXiwZtCc7P08ZgUjvcnSviyFkXkojb59Nxf4/tXsiE=;
- b=UoJm8cOUwDbUZaGCu/6/A2ZEkCDOViFBfczvAM5knasQJRy7s18G7gsVP6zwFOy1FBwWL/nXj
- M/F79L4YdOoCAv3QZE2oXpL/jmdtEbuyArFvtu7fbTfA4XBopk6UHWV
+ bh=QjNRn783TryVaP32s1fqdde0JJl5VlRoYl0aey6l8JI=;
+ b=ZTgmWxaTm/nzxm/hJzIpamvvLX7d8KyH9pT9SgKvu5Ga0Z6Na1Isl5iBXBfJT8GRq6iQDFm90
+ qFRX/fnBUg+DuPrGY0zNdK7au0KM6M72mRUXBFqDgF5U5p4HmiO3Qb2
 X-Developer-Key: i=aesteve@redhat.com; a=ed25519;
  pk=YSFz6sOHd2L45+Fr8DIvHTi6lSIjhLZ5T+rkxspJt1s=
 X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: NRCOq4MyddTohWCsehgwJrcAdyqGYserVzbyleOh27A_1772541251
+X-Mimecast-MFC-PROC-ID: mMRIa9tFqhp6a-ZrhgrQqFCt_PIo9w_ghm7AILhWkm0_1772541257
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="utf-8"
 X-Spamd-Bar: ------
-Message-ID-Hash: CI3O2QC2QU4FW7ZJFHKYTHWLLB5A6CEJ
-X-Message-ID-Hash: CI3O2QC2QU4FW7ZJFHKYTHWLLB5A6CEJ
+Message-ID-Hash: UMELIYCO37YLVXNG5GS63UNTVKF3AN35
+X-Message-ID-Hash: UMELIYCO37YLVXNG5GS63UNTVKF3AN35
 X-MailFrom: aesteve@redhat.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 CC: linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, iommu@lists.linux.dev, devicetree@vger.kernel.org, Albert Esteve <aesteve@redhat.com>, echanude@redhat.com, mripard@redhat.com, John Stultz <john.stultz@linaro.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v2 0/6] dma-buf: heaps: add coherent reserved-memory heap
+Subject: [Linaro-mm-sig] [PATCH v2 1/6] dma-buf: dma-heap: Keep track of the heap device struct
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CI3O2QC2QU4FW7ZJFHKYTHWLLB5A6CEJ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UMELIYCO37YLVXNG5GS63UNTVKF3AN35/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Transfer-Encoding: base64
-X-Rspamd-Queue-Id: 4AA3F1EF7EE
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Queue-Id: F3D071EF804
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [2.09 / 15.00];
+X-Spamd-Result: default: False [1.99 / 15.00];
 	DMARC_POLICY_QUARANTINE(1.50)[redhat.com : SPF not aligned (relaxed),quarantine];
 	R_DKIM_REJECT(1.00)[redhat.com:s=mimecast20190719];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx];
-	MIME_BASE64_TEXT(0.10)[];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	URIBL_MULTI_FAIL(0.00)[lists.linaro.org:server fail,linaro.org:server fail];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	ARC_NA(0.00)[];
+	DKIM_TRACE(0.00)[redhat.com:-];
+	URIBL_MULTI_FAIL(0.00)[lists.linaro.org:server fail,linaro.org:server fail];
 	RCVD_TLS_LAST(0.00)[];
+	ARC_NA(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCPT_COUNT_TWELVE(0.00)[20];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[redhat.com:-];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	FROM_NEQ_ENVFROM(0.00)[aesteve@redhat.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.950];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo]
+	NEURAL_HAM(-0.00)[-0.972];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo]
 X-Rspamd-Action: no action
 
-VGhpcyBwYXRjaCBpbnRyb2R1Y2VzIGEgbmV3IGhlYXAgZHJpdmVyIHRvIGV4cG9zZSBEVCBub27i
-gJFyZXVzYWJsZQ0KInNoYXJlZC1kbWEtcG9vbCIgY29oZXJlbnQgcmVnaW9ucyBhcyBkbWEtYnVm
-IGhlYXBzLCBzbyB1c2Vyc3BhY2UgY2FuDQphbGxvY2F0ZSBidWZmZXJzIGZyb20gZWFjaCByZXNl
-cnZlZCwgbmFtZWQgcmVnaW9uLg0KDQpCZWNhdXNlIHRoZXNlIHJlZ2lvbnMgYXJlIGRldmljZeKA
-kWRlcGVuZGVudCwgZWFjaCBoZWFwIGluc3RhbmNlIGJpbmRzIGENCmhlYXAgZGV2aWNlIHRvIGl0
-cyByZXNlcnZlZOKAkW1lbSByZWdpb24gdmlhIGEgbmV3bHkgaW50cm9kdWNlZCBoZWxwZXINCmZ1
-bmN0aW9uIC1uYW1lbHksIG9mX3Jlc2VydmVkX21lbV9kZXZpY2VfaW5pdF93aXRoX21lbSgpLSBz
-byBjb2hlcmVudA0KYWxsb2NhdGlvbnMgdXNlIHRoZSBjb3JyZWN0IGRldi0+ZG1hX21lbS4NCg0K
-Q2hhcmdpbmcgdG8gY2dyb3VwcyBmb3IgdGhlc2UgYnVmZmVycyBpcyBpbnRlbnRpb25hbGx5IGxl
-ZnQgb3V0IHRvIGtlZXANCnJldmlldyBmb2N1c2VkIG9uIHRoZSBuZXcgaGVhcDsgSSBwbGFuIHRv
-IGZvbGxvdyB1cCBiYXNlZCBvbiBFcmlj4oCZcyBbMV0NCmFuZCBNYXhpbWXigJlzIFsyXSB3b3Jr
-IG9uIGRtZW0gY2hhcmdpbmcgZnJvbSB1c2Vyc3BhY2UuDQoNClRoaXMgc2VyaWVzIGFsc28gbWFr
-ZXMgdGhlIG5ldyBoZWFwIGRyaXZlciBtb2R1bGFyLCBpbiBsaW5lIHdpdGggdGhlIENNQQ0KaGVh
-cCBjaGFuZ2UgaW4gWzNdLg0KDQpbMV0gaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvYWxsLzIwMjYw
-MjE4LWRtYWJ1Zi1oZWFwLWNtYS1kbWVtLXYyLTAtYjI0OTg4NmZiN2IyQHJlZGhhdC5jb20vDQpb
-Ml0gaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvYWxsLzIwMjUwMzEwLWRtZW0tY2dyb3Vwcy12MS0w
-LTI5ODRjMWJjOTMxMkBrZXJuZWwub3JnLw0KWzNdIGh0dHBzOi8vbG9yZS5rZXJuZWwub3JnL2Fs
-bC8yMDI2MDMwMy1kbWEtYnVmLWhlYXBzLWFzLW1vZHVsZXMtdjMtMC0yNDM0NDgxMmM3MDdAa2Vy
-bmVsLm9yZy8NCg0KU2lnbmVkLW9mZi1ieTogQWxiZXJ0IEVzdGV2ZSA8YWVzdGV2ZUByZWRoYXQu
-Y29tPg0KLS0tDQpDaGFuZ2VzIGluIHYyOg0KLSBSZW1vdmVkIGRtZW0gY2hhcmdpbmcgcGFydHMN
-Ci0gTW92ZWQgY29oZXJlbnQgaGVhcCByZWdpc3RlcmluZyBsb2dpYyB0byBjb2hlcmVudC5jDQot
-IE1hZGUgaGVhcCBkZXZpY2UgYSBtZW1iZXIgb2Ygc3RydWN0IGRtYV9oZWFwDQotIFNwbGl0IGRt
-YV9oZWFwX2FkZCBsb2dpYyBpbnRvIGNyZWF0ZS9yZWdpc3RlciwgdG8gYmUgYWJsZSB0bw0KICBh
-Y2Nlc3MgdGhlIHN0b3JlZCBoZWFwIGRldmljZSBiZWZvcmUgcmVnaXN0ZXJlZC4NCi0gQXZvaWQg
-cGxhdGZvcm0gZGV2aWNlIGluIGZhdm91ciBvZiBoZWFwIGRldmljZQ0KLSBBZGRlZCBhIHdyYXBw
-ZXIgdG8gcm1lbSBkZXZpY2VfaW5pdCgpIG9wDQotIFN3aXRjaGVkIGZyb20gbGF0ZV9pbml0Y2Fs
-bCgpIHRvIG1vZHVsZV9pbml0KCkNCi0gTWFkZSB0aGUgY29oZXJlbnQgaGVhcCBkcml2ZXIgbW9k
-dWxhcg0KLSBMaW5rIHRvIHYxOiBodHRwczovL2xvcmUua2VybmVsLm9yZy9yLzIwMjYwMjI0LWI0
-LWRtYWJ1Zi1oZWFwLWNvaGVyZW50LXJtZW0tdjEtMS1kZmZlZjQzMjk4YWNAcmVkaGF0LmNvbQ0K
-DQotLS0NCkFsYmVydCBFc3RldmUgKDUpOg0KICAgICAgZG1hLWJ1ZjogZG1hLWhlYXA6IHNwbGl0
-IGRtYV9oZWFwX2FkZA0KICAgICAgb2ZfcmVzZXJ2ZWRfbWVtOiBhZGQgYSBoZWxwZXIgZm9yIHJt
-ZW0gZGV2aWNlX2luaXQgb3ANCiAgICAgIGRtYS1idWY6IGhlYXBzOiBBZGQgQ29oZXJlbnQgaGVh
-cCB0byBkbWFidWYgaGVhcHMNCiAgICAgIGRtYTogY29oZXJlbnQ6IHJlZ2lzdGVyIHRvIGNvaGVy
-ZW50IGhlYXANCiAgICAgIGRtYS1idWY6IGhlYXBzOiBjb2hlcmVudDogVHVybiBoZWFwIGludG8g
-YSBtb2R1bGUNCg0KSm9obiBTdHVsdHogKDEpOg0KICAgICAgZG1hLWJ1ZjogZG1hLWhlYXA6IEtl
-ZXAgdHJhY2sgb2YgdGhlIGhlYXAgZGV2aWNlIHN0cnVjdA0KDQogZHJpdmVycy9kbWEtYnVmL2Rt
-YS1oZWFwLmMgICAgICAgICAgICB8IDEzOCArKysrKysrKystLQ0KIGRyaXZlcnMvZG1hLWJ1Zi9o
-ZWFwcy9LY29uZmlnICAgICAgICAgfCAgIDkgKw0KIGRyaXZlcnMvZG1hLWJ1Zi9oZWFwcy9NYWtl
-ZmlsZSAgICAgICAgfCAgIDEgKw0KIGRyaXZlcnMvZG1hLWJ1Zi9oZWFwcy9jb2hlcmVudF9oZWFw
-LmMgfCA0MjkgKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKw0KIGRyaXZlcnMvb2Yv
-b2ZfcmVzZXJ2ZWRfbWVtLmMgICAgICAgICAgfCAgMjcgKystDQogaW5jbHVkZS9saW51eC9kbWEt
-aGVhcC5oICAgICAgICAgICAgICB8ICAxNiArKw0KIGluY2x1ZGUvbGludXgvZG1hLW1hcC1vcHMu
-aCAgICAgICAgICAgfCAgIDcgKw0KIGluY2x1ZGUvbGludXgvb2ZfcmVzZXJ2ZWRfbWVtLmggICAg
-ICAgfCAgIDggKw0KIGtlcm5lbC9kbWEvY29oZXJlbnQuYyAgICAgICAgICAgICAgICAgfCAgMzQg
-KysrDQogOSBmaWxlcyBjaGFuZ2VkLCA2NDIgaW5zZXJ0aW9ucygrKSwgMjcgZGVsZXRpb25zKC0p
-DQotLS0NCmJhc2UtY29tbWl0OiA2ZGUyM2Y4MWE1ZTA4YmU4ZmJmNWU4ZDdlOWZlYmM3MmE1YjVm
-MjdmDQpjaGFuZ2UtaWQ6IDIwMjYwMjIzLWI0LWRtYWJ1Zi1oZWFwLWNvaGVyZW50LXJtZW0tOTFm
-ZDM5MjZhZmU5DQoNCkJlc3QgcmVnYXJkcywNCi0tIA0KQWxiZXJ0IEVzdGV2ZSA8YWVzdGV2ZUBy
-ZWRoYXQuY29tPg0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxp
-bmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxl
-YXZlQGxpc3RzLmxpbmFyby5vcmcK
+From: John Stultz <john.stultz@linaro.org>
+
+Keep track of the heap device struct.
+
+This will be useful for special DMA allocations
+and actions.
+
+Signed-off-by: John Stultz <john.stultz@linaro.org>
+Signed-off-by: Albert Esteve <aesteve@redhat.com>
+---
+ drivers/dma-buf/dma-heap.c | 34 ++++++++++++++++++++++++++--------
+ include/linux/dma-heap.h   |  2 ++
+ 2 files changed, 28 insertions(+), 8 deletions(-)
+
+diff --git a/drivers/dma-buf/dma-heap.c b/drivers/dma-buf/dma-heap.c
+index ac5f8685a6494..1124d63eb1398 100644
+--- a/drivers/dma-buf/dma-heap.c
++++ b/drivers/dma-buf/dma-heap.c
+@@ -31,6 +31,7 @@
+  * @heap_devt:		heap device node
+  * @list:		list head connecting to list of heaps
+  * @heap_cdev:		heap char device
++ * @heap_dev:		heap device
+  *
+  * Represents a heap of memory from which buffers can be made.
+  */
+@@ -41,6 +42,7 @@ struct dma_heap {
+ 	dev_t heap_devt;
+ 	struct list_head list;
+ 	struct cdev heap_cdev;
++	struct device *heap_dev;
+ };
+ 
+ static LIST_HEAD(heap_list);
+@@ -223,6 +225,19 @@ const char *dma_heap_get_name(struct dma_heap *heap)
+ }
+ EXPORT_SYMBOL_NS_GPL(dma_heap_get_name, "DMA_BUF_HEAP");
+ 
++/**
++ * dma_heap_get_dev() - get device struct for the heap
++ * @heap: DMA-Heap to retrieve device struct from
++ *
++ * Returns:
++ * The device struct for the heap.
++ */
++struct device *dma_heap_get_dev(struct dma_heap *heap)
++{
++	return heap->heap_dev;
++}
++EXPORT_SYMBOL_NS_GPL(dma_heap_get_dev, "DMA_BUF_HEAP");
++
+ /**
+  * dma_heap_add - adds a heap to dmabuf heaps
+  * @exp_info: information needed to register this heap
+@@ -230,7 +245,6 @@ EXPORT_SYMBOL_NS_GPL(dma_heap_get_name, "DMA_BUF_HEAP");
+ struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_info)
+ {
+ 	struct dma_heap *heap, *h, *err_ret;
+-	struct device *dev_ret;
+ 	unsigned int minor;
+ 	int ret;
+ 
+@@ -272,14 +286,14 @@ struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_info)
+ 		goto err1;
+ 	}
+ 
+-	dev_ret = device_create(dma_heap_class,
+-				NULL,
+-				heap->heap_devt,
+-				NULL,
+-				heap->name);
+-	if (IS_ERR(dev_ret)) {
++	heap->heap_dev = device_create(dma_heap_class,
++				       NULL,
++				       heap->heap_devt,
++				       NULL,
++				       heap->name);
++	if (IS_ERR(heap->heap_dev)) {
+ 		pr_err("dma_heap: Unable to create device\n");
+-		err_ret = ERR_CAST(dev_ret);
++		err_ret = ERR_CAST(heap->heap_dev);
+ 		goto err2;
+ 	}
+ 
+@@ -295,6 +309,10 @@ struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_info)
+ 		}
+ 	}
+ 
++	/* Make sure it doesn't disappear on us */
++	heap->heap_dev = get_device(heap->heap_dev);
++
++
+ 	/* Add heap to the list */
+ 	list_add(&heap->list, &heap_list);
+ 	mutex_unlock(&heap_list_lock);
+diff --git a/include/linux/dma-heap.h b/include/linux/dma-heap.h
+index 648328a64b27e..493085e69b70e 100644
+--- a/include/linux/dma-heap.h
++++ b/include/linux/dma-heap.h
+@@ -12,6 +12,7 @@
+ #include <linux/types.h>
+ 
+ struct dma_heap;
++struct device;
+ 
+ /**
+  * struct dma_heap_ops - ops to operate on a given heap
+@@ -43,6 +44,7 @@ struct dma_heap_export_info {
+ void *dma_heap_get_drvdata(struct dma_heap *heap);
+ 
+ const char *dma_heap_get_name(struct dma_heap *heap);
++struct device *dma_heap_get_dev(struct dma_heap *heap);
+ 
+ struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_info);
+ 
+
+-- 
+2.52.0
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
