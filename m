@@ -2,46 +2,47 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id iCixFj8e4WlbpQAAu9opvQ
+	id ML+qLkQe4WlbpQAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:37:03 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:37:08 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id AFB58412E05
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:37:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 73D94412E2B
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:37:08 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 33F4D459E8
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:36:59 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 70C23456F4
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:37:07 +0000 (UTC)
 Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id BA7103F6A0
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  3 Mar 2026 10:52:51 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 080E23F6A0
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  3 Mar 2026 10:53:57 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=gkN0AhVq;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=hu4p2+8Z;
 	dmarc=pass (policy=quarantine) header.from=kernel.org;
 	spf=pass (lists.linaro.org: domain of jlayton@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=jlayton@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id C537643F70;
-	Tue,  3 Mar 2026 10:52:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9C3ACC116C6;
-	Tue,  3 Mar 2026 10:52:36 +0000 (UTC)
+	by sea.source.kernel.org (Postfix) with ESMTP id 448DB43C5F;
+	Tue,  3 Mar 2026 10:53:56 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1144FC116C6;
+	Tue,  3 Mar 2026 10:53:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772535170;
-	bh=nGOhg9QKdd1xgegpWoMeks0A2moqyXq0ThAv01c57R4=;
+	s=k20201202; t=1772535236;
+	bh=p0kDOuUJp/6naEK1aTty8mE71Stjpf1QrLyVZVxDOA4=;
 	h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
-	b=gkN0AhVqRF3ETcr5Aa16oLSpRxTKSO8oK8Zkt4YIeJHbHxskYXh7p/NRdTlEhKfuk
-	 5u6De2MfLrgLdJd9tyTZRo7LDV22vXyQyYTcckKvQUYdAQ8zpOoy0eTtU+JOZnB5y9
-	 7HtQWcoG6jVo9I3FqyJXR0dqwKVEfQmYQm/2rR7T+oNP1TG+6qCTK/p9OfeczHTRAX
-	 elYlzyG/qc0W3KHKG0wi3CX/i+zNQYKjtu9ryT1UTo8sA4buRETJvIy99OBopiWFwg
-	 PUe7UTLZtbLzWiiCd44isyIAafgGod1JhN+nQmRiuJZa/Ij09Je4AeYD52HWMb9M/U
-	 hd1unNVYAIKyg==
-Message-ID: <2119a8418cab65eef5e0fb100e44224e39568e10.camel@kernel.org>
+	b=hu4p2+8ZvYZ2X7dr2Us7EaNOBBbABtx9XOvwdTWcuO5KthFigdlgY144/h9J6IGz8
+	 netz+U6Ku25iGs9UZXioxgbANgLrB+qEW0Wmd+TOu/q30RX4W3EuQYBx0VTeLZaiGb
+	 Vqm2xUv9Uja0SiQ8QtXFHgfhKRSqJWcM3qFgu0C6CC2hDwcc/9xzbvhf2162gW5xB9
+	 aWYwY4cO1lv9ftduSfik9ao2JxQA2RDxcHulEbJpmNjLgkTqUvOliNthS+oPycJZyR
+	 yMswS8wlIsEtazmn2Y7jqSdfyA1z43RD0Is3CDQwMxIeWhhsCPdkmIOZlt+j9upVUX
+	 zoCgXIiYdEMAw==
+Message-ID: <33228005140684201de2ca0c157441d3b6a06413.camel@kernel.org>
 From: Jeff Layton <jlayton@kernel.org>
-To: Theodore Tso <tytso@mit.edu>
-Date: Tue, 03 Mar 2026 05:52:34 -0500
-In-Reply-To: <20260303012556.GA6520@macsyma-wired.lan>
+To: "Darrick J. Wong" <djwong@kernel.org>, Theodore Tso <tytso@mit.edu>
+Date: Tue, 03 Mar 2026 05:53:39 -0500
+In-Reply-To: <20260303042546.GF13868@frogsfrogsfrogs>
 References: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
 	 <20260302-iino-u64-v2-1-e5388800dae0@kernel.org>
 	 <20260303012556.GA6520@macsyma-wired.lan>
+	 <20260303042546.GF13868@frogsfrogsfrogs>
 Autocrypt: addr=jlayton@kernel.org; prefer-encrypt=mutual;
  keydata=mQINBE6V0TwBEADXhJg7s8wFDwBMEvn0qyhAnzFLTOCHooMZyx7XO7dAiIhDSi7G1NPxw
  n8jdFUQMCR/GlpozMFlSFiZXiObE7sef9rTtM68ukUyZM4pJ9l0KjQNgDJ6Fr342Htkjxu/kFV1Wv
@@ -122,21 +123,21 @@ X-Spamd-Bar: --
 X-MailFrom: jlayton@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 4TP7F4FIP44TFWGZFHYXFQACUH3GGN7Q
-X-Message-ID-Hash: 4TP7F4FIP44TFWGZFHYXFQACUH3GGN7Q
-X-Mailman-Approved-At: Thu, 16 Apr 2026 17:00:01 +0000
+Message-ID-Hash: JFTPJ6RX3BMSIQ2YPWJBACZEVSSYIE5X
+X-Message-ID-Hash: JFTPJ6RX3BMSIQ2YPWJBACZEVSSYIE5X
+X-Mailman-Approved-At: Thu, 16 Apr 2026 17:00:02 +0000
 CC: Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>, Steven Rostedt <rostedt@goodmis.org>, Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Dan Williams <dan.j.williams@intel.com>, Matthew Wilcox <willy@infradead.org>, Eric Biggers <ebiggers@kernel.org>, Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>, David Hildenbrand <david@kernel.org>, David Howells <dhowells@redhat.com>, Paulo Alcantara <pc@manguebit.org>, Andreas Dilger <adilger.kernel@dilger.ca>, Jan Kara <jack@suse.com>, Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>, Trond Myklebust <trondmy@kernel.org>, Anna Schumaker <anna@kernel.org>, Chuck Lever <chuck.lever@oracle.com>, NeilBrown <neil@brown.name>, Olga Kornievskaia <okorniev@redhat.com>, Dai Ngo <Dai.Ngo@oracle.com>, Tom Talpey <tom@talpey.com>, Steve French <sfrench@samba.org>, Ronnie Sahlberg <ronniesahlberg@gmail.com>, Shyam Prasa
  d N <sprasad@microsoft.com>, Bharath SM <bharathsm@microsoft.com>, Alexander Aring <alex.aring@gmail.com>, Ryusuke Konishi <konishi.ryusuke@gmail.com>, Viacheslav Dubeyko <slava@dubeyko.com>, Eric Van Hensbergen <ericvh@kernel.org>, Latchesar Ionkov <lucho@ionkov.net>, Dominique Martinet <asmadeus@codewreck.org>, Christian Schoenebeck <linux_oss@crudebyte.com>, David Sterba <dsterba@suse.com>, Marc Dionne <marc.dionne@auristor.com>, Ian Kent <raven@themaw.net>, Luis de Bethencourt <luisbg@kernel.org>, Salah Triki <salah.triki@gmail.com>, "Tigran A. Aivazian" <aivazian.tigran@gmail.com>, Ilya Dryomov <idryomov@gmail.com>, Alex Markuze <amarkuze@redhat.com>, Jan Harkes <jaharkes@cs.cmu.edu>, coda@cs.cmu.edu, Nicolas Pitre <nico@fluxnic.net>, Tyler Hicks <code@tyhicks.com>, Amir Goldstein <amir73il@gmail.com>, Christoph Hellwig <hch@infradead.org>, John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>, Yangtao Li <frank.li@vivo.com>, Mikulas Patocka <mikulas@artax.karlin.mff.cuni.cz
  >, David Woodhouse <dwmw2@infradead.org>, Richard Weinberger <richard@nod.at>, Dave Kleikamp <shaggy@kernel.org>, Konstantin Komarov <almaz.alexandrovich@paragon-software.com>, Mark Fasheh <mark@fasheh.com>, Joel Becker <jlbec@evilplan.org>, Joseph Qi <joseph.qi@linux.alibaba.com>, Mike Marshall <hubcap@omnibond.com>, Martin Brandenburg <martin@omnibond.com>, Miklos Szeredi <miklos@szeredi.hu>, Anders Larsen <al@alarsen.net>, Zhihao Cheng <chengzhihao1@huawei.com>, Damien Le Moal <dlemoal@kernel.org>, Naohiro Aota <naohiro.aota@wdc.com>, Johannes Thumshirn <jth@kernel.org>, John Johansen <john.johansen@canonical.com>, Paul Moore <paul@paul-moore.com>, James Morris <jmorris@namei.org>, "Serge E. Hallyn" <serge@hallyn.com>, Mimi Zohar <zohar@linux.ibm.com>, Roberto Sassu <roberto.sassu@huawei.com>, Dmitry Kasatkin <dmitry.kasatkin@gmail.com>, Eric Snowberg <eric.snowberg@oracle.com>, Fan Wu <wufan@kernel.org>, Stephen Smalley <stephen.smalley.work@gmail.com>, Ondrej Mosnacek <omosnace
- @redhat.com>, Casey Schaufler <casey@schaufler-ca.com>, Alex Deucher <alexander.deucher@amd.com>, Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Eric Dumazet <edumazet@google.com>, Kuniyuki Iwashima <kuniyu@google.com>, Paolo Abeni <pabeni@redhat.com>, Willem de Bruijn <willemb@google.com>, "David S. Miller" <davem@davemloft.net>, Jakub Kicinski <kuba@kernel.org>, Simon Horman <horms@kernel.org>, Oleg Nesterov <oleg@redhat.com>, Peter Zijlstra <peterz@infradead.org>, Ingo Molnar <mingo@redhat.com>, Arnaldo Carvalho de Melo <acme@kernel.org>, Namhyung Kim <namhyung@kernel.org>, Mark Rutland <mark.rutland@arm.com>, Alexander Shishkin <alexander.shishkin@linux.intel.com>, Jiri Olsa <jolsa@kernel.org>, Ian Rogers <irogers@google.com>, Adrian Hunter <adrian.hunter@intel.com>, James Clark <james.clark@linaro.org>, "Darrick J. Wong" <djwong@kernel.org>, Martin Schiller
-  <ms@dev.tdt.de>, Eric Paris <eparis@redhat.com>, Joerg Reuter <jreuter@yaina.de>, Marcel Holtmann <marcel@holtmann.org>, Johan Hedberg <johan.hedberg@gmail.com>, Luiz Augusto von Dentz <luiz.dentz@gmail.com>, Oliver Hartkopp <socketcan@hartkopp.net>, Marc Kleine-Budde <mkl@pengutronix.de>, David Ahern <dsahern@kernel.org>, Neal Cardwell <ncardwell@google.com>, Steffen Klassert <steffen.klassert@secunet.com>, Herbert Xu <herbert@gondor.apana.org.au>, Remi Denis-Courmont <courmisch@gmail.com>, Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>, Xin Long <lucien.xin@gmail.com>, Magnus Karlsson <magnus.karlsson@intel.com>, Maciej Fijalkowski <maciej.fijalkowski@intel.com>, Stanislav Fomichev <sdf@fomichev.me>, Alexei Starovoitov <ast@kernel.org>, Daniel Borkmann <daniel@iogearbox.net>, Jesper Dangaard Brouer <hawk@kernel.org>, John Fastabend <john.fastabend@gmail.com>, linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, nvdimm@lists.linux.d
- ev, fsverity@lists.linux.dev, linux-mm@kvack.org, netfs@lists.linux.dev, linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net, linux-nfs@vger.kernel.org, linux-cifs@vger.kernel.org, samba-technical@lists.samba.org, linux-nilfs@vger.kernel.org, v9fs@lists.linux.dev, linux-afs@lists.infradead.org, autofs@vger.kernel.org, ceph-devel@vger.kernel.org, codalist@telemann.coda.cs.cmu.edu, ecryptfs@vger.kernel.org, linux-mtd@lists.infradead.org, jfs-discussion@lists.sourceforge.net, ntfs3@lists.linux.dev, ocfs2-devel@lists.linux.dev, devel@lists.orangefs.org, linux-unionfs@vger.kernel.org, apparmor@lists.ubuntu.com, linux-security-module@vger.kernel.org, linux-integrity@vger.kernel.org, selinux@vger.kernel.org, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, netdev@vger.kernel.org, linux-perf-users@vger.kernel.org, linux-fscrypt@vger.kernel.org, linux-xfs@vger.kernel.org, linux-hams@vger.kernel.org, li
- nux-x25@vger.kernel.org, audit@vger.kernel.org, linux-bluetooth@vger.kernel.org, linux-can@vger.kernel.org, linux-sctp@vger.kernel.org, bpf@vger.kernel.org
+ @redhat.com>, Casey Schaufler <casey@schaufler-ca.com>, Alex Deucher <alexander.deucher@amd.com>, Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Eric Dumazet <edumazet@google.com>, Kuniyuki Iwashima <kuniyu@google.com>, Paolo Abeni <pabeni@redhat.com>, Willem de Bruijn <willemb@google.com>, "David S. Miller" <davem@davemloft.net>, Jakub Kicinski <kuba@kernel.org>, Simon Horman <horms@kernel.org>, Oleg Nesterov <oleg@redhat.com>, Peter Zijlstra <peterz@infradead.org>, Ingo Molnar <mingo@redhat.com>, Arnaldo Carvalho de Melo <acme@kernel.org>, Namhyung Kim <namhyung@kernel.org>, Mark Rutland <mark.rutland@arm.com>, Alexander Shishkin <alexander.shishkin@linux.intel.com>, Jiri Olsa <jolsa@kernel.org>, Ian Rogers <irogers@google.com>, Adrian Hunter <adrian.hunter@intel.com>, James Clark <james.clark@linaro.org>, Martin Schiller <ms@dev.tdt.de>, Eric Paris <eparis@re
+ dhat.com>, Joerg Reuter <jreuter@yaina.de>, Marcel Holtmann <marcel@holtmann.org>, Johan Hedberg <johan.hedberg@gmail.com>, Luiz Augusto von Dentz <luiz.dentz@gmail.com>, Oliver Hartkopp <socketcan@hartkopp.net>, Marc Kleine-Budde <mkl@pengutronix.de>, David Ahern <dsahern@kernel.org>, Neal Cardwell <ncardwell@google.com>, Steffen Klassert <steffen.klassert@secunet.com>, Herbert Xu <herbert@gondor.apana.org.au>, Remi Denis-Courmont <courmisch@gmail.com>, Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>, Xin Long <lucien.xin@gmail.com>, Magnus Karlsson <magnus.karlsson@intel.com>, Maciej Fijalkowski <maciej.fijalkowski@intel.com>, Stanislav Fomichev <sdf@fomichev.me>, Alexei Starovoitov <ast@kernel.org>, Daniel Borkmann <daniel@iogearbox.net>, Jesper Dangaard Brouer <hawk@kernel.org>, John Fastabend <john.fastabend@gmail.com>, linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, nvdimm@lists.linux.dev, fsverity@lists.linux.dev, linux-mm@
+ kvack.org, netfs@lists.linux.dev, linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net, linux-nfs@vger.kernel.org, linux-cifs@vger.kernel.org, samba-technical@lists.samba.org, linux-nilfs@vger.kernel.org, v9fs@lists.linux.dev, linux-afs@lists.infradead.org, autofs@vger.kernel.org, ceph-devel@vger.kernel.org, codalist@telemann.coda.cs.cmu.edu, ecryptfs@vger.kernel.org, linux-mtd@lists.infradead.org, jfs-discussion@lists.sourceforge.net, ntfs3@lists.linux.dev, ocfs2-devel@lists.linux.dev, devel@lists.orangefs.org, linux-unionfs@vger.kernel.org, apparmor@lists.ubuntu.com, linux-security-module@vger.kernel.org, linux-integrity@vger.kernel.org, selinux@vger.kernel.org, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, netdev@vger.kernel.org, linux-perf-users@vger.kernel.org, linux-fscrypt@vger.kernel.org, linux-xfs@vger.kernel.org, linux-hams@vger.kernel.org, linux-x25@vger.kernel.org, audit@vger.ker
+ nel.org, linux-bluetooth@vger.kernel.org, linux-can@vger.kernel.org, linux-sctp@vger.kernel.org, bpf@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH v2 001/110] vfs: introduce kino_t typedef and PRIino format macro
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4TP7F4FIP44TFWGZFHYXFQACUH3GGN7Q/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JFTPJ6RX3BMSIQ2YPWJBACZEVSSYIE5X/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -150,7 +151,7 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
 	DATE_IN_PAST(1.00)[1062];
 	R_DKIM_REJECT(1.00)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+mx];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
@@ -162,11 +163,11 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	GREYLIST(0.00)[pass,meta];
 	TO_DN_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[zeniv.linux.org.uk,kernel.org,suse.cz,goodmis.org,efficios.com,intel.com,infradead.org,linux.dev,suse.de,redhat.com,manguebit.org,dilger.ca,suse.com,oracle.com,brown.name,talpey.com,samba.org,gmail.com,microsoft.com,dubeyko.com,ionkov.net,codewreck.org,crudebyte.com,auristor.com,themaw.net,cs.cmu.edu,fluxnic.net,tyhicks.com,physik.fu-berlin.de,vivo.com,artax.karlin.mff.cuni.cz,nod.at,paragon-software.com,fasheh.com,evilplan.org,linux.alibaba.com,omnibond.com,szeredi.hu,alarsen.net,huawei.com,wdc.com,canonical.com,paul-moore.com,namei.org,hallyn.com,linux.ibm.com,schaufler-ca.com,amd.com,ffwll.ch,linaro.org,google.com,davemloft.net,arm.com,linux.intel.com,dev.tdt.de,yaina.de,holtmann.org,hartkopp.net,pengutronix.de,secunet.com,gondor.apana.org.au,fomichev.me,iogearbox.net,vger.kernel.org,lists.linux.d,lists.linux.dev,kvack.org,lists.sourceforge.net,lists.samba.org,lists.infradead.org,telemann.coda.cs.cmu.edu,lists.orangefs.org,lists.ubuntu.com,lists.freedesktop.org,
- lists.linaro.org];
+	FREEMAIL_CC(0.00)[zeniv.linux.org.uk,kernel.org,suse.cz,goodmis.org,efficios.com,intel.com,infradead.org,linux.dev,suse.de,redhat.com,manguebit.org,dilger.ca,suse.com,oracle.com,brown.name,talpey.com,samba.org,gmail.com,microsoft.com,dubeyko.com,ionkov.net,codewreck.org,crudebyte.com,auristor.com,themaw.net,cs.cmu.edu,fluxnic.net,tyhicks.com,physik.fu-berlin.de,vivo.com,artax.karlin.mff.cuni.cz,nod.at,paragon-software.com,fasheh.com,evilplan.org,linux.alibaba.com,omnibond.com,szeredi.hu,alarsen.net,huawei.com,wdc.com,canonical.com,paul-moore.com,namei.org,hallyn.com,linux.ibm.com,schaufler-ca.com,amd.com,ffwll.ch,linaro.org,google.com,davemloft.net,arm.com,linux.intel.com,dev.tdt.de,re dhat.com,yaina.de,holtmann.org,hartkopp.net,pengutronix.de,secunet.com,gondor.apana.org.au,fomichev.me,iogearbox.net,vger.kernel.org,lists.linux.dev, kvack.org,lists.sourceforge.net,lists.samba.org,lists.infradead.org,telemann.coda.cs.cmu.edu,lists.orangefs.org,lists.ubuntu.com,lists.freedesktop.org,l
+ ists.linaro.org,vger.ker];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.852];
+	NEURAL_HAM(-0.00)[-0.888];
 	RCPT_COUNT_GT_50(0.00)[171];
 	FROM_NEQ_ENVFROM(0.00)[jlayton@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
 	DKIM_TRACE(0.00)[kernel.org:-];
@@ -175,57 +176,33 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: AFB58412E05
+X-Rspamd-Queue-Id: 73D94412E2B
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Mon, 2026-03-02 at 20:25 -0500, Theodore Tso wrote:
-> On Mon, Mar 02, 2026 at 03:23:45PM -0500, Jeff Layton wrote:
-> > The PRIino macro is a length modifier, not a complete format specifier.
-> > It is used as: "%" PRIino "u" for decimal, "%" PRIino "x" for hex, etc.
-> > This follows the pattern used by userspace PRIu64/PRIx64 macros.
+On Mon, 2026-03-02 at 20:25 -0800, Darrick J. Wong wrote:
+> On Mon, Mar 02, 2026 at 08:25:56PM -0500, Theodore Tso wrote:
+> > On Mon, Mar 02, 2026 at 03:23:45PM -0500, Jeff Layton wrote:
+> > > The PRIino macro is a length modifier, not a complete format specifier.
+> > > It is used as: "%" PRIino "u" for decimal, "%" PRIino "x" for hex, etc.
+> > > This follows the pattern used by userspace PRIu64/PRIx64 macros.
+> > 
+> > For the record, I really hate the inttypes.h format specifiers, but I
+> > agree that we should forward the example of the C99 spec, for better
+> > or for worse.
+> > 
+> > That being said, the userspace PRIu64, et. al macros are complete
+> > format specifiers, not just a length modifier.  And I think this
+> > results in less ugly format specifiers in our kernel code.
 > 
-> For the record, I really hate the inttypes.h format specifiers, but I
-> agree that we should forward the example of the C99 spec, for better
-> or for worse.
-> 
-> That being said, the userspace PRIu64, et. al macros are complete
-> format specifiers, not just a length modifier.  And I think this
-> results in less ugly format specifiers in our kernel code.
-> 
-> ---- cut here ---
-> #!/bin/sh
-> cat <<EOF > /tmp/blah.c
-> #include <inttypes.h>
-> #include <stdio.h>
-> 
-> int main(int arg, char **argv)
-> {
->         printf("PRIu64 is %s\n", PRIu64);
->         printf("PRId64 is %s\n", PRId64);
->         printf("PRIx64 is %s\n", PRIx64);
->         return 0;
-> }
-> EOF
-> 
-> clang -m32 -o /tmp/blah /tmp/blah.c
-> /tmp/blah
-> ---- cut here ---
-> 
-> % /tmp/blah.sh
-> PRIu64 is llu
-> PRId64 is lld
-> PRIx64 is llx
+> Yeah, I don't like "ino=%" PRIino "u, lolz\n" either.  I'd rather have
+> the whole format in the PRIino definition -- it /is/ unsigned long
+> after all.
 > 
 
-I originally had them that way, but ended up going with just a single
-"PRIino" macro since it was simpler.
-
-If we were going to keep these macros in perpetuity then I'd be
-inclined to follow your suggestion, but since they're just temporary
-scaffolding to make this change, maybe I can ask you to overlook this
-preference for now?
-
+Like I said to Ted, this is just temporary scaffolding for the change.
+The PRIino macro is removed in the end. Given that, perhaps you can
+overlook the bikeshed's color in this instance?
 -- 
 Jeff Layton <jlayton@kernel.org>
 _______________________________________________
