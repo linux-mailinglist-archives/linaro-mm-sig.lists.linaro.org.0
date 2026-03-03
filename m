@@ -2,243 +2,181 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id YMvMDB8e4WlbpQAAu9opvQ
+	id KAnODyce4WlbpQAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:36:31 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:36:39 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id E053E412DD2
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:36:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AB2CD412DD9
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:36:38 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0DB4245986
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:36:30 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.7])
-	by lists.linaro.org (Postfix) with ESMTPS id B75333F6A0
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  3 Mar 2026 07:07:24 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id BCB2545995
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:36:37 +0000 (UTC)
+Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
+	by lists.linaro.org (Postfix) with ESMTPS id B13BD3F6A0
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  3 Mar 2026 10:05:27 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=Dx7ykJW3;
-	dmarc=pass (policy=none) header.from=intel.com;
-	arc=pass ("microsoft.com:s=arcselector10001:i=1");
-	spf=pass (lists.linaro.org: domain of vivek.kasireddy@intel.com designates 192.198.163.7 as permitted sender) smtp.mailfrom=vivek.kasireddy@intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1772521645; x=1804057645;
-  h=from:to:subject:date:message-id:references:in-reply-to:
-   content-transfer-encoding:mime-version;
-  bh=6sHNW2XZgAG5yKxgywPE2oa+SOneY1Jjz0RGLnsm6GA=;
-  b=Dx7ykJW3+CLqfb3tZ4c4+/aO+F6fLQTsSfL5quUjGFz/DhPbSFfYvpcO
-   VFzewCNbQEJsNd/XeYEIpedcCr9twnO3W+YtFXH4MfB2xi+4ffzdvCWGD
-   6e45MFflfHg0kpUan2EznnTEhJO1mFop2nf3UmIiluIlMOgT6PpmHys8d
-   cmdSFSs13VJkIRm61eELeX4IjzbykAs+gGl93+9OpiFi16mtCcjyLQ+0g
-   6KuuNeVp1pGJvmg8B88MMcmT2ZRQZEeHyaxvqx8yJLqrrYG/XfRvrEsvL
-   XKkODE3FgZ7ErnWY8/jHFTJWQ3a5dlEb9KtlF8WhSuoZ2e7P1Tqyws0j8
-   g==;
-X-CSE-ConnectionGUID: 1v3h6Y5sRH2j9+2UCkk93A==
-X-CSE-MsgGUID: XuG9mZZoSOiUOb4be2Hnrg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11717"; a="99022577"
-X-IronPort-AV: E=Sophos;i="6.21,321,1763452800";
-   d="scan'208";a="99022577"
-Received: from orviesa010.jf.intel.com ([10.64.159.150])
-  by fmvoesa101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Mar 2026 23:07:23 -0800
-X-CSE-ConnectionGUID: wvv8aaxdSsG1hzCYGRyQQA==
-X-CSE-MsgGUID: H5zPQTTaTR+IqzHzLXx8uA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.21,321,1763452800";
-   d="scan'208";a="217134243"
-Received: from fmsmsx901.amr.corp.intel.com ([10.18.126.90])
-  by orviesa010.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Mar 2026 23:07:23 -0800
-Received: from FMSMSX902.amr.corp.intel.com (10.18.126.91) by
- fmsmsx901.amr.corp.intel.com (10.18.126.90) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.37; Mon, 2 Mar 2026 23:07:22 -0800
-Received: from fmsedg902.ED.cps.intel.com (10.1.192.144) by
- FMSMSX902.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.37 via Frontend Transport; Mon, 2 Mar 2026 23:07:22 -0800
-Received: from DM5PR21CU001.outbound.protection.outlook.com (52.101.62.66) by
- edgegateway.intel.com (192.55.55.82) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.37; Mon, 2 Mar 2026 23:07:22 -0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Jn6FjfjrqQYfInD+GF/uORED8eTNWq3UVWey2CKUjrsfEKdfaDpE979fk5IzkvTWife3+KeJiEZF6bEnmhJqQVmWXM24W3B3cX8gazNcUxZuLf2cmhDNxr7jHw0ajRI6xo/VmmerFz5qr2+BposUUZfvq2Kyl92FRf8hs8hPIRrtfJBCOIufQPdEQ/bxJoMQquVA4mh1FT2F9UsbzSBpIewO60rQ0hoBnfX+Z9YCW+YwoakGCbQw5f2zSwGtc2OBzzy0xc1PHZEFxKrcYpjYkJ4t6zmIcnZxS+TkRXgy3oZUtkGa0F7RxjuL8S4ko/7P+SRbnb6+rMIKutCfYTwKTw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1Q5YHi2JmIadEhj2dFIvbdMz5BUSKxqJ5lwwGyuOtJc=;
- b=H8neXg81JrDFOYthOMKrYgBaH5dK9mwX+SOfos7PcWfrlPSP993Pi9wvdWMwiBgt2DCiX+9FLlZ8SY5ptAbzCBDU3lEcR1FPUaP0ptqTnEXi54kt08jJXa5OZyBEcKQSd7TqR13BJBJeot8s5NXYHgtPvNRJv5bdv0cKPXFYlWOg6qqp1Ujs7aZ/T9G14ksOsB6nQcTsVncveyQ0ZCRG0YPnyzBaV/foeVWbo4gymmjlWf85MySPyKs5xP4d7QAg4tvVByjXAl/kZaKVJTXfXuGrUPotN7Nq/zu+0DKvajR9CGEi+ySuLbfJ7ZPGXVAKA+LFmmRCC2N1dtcsrr7Fgg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Received: from CH3PR11MB7177.namprd11.prod.outlook.com (2603:10b6:610:153::8)
- by SN7PR11MB7589.namprd11.prod.outlook.com (2603:10b6:806:34a::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.20; Tue, 3 Mar
- 2026 07:07:19 +0000
-Received: from CH3PR11MB7177.namprd11.prod.outlook.com
- ([fe80::b997:e226:4979:c035]) by CH3PR11MB7177.namprd11.prod.outlook.com
- ([fe80::b997:e226:4979:c035%5]) with mapi id 15.20.9654.022; Tue, 3 Mar 2026
- 07:07:18 +0000
-From: "Kasireddy, Vivek" <vivek.kasireddy@intel.com>
-To: Jason Gunthorpe <jgg@nvidia.com>, Christian Koenig
-	<christian.koenig@amd.com>, "Kim, Dongwon" <dongwon.kim@intel.com>,
-	"dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
-	"intel-xe@lists.freedesktop.org" <intel-xe@lists.freedesktop.org>,
-	"iommu@lists.linux.dev" <iommu@lists.linux.dev>, "Tian, Kevin"
-	<kevin.tian@intel.com>, Leon Romanovsky <leonro@nvidia.com>,
-	"linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>,
-	"linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "Brost, Matthew"
-	<matthew.brost@intel.com>, Simona Vetter <simona.vetter@ffwll.ch>, "Sumit
- Semwal" <sumit.semwal@linaro.org>, Thomas Hellstrom
-	<thomas.hellstrom@linux.intel.com>
-Thread-Topic: [PATCH RFC 00/26] Add DMA-buf mapping types and convert
- vfio/iommufd to use them
-Thread-Index: AQHcoGtCf9ua8bJZokKhC0c/o24ZWrWaG/eAgAGkw+A=
-Date: Tue, 3 Mar 2026 07:07:18 +0000
-Message-ID: <CH3PR11MB7177124A1305900DC0F16D70F87FA@CH3PR11MB7177.namprd11.prod.outlook.com>
-References: <0-v1-b5cab63049c0+191af-dmabuf_map_type_jgg@nvidia.com>
- <20260301190543.GA768004@nvidia.com>
-In-Reply-To: <20260301190543.GA768004@nvidia.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: CH3PR11MB7177:EE_|SN7PR11MB7589:EE_
-x-ms-office365-filtering-correlation-id: 77c48c53-494c-4885-c0a7-08de78f38202
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;ARA:13230040|1800799024|366016|376014|7416014|38070700021|921020;
-x-microsoft-antispam-message-info: wY0eYu8ScALAXOKwyO2Q/8aHw4ZpAYCuQlg4vsfb06UVqrjhCMoe1FhKe1bCrE5+zsMLSeEVH3Nan99wrK2KHcqXdjirSgfCr+aDgI83FZYPXoVg3iBePM6WOqq1xx4twbGCvRAsukOSHu97z5p3qBI7EFjX4EvJS+naW96TZ6JZoGqFkLBLOTv7HBudycU0vEanqGC6Gh1Io+4QfrAA6YM1NzD1eO69cLYJ+O2vNXBOk7vzm6ODU7c6gB74ew7NNE1MDVGDxmd+/y3Ek5FfYeO58ykyKdsZAXH8zXzW7+hG9xwS/6iL25B3Kfb6WwAbXQ0dGtvFFfyYQihT8dCdCzZDbYWh7ngSvAQNKoDfFkEz38EwJLOb8rE4ewaArn4z7tpQMdMkJ15P13yDbntIDBwhW+miycdM6WonTwkKghTVdt+hWTuxXm/3O5kb/86dNH0i5wko7bJAXVRm9MaZ6aCqNLZL5f1YhFKqq5OW6VF0s5TVhqLaXH9ogHiPG2gzRIDtICNpGzk4zbkgBxDieTnvwU1TpOoAWUIvfhXTfh84kXJJw6pUB1VT2zv+5KAWKsBTMd0X6bO0EtSqQAXDzacpR5/F6lUd2fX6uIH5pp26aQwk3cupH/ja644IdZ2OoYy3Lt4JpBVk6Y7Dc6qwa4OFbzsRy74Ua5bd3+s/5QqGaTe9eYEO/VbjnN8ce+dmAd/f/2JvcVLoIw7DRdFfJA8K76t5wWB54t186OzkRWURbct+8py31bZO+u7loMXeVZrO1VeEHMS3lSvY4Ej6F+gGnaCvmJsR/E10UztcO9WOf3HffDWMRYVeEWbe7Axj
-x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH3PR11MB7177.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(7416014)(38070700021)(921020);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?f42m2G+N68Q/n1SELBEbtrDARTb7n36ZbuwQEQCNT5yNp92AHYR7yH2U4q99?=
- =?us-ascii?Q?WdyLhrPNjtu2JhtJyvaKkGxbosOO19VxCQLBfSdTn2VjF4m87zNY/suzV3nq?=
- =?us-ascii?Q?hMWPvtqq7UrSE0mpQyRkW5NZPHn9o/v2v+j+msPygRiwDtW1r3aJQkCasKm3?=
- =?us-ascii?Q?OO5q0CsLPyKfM1yv9BjPde02P9/m3AE6AZJoL0V7qXCWGMejzdrIgHbbFkXh?=
- =?us-ascii?Q?5+4A5gx5XruiD94LLShC5r2Q548mbFODnnXuk/oj+kBk7nBOAUZtlSKnsrYx?=
- =?us-ascii?Q?llhVFrNygJKxEAQ3FPNDVxbngpaoofg4TbnlZKrcO1H4uwYjOu/EwFkj+oJS?=
- =?us-ascii?Q?ycO/mYy8wK2WRGu1TBKMgra1reVjHZO/H75Hx2eljEtQfylzpUUQnTB07CYi?=
- =?us-ascii?Q?pIFMaVcr63lzInyN5/CN80gy8XkgmLZ/+mz6E1c77OBGIuDlYzoexEsu2ObZ?=
- =?us-ascii?Q?yVcwv/uh9mSMqezqzeHe2ANGGSfFi7eLHAnqcNwK07slnS5qxArV5PcQgxQk?=
- =?us-ascii?Q?40lHaa/FiLiZbHkRLXpjIM4WMSQ3HENxVvRJzWn9A2ZkffEMnYxTZT7ytkQm?=
- =?us-ascii?Q?BKx5OCmjeFQof+y7PE2sFCntC23AEixbh95H6L+5zJ3+M1CG5wBu0qspElGC?=
- =?us-ascii?Q?s1yCXEpmJiIckM/jv0gZv+A7HS510pXbTSqQoYyVXH1WGAXeK5nuVkJN7IWE?=
- =?us-ascii?Q?KQjnQjqveF5Unh99kmCc+XQSP1GU88wmb01UFAG6gWx5AqJnMpAR5kKfD3HV?=
- =?us-ascii?Q?CVCYuPJrpYr/NlS+qYATXZDUV4jrokb6sUVcVDuZlBp89bn8aZApcr/IzZpk?=
- =?us-ascii?Q?JDSccVbSEjI1tcIxknmmQ21/EN23H4H9ehCSRaEjAoRQbQZ3pIXhgCWTq95n?=
- =?us-ascii?Q?H/48nZT6DoM9b2eK+36i8O4KQDA0PfCzl3gLIXmh3saN4UsH6qAmtSkhSYwx?=
- =?us-ascii?Q?TtkMFU3G++6vznNobm7W/qaFJcmkXghT7QcjWYOFNUwER/9+1LxZ37rCOs9y?=
- =?us-ascii?Q?6PTGggrEdffmYMJPH8f0hLtzzcNeNWg2i0SFPSAaxL5u1L+cr8uQ/2S+m+0y?=
- =?us-ascii?Q?zz72/EuakxjvHBbfGpEbZUbHF7ChiqtAeSdFVku2t0bQ+nYMMvQ+sCEf674F?=
- =?us-ascii?Q?cpOoIDCemfw0d8DViTII5CuU3JN4aHZjKCsX9uiLb311OAyu6AJTKZpgM4KO?=
- =?us-ascii?Q?s31ctWyFgF57m1LmC4CFippGcHJQldMNva5zI2OiKEkIR8yGx/uDSuQCEeM+?=
- =?us-ascii?Q?yfRBwoDUgqqEo5FdXH72rdYEpIXYD8g4R5HFeSvtPETthvdZ+q4FEXkTobjo?=
- =?us-ascii?Q?GDiBuERWvCKShcULfP9vWJtVMPP9BZGO/vvT+z6XZg12+eO1eV7XvmailLR1?=
- =?us-ascii?Q?ge+4Vv7S6oTyfFGTv90vO1HCSbzltPoFdlQRPnHpIjy2mH/EBgHqwVHCq5dz?=
- =?us-ascii?Q?e2c+jGi0Ywpb/piH/jNaEcDBGZEZkvwXMkYsI5rUo7Be/W40mb5ksibzzS9P?=
- =?us-ascii?Q?axsnLX+nvuasUPOCjJ18298/0Z+zwaLB6u8HZaMH2d1G+mSrNt8zX+FsNd84?=
- =?us-ascii?Q?3wp4GBsaf2xNeP7ToqJXvj84mNE40usWKTO5ZFwHEoGPZblfs+E6+CHSiFiN?=
- =?us-ascii?Q?nX3qaKrRISDGg8yCefTwxVMmQxciOyWz9ejqpIyGhasePQvcJNmqLrPsPVYM?=
- =?us-ascii?Q?FbJFfunjW99K/5YXz57iHGPIS6hQzK0DuwA4PoUQG/ftX97UiiijATyzGGKG?=
- =?us-ascii?Q?OiYxbDgaFg=3D=3D?=
-Content-Type: text/plain; charset="us-ascii"
+	dkim=none;
+	dmarc=none;
+	spf=pass (lists.linaro.org: domain of mkl@pengutronix.de designates 185.203.201.7 as permitted sender) smtp.mailfrom=mkl@pengutronix.de
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <mkl@pengutronix.de>)
+	id 1vxMbX-0007dn-3h; Tue, 03 Mar 2026 11:03:51 +0100
+Received: from moin.white.stw.pengutronix.de ([2a0a:edc0:0:b01:1d::7b] helo=bjornoya.blackshift.org)
+	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.96)
+	(envelope-from <mkl@pengutronix.de>)
+	id 1vxMbP-003Wd8-0B;
+	Tue, 03 Mar 2026 11:03:44 +0100
+Received: from pengutronix.de (p4ffb2dc6.dip0.t-ipconnect.de [79.251.45.198])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(Client did not present a certificate)
+	(Authenticated sender: mkl-all@blackshift.org)
+	by smtp.blackshift.org (Postfix) with ESMTPSA id 23B2F4F64B1;
+	Tue, 03 Mar 2026 10:03:43 +0000 (UTC)
+Date: Tue, 3 Mar 2026 11:03:42 +0100
+From: Marc Kleine-Budde <mkl@pengutronix.de>
+To: Jeff Layton <jlayton@kernel.org>
+Message-ID: <20260303-tall-fictional-tench-7c5f66-mkl@pengutronix.de>
+X-AI: stop_reason: "refusal"
+References: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
+ <20260302-iino-u64-v2-4-e5388800dae0@kernel.org>
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: CH3PR11MB7177.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 77c48c53-494c-4885-c0a7-08de78f38202
-X-MS-Exchange-CrossTenant-originalarrivaltime: 03 Mar 2026 07:07:18.6491
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 9V5HzoeXOZ2ohIP5SOtYAd9DQwmg0gHFPLbgxfzkZR1tD/6S9b/iEfrZC65BW13ZNdJJuK9e2Wgtfr5U/RjZYzZ/VGflvHXIJ01saMMs6+M=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR11MB7589
-X-OriginatorOrg: intel.com
-X-Spamd-Bar: --------
-X-MailFrom: vivek.kasireddy@intel.com
+In-Reply-To: <20260302-iino-u64-v2-4-e5388800dae0@kernel.org>
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: mkl@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: linaro-mm-sig@lists.linaro.org
+X-Spamd-Bar: --
+X-MailFrom: mkl@pengutronix.de
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: HUP5YZT63PE5DFMLRCDWJ257PMMZ2GDF
-X-Message-ID-Hash: HUP5YZT63PE5DFMLRCDWJ257PMMZ2GDF
+Message-ID-Hash: 3VTHPQUR22PXLUNE2ESUU5B5G4FQW7S6
+X-Message-ID-Hash: 3VTHPQUR22PXLUNE2ESUU5B5G4FQW7S6
 X-Mailman-Approved-At: Thu, 16 Apr 2026 17:00:00 +0000
+CC: Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>, Steven Rostedt <rostedt@goodmis.org>, Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Dan Williams <dan.j.williams@intel.com>, Matthew Wilcox <willy@infradead.org>, Eric Biggers <ebiggers@kernel.org>, "Theodore Y. Ts'o" <tytso@mit.edu>, Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>, David Hildenbrand <david@kernel.org>, David Howells <dhowells@redhat.com>, Paulo Alcantara <pc@manguebit.org>, Andreas Dilger <adilger.kernel@dilger.ca>, Jan Kara <jack@suse.com>, Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>, Trond Myklebust <trondmy@kernel.org>, Anna Schumaker <anna@kernel.org>, Chuck Lever <chuck.lever@oracle.com>, NeilBrown <neil@brown.name>, Olga Kornievskaia <okorniev@redhat.com>, Dai Ngo <Dai.Ngo@oracle.com>, Tom Talpey <tom@talpey.com>, Steve French <sfrench@samba.org>, Ronnie Sahlberg <ro
+ nniesahlberg@gmail.com>, Shyam Prasad N <sprasad@microsoft.com>, Bharath SM <bharathsm@microsoft.com>, Alexander Aring <alex.aring@gmail.com>, Ryusuke Konishi <konishi.ryusuke@gmail.com>, Viacheslav Dubeyko <slava@dubeyko.com>, Eric Van Hensbergen <ericvh@kernel.org>, Latchesar Ionkov <lucho@ionkov.net>, Dominique Martinet <asmadeus@codewreck.org>, Christian Schoenebeck <linux_oss@crudebyte.com>, David Sterba <dsterba@suse.com>, Marc Dionne <marc.dionne@auristor.com>, Ian Kent <raven@themaw.net>, Luis de Bethencourt <luisbg@kernel.org>, Salah Triki <salah.triki@gmail.com>, "Tigran A. Aivazian" <aivazian.tigran@gmail.com>, Ilya Dryomov <idryomov@gmail.com>, Alex Markuze <amarkuze@redhat.com>, Jan Harkes <jaharkes@cs.cmu.edu>, coda@cs.cmu.edu, Nicolas Pitre <nico@fluxnic.net>, Tyler Hicks <code@tyhicks.com>, Amir Goldstein <amir73il@gmail.com>, Christoph Hellwig <hch@infradead.org>, John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>, Yangtao Li <frank.li@vivo.com>, Mikulas Patoc
+ ka <mikulas@artax.karlin.mff.cuni.cz>, David Woodhouse <dwmw2@infradead.org>, Richard Weinberger <richard@nod.at>, Dave Kleikamp <shaggy@kernel.org>, Konstantin Komarov <almaz.alexandrovich@paragon-software.com>, Mark Fasheh <mark@fasheh.com>, Joel Becker <jlbec@evilplan.org>, Joseph Qi <joseph.qi@linux.alibaba.com>, Mike Marshall <hubcap@omnibond.com>, Martin Brandenburg <martin@omnibond.com>, Miklos Szeredi <miklos@szeredi.hu>, Anders Larsen <al@alarsen.net>, Zhihao Cheng <chengzhihao1@huawei.com>, Damien Le Moal <dlemoal@kernel.org>, Naohiro Aota <naohiro.aota@wdc.com>, Johannes Thumshirn <jth@kernel.org>, John Johansen <john.johansen@canonical.com>, Paul Moore <paul@paul-moore.com>, James Morris <jmorris@namei.org>, "Serge E. Hallyn" <serge@hallyn.com>, Mimi Zohar <zohar@linux.ibm.com>, Roberto Sassu <roberto.sassu@huawei.com>, Dmitry Kasatkin <dmitry.kasatkin@gmail.com>, Eric Snowberg <eric.snowberg@oracle.com>, Fan Wu <wufan@kernel.org>, Stephen Smalley <stephen.smalley.work@g
+ mail.com>, Ondrej Mosnacek <omosnace@redhat.com>, Casey Schaufler <casey@schaufler-ca.com>, Alex Deucher <alexander.deucher@amd.com>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Eric Dumazet <edumazet@google.com>, Kuniyuki Iwashima <kuniyu@google.com>, Paolo Abeni <pabeni@redhat.com>, Willem de Bruijn <willemb@google.com>, "David S. Miller" <davem@davemloft.net>, Jakub Kicinski <kuba@kernel.org>, Simon Horman <horms@kernel.org>, Oleg Nesterov <oleg@redhat.com>, Peter Zijlstra <peterz@infradead.org>, Ingo Molnar <mingo@redhat.com>, Arnaldo Carvalho de Melo <acme@kernel.org>, Namhyung Kim <namhyung@kernel.org>, Mark Rutland <mark.rutland@arm.com>, Alexander Shishkin <alexander.shishkin@linux.intel.com>, Jiri Olsa <jolsa@kernel.org>, Ian Rogers <irogers@google.com>, Adrian Hunter <adrian.hunter@intel.com>, James Clark <james.clark@linaro.org>, "Darrick J. Wong" <djw
+ ong@kernel.org>, Martin Schiller <ms@dev.tdt.de>, Eric Paris <eparis@redhat.com>, Joerg Reuter <jreuter@yaina.de>, Marcel Holtmann <marcel@holtmann.org>, Johan Hedberg <johan.hedberg@gmail.com>, Luiz Augusto von Dentz <luiz.dentz@gmail.com>, Oliver Hartkopp <socketcan@hartkopp.net>, David Ahern <dsahern@kernel.org>, Neal Cardwell <ncardwell@google.com>, Steffen Klassert <steffen.klassert@secunet.com>, Herbert Xu <herbert@gondor.apana.org.au>, Remi Denis-Courmont <courmisch@gmail.com>, Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>, Xin Long <lucien.xin@gmail.com>, Magnus Karlsson <magnus.karlsson@intel.com>, Maciej Fijalkowski <maciej.fijalkowski@intel.com>, Stanislav Fomichev <sdf@fomichev.me>, Alexei Starovoitov <ast@kernel.org>, Daniel Borkmann <daniel@iogearbox.net>, Jesper Dangaard Brouer <hawk@kernel.org>, John Fastabend <john.fastabend@gmail.com>, linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, nvdimm@lists.linux.dev, fsve
+ rity@lists.linux.dev, linux-mm@kvack.org, netfs@lists.linux.dev, linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net, linux-nfs@vger.kernel.org, linux-cifs@vger.kernel.org, samba-technical@lists.samba.org, linux-nilfs@vger.kernel.org, v9fs@lists.linux.dev, linux-afs@lists.infradead.org, autofs@vger.kernel.org, ceph-devel@vger.kernel.org, codalist@coda.cs.cmu.edu, ecryptfs@vger.kernel.org, linux-mtd@lists.infradead.org, jfs-discussion@lists.sourceforge.net, ntfs3@lists.linux.dev, ocfs2-devel@lists.linux.dev, devel@lists.orangefs.org, linux-unionfs@vger.kernel.org, apparmor@lists.ubuntu.com, linux-security-module@vger.kernel.org, linux-integrity@vger.kernel.org, selinux@vger.kernel.org, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, netdev@vger.kernel.org, linux-perf-users@vger.kernel.org, linux-fscrypt@vger.kernel.org, linux-xfs@vger.kernel.org, linux-hams@vger.kernel.org, linux-x25@vger.kern
+ el.org, audit@vger.kernel.org, linux-bluetooth@vger.kernel.org, linux-can@vger.kernel.org, linux-sctp@vger.kernel.org, bpf@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH RFC 00/26] Add DMA-buf mapping types and convert vfio/iommufd to use them
+Subject: [Linaro-mm-sig] Re: [PATCH v2 004/110] net: change sock.sk_ino and sock_i_ino() to u64
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HUP5YZT63PE5DFMLRCDWJ257PMMZ2GDF/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3VTHPQUR22PXLUNE2ESUU5B5G4FQW7S6/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [2.59 / 15.00];
-	DATE_IN_PAST(1.00)[1066];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
-	R_DKIM_REJECT(1.00)[intel.com:s=Intel];
+Content-Type: multipart/mixed; boundary="===============5712545008876091456=="
+X-Spamd-Result: default: False [0.89 / 15.00];
+	SIGNED_PGP(-2.00)[];
+	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
+	DATE_IN_PAST(1.00)[1063];
+	MIME_GOOD(-0.20)[multipart/mixed,multipart/signed,text/plain];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
-	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[intel.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[14];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email,CH3PR11MB7177.namprd11.prod.outlook.com:mid];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[vivek.kasireddy@intel.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FREEMAIL_CC(0.00)[zeniv.linux.org.uk,kernel.org,suse.cz,goodmis.org,efficios.com,intel.com,infradead.org,mit.edu,linux.dev,suse.de,redhat.com,manguebit.org,dilger.ca,suse.com,oracle.com,brown.name,talpey.com,samba.org,gmail.com,microsoft.com,dubeyko.com,ionkov.net,codewreck.org,crudebyte.com,auristor.com,themaw.net,cs.cmu.edu,fluxnic.net,tyhicks.com,physik.fu-berlin.de,vivo.com,artax.karlin.mff.cuni.cz,nod.at,paragon-software.com,fasheh.com,evilplan.org,linux.alibaba.com,omnibond.com,szeredi.hu,alarsen.net,huawei.com,wdc.com,canonical.com,paul-moore.com,namei.org,hallyn.com,linux.ibm.com,g mail.com,schaufler-ca.com,amd.com,ffwll.ch,linaro.org,google.com,davemloft.net,arm.com,linux.intel.com,dev.tdt.de,yaina.de,holtmann.org,hartkopp.net,secunet.com,gondor.apana.org.au,fomichev.me,iogearbox.net,vger.kernel.org,lists.linux.dev,kvack.org,lists.sourceforge.net,lists.samba.org,lists.infradead.org,coda.cs.cmu.edu,lists.orangefs.org,lists.ubuntu.com,lists.freedesktop.org,lists.linaro.org,vg
+ er.kern];
+	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+,1:+,2:+,3:~,4:+];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	DMARC_NA(0.00)[pengutronix.de];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:-];
-	NEURAL_HAM(-0.00)[-0.964];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	MISSING_XM_UA(0.00)[];
-	RCVD_COUNT_SEVEN(0.00)[9]
-X-Rspamd-Queue-Id: E053E412DD2
+	RCPT_COUNT_GT_50(0.00)[171];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[mkl@pengutronix.de,linaro-mm-sig-bounces@lists.linaro.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	R_DKIM_NA(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email,pengutronix.de:email,pengutronix.de:mid,pengutronix.de:url]
+X-Rspamd-Queue-Id: AB2CD412DD9
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Hi Jason,
 
-> Subject: Re: [PATCH RFC 00/26] Add DMA-buf mapping types and
-> convert vfio/iommufd to use them
-> 
-> On Tue, Feb 17, 2026 at 08:11:31PM -0400, Jason Gunthorpe wrote:
-> > Jason Gunthorpe (26):
-> >   dma-buf: Introduce DMA-buf mapping types
-> >   dma-buf: Add the SGT DMA mapping type
-> >   dma-buf: Add dma_buf_mapping_attach()
-> >   dma-buf: Route SGT related actions through attach->map_type
-> >   dma-buf: Allow single exporter drivers to avoid the match_mapping
-> >     function
-> 
-> I've rebased my github branch:
-> 
->   https://github.com/jgunthorpe/linux/commits/dmabuf_map_type
-> 
-> On to drm-misc-next comit 41dae5ac5e15 ("drm/nouveau: Test for
-> imported
-> buffers with drm_gem_is_imported()") and reworked some of the
-> pending
-> bits on the VFIO side to accommodate Leon's series.
-> 
-> Christian/Thomas/Vivek, how are you feeling about this approach? I'd
-> like to focus on the above patches, should I post a non-RFC series?
-The approach looks good to me. One particular idea that you have added,
-that is new is finish_match(), which I think is very useful. Hopefully, this series
-is on Christian and Thomas' TODO list and they can do an in-depth review
-soon.
+--===============5712545008876091456==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="w7xntzjnabubqe7a"
+Content-Disposition: inline
 
-Thanks,
-Vivek
-> 
-> Thanks,
-> Jason
+
+--w7xntzjnabubqe7a
+Content-Type: text/plain; protected-headers=v1; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH v2 004/110] net: change sock.sk_ino and sock_i_ino() to
+ u64
+MIME-Version: 1.0
+
+On 02.03.2026 15:23:48, Jeff Layton wrote:
+> inode->i_ino is being converted to a u64. sock.sk_ino (which caches the
+> inode number) must also be widened to avoid truncation on 32-bit
+> architectures where unsigned long is only 32 bits.
+>
+> Change sk_ino from unsigned long to u64, and update the return type
+> of sock_i_ino() to match. Fix all format strings that print the
+> result of sock_i_ino() (%lu -> %llu), and widen the intermediate
+> variables and function parameters in the diag modules that were
+> using int to hold the inode number.
+>
+> Note that the UAPI socket diag structures (inet_diag_msg.idiag_inode,
+> unix_diag_msg.udiag_ino, etc.) are all __u32 and cannot be changed
+> without breaking the ABI. The assignments to those fields will
+> silently truncate, which is the existing behavior.
+>
+> Signed-off-by: Jeff Layton <jlayton@kernel.org>
+> ---
+>  net/can/bcm.c                | 2 +-
+
+Acked-by: Marc Kleine-Budde <mkl@pengutronix.de> # for net/can
+
+regards,
+Marc
+
+--=20
+Pengutronix e.K.                 | Marc Kleine-Budde          |
+Embedded Linux                   | https://www.pengutronix.de |
+Vertretung N=C3=BCrnberg              | Phone: +49-5121-206917-129 |
+Amtsgericht Hildesheim, HRA 2686 | Fax:   +49-5121-206917-9   |
+
+--w7xntzjnabubqe7a
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQSl+MghEFFAdY3pYJLMOmT6rpmt0gUCaaax+QAKCRDMOmT6rpmt
+0hl7AQCzPgPTWe6ol8KwtKBDfHnqkx4Ku1cIiwlQY4Hnx5jz1wD5ASVd5abGOb50
+lF4hQNIazRvyjJwKRF+va5JwX/SN2go=
+=y8vr
+-----END PGP SIGNATURE-----
+
+--w7xntzjnabubqe7a--
+
+--===============5712545008876091456==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============5712545008876091456==--
