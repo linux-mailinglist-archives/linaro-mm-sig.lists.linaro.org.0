@@ -2,94 +2,94 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WLtuBaoe4Wl0pQAAu9opvQ
+	id 6FPqOLEe4WlbpQAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:38:50 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:38:57 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 77EAE412F19
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:38:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 97E3A412F4D
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:38:57 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7F10145ACE
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:38:48 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 560C845AD7
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:38:56 +0000 (UTC)
 Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
-	by lists.linaro.org (Postfix) with ESMTPS id 1BF2C3F69B
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  3 Mar 2026 11:22:15 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 403B73F727
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  3 Mar 2026 11:24:03 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=suse.cz header.s=susede2_rsa header.b=MMje5RHt;
-	dkim=pass header.d=suse.cz header.s=susede2_ed25519 header.b=mBJ7uKd5;
-	dkim=pass header.d=suse.cz header.s=susede2_rsa header.b=MMje5RHt;
-	dkim=pass header.d=suse.cz header.s=susede2_ed25519 header.b=mBJ7uKd5;
+	dkim=pass header.d=suse.cz header.s=susede2_rsa header.b=oy8pWoHq;
+	dkim=pass header.d=suse.cz header.s=susede2_ed25519 header.b=jJuhp4wn;
+	dkim=pass header.d=suse.cz header.s=susede2_rsa header.b=oy8pWoHq;
+	dkim=pass header.d=suse.cz header.s=susede2_ed25519 header.b=jJuhp4wn;
 	dmarc=none;
 	spf=pass (lists.linaro.org: domain of jack@suse.cz designates 195.135.223.131 as permitted sender) smtp.mailfrom=jack@suse.cz
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
 	(No client certificate requested)
-	by smtp-out2.suse.de (Postfix) with ESMTPS id F3B445BD15;
-	Tue,  3 Mar 2026 11:22:13 +0000 (UTC)
+	by smtp-out2.suse.de (Postfix) with ESMTPS id 4BF235BDF1;
+	Tue,  3 Mar 2026 11:24:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-	t=1772536934; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1772537042; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=KeUIkqizRv13GXqCMqsXZmgZff1w7sG5Qjbx6Jj7J7Q=;
-	b=MMje5RHtAq0iyN2Ci5NB3siR+5uKf4OabgxeLPpbapGQwdYTZLHIG9WbEhBZtfZH4K6FJj
-	K6dLcOOiweD5MCv526aROGLBnxAitX0xVEFukIg5VKf81+ODBL8aapNjjd2HAUQ3YbMqn7
-	qxFG09Zg+uhBneAwqCoeimjK9RUv3zM=
+	bh=K7Yl9Dt7jVlcVQjEf63B1tQYNVt8eYC4EdfdZsuIVJM=;
+	b=oy8pWoHqrMEHlN4brCXg2tPFAhfnj7hNnLiWr7QZqvLnhUUVRLml6dG2v7DgEPSLDnZovj
+	KAXy3PwMSytjm6CRgomx/IgEopJ3owCZp+3PaBD8ZCWWFIlSZ6TreqR/OCjywszkRFPjhM
+	RZ129a6nRDsR1gOHwRCIua5AvBIGjGg=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-	s=susede2_ed25519; t=1772536934;
+	s=susede2_ed25519; t=1772537042;
 	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=KeUIkqizRv13GXqCMqsXZmgZff1w7sG5Qjbx6Jj7J7Q=;
-	b=mBJ7uKd5M1QzjfrDgXpF0iEdCEhfwIvS8TCLCSzoZDho+dSibf/db1v1ycUm9i74WcZRv4
-	dGapPbtCt8Qt4hAA==
+	bh=K7Yl9Dt7jVlcVQjEf63B1tQYNVt8eYC4EdfdZsuIVJM=;
+	b=jJuhp4wn8vYJLdotyAquo63x/02x111qPRtzSjYNdGjAowRt5gzgynAxTUYw+Ln14/yoSt
+	LKDZZhnGQ3WO8cCw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-	t=1772536934; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1772537042; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=KeUIkqizRv13GXqCMqsXZmgZff1w7sG5Qjbx6Jj7J7Q=;
-	b=MMje5RHtAq0iyN2Ci5NB3siR+5uKf4OabgxeLPpbapGQwdYTZLHIG9WbEhBZtfZH4K6FJj
-	K6dLcOOiweD5MCv526aROGLBnxAitX0xVEFukIg5VKf81+ODBL8aapNjjd2HAUQ3YbMqn7
-	qxFG09Zg+uhBneAwqCoeimjK9RUv3zM=
+	bh=K7Yl9Dt7jVlcVQjEf63B1tQYNVt8eYC4EdfdZsuIVJM=;
+	b=oy8pWoHqrMEHlN4brCXg2tPFAhfnj7hNnLiWr7QZqvLnhUUVRLml6dG2v7DgEPSLDnZovj
+	KAXy3PwMSytjm6CRgomx/IgEopJ3owCZp+3PaBD8ZCWWFIlSZ6TreqR/OCjywszkRFPjhM
+	RZ129a6nRDsR1gOHwRCIua5AvBIGjGg=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-	s=susede2_ed25519; t=1772536934;
+	s=susede2_ed25519; t=1772537042;
 	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=KeUIkqizRv13GXqCMqsXZmgZff1w7sG5Qjbx6Jj7J7Q=;
-	b=mBJ7uKd5M1QzjfrDgXpF0iEdCEhfwIvS8TCLCSzoZDho+dSibf/db1v1ycUm9i74WcZRv4
-	dGapPbtCt8Qt4hAA==
+	bh=K7Yl9Dt7jVlcVQjEf63B1tQYNVt8eYC4EdfdZsuIVJM=;
+	b=jJuhp4wn8vYJLdotyAquo63x/02x111qPRtzSjYNdGjAowRt5gzgynAxTUYw+Ln14/yoSt
+	LKDZZhnGQ3WO8cCw==
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
 	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id DC5A43EA69;
-	Tue,  3 Mar 2026 11:22:13 +0000 (UTC)
+	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 356003EA6C;
+	Tue,  3 Mar 2026 11:24:02 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
 	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id EgrGNWXEpmnvRwAAD6G6ig
-	(envelope-from <jack@suse.cz>); Tue, 03 Mar 2026 11:22:13 +0000
+	id KO4ODdLEpmm1SQAAD6G6ig
+	(envelope-from <jack@suse.cz>); Tue, 03 Mar 2026 11:24:02 +0000
 Received: by quack3.suse.cz (Postfix, from userid 1000)
-	id 9E82BA0A1B; Tue,  3 Mar 2026 12:22:13 +0100 (CET)
-Date: Tue, 3 Mar 2026 12:22:13 +0100
+	id D1FB8A0A1B; Tue,  3 Mar 2026 12:24:01 +0100 (CET)
+Date: Tue, 3 Mar 2026 12:24:01 +0100
 From: Jan Kara <jack@suse.cz>
 To: Jeff Layton <jlayton@kernel.org>
-Message-ID: <ylcfz3i2lduxgi5sywsxolkk3yc6u5satyzrf2mymj2vcirtiy@bfgr5natl6gf>
+Message-ID: <ru6heof6ndlg2doksb3mhaz2gnfdt32pqkiwv3trx6ppbmtu3l@466clvjonlps>
 References: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
- <20260302-iino-u64-v2-14-e5388800dae0@kernel.org>
+ <20260302-iino-u64-v2-29-e5388800dae0@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260302-iino-u64-v2-14-e5388800dae0@kernel.org>
+In-Reply-To: <20260302-iino-u64-v2-29-e5388800dae0@kernel.org>
 X-Spam-Flag: NO
-X-Spam-Score: -0.30
+X-Spam-Score: -0.51
 X-Spam-Level: 
-X-Spamd-Bar: -
+X-Spamd-Bar: /
 X-MailFrom: jack@suse.cz
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: N627APY3IN5WNGVHNWVBDELU55KC65OE
-X-Message-ID-Hash: N627APY3IN5WNGVHNWVBDELU55KC65OE
+Message-ID-Hash: 7WONP4IKF3U4CF4W7UHWJG7REMIGQAK4
+X-Message-ID-Hash: 7WONP4IKF3U4CF4W7UHWJG7REMIGQAK4
 X-Mailman-Approved-At: Thu, 16 Apr 2026 17:00:07 +0000
 CC: Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>, Steven Rostedt <rostedt@goodmis.org>, Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Dan Williams <dan.j.williams@intel.com>, Matthew Wilcox <willy@infradead.org>, Eric Biggers <ebiggers@kernel.org>, "Theodore Y. Ts'o" <tytso@mit.edu>, Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>, David Hildenbrand <david@kernel.org>, David Howells <dhowells@redhat.com>, Paulo Alcantara <pc@manguebit.org>, Andreas Dilger <adilger.kernel@dilger.ca>, Jan Kara <jack@suse.com>, Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>, Trond Myklebust <trondmy@kernel.org>, Anna Schumaker <anna@kernel.org>, Chuck Lever <chuck.lever@oracle.com>, NeilBrown <neil@brown.name>, Olga Kornievskaia <okorniev@redhat.com>, Dai Ngo <Dai.Ngo@oracle.com>, Tom Talpey <tom@talpey.com>, Steve French <sfrench@samba.org>, Ronnie Sahlberg <ro
  nniesahlberg@gmail.com>, Shyam Prasad N <sprasad@microsoft.com>, Bharath SM <bharathsm@microsoft.com>, Alexander Aring <alex.aring@gmail.com>, Ryusuke Konishi <konishi.ryusuke@gmail.com>, Viacheslav Dubeyko <slava@dubeyko.com>, Eric Van Hensbergen <ericvh@kernel.org>, Latchesar Ionkov <lucho@ionkov.net>, Dominique Martinet <asmadeus@codewreck.org>, Christian Schoenebeck <linux_oss@crudebyte.com>, David Sterba <dsterba@suse.com>, Marc Dionne <marc.dionne@auristor.com>, Ian Kent <raven@themaw.net>, Luis de Bethencourt <luisbg@kernel.org>, Salah Triki <salah.triki@gmail.com>, "Tigran A. Aivazian" <aivazian.tigran@gmail.com>, Ilya Dryomov <idryomov@gmail.com>, Alex Markuze <amarkuze@redhat.com>, Jan Harkes <jaharkes@cs.cmu.edu>, coda@cs.cmu.edu, Nicolas Pitre <nico@fluxnic.net>, Tyler Hicks <code@tyhicks.com>, Amir Goldstein <amir73il@gmail.com>, Christoph Hellwig <hch@infradead.org>, John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>, Yangtao Li <frank.li@vivo.com>, Mikulas Patoc
@@ -100,9 +100,9 @@ CC: Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.
  ams@vger.kernel.org, linux-x25@vger.kernel.org, audit@vger.kernel.org, linux-bluetooth@vger.kernel.org, linux-can@vger.kernel.org, linux-sctp@vger.kernel.org, bpf@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 014/110] proc: use PRIino format for i_ino
+Subject: [Linaro-mm-sig] Re: [PATCH v2 029/110] ext2: use PRIino format for i_ino
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/N627APY3IN5WNGVHNWVBDELU55KC65OE/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7WONP4IKF3U4CF4W7UHWJG7REMIGQAK4/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -135,22 +135,22 @@ X-Spamd-Result: default: False [3.49 / 15.00];
 	RCVD_COUNT_FIVE(0.00)[6];
 	FROM_NEQ_ENVFROM(0.00)[jack@suse.cz,linaro-mm-sig-bounces@lists.linaro.org];
 	DKIM_TRACE(0.00)[suse.cz:-];
-	NEURAL_HAM(-0.00)[-0.988];
+	NEURAL_HAM(-0.00)[-0.992];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	MISSING_XM_UA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email,linaro.org:email,suse.cz:email,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: 77EAE412F19
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email,lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email,suse.cz:email]
+X-Rspamd-Queue-Id: 97E3A412F4D
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Mon 02-03-26 15:23:58, Jeff Layton wrote:
-> Convert proc i_ino format strings to use the PRIino format
+On Mon 02-03-26 15:24:13, Jeff Layton wrote:
+> Convert ext2 i_ino format strings to use the PRIino format
 > macro in preparation for the widening of i_ino via kino_t.
 > 
-> Update local variables and function parameters that hold i_ino
-> values from unsigned long to kino_t.
+> Also correct signed format specifiers to unsigned, since inode
+> numbers are unsigned values.
 > 
 > Signed-off-by: Jeff Layton <jlayton@kernel.org>
 
@@ -159,51 +159,6 @@ Looks good. Feel free to add:
 Reviewed-by: Jan Kara <jack@suse.cz>
 
 								Honza
-
-> ---
->  fs/proc/fd.c       | 2 +-
->  fs/proc/task_mmu.c | 4 ++--
->  2 files changed, 3 insertions(+), 3 deletions(-)
-> 
-> diff --git a/fs/proc/fd.c b/fs/proc/fd.c
-> index 9eeccff49b2abf57d766ce17fe47070c379ed2c8..936d0258d688be5fdc384ee5c4dfbb8fa0d19dff 100644
-> --- a/fs/proc/fd.c
-> +++ b/fs/proc/fd.c
-> @@ -54,7 +54,7 @@ static int seq_show(struct seq_file *m, void *v)
->  	if (ret)
->  		return ret;
->  
-> -	seq_printf(m, "pos:\t%lli\nflags:\t0%o\nmnt_id:\t%i\nino:\t%lu\n",
-> +	seq_printf(m, "pos:\t%lli\nflags:\t0%o\nmnt_id:\t%i\nino:\t%" PRIino "u\n",
->  		   (long long)file->f_pos, f_flags,
->  		   real_mount(file->f_path.mnt)->mnt_id,
->  		   file_inode(file)->i_ino);
-> diff --git a/fs/proc/task_mmu.c b/fs/proc/task_mmu.c
-> index e091931d7ca19d71f31699913d177eec0821ca7b..702b0f0433f91077cd0d0af4a07e9d67d9fa9a45 100644
-> --- a/fs/proc/task_mmu.c
-> +++ b/fs/proc/task_mmu.c
-> @@ -442,7 +442,7 @@ static void get_vma_name(struct vm_area_struct *vma,
->  static void show_vma_header_prefix(struct seq_file *m,
->  				   unsigned long start, unsigned long end,
->  				   vm_flags_t flags, unsigned long long pgoff,
-> -				   dev_t dev, unsigned long ino)
-> +				   dev_t dev, kino_t ino)
->  {
->  	seq_setwidth(m, 25 + sizeof(void *) * 6 - 1);
->  	seq_put_hex_ll(m, NULL, start, 8);
-> @@ -465,7 +465,7 @@ show_map_vma(struct seq_file *m, struct vm_area_struct *vma)
->  	const struct path *path;
->  	const char *name_fmt, *name;
->  	vm_flags_t flags = vma->vm_flags;
-> -	unsigned long ino = 0;
-> +	kino_t ino = 0;
->  	unsigned long long pgoff = 0;
->  	unsigned long start, end;
->  	dev_t dev = 0;
-> 
-> -- 
-> 2.53.0
-> 
 -- 
 Jan Kara <jack@suse.com>
 SUSE Labs, CR
