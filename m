@@ -2,215 +2,253 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gNOPJlQf4Wl0pQAAu9opvQ
+	id sNi7Blof4Wl0pQAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:41:40 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:41:46 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0590441310E
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:41:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D8CFE41312B
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 19:41:45 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0804645CBB
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:41:39 +0000 (UTC)
-Received: from kylie.crudebyte.com (kylie.crudebyte.com [5.189.157.229])
-	by lists.linaro.org (Postfix) with ESMTPS id 0CCC83F727
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  3 Mar 2026 12:15:00 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E98C445CC8
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:41:44 +0000 (UTC)
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+	by lists.linaro.org (Postfix) with ESMTPS id 011193F69B
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  3 Mar 2026 13:13:07 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=crudebyte.com header.s=kylie header.b=HqDnIkLb;
-	dmarc=pass (policy=quarantine) header.from=crudebyte.com;
-	spf=pass (lists.linaro.org: domain of linux_oss@crudebyte.com designates 5.189.157.229 as permitted sender) smtp.mailfrom=linux_oss@crudebyte.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=crudebyte.com; s=kylie; h=Content-Type:Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
-	Content-ID:Content-Description;
-	bh=6morsqL1rf2svzHpl7Mgcq7P7Za1rjxSr9X2GzDxJdQ=; b=HqDnIkLb9g/Hsc8NjMh6Jj9WuM
-	MzJbEDxoSbJB6oNviZ4lhLElZSwdxUq+F82IhdhMr3/l3EIr7ekENzTfWw1alK0l7gFMBknTTbllK
-	rQiTpC5jrJRp5O9Y1BXau586rPz904ODCjVtDrL/S+fcUwcyE3KQHYPQE7yHCQgEDc8jdW2FFMvnt
-	8BFo41dQEnn19Baat6muvD8WHIuTeXI5DV3hJWIvjJJnnIbJ9NBNkEHuffv8Z0iXv2/2WH2/hxxuH
-	bQk7qyA82VKBDS4IWm4WLmrZDk/8F2VTqK9lWDvGIID23xeCtmOUbbOU5nkyVR/RcS3L+8d3GznDt
-	Co3UvqraJhe1cjvRT3F0oMQn4owK/B7J/FhwdoT/TARifEt06mcA+ESiihNW/SIasrPSJHOjZxjau
-	19CUACfNAgbx8938xysaW9hCoTK95R7R5EP2KKkB7w4xq+Xr5QZHTBanCME4DOR0egc7lmc8Iwow+
-	6QdiLyA9W5tnh0qszmpT1je2sF3FDWXPdKIW8B5OWRyh6mmktdJOqx2KnWKFBZUmJIRSr0SYCgoEj
-	OXekGpcPmr2OGrtA46WUBXf4g/mM8I/cnPWeWBCwtWVWaywFhrbuiZs4N+cAgdTRI0a7P2lT1kapU
-	+AuwoWhfJXGO+AHTpCpSIxdbyzli+byB6v/wTaiSQ=;
-From: Christian Schoenebeck <linux_oss@crudebyte.com>
-To: Alexander Viro <viro@zeniv.linux.org.uk>,
- Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>,
- Steven Rostedt <rostedt@goodmis.org>, Masami Hiramatsu <mhiramat@kernel.org>,
- Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
- Dan Williams <dan.j.williams@intel.com>,
- Matthew Wilcox <willy@infradead.org>, Eric Biggers <ebiggers@kernel.org>,
- "Theodore Y. Ts'o" <tytso@mit.edu>, Muchun Song <muchun.song@linux.dev>,
- Oscar Salvador <osalvador@suse.de>, David Hildenbrand <david@kernel.org>,
- David Howells <dhowells@redhat.com>, Paulo Alcantara <pc@manguebit.org>,
- Andreas Dilger <adilger.kernel@dilger.ca>, Jan Kara <jack@suse.com>,
- Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>,
- Trond Myklebust <trondmy@kernel.org>, Anna Schumaker <anna@kernel.org>,
- Chuck Lever <chuck.lever@oracle.com>, NeilBrown <neil@brown.name>,
- Olga Kornievskaia <okorniev@redhat.com>, Dai Ngo <Dai.Ngo@oracle.com>,
- Tom Talpey <tom@talpey.com>, Steve French <sfrench@samba.org>,
- Ronnie Sahlberg <ronniesahlberg@gmail.com>,
- Shyam Prasad N <sprasad@microsoft.com>, Bharath SM <bharathsm@microsoft.com>,
- Alexander Aring <alex.aring@gmail.com>,
- Ryusuke Konishi <konishi.ryusuke@gmail.com>,
- Viacheslav Dubeyko <slava@dubeyko.com>,
- Eric Van Hensbergen <ericvh@kernel.org>, Latchesar Ionkov <lucho@ionkov.net>,
- Dominique Martinet <asmadeus@codewreck.org>, David Sterba <dsterba@suse.com>,
- Marc Dionne <marc.dionne@auristor.com>, Ian Kent <raven@themaw.net>,
- Luis de Bethencourt <luisbg@kernel.org>, Salah Triki <salah.triki@gmail.com>,
- "Tigran A. Aivazian" <aivazian.tigran@gmail.com>,
- Ilya Dryomov <idryomov@gmail.com>, Alex Markuze <amarkuze@redhat.com>,
- Jan Harkes <jaharkes@cs.cmu.edu>, coda@cs.cmu.edu,
- Nicolas Pitre <nico@fluxnic.net>, Tyler Hicks <code@tyhicks.com>,
- Amir Goldstein <amir73il@gmail.com>, Christoph Hellwig <hch@infradead.org>,
- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>,
- Yangtao Li <frank.li@vivo.com>,
- Mikulas Patocka <mikulas@artax.karlin.mff.cuni.cz>,
- David Woodhouse <dwmw2@infradead.org>, Richard Weinberger <richard@nod.at>,
- Dave Kleikamp <shaggy@kernel.org>,
- Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
- Mark Fasheh <mark@fasheh.com>, Joel Becker <jlbec@evilplan.org>,
- Joseph Qi <joseph.qi@linux.alibaba.com>, Mike Marshall <hubcap@omnibond.com>,
- Martin Brandenburg <martin@omnibond.com>, Miklos Szeredi <miklos@szeredi.hu>,
- Anders Larsen <al@alarsen.net>, Zhihao Cheng <chengzhihao1@huawei.com>,
- Damien Le Moal <dlemoal@kernel.org>, Naohiro Aota <naohiro.aota@wdc.com>,
- Johannes Thumshirn <jth@kernel.org>,
- John Johansen <john.johansen@canonical.com>,
- Paul Moore <paul@paul-moore.com>, James Morris <jmorris@namei.org>,
- "Serge E. Hallyn" <serge@hallyn.com>, Mimi Zohar <zohar@linux.ibm.com>,
- Roberto Sassu <roberto.sassu@huawei.com>,
- Dmitry Kasatkin <dmitry.kasatkin@gmail.com>,
- Eric Snowberg <eric.snowberg@oracle.com>, Fan Wu <wufan@kernel.org>,
- Stephen Smalley <stephen.smalley.work@gmail.com>,
- Ondrej Mosnacek <omosnace@redhat.com>,
- Casey Schaufler <casey@schaufler-ca.com>,
- Alex Deucher <alexander.deucher@amd.com>,
- Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Sumit Semwal <sumit.semwal@linaro.org>, Eric Dumazet <edumazet@google.com>,
- Kuniyuki Iwashima <kuniyu@google.com>, Paolo Abeni <pabeni@redhat.com>,
- Willem de Bruijn <willemb@google.com>,
- "David S. Miller" <davem@davemloft.net>, Jakub Kicinski <kuba@kernel.org>,
- Simon Horman <horms@kernel.org>, Oleg Nesterov <oleg@redhat.com>,
- Peter Zijlstra <peterz@infradead.org>, Ingo Molnar <mingo@redhat.com>,
- Arnaldo Carvalho de Melo <acme@kernel.org>,
- Namhyung Kim <namhyung@kernel.org>, Mark Rutland <mark.rutland@arm.com>,
- Alexander Shishkin <alexander.shishkin@linux.intel.com>,
- Jiri Olsa <jolsa@kernel.org>, Ian Rogers <irogers@google.com>,
- Adrian Hunter <adrian.hunter@intel.com>,
- James Clark <james.clark@linaro.org>, "Darrick J. Wong" <djwong@kernel.org>,
- Martin Schiller <ms@dev.tdt.de>, Eric Paris <eparis@redhat.com>,
- Joerg Reuter <jreuter@yaina.de>, Marcel Holtmann <marcel@holtmann.org>,
- Johan Hedberg <johan.hedberg@gmail.com>,
- Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
- Oliver Hartkopp <socketcan@hartkopp.net>,
- Marc Kleine-Budde <mkl@pengutronix.de>, David Ahern <dsahern@kernel.org>,
- Neal Cardwell <ncardwell@google.com>,
- Steffen Klassert <steffen.klassert@secunet.com>,
- Herbert Xu <herbert@gondor.apana.org.au>,
- Remi Denis-Courmont <courmisch@gmail.com>,
- Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>,
- Xin Long <lucien.xin@gmail.com>, Magnus Karlsson <magnus.karlsson@intel.com>,
- Maciej Fijalkowski <maciej.fijalkowski@intel.com>,
- Stanislav Fomichev <sdf@fomichev.me>, Alexei Starovoitov <ast@kernel.org>,
- Daniel Borkmann <daniel@iogearbox.net>,
- Jesper Dangaard Brouer <hawk@kernel.org>,
- John Fastabend <john.fastabend@gmail.com>, Jeff Layton <jlayton@kernel.org>
-Date: Tue, 03 Mar 2026 13:12:51 +0100
-Message-ID: <13960165.uLZWGnKmhe@weasel>
-In-Reply-To: <20260302-iino-u64-v2-69-e5388800dae0@kernel.org>
-References: 
- <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
- <20260302-iino-u64-v2-69-e5388800dae0@kernel.org>
+	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=f062MBur;
+	dkim=pass header.d=redhat.com header.s=google header.b=bnXHuqVt;
+	dmarc=pass (policy=quarantine) header.from=redhat.com;
+	spf=pass (lists.linaro.org: domain of mripard@redhat.com designates 170.10.133.124 as permitted sender) smtp.mailfrom=mripard@redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1772543587;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=5qYfoI6IhVhwhSZGcHAz8lUbAzhXZJ/rjYc5L9rs8fk=;
+	b=f062MBurugz94+nJwzN8eKrz3ldAidzMeD7Tf9N7NeBw+F9wKhT/YU1DVDZ+LFyDE81wm6
+	b9dSS7xcqDsLdMfCRodFP2L386hdZok7f+W3+HVIyCQubhcIXvQhUe6FFFFSdhhCAo5m+q
+	1JL1+8PsfKkyZ3tNK8a+oFJ5/Mc6mXY=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-358--bk2SAPFMf6lqbmNF7-C1w-1; Tue, 03 Mar 2026 08:13:06 -0500
+X-MC-Unique: -bk2SAPFMf6lqbmNF7-C1w-1
+X-Mimecast-MFC-AGG-ID: -bk2SAPFMf6lqbmNF7-C1w_1772543585
+Received: by mail-wm1-f72.google.com with SMTP id 5b1f17b1804b1-4837246211bso67853565e9.0
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 03 Mar 2026 05:13:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=redhat.com; s=google; t=1772543585; x=1773148385; darn=lists.linaro.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=5qYfoI6IhVhwhSZGcHAz8lUbAzhXZJ/rjYc5L9rs8fk=;
+        b=bnXHuqVtMC7zvE2cR2GNsYBN8dTshZot/gwnT5vyOuk9L24gJRrndMvZB4GaOTpZ8H
+         pEnCJ5M/rXZFHE2X222YwchsfVvAqyWjrcel/s/Qb7merQDosH+QK7mlr6tDfSGD3K5V
+         COtdbctehgfloVw3Y30okTTHeaGrqHUJt7UBxvUczVllGWl9hei/RLtWFionI1PnXNN3
+         rqleW/iHRjkon/u5VECSlVBWaOPKMzAXCMVyrZ+vYJ1WkQa4gtQGoIsBY59rd+WrH+jp
+         sSgh4DILsa0ako2vTOiUZI+u7qZVrHrlI00j2USI2wYW9RtNKF6WkZtkQeiuMy7K9iU8
+         mPvQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1772543585; x=1773148385;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=5qYfoI6IhVhwhSZGcHAz8lUbAzhXZJ/rjYc5L9rs8fk=;
+        b=TQs1yweALtJGCBT8BYV/Y7RtgfFTYCwBHDFArCDddv9sI6rxPGp2dw9tDyPHEEqp3k
+         5hC6UktB2vsSmS/IMEvc845WQxk7fV41MS5QpIQdIynRerHUQeoWC7GxhZYKrPKCiQGb
+         wOdNYFGX9zbkZgXOjiCkZiu+TmWSO2jWjs29TQ2kJ/mIIQiWvSqrJ/ava9qO2dSwkQ/C
+         KdXMEFDdrPR+tSxzSbjv9an26ag3rG/bbFXqUvRLAi1xMJfgMmWW17/cfD4Dh7WWkt8V
+         fw2nASCbDpTAl/SDp9hYMRAGWJPA0oQrdiU6VWpLxSlq/iLJ77BYorXEbPULu17GG9Q2
+         ASNA==
+X-Forwarded-Encrypted: i=1; AJvYcCWTYycdC/G/mk2AIcu3PcrMLowhcmBw9u8tHhVKe4+oh6/0enlzd9F0umz69E4diFf/vk39YuM1ob5kskUD@lists.linaro.org
+X-Gm-Message-State: AOJu0YwKUc7/yvsMPrEPPWLJ0QMzU7BW3iHBw1V1iBNKAY/G6uvBpKKC
+	nYYrwjGCrG2xDef75f/4KYLW5sR3SuSx7BmHFJ5yEBCOCdHDkhREW8m3XMjfieg8muMEuzw6J8E
+	UJTteUl9iztjRpaR9HQQEwFIZ59Ppgprc1UU0ke2KCH6QQnzoYNvG+gvTfedX6Qt9I2il
+X-Gm-Gg: ATEYQzynEDUFLrPSQ4UA/eriKWoKJZHSahEooR5c7uu7TtE5txKxbxOXnzKFzEZVehy
+	Nmfh2Vnwy7VmQIQLqMWHRc0Htn+ZF+cjqE2NZ6UdemcRfojWUWsEgNdnlQ5NwD85COVzAcdGyQN
+	hKSILWQT/nXUodKHxh47/uuH88dyYnnCY3BmzmUgg+SwkJJn4eLpCI/CgJL0tiIkooUAuJ5YS1e
+	ASH31bAGDAbRN3rGy9GKLduFwR5pnnvPoz8JSXEOkQmKEO1gtbxjVDj2wj8DPsrB1L2g6WNui0+
+	6iy2BnhGgWM1MPX4jtLsxzTLqPI1mxbnwzHpv4s6Zw2HJmwbt6wgWdaOdMagHy4DLyCOdiIasA=
+	=
+X-Received: by 2002:a05:600c:1393:b0:483:498f:7963 with SMTP id 5b1f17b1804b1-483c9c1f8fcmr272330295e9.26.1772543584834;
+        Tue, 03 Mar 2026 05:13:04 -0800 (PST)
+X-Received: by 2002:a05:600c:1393:b0:483:498f:7963 with SMTP id 5b1f17b1804b1-483c9c1f8fcmr272329585e9.26.1772543584305;
+        Tue, 03 Mar 2026 05:13:04 -0800 (PST)
+Received: from localhost ([2a01:e0a:b25:f902::ff])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48512692c14sm17392055e9.7.2026.03.03.05.13.03
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 03 Mar 2026 05:13:03 -0800 (PST)
+Date: Tue, 3 Mar 2026 14:13:02 +0100
+From: Maxime Ripard <mripard@redhat.com>
+To: Albert Esteve <aesteve@redhat.com>
+Message-ID: <20260303-weightless-crafty-hyrax-bdf1ca@houat>
+References: <20260303-b4-dmabuf-heap-coherent-rmem-v2-0-65a4653b3378@redhat.com>
+ <20260303-b4-dmabuf-heap-coherent-rmem-v2-3-65a4653b3378@redhat.com>
 MIME-Version: 1.0
-X-Spamd-Bar: /
-X-MailFrom: linux_oss@crudebyte.com
+In-Reply-To: <20260303-b4-dmabuf-heap-coherent-rmem-v2-3-65a4653b3378@redhat.com>
+X-Spamd-Bar: --------
+X-MailFrom: mripard@redhat.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 4L677HSXFKB2MS6RX7DM52L7C5K2YQZ5
-X-Message-ID-Hash: 4L677HSXFKB2MS6RX7DM52L7C5K2YQZ5
+Message-ID-Hash: 7XWGXPZVEMF4S3SLLM7JXVVRWSSBWS7T
+X-Message-ID-Hash: 7XWGXPZVEMF4S3SLLM7JXVVRWSSBWS7T
 X-Mailman-Approved-At: Thu, 16 Apr 2026 17:00:20 +0000
-CC: linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, nvdimm@lists.linux.dev, fsverity@lists.linux.dev, linux-mm@kvack.org, netfs@lists.linux.dev, linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net, linux-nfs@vger.kernel.org, linux-cifs@vger.kernel.org, samba-technical@lists.samba.org, linux-nilfs@vger.kernel.org, v9fs@lists.linux.dev, linux-afs@lists.infradead.org, autofs@vger.kernel.org, ceph-devel@vger.kernel.org, codalist@coda.cs.cmu.edu, ecryptfs@vger.kernel.org, linux-mtd@lists.infradead.org, jfs-discussion@lists.sourceforge.net, ntfs3@lists.linux.dev, ocfs2-devel@lists.linux.dev, devel@lists.orangefs.org, linux-unionfs@vger.kernel.org, apparmor@lists.ubuntu.com, linux-security-module@vger.kernel.org, linux-integrity@vger.kernel.org, selinux@vger.kernel.org, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, netdev@vger.kernel.org, linux-perf-
- users@vger.kernel.org, linux-fscrypt@vger.kernel.org, linux-xfs@vger.kernel.org, linux-hams@vger.kernel.org, linux-x25@vger.kernel.org, audit@vger.kernel.org, linux-bluetooth@vger.kernel.org, linux-can@vger.kernel.org, linux-sctp@vger.kernel.org, bpf@vger.kernel.org, Jeff Layton <jlayton@kernel.org>
+CC: Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Robin Murphy <robin.murphy@arm.com>, Rob Herring <robh@kernel.org>, Saravana Kannan <saravanak@kernel.org>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, iommu@lists.linux.dev, devicetree@vger.kernel.org, echanude@redhat.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 069/110] 9p: replace PRIino with %llu/%llx format strings
+Subject: [Linaro-mm-sig] Re: [PATCH v2 3/6] of_reserved_mem: add a helper for rmem device_init op
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4L677HSXFKB2MS6RX7DM52L7C5K2YQZ5/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7XWGXPZVEMF4S3SLLM7JXVVRWSSBWS7T/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [4.99 / 15.00];
-	DMARC_POLICY_QUARANTINE(1.50)[crudebyte.com : SPF not aligned (relaxed),quarantine];
-	SUSPICIOUS_RECIPS(1.50)[];
-	DATE_IN_PAST(1.00)[1061];
-	R_DKIM_REJECT(1.00)[crudebyte.com:s=kylie];
+Content-Type: multipart/mixed; boundary="===============1346694405166835359=="
+X-Spamd-Result: default: False [1.39 / 15.00];
+	SIGNED_PGP(-2.00)[];
+	DMARC_POLICY_QUARANTINE(1.50)[redhat.com : SPF not aligned (relaxed),quarantine];
+	R_DKIM_REJECT(1.00)[redhat.com:s=mimecast20190719];
+	DATE_IN_PAST(1.00)[1060];
 	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
-	MIME_GOOD(-0.10)[text/plain];
+	MIME_GOOD(-0.20)[multipart/mixed,multipart/signed,text/plain];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	HAS_LIST_UNSUB(-0.01)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_TO(0.00)[zeniv.linux.org.uk,kernel.org,suse.cz,goodmis.org,efficios.com,intel.com,infradead.org,mit.edu,linux.dev,suse.de,redhat.com,manguebit.org,dilger.ca,suse.com,oracle.com,brown.name,talpey.com,samba.org,gmail.com,microsoft.com,dubeyko.com,ionkov.net,codewreck.org,auristor.com,themaw.net,cs.cmu.edu,fluxnic.net,tyhicks.com,physik.fu-berlin.de,vivo.com,artax.karlin.mff.cuni.cz,nod.at,paragon-software.com,fasheh.com,evilplan.org,linux.alibaba.com,omnibond.com,szeredi.hu,alarsen.net,huawei.com,wdc.com,canonical.com,paul-moore.com,namei.org,hallyn.com,linux.ibm.com,schaufler-ca.com,amd.com,ffwll.ch,linaro.org,google.com,davemloft.net,arm.com,linux.intel.com,dev.tdt.de,yaina.de,holtmann.org,hartkopp.net,pengutronix.de,secunet.com,gondor.apana.org.au,fomichev.me,iogearbox.net];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	MIME_TRACE(0.00)[0:+,1:+,2:+,3:~,4:+];
 	ARC_NA(0.00)[];
-	GREYLIST(0.00)[pass,meta];
+	RCPT_COUNT_TWELVE(0.00)[17];
+	DKIM_TRACE(0.00)[redhat.com:-];
+	MISSING_XM_UA(0.00)[];
 	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[mripard@redhat.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[172];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_NEQ_ENVFROM(0.00)[linux_oss@crudebyte.com,linaro-mm-sig-bounces@lists.linaro.org];
-	DKIM_TRACE(0.00)[crudebyte.com:-];
-	NEURAL_HAM(-0.00)[-0.727];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	NEURAL_HAM(-0.00)[-0.974];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: 0590441310E
+X-Rspamd-Queue-Id: D8CFE41312B
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Monday, 2 March 2026 21:24:53 CET Jeff Layton wrote:
-> Now that i_ino is u64 and the PRIino format macro has been removed,
-> replace all uses in 9p with the concrete format strings.
-> 
-> Signed-off-by: Jeff Layton <jlayton@kernel.org>
+
+--===============1346694405166835359==
+Content-Type: multipart/signed; micalg=pgp-sha384;
+	protocol="application/pgp-signature"; boundary="6eyb3mm7ilqztbmi"
+Content-Disposition: inline
+
+
+--6eyb3mm7ilqztbmi
+Content-Type: text/plain; protected-headers=v1; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH v2 3/6] of_reserved_mem: add a helper for rmem
+ device_init op
+MIME-Version: 1.0
+
+On Tue, Mar 03, 2026 at 01:33:46PM +0100, Albert Esteve wrote:
+> Add a helper function wrapping internal reserved memory
+> device_init call and expose it externally.
+>=20
+> Use the new helper function within of_reserved_mem_device_init_by_idx().
+>=20
+> Signed-off-by: Albert Esteve <aesteve@redhat.com>
 > ---
->  fs/9p/vfs_addr.c       | 4 ++--
->  fs/9p/vfs_inode.c      | 6 +++---
->  fs/9p/vfs_inode_dotl.c | 6 +++---
->  3 files changed, 8 insertions(+), 8 deletions(-)
+>  drivers/of/of_reserved_mem.c    | 27 +++++++++++++++++++++++----
+>  include/linux/of_reserved_mem.h |  8 ++++++++
+>  2 files changed, 31 insertions(+), 4 deletions(-)
+>=20
+> diff --git a/drivers/of/of_reserved_mem.c b/drivers/of/of_reserved_mem.c
+> index 1fd28f8056108..3a350bef8f11e 100644
+> --- a/drivers/of/of_reserved_mem.c
+> +++ b/drivers/of/of_reserved_mem.c
+> @@ -605,6 +605,28 @@ struct rmem_assigned_device {
+>  static LIST_HEAD(of_rmem_assigned_device_list);
+>  static DEFINE_MUTEX(of_rmem_assigned_device_mutex);
+> =20
+> +/**
+> + * of_reserved_mem_device_init_with_mem() - assign reserved memory regio=
+n to
+> + *					    given device
+> + * @dev:	Pointer to the device to configure
+> + * @rmem:	Reserved memory region to assign
+> + *
+> + * This function assigns respective DMA-mapping operations based on the
+> + * reserved memory region already provided in @rmem to the @dev device,
+> + * without walking DT nodes.
+> + *
+> + * Returns error code or zero on success.
+> + */
+> +int of_reserved_mem_device_init_with_mem(struct device *dev,
+> +					 struct reserved_mem *rmem)
+> +{
+> +	if (!dev || !rmem || !rmem->ops || !rmem->ops->device_init)
+> +		return -EINVAL;
+> +
+> +	return rmem->ops->device_init(rmem, dev);
+> +}
+> +EXPORT_SYMBOL_GPL(of_reserved_mem_device_init_with_mem);
+> +
+>  /**
+>   * of_reserved_mem_device_init_by_idx() - assign reserved memory region =
+to
+>   *					  given device
+> @@ -643,14 +665,11 @@ int of_reserved_mem_device_init_by_idx(struct devic=
+e *dev,
+>  	rmem =3D of_reserved_mem_lookup(target);
+>  	of_node_put(target);
+> =20
+> -	if (!rmem || !rmem->ops || !rmem->ops->device_init)
+> -		return -EINVAL;
+> -
+>  	rd =3D kmalloc_obj(struct rmem_assigned_device);
+>  	if (!rd)
+>  		return -ENOMEM;
+> =20
+> -	ret =3D rmem->ops->device_init(rmem, dev);
+> +	ret =3D of_reserved_mem_device_init_with_mem(dev, rmem);
+>  	if (ret =3D=3D 0) {
+>  		rd->dev =3D dev;
+>  		rd->rmem =3D rmem;
 
-9p uses the following macro to convert the 9p network protocol's QID path from
-u64 (all platforms) to ino_t. The 32-bit path of this macro should be dropped
-after this change, as it would unnecessarily truncate the value to 32-bit now
-[fs/9p/v9fs_vfs.h]:
+I think you need to take the allocation of rd, and everything below.
+Otherwise, your device, despite being attechd, wouldn't be listed
+anywhere.
 
-#if (BITS_PER_LONG == 32)
-#define QID2INO(q) ((ino_t) (((q)->path+2) ^ (((q)->path) >> 32)))
-#else
-#define QID2INO(q) ((ino_t) ((q)->path+2))
-#endif
+Maxime
 
-You are not breaking anything, if you happen to send a v3, that would be nice
-to be dropped, otherwise we'll handle that on our end later on:
+--6eyb3mm7ilqztbmi
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Reviewed-by: Christian Schoenebeck <linux_oss@crudebyte.com>
+-----BEGIN PGP SIGNATURE-----
 
-I wonder whether that exceeded Claude's context size, or if that's in line
-with the prompt specified by you.
+iJUEABMJAB0WIQTkHFbLp4ejekA/qfgnX84Zoj2+dgUCaabeWQAKCRAnX84Zoj2+
+dobdAYD53cfYylVyAMmjYQNu5L2HhH4nvwgXPsXDn+F4I5VP5R8b4pw9vf6buYC3
+VoNwMQ4BfRUwUB8fZ2DXMX2IzVK3CXj6DaDP6OvnbvuzEI1Mw7ev9Mpzd14engew
+qmADP+lGrA==
+=WwGV
+-----END PGP SIGNATURE-----
 
-/Christian
+--6eyb3mm7ilqztbmi--
 
+
+--===============1346694405166835359==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============1346694405166835359==--
+
