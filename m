@@ -2,101 +2,100 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id iAJHBmKWqGkLvwAAu9opvQ
+	id eGkVO4yWqGkLvwAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 04 Mar 2026 21:30:26 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 04 Mar 2026 21:31:08 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id A90D42079C0
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 04 Mar 2026 21:30:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8EC5D2079D6
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 04 Mar 2026 21:31:08 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8A8A94014A
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  4 Mar 2026 20:30:24 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9AE2F3F9BB
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  4 Mar 2026 20:31:07 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 137173F751
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  4 Mar 2026 20:30:17 +0000 (UTC)
-Content-Type: text/plain; charset="utf-8"
+	by lists.linaro.org (Postfix) with ESMTP id C7BC33F751
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  4 Mar 2026 20:31:00 +0000 (UTC)
 MIME-Version: 1.0
-From: luisannete22@gmail.com
+From: rogerstewer@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Wed, 04 Mar 2026 20:30:17 -0000
-Message-ID: <177265621707.2949172.9235195314796563197@lists.linaro.org>
+Date: Wed, 04 Mar 2026 20:31:00 -0000
+Message-ID: <177265626081.2951087.7646690970802935966@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: 3Z3CKPY4ONFI2HNEOBT42CSJPF5KXESJ
-X-Message-ID-Hash: 3Z3CKPY4ONFI2HNEOBT42CSJPF5KXESJ
-X-MailFrom: luisannete22@gmail.com
+Message-ID-Hash: S5WFL3JUCM74MSKQDMS53R7BEWNUVAGH
+X-Message-ID-Hash: S5WFL3JUCM74MSKQDMS53R7BEWNUVAGH
+X-MailFrom: rogerstewer@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Phishing Attacks on Wallets: How Hackers Drain Your Crypto in Minutes
+Subject: [Linaro-mm-sig] Fake Investment Platforms: Anatomy of a Rug Pull Scam
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3Z3CKPY4ONFI2HNEOBT42CSJPF5KXESJ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/S5WFL3JUCM74MSKQDMS53R7BEWNUVAGH/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Transfer-Encoding: base64
-X-Rspamd-Queue-Id: A90D42079C0
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Queue-Id: 8EC5D2079D6
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.69 / 15.00];
+X-Spamd-Result: default: False [0.59 / 15.00];
 	MID_RHS_MATCH_TO(1.00)[];
-	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx:c];
-	MIME_BASE64_TEXT(0.10)[];
+	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[luisannete22@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
-	ARC_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	FROM_NO_DN(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[rogerstewer@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	RCPT_COUNT_ONE(0.00)[1];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	NEURAL_SPAM(0.00)[0.123];
+	ARC_NA(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	TO_DN_NONE(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.178];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	R_DKIM_NA(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:mid,lists.linaro.org:rdns,lists.linaro.org:helo,linaro.org:email]
+	RCVD_TLS_LAST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:mid,lists.linaro.org:rdns,lists.linaro.org:helo]
 X-Rspamd-Action: no action
 
-UGhpc2hpbmcgcmVtYWlucyBvbmUgb2YgdGhlIG1vc3QgY29tbW9uIHdheXMgc2NhbW1lcnMgc3Rl
-YWwgY3J5cHRv4oCUb2Z0ZW4gdGhyb3VnaCBmYWtlIHdlYnNpdGVzLCBtYWxpY2lvdXMgZW1haWxz
-LCBvciBjb21wcm9taXNlZCBsaW5rcy4NCjEuIFRoZSBCYWl0DQpWaWN0aW1zIHJlY2VpdmUgdXJn
-ZW50IG1lc3NhZ2VzOiAiWW91ciB3YWxsZXQgaXMgYXQgcmlza+KAlHZlcmlmeSBoZXJlIiBvciBm
-YWtlIGFpcmRyb3AvY2xhaW0gbGlua3MgZnJvbSB0cnVzdGVkIHByb2plY3RzLg0KDQpDbGlja2lu
-ZyBsZWFkcyB0byBzcG9vZmVkIHNpdGVzIG1pbWlja2luZyBNZXRhTWFzaywgTGVkZ2VyLCBvciBl
-eGNoYW5nZXMuDQpVc2VycyBlbnRlciBzZWVkIHBocmFzZXMsIHByaXZhdGUga2V5cywgb3IgYXBw
-cm92ZSBtYWxpY2lvdXMgdHJhbnNhY3Rpb25zLg0KDQoyLiBJbnN0YW50IERyYWluYWdlDQpPbmNl
-IGNyZWRlbnRpYWxzIG9yIGFwcHJvdmFscyBhcmUgb2J0YWluZWQ6DQoNClNjYW1tZXJzIHN3ZWVw
-IGZ1bmRzIHRvIHRoZWlyIGFkZHJlc3MuDQpEcmFpbmVycyBhdXRvLXRyYW5zZmVyIGV2ZXJ5dGhp
-bmcgKHRva2VucywgTkZUcykuDQoNCjMuIFJhcGlkIExhdW5kZXJpbmcNCkZ1bmRzIG1vdmUgZmFz
-dDoNCg0KU3BsaXQgYW5kIHBlZWxlZCBpbnRvIHNtYWxsZXIgYW1vdW50cy4NCkJyaWRnZWQgdG8g
-b3RoZXIgY2hhaW5zLg0KTWl4ZWQgb3Igc3dhcHBlZCB0byBicmVhayBsaW5rcy4NCg0KNC4gQ2Fz
-aC1PdXQNCkRlcG9zaXRlZCB0byBleGNoYW5nZXMsIG9mdGVuIEtZQy1ieXBhc3NlZCB2aWEgbGF5
-ZXJlZCBhY2NvdW50cy4NCldoZXJlIFRyYWNpbmcgQ2FuIEludGVydmVuZQ0KUGhpc2hpbmcgdGhl
-ZnRzIGxlYXZlIGNsZWFyIG9uLWNoYWluIHRyYWlscyBpZiByZXBvcnRlZCBxdWlja2x5Lg0KDQpS
-ZWFsLVRpbWUgTW9uaXRvcmluZzogVHJhY2sgb3V0Z29pbmcgc3dlZXBzIGFuZCBkb3duc3RyZWFt
-IGhvcHMuDQpQYXR0ZXJuIFJlY29nbml0aW9uOiBJZGVudGlmeSBjb21tb24gZHJhaW5lciBzaWdu
-YXR1cmVzIG9yIGV4Y2hhbmdlIGRlcG9zaXQgY2x1c3RlcnMuDQpGcmVlemUgUG90ZW50aWFsOiBF
-eGNoYW5nZXMgY2FuIGhhbHQgaWYgaWxsaWNpdCBvcmlnaW4gcHJvdmVuIGVhcmx5Lg0KDQpGaXJt
-cyBsaWtlIENyeXB0ZXJhIENoYWluIFNpZ25hbHMgKENDUykgZXhjZWwgYXQgcmFwaWQgcGhpc2hp
-bmcgaW52ZXN0aWdhdGlvbnMsIHVzaW5nIEFJLXBvd2VyZWQgdHJhY2luZyB0byBmb2xsb3cgZnVu
-ZHMgYWNyb3NzIGNoYWlucyBhbmQgZmFjaWxpdGF0ZSBleGNoYW5nZSBmcmVlemVzLiBJbiAyMDI2
-LCB0aGV5J3ZlIGhlbHBlZCByZWNvdmVyIHNpZ25pZmljYW50IHBvcnRpb25zIGluIHRpbWUtc2Vu
-c2l0aXZlIGNhc2VzLg0KVmlzaXQgaHR0cHM6Ly93d3cuY3J5cHRlcmFjaGFpbnNpZ25hbHMuY29t
-LyBmb3IgY3J5cHRvIHNjYW0gcmVjb3Zlcnkgc3VwcG9ydCwgb3IgZW1haWwgaW5mb0BjcnlwdGVy
-YWNoYWluc2lnbmFscy5jb20gdG8gZ2V0IHN0YXJ0ZWQuDQpQcm90ZWN0IHlvdXJzZWxmIHdpdGgg
-aGFyZHdhcmUgd2FsbGV0cyBhbmQgYm9va21hcmsgdmVyaWZpY2F0aW9uIG5ldmVyIGVudGVyIHNl
-ZWRzIG9ubGluZS4NCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGlu
-YXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVh
-dmVAbGlzdHMubGluYXJvLm9yZwo=
+Scammers launch bogus trading/investment sites promising guaranteed returns, then vanish with deposits.
+1. Luring Victims
+Ads on social media or Telegram promote "AI trading bots" or "exclusive funds."
+
+Victims sign up and deposit crypto via provided wallets.
+
+2. Controlled Environment
+Fake interfaces show rising balances to encourage more investment.
+
+Withdrawals blocked with excuses ("taxes," "verification").
+
+3. The Exit Scam
+When enough funds accumulate:
+
+Site goes offline.
+Funds transferred out rapidly.
+
+4. Obfuscation & Cash-Out
+Similar to other scams: splitting, mixing, chain-hopping, then exchange fiat off-ramps.
+Where Tracing Can Intervene
+Many platforms use traceable patterns (e.g., repeated deposit addresses).
+
+Early Alerts: Monitor for sudden outflows.
+Clustering: Group related wallets to reveal operators.
+Legal Leverage: Evidence supports civil or criminal action.
+
+Cryptera Chain Signals (CCS) analyzes these platforms' transaction histories, traces to exchanges, and supports recovery efforts with detailed reports and partnerships.
+For help with fake investment scams, head to https://www.crypterachainsignals.com/ or contact info@crypterachainsignals.com.
+Research platforms thoroughly check audits, team transparency, and community feedback.
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
