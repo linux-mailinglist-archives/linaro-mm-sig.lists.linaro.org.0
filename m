@@ -2,35 +2,35 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id SKw/IWeYqGm8vwAAu9opvQ
+	id RJJtJWeYqGnavwAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
 	for <lists+linaro-mm-sig@lfdr.de>; Wed, 04 Mar 2026 21:39:03 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 18C89207A5E
+	by mail.lfdr.de (Postfix) with ESMTPS id 30859207A60
 	for <lists+linaro-mm-sig@lfdr.de>; Wed, 04 Mar 2026 21:39:03 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 434C3401C1
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  4 Mar 2026 20:33:28 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3F06C400F4
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  4 Mar 2026 20:33:55 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id BFD973F949
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  4 Mar 2026 20:33:20 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 194D03F949
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  4 Mar 2026 20:33:48 +0000 (UTC)
 MIME-Version: 1.0
-From: luisannete22@gmail.com
+From: rogerstewer@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Wed, 04 Mar 2026 20:33:20 -0000
-Message-ID: <177265640078.2953743.3755316559909329279@lists.linaro.org>
+Date: Wed, 04 Mar 2026 20:33:48 -0000
+Message-ID: <177265642810.2953190.13823754212808646797@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: HRTS2WZKHLPULPKJP4R2Q4P3JFUDGNPO
-X-Message-ID-Hash: HRTS2WZKHLPULPKJP4R2Q4P3JFUDGNPO
-X-MailFrom: luisannete22@gmail.com
+Message-ID-Hash: P4SXUHQWNNWRX7IMH2MLSOULIIX6NPCR
+X-Message-ID-Hash: P4SXUHQWNNWRX7IMH2MLSOULIIX6NPCR
+X-MailFrom: rogerstewer@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] DeFi Yield Farming Traps: High Returns or Total Wipeouts?
+Subject: [Linaro-mm-sig] Crypto Impersonation Scams: Spotting Fake Celebrities and Influencers
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HRTS2WZKHLPULPKJP4R2Q4P3JFUDGNPO/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/P4SXUHQWNNWRX7IMH2MLSOULIIX6NPCR/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -39,53 +39,52 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 18C89207A5E
+X-Rspamd-Queue-Id: 30859207A60
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [1.59 / 15.00];
-	SUBJECT_ENDS_QUESTION(1.00)[];
+X-Spamd-Result: default: False [0.59 / 15.00];
 	MID_RHS_MATCH_TO(1.00)[];
-	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx:c];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
+	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FROM_NEQ_ENVFROM(0.00)[luisannete22@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	FROM_NO_DN(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[rogerstewer@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	RCPT_COUNT_ONE(0.00)[1];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	NEURAL_SPAM(0.00)[0.141];
+	ARC_NA(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	TO_DN_NONE(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
-	FROM_NO_DN(0.00)[];
-	NEURAL_HAM(-0.00)[-0.417];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	R_DKIM_NA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:mid,lists.linaro.org:rdns,lists.linaro.org:helo,linaro.org:email,crypterachainsignals.com:url,crypterachainsignals.com:email]
+	RCVD_TLS_LAST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:mid,lists.linaro.org:rdns,lists.linaro.org:helo,crypterachainsignals.com:url,crypterachainsignals.com:email]
 X-Rspamd-Action: no action
 
-Decentralized finance (DeFi) promises passive income through yield farming, but many protocols are riddled with risks, including outright scams. High APYs often mask exploitable code or exit strategies, leading to massive losses. This piece explores yield farming pitfalls, educating users on safer participation while highlighting recovery avenues.
-1. Luring with Unrealistic Yields
-Scammers launch DeFi protocols advertising yields over 1000% APY, drawing liquidity providers with token rewards. Victims deposit pairs like ETH-USDT into pools, staking LP tokens for farm tokens.
-These yields stem from inflationary emissions, unsustainable without constant inflows. Educatively, legitimate projects like Aave offer modest, risk-adjusted returns; anything hyperbolic warrants scrutiny. Check tokenomics on sites like DefiLlama for emission schedules and TVL authenticity.
-2. Smart Contract Vulnerabilities and Exploits
-Many scams embed flaws in contracts, allowing devs to mint unlimited tokens or drain pools. Flash loan attacks amplify this, borrowing to manipulate prices then repaying in one transaction.
-Post-exploit, funds are swiftly moved: split into smaller batches, bridged to chains like Arbitrum, and swapped to stablecoins. Understanding oracles (e.g., Chainlink) helps spot manipulation-prone setups, as faulty price feeds enable arbitrage scams.
-3. Impermanent Loss and Rug Pull Mechanics
-Yield farmers face impermanent loss from price volatility, but scammers exacerbate it by dumping farm tokens, crashing values. In rug pulls, liquidity is removed suddenly, stranding providers.
-Funds then undergo obfuscation: mixing via decentralized services, converting to privacy coins, or layering through multiple DEXs. Real cases from 2025 show how anonymous teams vanish, leaving code audits as a key preventive measure.
-4. Laundering and Exit Strategies
-Cleaned assets hit CEXs for fiat, using accounts in low-regulation areas. Mules or nested wallets add layers, making tracing multifaceted.
-Educatively, monitoring on-chain metrics like holder distribution via tools like Nansen can flag concentration risks indicative of scams.
+Impersonation scams leverage trust in public figures, faking endorsements for crypto projects or giveaways. Victims lose billions annually to these, often via social media. This article unpacks their tactics, offering educational insights on detection and response.
+1. Creating Fake Profiles
+Scammers duplicate handles like @elonmusk, adding subtle changes (e.g., underscores) and using stolen photos. They post about "double your crypto" schemes, urging sends to a wallet.
+These align with real events, like Tesla announcements, to seem credible. Educatively, verify blue checks and account creation dates; X's advanced search can reveal duplicates.
+2. Building Engagement
+Fake accounts interact with victims, promising returns for small sends. Livestreams or AMAs amplify urgency.
+Funds arrive in initial wallets, recorded transparently but controlled by fraudsters. Common in 2025 were scams mimicking Vitalik Buterin, highlighting platform verification flaws.
+3. Fund Movement and Obfuscation
+Post-receipt, splitting occurs: automated to evade blocks. Chain hops to Tron for cheap fees, then mixing.
+Privacy enhancements like zk-SNARKs in coins such as Zcash break trails, educating on why quick action matters.
+4. Cash-Out and Evasion
+Exchanges in jurisdictions like Seychelles facilitate withdrawals, often via prepaid cards.
+Global coordination is key, as scams span borders.
 Where Tracing Can Intervene
-DeFi's open ledgers enable detailed tracing, especially pre-cash-out. Interventions include smart contract freezes (if upgradable) or exchange alerts.
-Cryptera Chain Signals excels in DeFi scam forensics, analyzing contract interactions and fund flows to identify actionable points. Their 2026 track record includes recovering farmed assets through chain mapping and authority collaborations.
-Visit https://www.crypterachainsignals.com/ for DeFi recovery support, or email info@crypterachainsignals.com to initiate help.
-Approach DeFi with audited protocols, diversified stakes, and exit plans. Education mitigates risks, turning potential traps into opportunities.
+Impersonations leave social and on-chain clues; early flags enable wallet monitoring.
+Cryptera Chain Signals traces these, clustering impersonator wallets and aiding freezes, with successes in high-profile 2026 cases.
+Contact them at https://www.crypterachainsignals.com/ or info@crypterachainsignals.com for impersonation recovery.
+Question unsolicited offers; official figures rarely request funds directly.
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
