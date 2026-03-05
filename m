@@ -2,28 +2,28 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MCZLDu0sqWlK2wAAu9opvQ
+	id WJKnDvMsqWlN2wAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 05 Mar 2026 08:12:45 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 05 Mar 2026 08:12:51 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id BE9E420C43A
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 05 Mar 2026 08:12:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C77BB20C442
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 05 Mar 2026 08:12:50 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id D6D7B444D9
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  5 Mar 2026 07:12:43 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id DB80044AE7
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  5 Mar 2026 07:12:49 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 20691444B4
-	for <linaro-mm-sig@lists.linaro.org>; Thu,  5 Mar 2026 07:12:28 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 38F9F44580
+	for <linaro-mm-sig@lists.linaro.org>; Thu,  5 Mar 2026 07:12:35 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: spaceyrolince@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Thu, 05 Mar 2026 07:12:28 -0000
-Message-ID: <177269474813.3526643.8914383106907778185@lists.linaro.org>
+Date: Thu, 05 Mar 2026 07:12:35 -0000
+Message-ID: <177269475523.3527350.101683142297177949@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: 6ELXGDVRIFFQUPF2HC6JIZZIIQSUQVIS
-X-Message-ID-Hash: 6ELXGDVRIFFQUPF2HC6JIZZIIQSUQVIS
+Message-ID-Hash: UOS4LJYO37EQSHMMK7ZRUZJ4ERARZ2UO
+X-Message-ID-Hash: UOS4LJYO37EQSHMMK7ZRUZJ4ERARZ2UO
 X-MailFrom: spaceyrolince@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
@@ -31,7 +31,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] ## royboint@gmail.com | Telegram @buyhighs; Acquista Nembutal Italia, Nembutal online Italia, acquista Nembutal Italia, Nembutal in vendita Italia,
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6ELXGDVRIFFQUPF2HC6JIZZIIQSUQVIS/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UOS4LJYO37EQSHMMK7ZRUZJ4ERARZ2UO/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -39,7 +39,7 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Transfer-Encoding: base64
-X-Rspamd-Queue-Id: BE9E420C43A
+X-Rspamd-Queue-Id: C77BB20C442
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [0.69 / 15.00];
 	MID_RHS_MATCH_TO(1.00)[];
@@ -61,11 +61,11 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	TO_DN_NONE(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.238];
+	NEURAL_HAM(-0.00)[-0.244];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	R_DKIM_NA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:mid,lists.linaro.org:rdns,lists.linaro.org:helo,linaro.org:email,buycockonline.club:url,buy4mmconline.club:url,buyauthenticnembutalonline.club:url]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:mid,lists.linaro.org:rdns,lists.linaro.org:helo]
 X-Rspamd-Action: no action
 
 IyMgcm95Ym9pbnRAZ21haWwuY29tIHwgVGVsZWdyYW0gQGJ1eWhpZ2hzOyBBY3F1aXN0YSBOZW1i
