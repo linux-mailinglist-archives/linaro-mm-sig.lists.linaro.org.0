@@ -2,36 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +LPUBmwyqWnM2wAAu9opvQ
+	id UJDhEHIyqWnM2wAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 05 Mar 2026 08:36:12 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 05 Mar 2026 08:36:18 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id D17D320CC04
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 05 Mar 2026 08:36:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D956020CC0B
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 05 Mar 2026 08:36:17 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E04E144B70
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  5 Mar 2026 07:36:10 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id EAA0A44CF9
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  5 Mar 2026 07:36:16 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5244344D34
-	for <linaro-mm-sig@lists.linaro.org>; Thu,  5 Mar 2026 07:36:04 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id A737540F68
+	for <linaro-mm-sig@lists.linaro.org>; Thu,  5 Mar 2026 07:36:08 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: spaceyrolince@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Thu, 05 Mar 2026 07:36:04 -0000
-Message-ID: <177269616433.3556568.6130165182149568124@lists.linaro.org>
+Date: Thu, 05 Mar 2026 07:36:08 -0000
+Message-ID: <177269616868.3558623.4107006314592689238@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: OW6MXVIB3MC6HX4BCNHB53H23PIVXUKU
-X-Message-ID-Hash: OW6MXVIB3MC6HX4BCNHB53H23PIVXUKU
+Message-ID-Hash: BT4MMUKV5DCNG43QDQVASE6D3OCNBMDN
+X-Message-ID-Hash: BT4MMUKV5DCNG43QDQVASE6D3OCNBMDN
 X-MailFrom: spaceyrolince@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Contact royboint@gmail.com or on Telegram @buyhighs; Buy Nembutal Belgium, Nembutal online Belgium, purchase Nembutal Belgium, Nembutal for sale Belgium, buy liquid Nembutal Belgium,
+Subject: [Linaro-mm-sig] =?utf-8?b?Q29udGFjdCByb3lib2ludEBnbWFpbC5jb20gb3Igb24gVGVsZWdyYW0gQGJ1eWhpZ2hzINen16DXlCDXoNee15HXldeY15wg15nXqdeo15DXnCwg16DXnteR15XXmNecINeQ15XXoNec15nXmdefINeZ16nXqNeQ15wsINeo15vXldepINeg157XkdeV15jXnCDXmdep16jXkNec?=
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OW6MXVIB3MC6HX4BCNHB53H23PIVXUKU/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/BT4MMUKV5DCNG43QDQVASE6D3OCNBMDN/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -39,7 +39,7 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Transfer-Encoding: base64
-X-Rspamd-Queue-Id: D17D320CC04
+X-Rspamd-Queue-Id: D956020CC0B
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [0.69 / 15.00];
 	MID_RHS_MATCH_TO(1.00)[];
@@ -61,11 +61,11 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	TO_DN_NONE(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.412];
+	NEURAL_HAM(-0.00)[-0.366];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	R_DKIM_NA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:mid,lists.linaro.org:rdns,lists.linaro.org:helo]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[buyauthenticnembutalonline.club:url,linaro.org:email,buy4mmconline.club:url,buycockonline.club:url,lists.linaro.org:mid,lists.linaro.org:rdns,lists.linaro.org:helo]
 X-Rspamd-Action: no action
 
 Q29udGFjdCByb3lib2ludEBnbWFpbC5jb20gb3Igb24gVGVsZWdyYW0gQGJ1eWhpZ2hzINen16DX
