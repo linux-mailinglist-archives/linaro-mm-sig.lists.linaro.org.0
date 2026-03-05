@@ -2,28 +2,28 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +FikFJslqWkL2gAAu9opvQ
+	id 4EE1CKElqWkL2gAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 05 Mar 2026 07:41:31 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 05 Mar 2026 07:41:37 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id C567720BC3F
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 05 Mar 2026 07:41:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9C0A520BC46
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 05 Mar 2026 07:41:36 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8BD1D401E8
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  5 Mar 2026 06:41:29 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id A996F401F4
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  5 Mar 2026 06:41:35 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 96E003F6A0
-	for <linaro-mm-sig@lists.linaro.org>; Thu,  5 Mar 2026 06:41:21 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 73238401CF
+	for <linaro-mm-sig@lists.linaro.org>; Thu,  5 Mar 2026 06:41:27 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: spaceyrolince@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Thu, 05 Mar 2026 06:41:21 -0000
-Message-ID: <177269288161.3481577.10173759700680817938@lists.linaro.org>
+Date: Thu, 05 Mar 2026 06:41:27 -0000
+Message-ID: <177269288746.3480781.8970975148607685316@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: BKZTJLMPZ33UG52AGCDM4W6D3FD7M4A4
-X-Message-ID-Hash: BKZTJLMPZ33UG52AGCDM4W6D3FD7M4A4
+Message-ID-Hash: TCMOEXO4AUBMPLNXEVDLW44OC3YOEKTH
+X-Message-ID-Hash: TCMOEXO4AUBMPLNXEVDLW44OC3YOEKTH
 X-MailFrom: spaceyrolince@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
@@ -31,7 +31,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] ## royboint@gmail.com | Telegram @buyhighs Buy Cocaine online, Buy Nembutal online, Buy 4MMC online, Buy MDMA online, Buy Ketamine online, Buy Meth online' Buy Botox injection online
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/BKZTJLMPZ33UG52AGCDM4W6D3FD7M4A4/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TCMOEXO4AUBMPLNXEVDLW44OC3YOEKTH/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -39,7 +39,7 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Transfer-Encoding: base64
-X-Rspamd-Queue-Id: C567720BC3F
+X-Rspamd-Queue-Id: 9C0A520BC46
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [0.69 / 15.00];
 	MID_RHS_MATCH_TO(1.00)[];
@@ -65,7 +65,7 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	R_DKIM_NA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:mid,lists.linaro.org:rdns,lists.linaro.org:helo]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[buy4mmconline.club:url,buyauthenticnembutalonline.club:url,lists.linaro.org:mid,lists.linaro.org:rdns,lists.linaro.org:helo,linaro.org:email,buycockonline.club:url]
 X-Rspamd-Action: no action
 
 IyMgcm95Ym9pbnRAZ21haWwuY29tIHwgVGVsZWdyYW0gQGJ1eWhpZ2hzIEJ1eSBDb2NhaW5lIG9u
