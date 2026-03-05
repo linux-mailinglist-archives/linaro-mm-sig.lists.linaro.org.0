@@ -2,28 +2,28 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4EZlLXBwqWnH7AAAu9opvQ
+	id GGhdLHpwqWnH7AAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 05 Mar 2026 13:00:48 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 05 Mar 2026 13:00:58 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 50E8B211128
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 05 Mar 2026 13:00:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6A630211132
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 05 Mar 2026 13:00:58 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 175C5400F6
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  5 Mar 2026 12:00:47 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 33BDE3F902
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  5 Mar 2026 12:00:57 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 686B43F683
-	for <linaro-mm-sig@lists.linaro.org>; Thu,  5 Mar 2026 12:00:39 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id AAA2F3F9B5
+	for <linaro-mm-sig@lists.linaro.org>; Thu,  5 Mar 2026 12:00:49 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: spaceyrolince@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Thu, 05 Mar 2026 12:00:39 -0000
-Message-ID: <177271203942.3789933.9367597855305727746@lists.linaro.org>
+Date: Thu, 05 Mar 2026 12:00:49 -0000
+Message-ID: <177271204969.3789933.4497935091033014359@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: U4LQQO7HVUVB4ZKXSTK43J5KSC3YQ4QQ
-X-Message-ID-Hash: U4LQQO7HVUVB4ZKXSTK43J5KSC3YQ4QQ
+Message-ID-Hash: IM5ONHG2DLTETDDJQMHJFTF35KRTBIQ2
+X-Message-ID-Hash: IM5ONHG2DLTETDDJQMHJFTF35KRTBIQ2
 X-MailFrom: spaceyrolince@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
@@ -31,7 +31,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] ##### royboint@gmail.com | Telegram @buyhighs Buy Weed, ketamine, Cocaine, Heroin and Shrooms in Dubai UAE Malaysia Oman Kuwait Bahrain Saudi Arabia
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/U4LQQO7HVUVB4ZKXSTK43J5KSC3YQ4QQ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/IM5ONHG2DLTETDDJQMHJFTF35KRTBIQ2/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -39,7 +39,7 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Transfer-Encoding: base64
-X-Rspamd-Queue-Id: 50E8B211128
+X-Rspamd-Queue-Id: 6A630211132
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [0.69 / 15.00];
 	MID_RHS_MATCH_TO(1.00)[];
@@ -204,7 +204,7 @@ ZG9uLw0KDQpodHRwczovL2J1eTRtbWNvbmxpbmUuY2x1Yi9wcm9kdWN0LXRhZy9idXktbWVwaGVk
 cm9uZS11ay8NCg0KaHR0cHM6Ly9idXk0bW1jb25saW5lLmNsdWIvcHJvZHVjdC10YWcvNG1tYy1y
 aXNrcy8NCg0KaHR0cHM6Ly9idXk0bW1jb25saW5lLmNsdWIvcHJvZHVjdC10YWcvbWVwaGVkcm9u
 ZS1lZmZlY3RzLw0KDQoNCg0KRG9u4oCZdCBtaXNzIG91dCBvbiB0aGUgYmVzdCBkZWFscyBmb3Ig
-eW91ciBmYXZvcml0ZSBkcnVncyEjDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2ln
-QGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8t
-bW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+eW91ciBmYXZvcml0ZSBkcnVncyENCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdA
+bGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1t
+bS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
