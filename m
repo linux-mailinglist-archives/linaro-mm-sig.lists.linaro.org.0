@@ -2,28 +2,28 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id COppDbNxqWnH7AAAu9opvQ
+	id SDgvGbxxqWnH7AAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 05 Mar 2026 13:06:11 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 05 Mar 2026 13:06:20 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id CB7C32113EC
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 05 Mar 2026 13:06:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1CFFA2113FB
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 05 Mar 2026 13:06:20 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DBC01402B4
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  5 Mar 2026 12:06:09 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 21819402B4
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  5 Mar 2026 12:06:19 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7A44E3F6A0
-	for <linaro-mm-sig@lists.linaro.org>; Thu,  5 Mar 2026 12:05:38 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id F07A040171
+	for <linaro-mm-sig@lists.linaro.org>; Thu,  5 Mar 2026 12:05:44 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: spaceyrolince@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Thu, 05 Mar 2026 12:05:38 -0000
-Message-ID: <177271233849.3797150.11087993307219462018@lists.linaro.org>
+Date: Thu, 05 Mar 2026 12:05:44 -0000
+Message-ID: <177271234498.3797150.8737589830836097222@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: MKGEX2ZZ2TEFOEY2ZB72WXS3PU26J54B
-X-Message-ID-Hash: MKGEX2ZZ2TEFOEY2ZB72WXS3PU26J54B
+Message-ID-Hash: 4V7HGTZV3ZXHTCA77ZQTPWE7G6XZM37E
+X-Message-ID-Hash: 4V7HGTZV3ZXHTCA77ZQTPWE7G6XZM37E
 X-MailFrom: spaceyrolince@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
@@ -31,7 +31,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] ### royboint@gmail.com | Telegram @buyhighs Buy weed in Dubai, Buy weed in Abu Dhabi, Buy weed in Sharjah, Buy weed in Ras Al Khaimah, Buy weed in UAE,
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MKGEX2ZZ2TEFOEY2ZB72WXS3PU26J54B/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4V7HGTZV3ZXHTCA77ZQTPWE7G6XZM37E/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -39,7 +39,7 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Transfer-Encoding: base64
-X-Rspamd-Queue-Id: CB7C32113EC
+X-Rspamd-Queue-Id: 1CFFA2113FB
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [0.69 / 15.00];
 	MID_RHS_MATCH_TO(1.00)[];
@@ -61,11 +61,11 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	TO_DN_NONE(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.163];
+	NEURAL_HAM(-0.00)[-0.158];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	R_DKIM_NA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:mid,lists.linaro.org:rdns,lists.linaro.org:helo,linaro.org:email,buyauthenticnembutalonline.club:url,buycockonline.club:url]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:mid,lists.linaro.org:rdns,lists.linaro.org:helo]
 X-Rspamd-Action: no action
 
 IyMjIHJveWJvaW50QGdtYWlsLmNvbSB8IFRlbGVncmFtIEBidXloaWdocyBCdXkgd2VlZCBpbiBE
