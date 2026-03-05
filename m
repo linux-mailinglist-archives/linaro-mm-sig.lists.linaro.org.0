@@ -2,53 +2,53 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id YBdTOktc5mkwvQEAu9opvQ
+	id GCsNAFFc5mmtvAEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:03:07 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:03:13 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 43491430728
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:03:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C8646430730
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:03:12 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0AC9040501
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:03:06 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E00A0404F6
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:03:11 +0000 (UTC)
 Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
-	by lists.linaro.org (Postfix) with ESMTPS id 4BDF140482
-	for <linaro-mm-sig@lists.linaro.org>; Thu,  5 Mar 2026 14:25:44 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 240F53F6F0
+	for <linaro-mm-sig@lists.linaro.org>; Thu,  5 Mar 2026 14:25:50 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=infradead.org header.s=bombadil.20210309 header.b=lH0MXtHy;
+	dkim=pass header.d=infradead.org header.s=bombadil.20210309 header.b="N/OnFzWa";
 	dmarc=pass (policy=none) header.from=infradead.org;
 	spf=none (lists.linaro.org: domain of BATV+2e11e6930e970eb8572e+8229+infradead.org+hch@bombadil.srs.infradead.org has no SPF policy when checking 198.137.202.133) smtp.mailfrom=BATV+2e11e6930e970eb8572e+8229+infradead.org+hch@bombadil.srs.infradead.org
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
 	:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
 	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=Q7WgSM2wxChLNQuC1Kvn6fELh/kLhkbo4HJpx2Cfu6A=; b=lH0MXtHysHRHd3GA37b3KZTjyP
-	uu4y4Wtum5SU6K6sPfQMgC1wjjkW4oCqsV4k/47t6pQLQeF8ZoEj/MCqcOOGspH7qzymaVtmQP+Xz
-	McOy8ppewKfneb0WSeWQnqvtEDYc/dlx8W/zl9H7IajaOG+qhDprLRbWd56Gq6X58gqQbt72A/1Fu
-	57Ga2O0/96vpcbtKCzVO+AvNbbfp5XHKwrSU0HjpCts8yao8Gtx0uNB3CTwnNFoO22s1yTa6uj5cz
-	t5l/w2CXYVAlbsn9+teUymKx7c1e2jxul2t/6h7WcREQXT8EksTsachxtLADsrQgvaMckHOQQ2x5B
-	kI8111qA==;
+	bh=M7NmYC/Iylm9myghHwqILim55SAUt9QrM+UZYk0eJlw=; b=N/OnFzWa9k33Gb8WoaORaZf8/1
+	omQzMxzv7AKB0iGBOiFBTlfDd8cv/SFY2cN/xlhCF9LD4axDr458b3KkJDHIqY9jaYSeX0Iuke/ea
+	ruLhr6C+ymLhOMKavxBklyL56gQe5kOFHaR9GqikFPQ4+YspElC14XRfWh6kM52omEOHgMpsSREro
+	y5uto1k++Slfwuo7nq2YzlvQFOIu0vNsS5w8AUmDYAa3V8L257/vRobIemRsPwt43jEH4dMBKvjE9
+	qvJU8j7WutreciL7iwRXCEmJf59WsaeHF8hGB2PcyqrdNOf6OBCyjpqgu7qzQ+34Omj2U+HU1z4kP
+	lBT6VZKQ==;
 Received: from hch by bombadil.infradead.org with local (Exim 4.98.2 #2 (Red Hat Linux))
-	id 1vy9ck-00000001ywt-2yR7;
-	Thu, 05 Mar 2026 14:24:22 +0000
-Date: Thu, 5 Mar 2026 06:24:22 -0800
+	id 1vy9dP-00000001z65-3qix;
+	Thu, 05 Mar 2026 14:25:03 +0000
+Date: Thu, 5 Mar 2026 06:25:03 -0800
 From: Christoph Hellwig <hch@infradead.org>
 To: Jeff Layton <jlayton@kernel.org>
-Message-ID: <aamSFgXhrORAJLBC@infradead.org>
+Message-ID: <aamSP0KKicK3dvIf@infradead.org>
 References: <20260304-iino-u64-v3-0-2257ad83d372@kernel.org>
- <20260304-iino-u64-v3-1-2257ad83d372@kernel.org>
+ <20260304-iino-u64-v3-12-2257ad83d372@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260304-iino-u64-v3-1-2257ad83d372@kernel.org>
+In-Reply-To: <20260304-iino-u64-v3-12-2257ad83d372@kernel.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 X-Spamd-Bar: -
 X-MailFrom: BATV+2e11e6930e970eb8572e+8229+infradead.org+hch@bombadil.srs.infradead.org
 X-Mailman-Rule-Hits: max-recipients
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-size; news-moderation; no-subject; digests; suspicious-header
-Message-ID-Hash: 25VKGTK5VGI7TYYTZH77SO3CG4KEYX3T
-X-Message-ID-Hash: 25VKGTK5VGI7TYYTZH77SO3CG4KEYX3T
-X-Mailman-Approved-At: Mon, 20 Apr 2026 17:02:20 +0000
+Message-ID-Hash: N72TRNHGPQPRH72PGBY65T23RMSUAAE4
+X-Message-ID-Hash: N72TRNHGPQPRH72PGBY65T23RMSUAAE4
+X-Mailman-Approved-At: Mon, 20 Apr 2026 17:02:21 +0000
 CC: Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>, Steven Rostedt <rostedt@goodmis.org>, Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Dan Williams <dan.j.williams@intel.com>, Eric Biggers <ebiggers@kernel.org>, "Theodore Y. Ts'o" <tytso@mit.edu>, Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>, David Hildenbrand <david@kernel.org>, David Howells <dhowells@redhat.com>, Paulo Alcantara <pc@manguebit.org>, Andreas Dilger <adilger.kernel@dilger.ca>, Jan Kara <jack@suse.com>, Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>, Trond Myklebust <trondmy@kernel.org>, Anna Schumaker <anna@kernel.org>, Chuck Lever <chuck.lever@oracle.com>, NeilBrown <neil@brown.name>, Olga Kornievskaia <okorniev@redhat.com>, Dai Ngo <Dai.Ngo@oracle.com>, Tom Talpey <tom@talpey.com>, Steve French <sfrench@samba.org>, Ronnie Sahlberg <ronniesahlberg@gmail.com>, Shyam Prasad 
  N <sprasad@microsoft.com>, Bharath SM <bharathsm@microsoft.com>, Alexander Aring <alex.aring@gmail.com>, Ryusuke Konishi <konishi.ryusuke@gmail.com>, Viacheslav Dubeyko <slava@dubeyko.com>, Eric Van Hensbergen <ericvh@kernel.org>, Latchesar Ionkov <lucho@ionkov.net>, Dominique Martinet <asmadeus@codewreck.org>, Christian Schoenebeck <linux_oss@crudebyte.com>, David Sterba <dsterba@suse.com>, Marc Dionne <marc.dionne@auristor.com>, Ian Kent <raven@themaw.net>, Luis de Bethencourt <luisbg@kernel.org>, Salah Triki <salah.triki@gmail.com>, "Tigran A. Aivazian" <aivazian.tigran@gmail.com>, Ilya Dryomov <idryomov@gmail.com>, Alex Markuze <amarkuze@redhat.com>, Jan Harkes <jaharkes@cs.cmu.edu>, coda@cs.cmu.edu, Nicolas Pitre <nico@fluxnic.net>, Tyler Hicks <code@tyhicks.com>, Amir Goldstein <amir73il@gmail.com>, Christoph Hellwig <hch@infradead.org>, John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>, Yangtao Li <frank.li@vivo.com>, Mikulas Patocka <mikulas@artax.karlin.mff.cuni.cz>,
   David Woodhouse <dwmw2@infradead.org>, Richard Weinberger <richard@nod.at>, Dave Kleikamp <shaggy@kernel.org>, Konstantin Komarov <almaz.alexandrovich@paragon-software.com>, Mark Fasheh <mark@fasheh.com>, Joel Becker <jlbec@evilplan.org>, Joseph Qi <joseph.qi@linux.alibaba.com>, Mike Marshall <hubcap@omnibond.com>, Martin Brandenburg <martin@omnibond.com>, Miklos Szeredi <miklos@szeredi.hu>, Anders Larsen <al@alarsen.net>, Zhihao Cheng <chengzhihao1@huawei.com>, Damien Le Moal <dlemoal@kernel.org>, Naohiro Aota <naohiro.aota@wdc.com>, Johannes Thumshirn <jth@kernel.org>, John Johansen <john.johansen@canonical.com>, Paul Moore <paul@paul-moore.com>, James Morris <jmorris@namei.org>, "Serge E. Hallyn" <serge@hallyn.com>, Mimi Zohar <zohar@linux.ibm.com>, Roberto Sassu <roberto.sassu@huawei.com>, Dmitry Kasatkin <dmitry.kasatkin@gmail.com>, Eric Snowberg <eric.snowberg@oracle.com>, Fan Wu <wufan@kernel.org>, Stephen Smalley <stephen.smalley.work@gmail.com>, Ondrej Mosnacek <omosnace@r
@@ -58,9 +58,9 @@ CC: Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.
  r.kernel.org, audit@vger.kernel.org, linux-bluetooth@vger.kernel.org, linux-can@vger.kernel.org, linux-sctp@vger.kernel.org, bpf@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3 01/12] vfs: widen inode hash/lookup functions to u64
+Subject: [Linaro-mm-sig] Re: [PATCH v3 12/12] treewide: change inode->i_ino from unsigned long to u64
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/25VKGTK5VGI7TYYTZH77SO3CG4KEYX3T/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/N72TRNHGPQPRH72PGBY65T23RMSUAAE4/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -89,7 +89,7 @@ X-Spamd-Result: default: False [3.09 / 15.00];
  ts.linaro.org,vge];
 	DKIM_TRACE(0.00)[infradead.org:-];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.947];
+	NEURAL_HAM(-0.00)[-0.978];
 	RCPT_COUNT_GT_50(0.00)[171];
 	FROM_NEQ_ENVFROM(0.00)[hch@infradead.org,linaro-mm-sig-bounces@lists.linaro.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
@@ -97,24 +97,12 @@ X-Spamd-Result: default: False [3.09 / 15.00];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email,infradead.org:mid]
-X-Rspamd-Queue-Id: 43491430728
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,infradead.org:mid,lists.linaro.org:helo,lists.linaro.org:rdns]
+X-Rspamd-Queue-Id: C8646430730
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
->  extern struct inode *ilookup5_nowait(struct super_block *sb,
-> -		unsigned long hashval, int (*test)(struct inode *, void *),
-> +		u64 hashval, int (*test)(struct inode *, void *),
->  		void *data, bool *isnew);
-> -extern struct inode *ilookup5(struct super_block *sb, unsigned long hashval,
-> +extern struct inode *ilookup5(struct super_block *sb, u64 hashval,
->  		int (*test)(struct inode *, void *), void *data);
-
-...
-
-Can you please drop all these pointless externs while you're at it?
-
-Otherwise looks good:
+Looks good:
 
 Reviewed-by: Christoph Hellwig <hch@lst.de>
 
