@@ -2,53 +2,53 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sE5mGHKuqmmLVQEAu9opvQ
+	id QG+jL3iuqmmLVQEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 06 Mar 2026 11:37:38 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 06 Mar 2026 11:37:44 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 37BE221EE6C
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 06 Mar 2026 11:37:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5B88921EE85
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 06 Mar 2026 11:37:43 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3B9643F902
-	for <lists+linaro-mm-sig@lfdr.de>; Fri,  6 Mar 2026 10:37:37 +0000 (UTC)
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-	by lists.linaro.org (Postfix) with ESMTPS id 7EF6D3F9BA
-	for <linaro-mm-sig@lists.linaro.org>; Fri,  6 Mar 2026 10:37:32 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 0EB973F9A9
+	for <lists+linaro-mm-sig@lfdr.de>; Fri,  6 Mar 2026 10:37:43 +0000 (UTC)
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+	by lists.linaro.org (Postfix) with ESMTPS id 515204015D
+	for <linaro-mm-sig@lists.linaro.org>; Fri,  6 Mar 2026 10:37:39 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=IrOy4lfL;
-	spf=pass (lists.linaro.org: domain of aesteve@redhat.com designates 170.10.129.124 as permitted sender) smtp.mailfrom=aesteve@redhat.com;
+	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=G4pr6TGJ;
+	spf=pass (lists.linaro.org: domain of aesteve@redhat.com designates 170.10.133.124 as permitted sender) smtp.mailfrom=aesteve@redhat.com;
 	dmarc=pass (policy=quarantine) header.from=redhat.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1772793452;
+	s=mimecast20190719; t=1772793459;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=suRtAZrxz3OO0NlvM3Q3uQcnaecb9vHR4v4iJlgEyR8=;
-	b=IrOy4lfLxpCiYWyX4fo0ZzKH5x2JUxc6hml+SzpEXJIToYUeNJaZmkqoHTh0RW5R0BcbTW
-	OLLowcfUJ+KLEMMMvbEeZYo3hpqK8VyCaKg3N72boS+5N2SFmZOErUeVWQ4mslktZvScgq
-	/Wxw+SuAQQKqTyX3SfSaKA8hM0Mb1W0=
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+	bh=X1W1JFb09fQZLTmuNIkzg7O2smMWNXHTw+tCky9f0yA=;
+	b=G4pr6TGJcJJwnp3PsWrqOH8+NQ0+xbIrPPjee3AlDjBpfOeFj5P7OPI/f09HFXQvb6hDtN
+	vGhDM9+ZnkLa0SAYSJlZ3IYpIC1YxrUhTOo9TM/8bfm3dJW+7qqPEg+w9fxV9rKSLPEHWn
+	Hzyti1JAyeij9aVdxY7L16KfGadzjM0=
+Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-327-xTjywzMWNs6YmfKnZZPkig-1; Fri,
- 06 Mar 2026 05:37:29 -0500
-X-MC-Unique: xTjywzMWNs6YmfKnZZPkig-1
-X-Mimecast-MFC-AGG-ID: xTjywzMWNs6YmfKnZZPkig_1772793447
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-220-MnqftG4TNyCRK-vj5TQNCg-1; Fri,
+ 06 Mar 2026 05:37:34 -0500
+X-MC-Unique: MnqftG4TNyCRK-vj5TQNCg-1
+X-Mimecast-MFC-AGG-ID: MnqftG4TNyCRK-vj5TQNCg_1772793452
 Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id B23F51956095;
-	Fri,  6 Mar 2026 10:37:26 +0000 (UTC)
+	by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id A0F7D18005B0;
+	Fri,  6 Mar 2026 10:37:32 +0000 (UTC)
 Received: from [192.168.1.153] (unknown [10.45.226.103])
-	by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id D16FF1800576;
-	Fri,  6 Mar 2026 10:37:20 +0000 (UTC)
+	by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 4C717180035F;
+	Fri,  6 Mar 2026 10:37:27 +0000 (UTC)
 From: Albert Esteve <aesteve@redhat.com>
-Date: Fri, 06 Mar 2026 11:36:34 +0100
+Date: Fri, 06 Mar 2026 11:36:35 +0100
 MIME-Version: 1.0
-Message-Id: <20260306-b4-dmabuf-heap-coherent-rmem-v3-3-3d00d36c9bc4@redhat.com>
+Message-Id: <20260306-b4-dmabuf-heap-coherent-rmem-v3-4-3d00d36c9bc4@redhat.com>
 References: <20260306-b4-dmabuf-heap-coherent-rmem-v3-0-3d00d36c9bc4@redhat.com>
 In-Reply-To: <20260306-b4-dmabuf-heap-coherent-rmem-v3-0-3d00d36c9bc4@redhat.com>
 To: Sumit Semwal <sumit.semwal@linaro.org>,
@@ -59,28 +59,28 @@ To: Sumit Semwal <sumit.semwal@linaro.org>,
  Marek Szyprowski <m.szyprowski@samsung.com>,
  Robin Murphy <robin.murphy@arm.com>, Rob Herring <robh@kernel.org>,
  Saravana Kannan <saravanak@kernel.org>
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1772793417; l=4434;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1772793417; l=3959;
  i=aesteve@redhat.com; s=20260303; h=from:subject:message-id;
- bh=rgrqri/qil5mD0TqCg7stpgdjtBE6SE/MHI+utJVZN0=;
- b=/9NHwRWbwX4ljPKtYhgTcPVxYkxoBoVNNBgLyQk3ultqrgYvfZaohRku503CZAnxdi2GQrCDJ
- nuJ5HYgcUNyDgdH+gO0uk9X4NPANrQnY0hXLw41OgZNS7WS/AMYTTyJ
+ bh=u/febRDM30JzV4zi0O2oWhXMCmjL4J3mUC+OUI296Uo=;
+ b=ox/FLKFGG37y3D4eZEeuwpjANM+kMoZ40TSyVRxSl1Ey8IISOiKa4rN8VqUqJSo2qSnDVNqH6
+ fpEmrmFeDwyCRLDpE2qyCTx7NCMG7X+GpX6EubQV3mDuWjEh1pthLL6
 X-Developer-Key: i=aesteve@redhat.com; a=ed25519;
  pk=YSFz6sOHd2L45+Fr8DIvHTi6lSIjhLZ5T+rkxspJt1s=
 X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
-X-Mimecast-MFC-PROC-ID: pcn36ktBhsWpVRZHaF16cex_Qww7RgzU1hKjdTZK6-I_1772793447
+X-Mimecast-MFC-PROC-ID: TW7QmuBaSCSjSkLZGtr2x5cXYwC83QXVhWvZFjEKLn0_1772793452
 X-Mimecast-Originator: redhat.com
 X-Spamd-Bar: ----
-Message-ID-Hash: BCJHQM5PXFGOLBA57CIWMTHF5DP5D52G
-X-Message-ID-Hash: BCJHQM5PXFGOLBA57CIWMTHF5DP5D52G
+Message-ID-Hash: 3ZSZIUXLALCTEJKFNNYWDPPEBA5PCHO2
+X-Message-ID-Hash: 3ZSZIUXLALCTEJKFNNYWDPPEBA5PCHO2
 X-MailFrom: aesteve@redhat.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 CC: linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, iommu@lists.linux.dev, devicetree@vger.kernel.org, Albert Esteve <aesteve@redhat.com>, mripard@redhat.com, echanude@redhat.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v3 3/6] of_reserved_mem: add a helper for rmem device_init op
+Subject: [Linaro-mm-sig] [PATCH v3 4/6] dma: coherent: store reserved memory coherent regions
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/BCJHQM5PXFGOLBA57CIWMTHF5DP5D52G/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3ZSZIUXLALCTEJKFNNYWDPPEBA5PCHO2/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -89,7 +89,7 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 37BE221EE6C
+X-Rspamd-Queue-Id: 5B88921EE85
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [1.99 / 15.00];
 	DMARC_POLICY_QUARANTINE(1.50)[redhat.com : SPF not aligned (relaxed),quarantine];
@@ -111,144 +111,121 @@ X-Spamd-Result: default: False [1.99 / 15.00];
 	FROM_NEQ_ENVFROM(0.00)[aesteve@redhat.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	NEURAL_HAM(-0.00)[-0.916];
+	NEURAL_HAM(-0.00)[-0.917];
 	RCVD_TLS_LAST(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
 	DKIM_TRACE(0.00)[redhat.com:-]
 X-Rspamd-Action: no action
 
-Add a helper function wrapping internal reserved memory
-device_init call and expose it externally.
+Create the logic to store coherent reserved memory regions
+within the coherent DMA code; and provide an iterator
+(i.e., dma_coherent_get_reserved_region()) to allow
+consumers of this API retrieving the regions.
 
-Use the new helper function within of_reserved_mem_device_init_by_idx().
+Note: since the consumer of this iterator is going
+to be the specific coherent memory dmabuf heap module, this
+commit introduces a check for CONFIG_DMABUF_HEAPS_COHERENT,
+which is defined in the subsequent patch, to maintain a
+clean split between the kernel code and the heap
+module code.
 
 Signed-off-by: Albert Esteve <aesteve@redhat.com>
 ---
- drivers/of/of_reserved_mem.c    | 68 ++++++++++++++++++++++++++---------------
- include/linux/of_reserved_mem.h |  8 +++++
- 2 files changed, 52 insertions(+), 24 deletions(-)
+ include/linux/dma-map-ops.h |  7 +++++++
+ kernel/dma/coherent.c       | 34 ++++++++++++++++++++++++++++++++++
+ 2 files changed, 41 insertions(+)
 
-diff --git a/drivers/of/of_reserved_mem.c b/drivers/of/of_reserved_mem.c
-index 1fd28f8056108..26ca871f7f919 100644
---- a/drivers/of/of_reserved_mem.c
-+++ b/drivers/of/of_reserved_mem.c
-@@ -605,6 +605,49 @@ struct rmem_assigned_device {
- static LIST_HEAD(of_rmem_assigned_device_list);
- static DEFINE_MUTEX(of_rmem_assigned_device_mutex);
+diff --git a/include/linux/dma-map-ops.h b/include/linux/dma-map-ops.h
+index 60b63756df821..c87e5e44e5383 100644
+--- a/include/linux/dma-map-ops.h
++++ b/include/linux/dma-map-ops.h
+@@ -12,6 +12,7 @@
  
-+/**
-+ * of_reserved_mem_device_init_with_mem() - assign reserved memory region to
-+ *					    given device
-+ * @dev:	Pointer to the device to configure
-+ * @rmem:	Reserved memory region to assign
-+ *
-+ * This function assigns respective DMA-mapping operations based on the
-+ * reserved memory region already provided in @rmem to the @dev device,
-+ * without walking DT nodes.
-+ *
-+ * Returns error code or zero on success.
-+ */
-+int of_reserved_mem_device_init_with_mem(struct device *dev,
-+					 struct reserved_mem *rmem)
+ struct cma;
+ struct iommu_ops;
++struct reserved_mem;
+ 
+ struct dma_map_ops {
+ 	void *(*alloc)(struct device *dev, size_t size,
+@@ -161,6 +162,7 @@ int dma_alloc_from_dev_coherent(struct device *dev, ssize_t size,
+ int dma_release_from_dev_coherent(struct device *dev, int order, void *vaddr);
+ int dma_mmap_from_dev_coherent(struct device *dev, struct vm_area_struct *vma,
+ 		void *cpu_addr, size_t size, int *ret);
++struct reserved_mem *dma_coherent_get_reserved_region(unsigned int idx);
+ #else
+ static inline int dma_declare_coherent_memory(struct device *dev,
+ 		phys_addr_t phys_addr, dma_addr_t device_addr, size_t size)
+@@ -172,6 +174,11 @@ static inline int dma_declare_coherent_memory(struct device *dev,
+ #define dma_release_from_dev_coherent(dev, order, vaddr) (0)
+ #define dma_mmap_from_dev_coherent(dev, vma, vaddr, order, ret) (0)
+ static inline void dma_release_coherent_memory(struct device *dev) { }
++static inline
++struct reserved_mem *dma_coherent_get_reserved_region(unsigned int idx)
 +{
-+	struct rmem_assigned_device *rd;
-+	int ret;
++	return NULL;
++}
+ #endif /* CONFIG_DMA_DECLARE_COHERENT */
+ 
+ #ifdef CONFIG_DMA_GLOBAL_POOL
+diff --git a/kernel/dma/coherent.c b/kernel/dma/coherent.c
+index 1147497bc512c..d0d0979ffb153 100644
+--- a/kernel/dma/coherent.c
++++ b/kernel/dma/coherent.c
+@@ -9,6 +9,7 @@
+ #include <linux/module.h>
+ #include <linux/dma-direct.h>
+ #include <linux/dma-map-ops.h>
++#include <linux/dma-heap.h>
+ 
+ struct dma_coherent_mem {
+ 	void		*virt_base;
+@@ -334,6 +335,31 @@ static phys_addr_t dma_reserved_default_memory_base __initdata;
+ static phys_addr_t dma_reserved_default_memory_size __initdata;
+ #endif
+ 
++#define MAX_COHERENT_REGIONS 64
 +
-+	if (!dev || !rmem || !rmem->ops || !rmem->ops->device_init)
++static struct reserved_mem *rmem_coherent_areas[MAX_COHERENT_REGIONS];
++static unsigned int rmem_coherent_areas_num;
++
++static int rmem_coherent_insert_area(struct reserved_mem *rmem)
++{
++	if (rmem_coherent_areas_num >= MAX_COHERENT_REGIONS) {
++		pr_warn("Deferred heap areas list full, dropping %s\n",
++			rmem->name ? rmem->name : "unknown");
 +		return -EINVAL;
-+
-+	rd = kmalloc_obj(struct rmem_assigned_device);
-+	if (!rd)
-+		return -ENOMEM;
-+
-+	ret = rmem->ops->device_init(rmem, dev);
-+	if (ret == 0) {
-+		rd->dev = dev;
-+		rd->rmem = rmem;
-+
-+		mutex_lock(&of_rmem_assigned_device_mutex);
-+		list_add(&rd->list, &of_rmem_assigned_device_list);
-+		mutex_unlock(&of_rmem_assigned_device_mutex);
-+
-+		dev_info(dev, "assigned reserved memory node %s\n", rmem->name);
-+	} else {
-+		kfree(rd);
 +	}
-+
-+	return ret;
++	rmem_coherent_areas[rmem_coherent_areas_num++] = rmem;
++	return 0;
 +}
-+EXPORT_SYMBOL_GPL(of_reserved_mem_device_init_with_mem);
 +
- /**
-  * of_reserved_mem_device_init_by_idx() - assign reserved memory region to
-  *					  given device
-@@ -623,10 +666,8 @@ static DEFINE_MUTEX(of_rmem_assigned_device_mutex);
- int of_reserved_mem_device_init_by_idx(struct device *dev,
- 				       struct device_node *np, int idx)
- {
--	struct rmem_assigned_device *rd;
- 	struct device_node *target;
- 	struct reserved_mem *rmem;
--	int ret;
- 
- 	if (!np || !dev)
- 		return -EINVAL;
-@@ -643,28 +684,7 @@ int of_reserved_mem_device_init_by_idx(struct device *dev,
- 	rmem = of_reserved_mem_lookup(target);
- 	of_node_put(target);
- 
--	if (!rmem || !rmem->ops || !rmem->ops->device_init)
--		return -EINVAL;
--
--	rd = kmalloc_obj(struct rmem_assigned_device);
--	if (!rd)
--		return -ENOMEM;
--
--	ret = rmem->ops->device_init(rmem, dev);
--	if (ret == 0) {
--		rd->dev = dev;
--		rd->rmem = rmem;
--
--		mutex_lock(&of_rmem_assigned_device_mutex);
--		list_add(&rd->list, &of_rmem_assigned_device_list);
--		mutex_unlock(&of_rmem_assigned_device_mutex);
--
--		dev_info(dev, "assigned reserved memory node %s\n", rmem->name);
--	} else {
--		kfree(rd);
--	}
--
--	return ret;
-+	return of_reserved_mem_device_init_with_mem(dev, rmem);
- }
- EXPORT_SYMBOL_GPL(of_reserved_mem_device_init_by_idx);
- 
-diff --git a/include/linux/of_reserved_mem.h b/include/linux/of_reserved_mem.h
-index f573423359f48..12f7ddb7ee61f 100644
---- a/include/linux/of_reserved_mem.h
-+++ b/include/linux/of_reserved_mem.h
-@@ -32,6 +32,8 @@ typedef int (*reservedmem_of_init_fn)(struct reserved_mem *rmem);
- #define RESERVEDMEM_OF_DECLARE(name, compat, init)			\
- 	_OF_DECLARE(reservedmem, name, compat, init, reservedmem_of_init_fn)
- 
-+int of_reserved_mem_device_init_with_mem(struct device *dev,
-+					 struct reserved_mem *rmem);
- int of_reserved_mem_device_init_by_idx(struct device *dev,
- 				       struct device_node *np, int idx);
- int of_reserved_mem_device_init_by_name(struct device *dev,
-@@ -51,6 +53,12 @@ int of_reserved_mem_region_count(const struct device_node *np);
- #define RESERVEDMEM_OF_DECLARE(name, compat, init)			\
- 	_OF_DECLARE_STUB(reservedmem, name, compat, init, reservedmem_of_init_fn)
- 
-+static inline int of_reserved_mem_device_init_with_mem(struct device *dev,
-+						       struct reserved_mem *rmem)
++struct reserved_mem *dma_coherent_get_reserved_region(unsigned int idx)
 +{
-+	return -EOPNOTSUPP;
-+}
++	if (idx >= rmem_coherent_areas_num)
++		return NULL;
 +
- static inline int of_reserved_mem_device_init_by_idx(struct device *dev,
- 					struct device_node *np, int idx)
++	return rmem_coherent_areas[idx];
++}
++EXPORT_SYMBOL_GPL(dma_coherent_get_reserved_region);
++
+ static int rmem_dma_device_init(struct reserved_mem *rmem, struct device *dev)
  {
+ 	struct dma_coherent_mem *mem = rmem->priv;
+@@ -393,6 +419,14 @@ static int __init rmem_dma_setup(struct reserved_mem *rmem)
+ 	rmem->ops = &rmem_dma_ops;
+ 	pr_info("Reserved memory: created DMA memory pool at %pa, size %ld MiB\n",
+ 		&rmem->base, (unsigned long)rmem->size / SZ_1M);
++
++	if (IS_ENABLED(CONFIG_DMABUF_HEAPS_COHERENT)) {
++		int ret = rmem_coherent_insert_area(rmem);
++
++		if (ret)
++			pr_warn("Reserved memory: failed to store coherent area for %s (%d)\n",
++				rmem->name ? rmem->name : "unknown", ret);
++	}
+ 	return 0;
+ }
+ 
 
 -- 
 2.52.0
