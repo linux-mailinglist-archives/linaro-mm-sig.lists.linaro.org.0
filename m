@@ -2,40 +2,40 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id CN5rDfjhqmkJYAEAu9opvQ
+	id +JjzDP7iqmkjYAEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 06 Mar 2026 15:17:28 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 06 Mar 2026 15:21:50 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9D7AD222737
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 06 Mar 2026 15:17:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C6243222894
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 06 Mar 2026 15:21:49 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2A4D63F70A
-	for <lists+linaro-mm-sig@lfdr.de>; Fri,  6 Mar 2026 14:17:26 +0000 (UTC)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
-	by lists.linaro.org (Postfix) with ESMTPS id 038BD3F70A
-	for <linaro-mm-sig@lists.linaro.org>; Fri,  6 Mar 2026 14:17:24 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B8D813F902
+	for <lists+linaro-mm-sig@lfdr.de>; Fri,  6 Mar 2026 14:21:48 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+	by lists.linaro.org (Postfix) with ESMTPS id 6077C3F75D
+	for <linaro-mm-sig@lists.linaro.org>; Fri,  6 Mar 2026 14:21:46 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=DKkHTn5B;
-	spf=pass (lists.linaro.org: domain of krzk@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=krzk@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=jil9XdiN;
+	spf=pass (lists.linaro.org: domain of krzk@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=krzk@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by tor.source.kernel.org (Postfix) with ESMTP id 70F4160018;
-	Fri,  6 Mar 2026 14:17:23 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CDCE3C2BC86;
-	Fri,  6 Mar 2026 14:17:17 +0000 (UTC)
+	by sea.source.kernel.org (Postfix) with ESMTP id AD5854174F;
+	Fri,  6 Mar 2026 14:21:45 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3C60EC4CEF7;
+	Fri,  6 Mar 2026 14:21:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772806643;
-	bh=7acBvzZBMqx2N2UBBZgx1paFciGfqBfHUzRPZm4ezhc=;
+	s=k20201202; t=1772806905;
+	bh=QlowReCLCXaDEPiS+S2GX0Mrds2Ec/PskTemUWOyu5k=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=DKkHTn5BB0EHEeUXE5nuyGUieM/myfuAACPGek5QXTrxgBac5hNiOhh9OS4O+ueSF
-	 RbtuNE5nU8TQsj/q7iZG5spLBjZZ4Q6BCmbcil6uaep2hZsdnEzFcQKn81uRv9kuJN
-	 oXn4RuEoj7j/lQ6BFE5engn0rT85k2ygZ/Zmz1Or73xh3xc8z9sBa84UJ4dKMBaCGN
-	 zOPHT+lo7Saxk/Z9W/FD28gY1v94X5TYV5lbTeSSzYN14ulCmP/2fwP5PV7gsTIpiU
-	 31/FUl0OqYBcJ6urDxVwcA3/ETljgLr9S+K/DOlpMeuMC2PJMZkYm/zCaE3MOcMW5/
-	 ehl4j4SBEDVfQ==
-Message-ID: <a75dab31-d59f-446a-a100-4a9f082027e5@kernel.org>
-Date: Fri, 6 Mar 2026 15:17:15 +0100
+	b=jil9XdiNACVK8YNzZ5AQCO0O/A1VouaMzryqqOCAUCJDpa/RrLxWj2Q3MeCF2Mslg
+	 7d+1SpFsGEfaWNks+Ufj1woTgQrxd0nsBHhcCL925Zm5YXPkiJdb9okYaFmTbCBpSL
+	 tDokRNtYiIUIxpSJuB7Br0LeJb7U9sQ4B7N//dG+efQgrdFRsFNi36aOqOjosrFlXT
+	 Lb1i29HxExS4viNqXTeYq7O1E3gVR8ouf7x/dhLRrp8av5Oh0QuIlZnQWu4/34ggH1
+	 7+mecAb4+B6N63mbxF1LV/aCoWx9adrtQySO77EcmT6LE/cyZmtVIpwkuK8gxMxg9j
+	 0W+3NlSCajVyg==
+Message-ID: <110dace9-3ff9-4750-813f-93c6827b105c@kernel.org>
+Date: Fri, 6 Mar 2026 15:21:38 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Ioana Ciocoi-Radulescu <ruxandra.radulescu@nxp.com>,
@@ -49,7 +49,7 @@ To: Ioana Ciocoi-Radulescu <ruxandra.radulescu@nxp.com>,
  Frank Li <Frank.Li@nxp.com>, =?UTF-8?Q?Christian_K=C3=B6nig?=
  <christian.koenig@amd.com>
 References: <20260306-neutron-v2-0-3019bd8c91ef@nxp.com>
- <20260306-neutron-v2-3-3019bd8c91ef@nxp.com>
+ <20260306-neutron-v2-4-3019bd8c91ef@nxp.com>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
@@ -95,18 +95,18 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  jWt87ecuHlpL3uuQ0ZZNWqHgZoQLXoqC2ZV5KrtKWb/jyiFX/sxSrodALf0zf+tfHv0FZWT2
  zHjUqd0t4njD/UOsuIMOQn4Ig0SdivYPfZukb5cdasKJukG1NOpbW7yRNivaCnfZz6dTawXw
  XRIV/KDsHQiyVxKvN73bThKhONkcX2LWuD928tAR6XMM2G5ovxLe09vuOzzfTWQDsm++9UKF a/A=
-In-Reply-To: <20260306-neutron-v2-3-3019bd8c91ef@nxp.com>
-X-Spamd-Bar: ---
-Message-ID-Hash: 6JVCEB5XLPIVDAU6IUHIOYOQM6O2CR57
-X-Message-ID-Hash: 6JVCEB5XLPIVDAU6IUHIOYOQM6O2CR57
+In-Reply-To: <20260306-neutron-v2-4-3019bd8c91ef@nxp.com>
+X-Spamd-Bar: ----
+Message-ID-Hash: MIPHVQXHP53K5HXB3RG7DZOBI65YCADJ
+X-Message-ID-Hash: MIPHVQXHP53K5HXB3RG7DZOBI65YCADJ
 X-MailFrom: krzk@kernel.org
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, devicetree@vger.kernel.org, imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Jiwei Fu <jiwei.fu@nxp.com>, Forrest Shi <xuelin.shi@nxp.com>, Alexandru Taran <alexandru.taran@nxp.com>, Daniel Baluta <daniel.baluta@nxp.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 3/9] dt-bindings: npu: Add NXP Neutron
+Subject: [Linaro-mm-sig] Re: [PATCH v2 4/9] accel/neutron: Add driver for NXP Neutron NPU
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6JVCEB5XLPIVDAU6IUHIOYOQM6O2CR57/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MIPHVQXHP53K5HXB3RG7DZOBI65YCADJ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -115,18 +115,18 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 9D7AD222737
+X-Rspamd-Queue-Id: C6243222894
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [3.49 / 15.00];
 	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
 	SUSPICIOUS_RECIPS(1.50)[];
 	R_DKIM_REJECT(1.00)[kernel.org:s=k20201202];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
 	FREEMAIL_TO(0.00)[nxp.com,kernel.org,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com];
 	ARC_NA(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
@@ -135,60 +135,189 @@ X-Spamd-Result: default: False [3.49 / 15.00];
 	DKIM_TRACE(0.00)[kernel.org:-];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.181];
+	NEURAL_HAM(-0.00)[-0.148];
 	FROM_NEQ_ENVFROM(0.00)[krzk@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig,dt];
+	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[100.75.92.58:received];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[qualcomm.com:email,linaro.org:email,4ab00000:email]
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[nxp.com:email,linaro.org:email]
 X-Rspamd-Action: no action
 
 On 06/03/2026 14:27, Ioana Ciocoi-Radulescu wrote:
-> +
-> +  iommus:
-> +    maxItems: 1
-> +
-> +  power-domains:
-> +    maxItems: 1
-> +
-> +required:
-> +  - compatible
-> +  - reg
-> +  - reg-names
-> +  - memory-region
-> +  - interrupts
-> +  - clocks
-> +  - clock-names
+> 
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 8a5b27b061da..f7a687eb6b54 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -19191,6 +19191,16 @@ S:	Orphan
+>  F:	Documentation/devicetree/bindings/net/nfc/nxp,nci.yaml
+>  F:	drivers/nfc/nxp-nci
+>  
+> +NXP Neutron NPU DRIVER
 
-Missing power-domains
+s/Neutron/NEUTRON/ as everything here is in uppercase
+
+> +M:	Ioana Ciocoi Radulescu <ruxandra.radulescu@nxp.com>
+> +M:	Jiwei Fu <jiwei.fu@nxp.com>
+> +L:	dri-devel@lists.freedesktop.org
+> +S:	Maintained
+> +T:	git https://gitlab.freedesktop.org/drm/misc/kernel.git
+> +F:	Documentation/accel/neutron/
+> +F:	drivers/accel/neutron/
+> +F:	include/uapi/drm/neutron_accel.h
+
+
+>  
+> diff --git a/drivers/accel/Makefile b/drivers/accel/Makefile
+> index 1d3a7251b950..698136e12cce 100644
+> --- a/drivers/accel/Makefile
+> +++ b/drivers/accel/Makefile
+> @@ -4,5 +4,6 @@ obj-$(CONFIG_DRM_ACCEL_AMDXDNA)		+= amdxdna/
+>  obj-$(CONFIG_DRM_ACCEL_ARM_ETHOSU)	+= ethosu/
+>  obj-$(CONFIG_DRM_ACCEL_HABANALABS)	+= habanalabs/
+>  obj-$(CONFIG_DRM_ACCEL_IVPU)		+= ivpu/
+> +obj-$(CONFIG_DRM_ACCEL_NXP_NEUTRON)	+= neutron/
+>  obj-$(CONFIG_DRM_ACCEL_QAIC)		+= qaic/
+> -obj-$(CONFIG_DRM_ACCEL_ROCKET)		+= rocket/
+> \ No newline at end of file
+
+You still have patch warnings.
+
+> +obj-$(CONFIG_DRM_ACCEL_ROCKET)		+= rocket/
+> diff --git a/drivers/accel/neutron/Kconfig b/drivers/accel/neutron/Kconfig
+> new file mode 100644
+> index 000000000000..37b8ecb49804
+> --- /dev/null
+> +++ b/drivers/accel/neutron/Kconfig
+> @@ -0,0 +1,16 @@
+> +# SPDX-License-Identifier: GPL-2.0+
+> +
+> +config DRM_ACCEL_NXP_NEUTRON
+> +	tristate "NXP Neutron NPU"
+> +	depends on HAS_IOMEM
+> +	depends on DRM_ACCEL
+> +	depends on ARCH_MXC
+
+Missing compile test
+
+> +	select DRM_GEM_DMA_HELPER
+> +	select DRM_SCHED
+> +	help
+> +	  Enables driver for NXP Neutron NPU.
+> +
+> +	  Select this if you have an NXP SoC with Neutron, like i.MX95,
+> +	  and want to run machine learning applications.
+> +
+> +	  If built as module, the module is named neutron.
+
+...
 
 > +
-> +additionalProperties: false
+> +	ret = devm_request_threaded_irq(dev, ndev->irq, NULL,
+> +					neutron_irq_handler_thread,
+> +					IRQF_ONESHOT, KBUILD_MODNAME, ndev);
+> +	if (ret) {
+> +		dev_err(dev, "Failed to request irq %d\n", ndev->irq);
+
+Drop, not needed.
+
+> +		return ret;
+> +	}
 > +
-> +examples:
-> +  - |
-> +    #include <dt-bindings/interrupt-controller/arm-gic.h>
-> +    #include <dt-bindings/interrupt-controller/irq.h>
+> +	ret = of_reserved_mem_device_init(&pdev->dev);
+> +	if (ret) {
+> +		dev_err(dev, "Failed to initialize reserved memory\n");
+> +		return ret;
+> +	}
 > +
-> +    bus {
-> +      #address-cells = <2>;
-> +      #size-cells = <2>;
+> +	ret = devm_pm_runtime_enable(dev);
+> +	if (ret)
+> +		goto free_reserved;
 > +
-> +      npu@4ab00000 {
-> +        compatible = "nxp,imx95-neutron";
-> +        reg = <0x0 0x4ab00000 0x0 0x00000400>,
-> +              <0x0 0x4AB10000 0x0 0x00010000>,
-> +              <0x0 0x4AB08000 0x0 0x00008000>;
+> +	pm_runtime_set_autosuspend_delay(dev, NEUTRON_SUSPEND_DELAY_MS);
+> +	pm_runtime_use_autosuspend(dev);
+> +
+> +	ret = drm_dev_register(&ndev->base, 0);
+> +	if (ret)
+> +		goto free_reserved;
+> +
+> +	return 0;
+> +
+> +free_reserved:
+> +	of_reserved_mem_device_release(&pdev->dev);
+> +
+> +	return ret;
+> +}
+> +
+> +static void neutron_remove(struct platform_device *pdev)
+> +{
+> +	struct neutron_device *ndev = platform_get_drvdata(pdev);
+> +
+> +	drm_dev_unregister(&ndev->base);
+> +	of_reserved_mem_device_release(&pdev->dev);
+> +}
+> +
+> +static int neutron_runtime_suspend(struct device *dev)
+> +{
+> +	struct neutron_device *ndev = dev_get_drvdata(dev);
+> +
+> +	neutron_disable_irq(ndev);
+> +	neutron_shutdown(ndev);
+> +
+> +	clk_bulk_disable_unprepare(ndev->num_clks, ndev->clks);
+> +
+> +	return 0;
+> +}
+> +
+> +static int neutron_runtime_resume(struct device *dev)
+> +{
+> +	struct neutron_device *ndev = dev_get_drvdata(dev);
+> +	int ret;
+> +
+> +	ret = clk_bulk_prepare_enable(ndev->num_clks, ndev->clks);
+> +	if (ret)
+> +		return ret;
+> +
+> +	ret = neutron_boot(ndev);
+> +	if (ret) {
+> +		clk_bulk_disable_unprepare(ndev->num_clks, ndev->clks);
+> +		return ret;
+> +	}
+> +
+> +	neutron_enable_irq(ndev);
+> +
+> +	return 0;
+> +}
+> +
+> +static const struct dev_pm_ops neutron_pm_ops = {
+> +	SYSTEM_SLEEP_PM_OPS(pm_runtime_force_suspend, pm_runtime_force_resume)
+> +	RUNTIME_PM_OPS(neutron_runtime_suspend, neutron_runtime_resume, NULL)
+> +};
+> +
+> +static const struct of_device_id neutron_match_table[] = {
+> +	{ .compatible = "nxp,imx95-neutron" },
+> +	{}
+> +};
+> +
+> +MODULE_DEVICE_TABLE(of, neutron_match_table);
+> +
+> +static struct platform_driver neutron_driver = {
+> +	.probe	= &neutron_probe,
+> +	.remove	= &neutron_remove,
+> +	.driver	= {
+> +		.name		= "neutron",
+> +		.of_match_table	= of_match_ptr(neutron_match_table),
 
-Keep consistent code, so lowercase hex.
+Drop of_match_ptr. You will have (or you have already same as v1) here
+warning.
 
-With these two fixed:
-
-Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-
+> +		.pm		= pm_ptr(&neutron_pm_ops),
+> +	},
+> +};
 Best regards,
 Krzysztof
 _______________________________________________
