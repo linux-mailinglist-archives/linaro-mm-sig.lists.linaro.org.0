@@ -2,38 +2,38 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id rerLB7p6rWmw3QEAu9opvQ
+	id Te79JZOJrWnL4AEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 08 Mar 2026 14:33:46 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 08 Mar 2026 15:37:07 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8DF2B2306CC
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 08 Mar 2026 14:33:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 18DD3230B84
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 08 Mar 2026 15:37:07 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4B7934016D
-	for <lists+linaro-mm-sig@lfdr.de>; Sun,  8 Mar 2026 13:33:44 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D30F1401C7
+	for <lists+linaro-mm-sig@lfdr.de>; Sun,  8 Mar 2026 14:37:05 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5A47A3F7EC
-	for <linaro-mm-sig@lists.linaro.org>; Sun,  8 Mar 2026 13:33:38 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7E36D3ED23
+	for <linaro-mm-sig@lists.linaro.org>; Sun,  8 Mar 2026 14:36:59 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: "Elizabeth Servideo" <lindseypaqed90@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Sun, 08 Mar 2026 13:33:38 -0000
-Message-ID: <177297681836.3590699.6459305883904831829@lists.linaro.org>
-In-Reply-To: <20260224103100.GI10607@unreal>
-References: <20260224103100.GI10607@unreal>
+Date: Sun, 08 Mar 2026 14:36:59 -0000
+Message-ID: <177298061951.3642948.127561411756844842@lists.linaro.org>
+In-Reply-To: <20260308101948.GO12611@unreal>
+References: <20260308101948.GO12611@unreal>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: EL7MKC5JJKSGLYC6WX5DGRCSVDR2RRPV
-X-Message-ID-Hash: EL7MKC5JJKSGLYC6WX5DGRCSVDR2RRPV
+Message-ID-Hash: WBAN4BRX3YAWKEVSG6NQE3RLNTBOGNIQ
+X-Message-ID-Hash: WBAN4BRX3YAWKEVSG6NQE3RLNTBOGNIQ
 X-MailFrom: lindseypaqed90@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v7 0/8] dma-buf: Use revoke mechanism to invalidate shared buffers
+Subject: [Linaro-mm-sig] Re: [PATCH net-next v3 1/2] dma-mapping: introduce DMA_ATTR_CC_DECRYPTED for pre-decrypted memory
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EL7MKC5JJKSGLYC6WX5DGRCSVDR2RRPV/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WBAN4BRX3YAWKEVSG6NQE3RLNTBOGNIQ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -41,7 +41,7 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Transfer-Encoding: base64
-X-Rspamd-Queue-Id: 8DF2B2306CC
+X-Rspamd-Queue-Id: 18DD3230B84
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [0.69 / 15.00];
 	MID_RHS_MATCH_TO(1.00)[];
@@ -65,9 +65,9 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_NONE(0.00)[];
 	R_DKIM_NA(0.00)[];
-	NEURAL_HAM(-0.00)[-0.930];
+	NEURAL_HAM(-0.00)[-0.938];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,outlook.com:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[outlook.com:url,lists.linaro.org:mid,lists.linaro.org:rdns,lists.linaro.org:helo]
 X-Rspamd-Action: no action
 
 PkZyb20gTG9zcyB0byBIb3BlOiBNeSBQYXRoIHRvIFJlY292ZXJ5DQoNCkkgd2FudCB0byBzaGFy
@@ -80,8 +80,8 @@ IG15IGZpbmFuY2VzIGJ1dCBhbHNvIGdhdmUgbWUgaG9wZSBhbmQgY29uZmlkZW5jZSB0byBtb3Zl
 IGZvcndhcmQuDQpNeSBzdG9yeSBzaG93cyB0aGF0IGV2ZW4gYWZ0ZXIgYSBiaWcgbG9zcywgd2l0
 aCBkZXRlcm1pbmF0aW9uIGFuZCB0aGUgcmlnaHQgaGVscCwgcmVjb3ZlcnkgaXMgcG9zc2libGUu
 IElmIHlvdSdyZSBzdHJ1Z2dsaW5nLCBkb27igJl0IGdpdmUgdXAg4oCUIHN1cHBvcnQgaXMgYXZh
-aWxhYmxlLg0KQ29udGFjdDogc2hhZG93cm9vdDQ3QG91dGxvb2suY29tDQpXaGF0c0FwcDogKzEg
-4oCqKDUzMCkgNDI1LTYwNTLigKwNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdA
-bGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1t
-bS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+aWxhYmxlLg0KQ29udGFjdDogc2hhZG93cm9vdDQ3IChAKSBvdXRsb29rLmNvbQ0KV2hhdHNBcHA6
+ICsxIOKAqig1MzApIDQyNS02MDUy4oCsDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0t
+c2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5h
+cm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
