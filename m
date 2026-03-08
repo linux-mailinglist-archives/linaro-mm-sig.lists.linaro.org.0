@@ -2,93 +2,144 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id kKKSIa2YrGlarAEAu9opvQ
+	id 2LskGllNrWn/1AEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 07 Mar 2026 22:29:17 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 08 Mar 2026 11:20:09 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2970722DB57
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 07 Mar 2026 22:29:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C71E122F4EC
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 08 Mar 2026 11:20:08 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DBD9A3F7E6
-	for <lists+linaro-mm-sig@lfdr.de>; Sat,  7 Mar 2026 21:29:15 +0000 (UTC)
-Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2668E3F7E4
-	for <linaro-mm-sig@lists.linaro.org>; Sat,  7 Mar 2026 21:29:09 +0000 (UTC)
-Content-Type: text/plain; charset="utf-8"
+	by lists.linaro.org (Postfix) with ESMTP id 4EE2F3ED23
+	for <lists+linaro-mm-sig@lfdr.de>; Sun,  8 Mar 2026 10:20:07 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+	by lists.linaro.org (Postfix) with ESMTPS id 613143ED23
+	for <linaro-mm-sig@lists.linaro.org>; Sun,  8 Mar 2026 10:19:53 +0000 (UTC)
+Authentication-Results: lists.linaro.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=F2DwgKES;
+	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=leon@kernel.org;
+	dmarc=pass (policy=quarantine) header.from=kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by sea.source.kernel.org (Postfix) with ESMTP id 8418B41AA5;
+	Sun,  8 Mar 2026 10:19:52 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B329DC116C6;
+	Sun,  8 Mar 2026 10:19:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1772965192;
+	bh=2rFD7sDu1Wtasy0MSqFkcujG/V06Q4133pzep9gFi5Q=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=F2DwgKESqYEHeq6xbQ9Y/4KnjfpT9egAUca/+6XgnSqcnIp+Laiy1Uwm+N8V9voBd
+	 fxcBXtB0ojzfBqRoHjyYn+btN53hl1eP2g+Jl3kEAF3iW/kTPJAKlqcJdjkY40fWj3
+	 BOVCrPGvleJYYxoXLHmOtzNbV7f0JY0Da4oaPUzLgTxfaDgwKlmmaF61Wrr9kkBIv/
+	 +9eat2/GKxxXdtyHMLFC0ycpvww03vxshsMyR+WyUIwUJgGYDRlp3Fc/rw0s5sAkSm
+	 +iRAx6RP4744nYEW727O46BGo4mqK33oWMhfaNBeKUFxhH4f8WJbCe/hP0cnU9rYOF
+	 QhjHbo17LHl1w==
+Date: Sun, 8 Mar 2026 12:19:48 +0200
+From: Leon Romanovsky <leon@kernel.org>
+To: Jiri Pirko <jiri@resnulli.us>
+Message-ID: <20260308101948.GO12611@unreal>
+References: <20260305123641.164164-1-jiri@resnulli.us>
+ <20260305123641.164164-2-jiri@resnulli.us>
 MIME-Version: 1.0
-From: "Yulie Morgan" <morganyulie64@gmail.com>
-To: linaro-mm-sig@lists.linaro.org
-Date: Sat, 07 Mar 2026 21:29:09 -0000
-Message-ID: <177291894915.2717788.5124347304091890483@lists.linaro.org>
-User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: 4G3YPYFJR35J4C2B6JI6NUCL7247QY73
-X-Message-ID-Hash: 4G3YPYFJR35J4C2B6JI6NUCL7247QY73
-X-MailFrom: morganyulie64@gmail.com
-X-Mailman-Rule-Hits: member-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
+Content-Disposition: inline
+In-Reply-To: <20260305123641.164164-2-jiri@resnulli.us>
+X-Spamd-Bar: ---
+Message-ID-Hash: SBNEPG3MEFK52MCP6GZX5337M7Z7SDIX
+X-Message-ID-Hash: SBNEPG3MEFK52MCP6GZX5337M7Z7SDIX
+X-MailFrom: leon@kernel.org
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, iommu@lists.linux.dev, linux-media@vger.kernel.org, sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, Brian.Starkey@arm.com, jstultz@google.com, tjmercier@google.com, christian.koenig@amd.com, robin.murphy@arm.com, jgg@ziepe.ca, sean.anderson@linux.dev, ptesarik@suse.com, catalin.marinas@arm.com, aneesh.kumar@kernel.org, suzuki.poulose@arm.com, steven.price@arm.com, thomas.lendacky@amd.com, john.allen@amd.com, ashish.kalra@amd.com, suravee.suthikulpanit@amd.com, linux-coco@lists.linux.dev
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] =?utf-8?q?Cryptera_Chain_Signals_Summary_=E2=80=93_Focus_On_Transparency_During_Recovery_Process?=
+Subject: [Linaro-mm-sig] Re: [PATCH net-next v3 1/2] dma-mapping: introduce DMA_ATTR_CC_DECRYPTED for pre-decrypted memory
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4G3YPYFJR35J4C2B6JI6NUCL7247QY73/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SBNEPG3MEFK52MCP6GZX5337M7Z7SDIX/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Transfer-Encoding: base64
-X-Rspamd-Queue-Id: 2970722DB57
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Queue-Id: C71E122F4EC
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.69 / 15.00];
-	MID_RHS_MATCH_TO(1.00)[];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+X-Spamd-Result: default: False [2.49 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
+	R_DKIM_REJECT(1.00)[kernel.org:s=k20201202];
+	MID_RHS_NOT_FQDN(0.50)[];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
-	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	ARC_NA(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	MIME_TRACE(0.00)[0:+];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	RCPT_COUNT_ONE(0.00)[1];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_NEQ_ENVFROM(0.00)[morganyulie64@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	ARC_NA(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCPT_COUNT_TWELVE(0.00)[24];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[kernel.org:-];
+	NEURAL_SPAM(0.00)[0.691];
+	TO_DN_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[leon@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_NONE(0.00)[];
-	R_DKIM_NA(0.00)[];
-	NEURAL_HAM(-0.00)[-0.930];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[crypterachainsignals.com:url,crypterachainsignals.com:email,linaro.org:email,lists.linaro.org:mid,lists.linaro.org:rdns,lists.linaro.org:helo]
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo]
 X-Rspamd-Action: no action
 
-QWZ0ZXIgZXhwZXJpZW5jaW5nIGEgYnJpZGdlIGV4cGxvaXQgSSB3b3JrZWQgd2l0aCBDcnlwdGVy
-YSBDaGFpbiBTaWduYWxzIHRvIHVuZGVyc3RhbmQgdGhlIG1vdmVtZW50IG9mIGZ1bmRzLiBUaGVp
-ciBwcm9jZXNzIHdhcyB0cmFuc3BhcmVudCBmcm9tIGRheSBvbmU6IHNlY3VyZSBpbnRha2UsIGRl
-dGFpbGVkIG1hcHBpbmcgd2l0aCBtdWx0aS1sYXllciBhdHRyaWJ1dGlvbiwgYW5kIHJlZ3VsYXIg
-dXBkYXRlcyB3aXRoIHZpc3VhbCBleHBsYW5hdGlvbnMuIFRoZXkgc2hvd2VkIGhvdyBjcm9zcy1j
-aGFpbiBob3BzIGNvbXBsaWNhdGVkIHRoZSB0cmFpbCBhbmQgd2h5IHNvbWUgcGF0aHMgcmVhY2gg
-bmF0dXJhbCBsaW1pdHMuDQpUaGUgZWR1Y2F0aW9uYWwgZGlzY3Vzc2lvbnMgaGVscGVkIG1lIGdy
-YXNwIGJyb2FkZXIgY29uY2VwdHMg4oCUIGltbXV0YWJsZSByZWNvcmRzLCBwYXR0ZXJuIGRldGVj
-dGlvbiwgYW5kIGJlaGF2aW9yYWwgYW5hbHlzaXMuIFJhdGhlciB0aGFuIHRlY2huaWNhbCBvdmVy
-bG9hZCwgdGhlIGV4cGxhbmF0aW9ucyBmb2N1c2VkIG9uIHdoYXQgZWFjaCBzdGVwIHJldmVhbGVk
-IGFib3V0IHRoZSBpbmNpZGVudC4gUmVjb3Zlcnkgb3B0aW9ucyB3ZXJlIGxpbWl0ZWQgYnkgdGlt
-aW5nLCBidXQgdGhlIGNsYXJpdHkgcmVtb3ZlZCBndWVzc3dvcmsuDQpJIHBhcnRpY3VsYXJseSBh
-cHByZWNpYXRlZCB0aGUgcHJhY3RpY2FsIHNlY3VyaXR5IGFkdmljZSB0aGF0IGZvbGxvd2VkOiBo
-YXJkd2FyZSB3YWxsZXQgcmVjb21tZW5kYXRpb25zLCBzZWVkIHBocmFzZSBwcm90ZWN0aW9uLCBh
-bmQgY2hlY2tzIGZvciBhbm9tYWxvdXMgYWN0aXZpdHkuIFRoZXNlIGJlY2FtZSBwYXJ0IG9mIG15
-IHJvdXRpbmUuIFRoZSBlbmdhZ2VtZW50IHdhcyBwcm9mZXNzaW9uYWwsIGluZm9ybWF0aXZlLCBh
-bmQgZnJlZSBvZiBwcmVzc3VyZS4gSXQgcHJvdmlkZWQgYm90aCBhIGZhY3R1YWwgYWNjb3VudCBv
-ZiB0aGUgbG9zcyBhbmQgbGFzdGluZyBpbnNpZ2h0cyBpbnRvIHNhZmVyIGNyeXB0byBwcmFjdGlj
-ZXMuDQpDcnlwdGVyYSBDaGFpbiBTaWduYWxzDQpXZWJzaXRlOiBodHRwczovL3d3dy5jcnlwdGVy
-YWNoYWluc2lnbmFscy5jb20NCkVtYWlsOiBpbmZvQGNyeXB0ZXJhY2hhaW5zaWduYWxzLmNvbQ0K
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1t
-LXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVu
-c3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5h
-cm8ub3JnCg==
+On Thu, Mar 05, 2026 at 01:36:40PM +0100, Jiri Pirko wrote:
+> From: Jiri Pirko <jiri@nvidia.com>
+> 
+> Current CC designs don't place a vIOMMU in front of untrusted devices.
+> Instead, the DMA API forces all untrusted device DMA through swiotlb
+> bounce buffers (is_swiotlb_force_bounce()) which copies data into
+> decrypted memory on behalf of the device.
+> 
+> When a caller has already arranged for the memory to be decrypted
+> via set_memory_decrypted(), the DMA API needs to know so it can map
+> directly using the unencrypted physical address rather than bounce
+> buffering. Following the pattern of DMA_ATTR_MMIO, add
+> DMA_ATTR_CC_DECRYPTED for this purpose. Like the MMIO case, only the
+> caller knows what kind of memory it has and must inform the DMA API
+> for it to work correctly.
+> 
+> Signed-off-by: Jiri Pirko <jiri@nvidia.com>
+> ---
+> v1->v2:
+> - rebased on top of recent dma-mapping-fixes
+> ---
+>  include/linux/dma-mapping.h |  6 ++++++
+>  include/trace/events/dma.h  |  3 ++-
+>  kernel/dma/direct.h         | 14 +++++++++++---
+>  3 files changed, 19 insertions(+), 4 deletions(-)
+> 
+> diff --git a/include/linux/dma-mapping.h b/include/linux/dma-mapping.h
+> index 29973baa0581..ae3d85e494ec 100644
+> --- a/include/linux/dma-mapping.h
+> +++ b/include/linux/dma-mapping.h
+> @@ -85,6 +85,12 @@
+>   * a cacheline must have this attribute for this to be considered safe.
+>   */
+>  #define DMA_ATTR_CPU_CACHE_CLEAN	(1UL << 11)
+> +/*
+> + * DMA_ATTR_CC_DECRYPTED: Indicates memory that has been explicitly decrypted
+> + * (shared) for confidential computing guests. The caller must have
+> + * called set_memory_decrypted(). A struct page is required.
+> + */
+> +#define DMA_ATTR_CC_DECRYPTED	(1UL << 12)
+
+While adding the new attribute is fine, I would expect additional checks in
+dma_map_phys() to ensure the attribute cannot be misused. For example,
+WARN_ON(attrs & (DMA_ATTR_CC_DECRYPTED | DMA_ATTR_MMIO)), along with a check
+that we are taking the direct path only.
+
+Thanks
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
