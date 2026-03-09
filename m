@@ -2,177 +2,198 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 0MEWDDVe5mndvQEAu9opvQ
+	id MFvHJWBf5mkWvgEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:11:17 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:16:16 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id AAA78430AD1
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:11:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 57653430DDD
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:16:16 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B4D68406EC
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:06:08 +0000 (UTC)
-Received: from mail-yx1-f41.google.com (mail-yx1-f41.google.com [74.125.224.41])
-	by lists.linaro.org (Postfix) with ESMTPS id 753523F702
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  9 Mar 2026 15:39:56 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9815E40699
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:06:16 +0000 (UTC)
+Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com [148.163.158.5])
+	by lists.linaro.org (Postfix) with ESMTPS id 2D0E83F826
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  9 Mar 2026 17:47:27 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=google.com header.s=20230601 header.b=HPFLeLEA;
-	arc=pass ("google.com:s=arc-20240605:i=1");
-	spf=pass (lists.linaro.org: domain of pgonda@google.com designates 74.125.224.41 as permitted sender) smtp.mailfrom=pgonda@google.com;
-	dmarc=pass (policy=reject) header.from=google.com
-Received: by mail-yx1-f41.google.com with SMTP id 956f58d0204a3-64ca4dfdd88so11484274d50.0
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 09 Mar 2026 08:39:56 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773070796; cv=none;
-        d=google.com; s=arc-20240605;
-        b=OHy1Er9bilTLCRadU1SPmFidMwqlnhY9kkuNru0g2HTRWIxf+1Z6mgpoGU2DjtAmBF
-         zskHlMNCVzpy7kiChx3se/Krs61cySYGaeraTzBiuEAokhih/fxSNHyh0VKl2bc0beYb
-         pe5Wj4KAXUhCiaLKox6pDOuLAOyMQIHTRa8VeLj9XWuidA84HxHSfetSog+5zcwFuUcr
-         NpAhOfTx+gR8Om1lyy0ObIUUU6J+70u+EiqL/ikHPdG/HxPbriHd3r1FYBWh7daUhj0J
-         Y3UUlZCSxgrHSoXj07VKS0Db9c97KS6MBbcjs1VWIMQJbwD/KxW2eR9jfQq3qpaMs4go
-         AXAQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=MvLYcYLZmHSPzURtRpTfKGpAse3rZ5uBdKhXxFZ9chA=;
-        fh=ZeBufP8I8XGGqWTc9TO+4/y8+OV/5n1804waUR6GDZQ=;
-        b=A6DDsMWZx35Qmfsd/aolU9YIRjQNTyeCgGzSpgfsZbfCDlV3Xdp83kO8XzFyDLGdlZ
-         98bMD/IFeuwXih10ebBGy+6cv5Z1qJxQ+MwfMEbp8FRA9GsF1KGP9xIgrCVRXsBr/qwN
-         vgDzP1qWbNH0Nyayv2UMPXYah8GHAr6VSvQgrQD10fOcPwJ3fJ3Emm3P9BVwTYVOle1x
-         frnXKDdu7QcOrWhM6pXg15qeomjbmy9dZ8nibGsYZE3M7K6/2NhiqDZR0VG156qQ/B3k
-         qVCIz7xGUBNFb31ORbdavJgbWlVqU4etmNVu3wOhIc1w1nm3WTpxgxeK//V4beau0Fpe
-         ZiDg==;
-        darn=lists.linaro.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1773070796; x=1773675596; darn=lists.linaro.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=MvLYcYLZmHSPzURtRpTfKGpAse3rZ5uBdKhXxFZ9chA=;
-        b=HPFLeLEAIBBZJvN06ctzvvpZferHcH+Uhst9mg0yPhuk37xsXouDEMY4bEPOGyd1m4
-         rEuzSaRfGuqL0zbxlvTFLc1weMA/fYwKUNqBCizVa8ntyhCSA7I8EbyqANLQMINyZmz2
-         9IyqxRorJmZyjefrf0Deo/2DgB12kCwk5BOmF4JNv9jAUCpTbwOB0pd7Y/4gyt3IechM
-         Oml+5Xk5piJ5QxnvlBnat2v9KdAKh5l7+vvMbgNLtszXGcpawiApLV1hfmDr3ddoF6rL
-         snC1ceVDwa67wu7K2jeM9FCVremM9vLERB7/HQc+98fuuy5SBLiPLxeMPQHqsgdbLHs3
-         EJ8A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1773070796; x=1773675596;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=MvLYcYLZmHSPzURtRpTfKGpAse3rZ5uBdKhXxFZ9chA=;
-        b=RJrsLZF5SSw6kPaX6InqzFsZYC+PrGMPKT+ACuoqE1d3+RcLsGdxyVlRGuuJIKOLSC
-         6JOIepHITEU91XcJuJ2x/kd85FKP2wfEZgSHeaCU9XVYgpQCQ9FKkR3AEfxDAZhSZBbe
-         mBDIsd1w5iPcxnVfBV2fH0Pf8MMiRzQI/YJnO5UCqqnBd1XLK52KUF85dX/gaxs3vsvx
-         SgsvVd2Y2MKKfq0ujuyLbCBzHmfGyKAcbbO4uWUykw7RR8lYQq5Zx3Ke3g85QFFJpmDa
-         gcoSs4XEf9KEVnB6+q07MriMAIsMBCCzjWLPhQfMsGuKIG2jxE3fB0jKQzjYD+hzDTAq
-         z1Sg==
-X-Forwarded-Encrypted: i=1; AJvYcCX31xCWCmrPQimowle8vAaF84j3NXtAlW8PRocNvKEjPOvOkloJoWw+HUnsxB+cTwaLT+cunUluQ4YHKPrw@lists.linaro.org
-X-Gm-Message-State: AOJu0YzfG0obbNtWNAjeH9kZQlg3LCFIHuxWcS5aTJAI0holyTWEbt1F
-	Ygp+G1OYqWy+xXoUK5F9C9o1R0PlmZ7PdVtS7aNk/xH7L8Pvy175xiSWeiH+HJCZIQY7HRHTp5F
-	BMZrW5JyHgUBa1m1Bd3LBdkzJLWmqQiNmv3wAWF3D
-X-Gm-Gg: ATEYQzzpvL82GfHYy1ZwFJqmDSbU4S8ADqe6BmiDSliEsQv8O6+928RbLHbBDDIpGwU
-	wsgMCU6LrYJ8P8RpRtq23C2vtq/ha3qztK6vMQOHU7zz54l4VdYhpPQqJ9XjYXA4qtyPnB115lY
-	7xSb2gsjEiKfXzcHUcW7ay71PF+3ShAbp5Uux+qzy5ZoTrzsrMEELvUqZExDl5Yb/rnu1VZM4G2
-	xWxmGHSgrmNtShe1cS+DCzxgQf4m0RCz7ebIXWg1ykFnCyI1EOSkUvWrmbRUUqjIWMiqwAV4PMI
-	3rswjcHEQhWcXNdrkoR3+s9cD/Q0+foePSzWIbMqwAPf3yvk
-X-Received: by 2002:a05:690e:16cc:b0:64d:29c6:7974 with SMTP id
- 956f58d0204a3-64d29c67a27mr3174372d50.11.1773070795335; Mon, 09 Mar 2026
- 08:39:55 -0700 (PDT)
+	dkim=pass header.d=ibm.com header.s=pp1 header.b=O46FAzGv;
+	spf=pass (lists.linaro.org: domain of zohar@linux.ibm.com designates 148.163.158.5 as permitted sender) smtp.mailfrom=zohar@linux.ibm.com;
+	dmarc=pass (policy=none) header.from=ibm.com
+Received: from pps.filterd (m0360072.ppops.net [127.0.0.1])
+	by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 629F7to91275175;
+	Mon, 9 Mar 2026 17:47:15 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+	:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=pp1; bh=k/HLlQ
+	fqfXVQs+Pamcq/LePEaOpgjPTSxe75E2LQHmw=; b=O46FAzGvsE2YmZ6439UqTH
+	f//oqGS2NuJoB8xY2lcg12hMD2aNtQ4ID9XxubauhUUNB5XWruUCNbrIED9U/sy2
+	gQV+VyjgSVjVmAG4Kam45dqeg/cEF7wexHdqP7q6amhZ86wA+YW4+a7JvMwqNGHX
+	K+CR1szr/+ThnSfgYQtyXM8JHrNaKlVVJxj2UpO9B9nfw7GY0lpUaQgYj3FXUBhW
+	hCYFfYxjosdklAtClo/CAOyDK0Kz8Ak4d419uQhCeU81c/npAiEGpAq1IaGDP95R
+	6czGdohxtpKDTNPNp0U2JdVL6ApX0w6YBruEMYsSerjEZYuw8x9syT1jr4FLueng
+	==
+Received: from ppma11.dal12v.mail.ibm.com (db.9e.1632.ip4.static.sl-reverse.com [50.22.158.219])
+	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4crcvr7huu-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Mon, 09 Mar 2026 17:47:15 +0000 (GMT)
+Received: from pps.filterd (ppma11.dal12v.mail.ibm.com [127.0.0.1])
+	by ppma11.dal12v.mail.ibm.com (8.18.1.2/8.18.1.2) with ESMTP id 629FqYI5015725;
+	Mon, 9 Mar 2026 17:47:14 GMT
+Received: from smtprelay04.wdc07v.mail.ibm.com ([172.16.1.71])
+	by ppma11.dal12v.mail.ibm.com (PPS) with ESMTPS id 4cs121wp59-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Mon, 09 Mar 2026 17:47:14 +0000
+Received: from smtpav03.wdc07v.mail.ibm.com (smtpav03.wdc07v.mail.ibm.com [10.39.53.230])
+	by smtprelay04.wdc07v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 629HlDVJ60162522
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Mon, 9 Mar 2026 17:47:13 GMT
+Received: from smtpav03.wdc07v.mail.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 5E5775805A;
+	Mon,  9 Mar 2026 17:47:13 +0000 (GMT)
+Received: from smtpav03.wdc07v.mail.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 4442758054;
+	Mon,  9 Mar 2026 17:47:09 +0000 (GMT)
+Received: from li-43857255-d5e6-4659-90f1-fc5cee4750ad.ibm.com (unknown [9.61.72.80])
+	by smtpav03.wdc07v.mail.ibm.com (Postfix) with ESMTP;
+	Mon,  9 Mar 2026 17:47:09 +0000 (GMT)
+Message-ID: <05b5d55c49b5a1bbc43a5315e3c84872e7e634b3.camel@linux.ibm.com>
+From: Mimi Zohar <zohar@linux.ibm.com>
+To: Jeff Layton <jlayton@kernel.org>
+In-Reply-To: <20260304-iino-u64-v3-0-2257ad83d372@kernel.org>
+References: <20260304-iino-u64-v3-0-2257ad83d372@kernel.org>
+Date: Mon, 09 Mar 2026 13:47:08 -0400
 MIME-Version: 1.0
-References: <20260305123641.164164-1-jiri@resnulli.us> <20260305123641.164164-3-jiri@resnulli.us>
-In-Reply-To: <20260305123641.164164-3-jiri@resnulli.us>
-From: Peter Gonda <pgonda@google.com>
-Date: Mon, 9 Mar 2026 09:39:44 -0600
-X-Gm-Features: AaiRm51h3c_DzKOKsC7CokIZvNyOKydjIyhi9bVIzEGXBlmxcqpV-AFuGedzucs
-Message-ID: <CAMkAt6o_yZ5T-3TRwymjYQZEq-Q_z=DAA3vc61h81X9sQr_CXA@mail.gmail.com>
-To: Jiri Pirko <jiri@resnulli.us>
-X-Spamd-Bar: ----
-X-MailFrom: pgonda@google.com
+User-Agent: Evolution 3.56.2 (3.56.2-2.fc42) 
+X-TM-AS-GCONF: 00
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzA5MDE1OCBTYWx0ZWRfX4MWriKER56jj
+ FHMwPduc6Ya80ytljBjcJCflJZJQpLHypO90MyIljV3F+YGnUEWqD2zkjjI4tBlT1Isyk88nQqD
+ Bxsi6y6lZ0wNsui73O82C4s92lOeLYZxoPRW/EZDUOjQSMymQTWQJKaIWTXxL4ETx9VAdofRsxH
+ 1pntH+n6NhQwxXW3M12fPcKiL5ADcuXldDKiDw4m+7ix+qwvBlo3nspOLghaJ2LE6mxrOiKA5Lh
+ GMTERNprgwZauxVcqC/p8dLI9p6C/LOkJmscaf6mdPih3AOPO2LV5vS62FSOrim10LguG5ezUsF
+ rdAkmDzMNpwcB3l0gkLlsufFyGUR7bS4yrPNzNHAbiSDJiUdpsUzX7AZ0qjMDEeQhvmbO0coQJz
+ 4Dc1QnM6RvCUkwZGaB0uRcWv6crLl/+68sTOTDKRYLJY7AFXUTAN+lczmFotg9pSQAz65D+NPWn
+ mWAaXfwB8yIBs0IZagQ==
+X-Proofpoint-GUID: k-5kS7gQwSwb7EbHSrKEnUBgm0EngagK
+X-Proofpoint-ORIG-GUID: k-5kS7gQwSwb7EbHSrKEnUBgm0EngagK
+X-Authority-Analysis: v=2.4 cv=QoFTHFyd c=1 sm=1 tr=0 ts=69af07a3 cx=c_pps
+ a=aDMHemPKRhS1OARIsFnwRA==:117 a=aDMHemPKRhS1OARIsFnwRA==:17
+ a=IkcTkHD0fZMA:10 a=Yq5XynenixoA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=RnoormkPH1_aCDwRdu11:22 a=RzCfie-kr_QcCd8fBx8p:22 a=VwQbUJbxAAAA:8
+ a=x61hcHDQ_TxU8J0rBBAA:9 a=QEXdDO2ut3YA:10
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-03-09_04,2026-03-09_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 spamscore=0 priorityscore=1501 phishscore=0
+ lowpriorityscore=0 adultscore=0 clxscore=1011 malwarescore=0 suspectscore=0
+ bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2602130000
+ definitions=main-2603090158
+X-Spamd-Bar: -----
+X-MailFrom: zohar@linux.ibm.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 4EERI2JGLTNKVJ2FREEIY5XXUD3IHB4G
-X-Message-ID-Hash: 4EERI2JGLTNKVJ2FREEIY5XXUD3IHB4G
-X-Mailman-Approved-At: Mon, 20 Apr 2026 17:04:17 +0000
-CC: dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, iommu@lists.linux.dev, linux-media@vger.kernel.org, sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, Brian.Starkey@arm.com, jstultz@google.com, tjmercier@google.com, christian.koenig@amd.com, robin.murphy@arm.com, jgg@ziepe.ca, leon@kernel.org, sean.anderson@linux.dev, ptesarik@suse.com, catalin.marinas@arm.com, aneesh.kumar@kernel.org, suzuki.poulose@arm.com, steven.price@arm.com, thomas.lendacky@amd.com, john.allen@amd.com, ashish.kalra@amd.com, suravee.suthikulpanit@amd.com, linux-coco@lists.linux.dev
+Message-ID-Hash: ZUWQVFN3AF47GGAW73QIGED4QBKGEWJX
+X-Message-ID-Hash: ZUWQVFN3AF47GGAW73QIGED4QBKGEWJX
+X-Mailman-Approved-At: Mon, 20 Apr 2026 17:04:18 +0000
+CC: linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, nvdimm@lists.linux.dev, fsverity@lists.linux.dev, linux-mm@kvack.org, netfs@lists.linux.dev, linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net, linux-nfs@vger.kernel.org, linux-cifs@vger.kernel.org, samba-technical@lists.samba.org, linux-nilfs@vger.kernel.org, v9fs@lists.linux.dev, linux-afs@lists.infradead.org, autofs@vger.kernel.org, ceph-devel@vger.kernel.org, codalist@coda.cs.cmu.edu, ecryptfs@vger.kernel.org, linux-mtd@lists.infradead.org, jfs-discussion@lists.sourceforge.net, ntfs3@lists.linux.dev, ocfs2-devel@lists.linux.dev, devel@lists.orangefs.org, linux-unionfs@vger.kernel.org, apparmor@lists.ubuntu.com, linux-security-module@vger.kernel.org, linux-integrity@vger.kernel.org, selinux@vger.kernel.org, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, netdev@vger.kernel.org, linux-perf-
+ users@vger.kernel.org, linux-fscrypt@vger.kernel.org, linux-xfs@vger.kernel.org, linux-hams@vger.kernel.org, linux-x25@vger.kernel.org, audit@vger.kernel.org, linux-bluetooth@vger.kernel.org, linux-can@vger.kernel.org, linux-sctp@vger.kernel.org, bpf@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH net-next v3 2/2] dma-buf: heaps: system: add system_cc_decrypted heap for explicitly decrypted memory
+Subject: [Linaro-mm-sig] Re: [PATCH v3 00/12] vfs: change inode->i_ino from unsigned long to u64
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4EERI2JGLTNKVJ2FREEIY5XXUD3IHB4G/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZUWQVFN3AF47GGAW73QIGED4QBKGEWJX/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-X-Spamd-Result: default: False [3.59 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[google.com : SPF not aligned (relaxed), No valid DKIM,reject];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:google.com:reject}];
-	DATE_IN_PAST(1.00)[1009];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [1.59 / 15.00];
+	DATE_IN_PAST(1.00)[1007];
+	R_DKIM_REJECT(1.00)[ibm.com:s=pp1];
 	MAILLIST(-0.20)[mailman];
-	MIME_BASE64_TEXT(0.10)[];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[ibm.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	MISSING_XM_UA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[25];
-	TO_DN_SOME(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	NEURAL_SPAM(0.00)[0.932];
-	FROM_HAS_DN(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	FROM_NEQ_ENVFROM(0.00)[pgonda@google.com,linaro-mm-sig-bounces@lists.linaro.org];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
+	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[45];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,linux.ibm.com:mid,lists.linaro.org:helo,lists.linaro.org:rdns];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,mail.gmail.com:mid,linaro.org:email,nvidia.com:email,resnulli.us:email]
-X-Rspamd-Queue-Id: AAA78430AD1
+	TO_DN_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[zohar@linux.ibm.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[ibm.com:-];
+	NEURAL_HAM(-0.00)[-0.985];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	RCVD_COUNT_SEVEN(0.00)[10]
+X-Rspamd-Queue-Id: 57653430DDD
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-R3JlYXQgZmVhdHVyZSB0byBoYXZlIHRoYW5rcyBKaXJpISBBIGNvdXBsZSBuYWl2ZSBxdWVzdGlv
-bnMuDQoNCk9uIFRodSwgTWFyIDUsIDIwMjYgYXQgNTozOOKAr0FNIEppcmkgUGlya28gPGppcmlA
-cmVzbnVsbGkudXM+IHdyb3RlOg0KPg0KPiBGcm9tOiBKaXJpIFBpcmtvIDxqaXJpQG52aWRpYS5j
-b20+DQo+DQo+IEFkZCBhIG5ldyAic3lzdGVtX2NjX2RlY3J5cHRlZCIgZG1hLWJ1ZiBoZWFwIHRv
-IGFsbG93IHVzZXJzcGFjZSB0bw0KPiBhbGxvY2F0ZSBkZWNyeXB0ZWQgKHNoYXJlZCkgbWVtb3J5
-IGZvciBjb25maWRlbnRpYWwgY29tcHV0aW5nIChDb0NvKQ0KPiBWTXMuDQo+DQo+IE9uIENvQ28g
-Vk1zLCBndWVzdCBtZW1vcnkgaXMgZW5jcnlwdGVkIGJ5IGRlZmF1bHQuIFRoZSBoYXJkd2FyZSB1
-c2VzIGFuDQo+IGVuY3J5cHRpb24gYml0IGluIHBhZ2UgdGFibGUgZW50cmllcyAoQy1iaXQgb24g
-QU1EIFNFViwgInNoYXJlZCIgYml0IG9uDQo+IEludGVsIFREWCkgdG8gY29udHJvbCB3aGV0aGVy
-IGEgZ2l2ZW4gbWVtb3J5IGFjY2VzcyBpcyBlbmNyeXB0ZWQgb3INCj4gZGVjcnlwdGVkLiBUaGUg
-a2VybmVsJ3MgZGlyZWN0IG1hcCBpcyBzZXQgdXAgd2l0aCBlbmNyeXB0aW9uIGVuYWJsZWQsDQo+
-IHNvIHBhZ2VzIHJldHVybmVkIGJ5IGFsbG9jX3BhZ2VzKCkgYXJlIGVuY3J5cHRlZCBpbiB0aGUg
-ZGlyZWN0IG1hcA0KPiBieSBkZWZhdWx0LiBUbyBtYWtlIHRoaXMgbWVtb3J5IHVzYWJsZSBmb3Ig
-ZGV2aWNlcyB0aGF0IGRvIG5vdCBzdXBwb3J0DQo+IERNQSB0byBlbmNyeXB0ZWQgbWVtb3J5IChu
-byBURElTUCBzdXBwb3J0KSwgaXQgaGFzIHRvIGJlIGV4cGxpY2l0bHkNCj4gZGVjcnlwdGVkLiBB
-IGNvdXBsZSBvZiB0aGluZ3MgYXJlIG5lZWRlZCB0byBwcm9wZXJseSBoYW5kbGUNCj4gZGVjcnlw
-dGVkIG1lbW9yeSBmb3IgdGhlIGRtYS1idWYgdXNlIGNhc2U6DQo+DQo+IC0gc2V0X21lbW9yeV9k
-ZWNyeXB0ZWQoKSBvbiB0aGUgZGlyZWN0IG1hcCBhZnRlciBhbGxvY2F0aW9uOg0KPiAgIEJlc2lk
-ZXMgY2xlYXJpbmcgdGhlIGVuY3J5cHRpb24gYml0IGluIHRoZSBkaXJlY3QgbWFwIFBURXMsIHRo
-aXMNCj4gICBhbHNvIG5vdGlmaWVzIHRoZSBoeXBlcnZpc29yIGFib3V0IHRoZSBwYWdlIHN0YXRl
-IGNoYW5nZS4gT24gZnJlZSwNCj4gICB0aGUgaW52ZXJzZSBzZXRfbWVtb3J5X2VuY3J5cHRlZCgp
-IG11c3QgYmUgY2FsbGVkIGJlZm9yZSByZXR1cm5pbmcNCj4gICBwYWdlcyB0byB0aGUgYWxsb2Nh
-dG9yLiBJZiByZS1lbmNyeXB0aW9uIGZhaWxzLCBwYWdlcw0KPiAgIGFyZSBpbnRlbnRpb25hbGx5
-IGxlYWtlZCB0byBwcmV2ZW50IGRlY3J5cHRlZCBtZW1vcnkgZnJvbSBiZWluZw0KPiAgIHJldXNl
-ZCBhcyBwcml2YXRlLg0KPg0KPiAtIHBncHJvdF9kZWNyeXB0ZWQoKSBmb3IgdXNlcnNwYWNlIGFu
-ZCBrZXJuZWwgdmlydHVhbCBtYXBwaW5nczoNCj4gICBBbnkgbmV3IG1hcHBpbmcgb2YgdGhlIGRl
-Y3J5cHRlZCBwYWdlcywgYmUgaXQgdG8gdXNlcnNwYWNlIHZpYQ0KPiAgIG1tYXAgb3IgdG8ga2Vy
-bmVsIHZtYWxsb2Mgc3BhY2UgdmlhIHZtYXAsIGNyZWF0ZXMgUFRFcyBpbmRlcGVuZGVudA0KPiAg
-IG9mIHRoZSBkaXJlY3QgbWFwLiBUaGVzZSBtdXN0IGFsc28gaGF2ZSB0aGUgZW5jcnlwdGlvbiBi
-aXQgY2xlYXJlZCwNCj4gICBvdGhlcndpc2UgYWNjZXNzZXMgdGhyb3VnaCB0aGVtIHdvdWxkIHNl
-ZSBlbmNyeXB0ZWQgKGdhcmJhZ2UpIGRhdGEuDQoNClNvIHRoaXMgb25seSB3b3JrcyBvbiBuZXcg
-bWFwcGluZ3M/IFdoYXQgaWYgdGhlcmUgYXJlIGV4aXN0aW5nDQptYXBwaW5ncyB0byB0aGUgbWVt
-b3J5IHRoYXQgd2lsbCBiZSBjb252ZXJ0ZWQgdG8gc2hhcmVkPw0KDQpJdCdzIGFsc28gc2xpZ2h0
-bHkgd29yc2UgdGhhbiBqdXN0IHJlYWRpbmcgY2lwaGVydGV4dC4gSWYgYW5vdGhlcg0KcHJvY2Vz
-cyB3cml0ZXMgdG8gdGhlIG1lbW9yeSB3aXRoIHRoZSBpbmNvcnJlY3QgbWFwcGluZyBpdCBjb3Vs
-ZCBjYXVzZQ0KY29ycnVwdGlvbiBvbiBBTUQgU0VWLCBvciBhbiBSTVAgdmlvbGF0aW9uIG9uIEFN
-RCBTRVYtU05QLiBDYW4gd2UNCnVwZGF0ZSB0aGUgZXhpc3RpbmcgbWFwcGluZ3M/DQpfX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1h
-aWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3Jp
-YmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+[ I/O socket time out.  Trimming the To list.]
+
+On Wed, 2026-03-04 at 10:32 -0500, Jeff Layton wrote:
+> This version squashes all of the format-string changes and the i_ino
+> type change into the same patch. This results in a giant 600+ line patch
+> at the end of the series, but it does remain bisectable.  Because the
+> patchset was reorganized (again) some of the R-b's and A-b's have been
+> dropped.
+> 
+> The entire pile is in the "iino-u64" branch of my tree, if anyone is
+> interested in testing this.
+> 
+>     https://git.kernel.org/pub/scm/linux/kernel/git/jlayton/linux.git/
+> 
+> Original cover letter follows:
+> 
+> ----------------------8<-----------------------
+> 
+> Christian said [1] to "just do it" when I proposed this, so here we are!
+> 
+> For historical reasons, the inode->i_ino field is an unsigned long,
+> which means that it's 32 bits on 32 bit architectures. This has caused a
+> number of filesystems to implement hacks to hash a 64-bit identifier
+> into a 32-bit field, and deprives us of a universal identifier field for
+> an inode.
+> 
+> This patchset changes the inode->i_ino field from an unsigned long to a
+> u64. This shouldn't make any material difference on 64-bit hosts, but
+> 32-bit hosts will see struct inode grow by at least 4 bytes. This could
+> have effects on slabcache sizes and field alignment.
+> 
+> The bulk of the changes are to format strings and tracepoints, since the
+> kernel itself doesn't care that much about the i_ino field. The first
+> patch changes some vfs function arguments, so check that one out
+> carefully.
+> 
+> With this change, we may be able to shrink some inode structures. For
+> instance, struct nfs_inode has a fileid field that holds the 64-bit
+> inode number. With this set of changes, that field could be eliminated.
+> I'd rather leave that sort of cleanups for later just to keep this
+> simple.
+> 
+> Much of this set was generated by LLM, but I attributed it to myself
+> since I consider this to be in the "menial tasks" category of LLM usage.
+> 
+> [1]: https://lore.kernel.org/linux-fsdevel/20260219-portrait-winkt-959070cee42f@brauner/
+> 
+> Signed-off-by: Jeff Layton <jlayton@kernel.org>
+
+Jeff, missing from this patch set is EVM.  In hmac_add_misc() EVM copies the
+i_ino and calculates either an HMAC or file meta-data hash, which is then
+signed. 
+
+Mimi
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
