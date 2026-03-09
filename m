@@ -2,35 +2,35 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id UKkoAWY4r2knSQIAu9opvQ
+	id 6KRYGqY4r2kPQQIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 09 Mar 2026 22:15:18 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 09 Mar 2026 22:16:22 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7705E2417DD
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 09 Mar 2026 22:15:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DF01D241808
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 09 Mar 2026 22:16:21 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 91FEC401BB
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  9 Mar 2026 21:15:16 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id F420B3F9BE
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  9 Mar 2026 21:16:20 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id ADD623F9BE
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  9 Mar 2026 21:15:09 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7BE2C3F9BE
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  9 Mar 2026 21:16:14 +0000 (UTC)
 MIME-Version: 1.0
 From: "Chong Criston" <chongcriston@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Mon, 09 Mar 2026 21:15:09 -0000
-Message-ID: <177309090971.1163008.14593782413652529215@lists.linaro.org>
+Date: Mon, 09 Mar 2026 21:16:14 -0000
+Message-ID: <177309097450.1164308.12984562719326258473@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: AAVRHSRD7IGBDOTWBRYYO72JO3JTXAZS
-X-Message-ID-Hash: AAVRHSRD7IGBDOTWBRYYO72JO3JTXAZS
+Message-ID-Hash: DELTU4MX4HUXAFCWS6L5RHMGTJXF3INC
+X-Message-ID-Hash: DELTU4MX4HUXAFCWS6L5RHMGTJXF3INC
 X-MailFrom: chongcriston@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] dachshund puppies for sale
+Subject: [Linaro-mm-sig] How much does a dachshund cost?
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AAVRHSRD7IGBDOTWBRYYO72JO3JTXAZS/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DELTU4MX4HUXAFCWS6L5RHMGTJXF3INC/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -39,24 +39,25 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 7705E2417DD
+X-Rspamd-Queue-Id: DF01D241808
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [6.77 / 15.00];
+X-Spamd-Result: default: False [7.77 / 15.00];
 	SPAM_FLAG(5.00)[];
 	HFILTER_URL_ONLY(1.18)[0.5385587863464];
 	MID_RHS_MATCH_TO(1.00)[];
+	SUBJECT_ENDS_QUESTION(1.00)[];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	GREYLIST(0.00)[pass,meta];
 	ARC_NA(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
 	FREEMAIL_FROM(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	GREYLIST(0.00)[pass,meta];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCPT_COUNT_ONE(0.00)[1];
 	RCVD_COUNT_TWO(0.00)[2];
@@ -65,7 +66,7 @@ X-Spamd-Result: default: False [6.77 / 15.00];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	TO_DN_NONE(0.00)[];
 	R_DKIM_NA(0.00)[];
-	NEURAL_HAM(-0.00)[-0.875];
+	NEURAL_HAM(-0.00)[-0.858];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:mid,lists.linaro.org:rdns,lists.linaro.org:helo]
 X-Rspamd-Action: add header
