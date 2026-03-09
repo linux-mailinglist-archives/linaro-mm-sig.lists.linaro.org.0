@@ -2,177 +2,177 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id eOXqGzZe5mnpvQEAu9opvQ
+	id 0MEWDDVe5mndvQEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:11:18 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:11:17 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 35878430B1E
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:11:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AAA78430AD1
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:11:16 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9C4E0406EE
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:06:03 +0000 (UTC)
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
-	by lists.linaro.org (Postfix) with ESMTPS id 356E93F719
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  9 Mar 2026 13:01:32 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B4D68406EC
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:06:08 +0000 (UTC)
+Received: from mail-yx1-f41.google.com (mail-yx1-f41.google.com [74.125.224.41])
+	by lists.linaro.org (Postfix) with ESMTPS id 753523F702
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  9 Mar 2026 15:39:56 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=resnulli-us.20230601.gappssmtp.com header.s=20230601 header.b=UfjvC6pt;
-	spf=none (lists.linaro.org: domain of jiri@resnulli.us has no SPF policy when checking 209.85.128.50) smtp.mailfrom=jiri@resnulli.us;
-	dmarc=none
-Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-4853fd7b59aso3213835e9.2
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 09 Mar 2026 06:01:32 -0700 (PDT)
+	dkim=pass header.d=google.com header.s=20230601 header.b=HPFLeLEA;
+	arc=pass ("google.com:s=arc-20240605:i=1");
+	spf=pass (lists.linaro.org: domain of pgonda@google.com designates 74.125.224.41 as permitted sender) smtp.mailfrom=pgonda@google.com;
+	dmarc=pass (policy=reject) header.from=google.com
+Received: by mail-yx1-f41.google.com with SMTP id 956f58d0204a3-64ca4dfdd88so11484274d50.0
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 09 Mar 2026 08:39:56 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1773070796; cv=none;
+        d=google.com; s=arc-20240605;
+        b=OHy1Er9bilTLCRadU1SPmFidMwqlnhY9kkuNru0g2HTRWIxf+1Z6mgpoGU2DjtAmBF
+         zskHlMNCVzpy7kiChx3se/Krs61cySYGaeraTzBiuEAokhih/fxSNHyh0VKl2bc0beYb
+         pe5Wj4KAXUhCiaLKox6pDOuLAOyMQIHTRa8VeLj9XWuidA84HxHSfetSog+5zcwFuUcr
+         NpAhOfTx+gR8Om1lyy0ObIUUU6J+70u+EiqL/ikHPdG/HxPbriHd3r1FYBWh7daUhj0J
+         Y3UUlZCSxgrHSoXj07VKS0Db9c97KS6MBbcjs1VWIMQJbwD/KxW2eR9jfQq3qpaMs4go
+         AXAQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=MvLYcYLZmHSPzURtRpTfKGpAse3rZ5uBdKhXxFZ9chA=;
+        fh=ZeBufP8I8XGGqWTc9TO+4/y8+OV/5n1804waUR6GDZQ=;
+        b=A6DDsMWZx35Qmfsd/aolU9YIRjQNTyeCgGzSpgfsZbfCDlV3Xdp83kO8XzFyDLGdlZ
+         98bMD/IFeuwXih10ebBGy+6cv5Z1qJxQ+MwfMEbp8FRA9GsF1KGP9xIgrCVRXsBr/qwN
+         vgDzP1qWbNH0Nyayv2UMPXYah8GHAr6VSvQgrQD10fOcPwJ3fJ3Emm3P9BVwTYVOle1x
+         frnXKDdu7QcOrWhM6pXg15qeomjbmy9dZ8nibGsYZE3M7K6/2NhiqDZR0VG156qQ/B3k
+         qVCIz7xGUBNFb31ORbdavJgbWlVqU4etmNVu3wOhIc1w1nm3WTpxgxeK//V4beau0Fpe
+         ZiDg==;
+        darn=lists.linaro.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=resnulli-us.20230601.gappssmtp.com; s=20230601; t=1773061291; x=1773666091; darn=lists.linaro.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=C1uSgKALRT8QjmGeRtwIR5Sg9BvduvH1KsXj/bwOWs0=;
-        b=UfjvC6pt5D9wsf3WgEG7thH0TKcWhbFz0N67ydHnsNY2qyJW7qVIC1Nq4E65ekiFLc
-         lErffv1QtEjAKDsZpjOzoGFZG+oC7SyLHPofD5VXs/Lp/NzuQ6L9iqCg4iHgaXiBKT9B
-         FKKgoi5/RWoA0lxuE8ij7M9qTZ5M83LeDpgS0qXCd8N897igxieTRRWsZs7RjLvPYz+M
-         cNWixsyriFIo2ztIuVCDjitky2wJXREKpkzGh2SBh/zQ7Ohg1yDO6zhhUUZpGm8Zn0xp
-         P97p4A4uyNExqV5JKtqRGtqSMKXN5ugBA3VvAh7R3ig7Gz3uieF68kXQhNrDsaiRM9Hh
-         PFrg==
+        d=google.com; s=20230601; t=1773070796; x=1773675596; darn=lists.linaro.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=MvLYcYLZmHSPzURtRpTfKGpAse3rZ5uBdKhXxFZ9chA=;
+        b=HPFLeLEAIBBZJvN06ctzvvpZferHcH+Uhst9mg0yPhuk37xsXouDEMY4bEPOGyd1m4
+         rEuzSaRfGuqL0zbxlvTFLc1weMA/fYwKUNqBCizVa8ntyhCSA7I8EbyqANLQMINyZmz2
+         9IyqxRorJmZyjefrf0Deo/2DgB12kCwk5BOmF4JNv9jAUCpTbwOB0pd7Y/4gyt3IechM
+         Oml+5Xk5piJ5QxnvlBnat2v9KdAKh5l7+vvMbgNLtszXGcpawiApLV1hfmDr3ddoF6rL
+         snC1ceVDwa67wu7K2jeM9FCVremM9vLERB7/HQc+98fuuy5SBLiPLxeMPQHqsgdbLHs3
+         EJ8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1773061291; x=1773666091;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=C1uSgKALRT8QjmGeRtwIR5Sg9BvduvH1KsXj/bwOWs0=;
-        b=sfwieyPiesEwdzgic6r8gWBt2sDh10Ulnw3+FyUucU1yfnJw14HwKwiVCa6xcJJxBQ
-         bQMPqRrwjDDjIOodxSnHkXk4Jp3HsRi01BcW4LRQmUihyEVXOG0/8GwSeLf2QDw+2kr4
-         cvZlzaYnMmpr7Wem3MQ0x5WNeuO8xP8yMI97IZFD5VptLcUkGYJm7v5VtklCeBZXF8eG
-         p13K9qM73IvtksWPWxrFpco4MpGOoFnxPPEE3NFT7YdgxkymmrMd6u7u3ofY2MYXDhEO
-         V8eFP8FAZ7qQS4l6YrdnFFN8SXske7gvthTtk0FWrOAw62HRTJEZoEh4kjT+sRBEtpSZ
-         eNqg==
-X-Forwarded-Encrypted: i=1; AJvYcCUdeNlryt2AC4aTFqUtvPi5XXPoy4Ht797PXaIyHgQBtfUYAHB+PVrYcdpgJXKkYBuXiwE+VU808oeCl8Up@lists.linaro.org
-X-Gm-Message-State: AOJu0Yy0soPKcXaRC7BTC/Kvge14Xqp/ERZnp20SvVs/ZtidNxjUE/cg
-	I3XFTqJCA53ercV0mjDUf9FS+taHZeUdQ/PmcppvC2lUEuWy/fKA4d+vrfuppot/cTEIy9VhLP5
-	Wbq/zQJc=
-X-Gm-Gg: ATEYQzx3TMtVtoT+/yRXFA2fM3crARg09TJe7EWmp1ORBZmmWu3I+hoCVLAv0BXPY0t
-	IHZBjN3xpRwCzjzavvSv9dxgMXE704F7zRLLpVqTQsoNmO6XhpBif4aQftlA/rAlFklWeUlTHDI
-	lmMM04rX/ax1V+p9uhlEhjhTHhRsvGypwuLfi0fShlLMjG5k2awRIcmhSjakw/Ofc8BoSVonUmB
-	V7N3wIfWcm+DbIvo4s5B/+zrVsVqZJTITOb+vOWyPfr5GQ3GvZDyhb9kKw0NK1TG+7fCGtaVgVj
-	Q1iuJVOVnhRAsSdtUHNdmLO6JVHO52GM0inujAm159tkyUEj68zHgSHUrrJw1HVnqcdQT2U0jkf
-	BbnZrH0h0r0dMQn3y76vzTq/JxidNAyAMONuWmDIqz0h7hOyrhEllDjtiVXD4Cl/wwmxMhIxMzp
-	bNl6iQlgDtM+zz76Aew2XQxfCgd4CWLdmEdg6VwlYQbA==
-X-Received: by 2002:a05:600c:8218:b0:485:3692:e8f7 with SMTP id 5b1f17b1804b1-4853692eaf6mr73833215e9.25.1773061290855;
-        Mon, 09 Mar 2026 06:01:30 -0700 (PDT)
-Received: from FV6GYCPJ69 ([208.127.45.21])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4853a498afbsm64496685e9.0.2026.03.09.06.01.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 09 Mar 2026 06:01:30 -0700 (PDT)
-Date: Mon, 9 Mar 2026 14:01:26 +0100
-From: Jiri Pirko <jiri@resnulli.us>
-To: Petr Tesarik <ptesarik@suse.com>
-Message-ID: <byfhwrnq76ylztrjc67ia5tlzgpihh3ycv53je3jekkbqltcad@sslumibsz23v>
-References: <20260305123641.164164-1-jiri@resnulli.us>
- <20260305123641.164164-2-jiri@resnulli.us>
- <20260309135610.1f81d2df@mordecai>
+        d=1e100.net; s=20230601; t=1773070796; x=1773675596;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=MvLYcYLZmHSPzURtRpTfKGpAse3rZ5uBdKhXxFZ9chA=;
+        b=RJrsLZF5SSw6kPaX6InqzFsZYC+PrGMPKT+ACuoqE1d3+RcLsGdxyVlRGuuJIKOLSC
+         6JOIepHITEU91XcJuJ2x/kd85FKP2wfEZgSHeaCU9XVYgpQCQ9FKkR3AEfxDAZhSZBbe
+         mBDIsd1w5iPcxnVfBV2fH0Pf8MMiRzQI/YJnO5UCqqnBd1XLK52KUF85dX/gaxs3vsvx
+         SgsvVd2Y2MKKfq0ujuyLbCBzHmfGyKAcbbO4uWUykw7RR8lYQq5Zx3Ke3g85QFFJpmDa
+         gcoSs4XEf9KEVnB6+q07MriMAIsMBCCzjWLPhQfMsGuKIG2jxE3fB0jKQzjYD+hzDTAq
+         z1Sg==
+X-Forwarded-Encrypted: i=1; AJvYcCX31xCWCmrPQimowle8vAaF84j3NXtAlW8PRocNvKEjPOvOkloJoWw+HUnsxB+cTwaLT+cunUluQ4YHKPrw@lists.linaro.org
+X-Gm-Message-State: AOJu0YzfG0obbNtWNAjeH9kZQlg3LCFIHuxWcS5aTJAI0holyTWEbt1F
+	Ygp+G1OYqWy+xXoUK5F9C9o1R0PlmZ7PdVtS7aNk/xH7L8Pvy175xiSWeiH+HJCZIQY7HRHTp5F
+	BMZrW5JyHgUBa1m1Bd3LBdkzJLWmqQiNmv3wAWF3D
+X-Gm-Gg: ATEYQzzpvL82GfHYy1ZwFJqmDSbU4S8ADqe6BmiDSliEsQv8O6+928RbLHbBDDIpGwU
+	wsgMCU6LrYJ8P8RpRtq23C2vtq/ha3qztK6vMQOHU7zz54l4VdYhpPQqJ9XjYXA4qtyPnB115lY
+	7xSb2gsjEiKfXzcHUcW7ay71PF+3ShAbp5Uux+qzy5ZoTrzsrMEELvUqZExDl5Yb/rnu1VZM4G2
+	xWxmGHSgrmNtShe1cS+DCzxgQf4m0RCz7ebIXWg1ykFnCyI1EOSkUvWrmbRUUqjIWMiqwAV4PMI
+	3rswjcHEQhWcXNdrkoR3+s9cD/Q0+foePSzWIbMqwAPf3yvk
+X-Received: by 2002:a05:690e:16cc:b0:64d:29c6:7974 with SMTP id
+ 956f58d0204a3-64d29c67a27mr3174372d50.11.1773070795335; Mon, 09 Mar 2026
+ 08:39:55 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20260309135610.1f81d2df@mordecai>
-X-Spamd-Bar: --
-X-MailFrom: jiri@resnulli.us
+References: <20260305123641.164164-1-jiri@resnulli.us> <20260305123641.164164-3-jiri@resnulli.us>
+In-Reply-To: <20260305123641.164164-3-jiri@resnulli.us>
+From: Peter Gonda <pgonda@google.com>
+Date: Mon, 9 Mar 2026 09:39:44 -0600
+X-Gm-Features: AaiRm51h3c_DzKOKsC7CokIZvNyOKydjIyhi9bVIzEGXBlmxcqpV-AFuGedzucs
+Message-ID: <CAMkAt6o_yZ5T-3TRwymjYQZEq-Q_z=DAA3vc61h81X9sQr_CXA@mail.gmail.com>
+To: Jiri Pirko <jiri@resnulli.us>
+X-Spamd-Bar: ----
+X-MailFrom: pgonda@google.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: CBMQWC3WBXEQNCGFD54KGDPDQEWBPMJU
-X-Message-ID-Hash: CBMQWC3WBXEQNCGFD54KGDPDQEWBPMJU
-X-Mailman-Approved-At: Mon, 20 Apr 2026 17:04:16 +0000
-CC: dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, iommu@lists.linux.dev, linux-media@vger.kernel.org, sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, Brian.Starkey@arm.com, jstultz@google.com, tjmercier@google.com, christian.koenig@amd.com, robin.murphy@arm.com, jgg@ziepe.ca, leon@kernel.org, sean.anderson@linux.dev, catalin.marinas@arm.com, aneesh.kumar@kernel.org, suzuki.poulose@arm.com, steven.price@arm.com, thomas.lendacky@amd.com, john.allen@amd.com, ashish.kalra@amd.com, suravee.suthikulpanit@amd.com, linux-coco@lists.linux.dev
+Message-ID-Hash: 4EERI2JGLTNKVJ2FREEIY5XXUD3IHB4G
+X-Message-ID-Hash: 4EERI2JGLTNKVJ2FREEIY5XXUD3IHB4G
+X-Mailman-Approved-At: Mon, 20 Apr 2026 17:04:17 +0000
+CC: dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, iommu@lists.linux.dev, linux-media@vger.kernel.org, sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, Brian.Starkey@arm.com, jstultz@google.com, tjmercier@google.com, christian.koenig@amd.com, robin.murphy@arm.com, jgg@ziepe.ca, leon@kernel.org, sean.anderson@linux.dev, ptesarik@suse.com, catalin.marinas@arm.com, aneesh.kumar@kernel.org, suzuki.poulose@arm.com, steven.price@arm.com, thomas.lendacky@amd.com, john.allen@amd.com, ashish.kalra@amd.com, suravee.suthikulpanit@amd.com, linux-coco@lists.linux.dev
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH net-next v3 1/2] dma-mapping: introduce DMA_ATTR_CC_DECRYPTED for pre-decrypted memory
+Subject: [Linaro-mm-sig] Re: [PATCH net-next v3 2/2] dma-buf: heaps: system: add system_cc_decrypted heap for explicitly decrypted memory
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CBMQWC3WBXEQNCGFD54KGDPDQEWBPMJU/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4EERI2JGLTNKVJ2FREEIY5XXUD3IHB4G/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [0.99 / 15.00];
-	DATE_IN_PAST(1.00)[1012];
-	MID_RHS_NOT_FQDN(0.50)[];
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+X-Spamd-Result: default: False [3.59 / 15.00];
+	DMARC_POLICY_REJECT(2.00)[google.com : SPF not aligned (relaxed), No valid DKIM,reject];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:google.com:reject}];
+	DATE_IN_PAST(1.00)[1009];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
+	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	DMARC_NA(0.00)[resnulli.us];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[24];
+	MISSING_XM_UA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[25];
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	NEURAL_SPAM(0.00)[0.932];
+	FROM_HAS_DN(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	FROM_NEQ_ENVFROM(0.00)[pgonda@google.com,linaro-mm-sig-bounces@lists.linaro.org];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	FROM_NEQ_ENVFROM(0.00)[jiri@resnulli.us,linaro-mm-sig-bounces@lists.linaro.org];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	NEURAL_SPAM(0.00)[0.137];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,suse.com:email,resnulli.us:email,lists.linaro.org:helo,lists.linaro.org:rdns,nvidia.com:email]
-X-Rspamd-Queue-Id: 35878430B1E
+	RCVD_COUNT_THREE(0.00)[3];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,mail.gmail.com:mid,linaro.org:email,nvidia.com:email,resnulli.us:email]
+X-Rspamd-Queue-Id: AAA78430AD1
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Mon, Mar 09, 2026 at 01:56:10PM +0100, ptesarik@suse.com wrote:
->On Thu,  5 Mar 2026 13:36:40 +0100
->Jiri Pirko <jiri@resnulli.us> wrote:
->
->> From: Jiri Pirko <jiri@nvidia.com>
->> 
->> Current CC designs don't place a vIOMMU in front of untrusted devices.
->> Instead, the DMA API forces all untrusted device DMA through swiotlb
->> bounce buffers (is_swiotlb_force_bounce()) which copies data into
->> decrypted memory on behalf of the device.
->> 
->> When a caller has already arranged for the memory to be decrypted
->> via set_memory_decrypted(), the DMA API needs to know so it can map
->> directly using the unencrypted physical address rather than bounce
->> buffering. Following the pattern of DMA_ATTR_MMIO, add
->> DMA_ATTR_CC_DECRYPTED for this purpose. Like the MMIO case, only the
->> caller knows what kind of memory it has and must inform the DMA API
->> for it to work correctly.
->> 
->> Signed-off-by: Jiri Pirko <jiri@nvidia.com>
->> ---
->> v1->v2:
->> - rebased on top of recent dma-mapping-fixes
->> ---
->>  include/linux/dma-mapping.h |  6 ++++++
->>  include/trace/events/dma.h  |  3 ++-
->>  kernel/dma/direct.h         | 14 +++++++++++---
->>  3 files changed, 19 insertions(+), 4 deletions(-)
->> 
->> diff --git a/include/linux/dma-mapping.h b/include/linux/dma-mapping.h
->> index 29973baa0581..ae3d85e494ec 100644
->> --- a/include/linux/dma-mapping.h
->> +++ b/include/linux/dma-mapping.h
->> @@ -85,6 +85,12 @@
->>   * a cacheline must have this attribute for this to be considered safe.
->>   */
->>  #define DMA_ATTR_CPU_CACHE_CLEAN	(1UL << 11)
->> +/*
->> + * DMA_ATTR_CC_DECRYPTED: Indicates memory that has been explicitly decrypted
->> + * (shared) for confidential computing guests. The caller must have
->> + * called set_memory_decrypted(). A struct page is required.
->> + */
->> +#define DMA_ATTR_CC_DECRYPTED	(1UL << 12)
->
->I don't want to start a bikeshedding discussion, so if everyone else
->likes this name, let's keep it. But maybe the "_CC" (meaning
->Confidential Comptuing) is not necessary. IIUC it's the same concept as
->set_page_encrypted(), set_page_decrypted(), which does not refer to
->CoCo either.
-
-Do I understand that correctly that you suggest DMA_ATTR_DECRYPTED ?
-It's not uapi, so this is flexible for possible future renames.
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+R3JlYXQgZmVhdHVyZSB0byBoYXZlIHRoYW5rcyBKaXJpISBBIGNvdXBsZSBuYWl2ZSBxdWVzdGlv
+bnMuDQoNCk9uIFRodSwgTWFyIDUsIDIwMjYgYXQgNTozOOKAr0FNIEppcmkgUGlya28gPGppcmlA
+cmVzbnVsbGkudXM+IHdyb3RlOg0KPg0KPiBGcm9tOiBKaXJpIFBpcmtvIDxqaXJpQG52aWRpYS5j
+b20+DQo+DQo+IEFkZCBhIG5ldyAic3lzdGVtX2NjX2RlY3J5cHRlZCIgZG1hLWJ1ZiBoZWFwIHRv
+IGFsbG93IHVzZXJzcGFjZSB0bw0KPiBhbGxvY2F0ZSBkZWNyeXB0ZWQgKHNoYXJlZCkgbWVtb3J5
+IGZvciBjb25maWRlbnRpYWwgY29tcHV0aW5nIChDb0NvKQ0KPiBWTXMuDQo+DQo+IE9uIENvQ28g
+Vk1zLCBndWVzdCBtZW1vcnkgaXMgZW5jcnlwdGVkIGJ5IGRlZmF1bHQuIFRoZSBoYXJkd2FyZSB1
+c2VzIGFuDQo+IGVuY3J5cHRpb24gYml0IGluIHBhZ2UgdGFibGUgZW50cmllcyAoQy1iaXQgb24g
+QU1EIFNFViwgInNoYXJlZCIgYml0IG9uDQo+IEludGVsIFREWCkgdG8gY29udHJvbCB3aGV0aGVy
+IGEgZ2l2ZW4gbWVtb3J5IGFjY2VzcyBpcyBlbmNyeXB0ZWQgb3INCj4gZGVjcnlwdGVkLiBUaGUg
+a2VybmVsJ3MgZGlyZWN0IG1hcCBpcyBzZXQgdXAgd2l0aCBlbmNyeXB0aW9uIGVuYWJsZWQsDQo+
+IHNvIHBhZ2VzIHJldHVybmVkIGJ5IGFsbG9jX3BhZ2VzKCkgYXJlIGVuY3J5cHRlZCBpbiB0aGUg
+ZGlyZWN0IG1hcA0KPiBieSBkZWZhdWx0LiBUbyBtYWtlIHRoaXMgbWVtb3J5IHVzYWJsZSBmb3Ig
+ZGV2aWNlcyB0aGF0IGRvIG5vdCBzdXBwb3J0DQo+IERNQSB0byBlbmNyeXB0ZWQgbWVtb3J5IChu
+byBURElTUCBzdXBwb3J0KSwgaXQgaGFzIHRvIGJlIGV4cGxpY2l0bHkNCj4gZGVjcnlwdGVkLiBB
+IGNvdXBsZSBvZiB0aGluZ3MgYXJlIG5lZWRlZCB0byBwcm9wZXJseSBoYW5kbGUNCj4gZGVjcnlw
+dGVkIG1lbW9yeSBmb3IgdGhlIGRtYS1idWYgdXNlIGNhc2U6DQo+DQo+IC0gc2V0X21lbW9yeV9k
+ZWNyeXB0ZWQoKSBvbiB0aGUgZGlyZWN0IG1hcCBhZnRlciBhbGxvY2F0aW9uOg0KPiAgIEJlc2lk
+ZXMgY2xlYXJpbmcgdGhlIGVuY3J5cHRpb24gYml0IGluIHRoZSBkaXJlY3QgbWFwIFBURXMsIHRo
+aXMNCj4gICBhbHNvIG5vdGlmaWVzIHRoZSBoeXBlcnZpc29yIGFib3V0IHRoZSBwYWdlIHN0YXRl
+IGNoYW5nZS4gT24gZnJlZSwNCj4gICB0aGUgaW52ZXJzZSBzZXRfbWVtb3J5X2VuY3J5cHRlZCgp
+IG11c3QgYmUgY2FsbGVkIGJlZm9yZSByZXR1cm5pbmcNCj4gICBwYWdlcyB0byB0aGUgYWxsb2Nh
+dG9yLiBJZiByZS1lbmNyeXB0aW9uIGZhaWxzLCBwYWdlcw0KPiAgIGFyZSBpbnRlbnRpb25hbGx5
+IGxlYWtlZCB0byBwcmV2ZW50IGRlY3J5cHRlZCBtZW1vcnkgZnJvbSBiZWluZw0KPiAgIHJldXNl
+ZCBhcyBwcml2YXRlLg0KPg0KPiAtIHBncHJvdF9kZWNyeXB0ZWQoKSBmb3IgdXNlcnNwYWNlIGFu
+ZCBrZXJuZWwgdmlydHVhbCBtYXBwaW5nczoNCj4gICBBbnkgbmV3IG1hcHBpbmcgb2YgdGhlIGRl
+Y3J5cHRlZCBwYWdlcywgYmUgaXQgdG8gdXNlcnNwYWNlIHZpYQ0KPiAgIG1tYXAgb3IgdG8ga2Vy
+bmVsIHZtYWxsb2Mgc3BhY2UgdmlhIHZtYXAsIGNyZWF0ZXMgUFRFcyBpbmRlcGVuZGVudA0KPiAg
+IG9mIHRoZSBkaXJlY3QgbWFwLiBUaGVzZSBtdXN0IGFsc28gaGF2ZSB0aGUgZW5jcnlwdGlvbiBi
+aXQgY2xlYXJlZCwNCj4gICBvdGhlcndpc2UgYWNjZXNzZXMgdGhyb3VnaCB0aGVtIHdvdWxkIHNl
+ZSBlbmNyeXB0ZWQgKGdhcmJhZ2UpIGRhdGEuDQoNClNvIHRoaXMgb25seSB3b3JrcyBvbiBuZXcg
+bWFwcGluZ3M/IFdoYXQgaWYgdGhlcmUgYXJlIGV4aXN0aW5nDQptYXBwaW5ncyB0byB0aGUgbWVt
+b3J5IHRoYXQgd2lsbCBiZSBjb252ZXJ0ZWQgdG8gc2hhcmVkPw0KDQpJdCdzIGFsc28gc2xpZ2h0
+bHkgd29yc2UgdGhhbiBqdXN0IHJlYWRpbmcgY2lwaGVydGV4dC4gSWYgYW5vdGhlcg0KcHJvY2Vz
+cyB3cml0ZXMgdG8gdGhlIG1lbW9yeSB3aXRoIHRoZSBpbmNvcnJlY3QgbWFwcGluZyBpdCBjb3Vs
+ZCBjYXVzZQ0KY29ycnVwdGlvbiBvbiBBTUQgU0VWLCBvciBhbiBSTVAgdmlvbGF0aW9uIG9uIEFN
+RCBTRVYtU05QLiBDYW4gd2UNCnVwZGF0ZSB0aGUgZXhpc3RpbmcgbWFwcGluZ3M/DQpfX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1h
+aWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3Jp
+YmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
