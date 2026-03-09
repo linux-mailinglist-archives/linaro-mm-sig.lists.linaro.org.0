@@ -2,35 +2,35 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 6KRYGqY4r2kPQQIAu9opvQ
+	id CBInHtg4r2kPQQIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 09 Mar 2026 22:16:22 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 09 Mar 2026 22:17:12 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id DF01D241808
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 09 Mar 2026 22:16:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 09DD6241851
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 09 Mar 2026 22:17:12 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id F420B3F9BE
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  9 Mar 2026 21:16:20 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 278F04015E
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  9 Mar 2026 21:17:11 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7BE2C3F9BE
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  9 Mar 2026 21:16:14 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 6C4E33F9BE
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  9 Mar 2026 21:17:04 +0000 (UTC)
 MIME-Version: 1.0
 From: "Chong Criston" <chongcriston@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Mon, 09 Mar 2026 21:16:14 -0000
-Message-ID: <177309097450.1164308.12984562719326258473@lists.linaro.org>
+Date: Mon, 09 Mar 2026 21:17:04 -0000
+Message-ID: <177309102444.1163620.5231188043369477264@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: DELTU4MX4HUXAFCWS6L5RHMGTJXF3INC
-X-Message-ID-Hash: DELTU4MX4HUXAFCWS6L5RHMGTJXF3INC
+Message-ID-Hash: 2P7EQ4AVSRKQLUNA3MFOOIEJ3NWZ4LGP
+X-Message-ID-Hash: 2P7EQ4AVSRKQLUNA3MFOOIEJ3NWZ4LGP
 X-MailFrom: chongcriston@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] How much does a dachshund cost?
+Subject: [Linaro-mm-sig] Why should you buy a dachshund puppy?
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DELTU4MX4HUXAFCWS6L5RHMGTJXF3INC/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2P7EQ4AVSRKQLUNA3MFOOIEJ3NWZ4LGP/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -39,7 +39,7 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: DF01D241808
+X-Rspamd-Queue-Id: 09DD6241851
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [7.77 / 15.00];
 	SPAM_FLAG(5.00)[];
@@ -66,7 +66,7 @@ X-Spamd-Result: default: False [7.77 / 15.00];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	TO_DN_NONE(0.00)[];
 	R_DKIM_NA(0.00)[];
-	NEURAL_HAM(-0.00)[-0.858];
+	NEURAL_HAM(-0.00)[-0.863];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:mid,lists.linaro.org:rdns,lists.linaro.org:helo]
 X-Rspamd-Action: add header
