@@ -2,35 +2,35 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id uCzqISs4r2kPQQIAu9opvQ
+	id UKkoAWY4r2knSQIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 09 Mar 2026 22:14:19 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 09 Mar 2026 22:15:18 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF22A2417AF
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 09 Mar 2026 22:14:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7705E2417DD
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 09 Mar 2026 22:15:17 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id F32654016D
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  9 Mar 2026 21:14:17 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 91FEC401BB
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  9 Mar 2026 21:15:16 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 87BCF3F9BE
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  9 Mar 2026 21:14:10 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id ADD623F9BE
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  9 Mar 2026 21:15:09 +0000 (UTC)
 MIME-Version: 1.0
 From: "Chong Criston" <chongcriston@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Mon, 09 Mar 2026 21:14:10 -0000
-Message-ID: <177309085055.1160666.16773936363890019619@lists.linaro.org>
+Date: Mon, 09 Mar 2026 21:15:09 -0000
+Message-ID: <177309090971.1163008.14593782413652529215@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: CVVTSZZXETCKTBNBIESB6AD5IAU6EBO6
-X-Message-ID-Hash: CVVTSZZXETCKTBNBIESB6AD5IAU6EBO6
+Message-ID-Hash: AAVRHSRD7IGBDOTWBRYYO72JO3JTXAZS
+X-Message-ID-Hash: AAVRHSRD7IGBDOTWBRYYO72JO3JTXAZS
 X-MailFrom: chongcriston@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] buy dachshund puppies near me
+Subject: [Linaro-mm-sig] dachshund puppies for sale
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CVVTSZZXETCKTBNBIESB6AD5IAU6EBO6/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AAVRHSRD7IGBDOTWBRYYO72JO3JTXAZS/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -39,26 +39,26 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: EF22A2417AF
+X-Rspamd-Queue-Id: 7705E2417DD
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [6.77 / 15.00];
 	SPAM_FLAG(5.00)[];
 	HFILTER_URL_ONLY(1.18)[0.5385587863464];
 	MID_RHS_MATCH_TO(1.00)[];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_ONE(0.00)[1];
+	MIME_TRACE(0.00)[0:+];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	GREYLIST(0.00)[pass,meta];
 	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	FREEMAIL_FROM(0.00)[gmail.com];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_ONE(0.00)[1];
 	RCVD_COUNT_TWO(0.00)[2];
 	FROM_NEQ_ENVFROM(0.00)[chongcriston@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
