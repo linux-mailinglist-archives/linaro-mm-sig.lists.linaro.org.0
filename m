@@ -2,72 +2,70 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KNVrBWZf5mksvgEAu9opvQ
+	id 0JSXF2tf5mndvQEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:16:22 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:16:27 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id BCAB0430E07
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:16:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1444B430E17
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:16:26 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id D2FB140508
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:16:20 +0000 (UTC)
-Received: from mail-ot1-f53.google.com (mail-ot1-f53.google.com [209.85.210.53])
-	by lists.linaro.org (Postfix) with ESMTPS id 1922C3F80A
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 12 Mar 2026 15:05:39 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 1ECB43F7D9
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:16:26 +0000 (UTC)
+Received: from mail-ot1-f45.google.com (mail-ot1-f45.google.com [209.85.210.45])
+	by lists.linaro.org (Postfix) with ESMTPS id 78C5A3F80A
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 12 Mar 2026 15:05:57 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=bitbyteword.org header.s=google header.b=nv6KP5rp;
-	spf=pass (lists.linaro.org: domain of vineeth@bitbyteword.org designates 209.85.210.53 as permitted sender) smtp.mailfrom=vineeth@bitbyteword.org;
+	dkim=pass header.d=bitbyteword.org header.s=google header.b=AHvuYllR;
+	spf=pass (lists.linaro.org: domain of vineeth@bitbyteword.org designates 209.85.210.45 as permitted sender) smtp.mailfrom=vineeth@bitbyteword.org;
 	dmarc=none
-Received: by mail-ot1-f53.google.com with SMTP id 46e09a7af769-7d7422b4ff1so506269a34.3
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 12 Mar 2026 08:05:39 -0700 (PDT)
+Received: by mail-ot1-f45.google.com with SMTP id 46e09a7af769-7d73be007a1so876719a34.0
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 12 Mar 2026 08:05:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bitbyteword.org; s=google; t=1773327938; x=1773932738; darn=lists.linaro.org;
+        d=bitbyteword.org; s=google; t=1773327957; x=1773932757; darn=lists.linaro.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=cNc1V3lTb2QUW0xjd0W9BOVRtnhujjy4WaV1yGr6BKQ=;
-        b=nv6KP5rpURLTj2Ymi0KVGDIjuPa+U43CozgVYXoV7xRSWYq9SZJjVmlPhRX+i9yYXG
-         fPZtUkwCjr10YJEEYTc5jqSNiyI3TghtITOG6bxKzTwE4h6eYPRSqw5uxNdEiaB8t0wo
-         pNL4k/9zxWU7kG/VQs48l2Jc4zbo3vcpEVRfM1UgrutHf5H8BM40U+Ybg6wRThuhocE7
-         noTgu4hNKUmjndBxwuzPJunfhZ+ri3SiE4HC0i+komK4h+HwqzjZke32PE7+Tr+bth+a
-         PTv9kbg5q/2dUprD1xo6zeW13PUt4HdCQoTL0wJ5VhLr1nWfDO2SyWHH9gcije07spD9
-         VzFQ==
+        bh=F6q/8hBK1ObEUJJeEuPBlXFpYM8cpAj3EFJgYDsQfdk=;
+        b=AHvuYllRbunz/X+lIvPINr4U1DkngwfqzpYGvhx6x8Nd3SOV4F/tUDWJFOUDg8zIzn
+         z/U7NWmf6hrL6bpr5ttocNwPYTnvfHA28de6WSZRYFrQhNxDBZiT9kB0AtmiZZYDfSdK
+         pFDMM2sNuIxZt7JjixxUZfPOp6eER0Gy1Muhkdz7b0tNItDLrMDkxrRD03vM/WP4ZBHY
+         VEXXy+5bk9rlbeaI4UpRZDy86T5pKsbT8UNLRAP3Sw107gI7Dh2BXgRKZjbp48GOsBZo
+         7XhRlfkYs/+APv9XMv3gu5Ta6NM5DF45x1S2HcJJQPE/uKdjXN3heoUSHmjCk3cjtdQ9
+         qicg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1773327938; x=1773932738;
+        d=1e100.net; s=20230601; t=1773327957; x=1773932757;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=cNc1V3lTb2QUW0xjd0W9BOVRtnhujjy4WaV1yGr6BKQ=;
-        b=hE+gdQTRTfefqd/bTbhOsHZpsiJOsi4wGG2jnZIUDqNXDdFoDE5Jgh17g4dvAweHf2
-         02xZnAzZg1D9LcAz8nPYxWdKZiJD39k1/r44bt93XwNS+lECWsXYbDMIO+KLZUwoHIl4
-         /z3bNwsoXIqipLgf1P+imcOoLLEp3aM3Ybo5a4kMJpMQai5/I/1PMZkFG96rCIQ0H3z/
-         thmRXHAdHtv3Vdee2guRjheMzO407x2dsT/DsAPIPPbKa5c24Iq9a41PdWRDhj58qvic
-         ytyxUAbKtV5BEKgANfD8T/Su51pz8ptC2lq5DgbHmauDny3zRRtO+DUoFicyZgc92Xpt
-         JZog==
-X-Forwarded-Encrypted: i=1; AJvYcCV0EezAsPBUsyAUZrnMdhtfGJHOYTd4Ha3dkvKJLOnOY/J4DqfU8jhxwn4AeYYA5LcNTdHevwBqWdix/X1d@lists.linaro.org
-X-Gm-Message-State: AOJu0YxPxBobIvYcRvK85A1bgTJIqrL9vwnmzSv/zzaZ+ryxdBxzvsKi
-	nKnkTtZ6oxNt4rqskSu9uRaTS7hlQEJIfP8lVgb/ypYi2wpfUV82R694JVz/MNWdHj0=
-X-Gm-Gg: ATEYQzwRDtA2MXfu8d3b4me7Zq/6LwEsLKQmA9YiN9i8J99/PgQ9YZ9ty3Obksp6rOw
-	i2ILBPVQ+Fnoi8OO2jyP95DOInCegZeeXbJPlYw5bDI0DcZYVdxhIhHaNCi97YZ1uP28S0xUax0
-	Lhau9Nxv4eIJzO/nBVDViM05YCSrs64DJhiiyVqEBIU0fmz/F2rXigRbVJBN/i7b4Gw5X3K/6bE
-	uIU9ZRvFPy8anc3ELWIWvMMveyySIZCP8yPsamWdSpKq7iDANA5uc3fPmDZnI8zyrR8IueoyP9R
-	Mqr+3LymiOdlRVwk+dGrKw1kXVCUhFwbpbt87xlzJGYwziRMLPqfIgCgWxORyV+fHkiym6c9CU2
-	Pj/PUyO+3Svr08ae8dcRnHVensTMNrVSCoKjdi3kbankTBqYDEsn8k8nKHAco5QBFgaSeJqMJaz
-	9VFD6g1KHzjIP4yvSdog+g9TZKXe+hLr66ldF+2nF+eGqiqL28Y4lPxo/ob/fwmbnQvvgfzFc2w
-	aAP
-X-Received: by 2002:a05:6830:3113:b0:7c6:d001:afb2 with SMTP id 46e09a7af769-7d76a85b34cmr3668805a34.35.1773327936791;
-        Thu, 12 Mar 2026 08:05:36 -0700 (PDT)
+        bh=F6q/8hBK1ObEUJJeEuPBlXFpYM8cpAj3EFJgYDsQfdk=;
+        b=fQBUz5dPL4joMMXZRkGjTB670aQHvQ2Y9R820fB0qvRQRLN5VEaH2xHN0o5ktf4Nd+
+         M+/H7f/kPocV/yIYeisGkpvP2nCcAzvf8QBpaEuVKaS9IdOIY7jpjRGf23JIWDeazl8d
+         L5UWuxvidTJvGvbpaU3/mvm8WinzEGniD/bdM3rudkbJ2LIWchJYJtL7toIbco8R7EY4
+         zMa40xJjfB9zbiz7A+K/+H/6TBzEY9bIWlevCsyaQdtjillLqE27DJdi8jX7MVwriwtH
+         AF92P8fXXYzIEmn/2Hy+pHKydEPgWr9RGyT2xgqWwe8bUMQeNHbpdQi+lUVAFx0jX1zn
+         3RkQ==
+X-Forwarded-Encrypted: i=1; AJvYcCWlAEgy0Sz11VtZfuNbA452eijkD9mnUz6pgScPA1l0EQQBQsoFKQsMR1OeGp4Ee461/+NMngDG7MBKhS1m@lists.linaro.org
+X-Gm-Message-State: AOJu0YwjGAR+g2U9A2nZ4fgKxZAGUQI51BkM5Q8ZkjOi5GHelsGD+sK0
+	refdov521PXhw0adoCVwjyCUkc3/T2HaU89xO3fRhSVJnk4sJCNHKA6tSHtwZSJhuFI=
+X-Gm-Gg: ATEYQzxXwlZ9v8IqrY/0/kknDd+Ni8EC7FLvuv/WMdmSKj6wN8ukRgU5PRiw1juwMLy
+	5ecaMCKgdeiyjQB5mVbjFCo2gMeq1pst3MpefNp1QvhzSzgWiVX/ZGBd4+J7DlBHJzS1f/RouN+
+	CyewFlCQPltnQAFyZ7AryRS/GT+VdanmOMuSrrYJvlf8BM/SYgXmuERz0MgXRt99ZX/d8zLZeBF
+	d4pYalpDbsTa8MlEoLg0mAWTQBUtSJwugGLK04WcAPuuso9G8VQbX++AxV3liWC9KbQjaL4qQ+h
+	NttNhXJx9HK1BGfRNp7yxCGIZNtTeCd6MbJZ6EOQO2CRhgaoBsmjagTZiI/UCNGVP1Iz5H44PCd
+	GjIAVc/VvBJ0VQNY+jcdKguJ5CRkoZnujn1gqU9Eb22DB3q0NbPi9FMRcw5vBLAViAVTjzJaLvo
+	PJpbB5UvMwZeGhBoYQZCzHgHvqAOQfcWqvJkeCZJRZaLAcyhhkQBcAfrdVoBHYeYVOYwMH5Cu+b
+	rM5
+X-Received: by 2002:a05:6830:6a92:b0:7d7:4361:e33a with SMTP id 46e09a7af769-7d76a8da6b6mr4642874a34.30.1773327956799;
+        Thu, 12 Mar 2026 08:05:56 -0700 (PDT)
 Received: from vinmini.lan (c-73-143-21-186.hsd1.vt.comcast.net. [73.143.21.186])
-        by smtp.gmail.com with ESMTPSA id 46e09a7af769-7d76aedae57sm4321776a34.28.2026.03.12.08.05.30
+        by smtp.gmail.com with ESMTPSA id 46e09a7af769-7d76aedae57sm4321776a34.28.2026.03.12.08.05.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 12 Mar 2026 08:05:36 -0700 (PDT)
+        Thu, 12 Mar 2026 08:05:56 -0700 (PDT)
 From: "Vineeth Pillai (Google)" <vineeth@bitbyteword.org>
-To: Steven Rostedt <rostedt@goodmis.org>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Dmitry Ilvokhin <d@ilvokhin.com>
-Date: Thu, 12 Mar 2026 11:04:56 -0400
-Message-ID: <20260312150523.2054552-2-vineeth@bitbyteword.org>
+To: 
+Date: Thu, 12 Mar 2026 11:05:03 -0400
+Message-ID: <20260312150523.2054552-9-vineeth@bitbyteword.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260312150523.2054552-1-vineeth@bitbyteword.org>
 References: <20260312150523.2054552-1-vineeth@bitbyteword.org>
@@ -76,17 +74,15 @@ X-Spamd-Bar: --
 X-MailFrom: vineeth@bitbyteword.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: EEDY3X4AD4YROVMMO325TWZGHCNBMJBR
-X-Message-ID-Hash: EEDY3X4AD4YROVMMO325TWZGHCNBMJBR
-X-Mailman-Approved-At: Mon, 20 Apr 2026 17:15:58 +0000
-CC: "Vineeth Pillai (Google)" <vineeth@bitbyteword.org>, Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Ingo Molnar <mingo@redhat.com>, Jens Axboe <axboe@kernel.dk>, io-uring@vger.kernel.org, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Alexei Starovoitov <ast@kernel.org>, Daniel Borkmann <daniel@iogearbox.net>, Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>, Xin Long <lucien.xin@gmail.com>, Jon Maloy <jmaloy@redhat.com>, Aaron Conole <aconole@redhat.com>, Eelco Chaudron <echaudro@redhat.com>, Ilya Maximets <i.maximets@ovn.org>, netdev@vger.kernel.org, bpf@vger.kernel.org, linux-sctp@vger.kernel.org, tipc-discussion@lists.sourceforge.net, dev@openvswitch.org, Oded Gabbay <ogabbay@kernel.org>, Koby Elbaz <koby.elbaz@intel.com>, dri-devel@lists.freedesktop.org, "Rafael J. Wysocki" <rafael@kernel.org>, Viresh Kumar <viresh.kumar@linaro.org>
- , "Gautham R. Shenoy" <gautham.shenoy@amd.com>, Huang Rui <ray.huang@amd.com>, Mario Limonciello <mario.limonciello@amd.com>, Len Brown <lenb@kernel.org>, Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>, linux-pm@vger.kernel.org, MyungJoo Ham <myungjoo.ham@samsung.com>, Kyungmin Park <kyungmin.park@samsung.com>, Chanwoo Choi <cw00.choi@samsung.com>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Sumit Semwal <sumit.semwal@linaro.org>, linaro-mm-sig@lists.linaro.org, Eddie James <eajames@linux.ibm.com>, Andrew Jeffery <andrew@codeconstruct.com.au>, linux-fsi@lists.ozlabs.org, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Alex Deucher <alexander.deucher@amd.com>, Danilo Krummrich <dakr@kernel.org>, Matthew Brost <matthew.brost@intel.com>, Philipp Stanner <phasta@kernel.org>, Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>, amd-gfx@lists.freedesktop.org, Jiri Kosina <jikos@kernel.org>, Benjamin Tissoires <bentiss@kerne
- l.org>, linux-input@vger.kernel.org, Wolfram Sang <wsa+renesas@sang-engineering.com>, linux-i2c@vger.kernel.org, Mark Brown <broonie@kernel.org>, Michael Hennerich <michael.hennerich@analog.com>, =?UTF-8?q?Nuno=20S=C3=A1?= <nuno.sa@analog.com>, linux-spi@vger.kernel.org, "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>, "Martin K. Petersen" <martin.petersen@oracle.com>, linux-scsi@vger.kernel.org, Chris Mason <clm@fb.com>, David Sterba <dsterba@suse.com>, linux-btrfs@vger.kernel.org, linux-trace-kernel@vger.kernel.org, linux-kernel@vger.kernel.org
+Message-ID-Hash: NAI6IXJT4S6V7RM73E5TEPWGXEMKYIZK
+X-Message-ID-Hash: NAI6IXJT4S6V7RM73E5TEPWGXEMKYIZK
+X-Mailman-Approved-At: Mon, 20 Apr 2026 17:15:59 +0000
+CC: "Vineeth Pillai (Google)" <vineeth@bitbyteword.org>, Steven Rostedt <rostedt@goodmis.org>, Peter Zijlstra <peterz@infradead.org>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 01/15] tracepoint: Add trace_invoke_##name() API
+Subject: [Linaro-mm-sig] [PATCH 08/15] dma-buf: Use trace_invoke_##name() at guarded tracepoint call sites
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EEDY3X4AD4YROVMMO325TWZGHCNBMJBR/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NAI6IXJT4S6V7RM73E5TEPWGXEMKYIZK/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -95,106 +91,70 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [2.99 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [1.49 / 15.00];
 	DATE_IN_PAST(1.00)[938];
+	MID_CONTAINS_FROM(1.00)[];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	DMARC_NA(0.00)[bitbyteword.org];
-	ARC_NA(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_CC(0.00)[bitbyteword.org,kernel.org,efficios.com,redhat.com,kernel.dk,vger.kernel.org,davemloft.net,google.com,iogearbox.net,gmail.com,ovn.org,lists.sourceforge.net,openvswitch.org,intel.com,lists.freedesktop.org,linaro.org,amd.com,linux.intel.com,samsung.com,lists.linaro.org,linux.ibm.com,codeconstruct.com.au,lists.ozlabs.org,ffwll.ch,kerne l.org,sang-engineering.com,analog.com,HansenPartnership.com,oracle.com,fb.com,suse.com];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[72];
-	FROM_NEQ_ENVFROM(0.00)[vineeth@bitbyteword.org,linaro-mm-sig-bounces@lists.linaro.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,renesas];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	NEURAL_SPAM(0.00)[0.220];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,goodmis.org:email,linaro.org:email,infradead.org:email,bitbyteword.org:mid,bitbyteword.org:email]
-X-Rspamd-Queue-Id: BCAB0430E07
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	ARC_NA(0.00)[];
+	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	NEURAL_HAM(-0.00)[-0.628];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[vineeth@bitbyteword.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[10];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	DMARC_NA(0.00)[bitbyteword.org];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:email,bitbyteword.org:mid,bitbyteword.org:email,linaro.org:email,goodmis.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
+X-Rspamd-Queue-Id: 1444B430E17
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Add trace_invoke_##name() as a companion to trace_##name().  When a
-caller already guards a tracepoint with an explicit enabled check:
-
-  if (trace_foo_enabled() && cond)
-      trace_foo(args);
-
-trace_foo() internally repeats the static_branch_unlikely() test, which
-the compiler cannot fold since static branches are patched binary
-instructions.  This results in two static-branch evaluations for every
-guarded call site.
-
-trace_invoke_##name() calls __do_trace_##name() directly, skipping the
-redundant static-branch re-check.  This avoids leaking the internal
-__do_trace_##name() symbol into call sites while still eliminating the
-double evaluation:
-
-  if (trace_foo_enabled() && cond)
-      trace_invoke_foo(args);   /* calls __do_trace_foo() directly */
-
-Three locations are updated:
-- __DECLARE_TRACE: invoke form omits static_branch_unlikely, retains
-  the LOCKDEP RCU-watching assertion.
-- __DECLARE_TRACE_SYSCALL: same, plus retains might_fault().
-- !TRACEPOINTS_ENABLED stub: empty no-op so callers compile cleanly
-  when tracepoints are compiled out.
+Replace trace_foo() with the new trace_invoke_foo() at sites already
+guarded by trace_foo_enabled(), avoiding a redundant
+static_branch_unlikely() re-evaluation inside the tracepoint.
+trace_invoke_foo() calls the tracepoint callbacks directly without
+utilizing the static branch again.
 
 Suggested-by: Steven Rostedt <rostedt@goodmis.org>
 Suggested-by: Peter Zijlstra <peterz@infradead.org>
 Signed-off-by: Vineeth Pillai (Google) <vineeth@bitbyteword.org>
 Assisted-by: Claude:claude-sonnet-4-6
 ---
- include/linux/tracepoint.h | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+ drivers/dma-buf/dma-fence.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/include/linux/tracepoint.h b/include/linux/tracepoint.h
-index 22ca1c8b54f32..07219316a8e14 100644
---- a/include/linux/tracepoint.h
-+++ b/include/linux/tracepoint.h
-@@ -294,6 +294,10 @@ static inline struct tracepoint *tracepoint_ptr_deref(tracepoint_ptr_t *p)
- 			WARN_ONCE(!rcu_is_watching(),			\
- 				  "RCU not watching for tracepoint");	\
- 		}							\
-+	}								\
-+	static inline void trace_invoke_##name(proto)			\
-+	{								\
-+		__do_trace_##name(args);				\
- 	}
+diff --git a/drivers/dma-buf/dma-fence.c b/drivers/dma-buf/dma-fence.c
+index 35afcfcac5910..8884ad1ff0dab 100644
+--- a/drivers/dma-buf/dma-fence.c
++++ b/drivers/dma-buf/dma-fence.c
+@@ -535,7 +535,7 @@ dma_fence_wait_timeout(struct dma_fence *fence, bool intr, signed long timeout)
  
- #define __DECLARE_TRACE_SYSCALL(name, proto, args, data_proto)		\
-@@ -313,6 +317,11 @@ static inline struct tracepoint *tracepoint_ptr_deref(tracepoint_ptr_t *p)
- 			WARN_ONCE(!rcu_is_watching(),			\
- 				  "RCU not watching for tracepoint");	\
- 		}							\
-+	}								\
-+	static inline void trace_invoke_##name(proto)			\
-+	{								\
-+		might_fault();						\
-+		__do_trace_##name(args);				\
+ 	if (trace_dma_fence_wait_start_enabled()) {
+ 		rcu_read_lock();
+-		trace_dma_fence_wait_start(fence);
++		trace_invoke_dma_fence_wait_start(fence);
+ 		rcu_read_unlock();
  	}
- 
- /*
-@@ -398,6 +407,8 @@ static inline struct tracepoint *tracepoint_ptr_deref(tracepoint_ptr_t *p)
- #define __DECLARE_TRACE_COMMON(name, proto, args, data_proto)		\
- 	static inline void trace_##name(proto)				\
- 	{ }								\
-+	static inline void trace_invoke_##name(proto)			\
-+	{ }								\
- 	static inline int						\
- 	register_trace_##name(void (*probe)(data_proto),		\
- 			      void *data)				\
+ 	if (fence->ops->wait)
+@@ -544,7 +544,7 @@ dma_fence_wait_timeout(struct dma_fence *fence, bool intr, signed long timeout)
+ 		ret = dma_fence_default_wait(fence, intr, timeout);
+ 	if (trace_dma_fence_wait_end_enabled()) {
+ 		rcu_read_lock();
+-		trace_dma_fence_wait_end(fence);
++		trace_invoke_dma_fence_wait_end(fence);
+ 		rcu_read_unlock();
+ 	}
+ 	return ret;
 -- 
 2.53.0
 
