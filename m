@@ -2,166 +2,92 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id iGL0JU5f5mkWvgEAu9opvQ
+	id aJkkAlRf5mkWvgEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:15:58 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:16:04 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 13CDE430D65
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:15:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 272F6430D75
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:16:03 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B27513F6F8
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:15:56 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.10])
-	by lists.linaro.org (Postfix) with ESMTPS id 3A9AE3F7EE
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 12 Mar 2026 05:44:44 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 28EF63F6F8
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:16:02 +0000 (UTC)
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+	by lists.linaro.org (Postfix) with ESMTPS id A3CA53F7DE
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 12 Mar 2026 09:03:41 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=ELF82j0+;
-	arc=reject ("signature check failed: fail, {[1] = sig:microsoft.com:reject}");
-	spf=pass (lists.linaro.org: domain of vivek.kasireddy@intel.com designates 192.198.163.10 as permitted sender) smtp.mailfrom=vivek.kasireddy@intel.com;
-	dmarc=pass (policy=none) header.from=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1773294284; x=1804830284;
-  h=from:to:cc:subject:date:message-id:references:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=iWkVZagBrGuH/C9n4oVzmSqdZoP5sU5HB4MZ1ly6HNs=;
-  b=ELF82j0+rt7F6Cs5rLzIYoUdcIIHBree8HalO50UYpKaS9tEp5q9qKko
-   FWN+IY0k5ksijhz27RmIvYtQnI0LZO3P/cVpl2Llja0EUQ6BuC7DiDbGg
-   TfmoLKgYJAa3MrOrpYpTnxsXyAYCfzlFSHwCGj2xCzI+YLnthRASPOAaU
-   POGAKlXDOWBmg5HENyGEifIX/OfGcizQrMfwxCzDkWgvdbfjvEWhKJFbO
-   NYvzwsKi/rn/1R6APmKRSdNxU06+f+f3QmofPUrJTLPsfahQ+cPO+05o2
-   wSysB+veWnD2e54+YDUWbmCKhML3aO1bagAZE+g3jADuFBdi7xFMqtHTV
-   A==;
-X-CSE-ConnectionGUID: NZ0ZoaGFQmy5mj9W63FU/Q==
-X-CSE-MsgGUID: e7DBpxnVS56IeUnWE0JE5g==
-X-IronPort-AV: E=McAfee;i="6800,10657,11726"; a="85729920"
-X-IronPort-AV: E=Sophos;i="6.23,115,1770624000";
-   d="scan'208";a="85729920"
-Received: from orviesa010.jf.intel.com ([10.64.159.150])
-  by fmvoesa104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Mar 2026 22:44:43 -0700
-X-CSE-ConnectionGUID: +GiLk4QVR3+ets+h8VRdcg==
-X-CSE-MsgGUID: KT8qcQSrTHuqDjyoVTVfog==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.23,115,1770624000";
-   d="scan'208";a="219976513"
-Received: from fmsmsx903.amr.corp.intel.com ([10.18.126.92])
-  by orviesa010.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Mar 2026 22:44:44 -0700
-Received: from FMSMSX902.amr.corp.intel.com (10.18.126.91) by
- fmsmsx903.amr.corp.intel.com (10.18.126.92) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.37; Wed, 11 Mar 2026 22:44:42 -0700
-Received: from fmsedg901.ED.cps.intel.com (10.1.192.143) by
- FMSMSX902.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.37 via Frontend Transport; Wed, 11 Mar 2026 22:44:42 -0700
-Received: from BN1PR04CU002.outbound.protection.outlook.com (52.101.56.60) by
- edgegateway.intel.com (192.55.55.81) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.37; Wed, 11 Mar 2026 22:44:41 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Cg7nU1AOn1LeyR1T+rDM/g0siPYF0+x/o57yh1qo3oh5817Tb8z6KXEL+wkH7GyWM7F/V6M9m+3LBCm66dZqQH2ZQjpwUXZvD2+UHW+pnWLI8gwhUgz63CpickK10LbYCJtVmkjUGG8iga+sLPIxACz0c3IOco5DOga5HER9APcPLuxzxhnZyOB6woIlQl8VWLsP+gDGLDAS8hI5hD88kgLRNrkkEpcISHwO/4FnweW9fErM+DS6ZyvfpcgXvpz7fMovgCyDqSBPIeCyHVoHYu1CZwgpsAtOIfXDICHT6e83X3wJHxIqQILzVUXM5HKQhGxWrq5nUODPVkQFX8kjXw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=iWkVZagBrGuH/C9n4oVzmSqdZoP5sU5HB4MZ1ly6HNs=;
- b=JxQEow5wfedeAeYtTOurKBVqvZbVMYEGoloZlfIW7kWJIYT1Ujevyhy/obdx3/iBoaIFSxWvuXDSJu6khfw9gVZCPOT/5Vs7KV4j+AYEZrrexY2ijdS0X0NowXng8NkC+qip2i/6WF2uvh3GAFVOV/qqk6BNJzl0RWquKSKVx46+jfehTEvfLUINPdARXI7YPr/IYY2nR90WkVAhK3p0S5JM11KwIR2Q4ao4JVRnCADivD5uQMC/YYgvTDPE7ySSooVC68v/pRipXV2KSX5Pz4CPcNbFLIz2P1fS/UKcIwH2pFXnocZOnQCDEUx9n3Snbtgfz7Gp6iREFvC+s0p4xQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Received: from IA0PR11MB7185.namprd11.prod.outlook.com (2603:10b6:208:432::20)
- by DM4PR11MB7253.namprd11.prod.outlook.com (2603:10b6:8:10f::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.6; Thu, 12 Mar
- 2026 05:44:33 +0000
-Received: from IA0PR11MB7185.namprd11.prod.outlook.com
- ([fe80::9f37:cb81:5463:300e]) by IA0PR11MB7185.namprd11.prod.outlook.com
- ([fe80::9f37:cb81:5463:300e%5]) with mapi id 15.20.9700.010; Thu, 12 Mar 2026
- 05:44:33 +0000
-From: "Kasireddy, Vivek" <vivek.kasireddy@intel.com>
+	dkim=pass header.d=resnulli-us.20230601.gappssmtp.com header.s=20230601 header.b=tyb7ddsT;
+	spf=none (lists.linaro.org: domain of jiri@resnulli.us has no SPF policy when checking 209.85.221.53) smtp.mailfrom=jiri@resnulli.us;
+	dmarc=none
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-439c56e822eso806274f8f.2
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 12 Mar 2026 02:03:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=resnulli-us.20230601.gappssmtp.com; s=20230601; t=1773306220; x=1773911020; darn=lists.linaro.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=FFPtayDDhz8Xf/M05gyckNDjnYEg9BLk1Cs40ltYFF0=;
+        b=tyb7ddsTf3oV1qh0deKp4t2fYaGY/o5i5jj9Q5GEASB66uQg1nogG4TZLaPmDOxWrq
+         iejVrQmywoOEQBUhuv6qstXjnDDCdC6MWIUB9EcY7EEnrSIZ5oz86MvpdI04tZ42XiB8
+         zAiIHXl79UIsZWZAqZAAk1zIufX1zoErVkb1HPV/mSV4+H1/R7qezvcpAgS7K4FA3IZn
+         0mGhc2c9JdSdTYYT/nY9NQWe97WFAiD+W4S5iARAUjvea8rZobZsskj6dIpwY0pvwfnJ
+         AeeC8RmC7gG9JhIxUL0O8v9i+j3nl2CQhpGSK3QUMlAfJU9qXrlVdxjpnwo/scMWeMRN
+         8tug==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1773306220; x=1773911020;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=FFPtayDDhz8Xf/M05gyckNDjnYEg9BLk1Cs40ltYFF0=;
+        b=Tlqb6iF1/9cQ1+7iMoyZLKrdXVu+nJ7Lgx1adhM61RhXqhUuEoY2zFU/RYcfjEy+2W
+         R8gUksTzqtwCbODVe2lmY5iNi5RD/Be4ePKHQjY7o37M/MgnKfP+VOZoZImWSsqa8CZl
+         Svk9xrQ2L2ZjiPUyrbGlUAzc+LT1lkIUbEh7LXzzND4btszAPY+Bt883wfREpnihKnkq
+         8dGFABbFAJ+D7sxWE3/i/wfEVuod76MttmMnK+wo6P+qleCziS0eZtERkRd3cZ2XLLYa
+         RZKcCoR8d9EzbvgHDeIw2w/76NEWpiAMS32LyPA9BOQMmHAnLIemxoIj8xR6K7y6LqYx
+         Uy2w==
+X-Forwarded-Encrypted: i=1; AJvYcCVrJ+njWgjyTC/l6jNJlc+BqwihkJgDPX8DVMaM3TIElFWFss3HlYT6YKbda8kRhLQwTReH3U3tpnePC4nG@lists.linaro.org
+X-Gm-Message-State: AOJu0Yxj1wEoko5XQYL++lBksxIP8YZbaC5dZWq1KvJqL1A8pyjqH9/q
+	59NLRGAu8sD7pkKvUrFNaEgPb9RVZrUU8rZX9C5c5SJnoElYBXX5KL0SNs8s5pJxZCs=
+X-Gm-Gg: ATEYQzz3Q3SAQe62MOFsblRuH3GekXPTzLSrggU2jKdh7yDKFBPic0MmJtmGlPfdpEk
+	7dYwHE+3KT5n+UVrbbdNXy+Q3GjJ7UX6FkMLyH1XdzolLwOoBE1b2GBHePy96a5qoFOZRf8SNGP
+	IZFy9wI/aKqqNWggvIgrmj11ihGiO9VbGH11wUI93mLvn4qBDIEdhoAeG1Kyl4jgEh/h4WdEv/E
+	nIrEEu/v6VWf1J08co4nx36dvI+u1eTFSZO0hikpnSOMzJddu9CNP3YG+W3aFEvNL78Ur+C0vBF
+	mQ9/1AQkcgM9mdPfC65uLX0lGwmgQzI7Ef20g5xYZW6+w+Nd1qhpDUZULXaSyglmdL4TsBUrQL6
+	q1m2rs3hvVNsM943Ka3IuQBlUpbQJBfABePqbecP5ooMmgKZwdnbm4LOFGLzh0hMRcoTHUnHtDA
+	I286kmyqrleTOLfmiFjZFPKnOpqKEsPEM=
+X-Received: by 2002:a05:6000:24c4:b0:439:b3ff:9abb with SMTP id ffacd0b85a97d-439f8224fc0mr10284840f8f.57.1773306220321;
+        Thu, 12 Mar 2026 02:03:40 -0700 (PDT)
+Received: from FV6GYCPJ69 ([85.163.81.98])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439fe19aec5sm6366764f8f.4.2026.03.12.02.03.38
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 12 Mar 2026 02:03:39 -0700 (PDT)
+Date: Thu, 12 Mar 2026 10:03:37 +0100
+From: Jiri Pirko <jiri@resnulli.us>
 To: Jason Gunthorpe <jgg@ziepe.ca>
-Thread-Topic: [PATCH] lib/scatterlist: fix sg_page_count and sg_dma_page_count
-Thread-Index: AQHcrytGgNCxhmh1dUGazU9lY/+Y4bWmiV1QgAEz34CAAGnkcIABGZwAgAC4ITA=
-Date: Thu, 12 Mar 2026 05:44:33 +0000
-Message-ID: <IA0PR11MB718514D54A36FB1CE012C877F844A@IA0PR11MB7185.namprd11.prod.outlook.com>
-References: <20260308-scatterlist-v1-1-39c4566b0bba@gmail.com>
- <20260308180826.GG1687929@ziepe.ca>
- <CAHijbEX=LN_ntp6zwsqy3sW7EB+E6cBCWnrKZb_RqdNG=Et_3g@mail.gmail.com>
- <IA0PR11MB7185574E3A63285860017D69F846A@IA0PR11MB7185.namprd11.prod.outlook.com>
- <20260310125953.GS1687929@ziepe.ca>
- <IA0PR11MB71859E28938D1695D4223B8AF847A@IA0PR11MB7185.namprd11.prod.outlook.com>
- <20260311120648.GV1687929@ziepe.ca>
-In-Reply-To: <20260311120648.GV1687929@ziepe.ca>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: IA0PR11MB7185:EE_|DM4PR11MB7253:EE_
-x-ms-office365-filtering-correlation-id: a4e8ba90-9d91-43ae-2c75-08de7ffa7069
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;ARA:13230040|366016|376014|7416014|1800799024|22082099003|56012099003|18002099003|38070700021;
-x-microsoft-antispam-message-info: +opUywkeEKfhFevxWIg3y8LaplekV8tu//DdA9XsxBrnJ6I2yqZPLfq9ZP4wGrHLmccX8k7gyxf80eLednR0AvGdlMTpk4jubXLS/GFNNUd7htQg7NLI0kNTAIcffodyfvOoXxOhgOrBzz37msmKpPQrll7Z5ojrUBW8N/7a6Y5Cw27YFiD3KHGC2hrWRWudkfchDD5WqwOfMoDVyf3MceluuhcuMLo9RRCowp583p0xFDG69cZVUvrk7+Z9U2YlD8Pq7dkagGZtxvfgDERRs1Ag/nMVtqmlk87Z85SM2o9Sm9Z+xcjka5/usG82N/dXIOBpX63wT21HuojNoSiZ8uV8UPKTEi+QATTEgWvDduY8O1X95CmOznrIdq8xWXPJ0zfRCp8PmfENWI7lkx5tvAKRYdYbrwyRGj7lwfKhV/cbQj7HUQrH+2ONoxMEkoPLCMITqiaiwSC3JyL0JkGju+Jd7gipFLM4sYjn/KszpLv3towJxdxuvAcNwXGybxFitnLmFqg9hk1EnsigErRN6cAJY3TecftOGPZDOYmj7CMTI9jXJlreWSy+4HYv/VWEujjNqREzRb+TfTmUodruMwpk7pj7dnsKHeCZ9hb1BJg+XYynLqEkvSzb7pbas2iQ+3zOUdaJtHmYH8HxApwpkTlDBmqdcgaQ6goPstKjzhnJVHVNGTFxCR4qDIC+/Y3k/lBTEKn6Zjblwkrntxv8QKDp+o2m7O2HBjzW1N6024B0uxdwMjr6CVfaKufpLzxOUR9UqQcjs12KIT7Gk7lQyBktwbWFzT4HSS/7i+3iCbI=
-x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA0PR11MB7185.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(7416014)(1800799024)(22082099003)(56012099003)(18002099003)(38070700021);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?2n40VHGOw8BhQILcco86NtadoH8enFa/LOh5D6UyRMmDEa238ixVYiYz6M?=
- =?iso-8859-1?Q?OPmLVTglgJGfrmt+W0bTlT8bBItQ3YfIT+n8I47HUM5n/ffexHnXc2dHlP?=
- =?iso-8859-1?Q?b3BJ28AJNZojQd+Bxak67Hry5Xoq02h1TJo6RbRx4OUbAcSPonIPCTTPEd?=
- =?iso-8859-1?Q?tVB6fB9shnuFMfY6/FJXYAT8HXhA9Nf+4RNoT895ibyjPJQM3iasLHDUpn?=
- =?iso-8859-1?Q?FsxoD6IdvbBKzUwAWiqlCsC4aLp2B0Z4TF3YQnq0BZ87kY91kTS7R/JbYG?=
- =?iso-8859-1?Q?TgC9bI7e1N+epFBgvKr4OmQM2+cVLnpMWclBmM0gaVzxvFaoWYamrylrJ7?=
- =?iso-8859-1?Q?PBcs5XS/kVpw7AzKjJANTeNeNWTjYqFxoanx/nML5DWjPhmvwFweAD7o/9?=
- =?iso-8859-1?Q?8errmH2LKQkIOiaM71S94T8RzamZnkGQViuKQ3i04DmcUZv7vuwdnXENgq?=
- =?iso-8859-1?Q?R02tdkUM2x7PqLAU8EIQECHPs5F2wgYeKxT1eny+1lNMphVL2wrvmrceyo?=
- =?iso-8859-1?Q?doH4De8TerT30qA98nCCe1n9JXM4s4+EYXhRRFtHpHwXW4Wx7X1shD4Muw?=
- =?iso-8859-1?Q?Vw2yUsH3VB3wRnbvdyTKszDjrJVInUZSJG4fBp2LT8ykzsueRlJlQ4YJRo?=
- =?iso-8859-1?Q?QhuOmkUJRw/1g4uoo27EpQHnVzOdBKN1PyJcQrRwCScQakT7L44HR0y6ZW?=
- =?iso-8859-1?Q?j83kpAZoX0Xlxm8S5bucDz5jf+IshcBxTkO63dMOGN1jzod+GT2P6KvGLz?=
- =?iso-8859-1?Q?pZYI0lAhdixyZvLM5ZdYa4SfKdlZ5Sdcj6a5iLKux83qoMcG6NJkq0P+Ax?=
- =?iso-8859-1?Q?OD/ZEOv0sHhZSHOfAxfWZ+2Jp54uMBum65kVprUxO5eLy0Uz5EztdddpgP?=
- =?iso-8859-1?Q?jPTpG8jJVrm7VpIiHLKFzndv4YhPk+v638DLxbWktIbMgmN0uQ4F4rJe6q?=
- =?iso-8859-1?Q?iCKhwXrYVqUqI6FDlUtheYF6Ou/Jq0AOX6swPNaThw1gHVvTWA7UnxcEOn?=
- =?iso-8859-1?Q?1PdlE5YovIH4qFO+8TkrUn1R3N8A+bTIOGX7BIHOgGAzHjpzfoqjuy1zou?=
- =?iso-8859-1?Q?WBlfp231g7GtS++vz33Nq3GZmTYqVVT+4JbJiroJSBSB/PTRXqaHJL78ag?=
- =?iso-8859-1?Q?EFG81f9yI/AxB4IxowR5Fw3Oz5HxrBhh5VGqph0XZxIJ1gRGJXFiSviUfa?=
- =?iso-8859-1?Q?h0BLqnlYtA94fH+8e9oBeCjU7u6PvxaeLrMJvqeY0wVSG2MUil2USuLDN5?=
- =?iso-8859-1?Q?jZywgmTvLrDnO3mbuIdpmZIh2T13N+PBCqpmy+p2CydgHQsQsn5cSgDmfZ?=
- =?iso-8859-1?Q?gSu1Dg38mBWyWrFfAEc/bBPcWmcSe61ofO+26nF21p7Nkx4TZVv2IIm+wd?=
- =?iso-8859-1?Q?A1cYXlMrSbSEOjurFytKPAW9I4LiwLiEul9MJ1WdmBhHeLeHU754pbr2sa?=
- =?iso-8859-1?Q?N2FR31RxXEXAPlgbwlF/7V02A4+q3+BN/rr9ZF+MenPitSU2scg8Vigx1C?=
- =?iso-8859-1?Q?2O9KsvjdhhEo6E+sTsIfHX9/oTRnLFjBKLCk6wdY8C25LGEuHQyx/pe4F8?=
- =?iso-8859-1?Q?R+cTIQ/aR2MMnt6J77jSla5tYghryO+k6jslPI8qVKohLeHFxBJTQrgX61?=
- =?iso-8859-1?Q?w8C3J/2CXXVUGRSFfRI43cHR9EW2VHdVISi8hJCVWGnyfUOXu6UYf4bme8?=
- =?iso-8859-1?Q?zlnyFbCbrqLobpfXfBolpnxS7GF2IdUwD1v4XcAC11I+TtSlnwBVDWpCpZ?=
- =?iso-8859-1?Q?/A9Ep4nLGVJtc1Hjya9dd5eKoySiLo0lz6RlJ4KbH9KCqmA3WopKpX3FjZ?=
- =?iso-8859-1?Q?kbq8wSkwFQ=3D=3D?=
+Message-ID: <pmfxzgtazwa7fwz4mx53htdg4jjifwyq3gyzwklc45affy3xrp@57hxan4pqnkx>
+References: <20260305123641.164164-1-jiri@resnulli.us>
+ <20260305123641.164164-2-jiri@resnulli.us>
+ <20260308101948.GO12611@unreal>
+ <20260309131530.GJ1687929@ziepe.ca>
+ <20260309140233.GW12611@unreal>
+ <20260309151857.GO1687929@ziepe.ca>
+ <phry3e2dtgxzxdqvrnqfuskangp4al64f2auithwme5kwkgepe@7qtftrhgv4l7>
+ <20260312003408.GA1469476@ziepe.ca>
 MIME-Version: 1.0
-X-Exchange-RoutingPolicyChecked: KxJMYvfSpp/3sn6maT7xop4BBr2NMXkHUKPFUkuxEyHXd+VeNjgup5LzmNprtS3A4yzf2APXkfTDPPdYs/gFc3PtT9sM6oeXw3lq+nOU6ThGC7w16D8MgPg5WEmI0ySLev5rqwKpkXyFIS5TdwQb0m7xktN2d++WJqccHIUm9b2p8UDTMe8kxUg8f/P1H3BsCNdAJirPltXUSYKowibIZNXMyvuoVi+IOl7p/y+h8nwnbkoG9DDcDVGHA2Pfoh+tQCpQ/qVT06AGvFY05DTKY+CuoknbSK1/Ylqxp1rOlQs9lBfOFkyqk3bPZfj0SuwJVSG13OAaS/mS6EOmeROBEg==
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: IA0PR11MB7185.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a4e8ba90-9d91-43ae-2c75-08de7ffa7069
-X-MS-Exchange-CrossTenant-originalarrivaltime: 12 Mar 2026 05:44:33.7105
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: v+Yms4q+1i7jHVLHKqz79yt5RqmkGIyubiSOn1og40Sgl/Qpn9T1V/D6PgiLQOsM3wtl9kwWZ6GOQYYU/jbCDZhLWzWGTqr+HnSZoRJJJoE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR11MB7253
-X-OriginatorOrg: intel.com
-X-Spamd-Bar: -----
-X-MailFrom: vivek.kasireddy@intel.com
+Content-Disposition: inline
+In-Reply-To: <20260312003408.GA1469476@ziepe.ca>
+X-Spamd-Bar: --
+X-MailFrom: jiri@resnulli.us
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 3JWYTCCJZUDAMI3XSU72KGCSLS5I2V6N
-X-Message-ID-Hash: 3JWYTCCJZUDAMI3XSU72KGCSLS5I2V6N
-X-Mailman-Approved-At: Mon, 20 Apr 2026 17:15:54 +0000
-CC: Julian Orth <ju.orth@gmail.com>, Andrew Morton <akpm@linux-foundation.org>, Sakari Ailus <sakari.ailus@linux.intel.com>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, Gerd Hoffmann <kraxel@redhat.com>, Sumit Semwal <sumit.semwal@linaro.org>, =?iso-8859-1?Q?Christian_K=F6nig?= <christian.koenig@amd.com>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>
+Message-ID-Hash: ERWDP5H2EQJJEPJRQJFQCMDL2D72LTMT
+X-Message-ID-Hash: ERWDP5H2EQJJEPJRQJFQCMDL2D72LTMT
+X-Mailman-Approved-At: Mon, 20 Apr 2026 17:15:55 +0000
+CC: Leon Romanovsky <leon@kernel.org>, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, iommu@lists.linux.dev, linux-media@vger.kernel.org, sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, Brian.Starkey@arm.com, jstultz@google.com, tjmercier@google.com, christian.koenig@amd.com, robin.murphy@arm.com, sean.anderson@linux.dev, ptesarik@suse.com, catalin.marinas@arm.com, aneesh.kumar@kernel.org, suzuki.poulose@arm.com, steven.price@arm.com, thomas.lendacky@amd.com, john.allen@amd.com, ashish.kalra@amd.com, suravee.suthikulpanit@amd.com, linux-coco@lists.linux.dev
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] lib/scatterlist: fix sg_page_count and sg_dma_page_count
+Subject: [Linaro-mm-sig] Re: [PATCH net-next v3 1/2] dma-mapping: introduce DMA_ATTR_CC_DECRYPTED for pre-decrypted memory
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3JWYTCCJZUDAMI3XSU72KGCSLS5I2V6N/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ERWDP5H2EQJJEPJRQJFQCMDL2D72LTMT/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -170,59 +96,80 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [4.09 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[intel.com:s=Intel];
-	DATE_IN_PAST(1.00)[947];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
+X-Spamd-Result: default: False [0.99 / 15.00];
+	DATE_IN_PAST(1.00)[944];
+	MID_RHS_NOT_FQDN(0.50)[];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
-	DMARC_POLICY_SOFTFAIL(0.10)[intel.com : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	GREYLIST(0.00)[pass,meta];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,IA0PR11MB7185.namprd11.prod.outlook.com:mid];
-	DKIM_TRACE(0.00)[intel.com:-];
+	RCVD_COUNT_THREE(0.00)[4];
+	DMARC_NA(0.00)[resnulli.us];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.863];
-	FROM_NEQ_ENVFROM(0.00)[vivek.kasireddy@intel.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[gmail.com,linux-foundation.org,linux.intel.com,vger.kernel.org,redhat.com,linaro.org,amd.com,lists.freedesktop.org,lists.linaro.org];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[24];
+	RCVD_TLS_LAST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	FROM_NEQ_ENVFROM(0.00)[jiri@resnulli.us,linaro-mm-sig-bounces@lists.linaro.org];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	RCVD_COUNT_SEVEN(0.00)[9]
-X-Rspamd-Queue-Id: 13CDE430D65
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	NEURAL_SPAM(0.00)[0.153];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,ziepe.ca:email]
+X-Rspamd-Queue-Id: 272F6430D75
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-> Subject: Re: [PATCH] lib/scatterlist: fix sg_page_count and
-> sg_dma_page_count
-> > 
-> > So, given the current situation, what is the right thing to do?
-> > Should we take your patch that brings back the pages array and treat it
-> as
-> > a temporary fix until equivalent folio based APIs are available?
-> 
-> IMHO, yes. It saves memory, increases performance, fixes the bug and
-> uses the APIs properly.
-Alright, then please send your patch again to dri-devel. I can review and
-test it.
+Thu, Mar 12, 2026 at 01:34:08AM +0100, jgg@ziepe.ca wrote:
+>On Mon, Mar 09, 2026 at 06:51:21PM +0100, Jiri Pirko wrote:
+>> Mon, Mar 09, 2026 at 04:18:57PM +0100, jgg@ziepe.ca wrote:
+>> >On Mon, Mar 09, 2026 at 04:02:33PM +0200, Leon Romanovsky wrote:
+>> >> On Mon, Mar 09, 2026 at 10:15:30AM -0300, Jason Gunthorpe wrote:
+>> >> > On Sun, Mar 08, 2026 at 12:19:48PM +0200, Leon Romanovsky wrote:
+>> >> > 
+>> >> > > > +/*
+>> >> > > > + * DMA_ATTR_CC_DECRYPTED: Indicates memory that has been explicitly decrypted
+>> >> > > > + * (shared) for confidential computing guests. The caller must have
+>> >> > > > + * called set_memory_decrypted(). A struct page is required.
+>> >> > > > + */
+>> >> > > > +#define DMA_ATTR_CC_DECRYPTED	(1UL << 12)
+>> >> > > 
+>> >> > > While adding the new attribute is fine, I would expect additional checks in
+>> >> > > dma_map_phys() to ensure the attribute cannot be misused. For example,
+>> >> > > WARN_ON(attrs & (DMA_ATTR_CC_DECRYPTED | DMA_ATTR_MMIO)), along with a check
+>> >> > > that we are taking the direct path only.
+>> >> > 
+>> >> > DECRYPYED and MMIO is something that needs to work, VFIO (inside a
+>> >> > TVM) should be using that combination.
+>> >> 
+>> >> So this sentence "A struct page is required" from the comment above is
+>> >> not accurate.
+>> >
+>> >It would be clearer to say "Unless DMA_ATTR_MMIO is provided a struct
+>> >page is required"
+>> >
+>> >We need to audit if that works properly, IIRC it does, but I don't
+>> >remember.. Jiri?
+>> 
+>> How can you do set_memory_decrypted if you don't have page/folio ?
+>
+>Alot of device MMIO is decrypted by nature and can't be encrypted, so
+>you'd have to use both flags. eg in VFIO we'd want to do this.
 
-Thanks,
-Vivek
+Why both flags? Why MMIO flag is not enough? You still want to hit
+"if (attrs & DMA_ATTR_MMIO) {" path, don't you?
 
-Thanks,
-Vivek
-> 
-> Jason
+I mean, CC_DECRYPTED says the memory to be mapped was explicitly
+decrypted before the call. MMIO was not explicitly decrypted, it is
+decrypted by definition. For me that does not fit the CC_DECRYPTED
+semantics.
+
+What am I missing?
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
