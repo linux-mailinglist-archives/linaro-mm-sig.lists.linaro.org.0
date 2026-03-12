@@ -2,64 +2,85 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id eDzxIrVf5mkxvgEAu9opvQ
+	id kNlQJ71f5mkqvgEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:17:41 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:17:49 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 39279430ED6
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:17:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 37598430EEC
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:17:49 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 45B7F40500
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:17:40 +0000 (UTC)
-Received: from relay.hostedemail.com (smtprelay0010.hostedemail.com [216.40.44.10])
-	by lists.linaro.org (Postfix) with ESMTPS id 9CB9A40175
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 12 Mar 2026 17:03:14 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3685D3F7D9
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:17:48 +0000 (UTC)
+Received: from mx0a-00082601.pphosted.com (mx0b-00082601.pphosted.com [67.231.153.30])
+	by lists.linaro.org (Postfix) with ESMTPS id 81403402CE
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 12 Mar 2026 18:46:37 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=none;
-	spf=pass (lists.linaro.org: domain of rostedt@goodmis.org designates 216.40.44.10 as permitted sender) smtp.mailfrom=rostedt@goodmis.org;
-	dmarc=pass (policy=none) header.from=goodmis.org
-Received: from omf03.hostedemail.com (a10.router.float.18 [10.200.18.1])
-	by unirelay10.hostedemail.com (Postfix) with ESMTP id ACCFFC188B;
-	Thu, 12 Mar 2026 17:03:07 +0000 (UTC)
-Received: from [HIDDEN] (Authenticated sender: rostedt@goodmis.org) by omf03.hostedemail.com (Postfix) with ESMTPA id 1BAFA6000C;
-	Thu, 12 Mar 2026 17:02:41 +0000 (UTC)
-Date: Thu, 12 Mar 2026 13:02:55 -0400
-From: Steven Rostedt <rostedt@goodmis.org>
-To: Andrii Nakryiko <andrii.nakryiko@gmail.com>
-Message-ID: <20260312130255.6476e560@gandalf.local.home>
-In-Reply-To: <CAEf4BzbnfyhCqp0ne=2gRnVxp-mdGmuZwDeFRyhRYH+eDcz2-w@mail.gmail.com>
-References: <20260312150523.2054552-1-vineeth@bitbyteword.org>
-	<1e3c2830-765e-4271-89f7-0b6784b37597@efficios.com>
-	<20260312112354.3dd99e36@gandalf.local.home>
-	<219d015d-076b-4c80-8f63-88569115fdad@efficios.com>
-	<20260312114041.5193c729@gandalf.local.home>
-	<1becdbce-2c01-468a-bbab-42b5dea9fdf8@efficios.com>
-	<CAO7JXPjnnruhM5oC6xMgnYaQ9efzYFqMCFiJLNM3HCQ+ZeCiJw@mail.gmail.com>
-	<CAEf4BzbnfyhCqp0ne=2gRnVxp-mdGmuZwDeFRyhRYH+eDcz2-w@mail.gmail.com>
-X-Mailer: Claws Mail 3.20.0git84 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+	dkim=pass header.d=meta.com header.s=s2048-2025-q2 header.b=lgc9YAVH;
+	spf=pass (lists.linaro.org: domain of "prvs=1531796282=mattev@meta.com" designates 67.231.153.30 as permitted sender) smtp.mailfrom="prvs=1531796282=mattev@meta.com";
+	dmarc=pass (policy=reject) header.from=meta.com
+Received: from pps.filterd (m0001303.ppops.net [127.0.0.1])
+	by m0001303.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 62CHs62U736980;
+	Thu, 12 Mar 2026 11:46:28 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=meta.com; h=cc
+	:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=s2048-2025-q2; bh=SebPAxzAbwZ4sR8TrB
+	gXGqjGB5kjL87tfUXzYAaiqr4=; b=lgc9YAVHFDkka23/1IXetZqaAHnr+ZYc0N
+	bDpm6eNxmg35Lbu4RVfg/OnR2i3efqG4aUPHmhVNBgnNFy79/qdrMZFQDqt5UxDS
+	Y0W/eIVUQfNJvm0kByv77RzjhdsDsHYdPdVPMUUmCaMLjJaQuy8oBeqDQeg2BncR
+	wtngDadxw9o+aPJInBaCW5q+uGBXIstPosgOYfP9a+SoYvHjN7VwxIKlRmPC2mqF
+	H7HTO3SpJQbm2pMg5AIVZNW8Ms8MgpB1618QSGPBr/PomBda/LGnhSP2du7Twp0c
+	eFInGnN8yFo3pZLSBLVBzd/nxSAlUwOcoodmIVj8Cgkr6T0HdyVg==
+Received: from mail.thefacebook.com ([163.114.134.16])
+	by m0001303.ppops.net (PPS) with ESMTPS id 4cv29xs1mr-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
+	Thu, 12 Mar 2026 11:46:27 -0700 (PDT)
+Received: from localhost (2620:10d:c085:208::f) by mail.thefacebook.com
+ (2620:10d:c08b:78::c78f) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.35; Thu, 12 Mar
+ 2026 18:46:26 +0000
+From: Matt Evans <mattev@meta.com>
+To: Alex Williamson <alex@shazbot.org>, Leon Romanovsky <leon@kernel.org>,
+        Jason Gunthorpe <jgg@nvidia.com>, Alex Mastro <amastro@fb.com>,
+        Mahmoud Adam
+	<mngyadam@amazon.de>,
+        David Matlack <dmatlack@google.com>
+Date: Thu, 12 Mar 2026 11:45:58 -0700
+Message-ID: <20260312184613.3710705-1-mattev@meta.com>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-X-Stat-Signature: kfs6qijpbuferuuhtorb6b835ny66tin
-X-Spam-Status: No, score=1.40
-X-Session-Marker: 726F737465647440676F6F646D69732E6F7267
-X-Session-ID: U2FsdGVkX18gNtqVqUvpV9OuqznTYLgQxysBeUr1V4g=
-X-HE-Tag: 1773334961-101407
-X-HE-Meta: U2FsdGVkX18nBBc/wjwt+Uq/UDhPM+TvyqJ3PzJ7XTdg8zJwcAeVzhmYzxHLf7pqvroMwwz3w+ZMve24FXDlwN4Al9l18e+sIMsly59QHs1WIGUGFWD+n9vC0YFBju5YF4U2cW8usaKA9ACod/DJfkWwChqILC7YI5fjo0jn+MDRzWgSUtcRWc+1ACqufST8GE1+cVaguSIGVLtHO49AgMgvbvjSqwoHR4+HUaDb14GsztIWWkzSI6t3CvJZWLJ62JKH4l1NZ0cseEdgq33l48qG8hnnyAiEMhQWmONsALjOWujHAfplawqsGy97HetKzPQbnSWVIVPTZt4F/YmoVmEIzpjR6X9B
-X-Spamd-Bar: -
-X-MailFrom: rostedt@goodmis.org
-X-Mailman-Rule-Hits: implicit-dest
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-Message-ID-Hash: 3GQN5UEDHJYQQIS2NDEX4QOKFSDKJXDE
-X-Message-ID-Hash: 3GQN5UEDHJYQQIS2NDEX4QOKFSDKJXDE
-X-Mailman-Approved-At: Mon, 20 Apr 2026 17:16:08 +0000
-CC: Vineeth Remanan Pillai <vineeth@bitbyteword.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Peter Zijlstra <peterz@infradead.org>, Dmitry Ilvokhin <d@ilvokhin.com>, Masami Hiramatsu <mhiramat@kernel.org>, Ingo Molnar <mingo@redhat.com>, Jens Axboe <axboe@kernel.dk>, io-uring@vger.kernel.org, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Alexei Starovoitov <ast@kernel.org>, Daniel Borkmann <daniel@iogearbox.net>, Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>, Xin Long <lucien.xin@gmail.com>, Jon Maloy <jmaloy@redhat.com>, Aaron Conole <aconole@redhat.com>, Eelco Chaudron <echaudro@redhat.com>, Ilya Maximets <i.maximets@ovn.org>, netdev@vger.kernel.org, bpf@vger.kernel.org, linux-sctp@vger.kernel.org, tipc-discussion@lists.sourceforge.net, dev@openvswitch.org, Oded Gabbay <ogabbay@kernel.org>, Koby Elbaz <koby.elbaz@intel.com>, dri-devel@lists.freedesktop.org, "Rafael J
- . Wysocki" <rafael@kernel.org>, Viresh Kumar <viresh.kumar@linaro.org>, "Gautham R. Shenoy" <gautham.shenoy@amd.com>, Huang Rui <ray.huang@amd.com>, Mario Limonciello <mario.limonciello@amd.com>, Len Brown <lenb@kernel.org>, Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>, linux-pm@vger.kernel.org, MyungJoo Ham <myungjoo.ham@samsung.com>, Kyungmin Park <kyungmin.park@samsung.com>, Chanwoo Choi <cw00.choi@samsung.com>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Sumit Semwal <sumit.semwal@linaro.org>, linaro-mm-sig@lists.linaro.org, Eddie James <eajames@linux.ibm.com>, Andrew Jeffery <andrew@codeconstruct.com.au>, linux-fsi@lists.ozlabs.org, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Alex Deucher <alexander.deucher@amd.com>, Danilo Krummrich <dakr@kernel.org>, Matthew Brost <matthew.brost@intel.com>, Philipp Stanner <phasta@kernel.org>, Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>, amd-gfx@lists.freedesktop.org,
-  Jiri Kosina <jikos@kernel.org>, Benjamin Tissoires <bentiss@kernel.org>, linux-input@vger.kernel.org, Wolfram Sang <wsa+renesas@sang-engineering.com>, linux-i2c@vger.kernel.org, Mark Brown <broonie@kernel.org>, Michael Hennerich <michael.hennerich@analog.com>, Nuno =?UTF-8?B?U8Oh?= <nuno.sa@analog.com>, linux-spi@vger.kernel.org, "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>, "Martin K. Petersen" <martin.petersen@oracle.com>, linux-scsi@vger.kernel.org, Chris Mason <clm@fb.com>, David Sterba <dsterba@suse.com>, linux-btrfs@vger.kernel.org, linux-trace-kernel@vger.kernel.org, linux-kernel@vger.kernel.org
+X-Originating-IP: [2620:10d:c085:208::f]
+X-Proofpoint-ORIG-GUID: jXI8TQKq_Doe6vXOdWcCSqqgnYUYBjaV
+X-Proofpoint-GUID: jXI8TQKq_Doe6vXOdWcCSqqgnYUYBjaV
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzEyMDE1MSBTYWx0ZWRfX9GAz447p88t4
+ DxYilgJjn4/e/YE1QpygQ/d24uKsttN1tIwLrQ7VfMWaSvoUpryxXhFtGhNtaB8O4tEiwAr7UBe
+ j004boiTD+LUadeYsCpyixfHC342rVM1HkJZCtHajuq8BMTD/uKwZFnXhidFg68pzAtJJ+SQzi7
+ /JccWczKg6MeYpuNcjIm7H6lROOjTYRuO2+qyfbsmQGNzet8qaujzT4rbOUzzRMcc83Er0LPJwt
+ LQrCvHelJuxy90z3BhLrIJvXm5FKrVNn0DD5lS0slRHGSWtolevGJ8XV69pLS2bq1wuLnVPA+yi
+ /4xLsvU/UCuW/14NJri/IZp/jGF3Pb9E9pFtrJaV+Ivt3c+lkTPVawRMEgDfcOYuSN+AFQBVI0Z
+ Shbo34owsiND/UiliNYlXug6V5B+rbQUHyyT4zx3vEZct92Q4K2ITdQ4jGV2OFGsQGtXA9ifBbZ
+ oI04QLHhnE33hxWrARw==
+X-Authority-Analysis: v=2.4 cv=G4YR0tk5 c=1 sm=1 tr=0 ts=69b30a03 cx=c_pps
+ a=CB4LiSf2rd0gKozIdrpkBw==:117 a=CB4LiSf2rd0gKozIdrpkBw==:17
+ a=Yq5XynenixoA:10 a=VkNPw1HP01LnGYTKEx00:22 a=7x6HtfJdh03M6CCDgxCd:22
+ a=_78whYxrdx1mplLwxq1U:22 a=VwQbUJbxAAAA:8 a=FOH2dFAWAAAA:8 a=VabnemYjAAAA:8
+ a=G31UBovebDcdE0zSMSQA:9 a=gKebqoRLp9LExxC7YDUY:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-03-12_02,2026-03-12_01,2025-10-01_01
+X-Spamd-Bar: --
+X-MailFrom: prvs=1531796282=mattev@meta.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+Message-ID-Hash: FRHDPN76BDU3XTD2WS23OTCLUTFDLECA
+X-Message-ID-Hash: FRHDPN76BDU3XTD2WS23OTCLUTFDLECA
+X-Mailman-Approved-At: Mon, 20 Apr 2026 17:16:09 +0000
+CC: =?UTF-8?q?Bj=C3=B6rn=20T=C3=B6pel?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Kevin Tian <kevin.tian@intel.com>, Ankit Agrawal <ankita@nvidia.com>, Pranjal Shrivastava <praan@google.com>, Alistair Popple <apopple@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 00/15] tracepoint: Avoid double static_branch evaluation at guarded call sites
+Subject: [Linaro-mm-sig] [RFC v2 PATCH 00/10] vfio/pci: Add mmap() for DMABUFs
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3GQN5UEDHJYQQIS2NDEX4QOKFSDKJXDE/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FRHDPN76BDU3XTD2WS23OTCLUTFDLECA/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -68,61 +89,250 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [2.09 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	DATE_IN_PAST(1.00)[936];
+X-Spamd-Result: default: False [4.49 / 15.00];
+	DMARC_POLICY_REJECT(2.00)[meta.com : SPF not aligned (relaxed),reject];
+	R_DKIM_REJECT(1.00)[meta.com:s=s2048-2025-q2];
+	MID_CONTAINS_FROM(1.00)[];
+	DATE_IN_PAST(1.00)[934];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[goodmis.org : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
+	GREYLIST(0.00)[pass,meta];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
-	ARC_NA(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[19];
 	MIME_TRACE(0.00)[0:+];
-	FROM_HAS_DN(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	ARC_NA(0.00)[];
+	SUSPICIOUS_AUTH_ORIGIN(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[mattev@meta.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[meta.com:-];
+	HAS_XOIP(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_GT_50(0.00)[72];
-	FROM_NEQ_ENVFROM(0.00)[rostedt@goodmis.org,linaro-mm-sig-bounces@lists.linaro.org];
-	FREEMAIL_CC(0.00)[bitbyteword.org,efficios.com,infradead.org,ilvokhin.com,kernel.org,redhat.com,kernel.dk,vger.kernel.org,davemloft.net,google.com,iogearbox.net,gmail.com,ovn.org,lists.sourceforge.net,openvswitch.org,intel.com,lists.freedesktop.org,linaro.org,amd.com,linux.intel.com,samsung.com,lists.linaro.org,linux.ibm.com,codeconstruct.com.au,lists.ozlabs.org,ffwll.ch,sang-engineering.com,analog.com,hansenpartnership.com,oracle.com,fb.com,suse.com];
-	R_DKIM_NA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,renesas];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	NEURAL_SPAM(0.00)[0.272];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,gandalf.local.home:mid,linaro.org:email]
-X-Rspamd-Queue-Id: 39279430ED6
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,meta.com:mid,lists.linaro.org:helo,lists.linaro.org:rdns]
+X-Rspamd-Queue-Id: 37598430EEC
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Thu, 12 Mar 2026 09:54:29 -0700
-Andrii Nakryiko <andrii.nakryiko@gmail.com> wrote:
+Hi all,
 
-> > > emit_trace_foo()
-> > > __trace_foo()  
-> 
-> this seems like the best approach, IMO. double-underscored variants
-> are usually used for some specialized/internal version of a function
-> when we know that some conditions are correct (e.g., lock is already
-> taken, or something like that). Which fits here: trace_xxx() will
-> check if tracepoint is enabled, while __trace_xxx() will not check and
-> just invoke the tracepoint? It's short, it's distinct, and it says "I
-> know what I am doing".
 
-Honestly, I consider double underscore as internal only and not something
-anyone but the subsystem maintainers use.
+There were various suggestions in the September 2025 thread "[TECH
+TOPIC] vfio, iommufd: Enabling user space drivers to vend more
+granular access to client processes" [0], and LPC discussions, around
+improving the situation for multi-process userspace driver designs.
+This RFC series implements some of these ideas.
 
-This, is a normal function where it's just saying: If you have it already
-enabled, then you can use this. Thus, I don't think it qualifies as a "you
-know what you are doing".
+(Thanks for feedback on v1!  Revised series, with changes noted
+inline.)
 
-Perhaps: call_trace_foo() ?
+Background: Multi-process USDs
+==============================
 
--- Steve
+The userspace driver scenario discussed in that thread involves a
+primary process driving a PCIe function through VFIO/iommufd, which
+manages the function-wide ownership/lifecycle.  The function is
+designed to provide multiple distinct programming interfaces (for
+example, several independent MMIO register frames in one function),
+and the primary process delegates control of these interfaces to
+multiple independent client processes (which do the actual work).
+This scenario clearly relies on a HW design that provides appropriate
+isolation between the programming interfaces.
+
+The two key needs are:
+
+ 1.  Mechanisms to safely delegate a subset of the device MMIO
+     resources to a client process without over-sharing wider access
+     (or influence over whole-device activities, such as reset).
+
+ 2.  Mechanisms to allow a client process to do its own iommufd
+     management w.r.t. its address space, in a way that's isolated
+     from DMA relating to other clients.
+
+
+mmap() of VFIO DMABUFs
+======================
+
+This RFC addresses #1 in "vfio/pci: Support mmap() of a VFIO DMABUF",
+implementing the proposals in [0] to add mmap() support to the
+existing VFIO DMABUF exporter.
+
+This enables a userspace driver to define DMABUF ranges corresponding
+to sub-ranges of a BAR, and grant a given client (via a shared fd)
+the capability to access (only) those sub-ranges.  The VFIO device fds
+would be kept private to the primary process.  All the client can do
+with that fd is map (or iomap via iommufd) that specific subset of
+resources, and the impact of bugs/malice is contained.
+
+ (We'll follow up on #2 separately, as a related-but-distinct problem.
+  PASIDs are one way to achieve per-client isolation of DMA; another
+  could be sharing of a single IOVA space via 'constrained' iommufds.)
+
+
+New in v2: To achieve this, the existing VFIO BAR mmap() path is
+converted to use DMABUFs behind the scenes, in "vfio/pci: Convert BAR
+mmap() to use a DMABUF" plus new helper functions, as Jason/Christian
+suggested in the v1 discussion [3].
+
+This means:
+
+ - Both regular and new DMABUF BAR mappings share the same vm_ops,
+   i.e.  mmap()ing DMABUFs is a smaller change on top of the existing
+   mmap().
+
+ - The zapping of mappings occurs via vfio_pci_dma_buf_move(), and the
+   vfio_pci_zap_bars() originally paired with the _move()s can go
+   away.  Each DMABUF has a unique address_space.
+
+ - It's a step towards future iommufd VFIO Type1 emulation
+   implementing P2P, since iommufd can now get a DMABUF from a VA that
+   it's mapping for IO; the VMAs' vm_file is that of the backing
+   DMABUF.
+
+
+Revocation/reclaim
+==================
+
+Mapping a BAR subset is useful, but the lifetime of access granted to
+a client needs to be managed well.  For example, a protocol between
+the primary process and the client can indicate when the client is
+done, and when it's safe to reuse the resources elsewhere, but cleanup
+can't practically be cooperative.
+
+For robustness, we enable the driver to make the resources
+guaranteed-inaccessible when it chooses, so that it can re-assign them
+to other uses in future.
+
+"vfio/pci: Permanently revoke a DMABUF on request" adds a new VFIO
+device fd ioctl, VFIO_DEVICE_PCI_DMABUF_REVOKE.  This takes a DMABUF
+fd parameter previously exported (from that device!) and permanently
+revokes the DMABUF.  This notifies/detaches importers, zaps PTEs for
+any mappings, and guarantees no future attachment/import/map/access is
+possible by any means.
+
+A primary driver process would use this operation when the client's
+tenure ends to reclaim "loaned-out" MMIO interfaces, at which point
+the interfaces could be safely re-used.
+
+New in v2: ioctl() on VFIO driver fd, rather than DMABUF fd.  A DMABUF
+is revoked using code common to vfio_pci_dma_buf_move(), selectively
+zapping mappings (after waiting for completion on the
+dma_buf_invalidate_mappings() request).
+
+
+BAR mapping access attributes
+=============================
+
+Inspired by Alex [Mastro] and Jason's comments in [0] and Mahmoud's
+work in [1] with the goal of controlling CPU access attributes for
+VFIO BAR mappings (e.g. WC), we can decorate DMABUFs with access
+attributes that are then used by a mapping's PTEs.
+
+I've proposed reserving a field in struct
+vfio_device_feature_dma_buf's flags to specify an attribute for its
+ranges.  Although that keeps the (UAPI) struct unchanged, it means all
+ranges in a DMABUF share the same attribute.  I feel a single
+attribute-to-mmap() relation is logical/reasonable.  An application
+can also create multiple DMABUFs to describe any BAR layout and mix of
+attributes.
+
+
+Tests
+=====
+
+(Still sharing the [RFC ONLY] userspace test/demo program for context,
+not for merge.)
+
+It illustrates & tests various map/revoke cases, but doesn't use the
+existing VFIO selftests and relies on a (tweaked) QEMU EDU function.
+I'm (still) working on integrating the scenarios into the existing
+VFIO selftests.
+
+This code has been tested in mapping DMABUFs of single/multiple
+ranges, aliasing mmap()s, aliasing ranges across DMABUFs, vm_pgoff >
+0, revocation, shutdown/cleanup scenarios, and hugepage mappings seem
+to work correctly.  I've lightly tested WC mappings also (by observing
+resulting PTEs as having the correct attributes...).
+
+
+Fin
+===
+
+v2 is based on next-20260310 (to build on Leon's recent series
+"vfio: Wait for dma-buf invalidation to complete" [2]).
+
+
+Please share your thoughts!  I'd like to de-RFC if we feel this
+approach is now fair.
+
+
+Many thanks,
+
+
+Matt
+
+
+
+References:
+
+[0]: https://lore.kernel.org/linux-iommu/20250918214425.2677057-1-amastro@fb.com/
+[1]: https://lore.kernel.org/all/20250804104012.87915-1-mngyadam@amazon.de/
+[2]: https://lore.kernel.org/linux-iommu/20260205-nocturnal-poetic-chamois-f566ad@houat/T/#m310cd07011e3a1461b6fda45e3f9b886ba76571a
+[3]: https://lore.kernel.org/all/20260226202211.929005-1-mattev@meta.com/
+
+--------------------------------------------------------------------------------
+Changelog:
+
+v2:  Respin based on the feedback/suggestions:
+
+- Transform the existing VFIO BAR mmap path to also use DMABUFs behind
+  the scenes, and then simply share that code for explicitly-mapped
+  DMABUFs.
+
+- Refactors the export itself out of vfio_pci_core_feature_dma_buf,
+  and shared by a new vfio_pci_core_mmap_prep_dmabuf helper used by
+  the regular VFIO mmap to create a DMABUF.
+
+- Revoke buffers using a VFIO device fd ioctl
+
+v1: https://lore.kernel.org/all/20260226202211.929005-1-mattev@meta.com/
+
+
+Matt Evans (10):
+  vfio/pci: Set up VFIO barmap before creating a DMABUF
+  vfio/pci: Clean up DMABUFs before disabling function
+  vfio/pci: Add helper to look up PFNs for DMABUFs
+  vfio/pci: Add a helper to create a DMABUF for a BAR-map VMA
+  vfio/pci: Convert BAR mmap() to use a DMABUF
+  vfio/pci: Remove vfio_pci_zap_bars()
+  vfio/pci: Support mmap() of a VFIO DMABUF
+  vfio/pci: Permanently revoke a DMABUF on request
+  vfio/pci: Add mmap() attributes to DMABUF feature
+  [RFC ONLY] selftests: vfio: Add standalone vfio_dmabuf_mmap_test
+
+ drivers/vfio/pci/Kconfig                      |   3 +-
+ drivers/vfio/pci/Makefile                     |   3 +-
+ drivers/vfio/pci/vfio_pci_config.c            |  18 +-
+ drivers/vfio/pci/vfio_pci_core.c              | 123 +--
+ drivers/vfio/pci/vfio_pci_dmabuf.c            | 425 +++++++--
+ drivers/vfio/pci/vfio_pci_priv.h              |  46 +-
+ include/uapi/linux/vfio.h                     |  42 +-
+ tools/testing/selftests/vfio/Makefile         |   1 +
+ .../vfio/standalone/vfio_dmabuf_mmap_test.c   | 837 ++++++++++++++++++
+ 9 files changed, 1339 insertions(+), 159 deletions(-)
+ create mode 100644 tools/testing/selftests/vfio/standalone/vfio_dmabuf_mmap_test.c
+
+-- 
+2.47.3
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
