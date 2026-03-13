@@ -2,126 +2,65 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id YBSHJxhOtGk4kAAAu9opvQ
+	id gFroHg9g5mkqvgEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 13 Mar 2026 18:49:12 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:19:11 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 24F532884EF
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 13 Mar 2026 18:49:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 18F5C430FD4
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:19:11 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8F8F340303
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 13 Mar 2026 17:41:39 +0000 (UTC)
-Received: from CH1PR05CU001.outbound.protection.outlook.com (mail-northcentralusazon11010066.outbound.protection.outlook.com [52.101.193.66])
-	by lists.linaro.org (Postfix) with ESMTPS id B20CB40303
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 13 Mar 2026 17:41:13 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 232DB3F9B3
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:19:10 +0000 (UTC)
+Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com [136.143.188.112])
+	by lists.linaro.org (Postfix) with ESMTPS id 91BA240303
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 13 Mar 2026 19:32:04 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=Nvidia.com header.s=selector2 header.b=DknBq4jC;
-	arc=pass ("microsoft.com:s=arcselector10001:i=1");
-	spf=pass (lists.linaro.org: domain of jgg@nvidia.com designates 52.101.193.66 as permitted sender) smtp.mailfrom=jgg@nvidia.com;
-	dmarc=pass (policy=reject) header.from=nvidia.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=d63PAqVkj1OtXIZ3lGpHqHLiB96niBpjKnjX73s9HSFE1tKHKNiHZ3U19jsM3jkhuOYIFkq8Dh6NSKk38V05PeoFZ2h71Lj2tERdWnibY9s1VyU18jL4XJripM7Orz0ZjCaKvpErJ1V1Wkk7+pkphh2NVfJiI+kP8ws6M5Nz0XeQoCDmNRKS2B/FBVZs77TiPv5YZo3UuF9tbVorPMmpwbV2Uwa5ir31QrywMehGUSmeFKVeHqX74pp41rIA+ZpUSyLXo9O4/ZiCJ2I8Um1rcTjJ4wqiZOiG3oBGiRVYHVKOIrObpTJF0Z2sU9vPBHG+aot4UG8ymbQ/sdNoMIH59Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=aCzK7SAwtZVNI0sXrW0XtwGXtonbY2IGWuWTglvOgNI=;
- b=W9T4LrxnbiUUzH/yQ7HUHn2J50fyNC4tlYQHaGDmfc6CFI9WVJG/5Yq0l58bU98drdGnucdiAxlhdi7oUivAmdsFQrbdq0dWEQ5uJkxnbNg1NwGgRBSWn3o9dZYiIxq3jOdLpJF3fnDar7FOz0dTgzDhKm/HYKB6zYjoGztEU+PeAImX6MgQlVvq2zMgEl0QGbKGBvU7Nu0Fi6q/3Iaj8K8TtjLR/ZmKzVK/PxUgr3RibgSBbGVR/I/S2D3oO9/m+x0FNr8hQOy4wwodjcaKIXTCtW7SD5vvWQ9wgHzH9lpcQtuk3qMgCfpU1enyhHbkm29um5qXjWNll3Vxv23lnA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=aCzK7SAwtZVNI0sXrW0XtwGXtonbY2IGWuWTglvOgNI=;
- b=DknBq4jCBzvf/lXyeIvlRxj/EQadCa3w+S8BESvcYDgYlwlbJoneFs2Oc645cpBUQnb93TWXq89Rcm+O5D/8K4aBzf+Gt3yz7LQ+bCpTADwDstabE3l35MTnT1sYTvfcyXtDDQXTcB0/msMEg8MsITZ8nrtt9yvVRe2NbF7RkwpRT2YTZnH5b9myaVeQwH1jI4u5+cQ88Qi3kOGNYltSTsZCbY7HP15ZGMVTEmMGO+rOl4Z9fCgq5bVWuaH5oV6agkfzVR7ZBNGsB7c0HpLvoehglVyLgFuninH7gRp0oauigAcSUpvHunxux6dxGbrzNvqdF+nUqnKcWNtu7O3UbA==
-Received: from LV8PR12MB9620.namprd12.prod.outlook.com (2603:10b6:408:2a1::19)
- by PH7PR12MB7425.namprd12.prod.outlook.com (2603:10b6:510:200::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.6; Fri, 13 Mar
- 2026 17:41:07 +0000
-Received: from LV8PR12MB9620.namprd12.prod.outlook.com
- ([fe80::299d:f5e0:3550:1528]) by LV8PR12MB9620.namprd12.prod.outlook.com
- ([fe80::299d:f5e0:3550:1528%5]) with mapi id 15.20.9654.022; Fri, 13 Mar 2026
- 17:41:06 +0000
-From: Jason Gunthorpe <jgg@nvidia.com>
-To: =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
-	dri-devel@lists.freedesktop.org,
-	linaro-mm-sig@lists.linaro.org,
-	linux-media@vger.kernel.org,
-	Sumit Semwal <sumit.semwal@linaro.org>
-Date: Fri, 13 Mar 2026 14:41:05 -0300
-Message-ID: <0-v1-42779f29381a+4b9-udmabuf_sg_jgg@nvidia.com>
-X-ClientProxiedBy: IA1P220CA0005.NAMP220.PROD.OUTLOOK.COM
- (2603:10b6:208:461::13) To LV8PR12MB9620.namprd12.prod.outlook.com
- (2603:10b6:408:2a1::19)
+	dkim=pass header.d=collabora.com header.s=zohomail header.b=LOBh1++9;
+	arc=pass ("zohomail.com:s=zohoarc:i=1");
+	spf=pass (lists.linaro.org: domain of deborah.brouwer@collabora.com designates 136.143.188.112 as permitted sender) smtp.mailfrom=deborah.brouwer@collabora.com;
+	dmarc=pass (policy=none) header.from=collabora.com
+ARC-Seal: i=1; a=rsa-sha256; t=1773430314; cv=none;
+	d=zohomail.com; s=zohoarc;
+	b=dCtUpA72DgbuIKL9O7k3iED2EbGaiPwO9BxA6LdOfoB/F97l94vVIP0Id7M+943c29i9x5tMSjBTYiMlZY3tJXMrh39avPYcC6lBxbwKcSjfpRhNM/tHuHyeTFl7JdxVhU4Niz0NdigkWg2GKklugebiRHyDSGEv2B962Trl1IA=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc;
+	t=1773430314; h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+	bh=j8NYgTjqm5J8YGPNrQsUQ8qlvCL3SU/ajcRLywCawTY=;
+	b=mF7bg6oiim1URAFIUb6sIoHVXdrQ1AABGBm7LtkZVqne5KMq8E3vs49jB2vHYxJQOdelqVQfAqOxScOfgMbYZ4wnrGnN2ITQ48/efPdpevgjXIECf+9dLJA8lNrZxmv+MEjw4znCEo2lAxySf1VMWN6+SIOQUnbIhfdZSx46b6A=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=collabora.com;
+	spf=pass  smtp.mailfrom=deborah.brouwer@collabora.com;
+	dmarc=pass header.from=<deborah.brouwer@collabora.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1773430314;
+	s=zohomail; d=collabora.com; i=deborah.brouwer@collabora.com;
+	h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:References:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
+	bh=j8NYgTjqm5J8YGPNrQsUQ8qlvCL3SU/ajcRLywCawTY=;
+	b=LOBh1++932WGWkRuCEzr5sH0ch8ZTY8I10e8moTY16JCJ7VRSV5oSTmJXiQqpree
+	FOuxZ4IjYelwsAI0I+c3G8VuqC0QshLGRwqBUG2U4inOSqDIyGxZI9T1k0x2PcRNZjW
+	JroBwAFRsvXcGLxRTgKaPkjB7AeG1G5PYn+E6UZk=
+Received: by mx.zohomail.com with SMTPS id 1773430313153333.71971598965956;
+	Fri, 13 Mar 2026 12:31:53 -0700 (PDT)
+Date: Fri, 13 Mar 2026 12:31:52 -0700
+From: Deborah Brouwer <deborah.brouwer@collabora.com>
+To: Lyude Paul <lyude@redhat.com>
+Message-ID: <abRmKGUFas8rC_w6@um790>
+References: <20260311195246.2439593-1-lyude@redhat.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV8PR12MB9620:EE_|PH7PR12MB7425:EE_
-X-MS-Office365-Filtering-Correlation-Id: e36e1d7d-0c33-4e00-5f1e-08de8127b48a
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|376014|7416014|366016|1800799024|56012099003|18002099003;
-X-Microsoft-Antispam-Message-Info: 
-	szgdETTy3OI6RkeD6ZqnwOe4NruZ0Gmym68mzo/+B91HFCo++2RAro0gxgLaJVSpLLatsV0faV617hVyRpFAkneHNuMlmBHRoFb6qN35jNI/+19vAp/iXjSPvAH3fCMjiW9hTy5tZ+4tI/lZ0FTWLH0kV2FVb+8zYPwsi8Sepevx7mnGs2M6iQMajCrz1oOInznokLtsO7o4Xc1CKbNIY5PTEhN/kIgEeukA6r8SDp6pIyEXx2RWDdh4a9micCVub+/WU9QKHntAky251fQHUwf9HgajfSoJHBqfQ/RGBLqidrpUy4HPXdZBXV356LI5+wUYrovT6oW9IHJO8gHDJOrhwv0hcQM5BJqp9kbzNXIPfTKDcW0wUew1TXBmwUWYgqNJIZVJwKbU1+StxmbGgY7agb30vTa9lSBlHhL3lc8U4UgX93HarOt2nfzi3mWvSEWFHm/FwUzLWRnUUSROdehvn7SAe+M62j40Rx1S22ghmH+kslPqIPuyzL+R8Ez4HrUIeopxzXKeAz36kKCivQ5EmYI8ShRaPI8kHfF8HKnWyNOYD5vpo5oiZtQsQwGUzUp1XTuT5kcWaqID8G0slWnrwmdyRZvLJxVuA9M9qzcZmiLLmSG3qTGT+BbJ2wRRzR2IIFiich/yPwR+Dpdvwu+9hNuvpYH9PcVakCuPKXF1KOfDLRYRYTPCv4HZ3PfzKKU9nuXYMN9AckVT+3h9SMeXnxO91okw7KNDqjuKRno=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LV8PR12MB9620.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(366016)(1800799024)(56012099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?DiSWQsO6pMHvkO18k1BKXFdKFZaN91i31zFE11LbCGnii/zkMTFXZBLTNrLl?=
- =?us-ascii?Q?1C/X2aBjiwF/OVtAlP/whwk23cJA4vdpW311kv8MiggexGuUv1454+svAVWW?=
- =?us-ascii?Q?ZNXW0R8DfladE2C32bjVLaYVThtR0C8ocnoQiEKPJj3zxsipRpnhHQlRZsYM?=
- =?us-ascii?Q?VcSxueTn0FrkHPMv3eRIHEiMzZbaoTxSvQjDq9f3Gsldh26zB3AbsEhsVenF?=
- =?us-ascii?Q?W1aVkXZuF82Nj7yS82ZMVTbGCtgqYj98t8cEA84jAIWLcwuzNr3Ttl23WODl?=
- =?us-ascii?Q?npB5PwHtIQbp9xNul8sTlXGh6YInR1kWiAyHehXpcTuWfb71q3jIbYtim5D8?=
- =?us-ascii?Q?4KPLlWLf7H6FUtmKRPcFY2aujlDfJmp1UWybCQtoi/JmFo914xj+lGWIjfPn?=
- =?us-ascii?Q?kN5Dff/PvwiY1ZRETRk6zQybUPnvu9L+ef29CVsBLQtqcBBAEGYisCwzZpDd?=
- =?us-ascii?Q?bZ22n5KXQifjLf9g8AgDcLDoz5go81vTA/xx0QyuAsrykC/IRGwD8+mjT2Ug?=
- =?us-ascii?Q?StDl/CkYBgtE2tsqJQJw+VUu5bFtANgkmApjdEJuJbo3rpc0vJb/32LmvUhE?=
- =?us-ascii?Q?1umnh6UT1X/909QT+7IAFX6IDlukVu7O4BYeK5jn9iF30/qXcpWUUMKXzjqx?=
- =?us-ascii?Q?Y5TcHp6iOLEHLNnV/GpnosIY2pZiMrour8bCY6IKa++Qu+zs2MA7p4Vs6iEM?=
- =?us-ascii?Q?oi+dKznEjg/FK4RDWqX3ixfcJHuTK+bzbeS5ddorlHojFPrx9uk6jq4ieb69?=
- =?us-ascii?Q?Ui+KcdhANxqlbNu6BgT8Fh1/9wAQlKsvda0Lv5hl2TnWLKSsSbEQNv8NyICC?=
- =?us-ascii?Q?5bidW9LYjKUgWFNG13eK9l1ClnV+iVzlRCPMqjRVDRMTI55ZPtnKUz9vbo4Q?=
- =?us-ascii?Q?d98pQE6zXJw0JW35mwVLYdK8BIIWu83Dv4HJQNDalz/HTr/wHbZZjRYUfv84?=
- =?us-ascii?Q?HGZhbxl2LV+wfpC+GfSneP1K7nbVjJTZk+2wJ0hjnZa1uFq/T4L9ofXDOONw?=
- =?us-ascii?Q?v8T9b4mggnSPlDX9kGjB1BPZk/ufOzdbfFs1WAczEBLprwZ3jMQodFe8vIMf?=
- =?us-ascii?Q?1dLR3f3y8KvZGs/7+kaOBvVJ1TVQCzkiYURn+FLw5jI9DjTZayuMusvgfoRn?=
- =?us-ascii?Q?hiPN+4X9t9+fzvXMFaYvBlptGp6ZMzv2LZMowjdA13reXVPA2nJm6VFisB6Q?=
- =?us-ascii?Q?+8hXfTt+q1GrtwVOoqoEVvXP2uW3JDCewRDD007amppzJmEVSvfrLmbSaT6q?=
- =?us-ascii?Q?jBoiH/dkNh4pwxVmwNgx+7UgJ7OI4vVyMPlvp3QoJPjdsTjD/pYNzyW4HH9q?=
- =?us-ascii?Q?qzwF9OuFkMmB5M1gRTeerwlbJqyrCGX+E5oq22J2es/0a+SkxauFudQmToVW?=
- =?us-ascii?Q?QCXaj7QKxWxUi8UmAZqBqpRxZ3mc5PZdbVLE+iBB5RuDZXM7J7/CrxVbO+O8?=
- =?us-ascii?Q?pZhFF3ztgIA4kRDpz4oHt90Rahv6PLtbGkbfpDAluLxY+S/hfILm0ViHFW+J?=
- =?us-ascii?Q?/ju6l6VIZ4ApxPCgT4b+yubwwdsZHpPty+gmwhB0Jkh7Vywfs/2HDzpAOGu5?=
- =?us-ascii?Q?uRFlOQV8akkyJvA5qpj+gPvWZgDEoQ49d8KykhhukvFAZoM0//QpTLgyJTlg?=
- =?us-ascii?Q?0hcvnar6jS03jTEoiz1oDFFOJg5j+eA1SYvA8ynoGr0wwAJtDsSonvshsql1?=
- =?us-ascii?Q?mUiM99jcoPDUwfv4yQNm97hHJm+HzjtblRtNEPSb4j33XZuAQmilFdJEYU/Y?=
- =?us-ascii?Q?0gcIKt3wOg=3D=3D?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e36e1d7d-0c33-4e00-5f1e-08de8127b48a
-X-MS-Exchange-CrossTenant-AuthSource: LV8PR12MB9620.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Mar 2026 17:41:06.8239
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: fC/Y37F7f1BylTGNoNhZU9za+vUw3gSXuVBkfRm4QxY3H6pwVPXJPzn0okgFI89Z
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB7425
-X-Spamd-Bar: ---
-Message-ID-Hash: MZQFGFLZFVCGHKZH4M4LXJ2T743CSKTX
-X-Message-ID-Hash: MZQFGFLZFVCGHKZH4M4LXJ2T743CSKTX
-X-MailFrom: jgg@nvidia.com
+Content-Disposition: inline
+In-Reply-To: <20260311195246.2439593-1-lyude@redhat.com>
+X-Spamd-Bar: ----
+X-MailFrom: deborah.brouwer@collabora.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Dave Airlie <airlied@redhat.com>, Andrew Morton <akpm@linux-foundation.org>, Arnd Bergmann <arnd@arndb.de>, Daniel Vetter <daniel.vetter@ffwll.ch>, David Hildenbrand <david@redhat.com>, Christoph Hellwig <hch@infradead.org>, Christoph Hellwig <hch@lst.de>, Hugh Dickins <hughd@google.com>, Julian Orth <ju.orth@gmail.com>, Junxiao Chang <junxiao.chang@intel.com>, Gerd Hoffmann <kraxel@redhat.com>, Mike Kravetz <mike.kravetz@oracle.com>, Oscar Salvador <osalvador@suse.de>, patches@lists.linux.dev, Peter Xu <peterx@redhat.com>, Shuah Khan <shuah@kernel.org>, Vivek Kasireddy <vivek.kasireddy@intel.com>, "Matthew Wilcox (Oracle)" <willy@infradead.org>
+Message-ID-Hash: P4TAHXRYDFB44DW2OWO334TRIQBBWKM4
+X-Message-ID-Hash: P4TAHXRYDFB44DW2OWO334TRIQBBWKM4
+X-Mailman-Approved-At: Mon, 20 Apr 2026 17:16:20 +0000
+CC: nouveau@lists.freedesktop.org, Gary Guo <gary@garyguo.net>, Daniel Almeida <daniel.almeida@collabora.com>, rust-for-linux@vger.kernel.org, Matthew Maurer <mmaurer@google.com>, FUJITA Tomonori <fujita.tomonori@gmail.com>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, christian.koenig@amd.com, Asahi Lina <lina@asahilina.net>, Miguel Ojeda <ojeda@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, Simona Vetter <simona@ffwll.ch>, Alice Ryhl <aliceryhl@google.com>, Boqun Feng <boqun@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Krishna Ketan Rai <prafulrai522@gmail.com>, linux-media@vger.kernel.org, Shankari Anand <shankari.ak0208@gmail.com>, David Airlie <airlied@gmail.com>, Benno Lossin <lossin@kernel.org>, Viresh Kumar <viresh.kumar@linaro.org>, linaro-mm-sig@lists.linaro.org, Asahi Lina <lina+kernel@asahilina.net>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH] udmabuf: Do not create malformed scatterlists
+Subject: [Linaro-mm-sig] Re: [PATCH v8 0/7] Rust bindings for gem shmem + iosys_map
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MZQFGFLZFVCGHKZH4M4LXJ2T743CSKTX/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/P4TAHXRYDFB44DW2OWO334TRIQBBWKM4/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -130,193 +69,91 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [5.99 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[nvidia.com : SPF not aligned (relaxed),reject];
+X-Spamd-Result: default: False [4.59 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
-	R_DKIM_REJECT(1.00)[Nvidia.com:s=selector2];
-	MID_CONTAINS_FROM(1.00)[];
+	DATE_IN_PAST(1.00)[909];
+	R_DKIM_REJECT(1.00)[collabora.com:s=zohomail];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:zohomail.com:reject}];
+	MID_RHS_NOT_FQDN(0.50)[];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx];
+	DMARC_POLICY_SOFTFAIL(0.10)[collabora.com : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_CC(0.00)[redhat.com,linux-foundation.org,arndb.de,ffwll.ch,infradead.org,lst.de,google.com,gmail.com,intel.com,oracle.com,suse.de,lists.linux.dev,kernel.org];
-	GREYLIST(0.00)[pass,body];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FROM_NEQ_ENVFROM(0.00)[jgg@nvidia.com,linaro-mm-sig-bounces@lists.linaro.org];
-	TO_DN_SOME(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	NEURAL_HAM(-0.00)[-0.735];
 	FROM_HAS_DN(0.00)[];
+	GREYLIST(0.00)[pass,meta];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
+	RCPT_COUNT_TWELVE(0.00)[26];
+	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	FREEMAIL_CC(0.00)[lists.freedesktop.org,garyguo.net,collabora.com,vger.kernel.org,google.com,gmail.com,oracle.com,amd.com,asahilina.net,kernel.org,ffwll.ch,linaro.org,lists.linaro.org,linuxfoundation.org];
+	DKIM_TRACE(0.00)[collabora.com:-];
+	NEURAL_HAM(-0.00)[-0.713];
+	FROM_NEQ_ENVFROM(0.00)[deborah.brouwer@collabora.com,linaro-mm-sig-bounces@lists.linaro.org];
+	TO_DN_SOME(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig,kernel];
+	MISSING_XM_UA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	DKIM_TRACE(0.00)[Nvidia.com:-];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,nvidia.com:email,nvidia.com:mid]
-X-Rspamd-Queue-Id: 24F532884EF
+	DBL_BLOCKED_OPENRESOLVER(0.00)[collabora.com:email,lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email,patchwork.freedesktop.org:url]
+X-Rspamd-Queue-Id: 18F5C430FD4
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Using a sg_set_folio() loop for every 4K results in a malformed scatterlist
-because sg_set_folio() has an issue with offsets > PAGE_SIZE and because
-scatterlist expects the creator to build a list which consolidates any
-physical contiguity.
+On Wed, Mar 11, 2026 at 03:52:39PM -0400, Lyude Paul wrote:
+> This is the next version of the shmem backed GEM objects series
+> originally from Asahi, previously posted by Daniel Almeida.
+> 
+> One of the major changes in this patch series is a much better interface
+> around vmaps, which we achieve by introducing a new set of rust bindings
+> for iosys_map.
+> 
+> The previous version of the patch series can be found here:
+> 
+> https://patchwork.freedesktop.org/series/156093/
+> 
+> This patch series may be applied on top of the
+> driver-core/driver-core-testing branch:
+> 
+> https://git.kernel.org/pub/scm/linux/kernel/git/driver-core/driver-core.git/log/?h=driver-core-testing
 
-sg_alloc_table_from_pages() creates a valid scatterlist directly from a
-struct page array, so go back to that.
+Hi Lyude,
+I rebased the tyr firmware boot series on v8 of this series and it
+works without issue. Thanks for this!
 
-Remove the offsets allocation and just store an array of tail pages as it
-did before the below commit. Everything wants that anyhow.
+Tested-by: Deborah Brouwer <deborah.brouwer@collabora.com>
 
-Fixes: 0c8b91ef5100 ("udmabuf: add back support for mapping hugetlb pages")
-Reported-by: Julian Orth <ju.orth@gmail.com>
-Closes: https://lore.kernel.org/all/20260308-scatterlist-v1-1-39c4566b0bba@gmail.com/
-Signed-off-by: Jason Gunthorpe <jgg@nvidia.com>
----
- drivers/dma-buf/udmabuf.c | 49 +++++++++++----------------------------
- 1 file changed, 13 insertions(+), 36 deletions(-)
-
-diff --git a/drivers/dma-buf/udmabuf.c b/drivers/dma-buf/udmabuf.c
-index 94b8ecb892bb17..5d687860445137 100644
---- a/drivers/dma-buf/udmabuf.c
-+++ b/drivers/dma-buf/udmabuf.c
-@@ -26,10 +26,10 @@ MODULE_PARM_DESC(size_limit_mb, "Max size of a dmabuf, in megabytes. Default is
- 
- struct udmabuf {
- 	pgoff_t pagecount;
--	struct folio **folios;
-+	struct page **pages;
- 
- 	/**
--	 * Unlike folios, pinned_folios is only used for unpin.
-+	 * Unlike pages, pinned_folios is only used for unpin.
- 	 * So, nr_pinned is not the same to pagecount, the pinned_folios
- 	 * only set each folio which already pinned when udmabuf_create.
- 	 * Note that, since a folio may be pinned multiple times, each folio
-@@ -41,7 +41,6 @@ struct udmabuf {
- 
- 	struct sg_table *sg;
- 	struct miscdevice *device;
--	pgoff_t *offsets;
- };
- 
- static vm_fault_t udmabuf_vm_fault(struct vm_fault *vmf)
-@@ -55,8 +54,7 @@ static vm_fault_t udmabuf_vm_fault(struct vm_fault *vmf)
- 	if (pgoff >= ubuf->pagecount)
- 		return VM_FAULT_SIGBUS;
- 
--	pfn = folio_pfn(ubuf->folios[pgoff]);
--	pfn += ubuf->offsets[pgoff] >> PAGE_SHIFT;
-+	pfn = page_to_pfn(ubuf->pages[pgoff]);
- 
- 	ret = vmf_insert_pfn(vma, vmf->address, pfn);
- 	if (ret & VM_FAULT_ERROR)
-@@ -73,8 +71,7 @@ static vm_fault_t udmabuf_vm_fault(struct vm_fault *vmf)
- 		if (WARN_ON(pgoff >= ubuf->pagecount))
- 			break;
- 
--		pfn = folio_pfn(ubuf->folios[pgoff]);
--		pfn += ubuf->offsets[pgoff] >> PAGE_SHIFT;
-+		pfn = page_to_pfn(ubuf->pages[pgoff]);
- 
- 		/**
- 		 * If the below vmf_insert_pfn() fails, we do not return an
-@@ -109,22 +106,11 @@ static int mmap_udmabuf(struct dma_buf *buf, struct vm_area_struct *vma)
- static int vmap_udmabuf(struct dma_buf *buf, struct iosys_map *map)
- {
- 	struct udmabuf *ubuf = buf->priv;
--	struct page **pages;
- 	void *vaddr;
--	pgoff_t pg;
- 
- 	dma_resv_assert_held(buf->resv);
- 
--	pages = kvmalloc_objs(*pages, ubuf->pagecount);
--	if (!pages)
--		return -ENOMEM;
--
--	for (pg = 0; pg < ubuf->pagecount; pg++)
--		pages[pg] = folio_page(ubuf->folios[pg],
--				       ubuf->offsets[pg] >> PAGE_SHIFT);
--
--	vaddr = vm_map_ram(pages, ubuf->pagecount, -1);
--	kvfree(pages);
-+	vaddr = vm_map_ram(ubuf->pages, ubuf->pagecount, -1);
- 	if (!vaddr)
- 		return -EINVAL;
- 
-@@ -146,22 +132,18 @@ static struct sg_table *get_sg_table(struct device *dev, struct dma_buf *buf,
- {
- 	struct udmabuf *ubuf = buf->priv;
- 	struct sg_table *sg;
--	struct scatterlist *sgl;
--	unsigned int i = 0;
- 	int ret;
- 
- 	sg = kzalloc_obj(*sg);
- 	if (!sg)
- 		return ERR_PTR(-ENOMEM);
- 
--	ret = sg_alloc_table(sg, ubuf->pagecount, GFP_KERNEL);
-+	ret = sg_alloc_table_from_pages(sg, ubuf->pages, ubuf->pagecount, 0,
-+					ubuf->pagecount << PAGE_SHIFT,
-+					GFP_KERNEL);
- 	if (ret < 0)
- 		goto err_alloc;
- 
--	for_each_sg(sg->sgl, sgl, ubuf->pagecount, i)
--		sg_set_folio(sgl, ubuf->folios[i], PAGE_SIZE,
--			     ubuf->offsets[i]);
--
- 	ret = dma_map_sgtable(dev, sg, direction, 0);
- 	if (ret < 0)
- 		goto err_map;
-@@ -207,12 +189,8 @@ static void unpin_all_folios(struct udmabuf *ubuf)
- 
- static __always_inline int init_udmabuf(struct udmabuf *ubuf, pgoff_t pgcnt)
- {
--	ubuf->folios = kvmalloc_objs(*ubuf->folios, pgcnt);
--	if (!ubuf->folios)
--		return -ENOMEM;
--
--	ubuf->offsets = kvzalloc_objs(*ubuf->offsets, pgcnt);
--	if (!ubuf->offsets)
-+	ubuf->pages = kvmalloc_objs(*ubuf->pages, pgcnt);
-+	if (!ubuf->pages)
- 		return -ENOMEM;
- 
- 	ubuf->pinned_folios = kvmalloc_objs(*ubuf->pinned_folios, pgcnt);
-@@ -225,8 +203,7 @@ static __always_inline int init_udmabuf(struct udmabuf *ubuf, pgoff_t pgcnt)
- static __always_inline void deinit_udmabuf(struct udmabuf *ubuf)
- {
- 	unpin_all_folios(ubuf);
--	kvfree(ubuf->offsets);
--	kvfree(ubuf->folios);
-+	kvfree(ubuf->pages);
- }
- 
- static void release_udmabuf(struct dma_buf *buf)
-@@ -344,8 +321,8 @@ static long udmabuf_pin_folios(struct udmabuf *ubuf, struct file *memfd,
- 		ubuf->pinned_folios[nr_pinned++] = folios[cur_folio];
- 
- 		for (; subpgoff < fsize; subpgoff += PAGE_SIZE) {
--			ubuf->folios[upgcnt] = folios[cur_folio];
--			ubuf->offsets[upgcnt] = subpgoff;
-+			ubuf->pages[upgcnt] = folio_page(folios[cur_folio],
-+						subpgoff >> PAGE_SHIFT);
- 			++upgcnt;
- 
- 			if (++cur_pgcnt >= pgcnt)
-
-base-commit: 1f318b96cc84d7c2ab792fcc0bfd42a7ca890681
--- 
-2.43.0
-
+> 
+> Changelogs are per-patch
+> 
+> Asahi Lina (2):
+>   rust: helpers: Add bindings/wrappers for dma_resv_lock
+>   rust: drm: gem: shmem: Add DRM shmem helper abstraction
+> 
+> Lyude Paul (5):
+>   rust: drm: Add gem::impl_aref_for_gem_obj!
+>   rust: drm: gem: Add raw_dma_resv() function
+>   rust: gem: Introduce DriverObject::Args
+>   rust: drm: gem: Introduce shmem::SGTable
+>   rust: drm/gem: Add vmap functions to shmem bindings
+> 
+>  drivers/gpu/drm/nova/gem.rs     |   5 +-
+>  drivers/gpu/drm/tyr/gem.rs      |   3 +-
+>  rust/bindings/bindings_helper.h |   3 +
+>  rust/helpers/dma-resv.c         |  13 +
+>  rust/helpers/drm.c              |  56 +++-
+>  rust/helpers/helpers.c          |   1 +
+>  rust/kernel/drm/gem/mod.rs      |  79 +++--
+>  rust/kernel/drm/gem/shmem.rs    | 529 ++++++++++++++++++++++++++++++++
+>  8 files changed, 667 insertions(+), 22 deletions(-)
+>  create mode 100644 rust/helpers/dma-resv.c
+>  create mode 100644 rust/kernel/drm/gem/shmem.rs
+> 
+> -- 
+> 2.53.0
+> 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
