@@ -2,117 +2,133 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id Jdo9E3yYtGnMqwAAu9opvQ
+	id 0Ll9Ahhg5mkqvgEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 14 Mar 2026 00:06:36 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:19:20 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id B83BE28A94B
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 14 Mar 2026 00:06:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B0737430FF2
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:19:19 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 879AF3F962
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 13 Mar 2026 23:06:34 +0000 (UTC)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
-	by lists.linaro.org (Postfix) with ESMTPS id DA9813F962
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 13 Mar 2026 23:06:31 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id AF38F3F9B3
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:19:18 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+	by lists.linaro.org (Postfix) with ESMTPS id 12A463F66B
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 14 Mar 2026 00:24:18 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=Jt2I9UnZ;
-	spf=pass (lists.linaro.org: domain of robh@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=robh@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=i0nggihj;
+	spf=pass (lists.linaro.org: domain of kbusch@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=kbusch@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by tor.source.kernel.org (Postfix) with ESMTP id 6A54960132;
-	Fri, 13 Mar 2026 23:06:31 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id ED1AAC19421;
-	Fri, 13 Mar 2026 23:06:30 +0000 (UTC)
+	by sea.source.kernel.org (Postfix) with ESMTP id 1B71A408E8;
+	Sat, 14 Mar 2026 00:24:17 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 088E7C19421;
+	Sat, 14 Mar 2026 00:24:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1773443191;
-	bh=yFVSBh4WIS/NwxjvqQ8QJjFjOyTSxSn7QLtwu40ICpg=;
+	s=k20201202; t=1773447856;
+	bh=WQRXpjIwf6KYkSpJNf4xnZTekqBOFUxWV+yK0mOoxb8=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=Jt2I9UnZ2kDKSz/mk7fs/bJcvr7jO5ba3GhlsVjWsZKxKnz+Mi5/wklcExgENbE0w
-	 hPsMhYavxA4/Ii3mKP8MxniNHhQx5gBjDs3C2TLn61IuVVhJwW5sAH3qjrGKXao+M5
-	 KVlpVwH9xej7Bczoui+2oyTP8pLjAoAHmohs9xSiZQFf4qtSaeleG65oJ9dBaNMG2r
-	 w0P3Vvwc99eHe//v5RRFJP1t6Oxwo7YfHhVRjCwg3/sbqN7eg6WnOmaUA3lzASbaaQ
-	 wKMC3VLWgyT2l5v95CGEo6Jf+yK1w2fJtEGgVP80Toc/pboqWhkx9R+MBovmhfyGL6
-	 NVi4he/PVvSQQ==
-Date: Fri, 13 Mar 2026 18:06:29 -0500
-From: Rob Herring <robh@kernel.org>
-To: Albert Esteve <aesteve@redhat.com>
-Message-ID: <20260313230629.GA3603067-robh@kernel.org>
-References: <20260306-b4-dmabuf-heap-coherent-rmem-v3-0-3d00d36c9bc4@redhat.com>
- <20260306-b4-dmabuf-heap-coherent-rmem-v3-3-3d00d36c9bc4@redhat.com>
+	b=i0nggihjXmXTKML8sut6lB5srcFWHmMKN3tSb0vnbiKDcMNVltZU2CmPxcxFrG3o3
+	 nQrXA1wQ5YuTbmhgcTPNORS+379TzqDGm/7lSrQ1+WOrB6YJhRCIjKA7zUUcBgPch0
+	 EYChM4p2xmMbNvogwcdaYFHJ9nHAZ56sOZLrj4G67jwJtQWWuJzeM6LK+rXxZtPvPL
+	 7hsCy1/fez24lkAmdr6y8xZG7yqBOpidyJ0h37yL3W7fcEPRQk675mEsDmHjbA8Xn+
+	 hN93oY8bX37rGdXAEkgAe3QI7f5zrI2DHLm42gIk1V7HmETARtzUHgwH52MHcPBfBz
+	 VF6ZMYEbGWSgg==
+Date: Fri, 13 Mar 2026 18:24:12 -0600
+From: Keith Busch <kbusch@kernel.org>
+To: Vineeth Remanan Pillai <vineeth@bitbyteword.org>
+Message-ID: <abSqrJ1J59RQC47U@kbusch-mbp>
+References: <20260312150523.2054552-1-vineeth@bitbyteword.org>
+ <20260312150523.2054552-2-vineeth@bitbyteword.org>
+ <20260312111255.7925b4e2@gandalf.local.home>
+ <CAO7JXPhg-Etspj9YahZrq8cmZ2K6AGWDrMnHO+oD96P_SmOLBw@mail.gmail.com>
+ <20260312155326.GB1282955@noisy.programming.kicks-ass.net>
+ <CAO7JXPiu8-LE_gG001_GQLoGVYakPdzmH2SXLqfzJjEUxbn1Rw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260306-b4-dmabuf-heap-coherent-rmem-v3-3-3d00d36c9bc4@redhat.com>
-X-Spamd-Bar: --
-Message-ID-Hash: GE5SA453M6FJUL2NRKHMLKYXULIRV366
-X-Message-ID-Hash: GE5SA453M6FJUL2NRKHMLKYXULIRV366
-X-MailFrom: robh@kernel.org
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Robin Murphy <robin.murphy@arm.com>, Saravana Kannan <saravanak@kernel.org>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, iommu@lists.linux.dev, devicetree@vger.kernel.org, mripard@redhat.com, echanude@redhat.com
+In-Reply-To: <CAO7JXPiu8-LE_gG001_GQLoGVYakPdzmH2SXLqfzJjEUxbn1Rw@mail.gmail.com>
+X-Spamd-Bar: ---
+X-MailFrom: kbusch@kernel.org
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+Message-ID-Hash: 3ADBKX2LE3NLL2OTZQZWGO2OPFPEKAVM
+X-Message-ID-Hash: 3ADBKX2LE3NLL2OTZQZWGO2OPFPEKAVM
+X-Mailman-Approved-At: Mon, 20 Apr 2026 17:16:20 +0000
+CC: Peter Zijlstra <peterz@infradead.org>, Steven Rostedt <rostedt@goodmis.org>, Dmitry Ilvokhin <d@ilvokhin.com>, Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Ingo Molnar <mingo@redhat.com>, Jens Axboe <axboe@kernel.dk>, io-uring@vger.kernel.org, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Alexei Starovoitov <ast@kernel.org>, Daniel Borkmann <daniel@iogearbox.net>, Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>, Xin Long <lucien.xin@gmail.com>, Jon Maloy <jmaloy@redhat.com>, Aaron Conole <aconole@redhat.com>, Eelco Chaudron <echaudro@redhat.com>, Ilya Maximets <i.maximets@ovn.org>, netdev@vger.kernel.org, bpf@vger.kernel.org, linux-sctp@vger.kernel.org, tipc-discussion@lists.sourceforge.net, dev@openvswitch.org, Oded Gabbay <ogabbay@kernel.org>, Koby Elbaz <koby.elbaz@intel.com>, dri-devel@lists.freedesktop.org, "Rafael J. Wysocki" <
+ rafael@kernel.org>, Viresh Kumar <viresh.kumar@linaro.org>, "Gautham R. Shenoy" <gautham.shenoy@amd.com>, Huang Rui <ray.huang@amd.com>, Mario Limonciello <mario.limonciello@amd.com>, Len Brown <lenb@kernel.org>, Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>, linux-pm@vger.kernel.org, MyungJoo Ham <myungjoo.ham@samsung.com>, Kyungmin Park <kyungmin.park@samsung.com>, Chanwoo Choi <cw00.choi@samsung.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Sumit Semwal <sumit.semwal@linaro.org>, linaro-mm-sig@lists.linaro.org, Eddie James <eajames@linux.ibm.com>, Andrew Jeffery <andrew@codeconstruct.com.au>, linux-fsi@lists.ozlabs.org, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Alex Deucher <alexander.deucher@amd.com>, Danilo Krummrich <dakr@kernel.org>, Matthew Brost <matthew.brost@intel.com>, Philipp Stanner <phasta@kernel.org>, Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>, amd-gfx@lists.freedesktop.org, Jiri Ko
+ sina <jikos@kernel.org>, Benjamin Tissoires <bentiss@kernel.org>, linux-input@vger.kernel.org, Wolfram Sang <wsa+renesas@sang-engineering.com>, linux-i2c@vger.kernel.org, Mark Brown <broonie@kernel.org>, Michael Hennerich <michael.hennerich@analog.com>, Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>, linux-spi@vger.kernel.org, "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>, "Martin K. Petersen" <martin.petersen@oracle.com>, linux-scsi@vger.kernel.org, Chris Mason <clm@fb.com>, David Sterba <dsterba@suse.com>, linux-btrfs@vger.kernel.org, linux-trace-kernel@vger.kernel.org, linux-kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3 3/6] of_reserved_mem: add a helper for rmem device_init op
+Subject: [Linaro-mm-sig] Re: [PATCH 01/15] tracepoint: Add trace_invoke_##name() API
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GE5SA453M6FJUL2NRKHMLKYXULIRV366/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3ADBKX2LE3NLL2OTZQZWGO2OPFPEKAVM/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [2.99 / 15.00];
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+X-Spamd-Result: default: False [5.09 / 15.00];
 	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
-	MID_CONTAINS_FROM(1.00)[];
+	SUSPICIOUS_RECIPS(1.50)[];
 	R_DKIM_REJECT(1.00)[kernel.org:s=k20201202];
+	DATE_IN_PAST(1.00)[904];
+	MID_RHS_NOT_FQDN(0.50)[];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx];
+	R_SPF_ALLOW(-0.20)[+mx:c];
+	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	GREYLIST(0.00)[pass,meta];
 	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
 	RCVD_COUNT_THREE(0.00)[4];
-	RCPT_COUNT_TWELVE(0.00)[17];
+	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:-];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.893];
-	FROM_NEQ_ENVFROM(0.00)[robh@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	TAGGED_RCPT(0.00)[linaro-mm-sig,renesas];
+	RCPT_COUNT_GT_50(0.00)[72];
+	FROM_NEQ_ENVFROM(0.00)[kbusch@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FREEMAIL_CC(0.00)[infradead.org,goodmis.org,ilvokhin.com,kernel.org,efficios.com,redhat.com,kernel.dk,vger.kernel.org,davemloft.net,google.com,iogearbox.net,gmail.com,ovn.org,lists.sourceforge.net,openvswitch.org,intel.com,lists.freedesktop.org,linaro.org,amd.com,linux.intel.com,samsung.com,lists.linaro.org,linux.ibm.com,codeconstruct.com.au,lists.ozlabs.org,ffwll.ch,sang-engineering.com,analog.com,hansenpartnership.com,oracle.com,fb.com,suse.com];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: B83BE28A94B
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_SPAM(0.00)[0.805];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:email,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
+X-Rspamd-Queue-Id: B0737430FF2
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Fri, Mar 06, 2026 at 11:36:34AM +0100, Albert Esteve wrote:
-> Add a helper function wrapping internal reserved memory
-> device_init call and expose it externally.
-
-Why?
-
-The diff tells us what. The commit msg needs to tell us why. Maybe the 
-rest of the series explains it, but this commit needs to stand on its 
-own.
-
-> 
-> Use the new helper function within of_reserved_mem_device_init_by_idx().
-> 
-> Signed-off-by: Albert Esteve <aesteve@redhat.com>
-> ---
-
-Version history?
-
->  drivers/of/of_reserved_mem.c    | 68 ++++++++++++++++++++++++++---------------
->  include/linux/of_reserved_mem.h |  8 +++++
->  2 files changed, 52 insertions(+), 24 deletions(-)
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gVGh1LCBNYXIgMTIsIDIwMjYgYXQgMTI6MDU6MzdQTSAtMDQwMCwgVmluZWV0aCBSZW1hbmFu
+IFBpbGxhaSB3cm90ZToNCj4gT24gVGh1LCBNYXIgMTIsIDIwMjYgYXQgMTE6NTPigK9BTSBQZXRl
+ciBaaWpsc3RyYSA8cGV0ZXJ6QGluZnJhZGVhZC5vcmc+IHdyb3RlOg0KPiA+DQo+ID4gVGhhdCBz
+ZWVtcyBsaWtlIGFuIHVucmVhc29uYWJsZSB3YXN0ZSBvZiBlbmVyZ3kuIFlvdSBjb3VsZCd2ZSBo
+YWQgY2xhdWRlDQo+ID4gd3JpdGUgYSBDb2NjaW5lbGxlIHNjcmlwdCBmb3IgeW91IGFuZCBzYXZl
+ZCBhIHRvbiBvZiB0b2tlbnMuDQo+IA0KPiBZZWFoIHRydWUsIFN0ZXZlIGFsc28gbWVudGlvbmVk
+IHRoaXMgdG8gbWUgb2ZmbGluZS4gSGF2ZW4ndCB1c2VkDQo+IENvY2NpbmVsbGUgYmVmb3JlLCBi
+dXQgbm93IEkga25vdyA6LSkNCg0KWysgQ2hyaXMgTWFzb25dDQoNCkF0IHRoZSByaXNrIG9mIGNy
+ZWF0aW5nIGEgZGlzdHJhY3Rpb24uLi4NCg0KVGhpcyBkaXNjdXNzaW9uIGdvdCBtZSB0aGlua2lu
+ZyB0aGUgcmlnaHQgc2tpbGwgbG9hZGVkIHNob3VsZCBoYXZlIHRoZQ0KQUkgaW1wbGljaXRseSB1
+c2UgY29jY2luZWxsZSB0byBnZW5lcmF0ZSB0aGUgcGF0Y2hzZXQgcmF0aGVyIHRoYW4gZG8gaXQN
+CmJ5IGhhbmQuIFlvdSBjb3VsZCBwcm9tcHQgd2l0aCBzaW1wbGUgbGFuZ3VhZ2UgZm9yIGEgcGF0
+dGVybg0Kc3Vic3RpdHV0aW9uIHJhdGhlciB0aGFuIGV4cGxpY2l0bHkgcmVxdWVzdCBjb2NjaW5l
+bGxlLCBhbmQgaXQgc2hvdWxkDQpnZW5lcmF0ZSBhIHBhdGNoIHNldCB1c2luZyBhIHNjcmlwdCBy
+YXRoZXIgdGhhbiBzcGVuZGluZyB0b2tlbnMgb24gZG9pbmcNCml0ICJieSBoYW5kIi4NCg0KSSBz
+ZW50IHN1Y2ggYSAic2tpbGwiIHRvIENocmlzJyBrZXJuZWwgInJldmlldy1wcm9tcHRzIjoNCg0K
+ICBodHRwczovL2dpdGh1Yi5jb20vbWFzb25jbC9yZXZpZXctcHJvbXB0cy9wdWxsLzM1DQoNCkkg
+dXNlZCBwYXRjaCBvbmUgZnJvbSB0aGlzIHNlcmllcyBhcyB0aGUgc3RhcnRpbmcgcG9pbnQgYW5k
+IGxldCB0aGUgQUkNCmZpZ3VyZSB0aGUgcmVzdCBvdXQuIFRoZSByZXN1bHQgYWN0dWFsbHkgZm91
+bmQgYWRkaXRpb25hbCBwYXR0ZXJucyB0aGF0DQpjb3VsZCB0YWtlIGFkdmFudGFnZSBvZiB0aGUg
+b3B0aW1pc2F0aW9uIHRoYXQgdGhpcyBzZXJpZXMgZGlkIG5vdA0KaW5jbHVkZS4gVGhlIHJlc3Vs
+dGluZyBrZXJuZWwgdHJlZSB0aGF0IHRoZSBhYm92ZSBnaXRodWIgcHVsbCByZXF1ZXN0DQpyZWZl
+cmVuY2VzIGNvc3QgMi44ayB0b2tlbnMgdG8gY3JlYXRlIHdpdGggdGhlIHNraWxsLg0KX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBt
+YWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2Ny
+aWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3Jn
+Cg==
