@@ -2,631 +2,162 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id eOnSEbFg5mkxvgEAu9opvQ
+	id uMdJO7Zg5mkxvgEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:21:53 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:21:58 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id D7E314310C5
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:21:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9C9004310CD
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:21:58 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E3C513F6C2
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:21:51 +0000 (UTC)
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-	by lists.linaro.org (Postfix) with ESMTPS id AD9333F683
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 16 Mar 2026 12:09:01 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id A56BC404F9
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:21:57 +0000 (UTC)
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
+	by lists.linaro.org (Postfix) with ESMTPS id A6A8D3F683
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 16 Mar 2026 12:59:00 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=D5wD6fI8;
-	dkim=pass header.d=redhat.com header.s=google header.b=IsxZdMAc;
-	spf=pass (lists.linaro.org: domain of mripard@redhat.com designates 170.10.129.124 as permitted sender) smtp.mailfrom=mripard@redhat.com;
-	dmarc=pass (policy=quarantine) header.from=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1773662941;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=9hWncBj1VBOPQ2d4QY544TguWtyZIZ+X0CZjVivHv20=;
-	b=D5wD6fI8Tmjw2Vjkscn5Dap95j19JGSegj8jyEKSdiWYBq3bGDleLllj1LdAoBWaqxCu3b
-	AGdUvNE/mXHch/uj2JabADZ8+YbsZ0G3YGkkr6v95SiqdC+bPBIoCe/nre+PHmrh4xHRFE
-	h5PmRjXuJPtO9wowANlq+pftwCi2lYk=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-111-exMUVVWEMuqeX88IFFRinQ-1; Mon, 16 Mar 2026 08:08:59 -0400
-X-MC-Unique: exMUVVWEMuqeX88IFFRinQ-1
-X-Mimecast-MFC-AGG-ID: exMUVVWEMuqeX88IFFRinQ_1773662938
-Received: by mail-wr1-f71.google.com with SMTP id ffacd0b85a97d-43b3e0a73f8so1893145f8f.3
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 16 Mar 2026 05:08:59 -0700 (PDT)
+	dkim=pass header.d=resnulli-us.20230601.gappssmtp.com header.s=20230601 header.b=Y7gWYlMr;
+	spf=none (lists.linaro.org: domain of jiri@resnulli.us has no SPF policy when checking 209.85.221.43) smtp.mailfrom=jiri@resnulli.us;
+	dmarc=none
+Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-439b97a8a8cso4682666f8f.1
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 16 Mar 2026 05:59:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1773662938; x=1774267738; darn=lists.linaro.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=9hWncBj1VBOPQ2d4QY544TguWtyZIZ+X0CZjVivHv20=;
-        b=IsxZdMAcnJ1GMvMHvaxMgPvZyb8fYzSIlGHYjykJYydKgISfwRsDUVzftEYyB2EsXD
-         z5jMglSA7twlRSVRgPNV7aERfNtLEcD7Azfk5QkeC1800YGQwhrKF9IIF3JdQAAIA0cB
-         fthZ5v27xvN+lUmB6I1pLz+/12IK7wPgK1b+HSnonmjdI8rT/g3Wc7jwHoeDQStUyZ2N
-         zGOiMn9robh2nXBZXsaC54MhgYa96Eju+N2OWeDx1pywxAMChPuQBX8N05BRw6ITvO7q
-         NlOtW6yN3QF/p+PsJ7H7tloLRADHMagEVVcJbHXOmAkPDLL+yD8O0J5zBWNaaLdj/xlM
-         IHyA==
+        d=resnulli-us.20230601.gappssmtp.com; s=20230601; t=1773665940; x=1774270740; darn=lists.linaro.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=QiV2UgPzDyf2BIxEKlEP0kmveErchJjvWqwkP1nC5aU=;
+        b=Y7gWYlMrxBIk+emINAi6llC7h+D8qEG1TQGi6YkbKt+FtrwZK1ZF1zUmRCoiz4DLlh
+         KhxwahO+umZNVRgP+gTwmlElZkHQevHUBHvos2kBfyl5sCHiS/r6jA9MTtrnAfJ6rWVt
+         Si7UG8YsIyl2BlcMyXJA0sAOKfck5Dx1mKZ7tljoZ1dfDcT98Tmiz5yBr5QpwQkiV/mt
+         xs4JQJegD1bsTVxDHoxAdFy8ZbuLVwSukAxE5RzT2dyKK0S5YJGdHgvFeh2mPTw5qWnb
+         BoUgxvA0ZFdp+mShYPw8rDcvhCL5BzyaZSpr/oRP5SougmQojAmJSrVidKGyU0SKkVVF
+         ft8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773662938; x=1774267738;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=9hWncBj1VBOPQ2d4QY544TguWtyZIZ+X0CZjVivHv20=;
-        b=Fkwt91Cew3It9NsFBHeUXP84PiBYyirYq/YQKsGiKnff6eAF+ERNS3YN9RoTMS4oN6
-         h5W8ED4OC5qswcqF8gMJNvjqGorc3eBdKxI49TMzbhkjFof5Ztij6M1UUhzI0oRJfI9f
-         xTocvm9iodCxbNow1TFAJWm2rC6MoL+uOxccEWsD5dz5yJ9JoREcNxRVfog6BPg2DrdO
-         +F7FnN32aJLP+uHeaarKmZTMazB4CHd8N3g8JqjjVbXlouLLbkpXbsiRVFNg7xkx17KC
-         IbNsYApzJ99iRZj64UgAcmVlag0XDYt8li8MJxV31eHPi3HZBt0AXDK+RhLfvP6Lutfz
-         yd9g==
-X-Forwarded-Encrypted: i=1; AJvYcCU8MlBUAHWYnLZdle2H37Gj0a35scM/4g5yX2ByvykdZqCq019hNzGYj9PLYOfq7abexzJYY6ohhQ5tXuYZ@lists.linaro.org
-X-Gm-Message-State: AOJu0YwQdEwogcimIf+Roov/fTHqXN0wCq+G6Llw23D/Qbax+KYxr6Fj
-	a2tuqORPdHDgAQr2PUyKzbSd7pK4lVJlTiII5G+YqJsHv5817yNCphhA8KRE0RKj4FvyJR4lLXO
-	SCDWsbABeBDBG75t+d0jNf3Am2nInLGH9DnkfLqFSwPhMdFZw+NKfUL+IFzvkaDMDz8eS
-X-Gm-Gg: ATEYQzwdC1kWvskIetRJzPKnrTN6JbvLNCL4bKvkROwKhq2LPjXJsFNqLMteOBW4nG1
-	hHTMncM3Dt3hhIr4ow0y9jo3YyT+F/Ag1z5ELYoVXURb7iZnXOxxcEx+dncU6LxCGgWaB9ZHuoT
-	rkabViP2Tvxh8Wkjo/qmnFpvv+cU399ZAhRRuhBK2cSh7v7XvWdSqTdOwxVnbNAbGsfw96RQc2x
-	8nJHQKkgXerKYFn7pMUqm0t7IttClAf8lSyGumkPSFCIhEHwszY6bwTUREx9IE8L6MS1219ZmlT
-	o8OHeIQTZEtKH5ocoSunwb+IHu8hHVXGcxaC5WbLb6CA3NZJkE7ga4i+KhZXN2RMhV2HMOL7Sw=
-	=
-X-Received: by 2002:a05:6000:250c:b0:439:cbcb:5723 with SMTP id ffacd0b85a97d-43a04dc083emr23719021f8f.42.1773662937766;
-        Mon, 16 Mar 2026 05:08:57 -0700 (PDT)
-X-Received: by 2002:a05:6000:250c:b0:439:cbcb:5723 with SMTP id ffacd0b85a97d-43a04dc083emr23718918f8f.42.1773662937106;
-        Mon, 16 Mar 2026 05:08:57 -0700 (PDT)
-Received: from localhost ([2a01:e0a:b25:f902::ff])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439fe20c473sm44146333f8f.24.2026.03.16.05.08.56
+        d=1e100.net; s=20251104; t=1773665940; x=1774270740;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=QiV2UgPzDyf2BIxEKlEP0kmveErchJjvWqwkP1nC5aU=;
+        b=kY2qtTGBK99Zisw+BpMAqJjltgRvHAyZFYbWyMUO18680xRpmOC0pg8iB5V5dIWW0J
+         nH4Z7VPuJf3hrm5Qh9COT1Pjgwk/63zVMidynjCJkqglE5V5oDo7LTas89IJNtqQSNSZ
+         p6/puSQDEqAgyOPm/Ij4d/Jg8BP4h175lBU/kDb3FSYNyHiwPXkO0//EF/gYb/4e4f5e
+         aNTYvXvGToKR/MDDB1UFJL9yUG1dqVw4WhZtb09zNqj/Q4jzZZMgb6lD5uxjhOhe/VHy
+         x3sw1jqE6kXzY9h4obhLB/q+m5da83LpsarRXRNOqYbFlwNB3EFLpexbNBdIbTjox+aK
+         Mh/w==
+X-Forwarded-Encrypted: i=1; AJvYcCVoynxKmeCwuXK98LsjwrW3IyRedpXddPSrggvdu4M8DTI3zhh5SHYAOIRv0f6OueufMUJZJezR+8CnxRzz@lists.linaro.org
+X-Gm-Message-State: AOJu0YyHKecVwWLBMEY2DSAsbPA2rNmQ194x3V9uHLpJuGHVfqt4UWzw
+	NVTcyFnY8SdGbYXK3//wzOe5s8UVryBpExWQRzsaKFb8/Yj1FsqrudI8wBef0Asbe1Q=
+X-Gm-Gg: ATEYQzx0qJXBRCsWJJkSqTR+55ujan9Odpknfaxln4UdVs6n5toNCkJbovOUL8xVYgl
+	TegUrX99wsSf7/8etZqEJWrEddv7mTboQ2Amb+zkn3n1EUoxl5BHoa0x3XIYrBu5QaNE6Yevm7Y
+	cNtMM2qPWq+Vr6g7v0BeA1jbHDdmD8R8b769IJCnbC7qeuojA2VGfAqWqWIlTcbUfQ4Q2qFKY/x
+	B9uOpv0QWReo7ta/h8bGbUIA02VgzYUSFccd9aMA8D2FimzxKY+Ukje9/s3IPfSdcV9EqKOSQiC
+	z2SIjaKuynuRNC37oz80IAauKOQYZBhxsbvMZPWfL9CKyyPjbE1YT/Ck+Eq4ZPIn9blxgmAwz3k
+	v3MKNXhxE6DDcUbaGWbNonbU6Y8cs5mSB0+dtYjyjPe6Rivz9lJA/Df0DncyjL7wZQyhYoZZJKa
+	55aAryNsm6MIuiMA==
+X-Received: by 2002:a05:6000:18a8:b0:439:ccec:fcd0 with SMTP id ffacd0b85a97d-43a04db4fb9mr22368246f8f.29.1773665939476;
+        Mon, 16 Mar 2026 05:58:59 -0700 (PDT)
+Received: from localhost ([85.163.81.98])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43b3e9a4fcdsm14591157f8f.8.2026.03.16.05.58.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Mar 2026 05:08:56 -0700 (PDT)
-Date: Mon, 16 Mar 2026 13:08:55 +0100
-From: Maxime Ripard <mripard@redhat.com>
-To: Andrew Davis <afd@ti.com>
-Message-ID: <20260316-cherubic-eel-of-philosophy-10ef2b@houat>
-References: <20260306-b4-dmabuf-heap-coherent-rmem-v3-0-3d00d36c9bc4@redhat.com>
- <20260306-b4-dmabuf-heap-coherent-rmem-v3-5-3d00d36c9bc4@redhat.com>
- <e8dd476f-1be8-46fa-bf56-65fe0bfe29a1@ti.com>
- <CADSE00+-SQr3wGdgBmLowHPWE5bGxoyO4o20jZs4ma-71aOxUA@mail.gmail.com>
- <1afc696a-9afb-48af-887d-2a209680784e@ti.com>
+        Mon, 16 Mar 2026 05:58:58 -0700 (PDT)
+From: Jiri Pirko <jiri@resnulli.us>
+To: dri-devel@lists.freedesktop.org,
+	linaro-mm-sig@lists.linaro.org,
+	iommu@lists.linux.dev,
+	linux-media@vger.kernel.org
+Date: Mon, 16 Mar 2026 13:58:55 +0100
+Message-ID: <20260316125857.617836-1-jiri@resnulli.us>
+X-Mailer: git-send-email 2.51.1
 MIME-Version: 1.0
-In-Reply-To: <1afc696a-9afb-48af-887d-2a209680784e@ti.com>
-X-Spamd-Bar: -----
-X-MailFrom: mripard@redhat.com
+X-Spamd-Bar: -
+X-MailFrom: jiri@resnulli.us
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: IYKIPBJ2YATGTS5YB5AOLVPBHU3LW3FD
-X-Message-ID-Hash: IYKIPBJ2YATGTS5YB5AOLVPBHU3LW3FD
-X-Mailman-Approved-At: Mon, 20 Apr 2026 17:21:44 +0000
-CC: Albert Esteve <aesteve@redhat.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Robin Murphy <robin.murphy@arm.com>, Rob Herring <robh@kernel.org>, Saravana Kannan <saravanak@kernel.org>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, iommu@lists.linux.dev, devicetree@vger.kernel.org, echanude@redhat.com
+Message-ID-Hash: 23XIDGGBQPJBXFTAWR5DGYOMMJKDFCY5
+X-Message-ID-Hash: 23XIDGGBQPJBXFTAWR5DGYOMMJKDFCY5
+X-Mailman-Approved-At: Mon, 20 Apr 2026 17:21:45 +0000
+CC: sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, Brian.Starkey@arm.com, jstultz@google.com, tjmercier@google.com, christian.koenig@amd.com, robin.murphy@arm.com, jgg@ziepe.ca, leon@kernel.org, sean.anderson@linux.dev, ptesarik@suse.com, catalin.marinas@arm.com, aneesh.kumar@kernel.org, suzuki.poulose@arm.com, steven.price@arm.com, thomas.lendacky@amd.com, john.allen@amd.com, ashish.kalra@amd.com, suravee.suthikulpanit@amd.com, linux-coco@lists.linux.dev
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3 5/6] dma-buf: heaps: Add Coherent heap to dmabuf heaps
+Subject: [Linaro-mm-sig] [PATCH v4 0/2] dma-buf: heaps: system: add an option to allocate explicitly decrypted memory
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/IYKIPBJ2YATGTS5YB5AOLVPBHU3LW3FD/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/23XIDGGBQPJBXFTAWR5DGYOMMJKDFCY5/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============8188966391451368665=="
-X-Spamd-Result: default: False [1.39 / 15.00];
-	SIGNED_PGP(-2.00)[];
-	DMARC_POLICY_QUARANTINE(1.50)[redhat.com : SPF not aligned (relaxed),quarantine];
-	R_DKIM_REJECT(1.00)[redhat.com:s=mimecast20190719];
-	DATE_IN_PAST(1.00)[845];
-	MID_RHS_NOT_FQDN(0.50)[];
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [1.49 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
+	DATE_IN_PAST(1.00)[844];
 	MAILLIST(-0.20)[mailman];
-	MIME_GOOD(-0.20)[multipart/mixed,multipart/signed,text/plain];
 	R_SPF_ALLOW(-0.20)[+mx:c];
+	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	MIME_TRACE(0.00)[0:+,1:+,2:+,3:~,4:+];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[18];
-	DKIM_TRACE(0.00)[redhat.com:-];
-	MISSING_XM_UA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FROM_NEQ_ENVFROM(0.00)[mripard@redhat.com,linaro-mm-sig-bounces@lists.linaro.org];
+	RCVD_COUNT_THREE(0.00)[4];
 	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DMARC_NA(0.00)[resnulli.us];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.812];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	NEURAL_SPAM(0.00)[0.588];
+	TO_DN_NONE(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[jiri@resnulli.us,linaro-mm-sig-bounces@lists.linaro.org];
+	RCPT_COUNT_TWELVE(0.00)[24];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
-X-Rspamd-Queue-Id: D7E314310C5
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[resnulli.us:mid,lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
+X-Rspamd-Queue-Id: 9C9004310CD
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
+From: Jiri Pirko <jiri@nvidia.com>
 
---===============8188966391451368665==
-Content-Type: multipart/signed; micalg=pgp-sha384;
-	protocol="application/pgp-signature"; boundary="jscl64m2oiw74tyk"
-Content-Disposition: inline
+Confidential computing (CoCo) VMs/guests, such as AMD SEV and Intel TDX,
+run with encrypted/protected memory which creates a challenge
+for devices that do not support DMA to it (no TDISP support).
 
+For kernel-only DMA operations, swiotlb bounce buffering provides a
+transparent solution by copying data through decrypted memory.
+However, the only way to get this memory into userspace is via the DMA
+API's dma_alloc_pages()/dma_mmap_pages() type interfaces which limits
+the use of the memory to a single DMA device, and is incompatible with
+pin_user_pages().
 
---jscl64m2oiw74tyk
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH v3 5/6] dma-buf: heaps: Add Coherent heap to dmabuf heaps
-MIME-Version: 1.0
+These limitations are particularly problematic for the RDMA subsystem
+which makes heavy use of pin_user_pages() and expects flexible memory
+usage between many different DMA devices.
 
-Hi Andrew, Albert,
+This patch series enables userspace to explicitly request decrypted
+(shared) memory allocations from new dma-buf system_cc_decrypted heap.
+Userspace can mmap this memory and pass the dma-buf fd to other
+existing importers such as RDMA or DRM devices to access the
+memory. The DMA API is improved to allow the dma heap exporter to DMA
+map the shared memory to each importing device.
 
-On Wed, Mar 11, 2026 at 08:18:28AM -0500, Andrew Davis wrote:
-> On 3/11/26 5:19 AM, Albert Esteve wrote:
-> > On Tue, Mar 10, 2026 at 4:34=E2=80=AFPM Andrew Davis <afd@ti.com> wrote:
-> > >=20
-> > > On 3/6/26 4:36 AM, Albert Esteve wrote:
-> > > > Expose DT coherent reserved-memory pools ("shared-dma-pool"
-> > > > without "reusable") as dma-buf heaps, creating one heap per
-> > > > region so userspace can allocate from the exact device-local
-> > > > pool intended for coherent DMA.
-> > > >=20
-> > > > This is a missing backend in the long-term effort to steer
-> > > > userspace buffer allocations (DRM, v4l2, dma-buf heaps)
-> > > > through heaps for clearer cgroup accounting. CMA and system
-> > > > heaps already exist; non-reusable coherent reserved memory
-> > > > did not.
-> > > >=20
-> > > > The heap binds the heap device to each memory region so
-> > > > coherent allocations use the correct dev->dma_mem, and
-> > > > it defers registration until module_init when normal
-> > > > allocators are available.
-> > > >=20
-> > > > Signed-off-by: Albert Esteve <aesteve@redhat.com>
-> > > > ---
-> > > >    drivers/dma-buf/heaps/Kconfig         |   9 +
-> > > >    drivers/dma-buf/heaps/Makefile        |   1 +
-> > > >    drivers/dma-buf/heaps/coherent_heap.c | 414 ++++++++++++++++++++=
-++++++++++++++
-> > > >    3 files changed, 424 insertions(+)
-> > > >=20
-> > > > diff --git a/drivers/dma-buf/heaps/Kconfig b/drivers/dma-buf/heaps/=
-Kconfig
-> > > > index a5eef06c42264..aeb475e585048 100644
-> > > > --- a/drivers/dma-buf/heaps/Kconfig
-> > > > +++ b/drivers/dma-buf/heaps/Kconfig
-> > > > @@ -12,3 +12,12 @@ config DMABUF_HEAPS_CMA
-> > > >          Choose this option to enable dma-buf CMA heap. This heap i=
-s backed
-> > > >          by the Contiguous Memory Allocator (CMA). If your system h=
-as these
-> > > >          regions, you should say Y here.
-> > > > +
-> > > > +config DMABUF_HEAPS_COHERENT
-> > > > +     bool "DMA-BUF Coherent Reserved-Memory Heap"
-> > > > +     depends on DMABUF_HEAPS && OF_RESERVED_MEM && DMA_DECLARE_COH=
-ERENT
-> > > > +     help
-> > > > +       Choose this option to enable coherent reserved-memory dma-b=
-uf heaps.
-> > > > +       This heap is backed by non-reusable DT "shared-dma-pool" re=
-gions.
-> > > > +       If your system defines coherent reserved-memory regions, yo=
-u should
-> > > > +       say Y here.
-> > > > diff --git a/drivers/dma-buf/heaps/Makefile b/drivers/dma-buf/heaps=
-/Makefile
-> > > > index 974467791032f..96bda7a65f041 100644
-> > > > --- a/drivers/dma-buf/heaps/Makefile
-> > > > +++ b/drivers/dma-buf/heaps/Makefile
-> > > > @@ -1,3 +1,4 @@
-> > > >    # SPDX-License-Identifier: GPL-2.0
-> > > >    obj-$(CONFIG_DMABUF_HEAPS_SYSTEM)   +=3D system_heap.o
-> > > >    obj-$(CONFIG_DMABUF_HEAPS_CMA)              +=3D cma_heap.o
-> > > > +obj-$(CONFIG_DMABUF_HEAPS_COHERENT)  +=3D coherent_heap.o
-> > > > diff --git a/drivers/dma-buf/heaps/coherent_heap.c b/drivers/dma-bu=
-f/heaps/coherent_heap.c
-> > > > new file mode 100644
-> > > > index 0000000000000..55f53f87c4c15
-> > > > --- /dev/null
-> > > > +++ b/drivers/dma-buf/heaps/coherent_heap.c
-> > > > @@ -0,0 +1,414 @@
-> > > > +// SPDX-License-Identifier: GPL-2.0
-> > > > +/*
-> > > > + * DMABUF heap for coherent reserved-memory regions
-> > > > + *
-> > > > + * Copyright (C) 2026 Red Hat, Inc.
-> > > > + * Author: Albert Esteve <aesteve@redhat.com>
-> > > > + *
-> > > > + */
-> > > > +
-> > > > +#include <linux/dma-buf.h>
-> > > > +#include <linux/dma-heap.h>
-> > > > +#include <linux/dma-map-ops.h>
-> > > > +#include <linux/dma-mapping.h>
-> > > > +#include <linux/err.h>
-> > > > +#include <linux/highmem.h>
-> > > > +#include <linux/iosys-map.h>
-> > > > +#include <linux/of_reserved_mem.h>
-> > > > +#include <linux/scatterlist.h>
-> > > > +#include <linux/slab.h>
-> > > > +#include <linux/vmalloc.h>
-> > > > +
-> > > > +struct coherent_heap {
-> > > > +     struct dma_heap *heap;
-> > > > +     struct reserved_mem *rmem;
-> > > > +     char *name;
-> > > > +};
-> > > > +
-> > > > +struct coherent_heap_buffer {
-> > > > +     struct coherent_heap *heap;
-> > > > +     struct list_head attachments;
-> > > > +     struct mutex lock;
-> > > > +     unsigned long len;
-> > > > +     dma_addr_t dma_addr;
-> > > > +     void *alloc_vaddr;
-> > > > +     struct page **pages;
-> > > > +     pgoff_t pagecount;
-> > > > +     int vmap_cnt;
-> > > > +     void *vaddr;
-> > > > +};
-> > > > +
-> > > > +struct dma_heap_attachment {
-> > > > +     struct device *dev;
-> > > > +     struct sg_table table;
-> > > > +     struct list_head list;
-> > > > +     bool mapped;
-> > > > +};
-> > > > +
-> > > > +static int coherent_heap_attach(struct dma_buf *dmabuf,
-> > > > +                             struct dma_buf_attachment *attachment)
-> > > > +{
-> > > > +     struct coherent_heap_buffer *buffer =3D dmabuf->priv;
-> > > > +     struct dma_heap_attachment *a;
-> > > > +     int ret;
-> > > > +
-> > > > +     a =3D kzalloc_obj(*a);
-> > > > +     if (!a)
-> > > > +             return -ENOMEM;
-> > > > +
-> > > > +     ret =3D sg_alloc_table_from_pages(&a->table, buffer->pages,
-> > > > +                                     buffer->pagecount, 0,
-> > > > +                                     buffer->pagecount << PAGE_SHI=
-FT,
-> > > > +                                     GFP_KERNEL);
-> > > > +     if (ret) {
-> > > > +             kfree(a);
-> > > > +             return ret;
-> > > > +     }
-> > > > +
-> > > > +     a->dev =3D attachment->dev;
-> > > > +     INIT_LIST_HEAD(&a->list);
-> > > > +     a->mapped =3D false;
-> > > > +
-> > > > +     attachment->priv =3D a;
-> > > > +
-> > > > +     mutex_lock(&buffer->lock);
-> > > > +     list_add(&a->list, &buffer->attachments);
-> > > > +     mutex_unlock(&buffer->lock);
-> > > > +
-> > > > +     return 0;
-> > > > +}
-> > > > +
-> > > > +static void coherent_heap_detach(struct dma_buf *dmabuf,
-> > > > +                              struct dma_buf_attachment *attachmen=
-t)
-> > > > +{
-> > > > +     struct coherent_heap_buffer *buffer =3D dmabuf->priv;
-> > > > +     struct dma_heap_attachment *a =3D attachment->priv;
-> > > > +
-> > > > +     mutex_lock(&buffer->lock);
-> > > > +     list_del(&a->list);
-> > > > +     mutex_unlock(&buffer->lock);
-> > > > +
-> > > > +     sg_free_table(&a->table);
-> > > > +     kfree(a);
-> > > > +}
-> > > > +
-> > > > +static struct sg_table *coherent_heap_map_dma_buf(struct dma_buf_a=
-ttachment *attachment,
-> > > > +                                               enum dma_data_direc=
-tion direction)
-> > > > +{
-> > > > +     struct dma_heap_attachment *a =3D attachment->priv;
-> > > > +     struct sg_table *table =3D &a->table;
-> > > > +     int ret;
-> > > > +
-> > > > +     ret =3D dma_map_sgtable(attachment->dev, table, direction, 0);
-> > > > +     if (ret)
-> > > > +             return ERR_PTR(-ENOMEM);
-> > > > +     a->mapped =3D true;
-> > > > +
-> > > > +     return table;
-> > > > +}
-> > > > +
-> > > > +static void coherent_heap_unmap_dma_buf(struct dma_buf_attachment =
-*attachment,
-> > > > +                                     struct sg_table *table,
-> > > > +                                     enum dma_data_direction direc=
-tion)
-> > > > +{
-> > > > +     struct dma_heap_attachment *a =3D attachment->priv;
-> > > > +
-> > > > +     a->mapped =3D false;
-> > > > +     dma_unmap_sgtable(attachment->dev, table, direction, 0);
-> > > > +}
-> > > > +
-> > > > +static int coherent_heap_dma_buf_begin_cpu_access(struct dma_buf *=
-dmabuf,
-> > > > +                                               enum dma_data_direc=
-tion direction)
-> > > > +{
-> > > > +     struct coherent_heap_buffer *buffer =3D dmabuf->priv;
-> > > > +     struct dma_heap_attachment *a;
-> > > > +
-> > > > +     mutex_lock(&buffer->lock);
-> > > > +     if (buffer->vmap_cnt)
-> > > > +             invalidate_kernel_vmap_range(buffer->vaddr, buffer->l=
-en);
-> > > > +
-> > > > +     list_for_each_entry(a, &buffer->attachments, list) {
-> > > > +             if (!a->mapped)
-> > > > +                     continue;
-> > > > +             dma_sync_sgtable_for_cpu(a->dev, &a->table, direction=
-);
-> > > > +     }
-> > > > +     mutex_unlock(&buffer->lock);
-> > > > +
-> > > > +     return 0;
-> > > > +}
-> > > > +
-> > > > +static int coherent_heap_dma_buf_end_cpu_access(struct dma_buf *dm=
-abuf,
-> > > > +                                             enum dma_data_directi=
-on direction)
-> > > > +{
-> > > > +     struct coherent_heap_buffer *buffer =3D dmabuf->priv;
-> > > > +     struct dma_heap_attachment *a;
-> > > > +
-> > > > +     mutex_lock(&buffer->lock);
-> > > > +     if (buffer->vmap_cnt)
-> > > > +             flush_kernel_vmap_range(buffer->vaddr, buffer->len);
-> > > > +
-> > > > +     list_for_each_entry(a, &buffer->attachments, list) {
-> > > > +             if (!a->mapped)
-> > > > +                     continue;
-> > > > +             dma_sync_sgtable_for_device(a->dev, &a->table, direct=
-ion);
-> > > > +     }
-> > > > +     mutex_unlock(&buffer->lock);
-> > > > +
-> > > > +     return 0;
-> > > > +}
-> > > > +
-> > > > +static int coherent_heap_mmap(struct dma_buf *dmabuf, struct vm_ar=
-ea_struct *vma)
-> > > > +{
-> > > > +     struct coherent_heap_buffer *buffer =3D dmabuf->priv;
-> > > > +     struct coherent_heap *coh_heap =3D buffer->heap;
-> > > > +     struct device *heap_dev =3D dma_heap_get_dev(coh_heap->heap);
-> > > > +
-> > > > +     return dma_mmap_coherent(heap_dev, vma, buffer->alloc_vaddr,
-> > > > +                              buffer->dma_addr, buffer->len);
-> > > > +}
-> > > > +
-> > > > +static void *coherent_heap_do_vmap(struct coherent_heap_buffer *bu=
-ffer)
-> > > > +{
-> > > > +     void *vaddr;
-> > > > +
-> > > > +     vaddr =3D vmap(buffer->pages, buffer->pagecount, VM_MAP, PAGE=
-_KERNEL);
-> > > > +     if (!vaddr)
-> > > > +             return ERR_PTR(-ENOMEM);
-> > > > +
-> > > > +     return vaddr;
-> > > > +}
-> > > > +
-> > > > +static int coherent_heap_vmap(struct dma_buf *dmabuf, struct iosys=
-_map *map)
-> > > > +{
-> > > > +     struct coherent_heap_buffer *buffer =3D dmabuf->priv;
-> > > > +     void *vaddr;
-> > > > +     int ret =3D 0;
-> > > > +
-> > > > +     mutex_lock(&buffer->lock);
-> > > > +     if (buffer->vmap_cnt) {
-> > > > +             buffer->vmap_cnt++;
-> > > > +             iosys_map_set_vaddr(map, buffer->vaddr);
-> > > > +             goto out;
-> > > > +     }
-> > > > +
-> > > > +     vaddr =3D coherent_heap_do_vmap(buffer);
-> > > > +     if (IS_ERR(vaddr)) {
-> > > > +             ret =3D PTR_ERR(vaddr);
-> > > > +             goto out;
-> > > > +     }
-> > > > +
-> > > > +     buffer->vaddr =3D vaddr;
-> > > > +     buffer->vmap_cnt++;
-> > > > +     iosys_map_set_vaddr(map, buffer->vaddr);
-> > > > +out:
-> > > > +     mutex_unlock(&buffer->lock);
-> > > > +
-> > > > +     return ret;
-> > > > +}
-> > > > +
-> > > > +static void coherent_heap_vunmap(struct dma_buf *dmabuf, struct io=
-sys_map *map)
-> > > > +{
-> > > > +     struct coherent_heap_buffer *buffer =3D dmabuf->priv;
-> > > > +
-> > > > +     mutex_lock(&buffer->lock);
-> > > > +     if (!--buffer->vmap_cnt) {
-> > > > +             vunmap(buffer->vaddr);
-> > > > +             buffer->vaddr =3D NULL;
-> > > > +     }
-> > > > +     mutex_unlock(&buffer->lock);
-> > > > +     iosys_map_clear(map);
-> > > > +}
-> > > > +
-> > > > +static void coherent_heap_dma_buf_release(struct dma_buf *dmabuf)
-> > > > +{
-> > > > +     struct coherent_heap_buffer *buffer =3D dmabuf->priv;
-> > > > +     struct coherent_heap *coh_heap =3D buffer->heap;
-> > > > +     struct device *heap_dev =3D dma_heap_get_dev(coh_heap->heap);
-> > > > +
-> > > > +     if (buffer->vmap_cnt > 0) {
-> > > > +             WARN(1, "%s: buffer still mapped in the kernel\n", __=
-func__);
-> > > > +             vunmap(buffer->vaddr);
-> > > > +             buffer->vaddr =3D NULL;
-> > > > +             buffer->vmap_cnt =3D 0;
-> > > > +     }
-> > > > +
-> > > > +     if (buffer->alloc_vaddr)
-> > > > +             dma_free_coherent(heap_dev, buffer->len, buffer->allo=
-c_vaddr,
-> > > > +                               buffer->dma_addr);
-> > > > +     kfree(buffer->pages);
-> > > > +     kfree(buffer);
-> > > > +}
-> > > > +
-> > > > +static const struct dma_buf_ops coherent_heap_buf_ops =3D {
-> > > > +     .attach =3D coherent_heap_attach,
-> > > > +     .detach =3D coherent_heap_detach,
-> > > > +     .map_dma_buf =3D coherent_heap_map_dma_buf,
-> > > > +     .unmap_dma_buf =3D coherent_heap_unmap_dma_buf,
-> > > > +     .begin_cpu_access =3D coherent_heap_dma_buf_begin_cpu_access,
-> > > > +     .end_cpu_access =3D coherent_heap_dma_buf_end_cpu_access,
-> > > > +     .mmap =3D coherent_heap_mmap,
-> > > > +     .vmap =3D coherent_heap_vmap,
-> > > > +     .vunmap =3D coherent_heap_vunmap,
-> > > > +     .release =3D coherent_heap_dma_buf_release,
-> > > > +};
-> > > > +
-> > > > +static struct dma_buf *coherent_heap_allocate(struct dma_heap *hea=
-p,
-> > > > +                                           unsigned long len,
-> > > > +                                           u32 fd_flags,
-> > > > +                                           u64 heap_flags)
-> > > > +{
-> > > > +     struct coherent_heap *coh_heap;
-> > > > +     struct coherent_heap_buffer *buffer;
-> > > > +     struct device *heap_dev;
-> > > > +     DEFINE_DMA_BUF_EXPORT_INFO(exp_info);
-> > > > +     size_t size =3D PAGE_ALIGN(len);
-> > > > +     pgoff_t pagecount =3D size >> PAGE_SHIFT;
-> > > > +     struct dma_buf *dmabuf;
-> > > > +     int ret =3D -ENOMEM;
-> > > > +     pgoff_t pg;
-> > > > +
-> > > > +     coh_heap =3D dma_heap_get_drvdata(heap);
-> > > > +     if (!coh_heap)
-> > > > +             return ERR_PTR(-EINVAL);
-> > > > +
-> > > > +     heap_dev =3D dma_heap_get_dev(coh_heap->heap);
-> > > > +     if (!heap_dev)
-> > > > +             return ERR_PTR(-ENODEV);
-> > > > +
-> > > > +     buffer =3D kzalloc_obj(*buffer);
-> > > > +     if (!buffer)
-> > > > +             return ERR_PTR(-ENOMEM);
-> > > > +
-> > > > +     INIT_LIST_HEAD(&buffer->attachments);
-> > > > +     mutex_init(&buffer->lock);
-> > > > +     buffer->len =3D size;
-> > > > +     buffer->heap =3D coh_heap;
-> > > > +     buffer->pagecount =3D pagecount;
-> > > > +
-> > > > +     buffer->alloc_vaddr =3D dma_alloc_coherent(heap_dev, buffer->=
-len,
-> > > > +                                              &buffer->dma_addr, G=
-FP_KERNEL);
-> > >=20
-> > > You are doing this DMA allocation using a non-DMA pseudo-device (heap=
-_dev).
-> > > This is why you need to do that dma_coerce_mask_and_coherent(64) nons=
-ense, you
-> > > are doing a DMA alloc for the CPU itself. This might still work, but =
-only if
-> > > dma_map_sgtable() can handle swiotlb/iommu for all attaching devices =
-at map
-> > > time.
-> >=20
-> > The concern is valid. We're allocating via a synthetic device, which
-> > ties the allocation to that device's DMA domain. I looked deeper into
-> > this trying to address the concern.
-> >=20
-> > The approach works because dma_map_sgtable() handles both
-> > dma_map_direct and use_dma_iommu cases in __dma_map_sg_attrs(). For
-> > each physical address in the sg_table (extracted via sg_phys()), it
-> > creates device-specific DMA mappings:
-> > - For direct mapping: it checks if the address is directly accessible
-> > (dma_capable()), and if not, it falls back to swiotlb.
-> > - For IOMMU: it creates mappings that allow the device to access
-> > physical addresses.
-> >=20
-> > This means every attached device gets its own device-specific DMA
-> > mapping, properly handling cases where the physical addresses are
-> > inaccessible or have DMA constraints.
-> >=20
->=20
-> While this means it might still "work" it won't always be ideal. Take
-> the case where the consuming device(s) have a 32bit address restriction,
-> if the allocation was done using the real devices then the backing buffer
-> itself would be allocated in <32bit mem. Whereas here the allocation
-> could end up in >32bit mem, as the CPU/synthetic device supports that.
-> Then each mapping device would instead get a bounce buffer.
->=20
-> (this example might not be great as we usually know the address of
-> carveout/reserved memory regions, but substitute in whatever restriction
-> makes more sense)
->=20
-> These non-reusable carveouts tend to be made for some specific device, and
-> they are made specifically because that device has some memory restrictio=
-n.
-> So we might run into the situation above more than one would expect.
->=20
-> Not a blocker here, but just something worth thinking on.
+Jiri Pirko (2):
+  dma-mapping: introduce DMA_ATTR_CC_DECRYPTED for pre-decrypted memory
+  dma-buf: heaps: system: add system_cc_decrypted heap for explicitly
+    decrypted memory
 
-As I detailed in the previous version [1] the main idea behind that work
-is to allow to get rid of dma_alloc_attrs for framework and drivers to
-allocate from the heaps instead.
+ drivers/dma-buf/heaps/system_heap.c | 103 ++++++++++++++++++++++++++--
+ include/linux/dma-mapping.h         |  10 +++
+ include/trace/events/dma.h          |   3 +-
+ kernel/dma/direct.h                 |  14 +++-
+ kernel/dma/mapping.c                |  13 +++-
+ 5 files changed, 132 insertions(+), 11 deletions(-)
 
-Robin was saying he wasn't comfortable with exposing this heap to
-userspace, and we're saying here that maybe this might not always work
-anyway (or at least that we couldn't test it fully).
-
-Maybe the best thing is to defer this series until we are at a point
-where we can start enabling the "heap allocations" in frameworks then?
-Hopefully we will have hardware to test it with by then, and we might
-not even need to expose it to userspace at all but only to the kernel.
-
-What do you think?
-Maxime
-
---jscl64m2oiw74tyk
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iJUEABMJAB0WIQTkHFbLp4ejekA/qfgnX84Zoj2+dgUCabfy0wAKCRAnX84Zoj2+
-dgeiAXoDtrr53jaDnso+MPGG32MwwvCyvuZkKpfa3kBAN2BnNbY6OIpgaEgG4FYc
-Utw0NWMBf0PSYnXgs3OvaozQSkQ36eIEwTWcE0i0EbBh1GsiEccBubIWIh/7iLit
-uDjYaOlmGw==
-=hHFI
------END PGP SIGNATURE-----
-
---jscl64m2oiw74tyk--
-
-
---===============8188966391451368665==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+-- 
+2.51.1
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============8188966391451368665==--
-
