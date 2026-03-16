@@ -2,268 +2,158 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qDYgKT9LuGlTbgEAu9opvQ
+	id WF3hLFBzuGn5dgEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Mar 2026 19:26:07 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Mar 2026 22:17:04 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 31F9729F00A
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Mar 2026 19:26:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3DDB52A0B05
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Mar 2026 22:17:04 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 04F683F73A
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Mar 2026 18:26:06 +0000 (UTC)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by lists.linaro.org (Postfix) with ESMTP id 12A183F73A
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 16 Mar 2026 18:26:03 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 34B493F683
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Mar 2026 21:17:03 +0000 (UTC)
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+	by lists.linaro.org (Postfix) with ESMTPS id A67123F683
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 16 Mar 2026 21:17:00 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=none;
-	spf=pass (lists.linaro.org: domain of robin.murphy@arm.com designates 217.140.110.172 as permitted sender) smtp.mailfrom=robin.murphy@arm.com;
-	dmarc=pass (policy=none) header.from=arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 7E67C339;
-	Mon, 16 Mar 2026 11:25:56 -0700 (PDT)
-Received: from [10.57.61.116] (unknown [10.57.61.116])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 262AB3F778;
-	Mon, 16 Mar 2026 11:25:58 -0700 (PDT)
-Message-ID: <15fcfa5e-c4b9-4b56-8f84-20dd5f66d643@arm.com>
-Date: Mon, 16 Mar 2026 18:25:55 +0000
+	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b="ZkQKA/cw";
+	spf=pass (lists.linaro.org: domain of lyude@redhat.com designates 170.10.133.124 as permitted sender) smtp.mailfrom=lyude@redhat.com;
+	dmarc=pass (policy=quarantine) header.from=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1773695820;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=FK2SRYWUs8F1o4n/OCWFgYAf27vjExpMLrN5boT+rxU=;
+	b=ZkQKA/cwQXF6VI3AXjx4q8xdmD9CClg0XezD4JXD//tQMvvaNOMU5PMTa9DhOlD9BNGqUd
+	7CvxHuLWfNZ9hHf4MdW+HrUo6ZRbncO43uemG5OKrsIFdU9cA91NpMF06e4kYitQqaaLbx
+	j4xsxY1nA/Gpeye1uS5OQxqAe1XAXa4=
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-244-IJaCFJjyPQ2OhhmKNwgyTg-1; Mon,
+ 16 Mar 2026 17:16:56 -0400
+X-MC-Unique: IJaCFJjyPQ2OhhmKNwgyTg-1
+X-Mimecast-MFC-AGG-ID: IJaCFJjyPQ2OhhmKNwgyTg_1773695813
+Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id CDCE719560AE;
+	Mon, 16 Mar 2026 21:16:52 +0000 (UTC)
+Received: from GoldenWind.redhat.com (unknown [10.22.88.101])
+	by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id E1B0B1800361;
+	Mon, 16 Mar 2026 21:16:48 +0000 (UTC)
+From: Lyude Paul <lyude@redhat.com>
+To: nouveau@lists.freedesktop.org,
+	Gary Guo <gary@garyguo.net>,
+	Daniel Almeida <daniel.almeida@collabora.com>,
+	rust-for-linux@vger.kernel.org,
+	Danilo Krummrich <dakr@kernel.org>
+Date: Mon, 16 Mar 2026 17:16:08 -0400
+Message-ID: <20260316211646.650074-1-lyude@redhat.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Jiri Pirko <jiri@resnulli.us>, dri-devel@lists.freedesktop.org,
- linaro-mm-sig@lists.linaro.org, iommu@lists.linux.dev,
- linux-media@vger.kernel.org
-References: <20260316125857.617836-1-jiri@resnulli.us>
- <20260316125857.617836-2-jiri@resnulli.us>
-From: Robin Murphy <robin.murphy@arm.com>
-Content-Language: en-GB
-In-Reply-To: <20260316125857.617836-2-jiri@resnulli.us>
-X-Spamd-Bar: ---
-Message-ID-Hash: EVXB5LYZB2SG5M27JF4JPXTHNIS5VFM3
-X-Message-ID-Hash: EVXB5LYZB2SG5M27JF4JPXTHNIS5VFM3
-X-MailFrom: robin.murphy@arm.com
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
+X-Mimecast-MFC-PROC-ID: DgEglaVF1DkdWUB9bB5X0NVxBjJwjS0dP6vQis6-hAg_1773695813
+X-Mimecast-Originator: redhat.com
+X-Spamd-Bar: -----
+Message-ID-Hash: ZEWQFPED66DLR2XF7Q3UDHMGQ7AYTWNJ
+X-Message-ID-Hash: ZEWQFPED66DLR2XF7Q3UDHMGQ7AYTWNJ
+X-MailFrom: lyude@redhat.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, Brian.Starkey@arm.com, jstultz@google.com, tjmercier@google.com, christian.koenig@amd.com, jgg@ziepe.ca, leon@kernel.org, sean.anderson@linux.dev, ptesarik@suse.com, catalin.marinas@arm.com, aneesh.kumar@kernel.org, suzuki.poulose@arm.com, steven.price@arm.com, thomas.lendacky@amd.com, john.allen@amd.com, ashish.kalra@amd.com, suravee.suthikulpanit@amd.com, linux-coco@lists.linux.dev
+CC: Matthew Maurer <mmaurer@google.com>, FUJITA Tomonori <fujita.tomonori@gmail.com>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, christian.koenig@amd.com, Asahi Lina <lina@asahilina.net>, Miguel Ojeda <ojeda@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, Simona Vetter <simona@ffwll.ch>, Alice Ryhl <aliceryhl@google.com>, Boqun Feng <boqun@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Krishna Ketan Rai <prafulrai522@gmail.com>, linux-media@vger.kernel.org, Shankari Anand <shankari.ak0208@gmail.com>, David Airlie <airlied@gmail.com>, Benno Lossin <lossin@kernel.org>, Viresh Kumar <viresh.kumar@linaro.org>, linaro-mm-sig@lists.linaro.org, Asahi Lina <lina+kernel@asahilina.net>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v4 1/2] dma-mapping: introduce DMA_ATTR_CC_DECRYPTED for pre-decrypted memory
+Subject: [Linaro-mm-sig] [PATCH v9 0/7] Rust bindings for gem shmem
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EVXB5LYZB2SG5M27JF4JPXTHNIS5VFM3/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZEWQFPED66DLR2XF7Q3UDHMGQ7AYTWNJ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [-0.41 / 15.00];
+X-Spamd-Result: default: False [4.49 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[redhat.com : SPF not aligned (relaxed),quarantine];
+	SUSPICIOUS_RECIPS(1.50)[];
+	R_DKIM_REJECT(1.00)[redhat.com:s=mimecast20190719];
+	MID_CONTAINS_FROM(1.00)[];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx];
-	DMARC_POLICY_SOFTFAIL(0.10)[arm.com : SPF not aligned (relaxed), No valid DKIM,none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	ARC_NA(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	TO_DN_SOME(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[24];
-	MIME_TRACE(0.00)[0:+];
-	NEURAL_HAM(-0.00)[-0.907];
-	R_DKIM_NA(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[robin.murphy@arm.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	GREYLIST(0.00)[pass,meta];
+	ARC_NA(0.00)[];
+	FREEMAIL_CC(0.00)[google.com,gmail.com,oracle.com,amd.com,asahilina.net,kernel.org,ffwll.ch,linaro.org,vger.kernel.org,lists.linaro.org,linuxfoundation.org];
+	RCPT_COUNT_TWELVE(0.00)[26];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,linaro.org:email,arm.com:mid]
-X-Rspamd-Queue-Id: 31F9729F00A
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[lyude@redhat.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[redhat.com:-];
+	NEURAL_HAM(-0.00)[-0.613];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	TAGGED_RCPT(0.00)[linaro-mm-sig,kernel];
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email]
+X-Rspamd-Queue-Id: 3DDB52A0B05
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On 2026-03-16 12:58 pm, Jiri Pirko wrote:
-> From: Jiri Pirko <jiri@nvidia.com>
-> 
-> Current CC designs don't place a vIOMMU in front of untrusted devices.
-> Instead, the DMA API forces all untrusted device DMA through swiotlb
-> bounce buffers (is_swiotlb_force_bounce()) which copies data into
-> decrypted memory on behalf of the device.
-> 
-> When a caller has already arranged for the memory to be decrypted
-> via set_memory_decrypted(), the DMA API needs to know so it can map
-> directly using the unencrypted physical address rather than bounce
-> buffering. Following the pattern of DMA_ATTR_MMIO, add
-> DMA_ATTR_CC_DECRYPTED for this purpose. Like the MMIO case, only the
-> caller knows what kind of memory it has and must inform the DMA API
-> for it to work correctly.
+This is the next version of the shmem backed GEM objects series
+originally from Asahi, previously posted by Daniel Almeida.
 
-Echoing Jason's point, if the intent of this is to indicate shared 
-memory, please call it DMA_ATTR_CC_SHARED. Yes, some of the existing 
-APIs are badly named because they conflated intent with implementation 
-details; that is no reason to keep wilfully making the same mistake.
+The previous version of the patch series can be found here:
 
-At least with Arm CCA, the architecture enforces *confidentiality* 
-pretty much orthogonally to encryption - if your threat model excludes 
-physical attacks against DRAM, you can still have Realms isolated from 
-each other (and of course other execution states) without even 
-implementing the memory encryption feature; conversely if you do have 
-it, then even all the shared/host memory may still be physically 
-encrypted, it just has its own context (key) distinct from the Realm 
-ones. Similarly, while it's not a "true" CoCo environment, pKVM has a 
-similar notion of shared vs. private which can benefit from 
-piggy-backing off much of the CoCo infrastructure in places like the DMA 
-layer, but has nothing whatsoever to do with actual encryption.
+https://patchwork.freedesktop.org/series/156093/
 
-Furthermore, "shared" is just shorter and more readable, even before I 
-invoke the previous discussion of why it should be "unencrypted" rather 
-than "decrypted" anyway ;)
+This patch series may be applied on top of the
+driver-core/driver-core-testing branch:
 
-> Signed-off-by: Jiri Pirko <jiri@nvidia.com>
-> ---
-> v3->v4:
-> - added some sanity checks to dma_map_phys and dma_unmap_phys
-> - enhanced documentation of DMA_ATTR_CC_DECRYPTED attr
-> v1->v2:
-> - rebased on top of recent dma-mapping-fixes
-> ---
->   include/linux/dma-mapping.h | 10 ++++++++++
->   include/trace/events/dma.h  |  3 ++-
->   kernel/dma/direct.h         | 14 +++++++++++---
->   kernel/dma/mapping.c        | 13 +++++++++++--
->   4 files changed, 34 insertions(+), 6 deletions(-)
-> 
-> diff --git a/include/linux/dma-mapping.h b/include/linux/dma-mapping.h
-> index 29973baa0581..476964d2b22f 100644
-> --- a/include/linux/dma-mapping.h
-> +++ b/include/linux/dma-mapping.h
-> @@ -85,6 +85,16 @@
->    * a cacheline must have this attribute for this to be considered safe.
->    */
->   #define DMA_ATTR_CPU_CACHE_CLEAN	(1UL << 11)
-> +/*
-> + * DMA_ATTR_CC_DECRYPTED: Indicates the DMA mapping is decrypted (shared) for
-> + * confidential computing guests. For normal system memory the caller must have
-> + * called set_memory_decrypted(), and pgprot_decrypted must be used when
-> + * creating CPU PTEs for the mapping. The same decrypted semantic may be passed
-> + * to the vIOMMU when it sets up the IOPTE. For MMIO use together with
+https://git.kernel.org/pub/scm/linux/kernel/git/driver-core/driver-core.git/log/?h=driver-core-testing
 
-That being "the vIOMMU" that you said doesn't exist, and which is 
-explicitly not supported?...
+Changelogs are per-patch
 
-> + * DMA_ATTR_MMIO to indicate decrypted MMIO. Unless DMA_ATTR_MMIO is provided
-> + * a struct page is required.
-> + */
-> +#define DMA_ATTR_CC_DECRYPTED	(1UL << 12)
->   
->   /*
->    * A dma_addr_t can hold any valid DMA or bus address for the platform.  It can
-> diff --git a/include/trace/events/dma.h b/include/trace/events/dma.h
-> index 33e99e792f1a..b8082d5177c4 100644
-> --- a/include/trace/events/dma.h
-> +++ b/include/trace/events/dma.h
-> @@ -32,7 +32,8 @@ TRACE_DEFINE_ENUM(DMA_NONE);
->   		{ DMA_ATTR_ALLOC_SINGLE_PAGES, "ALLOC_SINGLE_PAGES" }, \
->   		{ DMA_ATTR_NO_WARN, "NO_WARN" }, \
->   		{ DMA_ATTR_PRIVILEGED, "PRIVILEGED" }, \
-> -		{ DMA_ATTR_MMIO, "MMIO" })
-> +		{ DMA_ATTR_MMIO, "MMIO" }, \
-> +		{ DMA_ATTR_CC_DECRYPTED, "CC_DECRYPTED" })
->   
->   DECLARE_EVENT_CLASS(dma_map,
->   	TP_PROTO(struct device *dev, phys_addr_t phys_addr, dma_addr_t dma_addr,
-> diff --git a/kernel/dma/direct.h b/kernel/dma/direct.h
-> index e89f175e9c2d..c047a9d0fda3 100644
-> --- a/kernel/dma/direct.h
-> +++ b/kernel/dma/direct.h
-> @@ -84,16 +84,24 @@ static inline dma_addr_t dma_direct_map_phys(struct device *dev,
->   	dma_addr_t dma_addr;
->   
->   	if (is_swiotlb_force_bounce(dev)) {
-> -		if (attrs & DMA_ATTR_MMIO)
-> -			return DMA_MAPPING_ERROR;
-> +		if (!(attrs & DMA_ATTR_CC_DECRYPTED)) {
-> +			if (attrs & DMA_ATTR_MMIO)
-> +				return DMA_MAPPING_ERROR;
->   
-> -		return swiotlb_map(dev, phys, size, dir, attrs);
-> +			return swiotlb_map(dev, phys, size, dir, attrs);
-> +		}
-> +	} else if (attrs & DMA_ATTR_CC_DECRYPTED) {
-> +		return DMA_MAPPING_ERROR;
->   	}
->   
->   	if (attrs & DMA_ATTR_MMIO) {
->   		dma_addr = phys;
->   		if (unlikely(!dma_capable(dev, dma_addr, size, false)))
->   			goto err_overflow;
-> +	} else if (attrs & DMA_ATTR_CC_DECRYPTED) {
-> +		dma_addr = phys_to_dma_unencrypted(dev, phys);
-> +		if (unlikely(!dma_capable(dev, dma_addr, size, false)))
-> +			goto err_overflow;
->   	} else {
->   		dma_addr = phys_to_dma(dev, phys);
->   		if (unlikely(!dma_capable(dev, dma_addr, size, true)) ||
-> diff --git a/kernel/dma/mapping.c b/kernel/dma/mapping.c
-> index 3928a509c44c..abb0c88b188b 100644
-> --- a/kernel/dma/mapping.c
-> +++ b/kernel/dma/mapping.c
-> @@ -157,6 +157,7 @@ dma_addr_t dma_map_phys(struct device *dev, phys_addr_t phys, size_t size,
->   {
->   	const struct dma_map_ops *ops = get_dma_ops(dev);
->   	bool is_mmio = attrs & DMA_ATTR_MMIO;
-> +	bool is_cc_decrypted = attrs & DMA_ATTR_CC_DECRYPTED;
->   	dma_addr_t addr = DMA_MAPPING_ERROR;
->   
->   	BUG_ON(!valid_dma_direction(dir));
-> @@ -165,8 +166,11 @@ dma_addr_t dma_map_phys(struct device *dev, phys_addr_t phys, size_t size,
->   		return DMA_MAPPING_ERROR;
->   
->   	if (dma_map_direct(dev, ops) ||
-> -	    (!is_mmio && arch_dma_map_phys_direct(dev, phys + size)))
-> +	    (!is_mmio && !is_cc_decrypted &&
-> +	     arch_dma_map_phys_direct(dev, phys + size)))
->   		addr = dma_direct_map_phys(dev, phys, size, dir, attrs);
-> +	else if (is_cc_decrypted)
-> +		return DMA_MAPPING_ERROR;
->   	else if (use_dma_iommu(dev))
+Asahi Lina (2):
+  rust: helpers: Add bindings/wrappers for dma_resv_lock
+  rust: drm: gem: shmem: Add DRM shmem helper abstraction
 
-...although, why *shouldn't* this be allowed with a vIOMMU? (Especially 
-given that a vIOMMU for untrusted devices can be emulated by the host 
-VMM without the CoCo hypervisor having to care at all - again, at least 
-on Arm and other architectures where IOMMUs are regular driver model 
-devices)
+Lyude Paul (5):
+  rust: drm: Add gem::impl_aref_for_gem_obj!
+  rust: drm: gem: Add raw_dma_resv() function
+  rust: gem: Introduce DriverObject::Args
+  rust: drm: gem: Introduce shmem::SGTable
+  rust: drm/gem: Add vmap functions to shmem bindings
 
->   		addr = iommu_dma_map_phys(dev, phys, size, dir, attrs);
->   	else if (ops->map_phys)
+ drivers/gpu/drm/nova/gem.rs     |   5 +-
+ drivers/gpu/drm/tyr/gem.rs      |   3 +-
+ rust/bindings/bindings_helper.h |   3 +
+ rust/helpers/dma-resv.c         |  13 +
+ rust/helpers/drm.c              |  56 ++-
+ rust/helpers/helpers.c          |   1 +
+ rust/kernel/drm/gem/mod.rs      |  79 +++-
+ rust/kernel/drm/gem/shmem.rs    | 654 ++++++++++++++++++++++++++++++++
+ 8 files changed, 792 insertions(+), 22 deletions(-)
+ create mode 100644 rust/helpers/dma-resv.c
+ create mode 100644 rust/kernel/drm/gem/shmem.rs
 
-Or indeed any other non-direct ops? Obviously all the legacy 
-architectures like Alpha are never going to see this or care, but I 
-could imagine Xen and possibly PowerPC might.
 
-Thanks,
-Robin.
-
-> @@ -203,11 +207,16 @@ void dma_unmap_phys(struct device *dev, dma_addr_t addr, size_t size,
->   {
->   	const struct dma_map_ops *ops = get_dma_ops(dev);
->   	bool is_mmio = attrs & DMA_ATTR_MMIO;
-> +	bool is_cc_decrypted = attrs & DMA_ATTR_CC_DECRYPTED;
->   
->   	BUG_ON(!valid_dma_direction(dir));
-> +
->   	if (dma_map_direct(dev, ops) ||
-> -	    (!is_mmio && arch_dma_unmap_phys_direct(dev, addr + size)))
-> +	    (!is_mmio && !is_cc_decrypted &&
-> +	     arch_dma_unmap_phys_direct(dev, addr + size)))
->   		dma_direct_unmap_phys(dev, addr, size, dir, attrs);
-> +	else if (is_cc_decrypted)
-> +		return;
->   	else if (use_dma_iommu(dev))
->   		iommu_dma_unmap_phys(dev, addr, size, dir, attrs);
->   	else if (ops->unmap_phys)
+base-commit: dc33ae50d32b509af5ae61030912fa20c79ef112
+prerequisite-patch-id: c631986f96e2073263e97e82a65b96fc5ada6924
+prerequisite-patch-id: ae853e8eb8d58c77881371960be4ae92755e83c6
+prerequisite-patch-id: 0ab78b50648c7d8f66b83c32ed2af0ec3ede42a3
+prerequisite-patch-id: 636ec7f913f4047e5e1a1788f3e835b7259698c2
+prerequisite-patch-id: d75e4d7140eadeeed8017af8cd093bfd2766ee8e
+prerequisite-patch-id: 67a8010c1bc95bca1d2cf6b246c67bc79d24e766
+-- 
+2.53.0
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
