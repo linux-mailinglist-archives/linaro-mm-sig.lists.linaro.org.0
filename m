@@ -2,230 +2,93 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id uEZkBpYjuWkrrwEAu9opvQ
+	id 0A7KLrAjuWm1sQEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 17 Mar 2026 10:49:10 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 17 Mar 2026 10:49:36 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 88F6E2A734E
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 17 Mar 2026 10:49:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7268A2A7373
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 17 Mar 2026 10:49:36 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8D6323F7EC
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 17 Mar 2026 09:49:08 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 809B83F7EC
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 17 Mar 2026 09:49:35 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 34D7A3F700
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 17 Mar 2026 09:48:04 +0000 (UTC)
-Content-Type: text/plain; charset="utf-8"
+	by lists.linaro.org (Postfix) with ESMTP id 6EED43F700
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 17 Mar 2026 09:48:32 +0000 (UTC)
 MIME-Version: 1.0
 From: luckaswilli7@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Tue, 17 Mar 2026 09:48:04 -0000
-Message-ID: <177374088421.3775856.3602229304130065763@lists.linaro.org>
+Date: Tue, 17 Mar 2026 09:48:32 -0000
+Message-ID: <177374091245.3774413.5652524720581131736@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: EIAGNRSPUWIM34XJJJGHGYHBPM2RUL5J
-X-Message-ID-Hash: EIAGNRSPUWIM34XJJJGHGYHBPM2RUL5J
+Message-ID-Hash: VGSJ3VVR2V3MCZBYCZQKOEEGCGMMWMPH
+X-Message-ID-Hash: VGSJ3VVR2V3MCZBYCZQKOEEGCGMMWMPH
 X-MailFrom: luckaswilli7@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] =?utf-8?q?Kaufen_Sie_echte_und_gef=C3=A4lschte_P=C3=A4sse_=28WhatsApp=3A_+1_=28615=29-314-6286=29=2E_P=C3=A4sse_online_verl=C3=A4ngern=2C_legale_P=C3=A4sse_beantragen=2C_gef=C3=A4lschte_P=C3=A4sse_kaufen=2C_US-P=C3=A4sse_kaufen=2C_chinesische_P=C3=A4sse_kaufen=2C_kanadische_P=C3=A4sse_kaufen_=28Telegram=3A_=40Globaldocs26=29=3A_Kaufen_Sie_echte_und_gef=C3=A4lschte_P=C3=A4sse_=28WhatsApp=3A_+1_=28615=29-314-6286=29=2E_P=C3=A4sse_online_verl=C3=A4ngern=2C_legale_P=C3=A4sse_beantragen=2C_gef=C3=A4lschte_P=C3=A4sse_kaufen=2C_US-P=C3=A4sse_kaufen=2C_chinesische_P=C3=A4sse_kaufen=2C_kanadische_P=C3=A4sse_kaufen_=28Telegram=3A_=40Globaldocs26=29=2E_P=C3=A4sse_und_Visa_kaufen=2C_Staatsb=C3=BCrgerschaft_durch_Pass_erwerben=2C_Visa_und_P=C3=A4sse=2E_Pass_und_Visum_sind_dasselbe=2C_Pass_und_Visum_beantragen=2C_ist_Pass_und_Visum_eine_seri=C3=B6se_Website=2C_Unterschied_zwischen_P=C3=A4ssen_und_Visa=2E_Ben=C3=B6tige_ich_ein_Visum_f=C3=BCr_meinen_Pass=3F_Wie_beantrage_ich
- _einen_Pass_und_eine_Passkarte=3F_Ist_Pass_und_Visum_seri=C3=B6s=3F_Kaufen_Sie_Falschgeld=2E_Kaufen_Sie_US-Dollar_=28USD=29=2C_chinesische_Yuan_=28RMB=29=2C_kanadische_Dollar_=28CAD=29=2C_chinesische_Yuan_=28CNY=29=2C_Hongkong-Dollar_=28HKD=29=2C_malaysische_Ringgit_=28MYR=29=2C_australische_Dollar_=28AUD=29=2C_Euro_=28EUR=29_=28WhatsApp=3A_+1_=28615=29-314-6286=29=2E_Kaufen_Sie_hochwertige=2C_t=C3=A4uschend_echt_wirkende_Falschgeld-Banknoten=2E_Wir_bieten_ausschlie=C3=9Flich_hochwertiges_Falschgeld_an=2E_Unsere_Banknoten_sind_perfekt_nachgebildet=2C_mit_Hologrammen_und_allen_verf=C3=BCgbaren_Sicherheitsmerkmalen=2E_Sie_sind_mit_blo=C3=9Fem_Auge_und_durch_Ber=C3=BChrung_nicht_von_echtem_Geld_zu_unterscheiden=2E_Die_Banknoten_sind_zu_100_=25_t=C3=A4uschend_echt_und_werden_auf_Papier_aus_80_=25_Baumwolle_und_20_=25_Zellulose_gedruckt=2E_Kaufen_Sie_ein_US-Studentenvisum=2C_TCF-=2C_TEF-=2C_TOEFL-=2C_IELTS-_oder_TOEIC-Testergebnisse_=28E-Mail=3A_guanyuguohai=40gmail=2Ecom=29=2C_die_kanad
- ische_oder_US-amerikanische_Staatsb=C3=BCrgerschaft_sowie_kanadische_TCF-=2C_TEF-=2C_CELPIP-_und_CELTA-Zertifikate=2E_Wie_wandere_ich_nach_Kanada_ein=3F_F=C3=BChrerschein=2C_Personalausweis=2C_US-Green_Card_=28Telegram=3A_=40Globaldocs26=29=2C_Sozialversicherungsnummer_=28SSN=29=2C_Arbeitserlaubnis=2C_neuer_Personalausweis=2C_National_Insurance_Card=2C_NIN=2C_SIN=2C_Heiratsurkunde=2C_Geburtsurkunde_kaufen_M=C3=B6chten_Sie_mit_einer_neuen_Identit=C3=A4t_ein_neues_Kapitel_in_Ihrem_Leben_beginnen=3F_Ihre_Privatsph=C3=A4re_sch=C3=BCtzen=2C_eine_neue_Bonit=C3=A4t_aufbauen=2C_Strafregisterausk=C3=BCnfte_umgehen_und_Ihre_Freiheit_zur=C3=BCckgewinnen=3F_Beantragen_Sie_jetzt_eine_neue_Identit=C3=A4t!_=28WhatsApp=3A_+1=28615=29-314-6286=29_Sie_erreichen_uns_=C3=BCber_die_folgenden_Kontaktdaten=3A_WhatsApp=3A_+1_=28615=29-314-6286_Telegram=3A_=40Globaldocs26_E-Mail=3A_Karlvonlinne74=40gmail=2Ecom_Website=3A_https=3A//flypassports=2Ecom/_Website=3A_https=3A//buylegitpassports=2Ecom/_Telegram=3A
- _https=3A//t=2Eme/globaldocs2_P=C3=A4sse_und_Visa_kaufen=2C_kanadischen_Pass_kaufen=2C_k=C3=A4ufliche_P=C3=A4sse=2C_Visa-Geschenkkarte_mit_PayPal_Kanada_kaufen=2C_kanadischen_Pass_kaufen=2C_Pass_und_Visum_sind_dasselbe=2C_Pass_und_Visum_beantragen=2C_ist_Passes_and_Visas_eine_seri=C3=B6se_Website=2C_Unterschied_zwischen_P=C3=A4ssen_und_Visa=2C_ben=C3=B6tige_ich_ein_Visum_f=C3=BCr_meinen_Pass=2C_wie_beantrage_ich_einen_Pass_und_eine_Passkarte=2C_P=C3=A4sse=2C_Visa_und_mehr=2C_kann_man_einen_amerikanischen_Pass_kaufen=2C_Pass_kaufen=2C_amerikanischen_Pass_kaufen=2C_Pass_kaufen=2C_k=C3=A4ufliche_P=C3=A4sse=2C_Pass_kaufen=2C_Pass-_und_Visapr=C3=BCfung=2C_Pass-_und_Visakarte=2C_Passes_and_Visas_Gutscheincode=2C_kann_ich_ein_kanadisches_Visum_auf_einen_neuen_Pass_=C3=BCbertragen=2C_ist_passportsandvisas=2Ecom_seri=C3=B6s=3F_Sie_kaufen_einen_kanadischen_Pass=2C_Unterschied_zwischen_Pass_und_Visum=2C_Unterschied_zwischen_Pass_und_Visum_auf_Hindi=2C_Pass-_und_Visabeh=C3=B6rde_von_Ra=2C_Unter
- schied_zwischen_Pass_und_Visum_auf_Marathi=2C_P=C3=A4sse_und_Visa_Denver=2C_Pass-_und_Visadokumente=2C_Pass_und_Visum_Dubai=2C_Liste_der_visumfreien_P=C3=A4sse_Passport_and_Visa_Express=2C_Passport_and_Visa_Emirates=2C_Bewertungen_von_Passport_and_Visa_Express=2C_Visa_E-Geschenkkarte_Kanada_kaufen=2C_P=C3=A4sse_online_kaufen=2C_Kann_man_ein_Visum_online_kaufen=3F=2C_Pass-_und_visafreie_L=C3=A4nder_f=C3=BCr_Indien=2C_Pass-_und_visafreie_L=C3=A4nder=2C_Pass_und_Visum_f=C3=BCr_Gro=C3=9Fbritannien=2C_P=C3=A4sse_kaufen=2C_Amerikanischen_Pass_kaufen=2C_Pass-_und_Visuminhaber=2C_Pass_und_Visum=3A_Wie_viel_kostet_ein_Pass_und_ein_Visum=3F=2C_Unterschied_zwischen_Pass_und_Passkarte_Irland=2C_P=C3=A4sse_und_Staatsb=C3=BCrgerschaft_kaufen=2C_Pass-_und_Visa-ID-Fotogenerator=2C_Pass_und_Visum_sind_dasselbe=2C_Pass-_und_Visaindex=2C_P=C3=A4sse=2C_die_ich_kaufen_kann=2C_Jobs_im_Bereich_Pass_und_Visum=2C_P=C3=A4sse_zum_Kaufen=2C_P=C3=A4sse=2C_die_Sie_kaufen_k=C3=B6nnen=2C_P=C3=A4sse_kaufen=2C_Pass_
- und_Visum_Kenia=2C_Wie_erhalte_ich_eine_Passkarte=2C_wenn_ich_bereits_einen_Pass_habe=3F=2C_Welchen_Pass_kann_ich_kaufen=3F=2C_Passports_and_Visas_LLC=2C_Pass_und_Visa-Link=2C_P=C3=A4sse_und_Visa_legitim=2C_Pass-_und_Visa-Logo=2C_Pass_kaufen=2C_Bedeutung_von_Pass_und_Visum=2C_Pass-_und_Visa-Handbuch_2006_=28PDF=29=2C_Pass-_und_Visa-Begriffe=2C_Was_sind_Pass-_und_Visa-Begriffe=3F=2C_Unterschied_zwischen_Pass_und_Visum_auf_Hindi=2C_Unterschied_zwischen_Pass_und_Visum=2C_Pass-_und_Visa-Begriffe=2C_Pass-_und_Visa-Begriffe_auf_Hindi=2C_Kann_ich_mein_Visum_auf_einen_neuen_Pass_=C3=BCbertragen=3F=2C_Pass_kaufen=2C_Unterschiedliche_Namen_f=C3=BCr_Pass_und_Visum=2C_Pass-_und_Visanummer=2C_Wie_kaufe_ich_einen_neuen_Pass=3F=2C_Muss_ich_mein_Visum_auf_einen_neuen_Pass_=C3=BCbertragen=3F=2C_Pass-_und_Visa-B=C3=BCro=2C_Pass-_und_Visa-Organisation=2C_Pass_und_Visum_bei_Emirates=2C_Pass-_und_Visa-Foto_=28Photogov=29=2C_Pass-_und_Visa-Preis=2C_Pass-_und_Visa-Foto=2C_Pass-_und_Visa-Preis_in_Indien=2C
- _Pass-_und_Visa-Fotogr=C3=B6=C3=9Fe=2C_Anforderungen_an_Pass-_und_Visa-Foto=2C_Pass-_und_Visa-Fotostudio_in_meiner_N=C3=A4he=2C_Pass-_und_Visa-Seite=2C_Pass_und_Visum_f=C3=BCr_Qatar_Airways=2C_Pass-_und_Visa-Quartus_Global_Services=2C_Pass-_und_Visa-Quartus_Global_Services_Missouri_City=2C_Fragen_zu_Pass_und_Visum=2C_Ist_ein_beschleunigter_Pass_und_Legale_Visa=2C_Kauf_eines_Quebec-Passes=2E_Pass-_und_Visabestimmungen=2C_Pass-_und_Visabewertungen=2C_Pass-_und_Visabestimmungen_f=C3=BCr_Thailand=2C_Pass-_und_Visaverl=C3=A4ngerung=2EAnforderungen_f=C3=BCr_Spanien=2C_Pass-_und_Visabestimmungen_f=C3=BCr_Dubai=2C_Pass-_und_Visabestimmungen_f=C3=BCr_Italien=2C_Pass-_und_Visabestimmungen_f=C3=BCr_Gro=C3=9Fbritannien=2C_Pass-_und_Visabestimmungen_f=C3=BCr_Singapur=2C_Pass-_und_Visabestimmungen_f=C3=BCr_Australien=2C_Kauf_eines_Passes_eines_anderen_Landes_Pass-_und_Visadienstleistungen=2C_Pass-_und_Visadienstleistungen_in_meiner_N=C3=A4he=2C_Pass-_und_Visal=C3=B6sungen=2C_Pass_und_Visum_dassel
- be=2C_Pass-_und_Visastatus_Pass-_und_Visadienstleistungen_in_Chicago=2C_Pass-_und_Visastempel=2C_sind_Visa_und_P=C3=A4sse_dasselbe=2C_Pass_und_Visum_dasselbe_Pass_und_Visum_dasselbe=2C_unbegrenzte_P=C3=A4sse_und_Visa=2C_Pass_und_Visum_f=C3=BCr_Gro=C3=9Fbritannien=2C_US-Pass_und_Visum=2C_Pass_und_Visum_=E2=80=93_was_ist_der_Unterschied=3F_Zweiten_Pass_kaufen=2C_Pass_kaufen=2C_amerikanischen_Pass_kaufen=2C_Pass_kaufen=2C_wie_viel_kostet_ein_kanadischer_Pass=3F_Reisepass_https=3A//flypassports=2Ecom/service-category/passport/_https=3A//flypassports=2Ecom/service/germany-driving-licence/=23_https=3A//flypassports=2Ecom/services/_https=3A//flypassports=2Ecom/faq/_https=3A//flypassports=2Ecom/about-us/_https=3A//flypassports=2Ecom/contact-us/_https=3A//flypassports=2Ecom/service/canadian-passport/_https=3A//flypassports=2Ecom/service/bulgarian-drivers-license/_https=3A//flypassport_s=2Ecom/service/chinese-passport-renewal/_https=3A//flypassports=2Ecom/service/illinois-drivers-license/_htt
- ps=3A//flypassports=2Ecom/service/usa-passport/_https=3A//flypassports=2Ecom/service/austrian-drivers-license/_https=3A//flypassports=2Ecom/service/netherlands-passport-application/_https=3A//flypassports=2Ecom/service/vermont-drivers-license/_https=3A//flypassports=2Ecom/service/korean-passport-renewal/_h_https=3A//flypassports=2Ecom/service/germany-driving-licence/_https=3A//buylegitpassports=2Ecom/_https=3A//buylegitpassports=2Ecom/apply/_https=3A//buylegitpassports=2Ecom/buy-fake-diploma/_https=3A//buylegitpassports=2Ecom/social-security-card-generator/_https=3A//buylegitpassports=2Ecom/how-do-we-get-a-passport/_https=3A//buylegitpassports=2Ecom/real-and-fake-passport/_https=3A//buylegitpassports=2Ecom/buy-fake-chine_Reisepass_kaufen/_https=3A//buylegitpassports=2Ecom/buy-canadian-passport-online/_https=3A//buylegitpassports=2Ecom/croatia-driven-license/_https=3A//buylegitpassports=2Ecom/buy-brazil-driver-license/_https=3A//buylegitpassports=2Ecom/buy-hungary-driver-license/_htt
- ps=3A//buylegitpassports=2Ecom/buy-fake-social-security-number-card/_https=3A//buylegitpassports=2Ecom/how-can-i-get-california-drivers-license/_WhatsApp-Nummer=3A_+1_=28615=29-314-6286_Telegram=3A_=40Globaldocs26_E-Mail=3A_Karlvonlinne74=40gmail=2Ecom_Website=3A_https=3A//flypassports=2Ecom/_Website=3A_https=3A//buylegitpassports=2Ecom/_Telegram=3A_https=3A//t=2Eme/globaldocs2?=
+Subject: [Linaro-mm-sig] Telegram @larrykarius Buy Weed Online, (WhatsApp +1 202-656-4683) Buy Weed EU, Germany, UK, Netherlands Website: https://t.me/+-KRMXrCLaPswOWYx We know marijuana is not always the easiest thing to obtain regarding its laws. USA, Canada, Europe, and South America. Reliable online cannabis dispensary created to ship extremely potent pots around the world. We offer convenient payment options and will safeguard your privacy and dignity. Quick, discreet, and secured services Buy Marijuana Online - Buy Weed Online Netherlands, Mail Order Weed UK - Order 420 online - Legit Weed For Sale Italy, Prefilled Vape Cartridges For Sale France, High THC Oil For Europe, UK Online Dispensary Shipping Worldwide, Buy Cannabis UK, Order Marjjuana Online Spain. If you have questions, please contact us at, Buying weed in Europe can be a daunting task for those unfamiliar with the process. However, with the right knowledge and preparation, it can be a relatively straightforward and 
+ safe experience. This guide will provide an overview of what to look for when buying weed in Europe, as well as where to find it. Email: larrykarius247@gmail.com WhatsApp: +1(202)656-4683 Website: https://t.me/+-KRMXrCLaPswOWYx Telegram: https://t.me/+-KRMXrCLaPswOWYx
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EIAGNRSPUWIM34XJJJGHGYHBPM2RUL5J/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VGSJ3VVR2V3MCZBYCZQKOEEGCGMMWMPH/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Transfer-Encoding: base64
-X-Spamd-Result: default: False [3.69 / 15.00];
-	LONG_SUBJ(3.00)[8135];
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [8.59 / 15.00];
+	SPAM_FLAG(5.00)[];
+	LONG_SUBJ(3.00)[1258];
 	MID_RHS_MATCH_TO(1.00)[];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
-	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	SUBJECT_HAS_EXCLAIM(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	GREYLIST(0.00)[pass,meta];
 	ARC_NA(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	FREEMAIL_FROM(0.00)[gmail.com];
 	MIME_TRACE(0.00)[0:+];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:mid];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_NO_DN(0.00)[];
 	RCPT_COUNT_ONE(0.00)[1];
-	TO_DN_NONE(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
 	FROM_NEQ_ENVFROM(0.00)[luckaswilli7@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_NO_DN(0.00)[];
-	NEURAL_HAM(-0.00)[-0.935];
+	NEURAL_SPAM(0.00)[0.988];
+	TO_DN_NONE(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	R_DKIM_NA(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	SUBJECT_HAS_QUESTION(0.00)[]
-X-Rspamd-Queue-Id: 88F6E2A734E
-X-Rspamd-Action: no action
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:mid,t.me:url,linaro.org:email]
+X-Rspamd-Queue-Id: 7268A2A7373
+X-Rspamd-Action: add header
 X-Rspamd-Server: lfdr
+X-Spam: Yes
 
-S2F1ZmVuIFNpZSBlY2h0ZSB1bmQgZ2Vmw6Rsc2NodGUgUMOkc3NlIChXaGF0c0FwcDogKzEgKDYx
-NSktMzE0LTYyODYpLiBQw6Rzc2Ugb25saW5lIHZlcmzDpG5nZXJuLCBsZWdhbGUgUMOkc3NlIGJl
-YW50cmFnZW4sIGdlZsOkbHNjaHRlIFDDpHNzZSBrYXVmZW4sIFVTLVDDpHNzZSBrYXVmZW4sIGNo
-aW5lc2lzY2hlIFDDpHNzZSBrYXVmZW4sIGthbmFkaXNjaGUgUMOkc3NlIGthdWZlbiAgKFRlbGVn
-cmFtOiBAR2xvYmFsZG9jczI2KTogS2F1ZmVuIFNpZSBlY2h0ZSB1bmQgZ2Vmw6Rsc2NodGUgUMOk
-c3NlIChXaGF0c0FwcDogKzEgKDYxNSktMzE0LTYyODYpLiBQw6Rzc2Ugb25saW5lIHZlcmzDpG5n
-ZXJuLCBsZWdhbGUgUMOkc3NlIGJlYW50cmFnZW4sIGdlZsOkbHNjaHRlIFDDpHNzZSBrYXVmZW4s
-IFVTLVDDpHNzZSBrYXVmZW4sIGNoaW5lc2lzY2hlIFDDpHNzZSBrYXVmZW4sIGthbmFkaXNjaGUg
-UMOkc3NlIGthdWZlbiAoVGVsZWdyYW06IEBHbG9iYWxkb2NzMjYpLiBQw6Rzc2UgdW5kIFZpc2Eg
-a2F1ZmVuLCBTdGFhdHNiw7xyZ2Vyc2NoYWZ0IGR1cmNoIFBhc3MgZXJ3ZXJiZW4sIFZpc2EgdW5k
-IFDDpHNzZS4gUGFzcyB1bmQgVmlzdW0gc2luZCBkYXNzZWxiZSwgUGFzcyB1bmQgVmlzdW0gYmVh
-bnRyYWdlbiwgaXN0IFBhc3MgdW5kIFZpc3VtIGVpbmUgc2VyacO2c2UgV2Vic2l0ZSwgVW50ZXJz
-Y2hpZWQgendpc2NoZW4gUMOkc3NlbiB1bmQgVmlzYS4gQmVuw7Z0aWdlIGljaCBlaW4gVmlzdW0g
-ZsO8ciBtZWluZW4gUGFzcz8gV2llIGJlYW50cmFnZSBpY2ggZWluZW4gUGFzcyB1bmQgZWluZSBQ
-YXNza2FydGU/IElzdCBQYXNzIHVuZCBWaXN1bSBzZXJpw7ZzPw0KDQpLYXVmZW4gU2llIEZhbHNj
-aGdlbGQuIEthdWZlbiBTaWUgVVMtRG9sbGFyIChVU0QpLCBjaGluZXNpc2NoZSBZdWFuIChSTUIp
-LCBrYW5hZGlzY2hlIERvbGxhciAoQ0FEKSwgY2hpbmVzaXNjaGUgWXVhbiAoQ05ZKSwgSG9uZ2tv
-bmctRG9sbGFyIChIS0QpLCBtYWxheXNpc2NoZSBSaW5nZ2l0IChNWVIpLCBhdXN0cmFsaXNjaGUg
-RG9sbGFyIChBVUQpLCBFdXJvIChFVVIpIChXaGF0c0FwcDogKzEgKDYxNSktMzE0LTYyODYpLiBL
-YXVmZW4gU2llIGhvY2h3ZXJ0aWdlLCB0w6R1c2NoZW5kIGVjaHQgd2lya2VuZGUgRmFsc2NoZ2Vs
-ZC1CYW5rbm90ZW4uDQoNCldpciBiaWV0ZW4gYXVzc2NobGllw59saWNoIGhvY2h3ZXJ0aWdlcyBG
-YWxzY2hnZWxkIGFuLiBVbnNlcmUgQmFua25vdGVuIHNpbmQgcGVyZmVrdCBuYWNoZ2ViaWxkZXQs
-IG1pdCBIb2xvZ3JhbW1lbiB1bmQgYWxsZW4gdmVyZsO8Z2JhcmVuIFNpY2hlcmhlaXRzbWVya21h
-bGVuLiBTaWUgc2luZCBtaXQgYmxvw59lbSBBdWdlIHVuZCBkdXJjaCBCZXLDvGhydW5nIG5pY2h0
-IHZvbiBlY2h0ZW0gR2VsZCB6dSB1bnRlcnNjaGVpZGVuLiBEaWUgQmFua25vdGVuIHNpbmQgenUg
-MTAwICUgdMOkdXNjaGVuZCBlY2h0IHVuZCB3ZXJkZW4gYXVmIFBhcGllciBhdXMgODAgJSBCYXVt
-d29sbGUgdW5kIDIwICUgWmVsbHVsb3NlIGdlZHJ1Y2t0Lg0KDQpLYXVmZW4gU2llIGVpbiBVUy1T
-dHVkZW50ZW52aXN1bSwgVENGLSwgVEVGLSwgVE9FRkwtLCBJRUxUUy0gb2RlciBUT0VJQy1UZXN0
-ZXJnZWJuaXNzZSAoRS1NYWlsOiBndWFueXVndW9oYWlAZ21haWwuY29tKSwgZGllIGthbmFkaXNj
-aGUgb2RlciBVUy1hbWVyaWthbmlzY2hlIFN0YWF0c2LDvHJnZXJzY2hhZnQgc293aWUga2FuYWRp
-c2NoZSBUQ0YtLCBURUYtLCBDRUxQSVAtIHVuZCBDRUxUQS1aZXJ0aWZpa2F0ZS4gV2llIHdhbmRl
-cmUgaWNoIG5hY2ggS2FuYWRhIGVpbj8gRsO8aHJlcnNjaGVpbiwgUGVyc29uYWxhdXN3ZWlzLCBV
-Uy1HcmVlbiBDYXJkIChUZWxlZ3JhbTogQEdsb2JhbGRvY3MyNiksIFNvemlhbHZlcnNpY2hlcnVu
-Z3NudW1tZXIgKFNTTiksIEFyYmVpdHNlcmxhdWJuaXMsIG5ldWVyIFBlcnNvbmFsYXVzd2Vpcywg
-TmF0aW9uYWwgSW5zdXJhbmNlIENhcmQsIE5JTiwgU0lOLCBIZWlyYXRzdXJrdW5kZSwgR2VidXJ0
-c3Vya3VuZGUga2F1ZmVuDQoNCk3DtmNodGVuIFNpZSBtaXQgZWluZXIgbmV1ZW4gSWRlbnRpdMOk
-dCBlaW4gbmV1ZXMgS2FwaXRlbCBpbiBJaHJlbSBMZWJlbiBiZWdpbm5lbj8gSWhyZSBQcml2YXRz
-cGjDpHJlIHNjaMO8dHplbiwgZWluZSBuZXVlIEJvbml0w6R0IGF1ZmJhdWVuLCBTdHJhZnJlZ2lz
-dGVyYXVza8O8bmZ0ZSB1bWdlaGVuIHVuZCBJaHJlIEZyZWloZWl0IHp1csO8Y2tnZXdpbm5lbj8g
-QmVhbnRyYWdlbiBTaWUgamV0enQgZWluZSBuZXVlIElkZW50aXTDpHQhIChXaGF0c0FwcDogKzEo
-NjE1KS0zMTQtNjI4NikNCg0KU2llIGVycmVpY2hlbiB1bnMgw7xiZXIgZGllIGZvbGdlbmRlbiBL
-b250YWt0ZGF0ZW46DQoNCldoYXRzQXBwOiArMSAoNjE1KS0zMTQtNjI4Ng0KVGVsZWdyYW06IEBH
-bG9iYWxkb2NzMjYNCkUtTWFpbDogS2FybHZvbmxpbm5lNzRAZ21haWwuY29tDQpXZWJzaXRlOiBo
-dHRwczovL2ZseXBhc3Nwb3J0cy5jb20vDQpXZWJzaXRlOiBodHRwczovL2J1eWxlZ2l0cGFzc3Bv
-cnRzLmNvbS8NClRlbGVncmFtOiBodHRwczovL3QubWUvZ2xvYmFsZG9jczINCg0KUMOkc3NlIHVu
-ZCBWaXNhIGthdWZlbiwga2FuYWRpc2NoZW4gUGFzcyBrYXVmZW4sIGvDpHVmbGljaGUgUMOkc3Nl
-LCBWaXNhLUdlc2NoZW5ra2FydGUgbWl0IFBheVBhbCBLYW5hZGEga2F1ZmVuLCBrYW5hZGlzY2hl
-biBQYXNzIGthdWZlbiwgUGFzcyB1bmQgVmlzdW0gc2luZCBkYXNzZWxiZSwgUGFzcyB1bmQgVmlz
-dW0gYmVhbnRyYWdlbiwgaXN0IFBhc3NlcyBhbmQgVmlzYXMgZWluZSBzZXJpw7ZzZSBXZWJzaXRl
-LCBVbnRlcnNjaGllZCB6d2lzY2hlbiBQw6Rzc2VuIHVuZCBWaXNhLCBiZW7DtnRpZ2UgaWNoIGVp
-biBWaXN1bSBmw7xyIG1laW5lbiBQYXNzLCB3aWUgYmVhbnRyYWdlIGljaCBlaW5lbiBQYXNzIHVu
-ZCBlaW5lIFBhc3NrYXJ0ZSwgUMOkc3NlLCBWaXNhIHVuZCBtZWhyLCBrYW5uIG1hbiBlaW5lbiBh
-bWVyaWthbmlzY2hlbiBQYXNzIGthdWZlbiwgUGFzcyBrYXVmZW4sIGFtZXJpa2FuaXNjaGVuIFBh
-c3Mga2F1ZmVuLCBQYXNzIGthdWZlbiwga8OkdWZsaWNoZSBQw6Rzc2UsIFBhc3Mga2F1ZmVuLCBQ
-YXNzLSB1bmQgVmlzYXByw7xmdW5nLCBQYXNzLSB1bmQgVmlzYWthcnRlLCBQYXNzZXMgYW5kIFZp
-c2FzIEd1dHNjaGVpbmNvZGUsIGthbm4gaWNoIGVpbiBrYW5hZGlzY2hlcyBWaXN1bSBhdWYgZWlu
-ZW4gbmV1ZW4gUGFzcyDDvGJlcnRyYWdlbiwgaXN0IHBhc3Nwb3J0c2FuZHZpc2FzLmNvbSBzZXJp
-w7ZzPyBTaWUga2F1ZmVuIGVpbmVuIGthbmFkaXNjaGVuIFBhc3MsIFVudGVyc2NoaWVkIHp3aXNj
-aGVuIFBhc3MgdW5kIFZpc3VtLCBVbnRlcnNjaGllZCB6d2lzY2hlbiBQYXNzIHVuZCBWaXN1bSBh
-dWYgSGluZGksIFBhc3MtIHVuZCBWaXNhYmVow7ZyZGUgdm9uIFJhLCBVbnRlcnNjaGllZCB6d2lz
-Y2hlbiBQYXNzIHVuZCBWaXN1bSBhdWYgTWFyYXRoaSwgUMOkc3NlIHVuZCBWaXNhIERlbnZlciwg
-UGFzcy0gdW5kIFZpc2Fkb2t1bWVudGUsIFBhc3MgdW5kIFZpc3VtIER1YmFpLCBMaXN0ZSBkZXIg
-dmlzdW1mcmVpZW4gUMOkc3NlDQpQYXNzcG9ydCBhbmQgVmlzYSBFeHByZXNzLCBQYXNzcG9ydCBh
-bmQgVmlzYSBFbWlyYXRlcywgQmV3ZXJ0dW5nZW4gdm9uIFBhc3Nwb3J0IGFuZCBWaXNhIEV4cHJl
-c3MsIFZpc2EgRS1HZXNjaGVua2thcnRlIEthbmFkYSBrYXVmZW4sIFDDpHNzZSBvbmxpbmUga2F1
-ZmVuLCBLYW5uIG1hbiBlaW4gVmlzdW0gb25saW5lIGthdWZlbj8sIFBhc3MtIHVuZCB2aXNhZnJl
-aWUgTMOkbmRlciBmw7xyIEluZGllbiwgUGFzcy0gdW5kIHZpc2FmcmVpZSBMw6RuZGVyLCBQYXNz
-IHVuZCBWaXN1bSBmw7xyIEdyb8OfYnJpdGFubmllbiwgUMOkc3NlIGthdWZlbiwgQW1lcmlrYW5p
-c2NoZW4gUGFzcyBrYXVmZW4sIFBhc3MtIHVuZCBWaXN1bWluaGFiZXIsIFBhc3MgdW5kIFZpc3Vt
-OiBXaWUgdmllbCBrb3N0ZXQgZWluIFBhc3MgdW5kIGVpbiBWaXN1bT8sIFVudGVyc2NoaWVkIHp3
-aXNjaGVuIFBhc3MgdW5kIFBhc3NrYXJ0ZSBJcmxhbmQsIFDDpHNzZSB1bmQgU3RhYXRzYsO8cmdl
-cnNjaGFmdCBrYXVmZW4sIFBhc3MtIHVuZCBWaXNhLUlELUZvdG9nZW5lcmF0b3IsIFBhc3MgdW5k
-IFZpc3VtIHNpbmQgZGFzc2VsYmUsIFBhc3MtIHVuZCBWaXNhaW5kZXgsIFDDpHNzZSwgZGllIGlj
-aCBrYXVmZW4ga2FubiwgSm9icyBpbSBCZXJlaWNoIFBhc3MgdW5kIFZpc3VtLCBQw6Rzc2UgenVt
-IEthdWZlbiwgUMOkc3NlLCBkaWUgU2llIGthdWZlbiBrw7ZubmVuLCBQw6Rzc2Uga2F1ZmVuLCBQ
-YXNzIHVuZCBWaXN1bSBLZW5pYSwgV2llIGVyaGFsdGUgaWNoIGVpbmUgUGFzc2thcnRlLCB3ZW5u
-IGljaCBiZXJlaXRzIGVpbmVuIFBhc3MgaGFiZT8sIFdlbGNoZW4gUGFzcyBrYW5uIGljaCBrYXVm
-ZW4/LCBQYXNzcG9ydHMgYW5kIFZpc2FzIExMQywgUGFzcyB1bmQgVmlzYS1MaW5rLCBQw6Rzc2Ug
-dW5kIFZpc2EgbGVnaXRpbSwgUGFzcy0gdW5kIFZpc2EtTG9nbywgUGFzcyBrYXVmZW4sIEJlZGV1
-dHVuZyB2b24gUGFzcyB1bmQgVmlzdW0sIFBhc3MtIHVuZCBWaXNhLUhhbmRidWNoIDIwMDYgKFBE
-RiksIFBhc3MtIHVuZCBWaXNhLUJlZ3JpZmZlLCBXYXMgc2luZCBQYXNzLSB1bmQgVmlzYS1CZWdy
-aWZmZT8sIFVudGVyc2NoaWVkIHp3aXNjaGVuIFBhc3MgdW5kIFZpc3VtIGF1ZiBIaW5kaSwgVW50
-ZXJzY2hpZWQgendpc2NoZW4gUGFzcyB1bmQgVmlzdW0sIFBhc3MtIHVuZCBWaXNhLUJlZ3JpZmZl
-LCBQYXNzLSB1bmQgVmlzYS1CZWdyaWZmZSBhdWYgSGluZGksIEthbm4gaWNoIG1laW4gVmlzdW0g
-YXVmIGVpbmVuIG5ldWVuIFBhc3Mgw7xiZXJ0cmFnZW4/LCBQYXNzIGthdWZlbiwgVW50ZXJzY2hp
-ZWRsaWNoZSBOYW1lbiBmw7xyIFBhc3MgdW5kIFZpc3VtLCBQYXNzLSB1bmQgVmlzYW51bW1lciwg
-V2llIGthdWZlIGljaCBlaW5lbiBuZXVlbiBQYXNzPywgTXVzcyBpY2ggbWVpbiBWaXN1bSBhdWYg
-ZWluZW4gbmV1ZW4gUGFzcyDDvGJlcnRyYWdlbj8sIFBhc3MtIHVuZCBWaXNhLULDvHJvLCBQYXNz
-LSB1bmQgVmlzYS1PcmdhbmlzYXRpb24sIFBhc3MgdW5kIFZpc3VtIGJlaSBFbWlyYXRlcywgUGFz
-cy0gdW5kIFZpc2EtRm90byAoUGhvdG9nb3YpLCBQYXNzLSB1bmQgVmlzYS1QcmVpcywgUGFzcy0g
-dW5kIFZpc2EtRm90bywgUGFzcy0gdW5kIFZpc2EtUHJlaXMgaW4gSW5kaWVuLCBQYXNzLSB1bmQg
-VmlzYS1Gb3RvZ3LDtsOfZSwgQW5mb3JkZXJ1bmdlbiBhbiBQYXNzLSB1bmQgVmlzYS1Gb3RvLCBQ
-YXNzLSB1bmQgVmlzYS1Gb3Rvc3R1ZGlvIGluIG1laW5lciBOw6RoZSwgUGFzcy0gdW5kIFZpc2Et
-U2VpdGUsIFBhc3MgdW5kIFZpc3VtIGbDvHIgUWF0YXIgQWlyd2F5cywgUGFzcy0gdW5kIFZpc2Et
-UXVhcnR1cyBHbG9iYWwgU2VydmljZXMsIFBhc3MtIHVuZCBWaXNhLVF1YXJ0dXMgR2xvYmFsIFNl
-cnZpY2VzIE1pc3NvdXJpIENpdHksIEZyYWdlbiB6dSBQYXNzIHVuZCBWaXN1bSwgSXN0IGVpbiBi
-ZXNjaGxldW5pZ3RlciBQYXNzIHVuZCBMZWdhbGUgVmlzYSwgS2F1ZiBlaW5lcyBRdWViZWMtUGFz
-c2VzLiBQYXNzLSB1bmQgVmlzYWJlc3RpbW11bmdlbiwgUGFzcy0gdW5kIFZpc2FiZXdlcnR1bmdl
-biwgUGFzcy0gdW5kIFZpc2FiZXN0aW1tdW5nZW4gZsO8ciBUaGFpbGFuZCwgUGFzcy0gdW5kIFZp
-c2F2ZXJsw6RuZ2VydW5nLkFuZm9yZGVydW5nZW4gZsO8ciBTcGFuaWVuLCBQYXNzLSB1bmQgVmlz
-YWJlc3RpbW11bmdlbiBmw7xyIER1YmFpLCBQYXNzLSB1bmQgVmlzYWJlc3RpbW11bmdlbiBmw7xy
-IEl0YWxpZW4sIFBhc3MtIHVuZCBWaXNhYmVzdGltbXVuZ2VuIGbDvHIgR3Jvw59icml0YW5uaWVu
-LCBQYXNzLSB1bmQgVmlzYWJlc3RpbW11bmdlbiBmw7xyIFNpbmdhcHVyLCBQYXNzLSB1bmQgVmlz
-YWJlc3RpbW11bmdlbiBmw7xyIEF1c3RyYWxpZW4sIEthdWYgZWluZXMgUGFzc2VzIGVpbmVzIGFu
-ZGVyZW4gTGFuZGVzDQpQYXNzLSB1bmQgVmlzYWRpZW5zdGxlaXN0dW5nZW4sIFBhc3MtIHVuZCBW
-aXNhZGllbnN0bGVpc3R1bmdlbiBpbiBtZWluZXIgTsOkaGUsIFBhc3MtIHVuZCBWaXNhbMO2c3Vu
-Z2VuLCBQYXNzIHVuZCBWaXN1bSBkYXNzZWxiZSwgUGFzcy0gdW5kIFZpc2FzdGF0dXMNClBhc3Mt
-IHVuZCBWaXNhZGllbnN0bGVpc3R1bmdlbiBpbiBDaGljYWdvLCBQYXNzLSB1bmQgVmlzYXN0ZW1w
-ZWwsIHNpbmQgVmlzYSB1bmQgUMOkc3NlIGRhc3NlbGJlLCBQYXNzIHVuZCBWaXN1bSBkYXNzZWxi
-ZQ0KUGFzcyB1bmQgVmlzdW0gZGFzc2VsYmUsIHVuYmVncmVuenRlIFDDpHNzZSB1bmQgVmlzYSwg
-UGFzcyB1bmQgVmlzdW0gZsO8ciBHcm/Dn2JyaXRhbm5pZW4sIFVTLVBhc3MgdW5kIFZpc3VtLCBQ
-YXNzIHVuZCBWaXN1bSDigJMgd2FzIGlzdCBkZXIgVW50ZXJzY2hpZWQ/DQpad2VpdGVuIFBhc3Mg
-a2F1ZmVuLCBQYXNzIGthdWZlbiwgYW1lcmlrYW5pc2NoZW4gUGFzcyBrYXVmZW4sIFBhc3Mga2F1
-ZmVuLCB3aWUgdmllbCBrb3N0ZXQgZWluIGthbmFkaXNjaGVyIFBhc3M/IFJlaXNlcGFzcw0KDQpo
-dHRwczovL2ZseXBhc3Nwb3J0cy5jb20vc2VydmljZS1jYXRlZ29yeS9wYXNzcG9ydC8NCmh0dHBz
-Oi8vZmx5cGFzc3BvcnRzLmNvbS9zZXJ2aWNlL2dlcm1hbnktZHJpdmluZy1saWNlbmNlLyMNCmh0
-dHBzOi8vZmx5cGFzc3BvcnRzLmNvbS9zZXJ2aWNlcy8NCmh0dHBzOi8vZmx5cGFzc3BvcnRzLmNv
-bS9mYXEvDQpodHRwczovL2ZseXBhc3Nwb3J0cy5jb20vYWJvdXQtdXMvDQpodHRwczovL2ZseXBh
-c3Nwb3J0cy5jb20vY29udGFjdC11cy8NCmh0dHBzOi8vZmx5cGFzc3BvcnRzLmNvbS9zZXJ2aWNl
-L2NhbmFkaWFuLXBhc3Nwb3J0Lw0KaHR0cHM6Ly9mbHlwYXNzcG9ydHMuY29tL3NlcnZpY2UvYnVs
-Z2FyaWFuLWRyaXZlcnMtbGljZW5zZS8NCmh0dHBzOi8vZmx5cGFzc3BvcnQgcy5jb20vc2Vydmlj
-ZS9jaGluZXNlLXBhc3Nwb3J0LXJlbmV3YWwvDQpodHRwczovL2ZseXBhc3Nwb3J0cy5jb20vc2Vy
-dmljZS9pbGxpbm9pcy1kcml2ZXJzLWxpY2Vuc2UvDQpodHRwczovL2ZseXBhc3Nwb3J0cy5jb20v
-c2VydmljZS91c2EtcGFzc3BvcnQvDQpodHRwczovL2ZseXBhc3Nwb3J0cy5jb20vc2VydmljZS9h
-dXN0cmlhbi1kcml2ZXJzLWxpY2Vuc2UvDQpodHRwczovL2ZseXBhc3Nwb3J0cy5jb20vc2Vydmlj
-ZS9uZXRoZXJsYW5kcy1wYXNzcG9ydC1hcHBsaWNhdGlvbi8NCmh0dHBzOi8vZmx5cGFzc3BvcnRz
-LmNvbS9zZXJ2aWNlL3Zlcm1vbnQtZHJpdmVycy1saWNlbnNlLw0KaHR0cHM6Ly9mbHlwYXNzcG9y
-dHMuY29tL3NlcnZpY2Uva29yZWFuLXBhc3Nwb3J0LXJlbmV3YWwvDQpoIGh0dHBzOi8vZmx5cGFz
-c3BvcnRzLmNvbS9zZXJ2aWNlL2dlcm1hbnktZHJpdmluZy1saWNlbmNlLw0KaHR0cHM6Ly9idXls
-ZWdpdHBhc3Nwb3J0cy5jb20vDQpodHRwczovL2J1eWxlZ2l0cGFzc3BvcnRzLmNvbS9hcHBseS8N
-Cmh0dHBzOi8vYnV5bGVnaXRwYXNzcG9ydHMuY29tL2J1eS1mYWtlLWRpcGxvbWEvDQpodHRwczov
-L2J1eWxlZ2l0cGFzc3BvcnRzLmNvbS9zb2NpYWwtc2VjdXJpdHktY2FyZC1nZW5lcmF0b3IvDQpo
-dHRwczovL2J1eWxlZ2l0cGFzc3BvcnRzLmNvbS9ob3ctZG8td2UtZ2V0LWEtcGFzc3BvcnQvDQpo
-dHRwczovL2J1eWxlZ2l0cGFzc3BvcnRzLmNvbS9yZWFsLWFuZC1mYWtlLXBhc3Nwb3J0Lw0KaHR0
-cHM6Ly9idXlsZWdpdHBhc3Nwb3J0cy5jb20vYnV5LWZha2UtY2hpbmUgUmVpc2VwYXNzIGthdWZl
-bi8NCmh0dHBzOi8vYnV5bGVnaXRwYXNzcG9ydHMuY29tL2J1eS1jYW5hZGlhbi1wYXNzcG9ydC1v
-bmxpbmUvDQpodHRwczovL2J1eWxlZ2l0cGFzc3BvcnRzLmNvbS9jcm9hdGlhLWRyaXZlbi1saWNl
-bnNlLw0KaHR0cHM6Ly9idXlsZWdpdHBhc3Nwb3J0cy5jb20vYnV5LWJyYXppbC1kcml2ZXItbGlj
-ZW5zZS8NCmh0dHBzOi8vYnV5bGVnaXRwYXNzcG9ydHMuY29tL2J1eS1odW5nYXJ5LWRyaXZlci1s
-aWNlbnNlLw0KaHR0cHM6Ly9idXlsZWdpdHBhc3Nwb3J0cy5jb20vYnV5LWZha2Utc29jaWFsLXNl
-Y3VyaXR5LW51bWJlci1jYXJkLw0KaHR0cHM6Ly9idXlsZWdpdHBhc3Nwb3J0cy5jb20vaG93LWNh
-bi1pLWdldC1jYWxpZm9ybmlhLWRyaXZlcnMtbGljZW5zZS8NCldoYXRzQXBwLU51bW1lcjogKzEg
-KDYxNSktMzE0LTYyODYNClRlbGVncmFtOiBAR2xvYmFsZG9jczI2DQpFLU1haWw6IEthcmx2b25s
-aW5uZTc0QGdtYWlsLmNvbQ0KV2Vic2l0ZTogaHR0cHM6Ly9mbHlwYXNzcG9ydHMuY29tLw0KV2Vi
-c2l0ZTogaHR0cHM6Ly9idXlsZWdpdHBhc3Nwb3J0cy5jb20vDQpUZWxlZ3JhbTogaHR0cHM6Ly90
-Lm1lL2dsb2JhbGRvY3MyDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3Rz
-LmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2ln
-LWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+Telegram @larrykarius Buy Weed Online, (WhatsApp +1 202-656-4683) Buy Weed EU, Germany, UK, Netherlands
+Website: https://t.me/+-KRMXrCLaPswOWYx
+
+We know marijuana is not always the easiest thing to obtain regarding its laws.
+USA, Canada, Europe, and South America. Reliable online cannabis dispensary created to ship extremely potent pots around the world. We offer convenient payment options and will safeguard your privacy and dignity.
+Quick, discreet, and secured services
+Buy Marijuana Online - Buy Weed Online Netherlands, Mail Order Weed UK - Order 420 online - Legit Weed For Sale Italy, Prefilled Vape Cartridges For Sale France, High THC Oil For Europe, UK Online Dispensary Shipping Worldwide, Buy Cannabis UK, Order Marjjuana Online Spain.
+If you have questions, please contact us at,
+Buying weed in Europe can be a daunting task for those unfamiliar with the process.
+However, with the right knowledge and preparation, it can be a relatively straightforward and safe experience.
+This guide will provide an overview of what to look for when buying weed in Europe, as well as where to find it.
+
+
+Email: larrykarius247@gmail.com
+WhatsApp: +1(202)656-4683
+Website: https://t.me/+-KRMXrCLaPswOWYx
+Telegram: https://t.me/+-KRMXrCLaPswOWYx
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
