@@ -2,84 +2,164 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id uJ+TFM9g5mkxvgEAu9opvQ
+	id GKz/Hddg5mkxvgEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:22:23 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:22:31 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id EB717431109
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:22:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E5AAD431111
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:22:30 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id F0828404F6
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:22:21 +0000 (UTC)
-Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com [209.85.167.48])
-	by lists.linaro.org (Postfix) with ESMTPS id F0FF83F700
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 17 Mar 2026 05:37:02 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id ECF9A3F70A
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:22:29 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.14])
+	by lists.linaro.org (Postfix) with ESMTPS id 946D43F700
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 17 Mar 2026 05:38:50 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20230601 header.b=TwiPbLFz;
-	spf=pass (lists.linaro.org: domain of mikhail.v.gavrilov@gmail.com designates 209.85.167.48 as permitted sender) smtp.mailfrom=mikhail.v.gavrilov@gmail.com;
-	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-lf1-f48.google.com with SMTP id 2adb3069b0e04-59e5aa4ca41so4894285e87.2
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 16 Mar 2026 22:37:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773725822; x=1774330622; darn=lists.linaro.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=2NiRAQv05vxst//6uLfp/yYFASGq0d9XovqJe++xcxQ=;
-        b=TwiPbLFzMv2lPcSCRY7NL2vCp3a68UCZ41+YCsI867fT4xTIaZ0slsIlmX2HPzc0BN
-         +m2nRfauiRssCObj+S/cp4SAde7XpBOPzc2GNwt+fjaRR02mqSO7lOlCaKl3iY3dgRZD
-         YP/Tn/mUFz8QwwVMk7GH/4hfaQFQLN5o9fsXmnQoO4FDRZRYuieBP5apTHNMNo7SmmB0
-         2BJQLoyrjyRuEawzgE+DI3qDeg6ot6n1Wh7HVtl7+b1EJ6xss1V5KLvdpWmcE6JImYLo
-         J3eNFnX+dq0FKn+f9Hmh0JpkIQ/m/HhQEPF0u8PyLPLi/fIXoHAYGF5cyXfa7mt21SiR
-         mDCg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773725822; x=1774330622;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=2NiRAQv05vxst//6uLfp/yYFASGq0d9XovqJe++xcxQ=;
-        b=UuPLMXADnusK0kemNi1kNWjfI3jmlmeyjNOc26AgBi1UDTltXqEhLc98KJgXbQAvMh
-         rNJcfsB+XoPJqAzV2VyJTMMsIxRq+3Zz7ngsA0u6toq0Vy7E4IcnVo5I6U5OoHE9vWFa
-         fLEyNfcB+sV5Tt4Ina0YOI4ZU+jOpaQ+QEj4V9UXN+7OgCU72Mvwc0C6X11t1Te1Pp9N
-         3TzlxogDfC+gX/vjiCpHPapCcaJ7tQJ16TaY70nA3lUD5pr164zJtAUvyr+1CPd3PP4D
-         mH3NWqv81M4ACsrlvIev5zb08U2bXjfDPmSrAwDklDILExp4oXdjqN65daqjiYZQjt7r
-         8C7Q==
-X-Forwarded-Encrypted: i=1; AJvYcCW52qcHZviNKmh15C+6eCFOsA6UVWjhve3o5cSf7Xlvuz7gWQVwhhnTjbMkKB0rfBckuQenem7T3CycOuBk@lists.linaro.org
-X-Gm-Message-State: AOJu0YzoY5jqm2VVdplk97LPagKeW1Ya7aepagqJFQwPLG8UBcforZM5
-	VP50jqFgcpdvxtE0VcD06iRU6CjH9ZsUauT/fZw4QOCj8hfV+3gXeuuP
-X-Gm-Gg: ATEYQzzJAdRHtb5nx19JDMqZDkonCvAbSV0l8pYWMzsJ3hpttFmlbbKMqQ3uK5MfCbZ
-	gRKXrYqxqs8HLBkNeD6nJ6lh/R+hCWZRiVdXbe+1V1epJifs+CKWb0mYRsWfJx9Njso7b9nkLWQ
-	Nc0V1gCBVRG/H811tx4zF0d2C6fuvMZWV/9eGXzxioeZYQb748KBgTWfERbmrSOxvzS6iDr/88k
-	2Azr/0PmNQs3F3QrSqXRysVCcAcLTu4b02+SLyC4MAgp5RfKIqZFMrVTpPTbKYNWDWj+sx4iqG6
-	Ro4SkJXXazEgpY7+oe11UX9J2RmDlDwwAGnYnCliAnICEB407FKKwb7OjN8ObLJlFPwWTPp1yyG
-	WNGhFmPHtBXG97CQUjEWVf1r++Ak5U/iVHiiaDsRgbPS7lzeixisQQu9asTg7VjkwZzScSXR/dX
-	8+ubpicFiwSVqcM+3e1kWb0wjGlYXGXjpj+yQzWG8kcFOI
-X-Received: by 2002:a05:6512:2350:b0:5a1:c03b:7980 with SMTP id 2adb3069b0e04-5a1c03b7a7dmr186889e87.28.1773725821391;
-        Mon, 16 Mar 2026 22:37:01 -0700 (PDT)
-Received: from localhost ([188.234.148.119])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5a156366606sm3958338e87.73.2026.03.16.22.36.59
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Mar 2026 22:36:59 -0700 (PDT)
-From: Mikhail Gavrilov <mikhail.v.gavrilov@gmail.com>
-To: kraxel@redhat.com,
-	vivek.kasireddy@intel.com
-Date: Tue, 17 Mar 2026 10:36:53 +0500
-Message-ID: <20260317053653.28888-1-mikhail.v.gavrilov@gmail.com>
-X-Mailer: git-send-email 2.53.0
+	dkim=pass header.d=intel.com header.s=Intel header.b=gGSsiZEd;
+	arc=reject ("signature check failed: fail, {[1] = sig:microsoft.com:reject}");
+	spf=pass (lists.linaro.org: domain of vivek.kasireddy@intel.com designates 198.175.65.14 as permitted sender) smtp.mailfrom=vivek.kasireddy@intel.com;
+	dmarc=pass (policy=none) header.from=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1773725931; x=1805261931;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=pn0VQnjk3rgLIb/i5B8PupWdqnUf3GK/RLfjuonPMno=;
+  b=gGSsiZEdMuHwNH/CO78xImRXcO4JT4Mx1+n2lZdvHA5tENfP5sN5gkmV
+   Mm4ErDh93X+6TMIcwF+I7mIamxpqOqXrFkYaelFbv1nFUSh/L09ZNimle
+   aMRFtWOgy0k26ioJbqisbY0nDnfSIzbUb1r65gLHSepXrFEVd3daoZsxK
+   H4hNJoqms4TEQipz37HSmwBtozRCwCzrAYTfDgg4F1JsH0tOFjJCB9GwT
+   kDO8OmeVrAAGwYqdBWEvO+p+ehBuCVEWMUFj36QbQ6hDR1eFzTczIP1Da
+   20KoraAycu4Eqx3FYN5om6JJScrcKMG4zLHMPW3g8alqN445DEaMmpIub
+   g==;
+X-CSE-ConnectionGUID: Xup1rGygQ2eFgR0aymQT7A==
+X-CSE-MsgGUID: kPleALsgSW6ne+U62w3cvw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11731"; a="78603443"
+X-IronPort-AV: E=Sophos;i="6.23,124,1770624000";
+   d="scan'208";a="78603443"
+Received: from fmviesa006.fm.intel.com ([10.60.135.146])
+  by orvoesa106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Mar 2026 22:38:49 -0700
+X-CSE-ConnectionGUID: WR8IIcuXSq6NnvtVjBCuog==
+X-CSE-MsgGUID: bBbYjreVQ5aKsNV7zKK3EA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.23,124,1770624000";
+   d="scan'208";a="217889026"
+Received: from orsmsx903.amr.corp.intel.com ([10.22.229.25])
+  by fmviesa006.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Mar 2026 22:37:47 -0700
+Received: from ORSMSX901.amr.corp.intel.com (10.22.229.23) by
+ ORSMSX903.amr.corp.intel.com (10.22.229.25) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.37; Mon, 16 Mar 2026 22:37:46 -0700
+Received: from ORSEDG901.ED.cps.intel.com (10.7.248.11) by
+ ORSMSX901.amr.corp.intel.com (10.22.229.23) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.37 via Frontend Transport; Mon, 16 Mar 2026 22:37:46 -0700
+Received: from SN4PR2101CU001.outbound.protection.outlook.com (40.93.195.2) by
+ edgegateway.intel.com (134.134.137.111) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.37; Mon, 16 Mar 2026 22:37:46 -0700
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=CYSCrxAvtv/G9a6bMphv6zvd8xjSKV6V1NHXYBrteiYjYHKus8dSmVxOAZ1PDXSTuzoo4TJinHBmPoddmaR8ROiEqAEDqZSZopvD25gNdBc/E5H6GEbaBAJOm3f9tEkpt64P4uirqiFq1xJUDc/NqXPJbl7cuycfC23TvW84QHlrnJYarNiPVI7bBotQZ89CLMpqB1hkIyh9kFgplURon6Yb1XTSS6YAaF3hnz9lXbmbu9y+xCxZtdOvitifxebeHfkB7HhGxM9XjzsUU6jGvC0Bvy389ppR8EWqoM1OOHc3sEDdpDx2/gcWtpF+fFL0L7dJ+2q+RT32h3I1CJjqzw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=t+y2zQuUbpVjKNpv1DjSaAqpNskadbNbkwnUouPcj1U=;
+ b=h/CYkMkDnz8qHK7aVldNgTwCDq+23dgKwYM8OsCFL57jpjTZgEgUdNlr32nbTiIidbmHRJ2Xrnx7DjElQbg5nOX0r2UORXQru8tsjVZm1AFb5cUROFnOF5D4ldf6NZD29G+Yegwd6F3lzWUtGCOaYXjrs2glelGk9Za7E64QwSldtcgBVoqdqnzoAqobB6Rnqi06A50lz3P4sjIBEglTeMtxb0NS+/Eb0gAamtGp46FMYGNaYyXLe+zk8Zxy5aBE7Q2PET0Y6q3Xs2v4xNSkcNBNd8DlZU1BIbCk9NAPhqdEcDDbPI3AqOx1tMSReXnw6TofQcjYx/ijGa/cCnyuKQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Received: from CH3PR11MB7177.namprd11.prod.outlook.com (2603:10b6:610:153::8)
+ by DS0PR11MB8134.namprd11.prod.outlook.com (2603:10b6:8:15a::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.17; Tue, 17 Mar
+ 2026 05:37:41 +0000
+Received: from CH3PR11MB7177.namprd11.prod.outlook.com
+ ([fe80::b997:e226:4979:c035]) by CH3PR11MB7177.namprd11.prod.outlook.com
+ ([fe80::b997:e226:4979:c035%5]) with mapi id 15.20.9723.016; Tue, 17 Mar 2026
+ 05:37:35 +0000
+From: "Kasireddy, Vivek" <vivek.kasireddy@intel.com>
+To: Jason Gunthorpe <jgg@nvidia.com>, =?iso-8859-1?Q?Christian_K=F6nig?=
+	<christian.koenig@amd.com>, "dri-devel@lists.freedesktop.org"
+	<dri-devel@lists.freedesktop.org>, "linaro-mm-sig@lists.linaro.org"
+	<linaro-mm-sig@lists.linaro.org>, "linux-media@vger.kernel.org"
+	<linux-media@vger.kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>
+Thread-Topic: [PATCH] udmabuf: Do not create malformed scatterlists
+Thread-Index: AQHcsxCg2jmO8KOozUyLmq08MkwvOLWvLm6A
+Date: Tue, 17 Mar 2026 05:37:34 +0000
+Message-ID: <CH3PR11MB7177AE4908A2D9511A647275F841A@CH3PR11MB7177.namprd11.prod.outlook.com>
+References: <0-v1-42779f29381a+4b9-udmabuf_sg_jgg@nvidia.com>
+In-Reply-To: <0-v1-42779f29381a+4b9-udmabuf_sg_jgg@nvidia.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: CH3PR11MB7177:EE_|DS0PR11MB8134:EE_
+x-ms-office365-filtering-correlation-id: 7a742da8-5e72-4639-cedd-08de83e74ad7
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;ARA:13230040|376014|7416014|1800799024|366016|38070700021|18002099003|56012099003|22082099003;
+x-microsoft-antispam-message-info: Sq6l6zqWlo8QWN3qMRSdIlqYUMY0tFLYBddab20cg/8A0DXIxHKdA3TwIAivBXp0V+tENMZ9FmMCahjoBXVKsFYCBdJNFy10Nq0NXwoUTgFh2AJ9i6Bf784MgquA9YTl2tlk1un78sXKhnohhEcCo2sI2tmuIHeBFqrvKcXICh1Tkbp0cZPIZbF968SeQFB5easixbgH7hvBUeZPQn0FF8RTcl5PvIflHCVDvgeUdGD5D3WLTmZtrgmSOziutE+y7cctPDETe4UpEMg7Pv/uLtLjhmf1uWBnmPa6dJpuIjeNXtTODGxd7wvMbz50VpDxNtIwQ9X+Y1ZyVmozYh0nvbwfKBwto5KoBXRXKjIcxN8/WtfQrdz0ppVHCYIjCu1UTE+Faf0rkFmzRewqTe9nFAlfiYOFAq/mKgMST6nczl+R4wCmAOwI+gZsd2b812WguORqZk6vBP1DYiLrrJ9M8CJo4CYpxlpbv8QTbjVlMRLDUFeIHL+NLtND69vWe/oor6Q+KH8jfSm7NvCSxvX14lnID5aqNCCVso2UJCZmWoiiDD1a8FzK4xc6isNuPIrkjVD5QXIa6SXW0rNM+roTCSj0YoXr1S8TyAvNiDMZ2tGxdu7UrpOumyTHQ7GtEn0hFRllQAO2ZzO1m5MesEWPWaRFv82I1inoBK6/psc6E3bppxFCschpaI9B8LdfXtkW7GwsY9+CLyj4wUkGkvMu3lF6l7pZzaNMn0eclJ0DiHjOYGw5By7jKvnif420dXWPKldVv17HtdwczdrKYNpidNkwUtsM7vxdzvGLooNEiWM=
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH3PR11MB7177.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(1800799024)(366016)(38070700021)(18002099003)(56012099003)(22082099003);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?DKn9WlKZCLQGR9Ps+ay2mbyV+8TPqkJg/NMNXvpz7/4jXsU5HLIXtwPLmK?=
+ =?iso-8859-1?Q?jBfI9HGTUO7xjWt+tTdnklbUB76XAHuwLkNOCPapge8McqkUJqDQ56DABG?=
+ =?iso-8859-1?Q?0SCDMYrg87Rv2qrgRKfREqBmLEO5Ya92miqlJKMjLYfKYTR4csJON6urqd?=
+ =?iso-8859-1?Q?jc0HNdTJSBfrGZWGf6i/c1dfFxY4NyFIbPVMEo6Yduku6bzpUmz283g0M4?=
+ =?iso-8859-1?Q?7Hxy0JAbsmy7G6MokdlVatUpmQAbEKQgSuj3I5Ccea7ZD09CC6MGYPCu9K?=
+ =?iso-8859-1?Q?iAscD9ET3KKJ5h/jACtmXEDJVgBzddjHH3aGTHcPLB0jziatCK+DIpUVKV?=
+ =?iso-8859-1?Q?2IM7FqtxUQo5ZZmIsycIE92FWQL8Jg/u/vM1AcwyJhqxf+TGGRbzi4Qin7?=
+ =?iso-8859-1?Q?ONAKAdT7B7W/ob7jKFFG40aKMz7Et8GPkO0wP9HsGUzxRm0fsVOEllgkcx?=
+ =?iso-8859-1?Q?qrk4aDL3bDch/yxY1aRz4292vXK4khgVaU85g4v6xQH8eEmhZz+h+6ifK6?=
+ =?iso-8859-1?Q?lh++p8arlGI8d4BinYk2ED4TqwK9ahYHtydpQCTzvcdG5PdeVgfilqKfVw?=
+ =?iso-8859-1?Q?zxxfjzGWM9lQRuXrj1NcIiHdJ+HoXZufY9QibJTsRyt/RmzilrcfGQAOLU?=
+ =?iso-8859-1?Q?HpZmi5JQYOxwiKRQL/K2zrcHbBh9pUlsSob8BSIB4rAd/2wZU1bAJ5bZaH?=
+ =?iso-8859-1?Q?6rrpRbqkeFPDPjxYvfKay5GEmh7eVCGU+9sudIOEr30J26x0WMYSZnWyu3?=
+ =?iso-8859-1?Q?c8BM2NhhHSsK9uh0wXXtfcsa4bxJqT2pyrgdTON4Wzhn85YbYcJaGwMUEv?=
+ =?iso-8859-1?Q?z/Mvrb30f3HFVNzbzix1qvETRlQ69vdNUE7kbqAVB/yzFfRJq74fBUfBVq?=
+ =?iso-8859-1?Q?IfnaLRbfzxD6xLH+Ev/BGmvWcTNV77Yv51OUHU6KEJgqLA7n0+6y+6Uzvq?=
+ =?iso-8859-1?Q?iLTJqBeZi/ggY4CR/43i7dfh49FqSsqYKW19shbtDagVBqZ8dlrQ/ETGXv?=
+ =?iso-8859-1?Q?gdsioqSm8WosjSrhqPPrlzykGOa1IOTZ5nnrhyshIRcGl3Hgaie464oDFy?=
+ =?iso-8859-1?Q?7I8zlucYwad5vte3J8Y7VYGa7Fm1sqX7qNXhAfWN2srWQiVobyxwxPJsQx?=
+ =?iso-8859-1?Q?edV4Xwr6IXe/YFDgezUM70inUDiqiGIYUxNbe6x4kJD43GDvREKTZ0JYmk?=
+ =?iso-8859-1?Q?srf6oqcF8sRtJE2Wj8Jgfa1wIw5fVJhwdxCX1yUMEh6fUCKBFRiyI9Heky?=
+ =?iso-8859-1?Q?6ZL7Jxz2BdnA4RhE91RNYsYPuHqXLtH1ghUQqXYO8uhOkxXWSpQCQNxl3L?=
+ =?iso-8859-1?Q?yNOMz1LSN/ZwRgqHAS4W+gEz+7niBBNPmMgleeXYJIvKM/zSfFlea45cL7?=
+ =?iso-8859-1?Q?7oVG+4Zsre7J9DXlHWzqEX2ZFReKTb5TVjNgDLufld4usHHJhBdFzlGb8a?=
+ =?iso-8859-1?Q?jc/UTVm/FvdkAX1sZaQcI3iCjcbH9ZsHuN014JC+PH7BWBX1rFxP/lW3DP?=
+ =?iso-8859-1?Q?zAcW5nYgn1Aw13F/ICXA5diWHziMWovol3Fx2RbYoeXgSUT2LZDDFNypav?=
+ =?iso-8859-1?Q?wur9QVu+xOCZWfLtqHczW8syXzZ3qlDRUq5wVDkBQ8d+lBYIWu8KHA04FK?=
+ =?iso-8859-1?Q?37z/q3s8JlPjEb+1o/AULLVvG6Av2u+AKJ/Ukp72kKWkCkxzklO9YO/Wlk?=
+ =?iso-8859-1?Q?KCTlRDH4oYAV6qcLEqO/VJ4NapgEkvj0P4NuX8aLtzccF9TFKVadxsC93p?=
+ =?iso-8859-1?Q?7wspr6pTsmWpVLcxvFAcrUrMqVLsQ4IQh6tGbviZhihhgWlT0XXnmfc6kK?=
+ =?iso-8859-1?Q?MMaHQOCK8A=3D=3D?=
 MIME-Version: 1.0
-X-Spamd-Bar: --
-X-MailFrom: mikhail.v.gavrilov@gmail.com
+X-Exchange-RoutingPolicyChecked: dtYUUn1vInY7fjwIbvkGsCp6H5k9xqJSEpfztpCMAnPMAIHqGpmNvkBUUAhJ7Tzzr2AscHDss9RfDszkP+A4l2I54eKLUzbFEPP8mgzOoWNNVtD2F16I3Y5Q4JQSbfNgsCNuzH076J7lKnLvvusAgHfx9IeqLY+GCC7SzMdUs+rzrebOsLILJEa6YrIf+lmwvEQevaNWG/FTrJey+umt76qbNyoPpc3woYta05HBqphuLKHtyNX56A3dwlbjH09NNlKmiF2YtPKjWo77TEwO6K79jDhJRxielLJ1KxtRGuXOkpRsaRn0NgRy3hRrJ/NidmEIJHwqcXpp5W1PqYOgFA==
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: CH3PR11MB7177.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7a742da8-5e72-4639-cedd-08de83e74ad7
+X-MS-Exchange-CrossTenant-originalarrivaltime: 17 Mar 2026 05:37:34.9246
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: lFJEqlaMxkF40l2yYUC+O+IwqG8qKhcDoOhZTrjhcpHUE2eIFGaSQPXZa+3RzyZO/3rKkCuJSAlaMAaEnp/qiARcXVv4+4xD6M1VigkiueU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR11MB8134
+X-OriginatorOrg: intel.com
+X-Spamd-Bar: ------
+X-MailFrom: vivek.kasireddy@intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 7FIH7NUGCMJOYDVCZE5AOAJV5DJHHSGO
-X-Message-ID-Hash: 7FIH7NUGCMJOYDVCZE5AOAJV5DJHHSGO
-X-Mailman-Approved-At: Mon, 20 Apr 2026 17:21:48 +0000
-CC: sumit.semwal@linaro.org, christian.koenig@amd.com, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, stable@vger.kernel.org, Mikhail Gavrilov <mikhail.v.gavrilov@gmail.com>
+Message-ID-Hash: LBRWEFQUOM6T5YTZO4ESLDA7D4ESCXXX
+X-Message-ID-Hash: LBRWEFQUOM6T5YTZO4ESLDA7D4ESCXXX
+X-Mailman-Approved-At: Mon, 20 Apr 2026 17:21:49 +0000
+CC: Dave Airlie <airlied@redhat.com>, Andrew Morton <akpm@linux-foundation.org>, Arnd Bergmann <arnd@arndb.de>, Daniel Vetter <daniel.vetter@ffwll.ch>, David Hildenbrand <david@redhat.com>, Christoph Hellwig <hch@infradead.org>, Christoph Hellwig <hch@lst.de>, Hugh Dickins <hughd@google.com>, Julian Orth <ju.orth@gmail.com>, "Chang, Junxiao" <junxiao.chang@intel.com>, Gerd Hoffmann <kraxel@redhat.com>, Oscar Salvador <osalvador@suse.de>, "patches@lists.linux.dev" <patches@lists.linux.dev>, Peter Xu <peterx@redhat.com>, Shuah Khan <shuah@kernel.org>, "Matthew Wilcox (Oracle)" <willy@infradead.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH] dma-buf/udmabuf: skip redundant cpu sync to fix cacheline EEXIST warning
+Subject: [Linaro-mm-sig] Re: [PATCH] udmabuf: Do not create malformed scatterlists
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7FIH7NUGCMJOYDVCZE5AOAJV5DJHHSGO/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LBRWEFQUOM6T5YTZO4ESLDA7D4ESCXXX/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -88,110 +168,214 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [2.09 / 15.00];
+X-Spamd-Result: default: False [4.09 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
+	R_DKIM_REJECT(1.00)[intel.com:s=Intel];
 	DATE_IN_PAST(1.00)[827];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
+	DMARC_POLICY_SOFTFAIL(0.10)[intel.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
+	GREYLIST(0.00)[pass,meta];
 	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[22];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,intel.com:email,nvidia.com:email,lists.linaro.org:helo,lists.linaro.org:rdns];
+	DKIM_TRACE(0.00)[intel.com:-];
 	TO_DN_SOME(0.00)[];
-	ARC_NA(0.00)[];
-	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[mikhailvgavrilov@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FREEMAIL_CC(0.00)[linaro.org,amd.com,lists.freedesktop.org,vger.kernel.org,lists.linaro.org,gmail.com];
+	FROM_NEQ_ENVFROM(0.00)[vivek.kasireddy@intel.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[redhat.com,linux-foundation.org,arndb.de,ffwll.ch,infradead.org,lst.de,google.com,gmail.com,intel.com,suse.de,lists.linux.dev,kernel.org];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	MISSING_XM_UA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_SPAM(0.00)[0.780];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: EB717431109
+	NEURAL_SPAM(0.00)[0.184];
+	RCVD_COUNT_SEVEN(0.00)[9]
+X-Rspamd-Queue-Id: E5AAD431111
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-When CONFIG_DMA_API_DEBUG_SG is enabled, importing a udmabuf into a DRM
-driver (e.g. amdgpu for video playback in GNOME Videos / Showtime)
-triggers a spurious warning:
+> Subject: [PATCH] udmabuf: Do not create malformed scatterlists
+> 
+> Using a sg_set_folio() loop for every 4K results in a malformed scatterlist
+> because sg_set_folio() has an issue with offsets > PAGE_SIZE and because
+> scatterlist expects the creator to build a list which consolidates any
+> physical contiguity.
+> 
+> sg_alloc_table_from_pages() creates a valid scatterlist directly from a
+> struct page array, so go back to that.
+> 
+> Remove the offsets allocation and just store an array of tail pages as it
+> did before the below commit. Everything wants that anyhow.
+> 
+> Fixes: 0c8b91ef5100 ("udmabuf: add back support for mapping hugetlb
+> pages")
+> Reported-by: Julian Orth <ju.orth@gmail.com>
+> Closes: https://lore.kernel.org/all/20260308-scatterlist-v1-1-
+> 39c4566b0bba@gmail.com/
+> Signed-off-by: Jason Gunthorpe <jgg@nvidia.com>
+> ---
+>  drivers/dma-buf/udmabuf.c | 49 +++++++++++----------------------------
+>  1 file changed, 13 insertions(+), 36 deletions(-)
+> 
+> diff --git a/drivers/dma-buf/udmabuf.c b/drivers/dma-buf/udmabuf.c
+> index 94b8ecb892bb17..5d687860445137 100644
+> --- a/drivers/dma-buf/udmabuf.c
+> +++ b/drivers/dma-buf/udmabuf.c
+> @@ -26,10 +26,10 @@ MODULE_PARM_DESC(size_limit_mb, "Max size
+> of a dmabuf, in megabytes. Default is
+> 
+>  struct udmabuf {
+>  	pgoff_t pagecount;
+> -	struct folio **folios;
+> +	struct page **pages;
+> 
+>  	/**
+> -	 * Unlike folios, pinned_folios is only used for unpin.
+> +	 * Unlike pages, pinned_folios is only used for unpin.
+>  	 * So, nr_pinned is not the same to pagecount, the pinned_folios
+>  	 * only set each folio which already pinned when udmabuf_create.
+>  	 * Note that, since a folio may be pinned multiple times, each folio
+> @@ -41,7 +41,6 @@ struct udmabuf {
+> 
+>  	struct sg_table *sg;
+>  	struct miscdevice *device;
+> -	pgoff_t *offsets;
+>  };
+> 
+>  static vm_fault_t udmabuf_vm_fault(struct vm_fault *vmf)
+> @@ -55,8 +54,7 @@ static vm_fault_t udmabuf_vm_fault(struct vm_fault
+> *vmf)
+>  	if (pgoff >= ubuf->pagecount)
+>  		return VM_FAULT_SIGBUS;
+> 
+> -	pfn = folio_pfn(ubuf->folios[pgoff]);
+> -	pfn += ubuf->offsets[pgoff] >> PAGE_SHIFT;
+> +	pfn = page_to_pfn(ubuf->pages[pgoff]);
+> 
+>  	ret = vmf_insert_pfn(vma, vmf->address, pfn);
+>  	if (ret & VM_FAULT_ERROR)
+> @@ -73,8 +71,7 @@ static vm_fault_t udmabuf_vm_fault(struct vm_fault
+> *vmf)
+>  		if (WARN_ON(pgoff >= ubuf->pagecount))
+>  			break;
+> 
+> -		pfn = folio_pfn(ubuf->folios[pgoff]);
+> -		pfn += ubuf->offsets[pgoff] >> PAGE_SHIFT;
+> +		pfn = page_to_pfn(ubuf->pages[pgoff]);
+> 
+>  		/**
+>  		 * If the below vmf_insert_pfn() fails, we do not return an
+> @@ -109,22 +106,11 @@ static int mmap_udmabuf(struct dma_buf *buf,
+> struct vm_area_struct *vma)
+>  static int vmap_udmabuf(struct dma_buf *buf, struct iosys_map *map)
+>  {
+>  	struct udmabuf *ubuf = buf->priv;
+> -	struct page **pages;
+>  	void *vaddr;
+> -	pgoff_t pg;
+> 
+>  	dma_resv_assert_held(buf->resv);
+> 
+> -	pages = kvmalloc_objs(*pages, ubuf->pagecount);
+> -	if (!pages)
+> -		return -ENOMEM;
+> -
+> -	for (pg = 0; pg < ubuf->pagecount; pg++)
+> -		pages[pg] = folio_page(ubuf->folios[pg],
+> -				       ubuf->offsets[pg] >> PAGE_SHIFT);
+> -
+> -	vaddr = vm_map_ram(pages, ubuf->pagecount, -1);
+> -	kvfree(pages);
+> +	vaddr = vm_map_ram(ubuf->pages, ubuf->pagecount, -1);
+>  	if (!vaddr)
+>  		return -EINVAL;
+> 
+> @@ -146,22 +132,18 @@ static struct sg_table *get_sg_table(struct
+> device *dev, struct dma_buf *buf,
+>  {
+>  	struct udmabuf *ubuf = buf->priv;
+>  	struct sg_table *sg;
+> -	struct scatterlist *sgl;
+> -	unsigned int i = 0;
+>  	int ret;
+> 
+>  	sg = kzalloc_obj(*sg);
+>  	if (!sg)
+>  		return ERR_PTR(-ENOMEM);
+> 
+> -	ret = sg_alloc_table(sg, ubuf->pagecount, GFP_KERNEL);
+> +	ret = sg_alloc_table_from_pages(sg, ubuf->pages, ubuf-
+> >pagecount, 0,
+> +					ubuf->pagecount << PAGE_SHIFT,
+> +					GFP_KERNEL);
+>  	if (ret < 0)
+>  		goto err_alloc;
+> 
+> -	for_each_sg(sg->sgl, sgl, ubuf->pagecount, i)
+> -		sg_set_folio(sgl, ubuf->folios[i], PAGE_SIZE,
+> -			     ubuf->offsets[i]);
+> -
+>  	ret = dma_map_sgtable(dev, sg, direction, 0);
+>  	if (ret < 0)
+>  		goto err_map;
+> @@ -207,12 +189,8 @@ static void unpin_all_folios(struct udmabuf
+> *ubuf)
+> 
+>  static __always_inline int init_udmabuf(struct udmabuf *ubuf, pgoff_t
+> pgcnt)
+>  {
+> -	ubuf->folios = kvmalloc_objs(*ubuf->folios, pgcnt);
+> -	if (!ubuf->folios)
+> -		return -ENOMEM;
+> -
+> -	ubuf->offsets = kvzalloc_objs(*ubuf->offsets, pgcnt);
+> -	if (!ubuf->offsets)
+> +	ubuf->pages = kvmalloc_objs(*ubuf->pages, pgcnt);
+> +	if (!ubuf->pages)
+>  		return -ENOMEM;
+> 
+>  	ubuf->pinned_folios = kvmalloc_objs(*ubuf->pinned_folios,
+> pgcnt);
+> @@ -225,8 +203,7 @@ static __always_inline int init_udmabuf(struct
+> udmabuf *ubuf, pgoff_t pgcnt)
+>  static __always_inline void deinit_udmabuf(struct udmabuf *ubuf)
+>  {
+>  	unpin_all_folios(ubuf);
+> -	kvfree(ubuf->offsets);
+> -	kvfree(ubuf->folios);
+> +	kvfree(ubuf->pages);
+>  }
+> 
+>  static void release_udmabuf(struct dma_buf *buf)
+> @@ -344,8 +321,8 @@ static long udmabuf_pin_folios(struct udmabuf
+> *ubuf, struct file *memfd,
+>  		ubuf->pinned_folios[nr_pinned++] = folios[cur_folio];
+> 
+>  		for (; subpgoff < fsize; subpgoff += PAGE_SIZE) {
+> -			ubuf->folios[upgcnt] = folios[cur_folio];
+> -			ubuf->offsets[upgcnt] = subpgoff;
+> +			ubuf->pages[upgcnt] = folio_page(folios[cur_folio],
+> +						subpgoff >> PAGE_SHIFT);
+>  			++upgcnt;
+LGTM.
+Reviewed-by: Vivek Kasireddy <vivek.kasireddy@intel.com>
 
-  DMA-API: amdgpu 0000:03:00.0: cacheline tracking EEXIST, \
-      overlapping mappings aren't supported
-  WARNING: kernel/dma/debug.c:619 at add_dma_entry+0x473/0x5f0
+Thanks,
+Vivek
 
-The call chain is:
-
-  amdgpu_cs_ioctl
-   -> amdgpu_ttm_backend_bind
-    -> dma_buf_map_attachment
-     -> [udmabuf] map_udmabuf -> get_sg_table
-      -> dma_map_sgtable(dev, sg, direction, 0)  // attrs=0
-       -> debug_dma_map_sg -> add_dma_entry -> EEXIST
-
-This happens because udmabuf builds a per-page scatter-gather list via
-sg_set_folio().  When begin_cpu_udmabuf() has already created an sg
-table mapped for the misc device, and an importer such as amdgpu maps
-the same pages for its own device via map_udmabuf(), the DMA debug
-infrastructure sees two active mappings whose physical addresses share
-cacheline boundaries and warns about the overlap.
-
-The DMA_ATTR_SKIP_CPU_SYNC flag suppresses this check in
-add_dma_entry() because it signals that no CPU cache maintenance is
-performed at map/unmap time, making the cacheline overlap harmless.
-
-All other major dma-buf exporters already pass this flag:
-  - drm_gem_map_dma_buf() passes DMA_ATTR_SKIP_CPU_SYNC
-  - amdgpu_dma_buf_map() passes DMA_ATTR_SKIP_CPU_SYNC
-
-The CPU sync at map/unmap time is also redundant for udmabuf:
-begin_cpu_udmabuf() and end_cpu_udmabuf() already perform explicit
-cache synchronization via dma_sync_sgtable_for_cpu/device() when CPU
-access is requested through the dma-buf interface.
-
-Pass DMA_ATTR_SKIP_CPU_SYNC to dma_map_sgtable() and
-dma_unmap_sgtable() in udmabuf to suppress the spurious warning and
-skip the redundant sync.
-
-Fixes: 284562e1f348 ("udmabuf: implement begin_cpu_access/end_cpu_access hooks")
-Cc: stable@vger.kernel.org
-Signed-off-by: Mikhail Gavrilov <mikhail.v.gavrilov@gmail.com>
----
- drivers/dma-buf/udmabuf.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/dma-buf/udmabuf.c b/drivers/dma-buf/udmabuf.c
-index 94b8ecb892bb..9c6f8785a28a 100644
---- a/drivers/dma-buf/udmabuf.c
-+++ b/drivers/dma-buf/udmabuf.c
-@@ -162,7 +162,7 @@ static struct sg_table *get_sg_table(struct device *dev, struct dma_buf *buf,
- 		sg_set_folio(sgl, ubuf->folios[i], PAGE_SIZE,
- 			     ubuf->offsets[i]);
- 
--	ret = dma_map_sgtable(dev, sg, direction, 0);
-+	ret = dma_map_sgtable(dev, sg, direction, DMA_ATTR_SKIP_CPU_SYNC);
- 	if (ret < 0)
- 		goto err_map;
- 	return sg;
-@@ -177,7 +177,7 @@ static struct sg_table *get_sg_table(struct device *dev, struct dma_buf *buf,
- static void put_sg_table(struct device *dev, struct sg_table *sg,
- 			 enum dma_data_direction direction)
- {
--	dma_unmap_sgtable(dev, sg, direction, 0);
-+	dma_unmap_sgtable(dev, sg, direction, DMA_ATTR_SKIP_CPU_SYNC);
- 	sg_free_table(sg);
- 	kfree(sg);
- }
--- 
-2.53.0
+> 
+>  			if (++cur_pgcnt >= pgcnt)
+> 
+> base-commit: 1f318b96cc84d7c2ab792fcc0bfd42a7ca890681
+> --
+> 2.43.0
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
