@@ -2,42 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 6Hy9LRR3uWnQGQIAu9opvQ
+	id uFm2HiJ3uWnQGQIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 17 Mar 2026 16:45:24 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 17 Mar 2026 16:45:38 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 599542AD41C
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 17 Mar 2026 16:45:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1AE6C2AD430
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 17 Mar 2026 16:45:38 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 502EB3F76C
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 17 Mar 2026 15:45:23 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 2BDCF3F76C
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 17 Mar 2026 15:45:37 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 86D783F76C
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 17 Mar 2026 15:44:59 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 116ED3F790
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 17 Mar 2026 15:45:25 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: kachachaissue12@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Tue, 17 Mar 2026 15:44:59 -0000
-Message-ID: <177376229955.4133030.9423012708445748558@lists.linaro.org>
+Date: Tue, 17 Mar 2026 15:45:25 -0000
+Message-ID: <177376232506.4133030.18130589059836023996@lists.linaro.org>
 User-Agent: HyperKitty on http://lists-ec2.96boards.org/
-Message-ID-Hash: MGYXCFCCMXRG77JZRRF6SIFFZZMYMHCZ
-X-Message-ID-Hash: MGYXCFCCMXRG77JZRRF6SIFFZZMYMHCZ
+Message-ID-Hash: ETJORI4NHLSZW376KZ2L4MMPEU5ZPF42
+X-Message-ID-Hash: ETJORI4NHLSZW376KZ2L4MMPEU5ZPF42
 X-MailFrom: kachachaissue12@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] =?utf-8?q?=28=F0=9F=9F=A1=F0=9F=92=96=F0=9F=9F=A2=29+971568044699=28=F0=9F=9F=A1=F0=9F=92=96=F0=9F=9F=A2Title_Cited_by_Year_In_Richards_bay_Whatsapp_+27732660312_IN_DUBAI=2C_ABU_DHABI=2C_SHARJAH=2C_RAK_CITY_DEIRA_AL_AIN_FUJAIRAH_D_Madam_In_Richards_bay_Whatsapp_+27732660312_IN_DUBAI=2C_ABU_DHABI=2C_SHARJAH=2C_RAK_CITY_=E2=80=A6_2021_Abortion_Pills_For_Sale_In_Abu_Dhabi=2C_+27732660312_Abortion_Pills_For_Sale_In_Abu_DhaBi=2C_buy_cytotec_misoprostol_200_mcg_in_Abu_Dhabi_D_Mazinya_Abortion_Pills_For_Sale_In_Abu_Dhabi_600_=28345=29=2C_345_2021_Abortion_Pills_For_Sale_In_Sharjah=2C_+27732660312_Abortion_Pills_For_Sale_In_Sharjah=2C_buy_cytotec_misoprostol_200_mcg_in_Sharjah_D_Mazinya_Abortion_Pills_For_Sale_In_Sharjah_600_=28345=29=2C_345_2021_Abortion_Pills_For_Sale_In_Ajman=2C_+27732660312_Abortion_Pills_For_Sale_In_Ajman=2C_buy_cytotec_misoprostol_200_mcg_in_Ajman_D_Mazinya_Abortion_Pills_For_Sale_In_Ajman_600_=28345=29=2C_345_2021_Abortion_Pills_For_Sale_In_Al
- _Ain=2C_+27732660312_Abortion_Pills_For_Sale_In_Al_Ain=2C_buy_cytotec_misoprostol_200_mcg_in_Al_Ain_D_Mazinya_Abortion_Pills_For_Sale_In_Al_Ain_600_=28345=29=2C_345_2021_Abortion_Pills_For_Sale_In_Rak_City=2C+27732660312_Abortion_Pills_For_Sale_In_Rak_City=2C_buy_cytotec_misoprostol_200_mcg_in_Rak_City_D_Mazinya_Abortion_Pills_For_Sale_In_Rak_City_600_=28345=29=2C_345_2021_Abortion_Pills_For_Sale_In_Satwa_+27732660312_Abortion_Pills_For_Sale_In_Satwa=2C_buy_cytotec_misoprostol_200_mcg_in_Satwa_D_Mazinya_Abortion_Pills_For_Sale_In_Satwa_600_=28345=29=2C_345_2021_Abortion_Pills_For_Sale_In_Dubai_Mall=2C_+27732660312_Abortion_Pills_For_Sale_In_Dubai_Mall=2C_buy_cytotec_misoprostol_200_mcg_in_Dubai_Mall_D_Mazinya_Abortion_Pills_For_Sale_In_Dubai_Mall_600_=28345=29=2C_345_2021_Abortion_Pills_For_Sale_In_Deira=2C_+27732660312_Abortion_Pills_For_Sale_In_Deira=2C_buy_cytotec_misoprostol_200_mcg_in_Deira_D_Mazinya_Abortion_Pills_For_Sale_In_Deira_600_=28345=29=2C_345_2021_Abortion_Pills_For_
- Sale_In_dubai=2C_+27732660312_Abortion_Pills_For_Sale_In_Dubai=2C_buy_cytotec_misoprostol_200_mcg_in_dubai_D_Mazinya_Abortion_Pills_For_Sale_In_dubai_600_=28345=29=2C_345_2021_Abortion_Pills_For_Sale_In_Qatar=2C_Al_=60Adhbah_An_Najmah_Ar_Rakiyat_Al_Rayyan_Ar_Ru=27ays_As_Salatah_As_Salatah_al_Jadidah_As_Sani=60_As_Sawq_Ath_Thaqab_Blar=C3=A9_Dukhan_Ras_Laffan_=E2=80=A6_D_Madam_Abortion_Pills_For_Sale_In_Qatar_600_=28342=29=2C_345_2021_Abortion_Pills_For_Sale_In_Doha=2C_Abu_az_Zuluf_Abu_Thaylah_Ad_Dawhah_al_Jadidah_Al_=60Arish_Al_Bida=60_ash_Sharqiyah_Al_Ghanim_Al_Ghuwariyah_Al_Hilal_al_Gharbiyah_Al_Hilal_ash_Sharqiyah_D_Madam_Abortion_Pills_For_Sale_In_Doha_6000_=28345=29=2C_345_2021_Abortion_Pills_For_Sale_In_Kuwait_City=2C_Mangaf_Mahboula=2CFahaheel_Sabah_Al_Salem_Hawally=2C_Mubarak_Al-Kabeer_Al_Ahmadi=2C_Salmiya_Shamiya_D_Madam_Abortion_Pills_For_Sale_In_Kuwait_City_6000_=28345=29=2C_345_2021_Abortion_Pills_For_Sale_In_Jebel_Ali=2C_Abortion_Pills_For_Sale_In_Kalba=2C_Khor_Fakkan=2C
- _Abortion_Pills_For_Sale_In_Umm_al-Quwain_D_Madam_Abortion_Pills_For_Sale_In_Jebel_Ali_600_=28345=29=2C_345_2021_Abortion_Pills_For_Sale_In_Oman=2C_Abortion_Pills_For_Sale_In_Muscat=2C_mifepristone_and_misoprostol_available_in_Muscat_D_Madam_Abortion_Pills_For_Sale_In_Oman_6000_=28111=29=2C_345_2021_Abortion_Pills_For_Sale_In_Dammam=2C_Abortion_Pills_For_Sale_In_Jeddah=2C_Abortion_Pills_For_Sale_In_Riyadh_D_Madam_Abortion_Pills_For_Sale_In_Dammam_600_=28111=29=2C_345_2021_Abortion_Pills_For_Sale_In_Riyadh=2C_mifepristone_and_misoprostol_available_in_Riyadh=2C_Cytotec_In_Riyadh_D_Madam_Abortion_Pills_For_Sale_In_Riyadh_6000_=28222=29=2C_345_2021_Abortion_Pills_For_Sale_In_RAK_City=2C_Abortion_Pills_For_Sale_In_Fujairah=2C_Jebel_Ali=2C_Kalba=2C_Abortion_Pills_For_Sale_In_Khor_Fakkan=2C_Umm_al-Quwain_D_Dreck_Abortion_Pills_For_Sale_In_RAK_City_600_=28200=29=2C_345_2021_Abortion_Pills_For_Sale_In_Jeddah=2C_mifepristone_and_misoprostol_available_in_Jeddah=2C_Buy_Cytotec_In_Jeddah_D_Madam
- _Abortion_Pills_For_Sale_In_Jeddah_6000_=28222=29=2C_345_2021_Abortion_Pills_For_Sale_In_Kalba=2C_Khor_Fakkan=2C_Umm_al-Quwain_D_Madam_Abortion_Pills_For_Sale_In_Kalba_6000_=28111=29=2C_345_2021_Abortion_Pills_For_Sale_In_Jebel_Ali=2C_Kalba=2C_Khor_Fakkan=2C_Umm_al-Quwain_D_Madam_Abortion_Pills_For_Sale_In_Jebel_Ali_6000_=2889=29=2C_345_2021_Abortion_Pills_For_Sale_In_Ruwais=2C_Dhaid=2C_Liwa_Oasis=2C_Madinat_Zayed=2C_Dibba_Al-Fujairah=2C_D_Madam_Abortion_Pills_For_Sale_In_Ruwais_6000_=2889=29=2C_345_2021_Abortion_Pills_For_Sale_In_Al_Madam=2C_Hatta=2C_Dibba_Al-Hisn=2C_Ar-Rams=2C_Ghayathi_D_Madam_Abortion_Pills_For_Sale_In_Al_Madam_6000_=2889=29=2C_345_2021_Abortion_Pills_For_sale_In_Doha=2CRu_486_Cytotec_In_Doha=2CBuy_Abortion_Kit_Online_In_Doha=2CAbortion_Pills_In_Doha=2Cwhere_i_can_buy_abortion_pills_in_Doha=2CCytotec_200_Mcg_In_Doha=2C_DH_Mutwaribu_Abortion_Pills_For_sale_In_Doha=2C_2000_=2878=29=2C_75_2021_Buy_Cytotec_Pills_In_Abu_Dhabi=2C_Cytotec_Pills_Available_In_Abu_Dhabi=2C
- _Termination_Pills_For_Sale_In_Abu_Dhabi=2C_20=25_Discount_Abortion_Pills_For_Sale_In_Abu_Dhabi_DM_Jims_Cytotec_Pills_Available_In_Abu_Dhabi_999_=2889=29=2C_321_2020_Buy_Cytotec_Pills_In_Dubai=2C_Cytotec_Pills_Available_In_Dubai=2C_Termination_Pills_For_Sale_In_Dubai=2C_20=25_Discount=2C_Abortion_Pills_For_Sale_In_Dubai_DM_Jims_Abortion_Pills_For_Sale_In_Dubai_999_=2889=29=2C_321_2020_Buy_Cytotec_Pills_In_Fujaira=2C_Cytotec_Pills_Available_In_Fujaira=2C_Termination_Pills_For_Sale_In_Fujaira=2C_1000=25_Discount=2C_Abortion_Pills_For_Sale_In_Fujaira_DM_Jims_Abortion_Pills_For_Sale_In_Fujaira_999_=2889=29=2C_321_2020_Buy_Cytotec_Pills_In_Rak_City=2C_Cytotec_Pills_Available_In_Rak_City=2C_Termination_Pills_For_Sale_In_Rak_City=2C_Abortion_Pills_For_Sale_In_Rak_City_DM_Jims_Abortion_Pills_For_Sale_In_Rak_City_999_=2889=29=2C_321_2020_Buy_Cytotec_Pills_In_Al_Ain=2C_Cytotec_Pills_Available_In_Al_Ain=2C_Termination_Pills_For_Sale_In_Al_Ain=2C_Abortion_Pills_For_Sale_In_Al_Ain_DM_Jims_Aborti
- on_Pills_For_Sale_In_Al_Ain_999_=2889=29=2C_321_2020_Buy_Cytotec_Pills_In_Sharjah=2C_Cytotec_Pills_Available_In_Sharjah=2C_Termination_Pills_For_Sale_In_Sharjah=2C_Abortion_Pills_For_Sale_In_Sharjah?=
+Subject: [Linaro-mm-sig] =?utf-8?q?=28=F0=9F=9F=A1=F0=9F=92=96=F0=9F=9F=A2=29+971568044699=28=F0=9F=9F=A1=F0=9F=92=96=F0=9F=9F=A2Buy_Cytotec_Pills_In_Sharjah=2C_Cytotec_Pills_Available_In_Sharjah=2C_Termination_Pills_For_Sale_In_Sharjah=2C_Abortion_Pills_For_Sale_In_Sharjah?=
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MGYXCFCCMXRG77JZRRF6SIFFZZMYMHCZ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ETJORI4NHLSZW376KZ2L4MMPEU5ZPF42/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -45,33 +39,32 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Transfer-Encoding: base64
-X-Spamd-Result: default: False [3.69 / 15.00];
-	LONG_SUBJ(3.00)[5719];
+X-Spamd-Result: default: False [0.69 / 15.00];
 	MID_RHS_MATCH_TO(1.00)[];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx:c];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
-	MIME_GOOD(-0.10)[text/plain];
 	MIME_BASE64_TEXT(0.10)[];
+	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
+	ARC_NA(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	RCPT_COUNT_ONE(0.00)[1];
-	RCVD_COUNT_TWO(0.00)[2];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[kachachaissue12@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_NO_DN(0.00)[];
+	RCPT_COUNT_ONE(0.00)[1];
 	TO_DN_NONE(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	NEURAL_SPAM(0.00)[0.202];
 	R_DKIM_NA(0.00)[];
-	NEURAL_HAM(-0.00)[-0.020];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	FROM_NO_DN(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:mid,linaro.org:email]
-X-Rspamd-Queue-Id: 599542AD41C
+X-Rspamd-Queue-Id: 1AE6C2AD430
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
