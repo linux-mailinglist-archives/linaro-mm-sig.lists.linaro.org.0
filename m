@@ -2,430 +2,175 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id IMT2LpsouWkAtAEAu9opvQ
+	id +KG5C+1g5mkxvgEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 17 Mar 2026 11:10:35 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:22:53 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 205422A799E
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 17 Mar 2026 11:10:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CF627431140
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:22:52 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E1FAA3F910
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 17 Mar 2026 10:10:33 +0000 (UTC)
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
-	by lists.linaro.org (Postfix) with ESMTPS id 2A5DA3F76C
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 17 Mar 2026 10:10:26 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D5DD4404EC
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:22:51 +0000 (UTC)
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+	by lists.linaro.org (Postfix) with ESMTPS id CCD143F760
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 17 Mar 2026 13:24:18 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20230601 header.b=hHVfO7DP;
-	arc=pass ("google.com:s=arc-20240605:i=1");
-	spf=pass (lists.linaro.org: domain of luckaswilli7@gmail.com designates 209.85.218.53 as permitted sender) smtp.mailfrom=luckaswilli7@gmail.com;
-	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-b9358bc9c50so689873666b.1
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 17 Mar 2026 03:10:26 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773742225; cv=none;
-        d=google.com; s=arc-20240605;
-        b=YJMt7JMhznc21JTs99be/Jy6EQdu6MhwyCNkuTTIYZnxTbupRlbJ1njc8ojq5Fb09L
-         E+fnKuT4749WJeJA6VITUk6su6iamaRdC/RDE6MqEx5pM3dgmCp/sV1xWbaZl/fK0QUw
-         JZhzZZIeCApw82buL0/1Ja1Bm83zz0k4uq8hPZrdus3jcrYztkGGQ+eXPCHdunCFIvRz
-         N57gan97QdBlDirBRNONip7FyPKzLmZfOMTksoSvIXTrGnbGpLuf8uNWNI6TDIj6xSS6
-         HUtf2ChTN8TeryQCjxqLkFDOO8baq6t3m5UXiTXbADqbRmyrkvhTk7SQ6RpGI9biiZl1
-         DXJA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=to:subject:message-id:date:from:mime-version:dkim-signature;
-        bh=vxp2wL6ObYN/Lzs82IA2lYINd8zc5Rag/fsU2Ub6ABs=;
-        fh=bu0H84NOjMryurdi6dtorcDVXXrFBnvDukXHAD5QbCs=;
-        b=R9AhvUeX7Be4/MlhHUccjIQo6Y5ttAEbyLWu4m/fnP4HTVD8+7PUWDB0Y+RDnextSZ
-         dyG/vNBBBJf+RNqNhZgPCrIEorLjofRw7H3mJ7DR1NnyKEryjFOmyjuFfq+DXf2g4Nqa
-         DJAXG6PQCq5yGPW9k3n+u9DOgmslcN3AU02VrYLhiVhlReyW7me/+WLvEnitj8dU1GRY
-         Ka2eU8Arb/Cdhapc78snARJIgydhyw2BF8NHMjzdKwQc2sFmemRpbkXS+Tj0v962r3cB
-         aTzoNsuCvnYVOFc14XHmGbDSbkXlYImjPOgH5zK8SnU9GU7D0+2oCVo2IOeg+/bUf2Pi
-         oKtQ==;
-        darn=lists.linaro.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass header.d=google.com header.s=20251104 header.b=d3mHgPRL;
+	spf=pass (lists.linaro.org: domain of smostafa@google.com designates 209.85.128.50 as permitted sender) smtp.mailfrom=smostafa@google.com;
+	dmarc=pass (policy=reject) header.from=google.com
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-4852ef20fe8so58995e9.1
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 17 Mar 2026 06:24:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773742225; x=1774347025; darn=lists.linaro.org;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=vxp2wL6ObYN/Lzs82IA2lYINd8zc5Rag/fsU2Ub6ABs=;
-        b=hHVfO7DPMt701W5YVRMosBjJ91Jokecb5pNsb/mBYnOUAuSeCwgWpXw+je9AfYCzn6
-         oGi1lgi3FkQYWkEa6Nhf5XMdMTfQzucHFxU8uZRqvTVXH15UW0DE1W1S6K3Lb1Aw5Zuj
-         4yd4//ZUKvMDMHxCZL9tFkvGuKTIlBQDlNAUWW5zYFCDqXeJG2dC3qFajVxexy6weGdd
-         FRZNNpG4uqh8bFNhbFRa75/lFGCknXvEgvYX1MfqUJrhUBYAX748fjl5JSJdJQ9KiBhb
-         4i/3GYq1QlOl168BFRIFv3ucXtY4bpWslrlMhC61LQWD9Eabyh84j8FTo4fjyj5+Lqz3
-         GI1A==
+        d=google.com; s=20251104; t=1773753858; x=1774358658; darn=lists.linaro.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=zWZeNHlOMbvwVmHsivYMTEHjYjPNUndT05044cKL2Xs=;
+        b=d3mHgPRLTApw35UDzjURO8pk1lfQsmy2xWfpAvYSe1oayE5dDgLpVBz/6dmToow+Ph
+         vpo0vHfAnA8ztnZvHIebrPFMQU2wHvvdSbg2gJei3+cwoMXb3XrJd3+LuI4HueMkXCwn
+         g9/wCujpUbc0AgAoSspsaRK78KIdxUQBW+GqTmMQhfZZIpW/T6Q69tOi9k433sdjwOo6
+         z7jRLW+v4RNlGtPflaVkKTPoKdgRiQ0SQYFHogmjlr5dIsoPxI0D9YszAcRNlrWql8RJ
+         FfVENARgWv1EM2e7skTO4tV9V6IpyMqJcyyh2hRCuxQYSqsWMQ8YEgZ5Qfy5tip0Xh8O
+         ucbQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773742225; x=1774347025;
-        h=to:subject:message-id:date:from:mime-version:x-gm-gg
+        d=1e100.net; s=20251104; t=1773753858; x=1774358658;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=vxp2wL6ObYN/Lzs82IA2lYINd8zc5Rag/fsU2Ub6ABs=;
-        b=Swjur764SQfF86nlJWfeTNDJodXKIthTmS2xzopV+WyhwJKxpyCtSWHZhUWW42f4qB
-         66i/ZIAOEdzMTyPnHyw3EEJp3VGjthVgUum241VthbzmGNwCZ7+o6tTDfI/dY36ndf1i
-         8Gk6FhqSgxP7f8DX+TFUBcjooN6DdQLka8LYCMuaAp4taA9IiUpqPdh1m7wGXdSBG8eE
-         0ZWkMdAcExXP5GTd8CzMQqJRuaBSf/8q/EG76Q4oIRJmSyXeiQ2clDAy3BExdj82fska
-         JspnGyn582lK36eksUKHJruKDvek2D/C7c/38fOuGvQvxSV9coBHZSkJ5WP72xBGYlYr
-         KDvQ==
-X-Gm-Message-State: AOJu0YwuqQz/JghrLRLB7SmZHMl3ZLoU5qXG/9FP/iBMhfwqg9qmOEFP
-	Li/VEjAyfCcvAky/Z9hmtNE9260CtFA76qR3ah6tIHeEV5BmiiM8gxXB9ow7HTawlz4rF0IyvKd
-	ZCi7rJIjMSZ8JRDgYjYy461eck61+2ot2eS7R
-X-Gm-Gg: ATEYQzzOuyR6ogOAtJVv9fO5NiQpr69OJ6hdCE0JihByAL7FKpyiWFKwEagqg4JkY1P
-	gU3wkg91aHNV6szElTQAoxYN99Y+YxfUn7+Wacq+3K94RA7x+3Szi6UNQQKKsuSoB8LsSxHuOJU
-	TZooJeBPnEnP04SP3aUoPJHc11/u3hRrQH+ZaN1S13aEuIDCyeMgh5HbcU+cOx0cR12x/V6r7KJ
-	KhfMY0Fm54LZUlDlJeDVCXKkeIWlggdQOWuFFkUhPKPWM2Dkgf4Ft4qcqPM5EEIKv32D255IS/s
-	obRrbViPjJAQ9A==
-X-Received: by 2002:a17:907:2d8a:b0:b94:19e5:5c46 with SMTP id
- a640c23a62f3a-b9764b67cfamr936666666b.0.1773742224295; Tue, 17 Mar 2026
- 03:10:24 -0700 (PDT)
+        bh=zWZeNHlOMbvwVmHsivYMTEHjYjPNUndT05044cKL2Xs=;
+        b=Lrk5KBDurDwiE0JJdj7CRsNNB+yunztolDkqDP2KEureLlsXp0H2NlL5KeqsTfEVqt
+         ajFntPboIn+ifFwxwYq+wzZ4JM8guAbN+0GqvHFnHTtf2sgCbbO6AKMfjI+xEXIpg1LO
+         bmG+DREpcja1k3DqW55hWE+F1zyOX8hFkAqQstgG3xJE81cc0BNgAMg2iVYw3AZtyy+g
+         OKlzpxRgbNH1cuSpFqcb7DGzgznqtJHC0LbFUhkSHRvCTscF749v/ibPwnupd4jqmd7/
+         gJloGjlCmqApyynuzgCk/cQoV30nm5iZKq6SoVoHrY9EfyrWia1l0erF4j/g/y5LUeRz
+         0nWA==
+X-Forwarded-Encrypted: i=1; AJvYcCWU6RCmEZVTM1OSWOsWp6qOMwDuDrNrI2/kZvT5JCoebUmjraPSSy/CeEUMNwbiX2+HgJ3o5j92BVBzHY1p@lists.linaro.org
+X-Gm-Message-State: AOJu0YyyIymXoF+NKraGmwfEUcuU3HbeGJb6hPCEa3YI8erJyJMDC2z+
+	ygQvLDCU9xkhk7j5LiboebArPH8BHTiim7iVKf/rUiZwGAZxfeOJV39uTY4xSsXhWA==
+X-Gm-Gg: ATEYQzzQJB7QqglwBoXthqGkocPB7Fg12qqhq5U83OfRy43a7yr0OmV8CpOxm85+aKW
+	yo4W7WYxfIQRZDnkvj8oufoDeA0T8RjAtnzPhmqDynpaXbkp9pkpMGj11HuP6+Q2fShdUpiwrlr
+	HrwAftY3ezsfsJU6GRdyXDfL/PfRYo3ohMGYQ2fbSSlI8LafUN8cdi0O93UN14kuo6TB+25G69K
+	iwdHkk8yRsrzjHitUWQLMoRFujQesohgyYsKMko2bC86vXXInk/b3vIPkirln4veboEzXZEPqjN
+	FBz1PPfcKNZsvDkREcBW08Vb0GBizZ7cgaNDAcofcQbY16qR+Z0pdMN4xqq/cEa6QN3W41QvZp0
+	fPjjMMozSDc8iBbqwgaMT7F8KsrOmdEi6yYqm9uHP+gBs7l8uNBFk51W4Gx2RrlYVutlLz1gvaQ
+	QCb2/O+gvApzMbNsdWBcjJwQzaqSpuKJTThRRr8blDTH7KrWQrJhCUvse8
+X-Received: by 2002:a05:600c:4e45:b0:485:b6e4:9808 with SMTP id 5b1f17b1804b1-485b6e49f7bmr773775e9.1.1773753857226;
+        Tue, 17 Mar 2026 06:24:17 -0700 (PDT)
+Received: from google.com (54.95.38.34.bc.googleusercontent.com. [34.38.95.54])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4856eae3322sm58975315e9.10.2026.03.17.06.24.16
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 17 Mar 2026 06:24:16 -0700 (PDT)
+Date: Tue, 17 Mar 2026 13:24:13 +0000
+From: Mostafa Saleh <smostafa@google.com>
+To: Jiri Pirko <jiri@resnulli.us>
+Message-ID: <ablV_f_l7wD2m63E@google.com>
+References: <20260305123641.164164-1-jiri@resnulli.us>
 MIME-Version: 1.0
-From: Lucas Wilson <luckaswilli7@gmail.com>
-Date: Tue, 17 Mar 2026 03:10:11 -0700
-X-Gm-Features: AaiRm50z5ZjiqsrD6PsTcHeIAC-24ExwRR8SAfaeBnQTKsWy4HEfYsDXK03feHs
-Message-ID: <CAMhVoM6hr6j2C422AuT_X6Fz7bEZzQQgw5dLt+jdyosHHNTD-g@mail.gmail.com>
-To: linaro-mm-sig@lists.linaro.org
-X-Spamd-Bar: /
-Message-ID-Hash: GENHU6BKK5IIUDLXTNNEIX7PEGVKTBZN
-X-Message-ID-Hash: GENHU6BKK5IIUDLXTNNEIX7PEGVKTBZN
-X-MailFrom: luckaswilli7@gmail.com
-X-Mailman-Rule-Hits: member-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
+Content-Disposition: inline
+In-Reply-To: <20260305123641.164164-1-jiri@resnulli.us>
+X-Spamd-Bar: ---
+X-MailFrom: smostafa@google.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+Message-ID-Hash: JEN7NUASJI3XCH5TARHUJZSHV72WNP46
+X-Message-ID-Hash: JEN7NUASJI3XCH5TARHUJZSHV72WNP46
+X-Mailman-Approved-At: Mon, 20 Apr 2026 17:21:52 +0000
+CC: dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, iommu@lists.linux.dev, linux-media@vger.kernel.org, sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, Brian.Starkey@arm.com, jstultz@google.com, tjmercier@google.com, christian.koenig@amd.com, robin.murphy@arm.com, jgg@ziepe.ca, leon@kernel.org, sean.anderson@linux.dev, ptesarik@suse.com, catalin.marinas@arm.com, aneesh.kumar@kernel.org, suzuki.poulose@arm.com, steven.price@arm.com, thomas.lendacky@amd.com, john.allen@amd.com, ashish.kalra@amd.com, suravee.suthikulpanit@amd.com, linux-coco@lists.linux.dev
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] =?utf-8?q?Buy_real_and_fake_Passports_=28WhatsApp=3A_+1_=28615=29-314-6286=29_renew_passports_online=2C_apply_for_legal_passports=2C_buy_fake_passports=2C_Buy_US_passports=2C_buy_Chinese_passports=2C_buy_Canadian_passports_=28Telegram=3A_=40Globaldocs26=29_buy_passports_and_visa=2C_buy_passports=2C_buy_passport_citizenship=2C_visas_and_passports_passport_and_visa_are_same=2C_passport_and_visa_apply=2C_is_passports_and_visas_a_legit_website=2C_difference_between_passports_and_visas_do_i_need_a_visa_with_my_passport=2C_how_to_apply_for_passport_and_passport_card=2C_is_passports_and_visas_legit_Buy_counterfeit_currency=2E_Buy_US_dollars_=28USD=29=2C_Chinese_yuan_=28RMB=29=2C_buy_Canadian_dollars_=28CAD=29=2C_Chinese_yuan_=28CNY=29=2C_Hong_Kong_dollars_=28HKD=29=2C_Malaysian_ringgit_=28MYR=29=2C_Australian_dollars_=28AUD=29=2C_buy_euros_=28EUR=29_=28WhatsApp=EF=BC=9A+1=28615=29-314-6286=29=2E_Buy_high-quality=2C_indistinguishable_counterfeit_banknotes=2E_We_only_
- offer_high-quality_counterfeit_currency=2E_We_provide_perfectly_replicated_counterfeit_banknotes_with_holograms_and_all_available_security_feature=2E?=
+Subject: [Linaro-mm-sig] Re: [PATCH net-next v3 0/2] dma-buf: heaps: system: add an option to allocate explicitly decrypted memory
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GENHU6BKK5IIUDLXTNNEIX7PEGVKTBZN/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JEN7NUASJI3XCH5TARHUJZSHV72WNP46/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============5308621217824432288=="
-X-Spamd-Result: default: False [4.59 / 15.00];
-	LONG_SUBJ(3.00)[1011];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:google.com:reject}];
-	R_DKIM_REJECT(1.00)[gmail.com:s=20230601];
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+X-Spamd-Result: default: False [2.59 / 15.00];
+	DMARC_POLICY_REJECT(2.00)[google.com : SPF not aligned (relaxed), No valid DKIM,reject];
+	DATE_IN_PAST(1.00)[819];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx];
-	MIME_GOOD(-0.10)[multipart/mixed,multipart/alternative,text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed),none];
+	MIME_BASE64_TEXT(0.10)[];
+	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	GREYLIST(0.00)[pass,meta];
-	RCPT_COUNT_ONE(0.00)[1];
-	RCVD_COUNT_THREE(0.00)[3];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	MIME_TRACE(0.00)[0:+,1:+,2:+,3:~,4:+];
-	FROM_HAS_DN(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[25];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.943];
-	TO_DN_NONE(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[luckaswilli7@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
-	DKIM_TRACE(0.00)[gmail.com:-];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: 205422A799E
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[smostafa@google.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	NEURAL_SPAM(0.00)[0.996];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,nvidia.com:email,lists.linaro.org:helo,lists.linaro.org:rdns]
+X-Rspamd-Queue-Id: CF627431140
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
---===============5308621217824432288==
-Content-Type: multipart/alternative; boundary="00000000000033cbfc064d358b64"
-
---00000000000033cbfc064d358b64
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Buy real and fake Passports (WhatsApp: +1 (615)-314-6286) renew passports
-online, apply for legal passports, buy fake passports, Buy US passports,
-buy Chinese passports, buy Canadian passports (Telegram: @Globaldocs26)
-buy passports and visa, buy passports, buy passport citizenship, visas and
-passports
-passport and visa are same, passport and visa apply, is passports and visas
-a legit website, difference between passports and visas
-do i need a visa with my passport, how to apply for passport and passport
-card, is passports and visas legit
-
-Buy counterfeit currency. Buy US dollars (USD), Chinese yuan (RMB), buy
-Canadian dollars (CAD), Chinese yuan (CNY), Hong Kong dollars (HKD),
-Malaysian ringgit (MYR), Australian dollars (AUD), buy euros (EUR)
-(WhatsApp=EF=BC=9A+1(615)-314-6286). Buy high-quality, indistinguishable
-counterfeit banknotes.
-
-We only offer high-quality counterfeit currency. We provide perfectly
-replicated counterfeit banknotes with holograms and all available security
-features. Indistinguishable to the naked eye and touch. 100%
-indistinguishable counterfeit banknotes, printed on 80% cotton and 20%
-cellulose paper.
-
-Buy a US student visa, buy TCF, TEF, TOEFL, IELTS, TOEIC test scores
-(Email: guanyuguohai@gmail.com), buy Canadian citizenship, buy US
-citizenship, buy Canadian TCF, TEF, CELPIP, CELTA certificates, how to
-immigrate to Canada? Buy a driver=E2=80=99s license, ID card, US green card
-(Telegram=EF=BC=9A@Buylegitpassports1), Social Security Number (SSN), work =
-permit,
-new ID card, National Insurance Card, NIN, SIN, marriage certificate, birth
-certificate
-
-Want to start a new chapter in your life with a new identity? Protect your
-privacy, build a new credit history, bypass criminal record checks, and
-regain your freedom? Apply for a new identity now!
-(WhatsApp=EF=BC=9A+1(615)-314-6286).
-
-You can contact us using the following details
-
-WhatsApp: +1 (615)-314-6286
-Telegram: @Globaldocs26
-Email: Karlvonlinne74@gmail.com
-Website: https://flypassports.com/
-Website: https://buylegitpassports.com/
-Telegram: https://t.me/globaldocs2
-
-buy passports and visa, buy passport canada, passports that can be bought,
-buy visa gift card with paypal canada, buy canadian passport, passport and
-visa are same, passport and visa apply, is passports and visas a legit
-website, difference between passports and visas, do i need a visa with my
-passport, how to apply for passport and passport card, passports visa and
-more, can you buy an american passport, buy a pasport, buying american
-passport, buy a paasport, buyable passports, pbuy passport, passport and
-visa check, passport and visa card, passports and visas coupon code, can i
-transfer canada visa to new passport, passports and visas.com legit, can
-you buy a canadian passport, passport and visa difference, passport and
-visa difference in hindi, passport and visa department of ra, passport and
-visa difference in marathi, passports and visas denver, passport and visa
-documents, passport and visa dubai, list of passports by visa free
-passport and visa express, passport and visa emirates, passport and visa
-express reviews, buy visa e gift card canada, buy passports online, can you
-buy a visa online, passport and visa free countries for india, passport and
-visa free countries, passport and visa for uk, buy passports, buy american
-passport, passport and visa holder, passport and visa how much, difference
-between passport and passport card ireland, buy passports and citizenship,
-passport and visa id photo maker, passport and visa is the same, passport
-and visa index, passports i can buy, passport and visa jobs, passports to
-buy, passports you can buy, buying passports, passport and visa kenya, how
-to get passport card if i already have passport, what passport can i buy,
-passports and visas llc, passport and visa link, passports and visas legit,
-passport and visa logo, passport to buy, passport and visa meaning,
-passport and visa manual 2006 pdf, passport and visa me antar, passport and
-visa mein kya antar hai, passport and visa me difference in hindi, passport
-and visa me difference, passport and visa mein antar, passport and visa me
-antar in hindi, can i transfer my visa to a new, passport, buy your
-passport, passport and visa name different, passport and visa number, how
-to buy a new passport, do i need to transfer visa to new passport, passport
-and visa office, passport and visa org, passport and visa on emirates,
-passport and visa photo photogov, passport and visa price, passport and
-visa photo, passport and visa price in india, passport and visa photo size,
-passport and visa photo requirements, passport and visa photo studio near
-me, passport and visa page, passport and visa qatar airways, passport and
-visa quartus global services, passport and visa quartus global services
-missouri city, passport and visa questions, is expedited passports and
-visas legit, buy quebec passport. passport and visa requirements, passports
-and visas reviews, passport and visa requirements for thailand, passport
-and visa renewal
-passport and visa requirements for spain, passport and visa requirements
-for dubai, passport and visa requirements for italy, passport and visa
-requirements for uk, passport and visa requirements for singapore, passport
-and visa requirements for australia, buying passport other country
-passport and visa services, passport and visa services near me, passport
-and visa solutions, passport and visa same, passport and visa status
-passport and visa services chicago, passport and visa stamp, are visas and
-passports the same thing, passport and visa the same
-passport and visa the same thing, passports and visas unlimited, passport
-and visa uk, us passport visa, passport and visa what is the difference
-buy a second passport, passport that you can buy, buy an american passport,
-buy a passport, how much to buy a canadian passport
-
-https://flypassports.com/service-category/passport/
-https://flypassports.com/service/germany-driving-licence/#
-https://flypassports.com/services/
-https://flypassports.com/faq/
-https://flypassports.com/about-us/
-https://flypassports.com/contact-us/
-https://flypassports.com/service/canadian-passport/
-https://flypassports.com/service/bulgarian-drivers-license/
-https://flypassports.com/service/chinese-passport-renewal/
-https://flypassports.com/service/illinois-drivers-license/
-https://flypassports.com/service/usa-passport/
-https://flypassports.com/service/austrian-drivers-license/
-https://flypassports.com/service/netherlands-passport-application/
-https://flypassports.com/service/vermont-drivers-license/
-https://flypassports.com/service/korean-passport-renewal/
-https://flypassports.com/service/germany-driving-licence/
-https://buylegitpassports.com/
-https://buylegitpassports.com/apply/
-https://buylegitpassports.com/buy-fake-diploma/
-https://buylegitpassports.com/social-security-card-generator/
-https://buylegitpassports.com/how-do-we-get-a-passport/
-https://buylegitpassports.com/real-and-fake-passport/
-https://buylegitpassports.com/buy-fake-chinese-passport/
-https://buylegitpassports.com/buy-canadian-passport-online/
-https://buylegitpassports.com/croatia-driven-license/
-https://buylegitpassports.com/buy-brazil-driver-license/
-https://buylegitpassports.com/buy-hungary-driver-license/
-https://buylegitpassports.com/buy-fake-social-security-number-card/
-https://buylegitpassports.com/how-can-i-get-california-drivers-license/
-WhatsApp number: +1 (615)-314-6286
-Telegram: @Globaldocs26
-Email: Karlvonlinne74@gmail.com
-Website: https://flypassports.com/
-Website: https://buylegitpassports.com/
-Telegram: https://t.me/globaldocs2
-
---00000000000033cbfc064d358b64
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Buy real and fake Passports (WhatsApp: +1 (615)-314-6286) =
-renew passports online, apply for legal passports, buy fake passports, Buy =
-US passports, buy Chinese passports, buy Canadian passports (Telegram: @Glo=
-baldocs26)<br>buy passports and visa, buy passports, buy passport citizensh=
-ip, visas and passports<br>passport and visa are same, passport and visa ap=
-ply, is passports and visas a legit website, difference between passports a=
-nd visas<br>do i need a visa with my passport, how to apply for passport an=
-d passport card, is passports and visas legit<br><br>Buy counterfeit curren=
-cy. Buy US dollars (USD), Chinese yuan (RMB), buy Canadian dollars (CAD), C=
-hinese yuan (CNY), Hong Kong dollars (HKD), Malaysian ringgit (MYR), Austra=
-lian dollars (AUD), buy euros (EUR) (WhatsApp=EF=BC=9A+1(615)-314-6286). Bu=
-y high-quality, indistinguishable counterfeit banknotes.<br><br>We only off=
-er high-quality counterfeit currency. We provide perfectly replicated count=
-erfeit banknotes with holograms and all available security features. Indist=
-inguishable to the naked eye and touch. 100% indistinguishable counterfeit =
-banknotes, printed on 80% cotton and 20% cellulose paper.<br><br>Buy a US s=
-tudent visa, buy TCF, TEF, TOEFL, IELTS, TOEIC test scores (Email: <a href=
-=3D"mailto:guanyuguohai@gmail.com">guanyuguohai@gmail.com</a>), buy Canadia=
-n citizenship, buy US citizenship, buy Canadian TCF, TEF, CELPIP, CELTA cer=
-tificates, how to immigrate to Canada? Buy a driver=E2=80=99s license, ID c=
-ard, US green card (Telegram=EF=BC=9A@Buylegitpassports1), Social Security =
-Number (SSN), work permit, new ID card, National Insurance Card, NIN, SIN, =
-marriage certificate, birth certificate<br><br>Want to start a new chapter =
-in your life with a new identity? Protect your privacy, build a new credit =
-history, bypass criminal record checks, and regain your freedom? Apply for =
-a new identity now! (WhatsApp=EF=BC=9A+1(615)-314-6286).<br><br>You can con=
-tact us using the following details<br><br>WhatsApp: +1 (615)-314-6286<br>T=
-elegram: @Globaldocs26<br>Email: <a href=3D"mailto:Karlvonlinne74@gmail.com=
-">Karlvonlinne74@gmail.com</a><br>Website: <a href=3D"https://flypassports.=
-com/">https://flypassports.com/</a><br>Website: <a href=3D"https://buylegit=
-passports.com/">https://buylegitpassports.com/</a><br>Telegram: <a href=3D"=
-https://t.me/globaldocs2">https://t.me/globaldocs2</a><br><br>buy passports=
- and visa, buy passport canada, passports that can be bought, buy visa gift=
- card with paypal canada, buy canadian passport, passport and visa are same=
-, passport and visa apply, is passports and visas a legit website, differen=
-ce between passports and visas, do i need a visa with my passport, how to a=
-pply for passport and passport card, passports visa and more, can you buy a=
-n american passport, buy a pasport, buying american passport, buy a paaspor=
-t, buyable passports, pbuy passport, passport and visa check, passport and =
-visa card, passports and visas coupon code, can i transfer canada visa to n=
-ew passport, passports and <a href=3D"http://visas.com">visas.com</a> legit=
-, can you buy a canadian passport, passport and visa difference, passport a=
-nd visa difference in hindi, passport and visa department of ra, passport a=
-nd visa difference in marathi, passports and visas denver, passport and vis=
-a documents, passport and visa dubai, list of passports by visa free<br>pas=
-sport and visa express, passport and visa emirates, passport and visa expre=
-ss reviews, buy visa e gift card canada, buy passports online, can you buy =
-a visa online, passport and visa free countries for india, passport and vis=
-a free countries, passport and visa for uk, buy passports, buy american pas=
-sport, passport and visa holder, passport and visa how much, difference bet=
-ween passport and passport card ireland, buy passports and citizenship, pas=
-sport and visa id photo maker, passport and visa is the same, passport and =
-visa index, passports i can buy, passport and visa jobs, passports to buy, =
-passports you can buy, buying passports, passport and visa kenya, how to ge=
-t passport card if i already have passport, what passport can i buy, passpo=
-rts and visas llc, passport and visa link, passports and visas legit, passp=
-ort and visa logo, passport to buy, passport and visa meaning, passport and=
- visa manual 2006 pdf, passport and visa me antar, passport and visa mein k=
-ya antar hai, passport and visa me difference in hindi, passport and visa m=
-e difference, passport and visa mein antar, passport and visa me antar in h=
-indi, can i transfer my visa to a new, passport, buy your passport, passpor=
-t and visa name different, passport and visa number, how to buy a new passp=
-ort, do i need to transfer visa to new passport, passport and visa office, =
-passport and visa org, passport and visa on emirates, passport and visa pho=
-to photogov, passport and visa price, passport and visa photo, passport and=
- visa price in india, passport and visa photo size, passport and visa photo=
- requirements, passport and visa photo studio near me, passport and visa pa=
-ge, passport and visa qatar airways, passport and visa quartus global servi=
-ces, passport and visa quartus global services missouri city, passport and =
-visa questions, is expedited passports and visas legit, buy quebec passport=
-. passport and visa requirements, passports and visas reviews, passport and=
- visa requirements for thailand, passport and visa renewal<br>passport and =
-visa requirements for spain, passport and visa requirements for dubai, pass=
-port and visa requirements for italy, passport and visa requirements for uk=
-, passport and visa requirements for singapore, passport and visa requireme=
-nts for australia, buying passport other country<br>passport and visa servi=
-ces, passport and visa services near me, passport and visa solutions, passp=
-ort and visa same, passport and visa status<br>passport and visa services c=
-hicago, passport and visa stamp, are visas and passports the same thing, pa=
-ssport and visa the same<br>passport and visa the same thing, passports and=
- visas unlimited, passport and visa uk, us passport visa, passport and visa=
- what is the difference<br>buy a second passport, passport that you can buy=
-, buy an american passport, buy a passport, how much to buy a canadian pass=
-port<br><br><a href=3D"https://flypassports.com/service-category/passport/"=
->https://flypassports.com/service-category/passport/</a><br><a href=3D"http=
-s://flypassports.com/service/germany-driving-licence/#">https://flypassport=
-s.com/service/germany-driving-licence/#</a><br><a href=3D"https://flypasspo=
-rts.com/services/">https://flypassports.com/services/</a><br><a href=3D"htt=
-ps://flypassports.com/faq/">https://flypassports.com/faq/</a><br><a href=3D=
-"https://flypassports.com/about-us/">https://flypassports.com/about-us/</a>=
-<br><a href=3D"https://flypassports.com/contact-us/">https://flypassports.c=
-om/contact-us/</a><br><a href=3D"https://flypassports.com/service/canadian-=
-passport/">https://flypassports.com/service/canadian-passport/</a><br><a hr=
-ef=3D"https://flypassports.com/service/bulgarian-drivers-license/">https://=
-flypassports.com/service/bulgarian-drivers-license/</a><br><a href=3D"https=
-://flypassports.com/service/chinese-passport-renewal/">https://flypassports=
-.com/service/chinese-passport-renewal/</a><br><a href=3D"https://flypasspor=
-ts.com/service/illinois-drivers-license/">https://flypassports.com/service/=
-illinois-drivers-license/</a><br><a href=3D"https://flypassports.com/servic=
-e/usa-passport/">https://flypassports.com/service/usa-passport/</a><br><a h=
-ref=3D"https://flypassports.com/service/austrian-drivers-license/">https://=
-flypassports.com/service/austrian-drivers-license/</a><br><a href=3D"https:=
-//flypassports.com/service/netherlands-passport-application/">https://flypa=
-ssports.com/service/netherlands-passport-application/</a><br><a href=3D"htt=
-ps://flypassports.com/service/vermont-drivers-license/">https://flypassport=
-s.com/service/vermont-drivers-license/</a><br><a href=3D"https://flypasspor=
-ts.com/service/korean-passport-renewal/">https://flypassports.com/service/k=
-orean-passport-renewal/</a><br><a href=3D"https://flypassports.com/service/=
-germany-driving-licence/">https://flypassports.com/service/germany-driving-=
-licence/</a><br><a href=3D"https://buylegitpassports.com/">https://buylegit=
-passports.com/</a><br><a href=3D"https://buylegitpassports.com/apply/">http=
-s://buylegitpassports.com/apply/</a><br><a href=3D"https://buylegitpassport=
-s.com/buy-fake-diploma/">https://buylegitpassports.com/buy-fake-diploma/</a=
-><br><a href=3D"https://buylegitpassports.com/social-security-card-generato=
-r/">https://buylegitpassports.com/social-security-card-generator/</a><br><a=
- href=3D"https://buylegitpassports.com/how-do-we-get-a-passport/">https://b=
-uylegitpassports.com/how-do-we-get-a-passport/</a><br><a href=3D"https://bu=
-ylegitpassports.com/real-and-fake-passport/">https://buylegitpassports.com/=
-real-and-fake-passport/</a><br><a href=3D"https://buylegitpassports.com/buy=
--fake-chinese-passport/">https://buylegitpassports.com/buy-fake-chinese-pas=
-sport/</a><br><a href=3D"https://buylegitpassports.com/buy-canadian-passpor=
-t-online/">https://buylegitpassports.com/buy-canadian-passport-online/</a><=
-br><a href=3D"https://buylegitpassports.com/croatia-driven-license/">https:=
-//buylegitpassports.com/croatia-driven-license/</a><br><a href=3D"https://b=
-uylegitpassports.com/buy-brazil-driver-license/">https://buylegitpassports.=
-com/buy-brazil-driver-license/</a><br><a href=3D"https://buylegitpassports.=
-com/buy-hungary-driver-license/">https://buylegitpassports.com/buy-hungary-=
-driver-license/</a><br><a href=3D"https://buylegitpassports.com/buy-fake-so=
-cial-security-number-card/">https://buylegitpassports.com/buy-fake-social-s=
-ecurity-number-card/</a><br><a href=3D"https://buylegitpassports.com/how-ca=
-n-i-get-california-drivers-license/">https://buylegitpassports.com/how-can-=
-i-get-california-drivers-license/</a><br>WhatsApp number: +1 (615)-314-6286=
-<br>Telegram: @Globaldocs26<br>Email: <a href=3D"mailto:Karlvonlinne74@gmai=
-l.com">Karlvonlinne74@gmail.com</a><br>Website: <a href=3D"https://flypassp=
-orts.com/">https://flypassports.com/</a><br>Website: <a href=3D"https://buy=
-legitpassports.com/">https://buylegitpassports.com/</a><br>Telegram: <a hre=
-f=3D"https://t.me/globaldocs2">https://t.me/globaldocs2</a></div>
-
---00000000000033cbfc064d358b64--
-
---===============5308621217824432288==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============5308621217824432288==--
+SGkgSmlyaSwNCg0KT24gVGh1LCBNYXIgMDUsIDIwMjYgYXQgMDE6MzY6MzlQTSArMDEwMCwgSmly
+aSBQaXJrbyB3cm90ZToNCj4gRnJvbTogSmlyaSBQaXJrbyA8amlyaUBudmlkaWEuY29tPg0KPiAN
+Cj4gQ29uZmlkZW50aWFsIGNvbXB1dGluZyAoQ29DbykgVk1zL2d1ZXN0cywgc3VjaCBhcyBBTUQg
+U0VWIGFuZCBJbnRlbCBURFgsDQo+IHJ1biB3aXRoIGVuY3J5cHRlZC9wcm90ZWN0ZWQgbWVtb3J5
+IHdoaWNoIGNyZWF0ZXMgYSBjaGFsbGVuZ2UNCj4gZm9yIGRldmljZXMgdGhhdCBkbyBub3Qgc3Vw
+cG9ydCBETUEgdG8gaXQgKG5vIFRESVNQIHN1cHBvcnQpLg0KPiANCj4gRm9yIGtlcm5lbC1vbmx5
+IERNQSBvcGVyYXRpb25zLCBzd2lvdGxiIGJvdW5jZSBidWZmZXJpbmcgcHJvdmlkZXMgYQ0KPiB0
+cmFuc3BhcmVudCBzb2x1dGlvbiBieSBjb3B5aW5nIGRhdGEgdGhyb3VnaCBkZWNyeXB0ZWQgbWVt
+b3J5Lg0KPiBIb3dldmVyLCB0aGUgb25seSB3YXkgdG8gZ2V0IHRoaXMgbWVtb3J5IGludG8gdXNl
+cnNwYWNlIGlzIHZpYSB0aGUgRE1BDQo+IEFQSSdzIGRtYV9hbGxvY19wYWdlcygpL2RtYV9tbWFw
+X3BhZ2VzKCkgdHlwZSBpbnRlcmZhY2VzIHdoaWNoIGxpbWl0cw0KPiB0aGUgdXNlIG9mIHRoZSBt
+ZW1vcnkgdG8gYSBzaW5nbGUgRE1BIGRldmljZSwgYW5kIGlzIGluY29tcGF0aWJsZSB3aXRoDQo+
+IHBpbl91c2VyX3BhZ2VzKCkuDQo+IA0KPiBUaGVzZSBsaW1pdGF0aW9ucyBhcmUgcGFydGljdWxh
+cmx5IHByb2JsZW1hdGljIGZvciB0aGUgUkRNQSBzdWJzeXN0ZW0NCj4gd2hpY2ggbWFrZXMgaGVh
+dnkgdXNlIG9mIHBpbl91c2VyX3BhZ2VzKCkgYW5kIGV4cGVjdHMgZmxleGlibGUgbWVtb3J5DQo+
+IHVzYWdlIGJldHdlZW4gbWFueSBkaWZmZXJlbnQgRE1BIGRldmljZXMuDQo+IA0KPiBUaGlzIHBh
+dGNoIHNlcmllcyBlbmFibGVzIHVzZXJzcGFjZSB0byBleHBsaWNpdGx5IHJlcXVlc3QgZGVjcnlw
+dGVkDQo+IChzaGFyZWQpIG1lbW9yeSBhbGxvY2F0aW9ucyBmcm9tIHRoZSBkbWEtYnVmIHN5c3Rl
+bSBoZWFwLg0KPiBVc2Vyc3BhY2UgY2FuIG1tYXAgdGhpcyBtZW1vcnkgYW5kIHBhc3MgdGhlIGRt
+YS1idWYgZmQgdG8gb3RoZXINCj4gZXhpc3RpbmcgaW1wb3J0ZXJzIHN1Y2ggYXMgUkRNQSBvciBE
+Uk0gZGV2aWNlcyB0byBhY2Nlc3MgdGhlDQo+IG1lbW9yeS4gVGhlIERNQSBBUEkgaXMgaW1wcm92
+ZWQgdG8gYWxsb3cgdGhlIGRtYSBoZWFwIGV4cG9ydGVyIHRvIERNQQ0KPiBtYXAgdGhlIHNoYXJl
+ZCBtZW1vcnkgdG8gZWFjaCBpbXBvcnRpbmcgZGV2aWNlLg0KDQpJIGhhdmUgYmVlbiBsb29raW5n
+IGludG8gYSBzaW1pbGFyIHByb2JsZW0gd2l0aCByZXN0cmljdGVkLWRtYVsxXSBhbmQNCnRoZSBp
+bmFiaWxpdHkgb2YgdGhlIERNQSBBUEkgdG8gcmVjb2duaXplIHRoYXQgYSBibG9jayBvZiBtZW1v
+cnkgaXMNCmFscmVhZHkgZGVjcnlwdGVkLg0KDQpIb3dldmVyLCBpbiB5b3VyIGNhc2UsIGFkZGlu
+ZyBhIG5ldyBhdHRyIOKAnERNQV9BVFRSX0NDX0RFQ1JZUFRFROKAnSB3b3Jrcw0Kd2VsbCBhcyBk
+bWEtYnVmIG93bnMgdGhlIG1lbW9yeSwgYW5kIGlzIGJvdGggcmVzcG9uc2libGUgZm9yIHRoZQ0K
+c2V0X21lbW9yeV9kZWNyeXB0ZWQoKSBhbmQgcGFzc2luZyB0aGUgRE1BIGF0dHJzLg0KDQpPbiB0
+aGUgb3RoZXIgaGFuZCwgZm9yIHJlc3RyaWN0ZWQtZG1hLCB0aGUgbWVtb3J5IGRlY3J5cHRpb24g
+aXMgZGVlcA0KaW4gdGhlIERNQSBkaXJlY3QgbWVtb3J5IGFsbG9jYXRpb24gYW5kIHRoZSBETUEg
+QVBJIGNhbGxlcnMgKGZvciBleA0KdmlydGlvIGRyaXZlcnMpIGFyZSBjbHVlbGVzcyBhYm91dCBp
+dCBhbmQgY2Fu4oCZdCBwYXNzIGFueSBhdHRycy4NCk15IHByb3Bvc2FsIHdhcyBzcGVjaWZpYyB0
+byByZXN0cmljdGVkLWRtYSBhbmQgd29u4oCZdCB3b3JrIGZvciB5b3VyIGNhc2UuDQoNCkkgYW0g
+d29uZGVyaW5nIGlmIHRoZSBrZXJuZWwgc2hvdWxkIGhhdmUgYSBtb3JlIHNvbGlkLCB1bmlmaWVk
+IG1ldGhvZA0KZm9yIGlkZW50aWZ5aW5nIGFscmVhZHktZGVjcnlwdGVkIG1lbW9yeSBpbnN0ZWFk
+LiBQZXJoYXBzIHdlIG5lZWQgYQ0Kd2F5IGZvciB0aGUgRE1BIEFQSSB0byBuYXRpdmVseSByZWNv
+Z25pemUgdGhlIGVuY3J5cHRpb24gc3RhdGUgb2YgYQ0KcGh5c2ljYWwgcGFnZSAod29ya2luZyBh
+bG9uZ3NpZGUgZm9yY2VfZG1hX3VuZW5jcnlwdGVkKGRldikpLCByYXRoZXINCnRoYW4gcmVseWlu
+ZyBvbiBjYWxsZXItcHJvdmlkZWQgYXR0cmlidXRlcz8NCg0KWzFdIGh0dHBzOi8vbG9yZS5rZXJu
+ZWwub3JnL2FsbC8yMDI2MDMwNTE3MDMzNS45NjM1NjgtMS1zbW9zdGFmYUBnb29nbGUuY29tLw0K
+DQpUaGFua3MsDQpNb3N0YWZhDQoNCg0KPiANCj4gSmlyaSBQaXJrbyAoMik6DQo+ICAgZG1hLW1h
+cHBpbmc6IGludHJvZHVjZSBETUFfQVRUUl9DQ19ERUNSWVBURUQgZm9yIHByZS1kZWNyeXB0ZWQg
+bWVtb3J5DQo+ICAgZG1hLWJ1ZjogaGVhcHM6IHN5c3RlbTogYWRkIHN5c3RlbV9jY19kZWNyeXB0
+ZWQgaGVhcCBmb3IgZXhwbGljaXRseQ0KPiAgICAgZGVjcnlwdGVkIG1lbW9yeQ0KPiANCj4gIGRy
+aXZlcnMvZG1hLWJ1Zi9oZWFwcy9zeXN0ZW1faGVhcC5jIHwgMTAzICsrKysrKysrKysrKysrKysr
+KysrKysrKysrLS0NCj4gIGluY2x1ZGUvbGludXgvZG1hLW1hcHBpbmcuaCAgICAgICAgIHwgICA2
+ICsrDQo+ICBpbmNsdWRlL3RyYWNlL2V2ZW50cy9kbWEuaCAgICAgICAgICB8ICAgMyArLQ0KPiAg
+a2VybmVsL2RtYS9kaXJlY3QuaCAgICAgICAgICAgICAgICAgfCAgMTQgKysrLQ0KPiAgNCBmaWxl
+cyBjaGFuZ2VkLCAxMTcgaW5zZXJ0aW9ucygrKSwgOSBkZWxldGlvbnMoLSkNCj4gDQo+IC0tIA0K
+PiAyLjUxLjENCj4gDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxp
+bmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxl
+YXZlQGxpc3RzLmxpbmFyby5vcmcK
