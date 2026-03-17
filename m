@@ -2,316 +2,222 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MIohLudg5mkxvgEAu9opvQ
+	id gF09MJkiuWkUsQEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:22:47 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 17 Mar 2026 10:44:57 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 33DA8431127
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:22:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2F6AC2A71B3
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 17 Mar 2026 10:44:57 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3B9BF3F82F
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:22:46 +0000 (UTC)
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
-	by lists.linaro.org (Postfix) with ESMTPS id 6F4363F76C
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 17 Mar 2026 08:26:26 +0000 (UTC)
-Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=resnulli-us.20230601.gappssmtp.com header.s=20230601 header.b=SGldMQZe;
-	spf=none (lists.linaro.org: domain of jiri@resnulli.us has no SPF policy when checking 209.85.128.51) smtp.mailfrom=jiri@resnulli.us;
-	dmarc=none
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-48534237460so59109225e9.3
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 17 Mar 2026 01:26:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=resnulli-us.20230601.gappssmtp.com; s=20230601; t=1773735985; x=1774340785; darn=lists.linaro.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=xf2CUvi8YSfRB4MbEru11u5aBtMS7TuUP2oF3ZpZ3ic=;
-        b=SGldMQZetPTRa/jj9FjPvETdvYDq0F0GEDUWzNNonlBmJF7cTGMVk/N70qGqq9xQqe
-         Fp3eIcHITaJ/VGK4oHBB4t+3OMKpBBjtfsobzHQog/jRDUdJbrTeA23U/YbAm/lx/sCQ
-         0DmCxt4prVrelPF7lbS/7GauufPn5pLpbBKl/XrWfTPue3BzvGkgIMISekADJvT0/1hX
-         YT0dgFH4xktLGaWeVr+f7s1xnTnz5gNRc0Lh9xzjltVvxkqXieP3PgxrpNcoKfX8mJGw
-         U3OKRHtj+I5+fbhxtmr2ypSJbalGaQnxyuLO8XUyF0sMjjWnsff6cDKPMMEMoonj8FSr
-         uoQg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773735985; x=1774340785;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=xf2CUvi8YSfRB4MbEru11u5aBtMS7TuUP2oF3ZpZ3ic=;
-        b=BLu51KPcTod4gzmE44JtmCVj6QqAP2ILvjLnUJfUukOBAUBbtxJu17vm+yTLVGZqCI
-         3UZczMClXM0aUhZ5CVZdsCYCnm/ouZBxQfxg6bt9bNrG8SrFXOJzhYwIgj4BJ7u30Zgd
-         UPAfFoVC3R019M78ruEEmIejK5rLC/fWmWc/oM8KWNzdRtsG0JeCJuJFpbsgLmrOE5w6
-         YnukBOBw1eFGQBLqQWk0bkPf6Rg5DHjcAxJ3f1vHfUKI/3gh7KY6O+VD0vFngMU8CK4V
-         uAtg3yazBV7u7ryP37Pnr+ZZqAMG9qu5PmBXnqSXEZ/zLvR1983U85aOixKL987+7j/s
-         CWWQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXXJv82hCQBulNHKt4tyTBRcn+H0LPfeJazJ94gkKr6jZcJ5umyStr9h8mhrQPjVQyYOhSIQY4GXma4JVTP@lists.linaro.org
-X-Gm-Message-State: AOJu0Yz6B0l+R8AzDsPDTwzDD37oqtZqmyD3v6QxLxkOsdBLWOcO5oPz
-	+o0JZpIs062W2G7qtDB3l/WFBF5lB/o51g5UqwXs9bYxI9lNXyrqitPYx+lTy2UuWQk=
-X-Gm-Gg: ATEYQzzSZhy1OKJwcjWeTO8d2sVbCNLl/hPQ05rmpommcnAHikHh6F8B9wZ3+SBuwfl
-	coGVOm7kmQQLOj64bcxZROkXpcXCPcSw1Z/z43iTZpO/YKmv5+FqGZNbtkJJ66fbtFd7QaQhh5e
-	94EPU78zSY95Pb2GX07fzDyQNffZ2VJ8Gw5v1nDRfCFDYCtt8VcncJL3987j8qiwdMocP5cU1g7
-	ot1RBeKZCDRCKbew8b0pUpbqfRNkDeW6mUTMNf2I6okgTOfMbCSLEz0FKbXW4CZvnZZzMbmMwFJ
-	aFUCERXpsyzL9aC4w6XijwNd8KPya0LlpY6/9iGBp8JgYsFn0no2/oRvtRpxZbBYkVt+iBdAANS
-	vLpPztcJWl6b7VEhLMgq4ABxrHpQBF+CHdRiM7i+nlNpCQFtGPMTHg1bBwXMncUT+g6QVxUq+Zi
-	pOZkeUxkWfPGKAqbvycqRRdTSHD3FeSAF9WjiVTpkWph0=
-X-Received: by 2002:a05:600c:c8f:b0:485:3c05:24dc with SMTP id 5b1f17b1804b1-48556710c02mr263331735e9.33.1773735985061;
-        Tue, 17 Mar 2026 01:26:25 -0700 (PDT)
-Received: from FV6GYCPJ69 ([2001:1ae9:6084:ab00:81f8:c391:4972:647b])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4856ea97e8esm52842845e9.5.2026.03.17.01.26.23
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 17 Mar 2026 01:26:24 -0700 (PDT)
-Date: Tue, 17 Mar 2026 09:26:21 +0100
-From: Jiri Pirko <jiri@resnulli.us>
-To: Robin Murphy <robin.murphy@arm.com>
-Message-ID: <lufy3ppgiy7637iravgzabajj67chmqvg22qc3fd2yqe2p33ws@b54vibhehth2>
-References: <20260316125857.617836-1-jiri@resnulli.us>
- <20260316125857.617836-2-jiri@resnulli.us>
- <15fcfa5e-c4b9-4b56-8f84-20dd5f66d643@arm.com>
+	by lists.linaro.org (Postfix) with ESMTP id CC3ED3F7EC
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 17 Mar 2026 09:44:55 +0000 (UTC)
+Received: from lists.linaro.org (localhost [127.0.0.1])
+	by lists.linaro.org (Postfix) with ESMTP id ACBB83F7EC
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 17 Mar 2026 09:44:16 +0000 (UTC)
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <15fcfa5e-c4b9-4b56-8f84-20dd5f66d643@arm.com>
-X-Spamd-Bar: --
-X-MailFrom: jiri@resnulli.us
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: LHKYEK4B7FMB3A3FWXYH4QJLLMPSVEIG
-X-Message-ID-Hash: LHKYEK4B7FMB3A3FWXYH4QJLLMPSVEIG
-X-Mailman-Approved-At: Mon, 20 Apr 2026 17:21:51 +0000
-CC: dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, iommu@lists.linux.dev, linux-media@vger.kernel.org, sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, Brian.Starkey@arm.com, jstultz@google.com, tjmercier@google.com, christian.koenig@amd.com, jgg@ziepe.ca, leon@kernel.org, sean.anderson@linux.dev, ptesarik@suse.com, catalin.marinas@arm.com, aneesh.kumar@kernel.org, suzuki.poulose@arm.com, steven.price@arm.com, thomas.lendacky@amd.com, john.allen@amd.com, ashish.kalra@amd.com, suravee.suthikulpanit@amd.com, linux-coco@lists.linux.dev
+From: luckaswilli7@gmail.com
+To: linaro-mm-sig@lists.linaro.org
+Date: Tue, 17 Mar 2026 09:44:16 -0000
+Message-ID: <177374065669.3771025.2347150077467989858@lists.linaro.org>
+User-Agent: HyperKitty on http://lists.linaro.org/
+Message-ID-Hash: TMK55GL4RKCZNID7E2WTA3IML5AETOBI
+X-Message-ID-Hash: TMK55GL4RKCZNID7E2WTA3IML5AETOBI
+X-MailFrom: luckaswilli7@gmail.com
+X-Mailman-Rule-Hits: member-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v4 1/2] dma-mapping: introduce DMA_ATTR_CC_DECRYPTED for pre-decrypted memory
+Subject: [Linaro-mm-sig] =?utf-8?q?Buy_real_and_fake_Passports_=28WhatsApp=3A_+1_=28615=29-314-6286=29_renew_passports_online=2C_apply_for_legal_passports=2C_buy_fake_passports=2C_Buy_US_passports=2C_buy_Chinese_passports=2C_buy_Canadian_passports_=28Telegram=3A_=40Globaldocs26=29_buy_passports_and_visa=2C_buy_passports=2C_buy_passport_citizenship=2C_visas_and_passports_passport_and_visa_are_same=2C_passport_and_visa_apply=2C_is_passports_and_visas_a_legit_website=2C_difference_between_passports_and_visas_do_i_need_a_visa_with_my_passport=2C_how_to_apply_for_passport_and_passport_card=2C_is_passports_and_visas_legit_Buy_counterfeit_currency=2E_Buy_US_dollars_=28USD=29=2C_Chinese_yuan_=28RMB=29=2C_buy_Canadian_dollars_=28CAD=29=2C_Chinese_yuan_=28CNY=29=2C_Hong_Kong_dollars_=28HKD=29=2C_Malaysian_ringgit_=28MYR=29=2C_Australian_dollars_=28AUD=29=2C_buy_euros_=28EUR=29_=28WhatsApp=EF=BC=9A+1=28615=29-314-6286=29=2E_Buy_high-quality=2C_indistinguishable_counterfeit_banknotes=2E_We_only_
+ offer_high-quality_counterfeit_currency=2E_We_provide_perfectly_replicated_counterfeit_banknotes_with_holograms_and_all_available_security_features=2E_Indistinguishable_to_the_naked_eye_and_touch=2E_100=25_indistinguishable_counterfeit_banknotes=2C_printed_on_80=25_cotton_and_20=25_cellulose_paper=2E_Buy_a_US_student_visa=2C_buy_TCF=2C_TEF=2C_TOEFL=2C_IELTS=2C_TOEIC_test_scores_=28Email=3A_guanyuguohai=40gmail=2Ecom=29=2C_buy_Canadian_citizenship=2C_buy_US_citizenship=2C_buy_Canadian_TCF=2C_TEF=2C_CELPIP=2C_CELTA_certificates=2C_how_to_immigrate_to_Canada=3F_Buy_a_driver=E2=80=99s_license=2C_ID_card=2C_US_green_card_=28Telegram=EF=BC=9A=40Buylegitpassports1=29=2C_Social_Security_Number_=28SSN=29=2C_work_permit=2C_new_ID_card=2C_National_Insurance_Card=2C_NIN=2C_SIN=2C_marriage_certificate=2C_birth_certificate_Want_to_start_a_new_chapter_in_your_life_with_a_new_identity=3F_Protect_your_privacy=2C_build_a_new_credit_history=2C_bypass_criminal_record_checks=2C_and_regain_your_freedom=3
+ F_Apply_for_a_new_identity_now!_=28WhatsApp=EF=BC=9A+1=28615=29-314-6286=29=2E_You_can_contact_us_using_the_following_details_WhatsApp=3A_+1_=28615=29-314-6286_Telegram=3A_=40Globaldocs26_Email=3A_Karlvonlinne74=40gmail=2Ecom_Website=3A_https=3A//flypassports=2Ecom/_Website=3A_https=3A//buylegitpassports=2Ecom/_Telegram=3A_https=3A//t=2Eme/globaldocs2_buy_passports_and_visa=2C_buy_passport_canada=2C_passports_that_can_be_bought=2C_buy_visa_gift_card_with_paypal_canada=2C_buy_canadian_passport=2C_passport_and_visa_are_same=2C_passport_and_visa_apply=2C_is_passports_and_visas_a_legit_website=2C_difference_between_passports_and_visas=2C_do_i_need_a_visa_with_my_passport=2C_how_to_apply_for_passport_and_passport_card=2C_passports_visa_and_more=2C_can_you_buy_an_american_passport=2C_buy_a_pasport=2C_buying_american_passport=2C_buy_a_paasport=2C_buyable_passports=2C_pbuy_passport=2C_passport_and_visa_check=2C_passport_and_visa_card=2C_passports_and_visas_coupon_code=2C_can_i_transfer_cana
+ da_visa_to_new_passport=2C_passports_and_visas=2Ecom_legit=2C_can_you_buy_a_canadian_passport=2C_passport_and_visa_difference=2C_passport_and_visa_difference_in_hindi=2C_passport_and_visa_department_of_ra=2C_passport_and_visa_difference_in_marathi=2C_passports_and_visas_denver=2C_passport_and_visa_documents=2C_passport_and_visa_dubai=2C_list_of_passports_by_visa_free_passport_and_visa_express=2C_passport_and_visa_emirates=2C_passport_and_visa_express_reviews=2C_buy_visa_e_gift_card_canada=2C_buy_passports_online=2C_can_you_buy_a_visa_online=2C_passport_and_visa_free_countries_for_india=2C_passport_and_visa_free_countries=2C_passport_and_visa_for_uk=2C_buy_passports=2C_buy_american_passport=2C_passport_and_visa_holder=2C_passport_and_visa_how_much=2C_difference_between_passport_and_passport_card_ireland=2C_buy_passports_and_citizenship=2C_passport_and_visa_id_photo_maker=2C_passport_and_visa_is_the_same=2C_passport_and_visa_index=2C_passports_i_can_buy=2C_passport_and_visa_jobs=2C_pa
+ ssports_to_buy=2C_passports_you_can_buy=2C_buying_passports=2C_passport_and_visa_kenya=2C_how_to_get_passport_card_if_i_already_have_passport=2C_what_passport_can_i_buy=2C_passports_and_visas_llc=2C_passport_and_visa_link=2C_passports_and_visas_legit=2C_passport_and_visa_logo=2C_passport_to_buy=2C_passport_and_visa_meaning=2C_passport_and_visa_manual_2006_pdf=2C_passport_and_visa_me_antar=2C_passport_and_visa_mein_kya_antar_hai=2C_passport_and_visa_me_difference_in_hindi=2C_passport_and_visa_me_difference=2C_passport_and_visa_mein_antar=2C_passport_and_visa_me_antar_in_hindi=2C_can_i_transfer_my_visa_to_a_new=2C_passport=2C_buy_your_passport=2C_passport_and_visa_name_different=2C_passport_and_visa_number=2C_how_to_buy_a_new_passport=2C_do_i_need_to_transfer_visa_to_new_passport=2C_passport_and_visa_office=2C_passport_and_visa_org=2C_passport_and_visa_on_emirates=2C_passport_and_visa_photo_photogov=2C_passport_and_visa_price=2C_passport_and_visa_photo=2C_passport_and_visa_price_in_in
+ dia=2C_passport_and_visa_photo_size=2C_passport_and_visa_photo_requirements=2C_passport_and_visa_photo_studio_near_me=2C_passport_and_visa_page=2C_passport_and_visa_qatar_airways=2C_passport_and_visa_quartus_global_services=2C_passport_and_visa_quartus_global_services_missouri_city=2C_passport_and_visa_questions=2C_is_expedited_passports_and_visas_legit=2C_buy_quebec_passport=2E_passport_and_visa_requirements=2C_passports_and_visas_reviews=2C_passport_and_visa_requirements_for_thailand=2C_passport_and_visa_renewal_passport_and_visa_requirements_for_spain=2C_passport_and_visa_requirements_for_dubai=2C_passport_and_visa_requirements_for_italy=2C_passport_and_visa_requirements_for_uk=2C_passport_and_visa_requirements_for_singapore=2C_passport_and_visa_requirements_for_australia=2C_buying_passport_other_country_passport_and_visa_services=2C_passport_and_visa_services_near_me=2C_passport_and_visa_solutions=2C_passport_and_visa_same=2C_passport_and_visa_status_passport_and_visa_services_c
+ hicago=2C_passport_and_visa_stamp=2C_are_visas_and_passports_the_same_thing=2C_passport_and_visa_the_same_passport_and_visa_the_same_thing=2C_passports_and_visas_unlimited=2C_passport_and_visa_uk=2C_us_passport_visa=2C_passport_and_visa_what_is_the_difference_buy_a_second_passport=2C_passport_that_you_can_buy=2C_buy_an_american_passport=2C_buy_a_passport=2C_how_much_to_buy_a_canadian_passport_https=3A//flypassports=2Ecom/service-category/passport/_https=3A//flypassports=2Ecom/service/germany-driving-licence/=23_https=3A//flypassports=2Ecom/services/_https=3A//flypassports=2Ecom/faq/_https=3A//flypassports=2Ecom/about-us/_https=3A//flypassports=2Ecom/contact-us/_https=3A//flypassports=2Ecom/service/canadian-passport/_https=3A//flypassports=2Ecom/service/bulgarian-drivers-license/_https=3A//flypassports=2Ecom/service/chinese-passport-renewal/_https=3A//flypassports=2Ecom/service/illinois-drivers-license/_https=3A//flypassports=2Ecom/service/usa-passport/_https=3A//flypassports=2Ecom/s
+ ervice/austrian-drivers-license/_https=3A//flypassports=2Ecom/service/netherlands-passport-application/_https=3A//flypassports=2Ecom/service/vermont-drivers-license/_https=3A//flypassports=2Ecom/service/korean-passport-renewal/_https=3A//flypassports=2Ecom/service/germany-driving-licence/_https=3A//buylegitpassports=2Ecom/_https=3A//buylegitpassports=2Ecom/apply/_https=3A//buylegitpassports=2Ecom/buy-fake-diploma/_https=3A//buylegitpassports=2Ecom/social-security-card-generator/_https=3A//buylegitpassports=2Ecom/how-do-we-get-a-passport/_https=3A//buylegitpassports=2Ecom/real-and-fake-passport/_https=3A//buylegitpassports=2Ecom/buy-fake-chinese-passport/_https=3A//buylegitpassports=2Ecom/buy-canadian-passport-online/_https=3A//buylegitpassports=2Ecom/croatia-driven-license/_https=3A//buylegitpassports=2Ecom/buy-brazil-driver-license/_https=3A//buylegitpassports=2Ecom/buy-hungary-driver-license/_https=3A//buylegitpassports=2Ecom/buy-fake-social-security-number-card/_https=3A//buylegi
+ tpassports=2Ecom/how-can-i-get-california-drivers-license/_WhatsApp_number=3A_+1_=28615=29-314-6286_Telegram=3A_=40Globaldocs26_Email=3A_Karlvonlinne74=40gmail=2Ecom_Website=3A_https=3A//flypassports=2Ecom/_Website=3A_https=3A//buylegitpassports=2Ecom/_Telegram=3A_https=3A//t=2Eme/globaldocs2?=
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LHKYEK4B7FMB3A3FWXYH4QJLLMPSVEIG/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TMK55GL4RKCZNID7E2WTA3IML5AETOBI/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [0.99 / 15.00];
-	DATE_IN_PAST(1.00)[824];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+Content-Transfer-Encoding: base64
+X-Spamd-Result: default: False [9.69 / 15.00];
+	SPAM_FLAG(5.00)[];
+	LONG_SUBJ(3.00)[7595];
+	URL_IN_SUBJECT(1.00)[flypassports.com];
+	MID_RHS_MATCH_TO(1.00)[];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MAILLIST(-0.20)[mailman];
+	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	DMARC_NA(0.00)[resnulli.us];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[24];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	FROM_NEQ_ENVFROM(0.00)[jiri@resnulli.us,linaro-mm-sig-bounces@lists.linaro.org];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+];
+	SUBJECT_HAS_EXCLAIM(0.00)[];
+	RCPT_COUNT_ONE(0.00)[1];
+	GREYLIST(0.00)[pass,meta];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:mid];
+	ARC_NA(0.00)[];
+	TO_DN_NONE(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_NEQ_ENVFROM(0.00)[luckaswilli7@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	NEURAL_SPAM(0.00)[0.576];
+	R_DKIM_NA(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	FROM_NO_DN(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	NEURAL_SPAM(0.00)[0.151];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,nvidia.com:email,arm.com:email]
-X-Rspamd-Queue-Id: 33DA8431127
-X-Rspamd-Action: no action
+	SUBJECT_HAS_QUESTION(0.00)[]
+X-Rspamd-Queue-Id: 2F6AC2A71B3
+X-Rspamd-Action: add header
 X-Rspamd-Server: lfdr
+X-Spam: Yes
 
-Mon, Mar 16, 2026 at 07:25:55PM +0100, robin.murphy@arm.com wrote:
->On 2026-03-16 12:58 pm, Jiri Pirko wrote:
->> From: Jiri Pirko <jiri@nvidia.com>
->> 
->> Current CC designs don't place a vIOMMU in front of untrusted devices.
->> Instead, the DMA API forces all untrusted device DMA through swiotlb
->> bounce buffers (is_swiotlb_force_bounce()) which copies data into
->> decrypted memory on behalf of the device.
->> 
->> When a caller has already arranged for the memory to be decrypted
->> via set_memory_decrypted(), the DMA API needs to know so it can map
->> directly using the unencrypted physical address rather than bounce
->> buffering. Following the pattern of DMA_ATTR_MMIO, add
->> DMA_ATTR_CC_DECRYPTED for this purpose. Like the MMIO case, only the
->> caller knows what kind of memory it has and must inform the DMA API
->> for it to work correctly.
->
->Echoing Jason's point, if the intent of this is to indicate shared memory,
->please call it DMA_ATTR_CC_SHARED. Yes, some of the existing APIs are badly
->named because they conflated intent with implementation details; that is no
->reason to keep wilfully making the same mistake.
->
->At least with Arm CCA, the architecture enforces *confidentiality* pretty
->much orthogonally to encryption - if your threat model excludes physical
->attacks against DRAM, you can still have Realms isolated from each other (and
->of course other execution states) without even implementing the memory
->encryption feature; conversely if you do have it, then even all the
->shared/host memory may still be physically encrypted, it just has its own
->context (key) distinct from the Realm ones. Similarly, while it's not a
->"true" CoCo environment, pKVM has a similar notion of shared vs. private
->which can benefit from piggy-backing off much of the CoCo infrastructure in
->places like the DMA layer, but has nothing whatsoever to do with actual
->encryption.
->
->Furthermore, "shared" is just shorter and more readable, even before I invoke
->the previous discussion of why it should be "unencrypted" rather than
->"decrypted" anyway ;)
-
-Okay, fair points. I'll rename it to shared for "v5". Thanks!
-
-
->
->> Signed-off-by: Jiri Pirko <jiri@nvidia.com>
->> ---
->> v3->v4:
->> - added some sanity checks to dma_map_phys and dma_unmap_phys
->> - enhanced documentation of DMA_ATTR_CC_DECRYPTED attr
->> v1->v2:
->> - rebased on top of recent dma-mapping-fixes
->> ---
->>   include/linux/dma-mapping.h | 10 ++++++++++
->>   include/trace/events/dma.h  |  3 ++-
->>   kernel/dma/direct.h         | 14 +++++++++++---
->>   kernel/dma/mapping.c        | 13 +++++++++++--
->>   4 files changed, 34 insertions(+), 6 deletions(-)
->> 
->> diff --git a/include/linux/dma-mapping.h b/include/linux/dma-mapping.h
->> index 29973baa0581..476964d2b22f 100644
->> --- a/include/linux/dma-mapping.h
->> +++ b/include/linux/dma-mapping.h
->> @@ -85,6 +85,16 @@
->>    * a cacheline must have this attribute for this to be considered safe.
->>    */
->>   #define DMA_ATTR_CPU_CACHE_CLEAN	(1UL << 11)
->> +/*
->> + * DMA_ATTR_CC_DECRYPTED: Indicates the DMA mapping is decrypted (shared) for
->> + * confidential computing guests. For normal system memory the caller must have
->> + * called set_memory_decrypted(), and pgprot_decrypted must be used when
->> + * creating CPU PTEs for the mapping. The same decrypted semantic may be passed
->> + * to the vIOMMU when it sets up the IOPTE. For MMIO use together with
->
->That being "the vIOMMU" that you said doesn't exist, and which is explicitly
->not supported?...
-
-Yeah, I wanted to draw the full picture. I can put a not like "(when it
-is going to be introduced)" or something like that to be clear.
-
-
->
->> + * DMA_ATTR_MMIO to indicate decrypted MMIO. Unless DMA_ATTR_MMIO is provided
->> + * a struct page is required.
->> + */
->> +#define DMA_ATTR_CC_DECRYPTED	(1UL << 12)
->>   /*
->>    * A dma_addr_t can hold any valid DMA or bus address for the platform.  It can
->> diff --git a/include/trace/events/dma.h b/include/trace/events/dma.h
->> index 33e99e792f1a..b8082d5177c4 100644
->> --- a/include/trace/events/dma.h
->> +++ b/include/trace/events/dma.h
->> @@ -32,7 +32,8 @@ TRACE_DEFINE_ENUM(DMA_NONE);
->>   		{ DMA_ATTR_ALLOC_SINGLE_PAGES, "ALLOC_SINGLE_PAGES" }, \
->>   		{ DMA_ATTR_NO_WARN, "NO_WARN" }, \
->>   		{ DMA_ATTR_PRIVILEGED, "PRIVILEGED" }, \
->> -		{ DMA_ATTR_MMIO, "MMIO" })
->> +		{ DMA_ATTR_MMIO, "MMIO" }, \
->> +		{ DMA_ATTR_CC_DECRYPTED, "CC_DECRYPTED" })
->>   DECLARE_EVENT_CLASS(dma_map,
->>   	TP_PROTO(struct device *dev, phys_addr_t phys_addr, dma_addr_t dma_addr,
->> diff --git a/kernel/dma/direct.h b/kernel/dma/direct.h
->> index e89f175e9c2d..c047a9d0fda3 100644
->> --- a/kernel/dma/direct.h
->> +++ b/kernel/dma/direct.h
->> @@ -84,16 +84,24 @@ static inline dma_addr_t dma_direct_map_phys(struct device *dev,
->>   	dma_addr_t dma_addr;
->>   	if (is_swiotlb_force_bounce(dev)) {
->> -		if (attrs & DMA_ATTR_MMIO)
->> -			return DMA_MAPPING_ERROR;
->> +		if (!(attrs & DMA_ATTR_CC_DECRYPTED)) {
->> +			if (attrs & DMA_ATTR_MMIO)
->> +				return DMA_MAPPING_ERROR;
->> -		return swiotlb_map(dev, phys, size, dir, attrs);
->> +			return swiotlb_map(dev, phys, size, dir, attrs);
->> +		}
->> +	} else if (attrs & DMA_ATTR_CC_DECRYPTED) {
->> +		return DMA_MAPPING_ERROR;
->>   	}
->>   	if (attrs & DMA_ATTR_MMIO) {
->>   		dma_addr = phys;
->>   		if (unlikely(!dma_capable(dev, dma_addr, size, false)))
->>   			goto err_overflow;
->> +	} else if (attrs & DMA_ATTR_CC_DECRYPTED) {
->> +		dma_addr = phys_to_dma_unencrypted(dev, phys);
->> +		if (unlikely(!dma_capable(dev, dma_addr, size, false)))
->> +			goto err_overflow;
->>   	} else {
->>   		dma_addr = phys_to_dma(dev, phys);
->>   		if (unlikely(!dma_capable(dev, dma_addr, size, true)) ||
->> diff --git a/kernel/dma/mapping.c b/kernel/dma/mapping.c
->> index 3928a509c44c..abb0c88b188b 100644
->> --- a/kernel/dma/mapping.c
->> +++ b/kernel/dma/mapping.c
->> @@ -157,6 +157,7 @@ dma_addr_t dma_map_phys(struct device *dev, phys_addr_t phys, size_t size,
->>   {
->>   	const struct dma_map_ops *ops = get_dma_ops(dev);
->>   	bool is_mmio = attrs & DMA_ATTR_MMIO;
->> +	bool is_cc_decrypted = attrs & DMA_ATTR_CC_DECRYPTED;
->>   	dma_addr_t addr = DMA_MAPPING_ERROR;
->>   	BUG_ON(!valid_dma_direction(dir));
->> @@ -165,8 +166,11 @@ dma_addr_t dma_map_phys(struct device *dev, phys_addr_t phys, size_t size,
->>   		return DMA_MAPPING_ERROR;
->>   	if (dma_map_direct(dev, ops) ||
->> -	    (!is_mmio && arch_dma_map_phys_direct(dev, phys + size)))
->> +	    (!is_mmio && !is_cc_decrypted &&
->> +	     arch_dma_map_phys_direct(dev, phys + size)))
->>   		addr = dma_direct_map_phys(dev, phys, size, dir, attrs);
->> +	else if (is_cc_decrypted)
->> +		return DMA_MAPPING_ERROR;
->>   	else if (use_dma_iommu(dev))
->
->...although, why *shouldn't* this be allowed with a vIOMMU? (Especially given
->that a vIOMMU for untrusted devices can be emulated by the host VMM without
->the CoCo hypervisor having to care at all - again, at least on Arm and other
->architectures where IOMMUs are regular driver model devices)
-
-Well, when iommu path is able to consume the attr, this restriction
-should be lifted. This is basically a sanity check for the
-dma_map_phys() caller.
-
-
->
->>   		addr = iommu_dma_map_phys(dev, phys, size, dir, attrs);
->>   	else if (ops->map_phys)
->
->Or indeed any other non-direct ops? Obviously all the legacy architectures
->like Alpha are never going to see this or care, but I could imagine Xen and
->possibly PowerPC might.
-
-Same here.
-
-
->
->Thanks,
->Robin.
->
->> @@ -203,11 +207,16 @@ void dma_unmap_phys(struct device *dev, dma_addr_t addr, size_t size,
->>   {
->>   	const struct dma_map_ops *ops = get_dma_ops(dev);
->>   	bool is_mmio = attrs & DMA_ATTR_MMIO;
->> +	bool is_cc_decrypted = attrs & DMA_ATTR_CC_DECRYPTED;
->>   	BUG_ON(!valid_dma_direction(dir));
->> +
->>   	if (dma_map_direct(dev, ops) ||
->> -	    (!is_mmio && arch_dma_unmap_phys_direct(dev, addr + size)))
->> +	    (!is_mmio && !is_cc_decrypted &&
->> +	     arch_dma_unmap_phys_direct(dev, addr + size)))
->>   		dma_direct_unmap_phys(dev, addr, size, dir, attrs);
->> +	else if (is_cc_decrypted)
->> +		return;
->>   	else if (use_dma_iommu(dev))
->>   		iommu_dma_unmap_phys(dev, addr, size, dir, attrs);
->>   	else if (ops->unmap_phys)
->
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+QnV5IHJlYWwgYW5kIGZha2UgUGFzc3BvcnRzIChXaGF0c0FwcDogKzEgKDYxNSktMzE0LTYyODYp
+IHJlbmV3IHBhc3Nwb3J0cyBvbmxpbmUsIGFwcGx5IGZvciBsZWdhbCBwYXNzcG9ydHMsIGJ1eSBm
+YWtlIHBhc3Nwb3J0cywgQnV5IFVTIHBhc3Nwb3J0cywgYnV5IENoaW5lc2UgcGFzc3BvcnRzLCBi
+dXkgQ2FuYWRpYW4gcGFzc3BvcnRzIChUZWxlZ3JhbTogQEdsb2JhbGRvY3MyNikNCmJ1eSBwYXNz
+cG9ydHMgYW5kIHZpc2EsIGJ1eSBwYXNzcG9ydHMsIGJ1eSBwYXNzcG9ydCBjaXRpemVuc2hpcCwg
+dmlzYXMgYW5kIHBhc3Nwb3J0cw0KcGFzc3BvcnQgYW5kIHZpc2EgYXJlIHNhbWUsIHBhc3Nwb3J0
+IGFuZCB2aXNhIGFwcGx5LCBpcyBwYXNzcG9ydHMgYW5kIHZpc2FzIGEgbGVnaXQgd2Vic2l0ZSwg
+ZGlmZmVyZW5jZSBiZXR3ZWVuIHBhc3Nwb3J0cyBhbmQgdmlzYXMNCmRvIGkgbmVlZCBhIHZpc2Eg
+d2l0aCBteSBwYXNzcG9ydCwgaG93IHRvIGFwcGx5IGZvciBwYXNzcG9ydCBhbmQgcGFzc3BvcnQg
+Y2FyZCwgaXMgcGFzc3BvcnRzIGFuZCB2aXNhcyBsZWdpdA0KDQpCdXkgY291bnRlcmZlaXQgY3Vy
+cmVuY3kuIEJ1eSBVUyBkb2xsYXJzIChVU0QpLCBDaGluZXNlIHl1YW4gKFJNQiksIGJ1eSBDYW5h
+ZGlhbiBkb2xsYXJzIChDQUQpLCBDaGluZXNlIHl1YW4gKENOWSksIEhvbmcgS29uZyBkb2xsYXJz
+IChIS0QpLCBNYWxheXNpYW4gcmluZ2dpdCAoTVlSKSwgQXVzdHJhbGlhbiBkb2xsYXJzIChBVUQp
+LCBidXkgZXVyb3MgKEVVUikgKFdoYXRzQXBw77yaKzEoNjE1KS0zMTQtNjI4NikuIEJ1eSBoaWdo
+LXF1YWxpdHksIGluZGlzdGluZ3Vpc2hhYmxlIGNvdW50ZXJmZWl0IGJhbmtub3Rlcy4NCg0KV2Ug
+b25seSBvZmZlciBoaWdoLXF1YWxpdHkgY291bnRlcmZlaXQgY3VycmVuY3kuIFdlIHByb3ZpZGUg
+cGVyZmVjdGx5IHJlcGxpY2F0ZWQgY291bnRlcmZlaXQgYmFua25vdGVzIHdpdGggaG9sb2dyYW1z
+IGFuZCBhbGwgYXZhaWxhYmxlIHNlY3VyaXR5IGZlYXR1cmVzLiBJbmRpc3Rpbmd1aXNoYWJsZSB0
+byB0aGUgbmFrZWQgZXllIGFuZCB0b3VjaC4gMTAwJSBpbmRpc3Rpbmd1aXNoYWJsZSBjb3VudGVy
+ZmVpdCBiYW5rbm90ZXMsIHByaW50ZWQgb24gODAlIGNvdHRvbiBhbmQgMjAlIGNlbGx1bG9zZSBw
+YXBlci4NCg0KQnV5IGEgVVMgc3R1ZGVudCB2aXNhLCBidXkgVENGLCBURUYsIFRPRUZMLCBJRUxU
+UywgVE9FSUMgdGVzdCBzY29yZXMgKEVtYWlsOiBndWFueXVndW9oYWlAZ21haWwuY29tKSwgYnV5
+IENhbmFkaWFuIGNpdGl6ZW5zaGlwLCBidXkgVVMgY2l0aXplbnNoaXAsIGJ1eSBDYW5hZGlhbiBU
+Q0YsIFRFRiwgQ0VMUElQLCBDRUxUQSBjZXJ0aWZpY2F0ZXMsIGhvdyB0byBpbW1pZ3JhdGUgdG8g
+Q2FuYWRhPyBCdXkgYSBkcml2ZXLigJlzIGxpY2Vuc2UsIElEIGNhcmQsIFVTIGdyZWVuIGNhcmQg
+KFRlbGVncmFt77yaQEJ1eWxlZ2l0cGFzc3BvcnRzMSksIFNvY2lhbCBTZWN1cml0eSBOdW1iZXIg
+KFNTTiksIHdvcmsgcGVybWl0LCBuZXcgSUQgY2FyZCwgTmF0aW9uYWwgSW5zdXJhbmNlIENhcmQs
+IE5JTiwgU0lOLCBtYXJyaWFnZSBjZXJ0aWZpY2F0ZSwgYmlydGggY2VydGlmaWNhdGUNCg0KV2Fu
+dCB0byBzdGFydCBhIG5ldyBjaGFwdGVyIGluIHlvdXIgbGlmZSB3aXRoIGEgbmV3IGlkZW50aXR5
+PyBQcm90ZWN0IHlvdXIgcHJpdmFjeSwgYnVpbGQgYSBuZXcgY3JlZGl0IGhpc3RvcnksIGJ5cGFz
+cyBjcmltaW5hbCByZWNvcmQgY2hlY2tzLCBhbmQgcmVnYWluIHlvdXIgZnJlZWRvbT8gQXBwbHkg
+Zm9yIGEgbmV3IGlkZW50aXR5IG5vdyEgKFdoYXRzQXBw77yaKzEoNjE1KS0zMTQtNjI4NikuDQoN
+CllvdSBjYW4gY29udGFjdCB1cyB1c2luZyB0aGUgZm9sbG93aW5nIGRldGFpbHMNCg0KV2hhdHNB
+cHA6ICsxICg2MTUpLTMxNC02Mjg2DQpUZWxlZ3JhbTogQEdsb2JhbGRvY3MyNg0KRW1haWw6IEth
+cmx2b25saW5uZTc0QGdtYWlsLmNvbQ0KV2Vic2l0ZTogaHR0cHM6Ly9mbHlwYXNzcG9ydHMuY29t
+Lw0KV2Vic2l0ZTogaHR0cHM6Ly9idXlsZWdpdHBhc3Nwb3J0cy5jb20vDQpUZWxlZ3JhbTogaHR0
+cHM6Ly90Lm1lL2dsb2JhbGRvY3MyDQoNCmJ1eSBwYXNzcG9ydHMgYW5kIHZpc2EsIGJ1eSBwYXNz
+cG9ydCBjYW5hZGEsIHBhc3Nwb3J0cyB0aGF0IGNhbiBiZSBib3VnaHQsIGJ1eSB2aXNhIGdpZnQg
+Y2FyZCB3aXRoIHBheXBhbCBjYW5hZGEsIGJ1eSBjYW5hZGlhbiBwYXNzcG9ydCwgcGFzc3BvcnQg
+YW5kIHZpc2EgYXJlIHNhbWUsIHBhc3Nwb3J0IGFuZCB2aXNhIGFwcGx5LCBpcyBwYXNzcG9ydHMg
+YW5kIHZpc2FzIGEgbGVnaXQgd2Vic2l0ZSwgZGlmZmVyZW5jZSBiZXR3ZWVuIHBhc3Nwb3J0cyBh
+bmQgdmlzYXMsIGRvIGkgbmVlZCBhIHZpc2Egd2l0aCBteSBwYXNzcG9ydCwgaG93IHRvIGFwcGx5
+IGZvciBwYXNzcG9ydCBhbmQgcGFzc3BvcnQgY2FyZCwgcGFzc3BvcnRzIHZpc2EgYW5kIG1vcmUs
+IGNhbiB5b3UgYnV5IGFuIGFtZXJpY2FuIHBhc3Nwb3J0LCBidXkgYSBwYXNwb3J0LCBidXlpbmcg
+YW1lcmljYW4gcGFzc3BvcnQsIGJ1eSBhIHBhYXNwb3J0LCBidXlhYmxlIHBhc3Nwb3J0cywgcGJ1
+eSBwYXNzcG9ydCwgcGFzc3BvcnQgYW5kIHZpc2EgY2hlY2ssIHBhc3Nwb3J0IGFuZCB2aXNhIGNh
+cmQsIHBhc3Nwb3J0cyBhbmQgdmlzYXMgY291cG9uIGNvZGUsIGNhbiBpIHRyYW5zZmVyIGNhbmFk
+YSB2aXNhIHRvIG5ldyBwYXNzcG9ydCwgcGFzc3BvcnRzIGFuZCB2aXNhcy5jb20gbGVnaXQsIGNh
+biB5b3UgYnV5IGEgY2FuYWRpYW4gcGFzc3BvcnQsIHBhc3Nwb3J0IGFuZCB2aXNhIGRpZmZlcmVu
+Y2UsIHBhc3Nwb3J0IGFuZCB2aXNhIGRpZmZlcmVuY2UgaW4gaGluZGksIHBhc3Nwb3J0IGFuZCB2
+aXNhIGRlcGFydG1lbnQgb2YgcmEsIHBhc3Nwb3J0IGFuZCB2aXNhIGRpZmZlcmVuY2UgaW4gbWFy
+YXRoaSwgcGFzc3BvcnRzIGFuZCB2aXNhcyBkZW52ZXIsIHBhc3Nwb3J0IGFuZCB2aXNhIGRvY3Vt
+ZW50cywgcGFzc3BvcnQgYW5kIHZpc2EgZHViYWksIGxpc3Qgb2YgcGFzc3BvcnRzIGJ5IHZpc2Eg
+ZnJlZQ0KcGFzc3BvcnQgYW5kIHZpc2EgZXhwcmVzcywgcGFzc3BvcnQgYW5kIHZpc2EgZW1pcmF0
+ZXMsIHBhc3Nwb3J0IGFuZCB2aXNhIGV4cHJlc3MgcmV2aWV3cywgYnV5IHZpc2EgZSBnaWZ0IGNh
+cmQgY2FuYWRhLCBidXkgcGFzc3BvcnRzIG9ubGluZSwgY2FuIHlvdSBidXkgYSB2aXNhIG9ubGlu
+ZSwgcGFzc3BvcnQgYW5kIHZpc2EgZnJlZSBjb3VudHJpZXMgZm9yIGluZGlhLCBwYXNzcG9ydCBh
+bmQgdmlzYSBmcmVlIGNvdW50cmllcywgcGFzc3BvcnQgYW5kIHZpc2EgZm9yIHVrLCBidXkgcGFz
+c3BvcnRzLCBidXkgYW1lcmljYW4gcGFzc3BvcnQsIHBhc3Nwb3J0IGFuZCB2aXNhIGhvbGRlciwg
+cGFzc3BvcnQgYW5kIHZpc2EgaG93IG11Y2gsIGRpZmZlcmVuY2UgYmV0d2VlbiBwYXNzcG9ydCBh
+bmQgcGFzc3BvcnQgY2FyZCBpcmVsYW5kLCBidXkgcGFzc3BvcnRzIGFuZCBjaXRpemVuc2hpcCwg
+cGFzc3BvcnQgYW5kIHZpc2EgaWQgcGhvdG8gbWFrZXIsIHBhc3Nwb3J0IGFuZCB2aXNhIGlzIHRo
+ZSBzYW1lLCBwYXNzcG9ydCBhbmQgdmlzYSBpbmRleCwgcGFzc3BvcnRzIGkgY2FuIGJ1eSwgcGFz
+c3BvcnQgYW5kIHZpc2Egam9icywgcGFzc3BvcnRzIHRvIGJ1eSwgcGFzc3BvcnRzIHlvdSBjYW4g
+YnV5LCBidXlpbmcgcGFzc3BvcnRzLCBwYXNzcG9ydCBhbmQgdmlzYSBrZW55YSwgaG93IHRvIGdl
+dCBwYXNzcG9ydCBjYXJkIGlmIGkgYWxyZWFkeSBoYXZlIHBhc3Nwb3J0LCB3aGF0IHBhc3Nwb3J0
+IGNhbiBpIGJ1eSwgcGFzc3BvcnRzIGFuZCB2aXNhcyBsbGMsIHBhc3Nwb3J0IGFuZCB2aXNhIGxp
+bmssIHBhc3Nwb3J0cyBhbmQgdmlzYXMgbGVnaXQsIHBhc3Nwb3J0IGFuZCB2aXNhIGxvZ28sIHBh
+c3Nwb3J0IHRvIGJ1eSwgcGFzc3BvcnQgYW5kIHZpc2EgbWVhbmluZywgcGFzc3BvcnQgYW5kIHZp
+c2EgbWFudWFsIDIwMDYgcGRmLCBwYXNzcG9ydCBhbmQgdmlzYSBtZSBhbnRhciwgcGFzc3BvcnQg
+YW5kIHZpc2EgbWVpbiBreWEgYW50YXIgaGFpLCBwYXNzcG9ydCBhbmQgdmlzYSBtZSBkaWZmZXJl
+bmNlIGluIGhpbmRpLCBwYXNzcG9ydCBhbmQgdmlzYSBtZSBkaWZmZXJlbmNlLCBwYXNzcG9ydCBh
+bmQgdmlzYSBtZWluIGFudGFyLCBwYXNzcG9ydCBhbmQgdmlzYSBtZSBhbnRhciBpbiBoaW5kaSwg
+Y2FuIGkgdHJhbnNmZXIgbXkgdmlzYSB0byBhIG5ldywgcGFzc3BvcnQsIGJ1eSB5b3VyIHBhc3Nw
+b3J0LCBwYXNzcG9ydCBhbmQgdmlzYSBuYW1lIGRpZmZlcmVudCwgcGFzc3BvcnQgYW5kIHZpc2Eg
+bnVtYmVyLCBob3cgdG8gYnV5IGEgbmV3IHBhc3Nwb3J0LCBkbyBpIG5lZWQgdG8gdHJhbnNmZXIg
+dmlzYSB0byBuZXcgcGFzc3BvcnQsIHBhc3Nwb3J0IGFuZCB2aXNhIG9mZmljZSwgcGFzc3BvcnQg
+YW5kIHZpc2Egb3JnLCBwYXNzcG9ydCBhbmQgdmlzYSBvbiBlbWlyYXRlcywgcGFzc3BvcnQgYW5k
+IHZpc2EgcGhvdG8gcGhvdG9nb3YsIHBhc3Nwb3J0IGFuZCB2aXNhIHByaWNlLCBwYXNzcG9ydCBh
+bmQgdmlzYSBwaG90bywgcGFzc3BvcnQgYW5kIHZpc2EgcHJpY2UgaW4gaW5kaWEsIHBhc3Nwb3J0
+IGFuZCB2aXNhIHBob3RvIHNpemUsIHBhc3Nwb3J0IGFuZCB2aXNhIHBob3RvIHJlcXVpcmVtZW50
+cywgcGFzc3BvcnQgYW5kIHZpc2EgcGhvdG8gc3R1ZGlvIG5lYXIgbWUsIHBhc3Nwb3J0IGFuZCB2
+aXNhIHBhZ2UsIHBhc3Nwb3J0IGFuZCB2aXNhIHFhdGFyIGFpcndheXMsIHBhc3Nwb3J0IGFuZCB2
+aXNhIHF1YXJ0dXMgZ2xvYmFsIHNlcnZpY2VzLCBwYXNzcG9ydCBhbmQgdmlzYSBxdWFydHVzIGds
+b2JhbCBzZXJ2aWNlcyBtaXNzb3VyaSBjaXR5LCBwYXNzcG9ydCBhbmQgdmlzYSBxdWVzdGlvbnMs
+IGlzIGV4cGVkaXRlZCBwYXNzcG9ydHMgYW5kIHZpc2FzIGxlZ2l0LCBidXkgcXVlYmVjIHBhc3Nw
+b3J0LiBwYXNzcG9ydCBhbmQgdmlzYSByZXF1aXJlbWVudHMsIHBhc3Nwb3J0cyBhbmQgdmlzYXMg
+cmV2aWV3cywgcGFzc3BvcnQgYW5kIHZpc2EgcmVxdWlyZW1lbnRzIGZvciB0aGFpbGFuZCwgcGFz
+c3BvcnQgYW5kIHZpc2EgcmVuZXdhbA0KcGFzc3BvcnQgYW5kIHZpc2EgcmVxdWlyZW1lbnRzIGZv
+ciBzcGFpbiwgcGFzc3BvcnQgYW5kIHZpc2EgcmVxdWlyZW1lbnRzIGZvciBkdWJhaSwgcGFzc3Bv
+cnQgYW5kIHZpc2EgcmVxdWlyZW1lbnRzIGZvciBpdGFseSwgcGFzc3BvcnQgYW5kIHZpc2EgcmVx
+dWlyZW1lbnRzIGZvciB1aywgcGFzc3BvcnQgYW5kIHZpc2EgcmVxdWlyZW1lbnRzIGZvciBzaW5n
+YXBvcmUsIHBhc3Nwb3J0IGFuZCB2aXNhIHJlcXVpcmVtZW50cyBmb3IgYXVzdHJhbGlhLCBidXlp
+bmcgcGFzc3BvcnQgb3RoZXIgY291bnRyeQ0KcGFzc3BvcnQgYW5kIHZpc2Egc2VydmljZXMsIHBh
+c3Nwb3J0IGFuZCB2aXNhIHNlcnZpY2VzIG5lYXIgbWUsIHBhc3Nwb3J0IGFuZCB2aXNhIHNvbHV0
+aW9ucywgcGFzc3BvcnQgYW5kIHZpc2Egc2FtZSwgcGFzc3BvcnQgYW5kIHZpc2Egc3RhdHVzDQpw
+YXNzcG9ydCBhbmQgdmlzYSBzZXJ2aWNlcyBjaGljYWdvLCBwYXNzcG9ydCBhbmQgdmlzYSBzdGFt
+cCwgYXJlIHZpc2FzIGFuZCBwYXNzcG9ydHMgdGhlIHNhbWUgdGhpbmcsIHBhc3Nwb3J0IGFuZCB2
+aXNhIHRoZSBzYW1lDQpwYXNzcG9ydCBhbmQgdmlzYSB0aGUgc2FtZSB0aGluZywgcGFzc3BvcnRz
+IGFuZCB2aXNhcyB1bmxpbWl0ZWQsIHBhc3Nwb3J0IGFuZCB2aXNhIHVrLCB1cyBwYXNzcG9ydCB2
+aXNhLCBwYXNzcG9ydCBhbmQgdmlzYSB3aGF0IGlzIHRoZSBkaWZmZXJlbmNlDQpidXkgYSBzZWNv
+bmQgcGFzc3BvcnQsIHBhc3Nwb3J0IHRoYXQgeW91IGNhbiBidXksIGJ1eSBhbiBhbWVyaWNhbiBw
+YXNzcG9ydCwgYnV5IGEgcGFzc3BvcnQsIGhvdyBtdWNoIHRvIGJ1eSBhIGNhbmFkaWFuIHBhc3Nw
+b3J0DQoNCmh0dHBzOi8vZmx5cGFzc3BvcnRzLmNvbS9zZXJ2aWNlLWNhdGVnb3J5L3Bhc3Nwb3J0
+Lw0KaHR0cHM6Ly9mbHlwYXNzcG9ydHMuY29tL3NlcnZpY2UvZ2VybWFueS1kcml2aW5nLWxpY2Vu
+Y2UvIw0KaHR0cHM6Ly9mbHlwYXNzcG9ydHMuY29tL3NlcnZpY2VzLw0KaHR0cHM6Ly9mbHlwYXNz
+cG9ydHMuY29tL2ZhcS8NCmh0dHBzOi8vZmx5cGFzc3BvcnRzLmNvbS9hYm91dC11cy8NCmh0dHBz
+Oi8vZmx5cGFzc3BvcnRzLmNvbS9jb250YWN0LXVzLw0KaHR0cHM6Ly9mbHlwYXNzcG9ydHMuY29t
+L3NlcnZpY2UvY2FuYWRpYW4tcGFzc3BvcnQvDQpodHRwczovL2ZseXBhc3Nwb3J0cy5jb20vc2Vy
+dmljZS9idWxnYXJpYW4tZHJpdmVycy1saWNlbnNlLw0KaHR0cHM6Ly9mbHlwYXNzcG9ydHMuY29t
+L3NlcnZpY2UvY2hpbmVzZS1wYXNzcG9ydC1yZW5ld2FsLw0KaHR0cHM6Ly9mbHlwYXNzcG9ydHMu
+Y29tL3NlcnZpY2UvaWxsaW5vaXMtZHJpdmVycy1saWNlbnNlLw0KaHR0cHM6Ly9mbHlwYXNzcG9y
+dHMuY29tL3NlcnZpY2UvdXNhLXBhc3Nwb3J0Lw0KaHR0cHM6Ly9mbHlwYXNzcG9ydHMuY29tL3Nl
+cnZpY2UvYXVzdHJpYW4tZHJpdmVycy1saWNlbnNlLw0KaHR0cHM6Ly9mbHlwYXNzcG9ydHMuY29t
+L3NlcnZpY2UvbmV0aGVybGFuZHMtcGFzc3BvcnQtYXBwbGljYXRpb24vDQpodHRwczovL2ZseXBh
+c3Nwb3J0cy5jb20vc2VydmljZS92ZXJtb250LWRyaXZlcnMtbGljZW5zZS8NCmh0dHBzOi8vZmx5
+cGFzc3BvcnRzLmNvbS9zZXJ2aWNlL2tvcmVhbi1wYXNzcG9ydC1yZW5ld2FsLw0KaHR0cHM6Ly9m
+bHlwYXNzcG9ydHMuY29tL3NlcnZpY2UvZ2VybWFueS1kcml2aW5nLWxpY2VuY2UvDQpodHRwczov
+L2J1eWxlZ2l0cGFzc3BvcnRzLmNvbS8NCmh0dHBzOi8vYnV5bGVnaXRwYXNzcG9ydHMuY29tL2Fw
+cGx5Lw0KaHR0cHM6Ly9idXlsZWdpdHBhc3Nwb3J0cy5jb20vYnV5LWZha2UtZGlwbG9tYS8NCmh0
+dHBzOi8vYnV5bGVnaXRwYXNzcG9ydHMuY29tL3NvY2lhbC1zZWN1cml0eS1jYXJkLWdlbmVyYXRv
+ci8NCmh0dHBzOi8vYnV5bGVnaXRwYXNzcG9ydHMuY29tL2hvdy1kby13ZS1nZXQtYS1wYXNzcG9y
+dC8NCmh0dHBzOi8vYnV5bGVnaXRwYXNzcG9ydHMuY29tL3JlYWwtYW5kLWZha2UtcGFzc3BvcnQv
+DQpodHRwczovL2J1eWxlZ2l0cGFzc3BvcnRzLmNvbS9idXktZmFrZS1jaGluZXNlLXBhc3Nwb3J0
+Lw0KaHR0cHM6Ly9idXlsZWdpdHBhc3Nwb3J0cy5jb20vYnV5LWNhbmFkaWFuLXBhc3Nwb3J0LW9u
+bGluZS8NCmh0dHBzOi8vYnV5bGVnaXRwYXNzcG9ydHMuY29tL2Nyb2F0aWEtZHJpdmVuLWxpY2Vu
+c2UvDQpodHRwczovL2J1eWxlZ2l0cGFzc3BvcnRzLmNvbS9idXktYnJhemlsLWRyaXZlci1saWNl
+bnNlLw0KaHR0cHM6Ly9idXlsZWdpdHBhc3Nwb3J0cy5jb20vYnV5LWh1bmdhcnktZHJpdmVyLWxp
+Y2Vuc2UvDQpodHRwczovL2J1eWxlZ2l0cGFzc3BvcnRzLmNvbS9idXktZmFrZS1zb2NpYWwtc2Vj
+dXJpdHktbnVtYmVyLWNhcmQvDQpodHRwczovL2J1eWxlZ2l0cGFzc3BvcnRzLmNvbS9ob3ctY2Fu
+LWktZ2V0LWNhbGlmb3JuaWEtZHJpdmVycy1saWNlbnNlLw0KV2hhdHNBcHAgbnVtYmVyOiArMSAo
+NjE1KS0zMTQtNjI4Ng0KVGVsZWdyYW06IEBHbG9iYWxkb2NzMjYNCkVtYWlsOiBLYXJsdm9ubGlu
+bmU3NEBnbWFpbC5jb20NCldlYnNpdGU6IGh0dHBzOi8vZmx5cGFzc3BvcnRzLmNvbS8NCldlYnNp
+dGU6IGh0dHBzOi8vYnV5bGVnaXRwYXNzcG9ydHMuY29tLw0KVGVsZWdyYW06IGh0dHBzOi8vdC5t
+ZS9nbG9iYWxkb2NzMg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5s
+aW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1s
+ZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
