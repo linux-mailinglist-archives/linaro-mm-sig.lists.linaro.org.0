@@ -2,35 +2,35 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id dVxEJYVAvGm7vwIAu9opvQ
+	id KoWwI4VAvGm6vwIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
 	for <lists+linaro-mm-sig@lfdr.de>; Thu, 19 Mar 2026 19:29:25 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 20A6C2D0F48
+	by mail.lfdr.de (Postfix) with ESMTPS id 203F32D0F47
 	for <lists+linaro-mm-sig@lfdr.de>; Thu, 19 Mar 2026 19:29:25 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E4D84402D5
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 19 Mar 2026 18:23:31 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id A7613402AF
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 19 Mar 2026 18:24:11 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DA5EE401B4
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 19 Mar 2026 18:23:25 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 95531401B4
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 19 Mar 2026 18:24:05 +0000 (UTC)
 MIME-Version: 1.0
 From: "Chong Criston" <chongcriston@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Thu, 19 Mar 2026 18:23:25 -0000
-Message-ID: <177394460589.3308265.14958016429726314209@lists.linaro.org>
+Date: Thu, 19 Mar 2026 18:24:05 -0000
+Message-ID: <177394464561.3308394.11052125841102193274@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: WT6CSTLXKSRTF2JY6IM5DKXP7254QAFV
-X-Message-ID-Hash: WT6CSTLXKSRTF2JY6IM5DKXP7254QAFV
+Message-ID-Hash: GTRWMKDAAA44RBQBWBOT7EV7U2L7HA7R
+X-Message-ID-Hash: GTRWMKDAAA44RBQBWBOT7EV7U2L7HA7R
 X-MailFrom: chongcriston@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] best deer hunting rifles usa 2026
+Subject: [Linaro-mm-sig] bolt action hunting rifles for sale usa
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WT6CSTLXKSRTF2JY6IM5DKXP7254QAFV/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GTRWMKDAAA44RBQBWBOT7EV7U2L7HA7R/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -62,8 +62,8 @@ X-Spamd-Result: default: False [0.59 / 15.00];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	TO_DN_NONE(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,remingtonandbrowning.site:url,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:mid]
-X-Rspamd-Queue-Id: 20A6C2D0F48
+	DBL_BLOCKED_OPENRESOLVER(0.00)[remingtonandbrowning.site:url,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:mid]
+X-Rspamd-Queue-Id: 203F32D0F47
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
