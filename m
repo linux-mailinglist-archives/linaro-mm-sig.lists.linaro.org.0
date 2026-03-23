@@ -2,35 +2,35 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id Kk5NJ9s2wWl3RgQAu9opvQ
+	id y8MsIts2wWl1RgQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
 	for <lists+linaro-mm-sig@lfdr.de>; Mon, 23 Mar 2026 13:49:31 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2E6BF2F2347
+	by mail.lfdr.de (Postfix) with ESMTPS id 1B4B32F2344
 	for <lists+linaro-mm-sig@lfdr.de>; Mon, 23 Mar 2026 13:49:31 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 021993F9BA
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 23 Mar 2026 12:43:42 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 13C383F9BB
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 23 Mar 2026 12:44:30 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 1B32C3F683
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Mar 2026 12:43:35 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E660B3F683
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Mar 2026 12:44:23 +0000 (UTC)
 MIME-Version: 1.0
 From: "Tirrell Otalvaro" <otalvarotirrell@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Mon, 23 Mar 2026 12:43:35 -0000
-Message-ID: <177426981510.989397.16978981968866281334@lists.linaro.org>
+Date: Mon, 23 Mar 2026 12:44:23 -0000
+Message-ID: <177426986394.989711.7857666199040417976@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: DREUBIJLEISQ7ITCTD5TG3GOJKYZ7REA
-X-Message-ID-Hash: DREUBIJLEISQ7ITCTD5TG3GOJKYZ7REA
+Message-ID-Hash: ACJIS65LFMU7P4N5Q4GOVTTHBVFYUXXH
+X-Message-ID-Hash: ACJIS65LFMU7P4N5Q4GOVTTHBVFYUXXH
 X-MailFrom: otalvarotirrell@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] corgi puppies for sale near me
+Subject: [Linaro-mm-sig] corgis for sale near me
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DREUBIJLEISQ7ITCTD5TG3GOJKYZ7REA/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ACJIS65LFMU7P4N5Q4GOVTTHBVFYUXXH/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -65,8 +65,8 @@ X-Spamd-Result: default: False [5.84 / 15.00];
 	R_DKIM_NA(0.00)[];
 	TO_DN_NONE(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:mid]
-X-Rspamd-Queue-Id: 2E6BF2F2347
+	DBL_BLOCKED_OPENRESOLVER(0.00)[adorablecorgipuppies.online:url,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:mid]
+X-Rspamd-Queue-Id: 1B4B32F2344
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
