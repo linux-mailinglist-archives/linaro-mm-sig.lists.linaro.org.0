@@ -2,285 +2,244 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id eH4uF6lh5mm6vgEAu9opvQ
+	id sHJZLq5h5mm6vgEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:26:01 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:26:06 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id E7F34431302
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:26:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 64BB8431312
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:26:06 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 96C273F6C2
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:25:59 +0000 (UTC)
-Received: from mx0b-00082601.pphosted.com (mx0b-00082601.pphosted.com [67.231.153.30])
-	by lists.linaro.org (Postfix) with ESMTPS id 05DA43F679
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Mar 2026 14:56:04 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 6BF5B3F6F8
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:26:05 +0000 (UTC)
+Received: from mail-oo1-f49.google.com (mail-oo1-f49.google.com [209.85.161.49])
+	by lists.linaro.org (Postfix) with ESMTPS id 751163F6DA
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Mar 2026 16:00:58 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=meta.com header.s=s2048-2025-q2 header.b=eLtemJKK;
-	arc=pass ("google.com:s=arc-20240605:i=1");
-	spf=pass (lists.linaro.org: domain of "prvs=15427aea8c=mattev@meta.com" designates 67.231.153.30 as permitted sender) smtp.mailfrom="prvs=15427aea8c=mattev@meta.com";
-	dmarc=pass (policy=reject) header.from=meta.com
-Received: from pps.filterd (m0109331.ppops.net [127.0.0.1])
-	by mx0a-00082601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 62NEgbQK710208
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Mar 2026 07:56:03 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=meta.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=s2048-2025-q2;
-	 bh=/SbFMZE76p3gfmGbK12ObrHMOu+elkT4/3PXLPlFc6s=; b=eLtemJKK4Has
-	CmgOJDrPyaoCnUKj/6m6pqv7c6rX5uKoNz278WPHV0NiaUJpobtYFO2c/H2u68V6
-	rUcPfFnGGMkA1R9FznzGaso1EetXEsib33uPa8YS5DWKk/0H2+KRC5WmKpB4cexD
-	WHP7rDQAp69Dwi6aLhiv0mxz/YtBATdPlBxZtCUbBSkgvz/ZWuCH7WY9e+9QunMn
-	U71mnXfpBfmdW222Bg4EpE/mrvmdhA8ahhryGTBsBHhUVMfP+BPmcCKkhg/LGSi4
-	aPVDqho1R8TPq9TMs70rd1fcR4pcGEwLRzN4l/Xx6Hgq2nJapc1J6r1TnayJIgy3
-	wnJnWEn1Dw==
-Received: from mail-oa1-f70.google.com (mail-oa1-f70.google.com [209.85.160.70])
-	by mx0a-00082601.pphosted.com (PPS) with ESMTPS id 4d1s56q9ah-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Mar 2026 07:56:03 -0700 (PDT)
-Received: by mail-oa1-f70.google.com with SMTP id 586e51a60fabf-41c5c1675c9so6886033fac.2
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Mar 2026 07:56:03 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1774277763; cv=none;
-        d=google.com; s=arc-20240605;
-        b=bpH54xu1V9X0bEkoB5tfWsfFBOyMwLXx4lzrsTVrot9msX7vOMl0N3d1B8+DkQxz1y
-         sm0zTNvf3/FuKMYeFiTZEnJctnrS/NTefCfaKDjjfP11tXCcY3yET5FAGIj5gjxJwcxO
-         uFdwoAbvCNa8EKLg5A+H/1N5bItHYmNhDVUniI8ynxnOOceh16AKfnEnlyEaQvYxEege
-         u1c8VK1eXwKBAkUXKAued/XLK818x/vMCc+3/i3l3+Lx1OSXpjVk8S/q9RPuRYo1CAwd
-         W1IoifPgyNdppjnpG4Ylmb3DIm95TCo0engFwYO4PZJF7XVTmictSLNPDRcelGySVX7m
-         2rTg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version;
-        bh=/SbFMZE76p3gfmGbK12ObrHMOu+elkT4/3PXLPlFc6s=;
-        fh=Ht8cLtnsUZLkkeVLHJhVoQ3cTwYQAyjOxxaLht6H78A=;
-        b=I+ROCVi+O1fCUmXzGr1Nb15OVfCP9RrRl+vlEJrkGLWdRpePSozw9dRiD2u0/dLUr3
-         Z7LNYCs6OfvoXLuhWn+p+Y/PL5prgOnO8+I8HcEs7nWg5zjKa16sxtsgH1ZOmegwTBZb
-         i1zbl7Ga5DT2oK3hETnafd6sxP8cG1gYEke7eCQcONJHjrwhxwIBDlfeH9INbLgYR31G
-         qUQqrj4iwk6+cqnna9iwBuYsQ291Vg64BL1DAgQUnvHrtKuAQWvhR390V+/lLKpvY/Bx
-         gNiE/X6TfoW/Yno0o2aXLQViGpxEQ5R477XeRURV48T8ZKrOI1hUG4BygA9RbdK5je87
-         T49A==;
-        darn=lists.linaro.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass header.d=bitbyteword.org header.s=google header.b=gg8za4jd;
+	spf=pass (lists.linaro.org: domain of vineeth@bitbyteword.org designates 209.85.161.49 as permitted sender) smtp.mailfrom=vineeth@bitbyteword.org;
+	dmarc=none
+Received: by mail-oo1-f49.google.com with SMTP id 006d021491bc7-67bd4e63606so1335858eaf.1
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Mar 2026 09:00:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bitbyteword.org; s=google; t=1774281658; x=1774886458; darn=lists.linaro.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=7SscKSPRtp5r0bOyZYtc8orw97P+lM4BuDDRyRnpM2Q=;
+        b=gg8za4jdGxEpj9Iu2jgK/CdnVatPmWeDvDfV0Vj/a/3CIVbjossuEVT2qwAgKe7i3u
+         ScbHCTxjrvrQwiZ+l22lxizqQjYaB8etqA58jaEy/8oSX9DwzmxfPdMhJieYKr7GcNgI
+         uOaEt54w01SYz5/PbNSnX5dr1MPG2wFfHNPBp3dGEnVdfRYpJQkGxfCr0oLQZl+6pdIU
+         aUWNm5Vo/N8VbH2O2IggDTR6itQIW2VlZfDU9JbJgJP2LDCJzxbEtvHSCqnYEhH4U9KS
+         ZH3Y/d5B+m0OdXpZgFx+mzfYM3jY/WN7pNlGoNq01wGOL8crIbXXkD+fonM/vkm8Tim1
+         7HLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774277763; x=1774882563;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=/SbFMZE76p3gfmGbK12ObrHMOu+elkT4/3PXLPlFc6s=;
-        b=f8C+HRchgdoShinHgOmsQAHvPhbl5npNrHIBJmnBBQRNENFoCB1ZQaVuEOfD5tN2+1
-         AkaTFncD+pkOfq1SpibeiddCGD+dtyoWRLk1Bt9rVtZKZzIEgaBkKHHhQlJWfEjlESNZ
-         Me5Pz/28xNtKo1RmkK7Ukw5L4Grg+MZgJi/iIp1HDvKiNjLr3YZtJsQ85wCJTJbjxupq
-         D2PrvLASgkrWSrI2z1qP6fdGCKB/ejlm0fOH6JdM7quHy0iTBbRLbZWOGptSUwVhBexx
-         9nZEg2Gpb7mwViqjEajNvxw8IPl5I1PYttrspBCcVyHdsyRS0bA6VcI1QsFWTzfxakaa
-         iU/g==
-X-Forwarded-Encrypted: i=1; AJvYcCXylYnEmK8kBO3zfl9OvfaQEx3aXS6hvFKidqiT3yB1XkP9D/lnK8wL/rLSfovK3svdAE0K7TYvfzSAApvq@lists.linaro.org
-X-Gm-Message-State: AOJu0YxzamykZ6g7SDCLAyDXN3EbVLqV7F2XjlAx3t+N56YKeNCe9Dg8
-	I9+cEyXLnjoy8T1uO9LWflWCpk5S1BeB+pna0QMvZH2yDG5wQZ80VrpjBMRJg1yzHEdJp+oRDop
-	b5UwrxaXYnydi4/f7vk+UFqK3Z95gVOnioVmX1/TpOqfVACZcYfyWYGi4/EcqSTCTb9/qY8rAxf
-	l9sl1XfrxSSOCGvZEwCBitO1+fpFtT3qOXhNzLQwsnEg==
-X-Gm-Gg: ATEYQzzI5GCDdL5oY8triYxFU90bgwisKNM9tq2hNifXtvMniiGFs9PBRf3/KRLNHIO
-	hHu7VPeF/20gzW7KpJzxJc8XME4w6pop+TT0doKr1BwitCvSK9dffjZJVmTHl3ADatroBnMt1N6
-	c9wQqGyH3nIe+MUbVoBs+kfDafpXM1wyMlS/zoAh2lsy3iAnhZIvRVACRX5dOIkDX4pn0k0TcfX
-	hrFCn55X6q0Mit6EUYiZQ==
-X-Received: by 2002:a05:6870:d694:b0:409:77a9:f951 with SMTP id 586e51a60fabf-41c10eff3demr8063011fac.11.1774277762635;
-        Mon, 23 Mar 2026 07:56:02 -0700 (PDT)
-X-Received: by 2002:a05:6870:d694:b0:409:77a9:f951 with SMTP id
- 586e51a60fabf-41c10eff3demr8062984fac.11.1774277762035; Mon, 23 Mar 2026
- 07:56:02 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1774281658; x=1774886458;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=7SscKSPRtp5r0bOyZYtc8orw97P+lM4BuDDRyRnpM2Q=;
+        b=AIkh4kisrrm3bPEnOJBumCkGYsVwUKGwjcVhVKivj+NCIcpQLh5kfvJlQXrv/gmLi7
+         7tH6AbIbMZleOETr+iWaVeh51o+LBqkrrK+YnM6h4EBSlcJDIj0ScGXiSzUyNAqhjyCl
+         N7fICZ2bq74r8D3fjKNG8CDjlIC2iEu7sRLVWXJ3eWARCrEQRTtwgnGYHu461L4lSnkn
+         LJ46lcDIW5X5gFQWNpL6JH21qmi/oiNzm4Dtg/KUKdeuOEZwoExrvc1Oo5t61opUYiQf
+         /BniAVac7tmaUz38fii+Sv0rqmcus+dWhPbSzPXxevSsQFWsnczwXcpthqlTOKbKRIhU
+         7DTQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXyLOy26OPU7Qd0x/DrZ1tJhUN65FgNFqdqF10mLeOCC0/w992CJ/uOqHtWjThLFRNJXe52Bx/87VGb4V7O@lists.linaro.org
+X-Gm-Message-State: AOJu0YzLLLmCn1X9TCBvaqRw8en5MvqTc7kbDuNWEcjnzrrHcLmufnhS
+	f1UgiMkTcmS7Tir4KP/NuJrt4I2daZ/68foa2g1Rft6/smkHwlwALaX4dMPDlBxQZMY=
+X-Gm-Gg: ATEYQzwVHnrQUjzubs2nceNj9a3xOOT6fjrSXmTio4LuEPwPiX1TUxAHkjfm4GU8i3P
+	x7cddZiGKwx9DYYGh+GUq8GKcfsAlCd0zKQ1XKpvl8Y7mUxqEH+5h+L+2+OPcCSuSvIweKc9l6S
+	mXVyecI9zB7V0WqYAmYM7rGYDBDxfb82hUGsrWzBeaaih+xHdGucjqOFArj9e6r40rYAhUXOOXO
+	mrH1oowhUYhdF5h2hPnfIQYA78VCbxkZYsAyv2eMqjat8PKOT71oaVbDdFUNjrnwg+nGeYSi1TF
+	rZVFHFBu7zwy+gpNPseiWcPl6DTlfO2ri/1KmQ+rb42fQ2DT0Ip6LClcc5GVL1BvRs3EoXbX7Gp
+	kAeoSOcOesNyVmnklZjr6WN2An63oNtYMBMqQ4Z/WESzTE3JiaPpGxD0OQ5m9mNwyzLrwut7Obo
+	VqDckvqgOEbdL47gW5Lp5qtC8yjZfeV+cYsJqk48UijZKXoDPX2s0hcv2+reUWFRHT1A==
+X-Received: by 2002:a05:6820:3091:b0:67d:9cc0:968 with SMTP id 006d021491bc7-67d9cc00e0dmr6486936eaf.63.1774281657494;
+        Mon, 23 Mar 2026 09:00:57 -0700 (PDT)
+Received: from vinmini.lan (c-73-143-21-186.hsd1.vt.comcast.net. [73.143.21.186])
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-8cfc9088df1sm843364185a.25.2026.03.23.09.00.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 23 Mar 2026 09:00:56 -0700 (PDT)
+From: "Vineeth Pillai (Google)" <vineeth@bitbyteword.org>
+To: Steven Rostedt <rostedt@goodmis.org>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Dmitry Ilvokhin <d@ilvokhin.com>
+Date: Mon, 23 Mar 2026 12:00:19 -0400
+Message-ID: <20260323160052.17528-1-vineeth@bitbyteword.org>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-References: <20260312184613.3710705-1-mattev@meta.com> <20260312184613.3710705-5-mattev@meta.com>
- <20260318140408.4677fff5@shazbot.org>
-In-Reply-To: <20260318140408.4677fff5@shazbot.org>
-From: Matt Evans <mattev@meta.com>
-Date: Mon, 23 Mar 2026 14:55:51 +0000
-X-Gm-Features: AaiRm53cK7A_m0KWvttAGgjGrqlnTSfUkM-9VEpOFaKWwlBtmEfLrXJeDgr0v_M
-Message-ID: <CAFzAbJGdYpaw0rAwLxLqqzzUiaPjySLXYsnS+hWwF4-GkBmgyQ@mail.gmail.com>
-To: Alex Williamson <alex@shazbot.org>
-X-Authority-Analysis: v=2.4 cv=Ys8ChoYX c=1 sm=1 tr=0 ts=69c15483 cx=c_pps
- a=nSjmGuzVYOmhOUYzIAhsAg==:117 a=Dv35txUGz5gI0hTa:21 a=IkcTkHD0fZMA:10
- a=Yq5XynenixoA:10 a=VkNPw1HP01LnGYTKEx00:22 a=7x6HtfJdh03M6CCDgxCd:22
- a=wpfVPzegXHpEFt3DAXn9:22 a=r1p2_3pzAAAA:8 a=VabnemYjAAAA:8
- a=cHgMKt-ThCp0vrf1_T8A:9 a=QEXdDO2ut3YA:10 a=1zu1i0D7hVQfj8NKfPKu:22
- a=r_pkcD-q9-ctt7trBg_g:22 a=gKebqoRLp9LExxC7YDUY:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzIzMDExNSBTYWx0ZWRfX9U4HOQijEEJD
- 9v3BNXS3DkgGeq2tYVDMv8udUbWdfpUM0NB5SwXoRnwO7KueUuZHjDno71ix3Fsz0x2v7FKTBW9
- JPMubhGDY1J5t8p1eH2C8debdOfGMUgIOlO91yn9UfXdXpgAkHYzjs+Rc/ZYCG/j+8wzIKpR0CZ
- UwBHeUVpQuCcswpskj7U2nYCR5AwNUKLacK8HISpN9YQjvypVqh1ccVjvlXNJNmmnXJaQl6UkK1
- NmZgPx817IgSv/NKuUlmennWpwizzm8udlVG3JIILGsR8tpXjmwKY1mpuPX8wtfffxX/dQkCxSe
- v4ajO+s38Z3ZmDt869AZ3zarPZqmUtNfEWldRv7VuyKUmjsgNiMa845kK8S/UNr/QeJZR/jYTeF
- J804/tRqY/GAFiCXqVfIhA0DSKrQNNuIo3mJjqSaGjw+BmRGKJVMnsNdYBOpRejecxFPKPtXy/B
- ajznHibsrUFFi+XAzcA==
-X-Proofpoint-GUID: bzk7t6qKB4GDFH_4k-JUOrydWYbGhsa9
-X-Proofpoint-ORIG-GUID: bzk7t6qKB4GDFH_4k-JUOrydWYbGhsa9
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-03-23_04,2026-03-23_01,2025-10-01_01
-X-Spamd-Bar: -----
-X-MailFrom: prvs=15427aea8c=mattev@meta.com
+X-Spamd-Bar: --
+X-MailFrom: vineeth@bitbyteword.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: PMEIFYKXFFUOWJORGWPVXF5CG3CEUHN5
-X-Message-ID-Hash: PMEIFYKXFFUOWJORGWPVXF5CG3CEUHN5
-X-Mailman-Approved-At: Mon, 20 Apr 2026 17:25:24 +0000
-CC: Leon Romanovsky <leon@kernel.org>, Jason Gunthorpe <jgg@nvidia.com>, Alex Mastro <amastro@fb.com>, Mahmoud Adam <mngyadam@amazon.de>, David Matlack <dmatlack@google.com>, =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Kevin Tian <kevin.tian@intel.com>, Ankit Agrawal <ankita@nvidia.com>, Pranjal Shrivastava <praan@google.com>, Alistair Popple <apopple@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org
+Message-ID-Hash: UIU3WSDDJNXAYDXLXJH55MZHRE4UEFSH
+X-Message-ID-Hash: UIU3WSDDJNXAYDXLXJH55MZHRE4UEFSH
+X-Mailman-Approved-At: Mon, 20 Apr 2026 17:25:25 +0000
+CC: "Vineeth Pillai (Google)" <vineeth@bitbyteword.org>, Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Ingo Molnar <mingo@redhat.com>, Jens Axboe <axboe@kernel.dk>, io-uring@vger.kernel.org, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Alexei Starovoitov <ast@kernel.org>, Daniel Borkmann <daniel@iogearbox.net>, Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>, Xin Long <lucien.xin@gmail.com>, Jon Maloy <jmaloy@redhat.com>, Aaron Conole <aconole@redhat.com>, Eelco Chaudron <echaudro@redhat.com>, Ilya Maximets <i.maximets@ovn.org>, netdev@vger.kernel.org, bpf@vger.kernel.org, linux-sctp@vger.kernel.org, tipc-discussion@lists.sourceforge.net, dev@openvswitch.org, Jiri Pirko <jiri@resnulli.us>, Oded Gabbay <ogabbay@kernel.org>, Koby Elbaz <koby.elbaz@intel.com>, dri-devel@lists.freedesktop.org, "Rafael J. Wysocki" <rafael@kernel.org>, Viresh 
+ Kumar <viresh.kumar@linaro.org>, "Gautham R. Shenoy" <gautham.shenoy@amd.com>, Huang Rui <ray.huang@amd.com>, Mario Limonciello <mario.limonciello@amd.com>, Len Brown <lenb@kernel.org>, Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>, linux-pm@vger.kernel.org, MyungJoo Ham <myungjoo.ham@samsung.com>, Kyungmin Park <kyungmin.park@samsung.com>, Chanwoo Choi <cw00.choi@samsung.com>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Sumit Semwal <sumit.semwal@linaro.org>, linaro-mm-sig@lists.linaro.org, Eddie James <eajames@linux.ibm.com>, Andrew Jeffery <andrew@codeconstruct.com.au>, linux-fsi@lists.ozlabs.org, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Alex Deucher <alexander.deucher@amd.com>, Danilo Krummrich <dakr@kernel.org>, Matthew Brost <matthew.brost@intel.com>, Philipp Stanner <phasta@kernel.org>, Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>, amd-gfx@lists.freedesktop.org, Jiri Kosina <jikos@kernel.org>, Be
+ njamin Tissoires <bentiss@kernel.org>, linux-input@vger.kernel.org, Wolfram Sang <wsa+renesas@sang-engineering.com>, linux-i2c@vger.kernel.org, Mark Brown <broonie@kernel.org>, Michael Hennerich <michael.hennerich@analog.com>, =?UTF-8?q?Nuno=20S=C3=A1?= <nuno.sa@analog.com>, linux-spi@vger.kernel.org, "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>, "Martin K. Petersen" <martin.petersen@oracle.com>, linux-scsi@vger.kernel.org, Chris Mason <clm@fb.com>, David Sterba <dsterba@suse.com>, linux-btrfs@vger.kernel.org, Thomas Gleixner <tglx@linutronix.de>, Andrew Morton <akpm@linux-foundation.org>, SeongJae Park <sj@kernel.org>, linux-mm@kvack.org, Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, linux-trace-kernel@vger.kernel.org, linux-kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [RFC v2 PATCH 04/10] vfio/pci: Add a helper to create a DMABUF for a BAR-map VMA
+Subject: [Linaro-mm-sig] [PATCH v2 00/19] tracepoint: Avoid double static_branch evaluation at guarded call sites
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PMEIFYKXFFUOWJORGWPVXF5CG3CEUHN5/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UIU3WSDDJNXAYDXLXJH55MZHRE4UEFSH/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-X-Spamd-Result: default: False [4.59 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[meta.com : SPF not aligned (relaxed),reject];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:google.com:reject}];
-	R_DKIM_REJECT(1.00)[meta.com:s=s2048-2025-q2];
-	DATE_IN_PAST(1.00)[674];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [2.99 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
+	DATE_IN_PAST(1.00)[673];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[19];
-	MIME_TRACE(0.00)[0:+];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	GREYLIST(0.00)[pass,meta];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FROM_NEQ_ENVFROM(0.00)[mattev@meta.com,linaro-mm-sig-bounces@lists.linaro.org];
+	RCVD_TLS_LAST(0.00)[];
+	DMARC_NA(0.00)[bitbyteword.org];
+	ARC_NA(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FREEMAIL_CC(0.00)[bitbyteword.org,kernel.org,efficios.com,redhat.com,kernel.dk,vger.kernel.org,davemloft.net,google.com,iogearbox.net,gmail.com,ovn.org,lists.sourceforge.net,openvswitch.org,resnulli.us,intel.com,lists.freedesktop.org,linaro.org,amd.com,linux.intel.com,samsung.com,lists.linaro.org,linux.ibm.com,codeconstruct.com.au,lists.ozlabs.org,ffwll.ch,sang-engineering.com,analog.com,HansenPartnership.com,oracle.com,fb.com,suse.com,linutronix.de,linux-foundation.org,kvack.org,alien8.de];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[meta.com:-];
-	NEURAL_HAM(-0.00)[-0.749];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[80];
+	FROM_NEQ_ENVFROM(0.00)[vineeth@bitbyteword.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig,renesas];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,linaro.org:email,shazbot.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: E7F34431302
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	NEURAL_SPAM(0.00)[0.867];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email,goodmis.org:email,bitbyteword.org:mid]
+X-Rspamd-Queue-Id: 64BB8431312
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-SGkgQWxleCwNCg0KT24gV2VkLCBNYXIgMTgsIDIwMjYgYXQgODowNOKAr1BNIEFsZXggV2lsbGlh
-bXNvbiA8YWxleEBzaGF6Ym90Lm9yZz4gd3JvdGU6DQo+IE9uIFRodSwgMTIgTWFyIDIwMjYgMTE6
-NDY6MDIgLTA3MDANCj4gTWF0dCBFdmFucyA8bWF0dGV2QG1ldGEuY29tPiB3cm90ZToNCj4NCj4g
-PiBUaGlzIGhlbHBlciwgdmZpb19wY2lfY29yZV9tbWFwX3ByZXBfZG1hYnVmKCksIGNyZWF0ZXMg
-YSBzaW5nbGUtcmFuZ2UNCj4gPiBETUFCVUYgZm9yIHRoZSBwdXJwb3NlIG9mIG1hcHBpbmcgYSBQ
-Q0kgQkFSLiAgVGhpcyBpcyB1c2VkIGluIGEgZnV0dXJlDQo+ID4gY29tbWl0IGJ5IFZGSU8ncyBv
-cmRpbmFyeSBtbWFwKCkgcGF0aC4NCj4gPg0KPiA+IFRoaXMgZnVuY3Rpb24gdHJhbnNmZXJzIG93
-bmVyc2hpcCBvZiB0aGUgVkZJTyBkZXZpY2UgZmQgdG8gdGhlDQo+ID4gRE1BQlVGLCB3aGljaCBm
-cHV0KClzIHdoZW4gaXQncyByZWxlYXNlZC4NCj4gPg0KPiA+IFJlZmFjdG9yIHRoZSBleGlzdGlu
-ZyB2ZmlvX3BjaV9jb3JlX2ZlYXR1cmVfZG1hX2J1ZigpIHRvIHNwbGl0IG91dA0KPiA+IGV4cG9y
-dCBjb2RlIGNvbW1vbiB0byB0aGUgdHdvIHBhdGhzLCBWRklPX0RFVklDRV9GRUFUVVJFX0RNQV9C
-VUYgYW5kDQo+ID4gdGhpcyBuZXcgVkZJT19CQVIgbW1hcCgpLg0KPiA+DQo+ID4gU2lnbmVkLW9m
-Zi1ieTogTWF0dCBFdmFucyA8bWF0dGV2QG1ldGEuY29tPg0KPiA+IC0tLQ0KPiA+ICBkcml2ZXJz
-L3ZmaW8vcGNpL3ZmaW9fcGNpX2RtYWJ1Zi5jIHwgMTMxICsrKysrKysrKysrKysrKysrKysrKy0t
-LS0tLS0tDQo+ID4gIGRyaXZlcnMvdmZpby9wY2kvdmZpb19wY2lfcHJpdi5oICAgfCAgIDQgKw0K
-PiA+ICAyIGZpbGVzIGNoYW5nZWQsIDEwMiBpbnNlcnRpb25zKCspLCAzMyBkZWxldGlvbnMoLSkN
-Cj4gPg0KPiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3ZmaW8vcGNpL3ZmaW9fcGNpX2RtYWJ1Zi5j
-IGIvZHJpdmVycy92ZmlvL3BjaS92ZmlvX3BjaV9kbWFidWYuYw0KPiA+IGluZGV4IDYzMTQwNTI4
-ZGJlYS4uNzZkYjM0MGJhNTkyIDEwMDY0NA0KPiA+IC0tLSBhL2RyaXZlcnMvdmZpby9wY2kvdmZp
-b19wY2lfZG1hYnVmLmMNCj4gPiArKysgYi9kcml2ZXJzL3ZmaW8vcGNpL3ZmaW9fcGNpX2RtYWJ1
-Zi5jDQo+ID4gQEAgLTgyLDYgKzgyLDggQEAgc3RhdGljIHZvaWQgdmZpb19wY2lfZG1hX2J1Zl9y
-ZWxlYXNlKHN0cnVjdCBkbWFfYnVmICpkbWFidWYpDQo+ID4gICAgICAgICAgICAgICB1cF93cml0
-ZSgmcHJpdi0+dmRldi0+bWVtb3J5X2xvY2spOw0KPiA+ICAgICAgICAgICAgICAgdmZpb19kZXZp
-Y2VfcHV0X3JlZ2lzdHJhdGlvbigmcHJpdi0+dmRldi0+dmRldik7DQo+ID4gICAgICAgfQ0KPiA+
-ICsgICAgIGlmIChwcml2LT52ZmlsZSkNCj4gPiArICAgICAgICAgICAgIGZwdXQocHJpdi0+dmZp
-bGUpOw0KPiA+ICAgICAgIGtmcmVlKHByaXYtPnBoeXNfdmVjKTsNCj4gPiAgICAgICBrZnJlZShw
-cml2KTsNCj4gPiAgfQ0KPiA+IEBAIC0xODIsNiArMTg0LDQxIEBAIGludCB2ZmlvX3BjaV9kbWFf
-YnVmX2ZpbmRfcGZuKHN0cnVjdCB2ZmlvX3BjaV9kbWFfYnVmICp2cGRtYWJ1ZiwNCj4gPiAgICAg
-ICByZXR1cm4gLUVGQVVMVDsNCj4gPiAgfQ0KPiA+DQo+ID4gK3N0YXRpYyBpbnQgdmZpb19wY2lf
-ZG1hYnVmX2V4cG9ydChzdHJ1Y3QgdmZpb19wY2lfY29yZV9kZXZpY2UgKnZkZXYsDQo+ID4gKyAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzdHJ1Y3QgdmZpb19wY2lfZG1hX2J1ZiAqcHJp
-diwgdWludDMyX3QgZmxhZ3MsDQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBz
-aXplX3Qgc2l6ZSwgYm9vbCBzdGF0dXNfb2spDQo+ID4gK3sNCj4gPiArICAgICBERUZJTkVfRE1B
-X0JVRl9FWFBPUlRfSU5GTyhleHBfaW5mbyk7DQo+ID4gKw0KPiA+ICsgICAgIGlmICghdmZpb19k
-ZXZpY2VfdHJ5X2dldF9yZWdpc3RyYXRpb24oJnZkZXYtPnZkZXYpKQ0KPiA+ICsgICAgICAgICAg
-ICAgcmV0dXJuIC1FTk9ERVY7DQo+ID4gKw0KPiA+ICsgICAgIGV4cF9pbmZvLm9wcyA9ICZ2Zmlv
-X3BjaV9kbWFidWZfb3BzOw0KPiA+ICsgICAgIGV4cF9pbmZvLnNpemUgPSBzaXplOw0KPiA+ICsg
-ICAgIGV4cF9pbmZvLmZsYWdzID0gZmxhZ3M7DQo+ID4gKyAgICAgZXhwX2luZm8ucHJpdiA9IHBy
-aXY7DQo+ID4gKw0KPiA+ICsgICAgIHByaXYtPmRtYWJ1ZiA9IGRtYV9idWZfZXhwb3J0KCZleHBf
-aW5mbyk7DQo+ID4gKyAgICAgaWYgKElTX0VSUihwcml2LT5kbWFidWYpKSB7DQo+ID4gKyAgICAg
-ICAgICAgICB2ZmlvX2RldmljZV9wdXRfcmVnaXN0cmF0aW9uKCZ2ZGV2LT52ZGV2KTsNCj4gPiAr
-ICAgICAgICAgICAgIHJldHVybiBQVFJfRVJSKHByaXYtPmRtYWJ1Zik7DQo+ID4gKyAgICAgfQ0K
-PiA+ICsNCj4gPiArICAgICBrcmVmX2luaXQoJnByaXYtPmtyZWYpOw0KPiA+ICsgICAgIGluaXRf
-Y29tcGxldGlvbigmcHJpdi0+Y29tcCk7DQo+ID4gKw0KPiA+ICsgICAgIC8qIGRtYV9idWZfcHV0
-KCkgbm93IGZyZWVzIHByaXYgKi8NCj4gPiArICAgICBJTklUX0xJU1RfSEVBRCgmcHJpdi0+ZG1h
-YnVmc19lbG0pOw0KPiA+ICsgICAgIGRvd25fd3JpdGUoJnZkZXYtPm1lbW9yeV9sb2NrKTsNCj4g
-PiArICAgICBkbWFfcmVzdl9sb2NrKHByaXYtPmRtYWJ1Zi0+cmVzdiwgTlVMTCk7DQo+ID4gKyAg
-ICAgcHJpdi0+cmV2b2tlZCA9ICFzdGF0dXNfb2s7DQo+DQo+IFRlc3RpbmcgX192ZmlvX3BjaV9t
-ZW1vcnlfZW5hYmxlZCgpIG91dHNpZGUgb2YgbWVtb3J5X2xvY2soKSBpcw0KPiBpbnZhbGlkLCBz
-byBwYXNzaW5nIGl0IGFzIGEgcGFyYW1ldGVyIG91dHNpZGUgb2YgdGhlIHNlbWFwaG9yZSBpcw0K
-PiBpbnZhbGlkLiAgQHN0YXR1c19vayBpcyBzdGFsZSBoZXJlLg0KDQpTbyBpdCBpcywgYXJycnJy
-Z2guICBUaGFuayB5b3UgZm9yIHRoYXQ7IEkndmUgZm91bmQgYSBjb3VwbGUgb2Ygb3RoZXINCmNo
-b2ljZSBidWdzIGluIHRoYXQgUkZDLCBhbmQgd2lsbCByZXNvbHZlIGFsbCBvZiB0aGlzIGluIGEg
-cmVwb3N0DQpzb29uLg0KDQpbc25pcF0NCj4gPiArDQo+ID4gKyAgICAgLyoNCj4gPiArICAgICAg
-KiBUaGUgVk1BIGdldHMgdGhlIERNQUJVRiBmaWxlIHNvIHRoYXQgb3RoZXIgdXNlcnMgY2FuIGxv
-Y2F0ZQ0KPiA+ICsgICAgICAqIHRoZSBETUFCVUYgdmlhIGEgVkEuICBPd25lcnNoaXAgb2YgdGhl
-IG9yaWdpbmFsIFZGSU8gZGV2aWNlDQo+ID4gKyAgICAgICogZmlsZSBiZWluZyBtbWFwKCllZCB0
-cmFuc2ZlcnMgdG8gcHJpdiwgYW5kIGlzIHB1dCB3aGVuIHRoZQ0KPiA+ICsgICAgICAqIERNQUJV
-RiBpcyByZWxlYXNlZC4NCj4gPiArICAgICAgKi8NCj4gPiArICAgICBwcml2LT52ZmlsZSA9IHZt
-YS0+dm1fZmlsZTsNCj4gPiArICAgICB2bWEtPnZtX2ZpbGUgPSBwcml2LT5kbWFidWYtPmZpbGU7
-DQo+DQo+IEFJVUksIHRoaXMgYWZmZWN0cyB3aGF0IHRoZSB1c2VyIHNlZXMgaW4gL3Byb2MvPHBp
-ZD4vbWFwcywgcmlnaHQ/DQo+IFByZXZpb3VzbHkgYSBtZW1vcnkgcmFuZ2UgY291bGQgYmUgY2xl
-YXJseSBhc3NvY2lhdGVkIHdpdGggYSBzcGVjaWZpYw0KPiB2ZmlvIGRldmljZSwgbm93LCBvbmx5
-IGZvciB2ZmlvLXBjaSBkZXZpY2VzLCBJIHRoaW5rIHRoZSByYW5nZSBpcw0KPiBhc3NvY2lhdGVk
-IHRvIGEgbm9uZGVzY3JpcHQgZG1hYnVmLiAgSWYgc28sIGlzIHRoYXQgYW4gYWNjZXB0YWJsZSwg
-dXNlcg0KPiB2aXNpYmxlLCBkZWJ1Z2dpbmcgZnJpZW5kbHkgY2hhbmdlIChleC4gbHNvZik/ICBU
-aGFua3MsDQoNCihKYXNvbiwgeW91ciBjb21tZW50IG5vdGVkIHdpdGggdGhhbmtzLCByZXBseWlu
-ZyB0byB5b3UgYm90aCBoZXJlIHRvDQpzYXZlIGVsZWN0cm9ucy4pDQoNCkdyZWF0IHF1ZXN0aW9u
-OyBhIGZvcm1hdHRpbmcgY2hhbmdlIHRoZXJlIGlzIGluaGVyZW50IHRvIG1vdmluZyB0byBhDQpE
-TUFCVUYgKHdoaWNoIGdlbmVyYXRlcyBhICIvZG1hYnVmOiIgcHJlZml4IHRvIGEgdXNlci1kZWZp
-bmVkIG5hbWUpLg0KSWYgd2UgY2FuIGFjY2VwdCB0aGF0IGl0IGNoYW5nZXMgYXQgYWxsLCB0aGVu
-IEkgYWdyZWUgdGhpcyB0aGVuIHNob3VsZA0Kb3V0cHV0IG5pY2UgZGVidWc6IGF0IGxlYXN0IHRo
-ZSBjZGV2IG5hbWUgYW5kIHJlc291cmNlIGluZGV4LCBhbmQNCndlJ3ZlIHRoZSBvcHBvcnR1bml0
-eSB0byBpbmNsdWRlIHRoZSBCREYgdG9vLiAgSSd2ZSBhZGRlZCB0aGlzOyBhbg0KZXhhbXBsZSBs
-aW5lIG9mIC9wcm9jLzxwaWQ+L21hcHM6DQoNCiAgICBmZmZmYjgwNzAwMDAtZmZmZmJjMDQwMDAw
-IHJ3LXMgMDAwMzAwMDAgMDA6MGIgNQ0KICAgICAgL2RtYWJ1Zjp2ZmlvMDowMDAwOjAwOjAzLjAv
-MQ0KDQpOb3RlIHRoZSBmaWxlIG9mZnNldCB1c2VkIHRvIGluY2x1ZGUgdGhlIHJlc291cmNlIGlu
-ZGV4IHVwIGF0DQpWRklPX1BDSV9PRkZTRVRfU0hJRlQgYnV0IHRoaXMgRE1BQlVGIHZlcnNpb24g
-ZG9lc24ndCBkbyB0aGF0LCBzbyBJJ20NCnByb3Bvc2luZyBhcHBlbmRpbmcgYSAiLyV1IiBmb3Ig
-dGhlIGluZGV4LiAgQWJvdmUgaXMgYSBtYXAgb2YgQkFSMSwNCm9mZnNldCAweDMwMDAwLiAgSWYg
-cGVvcGxlIGZlZWwgc3Ryb25nbHkgYWJvdXQgdGhlIGV4aXN0aW5nIGFlc3RoZXRpYw0KdGhlbiB3
-ZSBjb3VsZCBrZWVwIHRoZSBpbmRleCBlbmNvZGVkIGluIHZtX3Bnb2ZmIHRvIHJldGFpbiB0aGUg
-c2FtZQ0Kb2Zmc2V0IGZpZWxkIGluIC9wcm9jLzxwaWQ+L21hcHMsIGJ1dCBpdCdkIGJlIGxlc3Mg
-bmVhdCBtYXNraW5nIGl0DQpiYWNrIG91dCBpbiBhIGZldyBwbGFjZXMuDQoNClRoZSBkZWZhdWx0
-IG5hbWUgb2YgYSBETUFCVUYgYWNxdWlyZWQgdGhyb3VnaA0KVkZJT19ERVZJQ0VfRkVBVFVSRV9E
-TUFfQlVGIHdvdWxkIHN0aWxsIGJlICIvZG1hYnVmOiIgYW5kIEkgdGhpbmsgaXQNCnNob3VsZCBz
-dGF5IHRoaXMgd2F5IHNpbmNlIGEgYmV0dGVyIG5hbWUgc2hvdWxkIGJlIHN1cHBsaWVkIGJ5DQp1
-c2Vyc3BhY2UuICBUaGUgZGVmYXVsdCBhdCBsZWFzdCBkaWZmZXJlbnRpYXRlcyB0aGVtIGZyb20g
-VkZJTyBkZXZpY2UNCmZkIG1hcHBpbmdzLg0KDQpNYW55IHRoYW5rcywNCg0KDQpNYXR0DQoNCg0K
-Pg0KPiBBbGV4DQo+DQo+ID4gKyAgICAgdm1hLT52bV9wcml2YXRlX2RhdGEgPSBwcml2Ow0KPiA+
-ICsNCj4gPiArICAgICByZXR1cm4gMDsNCj4gPiArDQo+ID4gK2Vycl9mcmVlX3BoeXM6DQo+ID4g
-KyAgICAga2ZyZWUocHJpdi0+cGh5c192ZWMpOw0KPiA+ICtlcnJfZnJlZV9wcml2Og0KPiA+ICsg
-ICAgIGtmcmVlKHByaXYpOw0KPiA+ICsgICAgIHJldHVybiByZXQ7DQo+ID4gK30NCj4gPiArDQo+
-ID4gIHZvaWQgdmZpb19wY2lfZG1hX2J1Zl9tb3ZlKHN0cnVjdCB2ZmlvX3BjaV9jb3JlX2Rldmlj
-ZSAqdmRldiwgYm9vbCByZXZva2VkKQ0KPiA+ICB7DQo+ID4gICAgICAgc3RydWN0IHZmaW9fcGNp
-X2RtYV9idWYgKnByaXY7DQo+ID4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvdmZpby9wY2kvdmZpb19w
-Y2lfcHJpdi5oIGIvZHJpdmVycy92ZmlvL3BjaS92ZmlvX3BjaV9wcml2LmgNCj4gPiBpbmRleCA1
-Y2M4Yzg1YTIxNTMuLjVmZDNhNmUwMGEwZSAxMDA2NDQNCj4gPiAtLS0gYS9kcml2ZXJzL3ZmaW8v
-cGNpL3ZmaW9fcGNpX3ByaXYuaA0KPiA+ICsrKyBiL2RyaXZlcnMvdmZpby9wY2kvdmZpb19wY2lf
-cHJpdi5oDQo+ID4gQEAgLTMwLDYgKzMwLDcgQEAgc3RydWN0IHZmaW9fcGNpX2RtYV9idWYgew0K
-PiA+ICAgICAgIHNpemVfdCBzaXplOw0KPiA+ICAgICAgIHN0cnVjdCBwaHlzX3ZlYyAqcGh5c192
-ZWM7DQo+ID4gICAgICAgc3RydWN0IHAycGRtYV9wcm92aWRlciAqcHJvdmlkZXI7DQo+ID4gKyAg
-ICAgc3RydWN0IGZpbGUgKnZmaWxlOw0KPiA+ICAgICAgIHUzMiBucl9yYW5nZXM7DQo+ID4gICAg
-ICAgc3RydWN0IGtyZWYga3JlZjsNCj4gPiAgICAgICBzdHJ1Y3QgY29tcGxldGlvbiBjb21wOw0K
-PiA+IEBAIC0xMjgsNiArMTI5LDkgQEAgaW50IHZmaW9fcGNpX2RtYV9idWZfZmluZF9wZm4oc3Ry
-dWN0IHZmaW9fcGNpX2RtYV9idWYgKnZwZG1hYnVmLA0KPiA+ICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICB1bnNpZ25lZCBsb25nIGFkZHJlc3MsDQo+ID4gICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHVuc2lnbmVkIGludCBvcmRlciwNCj4gPiAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgdW5zaWduZWQgbG9uZyAqb3V0X3Bmbik7DQo+ID4gK2ludCB2ZmlvX3BjaV9jb3JlX21tYXBf
-cHJlcF9kbWFidWYoc3RydWN0IHZmaW9fcGNpX2NvcmVfZGV2aWNlICp2ZGV2LA0KPiA+ICsgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHN0cnVjdCB2bV9hcmVhX3N0cnVjdCAqdm1hLA0K
-PiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHU2NCBwaHlzX3N0YXJ0LCB1NjQg
-cGdvZmYsIHU2NCByZXFfbGVuKTsNCj4gPg0KPiA+ICAjaWZkZWYgQ09ORklHX1ZGSU9fUENJX0RN
-QUJVRg0KPiA+ICBpbnQgdmZpb19wY2lfY29yZV9mZWF0dXJlX2RtYV9idWYoc3RydWN0IHZmaW9f
-cGNpX2NvcmVfZGV2aWNlICp2ZGV2LCB1MzIgZmxhZ3MsDQo+DQpfX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAt
-LSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBl
-bWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+When a caller already guards a tracepoint with an explicit enabled check:
+
+  if (trace_foo_enabled() && cond)
+      trace_foo(args);
+
+trace_foo() internally re-evaluates the static_branch_unlikely() key.
+Since static branches are patched binary instructions the compiler cannot
+fold the two evaluations, so every such site pays the cost twice.
+
+This series introduces trace_call__##name() as a companion to
+trace_##name().  It calls __do_trace_##name() directly, bypassing the
+redundant static-branch re-check, while preserving all other correctness
+properties of the normal path (RCU-watching assertion, might_fault() for
+syscall tracepoints).  The internal __do_trace_##name() symbol is not
+leaked to call sites; trace_call__##name() is the only new public API.
+
+  if (trace_foo_enabled() && cond)
+      trace_call__foo(args);   /* calls __do_trace_foo() directly */
+
+The first patch adds the three-location change to
+include/linux/tracepoint.h (__DECLARE_TRACE, __DECLARE_TRACE_SYSCALL,
+and the !TRACEPOINTS_ENABLED stub).  The remaining 18 patches
+mechanically convert all guarded call sites found in the tree:
+kernel/, io_uring/, net/, accel/habanalabs, cpufreq/, devfreq/,
+dma-buf/, fsi/, drm/, HID, i2c/, spi/, scsi/ufs/, btrfs/,
+net/devlink/, kernel/time/, kernel/trace/, mm/damon/, and arch/x86/.
+
+This series is motivated by Peter Zijlstra's observation in the discussion
+around Dmitry Ilvokhin's locking tracepoint instrumentation series, where
+he noted that compilers cannot optimize static branches and that guarded
+call sites end up evaluating the static branch twice for no reason, and
+by Steven Rostedt's suggestion to add a proper API instead of exposing
+internal implementation details like __do_trace_##name() directly to
+call sites:
+
+  https://lore.kernel.org/linux-trace-kernel/8298e098d3418cb446ef396f119edac58a3414e9.1772642407.git.d@ilvokhin.com
+
+Suggested-by: Steven Rostedt <rostedt@goodmis.org>
+Suggested-by: Peter Zijlstra <peterz@infradead.org>
+
+Changes in v2:
+- Renamed trace_invoke_##name() to trace_call__##name() (double
+  underscore) per review comments.
+- Added 4 new patches covering sites missed in v1, found using
+  coccinelle to scan the tree (Keith Busch):
+    * net/devlink: guarded tracepoint_enabled() block in trap.c
+    * kernel/time: early-return guard in tick-sched.c (tick_stop)
+    * kernel/trace: early-return guard in trace_benchmark.c
+    * mm/damon: early-return guard in core.c
+    * arch/x86: do_trace_*() wrapper functions in lib/msr.c, which
+      are called exclusively from tracepoint_enabled()-guarded sites
+      in asm/msr.h
+
+v1: https://lore.kernel.org/linux-trace-kernel/abSqrJ1J59RQC47U@kbusch-mbp/
+
+Vineeth Pillai (Google) (19):
+  tracepoint: Add trace_call__##name() API
+  kernel: Use trace_call__##name() at guarded tracepoint call sites
+  io_uring: Use trace_call__##name() at guarded tracepoint call sites
+  net: Use trace_call__##name() at guarded tracepoint call sites
+  accel/habanalabs: Use trace_call__##name() at guarded tracepoint call
+    sites
+  cpufreq: Use trace_call__##name() at guarded tracepoint call sites
+  devfreq: Use trace_call__##name() at guarded tracepoint call sites
+  dma-buf: Use trace_call__##name() at guarded tracepoint call sites
+  fsi: Use trace_call__##name() at guarded tracepoint call sites
+  drm: Use trace_call__##name() at guarded tracepoint call sites
+  HID: Use trace_call__##name() at guarded tracepoint call sites
+  i2c: Use trace_call__##name() at guarded tracepoint call sites
+  spi: Use trace_call__##name() at guarded tracepoint call sites
+  scsi: ufs: Use trace_call__##name() at guarded tracepoint call sites
+  btrfs: Use trace_call__##name() at guarded tracepoint call sites
+  net: devlink: Use trace_call__##name() at guarded tracepoint call
+    sites
+  kernel: time, trace: Use trace_call__##name() at guarded tracepoint
+    call sites
+  mm: damon: Use trace_call__##name() at guarded tracepoint call sites
+  x86: msr: Use trace_call__##name() at guarded tracepoint call sites
+
+ arch/x86/lib/msr.c                                |  6 +++---
+ drivers/accel/habanalabs/common/device.c          | 12 ++++++------
+ drivers/accel/habanalabs/common/mmu/mmu.c         |  3 ++-
+ drivers/accel/habanalabs/common/pci/pci.c         |  4 ++--
+ drivers/cpufreq/amd-pstate.c                      | 10 +++++-----
+ drivers/cpufreq/cpufreq.c                         |  2 +-
+ drivers/cpufreq/intel_pstate.c                    |  2 +-
+ drivers/devfreq/devfreq.c                         |  2 +-
+ drivers/dma-buf/dma-fence.c                       |  4 ++--
+ drivers/fsi/fsi-master-aspeed.c                   |  2 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_cs.c            |  2 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vm.c            |  4 ++--
+ drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c |  2 +-
+ drivers/gpu/drm/scheduler/sched_entity.c          |  4 ++--
+ drivers/hid/intel-ish-hid/ipc/pci-ish.c           |  2 +-
+ drivers/i2c/i2c-core-slave.c                      |  2 +-
+ drivers/spi/spi-axi-spi-engine.c                  |  4 ++--
+ drivers/ufs/core/ufshcd.c                         | 12 ++++++------
+ fs/btrfs/extent_map.c                             |  4 ++--
+ fs/btrfs/raid56.c                                 |  4 ++--
+ include/linux/tracepoint.h                        | 11 +++++++++++
+ io_uring/io_uring.h                               |  2 +-
+ kernel/irq_work.c                                 |  2 +-
+ kernel/sched/ext.c                                |  2 +-
+ kernel/smp.c                                      |  2 +-
+ kernel/time/tick-sched.c                          | 12 ++++++------
+ kernel/trace/trace_benchmark.c                    |  2 +-
+ mm/damon/core.c                                   |  2 +-
+ net/core/dev.c                                    |  2 +-
+ net/core/xdp.c                                    |  2 +-
+ net/devlink/trap.c                                |  2 +-
+ net/openvswitch/actions.c                         |  2 +-
+ net/openvswitch/datapath.c                        |  2 +-
+ net/sctp/outqueue.c                               |  2 +-
+ net/tipc/node.c                                   |  2 +-
+ 35 files changed, 74 insertions(+), 62 deletions(-)
+
+-- 
+2.53.0
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
