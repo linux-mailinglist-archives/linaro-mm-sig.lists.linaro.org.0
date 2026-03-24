@@ -2,137 +2,57 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qC7OKOxh5mm6vgEAu9opvQ
+	id 8MQUBPJh5mm6vgEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:27:08 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:27:14 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7AF9A431392
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:27:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C2BFC43139B
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:27:13 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8006A3F800
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:27:07 +0000 (UTC)
-Received: from GVXPR05CU001.outbound.protection.outlook.com (mail-swedencentralazon11013004.outbound.protection.outlook.com [52.101.83.4])
-	by lists.linaro.org (Postfix) with ESMTPS id BC0AD3F751
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 24 Mar 2026 13:38:55 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id BEFD8404DD
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:27:12 +0000 (UTC)
+Received: from relay.hostedemail.com (smtprelay0014.hostedemail.com [216.40.44.14])
+	by lists.linaro.org (Postfix) with ESMTPS id A2D6A3F751
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 24 Mar 2026 14:27:56 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=nxp.com header.s=selector1 header.b=dybfMZac;
-	arc=pass ("microsoft.com:s=arcselector10001:i=1");
-	spf=pass (lists.linaro.org: domain of ruxandra.radulescu@nxp.com designates 52.101.83.4 as permitted sender) smtp.mailfrom=ruxandra.radulescu@nxp.com;
-	dmarc=pass (policy=none) header.from=nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Owujy0GBrqyYmOvbhydBCukId2WUiY10Jg5hj4DgDkni2pssuTAC0U4d7YNLTmbP5Mp/vyscD8dM9rDFhwkLiD72h9VwoFHb8yN8+iwHaELIomLaNo8dHTzht7gQDyRuVxcLfRKEOhq/Yja10zfK9bolfuQ+aE0kvHn0Als1BeXJd73NtCaUATRn7DFc9sq8ZY7RiuALc0V2GVJi7b6tsNZ/8U3MwJE63q1Zpkt8R+Qa6hLWybYisbn7xtrQn6j13wlTHu9+F/aInlkxBFnwPSSFuMgCejsIkka+0cuiQOYXsx7XmyyfBw6CX1sSqoqHO+F+2sPbeXkxjYLPPsuEYA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=kRYXTjj+3jPX90p8mHql8nyjSkBSP31fZ6f8r/c/zqs=;
- b=w+LzZFYltlLnqkh1JLkskyLiF6WKf8uJ+kYWelU09UEJxMZg6QyEZzwPjlEUVqhv95srimic/cvuWvc5ZYLt7qdknR4zpfzEDCg1JmbiBmRByRcHxM82j+cBX0PAakCbSk0pzxIuxsDJ3lOrkSK4gzvyyl86eY3eimwsfeQyVjHRlCSa+Mz05yCoFoEEy7Q4emUao/tjH2Ld/ElApIJR4TGhq7Rsxqx3OQ62uC58QFpl41FAlsC5WeOQ7EMMf0YQM0GV91Gm//CP36fYQol/BI29lhsk+zCE9bjVqSy3wOkXvghCmZtFVkMTyXA+Nou/U+Tep2IAPD4bwEC2kbth0g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
- header.d=nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kRYXTjj+3jPX90p8mHql8nyjSkBSP31fZ6f8r/c/zqs=;
- b=dybfMZac1vy2bxgv4zZOrHGtxHsXwVhEjbfkPouHq4ZYmuE8kJtV+AazPLuEyhRTZ+No2jEZHfGzBNY4enPXwZyOLCmMtyvI/hrmluJD/eWd/VpXeYeMDjRhMROLi8XwZA/F/gylCNNWJ5zJoJ8S9Cq01TOw9i6uMdl3/4Q5FOqMBFGgksXXSoNcSdwvYo15g4VSOFsCyaAkg3D2OsDwQTihpSU5uh8syilTiOvIK8HdpAfjgI7TKRSvpIxNiie1m2lXq8XYpHsOrOK7GfF7SrpJmmIFNuiGdyj/2ZnZCbS8QaXq01FU4bTkTkmys6PhyfHrxhFFeEX+c4Wth7Roig==
-Received: from PAXPR04MB9424.eurprd04.prod.outlook.com (2603:10a6:102:2b2::13)
- by PA4PR04MB7615.eurprd04.prod.outlook.com (2603:10a6:102:e6::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.31; Tue, 24 Mar
- 2026 13:38:51 +0000
-Received: from PAXPR04MB9424.eurprd04.prod.outlook.com
- ([fe80::671d:216f:d493:44ce]) by PAXPR04MB9424.eurprd04.prod.outlook.com
- ([fe80::671d:216f:d493:44ce%4]) with mapi id 15.20.9723.022; Tue, 24 Mar 2026
- 13:38:41 +0000
-From: Ioana Ciocoi Radulescu <ruxandra.radulescu@nxp.com>
-To: Frank Li <frank.li@nxp.com>, Oded Gabbay <ogabbay@kernel.org>, Maarten
- Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard
-	<mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie
-	<airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal
-	<sumit.semwal@linaro.org>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski
-	<krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Shawn Guo
-	<shawnguo@kernel.org>, =?iso-8859-1?Q?Christian_K=F6nig?=
-	<christian.koenig@amd.com>
-Thread-Topic: [PATCH v2 7/9] accel/neutron: Add job submission IOCTL
-Thread-Index: AQHcrW0YA6y3SKZzMUyWigJjqVStgrWhu08AgBwQhwA=
-Date: Tue, 24 Mar 2026 13:38:41 +0000
-Message-ID: 
- <PAXPR04MB94245DA907F655FDA17C74989448A@PAXPR04MB9424.eurprd04.prod.outlook.com>
-References: <20260306-neutron-v2-7-3019bd8c91ef@nxp.com>
- <20260306170259.296712-1-Frank.Li@nxp.com>
-In-Reply-To: <20260306170259.296712-1-Frank.Li@nxp.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PAXPR04MB9424:EE_|PA4PR04MB7615:EE_
-x-ms-office365-filtering-correlation-id: ccc4f24a-4324-47df-0c8c-08de89aaa97f
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: 
- BCL:0;ARA:13230040|366016|1800799024|19092799006|376014|7416014|38070700021|921020|22082099003|18002099003|56012099003;
-x-microsoft-antispam-message-info: 
- c6vwratmFieNo/ABtarMaf5IjMiIXGbYog1TVv/Fn6d9KgopkZfro2+MqAy9rnYbbYnwjCURvIUT2RjB02+2Bqg4wfytvg0pc3J8SZd0VxAehsdsn9sQA4/DKDivf6VHmYs7zTJ/PgEQkRggD+JGBEr7WNnbRR3la3t3dkd8gXk/FEWWLvbDA0hyQr9NHCcvB6gti2N+CYDbSzNVM744NodlA1LWmh78MLj3MWa1/nZ1VUDnfvkLuNS/BBqh9O2/0330i5pyA2Xrvcz7RtxctsnRCkqZjRCHiJhxYxG+n6XAm16RyIUt4gxJkYFht+Cb+McD5LEXNsk0cP0Sbx0sPFhZijpinh4TpLwukuoHhMcMSTiB1MgEvGeyweNFGM2E8hmuRdyVFwq79qk4UxJ+FkIzPZPHJzA8c1oaX7AorPRDWmGScLeBEuSw5XcokTcTdy8DaWzPKfj5MN9nn3ciVA53i1X4fE4yKp/wNoeKQwxfmVEIQIh/ndRbGpFhwn/JlQqdUX+wIHxEperYPt1VFgf1lEPpXfPTH9bpw7tV8Sl1gGiHqM418lwD7ZOJlFjdgKGBNnbzszoggEmScg15wEPeb3VgauHTRGUhxK5la5r428aiX+lcjLZkQreQ1QJSSAGfIMqvqOJ0ETOZq4BOTXZOir1i/epHFqdFU7IHU91mgRSQQ78TjqjlqeOZLwtKIaq9ACEyEVzcI4KO9UlL9GzYSjFN7iJs6b6iF8rKhl5UKe1w055xu9vQHsVg2nSn7kHC5lYf6WOvJxNdsPXRbcVL/2h//E5/RZVZzuguxOvode7fEkL/7+ZkY6SleFbJ
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAXPR04MB9424.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(19092799006)(376014)(7416014)(38070700021)(921020)(22082099003)(18002099003)(56012099003);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?iso-8859-1?Q?wDa4lD8BYAumg1dtIH53faKrFmAz5M8Slw24DogzV+nhphOW0w4WFUGP25?=
- =?iso-8859-1?Q?w17cpMrGHAin+bO2837F2PJD7cAYCdHOQW8aTwhURdfPU9ZZSIAhWH/Bf4?=
- =?iso-8859-1?Q?r5+AjaWOVllvLe2Sb7GSir+Kykf3wRtEd8TsMC3GJJu3019SpBVOpWLfI6?=
- =?iso-8859-1?Q?z6AFmL4VfomDbQGkx7sS/1UUCExIeB6T7zVjizGV7omyixCeVPlWpdHQz5?=
- =?iso-8859-1?Q?AmxOyPSjnlUTjP2cpcqDYJXKPKasKi8YSHB45++jW5FL/g7eYggSDwk6Dq?=
- =?iso-8859-1?Q?lm5ObPnvCXkdRJvd6RmJsH9NGx0pWhnkgSoRMpYOzZdnx1B+AdZ1L9/qy5?=
- =?iso-8859-1?Q?qz4Qfb5W8FaQVLyy4VzQy4fhp6mab144IWrxzzhxZfEGANjeDHTU1omBc2?=
- =?iso-8859-1?Q?X8/jAzZeI/z2JjsKDk36LtJWN8e8hdjTHQurUXJ4fRkdr/fT/Mzv0nEMNj?=
- =?iso-8859-1?Q?7a6SFWC8dH89LMrFaosZDSaagZskROtkVnOeFjktoNeZGNa2Ze3hCkm5xf?=
- =?iso-8859-1?Q?5gqcqdyni6HWo0CtXqpDULgowGQkAIhAC4fbkASSv4nHt2264p3iX9k3H2?=
- =?iso-8859-1?Q?sDlbTQg0EdgLuQAAAMZjSQCLildP9PXboFXDLnpA8w344SRY7DsHlAZNwz?=
- =?iso-8859-1?Q?tTOTt4g7DcnvD2XIn+rlAjX1RNKEQHfOI/zPy6dAGV6FTEeQnK8h6HqFau?=
- =?iso-8859-1?Q?hV6d6ItVW6hrjO7wKFlGa4/8KieWp/09uwwgK1FY9IqayyPw/VpkYmMlZ5?=
- =?iso-8859-1?Q?f6m9lc9XR8aeT/013IRYfJ+ctI6dfXa/EIs5EBleZ2tgq/oziaD0ljczCa?=
- =?iso-8859-1?Q?1uSa4rd8Mzj26dvarCpvxjYg1cg0riP0n/L6D+v+6ZisuwRewtMa3qWsa2?=
- =?iso-8859-1?Q?wHtmfBpyx73SGaTw4gjQ0zf1bCDfsVkOQ3VufaSXC9/H8bnLbcHgxmHzjL?=
- =?iso-8859-1?Q?rkFGWmhmbDVOyTdyyoOIWDoU/HYNdePvj9Rj2UECGBmp7L2elJQeps3AqJ?=
- =?iso-8859-1?Q?YKWUnuTJzMjzmB6ZpLuHWC8fR/4Mk6eVQAjA9uGEw5LNiptwi/1VRVQz0q?=
- =?iso-8859-1?Q?CrXVN92DC7zYxxoSYVAT1e/hzI9f3i1UJiWNxVltvbQZFLyUNDaHe3zwmL?=
- =?iso-8859-1?Q?5+6M5FnGM4COtsw622TLPgSomcsKX2MDnhSYZpku7BfX//LYH0mWK4krsR?=
- =?iso-8859-1?Q?fFKuj2AGLIHUGRu01lxg0TGMLrZG1GHuUE+XdVH5u9XiTqmCBl2pYr4R/r?=
- =?iso-8859-1?Q?88EhsUukSU29lCLcaqP4zIkctXc8VgCtxVmvRLm6vmG/Up2c/Z6p6/y47T?=
- =?iso-8859-1?Q?UyXhPAcbccyImkUUHs0llvcTdwKidv6lybt0F5a1DJ/nIxX5N6aLfi4wwa?=
- =?iso-8859-1?Q?899FfvlEg2pAsVUr7Bwi+5U+KY9h0p46h/dpxYpyjYWDiIVDPXepXpMnar?=
- =?iso-8859-1?Q?Vh+Mbk221RZLQzsjODBlSTap5jywLwkkEw17nqT/Y+Zz/f+KJhndO29I35?=
- =?iso-8859-1?Q?5zFvVLQdntQ/49J22kQIK2DK5V7boHlzJ+UpS2GQANZ/LJKy2bxJL2sNTQ?=
- =?iso-8859-1?Q?s0ps8PsQ73/c9MUQ7bQXEsCtUgw8AUuwIGCLZ0VyITgZOrIlZgL/xX9bwh?=
- =?iso-8859-1?Q?ZPET1GQencNXWKtQ9fyb8EMfR2WzCoKr5RGmNtHE45HvKQJZ2Tj0Z3jFw/?=
- =?iso-8859-1?Q?8Y96SXGrVUq33Wy75x94IDx631sNSJAOsaBOAH3NLDgbELEKY3wau12YTt?=
- =?iso-8859-1?Q?LX+tdDxHK77Ms6Oat+c2I7EzHYYWnLCxX653jR6Q7a1WwI1mHr2MEr2vgG?=
- =?iso-8859-1?Q?6N2IhntCEQ=3D=3D?=
+	dkim=none;
+	spf=pass (lists.linaro.org: domain of rostedt@goodmis.org designates 216.40.44.14 as permitted sender) smtp.mailfrom=rostedt@goodmis.org;
+	dmarc=pass (policy=none) header.from=goodmis.org
+Received: from omf02.hostedemail.com (a10.router.float.18 [10.200.18.1])
+	by unirelay09.hostedemail.com (Postfix) with ESMTP id 1F17D9396F;
+	Tue, 24 Mar 2026 14:27:53 +0000 (UTC)
+Received: from [HIDDEN] (Authenticated sender: rostedt@goodmis.org) by omf02.hostedemail.com (Postfix) with ESMTPA id DC83180011;
+	Tue, 24 Mar 2026 14:27:20 +0000 (UTC)
+Date: Tue, 24 Mar 2026 10:28:02 -0400
+From: Steven Rostedt <rostedt@goodmis.org>
+To: "Vineeth Pillai (Google)" <vineeth@bitbyteword.org>
+Message-ID: <20260324102802.4f8af148@gandalf.local.home>
+In-Reply-To: <20260323160052.17528-1-vineeth@bitbyteword.org>
+References: <20260323160052.17528-1-vineeth@bitbyteword.org>
+X-Mailer: Claws Mail 3.20.0git84 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9424.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ccc4f24a-4324-47df-0c8c-08de89aaa97f
-X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Mar 2026 13:38:41.3903
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: HO9d+AE++cERBK2NmnPw+eANJZ7qwD89wk1YoJX6Pmhi6ZIr0r6v5v//hsfRwwwROaaX/1PiMctxovwzr6/DIYMI0pCR2WofHy52Ey1S9fE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR04MB7615
-X-Spamd-Bar: ----
-X-MailFrom: ruxandra.radulescu@nxp.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 2LEW7376X4MGN72EYBA26QQVXZ52IHTH
-X-Message-ID-Hash: 2LEW7376X4MGN72EYBA26QQVXZ52IHTH
-X-Mailman-Approved-At: Mon, 20 Apr 2026 17:25:30 +0000
-CC: "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>, "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>, "imx@lists.linux.dev" <imx@lists.linux.dev>, "linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, Jiwei Fu <jiwei.fu@nxp.com>, Forrest Shi <xuelin.shi@nxp.com>, Alexandru Iulian Taran <alexandru.taran@nxp.com>, Daniel Baluta <daniel.baluta@nxp.com>
+X-Stat-Signature: rgnt1g9q8d9rzsk6azwgoui85joqhwik
+X-Spam-Status: No, score=1.40
+X-Session-Marker: 726F737465647440676F6F646D69732E6F7267
+X-Session-ID: U2FsdGVkX19u4yDoihzmlvbQbp4GBKk4Sx0FsrK0H8g=
+X-HE-Tag: 1774362440-296898
+X-HE-Meta: U2FsdGVkX18Kg3NfvHLPV0rnp3UrERb/HeySVgjR0PuCDys+LVJ4s2L8fsy1rJHv82yu9UO4h+xU9iEx3z3YFKVS1OFx2Vvti4rEmq0enV2xaTwbpZ+YWf60TFzb8QMlheid4NsXOVqOYcFPHCn+ZrWqPDCdrmq0l+tkyLSeYhbpJixFuANIjXhtSBZInyEBtAAqHPqUuWZ3PdZupXAY7JMTASH2KNw+CMFxYOXnDTbb38gpzJzBKiUcyoxK6GlO0db0aEPLlOAMHWKzcQEu5msgaweBGFFWtD9G0uWRbe+OcS9gBl+SI1CDJFvGCt0Z8gh5xinNWW7KF0gSIEh3ZlA0AO0+B5wCRjivVxgdquYH5bWbk7CtReb5es0u0tOp
+X-Spamd-Bar: --
+X-MailFrom: rostedt@goodmis.org
+X-Mailman-Rule-Hits: implicit-dest
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+Message-ID-Hash: BNSXFSZ3ZNFSTAHSL55MPMPM7YKDZH4R
+X-Message-ID-Hash: BNSXFSZ3ZNFSTAHSL55MPMPM7YKDZH4R
+X-Mailman-Approved-At: Mon, 20 Apr 2026 17:25:31 +0000
+CC: Peter Zijlstra <peterz@infradead.org>, Dmitry Ilvokhin <d@ilvokhin.com>, Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Ingo Molnar <mingo@redhat.com>, Jens Axboe <axboe@kernel.dk>, io-uring@vger.kernel.org, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Alexei Starovoitov <ast@kernel.org>, Daniel Borkmann <daniel@iogearbox.net>, Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>, Xin Long <lucien.xin@gmail.com>, Jon Maloy <jmaloy@redhat.com>, Aaron Conole <aconole@redhat.com>, Eelco Chaudron <echaudro@redhat.com>, Ilya Maximets <i.maximets@ovn.org>, netdev@vger.kernel.org, bpf@vger.kernel.org, linux-sctp@vger.kernel.org, tipc-discussion@lists.sourceforge.net, dev@openvswitch.org, Jiri Pirko <jiri@resnulli.us>, Oded Gabbay <ogabbay@kernel.org>, Koby Elbaz <koby.elbaz@intel.com>, dri-devel@lists.freedesktop.org, "Rafael J. Wysocki" <rafael@
+ kernel.org>, Viresh Kumar <viresh.kumar@linaro.org>, "Gautham R. Shenoy" <gautham.shenoy@amd.com>, Huang Rui <ray.huang@amd.com>, Mario Limonciello <mario.limonciello@amd.com>, Len Brown <lenb@kernel.org>, Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>, linux-pm@vger.kernel.org, MyungJoo Ham <myungjoo.ham@samsung.com>, Kyungmin Park <kyungmin.park@samsung.com>, Chanwoo Choi <cw00.choi@samsung.com>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Sumit Semwal <sumit.semwal@linaro.org>, linaro-mm-sig@lists.linaro.org, Eddie James <eajames@linux.ibm.com>, Andrew Jeffery <andrew@codeconstruct.com.au>, linux-fsi@lists.ozlabs.org, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Alex Deucher <alexander.deucher@amd.com>, Danilo Krummrich <dakr@kernel.org>, Matthew Brost <matthew.brost@intel.com>, Philipp Stanner <phasta@kernel.org>, Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>, amd-gfx@lists.freedesktop.org, Jiri Kosina <jikos
+ @kernel.org>, Benjamin Tissoires <bentiss@kernel.org>, linux-input@vger.kernel.org, Wolfram Sang <wsa+renesas@sang-engineering.com>, linux-i2c@vger.kernel.org, Mark Brown <broonie@kernel.org>, Michael Hennerich <michael.hennerich@analog.com>, Nuno =?UTF-8?B?U8Oh?= <nuno.sa@analog.com>, linux-spi@vger.kernel.org, "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>, "Martin K. Petersen" <martin.petersen@oracle.com>, linux-scsi@vger.kernel.org, Chris Mason <clm@fb.com>, David Sterba <dsterba@suse.com>, linux-btrfs@vger.kernel.org, Thomas Gleixner <tglx@linutronix.de>, Andrew Morton <akpm@linux-foundation.org>, SeongJae Park <sj@kernel.org>, linux-mm@kvack.org, Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, linux-trace-kernel@vger.kernel.org, linux-kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 7/9] accel/neutron: Add job submission IOCTL
+Subject: [Linaro-mm-sig] Re: [PATCH v2 00/19] tracepoint: Avoid double static_branch evaluation at guarded call sites
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TG6U4VYTANNVPPAV66TPKBKAAERZHN5F/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/BNSXFSZ3ZNFSTAHSL55MPMPM7YKDZH4R/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -141,92 +61,55 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [4.09 / 15.00];
+X-Spamd-Result: default: False [2.09 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[nxp.com:s=selector1];
-	DATE_IN_PAST(1.00)[651];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+	DATE_IN_PAST(1.00)[650];
 	MAILLIST(-0.20)[mailman];
-	DMARC_POLICY_SOFTFAIL(0.10)[nxp.com : SPF not aligned (relaxed),none];
+	R_SPF_ALLOW(-0.20)[+mx:c];
+	DMARC_POLICY_SOFTFAIL(0.10)[goodmis.org : SPF not aligned (relaxed), No valid DKIM,none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[25];
-	GREYLIST(0.00)[pass,meta];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_TO(0.00)[nxp.com,kernel.org,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[nxp.com:-];
-	NEURAL_HAM(-0.00)[-0.922];
-	FROM_NEQ_ENVFROM(0.00)[ruxandra.radulescu@nxp.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
 	TO_DN_SOME(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,dt];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	FREEMAIL_CC(0.00)[infradead.org,ilvokhin.com,kernel.org,efficios.com,redhat.com,kernel.dk,vger.kernel.org,davemloft.net,google.com,iogearbox.net,gmail.com,ovn.org,lists.sourceforge.net,openvswitch.org,resnulli.us,intel.com,lists.freedesktop.org, kernel.org,linaro.org,amd.com,linux.intel.com,samsung.com,lists.linaro.org,linux.ibm.com,codeconstruct.com.au,lists.ozlabs.org,ffwll.ch,sang-engineering.com,analog.com,HansenPartnership.com,oracle.com,fb.com,suse.com,linutronix.de,linux-foundation.org,kvack.org,alien8.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: 7AF9A431392
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	RCPT_COUNT_GT_50(0.00)[79];
+	FROM_NEQ_ENVFROM(0.00)[rostedt@goodmis.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[linaro-mm-sig,renesas];
+	R_DKIM_NA(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,gandalf.local.home:mid,bitbyteword.org:email,linaro.org:email]
+X-Rspamd-Queue-Id: C2BFC43139B
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Friday, March 6, 2026 at 7:03 PM, Frank Li wrote:
-> > +	if (appstatus & APPSTATUS_FAULTCAUSE_MASK) {
-> > +		dev_err(ndev->dev, "Neutron halted due to fault: 0x%lx\n",
-> > +			FIELD_GET(APPSTATUS_FAULTCAUSE_MASK,
-> appstatus));
-> > +		return neutron_job_err_handler(ndev);
+On Mon, 23 Mar 2026 12:00:19 -0400
+"Vineeth Pillai (Google)" <vineeth@bitbyteword.org> wrote:
+
+> When a caller already guards a tracepoint with an explicit enabled check:
 > 
-> AI: neutron_job_err_handler() returns void, not int. Remove 'return'.
+>   if (trace_foo_enabled() && cond)
+>       trace_foo(args);
 
-Ok, will fix.
+Thanks Vineeth!
 
-> 
-> > +	ret = drm_sched_job_init(&job->base, &npriv->sched_entity, 1, NULL,
-> > +				 filp->client_id);
-> > +	if (ret)
-> > +		goto out_put_syncobj;
-> > +
-> > +	ret = neutron_push_job(job, syncobj);
-> > +	if (ret)
-> > +		goto out_sched_cleanup;
-> > +
-> > +	neutron_put_job(job);
-> > +	drm_syncobj_put(syncobj);
-> > +
-> > +	return 0;
-> > +
-> > +out_sched_cleanup:
-> > +	drm_sched_job_cleanup(&job->base);
-> > +out_put_syncobj:
-> > +	drm_syncobj_put(syncobj);
-> > +out_put_gem:
-> > +	drm_gem_object_put(job->bo);
-> 
-> AI: In the success path, neutron_put_job(job) is called which decrements
-> refcnt. But if neutron_push_job() fails and we hit out_sched_cleanup, the job
-> refcnt is never decremented. This leaks the job structure.
-> Consider: if neutron_push_job() succeeds, it calls kref_get() inside sched_lock.
-> If it fails, no kref_get() happens, so don't call
-> 
-> (Need owner do judgment. Not sure if AI said correctly.)
+I'm going to start pulling in this series. I'll take the first patch, and
+then any patch that has an Acked-by or Reviewed-by from the maintainer.
 
-I don't see an issue here, kref_get() is called at a point where
-neutron_push_job() can't fail anymore. And if neutron_push_job() fails
-earlier, error path looks clean, it frees everything in reverse order,
-including the job struct.
+For patches without acks, I'll leave alone and then after the first patch
+gets merged into mainline, the maintainers could pull in their own patches
+at their own convenience. Unless of course they speak up now if they want
+me to take them ;-)
 
-Btw, what agent did you use for review?
-
-Thanks,
-Ioana
-
-> 
-> Frank
+-- Steve
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
