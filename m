@@ -2,35 +2,35 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id oCyBAnvNw2lKuAQAu9opvQ
+	id qBhgNIzNw2lKuAQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Mar 2026 12:56:43 +0100
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Mar 2026 12:57:00 +0100
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 77CD53244B4
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Mar 2026 12:56:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6217A3244D2
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Mar 2026 12:57:00 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 6F66D3F76C
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Mar 2026 11:56:41 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 512FF3F85C
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Mar 2026 11:56:59 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DD14A3F76C
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Mar 2026 11:56:34 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5C9C13F76C
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Mar 2026 11:56:53 +0000 (UTC)
 MIME-Version: 1.0
 From: "Adorable Ferrets" <adorableferrets6@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Wed, 25 Mar 2026 11:56:34 -0000
-Message-ID: <177443979490.3644488.8390221987439998112@lists.linaro.org>
+Date: Wed, 25 Mar 2026 11:56:53 -0000
+Message-ID: <177443981337.3643991.4831748824787049312@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: RXHXSG7LM4W4HVUAZGTX5B5ODZ5CZ65P
-X-Message-ID-Hash: RXHXSG7LM4W4HVUAZGTX5B5ODZ5CZ65P
+Message-ID-Hash: WBLVVVOS5WUQTRPSELZNXNGQ2NP4WDBW
+X-Message-ID-Hash: WBLVVVOS5WUQTRPSELZNXNGQ2NP4WDBW
 X-MailFrom: adorableferrets6@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Buy Shih Tzu puppy near me
+Subject: [Linaro-mm-sig] AKC Shih Tzu puppies
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RXHXSG7LM4W4HVUAZGTX5B5ODZ5CZ65P/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WBLVVVOS5WUQTRPSELZNXNGQ2NP4WDBW/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -62,8 +62,8 @@ X-Spamd-Result: default: False [0.59 / 15.00];
 	RCVD_TLS_LAST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	R_DKIM_NA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:mid,shihtzupuppies.site:url,linaro.org:email]
-X-Rspamd-Queue-Id: 77CD53244B4
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,shihtzupuppies.site:url,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:mid]
+X-Rspamd-Queue-Id: 6217A3244D2
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
