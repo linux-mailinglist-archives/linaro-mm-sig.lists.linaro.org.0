@@ -2,86 +2,89 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id CEXDDZJi5mmavgEAu9opvQ
+	id SMb/I5di5mmavgEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:29:54 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:29:59 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id C2BF943147F
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:29:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4EDA6431486
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:29:59 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id D488A3F9B3
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:29:52 +0000 (UTC)
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
-	by lists.linaro.org (Postfix) with ESMTPS id B2DA33F7B3
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Mar 2026 19:23:54 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5B13C40517
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:29:58 +0000 (UTC)
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+	by lists.linaro.org (Postfix) with ESMTPS id EB4D23F7B3
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Mar 2026 19:23:55 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=resnulli-us.20230601.gappssmtp.com header.s=20230601 header.b="yr1/YIC6";
-	spf=none (lists.linaro.org: domain of jiri@resnulli.us has no SPF policy when checking 209.85.128.51) smtp.mailfrom=jiri@resnulli.us;
+	dkim=pass header.d=resnulli-us.20230601.gappssmtp.com header.s=20230601 header.b=jRt16o6o;
+	spf=none (lists.linaro.org: domain of jiri@resnulli.us has no SPF policy when checking 209.85.128.45) smtp.mailfrom=jiri@resnulli.us;
 	dmarc=none
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-486b9675d36so2091925e9.0
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Mar 2026 12:23:54 -0700 (PDT)
+Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-48702d51cd0so2480075e9.2
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Mar 2026 12:23:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=resnulli-us.20230601.gappssmtp.com; s=20230601; t=1774466634; x=1775071434; darn=lists.linaro.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=q9oYYl5Ubh4Ping1zst+E8em20zAUpauFfgriVu6hpE=;
-        b=yr1/YIC6QbuTk02pndhZ5zJLZs6fsq+AH2OeYANjQfglpArrWtMYAyhnsvM4wA2rE4
-         ibdY0EQSZID473iPqszmWM3Jegfc6jAcg3Br37c1s1RQLEFPxVRA/Jlx6iQo25xDdAhI
-         AESaiHX2R48mSvcuYvOvmHG/ZtaIx0YPSLmH2pxR4Qdwvwk8PLZUYOBBywD6lcimW6wn
-         Vym3DN/fSfsI19ms6iNReeG47hWrRNS4X8BnZeRuQErRQvXxBVdKDHuiJaZYIwUPFJx8
-         ArmLJ638W8kvUdE7tF13SMx32piPRAIgZ13wZCDjTgQudhXcO4oI2+EBTRx3qCNQHSPE
-         0Y+Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774466634; x=1775071434;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=resnulli-us.20230601.gappssmtp.com; s=20230601; t=1774466635; x=1775071435; darn=lists.linaro.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=q9oYYl5Ubh4Ping1zst+E8em20zAUpauFfgriVu6hpE=;
-        b=g8RHwJoxuwO0ZIS+EwaFH87WS/Gt1CXctGLHf7jGcR3Z+XI6AEmryFg2Hf6dnXM/AF
-         uKduuXYPhvBn2ANZ9kNkI4naOx8Qpq/wsGZaExYAcrfkfPX9xD+msChM4ITmQ2eqNlbk
-         v1otKcW/D8+efE/gZckaYbcNB9wSmhC2rPScSyLjPZsR9zub8yTm6sGrU7cpfn+qPFjO
-         3y57kuwxHiLG9BmQ/qKir4Q+zvdw55HuNCXbEJbSbNTfztp8TRMKDOG+5H+aXNPNPWuX
-         UDB190sSh0MZXZJ44xJt7INXVUxWcjOztm7IGBI4RNrtUzHA0PikPDQTFAbpFqFdjKP8
-         y6nw==
-X-Forwarded-Encrypted: i=1; AJvYcCV9WFHytn9ryQYWYFMPf7XcRJuqZSkHswrPfsWxs5XtzUzIuvF6D0UMdDXihwa7sZ+kZtehNWWwVRQNcO60@lists.linaro.org
-X-Gm-Message-State: AOJu0YyP7Pj9Xsi6ja1wZRYJuAPfkaUwQLScGFtX4ySdKQyixc1WFH8/
-	6N3Yjs5ldw0dtEly9MHbOpEIV/h6Oqr53z8STGP0wgFXCGuBP/IYbW3AsgCi86K007o=
-X-Gm-Gg: ATEYQzylgQe6JnuJ0W3ZZGM6ftAnxEABuAvxvENPN1HbuFVzWnvs1LrwmU6XR4nHR5R
-	O4uVelI6w56RecYI6QYmAhc7cvQX9wqo4fWLnI4P71F2R3Qti/uIfgqDDDhd9pDTPBNbhRxco1L
-	MIj082M40ofjKcx0/9V25+6OQfuOfWIsH+/GsAvgcQR//YBsEoWgaKnQTgctv5ohqwhTPpSYjd9
-	2XcLYzPabH9B8JjQOXh0S2rFIq5m6kGoUgsz0ypL92uo7AVo6tp0G7Bqa7sgftcm1RXEqNJYWjf
-	Mbz+8K1jr8SbGHIvfb/qkrwuR7XZKzj3gPzj7mgM0cW+dzoCOWhx0DV+sATmODbtJ1ltiXcGjXy
-	noR16dW1gXUQrD2UFRCVmsO3jHtaJwloFRZ3vuTKqG47cMmevpMr4O2jkU/0gn2VFuywOIuT8Il
-	VQ7U01KreufGLHlhJvOHB76/LjA5qW
-X-Received: by 2002:a05:600c:1f12:b0:485:41c4:e2e5 with SMTP id 5b1f17b1804b1-4871605686dmr70437725e9.27.1774466633448;
-        Wed, 25 Mar 2026 12:23:53 -0700 (PDT)
+        bh=YMfoKT234OWAIu2ygAH4xOQ0BTmCnNSAwf62AjGD0Kg=;
+        b=jRt16o6oVeyUAzz4+ZpWph6Nl6yvURqU5QkO/l/WdP1O6JW2/A354ehLbMprGRitR4
+         zXTIAbFJgnDvsowEIcl0xvntWZnSKhHnnWnVGx+hsN9CE7a+koQujBwbi9QCubW7o4Hu
+         FLVNY8+d1qxv/Ex9Qt68CPUuBnPX4Z/AayDpzz1gnpom/KwxDgTKZED9zyQkWhSDsgTK
+         rhj9LTgalt7Xeq4EjwVfBiHGWvtYWyyA1H4w563sDKb6uaOLmXtNkaVC5WiQxw3lmOkk
+         wkKP8CW6tL7c7dsRKGleZIag6SuVwJVHTogBQBoIe0j7Z2l7byhR1cfs8sapzhO4HT5y
+         oP+w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1774466635; x=1775071435;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=YMfoKT234OWAIu2ygAH4xOQ0BTmCnNSAwf62AjGD0Kg=;
+        b=HtThBvm4iVZ7/mjCzlbIfmDbfVsFhyo3RKB+h52FNTw8VVevtLpHBbACdftSG4YoDp
+         kkSZyQMtCCkWbTIjx4HgLSeEY8wm0YuwedP1N0TBRrRuD/OeM9ZE7gOcHCCg/0m7WAjq
+         pqkynj5VHgzZFwgOdaLdlVo56Me5NvsxQhLcRYGVqtU8dvvLxQNCw3N3aFR2eqPjdpNA
+         PFnxy1XGXcpyJcnPd7Efnsi0ML752eHiOShQqydwBdp5sMR6euUbDf1P2e31Vmk9v+v3
+         +Jc/cfYJoubMz0DTciP9jKk4OmVmScHGPdVY/W8jjxqBektOwMHzwI46qcyToLiuk87j
+         VG2g==
+X-Forwarded-Encrypted: i=1; AJvYcCXk9HRpmy/CLNGeoIIuONWqn2kEXAJEEwYtOrgpg1pWt8e8ZT0nRiZRAk1c748R2PNTnIVMdOPpWz4EJnui@lists.linaro.org
+X-Gm-Message-State: AOJu0YwwAAdE7RP2TjU/kCFYQ0MO71Rr3qrEeoV+YqhpSPFqHJM0fGm4
+	5ducfh3L6jQ5i3ZimnLWS3YJavUfsDe+RKEb81fUull3k2ovRPE9ujLL3OK5eFGBFug=
+X-Gm-Gg: ATEYQzzwwY58CBkyjhYBYoXgD9MvCQg7HZC9wAJd0HpqfZzLxu9ShL9zL2JFzL+rXne
+	aDSGZzce8J6R260NH3n2zvyQauG0wNVcRFatqhxzEsZUrN9FvXIKs2hLDGTckOGyK1rtDJkbvgI
+	gJpiu3xctYlaq+dJeuUPmp4N+GQ9B8DkgwhTstm6leOkebsB/8JYJTDTRgEnOX1XPL8gn/04sG4
+	9/nj1sR38IQJSR4i2IAqHsF8cxl0B+HQDPjs/TkJ9nIy+u/mm//eiOjC9wFKli8/dbQw5aohoXf
+	1Rb+0BZYU1jbrwgsmB3dea9A9mv0eAzuu5GtlQcMtUFZj6JUo6+Z/XQ3itbqoc94ZAFBprDMDJc
+	3oXeVNWuSkswJ5lrdC7rpgZ+tKr6l+nb8Cgcyf62YeslplmHLG7wUFbhbRCbt+Aan6Q7WHgdwqD
+	AZVB8imrkwZu/1NoHnUA==
+X-Received: by 2002:a05:600c:c4a4:b0:485:1878:7b8c with SMTP id 5b1f17b1804b1-48716056512mr65908275e9.18.1774466634748;
+        Wed, 25 Mar 2026 12:23:54 -0700 (PDT)
 Received: from localhost ([140.209.217.211])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43b919e7111sm1855634f8f.37.2026.03.25.12.23.52
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48711702191sm146523035e9.5.2026.03.25.12.23.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Mar 2026 12:23:53 -0700 (PDT)
+        Wed, 25 Mar 2026 12:23:54 -0700 (PDT)
 From: Jiri Pirko <jiri@resnulli.us>
 To: dri-devel@lists.freedesktop.org,
 	linaro-mm-sig@lists.linaro.org,
 	iommu@lists.linux.dev,
 	linux-media@vger.kernel.org
-Date: Wed, 25 Mar 2026 20:23:50 +0100
-Message-ID: <20260325192352.437608-1-jiri@resnulli.us>
+Date: Wed, 25 Mar 2026 20:23:51 +0100
+Message-ID: <20260325192352.437608-2-jiri@resnulli.us>
 X-Mailer: git-send-email 2.51.1
+In-Reply-To: <20260325192352.437608-1-jiri@resnulli.us>
+References: <20260325192352.437608-1-jiri@resnulli.us>
 MIME-Version: 1.0
 X-Spamd-Bar: -
 X-MailFrom: jiri@resnulli.us
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: C6JBXKXJFGLNX4EUITZB72SCJ3JWRESF
-X-Message-ID-Hash: C6JBXKXJFGLNX4EUITZB72SCJ3JWRESF
-X-Mailman-Approved-At: Mon, 20 Apr 2026 17:29:42 +0000
+Message-ID-Hash: 3SOMI76252QNTAQFRSTGUCKFQOMXJTU6
+X-Message-ID-Hash: 3SOMI76252QNTAQFRSTGUCKFQOMXJTU6
+X-Mailman-Approved-At: Mon, 20 Apr 2026 17:29:43 +0000
 CC: sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, Brian.Starkey@arm.com, jstultz@google.com, tjmercier@google.com, christian.koenig@amd.com, robin.murphy@arm.com, jgg@ziepe.ca, leon@kernel.org, sean.anderson@linux.dev, ptesarik@suse.com, catalin.marinas@arm.com, aneesh.kumar@kernel.org, suzuki.poulose@arm.com, steven.price@arm.com, thomas.lendacky@amd.com, john.allen@amd.com, ashish.kalra@amd.com, suravee.suthikulpanit@amd.com, linux-coco@lists.linux.dev
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v5 0/2] dma-buf: heaps: system: add an option to allocate explicitly shared/decrypted memory
+Subject: [Linaro-mm-sig] [PATCH v5 1/2] dma-mapping: introduce DMA_ATTR_CC_SHARED for shared memory
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/C6JBXKXJFGLNX4EUITZB72SCJ3JWRESF/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3SOMI76252QNTAQFRSTGUCKFQOMXJTU6/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -107,56 +110,160 @@ X-Spamd-Result: default: False [1.49 / 15.00];
 	ARC_NA(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_SPAM(0.00)[0.581];
+	NEURAL_SPAM(0.00)[0.526];
 	TO_DN_NONE(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[jiri@resnulli.us,linaro-mm-sig-bounces@lists.linaro.org];
 	RCPT_COUNT_TWELVE(0.00)[24];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[resnulli.us:mid,lists.linaro.org:helo,lists.linaro.org:rdns,nvidia.com:email,linaro.org:email]
-X-Rspamd-Queue-Id: C2BF943147F
+	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,resnulli.us:mid,lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
+X-Rspamd-Queue-Id: 4EDA6431486
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 From: Jiri Pirko <jiri@nvidia.com>
 
-Confidential computing (CoCo) VMs/guests, such as AMD SEV and Intel TDX,
-run with private/encrypted memory which creates a challenge
-for devices that do not support DMA to it (no TDISP support).
+Current CC designs don't place a vIOMMU in front of untrusted devices.
+Instead, the DMA API forces all untrusted device DMA through swiotlb
+bounce buffers (is_swiotlb_force_bounce()) which copies data into
+shared memory on behalf of the device.
 
-For kernel-only DMA operations, swiotlb bounce buffering provides a
-transparent solution by copying data through shared memory.
-However, the only way to get this memory into userspace is via the DMA
-API's dma_alloc_pages()/dma_mmap_pages() type interfaces which limits
-the use of the memory to a single DMA device, and is incompatible with
-pin_user_pages().
+When a caller has already arranged for the memory to be shared
+via set_memory_decrypted(), the DMA API needs to know so it can map
+directly using the unencrypted physical address rather than bounce
+buffering. Following the pattern of DMA_ATTR_MMIO, add
+DMA_ATTR_CC_SHARED for this purpose. Like the MMIO case, only the
+caller knows what kind of memory it has and must inform the DMA API
+for it to work correctly.
 
-These limitations are particularly problematic for the RDMA subsystem
-which makes heavy use of pin_user_pages() and expects flexible memory
-usage between many different DMA devices.
+Signed-off-by: Jiri Pirko <jiri@nvidia.com>
+---
+v4->v5:
+- rebased on top od dma-mapping-for-next
+- s/decrypted/shared/
+v3->v4:
+- added some sanity checks to dma_map_phys and dma_unmap_phys
+- enhanced documentation of DMA_ATTR_CC_DECRYPTED attr
+v1->v2:
+- rebased on top of recent dma-mapping-fixes
+---
+ include/linux/dma-mapping.h | 10 ++++++++++
+ include/trace/events/dma.h  |  3 ++-
+ kernel/dma/direct.h         | 14 +++++++++++---
+ kernel/dma/mapping.c        | 13 +++++++++++--
+ 4 files changed, 34 insertions(+), 6 deletions(-)
 
-This patch series enables userspace to explicitly request shared
-(decrypted) memory allocations from new dma-buf system_cc_shared heap.
-Userspace can mmap this memory and pass the dma-buf fd to other
-existing importers such as RDMA or DRM devices to access the
-memory. The DMA API is improved to allow the dma heap exporter to DMA
-map the shared memory to each importing device.
-
-Based on dma-mapping-for-next e7442a68cd1ee797b585f045d348781e9c0dde0d
-
-Jiri Pirko (2):
-  dma-mapping: introduce DMA_ATTR_CC_SHARED for shared memory
-  dma-buf: heaps: system: add system_cc_shared heap for explicitly
-    shared memory
-
- drivers/dma-buf/heaps/system_heap.c | 103 ++++++++++++++++++++++++++--
- include/linux/dma-mapping.h         |  10 +++
- include/trace/events/dma.h          |   3 +-
- kernel/dma/direct.h                 |  14 +++-
- kernel/dma/mapping.c                |  13 +++-
- 5 files changed, 132 insertions(+), 11 deletions(-)
-
+diff --git a/include/linux/dma-mapping.h b/include/linux/dma-mapping.h
+index 677c51ab7510..db8ab24a54f4 100644
+--- a/include/linux/dma-mapping.h
++++ b/include/linux/dma-mapping.h
+@@ -92,6 +92,16 @@
+  * flushing.
+  */
+ #define DMA_ATTR_REQUIRE_COHERENT	(1UL << 12)
++/*
++ * DMA_ATTR_CC_SHARED: Indicates the DMA mapping is shared (decrypted) for
++ * confidential computing guests. For normal system memory the caller must have
++ * called set_memory_decrypted(), and pgprot_decrypted must be used when
++ * creating CPU PTEs for the mapping. The same shared semantic may be passed
++ * to the vIOMMU when it sets up the IOPTE. For MMIO use together with
++ * DMA_ATTR_MMIO to indicate shared MMIO. Unless DMA_ATTR_MMIO is provided
++ * a struct page is required.
++ */
++#define DMA_ATTR_CC_SHARED	(1UL << 13)
+ 
+ /*
+  * A dma_addr_t can hold any valid DMA or bus address for the platform.  It can
+diff --git a/include/trace/events/dma.h b/include/trace/events/dma.h
+index 63597b004424..31c9ddf72c9d 100644
+--- a/include/trace/events/dma.h
++++ b/include/trace/events/dma.h
+@@ -34,7 +34,8 @@ TRACE_DEFINE_ENUM(DMA_NONE);
+ 		{ DMA_ATTR_PRIVILEGED, "PRIVILEGED" }, \
+ 		{ DMA_ATTR_MMIO, "MMIO" }, \
+ 		{ DMA_ATTR_DEBUGGING_IGNORE_CACHELINES, "CACHELINES_OVERLAP" }, \
+-		{ DMA_ATTR_REQUIRE_COHERENT, "REQUIRE_COHERENT" })
++		{ DMA_ATTR_REQUIRE_COHERENT, "REQUIRE_COHERENT" }, \
++		{ DMA_ATTR_CC_SHARED, "CC_SHARED" })
+ 
+ DECLARE_EVENT_CLASS(dma_map,
+ 	TP_PROTO(struct device *dev, phys_addr_t phys_addr, dma_addr_t dma_addr,
+diff --git a/kernel/dma/direct.h b/kernel/dma/direct.h
+index b86ff65496fc..7140c208c123 100644
+--- a/kernel/dma/direct.h
++++ b/kernel/dma/direct.h
+@@ -89,16 +89,24 @@ static inline dma_addr_t dma_direct_map_phys(struct device *dev,
+ 	dma_addr_t dma_addr;
+ 
+ 	if (is_swiotlb_force_bounce(dev)) {
+-		if (attrs & (DMA_ATTR_MMIO | DMA_ATTR_REQUIRE_COHERENT))
+-			return DMA_MAPPING_ERROR;
++		if (!(attrs & DMA_ATTR_CC_SHARED)) {
++			if (attrs & (DMA_ATTR_MMIO | DMA_ATTR_REQUIRE_COHERENT))
++				return DMA_MAPPING_ERROR;
+ 
+-		return swiotlb_map(dev, phys, size, dir, attrs);
++			return swiotlb_map(dev, phys, size, dir, attrs);
++		}
++	} else if (attrs & DMA_ATTR_CC_SHARED) {
++		return DMA_MAPPING_ERROR;
+ 	}
+ 
+ 	if (attrs & DMA_ATTR_MMIO) {
+ 		dma_addr = phys;
+ 		if (unlikely(!dma_capable(dev, dma_addr, size, false)))
+ 			goto err_overflow;
++	} else if (attrs & DMA_ATTR_CC_SHARED) {
++		dma_addr = phys_to_dma_unencrypted(dev, phys);
++		if (unlikely(!dma_capable(dev, dma_addr, size, false)))
++			goto err_overflow;
+ 	} else {
+ 		dma_addr = phys_to_dma(dev, phys);
+ 		if (unlikely(!dma_capable(dev, dma_addr, size, true)) ||
+diff --git a/kernel/dma/mapping.c b/kernel/dma/mapping.c
+index df3eccc7d4ca..23ed8eb9233e 100644
+--- a/kernel/dma/mapping.c
++++ b/kernel/dma/mapping.c
+@@ -157,6 +157,7 @@ dma_addr_t dma_map_phys(struct device *dev, phys_addr_t phys, size_t size,
+ {
+ 	const struct dma_map_ops *ops = get_dma_ops(dev);
+ 	bool is_mmio = attrs & DMA_ATTR_MMIO;
++	bool is_cc_shared = attrs & DMA_ATTR_CC_SHARED;
+ 	dma_addr_t addr = DMA_MAPPING_ERROR;
+ 
+ 	BUG_ON(!valid_dma_direction(dir));
+@@ -168,8 +169,11 @@ dma_addr_t dma_map_phys(struct device *dev, phys_addr_t phys, size_t size,
+ 		return DMA_MAPPING_ERROR;
+ 
+ 	if (dma_map_direct(dev, ops) ||
+-	    (!is_mmio && arch_dma_map_phys_direct(dev, phys + size)))
++	    (!is_mmio && !is_cc_shared &&
++	     arch_dma_map_phys_direct(dev, phys + size)))
+ 		addr = dma_direct_map_phys(dev, phys, size, dir, attrs, true);
++	else if (is_cc_shared)
++		return DMA_MAPPING_ERROR;
+ 	else if (use_dma_iommu(dev))
+ 		addr = iommu_dma_map_phys(dev, phys, size, dir, attrs);
+ 	else if (ops->map_phys)
+@@ -206,11 +210,16 @@ void dma_unmap_phys(struct device *dev, dma_addr_t addr, size_t size,
+ {
+ 	const struct dma_map_ops *ops = get_dma_ops(dev);
+ 	bool is_mmio = attrs & DMA_ATTR_MMIO;
++	bool is_cc_shared = attrs & DMA_ATTR_CC_SHARED;
+ 
+ 	BUG_ON(!valid_dma_direction(dir));
++
+ 	if (dma_map_direct(dev, ops) ||
+-	    (!is_mmio && arch_dma_unmap_phys_direct(dev, addr + size)))
++	    (!is_mmio && !is_cc_shared &&
++	     arch_dma_unmap_phys_direct(dev, addr + size)))
+ 		dma_direct_unmap_phys(dev, addr, size, dir, attrs, true);
++	else if (is_cc_shared)
++		return;
+ 	else if (use_dma_iommu(dev))
+ 		iommu_dma_unmap_phys(dev, addr, size, dir, attrs);
+ 	else if (ops->unmap_phys)
 -- 
 2.51.1
 
