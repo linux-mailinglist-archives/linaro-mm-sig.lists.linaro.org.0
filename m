@@ -2,62 +2,141 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wIfJB7Ni5mmavgEAu9opvQ
+	id 0JHQGLhi5mmavgEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:30:27 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:30:32 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id C528A4314BB
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:30:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 015174314C2
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:30:31 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DA78A3F7A4
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:30:25 +0000 (UTC)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
-	by lists.linaro.org (Postfix) with ESMTPS id CED7A3F783
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Mar 2026 01:28:51 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 17258402D3
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:30:31 +0000 (UTC)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	by lists.linaro.org (Postfix) with ESMTPS id 27F693F786
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Mar 2026 04:31:59 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=MLfhqhkz;
-	spf=pass (lists.linaro.org: domain of mhiramat@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=mhiramat@kernel.org;
-	dmarc=pass (policy=quarantine) header.from=kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by tor.source.kernel.org (Postfix) with ESMTP id 6626160103;
-	Thu, 26 Mar 2026 01:28:51 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3592AC4CEF7;
-	Thu, 26 Mar 2026 01:28:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1774488531;
-	bh=0Cq7OMqDyz29Hy/YQIvOOTgh39yp/jjxAwDycnlq/O0=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=MLfhqhkzsxa7tc0jHzhytzV6qchl81dHU9KAPgpYRYmOHYLzk4wblKHPtqEHyv28p
-	 Q/b1ZGVBAKVMA2DtsWIH4xs0i1VJ2p7crVWlc/njQGIq3j2rxJcz4zZlqQtGtXSKGY
-	 qE7kmn3skAAmdHpynUh6G1IcDYzRBpRJQJ2v9dHtuEYl1SHM9u79m3ODxDTtFbRHwF
-	 TrXVRIXikjQcC748T/h8YzRRuj5Is74hno4IqadGPqhCATzpJM+vXtHmT1645lImlw
-	 xbcKSEnaeY6vjDCFgor9rDZ7RPAf5TB+nN0PUncVs3G3ToCrGTMxxDR5q52eHlIdvK
-	 yL93d9yknBOTA==
-Date: Thu, 26 Mar 2026 10:28:40 +0900
-From: Masami Hiramatsu (Google) <mhiramat@kernel.org>
-To: "Vineeth Pillai (Google)" <vineeth@bitbyteword.org>
-Message-Id: <20260326102840.80a270ec818fea7e000aeef4@kernel.org>
-In-Reply-To: <20260323160052.17528-2-vineeth@bitbyteword.org>
-References: <20260323160052.17528-1-vineeth@bitbyteword.org>
-	<20260323160052.17528-2-vineeth@bitbyteword.org>
-X-Mailer: Sylpheed 3.8.0beta1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
+	dkim=pass header.d=qualcomm.com header.s=qcppdkim1 header.b=hKKR2OBd;
+	dkim=pass header.d=oss.qualcomm.com header.s=google header.b=UayD2dgy;
+	spf=pass (lists.linaro.org: domain of aniket.randive@oss.qualcomm.com designates 205.220.180.131 as permitted sender) smtp.mailfrom=aniket.randive@oss.qualcomm.com;
+	dmarc=pass (policy=reject) header.from=qualcomm.com
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 62Q0e3Dv779755
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Mar 2026 04:31:58 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=jJRKMt5STVkyb1Y7d1ZgMO
+	1sueYs1DgBavRo6QS64AI=; b=hKKR2OBdmKOqiTdbZ33hIuMhZ7JhUlOiO93CcH
+	DiZtkKn4ZzwolbcR/CwQhTILnreUv0fRddHGSqh7q0cmXbE/A7mxKhFV+R1ogc80
+	lhHH8vDCGt17uqM3QSpcv6tfZtbD+MICx7s++bLr/jcSBgS1AnRDFwtNXLG+6ayz
+	hRWyuph9K6ZJv/lP6CNm2H2/ExRSupTSt7/cu0Tzu76LkaQFFCyPBepQ2M3/WvIc
+	J9xuBcB+qkvEhxejPXgEff/oU7iMB3As+oCu9W/mvN0R5oXzMczXpQY23wX84u+o
+	IHBEI8tJUF7r/+BXEfR4A/GWj8EKWFS9KP2gol5WElMqucsg==
+Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com [209.85.210.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4d4cvp3ns5-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Mar 2026 04:31:58 +0000 (GMT)
+Received: by mail-pf1-f198.google.com with SMTP id d2e1a72fcca58-82a77f807e4so1364088b3a.3
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Mar 2026 21:31:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1774499518; x=1775104318; darn=lists.linaro.org;
+        h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+         :date:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=jJRKMt5STVkyb1Y7d1ZgMO1sueYs1DgBavRo6QS64AI=;
+        b=UayD2dgy5G+1K+Ig3ISJ24Os5qoz5WRXxIBu1fcYBnU0kBFxdCefBygsbY6ihxh7a7
+         9AEMdzWT0cyJrPRqrTglIL2onWMJsTBZzlPL/eeAhVgNoSFlQyjl2dzUHovl4HEDslI5
+         OGHGk0f9kw/dVOk4fKa1Qeg1/tZhY7KHzBVVdFdsyw7L6rRUGsnBNS/GR+rI/jaaktsI
+         /4e+nQyYvTOsQUyAe/UBgM6D9+Xqh3UHB14Am9rwIqR9sCpgr8W7FjuG6aZAA1PjFw6/
+         4dhl5Xj18i31DVGcLqBTcavfkbKiprr0PXzbiEpC3yWXYC1d8fFt9I18ZPjQr3BCBndb
+         kGXw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1774499518; x=1775104318;
+        h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+         :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=jJRKMt5STVkyb1Y7d1ZgMO1sueYs1DgBavRo6QS64AI=;
+        b=ZnhV7/Hg4TD/AMCqcpXWh1517wIt8BPJPr4raXSNN4bQP4MswDGhD4dSYW3tIsIqhh
+         I8MTVJbWBwaNCGZYrz+jcb7svBrzu84CKNOuTDwnasvTNDE7XTMQ3FL0nvUqlVSYyNMW
+         2w6KowICZFar6McihNDrNVPf3UGHGTyIXw7BINLhFs0iujnRA4j3g0AOwSRD7XeasOlP
+         zxShl28HKh2QzFDbX0YuyTgu/2PTykJ0zlhk4XZLlvQmdulDhgwKxeNuK52FOsFZZy8X
+         4nBGhAyO7nf3FriefjBGYnQcStO6WbmLAMOcacBVrjrM6pDShChxbZB9x6pkfa36EDXg
+         l9NQ==
+X-Forwarded-Encrypted: i=1; AJvYcCUnTxpUk+M4InYyhFAgNkBiP0FmDFDe83mJrDPQc0dJpjxJQl0v77tgwBAjFHhrFYYC0yANan7/D6wbP6hG@lists.linaro.org
+X-Gm-Message-State: AOJu0Yz/aeWS+Jfu/IN2NX5Mx+Ql/Pwpy9vvuZqDJx4sF3O6HnhDYBIB
+	SPF8j7O90wHCvFpPT6R82M1bYF8p78XX5k88G096ii2nVWEvM4lwA/FY5T6ra5mwV1fFSD6/BKK
+	PmjQSmEqP2OGAJEeOmfylO5t9DjDqBWmtB8YacSjnlyNidrLjM0ewkafcuLKDDtBN8hBxxA==
+X-Gm-Gg: ATEYQzyO0mTpcViTTDYGGWF41yPxo+smwrm9yXPJbTLVnQLLNHkys7QUOOczrf3B5Ra
+	91XGZYV0q2EnkR/zwOLcoP3wj5DEtK5u4jCxN3KZsU6qUKj7kiYtjMPbCwaQR4xcJwQyD7S920G
+	FJqQhLG09hKTHgdw/EM5pRuH7eIstNuNBcibhEHIjbAlsE7VEQwG5tcKEgQZP3/qNYpQ72fSQL4
+	AQkOpVKxNw1T9xBlMr/o2WoOBQPRZztB0bMWN+eIc2GgHGTP5R6IM3Riu/yTWlbbEgxDDJ/BHB1
+	O5w938HGfHOjq4KwADZgzKg2v1eJIdve5PMP6sqrMMC4jjKsa+LOXj2bI9Sl5WpzyFzxoyC7I4D
+	Tfr9Sj82tTIerQf2qAx6eOSPdxkL+4Rk9Yl7O1jm3WsR2ps0sO8QzmTah
+X-Received: by 2002:a05:6a00:4b0a:b0:829:809e:8981 with SMTP id d2e1a72fcca58-82c6e0e616dmr6256930b3a.31.1774499517608;
+        Wed, 25 Mar 2026 21:31:57 -0700 (PDT)
+X-Received: by 2002:a05:6a00:4b0a:b0:829:809e:8981 with SMTP id d2e1a72fcca58-82c6e0e616dmr6256897b3a.31.1774499517105;
+        Wed, 25 Mar 2026 21:31:57 -0700 (PDT)
+Received: from hu-arandive-hyd.qualcomm.com ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-82c7d22c8e8sm1177396b3a.24.2026.03.25.21.31.52
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 25 Mar 2026 21:31:56 -0700 (PDT)
+From: Aniket Randive <aniket.randive@oss.qualcomm.com>
+Date: Thu, 26 Mar 2026 10:01:48 +0530
+MIME-Version: 1.0
+Message-Id: <20260326-skip_extra_dma_tre-v1-1-deef018895dc@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIALO2xGkC/yWM0QqDMAwAf0XyvIKNOLb9yhiltqnLxpwkVQTx3
+ +3m4x3craAkTAq3agWhmZW/QwF7qiA8/dCT4VgYsMZz3WBr9M2joyWLd/HjXRYyvgkJMV1svHZ
+ QwlEo8fKf3mG28DicTt2LQv7dYNt26Um64XoAAAA=
+X-Change-ID: 20260325-skip_extra_dma_tre-a3cf22f81d9b
+To: Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>,
+        Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
+        Andi Shyti <andi.shyti@kernel.org>,
+        Sumit Semwal <sumit.semwal@linaro.org>,
+        =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+X-Mailer: b4 0.15.1
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1774499512; l=2657;
+ i=aniket.randive@oss.qualcomm.com; s=20260325; h=from:subject:message-id;
+ bh=NpFXvrYh3Fb7+pGlr/Z61Pb78xmA51Vjq3Rxx3qOVtg=;
+ b=F4oCSfY3o5eliC5a/9PowUrf5FxpGtSwz/W4vzzQWSTjf14iwuzX8WrayFTCnK9XM9yo9kEL2
+ Iw5BwmRKNyMAZKpj1OK+i5GLjGWoi4vXfVo03bhtCg3FGxQGx7hFxXK
+X-Developer-Key: i=aniket.randive@oss.qualcomm.com; a=ed25519;
+ pk=4o37X1ZqGbCO/T2SR8kq/HnWvq0yb1RUlFuNukovbQk=
+X-Proofpoint-ORIG-GUID: 6cT1odl45FV2GmPGn8leVzKcb0gU7bKk
+X-Proofpoint-GUID: 6cT1odl45FV2GmPGn8leVzKcb0gU7bKk
+X-Authority-Analysis: v=2.4 cv=Q73fIo2a c=1 sm=1 tr=0 ts=69c4b6be cx=c_pps
+ a=m5Vt/hrsBiPMCU0y4gIsQw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=Yq5XynenixoA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=EUspDBNiAAAA:8 a=QTaY6CSZEmO6sGPGzGoA:9 a=QEXdDO2ut3YA:10
+ a=IoOABgeZipijB_acs4fv:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzI2MDAzMiBTYWx0ZWRfX2mKTIq7h7o2X
+ Adq+kZm10PcZK1Oh6VoCwId043dif1e8dk6iL+EMNnaDvWcriR2Rwnm8lcZFZOdPm7Pvwj4iypV
+ 7BiHL6qWW/Li50AzkY8iB15+vUPwJzAYU5ThanOKptJgNmJ5tDHxZC6z022N4Leo/LEBZC2nzdZ
+ SVnyv6qZ9pq6m2l0R8fbsvc4r1e+TLge/lHLXSHQ/Pbg2jVDusJl72zqNDoa8vxA+KJZNdCQryq
+ zkVLziNNWc6xXvS+ED8boaM9ckNZdJyzQ8BvuEeRmNVXPBbEHlYKD1a34n0WXkQVYgID+xPWL15
+ XdLYbeyj5LJdzM4SiO7Zu1PCs8PuJ5UJsVcY4nZk4DEO7SiPI9EvAFsY+60bWG544fzgi1x8ZSh
+ uc+MeS4nABMo2GjxUWk863IfkjSiiqWs4AZ/Pr9pRF16sf/v9BXOsA5hiC2qoaMAq789GhNOxwJ
+ ZoaScJs0XNs0ZTPsZkw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-03-26_01,2026-03-24_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 adultscore=0 clxscore=1011 priorityscore=1501 impostorscore=0
+ malwarescore=0 bulkscore=0 spamscore=0 lowpriorityscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2603050001 definitions=main-2603260032
 X-Spamd-Bar: ----
-X-MailFrom: mhiramat@kernel.org
+X-MailFrom: aniket.randive@oss.qualcomm.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: AUJIW2K6QRRVWKD2C5SVFOLRGV5DO3SC
-X-Message-ID-Hash: AUJIW2K6QRRVWKD2C5SVFOLRGV5DO3SC
-X-Mailman-Approved-At: Mon, 20 Apr 2026 17:29:46 +0000
-CC: Steven Rostedt <rostedt@goodmis.org>, Peter Zijlstra <peterz@infradead.org>, Dmitry Ilvokhin <d@ilvokhin.com>, Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Ingo Molnar <mingo@redhat.com>, Jens Axboe <axboe@kernel.dk>, io-uring@vger.kernel.org, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Alexei Starovoitov <ast@kernel.org>, Daniel Borkmann <daniel@iogearbox.net>, Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>, Xin Long <lucien.xin@gmail.com>, Jon Maloy <jmaloy@redhat.com>, Aaron Conole <aconole@redhat.com>, Eelco Chaudron <echaudro@redhat.com>, Ilya Maximets <i.maximets@ovn.org>, netdev@vger.kernel.org, bpf@vger.kernel.org, linux-sctp@vger.kernel.org, tipc-discussion@lists.sourceforge.net, dev@openvswitch.org, Jiri Pirko <jiri@resnulli.us>, Oded Gabbay <ogabbay@kernel.org>, Koby Elbaz <koby.elbaz@intel.com>, dri-devel@lists.freedes
- ktop.org, "Rafael J. Wysocki" <rafael@kernel.org>, Viresh Kumar <viresh.kumar@linaro.org>, "Gautham R. Shenoy" <gautham.shenoy@amd.com>, Huang Rui <ray.huang@amd.com>, Mario Limonciello <mario.limonciello@amd.com>, Len Brown <lenb@kernel.org>, Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>, linux-pm@vger.kernel.org, MyungJoo Ham <myungjoo.ham@samsung.com>, Kyungmin Park <kyungmin.park@samsung.com>, Chanwoo Choi <cw00.choi@samsung.com>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Sumit Semwal <sumit.semwal@linaro.org>, linaro-mm-sig@lists.linaro.org, Eddie James <eajames@linux.ibm.com>, Andrew Jeffery <andrew@codeconstruct.com.au>, linux-fsi@lists.ozlabs.org, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Alex Deucher <alexander.deucher@amd.com>, Danilo Krummrich <dakr@kernel.org>, Matthew Brost <matthew.brost@intel.com>, Philipp Stanner <phasta@kernel.org>, Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>, amd-gfx@lis
- ts.freedesktop.org, Jiri Kosina <jikos@kernel.org>, Benjamin Tissoires <bentiss@kernel.org>, linux-input@vger.kernel.org, Wolfram Sang <wsa+renesas@sang-engineering.com>, linux-i2c@vger.kernel.org, Mark Brown <broonie@kernel.org>, Michael Hennerich <michael.hennerich@analog.com>, Nuno =?UTF-8?B?U8Oh?= <nuno.sa@analog.com>, linux-spi@vger.kernel.org, "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>, "Martin K. Petersen" <martin.petersen@oracle.com>, linux-scsi@vger.kernel.org, Chris Mason <clm@fb.com>, David Sterba <dsterba@suse.com>, linux-btrfs@vger.kernel.org, Thomas Gleixner <tglx@linutronix.de>, Andrew Morton <akpm@linux-foundation.org>, SeongJae Park <sj@kernel.org>, linux-mm@kvack.org, Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, linux-trace-kernel@vger.kernel.org, linux-kernel@vger.kernel.org
+Message-ID-Hash: DGENIWJKH6WCSRN2CCBQIGK7R7OR7SAR
+X-Message-ID-Hash: DGENIWJKH6WCSRN2CCBQIGK7R7OR7SAR
+X-Mailman-Approved-At: Mon, 20 Apr 2026 17:29:47 +0000
+CC: linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Maramaina Naresh <naresh.maramaina@oss.qualcomm.com>, Aniket Randive <aniket.randive@oss.qualcomm.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 01/19] tracepoint: Add trace_call__##name() API
+Subject: [Linaro-mm-sig] [PATCH v1] i2c: qcom-geni: Skip extra TX DMA TRE for single read message in GPI mode
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AUJIW2K6QRRVWKD2C5SVFOLRGV5DO3SC/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DGENIWJKH6WCSRN2CCBQIGK7R7OR7SAR/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -66,128 +145,110 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [4.99 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
-	R_DKIM_REJECT(1.00)[kernel.org:s=k20201202];
-	DATE_IN_PAST(1.00)[616];
-	MV_CASE(0.50)[];
+X-Spamd-Result: default: False [3.49 / 15.00];
+	DMARC_POLICY_REJECT(2.00)[qualcomm.com : SPF not aligned (relaxed),reject];
+	DATE_IN_PAST(1.00)[612];
+	R_DKIM_REJECT(1.00)[qualcomm.com:s=qcppdkim1];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	GREYLIST(0.00)[pass,meta];
-	ARC_NA(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	TO_DN_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[goodmis.org,infradead.org,ilvokhin.com,kernel.org,efficios.com,redhat.com,kernel.dk,vger.kernel.org,davemloft.net,google.com,iogearbox.net,gmail.com,ovn.org,lists.sourceforge.net,openvswitch.org,resnulli.us,intel.com,lists.freedes,linaro.org,amd.com,linux.intel.com,samsung.com,lists.linaro.org,linux.ibm.com,codeconstruct.com.au,lists.ozlabs.org,ffwll.ch,lis,sang-engineering.com,analog.com,HansenPartnership.com,oracle.com,fb.com,suse.com,linutronix.de,linux-foundation.org,kvack.org,alien8.de];
+	RCPT_COUNT_TWELVE(0.00)[13];
+	ARC_NA(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	DKIM_TRACE(0.00)[qualcomm.com:-];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[80];
-	FROM_NEQ_ENVFROM(0.00)[mhiramat@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
-	DKIM_TRACE(0.00)[kernel.org:-];
-	NEURAL_HAM(-0.00)[-0.995];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,renesas];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	FROM_NEQ_ENVFROM(0.00)[aniket.randive@oss.qualcomm.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[goodmis.org:email,linaro.org:email,bitbyteword.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: C528A4314BB
+	NEURAL_HAM(-0.00)[-0.998];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	MID_RHS_MATCH_FROM(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email,qualcomm.com:email]
+X-Rspamd-Queue-Id: 015174314C2
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Mon, 23 Mar 2026 12:00:20 -0400
-"Vineeth Pillai (Google)" <vineeth@bitbyteword.org> wrote:
+In GPI mode, the I2C GENI driver incorrectly generates an extra TX DMA
+TRE on the TX channel during single read message transfer. This results
+in an unnecessary write operation on the I2C bus, which is not required.
 
-> Add trace_call__##name() as a companion to trace_##name().  When a
-> caller already guards a tracepoint with an explicit enabled check:
-> 
->   if (trace_foo_enabled() && cond)
->       trace_foo(args);
-> 
-> trace_foo() internally repeats the static_branch_unlikely() test, which
-> the compiler cannot fold since static branches are patched binary
-> instructions.  This results in two static-branch evaluations for every
-> guarded call site.
-> 
-> trace_call__##name() calls __do_trace_##name() directly, skipping the
-> redundant static-branch re-check.  This avoids leaking the internal
-> __do_trace_##name() symbol into call sites while still eliminating the
-> double evaluation:
-> 
->   if (trace_foo_enabled() && cond)
->       trace_invoke_foo(args);   /* calls __do_trace_foo() directly */
+Update the logic to avoid generating the extra TX DMA TRE for single
+read message, ensuring correct behavior and preventing redundant
+transfers.
 
-nit: trace_call_foo() instead of trace_invoke_foo()?
+Co-developed-by: Maramaina Naresh <naresh.maramaina@oss.qualcomm.com>
+Signed-off-by: Maramaina Naresh <naresh.maramaina@oss.qualcomm.com>
+Signed-off-by: Aniket Randive <aniket.randive@oss.qualcomm.com>
+---
+ drivers/i2c/busses/i2c-qcom-geni.c | 18 +++++++++++++-----
+ 1 file changed, 13 insertions(+), 5 deletions(-)
 
-Anyway looks good to me.
+diff --git a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-geni.c
+index a4acb78fafb6..2706309bbebb 100644
+--- a/drivers/i2c/busses/i2c-qcom-geni.c
++++ b/drivers/i2c/busses/i2c-qcom-geni.c
+@@ -625,8 +625,8 @@ static int geni_i2c_gpi(struct geni_i2c_dev *gi2c, struct i2c_msg msgs[],
+ {
+ 	struct gpi_i2c_config *peripheral;
+ 	unsigned int flags;
+-	void *dma_buf;
+-	dma_addr_t addr;
++	void *dma_buf = NULL;
++	dma_addr_t addr = 0;
+ 	enum dma_data_direction map_dirn;
+ 	enum dma_transfer_direction dma_dirn;
+ 	struct dma_async_tx_descriptor *desc;
+@@ -639,6 +639,11 @@ static int geni_i2c_gpi(struct geni_i2c_dev *gi2c, struct i2c_msg msgs[],
+ 	gi2c_gpi_xfer = &gi2c->i2c_multi_desc_config;
+ 	msg_idx = gi2c_gpi_xfer->msg_idx_cnt;
+ 
++	if (op == I2C_WRITE && msgs[msg_idx].flags & I2C_M_RD) {
++		peripheral->multi_msg = true;
++		goto skip_dma;
++	}
++
+ 	dma_buf = i2c_get_dma_safe_msg_buf(&msgs[msg_idx], 1);
+ 	if (!dma_buf) {
+ 		ret = -ENOMEM;
+@@ -668,6 +673,7 @@ static int geni_i2c_gpi(struct geni_i2c_dev *gi2c, struct i2c_msg msgs[],
+ 		flags = DMA_PREP_INTERRUPT | DMA_CTRL_ACK;
+ 	}
+ 
++skip_dma:
+ 	/* set the length as message for rx txn */
+ 	peripheral->rx_len = msgs[msg_idx].len;
+ 	peripheral->op = op;
+@@ -740,9 +746,11 @@ static int geni_i2c_gpi(struct geni_i2c_dev *gi2c, struct i2c_msg msgs[],
+ 	return 0;
+ 
+ err_config:
+-	dma_unmap_single(gi2c->se.dev->parent, addr,
+-			 msgs[msg_idx].len, map_dirn);
+-	i2c_put_dma_safe_msg_buf(dma_buf, &msgs[msg_idx], false);
++	if (op == I2C_WRITE && (msgs[msg_idx].flags & I2C_M_RD)) {
++		dma_unmap_single(gi2c->se.dev->parent, addr,
++				 msgs[msg_idx].len, map_dirn);
++		i2c_put_dma_safe_msg_buf(dma_buf, &msgs[msg_idx], false);
++	}
+ 
+ out:
+ 	gi2c->err = ret;
 
-Acked-by: Masami Hiramatsu (Google) <mhiramat@kernel.org>
+---
+base-commit: 785f0eb2f85decbe7c1ef9ae922931f0194ffc2e
+change-id: 20260325-skip_extra_dma_tre-a3cf22f81d9b
 
+Best regards,
+--  
+Aniket Randive <aniket.randive@oss.qualcomm.com>
 
-> 
-> Three locations are updated:
-> - __DECLARE_TRACE: invoke form omits static_branch_unlikely, retains
->   the LOCKDEP RCU-watching assertion.
-> - __DECLARE_TRACE_SYSCALL: same, plus retains might_fault().
-> - !TRACEPOINTS_ENABLED stub: empty no-op so callers compile cleanly
->   when tracepoints are compiled out.
-> 
-> Suggested-by: Steven Rostedt <rostedt@goodmis.org>
-> Suggested-by: Peter Zijlstra <peterz@infradead.org>
-> Signed-off-by: Vineeth Pillai (Google) <vineeth@bitbyteword.org>
-> Assisted-by: Claude:claude-sonnet-4-6
-> ---
->  include/linux/tracepoint.h | 11 +++++++++++
->  1 file changed, 11 insertions(+)
-> 
-> diff --git a/include/linux/tracepoint.h b/include/linux/tracepoint.h
-> index 22ca1c8b54f32..ed969705341f1 100644
-> --- a/include/linux/tracepoint.h
-> +++ b/include/linux/tracepoint.h
-> @@ -294,6 +294,10 @@ static inline struct tracepoint *tracepoint_ptr_deref(tracepoint_ptr_t *p)
->  			WARN_ONCE(!rcu_is_watching(),			\
->  				  "RCU not watching for tracepoint");	\
->  		}							\
-> +	}								\
-> +	static inline void trace_call__##name(proto)			\
-> +	{								\
-> +		__do_trace_##name(args);				\
->  	}
->  
->  #define __DECLARE_TRACE_SYSCALL(name, proto, args, data_proto)		\
-> @@ -313,6 +317,11 @@ static inline struct tracepoint *tracepoint_ptr_deref(tracepoint_ptr_t *p)
->  			WARN_ONCE(!rcu_is_watching(),			\
->  				  "RCU not watching for tracepoint");	\
->  		}							\
-> +	}								\
-> +	static inline void trace_call__##name(proto)			\
-> +	{								\
-> +		might_fault();						\
-> +		__do_trace_##name(args);				\
->  	}
->  
->  /*
-> @@ -398,6 +407,8 @@ static inline struct tracepoint *tracepoint_ptr_deref(tracepoint_ptr_t *p)
->  #define __DECLARE_TRACE_COMMON(name, proto, args, data_proto)		\
->  	static inline void trace_##name(proto)				\
->  	{ }								\
-> +	static inline void trace_call__##name(proto)			\
-> +	{ }								\
->  	static inline int						\
->  	register_trace_##name(void (*probe)(data_proto),		\
->  			      void *data)				\
-> -- 
-> 2.53.0
-> 
-
-
--- 
-Masami Hiramatsu (Google) <mhiramat@kernel.org>
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
