@@ -2,183 +2,244 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WLSVF8Ni5mmavgEAu9opvQ
+	id cG53Ccti5mmavgEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:30:43 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:30:51 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id AE7EE4314D8
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:30:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D10954314E2
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:30:50 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id BD134404FE
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:30:41 +0000 (UTC)
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
-	by lists.linaro.org (Postfix) with ESMTPS id 049A43F735
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Mar 2026 15:37:22 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id CFD7C3F7D9
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:30:49 +0000 (UTC)
+Received: from fout-b7-smtp.messagingengine.com (fout-b7-smtp.messagingengine.com [202.12.124.150])
+	by lists.linaro.org (Postfix) with ESMTPS id 71FF13F7A5
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Mar 2026 16:10:54 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=google.com header.s=20251104 header.b="IKWm+/O/";
-	arc=pass ("google.com:s=arc-20240605:i=1");
-	spf=pass (lists.linaro.org: domain of aliceryhl@google.com designates 209.85.221.51 as permitted sender) smtp.mailfrom=aliceryhl@google.com;
-	dmarc=pass (policy=reject) header.from=google.com
-Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-43b983bb07eso349433f8f.0
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Mar 2026 08:37:21 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1774539441; cv=none;
-        d=google.com; s=arc-20240605;
-        b=RFK5My8HNnf61rpayP26jvbcrHSzvDb+80VhmsfEs3Kn4KHl1188EDNkU/2m+53pbO
-         VNaEFSAOU43f7Yo6afzJptxXdgwJEAACJCazhz+Ods62uBxSjI/1qEKqDIf0YpQx+B1R
-         /jpjPBqewKfmzgDeqC4KPXgfp3i2OvmAAi+ZipXENUmQ9Sz0zHuwzJYxtwVcXrlsNQH4
-         O3HcqDAiYxqE1gK6j/bUgRaKisfqq4d81fzD0ngrasgPSKOZ4GTpGC0voLr4Zget2CzN
-         o2/DtLfhGFtw9VX8lZIQdxVDXG60B8nCwef6YPUG+GrApxAFH1plb19I9WC9SzL1uXfq
-         YmVQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=NWeLPeCEOISYEMuHk4klgF1pcPKiVi4mEhvhikoMf4E=;
-        fh=v3T9KOTgaqkL72BRSRHc7aTZE2OipupzqT7CHCTIR9Y=;
-        b=kk/lIaitEyuagvA9B0ppsf1R0dKrP+qK74o2j159dXrQs4sv9zjTOwPkLprUwONlAu
-         P48GzVkgZ7RlrIT9Tz3fAw/7fLqm5oumFmPDeJyzKovmyhG6NwPMjMah22yB/FI81CLS
-         wFckRTXsm+DQ9cBanUH233k9yHr9+2KocGyEIUNdvPqqhU46iKmTbdpFNODe7Qzkw8qB
-         Mn/HJDfEl96mOLmR+QBBVyiEuhJQMHN9BQj7GZu1ieIP3rd5g5DLwZfAznnR5UJ/LL6O
-         P7NtKk+jKFZdQ3hCEMf5sj7CdtokyMlLGXfLrCyFocvzBjr1L4GRSzAS5IGBBPTaqmmX
-         /AMw==;
-        darn=lists.linaro.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1774539441; x=1775144241; darn=lists.linaro.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=NWeLPeCEOISYEMuHk4klgF1pcPKiVi4mEhvhikoMf4E=;
-        b=IKWm+/O/ivCXfrA3CTlwACZRzcTnRYQ8g2O0B6AIN8ZI+SH/xEsAH/24lX9cpXuNtd
-         7aw7bqWxFyWalCz7EMJpp2pMW84wzlkMiPLUoHEgmDwOFKdDHBebxxAOSB+Jxwrl4ym/
-         IA2/JQPJ5hKbh91pU2Dn+g83I4Lqj3LdgQPLVwKxM2FiAYq1lSOLZ8YocfhYeoRVq0FL
-         c6uBF2G5VxQVkfUj5Cbgo83UCY3+D9DwiCEwJoRL+mfkvWORVaOAqQIFP0leOlD6evgt
-         uLZnSnGGhU6IG2peSBIhzSGER3/facZQbPVQZclQC67tvxvag00Xmsh5saFj6VQE2Kz0
-         awFQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774539441; x=1775144241;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=NWeLPeCEOISYEMuHk4klgF1pcPKiVi4mEhvhikoMf4E=;
-        b=hA0UaTCF1SGO7UDfa0usgXSQXJfvu+VvWtEor0vBg6KteNM3AOKAZvdWK08Xb9E3qr
-         vJdeAnRg0HwNs5kKHFTo/bdf71BfG9Ienx7o9kiE+idIIuPLS/je0bfzqIC3jMftmzft
-         anbgLXICLzafcfasQKVqmNPxls4Q7odntImGLA7+PrqcjzgcPq9fURNIfXI21p7diCqJ
-         4CC1rC6YlLLlHkgjCUkz/o9H9aFo/H8k/OA/GiDkVDX+KeWtxUHruOmeWVxfR+LnQ6vj
-         BB+ns1cU/Vb9IUOOzQsfuCT408u66h7IiWPwFVbpGkYU5+aoprvztq7FEQXKxQDpu8bp
-         vtOw==
-X-Forwarded-Encrypted: i=1; AJvYcCUb84CnwdHf3ED1HX3HiQaSMAMDFJOd4M+uQuE7y9619b8KSWR4kwSWhYExxqRKbG58yFr76C+tiB8dQHe7@lists.linaro.org
-X-Gm-Message-State: AOJu0Yy3zk+an+N7la9wQXkM5Ala0/KlP1eFIWwE6PuZ+vZohBwg1s21
-	1YCptYFCfqob6hL+wm3gbvUSTsYsLiFwYhlGS0NsVv0QHc5KIUgcT6qZnNLnswwhBZiCO04Ya6j
-	2RX3NpapmJ0qISKQOVSjrQcxu0nB5FRD6QTEmEB2l
-X-Gm-Gg: ATEYQzwMhDbNUNcyWm2726BPLg/4lS6nae0W235X3owYp4zFjoGw46lqycMaJ614C4L
-	RyxYk/GuJflzlk00q9ZgXQfzTm2T/0bPoeub0d6Q6rA1JWQn35pAZBzA5+1SPtODhS6YnBtIF2i
-	yQtFUuP8ABCwkfjhSrAZO9Y1GlG+GqZudfHng1ls/f4w5O5y7PD1yY/eMH9pWKDgHBKTRkctYdw
-	xh9KueqX7VG5a9k9B36xwIAshVb1l3EEnZ+Qv0pMfvBGpr4gRmU9UYumNnMCEfxMgINvHQzFOQH
-	2/Lwa4eU6DLoVL0/Vmg2F22nf4kWPRwMznywQQ==
-X-Received: by 2002:a05:6000:220b:b0:43b:8023:8b2 with SMTP id
- ffacd0b85a97d-43b88a25a22mr12525617f8f.45.1774539440336; Thu, 26 Mar 2026
- 08:37:20 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260316211646.650074-1-lyude@redhat.com> <DHCBEGGPWSVK.30MV8652PV4PY@kernel.org>
-In-Reply-To: <DHCBEGGPWSVK.30MV8652PV4PY@kernel.org>
-From: Alice Ryhl <aliceryhl@google.com>
-Date: Thu, 26 Mar 2026 16:37:08 +0100
-X-Gm-Features: AQROBzAWo8AoJkaNLNO9mq7x8n-1T_o4Q7aKPSl79urjgisqLmie7CjKUZkc8tM
-Message-ID: <CAH5fLgifLd5sYQMjXs-154KTJbDcEuy3VE1LY+9YvfNMBWzHbA@mail.gmail.com>
+	dkim=pass header.d=jannau.net header.s=fm3 header.b=KqQaRUgP;
+	dkim=pass header.d=messagingengine.com header.s=fm1 header.b="Vr6S/+y2";
+	spf=pass (lists.linaro.org: domain of j@jannau.net designates 202.12.124.150 as permitted sender) smtp.mailfrom=j@jannau.net;
+	dmarc=none
+Received: from phl-compute-01.internal (phl-compute-01.internal [10.202.2.41])
+	by mailfout.stl.internal (Postfix) with ESMTP id 229A51D00244;
+	Thu, 26 Mar 2026 12:10:53 -0400 (EDT)
+Received: from phl-frontend-04 ([10.202.2.163])
+  by phl-compute-01.internal (MEProxy); Thu, 26 Mar 2026 12:10:54 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jannau.net; h=cc
+	:cc:content-type:content-type:date:date:from:from:in-reply-to
+	:in-reply-to:message-id:mime-version:references:reply-to:subject
+	:subject:to:to; s=fm3; t=1774541452; x=1774627852; bh=mqFX0ystC8
+	G5bMrUA5MPL3IZ+yUM/PuDxgn6w4DVzlw=; b=KqQaRUgPfTBr9XD3tkJsncTvcp
+	HGOvGevyNLULt4Qw/8YnO4TB9KMxyIo1vDlsDkM9HNHdtj9XZwp2Mjm7mSBcKuKX
+	h9bTtphz/2JhQROIWX8838iqNy0mswSx4rWMnRlXYbCKiSDf6Hz2kETu1KVLEfN/
+	SvAiRy+gZPr0JQ0APGQaW0bzP/HgY17rsgdie/NEILDM6nGKsKtAll+woHSGKvQ9
+	ZwPBus3gy2wLvRQgbucjk/0Rj9mtCDzVbv39CzL2bYny3bRT+csox54JNlEPz3h+
+	jW4/GNoVjngIIoQsLfvXq1TH+Sh2UhHufARSCY5IHX0EFWyR/cdu6DAd8gVA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-type:content-type:date:date
+	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:subject:subject:to
+	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=
+	1774541452; x=1774627852; bh=mqFX0ystC8G5bMrUA5MPL3IZ+yUM/PuDxgn
+	6w4DVzlw=; b=Vr6S/+y2nAS3lWxO4UPHlHLbjZMDaQDpyO84eIN0c5mha55M+MN
+	hzbQeC7Knf17gm4diCyYS6d7VJdwuHud0YQE0W4TjoHh40S7YPfblk60pcocNp2o
+	YL02ZRqKJsUC+x6J6my0pHjhH7cB2Pj/wFizK08X4rlvJM1JxzU/vGXHSXsszWrA
+	XguZgEV6UZSC5MjelC79sgWnrWGUBs5Ww1eaHlQBvR0aopv1m7pgPNT9zB6kUnoU
+	oKk95WGCOZPeni9aX/14Xx2765TwFIvxGTxo+p3k42Hx7k7xnL0LIsxENOtJ4xAt
+	4kfANd0Lr+gOHL3/c/OF0edF/c6jyB9HSpA==
+X-ME-Sender: <xms:jFrFaaeDwUi0xsJTlNox3RFX12oa04zZ7EkHP6rg7YYIloFrhaOt9w>
+    <xme:jFrFadYhUlbE2Sv4y6w9HFl5pFQ9oMB0H6DK6cuSS4brF2t8fMANJ6J5RsxMqhJa1
+    x58imbJ6a8rmB2qahJmyJQHDHrOqCtAMbU-hCZpND3FrO1ty6maUcb8>
+X-ME-Received: <xmr:jFrFaVqNVE6HLWpu8PL_B_Wa5tLoDn8VubBJoli9LPNLCZRFG1iBwXc7lgn2v0y1YLz6Ww8KGNrcqUPjSpt64xsK3oqJHjdZckQ>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefgedrtddtgdefvdejkeefucetufdoteggodetrf
+    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
+    rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
+    gurhepfffhvfevuffkfhggtggujgesthdtredttddtjeenucfhrhhomheplfgrnhhnvgcu
+    ifhruhhnrghuuceojhesjhgrnhhnrghurdhnvghtqeenucggtffrrghtthgvrhhnpeegje
+    duudfhleekveeghfevjeegtefgtdegfeekheduiedtleehgeeludejgfegieenucffohhm
+    rghinhepfhhrvggvuggvshhkthhophdrohhrghdprhhushhtqdhfohhrqdhlihhnuhigrd
+    gtohhmpdhmshhgihgurdhlihhnkhenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgr
+    mhepmhgrihhlfhhrohhmpehjsehjrghnnhgruhdrnhgvthdpnhgspghrtghpthhtohepvd
+    ekpdhmohguvgepshhmthhpohhuthdprhgtphhtthhopegurghkrheskhgvrhhnvghlrdho
+    rhhgpdhrtghpthhtoheplhihuhguvgesrhgvughhrghtrdgtohhmpdhrtghpthhtoheprg
+    hlihgtvghrhihhlhesghhoohhglhgvrdgtohhmpdhrtghpthhtohepohhjvggurgeskhgv
+    rhhnvghlrdhorhhgpdhrtghpthhtohepnhhouhhvvggruheslhhishhtshdrfhhrvggvug
+    gvshhkthhophdrohhrghdprhgtphhtthhopehgrghrhiesghgrrhihghhuohdrnhgvthdp
+    rhgtphhtthhopegurghnihgvlhdrrghlmhgvihgurgestgholhhlrggsohhrrgdrtghomh
+    dprhgtphhtthhopehruhhsthdqfhhorhdqlhhinhhugiesvhhgvghrrdhkvghrnhgvlhdr
+    ohhrghdprhgtphhtthhopehmmhgruhhrvghrsehgohhoghhlvgdrtghomh
+X-ME-Proxy: <xmx:jFrFaY1eGumb2lP-gwk4rMljcd1HrGMa5zu-LPOdbLOZTBQlCMG-rg>
+    <xmx:jFrFaSra40WvK9wNoCUgNJSUuqdo_0b35aGx_LU_fljalYncxEVanw>
+    <xmx:jFrFaaQjCX9DsR0XbhHIyFQcjeoUMao6md7MaNFcB9dDm_AGhVNURQ>
+    <xmx:jFrFaarsfozIh98oVWs1QdcONAaGdvyDQce1808gf8WuNVG97FOoxA>
+    <xmx:jFrFaRX0jlBXDO9RbIEeXvX9PjNX0YBrLIN1johPts8zF8Ewg4_85f56>
+Feedback-ID: i47b949f6:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
+ 26 Mar 2026 12:10:51 -0400 (EDT)
+Date: Thu, 26 Mar 2026 17:10:49 +0100
+From: Janne Grunau <j@jannau.net>
 To: Danilo Krummrich <dakr@kernel.org>
-X-Spamd-Bar: ----
-X-MailFrom: aliceryhl@google.com
+Message-ID: <20260326161049.GA10417@robin.jannau.net>
+References: <20260316211646.650074-1-lyude@redhat.com>
+ <DHCBEGGPWSVK.30MV8652PV4PY@kernel.org>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <DHCBEGGPWSVK.30MV8652PV4PY@kernel.org>
+X-Spamd-Bar: ---
+X-MailFrom: j@jannau.net
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: GAIY6KJ3TLGTIOXPHWGZ2JFBO4CJHE2J
-X-Message-ID-Hash: GAIY6KJ3TLGTIOXPHWGZ2JFBO4CJHE2J
-X-Mailman-Approved-At: Mon, 20 Apr 2026 17:29:48 +0000
-CC: Lyude Paul <lyude@redhat.com>, Miguel Ojeda <ojeda@kernel.org>, nouveau@lists.freedesktop.org, Gary Guo <gary@garyguo.net>, Daniel Almeida <daniel.almeida@collabora.com>, rust-for-linux@vger.kernel.org, Matthew Maurer <mmaurer@google.com>, FUJITA Tomonori <fujita.tomonori@gmail.com>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, christian.koenig@amd.com, Asahi Lina <lina@asahilina.net>, Andreas Hindborg <a.hindborg@kernel.org>, Simona Vetter <simona@ffwll.ch>, Boqun Feng <boqun@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Krishna Ketan Rai <prafulrai522@gmail.com>, linux-media@vger.kernel.org, Shankari Anand <shankari.ak0208@gmail.com>, David Airlie <airlied@gmail.com>, Benno Lossin <lossin@kernel.org>, Viresh Kumar <viresh.kumar@linaro.org>, linaro-mm-sig@lists.linaro.org, Asahi Lina <lina+kernel@asahilina.net>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, kernel@vger.kernel.org, Deborah Brouwer <deborah.brouwer@collabora.com>
+Message-ID-Hash: HXHJOADKVSVNSRJ26YGLJIJTR6IWRFZI
+X-Message-ID-Hash: HXHJOADKVSVNSRJ26YGLJIJTR6IWRFZI
+X-Mailman-Approved-At: Mon, 20 Apr 2026 17:29:49 +0000
+CC: Lyude Paul <lyude@redhat.com>, Alice Ryhl <aliceryhl@google.com>, Miguel Ojeda <ojeda@kernel.org>, nouveau@lists.freedesktop.org, Gary Guo <gary@garyguo.net>, Daniel Almeida <daniel.almeida@collabora.com>, rust-for-linux@vger.kernel.org, Matthew Maurer <mmaurer@google.com>, FUJITA Tomonori <fujita.tomonori@gmail.com>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, christian.koenig@amd.com, Asahi Lina <lina@asahilina.net>, Andreas Hindborg <a.hindborg@kernel.org>, Simona Vetter <simona@ffwll.ch>, Boqun Feng <boqun@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Krishna Ketan Rai <prafulrai522@gmail.com>, linux-media@vger.kernel.org, Shankari Anand <shankari.ak0208@gmail.com>, David Airlie <airlied@gmail.com>, Benno Lossin <lossin@kernel.org>, Viresh Kumar <viresh.kumar@linaro.org>, linaro-mm-sig@lists.linaro.org, Asahi Lina <lina+kernel@asahilina.net>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, kernel@vger.kernel.org, Deborah Brouwer <deborah.brouwer@collabora.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: (subset) [PATCH v9 0/7] Rust bindings for gem shmem
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GAIY6KJ3TLGTIOXPHWGZ2JFBO4CJHE2J/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HXHJOADKVSVNSRJ26YGLJIJTR6IWRFZI/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-X-Spamd-Result: default: False [5.09 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[google.com : SPF not aligned (relaxed), No valid DKIM,reject];
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [1.99 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:google.com:reject}];
 	DATE_IN_PAST(1.00)[601];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	GREYLIST(0.00)[pass,meta];
-	RCPT_COUNT_TWELVE(0.00)[27];
+	FREEMAIL_CC(0.00)[redhat.com,google.com,kernel.org,lists.freedesktop.org,garyguo.net,collabora.com,vger.kernel.org,gmail.com,oracle.com,amd.com,asahilina.net,ffwll.ch,linaro.org,lists.linaro.org,linuxfoundation.org];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FROM_NEQ_ENVFROM(0.00)[aliceryhl@google.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FREEMAIL_CC(0.00)[redhat.com,kernel.org,lists.freedesktop.org,garyguo.net,collabora.com,vger.kernel.org,google.com,gmail.com,oracle.com,amd.com,asahilina.net,ffwll.ch,linaro.org,lists.linaro.org,linuxfoundation.org];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,kernel];
-	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DMARC_NA(0.00)[jannau.net];
+	ARC_NA(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[28];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_SPAM(0.00)[0.998];
+	MISSING_XM_UA(0.00)[];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,mail.gmail.com:mid,rust-for-linux.com:url,lists.linaro.org:helo,lists.linaro.org:rdns,pages.freedesktop.org:url]
-X-Rspamd-Queue-Id: AE7EE4314D8
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[j@jannau.net,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	NEURAL_SPAM(0.00)[0.954];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig,kernel];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[msgid.link:url,collabora.com:email,rust-for-linux.com:url,pages.freedesktop.org:url,lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
+X-Rspamd-Queue-Id: D10954314E2
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-T24gVGh1LCBNYXIgMjYsIDIwMjYgYXQgMjoxNeKAr0FNIERhbmlsbyBLcnVtbXJpY2ggPGRha3JA
-a2VybmVsLm9yZz4gd3JvdGU6DQo+DQo+IE9uIE1vbiBNYXIgMTYsIDIwMjYgYXQgMTA6MTYgUE0g
-Q0VULCBMeXVkZSBQYXVsIHdyb3RlOg0KPiA+IEx5dWRlIFBhdWwgKDUpOg0KPiA+ICAgcnVzdDog
-ZHJtOiBBZGQgZ2VtOjppbXBsX2FyZWZfZm9yX2dlbV9vYmohDQo+ID4gICBydXN0OiBnZW06IElu
-dHJvZHVjZSBEcml2ZXJPYmplY3Q6OkFyZ3MNCj4NCj4gQXBwbGllZCB0byBkcm0tcnVzdC1uZXh0
-LCB0aGFua3MhDQo+DQo+ID4gQXNhaGkgTGluYSAoMik6DQo+ID4gICBydXN0OiBkcm06IGdlbTog
-c2htZW06IEFkZCBEUk0gc2htZW0gaGVscGVyIGFic3RyYWN0aW9uDQo+DQo+IEkgd2FzIGFib3V0
-IHRvIHBpY2sgdGhpcyBvbmUgdXAgYXMgd2VsbCwgYnV0IGRpZCBydW4gaW50byBxdWl0ZSBzb21l
-IGJ1aWxkDQo+IGVycm9ycyBhbmQgd2FybmluZ3MuIEkgZml4ZWQgdGhlbSBhbGwgdXAsIGJ1dCBJ
-IGNvbnNpZGVyIHRoaXMgdG9vIGV4Y2Vzc2l2ZSB0bw0KPiBhY3R1YWxseSBhcHBseSB0aGUgcGF0
-Y2guIFRoaXMgaXMgdGhlIGNoYW5nZWxvZyBJIGNhbWUgdXAgd2l0aDoNCj4NCj4gICAgIFsgKiBE
-Uk1fR0VNX1NITUVNX0hFTFBFUiBpcyBhIHRyaXN0YXRlOyB3aGVuIGEgbW9kdWxlIGRyaXZlciBz
-ZWxlY3RzIGl0LA0KPiAgICAgICAgIGl0IGJlY29tZXMgPW0uIFRoZSBSdXN0IGtlcm5lbCBjcmF0
-ZSBhbmQgaXRzIEMgaGVscGVycyBhcmUgYWx3YXlzDQo+ICAgICAgICAgYnVpbHQgaW50byB2bWxp
-bnV4IGFuZCBjYW4ndCByZWZlcmVuY2Ugc3ltYm9scyBmcm9tIGEgbW9kdWxlLA0KPiAgICAgICAg
-IGNhdXNpbmcgbGluayBlcnJvcnMuDQo+DQo+ICAgICAgICAgVGh1cywgYWRkIFJVU1RfRFJNX0dF
-TV9TSE1FTV9IRUxQRVIgYm9vbCBLY29uZmlnIHRoYXQgc2VsZWN0cw0KPiAgICAgICAgIERSTV9H
-RU1fU0hNRU1fSEVMUEVSLCBmb3JjaW5nIGl0IGJ1aWx0LWluIHdoZW4gUnVzdCBkcml2ZXJzIG5l
-ZWQgaXQ7DQo+ICAgICAgICAgdXNlIGNmZyhDT05GSUdfUlVTVF9EUk1fR0VNX1NITUVNX0hFTFBF
-UikgZm9yIHRoZSBzaG1lbSBtb2R1bGUuDQo+DQo+ICAgICAgICogQWRkIGNmZ19hdHRyKG5vdChD
-T05GSUdfUlVTVF9EUk1fR0VNX1NITUVNX0hFTFBFUiksIGV4cGVjdCh1bnVzZWQpKQ0KPiAgICAg
-ICAgIG9uIHB1YihjcmF0ZSkgdXNlIGltcGxfYXJlZl9mb3JfZ2VtX29iaiBhbmQgQmFzZU9iamVj
-dFByaXZhdGUsIHNvDQo+ICAgICAgICAgdGhhdCB1bnVzZWQgd2FybmluZ3MgYXJlIHN1cHByZXNz
-ZWQgd2hlbiBzaG1lbSBpcyBub3QgZW5hYmxlZC4NCj4NCj4gICAgICAgKiBFbmFibGUgY29uc3Rf
-cmVmc190b19zdGF0aWMgKHN0YWJpbGl6ZWQgaW4gMS44MykgdG8gcHJldmVudCBidWlsZA0KPiAg
-ICAgICAgIGVycm9ycyB3aXRoIG9sZGVyIGNvbXBpbGVycy4NCj4NCj4gICAgICAgKiBVc2UgJnJh
-dyBjb25zdCBmb3IgYmluZGluZ3M6OmRybV9nZW1fc2htZW1fdm1fb3BzIGFuZCBhZGQNCj4gICAg
-ICAgICAjW2FsbG93KHVudXNlZF91bnNhZmUsIHJlYXNvbiA9ICJTYWZlIHNpbmNlIFJ1c3QgMS44
-Mi4wIildLg0KPg0KPiAgICAgICAqIEZpeCBpbmNvcnJlY3QgQyBIZWFkZXIgcGF0aCBhbmQgbWlu
-b3Igc3BlbGxpbmcgYW5kIGZvcm1hdHRpbmcNCj4gICAgICAgICBpc3N1ZXMuDQo+DQo+ICAgICAg
-ICogRHJvcCBzaG1lbTo6T2JqZWN0OjpzZ190YWJsZSgpIGFzIHRoZSBjdXJyZW50IGltcGxlbWVu
-dGF0aW9uIGlzDQo+ICAgICAgICAgdW5zb3VuZC4NCj4NCj4gICAgICAgICAtIERhbmlsbyBdDQo+
-DQo+IFBsZWFzZSBhbHdheXMgY29uc2lkZXIgWzFdIGFuZCBbMl0uDQo+DQo+IFsxXSBodHRwczov
-L2RybS5wYWdlcy5mcmVlZGVza3RvcC5vcmcvbWFpbnRhaW5lci10b29scy9jb21taXR0ZXIvY29t
-bWl0dGVyLWRybS1ydXN0Lmh0bWwjc3VibWl0LWNoZWNrbGlzdA0KPiBbMl0gaHR0cHM6Ly9ydXN0
-LWZvci1saW51eC5jb20vY29udHJpYnV0aW5nI3N1Ym1pdC1jaGVja2xpc3QtYWRkZW5kdW0NCj4N
-Cj4gKEBEZWJvcmFoOiBJIGFzc3VtZSB5b3Ugd2VyZSB0ZXN0aW5nIHRoaXMgd2l0aCBUeXIgYnVp
-bHQtaW4/KQ0KPg0KPiBATHl1ZGUsIEFsaWNlLCBNaWd1ZWw6IFBsZWFzZSBoYXZlIGEgbG9vayBh
-dCB3aGF0IEkgY2FtZSB1cCB3aXRoIGJlbG93Lg0KDQpJdCBsb29rcyBva2F5IHRvIG1lLg0KDQpB
-bGljZQ0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGlu
-YXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3Jn
-ClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0
-cy5saW5hcm8ub3JnCg==
+On Thu, Mar 26, 2026 at 02:15:28AM +0100, Danilo Krummrich wrote:
+> On Mon Mar 16, 2026 at 10:16 PM CET, Lyude Paul wrote:
+> > Lyude Paul (5):
+> >   rust: drm: Add gem::impl_aref_for_gem_obj!
+> >   rust: gem: Introduce DriverObject::Args
+> 
+> Applied to drm-rust-next, thanks!
+> 
+> > Asahi Lina (2):
+> >   rust: drm: gem: shmem: Add DRM shmem helper abstraction
+> 
+> I was about to pick this one up as well, but did run into quite some build
+> errors and warnings. I fixed them all up, but I consider this too excessive to
+> actually apply the patch. This is the changelog I came up with:
+> 
+>     [ * DRM_GEM_SHMEM_HELPER is a tristate; when a module driver selects it,
+>         it becomes =m. The Rust kernel crate and its C helpers are always
+>         built into vmlinux and can't reference symbols from a module,
+>         causing link errors.
+> 
+>         Thus, add RUST_DRM_GEM_SHMEM_HELPER bool Kconfig that selects
+>         DRM_GEM_SHMEM_HELPER, forcing it built-in when Rust drivers need it;
+>         use cfg(CONFIG_RUST_DRM_GEM_SHMEM_HELPER) for the shmem module.
+> 
+>       * Add cfg_attr(not(CONFIG_RUST_DRM_GEM_SHMEM_HELPER), expect(unused))
+>         on pub(crate) use impl_aref_for_gem_obj and BaseObjectPrivate, so
+>         that unused warnings are suppressed when shmem is not enabled.
+> 
+>       * Enable const_refs_to_static (stabilized in 1.83) to prevent build
+>         errors with older compilers.
+> 
+>       * Use &raw const for bindings::drm_gem_shmem_vm_ops and add
+>         #[allow(unused_unsafe, reason = "Safe since Rust 1.82.0")].
+> 
+>       * Fix incorrect C Header path and minor spelling and formatting
+>         issues.
+> 
+>       * Drop shmem::Object::sg_table() as the current implementation is
+>         unsound.
+> 
+>         - Danilo ]
+> 
+> Please always consider [1] and [2].
+> 
+> [1] https://drm.pages.freedesktop.org/maintainer-tools/committer/committer-drm-rust.html#submit-checklist
+> [2] https://rust-for-linux.com/contributing#submit-checklist-addendum
+> 
+> (@Deborah: I assume you were testing this with Tyr built-in?)
+> 
+> @Lyude, Alice, Miguel: Please have a look at what I came up with below.
+
+Looks fine, asahi had the bool CONFIG_RUST_DRM_GEM_SHMEM_HELPER already
+in the asahi Kconfig so I never noticed that's missing. Same for configs
+which do not excercise gem shmem.
+
+> commit 2dc69d77944dbd1494d2b10a4b134b7fead1c8e7
+> Author: Asahi Lina <lina+kernel@asahilina.net>
+> Date:   Mon Mar 16 17:16:13 2026 -0400
+> 
+>     rust: drm: gem: shmem: Add DRM shmem helper abstraction
+> 
+>     The DRM shmem helper includes common code useful for drivers which
+>     allocate GEM objects as anonymous shmem. Add a Rust abstraction for
+>     this. Drivers can choose the raw GEM implementation or the shmem layer,
+>     depending on their needs.
+> 
+>     Signed-off-by: Asahi Lina <lina@asahilina.net>
+>     Signed-off-by: Daniel Almeida <daniel.almeida@collabora.com>
+>     Reviewed-by: Daniel Almeida <daniel.almeida@collabora.com>
+>     Signed-off-by: Lyude Paul <lyude@redhat.com>
+>     Tested-by: Deborah Brouwer <deborah.brouwer@collabora.com>
+>     Link: https://patch.msgid.link/20260316211646.650074-6-lyude@redhat.com
+>     [ * DRM_GEM_SHMEM_HELPER is a tristate; when a module driver selects it,
+>         it becomes =m. The Rust kernel crate and its C helpers are always
+>         built into vmlinux and can't reference symbols from a module,
+>         causing link errors.
+> 
+>         Thus, add RUST_DRM_GEM_SHMEM_HELPER bool Kconfig that selects
+>         DRM_GEM_SHMEM_HELPER, forcing it built-in when Rust drivers need it;
+>         use cfg(CONFIG_RUST_DRM_GEM_SHMEM_HELPER) for the shmem module.
+> 
+>       * Add cfg_attr(not(CONFIG_RUST_DRM_GEM_SHMEM_HELPER), expect(unused))
+>         on pub(crate) use impl_aref_for_gem_obj and BaseObjectPrivate, so
+>         that unused warnings are suppressed when shmem is not enabled.
+> 
+>       * Enable const_refs_to_static (stabilized in 1.83) to prevent build
+>         errors with older compilers.
+> 
+>       * Use &raw const for bindings::drm_gem_shmem_vm_ops and add
+>         #[allow(unused_unsafe, reason = "Safe since Rust 1.82.0")].
+> 
+>       * Fix incorrect C Header path and minor spelling and formatting
+>         issues.
+> 
+>       * Drop shmem::Object::sg_table() as the current implementation is
+>         unsound.
+> 
+>         - Danilo ]
+>     Signed-off-by: Danilo Krummrich <dakr@kernel.org>
+
+Reviewed-by: Janne Grunau <j@jananu.net>
+
+Janne
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
