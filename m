@@ -2,59 +2,62 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gL/5B6ti5mmavgEAu9opvQ
+	id wIfJB7Ni5mmavgEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:30:19 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:30:27 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9104E4314B4
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:30:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C528A4314BB
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:30:26 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id AA81B3F6C2
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:30:17 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id DA78A3F7A4
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:30:25 +0000 (UTC)
 Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
-	by lists.linaro.org (Postfix) with ESMTPS id 7E5473F783
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Mar 2026 01:15:36 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id CED7A3F783
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Mar 2026 01:28:51 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=CAOnZ1a0;
-	spf=pass (lists.linaro.org: domain of dakr@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=dakr@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=MLfhqhkz;
+	spf=pass (lists.linaro.org: domain of mhiramat@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=mhiramat@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by tor.source.kernel.org (Postfix) with ESMTP id D179D60123;
-	Thu, 26 Mar 2026 01:15:35 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D58FBC4CEF7;
-	Thu, 26 Mar 2026 01:15:29 +0000 (UTC)
+	by tor.source.kernel.org (Postfix) with ESMTP id 6626160103;
+	Thu, 26 Mar 2026 01:28:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3592AC4CEF7;
+	Thu, 26 Mar 2026 01:28:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1774487735;
-	bh=ONoM3r8dhzn9gp/Rh8CpPc8mBuiVYIjyCbjkV7LKnK8=;
-	h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
-	b=CAOnZ1a0q6D0c535RBzlK0A467wrlyMMTUCLhHaIahv4vb5pnwfhakQ8ugzQ/pcxH
-	 1DedKNDxH7naDK5ncYMt0icIlFuGnqwzIh3VW4jg/hLePzADzliEE6gsgMxs/2Sl+N
-	 y0icYrEDe+aAYRlAuNd0geFdyDjJiCalG4V8nDKa2AZo3G7bS3BMEdcT10yUyp/sLE
-	 jq7tUi4BYuRMJNyy8DlU0CrzbYO8x3VD7AjqfRYF+5nQWgjdpn2+eZF9TDSZ1DW61A
-	 mO+hGffUVu56CdfQPmk6KeM0wFXV4YhcijwfmNGB0pJvti4ZD4Xrum1/9lXsFUglxS
-	 zEFg+2GKd5AxA==
+	s=k20201202; t=1774488531;
+	bh=0Cq7OMqDyz29Hy/YQIvOOTgh39yp/jjxAwDycnlq/O0=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=MLfhqhkzsxa7tc0jHzhytzV6qchl81dHU9KAPgpYRYmOHYLzk4wblKHPtqEHyv28p
+	 Q/b1ZGVBAKVMA2DtsWIH4xs0i1VJ2p7crVWlc/njQGIq3j2rxJcz4zZlqQtGtXSKGY
+	 qE7kmn3skAAmdHpynUh6G1IcDYzRBpRJQJ2v9dHtuEYl1SHM9u79m3ODxDTtFbRHwF
+	 TrXVRIXikjQcC748T/h8YzRRuj5Is74hno4IqadGPqhCATzpJM+vXtHmT1645lImlw
+	 xbcKSEnaeY6vjDCFgor9rDZ7RPAf5TB+nN0PUncVs3G3ToCrGTMxxDR5q52eHlIdvK
+	 yL93d9yknBOTA==
+Date: Thu, 26 Mar 2026 10:28:40 +0900
+From: Masami Hiramatsu (Google) <mhiramat@kernel.org>
+To: "Vineeth Pillai (Google)" <vineeth@bitbyteword.org>
+Message-Id: <20260326102840.80a270ec818fea7e000aeef4@kernel.org>
+In-Reply-To: <20260323160052.17528-2-vineeth@bitbyteword.org>
+References: <20260323160052.17528-1-vineeth@bitbyteword.org>
+	<20260323160052.17528-2-vineeth@bitbyteword.org>
+X-Mailer: Sylpheed 3.8.0beta1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 Mime-Version: 1.0
-Date: Thu, 26 Mar 2026 02:15:28 +0100
-Message-Id: <DHCBEGGPWSVK.30MV8652PV4PY@kernel.org>
-To: "Lyude Paul" <lyude@redhat.com>, "Alice Ryhl" <aliceryhl@google.com>,
- "Miguel Ojeda" <ojeda@kernel.org>
-From: "Danilo Krummrich" <dakr@kernel.org>
-References: <20260316211646.650074-1-lyude@redhat.com>
-In-Reply-To: <20260316211646.650074-1-lyude@redhat.com>
 X-Spamd-Bar: ----
-X-MailFrom: dakr@kernel.org
+X-MailFrom: mhiramat@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: PBN6M3QFVT3CAA24DMY4SRXIJJE3SK4H
-X-Message-ID-Hash: PBN6M3QFVT3CAA24DMY4SRXIJJE3SK4H
-X-Mailman-Approved-At: Mon, 20 Apr 2026 17:29:45 +0000
-CC: nouveau@lists.freedesktop.org, Gary Guo <gary@garyguo.net>, Daniel Almeida <daniel.almeida@collabora.com>, rust-for-linux@vger.kernel.org, Matthew Maurer <mmaurer@google.com>, FUJITA Tomonori <fujita.tomonori@gmail.com>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, christian.koenig@amd.com, Asahi Lina <lina@asahilina.net>, Miguel Ojeda <ojeda@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, Simona Vetter <simona@ffwll.ch>, Alice Ryhl <aliceryhl@google.com>, Boqun Feng <boqun@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Krishna Ketan Rai <prafulrai522@gmail.com>, linux-media@vger.kernel.org, Shankari Anand <shankari.ak0208@gmail.com>, David Airlie <airlied@gmail.com>, Benno Lossin <lossin@kernel.org>, Viresh Kumar <viresh.kumar@linaro.org>, linaro-mm-sig@lists.linaro.org, Asahi Lina <lina+kernel@asahilina.net>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, kernel@vger.kernel.org, Deborah Brouwer <deborah.brouwer@collabora.com>
+Message-ID-Hash: AUJIW2K6QRRVWKD2C5SVFOLRGV5DO3SC
+X-Message-ID-Hash: AUJIW2K6QRRVWKD2C5SVFOLRGV5DO3SC
+X-Mailman-Approved-At: Mon, 20 Apr 2026 17:29:46 +0000
+CC: Steven Rostedt <rostedt@goodmis.org>, Peter Zijlstra <peterz@infradead.org>, Dmitry Ilvokhin <d@ilvokhin.com>, Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Ingo Molnar <mingo@redhat.com>, Jens Axboe <axboe@kernel.dk>, io-uring@vger.kernel.org, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Alexei Starovoitov <ast@kernel.org>, Daniel Borkmann <daniel@iogearbox.net>, Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>, Xin Long <lucien.xin@gmail.com>, Jon Maloy <jmaloy@redhat.com>, Aaron Conole <aconole@redhat.com>, Eelco Chaudron <echaudro@redhat.com>, Ilya Maximets <i.maximets@ovn.org>, netdev@vger.kernel.org, bpf@vger.kernel.org, linux-sctp@vger.kernel.org, tipc-discussion@lists.sourceforge.net, dev@openvswitch.org, Jiri Pirko <jiri@resnulli.us>, Oded Gabbay <ogabbay@kernel.org>, Koby Elbaz <koby.elbaz@intel.com>, dri-devel@lists.freedes
+ ktop.org, "Rafael J. Wysocki" <rafael@kernel.org>, Viresh Kumar <viresh.kumar@linaro.org>, "Gautham R. Shenoy" <gautham.shenoy@amd.com>, Huang Rui <ray.huang@amd.com>, Mario Limonciello <mario.limonciello@amd.com>, Len Brown <lenb@kernel.org>, Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>, linux-pm@vger.kernel.org, MyungJoo Ham <myungjoo.ham@samsung.com>, Kyungmin Park <kyungmin.park@samsung.com>, Chanwoo Choi <cw00.choi@samsung.com>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Sumit Semwal <sumit.semwal@linaro.org>, linaro-mm-sig@lists.linaro.org, Eddie James <eajames@linux.ibm.com>, Andrew Jeffery <andrew@codeconstruct.com.au>, linux-fsi@lists.ozlabs.org, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Alex Deucher <alexander.deucher@amd.com>, Danilo Krummrich <dakr@kernel.org>, Matthew Brost <matthew.brost@intel.com>, Philipp Stanner <phasta@kernel.org>, Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>, amd-gfx@lis
+ ts.freedesktop.org, Jiri Kosina <jikos@kernel.org>, Benjamin Tissoires <bentiss@kernel.org>, linux-input@vger.kernel.org, Wolfram Sang <wsa+renesas@sang-engineering.com>, linux-i2c@vger.kernel.org, Mark Brown <broonie@kernel.org>, Michael Hennerich <michael.hennerich@analog.com>, Nuno =?UTF-8?B?U8Oh?= <nuno.sa@analog.com>, linux-spi@vger.kernel.org, "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>, "Martin K. Petersen" <martin.petersen@oracle.com>, linux-scsi@vger.kernel.org, Chris Mason <clm@fb.com>, David Sterba <dsterba@suse.com>, linux-btrfs@vger.kernel.org, Thomas Gleixner <tglx@linutronix.de>, Andrew Morton <akpm@linux-foundation.org>, SeongJae Park <sj@kernel.org>, linux-mm@kvack.org, Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, linux-trace-kernel@vger.kernel.org, linux-kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: (subset) [PATCH v9 0/7] Rust bindings for gem shmem
+Subject: [Linaro-mm-sig] Re: [PATCH v2 01/19] tracepoint: Add trace_call__##name() API
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PBN6M3QFVT3CAA24DMY4SRXIJJE3SK4H/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AUJIW2K6QRRVWKD2C5SVFOLRGV5DO3SC/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -64,522 +67,127 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 X-Spamd-Result: default: False [4.99 / 15.00];
-	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
 	SUSPICIOUS_RECIPS(1.50)[];
+	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
 	R_DKIM_REJECT(1.00)[kernel.org:s=k20201202];
 	DATE_IN_PAST(1.00)[616];
 	MV_CASE(0.50)[];
-	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx:c];
+	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[lists.freedesktop.org,garyguo.net,collabora.com,vger.kernel.org,google.com,gmail.com,oracle.com,amd.com,asahilina.net,kernel.org,ffwll.ch,linaro.org,lists.linaro.org,linuxfoundation.org];
-	RCPT_COUNT_TWELVE(0.00)[29];
-	ARC_NA(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
+	FROM_HAS_DN(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	GREYLIST(0.00)[pass,meta];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-0.915];
-	FROM_NEQ_ENVFROM(0.00)[dakr@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:-];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,kernel];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ARC_NA(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
 	TO_DN_SOME(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email,collabora.com:email,msgid.link:url,rust-for-linux.com:url]
-X-Rspamd-Queue-Id: 9104E4314B4
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[goodmis.org,infradead.org,ilvokhin.com,kernel.org,efficios.com,redhat.com,kernel.dk,vger.kernel.org,davemloft.net,google.com,iogearbox.net,gmail.com,ovn.org,lists.sourceforge.net,openvswitch.org,resnulli.us,intel.com,lists.freedes,linaro.org,amd.com,linux.intel.com,samsung.com,lists.linaro.org,linux.ibm.com,codeconstruct.com.au,lists.ozlabs.org,ffwll.ch,lis,sang-engineering.com,analog.com,HansenPartnership.com,oracle.com,fb.com,suse.com,linutronix.de,linux-foundation.org,kvack.org,alien8.de];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[80];
+	FROM_NEQ_ENVFROM(0.00)[mhiramat@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
+	DKIM_TRACE(0.00)[kernel.org:-];
+	NEURAL_HAM(-0.00)[-0.995];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig,renesas];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[goodmis.org:email,linaro.org:email,bitbyteword.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
+X-Rspamd-Queue-Id: C528A4314BB
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Mon Mar 16, 2026 at 10:16 PM CET, Lyude Paul wrote:
-> Lyude Paul (5):
->   rust: drm: Add gem::impl_aref_for_gem_obj!
->   rust: gem: Introduce DriverObject::Args
+On Mon, 23 Mar 2026 12:00:20 -0400
+"Vineeth Pillai (Google)" <vineeth@bitbyteword.org> wrote:
 
-Applied to drm-rust-next, thanks!
+> Add trace_call__##name() as a companion to trace_##name().  When a
+> caller already guards a tracepoint with an explicit enabled check:
+> 
+>   if (trace_foo_enabled() && cond)
+>       trace_foo(args);
+> 
+> trace_foo() internally repeats the static_branch_unlikely() test, which
+> the compiler cannot fold since static branches are patched binary
+> instructions.  This results in two static-branch evaluations for every
+> guarded call site.
+> 
+> trace_call__##name() calls __do_trace_##name() directly, skipping the
+> redundant static-branch re-check.  This avoids leaking the internal
+> __do_trace_##name() symbol into call sites while still eliminating the
+> double evaluation:
+> 
+>   if (trace_foo_enabled() && cond)
+>       trace_invoke_foo(args);   /* calls __do_trace_foo() directly */
 
-> Asahi Lina (2):
->   rust: drm: gem: shmem: Add DRM shmem helper abstraction
+nit: trace_call_foo() instead of trace_invoke_foo()?
 
-I was about to pick this one up as well, but did run into quite some build
-errors and warnings. I fixed them all up, but I consider this too excessive to
-actually apply the patch. This is the changelog I came up with:
+Anyway looks good to me.
 
-    [ * DRM_GEM_SHMEM_HELPER is a tristate; when a module driver selects it,
-        it becomes =m. The Rust kernel crate and its C helpers are always
-        built into vmlinux and can't reference symbols from a module,
-        causing link errors.
+Acked-by: Masami Hiramatsu (Google) <mhiramat@kernel.org>
 
-        Thus, add RUST_DRM_GEM_SHMEM_HELPER bool Kconfig that selects
-        DRM_GEM_SHMEM_HELPER, forcing it built-in when Rust drivers need it;
-        use cfg(CONFIG_RUST_DRM_GEM_SHMEM_HELPER) for the shmem module.
 
-      * Add cfg_attr(not(CONFIG_RUST_DRM_GEM_SHMEM_HELPER), expect(unused))
-        on pub(crate) use impl_aref_for_gem_obj and BaseObjectPrivate, so
-        that unused warnings are suppressed when shmem is not enabled.
+> 
+> Three locations are updated:
+> - __DECLARE_TRACE: invoke form omits static_branch_unlikely, retains
+>   the LOCKDEP RCU-watching assertion.
+> - __DECLARE_TRACE_SYSCALL: same, plus retains might_fault().
+> - !TRACEPOINTS_ENABLED stub: empty no-op so callers compile cleanly
+>   when tracepoints are compiled out.
+> 
+> Suggested-by: Steven Rostedt <rostedt@goodmis.org>
+> Suggested-by: Peter Zijlstra <peterz@infradead.org>
+> Signed-off-by: Vineeth Pillai (Google) <vineeth@bitbyteword.org>
+> Assisted-by: Claude:claude-sonnet-4-6
+> ---
+>  include/linux/tracepoint.h | 11 +++++++++++
+>  1 file changed, 11 insertions(+)
+> 
+> diff --git a/include/linux/tracepoint.h b/include/linux/tracepoint.h
+> index 22ca1c8b54f32..ed969705341f1 100644
+> --- a/include/linux/tracepoint.h
+> +++ b/include/linux/tracepoint.h
+> @@ -294,6 +294,10 @@ static inline struct tracepoint *tracepoint_ptr_deref(tracepoint_ptr_t *p)
+>  			WARN_ONCE(!rcu_is_watching(),			\
+>  				  "RCU not watching for tracepoint");	\
+>  		}							\
+> +	}								\
+> +	static inline void trace_call__##name(proto)			\
+> +	{								\
+> +		__do_trace_##name(args);				\
+>  	}
+>  
+>  #define __DECLARE_TRACE_SYSCALL(name, proto, args, data_proto)		\
+> @@ -313,6 +317,11 @@ static inline struct tracepoint *tracepoint_ptr_deref(tracepoint_ptr_t *p)
+>  			WARN_ONCE(!rcu_is_watching(),			\
+>  				  "RCU not watching for tracepoint");	\
+>  		}							\
+> +	}								\
+> +	static inline void trace_call__##name(proto)			\
+> +	{								\
+> +		might_fault();						\
+> +		__do_trace_##name(args);				\
+>  	}
+>  
+>  /*
+> @@ -398,6 +407,8 @@ static inline struct tracepoint *tracepoint_ptr_deref(tracepoint_ptr_t *p)
+>  #define __DECLARE_TRACE_COMMON(name, proto, args, data_proto)		\
+>  	static inline void trace_##name(proto)				\
+>  	{ }								\
+> +	static inline void trace_call__##name(proto)			\
+> +	{ }								\
+>  	static inline int						\
+>  	register_trace_##name(void (*probe)(data_proto),		\
+>  			      void *data)				\
+> -- 
+> 2.53.0
+> 
 
-      * Enable const_refs_to_static (stabilized in 1.83) to prevent build
-        errors with older compilers.
 
-      * Use &raw const for bindings::drm_gem_shmem_vm_ops and add
-        #[allow(unused_unsafe, reason = "Safe since Rust 1.82.0")].
-
-      * Fix incorrect C Header path and minor spelling and formatting
-        issues.
-
-      * Drop shmem::Object::sg_table() as the current implementation is
-        unsound.
-
-        - Danilo ]
-
-Please always consider [1] and [2].
-
-[1] https://drm.pages.freedesktop.org/maintainer-tools/committer/committer-drm-rust.html#submit-checklist
-[2] https://rust-for-linux.com/contributing#submit-checklist-addendum
-
-(@Deborah: I assume you were testing this with Tyr built-in?)
-
-@Lyude, Alice, Miguel: Please have a look at what I came up with below.
-
-commit 2dc69d77944dbd1494d2b10a4b134b7fead1c8e7
-Author: Asahi Lina <lina+kernel@asahilina.net>
-Date:   Mon Mar 16 17:16:13 2026 -0400
-
-    rust: drm: gem: shmem: Add DRM shmem helper abstraction
-
-    The DRM shmem helper includes common code useful for drivers which
-    allocate GEM objects as anonymous shmem. Add a Rust abstraction for
-    this. Drivers can choose the raw GEM implementation or the shmem layer,
-    depending on their needs.
-
-    Signed-off-by: Asahi Lina <lina@asahilina.net>
-    Signed-off-by: Daniel Almeida <daniel.almeida@collabora.com>
-    Reviewed-by: Daniel Almeida <daniel.almeida@collabora.com>
-    Signed-off-by: Lyude Paul <lyude@redhat.com>
-    Tested-by: Deborah Brouwer <deborah.brouwer@collabora.com>
-    Link: https://patch.msgid.link/20260316211646.650074-6-lyude@redhat.com
-    [ * DRM_GEM_SHMEM_HELPER is a tristate; when a module driver selects it,
-        it becomes =m. The Rust kernel crate and its C helpers are always
-        built into vmlinux and can't reference symbols from a module,
-        causing link errors.
-
-        Thus, add RUST_DRM_GEM_SHMEM_HELPER bool Kconfig that selects
-        DRM_GEM_SHMEM_HELPER, forcing it built-in when Rust drivers need it;
-        use cfg(CONFIG_RUST_DRM_GEM_SHMEM_HELPER) for the shmem module.
-
-      * Add cfg_attr(not(CONFIG_RUST_DRM_GEM_SHMEM_HELPER), expect(unused))
-        on pub(crate) use impl_aref_for_gem_obj and BaseObjectPrivate, so
-        that unused warnings are suppressed when shmem is not enabled.
-
-      * Enable const_refs_to_static (stabilized in 1.83) to prevent build
-        errors with older compilers.
-
-      * Use &raw const for bindings::drm_gem_shmem_vm_ops and add
-        #[allow(unused_unsafe, reason = "Safe since Rust 1.82.0")].
-
-      * Fix incorrect C Header path and minor spelling and formatting
-        issues.
-
-      * Drop shmem::Object::sg_table() as the current implementation is
-        unsound.
-
-        - Danilo ]
-    Signed-off-by: Danilo Krummrich <dakr@kernel.org>
-
-diff --git a/drivers/gpu/drm/Kconfig b/drivers/gpu/drm/Kconfig
-index 0d0657dd1b41..0f68446c9122 100644
---- a/drivers/gpu/drm/Kconfig
-+++ b/drivers/gpu/drm/Kconfig
-@@ -258,6 +258,13 @@ config DRM_GEM_SHMEM_HELPER
- 	help
- 	  Choose this if you need the GEM shmem helper functions
-
-+config RUST_DRM_GEM_SHMEM_HELPER
-+	bool
-+	depends on DRM && MMU
-+	select DRM_GEM_SHMEM_HELPER
-+	help
-+	  Choose this if you need the GEM shmem helper functions In Rust
-+
- config DRM_SUBALLOC_HELPER
- 	tristate
- 	depends on DRM
-diff --git a/rust/bindings/bindings_helper.h b/rust/bindings/bindings_helper.h
-index 563863d96d38..eda8f50d3a3c 100644
---- a/rust/bindings/bindings_helper.h
-+++ b/rust/bindings/bindings_helper.h
-@@ -34,6 +34,7 @@
- #include <drm/drm_drv.h>
- #include <drm/drm_file.h>
- #include <drm/drm_gem.h>
-+#include <drm/drm_gem_shmem_helper.h>
- #include <drm/drm_ioctl.h>
- #include <kunit/test.h>
- #include <linux/auxiliary_bus.h>
-@@ -63,6 +64,7 @@
- #include <linux/interrupt.h>
- #include <linux/io-pgtable.h>
- #include <linux/ioport.h>
-+#include <linux/iosys-map.h>
- #include <linux/jiffies.h>
- #include <linux/jump_label.h>
- #include <linux/mdio.h>
-diff --git a/rust/helpers/drm.c b/rust/helpers/drm.c
-index fe226f7b53ef..65f3f22b0e1d 100644
---- a/rust/helpers/drm.c
-+++ b/rust/helpers/drm.c
-@@ -1,6 +1,7 @@
- // SPDX-License-Identifier: GPL-2.0
-
- #include <drm/drm_gem.h>
-+#include <drm/drm_gem_shmem_helper.h>
- #include <drm/drm_vma_manager.h>
-
- #ifdef CONFIG_DRM
-@@ -21,4 +22,57 @@ rust_helper_drm_vma_node_offset_addr(struct drm_vma_offset_node *node)
- 	return drm_vma_node_offset_addr(node);
- }
-
--#endif
-+#ifdef CONFIG_DRM_GEM_SHMEM_HELPER
-+__rust_helper void
-+rust_helper_drm_gem_shmem_object_free(struct drm_gem_object *obj)
-+{
-+	return drm_gem_shmem_object_free(obj);
-+}
-+
-+__rust_helper void
-+rust_helper_drm_gem_shmem_object_print_info(struct drm_printer *p, unsigned int indent,
-+					    const struct drm_gem_object *obj)
-+{
-+	drm_gem_shmem_object_print_info(p, indent, obj);
-+}
-+
-+__rust_helper int
-+rust_helper_drm_gem_shmem_object_pin(struct drm_gem_object *obj)
-+{
-+	return drm_gem_shmem_object_pin(obj);
-+}
-+
-+__rust_helper void
-+rust_helper_drm_gem_shmem_object_unpin(struct drm_gem_object *obj)
-+{
-+	drm_gem_shmem_object_unpin(obj);
-+}
-+
-+__rust_helper struct sg_table *
-+rust_helper_drm_gem_shmem_object_get_sg_table(struct drm_gem_object *obj)
-+{
-+	return drm_gem_shmem_object_get_sg_table(obj);
-+}
-+
-+__rust_helper int
-+rust_helper_drm_gem_shmem_object_vmap(struct drm_gem_object *obj,
-+				      struct iosys_map *map)
-+{
-+	return drm_gem_shmem_object_vmap(obj, map);
-+}
-+
-+__rust_helper void
-+rust_helper_drm_gem_shmem_object_vunmap(struct drm_gem_object *obj,
-+					struct iosys_map *map)
-+{
-+	drm_gem_shmem_object_vunmap(obj, map);
-+}
-+
-+__rust_helper int
-+rust_helper_drm_gem_shmem_object_mmap(struct drm_gem_object *obj, struct vm_area_struct *vma)
-+{
-+	return drm_gem_shmem_object_mmap(obj, vma);
-+}
-+
-+#endif /* CONFIG_DRM_GEM_SHMEM_HELPER */
-+#endif /* CONFIG_DRM */
-diff --git a/rust/kernel/drm/gem/mod.rs b/rust/kernel/drm/gem/mod.rs
-index 527d86f4ce92..58eb0a3d5686 100644
---- a/rust/kernel/drm/gem/mod.rs
-+++ b/rust/kernel/drm/gem/mod.rs
-@@ -26,6 +26,9 @@
-     ptr::NonNull, //
- };
-
-+#[cfg(CONFIG_RUST_DRM_GEM_SHMEM_HELPER)]
-+pub mod shmem;
-+
- /// A macro for implementing [`AlwaysRefCounted`] for any GEM object type.
- ///
- /// Since all GEM objects use the same refcounting scheme.
-@@ -60,6 +63,8 @@ unsafe fn dec_ref(obj: core::ptr::NonNull<Self>) {
-         }
-     };
- }
-+#[cfg_attr(not(CONFIG_RUST_DRM_GEM_SHMEM_HELPER), allow(unused))]
-+pub(crate) use impl_aref_for_gem_obj;
-
- /// A type alias for retrieving a [`Driver`]s [`DriverFile`] implementation from its
- /// [`DriverObject`] implementation.
-@@ -216,7 +221,7 @@ fn create_mmap_offset(&self) -> Result<u64> {
- impl<T: IntoGEMObject> BaseObject for T {}
-
- /// Crate-private base operations shared by all GEM object classes.
--#[expect(unused)]
-+#[cfg_attr(not(CONFIG_RUST_DRM_GEM_SHMEM_HELPER), expect(unused))]
- pub(crate) trait BaseObjectPrivate: IntoGEMObject {
-     /// Return a pointer to this object's dma_resv.
-     fn raw_dma_resv(&self) -> *mut bindings::dma_resv {
-diff --git a/rust/kernel/drm/gem/shmem.rs b/rust/kernel/drm/gem/shmem.rs
-new file mode 100644
-index 000000000000..d025fb035195
---- /dev/null
-+++ b/rust/kernel/drm/gem/shmem.rs
-@@ -0,0 +1,228 @@
-+// SPDX-License-Identifier: GPL-2.0
-+
-+//! DRM GEM shmem helper objects
-+//!
-+//! C header: [`include/linux/drm/drm_gem_shmem_helper.h`](srctree/include/drm/drm_gem_shmem_helper.h)
-+
-+// TODO:
-+// - There are a number of spots here that manually acquire/release the DMA reservation lock using
-+//   dma_resv_(un)lock(). In the future we should add support for ww mutex, expose a method to
-+//   acquire a reference to the WwMutex, and then use that directly instead of the C functions here.
-+
-+use crate::{
-+    container_of,
-+    drm::{
-+        device,
-+        driver,
-+        gem,
-+        private::Sealed, //
-+    },
-+    error::to_result,
-+    prelude::*,
-+    types::{
-+        ARef,
-+        Opaque, //
-+    }, //
-+};
-+use core::{
-+    ops::{
-+        Deref,
-+        DerefMut, //
-+    },
-+    ptr::NonNull,
-+};
-+use gem::{
-+    BaseObjectPrivate,
-+    DriverObject,
-+    IntoGEMObject, //
-+};
-+
-+/// A struct for controlling the creation of shmem-backed GEM objects.
-+///
-+/// This is used with [`Object::new()`] to control various properties that can only be set when
-+/// initially creating a shmem-backed GEM object.
-+#[derive(Default)]
-+pub struct ObjectConfig<'a, T: DriverObject> {
-+    /// Whether to set the write-combine map flag.
-+    pub map_wc: bool,
-+
-+    /// Reuse the DMA reservation from another GEM object.
-+    ///
-+    /// The newly created [`Object`] will hold an owned refcount to `parent_resv_obj` if specified.
-+    pub parent_resv_obj: Option<&'a Object<T>>,
-+}
-+
-+/// A shmem-backed GEM object.
-+///
-+/// # Invariants
-+///
-+/// `obj` contains a valid initialized `struct drm_gem_shmem_object` for the lifetime of this
-+/// object.
-+#[repr(C)]
-+#[pin_data]
-+pub struct Object<T: DriverObject> {
-+    #[pin]
-+    obj: Opaque<bindings::drm_gem_shmem_object>,
-+    /// Parent object that owns this object's DMA reservation object.
-+    parent_resv_obj: Option<ARef<Object<T>>>,
-+    #[pin]
-+    inner: T,
-+}
-+
-+super::impl_aref_for_gem_obj!(impl<T> for Object<T> where T: DriverObject);
-+
-+// SAFETY: All GEM objects are thread-safe.
-+unsafe impl<T: DriverObject> Send for Object<T> {}
-+
-+// SAFETY: All GEM objects are thread-safe.
-+unsafe impl<T: DriverObject> Sync for Object<T> {}
-+
-+impl<T: DriverObject> Object<T> {
-+    /// `drm_gem_object_funcs` vtable suitable for GEM shmem objects.
-+    const VTABLE: bindings::drm_gem_object_funcs = bindings::drm_gem_object_funcs {
-+        free: Some(Self::free_callback),
-+        open: Some(super::open_callback::<T>),
-+        close: Some(super::close_callback::<T>),
-+        print_info: Some(bindings::drm_gem_shmem_object_print_info),
-+        export: None,
-+        pin: Some(bindings::drm_gem_shmem_object_pin),
-+        unpin: Some(bindings::drm_gem_shmem_object_unpin),
-+        get_sg_table: Some(bindings::drm_gem_shmem_object_get_sg_table),
-+        vmap: Some(bindings::drm_gem_shmem_object_vmap),
-+        vunmap: Some(bindings::drm_gem_shmem_object_vunmap),
-+        mmap: Some(bindings::drm_gem_shmem_object_mmap),
-+        status: None,
-+        rss: None,
-+        #[allow(unused_unsafe, reason = "Safe since Rust 1.82.0")]
-+        // SAFETY: `drm_gem_shmem_vm_ops` is a valid, static const on the C side.
-+        vm_ops: unsafe { &raw const bindings::drm_gem_shmem_vm_ops },
-+        evict: None,
-+    };
-+
-+    /// Return a raw pointer to the embedded drm_gem_shmem_object.
-+    fn as_raw_shmem(&self) -> *mut bindings::drm_gem_shmem_object {
-+        self.obj.get()
-+    }
-+
-+    /// Create a new shmem-backed DRM object of the given size.
-+    ///
-+    /// Additional config options can be specified using `config`.
-+    pub fn new(
-+        dev: &device::Device<T::Driver>,
-+        size: usize,
-+        config: ObjectConfig<'_, T>,
-+        args: T::Args,
-+    ) -> Result<ARef<Self>> {
-+        let new: Pin<KBox<Self>> = KBox::try_pin_init(
-+            try_pin_init!(Self {
-+                obj <- Opaque::init_zeroed(),
-+                parent_resv_obj: config.parent_resv_obj.map(|p| p.into()),
-+                inner <- T::new(dev, size, args),
-+            }),
-+            GFP_KERNEL,
-+        )?;
-+
-+        // SAFETY: `obj.as_raw()` is guaranteed to be valid by the initialization above.
-+        unsafe { (*new.as_raw()).funcs = &Self::VTABLE };
-+
-+        // SAFETY: The arguments are all valid via the type invariants.
-+        to_result(unsafe { bindings::drm_gem_shmem_init(dev.as_raw(), new.as_raw_shmem(), size) })?;
-+
-+        // SAFETY: We never move out of `self`.
-+        let new = KBox::into_raw(unsafe { Pin::into_inner_unchecked(new) });
-+
-+        // SAFETY: We're taking over the owned refcount from `drm_gem_shmem_init`.
-+        let obj = unsafe { ARef::from_raw(NonNull::new_unchecked(new)) };
-+
-+        // Start filling out values from `config`
-+        if let Some(parent_resv) = config.parent_resv_obj {
-+            // SAFETY: We have yet to expose the new gem object outside of this function, so it is
-+            // safe to modify this field.
-+            unsafe { (*obj.obj.get()).base.resv = parent_resv.raw_dma_resv() };
-+        }
-+
-+        // SAFETY: We have yet to expose this object outside of this function, so we're guaranteed
-+        // to have exclusive access - thus making this safe to hold a mutable reference to.
-+        let shmem = unsafe { &mut *obj.as_raw_shmem() };
-+        shmem.set_map_wc(config.map_wc);
-+
-+        Ok(obj)
-+    }
-+
-+    /// Returns the `Device` that owns this GEM object.
-+    pub fn dev(&self) -> &device::Device<T::Driver> {
-+        // SAFETY: `dev` will have been initialized in `Self::new()` by `drm_gem_shmem_init()`.
-+        unsafe { device::Device::from_raw((*self.as_raw()).dev) }
-+    }
-+
-+    extern "C" fn free_callback(obj: *mut bindings::drm_gem_object) {
-+        // SAFETY:
-+        // - DRM always passes a valid gem object here
-+        // - We used drm_gem_shmem_create() in our create_gem_object callback, so we know that
-+        //   `obj` is contained within a drm_gem_shmem_object
-+        let this = unsafe { container_of!(obj, bindings::drm_gem_shmem_object, base) };
-+
-+        // SAFETY:
-+        // - We're in free_callback - so this function is safe to call.
-+        // - We won't be using the gem resources on `this` after this call.
-+        unsafe { bindings::drm_gem_shmem_release(this) };
-+
-+        // SAFETY:
-+        // - We verified above that `obj` is valid, which makes `this` valid
-+        // - This function is set in AllocOps, so we know that `this` is contained within a
-+        //   `Object<T>`
-+        let this = unsafe { container_of!(Opaque::cast_from(this), Self, obj) }.cast_mut();
-+
-+        // SAFETY: We're recovering the Kbox<> we created in gem_create_object()
-+        let _ = unsafe { KBox::from_raw(this) };
-+    }
-+}
-+
-+impl<T: DriverObject> Deref for Object<T> {
-+    type Target = T;
-+
-+    fn deref(&self) -> &Self::Target {
-+        &self.inner
-+    }
-+}
-+
-+impl<T: DriverObject> DerefMut for Object<T> {
-+    fn deref_mut(&mut self) -> &mut Self::Target {
-+        &mut self.inner
-+    }
-+}
-+
-+impl<T: DriverObject> Sealed for Object<T> {}
-+
-+impl<T: DriverObject> gem::IntoGEMObject for Object<T> {
-+    fn as_raw(&self) -> *mut bindings::drm_gem_object {
-+        // SAFETY:
-+        // - Our immutable reference is proof that this is safe to dereference.
-+        // - `obj` is always a valid drm_gem_shmem_object via our type invariants.
-+        unsafe { &raw mut (*self.obj.get()).base }
-+    }
-+
-+    unsafe fn from_raw<'a>(obj: *mut bindings::drm_gem_object) -> &'a Object<T> {
-+        // SAFETY: The safety contract of from_gem_obj() guarantees that `obj` is contained within
-+        // `Self`
-+        unsafe {
-+            let obj = Opaque::cast_from(container_of!(obj, bindings::drm_gem_shmem_object, base));
-+
-+            &*container_of!(obj, Object<T>, obj)
-+        }
-+    }
-+}
-+
-+impl<T: DriverObject> driver::AllocImpl for Object<T> {
-+    type Driver = T::Driver;
-+
-+    const ALLOC_OPS: driver::AllocOps = driver::AllocOps {
-+        gem_create_object: None,
-+        prime_handle_to_fd: None,
-+        prime_fd_to_handle: None,
-+        gem_prime_import: None,
-+        gem_prime_import_sg_table: Some(bindings::drm_gem_shmem_prime_import_sg_table),
-+        dumb_create: Some(bindings::drm_gem_shmem_dumb_create),
-+        dumb_map_offset: None,
-+    };
-+}
-diff --git a/rust/kernel/lib.rs b/rust/kernel/lib.rs
-index e0837ffc91bf..40de00ce4f97 100644
---- a/rust/kernel/lib.rs
-+++ b/rust/kernel/lib.rs
-@@ -38,6 +38,7 @@
- #![feature(const_option)]
- #![feature(const_ptr_write)]
- #![feature(const_refs_to_cell)]
-+#![feature(const_refs_to_static)]
- //
- // Stable since Rust 1.84.0.
- #![feature(strict_provenance)]
+-- 
+Masami Hiramatsu (Google) <mhiramat@kernel.org>
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
