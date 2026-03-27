@@ -2,244 +2,232 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cG53Ccti5mmavgEAu9opvQ
+	id eBGtMtBi5mmavgEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:30:51 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:30:56 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id D10954314E2
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:30:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4DEFC4314E9
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:30:56 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id CFD7C3F7D9
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:30:49 +0000 (UTC)
-Received: from fout-b7-smtp.messagingengine.com (fout-b7-smtp.messagingengine.com [202.12.124.150])
-	by lists.linaro.org (Postfix) with ESMTPS id 71FF13F7A5
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Mar 2026 16:10:54 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 68E8F404FE
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:30:55 +0000 (UTC)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	by lists.linaro.org (Postfix) with ESMTPS id 4393C402C4
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 27 Mar 2026 11:59:56 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=jannau.net header.s=fm3 header.b=KqQaRUgP;
-	dkim=pass header.d=messagingengine.com header.s=fm1 header.b="Vr6S/+y2";
-	spf=pass (lists.linaro.org: domain of j@jannau.net designates 202.12.124.150 as permitted sender) smtp.mailfrom=j@jannau.net;
-	dmarc=none
-Received: from phl-compute-01.internal (phl-compute-01.internal [10.202.2.41])
-	by mailfout.stl.internal (Postfix) with ESMTP id 229A51D00244;
-	Thu, 26 Mar 2026 12:10:53 -0400 (EDT)
-Received: from phl-frontend-04 ([10.202.2.163])
-  by phl-compute-01.internal (MEProxy); Thu, 26 Mar 2026 12:10:54 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jannau.net; h=cc
-	:cc:content-type:content-type:date:date:from:from:in-reply-to
-	:in-reply-to:message-id:mime-version:references:reply-to:subject
-	:subject:to:to; s=fm3; t=1774541452; x=1774627852; bh=mqFX0ystC8
-	G5bMrUA5MPL3IZ+yUM/PuDxgn6w4DVzlw=; b=KqQaRUgPfTBr9XD3tkJsncTvcp
-	HGOvGevyNLULt4Qw/8YnO4TB9KMxyIo1vDlsDkM9HNHdtj9XZwp2Mjm7mSBcKuKX
-	h9bTtphz/2JhQROIWX8838iqNy0mswSx4rWMnRlXYbCKiSDf6Hz2kETu1KVLEfN/
-	SvAiRy+gZPr0JQ0APGQaW0bzP/HgY17rsgdie/NEILDM6nGKsKtAll+woHSGKvQ9
-	ZwPBus3gy2wLvRQgbucjk/0Rj9mtCDzVbv39CzL2bYny3bRT+csox54JNlEPz3h+
-	jW4/GNoVjngIIoQsLfvXq1TH+Sh2UhHufARSCY5IHX0EFWyR/cdu6DAd8gVA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-type:content-type:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:subject:subject:to
-	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=
-	1774541452; x=1774627852; bh=mqFX0ystC8G5bMrUA5MPL3IZ+yUM/PuDxgn
-	6w4DVzlw=; b=Vr6S/+y2nAS3lWxO4UPHlHLbjZMDaQDpyO84eIN0c5mha55M+MN
-	hzbQeC7Knf17gm4diCyYS6d7VJdwuHud0YQE0W4TjoHh40S7YPfblk60pcocNp2o
-	YL02ZRqKJsUC+x6J6my0pHjhH7cB2Pj/wFizK08X4rlvJM1JxzU/vGXHSXsszWrA
-	XguZgEV6UZSC5MjelC79sgWnrWGUBs5Ww1eaHlQBvR0aopv1m7pgPNT9zB6kUnoU
-	oKk95WGCOZPeni9aX/14Xx2765TwFIvxGTxo+p3k42Hx7k7xnL0LIsxENOtJ4xAt
-	4kfANd0Lr+gOHL3/c/OF0edF/c6jyB9HSpA==
-X-ME-Sender: <xms:jFrFaaeDwUi0xsJTlNox3RFX12oa04zZ7EkHP6rg7YYIloFrhaOt9w>
-    <xme:jFrFadYhUlbE2Sv4y6w9HFl5pFQ9oMB0H6DK6cuSS4brF2t8fMANJ6J5RsxMqhJa1
-    x58imbJ6a8rmB2qahJmyJQHDHrOqCtAMbU-hCZpND3FrO1ty6maUcb8>
-X-ME-Received: <xmr:jFrFaVqNVE6HLWpu8PL_B_Wa5tLoDn8VubBJoli9LPNLCZRFG1iBwXc7lgn2v0y1YLz6Ww8KGNrcqUPjSpt64xsK3oqJHjdZckQ>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefgedrtddtgdefvdejkeefucetufdoteggodetrf
-    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
-    rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
-    gurhepfffhvfevuffkfhggtggujgesthdtredttddtjeenucfhrhhomheplfgrnhhnvgcu
-    ifhruhhnrghuuceojhesjhgrnhhnrghurdhnvghtqeenucggtffrrghtthgvrhhnpeegje
-    duudfhleekveeghfevjeegtefgtdegfeekheduiedtleehgeeludejgfegieenucffohhm
-    rghinhepfhhrvggvuggvshhkthhophdrohhrghdprhhushhtqdhfohhrqdhlihhnuhigrd
-    gtohhmpdhmshhgihgurdhlihhnkhenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgr
-    mhepmhgrihhlfhhrohhmpehjsehjrghnnhgruhdrnhgvthdpnhgspghrtghpthhtohepvd
-    ekpdhmohguvgepshhmthhpohhuthdprhgtphhtthhopegurghkrheskhgvrhhnvghlrdho
-    rhhgpdhrtghpthhtoheplhihuhguvgesrhgvughhrghtrdgtohhmpdhrtghpthhtoheprg
-    hlihgtvghrhihhlhesghhoohhglhgvrdgtohhmpdhrtghpthhtohepohhjvggurgeskhgv
-    rhhnvghlrdhorhhgpdhrtghpthhtohepnhhouhhvvggruheslhhishhtshdrfhhrvggvug
-    gvshhkthhophdrohhrghdprhgtphhtthhopehgrghrhiesghgrrhihghhuohdrnhgvthdp
-    rhgtphhtthhopegurghnihgvlhdrrghlmhgvihgurgestgholhhlrggsohhrrgdrtghomh
-    dprhgtphhtthhopehruhhsthdqfhhorhdqlhhinhhugiesvhhgvghrrdhkvghrnhgvlhdr
-    ohhrghdprhgtphhtthhopehmmhgruhhrvghrsehgohhoghhlvgdrtghomh
-X-ME-Proxy: <xmx:jFrFaY1eGumb2lP-gwk4rMljcd1HrGMa5zu-LPOdbLOZTBQlCMG-rg>
-    <xmx:jFrFaSra40WvK9wNoCUgNJSUuqdo_0b35aGx_LU_fljalYncxEVanw>
-    <xmx:jFrFaaQjCX9DsR0XbhHIyFQcjeoUMao6md7MaNFcB9dDm_AGhVNURQ>
-    <xmx:jFrFaarsfozIh98oVWs1QdcONAaGdvyDQce1808gf8WuNVG97FOoxA>
-    <xmx:jFrFaRX0jlBXDO9RbIEeXvX9PjNX0YBrLIN1johPts8zF8Ewg4_85f56>
-Feedback-ID: i47b949f6:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 26 Mar 2026 12:10:51 -0400 (EDT)
-Date: Thu, 26 Mar 2026 17:10:49 +0100
-From: Janne Grunau <j@jannau.net>
-To: Danilo Krummrich <dakr@kernel.org>
-Message-ID: <20260326161049.GA10417@robin.jannau.net>
-References: <20260316211646.650074-1-lyude@redhat.com>
- <DHCBEGGPWSVK.30MV8652PV4PY@kernel.org>
+	dkim=pass header.d=quicinc.com header.s=qcppdkim1 header.b="RB/aqBUb";
+	dmarc=pass (policy=none) header.from=quicinc.com;
+	spf=pass (lists.linaro.org: domain of quic_msavaliy@quicinc.com designates 205.220.168.131 as permitted sender) smtp.mailfrom=quic_msavaliy@quicinc.com
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 62R4A5XA3341501;
+	Fri, 27 Mar 2026 06:21:39 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	YSzXm+RZAa9Rqyx7SbN6v7Cf13JatYH15U/iDOUtR48=; b=RB/aqBUbAIIEFFOU
+	c4kMCFtneX801+z8GuXWH1f7pGJr/9byBXrII71fj5Sz7Ta96kdxaERnWneaDLbi
+	EGhEjHiqBR3D1Zn3j94OzxJFnj0MmFTAxL6Pewjtk+1r0WaHSQAkfzVaE4HbIemI
+	4c93ZvL3OaqY4ieLfJ5DIYga0kHNh/Km+B9cWAD7XgLTl6VTBl2QGSVJfGSUm/ms
+	LF+A/AmZp564ZyAPY+xyo7rBYpAztwoFhzlNm7Y0vdiCLcEuofolRGHXCM9Ax3cq
+	ZwzQI08gIaSGMt1af59bfUg5bN0YbkPSZtSeKsadoeV+MQghH7PYDkfxLbOmmHnJ
+	hbbE0A==
+Received: from nasanppmta03.qualcomm.com (i-global254.qualcomm.com [199.106.103.254])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4d5a9q20g4-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Fri, 27 Mar 2026 06:21:39 +0000 (GMT)
+Received: from nasanex01c.na.qualcomm.com (nasanex01c.na.qualcomm.com [10.45.79.139])
+	by NASANPPMTA03.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 62R6LcXr014950
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Fri, 27 Mar 2026 06:21:38 GMT
+Received: from [10.217.219.207] (10.80.80.8) by nasanex01c.na.qualcomm.com
+ (10.45.79.139) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 26 Mar
+ 2026 23:21:34 -0700
+Message-ID: <341f2f06-eae0-44b1-b513-61a4a129bae2@quicinc.com>
+Date: Fri, 27 Mar 2026 11:51:31 +0530
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <DHCBEGGPWSVK.30MV8652PV4PY@kernel.org>
-X-Spamd-Bar: ---
-X-MailFrom: j@jannau.net
+User-Agent: Mozilla Thunderbird
+To: Aniket Randive <aniket.randive@oss.qualcomm.com>,
+        Mukesh Kumar Savaliya
+	<mukesh.savaliya@oss.qualcomm.com>,
+        Viken Dadhaniya
+	<viken.dadhaniya@oss.qualcomm.com>,
+        Andi Shyti <andi.shyti@kernel.org>,
+        "Sumit Semwal" <sumit.semwal@linaro.org>,
+        =?UTF-8?Q?Christian_K=C3=B6nig?=
+	<christian.koenig@amd.com>
+References: <20260326-skip_extra_dma_tre-v1-1-deef018895dc@oss.qualcomm.com>
+Content-Language: en-US
+From: Mukesh Kumar Savaliya <quic_msavaliy@quicinc.com>
+In-Reply-To: <20260326-skip_extra_dma_tre-v1-1-deef018895dc@oss.qualcomm.com>
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
+ nasanex01c.na.qualcomm.com (10.45.79.139)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Proofpoint-GUID: O8eAz8RP_v7e5AXmdYACo4b6E9ip1Q8b
+X-Proofpoint-ORIG-GUID: O8eAz8RP_v7e5AXmdYACo4b6E9ip1Q8b
+X-Authority-Analysis: v=2.4 cv=J4GnLQnS c=1 sm=1 tr=0 ts=69c621f3 cx=c_pps
+ a=JYp8KDb2vCoCEuGobkYCKw==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
+ a=GEpy-HfZoHoA:10 a=IkcTkHD0fZMA:10 a=Yq5XynenixoA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=EUspDBNiAAAA:8 a=DM0cx9kTKsjz1JukrIkA:9 a=QEXdDO2ut3YA:10
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzI3MDA0NiBTYWx0ZWRfX6ZnL9fiECyZ7
+ LMHimHdcXT+aA+1MibCeLVfagtST8511dCr1a3vtURNVnZEw4xHiwvvRhNvN3SSih1yvlx1XKVU
+ pAToEwg1xvFa4h6hRW+pf96/YoiLdY87Xy+/AWg9/HsN/XKdkpY8f0ZXLGhLgVnVp1oM/jidyoF
+ DuTeWboq70Z62uvuKk9UEZhRMGDmie++KvEI9Flgnm2QR5A7Gxr86XNmR2vNj8WgTkDL6AaGbfR
+ 5bbT8pTBIkqgvJGiO9XixXpZuKCwK0HJkrCQHqWHd+Rhbc0hLXPYuqpeW/0U+7y+IGZWydWaJwy
+ pgdTTkTwxJGJHz7AtGJ5z+aqGud8orhprJWpnyN60E/4tjD5kmZa4jkkfXvMCOQj5ytvgyPLfI9
+ DRBZKb0LtQSbJTjb1A48ngeJikYaTQGF1JfvJgsBazv4Vue2p3MVbgOGOHjgxFjlg4n5n3RAKQ/
+ Gsi3MwCAsC9s9N4Y32g==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-03-26_04,2026-03-26_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 clxscore=1011 phishscore=0 impostorscore=0 bulkscore=0
+ suspectscore=0 malwarescore=0 priorityscore=1501 lowpriorityscore=0
+ adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2603050001
+ definitions=main-2603270046
+X-Spamd-Bar: ----
+X-MailFrom: quic_msavaliy@quicinc.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: HXHJOADKVSVNSRJ26YGLJIJTR6IWRFZI
-X-Message-ID-Hash: HXHJOADKVSVNSRJ26YGLJIJTR6IWRFZI
-X-Mailman-Approved-At: Mon, 20 Apr 2026 17:29:49 +0000
-CC: Lyude Paul <lyude@redhat.com>, Alice Ryhl <aliceryhl@google.com>, Miguel Ojeda <ojeda@kernel.org>, nouveau@lists.freedesktop.org, Gary Guo <gary@garyguo.net>, Daniel Almeida <daniel.almeida@collabora.com>, rust-for-linux@vger.kernel.org, Matthew Maurer <mmaurer@google.com>, FUJITA Tomonori <fujita.tomonori@gmail.com>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, christian.koenig@amd.com, Asahi Lina <lina@asahilina.net>, Andreas Hindborg <a.hindborg@kernel.org>, Simona Vetter <simona@ffwll.ch>, Boqun Feng <boqun@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Krishna Ketan Rai <prafulrai522@gmail.com>, linux-media@vger.kernel.org, Shankari Anand <shankari.ak0208@gmail.com>, David Airlie <airlied@gmail.com>, Benno Lossin <lossin@kernel.org>, Viresh Kumar <viresh.kumar@linaro.org>, linaro-mm-sig@lists.linaro.org, Asahi Lina <lina+kernel@asahilina.net>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, kernel@vger.kernel.org, Deborah Brouwer <deborah.brouwer@collabora.com>
+Message-ID-Hash: EIPJSVSNDSUIK75EZASASC7UNFPMQ363
+X-Message-ID-Hash: EIPJSVSNDSUIK75EZASASC7UNFPMQ363
+X-Mailman-Approved-At: Mon, 20 Apr 2026 17:29:50 +0000
+CC: linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Maramaina Naresh <naresh.maramaina@oss.qualcomm.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: (subset) [PATCH v9 0/7] Rust bindings for gem shmem
+Subject: [Linaro-mm-sig] Re: [PATCH v1] i2c: qcom-geni: Skip extra TX DMA TRE for single read message in GPI mode
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HXHJOADKVSVNSRJ26YGLJIJTR6IWRFZI/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EIPJSVSNDSUIK75EZASASC7UNFPMQ363/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [1.99 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	DATE_IN_PAST(1.00)[601];
+X-Spamd-Result: default: False [1.59 / 15.00];
+	DATE_IN_PAST(1.00)[587];
+	R_DKIM_REJECT(1.00)[quicinc.com:s=qcppdkim1];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[quicinc.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[redhat.com,google.com,kernel.org,lists.freedesktop.org,garyguo.net,collabora.com,vger.kernel.org,gmail.com,oracle.com,amd.com,asahilina.net,ffwll.ch,linaro.org,lists.linaro.org,linuxfoundation.org];
+	RCVD_TLS_LAST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DMARC_NA(0.00)[jannau.net];
 	ARC_NA(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[28];
+	SUSPICIOUS_AUTH_ORIGIN(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[13];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FROM_NEQ_ENVFROM(0.00)[j@jannau.net,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
-	NEURAL_SPAM(0.00)[0.954];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,kernel];
+	DKIM_TRACE(0.00)[quicinc.com:-];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[msgid.link:url,collabora.com:email,rust-for-linux.com:url,pages.freedesktop.org:url,lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
-X-Rspamd-Queue-Id: D10954314E2
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	FROM_NEQ_ENVFROM(0.00)[quic_msavaliy@quicinc.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	HAS_XOIP(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	NEURAL_HAM(-0.00)[-0.897];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email,qualcomm.com:email]
+X-Rspamd-Queue-Id: 4DEFC4314E9
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Thu, Mar 26, 2026 at 02:15:28AM +0100, Danilo Krummrich wrote:
-> On Mon Mar 16, 2026 at 10:16 PM CET, Lyude Paul wrote:
-> > Lyude Paul (5):
-> >   rust: drm: Add gem::impl_aref_for_gem_obj!
-> >   rust: gem: Introduce DriverObject::Args
-> 
-> Applied to drm-rust-next, thanks!
-> 
-> > Asahi Lina (2):
-> >   rust: drm: gem: shmem: Add DRM shmem helper abstraction
-> 
-> I was about to pick this one up as well, but did run into quite some build
-> errors and warnings. I fixed them all up, but I consider this too excessive to
-> actually apply the patch. This is the changelog I came up with:
-> 
->     [ * DRM_GEM_SHMEM_HELPER is a tristate; when a module driver selects it,
->         it becomes =m. The Rust kernel crate and its C helpers are always
->         built into vmlinux and can't reference symbols from a module,
->         causing link errors.
-> 
->         Thus, add RUST_DRM_GEM_SHMEM_HELPER bool Kconfig that selects
->         DRM_GEM_SHMEM_HELPER, forcing it built-in when Rust drivers need it;
->         use cfg(CONFIG_RUST_DRM_GEM_SHMEM_HELPER) for the shmem module.
-> 
->       * Add cfg_attr(not(CONFIG_RUST_DRM_GEM_SHMEM_HELPER), expect(unused))
->         on pub(crate) use impl_aref_for_gem_obj and BaseObjectPrivate, so
->         that unused warnings are suppressed when shmem is not enabled.
-> 
->       * Enable const_refs_to_static (stabilized in 1.83) to prevent build
->         errors with older compilers.
-> 
->       * Use &raw const for bindings::drm_gem_shmem_vm_ops and add
->         #[allow(unused_unsafe, reason = "Safe since Rust 1.82.0")].
-> 
->       * Fix incorrect C Header path and minor spelling and formatting
->         issues.
-> 
->       * Drop shmem::Object::sg_table() as the current implementation is
->         unsound.
-> 
->         - Danilo ]
-> 
-> Please always consider [1] and [2].
-> 
-> [1] https://drm.pages.freedesktop.org/maintainer-tools/committer/committer-drm-rust.html#submit-checklist
-> [2] https://rust-for-linux.com/contributing#submit-checklist-addendum
-> 
-> (@Deborah: I assume you were testing this with Tyr built-in?)
-> 
-> @Lyude, Alice, Miguel: Please have a look at what I came up with below.
 
-Looks fine, asahi had the bool CONFIG_RUST_DRM_GEM_SHMEM_HELPER already
-in the asahi Kconfig so I never noticed that's missing. Same for configs
-which do not excercise gem shmem.
 
-> commit 2dc69d77944dbd1494d2b10a4b134b7fead1c8e7
-> Author: Asahi Lina <lina+kernel@asahilina.net>
-> Date:   Mon Mar 16 17:16:13 2026 -0400
+On 3/26/2026 10:01 AM, Aniket Randive wrote:
+> In GPI mode, the I2C GENI driver incorrectly generates an extra TX DMA
+> TRE on the TX channel during single read message transfer. This results
+What's the impact of this extra DMA TRE ? do you see failure/timeout, 
+anything ?
+> in an unnecessary write operation on the I2C bus, which is not required.
 > 
->     rust: drm: gem: shmem: Add DRM shmem helper abstraction
+> Update the logic to avoid generating the extra TX DMA TRE for single
+> read message, ensuring correct behavior and preventing redundant
+> transfers.
 > 
->     The DRM shmem helper includes common code useful for drivers which
->     allocate GEM objects as anonymous shmem. Add a Rust abstraction for
->     this. Drivers can choose the raw GEM implementation or the shmem layer,
->     depending on their needs.
+So for read, we do unwanted write too ? if so, please write it 
+accordingly.  Correct behavior needs to be justified against wrong.
+> Co-developed-by: Maramaina Naresh <naresh.maramaina@oss.qualcomm.com>
+> Signed-off-by: Maramaina Naresh <naresh.maramaina@oss.qualcomm.com>
+> Signed-off-by: Aniket Randive <aniket.randive@oss.qualcomm.com>
+> ---
+>   drivers/i2c/busses/i2c-qcom-geni.c | 18 +++++++++++++-----
+>   1 file changed, 13 insertions(+), 5 deletions(-)
 > 
->     Signed-off-by: Asahi Lina <lina@asahilina.net>
->     Signed-off-by: Daniel Almeida <daniel.almeida@collabora.com>
->     Reviewed-by: Daniel Almeida <daniel.almeida@collabora.com>
->     Signed-off-by: Lyude Paul <lyude@redhat.com>
->     Tested-by: Deborah Brouwer <deborah.brouwer@collabora.com>
->     Link: https://patch.msgid.link/20260316211646.650074-6-lyude@redhat.com
->     [ * DRM_GEM_SHMEM_HELPER is a tristate; when a module driver selects it,
->         it becomes =m. The Rust kernel crate and its C helpers are always
->         built into vmlinux and can't reference symbols from a module,
->         causing link errors.
+> diff --git a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-geni.c
+> index a4acb78fafb6..2706309bbebb 100644
+> --- a/drivers/i2c/busses/i2c-qcom-geni.c
+> +++ b/drivers/i2c/busses/i2c-qcom-geni.c
+> @@ -625,8 +625,8 @@ static int geni_i2c_gpi(struct geni_i2c_dev *gi2c, struct i2c_msg msgs[],
+>   {
+>   	struct gpi_i2c_config *peripheral;
+>   	unsigned int flags;
+> -	void *dma_buf;
+> -	dma_addr_t addr;
+> +	void *dma_buf = NULL;
+> +	dma_addr_t addr = 0;
+>   	enum dma_data_direction map_dirn;
+>   	enum dma_transfer_direction dma_dirn;
+>   	struct dma_async_tx_descriptor *desc;
+> @@ -639,6 +639,11 @@ static int geni_i2c_gpi(struct geni_i2c_dev *gi2c, struct i2c_msg msgs[],
+>   	gi2c_gpi_xfer = &gi2c->i2c_multi_desc_config;
+>   	msg_idx = gi2c_gpi_xfer->msg_idx_cnt;
+>   
+> +	if (op == I2C_WRITE && msgs[msg_idx].flags & I2C_M_RD) {
+> +		peripheral->multi_msg = true;
+what's the actual meaning of multi_msg here ? IIUC, this multi_msg is 
+set to true for single transfer  ? any better name if so ? Yes, need to 
+change it out of this patch.
+> +		goto skip_dma;
+> +	}
+> +
+>   	dma_buf = i2c_get_dma_safe_msg_buf(&msgs[msg_idx], 1);
+>   	if (!dma_buf) {
+>   		ret = -ENOMEM;
+> @@ -668,6 +673,7 @@ static int geni_i2c_gpi(struct geni_i2c_dev *gi2c, struct i2c_msg msgs[],
+>   		flags = DMA_PREP_INTERRUPT | DMA_CTRL_ACK;
+>   	}
+>   
+> +skip_dma:
+>   	/* set the length as message for rx txn */
+>   	peripheral->rx_len = msgs[msg_idx].len;
+>   	peripheral->op = op;
+> @@ -740,9 +746,11 @@ static int geni_i2c_gpi(struct geni_i2c_dev *gi2c, struct i2c_msg msgs[],
+>   	return 0;
+>   
+>   err_config:
+> -	dma_unmap_single(gi2c->se.dev->parent, addr,
+> -			 msgs[msg_idx].len, map_dirn);
+> -	i2c_put_dma_safe_msg_buf(dma_buf, &msgs[msg_idx], false);
+> +	if (op == I2C_WRITE && (msgs[msg_idx].flags & I2C_M_RD)) {
+> +		dma_unmap_single(gi2c->se.dev->parent, addr,
+> +				 msgs[msg_idx].len, map_dirn);
+> +		i2c_put_dma_safe_msg_buf(dma_buf, &msgs[msg_idx], false);
+> +	}
+>   
+>   out:
+>   	gi2c->err = ret;
 > 
->         Thus, add RUST_DRM_GEM_SHMEM_HELPER bool Kconfig that selects
->         DRM_GEM_SHMEM_HELPER, forcing it built-in when Rust drivers need it;
->         use cfg(CONFIG_RUST_DRM_GEM_SHMEM_HELPER) for the shmem module.
+> ---
+> base-commit: 785f0eb2f85decbe7c1ef9ae922931f0194ffc2e
+> change-id: 20260325-skip_extra_dma_tre-a3cf22f81d9b
 > 
->       * Add cfg_attr(not(CONFIG_RUST_DRM_GEM_SHMEM_HELPER), expect(unused))
->         on pub(crate) use impl_aref_for_gem_obj and BaseObjectPrivate, so
->         that unused warnings are suppressed when shmem is not enabled.
+> Best regards,
+> --
+> Aniket Randive <aniket.randive@oss.qualcomm.com>
 > 
->       * Enable const_refs_to_static (stabilized in 1.83) to prevent build
->         errors with older compilers.
 > 
->       * Use &raw const for bindings::drm_gem_shmem_vm_ops and add
->         #[allow(unused_unsafe, reason = "Safe since Rust 1.82.0")].
-> 
->       * Fix incorrect C Header path and minor spelling and formatting
->         issues.
-> 
->       * Drop shmem::Object::sg_table() as the current implementation is
->         unsound.
-> 
->         - Danilo ]
->     Signed-off-by: Danilo Krummrich <dakr@kernel.org>
 
-Reviewed-by: Janne Grunau <j@jananu.net>
-
-Janne
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
