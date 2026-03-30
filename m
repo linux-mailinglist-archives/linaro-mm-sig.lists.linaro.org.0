@@ -2,48 +2,48 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 2LXGFHZj5mkKvwEAu9opvQ
+	id cKPaOQJj5mmavgEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:33:42 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:31:46 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id DF809431703
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:33:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 97BCB4315A4
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:31:46 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id ED713402D3
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:33:40 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9FB50404EC
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:31:45 +0000 (UTC)
 Received: from mx07-00376f01.pphosted.com (mx07-00376f01.pphosted.com [185.132.180.163])
-	by lists.linaro.org (Postfix) with ESMTPS id 4D2B5402D3
+	by lists.linaro.org (Postfix) with ESMTPS id 4EF1B402F5
 	for <linaro-mm-sig@lists.linaro.org>; Mon, 30 Mar 2026 07:57:27 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=imgtec.com header.s=dk201812 header.b=qcRyE5kF;
+	dkim=pass header.d=imgtec.com header.s=dk201812 header.b="LwQWJ/n9";
 	dmarc=pass (policy=none) header.from=imgtec.com;
 	spf=pass (lists.linaro.org: domain of Alessio.Belle@imgtec.com designates 185.132.180.163 as permitted sender) smtp.mailfrom=Alessio.Belle@imgtec.com
 Received: from pps.filterd (m0168889.ppops.net [127.0.0.1])
-	by mx07-00376f01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 62U5HJTm174202;
+	by mx07-00376f01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 62U5HJTn174202;
 	Mon, 30 Mar 2026 08:57:02 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=imgtec.com; h=cc
 	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=dk201812; bh=/
-	8FiZRrrQ/O+Rf5kOsCDAWuTUsDDkKsfFbvZz4NC9po=; b=qcRyE5kF9iQ1avMmt
-	nH1fDHUusK7FSJ5LO/93IJHb2M2LeuFB67un+nJ0ETmVdeqChRl8nDHoqXEJ5LbX
-	N+8mxjSCtIrn1ow2RAfUMTtueZty7ifFO1BfIgYo/5PTFdIsDTqmN/eITA73araw
-	2i8WWJhuhu/gsWuVEIRITS9IsSbpR+uaM1CV5pGud22S261NyGo72nlAxoMZvqKS
-	sEd7hpKRkmhjyLxJz3zzcv4lzOl7qk+tii8XL1SIpyezmDywLAdLRjXCE3seOzX/
-	CDXgkjlPh6dnlAU2A3dtgr47KnB60XFN9VSA37IkNA24wZaKuXHudjIKZcbnh+6Z
-	dF9LQ==
+	:message-id:mime-version:references:subject:to; s=dk201812; bh=2
+	iOJxisi8Kb1EN20/4D6xSszCHtx00WNhzt1fooEsTU=; b=LwQWJ/n9SLLWIo9UX
+	UfPes8s3oOgLP/g/35Nr9Vv8PHXoo0sI0kGu5mAFJs0FWlh6X/lJmgxr4hLkEtlp
+	u+JEZpUPmj2SAO7kvVPsLqqOLCeJYImY7DO74bJ2cLe4MvJAD+GpxsREUsigxcA0
+	QwbFTruVtDYUZ55IMRiiOpiLMx4nYJTGx/PeyXGneEYT3hMa0tnTPtWXI/SlSEIF
+	KnkLp9P3gfCVDOxZUHJHNBT2/170VAwBsofmrk2beIp+TyXki/VcysjpD9VLGMCa
+	e68rPwlctLE4M6zebju/UGrquGIPtJD8Me74s7nhj0bsOrlCuBU3iz9NYTESVT1K
+	MWVCw==
 Received: from hhmail01.hh.imgtec.org (83-244-153-141.cust-83.exponential-e.net [83.244.153.141])
-	by mx07-00376f01.pphosted.com (PPS) with ESMTPS id 4d67xusfkv-6
+	by mx07-00376f01.pphosted.com (PPS) with ESMTPS id 4d67xusfkv-7
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
 	Mon, 30 Mar 2026 08:57:02 +0100 (BST)
 Received: from NP-A-BELLE.kl.imgtec.org (172.25.6.106) by
  HHMAIL01.hh.imgtec.org (10.100.10.19) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.37; Mon, 30 Mar 2026 08:57:00 +0100
+ 15.2.2562.37; Mon, 30 Mar 2026 08:57:01 +0100
 From: Alessio Belle <alessio.belle@imgtec.com>
-Date: Mon, 30 Mar 2026 08:56:41 +0100
+Date: Mon, 30 Mar 2026 08:56:42 +0100
 MIME-Version: 1.0
-Message-ID: <20260330-job-submission-fixes-cleanup-v1-6-7de8c09cef8c@imgtec.com>
+Message-ID: <20260330-job-submission-fixes-cleanup-v1-7-7de8c09cef8c@imgtec.com>
 References: <20260330-job-submission-fixes-cleanup-v1-0-7de8c09cef8c@imgtec.com>
 In-Reply-To: <20260330-job-submission-fixes-cleanup-v1-0-7de8c09cef8c@imgtec.com>
 To: Frank Binns <frank.binns@imgtec.com>,
@@ -61,43 +61,43 @@ To: Frank Binns <frank.binns@imgtec.com>,
         Boris Brezillon
 	<boris.brezillon@collabora.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1774857418; l=1816;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1774857418; l=1511;
  i=alessio.belle@imgtec.com; s=20251208; h=from:subject:message-id;
- bh=Jud123WWRsFViT++lGJXkizulPVbeyW2ltbMqISSRbY=;
- b=Us8Uqg2bcIei5LQeqV5+A3+PeVxiODs7azGrw4HFJvCPdodnoBN9XaRjosJv9U3EBmzjuJWrE
- wMTYRH4ofcNDWIcj5jOmJfWGTAyXXhqmoQ8Y11jl8NSM3fRo8OlmIy1
+ bh=l8WjdA/LGnLSJKWiMRcqXRkDj2NB9fc74Y1QB17lwrs=;
+ b=z8djzyO2G4zfTYC3QPntznFWlddGiMJvj7Wn9vyopXk/AvvZu3sjrhL4x23TbTi8hmphy7MFK
+ /izIcrDrmF3Bb7coenSG16XePHxjvtCGlRGSJ8ufb2OzsW/lf979rZu
 X-Developer-Key: i=alessio.belle@imgtec.com; a=ed25519;
  pk=2Vtuk+GKBRjwMqIHpKk+Gx6zl7cgtq0joszcOc0zF4g=
 X-Originating-IP: [172.25.6.106]
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzMwMDA2MSBTYWx0ZWRfX3LbZ7G18Zoin
- YFA4KSKSmaBVaJMwkomSPR16kvSZcBU9TKLTl9KWzSE03/iHGkLDlvN6y2YSgz+jlzZD4u8mB2T
- lOMD8YdBoKCfnwQ0PiNYXuMKm2gXRrnPRTTskFkxfTDQg5t54fqcHYKSXu9YX+iDzTVDqka3kqS
- saWPiWuYWvVZzzyxiHj25XPlZaiWTo6XeS3LpSDtR/Kx2I+VJdecJ8hCn6AL8p44OTBfjZVqwTJ
- 93Ue1u+sL6A3rD6UJ6raAPIkdNaMF6JFd9dhpGYP+vzVlhztK/B+s8uSZ34EZeyouUI6I8163xt
- MQbOr2U30RYP5v7E6KNFvdo1ISjs5gK42ZnhuizRnmkjmJ/3VDtmJ4+pJlPP+/AZlQcu+ip8rq7
- JU5SypaLRZEs02emRGnilz7WkpDMqOXC/Pmig1n6MLqzd1fQ3LOkjlnfUIpNuwdFjkLgiXd31kA
- r7YRCbf/OePJozP631w==
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzMwMDA2MSBTYWx0ZWRfXycd6f8OX4TvN
+ u4mnd+3JLq/+bLyXD6S5eEJlQCe+rhIdyOC+ofK1HBhuFtHrzldzzpZF6D5fArJI6rW8ZF9Skr5
+ yc0lFNJGGs766JE1sG0aXGy3k5NxoY9GnJosoQwqfg2jDJLaKGA4xxO3arKgpBlzmwYO5fbkbMI
+ 5TCR9DTBxMiuvQ2VAw4BWp44z4tGiGTPGft30fa0KGMMfJDF4eb2IoOZ0MUIbEw+UQHlQTA57B5
+ z73D/2P8tXOlLQ0zFr+04y3/pV9w4Aum5tuGH8EzXoVqtLw8lndciJaAbKoRFAMPqCj0+y74aPl
+ DqOOHJ1ve3D4bdhIFb8HHNX7HxbjikklW7z5eyJGLLcbyiiKGTnSLCRdL/ChbUN2P1/KxxFxYHt
+ RNPBOs1cCzfIW9S8VkdVbIP1kKGJSVE1N2aD2AbubmSFrus2Yl37DJ/Z0p+zplp7A3SfQCKaIho
+ 5fpxJ7QZL1xw+u+nuTQ==
 X-Authority-Analysis: v=2.4 cv=QO9lhwLL c=1 sm=1 tr=0 ts=69ca2cce cx=c_pps
  a=AKOq//PuzOIrVTIF9yBwbA==:117 a=AKOq//PuzOIrVTIF9yBwbA==:17
  a=txNhvCuK94MA:10 a=IkcTkHD0fZMA:10 a=Yq5XynenixoA:10
  a=VkNPw1HP01LnGYTKEx00:22 a=kQ-hrUj2-E3RCbRHssb7:22 a=7RYWX5rxfSByPNLylY2M:22
- a=r_1tXGB3AAAA:8 a=qN8rWf0lohQvQRdMElYA:9 a=QEXdDO2ut3YA:10
+ a=r_1tXGB3AAAA:8 a=_Y7jKtEYzl7tsisHUWkA:9 a=QEXdDO2ut3YA:10
  a=t8nPyN_e6usw4ciXM-Pk:22
-X-Proofpoint-GUID: tYoNvPJFFQmVQXx88G-m8Pt_uuTJnAhj
-X-Proofpoint-ORIG-GUID: tYoNvPJFFQmVQXx88G-m8Pt_uuTJnAhj
+X-Proofpoint-GUID: _AGAVqfJjxcLoA0Ds9QP2_y0SDZU1YsH
+X-Proofpoint-ORIG-GUID: _AGAVqfJjxcLoA0Ds9QP2_y0SDZU1YsH
 X-Spamd-Bar: ---
 X-MailFrom: Alessio.Belle@imgtec.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: GSZJLCRE4HRI7N4IWPUW2HDB3O34O4LQ
-X-Message-ID-Hash: GSZJLCRE4HRI7N4IWPUW2HDB3O34O4LQ
-X-Mailman-Approved-At: Mon, 20 Apr 2026 17:33:25 +0000
+Message-ID-Hash: 5CL53LM4SIOWE5V55U3WR55QUNVDBCKX
+X-Message-ID-Hash: 5CL53LM4SIOWE5V55U3WR55QUNVDBCKX
+X-Mailman-Approved-At: Mon, 20 Apr 2026 17:29:57 +0000
 CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Alessio Belle <alessio.belle@imgtec.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 6/8] drm/imagination: Move repeated job fence check to its own function
+Subject: [Linaro-mm-sig] [PATCH 7/8] drm/imagination: Update check to skip prepare_job() for fragment jobs
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GSZJLCRE4HRI7N4IWPUW2HDB3O34O4LQ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5CL53LM4SIOWE5V55U3WR55QUNVDBCKX/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -130,71 +130,48 @@ X-Spamd-Result: default: False [1.59 / 15.00];
 	DKIM_TRACE(0.00)[imgtec.com:-];
 	HAS_XOIP(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-0.967];
+	NEURAL_HAM(-0.00)[-0.965];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,imgtec.com:mid,imgtec.com:email]
-X-Rspamd-Queue-Id: DF809431703
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
+X-Rspamd-Queue-Id: 97BCB4315A4
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-This should make the code slightly clearer.
+By the time prepare_job() is called on a paired fragment job, the paired
+geometry job might already be finished and its PM reference dropped.
+
+Check the fragment job's PM reference instead which is a bit more likely
+to be still set. This is a very minor optimization.
 
 Signed-off-by: Alessio Belle <alessio.belle@imgtec.com>
 ---
- drivers/gpu/drm/imagination/pvr_queue.c | 25 ++++++++++++++++++++-----
- 1 file changed, 20 insertions(+), 5 deletions(-)
+ drivers/gpu/drm/imagination/pvr_queue.c | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
 
 diff --git a/drivers/gpu/drm/imagination/pvr_queue.c b/drivers/gpu/drm/imagination/pvr_queue.c
-index df0a110ed96f..4a49d954562e 100644
+index 4a49d954562e..303f4d6cc09e 100644
 --- a/drivers/gpu/drm/imagination/pvr_queue.c
 +++ b/drivers/gpu/drm/imagination/pvr_queue.c
-@@ -177,6 +177,24 @@ static const struct dma_fence_ops pvr_queue_job_fence_ops = {
- 	.release = pvr_queue_fence_release,
- };
+@@ -553,12 +553,13 @@ pvr_queue_prepare_job(struct drm_sched_job *sched_job,
  
-+/**
-+ * pvr_queue_fence_is_ufo_backed() - Check if a dma_fence is backed by a UFO.
-+ * @f: The dma_fence to check.
-+ *
-+ * Return:
-+ * * true if the dma_fence is backed by a UFO, or
-+ * * false otherwise.
-+ */
-+static inline bool
-+pvr_queue_fence_is_ufo_backed(struct dma_fence *f)
-+{
-+	/*
-+	 * Currently the only dma_fence backed by a UFO object is the job fence,
-+	 * e.g. pvr_job::done_fence, wrapped by a pvr_queue_fence object.
-+	 */
-+	return f && f->ops == &pvr_queue_job_fence_ops;
-+}
-+
- /**
-  * to_pvr_queue_job_fence() - Return a pvr_queue_fence object if the fence is
-  * already backed by a UFO.
-@@ -194,7 +212,7 @@ to_pvr_queue_job_fence(struct dma_fence *f)
- 	if (sched_fence)
- 		f = sched_fence->parent;
+ 	if (job->type == DRM_PVR_JOB_TYPE_FRAGMENT && job->paired_job) {
+ 		/*
+-		 * This will be called on a paired fragment job after being
+-		 * submitted to firmware. We can tell if this is the case and
+-		 * bail early from whether run_job() has been called on the
+-		 * geometry job, which would issue a pm ref.
++		 * This will be called on a paired fragment job after being submitted
++		 * to the firmware as part of the paired geometry job's submission.
++		 * We can tell if this is the case and bail early from whether run_job()
++		 * has been called on the geometry job, which would issue a pm ref on
++		 * this job as well.
+ 		 */
+-		if (job->paired_job->has_pm_ref)
++		if (job->has_pm_ref)
+ 			return NULL;
+ 	}
  
--	if (f && f->ops == &pvr_queue_job_fence_ops)
-+	if (pvr_queue_fence_is_ufo_backed(f))
- 		return container_of(f, struct pvr_queue_fence, base);
- 
- 	return NULL;
-@@ -915,10 +933,7 @@ bool pvr_queue_fence_is_native(struct dma_fence *f)
- 	    sched_fence->sched->ops == &pvr_queue_sched_ops)
- 		return true;
- 
--	if (f && f->ops == &pvr_queue_job_fence_ops)
--		return true;
--
--	return false;
-+	return pvr_queue_fence_is_ufo_backed(f);
- }
- 
- /**
 
 -- 
 2.43.0
