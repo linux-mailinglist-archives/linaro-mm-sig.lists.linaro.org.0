@@ -2,102 +2,74 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id ILbJKIpj5mkKvwEAu9opvQ
+	id uDgkGCk3ymlf6gUAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:34:02 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 30 Mar 2026 10:41:13 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 719B543174D
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:34:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B267C357592
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 30 Mar 2026 10:41:12 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7D610402D3
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:34:01 +0000 (UTC)
-Received: from mx07-00376f01.pphosted.com (mx07-00376f01.pphosted.com [185.132.180.163])
-	by lists.linaro.org (Postfix) with ESMTPS id B17EC40303
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 30 Mar 2026 07:57:30 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5E182402EF
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 30 Mar 2026 08:41:11 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+	by lists.linaro.org (Postfix) with ESMTPS id EA8AE3F719
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 30 Mar 2026 08:41:07 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=imgtec.com header.s=dk201812 header.b=smMB3OvY;
-	dmarc=pass (policy=none) header.from=imgtec.com;
-	spf=pass (lists.linaro.org: domain of Alessio.Belle@imgtec.com designates 185.132.180.163 as permitted sender) smtp.mailfrom=Alessio.Belle@imgtec.com
-Received: from pps.filterd (m0168889.ppops.net [127.0.0.1])
-	by mx07-00376f01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 62U5HJTp174202;
-	Mon, 30 Mar 2026 08:57:03 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=imgtec.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=dk201812; bh=j
-	hCCpkEt+BkB84N1zMr4Vl04qUsVX6qxkMXkjdr3+Xg=; b=smMB3OvY7SY0HkV1k
-	7bkGL23Yc9LMGcLqO7mJvkL4fP/hEYA/prpNDfmU4I1okFZB+APeoJpyLKHgzoJd
-	BzbnVYp//WENvpChim7jTe+AKWFCZMfb/AEogJ520PSPMCAp5veUiytPwiU7F2NG
-	RN/p/TpB29n+65SMFanMWylU5PTmNAssaCYRRe6QBYIjg/Aras49whi/0K1UaAsG
-	YVhem+UgO46pW0uuSChbb6vzJxqRBfE8w+TF28T1EzATZAIbrxxEcmjS93QpR167
-	s1ueOo7kmbQla6659hT7ZkyCFziz/qp2kaxcZWY9yp2aMnHMtKyIwfC694WBNoB1
-	ISFdA==
-Received: from hhmail01.hh.imgtec.org (83-244-153-141.cust-83.exponential-e.net [83.244.153.141])
-	by mx07-00376f01.pphosted.com (PPS) with ESMTPS id 4d67xusfkv-9
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Mon, 30 Mar 2026 08:57:03 +0100 (BST)
-Received: from NP-A-BELLE.kl.imgtec.org (172.25.6.106) by
- HHMAIL01.hh.imgtec.org (10.100.10.19) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.37; Mon, 30 Mar 2026 08:57:01 +0100
-From: Alessio Belle <alessio.belle@imgtec.com>
-Date: Mon, 30 Mar 2026 08:56:43 +0100
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=fgV3DSs0;
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=mripard@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by sea.source.kernel.org (Postfix) with ESMTP id 46B3C43EA9;
+	Mon, 30 Mar 2026 08:41:07 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9F95EC4CEF7;
+	Mon, 30 Mar 2026 08:41:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1774860067;
+	bh=2NhBgbhDn7ft3rC7LIHth8pNLQZW1E1FdbXxFtQzOIk=;
+	h=From:Date:Subject:To:Cc:From;
+	b=fgV3DSs0P9RnwmOpMroZPtCWngnSF78jdzY9CQRdJ6xa+dlwDMJF0jX2tL3hZNyHV
+	 USdUFdNzRk6Ki+3/S1+zeRywAQNBkNOGcSx8lMPfTEHBxYMv+SGhjKNQj+8oF/yA90
+	 upF2ahEPlnF7WLEOdv4vP8Y6bcAGyNnRBBTsJ9NRQ7OgtDq1UCiDR/YuX0HRzVVoye
+	 1fd7ApNSIWdGHA62y4eTAghiUhS00+p5z4NOFML/nLr5YtLlKgFvP6eFDnYwbDkIVe
+	 0W8Tf9Ie22qorZvFxYC33PyK3wrYXPkrA3SPO5OmaDA5oGXEJdvjEJPT+f0UVqb9kz
+	 ad9gR1M77CBXg==
+From: Maxime Ripard <mripard@kernel.org>
+Date: Mon, 30 Mar 2026 10:40:56 +0200
 MIME-Version: 1.0
-Message-ID: <20260330-job-submission-fixes-cleanup-v1-8-7de8c09cef8c@imgtec.com>
-References: <20260330-job-submission-fixes-cleanup-v1-0-7de8c09cef8c@imgtec.com>
-In-Reply-To: <20260330-job-submission-fixes-cleanup-v1-0-7de8c09cef8c@imgtec.com>
-To: Frank Binns <frank.binns@imgtec.com>,
-        Matt Coster
-	<matt.coster@imgtec.com>,
-        Brajesh Gupta <brajesh.gupta@imgtec.com>,
-        "Alexandru Dadu" <alexandru.dadu@imgtec.com>,
-        Maarten Lankhorst
-	<maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Sumit Semwal <sumit.semwal@linaro.org>,
-        =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
-        Boris Brezillon
-	<boris.brezillon@collabora.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1774857418; l=5384;
- i=alessio.belle@imgtec.com; s=20251208; h=from:subject:message-id;
- bh=/yF7BgXFlPY5bgvNPfE6BIw+//D50tMFfBnZCd0SRJg=;
- b=vzkL/Rb9EvRS8z1K3VHubqV2TS66bAjYhwngM7cK+U0Y1w9kTtqr4cL/EPYutBLkvx9VKkx1f
- hiQ280MZ06ZBnpOBZpcqgG5aGIpKEO681AwfTjxUzYO6qyZ6MSotSUi
-X-Developer-Key: i=alessio.belle@imgtec.com; a=ed25519;
- pk=2Vtuk+GKBRjwMqIHpKk+Gx6zl7cgtq0joszcOc0zF4g=
-X-Originating-IP: [172.25.6.106]
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzMwMDA2MSBTYWx0ZWRfXzfQ1IDE1g9IL
- DtTr64FZbO4eQUEIc48jvCjh9kHOf02NQfmlo58hbt0LC9X345+aLuoSzG/uwZjdU+gDjEZzWw/
- pZ4/Un439IC4Mrt/aOmDv3Y0fn1G8ETGh+v+hg3vlcjjRQCgwyS3bCxUqbAGKTaQmzS0ldOUNzb
- 4aI+dD80jSXOJXxdbr4GV/dftdq/HnZc1UuPdNfQto8yC56mbLNHVgNWmfBRdjQLRbTOLPJ7zja
- 1PhddJ+szUBJEuL0g2IMQXtGznY+eiTAHs4V42NzugL/U4XcShXiS2mkuz6PcebhgpjYlWBrfSb
- Dg6zOkV+swOPVYXz7veHELpVcKqCjdaozM15H3ClClY/9o1UAMhtjW9EB4rU7gwwPebMxpjDQXy
- O1aC4Wx1K+banTkgeCoy/XAqV0TU4Ob/CMet7FOihOr+AeXqqu4JmB5RZz2yl/IwyS37ESJQXEO
- T97JAQDhlwPbenqByUA==
-X-Authority-Analysis: v=2.4 cv=QO9lhwLL c=1 sm=1 tr=0 ts=69ca2ccf cx=c_pps
- a=AKOq//PuzOIrVTIF9yBwbA==:117 a=AKOq//PuzOIrVTIF9yBwbA==:17
- a=txNhvCuK94MA:10 a=IkcTkHD0fZMA:10 a=Yq5XynenixoA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=kQ-hrUj2-E3RCbRHssb7:22 a=7RYWX5rxfSByPNLylY2M:22
- a=r_1tXGB3AAAA:8 a=KCFfvmjXgMu-EKTFBUoA:9 a=QEXdDO2ut3YA:10
- a=t8nPyN_e6usw4ciXM-Pk:22
-X-Proofpoint-GUID: hqAUf5kEAgU4PDF-85MHTxc2iYqDLrnB
-X-Proofpoint-ORIG-GUID: hqAUf5kEAgU4PDF-85MHTxc2iYqDLrnB
+Message-Id: <20260330-dma-build-fix-v1-1-748b64f0d8af@kernel.org>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x2MQQqAMAzAviI9W6hOFPyKeJiu04JO2VAE2d8tH
+ hNIXkgchRP0xQuRb0lyBIWqLGBebVgYxSlDTXVLxhC63eJ0yebQy4MdtbbxPBGTB23OyKr/3zD
+ m/AEXVpECXwAAAA==
+X-Change-ID: 20260330-dma-build-fix-706a4feb0e0f
+To: Sumit Semwal <sumit.semwal@linaro.org>,
+ Benjamin Gaignard <benjamin.gaignard@collabora.com>,
+ Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>,
+ "T.J. Mercier" <tjmercier@google.com>,
+ =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ Marek Szyprowski <m.szyprowski@samsung.com>,
+ Robin Murphy <robin.murphy@arm.com>, Albert Esteve <aesteve@redhat.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3399; i=mripard@kernel.org;
+ h=from:subject:message-id; bh=2NhBgbhDn7ft3rC7LIHth8pNLQZW1E1FdbXxFtQzOIk=;
+ b=owGbwMvMwCmsHn9OcpHtvjLG02pJDJmnzOUn/pgaGTbvc3fF9IXpk7cuD1z0dZatqVDIeYW+q
+ UrRee02HVNZGIQ5GWTFFFmeyISdXt6+uMrBfuUPmDmsTCBDGLg4BWAi8ssYa7iOLV6aejOJzfv1
+ 4fbTM27dfHH9SO6tpdk7v21Lex97T2/HhR9uL7t0QrZLSWWeiJp6YQ5jw4bUt0aLU7P41wUEz/o
+ YeKjxTZCddUvYqqDtn++uDWC1d5i5m8N5EYt9gWzSVf/+rrjVAA==
+X-Developer-Key: i=mripard@kernel.org; a=openpgp;
+ fpr=BE5675C37E818C8B5764241C254BCFC56BF6CE8D
 X-Spamd-Bar: ----
-X-MailFrom: Alessio.Belle@imgtec.com
+Message-ID-Hash: X4C2QTOZI3JELP6AZDCAF7VPBSPJIUYW
+X-Message-ID-Hash: X4C2QTOZI3JELP6AZDCAF7VPBSPJIUYW
+X-MailFrom: mripard@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 46OIXDCHG5CUF75XVEP7WPJYJMIYJEGF
-X-Message-ID-Hash: 46OIXDCHG5CUF75XVEP7WPJYJMIYJEGF
-X-Mailman-Approved-At: Mon, 20 Apr 2026 17:33:28 +0000
-CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Alessio Belle <alessio.belle@imgtec.com>
+CC: linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, iommu@lists.linux.dev, Mark Brown <broonie@kernel.org>, Maxime Ripard <mripard@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 8/8] drm/imagination: Minor improvements to job submission code documentation
+Subject: [Linaro-mm-sig] [PATCH] dma/contiguous: Fix broken build
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/46OIXDCHG5CUF75XVEP7WPJYJMIYJEGF/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/X4C2QTOZI3JELP6AZDCAF7VPBSPJIUYW/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -106,167 +78,137 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [1.59 / 15.00];
-	DATE_IN_PAST(1.00)[513];
-	R_DKIM_REJECT(1.00)[imgtec.com:s=dk201812];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+X-Spamd-Result: default: False [1.99 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
+	R_DKIM_REJECT(1.00)[kernel.org:s=k20201202];
 	MAILLIST(-0.20)[mailman];
-	DMARC_POLICY_SOFTFAIL(0.10)[imgtec.com : SPF not aligned (relaxed),none];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[17];
+	RCVD_COUNT_THREE(0.00)[4];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	SUSPICIOUS_AUTH_ORIGIN(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_TO(0.00)[imgtec.com,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,collabora.com];
-	ARC_NA(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FROM_NEQ_ENVFROM(0.00)[alessio.belle@imgtec.com,linaro-mm-sig-bounces@lists.linaro.org];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	DKIM_TRACE(0.00)[kernel.org:-];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[imgtec.com:-];
-	HAS_XOIP(0.00)[];
+	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-0.989];
+	FROM_NEQ_ENVFROM(0.00)[mripard@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-0.964];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,imgtec.com:mid,imgtec.com:email]
-X-Rspamd-Queue-Id: 719B543174D
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
+X-Rspamd-Queue-Id: B267C357592
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Mixed list of clarifications and typo fixes.
+Commit 3a236f6a5cf2 ("dma: contiguous: Turn heap registration logic
+around") didn't remove one last call to dma_heap_cma_register_heap()
+that it removed, thus breaking the build.
 
-Signed-off-by: Alessio Belle <alessio.belle@imgtec.com>
+That last call is in dma_contiguous_reserve(), to handle the
+registration of the default CMA region heap instance if it's declared in
+the device tree.
+
+However, the default CMA region instance is already handled by
+retrieving it through dev_get_cma_area() in the CMA heap driver, so the
+call to dma_heap_cma_register_heap() wasn't actually needed.
+
+Let's remove this call, the now unused function definition, its now
+empty header, and all includes of this header.
+
+Fixes: 3a236f6a5cf2 ("dma: contiguous: Turn heap registration logic around")
+Reported-by: Mark Brown <broonie@kernel.org>
+Closes: https://lore.kernel.org/linux-next/acbjaDJ1a-YQC64d@sirena.co.uk/
+Signed-off-by: Maxime Ripard <mripard@kernel.org>
 ---
- drivers/gpu/drm/imagination/pvr_queue.c            | 38 ++++++++++++++--------
- .../gpu/drm/imagination/pvr_rogue_fwif_shared.h    | 10 +-----
- 2 files changed, 26 insertions(+), 22 deletions(-)
+ drivers/dma-buf/heaps/cma_heap.c  |  1 -
+ include/linux/dma-buf/heaps/cma.h | 16 ----------------
+ kernel/dma/contiguous.c           |  5 -----
+ 3 files changed, 22 deletions(-)
 
-diff --git a/drivers/gpu/drm/imagination/pvr_queue.c b/drivers/gpu/drm/imagination/pvr_queue.c
-index 303f4d6cc09e..b5bec656d13c 100644
---- a/drivers/gpu/drm/imagination/pvr_queue.c
-+++ b/drivers/gpu/drm/imagination/pvr_queue.c
-@@ -200,6 +200,13 @@ pvr_queue_fence_is_ufo_backed(struct dma_fence *f)
-  * already backed by a UFO.
-  * @f: The dma_fence to turn into a pvr_queue_fence.
-  *
-+ * This could be called on:
-+ * - a job fence directly, in which case it simply returns the containing pvr_queue_fence;
-+ * - a drm_sched_fence's scheduled or finished fence, in which case it will first try to follow
-+ *   the parent pointer to find the job fence (note that the parent pointer is initialized
-+ *   only after the run_job() callback is called on the drm_sched_fence's owning job);
-+ * - any other dma_fence, in which case it will return NULL.
-+ *
-  * Return:
-  *  * A non-NULL pvr_queue_fence object if the dma_fence is backed by a UFO, or
-  *  * NULL otherwise.
-@@ -367,11 +374,14 @@ static u32 ufo_cmds_size(u32 elem_count)
+diff --git a/drivers/dma-buf/heaps/cma_heap.c b/drivers/dma-buf/heaps/cma_heap.c
+index f8a3d87f3ccee9630383ba28502eb40b10671cc2..cc517ac68a0bec0788abcb338c03f530d169013b 100644
+--- a/drivers/dma-buf/heaps/cma_heap.c
++++ b/drivers/dma-buf/heaps/cma_heap.c
+@@ -12,11 +12,10 @@
  
- static u32 job_cmds_size(struct pvr_job *job, u32 ufo_wait_count)
- {
--	/* One UFO cmd for the fence signaling, one UFO cmd per native fence native,
--	 * and a command for the job itself.
-+	/*
-+	 * One UFO command per native fence this job will be waiting on (unless any are
-+	 * signaled by the time the job is submitted), plus a command for the job itself,
-+	 * plus one UFO command for the fence signaling.
- 	 */
--	return ufo_cmds_size(1) + ufo_cmds_size(ufo_wait_count) +
--	       pvr_cccb_get_size_of_cmd_with_hdr(job->cmd_len);
-+	return ufo_cmds_size(ufo_wait_count) +
-+	       pvr_cccb_get_size_of_cmd_with_hdr(job->cmd_len) +
-+	       ufo_cmds_size(1);
- }
+ #define pr_fmt(fmt) "cma_heap: " fmt
  
- static bool
-@@ -517,12 +527,16 @@ pvr_queue_get_paired_frag_job_dep(struct pvr_job *job)
- 	if (!frag_job)
- 		return NULL;
+ #include <linux/cma.h>
+ #include <linux/dma-buf.h>
+-#include <linux/dma-buf/heaps/cma.h>
+ #include <linux/dma-heap.h>
+ #include <linux/dma-map-ops.h>
+ #include <linux/err.h>
+ #include <linux/highmem.h>
+ #include <linux/io.h>
+diff --git a/include/linux/dma-buf/heaps/cma.h b/include/linux/dma-buf/heaps/cma.h
+deleted file mode 100644
+index e751479e21e703e24a5f799b4a7fc8bd0df3c1c4..0000000000000000000000000000000000000000
+--- a/include/linux/dma-buf/heaps/cma.h
++++ /dev/null
+@@ -1,16 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-#ifndef DMA_BUF_HEAP_CMA_H_
+-#define DMA_BUF_HEAP_CMA_H_
+-
+-struct cma;
+-
+-#ifdef CONFIG_DMABUF_HEAPS_CMA
+-int dma_heap_cma_register_heap(struct cma *cma);
+-#else
+-static inline int dma_heap_cma_register_heap(struct cma *cma)
+-{
+-	return 0;
+-}
+-#endif // CONFIG_DMABUF_HEAPS_CMA
+-
+-#endif // DMA_BUF_HEAP_CMA_H_
+diff --git a/kernel/dma/contiguous.c b/kernel/dma/contiguous.c
+index ad50512d71d3088a73e4b1ac02d6e6122374888e..9fe001c712339f8388d3f40cca3dfff3f707fcbf 100644
+--- a/kernel/dma/contiguous.c
++++ b/kernel/dma/contiguous.c
+@@ -40,11 +40,10 @@
+ #include <asm/page.h>
  
-+	/* Have the geometry job wait on the paired fragment job's dependencies as well. */
- 	xa_for_each(&frag_job->base.dependencies, index, f) {
- 		/* Skip already signaled fences. */
- 		if (dma_fence_is_signaled(f))
- 			continue;
+ #include <linux/memblock.h>
+ #include <linux/err.h>
+ #include <linux/sizes.h>
+-#include <linux/dma-buf/heaps/cma.h>
+ #include <linux/dma-map-ops.h>
+ #include <linux/cma.h>
+ #include <linux/nospec.h>
  
--		/* Skip our own fence. */
-+		/*
-+		 * The paired job fence won't be signaled until both jobs have
-+		 * been submitted, so we can't wait on it to schedule them.
-+		 */
- 		if (f == &job->base.s_fence->scheduled)
- 			continue;
- 
-@@ -665,6 +679,7 @@ static void pvr_queue_submit_job_to_cccb(struct pvr_job *job)
- 		if (!jfence)
- 			continue;
- 
-+		/* Some dependencies might have been signaled since prepare_job() */
- 		if (dma_fence_is_signaled(&jfence->base))
- 			continue;
- 
-@@ -714,7 +729,7 @@ static void pvr_queue_submit_job_to_cccb(struct pvr_job *job)
- 	pvr_cccb_write_command_with_header(cccb, job->fw_ccb_cmd_type, job->cmd_len, job->cmd,
- 					   job->id, job->id);
- 
--	/* Signal the job fence. */
-+	/* Update command to signal the job fence. */
- 	pvr_fw_object_get_fw_addr(queue->timeline_ufo.fw_obj, &ufos[0].addr);
- 	ufos[0].value = job->done_fence->seqno;
- 	pvr_cccb_write_command_with_header(cccb, ROGUE_FWIF_CCB_CMD_TYPE_UPDATE,
-@@ -744,10 +759,8 @@ static struct dma_fence *pvr_queue_run_job(struct drm_sched_job *sched_job)
+ #ifdef CONFIG_CMA_SIZE_MBYTES
+@@ -270,14 +269,10 @@ void __init dma_contiguous_reserve(phys_addr_t limit)
+ 						  selected_limit,
+ 						  &dma_contiguous_default_area,
+ 						  fixed);
+ 		if (ret)
+ 			return;
+-
+-		ret = dma_heap_cma_register_heap(dma_contiguous_default_area);
+-		if (ret)
+-			pr_warn("Couldn't register default CMA heap.");
  	}
- 
- 	/* The only kind of jobs that can be paired are geometry and fragment, and
--	 * we bail out early if we see a fragment job that's paired with a geomtry
--	 * job.
--	 * Paired jobs must also target the same context and point to the same
--	 * HWRT.
-+	 * we bail out early if we see a fragment job that's paired with a geometry job.
-+	 * Paired jobs must also target the same context and point to the same HWRT.
- 	 */
- 	if (WARN_ON(job->paired_job &&
- 		    (job->type != DRM_PVR_JOB_TYPE_GEOMETRY ||
-@@ -966,9 +979,8 @@ pvr_queue_signal_done_fences(struct pvr_queue *queue)
  }
  
- /**
-- * pvr_queue_check_job_waiting_for_cccb_space() - Check if the job waiting for CCCB space
-- * can be unblocked
-- * pushed to the CCCB
-+ * pvr_queue_check_job_waiting_for_cccb_space() - Check if a job waiting for CCCB space
-+ * can be unblocked and pushed to the CCCB.
-  * @queue: Queue to check
-  *
-  * If we have a job waiting for CCCB, and this job now fits in the CCCB, we signal
-diff --git a/drivers/gpu/drm/imagination/pvr_rogue_fwif_shared.h b/drivers/gpu/drm/imagination/pvr_rogue_fwif_shared.h
-index 869d904e3649..fe54c1cad7a9 100644
---- a/drivers/gpu/drm/imagination/pvr_rogue_fwif_shared.h
-+++ b/drivers/gpu/drm/imagination/pvr_rogue_fwif_shared.h
-@@ -14,15 +14,7 @@
- 
- #define ROGUE_NUM_GEOM_CORES_SIZE 2U
- 
--/*
-- * Maximum number of UFOs in a CCB command.
-- * The number is based on having 32 sync prims (as originally), plus 32 sync
-- * checkpoints.
-- * Once the use of sync prims is no longer supported, we will retain
-- * the same total (64) as the number of sync checkpoints which may be
-- * supporting a fence is not visible to the client driver and has to
-- * allow for the number of different timelines involved in fence merges.
-- */
-+/* Maximum number of UFOs in a CCB command. */
- #define ROGUE_FWIF_CCB_CMD_MAX_UFOS (32U + 32U)
- 
- /*
+ void __weak
+ dma_contiguous_early_fixup(phys_addr_t base, unsigned long size)
 
+---
+base-commit: f3948c8ed5ea206e87ea2375aebdbabc2064356a
+change-id: 20260330-dma-build-fix-706a4feb0e0f
+
+Best regards,
 -- 
-2.43.0
+Maxime Ripard <mripard@kernel.org>
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
