@@ -2,48 +2,48 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cKPaOQJj5mmavgEAu9opvQ
+	id ILbJKIpj5mkKvwEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:31:46 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:34:02 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 97BCB4315A4
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:31:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 719B543174D
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:34:02 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9FB50404EC
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:31:45 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7D610402D3
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:34:01 +0000 (UTC)
 Received: from mx07-00376f01.pphosted.com (mx07-00376f01.pphosted.com [185.132.180.163])
-	by lists.linaro.org (Postfix) with ESMTPS id 4EF1B402F5
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 30 Mar 2026 07:57:27 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id B17EC40303
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 30 Mar 2026 07:57:30 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=imgtec.com header.s=dk201812 header.b="LwQWJ/n9";
+	dkim=pass header.d=imgtec.com header.s=dk201812 header.b=smMB3OvY;
 	dmarc=pass (policy=none) header.from=imgtec.com;
 	spf=pass (lists.linaro.org: domain of Alessio.Belle@imgtec.com designates 185.132.180.163 as permitted sender) smtp.mailfrom=Alessio.Belle@imgtec.com
 Received: from pps.filterd (m0168889.ppops.net [127.0.0.1])
-	by mx07-00376f01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 62U5HJTn174202;
-	Mon, 30 Mar 2026 08:57:02 +0100
+	by mx07-00376f01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 62U5HJTp174202;
+	Mon, 30 Mar 2026 08:57:03 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=imgtec.com; h=cc
 	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=dk201812; bh=2
-	iOJxisi8Kb1EN20/4D6xSszCHtx00WNhzt1fooEsTU=; b=LwQWJ/n9SLLWIo9UX
-	UfPes8s3oOgLP/g/35Nr9Vv8PHXoo0sI0kGu5mAFJs0FWlh6X/lJmgxr4hLkEtlp
-	u+JEZpUPmj2SAO7kvVPsLqqOLCeJYImY7DO74bJ2cLe4MvJAD+GpxsREUsigxcA0
-	QwbFTruVtDYUZ55IMRiiOpiLMx4nYJTGx/PeyXGneEYT3hMa0tnTPtWXI/SlSEIF
-	KnkLp9P3gfCVDOxZUHJHNBT2/170VAwBsofmrk2beIp+TyXki/VcysjpD9VLGMCa
-	e68rPwlctLE4M6zebju/UGrquGIPtJD8Me74s7nhj0bsOrlCuBU3iz9NYTESVT1K
-	MWVCw==
+	:message-id:mime-version:references:subject:to; s=dk201812; bh=j
+	hCCpkEt+BkB84N1zMr4Vl04qUsVX6qxkMXkjdr3+Xg=; b=smMB3OvY7SY0HkV1k
+	7bkGL23Yc9LMGcLqO7mJvkL4fP/hEYA/prpNDfmU4I1okFZB+APeoJpyLKHgzoJd
+	BzbnVYp//WENvpChim7jTe+AKWFCZMfb/AEogJ520PSPMCAp5veUiytPwiU7F2NG
+	RN/p/TpB29n+65SMFanMWylU5PTmNAssaCYRRe6QBYIjg/Aras49whi/0K1UaAsG
+	YVhem+UgO46pW0uuSChbb6vzJxqRBfE8w+TF28T1EzATZAIbrxxEcmjS93QpR167
+	s1ueOo7kmbQla6659hT7ZkyCFziz/qp2kaxcZWY9yp2aMnHMtKyIwfC694WBNoB1
+	ISFdA==
 Received: from hhmail01.hh.imgtec.org (83-244-153-141.cust-83.exponential-e.net [83.244.153.141])
-	by mx07-00376f01.pphosted.com (PPS) with ESMTPS id 4d67xusfkv-7
+	by mx07-00376f01.pphosted.com (PPS) with ESMTPS id 4d67xusfkv-9
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Mon, 30 Mar 2026 08:57:02 +0100 (BST)
+	Mon, 30 Mar 2026 08:57:03 +0100 (BST)
 Received: from NP-A-BELLE.kl.imgtec.org (172.25.6.106) by
  HHMAIL01.hh.imgtec.org (10.100.10.19) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
  15.2.2562.37; Mon, 30 Mar 2026 08:57:01 +0100
 From: Alessio Belle <alessio.belle@imgtec.com>
-Date: Mon, 30 Mar 2026 08:56:42 +0100
+Date: Mon, 30 Mar 2026 08:56:43 +0100
 MIME-Version: 1.0
-Message-ID: <20260330-job-submission-fixes-cleanup-v1-7-7de8c09cef8c@imgtec.com>
+Message-ID: <20260330-job-submission-fixes-cleanup-v1-8-7de8c09cef8c@imgtec.com>
 References: <20260330-job-submission-fixes-cleanup-v1-0-7de8c09cef8c@imgtec.com>
 In-Reply-To: <20260330-job-submission-fixes-cleanup-v1-0-7de8c09cef8c@imgtec.com>
 To: Frank Binns <frank.binns@imgtec.com>,
@@ -61,43 +61,43 @@ To: Frank Binns <frank.binns@imgtec.com>,
         Boris Brezillon
 	<boris.brezillon@collabora.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1774857418; l=1511;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1774857418; l=5384;
  i=alessio.belle@imgtec.com; s=20251208; h=from:subject:message-id;
- bh=l8WjdA/LGnLSJKWiMRcqXRkDj2NB9fc74Y1QB17lwrs=;
- b=z8djzyO2G4zfTYC3QPntznFWlddGiMJvj7Wn9vyopXk/AvvZu3sjrhL4x23TbTi8hmphy7MFK
- /izIcrDrmF3Bb7coenSG16XePHxjvtCGlRGSJ8ufb2OzsW/lf979rZu
+ bh=/yF7BgXFlPY5bgvNPfE6BIw+//D50tMFfBnZCd0SRJg=;
+ b=vzkL/Rb9EvRS8z1K3VHubqV2TS66bAjYhwngM7cK+U0Y1w9kTtqr4cL/EPYutBLkvx9VKkx1f
+ hiQ280MZ06ZBnpOBZpcqgG5aGIpKEO681AwfTjxUzYO6qyZ6MSotSUi
 X-Developer-Key: i=alessio.belle@imgtec.com; a=ed25519;
  pk=2Vtuk+GKBRjwMqIHpKk+Gx6zl7cgtq0joszcOc0zF4g=
 X-Originating-IP: [172.25.6.106]
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzMwMDA2MSBTYWx0ZWRfXycd6f8OX4TvN
- u4mnd+3JLq/+bLyXD6S5eEJlQCe+rhIdyOC+ofK1HBhuFtHrzldzzpZF6D5fArJI6rW8ZF9Skr5
- yc0lFNJGGs766JE1sG0aXGy3k5NxoY9GnJosoQwqfg2jDJLaKGA4xxO3arKgpBlzmwYO5fbkbMI
- 5TCR9DTBxMiuvQ2VAw4BWp44z4tGiGTPGft30fa0KGMMfJDF4eb2IoOZ0MUIbEw+UQHlQTA57B5
- z73D/2P8tXOlLQ0zFr+04y3/pV9w4Aum5tuGH8EzXoVqtLw8lndciJaAbKoRFAMPqCj0+y74aPl
- DqOOHJ1ve3D4bdhIFb8HHNX7HxbjikklW7z5eyJGLLcbyiiKGTnSLCRdL/ChbUN2P1/KxxFxYHt
- RNPBOs1cCzfIW9S8VkdVbIP1kKGJSVE1N2aD2AbubmSFrus2Yl37DJ/Z0p+zplp7A3SfQCKaIho
- 5fpxJ7QZL1xw+u+nuTQ==
-X-Authority-Analysis: v=2.4 cv=QO9lhwLL c=1 sm=1 tr=0 ts=69ca2cce cx=c_pps
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzMwMDA2MSBTYWx0ZWRfXzfQ1IDE1g9IL
+ DtTr64FZbO4eQUEIc48jvCjh9kHOf02NQfmlo58hbt0LC9X345+aLuoSzG/uwZjdU+gDjEZzWw/
+ pZ4/Un439IC4Mrt/aOmDv3Y0fn1G8ETGh+v+hg3vlcjjRQCgwyS3bCxUqbAGKTaQmzS0ldOUNzb
+ 4aI+dD80jSXOJXxdbr4GV/dftdq/HnZc1UuPdNfQto8yC56mbLNHVgNWmfBRdjQLRbTOLPJ7zja
+ 1PhddJ+szUBJEuL0g2IMQXtGznY+eiTAHs4V42NzugL/U4XcShXiS2mkuz6PcebhgpjYlWBrfSb
+ Dg6zOkV+swOPVYXz7veHELpVcKqCjdaozM15H3ClClY/9o1UAMhtjW9EB4rU7gwwPebMxpjDQXy
+ O1aC4Wx1K+banTkgeCoy/XAqV0TU4Ob/CMet7FOihOr+AeXqqu4JmB5RZz2yl/IwyS37ESJQXEO
+ T97JAQDhlwPbenqByUA==
+X-Authority-Analysis: v=2.4 cv=QO9lhwLL c=1 sm=1 tr=0 ts=69ca2ccf cx=c_pps
  a=AKOq//PuzOIrVTIF9yBwbA==:117 a=AKOq//PuzOIrVTIF9yBwbA==:17
  a=txNhvCuK94MA:10 a=IkcTkHD0fZMA:10 a=Yq5XynenixoA:10
  a=VkNPw1HP01LnGYTKEx00:22 a=kQ-hrUj2-E3RCbRHssb7:22 a=7RYWX5rxfSByPNLylY2M:22
- a=r_1tXGB3AAAA:8 a=_Y7jKtEYzl7tsisHUWkA:9 a=QEXdDO2ut3YA:10
+ a=r_1tXGB3AAAA:8 a=KCFfvmjXgMu-EKTFBUoA:9 a=QEXdDO2ut3YA:10
  a=t8nPyN_e6usw4ciXM-Pk:22
-X-Proofpoint-GUID: _AGAVqfJjxcLoA0Ds9QP2_y0SDZU1YsH
-X-Proofpoint-ORIG-GUID: _AGAVqfJjxcLoA0Ds9QP2_y0SDZU1YsH
-X-Spamd-Bar: ---
+X-Proofpoint-GUID: hqAUf5kEAgU4PDF-85MHTxc2iYqDLrnB
+X-Proofpoint-ORIG-GUID: hqAUf5kEAgU4PDF-85MHTxc2iYqDLrnB
+X-Spamd-Bar: ----
 X-MailFrom: Alessio.Belle@imgtec.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 5CL53LM4SIOWE5V55U3WR55QUNVDBCKX
-X-Message-ID-Hash: 5CL53LM4SIOWE5V55U3WR55QUNVDBCKX
-X-Mailman-Approved-At: Mon, 20 Apr 2026 17:29:57 +0000
+Message-ID-Hash: 46OIXDCHG5CUF75XVEP7WPJYJMIYJEGF
+X-Message-ID-Hash: 46OIXDCHG5CUF75XVEP7WPJYJMIYJEGF
+X-Mailman-Approved-At: Mon, 20 Apr 2026 17:33:28 +0000
 CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Alessio Belle <alessio.belle@imgtec.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 7/8] drm/imagination: Update check to skip prepare_job() for fragment jobs
+Subject: [Linaro-mm-sig] [PATCH 8/8] drm/imagination: Minor improvements to job submission code documentation
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5CL53LM4SIOWE5V55U3WR55QUNVDBCKX/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/46OIXDCHG5CUF75XVEP7WPJYJMIYJEGF/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -130,48 +130,140 @@ X-Spamd-Result: default: False [1.59 / 15.00];
 	DKIM_TRACE(0.00)[imgtec.com:-];
 	HAS_XOIP(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-0.965];
+	NEURAL_HAM(-0.00)[-0.964];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
-X-Rspamd-Queue-Id: 97BCB4315A4
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,imgtec.com:mid,imgtec.com:email]
+X-Rspamd-Queue-Id: 719B543174D
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-By the time prepare_job() is called on a paired fragment job, the paired
-geometry job might already be finished and its PM reference dropped.
-
-Check the fragment job's PM reference instead which is a bit more likely
-to be still set. This is a very minor optimization.
+Mixed list of clarifications and typo fixes.
 
 Signed-off-by: Alessio Belle <alessio.belle@imgtec.com>
 ---
- drivers/gpu/drm/imagination/pvr_queue.c | 11 ++++++-----
- 1 file changed, 6 insertions(+), 5 deletions(-)
+ drivers/gpu/drm/imagination/pvr_queue.c            | 38 ++++++++++++++--------
+ .../gpu/drm/imagination/pvr_rogue_fwif_shared.h    | 10 +-----
+ 2 files changed, 26 insertions(+), 22 deletions(-)
 
 diff --git a/drivers/gpu/drm/imagination/pvr_queue.c b/drivers/gpu/drm/imagination/pvr_queue.c
-index 4a49d954562e..303f4d6cc09e 100644
+index 303f4d6cc09e..b5bec656d13c 100644
 --- a/drivers/gpu/drm/imagination/pvr_queue.c
 +++ b/drivers/gpu/drm/imagination/pvr_queue.c
-@@ -553,12 +553,13 @@ pvr_queue_prepare_job(struct drm_sched_job *sched_job,
+@@ -200,6 +200,13 @@ pvr_queue_fence_is_ufo_backed(struct dma_fence *f)
+  * already backed by a UFO.
+  * @f: The dma_fence to turn into a pvr_queue_fence.
+  *
++ * This could be called on:
++ * - a job fence directly, in which case it simply returns the containing pvr_queue_fence;
++ * - a drm_sched_fence's scheduled or finished fence, in which case it will first try to follow
++ *   the parent pointer to find the job fence (note that the parent pointer is initialized
++ *   only after the run_job() callback is called on the drm_sched_fence's owning job);
++ * - any other dma_fence, in which case it will return NULL.
++ *
+  * Return:
+  *  * A non-NULL pvr_queue_fence object if the dma_fence is backed by a UFO, or
+  *  * NULL otherwise.
+@@ -367,11 +374,14 @@ static u32 ufo_cmds_size(u32 elem_count)
  
- 	if (job->type == DRM_PVR_JOB_TYPE_FRAGMENT && job->paired_job) {
- 		/*
--		 * This will be called on a paired fragment job after being
--		 * submitted to firmware. We can tell if this is the case and
--		 * bail early from whether run_job() has been called on the
--		 * geometry job, which would issue a pm ref.
-+		 * This will be called on a paired fragment job after being submitted
-+		 * to the firmware as part of the paired geometry job's submission.
-+		 * We can tell if this is the case and bail early from whether run_job()
-+		 * has been called on the geometry job, which would issue a pm ref on
-+		 * this job as well.
- 		 */
--		if (job->paired_job->has_pm_ref)
-+		if (job->has_pm_ref)
- 			return NULL;
+ static u32 job_cmds_size(struct pvr_job *job, u32 ufo_wait_count)
+ {
+-	/* One UFO cmd for the fence signaling, one UFO cmd per native fence native,
+-	 * and a command for the job itself.
++	/*
++	 * One UFO command per native fence this job will be waiting on (unless any are
++	 * signaled by the time the job is submitted), plus a command for the job itself,
++	 * plus one UFO command for the fence signaling.
+ 	 */
+-	return ufo_cmds_size(1) + ufo_cmds_size(ufo_wait_count) +
+-	       pvr_cccb_get_size_of_cmd_with_hdr(job->cmd_len);
++	return ufo_cmds_size(ufo_wait_count) +
++	       pvr_cccb_get_size_of_cmd_with_hdr(job->cmd_len) +
++	       ufo_cmds_size(1);
+ }
+ 
+ static bool
+@@ -517,12 +527,16 @@ pvr_queue_get_paired_frag_job_dep(struct pvr_job *job)
+ 	if (!frag_job)
+ 		return NULL;
+ 
++	/* Have the geometry job wait on the paired fragment job's dependencies as well. */
+ 	xa_for_each(&frag_job->base.dependencies, index, f) {
+ 		/* Skip already signaled fences. */
+ 		if (dma_fence_is_signaled(f))
+ 			continue;
+ 
+-		/* Skip our own fence. */
++		/*
++		 * The paired job fence won't be signaled until both jobs have
++		 * been submitted, so we can't wait on it to schedule them.
++		 */
+ 		if (f == &job->base.s_fence->scheduled)
+ 			continue;
+ 
+@@ -665,6 +679,7 @@ static void pvr_queue_submit_job_to_cccb(struct pvr_job *job)
+ 		if (!jfence)
+ 			continue;
+ 
++		/* Some dependencies might have been signaled since prepare_job() */
+ 		if (dma_fence_is_signaled(&jfence->base))
+ 			continue;
+ 
+@@ -714,7 +729,7 @@ static void pvr_queue_submit_job_to_cccb(struct pvr_job *job)
+ 	pvr_cccb_write_command_with_header(cccb, job->fw_ccb_cmd_type, job->cmd_len, job->cmd,
+ 					   job->id, job->id);
+ 
+-	/* Signal the job fence. */
++	/* Update command to signal the job fence. */
+ 	pvr_fw_object_get_fw_addr(queue->timeline_ufo.fw_obj, &ufos[0].addr);
+ 	ufos[0].value = job->done_fence->seqno;
+ 	pvr_cccb_write_command_with_header(cccb, ROGUE_FWIF_CCB_CMD_TYPE_UPDATE,
+@@ -744,10 +759,8 @@ static struct dma_fence *pvr_queue_run_job(struct drm_sched_job *sched_job)
  	}
  
+ 	/* The only kind of jobs that can be paired are geometry and fragment, and
+-	 * we bail out early if we see a fragment job that's paired with a geomtry
+-	 * job.
+-	 * Paired jobs must also target the same context and point to the same
+-	 * HWRT.
++	 * we bail out early if we see a fragment job that's paired with a geometry job.
++	 * Paired jobs must also target the same context and point to the same HWRT.
+ 	 */
+ 	if (WARN_ON(job->paired_job &&
+ 		    (job->type != DRM_PVR_JOB_TYPE_GEOMETRY ||
+@@ -966,9 +979,8 @@ pvr_queue_signal_done_fences(struct pvr_queue *queue)
+ }
+ 
+ /**
+- * pvr_queue_check_job_waiting_for_cccb_space() - Check if the job waiting for CCCB space
+- * can be unblocked
+- * pushed to the CCCB
++ * pvr_queue_check_job_waiting_for_cccb_space() - Check if a job waiting for CCCB space
++ * can be unblocked and pushed to the CCCB.
+  * @queue: Queue to check
+  *
+  * If we have a job waiting for CCCB, and this job now fits in the CCCB, we signal
+diff --git a/drivers/gpu/drm/imagination/pvr_rogue_fwif_shared.h b/drivers/gpu/drm/imagination/pvr_rogue_fwif_shared.h
+index 869d904e3649..fe54c1cad7a9 100644
+--- a/drivers/gpu/drm/imagination/pvr_rogue_fwif_shared.h
++++ b/drivers/gpu/drm/imagination/pvr_rogue_fwif_shared.h
+@@ -14,15 +14,7 @@
+ 
+ #define ROGUE_NUM_GEOM_CORES_SIZE 2U
+ 
+-/*
+- * Maximum number of UFOs in a CCB command.
+- * The number is based on having 32 sync prims (as originally), plus 32 sync
+- * checkpoints.
+- * Once the use of sync prims is no longer supported, we will retain
+- * the same total (64) as the number of sync checkpoints which may be
+- * supporting a fence is not visible to the client driver and has to
+- * allow for the number of different timelines involved in fence merges.
+- */
++/* Maximum number of UFOs in a CCB command. */
+ #define ROGUE_FWIF_CCB_CMD_MAX_UFOS (32U + 32U)
+ 
+ /*
 
 -- 
 2.43.0
