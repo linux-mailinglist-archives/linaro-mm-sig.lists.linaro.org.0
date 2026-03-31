@@ -2,219 +2,183 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id uDnwMX7jy2n0MAYAu9opvQ
+	id KDSCF8Bj5mkKvwEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 31 Mar 2026 17:08:46 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:34:56 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8519236B719
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 31 Mar 2026 17:08:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0A548431819
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:34:56 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8DB8D401E9
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 31 Mar 2026 15:08:45 +0000 (UTC)
-Received: from BN1PR04CU002.outbound.protection.outlook.com (mail-eastus2azon11010006.outbound.protection.outlook.com [52.101.56.6])
-	by lists.linaro.org (Postfix) with ESMTPS id 5569B3F9BE
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 31 Mar 2026 15:08:42 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 20FB040513
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:34:55 +0000 (UTC)
+Received: from mx0b-00082601.pphosted.com (mx0b-00082601.pphosted.com [67.231.153.30])
+	by lists.linaro.org (Postfix) with ESMTPS id 2C23C3F806
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 31 Mar 2026 15:24:24 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=Nvidia.com header.s=selector2 header.b=h4xYgvQJ;
-	dmarc=pass (policy=reject) header.from=nvidia.com;
-	spf=pass (lists.linaro.org: domain of jgg@nvidia.com designates 52.101.56.6 as permitted sender) smtp.mailfrom=jgg@nvidia.com;
-	arc=pass ("microsoft.com:s=arcselector10001:i=1")
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=eJU8lZCdegbP4rKKVZUU9/ED43SDbrx79AKeMAVA77UAZbgnDtlZsmXXI5I3sXIpw9HpgO+48OkhwkRIQzAOm4Z456crwWrhwN4vqrqHVgvB02pBk1GVIfbgb556a4+QMfk7RgVJmrPU07rTOjz6H8diKURazUsTaDDNqLpvN4lRGIJhwoJb/RKTASnkP5MRYbIMoGQniRoqeO8JORmLYnblWHFZBJeaiM2Gh3pqYc1o7pcy1I6a1e/5XILswB+KPeEdWKVkjq6DGEoR84/qys68V+djrN3D5EcV7icoP2EL0YV75AxLhefVPM8tl+aeWdYh/Hib2pCXgGjDijOUFw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=pv4as3gNxdGn6D6th6D7a6C1lJwvFJnzs8/2TjIPxFw=;
- b=ygFiTeQK29iugJTUnV/WenZhfMOMIZtrDxVcxbn9XVQs/izcrTfjyYaJCz7xbAWeqjWTllf43eOTm/nyrDN4AFBAZvnH6NeT7/Nkj/KvP5HqLJ7VG/wyZ1qFq+/7c3EQNdDhxYx3MYlcX/Sv0FJqbSVFdfNJuL2PHg5i5yzBsqzmi+iiWWyCHlH9qoeDzcHtEWSexohj5tD/hGCVre8kNbv2DPgwbmTiZS0lE5ZZthJmRTCOa7HXNmrgBd0BFDhGZix2VNa/ztkgQSuhAhuTMFRgXPby/2TP1Zlz44DPJg1NMreKq0gjT1L3KfQAH0HlH5Zx/mfgI/XR5hoQ360+Hw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=pv4as3gNxdGn6D6th6D7a6C1lJwvFJnzs8/2TjIPxFw=;
- b=h4xYgvQJF9j1Dl7jk2LJDQnjwTyXvSrNw5pW0gh6NKMdz9QW0eQgeLlV4EiQ9nBdyUqL89u9M3L1m0Zki7I2x2wuPpC5sTVOeMVnprWJADVY72NAP4DH96i/oEIeubBEAlz0ZMi6IrAo4P82XpifmZgqLJallRPTKnRlvHSw/K+2V9aP/01NzS0ZN2BR9AncaOfKwaFrK6mtYtx2xUngS3SocX2dyd6lJbdPwnW4czdTtzzOtZPoxT2fXPCKzLXCa7Idzxu63RvrvFHIsF/HDJ3sC3nBxbzhsnbryQ8I8VDDSICkjab5Lv+JnfMDhdfGg7LOt+qgLEhS1qYULr/e1A==
-Received: from LV8PR12MB9620.namprd12.prod.outlook.com (2603:10b6:408:2a1::19)
- by LV9PR12MB9805.namprd12.prod.outlook.com (2603:10b6:408:2ee::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.15; Tue, 31 Mar
- 2026 15:08:37 +0000
-Received: from LV8PR12MB9620.namprd12.prod.outlook.com
- ([fe80::299d:f5e0:3550:1528]) by LV8PR12MB9620.namprd12.prod.outlook.com
- ([fe80::299d:f5e0:3550:1528%5]) with mapi id 15.20.9769.014; Tue, 31 Mar 2026
- 15:08:37 +0000
-Date: Tue, 31 Mar 2026 12:08:36 -0300
-From: Jason Gunthorpe <jgg@nvidia.com>
-To: Jiri Pirko <jiri@resnulli.us>
-Message-ID: <20260331150836.GB2308548@nvidia.com>
-References: <20260325192352.437608-1-jiri@resnulli.us>
- <20260325192352.437608-3-jiri@resnulli.us>
-Content-Disposition: inline
-In-Reply-To: <20260325192352.437608-3-jiri@resnulli.us>
-X-ClientProxiedBy: BN9PR03CA0434.namprd03.prod.outlook.com
- (2603:10b6:408:113::19) To LV8PR12MB9620.namprd12.prod.outlook.com
- (2603:10b6:408:2a1::19)
+	dkim=pass header.d=meta.com header.s=s2048-2025-q2 header.b=NgpBhtFm;
+	dmarc=pass (policy=reject) header.from=meta.com;
+	spf=pass (lists.linaro.org: domain of "prvs=25502be513=mattev@meta.com" designates 67.231.153.30 as permitted sender) smtp.mailfrom="prvs=25502be513=mattev@meta.com";
+	arc=pass ("google.com:s=arc-20240605:i=1")
+Received: from pps.filterd (m0528006.ppops.net [127.0.0.1])
+	by mx0a-00082601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 62VDKsBR3315987
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 31 Mar 2026 08:24:23 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=meta.com; h=cc
+	:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=s2048-2025-q2;
+	 bh=rVzD9RZ8DOj+OZScnURt3JaaKOoh5Y6w5keNNJrEDEk=; b=NgpBhtFmItDM
+	CNbcwb/E9DkdCKHJ/+HXG5nYnUCSAGdnK0J1DywzsfubqT3zoyDOiorROwlve6f5
+	Fabj2p7OS4l9/vDda/nt1iaWFhmj/dD7ikbmlCSU9C3dxHoD/BW1829WKG1gSNUo
+	bvhspgCJNM7QlFoJ6rz3LBSz57IF68o48IZ5V4B4vXaE0cFVG0Wx1twzhAphguZA
+	x2QO4KynACOL7v8zMEgjTg34ybae8h4kqqcSIVWunaNwvXNvzVjB0rqBMikZSh7r
+	g5YEFzd1SPUtzJOBJK+aZ0ehLdWWfxZnd/kXQFeHL1MALxrPKcsgO9HqIAQQZ7ex
+	Zwkn3t7Umw==
+Received: from mail-oa1-f71.google.com (mail-oa1-f71.google.com [209.85.160.71])
+	by mx0a-00082601.pphosted.com (PPS) with ESMTPS id 4d6ymfw7d3-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 31 Mar 2026 08:24:23 -0700 (PDT)
+Received: by mail-oa1-f71.google.com with SMTP id 586e51a60fabf-41c08879ba3so24581793fac.0
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 31 Mar 2026 08:24:23 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774970663; cv=none;
+        d=google.com; s=arc-20240605;
+        b=W61AeQKVkT/3Oy9eM6eGFuYSusik7TWjE03p5E1hXjnXLyZLxQCePppIGlOVeK1PPb
+         Dtiszk1GS42eUgbabffDdKgVJI7l8IrFE6Hl+n/t1PIde5UDFCVEKYSPAV+f0NYSEBFG
+         yuMy2GS33vI6PeaivdXuKk02eo7TfGUROs6adAf4xIhXTLMRA+Q0dMSsfcJgAT1H5z1R
+         PW2qN6It4Xfx+i4vUDNemdAycNvqY8EJukXyeWU16A0c6eH61eiYzhj1VrUWIgLVutQM
+         sYCJyuIcBijFcXLc7Pw9zCGXtE/1T2eJTeLERtluqapmVwVCaLOPchoy3qejwmJCfsLr
+         RF3A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version;
+        bh=rVzD9RZ8DOj+OZScnURt3JaaKOoh5Y6w5keNNJrEDEk=;
+        fh=pUDnRIBoT2LfZ90tJs/7bbk736FPOIuifKR6yUiVk6g=;
+        b=S7cgYSbLLNhVaT39Kc9ebV4Zk6NYtDgIV7vqHEes2dzcNCsj4jm30E507DUQN2KVWG
+         kUc4afLJ5G435Q1X43OZhxtOUn+WFxKCMlnZtoREHGmeoQk93LT9F5Qzo6/lrc1SQ5tQ
+         JmvQE4yTmmUA3I4JGlcLSTwUYc+XAN7sX5eYu/xgGBVm6gnIQ0ibIT7g6H3h3i4X9BEQ
+         uE07HVaUPPEJ0R2/O7fTfYL6ZHSH/9YIJjwClCV15gO8U9S1gEyxeBAKrIaNpTTQ8IuQ
+         mPV3nvXMFlOZ+nrh90Y8K+sBVmpZTv6PFEe8FVfpC9OjznLRyqG6I9kiudR5DnsdFMen
+         TltQ==;
+        darn=lists.linaro.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1774970663; x=1775575463;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=rVzD9RZ8DOj+OZScnURt3JaaKOoh5Y6w5keNNJrEDEk=;
+        b=QElB9HAKyu/iQph3apF5Y6ozY8qWwp0Dkgr7t8LiP0Vdu5zsWaNnBGYW8vQR06p9/g
+         XJftlUttYX9qDML3NovacXLd0SKrh8h+tnKdBL66mYY/fX2DhYEj+fxkzSoC1VT/3gwr
+         76tnoYVstMAcDw/7zHtBwRaR7szYs4R8JVnip83QPqEGH7OJBvHp4Wz/bJGjtDcuWuNK
+         XIwtkwYPNHGL46p69P8UUJvaowecqwoltpy+Ys/xobnwNvW8+y3uu5lDUkpCtxGWhe13
+         5K6p0jrFqqv+B2G6JoyyT02ON2QfBeIlRppDWODZmuZIkOQuJohjj3OXCJ8X4BDVOsi+
+         aavQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVCUBhf+hI0MX9D+cwTmuoyiEc/LUvO2ALqxMyG4Ks1sewnjFp0oKRGrQFpjzoh6bsZiCq0//d///XzBaBA@lists.linaro.org
+X-Gm-Message-State: AOJu0Yz3a0PVRsn2OFlR0MzGcIpTOATu4H3Fi6MlOlpN9nUgIxylFNxF
+	UqC0mWm0Yir4Dg4iEV3nZUqazUDK+UdIJjX1Wb9FifUbGnFBODiL8/I3Wot2HMnV3eLmIndvahI
+	VIkY7lwYXr6URkQBqfibCPVM3FuGq5aIakVL2pHy+KKQ+++xEbCkQb+iYhu5ZufGqS/XwJv9Rqu
+	X3D079NpKIms3+iqSo+WsbmwxAuZEVpFN6b1tFZShsMg==
+X-Gm-Gg: ATEYQzyRljm/f0CoCaL+kaqJre+m+uQiqAnukVVft8iuvcPO3yTyHZsd5npKfPRNgvB
+	P3T1v9pE04ct3SKkMdemAXJDE5qJSPaCVD/8qsdyk7/gojTgDYx/j6lRiphA3UHXKNuC270YSJn
+	AflVBEWWUtePZ9gHIj+rdZDKDjl7GyJtuMS41OtBAvDWJ6hZdCmbNF4jD9uoMK+4bVeYSI9irYX
+	6r8
+X-Received: by 2002:a05:6820:2901:b0:67f:31e3:81a with SMTP id 006d021491bc7-67f31e31008mr367464eaf.2.1774970662744;
+        Tue, 31 Mar 2026 08:24:22 -0700 (PDT)
+X-Received: by 2002:a05:6820:2901:b0:67f:31e3:81a with SMTP id
+ 006d021491bc7-67f31e31008mr367434eaf.2.1774970662327; Tue, 31 Mar 2026
+ 08:24:22 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV8PR12MB9620:EE_|LV9PR12MB9805:EE_
-X-MS-Office365-Filtering-Correlation-Id: 396ca46a-1607-4b4d-446f-08de8f3762b9
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|366016|7416014|376014|1800799024|22082099003|18002099003|56012099003;
-X-Microsoft-Antispam-Message-Info: 
-	xStHTyxc+jLodnwpmZC8XvLDN8pEraxkkwu3vCi5IrGWeTk1jdR4ftEQ6w2kN2HSDJrZwTHwUtucfj0Cqcx0VCiqHI5xESo4PXYfLyv8jgW2Opbq4BzmxXSFZv9S9rok0v9MS1ujFvlZjF0fhe5zlyyTDicHvD0+xarVnWu8FPck9rm3A0sB2BVQS9MHjvHN1rIONQ32fO11LTSsAhCuVQf5X8W6gQaiY5R7Ua2Okx+R5sKchzF5m50RopeXEZwKpMmt9t7FT1NcamDei2zz60ZmMeTfqrmDfJOmTxTNHw/l7a4Q5jUzVo1hRaInv8oKLhfIT9klprR94oBoyBlxkiwNvI2MuO3jO411DpRxas48Pd/+KzAn0WyNdav6yekzdW3Ww9JEFzHCavPQ4k4LoLrDoFnJEKdW/xf569Nayk0i3DUhPNzXKY/xxV78mpqMeQGMDJDvg2txGb301RGaXet+cr68P30CwuaBhXtARECFtuPyhZsK3M2+v3M8kOOqOO2EfLxXktl1XzFZsoLjfh2SBGC9lsQ4t5N0g05V7TwOBXr8TrW8S9lyn0hlUbWIniCE1WN+po+OYAojVT+SIVxX6TrraZWUdNGVSwt7OJZP01ZBfJrpbJcCSmNvYTUt/raGsaLo5GJ/4/Zovo2G1M5cKjg/zfFrFzlKHzXmUKadIgUbkXanSUG9u87HsUjF/BeTb0h2k+KGrlBqMKsMTV0DN0uThATtkgGEjhkf9kE=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LV8PR12MB9620.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(7416014)(376014)(1800799024)(22082099003)(18002099003)(56012099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?uGLafNIURNrShXUEYT4lrpAPO91TkPUqpLBKgBeuVySDuW7wQTf0AmsV5MR2?=
- =?us-ascii?Q?Yz7BKmDcy31qmps2ZcLvITR8lWJIGoVfhanx/RVtu09gfoURIDCvgIOjR6X0?=
- =?us-ascii?Q?9v5/ae4c9HNzuXbEFyZqMhHrVvdn/q2S0p8G/bY6l3m4VGILWXO2UR+UouHt?=
- =?us-ascii?Q?OItsfkvZbSj6opDPa7USyFMUNPkILfIB8OTPWLojmRk7zc2s+QS9OpXFeHBS?=
- =?us-ascii?Q?YL1a/kyXMj4aXBesGwvOAUSxlyJpZd2sstegmdJFxFURtS74oTB9HUrbayGn?=
- =?us-ascii?Q?ClsITTGynG187a3uR6GRCJ5ifVVlEB6OZiqX1i4DsSueJMG1lJFYNhso6v+c?=
- =?us-ascii?Q?nzPDrK6uQmRYZkasVt4qcS5jfToCdJFjXZfHj0espMaqORpkLbgcWdhG8pee?=
- =?us-ascii?Q?Wsm0JPa8Y0+qb+GjZxJcq4nPVrdDtXrLWTSCg8oVBIuMLl86s3KEsJAePL2S?=
- =?us-ascii?Q?ZyEOME4eT2zte8cf1XnZCZ8sEpkYEErxRN96RIYbPlWFv1Va9WlsPQ4o8cie?=
- =?us-ascii?Q?Wpr+y4ENCv5ukRywC5VAAZXsVLfYhglno6g4jHCvMnmDFUptWuz55OA3M8qx?=
- =?us-ascii?Q?Z8NPRXfZdLssFTty97too93iRknqvci7Gnw//oqCM/2cY6SL2N1GlZd9f0Qv?=
- =?us-ascii?Q?pVPJ9WVM2yhSw3s7GNJ+l60Q8eWDLAL05fLWudXTqz8vj0nEb//hAfWp7xLo?=
- =?us-ascii?Q?dTCZMbzL3OszfKpFr7buECpMGA91Vyu/2onDK/Gb9ZhwIf4B3gGEjIZ93MBz?=
- =?us-ascii?Q?jSyGrPVfhqviUVR+iioG71Hhv4UlLt1srIwBc0krpYkSwugLY6TnMiF5h/CZ?=
- =?us-ascii?Q?yG3YQNWSL4uTQOYGsM/Ef3VcWXWpH87kq/YDFNkdIP68ruryIm/q3HhTt3O2?=
- =?us-ascii?Q?kFSE2JOQB8oae2T16Phr/u4iZg3GC+Iwp+LP6q/oF2hTTfZPlh6ZrO+kfM4Z?=
- =?us-ascii?Q?kEuDvFFlwSSnR7o5g0e6nrp9WUzTBxgoa5YdNH01M2XQAgz0mIrz4S3js/Hd?=
- =?us-ascii?Q?hlE7XCs7NaSebav1Wj4Ag4fz9cYHWhbBzeEs3O6oMDhbhWnRiKe65nv6Pbzo?=
- =?us-ascii?Q?rKM855Y5tNI2hy/2JDDIwRTuCw5aKiNGdtQckj4V37HNeu8fju4ZKAR9TRW9?=
- =?us-ascii?Q?fVtRS4obhNomG34fizBvg/KanGRDyDjLcNv0bwUxORVSTID4LAi8qcJhEjiN?=
- =?us-ascii?Q?R7d70NT+cNYOh7hYu06EjWq4OP1xDOmGffFnIuu6aPR9A1crPSyGq9Wz+b+T?=
- =?us-ascii?Q?S0+4KfveBskgCMgiuBJPqJFha8FBSKeHkClEOLQ2TQ6CSkoEjbk8jocpkaMM?=
- =?us-ascii?Q?hdsUXS5HwDOcHQCeOpeh1gv97ogMim7mcR10JtV8i0ow6HiVhOzTuQX3T/y6?=
- =?us-ascii?Q?iUvr1glGO287+H3d54beqbLx7Oro3Isb7at75Eq+Ji5DUyE9qCqKVopzi3BI?=
- =?us-ascii?Q?ThcSFNftLcuKht/QrReZvf//8ZsV5P90td4icWnpTDPnr9f/RK19i3yfl+nn?=
- =?us-ascii?Q?wYpdgOrdR0wNUUyqPN0Qv3v5UntJC1KsaUrCT/qDfgTVbRbRzQEjd3HyIKBl?=
- =?us-ascii?Q?rJMSiBXs2hKMYbAglgCtwACYKkMqrb10/j6wOUoBBORQY0i1tYfL9cw/h9dJ?=
- =?us-ascii?Q?gqSe7aiqbX7fVBbqHh9VRvJs5sAJxnRgTeeYZ38FUpVAOfbVGB9TBBS0Jia+?=
- =?us-ascii?Q?qMUqcV7ziIkuRhzVe9qP+GFDRjg97DjP68wNKfK0WsQhK2kF?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 396ca46a-1607-4b4d-446f-08de8f3762b9
-X-MS-Exchange-CrossTenant-AuthSource: LV8PR12MB9620.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Mar 2026 15:08:37.7963
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 7hBe0oFJ8AuaY2YghjWqvdD/LTT1pEWJnt21xm8AQRR77KPN1rl43j5T69vgpLP4
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV9PR12MB9805
-X-Spamd-Bar: ----
-Message-ID-Hash: DDWAB3GC5ZGIKEPF6SYCTPGTYAZWTGOX
-X-Message-ID-Hash: DDWAB3GC5ZGIKEPF6SYCTPGTYAZWTGOX
-X-MailFrom: jgg@nvidia.com
+References: <20260312184613.3710705-1-mattev@meta.com> <20260312184613.3710705-10-mattev@meta.com>
+ <20260330133336.GT310919@nvidia.com>
+In-Reply-To: <20260330133336.GT310919@nvidia.com>
+From: Matt Evans <mattev@meta.com>
+Date: Tue, 31 Mar 2026 16:24:11 +0100
+X-Gm-Features: AQROBzBjz_Oa24Ou_FBmQkKdtClzBrzQA9IDx3XIRw5UCOwDpX9lbYyqY3Y5W8c
+Message-ID: <CAFzAbJHqnuV2vA-LPQy3xo1KesLUxJOCtS4FigsaZtaZEi19jQ@mail.gmail.com>
+To: Jason Gunthorpe <jgg@nvidia.com>
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzMxMDE0OCBTYWx0ZWRfX7ZSw3WwQpVk5
+ rMi48jQPdRsIGIYuYdWLJNZtuDrfdiqjFT+foriShqbTOgbE0Hxjk91ZPd4iinAOwufXt47APQr
+ YMk4mVhiRWvqvLx2mMVqRKccXKXLfxYH27KPl0ZpHxqIMeEG42bSnq42o4vhfmrKAkh1CboFKm/
+ yw/n5buJxn2K72m5Ojz6M/vis/H93mTd6Z7A8mRdUKVC9uV91OAoKVtlgW0JkCz+9apS+V/mUvt
+ ctAmGVBL570qeBLrlmhfS26W8DPuYQ06DzsIy2i6tMvmVjs1BhB+qjL08yUwiAGs1y6n72d86OM
+ HTrbNOVMCEkOe3W3UlKHxHOfFk4aPrG0h04zCs08rGgZCM+FbHFLyxaQ0RFVNVGIp2msqKz+re6
+ OURGyrGRJ59kuyV0WUJEfVtqnGbrV/FpkPh9xOhewfBIP8hUBPtPVgnW+PjxELmOA6Vhaq0TB1I
+ KIstUlfOuh+imwCwPaw==
+X-Proofpoint-GUID: yENOtYkG2pOF0TNpwoB4oYgMKp2jHFzR
+X-Proofpoint-ORIG-GUID: yENOtYkG2pOF0TNpwoB4oYgMKp2jHFzR
+X-Authority-Analysis: v=2.4 cv=UM7Q3Sfy c=1 sm=1 tr=0 ts=69cbe727 cx=c_pps
+ a=CWtnpBpaoqyeOyNyJ5EW7Q==:117 a=IkcTkHD0fZMA:10 a=Yq5XynenixoA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=7x6HtfJdh03M6CCDgxCd:22 a=kkcUborcUVj0H7zxAXTl:22
+ a=Ikd4Dj_1AAAA:8 a=scxTcjKw9OI2Du0FDOwA:9 a=QEXdDO2ut3YA:10 a=ZXulRonScM0A:10
+ a=vh23qwtRXIYOdz9xvnmn:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-03-31_03,2026-03-31_01,2025-10-01_01
+X-Spamd-Bar: -----
+X-MailFrom: prvs=25502be513=mattev@meta.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, iommu@lists.linux.dev, linux-media@vger.kernel.org, sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, Brian.Starkey@arm.com, jstultz@google.com, tjmercier@google.com, christian.koenig@amd.com, robin.murphy@arm.com, leon@kernel.org, sean.anderson@linux.dev, ptesarik@suse.com, catalin.marinas@arm.com, aneesh.kumar@kernel.org, suzuki.poulose@arm.com, steven.price@arm.com, thomas.lendacky@amd.com, john.allen@amd.com, ashish.kalra@amd.com, suravee.suthikulpanit@amd.com, linux-coco@lists.linux.dev
+Message-ID-Hash: DWWF42JV5RXHFWM6JIFMQYXXXIHQ6WTB
+X-Message-ID-Hash: DWWF42JV5RXHFWM6JIFMQYXXXIHQ6WTB
+X-Mailman-Approved-At: Mon, 20 Apr 2026 17:33:36 +0000
+CC: Alex Williamson <alex@shazbot.org>, Leon Romanovsky <leon@kernel.org>, Alex Mastro <amastro@fb.com>, Mahmoud Adam <mngyadam@amazon.de>, David Matlack <dmatlack@google.com>, =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Kevin Tian <kevin.tian@intel.com>, Ankit Agrawal <ankita@nvidia.com>, Pranjal Shrivastava <praan@google.com>, Alistair Popple <apopple@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v5 2/2] dma-buf: heaps: system: add system_cc_shared heap for explicitly shared memory
+Subject: [Linaro-mm-sig] Re: [RFC v2 PATCH 09/10] vfio/pci: Add mmap() attributes to DMABUF feature
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DDWAB3GC5ZGIKEPF6SYCTPGTYAZWTGOX/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DWWF42JV5RXHFWM6JIFMQYXXXIHQ6WTB/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [3.49 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[nvidia.com : SPF not aligned (relaxed),reject];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
-	R_DKIM_REJECT(1.00)[Nvidia.com:s=selector2];
-	MAILLIST(-0.20)[mailman];
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+X-Spamd-Result: default: False [4.59 / 15.00];
+	DMARC_POLICY_REJECT(2.00)[meta.com : SPF not aligned (relaxed),reject];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:google.com:reject}];
+	R_DKIM_REJECT(1.00)[meta.com:s=s2048-2025-q2];
+	DATE_IN_PAST(1.00)[482];
 	R_SPF_ALLOW(-0.20)[+mx:c];
+	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
+	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[19];
+	MIME_TRACE(0.00)[0:+];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_THREE(0.00)[4];
-	RCPT_COUNT_TWELVE(0.00)[24];
-	DKIM_TRACE(0.00)[Nvidia.com:-];
-	MISSING_XM_UA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jgg@nvidia.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
+	GREYLIST(0.00)[pass,meta];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.938];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	MID_RHS_MATCH_FROM(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[mattev@meta.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[meta.com:-];
+	NEURAL_HAM(-0.00)[-0.831];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,nvidia.com:mid,linaro.org:email]
-X-Rspamd-Queue-Id: 8519236B719
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email,nvidia.com:email]
+X-Rspamd-Queue-Id: 0A548431819
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Wed, Mar 25, 2026 at 08:23:52PM +0100, Jiri Pirko wrote:
-> From: Jiri Pirko <jiri@nvidia.com>
-> 
-> Add a new "system_cc_shared" dma-buf heap to allow userspace to
-> allocate shared (decrypted) memory for confidential computing (CoCo)
-> VMs.
-> 
-> On CoCo VMs, guest memory is private by default. The hardware uses an
-> encryption bit in page table entries (C-bit on AMD SEV, "shared" bit on
-> Intel TDX) to control whether a given memory access is private or
-> shared. The kernel's direct map is set up as private,
-> so pages returned by alloc_pages() are private in the direct map
-> by default. To make this memory usable for devices that do not support
-> DMA to private memory (no TDISP support), it has to be explicitly
-> shared. A couple of things are needed to properly handle
-> shared memory for the dma-buf use case:
-> 
-> - set_memory_decrypted() on the direct map after allocation:
->   Besides clearing the encryption bit in the direct map PTEs, this
->   also notifies the hypervisor about the page state change. On free,
->   the inverse set_memory_encrypted() must be called before returning
->   pages to the allocator. If re-encryption fails, pages
->   are intentionally leaked to prevent shared memory from being
->   reused as private.
-> 
-> - pgprot_decrypted() for userspace and kernel virtual mappings:
->   Any new mapping of the shared pages, be it to userspace via
->   mmap or to kernel vmalloc space via vmap, creates PTEs independent
->   of the direct map. These must also have the encryption bit cleared,
->   otherwise accesses through them would see encrypted (garbage) data.
-> 
-> - DMA_ATTR_CC_SHARED for DMA mapping:
->   Since the pages are already shared, the DMA API needs to be
->   informed via DMA_ATTR_CC_SHARED so it can map them correctly
->   as unencrypted for device access.
-> 
-> On non-CoCo VMs, the system_cc_shared heap is not registered
-> to prevent misuse by userspace that does not understand
-> the security implications of explicitly shared memory.
-> 
-> Signed-off-by: Jiri Pirko <jiri@nvidia.com>
-> ---
-> v4->v5:
-> - bools renamed: s/decrypted/cc_decrypted/
-> - other renames: s/decrypted/decrypted/ - this included name of the heap
-> v2->v3:
-> - removed couple of leftovers from headers
-> v1->v2:
-> - fixed build errors on s390 by including mem_encrypt.h
-> - converted system heap flag implementation to a separate heap
-> ---
->  drivers/dma-buf/heaps/system_heap.c | 103 ++++++++++++++++++++++++++--
->  1 file changed, 98 insertions(+), 5 deletions(-)
-
-Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
-
-Jason
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+SEkgSmFzb24sDQoNCk9uIE1vbiwgTWFyIDMwLCAyMDI2IGF0IDI6MzPigK9QTSBKYXNvbiBHdW50
+aG9ycGUgPGpnZ0BudmlkaWEuY29tPiB3cm90ZToNCj4NCj4gT24gVGh1LCBNYXIgMTIsIDIwMjYg
+YXQgMTE6NDY6MDdBTSAtMDcwMCwgTWF0dCBFdmFucyB3cm90ZToNCj4gPiBBIG5ldyBmaWVsZCBp
+cyByZXNlcnZlZCBpbiB2ZmlvX2RldmljZV9mZWF0dXJlX2RtYV9idWYuZmxhZ3MgdG8NCj4gPiBy
+ZXF1ZXN0IENQVS1mYWNpbmcgbWVtb3J5IHR5cGUgYXR0cmlidXRlcyBmb3IgbW1hcCgpcyBvZiB0
+aGUgYnVmZmVyLg0KPiA+IEFkZCBhIGZsYWcgVkZJT19ERVZJQ0VfRkVBVFVSRV9ETUFfQlVGX0FU
+VFJfV0MsIHdoaWNoIHJlc3VsdHMgaW4gV0MNCj4gPiBQVEVzIGZvciB0aGUgRE1BQlVGJ3MgQkFS
+IHJlZ2lvbi4NCj4NCj4gVGhpcyBzZWVtcyB2ZXJ5IHN0cmFpZ2h0Zm9yd2FyZCwgSSBsaWtlIGl0
+DQo+DQo+IERpZCBJIGdldCBpdCByaWdodCB0aGF0IHRoZSBpZGVhIGlzIHRoZSB1c2VyIHdvdWxk
+IHJlcXVlc3QgYSBkbWFidWYNCj4gd2l0aCB0aGVzZSBmbGFncyBhbmQgdGhlbiBtbWFwIHRoZSBk
+bWFidWY/DQoNClJpZ2h0LCBleHBvcnQgaXQgd2l0aCBhIHJlcXVlc3RlZCBhdHRyaWJ1dGUgKGFz
+IHBvc3NpYmx5IHNvbWUNCnN1Yi1zbGljZShzKSBvZiBhIGxhcmdlciBCQVIgaWYgeW91IGxpa2Up
+IGFuZCB0aGVuIG1hcCBpdCAobm8NCmF0dHJpYnV0ZXMgbmVlZCB0byBiZSBzcGVjaWZpZWQgYXQg
+bW1hcCgpIHRpbWUpLg0KDQpUaGFua3MsDQoNCk1hdHQNCl9fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxp
+bmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWls
+IHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
