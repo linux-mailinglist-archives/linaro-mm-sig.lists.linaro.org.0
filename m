@@ -2,149 +2,333 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id IEJaG6Bj5mkKvwEAu9opvQ
+	id WBa2CKZj5mkKvwEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:34:24 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:34:30 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id D9F9D4317A2
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:34:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 781D04317B3
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:34:29 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DD8B7404D4
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:34:22 +0000 (UTC)
-Received: from mail-ot1-f47.google.com (mail-ot1-f47.google.com [209.85.210.47])
-	by lists.linaro.org (Postfix) with ESMTPS id 30E963F719
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 31 Mar 2026 05:00:14 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 2646C404EC
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:34:28 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.11])
+	by lists.linaro.org (Postfix) with ESMTPS id 2D0623F7B6
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 31 Mar 2026 05:45:54 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=LnIe95ca;
-	dmarc=pass (policy=none) header.from=gmail.com;
-	spf=pass (lists.linaro.org: domain of mikhail.v.gavrilov@gmail.com designates 209.85.210.47 as permitted sender) smtp.mailfrom=mikhail.v.gavrilov@gmail.com;
-	arc=pass ("google.com:s=arc-20240605:i=1")
-Received: by mail-ot1-f47.google.com with SMTP id 46e09a7af769-7d4c383f2fcso5030634a34.0
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 30 Mar 2026 22:00:14 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1774933213; cv=none;
-        d=google.com; s=arc-20240605;
-        b=bNtM3ZR0sWjEiolq+jMk2lBK/yB0ZPW8nqUcraNEL5xGTQJNlj6MxNsfXoRZNsTkqw
-         VfLPqWgE4XVAZNCz5UmgLkugW6zSCRZYWaLICAYSEpAvg8KorQsCGP9FHtQnkklMcfk3
-         XgEIe2w8INLV/tBv5zBo2g0CbE9enz86miCjkMnCPmgS09fGGwfOP9jY3lH0VJbRrtL5
-         jhnCVNu/dGTuLOJD3wdezy7A76W/sP+FfNN52Gal4lgAnPXuRfztKk41KzmfNIa5DHyB
-         w5ZeYKq3yfvk0+9hr/5mK6pE1C8olsK9hrExLZ/LtEIb/5GDNNvuDQHEZZvWAeE7Mql1
-         TMJg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=qn9GR33IpU25pLfXu1OSUX8rRbknNQbsON2unRJuEZI=;
-        fh=G8dFPvF91y03Mi5uyJCoeog0+AoUrzfMjsgVrwlF2Zs=;
-        b=ZLJuW4YF9Ec5yC1DX2Rb2c8VGl6vJBVLiUJbQIUJacbdb/5WVcFr2vDCwUHyO3G2J5
-         DpNfKdZdUyIpmcCI7QtXjHBdFfKkS0+2UC3eVXOc9+ozby7HTnobuQXQJQjD1pMsraa5
-         c1hOjF1ufRYudlE0u7yURZZgXvI909rsYhvhJN2YY13DuQGk5m2nRA+UPqo78pTwzbD/
-         3w1PaZ4G/5hwFLDjyPonU/w9D70acXz+s2VlAqSMQmYM0bCbtNUFt+7BruR4oZIf8eSg
-         47bez1asjGnUvH0PQMFZuxONgPGFcn7KXTNop00gOLgjrrSJNpyp+uFXYgOIJlrdCpbl
-         7ZnA==;
-        darn=lists.linaro.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1774933213; x=1775538013; darn=lists.linaro.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=qn9GR33IpU25pLfXu1OSUX8rRbknNQbsON2unRJuEZI=;
-        b=LnIe95ca8HbEgBgqJ+2pQCcyvMebh81pq60ELU5f8k/U1aNtjuBbdzjo9eB/ph3bHL
-         xOrIuBJ6C4CWIPaHF2VZvNFeYjuAjffxxCSHwoAQU7f2uByatMimCxRjDMaIXE1sPbjb
-         bOLvfIU1MdN+1o9ky0W9srEWqNCGjDBiigiWOt0bbnXLOh4SJD4dGkis/7hIpJ+Flpsd
-         EYtVDRASqPENHzya7ELu5iXEKRsMwr5vQBH/PF8xHEw0GgJh+UIO9eBAGQzxs2q/g2/L
-         r+MUlSJvxL//V6wn490rlusxZxABn0vhFkYcqpsY7FBlqY1TvydXH3IJwefOQ1O1m8W5
-         LZ3Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774933213; x=1775538013;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=qn9GR33IpU25pLfXu1OSUX8rRbknNQbsON2unRJuEZI=;
-        b=phYN6WfM0l0PENfoWka3C+L2FNyWsj03PJKZM5BavPLq4ghWv3XSeqpIydRpjSOqa3
-         6uPF0rgJZKZ0TcTjXbsabZIlPp8O7KTVfRSHyu0gpwsuJRi+8qi0DDurDcSmKOn5+Rez
-         uVpGATcqWQ82gEuYnSfEYTbJHJzOkrXG61r1YSUjiVW6bdTJcGUirIxRKQbBWQbrDs2f
-         Qchl30j2g/ymzwjsHJBA1H0Zb8PI/i6HdtLAcvQYsN1IetbqzrMhzHl8E95yRjt9rq+k
-         Xkc0mJqP9BioLiUZcy9OfuP6PbrkEYNBJ1x8TvZ1WK0f9Xs9OjKwxqJlTPp+y05amAKJ
-         yWJw==
-X-Forwarded-Encrypted: i=1; AJvYcCWsPooPCpFrBSlJ1cP+yNwGe3J0OnyECF+VKI4XuPmx8k9pdkv5du+vnEsXug8fz1eE0zRjkOj7ASQ3FrzU@lists.linaro.org
-X-Gm-Message-State: AOJu0YyAXK4EmmbNU2MrqwU69+WTZZOg+yyVrLNk3SWwoG3CLwxGV7cS
-	5hJ1bHwHGw3Rum7/FONoiWKx3xIpwIL5Nw339rbZ4wnTTclzceaWOzdsd/6xzdQNoFzLyISixSM
-	Cmzp/dh7M/wiA1wEmVXEKMbRSMMqbbPg=
-X-Gm-Gg: ATEYQzw02i6XazuLPJSeeuGMYFDaCK3UgTsdc2G/3U7/PfGMmNOyEWp8oueCg7P5E/H
-	i+AGbhbSz7HlgoW64AOicIwepTnmjEPJ5jOmMKEBNNdVP4vXOWJq2e2Vv3V5MuT3EmscfT8NHi+
-	/A0mNuJ38gi0KOVUlwZx2/Ig24NeLhc1sTMPgE8JQqDACvW6FF8Ey85YIoOj/Z0cZ9Kf1ScnJGw
-	0FYWfOT4tOsBHLb5o5dA5HmtC4rjpXPldP9wVYcoQteDOMR07Zu/QNW/jNv87kA83L0aNTALPZf
-	zV5EwrMoW8s7QV36/3e9
-X-Received: by 2002:a05:6830:82a9:b0:7d7:455d:1003 with SMTP id
- 46e09a7af769-7d9fad9b3d5mr8646097a34.4.1774933213062; Mon, 30 Mar 2026
- 22:00:13 -0700 (PDT)
+	dkim=pass header.d=intel.com header.s=Intel header.b=hP09MKsw;
+	dmarc=pass (policy=none) header.from=intel.com;
+	spf=pass (lists.linaro.org: domain of vivek.kasireddy@intel.com designates 198.175.65.11 as permitted sender) smtp.mailfrom=vivek.kasireddy@intel.com;
+	arc=reject ("signature check failed: fail, {[1] = sig:microsoft.com:reject}")
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1774935954; x=1806471954;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=aXE0CpbYes/W+0ZtH5oeAj7NTgMzQIO07JOLh04J7Eg=;
+  b=hP09MKswE0m21Kg6FTcZjL+Nym83TB1OOBoAYjp7HfWfiNSScodzHrml
+   9ORL/9jyreT2WsaeRBiFyT2tCTWwm5Ms8+Fb+qI9bTtqzGmxeAHx7uraX
+   aPt1Egl2RHumSFKrPEpGVxG8ztlS4HLYXHIRDk8Nzc8CNjI3AE/89/cS7
+   DpTOjz8pCgoyeRbmFo9HYyD2beFIU7a74cJhdO3AAR6rb+v0O1e2wCa7I
+   MQ8KTZHC2KhQzU4gsXnz2zBJzmKJCGKO0ABiwloqUG4fgKh9QIate/qYm
+   UE80MGfenJ1bbzw53JNvbz0z/LfMDa4hMiKYKwvn8CmEnE3BwITcooA+2
+   w==;
+X-CSE-ConnectionGUID: GPvuwvDRTV2cP/pXy5paOQ==
+X-CSE-MsgGUID: xmgbZUDRQ/GzxgTbza2oHQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11744"; a="86237742"
+X-IronPort-AV: E=Sophos;i="6.23,151,1770624000";
+   d="scan'208";a="86237742"
+Received: from fmviesa005.fm.intel.com ([10.60.135.145])
+  by orvoesa103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Mar 2026 22:45:53 -0700
+X-CSE-ConnectionGUID: rHOBO5aZTqma4bkqUkMA0Q==
+X-CSE-MsgGUID: tDS0BX+4Tqyt/rTaJbbNUg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.23,151,1770624000";
+   d="scan'208";a="231074161"
+Received: from fmsmsx903.amr.corp.intel.com ([10.18.126.92])
+  by fmviesa005.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Mar 2026 22:45:52 -0700
+Received: from FMSMSX903.amr.corp.intel.com (10.18.126.92) by
+ fmsmsx903.amr.corp.intel.com (10.18.126.92) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.37; Mon, 30 Mar 2026 22:45:51 -0700
+Received: from fmsedg903.ED.cps.intel.com (10.1.192.145) by
+ FMSMSX903.amr.corp.intel.com (10.18.126.92) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.37 via Frontend Transport; Mon, 30 Mar 2026 22:45:51 -0700
+Received: from PH0PR06CU001.outbound.protection.outlook.com (40.107.208.20) by
+ edgegateway.intel.com (192.55.55.83) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.37; Mon, 30 Mar 2026 22:45:50 -0700
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ImC/biVQQ/4Dm6Lk+dlGuSWjJlEjLVvPH+RrBNz8MW62a3cECUChAbEVD98a1qefZtx9nNYgKxK/ska2StqKuHBM8kHfcMNLKtc112ItH2FlnoYFVxHrkvIHrSQA5FWXDBIZcxjYYwT1H2yhzfW4vRPuTrmCXrWhsDmgVxDZxNrv9whXt95Pd6AOkjvyDa4SCLsv4RKFA2a+MVI5xRD71QLR73BpBgLDXT41c9GVs5vGBF5JYYYf6h9EdSUQqQmiWQy2J0hxWGxc9oZJi8OW8RIWi4i9VWHOUPB6HUdNt5BM+5EzqfCwH/hQwsq9xpHRyRlbiiIuaTBgeh5GZ/BOAQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=AcobNwfQ1bzpDKAKuSLZPGJ7WaSwgJnmqV7EC4lKw5g=;
+ b=E3CB1SgVyHRgCNXjfGM7HRwJwk7IvJ1uBW43SyeB9ygOyHLP9fTb96uzV5phxdONxoJ6nW+yHqFimxDGdKW8ro38tI8kuYO5uKgcaWUFzz/4ywnjksrraXUdOifxuS98ATyNvqUxBTLahdEfqavcJLa66Wo6hyD2aHVAA41nxpRn9FY7lVj+1oAQD6wUK5VTkPSZhYkVbHK4aNT704MXozRzOyMkJQju6SJT/A1tXyN/7hqT8eNLhSzU8Z2BDK3rwWBd5eykIo9HM5LsTeb9k/nXU6U4JEV7JdKTbyOBfbUjpFP6XCiO7v3f16x9GnGC121N0WAPRTVXcTlFVFK/pQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Received: from IA0PR11MB7185.namprd11.prod.outlook.com (2603:10b6:208:432::20)
+ by MW4PR11MB5821.namprd11.prod.outlook.com (2603:10b6:303:184::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.6; Tue, 31 Mar
+ 2026 05:45:47 +0000
+Received: from IA0PR11MB7185.namprd11.prod.outlook.com
+ ([fe80::9f37:cb81:5463:300e]) by IA0PR11MB7185.namprd11.prod.outlook.com
+ ([fe80::9f37:cb81:5463:300e%5]) with mapi id 15.20.9769.014; Tue, 31 Mar 2026
+ 05:45:47 +0000
+From: "Kasireddy, Vivek" <vivek.kasireddy@intel.com>
+To: Mikhail Gavrilov <mikhail.v.gavrilov@gmail.com>, "kraxel@redhat.com"
+	<kraxel@redhat.com>
+Thread-Topic: [PATCH] dma-buf/udmabuf: skip redundant cpu sync to fix
+ cacheline EEXIST warning
+Thread-Index: AQHctdAdEiBcXRZXdE6KpMVNKEWqyrXCf4OAgABYNKCABRKr0A==
+Date: Tue, 31 Mar 2026 05:45:47 +0000
+Message-ID: <IA0PR11MB7185A3652480207665640553F853A@IA0PR11MB7185.namprd11.prod.outlook.com>
+References: <20260317053653.28888-1-mikhail.v.gavrilov@gmail.com>
+ <CABXGCsOCjQQ65uO3c8DFGx+ErLtn9jSVnktb3MgVdHRfU2pbVw@mail.gmail.com>
+ <IA0PR11MB7185CCB08BE83F37DC239EF2F855A@IA0PR11MB7185.namprd11.prod.outlook.com>
+In-Reply-To: <IA0PR11MB7185CCB08BE83F37DC239EF2F855A@IA0PR11MB7185.namprd11.prod.outlook.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: IA0PR11MB7185:EE_|MW4PR11MB5821:EE_
+x-ms-office365-filtering-correlation-id: b91c99fc-bdff-4321-1a66-08de8ee8c21e
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;ARA:13230040|366016|1800799024|376014|38070700021|18002099003|56012099003|22082099003;
+x-microsoft-antispam-message-info: zPne0Zg9QV8aGcuDrEmlXYNjyOT5KE0dwwLg12+ltOr8pt81tSs8oM2j3z0CBaCdfneXdc3QROjLoiwkzW5USqW5dvvNmveU6taB9InLuFlJQI8nFIhWreUL/u4NjBQDZnK5zx2MUfnfAYCKNrwrAiCf+L+kHylE7IHQQjlqNzPdVX5aifSVCwKeZRCEGpO+P6Rlf5EF7M/w/N9cKOhufJUbsz/Q3wB6KY5X8tBBpJG0jwVvuxqSwFDUwO27WGOwqme1im7TU/676aOpN118MfK870iRkmmyI9EfPhau0KM7eId9eZhbLkjLpXJD3ME+Qdk8bLivICwxzXTk3JXCo/KC0wDJ+1X3/phK0nvPGSoaFzenPvgouDzmZr0jgSMMhwqF/XRcaHpjlw/a91bZxuFYrFkb0+Ms5QEu2i0c/6QHlGRQX7goV8Ywk0Sgc8pIIW/GPohrslo2nCJchG0eV8l0RrvmMuDARaMGccFKa8hiy6Rqgq7YK4zQJbWEwI6toUorKzj7oL90Qnr2mRSW0hkXLB/NcKaQ1pF5vlDko++H7li8jBKrMl9bqbmUqeM+75BxdtvGnbSnUePuqfijjr7gLmXXwTQ/jAjHxvmbYCPLb93bap0OVcetaeMkFP5MgXlfpkooa35wvxOtBr95UaqY2bVMqiCqss9gVvuEN1fgApT9/5VbMVG13lGTN9dCV477woMi63aVu3uQkQWVb4r5UsgaORjngunfpFNoXmxBw8WB4Zo+YRqkSOku1IZD
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA0PR11MB7185.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(38070700021)(18002099003)(56012099003)(22082099003);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?A7FGSYm3e8UdrOOJarfmZ/OMfyPv7St+WBET+T16vcmF2UMXmLyFlYg4okGC?=
+ =?us-ascii?Q?MMwcpwqg523cCyx4SPtzVuTGA7xm9BkJo4zZQ6XRJF55rICBwFvUdQncxKEJ?=
+ =?us-ascii?Q?WhOC4L/p0brk/XeJFx3ZMbm0AxaKxyDolkm2okqOx/5HepohuDz2LIObyL4D?=
+ =?us-ascii?Q?PBhsUxhyhDONj9yt4mDS7FxpfdNNSX0xG/vvuGy2IYjvCZR9zY8pV6oEj+6h?=
+ =?us-ascii?Q?DdyOt1yGpzni/bLftSfmkDY+pEA2XkoKkJ0GMfW/lkv+Rj9yBn3l5bVmsJV6?=
+ =?us-ascii?Q?JeV6ikD/TNgGEyHjKJ9VEuAigFD5Cea2mUMforQfgDYVvk0y/BMFu6PtvGGG?=
+ =?us-ascii?Q?VdDbNgwqFFA03Drd1L+qpkvB/ObO4Ll2LavffRwG19siCmNdcMMAaqrgEi+0?=
+ =?us-ascii?Q?SftCGBeXUzh9era8zhi+U1fQDRdiqZ4TNcy0owB3qj4uTmm5iz3cFM4pyulH?=
+ =?us-ascii?Q?KpyBOLfdWlyOm1oZyLWTgloQMu8TnxE7XL3lh5LVdrMV+1r6ehTTSqr8udRp?=
+ =?us-ascii?Q?PXcGfhgW+r+t6EGRgeG7h5DaNZCBMMgahqpxWxbej8UezvpPI3kWKMvwWEf7?=
+ =?us-ascii?Q?1ZexSjbIaoNYXMri+nFXjetFl8kve1g69xPLmKr81yLFzv4oBKqojjZWw6sV?=
+ =?us-ascii?Q?wtlgamB33wxoK/1YQ2jqSyxpBDrrs0Hepq9eXpC46j3qARX1F9NvKTB2KZEq?=
+ =?us-ascii?Q?ltBEgU9LbfVKABo3RvAI/DUTko6qfJDtE2HT6dgADYxO/UGoDjTrlthRMIpK?=
+ =?us-ascii?Q?4D3QIRgKiEv7qv4svumIxzRh7QlMEFx3bmPNHaiNPNKDQlRsx51JkR9xn0gJ?=
+ =?us-ascii?Q?1PvKTCXD/S4Lx7i0yRy+p0VqMAJaAY6ejHe/pqhNndwfZIRDrj0hGZSUtwwp?=
+ =?us-ascii?Q?+TeTdqz+WB7KpiqvXOWM1UTblAlSrsHvZM+21maY5k8+VOfZOOCV9lLJNYzz?=
+ =?us-ascii?Q?dvLxwU+zmuSfJojT33w1eEqENeiAo+9rK9bAkA8c6pQByJHnQYkTGwOOIWF2?=
+ =?us-ascii?Q?eXvSPx9tT0uYxMboErvrpJgNeXcvI8P7Tsevxn6ap6cMXgVGHzzJQanpzRyC?=
+ =?us-ascii?Q?Z9aV7tkxYfxP0y4EWOqdTdSLgSDr6DJFMGcNYTWHJUO5d512QtL2A+PGDy4p?=
+ =?us-ascii?Q?qNPsC5BMUfCWTHj4D/LzySbS7kbioHX/WJnOp2YgxxCZBnDCh8Ywa2lcQa+8?=
+ =?us-ascii?Q?wuxHizb/DtvpUmdW83pYaY8I4yi1IUl7HXNBE1gkQk3wG9PN68WG6wEjBAh1?=
+ =?us-ascii?Q?95buvNYY+S2zcB4Oijxo4AB/i+q0JrdF4p3IuNibu3Xym2E86ji1K4l/lh+o?=
+ =?us-ascii?Q?M1AxBQ7ZqJtxDy0chtDt2FWWQ4sGFf1L0teLuvy4WioZ5ByI0BX/bhZUF3iw?=
+ =?us-ascii?Q?qenGwb9sM07+ruADt3RId9/GiToBu7MK3s+51keqRLaDTphslQHdlJqmfwGQ?=
+ =?us-ascii?Q?VNCO4PHAcg9Sjod4B8ubGa9PQQCCe8zKY6yfk2zV0tz94AEwrZnn0CiRz5S0?=
+ =?us-ascii?Q?bguyP97sFCq+rhNM/PvPzIi98/QjnOht6UEYDfBDLYujF+kNjJeOWkeAuqsk?=
+ =?us-ascii?Q?DJGf/iu/vujNlKOQHcCkfqLe7GYFmgOSZM4PZvhOHdJZjaGhDviOG4RJiPur?=
+ =?us-ascii?Q?MwsuFDrlLEKliH+wCmv+Xy/uNerR+aHsR+8OYeKFEH7Hl+G6OMENYRB1/G9Q?=
+ =?us-ascii?Q?L0oqxwLzmL/pBYp3EgTRERzGDFyNIktA4jawcRBQtZJBJOjfrAqA+n+X/6Vk?=
+ =?us-ascii?Q?N2+OIW0hrg=3D=3D?=
+Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
-References: <20260314232722.15555-1-mikhail.v.gavrilov@gmail.com> <CH3PR11MB7177D5538C726029D80BA6CEF841A@CH3PR11MB7177.namprd11.prod.outlook.com>
-In-Reply-To: <CH3PR11MB7177D5538C726029D80BA6CEF841A@CH3PR11MB7177.namprd11.prod.outlook.com>
-From: Mikhail Gavrilov <mikhail.v.gavrilov@gmail.com>
-Date: Tue, 31 Mar 2026 10:00:01 +0500
-X-Gm-Features: AQROBzCwLvCBjKMjXnGlDUOQAPoq0K7FN6AFDT1twLET-_2xPEv2urT74LC2vBE
-Message-ID: <CABXGCsP+4pSyXHcOBokD5kSuVVa86xhjD+8OTy2woGavovhNKQ@mail.gmail.com>
-To: "Kasireddy, Vivek" <vivek.kasireddy@intel.com>
-X-Spamd-Bar: -----
-X-MailFrom: mikhail.v.gavrilov@gmail.com
+X-Exchange-RoutingPolicyChecked: EiC8qH4ioqCaiiUiziNDwNtjyTrn9GR0Xqr8dQcuWEDcuWQgWF4qvOE+60pa+5fQpm3cJJf7rjM0fDZUn2ebXWmEGcjesJaVS2nirFrTa2VBRrslBOy+vawTaEvHmb5N6UV3ao7UHqcI78tAatoTbjqEQFZTqKzqqLS1iOy7rLCR06QZLecZmTjocf7MfNgvOJAgZcSF7+sa+EJNGZ+M4LNpAIMNFhCC79YU3A46DNjyuStepHGmqcNLqG4kOsAMaoR3e1ULFgNwGbFEhtaar0Wvdd3K5HwJ8qpmD5QNvLfQ+B9PG0jbOhDR08Vbx0F3QRqcIz/gPj3Ub8r9PJ2R9g==
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: IA0PR11MB7185.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b91c99fc-bdff-4321-1a66-08de8ee8c21e
+X-MS-Exchange-CrossTenant-originalarrivaltime: 31 Mar 2026 05:45:47.3188
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: QxYXE+cCwZZS2c7ND9y+bU2GWVIKzKNBzCuZ7//4ETBdIvzJl1CkuyUYgWZXw5tcFX1ZaJshN/c51N73RzjcqiGX7PoLJdOFGOJbPXYWIdU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR11MB5821
+X-OriginatorOrg: intel.com
+X-Spamd-Bar: ------
+X-MailFrom: vivek.kasireddy@intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: I5HJAFEIU36NICQGN5QZCPPDFBHF5QU6
-X-Message-ID-Hash: I5HJAFEIU36NICQGN5QZCPPDFBHF5QU6
-X-Mailman-Approved-At: Mon, 20 Apr 2026 17:33:31 +0000
-CC: "kraxel@redhat.com" <kraxel@redhat.com>, "sumit.semwal@linaro.org" <sumit.semwal@linaro.org>, "christian.koenig@amd.com" <christian.koenig@amd.com>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "stable@vger.kernel.org" <stable@vger.kernel.org>
+Message-ID-Hash: LA5V7OHOH3W7J2XQWXKQSO3ZHBUYM42C
+X-Message-ID-Hash: LA5V7OHOH3W7J2XQWXKQSO3ZHBUYM42C
+X-Mailman-Approved-At: Mon, 20 Apr 2026 17:33:32 +0000
+CC: "sumit.semwal@linaro.org" <sumit.semwal@linaro.org>, "christian.koenig@amd.com" <christian.koenig@amd.com>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "stable@vger.kernel.org" <stable@vger.kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] udmabuf: fix DMA direction mismatch in release_udmabuf()
+Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf/udmabuf: skip redundant cpu sync to fix cacheline EEXIST warning
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/I5HJAFEIU36NICQGN5QZCPPDFBHF5QU6/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LA5V7OHOH3W7J2XQWXKQSO3ZHBUYM42C/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-X-Spamd-Result: default: False [1.69 / 15.00];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:google.com:reject}];
-	DATE_IN_PAST(1.00)[492];
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [4.09 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	R_DKIM_REJECT(1.00)[intel.com:s=Intel];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
+	DATE_IN_PAST(1.00)[491];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
-	MIME_BASE64_TEXT(0.10)[];
+	DMARC_POLICY_SOFTFAIL(0.10)[intel.com : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FROM_HAS_DN(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	FREEMAIL_TO(0.00)[gmail.com,redhat.com];
 	TO_DN_EQ_ADDR_SOME(0.00)[];
+	GREYLIST(0.00)[pass,meta];
 	TO_DN_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns];
+	DKIM_TRACE(0.00)[intel.com:-];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_SPAM(0.00)[0.770];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[mikhailvgavrilov@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	NEURAL_HAM(-0.00)[-0.407];
+	FROM_NEQ_ENVFROM(0.00)[vivek.kasireddy@intel.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[8];
+	RCPT_COUNT_SEVEN(0.00)[9];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,intel.com:email,mail.gmail.com:mid]
-X-Rspamd-Queue-Id: D9F9D4317A2
+	RCVD_COUNT_SEVEN(0.00)[9]
+X-Rspamd-Queue-Id: 781D04317B3
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-T24gVHVlLCBNYXIgMTcsIDIwMjYgYXQgMTA6NDLigK9BTSBLYXNpcmVkZHksIFZpdmVrDQo8dml2
-ZWsua2FzaXJlZGR5QGludGVsLmNvbT4gd3JvdGU6DQo+DQo+IFJldmlld2VkLWJ5OiBWaXZlayBL
-YXNpcmVkZHkgPHZpdmVrLmthc2lyZWRkeUBpbnRlbC5jb20+DQo+DQo+IFRoYW5rcywNCj4gVml2
-ZWsNCj4NCg0KSGkgR2VyZCwNCg0KR2VudGxlIHBpbmcgb24gdGhpcyBwYXRjaC4gSXQgaGFzIFZp
-dmVrJ3MgUmV2aWV3ZWQtYnkgYW5kIGZpeGVzIGENCkRNQS1BUEkgd2FybmluZyBwcmVzZW50IHNp
-bmNlIHY1LjUuDQoNCi0tIA0KQmVzdCBSZWdhcmRzLA0KTWlrZSBHYXZyaWxvdi4NCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFp
-bGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmli
-ZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+Hi Mikhail,
+
+> Subject: RE: [PATCH] dma-buf/udmabuf: skip redundant cpu sync to fix
+> cacheline EEXIST warning
+> 
+> > >
+> > > When CONFIG_DMA_API_DEBUG_SG is enabled, importing a udmabuf
+> > into a DRM
+> > > driver (e.g. amdgpu for video playback in GNOME Videos / Showtime)
+> > > triggers a spurious warning:
+> > >
+> > >   DMA-API: amdgpu 0000:03:00.0: cacheline tracking EEXIST, \
+> > >       overlapping mappings aren't supported
+> > >   WARNING: kernel/dma/debug.c:619 at add_dma_entry+0x473/0x5f0
+> > >
+> > > The call chain is:
+> > >
+> > >   amdgpu_cs_ioctl
+> > >    -> amdgpu_ttm_backend_bind
+> > >     -> dma_buf_map_attachment
+> > >      -> [udmabuf] map_udmabuf -> get_sg_table
+> > >       -> dma_map_sgtable(dev, sg, direction, 0)  // attrs=0
+> > >        -> debug_dma_map_sg -> add_dma_entry -> EEXIST
+> > >
+> > > This happens because udmabuf builds a per-page scatter-gather list
+> > via
+> > > sg_set_folio().  When begin_cpu_udmabuf() has already created an sg
+> > > table mapped for the misc device, and an importer such as amdgpu
+> > maps
+> > > the same pages for its own device via map_udmabuf(), the DMA
+> > debug
+> > > infrastructure sees two active mappings whose physical addresses
+> > share
+> > > cacheline boundaries and warns about the overlap.
+> > >
+> > > The DMA_ATTR_SKIP_CPU_SYNC flag suppresses this check in
+> > > add_dma_entry() because it signals that no CPU cache maintenance is
+> > > performed at map/unmap time, making the cacheline overlap
+> > harmless.
+> > >
+> > > All other major dma-buf exporters already pass this flag:
+> > >   - drm_gem_map_dma_buf() passes DMA_ATTR_SKIP_CPU_SYNC
+> > >   - amdgpu_dma_buf_map() passes DMA_ATTR_SKIP_CPU_SYNC
+> > >
+> > > The CPU sync at map/unmap time is also redundant for udmabuf:
+> > > begin_cpu_udmabuf() and end_cpu_udmabuf() already perform
+> > explicit
+> > > cache synchronization via dma_sync_sgtable_for_cpu/device() when
+> > CPU
+> > > access is requested through the dma-buf interface.
+> > >
+> > > Pass DMA_ATTR_SKIP_CPU_SYNC to dma_map_sgtable() and
+> > > dma_unmap_sgtable() in udmabuf to suppress the spurious warning
+> > and
+> > > skip the redundant sync.
+> > >
+> > > Fixes: 284562e1f348 ("udmabuf: implement
+> > begin_cpu_access/end_cpu_access hooks")
+> > > Cc: stable@vger.kernel.org
+> > > Signed-off-by: Mikhail Gavrilov <mikhail.v.gavrilov@gmail.com>
+> > > ---
+> > >  drivers/dma-buf/udmabuf.c | 4 ++--
+> > >  1 file changed, 2 insertions(+), 2 deletions(-)
+> > >
+> > > diff --git a/drivers/dma-buf/udmabuf.c b/drivers/dma-buf/udmabuf.c
+> > > index 94b8ecb892bb..9c6f8785a28a 100644
+> > > --- a/drivers/dma-buf/udmabuf.c
+> > > +++ b/drivers/dma-buf/udmabuf.c
+> > > @@ -162,7 +162,7 @@ static struct sg_table *get_sg_table(struct
+> > device *dev, struct dma_buf *buf,
+> > >                 sg_set_folio(sgl, ubuf->folios[i], PAGE_SIZE,
+> > >                              ubuf->offsets[i]);
+> > >
+> > > -       ret = dma_map_sgtable(dev, sg, direction, 0);
+> > > +       ret = dma_map_sgtable(dev, sg, direction,
+> > DMA_ATTR_SKIP_CPU_SYNC);
+> > >         if (ret < 0)
+> > >                 goto err_map;
+> > >         return sg;
+> > > @@ -177,7 +177,7 @@ static struct sg_table *get_sg_table(struct
+> > device *dev, struct dma_buf *buf,
+> > >  static void put_sg_table(struct device *dev, struct sg_table *sg,
+> > >                          enum dma_data_direction direction)
+> > >  {
+> > > -       dma_unmap_sgtable(dev, sg, direction, 0);
+> > > +       dma_unmap_sgtable(dev, sg, direction,
+> > DMA_ATTR_SKIP_CPU_SYNC);
+> > >         sg_free_table(sg);
+> > >         kfree(sg);
+> > >  }
+> > > --
+> > > 2.53.0
+> > >
+> >
+> > Gentle ping on this patch.
+> >
+> > To summarize the review so far:
+> >   Vivek: "Looks OK to me"
+> >   Christian: Acked-by
+> >
+> > Note: while my separate dma-debug patch [1] would also suppress
+> > this specific warning on x86, the udmabuf fix here is still
+> > valuable as it removes the redundant CPU sync at map/unmap time
+> > and aligns udmabuf with other dma-buf exporters that already
+> > pass DMA_ATTR_SKIP_CPU_SYNC.
+> >
+> > [1] https://lore.kernel.org/all/20260327124156.24820-1-
+> > mikhail.v.gavrilov@gmail.com/
+> >
+> > Gerd, could you take a look when you have a chance?
+> I am convinced that this patch is useful in some cases, so I'll add
+> Christian's
+> Ack and push it (into drm-misc-next) in a day or two.
+I ran into a merge conflict while applying this patch on top of other
+udmabuf patches. So, please resend this patch after rebasing on top
+of drm-tip:
+https://gitlab.freedesktop.org/drm/tip/-/commits/drm-tip?ref_type=HEADS
+
+Thanks,
+Vivek
+
+> 
+> Thanks,
+> Vivek
+> 
+> >
+> > --
+> > Best Regards,
+> > Mike Gavrilov.
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
