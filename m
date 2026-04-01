@@ -2,38 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id dPm3C7enzGlmVAYAu9opvQ
+	id lVz4CbenzGllVAYAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
 	for <lists+linaro-mm-sig@lfdr.de>; Wed, 01 Apr 2026 07:05:59 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id A608C374CFB
+	by mail.lfdr.de (Postfix) with ESMTPS id A069E374CFA
 	for <lists+linaro-mm-sig@lfdr.de>; Wed, 01 Apr 2026 07:05:58 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8D2034030E
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Apr 2026 04:58:10 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 39B384043A
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Apr 2026 04:58:46 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B8615401F0
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  1 Apr 2026 04:58:03 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 508843F735
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  1 Apr 2026 04:58:39 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: "Emma Stone" <emmastone@yzcalo.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Wed, 01 Apr 2026 04:58:03 -0000
-Message-ID: <177501948375.2742191.4041136418267145626@lists.linaro.org>
-In-Reply-To: <20260331150836.GB2308548@nvidia.com>
-References: <20260331150836.GB2308548@nvidia.com>
+Date: Wed, 01 Apr 2026 04:58:39 -0000
+Message-ID: <177501951932.2742461.7950851593424684206@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: 5NQWBAN2XWWAFIFD3ZKJ4VNBKZGD5X6I
-X-Message-ID-Hash: 5NQWBAN2XWWAFIFD3ZKJ4VNBKZGD5X6I
+Message-ID-Hash: 2O7R5MHIN2OUWOU5UV2FSQYYDGXJIF6X
+X-Message-ID-Hash: 2O7R5MHIN2OUWOU5UV2FSQYYDGXJIF6X
 X-MailFrom: emmastone@yzcalo.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v5 2/2] dma-buf: heaps: system: add system_cc_shared heap for explicitly shared memory
+Subject: [Linaro-mm-sig] Can I Safely Explore Leh Ladakh?
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5NQWBAN2XWWAFIFD3ZKJ4VNBKZGD5X6I/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2O7R5MHIN2OUWOU5UV2FSQYYDGXJIF6X/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -41,9 +39,10 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Transfer-Encoding: base64
-X-Spamd-Result: default: False [10.99 / 15.00];
-	ABUSE_SURBL(5.00)[yzcalo.com:email];
+X-Spamd-Result: default: False [11.99 / 15.00];
 	SPAM_FLAG(5.00)[];
+	ABUSE_SURBL(5.00)[yzcalo.com:email];
+	SUBJECT_ENDS_QUESTION(1.00)[];
 	MID_RHS_MATCH_TO(1.00)[];
 	MAILLIST(-0.20)[mailman];
 	MIME_BASE64_TEXT(0.10)[];
@@ -52,7 +51,7 @@ X-Spamd-Result: default: False [10.99 / 15.00];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	GREYLIST(0.00)[pass,body];
+	GREYLIST(0.00)[pass,meta];
 	RCVD_TLS_LAST(0.00)[];
 	ARC_NA(0.00)[];
 	RCPT_COUNT_ONE(0.00)[1];
@@ -69,8 +68,8 @@ X-Spamd-Result: default: False [10.99 / 15.00];
 	R_DKIM_NA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	R_SPF_ALLOW(0.00)[+mx];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:mid,yzcalo.com:email,linaro.org:email,indiahighlight.com:url]
-X-Rspamd-Queue-Id: A608C374CFB
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,yzcalo.com:email,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:mid,indiahighlight.com:url]
+X-Rspamd-Queue-Id: A069E374CFA
 X-Rspamd-Action: add header
 X-Rspamd-Server: lfdr
 X-Spam: Yes
