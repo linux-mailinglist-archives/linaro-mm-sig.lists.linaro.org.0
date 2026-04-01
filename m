@@ -2,298 +2,102 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id YPVeMspj5mkuvwEAu9opvQ
+	id dPm3C7enzGlmVAYAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:35:06 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 01 Apr 2026 07:05:59 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6FFF4431828
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:35:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A608C374CFB
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 01 Apr 2026 07:05:58 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7E830405CF
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:35:05 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.7])
-	by lists.linaro.org (Postfix) with ESMTPS id 377463F742
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  1 Apr 2026 01:15:40 +0000 (UTC)
-Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=WYlzQ12b;
-	dmarc=pass (policy=none) header.from=intel.com;
-	spf=pass (lists.linaro.org: domain of vivek.kasireddy@intel.com designates 192.198.163.7 as permitted sender) smtp.mailfrom=vivek.kasireddy@intel.com;
-	arc=reject ("signature check failed: fail, {[1] = sig:microsoft.com:reject}")
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1775006140; x=1806542140;
-  h=from:to:cc:subject:date:message-id:references:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=XGVPL6QExAQ5JKPqzN+AsOs9sg1Vzi8msCc2x+WZcpc=;
-  b=WYlzQ12byTPOsvKjU3t+GsXkmuVLLNiihGg5A7LEy7Jm4gLV+RI9WPA/
-   +0+vLQOPMU33jh8fwUMrIPUmKNWzxMgVlvWLcIaxhWqbtukcFUfVxhujL
-   g+YaZuc0VUgEZqWTNzUglwx0Qf5O1yTy62OOtBZsIdo3VIfA1FCmCyDYr
-   xPnJVnBj5H2drH6yIeiHPAl9Rw4AHD+77a3iU+1CmkRrXcetkGBs8bIA5
-   wUahoEL35hu0P/A1nwOYiENx95YPGXK+nJizCZ/QteCVHE6kloLT2vfiK
-   S+bs2JHDInfr6Adr6Ze3SEJ99izr5eEmjZB4TmWIFOQ2MyaAVGmjCdOFE
-   w==;
-X-CSE-ConnectionGUID: 35WlKwJaT0WGgk+9Cj1nPQ==
-X-CSE-MsgGUID: Bwj/2JvcR9+yA0O+RpjWdQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11745"; a="101487926"
-X-IronPort-AV: E=Sophos;i="6.23,152,1770624000";
-   d="scan'208";a="101487926"
-Received: from fmviesa003.fm.intel.com ([10.60.135.143])
-  by fmvoesa101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 31 Mar 2026 18:15:39 -0700
-X-CSE-ConnectionGUID: 9J1xutW5Q9Sz/82Rs2TPog==
-X-CSE-MsgGUID: Omj3ruPKQhKo8jVp0DOYxA==
-X-ExtLoop1: 1
-Received: from fmsmsx902.amr.corp.intel.com ([10.18.126.91])
-  by fmviesa003.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 31 Mar 2026 18:15:39 -0700
-Received: from FMSMSX903.amr.corp.intel.com (10.18.126.92) by
- fmsmsx902.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.37; Tue, 31 Mar 2026 18:15:38 -0700
-Received: from fmsedg903.ED.cps.intel.com (10.1.192.145) by
- FMSMSX903.amr.corp.intel.com (10.18.126.92) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.37 via Frontend Transport; Tue, 31 Mar 2026 18:15:38 -0700
-Received: from SJ2PR03CU001.outbound.protection.outlook.com (52.101.43.45) by
- edgegateway.intel.com (192.55.55.83) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.37; Tue, 31 Mar 2026 18:15:36 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=WNWpNFhL5Ye6abCIp0H0Bs1tiRR/DLch7KlSF6X9PT8V9wrDTJky74twbClZl8sH9ff/1YcZsK9u9EQDrdgNv7IKiLLurmohWm2iIssyP2PvRKLRVa6w8LzngZxPE6YQYau88QRgkAqToYuOqeO3SBvhm0lF82/wQN7MtMwnfRfY1ZYQ9U/WAtAxM9P0GbUfVZFCFdG0hXfCbFVvwhAAsoXoZnLITZYt4NGXf8x7r1RaGWN89S9WiP6owCdQS/FhAOq6GJDoz7s0KY2SvPGwflRgWiBD4dR4TETM52yodBcUHF2plzK/F2maf4+KN022tyixyeXHTmcJF5EKBKu7lA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Jkcueib8rEI8f+C+zEzpVAW+IGzDsguK00C9SV6uVMg=;
- b=EBEMthlyw6Z1wf1DrPLEgoU9iuuvlEwPrnbZk/NiZiE0lMKi9Xkh5eni8dqdfRVjVS+ibDtdBAug6yTOJmS22KnT5aLFfQT01839LaGckqO8oBDcv+82gqBaABQ67kyNklgriKeM4yAgItT0Gtb7QAVoSYByuzfBInEJxv5d/k/6sUWAZc51AE87kgPbfPc7ty+JfSG/n62uMIrrXAh/WZO1IwUKH0DZd9E8fnlXKGW0WK5InEFgocAMg2vFg8eUzrNf3kHYHc9ioDghlGn3ERFOV7Rt6cLffGJAABvjb0NfPP4ORrjeZibfNz9KFD3lFwonsGOW1mnJAXUvhUHEbg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Received: from IA0PR11MB7185.namprd11.prod.outlook.com (2603:10b6:208:432::20)
- by PH3PPF37A184CA6.namprd11.prod.outlook.com (2603:10b6:518:1::d15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.20; Wed, 1 Apr
- 2026 01:15:32 +0000
-Received: from IA0PR11MB7185.namprd11.prod.outlook.com
- ([fe80::9f37:cb81:5463:300e]) by IA0PR11MB7185.namprd11.prod.outlook.com
- ([fe80::9f37:cb81:5463:300e%5]) with mapi id 15.20.9769.014; Wed, 1 Apr 2026
- 01:15:32 +0000
-From: "Kasireddy, Vivek" <vivek.kasireddy@intel.com>
-To: Mikhail Gavrilov <mikhail.v.gavrilov@gmail.com>, "kraxel@redhat.com"
-	<kraxel@redhat.com>
-Thread-Topic: [PATCH v2] dma-buf/udmabuf: skip redundant cpu sync to fix
- cacheline EEXIST warning
-Thread-Index: AQHcwNYF9KroOjxdFkWXYGnE97XBWbXJBjIQ
-Date: Wed, 1 Apr 2026 01:15:32 +0000
-Message-ID: <IA0PR11MB718531C51736C57114D6DC2CF850A@IA0PR11MB7185.namprd11.prod.outlook.com>
-References: <20260331061657.79983-1-mikhail.v.gavrilov@gmail.com>
-In-Reply-To: <20260331061657.79983-1-mikhail.v.gavrilov@gmail.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: IA0PR11MB7185:EE_|PH3PPF37A184CA6:EE_
-x-ms-office365-filtering-correlation-id: 5a149c93-1021-415c-3386-08de8f8c2b8d
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;ARA:13230040|1800799024|376014|366016|38070700021|56012099003|22082099003|18002099003;
-x-microsoft-antispam-message-info: JlKImN6V9XE9iBtE0bhbjz6q3af5Mfh3CE+plBgimiE6x3Xm6iQa0k10JTz60prS5FGEnNy0foY+rTsoeg+2TBG5i6PenaFCkg3+VOOb+tsAzppls/Iq0jYjjqsL3W8/hvg0401ITpv9mItD4hg9UQJtEJGSFFBT5pq/n3yxUiAPegC01NcN0Xy47oycT0nJJZrXMqXQ6i/zNcGd7/Wx/LHlw31NkVJ0CABFNnqpTdK3MpMMCKh25arWv2l5+GzymCuD3RTrfpmB3iqUf/mjFCTd9ugwF0cGOTPExhjKADmQphOBXL4mMMrk+GhpkR4kxJyXzeZ4c5CkYRVX5hQ+lEWW0mY38NKWrrV8vbiKVrjv+N0sKQjsQWD/ofOOpKaI/RBCV5CtN28EhBsoKffjxPPwknaIh9otgBdlKloc1P2gCwq27XfYyCIjc4XiNKjJipJ8gzKdT/wZPTmHnWopWLB5f5eNZVLWIjX92NwfYxYhka0iAEfPgD3AuTWWbhjwDFKcv4FVdWOtrvCYtn07OX9JwjpnZJuphZIt1KbFhavTA1ydZrinEW8W9icIkkEQ+5Gns+UBMFHs8vJru3IodUz1o/x7xztVx8yNvjPb4Odn4GFPgdykGhQLmX8nUcGnfhE1b79tYD93Kaee2z6PlhqsHKUzSq3iKAh72Nj0ninnvRiZnMpZNuR177GxqMy92z6z8IUJZ13OGQTAVA79WvUPvQD4dRGRgbZtZh66FDDf7qGGcQScepNeGvdawmAsv8+DFmYhsQHA8JzVle3SAJmTrZcFzgYYzSG/ba+asjc=
-x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA0PR11MB7185.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(38070700021)(56012099003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?tvX9n0YPBAuPuV15UsOuBYXlA8uG3tUVO1l8v9BBkx3qwHeoULEIGaY9rwj/?=
- =?us-ascii?Q?JtJuAadhBvC8ygZScwrHmeUyTdRwpKOpFo9UAKC7M31b5WbU+XPeiL7JPZ2E?=
- =?us-ascii?Q?BrzlS6NBDGXy4Ms//Ao6ZPYPYOvBa21ZAy+D70eOUfrbnhbX/9oCz8gGRZvo?=
- =?us-ascii?Q?mHdgvHy65T9rnJYuPoMXkk291Bvg3j/X23BcU7WjcszYy9GzFwebUxnfWU0y?=
- =?us-ascii?Q?RbKWYSWPYzEJBkMqXRx2cUC8ZRhV2SZiYvPtmSV0yWONtpJknrKgfrso/Nrj?=
- =?us-ascii?Q?ZEvM686aY0a1yamJ+7wofX41Fx+8GIcxfCcW/gp217RqzFhVUDRHzngwY3+Y?=
- =?us-ascii?Q?9AsnPweg6FGB+/kGKSalI1sJ1AhOUtVrMMFOz2N64JS8cFV8LwLx3Rx6mMAg?=
- =?us-ascii?Q?wtlFhyZsROR0QCZCAwEvnnchW2MFuEDh7KJHHPI54O7ON1+hjhzd2CT2Gtu/?=
- =?us-ascii?Q?/nCjDZtPEqgqIZcx+fOiP3W2okjzqRy/KpiYdNBtn6qGJAK3JXfJDSa9Az2i?=
- =?us-ascii?Q?v7YtSS821IZbc+6B8mPuvd4LkHUJ78/wkf6z7fqtG7MPeDXmMxULlWtBbqMV?=
- =?us-ascii?Q?KRXb/5gZKGoAsd/GdcJJRTUDfE+w4rPVUPtQ0lIGaBDtmfle7b5vP2XPIa3j?=
- =?us-ascii?Q?tFsnTCVsO0uA40XPF20FyYc3uaJseexOMLtAdbUtb1ZuZpYH1Tu7YBOeycn2?=
- =?us-ascii?Q?h4GtNVL3W37/zc2vXiq7jvWyrrrSrfI7wnV0y2chsG2KYrb+TwyEDqmq+S9K?=
- =?us-ascii?Q?jiImiW7uWBcXPZGMt19pKM6ud7XywnI5j8wGMgoyIl6Wf/CE5hEjdMEvhSTd?=
- =?us-ascii?Q?PDcKWu9O43D5q4HnshyV3fKoiebmd2Bkpa/9htf1GW4yQUqQzE8NYADMR1hr?=
- =?us-ascii?Q?wgkF78j43rSxS67eMu8cJG114jrW1aeDj6mdgbXweDUH988dh+To/mYN0x1j?=
- =?us-ascii?Q?XkVxPRNbXsnUXMAzN05NEFEFQy7lmJiR/2MKglnT/B2oCFW92h+JQQZGaLmt?=
- =?us-ascii?Q?R5WHIWC90Efou+dQ/weM71o5UrE2T+GMsIMWqC9x0aEXCpzDXWHhtw3oChTN?=
- =?us-ascii?Q?CZLMsAxtp/RfDiw6lPuqi3+Mi2/JTuigeZVsQbS8oISQhG2DVGAzud+Jin04?=
- =?us-ascii?Q?sQfhesWClTCkLnQciQS+4AU61E38hMwZGRWR45TmDKu/2fL25v/l99RttnC9?=
- =?us-ascii?Q?Ig055aTRlidvzOXyzyc30ynGU9rm+bfU0LTPBXTrkzgaiO2yL9XIpOn8/cmP?=
- =?us-ascii?Q?u8ElseCW6Y15s/qffj7E/F6FN/Z9j3avefKK8HSbEmx+9eiunhrFyVyxYq1b?=
- =?us-ascii?Q?+o6iJr1vaL7JdKLRmvRlaQ9D4HGxKoRzDHxtP0LchCcilGsggDiWp6fyhq++?=
- =?us-ascii?Q?5useBFmek9ZD6SUpdYaVOvR4iwGt5exkihIFvLRT5QifqYKVl3fbhwqYTnQA?=
- =?us-ascii?Q?AQaUC2alc8WzCVn9N/qLfXb2qn+o6Jl3ybXXXHLa5m4tFmMo5UvKHUrrjg1E?=
- =?us-ascii?Q?KKugj08Y5AiuQNUKe3fJm8FADBUy0EL0G88Gl7dzuy+HGbfdK8axFOJwts8+?=
- =?us-ascii?Q?tTMsal5BUmuZi7VLNK5HQakPXcibrjrmPZwrwVnzASK8qRus8tMGUhW4Fh1s?=
- =?us-ascii?Q?ms5sDlRjQjVT1dcYGsGqiac9JEhJhANiiKZPLQpGnUDGDlTLgIeyfrsIv2QV?=
- =?us-ascii?Q?LymBySYoxXJWps9g/CCTpeYKy/aOgSDrwpExiFt9rGW2yE7MJ0P5KelBniks?=
- =?us-ascii?Q?DQQUlbeZig=3D=3D?=
-Content-Type: text/plain; charset="us-ascii"
+	by lists.linaro.org (Postfix) with ESMTP id 8D2034030E
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Apr 2026 04:58:10 +0000 (UTC)
+Received: from lists.linaro.org (localhost [127.0.0.1])
+	by lists.linaro.org (Postfix) with ESMTP id B8615401F0
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  1 Apr 2026 04:58:03 +0000 (UTC)
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-X-Exchange-RoutingPolicyChecked: FH4fahOzJw98R5758chkhmbHNbYWa5EagvePy6pBnjQSlnyTgTM9BxQWTQLmgupYpJvvfmLzVWqrsThCVpojqKUSFOwrdIS6dwBFvsRLQ2iIiWMytKXvtzGuR9qpyHZiNAMp0jejErpvsGV2zVRG5na+hVnvl5Kd2Pl6ZLXxX7cgaxmH5X7M8vhAGZ2BCZKAczoMziLToUbkM3wsLpfS8vX+8X4CWfliS2UwZnvFox2B4YmlQjlRLKHrUhlRMEQNHmqkZ7o+b1aoKIrUzvh/opwETyBuoguGre9hbCRlZwvfJWWTaSwuVhGBqSieRgoaMVkjsKqztzG5oGy3ANtiYw==
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: IA0PR11MB7185.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5a149c93-1021-415c-3386-08de8f8c2b8d
-X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Apr 2026 01:15:32.2016
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: Lksl2jHjByqjoSrJ0jMU0Swb3cqqB18JqkKfwD6KNVhGn7U2nLL0r4xnZrXUoQPrDq7V8eIb0j3jmxMUhxIBl7feUoTykHGiKu6n8vEfQg0=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH3PPF37A184CA6
-X-OriginatorOrg: intel.com
-X-Spamd-Bar: ------
-X-MailFrom: vivek.kasireddy@intel.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: HNCLBVE6KFWX5BVLLAGOL5INEQN34CIX
-X-Message-ID-Hash: HNCLBVE6KFWX5BVLLAGOL5INEQN34CIX
-X-Mailman-Approved-At: Mon, 20 Apr 2026 17:33:38 +0000
-CC: "sumit.semwal@linaro.org" <sumit.semwal@linaro.org>, "christian.koenig@amd.com" <christian.koenig@amd.com>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "stable@vger.kernel.org" <stable@vger.kernel.org>
+From: "Emma Stone" <emmastone@yzcalo.com>
+To: linaro-mm-sig@lists.linaro.org
+Date: Wed, 01 Apr 2026 04:58:03 -0000
+Message-ID: <177501948375.2742191.4041136418267145626@lists.linaro.org>
+In-Reply-To: <20260331150836.GB2308548@nvidia.com>
+References: <20260331150836.GB2308548@nvidia.com>
+User-Agent: HyperKitty on http://lists.linaro.org/
+Message-ID-Hash: 5NQWBAN2XWWAFIFD3ZKJ4VNBKZGD5X6I
+X-Message-ID-Hash: 5NQWBAN2XWWAFIFD3ZKJ4VNBKZGD5X6I
+X-MailFrom: emmastone@yzcalo.com
+X-Mailman-Rule-Hits: member-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2] dma-buf/udmabuf: skip redundant cpu sync to fix cacheline EEXIST warning
+Subject: [Linaro-mm-sig] Re: [PATCH v5 2/2] dma-buf: heaps: system: add system_cc_shared heap for explicitly shared memory
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HNCLBVE6KFWX5BVLLAGOL5INEQN34CIX/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5NQWBAN2XWWAFIFD3ZKJ4VNBKZGD5X6I/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [4.09 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[intel.com:s=Intel];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
-	DATE_IN_PAST(1.00)[472];
+Content-Transfer-Encoding: base64
+X-Spamd-Result: default: False [10.99 / 15.00];
+	ABUSE_SURBL(5.00)[yzcalo.com:email];
+	SPAM_FLAG(5.00)[];
+	MID_RHS_MATCH_TO(1.00)[];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+	MIME_BASE64_TEXT(0.10)[];
+	DMARC_POLICY_SOFTFAIL(0.10)[yzcalo.com : SPF not aligned (relaxed), No valid DKIM,none];
+	BAD_REP_POLICIES(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[intel.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	GREYLIST(0.00)[pass,body];
 	RCVD_TLS_LAST(0.00)[];
-	GREYLIST(0.00)[pass,meta];
-	FREEMAIL_TO(0.00)[gmail.com,redhat.com];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,intel.com:email,IA0PR11MB7185.namprd11.prod.outlook.com:mid,linaro.org:email];
-	DKIM_TRACE(0.00)[intel.com:-];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_ONE(0.00)[1];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	FROM_NEQ_ENVFROM(0.00)[vivek.kasireddy@intel.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_TWO(0.00)[2];
+	TO_DN_NONE(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[emmastone@yzcalo.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	NEURAL_SPAM(0.00)[0.999];
+	DM_SURBL(0.00)[yzcalo.com:email];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	MISSING_XM_UA(0.00)[];
+	R_DKIM_NA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	NEURAL_SPAM(0.00)[0.196];
-	RCVD_COUNT_SEVEN(0.00)[9]
-X-Rspamd-Queue-Id: 6FFF4431828
-X-Rspamd-Action: no action
+	R_SPF_ALLOW(0.00)[+mx];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:mid,yzcalo.com:email,linaro.org:email,indiahighlight.com:url]
+X-Rspamd-Queue-Id: A608C374CFB
+X-Rspamd-Action: add header
 X-Rspamd-Server: lfdr
+X-Spam: Yes
 
-> Subject: [PATCH v2] dma-buf/udmabuf: skip redundant cpu sync to fix
-> cacheline EEXIST warning
-> 
-> When CONFIG_DMA_API_DEBUG_SG is enabled, importing a udmabuf
-> into a DRM
-> driver (e.g. amdgpu for video playback in GNOME Videos / Showtime)
-> triggers a spurious warning:
-> 
->   DMA-API: amdgpu 0000:03:00.0: cacheline tracking EEXIST, \
->       overlapping mappings aren't supported
->   WARNING: kernel/dma/debug.c:619 at add_dma_entry+0x473/0x5f0
-> 
-> The call chain is:
-> 
->   amdgpu_cs_ioctl
->    -> amdgpu_ttm_backend_bind
->     -> dma_buf_map_attachment
->      -> [udmabuf] map_udmabuf -> get_sg_table
->       -> dma_map_sgtable(dev, sg, direction, 0)  // attrs=0
->        -> debug_dma_map_sg -> add_dma_entry -> EEXIST
-> 
-> This happens because udmabuf builds a per-page scatter-gather list via
-> sg_set_folio().  When begin_cpu_udmabuf() has already created an sg
-> table mapped for the misc device, and an importer such as amdgpu
-> maps
-> the same pages for its own device via map_udmabuf(), the DMA debug
-> infrastructure sees two active mappings whose physical addresses share
-> cacheline boundaries and warns about the overlap.
-> 
-> The DMA_ATTR_SKIP_CPU_SYNC flag suppresses this check in
-> add_dma_entry() because it signals that no CPU cache maintenance is
-> performed at map/unmap time, making the cacheline overlap harmless.
-> 
-> All other major dma-buf exporters already pass this flag:
->   - drm_gem_map_dma_buf() passes DMA_ATTR_SKIP_CPU_SYNC
->   - amdgpu_dma_buf_map() passes DMA_ATTR_SKIP_CPU_SYNC
-> 
-> The CPU sync at map/unmap time is also redundant for udmabuf:
-> begin_cpu_udmabuf() and end_cpu_udmabuf() already perform explicit
-> cache synchronization via dma_sync_sgtable_for_cpu/device() when
-> CPU
-> access is requested through the dma-buf interface.
-> 
-> Pass DMA_ATTR_SKIP_CPU_SYNC to dma_map_sgtable() and
-> dma_unmap_sgtable() in udmabuf to suppress the spurious warning
-> and
-> skip the redundant sync.
-> 
-> Fixes: 284562e1f348 ("udmabuf: implement
-> begin_cpu_access/end_cpu_access hooks")
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Mikhail Gavrilov <mikhail.v.gavrilov@gmail.com>
-> ---
-> 
-> v1 -> v2:
->   - Rebased on drm-tip to resolve conflict with folio conversion
->     patches. No code change, same two-line fix.
-> 
-> v1: https://lore.kernel.org/all/20260317053653.28888-1-
-> mikhail.v.gavrilov@gmail.com/
-> 
->  drivers/dma-buf/udmabuf.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/dma-buf/udmabuf.c b/drivers/dma-buf/udmabuf.c
-> index 94b26ea706a3..bced421c0d65 100644
-> --- a/drivers/dma-buf/udmabuf.c
-> +++ b/drivers/dma-buf/udmabuf.c
-> @@ -145,7 +145,7 @@ static struct sg_table *get_sg_table(struct device
-> *dev, struct dma_buf *buf,
->  	if (ret < 0)
->  		goto err_alloc;
-> 
-> -	ret = dma_map_sgtable(dev, sg, direction, 0);
-> +	ret = dma_map_sgtable(dev, sg, direction,
-> DMA_ATTR_SKIP_CPU_SYNC);
->  	if (ret < 0)
->  		goto err_map;
->  	return sg;
-> @@ -160,7 +160,7 @@ static struct sg_table *get_sg_table(struct device
-> *dev, struct dma_buf *buf,
->  static void put_sg_table(struct device *dev, struct sg_table *sg,
->  			 enum dma_data_direction direction)
->  {
-> -	dma_unmap_sgtable(dev, sg, direction, 0);
-> +	dma_unmap_sgtable(dev, sg, direction,
-> DMA_ATTR_SKIP_CPU_SYNC);
-Acked-by: Vivek Kasireddy <vivek.kasireddy@intel.com>
-Will push this one to drm-misc-next soon.
-
-Thanks,
-Vivek
->  	sg_free_table(sg);
->  	kfree(sg);
->  }
-> --
-> 2.53.0
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+SSBvZnRlbiBnZXQgdGhpcyBxdWVzdGlvbiBpbiBteSBtaW5kIHdoZW4gSSB0aGluayBhYm91dCB2
+aXNpdGluZyB0aGUgbW91bnRhaW5zIOKAlCBpcyBMZWggTGFkYWtoIHNhZmUgZm9yIHZpc2l0b3Jz
+IGxpa2UgbWU/IFRoZSBwbGFjZSBsb29rcyBhYnNvbHV0ZWx5IGJlYXV0aWZ1bCBpbiBwaG90b3Ms
+IHdpdGggaHVnZSBtb3VudGFpbnMsIHF1aWV0IG1vbmFzdGVyaWVzLCBhbmQgdGhvc2UgbG9uZyBz
+Y2VuaWMgcm9hZHMuIEJ1dCBhdCB0aGUgc2FtZSB0aW1lLCBJIGFsd2F5cyB3b25kZXIgYWJvdXQg
+dGhlIGFsdGl0dWRlLCB3ZWF0aGVyLCBhbmQgcm9hZCBjb25kaXRpb25zLiBTaW5jZSBpdOKAmXMg
+YSBoaWdoLWFsdGl0dWRlIHJlZ2lvbiwgSSBmZWVsIGl04oCZcyBpbXBvcnRhbnQgdG8gdW5kZXJz
+dGFuZCBob3cgdGhlIGJvZHkgcmVhY3RzIHRoZXJlIGFuZCBob3cgbXVjaCB0aW1lIEkgc2hvdWxk
+IGdpdmUgbXlzZWxmIHRvIGFkanVzdC4NCg0KPkZyb20gd2hhdCBJ4oCZdmUgbGVhcm5lZCBzbyBm
+YXIsIG1hbnkgdHJhdmVsZXJzIHZpc2l0IGV2ZXJ5IHllYXIgYW5kIG1vc3Qgb2YgdGhlbSBoYXZl
+IGEgd29uZGVyZnVsIGV4cGVyaWVuY2UuIFN0aWxsLCBJIGFsd2F5cyBwcmVmZXIgdG8gcmVhZCBj
+YXJlZnVsbHkgYW5kIHBsYW4gdGhpbmdzIGJlZm9yZSBnb2luZyBhbnl3aGVyZSBuZXcuIEkgbGlr
+ZSBjaGVja2luZyByb3V0ZXMsIHRoZSBiZXN0IG1vbnRocyB0byB2aXNpdCwgYW5kIHdoYXQga2lu
+ZCBvZiBwcmVwYXJhdGlvbnMgSSBzaG91bGQgbWFrZS4gVGhhdOKAmXMgd2h5IEkgc3RhcnRlZCBs
+b29raW5nIHRocm91Z2ggYSBMZWggTGFkYWtoIHRyYXZlbCBndWlkZSwgYmVjYXVzZSBpdCBhbnN3
+ZXJzIG1hbnkgb2YgdGhlIHNtYWxsIHF1ZXN0aW9ucyBJIGhhdmUgaW4gbXkgbWluZC4NCg0KSSBh
+bHNvIGZlZWwgc2FmZXIga25vd2luZyB0aGF0IHRvdXJpc20gaXMgY29tbW9uIHRoZXJlIGFuZCBs
+b2NhbCBwZW9wbGUgYXJlIHdlbGNvbWluZyB0byB2aXNpdG9ycy4gU28gbWF5YmUgdGhlIHJlYWwg
+cXVlc3Rpb24gZm9yIG1lIGlzIG5vdCBqdXN0IHNhZmV0eSwgYnV0IGhvdyB3ZWxsIEkgcGxhbiBt
+eSB0cmlwLiBXaXRoIHRoZSByaWdodCBwcmVwYXJhdGlvbiwgdGhlIGpvdXJuZXkgY2FuIGJlIGFt
+YXppbmcuIPCfj5TvuI/inKgNCg0KTW9yZSBkZXRhaWxzOg0KaHR0cHM6Ly93d3cuaW5kaWFoaWdo
+bGlnaHQuY29tL2Rlc3RpbmF0aW9uL2xlaC1sYWRha2gNCg0K8J+TpyBlbW1hc3RvbmVAeXpjYWxv
+LmNvbQ0KDQrwn5OeIDE5NzA3ODQwNTA3DQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0t
+c2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5h
+cm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
