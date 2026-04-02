@@ -2,140 +2,171 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sJ0fM/9j5mkuvwEAu9opvQ
+	id IKblCCdrzmmpngYAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:35:59 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 02 Apr 2026 15:12:07 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 789CB4318F5
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:35:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 95A11389775
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 02 Apr 2026 15:12:06 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7DEC34068F
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:35:58 +0000 (UTC)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
-	by lists.linaro.org (Postfix) with ESMTPS id CA7B73F90B
-	for <linaro-mm-sig@lists.linaro.org>; Thu,  2 Apr 2026 12:58:19 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5F74C401E9
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  2 Apr 2026 13:12:05 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+	by lists.linaro.org (Postfix) with ESMTPS id 3AF2E3F8FE
+	for <linaro-mm-sig@lists.linaro.org>; Thu,  2 Apr 2026 13:12:03 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=resnulli-us.20230601.gappssmtp.com header.s=20230601 header.b=ZWvs4xl2;
-	dmarc=none;
-	spf=none (lists.linaro.org: domain of jiri@resnulli.us has no SPF policy when checking 209.85.128.44) smtp.mailfrom=jiri@resnulli.us
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-48891776099so7527405e9.2
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 02 Apr 2026 05:58:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=resnulli-us.20230601.gappssmtp.com; s=20230601; t=1775134699; x=1775739499; darn=lists.linaro.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=UzYbx1sEpC0M+peXKDrwMMEQ4PJH/E0owphKLjh5Vw8=;
-        b=ZWvs4xl2/u6WqZ4xWhbcLF4DI1Oq0D8SCNUHmrwfdABhcD7cffA9+gELmU52IruceU
-         Mn9ubFzt9+EUAJ4SealXxL+oV0tfMnInz/t+21SE1OuDT0wSLzblu4qQ7hlAkcuWkwse
-         kZhKBLk7TS9rZkGmhjjbjeIGRsYgRQTBA+SaJt0kjOYtpbs1dGDSk3oHiwnym0FHVzOo
-         lx6Pwg4KoKyICyARgNF2epFSy64pnblehd1JHT3R3nb6kohvjFZDjp/xHHuuik/PvG+q
-         vk0MQxkHY+h7lmXZSrapVaMmINYp/upQhJX+N44MTPWsOomD/T1qMFmqpdQ3TaX47YGJ
-         TRLA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775134699; x=1775739499;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=UzYbx1sEpC0M+peXKDrwMMEQ4PJH/E0owphKLjh5Vw8=;
-        b=JnVRpJUV+zOc/XDastofQit50YWfRQYfkswdz4+CI9SPLBXqUBju9GSedoXRVm34sz
-         0/3kMawyJaEDMtA0HDysZgD2kqUIyLpdnDqfTOIDOoxifS5HYeqxLJQRpi+R4oPqQvky
-         /QqsPSg8IOrV/2d0e3Xy23YgVuiln3uqDZB4Tj8PLWLyTRMYML6s4cCElufzSSczZp6c
-         BYPbL4lbxFYiodetB+FlbdnKexQrNCWJ8Jt/u6Rx0uiSR/biPAwKniRmZ5EAZGASjHzv
-         oEtgyEg3bn97Fs7LivHD8y/t33Vx/VUMvcutHn3eAJu1mGvtE+qqoFjBZv0IG3AciNnH
-         LjVQ==
-X-Forwarded-Encrypted: i=1; AJvYcCV6+LqqVvBTX5ntrJHOuRJHaN7EMx/cdUPqxFi7/ppTg5YbRnHqv7+Z4T2DfstHHLrn5WY5cHEGIX675T+F@lists.linaro.org
-X-Gm-Message-State: AOJu0YzyHUIvXi/NAxoLYj/R2Dn55RdAFRRIsnShsqlSAYAHUZDVNz2y
-	qLq3DB2EiPWDEzXuWz4qopxK1KCW4Vp4x4MczakgAfe0OHA6v3+qH+mtJw+o7UcF/Fs=
-X-Gm-Gg: ATEYQzx29rlOJImQCf9YK1F6toawTOEQJ9QzXk1r1o7wa8BF/FCPLL70cYUD7V13ucd
-	zXgDwltbGpvc/LM8E0meinyjFDjPe+yn7IcGe5o548TkoTqBYXosCTDssE3HSIXfR7bMJ2BEN/g
-	QrhzUv8sISrf42NixUhR/aRk1X5AjUXDHce8Hk4f8vImM8LDnKPB/YGwdGzPPzE1ykCQbyrHl2/
-	qEidaCwAWun+VBinYH9Bx/JwuSAAeNp7UQVGPbOpxT4y3GU8yoGvVo+9ouU2F5OtoFQLYxKTLjn
-	IYCmjJPoQ6RqR/gMD7IFevFVEhjIGtyFPjI3v1GSKdhtfoZjLWSgRwa3YwPY+ZhVUFIbe1bwTSp
-	zeB752oQci6hag1GPn3flz3gDLtGczEqdOLosrW4jh50uMuYu0M+ZChRBH+qeWWJDqRhn+hgOs6
-	v4Dcgy3nFAJv5XXzfC5G1dBZLsXuxojrFc45E8qLu07g==
-X-Received: by 2002:a05:600c:1f93:b0:480:1d0b:2d32 with SMTP id 5b1f17b1804b1-4888b7130f3mr58915525e9.12.1775134698707;
-        Thu, 02 Apr 2026 05:58:18 -0700 (PDT)
-Received: from FV6GYCPJ69 ([208.127.45.21])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4887c884f77sm62829225e9.20.2026.04.02.05.58.16
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 02 Apr 2026 05:58:18 -0700 (PDT)
-Date: Thu, 2 Apr 2026 14:58:15 +0200
-From: Jiri Pirko <jiri@resnulli.us>
-To: Jason Gunthorpe <jgg@ziepe.ca>
-Message-ID: <l26gcpagdhabj6w66hhxzgwkwqlybontqtbf7f6lu2fic6pnu6@crh3rt3j3alm>
-References: <20260325192352.437608-1-jiri@resnulli.us>
- <4s75rtsmdfrze4rscbqzyrjyrko7n6sehe7agrngqag2cna5bz@eflmf4kwjocj>
- <20260402120254.GB2551565@ziepe.ca>
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=WSszUspE;
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=mripard@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by sea.source.kernel.org (Postfix) with ESMTP id 970D843F07;
+	Thu,  2 Apr 2026 13:12:02 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2097EC116C6;
+	Thu,  2 Apr 2026 13:12:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1775135522;
+	bh=a7x/ysTtVW24aU35eMPirkt+sO+v8dpDAEKDhxuDe60=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=WSszUspE9dzXyP1vG2gMcdzvhWi9nAi5ipcnGtuyZonB7RZAGmX1hwDPduMtfEj0f
+	 lW2LoRIl2ShIjcyVDeuG1hlvOO/zqpCeA0Z146DRKKA0duBquAvj+fJQT/uscVbkZe
+	 2wg5nQmX87424MYUc//sb0M9cOh0Ho+XSCi8NXobJRbr+fliundDiCPi1S/NRwsAeC
+	 kc4nITLm01qhH8H8Sxex1i7X4/hTzJrnBqisiAgNMciIgTmVqODXmYgxMjwhE4MTBg
+	 w18ZXyGoeIRDg6/g/t6PcP82CKsFc0A1CC7A5a4HCiyOTIneD54u7brrQ1GJ5SK+vp
+	 +XGiv48Yu5boA==
+Date: Thu, 2 Apr 2026 15:11:59 +0200
+From: Maxime Ripard <mripard@kernel.org>
+To: Sumit Semwal <sumit.semwal@linaro.org>
+Message-ID: <20260402-burrowing-fine-bloodhound-afcebc@houat>
+References: <CGME20260331100026eucas1p19bdc2aaca4c9a48c6f6ac8fec71478d8@eucas1p1.samsung.com>
+ <20260331-dma-buf-heaps-as-modules-v4-0-e18fda504419@kernel.org>
+ <46397de2-eedf-4e09-a83a-3b683d154fe7@samsung.com>
+ <CAO_48GEFQE_FJjuq1UqP=DC6LJE8jjE3C+4FdAyB4uEZDsnFJw@mail.gmail.com>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20260402120254.GB2551565@ziepe.ca>
-X-Spamd-Bar: --
-X-MailFrom: jiri@resnulli.us
+In-Reply-To: <CAO_48GEFQE_FJjuq1UqP=DC6LJE8jjE3C+4FdAyB4uEZDsnFJw@mail.gmail.com>
+X-Spamd-Bar: -----
+Message-ID-Hash: S5C5WPSB5IVJE3WPTFUOX5QSSN6W3KDJ
+X-Message-ID-Hash: S5C5WPSB5IVJE3WPTFUOX5QSSN6W3KDJ
+X-MailFrom: mripard@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 7BQ3INSDRATZJYVTVEIYCKDJWC5XBRX6
-X-Message-ID-Hash: 7BQ3INSDRATZJYVTVEIYCKDJWC5XBRX6
-X-Mailman-Approved-At: Mon, 20 Apr 2026 17:33:45 +0000
-CC: Brian Starkey <brian.starkey@arm.com>, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, iommu@lists.linux.dev, linux-media@vger.kernel.org, sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, jstultz@google.com, tjmercier@google.com, christian.koenig@amd.com, robin.murphy@arm.com, leon@kernel.org, sean.anderson@linux.dev, ptesarik@suse.com, catalin.marinas@arm.com, aneesh.kumar@kernel.org, suzuki.poulose@arm.com, steven.price@arm.com, thomas.lendacky@amd.com, john.allen@amd.com, ashish.kalra@amd.com, suravee.suthikulpanit@amd.com, linux-coco@lists.linux.dev, nd@arm.com
+CC: Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Robin Murphy <robin.murphy@arm.com>, Andrew Morton <akpm@linux-foundation.org>, David Hildenbrand <david@kernel.org>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, "Liam R. Howlett" <Liam.Howlett@oracle.com>, Vlastimil Babka <vbabka@suse.cz>, Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>, Albert Esteve <aesteve@redhat.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, iommu@lists.linux.dev, linux-mm@kvack.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v5 0/2] dma-buf: heaps: system: add an option to allocate explicitly shared/decrypted memory
+Subject: [Linaro-mm-sig] Re: [PATCH v4 0/8] dma-buf: heaps: Turn heaps into modules
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7BQ3INSDRATZJYVTVEIYCKDJWC5XBRX6/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/S5C5WPSB5IVJE3WPTFUOX5QSSN6W3KDJ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [0.99 / 15.00];
-	DATE_IN_PAST(1.00)[436];
+Content-Type: multipart/mixed; boundary="===============2658002696943706846=="
+X-Spamd-Result: default: False [0.39 / 15.00];
+	SIGNED_PGP(-2.00)[];
+	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
+	R_DKIM_REJECT(1.00)[kernel.org:s=k20201202];
 	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+	R_SPF_ALLOW(-0.20)[+mx];
+	MIME_GOOD(-0.20)[multipart/mixed,multipart/signed,text/plain];
 	MAILLIST(-0.20)[mailman];
-	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	DMARC_NA(0.00)[resnulli.us];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[25];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	FROM_NEQ_ENVFROM(0.00)[jiri@resnulli.us,linaro-mm-sig-bounces@lists.linaro.org];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+,1:+,2:+,3:~,4:+];
+	ARC_NA(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:-];
 	MISSING_XM_UA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[22];
+	FROM_NEQ_ENVFROM(0.00)[mripard@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.180];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	NEURAL_SPAM(0.00)[0.107];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email,ziepe.ca:email]
-X-Rspamd-Queue-Id: 789CB4318F5
+	TO_DN_SOME(0.00)[]
+X-Rspamd-Queue-Id: 95A11389775
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Thu, Apr 02, 2026 at 02:02:54PM +0200, jgg@ziepe.ca wrote:
->On Thu, Apr 02, 2026 at 10:52:34AM +0100, Brian Starkey wrote:
->> I'm not clear why the heap depends on !CONFIG_HIGHMEM, but I also
->> don't know anything about SEV/TDX.
->
->It is because the CC apis, set_memory_decrypted()/etc are slightly
->mis-designed. They take in a vaddr to represent the address instead of
->a phys_addr_t or a page *
->
->This means the user has to use page_address() and then the whole thing
->is incompatible with highmem.
->
->Which is fine, highmem and CC are never turned on together.
 
-Yeah, I was wondering if it is worth sanitizing it, but decided to be on
-the safe side, for unlikely oddities future may bring sake :)
+--===============2658002696943706846==
+Content-Type: multipart/signed; micalg=pgp-sha384;
+	protocol="application/pgp-signature"; boundary="me4gicdwmutl43x6"
+Content-Disposition: inline
+
+
+--me4gicdwmutl43x6
+Content-Type: text/plain; protected-headers=v1; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH v4 0/8] dma-buf: heaps: Turn heaps into modules
+MIME-Version: 1.0
+
+On Thu, Apr 02, 2026 at 10:36:48AM +0530, Sumit Semwal wrote:
+> Hello Maxime,
+>=20
+> On Tue, 31 Mar 2026 at 18:24, Marek Szyprowski <m.szyprowski@samsung.com>=
+ wrote:
+> >
+> > On 31.03.2026 12:00, Maxime Ripard wrote:
+> > > The recent introduction of heaps in the optee driver [1] made possible
+> > > the creation of heaps as modules.
+> > >
+> > > It's generally a good idea if possible, including for the already
+> > > existing system and CMA heaps.
+> > >
+> > > The system one is pretty trivial, the CMA one is a bit more involved,
+> > > especially since we have a call from kernel/dma/contiguous.c to the C=
+MA
+> > > heap code. This was solved by turning the logic around and making the
+> > > CMA heap call into the contiguous DMA code.
+> > >
+> > > Let me know what you think,
+> > > Maxime
+> > >
+> > > 1: https://lore.kernel.org/dri-devel/20250911135007.1275833-4-jens.wi=
+klander@linaro.org/
+> > >
+> > > Signed-off-by: Maxime Ripard <mripard@kernel.org>
+>=20
+> Thank you for this patch series; now that it is needed by more folks,
+> I think we can merge this.
+>=20
+> Marek, I'll coordinate with you on this - thank you!
+
+If Marek plans on sending it during the next merge window, maybe the
+best thing to do for us is just to wait for -rc1 and apply the rest of
+the patches. Otherwise, we can merge the branch in drm-misc.
+
+Maxime
+
+--me4gicdwmutl43x6
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iJUEABMJAB0WIQTkHFbLp4ejekA/qfgnX84Zoj2+dgUCac5rGAAKCRAnX84Zoj2+
+drvAAX9Gv+TrbX5Ru5iTuTfrjby3dUGZF6Vd9/L4HY+x15swwQBj44P2X43WwAnM
+cMhPq+8Bf00cagtlOIBhV4Hse29yKk8z2Is7iRaewRIPe/yQho7wdJK8x1cnDkbD
+NQuA+jE9OQ==
+=+ZbZ
+-----END PGP SIGNATURE-----
+
+--me4gicdwmutl43x6--
+
+--===============2658002696943706846==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============2658002696943706846==--
