@@ -2,185 +2,259 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mBCxN8em0GmA+QYAu9opvQ
+	id IHaTF65k5mkKvwEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 04 Apr 2026 07:51:03 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:38:54 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7702B39A12A
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 04 Apr 2026 07:51:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DB3FE431AB1
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:38:53 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 12E1640456
-	for <lists+linaro-mm-sig@lfdr.de>; Sat,  4 Apr 2026 05:42:10 +0000 (UTC)
-Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4F52E3F748
-	for <linaro-mm-sig@lists.linaro.org>; Sat,  4 Apr 2026 05:42:02 +0000 (UTC)
-Content-Type: text/plain; charset="utf-8"
+	by lists.linaro.org (Postfix) with ESMTP id B9C623F6F8
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:38:52 +0000 (UTC)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	by lists.linaro.org (Postfix) with ESMTPS id 10F383F735
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  6 Apr 2026 04:39:08 +0000 (UTC)
+Authentication-Results: lists.linaro.org;
+	dkim=pass header.d=qualcomm.com header.s=qcppdkim1 header.b="aDX/karK";
+	dkim=pass header.d=oss.qualcomm.com header.s=google header.b=ABm3TZBy;
+	dmarc=pass (policy=reject) header.from=qualcomm.com;
+	spf=pass (lists.linaro.org: domain of mukesh.savaliya@oss.qualcomm.com designates 205.220.180.131 as permitted sender) smtp.mailfrom=mukesh.savaliya@oss.qualcomm.com
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 635ATvxA3204592
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 6 Apr 2026 04:39:07 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	ErGZ9VGt485klsK/g/5Yj2oyGp2dAuXoJriTQiswEyQ=; b=aDX/karKvYmPtB5E
+	ZFzkJ4/tawXZhF55uWZwsPOFHXAirMRJk4eEple/+0j2HijDm9BCh2aithOdvobR
+	zBqot8XcvpYSnhWCiNfRyMLbZpOK8r5NAuS3rkZ+iUDsOnA6EpQuKbz+EoIXrNLR
+	p45gI5vvbbdKDPNW81FIL5SfBswQV8ELidtvugTxbDlPG4RbCA8zLtXfi/lFk9tl
+	d+JgZX5/h4krD1m7uakjeutr6xSEn8xqMRDpuztTyvkMGFQvMyRcyzhqHarmT/w7
+	r66Nwi3RujeDn8f7iOFL5UISgbIb7190ZbCUiWeoI6XOhDucZA7lQoPSRoaN3+wr
+	G39PHQ==
+Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com [209.85.214.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4datqskrv7-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 06 Apr 2026 04:39:07 +0000 (GMT)
+Received: by mail-pl1-f199.google.com with SMTP id d9443c01a7336-2a90510a6d1so26265945ad.0
+        for <linaro-mm-sig@lists.linaro.org>; Sun, 05 Apr 2026 21:39:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1775450346; x=1776055146; darn=lists.linaro.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=ErGZ9VGt485klsK/g/5Yj2oyGp2dAuXoJriTQiswEyQ=;
+        b=ABm3TZByPJhMbII/BFn/7JxoXcJqBWMiwSBnJT2wM0EmchTqF//39FhtKR3+CWhZog
+         +cUIcG+y6ffcQBNdAdyi94lRENz+hR6FUcTeLF2bd7yxgs1tPhVhczclhxzayOOv/HhL
+         sjMqFPZliO4CQKsG/DNtBuGUEdzDfjEyTFBWm30XfJClj1hjXsiJRm0aMlVzRtxMzWYP
+         z3ktr2dP43rJhaLsn6b+IGwQvWq2JhISeuPIprbRx8abri4L3x5HYhp7sN9DZp7dtTfV
+         CjcLeA7tFpXinwkII6U0nIZpT+wh/VwJYWORFX4/5YcLN6kK+i5H1g3/0YqGYpd8j+DE
+         7TOA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1775450346; x=1776055146;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=ErGZ9VGt485klsK/g/5Yj2oyGp2dAuXoJriTQiswEyQ=;
+        b=SU5etfVXnhwh6OfBE0oaezWxuKPCldqk2SlB/f7xe7q6/ruFoimDwMKnzDH7wv/w4h
+         X5T3CFm8df2JVQaqBRPAlt9TOkXHVBUokFvHkrCOaS/34IBdFJRWsiT7gB+eSH9Ztk/h
+         HYN1mw7KE4VV0SInVVyxOoglRUH1NFZtVGyawEKUk2yn1hlPFVXB8DxDAK17Rq/kNqpQ
+         SkDBdyUSGm0rh5e5iCaZpKvvn0NojmBFbzhYD22bH5mzl0NJGbWkM0UCr0gZpT+MVgrR
+         6K0oes5WUNNPYaEoU1JTAk5dWQP3kSnLWkTbbwm1iDkXKqHb3UhAmQT17GK6HHz/F9Wu
+         Ii4w==
+X-Forwarded-Encrypted: i=1; AJvYcCUF/ija1KPSdssOyZDL1nEbsofs79CJWMuKLZMlvaNejkI4d3lR4g3upy0luyR0F1ALtHp7uXK3HmN1n0bX@lists.linaro.org
+X-Gm-Message-State: AOJu0Yx1lvnpzcWkljSV23Y0fJNmjxKoj6EFf33hEewt8Tys91wb3CTN
+	l7oG69UCity7BNgsg1mXSrcb9QaggjM83vWVJeDcu+TVgO3l14Jh9XbNn0wA739d11D7aE5/EPk
+	BN+xRNGXPQfuHMSX3pjXjJGcGXqx7LTvXbI7AtbmTP68l3NDX0UR4bocaozNZu7x89Tqybw==
+X-Gm-Gg: AeBDiesbQq3F8x+U0QfdkBa9RG5SDZzAIETJb9qH6RB1U1aveeuNLPN39FG67bvduFA
+	pVJIPOlUdLEuOc/axcCmVmR3pOSY8yNI9uI9wGfE34MxfpWGiUu7JFTKohZDyqkHomQ6FmbMvJb
+	mLoSi0RWP5XS3OlSz1PJISyzaFetfUHEVvGS3TgYXn2fXyr7+ltTEZvpvVuYNP8E1ApzmLqsg04
+	PsfD9EUbki7Sozy8pX4+JmfJSaLO4JUDqogtxINBLOdTQmuvp4wNQ5wptF4aknBzyMTK/+7HmS1
+	2Tb9pSBYnWEcMxFxsBZB1bxZQocNwB7YD1HWeQkFtwerj0wgWxlHoO+jIksiOmj58A6JXv8e3NO
+	6DwZIQcnn/uv5pNtpnf6lxprBxHaI0k+9dc+DCEJpmv2e2KjST/lo4zO8
+X-Received: by 2002:a17:902:d2c6:b0:2b2:53f5:461f with SMTP id d9443c01a7336-2b277e566a8mr124146715ad.25.1775450346417;
+        Sun, 05 Apr 2026 21:39:06 -0700 (PDT)
+X-Received: by 2002:a17:902:d2c6:b0:2b2:53f5:461f with SMTP id d9443c01a7336-2b277e566a8mr124146525ad.25.1775450345888;
+        Sun, 05 Apr 2026 21:39:05 -0700 (PDT)
+Received: from [10.217.219.207] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2b27478945asm162456115ad.28.2026.04.05.21.39.01
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 05 Apr 2026 21:39:05 -0700 (PDT)
+Message-ID: <818da0cf-06e8-4a26-955b-67a3d5392e91@oss.qualcomm.com>
+Date: Mon, 6 Apr 2026 10:08:59 +0530
 MIME-Version: 1.0
-From: admin@trektechcorp.net
-To: linaro-mm-sig@lists.linaro.org
-Date: Sat, 04 Apr 2026 05:42:02 -0000
-Message-ID: <177528132232.3503839.6933911467605005569@lists.linaro.org>
-In-Reply-To: <177516873877.1353790.12035928664266218808@lists.linaro.org>
-References: <177516873877.1353790.12035928664266218808@lists.linaro.org>
-User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: MKED37PXAUDQKHI5LN5LRQ72HV4JZH4H
-X-Message-ID-Hash: MKED37PXAUDQKHI5LN5LRQ72HV4JZH4H
-X-MailFrom: admin@trektechcorp.net
-X-Mailman-Rule-Hits: member-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
+User-Agent: Mozilla Thunderbird
+To: Aniket Randive <aniket.randive@oss.qualcomm.com>,
+        viken.dadhaniya@oss.qualcomm.com, andi.shyti@kernel.org,
+        sumit.semwal@linaro.org, christian.koenig@amd.com
+References: <20260403084135.1300931-1-aniket.randive@oss.qualcomm.com>
+Content-Language: en-US
+From: Mukesh Savaliya <mukesh.savaliya@oss.qualcomm.com>
+In-Reply-To: <20260403084135.1300931-1-aniket.randive@oss.qualcomm.com>
+X-Authority-Analysis: v=2.4 cv=ari/yCZV c=1 sm=1 tr=0 ts=69d338eb cx=c_pps
+ a=JL+w9abYAAE89/QcEU+0QA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=EUspDBNiAAAA:8 a=TIcjmxIkOcpZypuolxMA:9 a=QEXdDO2ut3YA:10
+ a=324X-CrmTo6CU4MGRt3R:22
+X-Proofpoint-ORIG-GUID: VpgUpaAZMrs5cNo3-o7aKFlzCFJHbnzt
+X-Proofpoint-GUID: VpgUpaAZMrs5cNo3-o7aKFlzCFJHbnzt
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDA2MDA0MSBTYWx0ZWRfX6hwNzUz9txSi
+ smXcs1cZZveGrA4o3caVdWNB5Cc3ghXMHItPj5NSkF9dR7bqWfPp06rztrceXGk9EI3ymnQGglg
+ PgoEynObcRt8HFAxC8dgU9BGrZy65dhVeRm4mZwdJ1JK8npdXDp25BLTqYiJHM8vrA6Mc7WBk2f
+ XcEHUw9629vRM1YRdC0uJY4mw8haKHEsJAbLxltMAlZATggOD2jNwVHIinJOq81qC5W/PWa5T3G
+ BSLx733EuXrDecOxEfHn6K98NLulJ1HZCfIqV3S52N4uWpeaRfC1ypK26LGe1qB5u97lbmQuNyx
+ dxZI5lBD6vrxUySwj2YogeEJcmJGRGdPPZD++POIqAKKiURHZ+RZKysPkVsmbPc/JrZvvdl1cOz
+ BCPsBSIlcK9+UqK2De22QlYgHcCREl8qe6MX5eT/sxok+NWACguZjxrf0mUlpkApf7FYBOqQ8TH
+ T9wghEwF5STx8aWwHLA==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-04-06_01,2026-04-03_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 suspectscore=0 clxscore=1011 malwarescore=0 phishscore=0
+ lowpriorityscore=0 bulkscore=0 priorityscore=1501 spamscore=0 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2603050001 definitions=main-2604060041
+X-Spamd-Bar: ----
+X-MailFrom: mukesh.savaliya@oss.qualcomm.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+Message-ID-Hash: 4CFSUOZDZHVJF5CTLMKYRQBV7DU4FJML
+X-Message-ID-Hash: 4CFSUOZDZHVJF5CTLMKYRQBV7DU4FJML
+X-Mailman-Approved-At: Mon, 20 Apr 2026 17:38:50 +0000
+CC: linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, naresh.maramaina@oss.qualcomm.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: Expertise in Recovery
+Subject: [Linaro-mm-sig] Re: [PATCH V3] i2c: qcom-geni: Avoid extra TX DMA TRE for single read message in GPI mode
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MKED37PXAUDQKHI5LN5LRQ72HV4JZH4H/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4CFSUOZDZHVJF5CTLMKYRQBV7DU4FJML/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Transfer-Encoding: base64
-X-Spamd-Result: default: False [5.59 / 15.00];
-	SPAM_FLAG(5.00)[];
-	MID_RHS_MATCH_TO(1.00)[];
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [3.49 / 15.00];
+	DMARC_POLICY_REJECT(2.00)[qualcomm.com : SPF not aligned (relaxed),reject];
+	DATE_IN_PAST(1.00)[348];
+	R_DKIM_REJECT(1.00)[qualcomm.com:s=qcppdkim1];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx:c];
-	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DMARC_NA(0.00)[trektechcorp.net];
-	FROM_NEQ_ENVFROM(0.00)[admin@trektechcorp.net,linaro-mm-sig-bounces@lists.linaro.org];
-	GREYLIST(0.00)[pass,meta];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[12];
 	ARC_NA(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	NEURAL_SPAM(0.00)[0.956];
-	RCPT_COUNT_ONE(0.00)[1];
-	TO_DN_NONE(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
+	DKIM_TRACE(0.00)[qualcomm.com:-];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	R_DKIM_NA(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	FROM_NEQ_ENVFROM(0.00)[mukesh.savaliya@oss.qualcomm.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	NEURAL_HAM(-0.00)[-0.998];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	FROM_NO_DN(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:mid]
-X-Rspamd-Queue-Id: 7702B39A12A
+	MID_RHS_MATCH_FROM(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,qualcomm.com:email,linaro.org:email,oss.qualcomm.com:mid]
+X-Rspamd-Queue-Id: DB3FE431AB1
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-SW4gdGhlIHZvbGF0aWxlIHdvcmxkIG9mIGNyeXB0b2N1cnJlbmN5LCB3aGVyZSBiaWxsaW9ucyBh
-cmUgbG9zdCBhbm51YWxseSB0byBzY2FtcywgaGFja3MsIHBoaXNoaW5nIGF0dGFja3MsIHJ1ZyBw
-dWxscywgYW5kIHdhbGxldCBjb21wcm9taXNlcywgdGhlIGRlbWFuZCBmb3IgbGVnaXRpbWF0ZSBy
-ZWNvdmVyeSBzZXJ2aWNlcyBoYXMgbmV2ZXIgYmVlbiBoaWdoZXIuIEFzIG9mIDAyLyAyMi8gMjAy
-NiwgdmljdGltcyBvZnRlbiBmYWNlIGEgZHVhbCBjaGFsbGVuZ2U6IHJlY292ZXJpbmcgc3RvbGVu
-IG9yIGluYWNjZXNzaWJsZSBmdW5kcyB3aGlsZSBhdm9pZGluZyBzZWNvbmRhcnkgc2NhbXMgdGhh
-dCBwcmV5IG9uIGRlc3BlcmF0aW9uIHdpdGggZmFsc2UgcHJvbWlzZXMgYW5kIHVwZnJvbnQgZmVl
-cy4gQW1pZCB0aGlzIGxhbmRzY2FwZSwgVFJFSyBUZWNoIENvcnDigJRjb21tb25seSByZWZlcnJl
-ZCB0byBhcyBDQ1PigJRoYXMgZXN0YWJsaXNoZWQgaXRzZWxmIGFzIGEgY3JlZGlibGUsIHByb2Zl
-c3Npb25hbCBmaXJtIHNwZWNpYWxpemluZyBpbiBibG9ja2NoYWluIGZvcmVuc2ljcywgY3J5cHRv
-IGFzc2V0IHRyYWNpbmcsIGZyYXVkIGludmVzdGlnYXRpb24sIGFuZCByZWFsaXN0aWMgcmVjb3Zl
-cnkgc3VwcG9ydC4NCg0KVFJFSyBUZWNoIENvcnAgb3BlcmF0ZXMgd2l0aCBhIGZvdW5kYXRpb24g
-YnVpbHQgb24gMTQgeWVhcnMgb2YgZXhwZXJpZW5jZSBpbiBkaWdpdGFsIGludmVzdGlnYXRpb25z
-LCBsb25nIHByZWRhdGluZyB0aGUgd2lkZXNwcmVhZCBhZG9wdGlvbiBvZiBjcnlwdG9jdXJyZW5j
-aWVzLiBUaGlzIGV4dGVuc2l2ZSBiYWNrZ3JvdW5kIGluIGZvcmVuc2ljcyBnaXZlcyBDQ1MgYSBz
-aWduaWZpY2FudCBlZGdlIG92ZXIgbWFueSBuZXdlciBlbnRyYW50cyBpbiB0aGUgY3J5cHRvIHJl
-Y292ZXJ5IHNwYWNlLiBUaGUgZmlybSBmb2N1c2VzIG9uIGhlbHBpbmcgaW5kaXZpZHVhbHMsIGZh
-bWlsaWVzLCBhbmQgaW5zdGl0dXRpb25zIHRyYWNlIGxvc3Qgb3Igc3RvbGVuIGRpZ2l0YWwgYXNz
-ZXRzIHVzaW5nIGFkdmFuY2VkLCB0cmFuc3BhcmVudCBtZXRob2RzIHJhdGhlciB0aGFuIHNwZWN1
-bGF0aXZlIG9yIGd1YXJhbnRlZWQgb3V0Y29tZXMuIFRoZWlyIG9mZmljaWFsIHdlYnNpdGUgaXMg
-aHR0cHM6Ly93d3cudHJla3RlY2hjb3JwLm5ldCwgYW5kIGRpcmVjdCBpbnF1aXJpZXMgY2FuIGJl
-IHNlbnQgdG8gdHJla3RlY2hjb3JwMUBnbWFpbC5jb20uDQoNCldoYXQgc2V0cyBUUkVLIFRlY2gg
-Q29ycCBhcGFydCBhcyBhIGxlZ2l0aW1hdGUgcHJvdmlkZXIgaXMgaXRzIGNvbW1pdG1lbnQgdG8g
-ZXRoaWNhbCBzdGFuZGFyZHMgYW5kIGV2aWRlbmNlLWJhc2VkIHByb2Nlc3Nlcy4gVW5saWtlIGZy
-YXVkdWxlbnQgcmVjb3Zlcnkgb3BlcmF0aW9ucyB0aGF0IGRlbWFuZCBsYXJnZSB1cGZyb250IHBh
-eW1lbnRzIHdpdGhvdXQgY2FzZSBldmFsdWF0aW9uIG9yIHByb21pc2UgMTAwJSBzdWNjZXNzIChh
-IGNsZWFyIHJlZCBmbGFnIGluIHRoZSBpbmR1c3RyeSksIENDUyBjb25kdWN0cyBob25lc3QgZmVh
-c2liaWxpdHkgYXNzZXNzbWVudHMgZnJvbSB0aGUgb3V0c2V0LiBUaGV5IG5ldmVyIHJlcXVpcmUg
-Y2xpZW50cyB0byBzaGFyZSBwcml2YXRlIGtleXMsIHNlZWQgcGhyYXNlcywgb3Igc2Vuc2l0aXZl
-IHdhbGxldCBjcmVkZW50aWFscyBkdXJpbmcgaW5pdGlhbCBjb25zdWx0YXRpb25zLiBGZWVzIGFy
-ZSB0eXBpY2FsbHkgYWxpZ25lZCB3aXRoIG91dGNvbWVzLCBhbmQgdGhlIGZpcm0gbWFpbnRhaW5z
-IHN0cmljdCBjb25maWRlbnRpYWxpdHkgd2l0aCByb2J1c3QgZGF0YSBwcm90ZWN0aW9uIHByb3Rv
-Y29scy4NCg0KVGhlIGNvcmUgb2YgVFJFSyBUZWNoIENvcnDigJkgc2VydmljZSBpcyBtdWx0aS1s
-YXllciBibG9ja2NoYWluIGF0dHJpYnV0aW9u4oCUYSBwcm9wcmlldGFyeSB0ZWNobmlxdWUgdGhh
-dCB0cmFja3MgZnVuZHMgdGhyb3VnaCBjb21wbGV4IGxhdW5kZXJpbmcgcGF0aHMuIFNjYW1tZXJz
-IGZyZXF1ZW50bHkgdXNlIG1peGVycywgY3Jvc3MtY2hhaW4gYnJpZGdlcywgZGVjZW50cmFsaXpl
-ZCBleGNoYW5nZXMsIHByaXZhY3kgcHJvdG9jb2xzLCBmbGFzaC1sb2FuIG9iZnVzY2F0aW9uLCBh
-bmQgYXV0b21hdGVkIHNtYXJ0LWNvbnRyYWN0IHR1bWJsaW5nIHRvIGJyZWFrIGRpcmVjdCB0cmFj
-ZWFiaWxpdHkuIEJhc2ljIGJsb2NrIGV4cGxvcmVycyBsb3NlIHZpc2liaWxpdHkgYWZ0ZXIgb25l
-IG9yIHR3byBob3BzLCBidXQgQ0NTIHJlY29uc3RydWN0cyB0aGVzZSBtb3ZlbWVudHMgYnkgYW5h
-bHl6aW5nIG9uLWNoYWluIGJlaGF2aW9yYWwgcGF0dGVybnM6IHRpbWluZyBjb3JyZWxhdGlvbnMs
-IGFtb3VudCBzaW1pbGFyaXRpZXMsIGFkZHJlc3MgY2x1c3RlcmluZyB2aWEgY28tc3BlbmRpbmcg
-aGV1cmlzdGljcywgY2hhbmdlIGFkZHJlc3MgcmV1c2UsIGFuZCBpbnRlcmFjdGlvbnMgd2l0aCBr
-bm93biBzZXJ2aWNlcy4NCg0KQSB0eXBpY2FsIGVuZ2FnZW1lbnQgYmVnaW5zIHdpdGggYSBzZWN1
-cmUgaW50YWtlIHByb2Nlc3MuIFZpY3RpbXMgc3VibWl0IHRyYW5zYWN0aW9uIGhhc2hlcyAoVFhJ
-RHMpLCB3YWxsZXQgYWRkcmVzc2VzLCBzY2FtIGNvbW11bmljYXRpb25zLCBzY3JlZW5zaG90cywg
-YW5kIHRpbWVsaW5lcy4gVFJFSyBUZWNoIENvcnAgdGhlbiBwZXJmb3JtcyBjb21wcmVoZW5zaXZl
-IG9uLWNoYWluIGFuZCBvZmYtY2hhaW4gYW5hbHlzaXMsIGJ1aWxkaW5nIGRldGFpbGVkIHRyYW5z
-YWN0aW9uIGdyYXBocyBhbmQgaWRlbnRpZnlpbmcgcHJvYmFibGUgZW5kcG9pbnRz4oCUbW9zdCBj
-b21tb25seSBjZW50cmFsaXplZCBleGNoYW5nZXMgdGhhdCBlbmZvcmNlIEtZQy9BTUwgY29tcGxp
-YW5jZS4gV2hlbiBmdW5kcyByZWFjaCBzdWNoIHBsYXRmb3JtcywgQ0NTIHByZXBhcmVzIGV2aWRl
-bmNlLWdyYWRlIGZvcmVuc2ljIHJlcG9ydHMgdGhhdCBpbmNsdWRlIHZpc3VhbGl6ZWQgZmxvdyBk
-aWFncmFtcywgY29uZmlkZW5jZS1zY29yZWQgYWRkcmVzcyBjbHVzdGVycywgaWRlbnRpZmllZCBs
-YXVuZGVyaW5nIHRlY2huaXF1ZXMsIGFuZCByZWNvbW1lbmRlZCBpbnRlcnZlbnRpb24gc3RlcHMu
-IFRoZXNlIHJlcG9ydHMgYXJlIGZyZXF1ZW50bHkgdXNlZCB0byBzdXBwb3J0IGFzc2V0IGZyZWV6
-ZSByZXF1ZXN0cyBzdWJtaXR0ZWQgdG8gZXhjaGFuZ2UgY29tcGxpYW5jZSB0ZWFtcyBvciBmaWxl
-ZCB3aXRoIGxhdyBlbmZvcmNlbWVudCBhZ2VuY2llcyBzdWNoIGFzIHRoZSBGQknigJlzIEludGVy
-bmV0IENyaW1lIENvbXBsYWludCBDZW50ZXIgKElDMyksIGxvY2FsIGN5YmVyY3JpbWUgdW5pdHMs
-IG9yIGZpbmFuY2lhbCByZWd1bGF0b3JzLg0KDQpUUkVLIFRlY2ggQ29ycCBlbXBoYXNpemVzIHNw
-ZWVkOiB0aGUgc29vbmVyIGEgdGhlZnQgaXMgcmVwb3J0ZWQgYW5kIGFuYWx5emVkLCB0aGUgaGln
-aGVyIHRoZSBjaGFuY2Ugb2YgaW50ZXJ2ZW50aW9uIGJlZm9yZSBmdW5kcyBhcmUgZnVsbHkgZGlz
-cGVyc2VkLiBJbiBjYXNlcyB3aGVyZSByYXBpZCBhY3Rpb24gd2FzIHRha2VuLCBwYXJ0aWFsIHJl
-Y292ZXJpZXPigJRvZnRlbiA3MOKAkzkwJSBvZiBzdG9sZW4gYW1vdW50c+KAlGhhdmUgYmVlbiBh
-Y2hpZXZlZCB0aHJvdWdoIGNvb3JkaW5hdGVkIGZyZWV6ZXMgYW5kIHN1YnNlcXVlbnQgbGVnYWwg
-cHJvY2Vzc2VzLiBXaGlsZSBmdWxsIHJlY292ZXJ5IGlzIG5ldmVyIGd1YXJhbnRlZWQgZHVlIHRv
-IGJsb2NrY2hhaW7igJlzIGltbXV0YWJsZSBkZXNpZ24gYW5kIHZhcmlhYmxlcyBsaWtlIHNjYW1t
-ZXIgc29waGlzdGljYXRpb24gYW5kIGp1cmlzZGljdGlvbmFsIGxpbWl0cywgQ0NTIHByb3ZpZGVz
-IGNsZWFyLCByZWFsaXN0aWMgZXhwZWN0YXRpb25zIGZyb20gZGF5IG9uZS4NCg0KQmV5b25kIHJl
-Y292ZXJ5IHN1cHBvcnQsIFRSRUsgVGVjaCBDb3JwIHByaW9yaXRpemVzIHZpY3RpbSBlZHVjYXRp
-b24gYW5kIHByZXZlbnRpb24uIENsaWVudHMgcmVjZWl2ZSB0YWlsb3JlZCBndWlkYW5jZSBvbiBo
-YXJkZW5pbmcgc2VjdXJpdHk6IHVzaW5nIGhhcmR3YXJlIHdhbGxldHMsIGVuYWJsaW5nIHN0cm9u
-ZyBtdWx0aS1mYWN0b3IgYXV0aGVudGljYXRpb24sIHNlY3VyZWx5IGJhY2tpbmcgdXAgc2VlZCBw
-aHJhc2VzIGluIG11bHRpcGxlIGVuY3J5cHRlZCBsb2NhdGlvbnMsIHZlcmlmeWluZyBhZGRyZXNz
-ZXMgYmVmb3JlIGV2ZXJ5IHRyYW5zZmVyLCBtb25pdG9yaW5nIHdhbGxldCBhY3Rpdml0eSBwcm9h
-Y3RpdmVseSwgYW5kIHJlY29nbml6aW5nIGVtZXJnaW5nIHRocmVhdHMgc3VjaCBhcyBBSS1lbmhh
-bmNlZCBpbXBlcnNvbmF0aW9uIHNjYW1zLCBjbGlwYm9hcmQgaGlqYWNraW5nLCBvciBtYWxpY2lv
-dXMgYnJvd3NlciBleHRlbnNpb25zLiBUaGlzIHByZXZlbnRpdmUgZm9jdXMgaGVscHMgcmVkdWNl
-IHRoZSBsaWtlbGlob29kIG9mIGZ1dHVyZSBpbmNpZGVudHMgYW5kIGVtcG93ZXJzIHVzZXJzIGlu
-IGFuIGVudmlyb25tZW50IHdoZXJlIHRocmVhdHMgZXZvbHZlIHJhcGlkbHkuDQoNClRoZSBmaXJt
-4oCZcyBsZWdpdGltYWN5IGlzIGZ1cnRoZXIgcmVpbmZvcmNlZCBieSBpdHMgcGVyZm9ybWFuY2Ug
-bWV0cmljcyBhbmQgY2xpZW50IGZlZWRiYWNrLiBBcyBvZiBlYXJseSAyMDI2LCBUUkVLIFRlY2gg
-Q29ycCBoYXMgc3VjY2Vzc2Z1bGx5IGhhbmRsZWQgb3ZlciA0MjYgZG9jdW1lbnRlZCBwcm9qZWN0
-cyBhbmQgbWFpbnRhaW5zIGEgNC4yOCBvdXQgb2YgNSByYXRpbmcgYmFzZWQgb24gbW9yZSB0aGFu
-IDIsNDY3IHZlcmlmaWVkIHJldmlld3MuIENsaWVudHMgY29uc2lzdGVudGx5IGhpZ2hsaWdodCB0
-aGUgdGVhbeKAmXMgcHJvZmVzc2lvbmFsaXNtLCB0ZWNobmljYWwgcHJlY2lzaW9uLCBjbGVhciBj
-b21tdW5pY2F0aW9uLCByZWd1bGFyIHVwZGF0ZXMsIGFuZCBnZW51aW5lIHN1cHBvcnQgZHVyaW5n
-IGhpZ2gtc3RyZXNzIHNpdHVhdGlvbnMuIEluIGFuIGluZHVzdHJ5IHJpZmUgd2l0aCBhZHZhbmNl
-LWZlZSBmcmF1ZCBhbmQgbWlzbGVhZGluZyBtYXJrZXRpbmcsIENDUyBzdGFuZHMgb3V0IGZvciBy
-ZWZ1c2luZyBoaWdoLXByZXNzdXJlIHRhY3RpY3MsIGF2b2lkaW5nIHVucmVhbGlzdGljIGd1YXJh
-bnRlZXMsIGFuZCBmb2N1c2luZyBvbiBldmlkZW5jZS1kcml2ZW4gcmVzdWx0cy4NCg0KRm9yIGFu
-eW9uZSB3aG8gaGFzIHN1ZmZlcmVkIGEgY3J5cHRvIGxvc3PigJR3aGV0aGVyIHRocm91Z2ggYSBz
-b3BoaXN0aWNhdGVkIHNjYW0sIGZvcmdvdHRlbiBjcmVkZW50aWFscywgaGFyZHdhcmUgZmFpbHVy
-ZSwgb3IgaW5oZXJpdGFuY2UgY29tcGxpY2F0aW9uc+KAlFRSRUsgVGVjaCBDb3JwIG9mZmVycyBh
-IHByb2Zlc3Npb25hbCwgY29uZmlkZW50aWFsIHBhdGh3YXkgZm9yd2FyZC4gVGhlaXIgd2Vic2l0
-ZSwgaHR0cHM6Ly93d3cudHJla3RlY2hjb3JwLm5ldCwgcHJvdmlkZXMgaW4tZGVwdGggaW5mb3Jt
-YXRpb24gYWJvdXQgc2VydmljZXMsIHRoZSBpbnZlc3RpZ2F0aW9uIHByb2Nlc3MsIGFub255bWl6
-ZWQgY2FzZSBleGFtcGxlcywgYW5kIGhvdyB0byBpbml0aWF0ZSBjb250YWN0LiBEaXJlY3QgZW1h
-aWwgY29tbXVuaWNhdGlvbiBpcyBhdmFpbGFibGUgYXQgdHJla3RlY2hjb3JwMUBnbWFpbC5jb20g
-Zm9yIGEgbm8tb2JsaWdhdGlvbiBpbml0aWFsIGNvbnN1bHRhdGlvbi4NCg0KSW4gY29uY2x1c2lv
-biwgbGVnaXRpbWF0ZSBjcnlwdG8gcmVjb3ZlcnkgcmVxdWlyZXMgZXhwZXJ0aXNlLCB0cmFuc3Bh
-cmVuY3ksIGFuZCBldGhpY2FsIGNvbmR1Y3TigJRxdWFsaXRpZXMgVFJFSyBUZWNoIENvcnAgY29u
-c2lzdGVudGx5IGRlbW9uc3RyYXRlcy4gV2hpbGUgYmxvY2tjaGFpbuKAmXMgYXJjaGl0ZWN0dXJl
-IGxpbWl0cyByZXZlcnNhbHMsIENDUyBsZXZlcmFnZXMgZGVjYWRlcyBvZiBpbnZlc3RpZ2F0aXZl
-IHJpZ29yLCBhZHZhbmNlZCBtdWx0aS1sYXllciBhdHRyaWJ1dGlvbiwgYW5kIHN0cmF0ZWdpYyBj
-b29yZGluYXRpb24gdG8gZGVsaXZlciBjbGFyaXR5LCBldmlkZW5jZSwgYW5kIHJlYWxpc3RpYyBy
-ZWNvdmVyeSBvcHBvcnR1bml0aWVzLiBJbiAyMDI24oCZcyBoaWdoLXJpc2sgZGlnaXRhbCBhc3Nl
-dCBlbnZpcm9ubWVudCwgcGFydG5lcmluZyB3aXRoIGEgcmVwdXRhYmxlIGZpcm0gbGlrZSBUUkVL
-IFRlY2ggQ29ycCBjYW4gbWFrZSB0aGUgY3JpdGljYWwgZGlmZmVyZW5jZSBiZXR3ZWVuIHBlcm1h
-bmVudCBsb3NzIGFuZCBtZWFuaW5nZnVsIHByb2dyZXNzIHRvd2FyZCByZWNsYW1hdGlvbiBhbmQg
-cmVuZXdlZCBzZWN1cml0eS4NCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlz
-dHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1z
-aWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+
+
+On 4/3/2026 2:11 PM, Aniket Randive wrote:
+> In GPI mode, the I2C GENI driver programs an extra TX DMA transfer
+> descriptor (TRE) on the TX channel when handling a single read message.
+> This results in an unintended write phase being issued on the I2C bus,
+> even though a read transaction does not require any TX data.
+> 
+> For a single-byte read, the correct hardware sequence consists of the
+> CONFIG and GO commands followed by a single RX DMA TRE. Programming an
+> additional TX DMA TRE is redundant, causes unnecessary DMA buffer
+> mapping on the TX channel, and may lead to incorrect bus behavior.
+> 
+> Update the transfer logic to avoid programming a TX DMA TRE for single
+> read messages in GPI mode.
+> 
+> Co-developed-by: Maramaina Naresh <naresh.maramaina@oss.qualcomm.com>
+> Signed-off-by: Maramaina Naresh <naresh.maramaina@oss.qualcomm.com>
+> Signed-off-by: Aniket Randive <aniket.randive@oss.qualcomm.com>
+> ---
+> Changes in v3:
+>    - Added comment in the driver for better readability and changed the
+>      position of 'skip_dma' label to allow dma engine configuration.
+> 
+> Changes in v2:
+>    - Updated the commit message.
+> 
+>   drivers/i2c/busses/i2c-qcom-geni.c | 20 +++++++++++++++-----
+>   1 file changed, 15 insertions(+), 5 deletions(-)
+> 
+> diff --git a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-geni.c
+> index a4acb78fafb6..78b92db7c7fd 100644
+> --- a/drivers/i2c/busses/i2c-qcom-geni.c
+> +++ b/drivers/i2c/busses/i2c-qcom-geni.c
+> @@ -625,8 +625,8 @@ static int geni_i2c_gpi(struct geni_i2c_dev *gi2c, struct i2c_msg msgs[],
+>   {
+>   	struct gpi_i2c_config *peripheral;
+>   	unsigned int flags;
+> -	void *dma_buf;
+> -	dma_addr_t addr;
+> +	void *dma_buf = NULL;
+> +	dma_addr_t addr = 0;
+>   	enum dma_data_direction map_dirn;
+>   	enum dma_transfer_direction dma_dirn;
+>   	struct dma_async_tx_descriptor *desc;
+> @@ -639,6 +639,12 @@ static int geni_i2c_gpi(struct geni_i2c_dev *gi2c, struct i2c_msg msgs[],
+>   	gi2c_gpi_xfer = &gi2c->i2c_multi_desc_config;
+>   	msg_idx = gi2c_gpi_xfer->msg_idx_cnt;
+>   
+> +	/* Skip TX DMA map for I2C_WRITE operation to avoid unintended write cycle */
+Seems you are missing writing important point - For read message ?
+Important is to clarity what's the condition we are handling, Skipping 
+something is anyway clear from goto skip_dma.
+> +	if (op == I2C_WRITE && msgs[msg_idx].flags & I2C_M_RD) {
+> +		peripheral->multi_msg = true;
+> +		goto skip_dma;
+> +	}
+> +
+>   	dma_buf = i2c_get_dma_safe_msg_buf(&msgs[msg_idx], 1);
+>   	if (!dma_buf) {
+>   		ret = -ENOMEM;
+> @@ -658,6 +664,7 @@ static int geni_i2c_gpi(struct geni_i2c_dev *gi2c, struct i2c_msg msgs[],
+>   		goto out;
+>   	}
+>   
+> +skip_dma:
+Better name - skip_tx_dma_map ?
+>   	if (gi2c->is_tx_multi_desc_xfer) {
+>   		flags = DMA_CTRL_ACK;
+>   
+> @@ -740,9 +747,12 @@ static int geni_i2c_gpi(struct geni_i2c_dev *gi2c, struct i2c_msg msgs[],
+>   	return 0;
+>   
+>   err_config:
+> -	dma_unmap_single(gi2c->se.dev->parent, addr,
+> -			 msgs[msg_idx].len, map_dirn);
+> -	i2c_put_dma_safe_msg_buf(dma_buf, &msgs[msg_idx], false);
+> +	/* Avoid DMA unmap as the write operation skipped DMA mapping */
+> +	if (dma_buf) {
+> +		dma_unmap_single(gi2c->se.dev->parent, addr,
+> +				 msgs[msg_idx].len, map_dirn);
+> +		i2c_put_dma_safe_msg_buf(dma_buf, &msgs[msg_idx], false);
+> +	}
+>   
+>   out:
+>   	gi2c->err = ret;
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
