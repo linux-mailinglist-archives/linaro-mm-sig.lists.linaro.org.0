@@ -2,159 +2,156 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wHfpELlk5mkKvwEAu9opvQ
+	id 0H+AEb9k5mkKvwEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:39:05 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:39:11 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id A5AB9431AC7
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:39:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 33ECE431AD5
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:39:10 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A4FE840501
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:39:03 +0000 (UTC)
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
-	by lists.linaro.org (Postfix) with ESMTPS id 98C913F83D
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  7 Apr 2026 09:25:19 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 21C51406B0
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:39:09 +0000 (UTC)
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+	by lists.linaro.org (Postfix) with ESMTPS id 3A5663F96E
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  7 Apr 2026 09:26:20 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=resnulli-us.20251104.gappssmtp.com header.s=20251104 header.b=fiMpNkHd;
+	dkim=pass header.d=resnulli-us.20251104.gappssmtp.com header.s=20251104 header.b=k70lIqd9;
 	dmarc=none;
-	spf=none (lists.linaro.org: domain of jiri@resnulli.us has no SPF policy when checking 209.85.221.48) smtp.mailfrom=jiri@resnulli.us
-Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-43b9d3ebed5so4042675f8f.1
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 07 Apr 2026 02:25:19 -0700 (PDT)
+	spf=none (lists.linaro.org: domain of jiri@resnulli.us has no SPF policy when checking 209.85.221.53) smtp.mailfrom=jiri@resnulli.us
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-43ba1f3fa7eso5036088f8f.2
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 07 Apr 2026 02:26:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=resnulli-us.20251104.gappssmtp.com; s=20251104; t=1775553918; x=1776158718; darn=lists.linaro.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=ChD0onF1gDOUOLYFpD7x1c0kz7T4QILlyJ39777mmvM=;
-        b=fiMpNkHdNAEa5KmP+NDMkbf7Z5jb0OlFakCOC7ABEhHYhKO3p4Nr1nZKuG8me1uTMy
-         /tUOeSMrV0zUyFDWDBPF58a2yAZKHJx5spFd0bdZwloXC5IFeMgAh9TxAvly7RikLJB3
-         p3mCl10c/YMhZ1+3odY0+nocMtTAzBUyjHtTpotxKvrZJCM8xI2PuSspSCe3ou35diGs
-         EXgQSdeu1O8UtWwviOvADOUbksIzi0rgNNM5KjQY8A3kfb8PX53rOcaFDt30ve28i+Ql
-         kUe+bzZRdO//NfNBMzTfqhyXVOEGMP9SZuefaRJCsWzSeHj+LZnQkeX29AccpQSSeKiI
-         HTfg==
+        d=resnulli-us.20251104.gappssmtp.com; s=20251104; t=1775553979; x=1776158779; darn=lists.linaro.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=4JppuW+8jHhiWrz5kQ42R8XjkKGXIqfSYDySDPjjqyw=;
+        b=k70lIqd9AmCUH4e1aLgilRPfK/za/FaWkMcDM8lVMvGOn+fkE7iV8XK305av0jq9p8
+         gME6AW/UQKMiWOZOCSQSA1Q0vGw+/KbMTaugHrxsDbPzk54AELEXrQFAlNx37AVfE0N2
+         7RhNSzSXREHIKtpxWHmyyz2K4UKAzTRxxOs9lAaIUYWvcQi2gsvc0xIs37r9yNxZygA/
+         tKjMJU92W0N74IHXBq6y7fIfkxa+cQjUNmU1tOEDHsab2etIt8mK46LG+jPgsY+tQPCW
+         k0Z0LwBgI/JKaFx02R87DijrjUvYnwvM3MvKKdrFgD/Blkz3jnFS5Qu5tn111/eW435e
+         gGpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775553918; x=1776158718;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=ChD0onF1gDOUOLYFpD7x1c0kz7T4QILlyJ39777mmvM=;
-        b=F/cU+EHlc5fuUNWhHzBXMSCt6/68YLNYeTPsm6dA25W8lP+TPxaMc+s+3nmicq2p4Y
-         ckJqOHGKb2ge4uwzh3uFqBnWDskC/JixPsmgHBIXq5EY+oLttCNJJEwjJsa9ZaN0d+DP
-         qdS0phOI83EU8qxWKGCfwVk9hMb+qVH7AXp//hpvQRWtmPEBNfVUmCy0GXbME6Lr7Pp8
-         sP+WyAJcZjyAJPfZ7KHJkYJixJwdUxFrpGIWAejTwIeKjvRLaSn6qEqhB+BWb3L7GiIw
-         kbrpXtoqmHTCQ06/hUsxUQ0n+1ivldokfohVbyazAyJSRmH7xQAbjYnGbg3bCJVZWtds
-         LNEA==
-X-Forwarded-Encrypted: i=1; AJvYcCXO4fkm9HG9RED5CpaOY4m3BvioXS/CzwC1j91iWrfQZqwOsvU2beGBdNj532fKxzJsHlNmZg/6Aq9UEO+8@lists.linaro.org
-X-Gm-Message-State: AOJu0Yx7VzjDXC4Buv+x8eb4fYgeTSe+Ju8Mx5hKlEBKJ4CVbr05hpgS
-	2BOccd4tsQklFXqeulo1bQ74kMFqOBLcLJOkZWwoC19IrAcVP+s0TPeNRf4Von3Tu4o=
-X-Gm-Gg: AeBDietk/Z+/L9KwhX1Aelc0yHqr9V5CQvie+Dp4AjoowpMrX2c07rAK3CVLSNAnww0
-	htc2EwNQq0Tj1+m/l0Xv8uZCAUpy1HTg74z+5n5YjA1uykAoS3lknli08unGqP6AVo9J+kXMpqe
-	0Q6oQnL+uvAekKxQo9nayYi1VIbTbixdRh8og9FCZ1Lz1+iLI5f0mVeXwZbV2GHvEcCwXIswm+l
-	L7FhS30rm+EsnljWVlNwXBDL2jTZOK0l57KpyQD1w343y46TCSUVJDS3RmROtAo0BhO0V2mMR2z
-	H8pvDAe2mVjqrC+R1Z5Su08mieE3ahSveyWv24mTOlWWfY5UNqRSuUrojuUJRrO74B3YW9eSph3
-	eaWNMnMAIRJYnc0xttzFGwzhnbFOcP0tDxYQHoLZ0PoJtBmT9hCvUBB6BvNNQJAF6WNoR28UNBB
-	7HeoAD1ey8bISqVVYwtdXC6+1B2a2aTo8=
-X-Received: by 2002:a05:6000:4201:b0:43c:f95c:3e66 with SMTP id ffacd0b85a97d-43d29294b62mr24203622f8f.21.1775553918478;
-        Tue, 07 Apr 2026 02:25:18 -0700 (PDT)
-Received: from FV6GYCPJ69 ([85.163.81.98])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43d1e4f5016sm52091538f8f.33.2026.04.07.02.25.16
+        d=1e100.net; s=20251104; t=1775553979; x=1776158779;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=4JppuW+8jHhiWrz5kQ42R8XjkKGXIqfSYDySDPjjqyw=;
+        b=KaaDAqC+QF8ksvvEexbz5FEcmjyE/fdZN9yEjxIrV2heEdOpGnOUwWqkJFg4EzmFHS
+         QSlfnNPtyj59SJZag5j8gU9QAQ7mogwah2rbGzQQ+0MjJ8anZpNnLauRd1QiIUb1hUAv
+         yygrxjeeqLvXmZVvoFmVUwNe1RevosBeW6HgqVvSNP2WKuVG/h+Wx0UIZL7nZYDSKIht
+         XOhR3qBxQYHEU88WabdhvpiVgkgFuU71TcmNiMRtUe2doBUxkccGJt7fqqdrcDp7UfXh
+         XoarxorjCaNuUJuNqJlFjqw+iK3jaMRDZrd5arnvv+ZTdVbpadM8jAmVOKNc/ALFaagA
+         gymg==
+X-Forwarded-Encrypted: i=1; AJvYcCU22kSrkqEmID9duP8THfeOuSgorTWjvnHSfGWk6xsHf9W2Te+irKbeQUxqFj/l4GTZnv6fyzStw+mXOmQr@lists.linaro.org
+X-Gm-Message-State: AOJu0YyU+0G8opcVIdJUi6vVPPVrNFYeUfGFyXbX8K60zmKFEBoLCunt
+	RwLDh8p1Rnvd6XNzx/7whPL55yv5c6lPRqH7JR8H4MNXpR/m1yeGD1X6SUZLubMWd6A=
+X-Gm-Gg: AeBDiev3p9hsp40NRkKCTcrYIKHhQ62MSsAHimmDDdfbNLMK8xIN0TLPQRVji6jqq2H
+	GCGKqv0oenPzNcCqI8pailHKAqLVWC8mtTJMAYT3XpTzGikSbrwUse7huewuZIUazgqe7au3UWQ
+	aUWvwpieaz0lUAQIIvcrYa2+JkQOUjRR3C/GfR4A/4xu3gpbYyoCKQkdztEdD86iorEx4nF7ddz
+	jlROULhbQX61TM4MwhSvjcgzL9/xpNkXFKhisxlK7hf48+eBU8fQkwv0XShFNbqFIg6+yebEPBi
+	ubhCNEz44hGGIdmx1xCslTUfeWdzxe+Zp9r3nDnMdn70m00TOw3W/EKjh+NhOYBXwZBRv1bPyp7
+	ffKMJpBGal/SMyq0C8xkecKTbIBeVqLy7ly9YrhuaM1PcpMrekJmu2iJKSfV81H1GQqiW0AMDd9
+	i0ajsY7TgZA+rBng==
+X-Received: by 2002:a05:600c:6098:b0:488:9fb7:376d with SMTP id 5b1f17b1804b1-4889fb73b1amr196429615e9.28.1775553978818;
+        Tue, 07 Apr 2026 02:26:18 -0700 (PDT)
+Received: from localhost ([85.163.81.98])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-488a91686f9sm268832955e9.10.2026.04.07.02.26.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 07 Apr 2026 02:25:17 -0700 (PDT)
-Date: Tue, 7 Apr 2026 11:25:15 +0200
+        Tue, 07 Apr 2026 02:26:18 -0700 (PDT)
 From: Jiri Pirko <jiri@resnulli.us>
-To: "T.J. Mercier" <tjmercier@google.com>
-Message-ID: <5l5ack3pgpajrkbcactkiyvfi5pir3jn5eg6tmohcrdgiuqtn5@odbwbvsn4vrj>
-References: <20260402141103.598495-1-jiri@resnulli.us>
- <CABdmKX3N70j8ZZs5DNhx6fhRi=Aa_+2xY1JHcW+uDoaV2+Sngw@mail.gmail.com>
+To: dri-devel@lists.freedesktop.org,
+	linaro-mm-sig@lists.linaro.org,
+	iommu@lists.linux.dev,
+	linux-media@vger.kernel.org
+Date: Tue,  7 Apr 2026 11:26:17 +0200
+Message-ID: <20260407092617.635223-1-jiri@resnulli.us>
+X-Mailer: git-send-email 2.51.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CABdmKX3N70j8ZZs5DNhx6fhRi=Aa_+2xY1JHcW+uDoaV2+Sngw@mail.gmail.com>
-X-Spamd-Bar: --
+X-Spamd-Bar: -
 X-MailFrom: jiri@resnulli.us
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 3PV4XKJIVAPHH54IYNRY2ZYJL3YAPLAN
-X-Message-ID-Hash: 3PV4XKJIVAPHH54IYNRY2ZYJL3YAPLAN
-X-Mailman-Approved-At: Mon, 20 Apr 2026 17:38:52 +0000
-CC: dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, iommu@lists.linux.dev, linux-media@vger.kernel.org, sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, Brian.Starkey@arm.com, jstultz@google.com, christian.koenig@amd.com, robin.murphy@arm.com, jgg@ziepe.ca, leon@kernel.org, sean.anderson@linux.dev, ptesarik@suse.com, catalin.marinas@arm.com, aneesh.kumar@kernel.org, suzuki.poulose@arm.com, steven.price@arm.com, thomas.lendacky@amd.com, john.allen@amd.com, ashish.kalra@amd.com, suravee.suthikulpanit@amd.com, linux-coco@lists.linux.dev
+Message-ID-Hash: 37BAZ3XJKZ7MSWKESL2DHCBD6AAXZFVK
+X-Message-ID-Hash: 37BAZ3XJKZ7MSWKESL2DHCBD6AAXZFVK
+X-Mailman-Approved-At: Mon, 20 Apr 2026 17:38:53 +0000
+CC: sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, Brian.Starkey@arm.com, jstultz@google.com, tjmercier@google.com, christian.koenig@amd.com, robin.murphy@arm.com, jgg@ziepe.ca, leon@kernel.org, ptesarik@suse.com, catalin.marinas@arm.com, aneesh.kumar@kernel.org, suzuki.poulose@arm.com, steven.price@arm.com, thomas.lendacky@amd.com, john.allen@amd.com, ashish.kalra@amd.com, suravee.suthikulpanit@amd.com, linux-coco@lists.linux.dev
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf: heaps: system: document system_cc_shared heap
+Subject: [Linaro-mm-sig] [PATCH v2] dma-buf: heaps: system: document system_cc_shared heap
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3PV4XKJIVAPHH54IYNRY2ZYJL3YAPLAN/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/37BAZ3XJKZ7MSWKESL2DHCBD6AAXZFVK/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-X-Spamd-Result: default: False [1.09 / 15.00];
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [1.49 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
 	DATE_IN_PAST(1.00)[320];
-	MID_RHS_NOT_FQDN(0.50)[];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx:c];
-	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DMARC_NA(0.00)[resnulli.us];
 	RCVD_TLS_LAST(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
+	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	DMARC_NA(0.00)[resnulli.us];
 	MIME_TRACE(0.00)[0:+];
 	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[24];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_SPAM(0.00)[0.915];
+	NEURAL_SPAM(0.00)[0.525];
+	TO_DN_NONE(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[jiri@resnulli.us,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[23];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,nvidia.com:email,lists.linaro.org:helo,lists.linaro.org:rdns,resnulli.us:email]
-X-Rspamd-Queue-Id: A5AB9431AC7
+	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email,resnulli.us:mid]
+X-Rspamd-Queue-Id: 33ECE431AD5
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-TW9uLCBBcHIgMDYsIDIwMjYgYXQgMTA6MjA6MzNQTSArMDIwMCwgdGptZXJjaWVyQGdvb2dsZS5j
-b20gd3JvdGU6DQo+T24gVGh1LCBBcHIgMiwgMjAyNiBhdCA3OjEx4oCvQU0gSmlyaSBQaXJrbyA8
-amlyaUByZXNudWxsaS51cz4gd3JvdGU6DQo+Pg0KPj4gRnJvbTogSmlyaSBQaXJrbyA8amlyaUBu
-dmlkaWEuY29tPg0KPj4NCj4+IERvY3VtZW50IHRoZSBzeXN0ZW1fY2Nfc2hhcmVkIGRtYS1idWYg
-aGVhcCB0aGF0IHdhcyBpbnRyb2R1Y2VkDQo+PiByZWNlbnRseS4gRGVzY3JpYmUgaXRzIHB1cnBv
-c2UsIGF2YWlsYWJpbGl0eSBjb25kaXRpb25zIGFuZA0KPj4gcmVsYXRpb24gdG8gY29uZmlkZW50
-aWFsIGNvbXB1dGluZyBWTXMuDQo+Pg0KPj4gU2lnbmVkLW9mZi1ieTogSmlyaSBQaXJrbyA8amly
-aUBudmlkaWEuY29tPg0KPj4gLS0tDQo+PiAgRG9jdW1lbnRhdGlvbi91c2Vyc3BhY2UtYXBpL2Rt
-YS1idWYtaGVhcHMucnN0IHwgOCArKysrKysrKw0KPj4gIDEgZmlsZSBjaGFuZ2VkLCA4IGluc2Vy
-dGlvbnMoKykNCj4+DQo+PiBkaWZmIC0tZ2l0IGEvRG9jdW1lbnRhdGlvbi91c2Vyc3BhY2UtYXBp
-L2RtYS1idWYtaGVhcHMucnN0IGIvRG9jdW1lbnRhdGlvbi91c2Vyc3BhY2UtYXBpL2RtYS1idWYt
-aGVhcHMucnN0DQo+PiBpbmRleCAwNTQ0NWM4M2I3OWEuLjU5MTczMjM5M2U3ZCAxMDA2NDQNCj4+
-IC0tLSBhL0RvY3VtZW50YXRpb24vdXNlcnNwYWNlLWFwaS9kbWEtYnVmLWhlYXBzLnJzdA0KPj4g
-KysrIGIvRG9jdW1lbnRhdGlvbi91c2Vyc3BhY2UtYXBpL2RtYS1idWYtaGVhcHMucnN0DQo+PiBA
-QCAtMTYsNiArMTYsMTQgQEAgZm9sbG93aW5nIGhlYXBzOg0KPj4NCj4+ICAgLSBUaGUgYGBzeXN0
-ZW1gYCBoZWFwIGFsbG9jYXRlcyB2aXJ0dWFsbHkgY29udGlndW91cywgY2FjaGVhYmxlLCBidWZm
-ZXJzLg0KPj4NCj4+ICsgLSBUaGUgYGBzeXN0ZW1fY2Nfc2hhcmVkYGAgaGVhcCBhbGxvY2F0ZXMg
-dmlydHVhbGx5IGNvbnRpZ3VvdXMsIGNhY2hlYWJsZSwNCj4+ICsgICBidWZmZXJzIHVzaW5nIHNo
-YXJlZCAoZGVjcnlwdGVkKSBtZW1vcnkuIEl0IGlzIG9ubHkgcHJlc2VudCBvbg0KPj4gKyAgIGNv
-bmZpZGVudGlhbCBjb21wdXRpbmcgKENvQ28pIFZNcyB3aGVyZSBtZW1vcnkgZW5jcnlwdGlvbiBp
-cyBhY3RpdmUNCj4+ICsgICAoZS5nLiwgQU1EIFNFViwgSW50ZWwgVERYKS4gVGhlIGFsbG9jYXRl
-ZCBwYWdlcyBoYXZlIHRoZSBlbmNyeXB0aW9uDQo+PiArICAgYml0IGNsZWFyZWQsIG1ha2luZyB0
-aGVtIGFjY2Vzc2libGUgZm9yIGRldmljZSBETUEgd2l0aG91dCBURElTUA0KPj4gKyAgIHN1cHBv
-cnQuIE9uIG5vbi1Db0NvIFZNcyBjb25maWd1cmF0aW9ucywgdGhpcyBoZWFwIGlzDQo+DQo+Im5v
-bi1Db0NvIFZNIGNvbmZpZ3VyYXRpb25zIg0KPg0KPj4gKyAgIG5vdCByZWdpc3RlcmVkLg0KPg0K
-PkRvZXNuJ3Qgc2VlbSBsaWtlIHlvdSBuZWVkIHRvIHdyYXAgdGhpcyBsaW5lLg0KPg0KPndpdGgg
-dGhhdDogUmV2aWV3ZWQtYnk6IFQuSi5NZXJjaWVyIDx0am1lcmNpZXJAZ29vZ2xlLmNvbT4NCg0K
-T2theS4gVGhhbmtzIQ0KDQoNCj4NCj4+ICsNCj4+ICAgLSBUaGUgYGBkZWZhdWx0X2NtYV9yZWdp
-b25gYCBoZWFwIGFsbG9jYXRlcyBwaHlzaWNhbGx5IGNvbnRpZ3VvdXMsDQo+PiAgICAgY2FjaGVh
-YmxlLCBidWZmZXJzLiBPbmx5IHByZXNlbnQgaWYgYSBDTUEgcmVnaW9uIGlzIHByZXNlbnQuIFN1
-Y2ggYQ0KPj4gICAgIHJlZ2lvbiBpcyB1c3VhbGx5IGNyZWF0ZWQgZWl0aGVyIHRocm91Z2ggdGhl
-IGtlcm5lbCBjb21tYW5kbGluZQ0KPg0KPkVhY2ggcGFyYWdyYXBoIHN0YXJ0aW5nIHdpdGggJy0n
-IGNvbmZ1c2VkIG1lIGZvciBhIHNlY29uZCB0aGVyZS4gVGhvc2UNCj5hcmVuJ3QgcGFydCBvZiB0
-aGUgZGlmZi4gOikNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGlu
-YXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVh
-dmVAbGlzdHMubGluYXJvLm9yZwo=
+From: Jiri Pirko <jiri@nvidia.com>
+
+Document the system_cc_shared dma-buf heap that was introduced
+recently. Describe its purpose, availability conditions and
+relation to confidential computing VMs.
+
+Signed-off-by: Jiri Pirko <jiri@nvidia.com>
+Reviewed-by: T.J.Mercier <tjmercier@google.com>
+---
+ Documentation/userspace-api/dma-buf-heaps.rst | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/Documentation/userspace-api/dma-buf-heaps.rst b/Documentation/userspace-api/dma-buf-heaps.rst
+index 05445c83b79a..f56b743cdb36 100644
+--- a/Documentation/userspace-api/dma-buf-heaps.rst
++++ b/Documentation/userspace-api/dma-buf-heaps.rst
+@@ -16,6 +16,13 @@ following heaps:
+ 
+  - The ``system`` heap allocates virtually contiguous, cacheable, buffers.
+ 
++ - The ``system_cc_shared`` heap allocates virtually contiguous, cacheable,
++   buffers using shared (decrypted) memory. It is only present on
++   confidential computing (CoCo) VMs where memory encryption is active
++   (e.g., AMD SEV, Intel TDX). The allocated pages have the encryption
++   bit cleared, making them accessible for device DMA without TDISP
++   support. On non-CoCo VM configurations, this heap is not registered.
++
+  - The ``default_cma_region`` heap allocates physically contiguous,
+    cacheable, buffers. Only present if a CMA region is present. Such a
+    region is usually created either through the kernel commandline
+-- 
+2.51.1
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
