@@ -2,86 +2,136 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 0H+AEb9k5mkKvwEAu9opvQ
+	id GKu0LfLX1GlxyAcAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:39:11 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 07 Apr 2026 12:09:54 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 33ECE431AD5
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:39:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2B70C3AC8DD
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 07 Apr 2026 12:09:53 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 21C51406B0
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:39:09 +0000 (UTC)
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
-	by lists.linaro.org (Postfix) with ESMTPS id 3A5663F96E
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  7 Apr 2026 09:26:20 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B7A9C40470
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  7 Apr 2026 10:09:52 +0000 (UTC)
+Received: from BN1PR04CU002.outbound.protection.outlook.com (mail-eastus2azon11010039.outbound.protection.outlook.com [52.101.56.39])
+	by lists.linaro.org (Postfix) with ESMTPS id BBC9C3F4C6
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  7 Apr 2026 10:09:49 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=resnulli-us.20251104.gappssmtp.com header.s=20251104 header.b=k70lIqd9;
-	dmarc=none;
-	spf=none (lists.linaro.org: domain of jiri@resnulli.us has no SPF policy when checking 209.85.221.53) smtp.mailfrom=jiri@resnulli.us
-Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-43ba1f3fa7eso5036088f8f.2
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 07 Apr 2026 02:26:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=resnulli-us.20251104.gappssmtp.com; s=20251104; t=1775553979; x=1776158779; darn=lists.linaro.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=4JppuW+8jHhiWrz5kQ42R8XjkKGXIqfSYDySDPjjqyw=;
-        b=k70lIqd9AmCUH4e1aLgilRPfK/za/FaWkMcDM8lVMvGOn+fkE7iV8XK305av0jq9p8
-         gME6AW/UQKMiWOZOCSQSA1Q0vGw+/KbMTaugHrxsDbPzk54AELEXrQFAlNx37AVfE0N2
-         7RhNSzSXREHIKtpxWHmyyz2K4UKAzTRxxOs9lAaIUYWvcQi2gsvc0xIs37r9yNxZygA/
-         tKjMJU92W0N74IHXBq6y7fIfkxa+cQjUNmU1tOEDHsab2etIt8mK46LG+jPgsY+tQPCW
-         k0Z0LwBgI/JKaFx02R87DijrjUvYnwvM3MvKKdrFgD/Blkz3jnFS5Qu5tn111/eW435e
-         gGpQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775553979; x=1776158779;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=4JppuW+8jHhiWrz5kQ42R8XjkKGXIqfSYDySDPjjqyw=;
-        b=KaaDAqC+QF8ksvvEexbz5FEcmjyE/fdZN9yEjxIrV2heEdOpGnOUwWqkJFg4EzmFHS
-         QSlfnNPtyj59SJZag5j8gU9QAQ7mogwah2rbGzQQ+0MjJ8anZpNnLauRd1QiIUb1hUAv
-         yygrxjeeqLvXmZVvoFmVUwNe1RevosBeW6HgqVvSNP2WKuVG/h+Wx0UIZL7nZYDSKIht
-         XOhR3qBxQYHEU88WabdhvpiVgkgFuU71TcmNiMRtUe2doBUxkccGJt7fqqdrcDp7UfXh
-         XoarxorjCaNuUJuNqJlFjqw+iK3jaMRDZrd5arnvv+ZTdVbpadM8jAmVOKNc/ALFaagA
-         gymg==
-X-Forwarded-Encrypted: i=1; AJvYcCU22kSrkqEmID9duP8THfeOuSgorTWjvnHSfGWk6xsHf9W2Te+irKbeQUxqFj/l4GTZnv6fyzStw+mXOmQr@lists.linaro.org
-X-Gm-Message-State: AOJu0YyU+0G8opcVIdJUi6vVPPVrNFYeUfGFyXbX8K60zmKFEBoLCunt
-	RwLDh8p1Rnvd6XNzx/7whPL55yv5c6lPRqH7JR8H4MNXpR/m1yeGD1X6SUZLubMWd6A=
-X-Gm-Gg: AeBDiev3p9hsp40NRkKCTcrYIKHhQ62MSsAHimmDDdfbNLMK8xIN0TLPQRVji6jqq2H
-	GCGKqv0oenPzNcCqI8pailHKAqLVWC8mtTJMAYT3XpTzGikSbrwUse7huewuZIUazgqe7au3UWQ
-	aUWvwpieaz0lUAQIIvcrYa2+JkQOUjRR3C/GfR4A/4xu3gpbYyoCKQkdztEdD86iorEx4nF7ddz
-	jlROULhbQX61TM4MwhSvjcgzL9/xpNkXFKhisxlK7hf48+eBU8fQkwv0XShFNbqFIg6+yebEPBi
-	ubhCNEz44hGGIdmx1xCslTUfeWdzxe+Zp9r3nDnMdn70m00TOw3W/EKjh+NhOYBXwZBRv1bPyp7
-	ffKMJpBGal/SMyq0C8xkecKTbIBeVqLy7ly9YrhuaM1PcpMrekJmu2iJKSfV81H1GQqiW0AMDd9
-	i0ajsY7TgZA+rBng==
-X-Received: by 2002:a05:600c:6098:b0:488:9fb7:376d with SMTP id 5b1f17b1804b1-4889fb73b1amr196429615e9.28.1775553978818;
-        Tue, 07 Apr 2026 02:26:18 -0700 (PDT)
-Received: from localhost ([85.163.81.98])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-488a91686f9sm268832955e9.10.2026.04.07.02.26.18
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 07 Apr 2026 02:26:18 -0700 (PDT)
-From: Jiri Pirko <jiri@resnulli.us>
-To: dri-devel@lists.freedesktop.org,
-	linaro-mm-sig@lists.linaro.org,
-	iommu@lists.linux.dev,
-	linux-media@vger.kernel.org
-Date: Tue,  7 Apr 2026 11:26:17 +0200
-Message-ID: <20260407092617.635223-1-jiri@resnulli.us>
-X-Mailer: git-send-email 2.51.1
+	dkim=pass header.d=amd.com header.s=selector1 header.b=4pa1YsdM;
+	dmarc=pass (policy=quarantine) header.from=amd.com;
+	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 52.101.56.39 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
+	arc=pass ("microsoft.com:s=arcselector10001:i=1")
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=oyU5T265/T8aaE4QYAjEKCidk84hM/3eVokmBGoycclYdPnHMdNlCrxMGW9IjWkB7b1ACNCHGY+yj4JEXdJMAHXjB4NmUsEiViTTHXM/zAJSZy1moTHQs8CzKqdgNBktvkdZZXphETQQvfCelKZtiyeNAi6ZZfYBN/NwPgPROWjD925hZITNA9vCRKcyIXldIzxbXhXFjakxIXxHbie9RejTHwM5mOg8DEkb8yO3P0J6In4LOBboePw/whXXY5XAOJMjYa1sxgxa71wXXGN5S7dNjc/x0FWE9qyksJ2mz4rJbodNeli0lTBNJzUmX7wrKq/WmbVnFEJLc3doyNWFnQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=6A3weveVZGufy5SRmpgis7+vWEsgG1KuSzEPlEzBOBA=;
+ b=Gp3rTV3BIzHYGpxUd4lBbTsCCHWYIrzz3r1zgF1JkEGiX0Hyqd7B/4TxTqf0eh7rXd2Oxc+7QIyM88kSO3qxg33OlrPK5FwycBiJfY7VNJwACrde94zLmHgraORazbVlkxuFSn7eZMQLM4CxwhTfb0cRntH2b76bLE3xBCqbmQQTae+6xiggzRcRi8bZDnz5+KcwnKCoepi6l4IdfQDhc2Vb0aN1W++NdN1rbJONybagR8IBT757qdmrxKqQwFr3gWc7sxzhd7ev1FS+/e48B/LvzjaW9pxpFCtnE9BKbWF9Si8kW9EJsL0qk7ctCLYF98OBRNVuxn/WZ/o4uk52WQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=6A3weveVZGufy5SRmpgis7+vWEsgG1KuSzEPlEzBOBA=;
+ b=4pa1YsdMYzOX8GW+PPYGi9dExDbfTVdAUdcUFncdU1+E4f8ErJ5kI909D1hk1QUKX18O6pNe0UeajRsRgiAes1fFz31/drH7ZI77iXvNjsxXzovhgD0UY1TSuBBlE8dA9KEyEvsJnFH/gi5kz4lw0yH2+ZY3SNBC3+XbkK2VUEQ=
+Received: from PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
+ by DM6PR12MB4404.namprd12.prod.outlook.com (2603:10b6:5:2a7::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.19; Tue, 7 Apr
+ 2026 10:09:47 +0000
+Received: from PH7PR12MB5685.namprd12.prod.outlook.com
+ ([fe80::ce69:cfae:774d:a65c]) by PH7PR12MB5685.namprd12.prod.outlook.com
+ ([fe80::ce69:cfae:774d:a65c%5]) with mapi id 15.20.9769.016; Tue, 7 Apr 2026
+ 10:09:47 +0000
+Message-ID: <1b46bb85-dcaf-4eee-b5ae-110d711107db@amd.com>
+Date: Tue, 7 Apr 2026 12:09:42 +0200
+User-Agent: Mozilla Thunderbird
+To: Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>,
+ Alex Deucher <alexander.deucher@amd.com>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>
+References: <20260403083602.1771-1-pierre-eric.pelloux-prayer@amd.com>
+ <20260403083602.1771-5-pierre-eric.pelloux-prayer@amd.com>
+Content-Language: en-US
+From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+In-Reply-To: <20260403083602.1771-5-pierre-eric.pelloux-prayer@amd.com>
+X-ClientProxiedBy: FR4P281CA0314.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:f6::10) To PH7PR12MB5685.namprd12.prod.outlook.com
+ (2603:10b6:510:13c::22)
 MIME-Version: 1.0
-X-Spamd-Bar: -
-X-MailFrom: jiri@resnulli.us
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 37BAZ3XJKZ7MSWKESL2DHCBD6AAXZFVK
-X-Message-ID-Hash: 37BAZ3XJKZ7MSWKESL2DHCBD6AAXZFVK
-X-Mailman-Approved-At: Mon, 20 Apr 2026 17:38:53 +0000
-CC: sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, Brian.Starkey@arm.com, jstultz@google.com, tjmercier@google.com, christian.koenig@amd.com, robin.murphy@arm.com, jgg@ziepe.ca, leon@kernel.org, ptesarik@suse.com, catalin.marinas@arm.com, aneesh.kumar@kernel.org, suzuki.poulose@arm.com, steven.price@arm.com, thomas.lendacky@amd.com, john.allen@amd.com, ashish.kalra@amd.com, suravee.suthikulpanit@amd.com, linux-coco@lists.linux.dev
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|DM6PR12MB4404:EE_
+X-MS-Office365-Filtering-Correlation-Id: c48d0f29-e4a5-4717-4da5-08de948dcc4c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|366016|1800799024|376014|56012099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: 
+	pqDF8kmZFUhjFd4uN4xZ2Sg379BmGzw5HuGmi24uPW7BQclsXSW9T0bJH7Y5LGlVC5WP5eORPfjWveepxlsOAD5n88Cb54VbkMzJNvzhneDJTQuWNBAWxB0OR82cNFHI2iH6MYo6NzgiSqpOD/IocV50A79Nn2NIRfRLwyGG1aT9fNBsFWOmh4vmBHjkdWR6Sb5SMS7N2CCy6JGI5wEtFFSZqpCfpbFicMxklTMyF7Cs1FwZ36xiTQ6qE940yIiK1p87dT4EHgCx2HAa7dSaB2c/fNy+PyqSWky/rrxRscK/EK3osvr1NlCbRSkcsRH6cDWV9a8+Mtp3Q0QXAqy7X/DPqOEf5TaHPYCjlZU3P4aTCehZCc8JIG0EQ9JHwNmxsNQXUO54wBRHg+swbETDZcqevdvw3TI/UpEJYocOJmKs/z9o/da6I/amyVEr64fvSe2LGI3fN7gp6fbAk8a323JKbewZIEoyBCht4ASh0TAGykFHyeWoVycnawD/+U+jEPKX9eZK2SYgIpofVt5atoHjkOz14tm2v3jyDWtHkcyf73xQsKw643+ZKrNVO6v8kK+Xpw0xUO4/Xkano4p87fMtApnkrYkxzhdkma9iZ+QH5PM+upKihXawa84lmvgsgm2CYX0H3BkNXY0Bk13I+xUJ03clT2qEZiyfuKo3JzYZ+vttlnAS30mHDMurUy2Yew1hcGY7N5O/8agQ/Db/mJsFKiUKWUZEPoG1b0O+DOE=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB5685.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(56012099003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?R0tweEQxMkxqa2FmVGlHdlpYRlUrNnR6b2VEWHVnbDlyQU1QM2dSbEQxcTJI?=
+ =?utf-8?B?ZXNWZEhsdldaeHIzNnQrbnh6OStEdnloWWRweTJybTZadzB3WHpIM1FLRzd4?=
+ =?utf-8?B?alo4azBKMFhEN2FjZTBYenphUWZYL1JPL3lKditFdW1EMlRQdWFwdlMvMWlI?=
+ =?utf-8?B?Y0ZuT3VITmFBK0s3cVZaNkoreTlveUo5a0twWVhCbEF5L2FBWkxyVGYwTHU1?=
+ =?utf-8?B?eGx6QUEzWHFwVjRVSXhSdk9USkZBeFpWc1IzTjhSM1Z5UDFoZ1lNeXNKanJj?=
+ =?utf-8?B?VVg5V2NBaVZreFF5YjhweWFaejNjdVR6bWhwVDBhd2Q1Y0RPMXIyYnhGMU5y?=
+ =?utf-8?B?b0czWkg1M01tZUsyanlySjVrMmdQdUtvL291SlRLNG5rQThOSHpwVkdsVUlr?=
+ =?utf-8?B?THhnNnlFVWJmVGk2akZ5SWU0cnlYL2FodW9mZUdZcFhGVjFjZk9xL0VpWDVt?=
+ =?utf-8?B?SEtCRjZsLy9RaEhVYTR5Sll6aEpvczdlNmVwTW4xNzIyVDk0NjZJZFBRK0xS?=
+ =?utf-8?B?THdsbk40OUw5OWNJSkEvSjFTbVJaaUNDWEtYcUg2aE5YUEloZmpvU0Y1YUgv?=
+ =?utf-8?B?Q05wMVBEYk9CLzdvK1dMUkNlUVdQS1FYaEpZNDh1eDBsSjAxbDFhSWRWZUY5?=
+ =?utf-8?B?MUE1eEVFTDhxa1I5SmFGZDF2cVZNdVFlWkxnVWR6NEdIUlpnZW5OZEhsUTEy?=
+ =?utf-8?B?MHdWUDhkSlFiWjNHSTNlbStlbDNsZ0lFTGlzSDJIS3F4OExqaHNUdkdCZEJX?=
+ =?utf-8?B?YUwwa21GcnVFL3JIbDlFU0NTTktkeFZaaFBqcGYwVkQ4WmEzTXZWVE4rTnF0?=
+ =?utf-8?B?dWpURjU2cTlKaVc0M1ZFU09TTDZYS3VzWCtySEpBaGxSeGZhandieUtyVTFJ?=
+ =?utf-8?B?MUgzcHljbWJVUVFMaVBQTmZCYm1RcHZaYm02VGtIakU1cUxoLzBkWmlPQjRE?=
+ =?utf-8?B?MGZIM3ZQZzYwZkpwcmlsd3BBeVg0ZnhFNm5vaGZUcXpOQVZtUFBudUFJenNQ?=
+ =?utf-8?B?RitqL2xhSEZNZVltNHg3N2JhL2dmekw0aEFOWU91TldEeHFDNWkzcnY0c2c4?=
+ =?utf-8?B?WDZlUEFoZ1gydjhrNGp4ditaaXRlSWJJNW51UzVpUC9wZWFCdld3SDIwbU0x?=
+ =?utf-8?B?OWxyNG93S1EwUTFscHpYbEZhbzQ1NmR3bk42dXlPUlpTSWQzdng1c253eWZ2?=
+ =?utf-8?B?THI2Q2p0Rnd2by9SdDFxaFBnSDF5eWNOR3ZtcUVSQlZsTHJCVjhXWm95UHpk?=
+ =?utf-8?B?K1RpZmk1WkpQdVgvSlFzUlFSNUt2ZzhMVHFxRUNhalM5VUp6b1NkOVcrdisr?=
+ =?utf-8?B?cXVYc29PTGUrU29LbEpWWWtQdk4rYU9HT1BmQXVsS2tFb3QxNExpaEY0VUd2?=
+ =?utf-8?B?cmE2eXBuZDczV2k3Q08xdzFGQ2JXeWZ4V1Z5L0xTL2RNZHFWeWpmOTc2ekIz?=
+ =?utf-8?B?eFM3aU5NOGN3TkI3eHVxNnhpM0NZUjU5ME90U1FxRnNQeVlRQmhKR0FuRytn?=
+ =?utf-8?B?ODJzNi84UXhyd25lQlFaRkhmTzkxTkoxNnVEVjZsT3czKzZraXM0b1A2UVpo?=
+ =?utf-8?B?bFU2MWF1R1J2QkRXOVl3ejRsSlFDaTFQQUxmWmtIeEJxNlRha09ZQWRKV1JE?=
+ =?utf-8?B?RXhKS2dValBoNHM4UzNzUFdEM3cxWUU3NWZxQUxvYkVRbXYxZUthSWRwcFpW?=
+ =?utf-8?B?NTloVkxBMWpWcFZxWHVQR2ZVTWR5a2lrOGJMeEUzTzhRcWZOZTA4T2V1M0Jz?=
+ =?utf-8?B?dWI4YTZIaGZyUUdORENJeUY4dFllcnp6dDVtbEtoV3RQcUtpQVZPMS9Fb21P?=
+ =?utf-8?B?T3dmeXNmbHdvTk13eVU4Q3ZOVHRMRkJVNnV5cVJndS9aaGxvZFMvU3RLc3Z6?=
+ =?utf-8?B?QWY5aW1Kb0JhUjZMUkVOSkMyQjNkbUtIZytNS2JFTFdnc3UwVlcvUWF0YlhU?=
+ =?utf-8?B?SDd1dThYTlp6Y044Q3ZzWFhUOUVzN1VxVVI3cXllT3haQWtQUG5jWjdKdWY1?=
+ =?utf-8?B?N2xkNG1WRzFOTFZySTk4ZXRSOUJYNCtSb2dvalhUbnNhQjlJTTBmZlRvRi9L?=
+ =?utf-8?B?UktUSzM2NFpxTURtZlA4b3lTdldhT0FSUmY3dEc0TDJSeXQ3cFVSb0RkNGpt?=
+ =?utf-8?B?aFpSVkViaFFxV3JNZWVrYktFWlVyK0o1OEhvVzdraFZGUFZDNlY1bmhUTEpP?=
+ =?utf-8?B?ek0zV3NyZVdJMVR6SXdvTmxJV0d0QTNZa1BjcWI3OStSZ1JHME90NlBMYzRv?=
+ =?utf-8?B?UWs2cXVlMC9lUHgwVnR4eWxnL0FaV3VzMGZ4all4QWZBc2ZWREFIaWlFMXVr?=
+ =?utf-8?Q?UQM+IHT9bwBDHjnFlO?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c48d0f29-e4a5-4717-4da5-08de948dcc4c
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5685.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Apr 2026 10:09:47.4152
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: p6xz+s22A82Q80hFFkWSFqP1rn9ZtnccdrCaYUvzI/JqDYup0b2X5meNmDjmbu7O
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4404
+X-Spamd-Bar: -----
+Message-ID-Hash: 3TU2YMYT5FQFLTBHBNDSUR6PYW6O6YYM
+X-Message-ID-Hash: 3TU2YMYT5FQFLTBHBNDSUR6PYW6O6YYM
+X-MailFrom: Christian.Koenig@amd.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v2] dma-buf: heaps: system: document system_cc_shared heap
+Subject: [Linaro-mm-sig] Re: [PATCH v5 5/7] drm/amdgpu: get rid of amdgpu_ttm_clear_buffer
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/37BAZ3XJKZ7MSWKESL2DHCBD6AAXZFVK/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3TU2YMYT5FQFLTBHBNDSUR6PYW6O6YYM/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -90,67 +140,246 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [1.49 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
-	DATE_IN_PAST(1.00)[320];
+X-Spamd-Result: default: False [2.99 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[amd.com : SPF not aligned (relaxed),quarantine];
+	R_DKIM_REJECT(1.00)[amd.com:s=selector1];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DMARC_NA(0.00)[resnulli.us];
-	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_TO(0.00)[amd.com,gmail.com,ffwll.ch,linaro.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[amd.com:-];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-0.968];
+	FROM_NEQ_ENVFROM(0.00)[christian.koenig@amd.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_SPAM(0.00)[0.525];
-	TO_DN_NONE(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jiri@resnulli.us,linaro-mm-sig-bounces@lists.linaro.org];
-	RCPT_COUNT_TWELVE(0.00)[23];
+	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	RCPT_COUNT_SEVEN(0.00)[10];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email,resnulli.us:mid]
-X-Rspamd-Queue-Id: 33ECE431AD5
+	DBL_BLOCKED_OPENRESOLVER(0.00)[amd.com:email,amd.com:mid]
+X-Rspamd-Queue-Id: 2B70C3AC8DD
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-From: Jiri Pirko <jiri@nvidia.com>
 
-Document the system_cc_shared dma-buf heap that was introduced
-recently. Describe its purpose, availability conditions and
-relation to confidential computing VMs.
 
-Signed-off-by: Jiri Pirko <jiri@nvidia.com>
-Reviewed-by: T.J.Mercier <tjmercier@google.com>
----
- Documentation/userspace-api/dma-buf-heaps.rst | 7 +++++++
- 1 file changed, 7 insertions(+)
+On 4/3/26 10:35, Pierre-Eric Pelloux-Prayer wrote:
+> It's doing the same thing as amdgpu_fill_buffer(src_data=0), so drop it.
+> 
+> The only caveat is that amdgpu_res_cleared() return value is only valid
+> right after allocation.
+> 
+> ---
+> v2: introduce new "bool consider_clear_status" arg
+> ---
+> 
+> Signed-off-by: Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>
+> ---
+>  drivers/gpu/drm/amd/amdgpu/amdgpu_object.c | 16 ++--
+>  drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c    | 88 +++++-----------------
+>  drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.h    |  6 +-
+>  3 files changed, 32 insertions(+), 78 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
+> index 66c20dd46d12..d0884bbffa75 100644
+> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
+> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
+> @@ -717,13 +717,17 @@ int amdgpu_bo_create(struct amdgpu_device *adev,
+>  	    bo->tbo.resource->mem_type == TTM_PL_VRAM) {
+>  		struct dma_fence *fence;
+>  
+> -		r = amdgpu_ttm_clear_buffer(bo, bo->tbo.base.resv, &fence);
+> +		r = amdgpu_fill_buffer(amdgpu_ttm_next_clear_entity(adev),
+> +				       bo, 0, NULL, &fence,
+> +				       true, AMDGPU_KERNEL_JOB_ID_TTM_CLEAR_BUFFER);
+>  		if (unlikely(r))
+>  			goto fail_unreserve;
+>  
+> -		dma_resv_add_fence(bo->tbo.base.resv, fence,
+> -				   DMA_RESV_USAGE_KERNEL);
+> -		dma_fence_put(fence);
+> +		if (fence) {
+> +			dma_resv_add_fence(bo->tbo.base.resv, fence,
+> +					   DMA_RESV_USAGE_KERNEL);
+> +			dma_fence_put(fence);
+> +		}
+>  	}
+>  	if (!bp->resv)
+>  		amdgpu_bo_unreserve(bo);
+> @@ -1326,8 +1330,8 @@ void amdgpu_bo_release_notify(struct ttm_buffer_object *bo)
+>  		goto out;
+>  
+>  	r = amdgpu_fill_buffer(amdgpu_ttm_next_clear_entity(adev),
+> -			       abo, 0, &bo->base._resv,
+> -			       &fence, AMDGPU_KERNEL_JOB_ID_CLEAR_ON_RELEASE);
+> +			       abo, 0, &bo->base._resv, &fence,
+> +			       false, AMDGPU_KERNEL_JOB_ID_CLEAR_ON_RELEASE);
+>  	if (WARN_ON(r))
+>  		goto out;
+>  
+> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+> index 648ad344e89c..a3d0998b8cec 100644
+> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+> @@ -418,7 +418,7 @@ static int amdgpu_move_blit(struct ttm_buffer_object *bo,
+>  	    (abo->flags & AMDGPU_GEM_CREATE_VRAM_WIPE_ON_RELEASE)) {
+>  		struct dma_fence *wipe_fence = NULL;
+>  		r = amdgpu_fill_buffer(entity, abo, 0, NULL, &wipe_fence,
+> -				       AMDGPU_KERNEL_JOB_ID_MOVE_BLIT);
+> +				       false, AMDGPU_KERNEL_JOB_ID_MOVE_BLIT);
+>  		if (r) {
+>  			goto error;
+>  		} else if (wipe_fence) {
+> @@ -2572,76 +2572,25 @@ static int amdgpu_ttm_fill_mem(struct amdgpu_device *adev,
+>  }
+>  
+>  /**
+> - * amdgpu_ttm_clear_buffer - clear memory buffers
+> - * @bo: amdgpu buffer object
+> - * @resv: reservation object
+> - * @fence: dma_fence associated with the operation
+> + * amdgpu_fill_buffer - fill a buffer with a given value
+> + * @entity: entity to use
+> + * @bo: the bo to fill
+> + * @src_data: the value to set
+> + * @resv: fences contained in this reservation will be used as dependencies.
+> + * @out_fence: the fence from the last clear will be stored here. It might be
+> + *             NULL if no job was run.
+> + * @dependency: optional input dependency fence.
+> + * @consider_clear_status: true if region reported as cleared by amdgpu_res_cleared()
+> + *                         are skipped.
+> + * @k_job_id: trace id
+>   *
+> - * Clear the memory buffer resource.
+> - *
+> - * Returns:
+> - * 0 for success or a negative error code on failure.
+>   */
+> -int amdgpu_ttm_clear_buffer(struct amdgpu_bo *bo,
+> -			    struct dma_resv *resv,
+> -			    struct dma_fence **fence)
+> -{
+> -	struct amdgpu_device *adev = amdgpu_ttm_adev(bo->tbo.bdev);
+> -	struct amdgpu_ttm_buffer_entity *entity;
+> -	struct amdgpu_res_cursor cursor;
+> -	u64 addr;
+> -	int r = 0;
+> -
+> -	if (!adev->mman.buffer_funcs_enabled)
+> -		return -EINVAL;
+> -
+> -	if (!fence)
+> -		return -EINVAL;
+> -	entity = &adev->mman.clear_entities[0];
+> -	*fence = dma_fence_get_stub();
+> -
+> -	amdgpu_res_first(bo->tbo.resource, 0, amdgpu_bo_size(bo), &cursor);
+> -
+> -	mutex_lock(&entity->lock);
+> -	while (cursor.remaining) {
+> -		struct dma_fence *next = NULL;
+> -		u64 size;
+> -
+> -		if (amdgpu_res_cleared(&cursor)) {
+> -			amdgpu_res_next(&cursor, cursor.size);
+> -			continue;
+> -		}
+> -
+> -		/* Never clear more than 256MiB at once to avoid timeouts */
+> -		size = min(cursor.size, 256ULL << 20);
+> -
+> -		r = amdgpu_ttm_map_buffer(entity, &bo->tbo, bo->tbo.resource, &cursor,
+> -					  0, false, &size, &addr);
+> -		if (r)
+> -			goto err;
+> -
+> -		r = amdgpu_ttm_fill_mem(adev, entity, 0, addr, size, resv,
+> -					&next, true,
+> -					AMDGPU_KERNEL_JOB_ID_TTM_CLEAR_BUFFER);
+> -		if (r)
+> -			goto err;
+> -
+> -		dma_fence_put(*fence);
+> -		*fence = next;
+> -
+> -		amdgpu_res_next(&cursor, size);
+> -	}
+> -err:
+> -	mutex_unlock(&entity->lock);
+> -
+> -	return r;
+> -}
+> -
+>  int amdgpu_fill_buffer(struct amdgpu_ttm_buffer_entity *entity,
 
-diff --git a/Documentation/userspace-api/dma-buf-heaps.rst b/Documentation/userspace-api/dma-buf-heaps.rst
-index 05445c83b79a..f56b743cdb36 100644
---- a/Documentation/userspace-api/dma-buf-heaps.rst
-+++ b/Documentation/userspace-api/dma-buf-heaps.rst
-@@ -16,6 +16,13 @@ following heaps:
- 
-  - The ``system`` heap allocates virtually contiguous, cacheable, buffers.
- 
-+ - The ``system_cc_shared`` heap allocates virtually contiguous, cacheable,
-+   buffers using shared (decrypted) memory. It is only present on
-+   confidential computing (CoCo) VMs where memory encryption is active
-+   (e.g., AMD SEV, Intel TDX). The allocated pages have the encryption
-+   bit cleared, making them accessible for device DMA without TDISP
-+   support. On non-CoCo VM configurations, this heap is not registered.
-+
-  - The ``default_cma_region`` heap allocates physically contiguous,
-    cacheable, buffers. Only present if a CMA region is present. Such a
-    region is usually created either through the kernel commandline
--- 
-2.51.1
+We should probably rename the function to amdgpu_ttm_clear_buffer() while doing this.
+
+Apart from that looks good to me.
+
+Regards,
+Christian.
+
+>  		       struct amdgpu_bo *bo,
+>  		       uint32_t src_data,
+>  		       struct dma_resv *resv,
+> -		       struct dma_fence **f,
+> +		       struct dma_fence **out_fence,
+> +		       bool consider_clear_status,
+>  		       u64 k_job_id)
+>  {
+>  	struct amdgpu_device *adev = amdgpu_ttm_adev(bo->tbo.bdev);
+> @@ -2659,6 +2608,11 @@ int amdgpu_fill_buffer(struct amdgpu_ttm_buffer_entity *entity,
+>  		struct dma_fence *next;
+>  		uint64_t cur_size, to;
+>  
+> +		if (consider_clear_status && amdgpu_res_cleared(&dst)) {
+> +			amdgpu_res_next(&dst, dst.size);
+> +			continue;
+> +		}
+> +
+>  		/* Never fill more than 256MiB at once to avoid timeouts */
+>  		cur_size = min(dst.size, 256ULL << 20);
+>  
+> @@ -2680,9 +2634,7 @@ int amdgpu_fill_buffer(struct amdgpu_ttm_buffer_entity *entity,
+>  	}
+>  error:
+>  	mutex_unlock(&entity->lock);
+> -	if (f)
+> -		*f = dma_fence_get(fence);
+> -	dma_fence_put(fence);
+> +	*out_fence = fence;
+>  	return r;
+>  }
+>  
+> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.h b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.h
+> index a6249252948b..436a3e09a178 100644
+> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.h
+> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.h
+> @@ -187,14 +187,12 @@ int amdgpu_copy_buffer(struct amdgpu_device *adev,
+>  		       struct dma_resv *resv,
+>  		       struct dma_fence **fence,
+>  		       bool vm_needs_flush, uint32_t copy_flags);
+> -int amdgpu_ttm_clear_buffer(struct amdgpu_bo *bo,
+> -			    struct dma_resv *resv,
+> -			    struct dma_fence **fence);
+>  int amdgpu_fill_buffer(struct amdgpu_ttm_buffer_entity *entity,
+>  		       struct amdgpu_bo *bo,
+>  		       uint32_t src_data,
+>  		       struct dma_resv *resv,
+> -		       struct dma_fence **f,
+> +		       struct dma_fence **out_fence,
+> +		       bool consider_clear_status,
+>  		       u64 k_job_id);
+>  struct amdgpu_ttm_buffer_entity *amdgpu_ttm_next_clear_entity(struct amdgpu_device *adev);
+>  
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
