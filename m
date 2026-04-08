@@ -2,59 +2,60 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mEkRHN5k5mkKvwEAu9opvQ
+	id 6EapHeNk5mlmvwEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:39:42 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:39:47 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 23080431B55
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:39:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 58E69431B7B
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:39:47 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 32C623F7D9
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:39:41 +0000 (UTC)
-Received: from 17.mo584.mail-out.ovh.net (17.mo584.mail-out.ovh.net [46.105.41.16])
-	by lists.linaro.org (Postfix) with ESMTPS id 125D7401C9
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  8 Apr 2026 12:39:46 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5FD2B40501
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:39:46 +0000 (UTC)
+Received: from 13.mo581.mail-out.ovh.net (13.mo581.mail-out.ovh.net [87.98.150.175])
+	by lists.linaro.org (Postfix) with ESMTPS id 8ABB73F768
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  8 Apr 2026 12:40:54 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
 	dkim=none;
 	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=kernel.org (policy=quarantine);
-	spf=pass (lists.linaro.org: domain of andi@etezian.org designates 46.105.41.16 as permitted sender) smtp.mailfrom=andi@etezian.org
-Received: from director11.ghost.mail-out.ovh.net (unknown [10.110.54.146])
-	by mo584.mail-out.ovh.net (Postfix) with ESMTP id 4frN1X6xrxz8Ggd
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  8 Apr 2026 12:39:44 +0000 (UTC)
-Received: from ghost-submission-7d8d68f679-rvp9c (unknown [10.110.118.225])
-	by director11.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 5CAADC29B9;
-	Wed,  8 Apr 2026 12:39:43 +0000 (UTC)
-Received: from etezian.org ([37.59.142.97])
-	by ghost-submission-7d8d68f679-rvp9c with ESMTPSA
-	id MJC9D49M1mneRSgAk2rvTQ
-	(envelope-from <andi@etezian.org>); Wed, 08 Apr 2026 12:39:43 +0000
+	spf=pass (lists.linaro.org: domain of andi@etezian.org designates 87.98.150.175 as permitted sender) smtp.mailfrom=andi@etezian.org
+Received: from director5.ghost.mail-out.ovh.net (unknown [10.110.58.129])
+	by mo581.mail-out.ovh.net (Postfix) with ESMTP id 4frN2s4JqSz5x0H
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  8 Apr 2026 12:40:53 +0000 (UTC)
+Received: from ghost-submission-7d8d68f679-mb8kg (unknown [10.110.113.134])
+	by director5.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 923D91001F4;
+	Wed,  8 Apr 2026 12:40:51 +0000 (UTC)
+Received: from etezian.org ([37.59.142.111])
+	by ghost-submission-7d8d68f679-mb8kg with ESMTPSA
+	id xi9IBtNM1mmC/xcAWGcN2g
+	(envelope-from <andi@etezian.org>); Wed, 08 Apr 2026 12:40:51 +0000
 X-OVh-ClientIp: 178.82.31.9
 From: Andi Shyti <andi.shyti@kernel.org>
 To: christian.koenig@amd.com
-Date: Wed,  8 Apr 2026 14:39:15 +0200
-Message-ID: <20260408123916.2604101-1-andi.shyti@kernel.org>
+Date: Wed,  8 Apr 2026 14:39:16 +0200
+Message-ID: <20260408123916.2604101-2-andi.shyti@kernel.org>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <68595b2ceed038074f5fe0a5739d75aafbcac8d3.camel@intel.com>
+In-Reply-To: <20260408123916.2604101-1-andi.shyti@kernel.org>
 References: <68595b2ceed038074f5fe0a5739d75aafbcac8d3.camel@intel.com>
+ <20260408123916.2604101-1-andi.shyti@kernel.org>
 MIME-Version: 1.0
-x-ovh-tracer-id: 5516909544000427226
+x-ovh-tracer-id: 5536331319964046554
 X-VR-SPAMSTATE: OK
 X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: dmFkZTFJcN3wABJSf2iZpuR5LkA/rJofncb8HPc1lvL14FRcLOhQZE9m65WI7Syzas+A5oU/HMP6qC08qwn2zeFkRR5HvIZrLxMSqek0zFZDYgrkyvfAr5plLRTBX/NT1TF8vFWKq2ajKk0j/79sd/tNec7iFaJQhArVdfqMXgEY9sgx9yGM9FzuJLYJKMjXCETNVsXf+qfrOdOhVic425NTdRHE3a3QPOSdjP3MeHA+GhGkfeLZ3KRIxDswm1v6v1n01idrLScUV3IcfBnSZc3eV7sfBqvJvxU7El0aQnmB3Qejf7phnyndjNdEJ4FQBHv47AIXzCTaI9hPomwTY2P5akDfTohtUzYYEQcqIXH3CX/jun/f++pOsfrvPqmlnxlMP1e2bGQgb0sOpwzmj7fORzpousDNvDiOIn4XuIw+5RUK4/t/rqMmN3l3Oij7y40FIaQpvv/ybO2aaGVkybL3lX1UohnhErFfXtrgS2+uTJV6mSND6P5v6qe3vqIIg5DqwXVm0LMnwCnhnFz5RQyhK2BNGTDrWTnUGyVnGeIXZ3eodH1X3dvmfuFcogjKy+TgMncWeG472nFyyoMoezOghPiNG50jwwmZkuvhGMYQL0bNLIZFn2abADKWcyGFINhaXPbpEaUmwaoEceyGjDgMGm/zmetkZCgKhjn6hYoQoZlMvg
+X-VR-SPAMCAUSE: dmFkZTFz5CK8pll4+m5rzR24T746LhjYj0+P7SPwAVsk3wZFnbp+RFDWAosALJb5nVkuVD1j5uaxE3Q2sgEtavEjgrNJlsQ6p+mnK8Qlhi0kzcJwEgnoUBVKWrsVVpQ7R/Y+9BwkJcgqgm25Q2u/F9PiAsMNwOCgi8TL/5WLXNpdsfoLSd1BWZKbZ9S7GFLaJeqB5t12xoDsqbrrHVeB2JRmOd716PcPxqa6FrDi+Nr4Lropz4Ey1GayttEWMbI7tmWXMHtER0h++jPXdEVXopxjePU8Ff0ssrpUzGvE6lfQumSM7er0ehIPkgcyj0Nzujs8ITbFvT+IaQ4L8GPlRPmrjDZBI6IEdt8mf2068pobldpZePI6Cu7I502fjV2OBdoaUWTH0lv2I+rSxqfnpPtFOq9b72FAnNg+esPb1cEkYyB2g2TSIQn+aLaQOEBqSQdXFC51D0b8iv4m2AvU5pdqco6DAaatHLS4N3Au17qM5b9pMsqBkusHJMTkJPMTKWfdOBNXtw5JvG3JlWJ7B84M8HeujUK5srVbr6OYPsT97xcrp7CoFY/y6LdQ9A3u6J5IhFfqQnKKfbFUkgmg1G/ziSjU+a3hTeKQQ17hxhKasZ8of5w2HUYV4X2EoVdkqoAvAoJwaxGMdpshpC2zAz1lCyX/DB7cf5ZmxNOJb/+/mrOfRA
 X-Spamd-Bar: /
 X-MailFrom: andi@etezian.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: CFDLXL5X3MQ5VTKLGXN7ZGSG37KBRXFX
-X-Message-ID-Hash: CFDLXL5X3MQ5VTKLGXN7ZGSG37KBRXFX
+Message-ID-Hash: N6D7HEB7EWAFGATZ7HEKT6LBLDO3RAC6
+X-Message-ID-Hash: N6D7HEB7EWAFGATZ7HEKT6LBLDO3RAC6
 X-Mailman-Approved-At: Mon, 20 Apr 2026 17:38:57 +0000
 CC: janusz.krzysztofik@intel.com, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org, sumit.semwal@linaro.org, Xiang Gao <gaoxiang17@xiaomi.com>, Andi Shyti <andi.shyti@linux.intel.com>, Andi Shyti <andi.shyti@kernel.org>, Janusz Krzysztofik <janusz.krzysztofik@linux.intel.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] [PATCH] dma-buf: fix UAF in dma_buf_put() tracepoint
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CFDLXL5X3MQ5VTKLGXN7ZGSG37KBRXFX/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/N6D7HEB7EWAFGATZ7HEKT6LBLDO3RAC6/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -88,8 +89,8 @@ X-Spamd-Result: default: False [3.09 / 15.00];
 	RCPT_COUNT_SEVEN(0.00)[10];
 	R_DKIM_NA(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,intel.com:email,amd.com:email,linaro.org:email,xiaomi.com:email]
-X-Rspamd-Queue-Id: 23080431B55
+	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:email,lists.linaro.org:helo,lists.linaro.org:rdns,amd.com:email,linaro.org:email,xiaomi.com:email]
+X-Rspamd-Queue-Id: 58E69431B7B
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
