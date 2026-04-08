@@ -2,176 +2,139 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id xqZUItZk5mlmvwEAu9opvQ
+	id eJFWNgtJ1mkFDQgAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:39:34 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 08 Apr 2026 14:24:43 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 20EAD431B23
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:39:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5D9023BBF6C
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 08 Apr 2026 14:24:43 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 26B383F7D9
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:39:33 +0000 (UTC)
-Received: from mx07-00376f01.pphosted.com (mx07-00376f01.pphosted.com [185.132.180.163])
-	by lists.linaro.org (Postfix) with ESMTPS id C79333F821
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  8 Apr 2026 10:33:29 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 18A7740492
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  8 Apr 2026 12:24:42 +0000 (UTC)
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
+	by lists.linaro.org (Postfix) with ESMTPS id C08C93F4C6
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  8 Apr 2026 12:24:39 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=imgtec.com header.s=dk201812 header.b=v0dGvejY;
-	dmarc=pass (policy=none) header.from=imgtec.com;
-	spf=pass (lists.linaro.org: domain of Matt.Coster@imgtec.com designates 185.132.180.163 as permitted sender) smtp.mailfrom=Matt.Coster@imgtec.com
-Received: from pps.filterd (m0168889.ppops.net [127.0.0.1])
-	by mx07-00376f01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6385eBuw2995154;
-	Wed, 8 Apr 2026 11:33:03 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=imgtec.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=dk201812; bh=Y
-	RbIUfy7PDUjzpSHaVbdZAuNWadSqt0BWYZ64+s6FzA=; b=v0dGvejY1qOLi4OWX
-	cSd8OYKCKN5epd3EIE+jSol+If6RExyox0ntJaT9DgWfxFpfbmvKfk73L/bQDNKf
-	sA48anNK2CaLzgXR4Z8XUDeALOEw08iIXfNMBL/oYWQyu+dkbQYRh2MSAth1z27d
-	IESyxiozXQeKIombfglswcVgXVCnwmg7YviHcMUw2//n0S+qwLaWreQ1Y55xpOdO
-	ceUMNds3TrKZN3Q3dB7Km9G8gR0OIBeNpn8l/4xyf7QvIK69hH97jiApPibjuhAI
-	oMlV0FcUPmFVA9rzRIsLnnAQXcRL9ef9FSf3xAYR3b+Y4i0v3kkYY9HPINzOHrjU
-	H2jpQ==
-Received: from hhmail02.hh.imgtec.org (83-244-153-141.cust-83.exponential-e.net [83.244.153.141])
-	by mx07-00376f01.pphosted.com (PPS) with ESMTPS id 4dd4s2gs5a-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Wed, 08 Apr 2026 11:33:03 +0100 (BST)
-Received: from HHMAIL03.hh.imgtec.org (10.44.0.121) by HHMAIL02.hh.imgtec.org
- (10.100.10.20) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Wed, 8 Apr
- 2026 11:33:02 +0100
-Received: from
- 1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.ip6.arpa
- (172.25.4.178) by HHMAIL03.hh.imgtec.org (10.44.0.121) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.37; Wed, 8 Apr 2026 11:33:02 +0100
-From: Matt Coster <matt.coster@imgtec.com>
-To: Frank Binns <frank.binns@imgtec.com>,
-        Brajesh Gupta
-	<brajesh.gupta@imgtec.com>,
-        Alexandru Dadu <alexandru.dadu@imgtec.com>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard
-	<mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        David Airlie
-	<airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Sumit Semwal
-	<sumit.semwal@linaro.org>,
-        =?utf-8?q?Christian_K=C3=B6nig?=
-	<christian.koenig@amd.com>,
-        Boris Brezillon <boris.brezillon@collabora.com>,
-        Alessio Belle <alessio.belle@imgtec.com>
-In-Reply-To: <20260330-job-submission-fixes-cleanup-v1-0-7de8c09cef8c@imgtec.com>
-References: <20260330-job-submission-fixes-cleanup-v1-0-7de8c09cef8c@imgtec.com>
-Message-ID: <177564438213.82099.271553295476946768.b4-ty@b4>
-Date: Wed, 8 Apr 2026 11:33:02 +0100
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=pbXrPiaX;
+	dmarc=pass (policy=none) header.from=gmail.com;
+	spf=pass (lists.linaro.org: domain of ckoenig.leichtzumerken@gmail.com designates 209.85.221.54 as permitted sender) smtp.mailfrom=ckoenig.leichtzumerken@gmail.com
+Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-43b87970468so4768293f8f.3
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 08 Apr 2026 05:24:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1775651079; x=1776255879; darn=lists.linaro.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=hcT0qoIH7xmelj+rFhrvLZcEz9q7W2TTx0LM03Unuj8=;
+        b=pbXrPiaXHTfWq8FZA/F/rD/De6Bo7og1C1RvcOoM+XZ5taNEGPTqIcahZiBa06Hlma
+         T0kIqQANLDHeejZwY5VXmWIVSIj8t5V/sICF2SNyQo4D+lv2KpGdbfn12/GR4lQGlTZ4
+         UU+f1yXmeiDBt2ZzYjhtTsRctp5rFKpFIibToIuByW9PUHwgkU1JYhobasqvPdJ7wkwz
+         lAIKQi3aCwDXAugw4unQazmUCVEGzAus/dE+aEPL5XLWq+A4PzzQeTakPLU+oWkKwikk
+         2X+yFc0BjP0E/3XWgiAxqnrkIScGLj70XImaPw5luQV+/pMk84pldnE064064c/ybjDR
+         vBCg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1775651079; x=1776255879;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=hcT0qoIH7xmelj+rFhrvLZcEz9q7W2TTx0LM03Unuj8=;
+        b=ICtnOxx8GpR7660hmltD/AtV4QmMTvmo35dF0n8vEPisy8RAM92NemNr7g9479Cnql
+         Mvw/J36R1dZ9g9SCa2CtDpKcViJ/frtnfDyjSYZ/PlGCNgqmxlGF9hV0UTEHzdPcfiM4
+         39ZlttFEAC3Qo3L2sKAX/3zpaaPsYmtxJP10kS+OwPgXDjduoOOcpHUPW9JC4O54IXQa
+         82vh0rSM1SwW4Is2zEbM4j/7g0HlLGR9bMrhRd0KrNEWkOjXU+YHim+XRpYZJAEUKcYt
+         Dw4oJ8Xae9ahCaqNeebu65wS79DFfUQjvjxGiovyDXIHhvbuj2Dz023/GKriaoPH4GZW
+         txcg==
+X-Forwarded-Encrypted: i=1; AJvYcCX7s97lcqccTo3zl6qgxRN0a8IwhL4vKiuzIvDkaklXGrngPpZ9iE+dsQi4ctOwITxaDiNMOPzReaY8Th5f@lists.linaro.org
+X-Gm-Message-State: AOJu0YwgCzjDqU5LfIFTJhnW5grdN2f27oCwXIkHXkudUd0BAjEMfM/l
+	S42F0GAJjbDFWwGmhjPr519hePv8wf/ARORHjpg0+rWf97aHT6A71vhl
+X-Gm-Gg: AeBDieu6odIXTw4bqSfbA5WmyfP4LxZtGN94VIfx602dqzp/S1a45TbLllMsdAIrhI8
+	ZIUkRxPN5h5wmLUJzxR+gJkCS3NaQFMXYEicnhx+s/xj6rmwR711boePdLeVVMyup4AXrM5t+wo
+	HsjTtdTWudYhkjr42ZzMVyZC2AaxU1rCoFFp6OdeuvFC0CX9TOIkrnbf2WmK2MhxJ4toYuox2MI
+	m5grwxzHdPmqwcfhy0o7PUVX/hb+SvEss1rUydfXIwzw4qY8pJXjMdbug/L9Dfp3PatuMt6bPZK
+	0UhfUBHe4fk24bdaGwjPUJdb8+bYidbE+IrU7QMz/F9Sah8j4jkkHdK3yHsWIP3uza/fYVHrXge
+	jUPWG7D5z6vBgKvhs09Dt3kL35Il6YrarHtEWPk2P6IFQteikUzfj/jzh+Puod1Q+xLpvc/Cnl7
+	CtRYv9f3qNzgBa5pWmCgumDAU2kheT6cooG5k=
+X-Received: by 2002:a05:6000:1446:b0:439:dfae:8083 with SMTP id ffacd0b85a97d-43d292dbc56mr31451445f8f.38.1775651078507;
+        Wed, 08 Apr 2026 05:24:38 -0700 (PDT)
+Received: from able.fritz.box ([2a00:e180:1423:3300:ad43:2520:7f6:56d3])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43d1e4e5890sm57197590f8f.31.2026.04.08.05.24.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 08 Apr 2026 05:24:38 -0700 (PDT)
+From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
+X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
+To: janusz.krzysztofik@intel.com,
+	dri-devel@lists.freedesktop.org,
+	linaro-mm-sig@lists.linaro.org,
+	linux-media@vger.kernel.org,
+	gaoxiang17@xiaomi.com
+Date: Wed,  8 Apr 2026 14:24:37 +0200
+Message-ID: <20260408122437.1364-1-christian.koenig@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-Mailer: b4 0.15.1
-X-Originating-IP: [172.25.4.178]
-X-Proofpoint-GUID: _TMcyOQ8vC78jZMMA64wGo11iNMJ4oFu
-X-Authority-Analysis: v=2.4 cv=cL/QdFeN c=1 sm=1 tr=0 ts=69d62edf cx=c_pps
- a=AKOq//PuzOIrVTIF9yBwbA==:117 a=AKOq//PuzOIrVTIF9yBwbA==:17
- a=vO48zYV2LvQA:10 a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=kQ-hrUj2-E3RCbRHssb7:22 a=7RYWX5rxfSByPNLylY2M:22
- a=r_1tXGB3AAAA:8 a=TDz46OUBVoeO_pJfSP8A:9 a=QEXdDO2ut3YA:10
- a=t8nPyN_e6usw4ciXM-Pk:22
-X-Proofpoint-ORIG-GUID: _TMcyOQ8vC78jZMMA64wGo11iNMJ4oFu
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDA4MDA5NyBTYWx0ZWRfX/eQQBFVBZg2E
- Ol7j9k4HU3URWdMzOVwSOImzIkGBeYxlGqzExnLAasSyRg/51K4G5pLUuiuri0pu1HpawO4x1KI
- G+P+zkm9OAwZwpYAGtSi78AT9wmrPRrMjLQQRE9lMi3wYAUcJToHanw0t8vduYtwfso9mvHULNu
- m5HjA9ISZkKQKT2hKV9reG8Fl2jRI64qTa2EUWqEDqTZDIBLUj4edSfev+lEzljuBTe0MwXLi2z
- gmYxh1NhVdu1n0GqodK176OBD8IFLEGsczmNJPDngu2ZhFwrk3oQvrkfWk6optu263lnp3KVQt6
- aMAjI5ktnBDJdDHXSyxg1FZAV/NpgrRhcr8WWNSOXXi9TdVPqsSJvmUkuYEfXQdZLbqbGDvxB2I
- W7zpm1oxzvLI1oJ40oh3NoQ/IPFyZ0lo9DMxPoc7Nik6NIMUVbdoqPyfuK5nz+C0CeC/Ik9f3Hp
- MpRDyJ38fg6uOCpHtxA==
-X-Spamd-Bar: ---
-X-MailFrom: Matt.Coster@imgtec.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: ABQQ7EQDTZF5MY2B4VKZU37JZSMMIKQI
-X-Message-ID-Hash: ABQQ7EQDTZF5MY2B4VKZU37JZSMMIKQI
-X-Mailman-Approved-At: Mon, 20 Apr 2026 17:38:56 +0000
-CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, stable@vger.kernel.org
+X-Spamd-Bar: ----
+Message-ID-Hash: QZ5ZEMHJI5CHZCGETYZRWPWNKI4XB2KP
+X-Message-ID-Hash: QZ5ZEMHJI5CHZCGETYZRWPWNKI4XB2KP
+X-MailFrom: ckoenig.leichtzumerken@gmail.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: sumit.semwal@linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 0/8] drm/imagination: Job submission fixes and cleanup
+Subject: [Linaro-mm-sig] [PATCH] dma-buf: fix order of trace and fput
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ABQQ7EQDTZF5MY2B4VKZU37JZSMMIKQI/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QZ5ZEMHJI5CHZCGETYZRWPWNKI4XB2KP/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [2.09 / 15.00];
-	R_DKIM_REJECT(1.00)[imgtec.com:s=dk201812];
-	DATE_IN_PAST(1.00)[295];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+X-Spamd-Result: default: False [0.69 / 15.00];
+	R_DKIM_REJECT(1.00)[gmail.com:s=20251104];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+mx];
+	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[imgtec.com : SPF not aligned (relaxed),none];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	SUSPICIOUS_AUTH_ORIGIN(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[17];
-	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
-	FREEMAIL_TO(0.00)[imgtec.com,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,collabora.com];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[imgtec.com:-];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	FROM_NEQ_ENVFROM(0.00)[matt.coster@imgtec.com,linaro-mm-sig-bounces@lists.linaro.org];
+	RCVD_COUNT_THREE(0.00)[4];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	HAS_XOIP(0.00)[];
+	ARC_NA(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	DKIM_TRACE(0.00)[gmail.com:-];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_NONE(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[ckoenigleichtzumerken@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	RCPT_COUNT_FIVE(0.00)[6];
+	NEURAL_HAM(-0.00)[-0.773];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	NEURAL_HAM(-0.00)[-0.966];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,imgtec.com:email,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: 20EAD431B23
+	DBL_BLOCKED_OPENRESOLVER(0.00)[amd.com:email,amd.com:mid]
+X-Rspamd-Queue-Id: 5D9023BBF6C
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-
-On Mon, 30 Mar 2026 08:56:35 +0100, Alessio Belle wrote:
-> The first two commits fix rare bugs and should be backported to stable
-> branches.
-> 
-> The rest is an attempt to cleanup and document the code to make it
-> a bit easier to understand.
-> 
-> 
-> [...]
-
-Applied, thanks!
-
-[1/8] drm/imagination: Count paired job fence as dependency in prepare_job()
-      commit: 9cd74f935306cd857f46686975c43383e1d95f94
-[2/8] drm/imagination: Fit paired fragment job in the correct CCCB
-      commit: 4baf9e70cb756d78dd56419f8baee2978a72d0c3
-[3/8] drm/imagination: Skip check on paired job fence during job submission
-      commit: 18998b3cb7595850b8b2da55adb3fdc7aef8bc22
-[4/8] drm/imagination: Rename pvr_queue_fence_is_ufo_backed() to reflect usage
-      commit: c162e655092de8de2e0f7776d72919dd5e3b84f2
-[5/8] drm/imagination: Rename fence returned by pvr_queue_job_arm()
-      commit: 5dae1a21f1e7128a19c68212422383f700699d01
-[6/8] drm/imagination: Move repeated job fence check to its own function
-      commit: 402562e60c6c1b15ee359ba7ffed907baa886a99
-[7/8] drm/imagination: Update check to skip prepare_job() for fragment jobs
-      commit: 5c81eb2970133ad073214eb1e5b0c34a1ae793eb
-[8/8] drm/imagination: Minor improvements to job submission code documentation
-      commit: 62a36c2da774800bef893bc4bf8922fb9c07c1d0
-
-Best regards,
--- 
-Matt Coster <matt.coster@imgtec.com>
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+RHJvcHBpbmcgdGhlIGxhc3QgcmVmZXJlbmNlIHRvIHRoZSBETUEtYnVmIGFuZCB0aGVuIGFjY2Vz
+c2luZyB0aGUgbmFtZQ0KZm9yIHRyYWNpbmcgY2FuJ3Qgd29yayBjb3JyZWN0bHkuDQoNCk9ubHkg
+Y29tcGlsZSB0ZXN0ZWQhDQoNClNpZ25lZC1vZmYtYnk6IENocmlzdGlhbiBLw7ZuaWcgPGNocmlz
+dGlhbi5rb2VuaWdAYW1kLmNvbT4NCkZpeGVkOiAyODFhMjI2MzE0MjMgKCJkbWEtYnVmOiBhZGQg
+c29tZSB0cmFjZXBvaW50cyB0byBkZWJ1Zy4iKQ0KLS0tDQogZHJpdmVycy9kbWEtYnVmL2RtYS1i
+dWYuYyB8IDMgKy0tDQogMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAyIGRlbGV0aW9u
+cygtKQ0KDQpkaWZmIC0tZ2l0IGEvZHJpdmVycy9kbWEtYnVmL2RtYS1idWYuYyBiL2RyaXZlcnMv
+ZG1hLWJ1Zi9kbWEtYnVmLmMNCmluZGV4IDExNzExODc0YTMyNS4uM2E5ZDUxMTNiOThjIDEwMDY0
+NA0KLS0tIGEvZHJpdmVycy9kbWEtYnVmL2RtYS1idWYuYw0KKysrIGIvZHJpdmVycy9kbWEtYnVm
+L2RtYS1idWYuYw0KQEAgLTg0NSw5ICs4NDUsOCBAQCB2b2lkIGRtYV9idWZfcHV0KHN0cnVjdCBk
+bWFfYnVmICpkbWFidWYpDQogCWlmIChXQVJOX09OKCFkbWFidWYgfHwgIWRtYWJ1Zi0+ZmlsZSkp
+DQogCQlyZXR1cm47DQogDQotCWZwdXQoZG1hYnVmLT5maWxlKTsNCi0NCiAJRE1BX0JVRl9UUkFD
+RSh0cmFjZV9kbWFfYnVmX3B1dCwgZG1hYnVmKTsNCisJZnB1dChkbWFidWYtPmZpbGUpOw0KIH0N
+CiBFWFBPUlRfU1lNQk9MX05TX0dQTChkbWFfYnVmX3B1dCwgIkRNQV9CVUYiKTsNCiANCi0tIA0K
+Mi40My4wDQoNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+CkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJv
+Lm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVA
+bGlzdHMubGluYXJvLm9yZwo=
