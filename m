@@ -2,245 +2,340 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id GPWRFR2012kORggAu9opvQ
+	id AEW6KPNk5mkKvwEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 09 Apr 2026 16:13:49 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:40:03 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id D34823CBD31
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 09 Apr 2026 16:13:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 51DEA431BCF
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:40:02 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DB6B74049F
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  9 Apr 2026 14:13:47 +0000 (UTC)
-Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DED6640494
-	for <linaro-mm-sig@lists.linaro.org>; Thu,  9 Apr 2026 14:13:40 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 0F927405D5
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:40:02 +0000 (UTC)
+Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com [136.143.188.112])
+	by lists.linaro.org (Postfix) with ESMTPS id DCCA33F78B
+	for <linaro-mm-sig@lists.linaro.org>; Thu,  9 Apr 2026 22:57:15 +0000 (UTC)
+Authentication-Results: lists.linaro.org;
+	dkim=pass header.d=collabora.com header.s=zohomail header.b=IiBOlxF7;
+	dmarc=pass (policy=none) header.from=collabora.com;
+	spf=pass (lists.linaro.org: domain of deborah.brouwer@collabora.com designates 136.143.188.112 as permitted sender) smtp.mailfrom=deborah.brouwer@collabora.com;
+	arc=pass ("zohomail.com:s=zohoarc:i=1")
+ARC-Seal: i=1; a=rsa-sha256; t=1775775427; cv=none;
+	d=zohomail.com; s=zohoarc;
+	b=m4HMpydMUiKIypEQgW6lE0uc9Durc0jVzFb/kzdmqnnznlX2Ixpm+FkCIVVQ98qrsFEqrnvkrvimFZmpCLYmLlGGLIzDCJfnnjCRF2Mw1ysWFCKsKwwRfmBpdz84Jh7eP2STnJiR3tmF3SESeqgJzhEdNCUrYr0TrSwWiF/gpHs=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc;
+	t=1775775427; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+	bh=mglfHDbQCdy4UxiAawklgqLRry8FY4Gua9B8jPjXuow=;
+	b=C9DX0pvd94VEeXNdz66O5D5Z3yzcRGfY/HtGsXcMYcScTMZ16Jx+f3QFbcDOTT4pGhzAjVwSuJN4yyvGcfWE5K9FrMEXBncN1mjWdcNmrrEFIZ39Pya99XFAsoyEIWQqDhzJeYa1oyK/xzfXWVuhS/ldnLmxEOv/n4pf7DXlfnQ=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=collabora.com;
+	spf=pass  smtp.mailfrom=deborah.brouwer@collabora.com;
+	dmarc=pass header.from=<deborah.brouwer@collabora.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1775775426;
+	s=zohomail; d=collabora.com; i=deborah.brouwer@collabora.com;
+	h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:References:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:Message-Id:Reply-To;
+	bh=mglfHDbQCdy4UxiAawklgqLRry8FY4Gua9B8jPjXuow=;
+	b=IiBOlxF7Bp5ihDohymYF03yGGNlWo9IPoN7KuA8VYBzOm5Et+C8w68RGS/gK4wDD
+	xj5PR7Ru35KRCmAaA9nz4A+s+2sDB0RoznCzRciIpC7M1JAfG4pVVox/pzYjTgcdvVe
+	pCJXqHX2ljR5wqUAWJ03nAyAWTkQ2XfJvGUE3HpI=
+Received: by mx.zohomail.com with SMTPS id 1775775425845803.217885107667;
+	Thu, 9 Apr 2026 15:57:05 -0700 (PDT)
+Date: Thu, 9 Apr 2026 15:57:04 -0700
+From: Deborah Brouwer <deborah.brouwer@collabora.com>
+To: Lyude Paul <lyude@redhat.com>
+Message-ID: <adguwHf8NpFPqWkV@um790>
+References: <20260409001559.622026-1-lyude@redhat.com>
+ <20260409001559.622026-5-lyude@redhat.com>
 MIME-Version: 1.0
-From: "Chong Criston" <chongcriston@gmail.com>
-To: linaro-mm-sig@lists.linaro.org
-Date: Thu, 09 Apr 2026 14:13:40 -0000
-Message-ID: <177574402091.3481605.13528858083926293523@lists.linaro.org>
-User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: XBD355IEIOP56OL2WBXE7UW5Z6ZVJEET
-X-Message-ID-Hash: XBD355IEIOP56OL2WBXE7UW5Z6ZVJEET
-X-MailFrom: chongcriston@gmail.com
-X-Mailman-Rule-Hits: member-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
+Content-Disposition: inline
+In-Reply-To: <20260409001559.622026-5-lyude@redhat.com>
+X-Spamd-Bar: ----
+X-MailFrom: deborah.brouwer@collabora.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+Message-ID-Hash: W2KCDPG7W2KKO656KTGYPIA5LKHNSALQ
+X-Message-ID-Hash: W2KCDPG7W2KKO656KTGYPIA5LKHNSALQ
+X-Mailman-Approved-At: Mon, 20 Apr 2026 17:39:00 +0000
+CC: nouveau@lists.freedesktop.org, Gary Guo <gary@garyguo.net>, Daniel Almeida <daniel.almeida@collabora.com>, rust-for-linux@vger.kernel.org, Danilo Krummrich <dakr@kernel.org>, dri-devel@lists.freedesktop.org, Matthew Maurer <mmaurer@google.com>, FUJITA Tomonori <fujita.tomonori@gmail.com>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, christian.koenig@amd.com, Asahi Lina <lina@asahilina.net>, Miguel Ojeda <ojeda@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, Simona Vetter <simona@ffwll.ch>, Alice Ryhl <aliceryhl@google.com>, Boqun Feng <boqun@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Krishna Ketan Rai <prafulrai522@gmail.com>, linux-media@vger.kernel.org, Shankari Anand <shankari.ak0208@gmail.com>, David Airlie <airlied@gmail.com>, Benno Lossin <lossin@kernel.org>, Viresh Kumar <viresh.kumar@linaro.org>, linaro-mm-sig@lists.linaro.org, Asahi Lina <lina+kernel@asahilina.net>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] ragdoll kittens for sale near me by owner
+Subject: [Linaro-mm-sig] Re: [PATCH v10 4/5] rust: drm: gem: Introduce shmem::SGTable
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XBD355IEIOP56OL2WBXE7UW5Z6ZVJEET/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/W2KCDPG7W2KKO656KTGYPIA5LKHNSALQ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [6.01 / 15.00];
-	SPAM_FLAG(5.00)[];
-	MID_RHS_MATCH_TO(1.00)[];
-	HFILTER_URL_ONLY(0.42)[0.19293291612608];
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+X-Spamd-Result: default: False [4.69 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	R_DKIM_REJECT(1.00)[collabora.com:s=zohomail];
+	DATE_IN_PAST(1.00)[258];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:zohomail.com:reject}];
+	MID_RHS_NOT_FQDN(0.50)[];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx:c];
+	MIME_BASE64_TEXT(0.10)[];
+	DMARC_POLICY_SOFTFAIL(0.10)[collabora.com : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	GREYLIST(0.00)[pass,meta];
-	ARC_NA(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_ONE(0.00)[1];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_NEQ_ENVFROM(0.00)[chongcriston@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	RCVD_COUNT_THREE(0.00)[3];
+	RCPT_COUNT_TWELVE(0.00)[28];
+	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[lists.freedesktop.org,garyguo.net,collabora.com,vger.kernel.org,kernel.org,google.com,gmail.com,oracle.com,amd.com,asahilina.net,ffwll.ch,linaro.org,lists.linaro.org,linuxfoundation.org];
+	TAGGED_RCPT(0.00)[linaro-mm-sig,kernel];
+	NEURAL_HAM(-0.00)[-0.021];
+	FROM_NEQ_ENVFROM(0.00)[deborah.brouwer@collabora.com,linaro-mm-sig-bounces@lists.linaro.org];
+	TO_DN_SOME(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	TO_DN_NONE(0.00)[];
-	R_DKIM_NA(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:mid]
-X-Rspamd-Queue-Id: D34823CBD31
-X-Rspamd-Action: add header
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	DKIM_TRACE(0.00)[collabora.com:-];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
+X-Rspamd-Queue-Id: 51DEA431BCF
+X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spam: Yes
 
-https://rainingragdollsforsale.online/
-https://rainingragdollsforsale.online/health-guarantee/
-https://rainingragdollsforsale.online/reviews/
-https://rainingragdollsforsale.online/contact/
-https://rainingragdollsforsale.online/shipping/
-https://rainingragdollsforsale.online/about-us/
-https://rainingragdollsforsale.online/available-kittens/
-https://rainingragdollsforsale.online/shop/
-https://rainingragdollsforsale.online/product/brown-ragdoll-kittens-for-sale-us/
-https://rainingragdollsforsale.online/product/ragdoll-kittens-for-sale-near-me/
-https://rainingragdollsforsale.online/product/ragdoll-kittens-for-sale-near-me-by-owner/
-https://rainingragdollsforsale.online/product/ragdoll-kittens-for-sale-near-me-cheap/
-https://rainingragdollsforsale.online/product/ragdoll-kittens-for-sale-near-me-craigslist/
-https://rainingragdollsforsale.online/product/ragdoll-kittens-for-sale-near-me-open-now/
-https://rainingragdollsforsale.online/product/ragdoll-kittens-for-sale-near-me-under-500/
-https://rainingragdollsforsale.online/product/ragdoll-kittens-for-sale-near-me-within-20-mi/
-https://rainingragdollsforsale.online/product/ragdoll-kittens-for-sale-near-memphis-tn/
-https://rainingragdollsforsale.online/shop/page/2/
-https://rainingragdollsforsale.online/product-category/ragdoll-kittens-for-sale-us-price/
-https://rainingragdollsforsale.online/product-tag/brown-ragdoll-kittens-for-sale-us/
-https://rainingragdollsforsale.online/product-tag/chocolate-ragdoll-kittens-for-sale-us/
-https://rainingragdollsforsale.online/product-tag/cinnamon-ragdoll-kittens-for-sale-us/
-https://rainingragdollsforsale.online/product-tag/ginger-ragdoll-kittens-for-sale-us/
-https://rainingragdollsforsale.online/product-tag/how-much-are-ragdoll-kittens-us/
-https://rainingragdollsforsale.online/product-tag/how-much-does-ragdoll-kittens-cost/
-https://rainingragdollsforsale.online/product-tag/how-much-should-a-ragdoll-kitten-cost/
-https://rainingragdollsforsale.online/product-tag/mink-ragdoll-kittens-for-sale-us/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-cleveland-ohio/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-columbus-ohio/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-craigslist-mn/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-craigslist-mn-free/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-duluth-mn/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-mn/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-mn-rescue/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-mn-under-500/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-mn-under-500-near/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-near-me/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-near-me-by-owner/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-near-me-cheap/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-near-me-craigslist/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-near-me-for-adoption/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-near-me-open-now/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-near-me-under-500/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-near-me-within-20-mi/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-near-memphis-tn/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-near-rochester-mn/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-near-st-cloud-mn/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-near-st-paul-mn/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-ohio/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-ohio-cheap/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-ohio-hoobly/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-ohio-price/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-ohio-rescue/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-ohio-rescue-near-me/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-ohio-under-500/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-ohio-under-500-near-me/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-us/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-us-cheap/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-us-for-free/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-us-kennel-club/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-us-price/
-https://rainingragdollsforsale.online/product-tag/what-is-ragdoll-kitten/
-https://rainingragdollsforsale.online/product/ragdoll-kittens-for-sale-us/
-https://rainingragdollsforsale.online/product/ragdoll-kittens-for-sale-us-cheap/
-https://rainingragdollsforsale.online/product-category/ragdoll-kittens-for-sale-near-me/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-near-me-telford/
-https://rainingragdollsforsale.online/product-category/ragdoll-kittens-for-sale-near-me-by-owner/
-https://rainingragdollsforsale.online/product/ragdoll-kittens-for-sale-us-kennel-club/
-https://rainingragdollsforsale.online/product/ragdoll-kittens-for-sale-us-price/
-https://rainingragdollsforsale.online/product-category/ragdoll-kittens-for-sale-near-me-cheap/
-https://rainingragdollsforsale.online/product-category/ragdoll-kittens-for-sale-near-me-craigslist/
-https://rainingragdollsforsale.online/product-category/ragdoll-kittens-for-sale-near-me-open-now/
-https://rainingragdollsforsale.online/product-category/ragdoll-kittens-for-sale-near-me-under-500/
-https://rainingragdollsforsale.online/product-category/ragdoll-kittens-for-sale-near-me-within-20-mi/
-https://rainingragdollsforsale.online/product-category/ragdoll-kittens-for-sale-near-memphis-tn/
-https://rainingragdollsforsale.online/product/ragdoll-kittens-for-sale-us-for-free/
-https://rainingragdollsforsale.online/product-tag/brown-ragdoll-kittens-for-sale-us/page/2/
-https://rainingragdollsforsale.online/product-tag/chocolate-ragdoll-kittens-for-sale-us/page/2/
-https://rainingragdollsforsale.online/product-tag/cinnamon-ragdoll-kittens-for-sale-us/page/2/
-https://rainingragdollsforsale.online/product-tag/ginger-ragdoll-kittens-for-sale-us/page/2/
-https://rainingragdollsforsale.online/product-tag/how-much-are-ragdoll-kittens-us/page/2/
-https://rainingragdollsforsale.online/product-tag/how-much-does-ragdoll-kittens-cost/page/2/
-https://rainingragdollsforsale.online/product-tag/how-much-should-a-ragdoll-kitten-cost/page/2/
-https://rainingragdollsforsale.online/product-tag/mink-ragdoll-kittens-for-sale-us/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-cleveland-ohio/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-columbus-ohio/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-craigslist-mn/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-craigslist-mn-free/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-duluth-mn/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-mn/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-mn-rescue/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-mn-under-500/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-mn-under-500-near/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-near-me/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-near-me-by-owner/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-near-me-cheap/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-near-me-craigslist/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-near-me-for-adoption/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-near-me-open-now/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-near-me-under-500/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-near-me-within-20-mi/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-near-memphis-tn/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-near-rochester-mn/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-near-st-cloud-mn/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-near-st-paul-mn/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-ohio/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-ohio-cheap/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-ohio-hoobly/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-ohio-price/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-ohio-rescue/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-ohio-rescue-near-me/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-ohio-under-500/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-ohio-under-500-near-me/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-us/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-us-cheap/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-us-for-free/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-us-kennel-club/page/2/
-https://rainingragdollsforsale.online/product-tag/ragdoll-kittens-for-sale-us-price/page/2/
-https://rainingragdollsforsale.online/product-tag/what-is-ragdoll-kitten/page/2/
-https://rainingragdollsforsale.online/product-category/uncategorized/
-https://rainingragdollsforsale.online/product-category/ragdoll-kittens-for-sale-us-cheap/
-https://rainingragdollsforsale.online/product-category/ragdoll-kittens-for-sale-us-kennel-club/
-https://rainingragdollsforsale.online/product-category/ragdoll-kittens-for-sale-us-for-free/
-
-ragdoll kittens for sale,
-ragdoll kittens for sale near me,
-ragdoll kittens for sale near me under $500,
-ragdoll kittens for sale near me cheap,
-ragdoll kittens for sale near me by owner,
-ragdoll kittens for sale near me within 20 mi,
-ragdoll kittens for sale near me craigslist,
-ragdoll kittens for sale near memphis tn,
-ragdoll kittens for sale near me for adoption,
-ragdoll kittens for sale near me open now,
-ragdoll kittens for sale us,
-ragdoll kittens for sale us cheap,
-ragdoll kittens for sale us kennel club,
-ragdoll kittens for sale us for free,
-ragdoll kittens for sale us price,
-brown ragdoll kittens for sale us,
-cinnamon ragdoll kittens for sale us,
-chocolate ragdoll kittens for sale us,
-ginger ragdoll kittens for sale us,
-mink ragdoll kittens for sale us,
-ragdoll kittens for sale ohio,
-ragdoll kittens for sale ohio under $500,
-ragdoll kittens for sale ohio hoobly,
-ragdoll kittens for sale ohio rescue,
-ragdoll kittens for sale ohio rescue near me,
-ragdoll kittens for sale ohio price,
-ragdoll kittens for sale ohio under $500 near me,
-ragdoll kittens for sale ohio cheap,
-ragdoll kittens for sale columbus ohio,
-ragdoll kittens for sale cleveland ohio,
-how much does ragdoll kittens cost,
-how much are ragdoll kittens us,
-what is ragdoll kitten,
-how much should a ragdoll kitten cost,
-ragdoll kittens for sale mn,
-ragdoll kittens for sale mn under $500,
-ragdoll kittens for sale mn rescue,
-ragdoll kittens for sale mn under $500 near,
-ragdoll kittens for sale near st cloud mn,
-ragdoll kittens for sale craigslist mn,
-ragdoll kittens for sale near st paul mn,
-ragdoll kittens for sale duluth mn,
-ragdoll kittens for sale near rochester mn,
-ragdoll kittens for sale craigslist mn free,
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gV2VkLCBBcHIgMDgsIDIwMjYgYXQgMDg6MTI6NTBQTSAtMDQwMCwgTHl1ZGUgUGF1bCB3cm90
+ZToNCj4gSW4gb3JkZXIgdG8gZG8gdGhpcywgd2UgbmVlZCB0byBiZSBjYXJlZnVsIHRvIGVuc3Vy
+ZSB0aGF0IGFueSBpbnRlcmZhY2Ugd2UNCj4gZXhwb3NlIGZvciBzY2F0dGVybGlzdHMgZW5zdXJl
+cyB0aGF0IGFueSBtYXBwaW5ncyBjcmVhdGVkIGZyb20gb25lIGFyZQ0KPiBkZXN0cm95ZWQgb24g
+ZHJpdmVyLXVuYmluZC4gVG8gZG8gdGhpcywgd2UgaW50cm9kdWNlIGEgRGV2cmVzIHJlc291cmNl
+IGludG8NCj4gc2htZW06Ok9iamVjdCB0aGF0IHdlIHVzZSBpbiBvcmRlciB0byBlbnN1cmUgdGhh
+dCB3ZSByZWxlYXNlIGFueSBTR1RhYmxlDQo+IG1hcHBpbmdzIG9uIGRyaXZlci11bmJpbmQuIFdl
+IHN0b3JlIHRoaXMgaW4gYW4gVW5zYWZlQ2VsbCBhbmQgcHJvdGVjdA0KPiBhY2Nlc3MgdG8gaXQg
+dXNpbmcgdGhlIGRtYV9yZXN2IGxvY2sgdGhhdCB3ZSBhbHJlYWR5IGhhdmUgZnJvbSB0aGUgc2ht
+ZW0NCj4gZ2VtIG9iamVjdCwgd2hpY2ggaXMgdGhlIHNhbWUgbG9jayB0aGF0IGN1cnJlbnRseSBw
+cm90ZWN0cw0KPiBkcm1fZ2VtX29iamVjdF9zaG1lbS0+c2d0Lg0KPiANCj4gV2UgYWxzbyBwcm92
+aWRlIHR3byBkaWZmZXJlbnQgbWV0aG9kcyBmb3IgYWNxdWlyaW5nIGFuIHNnIHRhYmxlOg0KPiBz
+ZWxmLnNnX3RhYmxlKCksIGFuZCBzZWxmLm93bmVkX3NnX3RhYmxlKCkuIFRoZSBmaXJzdCBmdW5j
+dGlvbiBpcyBmb3INCj4gc2hvcnQtdGVybSB1c2VzIG9mIG1hcHBlZCBTR1RhYmxlcywgdGhlIHNl
+Y29uZCBpcyBmb3IgY2FsbGVycyB0aGF0IG5lZWQgdG8NCj4gaG9sZCBvbnRvIHRoZSBtYXBwZWQg
+U0dUYWJsZSBmb3IgYW4gZXh0ZW5kZWQgcGVyaW9kIG9mIHRpbWUuIFRoZSBzZWNvbmQNCj4gdmFy
+aWFudCB1c2VzIERldnJlcyBvZiBjb3Vyc2UsIHdoZXJlYXMgdGhlIGZpcnN0IHNpbXBseSByZWxp
+ZXMgb24gcnVzdCdzDQo+IGJvcnJvdyBjaGVja2VyIHRvIHByZXZlbnQgZHJpdmVyLXVuYmluZCB3
+aGVuIHVzaW5nIHRoZSBtYXBwZWQgU0dUYWJsZS4NCj4gDQo+IFNpZ25lZC1vZmYtYnk6IEx5dWRl
+IFBhdWwgPGx5dWRlQHJlZGhhdC5jb20+DQo+IA0KPiAtLS0NCj4gVjM6DQo+ICogUmVuYW1lIE93
+bmVkU0dUYWJsZSB0byBzaG1lbTo6U0dUYWJsZS4gU2luY2UgdGhlIGN1cnJlbnQgdmVyc2lvbiBv
+ZiB0aGUNCj4gICBTR1RhYmxlIGFic3RyYWN0aW9ucyBub3cgaGFzIGEgYE93bmVkYCBhbmQgYEJv
+cnJvd2VkYCB2YXJpYW50LCBJIHRoaW5rDQo+ICAgcmVuYW1pbmcgdGhpcyB0byBzaG1lbTo6U0dU
+YWJsZSBtYWtlcyB0aGluZ3MgbGVzcyBjb25mdXNpbmcuDQo+ICAgV2UgZG8gaG93ZXZlciwga2Vl
+cCB0aGUgbmFtZSBvZiBvd25lZF9zZ190YWJsZSgpIGFzLWlzLg0KPiBWNDoNCj4gKiBDbGFyaWZ5
+IHNhZmV0eSBjb21tZW50cyBmb3IgU0dUYWJsZSB0byBleHBsYWluIHdoeSB0aGUgb2JqZWN0IGlz
+DQo+ICAgdGhyZWFkLXNhZmUuDQo+ICogUmVuYW1lIGZyb20gU0dUYWJsZVJlZiB0byBTR1RhYmxl
+DQo+IFYxMDoNCj4gKiBVc2UgRGV2cmVzIGluIG9yZGVyIHRvIGVuc3VyZSB0aGF0IFNHVGFibGVz
+IGFyZSByZXZvY2FibGUsIGFuZCBhcmUNCj4gICB1bm1hcHBlZCBvbiBkcml2ZXItdW5iaW5kLg0K
+PiANCj4gIHJ1c3Qva2VybmVsL2RybS9nZW0vc2htZW0ucnMgfCAxOTEgKysrKysrKysrKysrKysr
+KysrKysrKysrKysrKysrKysrKy0NCj4gIDEgZmlsZSBjaGFuZ2VkLCAxODkgaW5zZXJ0aW9ucygr
+KSwgMiBkZWxldGlvbnMoLSkNCj4gDQo+IGRpZmYgLS1naXQgYS9ydXN0L2tlcm5lbC9kcm0vZ2Vt
+L3NobWVtLnJzIGIvcnVzdC9rZXJuZWwvZHJtL2dlbS9zaG1lbS5ycw0KPiBpbmRleCBjNjQzZjE4
+YjIwODM4Li4xMTFiZTQ0NjIxM2RmIDEwMDY0NA0KPiAtLS0gYS9ydXN0L2tlcm5lbC9kcm0vZ2Vt
+L3NobWVtLnJzDQo+ICsrKyBiL3J1c3Qva2VybmVsL2RybS9nZW0vc2htZW0ucnMNCj4gQEAgLTEx
+LDI1ICsxMSwzOCBAQA0KPiAgDQo+ICB1c2UgY3JhdGU6OnsNCj4gICAgICBjb250YWluZXJfb2Ys
+DQo+ICsgICAgZGV2aWNlOjp7DQo+ICsgICAgICAgIHNlbGYsDQo+ICsgICAgICAgIEJvdW5kLCAv
+Lw0KPiArICAgIH0sDQo+ICsgICAgZGV2cmVzOjoqLA0KPiAgICAgIGRybTo6ew0KPiAgICAgICAg
+ICBkcml2ZXIsDQo+ICAgICAgICAgIGdlbSwNCj4gICAgICAgICAgcHJpdmF0ZTo6U2VhbGVkLCAv
+Lw0KPiAgICAgICAgICBEZXZpY2UsDQo+ICAgICAgfSwNCj4gLSAgICBlcnJvcjo6dG9fcmVzdWx0
+LA0KPiArICAgIGVycm9yOjp7DQo+ICsgICAgICAgIGZyb21fZXJyX3B0ciwgLy8NCj4gKyAgICAg
+ICAgdG9fcmVzdWx0LA0KPiArICAgIH0sDQo+ICAgICAgcHJlbHVkZTo6KiwNCj4gKyAgICBzY2F0
+dGVybGlzdCwNCj4gICAgICB0eXBlczo6ew0KPiAgICAgICAgICBBUmVmLA0KPiAgICAgICAgICBP
+cGFxdWUsIC8vDQo+ICAgICAgfSwgLy8NCj4gIH07DQo+ICB1c2UgY29yZTo6ew0KPiArICAgIGNl
+bGw6OlVuc2FmZUNlbGwsDQo+ICAgICAgb3BzOjp7DQo+ICAgICAgICAgIERlcmVmLA0KPiAgICAg
+ICAgICBEZXJlZk11dCwgLy8NCj4gICAgICB9LA0KPiAtICAgIHB0cjo6Tm9uTnVsbCwNCj4gKyAg
+ICBwdHI6OnsNCj4gKyAgICAgICAgc2VsZiwNCj4gKyAgICAgICAgTm9uTnVsbCwgLy8NCj4gKyAg
+ICB9LA0KPiAgfTsNCj4gIHVzZSBnZW06OnsNCj4gICAgICBCYXNlT2JqZWN0UHJpdmF0ZSwNCj4g
+QEAgLTY1LDYgKzc4LDEwIEBAIHB1YiBzdHJ1Y3QgT2JqZWN0PFQ6IERyaXZlck9iamVjdD4gew0K
+PiAgICAgIG9iajogT3BhcXVlPGJpbmRpbmdzOjpkcm1fZ2VtX3NobWVtX29iamVjdD4sDQo+ICAg
+ICAgLy8vIFBhcmVudCBvYmplY3QgdGhhdCBvd25zIHRoaXMgb2JqZWN0J3MgRE1BIHJlc2VydmF0
+aW9uIG9iamVjdC4NCj4gICAgICBwYXJlbnRfcmVzdl9vYmo6IE9wdGlvbjxBUmVmPE9iamVjdDxU
+Pj4+LA0KPiArICAgIC8vLyBEZXZyZXMgb2JqZWN0IGZvciB1bm1hcHBpbmcgYW55IFNHVGFibGUg
+b24gZHJpdmVyLXVuYmluZC4NCj4gKyAgICAvLy8NCj4gKyAgICAvLy8gVGhpcyBpcyBwcm90ZWN0
+ZWQgYnkgdGhlIG9iamVjdCdzIGRtYV9yZXN2IGxvY2suDQo+ICsgICAgc2d0X3JlczogVW5zYWZl
+Q2VsbDxPcHRpb248RGV2cmVzPFNHVGFibGVNYXA8VD4+Pj4sDQo+ICAgICAgI1twaW5dDQo+ICAg
+ICAgaW5uZXI6IFQsDQo+ICB9DQo+IEBAIC0xMTcsNiArMTM0LDcgQEAgcHViIGZuIG5ldygNCj4g
+ICAgICAgICAgICAgIHRyeV9waW5faW5pdCEoU2VsZiB7DQo+ICAgICAgICAgICAgICAgICAgb2Jq
+IDwtIE9wYXF1ZTo6aW5pdF96ZXJvZWQoKSwNCj4gICAgICAgICAgICAgICAgICBwYXJlbnRfcmVz
+dl9vYmo6IGNvbmZpZy5wYXJlbnRfcmVzdl9vYmoubWFwKHxwfCBwLmludG8oKSksDQo+ICsgICAg
+ICAgICAgICAgICAgc2d0X3JlczogVW5zYWZlQ2VsbDo6bmV3KE5vbmUpLA0KPiAgICAgICAgICAg
+ICAgICAgIGlubmVyIDwtIFQ6Om5ldyhkZXYsIHNpemUsIGFyZ3MpLA0KPiAgICAgICAgICAgICAg
+fSksDQo+ICAgICAgICAgICAgICBHRlBfS0VSTkVMLA0KPiBAQCAtMTc2LDYgKzE5NCwxMDAgQEAg
+ZXh0ZXJuICJDIiBmbiBmcmVlX2NhbGxiYWNrKG9iajogKm11dCBiaW5kaW5nczo6ZHJtX2dlbV9v
+YmplY3QpIHsNCj4gICAgICAgICAgLy8gU0FGRVRZOiBXZSdyZSByZWNvdmVyaW5nIHRoZSBLYm94
+PD4gd2UgY3JlYXRlZCBpbiBnZW1fY3JlYXRlX29iamVjdCgpDQo+ICAgICAgICAgIGxldCBfID0g
+dW5zYWZlIHsgS0JveDo6ZnJvbV9yYXcodGhpcykgfTsNCj4gICAgICB9DQo+ICsNCj4gKyAgICAv
+LyBJZiBuZWNlc3NhcnksIGNyZWF0ZSBhbiBTR1RhYmxlIGZvciB0aGUgZ2VtIG9iamVjdCBhbmQg
+cmVnaXN0ZXIgYSBEZXZyZXMgZm9yIGl0IHRvIGVuc3VyZQ0KPiArICAgIC8vIHRoYXQgaXQgaXMg
+dW5tYXBwZWQgb24gZHJpdmVyIHVuYmluZC4NCj4gKyAgICBmbiBjcmVhdGVfc2dfdGFibGU8J2E+
+KA0KPiArICAgICAgICAmJ2Egc2VsZiwNCj4gKyAgICAgICAgZGV2OiAmJ2EgZGV2aWNlOjpEZXZp
+Y2U8Qm91bmQ+LA0KPiArICAgICkgLT4gUmVzdWx0PCYnYSBEZXZyZXM8U0dUYWJsZU1hcDxUPj4+
+IHsNCj4gKyAgICAgICAgbGV0IHJldDsNCj4gKyAgICAgICAgbGV0IHNndF9yZXNfcHRyID0gc2Vs
+Zi5zZ3RfcmVzLmdldCgpOw0KPiArDQo+ICsgICAgICAgIC8vIFNBRkVUWTogVGhpcyBsb2NrIGlz
+IGluaXRpYWxpemVkIHRocm91Z2hvdXQgdGhlIGxpZmV0aW1lIG9mIHRoZSBnZW0gb2JqZWN0DQo+
+ICsgICAgICAgIHVuc2FmZSB7IGJpbmRpbmdzOjpkbWFfcmVzdl9sb2NrKHNlbGYucmF3X2RtYV9y
+ZXN2KCksIHB0cjo6bnVsbF9tdXQoKSkgfTsNCj4gKw0KPiArICAgICAgICAvLyBTQUZFVFk6IFdl
+IGp1c3QgZ3JhYmJlZCB0aGUgbG9jayByZXF1aXJlZCBmb3IgcmVhZGluZyB0aGlzIGRhdGEgYWJv
+dmUuDQo+ICsgICAgICAgIGxldCBzZ3RfcmVzID0gdW5zYWZlIHsgKCpzZ3RfcmVzX3B0cikuYXNf
+cmVmKCkgfTsNCj4gKyAgICAgICAgaWYgbGV0IFNvbWUoc2d0X3JlcykgPSBzZ3RfcmVzIHsNCj4g
+KyAgICAgICAgICAgIC8vIFdlIGFscmVhZHkgaGF2ZSBhIERldnJlcyBvYmplY3QgZm9yIHRoaXMg
+c2cgdGFibGUsIHJldHVybiBpdA0KPiArICAgICAgICAgICAgcmV0ID0gT2soc2d0X3Jlcyk7DQo+
+ICsgICAgICAgIH0gZWxzZSB7DQo+ICsgICAgICAgICAgICAvLyBTQUZFVFk6IFdlIGdyYWJiZWQg
+dGhlIGxvY2sgcmVxdWlyZWQgZm9yIGNhbGxpbmcgdGhpcyBmdW5jdGlvbiBhYm92ZSAqLw0KPiAr
+ICAgICAgICAgICAgbGV0IHNndCA9IGZyb21fZXJyX3B0cih1bnNhZmUgew0KPiArICAgICAgICAg
+ICAgICAgIGJpbmRpbmdzOjpkcm1fZ2VtX3NobWVtX2dldF9wYWdlc19zZ3RfbG9ja2VkKHNlbGYu
+YXNfcmF3X3NobWVtKCkpDQo+ICsgICAgICAgICAgICB9KTsNCj4gKw0KPiArICAgICAgICAgICAg
+aWYgbGV0IEVycihlKSA9IHNndCB7DQo+ICsgICAgICAgICAgICAgICAgcmV0ID0gRXJyKGUpOw0K
+PiArICAgICAgICAgICAgfSBlbHNlIHsNCj4gKyAgICAgICAgICAgICAgICAvLyBJTlZBUklBTlQ6
+DQo+ICsgICAgICAgICAgICAgICAgLy8gLSBXZSBjYWxsZWQgZHJtX2dlbV9zaG1lbV9nZXRfcGFn
+ZXNfc2d0X2xvY2tlZCBhYm92ZSBhbmQgY2hlY2tlZCB0aGF0IGl0DQo+ICsgICAgICAgICAgICAg
+ICAgLy8gICBzdWNjZWVkZWQsIGZ1bGZpbGxpbmcgdGhlIGludmFyaWFudCBvZiBTR1RhYmxlUmVm
+IHRoYXQgdGhlIG9iamVjdCdzIGBzZ3RgIGZpZWxkDQo+ICsgICAgICAgICAgICAgICAgLy8gICBp
+cyBpbml0aWFsaXplZC4NCj4gKyAgICAgICAgICAgICAgICAvLyAtIFdlIHN0b3JlIHRoaXMgRGV2
+cmVzIGluIHRoZSBvYmplY3QgaXRzZWxmIGFuZCBkb24ndCBtb3ZlIGl0LCBlbnN1cmluZyB0aGF0
+IHRoZQ0KPiArICAgICAgICAgICAgICAgIC8vICAgb2JqZWN0IGl0IHBvaW50cyB0byByZW1haW5z
+IHZhbGlkIGZvciB0aGUgbGlmZXRpbWUgb2YgdGhlIFNHVGFibGVSZWYuDQo+ICsgICAgICAgICAg
+ICAgICAgbGV0IGRldnJlcyA9IERldnJlczo6bmV3KGRldiwgaW5pdCEoU0dUYWJsZU1hcCB7IG9i
+ajogc2VsZi5pbnRvKCkgfSkpOw0KPiArICAgICAgICAgICAgICAgIG1hdGNoIGRldnJlcyB7DQo+
+ICsgICAgICAgICAgICAgICAgICAgIE9rKGRldnJlcykgPT4gew0KPiArICAgICAgICAgICAgICAg
+ICAgICAgICAgLy8gU0FGRVRZOiBXZSBhY3F1aXJlZCB0aGUgbG9jayBwcm90ZWN0aW5nIHRoaXMg
+ZGF0YSBhYm92ZSwgbWFraW5nIGl0IHNhZmUNCj4gKyAgICAgICAgICAgICAgICAgICAgICAgIC8v
+IHRvIHdyaXRlIGludG8gaGVyZQ0KPiArICAgICAgICAgICAgICAgICAgICAgICAgdW5zYWZlIHsg
+KCpzZ3RfcmVzX3B0cikgPSBTb21lKGRldnJlcykgfTsNCj4gKw0KPiArICAgICAgICAgICAgICAg
+ICAgICAgICAgLy8gU0FGRVRZOiBXZSBqdXN0IHdyaXRlIFNvbWUoKSBpbnRvICpzZ3RfcmVzX3B0
+ciBhYm92ZQ0KPiArICAgICAgICAgICAgICAgICAgICAgICAgcmV0ID0gT2sodW5zYWZlIHsgKCYq
+c2d0X3Jlc19wdHIpLmFzX3JlZigpLnVud3JhcF91bmNoZWNrZWQoKSB9KTsNCj4gKyAgICAgICAg
+ICAgICAgICAgICAgfQ0KPiArICAgICAgICAgICAgICAgICAgICBFcnIoZSkgPT4gew0KPiArICAg
+ICAgICAgICAgICAgICAgICAgICAgLy8gV2UgY2FuJ3QgbWFrZSBzdXJlIHRoYXQgdGhlIHBhZ2Vz
+IGZvciB0aGlzIG9iamVjdCBhcmUgdW5tYXBwZWQgb24NCj4gKyAgICAgICAgICAgICAgICAgICAg
+ICAgIC8vIGRyaXZlci11bmJpbmQsIHNvIHdlIG5lZWQgdG8gcmVsZWFzZSB0aGUgc2d0DQo+ICsg
+ICAgICAgICAgICAgICAgICAgICAgICAvLyBTQUZFVFk6DQo+ICsgICAgICAgICAgICAgICAgICAg
+ICAgICAvLyAtIFdlIGdyYWJiZWQgdGhlIGxvY2sgcmVxdWlyZWQgZm9yIGNhbGxpbmcgdGhpcyBm
+dW5jdGlvbiBhYm92ZQ0KPiArICAgICAgICAgICAgICAgICAgICAgICAgLy8gLSBXZSBjaGVja2Vk
+IGFib3ZlIHRoYXQgZ2V0X3BhZ2VzX3NndF9sb2NrZWQoKSB3YXMgc3VjY2Vzc2Z1bA0KPiArICAg
+ICAgICAgICAgICAgICAgICAgICAgdW5zYWZlIHsgYmluZGluZ3M6Ol9fZHJtX2dlbV9zaG1lbV9m
+cmVlX3NndF9sb2NrZWQoc2VsZi5hc19yYXdfc2htZW0oKSkgfTsNCj4gKw0KPiArICAgICAgICAg
+ICAgICAgICAgICAgICAgcmV0ID0gRXJyKGUpOw0KPiArICAgICAgICAgICAgICAgICAgICB9DQo+
+ICsgICAgICAgICAgICAgICAgfQ0KPiArICAgICAgICAgICAgfQ0KPiArICAgICAgICB9DQo+ICsN
+Cj4gKyAgICAgICAgLy8gU0FGRVRZOiBXZSdyZSByZWxlYXNpbmcgdGhlIGxvY2sgdGhhdCB3ZSBn
+cmFiYmVkIGFib3ZlLg0KPiArICAgICAgICB1bnNhZmUgeyBiaW5kaW5nczo6ZG1hX3Jlc3ZfdW5s
+b2NrKHNlbGYucmF3X2RtYV9yZXN2KCkpIH07DQo+ICsNCj4gKyAgICAgICAgcmV0DQo+ICsgICAg
+fQ0KPiArDQo+ICsgICAgLy8vIENyZWF0ZXMgKGlmIG5lY2Vzc2FyeSkgYW5kIHJldHVybnMgYW4g
+aW1tdXRhYmxlIHJlZmVyZW5jZSB0byBhIHNjYXR0ZXItZ2F0aGVyIHRhYmxlIG9mIERNQQ0KPiAr
+ICAgIC8vLyBwYWdlcyBmb3IgdGhpcyBvYmplY3QuDQo+ICsgICAgLy8vDQo+ICsgICAgLy8vIFRo
+aXMgd2lsbCBwaW4gdGhlIG9iamVjdCBpbiBtZW1vcnkuDQo+ICsgICAgI1tpbmxpbmVdDQo+ICsg
+ICAgcHViIGZuIHNnX3RhYmxlPCdhPigNCj4gKyAgICAgICAgJidhIHNlbGYsDQo+ICsgICAgICAg
+IGRldjogJidhIGRldmljZTo6RGV2aWNlPEJvdW5kPiwNCj4gKyAgICApIC0+IFJlc3VsdDwmJ2Eg
+c2NhdHRlcmxpc3Q6OlNHVGFibGU+IHsNCj4gKyAgICAgICAgbGV0IHNndCA9IHNlbGYuY3JlYXRl
+X3NnX3RhYmxlKGRldik/Ow0KPiArDQo+ICsgICAgICAgIE9rKHNndC5hY2Nlc3MoZGV2KT8uZGVy
+ZWYoKSkNCj4gKyAgICB9DQo+ICsNCj4gKyAgICAvLy8gQ3JlYXRlcyAoaWYgbmVjZXNzYXJ5KSBh
+bmQgcmV0dXJucyBhbiBvd25lZCByZWZlcmVuY2UgdG8gYSBzY2F0dGVyLWdhdGhlciB0YWJsZSBv
+ZiBETUEgcGFnZXMNCj4gKyAgICAvLy8gZm9yIHRoaXMgb2JqZWN0Lg0KPiArICAgIC8vLw0KPiAr
+ICAgIC8vLyBUaGlzIGlzIHRoZSBzYW1lIGFzIFtgc2dfdGFibGVgXShTZWxmOjpzZ190YWJsZSks
+IGV4Y2VwdCB0aGF0IGl0IGluc3RlYWQgcmV0dXJucyBhbg0KPiArICAgIC8vLyBbYHNobWVtOjpT
+R1RhYmxlYF0gd2hpY2ggaG9sZHMgYSByZWZlcmVuY2UgdG8gdGhlIGFzc29jaWF0ZWQgZ2VtIG9i
+amVjdCwgaW5zdGVhZCBvZiBhDQo+ICsgICAgLy8vIHJlZmVyZW5jZSB0byBhbiBbYHNjYXR0ZXJs
+aXN0OjpTR1RhYmxlYF0uDQo+ICsgICAgLy8vDQo+ICsgICAgLy8vIFRoaXMgd2lsbCBwaW4gdGhl
+IG9iamVjdCBpbiBtZW1vcnkuDQo+ICsgICAgLy8vDQo+ICsgICAgLy8vIFtgc2htZW06OlNHVGFi
+bGVgXTogU0dUYWJsZQ0KPiArICAgIHB1YiBmbiBvd25lZF9zZ190YWJsZSgmc2VsZiwgZGV2OiAm
+ZGV2aWNlOjpEZXZpY2U8Qm91bmQ+KSAtPiBSZXN1bHQ8U0dUYWJsZTxUPj4gew0KPiArICAgICAg
+ICBzZWxmLmNyZWF0ZV9zZ190YWJsZShkZXYpPzsNCj4gKw0KPiArICAgICAgICAvLyBJTlZBUklB
+TlQ6IFdlIGp1c3QgZW5zdXJlZCBhYm92ZSB0aGF0IGBzZWxmLnNndF9yZXNgIGlzIGluaXRpYWxp
+emVkIHdpdGgNCj4gKyAgICAgICAgLy8gYFNvbWUoRGV2cmVzPFNHVGFibGVNYXA8VD4+KWAuDQo+
+ICsgICAgICAgIE9rKFNHVGFibGUoc2VsZi5pbnRvKCkpKQ0KPiArICAgIH0NCj4gIH0NCj4gIA0K
+PiAgaW1wbDxUOiBEcml2ZXJPYmplY3Q+IERlcmVmIGZvciBPYmplY3Q8VD4gew0KPiBAQCAtMjI2
+LDMgKzMzOCw3OCBAQCBpbXBsPFQ6IERyaXZlck9iamVjdD4gZHJpdmVyOjpBbGxvY0ltcGwgZm9y
+IE9iamVjdDxUPiB7DQo+ICAgICAgICAgIGR1bWJfbWFwX29mZnNldDogTm9uZSwNCj4gICAgICB9
+Ow0KPiAgfQ0KPiArDQo+ICsvLy8gQSByZWZlcmVuY2UgdG8gYSBHRU0gb2JqZWN0IHRoYXQgaXMg
+a25vd24gdG8gaGF2ZSBhIG1hcHBlZCBbYFNHVGFibGVgXS4NCj4gKy8vLw0KPiArLy8vIFRoaXMg
+aXMgdXNlZCBieSB0aGUgUnVzdCBiaW5kaW5ncyB3aXRoIFtgRGV2cmVzYF0gaW4gb3JkZXIgdG8g
+ZW5zdXJlIHRoYXQgbWFwcGluZ3MgZm9yIFNHVGFibGVzDQo+ICsvLy8gb24gR0VNIHNobWVtIG9i
+amVjdHMgYXJlIHJldm9rZWQgb24gZHJpdmVyLXVuYmluZC4NCj4gKy8vLw0KPiArLy8vICMgSW52
+YXJpYW50cw0KPiArLy8vDQo+ICsvLy8gLSBgc2VsZi5vYmpgIGFsd2F5cyBwb2ludHMgdG8gYSB2
+YWxpZCBHRU0gb2JqZWN0Lg0KPiArLy8vIC0gVGhpcyBvYmplY3QgaXMgcHJvb2YgdGhhdCBgc2Vs
+Zi4wLm93bmVyLnNndGAgaGFzIGFuIGluaXRpYWxpemVkIGFuZCB2YWxpZCBTR1RhYmxlLg0KPiAr
+cHViIHN0cnVjdCBTR1RhYmxlTWFwPFQ6IERyaXZlck9iamVjdD4gew0KPiArICAgIG9iajogTm9u
+TnVsbDxPYmplY3Q8VD4+LA0KPiArfQ0KPiArDQo+ICtpbXBsPFQ6IERyaXZlck9iamVjdD4gRGVy
+ZWYgZm9yIFNHVGFibGVNYXA8VD4gew0KPiArICAgIHR5cGUgVGFyZ2V0ID0gc2NhdHRlcmxpc3Q6
+OlNHVGFibGU7DQo+ICsNCj4gKyAgICBmbiBkZXJlZigmc2VsZikgLT4gJlNlbGY6OlRhcmdldCB7
+DQo+ICsgICAgICAgIC8vIFNBRkVUWToNCj4gKyAgICAgICAgLy8gLSBUaGUgTm9uTnVsbCBpcyBn
+dWFyYW50ZWVkIHRvIGJlIHZhbGlkIHZpYSBvdXIgdHlwZSBpbnZhcmlhbnRzLg0KPiArICAgICAg
+ICAvLyAtIFRoZSBzZ3QgZmllbGQgaXMgZ3VhcmFudGVlZCB0byBiZSBpbml0aWFsaXplZCBhbmQg
+dmFsaWQgdmlhIG91ciB0eXBlIGludmFyaWFudHMuDQo+ICsgICAgICAgIHVuc2FmZSB7IHNjYXR0
+ZXJsaXN0OjpTR1RhYmxlOjpmcm9tX3JhdygoKnNlbGYub2JqLmFzX3JlZigpLmFzX3Jhd19zaG1l
+bSgpKS5zZ3QpIH0NCj4gKyAgICB9DQo+ICt9DQo+ICsNCj4gK2ltcGw8VDogRHJpdmVyT2JqZWN0
+PiBEcm9wIGZvciBTR1RhYmxlTWFwPFQ+IHsNCj4gKyAgICBmbiBkcm9wKCZtdXQgc2VsZikgew0K
+PiArICAgICAgICAvLyBTQUZFVFk6IGBvYmpgIGlzIGFsd2F5cyB2YWxpZCB2aWEgb3VyIHR5cGUg
+aW52YXJpYW50cw0KPiArICAgICAgICBsZXQgb2JqID0gdW5zYWZlIHsgc2VsZi5vYmouYXNfcmVm
+KCkgfTsNCj4gKw0KPiArICAgICAgICAvLyBTQUZFVFk6IFRoZSBkbWFfcmVzdiBmb3IgR0VNIG9i
+amVjdHMgaXMgaW5pdGlhbGl6ZWQgdGhyb3VnaG91dCBpdHMgbGlmZXRpbWUNCj4gKyAgICAgICAg
+dW5zYWZlIHsgYmluZGluZ3M6OmRtYV9yZXN2X2xvY2sob2JqLnJhd19kbWFfcmVzdigpLCBwdHI6
+Om51bGxfbXV0KCkpIH07DQo+ICsNCj4gKyAgICAgICAgLy8gU0FGRVRZOiBXZSBhY3F1aXJlZCB0
+aGUgbG9jayBuZWVkZWQgZm9yIGNhbGxpbmcgdGhpcyBmdW5jdGlvbiBhYm92ZQ0KPiArICAgICAg
+ICB1bnNhZmUgeyBiaW5kaW5nczo6X19kcm1fZ2VtX3NobWVtX2ZyZWVfc2d0X2xvY2tlZChvYmou
+YXNfcmF3X3NobWVtKCkpIH07DQoNCldoZW4gaSB3YXMgdGVzdGluZyB0aGlzIHdpdGggdHlyIEkg
+Z290IGEgZG91YmxlIGZyZWUgaGVyZSB3aGVuIEkgdW5sb2FkZWQgdGhlIG1vZHVsZS4NCg0KV2hl
+biBvdXIgZHJtOjpEZXZpY2UgKGRybTo6RGV2aWNlPFR5ckRybURyaXZlciwgQ3R4Pikgd2FzIHJl
+bGVhc2VkLCBpdHMgZGV2aWNlIGRhdGENCihUeXJEcm1EZXZpY2VEYXRhKSB3YXMgZHJvcHBlZC4g
+SW4gb3VyIGRldmljZSBkYXRhIHdlIGFyZSBpbmRpcmVjdGx5IGhvbGRpbmcgc2V2ZXJhbCBnZW0N
+Ck9iamVjdHMgdGhyb3VnaCB0aGUgZmlybXdhcmUgKEZpcm13YXJlIOKGkiBzZWN0aW9ucyDihpIg
+S2VybmVsQm8g4oaSIGJvKQ0KDQpXaGVuIHRob3NlIG9iamVjdHMgYXJlIGRlc3Ryb3llZCwgc2ht
+ZW06Ok9iamVjdDo6ZnJlZV9jYWxsYmFjaygpIHJ1bnMuIFRoaXMgY2FsbHMNCmRybV9nZW1fc2ht
+ZW1fcmVsZWFzZSgpIHdoaWNoLCBvbiB0aGUgQyBzaWRlIGZyZWVzIHNobWVt4oaSc2d0IGlmIGl0
+IGV4aXN0cw0KdmlhIF9fZHJtX2dlbV9zaG1lbV9mcmVlX3NndF9sb2NrZWQoc2htZW0pLg0KDQpC
+dXQgdGhlIFJ1c3QgT2JqZWN0PFQ+IHN0aWxsIGhhcyB0aGUgc2d0X3Jlcy4gU28sIGF0IHRoZSBl
+bmQgb2YgZnJlZV9jYWxsYmFjaygpLCBLQm94Ojpmcm9tX3Jhdyh0aGlzKSB0cmlnZ2Vycw0KU0dU
+YWJsZU1hcDo6ZHJvcCgpLCBhbmQgdGhhdCBjYWxscyBfX2RybV9nZW1fc2htZW1fZnJlZV9zZ3Rf
+bG9ja2VkKCkgYWdhaW4gZm9yIHRoZSBzYW1lIHNobWVtIG9iamVjdC4NCg0KU28gdGhlIHNhbWUg
+c2d0IGVuZHMgdXAgYmVpbmcgZnJlZWQgb25jZSBmcm9tIGRybV9nZW1fc2htZW1fcmVsZWFzZSgp
+IGFuZCBhZ2FpbiBsYXRlciBmcm9tIFNHVGFibGVNYXA6OmRyb3AoKS4NCg0KRm9yIG5vdyBteSBm
+aXggaXMganVzdCB0byBjbGVhciBzZ3RfcmVzIGluIGZyZWVfY2FsbGJhY2soKSBiZWZvcmUgZHJt
+X2dlbV9zaG1lbV9yZWxlYXNlKCkgd2hpY2gNCnByZXZlbnRzIHRoZSBzZ3QgZnJvbSBiZWluZyBm
+cmVlZCBieSB0aGUgQyBzaWRlLg0KDQpJIHBsYW4gdG8gcG9zdCBvdXIgbGF0ZXN0IHR5ciBzZXJp
+ZXMgc29vbiBpbmNsdWRpbmcgdGhpcyBhYnN0cmFjdGlvbiwgYW5kIEkgaG9wZSB5b3UgY2FuIGhh
+dmUgYSBsb29rLA0KcGVyaGFwcyBob3cgd2XigJl2ZSBzZXQgdXAgdGhlIGRldmljZSBkYXRhIGlz
+IHVuZXhwZWN0ZWQuDQoNCj4gKw0KPiArICAgICAgICAvLyBTQUZFVFk6IFdlIGFyZSByZWxlYXNp
+bmcgdGhlIGxvY2sgd2UgYWNxdWlyZWQgYWJvdmUuDQo+ICsgICAgICAgIHVuc2FmZSB7IGJpbmRp
+bmdzOjpkbWFfcmVzdl91bmxvY2sob2JqLnJhd19kbWFfcmVzdigpKSB9Ow0KPiArICAgIH0NCj4g
+K30NCj4gKw0KPiArLy8gU0FGRVRZOiBUaGUgTm9uTnVsbCBpbiBTR1RhYmxlUmVmIGlzIGd1YXJh
+bnRlZWQgdmFsaWQgYnkgb3VyIHR5cGUgaW52YXJpYW50cywgYW5kIHRoZSBHRU0gb2JqZWN0DQo+
+ICsvLyBpdCBwb2ludHMgdG8gaXMgZ3VhcmFudGVlZCB0byBiZSB0aHJlYWQtc2FmZS4NCj4gK3Vu
+c2FmZSBpbXBsPFQ6IERyaXZlck9iamVjdD4gU2VuZCBmb3IgU0dUYWJsZU1hcDxUPiB7fQ0KPiAr
+Ly8gU0FGRVRZOiBUaGUgTm9uTnVsbCBpbiBTR1RhYmxlUmVmIGlzIGd1YXJhbnRlZWQgdmFsaWQg
+Ynkgb3VyIHR5cGUgaW52YXJpYW50cywgYW5kIHRoZSBHRU0gb2JqZWN0DQo+ICsvLyBpdCBwb2lu
+dHMgdG8gaXMgZ3VhcmFudGVlZCB0byBiZSB0aHJlYWQtc2FmZS4NCj4gK3Vuc2FmZSBpbXBsPFQ6
+IERyaXZlck9iamVjdD4gU3luYyBmb3IgU0dUYWJsZU1hcDxUPiB7fQ0KPiArDQo+ICsvLy8gQW4g
+b3duZWQgcmVmZXJlbmNlIHRvIGEgc2NhdHRlci1nYXRoZXIgdGFibGUgb2YgRE1BIGFkZHJlc3Mg
+c3BhbnMgZm9yIGEgR0VNIHNobWVtIG9iamVjdC4NCj4gKy8vLw0KPiArLy8vIFRoaXMgb2JqZWN0
+IGhvbGRzIGFuIG93bmVkIHJlZmVyZW5jZSB0byB0aGUgdW5kZXJseWluZyBHRU0gc2htZW0gb2Jq
+ZWN0LCBlbnN1cmluZyB0aGF0IHRoZQ0KPiArLy8vIFtgc2NhdHRlcmxpc3Q6OlNHVGFibGVgXSBy
+ZWZlcmVuY2VkIGJ5IHRoaXMgdHlwZSByZW1haW5zIHZhbGlkIGZvciB0aGUgbGlmZXRpbWUgb2Yg
+dGhpcyBvYmplY3QuDQo+ICsvLy8NCj4gKy8vLyAjIEludmFyaWFudHMNCj4gKy8vLw0KPiArLy8v
+IC0gVGhpcyB0eXBlIGlzIHByb29mIHRoYXQgYHNlbGYuMC5zZ3RfcmVzYCBpcyBpbml0aWFsaXpl
+ZCB3aXRoIGEgYFNvbWUoRGV2cmVzPFNHVGFibGVNYXA8VD4+KWAuDQo+ICsvLy8gLSBUaGlzIG9i
+amVjdCBpcyBvbmx5IGV4cG9zZWQgaW4gc2l0dWF0aW9ucyB3aGVyZSB3ZSBrbm93IHRoZSB1bmRl
+cmx5aW5nIGBTR1RhYmxlYCB3aWxsIG5vdCBiZQ0KPiArLy8vICAgbW9kaWZpZWQgZm9yIHRoZSBs
+aWZldGltZSBvZiB0aGlzIG9iamVjdC4gVGh1cywgaXQgaXMgc2FmZSB0byBzZW5kL2FjY2VzcyB0
+aGlzIHR5cGUgYWNyb3NzDQo+ICsvLy8gICB0aHJlYWRzLg0KPiArcHViIHN0cnVjdCBTR1RhYmxl
+PFQ6IERyaXZlck9iamVjdD4oQVJlZjxPYmplY3Q8VD4+KTsNCj4gKw0KPiArLy8gU0FGRVRZOiBU
+aGlzIG9iamVjdCBpcyB0aHJlYWQtc2FmZSB2aWEgb3VyIHR5cGUgaW52YXJpYW50cy4NCj4gK3Vu
+c2FmZSBpbXBsPFQ6IERyaXZlck9iamVjdD4gU2VuZCBmb3IgU0dUYWJsZTxUPiB7fQ0KPiArLy8g
+U0FGRVRZOiBUaGlzIG9iamVjdCBpcyB0aHJlYWQtc2FmZSB2aWEgb3VyIHR5cGUgaW52YXJpYW50
+cy4NCj4gK3Vuc2FmZSBpbXBsPFQ6IERyaXZlck9iamVjdD4gU3luYyBmb3IgU0dUYWJsZTxUPiB7
+fQ0KPiArDQo+ICtpbXBsPFQ6IERyaXZlck9iamVjdD4gRGVyZWYgZm9yIFNHVGFibGU8VD4gew0K
+PiArICAgIHR5cGUgVGFyZ2V0ID0gRGV2cmVzPFNHVGFibGVNYXA8VD4+Ow0KPiArDQo+ICsgICAg
+Zm4gZGVyZWYoJnNlbGYpIC0+ICZTZWxmOjpUYXJnZXQgew0KPiArICAgICAgICAvLyBTQUZFVFk6
+IGBzZWxmLm93bmVyLnNndF9yZXNgIGlzIGd1YXJhbnRlZWQgdG8gYmUgaW5pdGlhbGl6ZWQgd2l0
+aA0KPiArICAgICAgICAvLyBgU29tZShEZXZyZXM8U0dUYWJsZU1hcDxUPj4pYCB2aWEgb3VyIHR5
+cGUgaW52YXJpYW50cw0KPiArICAgICAgICB1bnNhZmUgeyAoKnNlbGYuMC5zZ3RfcmVzLmdldCgp
+KS5hc19yZWYoKS51bndyYXBfdW5jaGVja2VkKCkgfQ0KPiArICAgIH0NCj4gK30NCj4gLS0gDQo+
+IDIuNTMuMA0KPiANCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGlu
+YXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVh
+dmVAbGlzdHMubGluYXJvLm9yZwo=
