@@ -2,550 +2,128 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gMDYCfDv1mmNJwgAu9opvQ
+	id AJvFCJlP12mvMQgAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 09 Apr 2026 02:16:48 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 09 Apr 2026 09:04:57 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id B5FF23C4F39
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 09 Apr 2026 02:16:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 52CD53C6D11
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 09 Apr 2026 09:04:56 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B621B3F7EE
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  9 Apr 2026 00:16:46 +0000 (UTC)
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-	by lists.linaro.org (Postfix) with ESMTPS id 8A97C404A0
-	for <linaro-mm-sig@lists.linaro.org>; Thu,  9 Apr 2026 00:16:36 +0000 (UTC)
-Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=TaSSCuWn;
-	dmarc=pass (policy=quarantine) header.from=redhat.com;
-	spf=pass (lists.linaro.org: domain of lyude@redhat.com designates 170.10.129.124 as permitted sender) smtp.mailfrom=lyude@redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1775693796;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=/K+peBcGlE3GY5d6uET5VxMovheiwOxHprQZIawbTV0=;
-	b=TaSSCuWnEr9538TERAcXvCYj3OETeZG0lbwvXk3+ScfSdaBooT9D8wnJXee10+GpmwQCJF
-	a6UJXYZCKwoCA5q2nafo8PZZGbbIFCv3wSiEpb9U5VStvM0AfvBVzLWdKe2psjOB2b7/Wh
-	Uo9l33/2Y0dVtorewlfVUABLZ3vP24A=
-Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-39-tf42dWcxNrajL9EWTE2-pw-1; Wed,
- 08 Apr 2026 20:16:32 -0400
-X-MC-Unique: tf42dWcxNrajL9EWTE2-pw-1
-X-Mimecast-MFC-AGG-ID: tf42dWcxNrajL9EWTE2-pw_1775693789
-Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id B2D20180044D;
-	Thu,  9 Apr 2026 00:16:28 +0000 (UTC)
-Received: from GoldenWind.redhat.com (unknown [10.22.80.49])
-	by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id E99E7300019F;
-	Thu,  9 Apr 2026 00:16:24 +0000 (UTC)
-From: Lyude Paul <lyude@redhat.com>
-To: nouveau@lists.freedesktop.org,
-	Gary Guo <gary@garyguo.net>,
-	Daniel Almeida <daniel.almeida@collabora.com>,
-	rust-for-linux@vger.kernel.org,
-	Danilo Krummrich <dakr@kernel.org>,
-	dri-devel@lists.freedesktop.org
-Date: Wed,  8 Apr 2026 20:12:51 -0400
-Message-ID: <20260409001559.622026-6-lyude@redhat.com>
-In-Reply-To: <20260409001559.622026-1-lyude@redhat.com>
-References: <20260409001559.622026-1-lyude@redhat.com>
+	by lists.linaro.org (Postfix) with ESMTP id 9424B404A0
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  9 Apr 2026 07:04:54 +0000 (UTC)
+Received: from lists.linaro.org (localhost [127.0.0.1])
+	by lists.linaro.org (Postfix) with ESMTP id 1FFED3F6DC
+	for <linaro-mm-sig@lists.linaro.org>; Thu,  9 Apr 2026 07:04:47 +0000 (UTC)
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: lLWl74ebV7UqeUXTenNAC_VbseSpi01ethvRPJzmerc_1775693789
-X-Mimecast-Originator: redhat.com
-X-Spamd-Bar: ---
-Message-ID-Hash: U2HTSLN2LWTGDMCLUMPGLXLS3X2OHZYN
-X-Message-ID-Hash: U2HTSLN2LWTGDMCLUMPGLXLS3X2OHZYN
-X-MailFrom: lyude@redhat.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Matthew Maurer <mmaurer@google.com>, FUJITA Tomonori <fujita.tomonori@gmail.com>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, christian.koenig@amd.com, Asahi Lina <lina@asahilina.net>, Miguel Ojeda <ojeda@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, Simona Vetter <simona@ffwll.ch>, Alice Ryhl <aliceryhl@google.com>, Boqun Feng <boqun@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Krishna Ketan Rai <prafulrai522@gmail.com>, linux-media@vger.kernel.org, Shankari Anand <shankari.ak0208@gmail.com>, David Airlie <airlied@gmail.com>, Benno Lossin <lossin@kernel.org>, Viresh Kumar <viresh.kumar@linaro.org>, linaro-mm-sig@lists.linaro.org, Asahi Lina <lina+kernel@asahilina.net>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, kernel@vger.kernel.org
+From: relative.rooster.miqd@hidingmail.com
+To: linaro-mm-sig@lists.linaro.org
+Date: Thu, 09 Apr 2026 07:04:47 -0000
+Message-ID: <177571828712.2997127.3049874934551313361@lists.linaro.org>
+User-Agent: HyperKitty on http://lists.linaro.org/
+Message-ID-Hash: EWJLYYORIDYNWWVZC6HMKSVLNCTZMGLC
+X-Message-ID-Hash: EWJLYYORIDYNWWVZC6HMKSVLNCTZMGLC
+X-MailFrom: relative.rooster.miqd@hidingmail.com
+X-Mailman-Rule-Hits: member-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v10 5/5] rust: drm: gem: Add vmap functions to shmem bindings
+Subject: [Linaro-mm-sig] Unleash Your Inner Ninja: A Guide to Slicing Success in Slice Master
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/U2HTSLN2LWTGDMCLUMPGLXLS3X2OHZYN/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EWJLYYORIDYNWWVZC6HMKSVLNCTZMGLC/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; x-default="true"
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [4.49 / 15.00];
-	DMARC_POLICY_QUARANTINE(1.50)[redhat.com : SPF not aligned (relaxed),quarantine];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
-	R_DKIM_REJECT(1.00)[redhat.com:s=mimecast20190719];
+Content-Transfer-Encoding: base64
+X-Spamd-Result: default: False [2.59 / 15.00];
+	DMARC_POLICY_REJECT(2.00)[hidingmail.com : SPF not aligned (relaxed), No valid DKIM,reject];
+	MID_RHS_MATCH_TO(1.00)[];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MIME_GOOD(-0.10)[text/plain];
+	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[27];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	GREYLIST(0.00)[pass,meta];
-	FREEMAIL_CC(0.00)[google.com,gmail.com,oracle.com,amd.com,asahilina.net,kernel.org,ffwll.ch,linaro.org,vger.kernel.org,lists.linaro.org,linuxfoundation.org];
-	FUZZY_RATELIMITED(0.00)[rspamd.com];
-	ARC_NA(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FROM_NEQ_ENVFROM(0.00)[lyude@redhat.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[redhat.com:-];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,kernel];
-	MISSING_XM_UA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	NEURAL_SPAM(0.00)[0.534];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
-X-Rspamd-Queue-Id: B5FF23C4F39
+	NEURAL_HAM(-0.00)[-0.913];
+	RCPT_COUNT_ONE(0.00)[1];
+	MIME_TRACE(0.00)[0:+];
+	FROM_NO_DN(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:mid];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_NEQ_ENVFROM(0.00)[relative.rooster.miqd@hidingmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	TO_DN_NONE(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	R_DKIM_NA(0.00)[];
+	ARC_NA(0.00)[]
+X-Rspamd-Queue-Id: 52CD53C6D11
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-One of the more obvious use cases for gem shmem objects is the ability to
-create mappings into their contents. So, let's hook this up in our rust
-bindings.
-
-Similar to how we handle SGTables, we make sure there's two different types
-of mappings: owned mappings (kernel::drm::gem::shmem::VMap) and borrowed
-mappings (kernel::drm::gem::shmem::VMapRef).
-
-Signed-off-by: Lyude Paul <lyude@redhat.com>
-
----
-V7:
-* Switch over to the new iosys map bindings that use the Io trait
-V8:
-* Get rid of iosys_map bindings for now, only support non-iomem types
-* s/as_shmem()/as_raw_shmem()
-V9:
-* Get rid of some outdated comments I missed
-* Add missing SIZE check to raw_vmap()
-* Add a proper unit test that ensures that we actually validate SIZE at
-  compile-time.
-  Turns out it takes only 34 lines to make a boilerplate DRM driver for a
-  kunit test :)
-* Add unit tests
-* Add some missing #[inline]s
-V10:
-* Correct issue with iomem error path
-  We previously called raw_vunmap() if we got an iomem allocation, but
-  raw_vunmap() was written such that it assumed all allocations were sysmem
-  allocations. Fix this by just making raw_vunmap() accept a iosys_map.
-
- rust/kernel/drm/gem/shmem.rs | 354 +++++++++++++++++++++++++++++++++++
- 1 file changed, 354 insertions(+)
-
-diff --git a/rust/kernel/drm/gem/shmem.rs b/rust/kernel/drm/gem/shmem.rs
-index 111be446213df..6c186d83f528e 100644
---- a/rust/kernel/drm/gem/shmem.rs
-+++ b/rust/kernel/drm/gem/shmem.rs
-@@ -26,6 +26,11 @@
-         from_err_ptr, //
-         to_result,
-     },
-+    io::{
-+        Io,
-+        IoCapable,
-+        IoKnownSize, //
-+    },
-     prelude::*,
-     scatterlist,
-     types::{
-@@ -35,6 +40,11 @@
- };
- use core::{
-     cell::UnsafeCell,
-+    ffi::c_void,
-+    mem::{
-+        self,
-+        MaybeUninit, //
-+    },
-     ops::{
-         Deref,
-         DerefMut, //
-@@ -45,6 +55,7 @@
-     },
- };
- use gem::{
-+    BaseObject,
-     BaseObjectPrivate,
-     DriverObject,
-     IntoGEMObject, //
-@@ -288,6 +299,84 @@ pub fn owned_sg_table(&self, dev: &device::Device<Bound>) -> Result<SGTable<T>>
-         // `Some(Devres<SGTableMap<T>>)`.
-         Ok(SGTable(self.into()))
-     }
-+
-+    /// Attempt to create a vmap from the gem object, and confirm the size of said vmap.
-+    fn raw_vmap(&self, min_size: usize) -> Result<*mut c_void> {
-+        if self.size() < min_size {
-+            return Err(ENOSPC);
-+        }
-+
-+        let mut map: MaybeUninit<bindings::iosys_map> = MaybeUninit::uninit();
-+
-+        // SAFETY: drm_gem_shmem_vmap can be called with the DMA reservation lock held
-+        to_result(unsafe {
-+            // TODO: see top of file
-+            bindings::dma_resv_lock(self.raw_dma_resv(), ptr::null_mut());
-+            let ret = bindings::drm_gem_shmem_vmap_locked(self.as_raw_shmem(), map.as_mut_ptr());
-+            bindings::dma_resv_unlock(self.raw_dma_resv());
-+            ret
-+        })?;
-+
-+        // SAFETY: The call to drm_gem_shmem_vunmap_locked succeeded above, so we are guaranteed
-+        // that map is properly initialized.
-+        let map = unsafe { map.assume_init() };
-+
-+        // XXX: We don't currently support iomem allocations
-+        if map.is_iomem {
-+            // SAFETY:
-+            // - The vmap operation above succeeded, guaranteeing that `map` points to a valid
-+            //   memory mapping.
-+            // - We checked that this is an iomem allocation, making it safe to read vaddr_iomem
-+            unsafe { self.raw_vunmap(map) };
-+
-+            Err(ENOTSUPP)
-+        } else {
-+            // SAFETY: We checked that this is not an iomem allocation, making it safe to read vaddr
-+            Ok(unsafe { map.__bindgen_anon_1.vaddr })
-+        }
-+    }
-+
-+    /// Unmap a vmap from the gem object.
-+    ///
-+    /// # Safety
-+    ///
-+    /// - The caller promises that `map` is a valid vmap on this gem object.
-+    /// - The caller promises that the memory pointed to by map will no longer be accesed through
-+    ///   this instance.
-+    unsafe fn raw_vunmap(&self, mut map: bindings::iosys_map) {
-+        let resv = self.raw_dma_resv();
-+
-+        // SAFETY:
-+        // - This function is safe to call with the DMA reservation lock held
-+        // - Our `ARef` is proof that the underlying gem object here is initialized and thus safe to
-+        //   dereference.
-+        unsafe {
-+            // TODO: see top of file
-+            bindings::dma_resv_lock(resv, ptr::null_mut());
-+            bindings::drm_gem_shmem_vunmap_locked(self.as_raw_shmem(), &mut map);
-+            bindings::dma_resv_unlock(resv);
-+        }
-+    }
-+
-+    /// Creates and returns a virtual kernel memory mapping for this object.
-+    #[inline]
-+    pub fn vmap<const SIZE: usize>(&self) -> Result<VMapRef<'_, T, SIZE>> {
-+        Ok(VMapRef {
-+            // INVARIANT: `raw_vmap()` checks that the gem object is at least as large as `SIZE`.
-+            addr: self.raw_vmap(SIZE)?,
-+            owner: self,
-+        })
-+    }
-+
-+    /// Creates and returns an owned reference to a virtual kernel memory mapping for this object.
-+    #[inline]
-+    pub fn owned_vmap<const SIZE: usize>(&self) -> Result<VMap<T, SIZE>> {
-+        Ok(VMap {
-+            // INVARIANT: `raw_vmap()` checks that the gem object is at least as large as `SIZE`.
-+            addr: self.raw_vmap(SIZE)?,
-+            owner: self.into(),
-+        })
-+    }
- }
- 
- impl<T: DriverObject> Deref for Object<T> {
-@@ -386,6 +475,154 @@ unsafe impl<T: DriverObject> Send for SGTableMap<T> {}
- // it points to is guaranteed to be thread-safe.
- unsafe impl<T: DriverObject> Sync for SGTableMap<T> {}
- 
-+macro_rules! impl_vmap_io_capable {
-+    ($impl:ident, $ty:ty $(, $lifetime:lifetime )?) => {
-+        impl<$( $lifetime ,)? D: DriverObject, const SIZE: usize> IoCapable<$ty>
-+            for $impl<$( $lifetime ,)? D, SIZE>
-+        {
-+            #[inline(always)]
-+            unsafe fn io_read(&self, address: usize) -> $ty {
-+                let ptr = address as *mut $ty;
-+
-+                // SAFETY: The safety contract of `io_read` guarantees that address is a valid
-+                // address within the bounds of `Self` of at least the size of $ty, and is properly
-+                // aligned.
-+                unsafe { ptr::read(ptr) }
-+            }
-+
-+            #[inline(always)]
-+            unsafe fn io_write(&self, value: $ty, address: usize) {
-+                let ptr = address as *mut $ty;
-+
-+                // SAFETY: The safety contract of `io_write` guarantees that address is a valid
-+                // address within the bounds of `Self` of at least the size of $ty, and is properly
-+                // aligned.
-+                unsafe { ptr::write(ptr, value) }
-+            }
-+        }
-+    };
-+}
-+
-+// Implement various traits common to both VMap types
-+macro_rules! impl_vmap_common {
-+    ($impl:ident $(, $lifetime:lifetime )?) => {
-+        impl<$( $lifetime ,)? D, const SIZE: usize> $impl<$( $lifetime ,)? D, SIZE>
-+        where
-+            D: DriverObject,
-+        {
-+            /// Borrows a reference to the object that owns this virtual mapping.
-+            #[inline(always)]
-+            pub fn owner(&self) -> &Object<D> {
-+                &self.owner
-+            }
-+        }
-+
-+        impl<$( $lifetime ,)? D, const SIZE: usize> Drop for $impl<$( $lifetime ,)? D, SIZE>
-+        where
-+            D: DriverObject,
-+        {
-+            #[inline(always)]
-+            fn drop(&mut self) {
-+                // SAFETY:
-+                // - Our existence is proof that this map was previously created using self.owner.
-+                // - Since we are in Drop, we are guaranteed that no one will access the memory
-+                //   through this mapping after calling this.
-+                unsafe {
-+                    self.owner.raw_vunmap(bindings::iosys_map {
-+                        is_iomem: false,
-+                        __bindgen_anon_1: bindings::iosys_map__bindgen_ty_1 { vaddr: self.addr }
-+                    })
-+                };
-+            }
-+        }
-+
-+        impl<$( $lifetime ,)? D, const SIZE: usize> Io for $impl<$( $lifetime ,)? D, SIZE>
-+        where
-+            D: DriverObject,
-+        {
-+            #[inline(always)]
-+            fn addr(&self) -> usize {
-+                self.addr as usize
-+            }
-+
-+            #[inline(always)]
-+            fn maxsize(&self) -> usize {
-+                self.owner.size()
-+            }
-+        }
-+
-+        impl<$( $lifetime ,)? D, const SIZE: usize> IoKnownSize for $impl<$( $lifetime ,)? D, SIZE>
-+        where
-+            D: DriverObject,
-+        {
-+            const MIN_SIZE: usize = SIZE;
-+        }
-+
-+        impl_vmap_io_capable!($impl, u8 $( , $lifetime )?);
-+        impl_vmap_io_capable!($impl, u16 $( , $lifetime )?);
-+        impl_vmap_io_capable!($impl, u32 $( , $lifetime )?);
-+        #[cfg(CONFIG_64BIT)]
-+        impl_vmap_io_capable!($impl, u64 $( , $lifetime )?);
-+    };
-+}
-+
-+/// An owned reference to a virtual mapping for a shmem-based GEM object in kernel address space.
-+///
-+/// # Invariants
-+///
-+/// - The size of `owner` is >= SIZE.
-+/// - The memory pointed to by addr remains valid at least until this object is dropped.
-+pub struct VMap<D: DriverObject, const SIZE: usize = 0> {
-+    addr: *mut c_void,
-+    owner: ARef<Object<D>>,
-+}
-+
-+impl_vmap_common!(VMap);
-+
-+impl<D: DriverObject, const SIZE: usize> Clone for VMap<D, SIZE> {
-+    #[inline]
-+    fn clone(&self) -> Self {
-+        // SAFETY: We have a successful vmap already, so this can't fail
-+        unsafe { self.owner.owned_vmap().unwrap_unchecked() }
-+    }
-+}
-+
-+impl<'a, D: DriverObject, const SIZE: usize> From<VMapRef<'a, D, SIZE>> for VMap<D, SIZE> {
-+    #[inline]
-+    fn from(value: VMapRef<'a, D, SIZE>) -> Self {
-+        let this = Self {
-+            addr: value.addr,
-+            owner: value.owner.into(),
-+        };
-+
-+        mem::forget(value);
-+        this
-+    }
-+}
-+
-+// SAFETY: addr is guaranteed to be valid and accessible for the lifetime of VMap, ensuring its
-+// safe to send across threads.
-+unsafe impl<D: DriverObject, const SIZE: usize> Send for VMap<D, SIZE> {}
-+// SAFETY: addr is guaranteed to be valid and accessible for the lifetime of VMap, ensuring its
-+// safe to send across threads.
-+unsafe impl<D: DriverObject, const SIZE: usize> Sync for VMap<D, SIZE> {}
-+
-+/// A borrowed reference to a virtual mapping for a shmem-based GEM object in kernel address space.
-+pub struct VMapRef<'a, D: DriverObject, const SIZE: usize = 0> {
-+    addr: *mut c_void,
-+    owner: &'a Object<D>,
-+}
-+
-+impl_vmap_common!(VMapRef, 'a);
-+
-+impl<'a, D: DriverObject, const SIZE: usize> Clone for VMapRef<'a, D, SIZE> {
-+    #[inline]
-+    fn clone(&self) -> Self {
-+        // SAFETY: We have a successful vmap already, so this can't fail
-+        unsafe { self.owner.vmap().unwrap_unchecked() }
-+    }
-+}
-+
- /// An owned reference to a scatter-gather table of DMA address spans for a GEM shmem object.
- ///
- /// This object holds an owned reference to the underlying GEM shmem object, ensuring that the
-@@ -413,3 +650,120 @@ fn deref(&self) -> &Self::Target {
-         unsafe { (*self.0.sgt_res.get()).as_ref().unwrap_unchecked() }
-     }
- }
-+
-+#[kunit_tests(rust_drm_gem_shmem)]
-+mod tests {
-+    use super::*;
-+    use crate::{
-+        drm,
-+        faux,
-+        page::PAGE_SIZE, //
-+    };
-+
-+    // The bare minimum needed to create a fake drm driver for kunit
-+
-+    #[pin_data]
-+    struct KunitData {}
-+    struct KunitDriver;
-+    struct KunitFile;
-+    #[pin_data]
-+    struct KunitObject {}
-+
-+    const INFO: drm::DriverInfo = drm::DriverInfo {
-+        major: 0,
-+        minor: 0,
-+        patchlevel: 0,
-+        name: c"kunit",
-+        desc: c"Kunit",
-+    };
-+
-+    impl drm::file::DriverFile for KunitFile {
-+        type Driver = KunitDriver;
-+
-+        fn open(_dev: &drm::Device<KunitDriver>) -> Result<Pin<KBox<Self>>> {
-+            Ok(KBox::new(Self, GFP_KERNEL)?.into())
-+        }
-+    }
-+
-+    impl gem::DriverObject for KunitObject {
-+        type Driver = KunitDriver;
-+        type Args = ();
-+
-+        fn new(
-+            _dev: &drm::Device<KunitDriver>,
-+            _size: usize,
-+            _args: Self::Args,
-+        ) -> impl PinInit<Self, Error> {
-+            try_pin_init!(KunitObject {})
-+        }
-+    }
-+
-+    #[vtable]
-+    impl drm::Driver for KunitDriver {
-+        type Data = KunitData;
-+        type File = KunitFile;
-+        type Object = Object<KunitObject>;
-+
-+        const INFO: drm::DriverInfo = INFO;
-+        const IOCTLS: &'static [drm::ioctl::DrmIoctlDescriptor] = &[];
-+    }
-+
-+    fn create_drm_dev() -> Result<(faux::Registration, ARef<drm::Device<KunitDriver>>)> {
-+        // Create a faux DRM device so we can test gem object creation.
-+        let data = try_pin_init!(KunitData {});
-+        let dev = faux::Registration::new(c"Kunit", None)?;
-+        let drm = drm::Device::<KunitDriver>::new(dev.as_ref(), data)?;
-+
-+        Ok((dev, drm))
-+    }
-+
-+    #[test]
-+    fn compile_time_vmap_sizes() -> Result {
-+        let (_dev, drm) = create_drm_dev()?;
-+
-+        // Create a gem object to test with
-+        let cfg_ = ObjectConfig::<KunitObject> {
-+            map_wc: false,
-+            parent_resv_obj: None,
-+        };
-+        let obj = Object::<KunitObject>::new(&drm, PAGE_SIZE, cfg_, ())?;
-+
-+        // Try creating a normal vmap
-+        obj.vmap::<PAGE_SIZE>()?;
-+
-+        // Try creating a vmap that's smaller then the size we specified
-+        obj.vmap::<{ PAGE_SIZE - 100 }>()?;
-+
-+        // Make sure creating a vmap that's too large fails
-+        assert!(obj.vmap::<{ PAGE_SIZE + 200 }>().is_err());
-+
-+        Ok(())
-+    }
-+
-+    #[test]
-+    fn vmap_io() -> Result {
-+        let (_dev, drm) = create_drm_dev()?;
-+
-+        // Create a gem object to test with
-+        let cfg_ = ObjectConfig::<KunitObject> {
-+            map_wc: false,
-+            parent_resv_obj: None,
-+        };
-+        let obj = Object::<KunitObject>::new(&drm, PAGE_SIZE, cfg_, ())?;
-+
-+        let vmap = obj.vmap::<PAGE_SIZE>()?;
-+
-+        vmap.write8(0xDE, 0x0);
-+        assert_eq!(vmap.read8(0x0), 0xDE);
-+        vmap.write32(0xFFFFFFFF, 0x20);
-+
-+        assert_eq!(vmap.read32(0x20), 0xFFFFFFFF);
-+
-+        assert_eq!(vmap.read8(0x20), 0xFF);
-+        assert_eq!(vmap.read8(0x21), 0xFF);
-+        assert_eq!(vmap.read8(0x22), 0xFF);
-+        assert_eq!(vmap.read8(0x23), 0xFF);
-+
-+        Ok(())
-+    }
-+}
--- 
-2.53.0
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+UmVhZHkgdG8gdW5sZWFzaCB5b3VyIGlubmVyIGZydWl0IG5pbmphIHdpdGhvdXQgdGhlIG1lc3M/
+IFRoZW4gZ2V0IHJlYWR5IHRvIGRpdmUgaW50byB0aGUgYWRkaWN0aXZlbHkgc2ltcGxlLCB5ZXQg
+c3VycHJpc2luZ2x5IGNoYWxsZW5naW5nIHdvcmxkIG9mIFNsaWNlIE1hc3Rlci4gVGhpcyBnYW1l
+LCByZWFkaWx5IGF2YWlsYWJsZSBvbmxpbmUsIGlzIHBlcmZlY3QgZm9yIGEgcXVpY2sgYnVyc3Qg
+b2YgZnVuIG9yIGEgbW9yZSBleHRlbmRlZCBnYW1pbmcgc2Vzc2lvbi4gSXTigJlzIGEgdGVzdGFt
+ZW50IHRvIHRoZSBmYWN0IHRoYXQgZ2FtZXBsYXkgZG9lc24ndCBuZWVkIHRvIGJlIGNvbXBsZXgg
+dG8gYmUgZW5nYWdpbmcuDQpodHRwczovL3NsaWNlbWFzdGVyZnJlZS5jb20NCkdhbWVwbGF5OiBT
+aW1wbGUgTWVjaGFuaWNzLCBFbmRsZXNzIEZ1bg0KVGhlIGNvcmUgY29uY2VwdCBvZiBTbGljZSBN
+YXN0ZXIgaXMgcmVmcmVzaGluZ2x5IHN0cmFpZ2h0Zm9yd2FyZC4gQ29sb3JmdWwgZnJ1aXRzIGFy
+ZSBsYXVuY2hlZCBpbnRvIHRoZSBhaXIsIGFuZCB5b3VyIG1pc3Npb24gaXMgdG8gc2xpY2UgdGhl
+bSBpbnRvIHBpZWNlcyBiZWZvcmUgdGhleSBmYWxsIG9mZiB0aGUgc2NyZWVuLiBZb3UgY29udHJv
+bCBhIHZpcnR1YWwgYmxhZGUgd2l0aCB5b3VyIG1vdXNlIG9yIGZpbmdlciAoZGVwZW5kaW5nIG9u
+IHRoZSBwbGF0Zm9ybSksIGFuZCBkcmF3aW5nIGxpbmVzIHRocm91Z2ggdGhlIGZydWl0IGluaXRp
+YXRlcyB0aGUgc2xpY2luZyBhY3Rpb24uDQpUaGUgY2F0Y2g/IFlvdSBoYXZlIGxpbWl0ZWQgbGl2
+ZXMsIGFuZCBsZXR0aW5nIHRvbyBtYW55IGZydWl0cyBmYWxsIHVudG91Y2hlZCB3aWxsIHJlc3Vs
+dCBpbiBhIGdhbWUgb3Zlci4gT2NjYXNpb25hbGx5LCB5b3UnbGwgYWxzbyBlbmNvdW50ZXIgYm9t
+YnMgbWl4ZWQgaW4gd2l0aCB0aGUgZnJ1aXQgYmFycmFnZS4gQWNjaWRlbnRhbGx5IHNsaWNpbmcg
+YSBib21iIHdpbGwgZW5kIHlvdXIgcnVuIGluc3RhbnRseSwgYWRkaW5nIGEgbGF5ZXIgb2Ygc3Ry
+YXRlZ2ljIHRoaW5raW5nIHRvIHRoZSByYXBpZC1maXJlIGFjdGlvbi4NCkFzIHlvdSBwcm9ncmVz
+cywgdGhlIGdhbWUgdGhyb3dzIGRpZmZlcmVudCB0eXBlcyBvZiBmcnVpdCBhdCB5b3UsIHNvbWUg
+cmVxdWlyaW5nIG11bHRpcGxlIHNsaWNlcywgYW5kIHRoZSBzcGVlZCBpbmNyZWFzZXMgZ3JhZHVh
+bGx5LCBkZW1hbmRpbmcgZmFzdGVyIHJlZmxleGVzIGFuZCBtb3JlIHByZWNpc2UgbW92ZW1lbnRz
+LiBTcGVjaWFsIGZydWl0cyBtaWdodCBvZmZlciBzY29yZSBtdWx0aXBsaWVycyBvciBvdGhlciBi
+ZW5lZml0cywgYWRkaW5nIGZ1cnRoZXIgZGVwdGggdG8gdGhlIGdhbWVwbGF5LiBJdOKAmXMgYSBn
+YW1lIHdoZXJlIHByYWN0aWNlIHRydWx5IG1ha2VzIHBlcmZlY3QsIGFuZCBtYXN0ZXJpbmcgdGhl
+IGFydCBvZiBmcnVpdCBzbGljaW5nIGlzIGluY3JlZGlibHkgc2F0aXNmeWluZy4gWW91IGNhbiB0
+cnkgaXQgb3V0IG5vdyBieSBjbGlja2luZyBvbiBTbGljZSBNYXN0ZXIuDQpUaXBzIGZvciBBY2hp
+ZXZpbmcgRnJ1aXQtU2xpY2luZyBNYXN0ZXJ5DQpXaGlsZSB0aGUgZ2FtZSBzZWVtcyBzaW1wbGUg
+b24gdGhlIHN1cmZhY2UsIGEgZmV3IHN0cmF0ZWdpZXMgY2FuIHNpZ25pZmljYW50bHkgaW1wcm92
+ZSB5b3VyIHNjb3JlIGFuZCBleHRlbmQgeW91ciBnYW1lcGxheS4NCuKAoglGb2N1cyBvbiBFZmZp
+Y2llbmN5OiBJbnN0ZWFkIG9mIGZyYW50aWNhbGx5IHNsYXNoaW5nIGF0IGluZGl2aWR1YWwgZnJ1
+aXRzLCB0cnkgdG8gc2xpY2UgbXVsdGlwbGUgZnJ1aXRzIHdpdGggYSBzaW5nbGUsIHdlbGwtYWlt
+ZWQgc3dpcGUuIFRoaXMgbm90IG9ubHkgaW5jcmVhc2VzIHlvdXIgc2NvcmUgYnV0IGFsc28gY29u
+c2VydmVzIHlvdXIgbGltaXRlZCBzbGljaW5nIHRpbWUuDQrigKIJUHJpb3JpdGl6ZSBIaWdoLVZh
+bHVlIEZydWl0czogS2VlcCBhbiBleWUgb3V0IGZvciBzcGVjaWFsIGZydWl0cyB0aGF0IG9mZmVy
+IGJvbnVzIHBvaW50cyBvciBtdWx0aXBsaWVycy4gU2xpY2luZyB0aGVzZSBhdCB0aGUgcmlnaHQg
+bW9tZW50IGNhbiBkcmFtYXRpY2FsbHkgYm9vc3QgeW91ciBzY29yZS4NCuKAoglCZSBNaW5kZnVs
+IG9mIEJvbWJzOiBUaGlzIG9uZSBpcyBjcnVjaWFsISBBbHdheXMgYmUgYXdhcmUgb2YgdGhlIHBv
+c2l0aW9uIG9mIHRoZSBib21icyBhbmQgYXZvaWQgdGhlbSBhdCBhbGwgY29zdHMuIEEgbW9tZW50
+IG9mIGNhcmVsZXNzbmVzcyBjYW4gaW5zdGFudGx5IGVuZCB5b3VyIGdhbWUuIFRyeSB0byB0cmFp
+biB5b3Vyc2VsZiB0byByZWNvZ25pemUgdGhlbSBlYXJseSBhbmQgcGxhbiB5b3VyIHNsaWNlcyBh
+Y2NvcmRpbmdseS4NCuKAoglQcmFjdGljZSBNYWtlcyBQZXJmZWN0OiBMaWtlIGFueSBza2lsbC1i
+YXNlZCBnYW1lLCBwcmFjdGljZSBpcyBlc3NlbnRpYWwgZm9yIGltcHJvdmluZyB5b3VyIHJlZmxl
+eGVzIGFuZCBhY2N1cmFjeS4gVGhlIG1vcmUgeW91IHBsYXksIHRoZSBiZXR0ZXIgeW91J2xsIGJl
+Y29tZSBhdCBwcmVkaWN0aW5nIGZydWl0IHRyYWplY3RvcmllcyBhbmQgZXhlY3V0aW5nIHByZWNp
+c2Ugc2xpY2VzLiBTbywga2VlcCBwcmFjdGljaW5nIGFuZCB5b3UnbGwgYmUgcmVhY2hpbmcgbmV3
+IGhpZ2ggc2NvcmVzIGluIG5vIHRpbWUhDQpJbiBDb25jbHVzaW9uOiBBIFNsaWNlIG9mIEFkZGlj
+dGl2ZSBGdW4NClNsaWNlIE1hc3RlciBvZmZlcnMgYSBzdXJwcmlzaW5nbHkgYWRkaWN0aXZlIGFu
+ZCBlbmdhZ2luZyBnYW1pbmcgZXhwZXJpZW5jZSwgZGVzcGl0ZSBpdHMgc2ltcGxlIHByZW1pc2Uu
+IEl0cyBhY2Nlc3NpYmxlIGdhbWVwbGF5LCBjb21iaW5lZCB3aXRoIHRoZSBlc2NhbGF0aW5nIGNo
+YWxsZW5nZSwgbWFrZXMgaXQgYSBwZXJmZWN0IGNob2ljZSBmb3IgYSBxdWljayBkb3NlIG9mIGVu
+dGVydGFpbm1lbnQgb3IgYSBtb3JlIGV4dGVuZGVkIGdhbWluZyBzZXNzaW9uLiBXaGV0aGVyIHlv
+dSdyZSBsb29raW5nIGZvciBhIGNhc3VhbCBkaXN0cmFjdGlvbiBvciBhIHNraWxsLWJhc2VkIGNo
+YWxsZW5nZSwgU2xpY2UgTWFzdGVyIHByb3ZpZGVzIGEgc2F0aXNmeWluZyBhbmQgZnVuIHdheSB0
+byB0ZXN0IHlvdXIgcmVmbGV4ZXMgYW5kIGFjY3VyYWN5LiBTbywgZ3JhYiB5b3VyIHZpcnR1YWwg
+YmxhZGUgYW5kIHByZXBhcmUgdG8gdW5sZWFzaCB5b3VyIGlubmVyIGZydWl0LXNsaWNpbmcgbmlu
+amEhDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5h
+cm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcK
+VG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3Rz
+LmxpbmFyby5vcmcK
