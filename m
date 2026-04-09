@@ -2,94 +2,147 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id oETcB96O1mmEGQgAu9opvQ
+	id 8D+RIAbw1mm3JwgAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 08 Apr 2026 19:22:38 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 09 Apr 2026 02:17:10 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id A2CF83BF6C7
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 08 Apr 2026 19:22:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 325493C4F49
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 09 Apr 2026 02:17:10 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 6F60640487
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  8 Apr 2026 17:22:36 +0000 (UTC)
-Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5FAD13F74B
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  8 Apr 2026 17:22:30 +0000 (UTC)
-Content-Type: text/plain; charset="utf-8"
+	by lists.linaro.org (Postfix) with ESMTP id 477D6400FC
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  9 Apr 2026 00:17:09 +0000 (UTC)
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+	by lists.linaro.org (Postfix) with ESMTPS id 8ECE13F74B
+	for <linaro-mm-sig@lists.linaro.org>; Thu,  9 Apr 2026 00:17:07 +0000 (UTC)
+Authentication-Results: lists.linaro.org;
+	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=CPWNVxgN;
+	dmarc=pass (policy=quarantine) header.from=redhat.com;
+	spf=pass (lists.linaro.org: domain of lyude@redhat.com designates 170.10.129.124 as permitted sender) smtp.mailfrom=lyude@redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1775693827;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=nQ/kkld0vtHaBT8o/y52woZ43HcqsBt739q7XOTr3PI=;
+	b=CPWNVxgNKJdDpV+gUVfpWDQJmcqZIfn9L9R0iKgYNXdyjMk5Z4HS0hc03JXlSV8dXbogp+
+	5GBEL3ysfsazLxj9bgutyA7QTyZxTITa+yhm+3GBnW1DB5bYNKs0IUdwLVkb/WSpN4QZ/E
+	TsDzAPZTR6wHlAzfeMsL7QCVjab234U=
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-295-dV8j-oK_Ml2tpKVB0cpQdw-1; Wed,
+ 08 Apr 2026 20:16:11 -0400
+X-MC-Unique: dV8j-oK_Ml2tpKVB0cpQdw-1
+X-Mimecast-MFC-AGG-ID: dV8j-oK_Ml2tpKVB0cpQdw_1775693767
+Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 03DAB1956060;
+	Thu,  9 Apr 2026 00:16:07 +0000 (UTC)
+Received: from GoldenWind.redhat.com (unknown [10.22.80.49])
+	by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id D91AA300019F;
+	Thu,  9 Apr 2026 00:16:02 +0000 (UTC)
+From: Lyude Paul <lyude@redhat.com>
+To: nouveau@lists.freedesktop.org,
+	Gary Guo <gary@garyguo.net>,
+	Daniel Almeida <daniel.almeida@collabora.com>,
+	rust-for-linux@vger.kernel.org,
+	Danilo Krummrich <dakr@kernel.org>,
+	dri-devel@lists.freedesktop.org
+Date: Wed,  8 Apr 2026 20:12:46 -0400
+Message-ID: <20260409001559.622026-1-lyude@redhat.com>
 MIME-Version: 1.0
-From: onwekingsley021@gmail.com
-To: linaro-mm-sig@lists.linaro.org
-Date: Wed, 08 Apr 2026 17:22:30 -0000
-Message-ID: <177566895039.2104179.9521683622214523326@lists.linaro.org>
-User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: ABKBWTOUFEN2IOG5XS2AXY2MLXDJVBIN
-X-Message-ID-Hash: ABKBWTOUFEN2IOG5XS2AXY2MLXDJVBIN
-X-MailFrom: onwekingsley021@gmail.com
-X-Mailman-Rule-Hits: member-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
+X-Mimecast-MFC-PROC-ID: CaXINaNG_jMX3_NClSykGudhCL2tcgCUGeyHRGWfWHs_1775693767
+X-Mimecast-Originator: redhat.com
+X-Spamd-Bar: ---
+Message-ID-Hash: O35ULWMSDRYTPTMY2WDK4H52Q6EQ5EWU
+X-Message-ID-Hash: O35ULWMSDRYTPTMY2WDK4H52Q6EQ5EWU
+X-MailFrom: lyude@redhat.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Matthew Maurer <mmaurer@google.com>, FUJITA Tomonori <fujita.tomonori@gmail.com>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, christian.koenig@amd.com, Asahi Lina <lina@asahilina.net>, Miguel Ojeda <ojeda@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, Simona Vetter <simona@ffwll.ch>, Alice Ryhl <aliceryhl@google.com>, Boqun Feng <boqun@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Krishna Ketan Rai <prafulrai522@gmail.com>, linux-media@vger.kernel.org, Shankari Anand <shankari.ak0208@gmail.com>, David Airlie <airlied@gmail.com>, Benno Lossin <lossin@kernel.org>, Viresh Kumar <viresh.kumar@linaro.org>, linaro-mm-sig@lists.linaro.org, Asahi Lina <lina+kernel@asahilina.net>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] ZEUS Crypt-o Rec-overy Services: the Worldwide Leading Crypt-o Recovery Experts in 2026
+Subject: [Linaro-mm-sig] [PATCH v10 0/5] Rust bindings for gem shmem
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ABKBWTOUFEN2IOG5XS2AXY2MLXDJVBIN/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/O35ULWMSDRYTPTMY2WDK4H52Q6EQ5EWU/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Transfer-Encoding: base64
-X-Spamd-Result: default: False [5.69 / 15.00];
-	SPAM_FLAG(5.00)[];
-	MID_RHS_MATCH_TO(1.00)[];
-	R_SPF_ALLOW(-0.20)[+mx];
+Content-Type: text/plain; charset="us-ascii"; x-default="true"
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [4.49 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[redhat.com : SPF not aligned (relaxed),quarantine];
+	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
+	R_DKIM_REJECT(1.00)[redhat.com:s=mimecast20190719];
 	MAILLIST(-0.20)[mailman];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	GREYLIST(0.00)[pass,meta];
-	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[27];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_ONE(0.00)[1];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	GREYLIST(0.00)[pass,meta];
+	FREEMAIL_CC(0.00)[google.com,gmail.com,oracle.com,amd.com,asahilina.net,kernel.org,ffwll.ch,linaro.org,vger.kernel.org,lists.linaro.org,linuxfoundation.org];
+	FUZZY_RATELIMITED(0.00)[rspamd.com];
+	ARC_NA(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	TO_DN_NONE(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_NEQ_ENVFROM(0.00)[onwekingsley021@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
-	NEURAL_SPAM(0.00)[0.935];
-	R_DKIM_NA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[lyude@redhat.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[redhat.com:-];
+	TAGGED_RCPT(0.00)[linaro-mm-sig,kernel];
+	MISSING_XM_UA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	FROM_NO_DN(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:mid]
-X-Rspamd-Queue-Id: A2CF83BF6C7
+	NEURAL_SPAM(0.00)[0.355];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,gitlab.freedesktop.org:url,shmem.rs:url,linaro.org:email]
+X-Rspamd-Queue-Id: 325493C4F49
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-WkVVUyBDcnlwdC1vIFJlY292ZXIteSBTZXJ2aWNlcyB0cnVseSBjYW1lIHRocm91Z2ggZm9yIG1l
-IGF0IGEgdGltZSB3aGVuIEkgZmVsdCBjb21wbGV0ZWx5IGhvcGVsZXNzLiBBZnRlciBsb3Npbmcg
-bXkgQml0Y29pbiB0byBhIHNjYW0sIEkgdGhvdWdodCBteSAtd2VyZSBnb25lIGZvcmV2ZXIuIFRo
-YXQncyB3aGVuIEkgZGlzY292ZXJlZCBaRVVTLCBhbmQgZnJvbSB0aGUgdmVyeSBmaXJzdCBpbnRl
-cmFjdGlvbiwgSSBrbmV3IEkgd2FzIGluIGNhcGFibGUgaGFuZHMuIFRoZWlyIHRlYW0gd2FzIGlu
-Y3JlZGlibHkgcmVzcG9uc2l2ZSwgcHJvZmVzc2lvbmFsLCBhbmQga25vd2xlZGdlYWJsZSBhYm91
-dCBibG9jLWtjaGFpbiB0ZWNobm9sb2d5IGFuZCBjcnlwdC1vIGludmVzdGlnYXRpb25zLg0KLQ0K
-VGhleSB0b29rIHRoZSB0aW1lIHRvIHVuZGVyc3RhbmQgbXkgc2l0dWF0aW9uIGluIGRldGFpbCwg
-ZXhwbGFpbmVkIGV2ZXJ5IHN0ZXAgb2YgdGhlIHJlY292LWVyeSBwcm9jZXNzIGNsZWFybHksIGFu
-ZCBwcm92aWRlZCByZWd1bGFyIHVwZGF0ZXMgdGhhdCBrZXB0IG1lIHJlYXNzdXJlZC4gV2hhdCBp
-bXByZXNzZWQgbWUgbW9zdCB3YXMgdGhlaXIgcGVyc2lzdGVuY2UgYW5kIGRlZGljYXRpb27igJR0
-aGV5IGRpZG4ndCBnaXZlIHVwIHVudGlsIHJlYWwgcHJvZ3Jlc3Mgd2FzIG1hZGUuIFRoYW5rcyB0
-byB0aGVpciBleHBlcnRpc2UgYW5kIGFkdmFuY2VkIHRyYWNraW5nIHRlY2huaXF1ZXMsIEkgd2Fz
-IGFibGUgdG8gcmVjb3ZlciBhIHNpZ25pZmljYW50IHBvcnRpb24gb2YgbXkgbG8tc3QgZnUtbmRz
-Lg0KDQpaRVVTIENyeXAtdG8gUmVjb3ZlLXJ5IFNlcnZpY2VzIGRpZG4ndCBqdXN0IGhlbHAgbWUg
-ZmluYW5jaWFsbHnigJR0aGV5IHJlc3RvcmVkIG15IGNvbmZpZGVuY2UgYW5kIHBlYWNlIG9mIG1p
-bmQuIElmIHlvdSd2ZSBiZWVuIGEgdmljdGltIG9mIGNyeXB0LW8gZnJhLXVkIG9yIGxvLXN0IGFj
-LWNlc3MgdG8geW91ciBkaS1naXRhbCBhc3NlLXRzLCBJIGhpZ2hseSByZWNvbW1lbmQgcmVhY2hp
-bmcgb3V0IHRvIHRoZW0uDQoNCkNvbnRhY3QgWkVVUyBDcnlwLXRvIFJlY292ZS1yeSBTZXJ2aWNl
-czoNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFy
-by1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpU
-byB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMu
-bGluYXJvLm9yZwo=
+Most of this patch series has already been pushed upstream, this is just
+the second half of the patch series that has not been pushed yet + some
+additional changes which were required to implement changes requested by
+the mailing list. This patch series is originally from Asahi, previously
+posted by Daniel Almeida.
+
+The previous version of the patch series can be found here:
+
+(apparently it mistakenly was not sent to dri-devel, so no patchwork ):
+
+	https://patchwork.freedesktop.org/series/156093/
+
+Branch with patches applied available here (+ a hack required to make
+sure this builds:
+
+	https://gitlab.freedesktop.org/lyudess/linux/-/commits/rust/gem-shmem
+
+Lyude Paul (5):
+  rust: drm: gem: s/device::Device/Device/ for shmem.rs
+  drm/gem/shmem: Introduce __drm_gem_shmem_free_sgt_locked()
+  drm/gem/shmem: Export drm_gem_shmem_get_pages_sgt_locked()
+  rust: drm: gem: Introduce shmem::SGTable
+  rust: drm: gem: Add vmap functions to shmem bindings
+
+ drivers/gpu/drm/drm_gem_shmem_helper.c |  48 ++-
+ include/drm/drm_gem_shmem_helper.h     |   2 +
+ rust/kernel/drm/gem/shmem.rs           | 553 ++++++++++++++++++++++++-
+ 3 files changed, 590 insertions(+), 13 deletions(-)
+
+
+base-commit: a7a080bb4236ebe577b6776d940d1717912ff6dd
+-- 
+2.53.0
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
