@@ -2,35 +2,35 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WO8kAhfD2Gk4hwgAu9opvQ
+	id mO9lOjXD2Gk4hwgAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 10 Apr 2026 11:29:59 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 10 Apr 2026 11:30:29 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 803763D4C28
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 10 Apr 2026 11:29:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 921A33D4C42
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 10 Apr 2026 11:30:29 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 804BE404B7
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 10 Apr 2026 09:29:57 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 98959404C0
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 10 Apr 2026 09:30:28 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 22CFE404B2
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 10 Apr 2026 09:29:51 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 2614C404B2
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 10 Apr 2026 09:30:21 +0000 (UTC)
 MIME-Version: 1.0
 From: "Chong Criston" <chongcriston@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Fri, 10 Apr 2026 09:29:51 -0000
-Message-ID: <177581339114.682186.15969056047205823794@lists.linaro.org>
+Date: Fri, 10 Apr 2026 09:30:21 -0000
+Message-ID: <177581342115.682097.60183523465382047@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: F7A4HTZCGFY5Z447P2UK3QFROLHA2QA4
-X-Message-ID-Hash: F7A4HTZCGFY5Z447P2UK3QFROLHA2QA4
+Message-ID-Hash: NGHS75I43QQIRZ4HOONA5EZJKRMNSWU4
+X-Message-ID-Hash: NGHS75I43QQIRZ4HOONA5EZJKRMNSWU4
 X-MailFrom: chongcriston@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] maine coon kittens for sale united states cheap
+Subject: [Linaro-mm-sig] maine coon kittens for sale united states
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/F7A4HTZCGFY5Z447P2UK3QFROLHA2QA4/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NGHS75I43QQIRZ4HOONA5EZJKRMNSWU4/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -39,8 +39,7 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [5.62 / 15.00];
-	SPAM_FLAG(5.00)[];
+X-Spamd-Result: default: False [0.62 / 15.00];
 	MID_RHS_MATCH_TO(1.00)[];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx:c];
@@ -50,23 +49,22 @@ X-Spamd-Result: default: False [5.62 / 15.00];
 	HAS_LIST_UNSUB(-0.01)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FREEMAIL_FROM(0.00)[gmail.com];
 	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	GREYLIST(0.00)[pass,meta];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	ARC_NA(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	RCPT_COUNT_ONE(0.00)[1];
 	RCVD_COUNT_TWO(0.00)[2];
 	FROM_NEQ_ENVFROM(0.00)[chongcriston@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	TO_DN_NONE(0.00)[];
 	R_DKIM_NA(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:mid]
-X-Rspamd-Queue-Id: 803763D4C28
+X-Rspamd-Queue-Id: 921A33D4C42
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
