@@ -2,180 +2,186 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id ENWyHB5l5mkKvwEAu9opvQ
+	id aAlMKcXp2GnjjggAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:40:46 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 10 Apr 2026 14:15:01 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1D2FE431CA0
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:40:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 36B903D6917
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 10 Apr 2026 14:15:01 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DB02F40954
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:40:44 +0000 (UTC)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	by lists.linaro.org (Postfix) with ESMTPS id 63513400F6
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 10 Apr 2026 11:22:15 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 449D4404B3
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 10 Apr 2026 12:15:00 +0000 (UTC)
+Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
+	by lists.linaro.org (Postfix) with ESMTPS id 6B8BF400F6
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 10 Apr 2026 12:14:57 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=quicinc.com header.s=qcppdkim1 header.b=GeBFTT3N;
-	dmarc=pass (policy=none) header.from=quicinc.com;
-	spf=pass (lists.linaro.org: domain of quic_msavaliy@quicinc.com designates 205.220.168.131 as permitted sender) smtp.mailfrom=quic_msavaliy@quicinc.com
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 63AADVLm1925453;
-	Fri, 10 Apr 2026 11:22:10 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	OXCDEuWxbaerERvBelLzYgqdWH9OXFRHW+vN3cYatsk=; b=GeBFTT3NU1FSM6Hj
-	2H/Q7pmlAT4qe7QOhaKVrZ75sFot43vQAH/ZP7Y33Vu+BaMZmQfkzDAawcDzGOeD
-	KOA8vlG50i+byMO8TqcO0eeTh97OqkzFO4SIhfX4xyBxCkoqXxunKyJRhPFNSgcM
-	VFXvlJvAtM1Y76kpZ2mGh8ChBdQ5A4KiL/x4mIMmBjVT/P+qvtGIJRuSlxLSObAm
-	MHmBZvI1qHXlRK6EOYMDiw3Q/4E70nZqOLx3reTJd6hAx3DoHXUkKrq7qakIkCNK
-	CLiSB5yef4Rch6kFbaLlTn/3YeWAOdDDTAi34BJ0fXSreoIR7Uxa+CJFtaM6pjDg
-	b11yxg==
-Received: from nasanppmta05.qualcomm.com (i-global254.qualcomm.com [199.106.103.254])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4deudjs5ed-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Fri, 10 Apr 2026 11:22:09 +0000 (GMT)
-Received: from nasanex01c.na.qualcomm.com (nasanex01c.na.qualcomm.com [10.45.79.139])
-	by NASANPPMTA05.qualcomm.com (8.18.1.7/8.18.1.7) with ESMTPS id 63ABM9nl017097
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Fri, 10 Apr 2026 11:22:09 GMT
-Received: from [10.216.26.180] (10.80.80.8) by nasanex01c.na.qualcomm.com
- (10.45.79.139) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 10 Apr
- 2026 04:22:05 -0700
-Message-ID: <fb37aa8d-bc61-48fe-9c82-828e7fd642f9@quicinc.com>
-Date: Fri, 10 Apr 2026 16:52:01 +0530
+	dkim=pass header.d=linaro.org header.s=google header.b="mCekA/3q";
+	dmarc=pass (policy=none) header.from=linaro.org;
+	spf=pass (lists.linaro.org: domain of sumit.semwal@linaro.org designates 209.85.208.42 as permitted sender) smtp.mailfrom=sumit.semwal@linaro.org;
+	arc=pass ("google.com:s=arc-20240605:i=1")
+Received: by mail-ed1-f42.google.com with SMTP id 4fb4d7f45d1cf-670a48b01efso637744a12.0
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 10 Apr 2026 05:14:57 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775823296; cv=none;
+        d=google.com; s=arc-20240605;
+        b=dHZuWuRJQ06OdwaJ7D34XJ+dr9tdwqVIhwZzX1OZa1FEjG4tWVCxDvZSAGIAuWsh3c
+         SzwzOkIfmNmVKKxArNsTP40CqU5UZKx6v7BODZIftyF0foGWdLpWO/Y+ZKbAul12CbDT
+         LI1miKRavz/VeJR/sZBnxbD5sUK00Lrsd+5xfwa5dl+8wW5w69OThrCqtTNSSJzJfMQK
+         26HfQtxuIIrTKQi3qe5Fk3AETAO9IsTDhYNjWP2Zlf1YYMAVvF1Wollt5e4PDxUdlDpu
+         qVP6ui4UqerjYbNxdmtgEG4d9J5dbcSnH+V++0tTnH1rDG6RNK/N9Ae3948u33l9XnsE
+         3jKw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=7jIY/1++oar4yAYBTP2iQ0v5rOvIuL4pDsKGubLCfjE=;
+        fh=qSVcLRk62ljEETxHToPx2ZnoVch8VD+/Mja3rxQ3F+U=;
+        b=g4hbBtIVfwpdnDAJEPiPOHVBAj72mIKg1wWZmLogMpurgPJ7VWvziNa1waVhtCDBid
+         /nD+Ux4zKJ6loxWqrRLOV796/iD70+FROvk3oHyR5C9rv//8O86wckegPjUn1e7LLsj2
+         yTkGNwdoLR+jLOcDA1CXJQYqoHHC8W7Jq2Gxb9PEzYjwR7pXHuTsjC+m/PlG6cruxbOJ
+         40aHEMFm7ZoQx4hL+hqPmTfHGJ11f8xjTbJvasUh/SVN6oJ0dCG6VxHL/HtqR6D3IxZk
+         CR2DnXWpnZO2rgwqQI6NxQq7eP7oYI1SThqG1DqZo3hD2kMtySLpb0cYvp1PCMM70FDe
+         uFDg==;
+        darn=lists.linaro.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1775823296; x=1776428096; darn=lists.linaro.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=7jIY/1++oar4yAYBTP2iQ0v5rOvIuL4pDsKGubLCfjE=;
+        b=mCekA/3qntZ/Exl+7egMsBjHYMfKQTrQhA+keT2gBcb99aaYkuRWu6rhPc8vdhRxaw
+         2gZKpVDc8E51jy66StmmtQNqKzSqgiqZpO9gmlz5Fj21eYDzGdO/SkpEHXJ8QE14qWE9
+         UfbzsW9a7YCHQ8o5fsycV8JZuCzvSfJ2EwiWdZBmSbNLzDlkzvSv7892qP+Nc7hhBKeV
+         ORfMmUj//HCROXWea+PW9LErXmjKnsmGS2RkceFRPDwi+6EKcARHLBtb/6JG82u/Ses0
+         sYfoaEr2+VtM1Z/0wKO1dPlpCH4gCbJmuco+WeotbfzwOAtxkM6DPBwCRTAvwm1IDOQk
+         HOGw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1775823296; x=1776428096;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=7jIY/1++oar4yAYBTP2iQ0v5rOvIuL4pDsKGubLCfjE=;
+        b=UwDKFyld4zl8UE7Owq+D+zBHYmyJ7K8qOMW1Lp5k8KmiqQVW35uxNv+hjkbEP5H5u/
+         J+pHkn95jyFYNJqvkO5rkyfmfs/KSWUWYdLcsM4Yxy5B9N2sBKH5CgFxign7EwHUsg5/
+         bvTPl/YNWcBoGCBFQ2AIyp9mZIbf/AnS5tk7fmXpmWT9gk2YSfWW9AYNmzEE8omo+605
+         Q1tCBqk+S5bvX6/QB8Jq2cEtgtOAVb6LvAcuCXX+z1llBPY/a8Nr61CbNrriIrY3fqRx
+         G/tud+3h8y3Zer4rN+QIelQ/8wnSFWCG6nWNJjCpH+gzEhRrCQMW1dz27NZ1Bbzkk/7d
+         F9MA==
+X-Forwarded-Encrypted: i=1; AJvYcCUlAk7MW9/0S3BtYex3gfKmYT/P2AgWE1QFbEIY/A3+YHwHRZETXZz2hNCG2Ew4h6ooi8o1TSF5bVP5ffGO@lists.linaro.org
+X-Gm-Message-State: AOJu0Yx1TUdLqMZbZZhAyzVKU+/Xwcp5k9PcPh3/R98A8cVk2VcfcAK7
+	IycIaUfIW/44w+yP6zR9BdbogBz6QLjg9SIWYiPzPI+z9R3mzZDidIS0F25Sh8s8pFF1tWavRr4
+	aVUgIoatZEhtU5VOv4WUJB0yuwDROvudjFHYppL5FZdu2
+X-Gm-Gg: AeBDietHMrickXOAFocot/3Xuhn/TlY6yKSFKFMu69fKpNs0PZ1a8ZLHqsfS57uIm/P
+	sMfeosGhM3cfIlBpWnRKRj7pTuCkXMo1zrMCYbpfDBnRS5ClL2AjprJ168W66yomzg6BHlyed9Z
+	SjqIAQWZaO3cenm2IfiUf/lg7AHyuRC4Ri5tdD45dyI67JBce1lw1uLNM/MyZMcWjnxVSGNew5g
+	qBbiuLjdovL2c1YaaYNVh4O35fvcFLfv7u11w8CUtTyVYe8ePCEABkGTU/1OlNBV5h2CWaEYI1l
+	UDEfl8tqUpQVYmkm9y/ycpALQOpSV62Lk2rrDoE=
+X-Received: by 2002:a17:907:e102:b0:b83:95c8:15d0 with SMTP id
+ a640c23a62f3a-b9d7279bb78mr130310166b.52.1775823294707; Fri, 10 Apr 2026
+ 05:14:54 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Aniket Randive <aniket.randive@oss.qualcomm.com>,
-        <mukesh.savaliya@oss.qualcomm.com>, <viken.dadhaniya@oss.qualcomm.com>,
-        <andi.shyti@kernel.org>, <sumit.semwal@linaro.org>,
-        <christian.koenig@amd.com>
-References: <20260410101949.2315058-1-aniket.randive@oss.qualcomm.com>
-Content-Language: en-US
-From: Mukesh Kumar Savaliya <quic_msavaliy@quicinc.com>
-In-Reply-To: <20260410101949.2315058-1-aniket.randive@oss.qualcomm.com>
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
- nasanex01c.na.qualcomm.com (10.45.79.139)
-X-QCInternal: smtphost
-X-Authority-Analysis: v=2.4 cv=X+hi7mTe c=1 sm=1 tr=0 ts=69d8dd61 cx=c_pps
- a=JYp8KDb2vCoCEuGobkYCKw==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
- a=GEpy-HfZoHoA:10 a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=2ZZFV4PajdD4Tf-m3e0A:9 a=QEXdDO2ut3YA:10
-X-Proofpoint-GUID: gRq6W0F6IGuJAnJhHlCPTtFpLZTjLa7V
-X-Proofpoint-ORIG-GUID: gRq6W0F6IGuJAnJhHlCPTtFpLZTjLa7V
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDEwMDEwNiBTYWx0ZWRfXwOqFuikj+wsJ
- Nns3Qy0glre0sxugk1cvT+ttj1yIvRP3n8VhRfH4xTL5Sbk80NaB/UX4AAZbjlantZO+ozfjSB/
- MsfzSZ+sWAaSfJmhgc36qRY7u0V4PJgEjGNTQTaNvJIBXrUED/YvY6THa83wQH+XdFDm5p2IDcb
- hRfTXzv6ePnBnA7KzYQ3xS/baN+CeUjaXJeiwyHXMxXmI7c/gsyF+QTxANvKv3xtkU95qE9pa3Q
- GBh2WNEao+QEhmAS+CPijjNGjTo7L+aTonS2oz1mxUMQl3QYyWfey0SSmBUy6+CJf3FWjs/rXGN
- JLmS9ttJw15Qzd3C0bn+oDOxL/R+6w3L7kdNBPJlBMomd6w5bABAT31XI5bel2waNNtyzSLoil8
- ZouoRu7+3VexVNpIRfYX4axBgB6CJ6i8ipbT74oN5ApCEyLzH0ojaE3fwY7mTf5fyp4szp2lFuk
- rtMM+1Odb6UoEYuo7zA==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-04-10_03,2026-04-09_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 malwarescore=0 clxscore=1015 adultscore=0 priorityscore=1501
- lowpriorityscore=0 suspectscore=0 spamscore=0 bulkscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2604010000 definitions=main-2604100106
+References: <20260407092617.635223-1-jiri@resnulli.us>
+In-Reply-To: <20260407092617.635223-1-jiri@resnulli.us>
+From: Sumit Semwal <sumit.semwal@linaro.org>
+Date: Fri, 10 Apr 2026 17:44:43 +0530
+X-Gm-Features: AQROBzADFveULcyZjtNgjI9rBi4aeeX0JzC3AEXYi9kt8DQW2Z9q1-iXZwCoelw
+Message-ID: <CAO_48GFt21rv0PJd2Csa0O4OEpN053_p__4Zux+m7jQdHSagEg@mail.gmail.com>
+To: Jiri Pirko <jiri@resnulli.us>
 X-Spamd-Bar: ----
-X-MailFrom: quic_msavaliy@quicinc.com
+Message-ID-Hash: FW476T77VIS75WKU5VSWQNHAFIV7QIAY
+X-Message-ID-Hash: FW476T77VIS75WKU5VSWQNHAFIV7QIAY
+X-MailFrom: sumit.semwal@linaro.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 64EM5NBN2VQAF6PT2AHZ4HHKG7ZBCUKY
-X-Message-ID-Hash: 64EM5NBN2VQAF6PT2AHZ4HHKG7ZBCUKY
-X-Mailman-Approved-At: Mon, 20 Apr 2026 17:39:05 +0000
-CC: linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, naresh.maramaina@oss.qualcomm.com
+CC: dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, iommu@lists.linux.dev, linux-media@vger.kernel.org, benjamin.gaignard@collabora.com, Brian.Starkey@arm.com, jstultz@google.com, tjmercier@google.com, christian.koenig@amd.com, robin.murphy@arm.com, jgg@ziepe.ca, leon@kernel.org, ptesarik@suse.com, catalin.marinas@arm.com, aneesh.kumar@kernel.org, suzuki.poulose@arm.com, steven.price@arm.com, thomas.lendacky@amd.com, john.allen@amd.com, ashish.kalra@amd.com, suravee.suthikulpanit@amd.com, linux-coco@lists.linux.dev
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH V4] i2c: qcom-geni: Avoid extra TX DMA TRE for single read message in GPI mode
+Subject: [Linaro-mm-sig] Re: [PATCH v2] dma-buf: heaps: system: document system_cc_shared heap
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/64EM5NBN2VQAF6PT2AHZ4HHKG7ZBCUKY/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FW476T77VIS75WKU5VSWQNHAFIV7QIAY/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [1.59 / 15.00];
-	DATE_IN_PAST(1.00)[246];
-	R_DKIM_REJECT(1.00)[quicinc.com:s=qcppdkim1];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+X-Spamd-Result: default: False [-0.01 / 15.00];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:google.com:reject}];
+	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[quicinc.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	ARC_NA(0.00)[];
-	SUSPICIOUS_AUTH_ORIGIN(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[13];
-	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[quicinc.com:-];
+	DMARC_POLICY_ALLOW(0.00)[linaro.org,none];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	MISSING_XM_UA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[23];
+	MIME_TRACE(0.00)[0:+];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	FROM_NEQ_ENVFROM(0.00)[quic_msavaliy@quicinc.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	HAS_XOIP(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-0.895];
+	R_DKIM_REJECT(0.00)[linaro.org:s=google];
+	FROM_HAS_DN(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,qualcomm.com:email,quicinc.com:mid,linaro.org:email]
-X-Rspamd-Queue-Id: 1D2FE431CA0
+	NEURAL_SPAM(0.00)[0.764];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	FROM_NEQ_ENVFROM(0.00)[sumit.semwal@linaro.org,linaro-mm-sig-bounces@lists.linaro.org];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[linaro.org:-]
+X-Rspamd-Queue-Id: 36B903D6917
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
+Hello Jiri,
 
+On Tue, 7 Apr 2026 at 14:56, Jiri Pirko <jiri@resnulli.us> wrote:
+>
+> From: Jiri Pirko <jiri@nvidia.com>
+>
+> Document the system_cc_shared dma-buf heap that was introduced
+> recently. Describe its purpose, availability conditions and
+> relation to confidential computing VMs.
+>
+> Signed-off-by: Jiri Pirko <jiri@nvidia.com>
+> Reviewed-by: T.J.Mercier <tjmercier@google.com>
 
-On 4/10/2026 3:49 PM, Aniket Randive wrote:
-> In GPI mode, the I2C GENI driver programs an extra TX DMA transfer
-> descriptor (TRE) on the TX channel when handling a single read message.
-> This results in an unintended write phase being issued on the I2C bus,
-> even though a read transaction does not require any TX data.
-> 
-> For a single-byte read, the correct hardware sequence consists of the
-> CONFIG and GO commands followed by a single RX DMA TRE. Programming an
-> additional TX DMA TRE is redundant, causes unnecessary DMA buffer
-> mapping on the TX channel, and may lead to incorrect bus behavior.
-> 
-> Update the transfer logic to avoid programming a TX DMA TRE for single
-> read messages in GPI mode.
-> 
-> Co-developed-by: Maramaina Naresh <naresh.maramaina@oss.qualcomm.com>
-> Signed-off-by: Maramaina Naresh <naresh.maramaina@oss.qualcomm.com>
-> Signed-off-by: Aniket Randive <aniket.randive@oss.qualcomm.com>
-Reviewed-by: Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>
+Thank you for the patch!
+
+Marek: Since you're taking the dependent patches through your tree,
+could you please use:
+Acked-by: Sumit Semwal <sumit.semwal@linaro.org>
+
+and take this as well?
+
+Thanks and Best regards,
+Sumit.
 > ---
-> 
-> Changes in v4:
->    - Added some more description in comment and changed the label name.
-> Changes in v3:
->    - Added comment in the driver for better readability and changed the
->      position of 'skip_dma' label to allow dma engine configuration.
-> Changes in v2:
->    - Updated the commit message.
-> 
->   drivers/i2c/busses/i2c-qcom-geni.c | 24 +++++++++++++++++++-----
->   1 file changed, 19 insertions(+), 5 deletions(-)
-> 
-> diff --git a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-geni.c
-> index a4acb78fafb6..a482a4c60744 100644
-> --- a/drivers/i2c/busses/i2c-qcom-geni.c
-> +++ b/drivers/i2c/busses/i2c-qcom-geni.c
-> @@ -625,8 +625,8 @@ static int geni_i2c_gpi(struct geni_i2c_dev *gi2c, struct i2c_msg msgs[],
-
-[...]
-
+>  Documentation/userspace-api/dma-buf-heaps.rst | 7 +++++++
+>  1 file changed, 7 insertions(+)
+>
+> diff --git a/Documentation/userspace-api/dma-buf-heaps.rst b/Documentation/userspace-api/dma-buf-heaps.rst
+> index 05445c83b79a..f56b743cdb36 100644
+> --- a/Documentation/userspace-api/dma-buf-heaps.rst
+> +++ b/Documentation/userspace-api/dma-buf-heaps.rst
+> @@ -16,6 +16,13 @@ following heaps:
+>
+>   - The ``system`` heap allocates virtually contiguous, cacheable, buffers.
+>
+> + - The ``system_cc_shared`` heap allocates virtually contiguous, cacheable,
+> +   buffers using shared (decrypted) memory. It is only present on
+> +   confidential computing (CoCo) VMs where memory encryption is active
+> +   (e.g., AMD SEV, Intel TDX). The allocated pages have the encryption
+> +   bit cleared, making them accessible for device DMA without TDISP
+> +   support. On non-CoCo VM configurations, this heap is not registered.
+> +
+>   - The ``default_cma_region`` heap allocates physically contiguous,
+>     cacheable, buffers. Only present if a CMA region is present. Such a
+>     region is usually created either through the kernel commandline
+> --
+> 2.51.1
+>
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
