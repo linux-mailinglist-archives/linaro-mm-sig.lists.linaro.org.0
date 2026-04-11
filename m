@@ -2,411 +2,156 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id SB4sNjBl5mlmvwEAu9opvQ
+	id aB0bAPSZ2mkC4QgAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:41:04 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 11 Apr 2026 20:59:00 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8A15E431CEF
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:41:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 79DB53E161A
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 11 Apr 2026 20:58:59 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8FB36406ED
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:41:03 +0000 (UTC)
-Received: from CY3PR05CU001.outbound.protection.outlook.com (mail-westcentralusazon11013046.outbound.protection.outlook.com [40.93.201.46])
-	by lists.linaro.org (Postfix) with ESMTPS id F364440166
-	for <linaro-mm-sig@lists.linaro.org>; Sat, 11 Apr 2026 13:32:50 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 264C8400FF
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 11 Apr 2026 18:58:58 +0000 (UTC)
+Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
+	by lists.linaro.org (Postfix) with ESMTPS id 32F503F728
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 11 Apr 2026 18:58:54 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=Nvidia.com header.s=selector2 header.b=RSKVlVn5;
-	dmarc=pass (policy=reject) header.from=nvidia.com;
-	spf=pass (lists.linaro.org: domain of acourbot@nvidia.com designates 40.93.201.46 as permitted sender) smtp.mailfrom=acourbot@nvidia.com;
-	arc=pass ("microsoft.com:s=arcselector10001:i=1")
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=uD+5dyTE6sCV95Yx3WmlcCU3diRHEI56tzOMJG5LlZg0cXn3UXjRzFAS81w+xPSKhIjWJxzooau1rCDnud2Z6Q86XpijAx+mL6vNoaerDmLhnr6rmvge01G3dKSCmmhCQ3bZmZvHX+VL1cO39WwV/oGFRN2jtalonnmrxif8MSsky3Jmkv7VrqnXgaxC1SqOgKVbE+ewnALlQVeZQUJKz75s29sBpNklkknBWvWGCw8mweBFZDFZxYSDklvcTGlun1Y4U+vImQ5nS0huulysbd7/lptLUMM1Mg1Amsbx2/BOmr2jPLKhgsl74eNJb1aMiq6EjQYp95yWPOqq46gcLQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+IDfgeBmwQeNTL7XBGDuGSBMO5e2rkJd8wN7HJTJs3s=;
- b=t23O+uakM4ip6P60rEMGqOX5eghphasOnCLNKA3jAxQ1kkbmLV5sm0z82b0gleYLhGxT3edysrCQtaZMFlgyZwa6cod9YK4GFsxnDGoM5723E+BEfbrBWVUtgJaSt1Zesvk7XjsAMBnh7QyupjsaIFcZdRJAofWTS3jbM3g8PykIAsL++Ap7eSI+AIMq3yr6fpPQ/R0NgpGXkT9jEn+386QW1QAsk7cwS4uK+Uf3qvtIpoiF7PLm4mVAXkrJBQ7bruJWDOXy2wO012j1Y3eUfEKBxlsBbddJHGTIyruUtX58uvM6HG/d+srs4z8B4lJIyYqoUmhsizvUxxWaw0tBPw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+IDfgeBmwQeNTL7XBGDuGSBMO5e2rkJd8wN7HJTJs3s=;
- b=RSKVlVn5pUxbniRMmj7Y1gc+AYUChqg3C4WAeDpTK5dcexwv4ukk025a/fyZSp7YxyDb/qbfKY1jcQ/g0rUb3pHpXw/tC0hyG5gS+4SIxJeJQV1QfGrot0UO6Lq77VxfeOOMJA+kvTdRAUXqC1EehzzsBjjuQgu4J/uRkgZ+bGVluuLThIZkh2ZMLWVON6rjb4d9UMuS0GQr/uBpCmFX0u/R3aNhyZU0OWTq6oT8mo5R2HRmRNlAFwtEpJGnVcCFqzVMyXa2xlbeJElCuy02HQ5nNCNU74vDotq1s2NKRAyAL6+MpWt4E5Mq3JBwkebcMCf0doqCRW2GK4QUKCSErQ==
-Received: from CH2PR12MB3990.namprd12.prod.outlook.com (2603:10b6:610:28::18)
- by SN7PR12MB6863.namprd12.prod.outlook.com (2603:10b6:806:264::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.46; Sat, 11 Apr
- 2026 13:32:44 +0000
-Received: from CH2PR12MB3990.namprd12.prod.outlook.com
- ([fe80::7de1:4fe5:8ead:5989]) by CH2PR12MB3990.namprd12.prod.outlook.com
- ([fe80::7de1:4fe5:8ead:5989%4]) with mapi id 15.20.9769.041; Sat, 11 Apr 2026
- 13:32:43 +0000
-Date: Sat, 11 Apr 2026 22:32:38 +0900
-Message-Id: <DHQD3LJ6PA12.8H8P3FUPSP9K@nvidia.com>
-From: "Alexandre Courbot" <acourbot@nvidia.com>
-To: "Lyude Paul" <lyude@redhat.com>
-References: <20260409001559.622026-1-lyude@redhat.com>
- <20260409001559.622026-6-lyude@redhat.com>
-In-Reply-To: <20260409001559.622026-6-lyude@redhat.com>
-X-ClientProxiedBy: TY4P286CA0072.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:405:36d::11) To CH2PR12MB3990.namprd12.prod.outlook.com
- (2603:10b6:610:28::18)
+	dkim=pass header.d=igalia.com header.s=20170329 header.b="GcF/nW8I";
+	dmarc=pass (policy=none) header.from=igalia.com;
+	spf=pass (lists.linaro.org: domain of mcanal@igalia.com designates 213.97.179.56 as permitted sender) smtp.mailfrom=mcanal@igalia.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
+	s=20170329; h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:
+	Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:
+	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=rfR/xs54iud7qjWeo87LTD8Cmitowf/vA43TFtPNilg=; b=GcF/nW8Ix57ePYZUjwiT2qGAqq
+	FGUPSxXoVtUY5rS9XjVpwYPSLrqZPUJ9MNVaLrXFN17E8LU5EbUDj15csHk/Yio31BGQ54M6WhEoI
+	oHSifD9t/euCsVP9dlDWCVV0s8jPhf+h9YNbdfiCitbX0gCylkfo98AB9lOqNUdZCtGbvshsnfZKr
+	U7KRlZ54x3H5ovkkl6r8gbgmn8SpAF0vIeAxvCQpMK1fr5tXimTV2In2X77fepR5OzsFDziwU+Peg
+	xuQTmdivHcdKxFSldAszUCJng3iIC9gArP2CeQfVAhGeBxyLigsNR9SSABdFV5PexBPL0Dxoi0Vgg
+	OS3qOyKQ==;
+Received: from [189.7.87.169] (helo=prince)
+	by fanzine2.igalia.com with esmtpsa
+	(Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
+	id 1wBdXV-00Epqg-1H; Sat, 11 Apr 2026 20:58:41 +0200
+From: =?UTF-8?q?Ma=C3=ADra=20Canal?= <mcanal@igalia.com>
+To: =?UTF-8?q?Christian=20K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Boris Brezillon <boris.brezillon@collabora.com>,
+	Tvrtko Ursulin <tvrtko.ursulin@igalia.com>,
+	Philipp Stanner <phasta@kernel.org>
+Date: Sat, 11 Apr 2026 15:47:33 -0300
+Message-ID: <20260411185756.1887119-4-mcanal@igalia.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PR12MB3990:EE_|SN7PR12MB6863:EE_
-X-MS-Office365-Filtering-Correlation-Id: 379003f8-f333-457a-5331-08de97cecedf
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|7416014|376014|10070799003|366016|1800799024|56012099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: 
-	9p1q90t07orT2nQEFvoG2knfWsx1sI8HOm2HUmwO9K3pEV+cTAm7zvBO+G43UByVwArJ5iym9ykTVVHS0XFkS2zifAGDOG2759CCd7qEUP22P7KJs3/2/65Q3hLygdXZ0Im1dc2GCX0cHJx6Q1UsfjSKWZwUqvlYJkDXcJrA46zmKJjefYK93KbXldkpCRoGPgrt8gZCtTC7UfK2b9Z+QFxjepU0fLoCDOyb/rR8jiy0Zcy7x2UjLPLH6BDR6KqNyqgyuO0J4qAZt+UHzMYVawCTyMXWPQpmaYo4KBQDJ7ZuxqDMh7kMka0MWCfaRfHcR1hxwIjrpLNCfbQp1FToyaJScqeYCCB6jCeDEIYBKb48oPEtiwTXILYh1RYB8A1wL3uGEJqg0q89SuBdLJedpwvJY+Zm8XpZGBECCReeE4tK5l9KjenjMkQM7xXFIT+tK1Nu8vvp4OIMdU8ClbXHzczsGTdE3nPYxhdJkLzzAZmlTvRU01p13rf5pBlyxt7emtDKZ7aMSkK/LuV0s6wlvhm7ut1Vqg+uUkOr6nKzIqDw/yRIt/zHVmpmZV+sA0oOBhvVi87selp4dptRB9+xH86JDBrHwZ8Z4IIc31HZvv83fbU58iAyBRTNfw2qrA5acfAJDE5ZYmx///IRXx+xn5SBloF9+TGcAsMT3Crxrc2xZHj0pQZ/YdCS+MECzb4x4Ahs4WuLfTWXucMH3MgweyR7zslyNxwTPRvQkiPX0SQ=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH2PR12MB3990.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(376014)(10070799003)(366016)(1800799024)(56012099003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?clJ0aXltUmEwV2VQZm5OcFBkMEdiZ3pBV2RIcEQwLy9jVUJucjlOMVJsMUlr?=
- =?utf-8?B?QnBxcjNnb0FRVTJ5QXBlbVJFd21WSERLRkVSMGs3d2dOMFU2SUN5RU1OSEFt?=
- =?utf-8?B?ZzJiVkhiMW54eWQ5NGFabjBsM0JyYXJDOGJaUXpHRU1EM20zQVRWQlZQU2tN?=
- =?utf-8?B?VTdJb2hXcEkzNjUxUm41T1FGZ3ptVDM3amZiUlNSN2RNWE1IK3BVVHJnWjl0?=
- =?utf-8?B?STk5b3R2eW91bk4veUhOMkY4SVZqNnRaemFpVS9hM2hZOHdMRVZMNnBjZXdi?=
- =?utf-8?B?ZTlNbXRCL2FrR2ZSMnJpempIWDBJNUZnNy9RVnhsaWswcWc4M1BoNW1aUHRa?=
- =?utf-8?B?NmpSTENyS20yelo2UXdCaHc0Sm5pZytMZkQvRlRHcWVsSjZGM1JMNVg5bVdv?=
- =?utf-8?B?SVZ0U0N1SDQ3WXAyVmdMeXNsOEVhV29ncDdjK2ZiQVdPeHd4U0NiemxNejI0?=
- =?utf-8?B?eS8vUC9sbUtWajNvUkdha21OaW51ZmdrdVU0akZJeGw3SDB6SmRYbVZiVEti?=
- =?utf-8?B?OGtaNUx2eGhzNTVxYUUzZGc1ZGtuVHErdVp3bGlDMWs5Z3hyQ0NZR1JRSmZQ?=
- =?utf-8?B?RGhUM0FZd1BoZDJkNTJGZk5mT0R3ME5HME5QRVJ1YkRaWFVBVnpvTmZrRk5w?=
- =?utf-8?B?aGx1TkMrNFVqanVBWksrK0ZjWnNqV0xqU0R3MWxkSE96SmtFcUlsV1VRR1J0?=
- =?utf-8?B?NHNmT2gxUXNzWU5LVUIwRDM0YjhWZkorYTlIVWlialNLbWFlL09BdEgyR2x4?=
- =?utf-8?B?RkszMmhYc1ZCQmVOcE1IaUJYR24rUGhOdERBSzZ1MHRDa3l6RmI1VW00OUJM?=
- =?utf-8?B?VStqVWN4dDFMazNSanQ0d3phRFZvM21KTWk5Z2M5bGhOWVQ0bUg0bWp2K0ow?=
- =?utf-8?B?V2lNZVF6NDdvZjJDQTFEaTIvcnhTWlEvdlV5TTIrRExCTFl3aU9kMkpzT08z?=
- =?utf-8?B?a2JXL1UrQzluUE13VWVTVEp0VWRkZTJXNXN3QjI0QU0ra09MaVYyTFZsazVh?=
- =?utf-8?B?dWNndHRMdXpJUjVCZTZIWFdsL1J2RWdHVzhSTlplVzUzL21HRmFVbWtGc2ZU?=
- =?utf-8?B?WUdUdVNXQk16aG9kMTY2WEtVaHpRaTJJUjV2WmFGUk1yUVlad2l3Yk1kRDFB?=
- =?utf-8?B?QVJDNHp2Z2pSdXl3TkV3VzlCektIZ3ZSaHhiNm9ScGhsaWdPM0lUeVpFWHBW?=
- =?utf-8?B?OWhSYXFlTE5UNjZXU2Q2M0tJLzJEeVRtUW1tUWpESkVCTnJ6RjcybldDL3hB?=
- =?utf-8?B?OVoyRlVJZ2VOU2lqVDZiK2JmSndIUTlFSGtMOUlRc2FIMGREaHBWVlZ4azBL?=
- =?utf-8?B?VUlVc2p2N3ZROUcyL0ZrRGdPekp1bU1QbC9ZekRlVWlSU2QvdEJOc2hGMGli?=
- =?utf-8?B?RjVBNkE3a1Y0a2E4bkE2RFlFWTBnVFY4MDRKc0VRbitoSzZEQXkrRVlQTkdp?=
- =?utf-8?B?QVJROFhtUzFmM2kyNGVtODR2bDVDdlBaaTdqQTVmM0NENWtqSnF4MnY1bkhK?=
- =?utf-8?B?VW5nRHU3TXhyZmg5Zmp2SlJXKzFvQjdyN1Q0cFVWVFB1K1FvZE1NR21ZZkYz?=
- =?utf-8?B?dEE1K2tCT0hqSFU2NGxHNElBNlZkam1JS0NxNW9yai8vcHJLdkRwTVZ2bWVS?=
- =?utf-8?B?bWoxdFZyNWtveEF4TVBjY1lTNndrQlRvOFM1L2ZZUmRKR2IxbXlJUmdqZG1X?=
- =?utf-8?B?SEtVTzIxV2VzRUFFcDFsM0pNc0grUWxxL01nZklGRFd4Q3ltOXVPTHRaMzBY?=
- =?utf-8?B?WjI5VG0zSEc0TXhsM3R6clJlZjBFYnM5cjVhSis2dTNSNjZQeXlJbHhBZ1E3?=
- =?utf-8?B?V01qVFRUdmZ2UmJDMWNuTVdoTE9jUnZHV3JRdWk3eHU3YUJZajBoZlNVZW0z?=
- =?utf-8?B?TUxXM3kyVEMwaUZiSWlxZXcwK1VWTXNrVTNpdzZZVVVuaTlIYkgzMEdQY05t?=
- =?utf-8?B?Kzd6Q1p4SlQ0VndDVlBiZU14Q0dDN01OUzZKajgzNFAyUTIwWmh0bkJ5U0FZ?=
- =?utf-8?B?TG9KMnB4M3B6aVhiak8zY2I5eU9DWlZ4eENHUC9xVmZXdUZTMEsxTEF2bzJu?=
- =?utf-8?B?WDRpbnVFdWFCemhpZ1BtQ0l4TWliRDB0T0JLUHh6TXZhd0pFRUo0VmwvY2xj?=
- =?utf-8?B?bURXK1FjL2RkdUVXbUp1T0hkbk0wOU5IUzB4TWMxMFEzRjBzV2RoUXJ3dHF2?=
- =?utf-8?B?ZEtjWGVqZkc2emhGczZQZCt5ZkpxK0ZQdHFWQ3BTOVYvcHFCZmIzSUZuczh0?=
- =?utf-8?B?dDNTeFh1L3Boc1VUT1FScXVTUjB4cE1Wd3lPdWhUR1N4aGNVVXhveXRycitO?=
- =?utf-8?B?NmxPazRSazlQVkJCS3grTGJ6MExEckNkWFBVNGgwR1FBNGVBaFBUeWE4emdt?=
- =?utf-8?Q?5qmTwbDN319pgCDZNuSjlv5Rt65AHf57HRkWZHTZOWnVK?=
-X-MS-Exchange-AntiSpam-MessageData-1: K0ehdg7Umcgbtw==
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 379003f8-f333-457a-5331-08de97cecedf
-X-MS-Exchange-CrossTenant-AuthSource: CH2PR12MB3990.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Apr 2026 13:32:43.7569
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: PMpWW2OBJ/ecbhenMlS0ll65xtYoKTfmdXN5rl2mtTaXJa1U6ThdYH1e2GA+Sqp24oQV1v/SiRdHQS9iuAueOg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB6863
-X-Spamd-Bar: ----
-X-MailFrom: acourbot@nvidia.com
+X-Spamd-Bar: --
+Message-ID-Hash: 2LO6QN5ZF7ID374VHODN2Q3C75NUG7WA
+X-Message-ID-Hash: 2LO6QN5ZF7ID374VHODN2Q3C75NUG7WA
+X-MailFrom: mcanal@igalia.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 4ZANP6NV2BP4FDX7FHMDKLG2OW2GJSGX
-X-Message-ID-Hash: 4ZANP6NV2BP4FDX7FHMDKLG2OW2GJSGX
-X-Mailman-Approved-At: Mon, 20 Apr 2026 17:39:08 +0000
-CC: nouveau@lists.freedesktop.org, Gary Guo <gary@garyguo.net>, Daniel Almeida <daniel.almeida@collabora.com>, rust-for-linux@vger.kernel.org, Danilo Krummrich <dakr@kernel.org>, dri-devel@lists.freedesktop.org, Matthew Maurer <mmaurer@google.com>, FUJITA Tomonori <fujita.tomonori@gmail.com>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, christian.koenig@amd.com, Asahi Lina <lina@asahilina.net>, Miguel Ojeda <ojeda@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, Simona Vetter <simona@ffwll.ch>, Alice Ryhl <aliceryhl@google.com>, Boqun Feng <boqun@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Krishna Ketan Rai <prafulrai522@gmail.com>, linux-media@vger.kernel.org, Shankari Anand <shankari.ak0208@gmail.com>, David Airlie <airlied@gmail.com>, Benno Lossin <lossin@kernel.org>, Viresh Kumar <viresh.kumar@linaro.org>, linaro-mm-sig@lists.linaro.org, Asahi Lina <lina+kernel@asahilina.net>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, kernel@vger.kernel.org
+CC: dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kernel-dev@igalia.com, =?UTF-8?q?Ma=C3=ADra=20Canal?= <mcanal@igalia.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v10 5/5] rust: drm: gem: Add vmap functions to shmem bindings
+Subject: [Linaro-mm-sig] [PATCH] dma-fence: Clarify external lock use case in dma_fence_init() docs
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4ZANP6NV2BP4FDX7FHMDKLG2OW2GJSGX/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2LO6QN5ZF7ID374VHODN2Q3C75NUG7WA/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [5.99 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[nvidia.com : SPF not aligned (relaxed),reject];
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+X-Spamd-Result: default: False [3.19 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
-	DATE_IN_PAST(1.00)[220];
-	R_DKIM_REJECT(1.00)[Nvidia.com:s=selector2];
+	R_DKIM_REJECT(1.00)[igalia.com:s=20170329];
+	MID_CONTAINS_FROM(1.00)[];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+	DMARC_POLICY_SOFTFAIL(0.10)[igalia.com : SPF not aligned (relaxed),none];
+	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[28];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	GREYLIST(0.00)[pass,meta];
-	DKIM_TRACE(0.00)[Nvidia.com:-];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[gmail.com,linaro.org,collabora.com,igalia.com,kernel.org];
+	RCVD_COUNT_THREE(0.00)[3];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.822];
-	FROM_NEQ_ENVFROM(0.00)[acourbot@nvidia.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[lists.freedesktop.org,garyguo.net,collabora.com,vger.kernel.org,kernel.org,google.com,gmail.com,oracle.com,amd.com,asahilina.net,ffwll.ch,linaro.org,lists.linaro.org,linuxfoundation.org];
-	MID_RHS_MATCH_FROM(0.00)[];
+	DKIM_TRACE(0.00)[igalia.com:-];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	RCPT_COUNT_SEVEN(0.00)[9];
+	FROM_NEQ_ENVFROM(0.00)[mcanal@igalia.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	NEURAL_SPAM(0.00)[0.473];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,kernel];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,nvidia.com:mid]
-X-Rspamd-Queue-Id: 8A15E431CEF
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
+X-Rspamd-Queue-Id: 79DB53E161A
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Hi Lyude,
-
-On Thu Apr 9, 2026 at 9:12 AM JST, Lyude Paul wrote:
-<snip>
-> @@ -288,6 +299,84 @@ pub fn owned_sg_table(&self, dev: &device::Device<Bound>) -> Result<SGTable<T>>
->          // `Some(Devres<SGTableMap<T>>)`.
->          Ok(SGTable(self.into()))
->      }
-> +
-> +    /// Attempt to create a vmap from the gem object, and confirm the size of said vmap.
-> +    fn raw_vmap(&self, min_size: usize) -> Result<*mut c_void> {
-> +        if self.size() < min_size {
-> +            return Err(ENOSPC);
-> +        }
-> +
-> +        let mut map: MaybeUninit<bindings::iosys_map> = MaybeUninit::uninit();
-> +
-> +        // SAFETY: drm_gem_shmem_vmap can be called with the DMA reservation lock held
-> +        to_result(unsafe {
-> +            // TODO: see top of file
-> +            bindings::dma_resv_lock(self.raw_dma_resv(), ptr::null_mut());
-> +            let ret = bindings::drm_gem_shmem_vmap_locked(self.as_raw_shmem(), map.as_mut_ptr());
-> +            bindings::dma_resv_unlock(self.raw_dma_resv());
-> +            ret
-> +        })?;
-> +
-> +        // SAFETY: The call to drm_gem_shmem_vunmap_locked succeeded above, so we are guaranteed
-
-Looks like a typo: the call above is `drm_gem_shmem_vmap_locked`.
-
-> +        // that map is properly initialized.
-> +        let map = unsafe { map.assume_init() };
-> +
-> +        // XXX: We don't currently support iomem allocations
-> +        if map.is_iomem {
-> +            // SAFETY:
-> +            // - The vmap operation above succeeded, guaranteeing that `map` points to a valid
-> +            //   memory mapping.
-> +            // - We checked that this is an iomem allocation, making it safe to read vaddr_iomem
-> +            unsafe { self.raw_vunmap(map) };
-> +
-> +            Err(ENOTSUPP)
-> +        } else {
-> +            // SAFETY: We checked that this is not an iomem allocation, making it safe to read vaddr
-> +            Ok(unsafe { map.__bindgen_anon_1.vaddr })
-> +        }
-> +    }
-> +
-> +    /// Unmap a vmap from the gem object.
-> +    ///
-> +    /// # Safety
-> +    ///
-> +    /// - The caller promises that `map` is a valid vmap on this gem object.
-> +    /// - The caller promises that the memory pointed to by map will no longer be accesed through
-> +    ///   this instance.
-> +    unsafe fn raw_vunmap(&self, mut map: bindings::iosys_map) {
-> +        let resv = self.raw_dma_resv();
-> +
-> +        // SAFETY:
-> +        // - This function is safe to call with the DMA reservation lock held
-> +        // - Our `ARef` is proof that the underlying gem object here is initialized and thus safe to
-> +        //   dereference.
-> +        unsafe {
-> +            // TODO: see top of file
-> +            bindings::dma_resv_lock(resv, ptr::null_mut());
-> +            bindings::drm_gem_shmem_vunmap_locked(self.as_raw_shmem(), &mut map);
-> +            bindings::dma_resv_unlock(resv);
-> +        }
-> +    }
-> +
-> +    /// Creates and returns a virtual kernel memory mapping for this object.
-> +    #[inline]
-> +    pub fn vmap<const SIZE: usize>(&self) -> Result<VMapRef<'_, T, SIZE>> {
-> +        Ok(VMapRef {
-> +            // INVARIANT: `raw_vmap()` checks that the gem object is at least as large as `SIZE`.
-> +            addr: self.raw_vmap(SIZE)?,
-> +            owner: self,
-> +        })
-> +    }
-> +
-> +    /// Creates and returns an owned reference to a virtual kernel memory mapping for this object.
-> +    #[inline]
-> +    pub fn owned_vmap<const SIZE: usize>(&self) -> Result<VMap<T, SIZE>> {
-> +        Ok(VMap {
-> +            // INVARIANT: `raw_vmap()` checks that the gem object is at least as large as `SIZE`.
-> +            addr: self.raw_vmap(SIZE)?,
-> +            owner: self.into(),
-> +        })
-> +    }
->  }
->  
->  impl<T: DriverObject> Deref for Object<T> {
-> @@ -386,6 +475,154 @@ unsafe impl<T: DriverObject> Send for SGTableMap<T> {}
->  // it points to is guaranteed to be thread-safe.
->  unsafe impl<T: DriverObject> Sync for SGTableMap<T> {}
->  
-> +macro_rules! impl_vmap_io_capable {
-> +    ($impl:ident, $ty:ty $(, $lifetime:lifetime )?) => {
-
-How about taking a list of types as argument, so you don't need to
-invoke the macro once per supported primitive?
-
-> +        impl<$( $lifetime ,)? D: DriverObject, const SIZE: usize> IoCapable<$ty>
-> +            for $impl<$( $lifetime ,)? D, SIZE>
-> +        {
-> +            #[inline(always)]
-> +            unsafe fn io_read(&self, address: usize) -> $ty {
-> +                let ptr = address as *mut $ty;
-> +
-> +                // SAFETY: The safety contract of `io_read` guarantees that address is a valid
-> +                // address within the bounds of `Self` of at least the size of $ty, and is properly
-> +                // aligned.
-> +                unsafe { ptr::read(ptr) }
-> +            }
-> +
-> +            #[inline(always)]
-> +            unsafe fn io_write(&self, value: $ty, address: usize) {
-> +                let ptr = address as *mut $ty;
-> +
-> +                // SAFETY: The safety contract of `io_write` guarantees that address is a valid
-> +                // address within the bounds of `Self` of at least the size of $ty, and is properly
-> +                // aligned.
-> +                unsafe { ptr::write(ptr, value) }
-> +            }
-> +        }
-> +    };
-> +}
-> +
-> +// Implement various traits common to both VMap types
-> +macro_rules! impl_vmap_common {
-> +    ($impl:ident $(, $lifetime:lifetime )?) => {
-> +        impl<$( $lifetime ,)? D, const SIZE: usize> $impl<$( $lifetime ,)? D, SIZE>
-
-The comment says "Implement various traits" but this block is not a
-trait implementation.
-
-> +        where
-> +            D: DriverObject,
-> +        {
-> +            /// Borrows a reference to the object that owns this virtual mapping.
-> +            #[inline(always)]
-> +            pub fn owner(&self) -> &Object<D> {
-> +                &self.owner
-> +            }
-> +        }
-> +
-> +        impl<$( $lifetime ,)? D, const SIZE: usize> Drop for $impl<$( $lifetime ,)? D, SIZE>
-> +        where
-> +            D: DriverObject,
-> +        {
-> +            #[inline(always)]
-> +            fn drop(&mut self) {
-> +                // SAFETY:
-> +                // - Our existence is proof that this map was previously created using self.owner.
-> +                // - Since we are in Drop, we are guaranteed that no one will access the memory
-> +                //   through this mapping after calling this.
-> +                unsafe {
-> +                    self.owner.raw_vunmap(bindings::iosys_map {
-> +                        is_iomem: false,
-> +                        __bindgen_anon_1: bindings::iosys_map__bindgen_ty_1 { vaddr: self.addr }
-> +                    })
-> +                };
-> +            }
-> +        }
-> +
-> +        impl<$( $lifetime ,)? D, const SIZE: usize> Io for $impl<$( $lifetime ,)? D, SIZE>
-> +        where
-> +            D: DriverObject,
-> +        {
-> +            #[inline(always)]
-> +            fn addr(&self) -> usize {
-> +                self.addr as usize
-> +            }
-> +
-> +            #[inline(always)]
-> +            fn maxsize(&self) -> usize {
-> +                self.owner.size()
-> +            }
-> +        }
-> +
-> +        impl<$( $lifetime ,)? D, const SIZE: usize> IoKnownSize for $impl<$( $lifetime ,)? D, SIZE>
-> +        where
-> +            D: DriverObject,
-> +        {
-> +            const MIN_SIZE: usize = SIZE;
-> +        }
-> +
-> +        impl_vmap_io_capable!($impl, u8 $( , $lifetime )?);
-> +        impl_vmap_io_capable!($impl, u16 $( , $lifetime )?);
-> +        impl_vmap_io_capable!($impl, u32 $( , $lifetime )?);
-> +        #[cfg(CONFIG_64BIT)]
-> +        impl_vmap_io_capable!($impl, u64 $( , $lifetime )?);
-> +    };
-> +}
-> +
-> +/// An owned reference to a virtual mapping for a shmem-based GEM object in kernel address space.
-> +///
-> +/// # Invariants
-> +///
-> +/// - The size of `owner` is >= SIZE.
-> +/// - The memory pointed to by addr remains valid at least until this object is dropped.
-> +pub struct VMap<D: DriverObject, const SIZE: usize = 0> {
-> +    addr: *mut c_void,
-> +    owner: ARef<Object<D>>,
-> +}
-> +
-> +impl_vmap_common!(VMap);
-
-I believe you can considerably reduce the use of macros and consolidate
-the code around a single type if you define `VMap` this way:
-
-    pub struct VMap<D, R, const SIZE: usize = 0>
-    where
-        D: DriverObject,
-        R: Deref<Target = Object<D>>,
-    {
-        addr: *mut c_void,
-        owner: R,
-    }
-
-Then `R` can either be `&'a Object<D>` or `ARef<Object<D>>` and you
-don't need `impl_vmap_common!` anymore (`impl_vmap_io_capable!` is
-probably still useful though).
-
-The extra generic makes the type a bit more complex, but you can also
-fold it into something similar to what you currently have by defining
-type aliases:
-
-    pub type VMapRef<'a, D, const SIZE: usize = 0> = VMap<D, &'a Object<D>, SIZE>;
-    pub type VMapOwned<D, const SIZE: usize = 0> = VMap<D, ARef<Object<D>>, SIZE>;
-
-... although I don't think that is necessary as callers will never need
-to specify these generics anyway.
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+VGhlIGtlcm5lbGRvYyBjb21tZW50IG9uIGRtYV9mZW5jZV9pbml0KCkgYW5kIGRtYV9mZW5jZV9p
+bml0NjQoKSBkZXNjcmliZQ0KdGhlIGxlZ2FjeSByZWFzb24gdG8gcGFzcyBhbiBleHRlcm5hbCBs
+b2NrIGFzIGEgbmVlZCB0byBwcmV2ZW50IG11bHRpcGxlDQpmZW5jZXMgImZyb20gc2lnbmFsaW5n
+IG91dCBvZiBvcmRlciIuIEhvd2V2ZXIsIHRoaXMgd29yZGluZyBpcyBhIGJpdA0KbWlzbGVhZGlu
+ZzogYSBzaGFyZWQgc3BpbmxvY2sgZG9lcyBub3QgKGFuZCBjYW5ub3QpIHByZXZlbnQgdGhlIHNp
+Z25hbGVyDQpmcm9tIHNpZ25hbGluZyBvdXQgb2Ygb3JkZXIuIFNpZ25hbGluZyBvcmRlciBpcyB0
+aGUgZHJpdmVyJ3MgcmVzcG9uc2liaWxpdHkNCnJlZ2FyZGxlc3Mgb2Ygd2hldGhlciB0aGUgbG9j
+ayBpcyBzaGFyZWQgb3IgcGVyLWZlbmNlLg0KDQpXaGF0IGEgc2hhcmVkIGxvY2sgYWN0dWFsbHkg
+cHJvdmlkZXMgaXMgc2VyaWFsaXphdGlvbiBvZiBzaWduYWxpbmcgYW5kDQpvYnNlcnZhdGlvbiBh
+Y3Jvc3MgZmVuY2VzIGluIGEgZ2l2ZW4gY29udGV4dCwgc28gdGhhdCBvYnNlcnZlcnMgbmV2ZXIN
+CnNlZSBhIGxhdGVyIGZlbmNlIHNpZ25hbGVkIHdoaWxlIGFuIGVhcmxpZXIgb25lIGlzIG5vdC4N
+Cg0KUmV3b3JkIGJvdGggY29tbWVudHMgdG8gZGVzY3JpYmUgdGhpcyBtb3JlIGFjY3VyYXRlbHku
+DQoNClNpZ25lZC1vZmYtYnk6IE1hw61yYSBDYW5hbCA8bWNhbmFsQGlnYWxpYS5jb20+DQotLS0N
+Cg0KSGksDQoNCldoaWxlIHJlYWRpbmcgdGhlIGRvY3VtZW50YXRpb24sIEkgZm91bmQgdGhpcyBw
+YXJ0aWN1bGFyIHBhcmFncmFwaCBxdWl0ZQ0KaGFyZCB0byB1bmRlcnN0YW5kLiBBcyBJIHVuZGVy
+c3RhbmQgaXQsIGxvY2tzIGRvbid0IGVuZm9yY2Ugb3JkZXIsIG9ubHkNCnNlcmlhbGl6YXRpb24s
+IGJ1dCB0aGUgcGFyYWdyYXBoIHNlZW1zIHRvIGNvbW11bmljYXRlIHRoZSBvdGhlciB3YXkgYXJv
+dW5kLg0KRHVlIHRvIHRoYXQsIEkgaGFkIHRoZSBpbXByZXNzaW9uIHRoYXQgdGhlIGN1cnJlbnQg
+d29yZGluZyBjYW4gYmUNCm1pc2xlYWRpbmcgZm9yIGRyaXZlciBkZXZlbG9wZXJzLg0KDQpJJ20g
+cHJvcG9zaW5nIGEgbmV3IHdvcmRpbmcgdG8gYmV0dGVyIGRlc2NyaWJlIHRoZSB1c2UgY2FzZSBv
+ZiB0aGUNCmV4dGVybmFsIGxvY2sgYmFzZWQgb24gbXkgdW5kZXJzdGFuZGluZywgYnV0IGl0IHdv
+dWxkIGJlIGdyZWF0IHRvIGhlYXINCnRoZSBmZWVkYmFjayBhbmQgc3VnZ2VzdGlvbnMgZnJvbSBt
+b3JlIGV4cGVyaWVuY2VkIGRldmVsb3BlcnMgd2hvIG1pZ2h0DQpoYXZlIG1vcmUgaW5zaWdodCBh
+Ym91dCB0aGVzZSBsZWdhY3kgdXNlIGNhc2VzLg0KDQpCZXN0IHJlZ2FyZHMsDQotIE1hw61yYQ0K
+DQogZHJpdmVycy9kbWEtYnVmL2RtYS1mZW5jZS5jIHwgMTIgKysrKysrKystLS0tDQogMSBmaWxl
+IGNoYW5nZWQsIDggaW5zZXJ0aW9ucygrKSwgNCBkZWxldGlvbnMoLSkNCg0KZGlmZiAtLWdpdCBh
+L2RyaXZlcnMvZG1hLWJ1Zi9kbWEtZmVuY2UuYyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtZmVuY2Uu
+Yw0KaW5kZXggMTgyNmJhNzMwOTRjLi5iZGMyOWQxYzFiNWMgMTAwNjQ0DQotLS0gYS9kcml2ZXJz
+L2RtYS1idWYvZG1hLWZlbmNlLmMNCisrKyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtZmVuY2UuYw0K
+QEAgLTExMDIsOCArMTEwMiwxMCBAQCBfX2RtYV9mZW5jZV9pbml0KHN0cnVjdCBkbWFfZmVuY2Ug
+KmZlbmNlLCBjb25zdCBzdHJ1Y3QgZG1hX2ZlbmNlX29wcyAqb3BzLA0KICAqIHRvIGNoZWNrIHdo
+aWNoIGZlbmNlIGlzIGxhdGVyIGJ5IHNpbXBseSB1c2luZyBkbWFfZmVuY2VfbGF0ZXIoKS4NCiAg
+Kg0KICAqIEl0IGlzIHN0cm9uZ2x5IGRpc2NvdXJhZ2VkIHRvIHByb3ZpZGUgYW4gZXh0ZXJuYWwg
+bG9jayBiZWNhdXNlIHRoaXMgY291cGxlcw0KLSAqIGxvY2sgYW5kIGZlbmNlIGxpZmUgdGltZS4g
+VGhpcyBpcyBvbmx5IGFsbG93ZWQgZm9yIGxlZ2FjeSB1c2UgY2FzZXMgd2hlbg0KLSAqIG11bHRp
+cGxlIGZlbmNlcyBuZWVkIHRvIGJlIHByZXZlbnRlZCBmcm9tIHNpZ25hbGluZyBvdXQgb2Ygb3Jk
+ZXIuDQorICogbG9jayBhbmQgZmVuY2UgbGlmZXRpbWUuIFRoaXMgaXMgb25seSBhbGxvd2VkIGZv
+ciBsZWdhY3kgdXNlIGNhc2VzIHRoYXQgbmVlZA0KKyAqIGEgc2hhcmVkIGxvY2sgdG8gc2VyaWFs
+aXplIHNpZ25hbGluZyBhbmQgb2JzZXJ2YXRpb24gb2YgZmVuY2VzIHdpdGhpbiBhDQorICogY29u
+dGV4dCwgc28gdGhhdCBvYnNlcnZlcnMgbmV2ZXIgc2VlIGEgbGF0ZXIgZmVuY2Ugc2lnbmFsZWQg
+d2hpbGUgYW4gZWFybGllcg0KKyAqIG9uZSBpc24ndC4NCiAgKi8NCiB2b2lkDQogZG1hX2ZlbmNl
+X2luaXQoc3RydWN0IGRtYV9mZW5jZSAqZmVuY2UsIGNvbnN0IHN0cnVjdCBkbWFfZmVuY2Vfb3Bz
+ICpvcHMsDQpAQCAtMTEyOSw4ICsxMTMxLDEwIEBAIEVYUE9SVF9TWU1CT0woZG1hX2ZlbmNlX2lu
+aXQpOw0KICAqIHRvIGNoZWNrIHdoaWNoIGZlbmNlIGlzIGxhdGVyIGJ5IHNpbXBseSB1c2luZyBk
+bWFfZmVuY2VfbGF0ZXIoKS4NCiAgKg0KICAqIEl0IGlzIHN0cm9uZ2x5IGRpc2NvdXJhZ2VkIHRv
+IHByb3ZpZGUgYW4gZXh0ZXJuYWwgbG9jayBiZWNhdXNlIHRoaXMgY291cGxlcw0KLSAqIGxvY2sg
+YW5kIGZlbmNlIGxpZmUgdGltZS4gVGhpcyBpcyBvbmx5IGFsbG93ZWQgZm9yIGxlZ2FjeSB1c2Ug
+Y2FzZXMgd2hlbg0KLSAqIG11bHRpcGxlIGZlbmNlcyBuZWVkIHRvIGJlIHByZXZlbnRlZCBmcm9t
+IHNpZ25hbGluZyBvdXQgb2Ygb3JkZXIuDQorICogbG9jayBhbmQgZmVuY2UgbGlmZXRpbWUuIFRo
+aXMgaXMgb25seSBhbGxvd2VkIGZvciBsZWdhY3kgdXNlIGNhc2VzIHRoYXQgbmVlZA0KKyAqIGEg
+c2hhcmVkIGxvY2sgdG8gc2VyaWFsaXplIHNpZ25hbGluZyBhbmQgb2JzZXJ2YXRpb24gb2YgZmVu
+Y2VzIHdpdGhpbiBhDQorICogY29udGV4dCwgc28gdGhhdCBvYnNlcnZlcnMgbmV2ZXIgc2VlIGEg
+bGF0ZXIgZmVuY2Ugc2lnbmFsZWQgd2hpbGUgYW4gZWFybGllcg0KKyAqIG9uZSBpc24ndC4NCiAg
+Ki8NCiB2b2lkDQogZG1hX2ZlbmNlX2luaXQ2NChzdHJ1Y3QgZG1hX2ZlbmNlICpmZW5jZSwgY29u
+c3Qgc3RydWN0IGRtYV9mZW5jZV9vcHMgKm9wcywNCi0tIA0KMi41My4wDQoNCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGlu
+ZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBz
+ZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
