@@ -2,186 +2,327 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wBogAJFl5mkKvwEAu9opvQ
+	id UNN4MTuw3GldVQkAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:42:41 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 13 Apr 2026 10:58:35 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4BCE5431DEF
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:42:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4785F3E96E6
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 13 Apr 2026 10:58:35 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5475D40690
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:42:39 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.19])
-	by lists.linaro.org (Postfix) with ESMTPS id 3DE393F8E9
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 13 Apr 2026 08:31:51 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 4F314404A1
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 13 Apr 2026 08:58:34 +0000 (UTC)
+Received: from CY3PR05CU001.outbound.protection.outlook.com (mail-westcentralusazon11013071.outbound.protection.outlook.com [40.93.201.71])
+	by lists.linaro.org (Postfix) with ESMTPS id 1EB563F8E9
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 13 Apr 2026 08:58:32 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=K6l+3LeM;
-	dmarc=pass (policy=none) header.from=intel.com;
-	spf=pass (lists.linaro.org: domain of baolu.lu@linux.intel.com designates 198.175.65.19 as permitted sender) smtp.mailfrom=baolu.lu@linux.intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1776069112; x=1807605112;
-  h=message-id:date:mime-version:subject:to:cc:references:
-   from:in-reply-to:content-transfer-encoding;
-  bh=ygX3QGpmpzQ4vDb35DrfpC80ywfwMhPNQFU2B1S833A=;
-  b=K6l+3LeMxYKj6vLSstiW/3xHhDPpsNLWaUncfBQHCaCdZKPd3Uim2RQf
-   4FSOcr6CELD2ZmobDi2JSgvvTcqwf8gxwkl19aLfjGl9AU4jIY5eMrG8V
-   6eGrAL54QIew09JSJOQN3l/3aZqkDJYDfxROFh25wMf7Uy8+ZGoW11xdg
-   e/b39i6uVVDZtIquqQKvUcP1pvCMDh/859r5h7D1tcxb5JbByUE54uowK
-   1W5lh37ljRWKiVQetBSaLvCJ/N7UzRYNM1mkjOWpRD+/MmxCP8vYEUafU
-   FQuvlJuh3ZoauUmuHtS7e34cWjUFJSM6HPIsMKVke0fYp/vV/u9zlk2z0
-   Q==;
-X-CSE-ConnectionGUID: TMn+aDnqRY64ZD20MgEjQg==
-X-CSE-MsgGUID: PefKNI5uQ86pZHnuPpXh6A==
-X-IronPort-AV: E=McAfee;i="6800,10657,11757"; a="76907461"
-X-IronPort-AV: E=Sophos;i="6.23,176,1770624000";
-   d="scan'208";a="76907461"
-Received: from orviesa003.jf.intel.com ([10.64.159.143])
-  by orvoesa111.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Apr 2026 01:31:51 -0700
-X-CSE-ConnectionGUID: kRnB8EohQb611Ginyevg6g==
-X-CSE-MsgGUID: AiU4VxdXSISX/Yzv4b1gFg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.23,176,1770624000";
-   d="scan'208";a="233756454"
-Received: from allen-sbox.sh.intel.com (HELO [10.239.159.30]) ([10.239.159.30])
-  by ORVIESA003-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Apr 2026 01:31:47 -0700
-Message-ID: <f4e2171a-da58-488f-be02-26a39b5afbe3@linux.intel.com>
-Date: Mon, 13 Apr 2026 16:29:59 +0800
-MIME-Version: 1.0
+	dkim=pass header.d=amd.com header.s=selector1 header.b=Ya7SXqP6;
+	dmarc=pass (policy=quarantine) header.from=amd.com;
+	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.93.201.71 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
+	arc=pass ("microsoft.com:s=arcselector10001:i=1")
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=P3fLaaupY6wAEx7kZbrY7+wb1de9JzncxObPA5UVlp1dSBhCRaOeYl56Mv//68SpxzHFwuhGoq32PeuqtDgPYQF5puj2p7Cdlt6Omv78ECovEDzWqPz30PnJsj2TbTrdMgv4155qOLVYQnk3qrtplFvL3NuJoCTvwi6mo6bsinQUMLRDJTqbMk4dvCDhOI3e3Q7Zdf5Yac7M77bYTs6Hy4NJGPGZgZx2Yro3lf+ijcHQpvNLqqkQ1DMz27p6kn9eGBSfCD69VxewYzNPjbhDqBm6CPg+Qm1sqh2bVaUI8K8ng5MdYppVy2p5waqJxlfws/qbhacyqmuasDbVPacQRw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=fmYYmJ1pdH1p+mGrX8f/T6nmsij8qV8ZEOWGdWDaG9o=;
+ b=Keu4rf/uwCJ0rjYC8Ad655t0Iw07apr/Ql/wkFLwoHh4MCfGT2egiWYaKbO2PUmg35/LwZQ0FyhOpCdVFDmHy2IRv6FoGouaFlekQcNCoBkq/HAfkqSx+qwXWOhG1iliT1pB88mFrnLZMA/1yHzbA0VwPqBftqABR2DuHzyNulUkVI22JZ53YM52u3eY/I5h5MhTm1LfUVM4gofQV3xSPq6cyOQ04aiM6Y5jFV4mm2jh4J1gTb01x/FzgNNYisSh03o/AXD5io5YE0k0R/H1hJVIoZFXksW0SgRYdTa4wfYa+T11Xb/IpEuF/hjghukZ3OQwtSQWxLh6e6xNpvqrGQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=fmYYmJ1pdH1p+mGrX8f/T6nmsij8qV8ZEOWGdWDaG9o=;
+ b=Ya7SXqP6Zf2pVfk6ZF/K2nnTUWBrwQRIKzrRBR6/ba8qWJoReONIMykMvCeg0AFjcV4jsM0ox5AS7x5Df29vEuWcmdSCCSX28JUD2VpLiDT8QJV15DQcnRmIM1hDoSf59wfx3voKo3B+iHTWdmc6lfUMNK0UKiYHUzLM6Wa+7GE=
+Received: from PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
+ by LV2PR12MB5872.namprd12.prod.outlook.com (2603:10b6:408:173::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.48; Mon, 13 Apr
+ 2026 08:58:28 +0000
+Received: from PH7PR12MB5685.namprd12.prod.outlook.com
+ ([fe80::ce69:cfae:774d:a65c]) by PH7PR12MB5685.namprd12.prod.outlook.com
+ ([fe80::ce69:cfae:774d:a65c%5]) with mapi id 15.20.9818.017; Mon, 13 Apr 2026
+ 08:58:28 +0000
+Message-ID: <c413710b-4c28-4ed8-88ec-aeb8c4482011@amd.com>
+Date: Mon, 13 Apr 2026 10:58:20 +0200
 User-Agent: Mozilla Thunderbird
 To: Jason Gunthorpe <jgg@nvidia.com>
-References: <12-v1-b5cab63049c0+191af-dmabuf_map_type_jgg@nvidia.com>
+References: <21-v1-b5cab63049c0+191af-dmabuf_map_type_jgg@nvidia.com>
 Content-Language: en-US
-From: Baolu Lu <baolu.lu@linux.intel.com>
-In-Reply-To: <12-v1-b5cab63049c0+191af-dmabuf_map_type_jgg@nvidia.com>
-X-Spamd-Bar: ---------
-X-MailFrom: baolu.lu@linux.intel.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: SGX5YETRIY6ZIFZMHBGCNG7Q2VDS5IXQ
-X-Message-ID-Hash: SGX5YETRIY6ZIFZMHBGCNG7Q2VDS5IXQ
-X-Mailman-Approved-At: Mon, 20 Apr 2026 17:42:23 +0000
-CC: Christian Koenig <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, intel-xe@lists.freedesktop.org, iommu@lists.linux.dev, Kevin Tian <kevin.tian@intel.com>, Leon Romanovsky <leonro@nvidia.com>, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org, Matthew Brost <matthew.brost@intel.com>, Simona Vetter <simona.vetter@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Thomas Hellstrom <thomas.hellstrom@linux.intel.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>
+From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+In-Reply-To: <21-v1-b5cab63049c0+191af-dmabuf_map_type_jgg@nvidia.com>
+X-ClientProxiedBy: FR3P281CA0122.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:94::6) To PH7PR12MB5685.namprd12.prod.outlook.com
+ (2603:10b6:510:13c::22)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|LV2PR12MB5872:EE_
+X-MS-Office365-Filtering-Correlation-Id: c0c1f1eb-63ac-41f1-294d-08de993ad43d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|1800799024|366016|7416014|376014|22082099003|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: 
+	VFMAuT+pet7c+l670oZ2PyerScNqa/CsamufZPVfcV8UwgHUkCZ6lq7H0UHmdL8/fAeglCwuN7STwCAONN1IhqlYje9n6yKZKIqgB38qxfytkShzyXeC46JZnGDACWE4W9A5ciDckj4fsZKdHMt8Yt5oeUMOLCv5UoOQDIWvwUJ9W7sbkTzU97yaJGXBxOJMXSdveuD6ANw4Ivt6RC1zT4DkMpxQ8s1+XoyeVfivar4wzuqGy8IaODGqITRMhqUL2c5pxCjcXNi1hSaUfuz1a1cooUM4pMBXsAz3mAirNpofRQ29+nYnVJNQhE4Qzij76rsvWM7oLyy/5tIiYbRWghEqrS3Af0L0/CLdqyjjEBSkmCanq1aszmSR5UebBZS180xPzCxpzzWrlbNVDddQnROQjF6hw2NPwObn/QArYyqdG6DSuXAHUOisULHEHUEtiKHFMPhb2/ybt19R9/g+pqWzHKmy8+ly/ErUkX9BeqPmE4GgVaCNSq5tsKORoR41A5P8TB2n3e87sXds3KaIBRS4IPBdesBU2xMZELhPTbuAj8at+5FFYMk6yih69soF89KZ2HaZ29BNppYljnTKuP3ZFGx85Nj12rJGszt5WXDYpE/QimRguBCO6NflX3onv3kMVp7b68C8Uo9y9nzbgl5B6ufCgk7TBTXzZS1W55t2pR8IFh6aVQseUWF788PN7Z3/hgbVmEcangmhRLCUb6NvdWBUcAgZ7wvEt6A/nXg=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB5685.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(7416014)(376014)(22082099003)(56012099003)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?UlZBMDNkeXhqakxyNXZmWE80UTFJWnBzMmJ5MEc1QUNUMnQxUjRpYmhhVVkw?=
+ =?utf-8?B?QTRicEdkeE80MVpieTlEYmZoeXlWNlNyc3h1azJNMS9lVXd4REJKUGMrVVVJ?=
+ =?utf-8?B?a1pUZ2FGU1hEbDNDeFQ4WHdGRDhwSXQ3THorbGZtcEtPR0ZYOGxjMmQ4NlRz?=
+ =?utf-8?B?NXRRc292RlI4eFA5eDNONS9FZXVDUU8ycEFnR1hwWEZKT2JYQ01RbG0yTE9G?=
+ =?utf-8?B?Y1RhUFlRVXhaL3RuazkvZk42eE9kU01KY0lRY2pZcmo3NEhwa2FFVE9YNVBB?=
+ =?utf-8?B?N0hEa1NwZm50ZmUzMHpGWmlPY3JoeW4yN2JmUmQwcm1ZNUFWdURQZ2dkUXR1?=
+ =?utf-8?B?dG8xUEdHSUVoZmxvbkJnT1NaVXVORzIxMW5tdWJuTVJSZlE4MEd6RWU5Zk0z?=
+ =?utf-8?B?cFRVMWd0a1A4QUl4MU5KamplVHk5cWZNcE4zcHBtU0toMnpMdDFleUNrMEkw?=
+ =?utf-8?B?QUh1OGFPQy92NGkyeWtLbXF5czRLNEtOemhwTkczaFJrV1FUVmlsU3ZWaElK?=
+ =?utf-8?B?dXdrbVpNdkt4WlA0U084TzRMc3RjYW5oK3RTWm90bmFqZFZ0M3Ezak9BWkda?=
+ =?utf-8?B?QTlRWHdJcmJTNWxWNkVJSFRpZDEwdnVpUTloWTlNaU1WQm5VNEpRVDF1bXIw?=
+ =?utf-8?B?MHZNYThXY1hxSEJUVzR4MHUyRHF1bzlKaWExWmVjcHZNeWQwNGpOTVFoMU5W?=
+ =?utf-8?B?a3M4cm1idTJqSXQ2cWpGOGR5di83QWxNNDJ6TFdPeEZZVTc4elg0MlhOMUFT?=
+ =?utf-8?B?cWtXWlZ6c01OM0ZMSWpaNEo2RGxpVkpibHlQdEsyVVRnVkoxYnpoQ0RkQW9L?=
+ =?utf-8?B?Q0Q5Y0c3TFJ0cGptaHc5SHN4TndnNjlrVHdUWWlZZ2ZyWXA2TkVVZkhpOVdH?=
+ =?utf-8?B?MThLelBFc2E3d3V6ZVlHTGYwU1J0ZFNUb0ZxNUlId1ZONDM2UGZqWkRUTzFj?=
+ =?utf-8?B?SG1yZHhieHNMUGFlYVNqamc3Tk14NUxoemJVZHg2Vlljb1prNU5KbEQ2SUJk?=
+ =?utf-8?B?bkJHR1pxQ2ZPODlXazJURitzQ1UvWjA1VkRYWDVCMkdYTk45Z090VzdSOU5H?=
+ =?utf-8?B?VXV6dWxxWkdEa1A4dUFpeXZpemdoNmhLcnkwL25UTFlwTmlhanJjald1RElD?=
+ =?utf-8?B?eTgyV1lEUjZzeXpiVFU4dVAxZkZiSG9oMHNXVnVEZmRQTlFFekgyOEp2ckJz?=
+ =?utf-8?B?ZVJwSFozQ0lxZzVEQVZwcXVyZDJYYUNXYWZWWnUzZmxaR1FKOXh2N1BGK0dQ?=
+ =?utf-8?B?QVl2ZVJpa0ord0VMUWxEQmJRVXE1cVM1c3NxeEdHUThndXNIU2tKa01XejhN?=
+ =?utf-8?B?YjBESldTQjVzaWduWFBxSVYrSysxUXoxYTBDcWVlOUFsdzJGaGdkMUl0aEI4?=
+ =?utf-8?B?cG5mV0RTZ3VmcllHSDNSeE9qQjloYjhrUnFYdERJenZ5L2hjVlUvbDlGYi9E?=
+ =?utf-8?B?WWJNRnNUVGdpbDkzV29rdXNyNFFpSG1BSmlTQURLWkwya2RpZldXajJvYktG?=
+ =?utf-8?B?RkNvNktCOFZLYTZNdlpMcURWMk1HMWRwUGtpZzVuandjTUFFV2dBcDJBNVNm?=
+ =?utf-8?B?ckY5Qmc4eVcyd1Myb3RoYjczWlVaNitzc3NZUnRYSU5BUFBDcmZSdkxPUzZM?=
+ =?utf-8?B?MXVKd2NIbVJWMWtpZXNKcFM2RGpXVERlQm9nb3N2YlFQODNuOTY2ZjZ1WXh0?=
+ =?utf-8?B?WmY0RlIzdE9rVzEvTHNhMEJSVmpEWXBVQzh0dzBpam45b2FzZWptZS9HbThO?=
+ =?utf-8?B?eFRFUG5nRUZ0M1NodjhveWRKeWdNdGkwM3FBMkNkV2lYVlNGSTlWMUEzUVRM?=
+ =?utf-8?B?UWJ4T2YzYnBwYkN1Y0hKS2lFSFlwNGNuSVR6YjJUdWdvd2Ird0o2Uy9jMVR3?=
+ =?utf-8?B?SGJCSzRyd3BYbGMvdG9QWjN4U3F0RnkrdUlYY3Z0T0g4aWNsTzVlSlpFRmQz?=
+ =?utf-8?B?VG1ISThkZ2FqV2NjamZ4MXdZblVJdVlCb0YzMDBVeTFJdkZjSS9GWWl5blFD?=
+ =?utf-8?B?VGZuRVFoNktRY2Vmb1VURFdmcVBjV0hydmgzelkwUWdXc1puYkRFRlAzVFRW?=
+ =?utf-8?B?b25KUWZmdHU2Tm9KcDR1VVhjSU1STktDYmtocUhjVDVUVWVLK1ExN2tuQnky?=
+ =?utf-8?B?SGk1T1V4MXdIOGhsMUdKUTFMM3ZoZEp5UzBGZGJaWFRqaTBtc0MzN0N3ZVVi?=
+ =?utf-8?B?TEVZS1FzbGtJR1lGaEtQUUY5eDlOaTRTaFVzRzF2QkxLWGdNZS9Wblkwd3o1?=
+ =?utf-8?B?Z0lDdlhSUktqQjdIaG9XZUpCUnhHMWNXc2JCNlVoQkhOTUhDRE9aYk9sNmJj?=
+ =?utf-8?Q?S0h4Nb/ZA0/IuyrH8w?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c0c1f1eb-63ac-41f1-294d-08de993ad43d
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5685.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Apr 2026 08:58:28.2891
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: ZNrmYWqfnAQJJzswmB2U5gVYqykb3svm/hFGDSxLzqR8DbMqAsAOa8oVZGzAKGHV
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV2PR12MB5872
+X-Spamd-Bar: -----
+Message-ID-Hash: DW3W2JDZPV7OKJU5LSGRIGESXTA3OAMX
+X-Message-ID-Hash: DW3W2JDZPV7OKJU5LSGRIGESXTA3OAMX
+X-MailFrom: Christian.Koenig@amd.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: dri-devel@lists.freedesktop.org, intel-xe@lists.freedesktop.org, iommu@lists.linux.dev, Kevin Tian <kevin.tian@intel.com>, Leon Romanovsky <leonro@nvidia.com>, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org, Matthew Brost <matthew.brost@intel.com>, Simona Vetter <simona.vetter@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Thomas Hellstrom <thomas.hellstrom@linux.intel.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH RFC 12/26] vfio/pci: Change the DMA-buf exporter to use mapping_type
+Subject: [Linaro-mm-sig] Re: [PATCH RFC 21/26] dma-buf: Add the Physical Address List DMA mapping type
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SGX5YETRIY6ZIFZMHBGCNG7Q2VDS5IXQ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DW3W2JDZPV7OKJU5LSGRIGESXTA3OAMX/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [1.59 / 15.00];
-	R_DKIM_REJECT(1.00)[intel.com:s=Intel];
-	DATE_IN_PAST(1.00)[177];
+X-Spamd-Result: default: False [2.99 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[amd.com : SPF not aligned (relaxed),quarantine];
+	R_DKIM_REJECT(1.00)[amd.com:s=selector1];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[intel.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FROM_HAS_DN(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[14];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	DKIM_TRACE(0.00)[intel.com:-];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.997];
-	FROM_NEQ_ENVFROM(0.00)[baolu.lu@linux.intel.com,linaro-mm-sig-bounces@lists.linaro.org];
-	TO_DN_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[13];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linux.intel.com:mid,linaro.org:email]
-X-Rspamd-Queue-Id: 4BCE5431DEF
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[christian.koenig@amd.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	NEURAL_HAM(-0.00)[-0.842];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[amd.com:-]
+X-Rspamd-Queue-Id: 4785F3E96E6
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On 2/18/26 08:11, Jason Gunthorpe wrote:
-> Simple conversion to add a match_mapping() callback that offers an
-> exporter SGT mapping type. Later patches will add a physical address
-> exporter so go straight to adding the match_mapping() function.
+On 2/18/26 01:11, Jason Gunthorpe wrote:
+> This type is required by iommufd and kvm as dmabuf importers.
 > 
-> The check for attachment->peer2peer is replaced with setting
-> exporter_requires_p2p=true. VFIO always uses MMIO memory.
+> Due to sensitivity about abusing physical addresses, restrict importers by
+> using EXPORT_SYMBOL_FOR_MODULES(). Only iommufd can implement an importer,
+> the kernel module loader will enforce this.
+> 
+> Allow anything to implement an exporter as there are use cases in
+> DPDK/SPDK to connect GPU memory into VFIO/iommufd and it is hard to abuse
+> the API as an exporter.
+> 
+> The physical address list exporter returns a physical address list in a
+> simple kvalloc'd array of struct phys_vec.
+
+As far as I can see that is still a pretty big NO-GO.
+
+We have seen so many problems with direct physical address access by the importer that I clear don't want to repeat that performance.
+
+My main question is why does IOMMUFD need the physical address in the first place?
+
+If that is really strictly necessary then I strongly suggest to not touch drivers/dma-buf in any way, but only do this is private interface between iommufd and KVM.
+
+Regards,
+Christian.
+
+> 
+> For now all entries are assumed to be MMIO and iommufd will map into
+> the IOMMU using the IOMMU_MMIO flag.
 > 
 > Signed-off-by: Jason Gunthorpe <jgg@nvidia.com>
 > ---
->   drivers/vfio/pci/vfio_pci_dmabuf.c | 31 +++++++++++++++++++++++++-----
->   1 file changed, 26 insertions(+), 5 deletions(-)
+>  drivers/dma-buf/dma-buf-mapping.c | 63 +++++++++++++++++++++++++++++++
+>  include/linux/dma-buf-mapping.h   | 42 +++++++++++++++++++++
+>  2 files changed, 105 insertions(+)
 > 
-> diff --git a/drivers/vfio/pci/vfio_pci_dmabuf.c b/drivers/vfio/pci/vfio_pci_dmabuf.c
-> index d4d0f7d08c53e2..c7addef5794abf 100644
-> --- a/drivers/vfio/pci/vfio_pci_dmabuf.c
-> +++ b/drivers/vfio/pci/vfio_pci_dmabuf.c
-> @@ -25,9 +25,6 @@ static int vfio_pci_dma_buf_attach(struct dma_buf *dmabuf,
->   {
->   	struct vfio_pci_dma_buf *priv = dmabuf->priv;
->   
-> -	if (!attachment->peer2peer)
-> -		return -EOPNOTSUPP;
-> -
->   	if (priv->revoked)
->   		return -ENODEV;
->   
-> @@ -75,11 +72,35 @@ static void vfio_pci_dma_buf_release(struct dma_buf *dmabuf)
->   	kfree(priv);
->   }
->   
-> -static const struct dma_buf_ops vfio_pci_dmabuf_ops = {
-> -	.attach = vfio_pci_dma_buf_attach,
-> +static const struct dma_buf_mapping_sgt_exp_ops vfio_pci_dma_buf_sgt_ops = {
->   	.map_dma_buf = vfio_pci_dma_buf_map,
->   	.unmap_dma_buf = vfio_pci_dma_buf_unmap,
-> +};
+> diff --git a/drivers/dma-buf/dma-buf-mapping.c b/drivers/dma-buf/dma-buf-mapping.c
+> index baa96b37e2c6bd..d9d6b9b5bf05c6 100644
+> --- a/drivers/dma-buf/dma-buf-mapping.c
+> +++ b/drivers/dma-buf/dma-buf-mapping.c
+> @@ -349,3 +349,66 @@ struct dma_buf_mapping_type dma_buf_mapping_sgt_type = {
+>  	.debugfs_dump = dma_buf_sgt_debugfs_dump,
+>  };
+>  EXPORT_SYMBOL_NS_GPL(dma_buf_mapping_sgt_type, "DMA_BUF");
 > +
-> +static int vfio_pci_dma_buf_match_mapping(struct dma_buf_match_args *args)
+> +static const struct dma_buf_mapping_pal_exp_ops *
+> +to_pal_exp_ops(struct dma_buf_attachment *attach)
 > +{
-> +	struct vfio_pci_dma_buf *priv = args->dmabuf->priv;
-> +	struct dma_buf_mapping_match sgt_match[1];
-> +
-> +	dma_resv_assert_held(priv->dmabuf->resv);
-
-My understanding of this lock assertion is that priv and the underlying
-priv->vdev are accessed within this function. Therefore, the lock is
-necessary to protect them. Do I understand it right?
-
-However, callers - for example, dma_buf_mapping_attach() - do not
-acquire dma_resv_lock() before calling this function. So kernel traces
-will always be triggered.
-
-> +
-> +	/*
-> +	 * Once we pass vfio_pci_dma_buf_cleanup() the dmabuf will never be
-> +	 * usable again.
-> +	 */
-> +	if (!priv->vdev)
-> +		return -ENODEV;
-> +
-> +	sgt_match[0] = DMA_BUF_EMAPPING_SGT_P2P(&vfio_pci_dma_buf_sgt_ops,
-> +						priv->vdev->pdev);
-> +
-> +	return dma_buf_match_mapping(args, sgt_match, ARRAY_SIZE(sgt_match));
+> +	return container_of(attach->map_type.exp_ops,
+> +			    struct dma_buf_mapping_pal_exp_ops, ops);
 > +}
 > +
-> +static const struct dma_buf_ops vfio_pci_dmabuf_ops = {
-> +	.attach = vfio_pci_dma_buf_attach,
->   	.release = vfio_pci_dma_buf_release,
-> +	.match_mapping = vfio_pci_dma_buf_match_mapping,
->   };
->   
->   /*
+> +/**
+> + * dma_buf_pal_map_phys - Obtain the physical address list for a PAL attachment
+> + * @attach: The DMA-buf attachment
+> + *
+> + * Calls the exporter's map_phys() callback to retrieve the physical address
+> + * list for the buffer. The caller must hold the dma-buf's reservation lock.
+> + *
+> + * This symbol is restricted to iommufd to prevent misuse.
+> + *
+> + * Returns the physical address list on success, or an ERR_PTR on failure.
+> + * The returned list must be freed with dma_buf_pal_unmap_phys().
+> + */
+> +struct dma_buf_phys_list *
+> +dma_buf_pal_map_phys(struct dma_buf_attachment *attach)
+> +{
+> +	dma_resv_assert_held(attach->dmabuf->resv);
+> +	return to_pal_exp_ops(attach)->map_phys(attach);
+> +}
+> +/*
+> + * Restricted, iommufd is the only importer allowed to prevent misuse of this
+> + * API.
+> + */
+> +EXPORT_SYMBOL_FOR_MODULES(dma_buf_pal_map_phys, "iommufd");
+> +
+> +/**
+> + * dma_buf_pal_unmap_phys - Unmap a physical address list
+> + * @attach: The DMA-buf attachment
+> + * @phys: The physical address list returned by dma_buf_pal_map_phys()
+> + *
+> + * Returns the mapping back to the exporter. After this point the importer may
+> + * not touch any of the addresses in any way.
+> + */
+> +void dma_buf_pal_unmap_phys(struct dma_buf_attachment *attach,
+> +			    struct dma_buf_phys_list *phys)
+> +{
+> +	to_pal_exp_ops(attach)->unmap_phys(attach, phys);
+> +}
+> +EXPORT_SYMBOL_NS_GPL(dma_buf_pal_unmap_phys, "DMA_BUF");
+> +
+> +static inline void
+> +dma_buf_pal_finish_match(struct dma_buf_match_args *args,
+> +			 const struct dma_buf_mapping_match *exp,
+> +			 const struct dma_buf_mapping_match *imp)
+> +{
+> +	args->attach->map_type = (struct dma_buf_mapping_match){
+> +		.type = &dma_buf_mapping_pal_type,
+> +		.exp_ops = exp->exp_ops,
+> +	};
+> +}
+> +
+> +struct dma_buf_mapping_type dma_buf_mapping_pal_type = {
+> +	.name = "Physical Address List",
+> +	.finish_match = dma_buf_pal_finish_match,
+> +};
+> +EXPORT_SYMBOL_NS_GPL(dma_buf_mapping_pal_type, "DMA_BUF");
+> diff --git a/include/linux/dma-buf-mapping.h b/include/linux/dma-buf-mapping.h
+> index ac859b8913edcd..10831ce2e72851 100644
+> --- a/include/linux/dma-buf-mapping.h
+> +++ b/include/linux/dma-buf-mapping.h
+> @@ -269,4 +269,46 @@ DMA_BUF_EMAPPING_SGT_P2P(const struct dma_buf_mapping_sgt_exp_ops *exp_ops,
+>  			.exporter_requires_p2p = DMA_SGT_NO_P2P,         \
+>  		} })
+>  
+> +/*
+> + * Physical Address List mapping type
+> + *
+> + * Use of the Physical Address List type is restricted to prevent abuse of the
+> + * physical addresses API. Please check with the DMA BUF maintainers before
+> + * trying to use it.
+> + */
+> +struct dma_buf_phys_list {
+> +	size_t length;
+> +	struct dma_buf_phys_vec phys[] __counted_by(length);
+> +};
+> +
+> +extern struct dma_buf_mapping_type dma_buf_mapping_pal_type;
+> +
+> +struct dma_buf_mapping_pal_exp_ops {
+> +	struct dma_buf_mapping_exp_ops ops;
+> +	struct dma_buf_phys_list *(*map_phys)(struct dma_buf_attachment *attach);
+> +	void (*unmap_phys)(struct dma_buf_attachment *attach,
+> +			   struct dma_buf_phys_list *phys);
+> +};
+> +
+> +struct dma_buf_phys_list *
+> +dma_buf_pal_map_phys(struct dma_buf_attachment *attach);
+> +void dma_buf_pal_unmap_phys(struct dma_buf_attachment *attach,
+> +			    struct dma_buf_phys_list *phys);
+> +
+> +static inline struct dma_buf_mapping_match DMA_BUF_IMAPPING_PAL(void)
+> +{
+> +	return (struct dma_buf_mapping_match){
+> +		.type = &dma_buf_mapping_pal_type,
+> +	};
+> +}
+> +
+> +static inline struct dma_buf_mapping_match
+> +DMA_BUF_EMAPPING_PAL(const struct dma_buf_mapping_pal_exp_ops *exp_ops)
+> +{
+> +	return (struct dma_buf_mapping_match){
+> +		.type = &dma_buf_mapping_pal_type,
+> +		.exp_ops = &exp_ops->ops,
+> +	};
+> +}
+> +
+>  #endif
 
-Thanks,
-baolu
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
