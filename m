@@ -2,27 +2,27 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +JCJEPj/4GlIoQAAu9opvQ
+	id OOGmMP3/4Gk7oQAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:27:52 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:27:57 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id EBAEE410BD9
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:27:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A4969410BE7
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:27:57 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0BA4640517
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:27:51 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 682E340955
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:27:56 +0000 (UTC)
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 From: asml.silence@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Message-ID: <b38f2c3af8c03ee4fc5f67f97b4412ecd8588924.1763725388.git.asml.silence@gmail.com>
+Message-ID: <44e4ad8c4bd72856379c368e4303090c44c9e98e.1763725388.git.asml.silence@gmail.com>
 X-Mailman-Approved-At: Thu, 16 Apr 2026 15:06:50 +0000
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [RFC v2 10/11] io_uring/rsrc: add dmabuf-backed buffer registeration
+Subject: [Linaro-mm-sig] [RFC v2 11/11] io_uring/rsrc: implement dmabuf regbuf import
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GSERMMAK3OQG4QMPYOH2HUUVGCFFW4UQ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DFAVS2Y2LR63CGJJEDYTQ5FRKTNXLA25/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -30,7 +30,7 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Transfer-Encoding: 7bit
-Date: Thu, 16 Apr 2026 15:27:51 +0000 (UTC)
+Date: Thu, 16 Apr 2026 15:27:56 +0000 (UTC)
 X-Spamd-Result: default: False [-0.21 / 15.00];
 	MAILLIST(-0.20)[mailman];
 	ONCE_RECEIVED(0.20)[];
@@ -57,7 +57,7 @@ X-Spamd-Result: default: False [-0.21 / 15.00];
 	R_DKIM_NA(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
-X-Rspamd-Queue-Id: EBAEE410BD9
+X-Rspamd-Queue-Id: A4969410BE7
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
