@@ -2,27 +2,28 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 0GpuH6f34GnZnwAAu9opvQ
+	id kKjZFUD/4GkSoQAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:52:23 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:24:48 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 23EFE40FD87
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 16:52:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F1515410AA3
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 17:24:47 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3A971404DE
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 14:52:22 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C315E405D0
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 15:24:46 +0000 (UTC)
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
-From: xueshuai@linux.alibaba.com
+From: ankita@nvidia.com
 To: linaro-mm-sig@lists.linaro.org
-Message-ID: <0d95b8af-97e4-43b6-a35a-aa3ce153f0ee@linux.alibaba.com>
-X-Mailman-Approved-At: Thu, 16 Apr 2026 14:48:30 +0000
+Message-ID: 
+ <SA1PR12MB719993F747B09154A3DDA788B0D4A@SA1PR12MB7199.namprd12.prod.outlook.com>
+X-Mailman-Approved-At: Thu, 16 Apr 2026 15:01:07 +0000
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v5 9/9] vfio/pci: Add dma-buf export support for MMIO regions
+Subject: [Linaro-mm-sig] Re: [PATCH v9 11/11] vfio/nvgrace: Support get_dmabuf_phys
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZPJQJISZMKCCPWP2YWFJF6GSPFLAGIZZ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JOIJARNYPQRTSYPHGRMN6UADAVYXY3KA/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -30,33 +31,32 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Transfer-Encoding: 7bit
-Date: Thu, 16 Apr 2026 14:52:22 +0000 (UTC)
-X-Spamd-Result: default: False [-0.21 / 15.00];
+Date: Thu, 16 Apr 2026 15:24:46 +0000 (UTC)
+X-Spamd-Result: default: False [1.69 / 15.00];
+	DMARC_POLICY_REJECT(2.00)[nvidia.com : SPF not aligned (relaxed), No valid DKIM,reject];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx:c];
 	ONCE_RECEIVED(0.20)[];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[linux.alibaba.com : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FROM_NEQ_ENVFROM(0.00)[xueshuai@linux.alibaba.com,linaro-mm-sig-bounces@lists.linaro.org];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	ARC_NA(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	MISSING_XM_UA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	ARC_NA(0.00)[];
+	MISSING_XM_UA(0.00)[];
 	FROM_NO_DN(0.00)[];
-	NEURAL_HAM(-0.00)[-0.669];
-	TO_DN_NONE(0.00)[];
 	RCVD_COUNT_ONE(0.00)[1];
-	R_DKIM_NA(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	MID_RHS_MATCH_FROM(0.00)[];
 	RCPT_COUNT_ONE(0.00)[1];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.alibaba.com:mid,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: 23EFE40FD87
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	TO_DN_NONE(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,SA1PR12MB7199.namprd12.prod.outlook.com:mid];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	NEURAL_HAM(-0.00)[-0.669];
+	RCVD_TLS_LAST(0.00)[];
+	R_DKIM_NA(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[ankita@nvidia.com,linaro-mm-sig-bounces@lists.linaro.org]
+X-Rspamd-Queue-Id: F1515410AA3
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
