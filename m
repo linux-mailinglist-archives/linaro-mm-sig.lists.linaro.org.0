@@ -2,186 +2,376 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id QKzkH0zP4GkkmQAAu9opvQ
+	id yP3VBPll5mmJvwEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 14:00:12 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:44:25 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id E0E2F40DBBC
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 14:00:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 914CA431F58
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:44:24 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id CC3374049C
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Apr 2026 12:00:10 +0000 (UTC)
-Received: from SN4PR2101CU001.outbound.protection.outlook.com (mail-southcentralusazon11012034.outbound.protection.outlook.com [40.93.195.34])
-	by lists.linaro.org (Postfix) with ESMTPS id 918923F772
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 16 Apr 2026 12:00:08 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 91EFC406F0
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:44:23 +0000 (UTC)
+Received: from mx0a-00082601.pphosted.com (mx0a-00082601.pphosted.com [67.231.145.42])
+	by lists.linaro.org (Postfix) with ESMTPS id 533853F9A4
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 16 Apr 2026 13:18:38 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=Nvidia.com header.s=selector2 header.b=GS4FsRNA;
-	dmarc=pass (policy=reject) header.from=nvidia.com;
-	spf=pass (lists.linaro.org: domain of jgg@nvidia.com designates 40.93.195.34 as permitted sender) smtp.mailfrom=jgg@nvidia.com;
-	arc=pass ("microsoft.com:s=arcselector10001:i=1")
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=wHltc/mzcmgwhvwX0Df4a/AfxepEteL+BdFSWm4Dnvyrv5O2JWw0M/sQm5tPnI5ZZTR/8up+P+LGLLCcO43OBgg+2tJYjjIsu5p5HmfnG3b6UCp6sqbGpVnCofkBDKtL8H53GZYozUIVErJ6EVa5N7q93llXYnI8baRiFO5IIO4ELUmAbWJm/mvbFLc8vAabBpjwHtmhPkKGwEreV6A7hZ1N2Eywbu2xE9lJqrnpctd3Hq3coeH4dMI1IIa3jNRWnuwHvxBWINywYaoBidC3HHBCm9uFVSAeHF9x9bU/otsFuEaL+4p3ZgwlrK+ot92WKDI4JU762jbYVRb4vHhztg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=7W5DslnPbBMISsos8+APnUdF+rXLdA3Gu0hRAwTad2E=;
- b=h6NEZpB9D++0GhbN8TEWrfQ4nNDuuBimEhutajVPWyZqKhCHSGV/V5SvIxaPhWPDL778yOgFG5w0bnzn8SsEIGLkSCCt7M3e4k5liDfmK82U6IugeCWE6S/QD1ExUJdP/JmKRyEo0CaIRUv6HHwBfWCxZFUmLht1GsGYSv/Do6X5CW7AJ2auHW0XmvBraM5H5Vkwr8f2/nNt5T2xIcFjJYEo/OPF7Vu5FNcbqmAMDuZwfgUxARt4h7OwUj3uBpTAYsFwc0/sXXjfBpCZx21UjK/NSFpi5DgFgcLHDVhLqk4VgRk4dGT9uUpb1YWPK5s3iU3BjD7ZaMmAx++IEqQjfA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7W5DslnPbBMISsos8+APnUdF+rXLdA3Gu0hRAwTad2E=;
- b=GS4FsRNAEcI2kTPYLq0ZI2eMW+8Q/pTBWmZ094BXKfGUKOl9BNOLIgYcJ74t8aJDoJb2jdV1Rife0jBtpRMkdDHKy2d4to7954IS9SHVaYl0niYejkNAj0wxFe/5bFeTa8q/Y8IYnnerh+G+15OGmcYGjiRJdBtEr0oLEDVOyjeNf+p+svtoXpNQ7AR5UDrXpmyzXW+CbLW3WXTgTPNN9F5E8zCIkUSjxuR0kwFbVySRbuWAl0bvEHQF/F1XMdNIdbbkyRMaJVesb9I+8+7ErnQUA2iA7ahCgPkGJmKu8Y4OTMdPb7xHF2GmRX0nnBoCV5I6LFoxAACFho4bop1wMg==
-Received: from LV8PR12MB9620.namprd12.prod.outlook.com (2603:10b6:408:2a1::19)
- by PH8PR12MB6939.namprd12.prod.outlook.com (2603:10b6:510:1be::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.20; Thu, 16 Apr
- 2026 12:00:02 +0000
-Received: from LV8PR12MB9620.namprd12.prod.outlook.com
- ([fe80::299d:f5e0:3550:1528]) by LV8PR12MB9620.namprd12.prod.outlook.com
- ([fe80::299d:f5e0:3550:1528%5]) with mapi id 15.20.9818.017; Thu, 16 Apr 2026
- 12:00:02 +0000
-Date: Thu, 16 Apr 2026 09:00:01 -0300
-From: Jason Gunthorpe <jgg@nvidia.com>
-To: Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>
-Message-ID: <20260416120001.GA761338@nvidia.com>
-References: <0-v1-0a349a394eff+14110-dmabuf_kunit_jgg@nvidia.com>
- <7c30f527-abc4-43a9-a11c-9233015b0a59@amd.com>
- <20260302130113.GV5933@nvidia.com>
- <c088698d-0bb2-4b0a-acad-946ec3df5777@amd.com>
- <20260407123530.GA3395114@nvidia.com>
- <60cf4c5c-9a4e-4f1f-927e-75ae585d5e9d@amd.com>
-Content-Disposition: inline
-In-Reply-To: <60cf4c5c-9a4e-4f1f-927e-75ae585d5e9d@amd.com>
-X-ClientProxiedBy: BLAPR03CA0179.namprd03.prod.outlook.com
- (2603:10b6:208:32f::33) To LV8PR12MB9620.namprd12.prod.outlook.com
- (2603:10b6:408:2a1::19)
+	dkim=pass header.d=meta.com header.s=s2048-2025-q2 header.b=n6R1ydmS;
+	dmarc=pass (policy=reject) header.from=meta.com;
+	spf=pass (lists.linaro.org: domain of "prvs=25666d518a=mattev@meta.com" designates 67.231.145.42 as permitted sender) smtp.mailfrom="prvs=25666d518a=mattev@meta.com"
+Received: from pps.filterd (m0528008.ppops.net [127.0.0.1])
+	by mx0a-00082601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 63G0rQRf3422133;
+	Thu, 16 Apr 2026 06:18:27 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=meta.com; h=cc
+	:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=s2048-2025-q2; bh=uWvoP8xihtbjlTOo0V
+	GZ9+gjNI+WyhvME6ivf0yFcew=; b=n6R1ydmSABpKNOFEwmjUirdeSdLBQDyOCY
+	Uz8dExrw69NhoydATn1iXuB8wms3e8gRdXcpimnAdKIQ7YU/np5gK+dDnnXrh1//
+	C4Mq7PS7rd1Xh0dG5FPWhdO3g8Y93LRiP/WCb11cL1Uavv5+6X7mQ9P7F7qd51fU
+	HY5fUdwPr2z0pVL7ccVAZcEUv6IElFXYL2LGbIm11Mpyy+1kM3rvX3b3qeeq1G9x
+	ODugDDV3SuIwUWYsnNjXMkYhByV5a9Sn4LGwrBoqBaL/A96q1/3hyD/T8iF2OiMe
+	egkI+tYEsIfoT03qATlmIYutWGnYTreFKp/hgbMt6N5Xx51pk4+A==
+Received: from maileast.thefacebook.com ([163.114.135.16])
+	by mx0a-00082601.pphosted.com (PPS) with ESMTPS id 4dh84w1rkh-3
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
+	Thu, 16 Apr 2026 06:18:27 -0700 (PDT)
+Received: from localhost (2620:10d:c0a8:1b::2d) by mail.thefacebook.com
+ (2620:10d:c0a9:6f::237c) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.37; Thu, 16 Apr
+ 2026 13:18:25 +0000
+From: Matt Evans <mattev@meta.com>
+To: Alex Williamson <alex@shazbot.org>, Leon Romanovsky <leon@kernel.org>,
+        Jason Gunthorpe <jgg@nvidia.com>, Alex Mastro <amastro@fb.com>,
+        =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
+Date: Thu, 16 Apr 2026 06:17:43 -0700
+Message-ID: <20260416131815.2729131-1-mattev@meta.com>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV8PR12MB9620:EE_|PH8PR12MB6939:EE_
-X-MS-Office365-Filtering-Correlation-Id: e165b19c-18a1-41a8-66b4-08de9bafb0db
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|376014|1800799024|7416014|366016|56012099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: 
-	dEL74G4OQzQkI6Kvq1oOGvADk5slFnwKgiIPiC5jUIQQOsAIJbhCo2JtOrvkF8owN6tHetPslRgf4gKTbwyf548iwcDmbX7jUx/mfFmdPsNB+hOLmm9yYskIoPrTOEXt9IwkBkx8BD+A69uYmIWqZ7KPmllBuIi1gB2d0uD/wH0KrpPj8voGHAxjPo+vbYEWYQO4W0kRZkEBic9bGm1iICc2vBzjmeghB+nLUjiGzsuZnQG/KXwIR+WedvvFny+Hv1RsqxlTYzFw4HRqM99vq1tZDh6pDdQ2NnWr9Kt1S1e2denNkBiPJVa/zITDouGnotQKZG+fnufcK4syph3GBea2YEDm91Jk4nRM0QqrsmRAF2cG5Snxxaj3eEm/p777Y11dFAt2pXXxjiq2AhTnNw35nsNauiywcrCqGImgeptwuC3jchyT9nxqf+sN9v8rvFJaifMMbTHa/M8G4Z9GOGMKLHOD+G9XGxoQtbLxH6uY8eADIsSBkicYXOOaozH5Wg6DycN0GfksEVBqOhHBACFIPpkT+zVOujFTScxdKUdj52d5kOmnabWe0VnuEMaeEL8VhYlFJOz1KjbRQgU7MS3YhV7i1yX5XMQ4ITGvhLNKUlVHtAhA3gKqPItxN7eH79fa9l7CnS7WjBG1fvIfZ9IZk53uaali9j5g5J8eiKLSYDmPAX9pYKx2iUNojA4rryYodouf8oLoOxe4DshRVBF2xzPyaaczqT05OjFSUYI=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LV8PR12MB9620.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(7416014)(366016)(56012099003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?ejZBVjcvUGdsNFVyZnBwRFliU2kxRDR1b0RIWkRkbGFaY1Z3b3FkUG5xMEs1?=
- =?utf-8?B?dVJ5akM0NGg1cm1vVkVYY1dIOGlyWFo4cW80VHBYTGxEZnorbWdCV3NHZEox?=
- =?utf-8?B?TURnY2p0T0huZXJ3UEtlT2wrMC9lT0ZqY0RSUkFrY3psK0o2ME53WFgrV2pJ?=
- =?utf-8?B?eHFIVnR5dWJ6OVRxUjd1aGFhQUZSSEVoY3I4VmY4UkxxU09sVUNoZHRacVYz?=
- =?utf-8?B?RTlibjB1cHBpYTgrRVFiWUpYMzIvdElDWUtBNkJaU1NsS2U4YTFjWFRsNUdy?=
- =?utf-8?B?Vm9QdVNvUVBCemplOUN3RVNJM2tMSjhCTDUxMGp6eWNlb3RMTDdPYTdlUUpu?=
- =?utf-8?B?a2YzbmNuTWhHMTFOK1FFSWxZZ1AwL1hmOHo2eEp6MTBwZEtsYWt3eHNpZlVt?=
- =?utf-8?B?UFFPeklkN0F2WTlydTZPOTdKZS9ab1FERU85cUNVaTlHakFEaUlydUFhc1FH?=
- =?utf-8?B?dExiVlg3RTRNSlV1NVNQVGlOeWh3dW50ZTkyb21QL2trV29VMzM5dzhFblVD?=
- =?utf-8?B?RFg0RjgwSlRRZ0RBaFFMY2RReERhRm8vV3pkc0Y0Q1ZWbEYxUXJQelQrNzg4?=
- =?utf-8?B?UGtDU3AyUEhxYzBkeFZmcGJOdU9waE42YVZLN1RocUd1dEVXT05QNUsrbUlY?=
- =?utf-8?B?Nk93NTJtdGVqOWxnMGZxc2VqNFlHK213ckZhazNrdWNDMHNxaTFHUDhjQitH?=
- =?utf-8?B?N0k1bWdKQ2RaNEVNK0VUS3h6Tm8zTFFwSTc3N2hCeXowYzhCcy9GWjEwOTZu?=
- =?utf-8?B?U3puOTRsTFZsWElSM3k5NThrajA3M0dXeVhwanUwQVlzSm5LNzdWUEhRZWlM?=
- =?utf-8?B?ckZrNVlrWFJFcUFDcmk4TTNBcG9rNVJIM3U2MHZPL1FaVHZRZVhJaENYWnlW?=
- =?utf-8?B?M2VmM3JzNHUwcGVia0NYRThxUGVFREloUGdSTmF1Q0V2ZDl5ZlZTNWxUalFB?=
- =?utf-8?B?WG95SEFUeDZMMDNYT3QybmNoYVlxUDZ1UE1iYmtuZFhyNjQ2WEZXbUIvai9y?=
- =?utf-8?B?a2tGQ2dnUk9IUXd3cE9NclRuZUtDVGVlQ0xSek00VTJkTjNmWEIwM0IzaEs4?=
- =?utf-8?B?Slo2UFVwRnBZUHQrUVkxdFp3OVBuRFR0UXNxd282SDFteW5UYkRGanVmWUYr?=
- =?utf-8?B?Q1piRWR0UnpvYjh0OGloeFowUjdyMmVwVCtUSWlwTTZuN3lpelBlN2lLc2Iz?=
- =?utf-8?B?NEsvcXVGeGJrU3pBT1MrQVFRckFpYUFhTzZqR3dONWxmbXhkRjlWSUVJcjZz?=
- =?utf-8?B?S25LSWRYeHFFS1hDRkhQQ0VLVkZlR1U0am9jSWpBdzc4aS9NSTNwMktiMjVt?=
- =?utf-8?B?YWJsZVEwK1hGK25JSFk3dUJmTjZ5WU9ZdDBKYUwvUGw2bG5NaGFTRDFUWS9m?=
- =?utf-8?B?eGR5Wkhlb2YzeDdFTzVxWWF6OFJIdFl4dFlZS3FxaFo2Y0h6d2tFNTdBS09r?=
- =?utf-8?B?Sno2TzFOcTFxb2oyVysyMENnRytxMmlwN2VQNDQzR3pwZURSQkFMYlkvWVM2?=
- =?utf-8?B?VFIySllHZ0F6dFZDNFBEZlFRbGJBdHpIWVc3amxmS0R5QmVaVDBaN21QTk1Y?=
- =?utf-8?B?UWlOR0NnZ01qTWJZeU11MlorM3BzYXVjWXlESk5XdTZyOEhrWmJ4dG5pSFgw?=
- =?utf-8?B?UWFwamIvUjljRUUyUWQxY1YwMWp3a2NGMExwVTFxaER2WmpFaEgzL2dHWnU4?=
- =?utf-8?B?Sjg1Rmk3L3BaQ3RzRndMOWhzQzdHUndpaEkyYlZuWlppYWF0cE9VNTNURzlv?=
- =?utf-8?B?OFJzRkJLdHloVThPSWk4bGNIbkhsTStPajdSUDZoelNmWUFER3JjeEJ2OE1D?=
- =?utf-8?B?UmdYNFFScHg1MFF4dnRIa3M1VVJqdGYxM3Nxb3FsVXl1MnV1bVdyOWJJdDJW?=
- =?utf-8?B?d3J1TGZPV2lCWXR6STMzaTBUeGc1c2owcEUwQUdvY1JVRkY2aUVwczlDVWk2?=
- =?utf-8?B?UFFLbTJvOGJWYm5IbXV3RkV1RGQ4NGxTL0hGcW54TGJYY3Fsa0o3NTJqVGRJ?=
- =?utf-8?B?RldrcHU0VEFjb3JRbVhaenRWYitoK09DelFsckg0ZFVZZWk1MEp1SVl1T1Vz?=
- =?utf-8?B?Qm1UWGFoMzA1a08rbUsxNi9FN2cwbjcxTmY3c0xTazBTYU1xTVI0cVA4Z2c2?=
- =?utf-8?B?MjdDUE1vSmZ6M3YzazdiOFdjTkQ1VUMxSTZjMkhhZjdWT1VVZFlsSHdIM1Zx?=
- =?utf-8?B?V1RMOERYZEk5K1RhN2NWMG9XRERsR1RkR0U3TkREbUVQK21XRVlnVnY2ZkdZ?=
- =?utf-8?B?U2pwWEV3ZzZ0TWM4Wkg0OFdTUUk1d0FKa0pXTFkxTzUvMU45cjE3UGs0dWZt?=
- =?utf-8?Q?t1UDHZH5kXg7Uv7HHX?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e165b19c-18a1-41a8-66b4-08de9bafb0db
-X-MS-Exchange-CrossTenant-AuthSource: LV8PR12MB9620.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Apr 2026 12:00:02.5750
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: uzBbn/LMK+cLwM7rgr/eNB7tElK0h4Wh0X0wEMUkJt/OmeqzD7YVAKRuI344EHfr
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB6939
-X-Spamd-Bar: ---
-Message-ID-Hash: L2XDAGJTCO5FKL77CTBT2OXXZ25CZNUG
-X-Message-ID-Hash: L2XDAGJTCO5FKL77CTBT2OXXZ25CZNUG
-X-MailFrom: jgg@nvidia.com
+X-Originating-IP: [2620:10d:c0a8:1b::2d]
+X-Proofpoint-ORIG-GUID: xvJ97mvJ2CwTMNnEjPSB-JkHSnbjtg01
+X-Authority-Analysis: v=2.4 cv=OYioyBTY c=1 sm=1 tr=0 ts=69e0e1a3 cx=c_pps
+ a=MfjaFnPeirRr97d5FC5oHw==:117 a=MfjaFnPeirRr97d5FC5oHw==:17
+ a=A5OVakUREuEA:10 a=VkNPw1HP01LnGYTKEx00:22 a=7x6HtfJdh03M6CCDgxCd:22
+ a=_1IyUuN4QrATX339ibzo:22 a=VwQbUJbxAAAA:8 a=FOH2dFAWAAAA:8 a=VabnemYjAAAA:8
+ a=NEAV23lmAAAA:8 a=qjuhjZv_-3ty6mOANPAA:9 a=gKebqoRLp9LExxC7YDUY:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDE2MDEyNiBTYWx0ZWRfX5gbqR3zwJw/m
+ BcZ09fwyz6uVjq0MXNorZbmpWflo9n5IMBIFuyvicX3xDermC9SJncIiDS2ZUwCHbtxoNB/hBV9
+ 6AWXF9PRt/AdtHw1rZN2ce6Kdv0XzAWMdjztYd4yM7bTZPFSEcDrCD0cBr9kz71RZTed4bEbQP2
+ ygKX4grl+u1b7mIoQCK44s0y2JivWmPLYHFs6SAzYNGSXj0YyOUM0LV7ASCPqJP5KGl3aECr9FB
+ FbRfMo4jHJ3MQGeB7U46ftdBpsGEshze6n2xDT2MSUBW0QQ+JMptZ4FLWfr4Smp/tRK4OgIiPXy
+ hiwKcesi0D4nRWZAkCRA0QxkrJtKgtWGhzEz8fWK8/0ft7CD521Rj5moO+Z4ox4YYK/GqouAkJe
+ nolqRqi/BUH/U0YN8BXXRnBie/OL3oCSu52xuWOQON/0HPnHxmUcAymPfGyzn/Wq4mK+GxfEqsJ
+ b98FbiGvPAwWCJ7NODQ==
+X-Proofpoint-GUID: xvJ97mvJ2CwTMNnEjPSB-JkHSnbjtg01
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-04-16_03,2026-04-16_02,2025-10-01_01
+X-Spamd-Bar: --
+X-MailFrom: prvs=25666d518a=mattev@meta.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: David Airlie <airlied@gmail.com>, dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, Jani Nikula <jani.nikula@linux.intel.com>, Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org, Rodrigo Vivi <rodrigo.vivi@intel.com>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Tvrtko Ursulin <tursulin@ursulin.net>, patches@lists.linux.dev
+Message-ID-Hash: X65YO54SSDVI4P2VK2OMHJJT6ATIRPJY
+X-Message-ID-Hash: X65YO54SSDVI4P2VK2OMHJJT6ATIRPJY
+X-Mailman-Approved-At: Mon, 20 Apr 2026 17:42:35 +0000
+CC: Mahmoud Adam <mngyadam@amazon.de>, David Matlack <dmatlack@google.com>, =?UTF-8?q?Bj=C3=B6rn=20T=C3=B6pel?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Kevin Tian <kevin.tian@intel.com>, Ankit Agrawal <ankita@nvidia.com>, Pranjal Shrivastava <praan@google.com>, Alistair Popple <apopple@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 0/5] Replace the dmabuf custom test framework with kunit
+Subject: [Linaro-mm-sig] [PATCH 0/9] vfio/pci: Add mmap() for DMABUFs
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/L2XDAGJTCO5FKL77CTBT2OXXZ25CZNUG/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/X65YO54SSDVI4P2VK2OMHJJT6ATIRPJY/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-X-Spamd-Result: default: False [3.59 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[nvidia.com : SPF not aligned (relaxed),reject];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
-	R_DKIM_REJECT(1.00)[Nvidia.com:s=selector2];
-	R_SPF_ALLOW(-0.20)[+mx];
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [4.49 / 15.00];
+	DMARC_POLICY_REJECT(2.00)[meta.com : SPF not aligned (relaxed),reject];
+	R_DKIM_REJECT(1.00)[meta.com:s=s2048-2025-q2];
+	MID_CONTAINS_FROM(1.00)[];
+	DATE_IN_PAST(1.00)[100];
 	MAILLIST(-0.20)[mailman];
-	MIME_BASE64_TEXT(0.10)[];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	GREYLIST(0.00)[pass,meta];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[13];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
+	RCPT_COUNT_TWELVE(0.00)[19];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[gmail.com,lists.freedesktop.org,linux.intel.com,lists.linaro.org,vger.kernel.org,intel.com,ffwll.ch,linaro.org,ursulin.net,lists.linux.dev];
+	RCVD_TLS_LAST(0.00)[];
+	ARC_NA(0.00)[];
+	SUSPICIOUS_AUTH_ORIGIN(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.906];
-	FROM_NEQ_ENVFROM(0.00)[jgg@nvidia.com,linaro-mm-sig-bounces@lists.linaro.org];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[mattev@meta.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[Nvidia.com:-];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	DKIM_TRACE(0.00)[meta.com:-];
+	HAS_XOIP(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,nvidia.com:mid,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: E0E2F40DBBC
+	NEURAL_SPAM(0.00)[0.211];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email,meta.com:mid]
+X-Rspamd-Queue-Id: 914CA431F58
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-T24gVGh1LCBBcHIgMTYsIDIwMjYgYXQgMTI6Mzc6MjlQTSArMDIwMCwgQ2hyaXN0aWFuIEvDtm5p
-ZyB3cm90ZToNCg0KPiBTb3JyeSBmb3IgdGhlIGRlbGF5IGJ1dCBhdCB0aGUgbW9tZW50IGF0IGxl
-YXN0IEkgZ2V0IGZsb29kZWQgd2l0aCBBSQ0KPiBnZW5lcmF0ZWQgYnVnIHJlcG9ydHMgd2hpY2gg
-YXJlIGF0IGxlYXN0IHBhcnRpYWxseSBjb21wbGV0ZQ0KPiBub25zZW5zZS4NCg0KTm8gd29ycmll
-cywgaXQgaXNuJ3QgYSBjcml0aWNhbCB0aGluZywganVzdCBjbGVhbmluZyBvdXQgbXkgZGVjayBu
-b3cNCmF0IHRoZSBlbmQgb2YgdGhlIGN5Y2xlLg0KDQpXZSBoYXZlIGFsc28gYmVlbiBnZXR0aW5n
-IG1vcmUgQUkgc3R1ZmYgb2YgbWl4ZWQgcXVhbGl0eS4uDQoNClRoYW5rcywNCkphc29uDQpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2ln
-IG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJz
-Y3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5v
-cmcK
+
+Hi all,
+
+
+This series is based on previous RFCs/discussions:
+
+Tech topic: https://lore.kernel.org/linux-iommu/20250918214425.2677057-1-amastro@fb.com/
+RFCv1:	    https://lore.kernel.org/all/20260226202211.929005-1-mattev@meta.com/
+RFCv2:	    https://lore.kernel.org/kvm/20260312184613.3710705-1-mattev@meta.com/
+
+
+The background/rationale is covered in more detail in the RFC cover
+letters.  The TL;DR is:
+
+The goal is to enable userspace driver designs that use VFIO to export
+DMABUFs representing subsets of PCI device BARs, and "vend" those
+buffers from a primary process to other subordinate processes by fd.
+These processes then mmap() the buffers and their access to the device
+is isolated to the exported ranges.  This is an improvement on sharing
+the VFIO device fd to subordinate processes, which would allow
+unfettered access .
+
+This is achieved by enabling mmap() of vfio-pci DMABUFs.  Second, a
+new ioctl()-based revocation mechanism is added to allow the primary
+process to forcibly revoke access to previously-shared BAR spans, even
+if the subordinate processes haven't cleanly exited.
+
+(The related topic of safe delegation of iommufd control to the
+subordinate processes is not addressed here, and is follow-up work.)
+
+As well as isolation and revocation, another advantage to accessing a
+BAR through a VMA backed by a DMABUF is that it's straightforward to
+create the buffer with access attributes, such as write-combining.
+
+
+Notes on patches
+================
+
+Feedback from the RFCs requested that, instead of creating
+DMABUF-specific vm_ops and .fault paths, to go the whole way and
+migrate the existing VFIO PCI BAR mmap() to be backed by a DMABUF too,
+resulting in a common vm_ops and fault handler for mmap()s of both the
+VFIO device and explicitly-exported DMABUFs.  This has been done for
+vfio-pci, but not sub-drivers (nvgrace-gpu's special-case mappings are
+unchanged).
+
+
+ vfio/pci: Fix vfio_pci_dma_buf_cleanup() double-put
+
+   A bug fix to a related are, whose context is a depdency for later
+   patches.
+
+
+ vfio/pci: Add a helper to look up PFNs for DMABUFs
+ vfio/pci: Add a helper to create a DMABUF for a BAR-map VMA
+
+   The first is for a DMABUF VMA fault handler to determine
+   arbitrary-sized PFNs from ranges in DMABUF.  Secondly, refactor
+   DMABUF export for use by the existing export feature and a new
+   helper that creates a DMABUF corresponding to a VFIO BAR mmap()
+   request.
+
+
+ vfio/pci: Convert BAR mmap() to use a DMABUF
+
+   The vfio-pci core mmap() creates a DMABUF with the helper, and the
+   vm_ops fault handler uses the other helper to resolve the fault.
+   Because this depends on DMABUF structs/code, CONFIG_VFIO_PCI_CORE
+   needs to depend on CONFIG_DMA_SHARED_BUFFER.  The
+   CONFIG_VFIO_PCI_DMABUF still conditionally enables the export
+   support code.
+
+   NOTE: The user mmap()s a device fd, but the resulting VMA's vm_file
+   becomes that of the DMABUF which takes ownership of the device and
+   puts it on release.  This maintains the existing behaviour of a VMA
+   keeping the VFIO device open.
+
+   BAR zapping then happens via the existing vfio_pci_dma_buf_move()
+   path, which now needs to unmap PTEs in the DMABUF's address_space.
+
+
+ vfio/pci: Provide a user-facing name for BAR mappings
+
+   There was a request for decent debug naming in /proc/<pid>/maps
+   etc.  comparable to the existing VFIO names: since the VMAs are
+   DMABUFs, they have a "dmabuf:" prefix and can't be 100% identical
+   to before.  This is a user-visible change, but this patch at least
+   now gives us extra info on the BDF & BAR being mapped.
+
+
+ vfio/pci: Clean up BAR zap and revocation
+
+   In general (see NOTE!) the vfio_pci_zap_bars() is now obsolete,
+   since it unmaps PTEs in the VFIO device address_space which is now
+   unused.  This consolidates all calls (e.g. around reset) with the
+   neighbouring vfio_pci_dma_buf_move()s into new functions, to
+   revoke-zap/unrevoke.
+
+   NOTE: the nvgrace-gpu driver continues to use its own private
+   vm_ops, fault handler, etc. for its special memregions, and these
+   DO still add PTEs to the VFIO device address_space.  So, a
+   temporary flag, vdev->bar_needs_zap, maintains the old behaviour
+   for this use.  At least this patch's consolidation makes it easy
+   to remove the remaining zap when this need goes away.
+
+   A FIXME is added: if nvgrace-gpu is converted to DMABUFs, remove
+   the flag and final zap.
+
+
+ vfio/pci: Support mmap() of a VFIO DMABUF
+
+   Adds mmap() for a DMABUF fd exported from vfio-pci.
+
+   It was a goal to keep the VFIO device fd lifetime behaviour
+   unchanged with respect to the DMABUFs.  An application can close
+   all device fds, and this will revoke/clean up all DMABUFs; no
+   mappings or other access can be performed now.  When enabling
+   mmap() of the DMABUFs, this means access through the VMA is also
+   revoked.  This complicates the fault handler because whilst the
+   DMABUF exists, it has no guarantee that the corresponding VFIO
+   device is still alive.  Adds synchronisation ensuring the vdev is
+   available before vdev->memory_lock is touched.
+
+   (I decided against the alternative of preventing cleanup by holding
+   the VFIO device open if any DMABUFs exist, because it's both a
+   change of behaviour and less clean overall.)
+
+   I've added a chonky comment in place, happy to clarify more if you
+   have ideas.
+
+
+ vfio/pci: Permanently revoke a DMABUF on request
+
+   By weight, this is mostly a rename of revoked to an enum, status.
+   There are now 3 states for a buffer, usable and revoked
+   temporary/permanent.  A new VFIO device ioctl is added,
+   VFIO_DEVICE_PCI_DMABUF_REVOKE, which passes a DMABUF (exported from
+   that device) and permanently revokes it.  Thus a userspace driver
+   can guarantee any downstream consumers of a shared fd are prevented
+   from accessing a BAR range, and that range can be reused.
+
+   The code doing revocation in vfio_pci_dma_buf_move() is moved,
+   unchanged, to a common function for use by _move() and the new
+   ioctl path.
+
+   Q:  I can't think of a good reason to temporarily revoke/unrevoke
+   buffers from userspace, so didn't add a 'flags' field to the ioctl
+   struct.  Easy to add if people think it's worthwhile for future
+   use.
+
+
+ vfio/pci: Add mmap() attributes to DMABUF feature
+
+   Reserves bits [31:28] in vfio_device_feature_dma_buf to allow a
+   (CPU) mapping attribute to be specified for an exported set of
+   ranges.  The default is the current UC, and a new flag can specify
+   CPU access as WC.
+
+   Q:  I've taken 4 bits; the intention is for this field to be a
+   scalar not a bitmap (i.e. mutually-exclusive access properties).
+   Perhaps 4 is a bit too many?
+
+
+Testing
+=======
+
+(The [RFC ONLY] userspace test program, for QEMU edu-plus, has been
+dropped, but can be found in the GitHub branch below.)
+
+This code has been tested in mapping DMABUFs of single/multiple
+ranges, aliasing mmap()s, aliasing ranges across DMABUFs, vm_pgoff >
+0, revocation, shutdown/cleanup scenarios, and hugepage mappings seem
+to work correctly.  I've lightly tested WC mappings also (by observing
+resulting PTEs as having the correct attributes...).  No regressions
+observed on the VFIO selftests, or on our internal vfio-pci
+applications.
+
+
+End
+===
+
+This is based on -next (next-20260414 but will merge earlier), as it
+depends on Leon's series "vfio: Wait for dma-buf invalidation to
+complete":
+
+https://lore.kernel.org/linux-iommu/20260205-nocturnal-poetic-chamois-f566ad@houat/T/#m310cd07011e3a1461b6fda45e3f9b886ba76571a
+
+These commits are on GitHub, along with "[RFC ONLY] selftests: vfio: Add
+standalone vfio_dmabuf_mmap_test":
+
+https://github.com/metamev/linux/compare/next-20260414...metamev:linux:dev/mev/vfio-dmabuf-mmap
+
+
+Thanks for reading,
+
+
+Matt
+
+
+================================================================================
+Change log:
+
+
+v1:
+
+ - Cleanup of the common DMABUF-aware VMA vm_ops fault handler and
+   export code.
+ - Fixed a lot of races, particularly faults racing with DMABUF
+   cleanup (if the VFIO device fds close, for example).
+ - Added nicer human-readable names for VFIO mmap() VMAs
+
+
+RFCv2:  Respin based on the feedback/suggestions:
+https://lore.kernel.org/kvm/20260312184613.3710705-1-mattev@meta.com/
+
+ - Transform the existing VFIO BAR mmap path to also use DMABUFs
+   behind the scenes, and then simply share that code for
+   explicitly-mapped DMABUFs.  Jason wanted to go that direction to
+   enable iommufd VFIO type 1 emulation to pick up a DMABUF for an IO
+   mapping.
+
+ - Revoke buffers using a VFIO device fd ioctl
+
+RFCv1:
+https://lore.kernel.org/all/20260226202211.929005-1-mattev@meta.com/
+
+
+Matt Evans (9):
+  vfio/pci: Fix vfio_pci_dma_buf_cleanup() double-put
+  vfio/pci: Add a helper to look up PFNs for DMABUFs
+  vfio/pci: Add a helper to create a DMABUF for a BAR-map VMA
+  vfio/pci: Convert BAR mmap() to use a DMABUF
+  vfio/pci: Provide a user-facing name for BAR mappings
+  vfio/pci: Clean up BAR zap and revocation
+  vfio/pci: Support mmap() of a VFIO DMABUF
+  vfio/pci: Permanently revoke a DMABUF on request
+  vfio/pci: Add mmap() attributes to DMABUF feature
+
+ drivers/vfio/pci/Kconfig            |   3 +-
+ drivers/vfio/pci/Makefile           |   3 +-
+ drivers/vfio/pci/nvgrace-gpu/main.c |   5 +
+ drivers/vfio/pci/vfio_pci_config.c  |  30 +-
+ drivers/vfio/pci/vfio_pci_core.c    | 224 ++++++++++---
+ drivers/vfio/pci/vfio_pci_dmabuf.c  | 500 +++++++++++++++++++++++-----
+ drivers/vfio/pci/vfio_pci_priv.h    |  49 ++-
+ include/linux/vfio_pci_core.h       |   1 +
+ include/uapi/linux/vfio.h           |  42 ++-
+ 9 files changed, 690 insertions(+), 167 deletions(-)
+
+-- 
+2.47.3
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
