@@ -2,153 +2,278 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id QB3EEKbd5GkibQEAu9opvQ
+	id WB76NFBm5mmJvwEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 19 Apr 2026 15:50:30 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:45:52 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id AD0274243F6
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 19 Apr 2026 15:50:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9B4A64320A6
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:45:52 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5D1EA404B6
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 19 Apr 2026 13:50:28 +0000 (UTC)
-Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
-	by lists.linaro.org (Postfix) with ESMTPS id 573AD3F907
-	for <linaro-mm-sig@lists.linaro.org>; Sun, 19 Apr 2026 13:50:24 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5FC314095C
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:45:51 +0000 (UTC)
+Received: from mail-qk1-f178.google.com (mail-qk1-f178.google.com [209.85.222.178])
+	by lists.linaro.org (Postfix) with ESMTPS id B22BA3F907
+	for <linaro-mm-sig@lists.linaro.org>; Sun, 19 Apr 2026 16:12:35 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=igalia.com header.s=20170329 header.b=Qgk9gHJz;
-	dmarc=pass (policy=none) header.from=igalia.com;
-	spf=pass (lists.linaro.org: domain of mcanal@igalia.com designates 213.97.179.56 as permitted sender) smtp.mailfrom=mcanal@igalia.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
-	s=20170329; h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:
-	Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:
-	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
-	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
-	List-Post:List-Owner:List-Archive;
-	bh=CLJsyouNMejv17zbbnbx5olGhCMXQM3w350Ea2kQLNk=; b=Qgk9gHJz07/X5zIwqfXvQfpPG+
-	mJJVQyYm1mIdUo7081Z2ONiSyB+s8LUcFFQNnowpX2jz5/30mdPFMCFNiuky4eAzZfVhSX/c/Vzu/
-	Ahm92XqpZM49bhMrEzf6rCYX4u72E42BxWYUIbY3ZhJ0FGY5s0n5gNGyLqzsx6dhZMbiCJIkSfV/S
-	xT+nXkrCmZ+vwbKWGtj3YMXd36YYxlHoQ4KNFz9JgVfDEPqqkUbJO9YZrOe8Buq2F8OXGXvuvYH4z
-	DrXalxVBJkaSsKqVsLaDgc1mGgSCy8UCXATNqhyEVAKhVnpj1gzohXhg5ZWi2PhI4HiFtH2LLW7iq
-	SsbtHpcA==;
-Received: from [187.36.208.231] (helo=localhost.localdomain)
-	by fanzine2.igalia.com with esmtpsa
-	(Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA512__CHACHA20_POLY1305:256) (Exim)
-	id 1wESXH-000bE6-7V; Sun, 19 Apr 2026 15:50:07 +0200
-From: =?UTF-8?q?Ma=C3=ADra=20Canal?= <mcanal@igalia.com>
-To: =?UTF-8?q?Christian=20K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	Boris Brezillon <boris.brezillon@collabora.com>,
-	Tvrtko Ursulin <tvrtko.ursulin@igalia.com>,
-	Philipp Stanner <phasta@kernel.org>
-Date: Sun, 19 Apr 2026 10:48:58 -0300
-Message-ID: <20260419134943.54833-2-mcanal@igalia.com>
+	dkim=pass header.d=gmail.com header.s=20251104 header.b="Pd/yto5P";
+	dmarc=pass (policy=none) header.from=gmail.com;
+	spf=pass (lists.linaro.org: domain of michael.bommarito@gmail.com designates 209.85.222.178 as permitted sender) smtp.mailfrom=michael.bommarito@gmail.com
+Received: by mail-qk1-f178.google.com with SMTP id af79cd13be357-8cbc593a67aso209066785a.2
+        for <linaro-mm-sig@lists.linaro.org>; Sun, 19 Apr 2026 09:12:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1776615155; x=1777219955; darn=lists.linaro.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=B17bAyfAm7uzzttww80XtUu6/K1MgSIE6Bs+vc9UHtw=;
+        b=Pd/yto5P28cy88ovEndZfdsjs3dlvujaG3hqXl+ijbJIObDUO4XdbSS1Yb4Z4JHbdD
+         RRDBcdQyqu3izELY6ukoznuUZo0ztSDgzJSRyBHY9sRtlJyQy+SfvmqpiJOid+7LedFk
+         wHHb2JdB5o0eb21gYp/LXWzRjLCAYlpcczyxa/Doc/7qnWr/UUw4HDTMwmV+wrSnLA2s
+         s+fdhGqGUw/fw5CU3ArzeVP5NTyMPp1bh8z1Q0gA2qWc0JQWD1sFUZPOv0f/QMH/r6in
+         m1NIqqVXRpvEhVSmtPvHyjzJrsVjW64YnBopubDiNHuS4sAFwjvvV6OUb0R7vvjA7+vI
+         ilug==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1776615155; x=1777219955;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=B17bAyfAm7uzzttww80XtUu6/K1MgSIE6Bs+vc9UHtw=;
+        b=LIIa+7u3Fhme5W53YxPdk3eDdD3B8lsO8dd0/6GFZ9iWJzP2TqzipZ5y+4IOptLLgQ
+         Eo1XhlyCtv8K1uewdU86loii69RKd+Minc5XT0mMRr/BFcyto5Iz+qtddO1nScDcNLH+
+         7QEe4+oejPgrLXQ9eM9iD1K7B4nR8Jpmru0dW4csHxubBz2AZi1sUw5Q/MPagXTjAVvk
+         tcE6dYbjawfAdbf1PH6uf8lHVPqtWTKZAGbX0Ke3tg/ix2ElwAMbjzMI2NzZynStWSKT
+         axb3knW9Vkk12/MWvE79uZd4RFXphPqjHutJHXKhTu3+XoMNaWZLx1TeVR1x6jMN60tR
+         zobA==
+X-Forwarded-Encrypted: i=1; AFNElJ+N3NPBIchsZwQB2dIc7WriZA5MTaNWYq/zA5ljtMKRbogY2TN13DdYEfwNrVb2mGzXjO0WbA6eE8ni9LqM@lists.linaro.org
+X-Gm-Message-State: AOJu0YzXPLNZK6BHprNWZo8EocIgUFTyFzt6W7oaKTcrz4Yhf2oYXe+W
+	0xa5tO/2iDu1AL4w755SMMSUK9d2mXuSc1jEJDFg26QUf5h6NDJMnETK
+X-Gm-Gg: AeBDievUQBgMKg1GxRM+QQjAsOTP7Q+U6ECxe/RcXQ1Pmhpjxp6knpnw1xdR+QgUzUn
+	u5sLBi6K/RZZ7vjEOJ4oUJXa0YuNLuo3L+IiX04aiSkEXxKRWpclDsA1XXu5LfH6J21Sy6mRdmU
+	VW2e/mmXmWQavBFpVtjQU4PcPxpBSdR/wzfPI0cd8+Oh7rJ5l311qJDSp1hPJ4frVL/+U4oCd7F
+	0sKGgUSBl+Wk8VNnL5vxEKe/QXpt2fOL975cYfvXt8AUo3LAdfrP2O8KgORVpFM2LQ54Fu1nP0F
+	kS7iwUtyEjbVGRSueV36hXO9b+Qvd8ManivxaZF9gfvJmF3AKVr8UmZLdDaISteL+H3WwFndPRY
+	c1aojWcsfs5pM8RqC4OeZE9TJxw58Ucw8wcH2BCnbTry33MNMsnhMsaYTJ0dEJ4l2Mo3bU3hl/M
+	VE3SUZ7Wy5WpMQ5EIvHT3YaKgr5SCjka/Irnbc9CwqrCH+5lykq98316Y/Dtrou0n+bn43FaO9E
+	QL0AlLLHxB9mBToBlQ4fxnxZpMv/no=
+X-Received: by 2002:a05:620a:2844:b0:8b2:1ee9:dcfb with SMTP id af79cd13be357-8e78f82cf5emr1427279685a.8.1776615155112;
+        Sun, 19 Apr 2026 09:12:35 -0700 (PDT)
+Received: from server0 (c-68-48-65-54.hsd1.mi.comcast.net. [68.48.65.54])
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-8e7d8edb795sm598271385a.25.2026.04.19.09.12.33
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 19 Apr 2026 09:12:34 -0700 (PDT)
+From: Michael Bommarito <michael.bommarito@gmail.com>
+To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Date: Sun, 19 Apr 2026 12:12:27 -0400
+Message-ID: <20260419161227.1587668-1-michael.bommarito@gmail.com>
 X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 X-Spamd-Bar: --
-Message-ID-Hash: J2ZEDHHXFCDHA46BCQF6MTLUBM6GAJNU
-X-Message-ID-Hash: J2ZEDHHXFCDHA46BCQF6MTLUBM6GAJNU
-X-MailFrom: mcanal@igalia.com
+X-MailFrom: michael.bommarito@gmail.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kernel-dev@igalia.com, =?UTF-8?q?Ma=C3=ADra=20Canal?= <mcanal@igalia.com>
+Message-ID-Hash: 3P53FXP5HZ7RCHXG2EJXBBWWK3YTUSTZ
+X-Message-ID-Hash: 3P53FXP5HZ7RCHXG2EJXBBWWK3YTUSTZ
+X-Mailman-Approved-At: Mon, 20 Apr 2026 17:44:55 +0000
+CC: Al Viro <viro@zeniv.linux.org.uk>, Sam Day <me@samcday.com>, Christian Brauner <brauner@kernel.org>, Ingo Rohloff <ingo.rohloff@lauterbach.com>, Paul Cercueil <paul@crapouillou.net>, Sumit Semwal <sumit.semwal@linaro.org>, Christian Koenig <christian.koenig@amd.com>, Simona Vetter <simona.vetter@ffwll.ch>, Kees Cook <kees@kernel.org>, linux-usb@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v2] dma-fence: Clarify external lock use case in dma_fence_init() docs
+Subject: [Linaro-mm-sig] [PATCH] usb: gadget: f_fs: serialize DMABUF cancel against request completion
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/J2ZEDHHXFCDHA46BCQF6MTLUBM6GAJNU/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3P53FXP5HZ7RCHXG2EJXBBWWK3YTUSTZ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-X-Spamd-Result: default: False [3.19 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[igalia.com:s=20170329];
-	MID_CONTAINS_FROM(1.00)[];
-	R_SPF_ALLOW(-0.20)[+mx];
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [1.59 / 15.00];
+	DATE_IN_PAST(1.00)[25];
+	R_DKIM_REJECT(1.00)[gmail.com:s=20251104];
 	MAILLIST(-0.20)[mailman];
-	DMARC_POLICY_SOFTFAIL(0.10)[igalia.com : SPF not aligned (relaxed),none];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_BASE64_TEXT(0.10)[];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	ARC_NA(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
+	ARC_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_THREE(0.00)[3];
-	TO_DN_SOME(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com,linaro.org,collabora.com,igalia.com,kernel.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[igalia.com:-];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	NEURAL_HAM(-0.00)[-0.032];
-	FROM_NEQ_ENVFROM(0.00)[mcanal@igalia.com,linaro-mm-sig-bounces@lists.linaro.org];
+	RCVD_COUNT_THREE(0.00)[4];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCPT_COUNT_TWELVE(0.00)[15];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-0.988];
+	FROM_NEQ_ENVFROM(0.00)[michaelbommarito@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:-];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[igalia.com:mid,igalia.com:email]
-X-Rspamd-Queue-Id: AD0274243F6
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
+X-Rspamd-Queue-Id: 9B4A64320A6
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-VGhlIGtlcm5lbGRvYyBjb21tZW50IG9uIGRtYV9mZW5jZV9pbml0KCkgYW5kIGRtYV9mZW5jZV9p
-bml0NjQoKSBkZXNjcmliZQ0KdGhlIGxlZ2FjeSByZWFzb24gdG8gcGFzcyBhbiBleHRlcm5hbCBs
-b2NrIGFzIGEgbmVlZCB0byBwcmV2ZW50IG11bHRpcGxlDQpmZW5jZXMgImZyb20gc2lnbmFsaW5n
-IG91dCBvZiBvcmRlciIuIEhvd2V2ZXIsIHRoaXMgd29yZGluZyBpcyBhIGJpdA0KbWlzbGVhZGlu
-ZzogYSBzaGFyZWQgc3BpbmxvY2sgZG9lcyBub3QgKGFuZCBjYW5ub3QpIHByZXZlbnQgdGhlIHNp
-Z25hbGVyDQpmcm9tIHNpZ25hbGluZyBvdXQgb2Ygb3JkZXIuIFNpZ25hbGluZyBvcmRlciBpcyB0
-aGUgZHJpdmVyJ3MgcmVzcG9uc2liaWxpdHkNCnJlZ2FyZGxlc3Mgb2Ygd2hldGhlciB0aGUgbG9j
-ayBpcyBzaGFyZWQgb3IgcGVyLWZlbmNlLg0KDQpXaGF0IGEgc2hhcmVkIGxvY2sgYWN0dWFsbHkg
-cHJvdmlkZXMgaXMgc2VyaWFsaXphdGlvbiBvZiBzaWduYWxpbmcgYW5kDQpvYnNlcnZhdGlvbiBh
-Y3Jvc3MgZmVuY2VzIGluIGEgZ2l2ZW4gY29udGV4dCwgc28gdGhhdCBvYnNlcnZlcnMgbmV2ZXIN
-CnNlZSBhIGxhdGVyIGZlbmNlIHNpZ25hbGVkIHdoaWxlIGFuIGVhcmxpZXIgb25lIGlzIG5vdC4N
-Cg0KUmV3b3JkIGJvdGggY29tbWVudHMgdG8gZGVzY3JpYmUgdGhpcyBtb3JlIGFjY3VyYXRlbHku
-DQoNClNpZ25lZC1vZmYtYnk6IE1hw61yYSBDYW5hbCA8bWNhbmFsQGlnYWxpYS5jb20+DQoNCi0t
-LQ0KDQp2MSAtPiB2MjogaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvZHJpLWRldmVsLzIwMjYwNDEx
-MTg1NzU2LjE4ODcxMTktNC1tY2FuYWxAaWdhbGlhLmNvbS8NCg0KLSBCZSBtb3JlIGV4cGxpY2l0
-IGFib3V0IG5vdCBhbGxvd2luZyBuZXcgdXNlcnMgdG8gdXNlIGFuIGV4dGVybmFsIGxvY2suDQot
-IERlLWR1cGxpY2F0ZSB0aGUgZXhwbGFuYXRpb24gaW4gZG1hX2ZlbmNlX2luaXQ2NCgpIGJ5IHBv
-aW50aW5nIHRvIHRoZQ0KICBkbWFfZmVuY2VfaW5pdCgpIGRvY3VtZW50YXRpb24uDQotLS0NCiBk
-cml2ZXJzL2RtYS1idWYvZG1hLWZlbmNlLmMgfCAxMyArKysrKysrLS0tLS0tDQogMSBmaWxlIGNo
-YW5nZWQsIDcgaW5zZXJ0aW9ucygrKSwgNiBkZWxldGlvbnMoLSkNCg0KZGlmZiAtLWdpdCBhL2Ry
-aXZlcnMvZG1hLWJ1Zi9kbWEtZmVuY2UuYyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtZmVuY2UuYw0K
-aW5kZXggMWMxZWFlY2FmMWIwLi42M2IzNDliYTlhMzQgMTAwNjQ0DQotLS0gYS9kcml2ZXJzL2Rt
-YS1idWYvZG1hLWZlbmNlLmMNCisrKyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtZmVuY2UuYw0KQEAg
-LTExMDIsOSArMTEwMiwxMSBAQCBfX2RtYV9mZW5jZV9pbml0KHN0cnVjdCBkbWFfZmVuY2UgKmZl
-bmNlLCBjb25zdCBzdHJ1Y3QgZG1hX2ZlbmNlX29wcyAqb3BzLA0KICAqIGNvbnRleHQgYW5kIHNl
-cW5vIGFyZSB1c2VkIGZvciBlYXN5IGNvbXBhcmlzb24gYmV0d2VlbiBmZW5jZXMsIGFsbG93aW5n
-DQogICogdG8gY2hlY2sgd2hpY2ggZmVuY2UgaXMgbGF0ZXIgYnkgc2ltcGx5IHVzaW5nIGRtYV9m
-ZW5jZV9sYXRlcigpLg0KICAqDQotICogSXQgaXMgc3Ryb25nbHkgZGlzY291cmFnZWQgdG8gcHJv
-dmlkZSBhbiBleHRlcm5hbCBsb2NrIGJlY2F1c2UgdGhpcyBjb3VwbGVzDQotICogbG9jayBhbmQg
-ZmVuY2UgbGlmZSB0aW1lLiBUaGlzIGlzIG9ubHkgYWxsb3dlZCBmb3IgbGVnYWN5IHVzZSBjYXNl
-cyB3aGVuDQotICogbXVsdGlwbGUgZmVuY2VzIG5lZWQgdG8gYmUgcHJldmVudGVkIGZyb20gc2ln
-bmFsaW5nIG91dCBvZiBvcmRlci4NCisgKiBFeHRlcm5hbCBsb2NrcyBhcmUgYSByZWxpYyBmcm9t
-IGxlZ2FjeSB1c2UgY2FzZXMgdGhhdCBuZWVkZWQgYSBzaGFyZWQgbG9jaw0KKyAqIHRvIHNlcmlh
-bGl6ZSBzaWduYWxpbmcgYW5kIG9ic2VydmF0aW9uIG9mIGZlbmNlcyB3aXRoaW4gYSBjb250ZXh0
-LCBzbyB0aGF0DQorICogb2JzZXJ2ZXJzIG5ldmVyIHNlZSBhIGxhdGVyIGZlbmNlIHNpZ25hbGVk
-IHdoaWxlIGFuIGVhcmxpZXIgb25lIGlzbid0LiBOZXcNCisgKiB1c2VycyBNVVNUIE5PVCB1c2Ug
-ZXh0ZXJuYWwgbG9ja3MsIGFzIHRoZXkgZm9yY2UgdGhlIGlzc3VlciB0byBvdXRsaXZlIGFsbA0K
-KyAqIGZlbmNlcyB0aGF0IHJlZmVyZW5jZSB0aGUgbG9jay4NCiAgKi8NCiB2b2lkDQogZG1hX2Zl
-bmNlX2luaXQoc3RydWN0IGRtYV9mZW5jZSAqZmVuY2UsIGNvbnN0IHN0cnVjdCBkbWFfZmVuY2Vf
-b3BzICpvcHMsDQpAQCAtMTEyOSw5ICsxMTMxLDggQEAgRVhQT1JUX1NZTUJPTChkbWFfZmVuY2Vf
-aW5pdCk7DQogICogQ29udGV4dCBhbmQgc2Vxbm8gYXJlIHVzZWQgZm9yIGVhc3kgY29tcGFyaXNv
-biBiZXR3ZWVuIGZlbmNlcywgYWxsb3dpbmcNCiAgKiB0byBjaGVjayB3aGljaCBmZW5jZSBpcyBs
-YXRlciBieSBzaW1wbHkgdXNpbmcgZG1hX2ZlbmNlX2xhdGVyKCkuDQogICoNCi0gKiBJdCBpcyBz
-dHJvbmdseSBkaXNjb3VyYWdlZCB0byBwcm92aWRlIGFuIGV4dGVybmFsIGxvY2sgYmVjYXVzZSB0
-aGlzIGNvdXBsZXMNCi0gKiBsb2NrIGFuZCBmZW5jZSBsaWZlIHRpbWUuIFRoaXMgaXMgb25seSBh
-bGxvd2VkIGZvciBsZWdhY3kgdXNlIGNhc2VzIHdoZW4NCi0gKiBtdWx0aXBsZSBmZW5jZXMgbmVl
-ZCB0byBiZSBwcmV2ZW50ZWQgZnJvbSBzaWduYWxpbmcgb3V0IG9mIG9yZGVyLg0KKyAqIE5ldyB1
-c2VycyBNVVNUIE5PVCB1c2UgZXh0ZXJuYWwgbG9ja3MuIENoZWNrIHRoZSBkb2N1bWVudGF0aW9u
-IGluDQorICogZG1hX2ZlbmNlX2luaXQoKSB0byB1bmRlcnN0YW5kIHRoZSBtb3RpdmVzIGJlaGlu
-ZCB0aGUgbGVnYWN5IHVzZSBjYXNlcy4NCiAgKi8NCiB2b2lkDQogZG1hX2ZlbmNlX2luaXQ2NChz
-dHJ1Y3QgZG1hX2ZlbmNlICpmZW5jZSwgY29uc3Qgc3RydWN0IGRtYV9mZW5jZV9vcHMgKm9wcywN
-Ci0tIA0KMi41My4wDQoNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMu
-bGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWct
-bGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+ffs_epfile_dmabuf_io_complete() calls usb_ep_free_request() on the
+completed request but leaves priv->req, the back-pointer that
+ffs_dmabuf_transfer() set on submission, pointing at the freed
+memory.  A later FUNCTIONFS_DMABUF_DETACH ioctl or
+ffs_epfile_release() on the close path still sees priv->req
+non-NULL under ffs->eps_lock:
+
+    if (priv->ep && priv->req)
+            usb_ep_dequeue(priv->ep, priv->req);
+
+so usb_ep_dequeue() is called on a freed usb_request.
+
+On dummy_hcd the dequeue path only walks a live queue and
+pointer-compares, so the freed pointer reads without faulting and
+KASAN requires an explicit check at the FunctionFS call site to
+surface the use-after-free.  On SG-capable in-tree UDCs the
+dequeue path dereferences the supplied request immediately:
+
+  * chipidea's ep_dequeue() does
+    container_of(req, struct ci_hw_req, req) and reads
+    hwreq->req.status before acquiring its own lock.
+  * cdnsp's cdnsp_gadget_ep_dequeue() reads request->status first.
+
+The narrower option of clearing priv->req via cmpxchg() in the
+completion does not close the race: the completion runs without
+eps_lock, so a cancel path holding eps_lock can still observe
+priv->req non-NULL, race a concurrent completion that clears and
+frees, and pass the freed pointer to usb_ep_dequeue().  A slightly
+longer fix that moves the free into the cleanup work is needed.
+
+Same class of lifetime race as the recent usbip-vudc timer fix [1].
+
+Take eps_lock in the sole place that mutates priv->req from the
+callback direction by moving usb_ep_free_request() out of the
+completion into ffs_dmabuf_cleanup(), the existing work handler
+scheduled by ffs_dmabuf_signal_done() on
+ffs->io_completion_wq.  Clear priv->req there under eps_lock
+before freeing, and only clear if priv->req still names our
+request (a subsequent ffs_dmabuf_transfer() on the same
+attachment may have queued a new one).
+
+This keeps the existing dummy_hcd sync-dequeue invariant: the
+completion callback is still invoked by the UDC without
+eps_lock held (dummy_hcd drops its own lock before calling the
+callback), and the callback now takes no f_fs lock at all.
+Serialization against the cancel path happens in cleanup, which
+runs from the workqueue with no f_fs lock held on entry.
+
+The priv ref count protects the containing ffs_dmabuf_priv:
+ffs_dmabuf_transfer() takes a ref via ffs_dmabuf_get(), cleanup
+drops it via ffs_dmabuf_put(), so priv stays live for the
+cleanup even after the cancel path's list_del + ffs_dmabuf_put.
+
+The ffs_dmabuf_transfer() error path no longer frees usb_req
+inline: fence->req and fence->ep are set before usb_ep_queue(),
+so ffs_dmabuf_cleanup() (scheduled by the error-path
+ffs_dmabuf_signal_done()) owns the free regardless of whether
+the queue succeeded.
+
+Reproduced under KASAN on both detach and close paths against
+dummy_hcd with an observability hook
+(kasan_check_byte(priv->req) immediately before usb_ep_dequeue)
+at the two FunctionFS cancel sites to surface the stale-pointer
+access; the hook is not part of this patch.  The KASAN
+allocator / free stacks in the captured splats identify the
+same request: alloc in dummy_alloc_request, free in
+dummy_timer, fault reached from ffs_epfile_release (close) and
+from the FUNCTIONFS_DMABUF_DETACH ioctl (detach).  With the
+patch applied, both paths are silent under the same hook.
+
+The bug is reached from the FunctionFS device node, which in
+real deployments is owned by the privileged gadget daemon
+(adbd, UMS, composite gadget services, etc.); it is not
+reachable from unprivileged userspace or from a USB host on the
+cable.  FunctionFS mounts default to GLOBAL_ROOT_UID, but the
+filesystem supports uid=, gid=, and fmode= delegation to a
+non-root gadget daemon, so on real deployments the attacker may
+be a less-privileged service rather than root.
+
+Fixes: 7b07a2a7ca02 ("usb: gadget: functionfs: Add DMABUF import interface")
+Link: https://lore.kernel.org/all/20260417163552.807548-1-michael.bommarito@gmail.com/ [1]
+Cc: stable@vger.kernel.org
+Assisted-by: Claude:claude-opus-4-7
+Signed-off-by: Michael Bommarito <michael.bommarito@gmail.com>
+---
+ drivers/usb/gadget/function/f_fs.c | 24 ++++++++++++++++++++++--
+ 1 file changed, 22 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/usb/gadget/function/f_fs.c b/drivers/usb/gadget/function/f_fs.c
+index 815639506520..75912ce6ab55 100644
+--- a/drivers/usb/gadget/function/f_fs.c
++++ b/drivers/usb/gadget/function/f_fs.c
+@@ -150,6 +150,8 @@ struct ffs_dma_fence {
+ 	struct dma_fence base;
+ 	struct ffs_dmabuf_priv *priv;
+ 	struct work_struct work;
++	struct usb_ep *ep;
++	struct usb_request *req;
+ };
+ 
+ struct ffs_epfile {
+@@ -1385,6 +1387,21 @@ static void ffs_dmabuf_cleanup(struct work_struct *work)
+ 	struct ffs_dmabuf_priv *priv = dma_fence->priv;
+ 	struct dma_buf_attachment *attach = priv->attach;
+ 	struct dma_fence *fence = &dma_fence->base;
++	struct usb_request *req = dma_fence->req;
++	struct usb_ep *ep = dma_fence->ep;
++
++	/*
++	 * eps_lock pairs with the cancel paths so they cannot pass a freed
++	 * req to usb_ep_dequeue().  Only clear if priv->req still names ours;
++	 * a re-queue on the same attachment may have taken that slot.
++	 */
++	spin_lock_irq(&priv->ffs->eps_lock);
++	if (priv->req == req)
++		priv->req = NULL;
++	spin_unlock_irq(&priv->ffs->eps_lock);
++
++	if (ep && req)
++		usb_ep_free_request(ep, req);
+ 
+ 	ffs_dmabuf_put(attach);
+ 	dma_fence_put(fence);
+@@ -1414,8 +1431,8 @@ static void ffs_epfile_dmabuf_io_complete(struct usb_ep *ep,
+ 					  struct usb_request *req)
+ {
+ 	pr_vdebug("FFS: DMABUF transfer complete, status=%d\n", req->status);
++	/* req is freed by ffs_dmabuf_cleanup() under eps_lock. */
+ 	ffs_dmabuf_signal_done(req->context, req->status);
+-	usb_ep_free_request(ep, req);
+ }
+ 
+ static const char *ffs_dmabuf_get_driver_name(struct dma_fence *fence)
+@@ -1699,6 +1716,10 @@ static int ffs_dmabuf_transfer(struct file *file,
+ 	usb_req->context  = fence;
+ 	usb_req->complete = ffs_epfile_dmabuf_io_complete;
+ 
++	/* ffs_dmabuf_cleanup() frees usb_req via these two fields. */
++	fence->req = usb_req;
++	fence->ep = ep->ep;
++
+ 	cookie = dma_fence_begin_signalling();
+ 	ret = usb_ep_queue(ep->ep, usb_req, GFP_ATOMIC);
+ 	dma_fence_end_signalling(cookie);
+@@ -1708,7 +1729,6 @@ static int ffs_dmabuf_transfer(struct file *file,
+ 	} else {
+ 		pr_warn("FFS: Failed to queue DMABUF: %d\n", ret);
+ 		ffs_dmabuf_signal_done(fence, ret);
+-		usb_ep_free_request(ep->ep, usb_req);
+ 	}
+ 
+ 	spin_unlock_irq(&epfile->ffs->eps_lock);
+-- 
+2.53.0
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
