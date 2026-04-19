@@ -2,36 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id GGVbIp+s5Gm7YAEAu9opvQ
+	id GGViDMas5Gm7YAEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 19 Apr 2026 12:21:19 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 19 Apr 2026 12:21:58 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED060423A0C
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 19 Apr 2026 12:21:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5A987423A1B
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 19 Apr 2026 12:21:57 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4C513404E4
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 19 Apr 2026 10:21:17 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 6D105404DF
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 19 Apr 2026 10:21:56 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C377F404AA
-	for <linaro-mm-sig@lists.linaro.org>; Sun, 19 Apr 2026 10:21:10 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 978213F796
+	for <linaro-mm-sig@lists.linaro.org>; Sun, 19 Apr 2026 10:21:49 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: "CYTOTEC 087776558899" <moratmaret502@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Sun, 19 Apr 2026 10:21:10 -0000
-Message-ID: <177659407079.3478256.7348484348372737225@lists.linaro.org>
+Date: Sun, 19 Apr 2026 10:21:49 -0000
+Message-ID: <177659410961.3481891.12889101231625869856@lists.linaro.org>
 User-Agent: HyperKitty on http://lists-ec2.96boards.org/
-Message-ID-Hash: NCVCMGILLYGH6K2OGJA5SYXVFK4IUV77
-X-Message-ID-Hash: NCVCMGILLYGH6K2OGJA5SYXVFK4IUV77
+Message-ID-Hash: YWTY2HTMAZALJUQPLLIK63SCEJPKEBDH
+X-Message-ID-Hash: YWTY2HTMAZALJUQPLLIK63SCEJPKEBDH
 X-MailFrom: moratmaret502@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] PENJUAL OBAT ABORSI PALANGKARAYA 087776558899
+Subject: [Linaro-mm-sig] PENJUAL OBAT ABORSI DI NUSANTARA 087776558899
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NCVCMGILLYGH6K2OGJA5SYXVFK4IUV77/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YWTY2HTMAZALJUQPLLIK63SCEJPKEBDH/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -41,7 +41,7 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Transfer-Encoding: base64
 X-Spamd-Result: default: False [0.69 / 15.00];
 	MID_RHS_MATCH_TO(1.00)[];
-	R_SPF_ALLOW(-0.20)[+mx];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
@@ -49,13 +49,13 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	ARC_NA(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
 	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_ONE(0.00)[1];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	RCPT_COUNT_ONE(0.00)[1];
 	RCVD_COUNT_TWO(0.00)[2];
 	FROM_NEQ_ENVFROM(0.00)[moratmaret502@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
@@ -63,8 +63,8 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	R_DKIM_NA(0.00)[];
 	NEURAL_HAM(-0.00)[-0.992];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,wa.me:url,lists.linaro.org:mid,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: ED060423A0C
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:mid,lists.linaro.org:helo,lists.linaro.org:rdns,wa.me:url]
+X-Rspamd-Queue-Id: 5A987423A1B
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
