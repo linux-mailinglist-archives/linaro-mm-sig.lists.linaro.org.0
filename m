@@ -2,118 +2,102 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 6BZjKkZm5mmJvwEAu9opvQ
+	id t/8OAz0f5GnvRQEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:45:42 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 19 Apr 2026 02:18:05 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id DBEFF432087
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:45:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7D2A2422B33
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 19 Apr 2026 02:18:04 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DAD2C3F70A
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:45:40 +0000 (UTC)
-Received: from relay.hostedemail.com (smtprelay0015.hostedemail.com [216.40.44.15])
-	by lists.linaro.org (Postfix) with ESMTPS id 064093F836
-	for <linaro-mm-sig@lists.linaro.org>; Sat, 18 Apr 2026 23:05:37 +0000 (UTC)
-Authentication-Results: lists.linaro.org;
-	dkim=none;
-	dmarc=pass (policy=none) header.from=goodmis.org;
-	spf=pass (lists.linaro.org: domain of rostedt@goodmis.org designates 216.40.44.15 as permitted sender) smtp.mailfrom=rostedt@goodmis.org
-Received: from omf17.hostedemail.com (a10.router.float.18 [10.200.18.1])
-	by unirelay01.hostedemail.com (Postfix) with ESMTP id 3A610E4C26;
-	Sat, 18 Apr 2026 23:05:34 +0000 (UTC)
-Received: from [HIDDEN] (Authenticated sender: rostedt@goodmis.org) by omf17.hostedemail.com (Postfix) with ESMTPA id D63C017;
-	Sat, 18 Apr 2026 23:05:02 +0000 (UTC)
-Date: Sat, 18 Apr 2026 19:04:56 -0400
-From: Steven Rostedt <rostedt@goodmis.org>
-To: "Vineeth Pillai (Google)" <vineeth@bitbyteword.org>
-Message-ID: <20260418190456.631df6f3@fedora>
-In-Reply-To: <20260323160052.17528-1-vineeth@bitbyteword.org>
-References: <20260323160052.17528-1-vineeth@bitbyteword.org>
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.52; x86_64-redhat-linux-gnu)
+	by lists.linaro.org (Postfix) with ESMTP id 09C30404DF
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 19 Apr 2026 00:18:03 +0000 (UTC)
+Received: from lists.linaro.org (localhost [127.0.0.1])
+	by lists.linaro.org (Postfix) with ESMTP id 5F7393F836
+	for <linaro-mm-sig@lists.linaro.org>; Sun, 19 Apr 2026 00:17:55 +0000 (UTC)
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-X-Stat-Signature: 14j39sducs3tg3aey13ys76m4wq4pf1a
-X-Spam-Status: No, score=1.91
-X-Session-Marker: 726F737465647440676F6F646D69732E6F7267
-X-Session-ID: U2FsdGVkX18uI1/Yo7/rI1+CwnTJAuzOiDhDTcHCmFM=
-X-HE-Tag: 1776553502-227936
-X-HE-Meta: U2FsdGVkX19V5aRBuQVgNrwFYqJny3DiV29cPCLORtmFjnJgNsHv2iodpq+DK7eFwvzFvhgzZ+I=
-X-Spamd-Bar: --
-X-MailFrom: rostedt@goodmis.org
-X-Mailman-Rule-Hits: implicit-dest
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-Message-ID-Hash: BP4FZFX3DTFWV7MBWNOZFK6DM6KCRMPO
-X-Message-ID-Hash: BP4FZFX3DTFWV7MBWNOZFK6DM6KCRMPO
-X-Mailman-Approved-At: Mon, 20 Apr 2026 17:44:55 +0000
-CC: Peter Zijlstra <peterz@infradead.org>, Dmitry Ilvokhin <d@ilvokhin.com>, Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Ingo Molnar <mingo@redhat.com>, Jens Axboe <axboe@kernel.dk>, io-uring@vger.kernel.org, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Alexei Starovoitov <ast@kernel.org>, Daniel Borkmann <daniel@iogearbox.net>, Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>, Xin Long <lucien.xin@gmail.com>, Jon Maloy <jmaloy@redhat.com>, Aaron Conole <aconole@redhat.com>, Eelco Chaudron <echaudro@redhat.com>, Ilya Maximets <i.maximets@ovn.org>, netdev@vger.kernel.org, bpf@vger.kernel.org, linux-sctp@vger.kernel.org, tipc-discussion@lists.sourceforge.net, dev@openvswitch.org, Jiri Pirko <jiri@resnulli.us>, Oded Gabbay <ogabbay@kernel.org>, Koby Elbaz <koby.elbaz@intel.com>, dri-devel@lists.freedesktop.org, "Rafael J. Wysocki" <rafael@
- kernel.org>, Viresh Kumar <viresh.kumar@linaro.org>, "Gautham R. Shenoy" <gautham.shenoy@amd.com>, Huang Rui <ray.huang@amd.com>, Mario Limonciello <mario.limonciello@amd.com>, Len Brown <lenb@kernel.org>, Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>, linux-pm@vger.kernel.org, MyungJoo Ham <myungjoo.ham@samsung.com>, Kyungmin Park <kyungmin.park@samsung.com>, Chanwoo Choi <cw00.choi@samsung.com>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Sumit Semwal <sumit.semwal@linaro.org>, linaro-mm-sig@lists.linaro.org, Eddie James <eajames@linux.ibm.com>, Andrew Jeffery <andrew@codeconstruct.com.au>, linux-fsi@lists.ozlabs.org, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Alex Deucher <alexander.deucher@amd.com>, Danilo Krummrich <dakr@kernel.org>, Matthew Brost <matthew.brost@intel.com>, Philipp Stanner <phasta@kernel.org>, Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>, amd-gfx@lists.freedesktop.org, Jiri Kosina <jikos
- @kernel.org>, Benjamin Tissoires <bentiss@kernel.org>, linux-input@vger.kernel.org, Wolfram Sang <wsa+renesas@sang-engineering.com>, linux-i2c@vger.kernel.org, Mark Brown <broonie@kernel.org>, Michael Hennerich <michael.hennerich@analog.com>, Nuno =?UTF-8?B?U8Oh?= <nuno.sa@analog.com>, linux-spi@vger.kernel.org, "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>, "Martin K. Petersen" <martin.petersen@oracle.com>, linux-scsi@vger.kernel.org, Chris Mason <clm@fb.com>, David Sterba <dsterba@suse.com>, linux-btrfs@vger.kernel.org, Thomas Gleixner <tglx@linutronix.de>, Andrew Morton <akpm@linux-foundation.org>, SeongJae Park <sj@kernel.org>, linux-mm@kvack.org, Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, linux-trace-kernel@vger.kernel.org, linux-kernel@vger.kernel.org
+From: manuelasonnino42@gmail.com
+To: linaro-mm-sig@lists.linaro.org
+Date: Sun, 19 Apr 2026 00:17:55 -0000
+Message-ID: <177655787538.2698980.14278714926972483145@lists.linaro.org>
+User-Agent: HyperKitty on http://lists.linaro.org/
+Message-ID-Hash: AO44X4WHNLSZPNYFZLLGT23RGAGLP5W5
+X-Message-ID-Hash: AO44X4WHNLSZPNYFZLLGT23RGAGLP5W5
+X-MailFrom: manuelasonnino42@gmail.com
+X-Mailman-Rule-Hits: member-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 00/19] tracepoint: Avoid double static_branch evaluation at guarded call sites
+Subject: [Linaro-mm-sig] I NEED A HACKER TO HIER>>> BRUNOEQUICKHACK@GMAIL.COM
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/BP4FZFX3DTFWV7MBWNOZFK6DM6KCRMPO/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AO44X4WHNLSZPNYFZLLGT23RGAGLP5W5/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [2.59 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	DATE_IN_PAST(1.00)[42];
-	MID_RHS_NOT_FQDN(0.50)[];
+Content-Transfer-Encoding: base64
+X-Spamd-Result: default: False [5.69 / 15.00];
+	SPAM_FLAG(5.00)[];
+	MID_RHS_MATCH_TO(1.00)[];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[goodmis.org : SPF not aligned (relaxed), No valid DKIM,none];
+	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	MIME_TRACE(0.00)[0:+];
+	GREYLIST(0.00)[pass,meta];
 	ARC_NA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_ONE(0.00)[1];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_GT_50(0.00)[79];
-	FROM_NEQ_ENVFROM(0.00)[rostedt@goodmis.org,linaro-mm-sig-bounces@lists.linaro.org];
-	FREEMAIL_CC(0.00)[infradead.org,ilvokhin.com,kernel.org,efficios.com,redhat.com,kernel.dk,vger.kernel.org,davemloft.net,google.com,iogearbox.net,gmail.com,ovn.org,lists.sourceforge.net,openvswitch.org,resnulli.us,intel.com,lists.freedesktop.org, kernel.org,linaro.org,amd.com,linux.intel.com,samsung.com,lists.linaro.org,linux.ibm.com,codeconstruct.com.au,lists.ozlabs.org,ffwll.ch,sang-engineering.com,analog.com,HansenPartnership.com,oracle.com,fb.com,suse.com,linutronix.de,linux-foundation.org,kvack.org,alien8.de];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	TO_DN_NONE(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_NEQ_ENVFROM(0.00)[manuelasonnino42@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	NEURAL_SPAM(0.00)[0.504];
 	R_DKIM_NA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,renesas];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
-X-Rspamd-Queue-Id: DBEFF432087
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	FROM_NO_DN(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email]
+X-Rspamd-Queue-Id: 7D2A2422B33
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Mon, 23 Mar 2026 12:00:19 -0400
-"Vineeth Pillai (Google)" <vineeth@bitbyteword.org> wrote:
-
->   if (trace_foo_enabled() && cond)
->       trace_call__foo(args);   /* calls __do_trace_foo() directly */
-
-Hi Vineeth,
-
-Could you rebase this series on top of 7.1-rc1 when it comes out?
-Several of these patches were accepted already. Obviously drop those.
-They were the patches that added the feature, and any where the
-maintainer acked the patch.
-
-Now that the feature has been accepted, if you post the patch series
-again after 7.1-rc1 with all the patches that haven't been accepted
-yet, then the maintainers can simply take them directly. As the feature
-is now accepted, there's no dependency on it, and they don't need to go
-through the tracing tree.
-
-Thanks,
-
--- Steve
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+SW4gbXkgcHVyc3VpdCBvZiBlYXJuaW5nIGVub3VnaCBwcm9maXQgdG8gc2VjdXJlIGEgaG91c2Us
+IEkgbWFkZSB0aGUgZGVjaXNpb24gdG8gaW52ZXN0IGFsbCBteSBzYXZpbmdzIGludG8gYSB0cmFk
+aW5nIHN0b2NrIHBsYXRmb3JtLiBIb3dldmVyLCBhZnRlciBmaXZlIG1vbnRocywgSSBkaXNjb3Zl
+cmVkIHRoYXQgdGhlIHdlYnNpdGUgaGFkIGFicnVwdGx5IHNodXQgZG93biwgYW5kIHRoZSBwZXJz
+b24gd2hvIGhhZCBjb252aW5jZWQgbWUgdG8gaW52ZXN0IHdhcyBub3doZXJlIHRvIGJlIGZvdW5k
+LiBJdCB3YXMgYSBkZXZhc3RhdGluZyByZWFsaXphdGlvbiB0aGF0IEkgaGFkIGJlZW4gc2NhbW1l
+ZC4gVGhlIHNpdHVhdGlvbiBsZWZ0IG1lIGZlZWxpbmcgZGVzcGVyYXRlIGFuZCBldmVuIGNvbnRl
+bXBsYXRpbmcgZW5kaW5nIG15IG93biBsaWZlLiBJdCB3YXMgZHVyaW5nIHRoaXMgbG93IHBvaW50
+IHRoYXQgSSBjYW1lIGFjcm9zcyBhbiBhcnRpY2xlIGFib3V0IHRoZSBDcnlwdG8gUmVjb3Zlcnkg
+U2VydmljZSBwcm92aWRlZCBieSBCcnVub2UgUXVpY2sgSGFjaywgYW5kIEkgZGVjaWRlZCB0byBy
+ZWFjaCBvdXQgdG8gdGhlbS4gUmVtYXJrYWJseSwgd2l0aGluIGp1c3QgNDggaG91cnMgb2YgYXZh
+aWxpbmcgdGhlaXIgc2VydmljZXMsIEkgd2FzIGFibGUgdG8gcmVjb3ZlciBldmVyeXRoaW5nIEkg
+aGFkIGxvc3QuIEkgYW0gaW5jcmVkaWJseSBncmF0ZWZ1bCB0byBCcnVub2UgUXVpY2sgSGFjayBm
+b3IgdGhlaXIgYXNzaXN0YW5jZSBpbiByZXNvbHZpbmcgdGhpcyBkaXN0cmVzc2luZyBzaXR1YXRp
+b24uICBJIGV4cHJlc3MgbXkgc3Ryb25nIGF2ZXJzaW9uIHRvIHNjYW1tZXJzIGFuZCBjYWxsIHVw
+b24gYWxsIHRvIHN1cHBvcnQgb3VyIGZpZ2h0IGZvciBqdXN0aWNlLiBOZWVkIHRvIGhhY2sgaW50
+byBhbnkgZGF0YWJhc2Ugc2VydmVyLCBvciBzcHkgb24gRmFjZWJvb2ssIEVtYWlscywgVXNkYywg
+V2hhdHNBcHAsIFVzZHQsIFZpYmVyLCBTbmFwY2hhdCwgQml0Y29pbiwgSW5zdGFncmFtLCBDcnlw
+dG8sIGFuZCBtYW55IG1vcmU/IEkgdXJnZSB5b3UgdG8gY29udGFjdCB0aGUgYmVzdCBIYWNrIEJy
+dW5vZSBRdWljayBIYWNrIFNlcnZpY2UgZm9yIHRoZSBqb2IgYW5kIG90aGVyIGhhY2sgam9icy4g
+R29vZCB0byBzZWUgYSByZXZpZXcgYWJvdXQgdGhpcyBncmVhdCBIYWNrZXIgQnJ1bm9lIFF1aWNr
+IEhhY2ssICBJZiB5b3UgaGF2ZSBiZWVuIHNjYW1tZWQgYnkgY3J5cHQwIGludmVzdG1lbnQsIERv
+buKAmXQgcGFuaWPigJR5b3XigJlyZSBub3QgYWxvbmUuIFRoYW5rcyB0byB0aGVpciBza2lsbHMg
+YW5kIHBlcnNpc3RlbmNlLCBJIGZpbmFsbHkgcmVjb3ZlcmVkIG15IHN0b2xlbiBDcnlwdDAuIENv
+bnRhY3Q6IEVtYWlsPj4+IEJydW5vZVF1aWNrSGFjayhAKUdNQUlMLkNPTSAgIFRoYW5rcywgZ3V5
+cyBmb3IgdGhlIHRlYW13b3JrIGNoZWNrLiBXaGF0c0FwcCBhdCArIDEgLzcwNSA3OCAvNDI2LzM1
+ID4+IGh0dHBzOi8vd3d3LmZhY2Vib29rLmNvbS9wZW9wbGUvQnJ1bm9lLVF1aWNraGFjay1CZXN0
+LVJlY292ZXJ5LzYxNTgwNjQ1MDY0MTEzLw0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1t
+LXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGlu
+YXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
