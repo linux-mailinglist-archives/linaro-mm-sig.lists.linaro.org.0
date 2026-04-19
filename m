@@ -2,36 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wHxjANmx5GltYQEAu9opvQ
+	id 8N/WF+ex5GltYQEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 19 Apr 2026 12:43:37 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 19 Apr 2026 12:43:51 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 87A1A423BA6
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 19 Apr 2026 12:43:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1CF07423BBE
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 19 Apr 2026 12:43:50 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 96EB8404EC
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 19 Apr 2026 10:43:35 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C45A9404F9
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 19 Apr 2026 10:43:49 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id AE67A3F859
-	for <linaro-mm-sig@lists.linaro.org>; Sun, 19 Apr 2026 10:43:27 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 342EB3F859
+	for <linaro-mm-sig@lists.linaro.org>; Sun, 19 Apr 2026 10:43:43 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: "CYTOTEC 087776558899" <moratmaret502@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Sun, 19 Apr 2026 10:43:27 -0000
-Message-ID: <177659540771.3520727.3337051315083120286@lists.linaro.org>
+Date: Sun, 19 Apr 2026 10:43:43 -0000
+Message-ID: <177659542321.3520727.2048148558587028184@lists.linaro.org>
 User-Agent: HyperKitty on http://lists-ec2.96boards.org/
-Message-ID-Hash: LH5OFR6OZ64MLSF6NHUBZOAXSQ7CAXYI
-X-Message-ID-Hash: LH5OFR6OZ64MLSF6NHUBZOAXSQ7CAXYI
+Message-ID-Hash: OT5B6S2IRMKGGCEUBYA3YWJFUAUD6KI6
+X-Message-ID-Hash: OT5B6S2IRMKGGCEUBYA3YWJFUAUD6KI6
 X-MailFrom: moratmaret502@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] PENJUAL OBAT ABORSI MAKASAR
+Subject: [Linaro-mm-sig] PENJUAL OBAT ABORSI LAMPUNG
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LH5OFR6OZ64MLSF6NHUBZOAXSQ7CAXYI/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OT5B6S2IRMKGGCEUBYA3YWJFUAUD6KI6/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -63,7 +63,7 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	RCVD_TLS_LAST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[]
-X-Rspamd-Queue-Id: 87A1A423BA6
+X-Rspamd-Queue-Id: 1CF07423BBE
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
