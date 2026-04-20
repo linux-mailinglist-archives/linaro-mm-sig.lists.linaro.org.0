@@ -2,278 +2,180 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WB76NFBm5mmJvwEAu9opvQ
+	id kMnvBlZm5mlmvwEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:45:52 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:45:58 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9B4A64320A6
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:45:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 95DE94320AD
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 19:45:57 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5FC314095C
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:45:51 +0000 (UTC)
-Received: from mail-qk1-f178.google.com (mail-qk1-f178.google.com [209.85.222.178])
-	by lists.linaro.org (Postfix) with ESMTPS id B22BA3F907
-	for <linaro-mm-sig@lists.linaro.org>; Sun, 19 Apr 2026 16:12:35 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B14A74095D
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Apr 2026 17:45:56 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+	by lists.linaro.org (Postfix) with ESMTPS id CCBD2400F6
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 20 Apr 2026 06:34:17 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b="Pd/yto5P";
-	dmarc=pass (policy=none) header.from=gmail.com;
-	spf=pass (lists.linaro.org: domain of michael.bommarito@gmail.com designates 209.85.222.178 as permitted sender) smtp.mailfrom=michael.bommarito@gmail.com
-Received: by mail-qk1-f178.google.com with SMTP id af79cd13be357-8cbc593a67aso209066785a.2
-        for <linaro-mm-sig@lists.linaro.org>; Sun, 19 Apr 2026 09:12:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1776615155; x=1777219955; darn=lists.linaro.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=B17bAyfAm7uzzttww80XtUu6/K1MgSIE6Bs+vc9UHtw=;
-        b=Pd/yto5P28cy88ovEndZfdsjs3dlvujaG3hqXl+ijbJIObDUO4XdbSS1Yb4Z4JHbdD
-         RRDBcdQyqu3izELY6ukoznuUZo0ztSDgzJSRyBHY9sRtlJyQy+SfvmqpiJOid+7LedFk
-         wHHb2JdB5o0eb21gYp/LXWzRjLCAYlpcczyxa/Doc/7qnWr/UUw4HDTMwmV+wrSnLA2s
-         s+fdhGqGUw/fw5CU3ArzeVP5NTyMPp1bh8z1Q0gA2qWc0JQWD1sFUZPOv0f/QMH/r6in
-         m1NIqqVXRpvEhVSmtPvHyjzJrsVjW64YnBopubDiNHuS4sAFwjvvV6OUb0R7vvjA7+vI
-         ilug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776615155; x=1777219955;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=B17bAyfAm7uzzttww80XtUu6/K1MgSIE6Bs+vc9UHtw=;
-        b=LIIa+7u3Fhme5W53YxPdk3eDdD3B8lsO8dd0/6GFZ9iWJzP2TqzipZ5y+4IOptLLgQ
-         Eo1XhlyCtv8K1uewdU86loii69RKd+Minc5XT0mMRr/BFcyto5Iz+qtddO1nScDcNLH+
-         7QEe4+oejPgrLXQ9eM9iD1K7B4nR8Jpmru0dW4csHxubBz2AZi1sUw5Q/MPagXTjAVvk
-         tcE6dYbjawfAdbf1PH6uf8lHVPqtWTKZAGbX0Ke3tg/ix2ElwAMbjzMI2NzZynStWSKT
-         axb3knW9Vkk12/MWvE79uZd4RFXphPqjHutJHXKhTu3+XoMNaWZLx1TeVR1x6jMN60tR
-         zobA==
-X-Forwarded-Encrypted: i=1; AFNElJ+N3NPBIchsZwQB2dIc7WriZA5MTaNWYq/zA5ljtMKRbogY2TN13DdYEfwNrVb2mGzXjO0WbA6eE8ni9LqM@lists.linaro.org
-X-Gm-Message-State: AOJu0YzXPLNZK6BHprNWZo8EocIgUFTyFzt6W7oaKTcrz4Yhf2oYXe+W
-	0xa5tO/2iDu1AL4w755SMMSUK9d2mXuSc1jEJDFg26QUf5h6NDJMnETK
-X-Gm-Gg: AeBDievUQBgMKg1GxRM+QQjAsOTP7Q+U6ECxe/RcXQ1Pmhpjxp6knpnw1xdR+QgUzUn
-	u5sLBi6K/RZZ7vjEOJ4oUJXa0YuNLuo3L+IiX04aiSkEXxKRWpclDsA1XXu5LfH6J21Sy6mRdmU
-	VW2e/mmXmWQavBFpVtjQU4PcPxpBSdR/wzfPI0cd8+Oh7rJ5l311qJDSp1hPJ4frVL/+U4oCd7F
-	0sKGgUSBl+Wk8VNnL5vxEKe/QXpt2fOL975cYfvXt8AUo3LAdfrP2O8KgORVpFM2LQ54Fu1nP0F
-	kS7iwUtyEjbVGRSueV36hXO9b+Qvd8ManivxaZF9gfvJmF3AKVr8UmZLdDaISteL+H3WwFndPRY
-	c1aojWcsfs5pM8RqC4OeZE9TJxw58Ucw8wcH2BCnbTry33MNMsnhMsaYTJ0dEJ4l2Mo3bU3hl/M
-	VE3SUZ7Wy5WpMQ5EIvHT3YaKgr5SCjka/Irnbc9CwqrCH+5lykq98316Y/Dtrou0n+bn43FaO9E
-	QL0AlLLHxB9mBToBlQ4fxnxZpMv/no=
-X-Received: by 2002:a05:620a:2844:b0:8b2:1ee9:dcfb with SMTP id af79cd13be357-8e78f82cf5emr1427279685a.8.1776615155112;
-        Sun, 19 Apr 2026 09:12:35 -0700 (PDT)
-Received: from server0 (c-68-48-65-54.hsd1.mi.comcast.net. [68.48.65.54])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-8e7d8edb795sm598271385a.25.2026.04.19.09.12.33
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 19 Apr 2026 09:12:34 -0700 (PDT)
-From: Michael Bommarito <michael.bommarito@gmail.com>
-To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Date: Sun, 19 Apr 2026 12:12:27 -0400
-Message-ID: <20260419161227.1587668-1-michael.bommarito@gmail.com>
-X-Mailer: git-send-email 2.53.0
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=ferli2cG;
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	spf=pass (lists.linaro.org: domain of aneesh.kumar@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=aneesh.kumar@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by sea.source.kernel.org (Postfix) with ESMTP id 0626F42DE2;
+	Mon, 20 Apr 2026 06:34:17 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2DDE9C19425;
+	Mon, 20 Apr 2026 06:34:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1776666856;
+	bh=SIQzikZxZrp71GghANcUxQ34/VjF6aP3rRJUnE4qCP0=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=ferli2cGr0NulEsabkChnw3zEB6FRv162hX/dUU+qBVnao9EBzZ/UbCTXcYJK95YT
+	 9hHCCNaUTp6TYIwUtfw/AsX3bZXymXbQR7MQMQ44aDjdx1ZlMpV8hUYMcujSEcR454
+	 J7ZWrp0TNt7d6tHYs9bZOu7qoXctDQuHXGZALhr+0sP5+ub98rzuAQeJj81AnLLNVG
+	 Pc0lHdaXgajlQCpnSTIWFrooAeIiupbYNMujX8uW6ZvCMUJmP5zJid9v2rvFE6KPgt
+	 fzL/CDnGdhfmxbLG3WsxnBM8SvFhNhAiyU4nC6/JtJF79tkLrIcNrSnSPqLXO9sbrv
+	 72pq1x20ubACQ==
+X-Mailer: emacs 30.2 (via feedmail 11-beta-1 I)
+From: Aneesh Kumar K.V <aneesh.kumar@kernel.org>
+To: Jiri Pirko <jiri@resnulli.us>, dri-devel@lists.freedesktop.org,
+	linaro-mm-sig@lists.linaro.org, iommu@lists.linux.dev,
+	linux-media@vger.kernel.org
+In-Reply-To: <20260325192352.437608-2-jiri@resnulli.us>
+References: <20260325192352.437608-1-jiri@resnulli.us>
+ <20260325192352.437608-2-jiri@resnulli.us>
+Date: Mon, 20 Apr 2026 12:04:06 +0530
+Message-ID: <yq5atst6ywbl.fsf@kernel.org>
 MIME-Version: 1.0
-X-Spamd-Bar: --
-X-MailFrom: michael.bommarito@gmail.com
+X-Spamd-Bar: ----
+X-MailFrom: aneesh.kumar@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 3P53FXP5HZ7RCHXG2EJXBBWWK3YTUSTZ
-X-Message-ID-Hash: 3P53FXP5HZ7RCHXG2EJXBBWWK3YTUSTZ
-X-Mailman-Approved-At: Mon, 20 Apr 2026 17:44:55 +0000
-CC: Al Viro <viro@zeniv.linux.org.uk>, Sam Day <me@samcday.com>, Christian Brauner <brauner@kernel.org>, Ingo Rohloff <ingo.rohloff@lauterbach.com>, Paul Cercueil <paul@crapouillou.net>, Sumit Semwal <sumit.semwal@linaro.org>, Christian Koenig <christian.koenig@amd.com>, Simona Vetter <simona.vetter@ffwll.ch>, Kees Cook <kees@kernel.org>, linux-usb@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org
+Message-ID-Hash: Z74ALNAJODWFFUBRWMD3TFPVVJLGN63B
+X-Message-ID-Hash: Z74ALNAJODWFFUBRWMD3TFPVVJLGN63B
+X-Mailman-Approved-At: Mon, 20 Apr 2026 17:44:56 +0000
+CC: sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, Brian.Starkey@arm.com, jstultz@google.com, tjmercier@google.com, christian.koenig@amd.com, robin.murphy@arm.com, jgg@ziepe.ca, leon@kernel.org, sean.anderson@linux.dev, ptesarik@suse.com, catalin.marinas@arm.com, suzuki.poulose@arm.com, steven.price@arm.com, thomas.lendacky@amd.com, john.allen@amd.com, ashish.kalra@amd.com, suravee.suthikulpanit@amd.com, linux-coco@lists.linux.dev
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH] usb: gadget: f_fs: serialize DMABUF cancel against request completion
+Subject: [Linaro-mm-sig] Re: [PATCH v5 1/2] dma-mapping: introduce DMA_ATTR_CC_SHARED for shared memory
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3P53FXP5HZ7RCHXG2EJXBBWWK3YTUSTZ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/Z74ALNAJODWFFUBRWMD3TFPVVJLGN63B/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [1.59 / 15.00];
-	DATE_IN_PAST(1.00)[25];
-	R_DKIM_REJECT(1.00)[gmail.com:s=20251104];
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+X-Spamd-Result: default: False [2.09 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
+	R_DKIM_REJECT(1.00)[kernel.org:s=k20201202];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx:c];
+	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	ARC_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCPT_COUNT_TWELVE(0.00)[15];
+	RCPT_COUNT_TWELVE(0.00)[24];
+	DKIM_TRACE(0.00)[kernel.org:-];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.988];
-	FROM_NEQ_ENVFROM(0.00)[michaelbommarito@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	NEURAL_HAM(-0.00)[-0.970];
+	FROM_NEQ_ENVFROM(0.00)[aneesh.kumar@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:-];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
-X-Rspamd-Queue-Id: 9B4A64320A6
+	DBL_BLOCKED_OPENRESOLVER(0.00)[resnulli.us:email,nvidia.com:email,lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
+X-Rspamd-Queue-Id: 95DE94320AD
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-ffs_epfile_dmabuf_io_complete() calls usb_ep_free_request() on the
-completed request but leaves priv->req, the back-pointer that
-ffs_dmabuf_transfer() set on submission, pointing at the freed
-memory.  A later FUNCTIONFS_DMABUF_DETACH ioctl or
-ffs_epfile_release() on the close path still sees priv->req
-non-NULL under ffs->eps_lock:
-
-    if (priv->ep && priv->req)
-            usb_ep_dequeue(priv->ep, priv->req);
-
-so usb_ep_dequeue() is called on a freed usb_request.
-
-On dummy_hcd the dequeue path only walks a live queue and
-pointer-compares, so the freed pointer reads without faulting and
-KASAN requires an explicit check at the FunctionFS call site to
-surface the use-after-free.  On SG-capable in-tree UDCs the
-dequeue path dereferences the supplied request immediately:
-
-  * chipidea's ep_dequeue() does
-    container_of(req, struct ci_hw_req, req) and reads
-    hwreq->req.status before acquiring its own lock.
-  * cdnsp's cdnsp_gadget_ep_dequeue() reads request->status first.
-
-The narrower option of clearing priv->req via cmpxchg() in the
-completion does not close the race: the completion runs without
-eps_lock, so a cancel path holding eps_lock can still observe
-priv->req non-NULL, race a concurrent completion that clears and
-frees, and pass the freed pointer to usb_ep_dequeue().  A slightly
-longer fix that moves the free into the cleanup work is needed.
-
-Same class of lifetime race as the recent usbip-vudc timer fix [1].
-
-Take eps_lock in the sole place that mutates priv->req from the
-callback direction by moving usb_ep_free_request() out of the
-completion into ffs_dmabuf_cleanup(), the existing work handler
-scheduled by ffs_dmabuf_signal_done() on
-ffs->io_completion_wq.  Clear priv->req there under eps_lock
-before freeing, and only clear if priv->req still names our
-request (a subsequent ffs_dmabuf_transfer() on the same
-attachment may have queued a new one).
-
-This keeps the existing dummy_hcd sync-dequeue invariant: the
-completion callback is still invoked by the UDC without
-eps_lock held (dummy_hcd drops its own lock before calling the
-callback), and the callback now takes no f_fs lock at all.
-Serialization against the cancel path happens in cleanup, which
-runs from the workqueue with no f_fs lock held on entry.
-
-The priv ref count protects the containing ffs_dmabuf_priv:
-ffs_dmabuf_transfer() takes a ref via ffs_dmabuf_get(), cleanup
-drops it via ffs_dmabuf_put(), so priv stays live for the
-cleanup even after the cancel path's list_del + ffs_dmabuf_put.
-
-The ffs_dmabuf_transfer() error path no longer frees usb_req
-inline: fence->req and fence->ep are set before usb_ep_queue(),
-so ffs_dmabuf_cleanup() (scheduled by the error-path
-ffs_dmabuf_signal_done()) owns the free regardless of whether
-the queue succeeded.
-
-Reproduced under KASAN on both detach and close paths against
-dummy_hcd with an observability hook
-(kasan_check_byte(priv->req) immediately before usb_ep_dequeue)
-at the two FunctionFS cancel sites to surface the stale-pointer
-access; the hook is not part of this patch.  The KASAN
-allocator / free stacks in the captured splats identify the
-same request: alloc in dummy_alloc_request, free in
-dummy_timer, fault reached from ffs_epfile_release (close) and
-from the FUNCTIONFS_DMABUF_DETACH ioctl (detach).  With the
-patch applied, both paths are silent under the same hook.
-
-The bug is reached from the FunctionFS device node, which in
-real deployments is owned by the privileged gadget daemon
-(adbd, UMS, composite gadget services, etc.); it is not
-reachable from unprivileged userspace or from a USB host on the
-cable.  FunctionFS mounts default to GLOBAL_ROOT_UID, but the
-filesystem supports uid=, gid=, and fmode= delegation to a
-non-root gadget daemon, so on real deployments the attacker may
-be a less-privileged service rather than root.
-
-Fixes: 7b07a2a7ca02 ("usb: gadget: functionfs: Add DMABUF import interface")
-Link: https://lore.kernel.org/all/20260417163552.807548-1-michael.bommarito@gmail.com/ [1]
-Cc: stable@vger.kernel.org
-Assisted-by: Claude:claude-opus-4-7
-Signed-off-by: Michael Bommarito <michael.bommarito@gmail.com>
----
- drivers/usb/gadget/function/f_fs.c | 24 ++++++++++++++++++++++--
- 1 file changed, 22 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/usb/gadget/function/f_fs.c b/drivers/usb/gadget/function/f_fs.c
-index 815639506520..75912ce6ab55 100644
---- a/drivers/usb/gadget/function/f_fs.c
-+++ b/drivers/usb/gadget/function/f_fs.c
-@@ -150,6 +150,8 @@ struct ffs_dma_fence {
- 	struct dma_fence base;
- 	struct ffs_dmabuf_priv *priv;
- 	struct work_struct work;
-+	struct usb_ep *ep;
-+	struct usb_request *req;
- };
- 
- struct ffs_epfile {
-@@ -1385,6 +1387,21 @@ static void ffs_dmabuf_cleanup(struct work_struct *work)
- 	struct ffs_dmabuf_priv *priv = dma_fence->priv;
- 	struct dma_buf_attachment *attach = priv->attach;
- 	struct dma_fence *fence = &dma_fence->base;
-+	struct usb_request *req = dma_fence->req;
-+	struct usb_ep *ep = dma_fence->ep;
-+
-+	/*
-+	 * eps_lock pairs with the cancel paths so they cannot pass a freed
-+	 * req to usb_ep_dequeue().  Only clear if priv->req still names ours;
-+	 * a re-queue on the same attachment may have taken that slot.
-+	 */
-+	spin_lock_irq(&priv->ffs->eps_lock);
-+	if (priv->req == req)
-+		priv->req = NULL;
-+	spin_unlock_irq(&priv->ffs->eps_lock);
-+
-+	if (ep && req)
-+		usb_ep_free_request(ep, req);
- 
- 	ffs_dmabuf_put(attach);
- 	dma_fence_put(fence);
-@@ -1414,8 +1431,8 @@ static void ffs_epfile_dmabuf_io_complete(struct usb_ep *ep,
- 					  struct usb_request *req)
- {
- 	pr_vdebug("FFS: DMABUF transfer complete, status=%d\n", req->status);
-+	/* req is freed by ffs_dmabuf_cleanup() under eps_lock. */
- 	ffs_dmabuf_signal_done(req->context, req->status);
--	usb_ep_free_request(ep, req);
- }
- 
- static const char *ffs_dmabuf_get_driver_name(struct dma_fence *fence)
-@@ -1699,6 +1716,10 @@ static int ffs_dmabuf_transfer(struct file *file,
- 	usb_req->context  = fence;
- 	usb_req->complete = ffs_epfile_dmabuf_io_complete;
- 
-+	/* ffs_dmabuf_cleanup() frees usb_req via these two fields. */
-+	fence->req = usb_req;
-+	fence->ep = ep->ep;
-+
- 	cookie = dma_fence_begin_signalling();
- 	ret = usb_ep_queue(ep->ep, usb_req, GFP_ATOMIC);
- 	dma_fence_end_signalling(cookie);
-@@ -1708,7 +1729,6 @@ static int ffs_dmabuf_transfer(struct file *file,
- 	} else {
- 		pr_warn("FFS: Failed to queue DMABUF: %d\n", ret);
- 		ffs_dmabuf_signal_done(fence, ret);
--		usb_ep_free_request(ep->ep, usb_req);
- 	}
- 
- 	spin_unlock_irq(&epfile->ffs->eps_lock);
--- 
-2.53.0
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+SmlyaSBQaXJrbyA8amlyaUByZXNudWxsaS51cz4gd3JpdGVzOg0KDQo+IEZyb206IEppcmkgUGly
+a28gPGppcmlAbnZpZGlhLmNvbT4NCj4NCj4gQ3VycmVudCBDQyBkZXNpZ25zIGRvbid0IHBsYWNl
+IGEgdklPTU1VIGluIGZyb250IG9mIHVudHJ1c3RlZCBkZXZpY2VzLg0KPiBJbnN0ZWFkLCB0aGUg
+RE1BIEFQSSBmb3JjZXMgYWxsIHVudHJ1c3RlZCBkZXZpY2UgRE1BIHRocm91Z2ggc3dpb3RsYg0K
+PiBib3VuY2UgYnVmZmVycyAoaXNfc3dpb3RsYl9mb3JjZV9ib3VuY2UoKSkgd2hpY2ggY29waWVz
+IGRhdGEgaW50bw0KPiBzaGFyZWQgbWVtb3J5IG9uIGJlaGFsZiBvZiB0aGUgZGV2aWNlLg0KPg0K
+PiBXaGVuIGEgY2FsbGVyIGhhcyBhbHJlYWR5IGFycmFuZ2VkIGZvciB0aGUgbWVtb3J5IHRvIGJl
+IHNoYXJlZA0KPiB2aWEgc2V0X21lbW9yeV9kZWNyeXB0ZWQoKSwgdGhlIERNQSBBUEkgbmVlZHMg
+dG8ga25vdyBzbyBpdCBjYW4gbWFwDQo+IGRpcmVjdGx5IHVzaW5nIHRoZSB1bmVuY3J5cHRlZCBw
+aHlzaWNhbCBhZGRyZXNzIHJhdGhlciB0aGFuIGJvdW5jZQ0KPiBidWZmZXJpbmcuIEZvbGxvd2lu
+ZyB0aGUgcGF0dGVybiBvZiBETUFfQVRUUl9NTUlPLCBhZGQNCj4gRE1BX0FUVFJfQ0NfU0hBUkVE
+IGZvciB0aGlzIHB1cnBvc2UuIExpa2UgdGhlIE1NSU8gY2FzZSwgb25seSB0aGUNCj4gY2FsbGVy
+IGtub3dzIHdoYXQga2luZCBvZiBtZW1vcnkgaXQgaGFzIGFuZCBtdXN0IGluZm9ybSB0aGUgRE1B
+IEFQSQ0KPiBmb3IgaXQgdG8gd29yayBjb3JyZWN0bHkuDQo+DQo+IFNpZ25lZC1vZmYtYnk6IEpp
+cmkgUGlya28gPGppcmlAbnZpZGlhLmNvbT4NCj4gLS0tDQo+IHY0LT52NToNCj4gLSByZWJhc2Vk
+IG9uIHRvcCBvZCBkbWEtbWFwcGluZy1mb3ItbmV4dA0KPiAtIHMvZGVjcnlwdGVkL3NoYXJlZC8N
+Cj4gdjMtPnY0Og0KPiAtIGFkZGVkIHNvbWUgc2FuaXR5IGNoZWNrcyB0byBkbWFfbWFwX3BoeXMg
+YW5kIGRtYV91bm1hcF9waHlzDQo+IC0gZW5oYW5jZWQgZG9jdW1lbnRhdGlvbiBvZiBETUFfQVRU
+Ul9DQ19ERUNSWVBURUQgYXR0cg0KPiB2MS0+djI6DQo+IC0gcmViYXNlZCBvbiB0b3Agb2YgcmVj
+ZW50IGRtYS1tYXBwaW5nLWZpeGVzDQo+IC0tLQ0KPiAgaW5jbHVkZS9saW51eC9kbWEtbWFwcGlu
+Zy5oIHwgMTAgKysrKysrKysrKw0KPiAgaW5jbHVkZS90cmFjZS9ldmVudHMvZG1hLmggIHwgIDMg
+KystDQo+ICBrZXJuZWwvZG1hL2RpcmVjdC5oICAgICAgICAgfCAxNCArKysrKysrKysrKy0tLQ0K
+PiAga2VybmVsL2RtYS9tYXBwaW5nLmMgICAgICAgIHwgMTMgKysrKysrKysrKystLQ0KPiAgNCBm
+aWxlcyBjaGFuZ2VkLCAzNCBpbnNlcnRpb25zKCspLCA2IGRlbGV0aW9ucygtKQ0KPg0KPiBkaWZm
+IC0tZ2l0IGEvaW5jbHVkZS9saW51eC9kbWEtbWFwcGluZy5oIGIvaW5jbHVkZS9saW51eC9kbWEt
+bWFwcGluZy5oDQo+IGluZGV4IDY3N2M1MWFiNzUxMC4uZGI4YWIyNGE1NGY0IDEwMDY0NA0KPiAt
+LS0gYS9pbmNsdWRlL2xpbnV4L2RtYS1tYXBwaW5nLmgNCj4gKysrIGIvaW5jbHVkZS9saW51eC9k
+bWEtbWFwcGluZy5oDQo+IEBAIC05Miw2ICs5MiwxNiBAQA0KPiAgICogZmx1c2hpbmcuDQo+ICAg
+Ki8NCj4gICNkZWZpbmUgRE1BX0FUVFJfUkVRVUlSRV9DT0hFUkVOVAkoMVVMIDw8IDEyKQ0KPiAr
+LyoNCj4gKyAqIERNQV9BVFRSX0NDX1NIQVJFRDogSW5kaWNhdGVzIHRoZSBETUEgbWFwcGluZyBp
+cyBzaGFyZWQgKGRlY3J5cHRlZCkgZm9yDQo+ICsgKiBjb25maWRlbnRpYWwgY29tcHV0aW5nIGd1
+ZXN0cy4gRm9yIG5vcm1hbCBzeXN0ZW0gbWVtb3J5IHRoZSBjYWxsZXIgbXVzdCBoYXZlDQo+ICsg
+KiBjYWxsZWQgc2V0X21lbW9yeV9kZWNyeXB0ZWQoKSwgYW5kIHBncHJvdF9kZWNyeXB0ZWQgbXVz
+dCBiZSB1c2VkIHdoZW4NCj4gKyAqIGNyZWF0aW5nIENQVSBQVEVzIGZvciB0aGUgbWFwcGluZy4g
+VGhlIHNhbWUgc2hhcmVkIHNlbWFudGljIG1heSBiZSBwYXNzZWQNCj4gKyAqIHRvIHRoZSB2SU9N
+TVUgd2hlbiBpdCBzZXRzIHVwIHRoZSBJT1BURS4gRm9yIE1NSU8gdXNlIHRvZ2V0aGVyIHdpdGgN
+Cj4gKyAqIERNQV9BVFRSX01NSU8gdG8gaW5kaWNhdGUgc2hhcmVkIE1NSU8uIFVubGVzcyBETUFf
+QVRUUl9NTUlPIGlzIHByb3ZpZGVkDQo+ICsgKiBhIHN0cnVjdCBwYWdlIGlzIHJlcXVpcmVkLg0K
+PiArICovDQo+ICsjZGVmaW5lIERNQV9BVFRSX0NDX1NIQVJFRAkoMVVMIDw8IDEzKQ0KPiAgDQo+
+ICAvKg0KPiAgICogQSBkbWFfYWRkcl90IGNhbiBob2xkIGFueSB2YWxpZCBETUEgb3IgYnVzIGFk
+ZHJlc3MgZm9yIHRoZSBwbGF0Zm9ybS4gIEl0IGNhbg0KPiBkaWZmIC0tZ2l0IGEvaW5jbHVkZS90
+cmFjZS9ldmVudHMvZG1hLmggYi9pbmNsdWRlL3RyYWNlL2V2ZW50cy9kbWEuaA0KPiBpbmRleCA2
+MzU5N2IwMDQ0MjQuLjMxYzlkZGY3MmM5ZCAxMDA2NDQNCj4gLS0tIGEvaW5jbHVkZS90cmFjZS9l
+dmVudHMvZG1hLmgNCj4gKysrIGIvaW5jbHVkZS90cmFjZS9ldmVudHMvZG1hLmgNCj4gQEAgLTM0
+LDcgKzM0LDggQEAgVFJBQ0VfREVGSU5FX0VOVU0oRE1BX05PTkUpOw0KPiAgCQl7IERNQV9BVFRS
+X1BSSVZJTEVHRUQsICJQUklWSUxFR0VEIiB9LCBcDQo+ICAJCXsgRE1BX0FUVFJfTU1JTywgIk1N
+SU8iIH0sIFwNCj4gIAkJeyBETUFfQVRUUl9ERUJVR0dJTkdfSUdOT1JFX0NBQ0hFTElORVMsICJD
+QUNIRUxJTkVTX09WRVJMQVAiIH0sIFwNCj4gLQkJeyBETUFfQVRUUl9SRVFVSVJFX0NPSEVSRU5U
+LCAiUkVRVUlSRV9DT0hFUkVOVCIgfSkNCj4gKwkJeyBETUFfQVRUUl9SRVFVSVJFX0NPSEVSRU5U
+LCAiUkVRVUlSRV9DT0hFUkVOVCIgfSwgXA0KPiArCQl7IERNQV9BVFRSX0NDX1NIQVJFRCwgIkND
+X1NIQVJFRCIgfSkNCj4gIA0KPiAgREVDTEFSRV9FVkVOVF9DTEFTUyhkbWFfbWFwLA0KPiAgCVRQ
+X1BST1RPKHN0cnVjdCBkZXZpY2UgKmRldiwgcGh5c19hZGRyX3QgcGh5c19hZGRyLCBkbWFfYWRk
+cl90IGRtYV9hZGRyLA0KPiBkaWZmIC0tZ2l0IGEva2VybmVsL2RtYS9kaXJlY3QuaCBiL2tlcm5l
+bC9kbWEvZGlyZWN0LmgNCj4gaW5kZXggYjg2ZmY2NTQ5NmZjLi43MTQwYzIwOGMxMjMgMTAwNjQ0
+DQo+IC0tLSBhL2tlcm5lbC9kbWEvZGlyZWN0LmgNCj4gKysrIGIva2VybmVsL2RtYS9kaXJlY3Qu
+aA0KPiBAQCAtODksMTYgKzg5LDI0IEBAIHN0YXRpYyBpbmxpbmUgZG1hX2FkZHJfdCBkbWFfZGly
+ZWN0X21hcF9waHlzKHN0cnVjdCBkZXZpY2UgKmRldiwNCj4gIAlkbWFfYWRkcl90IGRtYV9hZGRy
+Ow0KPiAgDQo+ICAJaWYgKGlzX3N3aW90bGJfZm9yY2VfYm91bmNlKGRldikpIHsNCj4gLQkJaWYg
+KGF0dHJzICYgKERNQV9BVFRSX01NSU8gfCBETUFfQVRUUl9SRVFVSVJFX0NPSEVSRU5UKSkNCj4g
+LQkJCXJldHVybiBETUFfTUFQUElOR19FUlJPUjsNCj4gKwkJaWYgKCEoYXR0cnMgJiBETUFfQVRU
+Ul9DQ19TSEFSRUQpKSB7DQo+ICsJCQlpZiAoYXR0cnMgJiAoRE1BX0FUVFJfTU1JTyB8IERNQV9B
+VFRSX1JFUVVJUkVfQ09IRVJFTlQpKQ0KPiArCQkJCXJldHVybiBETUFfTUFQUElOR19FUlJPUjsN
+Cj4gIA0KPiAtCQlyZXR1cm4gc3dpb3RsYl9tYXAoZGV2LCBwaHlzLCBzaXplLCBkaXIsIGF0dHJz
+KTsNCj4gKwkJCXJldHVybiBzd2lvdGxiX21hcChkZXYsIHBoeXMsIHNpemUsIGRpciwgYXR0cnMp
+Ow0KPiArCQl9DQo+ICsJfSBlbHNlIGlmIChhdHRycyAmIERNQV9BVFRSX0NDX1NIQVJFRCkgew0K
+PiArCQlyZXR1cm4gRE1BX01BUFBJTkdfRVJST1I7DQo+ICAJfQ0KPg0KDQpXaGF0IGlzIHRoaXMg
+Y2hlY2sgZm9yPyBJZiB3ZSBhcmUgcmVxdWVzdGluZyBhIERNQSBtYXBwaW5nIHdpdGgNCkRNQV9B
+VFRSX0NDX1NIQVJFRCwgc2hvdWxkbuKAmXQgaXQgYmUgYWxsb3dlZD8gSWYgbm90LCBob3cgd291
+bGQgd2UgcmVhY2gNCnRoZSBjb25kaXRpb25hbCBiZWxvdyB3aGVyZSB3ZSBjb252ZXJ0IHRoZSBw
+aHlzaWNhbCBhZGRyZXNzIHRvIGEgRE1BDQphZGRyZXNzIHVzaW5nIHBoeXNfdG9fZG1hX3VuZW5j
+cnlwdGVkKCk/LiBBbHNvLCBob3cgaXMgdGhpcyBzdXBwb3NlZCB0bw0KaW50ZXJhY3Qgd2l0aCBp
+c19zd2lvdGxiX2ZvcmNlX2JvdW5jZSgpP+KAnQ0KDQo+ICANCj4gIAlpZiAoYXR0cnMgJiBETUFf
+QVRUUl9NTUlPKSB7DQo+ICAJCWRtYV9hZGRyID0gcGh5czsNCj4gIAkJaWYgKHVubGlrZWx5KCFk
+bWFfY2FwYWJsZShkZXYsIGRtYV9hZGRyLCBzaXplLCBmYWxzZSkpKQ0KPiAgCQkJZ290byBlcnJf
+b3ZlcmZsb3c7DQo+ICsJfSBlbHNlIGlmIChhdHRycyAmIERNQV9BVFRSX0NDX1NIQVJFRCkgew0K
+PiArCQlkbWFfYWRkciA9IHBoeXNfdG9fZG1hX3VuZW5jcnlwdGVkKGRldiwgcGh5cyk7DQo+ICsJ
+CWlmICh1bmxpa2VseSghZG1hX2NhcGFibGUoZGV2LCBkbWFfYWRkciwgc2l6ZSwgZmFsc2UpKSkN
+Cj4gKwkJCWdvdG8gZXJyX292ZXJmbG93Ow0KPiAgCX0gZWxzZSB7DQo+ICAJCWRtYV9hZGRyID0g
+cGh5c190b19kbWEoZGV2LCBwaHlzKTsNCj4gIAkJaWYgKHVubGlrZWx5KCFkbWFfY2FwYWJsZShk
+ZXYsIGRtYV9hZGRyLCBzaXplLCB0cnVlKSkgfHwNCg0KLWFuZWVzaA0KX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxp
+c3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQg
+YW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
