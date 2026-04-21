@@ -2,49 +2,49 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id AMsbI4kL6GkgEgIAu9opvQ
+	id mGnuGZML6GkzEgIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Apr 2026 01:43:05 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Apr 2026 01:43:15 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5E5F0440A44
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Apr 2026 01:43:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0CB61440A89
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Apr 2026 01:43:14 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7BCB640517
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 21 Apr 2026 23:43:04 +0000 (UTC)
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-	by lists.linaro.org (Postfix) with ESMTPS id 53D02404E5
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 21 Apr 2026 23:42:56 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 21588404D3
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 21 Apr 2026 23:43:14 +0000 (UTC)
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+	by lists.linaro.org (Postfix) with ESMTPS id D41DA40517
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 21 Apr 2026 23:42:59 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=gERfEgE9;
+	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=dcrZKf2N;
 	dmarc=pass (policy=quarantine) header.from=redhat.com;
-	spf=pass (lists.linaro.org: domain of lyude@redhat.com designates 170.10.129.124 as permitted sender) smtp.mailfrom=lyude@redhat.com
+	spf=pass (lists.linaro.org: domain of lyude@redhat.com designates 170.10.133.124 as permitted sender) smtp.mailfrom=lyude@redhat.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1776814976;
+	s=mimecast20190719; t=1776814979;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=WX8GF8QjZYpTHNcCIWqfIkVacO9JeuGdxARtANDN6u8=;
-	b=gERfEgE96GubCzvllMs2PvXKZn+j7JfAk+7ZhxZuWrWJMGNH7B/OBXUUYfWsqDgFsmtzn9
-	SXkzJs5Ted/5eOltJg7YKZDuqA91CaSLnrcbGWLpmIku9HdzHgwMKQ1KSLW9oiviBPb6If
-	+yWpvzVkb9RhOu+n1Ikfk6DRBzjEzco=
-Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+	bh=Jpiw4NbDlnr2VDVswPGwDPVhLnXvWCUe2RwuNRF/TFk=;
+	b=dcrZKf2N9t7ubCCIb348ni6FrwZP7XI5220qnnRYoLTIsAiieYv1xNDoZf1hH7FLoqrtc7
+	kCezUkCpr7nGI/KaEVcL03s0rTFDR3QDN0NdBhFRkW2ClRasUFpjHMqsjV/0Cdx6fVnvA0
+	5jRRj2MD7agRbDyg19lNpS8jsQDHro8=
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-97-b8tNv6ojN6uyujB6V__tuw-1; Tue,
- 21 Apr 2026 19:42:52 -0400
-X-MC-Unique: b8tNv6ojN6uyujB6V__tuw-1
-X-Mimecast-MFC-AGG-ID: b8tNv6ojN6uyujB6V__tuw_1776814969
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-376-O_rB290LNym1inC3GixdfA-1; Tue,
+ 21 Apr 2026 19:42:55 -0400
+X-MC-Unique: O_rB290LNym1inC3GixdfA-1
+X-Mimecast-MFC-AGG-ID: O_rB290LNym1inC3GixdfA_1776814972
 Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id C61061956048;
-	Tue, 21 Apr 2026 23:42:48 +0000 (UTC)
+	by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id B792B1800367;
+	Tue, 21 Apr 2026 23:42:52 +0000 (UTC)
 Received: from GoldenWind.lan (unknown [10.22.80.14])
-	by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id 19A041800660;
-	Tue, 21 Apr 2026 23:42:44 +0000 (UTC)
+	by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id 2D004180045E;
+	Tue, 21 Apr 2026 23:42:48 +0000 (UTC)
 From: Lyude Paul <lyude@redhat.com>
 To: nouveau@lists.freedesktop.org,
 	Gary Guo <gary@garyguo.net>,
@@ -52,25 +52,25 @@ To: nouveau@lists.freedesktop.org,
 	rust-for-linux@vger.kernel.org,
 	Danilo Krummrich <dakr@kernel.org>,
 	dri-devel@lists.freedesktop.org
-Date: Tue, 21 Apr 2026 19:40:37 -0400
-Message-ID: <20260421234234.638503-2-lyude@redhat.com>
+Date: Tue, 21 Apr 2026 19:40:38 -0400
+Message-ID: <20260421234234.638503-3-lyude@redhat.com>
 In-Reply-To: <20260421234234.638503-1-lyude@redhat.com>
 References: <20260421234234.638503-1-lyude@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
-X-Mimecast-MFC-PROC-ID: IwAdoORg-f-b_9LQKrnE44mNq5m2kGex1bw4QJUOC0Y_1776814969
+X-Mimecast-MFC-PROC-ID: zFW1qJwRumAMtCgKvmYWhlisU6ZF2JDeRg8D0fBHejY_1776814972
 X-Mimecast-Originator: redhat.com
 X-Spamd-Bar: -----
-Message-ID-Hash: XOBMBCQAAJW6TVGKNSYNPUZ2EIHV5PEF
-X-Message-ID-Hash: XOBMBCQAAJW6TVGKNSYNPUZ2EIHV5PEF
+Message-ID-Hash: JUKHXB75VG5JSGT6QO3RFVKGSEGGHKNN
+X-Message-ID-Hash: JUKHXB75VG5JSGT6QO3RFVKGSEGGHKNN
 X-MailFrom: lyude@redhat.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: Matthew Maurer <mmaurer@google.com>, FUJITA Tomonori <fujita.tomonori@gmail.com>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, christian.koenig@amd.com, Asahi Lina <lina@asahilina.net>, Miguel Ojeda <ojeda@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, Simona Vetter <simona@ffwll.ch>, Alice Ryhl <aliceryhl@google.com>, Boqun Feng <boqun@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Krishna Ketan Rai <prafulrai522@gmail.com>, linux-media@vger.kernel.org, Shankari Anand <shankari.ak0208@gmail.com>, David Airlie <airlied@gmail.com>, Benno Lossin <lossin@kernel.org>, Viresh Kumar <viresh.kumar@linaro.org>, linaro-mm-sig@lists.linaro.org, Asahi Lina <lina+kernel@asahilina.net>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v11 1/5] rust: drm: gem: s/device::Device/Device/ for shmem.rs
+Subject: [Linaro-mm-sig] [PATCH v11 2/5] drm/gem/shmem: Introduce __drm_gem_shmem_free_sgt_locked()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XOBMBCQAAJW6TVGKNSYNPUZ2EIHV5PEF/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JUKHXB75VG5JSGT6QO3RFVKGSEGGHKNN/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -102,67 +102,101 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	FROM_NEQ_ENVFROM(0.00)[lyude@redhat.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[redhat.com:-];
-	NEURAL_HAM(-0.00)[-0.916];
+	NEURAL_HAM(-0.00)[-0.935];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	TAGGED_RCPT(0.00)[linaro-mm-sig,kernel];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email]
-X-Rspamd-Queue-Id: 5E5F0440A44
+	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,linaro.org:email]
+X-Rspamd-Queue-Id: 0CB61440A89
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-We're about to start explicitly mentioning kernel devices as well in this
-file, so this makes it easier to differentiate the two by allowing us to
-import `device` as `kernel::device`.
+One of the complications of trying to use the shmem helpers to create a
+scatterlist for shmem objects is that we need to be able to provide a
+guarantee that the driver cannot be unbound for the lifetime of the
+scatterlist.
+
+The easiest way of handling this seems to be just hooking up an unmap
+operation to devres the first time we create a scatterlist, which allows us
+to still take advantage of gem shmem facilities without breaking that
+guarantee. To allow for this, we extract __drm_gem_shmem_free_sgt_locked()
+- which allows a caller (e.g. the rust bindings) to manually unmap the sgt
+for a gem object as needed.
 
 Signed-off-by: Lyude Paul <lyude@redhat.com>
 Reviewed-by: Alexandre Courbot <acourbot@nvidia.com>
 
 ---
-V11:
-* Fix location of //
+V10:
+* Fix incorrect function name in documentation for
+  __drm_gem_shmem_release_sgt_locked()
 
- rust/kernel/drm/gem/shmem.rs | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ drivers/gpu/drm/drm_gem_shmem_helper.c | 32 +++++++++++++++++++++-----
+ include/drm/drm_gem_shmem_helper.h     |  1 +
+ 2 files changed, 27 insertions(+), 6 deletions(-)
 
-diff --git a/rust/kernel/drm/gem/shmem.rs b/rust/kernel/drm/gem/shmem.rs
-index d025fb0351954..11749c36e8695 100644
---- a/rust/kernel/drm/gem/shmem.rs
-+++ b/rust/kernel/drm/gem/shmem.rs
-@@ -12,10 +12,10 @@
- use crate::{
-     container_of,
-     drm::{
--        device,
-         driver,
-         gem,
--        private::Sealed, //
-+        private::Sealed,
-+        Device, //
-     },
-     error::to_result,
-     prelude::*,
-@@ -108,7 +108,7 @@ fn as_raw_shmem(&self) -> *mut bindings::drm_gem_shmem_object {
-     ///
-     /// Additional config options can be specified using `config`.
-     pub fn new(
--        dev: &device::Device<T::Driver>,
-+        dev: &Device<T::Driver>,
-         size: usize,
-         config: ObjectConfig<'_, T>,
-         args: T::Args,
-@@ -150,9 +150,9 @@ pub fn new(
-     }
+diff --git a/drivers/gpu/drm/drm_gem_shmem_helper.c b/drivers/gpu/drm/drm_gem_shmem_helper.c
+index 4500deef41278..d2c34a0e573a1 100644
+--- a/drivers/gpu/drm/drm_gem_shmem_helper.c
++++ b/drivers/gpu/drm/drm_gem_shmem_helper.c
+@@ -158,6 +158,30 @@ struct drm_gem_shmem_object *drm_gem_shmem_create(struct drm_device *dev, size_t
+ }
+ EXPORT_SYMBOL_GPL(drm_gem_shmem_create);
  
-     /// Returns the `Device` that owns this GEM object.
--    pub fn dev(&self) -> &device::Device<T::Driver> {
-+    pub fn dev(&self) -> &Device<T::Driver> {
-         // SAFETY: `dev` will have been initialized in `Self::new()` by `drm_gem_shmem_init()`.
--        unsafe { device::Device::from_raw((*self.as_raw()).dev) }
-+        unsafe { Device::from_raw((*self.as_raw()).dev) }
-     }
++/**
++ * __drm_gem_shmem_release_sgt_locked - Unpin and DMA unmap pages, and release the
++ * cached scatter/gather table for an shmem GEM object.
++ * @shmem: shmem GEM object
++ *
++ * If the passed shmem object has an active scatter/gather table for driver
++ * usage, this function will unmap it and release the memory associated with it.
++ * It is the responsibility of the caller to ensure it holds the dma_resv_lock
++ * for this object.
++ *
++ * Drivers should not need to call this function themselves, it is mainly
++ * intended for usage in the Rust shmem bindings.
++ */
++void __drm_gem_shmem_free_sgt_locked(struct drm_gem_shmem_object *shmem)
++{
++	dma_resv_assert_held(shmem->base.resv);
++
++	dma_unmap_sgtable(shmem->base.dev->dev, shmem->sgt, DMA_BIDIRECTIONAL, 0);
++	sg_free_table(shmem->sgt);
++	kfree(shmem->sgt);
++	shmem->sgt = NULL;
++}
++EXPORT_SYMBOL_GPL(__drm_gem_shmem_free_sgt_locked);
++
+ /**
+  * drm_gem_shmem_release - Release resources associated with a shmem GEM object.
+  * @shmem: shmem GEM object
+@@ -176,12 +200,8 @@ void drm_gem_shmem_release(struct drm_gem_shmem_object *shmem)
  
-     extern "C" fn free_callback(obj: *mut bindings::drm_gem_object) {
+ 		drm_WARN_ON(obj->dev, refcount_read(&shmem->vmap_use_count));
+ 
+-		if (shmem->sgt) {
+-			dma_unmap_sgtable(obj->dev->dev, shmem->sgt,
+-					  DMA_BIDIRECTIONAL, 0);
+-			sg_free_table(shmem->sgt);
+-			kfree(shmem->sgt);
+-		}
++		if (shmem->sgt)
++			__drm_gem_shmem_free_sgt_locked(shmem);
+ 		if (shmem->pages)
+ 			drm_gem_shmem_put_pages_locked(shmem);
+ 
+diff --git a/include/drm/drm_gem_shmem_helper.h b/include/drm/drm_gem_shmem_helper.h
+index 5ccdae21b94a9..b2c23af628e1a 100644
+--- a/include/drm/drm_gem_shmem_helper.h
++++ b/include/drm/drm_gem_shmem_helper.h
+@@ -111,6 +111,7 @@ int drm_gem_shmem_init(struct drm_device *dev, struct drm_gem_shmem_object *shme
+ struct drm_gem_shmem_object *drm_gem_shmem_create(struct drm_device *dev, size_t size);
+ void drm_gem_shmem_release(struct drm_gem_shmem_object *shmem);
+ void drm_gem_shmem_free(struct drm_gem_shmem_object *shmem);
++void __drm_gem_shmem_free_sgt_locked(struct drm_gem_shmem_object *shmem);
+ 
+ void drm_gem_shmem_put_pages_locked(struct drm_gem_shmem_object *shmem);
+ int drm_gem_shmem_pin(struct drm_gem_shmem_object *shmem);
 -- 
 2.53.0
 
