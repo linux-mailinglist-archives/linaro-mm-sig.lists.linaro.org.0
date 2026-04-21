@@ -2,36 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id YP7RKSAn52nV4QEAu9opvQ
+	id 6Ea7Go8n52kf4wEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 21 Apr 2026 09:28:32 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 21 Apr 2026 09:30:23 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5AA074378F3
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 21 Apr 2026 09:28:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E14B243798D
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 21 Apr 2026 09:30:22 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 75DEC4049D
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 21 Apr 2026 07:28:31 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7A793404EB
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 21 Apr 2026 07:30:21 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 54029401DB
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 21 Apr 2026 07:28:25 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D6D974049D
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 21 Apr 2026 07:30:14 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: divedtomson@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Tue, 21 Apr 2026 07:28:25 -0000
-Message-ID: <177675650534.2487331.17829504170776420074@lists.linaro.org>
+Date: Tue, 21 Apr 2026 07:30:14 -0000
+Message-ID: <177675661487.2490048.7046738676425215941@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: 6VU6VCKOJW5KU6QZ3ACHJFTNLOBHSIFI
-X-Message-ID-Hash: 6VU6VCKOJW5KU6QZ3ACHJFTNLOBHSIFI
+Message-ID-Hash: 324R4IZZJCC4ECJJPWYDLEHEFPR5GKZ4
+X-Message-ID-Hash: 324R4IZZJCC4ECJJPWYDLEHEFPR5GKZ4
 X-MailFrom: divedtomson@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Kokain ohne Rezept bestellen
+Subject: [Linaro-mm-sig] Was ist Kokain? | Hochwertiges Kokain zu kaufen
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6VU6VCKOJW5KU6QZ3ACHJFTNLOBHSIFI/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/324R4IZZJCC4ECJJPWYDLEHEFPR5GKZ4/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -41,30 +41,31 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Transfer-Encoding: base64
 X-Spamd-Result: default: False [0.69 / 15.00];
 	MID_RHS_MATCH_TO(1.00)[];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx:c];
-	MIME_BASE64_TEXT(0.10)[];
-	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
+	MIME_GOOD(-0.10)[text/plain];
+	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[divedtomson@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
-	ARC_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FROM_NO_DN(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	ARC_NA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	RCPT_COUNT_ONE(0.00)[1];
+	SUBJECT_HAS_QUESTION(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	FREEMAIL_FROM(0.00)[gmail.com];
 	TO_DN_NONE(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[divedtomson@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_NO_DN(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	R_DKIM_NA(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:mid,lists.linaro.org:helo,lists.linaro.org:rdns]
-X-Rspamd-Queue-Id: 5AA074378F3
+X-Rspamd-Queue-Id: E14B243798D
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
