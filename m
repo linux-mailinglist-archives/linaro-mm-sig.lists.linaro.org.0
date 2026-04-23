@@ -2,202 +2,566 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4BrBETUf6mntuQIAu9opvQ
+	id UJx4NlNI6mkhxgIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 23 Apr 2026 15:31:33 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 23 Apr 2026 18:26:59 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id C9DC7452F24
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 23 Apr 2026 15:31:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8C573454DDF
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 23 Apr 2026 18:26:59 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3ABDD404A5
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 23 Apr 2026 13:31:31 +0000 (UTC)
-Received: from mail-ot1-f49.google.com (mail-ot1-f49.google.com [209.85.210.49])
-	by lists.linaro.org (Postfix) with ESMTPS id 09F914013A
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 23 Apr 2026 13:31:27 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 4E36E405D5
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 23 Apr 2026 16:26:58 +0000 (UTC)
+Received: from BN1PR04CU002.outbound.protection.outlook.com (mail-eastus2azon11010003.outbound.protection.outlook.com [52.101.56.3])
+	by lists.linaro.org (Postfix) with ESMTPS id 21DFA4013A
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 23 Apr 2026 15:01:51 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=ndufresne-ca.20251104.gappssmtp.com header.s=20251104 header.b=CkpQeIg1;
-	dmarc=pass (policy=none) header.from=ndufresne.ca;
-	spf=pass (lists.linaro.org: domain of nicolas@ndufresne.ca designates 209.85.210.49 as permitted sender) smtp.mailfrom=nicolas@ndufresne.ca
-Received: by mail-ot1-f49.google.com with SMTP id 46e09a7af769-7dca00c1591so2033144a34.3
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 23 Apr 2026 06:31:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ndufresne-ca.20251104.gappssmtp.com; s=20251104; t=1776951086; x=1777555886; darn=lists.linaro.org;
-        h=mime-version:user-agent:autocrypt:references:in-reply-to:date:cc:to
-         :from:subject:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=OkIYMUDB7SvQNczi+a/z9LNo3qE9So2rbHE3TpVf25k=;
-        b=CkpQeIg1bdB79PDfiW/32XG2G8wtuRK4/01zy/+NS4q7KXmcO3lwuZwhx3QEmQznO6
-         yK+x9as7PuFfySCXFunyoepZ4ZD7BSmVZBGoglf7/W1rI9AVzgGQ7aEGSbE5vY86YNQu
-         YxKQeJKB3Dr1T88N94UL6gHzsK0U2ybq3WswFaYXFOzXIsZHKGozhNuAznidUFS8v3bi
-         UNOQLks63cR9qMnyKXnKluOhpp7IRk1xwZzO8IlHtg+DttVThb1oaerVK8P6UmJuQ6Ti
-         /FZulKHyN3gtrbrGlxDZSSgfmZVRwjNd4YDMTq9B+nApq5RupZ3PutlwrK6qZU+dzVbm
-         QiRg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776951086; x=1777555886;
-        h=mime-version:user-agent:autocrypt:references:in-reply-to:date:cc:to
-         :from:subject:message-id:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=OkIYMUDB7SvQNczi+a/z9LNo3qE9So2rbHE3TpVf25k=;
-        b=IJTT8IQbuvxmpB6HsIPZ8DqZKnQJ/o/VEXtKbYfhxwyCU415RMmlvNT1O8VhgEQ1uT
-         qLjk4P9azOUXU4AJe5sgxdlaVGc1hdbQwYYPeHX75lnIfayKL+bExTrPVM/X+92ue3My
-         p5lRwHfWZswWjIbUlzUIGJl0ao8wFJvw4jKNFWUyUmTNec7GRnfkAZOwbUtxhbFl8VzK
-         SX/DREI22Vma9LQKz61JSIvP4/zx3qfU9QoGc5JiA1YewnEQWE4kwXlUtPYTMXiUkjCH
-         yPe0kLeI9eYMsCc54h6M5PxUtQqC3HrtJ7HEgkQ9L4ngvpVC8CnK5TXVqw8hUP2ZU13Q
-         ssAg==
-X-Forwarded-Encrypted: i=1; AFNElJ95/CHQtaMZfzYlfxuSsjplSQqbMK7JyPUxMe3loxaD9ZEWtTsSUDuHvL7EE9JApqqggn90w8lhHf9c5Qlz@lists.linaro.org
-X-Gm-Message-State: AOJu0YzrRCx7zwCp7yx2ULnkXWUS1a2TSw/WjwQS5przICwheSgFRNFJ
-	J/Oj9+TBD39znY6rwtHwLENZ3gXu3KXwfn/IKUJLRPnUMZatiEemwjFzzmMTjqScE1w=
-X-Gm-Gg: AeBDiesAMwHsysX48cjleeBeuG0dNN7yrfpwCNTtUFhkAc6CB2ofduUCidb9+QLy+B+
-	DxeQ4e7fO2Pnpf7716LPBNzcFhKB+QwINy5iM547KIi2cJBvvVn8yvgRzOkPetsx7irNRsePwGR
-	m7bU4XIQ5vCvgspK/AgKtMItdOhdnlAUQNPE+Bajmn5inryhhz9QxNJlVkmYSiLEkl1WebSl5Gx
-	R3L0yFXGOgJcwtqY7ISwHbQ+h4l4uW8c3HjZZDBuOqmb5/NUxnekKM7OTtiFjMqo5jrs3PSWkir
-	PehXYjK/qlIxuMYGhl2k1+p/KNnzjQBAdqDbGadwtLElXrBaVAVhlBJMl9+2bDynn3fZK6bzNQd
-	A5lKDR8xBWP5quExxtwnahGb3qXrPbCdCeuJmMlK0HBzzUzV5ciZxjShRci/Uo02OyPEFJ3MH0N
-	Owyo6UBvAof5pgTnxNDLHNgVm+cQSOemGED4F9u/0y3dpLRuETJg==
-X-Received: by 2002:a05:6830:67d5:b0:7d7:d615:3040 with SMTP id 46e09a7af769-7dc951a8f7amr17141856a34.17.1776951085943;
-        Thu, 23 Apr 2026 06:31:25 -0700 (PDT)
-Received: from ?IPv6:2606:6d00:15:e06b::5ac? ([2606:6d00:15:e06b::5ac])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-8b02ac462d9sm161750556d6.7.2026.04.23.06.31.24
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 23 Apr 2026 06:31:25 -0700 (PDT)
-Message-ID: <89390648a5ed37ccb61731d54b6241cfc6058882.camel@ndufresne.ca>
-From: Nicolas Dufresne <nicolas@ndufresne.ca>
-To: Mikhail Gavrilov <mikhail.v.gavrilov@gmail.com>, "Kasireddy, Vivek"
-	 <vivek.kasireddy@intel.com>
-Date: Thu, 23 Apr 2026 09:31:24 -0400
-In-Reply-To: <CABXGCsM8T4e8kaaO_bauHnN0yE5cxwkkcN+eAJWE8hnJ8RdSRw@mail.gmail.com>
-References: <20260331061657.79983-1-mikhail.v.gavrilov@gmail.com>
-	 <IA0PR11MB718531C51736C57114D6DC2CF850A@IA0PR11MB7185.namprd11.prod.outlook.com>
-	 <CABXGCsM8T4e8kaaO_bauHnN0yE5cxwkkcN+eAJWE8hnJ8RdSRw@mail.gmail.com>
-Autocrypt: addr=nicolas@ndufresne.ca; prefer-encrypt=mutual;
- keydata=mDMEaCN2ixYJKwYBBAHaRw8BAQdAM0EHepTful3JOIzcPv6ekHOenE1u0vDG1gdHFrChD
- /e0J05pY29sYXMgRHVmcmVzbmUgPG5pY29sYXNAbmR1ZnJlc25lLmNhPoicBBMWCgBEAhsDBQsJCA
- cCAiICBhUKCQgLAgQWAgMBAh4HAheABQkJZfd1FiEE7w1SgRXEw8IaBG8S2UGUUSlgcvQFAmibrjo
- CGQEACgkQ2UGUUSlgcvQlQwD/RjpU1SZYcKG6pnfnQ8ivgtTkGDRUJ8gP3fK7+XUjRNIA/iXfhXMN
- abIWxO2oCXKf3TdD7aQ4070KO6zSxIcxgNQFtDFOaWNvbGFzIER1ZnJlc25lIDxuaWNvbGFzLmR1Z
- nJlc25lQGNvbGxhYm9yYS5jb20+iJkEExYKAEECGwMFCwkIBwICIgIGFQoJCAsCBBYCAwECHgcCF4
- AWIQTvDVKBFcTDwhoEbxLZQZRRKWBy9AUCaCyyxgUJCWX3dQAKCRDZQZRRKWBy9ARJAP96pFmLffZ
- smBUpkyVBfFAf+zq6BJt769R0al3kHvUKdgD9G7KAHuioxD2v6SX7idpIazjzx8b8rfzwTWyOQWHC
- AAS0LU5pY29sYXMgRHVmcmVzbmUgPG5pY29sYXMuZHVmcmVzbmVAZ21haWwuY29tPoiZBBMWCgBBF
- iEE7w1SgRXEw8IaBG8S2UGUUSlgcvQFAmibrGYCGwMFCQll93UFCwkIBwICIgIGFQoJCAsCBBYCAw
- ECHgcCF4AACgkQ2UGUUSlgcvRObgD/YnQjfi4+L8f4fI7p1pPMTwRTcaRdy6aqkKEmKsCArzQBAK8
- bRLv9QjuqsE6oQZra/RB4widZPvphs78H0P6NmpIJ
-User-Agent: Evolution 3.58.3 (3.58.3-1.fc43) 
+	dkim=pass header.d=Nvidia.com header.s=selector2 header.b=ffgt8QB9;
+	dmarc=pass (policy=reject) header.from=nvidia.com;
+	spf=pass (lists.linaro.org: domain of acourbot@nvidia.com designates 52.101.56.3 as permitted sender) smtp.mailfrom=acourbot@nvidia.com;
+	arc=pass ("microsoft.com:s=arcselector10001:i=1")
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ZK7Yu3gIgqDIvdetILvmNn8aMpqXMGga9mMvpFiU4Lvs4AuMqQ+vyAONil1NU8/YFdvwSrNJ1HoI7+hy1CKASkRtwoDVUCIEGaQuU3CgTDoGoSSjlz2nPrOA8eFaGiiPCU7N+DkmtWf96P7gROJTAt7WCXRRHRi1bTQUnvxLYLdaqSQv0X8ozKcQ49qiCp4SWo2mlw92G8aZo2F4dJtOzaeRh3yjbv8oUrjx0H54NPv111knwU7p51gtZNnlM0VyQBuci5D/5rYnzbcGfvZtHO+oujUQzP2px/79B5nUd4cChgh7//oLXvmpOzW+f61he7MGbqsk2o5STXjkzcADRA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Se2cr73zYuDZrMy0gGi4qB4ITA6KTGzonu0RZjnU+4I=;
+ b=grME9haISduVs5Oi+bJScVlTVq0wRXYfdohOVIGWAyyhxaMEOxxZ29cz9/5fYuEZh5RWyKP48g1X9k+XCBT6g7975kTv/nP82IqsB6Dqx5OrSovp8QlRYKzIhPnLfb+IN/o6zHtCp4zOVQXYg4Gw3NmCWl1Vwbglczu2c1FZH0DM+mnXc+GGEwKQuta2n3wegTk893Opy0WYiBgcv2Dkadv7FBhEldFRP44Ym5tO/6AnFsyEVhnhguaBvMBz8M699bvZy/Iee2T2RMl3Vjzp+BYSuysw+q1foUmoQQTb1fPXnfSy32s86fUvjdieuzScufuItg/dDiVZ1utQhnUEdA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Se2cr73zYuDZrMy0gGi4qB4ITA6KTGzonu0RZjnU+4I=;
+ b=ffgt8QB9nVw2UUYNUOkzmasq/D2SUbXTHhjScPYm8/qXFRIOfpot+PxmdwsjrEcwC1MQP7O7vqWWX02iiMXmnhc3J5yMzYPgqrqTse/qfZqQfubesh/tT7TDBZLl4wngohJnXRGGyA799cHlTTJTzuM5JlTjaHqKV7CgrBFubHPtFV1E1KXpoTcOQTAhjyeo8xaRcissq+zrRJEVNkF/8AD00zh1eZt0lrXbIzAN61ja+vkJrfvrhbQ4qRuvU49rS5wvkN6wpUwNrQW0N5v/vIN9iVDfnZ2gU+DGg7CiPfjexnvM4PHD68AJHnlqebZGjk11Ti3lNGKN3e5DRryNlA==
+Received: from CH2PR12MB3990.namprd12.prod.outlook.com (2603:10b6:610:28::18)
+ by DS5PPF482CFEB7D.namprd12.prod.outlook.com (2603:10b6:f:fc00::64a) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.15; Thu, 23 Apr
+ 2026 15:01:35 +0000
+Received: from CH2PR12MB3990.namprd12.prod.outlook.com
+ ([fe80::7de1:4fe5:8ead:5989]) by CH2PR12MB3990.namprd12.prod.outlook.com
+ ([fe80::7de1:4fe5:8ead:5989%4]) with mapi id 15.20.9846.019; Thu, 23 Apr 2026
+ 15:01:35 +0000
+Date: Fri, 24 Apr 2026 00:01:31 +0900
+Message-Id: <DI0MI6UF325Y.2TDWZGCN3WGIG@nvidia.com>
+From: "Alexandre Courbot" <acourbot@nvidia.com>
+To: "Lyude Paul" <lyude@redhat.com>
+References: <20260421235346.672794-1-lyude@redhat.com>
+ <20260421235346.672794-5-lyude@redhat.com>
+In-Reply-To: <20260421235346.672794-5-lyude@redhat.com>
+X-ClientProxiedBy: TYCP286CA0344.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:400:38e::16) To CH2PR12MB3990.namprd12.prod.outlook.com
+ (2603:10b6:610:28::18)
 MIME-Version: 1.0
-X-Spamd-Bar: ------
-Message-ID-Hash: 3VUTFGAJN6GB2QTCHGLIARBYIVLJHKDE
-X-Message-ID-Hash: 3VUTFGAJN6GB2QTCHGLIARBYIVLJHKDE
-X-MailFrom: nicolas@ndufresne.ca
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH2PR12MB3990:EE_|DS5PPF482CFEB7D:EE_
+X-MS-Office365-Filtering-Correlation-Id: 90323fa4-0463-485b-cca9-08dea1493665
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|10070799003|7416014|376014|1800799024|366016|18002099003|22082099003|56012099003;
+X-Microsoft-Antispam-Message-Info: 
+	L3GUQcTPe2EJYgdGCoNKKvC/o5R0CRDQggz2D99yqialvsp4fU8TYBmPDMxoGMHfiHil5ZEql+9zu08uvZvVnEYVb0fsls6idKw1W1ZA7zZfTG95t1wG4En4IFViWzTiKoCA/ByMw40oWGbimom7AkIwHM1Eb0RyuUnFKvclmdonPT/MAhTcH1x+DCQ/b97W2qigSVUtvEsjRDAiUf+6mNgpke3bh7cCw5byefU8DBdJsncnmXb3/C2C8FHDcwhWpNbbkHOdFzjU7Zjo4Vr4forJAepMxfi+vfJOLxS5yLcQ+RaJv0xZBRMs80sQ9l9F/bWdSOmXWSka0o2faBvFTzbHPTveWgqfK2vAraTrWsWq5hy/WehszM63as50R6JwqCtR0fW69AGkzFzr91bqRNZLfgDlzFiprQb34fIkE/a3LAaEFnFUrda5xjAMTmsR0mG55mr2jMK83byMk068FKfpf+mwTK7V8MSAzMVNylPIqDLwuhwi76x4xIBDQsq9c2CC15eC9xWGi1+27jQN2iHc3g1/AuUaKHB39Uc9JOAE3seEj0iMSsSpiNdcqXdQienRHhSs9JNuQSK582Mb17TWqXdO3dRLlZvxXZ0+uBW0K7ZZ96Po8aSLNaEIfIho4JVYHejlAGmV0f8yAcoZvP37x7hwdpdcR03hXVWhpfo3xY2HL3JcgkkTeNmZJ1LmTMgH5Z6xrk5kuTNXPqj149l0mYjNOyKKT8YdfyWQFWs=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH2PR12MB3990.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(10070799003)(7416014)(376014)(1800799024)(366016)(18002099003)(22082099003)(56012099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?dFlHcnZhTEdOZE5tRVpwMVNHRmduN0ZsU1o1aUljTWsyRkRnK1Q5OVdJSWMv?=
+ =?utf-8?B?UFh1Y1RyK2hsU3VpWHhFUnk4QTRqNEVnbitzcU11cTZoTk5qN3pKWkQ5ZE1M?=
+ =?utf-8?B?Z1psTlpzRGhmQzNYQ2NvZFhrblhYM0FCUmlsaVNYWUo3VTNDUHU0Qm9WVE5a?=
+ =?utf-8?B?SlJlOU02YS8vRnR5ODhxbkJSdXQvVVZhVFZTa2pyYnhYSXR6bnV1Q1JRNEZs?=
+ =?utf-8?B?QVNDUzdiMkhIVUhGV1JtZzdNN3RweUttZFU0UUZNYnVtVFk2d2EvN0xXKzhV?=
+ =?utf-8?B?R3JacUJMVGsrSHhBK0dsNUdJWlBMcUV6ejFJWEwxZjN0bm1DdjZjT2RGQmtu?=
+ =?utf-8?B?aXpyRzJqaTdHYTNFTG0wK2hVSXluQURGd29kMjNldWdTNWh6V2g2dEgxWjNI?=
+ =?utf-8?B?L3lWSGgwZ0cwMVllZ3R2eFJFNmZrMVhER3lkRnBGS1I3d0VYZnIwQ0djUmJ6?=
+ =?utf-8?B?cG03dlA5RXU4ZjVsVjBtN1IrNndNUmFEVFBqSkFZQmJocktLK1BCMnNCMUhr?=
+ =?utf-8?B?RldnN0k3aWRCZGVsbkNkVy93MUhXdG12bVgvTjZFTFhhQXl0Q0pCR1JNakh4?=
+ =?utf-8?B?aUlMb3ZwZkF0NkJCa0w0OXI4Wlh1bllQQ1daQVZsaUJzTmc5VVB2UVh6bEM0?=
+ =?utf-8?B?VEovbHpYNnlpUVI1a2dESHhKZEpRdjhBZjBlbDVtSXlxTVJ3RFU4a216ZXBa?=
+ =?utf-8?B?VUpvc3dtMzFQYnVCSzdFUEtuN1A5NFF2SXV2NmsvNUMzN0N2VDQvV29PdXlx?=
+ =?utf-8?B?akhrTWVORU5DcWFySHBjakN4MnJrcVpZZU5PNzlMcHFIb0RyNmdVTkRnTXlt?=
+ =?utf-8?B?QzZUT1FZMS9MeHVpQUhIOG1YL0ZmVURuanZoM1JBSzlYVVJMZk84Z3JiVDFG?=
+ =?utf-8?B?V0NyNXFTNEwyQUdrekxQOUxFRkNsaTFWbEVFRGZUZ1BqQkxkcGdYc0phTksw?=
+ =?utf-8?B?bzl4a2xlYnJCc0YxNmlxbDBUVmRIcm9EVGFIWWVFb1M2ZzZ1cExaQUZ0N1py?=
+ =?utf-8?B?Z0RqRXdmZkNPQmdiMFQ2Z3J1d0RMbU9UaWUzdzJDZ3o5Z2t2L2xIdUtaaVlW?=
+ =?utf-8?B?K2I0M0VwN1FSRnBlTlA5ZW1KdG85QVNEMXEwQjV6blJPamxRU1hFZkpXdThz?=
+ =?utf-8?B?U09MM0hYK2htYVIrSUFhbHcyOXZZaC9EWStGL3B6WkJpWjVBVFVGOWZjTEt4?=
+ =?utf-8?B?SmowTnN0RzhIQVJaM2dOam1vSERyTHdGYlhZbk9sem95NCtQN291OFVweWsz?=
+ =?utf-8?B?K2w1N2M3Qmw3L0ZyT0JtTUcvR0hTMU8xTnVkc1d3V1BYQnBGVXNnRE1FVEsy?=
+ =?utf-8?B?NFNqRzdhRjR6ZjNlWHFvT0RBK1E3ZjRyR2NxSzlidFJQcW13MzNHL2VOV1pa?=
+ =?utf-8?B?UzhSdk1EdHZGdjBiR2lZQTlBVG1yNHpkMHMyL20vTmdRUjYrK2pRQmdsaG9z?=
+ =?utf-8?B?d2tBNmxRQk96UEhXcmFaVG43STlBZ0IzcE1URmhqaDZIbUxFZit2RU5MVFhw?=
+ =?utf-8?B?eDVqYmNaUnF3UDlhNHFtVHhxOUZnNUk0QmV4anFnaDNUNGlGbm1acVFsdGIr?=
+ =?utf-8?B?YzRLNE1nQnJML3hFME9DZlVuMGo3K0poT1B5aDdBZzU2T2ljMHVJYysxaVRC?=
+ =?utf-8?B?RUZtNGdSUXp1V1J1aTQ3TzZqWE80YTFrbFNJZjlsNUNpYnB2ci9jWDF6aG1O?=
+ =?utf-8?B?eDdQT3VNZzNESnkwWEpQeTUwbFc1eFc1eWt1b2dYcm9DL2p2dFBxREJzSk9w?=
+ =?utf-8?B?VmsvNWV6V2pyZTFmYis3Uys0MmtabVNkYmFUcjFmSmxUU0NkK3BOU2lxZlhE?=
+ =?utf-8?B?RllzRWhiYWVNcERJWDZCQVIxTGE5VWMydm1jMTZUT3dIbEkxbDlLeGpPdUxC?=
+ =?utf-8?B?SHhTVnRSVy9KWERES2JiOGYvdlhIcm9BeWVjVTBGWFBQbFZ0TGVRU1U2K3Fq?=
+ =?utf-8?B?RUV6ZnBFbGplQ2p6QnpDb29LWGFTcjgvSENISnV0eDJNcFJ4Q0xJYlRkU2pu?=
+ =?utf-8?B?V2pxNloyWnhBRFN1bGFxZ21LSkRvOUFYeTVGY3l1WCtSYWRJMlhMNnpzZ0k0?=
+ =?utf-8?B?dFdVSGEzNmdDMkpSL1VkYWVIaC9ZOUMrZDZYNDdLMnJZTmd1UFlhRXlQTGts?=
+ =?utf-8?B?TXVwanN0Z3BXOTJMUXVuQk85OHhZQTdtR0wxOUI0Z01lSzZHSzh3NFVDVnhU?=
+ =?utf-8?B?YkVqL2YwWFZyN1ZLRHVaRWZNdjZNZElVSXhoN0xxL1A3WXlxTlFZN1lMckJt?=
+ =?utf-8?B?eWIwWFhPTXJQODAwM0lPOXV3TXJybTRpZWJsTlB4RmNaMFBqdzJjWjNxcisz?=
+ =?utf-8?B?RnpIcmduemlKOWV6aXRTQ0U3d2VIdDAzZWlNV2JrRU1NOVVKeWE3SkdRbFBp?=
+ =?utf-8?Q?olUvXdb4xYzUdexL4pKB9HP76DA5FqFZEefTxYTtt9cdo?=
+X-MS-Exchange-AntiSpam-MessageData-1: D+oDKuMdfnsUlQ==
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 90323fa4-0463-485b-cca9-08dea1493665
+X-MS-Exchange-CrossTenant-AuthSource: CH2PR12MB3990.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Apr 2026 15:01:35.4222
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: eg3dxs+CTizuvQJwrAbsuZeTkCFzazvyO076wn/lrIdM1lCiwFHo7SJjgPogE51wlaJx8IruqVshI0EcTYYAaw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS5PPF482CFEB7D
+X-Spamd-Bar: ----
+X-MailFrom: acourbot@nvidia.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: "kraxel@redhat.com" <kraxel@redhat.com>, "sumit.semwal@linaro.org" <sumit.semwal@linaro.org>, "christian.koenig@amd.com" <christian.koenig@amd.com>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "stable@vger.kernel.org" <stable@vger.kernel.org>
+Message-ID-Hash: KVMK2LXCAIKF6LSWIKVNRNVYNO6JXRR5
+X-Message-ID-Hash: KVMK2LXCAIKF6LSWIKVNRNVYNO6JXRR5
+X-Mailman-Approved-At: Thu, 23 Apr 2026 16:26:51 +0000
+CC: nouveau@lists.freedesktop.org, Gary Guo <gary@garyguo.net>, Daniel Almeida <daniel.almeida@collabora.com>, rust-for-linux@vger.kernel.org, Danilo Krummrich <dakr@kernel.org>, dri-devel@lists.freedesktop.org, Matthew Maurer <mmaurer@google.com>, FUJITA Tomonori <fujita.tomonori@gmail.com>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, christian.koenig@amd.com, Asahi Lina <lina@asahilina.net>, Miguel Ojeda <ojeda@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, Simona Vetter <simona@ffwll.ch>, Alice Ryhl <aliceryhl@google.com>, Boqun Feng <boqun@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Krishna Ketan Rai <prafulrai522@gmail.com>, linux-media@vger.kernel.org, Shankari Anand <shankari.ak0208@gmail.com>, David Airlie <airlied@gmail.com>, Benno Lossin <lossin@kernel.org>, Viresh Kumar <viresh.kumar@linaro.org>, linaro-mm-sig@lists.linaro.org, Asahi Lina <lina+kernel@asahilina.net>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2] dma-buf/udmabuf: skip redundant cpu sync to fix cacheline EEXIST warning
+Subject: [Linaro-mm-sig] Re: [PATCH v12 4/5] rust: drm: gem: Introduce shmem::SGTable
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3VUTFGAJN6GB2QTCHGLIARBYIVLJHKDE/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KVMK2LXCAIKF6LSWIKVNRNVYNO6JXRR5/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============2569472426216641828=="
-X-Spamd-Result: default: False [-0.01 / 15.00];
-	SIGNED_PGP(-2.00)[];
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [4.99 / 15.00];
+	DMARC_POLICY_REJECT(2.00)[nvidia.com : SPF not aligned (relaxed),reject];
 	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[ndufresne-ca.20251104.gappssmtp.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+mx];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
+	R_DKIM_REJECT(1.00)[Nvidia.com:s=selector2];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
-	MIME_GOOD(-0.20)[multipart/mixed,multipart/signed,text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[ndufresne.ca : SPF not aligned (relaxed),none];
+	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[28];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com,intel.com];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	GREYLIST(0.00)[pass,meta];
+	DKIM_TRACE(0.00)[Nvidia.com:-];
 	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+,1:+,2:+,3:~,4:+];
-	DKIM_TRACE(0.00)[ndufresne-ca.20251104.gappssmtp.com:-];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	ARC_NA(0.00)[];
-	MAILSPIKE_FAIL(0.00)[44.210.186.118:server fail];
-	FROM_NEQ_ENVFROM(0.00)[nicolas@ndufresne.ca,linaro-mm-sig-bounces@lists.linaro.org];
+	NEURAL_HAM(-0.00)[-0.996];
+	FROM_NEQ_ENVFROM(0.00)[acourbot@nvidia.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.924];
-	RCPT_COUNT_SEVEN(0.00)[10];
+	FREEMAIL_CC(0.00)[lists.freedesktop.org,garyguo.net,collabora.com,vger.kernel.org,kernel.org,google.com,gmail.com,oracle.com,amd.com,asahilina.net,ffwll.ch,linaro.org,lists.linaro.org,linuxfoundation.org];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:email,linaro.org:email]
-X-Rspamd-Queue-Id: C9DC7452F24
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	TAGGED_RCPT(0.00)[linaro-mm-sig,kernel];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,nvidia.com:mid,linaro.org:email]
+X-Rspamd-Queue-Id: 8C573454DDF
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
+Hi Lyude,
 
---===============2569472426216641828==
-Content-Type: multipart/signed; micalg="pgp-sha512";
-	protocol="application/pgp-signature"; boundary="=-Upe9IeD/YcP+xQYdAbXn"
+On Wed Apr 22, 2026 at 8:52 AM JST, Lyude Paul wrote:
+> In order to do this, we need to be careful to ensure that any interface we
+> expose for scatterlists ensures that any mappings created from one are
+> destroyed on driver-unbind. To do this, we introduce a Devres resource into
+> shmem::Object that we use in order to ensure that we release any SGTable
+> mappings on driver-unbind. We store this in an UnsafeCell and protect
+> access to it using the dma_resv lock that we already have from the shmem
+> gem object, which is the same lock that currently protects
+> drm_gem_object_shmem->sgt.
+>
+> We also provide two different methods for acquiring an sg table:
+> self.sg_table(), and self.owned_sg_table(). The first function is for
+> short-term uses of mapped SGTables, the second is for callers that need to
+> hold onto the mapped SGTable for an extended period of time. The second
+> variant uses Devres of course, whereas the first simply relies on rust's
+> borrow checker to prevent driver-unbind when using the mapped SGTable.
+>
+> Signed-off-by: Lyude Paul <lyude@redhat.com>
+>
+> ---
+> V3:
+> * Rename OwnedSGTable to shmem::SGTable. Since the current version of the
+>   SGTable abstractions now has a `Owned` and `Borrowed` variant, I think
+>   renaming this to shmem::SGTable makes things less confusing.
+>   We do however, keep the name of owned_sg_table() as-is.
+> V4:
+> * Clarify safety comments for SGTable to explain why the object is
+>   thread-safe.
+> * Rename from SGTableRef to SGTable
+> V10:
+> * Use Devres in order to ensure that SGTables are revocable, and are
+>   unmapped on driver-unbind.
+> V11:
+> * s/create_sg_table()/get_sg_table()
+> * Get rid of extraneous `ret = ` in shmem::Object::get_sg_table()
+> V12:
+> * Actually move sgt_res in this patch and not the next one
+>
+>  rust/kernel/drm/gem/shmem.rs | 192 ++++++++++++++++++++++++++++++++++-
+>  1 file changed, 190 insertions(+), 2 deletions(-)
+>
+> diff --git a/rust/kernel/drm/gem/shmem.rs b/rust/kernel/drm/gem/shmem.rs
+> index 11749c36e8695..a477312c8a09b 100644
+> --- a/rust/kernel/drm/gem/shmem.rs
+> +++ b/rust/kernel/drm/gem/shmem.rs
+> @@ -11,25 +11,38 @@
+>  
+>  use crate::{
+>      container_of,
+> +    device::{
+> +        self,
+> +        Bound, //
+> +    },
+> +    devres::*,
+>      drm::{
+>          driver,
+>          gem,
+>          private::Sealed,
+>          Device, //
+>      },
+> -    error::to_result,
+> +    error::{
+> +        from_err_ptr,
+> +        to_result, //
+> +    },
+>      prelude::*,
+> +    scatterlist,
+>      types::{
+>          ARef,
 
+This fails on master:
 
---=-Upe9IeD/YcP+xQYdAbXn
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+    error[E0432]: unresolved import `crate::sync::ARef`
+      --> ../rust/kernel/drm/gem/shmem.rs:36:5
+      |
+    36 |     sync::ARef,
+      |     ^^^^^^^^^^ no `ARef` in `sync`
 
-Le jeudi 23 avril 2026 =C3=A0 16:49 +0500, Mikhail Gavrilov a =C3=A9crit=C2=
-=A0:
-> On Wed, Apr 1, 2026 at 6:15=E2=80=AFAM Kasireddy, Vivek
-> <vivek.kasireddy@intel.com> wrote:
-> >=20
-> > Acked-by: Vivek Kasireddy <vivek.kasireddy@intel.com>
-> > Will push this one to drm-misc-next soon.
-> >=20
-> > Thanks,
-> > Vivek
->=20
-> Hi Vivek,
->=20
-> I see the patch landed in drm-misc-next (504e2b4ab97a, tagged
-> drm-misc-next-2026-04-20), which targets 7.2.
->=20
-> Since the patch has a Fixes: tag and Cc: stable, would it be
-> possible to also cherry-pick it into drm-misc-next-fixes so it
-> makes the 7.1 merge window that's closing soon?
+Importing `sync::aref::ARef` seems to be the correct way now.
 
-That would cause the same patch to exist with two different hash, which is
-generally causing trouble down the pipeline.
+>          Opaque, //
+>      }, //
+>  };
+>  use core::{
+> +    cell::UnsafeCell,
+>      ops::{
+>          Deref,
+>          DerefMut, //
+>      },
+> -    ptr::NonNull,
+> +    ptr::{
+> +        self,
+> +        NonNull, //
+> +    },
+>  };
+>  use gem::{
+>      BaseObjectPrivate,
+> @@ -61,6 +74,11 @@ pub struct ObjectConfig<'a, T: DriverObject> {
+>  #[repr(C)]
+>  #[pin_data]
+>  pub struct Object<T: DriverObject> {
+> +    /// Devres object for unmapping any SGTable on driver-unbind.
+> +    ///
+> +    /// This is protected by the object's dma_resv lock. It needs to be before `obj` to ensure that
+> +    /// it is destroyed before `obj` on `Drop`.
+> +    sgt_res: UnsafeCell<Option<Devres<SGTableMap<T>>>>,
 
-Nicolas
+I didn't like this `UnsafeCell<Option>` since the last time, but only figured how to replace it now:
 
->=20
-> The bug is reproducible on current mainline and affects users
-> with CONFIG_DMA_API_DEBUG_SG enabled.
+    sgt_res: SetOnce<Devres<SGTableMap<T>>>,
 
---=-Upe9IeD/YcP+xQYdAbXn
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
+It's actually designed for that! And lets you remove at least one unsafe
+statement, while simplifying `get_sg_table` quite a bit. With the other
+suggestions I have below, here is my version of `get_sg_table` for
+reference:
 
------BEGIN PGP SIGNATURE-----
+    fn get_sg_table<'a>(
+        &'a self,
+        dev: &'a device::Device<Bound>,
+    ) -> Result<&'a Devres<SGTableMap<T>>> {
+        let _dma_resv = DmaResvGuard::new(self);
 
-iHUEABYKAB0WIQTvDVKBFcTDwhoEbxLZQZRRKWBy9AUCaeofLAAKCRDZQZRRKWBy
-9LE6AP4zbpIjsamlcu/G6Lqh82xunsoqtFZgRGnace73ZbfDFAEA6PEngKC7M3Yo
-K0RGNiwAl4iugWAP62doSTdmh9OX8Ac=
-=JOLV
------END PGP SIGNATURE-----
+        if let Some(devres) = self.sgt_res.as_ref() {
+            Ok(devres)
+        } else {
+            // Only called for the side-effect of populating the GEM SG table.
+            // SAFETY: We grabbed the lock required for calling this function above.
+            from_err_ptr(unsafe {
+                bindings::drm_gem_shmem_get_pages_sgt_locked(self.as_raw_shmem())
+            })?;
 
---=-Upe9IeD/YcP+xQYdAbXn--
+            // INVARIANT:
+            // - We called drm_gem_shmem_get_pages_sgt_locked above and checked that it
+            //   succeeded, fulfilling the invariant of `SGTableMap` that the object's `sgt` field
+            //   is initialized.
+            // - We store this Devres in the object itself and don't move it, ensuring that the
+            //   object it points to remains valid for the lifetime of the `SGTableMap`.
+            let devres =
+                Devres::new(dev, init!(SGTableMap { obj: self.into() })).inspect_err(|_| {
+                    // We can't make sure that the pages for this object are unmapped on
+                    // driver-unbind, so we need to release the sgt
+                    // SAFETY:
+                    // - We grabbed the lock required for calling this function above
+                    // - We checked above that get_pages_sgt_locked() was successful
+                    unsafe { bindings::__drm_gem_shmem_free_sgt_locked(self.as_raw_shmem()) }
+                })?;
 
---===============2569472426216641828==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+            self.sgt_res.populate(devres);
 
+            // PANIC: `populate` has just succeeded, guaranteeing that `sgt_res` is populated.
+            Ok(self.sgt_res.as_ref().unwrap())
+        }
+    }
+
+And if only we could populate the `SetOnce` with a `impl Init<T, E>`,
+then we could even remove the DMA reservation acquisition on the fast
+path, because `SetOnce` comes with its own locking and the DMA lock here
+is used outside of its intended scope. I'll try to push the necessary
+work for `SetOnce` and maybe we can do that as a follow-up patch.
+
+>      #[pin]
+>      obj: Opaque<bindings::drm_gem_shmem_object>,
+>      /// Parent object that owns this object's DMA reservation object.
+> @@ -117,6 +135,7 @@ pub fn new(
+>              try_pin_init!(Self {
+>                  obj <- Opaque::init_zeroed(),
+>                  parent_resv_obj: config.parent_resv_obj.map(|p| p.into()),
+> +                sgt_res: UnsafeCell::new(None),
+>                  inner <- T::new(dev, size, args),
+>              }),
+>              GFP_KERNEL,
+> @@ -176,6 +195,100 @@ extern "C" fn free_callback(obj: *mut bindings::drm_gem_object) {
+>          // SAFETY: We're recovering the Kbox<> we created in gem_create_object()
+>          let _ = unsafe { KBox::from_raw(this) };
+>      }
+> +
+> +    // If necessary, create an SGTable for the gem object and register a Devres for it to ensure
+> +    // that it is unmapped on driver unbind.
+> +    fn get_sg_table<'a>(
+> +        &'a self,
+> +        dev: &'a device::Device<Bound>,
+> +    ) -> Result<&'a Devres<SGTableMap<T>>> {
+> +        let sgt_res_ptr = self.sgt_res.get();
+> +
+> +        // SAFETY: This lock is initialized throughout the lifetime of the gem object
+> +        unsafe { bindings::dma_resv_lock(self.raw_dma_resv(), ptr::null_mut()) };
+
+There are 4 sites where we acquire and release the DMA resv lock, each
+of which require unsafe blocks and carrying the risk that we forget
+releasing the lock in the end. For this method in particular we need to
+jump through hoops a bit and store the return value into a temporary
+variable so we can unlock the DMA reservation.
+
+Let's do ourselves a favor and implement a small, private guard type:
+
+    struct DmaResvGuard<'a, T: DriverObject>(&'a Object<T>);
+
+    impl<'a, T: DriverObject> DmaResvGuard<'a, T> {
+        fn new(object: &'a Object<T>) -> Self {
+            // SAFETY: This lock is initialized throughout the lifetime of `object`
+            unsafe { bindings::dma_resv_lock(object.raw_dma_resv(), ptr::null_mut()) };
+
+            Self(object)
+        }
+    }
+
+    impl<'a, T> Drop for DmaResvGuard<'a, T>
+    where
+        T: DriverObject,
+    {
+        fn drop(&mut self) {
+            // SAFETY: We are releasing the lock grabbed during the creation of this object.
+            unsafe { bindings::dma_resv_unlock(self.0.raw_dma_resv()) };
+        }
+    }
+
+There here you would just do
+
+    let _dma_resv = DmaResvGuard::new(self);
+
+and write the rest of the method without without having to worry about
+not returning early. It also let's you improve the flow of the code a
+bit, and requires less unsafe blocks overall.
+
+I am not sure how much of the TODO at the beginning of the file this
+solves, but it should also make it easier to switch to something that
+acquires a reference to a Wwmutex.
+
+> +
+> +        // SAFETY: We just grabbed the lock required for reading this data above.
+> +        let sgt_res = unsafe { (*sgt_res_ptr).as_ref() };
+> +
+> +        let ret = if let Some(sgt_res) = sgt_res {
+> +            // We already have a Devres object for this sg table, return it
+> +            Ok(sgt_res)
+> +        } else {
+> +            // SAFETY: We grabbed the lock required for calling this function above */
+> +            let sgt = from_err_ptr(unsafe {
+> +                bindings::drm_gem_shmem_get_pages_sgt_locked(self.as_raw_shmem())
+> +            });
+> +
+> +            if let Err(e) = sgt {
+> +                Err(e)
+> +            } else {
+> +                // INVARIANT:
+> +                // - We called drm_gem_shmem_get_pages_sgt_locked above and checked that it
+> +                //   succeeded, fulfilling the invariant of SGTableRef that the object's `sgt` field
+
+s/SGTableRef/SGTableMap? (several like this through the patch).
+
+> +                //   is initialized.
+> +                // - We store this Devres in the object itself and don't move it, ensuring that the
+> +                //   object it points to remains valid for the lifetime of the SGTableRef.
+> +                let devres = Devres::new(dev, init!(SGTableMap { obj: self.into() }));
+> +                match devres {
+> +                    Ok(devres) => {
+> +                        // SAFETY: We acquired the lock protecting this data above, making it safe
+> +                        // to write into here
+> +                        unsafe { (*sgt_res_ptr) = Some(devres) };
+> +
+> +                        // SAFETY: We just write Some() into *sgt_res_ptr above
+> +                        Ok(unsafe { (&*sgt_res_ptr).as_ref().unwrap_unchecked() })
+> +                    }
+> +                    Err(e) => {
+> +                        // We can't make sure that the pages for this object are unmapped on
+> +                        // driver-unbind, so we need to release the sgt
+> +                        // SAFETY:
+> +                        // - We grabbed the lock required for calling this function above
+> +                        // - We checked above that get_pages_sgt_locked() was successful
+> +                        unsafe { bindings::__drm_gem_shmem_free_sgt_locked(self.as_raw_shmem()) };
+> +
+> +                        Err(e)
+> +                    }
+> +                }
+> +            }
+> +        };
+> +
+> +        // SAFETY: We're releasing the lock that we grabbed above.
+> +        unsafe { bindings::dma_resv_unlock(self.raw_dma_resv()) };
+> +
+> +        ret
+> +    }
+> +
+> +    /// Creates (if necessary) and returns an immutable reference to a scatter-gather table of DMA
+> +    /// pages for this object.
+> +    ///
+> +    /// This will pin the object in memory.
+> +    #[inline]
+> +    pub fn sg_table<'a>(
+> +        &'a self,
+> +        dev: &'a device::Device<Bound>,
+> +    ) -> Result<&'a scatterlist::SGTable> {
+> +        let sgt = self.get_sg_table(dev)?;
+> +
+> +        Ok(sgt.access(dev)?.deref())
+> +    }
+> +
+> +    /// Creates (if necessary) and returns an owned reference to a scatter-gather table of DMA pages
+> +    /// for this object.
+> +    ///
+> +    /// This is the same as [`sg_table`](Self::sg_table), except that it instead returns an
+> +    /// [`shmem::SGTable`] which holds a reference to the associated gem object, instead of a
+> +    /// reference to an [`scatterlist::SGTable`].
+> +    ///
+> +    /// This will pin the object in memory.
+> +    ///
+> +    /// [`shmem::SGTable`]: SGTable
+> +    pub fn owned_sg_table(&self, dev: &device::Device<Bound>) -> Result<SGTable<T>> {
+> +        self.get_sg_table(dev)?;
+> +
+> +        // INVARIANT: We just ensured above that `self.sgt_res` is initialized with
+> +        // `Some(Devres<SGTableMap<T>>)`.
+> +        Ok(SGTable(self.into()))
+> +    }
+>  }
+>  
+>  impl<T: DriverObject> Deref for Object<T> {
+> @@ -226,3 +339,78 @@ impl<T: DriverObject> driver::AllocImpl for Object<T> {
+>          dumb_map_offset: None,
+>      };
+>  }
+> +
+> +/// A reference to a GEM object that is known to have a mapped [`SGTable`].
+> +///
+> +/// This is used by the Rust bindings with [`Devres`] in order to ensure that mappings for SGTables
+> +/// on GEM shmem objects are revoked on driver-unbind.
+> +///
+> +/// # Invariants
+> +///
+> +/// - `self.obj` always points to a valid GEM object.
+> +/// - This object is proof that `self.0.owner.sgt` has an initialized and valid SGTable.
+
+The comment mentions `self.0` and "a valid SGTable", which don't seem to
+apply to this type.
+
+> +pub struct SGTableMap<T: DriverObject> {
+> +    obj: NonNull<Object<T>>,
+> +}
+> +
+> +impl<T: DriverObject> Deref for SGTableMap<T> {
+> +    type Target = scatterlist::SGTable;
+> +
+> +    fn deref(&self) -> &Self::Target {
+> +        // SAFETY:
+> +        // - The NonNull is guaranteed to be valid via our type invariants.
+> +        // - The sgt field is guaranteed to be initialized and valid via our type invariants.
+> +        unsafe { scatterlist::SGTable::from_raw((*self.obj.as_ref().as_raw_shmem()).sgt) }
+> +    }
+> +}
+> +
+> +impl<T: DriverObject> Drop for SGTableMap<T> {
+> +    fn drop(&mut self) {
+> +        // SAFETY: `obj` is always valid via our type invariants
+> +        let obj = unsafe { self.obj.as_ref() };
+> +
+> +        // SAFETY: The dma_resv for GEM objects is initialized throughout its lifetime
+> +        unsafe { bindings::dma_resv_lock(obj.raw_dma_resv(), ptr::null_mut()) };
+> +
+> +        // SAFETY: We acquired the lock needed for calling this function above
+> +        unsafe { bindings::__drm_gem_shmem_free_sgt_locked(obj.as_raw_shmem()) };
+
+For symmetry, I wanted to suggest moving the call to
+`drm_gem_shmem_get_pages_sgt_locked` to a (fallible) constructor of
+`SGTableMap`.
+
+It's not only for cosmetic and code proximity reasons - once you bind
+the call to `drm_gem_shmem_get_pages_sgt_locked` to the successful
+creation of the `SGTableMap` object, you can remove the custom error
+path of `get_sg_table` that called `__drm_gem_shmem_free_sgt_locked` if
+`Devres::new` failed since the destructor of `SGTableMap` will now take
+care of this for us. This simplifies the last complex bit of
+`get_sg_table`.
+
+The problem is that it would also normally require `SGTableMap::new` to
+acquire the DMA reservation lock in order to call
+`drm_gem_shmem_get_pages_sgt_locked`, but we already have it in
+`get_sg_table`.
+
+If we stopped using the DMA reservation lock as a lock for population
+`sgt_res` and instead switched to a regular Mutex, we could then move
+the DMA reservation acquisition to the constructor, attain symmetry, and
+simplify `get_sg_table` to the point where it becomes trivial. That use
+is also fragile as the `SGTableMap` destructor acquires it, so we must
+be very careful to never drop it in `get_sg_table`.
+
+I think that would be a good tradeoff for the time until we make
+`SetOnce` capable of being populated using an `impl Init`.
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============2569472426216641828==--
