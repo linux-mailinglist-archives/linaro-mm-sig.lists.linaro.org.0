@@ -2,66 +2,66 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id UCYbLcOH72ksCQEAu9opvQ
+	id aGV/F8yH72mCCQEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 27 Apr 2026 17:58:59 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 27 Apr 2026 17:59:08 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7A43A475C4F
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 27 Apr 2026 17:58:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D6DF3475C5D
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 27 Apr 2026 17:59:07 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8FD3C404AB
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 27 Apr 2026 15:58:58 +0000 (UTC)
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
-	by lists.linaro.org (Postfix) with ESMTPS id A46E4404AB
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 24 Apr 2026 05:48:20 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E2C1D404B4
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 27 Apr 2026 15:59:06 +0000 (UTC)
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
+	by lists.linaro.org (Postfix) with ESMTPS id 7245D405CB
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 24 Apr 2026 05:48:31 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=qnZUZxF1;
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=eH1IweZ1;
 	dmarc=pass (policy=none) header.from=gmail.com;
-	spf=pass (lists.linaro.org: domain of mkchauras@gmail.com designates 209.85.214.180 as permitted sender) smtp.mailfrom=mkchauras@gmail.com
-Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-2ab46931cf1so58895105ad.0
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 23 Apr 2026 22:48:20 -0700 (PDT)
+	spf=pass (lists.linaro.org: domain of mkchauras@gmail.com designates 209.85.214.169 as permitted sender) smtp.mailfrom=mkchauras@gmail.com
+Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-2b299b3c739so34536255ad.3
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 23 Apr 2026 22:48:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1777009700; x=1777614500; darn=lists.linaro.org;
+        d=gmail.com; s=20251104; t=1777009710; x=1777614510; darn=lists.linaro.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Ox8HNk2ehgX4u9MIzrQAUilnp/6GJtQsHeC9tfe3Lv8=;
-        b=qnZUZxF13eqZLIli/AsIgbczVBkrA2HKqugP/VAUMVD9AJwJFMy8XKpeoac+Zzy/ye
-         K6WWm5uF9B1Wk2FNV/+uwWX8RMCE9YbdyFZlE9o/BHh3NTWiiPxxwLeU52+2z0wlBKcP
-         wo20Tg2HtFS+vf5PJ38sA6Cij4s2FcZDeVjOpmdTiR0MPNRVoMo8gS06ZnN4CUKohU49
-         H6nTmVg/ims0H+2NmVGMne1sAwgzAS9bzA5agKrvqWOnieIjNQZRarl/6z8Oz6L/Uwc/
-         3fDvAcNBWhsma/flALeJWNPhREEcYuRRP6sNwXioA+WKp++gX0+j37RIhxU0Wq6NTFgf
-         N6ZA==
+        bh=SIf376OZyXcpY0mdrIrP1nTWV/VE0v5g8114Fjjgl84=;
+        b=eH1IweZ15qi9w0az22/CTitaLuL39WGGRmbGIx4n/i7PiuXCb9zBFUqRLwhEwHOSL1
+         xxY446paoMrs3ECEECEeo7mSI4asLbRGpQhLO0beCTpU4QLko+Qh5QHtGceeE8dlIezt
+         49VyPm651D3fVgA1/EUieKdHB5AUthno3CmfuUbHVTJESGWUPrfnbx8EfShxB9G2r2Ch
+         /C9Wqki1JzOapqdz+HypmXO/fkhJg+n/B4JtvGjVmlCO+1diNFlH3iypA29DZIYW3lc3
+         eAZh1YmKR0D/0FAsUIRPgA4jWcJAlu8ldew1V8W25D6ULRrFLUF91BipF+fPqcHb/kLD
+         7ZAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777009700; x=1777614500;
+        d=1e100.net; s=20251104; t=1777009710; x=1777614510;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=Ox8HNk2ehgX4u9MIzrQAUilnp/6GJtQsHeC9tfe3Lv8=;
-        b=B56MU1i/XCt31v2NmI2e2inCDzkIdgXtFYr3KoutuMObAUk/qKBtcdroa9b6PgP7Dr
-         H4KpLRg6SpDSLNfIre9n0cWvjtIJLG4i1994jGZp4fkePdvb841NGZwfi4OtbAU0QHAE
-         YpYbwi1lDtc6Ho9C34lTkIw0nizIQGzQkI6NFmhH52CDX8evtCAF+qQMyOv2yDlI3SK5
-         wz+jne3Lt4QjXNmmI58qSqVm8Hk57BVMyQGOKSbWVmt4Qq4kU+wZ8NByHm49gxQvcfDv
-         nTh7hocoVPzslrbt2yV4hjEdvgEZRAjlFDwWZk9xmHm0HcvYBFRymJVdI3mXkBKeE8+x
-         NlYw==
-X-Forwarded-Encrypted: i=1; AFNElJ8IsN4zOfAIHA4i2Di7pZJehUjsi7NPW9nKlUBn3coU5zO00RfWZP9eVgX0MG0OmSfF9KxUI9/pYHE5o4h6@lists.linaro.org
-X-Gm-Message-State: AOJu0YwpPVf5Knzh4wsTK9MBPlw2hpcxvvkhAA0GbAdqN7FppdpYM6A8
-	mDDcXYOYu4EymLrgvdd0BMO3SIvnb51ry+QXwaLs8t5qfOmbts08wAfX
-X-Gm-Gg: AeBDiet6GYG9HQB6ZPk5uzOQfJMx9/2iArs5R+W85ga3EncMQjEbk+xgDiLcv20lwgi
-	5xKuIff2nhfzUImag8UJCZH2cuK2PK5nQt4649LdGa9Xlj9cHXBjaFljOMML4INjz7fnXZfznu0
-	4n/5r44h68Ga2djdZ77BN1CjzcqsrvqB5ekj9GfnvGavYm7TOSmvIfbGRep90IcuQCQ9IvT0puN
-	X97MgPonJzLkOhs+OJETCGFREC1IjT+K8f4TCBVCIQ7d9Yz3jQl4+idKFnwRS4Ogj6Xv51/NsB0
-	q2sZ/CkGvZIvoW/AscOzAjqc/miCXFnXjCMK/yFyzygdz3L54Fj1OcB52qVVJQG6EcCW+0QAE0C
-	S/JP0cOtCfUFE7Q36dxG/ksE/okarkeWLExvjH3Ytd1KMmSeZR+RGpDUDeFO0IWU9gZYmpmutMh
-	0UCnomS3GOMYRaGIsJEf3dc7PoFWPpG4VGFGaBEY8qUzOX4l09qkcm4F4IY9BIcbsNLapliHcXR
-	5kyD04qP478OSM=
-X-Received: by 2002:a17:902:d591:b0:2b0:badc:c9cf with SMTP id d9443c01a7336-2b5f9e18812mr226513645ad.13.1777009699637;
-        Thu, 23 Apr 2026 22:48:19 -0700 (PDT)
+        bh=SIf376OZyXcpY0mdrIrP1nTWV/VE0v5g8114Fjjgl84=;
+        b=QSMA7GmWkuPoFCxfc7M2QLCApx0LX5aWjiVrDT0sn7BJYLnmeWYHoI5nFQYvVu/Q2Y
+         0c1SB1eVWb/JklnrXL0EwlyNR8W3Xwa19utaUH8cvEWpKcYMwBp+d1oeA5t/9G9w1Umb
+         bsw4JqIencJzJ/OKyCVv4E2KkAAjAdzrxfIg0tHdH02bAuipmM/IVi1Go7/RVeHILR7l
+         1EgX9a0+sfPKFnwjOmk5jd+6o+APu3CUECcplnLchuXbj3KRRbt65pY6jrACbhSck0q8
+         5bcou9iMCuCdwq5q4B+T34uclrULeTySf9ZJCByhezPf8Z0SqWeokbjLLgv0a72fd8Yh
+         Xk3Q==
+X-Forwarded-Encrypted: i=1; AFNElJ/PrIaYQnk0Ri/zdMQlYrAyz9v6m2yixer/AVdTy21h4cZ3HvzoOn/Vti4olc5sEdIcFuXEfajFhn4aqzXq@lists.linaro.org
+X-Gm-Message-State: AOJu0YxsEP9oUWEwCZRo6x93Ehhj7Oc/bVaCENAzUGa/rI1NULsHdM5U
+	TTFTzXBLfbzxSt4BFRAshckI7idjMLdyv9j/gZ2cdXElE97QqlzuoJnN
+X-Gm-Gg: AeBDievRYbvQVMTDp01WDCHyO4paQ5RHTSiUg19dg40mVbWPgKpAIic0W5+KB3IyNKz
+	G40WhGCxXzT5Pc2wdRIjquEecd7ny2dkvujsq2NO5NxLJXZzPCWlri94yDEnyR7BHN3Pun7IFA3
+	mBTNpQt/hdpbC35SSFl41qglxfoCYVWaD4PlFXSRMHt4EGHCHnvA/6CS1nZdeLMTvz5OWZ3yE61
+	prlBaOPUaXK9l1NHx1BAiDn9cxFvRUZKXUJUlRcmRMpLmGIjJJiL5acojwI1Z/afJYK+jDE0xS6
+	c8j1JpfvjSf2LAMQP30UIByfAZVUyU33HRppBKBtJp5F/R8nC+jqf3LT0oOMALSyCC7Nvdf6Pj0
+	qMxGown2x0fB6nCtEl5MH0MsHY9d6Bjgj6oRxKiTf7lDAWDdkcLCJcGg4CuFMbQdP3qgxjvgAnK
+	0gERKy5Yb2UM9NYARdPyQehE8DwzhaMRR490fjRTS64NqshZ72oL4tDr6M9GBt5oIytYmJJWFM9
+	+Jv+nPX41bQVDI=
+X-Received: by 2002:a17:903:1a88:b0:2b2:5ec6:dcf6 with SMTP id d9443c01a7336-2b5f9e85f20mr310774475ad.8.1777009710516;
+        Thu, 23 Apr 2026 22:48:30 -0700 (PDT)
 Received: from li-1a3e774c-28e4-11b2-a85c-acc9f2883e29.bl1-in.ibm.com ([129.41.58.4])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2b5faa176e9sm208778245ad.20.2026.04.23.22.48.09
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2b5faa176e9sm208778245ad.20.2026.04.23.22.48.20
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 23 Apr 2026 22:48:19 -0700 (PDT)
+        Thu, 23 Apr 2026 22:48:30 -0700 (PDT)
 From: "Mukesh Kumar Chaurasiya (IBM)" <mkchauras@gmail.com>
 To: maddy@linux.ibm.com,
 	mpe@ellerman.id.au,
@@ -99,8 +99,8 @@ To: maddy@linux.ibm.com,
 	linaro-mm-sig@lists.linaro.org,
 	rust-for-linux@vger.kernel.org,
 	llvm@lists.linux.dev
-Date: Fri, 24 Apr 2026 11:17:37 +0530
-Message-ID: <20260424054742.45832-3-mkchauras@gmail.com>
+Date: Fri, 24 Apr 2026 11:17:38 +0530
+Message-ID: <20260424054742.45832-4-mkchauras@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260424054742.45832-1-mkchauras@gmail.com>
 References: <20260424054742.45832-1-mkchauras@gmail.com>
@@ -109,14 +109,14 @@ X-Spamd-Bar: --
 X-MailFrom: mkchauras@gmail.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 4W3V5LJXOY22FGPICZH75UYR5O4DIDUK
-X-Message-ID-Hash: 4W3V5LJXOY22FGPICZH75UYR5O4DIDUK
-X-Mailman-Approved-At: Mon, 27 Apr 2026 15:58:42 +0000
+Message-ID-Hash: 4QA3EIUOJE3BPQLF5Z2ECFO6PQSXIGT3
+X-Message-ID-Hash: 4QA3EIUOJE3BPQLF5Z2ECFO6PQSXIGT3
+X-Mailman-Approved-At: Mon, 27 Apr 2026 15:58:43 +0000
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH V13 2/7] dma-resv: Fix undefined symbol when CONFIG_DMA_SHARED_BUFFER is disabled
+Subject: [Linaro-mm-sig] [PATCH V13 3/7] powerpc/jump_label: adjust inline asm to be consistent
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4W3V5LJXOY22FGPICZH75UYR5O4DIDUK/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4QA3EIUOJE3BPQLF5Z2ECFO6PQSXIGT3/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -125,7 +125,7 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 7A43A475C4F
+X-Rspamd-Queue-Id: D6DF3475C5D
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [4.09 / 15.00];
@@ -149,7 +149,7 @@ X-Spamd-Result: default: False [4.09 / 15.00];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[gmail.com:-];
-	NEURAL_HAM(-0.00)[-0.982];
+	NEURAL_HAM(-0.00)[-0.975];
 	TO_DN_NONE(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[mkchauras@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
@@ -157,48 +157,67 @@ X-Spamd-Result: default: False [4.09 / 15.00];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[garyguo.net:email,lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
 
-When building with LLVM=1 for architectures like powerpc where
-CONFIG_DMA_SHARED_BUFFER is not enabled, the build fails with:
+Added support for a new macro ARCH_STATIC_BRANCH_ASM in powerpc
+to avoid duplication of inline asm between C and Rust. This is
+inline with 'commit aecaf181651c ("jump_label: adjust inline asm to be consistent")'
 
-  ld.lld: error: undefined symbol: dma_resv_reset_max_fences
-  >>> referenced by helpers.c
-  >>>               rust/helpers/helpers.o:(rust_helper_dma_resv_unlock)
-
-The issue occurs because:
-1. CONFIG_DEBUG_MUTEXES=y is enabled
-2. CONFIG_DMA_SHARED_BUFFER is not enabled
-3. dma_resv_reset_max_fences() is declared in the header when
-   CONFIG_DEBUG_MUTEXES is set
-4. But the function is only compiled in drivers/dma-buf/dma-resv.c,
-   which is only built when CONFIG_DMA_SHARED_BUFFER is enabled
-5. Rust helpers call dma_resv_unlock() which calls
-   dma_resv_reset_max_fences(), causing an undefined symbol
-
-Fix this by making the function declaration conditional on both
-CONFIG_DEBUG_MUTEXES and CONFIG_DMA_SHARED_BUFFER. When either is
-disabled, use a static inline stub instead.
-
-Fixes: 0c6b522abc2a ("dma-buf: cleanup dma-resv shared fence debugging a bit v2")
+Co-developed-by: Madhavan Srinivasan <maddy@linux.ibm.com>
+Signed-off-by: Madhavan Srinivasan <maddy@linux.ibm.com>
+Reviewed-by: Alice Ryhl <aliceryhl@google.com>
+Reviewed-by: Christophe Leroy (CS GROUP) <chleroy@kernel.org>
+Reviewed-by: Gary Guo <gary@garyguo.net>
+Link: https://github.com/Rust-for-Linux/linux/issues/105
+Link: https://github.com/linuxppc/issues/issues/451
 Signed-off-by: Mukesh Kumar Chaurasiya (IBM) <mkchauras@gmail.com>
 ---
- include/linux/dma-resv.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/powerpc/include/asm/jump_label.h | 23 +++++++++++++----------
+ 1 file changed, 13 insertions(+), 10 deletions(-)
 
-diff --git a/include/linux/dma-resv.h b/include/linux/dma-resv.h
-index c5ab6fd9ebe8..23c8db0b5214 100644
---- a/include/linux/dma-resv.h
-+++ b/include/linux/dma-resv.h
-@@ -311,7 +311,7 @@ static inline bool dma_resv_iter_is_restarted(struct dma_resv_iter *cursor)
- #define dma_resv_held(obj) lockdep_is_held(&(obj)->lock.base)
- #define dma_resv_assert_held(obj) lockdep_assert_held(&(obj)->lock.base)
+diff --git a/arch/powerpc/include/asm/jump_label.h b/arch/powerpc/include/asm/jump_label.h
+index d4eaba459a0e..3016e9c8d6bc 100644
+--- a/arch/powerpc/include/asm/jump_label.h
++++ b/arch/powerpc/include/asm/jump_label.h
+@@ -15,14 +15,20 @@
+ #define JUMP_ENTRY_TYPE		stringify_in_c(FTR_ENTRY_LONG)
+ #define JUMP_LABEL_NOP_SIZE	4
  
--#ifdef CONFIG_DEBUG_MUTEXES
-+#if IS_ENABLED(CONFIG_DEBUG_MUTEXES) && IS_ENABLED(CONFIG_DMA_SHARED_BUFFER)
- void dma_resv_reset_max_fences(struct dma_resv *obj);
- #else
- static inline void dma_resv_reset_max_fences(struct dma_resv *obj) {}
++#define JUMP_TABLE_ENTRY(key, label)			\
++	".pushsection __jump_table,  \"aw\"	\n\t"	\
++	".long 1b - ., " label " - .		\n\t"	\
++	JUMP_ENTRY_TYPE key " - .		\n\t"	\
++	".popsection 				\n\t"
++
++#define ARCH_STATIC_BRANCH_ASM(key, label)		\
++	"1:	nop				\n\t"	\
++	JUMP_TABLE_ENTRY(key, label)
++
+ static __always_inline bool arch_static_branch(struct static_key *key, bool branch)
+ {
+-	asm goto("1:\n\t"
+-		 "nop # arch_static_branch\n\t"
+-		 ".pushsection __jump_table,  \"aw\"\n\t"
+-		 ".long 1b - ., %l[l_yes] - .\n\t"
+-		 JUMP_ENTRY_TYPE "%c0 - .\n\t"
+-		 ".popsection \n\t"
++	asm goto(
++		 ARCH_STATIC_BRANCH_ASM("%c0", "%l[l_yes]")
+ 		 : :  "i" (&((char *)key)[branch]) : : l_yes);
+ 
+ 	return false;
+@@ -34,10 +40,7 @@ static __always_inline bool arch_static_branch_jump(struct static_key *key, bool
+ {
+ 	asm goto("1:\n\t"
+ 		 "b %l[l_yes] # arch_static_branch_jump\n\t"
+-		 ".pushsection __jump_table,  \"aw\"\n\t"
+-		 ".long 1b - ., %l[l_yes] - .\n\t"
+-		 JUMP_ENTRY_TYPE "%c0 - .\n\t"
+-		 ".popsection \n\t"
++		 JUMP_TABLE_ENTRY("%c0", "%l[l_yes]")
+ 		 : :  "i" (&((char *)key)[branch]) : : l_yes);
+ 
+ 	return false;
 -- 
 2.53.0
 
