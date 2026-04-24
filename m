@@ -2,230 +2,166 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id YBDVKNn062mcTQAAu9opvQ
+	id 4CfyBWL462kKTgAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 25 Apr 2026 00:55:21 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 25 Apr 2026 01:10:26 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 24465463EDC
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 25 Apr 2026 00:55:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9BD6B463F82
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 25 Apr 2026 01:10:25 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 1992B40692
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 24 Apr 2026 22:55:20 +0000 (UTC)
-Received: from mail-qv1-f51.google.com (mail-qv1-f51.google.com [209.85.219.51])
-	by lists.linaro.org (Postfix) with ESMTPS id 36BCB40476
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 24 Apr 2026 22:55:16 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 94D4D40699
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 24 Apr 2026 23:10:24 +0000 (UTC)
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+	by lists.linaro.org (Postfix) with ESMTPS id 010E8405D5
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 24 Apr 2026 23:10:21 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=ziepe.ca header.s=google header.b=T9Oot3Z6;
-	dmarc=none;
-	spf=pass (lists.linaro.org: domain of jgg@ziepe.ca designates 209.85.219.51 as permitted sender) smtp.mailfrom=jgg@ziepe.ca
-Received: by mail-qv1-f51.google.com with SMTP id 6a1803df08f44-8a5800772f3so62280626d6.2
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 24 Apr 2026 15:55:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ziepe.ca; s=google; t=1777071316; x=1777676116; darn=lists.linaro.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=Dw33gELuGUNq59I/OY2f7G4Yqpl4DyjVQaY1TU/E47I=;
-        b=T9Oot3Z6kvt29EsA6SzKeFPwrTyogusnE6b6l7UqzSKvrbe+VljttllSOSMplNWw4k
-         opDSEcNTmHqTNGxPPixjt6TgyR/or9rCKNQ2CkDVH+eIQmvO1eFFuV1qUenQreEojcZB
-         lw5wrXWRRWAc5lWEoMGMlMH6xOdjVYLau+SxyMZJl1ojh0jGaT6P+ZydSKqxOTf0ZuD3
-         bfslXzdQM8/je5jlXULfRSgvCv5eiTu+ytLlPCz4gHxJhdL8T0O325eLcWh5dcSaSmHU
-         Wrz/WiQvoQZz+PDpnr+fQjyA7XVLHvPbKWeBk2I4q1cRLzLcVxdqBmo6nAcC3vQ/RiwE
-         llow==
+	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=ZqFY4eIs;
+	dmarc=pass (policy=quarantine) header.from=redhat.com;
+	spf=pass (lists.linaro.org: domain of lyude@redhat.com designates 170.10.133.124 as permitted sender) smtp.mailfrom=lyude@redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1777072221;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=N09YNoupJhmv1sapC/t38hsbn3OUvdSVBkUzd+3dwtM=;
+	b=ZqFY4eIslT8Q1waeozySBBATmcm+VJkXqaiX0644uUplJJ5m4tyZu4gobXC4Sg3gRH3YUu
+	yEkHsJDH7hKzVNrgGKYQB8xR+RJY5xUVoRZNMyfKNE0/4fLPqbc/37REr/dH7H+DXb4OGL
+	1ZXcVIjWrATIykP39ilcExl2HYV8zZU=
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
+ [209.85.222.197]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-294-6pfV0v1UMZa5cjVqWT5UEg-1; Fri, 24 Apr 2026 19:10:18 -0400
+X-MC-Unique: 6pfV0v1UMZa5cjVqWT5UEg-1
+X-Mimecast-MFC-AGG-ID: 6pfV0v1UMZa5cjVqWT5UEg_1777072218
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-8eb52a22eb6so1227274485a.0
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 24 Apr 2026 16:10:18 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777071316; x=1777676116;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Dw33gELuGUNq59I/OY2f7G4Yqpl4DyjVQaY1TU/E47I=;
-        b=irb8its9Zp0Q0syscxUonYT+wrZQbp9cn2wqNDLK8sA7sIgjCitPODIYq9Sw2caN/Y
-         L+ZtX5gtZsqfJTTp12Y9RClNxsq3ngampYhBEd0eTy+SOcm2rL07N++UFnfZeS8J1z6p
-         rYukChkREQ0O9PWUvass5IH8oby4II4/Re+B3nLAS20NOtUmETna9a2B8Jrvgy0S4a4P
-         DVxjy+h/Cz2Wv+eBP6obfDpLBiT6lgLAT2Yp+FBqcN9defqYXRDKSjEUswfzTB5TylXZ
-         PanwSw3RNJhnKcgiKqkMBglKTL34KqCUEq2CfUUqzNChTe24AfDrkAQn7Quix63tSvAq
-         t5ZA==
-X-Forwarded-Encrypted: i=1; AFNElJ99v/wV4zOEkejrNIEYPeWgGvajj8Z0CS9uAnZsmkAtruGsgOp7WURGAvYXvf4ELTjKocQEUHQvLOcnD3Ps@lists.linaro.org
-X-Gm-Message-State: AOJu0YwJq8uOceNNadlCPEpbN5QxW08QUNv2lqkk0GnKDVMamDTtDMGR
-	E2mDK7jmYHhBwmuxYbMbGWOemDg8zU9On0jZJaXiWoL7/ew/Yl8pRQPqUUCvy5thPoY=
-X-Gm-Gg: AeBDievf/jAa1H+tMmOhsqND8H49P8MHKQP0vDcv8H9aME8DfeJcOA7A6SHsQdJWWbU
-	R6SwOrA3RVeN4MhAFkE8JOtgCgpWKxrJeiLePfJY+yssco/aPC9ImHS+pd65/+4Jq2fJ9F00LnJ
-	+j1rp32fxLB2exnHY+2o8GLiQv3Bym3zGj5eI67vOtXUpraSQnp4nqoImigldcwfahIE4wYfEkx
-	Nn1FZPGcWii2hQQO+MYl00MGHtxQZOu59QC60PtzcP/3OYp0Zpeq1JEzbpIGpJVtyXwFD5kdsMe
-	FlRXlvbweayfR1T6A2lQv1RT8zWdqGUc3vrO3kvwqHpPZBAWPKXuv+GtqXJN/ScOBTK1aqhZAe2
-	mho+QnhkETNEyTpH+cOpKUkTW1iVHwZ1K5x9E8oJVQRRjbMAON/O9iaPYyYK/eeS4z+r59nP8A5
-	G0qpOCTSdZ7ejjKQcw6qPRvg6FdRdPiy1W4zDHSPtLgb+X3tXKuV3DL2Wzqs2DMFdJ0GvmX9cfs
-	2Pi/PfnyGQdysq3
-X-Received: by 2002:ad4:5f0e:0:b0:8b2:2474:8f3a with SMTP id 6a1803df08f44-8b224749034mr37604816d6.25.1777071315667;
-        Fri, 24 Apr 2026 15:55:15 -0700 (PDT)
-Received: from ziepe.ca (crbknf0213w-47-54-130-67.pppoe-dynamic.high-speed.nl.bellaliant.net. [47.54.130.67])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-8b02ac78513sm198480506d6.19.2026.04.24.15.55.15
+        d=1e100.net; s=20251104; t=1777072218; x=1777677018;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=N09YNoupJhmv1sapC/t38hsbn3OUvdSVBkUzd+3dwtM=;
+        b=NHmxyVyRv4MA5r8l5KspidOGcUd7BF1Vf+mIZOr2r2o8IFHrhb7x5pSCgAzwZeTklG
+         KB7yhmNQVz7zlVLqVl19PI+hwzj1HvWdksUxV2pQuIVrfAXy1QyARcRsWz+KVsNmP4NJ
+         uMkl49dkRwpJcazPfKUSqlrWOekpc+j7Xja4Pc9OzpWR/tRQsjiDis5tlcxdTfMGlosu
+         NpTU3rKChbhqPVEpXdb6XXYS4XwhPVUQXCIs6wI4oe40F28U+5qWDpD3kBf4I/x5U0qm
+         8lEV9uOWfNBQa5Ud2a1XJaGdpgyUj1PyL9LaY1LotE1m6uzVc+YP75J3rH7b1Fd7Ka+D
+         lMMw==
+X-Forwarded-Encrypted: i=1; AFNElJ97TwwfMYArunTb1av9xgeXTg0gISdaEkSi6xzbS+DPC4zASHe8htIPFz461eMJyj8IDvxJF2FuItpDEOf7@lists.linaro.org
+X-Gm-Message-State: AOJu0Yz6NUGAy3qKytJ/KMf78x/VfhkXPSUnK98FGasH6ieY9KE00roj
+	QAOZ635gbHhu/+oNrt3V8bkyfAnOQvexJjff72Sb8Uw2wEXoy2AxlMKtXMqS0NUQLE2IQKTtnOa
+	fD9jISnZh6G/7IpTwAgNkJTELO9pmXIbccWPtHM+r1jTmniOFZSULgcQs6WOQXYiBJ4gq
+X-Gm-Gg: AeBDievVjwIsd2UrUp4QBOUK37rsXdIigtXJvdmqCfxCjJ0Flc/3neZ6acAPpu3pyFt
+	qdBDN/zXHVNfsTTC8zCgdjk4mR6Mq/GOXjkjNu/hDPO2SfoJu/Mi7lv0NGZnTGZ4If+Mdn/kOjq
+	xpHRe5w6fuSVc/5I0d0CDfR7MTP9PY81ugL4lq6wQUcLMnnGKRr3n3DuFqXtLK+JqISCNTdPCDk
+	UirBLy7+TEN7eFSBDOYSdevF9n5qT/mcNEOkt9uIINPeYV2U0PnfuEDsUR0dtOrEbPTBE1AHpX+
+	739zcCrsWfhgjd4ziCOS23kz/ixEjqqB4mJphauUoPnazBiscgdTVHScBXND9SB66gDwk1uJCCu
+	25K7d8KH9cYsrm5VcZyBK+T5xfQud
+X-Received: by 2002:a05:620a:f0b:b0:8eb:cbf8:85e7 with SMTP id af79cd13be357-8ebcbf89261mr3123560885a.34.1777072217921;
+        Fri, 24 Apr 2026 16:10:17 -0700 (PDT)
+X-Received: by 2002:a05:620a:f0b:b0:8eb:cbf8:85e7 with SMTP id af79cd13be357-8ebcbf89261mr3123553685a.34.1777072217335;
+        Fri, 24 Apr 2026 16:10:17 -0700 (PDT)
+Received: from [192.168.8.4] ([100.0.180.93])
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-8e7d69ad48asm1913863785a.19.2026.04.24.16.10.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 Apr 2026 15:55:15 -0700 (PDT)
-Received: from jgg by wakko with local (Exim 4.97)
-	(envelope-from <jgg@ziepe.ca>)
-	id 1wGPQY-00000004wIG-2XfJ;
-	Fri, 24 Apr 2026 19:55:14 -0300
-Date: Fri, 24 Apr 2026 19:55:14 -0300
-From: Jason Gunthorpe <jgg@ziepe.ca>
-To: "Aneesh Kumar K.V" <aneesh.kumar@kernel.org>
-Message-ID: <20260424225514.GE804026@ziepe.ca>
-References: <20260325192352.437608-1-jiri@resnulli.us>
- <20260325192352.437608-2-jiri@resnulli.us>
- <yq5atst6ywbl.fsf@kernel.org>
- <4qdizkkoeke3cvkcf35upa7p7ick6s654eqlrizmi7ozkw5eze@tnpk2e34xgwl>
- <yq5awly0d504.fsf@kernel.org>
- <tteiecxfqy4k24wnzvp6ocxnuopyhmqtne2xwh5htwldlbzjnp@o6cbzdlurxld>
- <20260421121004.GA3611611@ziepe.ca>
- <yq5aik9jcpzm.fsf@kernel.org>
+        Fri, 24 Apr 2026 16:10:16 -0700 (PDT)
+Message-ID: <ed26658c461020547e058b237575324adcbaca59.camel@redhat.com>
+From: lyude@redhat.com
+To: Alexandre Courbot <acourbot@nvidia.com>
+Date: Fri, 24 Apr 2026 19:10:14 -0400
+In-Reply-To: <DI0MI6UF325Y.2TDWZGCN3WGIG@nvidia.com>
+References: <20260421235346.672794-1-lyude@redhat.com>
+	 <20260421235346.672794-5-lyude@redhat.com>
+	 <DI0MI6UF325Y.2TDWZGCN3WGIG@nvidia.com>
+User-Agent: Evolution 3.58.3 (3.58.3-1.fc43)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <yq5aik9jcpzm.fsf@kernel.org>
-X-Spamd-Bar: ---
-Message-ID-Hash: PSBOK3NKPH33MZ6E6ONWOEEOG34ZLTML
-X-Message-ID-Hash: PSBOK3NKPH33MZ6E6ONWOEEOG34ZLTML
-X-MailFrom: jgg@ziepe.ca
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: bR6BnxyHLoVC3sq2s5n0T54dQgcdY7pY7VEnxjxViLI_1777072218
+X-Mimecast-Originator: redhat.com
+X-Spamd-Bar: --
+Message-ID-Hash: KBJU6RN5MLBGSIXVNUT5EEQGFSVSKVZN
+X-Message-ID-Hash: KBJU6RN5MLBGSIXVNUT5EEQGFSVSKVZN
+X-MailFrom: lyude@redhat.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Jiri Pirko <jiri@resnulli.us>, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, iommu@lists.linux.dev, linux-media@vger.kernel.org, sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, Brian.Starkey@arm.com, jstultz@google.com, tjmercier@google.com, christian.koenig@amd.com, robin.murphy@arm.com, leon@kernel.org, sean.anderson@linux.dev, ptesarik@suse.com, catalin.marinas@arm.com, suzuki.poulose@arm.com, steven.price@arm.com, thomas.lendacky@amd.com, john.allen@amd.com, ashish.kalra@amd.com, suravee.suthikulpanit@amd.com, linux-coco@lists.linux.dev
+CC: nouveau@lists.freedesktop.org, Gary Guo <gary@garyguo.net>, Daniel Almeida <daniel.almeida@collabora.com>, rust-for-linux@vger.kernel.org, Danilo Krummrich <dakr@kernel.org>, dri-devel@lists.freedesktop.org, Matthew Maurer <mmaurer@google.com>, FUJITA Tomonori <fujita.tomonori@gmail.com>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, christian.koenig@amd.com, Asahi Lina <lina@asahilina.net>, Miguel Ojeda <ojeda@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, Simona Vetter <simona@ffwll.ch>, Alice Ryhl <aliceryhl@google.com>, Boqun Feng <boqun@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Krishna Ketan Rai <prafulrai522@gmail.com>, linux-media@vger.kernel.org, Shankari Anand <shankari.ak0208@gmail.com>, David Airlie <airlied@gmail.com>, Benno Lossin <lossin@kernel.org>, Viresh Kumar <viresh.kumar@linaro.org>, linaro-mm-sig@lists.linaro.org, Asahi Lina <lina+kernel@asahilina.net>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v5 1/2] dma-mapping: introduce DMA_ATTR_CC_SHARED for shared memory
+Subject: [Linaro-mm-sig] Re: [PATCH v12 4/5] rust: drm: gem: Introduce shmem::SGTable
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PSBOK3NKPH33MZ6E6ONWOEEOG34ZLTML/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KBJU6RN5MLBGSIXVNUT5EEQGFSVSKVZN/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 24465463EDC
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+X-Rspamd-Queue-Id: 9BD6B463F82
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.49 / 15.00];
-	R_DKIM_REJECT(1.00)[ziepe.ca:s=google];
-	MAILLIST(-0.20)[mailman];
+X-Spamd-Result: default: False [3.59 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[redhat.com : SPF not aligned (relaxed),quarantine];
+	SUSPICIOUS_RECIPS(1.50)[];
+	R_DKIM_REJECT(1.00)[redhat.com:s=mimecast20190719];
 	R_SPF_ALLOW(-0.20)[+mx];
+	MAILLIST(-0.20)[mailman];
+	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	DMARC_NA(0.00)[ziepe.ca];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	ARC_NA(0.00)[];
-	DKIM_TRACE(0.00)[ziepe.ca:-];
-	RCPT_COUNT_TWELVE(0.00)[24];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	RCPT_COUNT_TWELVE(0.00)[28];
+	ARC_NA(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	FREEMAIL_CC(0.00)[lists.freedesktop.org,garyguo.net,collabora.com,vger.kernel.org,kernel.org,google.com,gmail.com,oracle.com,amd.com,asahilina.net,ffwll.ch,linaro.org,lists.linaro.org,linuxfoundation.org];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[redhat.com:-];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-0.972];
 	RCVD_COUNT_FIVE(0.00)[5];
-	FROM_NEQ_ENVFROM(0.00)[jgg@ziepe.ca,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	FROM_NEQ_ENVFROM(0.00)[lyude@redhat.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[ziepe.ca:mid,ziepe.ca:email,lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
+	TAGGED_RCPT(0.00)[linaro-mm-sig,kernel];
+	FROM_NO_DN(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email]
 
-On Wed, Apr 22, 2026 at 02:48:37PM +0530, Aneesh Kumar K.V wrote:
-> Jason Gunthorpe <jgg@ziepe.ca> writes:
-> 
-> > On Tue, Apr 21, 2026 at 01:53:31PM +0200, Jiri Pirko wrote:
-> >> >> You reach there when is_swiotlb_force_bounce(dev) is true and
-> >> >> DMA_ATTR_CC_SHARED is set. What am I missing?
-> >> >>
-> >> >
-> >> >So a swiotlb_force_bounce will not use swiotlb bouncing if
-> >> >DMA_ATTR_CC_SHARED is set ? 
-> >> 
-> >> Correct. Bouncing does not make sense in this case, as shared memory is
-> >> already being mapped.
-> >
-> > It is a little bit mangled, there are many reasons force_swiotlb can
-> > be set, but we loose them as it flows through - swiotlb_init()
-> > just has a simple SWIOTLB_FORCE
-> >
-> > Ideally DMA_ATTR_CC_SHARED would skip swiotlb only if it is being
-> > selected for CC reasons. For instance if you have the swiotlb force
-> > command line parameter I would still expect it bounce shared memory.
-> >
-> > Arguably I think this arch flow is misdesigned, the
-> > is_swiotlb_force_bounce() should not be used for CC. dma_capable() is
-> > the correct API to check if the device can DMA to the presented
-> > address, and it will trigger swiotlb_map() just the same without
-> > creating this gap.
-> >
-> > Jason
-> 
-> Something like this?
-
-Yeah that reads pretty sanely.
-
-> static inline dma_addr_t dma_direct_map_phys(struct device *dev,
-> 		phys_addr_t phys, size_t size, enum dma_data_direction dir,
-> 		unsigned long attrs, bool flush)
-> {
-> 	dma_addr_t dma_addr;
-> 
-> 	if (is_swiotlb_force_bounce(dev)) {
-> 		if (attrs & (DMA_ATTR_MMIO | DMA_ATTR_REQUIRE_COHERENT))
-> 			return DMA_MAPPING_ERROR;
-> 
-> 		return swiotlb_map(dev, phys, size, dir, attrs);
-> 	}
-> 
-> 	if (attrs & DMA_ATTR_MMIO) {
-> 		dma_addr = phys;
-> 		if (unlikely(!dma_capable(dev, dma_addr, size, false, attrs)))
-> 			goto err_overflow;
-> 		goto dma_mapped;
-
-I suspect P2P is probably broken on CC because this doesn't make
-sense..
-
-This should flow into the
-phys_to_dma_unencrypted/phys_to_dma_encrypted block as well AFAICT, it
-shouldn't just assign phys. Assigning phys to dma on a CC system is
-always wrong, right?
-
-It is is more like
-
-        /* To be updated, callers should specify MMIO | CC_SHARED instead of
-	 * implying it. */
-        if (attrs & DMA_ATTR_MMIO)
-	   attrs |= DMA_ATTR_CC_SHARED;
-
-        if (attrs & DMA_ATTR_CC_SHARED) {
- 		dma_addr = phys_to_dma_unencrypted(dev, phys);
- 	} else {
- 		dma_addr = phys_to_dma_encrypted(dev, phys);
- 	}
-
-        if (!dma_capable()) {
-            if (attrs & (DMA_ATTR_MMIO | DMA_ATTR_REQUIRE_COHERENT)
-	       fail
-        }
-
-> and dma_capable() now does
-> static inline bool dma_capable(struct device *dev, dma_addr_t addr, size_t size,
-> 		bool is_ram, unsigned long attrs)
-> {
-> ....
-> 
-> 	/*
-> 	 * if phys addr attribute is encrypted but the
-> 	 * device is forcing an encrypted dma addr
-> 	 */
-> 	if (!(attrs & DMA_ATTR_CC_SHARED) && force_dma_unencrypted(dev))
-> 		return false;
-
-Yeah
-
-And with the above little edits it works for MMIO now too.
-
-Jason
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+DQpPbiBGcmksIDIwMjYtMDQtMjQgYXQgMDA6MDEgKzA5MDAsIEFsZXhhbmRyZSBDb3VyYm90IHdy
+b3RlOg0KPiBUaGVyZSBhcmUgNCBzaXRlcyB3aGVyZSB3ZSBhY3F1aXJlIGFuZCByZWxlYXNlIHRo
+ZSBETUEgcmVzdiBsb2NrLA0KPiBlYWNoDQo+IG9mIHdoaWNoIHJlcXVpcmUgdW5zYWZlIGJsb2Nr
+cyBhbmQgY2FycnlpbmcgdGhlIHJpc2sgdGhhdCB3ZSBmb3JnZXQNCj4gcmVsZWFzaW5nIHRoZSBs
+b2NrIGluIHRoZSBlbmQuIEZvciB0aGlzIG1ldGhvZCBpbiBwYXJ0aWN1bGFyIHdlIG5lZWQNCj4g
+dG8NCj4ganVtcCB0aHJvdWdoIGhvb3BzIGEgYml0IGFuZCBzdG9yZSB0aGUgcmV0dXJuIHZhbHVl
+IGludG8gYSB0ZW1wb3JhcnkNCj4gdmFyaWFibGUgc28gd2UgY2FuIHVubG9jayB0aGUgRE1BIHJl
+c2VydmF0aW9uLg0KPiANCj4gTGV0J3MgZG8gb3Vyc2VsdmVzIGEgZmF2b3IgYW5kIGltcGxlbWVu
+dCBhIHNtYWxsLCBwcml2YXRlIGd1YXJkIHR5cGU6DQo+IA0KPiDCoMKgwqAgc3RydWN0IERtYVJl
+c3ZHdWFyZDwnYSwgVDogRHJpdmVyT2JqZWN0PigmJ2EgT2JqZWN0PFQ+KTsNCj4gDQo+IMKgwqDC
+oCBpbXBsPCdhLCBUOiBEcml2ZXJPYmplY3Q+IERtYVJlc3ZHdWFyZDwnYSwgVD4gew0KPiDCoMKg
+wqDCoMKgwqDCoCBmbiBuZXcob2JqZWN0OiAmJ2EgT2JqZWN0PFQ+KSAtPiBTZWxmIHsNCj4gwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoCAvLyBTQUZFVFk6IFRoaXMgbG9jayBpcyBpbml0aWFsaXplZCB0
+aHJvdWdob3V0IHRoZQ0KPiBsaWZldGltZSBvZiBgb2JqZWN0YA0KPiDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgIHVuc2FmZSB7IGJpbmRpbmdzOjpkbWFfcmVzdl9sb2NrKG9iamVjdC5yYXdfZG1hX3Jl
+c3YoKSwNCj4gcHRyOjpudWxsX211dCgpKSB9Ow0KPiANCj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oCBTZWxmKG9iamVjdCkNCj4gwqDCoMKgwqDCoMKgwqAgfQ0KPiDCoMKgwqAgfQ0KPiANCj4gwqDC
+oMKgIGltcGw8J2EsIFQ+IERyb3AgZm9yIERtYVJlc3ZHdWFyZDwnYSwgVD4NCj4gwqDCoMKgIHdo
+ZXJlDQo+IMKgwqDCoMKgwqDCoMKgIFQ6IERyaXZlck9iamVjdCwNCj4gwqDCoMKgIHsNCj4gwqDC
+oMKgwqDCoMKgwqAgZm4gZHJvcCgmbXV0IHNlbGYpIHsNCj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oCAvLyBTQUZFVFk6IFdlIGFyZSByZWxlYXNpbmcgdGhlIGxvY2sgZ3JhYmJlZCBkdXJpbmcgdGhl
+DQo+IGNyZWF0aW9uIG9mIHRoaXMgb2JqZWN0Lg0KPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHVu
+c2FmZSB7IGJpbmRpbmdzOjpkbWFfcmVzdl91bmxvY2soc2VsZi4wLnJhd19kbWFfcmVzdigpKQ0K
+PiB9Ow0KPiDCoMKgwqDCoMKgwqDCoCB9DQo+IMKgwqDCoCB9DQo+IA0KPiBUaGVyZSBoZXJlIHlv
+dSB3b3VsZCBqdXN0IGRvDQo+IA0KPiDCoMKgwqAgbGV0IF9kbWFfcmVzdiA9IERtYVJlc3ZHdWFy
+ZDo6bmV3KHNlbGYpOw0KDQpJIHRob3VnaHQgb2YgZG9pbmcgdGhpcyBidXQgbG9zdCB0cmFjayBv
+ZiBob3cgbWFueSB0aW1lcyBJIHdhcyBhY3R1YWxseQ0KZ3JhYmJpbmcgdGhpcyBsb2Nr4oCmDQpC
+VFcgLSB3YW50IG1lIHRvIGp1c3QgZ2l2ZSB5b3UgYXV0aG9yc2hpcCBvbiB0aGUgcGF0Y2ggZm9y
+IGFkZGluZw0KRG1hUmVzdkd1YXJkPyBTaW5jZSBvbiBteSBicmFuY2ggSSd2ZSBwcmV0dHkgbXVj
+aCBvbmx5IGp1c3QgYWRkZWQgdHdvDQppbmxpbmUgYW5ub3RhdGlvbnMsIGl0J3Mgb3RoZXJ3aXNl
+IGlkZW50aWNhbCB0byB3aGF0IHlvdSB3cm90ZSBoZXJlLg0KDQpfX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAt
+LSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBl
+bWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
