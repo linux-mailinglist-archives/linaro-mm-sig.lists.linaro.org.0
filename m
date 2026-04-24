@@ -2,170 +2,211 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cGJhDUpH62kmKgAAu9opvQ
+	id IOy2AAyI72mwCQEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 24 Apr 2026 12:34:50 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 27 Apr 2026 18:00:12 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 17F9145D262
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 24 Apr 2026 12:34:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 91732475D36
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 27 Apr 2026 18:00:11 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A208B405D2
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 24 Apr 2026 10:34:43 +0000 (UTC)
-Received: from mail-dy1-f177.google.com (mail-dy1-f177.google.com [74.125.82.177])
-	by lists.linaro.org (Postfix) with ESMTPS id 4353B405D0
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 24 Apr 2026 10:34:41 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 93E2F404F5
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 27 Apr 2026 16:00:10 +0000 (UTC)
+Received: from CH4PR04CU002.outbound.protection.outlook.com (mail-northcentralusazon11013056.outbound.protection.outlook.com [40.107.201.56])
+	by lists.linaro.org (Postfix) with ESMTPS id 276254014B
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 24 Apr 2026 11:08:27 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b="J/oIwa56";
-	dmarc=pass (policy=none) header.from=gmail.com;
-	spf=pass (lists.linaro.org: domain of miguel.ojeda.sandonis@gmail.com designates 74.125.82.177 as permitted sender) smtp.mailfrom=miguel.ojeda.sandonis@gmail.com;
-	arc=pass ("google.com:s=arc-20240605:i=1")
-Received: by mail-dy1-f177.google.com with SMTP id 5a478bee46e88-2d9472c97dbso673488eec.3
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 24 Apr 2026 03:34:41 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777026880; cv=none;
-        d=google.com; s=arc-20240605;
-        b=S1OsEvlVyYmLBmUoDkKHFDxULkjJmwGVC6KiG0BphxBrIHUdbDctNFDh+D1IO1JVaQ
-         mIQIW/EXTsRTfzE/MIE1tOuk8hVVYOWJsH27ocL3Zsmru1k7gYxgLmlath7za7HHluJm
-         /kgG0zOOoeHKnfxkOcpT3rcBGZpAArR7HWClv58r8tFBYx/8h8BRzdI7KQGRoFPz8nnj
-         T2rvmZ49jRR4F0pQNc9ODGHw9XEZ7H4GAUCbeaTzEnW1fQ9/cg6nT5WW7xhJcL7/MbM8
-         0qxg10NNoln5ABCg7jzP4yYwhl3tmdc80qKtwL2MybBX9as2XKPzcNTJJidnf7ltwrhh
-         9rnA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=yTJizOE+aTFx68oE3PlVDChTaWYKzRYowl6JulRmua4=;
-        fh=v2b4QnZTvXcR1BjmDjt1xSfG/OI6dTMOCW8BtYqZayI=;
-        b=Z0w9zxhuUExqLpSZIc1eDRYzp0rRJbgCwCJHi5TYLSdmEck4NREVMbcNu1NC7fz8IY
-         gptayjlv86zowNHgCb8dm/V86tRL8DL/WRmyZ5JQ511smFBQzaQrefcgFw93nJVd8uT/
-         K5YyKyb/7bfsRZbsJ/dhNVNDbNuJAn+BLSjjBm22ayVp9k5U4bwgh0PiNVnq4NQYgkUw
-         bECXdDOA/6gzw8vDYjRdlf5fic5gEdvVRQ49Ti1VsB+xg5yBpXMGZd84KY65dPe+fAZf
-         CG3fSEYB99WslOfjOJLpo2DCIZTT5HEzCi/N3xVUo27oV32TuaX+qLbEA7cKQQ+ZczO8
-         EUjQ==;
-        darn=lists.linaro.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1777026880; x=1777631680; darn=lists.linaro.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=yTJizOE+aTFx68oE3PlVDChTaWYKzRYowl6JulRmua4=;
-        b=J/oIwa56AN0txpn+5FFl5wEc+nv+P21mOv1ipPS2MyCOncC/C/18u07vkbRls4dvNX
-         cAsG0Jfr2GNlruWTDZNjXL7tvu+F4TPon4ojBdJk2lfMuwdTRDASCCVOZeG1pYfIzKAy
-         AWGwYA8OcNeI8Q72piBNPvmvRrEm3/BIIbD69c+kDLbEyHrGuHO4BjElcDYf18s16P1N
-         YsXUhAfugvMCUW+/IVlbtcPVkmgbVI/MeCOvxOeLhLGHL7pXl6Dzs/f7MFmVJfUQnqRy
-         zk1mx/MuFr4AVSKw2Kg8/zNhYb9o6Iu34RKcn+3/VodrbeX/yMsd23Rm9j0LhexBA711
-         p9Yg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777026880; x=1777631680;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=yTJizOE+aTFx68oE3PlVDChTaWYKzRYowl6JulRmua4=;
-        b=VrBCfJlAO0gesRj7q8o8vKnZvCC7U6ElxuM9JHeyYifuau9t9NtYwLd4COjRUGntbl
-         sUIDHa74XdHFP77u6dJvE+R69y3Ymm+iKK+MMN8fs7w5XfJTobMaupitTkrf3Xq4iwWF
-         Q9dftdsgDduGPHNwGJ/LRizMkjFzX9qFDUSntSqnbtxdVMz6KBhzzsWv0pazcDAuHJK5
-         d9bME98A0jizuPOm4AsmNzgHLmNUMGIv9rX2FDxPfZS0w3yxdefh5AkmEQI/rUlYsTkK
-         GIxzJjZhARo0ujpcn1ENs9DIveupfRoz3TIMhD0zHAjgMVrwxws6jLzl9MQodKeJHqo0
-         BL3Q==
-X-Forwarded-Encrypted: i=1; AFNElJ9NxPGlXIfuU2w7wZdlOb/ssynKhrZ2j3/hI3nx2waDWWy4/RGCzsrwmA8JonjQ0KSVfWSK+HBEl/ll+Nv5@lists.linaro.org
-X-Gm-Message-State: AOJu0YzAkelT9ovMILgkB4+IXgKMmIIYR2oeRl01r8xiqSYQVSRKG4A6
-	+dV+6+1H7tRe+ABqcCDKMPDwX/8QwJUga2GuVfMd+BxmymGyLeZ4peDlHwU2LJQ4nw1VR19s/xh
-	gDN1W/GsBeixOQQjR7HZamBm3/8IHK34=
-X-Gm-Gg: AeBDieuixacfsVmfRnbDFXVIcW5KXVSgAz8yrtV9M+zbnDSlErivHRH0anxriJNiVdz
-	pI7p0e8MIGFQHOdEnExKYIg29pePZXL6NZ100M1WFRMbW9H9r6QPUD3m2TppVV54GVXLhK52xlI
-	2GkRNUzl4VAQ4PcLf95t1HKGX0iaLU1HdRgyMC3ulNjXCo89LLEbG7uRsAQ8tKaSTrGaU0eHjRX
-	Rppz9inWDzbgPbL9ACeSpPuOMexofPbh+MuKBiPPaCNYIpZbWEhynqOEeS2J0Sr8l2WfwriixPm
-	4OP/zfkhi/y7An1R+9OaXHrr+ibpWQpud3Q65JdR9ZEhX0zAiat9VZjedoCLclG+T5DfsCCyiyB
-	0YYpPj/bKX29x6LcQC/CquKN83862yuSb/w==
-X-Received: by 2002:a05:7300:d50e:b0:2bd:d8e6:90a0 with SMTP id
- 5a478bee46e88-2e478936a32mr6682650eec.3.1777026880251; Fri, 24 Apr 2026
- 03:34:40 -0700 (PDT)
+	dkim=pass header.d=Nvidia.com header.s=selector2 header.b=P9s0neYe;
+	dmarc=pass (policy=reject) header.from=nvidia.com;
+	spf=pass (lists.linaro.org: domain of acourbot@nvidia.com designates 40.107.201.56 as permitted sender) smtp.mailfrom=acourbot@nvidia.com;
+	arc=pass ("microsoft.com:s=arcselector10001:i=1")
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Shol3vST34R+dEdLDawEvKHnO5UB6S1SOsxFQFSSDwwTBC1opLIBNmf2XwNb/+ydmj+xVzQ52MaqB6mAJKaj5MKiDLMTVdn9xv1B0gHoeuuIRCLJKHm4RDMae/1SZ5l6wIWxaKnT1HkRVBvVFQ2Fmb7naaQNC5OKApscBi7nNh4X4BnuwGUY5vWpICVk7q2jw7FW8uZq2zjyzXPAG2NbREVWxNXf30pKqrb1ZVmzTi6Yo4bc8USm1+oFeQ/NtpBqqQzUDgjA47E1IRBVSmjQpPMDDwE4z2JBgMFxiwsk3wZeAZ/Zeb2PlliKGnoflyMIT9MIYGRs/8sOC6xctrhuWA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=K36Ffc9F0lpx7myXKpmNybkudGjiINR377bgkLt/T88=;
+ b=Zy2IZWL/u86WrCq6+CGWh0uhPEc06H0FJFOwZXd7ZzS5xsINDWXLphsd/yxvZ0owj2m/HS81Bomi/wEijitRERWVsn4RY4ZlHtPvBMBWxK/CUqcG7YYuJb3pYfQHHj6aMuIj1JBnplRyvPu4EuLmfMOv5hUXFjqOCi+PbOOB/A8Y8cRJUCFMqbxalgjvaZtwRgFeliQ2g1DC/h54bZRcPYiMnXgZaQqgtvCPIJeKrA1KrtzS925wQV3yRS6W06JPDaKDkCmtL/M62XTJ0QGNdNR5z6iK+7NF67vvhP9g+hGQBjCqx5XOvkfIuZROL83oop0HxwFQDTfVFRyn+Dw9Eg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=K36Ffc9F0lpx7myXKpmNybkudGjiINR377bgkLt/T88=;
+ b=P9s0neYeEzmoUaxkBggurxq32HUb7hIQgGxQo1UeKke/HydlNFyi/Uxpfcrk4wuKKnw+yQJJp3+hpaGBsbEyLJ4VUUM2Epi5SpsFbknEBebPGi68M5mAxLGYqcNU+T3VLpGKiAlUviB7nLJe75phM8d3wZGOivZvV2tPI/+tU684TNFvhqq87U25gozP5z8kfgwlHJb9Y0RxVjC7Zmm0c1RwL9DHyDr0UPrABkJZyJyFu0/mZJRC00Qhy6piHJoNR1ycSY5stKFP2GJpuZRMyN2gucgfFCsbJKfVnlkscDSdrKUUAK9nhl3djlJX5FR/0tviw5GN44WmUEb4lN5fuQ==
+Received: from CH2PR12MB3990.namprd12.prod.outlook.com (2603:10b6:610:28::18)
+ by CH3PR12MB9282.namprd12.prod.outlook.com (2603:10b6:610:1cb::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.22; Fri, 24 Apr
+ 2026 11:08:19 +0000
+Received: from CH2PR12MB3990.namprd12.prod.outlook.com
+ ([fe80::7de1:4fe5:8ead:5989]) by CH2PR12MB3990.namprd12.prod.outlook.com
+ ([fe80::7de1:4fe5:8ead:5989%4]) with mapi id 15.20.9846.021; Fri, 24 Apr 2026
+ 11:08:18 +0000
+Date: Fri, 24 Apr 2026 20:08:14 +0900
+Message-Id: <DI1C648G6OWI.20O3JB8VS59PB@nvidia.com>
+From: "Alexandre Courbot" <acourbot@nvidia.com>
+To: "Lyude Paul" <lyude@redhat.com>
+References: <20260421235346.672794-1-lyude@redhat.com>
+ <20260421235346.672794-5-lyude@redhat.com>
+In-Reply-To: <20260421235346.672794-5-lyude@redhat.com>
+X-ClientProxiedBy: TYCP286CA0066.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:400:31a::10) To CH2PR12MB3990.namprd12.prod.outlook.com
+ (2603:10b6:610:28::18)
 MIME-Version: 1.0
-References: <20260424054742.45832-1-mkchauras@gmail.com> <20260424054742.45832-6-mkchauras@gmail.com>
- <20260424101425.6bde0e17@pumpkin> <aes7L3M1d_LvvGKa@luna> <0a81f510-7b49-4879-b0bb-3b24dbfc0788@app.fastmail.com>
-In-Reply-To: <0a81f510-7b49-4879-b0bb-3b24dbfc0788@app.fastmail.com>
-From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Fri, 24 Apr 2026 12:34:27 +0200
-X-Gm-Features: AQROBzBsdDZLB2GUpMgvGgFgU1KPjXwk3TMpDFKjffQGyp1lulncbpRBZafhAFU
-Message-ID: <CANiq72mZGb+mTwP-8pTLe81oM0QnK-WtQeVjKPiP5m8zK_tOnw@mail.gmail.com>
-To: Arnd Bergmann <arnd@arndb.de>
-X-Spamd-Bar: ---
-Message-ID-Hash: CLWGJFQ2P44DWFOJD5WQDTSGWWI63T7L
-X-Message-ID-Hash: CLWGJFQ2P44DWFOJD5WQDTSGWWI63T7L
-X-MailFrom: miguel.ojeda.sandonis@gmail.com
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH2PR12MB3990:EE_|CH3PR12MB9282:EE_
+X-MS-Office365-Filtering-Correlation-Id: e675cd7a-7d0a-4f71-4405-08dea1f1ca0a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|1800799024|366016|10070799003|376014|7416014|18002099003|22082099003|56012099003;
+X-Microsoft-Antispam-Message-Info: 
+	feWlpK3714K1cebvzp2GiGvupPs0nuy6J2r47h/50M47G1YZgxr6XftNN8RkUi9NN4rmJrrORp29q52YVUhxQDBCeuJMj45y4ZslNiluTRVd4wjc1Ggd+zPSyuLnYT4tSBOJzAiQZdI1S/5CpEqXN9A2nYC+/yATldmEYFkmk0yD1FFFa2SmNNTxxmGF0vDpkXL+J7i2jksaqLBR6cjptuiLpW2J088sT2EgV3TbH0dARplu/bDi/NHe3aWkxXNQNaVh1HzUHSwfgGUslFOUhf6UUp/HmwRVuvS5ahJWFQJdlYR2DA+MxPOuxqcCWGf4coB+gUJ5OlGW9MvRks74b6m2p8X48fYBYE8G8VRN8YCRl0ahE9pGBTqHwrN5OU7TDNI3qf3ETlorA9XPpakKHgzFYIB9++4heDpq/DiVEtpsoBVxkTh+Y2ZkvDcUIiwNr3zYTUM3LIMATlOfAG16Wg3TbImMwpKZh6DzC60nnfKaCnxnslokEzcUXL1izOMOmPWHhaTkOyLq69bvHA+SGaUE3R8YHKN6yN2LG+ChDTm7E3GggSJw10+FdLkfBXpNn1PkA2P08M1x0S1nlS8NqZCkhMwZeEUtZ1IUAqK7zmfaOuhcnXHKNIFm26ZzxvqK+eJ697eqfn03uMcjaUCGgPJBPc794yayy8Q6GjylVsT0caRjO8TV3hkC5I4veiVffcKzoHpLVPD0RARkxNXXyi8KbkmaUPVo9x9r4ayvW9g=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH2PR12MB3990.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(10070799003)(376014)(7416014)(18002099003)(22082099003)(56012099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?UDZNT00rN0VnUGthUis2em5pK3ViSDNxZHJrYmY2WkdsWWd1NUh0bFJsbjdS?=
+ =?utf-8?B?K25mbW1yZGhCZmJYemxydU8xdk1WdE9QaFBDNndBdDVkMng0bXhtMFNaLzZB?=
+ =?utf-8?B?SlhlQ0k1Y0hKMzV3WXJ2WFh2VDhBZDZSTitxdHhLa3dBV01LY0tiYlZoL25i?=
+ =?utf-8?B?OVRBdlZOcGRFbWcxZmtFRVVMZmJDSS9tVkNneGVSR0FRcURhNGt4cmY2S0lq?=
+ =?utf-8?B?SmZQYXRmNFl0TTB2dlVoU3pMTE50bGpLOUhKalZKait6VFJPdEh4UCsyUGp5?=
+ =?utf-8?B?T3UzNFVLTjR2OEp0UXdxL1FlT2hMcTArV2JqSi90RkVSSE0yMFIzakZHbWZG?=
+ =?utf-8?B?V0dtL21kcTkvV3puRFA3WlJLTkFSVFpRMHpXNC9KeE8rSzFpQWEzSHNwcGth?=
+ =?utf-8?B?TW50OEpHMEJqUmNrb2tmbmVEV2lxMWt2ZGdrOUUrWTRvcWh1emEydjVEbXBS?=
+ =?utf-8?B?NGdMQmhicEplL1ZDMUlqdzhwMVpuY3dRRXhkMFlPbkVCTHBnQVNjRG5idlY5?=
+ =?utf-8?B?VHZ4blVNZUU0SVFncHZrUWR4ancvQ0VDL3R2b3I1b0t1OWJ5ck0veEJGR3pj?=
+ =?utf-8?B?S0o5SURzd0dJdEZ3THk1Q2V4L2x4VXpkdENQeDFVaVg0TDlRaTNjMXhlL3Nu?=
+ =?utf-8?B?WXZxNHVVYndkK0MvMzZmQ05DcDU5TU15QXZtclU5bDRxLzBCZ2YxVXVCYnIw?=
+ =?utf-8?B?c1h1cFRDbWkwWHdsUXd6ZmdlSUYyL3RnY29weFI5RnIxL3BTSUlGUlFpYldO?=
+ =?utf-8?B?V3dCOW9KNk94VTR5QjJ5aTJzcUhncnZVdFJHbkZwbTJPMC94Z1E2RlBVNzVQ?=
+ =?utf-8?B?Kzd4Z3hJYVhrZ3BHTXVSQnhYODZoR1g0dkJDK3BRdFF5YW01Skk0alBqa0dY?=
+ =?utf-8?B?NjQvT3Z1c0hwbDZ4WUR2ZWdVb0ZXTTNZTkF4NlJCNlVWc0pvYTFuS3hhZmpG?=
+ =?utf-8?B?amluY3BmUnZMZzNoNnpLMWRsd3JKdmN3aE8zWEtsRWdlVWRVSVhZMTVUSDNF?=
+ =?utf-8?B?Y1VFRldOUGppeWxOU3d3aWFPcnBTYWNXRnRiT29SbExBZ2llUytETTNtU0hX?=
+ =?utf-8?B?SmVtUk5QQlJDTFpNbGdpYUxQbHpQZ2tZNDlvTUdsc1VVYzFkS0h2WklZRkZz?=
+ =?utf-8?B?RW4wekxRSS9RTHBpLzFWZVg5RWx5ZmpjSzVtcklYS1A2LzZvMVg3TkFNdDRH?=
+ =?utf-8?B?bVVHQVNOR0VFMTl6L2Z4NzR3K1A0VkZrblgxUkJ5R21wKzNpcXd2OElJL21Y?=
+ =?utf-8?B?aFRIeThGTkpGRVhBVnRpTGpHM1dobFlEYkRZekl6SjlxVE9xNURKNzRac2RE?=
+ =?utf-8?B?ZVovQVl1VnJtN01NL2UwSFhqNUM0WFJBMWRVNlF6VGtzUEVqcW5EbkRmdGt6?=
+ =?utf-8?B?dUFiRnhhaTZCQkEvMjV3UE9MTldZeXV4a0ZnZmozR1RpcUN4djE3cDBDbnFV?=
+ =?utf-8?B?NGRHU1BmN2J4ZFpnWVVqVWFmWk5wSGRMZ1U3U0U0T2EvUE81V2hjdWpJS1BC?=
+ =?utf-8?B?aG42VVZqSlpFNnFVSmQ5bkV6VWQzS3RvV3FVamVoZ01SaVN0bThLcGdvaW50?=
+ =?utf-8?B?Qm9INkRlY082c21KRnJLQVBHNHV5dU9TMCtXd1VidDJuK1J6ZkFOUW14T2JT?=
+ =?utf-8?B?ZWppOC9raGRmTDRCcmE2d2lBSURBVUlzU09UWlQvMFVXYUFFM01sSVU3Q2pp?=
+ =?utf-8?B?T0Qvam9aNWlYNUc4aHBHeHRQOTEyZWlRQlpHZDdvODAzMW9SNERSTFlSUFZn?=
+ =?utf-8?B?TUcwcVgyaEtJMmVWTWI2VUVxNXFTc0ErODB4NnhRR0hsc0FxOHl1eVNJc0dI?=
+ =?utf-8?B?ek55eFprZVppSzVZbHlFYWVDcmVaR1ZvYkFqNG1temxMWWdOeEVxenUwTUxQ?=
+ =?utf-8?B?N0ZmRmxmZEVzcHBjMjVycU8rOCsvd29wd0V0VlVMLzNDVEx0WWxsU3FRTE4w?=
+ =?utf-8?B?T2paMS95SWdqQmhYTmZ5VFhTQ1lYVE03VTRQSmVaTGxsSWEyRDQ0Q051ZFA2?=
+ =?utf-8?B?SlNQcmJBWFZjZm1MdkRxQkVFeERvbkw5ak5oV2M3Vm1Mdi9uZVpjaE9VTW95?=
+ =?utf-8?B?UzI1c2IzUXhYZmpNbHdkbzVSbWozUnpzSnc4UEpFSi9UT1M0ZzZIWFIrMjlm?=
+ =?utf-8?B?SmYxK1dDMndTTGNLcHlTYXpIQkRJT1pGVFd5ZGpuUUdycTZvamUzQmJ0UHph?=
+ =?utf-8?B?TFAwQ0U3WURIREdVeW41ZXRYdExyNWhHMVhYNlVVVjhZSFZVdFQybytKWndJ?=
+ =?utf-8?B?L25vV2dHM2RnWlptTHphUzZQSUYxNWVudVZxbXVEUnJBcWVjeW1Nc2ttSDcz?=
+ =?utf-8?B?RlAybVVHdStLeHdxc3gyc29jSG9ManlDdEFIS2tjQ3ZPRnVrbHQxaXNYN0ZB?=
+ =?utf-8?Q?7GRzuUc0NRRx3dw/tjAjR2FSPXJnMvi6qICvKhx1mgIcL?=
+X-MS-Exchange-AntiSpam-MessageData-1: jMZ/CdcRFRb9JQ==
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e675cd7a-7d0a-4f71-4405-08dea1f1ca0a
+X-MS-Exchange-CrossTenant-AuthSource: CH2PR12MB3990.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Apr 2026 11:08:18.7454
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 5m6wCKcLXukrMsADgpYwL6CWTpqtG/VIiv+9nR1fC6Fidl8IqZe2xnhZvj4mgHrt1ACMDvgcs3+6EGt1TLnn4Q==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB9282
+X-Spamd-Bar: ----
+X-MailFrom: acourbot@nvidia.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Link Mauve <linkmauve@linkmauve.fr>, David Laight <david.laight.linux@gmail.com>, "Mukesh Kumar Chaurasiya (IBM)" <mkchauras@gmail.com>, Madhavan Srinivasan <maddy@linux.ibm.com>, Michael Ellerman <mpe@ellerman.id.au>, Nicholas Piggin <npiggin@gmail.com>, Christophe Leroy <chleroy@kernel.org>, Peter Zijlstra <peterz@infradead.org>, Josh Poimboeuf <jpoimboe@kernel.org>, Jason Baron <jbaron@akamai.com>, Alice Ryhl <aliceryhl@google.com>, Steven Rostedt <rostedt@goodmis.org>, Ard Biesheuvel <ardb@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Miguel Ojeda <ojeda@kernel.org>, boqun@kernel.org, Gary Guo <gary@garyguo.net>, =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, Trevor Gross <tmgross@umich.edu>, Danilo Krummrich <dakr@kernel.org>, Nathan Chancellor <nathan@kernel.org>, Nick Desaulniers <nick.desaulniers+lkml@gmail.com>, Bil
- l Wendling <morbo@google.com>, Justin Stitt <justinstitt@google.com>, tamird@kernel.org, Nicolas Schier <nsc@kernel.org>, simona.vetter@ffwll.ch, linuxppc-dev@lists.ozlabs.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, rust-for-linux@vger.kernel.org, llvm@lists.linux.dev
+Message-ID-Hash: JE5SEOXZDJLZKKTEYY4BVLJABW5FFLVE
+X-Message-ID-Hash: JE5SEOXZDJLZKKTEYY4BVLJABW5FFLVE
+X-Mailman-Approved-At: Mon, 27 Apr 2026 15:59:53 +0000
+CC: nouveau@lists.freedesktop.org, Gary Guo <gary@garyguo.net>, Daniel Almeida <daniel.almeida@collabora.com>, rust-for-linux@vger.kernel.org, Danilo Krummrich <dakr@kernel.org>, dri-devel@lists.freedesktop.org, Matthew Maurer <mmaurer@google.com>, FUJITA Tomonori <fujita.tomonori@gmail.com>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, christian.koenig@amd.com, Asahi Lina <lina@asahilina.net>, Miguel Ojeda <ojeda@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, Simona Vetter <simona@ffwll.ch>, Alice Ryhl <aliceryhl@google.com>, Boqun Feng <boqun@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Krishna Ketan Rai <prafulrai522@gmail.com>, linux-media@vger.kernel.org, Shankari Anand <shankari.ak0208@gmail.com>, David Airlie <airlied@gmail.com>, Benno Lossin <lossin@kernel.org>, Viresh Kumar <viresh.kumar@linaro.org>, linaro-mm-sig@lists.linaro.org, Asahi Lina <lina+kernel@asahilina.net>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH V13 5/7] rust: Make __udivdi3() and __umoddi3() panic
+Subject: [Linaro-mm-sig] Re: [PATCH v12 4/5] rust: drm: gem: Introduce shmem::SGTable
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CLWGJFQ2P44DWFOJD5WQDTSGWWI63T7L/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JE5SEOXZDJLZKKTEYY4BVLJABW5FFLVE/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-X-Rspamd-Queue-Id: 17F9145D262
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Queue-Id: 91732475D36
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [3.19 / 15.00];
+X-Spamd-Result: default: False [5.99 / 15.00];
+	DMARC_POLICY_REJECT(2.00)[nvidia.com : SPF not aligned (relaxed),reject];
 	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[gmail.com:s=20251104];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:google.com:reject}];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
+	DATE_IN_PAST(1.00)[76];
+	R_DKIM_REJECT(1.00)[Nvidia.com:s=selector2];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed),none];
-	MIME_BASE64_TEXT(0.10)[];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[38];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[28];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[linkmauve.fr,gmail.com,linux.ibm.com,ellerman.id.au,kernel.org,infradead.org,akamai.com,google.com,goodmis.org,linaro.org,amd.com,garyguo.net,protonmail.com,umich.edu,ffwll.ch,lists.ozlabs.org,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.linux.dev];
-	DKIM_TRACE(0.00)[gmail.com:-];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	NEURAL_HAM(-0.00)[-0.996];
-	FROM_NEQ_ENVFROM(0.00)[miguelojedasandonis@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	RCVD_COUNT_THREE(0.00)[4];
+	GREYLIST(0.00)[pass,meta];
+	DKIM_TRACE(0.00)[Nvidia.com:-];
 	TO_DN_SOME(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,lkml];
-	MISSING_XM_UA(0.00)[];
+	NEURAL_HAM(-0.00)[-0.788];
+	FROM_NEQ_ENVFROM(0.00)[acourbot@nvidia.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[lists.freedesktop.org,garyguo.net,collabora.com,vger.kernel.org,kernel.org,google.com,gmail.com,oracle.com,amd.com,asahilina.net,ffwll.ch,linaro.org,lists.linaro.org,linuxfoundation.org];
+	MID_RHS_MATCH_FROM(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	TAGGED_RCPT(0.00)[linaro-mm-sig,kernel];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RSPAMD_EMAILBL_FAIL(0.00)[arnd.arndb.de:query timed out];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,lists.linaro.org:helo,lists.linaro.org:rdns,arndb.de:email,linaro.org:email]
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:mid,lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
 
-T24gRnJpLCBBcHIgMjQsIDIwMjYgYXQgMTI6MjHigK9QTSBBcm5kIEJlcmdtYW5uIDxhcm5kQGFy
-bmRiLmRlPiB3cm90ZToNCj4NCj4gSG93IGhhcmQgd291bGQgaXQgYmUgdG8gaGF2ZSBhIHByaXZh
-dGUgY29weSBvZiB0aGUgcGFydHMgb2YgdGhlIGNvcmUNCj4gY3JhdGUgdGhhdCB0aGUga2VybmVs
-IGFjdHVhbGx5IG5lZWRzPyBTaW5jZSBMaW51eCBpcyBuZWl0aGVyIHF1aXRlDQo+IGhvc3RlZCAo
-dXNpbmcgYSBmdWxsIGxpYmMpIG5vciBlbnRpcmVseSBmcmVlc3RhbmRpbmcgKHN0aWxsIHVzaW5n
-DQo+IHNvbWUgbGlicmFyeSBpbnRlcmZhY2VzKSwgdGhlIEMgaW1wbGVtZW50YXRpb24gb24gbW9z
-dCBhcmNoaXRlY3R1cmVzDQo+IGhhcyBhIHNtYWxsIHN1YnNldCBvZiB0aGUgbGliZ2NjIHRoYXQg
-d2Ugc2hpcCB3aXRoIHRoZSBrZXJuZWwuDQo+DQo+IEkgYXNzdW1lIHRoZSBjb3JlIGNyYXRlIGlz
-IGxhcmdlciB0aGFuIGxpYmdjYywgYnV0IEkgZG9uJ3Qga25vdyBob3cNCj4gbXVjaCBvZiBpdCBp
-cyBhY3R1YWxseSBuZWVkZWQgaGVyZS4NCg0KSXQgaXMgZmFpcmx5IHRpZWQgdG8gdGhlIGNvbXBp
-bGVyIHZlcnNpb24sIHNvIGl0IHdvdWxkIGJlIGENCnN1YnN0YW50aWFsIGVmZm9ydCB0byBzdXBw
-b3J0IGFjcm9zcyBhIGJ1bmNoIG9mIHZlcnNpb25zLiBJbnN0ZWFkIG9mDQp0aGF0LCBpbml0aWFs
-bHkgd2UgYXNrZWQgdG8gaGF2ZSBzb21lIGBjZmdgcyAoaS5lLiBjb25kaXRpb25hbA0KY29tcGls
-YXRpb24pIHRvIGN1c3RvbWl6ZSBpdCBpbiB0aGUgZmV3IHBsYWNlcyB3ZSBuZWVkLiBXZSBhbHJl
-YWR5DQpwYXNzIGAtLWNmZyBub19mcF9mbXRfcGFyc2VgIGZvciBpbnN0YW5jZS4NCg0KVGhlcmUg
-d2VyZSBjb25jZXJucyBhYm91dCBjb21iaW5hdG9yaWFsIGV4cGxvc2lvbiBvZiBgY2ZnYHMsIHNv
-IHdlDQpzdWdnZXN0ZWQgYGNmZyhsaW51eF9rZXJuZWwpYCBvciBzaW1pbGFyIGluc3RlYWQsIHRo
-b3VnaCBub3RoaW5nDQpoYXBwZW5lZCBzbyBmYXIuDQoNClRoZSBvdGhlciBvcHRpb24gaXMgdG8g
-YXQgbGVhc3QgbGludCBhZ2FpbnN0IGNlcnRhaW4gb3BlcmF0aW9ucywgYnV0IEkNCnRoaW5rIGl0
-IHdvdWxkIGJlIGJldHRlciB0byBoYXZlIGEgd2F5IHRvIHRlbGwgdGhlIGNvbXBpbGVyIHdlIHJl
-YWxseQ0KZG9uJ3Qgd2FudCB0aGVtIGdlbmVyYXRlZCB0byBiZWdpbiB3aXRoLg0KDQpDaGVlcnMs
-DQpNaWd1ZWwNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-CkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJv
-Lm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVA
-bGlzdHMubGluYXJvLm9yZwo=
+On Wed Apr 22, 2026 at 8:52 AM JST, Lyude Paul wrote:
+<snip>
+> @@ -176,6 +195,100 @@ extern "C" fn free_callback(obj: *mut bindings::drm_gem_object) {
+>          // SAFETY: We're recovering the Kbox<> we created in gem_create_object()
+>          let _ = unsafe { KBox::from_raw(this) };
+>      }
+> +
+> +    // If necessary, create an SGTable for the gem object and register a Devres for it to ensure
+> +    // that it is unmapped on driver unbind.
+> +    fn get_sg_table<'a>(
+> +        &'a self,
+> +        dev: &'a device::Device<Bound>,
+
+Just noticed that the caller can technically pass a different `dev` from
+the one the buffer will be mapped onto, potentially linking the `Devres`
+(and thus the device mapping) to a completely unrelated lifetime.
+
+I.e. `dev` is only used to create the `Devres`, while
+`drm_gem_shmem_get_pages_sgt_locked` uses the object's device pointer to
+create the mapping. We need to add the check ensuring that the two point
+to the same device:
+
+    let expected = self.dev().as_ref().as_raw();
+    if dev.as_raw() != expected {
+        return Err(EINVAL);
+    }
+
+Ideally we could do without the `dev` argument altogether, but that's
+our only guarantee that the device is bound, so I don't think we can do
+without this runtime check.
+
+I think it's also worth mentioning in the documentations of `sg_table`
+and `owned_sg_table` which device is expected.
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
