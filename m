@@ -2,141 +2,118 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 8DoMHrKH72ksCQEAu9opvQ
+	id yM06NLiH72mCCQEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 27 Apr 2026 17:58:42 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 27 Apr 2026 17:58:48 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id DB87D475C30
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 27 Apr 2026 17:58:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 88185475C40
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 27 Apr 2026 17:58:48 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DCBBD406AA
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 27 Apr 2026 15:58:40 +0000 (UTC)
-Received: from BN8PR05CU002.outbound.protection.outlook.com (mail-eastus2azon11011038.outbound.protection.outlook.com [52.101.57.38])
-	by lists.linaro.org (Postfix) with ESMTPS id E77783F768
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 24 Apr 2026 02:10:49 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 896FF406C8
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 27 Apr 2026 15:58:47 +0000 (UTC)
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+	by lists.linaro.org (Postfix) with ESMTPS id 16D82404AB
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 24 Apr 2026 05:48:00 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=Nvidia.com header.s=selector2 header.b="EuOy/C0Y";
-	dmarc=pass (policy=reject) header.from=nvidia.com;
-	spf=pass (lists.linaro.org: domain of acourbot@nvidia.com designates 52.101.57.38 as permitted sender) smtp.mailfrom=acourbot@nvidia.com;
-	arc=pass ("microsoft.com:s=arcselector10001:i=1")
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=V3kIiFUerU+qtnAM2aSaVsbE4Wg+g3c3JlAo3vRjGaK1WJCZNxrtaxiZKUgX6ZW2HhNLU9O/OVoSrmAw/FFK5b7L2jvU4nqbcAEBlVAYKX5FFPB5gYrcCvUV431x3gL8rmEHcgoPOtODHAnsSRq2iwfTrb621voeXLtGxwg0OumzKwqrZj9a6LfUENbRlB+vxLNYLtK+pi5sBz52DoNYmZWOQEwV6hnIEV2Ldl/zJL109eLEHTzbrVrIVxsIUYHfvJnvK/DP5H96su0yRItPSiolE8Q8+EbJUcU8O9hzanrDHyCstuLNLQHFheacTsg2zYojZihcMWHoT9MyxM4TTQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=cFfYVCV4NrCqRG9qv1CudX4S6c2ibmf5eAUFDLyCVww=;
- b=QP4ZxDY73t6yTjG5A281TLy9BdGGuvsSytC//hCjGKX4ctYSSR/fiDsjKtNmj5A09IU7a8b0lRsS96VbMbbBCmoo3wmVe8yewwT/2RoinWYlYnPeLtkHPIO6YOU7mqw1Yk3mcwaF8v14krBbQQspa5vh6CVbxBrnRNopXLlOa5soewjGWYrRhD1ycWG39eFRgAaeqQmTRy8jnPf6n87k+B41Hdj5R1R89IPtHbn4rIhvj8ilPmN1eTX/Lp2GYxzbSmfg3/HpF+TOyneDDgi8q4QO52evy6K4DNKzmRrKE12LN9F9DbCcXLiWCzXFWp3OdlQu7WAO8f0E5WJaEzCBkg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=cFfYVCV4NrCqRG9qv1CudX4S6c2ibmf5eAUFDLyCVww=;
- b=EuOy/C0YAG7Or40sbYZ7KRmakaFCJDni8rvFCm92P0P99BD23bLOukaZifARWaoyPLM7DEhnU+zLtc0pkpcJrTCbpqFUvG/0/jvIP1UmHTcP5iJIp4RFvw3ry3ShXE9iXwJ3yUOXb48qij/3jr9B72W12MmCHE8CLEIRwYO35jHut8/LjpbnZ+DVIp85DQ9JFSCqDiSmxRyt8I7PR6cOPKw7wFi160LmPB8hqclakNI7ql3cNKdJRM2ZrXgY0UPjI5gcdvOUk2jt7KH2GZ4+o4yg7JHLwdlzMOs2YbI3mKSkoFMJAJnjNlFfEE5fi1RNxglhClm91MFL7VM9NxNHmA==
-Received: from CH2PR12MB3990.namprd12.prod.outlook.com (2603:10b6:610:28::18)
- by SN7PR12MB8771.namprd12.prod.outlook.com (2603:10b6:806:32a::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.21; Fri, 24 Apr
- 2026 02:10:44 +0000
-Received: from CH2PR12MB3990.namprd12.prod.outlook.com
- ([fe80::7de1:4fe5:8ead:5989]) by CH2PR12MB3990.namprd12.prod.outlook.com
- ([fe80::7de1:4fe5:8ead:5989%4]) with mapi id 15.20.9846.019; Fri, 24 Apr 2026
- 02:10:44 +0000
-Date: Fri, 24 Apr 2026 11:10:39 +0900
-Message-Id: <DI10QIODI69N.RKZAXK5PPLN0@nvidia.com>
-From: "Alexandre Courbot" <acourbot@nvidia.com>
-To: "Gary Guo" <gary@garyguo.net>
-References: <20260421235346.672794-1-lyude@redhat.com>
- <20260421235346.672794-5-lyude@redhat.com>
- <DI0MI6UF325Y.2TDWZGCN3WGIG@nvidia.com>
- <DI0MOCJ8BO4A.37OS3YPF3VPK3@garyguo.net>
- <DI0N2EDVV7MI.UFR6TKHDJLZG@nvidia.com>
- <DI0O1G7AX1I3.1SCSOLCPR258X@garyguo.net>
-In-Reply-To: <DI0O1G7AX1I3.1SCSOLCPR258X@garyguo.net>
-X-ClientProxiedBy: TY4P301CA0094.JPNP301.PROD.OUTLOOK.COM
- (2603:1096:405:37a::13) To CH2PR12MB3990.namprd12.prod.outlook.com
- (2603:10b6:610:28::18)
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=A1Ao55e3;
+	dmarc=pass (policy=none) header.from=gmail.com;
+	spf=pass (lists.linaro.org: domain of mkchauras@gmail.com designates 209.85.214.179 as permitted sender) smtp.mailfrom=mkchauras@gmail.com
+Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-2b23fcf90b2so71244145ad.3
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 23 Apr 2026 22:48:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1777009679; x=1777614479; darn=lists.linaro.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Q7M2fwY604nxmRG1YIO02Z14fgzwwg1Pa67qHupVFxk=;
+        b=A1Ao55e3XJMNbBMrptvYVgJ6wU12F+tOuKcy+wzguhqPGAFrU+Y/wBRngjV25QD0aU
+         mtBflQPvVlCUTN2W1A2u2GLB0MRk17ml4dLNs6th1TT+xeYZKm7Jy9Wb8Q0HYGIB6H5y
+         u1U06afBdIP/n6XSz8PaXFCEFxABx9bu0cns8M8uh62O2eX47/MoSChX9ZoVzAAoH6NS
+         Nu2ong70Xr+7AERRpDu/bx7WaP65wQmBGJoIm81DMq8bpujrH0sctcd+/3yFMlLHqP9+
+         ThASU8THQmAJ98FaqUAb0xy9N+Kl8lSPv92XfNo31oAJPDOrVHOcgbW3605cvcDFG5jl
+         Px6A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1777009679; x=1777614479;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Q7M2fwY604nxmRG1YIO02Z14fgzwwg1Pa67qHupVFxk=;
+        b=J3T6tkTAN2mDav45/hT2BviYNL543u/5fdUlW7Df38DmPxytYwq/EvsokdBEnnSFQy
+         iTp5pP/CfuiaIxsHKbrtEKiSMUl7p1iiqeZ4QheQQqk9ElRR7+5SAPlEuJirL5bvNcFz
+         scgizrZtsD7qXPadn0Euhd79R7HoYhApBu9wfVGskCSUOVSRvV7alVb6U0RbByWTPOnl
+         J/5HQqC/KdStwGNEmveDz4482tRz1dM1lxEszzvqB7rxdygaFHb2mw5/7EoLNG4Tm5QG
+         nLCAit2NLsHqq+4X/8QJTikIRBVTyJApjQsnssfn5+hIR4uG8XEVCRBRuyB0Gd/QkJkI
+         fsag==
+X-Forwarded-Encrypted: i=1; AFNElJ+WtazSiXQCHThs1xZJlgON3Xd/b1N+yLc4v+GzxcKVKdDPqPOJF/rPrvZkiAil8H1o+39E5+D0HL5iH/9B@lists.linaro.org
+X-Gm-Message-State: AOJu0YxTH8wJtYEBXtRJAhykHi9kxnN3y/gE+Qe+sNdq/YXGDvCU/M1c
+	2HMidzgV3oljTRTZNnj5WnAdj0V0+wnVcmEs/VkMPPAEyR/xO+RxXzp/
+X-Gm-Gg: AeBDietE7tAv8DTbfJeJK+e25x5finms4GlR4Y9QVQbFfjXnX0rFUskk5OGsDgRHpqq
+	XCKqiZyVQckkiOnid6m/WSoGTV3UCHLA/3Oc/bngzhoFW5V9d2C1CjDfH+U01YqsV+s41aotAgP
+	q+f9vej9NFO5t7+hbJ1CaX8dxjLebctJAQzVnVTygWVVfOGjcP/AEKGMfTxuB4Bjv07XmbLsY5W
+	/m+KlYjFyYDfRroFu1i+RXSkOGDocS+vLEG6KLrc573Cx36nem47qbpZMtGXQ21/M86UdHe9Blb
+	2sfLp2rb3dUubXBJECs2LS5vKeKSS2a4HFRFtRmVdlxjVqpgaVw5rj2iwvvSD4+BaiqSqA7orTW
+	wgseDp6gr2HR+kQyiGZYxtAewUD/usEXZZ/to1aLnaqx2QQ6X0TOZVImk5s2/IV9TNYALvzLtZB
+	IAjsHWmn5GLhTPATOzUEONOOqAByjNUYCh5Jusqilwboa0Vl4o/kCQm+rQSdPKAd5KU79pQuzS8
+	FzSoBXnDXtyih4=
+X-Received: by 2002:a17:903:28e:b0:2b0:7531:b61e with SMTP id d9443c01a7336-2b5f9f9f125mr305572665ad.41.1777009679150;
+        Thu, 23 Apr 2026 22:47:59 -0700 (PDT)
+Received: from li-1a3e774c-28e4-11b2-a85c-acc9f2883e29.bl1-in.ibm.com ([129.41.58.4])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2b5faa176e9sm208778245ad.20.2026.04.23.22.47.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 23 Apr 2026 22:47:58 -0700 (PDT)
+From: "Mukesh Kumar Chaurasiya (IBM)" <mkchauras@gmail.com>
+To: maddy@linux.ibm.com,
+	mpe@ellerman.id.au,
+	npiggin@gmail.com,
+	chleroy@kernel.org,
+	peterz@infradead.org,
+	jpoimboe@kernel.org,
+	jbaron@akamai.com,
+	aliceryhl@google.com,
+	rostedt@goodmis.org,
+	ardb@kernel.org,
+	sumit.semwal@linaro.org,
+	christian.koenig@amd.com,
+	ojeda@kernel.org,
+	boqun@kernel.org,
+	gary@garyguo.net,
+	bjorn3_gh@protonmail.com,
+	lossin@kernel.org,
+	a.hindborg@kernel.org,
+	tmgross@umich.edu,
+	dakr@kernel.org,
+	nathan@kernel.org,
+	nick.desaulniers+lkml@gmail.com,
+	morbo@google.com,
+	justinstitt@google.com,
+	tamird@kernel.org,
+	arnd@arndb.de,
+	nsc@kernel.org,
+	mkchauras@gmail.com,
+	simona.vetter@ffwll.ch,
+	linuxppc-dev@lists.ozlabs.org,
+	linux-kernel@vger.kernel.org,
+	linux-media@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	linaro-mm-sig@lists.linaro.org,
+	rust-for-linux@vger.kernel.org,
+	llvm@lists.linux.dev
+Date: Fri, 24 Apr 2026 11:17:35 +0530
+Message-ID: <20260424054742.45832-1-mkchauras@gmail.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PR12MB3990:EE_|SN7PR12MB8771:EE_
-X-MS-Office365-Filtering-Correlation-Id: 90f8c670-4df1-4388-e877-08dea1a6b152
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|376014|366016|7416014|10070799003|56012099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: 
-	L4mw3wDoCuG5h7dMA8rrbCODuPkx0udrQkjFFbgBBCLxftS/X6nEiM+2XTyvUysiw0FTB6LBzb5Sytsr96YIuI2HNFllfdWal2BnCENhcyaG76Ir41+CKHMGQfd+HIf6AoumT97Br/5srpYqX2vuYO8137mlpLJCn1eqsbsnwspIWA0lC4mb+ni1L9WZXEb4a0O/nUCYHYcsfn0a8cJj0YQg0YWP8BGGdM9cf97kU9Uxr/PvA8ETbMUM8IBIIQodQs2zGtm/ZwTlK+1wh2Zug5HHnaTkZkChpUauAqYMUKE4GVIlU5jJ34xfmXEKpRltrQJvYbVOz/9MqXEIq3JWZUwZ6km/9KgVZ1PZFJkekzA9aAXEKxXQRzkLozDK45qz/KHeJh9G1rku/iLQBluVpKaSnizk4nHgoETqZsuV/NFFtNMbiTgtMoVtS6R2P328WT98+f6LXV4ekWKCedBg+2dEvRYABw3k5bupLUavMh7t84rYV3ekCsYJSNy1DXiRG52rErs7+MpiZqyRhsgPSH2ZuE7J2kJ7QAFQJomq/qYdEJjQZTnmmf/pYEUxZUhWR7yvl4VzxowTvHmNAshvEyi/MDbA6mA4hOwE3qHRIYO+6teq3bJy2fQZrup3BOuwk0cncb3xgO+ZgFuLVZhBvFtGvmxiv1vq/ksC4QHsSP5LTvWJyMZO+VXfZnKWJi+8CGypkpkc7qkwgPr0YEuoDrDbDcZbNVncVXcJQ47cUIUZtSBfva/Kaz9yZNv3jHzI
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH2PR12MB3990.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(7416014)(10070799003)(56012099003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?ZG1Hc3Vzc0Z4U3c0Q3JtNnh5N2dRdGt0ZThEVHpLOGdMYklJVnVOSisvaEti?=
- =?utf-8?B?QlZrMUxtc0VmT0IxYzhBZE9RSUtXdllYN1BYYkwyTGRCN21xM1ZLamIrWHpr?=
- =?utf-8?B?OGtEWG8wbnNQYkY3bHNERjZHVzlVc1ZnekswRnV4cUhuZnV6QmN5WjFpbWh6?=
- =?utf-8?B?VmxVcUgrNWVIT2lIZFZqcEJkZjFkd05MbndiQm90YnVXb0hPZ21uc3prT2Jq?=
- =?utf-8?B?NWVRaXdaQllBMm9CUWwwR2VxN3MzTFNQRDlRN3lMUUUrU0dRbGxPWG81Ryt3?=
- =?utf-8?B?d09QS2FUeTJqZUFGdXRyemM1UU1wVXJtK1hmSU5uSlMraGlON0FGM2dVQmsr?=
- =?utf-8?B?Mm5GYm9JTEp5MU02bEw1ODZZQVhoWnh6L2xhUTFWVGltSWhwSTNNRm9sa2Ez?=
- =?utf-8?B?aUQ3TWlxek5Uc1ZQNXhqKzdaZ1RUN0ZvS3hBZE9SUkJnWUo5Ylc1NVN2THJW?=
- =?utf-8?B?MnltNGhkMUh0T1BDS1pDME5TMFArYzU0RngycmFtQUh1WVdtVm5JQVJqSmVM?=
- =?utf-8?B?eW9CdDRSaWtyRFBSdUtYRWo2TFllL0g1UDltQkZQNkEyT0lRNXozeUplSmJn?=
- =?utf-8?B?ZHpIQXVkWnZqTXlJYkpFK3hRUzE5aFpvQk0zUy8vWTdGRURJcFNZa3dQeDly?=
- =?utf-8?B?NVRBOEQwbHkxQ1ZjbUt4TnRmY2t5RGdCQWVlYnRyNU9XRWRQeE5nTnBFZEtM?=
- =?utf-8?B?cERZZkNyU3hpTW15L3NXeWVHL25XNXE4TTRVTTRhZlpTUmpxaWlKTmxOcFpt?=
- =?utf-8?B?RmtuZlRBVjRvU3U1TzNwYjhkQ1BhaC9pbFdiRUNwcTFtUnlqbjRjd3dFVHM4?=
- =?utf-8?B?aFkrVkR0TVlxRVhrUDYxSjg3RU5QQ1BpdHJwOHN1MkhiMWpsT3d2VXRQbEkw?=
- =?utf-8?B?UUdDRml6NlVMU2JXV2xrN2pnWkxaMUdpaE5LUkdKRWZ1N2xOemUveGNMcmVk?=
- =?utf-8?B?OW1KQkczYmoxSzN6YlBZajBGYVMxdnU3S2ZXRndFTTBnVmVOcnUwaXRSSklK?=
- =?utf-8?B?L1FNWlpmWWVkL3N2SFVsaFlSMGJBZDNWK3h6alJ4T1J6VlVKSnhiZlpsUzB2?=
- =?utf-8?B?ZjY3ZkxuVS9iZUhkZ2w5QkdBaU11ZjlHSWlLSDB4L0duaHNGekU4UVJPRDds?=
- =?utf-8?B?Yk9XWThaemFlRmdJcWt3TjZyTmdMcWVVdHoyZjhNVGdhL2pkK3U4ZVlaazFO?=
- =?utf-8?B?VDJiYTE5ZTZGa0JKcHFrZnVqNkEvMHZBS2JaQUhuT2xBT3l4S3U1b3k3NWRX?=
- =?utf-8?B?UlN4eWdoNU80OGUvSEkzSkhNaVdlYTBGMFZkOHd3NzhKRXNlQzdGNkRVNkdM?=
- =?utf-8?B?aDVNNERxV1dRZmhuSElFdG44eklKUlVZejhWSkJhV1krNWNxTlFsTll5UzFN?=
- =?utf-8?B?RmdEQU8yeUQ3b3JITUNXaFRmS295cXdLSzdISSt4ZTFkbnNEQTFHTUlmYlNE?=
- =?utf-8?B?Wk5lMG5SK0Zmbi9Ca1Bxd2U3RExjSktIeTBJckhuY2g3UW8vc2xoNTFuQlFN?=
- =?utf-8?B?YnJ5a2lURmZ1c2ovZVJxUmVyMWlyNm9SNVVvRktjcGtybG9ubEZrdS9xT3ps?=
- =?utf-8?B?Y05GYmJlZmxRLzRaS1dhSGF6cUhXL2xCbnBWejRLZC9aZEtEWFkveTZGaWZJ?=
- =?utf-8?B?T0Y5Z2R5Z0JSTUNleE5URWs3bzREZjUzR1lEc0VSdzU0Y0FjNG9BSG1TT2JL?=
- =?utf-8?B?MlBjZ0RpdUdQY1JwNmlHY0F1Und6RndRUDNhamsxQnptRFJjRWhzekkvVmlG?=
- =?utf-8?B?Yk1kMXVMRktJbGhiWkg2WG9WZTkxVHliSndMVDZGZkZsSURtaFhaVmdPR29s?=
- =?utf-8?B?dUdrUjlSYnhKUFpFRHBScEdzZ0lBUXlaVE05YnVkSzFaNTJHM1B1djdHUDY1?=
- =?utf-8?B?QlcxY3pEQjRKYWZmeStmZTE1OXpZbGZZTE9TL3NxeHFIOE5ZSHZBR2hiMzZv?=
- =?utf-8?B?dmFNajBseXJhYTFlVG5mRGJOS0hHdk52djVvdXN4TmpBZ2dZNnV6OWsvc1lT?=
- =?utf-8?B?eERWUmFCbm9tV0M3YmM5VlVncWR4WVVVWUVkdG1UQmZXWDg5UnhUMWpmcFBm?=
- =?utf-8?B?UEQxU083MjhubnlMajVZVzE2UHdQLzRORk1BbjZpMmRsZHJpbTFSY1psVG4y?=
- =?utf-8?B?N2ZuMTg2U2RjM29xcUZaWmdFZFBJakpjTm5KN2VaVENSWmJET0lEVHY5U3pP?=
- =?utf-8?B?WDhUZkJ2ZzF4SHM3ZWdSclVwUVBOY0FSK2lzdVR2azF2dHlUZmlQUlQ5TFBx?=
- =?utf-8?B?d2pONE1UNGp5cm9jNXh5V2xWM3lRS284ZS9EQ3prKzloQUoxSWZTNEdVc05H?=
- =?utf-8?B?aVJOczJkMnVWQitNTVJTZVR1c1ZBV3RxbUgvR2VoQkRKejdFaHUvQ0M4TG90?=
- =?utf-8?Q?THuouWYya9nR4vn8oTVamoy8poyDu44/EkvM8ScpLTxlN?=
-X-MS-Exchange-AntiSpam-MessageData-1: krDpXfg/C73KNA==
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 90f8c670-4df1-4388-e877-08dea1a6b152
-X-MS-Exchange-CrossTenant-AuthSource: CH2PR12MB3990.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Apr 2026 02:10:44.6563
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: L0YIrxsqaeVC0Z6w2zreouNz6DW6b33ID5xIViFb1neOoyM+829CgmGdR1o/tYkTixsde0rqv/nOpYWIDZVwWg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB8771
-X-Spamd-Bar: ------
-X-MailFrom: acourbot@nvidia.com
+X-Spamd-Bar: ---
+X-MailFrom: mkchauras@gmail.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: OJRLJ73OENUUV6Z75CLBUUXY4VJREQVM
-X-Message-ID-Hash: OJRLJ73OENUUV6Z75CLBUUXY4VJREQVM
-X-Mailman-Approved-At: Mon, 27 Apr 2026 15:58:39 +0000
-CC: Lyude Paul <lyude@redhat.com>, nouveau@lists.freedesktop.org, Daniel Almeida <daniel.almeida@collabora.com>, rust-for-linux@vger.kernel.org, Danilo Krummrich <dakr@kernel.org>, dri-devel@lists.freedesktop.org, Matthew Maurer <mmaurer@google.com>, FUJITA Tomonori <fujita.tomonori@gmail.com>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, christian.koenig@amd.com, Asahi Lina <lina@asahilina.net>, Miguel Ojeda <ojeda@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, Simona Vetter <simona@ffwll.ch>, Alice Ryhl <aliceryhl@google.com>, Boqun Feng <boqun@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Krishna Ketan Rai <prafulrai522@gmail.com>, linux-media@vger.kernel.org, Shankari Anand <shankari.ak0208@gmail.com>, David Airlie <airlied@gmail.com>, Benno Lossin <lossin@kernel.org>, Viresh Kumar <viresh.kumar@linaro.org>, linaro-mm-sig@lists.linaro.org, Asahi Lina <lina+kernel@asahilina.net>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, kernel@vger.kernel.org
+Message-ID-Hash: QX3AEV6O22DLZHCY7PE46TQLYTWQMT2C
+X-Message-ID-Hash: QX3AEV6O22DLZHCY7PE46TQLYTWQMT2C
+X-Mailman-Approved-At: Mon, 27 Apr 2026 15:58:40 +0000
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v12 4/5] rust: drm: gem: Introduce shmem::SGTable
+Subject: [Linaro-mm-sig] [PATCH V13 0/7] Rust support for powerpc
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OJRLJ73OENUUV6Z75CLBUUXY4VJREQVM/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QX3AEV6O22DLZHCY7PE46TQLYTWQMT2C/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -145,115 +122,147 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: DB87D475C30
+X-Rspamd-Queue-Id: 88185475C40
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [5.99 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[nvidia.com : SPF not aligned (relaxed),reject];
+X-Spamd-Result: default: False [4.09 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
-	DATE_IN_PAST(1.00)[85];
-	R_DKIM_REJECT(1.00)[Nvidia.com:s=selector2];
+	MID_CONTAINS_FROM(1.00)[];
+	DATE_IN_PAST(1.00)[82];
+	R_DKIM_REJECT(1.00)[gmail.com:s=20251104];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx];
+	R_SPF_ALLOW(-0.20)[+mx:c];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[28];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[36];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+];
 	RCVD_COUNT_THREE(0.00)[4];
 	GREYLIST(0.00)[pass,meta];
-	DKIM_TRACE(0.00)[Nvidia.com:-];
-	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.739];
-	FROM_NEQ_ENVFROM(0.00)[acourbot@nvidia.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FREEMAIL_TO(0.00)[linux.ibm.com,ellerman.id.au,gmail.com,kernel.org,infradead.org,akamai.com,google.com,goodmis.org,linaro.org,amd.com,garyguo.net,protonmail.com,umich.edu,arndb.de,ffwll.ch,lists.ozlabs.org,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.linux.dev];
+	ARC_NA(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[redhat.com,lists.freedesktop.org,collabora.com,vger.kernel.org,kernel.org,google.com,gmail.com,oracle.com,amd.com,asahilina.net,ffwll.ch,linaro.org,lists.linaro.org,linuxfoundation.org];
-	MID_RHS_MATCH_FROM(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:-];
+	NEURAL_HAM(-0.00)[-0.978];
+	TO_DN_NONE(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[mkchauras@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig,lkml];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,kernel];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:mid,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
 
-On Fri Apr 24, 2026 at 1:13 AM JST, Gary Guo wrote:
-> On Thu Apr 23, 2026 at 4:27 PM BST, Alexandre Courbot wrote:
->> On Fri Apr 24, 2026 at 12:09 AM JST, Gary Guo wrote:
->>> On Thu Apr 23, 2026 at 4:01 PM BST, Alexandre Courbot wrote:
->>>>
->>>> I didn't like this `UnsafeCell<Option>` since the last time, but only figured how to replace it now:
->>>>
->>>>     sgt_res: SetOnce<Devres<SGTableMap<T>>>,
->>>>
->>>> It's actually designed for that! And lets you remove at least one unsafe
->>>> statement, while simplifying `get_sg_table` quite a bit. With the other
->>>> suggestions I have below, here is my version of `get_sg_table` for
->>>> reference:
->>>>
->>>>     fn get_sg_table<'a>(
->>>>         &'a self,
->>>>         dev: &'a device::Device<Bound>,
->>>>     ) -> Result<&'a Devres<SGTableMap<T>>> {
->>>>         let _dma_resv = DmaResvGuard::new(self);
->>>>
->>>>         if let Some(devres) = self.sgt_res.as_ref() {
->>>>             Ok(devres)
->>>>         } else {
->>>>             // Only called for the side-effect of populating the GEM SG table.
->>>>             // SAFETY: We grabbed the lock required for calling this function above.
->>>>             from_err_ptr(unsafe {
->>>>                 bindings::drm_gem_shmem_get_pages_sgt_locked(self.as_raw_shmem())
->>>>             })?;
->>>>
->>>>             // INVARIANT:
->>>>             // - We called drm_gem_shmem_get_pages_sgt_locked above and checked that it
->>>>             //   succeeded, fulfilling the invariant of `SGTableMap` that the object's `sgt` field
->>>>             //   is initialized.
->>>>             // - We store this Devres in the object itself and don't move it, ensuring that the
->>>>             //   object it points to remains valid for the lifetime of the `SGTableMap`.
->>>>             let devres =
->>>>                 Devres::new(dev, init!(SGTableMap { obj: self.into() })).inspect_err(|_| {
->>>>                     // We can't make sure that the pages for this object are unmapped on
->>>>                     // driver-unbind, so we need to release the sgt
->>>>                     // SAFETY:
->>>>                     // - We grabbed the lock required for calling this function above
->>>>                     // - We checked above that get_pages_sgt_locked() was successful
->>>>                     unsafe { bindings::__drm_gem_shmem_free_sgt_locked(self.as_raw_shmem()) }
->>>>                 })?;
->>>>
->>>>             self.sgt_res.populate(devres);
->>>>
->>>>             // PANIC: `populate` has just succeeded, guaranteeing that `sgt_res` is populated.
->>>>             Ok(self.sgt_res.as_ref().unwrap())
->>>>         }
->>>>     }
->>>>
->>>> And if only we could populate the `SetOnce` with a `impl Init<T, E>`,
->>>> then we could even remove the DMA reservation acquisition on the fast
->>>> path, because `SetOnce` comes with its own locking and the DMA lock here
->>>> is used outside of its intended scope. I'll try to push the necessary
->>>> work for `SetOnce` and maybe we can do that as a follow-up patch.
->>>
->>> I have this sitting in my once_wip branch for while
->>> https://github.com/nbdd0121/linux/commits/once_wip/
->>> (the specific commit that adds init support is
->>> https://github.com/nbdd0121/linux/commit/4aabdbcf20b11626c253f203745b1d55c37ab2ee).
->>>
->>> This was implemented for lazy revocable support which Alvin has picked up, see
->>> https://lore.kernel.org/rust-for-linux/20260326-b4-tyr-debugfs-v1-1-074badd18716@linux.dev/
->>
->> Haha that's pretty close to what I wrote to test the code. Do you have
->> plans to send it soon?
->
-> I mean.. Alvin has already sent it?
->
-> If you (or someone else) want to carry the patch in another series, by all means.
+Enable experimental rust support for ppc64le and ppc32be. The patch for
+ppc32 has been provided by Link Mauve[1] and ppc64le support[2] has been
+merged over it. ppc32 needs some toolchain fixes mentioned in the patch
+`rust: Add PowerPC support` and the discussion for that is done here[1].
 
-My bad, it was late at night and my focus was a bit down.
+This has been tested on
+- powernv9 hardware
+- pseries P11 hardware
+- pseries(9, 10) qemu
+- powernv(9, 10) qemu
+- rustdoc on x86 and powerpc64le
+- rusttest on x86 and powerpc64le
 
-It's perfect if Alvin keeps carrying this patch.
+We are actively working with our LLVM team to get the target for ppc,
+ppc64 and ppc64le in the rust compiler.
+
+[1] https://lore.kernel.org/all/20260204030507.8203-1-linkmauve@linkmauve.fr
+[2] https://lore.kernel.org/all/20260204042417.83903-1-mkchauras@gmail.com
+
+Changelog:
+V12 -> V13:
+- Added a patch for fixing build issue on ppc32 by Link Mauve
+- Added another patch to fix a build issue in dma-buf
+- Added another patch to enforce minimum `rustc` version for powerpc
+V12: https://lore.kernel.org/all/20260421120958.190430-1-mkchauras@gmail.com/
+
+V11 -> V12:
+- Rebased to mainline (rust/Makefile conflict resolved)
+V11: https://lore.kernel.org/all/20260417152253.2312961-1-mkchauras@gmail.com/
+
+V10 -> V11:
+- Updated `rust/Makefile`
+- Not all libraries are move to `rust/host` directory now. Only
+  proc_macro2, quote and syn are moved
+- Special handling for pin init is added. Details in commit
+- Removed mkdir for `rust/host`, this is now handled by toolchain.
+V10: https://lore.kernel.org/all/20260406200149.3727922-1-mkchauras@gmail.com/
+
+V9 -> V10:
+- rust/Makefile updated with review comments from Miguel
+- Patch 1/4 updated with commit message and subject
+V9: https://lore.kernel.org/all/20260404121610.1956528-1-mkchauras@gmail.com/
+
+V8 -> V9:
+- rust/Makefile updated with a directory instead of abspath
+V8: https://lore.kernel.org/all/20260403145308.1042622-1-mkchauras@gmail.com/
+
+V7 -> V8:
+- rust/Makefile updated to separate host libraries from target
+V7: https://lore.kernel.org/all/20260329160254.2592207-1-mkchauras@gmail.com/
+
+Changelog:
+V6 -> V7:
+- Documentation removed as powerpc is still under development
+- Added a fix for race condition in rust/Makefile
+V6: https://lore.kernel.org/all/20260210090023.2587534-1-mkchauras@gmail.com
+
+V5 -> V6:
+- Added a missing Tested by from Venkat which got missed since V3
+- Support is marked as Maintained instead of experimental
+V5: https://lore.kernel.org/all/20260210053756.2088302-1-mkchauras@gmail.com
+
+V4 -> V5:
+- Removed a nested ifdef from PPC64 for Little endian toolchain
+V4: https://lore.kernel.org/all/20260209105456.1551677-1-mkchauras@gmail.com
+
+V3 -> V4:
+- Co-developed-by header added in patch 1
+V3: https://lore.kernel.org/all/20260205180429.3280657-1-mkchauras@gmail.com
+
+V2 -> V3:
+- Splited HAVE_RUST in 2 lines
+- BINDGEN_TARGET_powerpc initialized before assigning the same to
+  BINDGEN_TARGET
+V2: https://lore.kernel.org/all/20260204210125.613350-1-mkchauras@gmail.com
+
+V1 -> V2:
+- jump label fix for rust has been moved to a separate patch
+- PPC32 support has been taken
+- rust support has been marked experimental
+- target.json dependency has been removed
+- HAVE_RUST now depends on CPU_LITTLE_ENDIAN for PPC64
+
+Link Mauve (2):
+  rust: Make __udivdi3() and __umoddi3() panic
+  rust: Add PowerPC support
+
+Mukesh Kumar Chaurasiya (IBM) (5):
+  rust: Fix "multiple candidates for rmeta dependency core" error
+  dma-resv: Fix undefined symbol when CONFIG_DMA_SHARED_BUFFER is
+    disabled
+  powerpc/jump_label: adjust inline asm to be consistent
+  rust/powerpc: Set min rustc version for powerpc
+  powerpc: Enable Rust for ppc64le
+
+ arch/powerpc/Kconfig                  |  2 ++
+ arch/powerpc/Makefile                 |  7 ++++
+ arch/powerpc/include/asm/jump_label.h | 23 ++++++------
+ include/linux/dma-resv.h              |  2 +-
+ rust/Makefile                         | 52 +++++++++++++++++----------
+ rust/compiler_builtins.rs             |  6 ++++
+ scripts/min-tool-version.sh           |  6 +++-
+ 7 files changed, 68 insertions(+), 30 deletions(-)
+
+-- 
+2.53.0
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
