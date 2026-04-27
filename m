@@ -2,158 +2,129 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +MyoHoqf72kcDgEAu9opvQ
+	id SBCCLyIa8mljnwEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 27 Apr 2026 19:40:26 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 29 Apr 2026 16:48:02 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 14DAC477CD4
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 27 Apr 2026 19:40:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7F90449629D
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 29 Apr 2026 16:47:58 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id EF611404B1
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 27 Apr 2026 17:40:24 +0000 (UTC)
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
-	by lists.linaro.org (Postfix) with ESMTPS id E69803F785
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 27 Apr 2026 17:40:21 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 69758401C1
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 29 Apr 2026 14:47:53 +0000 (UTC)
+Received: from out-177.mta0.migadu.com (out-177.mta0.migadu.com [91.218.175.177])
+	by lists.linaro.org (Postfix) with ESMTPS id B3CFB40178
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 27 Apr 2026 21:27:46 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=google.com header.s=20251104 header.b=DdPfqrkR;
-	dmarc=pass (policy=reject) header.from=google.com;
-	spf=pass (lists.linaro.org: domain of tjmercier@google.com designates 209.85.128.54 as permitted sender) smtp.mailfrom=tjmercier@google.com;
-	arc=pass ("google.com:s=arc-20240605:i=1")
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-488940ccfa6so4085e9.1
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 27 Apr 2026 10:40:21 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777311621; cv=none;
-        d=google.com; s=arc-20240605;
-        b=O0HizkP1Kw2QflKEnnz6MQX8+/8OE5yTQMxui/59LkrTG3u7ecr3yIZUD8P9jELr5W
-         2CN9q+dYJ/f119HciAhM1w9WcbbFil1VTHApZ6jbAX84zb2VEOwCwrsMpjNWcgmJvDDY
-         jTnpZFyO8EalEcFuhERiUq5NuZ0vzZAObQBrv26WZSunLDNfTsxvyP/WmrcSG5ZrMrqC
-         ozX3q80KSaNoBXvskUgjOgmIzMOXGbDBzFYb0zPL7p4rAjh2xVSg26l+Dj1yjos0QoB5
-         b5m17jPYD7qWBkpMdZdb6x8Xw596iwOHEBsqORvc/51KmPt+eZCBt4x4SWfhQFVJDI2C
-         YSdg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=wQPYpl86S/o4OEYS0Pn9HHusXk6T/j3+DCtfMcETKIE=;
-        fh=J3XzT0hiYsL5Tt3PNwv0OWOXQ8fpGm6F04FoOZUBs/A=;
-        b=L2vneEdsdvTcGwzlPGSatXbumyIjLzompPWtpxgjUWeANmSsw01QuFmcRvgw+LWIyH
-         M9Je9vgaB8/+HPRQSfkq0hyGkAZq8VXWRiBLbZd+pHLq5XsutBljsz2PBiddmQ8c9dxq
-         bqi01GzhRtVs4bT0UTXpnx5yN9HcOdyHmg8yERUfwGH5rKFiqD4vvoa5sU0TJyPoxkVQ
-         vuyA8lSkfpD2VrIhtqOtwTRleV2KvDHDEw6d/8Lq9iK1ARIjGI6Z8JEqCiTwH+fSl1QB
-         FLIpXBmaGM9/uEL6xCo8m+tmoLilzXZsxsKT9iom+I3qUu+7C59A30sMOVDYmd+SER9V
-         kWYA==;
-        darn=lists.linaro.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1777311621; x=1777916421; darn=lists.linaro.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=wQPYpl86S/o4OEYS0Pn9HHusXk6T/j3+DCtfMcETKIE=;
-        b=DdPfqrkR4RTY9u7VP9G5P1H/wr2uDLql/orqyHIUtpOU99eb/fBwNo71f9dZh6xy/Y
-         om6y4mjlD10y3etiihT82r/F5QLUHS8xDVmCj2wzd+X52kZb8Gjlogfode8Ic1h2VfOJ
-         ZgQvKcdtYWmat6qVC3AzE1LDZonOEs1TMbo1+/FcZNI8PiCX8AyJfKWVEboBgR/9e5sa
-         8L6GdxhfaqmjYZEQ42C27NLcR5tixXPRN8mE2Hmx4AI36lzCyMMoQTg/ZeCQljyN5oNL
-         a0Ek4UoQEg7gLLmiS/KnZf0+UvF3k1jd92GnfeYOK5DtkkHlPfA3dOU7JZ+Bviks9TG4
-         YuBw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777311621; x=1777916421;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=wQPYpl86S/o4OEYS0Pn9HHusXk6T/j3+DCtfMcETKIE=;
-        b=Q199Xqx33ZAn7I3t2gg91XeAOUO/CgoCWpzRHzPL3GQOQX7xcweusNZ7HcdeObITWY
-         +rs0NqsnpmE2tjVnKd7cY1DaOLVibnP+m+Bn2PQdru0X5MwTmogafewhpmm68Ab9Y0pW
-         WLMPVKF8atqrY23ZtsrakuBMhSDuxJZCioDIXpOaAMdjTpOQFRHbxmxwIBAHlIRGHNbk
-         wuUC5yw+N+6jT5+m9755UPLvRWwUzsrxwITFqMKJpfjf0XY+BzjSv0gPAHEIq0bE6bLD
-         UHN71G5FfbEc2au4Goa1WRYH0uZwW5q83Ew7kSaktmr7hpWd8Ib8I3vjBpqBQRwdxRF3
-         RBvQ==
-X-Forwarded-Encrypted: i=1; AFNElJ/i0MWSrjvGcNpPbXQSJGBgL2nL5zXCiWQ4t1gDPhpsDDpqC8+aNQCrBkVYnvJDR1JKMWGx4a2Yxq25Pbsq@lists.linaro.org
-X-Gm-Message-State: AOJu0YztfpqpMEJL57avfuaw2ANswTESezAYpoNq4jwJhjiKUGGQ9iPD
-	ov17baEwmPc6wm7tuJ9QPi4XrfvxSkjTSiQ4lEBqz9YNVTH9YKpY3FeJHQ/YlC1rSujayrjRT+Y
-	8GOtFe0eaazp4cLtfJKfhkJW+0lT/swt6esRQiWP/
-X-Gm-Gg: AeBDievV4WlSvTL6S6zrm471M6vW+dCQoHykWyoGwr+c275TZOnnjItU30hxiaCB1up
-	6o2sSiR2lCumx/PBGDI0CtV6pDKJ0pr2vLAA+3dIlQmBXTJZWpDTR0cuP0lvhwfc2V2DBP4BEuJ
-	trXO2dMkThMs/8k7D6w4r+dMCOIm7/JaUtr7QOnKpFsHZqmyAwxEK+H+eow09dc361JnYEHEU++
-	9TWu993GcoNtuav3EI6DJwYeEsBRgoZxSsyp2tUthxBewddVOYUHc/M/VFj6o8+GQ0X0Geg7gP4
-	Yetwz5/PcF73GuV2MTJ1CdhsL/uHHIo3XdFc0hki73JN4uR2AZBoBZKnGEc=
-X-Received: by 2002:a05:600c:1e1c:b0:485:1a54:9407 with SMTP id
- 5b1f17b1804b1-48a774024fbmr86295e9.0.1777311620577; Mon, 27 Apr 2026 10:40:20
- -0700 (PDT)
+	dkim=pass header.d=linux.dev header.s=key1 header.b="ig/N7rOx";
+	dmarc=pass (policy=none) header.from=linux.dev;
+	spf=pass (lists.linaro.org: domain of thorsten.blum@linux.dev designates 91.218.175.177 as permitted sender) smtp.mailfrom=thorsten.blum@linux.dev
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+	t=1777325265;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=hueLhtL3zsdmdXnMtuPrauJ8fkjBDESO/03aEH4/H2E=;
+	b=ig/N7rOxAjR6yFr0Jkkz+z60oppTfibLQOzEKI/nc4RCoJvJZ5ASDIIR5H8umv+wM5kMCn
+	LBqhZcPbIsgZfg5y2Q+zwXzqwRjcKAjI7v9HZI2TzUziDgej15Ve5xV+cw0AG2gxVco0TN
+	LTb/eiIzYFH3p5rCtq6nlhlbzImvnIM=
+From: Thorsten Blum <thorsten.blum@linux.dev>
+To: Sumit Semwal <sumit.semwal@linaro.org>,
+	Benjamin Gaignard <benjamin.gaignard@collabora.com>,
+	Brian Starkey <Brian.Starkey@arm.com>,
+	John Stultz <jstultz@google.com>,
+	"T.J. Mercier" <tjmercier@google.com>,
+	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
+Date: Mon, 27 Apr 2026 23:24:56 +0200
+Message-ID: <20260427212454.420004-3-thorsten.blum@linux.dev>
 MIME-Version: 1.0
-References: <20260427172519.417333-3-thorsten.blum@linux.dev>
-In-Reply-To: <20260427172519.417333-3-thorsten.blum@linux.dev>
-From: "T.J. Mercier" <tjmercier@google.com>
-Date: Mon, 27 Apr 2026 10:40:07 -0700
-X-Gm-Features: AVHnY4KrC_-8s-6jQ3WU3OwQLdanE1VG9VKiglfUxWDdXiiJUp5ur2yhP2MZCrM
-Message-ID: <CABdmKX1xp1=_EnicNGj1ZOp0dvma-YevvZk1_3V5FZ8ucUK32A@mail.gmail.com>
-To: Thorsten Blum <thorsten.blum@linux.dev>
-X-Spamd-Bar: -----
-Message-ID-Hash: IH362UYEX7H3MAR56JY4HAANPNFFBR4W
-X-Message-ID-Hash: IH362UYEX7H3MAR56JY4HAANPNFFBR4W
-X-MailFrom: tjmercier@google.com
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1175; i=thorsten.blum@linux.dev; h=from:subject; bh=2Qy1bhZE4ZUxVczuVFGuB6tJXixNg2z/25mUfsiG6bg=; b=owGbwMvMwCUWt7pQ4caZUj3G02pJDJnvr6ht3b0sQqfy14Ly09nCLzf+1VQtz7oVwrXO/n8X3 /bfb6/0dpSyMIhxMciKKbI8mPVjhm9pTeUmk4idMHNYmUCGMHBxCsBElk9k+CvQvddeYz6vfuWJ +ft+GhcWbjd3TekvymXw/Xf30FJHkz0M/xS1BD5HyN83PscmILv89kN9g8wHHxjfZ5j17PQ6rBH WxgoA
+X-Developer-Key: i=thorsten.blum@linux.dev; a=openpgp; fpr=1D60735E8AEF3BE473B69D84733678FD8DFEEAD4
+X-Migadu-Flow: FLOW_OUT
+X-Spamd-Bar: --
+X-MailFrom: thorsten.blum@linux.dev
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
+Message-ID-Hash: SJKPTLKLXERPVYAC73PCBQ5PA5RJBFDN
+X-Message-ID-Hash: SJKPTLKLXERPVYAC73PCBQ5PA5RJBFDN
+X-Mailman-Approved-At: Wed, 29 Apr 2026 14:29:26 +0000
+CC: Thorsten Blum <thorsten.blum@linux.dev>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf: heaps: use max3() in dma_heap_ioctl
+Subject: [Linaro-mm-sig] [PATCH v2] dma-buf: heaps: use max3() in dma_heap_ioctl
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/IH362UYEX7H3MAR56JY4HAANPNFFBR4W/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SJKPTLKLXERPVYAC73PCBQ5PA5RJBFDN/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-X-Rspamd-Queue-Id: 14DAC477CD4
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Queue-Id: 7F90449629D
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [3.59 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[google.com : SPF not aligned (relaxed),reject];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:google.com:reject}];
-	R_DKIM_REJECT(1.00)[google.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+mx];
+X-Spamd-Result: default: False [2.59 / 15.00];
+	R_DKIM_REJECT(1.00)[linux.dev:s=key1];
+	MID_CONTAINS_FROM(1.00)[];
+	DATE_IN_PAST(1.00)[41];
 	MAILLIST(-0.20)[mailman];
-	MIME_BASE64_TEXT(0.10)[];
+	R_SPF_ALLOW(-0.20)[+mx:c];
+	DMARC_POLICY_SOFTFAIL(0.10)[linux.dev : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[google.com:-];
-	MISSING_XM_UA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[tjmercier@google.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	ARC_NA(0.00)[];
+	DKIM_TRACE(0.00)[linux.dev:-];
+	MISSING_XM_UA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_NEQ_ENVFROM(0.00)[thorsten.blum@linux.dev,linaro-mm-sig-bounces@lists.linaro.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.482];
+	NEURAL_HAM(-0.00)[-0.895];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	RCPT_COUNT_SEVEN(0.00)[10];
+	RCPT_COUNT_SEVEN(0.00)[11];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,mail.gmail.com:mid,linux.dev:email]
+	TO_DN_SOME(0.00)[]
 
-T24gTW9uLCBBcHIgMjcsIDIwMjYgYXQgMTA6MjbigK9BTSBUaG9yc3RlbiBCbHVtIDx0aG9yc3Rl
-bi5ibHVtQGxpbnV4LmRldj4gd3JvdGU6DQo+DQo+IFJlcGxhY2UgdHdvIG5lc3RlZCBtYXgoKSBj
-YWxscyB3aXRoIGEgc2luZ2xlIG1heDMoKSBpbiBkbWFfaGVhcF9pb2N0bCgpLg0KPg0KPiBTaWdu
-ZWQtb2ZmLWJ5OiBUaG9yc3RlbiBCbHVtIDx0aG9yc3Rlbi5ibHVtQGxpbnV4LmRldj4NCj4gLS0t
-DQo+ICBkcml2ZXJzL2RtYS1idWYvZG1hLWhlYXAuYyB8IDIgKy0NCj4gIDEgZmlsZSBjaGFuZ2Vk
-LCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQ0KPg0KPiBkaWZmIC0tZ2l0IGEvZHJpdmVy
-cy9kbWEtYnVmL2RtYS1oZWFwLmMgYi9kcml2ZXJzL2RtYS1idWYvZG1hLWhlYXAuYw0KPiBpbmRl
-eCBhYzVmODY4NWE2NDkuLjUyZWVjMmViYjJlOCAxMDA2NDQNCj4gLS0tIGEvZHJpdmVycy9kbWEt
-YnVmL2RtYS1oZWFwLmMNCj4gKysrIGIvZHJpdmVycy9kbWEtYnVmL2RtYS1oZWFwLmMNCj4gQEAg
-LTE1Myw3ICsxNTMsNyBAQCBzdGF0aWMgbG9uZyBkbWFfaGVhcF9pb2N0bChzdHJ1Y3QgZmlsZSAq
-ZmlsZSwgdW5zaWduZWQgaW50IHVjbWQsDQo+ICAgICAgICAgICAgICAgICBpbl9zaXplID0gMDsN
-Cj4gICAgICAgICBpZiAoKHVjbWQgJiBrY21kICYgSU9DX09VVCkgPT0gMCkNCj4gICAgICAgICAg
-ICAgICAgIG91dF9zaXplID0gMDsNCj4gLSAgICAgICBrc2l6ZSA9IG1heChtYXgoaW5fc2l6ZSwg
-b3V0X3NpemUpLCBkcnZfc2l6ZSk7DQo+ICsgICAgICAga3NpemUgPSBtYXgzKGluX3NpemUsIG91
-dF9zaXplLCBkcnZfc2l6ZSk7DQoNCkhpLA0KDQpDb3VsZCB5b3UgYWRkICNpbmNsdWRlIDxsaW51
-eC9taW5tYXguaD4gYXMgd2VsbD8gSXQncyBjdXJyZW50bHkgbWlzc2luZy4NCg0KV2l0aCB0aGF0
-OiBSZXZpZXdlZC1ieTogVC5KLk1lcmNpZXIgPHRqbWVyY2llckBnb29nbGUuY29tPg0KDQpUaGFu
-a3MsDQpULkouDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFy
-by5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZl
-QGxpc3RzLmxpbmFyby5vcmcK
+Replace two nested max() calls with a single max3() in dma_heap_ioctl().
+
+Reviewed-by: T.J. Mercier <tjmercier@google.com>
+Signed-off-by: Thorsten Blum <thorsten.blum@linux.dev>
+---
+Changes in v2:
+- Include minmax.h as suggested by T.J. Mercier
+- v1: https://lore.kernel.org/lkml/20260427172519.417333-3-thorsten.blum@linux.dev/
+---
+ drivers/dma-buf/dma-heap.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/dma-buf/dma-heap.c b/drivers/dma-buf/dma-heap.c
+index ac5f8685a649..d49188893608 100644
+--- a/drivers/dma-buf/dma-heap.c
++++ b/drivers/dma-buf/dma-heap.c
+@@ -13,6 +13,7 @@
+ #include <linux/err.h>
+ #include <linux/export.h>
+ #include <linux/list.h>
++#include <linux/minmax.h>
+ #include <linux/nospec.h>
+ #include <linux/syscalls.h>
+ #include <linux/uaccess.h>
+@@ -153,7 +154,7 @@ static long dma_heap_ioctl(struct file *file, unsigned int ucmd,
+ 		in_size = 0;
+ 	if ((ucmd & kcmd & IOC_OUT) == 0)
+ 		out_size = 0;
+-	ksize = max(max(in_size, out_size), drv_size);
++	ksize = max3(in_size, out_size, drv_size);
+ 
+ 	/* If necessary, allocate buffer for ioctl argument */
+ 	if (ksize > sizeof(stack_kdata)) {
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
