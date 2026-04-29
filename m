@@ -2,65 +2,66 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id IL9/AAJdBGqiHQIAu9opvQ
+	id 0JAnDghdBGqiHQIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:14:10 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:14:16 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id B1022531FE6
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:14:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DD4A4531FFF
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:14:15 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B983340492
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 11:14:08 +0000 (UTC)
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
-	by lists.linaro.org (Postfix) with ESMTPS id D52C13F7DA
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 29 Apr 2026 15:26:18 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 58CBA40475
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 11:14:14 +0000 (UTC)
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+	by lists.linaro.org (Postfix) with ESMTPS id CDE2B3F7DA
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 29 Apr 2026 15:26:23 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=Dg8pqXa1;
+	dkim=pass header.d=gmail.com header.s=20251104 header.b="P/iQFjwv";
 	dmarc=pass (policy=none) header.from=gmail.com;
-	spf=pass (lists.linaro.org: domain of asml.silence@gmail.com designates 209.85.128.51 as permitted sender) smtp.mailfrom=asml.silence@gmail.com
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-488a9033b2cso133240665e9.2
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 29 Apr 2026 08:26:18 -0700 (PDT)
+	spf=pass (lists.linaro.org: domain of asml.silence@gmail.com designates 209.85.128.54 as permitted sender) smtp.mailfrom=asml.silence@gmail.com
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-48374014a77so162933625e9.3
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 29 Apr 2026 08:26:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1777476378; x=1778081178; darn=lists.linaro.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=G9kqbgnidQC23bEvrBAVDYa4e7L0vOouqvUY0ysfe8Y=;
-        b=Dg8pqXa1pFmT7HIz8+E0CDeO/xRwisdCMONgHOmBasvhEN/CbnH3OnK/USVnw7nCAS
-         3wobXaDDhoPQernpwYGUqCwl8EyFpwM7fyHKnDK6jbz+DHY4euAwt+08rfwmVoj5+9KR
-         oFFsm5AnkIBK9Lylnff69H77GDwACVZSMuz8M/67lasm70sGacTy12UJcx+0pKhFHzQa
-         YKE3EKcEb2b5hZLwK/Y9j6JV/PnOSHKjhlg525RaTJzSONqulPqZGuW/pSJqXsdGav3c
-         adNzVGEcWniWlpfpfSd9WTph9JrlF/MY5CslZ4T3/pqORa8d+IC6um7Gy44rP08mqe1L
-         tF6A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777476378; x=1778081178;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1777476383; x=1778081183; darn=lists.linaro.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=G9kqbgnidQC23bEvrBAVDYa4e7L0vOouqvUY0ysfe8Y=;
-        b=k18lYNKzMRmVNGggujJDrkN0rEa7lPMOYuhSlnEjHDAeSwBTxAT+V83k7tXL10AhuA
-         ivLkRjG4XNHfAa2xQrTd1cxUrlJFPFpsr2AgxORgVV1wDGQjsOURywE3DCiVybDn+yWq
-         iemAq4Rj9U1gj0opG7CaPrlo3LKMOM7Uwz6pRxGktnqCNVx9LIcbWD1Gby9cV9Wy3d55
-         xiLNjta8ppmP/jO67qYNdr2mVCxIGZe+wrw8onBo8WCOhGRtf4XvQW8vO6hxwNWJ60C/
-         p52gCW4OXC+BNm3onxEaorH9TU20/Ra7dmelNNUnoW7ytW97GXC746Z/tVT8hlvI1NCU
-         y/rQ==
-X-Forwarded-Encrypted: i=1; AFNElJ+nRvTOOwSZNI2H0zUKeAqFP1kMv483BzIS+NlWoGAY6EjbidgZBx6afCrkQLFKDTwt/XWFrEuPu7cUVqxf@lists.linaro.org
-X-Gm-Message-State: AOJu0YyPmRc6qG/7E7Gb6KRk6XC2arKRfTa8LtTIWCm85XDaXqFDWMDk
-	j+RTLvoO+iaePhhxQz8VFLwV6ErE7d9ID4MO48nafobXFBFWjjjROuG4
-X-Gm-Gg: AeBDiev5k3wZxT8AHEjpNG034wqneXCfcP7f47jhnVtlbO+HOQOKWV8UZIZiR4KNkBY
-	a4RkjMykNzbWGq+p7+3q2+T/7h1XnBI3r6wihK0mp9ZcKc4AWJxwyLCGg3Gn3VCfHmv1dH1eWkS
-	R1tHTvLau6rKasplgW6cE1eb4Ed08dkLvtWCFgoIR13ZscWacclSogHQ4rAt51d98G075AbX3eZ
-	RJOirAaSxBzVYW1DEuIe4vFEmBSWimW+IWSnaA6t+0nDT+BHMT5KKBuyhrM9v7xCbme+//y1mCc
-	OYsmzp1MQD4pe5dJNRmLK0BhqsA6gCpyAs13phjXnLnhPHQIQni6c182/xVZaMbVoztHakpn2V6
-	1icJXU48lptw+iwvLhR88nGU6xSKDHPTpZjdMZU+hRuzNYUE8JM/iZa4d2ESPLUezFcou9XKSys
-	6UmSbQCB091LWeqPj/WAOQ/xDetyM1I7qPvJP3p4sKpPaYtgfyldD60oKAWCXVO7mJW46+vhgH/
-	EDvIYgs8H7phLHyPDTXkmdEK08mFHb9YzUQbJgx0sZH
-X-Received: by 2002:a05:600c:4f92:b0:489:1ff1:74df with SMTP id 5b1f17b1804b1-48a77ae5430mr125646225e9.1.1777476377153;
-        Wed, 29 Apr 2026 08:26:17 -0700 (PDT)
+        bh=Bz5U140iikgjy9qkhQv9ANNAasoYi2fY/CedhAQlGZc=;
+        b=P/iQFjwvMpDYaY2qwV84Z10QTAM962Z2Kd1rj1wvu7XsjThmQNsZIUZ0OqjqEBJ6LA
+         aasIowjaGbbEPjwro5f17Yak0Zrlq3eCkifrUljXM3ONKCE2cDDDj2+x7O+HZCewcJSR
+         Ltj1dUBsDWZ3yTFyDhvfx8aynNsv4v3gUQQ8cbHG0201bdq0Oexrdk1Mmpa9MLKQnQaM
+         Az9ODGaplwldrYk069E7Ya+KEOdQXKFu7HToXHubTqdXLvaX70JIR7PrmA1FS6boB3fp
+         98QlDwdbWPWQuiOkj4p1cFAOCcqbbvsHqTPJ21VtK8pH0Azw6VIw9WKnI3CE2CZIpoVY
+         0Y2g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1777476383; x=1778081183;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=Bz5U140iikgjy9qkhQv9ANNAasoYi2fY/CedhAQlGZc=;
+        b=ByN3Nz25C68vwA3yMv9qKo3JiaqgvTxz0sC3jLV6qCZ78p+4TJcNRJlWtvrFfr+iCW
+         vTSC6yONtbnagKW1rVzHz9htcEB1gzszZH11n0M91TLFqu9JqDzv+2MsIGeALf+G23xt
+         x12zQBJWxjvDr/nS148LFmAou5M+yw92mQyoYWwT5IX9Ed9o810ySGg/f5HdDF5R9AtS
+         4NytdaMA8LMaQOyvfdoTgXh5GjIq8hr45kbUj95HGRPOexQfFOzhJ/A0GshS6MzlGsn6
+         HcH5AfxwTnh8qPUaIXFcXk6czUMirMW0/fNE+Uw2Tz7TUqt0lHMZIyzZHzCZHJMxn3es
+         wQtw==
+X-Forwarded-Encrypted: i=1; AFNElJ/IyUVIdhGFzHLuTjxZlkxDoOOoOh/1G4dESdoM48VI/5pzSkx6QpKtOEakMoBYg5oANjMsQmIQuYERH19o@lists.linaro.org
+X-Gm-Message-State: AOJu0Yy2FgdSkGQcj1kRhy5puDsz16Apbaq0MiQEXsANIuFtlkrtW4iK
+	DaiTnFR1j4ybU+lQiso4YmfoYTrmRbaXNP+7/j2kwk2HVz/Gc8PiLPMN
+X-Gm-Gg: AeBDiet7W5s7OzuiPPj7zU9ChgkGLnhsoxoks86wphWq5Ospyd9jr6vVJyEWWOr7AF2
+	wH83HDWV7YKZ0sYYkiM9fUwWWiO295DwabaMtknrrX8X/SFn/8wX8tSGnvGg407ThWquUyD17+S
+	O3xVeTUeBXtGeLNMwolY869dx9jxkzbg6wOb2q2bHleDZ+ReVxlvPximh2+uCiZEOqYcnJbAXcQ
+	Aq2WSNyDz7wIfaMCBnH5Z37Bz8dM8U8JSh7B1GylIDk+m3TXvuhGtrGI1GU58a4XVh8zXuIS1hg
+	BxGWoyiaxbTcumMeF/QZI3zSBWkYKKzESh7fsnvRaYKsSyJvpdBORLanMFLc5/i8q9Axd0x26KW
+	9BQ4un09U751eTz+sjNyi9KiQbwOmy/KvPJpaDgszV7V4c/Vb5/M5yhqvpqSlKuQiILMJMEKRN3
+	/X2wLjEolzRHRPR6gWbis8M4EUZapH3UmBdZ3eDYwRx0sW2wk5Rzs2mu6rEiFc2l3/FO94w5GrJ
+	6lQEkSKQIznqzS9kGSinE0xkyQ2FuYxqqh2DkswuXRd
+X-Received: by 2002:a05:600c:3b13:b0:48a:52ee:5776 with SMTP id 5b1f17b1804b1-48a77ae049fmr129049305e9.11.1777476382406;
+        Wed, 29 Apr 2026 08:26:22 -0700 (PDT)
 Received: from 127.0.0.1localhost ([82.132.184.31])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-447b76e5c22sm6382951f8f.28.2026.04.29.08.26.13
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-447b76e5c22sm6382951f8f.28.2026.04.29.08.26.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 29 Apr 2026 08:26:16 -0700 (PDT)
+        Wed, 29 Apr 2026 08:26:21 -0700 (PDT)
 From: Pavel Begunkov <asml.silence@gmail.com>
 To: Jens Axboe <axboe@kernel.dk>,
 	Keith Busch <kbusch@kernel.org>,
@@ -79,23 +80,25 @@ To: Jens Axboe <axboe@kernel.dk>,
 	linux-media@vger.kernel.org,
 	dri-devel@lists.freedesktop.org,
 	linaro-mm-sig@lists.linaro.org
-Date: Wed, 29 Apr 2026 16:25:46 +0100
-Message-ID: <cover.1777475843.git.asml.silence@gmail.com>
+Date: Wed, 29 Apr 2026 16:25:47 +0100
+Message-ID: <ae941457cf6cacb9d4c16b6ec904da9ef7fed97f.1777475843.git.asml.silence@gmail.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <cover.1777475843.git.asml.silence@gmail.com>
+References: <cover.1777475843.git.asml.silence@gmail.com>
 MIME-Version: 1.0
 X-Spamd-Bar: --
 X-MailFrom: asml.silence@gmail.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: W7WGPDI626GXFGIHVIRMAAHM3MLAMDWU
-X-Message-ID-Hash: W7WGPDI626GXFGIHVIRMAAHM3MLAMDWU
+Message-ID-Hash: CNG2ETWXFL54JNNTB3RPULFIGQN6SRUV
+X-Message-ID-Hash: CNG2ETWXFL54JNNTB3RPULFIGQN6SRUV
 X-Mailman-Approved-At: Wed, 13 May 2026 11:13:55 +0000
 CC: asml.silence@gmail.com, Nitesh Shetty <nj.shetty@samsung.com>, Kanchan Joshi <joshi.k@samsung.com>, Anuj Gupta <anuj20.g@samsung.com>, Tushar Gohad <tushar.gohad@intel.com>, William Power <william.power@intel.com>, Phil Cayton <phil.cayton@intel.com>, Jason Gunthorpe <jgg@nvidia.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v3 00/10] Add dmabuf read/write via io_uring
+Subject: [Linaro-mm-sig] [PATCH v3 01/10] file: add callback for creating long-term dmabuf maps
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/W7WGPDI626GXFGIHVIRMAAHM3MLAMDWU/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CNG2ETWXFL54JNNTB3RPULFIGQN6SRUV/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -104,7 +107,7 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: B1022531FE6
+X-Rspamd-Queue-Id: DD4A4531FFF
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [2.09 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
@@ -131,93 +134,40 @@ X-Spamd-Result: default: False [2.09 / 15.00];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	NEURAL_SPAM(0.00)[0.892];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
+	NEURAL_SPAM(0.00)[0.881];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
 X-Rspamd-Action: no action
 
-The patch set allows to register a dmabuf to an io_uring instance for
-a specified file and use it with io_uring read / write requests. The
-infrastructure is not tied to io_uring and there could be more users
-in the future. A similar idea was attempted some years ago by Keith [1],
-from where I borrowed a good number of changes, and later was brough up
-by Tushar and Vishal from Intel.
+Introduce a new file callback that allows creating long-term dma
+mapping. All necessary information together with a dmabuf will be passed
+in the second argument of type struct io_dmabuf_token, which will be
+defined in following patches.
 
-It's an opt-in feature for files, and they need to implement a new
-file operation to use it. Only NVMe block devices are supported in this
-series. The user API is built on top of io_uring's "registered buffers",
-where a dmabuf is registered in a special way, but after it can be used
-as any other "registered buffer" with IORING_OP_{READ,WRITE}_FIXED
-requests. It's created via a new file operation and the resulted map is
-then passed through the I/O stack in a new iterator type. There is some
-additional infrastructure to bind it all, which also counts requests
-using a dmabuf map and managing lifetimes, which is used to implement
-map invalidation.
+Signed-off-by: Pavel Begunkov <asml.silence@gmail.com>
+---
+ include/linux/fs.h | 2 ++
+ 1 file changed, 2 insertions(+)
 
-It was tested for GPU <-> NVMe transfers. Also, as it maintains a
-long-term dma mapping, it helps with the IOMMU cost. The numbers
-below are for udmabuf reads previously run by Anuj for different
-IOMMU modes:
-
-- STRICT: before = 570 KIOPS, after = 5.01 MIOPS
-- LAZY: before = 1.93 MIOPS, after = 5.01 MIOPS
-- PASSTHROUGH: before = 5.01 MIOPS, after = 5.01 MIOPS
-
-There are some liburing tests that can serve as an example:
-git: https://github.com/isilence/liburing.git rw-dmabuf-tests-v3
-url: https://github.com/isilence/liburing/tree/rw-dmabuf-tests-v3
-
-[1] https://lore.kernel.org/io-uring/20220805162444.3985535-1-kbusch@fb.com/
-
-v3: - Rework io_uring registration
-    - Move token/map infrastructure code out of blk-mq
-    - Simplify callbacks: remove a separate blk-mq table, which was
-      mostly just forwarding calls (to nvme).
-    - Don't skip dma sync depending on request direction
-    - Fix a couple of hangs
-    - Rename s/dma/dmabuf/
-    - Other small changes
-
-v2: - Don't pass raw dma addresses, wrap it into a driver specific object
-    - Split into two objects: token and map
-    - Implement move_notify
-
-Pavel Begunkov (10):
-  file: add callback for creating long-term dmabuf maps
-  iov_iter: add iterator type for dmabuf maps
-  block: move bvec init into __bio_clone
-  block: introduce dma map backed bio type
-  lib: add dmabuf token infrastructure
-  block: forward create_dmabuf_token to drivers
-  nvme-pci: implement dma_token backed requests
-  io_uring/rsrc: introduce buf registration structure
-  io_uring/rsrc: extend buffer update
-  io_uring/rsrc: add dmabuf backed registered buffers
-
- block/bio.c                     |  28 +++-
- block/blk-merge.c               |  14 ++
- block/blk.h                     |   3 +-
- block/fops.c                    |  16 ++
- drivers/nvme/host/pci.c         | 282 ++++++++++++++++++++++++++++++++
- include/linux/bio.h             |  19 ++-
- include/linux/blk-mq.h          |   9 +
- include/linux/blk_types.h       |   8 +-
- include/linux/fs.h              |   2 +
- include/linux/io_dmabuf_token.h |  92 +++++++++++
- include/linux/io_uring_types.h  |   5 +
- include/linux/uio.h             |  11 ++
- include/uapi/linux/io_uring.h   |  31 +++-
- io_uring/io_uring.c             |   3 +-
- io_uring/rsrc.c                 | 266 +++++++++++++++++++++++++-----
- io_uring/rsrc.h                 |  30 +++-
- io_uring/rw.c                   |   4 +-
- lib/Kconfig                     |   4 +
- lib/Makefile                    |   2 +
- lib/io_dmabuf_token.c           | 272 ++++++++++++++++++++++++++++++
- lib/iov_iter.c                  |  29 +++-
- 21 files changed, 1071 insertions(+), 59 deletions(-)
- create mode 100644 include/linux/io_dmabuf_token.h
- create mode 100644 lib/io_dmabuf_token.c
-
+diff --git a/include/linux/fs.h b/include/linux/fs.h
+index b5b01bb22d12..c5558aab4628 100644
+--- a/include/linux/fs.h
++++ b/include/linux/fs.h
+@@ -1920,6 +1920,7 @@ struct dir_context {
+ 
+ struct io_uring_cmd;
+ struct offset_ctx;
++struct io_dmabuf_token;
+ 
+ typedef unsigned int __bitwise fop_flags_t;
+ 
+@@ -1967,6 +1968,7 @@ struct file_operations {
+ 	int (*uring_cmd_iopoll)(struct io_uring_cmd *, struct io_comp_batch *,
+ 				unsigned int poll_flags);
+ 	int (*mmap_prepare)(struct vm_area_desc *);
++	int (*create_dmabuf_token)(struct file *, struct io_dmabuf_token *);
+ } __randomize_layout;
+ 
+ /* Supports async buffered reads */
 -- 
 2.53.0
 
