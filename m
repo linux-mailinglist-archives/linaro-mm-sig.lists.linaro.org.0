@@ -2,241 +2,210 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id kJHZJ5ddBGqiHQIAu9opvQ
+	id uP/hLp1dBGqiHQIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:16:39 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:16:45 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3DECF53208E
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:16:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 539F7532095
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:16:45 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 51408401F8
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 11:16:38 +0000 (UTC)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
-	by lists.linaro.org (Postfix) with ESMTPS id 859E63F6FF
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 29 Apr 2026 18:50:01 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7082F401F8
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 11:16:44 +0000 (UTC)
+Received: from web04.chillydomains.com (web04.chillydomains.com [193.19.92.170])
+	by lists.linaro.org (Postfix) with ESMTPS id 06DA73F78A
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 29 Apr 2026 19:53:23 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=ZiKs4+Ko;
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (lists.linaro.org: domain of thierry.reding@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=thierry.reding@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by tor.source.kernel.org (Postfix) with ESMTP id 349D36015B;
-	Wed, 29 Apr 2026 18:50:01 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5BEF6C19425;
-	Wed, 29 Apr 2026 18:50:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1777488600;
-	bh=SJYZ4NAfB0jKA2r12K3oUXg2EYSzdPCWQ44kjGJMgLo=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=ZiKs4+KokO+v2SHr7cJRFjeswZtDWAzjDIi7YJZLFDicOWa42t0FtJ97scrmoiUiL
-	 YsjvGJNaROhTcz31Xxw3IN36HhQVVkTcvWofiM/u+JdnNoCJi51qAjuL9iY8yXa9Cz
-	 Lb9/EVcoz/DZ+6UJcQJsHcrbjdeaCuXDVqP+XDLo6nc+fEiZO+5RR09YgxNVqmsRE6
-	 f2xwQcVnUTNF42WTKHXUSjGizaJUfdHMQHie5vUwjbIFkMu4R84ualDCvczf7C1DBq
-	 GgfoEPpj4WRW5lJCJtmyi77fcvlk4IwucF/VAif6QEZdu8VOln9b5y5Cz4cpHWGcEl
-	 285blVyaIgMGw==
-Date: Wed, 29 Apr 2026 20:49:58 +0200
-From: Thierry Reding <thierry.reding@kernel.org>
-To: Maxime Ripard <mripard@redhat.com>
-Message-ID: <afJSQbArB8USb6mt@orome>
-References: <20260122161009.3865888-1-thierry.reding@kernel.org>
- <20260122161009.3865888-7-thierry.reding@kernel.org>
- <20260123-meteoric-butterfly-of-imagination-fd691f@houat>
- <aY3nov29aBGWw93Y@orome>
- <20260218-voracious-orchid-malamute-febce0@houat>
+	dkim=pass header.d=web04.chillydomains.com header.s=dkim header.b="1vj/rErK";
+	dmarc=none;
+	spf=none (lists.linaro.org: domain of mfritsche@reauktion.de has no SPF policy when checking 193.19.92.170) smtp.mailfrom=mfritsche@reauktion.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=web04.chillydomains.com; s=dkim; h=From:To:Cc:Subject:Date:
+	Message-ID:X-Mailer:MIME-Version:Content-Type:
+	Content-Transfer-Encoding; bh=YdZ585r8V4E5fIuQnRHHEPO5/1uSUDu/m0
+	GZmLya3es=; b=1vj/rErKfLqdvPkaG7tQijNJlnMKzq3V9bInusLa5pAamfmMu6
+	cNuGkzACHYfNYN4jN0F2CaiOl/W7T6Q2fkOIuhNkjKF0iJnZHhOmlNr4w+JPyB5M
+	Gzkst5aqBPrurZmJaNlb7pJ7q3JSF3Qz33BJ4/f3Vq3Mll/4EghofNfHsevT1JQx
+	wJ0fv/V3BrzOSUyvo7j4mRHAOJLPKB2rSXEX9PSoY4zvmWs+ZL0Mkd46betkApbG
+	NVTpRCLv5ccro0DY7BCXh8gWJNXJhhUSzTeR7KJeUJNroOpZGc1Uu7144jPwsQ2f
+	q581v2KAPxqgF9wh2jnPqaiW4PgXFayBh2aw==
+Received: (qmail 2738904 invoked by uid 7799); 29 Apr 2026 21:53:22 +0200
+Received: by simscan 1.4.0 ppid: 2738885, pid: 2738893, t: 0.6424s
+         scanners: clamav: 0.103.9/m:62/d:27778
+Received: from 31.29.52.71.dynamic-pppoe.dt.ipv4.wtnet.de (HELO localhost) (automation@reauktion.de@31.29.52.71) by web04.chillydomains.com with SMTP [64555]; 29 Apr 2026 21:53:21 +0200
+From: Markus Fritsche <mfritsche@reauktion.de>
+To: Tomasz Figa <tfiga@chromium.org>,
+	Marek Szyprowski <m.szyprowski@samsung.com>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+	Ezequiel Garcia <ezequiel@vanguardiasur.com.ar>,
+	Philipp Zabel <p.zabel@pengutronix.de>,
+	Jacob Chen <jacob-chen@iotwrt.com>,
+	Heiko Stuebner <heiko@sntech.de>
+Date: Wed, 29 Apr 2026 19:53:03 +0000
+Message-ID: <20260429195306.239666-1-mfritsche@reauktion.de>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-In-Reply-To: <20260218-voracious-orchid-malamute-febce0@houat>
-X-Spamd-Bar: -----
-X-MailFrom: thierry.reding@kernel.org
+X-Spamd-Bar: --
+X-MailFrom: mfritsche@reauktion.de
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: SWGYVHY4SROUJM5ERIB6WELZZJZOHBYT
-X-Message-ID-Hash: SWGYVHY4SROUJM5ERIB6WELZZJZOHBYT
+Message-ID-Hash: 5BQPE2UWRMODT3DQ3JZX3NNATVKG4ZVA
+X-Message-ID-Hash: 5BQPE2UWRMODT3DQ3JZX3NNATVKG4ZVA
 X-Mailman-Approved-At: Wed, 13 May 2026 11:15:56 +0000
-CC: David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T . J . Mercier" <tjmercier@google.com>, Andrew Morton <akpm@linux-foundation.org>, David Hildenbrand <david@redhat.com>, Mike Rapoport <rppt@kernel.org>, Sumit Garg <sumit.garg@kernel.org>, dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, linux-tegra@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-mm@kvack.org
+CC: linux-media@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-rockchip@lists.infradead.org, linux-arm-kernel@lists.infradead.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 06/10] dma-buf: heaps: Add support for Tegra VPR
+Subject: [Linaro-mm-sig] [PATCH RFC 0/3] media: videobuf2: opt-in dma_resv producer fences for V4L2 dmabuf exports
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SWGYVHY4SROUJM5ERIB6WELZZJZOHBYT/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5BQPE2UWRMODT3DQ3JZX3NNATVKG4ZVA/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============2714094593284559580=="
-X-Rspamd-Queue-Id: 3DECF53208E
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+X-Rspamd-Queue-Id: 539F7532095
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [2.89 / 15.00];
-	SIGNED_PGP(-2.00)[];
-	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
-	DATE_IN_PAST(1.00)[328];
-	R_DKIM_REJECT(1.00)[kernel.org:s=k20201202];
-	MID_RHS_NOT_FQDN(0.50)[];
-	MAILLIST(-0.20)[mailman];
-	MIME_GOOD(-0.20)[multipart/mixed,multipart/signed,text/plain];
+X-Spamd-Result: default: False [2.69 / 15.00];
+	DATE_IN_PAST(1.00)[327];
+	MID_CONTAINS_FROM(1.00)[];
+	R_DKIM_REJECT(1.00)[web04.chillydomains.com:s=dkim];
 	R_SPF_ALLOW(-0.20)[+mx:c];
+	MAILLIST(-0.20)[mailman];
+	DMARC_POLICY_SOFTFAIL(0.10)[reauktion.de : SPF not aligned (relaxed),none];
+	MIME_BASE64_TEXT(0.10)[];
+	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
-	ARC_NA(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[20];
-	MIME_TRACE(0.00)[0:+,1:+,2:+,3:~,4:+];
-	FREEMAIL_CC(0.00)[gmail.com,ffwll.ch,linaro.org,kernel.org,collabora.com,arm.com,google.com,linux-foundation.org,redhat.com,lists.freedesktop.org,vger.kernel.org,lists.linaro.org,kvack.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.463];
-	FROM_NEQ_ENVFROM(0.00)[thierry.reding@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[web04.chillydomains.com:-];
+	FROM_NEQ_ENVFROM(0.00)[mfritsche@reauktion.de,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:-];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,dt];
+	TO_DN_SOME(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	NEURAL_SPAM(0.00)[0.690];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,reauktion.de:mid]
 X-Rspamd-Action: no action
 
-
---===============2714094593284559580==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="d2myfaz5io3m7bs5"
-Content-Disposition: inline
-
-
---d2myfaz5io3m7bs5
-Content-Type: text/plain; protected-headers=v1; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH v2 06/10] dma-buf: heaps: Add support for Tegra VPR
-MIME-Version: 1.0
-
-On Wed, Feb 18, 2026 at 10:42:22AM +0100, Maxime Ripard wrote:
-> On Thu, Feb 12, 2026 at 03:50:09PM +0100, Thierry Reding wrote:
-> > On Fri, Jan 23, 2026 at 02:30:14PM +0100, Maxime Ripard wrote:
-> > > Hi,
-> > >=20
-> > > On Thu, Jan 22, 2026 at 05:10:05PM +0100, Thierry Reding wrote:
-> > > > From: Thierry Reding <treding@nvidia.com>
-> > > >=20
-> > > > NVIDIA Tegra SoCs commonly define a Video-Protection-Region, which =
-is a
-> > > > region of memory dedicated to content-protected video decode and
-> > > > playback. This memory cannot be accessed by the CPU and only certain
-> > > > hardware devices have access to it.
-> > > >=20
-> > > > Expose the VPR as a DMA heap so that applications and drivers can
-> > > > allocate buffers from this region for use-cases that require this k=
-ind
-> > > > of protected memory.
-> > > >=20
-> > > > VPR has a few very critical peculiarities. First, it must be a sing=
-le
-> > > > contiguous region of memory (there is a single pair of registers th=
-at
-> > > > set the base address and size of the region), which is configured by
-> > > > calling back into the secure monitor. The memory region also needs =
-to
-> > > > quite large for some use-cases because it needs to fit multiple vid=
-eo
-> > > > frames (8K video should be supported), so VPR sizes of ~2 GiB are
-> > > > expected. However, some devices cannot afford to reserve this amount
-> > > > of memory for a particular use-case, and therefore the VPR must be
-> > > > resizable.
-> > > >=20
-> > > > Unfortunately, resizing the VPR is slightly tricky because the GPU =
-found
-> > > > on Tegra SoCs must be in reset during the VPR resize operation. Thi=
-s is
-> > > > currently implemented by freezing all userspace processes and calli=
-ng
-> > > > invoking the GPU's freeze() implementation, resizing and the thawin=
-g the
-> > > > GPU and userspace processes. This is quite heavy-handed, so eventua=
-lly
-> > > > it might be better to implement thawing/freezing in the GPU driver =
-in
-> > > > such a way that they block accesses to the GPU so that the VPR resi=
-ze
-> > > > operation can happen without suspending all userspace.
-> > > >=20
-> > > > In order to balance the memory usage versus the amount of resizing =
-that
-> > > > needs to happen, the VPR is divided into multiple chunks. Each chun=
-k is
-> > > > implemented as a CMA area that is completely allocated on first use=
- to
-> > > > guarantee the contiguity of the VPR. Once all buffers from a chunk =
-have
-> > > > been freed, the CMA area is deallocated and the memory returned to =
-the
-> > > > system.
-> > > >=20
-> > > > Signed-off-by: Thierry Reding <treding@nvidia.com>
-> > >=20
-> > > Aside from the discussion on CMA, it doesn't look like the heap defin=
-es
-> > > anywhere the attributes of the allocated buffers this heap provides.
-> >=20
-> > Attributes like what? Where would you expect the driver to define this?
-> > I don't see anything in struct drm_heap_export_info that sounds like
-> > what you expect, nor does the allocation ABI provide any means of
-> > reporting attributes.
-> >=20
-> > There's also not a whole lot to this, other than that the memory
-> > allocated by this can't be accessed by anything other than a select set
-> > of devices. You can't have any CPU access to these buffers (the hardware
-> > will refuse to let the CPU read from this memory) either, which is
-> > hinted at by the fact that no mmap() operations are allowed.
-> >=20
-> > Can you elaborate what you're looking for?
->=20
-> Are the buffers you're getting when allocating cacheable? uncacheable?
-> mappable? physically or virtually contiguous? etc.
->=20
-> See
-> https://docs.kernel.org/userspace-api/dma-buf-heaps.html#heaps
-
-The CPU doesn't have access to the contents of these buffers, so
-cacheable or uncacheable aren't really meaningful, but I guess they are
-unmappable in that sense. The buffers are physically contiguous, but I
-think "protected" is the right name for the heap since it most
-accurately describes what the purpose (and access pattern) is.
-
-Thierry
-
---d2myfaz5io3m7bs5
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCgAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmnyUtYACgkQ3SOs138+
-s6FR+g/+KsYWfQUZ129aKCUNsoLuGu/cyN7j8T6Z/3ilgL0EC9R58tbva6UNIcs8
-8r2onzdPn4w0huB+6STgpihIyHcmj/Uz+Oe99KMc9dtsU9ZJQ3ZXimgI74FU+Rpw
-etJC0iu8ZzUj4E46mO2wUxhq1Hw9v/+ozBlejV1Z2+07PrfxYANnB6AfrJctpWfR
-oHSChS/KXwfgBN4VJUcDr9Oe9ldyzolQp/8zUNYjfIn7U8y/RzJrm/qk6llDpqmX
-JVnqBG6sPty/tCi48FH6zyrD3xTi83Od3oxpLVTPk/wIOJANhJ1EMDXWicQwrWLc
-eeGvG0WWTNx7+8Ej95VB/LPguytkBN3QwJwZb9d9gBOYKewiKLM41fSMhSpIjz+j
-3g0DhGqKSSlk4mVqw1BQik6+wIBGCSQSZxXnqjtwOoCy7XREJbU+POiSKnczfm7/
-5+YVt7Se5070nu3fc1Pl9m0vlacUB6PfYKpR47BJE8KbT5hcyDUpAK96Spo4d1L0
-B+mC14GNVj1/cAV9X82JR8MhB+IsZLgWKoXV7VKQOmrQmmN7WF78iCiiYWQ0/1CY
-f98vLHUgPFfpyp2laMldeuILA1YYOX73cANruKUqSz2baWdNV/YEAkShnVJxDynq
-sUPyc9EarzQeCDHok0jWlg+/+IlZJoXgOHIt3ToaY3R0kns97JI=
-=hyUh
------END PGP SIGNATURE-----
-
---d2myfaz5io3m7bs5--
-
---===============2714094593284559580==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============2714094593284559580==--
+SGksDQoNClRoaXMgc2VyaWVzIHByb3Bvc2VzIGEgc21hbGwgb3B0LWluIEFQSSBpbiB2aWRlb2J1
+ZjItY29yZSB0aGF0IGxldHMgVjRMMg0KZHJpdmVycyBwb3B1bGF0ZSBhIGRtYV9yZXN2IGV4Y2x1
+c2l2ZSB3cml0ZSBmZW5jZSBvbiB0aGUgZG1hYnVmcyB0aGV5DQpleHBvcnQgdG8gdXNlcnNwYWNl
+LCBzaWduYWxsZWQgd2hlbiB0aGUgYnVmZmVyIHRyYW5zaXRpb25zIHRvDQpWQjJfQlVGX1NUQVRF
+X0RPTkUuIFR3byBleGFtcGxlIGRyaXZlcnMgKGhhbnRybywgcm9ja2NoaXAtcmdhKSBvcHQgaW4N
+CnRvIGRlbW9uc3RyYXRlIHRoZSBjYWxsIHNoYXBlOyB0aGUgY2hhbmdlIGlzIG5vLW9wIGZvciBl
+dmVyeSBvdGhlcg0KZHJpdmVyLg0KDQpXaHkNCi0tLQ0KTW9kZXJuIFdheWxhbmQgY29tcG9zaXRv
+cnMgYW5kIGFueSBvdGhlciB1c2Vyc3BhY2UgY29uc3VtZXJzIHRoYXQNCmltcG9ydCBWNEwyLXBy
+b2R1Y2VkIGRtYWJ1ZnMgYW5kIHdhbnQgdG8gZG8gaW1wbGljaXQgc3luY2hyb25pemF0aW9uDQp0
+aGUgc3BlYy1jbGVhbiB3YXkgKHBvbGwoUE9MTElOKSBvbiB0aGUgZG1hYnVmIGZkLCBvcg0KRE1B
+X0JVRl9JT0NUTF9FWFBPUlRfU1lOQ19GSUxFIGZvciBhIHN5bmNfZmlsZSkgY3VycmVudGx5IGdl
+dCBlaXRoZXI6DQoNCjEuIEEgc3R1YiBmZW5jZSBmcm9tIGRtYV9idWZfZXhwb3J0X3N5bmNfZmls
+ZSgpLCBiZWNhdXNlIHRoZSBkbWFidWYncw0KICAgZG1hX3Jlc3YgaGFzIG5vIGZlbmNlcyBwb3B1
+bGF0ZWQuIFRoZSBrZXJuZWwgc3Vic3RpdHV0ZXMNCiAgIGRtYV9mZW5jZV9nZXRfc3R1YigpIHdo
+aWNoIGlzIHBlcm1hbmVudGx5IHNpZ25hbGxlZC4gVGhlIGNvbXBvc2l0b3INCiAgICJzdWNjZXNz
+ZnVsbHkiIHdhaXRzIG9uIGEgZmVuY2UgdGhhdCByZXByZXNlbnRzIG5vdGhpbmcgcmVhbCBhYm91
+dA0KICAgdGhlIHByb2R1Y2VyJ3Mgc3RhdGUuDQoyLiBBIHBvbGwoUE9MTElOKSBvbiB0aGUgZG1h
+YnVmIGZkIHRoYXQgcmV0dXJucyBpbW1lZGlhdGVseSBmb3IgdGhlDQogICBzYW1lIHJlYXNvbiDi
+gJQgZG1hX2J1Zl9wb2xsX2FkZF9jYiBmaW5kcyB6ZXJvIGZlbmNlcyBpbiB0aGUgcmVzdiwNCiAg
+IHRyaWdnZXJzIHRoZSB3YWtlIGNhbGxiYWNrIGlubGluZSwgYW5kIHJlcG9ydHMgUE9MTElOIHJl
+YWR5IGJlZm9yZQ0KICAgdGhlIHByb2R1Y2VyIGhhcyBhY3R1YWxseSBzYWlkIGFueXRoaW5nLg0K
+DQpUb2RheSB0aGlzIHdvcmtzIGFzIGEgaGFwcHkgYWNjaWRlbnQgb24gbW9zdCBwYXRocyBiZWNh
+dXNlIGNsaWVudHMNCmF0dGFjaCBidWZmZXJzIGFmdGVyIFZJRElPQ19EUUJVRiwgd2hpY2ggdGhl
+IHVzZXJzcGFjZSBWNEwyIGNvbnRyYWN0DQpndWFyYW50ZWVzIG9ubHkgcmV0dXJucyBhIGJ1ZmZl
+ciBhZnRlciB0aGUgcHJvZHVjZXIgaXMgZG9uZS4gU28gdGhlDQppbXBsaWNpdCAidGhlIGtlcm5l
+bCdzIHN0dWIgZmVuY2UgaXMgZmluZSBiZWNhdXNlIHRoZSBidWZmZXIgaXMNCmFscmVhZHkgY29t
+cGxldGUgYnkgdGhlIHRpbWUgYW55b25lIHBvbGxzIGl0IiBhc3N1bXB0aW9uIGhhcyBoZWxkLg0K
+DQpCdXQ6DQoNCi0gSXQncyBhIGNvbnRyYWN0IGdhcC4gVGhlIGtlcm5lbCBjbGFpbXMgdG8gZXhw
+b3NlIGltcGxpY2l0IHN5bmM7IGl0DQogIGRvZXMgbm90LCBmb3IgVjRMMiBwcm9kdWNlcnMuDQot
+IEl0IHBhaWQgbGF0ZW5jeSBmb3Igbm90aGluZy4gRXZlcnkgV2F5bGFuZCBmcmFtZSBmcm9tIGEg
+VjRMMg0KICBwcm9kdWNlciBwYXlzIGEgRE1BX0JVRl9JT0NUTF9FWFBPUlRfU1lOQ19GSUxFIHJv
+dW5kLXRyaXAgZm9yIGENCiAgZmVuY2UgdGhhdCdzIHN0dWItc2lnbmFsbGVkLiBPbiBNYWxpLWNs
+YXNzIGhhcmR3YXJlIChSSzM1NjYgV2F5bGFuZA0KICBjaHJvbWUgdmlkZW8gcGxheWJhY2spLCB0
+aGlzIGNvbnRyaWJ1dGVkIHRvIGNvbXBvc2l0b3Igc3RhbGxzLg0KICBSZW1vdmluZyB0aGUgd2Fp
+dCBhdCB0aGUgY29tcG9zaXRvciBsZXZlbCBpcyBhIHdvcmthcm91bmQsIG5vdCBhDQogIGZpeC4N
+Ci0gSXQgYmxvY2tzIGRvd25zdHJlYW0gY29uc3VtZXJzIGZyb20gZG9pbmcgdGhlIHJpZ2h0IHRo
+aW5nLiBBDQogIFdheWxhbmQgY29tcG9zaXRvciB0aGF0IGRlZmVuc2l2ZWx5IHdhaXRzIG9uIGEg
+c3luY19maWxlIGdldHMgYQ0KICBzdHViLWZlbmNlIHBhc3MtdGhyb3VnaCB3aXRoIG5vIGFjdHVh
+bCBnYXRpbmc7IGlmIHRoZSBWNEwyIGRyaXZlcg0KICBldmVyIGhhcyBhbiBvdXQtb2YtYmFuZCBw
+YXRoIHRoYXQgcmVsZWFzZXMgdGhlIGJ1ZmZlciBiZWZvcmUNCiAgZmluaXNoaW5nIHRoZSB3cml0
+ZSwgdGhlcmUgaXMgbm8gZmVuY2UgdG8gZ2F0ZSBvbi4NCg0KV2hhdA0KLS0tLQ0KUGF0Y2ggMSBh
+ZGRzOg0KDQotIHN0cnVjdCBkbWFfZmVuY2UgKnJlbGVhc2VfZmVuY2UgdG8gc3RydWN0IHZiMl9i
+dWZmZXINCi0gdTY0IGRtYV9yZXN2X2ZlbmNlX2NvbnRleHQgKyBhdG9taWM2NF90IGRtYV9yZXN2
+X2ZlbmNlX3NlcW5vICsNCiAgc3BpbmxvY2tfdCBkbWFfcmVzdl9mZW5jZV9sb2NrIHRvIHN0cnVj
+dCB2YjJfcXVldWUNCi0gdmIyX2J1ZmZlcl9hdHRhY2hfcmVsZWFzZV9mZW5jZSh2Yikg4oCUIGRy
+aXZlcnMgY2FsbCB0aGlzIGZyb20gdGhlaXINCiAgYnVmX3F1ZXVlIGNhbGxiYWNrLiBBbGxvY2F0
+ZXMgYSBkbWFfZmVuY2Ugb24gdGhlIHF1ZXVlJ3MgZmVuY2UNCiAgY29udGV4dCwgYXR0YWNoZXMg
+aXQgYXMgRE1BX1JFU1ZfVVNBR0VfV1JJVEUgb24gZWFjaCBwbGFuZSdzDQogIGRtYWJ1Zi0+cmVz
+di4gTm8tb3AgZm9yIGJ1ZmZlcnMgd2l0aG91dCBleHBvcnRlZCBkbWFidWZzLg0KLSB2YjJfYnVm
+ZmVyX2RvbmUoKSBleHRlbmRlZCB0byBzaWduYWwrcHV0IHRoZSBmZW5jZSBpZiBhdHRhY2hlZCwN
+CiAgc28gdGhlIHByb2R1Y2VyJ3MgY29tcGxldGlvbiBzaWduYWwgbGFuZHMgaW4gdGhlIHJlc3Yg
+c3luY2hyb25vdXNseQ0KICB3aXRoIHRoZSB1c2Vyc3BhY2UgRFFCVUYgd2FrZXVwLg0KDQpQYXRj
+aGVzIDIgYW5kIDMgYWRkIGEgc2luZ2xlIGNhbGwgdG8gdGhlIGhlbHBlciBmcm9tIGhhbnRyb19i
+dWZfcXVldWUNCmFuZCByZ2FfYnVmX3F1ZXVlIHJlc3BlY3RpdmVseS4gQm90aCBhcmUgZGVtb25z
+dHJhdGlvbiBkcml2ZXJzOyBvdGhlcg0KdmIyIGRyaXZlcnMgY2FuIG9wdCBpbiBpbmNyZW1lbnRh
+bGx5IHdpdGggdGhlIHNhbWUgb25lLWxpbmUgY2hhbmdlLg0KDQpUZXN0ZWQgb24NCi0tLS0tLS0t
+LQ0KUGluZVRhYjIgKFJLMzU2NiAvIE1hbGktRzUyIHBhbmZyb3N0IC8gbWFpbmxpbmUgNi4xOS4x
+MCwgdGhpcyBzZXJpZXMNCmJhY2twb3J0ZWQpLCBwbGF5aW5nIDEwODBwMzAgSC4yNjQgaW4gY2hy
+b21pdW0gdW5kZXIgS0RFIFBsYXNtYSA2LjYuNA0KV2F5bGFuZC4gVGhlIHRlc3QgaGFybmVzcyBp
+cyB0aGUgY2hyb21pdW0tZm91cmllciBwYXRjaCBzZXJpZXMgYXQNCmh0dHBzOi8vZ2l0aHViLmNv
+bS9tYXJmcml0L2ZvdXJpZXIg4oCUIGNocm9taXVtIHBsdXMgYSBLV2luIHBhdGNoDQp0aGF0ICpw
+cmV2aW91c2x5IGJ5cGFzc2VkKiBUcmFuc2FjdGlvbjo6d2F0Y2hEbWFCdWYgYmVjYXVzZSB0aGUN
+Cmtlcm5lbC1zaWRlIGZlbmNlIHdhcyBzdHViLXNpZ25hbGxlZC4gV2l0aCB0aGlzIHNlcmllcyBh
+cHBsaWVkLCB0aGUNCmJ5cGFzcyBiZWNvbWVzIHVubmVjZXNzYXJ5OyBLV2luJ3MgZmVuY2Ugd2Fp
+dCBjb21wbGV0ZXMgY29ycmVjdGx5DQpiZWNhdXNlIHRoZSBmZW5jZSBub3cgc2lnbmFscyB3aGVu
+IGhhbnRybyBjb21wbGV0ZXMgdGhlIGNhcHR1cmUNCmJ1ZmZlciB3cml0ZS4NCg0KRW5kLXRvLWVu
+ZCByZXN1bHQgYmVmb3JlIHRoZSBrZXJuZWwgcGF0Y2ggKGNocm9taXVtICsgUXQgNiBwYXRjaGVz
+ICsNCktXaW4gd2F0Y2hEbWFCdWYgYnlwYXNzKTogMTA4MHAzMCBILjI2NCBwbGF5cyB0aHJvdWdo
+LCB+ODElIGNvbWJpbmVkDQpjaHJvbWUgQ1BVLCBidXQgdGhlIHdhdGNoRG1hQnVmIGJ5cGFzcyB3
+ZWFrZW5zIEtXaW4ncyBkZWZlbnNlcyBhZ2FpbnN0DQptaXNiZWhhdmluZyBjbGllbnRzLg0KDQpF
+bmQtdG8tZW5kIHJlc3VsdCBhZnRlciB0aGUga2VybmVsIHBhdGNoIChjaHJvbWl1bSArIFF0IDYg
+cGF0Y2hlcyArDQpwbGFpbiB1bm1vZGlmaWVkIEtXaW4pOiAxMDgwcDMwIEguMjY0IHBsYXlzIHRo
+cm91Z2ggd2l0aCB0aGUgc2FtZSBDUFUNCnByb2ZpbGUsIEtXaW4ncyB3YXRjaERtYUJ1ZiB3YWl0
+IGNvbXBsZXRlcyB3aXRoaW4gbWljcm9zZWNvbmRzIGFnYWluc3QNCnRoZSBub3ctcmVhbCBwcm9k
+dWNlciBmZW5jZSwgbm8gZGVmZW5zZXMgd2Vha2VuZWQuDQoNCldoYXQncyBtaXNzaW5nIGluIHRo
+aXMgUkZDDQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KLSBPdGhlciB2YjItdXNpbmcgZHJp
+dmVycyBkb24ndCBvcHQgaW4uIEVhY2ggbWFpbnRhaW5lciBzaG91bGQgbG9vaw0KICBhdCB0aGVp
+ciBkcml2ZXIgYW5kIGRlY2lkZS4gVGhlIGhhbnRybyArIHJnYSBwYXRjaGVzIHNob3cgdGhlDQog
+IHNoYXBlOyBjb3B5aW5nIGl0IHRvIG90aGVyIGRyaXZlcnMgc2hvdWxkIGJlIHN0cmFpZ2h0Zm9y
+d2FyZC4NCi0gRm9yIGRyaXZlcnMgdGhhdCBoYXZlIGludGVybWVkaWF0ZSBpbWFnZS1wcm9jZXNz
+b3Igc3RhZ2VzIChlLmcuDQogIENTSSAtPiBJU1AgLT4gdXNlciksIHRoZSBmZW5jZSBzZW1hbnRp
+Y3MgYWNyb3NzIHN0YWdlIGJvdW5kYXJpZXMNCiAgYXJlIG91dCBvZiBzY29wZSBoZXJlLiBUaGlz
+IHNlcmllcyBvbmx5IGFkZHJlc3NlcyB0aGUgcHJvZHVjZXItdG8tDQogIHVzZXJzcGFjZSBlZGdl
+Lg0KLSBObyBzZWxmdGVzdC4gdmlkZW9idWYyIGRvZXNuJ3QgaGF2ZSBhIGdyZWF0IGluLXRyZWUg
+c2VsZnRlc3QgaGFybmVzcw0KICBmb3IgZG1hYnVmIGZsb3dzOyB0aGUgdmFsaWRhdGlvbiBpcyBl
+bmQtdG8tZW5kIGF0IHRoZSB1c2Vyc3BhY2UNCiAgY29uc3VtZXIgbGV2ZWwgKEtXaW4sIGluIG91
+ciBjYXNlKS4NCg0KUmV2aWV3cyBlc3BlY2lhbGx5IHdlbGNvbWUgb246DQoNCi0gVGhlIGRlY2lz
+aW9uIHRvIG1ha2UgdGhpcyBvcHQtaW4gcGVyIGRyaXZlciB2cy4gYXV0b21hdGljIGZvciBhbGwN
+CiAgdmIyLUNBUFRVUkUgcXVldWVzLiBBdXRvLW9uIHdvdWxkIGZvcmNlIGV2ZXJ5IGRyaXZlciB0
+byBiZSBhdWRpdGVkOw0KICBvcHQtaW4gaXMgaW5jcmVtZW50YWwgYW5kIHNhZmVyIGJ1dCBsZWF2
+ZXMgdGhlIGNvbnRyYWN0IGdhcCBmb3INCiAgZHJpdmVycyBub2JvZHkgdG91Y2hlcy4NCi0gV2hl
+dGhlciB2YjJfYnVmZmVyX2RvbmUgaXMgdGhlIHJpZ2h0IHBsYWNlIHRvIHNpZ25hbCB2cy4gYW4g
+ZWFybGllcg0KICBob29rIChlLmcuIGltbWVkaWF0ZWx5IGFmdGVyIERNQS1mcm9tLWRldmljZSBm
+aW5pc2hlcykuIEZvciBoYW50cm8NCiAgdGhlIHR3byBhcmUgZWZmZWN0aXZlbHkgdGhlIHNhbWU7
+IGZvciBkcml2ZXJzIHdpdGggYXN5bmNocm9ub3VzDQogIHBvc3QtcHJvY2Vzc2luZyB0aGV5IG1h
+eSBkaWZmZXIuDQotIFRoZSBjaG9pY2Ugb2YgRE1BX1JFU1ZfVVNBR0VfV1JJVEUg4oCUIHdlIGFy
+ZSBlbWl0dGluZyB0aGUgcHJvZHVjZXIncw0KICB3cml0ZSBjb21wbGV0aW9uLCBzbyBXUklURSBt
+YXRjaGVzIGRtYS1idWYgZG9jdW1lbnRhdGlvbiwgYnV0IGENCiAgc2FuaXR5IGNoZWNrIGlzIHdl
+bGNvbWUuDQoNCkNoZWVycywNCk1hcmt1cw0KDQoNCk1hcmt1cyBGcml0c2NoZSAoMyk6DQogIG1l
+ZGlhOiB2aWRlb2J1ZjI6IGFkZCBkbWFfcmVzdiByZWxlYXNlLWZlbmNlIGhlbHBlcg0KICBtZWRp
+YTogaGFudHJvOiBhdHRhY2ggZG1hX3Jlc3YgcmVsZWFzZSBmZW5jZSBhdCBidWZfcXVldWUNCiAg
+bWVkaWE6IHJvY2tjaGlwLXJnYTogYXR0YWNoIGRtYV9yZXN2IHJlbGVhc2UgZmVuY2UgYXQgYnVm
+X3F1ZXVlDQoNCiAuLi4vbWVkaWEvY29tbW9uL3ZpZGVvYnVmMi92aWRlb2J1ZjItY29yZS5jICAg
+fCA5NSArKysrKysrKysrKysrKysrKysrDQogZHJpdmVycy9tZWRpYS9wbGF0Zm9ybS9yb2NrY2hp
+cC9yZ2EvcmdhLWJ1Zi5jIHwgMTAgKysNCiAuLi4vbWVkaWEvcGxhdGZvcm0vdmVyaXNpbGljb24v
+aGFudHJvX3Y0bDIuYyAgfCAxMiArKysNCiBpbmNsdWRlL21lZGlhL3ZpZGVvYnVmMi1jb3JlLmgg
+ICAgICAgICAgICAgICAgfCAyOSArKysrKysNCiA0IGZpbGVzIGNoYW5nZWQsIDE0NiBpbnNlcnRp
+b25zKCspDQoNCi0tIA0KMi40Ny4zDQoNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1z
+aWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFy
+by1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
