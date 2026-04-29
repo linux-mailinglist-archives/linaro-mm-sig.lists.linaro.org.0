@@ -2,37 +2,37 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 8ABYDKldBGqiHQIAu9opvQ
+	id 2MxPAbFdBGqiHQIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:16:57 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:17:05 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id A1DB75320A4
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:16:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B16F85320B2
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:17:04 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B619D3F820
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 11:16:55 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C4C45402E5
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 11:17:03 +0000 (UTC)
 Received: from web04.chillydomains.com (web04.chillydomains.com [193.19.92.170])
-	by lists.linaro.org (Postfix) with ESMTPS id BF632404B4
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 29 Apr 2026 19:53:29 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id CE2033F80C
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 29 Apr 2026 19:53:36 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=web04.chillydomains.com header.s=dkim header.b="lrxD/WNw";
+	dkim=pass header.d=web04.chillydomains.com header.s=dkim header.b=nGSlbyXY;
 	dmarc=none;
 	spf=none (lists.linaro.org: domain of mfritsche@reauktion.de has no SPF policy when checking 193.19.92.170) smtp.mailfrom=mfritsche@reauktion.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=web04.chillydomains.com; s=dkim; h=From:To:Cc:Subject:Date:
 	Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	Content-Transfer-Encoding; bh=+BMPRzE2ZaYndt8PUP9j3vTLvi6F1/BIe/
-	+XCjPPh4w=; b=lrxD/WNwHIEekuNqi8vyqW3sAshhJYlyBWCJnbqSeTMYEytjp+
-	UyGR2ATf8nRI1fDgeTXCln6LGbfU4BNAUXh/sUDzdti6LlZajf/4fLrePDzBpnfR
-	Zo7FfaU9+6/4cWOP1EtpX0Nzmz3AyYUTl73wrxubhby8h1gzOUF1xTtmF0vyGvLV
-	CjZU8gbZvp74M1UX9jJuJSqdVC+xjGUQYsICFy+ocDlBL0TMO0Ua+6ZF5cHRPUD/
-	DjvymalihIlfMzkrStbDUkw4uHkM/LTqfTPDlJT+m0gGPrUxqjE7F2chM01iLOPb
-	OTNNJgyb9YhYocCpHiL/e7PC4y/B+Zw4YCyA==
-Received: (qmail 2739579 invoked by uid 7799); 29 Apr 2026 21:53:28 +0200
-Received: by simscan 1.4.0 ppid: 2739543, pid: 2739553, t: 0.6181s
+	Content-Transfer-Encoding; bh=OaxA1KOQqFLnJwD8i8nhUbyHPWKOXYrj9Z
+	YYoAP/kX0=; b=nGSlbyXYUKfQkPQwkan4V4FLTl1ALcyBc3+tUwIgRQWWxv/h2n
+	pesTI414bf4N64kRjBeEU7tiq8EUc8Lt3K2VyQKx7gi/uE4xPiUZHDrY7kp9b/F4
+	oHJit6O9XlrqQYW4MFIBZkv9UdCHcSUMc/OMHRIvBSZtRhCECuv3o9eU3XyLpG9V
+	TmJpMAYX7743WkMFHRFlvFATt01iFwwFinKlU6eewGwo3VYsymZlNMdFiI2mRIYh
+	3iMb+uUxr9SNY/mp3eHMABzA11kKqFvixLvby1WpBK3B2ddPiE27Vcc8VDeuGFsT
+	ba9CvK9bEPNHt4W5Utk1BeuDJEL0QbRF4MgA==
+Received: (qmail 2740071 invoked by uid 7799); 29 Apr 2026 21:53:35 +0200
+Received: by simscan 1.4.0 ppid: 2740007, pid: 2740026, t: 0.6149s
          scanners: clamav: 0.103.9/m:62/d:27778
-Received: from 31.29.52.71.dynamic-pppoe.dt.ipv4.wtnet.de (HELO localhost) (automation@reauktion.de@31.29.52.71) by web04.chillydomains.com with SMTP [61968]; 29 Apr 2026 21:53:28 +0200
+Received: from 31.29.52.71.dynamic-pppoe.dt.ipv4.wtnet.de (HELO localhost) (automation@reauktion.de@31.29.52.71) by web04.chillydomains.com with SMTP [64183]; 29 Apr 2026 21:53:35 +0200
 From: Markus Fritsche <mfritsche@reauktion.de>
 To: Tomasz Figa <tfiga@chromium.org>,
 	Marek Szyprowski <m.szyprowski@samsung.com>,
@@ -43,8 +43,8 @@ To: Tomasz Figa <tfiga@chromium.org>,
 	Philipp Zabel <p.zabel@pengutronix.de>,
 	Jacob Chen <jacob-chen@iotwrt.com>,
 	Heiko Stuebner <heiko@sntech.de>
-Date: Wed, 29 Apr 2026 19:53:05 +0000
-Message-ID: <20260429195306.239666-3-mfritsche@reauktion.de>
+Date: Wed, 29 Apr 2026 19:53:06 +0000
+Message-ID: <20260429195306.239666-4-mfritsche@reauktion.de>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260429195306.239666-1-mfritsche@reauktion.de>
 References: <20260429195306.239666-1-mfritsche@reauktion.de>
@@ -53,15 +53,15 @@ X-Spamd-Bar: -
 X-MailFrom: mfritsche@reauktion.de
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: SZ7QREERBTIWXXP3GGMN2X5S5GZU4YRY
-X-Message-ID-Hash: SZ7QREERBTIWXXP3GGMN2X5S5GZU4YRY
+Message-ID-Hash: L2W532BKSC5XCKJDBTYAINNAZPDAH4Q3
+X-Message-ID-Hash: L2W532BKSC5XCKJDBTYAINNAZPDAH4Q3
 X-Mailman-Approved-At: Wed, 13 May 2026 11:15:57 +0000
 CC: linux-media@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-rockchip@lists.infradead.org, linux-arm-kernel@lists.infradead.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH RFC 2/3] media: hantro: attach dma_resv release fence at buf_queue
+Subject: [Linaro-mm-sig] [PATCH RFC 3/3] media: rockchip-rga: attach dma_resv release fence at buf_queue
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SZ7QREERBTIWXXP3GGMN2X5S5GZU4YRY/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/L2W532BKSC5XCKJDBTYAINNAZPDAH4Q3/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -70,7 +70,7 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: A1DB75320A4
+X-Rspamd-Queue-Id: B16F85320B2
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [2.59 / 15.00];
 	DATE_IN_PAST(1.00)[327];
@@ -95,58 +95,49 @@ X-Spamd-Result: default: False [2.59 / 15.00];
 	TO_DN_SOME(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_SPAM(0.00)[0.631];
+	NEURAL_SPAM(0.00)[0.643];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[reauktion.de:email,reauktion.de:mid,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
 X-Rspamd-Action: no action
 
-Opt the hantro driver into the new vb2 release-fence helper.
+Opt the Rockchip RGA driver into the new vb2 release-fence helper.
 
-When userspace QBUFs a buffer to hantro, the buffer is added to the
-driver's m2m queue via v4l2_m2m_buf_queue. We additionally call
-vb2_buffer_attach_release_fence() so each plane's dmabuf->resv
-gets a real producer fence attached. The fence is signalled by
-vb2_buffer_done when hantro completes the decode (via
-v4l2_m2m_buf_done_and_job_finish in hantro_drv.c, which converges
-on vb2_buffer_done).
+Same shape as the hantro patch: rga_buf_queue enqueues the buffer
+in the driver's m2m queue via v4l2_m2m_buf_queue and additionally
+attaches a release fence to each plane's dmabuf->resv via
+vb2_buffer_attach_release_fence(). vb2_buffer_done signals the
+fence when RGA completes the M2M operation.
 
-Wayland compositors (and any other userspace) that import hantro
-CAPTURE buffers and wait on the dmabuf's implicit-sync fence now
-wait on a real fence representing the producer's actual completion,
-not a stub. Validated end-to-end on PineTab2 (RK3566 / Mali-G52 /
-mainline 6.19 with this series backported) playing 1080p30 H.264 in
-chromium under stock KDE Plasma 6.6.4 Wayland: KWin's
-Transaction::watchDmaBuf wait completes correctly the moment
-hantro's IRQ fires, instead of falling back to a stub-resolved
-poll.
+Userspace consumers of RGA-produced dmabufs (image-processing
+pipelines, screen-rotation servers, gstreamer flows on Rockchip
+boards) get spec-clean implicit-sync semantics, matching what
+hantro now does in the same patch series.
 
 Signed-off-by: Markus Fritsche <mfritsche@reauktion.de>
 ---
- drivers/media/platform/verisilicon/hantro_v4l2.c | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ drivers/media/platform/rockchip/rga/rga-buf.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/drivers/media/platform/verisilicon/hantro_v4l2.c b/drivers/media/platform/verisilicon/hantro_v4l2.c
-index 62d3962c1..e95a3433a 100644
---- a/drivers/media/platform/verisilicon/hantro_v4l2.c
-+++ b/drivers/media/platform/verisilicon/hantro_v4l2.c
-@@ -877,6 +877,18 @@ static void hantro_buf_queue(struct vb2_buffer *vb)
- 	}
+diff --git a/drivers/media/platform/rockchip/rga/rga-buf.c b/drivers/media/platform/rockchip/rga/rga-buf.c
+index 70808049d..5557ca632 100644
+--- a/drivers/media/platform/rockchip/rga/rga-buf.c
++++ b/drivers/media/platform/rockchip/rga/rga-buf.c
+@@ -153,6 +153,16 @@ static void rga_buf_queue(struct vb2_buffer *vb)
+ 	struct rga_ctx *ctx = vb2_get_drv_priv(vb->vb2_queue);
  
  	v4l2_m2m_buf_queue(ctx->fh.m2m_ctx, vbuf);
 +
 +	/*
-+	 * Opt in to vb2's dma_resv release-fence path. Userspace
-+	 * consumers that imported this buffer's dmabuf and wait on
-+	 * its implicit-sync fence (poll(POLLIN) or
-+	 * DMA_BUF_IOCTL_EXPORT_SYNC_FILE) get a real producer fence
-+	 * representing this device's completion, instead of the stub
-+	 * fence dma_buf_export_sync_file substitutes when dma_resv
-+	 * is empty. Best-effort: a fence-allocation failure means we
-+	 * lose implicit-sync precision, no functional regression.
++	 * Opt in to vb2's dma_resv release-fence path so userspace
++	 * consumers of RGA-produced dmabufs get a real producer fence
++	 * to wait on instead of the dma_buf core's stub fence. See
++	 * the leading patch in this series for rationale. Best-effort:
++	 * fence-allocation failure means we lose implicit-sync
++	 * precision but the m2m operation itself proceeds normally.
 +	 */
 +	(void)vb2_buffer_attach_release_fence(vb);
  }
  
- static bool hantro_vq_is_coded(struct vb2_queue *q)
+ static void rga_buf_cleanup(struct vb2_buffer *vb)
 -- 
 2.47.3
 
