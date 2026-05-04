@@ -2,36 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sMIGCYk4+Gl2rgIAu9opvQ
+	id iFItFqM4+Gl2rgIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 04 May 2026 08:11:21 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 04 May 2026 08:11:47 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 874CA4B8C98
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 04 May 2026 08:11:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DC12F4B8CA8
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 04 May 2026 08:11:46 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3743640994
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  4 May 2026 06:11:17 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7F76D4098A
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  4 May 2026 06:11:45 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 28548401B7
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  4 May 2026 06:11:10 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 565B7401B7
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  4 May 2026 06:11:39 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: kachachaissue12@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Mon, 04 May 2026 06:11:10 -0000
-Message-ID: <177787507016.327432.4073657519538563407@lists.linaro.org>
+Date: Mon, 04 May 2026 06:11:39 -0000
+Message-ID: <177787509935.328839.8197390290839397715@lists.linaro.org>
 User-Agent: HyperKitty on http://lists-ec2.96boards.org/
-Message-ID-Hash: MGMRID26CZMHI5JOINQH7BMANKSFBX3E
-X-Message-ID-Hash: MGMRID26CZMHI5JOINQH7BMANKSFBX3E
+Message-ID-Hash: AHVGEBA4CCWGL6AXKE6XP63OLSHN4Z4C
+X-Message-ID-Hash: AHVGEBA4CCWGL6AXKE6XP63OLSHN4Z4C
 X-MailFrom: kachachaissue12@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] =?utf-8?b?QWJvcnRpb24gUGlsbHMgSW4gRnVqYWlyYWjgv5Ao4pWl77mP4pWlKSs5NzE1NjgwNDQ2OTkgKOKVpe+5j+KVpSkgQnV5IFZpYWdyYSBCbHVlIFBpbGwgSW4gRnVqYWlyYWg=?=
+Subject: [Linaro-mm-sig] =?utf-8?b?QWJvcnRpb24gUGlsbHMgSW4gUmFzIEFsIEtoYWltYWjgv5Ao4pWl77mP4pWlKSs5NzE1NjgwNDQ2OTkgKOKVpe+5j+KVpSkgQnV5IFZpYWdyYSBCbHVlIFBpbGwgSW4gUmFzIEFsIEtoYWltYWg=?=
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MGMRID26CZMHI5JOINQH7BMANKSFBX3E/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AHVGEBA4CCWGL6AXKE6XP63OLSHN4Z4C/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -39,7 +39,7 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Transfer-Encoding: base64
-X-Rspamd-Queue-Id: 874CA4B8C98
+X-Rspamd-Queue-Id: DC12F4B8CA8
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [0.69 / 15.00];
@@ -62,14 +62,15 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	TO_DN_NONE(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.767];
+	NEURAL_HAM(-0.00)[-0.773];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	R_DKIM_NA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:mid,lists.linaro.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:mid,lists.linaro.org:rdns,linaro.org:email]
 
-QWJvcnRpb24gUGlsbHMgSW4gRnVqYWlyYWjgv5Ao4pWl77mP4pWlKSs5NzE1NjgwNDQ2OTkgKOKV
-pe+5j+KVpSkgQnV5IFZpYWdyYSBCbHVlIFBpbGwgSW4gRnVqYWlyYWgNCl9fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBs
-aXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5k
-IGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+QWJvcnRpb24gUGlsbHMgSW4gUmFzIEFsIEtoYWltYWjgv5Ao4pWl77mP4pWlKSs5NzE1NjgwNDQ2
+OTkgKOKVpe+5j+KVpSkgQnV5IFZpYWdyYSBCbHVlIFBpbGwgSW4gUmFzIEFsIEtoYWltYWgNCl9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1z
+aWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1
+YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJv
+Lm9yZwo=
