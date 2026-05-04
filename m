@@ -2,27 +2,27 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4L/eEq0t+GnsrAIAu9opvQ
+	id EJk+MeQt+GnsrAIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 04 May 2026 07:25:01 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 04 May 2026 07:25:56 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF0794B87E7
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 04 May 2026 07:25:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5CF134B8807
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 04 May 2026 07:25:55 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 131514095E
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  4 May 2026 05:25:00 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E9EDD404BB
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  4 May 2026 05:25:54 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id D64AC40964
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  4 May 2026 05:24:51 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 307D44043A
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  4 May 2026 05:25:44 +0000 (UTC)
 MIME-Version: 1.0
 From: kachachaissue12@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Mon, 04 May 2026 05:24:51 -0000
-Message-ID: <177787229187.262679.6487394698982649524@lists.linaro.org>
+Date: Mon, 04 May 2026 05:25:44 -0000
+Message-ID: <177787234419.265062.1463499274943779984@lists.linaro.org>
 User-Agent: HyperKitty on http://lists-ec2.96boards.org/
-Message-ID-Hash: LLTSK3ZF44AXZ6BGTG4XGFYFOKDHC7G6
-X-Message-ID-Hash: LLTSK3ZF44AXZ6BGTG4XGFYFOKDHC7G6
+Message-ID-Hash: DHRYPT7UN72EPVQWWLTYW4PTWTNHRKFS
+X-Message-ID-Hash: DHRYPT7UN72EPVQWWLTYW4PTWTNHRKFS
 X-MailFrom: kachachaissue12@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
@@ -30,7 +30,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Abortion Pills In Doha [][] +971568044699 [][]Misoprostol Medicine Available In Doha, Qatar Al Shamal. [][] +971568044699 []Al Wakrah. Al Rayyan. Mtp Kit In Doha [][] +971568044699 []Al Daayen. Al Khor. Mifepristone Tablets Available In Doha/Unwanted
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LLTSK3ZF44AXZ6BGTG4XGFYFOKDHC7G6/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DHRYPT7UN72EPVQWWLTYW4PTWTNHRKFS/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -39,7 +39,7 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: EF0794B87E7
+X-Rspamd-Queue-Id: 5CF134B8807
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [2.58 / 15.00];
