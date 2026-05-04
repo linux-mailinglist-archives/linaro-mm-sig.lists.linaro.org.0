@@ -2,177 +2,73 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id OzMKGA1z92nKhwIAu9opvQ
+	id JT0kJI0t+GnsrAIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 03 May 2026 18:08:45 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 04 May 2026 07:24:29 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id CFEA74B65B0
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 03 May 2026 18:08:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0D9CB4B87CA
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 04 May 2026 07:24:28 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 100A74095A
-	for <lists+linaro-mm-sig@lfdr.de>; Sun,  3 May 2026 16:08:43 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 6FE8D4043A
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  4 May 2026 05:24:27 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 31008405DC
-	for <linaro-mm-sig@lists.linaro.org>; Sun,  3 May 2026 16:08:35 +0000 (UTC)
-Content-Type: text/plain; charset="utf-8"
+	by lists.linaro.org (Postfix) with ESMTP id A7B233F906
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  4 May 2026 05:24:18 +0000 (UTC)
 MIME-Version: 1.0
-From: photossad64@yahoo.com
+From: kachachaissue12@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Sun, 03 May 2026 16:08:35 -0000
-Message-ID: <177782451519.3453164.12420714800005642108@lists.linaro.org>
-User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: Q4TFATDQZO3UDVXJDARZVWXZWES3Q5LR
-X-Message-ID-Hash: Q4TFATDQZO3UDVXJDARZVWXZWES3Q5LR
-X-MailFrom: photossad64@yahoo.com
+Date: Mon, 04 May 2026 05:24:18 -0000
+Message-ID: <177787225867.262679.3054992136540313412@lists.linaro.org>
+User-Agent: HyperKitty on http://lists-ec2.96boards.org/
+Message-ID-Hash: 4TLY4CWCCH56EOAZQGSPIA2ZKAXSBFPG
+X-Message-ID-Hash: 4TLY4CWCCH56EOAZQGSPIA2ZKAXSBFPG
+X-MailFrom: kachachaissue12@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] =?utf-8?b?2KfZhNiq2K3ZiNmEINin2YTYsdmC2YXZiiDYp9mE2LTYp9mF2YQ6INmD2YrZgSDYqtit2YjZhCDZhdmI2YLYudmDINil2YTZiSDZhdmG2LXYqSDYsdin2KbYr9ip?=
+Subject: [Linaro-mm-sig] Abortion Pills In Doha [][] +971568044699 [][]Misoprostol Medicine Available In Doha, Qatar Al Shamal. [][] +971568044699 []Al Wakrah. Al Rayyan. Mtp Kit In Doha [][] +971568044699 []Al Daayen. Al Khor. Mifepristone Tablets Available In Doha/Unwanted
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/Q4TFATDQZO3UDVXJDARZVWXZWES3Q5LR/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4TLY4CWCCH56EOAZQGSPIA2ZKAXSBFPG/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Transfer-Encoding: base64
-X-Rspamd-Queue-Id: CFEA74B65B0
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Queue-Id: 0D9CB4B87CA
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [2.89 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[yahoo.com : SPF not aligned (relaxed), No valid DKIM,reject];
+X-Spamd-Result: default: False [2.58 / 15.00];
+	LONG_SUBJ(2.00)[266];
 	MID_RHS_MATCH_TO(1.00)[];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx];
-	MIME_HTML_ONLY(0.20)[];
-	MIME_BASE64_TEXT(0.10)[];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
+	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	FROM_NEQ_ENVFROM(0.00)[kachachaissue12@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	ARC_NA(0.00)[];
 	RCPT_COUNT_ONE(0.00)[1];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:~];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_NO_DN(0.00)[];
-	FREEMAIL_FROM(0.00)[yahoo.com];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_NEQ_ENVFROM(0.00)[photossad64@yahoo.com,linaro-mm-sig-bounces@lists.linaro.org];
-	NEURAL_SPAM(0.00)[0.993];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	FREEMAIL_FROM(0.00)[gmail.com];
 	TO_DN_NONE(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_NO_DN(0.00)[];
+	NEURAL_HAM(-0.00)[-0.966];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	R_DKIM_NA(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:mid,lists.linaro.org:rdns,linaro.org:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email]
 
-PGRpdiBjbGFzcz0iYXJ0aWNsZS1jb250ZW50Ij4NCiAgICA8aDI+2KfZhNiq2K3ZiNmEINin2YTY
-sdmC2YXZiiDYp9mE2LTYp9mF2YQ6INmD2YrZgSDYqtit2YjZhCDZhdmI2YLYudmDINil2YTZiSDZ
-hdmG2LXYqSDYsdin2KbYr9ip2J88L2gyPg0KICAgIDxwPtmB2Yog2KfZhNi52LXYsSDYp9mE2K3Y
-p9mE2YrYjCDZhNmFINmK2LnYryDYp9mE2KrZiNin2KzYryDYp9mE2LHZgtmF2Yog2K7Zitin2LHY
-p9mLINio2YQg2KPYtdio2K0g2LbYsdmI2LHYqSDYrdiq2YXZitipINmE2YTYqNmC2KfYoS4g2YjZ
-hNmD2YbYjCDZhdi5INin2LLYr9mK2KfYryDYudiv2K8g2KfZhNmF2YjYp9mC2Lkg2KjZhdi52K/Z
-hNin2Kog2YHZhNmD2YrYqdiMINij2LXYqNitICLYp9mE2LjZh9mI2LEiINmH2Ygg2KfZhNiq2K3Y
-r9mKINin2YTYo9mD2KjYsS4g2KzZiNis2YQg2YHZiiDYudin2YUgMjAyNiDYo9i12KjYrSDYo9mD
-2KvYsSDYsNmD2KfYodmLINmB2Yog2KrZgtmK2YrZhSDYp9mE2YXZiNin2YLYuSDYqNmG2KfYodmL
-INi52YTZiSDZhdi52KfZitmK2LEgRS1FLUEtVCAo2KfZhNiu2KjYsdip2Iwg2KfZhNiq2K7Ytdi1
-2Iwg2KfZhNmF2LXYr9in2YLZitip2Iwg2KfZhNmF2YjYq9mI2YLZitipKS4g2YTZg9mKINiq2YbY
-rNitINmB2Yog2KfYrNiq2YrYp9iyINmH2LDZhyDYp9mE2KfYrtiq2KjYp9ix2KfYqiDYp9mE2YLY
-p9iz2YrYqdiMINij2YbYqiDYqNit2KfYrNipINil2YTZiSDZhNmF2LPYqSA8c3Ryb25nPjxhIGhy
-ZWY9Imh0dHBzOi8vbW9hbWVuLmRldi8iIHRhcmdldD0iX2JsYW5rIj7Yrtio2YrYsSDYs9mK2Yg8
-L2E+PC9zdHJvbmc+INmK2K/YsdmDINmD2YrZgdmK2Kkg2LXZitin2LrYqSDYp9mE2YXYrdiq2YjZ
-iSDZiNin2YTYqNmK2KfZhtin2Kog2KfZhNiq2YLZhtmK2Kkg2KjYtNmD2YQg2YrYq9io2Kog2YTY
-rNmI2KzZhCDYo9mG2YMg2KfZhNiu2YrYp9ixINin2YTYo9mB2LbZhCDZhNiy2YjYp9ix2YfYjCDZ
-hdmF2Kcg2YrZgdiq2K0g2KPZhdin2YXZgyDYo9io2YjYp9ioINin2YTYtdmB2K3YqSDYp9mE2KPZ
-iNmE2Ykg2LnZhNmJINmF2LXYsdin2LnZitmH2KcuPC9wPg0KDQogICAgPGgzPtmB2YYg2KrYt9mI
-2YrYsSDZhdmI2KfZgti5INin2YTZiNmI2LHYr9io2LHZitizINin2YTYp9it2KrYsdin2YHZitip
-PC9oMz4NCiAgICA8cD7Yp9mE2YPYq9mK2LHZiNmGINmK2LPYqti32YrYudmI2YYg2KrZhti12YrY
-qCDYp9mE2YjZiNix2K/YqNix2YrYs9iMINmI2YTZg9mGINin2YTZgtmE2YrZhNmI2YYg2YfZhSDZ
-hdmGINmK2LPYqti32YrYudmI2YYgItiq2LfZiNmK2LHZhyIg2YTZitmD2YjZhiDZhdin2YPZitmG
-2Kkg2KrYs9mI2YrZgtmK2KkuINin2YTYp9iz2KrYudin2YbYqSDYqNmAIDxzdHJvbmc+PGEgaHJl
-Zj0iaHR0cHM6Ly9tb2FtZW4uZGV2L3Byb2plY3QtY2F0ZWdvcnkvd29yZHByZXNzLXdvcmsvIiB0
-YXJnZXQ9Il9ibGFuayI+2YXYt9mI2LEg2YXZiNin2YLYuSDZiNmI2LHYr9io2LHZitizPC9hPjwv
-c3Ryb25nPiDZhdiq2K7Ytdi1INmK2LnZhtmKINin2YTYrdi12YjZhCDYudmE2Ykg2YXZiNmC2Lkg
-2LPYsdmK2Lkg2KfZhNio2LHZgtiMINmF2K3ZhdmKINmF2YYg2KfZhNmH2KzZhdin2KrYjCDZiNmF
-2YfZitijINiq2YXYp9mF2KfZiyDZhNmF2K3YsdmD2KfYqiDYp9mE2KjYrdirLiDYp9mE2KrZgdin
-2LXZitmEINin2YTYtdi62YrYsdipINmF2KvZhCDYtti62Lcg2YXZhNmB2KfYqiDYp9mE2YAgQ1NT
-2Iwg2KrYrdiz2YrZhiDYp9mE2LXZiNix2Iwg2YjYp9iz2KrYrtiv2KfZhSDYrti32YjYtyDZiNmK
-2Kgg2K7ZgdmK2YHYqSDZhdir2YQgIkNhaXJvIiDYqtis2LnZhCDYqtis2LHYqNipINin2YTZhdiz
-2KrYrtiv2YUg2LPZhNiz2Kkg2YjZhdmF2KrYudipLiDZh9iw2Kcg2KfZhNiq2YXZitiyINin2YTY
-qNix2YXYrNmKINmH2Ygg2YXYpyDZitit2LHYtSDYudmE2YrZhyA8c3Ryb25nPtmF2KTZhdmGINij
-2KjZiCDYp9mE2K7ZitixPC9zdHJvbmc+INmB2Yog2YPZhCDZhdi02LHZiNi52Iwg2YTYttmF2KfZ
-hiDYo9mGINin2YTYqNmG2YrYqSDYp9mE2KrYrdiq2YrYqSDZhNmE2YXZiNmC2Lkg2KrYr9i52YUg
-2KzZh9mI2K8g2KfZhNiq2LPZiNmK2YIg2YjZhNinINiq2LnZitmC2YfYpy48L3A+DQoNCiAgICA8
-aDM+2KfZhNmF2YjYp9iy2YbYqSDYqNmK2YYg2KfZhNiz2YrZiCDZiNin2YTZgCBTRU0g2YTYqtit
-2YLZitmCINij2YLYtdmJINi52KfYptivPC9oMz4NCiAgICA8cD7YudmG2K/ZhdinINiq2KjYr9ij
-INmF2LTYsdmI2LnZg9iMINiz2KrZiNin2KzZhyDYr9in2KbZhdin2Ysg2LPYpNin2YTYp9mLOiDZ
-h9mEINij2K/Zgdi5INmE2YTYpdi52YTYp9mG2KfYqiDYo9mFINij2YbYqti42LEg2YbYqtin2KbY
-rCDYp9mE2LPZitmI2J8g2KfZhNil2KzYp9io2Kkg2KrZg9mF2YYg2YHZiiDZgdmH2YUgPHN0cm9u
-Zz48YSBocmVmPSJodHRwczovL21vYW1lbi5kZXYvJWQ5JTg1JWQ4JWE3LSVkOSU4NyVkOSU4OC0l
-ZDglYTclZDklODQlZDklODElZDglYjElZDklODItJWQ4JWE4JWQ5JTjZiiVkOSU4Ni1zZW8tJWQ5
-JTg4LXNlbS8iIHRhcmdldD0iX2JsYW5rIj7Yp9mE2YHYsdmCINio2YrZhiBTRU8g2YggU0VNPC9h
-Pjwvc3Ryb25nPi4g2KfZhNiz2YrZiCDZh9mIINin2LPYqtir2YXYp9ixINmB2Yog2KPYtdmEINiq
-2YXZhNmD2YfYjCDZitmG2YXZiCDYqNmF2LHZiNixINin2YTZiNmC2Kog2YjZitmI2YHYsSDZhNmD
-INiy2YrYp9ix2KfYqiDZhdis2KfZhtmK2Kkg2YTYpyDYqtmG2YLYt9i52Iwg2KjZitmG2YXYpyDY
-p9mE2YAgU0VNINmH2Ygg2KfYs9iq2KbYrNin2LEg2YXYs9in2K3YqSDYqtmG2KrZh9mKINio2KfZ
-htiq2YfYp9ihINmF2YrYstin2YbZitiq2YMuINin2YTYp9iz2KrYsdin2KrZitis2YrYqSDYp9mE
-2YbYp9is2K3YqSDYp9mE2KrZiiDZiti32KjZgtmH2Kcg2YXYpNmF2YYg2KrYudiq2YXYryDYudmE
-2Ykg2KfYs9iq2K7Yr9in2YUg2KfZhNmAIFNFTSDZhNmE2K3YtdmI2YQg2LnZhNmJINio2YrYp9mG
-2KfYqiDYs9ix2YrYudipINi52YYg2KfZhNmD2YTZhdin2Kog2KfZhNiq2Yog2KrYrdmC2YIg2YXY
-qNmK2LnYp9iq2Iwg2KvZhSDYp9mE2KrYsdmD2YrYsiDYp9mE2YXZg9ir2YEg2LnZhNmJINin2YTY
-s9mK2Ygg2YTZhNiz2YrYt9ix2Kkg2LnZhNmJINiq2YTZgyDYp9mE2YPZhNmF2KfYqiDYudi22YjZ
-itin2YvYjCDZhdmF2Kcg2YrYrdmC2YIg2YTZgyDYp9iz2KrZgtix2KfYsdin2Ysg2YXYp9mE2YrY
-p9mLINmI2KrYr9mB2YLYp9mLINmF2LPYqtmF2LHYp9mLINmE2YTYudmF2YTYp9ihLjwvcD4NCg0K
-ICAgIDxoMz7ZhNmF2KfYsNinINmK2KvZgiDZg9io2KfYsSDYp9mE2LnZhdmE2KfYoSDZgdmKICLY
-o9mB2LbZhCDYrtio2YrYsSDYs9mK2Ygg2YHZiiDZhdi12LEi2J88L2gzPg0KICAgIDxwPtin2YTZ
-htis2KfYrSDZgdmKINin2YTYs9mK2Ygg2YTYpyDZitij2KrZiiDZhdmGINin2KrYqNin2Lkg2KfZ
-hNiq2LnZhNmK2YXYp9iqINin2YTYudin2YXYqdiMINio2YQg2YXZhiAi2KrYrti12YrYtSIg2KfZ
-hNin2LPYqtix2KfYqtmK2KzZitipINmE2KrZhtin2LPYqCDYp9mE2LPZiNmCINin2YTZhdit2YTZ
-ii4g2KfZhNio2K3YqyDYudmGIDxzdHJvbmc+PGEgaHJlZj0iaHR0cHM6Ly9tb2FtZW4uZGV2LyIg
-dGFyZ2V0PSJfYmxhbmsiPtij2YHYttmEINiu2KjZitixINiz2YrZiCDZgdmKINmF2LXYsTwvYT48
-L3N0cm9uZz4g2YrYudmD2LMg2LHYutio2Kkg2KPYtdit2KfYqCDYp9mE2YXYtNin2LHZiti5INmB
-2Yog2KfZhNi52YXZhCDZhdi5INi02K7YtSDZitmB2YfZhSDYt9io2YrYudipINin2YTZhdmG2KfZ
-gdiz2Kkg2YHZiiDYp9mE2LPZiNmCINin2YTZhdi12LHZiiDZiNin2YTYudix2KjZii4g2YXYpNmF
-2YYg2KPYqNmIINin2YTYrtmK2LEg2YrYqtmF2YrYsiDYqNin2YTZgtiv2LHYqSDYudmE2Ykg2KrY
-rdmE2YrZhCDYp9mE2YXZhtin2YHYs9mK2YYg2KjYr9mC2KnYjCDZiNio2YbYp9ihINi02KjZg9ip
-INix2YjYp9io2Lcg2K7ZhNmB2YrYqSAoQmFja2xpbmtzKSDZgtmI2YrYqSDZiNiz2YrYp9mC2YrY
-qSDYqtix2YHYuSDZhdmGICLYs9mE2LfYqSDYp9mE2K/ZiNmF2YrZhiIg2YTZhdmI2YLYudmD2Iwg
-2YXZhdinINmK2KzYudmE2Ycg2YrYqti12K/YsSDYp9mE2YPZhNmF2KfYqiDYp9mE2KrZhtin2YHY
-s9mK2Kkg2KfZhNi12LnYqNipINin2YTYqtmKINmK2K7YtNin2YfYpyDYp9mE2KLYrtix2YjZhi48
-L3A+DQoNCiAgICA8aDM+2KPYrti12KfYptmKINin2YTYs9mK2Yg6INin2YTZhdin2YrYs9iq2LHZ
-iCDZiNix2KfYoSDZhtis2KfYrSDZhdi02KfYsdmK2LnZgzwvaDM+DQogICAgPHA+2KfZhNi52YXZ
-hCDZhdi5IDxzdHJvbmc+PGEgaHJlZj0iaHR0cHM6Ly9tb2FtZW4uZGV2L3Byb2plY3QtY2F0ZWdv
-cnkvc2VvLXdvcmsvIiB0YXJnZXQ9Il9ibGFuayI+2KfYrti12KfYptmKINiz2YrZiDwvYT48L3N0
-cm9uZz4g2YXYrdiq2LHZgSDZiti52YbZiiDYo9mG2YMg2KrYrdi12YQg2LnZhNmJINi02LHZitmD
-INmK2YHZg9ixINmB2Yog2YbZhdmIINij2LnZhdin2YTZgyDZg9mF2Kcg2KrZgdmD2LEg2KPZhtiq
-LiDYp9mE2LPZitmIINmE2YrYsyDZhdis2LHYryDZg9mE2YXYp9iqINmF2YHYqtin2K3Zitip2Iwg
-2KjZhCDZh9mIINiq2K3Ys9mK2YYg2YTYsdit2YTYqSDYp9mE2LLYp9im2LEg2KjYp9mE2YPYp9mF
-2YQg2K/Yp9iu2YQg2KfZhNmF2YjZgti5LiDZhdik2YXZhiDZitix2YPYsiDYudmE2Ykg2YXYq9mE
-2Ksg2KfZhNmG2KzYp9itOiDYp9mE2YXYrdiq2YjZiSDYp9mE2LDZiiDZitit2YQg2YXYtNin2YPZ
-hCDYp9mE2LLZiNin2LHYjCDYp9mE2YPZiNivINin2YTYqNix2YXYrNmKINin2YTZhti42YrZgSDY
-p9mE2LDZiiDZitix2LbZiiDZhdit2LHZg9in2Kog2KfZhNio2K3Yq9iMINmI2KfZhNiz2YXYudip
-INin2YTYsdmC2YXZitipINin2YTYqtmKINiq2KjZhtmKINin2YTYq9mC2KkuINmH2LDZhyDYp9mE
-2YXYudin2K/ZhNipINmH2Yog2YXYpyDYqti22YXZhiDZhNmF2YjZgti52YMg2KfZhNio2YLYp9ih
-INmB2Yog2KfZhNi12K/Yp9ix2Kkg2YjYqtit2YLZitmCINij2LnZhNmJINmF2LnYr9mE2KfYqiDY
-p9mE2KrYrdmI2YrZhNiMINmF2YXYpyDZitit2YjZhCDZg9mEINiy2KfYptixINil2YTZiSDYudmF
-2YrZhCDZhdit2KrZhdmEINmE2LnZhNin2YXYqtmDINin2YTYqtis2KfYsdmK2KkuPC9wPg0KDQog
-ICAgPGgzPtiu2YTYp9i12Kkg2KfZhNmC2YjZhDog2YXYs9iq2YLYqNmE2YMg2KfZhNix2YLZhdmK
-INmK2KjYr9ijINio2KfZhNmC2LHYp9ixINin2YTYtdit2YrYrTwvaDM+DQogICAgPHA+2YHZiiDY
-udin2YTZhSDYp9mE2KXZhtiq2LHZhtiq2Iwg2YTYpyDZhdmD2KfZhiDZhNmE2YXZiNin2YLYuSDY
-p9mE2LbYudmK2YHYqSDYo9mIINi62YrYsSDYp9mE2YXZh9mK2KPYqS4g2KfZhNin2LPYqtir2YXY
-p9ixINmB2Yog2KfZhNiz2YrZiCDZiNiq2LfZiNmK2LEg2KfZhNmF2YjYp9mC2Lkg2YfZiCDYp9mE
-2YLYsdin2LEg2KfZhNin2LPYqtix2KfYqtmK2KzZiiDYp9mE2KPZh9mFINmE2KPZiiDYqNmK2LLZ
-htizINmK2LfZhditINmE2YTZhtmF2Ygg2YHZiiAyMDI2LiDYp9mE2YXZiNin2YLYuSDYp9mE2KrZ
-iiDYqtiq2KjYuSDYp9mE2YbZh9isINin2YTYp9it2KrYsdin2YHZiiDYp9mE2LDZiiDZiti32KjZ
-gtmHIDxzdHJvbmc+2YXYpNmF2YY8L3N0cm9uZz4g2YfZiiDYp9mE2KrZiiDYqtmG2KzYrSDZgdmK
-INio2YbYp9ihINir2YLYqSDYrdmC2YrZgtmK2Kkg2YXYuSDYrNmF2YfZiNix2YfYpyDZiNiq2KrY
-tdiv2LEg2YXYtNmH2K8g2KfZhNio2K3Yqy4g2KrYsNmD2LEg2K/Yp9im2YXYp9mLINij2YYg2YXZ
-iNmC2LnZgyDZh9mIINmI2KfYrNmH2KrZgyDYo9mF2KfZhSDYp9mE2LnYp9mE2YXYjCDZiNin2YTY
-p9mH2KrZhdin2YUg2KjYqtmB2KfYtdmK2YTZhyDYp9mE2YHZhtmK2Kkg2YjYp9mE2KrYs9mI2YrZ
-gtmK2Kkg2YfZiCDYo9mC2LXYsSDYt9ix2YrZgiDZhNmE2YbYrNin2K0g2YjYp9mE2LHZitin2K/Y
-qSDZgdmKINmF2KzYp9mE2YMuPC9wPg0KPC9kaXY+DQpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5h
-cm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0
-byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+Abortion Pills In Doha [][] +971568044699 [][]Misoprostol Medicine Available In Doha, Qatar Al Shamal. [][] +971568044699 []Al Wakrah. Al Rayyan. Mtp Kit In Doha [][] +971568044699 []Al Daayen. Al Khor. Mifepristone Tablets Available In Doha/Unwanted
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
