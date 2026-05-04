@@ -2,36 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4OvQISU1+GmxrQIAu9opvQ
+	id 0LTYLjk1+GmxrQIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 04 May 2026 07:56:53 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 04 May 2026 07:57:13 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1C0E84B8B81
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 04 May 2026 07:56:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 57BE84B8B88
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 04 May 2026 07:57:13 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 32E2F40976
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  4 May 2026 05:56:52 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 69AF540986
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  4 May 2026 05:57:12 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0E1FF40963
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  4 May 2026 05:56:44 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3E80940963
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  4 May 2026 05:57:05 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: kachachaissue12@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Mon, 04 May 2026 05:56:44 -0000
-Message-ID: <177787420405.309319.630176978479693861@lists.linaro.org>
+Date: Mon, 04 May 2026 05:57:05 -0000
+Message-ID: <177787422525.310353.12090888331361951307@lists.linaro.org>
 User-Agent: HyperKitty on http://lists-ec2.96boards.org/
-Message-ID-Hash: 3UUWALMNW3BUMLKMGWPTJASWZJ2OQN7C
-X-Message-ID-Hash: 3UUWALMNW3BUMLKMGWPTJASWZJ2OQN7C
+Message-ID-Hash: WMB432K5WQR2F7U532PVOMZKQOVHPW3B
+X-Message-ID-Hash: WMB432K5WQR2F7U532PVOMZKQOVHPW3B
 X-MailFrom: kachachaissue12@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] =?utf-8?q?Cytotec_Pills_For_Sale_In_Dibba=2C=29=5D=5B=28=E2=AD=95=E2=9C=9A_=E2=AD=95971568044699_=E2=AD=95=29=5D=5B=28_Cytotec_Medicine_Available_In_Dibba=2C_How_To_Buy_Cytotec_Medicine_In_Dibba=2C?=
+Subject: [Linaro-mm-sig] =?utf-8?q?Cytotec_Pills_For_Sale_In_Bahrain=29=5D=5B=28=E2=AD=95=E2=9C=9A_=E2=AD=95971568044699_=E2=AD=95=29=5D=5B=28=2C_Cytotec_Medicine_Available_In_Bahrain=2C_How_To_Buy_Cytotec_Medicine_In_Bahrain=2C?=
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3UUWALMNW3BUMLKMGWPTJASWZJ2OQN7C/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WMB432K5WQR2F7U532PVOMZKQOVHPW3B/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -39,7 +39,7 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Transfer-Encoding: base64
-X-Rspamd-Queue-Id: 1C0E84B8B81
+X-Rspamd-Queue-Id: 57BE84B8B88
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [0.69 / 15.00];
@@ -68,9 +68,9 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:mid,lists.linaro.org:rdns,linaro.org:email]
 
-Q3l0b3RlYyBQaWxscyBGb3IgU2FsZSBJbiBEaWJiYSwpXVso4q2V4pyaIOKtlTk3MTU2ODA0NDY5
-OSDirZUpXVsoIEN5dG90ZWMgTWVkaWNpbmUgQXZhaWxhYmxlIEluIERpYmJhLCBIb3cgVG8gQnV5
-IEN5dG90ZWMgTWVkaWNpbmUgSW4gRGliYmEsDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8t
-bW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBs
-aW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+Q3l0b3RlYyBQaWxscyBGb3IgU2FsZSBJbiBCYWhyYWluKV1bKOKtleKcmiDirZU5NzE1NjgwNDQ2
+OTkg4q2VKV1bKCwgQ3l0b3RlYyBNZWRpY2luZSBBdmFpbGFibGUgSW4gQmFocmFpbiwgSG93IFRv
+IEJ1eSBDeXRvdGVjIE1lZGljaW5lIEluIEJhaHJhaW4sDQpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBs
+aW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFp
+bCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
