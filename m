@@ -2,28 +2,28 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mEMrA2M1+GmxrQIAu9opvQ
+	id oGi9IIY1+GmxrQIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 04 May 2026 07:57:55 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 04 May 2026 07:58:30 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id C816E4B8B9E
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 04 May 2026 07:57:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 17A4C4B8BA5
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 04 May 2026 07:58:30 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DDA814095E
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  4 May 2026 05:57:53 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 2E23F40977
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  4 May 2026 05:58:29 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id ACFAF4095E
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  4 May 2026 05:57:46 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id DB6814095E
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  4 May 2026 05:58:21 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: kachachaissue12@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Mon, 04 May 2026 05:57:46 -0000
-Message-ID: <177787426670.310353.5217241025808129655@lists.linaro.org>
+Date: Mon, 04 May 2026 05:58:21 -0000
+Message-ID: <177787430189.311718.11850672852011546974@lists.linaro.org>
 User-Agent: HyperKitty on http://lists-ec2.96boards.org/
-Message-ID-Hash: A6XE6CE674I2JS7EHF5VU2P32ADWME7P
-X-Message-ID-Hash: A6XE6CE674I2JS7EHF5VU2P32ADWME7P
+Message-ID-Hash: CDIWJ46Z2DHFNYYFULY2CHAHFSZDUANB
+X-Message-ID-Hash: CDIWJ46Z2DHFNYYFULY2CHAHFSZDUANB
 X-MailFrom: kachachaissue12@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
@@ -31,7 +31,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] =?utf-8?q?Cytotec_Pills_For_Sale_In_Muscat=2C_=29=5D=5B=28=E2=AD=95=E2=9C=9A_=E2=AD=95971568044699_=E2=AD=95=29=5D=5B=28Cytotec_Medicine_Available_In_Muscat=2C_How_To_Buy_Cytotec_Medicine_In_Muscat=2C?=
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/A6XE6CE674I2JS7EHF5VU2P32ADWME7P/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CDIWJ46Z2DHFNYYFULY2CHAHFSZDUANB/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -39,7 +39,7 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Transfer-Encoding: base64
-X-Rspamd-Queue-Id: C816E4B8B9E
+X-Rspamd-Queue-Id: 17A4C4B8BA5
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [0.69 / 15.00];
@@ -66,7 +66,7 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	R_DKIM_NA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:mid,lists.linaro.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:mid,lists.linaro.org:rdns,linaro.org:email]
 
 Q3l0b3RlYyBQaWxscyBGb3IgU2FsZSBJbiBNdXNjYXQsICldWyjirZXinJog4q2VOTcxNTY4MDQ0
 Njk5IOKtlSldWyhDeXRvdGVjIE1lZGljaW5lIEF2YWlsYWJsZSBJbiBNdXNjYXQsIEhvdyBUbyBC
