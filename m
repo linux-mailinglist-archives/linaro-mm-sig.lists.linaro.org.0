@@ -2,36 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id eBnvC5o1+GmxrQIAu9opvQ
+	id mHOOBqI1+GmxrQIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 04 May 2026 07:58:50 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 04 May 2026 07:58:58 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id BFC7F4B8BBB
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 04 May 2026 07:58:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C42DA4B8BC2
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 04 May 2026 07:58:57 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C101740977
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  4 May 2026 05:58:48 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id DF4B64098A
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  4 May 2026 05:58:56 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 1063D4095E
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  4 May 2026 05:58:41 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id F37BA4095E
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  4 May 2026 05:58:49 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: kachachaissue12@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Mon, 04 May 2026 05:58:41 -0000
-Message-ID: <177787432106.312834.10746600884402075946@lists.linaro.org>
+Date: Mon, 04 May 2026 05:58:49 -0000
+Message-ID: <177787432999.312834.17108778694834195917@lists.linaro.org>
 User-Agent: HyperKitty on http://lists-ec2.96boards.org/
-Message-ID-Hash: JWYPWC53Q6CUH2KXSJOYGUYDVX6SSFAI
-X-Message-ID-Hash: JWYPWC53Q6CUH2KXSJOYGUYDVX6SSFAI
+Message-ID-Hash: RQ44T6VK5HE4KS6SKD362E4TSZLW3EHV
+X-Message-ID-Hash: RQ44T6VK5HE4KS6SKD362E4TSZLW3EHV
 X-MailFrom: kachachaissue12@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] =?utf-8?b?QWJvcnRpb24gUGlsbHMgQXZhaWxhYmxlIEluIE11c2NhdOC/kCjilaXvuY/ilaUpKzk3MTU2ODA0NDY5OSAo4pWl77mP4pWlKSBNaXNvcHJvc3RvbCBUYWJsZXRzIE9uIFNhbGUgSW4gTXVzY2F0?=
+Subject: [Linaro-mm-sig] =?utf-8?b?QWJvcnRpb24gUGlsbHMgQXZhaWxhYmxlIEluIEJhaHJhaW7gv5Ao4pWl77mP4pWlKSs5NzE1NjgwNDQ2OTkgKOKVpe+5j+KVpSkgTWlzb3Byb3N0b2wgVGFibGV0cyBPbiBTYWxlIEluIEJhaHJhaW4=?=
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JWYPWC53Q6CUH2KXSJOYGUYDVX6SSFAI/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RQ44T6VK5HE4KS6SKD362E4TSZLW3EHV/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -39,7 +39,7 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Transfer-Encoding: base64
-X-Rspamd-Queue-Id: BFC7F4B8BBB
+X-Rspamd-Queue-Id: C42DA4B8BC2
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [0.69 / 15.00];
@@ -68,9 +68,9 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:mid,lists.linaro.org:rdns,linaro.org:email]
 
-QWJvcnRpb24gUGlsbHMgQXZhaWxhYmxlIEluIE11c2NhdOC/kCjilaXvuY/ilaUpKzk3MTU2ODA0
-NDY5OSAo4pWl77mP4pWlKSBNaXNvcHJvc3RvbCBUYWJsZXRzIE9uIFNhbGUgSW4gTXVzY2F0DQpf
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0t
-c2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5z
-dWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFy
-by5vcmcK
+QWJvcnRpb24gUGlsbHMgQXZhaWxhYmxlIEluIEJhaHJhaW7gv5Ao4pWl77mP4pWlKSs5NzE1Njgw
+NDQ2OTkgKOKVpe+5j+KVpSkgTWlzb3Byb3N0b2wgVGFibGV0cyBPbiBTYWxlIEluIEJhaHJhaW4N
+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1t
+bS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1
+bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGlu
+YXJvLm9yZwo=
