@@ -2,240 +2,115 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gBdcEb9fBGpxHgIAu9opvQ
+	id iAfvF2l/+mmuPQMAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:25:51 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 06 May 2026 01:38:17 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id DA117532325
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:25:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E38144D4C44
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 06 May 2026 01:38:16 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 74C30401C1
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 11:25:49 +0000 (UTC)
-Received: from mx0a-00082601.pphosted.com (mx0a-00082601.pphosted.com [67.231.145.42])
-	by lists.linaro.org (Postfix) with ESMTPS id 121BF3F812
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  5 May 2026 18:13:57 +0000 (UTC)
-Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=meta.com header.s=s2048-2025-q2 header.b=s2knLRbe;
-	dmarc=pass (policy=reject) header.from=meta.com;
-	spf=pass (lists.linaro.org: domain of "prvs=358589eecc=mattev@meta.com" designates 67.231.145.42 as permitted sender) smtp.mailfrom="prvs=358589eecc=mattev@meta.com"
-Received: from pps.filterd (m0109333.ppops.net [127.0.0.1])
-	by mx0a-00082601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 645EFep43154524
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 5 May 2026 11:13:57 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=meta.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=s2048-2025-q2;
-	 bh=n/8Evrp0/Cs5xE91fVKhf/YUdfmd3rQjcqs7sGTTtLk=; b=s2knLRbegq9X
-	RCpDDJ/hBxKjw2pRkecpdWzz2gHGLBfGVyowgs8mooCbRWX5MHpJSEhh8YVlH6AQ
-	8RJ4/8+pU0ux8fOyIJoDPGbyaMfqNNhuUfCBWb+L+6lEdCNzSvCxg1fBEoqSc2+V
-	EbmQz+k9tHe0F2aoDYv3pCDhVCvsHHbhW/6qRUBFrMHrkZVXCYrRkaY7BYYwJhni
-	o1DNwr+CwfydLAJE+CuHn63B/ToXKcgo18Id141iN/gmxjPmOMMEzF5gNaollCf6
-	s+rXyR2Cnq0QDf7k1BVwbMqmN9WyJoH39FmoZTvdqbFOhWUbt8KRnCrHywPFKfuB
-	XIvDNHkjbQ==
-Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
-	by mx0a-00082601.pphosted.com (PPS) with ESMTPS id 4dwda0jqnr-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 05 May 2026 11:13:56 -0700 (PDT)
-Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-2f2d983d109so782003eec.0
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 05 May 2026 11:13:56 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778004836; x=1778609636;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=n/8Evrp0/Cs5xE91fVKhf/YUdfmd3rQjcqs7sGTTtLk=;
-        b=Qhg3yHoFRgIrWKRBQWOsf+/ZAcZdw5p3lpGDrz0PblKu6/dlFdwX2/mcvrQzi3bPxd
-         au3aOmLUYWCPAd0ewbHQEa22ZiZO7lrgOhCp1GsIzEen6mXcv9O8wjpDg4YRr/o+BnVL
-         JjGBxr5oBeLkDI2ICDPAke7rYdAxdV3s2/PBD0ItTC/Mj6WFxTlvk6JzO1E13ujGLyVn
-         aLYZ7q8OrehkbbBCamcDonw5gj+rtfEhQE205cMswM8mM8F8O2EUhxa8CrLXEE6dBzz+
-         86egrAQu3rDc+8k5GONQLRYqTGCOR8SExEGkcUI3RKrHtOPHwDuRrN34nBha5VPtD9v1
-         LYyg==
-X-Forwarded-Encrypted: i=1; AFNElJ/Bn/x6MhYezr5aWOC6vt7IrzDxJbf9uwWejrZWCsUnRSyn/R5mAa6BCcASjgh6z7A6k7OHtbxB2L3MKTqz@lists.linaro.org
-X-Gm-Message-State: AOJu0YyBCYWhMnSRtRuvUHRCw10UTC8z6AEUfpL5KQaD7CylLFhgk9IV
-	Ec33yBNMk5DapfXy5TowKN/4i1K0qHn+oRk+9eqpveF8fSkXprYLQBQlaQwCH4apuJ9oOYDEmzd
-	MO6rDw24cKrohMloExw0F2xjHP9XItMKX0LxrplEMYmhiwoCVkB/YFTl6QQ0f3TTvVEo=
-X-Gm-Gg: AeBDietQY3JmmsDvUJzPnocgM/hAyUoVZJqyMDfcqmWafjaxSUVuUOPjGNetNB9kH7u
-	t+SiVbhXImR0cvacy+syoFw6PiZSXRufUpj3anhzn+Ec+uEYqw3EZJvvRyIUy/jf7icQi5Ev9tw
-	4VOFMjyARfD5gcraIWoZkbyzN6RSDTLFmThS0BRfxvmngHqN2wVkk4gCmOWVZQikUmctOAHF5e1
-	oaKSwoy/VG/fKyMwGxjLMN5hFWYbjvnYuJUf6LKiaGZpVDhF6BW23VkHw3wBA8YBCiOzk1PAVnU
-	OdAByiMWPZGUEq22W2777Q5UJsDCPcMB0Zx2a4Fyi4pBLoWIxjb0WU2JQJSJpmKLTJqz3Pe6Al0
-	Vh95SCzq76C/6oqk6nZI1WFpeEoJC95nIHFSPbiJ0
-X-Received: by 2002:a05:693c:300b:b0:2f2:32bc:788a with SMTP id 5a478bee46e88-2f54b465ca5mr163908eec.25.1778004836049;
-        Tue, 05 May 2026 11:13:56 -0700 (PDT)
-X-Received: by 2002:a05:693c:300b:b0:2f2:32bc:788a with SMTP id 5a478bee46e88-2f54b465ca5mr163886eec.25.1778004835478;
-        Tue, 05 May 2026 11:13:55 -0700 (PDT)
-Received: from [10.0.40.29] ([51.52.155.79])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2ee3bc6a79esm25025486eec.26.2026.05.05.11.13.51
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 05 May 2026 11:13:54 -0700 (PDT)
-Message-ID: <2d0eb275-64ef-4710-806b-36f6b32f7122@meta.com>
-Date: Tue, 5 May 2026 19:13:46 +0100
+	by lists.linaro.org (Postfix) with ESMTP id 60DC13F75A
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  5 May 2026 23:38:15 +0000 (UTC)
+Received: from lists.linaro.org (localhost [127.0.0.1])
+	by lists.linaro.org (Postfix) with ESMTP id 81B903F81E
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  5 May 2026 23:38:07 +0000 (UTC)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-GB
-To: Jason Gunthorpe <jgg@nvidia.com>
-References: <20260416131815.2729131-1-mattev@meta.com>
- <20260416131815.2729131-4-mattev@meta.com>
- <20260424182426.GG3444440@nvidia.com>
- <c598a21e-ee50-42d9-98dc-2959e84ace50@meta.com>
- <20260430171106.GA6829@nvidia.com>
-From: Matt Evans <mattev@meta.com>
-In-Reply-To: <20260430171106.GA6829@nvidia.com>
-X-Proofpoint-GUID: m5X_zwE-RG088lN0VX9IOTZJeNHavUrx
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTA1MDE3NyBTYWx0ZWRfX+NxYV8NJikws
- j3Jcw52ptW1AxI7AbGJmwugOgcC00caSU/96kWmI2B0TgboiHHosK3f0KC1EnEKRy6Xy21736pC
- 6RbAX4sl4GNfDsOvD8hFzRfLLuyf75Gcr0ij0D3aEAoD4GFpnYr3ELSEI5M/u+Vf9Q7kkU0NHIu
- j0O6lpbXKilYfAfV06qug0qW2z32hwkdEKFM+atSB4KPDD759AIO1J0Re9Jv/Y1dNvhVO6Kq1Yp
- bnN1eftqVuiqJwyr50EEgZ8LD0bp2E2x3/35X7aUV779wYGsF916wSHAfQmuXHHtUJIoRgnGJ6K
- KTq1uyBAINdj5uSj8+SV8uGN8z3I4eBbbA3WFrF9czsXQkwAeYW5ui7ALLfVFfYlsm5Wqzw2JXG
- 9PsG3P1X0PA7wc14TUvqkTNMPZkyoid/8pKZOUfCVbbGFzbNHU0aysG3wM5bRLcuKLRSjkCmSZL
- Wzow+TJXajCdtsLKglg==
-X-Authority-Analysis: v=2.4 cv=NYjWEWD4 c=1 sm=1 tr=0 ts=69fa3364 cx=c_pps
- a=cFYjgdjTJScbgFmBucgdfQ==:117 a=2UbFsIa4v//lIgRL4kGwwA==:17
- a=Dv35txUGz5gI0hTa:21 a=IkcTkHD0fZMA:10 a=NGcC8JguVDcA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=7x6HtfJdh03M6CCDgxCd:22 a=tpM8CJlwf7uhpglF1g9U:22
- a=znC_9Zf_qiuKpCydwTIA:9 a=QEXdDO2ut3YA:10 a=scEy_gLbYbu1JhEsrz4S:22
-X-Proofpoint-ORIG-GUID: m5X_zwE-RG088lN0VX9IOTZJeNHavUrx
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-05-05_02,2026-04-30_02,2025-10-01_01
-X-Spamd-Bar: ----
-X-MailFrom: prvs=358589eecc=mattev@meta.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 4KSRPOL6P7QWJCJAYRPDE4CQ3G7UPAXH
-X-Message-ID-Hash: 4KSRPOL6P7QWJCJAYRPDE4CQ3G7UPAXH
-X-Mailman-Approved-At: Wed, 13 May 2026 11:22:17 +0000
-CC: Alex Williamson <alex@shazbot.org>, Leon Romanovsky <leon@kernel.org>, Alex Mastro <amastro@fb.com>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Mahmoud Adam <mngyadam@amazon.de>, David Matlack <dmatlack@google.com>, =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Kevin Tian <kevin.tian@intel.com>, Ankit Agrawal <ankita@nvidia.com>, Pranjal Shrivastava <praan@google.com>, Alistair Popple <apopple@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org
+From: jameswalkes0987@gmail.com
+To: linaro-mm-sig@lists.linaro.org
+Date: Tue, 05 May 2026 23:38:07 -0000
+Message-ID: <177802428752.3340081.2322294761963064008@lists.linaro.org>
+User-Agent: HyperKitty on http://lists.linaro.org/
+Message-ID-Hash: P4NEBI23ORFNGFPC4DUL363LVD3BHLIE
+X-Message-ID-Hash: P4NEBI23ORFNGFPC4DUL363LVD3BHLIE
+X-MailFrom: jameswalkes0987@gmail.com
+X-Mailman-Rule-Hits: member-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 3/9] vfio/pci: Add a helper to create a DMABUF for a BAR-map VMA
+Subject: [Linaro-mm-sig] BUY REAL PASSPORT, DRIVERS LICENSE, VISA, GREEN CARD, ID CARD, SCHOOL CERTIFICAT
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4KSRPOL6P7QWJCJAYRPDE4CQ3G7UPAXH/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/P4NEBI23ORFNGFPC4DUL363LVD3BHLIE/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: DA117532325
+X-Rspamd-Queue-Id: E38144D4C44
+X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [3.49 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[meta.com : SPF not aligned (relaxed),reject];
-	DATE_IN_PAST(1.00)[185];
-	R_DKIM_REJECT(1.00)[meta.com:s=s2048-2025-q2];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+X-Spamd-Result: default: False [0.59 / 15.00];
+	MID_RHS_MATCH_TO(1.00)[];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[19];
+	FUZZY_RATELIMITED(0.00)[rspamd.com];
 	ARC_NA(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	RCPT_COUNT_ONE(0.00)[1];
+	MIME_TRACE(0.00)[0:+];
+	FROM_NO_DN(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.999];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_NEQ_ENVFROM(0.00)[jameswalkes0987@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	TO_DN_NONE(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	DKIM_TRACE(0.00)[meta.com:-];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	FROM_NEQ_ENVFROM(0.00)[mattev@meta.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
-	NEURAL_SPAM(0.00)[0.429];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
-X-Rspamd-Action: no action
+	R_DKIM_NA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[]
 
-Hi Jason,
+Genuine Passports, Driver's licenses And Other Documents Of All Countries For Sale. Buy High Quality Data-based Registered Machine Read-able Scan-able Driver's Licenses, ID's, Passports, And Citizenship Documents. Buy Real Passports, Driver's License, ID Cards, Visas, USA Green Card, Fake Money. We are the best producers of genuine Data-based Registered High Quality Real/Fake Passport, Driver's Licenses, ID Card's And other Citizenship Documents. Buy High Quality Data-based Registered Machine Read-able Scan-able Driver's Licenses, ID's, Passports, And Citizenship Documents. Buy Real Passports, Driver's License, ID Cards, Visas, USA Green Card, Fake Money.
 
-On 30/04/2026 18:11, Jason Gunthorpe wrote:
-> 
-> On Thu, Apr 30, 2026 at 05:47:49PM +0100, Matt Evans wrote:
->>> On Thu, Apr 16, 2026 at 06:17:46AM -0700, Matt Evans wrote:
->>>> +int vfio_pci_core_mmap_prep_dmabuf(struct vfio_pci_core_device *vdev,
->>>> +				   struct vm_area_struct *vma,
->>>> +				   u64 phys_start, u64 req_len,
->>>> +				   unsigned int res_index)
->>>> +{
->>>> +	struct vfio_pci_dma_buf *priv;
->>>> +	const unsigned int nr_ranges = 1;
->>>> +	int ret;
->>>> +
->>>> +	priv = kzalloc_obj(*priv);
->>>> +	if (!priv)
->>>> +		return -ENOMEM;
->>>> +
->>>> +	priv->phys_vec = kzalloc_obj(*priv->phys_vec);
->>>> +	if (!priv->phys_vec) {
->>>> +		ret = -ENOMEM;
->>>> +		goto err_free_priv;
->>>> +	}
->>>> +
->>>> +	/*
->>>> +	 * The mmap() request's vma->vm_offs might be non-zero, but
->>>> +	 * the DMABUF is created from _offset zero_ of the BAR.  The
->>>> +	 * portion between zero and the vm_offs is inaccessible
->>>> +	 * through this VMA, but this approach keeps the
->>>> +	 * /proc/<pid>/maps offset somewhat consistent with the
->>>> +	 * pre-DMABUF code.  Size includes the offset portion.
->>>
->>> I'm not sure I understand this comment?
->>>
->>> For the old path vm_pgoff for byte 0 of the bar starts at some large
->>> offset
->>>
->>> For the new path vm_pgoff for byte 0 of the first range starts at 0
->>
->> Glad you asked.  :)
->>
->> This is trying to achieve keeping /proc/<pid>/maps (or similar) somewhat
->> as informative as pre-DMABUF BAR mmap, in terms of keeping the VMA
->> vm_offs column useful.  Before this patch, say you mmap() two slices A
->> and B of the same BAR:
->>
->>   struct vfio_region_info bar_region;
->>
->>   vm_a = mmap(0, 0x1000, ..., device_fd, bar_region.offset + 0);
->>   vm_b = mmap(0, 0x1000, ..., device_fd, bar_region.offset + 0x4000);
->>
->> ...you'd see something like this in /proc/blah/maps:
->>
->> fffff4000000-fffff4001000 rw-s 10000000000 00:07 148     /dev/vfio/devices/vfio0
->> fffff5000000-fffff5001000 rw-s 10000004000 00:07 148     /dev/vfio/devices/vfio0
-> 
-> 
->> then the VMA's vm_offs would need to be thunked back down to 0 (since
->> the fault handler then treats vm_b + 0 as the first byte of the DMABUF).
->> That works/adds up, but then the vm_offs of both VMAs A & B both have
->> offset 0, and it's harder to differentiate in /proc/blah/maps.
-> 
-> Yes, and that would be correct.
-> 
-> The VMA output of lspci should show the exact pgoff passed to mmap and
-> nothing else. Do not mangle it for "debugging".
-> 
-> pgoff is not to be used to show random internal FD details..
-> 
->> We could possibly stash the original offset somewhere and then render it
->> in the name string, but the name's already about the max size and using
->> the existing vm_offs column is nicer IMO, doesn't need a new field, etc.
-> 
->> I need to work on this comment then!  What this is trying to say is that
->> the DMABUF is made artificially larger than the part that is visible
->> through the VMA.
-> 
-> Yuk, that's another reason not to do this.
+Email : jameswalkes0987@gmail.com
 
-OK, fair enough.  I'll rework this and remove this one weird trick, 
-thanks for the input.
+What's app:+237 677480749
 
-Matt
+Tell:+237 677480749
 
+
+
+We are the best producers of genuine high quality fake documents.
+
+Buy Fake Passport British(UK) For Sale Diplomatic Canadian False ID Cards Online United States(US) Fake ID Card Sell Driver's License.
+
+Buy genuine Green card Training certificates, GCSE, A-levels, High School Diploma Certificates ,GMAT, MCAT, and LSAT examination Certificates and credit cards, school diplomas, school degrees all in an entirely new name issued and registered in the government's data-base system.
+
+Welcome To David Wilson and Associates Network. Get A second Chance In Life with Wesley Hover and Associates , protect your privacy, build new credit history, by-pass criminal background checks, take back your freedom. It's a cruise, you have come to the right place for all your travel needs and guest what !!!! you're going to finally make your dream a reality. Let us help you plan the ideal trip for you if you would like to find out more about the services we have available. We are an Association responsible for the production of real genuine passports, Real Genuine Data-Base Registered Fake Passports and other Citizenship documents. I can guarantee you a new Identity starting from a clean new genuine Birth Certificate, ID card, Drivers License, Passports, Social security card with SSN, credit files can you imagine ??
+
+WE DO OFFER LEGITIMATE'S SERVICE: .GET REGISTERED BRITISH PASSPORT. .REGISTERED CANADIAN PASSPORT. .REGISTERED FRENCH PASSPORT. .REGISTERED AMERICAN PASSPORT. .REGISTERED USA PASSPORT. .REGISTERED PASSPORT FOR COUNTRIES IN THE EUROPEAN UNION.
+
+We offer a service to help you through to meet your goals, we can help you with: Getting real government issued ID under another identity(NEW NAMES), A new social security number (verifiable with the SSA), Checking and saving accounts for your new ID. Credit cards Relocation Passports, Diplomatic passports, novelty passports. Production and obtaining new identification documents.
+
+We also do work permit and bank statements and have connections to OFFER JOBS in country like Dubai, USA , CANADA , UK ,China,Peru,Brazil,South Africa,Denmark,Sweden,Norway,France etc..
+
+Tourist and business visa services available to residents of all 50 states and all nationalities Worldwide
+
+INTERESTED TO BUY REAL GENUINE QUALITY BANKNOTES of Euros, Dollars and Pounds ??? with security feature magnetic ink, water marks, the pen test, and the security strip that by-pass machines. Our hundreds carry "color-shifting ink," an advanced feature that gives the money an appearance of changing color when held at different angles including Intaglio.
+
+Coaching services available....
+
+Not even an expertise custom official or machine can ever dictate the document we offer as fake, since the document is no different from Real government issued!
+
+
+Email : jameswalkes0987@gmail.com
+
+What's app:+237 677480749
+
+Tell:+237 677480749
+
+
+
+E-Mail Your Questions and Comments.
+
+We are looking forward to receiving your inquiries and early receipt of your first orders!
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
