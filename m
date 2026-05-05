@@ -2,129 +2,64 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id AG9OJMgF+mkEIgMAu9opvQ
+	id GGjsKWVfBGqiHQIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 05 May 2026 16:59:20 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:24:21 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 29BC54CFD5A
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 05 May 2026 16:59:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4AB8C532286
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:24:20 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E9271409C0
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  5 May 2026 14:59:18 +0000 (UTC)
-Received: from CY7PR03CU001.outbound.protection.outlook.com (mail-westcentralusazon11010013.outbound.protection.outlook.com [40.93.198.13])
-	by lists.linaro.org (Postfix) with ESMTPS id BE5373F75A
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  5 May 2026 14:59:15 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id DAB82401B1
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 11:24:19 +0000 (UTC)
+Received: from bali.collaboradmins.com (bali.collaboradmins.com [148.251.105.195])
+	by lists.linaro.org (Postfix) with ESMTPS id 482C840705
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  5 May 2026 15:20:57 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=Nvidia.com header.s=selector2 header.b=FpV1SlrS;
-	dmarc=pass (policy=reject) header.from=nvidia.com;
-	spf=pass (lists.linaro.org: domain of jgg@nvidia.com designates 40.93.198.13 as permitted sender) smtp.mailfrom=jgg@nvidia.com;
-	arc=pass ("microsoft.com:s=arcselector10001:i=1")
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=auLRFohXePwnRUTqgfqoj9uAQHytXOKCMT0gmyEDrv1f4+mztojufybb3SswD5HQzvvk2AwFGwGq2fSVBUOtObt94RZ23YKzZe/v4fy7vvBj6Qv4OZlO+syt0yhmhxUZi2M7Ix88BSMXeZsHVX4sQXnORcHumNDxL08LDnKnOgs2zk9megwTmTztGAwH+mbMcK19FHElAo6MvkPO6xfufpzfLquXw3X79FJfsCoKXCI5BU4qjAhYzI9gIAO8X9c/kKGHtf+U3IrVuElyQZsqQMSAsz/XmBqgEG+EhWol+HD6h3d8WVl7Q+InNSAqCKYWKnaK81aODQ9/zp6s/BZU6g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8H4qcHbR98Lvxvsl+J8LGw1vDQW8yRmoXONFOPnnLWk=;
- b=j48ac8T5vz2UIlRD/Fj6W4i2HVaA62WM/GPCf74e7zEwpkuC9UJEGfnDoYFR+NCfdIVV9bGQiK3De4Dsy6ZKdQQzvcHB0S5Jyl9gAZycM509ru1YtloQYNE0tCTY2s4VcwNoal0J7XzwJBBlcTM6gPaIu6wAD3zzCEd7aUeymECPRsvJV2bqR3r3JuhrTpkQSLq4teRyICjAVxToqlT9/oK/v9tnraCQkc3yxmZhTmRPX4vMkG4fTF6Cy0mFueLo/2YdGu2OHhHJQKLsL6HFSmJxfgSzJSj31UedG7qAz1XJKFnrftAkQrr0Xja10gikGbP2XtCfHHnq4u86OOcxmw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8H4qcHbR98Lvxvsl+J8LGw1vDQW8yRmoXONFOPnnLWk=;
- b=FpV1SlrSExI3u3J2ObvYBaP4dDY6yFBVm55lNBxRZwTXw0sFhoDsutphVS5Djv6kG2/aIvLyjYFigwWZmvu6aOv4Vqtmzz8lrBOlXr84m0zUHVAj2+8NgIdtdd7wU/ZQVHNemPvMfylJNDjNxaD1AMT+tH9hlSlLOAkGPCu1iNuiNhUzLxzDGJKoDHCxoistoublhrdcCFPPL5ufYg19vrpB87EzHRcwHkb+5V6Gty3V5mBvbLxLLC3RLm8g7KF1PYNtBG1gW6Ie+ghKepgtY9zXP86r09+C6ytTmma1ezrX0+AviwBzC1DW433dzXvG1s28bMnf5gLKKh1vrygA4w==
-Received: from LV8PR12MB9620.namprd12.prod.outlook.com (2603:10b6:408:2a1::19)
- by IA0PR12MB8254.namprd12.prod.outlook.com (2603:10b6:208:408::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.27; Tue, 5 May
- 2026 14:59:03 +0000
-Received: from LV8PR12MB9620.namprd12.prod.outlook.com
- ([fe80::299d:f5e0:3550:1528]) by LV8PR12MB9620.namprd12.prod.outlook.com
- ([fe80::299d:f5e0:3550:1528%5]) with mapi id 15.20.9870.023; Tue, 5 May 2026
- 14:59:03 +0000
-Date: Tue, 5 May 2026 11:59:00 -0300
-From: Jason Gunthorpe <jgg@nvidia.com>
-To: Alex Williamson <alex@shazbot.org>
-Message-ID: <afoFtHGCl6oSeOoc@nvidia.com>
-References: <20260416131815.2729131-1-mattev@meta.com>
- <20260416131815.2729131-5-mattev@meta.com>
- <20260501161915.75525c15@shazbot.org>
- <afhNeYS174EW7RYp@nvidia.com>
- <20260505104911.GB11063@unreal>
- <20260505085058.74c34290@shazbot.org>
-Content-Disposition: inline
-In-Reply-To: <20260505085058.74c34290@shazbot.org>
-X-ClientProxiedBy: FR2P281CA0150.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:98::11) To LV8PR12MB9620.namprd12.prod.outlook.com
- (2603:10b6:408:2a1::19)
+	dkim=pass header.d=collabora.com header.s=mail header.b=HZ4LnhKu;
+	dmarc=pass (policy=none) header.from=collabora.com;
+	spf=pass (lists.linaro.org: domain of boris.brezillon@collabora.com designates 148.251.105.195 as permitted sender) smtp.mailfrom=boris.brezillon@collabora.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+	s=mail; t=1777994455;
+	bh=GB3l17/ekg1P4sEApX6f/ITXv7X2gefB+5c4kZ5bdhQ=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=HZ4LnhKuimVBHwguEpzHzUmKIga1uo5dFOtEZyWUTnmmq5oSmrqc6vzHcWnZmPR34
+	 ISBs/7vrXXLNNZ4GzSz1AJXYG8mPv7GKqln6yQNsn7XEidgQgN3pkpnmUMh9E0By+E
+	 zjJnyB/DCGYC3Db1gUTZLhyIJZHavG7xhlYHNvBDaTBBeHP54ab0vkUtayjvGW3SXh
+	 U3zsKmmcKDqZX6/TTlXzVZGRMyLzcOvVBrNbm7mZ2626RA7Z4h0vMRsAI54zUqDGO5
+	 G6+irU6LumaJMQzuJp99XhlFz158BBAuV1vb71KFVgPXYymXDUkC3hcxqWANL5gyVo
+	 vIVXPlsHRlI0w==
+Received: from fedora (unknown [100.64.0.11])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: bbrezillon)
+	by bali.collaboradmins.com (Postfix) with ESMTPSA id 35D1417E13B2;
+	Tue,  5 May 2026 17:20:54 +0200 (CEST)
+Date: Tue, 5 May 2026 17:20:48 +0200
+From: Boris Brezillon <boris.brezillon@collabora.com>
+To: Ketil Johnsen <ketil.johnsen@arm.com>
+Message-ID: <20260505172048.1c48e030@fedora>
+In-Reply-To: <20260505140516.1372388-2-ketil.johnsen@arm.com>
+References: <20260505140516.1372388-1-ketil.johnsen@arm.com>
+	<20260505140516.1372388-2-ketil.johnsen@arm.com>
+Organization: Collabora
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV8PR12MB9620:EE_|IA0PR12MB8254:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5eba83bb-f57e-489b-d0f2-08deaab6d8db
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|376014|7416014|1800799024|366016|56012099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: 
-	yYEsPW9M9LiXuDHVQHWu167Rv1tcECZbr3J7noUj23/PmCSihM2s1LxoYiF01I48C8ztWOx2bH6cGU+CbE7A6EsG48g6TdO8d2BooKvgheQNawApBJuz6RvgbyFnd6fQwC9tJJCEKPvcEb5UjcE7U1MrHHPA4hT6RVwoNW7SU0wHRo8SV5SN/qYeMBTPMQQZVVDgXXDal4L6ADQ00zFYM1yGX+ti74OBHgErEmnL2xyUww9Zth7brZd+YIY2NCa2FsBm5KLWoNM+FIYlWUjMF+Pe5j8HobglIHuUqCBM0SneNkr9yr30bhwGfqIn5G6qiGsn7BFEigzyEHnhoFTBYipnttGpfnNvJZwi1qToAWeXeUC/eX8qOKJRNszb/zP8uQc86/y56m4UwOWNE3c8Gwg6q5V+bTHw41YBiWkh+KGIosod/hA11L3nPU/Suz6YKLBkgv2990DjJT4q6YQRsNDTceipGnkN8jmoLUzgj6XVdIwUulWnSsq6wLSbdQTF+7SwYbmwl2gWiXU5vsKrJClk8CzTWrspl+UnFJIOTPf7ztsh0Zbx19ueu7pLt6CWSsGNVXDK4xR714ldeHo1lFKg9jPftdcTDZ951eDzb9aCi828pTO4CHHea4O7uhfeDxV3xxx44rJauir/B6l2f8Yl3qErKAUNXOkNZYAG92slevWDBPyUQDYDKgzdzZbY
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LV8PR12MB9620.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(1800799024)(366016)(56012099003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?EGbjWwi9J/EujTfH7gLteUl8OJUc2ZKwZhteR3KMr5I+iHWaAtvbaTlbpyHL?=
- =?us-ascii?Q?PH0O1Q9YeSY8BRid3o1WyBJoFTtI69z4UzENsgd0oOnnkPMXsOGBO+iWZTir?=
- =?us-ascii?Q?4dNLAs6nMtd50thh8hQ8bNdGykJOkO8nWOk+yvFdaiiRPUYXnWZuViXIJfQb?=
- =?us-ascii?Q?xvqaen7Z40sEP5BiE6j4qX5E1kB3HZorjxhk4ziplwwRFIu9m8QPlBOtdgiL?=
- =?us-ascii?Q?FguDONZ4TmKmfx7XrJQgPZsn5+VxcnyiHmjRkGt45Uv1IoIR27WzzMti7HaU?=
- =?us-ascii?Q?JI5Cbiv6CyV9NerY4y5aLWOQ8KvegE6rHfXPQjlP9xCS1Zpg4xgDD6k9JpnX?=
- =?us-ascii?Q?nJBrEDkJQganH2UFCgEWTw4wv/Ji7ZDrCvKFJIww52jZ7Evbj53inbqvbSmE?=
- =?us-ascii?Q?rPh/VNKwcBkrSaT770ZWvFS7is7P3CeCTjNd61pQmTDfU4unwt6wwZvLst8c?=
- =?us-ascii?Q?U/tO/X5pOT/IXT25LJAXfjLlKFGz/ljOCDAoiCWvO+MNJDYz4MiPEfCTmd0d?=
- =?us-ascii?Q?WmWJbClXqjhkqo6GYcd4rCzNCsPgRrNzD9vJGQ9T0IvdZ6Sn+rfU0s4qBKuF?=
- =?us-ascii?Q?FAcuptDbqZxTbE8TI2ANsJlla3rNlmU76HUe+Ebcl8tSuc6wynM5A7K23gTQ?=
- =?us-ascii?Q?bdus5hFaZ5B6/JwJnpjPVg2fmPGq2zkDXkTeSxqr1lrXA2GU/0TLTvA08lIj?=
- =?us-ascii?Q?DA+D6BUg6J1MUATp4EqdTua6tZIrXCJp3c7iHVk0pFuYszk+vtqSnxAn6qWa?=
- =?us-ascii?Q?BEnCk2Q3m1uN98VdsfIFcJjAPWBXRl7ifKHykHyhhYA2CrjVVQSk7QM+24OE?=
- =?us-ascii?Q?AoFnBWIwIR/wSHS2jffsPJUX+nfnM4f2rii3jT97GlEBgDj//F5IBYhxK/aL?=
- =?us-ascii?Q?BHIZW4OnhG+N235cdX3AfZCTHJi1RisgHWR7thFvCcM2/EJ+fk9LbffUiSLa?=
- =?us-ascii?Q?dLUYut1DyYjrY/4FeNULq9icpVSV28GvB8koK8g0B3fdvF9EYLMaviyVeQrl?=
- =?us-ascii?Q?tk0HmVd5MgfyIMf5tfIwn9iypNVA6HNwHCH7BHCI6wFiuI31z0i2Vt83fUAz?=
- =?us-ascii?Q?FqHcx1PqJzk4JgCC0X0sk2tB3+/fiodklzXazMuZ1Ld4RlYB/AfSm4Zg5M6Q?=
- =?us-ascii?Q?uc5eEgUFdcF4p5/hisWKuPUYLh6SdvRk0W5xCPsqRMc7wIcoHFey37Sk9OLy?=
- =?us-ascii?Q?PhWuiYr+5H6S9tRq8Dd3A7U/x5phWgqphnP1hpN+br4a7QEPZ+BMkVvLjST1?=
- =?us-ascii?Q?AtIMrCJQ3lezs0+wiinOqq8Ol7uOtl0AA5P0W66y+No9qkjdLD3ONIIfuKy4?=
- =?us-ascii?Q?EFFI9FOMYarWl4C04h7zvoyDLCzHnqgBymdMd7CUnpVzJk6bCHfVS3K3tyJz?=
- =?us-ascii?Q?lmmXU6/CJ1SYAzLPcSnDhq9w0gYUlEv3zKMQWXyKEZdR58hNCGi5fKyrVdiB?=
- =?us-ascii?Q?GgBrh7waSts9XE0XJjT42ch+2LSEeyhbdUvHYfwVaAYSjxzBJgc/dgyB0uyu?=
- =?us-ascii?Q?1scB8qOoqHi+EgpC4FkEm5T30wmqAdkZLn7lxTc1LiRa9EpYeSQRbs/dQD+r?=
- =?us-ascii?Q?UA24+2LOgWhjtedYn2TtSGvLT5lPnsVvPs58KISg8kK1iulC0x1O3DEv2tDe?=
- =?us-ascii?Q?PXobubbOZYmzWvSVFm5zb0GssqKKnpqnGi7zdQAMVkzSwrnanBozia+ioop1?=
- =?us-ascii?Q?PuSKEhPYTLvTRNgByDWhrVlxhuyzEi5JhBzbTYuHWRk7nExZ?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5eba83bb-f57e-489b-d0f2-08deaab6d8db
-X-MS-Exchange-CrossTenant-AuthSource: LV8PR12MB9620.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 May 2026 14:59:03.4189
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: T7k7cF9UcmrPle3n47bDyIx2SkhiCvsXXwZ0F3G8LfVO/0tlqh8SPkO/Ynous8Mw
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB8254
-X-Spamd-Bar: ----
-Message-ID-Hash: PAQ74BEH5ZIXSMMUG4X5IWDHFQYS5CLM
-X-Message-ID-Hash: PAQ74BEH5ZIXSMMUG4X5IWDHFQYS5CLM
-X-MailFrom: jgg@nvidia.com
+X-Spamd-Bar: ---
+X-MailFrom: boris.brezillon@collabora.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Leon Romanovsky <leon@kernel.org>, Matt Evans <mattev@meta.com>, Alex Mastro <amastro@fb.com>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Mahmoud Adam <mngyadam@amazon.de>, David Matlack <dmatlack@google.com>, =?utf-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Kevin Tian <kevin.tian@intel.com>, Ankit Agrawal <ankita@nvidia.com>, Pranjal Shrivastava <praan@google.com>, Alistair Popple <apopple@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org
+Message-ID-Hash: D3A4TLJ3CNF7YAYGLFLXKLZTFYW6OZXL
+X-Message-ID-Hash: D3A4TLJ3CNF7YAYGLFLXKLZTFYW6OZXL
+X-Mailman-Approved-At: Wed, 13 May 2026 11:22:14 +0000
+CC: David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Steven Price <steven.price@arm.com>, Liviu Dudau <liviu.dudau@arm.com>, Daniel Almeida <daniel.almeida@collabora.com>, Alice Ryhl <aliceryhl@google.com>, Matthias Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-arm-kernel@lists.infradead.org, l
+ inux-mediatek@lists.infradead.org, Yong Wu <yong.wu@mediatek.com>, Yunfei Dong <yunfei.dong@mediatek.com>, Florent Tomasin <florent.tomasin@arm.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 4/9] vfio/pci: Convert BAR mmap() to use a DMABUF
+Subject: [Linaro-mm-sig] Re: [PATCH 1/8] dma-heap: Add proper kref handling on dma-buf heaps
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PAQ74BEH5ZIXSMMUG4X5IWDHFQYS5CLM/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/D3A4TLJ3CNF7YAYGLFLXKLZTFYW6OZXL/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -133,67 +68,185 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 29BC54CFD5A
-X-Rspamd-Action: no action
+X-Rspamd-Queue-Id: 4AB8C532286
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [3.49 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[nvidia.com : SPF not aligned (relaxed),reject];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
-	R_DKIM_REJECT(1.00)[Nvidia.com:s=selector2];
-	MAILLIST(-0.20)[mailman];
+X-Spamd-Result: default: False [3.59 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	DATE_IN_PAST(1.00)[188];
+	R_DKIM_REJECT(1.00)[collabora.com:s=mail];
+	MID_RHS_NOT_FQDN(0.50)[];
 	R_SPF_ALLOW(-0.20)[+mx];
+	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[collabora.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[3];
+	RCPT_COUNT_TWELVE(0.00)[30];
 	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_THREE(0.00)[4];
-	RCPT_COUNT_TWELVE(0.00)[19];
-	DKIM_TRACE(0.00)[Nvidia.com:-];
-	MISSING_XM_UA(0.00)[];
+	HAS_ORG_HEADER(0.00)[];
+	ARC_NA(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jgg@nvidia.com,linaro-mm-sig-bounces@lists.linaro.org];
+	NEURAL_HAM(-0.00)[-0.794];
+	FROM_NEQ_ENVFROM(0.00)[boris.brezillon@collabora.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.981];
+	FREEMAIL_CC(0.00)[gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de,lwn.net,linuxfoundation.org,linaro.org,collabora.com,arm.com,google.com,amd.com,lists.freedesktop.org,vger.kernel.org,lists.linaro.org,lists.infradead.org,mediatek.com];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	MID_RHS_MATCH_FROM(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DKIM_TRACE(0.00)[collabora.com:-];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,arm.com:email]
+X-Rspamd-Action: no action
 
-On Tue, May 05, 2026 at 08:50:58AM -0600, Alex Williamson wrote:
-> On Tue, 5 May 2026 13:49:11 +0300
-> Leon Romanovsky <leon@kernel.org> wrote:
+Hi Ketil,
+
+On Tue,  5 May 2026 16:05:07 +0200
+Ketil Johnsen <ketil.johnsen@arm.com> wrote:
+
+> From: John Stultz <jstultz@google.com>
 > 
-> > On Mon, May 04, 2026 at 04:40:41AM -0300, Jason Gunthorpe wrote:
-> > > On Fri, May 01, 2026 at 04:19:15PM -0600, Alex Williamson wrote:
-> > >   
-> > > > Exporting dma-bufs from vfio-pci is a feature, but mmap of MMIO BARs is
-> > > > a legacy requirement.  That legacy requirement now depends on
-> > > > PCI_P2PDMA, which depends on 64BIT and ZONE_DEVICE.  
-> > > 
-> > > That should be split up now, Leon missed it when he added the new
-> > > APIs that didn't require ZONE_DEVICE..  
-> > 
-> > Sorry, what did I miss here?  
-> > VFIO_DMABUF is an optional feature and is enabled only when P2P support is  
-> > available. It does not affect legacy systems where P2P cannot be enabled.
+> Add proper reference counting on the dma_heap structure. While
+> existing heaps are built-in, we may eventually have heaps loaded
+> from modules, and we'll need to be able to properly handle the
+> references to the heaps
+
+It's weird that this "heap as module" thing is mentioned here, but
+actual robustness to make this safe is not added in the commit or any
+of the following ones.
+
 > 
-> If we look at the long term view of moving exclusively to cdev/iommufd,
-> where VFIO_DMABUF becomes the mechanism for implementing P2P DMA
-> mappings, VFIO_DMABUF may be optional, but it's highly desirable for
-> legacy compatibility.  There's an argument though that providing P2P
-> compatibility on platforms that support PCI_P2PDMA is probably
-> sufficient.
+> Signed-off-by: John Stultz <jstultz@google.com>
+> Signed-off-by: T.J. Mercier <tjmercier@google.com>
+> Signed-off-by: Yong Wu <yong.wu@mediatek.com>
+> [Yong: Just add comment for "minor" and "refcount"]
+> Signed-off-by: Yunfei Dong <yunfei.dong@mediatek.com>
+> [Yunfei: Change reviewer's comments]
+> Signed-off-by: Florent Tomasin <florent.tomasin@arm.com>
+> [Florent: Rebase]
+> Signed-off-by: Ketil Johnsen <ketil.johnsen@arm.com>
+> [Ketil: Rebase]
+> ---
+>  drivers/dma-buf/dma-heap.c | 29 +++++++++++++++++++++++++++++
+>  include/linux/dma-heap.h   |  2 ++
+>  2 files changed, 31 insertions(+)
+> 
+> diff --git a/drivers/dma-buf/dma-heap.c b/drivers/dma-buf/dma-heap.c
+> index ac5f8685a6494..9fd365ddbd517 100644
+> --- a/drivers/dma-buf/dma-heap.c
+> +++ b/drivers/dma-buf/dma-heap.c
+> @@ -12,6 +12,7 @@
+>  #include <linux/dma-heap.h>
+>  #include <linux/err.h>
+>  #include <linux/export.h>
+> +#include <linux/kref.h>
+>  #include <linux/list.h>
+>  #include <linux/nospec.h>
+>  #include <linux/syscalls.h>
+> @@ -31,6 +32,7 @@
+>   * @heap_devt:		heap device node
+>   * @list:		list head connecting to list of heaps
+>   * @heap_cdev:		heap char device
+> + * @refcount:		reference counter for this heap device
+>   *
+>   * Represents a heap of memory from which buffers can be made.
+>   */
+> @@ -41,6 +43,7 @@ struct dma_heap {
+>  	dev_t heap_devt;
+>  	struct list_head list;
+>  	struct cdev heap_cdev;
+> +	struct kref refcount;
+>  };
+>  
+>  static LIST_HEAD(heap_list);
+> @@ -248,6 +251,7 @@ struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_info)
+>  	if (!heap)
+>  		return ERR_PTR(-ENOMEM);
+>  
+> +	kref_init(&heap->refcount);
+>  	heap->name = exp_info->name;
+>  	heap->ops = exp_info->ops;
+>  	heap->priv = exp_info->priv;
+> @@ -313,6 +317,31 @@ struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_info)
+>  }
+>  EXPORT_SYMBOL_NS_GPL(dma_heap_add, "DMA_BUF_HEAP");
+>  
+> +static void dma_heap_release(struct kref *ref)
+> +{
+> +	struct dma_heap *heap = container_of(ref, struct dma_heap, refcount);
+> +	unsigned int minor = MINOR(heap->heap_devt);
+> +
+> +	mutex_lock(&heap_list_lock);
+> +	list_del(&heap->list);
+> +	mutex_unlock(&heap_list_lock);
+> +
+> +	device_destroy(dma_heap_class, heap->heap_devt);
+> +	cdev_del(&heap->heap_cdev);
+> +	xa_erase(&dma_heap_minors, minor);
+> +
+> +	kfree(heap);
 
-The whole reason we developed the P2PDMA stuff the way we did was so
-that all VFIO platforms could use it and get P2P. Thec code is fine,
-there is a kconfig/kbuild issue that we can't enable P2PDMA without
-also ZONE_DEVICE and those need to be split up. Once P2PDMA is
-available on all arches it is no longer a concern..
+That's actually problematic, because cdev_del() doesn't guarantee that
+all opened FDs have been closed [1], it just guarantees that no new ones
+can materialize. In order to make that safe, we'd need a
 
-Jason
+1. kref_get_unless_zero() in dma_heap_open(), with proper locking around
+   the xa_load() to protect against the heap removal that's happening
+   here
+2. a dma_heap_put() in a new dma_heap_close() implementation
+3. a guarantee that heap implementations won't go away until the last
+   ref is dropped, which means ops and all the data needed for this heap
+   to satisfy ioctl()s (and more generally every passed at
+   dma_heap_add() time) have to stay valid until the last ref is
+   dropped. Alternatively, we could restrict this only to in-flight
+   ioctl()s, and have the ops replaced by some dummy ops using RCU or a
+   rwlock. But I guess live dmabufs allocated on this heap have to
+   retain the heap and its implementation anyway.
+
+For record, #3 is already not satisfied by the current tee_heap
+implementation (tee_dma_heap objects can vanish before the dma_heap
+object is gone). The other implementations seem to be fine because they
+are statically linked, and they either have exp_info.priv set to NULL,
+or something that's never released.
+
+TLDR; the whole assumption that adding refcounting to dma_heap is
+enough to guarantee safety around device/module removal is not holding,
+and adding in-kernel users acquiring dma_heap refs on top of this
+design is just going to make it even more painful to fix.
+
+I see two way forward from here, either we get the
+dma_heap/dma_heap-producer lifetime right from the start the way I
+suggested above (I might have missed corner cases there BTW), or we keep
+assuming that heaps can only ever be created, never destroyed/removed
+(which is basically what the current dma_heap.c logic does, except
+tee_heap.c broke that), and just let dma_heap_find() return dma_heap
+pointers whose lifetime is assumed to be static.
+
+> +}
+> +
+> +/**
+> + * dma_heap_put - drops a reference to a dmabuf heap, potentially freeing it
+> + * @heap: DMA-Heap whose reference count to decrement
+> + */
+> +void dma_heap_put(struct dma_heap *heap)
+> +{
+> +	kref_put(&heap->refcount, dma_heap_release);
+
+nit: I'd go
+
+	if (heap)
+		kref_put(&heap->refcount, dma_heap_release);
+
+so users can call dma_heap_put() on NULL heaps, which usually simplify
+error paths and/or destruction of partially initialized objects.
+
+Regards,
+
+Boris
+
+[1]https://elixir.bootlin.com/linux/v7.0.1/source/fs/char_dev.c#L594
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
