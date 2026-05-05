@@ -2,35 +2,35 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id aFddJAdfBGpBHgIAu9opvQ
+	id 6BlHOQ5fBGpBHgIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:22:47 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:22:54 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 33E3E5321BF
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:22:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BEC6B5321CE
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:22:54 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 51F91401B1
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 11:22:46 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id CAA3D4030E
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 11:22:53 +0000 (UTC)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by lists.linaro.org (Postfix) with ESMTP id DB344409BF
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  5 May 2026 14:05:36 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id CFF1A40705
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  5 May 2026 14:05:41 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=arm.com header.s=foss header.b=cW8emmly;
+	dkim=pass header.d=arm.com header.s=foss header.b=Cf7NCzLW;
 	dmarc=pass (policy=none) header.from=arm.com;
 	spf=pass (lists.linaro.org: domain of ketil.johnsen@arm.com designates 217.140.110.172 as permitted sender) smtp.mailfrom=ketil.johnsen@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1787924C0;
-	Tue,  5 May 2026 07:05:31 -0700 (PDT)
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0EB582681;
+	Tue,  5 May 2026 07:05:36 -0700 (PDT)
 Received: from e120398-lin.trondheim.arm.com (e120398-lin.trondheim.arm.com [10.42.46.160])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 770E33F763;
-	Tue,  5 May 2026 07:05:31 -0700 (PDT)
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id DEEC63F763;
+	Tue,  5 May 2026 07:05:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1777989936; bh=knenjS6icqSk3YRJhYDzdkIS/YGlcoD/AJp0MB+GY40=;
+	t=1777989941; bh=Lmg4UHVoceq5MLqHuT0Zw4zFdgj23nCiSgwMP/Dr5Vs=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=cW8emmly/iWCkM4Zgb9M2QLXsBVbQTUQISQA8G9vSVGTr6pfllLsjuzA0hQyI7W1W
-	 dNR1TgB+qSzwQOZcaJYjQnVP0oULO8NgArKEd8VRGzt8Y+ZHJAiellnat15kTvAun6
-	 UODcQQwfFPRRbZWB5eWC2x19OixZ3PCB42MD4Z0I=
+	b=Cf7NCzLWa2JQFYrlx4a14dPfmo+PNOr9sAOCyiFWWizwWQYFN9afN9Vy2akEh41w4
+	 9Ikx7gWRRtHmxmzEnc8LlioyXtZsAw9p7gnYqp5TZFZw5+/qLMlpCdQ5Xrq4bEiEZA
+	 twar6aISCUE5yhhR5v2NLdJo/Hldo+NllxndJ3N8=
 From: Ketil Johnsen <ketil.johnsen@arm.com>
 To: David Airlie <airlied@gmail.com>,
 	Simona Vetter <simona@ffwll.ch>,
@@ -52,8 +52,8 @@ To: David Airlie <airlied@gmail.com>,
 	Alice Ryhl <aliceryhl@google.com>,
 	Matthias Brugger <matthias.bgg@gmail.com>,
 	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
-Date: Tue,  5 May 2026 16:05:08 +0200
-Message-ID: <20260505140516.1372388-3-ketil.johnsen@arm.com>
+Date: Tue,  5 May 2026 16:05:09 +0200
+Message-ID: <20260505140516.1372388-4-ketil.johnsen@arm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260505140516.1372388-1-ketil.johnsen@arm.com>
 References: <20260505140516.1372388-1-ketil.johnsen@arm.com>
@@ -62,15 +62,15 @@ X-Spamd-Bar: --
 X-MailFrom: ketil.johnsen@arm.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 52NDZSU6D5SUK2T7S4EN6SAXDOUEN56O
-X-Message-ID-Hash: 52NDZSU6D5SUK2T7S4EN6SAXDOUEN56O
+Message-ID-Hash: 2TBFFENHREWLGL5Y5OV6RI332QEKOR3G
+X-Message-ID-Hash: 2TBFFENHREWLGL5Y5OV6RI332QEKOR3G
 X-Mailman-Approved-At: Wed, 13 May 2026 11:22:13 +0000
-CC: dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, Yong Wu <yong.wu@mediatek.com>, Yunfei Dong <yunfei.dong@mediatek.com>, Florent Tomasin <florent.tomasin@arm.com>, Ketil Johnsen <ketil.johnsen@arm.com>
+CC: dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, Ketil Johnsen <ketil.johnsen@arm.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 2/8] dma-heap: Provide accessors so that in-kernel drivers can allocate dmabufs from specific heaps
+Subject: [Linaro-mm-sig] [PATCH 3/8] drm/panthor: De-duplicate FW memory section sync
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/52NDZSU6D5SUK2T7S4EN6SAXDOUEN56O/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2TBFFENHREWLGL5Y5OV6RI332QEKOR3G/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -79,7 +79,7 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 33E3E5321BF
+X-Rspamd-Queue-Id: BEC6B5321CE
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [4.09 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
@@ -93,7 +93,7 @@ X-Spamd-Result: default: False [4.09 / 15.00];
 	HAS_LIST_UNSUB(-0.01)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[31];
+	RCPT_COUNT_TWELVE(0.00)[28];
 	GREYLIST(0.00)[pass,meta];
 	RCVD_TLS_LAST(0.00)[];
 	FREEMAIL_TO(0.00)[gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de,lwn.net,linuxfoundation.org,linaro.org,collabora.com,arm.com,google.com,amd.com];
@@ -101,7 +101,7 @@ X-Spamd-Result: default: False [4.09 / 15.00];
 	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	DKIM_TRACE(0.00)[arm.com:-];
-	NEURAL_HAM(-0.00)[-0.445];
+	NEURAL_HAM(-0.00)[-0.504];
 	FROM_NEQ_ENVFROM(0.00)[ketil.johnsen@arm.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
@@ -112,173 +112,83 @@ X-Spamd-Result: default: False [4.09 / 15.00];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,arm.com:email,arm.com:mid]
 X-Rspamd-Action: no action
 
-From: John Stultz <jstultz@google.com>
+Handle the sync to device of FW memory sections inside
+panthor_fw_init_section_mem() so that the callers do not have to.
 
-This allows drivers who don't want to create their own
-DMA-BUF exporter to be able to allocate DMA-BUFs directly
-from existing DMA-BUF Heaps.
+This small improvement is also critical for protected FW sections,
+so we avoid issuing memory transactions to protected memory from
+CPU running in normal mode.
 
-There is some concern that the premise of DMA-BUF heaps is
-that userland knows better about what type of heap memory
-is needed for a pipeline, so it would likely be best for
-drivers to import and fill DMA-BUFs allocated by userland
-instead of allocating one themselves, but this is still
-up for debate.
-
-Signed-off-by: John Stultz <jstultz@google.com>
-Signed-off-by: T.J. Mercier <tjmercier@google.com>
-Signed-off-by: Yong Wu <yong.wu@mediatek.com>
-[Yong: Fix the checkpatch alignment warning]
-Signed-off-by: Yunfei Dong <yunfei.dong@mediatek.com>
-Signed-off-by: Florent Tomasin <florent.tomasin@arm.com>
-[Florent: Rebase]
 Signed-off-by: Ketil Johnsen <ketil.johnsen@arm.com>
-[Ketil: Rebase]
 ---
- drivers/dma-buf/dma-heap.c | 80 ++++++++++++++++++++++++++++++--------
- include/linux/dma-heap.h   |  6 +++
- 2 files changed, 70 insertions(+), 16 deletions(-)
+ drivers/gpu/drm/panthor/panthor_fw.c | 22 ++++++----------------
+ 1 file changed, 6 insertions(+), 16 deletions(-)
 
-diff --git a/drivers/dma-buf/dma-heap.c b/drivers/dma-buf/dma-heap.c
-index 9fd365ddbd517..854d40d789ff2 100644
---- a/drivers/dma-buf/dma-heap.c
-+++ b/drivers/dma-buf/dma-heap.c
-@@ -57,12 +57,24 @@ module_param(mem_accounting, bool, 0444);
- MODULE_PARM_DESC(mem_accounting,
- 		 "Enable cgroup-based memory accounting for dma-buf heap allocations (default=false).");
- 
--static int dma_heap_buffer_alloc(struct dma_heap *heap, size_t len,
--				 u32 fd_flags,
--				 u64 heap_flags)
-+/**
-+ * dma_heap_buffer_alloc - Allocate dma-buf from a dma_heap
-+ * @heap:	DMA-Heap to allocate from
-+ * @len:	size to allocate in bytes
-+ * @fd_flags:	flags to set on returned dma-buf fd
-+ * @heap_flags: flags to pass to the dma heap
-+ *
-+ * This is for internal dma-buf allocations only. Free returned buffers with dma_buf_put().
-+ */
-+struct dma_buf *dma_heap_buffer_alloc(struct dma_heap *heap, size_t len,
-+				      u32 fd_flags,
-+				      u64 heap_flags)
+diff --git a/drivers/gpu/drm/panthor/panthor_fw.c b/drivers/gpu/drm/panthor/panthor_fw.c
+index be0da5b1f3abf..0d07a133dc3af 100644
+--- a/drivers/gpu/drm/panthor/panthor_fw.c
++++ b/drivers/gpu/drm/panthor/panthor_fw.c
+@@ -446,6 +446,7 @@ static void panthor_fw_init_section_mem(struct panthor_device *ptdev,
+ 					struct panthor_fw_section *section)
  {
--	struct dma_buf *dmabuf;
--	int fd;
-+	if (fd_flags & ~DMA_HEAP_VALID_FD_FLAGS)
-+		return ERR_PTR(-EINVAL);
+ 	bool was_mapped = !!section->mem->kmap;
++	struct sg_table *sgt;
+ 	int ret;
+ 
+ 	if (!section->data.size &&
+@@ -464,6 +465,11 @@ static void panthor_fw_init_section_mem(struct panthor_device *ptdev,
+ 
+ 	if (!was_mapped)
+ 		panthor_kernel_bo_vunmap(section->mem);
 +
-+	if (heap_flags & ~DMA_HEAP_VALID_HEAP_FLAGS)
-+		return ERR_PTR(-EINVAL);
- 
- 	/*
- 	 * Allocations from all heaps have to begin
-@@ -70,9 +82,20 @@ static int dma_heap_buffer_alloc(struct dma_heap *heap, size_t len,
- 	 */
- 	len = PAGE_ALIGN(len);
- 	if (!len)
--		return -EINVAL;
-+		return ERR_PTR(-EINVAL);
-+
-+	return heap->ops->allocate(heap, len, fd_flags, heap_flags);
-+}
-+EXPORT_SYMBOL_NS_GPL(dma_heap_buffer_alloc, "DMA_BUF_HEAP");
- 
--	dmabuf = heap->ops->allocate(heap, len, fd_flags, heap_flags);
-+static int dma_heap_bufferfd_alloc(struct dma_heap *heap, size_t len,
-+				   u32 fd_flags,
-+				   u64 heap_flags)
-+{
-+	struct dma_buf *dmabuf;
-+	int fd;
-+
-+	dmabuf = dma_heap_buffer_alloc(heap, len, fd_flags, heap_flags);
- 	if (IS_ERR(dmabuf))
- 		return PTR_ERR(dmabuf);
- 
-@@ -110,15 +133,9 @@ static long dma_heap_ioctl_allocate(struct file *file, void *data)
- 	if (heap_allocation->fd)
- 		return -EINVAL;
- 
--	if (heap_allocation->fd_flags & ~DMA_HEAP_VALID_FD_FLAGS)
--		return -EINVAL;
--
--	if (heap_allocation->heap_flags & ~DMA_HEAP_VALID_HEAP_FLAGS)
--		return -EINVAL;
--
--	fd = dma_heap_buffer_alloc(heap, heap_allocation->len,
--				   heap_allocation->fd_flags,
--				   heap_allocation->heap_flags);
-+	fd = dma_heap_bufferfd_alloc(heap, heap_allocation->len,
-+				     heap_allocation->fd_flags,
-+				     heap_allocation->heap_flags);
- 	if (fd < 0)
- 		return fd;
- 
-@@ -317,6 +334,36 @@ struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_info)
++	/* An sgt should have been requested when the kernel BO was GPU-mapped. */
++	sgt = to_panthor_bo(section->mem->obj)->dmap.sgt;
++	if (!drm_WARN_ON_ONCE(&ptdev->base, !sgt))
++		dma_sync_sgtable_for_device(ptdev->base.dev, sgt, DMA_TO_DEVICE);
  }
- EXPORT_SYMBOL_NS_GPL(dma_heap_add, "DMA_BUF_HEAP");
  
-+/**
-+ * dma_heap_find - get the heap registered with the specified name
-+ * @name: Name of the DMA-Heap to find
-+ *
-+ * Returns:
-+ * The DMA-Heap with the provided name.
-+ *
-+ * NOTE: DMA-Heaps returned from this function MUST be released using
-+ * dma_heap_put() when the user is done to enable the heap to be unloaded.
-+ */
-+struct dma_heap *dma_heap_find(const char *name)
-+{
-+	struct dma_heap *h;
-+
-+	mutex_lock(&heap_list_lock);
-+	list_for_each_entry(h, &heap_list, list) {
-+		if (!kref_get_unless_zero(&h->refcount))
-+			continue;
-+
-+		if (!strcmp(h->name, name)) {
-+			mutex_unlock(&heap_list_lock);
-+			return h;
-+		}
-+		dma_heap_put(h);
-+	}
-+	mutex_unlock(&heap_list_lock);
-+	return NULL;
-+}
-+EXPORT_SYMBOL_NS_GPL(dma_heap_find, "DMA_BUF_HEAP");
-+
- static void dma_heap_release(struct kref *ref)
- {
- 	struct dma_heap *heap = container_of(ref, struct dma_heap, refcount);
-@@ -341,6 +388,7 @@ void dma_heap_put(struct dma_heap *heap)
- {
- 	kref_put(&heap->refcount, dma_heap_release);
+ /**
+@@ -626,7 +632,6 @@ static int panthor_fw_load_section_entry(struct panthor_device *ptdev,
+ 	section_size = hdr.va.end - hdr.va.start;
+ 	if (section_size) {
+ 		u32 cache_mode = hdr.flags & CSF_FW_BINARY_IFACE_ENTRY_CACHE_MODE_MASK;
+-		struct panthor_gem_object *bo;
+ 		u32 vm_map_flags = 0;
+ 		u64 va = hdr.va.start;
+ 
+@@ -663,14 +668,6 @@ static int panthor_fw_load_section_entry(struct panthor_device *ptdev,
+ 		}
+ 
+ 		panthor_fw_init_section_mem(ptdev, section);
+-
+-		bo = to_panthor_bo(section->mem->obj);
+-
+-		/* An sgt should have been requested when the kernel BO was GPU-mapped. */
+-		if (drm_WARN_ON_ONCE(&ptdev->base, !bo->dmap.sgt))
+-			return -EINVAL;
+-
+-		dma_sync_sgtable_for_device(ptdev->base.dev, bo->dmap.sgt, DMA_TO_DEVICE);
+ 	}
+ 
+ 	if (hdr.va.start == CSF_MCU_SHARED_REGION_START)
+@@ -724,17 +721,10 @@ panthor_reload_fw_sections(struct panthor_device *ptdev, bool full_reload)
+ 	struct panthor_fw_section *section;
+ 
+ 	list_for_each_entry(section, &ptdev->fw->sections, node) {
+-		struct sg_table *sgt;
+-
+ 		if (!full_reload && !(section->flags & CSF_FW_BINARY_IFACE_ENTRY_WR))
+ 			continue;
+ 
+ 		panthor_fw_init_section_mem(ptdev, section);
+-
+-		/* An sgt should have been requested when the kernel BO was GPU-mapped. */
+-		sgt = to_panthor_bo(section->mem->obj)->dmap.sgt;
+-		if (!drm_WARN_ON_ONCE(&ptdev->base, !sgt))
+-			dma_sync_sgtable_for_device(ptdev->base.dev, sgt, DMA_TO_DEVICE);
+ 	}
  }
-+EXPORT_SYMBOL_NS_GPL(dma_heap_put, "DMA_BUF_HEAP");
  
- static char *dma_heap_devnode(const struct device *dev, umode_t *mode)
- {
-diff --git a/include/linux/dma-heap.h b/include/linux/dma-heap.h
-index ff57741700f5f..c3351f8a1f8cf 100644
---- a/include/linux/dma-heap.h
-+++ b/include/linux/dma-heap.h
-@@ -46,8 +46,14 @@ const char *dma_heap_get_name(struct dma_heap *heap);
- 
- struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_info);
- 
-+struct dma_heap *dma_heap_find(const char *name);
-+
- void dma_heap_put(struct dma_heap *heap);
- 
-+struct dma_buf *dma_heap_buffer_alloc(struct dma_heap *heap, size_t len,
-+				      u32 fd_flags,
-+				      u64 heap_flags);
-+
- extern bool mem_accounting;
- 
- #endif /* _DMA_HEAPS_H */
 -- 
 2.43.0
 
