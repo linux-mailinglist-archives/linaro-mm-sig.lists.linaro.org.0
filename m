@@ -2,92 +2,114 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gD68NAdo+Wmt8QIAu9opvQ
+	id sC95LjLL+WmFEAMAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 05 May 2026 05:46:15 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 05 May 2026 12:49:22 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 793E54C6434
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 05 May 2026 05:46:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 448AA4CBCF5
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 05 May 2026 12:49:22 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 33CAE409C6
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  5 May 2026 03:46:14 +0000 (UTC)
-Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 643E83F8EC
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  5 May 2026 03:46:07 +0000 (UTC)
-Content-Type: text/plain; charset="utf-8"
+	by lists.linaro.org (Postfix) with ESMTP id C9A64406AE
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  5 May 2026 10:49:20 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+	by lists.linaro.org (Postfix) with ESMTPS id B23773F72F
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  5 May 2026 10:49:18 +0000 (UTC)
+Authentication-Results: lists.linaro.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=da+b6HqW;
+	dmarc=pass (policy=quarantine) header.from=kernel.org;
+	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=leon@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by tor.source.kernel.org (Postfix) with ESMTP id 44A986012B;
+	Tue,  5 May 2026 10:49:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F041BC2BCB9;
+	Tue,  5 May 2026 10:49:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1777978158;
+	bh=VwbDdX36fjXj6/K+MlyisBmDaAMjjmJqPH15dknt6nM=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=da+b6HqW0iC4iVIMeqmLLKKYUyCkC20+EKjgnNIOfhj0BOoavtxV+TYZnp+psCoog
+	 ymO7YYB0UB696539X9HSdwlZC4xNXn9or3FMBnkO+Ezj24w5unfS2tNhDb4JPYthH7
+	 10XIF+45HCSplMR5GAXyevwU4QS9hzTUZw+sVqny/1Ws3hfOayG6exEzqrviw3MwOi
+	 8VEzi0hOK1qw7W4YjDScYqzYNPAhDCx0WgFReAVnfrhZh8cZ7mlQBTiaKSLO9hDYVQ
+	 M+ZFZ1KZefRb35bruPCMTxi7eVWk3jawx4j45akPoDIHuqFWHNrli2mZo4tdvIDFvG
+	 6oDB5sN1PmQ1Q==
+Date: Tue, 5 May 2026 13:49:11 +0300
+From: Leon Romanovsky <leon@kernel.org>
+To: Jason Gunthorpe <jgg@nvidia.com>
+Message-ID: <20260505104911.GB11063@unreal>
+References: <20260416131815.2729131-1-mattev@meta.com>
+ <20260416131815.2729131-5-mattev@meta.com>
+ <20260501161915.75525c15@shazbot.org>
+ <afhNeYS174EW7RYp@nvidia.com>
 MIME-Version: 1.0
-From: blainefraaza@gmail.com
-To: linaro-mm-sig@lists.linaro.org
-Date: Tue, 05 May 2026 03:46:07 -0000
-Message-ID: <177795276740.1932620.12991397239101412251@lists.linaro.org>
-User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: 6X7ZC4DHAP6IZ5UQX7KIELYM4BD52T5Z
-X-Message-ID-Hash: 6X7ZC4DHAP6IZ5UQX7KIELYM4BD52T5Z
-X-MailFrom: blainefraaza@gmail.com
-X-Mailman-Rule-Hits: member-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
+Content-Disposition: inline
+In-Reply-To: <afhNeYS174EW7RYp@nvidia.com>
+X-Spamd-Bar: ---
+Message-ID-Hash: JQSV452UMTF7GD7HEOBBNYQSS5Z552E7
+X-Message-ID-Hash: JQSV452UMTF7GD7HEOBBNYQSS5Z552E7
+X-MailFrom: leon@kernel.org
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: Alex Williamson <alex@shazbot.org>, Matt Evans <mattev@meta.com>, Alex Mastro <amastro@fb.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Mahmoud Adam <mngyadam@amazon.de>, David Matlack <dmatlack@google.com>, =?iso-8859-1?Q?Bj=F6rn_T=F6pel?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Kevin Tian <kevin.tian@intel.com>, Ankit Agrawal <ankita@nvidia.com>, Pranjal Shrivastava <praan@google.com>, Alistair Popple <apopple@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] If you have been a victim of a crypto scam, i strongly advise you to reach out to Ghost Champion Recovery.
+Subject: [Linaro-mm-sig] Re: [PATCH 4/9] vfio/pci: Convert BAR mmap() to use a DMABUF
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6X7ZC4DHAP6IZ5UQX7KIELYM4BD52T5Z/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JQSV452UMTF7GD7HEOBBNYQSS5Z552E7/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Transfer-Encoding: base64
-X-Rspamd-Queue-Id: 793E54C6434
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Queue-Id: 448AA4CBCF5
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.69 / 15.00];
-	MID_RHS_MATCH_TO(1.00)[];
+X-Spamd-Result: default: False [2.49 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
+	R_DKIM_REJECT(1.00)[kernel.org:s=k20201202];
+	MID_RHS_NOT_FQDN(0.50)[];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx:c];
-	MIME_BASE64_TEXT(0.10)[];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[blainefraaza@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	ARC_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCPT_COUNT_TWELVE(0.00)[19];
+	DKIM_TRACE(0.00)[kernel.org:-];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FROM_NO_DN(0.00)[];
-	RCPT_COUNT_ONE(0.00)[1];
-	TO_DN_NONE(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
+	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-0.992];
+	FROM_NEQ_ENVFROM(0.00)[leon@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.680];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	R_DKIM_NA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,t.me:url]
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email]
 
-QWN0aW5nIHF1aWNrbHkgY2FuIGRyYW1hdGljYWxseSBpbmNyZWFzZSB0aGUgY2hhbmNlcyBvZiBz
-dWNjZXNzZnVsIHJldHJpZXZhbC4gSWYgeW914oCZdmUgbG9zdCB5b3VyIGNyeXB0byB0byBhIHNj
-YW0gb3IgYWNjaWRlbnRhbCB0cmFuc2ZlciwgZG9u4oCZdCB3YWl0IGFub3RoZXIgZGF5IGhvcGlu
-ZyB0aGUgc2l0dWF0aW9uIHdpbGwgcmVzb2x2ZSBpdHNlbGYuIFRha2UgcHJvYWN0aXZlIHN0ZXBz
-IGFuZCB3b3JrIHdpdGggYSB0ZWFtIHRoYXQgaGFzIGEgcHJvdmVuIGhpc3Rvcnkgb2YgZGVsaXZl
-cmluZyByZXN1bHRzLg0KDQogR2hvc3QgQ2hhbXBpb24gUmVjb3ZlcnkgRXhwZXJ0cyAgaXMgcmVh
-ZHkgdG8gaGVscCB5b3UgcmVjbGFpbSB3aGF0IGlzIHJpZ2h0ZnVsbHkgeW91cnMuIE5vIG1hdHRl
-ciBob3cgY29tcGxleCB5b3VyIGNhc2UgbWF5IHNlZW0sIHRoZWlyIHNwZWNpYWxpc3RzIHdpbGwg
-YXNzZXNzIHlvdXIgc2l0dWF0aW9uIGhvbmVzdGx5IGFuZCBwcm92aWRlIGEgY2xlYXIgcm9hZG1h
-cCB0b3dhcmQgcmVjb3ZlcnkuIFlvdSBkZXNlcnZlIHBlYWNlIG9mIG1pbmQgYW5kIHRoZSBjb25m
-aWRlbmNlIHRoYXQgeW91ciBmaW5hbmNpYWwgZnV0dXJlIGNhbiBiZSByZXN0b3JlZC4NCg0KQ29u
-dGFjdCAgR2hvc3QgQ2hhbXBpb24gUmVjb3ZlcnkgRXhwZXJ0cyB0b2RheSBhbmQgdGFrZSB0aGUg
-Zmlyc3Qgc3RlcCB0b3dhcmQgcmVjb3ZlcmluZyB5b3VyIGxvc3QgY3J5cHRvY3VycmVuY3k6DQoN
-ClRlbGVncmFtOiBodHRwczovL3QubWUvV2l6YXJkR2hvc3RoYWNrZXINCg0KRW1haWw6Z2hvc3Rj
-aGFtcGlvbndpemFyZEBnbWFpbC5jb20NCg0KV2Vic2l0ZSA6IGh0dHBzOi8vc3RlbGxhbWFyaWFx
-dWVlbjAzLndpeHNpdGUuY29tLy1naG9zdC1jaGFtcGlvbi13aXphDQoNCkRvbuKAmXQgbGV0IHNj
-YW1tZXJzIHdpbi4gSm9pbiB0aG91c2FuZHMgb2Ygb3RoZXJzIHdobyBoYXZlIHRydXN0ZWQgR0hP
-U1QgQ0hBTVBJT04gSEFDS0VSIHRvIHJldHJpZXZlIHRoZWlyIHN0b2xlbiBhc3NldHMgYW5kIHJl
-YnVpbGQgdGhlaXIgZmluYW5jaWFsIHNlY3VyaXR5LiBZb3VyIHJlY292ZXJ5IGpvdXJuZXkgc3Rh
-cnRzIGhlcmUuDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFy
-by5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZl
-QGxpc3RzLmxpbmFyby5vcmcK
+On Mon, May 04, 2026 at 04:40:41AM -0300, Jason Gunthorpe wrote:
+> On Fri, May 01, 2026 at 04:19:15PM -0600, Alex Williamson wrote:
+> 
+> > Exporting dma-bufs from vfio-pci is a feature, but mmap of MMIO BARs is
+> > a legacy requirement.  That legacy requirement now depends on
+> > PCI_P2PDMA, which depends on 64BIT and ZONE_DEVICE.
+> 
+> That should be split up now, Leon missed it when he added the new
+> APIs that didn't require ZONE_DEVICE..
+
+Sorry, what did I miss here?  
+VFIO_DMABUF is an optional feature and is enabled only when P2P support is  
+available. It does not affect legacy systems where P2P cannot be enabled.
+
+Thanks
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
