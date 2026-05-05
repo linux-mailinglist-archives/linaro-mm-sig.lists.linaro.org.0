@@ -2,133 +2,73 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cNunOdXn+WmdFAMAu9opvQ
+	id WPknHfZeBGqiHQIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 05 May 2026 14:51:33 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:22:30 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8441C4CDF43
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 05 May 2026 14:51:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0A3C453219B
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:22:29 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 460F8409B6
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  5 May 2026 12:41:51 +0000 (UTC)
-Received: from SA9PR02CU001.outbound.protection.outlook.com (mail-southcentralusazon11013062.outbound.protection.outlook.com [40.93.196.62])
-	by lists.linaro.org (Postfix) with ESMTPS id EB0024016A
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  5 May 2026 12:41:48 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 167863F91B
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 11:22:29 +0000 (UTC)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by lists.linaro.org (Postfix) with ESMTP id 362D0406B0
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  5 May 2026 14:05:26 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=amd.com header.s=selector1 header.b=jq4ewZIJ;
-	dmarc=pass (policy=quarantine) header.from=amd.com;
-	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.93.196.62 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
-	arc=pass ("microsoft.com:s=arcselector10001:i=1")
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=l2sWncc+qjSmSndJLs9LeGir31sSjzTGGsUVIC+GJIInM0KDOSMAY4pTWqLasdKh9U/BRD2wvulBeYgd3wWn8kY5pLN2PndAixk2nqTJSmIpT/Q/zhFzK0wzGs2pxFn6PjJ8+i/blE3754TwumcCGj8l/97uOiWIanLVVtPAxxbU5oBDu2yx1hte+j1d9AOFLHeLX0d1APgwUxBMef1sGttv3d1E2vyO9uoZPPZE2AJHJmQuSM4MBn2Lcy4YWUNuzzGubZJEnkPPHm2j4aslRCgfkdJjru3NO3IxYNW0g1kRI112VPNLT2+9As/9f75dmRsVPvrDwwGYGQqs1BMKOw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=RFKc3hWKUvnQdqB/j6LYqQuZOaG3+PLE3eFLDcqI4Iw=;
- b=BelMLYddRDWf7xOcjUkL5k65Swoe0Jeob/ipG8P3qLmXe37c8ZvD0rP7J/46z3Rvj6Z+IcxRSbZ+vuSjOd7G0Qj1le9ztzLWyPPl8hvzszE0gV0G3itUQhUQa7L8MfNy4fsaC0MEyEd1fob0gFEqV3eh9lnAa7ns6iSbFy0H4+fTqLkQb4lFwq+RZcxO+V1R5q+/pRzy8kdaxsh7BgnLIOwvuJzZeKyIvOzjJgMMx81x+azEXBwEUnIrUhv1YwaRyAVfdLg8zJO0ApwxKihY8qFEw2YKOvA93fkSSysKTY9XBG2HwxvbQxB3G/1UH+zb98WKtf2cjMzsycLYq6KBlg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=RFKc3hWKUvnQdqB/j6LYqQuZOaG3+PLE3eFLDcqI4Iw=;
- b=jq4ewZIJDf3tz0so2DNwExh4Inf9CnxTrIqKHHQ09mQGeMdIeMmk5L6ykFg+NN2z/M5Zz0aKnOPchLeTnjDr6oQRQlGvnbLMIvFWXZBgyVdicj1KpzESc9XPcco1bnafxAPer1QF6UQHPqdyHWvd3L0MfsV46vKLBzxmNMwG3vA=
-Received: from PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
- by PH8PR12MB6700.namprd12.prod.outlook.com (2603:10b6:510:1cf::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.25; Tue, 5 May
- 2026 12:41:44 +0000
-Received: from PH7PR12MB5685.namprd12.prod.outlook.com
- ([fe80::ce69:cfae:774d:a65c]) by PH7PR12MB5685.namprd12.prod.outlook.com
- ([fe80::ce69:cfae:774d:a65c%5]) with mapi id 15.20.9870.023; Tue, 5 May 2026
- 12:41:44 +0000
-Message-ID: <cf945dda-f526-4544-bc43-22f70acb28f5@amd.com>
-Date: Tue, 5 May 2026 14:41:37 +0200
-User-Agent: Mozilla Thunderbird
-To: Julian Orth <ju.orth@gmail.com>, "T.J. Mercier" <tjmercier@google.com>
-References: <CAHijbEXhuVRgkkPA2dAC=njGBU7vpAbxAbsSmxvvPznO-ckVRA@mail.gmail.com>
-Content-Language: en-US
-From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-In-Reply-To: <CAHijbEXhuVRgkkPA2dAC=njGBU7vpAbxAbsSmxvvPznO-ckVRA@mail.gmail.com>
-X-ClientProxiedBy: FR4P281CA0332.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:ea::18) To PH7PR12MB5685.namprd12.prod.outlook.com
- (2603:10b6:510:13c::22)
+	dkim=pass header.d=arm.com header.s=foss header.b=AVP8sPCI;
+	dmarc=pass (policy=none) header.from=arm.com;
+	spf=pass (lists.linaro.org: domain of ketil.johnsen@arm.com designates 217.140.110.172 as permitted sender) smtp.mailfrom=ketil.johnsen@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3B2F024C0;
+	Tue,  5 May 2026 07:05:20 -0700 (PDT)
+Received: from e120398-lin.trondheim.arm.com (e120398-lin.trondheim.arm.com [10.42.46.160])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 156CC3F763;
+	Tue,  5 May 2026 07:05:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1777989925; bh=iyP/JaXBkTbwZEXjAStW8lEzoZNntiUAc3QwhcHeM3o=;
+	h=From:To:Cc:Subject:Date:From;
+	b=AVP8sPCIrwkEWGrTaXpA6Im1VQWWw+uTbtbX3XiVBAup4tMMeO/iLw+A42dT7Be0o
+	 xe14tg17ZPx3Z59IFP6ah6B6XQAl77krNHSOGynpJGa66Ok8S/I/VgyJ2dsP6L8bM4
+	 fEcayPwk9oJayp5u9OMQctpwEtK6q9PyIfSSIUug=
+From: Ketil Johnsen <ketil.johnsen@arm.com>
+To: David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Benjamin Gaignard <benjamin.gaignard@collabora.com>,
+	Brian Starkey <Brian.Starkey@arm.com>,
+	John Stultz <jstultz@google.com>,
+	"T.J. Mercier" <tjmercier@google.com>,
+	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+	Boris Brezillon <boris.brezillon@collabora.com>,
+	Steven Price <steven.price@arm.com>,
+	Liviu Dudau <liviu.dudau@arm.com>,
+	Daniel Almeida <daniel.almeida@collabora.com>,
+	Alice Ryhl <aliceryhl@google.com>,
+	Matthias Brugger <matthias.bgg@gmail.com>,
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
+Date: Tue,  5 May 2026 16:05:06 +0200
+Message-ID: <20260505140516.1372388-1-ketil.johnsen@arm.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|PH8PR12MB6700:EE_
-X-MS-Office365-Filtering-Correlation-Id: 87ea815e-83ee-4c26-bb98-08deaaa3a9f4
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|366016|376014|18002099003|22082099003|56012099003;
-X-Microsoft-Antispam-Message-Info: 
-	DDonhNSOWFVbCAbHKi6hrE8mpMn1MQ9m+hc0OUNRgAV0oxpeGhxubbalDsLObbDFPUsvi2z5thxnbHjwYl1Cs5QisA8mcXR/qoZ85YS2DDj7PTnOdi4ioE8vCc44h4z0qokmmyij0M7n+iLddNNneHchz8q0hM5MCHDmk6apQgWM+O8Oz4ui9RiwXmY2a+EyHuO5YcSjezeT01ppKc/OOROVklY3JyjcVKS8MtsXXwCouz7vV3eD7DL6TWLohOfDS92yheO0DKIVQJEf+X8MN4HQrrSlj3sH9uAOIZX8dxGE5L+VIexjsarOAG32WhUPVp+i61S8hDOAru3vo+wzuJ/l3JlUt3ve9mdTIVaVeGGFfhUp3hk3e/AISIcL7oA2B4CsyjLKWt0NQznpRFxpKIaTblw4ecnLp525dlrhnTSxj25c3chwfWUVDA4yuJZjs+z7R1dRq9jZP1X04dqVpdszqLL3bJg1uVBNZy6q0pck+l01e2UPWFPaWB66UG1m6wcpwzYp8ueFXxjDKPXRsq11io0SjuuU7MB2vx3Frd8Nv4iExy1AvphpgcPwSJI34nOiq5rXHCmvFQpYUkGU+f5IU3MQNPpcWY3V9BfvoOVYclRtT7PO66bSd2RwzOKySSPX37l/w1QxndYLMPudDQlhIRSxzLzDT6wZGsKBNV6r+Fe9GrO579nyLuCeB/RV
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB5685.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(18002099003)(22082099003)(56012099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?ZG9iTkJLWEtWZStneGNrV2kySWtNcFNIRmtMVEdaYTB2LzYvbzlXSml3THlH?=
- =?utf-8?B?eUI1d2Jaa3RBYkR4ejNYRG5LeEcxcFFSNTNzc3E1cU1NbVF6N2NDK09CcXg2?=
- =?utf-8?B?TWFhaDJjSm9FTXJ5d3RpdFd6MFRjbnYyVFNnOWtPVVJ6eTBuczZySVM1QWZM?=
- =?utf-8?B?V0YxQVdpTENjOElJUUtUSUd1bnFUamRmL25LcjltbHh3dnpDUkMwZjZmazNW?=
- =?utf-8?B?VjVZNzR6cEpLR2xWWGpXREtSRUNDb1BTZURPSWpDRXNsZU5NNjcvL2psNFVk?=
- =?utf-8?B?N3QzWFE4N1pObmhqVWFhK3l6VEE3eStZMTB2WUFOQm9tQitiNnpBaVhtazlY?=
- =?utf-8?B?bW4wYjZkZzUxS2Q0b1VSRnVRWERhaEU1dWp0blJiMlRsN2hEU2RqbzZsTXUz?=
- =?utf-8?B?aUQzM2J5YVlOTlYwRE9GVFdDeDZLak5mTUNWekxSU1BjcGN3bG1LOVF0SkhP?=
- =?utf-8?B?ekJPNnBTbmhSRGdGZkpnTDd0d01Fbml5S216RktWdGs0S1hpbjlpdmFQVTJD?=
- =?utf-8?B?bWUrcUZOcEQvYnpmemczYVFyOWRmZk9pME1WTVdZR0VDSFZOK1pEeUNMV2dq?=
- =?utf-8?B?TENGTnBDN0ZjUTJ1b1o0RXBHVWVDdTF1M0g2UW5WY3hrVmVzU2ViVzQxeWhZ?=
- =?utf-8?B?WEkwczgranNoK2JMbE9RYTExTVZxSkR5QjFLQk5BK0x2dkZXTlpTRnc4cWlV?=
- =?utf-8?B?b1hGNTlHSFB0NmtuWXdDZ1hWRnNJSjJsNDEzSm5GdmkwbFIrbTJwZ0k3VHUz?=
- =?utf-8?B?MVQvZE1XYXZmVVZDanJxc3JxR3VBcWpUWWdER1ZZT3pFL0hjd2FCQ0prOTJv?=
- =?utf-8?B?SzNWenc2QnMrd3IranlxSmdtOFdoMUJFZC8xdERlYndpOGRJNFJtenFPV2FQ?=
- =?utf-8?B?Y00vaTNJeDVmcGtNZmxlYjNEdmV0N3BRbW8rV3RzYm5ZSmdmQVFuZUF4S0N2?=
- =?utf-8?B?a2pLdnE0MHFQY0lCKzlnYmE5dFZ3UHBiekVkTnVrUUtiYXF5ZWNKRWdqSFA0?=
- =?utf-8?B?cTRpMnBjZ1ByREkxRW00SWpHNnVJVWlmU1g0bWJCS2hoR3J0Vlp3UnVXb2hz?=
- =?utf-8?B?bHArZWQwZkFJUGRZcUZWSkJVVWhyZTZMWHh1aS9ZN2hrU2N2STNBaGhmOFh0?=
- =?utf-8?B?cXFmZTM2c3NqVmFnRDJvbHgzOUFCK2NKZ0U4Q2NZRHdPZGZCT1pTQWRGcUhs?=
- =?utf-8?B?UWJwWGI2dEd1YWlWVlAyWGE1aGJaU0lYcnF5cUxqbXhlOEFEUnBLMWhTYUlB?=
- =?utf-8?B?V2JHb3ZsQ1NhNjdNNUN4S2VhNytScFNhWXZMZHYrZzgwZXE1S0E1UGRJdlhs?=
- =?utf-8?B?K2o3b2YyYnE4ck42a0x5K0FrQ2dIb2NGaUovUlpXa29KTEtSaFBTVjF1c1Vp?=
- =?utf-8?B?Qms2YllwWjZ2aWYrOE5kRjB3R0Z2bmtHVHgwZFhFMzZYN1ZpbWFTbVZNVWhW?=
- =?utf-8?B?eFZXQ0FSR3ZVa2xtUU0xMmhrbzRZVmhBQ1BTQXRBdmZrMDFJcFZlU2k2ZVJU?=
- =?utf-8?B?NHgveXVKaHdGR3Z3SndtZW4rWS9rc20xNC9vK0pRZ1ZDcmdZbTFJQS9pYzN6?=
- =?utf-8?B?MWpVTmp0bmplQ2dXeExZSitKS2ZhcWMvRXkzUWFmbHB1NklqZlloZ0N5ZEJm?=
- =?utf-8?B?Um1PQ0V6Q2xZWktGbGYyRFROWWYwODZLL2VxbjBmVW4yYTA4dHp1WEIyb0JQ?=
- =?utf-8?B?RmNiUE5uZ1dwZ1M3ODE5K1RJN0Z4dzFNUnBxQlg2Zkp5VmdoVWxjdy9lcnB5?=
- =?utf-8?B?SUh5K0RHeHE0M2QzcFM1YTdVRTFFL3JDRFRyL1lXWHBYWVNTMitzVmg1WnV4?=
- =?utf-8?B?TmViSWpxdmhlaVFVUHByUXAyOXl1UzBncHpYMURWa0lGOGoySlFhS3F4Z1h5?=
- =?utf-8?B?OWZ6ZjF3ZS9zL3lUZGU3V1UrTC91SXkrNU1tUmxMa0hDOFYxUkJDZFBKb0VY?=
- =?utf-8?B?TnhYUzRyY1cyaGtCbWlQT09rSjZVZ1NWY21OWGNXUTM3WUxLTmd5WENqTGY3?=
- =?utf-8?B?bWNaZnE3TXozVEtWbEp6Q3p1YlFEejZhZUJhNE1DeVhCK1BCeU8ycGRNWUp2?=
- =?utf-8?B?cWh6VTVlREdBNTRWSGE5SE9CY2ZCQjNwbGJjTEtUMnNweG5NdnA2Y2g3THFJ?=
- =?utf-8?B?Uk01cGlSTDdMV0NLZ09YQlpWRTdLRFJCSFBmWmU1NmZFcFRUMDU2aityMTNo?=
- =?utf-8?B?NHNUVnlqT1B2Y1JwbGwrTWd1NHlLL04vOEltNEs1S2d1NVlVeXVIVVF4MEpa?=
- =?utf-8?B?b1pkcjdtTFZKeWhjM3BBckU0cFc1YnYzWDhNdXR1REFPT1NhU3d2R295Zjl1?=
- =?utf-8?Q?gEayx+IY8upJQIwFmD?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 87ea815e-83ee-4c26-bb98-08deaaa3a9f4
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5685.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 May 2026 12:41:44.3668
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: c9RKJE8j8z8PDl7XhZnTG1brmyqtxwT7dmRfuzqhYrJk29wBwDXyaPVj/F3Tt2l+
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB6700
-X-Spamd-Bar: ----
-Message-ID-Hash: PK2LBPCD5VPYIJ7IY3RL2MLXOBLJTTDY
-X-Message-ID-Hash: PK2LBPCD5VPYIJ7IY3RL2MLXOBLJTTDY
-X-MailFrom: Christian.Koenig@amd.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: corbet@lwn.net, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, Sumit Semwal <sumit.semwal@linaro.org>
+X-Spamd-Bar: --
+X-MailFrom: ketil.johnsen@arm.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+Message-ID-Hash: LGTBHLVVPOTNFEI7MTVUGRCPCTOBGZBZ
+X-Message-ID-Hash: LGTBHLVVPOTNFEI7MTVUGRCPCTOBGZBZ
+X-Mailman-Approved-At: Wed, 13 May 2026 11:22:12 +0000
+CC: dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, Ketil Johnsen <ketil.johnsen@arm.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: Regression due to /sys/kernel/dmabuf/buffers removal
+Subject: [Linaro-mm-sig] [PATCH 0/8] drm/panthor: Protected mode support for Mali CSF GPUs
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PK2LBPCD5VPYIJ7IY3RL2MLXOBLJTTDY/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LGTBHLVVPOTNFEI7MTVUGRCPCTOBGZBZ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -137,76 +77,244 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 8441C4CDF43
-X-Rspamd-Action: no action
+X-Rspamd-Queue-Id: 0A3C453219B
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [4.49 / 15.00];
+X-Spamd-Result: default: False [4.09 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_QUARANTINE(1.50)[amd.com : SPF not aligned (relaxed),quarantine];
-	R_DKIM_REJECT(1.00)[amd.com:s=selector1];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
+	MID_CONTAINS_FROM(1.00)[];
+	R_DKIM_REJECT(1.00)[arm.com:s=foss];
+	DATE_IN_PAST(1.00)[189];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx];
+	DMARC_POLICY_SOFTFAIL(0.10)[arm.com : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FREEMAIL_TO(0.00)[gmail.com,google.com];
-	GREYLIST(0.00)[pass,body];
-	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[28];
+	GREYLIST(0.00)[pass,meta];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de,lwn.net,linuxfoundation.org,linaro.org,collabora.com,arm.com,google.com,amd.com];
+	ARC_NA(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[arm.com:-];
+	NEURAL_HAM(-0.00)[-0.484];
+	FROM_NEQ_ENVFROM(0.00)[ketil.johnsen@arm.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.815];
-	FROM_NEQ_ENVFROM(0.00)[christian.koenig@amd.com,linaro-mm-sig-bounces@lists.linaro.org];
-	DKIM_TRACE(0.00)[amd.com:-];
-	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	RCPT_COUNT_SEVEN(0.00)[9];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,amd.com:mid]
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,gitlab.freedesktop.org:url,arm.com:url,arm.com:mid]
+X-Rspamd-Action: no action
 
-Hi Julian,
+Hi,
 
-On 5/5/26 14:25, Julian Orth wrote:
-> In ab4c3dcf9a71582503b4fb25aeab884c696cab25 ("dma-buf: Remove DMA-BUF
-> sysfs stats") the /sys/kernel/dmabuf/buffer directory was removed.
-> 
-> I've been using this interface, specifically the exporter_name file,
-> to detect dmabufs created via udmabuf. Such dmabufs show "udmabuf" in
-> exporter_name. I've been doing this for two reasons: 1) to detect that
-> mmap on such buffers will be fast and 2) to detect that GPU access to
-> such buffers will be slow.
+This is a patch series covering the support for protected mode execution in
+Mali Panthor CSF kernel driver.
 
-Crap, I really hoped that Android was the only user of that sysfs interface since that approach turned out to be quite broken.
+It builds on the initial RFC posted by Florent Tomasin back in January of 2025.
 
-It's number one rule on Linux that we don't break userspace. So I hope that you don't insist on bringing that interface back, but if you do I will just revert the removal until we found a better solution.
+The initial RFC can be found here:
+https://lore.kernel.org/lkml/cover.1738228114.git.florent.tomasin@arm.com/
 
-> With the removal of that file, that detection mechanism no longer works.
-> 
-> I'm not particularly fond of that mechanism but it was the only one
-> providing that functionality that I could find at the time. If there
-> is another one, ideally an ioctl on the dmabuf, please let me know.
+The Mali CSF GPUs come with the support for protected mode execution at the
+HW level. This feature requires two main changes in the kernel driver:
 
-The virtual fdinfo file you can find under /proc/$pid/fdinfo/$fd also contains the exporter name for the DMA-buf.
+1) Configure the GPU with a protected buffer. The system must provide a DMA
+   heap from which the driver can allocate a protected buffer.
+   It can be a carved-out memory or dynamically allocated protected memory region.
+   Some system includes a trusted FW which is in charge of the protected memory.
+   Since this problem is integration specific, the Mali Panthor CSF kernel
+   driver must import the protected memory from a device specific exporter.
 
-You can find the full documentation here: https://docs.kernel.org/filesystems/proc.html#dma-buffer-files
+2) Handle enter and exit of the GPU HW from normal to protected mode of execution.
+   FW sends a request for protected mode entry to the kernel driver.
+   The acknowledgment of that request is a scheduling decision. Effectively,
+   protected mode execution should not overrule normal mode of execution.
+   A fair distribution of execution time will guaranty the overall performance
+   of the device, including the UI (usually executing in normal mode),
+   will not regress when a protected mode job is submitted by an application.
 
-Is that sufficient?
 
-Additional to that the debugfs for DMA-buf also contains that information and I'm open to the suggestion with the IOCTL.
+Background
+----------
 
-Regards,
-Christian.
+Current Mali Panthor CSF driver does not allow a user space application to
+execute protected jobs on the GPU. This use case is quite common on end-user-device.
+A user may want to watch a video or render content that is under a "Digital Right
+Management" protection, or launch an application with user private data.
 
-> 
-> Shipping an entire BPF compiler in my application, which the original
-> patch suggests as the replacement, is not an option when the removed
-> alternative was simply reading a file.
-> 
-> Thanks, Julian
+1) User-space:
+
+   In order for an application to execute protected jobs on a Mali CSF GPU the
+   user space application must submit jobs to the GPU within a "protected regions"
+   (range of commands to execute in protected mode).
+
+   Find here an example of a command buffer that contains protected commands:
+
+```
+          <--- Normal mode ---><--- Protected mode ---><--- Normal mode --->
+   +-------------------------------------------------------------------------+
+   | ... | CMD_0 | ... | CMD_N | PROT_REGION | CMD_N+1 | ... | CMD_N+M | ... |
+   +-------------------------------------------------------------------------+
+```
+
+   The PROT_REGION command acts as a barrier to notify the HW of upcoming
+   protected jobs. It also defines the number of commands to execute in protected
+   mode.
+
+   The Mesa definition of the opcode can be found here:
+
+     https://gitlab.freedesktop.org/mesa/mesa/-/blob/main/src/panfrost/lib/genxml/v10.xml?ref_type=heads#L763
+
+2) Kernel-space:
+
+   When loading the FW image, the Kernel driver must also load the data section of
+   CSF FW that comes from the protected memory, in order to allow FW to execute in
+   protected mode.
+
+   Important: this memory is not owned by any process. It is a GPU device level
+              protected memory.
+
+   In addition, when a CSG (group) is created, it must have a protected suspend buffer.
+   This memory is allocated within the kernel but bound to a specific CSG that belongs
+   to a process. The kernel owns this allocation and does not allow user space mapping.
+   The format of the data in this buffer is only known by the FW and does not need to
+   be shared with other entities. The purpose of this buffer is the same as the normal
+   suspend buffer but for protected mode. FW will use it to suspend the execution of
+   PROT_REGION before returning to normal mode of execution.
+
+
+Design decisions
+----------------
+
+The Mali Panthor CSF kernel driver will allocate protected DMA buffers
+using a global protected DMA heap. The name of the heap can vary on
+the system and is integration specific. Therefore, the kernel driver
+will retrieve it using the DTB entry: "protected-heap-name".
+
+The Mali Panthor CSF kernel driver will handle enter/exit of protected
+mode with a fair consideration of the job scheduling.
+
+If the system integrator does not provide a protected DMA heap, the driver
+will not allow any protected mode execution.
+
+
+Patch series
+------------
+
+[PATCHES 1-2]:
+  Thees patches comes from the following patch series:
+  https://lore.kernel.org/lkml/20240720071606.27930-1-yunfei.dong@mediatek.com/
+
+  These extend the DMA-buf heap API to allow other kernel drivers to Find
+  and allocate memory from dma heaps.
+
+  Note: This patch series do not include a protected DMA heap, as this is
+  platform specific.
+
+  * dma-heap: Add proper kref handling on dma-buf heaps
+  * dma-heap: Provide accessors so that in-kernel drivers can allocate dmabufs from specific heaps
+
+[PATCHES 3, 5 and 6]:
+  These are refactoring to aid the implementation of the protected rendering
+  feature itself.
+
+* drm/panthor: De-duplicate FW memory section sync
+* drm/panthor: Minor scheduler refactoring
+* drm/panthor: Explicit expansion of locked VM region
+
+[Patch 4]:
+  This introduces allocation of protected memory inside the Panthor driver.
+  It also ensures the protected FW sections are loaded.
+
+  * drm/panthor: Add support for protected memory allocation in panthor
+
+[PATCH 7]:
+  This patch implements the logic to handle enter/exit of the GPU protected
+  mode in Panthor CSF driver.
+
+  Note: to prevent scheduler priority inversion, only a single CSG is allowed
+        to execute while in protected mode. It must be the top priority one.
+
+  * drm/panthor: Add support for entering and exiting protected mode
+
+[PATCH 8]:
+  The final patch exposes this feature via the uAPI.
+
+  * drm/panthor: Expose protected rendering features
+
+Testing
+-------
+
+1) Platform and development environment
+
+   Any platform containing a Mali CSF type of GPU and a protected memory allocator
+   that is based on DMA Heap can be used. For example, it can be a physical platform
+   or a simulator such as Arm Total Compute FVPs platforms. Reference to the latter:
+
+     https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms/Total%20Compute%20FVPs
+
+2) Mesa:
+
+PanVK support can be found here:
+https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/40044
+
+This is still work in progress.
+
+Constraints
+-----------
+
+At the time of developing the feature, Linux kernel does not have a generic
+way of implementing protected DMA heaps. The patch series relies on previous
+work to expose the DMA heap API to the kernel drivers.
+
+The Mali CSF GPU requires device level allocated protected memory, which do
+not belong to a process. The current Linux implementation of DMA heap only
+allows a user space program to allocate from such heap. Having the ability
+to allocate this memory at the kernel level via the DMA heap API would allow
+support for protected mode on Mali CSF GPUs.
+
+
+
+Florent Tomasin (3):
+  drm/panthor: Add support for protected memory allocation in panthor
+  drm/panthor: Minor scheduler refactoring
+  drm/panthor: Add support for entering and exiting protected mode
+
+John Stultz (2):
+  dma-heap: Add proper kref handling on dma-buf heaps
+  dma-heap: Provide accessors so that in-kernel drivers can allocate dmabufs from specific heaps
+
+Ketil Johnsen (3):
+  drm/panthor: De-duplicate FW memory section sync
+  drm/panthor: Explicit expansion of locked VM region
+  drm/panthor: Expose protected rendering features
+
+ Documentation/gpu/panthor.rst            |  47 +++
+ drivers/dma-buf/dma-heap.c               | 109 ++++++-
+ drivers/gpu/drm/panthor/Kconfig          |   1 +
+ drivers/gpu/drm/panthor/panthor_device.c |  29 +-
+ drivers/gpu/drm/panthor/panthor_device.h |  15 +
+ drivers/gpu/drm/panthor/panthor_drv.c    |  21 +-
+ drivers/gpu/drm/panthor/panthor_fw.c     | 137 ++++++--
+ drivers/gpu/drm/panthor/panthor_fw.h     |   7 +
+ drivers/gpu/drm/panthor/panthor_gem.c    |  77 ++++-
+ drivers/gpu/drm/panthor/panthor_gem.h    |  16 +-
+ drivers/gpu/drm/panthor/panthor_gpu.c    |  14 +-
+ drivers/gpu/drm/panthor/panthor_gpu.h    |   6 +
+ drivers/gpu/drm/panthor/panthor_heap.c   |   2 +
+ drivers/gpu/drm/panthor/panthor_mmu.c    |  79 +++--
+ drivers/gpu/drm/panthor/panthor_sched.c  | 387 ++++++++++++++++++-----
+ include/linux/dma-heap.h                 |   8 +
+ include/uapi/drm/panthor_drm.h           |  45 ++-
+ 17 files changed, 864 insertions(+), 136 deletions(-)
+
+-- 
+2.43.0
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
