@@ -2,67 +2,63 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qJ+hG4FgBGq6HgIAu9opvQ
+	id KIoZNBtZ+2n+ZQMAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:29:05 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 06 May 2026 17:07:07 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 257FC532430
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:29:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5E8854DCDDD
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 06 May 2026 17:07:07 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3FC10402F0
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 11:29:04 +0000 (UTC)
-Received: from bali.collaboradmins.com (bali.collaboradmins.com [148.251.105.195])
-	by lists.linaro.org (Postfix) with ESMTPS id 2C40B3F75F
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  6 May 2026 15:05:26 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 635F1402EF
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  6 May 2026 15:07:06 +0000 (UTC)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by lists.linaro.org (Postfix) with ESMTP id 03AB73F75F
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  6 May 2026 15:07:03 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=collabora.com header.s=mail header.b=Xl2+76cJ;
-	dmarc=pass (policy=none) header.from=collabora.com;
-	spf=pass (lists.linaro.org: domain of boris.brezillon@collabora.com designates 148.251.105.195 as permitted sender) smtp.mailfrom=boris.brezillon@collabora.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1778079924;
-	bh=5VmaZC0RomEbp6aSDoSjoUMQMXlIAykXwImP8NyVAX4=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=Xl2+76cJ+aSL9e3r2WJoupZZAaYmQbPGDTHPik5U1VTSygVKWY3ArXBA/kjLDvK4G
-	 eg9+ssBQ7WGf+DKYenyfLSkd5s4HT/1O9GMoqrlLxFyY0gax8+zwirT6uUFHpDh13T
-	 0kqWAvplq2HRPGwxVpV7x81YumQffmyohu09SIXwfXESbDS5ZguwU2j2jNqVm+hpiq
-	 laYdbYVv3n8e9Va/HRP8M9VY74Jc3EtOds65TNkUJAHJ/GXycujbibDaOv+giz73Cq
-	 gCyTna02cmPHhb8AkVl3fQ23YY1KHnz1yMjPIfF63MXay/Kr/iYE/FwktK2luqam6O
-	 nqUdERfFEz3VA==
-Received: from fedora (unknown [100.64.0.11])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: bbrezillon)
-	by bali.collaboradmins.com (Postfix) with ESMTPSA id EBF9F17E0610;
-	Wed,  6 May 2026 17:05:22 +0200 (CEST)
-Date: Wed, 6 May 2026 17:05:15 +0200
-From: Boris Brezillon <boris.brezillon@collabora.com>
-To: Maxime Ripard <mripard@kernel.org>
-Message-ID: <20260506170515.2d8511c3@fedora>
-In-Reply-To: <20260506-golden-python-of-aptitude-ff972a@houat>
-References: <20260505140516.1372388-1-ketil.johnsen@arm.com>
-	<20260505140516.1372388-5-ketil.johnsen@arm.com>
-	<20260506-energetic-azure-pig-2b6ec4@houat>
-	<20260506125015.0108ef44@fedora>
-	<20260506-golden-python-of-aptitude-ff972a@houat>
-Organization: Collabora
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-redhat-linux-gnu)
+	dkim=pass header.d=arm.com header.s=foss header.b=NcQbZM4P;
+	dmarc=pass (policy=none) header.from=arm.com;
+	spf=pass (lists.linaro.org: domain of steven.price@arm.com designates 217.140.110.172 as permitted sender) smtp.mailfrom=steven.price@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 284A919F6;
+	Wed,  6 May 2026 08:06:57 -0700 (PDT)
+Received: from [10.57.69.49] (unknown [10.57.69.49])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 0A5703F7B4;
+	Wed,  6 May 2026 08:06:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1778080022; bh=lBGCayGvLObt4utL3x/Gntz0gbSLpK2Kdmd/cyJzcXs=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=NcQbZM4Pxnep1uNs1Um11J1hVT4lQXEnAMaOkFxE3oksqybNtjvFrceF/FnFfkn9g
+	 jh8S5taoT7IRtqSRtBPfp9E+d0EAnUFMSexiz68GGXUka5oKG0UUBLCj/XQiyWb2wF
+	 +NbXo5ZBqYWbUaGmo2Hfzo5bVWF1ITcgQzm7dHLc=
+Message-ID: <829b8887-48de-4cfa-8bb2-79db1471bb8d@arm.com>
+Date: Wed, 6 May 2026 16:06:56 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+To: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>,
+ Boris Brezillon <boris.brezillon@collabora.com>,
+ Liviu Dudau <liviu.dudau@arm.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Sumit Semwal <sumit.semwal@linaro.org>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+References: <20260506-panthor-explicit-reclaim-v1-0-44f82ac147ce@collabora.com>
+From: Steven Price <steven.price@arm.com>
+Content-Language: en-GB
+In-Reply-To: <20260506-panthor-explicit-reclaim-v1-0-44f82ac147ce@collabora.com>
 X-Spamd-Bar: ---
-X-MailFrom: boris.brezillon@collabora.com
+Message-ID-Hash: 4YAMT3R2XGBBYFWO4N2BR4XSBZUB7T6X
+X-Message-ID-Hash: 4YAMT3R2XGBBYFWO4N2BR4XSBZUB7T6X
+X-MailFrom: steven.price@arm.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 6VYXSFUNS2JYFUFWREVKPC3M6VAX4PSH
-X-Message-ID-Hash: 6VYXSFUNS2JYFUFWREVKPC3M6VAX4PSH
-X-Mailman-Approved-At: Wed, 13 May 2026 11:23:47 +0000
-CC: Ketil Johnsen <ketil.johnsen@arm.com>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Thomas Zimmermann <tzimmermann@suse.de>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Steven Price <steven.price@arm.com>, Liviu Dudau <liviu.dudau@arm.com>, Daniel Almeida <daniel.almeida@collabora.com>, Alice Ryhl <aliceryhl@google.com>, Matthias Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-arm-kernel@lists.infradead.org
- , linux-mediatek@lists.infradead.org, Florent Tomasin <florent.tomasin@arm.com>
+CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 4/8] drm/panthor: Add support for protected memory allocation in panthor
+Subject: [Linaro-mm-sig] Re: [PATCH 0/4] Let userspace explicitly trigger memory reclaims
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6VYXSFUNS2JYFUFWREVKPC3M6VAX4PSH/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4YAMT3R2XGBBYFWO4N2BR4XSBZUB7T6X/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -71,111 +67,94 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 257FC532430
+X-Rspamd-Queue-Id: 5E8854DCDDD
+X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [3.59 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	DATE_IN_PAST(1.00)[164];
-	R_DKIM_REJECT(1.00)[collabora.com:s=mail];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+X-Spamd-Result: default: False [0.59 / 15.00];
+	R_DKIM_REJECT(1.00)[arm.com:s=foss];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+mx];
+	DMARC_POLICY_SOFTFAIL(0.10)[arm.com : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[collabora.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[3];
-	RCPT_COUNT_TWELVE(0.00)[28];
-	MIME_TRACE(0.00)[0:+];
-	HAS_ORG_HEADER(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
 	ARC_NA(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	FREEMAIL_TO(0.00)[collabora.com,arm.com,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com];
+	RCPT_COUNT_TWELVE(0.00)[14];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.571];
-	FROM_NEQ_ENVFROM(0.00)[boris.brezillon@collabora.com,linaro-mm-sig-bounces@lists.linaro.org];
+	NEURAL_HAM(-0.00)[-0.960];
+	FROM_NEQ_ENVFROM(0.00)[steven.price@arm.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[arm.com,gmail.com,ffwll.ch,linux.intel.com,suse.de,lwn.net,linuxfoundation.org,linaro.org,collabora.com,google.com,amd.com,lists.freedesktop.org,vger.kernel.org,lists.linaro.org,lists.infradead.org];
+	DKIM_TRACE(0.00)[arm.com:-];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DKIM_TRACE(0.00)[collabora.com:-];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[arm.com:email,lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
-X-Rspamd-Action: no action
+	DBL_BLOCKED_OPENRESOLVER(0.00)[arm.com:mid,collabora.com:email,linaro.org:email]
 
-On Wed, 6 May 2026 15:12:37 +0200
-Maxime Ripard <mripard@kernel.org> wrote:
+On 06/05/2026 11:45, Nicolas Frattaroli wrote:
+> RAM is not, in fact, cheap. Especially on embedded systems with a low
+> amount of memory, but known and well-defined userspace, more explicit
+> resource management can lead to better utilisation patterns. As an
+> example, a resource manager process on a purpose-built device may wish
+> to launch, and then explicitly swap out, memory of processes that are
+> kept "warm", to improve perceived startup latency of individual
+> full-screen applications without making the kernel figure out the usage
+> pattern from observation alone in order to swap out the right pages.
 
-> On Wed, May 06, 2026 at 12:50:15PM +0200, Boris Brezillon wrote:
-> > On Wed, 6 May 2026 12:08:24 +0200
-> > Maxime Ripard <mripard@kernel.org> wrote:
-> >   
-> > > Hi,
-> > > 
-> > > On Tue, May 05, 2026 at 04:05:10PM +0200, Ketil Johnsen wrote:  
-> > > > From: Florent Tomasin <florent.tomasin@arm.com>
-> > > > 
-> > > > This patch allows Panthor to allocate buffer objects from a
-> > > > protected heap. The Panthor driver should be seen as a consumer
-> > > > of the heap and not an exporter.
-> > > > 
-> > > > Protected memory buffers needed by the Panthor driver:
-> > > > - On CSF FW load, the Panthor driver must allocate a protected
-> > > >   buffer object to hold data to use by the FW when in protected
-> > > >   mode. This protected buffer object is owned by the device
-> > > >   and does not belong to a process.
-> > > > - On CSG creation, the Panthor driver must allocate a protected
-> > > >   suspend buffer object for the FW to store data when suspending
-> > > >   the CSG while in protected mode. The kernel owns this allocation
-> > > >   and does not allow user space mapping. The format of the data
-> > > >   in this buffer is only known by the FW and does not need to be
-> > > >   shared with other entities.
-> > > > 
-> > > > The driver will retrieve the protected heap using the name of the
-> > > > heap provided to the driver as module parameter.    
-> > > 
-> > > I know it's what dma_heap_find asks for, but I wonder if it wouldn't be
-> > > better in the device tree and lookup through the device node? heaps are
-> > > going to have a node anyway, right?  
-> > 
-> > I'm not too sure. Take the PROTMEM (name="protected,xxxx") dma_heaps
-> > instantiated by optee for instance, I don't think the originating
-> > tee_device comes from a device node, nor is the underlying heap
-> > described as a device node. The reserved memory pool this protected heap
-> > comes from is most likely defined somewhere as reserved memory in the
-> > DT, but there's nothing to correlate this range of reserved mem to some
-> > sub-range that the TEE implementation is carving out to provide
-> > protected memory.  
+Have you considered memory control groups (memcg) for this purpose?
+Imposing a lower limit than currently allocated should trigger reclaim,
+so 'background' applications could have the limit lowered and then
+restored when moved to the foreground.
+
+> To allow for this explicit control in the context of panthor's GPU
+> memory, add two new sysfs knobs. The first, mem_reclaim, runs an
+> explicit priv BO reclaim cycle on the TGID written to it.
 > 
-> Maybe we should be working on a dt bindings for heaps then? Something
-> simple like we have for clocks with a phandle and an ID would probably
-> be enough. In optee's case, it looks like it would map nicely with
-> TEE_DMA_HEAP_* flags too.
+> The second, mem_claim, does the opposite: it swaps BOs back into active
+> memory.
 
-Sure.
+How necessary is this mem_claim for performance? Have you done any
+benchmarking of explicitly claiming vs just allowing it to happen
+naturally? My gut feeling is that mem_claim should be unnecessary in
+most situations, but I'm prepared to be proved wrong.
 
+I'm not saying this series is necessarily the wrong approach - but I
+think we need a bit more justification for adding a new API for this.
+
+Thanks,
+Steve
+
+> Signed-off-by: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
+> ---
+> Nicolas Frattaroli (4):
+>       drm/panthor: Add freed_sz parameter to reclaim_priv_bos
+>       MAINTAINERS: Add sysfs ABI docs to list of panthor files
+>       drm/panthor: Add explicit memory reclaim sysfs knob
+>       drm/panthor: Add explicit memory claim sysfs knob
 > 
-> The only two that wouldn't be covered would be the system and default
-> CMA heap if not setup in the DT, which shouldn't be too bad for this
-> particular use-case.
+>  Documentation/ABI/testing/sysfs-driver-panthor-mem | 34 ++++++++
+>  MAINTAINERS                                        |  1 +
+>  drivers/gpu/drm/panthor/panthor_drv.c              | 93 ++++++++++++++++++++++
+>  drivers/gpu/drm/panthor/panthor_gem.c              |  7 +-
+>  drivers/gpu/drm/panthor/panthor_gem.h              |  1 +
+>  drivers/gpu/drm/panthor/panthor_mmu.c              | 70 +++++++++++++++-
+>  drivers/gpu/drm/panthor/panthor_mmu.h              |  4 +
+>  7 files changed, 205 insertions(+), 5 deletions(-)
+> ---
+> base-commit: 2c4b906cd135bbb44855287d0d0eff0ee0b47afe
+> change-id: 20260506-panthor-explicit-reclaim-3dffed028d8c
+> 
+> Best regards,
+> --  
+> Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
+> 
 
-I'm not opposed to the idea of describing the association through the
-DT (with a <phandle, ID> pair). My main fear is that it drags us into
-endless discussions around what's considered HW description and what's
-not (PTSD of all those DT-bindings discussions I suppose :-)), which
-ends up delaying the merging of Panthor's protected memory support.
-
-Honestly, at this point I'm considering going back to my initial
-suggestion to add a dedicated ioctl() (requiring high privilege) to let
-the user pass the memory for the FW protected sections as a dmabuf FD.
-Given we don't need those sections to be populated for the FW to boot,
-it wouldn't block the probe of the driver, it would just prevent PROTM
-usage until those sections are populated.
-
-This would let us make progress with the rest of the changes in this
-patchset, while the community decides how they want to expose dma_heaps
-to in-kernel users.
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
