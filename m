@@ -2,340 +2,732 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id kJUzC9tfBGpxHgIAu9opvQ
+	id gEalB+NfBGqiHQIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:26:19 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:26:27 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id A767153234A
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:26:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8B219532353
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:26:26 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id BBE413F820
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 11:26:17 +0000 (UTC)
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
-	by lists.linaro.org (Postfix) with ESMTPS id F393C3F7E9
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  6 May 2026 08:04:18 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 698C43F91B
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 11:26:25 +0000 (UTC)
+Received: from bali.collaboradmins.com (bali.collaboradmins.com [148.251.105.195])
+	by lists.linaro.org (Postfix) with ESMTPS id D37FE3F73F
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  6 May 2026 08:51:51 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=ursulin.net header.s=google header.b=kUSsqXDi;
-	dmarc=none;
-	spf=pass (lists.linaro.org: domain of tursulin@ursulin.net designates 209.85.128.53 as permitted sender) smtp.mailfrom=tursulin@ursulin.net
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-48334ee0aeaso43450515e9.1
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 06 May 2026 01:04:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ursulin.net; s=google; t=1778054658; x=1778659458; darn=lists.linaro.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=LiS/ij6r165ba7gZt06iVY0/MOUwEsreAaIASyC63GA=;
-        b=kUSsqXDiDINMwWXS8HEw6mU395o8Oj58iA0I1nxCVDq3maZ4vLWJLVTc2me6f6m63r
-         zUYQbKwEdZTxBmEumL7m7DxORLgSCAyOTkRXNQcM2KyTeVYos33WCekGDlVVLqtMQfmh
-         jvWRlmuOdpqNMmKqsaOkOHWqZ2Fu81S0SI1DA91IaReA5MbHGHg8hRM1fUgfbGepFVen
-         iCQF+/H0NeSGQtfc9vu3oPu4wniJ014bqEMSoHt0FjR3+RUKQ7pqbGAFskMRyBmpL7B/
-         8Lefkxf9QFL82NHsquTSI38ECzCpuLuXns6mEqQmKMMr2uOKE2S97foHH3ClXxb/TnWb
-         qylQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778054658; x=1778659458;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=LiS/ij6r165ba7gZt06iVY0/MOUwEsreAaIASyC63GA=;
-        b=C0Ux9kD5Pwd1FzSGgfZZSpd43UJAQKrb7iq9t4jBrbFAS1wqC/mjAelBZzXl7bBCEL
-         LDvuY81WyRRNLVExS93kuIp2qpGZnK27EuGWEbZiStu7IF9/ThMQJG7jDIJJemiGOUU2
-         /OFukWevqQjCfgnw/c0J4xnBcD0E8bfsj95XQbqu/EuWL2fMGMRXuBg2Rn5JwzMNeKiw
-         9CQKag/N7FJ79YmlWRHzoJxasXTO9YGP66WAXGZqW1JdEHY2Sbh18SGBaHsgafrp6Cla
-         37pa43n0LoLG7Vbq8rFPB79rt8m74SL+3BtTc3SxNcakvepo1Ppjfwk+pMYrx9NcEXVY
-         yrjA==
-X-Forwarded-Encrypted: i=1; AFNElJ+5ykCjzMis2lb066Ifcms+ivPjUjepUolATz+1BoHZ72ouLweI7LcTREV1/cZDgAlAWcPVvyUCxScwep1+@lists.linaro.org
-X-Gm-Message-State: AOJu0YwHHEiYyuem8lgP8Jlz95x0ZtYJgvNl3rpQQ89uSxobd/hqPGxU
-	fA4BsSaK5aouJVztN1cFoMn7m1dQNZuMvdSEU9PXBxS/yTfnU7Y/miUJgYgivWRZbbE=
-X-Gm-Gg: AeBDievSBRWgvYDHxYLV2whgA+pBcAM+JDJ0tiz+cZmJRNn/FpD3TchA7OvIWpjlSjP
-	2PKcyJPOAV3E/M2mO6amIld4CWlCZ3mDpTurvaKvu35nSWw8fc0cLQXmwfMwSAYCIwqCnAzobFc
-	xGGwuv++A19Mx+5IUbyuNqpa6kD/FWWolrdZ8ZHInn/Ooo/sKq4N/KZdO5tOVExVijsO33coFHS
-	sSh4nO3k9WBaj9jG64KS4qvFpJgmYpdxmqbumrnhu2Y0snxNVKDRXNNgv7Z0vxKh75kCMVqDSpC
-	JmN/CoRCzacg3oUHS9415exA5lMgUL0VOBfjgx1j87lUjAKOG+NKI+l2NrFHLNozk57ENq6Lv+o
-	ziz+ieu/daarSu0o5fa8bNJjcu4nZYtRk47ffYucXyWw4Gu8+dnb38zGzA7HMHdyuyltuNXgXwq
-	XEG44Ch4OkNiSspHsIzLjCc0Nou/7Dmw9pmeSVvYqKDJPNYdihlkQxU2UsmTsk9QTgAA==
-X-Received: by 2002:a05:600c:a08b:b0:489:1ba8:5bf0 with SMTP id 5b1f17b1804b1-48e51f4119bmr39672925e9.21.1778054657634;
-        Wed, 06 May 2026 01:04:17 -0700 (PDT)
-Received: from [192.168.0.101] ([90.240.106.137])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48e530cf964sm19380375e9.1.2026.05.06.01.04.16
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 06 May 2026 01:04:17 -0700 (PDT)
-Message-ID: <21121a6f-4431-497a-a8ff-61219cb00ad6@ursulin.net>
-Date: Wed, 6 May 2026 09:04:16 +0100
+	dkim=pass header.d=collabora.com header.s=mail header.b=lKCgYU5q;
+	dmarc=pass (policy=none) header.from=collabora.com;
+	spf=pass (lists.linaro.org: domain of boris.brezillon@collabora.com designates 148.251.105.195 as permitted sender) smtp.mailfrom=boris.brezillon@collabora.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+	s=mail; t=1778057510;
+	bh=qn8hCXeok/i1qfKg2+apfL6WRVPA2S3XWp9AscVrXqY=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=lKCgYU5q+LWXj791/sVDxiKvYI4BFPtsXRvttcatIxuqT3J1yAni62KB0nbdUOxLk
+	 v4ivYv29NjLOBkUC2QBpKm9WbmcgfBFie34FXsFNNZYxPCL8Pmq/M/miBfkkboBu2t
+	 6R6uOqNJ0/wXMkvRsMAy+thzbYcQW40ZDDNpqgtY0Dcq2Da8ddgHFaD+M9xXoW53ZZ
+	 fRNgKmf/5ddJU9wqgVEocXO3lvgDxbsqSbgdir2cLL3ccBtHwrfSvIv088woF/ln6K
+	 Oj/3co90eLSWpB933nfuKazT99hfaDovfSpZefjzk5c+dc1GzIilxOlkSWuhVYjJdb
+	 GSmnSlW1VQ1Gw==
+Received: from fedora (unknown [100.64.0.11])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: bbrezillon)
+	by bali.collaboradmins.com (Postfix) with ESMTPSA id D164117E1321;
+	Wed,  6 May 2026 10:51:48 +0200 (CEST)
+Date: Wed, 6 May 2026 10:51:45 +0200
+From: Boris Brezillon <boris.brezillon@collabora.com>
+To: Ketil Johnsen <ketil.johnsen@arm.com>
+Message-ID: <20260506105145.6f25181d@fedora>
+In-Reply-To: <20260505140516.1372388-8-ketil.johnsen@arm.com>
+References: <20260505140516.1372388-1-ketil.johnsen@arm.com>
+	<20260505140516.1372388-8-ketil.johnsen@arm.com>
+Organization: Collabora
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: christian.koenig@amd.com, sumit.semwal@linaro.org,
- dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org,
- linaro-mm-sig@lists.linaro.org
-References: <20260505110828.1574-1-christian.koenig@amd.com>
-Content-Language: en-GB
-From: Tvrtko Ursulin <tursulin@ursulin.net>
-In-Reply-To: <20260505110828.1574-1-christian.koenig@amd.com>
 X-Spamd-Bar: ---
-X-MailFrom: tursulin@ursulin.net
+X-MailFrom: boris.brezillon@collabora.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: XFVBNOMYICKIL33VAMGFYH7M52GRQVZN
-X-Message-ID-Hash: XFVBNOMYICKIL33VAMGFYH7M52GRQVZN
-X-Mailman-Approved-At: Wed, 13 May 2026 11:22:18 +0000
+Message-ID-Hash: TMPEAVEBUQ5KW2PZBWVU4RWNXR7ZIVG3
+X-Message-ID-Hash: TMPEAVEBUQ5KW2PZBWVU4RWNXR7ZIVG3
+X-Mailman-Approved-At: Wed, 13 May 2026 11:22:19 +0000
+CC: David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Steven Price <steven.price@arm.com>, Liviu Dudau <liviu.dudau@arm.com>, Daniel Almeida <daniel.almeida@collabora.com>, Alice Ryhl <aliceryhl@google.com>, Matthias Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-arm-kernel@lists.infradead.org, l
+ inux-mediatek@lists.infradead.org, Florent Tomasin <florent.tomasin@arm.com>, Paul Toadere <paul.toadere@arm.com>, Samuel Percival <samuel.percival@arm.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf/dma_fence_array: optimize handling v2
+Subject: [Linaro-mm-sig] Re: [PATCH 7/8] drm/panthor: Add support for entering and exiting protected mode
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XFVBNOMYICKIL33VAMGFYH7M52GRQVZN/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TMPEAVEBUQ5KW2PZBWVU4RWNXR7ZIVG3/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
-X-Rspamd-Queue-Id: A767153234A
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Queue-Id: 8B219532353
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.59 / 15.00];
-	DATE_IN_PAST(1.00)[171];
-	MAILLIST(-0.20)[mailman];
+X-Spamd-Result: default: False [3.59 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	DATE_IN_PAST(1.00)[170];
+	R_DKIM_REJECT(1.00)[collabora.com:s=mail];
+	MID_RHS_NOT_FQDN(0.50)[];
 	R_SPF_ALLOW(-0.20)[+mx:c];
+	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_BASE64_TEXT(0.10)[];
+	DMARC_POLICY_SOFTFAIL(0.10)[collabora.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	DMARC_NA(0.00)[ursulin.net];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	ARC_NA(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[3];
+	RCPT_COUNT_TWELVE(0.00)[30];
 	MIME_TRACE(0.00)[0:+];
+	HAS_ORG_HEADER(0.00)[];
+	ARC_NA(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-0.517];
+	FROM_NEQ_ENVFROM(0.00)[boris.brezillon@collabora.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
-	NEURAL_SPAM(0.00)[0.966];
-	RCPT_COUNT_FIVE(0.00)[5];
-	TO_DN_NONE(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[tursulin@ursulin.net,linaro-mm-sig-bounces@lists.linaro.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FREEMAIL_CC(0.00)[gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de,lwn.net,linuxfoundation.org,linaro.org,collabora.com,arm.com,google.com,amd.com,lists.freedesktop.org,vger.kernel.org,lists.linaro.org,lists.infradead.org];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,amd.com:email,ursulin.net:mid]
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DKIM_TRACE(0.00)[collabora.com:-];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[arm.com:email,lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
 X-Rspamd-Action: no action
 
-DQpPbiAwNS8wNS8yMDI2IDEyOjA4LCBDaHJpc3RpYW4gS8O2bmlnIHdyb3RlOg0KPiBSZW1vdmlu
-ZyB0aGUgc2lnbmFsIG9uIGFueSBmZWF0dXJlIGFsbG93cyB0byBzaW1wbGZ5IHRoZSBkbWFfZmVu
-Y2VfYXJyYXkNCj4gY29kZSBhIGxvdCBhbmQgc2F2ZXMgdXMgZnJvbSB0aGUgbmVlZCB0byBpbnN0
-YWxsIGEgY2FsbGJhY2sgb24gYWxsIGZlbmNlcw0KPiBhdCB0aGUgc2FtZSB0aW1lLg0KPiANCj4g
-VGhpcyByZXN1bHRzIGlzIGxlc3MgbWVtb3J5IGFuZCBDUFUgb3ZlcmhlYWQuDQoNCkNvZGUgbG9v
-a3MgZ29vZCBidXQgSSBzdGlsbCB3b3JyeSBhYm91dCB0aGUgbmV3IHBvdGVudGlhbCBmb3IgbnVt
-X2ZlbmNlcyANCmlycSB3b3JrIGxhdGVuY2llcyB3aGVyZWFzIHRoZSBleGlzdGluZyBpbXBsZW1l
-bnRhdGlvbiBvbmx5IGhhcyBvbmUuDQoNCkFsc28sIHdoZXRoZXIgb3Igbm90IGN1cnJlbnQgb3Ig
-dGhpcyBpbXBsZW1lbnRhdGlvbiB1c2VzIGxlc3Mgb3IgbW9yZSANCkNQVSBvdmVyaGVhZCBkZXBl
-bmRzIG9uIHRoZSBzaWduYWxsaW5nIHBhdHRlcm4gKHRpbWUgZGlzdHJpYnV0aW9uKSBvZiANCnRo
-ZSBmZW5jZXMgaW4gdGhlIGFycmF5Lg0KDQpBcGFydCBmcm9tIG1vcmUgbGF0ZW5jeSBpdCBjb3Vs
-ZCBldmVuIGJlIG1vcmUgQ1BVIHVzYWdlIGluIHRoZSANCnBhdGhvbG9naWNhbCBjYXNlLg0KDQpJ
-dCB3b3VsZCBiZSBsZXNzIGlmLCB3aGVuIHRoZSBsYXN0IGZlbmNlIGluIHRoZSBhcnJheSBzaWdu
-YWxzLCBhbGwgDQpvdGhlcnMgaGF2ZSBhbHJlYWR5IHNpZ25hbGVkLiBBbHRob3VnaCBpdCB3b3Vs
-ZCBzdGlsbCBuZWVkIHRvIGdvIHRocm91Z2ggDQphbGwgZG1hX2ZlbmNlX2FkZF9jYWxsYmFjaygp
-IGNhbGxzIHNvIHRoYXQgcGFydCBpcyB0aGUgc2FtZSBhcyB0aGUgDQpjdXJyZW50IGltcGxlbWVu
-dGF0aW9uLiBPbmx5IHRoZSBDUFUgY3ljbGVzIGZyb20gdGhlIHNpZ25hbGluZyBzaWRlIA0Kd291
-bGQgYmUgc2F2ZWQuDQoNCkJ1dCBpbiB0aGUgcGF0aG9sb2dpY2FsIGNhc2UsIHdoZXJlIGZlbmNl
-cyBzaWduYWwgb25lIGJ5IG9uZSBmcm9tIHRoZSANCmZpcnN0IHRvIGxhc3QsIGFuZCBhcmUgc3Bh
-Y2VkIG1vcmUgaW4gdGltZSB0aGFuIGEgc2luZ2xlIGlycSB3b3JrIA0KbGF0ZW5jeSwgdGhlIG5l
-dyBpbXBsZW1lbnRhdGlvbiBuZWVkcyBtb3JlIENQVSB0aW1lIGFuZCBtb3JlIGxhdGVuY3kuDQoN
-CkkgZG8gYWdyZWUgaXQgd291bGQgYmUgbmljZSB0byBiZSBhYmxlIHRvIGRyb3AgdGhlIGNhbGxi
-YWNrcyBhcnJheSBidXQgDQpmb3IgdGhlIGFib3ZlIHJlYXNvbnMgSSBhbSB3b3JyaWVkIHdoZXRo
-ZXIgaXQgaXMgc2FmZS4NCg0KU29tZSBvdGhlciBtaW5vciBjb21tZW50cyBiZWxvdy4NCg0KPiB2
-MjogZml4IHBvdGVudGlhbCBkb3VibGUgbG9ja2luZyBwb2ludGVkIG91dCBieSBUdnJ0a28NCj4g
-DQo+IFNpZ25lZC1vZmYtYnk6IENocmlzdGlhbiBLw7ZuaWcgPGNocmlzdGlhbi5rb2VuaWdAYW1k
-LmNvbT4NCj4gLS0tDQo+ICAgZHJpdmVycy9kbWEtYnVmL2RtYS1mZW5jZS1hcnJheS5jIHwgMTM0
-ICsrKysrKysrKysrKystLS0tLS0tLS0tLS0tLS0tLQ0KPiAgIGRyaXZlcnMvZ3B1L2RybS94ZS94
-ZV92bS5jICAgICAgICB8ICAgMiArLQ0KPiAgIGluY2x1ZGUvbGludXgvZG1hLWZlbmNlLWFycmF5
-LmggICB8ICAyMiArKy0tLQ0KPiAgIDMgZmlsZXMgY2hhbmdlZCwgNjYgaW5zZXJ0aW9ucygrKSwg
-OTIgZGVsZXRpb25zKC0pDQo+IA0KPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9kbWEtYnVmL2RtYS1m
-ZW5jZS1hcnJheS5jIGIvZHJpdmVycy9kbWEtYnVmL2RtYS1mZW5jZS1hcnJheS5jDQo+IGluZGV4
-IDVlMTBlOGRmMzcyZi4uOGI5NGM2Mjg3NDgyIDEwMDY0NA0KPiAtLS0gYS9kcml2ZXJzL2RtYS1i
-dWYvZG1hLWZlbmNlLWFycmF5LmMNCj4gKysrIGIvZHJpdmVycy9kbWEtYnVmL2RtYS1mZW5jZS1h
-cnJheS5jDQo+IEBAIC00Miw5NyArNDIsODggQEAgc3RhdGljIHZvaWQgZG1hX2ZlbmNlX2FycmF5
-X2NsZWFyX3BlbmRpbmdfZXJyb3Ioc3RydWN0IGRtYV9mZW5jZV9hcnJheSAqYXJyYXkpDQo+ICAg
-CWNtcHhjaGcoJmFycmF5LT5iYXNlLmVycm9yLCBQRU5ESU5HX0VSUk9SLCAwKTsNCj4gICB9DQo+
-ICAgDQo+IC1zdGF0aWMgdm9pZCBpcnFfZG1hX2ZlbmNlX2FycmF5X3dvcmsoc3RydWN0IGlycV93
-b3JrICp3cmspDQo+ICtzdGF0aWMgdm9pZCBkbWFfZmVuY2VfYXJyYXlfY2JfZnVuYyhzdHJ1Y3Qg
-ZG1hX2ZlbmNlICpmLA0KPiArCQkJCSAgICBzdHJ1Y3QgZG1hX2ZlbmNlX2NiICpjYikNCj4gICB7
-DQo+IC0Jc3RydWN0IGRtYV9mZW5jZV9hcnJheSAqYXJyYXkgPSBjb250YWluZXJfb2Yod3JrLCB0
-eXBlb2YoKmFycmF5KSwgd29yayk7DQo+IC0NCj4gLQlkbWFfZmVuY2VfYXJyYXlfY2xlYXJfcGVu
-ZGluZ19lcnJvcihhcnJheSk7DQo+ICsJc3RydWN0IGRtYV9mZW5jZV9hcnJheSAqYXJyYXkgPQ0K
-PiArCQljb250YWluZXJfb2YoY2IsIHN0cnVjdCBkbWFfZmVuY2VfYXJyYXksIGNhbGxiYWNrKTsN
-Cj4gICANCj4gLQlkbWFfZmVuY2Vfc2lnbmFsKCZhcnJheS0+YmFzZSk7DQo+IC0JZG1hX2ZlbmNl
-X3B1dCgmYXJyYXktPmJhc2UpOw0KPiArCWlycV93b3JrX3F1ZXVlKCZhcnJheS0+d29yayk7DQo+
-ICAgfQ0KPiAgIA0KPiAtc3RhdGljIHZvaWQgZG1hX2ZlbmNlX2FycmF5X2NiX2Z1bmMoc3RydWN0
-IGRtYV9mZW5jZSAqZiwNCj4gLQkJCQkgICAgc3RydWN0IGRtYV9mZW5jZV9jYiAqY2IpDQo+ICtz
-dGF0aWMgYm9vbCBkbWFfZmVuY2VfYXJyYXlfdHJ5X2FkZF9jYihzdHJ1Y3QgZG1hX2ZlbmNlX2Fy
-cmF5ICphcnJheSkNCj4gICB7DQo+IC0Jc3RydWN0IGRtYV9mZW5jZV9hcnJheV9jYiAqYXJyYXlf
-Y2IgPQ0KPiAtCQljb250YWluZXJfb2YoY2IsIHN0cnVjdCBkbWFfZmVuY2VfYXJyYXlfY2IsIGNi
-KTsNCj4gLQlzdHJ1Y3QgZG1hX2ZlbmNlX2FycmF5ICphcnJheSA9IGFycmF5X2NiLT5hcnJheTsN
-Cj4gKwl3aGlsZSAoYXJyYXktPm51bV9wZW5kaW5nKSB7DQo+ICsJCXN0cnVjdCBkbWFfZmVuY2Ug
-KmYgPSBhcnJheS0+ZmVuY2VzW2FycmF5LT5udW1fcGVuZGluZyAtIDFdOw0KDQpNYXliZSBhZGQg
-YWJvdmUgdGhpcyBsaW5lIHNvbWV0aGluZyBsaWtlOg0KDQovKg0KICAqIEluc3RhbGwgY2FsbGJh
-Y2tzIGZyb20gdGhlIHJldmVyc2Ugc28gdGhlIGNoZWNrIGluDQogICogZG1hX2ZlbmNlX2FycmF5
-X3NpZ25hbGVkKCkgY2FuIGJlIG9wdGltaXplZC4NCiAgKi8NCg0KPiAgIA0KPiAtCWRtYV9mZW5j
-ZV9hcnJheV9zZXRfcGVuZGluZ19lcnJvcihhcnJheSwgZi0+ZXJyb3IpOw0KPiArCQlpZiAoIWRt
-YV9mZW5jZV9hZGRfY2FsbGJhY2soZiwgJmFycmF5LT5jYWxsYmFjaywNCj4gKwkJCQkJICAgIGRt
-YV9mZW5jZV9hcnJheV9jYl9mdW5jKSkNCj4gKwkJCXJldHVybiB0cnVlOw0KPiAgIA0KPiAtCWlm
-IChhdG9taWNfZGVjX2FuZF90ZXN0KCZhcnJheS0+bnVtX3BlbmRpbmcpKQ0KPiAtCQlpcnFfd29y
-a19xdWV1ZSgmYXJyYXktPndvcmspOw0KPiAtCWVsc2UNCj4gKwkJZG1hX2ZlbmNlX2FycmF5X3Nl
-dF9wZW5kaW5nX2Vycm9yKGFycmF5LCBmLT5lcnJvcik7DQo+ICsJCS0tYXJyYXktPm51bV9wZW5k
-aW5nOw0KPiArCX0NCj4gKwlyZXR1cm4gZmFsc2U7DQo+ICt9DQo+ICsNCj4gK3N0YXRpYyB2b2lk
-IGRtYV9mZW5jZV9hcnJheV9pcnFfd29yayhzdHJ1Y3QgaXJxX3dvcmsgKndyaykNCj4gK3sNCj4g
-KwlzdHJ1Y3QgZG1hX2ZlbmNlX2FycmF5ICphcnJheSA9IGNvbnRhaW5lcl9vZih3cmssIHR5cGVv
-ZigqYXJyYXkpLCB3b3JrKTsNCj4gKw0KPiArCS0tYXJyYXktPm51bV9wZW5kaW5nOw0KPiArCWlm
-ICghZG1hX2ZlbmNlX2FycmF5X3RyeV9hZGRfY2IoYXJyYXkpKSB7DQo+ICsJCWRtYV9mZW5jZV9z
-aWduYWwoJmFycmF5LT5iYXNlKTsNCj4gICAJCWRtYV9mZW5jZV9wdXQoJmFycmF5LT5iYXNlKTsN
-Cj4gKwl9DQo+ICAgfQ0KPiAgIA0KPiAgIHN0YXRpYyBib29sIGRtYV9mZW5jZV9hcnJheV9lbmFi
-bGVfc2lnbmFsaW5nKHN0cnVjdCBkbWFfZmVuY2UgKmZlbmNlKQ0KPiAgIHsNCj4gICAJc3RydWN0
-IGRtYV9mZW5jZV9hcnJheSAqYXJyYXkgPSB0b19kbWFfZmVuY2VfYXJyYXkoZmVuY2UpOw0KPiAt
-CXN0cnVjdCBkbWFfZmVuY2VfYXJyYXlfY2IgKmNiID0gYXJyYXktPmNhbGxiYWNrczsNCj4gLQl1
-bnNpZ25lZCBpOw0KPiAgIA0KPiAtCWZvciAoaSA9IDA7IGkgPCBhcnJheS0+bnVtX2ZlbmNlczsg
-KytpKSB7DQo+IC0JCWNiW2ldLmFycmF5ID0gYXJyYXk7DQo+ICsJLyoNCj4gKwkgKiBBcyB3ZSBt
-YXkgcmVwb3J0IHRoYXQgdGhlIGZlbmNlIGlzIHNpZ25hbGVkIGJlZm9yZSBhbGwNCj4gKwkgKiBj
-YWxsYmFja3MgYXJlIGNvbXBsZXRlLCB3ZSBuZWVkIHRvIHRha2UgYW4gYWRkaXRpb25hbA0KPiAr
-CSAqIHJlZmVyZW5jZSBjb3VudCBvbiB0aGUgYXJyYXkgc28gdGhhdCB3ZSBkbyBub3QgZnJlZSBp
-dCB0b28NCj4gKwkgKiBlYXJseS4gVGhlIGNvcmUgZmVuY2UgaGFuZGxpbmcgd2lsbCBvbmx5IGhv
-bGQgdGhlIHJlZmVyZW5jZQ0KPiArCSAqIHVudGlsIHdlIHNpZ25hbCB0aGUgYXJyYXkgYXMgY29t
-cGxldGUgKGJ1dCB0aGF0IGlzIG5vdw0KPiArCSAqIGluc3VmZmljaWVudCkuDQo+ICsJICovDQo+
-ICsJZG1hX2ZlbmNlX2dldCgmYXJyYXktPmJhc2UpOw0KPiArCWlmICghZG1hX2ZlbmNlX2FycmF5
-X3RyeV9hZGRfY2IoYXJyYXkpKSB7DQo+ICAgCQkvKg0KPiAtCQkgKiBBcyB3ZSBtYXkgcmVwb3J0
-IHRoYXQgdGhlIGZlbmNlIGlzIHNpZ25hbGVkIGJlZm9yZSBhbGwNCj4gLQkJICogY2FsbGJhY2tz
-IGFyZSBjb21wbGV0ZSwgd2UgbmVlZCB0byB0YWtlIGFuIGFkZGl0aW9uYWwNCj4gLQkJICogcmVm
-ZXJlbmNlIGNvdW50IG9uIHRoZSBhcnJheSBzbyB0aGF0IHdlIGRvIG5vdCBmcmVlIGl0IHRvbw0K
-PiAtCQkgKiBlYXJseS4gVGhlIGNvcmUgZmVuY2UgaGFuZGxpbmcgd2lsbCBvbmx5IGhvbGQgdGhl
-IHJlZmVyZW5jZQ0KPiAtCQkgKiB1bnRpbCB3ZSBzaWduYWwgdGhlIGFycmF5IGFzIGNvbXBsZXRl
-IChidXQgdGhhdCBpcyBub3cNCj4gLQkJICogaW5zdWZmaWNpZW50KS4NCj4gKwkJICogV2hlbiBh
-bGwgZmVuY2VzIGFyZSBhbHJlYWR5IHNpZ25hbGVkIHdlIGNhbiBkcm9wIHRoZSByZWZlcmVuY2Ug
-YWdhaW4NCj4gKwkJICogYW5kIHJlcG9ydCB0byB0aGUgY2FsbGVyIHRoYXQgdGhlIGFycmF5IGNh
-biBiZSBzaWduYWxlZCBhcyB3ZWxsLg0KDQpPcHRpb25hbCBuaXQgLSBhYm92ZSB0d28gbGluZXMg
-ZW5kIHVwIG9ubHkgbGluZXMgb3ZlciA4MCBpbiB0aGUgZmlsZS4NCg0KUmVnYXJkcywNCg0KVHZy
-dGtvDQoNCj4gICAJCSAqLw0KPiAtCQlkbWFfZmVuY2VfZ2V0KCZhcnJheS0+YmFzZSk7DQo+IC0J
-CWlmIChkbWFfZmVuY2VfYWRkX2NhbGxiYWNrKGFycmF5LT5mZW5jZXNbaV0sICZjYltpXS5jYiwN
-Cj4gLQkJCQkJICAgZG1hX2ZlbmNlX2FycmF5X2NiX2Z1bmMpKSB7DQo+IC0JCQlpbnQgZXJyb3Ig
-PSBhcnJheS0+ZmVuY2VzW2ldLT5lcnJvcjsNCj4gLQ0KPiAtCQkJZG1hX2ZlbmNlX2FycmF5X3Nl
-dF9wZW5kaW5nX2Vycm9yKGFycmF5LCBlcnJvcik7DQo+IC0JCQlkbWFfZmVuY2VfcHV0KCZhcnJh
-eS0+YmFzZSk7DQo+IC0JCQlpZiAoYXRvbWljX2RlY19hbmRfdGVzdCgmYXJyYXktPm51bV9wZW5k
-aW5nKSkgew0KPiAtCQkJCWRtYV9mZW5jZV9hcnJheV9jbGVhcl9wZW5kaW5nX2Vycm9yKGFycmF5
-KTsNCj4gLQkJCQlyZXR1cm4gZmFsc2U7DQo+IC0JCQl9DQo+IC0JCX0NCj4gKwkJZG1hX2ZlbmNl
-X3B1dCgmYXJyYXktPmJhc2UpOw0KPiArCQlyZXR1cm4gZmFsc2U7DQo+ICAgCX0NCj4gLQ0KPiAg
-IAlyZXR1cm4gdHJ1ZTsNCj4gICB9DQo+ICAgDQo+ICAgc3RhdGljIGJvb2wgZG1hX2ZlbmNlX2Fy
-cmF5X3NpZ25hbGVkKHN0cnVjdCBkbWFfZmVuY2UgKmZlbmNlKQ0KPiAgIHsNCj4gICAJc3RydWN0
-IGRtYV9mZW5jZV9hcnJheSAqYXJyYXkgPSB0b19kbWFfZmVuY2VfYXJyYXkoZmVuY2UpOw0KPiAt
-CWludCBudW1fcGVuZGluZzsNCj4gKwlpbnQgbnVtX3BlbmRpbmcsIGVycm9yID0gMDsNCj4gICAJ
-dW5zaWduZWQgaW50IGk7DQo+ICAgDQo+ICAgCS8qDQo+IC0JICogV2UgbmVlZCB0byByZWFkIG51
-bV9wZW5kaW5nIGJlZm9yZSBjaGVja2luZyB0aGUgZW5hYmxlX3NpZ25hbCBiaXQNCj4gLQkgKiB0
-byBhdm9pZCByYWNpbmcgd2l0aCB0aGUgZW5hYmxlX3NpZ25hbGluZygpIGltcGxlbWVudGF0aW9u
-LCB3aGljaA0KPiAtCSAqIG1pZ2h0IGRlY3JlbWVudCB0aGUgY291bnRlciwgYW5kIGNhdXNlIGEg
-cGFydGlhbCBjaGVjay4NCj4gLQkgKiBhdG9taWNfcmVhZF9hY3F1aXJlKCkgcGFpcnMgd2l0aCBh
-dG9taWNfZGVjX2FuZF90ZXN0KCkgaW4NCj4gLQkgKiBkbWFfZmVuY2VfYXJyYXlfZW5hYmxlX3Np
-Z25hbGluZygpDQo+IC0JICoNCj4gLQkgKiBUaGUgIS0tbnVtX3BlbmRpbmcgY2hlY2sgaXMgaGVy
-ZSB0byBhY2NvdW50IGZvciB0aGUgYW55X3NpZ25hbGVkIGNhc2UNCj4gLQkgKiBpZiB3ZSByYWNl
-IHdpdGggZW5hYmxlX3NpZ25hbGluZygpLCB0aGF0IG1lYW5zIHRoZSAhbnVtX3BlbmRpbmcgY2hl
-Y2sNCj4gLQkgKiBpbiB0aGUgaXNfc2lnbmFsbGluZ19lbmFibGVkIGJyYW5jaCBtaWdodCBiZSBv
-dXRkYXRlZCAobnVtX3BlbmRpbmcNCj4gLQkgKiBtaWdodCBoYXZlIGJlZW4gZGVjcmVtZW50ZWQp
-LCBidXQgdGhhdCdzIGZpbmUuIFRoZSB1c2VyIHdpbGwgZ2V0IHRoZQ0KPiAtCSAqIHJpZ2h0IHZh
-bHVlIHdoZW4gdGVzdGluZyBhZ2FpbiBsYXRlci4NCj4gKwkgKiBSZWFkaW5nIG51bV9wZW5kaW5n
-IHdpdGhvdXQgYSBtZW1vcnkgYmFycmllciBoZXJlIGlzIGNvcnJlY3Qgc2luY2UNCj4gKwkgKiB0
-aGF0IGlzIG9ubHkgZm9yIG9wdGltaXphdGlvbiwgaXQgaXMgcGVyZmVjdGx5IGFjY2VwdGFibGUg
-dG8gaGF2ZSBhDQo+ICsJICogc3RhbGUgdmFsdWUgZm9yIGl0LiBJbiBhbGwgb3RoZXIgY2FzZXMg
-bnVtX3BlbmRpbmcgaXMgYWNjZXNzZWQgYnkgYQ0KPiArCSAqIHNpbmdsZSBjYWxsIGNoYWluLg0K
-PiAgIAkgKi8NCj4gLQludW1fcGVuZGluZyA9IGF0b21pY19yZWFkX2FjcXVpcmUoJmFycmF5LT5u
-dW1fcGVuZGluZyk7DQo+IC0JaWYgKHRlc3RfYml0KERNQV9GRU5DRV9GTEFHX0VOQUJMRV9TSUdO
-QUxfQklULCAmYXJyYXktPmJhc2UuZmxhZ3MpKSB7DQo+IC0JCWlmIChudW1fcGVuZGluZyA8PSAw
-KQ0KPiAtCQkJZ290byBzaWduYWw7DQo+IC0JCXJldHVybiBmYWxzZTsNCj4gLQl9DQo+ICsJbnVt
-X3BlbmRpbmcgPSBSRUFEX09OQ0UoYXJyYXktPm51bV9wZW5kaW5nKTsNCj4gKwlmb3IgKGkgPSAw
-OyBpIDwgbnVtX3BlbmRpbmc7ICsraSkgew0KPiArCQlzdHJ1Y3QgZG1hX2ZlbmNlICpmID0gYXJy
-YXktPmZlbmNlc1tpXTsNCj4gICANCj4gLQlmb3IgKGkgPSAwOyBpIDwgYXJyYXktPm51bV9mZW5j
-ZXM7ICsraSkgew0KPiAtCQlpZiAoZG1hX2ZlbmNlX2lzX3NpZ25hbGVkKGFycmF5LT5mZW5jZXNb
-aV0pICYmICEtLW51bV9wZW5kaW5nKQ0KPiAtCQkJZ290byBzaWduYWw7DQo+IC0JfQ0KPiAtCXJl
-dHVybiBmYWxzZTsNCj4gKwkJaWYgKCFkbWFfZmVuY2VfaXNfc2lnbmFsZWQoZikpDQo+ICsJCQly
-ZXR1cm4gZmFsc2U7DQo+ICAgDQo+IC1zaWduYWw6DQo+ICsJCWlmICghZXJyb3IpDQo+ICsJCQll
-cnJvciA9IGYtPmVycm9yOw0KPiArCX0NCj4gKwlkbWFfZmVuY2VfYXJyYXlfc2V0X3BlbmRpbmdf
-ZXJyb3IoYXJyYXksIGVycm9yKTsNCj4gICAJZG1hX2ZlbmNlX2FycmF5X2NsZWFyX3BlbmRpbmdf
-ZXJyb3IoYXJyYXkpOw0KPiAgIAlyZXR1cm4gdHJ1ZTsNCj4gICB9DQo+IEBAIC0xNzEsMTUgKzE2
-MiwxMiBAQCBFWFBPUlRfU1lNQk9MKGRtYV9mZW5jZV9hcnJheV9vcHMpOw0KPiAgIA0KPiAgIC8q
-Kg0KPiAgICAqIGRtYV9mZW5jZV9hcnJheV9hbGxvYyAtIEFsbG9jYXRlIGEgY3VzdG9tIGZlbmNl
-IGFycmF5DQo+IC0gKiBAbnVtX2ZlbmNlczoJCVtpbl0JbnVtYmVyIG9mIGZlbmNlcyB0byBhZGQg
-aW4gdGhlIGFycmF5DQo+ICAgICoNCj4gICAgKiBSZXR1cm4gZG1hIGZlbmNlIGFycmF5IG9uIHN1
-Y2Nlc3MsIE5VTEwgb24gZmFpbHVyZQ0KPiAgICAqLw0KPiAtc3RydWN0IGRtYV9mZW5jZV9hcnJh
-eSAqZG1hX2ZlbmNlX2FycmF5X2FsbG9jKGludCBudW1fZmVuY2VzKQ0KPiArc3RydWN0IGRtYV9m
-ZW5jZV9hcnJheSAqZG1hX2ZlbmNlX2FycmF5X2FsbG9jKHZvaWQpDQo+ICAgew0KPiAtCXN0cnVj
-dCBkbWFfZmVuY2VfYXJyYXkgKmFycmF5Ow0KPiAtDQo+IC0JcmV0dXJuIGt6YWxsb2NfZmxleCgq
-YXJyYXksIGNhbGxiYWNrcywgbnVtX2ZlbmNlcyk7DQo+ICsJcmV0dXJuIGt6YWxsb2Nfb2JqKHN0
-cnVjdCBkbWFfZmVuY2VfYXJyYXkpOw0KPiAgIH0NCj4gICBFWFBPUlRfU1lNQk9MKGRtYV9mZW5j
-ZV9hcnJheV9hbGxvYyk7DQo+ICAgDQo+IEBAIC0yMDMsMTAgKzE5MSwxMyBAQCB2b2lkIGRtYV9m
-ZW5jZV9hcnJheV9pbml0KHN0cnVjdCBkbWFfZmVuY2VfYXJyYXkgKmFycmF5LA0KPiAgIAlXQVJO
-X09OKCFudW1fZmVuY2VzIHx8ICFmZW5jZXMpOw0KPiAgIA0KPiAgIAlhcnJheS0+bnVtX2ZlbmNl
-cyA9IG51bV9mZW5jZXM7DQo+ICsJYXJyYXktPm51bV9wZW5kaW5nID0gbnVtX2ZlbmNlczsNCj4g
-KwlhcnJheS0+ZmVuY2VzID0gZmVuY2VzOw0KPiArCWFycmF5LT5iYXNlLmVycm9yID0gUEVORElO
-R19FUlJPUjsNCj4gICANCj4gICAJZG1hX2ZlbmNlX2luaXQoJmFycmF5LT5iYXNlLCAmZG1hX2Zl
-bmNlX2FycmF5X29wcywgTlVMTCwgY29udGV4dCwNCj4gICAJCSAgICAgICBzZXFubyk7DQo+IC0J
-aW5pdF9pcnFfd29yaygmYXJyYXktPndvcmssIGlycV9kbWFfZmVuY2VfYXJyYXlfd29yayk7DQo+
-ICsJaW5pdF9pcnFfd29yaygmYXJyYXktPndvcmssIGRtYV9mZW5jZV9hcnJheV9pcnFfd29yayk7
-DQo+ICAgDQo+ICAgCS8qDQo+ICAgCSAqIGRtYV9mZW5jZV9hcnJheV9lbmFibGVfc2lnbmFsaW5n
-KCkgaXMgaW52b2tlZCB3aGlsZSBob2xkaW5nDQo+IEBAIC0yMjAsMTEgKzIxMSw2IEBAIHZvaWQg
-ZG1hX2ZlbmNlX2FycmF5X2luaXQoc3RydWN0IGRtYV9mZW5jZV9hcnJheSAqYXJyYXksDQo+ICAg
-CSAqLw0KPiAgIAlsb2NrZGVwX3NldF9jbGFzcygmYXJyYXktPmJhc2UuaW5saW5lX2xvY2ssICZk
-bWFfZmVuY2VfYXJyYXlfbG9ja19rZXkpOw0KPiAgIA0KPiAtCWF0b21pY19zZXQoJmFycmF5LT5u
-dW1fcGVuZGluZywgbnVtX2ZlbmNlcyk7DQo+IC0JYXJyYXktPmZlbmNlcyA9IGZlbmNlczsNCj4g
-LQ0KPiAtCWFycmF5LT5iYXNlLmVycm9yID0gUEVORElOR19FUlJPUjsNCj4gLQ0KPiAgIAkvKg0K
-PiAgIAkgKiBkbWFfZmVuY2VfYXJyYXkgb2JqZWN0cyBzaG91bGQgbmV2ZXIgY29udGFpbiBhbnkg
-b3RoZXIgZmVuY2UNCj4gICAJICogY29udGFpbmVycyBvciBvdGhlcndpc2Ugd2UgcnVuIGludG8g
-cmVjdXJzaW9uIGFuZCBwb3RlbnRpYWwga2VybmVsDQo+IEBAIC0yNjUsNyArMjUxLDcgQEAgc3Ry
-dWN0IGRtYV9mZW5jZV9hcnJheSAqZG1hX2ZlbmNlX2FycmF5X2NyZWF0ZShpbnQgbnVtX2ZlbmNl
-cywNCj4gICB7DQo+ICAgCXN0cnVjdCBkbWFfZmVuY2VfYXJyYXkgKmFycmF5Ow0KPiAgIA0KPiAt
-CWFycmF5ID0gZG1hX2ZlbmNlX2FycmF5X2FsbG9jKG51bV9mZW5jZXMpOw0KPiArCWFycmF5ID0g
-ZG1hX2ZlbmNlX2FycmF5X2FsbG9jKCk7DQo+ICAgCWlmICghYXJyYXkpDQo+ICAgCQlyZXR1cm4g
-TlVMTDsNCj4gICANCj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS94ZS94ZV92bS5jIGIv
-ZHJpdmVycy9ncHUvZHJtL3hlL3hlX3ZtLmMNCj4gaW5kZXggNjJhODdhMDUxYmU3Li44ZjQ3Mjkx
-MTQ2OWQgMTAwNjQ0DQo+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS94ZS94ZV92bS5jDQo+ICsrKyBi
-L2RyaXZlcnMvZ3B1L2RybS94ZS94ZV92bS5jDQo+IEBAIC0zMzcwLDcgKzMzNzAsNyBAQCBzdGF0
-aWMgc3RydWN0IGRtYV9mZW5jZSAqb3BzX2V4ZWN1dGUoc3RydWN0IHhlX3ZtICp2bSwNCj4gICAJ
-CWdvdG8gZXJyX3RyYWNlOw0KPiAgIAl9DQo+ICAgDQo+IC0JY2YgPSBkbWFfZmVuY2VfYXJyYXlf
-YWxsb2Mobl9mZW5jZSk7DQo+ICsJY2YgPSBkbWFfZmVuY2VfYXJyYXlfYWxsb2MoKTsNCj4gICAJ
-aWYgKCFjZikgew0KPiAgIAkJZmVuY2UgPSBFUlJfUFRSKC1FTk9NRU0pOw0KPiAgIAkJZ290byBl
-cnJfb3V0Ow0KPiBkaWZmIC0tZ2l0IGEvaW5jbHVkZS9saW51eC9kbWEtZmVuY2UtYXJyYXkuaCBi
-L2luY2x1ZGUvbGludXgvZG1hLWZlbmNlLWFycmF5LmgNCj4gaW5kZXggMWIxZDg3NTc5YzM4Li4z
-ZWU1NWMwZTJmYTQgMTAwNjQ0DQo+IC0tLSBhL2luY2x1ZGUvbGludXgvZG1hLWZlbmNlLWFycmF5
-LmgNCj4gKysrIGIvaW5jbHVkZS9saW51eC9kbWEtZmVuY2UtYXJyYXkuaA0KPiBAQCAtMTUsMTYg
-KzE1LDYgQEANCj4gICAjaW5jbHVkZSA8bGludXgvZG1hLWZlbmNlLmg+DQo+ICAgI2luY2x1ZGUg
-PGxpbnV4L2lycV93b3JrLmg+DQo+ICAgDQo+IC0vKioNCj4gLSAqIHN0cnVjdCBkbWFfZmVuY2Vf
-YXJyYXlfY2IgLSBjYWxsYmFjayBoZWxwZXIgZm9yIGZlbmNlIGFycmF5DQo+IC0gKiBAY2I6IGZl
-bmNlIGNhbGxiYWNrIHN0cnVjdHVyZSBmb3Igc2lnbmFsaW5nDQo+IC0gKiBAYXJyYXk6IHJlZmVy
-ZW5jZSB0byB0aGUgcGFyZW50IGZlbmNlIGFycmF5IG9iamVjdA0KPiAtICovDQo+IC1zdHJ1Y3Qg
-ZG1hX2ZlbmNlX2FycmF5X2NiIHsNCj4gLQlzdHJ1Y3QgZG1hX2ZlbmNlX2NiIGNiOw0KPiAtCXN0
-cnVjdCBkbWFfZmVuY2VfYXJyYXkgKmFycmF5Ow0KPiAtfTsNCj4gLQ0KPiAgIC8qKg0KPiAgICAq
-IHN0cnVjdCBkbWFfZmVuY2VfYXJyYXkgLSBmZW5jZSB0byByZXByZXNlbnQgYW4gYXJyYXkgb2Yg
-ZmVuY2VzDQo+ICAgICogQGJhc2U6IGZlbmNlIGJhc2UgY2xhc3MNCj4gQEAgLTMzLDE4ICsyMywx
-NyBAQCBzdHJ1Y3QgZG1hX2ZlbmNlX2FycmF5X2NiIHsNCj4gICAgKiBAbnVtX3BlbmRpbmc6IGZl
-bmNlcyBpbiB0aGUgYXJyYXkgc3RpbGwgcGVuZGluZw0KPiAgICAqIEBmZW5jZXM6IGFycmF5IG9m
-IHRoZSBmZW5jZXMNCj4gICAgKiBAd29yazogaW50ZXJuYWwgaXJxX3dvcmsgZnVuY3Rpb24NCj4g
-LSAqIEBjYWxsYmFja3M6IGFycmF5IG9mIGNhbGxiYWNrIGhlbHBlcnMNCj4gKyAqIEBjYWxsYmFj
-azogY2FsbGJhY2sgc3RydWN0dXJlIGZvciBzaWduYWxpbmcNCj4gICAgKi8NCj4gICBzdHJ1Y3Qg
-ZG1hX2ZlbmNlX2FycmF5IHsNCj4gICAJc3RydWN0IGRtYV9mZW5jZSBiYXNlOw0KPiAgIA0KPiAt
-CXVuc2lnbmVkIG51bV9mZW5jZXM7DQo+IC0JYXRvbWljX3QgbnVtX3BlbmRpbmc7DQo+ICsJdW5z
-aWduZWQgaW50IG51bV9mZW5jZXM7DQo+ICsJdW5zaWduZWQgaW50IG51bV9wZW5kaW5nOw0KPiAg
-IAlzdHJ1Y3QgZG1hX2ZlbmNlICoqZmVuY2VzOw0KPiAgIA0KPiAgIAlzdHJ1Y3QgaXJxX3dvcmsg
-d29yazsNCj4gLQ0KPiAtCXN0cnVjdCBkbWFfZmVuY2VfYXJyYXlfY2IgY2FsbGJhY2tzW10gX19j
-b3VudGVkX2J5KG51bV9mZW5jZXMpOw0KPiArCXN0cnVjdCBkbWFfZmVuY2VfY2IgY2FsbGJhY2s7
-DQo+ICAgfTsNCj4gICANCj4gICAvKioNCj4gQEAgLTc4LDExICs2NywxMCBAQCB0b19kbWFfZmVu
-Y2VfYXJyYXkoc3RydWN0IGRtYV9mZW5jZSAqZmVuY2UpDQo+ICAgCWZvciAoaW5kZXggPSAwLCBm
-ZW5jZSA9IGRtYV9mZW5jZV9hcnJheV9maXJzdChoZWFkKTsgZmVuY2U7CVwNCj4gICAJICAgICAr
-KyhpbmRleCksIGZlbmNlID0gZG1hX2ZlbmNlX2FycmF5X25leHQoaGVhZCwgaW5kZXgpKQ0KPiAg
-IA0KPiAtc3RydWN0IGRtYV9mZW5jZV9hcnJheSAqZG1hX2ZlbmNlX2FycmF5X2FsbG9jKGludCBu
-dW1fZmVuY2VzKTsNCj4gK3N0cnVjdCBkbWFfZmVuY2VfYXJyYXkgKmRtYV9mZW5jZV9hcnJheV9h
-bGxvYyh2b2lkKTsNCj4gICB2b2lkIGRtYV9mZW5jZV9hcnJheV9pbml0KHN0cnVjdCBkbWFfZmVu
-Y2VfYXJyYXkgKmFycmF5LA0KPiAgIAkJCSAgaW50IG51bV9mZW5jZXMsIHN0cnVjdCBkbWFfZmVu
-Y2UgKipmZW5jZXMsDQo+ICAgCQkJICB1NjQgY29udGV4dCwgdW5zaWduZWQgc2Vxbm8pOw0KPiAt
-DQo+ICAgc3RydWN0IGRtYV9mZW5jZV9hcnJheSAqZG1hX2ZlbmNlX2FycmF5X2NyZWF0ZShpbnQg
-bnVtX2ZlbmNlcywNCj4gICAJCQkJCSAgICAgICBzdHJ1Y3QgZG1hX2ZlbmNlICoqZmVuY2VzLA0K
-PiAgIAkJCQkJICAgICAgIHU2NCBjb250ZXh0LCB1bnNpZ25lZCBzZXFubyk7DQoNCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFp
-bGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmli
-ZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+On Tue,  5 May 2026 16:05:13 +0200
+Ketil Johnsen <ketil.johnsen@arm.com> wrote:
+
+Here comes the second part of the review :-).
+
+> diff --git a/drivers/gpu/drm/panthor/panthor_gpu.c b/drivers/gpu/drm/panthor/panthor_gpu.c
+> index 2ab444ee8c710..e93042eaf3fc8 100644
+> --- a/drivers/gpu/drm/panthor/panthor_gpu.c
+> +++ b/drivers/gpu/drm/panthor/panthor_gpu.c
+> @@ -100,8 +100,11 @@ static void panthor_gpu_irq_handler(struct panthor_device *ptdev, u32 status)
+>  			 fault_status, panthor_exception_name(ptdev, fault_status & 0xFF),
+>  			 address);
+>  	}
+> -	if (status & GPU_IRQ_PROTM_FAULT)
+> +	if (status & GPU_IRQ_PROTM_FAULT) {
+>  		drm_warn(&ptdev->base, "GPU Fault in protected mode\n");
+> +		panthor_gpu_disable_protm_fault_interrupt(ptdev);
+
+It's only used in a single place, so I'd just inline the content of
+panthor_gpu_disable_protm_fault_interrupt() here. Also, I think
+panthor_gpu_disable_protm_fault_interrupt() is not taking the right
+lock (see below).
+
+> +		panthor_device_schedule_reset(ptdev);
+> +	}
+>  
+>  	spin_lock(&ptdev->gpu->reqs_lock);
+>  	if (status & ptdev->gpu->pending_reqs) {
+> @@ -367,6 +370,10 @@ int panthor_gpu_soft_reset(struct panthor_device *ptdev)
+>  	unsigned long flags;
+>  
+>  	spin_lock_irqsave(&ptdev->gpu->reqs_lock, flags);
+> +
+> +	/** Re-enable the protm_irq_fault when reset is complete */
+> +	ptdev->gpu->irq.mask |= GPU_IRQ_PROTM_FAULT;
+
+panthor_irq::mask should only be modified with the
+panthor_irq::mask_lock held. Besides, we have a helper for
+that:
+
+	panthor_gpu_irq_enable_events(&ptdev->gpu->irq,	GPU_IRQ_PROTM_FAULT);
+
+> +
+>  	if (!drm_WARN_ON(&ptdev->base,
+>  			 ptdev->gpu->pending_reqs & GPU_IRQ_RESET_COMPLETED)) {
+>  		ptdev->gpu->pending_reqs |= GPU_IRQ_RESET_COMPLETED;
+> @@ -427,3 +434,8 @@ void panthor_gpu_resume(struct panthor_device *ptdev)
+>  	panthor_hw_l2_power_on(ptdev);
+>  }
+>  
+> +void panthor_gpu_disable_protm_fault_interrupt(struct panthor_device *ptdev)
+> +{
+> +	scoped_guard(spinlock_irqsave, &ptdev->gpu->reqs_lock)
+> +		ptdev->gpu->irq.mask &= ~GPU_IRQ_PROTM_FAULT;
+
+Same problem with wrong lock being taken to modify the mask, and
+panthor_gpu_irq_disable_events() probably being a better option?
+
+> +}
+> diff --git a/drivers/gpu/drm/panthor/panthor_gpu.h b/drivers/gpu/drm/panthor/panthor_gpu.h
+> index 12c263a399281..ca66c73f543e6 100644
+> --- a/drivers/gpu/drm/panthor/panthor_gpu.h
+> +++ b/drivers/gpu/drm/panthor/panthor_gpu.h
+> @@ -54,4 +54,10 @@ int panthor_gpu_soft_reset(struct panthor_device *ptdev);
+>  void panthor_gpu_power_changed_off(struct panthor_device *ptdev);
+>  int panthor_gpu_power_changed_on(struct panthor_device *ptdev);
+>  
+> +/**
+> + * panthor_gpu_disable_protm_fault_interrupt() - Disable GPU_PROTECTED_FAULT interrupt
+> + * @ptdev: Device.
+> + */
+> +void panthor_gpu_disable_protm_fault_interrupt(struct panthor_device *ptdev);
+> +
+>  #endif
+> diff --git a/drivers/gpu/drm/panthor/panthor_mmu.c b/drivers/gpu/drm/panthor/panthor_mmu.c
+> index 07f54176ec1bf..702f537905b56 100644
+> --- a/drivers/gpu/drm/panthor/panthor_mmu.c
+> +++ b/drivers/gpu/drm/panthor/panthor_mmu.c
+> @@ -31,6 +31,7 @@
+>  #include <linux/sizes.h>
+>  
+>  #include "panthor_device.h"
+> +#include "panthor_fw.h"
+>  #include "panthor_gem.h"
+>  #include "panthor_gpu.h"
+>  #include "panthor_heap.h"
+> @@ -1704,8 +1705,12 @@ static int panthor_vm_lock_region(struct panthor_vm *vm, u64 start, u64 size)
+>  	if (drm_WARN_ON(&ptdev->base, vm->locked_region.size))
+>  		return -EINVAL;
+>  
+> +	down_read(&ptdev->protm.lock);
+> +
+>  	mutex_lock(&ptdev->mmu->as.slots_lock);
+>  	if (vm->as.id >= 0 && size) {
+> +		panthor_fw_protm_exit_sync(ptdev);
+> +
+>  		/* Lock the region that needs to be updated */
+>  		gpu_write64(ptdev, AS_LOCKADDR(vm->as.id),
+>  			    pack_region_range(ptdev, &start, &size));
+> @@ -1720,6 +1725,9 @@ static int panthor_vm_lock_region(struct panthor_vm *vm, u64 start, u64 size)
+>  	}
+>  	mutex_unlock(&ptdev->mmu->as.slots_lock);
+>  
+> +	if (ret)
+> +		up_read(&ptdev->protm.lock);
+
+Let's try to keep the locked section local to a function: the protm.lock
+should, IMHO, be taken/released in panthor_vm_exec_op(). If we go for
+that, this also makes the panthor_vm_lock_region() vs
+panthor_vm_expand_locked_region() distinction useless, though it's
+probably fine to keep it for clarity.
+
+> +
+>  	return ret;
+>  }
+>  
+> @@ -1805,6 +1813,8 @@ static void panthor_vm_unlock_region(struct panthor_vm *vm)
+>  	vm->locked_region.start = 0;
+>  	vm->locked_region.size = 0;
+>  	mutex_unlock(&ptdev->mmu->as.slots_lock);
+> +
+> +	up_read(&ptdev->protm.lock);
+>  }
+>  
+>  static void panthor_mmu_irq_handler(struct panthor_device *ptdev, u32 status)
+> diff --git a/drivers/gpu/drm/panthor/panthor_sched.c b/drivers/gpu/drm/panthor/panthor_sched.c
+> index 987072bd867c4..acb04250c7def 100644
+> --- a/drivers/gpu/drm/panthor/panthor_sched.c
+> +++ b/drivers/gpu/drm/panthor/panthor_sched.c
+> @@ -308,6 +308,15 @@ struct panthor_scheduler {
+>  		 */
+>  		struct list_head stopped_groups;
+>  	} reset;
+> +
+> +	/** @protm: Protected mode related fields. */
+> +	struct {
+> +		/** @protected_mode: True if GPU is in protected mode. */
+> +		bool protected_mode;
+
+nit: s/protected_mode/enabled/s. But do we even need that boolean?
+Isn't active_group != NULL providing the same info?
+
+> +
+> +		/** @active_group: The active protected group. */
+> +		struct panthor_group *active_group;
+> +	} protm;
+>  };
+>  
+>  /**
+> @@ -570,6 +579,16 @@ struct panthor_group {
+>  	/** @fatal_queues: Bitmask reflecting the queues that hit a fatal exception. */
+>  	u32 fatal_queues;
+>  
+> +	/**
+> +	 * @protm_pending_queues: Bitmask reflecting the queues that are waiting
+> +	 *                        on a CS_PROTM_PENDING.
+> +	 *
+> +	 * The GPU will set the bit associated to the queue pending protected mode
+> +	 * when a PROT_REGION command is executing or when trying to resume previously
+> +	 * suspended protected mode jobs.
+> +	 */
+> +	u32 protm_pending_queues;
+> +
+>  	/** @tiler_oom: Mask of queues that have a tiler OOM event to process. */
+>  	atomic_t tiler_oom;
+>  
+> @@ -1176,6 +1195,7 @@ queue_resume_timeout(struct panthor_queue *queue)
+>   * @ptdev: Device.
+>   * @csg_id: Group slot ID.
+>   * @cs_id: Queue slot ID.
+> + * @protm_ack: Acknowledge pending protected mode queues
+>   *
+>   * Program a queue slot with the queue information so things can start being
+>   * executed on this queue.
+> @@ -1472,6 +1492,34 @@ csg_slot_prog_locked(struct panthor_device *ptdev, u32 csg_id, u32 priority)
+>  	return 0;
+>  }
+>  
+> +static void
+> +cs_slot_process_protm_pending_event_locked(struct panthor_device *ptdev,
+> +					   u32 csg_id, u32 cs_id)
+> +{
+> +	struct panthor_scheduler *sched = ptdev->scheduler;
+> +	struct panthor_csg_slot *csg_slot = &sched->csg_slots[csg_id];
+> +	struct panthor_group *group = csg_slot->group;
+> +
+> +	lockdep_assert_held(&sched->lock);
+> +
+> +	if (!group)
+> +		return;
+> +
+> +	/* No protected memory heap, a user space program tried to
+> +	 * submit a protected mode jobs resulting in the GPU raising
+> +	 * a CS_PROTM_PENDING request.
+> +	 *
+> +	 * This scenario is invalid and the protected mode jobs must
+> +	 * not be allowed to progress.
+> +	 */
+> +	if (!ptdev->protm.heap)
+> +		return;
+
+Should we flag the group unusable when that happens and schedule it out
+as soon as possible?
+
+	if (!ptdev->protm.heap)
+		group->fatal_queues |= BIT(cs_id);
+	else
+		group->protm_pending_queues |= BIT(cs_id);
+
+	sched_queue_delayed_work(sched, tick, 0);
+
+> +
+> +	group->protm_pending_queues |= BIT(cs_id);
+> +
+> +	sched_queue_delayed_work(sched, tick, 0);
+> +}
+> +
+>  static void
+>  cs_slot_process_fatal_event_locked(struct panthor_device *ptdev,
+>  				   u32 csg_id, u32 cs_id)
+> @@ -1718,6 +1766,9 @@ static bool cs_slot_process_irq_locked(struct panthor_device *ptdev,
+>  	if (events & CS_TILER_OOM)
+>  		cs_slot_process_tiler_oom_event_locked(ptdev, csg_id, cs_id);
+>  
+> +	if (events & CS_PROTM_PENDING)
+> +		cs_slot_process_protm_pending_event_locked(ptdev, csg_id, cs_id);
+> +
+>  	/* We don't acknowledge the TILER_OOM event since its handling is
+>  	 * deferred to a separate work.
+>  	 */
+> @@ -1848,6 +1899,17 @@ static void sched_process_idle_event_locked(struct panthor_device *ptdev)
+>  	sched_queue_delayed_work(ptdev->scheduler, tick, 0);
+>  }
+>  
+> +static void sched_process_protm_exit_event_locked(struct panthor_device *ptdev)
+> +{
+> +	lockdep_assert_held(&ptdev->scheduler->lock);
+> +
+> +	/* Acknowledge the protm exit and schedule a tick. */
+> +	panthor_fw_protm_exit(ptdev);
+
+Let's just inline the content of panthor_fw_protm_exit() here.*
+It doesn't make sense to have all these indirections, especially
+since PROTM and scheduling are intertwined anyway, so I consider
+it part of the scheduler responsibility (just like the scheduler
+deals with other GLB events).
+
+The same goes for the other panthor_fw_protm_ helpers defined in
+panthor_fw.c, I think panthor_sched.c would be a better fit for
+those, or even inlining their content if they are only used in
+a single place.
+
+> +	sched_queue_delayed_work(ptdev->scheduler, tick, 0);
+> +	ptdev->scheduler->protm.protected_mode = false;
+> +	ptdev->scheduler->protm.active_group = NULL;
+> +}
+> +
+>  /**
+>   * sched_process_global_irq_locked() - Process the scheduling part of a global IRQ
+>   * @ptdev: Device.
+> @@ -1863,6 +1925,9 @@ static void sched_process_global_irq_locked(struct panthor_device *ptdev)
+>  	ack = READ_ONCE(glb_iface->output->ack);
+>  	evts = (req ^ ack) & GLB_EVT_MASK;
+>  
+> +	if (evts & GLB_PROTM_EXIT)
+> +		sched_process_protm_exit_event_locked(ptdev);
+> +
+>  	if (evts & GLB_IDLE)
+>  		sched_process_idle_event_locked(ptdev);
+>  }
+> @@ -1872,23 +1937,71 @@ static void process_fw_events_work(struct work_struct *work)
+>  	struct panthor_scheduler *sched = container_of(work, struct panthor_scheduler,
+>  						      fw_events_work);
+>  	u32 events = atomic_xchg(&sched->fw_events, 0);
+> +	u32 csg_events = events & ~JOB_INT_GLOBAL_IF;
+>  	struct panthor_device *ptdev = sched->ptdev;
+>  
+>  	mutex_lock(&sched->lock);
+>  
+> +	while (csg_events) {
+> +		u32 csg_id = ffs(csg_events) - 1;
+> +
+> +		sched_process_csg_irq_locked(ptdev, csg_id);
+> +		csg_events &= ~BIT(csg_id);
+> +	}
+
+I'm sure you have a good reason to re-order the processing
+of CSG and GLB events, and it'd be good to have it documented
+in a comment.
+
+> +
+>  	if (events & JOB_INT_GLOBAL_IF) {
+>  		sched_process_global_irq_locked(ptdev);
+>  		events &= ~JOB_INT_GLOBAL_IF;
+>  	}
+>  
+> -	while (events) {
+> -		u32 csg_id = ffs(events) - 1;
+> +	mutex_unlock(&sched->lock);
+> +}
+>  
+> -		sched_process_csg_irq_locked(ptdev, csg_id);
+> -		events &= ~BIT(csg_id);
+> +static void handle_protm_fault(struct panthor_device *ptdev)
+
+This is a bit of a misnomer, I think. It doesn't seem to be triggered
+by a FAULT event, it's more a timeout on a PROTM section that would
+lead to a reset being scheduled, and this "blocked-in-protm" situation
+being detected as part of the reset.
+
+> +{
+> +	struct panthor_scheduler *sched = ptdev->scheduler;
+> +	u32 csg_id;
+> +	struct panthor_group *protm_group;
+> +
+> +	guard(mutex)(&sched->lock);
+> +
+> +	if (!sched->protm.protected_mode)
+> +		return;
+> +
+> +	protm_group = sched->protm.active_group;
+> +
+> +	if (drm_WARN_ON(&ptdev->base, !protm_group))
+> +		return;
+
+See, that's a perfect example of sched->protm.protected_mode being redundant.
+Now you're left with a potential protected_mode=true,active_group=NULL
+inconsistency you don't expect.
+
+> +
+> +	/* Group will be terminated by the device reset */
+> +	protm_group->fatal_queues |= GENMASK(protm_group->queue_count - 1, 0);
+> +
+> +	if (!panthor_fw_protm_exit_wait_event_timeout(ptdev))
+> +		goto cleanup_protm;
+> +
+> +	/**
+> +	 * GPU failed to exit protected mode. Mark all non-protected mode CSGs
+
+	/* GPU failed to exit protected mode. Mark all non-protected mode CSGs
+
+> +	 * as suspended so that they are unaffected by the GPU reset.
+> +	 */
+> +
+> +	for (csg_id = 0; csg_id < sched->csg_slot_count; csg_id++) {
+> +		struct panthor_group *group = sched->csg_slots[csg_id].group;
+> +
+> +		if (!group || group == protm_group)
+> +			continue;
+> +
+> +		group->state = PANTHOR_CS_GROUP_SUSPENDED;
+> +
+> +		group_unbind_locked(group);
+> +
+> +		list_move(&group->run_node, group_is_idle(group) ?
+> +						&sched->groups.idle[group->priority] :
+> +						&sched->groups.runnable[group->priority]);
+
+nit: Let's use a local struct list_head * variable to select the right list.
+
+>  	}
+>  
+> -	mutex_unlock(&sched->lock);
+> +cleanup_protm:
+> +	sched->protm.protected_mode = false;
+> +	sched->protm.active_group = NULL;
+>  }
+>  
+>  /**
+> @@ -2029,6 +2142,7 @@ struct panthor_sched_tick_ctx {
+>  	bool immediate_tick;
+>  	bool stop_tick;
+>  	u32 csg_upd_failed_mask;
+> +	struct panthor_group *protm_group;
+>  };
+>  
+>  static bool
+> @@ -2299,6 +2413,7 @@ tick_ctx_evict_group(struct panthor_scheduler *sched,
+>  
+>  static void
+>  tick_ctx_reschedule_group(struct panthor_scheduler *sched,
+> +			  struct panthor_sched_tick_ctx *ctx,
+>  			  struct panthor_csg_slots_upd_ctx *upd_ctx,
+>  			  struct panthor_group *group,
+>  			  int new_csg_prio)
+> @@ -2321,6 +2436,30 @@ tick_ctx_reschedule_group(struct panthor_scheduler *sched,
+>  					csg_iface->output->ack ^ CSG_ENDPOINT_CONFIG,
+>  					CSG_ENDPOINT_CONFIG);
+>  	}
+> +
+> +	if (ctx->protm_group == group) {
+> +		for (u32 q = 0; q < group->queue_count; q++) {
+> +			struct panthor_fw_cs_iface *cs_iface;
+> +
+> +			if (!(group->protm_pending_queues & BIT(q)))
+> +				continue;
+> +
+> +			cs_iface = panthor_fw_get_cs_iface(ptdev, group->csg_id, q);
+> +			panthor_fw_update_reqs(cs_iface, req, cs_iface->output->ack,
+> +					       CS_PROTM_PENDING);
+> +		}
+> +
+> +		panthor_fw_toggle_reqs(csg_iface, doorbell_req, doorbell_ack,
+> +				       group->protm_pending_queues);
+> +		csgs_upd_ctx_ring_doorbell(upd_ctx, group->csg_id);
+> +		group->protm_pending_queues = 0;
+> +
+> +		/*
+> +		 * We only allow one protected group to run at same time,
+> +		 * as it makes it easier to handle faults in protected mode.
+
+It's more something to document in the panthor_scheduler::protm::active_group
+section.
+
+> +		 */
+> +		sched->protm.active_group = group;
+
+Would it make sense to move this logic to a tick_ctx_handle_protm_group()
+helper that's called before/after tick_ctx_reschedule_group()? This way
+there's no extra if (ctx->protm_group == group) conditional branch in here.
+
+
+static void
+tick_ctx_handle_protm_group(struct panthor_scheduler *sched,
+			    struct panthor_sched_tick_ctx *ctx,
+ 			    struct panthor_csg_slots_upd_ctx *upd_ctx)
+{
+	struct panthor_device *ptdev = sched->ptdev;
+	struct panthor_group *group = ctx->protm_group;
+	struct panthor_fw_csg_iface *csg_iface;
+
+	if (!group || drm_WARN_ON(&ptdev->base, group->csg_id < 0))
+		return;
+
+	csg_iface = panthor_fw_get_csg_iface(ptdev, group->csg_id);
+	for (u32 q = 0; q < group->queue_count; q++) {
+		struct panthor_fw_cs_iface *cs_iface;
+
+		if (!(group->protm_pending_queues & BIT(q)))
+			continue;
+
+		cs_iface = panthor_fw_get_cs_iface(ptdev, group->csg_id, q);
+		panthor_fw_update_reqs(cs_iface, req, cs_iface->output->ack,
+				       CS_PROTM_PENDING);
+	}
+
+	panthor_fw_toggle_reqs(csg_iface, doorbell_req, doorbell_ack,
+			       group->protm_pending_queues);
+	csgs_upd_ctx_ring_doorbell(upd_ctx, group->csg_id);
+	group->protm_pending_queues = 0;
+	sched->protm.active_group = group;
+}
+
+> +	}
+>  }
+>  
+>  static void
+> @@ -2336,6 +2475,17 @@ tick_ctx_schedule_group(struct panthor_scheduler *sched,
+>  	group_bind_locked(group, csg_id);
+>  	csg_slot_prog_locked(ptdev, csg_id, csg_prio);
+>  
+> +	/* If the group was waiting for protected mode before suspension,
+> +	 * and the tick context enters this mode, it should be serviced
+> +	 * immediately because the slot reset should have set the
+> +	 * CS_PROTM_PENDING bit to zero, and cs_prog_slot_locked() sets it to
+> +	 * zero too.
+> +	 * It's not clear if we will get a new CS_PROTM_PENDING event in that
+> +	 * case, but it should be safe either way.
+> +	 */
+> +	if (group->protm_pending_queues && ctx->protm_group)
+> +		group->protm_pending_queues = 0;
+
+I'd move this to the path where we do the SUSPEND, or group_unbind(), even.
+
+> +
+>  	csgs_upd_ctx_queue_reqs(ptdev, upd_ctx, csg_id,
+>  				group->state == PANTHOR_CS_GROUP_SUSPENDED ?
+>  				CSG_STATE_RESUME : CSG_STATE_START,
+> @@ -2365,7 +2515,7 @@ tick_ctx_apply(struct panthor_scheduler *sched, struct panthor_sched_tick_ctx *c
+>  
+>  		/* Update priorities on already running groups. */
+>  		list_for_each_entry(group, &ctx->groups[prio], run_node) {
+> -			tick_ctx_reschedule_group(sched, &upd_ctx, group, new_csg_prio--);
+> +			tick_ctx_reschedule_group(sched, ctx, &upd_ctx, group, new_csg_prio--);
+>  		}
+>  	}
+>  
+> @@ -2457,6 +2607,15 @@ tick_ctx_apply(struct panthor_scheduler *sched, struct panthor_sched_tick_ctx *c
+>  
+>  	sched->used_csg_slot_count = ctx->group_count;
+>  	sched->might_have_idle_groups = ctx->idle_group_count > 0;
+> +
+> +	if (ctx->protm_group) {
+> +		ret = panthor_fw_protm_enter(ptdev);
+> +		if (ret) {
+> +			panthor_device_schedule_reset(ptdev);
+> +			ctx->csg_upd_failed_mask = U32_MAX;
+
+It's weird to flag it as all CSGs update failed. Should we instead
+have
+
+			/* If we failed to enter PROTM, consider the group who
+			 * requested it as failed.
+			 */
+			ctx->csg_upd_failed_mask |= BIT(ctx->protm_group->csg_id);
+
+> +		}
+> +		sched->protm.protected_mode = true;
+
+I'd move that to a tick_ctx_service_protm_req() helper that has the
+panthor_fw_protm_enter() inlined, because again, it doesn't make
+sense to have this defined in panthor_fw.c if the only user lives
+in panthor_sched.c
+
+> +	}
+>  }
+>  
+>  static u64
+> @@ -2490,7 +2649,7 @@ static void tick_work(struct work_struct *work)
+>  	u64 resched_target = sched->resched_target;
+>  	u64 remaining_jiffies = 0, resched_delay;
+>  	u64 now = get_jiffies_64();
+> -	int prio, ret, cookie;
+> +	int prio, protm_prio, ret, cookie;
+>  	bool full_tick;
+>  
+>  	if (!drm_dev_enter(&ptdev->base, &cookie))
+> @@ -2564,14 +2723,49 @@ static void tick_work(struct work_struct *work)
+>  		}
+>  	}
+>  
+> +	/* Check if the highest priority group want to switch to protected mode */
+> +	for (protm_prio = PANTHOR_CSG_PRIORITY_COUNT - 1; protm_prio >= 0; protm_prio--) {
+> +		struct panthor_group *group;
+> +
+> +		group = list_first_entry_or_null(&ctx.groups[protm_prio],
+> +						 struct panthor_group,
+> +						 run_node);
+> +		if (group) {
+> +			ctx.protm_group = group;
+> +			break;
+> +		}
+
+Should this be
+
+		if (group) {
+			if (group->protm_pending_queues)
+				ctx.protm_group = group;
+
+			break;
+		}
+
+?
+
+> +	}
+> +
+>  	/* If we have free CSG slots left, pick idle groups */
+> -	for (prio = PANTHOR_CSG_PRIORITY_COUNT - 1;
+> -	     prio >= 0 && !tick_ctx_is_full(sched, &ctx);
+> -	     prio--) {
+
+How about we keep it a single indentation level and skip higher prios if
+PROTM is requested:
+
+		/* Pick only idle groups with equal or lower priority than the
+		 * group triggering protected mode. Do not bother picking
+		 * unscheduled idle groups.
+		 */
+		if (ctx.protm_group && prio < protm_prio)
+			continue;
+
+This saves us an indentation level and limits the code duplication.
+
+> -		/* Check the old_group queue first to avoid reprogramming the slots */
+> -		tick_ctx_pick_groups_from_list(sched, &ctx, &ctx.old_groups[prio], false, true);
+> -		tick_ctx_pick_groups_from_list(sched, &ctx, &sched->groups.idle[prio],
+> -					       false, false);
+> +	if (ctx.protm_group) {
+> +		/* Pick only idle groups with equal or lower priority than the
+> +		 * group triggering protected mode. Do not bother picking
+> +		 * unscheduled idle groups.
+> +		 */
+> +		for (prio = protm_prio;
+> +		     prio >= 0 && !tick_ctx_is_full(sched, &ctx);
+> +		     prio--)
+> +			tick_ctx_pick_groups_from_list(sched, &ctx,
+> +						       &ctx.old_groups[prio],
+> +						       false, true);
+> +	} else {
+> +		/* No switch to protected, just pick any idle group according
+> +		 * to priority
+> +		 */
+> +		for (prio = PANTHOR_CSG_PRIORITY_COUNT - 1;
+> +		     prio >= 0 && !tick_ctx_is_full(sched, &ctx);
+> +		     prio--) {
+> +			/* Check the old_group queue first to avoid
+> +			 * reprogramming the slots
+> +			 */
+> +			tick_ctx_pick_groups_from_list(sched, &ctx,
+> +						       &ctx.old_groups[prio],
+> +						       false, true);
+> +			tick_ctx_pick_groups_from_list(sched, &ctx,
+> +						       &sched->groups.idle[prio],
+> +						       false, false);
+> +		}
+> +
+>  	}
+>  
+>  	tick_ctx_apply(sched, &ctx);
+> @@ -2993,6 +3187,8 @@ void panthor_sched_pre_reset(struct panthor_device *ptdev)
+>  	cancel_work_sync(&sched->sync_upd_work);
+>  	cancel_delayed_work_sync(&sched->tick_work);
+>  
+> +	handle_protm_fault(ptdev);
+
+I actually wonder if this should be part of the panthor_sched_suspend()
+logic. That is, we would automatically flag all non-protm groups as
+suspended if the GPU was in PROTM mode at the time the hang happened.
+
+> +
+>  	panthor_sched_suspend(ptdev);
+>  
+>  	/* Stop all groups that might still accept jobs, so we don't get passed
+
+Regards,
+
+Boris
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
