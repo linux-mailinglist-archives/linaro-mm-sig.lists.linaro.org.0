@@ -2,64 +2,79 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id OOH6IiJZ+2n+ZQMAu9opvQ
+	id oJ4SO/5a+2kuZwMAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 06 May 2026 17:07:14 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 06 May 2026 17:15:10 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3F9D94DCDEC
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 06 May 2026 17:07:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 808384DCFAB
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 06 May 2026 17:15:10 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 491A440514
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  6 May 2026 15:07:13 +0000 (UTC)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by lists.linaro.org (Postfix) with ESMTP id B59E43F75F
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  6 May 2026 15:07:05 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3B1044017B
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  6 May 2026 15:15:09 +0000 (UTC)
+Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com [136.143.188.112])
+	by lists.linaro.org (Postfix) with ESMTPS id 8C5323F75F
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  6 May 2026 15:15:07 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=arm.com header.s=foss header.b=FmnnVKGi;
-	dmarc=pass (policy=none) header.from=arm.com;
-	spf=pass (lists.linaro.org: domain of steven.price@arm.com designates 217.140.110.172 as permitted sender) smtp.mailfrom=steven.price@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id F1A5F1A00;
-	Wed,  6 May 2026 08:06:59 -0700 (PDT)
-Received: from [10.57.69.49] (unknown [10.57.69.49])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EB7173F7B4;
-	Wed,  6 May 2026 08:07:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1778080025; bh=0Qvkwoc6ppPEBLSk9uM5Rsgl5b8rqzzkFxSZy6MZlV8=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=FmnnVKGik6Xi8qEL1+q1giTNjcCEklsr6JI2g2nwenfvZhfM3nqzgpT+RM2xxmcJC
-	 xly2Z0kjShS+ZRLlyw6kV6yCShZvUoFu2DPHS+flFwwTX2uS0zZJ94JWhsqo0vVpe1
-	 zeNFJykwZSUlOJaLygI3u2hyQJgsKDJ1m5jWaAZo=
-Message-ID: <ed1b0be1-cf6e-4318-b040-12d315eae3f0@arm.com>
-Date: Wed, 6 May 2026 16:06:57 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>,
- Boris Brezillon <boris.brezillon@collabora.com>,
- Liviu Dudau <liviu.dudau@arm.com>,
+	dkim=pass header.d=collabora.com header.s=zohomail header.b=KVpt6Hx6;
+	dmarc=pass (policy=none) header.from=collabora.com;
+	spf=pass (lists.linaro.org: domain of nicolas.frattaroli@collabora.com designates 136.143.188.112 as permitted sender) smtp.mailfrom=nicolas.frattaroli@collabora.com;
+	arc=pass ("zohomail.com:s=zohoarc:i=1")
+ARC-Seal: i=1; a=rsa-sha256; t=1778080494; cv=none;
+	d=zohomail.com; s=zohoarc;
+	b=ixS5eLvs7I2dnfRcs+L+HtR6kGENPZFsVABEe4tsnh2HUo5IJt2fCYZ7shtqrsWQuf626cIXVW5wO/YeBr7Ncnx5RUaKXld9ONSi3PEiNpCRb6hh89p06Cw9AA1Kx1+VODFvEZR+VA5YHzDYsYthhK6b8lMoO1hn5ncKhjn6wjI=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc;
+	t=1778080494; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+	bh=bFMYULcpZyad3lOGrB5sIpSUs1w1oVFnhviqEt0JPQ4=;
+	b=Q0O59o3IB0rqq6w26v2iWVbikXTNZIo+zRhSCvugTq2aqKDdwhwECflKwpJO5iJnCx1mBiATr2/th+yxNNsjCTRJOM0xabfYmHixQG3Y0T3CrBuskPYsIOJLh4z0rEtAcU2IQiJdIA6lUnoM9TUQPc+WOgYi3YkakGrazdz0Z2w=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=collabora.com;
+	spf=pass  smtp.mailfrom=nicolas.frattaroli@collabora.com;
+	dmarc=pass header.from=<nicolas.frattaroli@collabora.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1778080494;
+	s=zohomail; d=collabora.com; i=nicolas.frattaroli@collabora.com;
+	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-ID:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Content-Type:Message-Id:Reply-To;
+	bh=bFMYULcpZyad3lOGrB5sIpSUs1w1oVFnhviqEt0JPQ4=;
+	b=KVpt6Hx66oRhBOLlcguyPd8qg8/xaTUSp/8d1rw/uMMKYqnqKqp1p+Vy88lTEFZp
+	vQlQ21VlfSYQwE8pXCYkeiwCQ2OV4y3CCBMuEy2BQUDZKTgTRyQCTHSCQBPOy3kHc6J
+	J769PGroPn+YM5DmZ+m5aGqUQE/pRB4cbNVvURyI=
+Received: by mx.zohomail.com with SMTPS id 177808049351924.671974264945334;
+	Wed, 6 May 2026 08:14:53 -0700 (PDT)
+From: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
+To: David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
  Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
  Sumit Semwal <sumit.semwal@linaro.org>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-References: <20260506-panthor-explicit-reclaim-v1-0-44f82ac147ce@collabora.com>
- <20260506-panthor-explicit-reclaim-v1-1-44f82ac147ce@collabora.com>
-From: Steven Price <steven.price@arm.com>
-Content-Language: en-GB
-In-Reply-To: <20260506-panthor-explicit-reclaim-v1-1-44f82ac147ce@collabora.com>
-X-Spamd-Bar: ---
-Message-ID-Hash: IQTMDHQ455KNU4GFQUJBWQY6FO3JGGSB
-X-Message-ID-Hash: IQTMDHQ455KNU4GFQUJBWQY6FO3JGGSB
-X-MailFrom: steven.price@arm.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+ Benjamin Gaignard <benjamin.gaignard@collabora.com>,
+ Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>,
+ "T.J. Mercier" <tjmercier@google.com>,
+ Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>,
+ Boris Brezillon <boris.brezillon@collabora.com>,
+ Steven Price <steven.price@arm.com>, Liviu Dudau <liviu.dudau@arm.com>,
+ Daniel Almeida <daniel.almeida@collabora.com>,
+ Alice Ryhl <aliceryhl@google.com>, Matthias Brugger <matthias.bgg@gmail.com>,
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+ Ketil Johnsen <ketil.johnsen@arm.com>, Ketil Johnsen <ketil.johnsen@arm.com>
+Date: Wed, 06 May 2026 17:14:45 +0200
+Message-ID: <kC1hpRBAS8uGaw7vVFyW2g@collabora.com>
+In-Reply-To: <20260505140516.1372388-7-ketil.johnsen@arm.com>
+References: 
+ <20260505140516.1372388-1-ketil.johnsen@arm.com>
+ <20260505140516.1372388-7-ketil.johnsen@arm.com>
+MIME-Version: 1.0
+X-Spamd-Bar: -----
+Message-ID-Hash: 6HOOU2L7NBSAA7LDYEAXSHZTA7BPVFYS
+X-Message-ID-Hash: 6HOOU2L7NBSAA7LDYEAXSHZTA7BPVFYS
+X-MailFrom: nicolas.frattaroli@collabora.com
+X-Mailman-Rule-Hits: member-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
+CC: dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 1/4] drm/panthor: Add freed_sz parameter to reclaim_priv_bos
+Subject: [Linaro-mm-sig] Re: [PATCH 6/8] drm/panthor: Explicit expansion of locked VM region
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/IQTMDHQ455KNU4GFQUJBWQY6FO3JGGSB/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6HOOU2L7NBSAA7LDYEAXSHZTA7BPVFYS/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -68,126 +83,123 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 3F9D94DCDEC
+X-Rspamd-Queue-Id: 808384DCFAB
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.59 / 15.00];
-	R_DKIM_REJECT(1.00)[arm.com:s=foss];
+X-Spamd-Result: default: False [3.09 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:zohomail.com:reject}];
+	R_DKIM_REJECT(1.00)[collabora.com:s=zohomail];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx:c];
-	DMARC_POLICY_SOFTFAIL(0.10)[arm.com : SPF not aligned (relaxed),none];
+	DMARC_POLICY_SOFTFAIL(0.10)[collabora.com : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	ARC_NA(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FREEMAIL_TO(0.00)[collabora.com,arm.com,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com];
-	RCPT_COUNT_TWELVE(0.00)[14];
-	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de,lwn.net,linuxfoundation.org,linaro.org,collabora.com,arm.com,google.com,amd.com];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.958];
-	FROM_NEQ_ENVFROM(0.00)[steven.price@arm.com,linaro-mm-sig-bounces@lists.linaro.org];
+	RCVD_COUNT_THREE(0.00)[3];
+	RCPT_COUNT_TWELVE(0.00)[29];
+	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[arm.com:-];
+	DKIM_TRACE(0.00)[collabora.com:-];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.897];
+	FROM_NEQ_ENVFROM(0.00)[nicolas.frattaroli@collabora.com,linaro-mm-sig-bounces@lists.linaro.org];
+	TO_DN_SOME(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[arm.com:mid,collabora.com:email,linaro.org:email]
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,arm.com:email]
 
-On 06/05/2026 11:45, Nicolas Frattaroli wrote:
-> panthor_mmu_reclaim_priv_bos returns the number of freed pages. However,
-> how many bytes of freed memory this translates to can't generally be
-> deduced from the number of pages, as the page size is a per-VM property.
+On Tuesday, 5 May 2026 16:05:12 Central European Summer Time Ketil Johnsen wrote:
+> Currently the panthor_vm_lock_region() function will implicitly expand
+> an already locked VM region. This can be problematic because the caller
+> do not reliably know if it needs to call panthor_vm_unlock_region()
+> or not.
 > 
-> It may be useful to know the exact number of bytes that have been freed
-
-The "useful" aspect seems to just be a drm_dbg() message from what I can
-see with this series? Am I missing something or is it not actually that
-useful?
-
-Thanks,
-Steve
-
-> for observability and debugging purposes. To that end, add a new
-> parameter "freed_sz", which is a pointer to a size_t where this
-> information will be stored. It may be NULL, in which case the
-> information isn't stored at all.
+> Worth noting, there is currently no known issues with this as the code
+> is written today.
 > 
-> Signed-off-by: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
+> This change introduces panthor_vm_expand_region() which will only work
+> if there is already a locked VM region. This again means that the
+> original lock and unlock functions can work as a pair. This pairing is
+> needed for subsequent protected memory changes.
+> 
+> Signed-off-by: Ketil Johnsen <ketil.johnsen@arm.com>
 > ---
->  drivers/gpu/drm/panthor/panthor_gem.c |  3 ++-
->  drivers/gpu/drm/panthor/panthor_mmu.c | 12 ++++++++++--
->  drivers/gpu/drm/panthor/panthor_mmu.h |  1 +
->  3 files changed, 13 insertions(+), 3 deletions(-)
+>  drivers/gpu/drm/panthor/panthor_mmu.c | 69 +++++++++++++++++++--------
+>  1 file changed, 50 insertions(+), 19 deletions(-)
 > 
-> diff --git a/drivers/gpu/drm/panthor/panthor_gem.c b/drivers/gpu/drm/panthor/panthor_gem.c
-> index 13295d7a593d..80e82238f3c5 100644
-> --- a/drivers/gpu/drm/panthor/panthor_gem.c
-> +++ b/drivers/gpu/drm/panthor/panthor_gem.c
-> @@ -1511,7 +1511,8 @@ panthor_gem_shrinker_scan(struct shrinker *shrinker, struct shrink_control *sc)
->  		goto out;
->  
->  	freed += panthor_mmu_reclaim_priv_bos(ptdev, sc->nr_to_scan - freed,
-> -					      &remaining, panthor_gem_try_evict);
-> +					      &remaining, NULL,
-> +					      panthor_gem_try_evict);
->  	if (freed >= sc->nr_to_scan)
->  		goto out;
->  
-> diff --git a/drivers/gpu/drm/panthor/panthor_mmu.c b/drivers/gpu/drm/panthor/panthor_mmu.c
-> index a7ee14986849..b81388b35a58 100644
-> --- a/drivers/gpu/drm/panthor/panthor_mmu.c
-> +++ b/drivers/gpu/drm/panthor/panthor_mmu.c
-> @@ -3127,13 +3127,18 @@ int panthor_vm_prepare_mapped_bos_resvs(struct drm_exec *exec, struct panthor_vm
->  unsigned long
->  panthor_mmu_reclaim_priv_bos(struct panthor_device *ptdev,
->  			     unsigned int nr_to_scan, unsigned long *remaining,
-> +			     size_t *freed_sz,
->  			     bool (*shrink)(struct drm_gem_object *,
->  					    struct ww_acquire_ctx *))
->  {
-> +	unsigned long newly_freed;
->  	unsigned long freed = 0;
->  	LIST_HEAD(remaining_vms);
->  	LIST_HEAD(vms);
->  
-> +	if (freed_sz)
-> +		*freed_sz = 0;
-> +
->  	mutex_lock(&ptdev->reclaim.lock);
->  	list_splice_init(&ptdev->reclaim.vms, &vms);
->  
-> @@ -3152,8 +3157,11 @@ panthor_mmu_reclaim_priv_bos(struct panthor_device *ptdev,
->  
->  		mutex_unlock(&ptdev->reclaim.lock);
->  
-> -		freed += drm_gem_lru_scan(&vm->reclaim.lru, nr_to_scan - freed,
-> -					  remaining, shrink, NULL);
-> +		newly_freed = drm_gem_lru_scan(&vm->reclaim.lru, nr_to_scan - freed,
-> +					       remaining, shrink, NULL);
-> +		if (freed_sz)
-> +			*freed_sz += panthor_vm_page_size(vm) * newly_freed;
-> +		freed += newly_freed;
->  
->  		mutex_lock(&ptdev->reclaim.lock);
->  
-> diff --git a/drivers/gpu/drm/panthor/panthor_mmu.h b/drivers/gpu/drm/panthor/panthor_mmu.h
-> index 3522fbbce369..12b18b5f90e1 100644
-> --- a/drivers/gpu/drm/panthor/panthor_mmu.h
-> +++ b/drivers/gpu/drm/panthor/panthor_mmu.h
-> @@ -52,6 +52,7 @@ int panthor_vm_evict_bo_mappings_locked(struct panthor_gem_object *bo);
->  unsigned long
->  panthor_mmu_reclaim_priv_bos(struct panthor_device *ptdev,
->  			     unsigned int nr_to_scan, unsigned long *remaining,
-> +			     size_t *freed_sz,
->  			     bool (*shrink)(struct drm_gem_object *,
->  					    struct ww_acquire_ctx *));
->  int panthor_vm_prepare_mapped_bos_resvs(struct drm_exec *exec,
-> 
+
+While trying this series, I attempted my usual
+`modprobe -r panthor && modprobe panthor protected_heap_name=default_cma_region`.
+
+Unfortunately, it oopses when attempting to unmap the sg for a bo labeled
+"FW section" on panthor module unload, and I bisected it to this patch.
+
+The oops:
+
+[  598.515550] Unable to handle kernel paging request at virtual address 0000000000400267
+[  598.516864] Mem abort info:
+[  598.517676]   ESR = 0x0000000096000004
+[  598.518560]   EC = 0x25: DABT (current EL), IL = 32 bits
+[  598.520414]   SET = 0, FnV = 0
+[  598.521275]   EA = 0, S1PTW = 0
+[  598.522099]   FSC = 0x04: level 0 translation fault
+[  598.523069] Data abort info:
+[  598.524311]   ISV = 0, ISS = 0x00000004, ISS2 = 0x00000000
+[  598.525566]   CM = 0, WnR = 0, TnD = 0, TagAccess = 0
+[  598.526850]   GCS = 0, Overlay = 0, DirtyBit = 0, Xs = 0
+[  598.527905] user pgtable: 4k pages, 48-bit VAs, pgdp=0000000104056000
+[  598.529019] [0000000000400267] pgd=0000000000000000, p4d=0000000000000000
+[  598.530170] Internal error: Oops: 0000000096000004 [#1]  SMP
+[  598.531158] Modules linked in: btusb btrtl btmtk btintel btbcm bluetooth ecdh_generic ecc kpp snd_soc_hdmi_codec cfg80211 r8169 rfkill_gpio pwm_fan rfkill snd_soc_es8316 rtc_hym8563 rk805_pwrkey at24 fusb302 tcpm aux_hpd_bridge display_connector snd_soc_simple_card phy_rockchip_samsung_hdptx phy_rockchip_usbdp rockchip_thermal typec phy_rockchip_naneng_combphy rockchip_saradc industrialio_triggered_buffer kfifo_buf rockchipdrm inno_hdmi dw_dp hantro_vpu rockchip_vdec dw_mipi_dsi2 v4l2_jpeg v4l2_vp9 rockchip_rga dw_mipi_dsi v4l2_h264 synopsys_hdmirx v4l2_dv_timings spi_rockchip_sfc videobuf2_dma_contig videobuf2_dma_sg v4l2_mem2mem videobuf2_memops dw_hdmi_qp onboard_usb_dev analogix_dp videobuf2_v4l2 videobuf2_common snd_soc_rockchip_i2s_tdm dw_hdmi videodev mc drm_display_helper nvme cec panthor(-) drm_gpuvm drm_exec gpu_sched drm_dp_aux_bus drm_dma_helper drm_client_lib nvme_core drm_kms_helper drm pci_endpoint_test backlight snd_soc_audio_graph_card snd_soc_simple_card_utils fu
+ se dm_mod
+[  598.541237] CPU: 6 UID: 0 PID: 806 Comm: modprobe Not tainted 7.1.0-rc2-00726-g8ab0a3092b56-dirty #2 PREEMPT
+[  598.542733] Hardware name: Radxa ROCK 5T (DT)
+[  598.543746] pstate: 80400009 (Nzcv daif +PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+[  598.544991] pc : dma_unmap_sg_attrs (kernel/dma/mapping.c:0)
+[  598.546021] lr : panthor_gem_free_object (include/linux/dma-mapping.h:565 drivers/gpu/drm/panthor/panthor_gem.c:308 drivers/gpu/drm/panthor/panthor_gem.c:469) panthor
+[  598.547180] sp : ffff80008835bb90
+[  598.548123] x29: ffff80008835bb90 x28: ffff00012610bf00 x27: 0000000000000000
+[  598.549412] x26: 0000000000000000 x25: 0000000000000000 x24: 0000000000000000
+[  598.550696] x23: ffff000127194600 x22: ffff0001271943d0 x21: ffff000118671000
+[  598.551984] x20: ffff000127194200 x19: ffff000127194600 x18: 00000000002ab980
+[  598.553273] x17: 00000000002ab980 x16: ffffa39a6b372a04 x15: 0000000000000000
+[  598.554568] x14: 0000000000000010 x13: 0000000000000000 x12: 000000000000003c
+[  598.555864] x11: 0000000000000002 x10: ffff000100a5d000 x9 : ffff000118671000
+[  598.557164] x8 : ffff000102f8b490 x7 : ffff000149569000 x6 : ffff000149569000
+[  598.558461] x5 : ffff000100faa7e8 x4 : 0000000000000000 x3 : 0000000000000000
+[  598.559763] x2 : 0000000000000010 x1 : ffff000127194000 x0 : 000000000040000f
+[  598.561069] Call trace:
+[  598.561961]  dma_unmap_sg_attrs (kernel/dma/mapping.c:0) (P)
+[  598.563038] panthor_gem_free_object (include/linux/dma-mapping.h:565 drivers/gpu/drm/panthor/panthor_gem.c:308 drivers/gpu/drm/panthor/panthor_gem.c:469) panthor
+[  598.564218] drm_gem_object_free (drivers/gpu/drm/drm_gem.c:1148) drm
+[  598.565386] panthor_kernel_bo_destroy (include/linux/kref.h:65 include/drm/drm_gem.h:565 include/drm/drm_gem.h:578 drivers/gpu/drm/panthor/panthor_gem.c:1317) panthor
+[  598.566575] panthor_fw_unplug (drivers/gpu/drm/panthor/panthor_fw.c:1306) panthor
+[  598.567705] panthor_device_unplug (drivers/gpu/drm/panthor/panthor_device.c:103) panthor
+[  598.568878] panthor_remove (drivers/gpu/drm/panthor/panthor_drv.c:1846) panthor
+[  598.569991]  platform_remove (drivers/base/platform.c:1435)
+[  598.571029]  device_release_driver_internal (drivers/base/dd.c:619 drivers/base/dd.c:1352 drivers/base/dd.c:1375)
+[  598.572209]  driver_detach (drivers/base/dd.c:1438)
+[  598.573237]  bus_remove_driver (drivers/base/bus.c:825)
+[  598.574304]  driver_unregister (drivers/base/driver.c:277)
+[  598.575363]  platform_driver_unregister (drivers/base/platform.c:920)
+[  598.576494] cleanup_module (drivers/gpu/drm/panthor/panthor_devfreq.c:134) panthor
+[  598.577617]  __arm64_sys_delete_module (kernel/module/main.c:863 kernel/module/main.c:804 kernel/module/main.c:804)
+[  598.578751]  invoke_syscall (arch/arm64/kernel/syscall.c:35 arch/arm64/kernel/syscall.c:49)
+[  598.579794]  el0_svc_common (arch/arm64/kernel/syscall.c:121)
+[  598.580842]  do_el0_svc (arch/arm64/kernel/syscall.c:140)
+[  598.581862]  el0_svc (arch/arm64/kernel/entry-common.c:723)
+[  598.582853]  el0t_64_sync_handler (arch/arm64/kernel/entry-common.c:742)
+[  598.583949]  el0t_64_sync (arch/arm64/kernel/entry.S:594)
+
+Kind regards,
+Nicolas Frattaroli
+
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
