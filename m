@@ -2,732 +2,186 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gEalB+NfBGqiHQIAu9opvQ
+	id wMqLDO1fBGqiHQIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:26:27 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:26:37 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B219532353
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:26:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ED7FA532368
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:26:36 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 698C43F91B
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 11:26:25 +0000 (UTC)
-Received: from bali.collaboradmins.com (bali.collaboradmins.com [148.251.105.195])
-	by lists.linaro.org (Postfix) with ESMTPS id D37FE3F73F
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  6 May 2026 08:51:51 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 8DF3C3F91B
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 11:26:35 +0000 (UTC)
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+	by lists.linaro.org (Postfix) with ESMTPS id 024013F72F
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  6 May 2026 09:02:24 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=collabora.com header.s=mail header.b=lKCgYU5q;
-	dmarc=pass (policy=none) header.from=collabora.com;
-	spf=pass (lists.linaro.org: domain of boris.brezillon@collabora.com designates 148.251.105.195 as permitted sender) smtp.mailfrom=boris.brezillon@collabora.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1778057510;
-	bh=qn8hCXeok/i1qfKg2+apfL6WRVPA2S3XWp9AscVrXqY=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=lKCgYU5q+LWXj791/sVDxiKvYI4BFPtsXRvttcatIxuqT3J1yAni62KB0nbdUOxLk
-	 v4ivYv29NjLOBkUC2QBpKm9WbmcgfBFie34FXsFNNZYxPCL8Pmq/M/miBfkkboBu2t
-	 6R6uOqNJ0/wXMkvRsMAy+thzbYcQW40ZDDNpqgtY0Dcq2Da8ddgHFaD+M9xXoW53ZZ
-	 fRNgKmf/5ddJU9wqgVEocXO3lvgDxbsqSbgdir2cLL3ccBtHwrfSvIv088woF/ln6K
-	 Oj/3co90eLSWpB933nfuKazT99hfaDovfSpZefjzk5c+dc1GzIilxOlkSWuhVYjJdb
-	 GSmnSlW1VQ1Gw==
-Received: from fedora (unknown [100.64.0.11])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: bbrezillon)
-	by bali.collaboradmins.com (Postfix) with ESMTPSA id D164117E1321;
-	Wed,  6 May 2026 10:51:48 +0200 (CEST)
-Date: Wed, 6 May 2026 10:51:45 +0200
-From: Boris Brezillon <boris.brezillon@collabora.com>
-To: Ketil Johnsen <ketil.johnsen@arm.com>
-Message-ID: <20260506105145.6f25181d@fedora>
-In-Reply-To: <20260505140516.1372388-8-ketil.johnsen@arm.com>
-References: <20260505140516.1372388-1-ketil.johnsen@arm.com>
-	<20260505140516.1372388-8-ketil.johnsen@arm.com>
-Organization: Collabora
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-redhat-linux-gnu)
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=h1GbVy5Q;
+	dmarc=pass (policy=none) header.from=gmail.com;
+	spf=pass (lists.linaro.org: domain of asml.silence@gmail.com designates 209.85.128.45 as permitted sender) smtp.mailfrom=asml.silence@gmail.com
+Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-48e56c1bf5dso887965e9.3
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 06 May 2026 02:02:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1778058143; x=1778662943; darn=lists.linaro.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=mmaZWXsqMxYY1SXzoardDG6u5dyIRaJ/iULJJHwbN+E=;
+        b=h1GbVy5QfLPRh6SeMd0FA2vMmg0uYkeQ9INGK5feJPGQRQ0izqp1c6S7SPMvSBjgr1
+         NhMhOXKYPfCsdclW1u3QTUxvq8biC5tqc0mpxDhnab7T9o3Pp22QmstPHO6SD1lptwrN
+         rydB76qoSkFvIvPcLxIVVeIt4xAGSeviwHoXbE350Te1rSZd6YN8IpAh9WL2JvDwzX0H
+         kzm2P5jLJVoQx1vNitmg5dQfSI8FBsALqXroVVAj9hGUoiDMokWTXZjx59BOKqRLcqA/
+         eYmNQ16AuhIjXjPT9qq/JQiBFslyLqEixm465XC5guH7rTTg7f8TGF+M2Dvr5JjONYbv
+         016w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1778058143; x=1778662943;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=mmaZWXsqMxYY1SXzoardDG6u5dyIRaJ/iULJJHwbN+E=;
+        b=ojZzqS9TesKPh9CETKSTzRCWytyPNuVxtf+xpbGnXualszYMpSLwNZoY7tpsX/KJAY
+         nAKue6VwZjLEHEQVXAbUZsRBnnaFOttk5z666g9fWGPxLJF5wBtFZmONPU0whS5733+X
+         Co105ehkNckbtll+KOp5bWO/9VdphbDQoifkRyvNmkKpQPM+6TlTzWwJyBwGyMQo3Yd/
+         fci1y81JPtbfTIPBNFSFni2PjGiy2cKdl+TbvR756NR/vJAb1J6St4htRRmH4hXMP2im
+         lF2GhP5zT0hrZ//Xa13IteAp1JpReAuI0gtSkIKNW9dtVCl18TAHQwf8srHAm7vYrmLB
+         fUTA==
+X-Forwarded-Encrypted: i=1; AFNElJ86Iek3yixBb47mlFDko06x7HNiF4ZkY+R5xeSv7jGxV2GW7YW8//X9BuEpEW7/T7x8S/d2AgMtZjsEdqY4@lists.linaro.org
+X-Gm-Message-State: AOJu0Ywo/uV/PLNc5humwGg94HTrCCQ2NAKPR3QH8yoez8QjhJr//vit
+	393pq1GExGYSixPcrPUoMjDsXeUDYENslni2X8HDWQG7Crc728TjTPL7
+X-Gm-Gg: AeBDieuQFPh0dVxMD84TJsradSfn7lH8cjOo9PfqlOvP5qPaHeeOD0wxFw6RrHpgLqi
+	2ZMwO0wa14+KW5gyYI4cv1UkWkqpG4E2zXaRLyOWw1WtmfWKp9NY4zEytJGU4abnQ9+iDutIg3v
+	x+p5pqXm0zISG1+d8b93mq8yEwlKJmTpI4COXUt5pNjlFCJ+9gxEZDWnilVp3F5/Ir63qAv1GHD
+	5m+QIU5MiEWnMNAI34BWkfwyF0/0IWMZgTg1c9AkXovchQtRXQpAZJywT/Pis4OE5A8EZ/0sQMH
+	j/a0U+xal95pVT/vTRosNUvpt71v4KZP2+eGsmLNvUlC7i2GtTjRpj7WE3Zph3Hj7mDOhU0AuYN
+	vOjNnkc8Emzhfbr1WjpjPo2hITYdZcRQEADKfP63ZxIlMI1JzM/yYCnxxHOlDqDTEeyiTxb3mTX
+	iksSbNE0UdDR5OuXZt/J+37FHsx8BkYBSt+tTB4idTC2R/Z7mpWP4IZAu3kr41XM1RH5V6tW3ho
+	dhbQIvVPptVLhcqvn5qyR3HX+Sh1YChkobARYdOxA==
+X-Received: by 2002:a05:600c:2e0c:b0:489:1c2d:211e with SMTP id 5b1f17b1804b1-48e51e0c833mr25734095e9.5.1778058142476;
+        Wed, 06 May 2026 02:02:22 -0700 (PDT)
+Received: from [10.109.92.22] ([86.33.71.194])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48e52f5c1cfsm21365215e9.0.2026.05.06.02.02.20
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 06 May 2026 02:02:21 -0700 (PDT)
+Message-ID: <6873d617-c904-45f3-bad9-e1ae39cfecd2@gmail.com>
+Date: Wed, 6 May 2026 10:02:11 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+To: Ming Lei <tom.leiming@gmail.com>
+References: <cover.1777475843.git.asml.silence@gmail.com>
+ <afi7c-VUJWOLlC1m@fedora>
+Content-Language: en-US
+From: Pavel Begunkov <asml.silence@gmail.com>
+In-Reply-To: <afi7c-VUJWOLlC1m@fedora>
 X-Spamd-Bar: ---
-X-MailFrom: boris.brezillon@collabora.com
+X-MailFrom: asml.silence@gmail.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: TMPEAVEBUQ5KW2PZBWVU4RWNXR7ZIVG3
-X-Message-ID-Hash: TMPEAVEBUQ5KW2PZBWVU4RWNXR7ZIVG3
+Message-ID-Hash: 6UNT3QBPZIETVLSXFKJQARKME46IJGHK
+X-Message-ID-Hash: 6UNT3QBPZIETVLSXFKJQARKME46IJGHK
 X-Mailman-Approved-At: Wed, 13 May 2026 11:22:19 +0000
-CC: David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Steven Price <steven.price@arm.com>, Liviu Dudau <liviu.dudau@arm.com>, Daniel Almeida <daniel.almeida@collabora.com>, Alice Ryhl <aliceryhl@google.com>, Matthias Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-arm-kernel@lists.infradead.org, l
- inux-mediatek@lists.infradead.org, Florent Tomasin <florent.tomasin@arm.com>, Paul Toadere <paul.toadere@arm.com>, Samuel Percival <samuel.percival@arm.com>
+CC: Jens Axboe <axboe@kernel.dk>, Keith Busch <kbusch@kernel.org>, Christoph Hellwig <hch@lst.de>, Sagi Grimberg <sagi@grimberg.me>, Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Andrew Morton <akpm@linux-foundation.org>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, linux-nvme@lists.infradead.org, linux-fsdevel@vger.kernel.org, io-uring@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Nitesh Shetty <nj.shetty@samsung.com>, Kanchan Joshi <joshi.k@samsung.com>, Anuj Gupta <anuj20.g@samsung.com>, Tushar Gohad <tushar.gohad@intel.com>, William Power <william.power@intel.com>, Phil Cayton <phil.cayton@intel.com>, Jason Gunthorpe <jgg@nvidia.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 7/8] drm/panthor: Add support for entering and exiting protected mode
+Subject: [Linaro-mm-sig] Re: [PATCH v3 00/10] Add dmabuf read/write via io_uring
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TMPEAVEBUQ5KW2PZBWVU4RWNXR7ZIVG3/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6UNT3QBPZIETVLSXFKJQARKME46IJGHK/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 8B219532353
+X-Rspamd-Queue-Id: ED7FA532368
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [3.59 / 15.00];
+X-Spamd-Result: default: False [2.09 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	DATE_IN_PAST(1.00)[170];
-	R_DKIM_REJECT(1.00)[collabora.com:s=mail];
-	MID_RHS_NOT_FQDN(0.50)[];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[collabora.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
+	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[3];
-	RCPT_COUNT_TWELVE(0.00)[30];
-	MIME_TRACE(0.00)[0:+];
-	HAS_ORG_HEADER(0.00)[];
-	ARC_NA(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.517];
-	FROM_NEQ_ENVFROM(0.00)[boris.brezillon@collabora.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de,lwn.net,linuxfoundation.org,linaro.org,collabora.com,arm.com,google.com,amd.com,lists.freedesktop.org,vger.kernel.org,lists.linaro.org,lists.infradead.org];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DKIM_TRACE(0.00)[collabora.com:-];
+	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[gmail.com];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCPT_COUNT_TWELVE(0.00)[25];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[arm.com:email,lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	FROM_NEQ_ENVFROM(0.00)[asmlsilence@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-0.088];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
 X-Rspamd-Action: no action
 
-On Tue,  5 May 2026 16:05:13 +0200
-Ketil Johnsen <ketil.johnsen@arm.com> wrote:
+Hey Ming,
 
-Here comes the second part of the review :-).
+On 5/4/26 16:29, Ming Lei wrote:
+> On Wed, Apr 29, 2026 at 04:25:46PM +0100, Pavel Begunkov wrote:
+>> The patch set allows to register a dmabuf to an io_uring instance for
+>> a specified file and use it with io_uring read / write requests. The
+>> infrastructure is not tied to io_uring and there could be more users
+>> in the future. A similar idea was attempted some years ago by Keith [1],
+>> from where I borrowed a good number of changes, and later was brough up
+>> by Tushar and Vishal from Intel.
+>>
+>> It's an opt-in feature for files, and they need to implement a new
+>> file operation to use it. Only NVMe block devices are supported in this
+>> series. The user API is built on top of io_uring's "registered buffers",
+>> where a dmabuf is registered in a special way, but after it can be used
+>> as any other "registered buffer" with IORING_OP_{READ,WRITE}_FIXED
+>> requests. It's created via a new file operation and the resulted map is
+>> then passed through the I/O stack in a new iterator type. There is some
+>> additional infrastructure to bind it all, which also counts requests
+>> using a dmabuf map and managing lifetimes, which is used to implement
+>> map invalidation.
+>>
+>> It was tested for GPU <-> NVMe transfers. Also, as it maintains a
+>> long-term dma mapping, it helps with the IOMMU cost. The numbers
+>> below are for udmabuf reads previously run by Anuj for different
+>> IOMMU modes:
+> 
+> Plain registered buffer is long-live too, which raises question: does this
+> framework need to take it into account from beginning?
 
-> diff --git a/drivers/gpu/drm/panthor/panthor_gpu.c b/drivers/gpu/drm/panthor/panthor_gpu.c
-> index 2ab444ee8c710..e93042eaf3fc8 100644
-> --- a/drivers/gpu/drm/panthor/panthor_gpu.c
-> +++ b/drivers/gpu/drm/panthor/panthor_gpu.c
-> @@ -100,8 +100,11 @@ static void panthor_gpu_irq_handler(struct panthor_device *ptdev, u32 status)
->  			 fault_status, panthor_exception_name(ptdev, fault_status & 0xFF),
->  			 address);
->  	}
-> -	if (status & GPU_IRQ_PROTM_FAULT)
-> +	if (status & GPU_IRQ_PROTM_FAULT) {
->  		drm_warn(&ptdev->base, "GPU Fault in protected mode\n");
-> +		panthor_gpu_disable_protm_fault_interrupt(ptdev);
+Not sure I follow, mind expanding on what should be accounted?
+Are you suggesting that we might want to use normal registered
+buffers in a similar way? I.e. giving the driver an ability to
+pre-register them?
 
-It's only used in a single place, so I'd just inline the content of
-panthor_gpu_disable_protm_fault_interrupt() here. Also, I think
-panthor_gpu_disable_protm_fault_interrupt() is not taking the right
-lock (see below).
+> BTW, inspired by this approach, I adds similar feature to ublk via UBLK_IO_F_SHMEM_ZC
+> which can maintain long-term vfio dma mapping over registered user-place aligned buffer.
 
-> +		panthor_device_schedule_reset(ptdev);
-> +	}
->  
->  	spin_lock(&ptdev->gpu->reqs_lock);
->  	if (status & ptdev->gpu->pending_reqs) {
-> @@ -367,6 +370,10 @@ int panthor_gpu_soft_reset(struct panthor_device *ptdev)
->  	unsigned long flags;
->  
->  	spin_lock_irqsave(&ptdev->gpu->reqs_lock, flags);
-> +
-> +	/** Re-enable the protm_irq_fault when reset is complete */
-> +	ptdev->gpu->irq.mask |= GPU_IRQ_PROTM_FAULT;
+Interesting, just too a glance, and it looks like what David Wei
+was thinking to add to fuse, but IIUC he gave up exactly because the
+client will need to cooperate and that could be troublesome.
 
-panthor_irq::mask should only be modified with the
-panthor_irq::mask_lock held. Besides, we have a helper for
-that:
+Should we try to push everything under the same interface instead of
+keeping a ublk specific one? Again to the point that it requires
+a cooperative client, but if it's something more generic, the user
+might just try to use it as a general optimisation. In the same way
+it'll be helpful to fuse, and as a bonus you wouldn't need tree look
+ups (but mandates clients using registered buffers as a downside).
 
-	panthor_gpu_irq_enable_events(&ptdev->gpu->irq,	GPU_IRQ_PROTM_FAULT);
+It'd need to shaped to somehow work better with host memory as I
+assume you want to be able to map it into server in common case.
+Switch case'ing if it's a udmabuf is not the greatest approach,
+but maybe we can figure out something else.
+  
+-- 
+Pavel Begunkov
 
-> +
->  	if (!drm_WARN_ON(&ptdev->base,
->  			 ptdev->gpu->pending_reqs & GPU_IRQ_RESET_COMPLETED)) {
->  		ptdev->gpu->pending_reqs |= GPU_IRQ_RESET_COMPLETED;
-> @@ -427,3 +434,8 @@ void panthor_gpu_resume(struct panthor_device *ptdev)
->  	panthor_hw_l2_power_on(ptdev);
->  }
->  
-> +void panthor_gpu_disable_protm_fault_interrupt(struct panthor_device *ptdev)
-> +{
-> +	scoped_guard(spinlock_irqsave, &ptdev->gpu->reqs_lock)
-> +		ptdev->gpu->irq.mask &= ~GPU_IRQ_PROTM_FAULT;
-
-Same problem with wrong lock being taken to modify the mask, and
-panthor_gpu_irq_disable_events() probably being a better option?
-
-> +}
-> diff --git a/drivers/gpu/drm/panthor/panthor_gpu.h b/drivers/gpu/drm/panthor/panthor_gpu.h
-> index 12c263a399281..ca66c73f543e6 100644
-> --- a/drivers/gpu/drm/panthor/panthor_gpu.h
-> +++ b/drivers/gpu/drm/panthor/panthor_gpu.h
-> @@ -54,4 +54,10 @@ int panthor_gpu_soft_reset(struct panthor_device *ptdev);
->  void panthor_gpu_power_changed_off(struct panthor_device *ptdev);
->  int panthor_gpu_power_changed_on(struct panthor_device *ptdev);
->  
-> +/**
-> + * panthor_gpu_disable_protm_fault_interrupt() - Disable GPU_PROTECTED_FAULT interrupt
-> + * @ptdev: Device.
-> + */
-> +void panthor_gpu_disable_protm_fault_interrupt(struct panthor_device *ptdev);
-> +
->  #endif
-> diff --git a/drivers/gpu/drm/panthor/panthor_mmu.c b/drivers/gpu/drm/panthor/panthor_mmu.c
-> index 07f54176ec1bf..702f537905b56 100644
-> --- a/drivers/gpu/drm/panthor/panthor_mmu.c
-> +++ b/drivers/gpu/drm/panthor/panthor_mmu.c
-> @@ -31,6 +31,7 @@
->  #include <linux/sizes.h>
->  
->  #include "panthor_device.h"
-> +#include "panthor_fw.h"
->  #include "panthor_gem.h"
->  #include "panthor_gpu.h"
->  #include "panthor_heap.h"
-> @@ -1704,8 +1705,12 @@ static int panthor_vm_lock_region(struct panthor_vm *vm, u64 start, u64 size)
->  	if (drm_WARN_ON(&ptdev->base, vm->locked_region.size))
->  		return -EINVAL;
->  
-> +	down_read(&ptdev->protm.lock);
-> +
->  	mutex_lock(&ptdev->mmu->as.slots_lock);
->  	if (vm->as.id >= 0 && size) {
-> +		panthor_fw_protm_exit_sync(ptdev);
-> +
->  		/* Lock the region that needs to be updated */
->  		gpu_write64(ptdev, AS_LOCKADDR(vm->as.id),
->  			    pack_region_range(ptdev, &start, &size));
-> @@ -1720,6 +1725,9 @@ static int panthor_vm_lock_region(struct panthor_vm *vm, u64 start, u64 size)
->  	}
->  	mutex_unlock(&ptdev->mmu->as.slots_lock);
->  
-> +	if (ret)
-> +		up_read(&ptdev->protm.lock);
-
-Let's try to keep the locked section local to a function: the protm.lock
-should, IMHO, be taken/released in panthor_vm_exec_op(). If we go for
-that, this also makes the panthor_vm_lock_region() vs
-panthor_vm_expand_locked_region() distinction useless, though it's
-probably fine to keep it for clarity.
-
-> +
->  	return ret;
->  }
->  
-> @@ -1805,6 +1813,8 @@ static void panthor_vm_unlock_region(struct panthor_vm *vm)
->  	vm->locked_region.start = 0;
->  	vm->locked_region.size = 0;
->  	mutex_unlock(&ptdev->mmu->as.slots_lock);
-> +
-> +	up_read(&ptdev->protm.lock);
->  }
->  
->  static void panthor_mmu_irq_handler(struct panthor_device *ptdev, u32 status)
-> diff --git a/drivers/gpu/drm/panthor/panthor_sched.c b/drivers/gpu/drm/panthor/panthor_sched.c
-> index 987072bd867c4..acb04250c7def 100644
-> --- a/drivers/gpu/drm/panthor/panthor_sched.c
-> +++ b/drivers/gpu/drm/panthor/panthor_sched.c
-> @@ -308,6 +308,15 @@ struct panthor_scheduler {
->  		 */
->  		struct list_head stopped_groups;
->  	} reset;
-> +
-> +	/** @protm: Protected mode related fields. */
-> +	struct {
-> +		/** @protected_mode: True if GPU is in protected mode. */
-> +		bool protected_mode;
-
-nit: s/protected_mode/enabled/s. But do we even need that boolean?
-Isn't active_group != NULL providing the same info?
-
-> +
-> +		/** @active_group: The active protected group. */
-> +		struct panthor_group *active_group;
-> +	} protm;
->  };
->  
->  /**
-> @@ -570,6 +579,16 @@ struct panthor_group {
->  	/** @fatal_queues: Bitmask reflecting the queues that hit a fatal exception. */
->  	u32 fatal_queues;
->  
-> +	/**
-> +	 * @protm_pending_queues: Bitmask reflecting the queues that are waiting
-> +	 *                        on a CS_PROTM_PENDING.
-> +	 *
-> +	 * The GPU will set the bit associated to the queue pending protected mode
-> +	 * when a PROT_REGION command is executing or when trying to resume previously
-> +	 * suspended protected mode jobs.
-> +	 */
-> +	u32 protm_pending_queues;
-> +
->  	/** @tiler_oom: Mask of queues that have a tiler OOM event to process. */
->  	atomic_t tiler_oom;
->  
-> @@ -1176,6 +1195,7 @@ queue_resume_timeout(struct panthor_queue *queue)
->   * @ptdev: Device.
->   * @csg_id: Group slot ID.
->   * @cs_id: Queue slot ID.
-> + * @protm_ack: Acknowledge pending protected mode queues
->   *
->   * Program a queue slot with the queue information so things can start being
->   * executed on this queue.
-> @@ -1472,6 +1492,34 @@ csg_slot_prog_locked(struct panthor_device *ptdev, u32 csg_id, u32 priority)
->  	return 0;
->  }
->  
-> +static void
-> +cs_slot_process_protm_pending_event_locked(struct panthor_device *ptdev,
-> +					   u32 csg_id, u32 cs_id)
-> +{
-> +	struct panthor_scheduler *sched = ptdev->scheduler;
-> +	struct panthor_csg_slot *csg_slot = &sched->csg_slots[csg_id];
-> +	struct panthor_group *group = csg_slot->group;
-> +
-> +	lockdep_assert_held(&sched->lock);
-> +
-> +	if (!group)
-> +		return;
-> +
-> +	/* No protected memory heap, a user space program tried to
-> +	 * submit a protected mode jobs resulting in the GPU raising
-> +	 * a CS_PROTM_PENDING request.
-> +	 *
-> +	 * This scenario is invalid and the protected mode jobs must
-> +	 * not be allowed to progress.
-> +	 */
-> +	if (!ptdev->protm.heap)
-> +		return;
-
-Should we flag the group unusable when that happens and schedule it out
-as soon as possible?
-
-	if (!ptdev->protm.heap)
-		group->fatal_queues |= BIT(cs_id);
-	else
-		group->protm_pending_queues |= BIT(cs_id);
-
-	sched_queue_delayed_work(sched, tick, 0);
-
-> +
-> +	group->protm_pending_queues |= BIT(cs_id);
-> +
-> +	sched_queue_delayed_work(sched, tick, 0);
-> +}
-> +
->  static void
->  cs_slot_process_fatal_event_locked(struct panthor_device *ptdev,
->  				   u32 csg_id, u32 cs_id)
-> @@ -1718,6 +1766,9 @@ static bool cs_slot_process_irq_locked(struct panthor_device *ptdev,
->  	if (events & CS_TILER_OOM)
->  		cs_slot_process_tiler_oom_event_locked(ptdev, csg_id, cs_id);
->  
-> +	if (events & CS_PROTM_PENDING)
-> +		cs_slot_process_protm_pending_event_locked(ptdev, csg_id, cs_id);
-> +
->  	/* We don't acknowledge the TILER_OOM event since its handling is
->  	 * deferred to a separate work.
->  	 */
-> @@ -1848,6 +1899,17 @@ static void sched_process_idle_event_locked(struct panthor_device *ptdev)
->  	sched_queue_delayed_work(ptdev->scheduler, tick, 0);
->  }
->  
-> +static void sched_process_protm_exit_event_locked(struct panthor_device *ptdev)
-> +{
-> +	lockdep_assert_held(&ptdev->scheduler->lock);
-> +
-> +	/* Acknowledge the protm exit and schedule a tick. */
-> +	panthor_fw_protm_exit(ptdev);
-
-Let's just inline the content of panthor_fw_protm_exit() here.*
-It doesn't make sense to have all these indirections, especially
-since PROTM and scheduling are intertwined anyway, so I consider
-it part of the scheduler responsibility (just like the scheduler
-deals with other GLB events).
-
-The same goes for the other panthor_fw_protm_ helpers defined in
-panthor_fw.c, I think panthor_sched.c would be a better fit for
-those, or even inlining their content if they are only used in
-a single place.
-
-> +	sched_queue_delayed_work(ptdev->scheduler, tick, 0);
-> +	ptdev->scheduler->protm.protected_mode = false;
-> +	ptdev->scheduler->protm.active_group = NULL;
-> +}
-> +
->  /**
->   * sched_process_global_irq_locked() - Process the scheduling part of a global IRQ
->   * @ptdev: Device.
-> @@ -1863,6 +1925,9 @@ static void sched_process_global_irq_locked(struct panthor_device *ptdev)
->  	ack = READ_ONCE(glb_iface->output->ack);
->  	evts = (req ^ ack) & GLB_EVT_MASK;
->  
-> +	if (evts & GLB_PROTM_EXIT)
-> +		sched_process_protm_exit_event_locked(ptdev);
-> +
->  	if (evts & GLB_IDLE)
->  		sched_process_idle_event_locked(ptdev);
->  }
-> @@ -1872,23 +1937,71 @@ static void process_fw_events_work(struct work_struct *work)
->  	struct panthor_scheduler *sched = container_of(work, struct panthor_scheduler,
->  						      fw_events_work);
->  	u32 events = atomic_xchg(&sched->fw_events, 0);
-> +	u32 csg_events = events & ~JOB_INT_GLOBAL_IF;
->  	struct panthor_device *ptdev = sched->ptdev;
->  
->  	mutex_lock(&sched->lock);
->  
-> +	while (csg_events) {
-> +		u32 csg_id = ffs(csg_events) - 1;
-> +
-> +		sched_process_csg_irq_locked(ptdev, csg_id);
-> +		csg_events &= ~BIT(csg_id);
-> +	}
-
-I'm sure you have a good reason to re-order the processing
-of CSG and GLB events, and it'd be good to have it documented
-in a comment.
-
-> +
->  	if (events & JOB_INT_GLOBAL_IF) {
->  		sched_process_global_irq_locked(ptdev);
->  		events &= ~JOB_INT_GLOBAL_IF;
->  	}
->  
-> -	while (events) {
-> -		u32 csg_id = ffs(events) - 1;
-> +	mutex_unlock(&sched->lock);
-> +}
->  
-> -		sched_process_csg_irq_locked(ptdev, csg_id);
-> -		events &= ~BIT(csg_id);
-> +static void handle_protm_fault(struct panthor_device *ptdev)
-
-This is a bit of a misnomer, I think. It doesn't seem to be triggered
-by a FAULT event, it's more a timeout on a PROTM section that would
-lead to a reset being scheduled, and this "blocked-in-protm" situation
-being detected as part of the reset.
-
-> +{
-> +	struct panthor_scheduler *sched = ptdev->scheduler;
-> +	u32 csg_id;
-> +	struct panthor_group *protm_group;
-> +
-> +	guard(mutex)(&sched->lock);
-> +
-> +	if (!sched->protm.protected_mode)
-> +		return;
-> +
-> +	protm_group = sched->protm.active_group;
-> +
-> +	if (drm_WARN_ON(&ptdev->base, !protm_group))
-> +		return;
-
-See, that's a perfect example of sched->protm.protected_mode being redundant.
-Now you're left with a potential protected_mode=true,active_group=NULL
-inconsistency you don't expect.
-
-> +
-> +	/* Group will be terminated by the device reset */
-> +	protm_group->fatal_queues |= GENMASK(protm_group->queue_count - 1, 0);
-> +
-> +	if (!panthor_fw_protm_exit_wait_event_timeout(ptdev))
-> +		goto cleanup_protm;
-> +
-> +	/**
-> +	 * GPU failed to exit protected mode. Mark all non-protected mode CSGs
-
-	/* GPU failed to exit protected mode. Mark all non-protected mode CSGs
-
-> +	 * as suspended so that they are unaffected by the GPU reset.
-> +	 */
-> +
-> +	for (csg_id = 0; csg_id < sched->csg_slot_count; csg_id++) {
-> +		struct panthor_group *group = sched->csg_slots[csg_id].group;
-> +
-> +		if (!group || group == protm_group)
-> +			continue;
-> +
-> +		group->state = PANTHOR_CS_GROUP_SUSPENDED;
-> +
-> +		group_unbind_locked(group);
-> +
-> +		list_move(&group->run_node, group_is_idle(group) ?
-> +						&sched->groups.idle[group->priority] :
-> +						&sched->groups.runnable[group->priority]);
-
-nit: Let's use a local struct list_head * variable to select the right list.
-
->  	}
->  
-> -	mutex_unlock(&sched->lock);
-> +cleanup_protm:
-> +	sched->protm.protected_mode = false;
-> +	sched->protm.active_group = NULL;
->  }
->  
->  /**
-> @@ -2029,6 +2142,7 @@ struct panthor_sched_tick_ctx {
->  	bool immediate_tick;
->  	bool stop_tick;
->  	u32 csg_upd_failed_mask;
-> +	struct panthor_group *protm_group;
->  };
->  
->  static bool
-> @@ -2299,6 +2413,7 @@ tick_ctx_evict_group(struct panthor_scheduler *sched,
->  
->  static void
->  tick_ctx_reschedule_group(struct panthor_scheduler *sched,
-> +			  struct panthor_sched_tick_ctx *ctx,
->  			  struct panthor_csg_slots_upd_ctx *upd_ctx,
->  			  struct panthor_group *group,
->  			  int new_csg_prio)
-> @@ -2321,6 +2436,30 @@ tick_ctx_reschedule_group(struct panthor_scheduler *sched,
->  					csg_iface->output->ack ^ CSG_ENDPOINT_CONFIG,
->  					CSG_ENDPOINT_CONFIG);
->  	}
-> +
-> +	if (ctx->protm_group == group) {
-> +		for (u32 q = 0; q < group->queue_count; q++) {
-> +			struct panthor_fw_cs_iface *cs_iface;
-> +
-> +			if (!(group->protm_pending_queues & BIT(q)))
-> +				continue;
-> +
-> +			cs_iface = panthor_fw_get_cs_iface(ptdev, group->csg_id, q);
-> +			panthor_fw_update_reqs(cs_iface, req, cs_iface->output->ack,
-> +					       CS_PROTM_PENDING);
-> +		}
-> +
-> +		panthor_fw_toggle_reqs(csg_iface, doorbell_req, doorbell_ack,
-> +				       group->protm_pending_queues);
-> +		csgs_upd_ctx_ring_doorbell(upd_ctx, group->csg_id);
-> +		group->protm_pending_queues = 0;
-> +
-> +		/*
-> +		 * We only allow one protected group to run at same time,
-> +		 * as it makes it easier to handle faults in protected mode.
-
-It's more something to document in the panthor_scheduler::protm::active_group
-section.
-
-> +		 */
-> +		sched->protm.active_group = group;
-
-Would it make sense to move this logic to a tick_ctx_handle_protm_group()
-helper that's called before/after tick_ctx_reschedule_group()? This way
-there's no extra if (ctx->protm_group == group) conditional branch in here.
-
-
-static void
-tick_ctx_handle_protm_group(struct panthor_scheduler *sched,
-			    struct panthor_sched_tick_ctx *ctx,
- 			    struct panthor_csg_slots_upd_ctx *upd_ctx)
-{
-	struct panthor_device *ptdev = sched->ptdev;
-	struct panthor_group *group = ctx->protm_group;
-	struct panthor_fw_csg_iface *csg_iface;
-
-	if (!group || drm_WARN_ON(&ptdev->base, group->csg_id < 0))
-		return;
-
-	csg_iface = panthor_fw_get_csg_iface(ptdev, group->csg_id);
-	for (u32 q = 0; q < group->queue_count; q++) {
-		struct panthor_fw_cs_iface *cs_iface;
-
-		if (!(group->protm_pending_queues & BIT(q)))
-			continue;
-
-		cs_iface = panthor_fw_get_cs_iface(ptdev, group->csg_id, q);
-		panthor_fw_update_reqs(cs_iface, req, cs_iface->output->ack,
-				       CS_PROTM_PENDING);
-	}
-
-	panthor_fw_toggle_reqs(csg_iface, doorbell_req, doorbell_ack,
-			       group->protm_pending_queues);
-	csgs_upd_ctx_ring_doorbell(upd_ctx, group->csg_id);
-	group->protm_pending_queues = 0;
-	sched->protm.active_group = group;
-}
-
-> +	}
->  }
->  
->  static void
-> @@ -2336,6 +2475,17 @@ tick_ctx_schedule_group(struct panthor_scheduler *sched,
->  	group_bind_locked(group, csg_id);
->  	csg_slot_prog_locked(ptdev, csg_id, csg_prio);
->  
-> +	/* If the group was waiting for protected mode before suspension,
-> +	 * and the tick context enters this mode, it should be serviced
-> +	 * immediately because the slot reset should have set the
-> +	 * CS_PROTM_PENDING bit to zero, and cs_prog_slot_locked() sets it to
-> +	 * zero too.
-> +	 * It's not clear if we will get a new CS_PROTM_PENDING event in that
-> +	 * case, but it should be safe either way.
-> +	 */
-> +	if (group->protm_pending_queues && ctx->protm_group)
-> +		group->protm_pending_queues = 0;
-
-I'd move this to the path where we do the SUSPEND, or group_unbind(), even.
-
-> +
->  	csgs_upd_ctx_queue_reqs(ptdev, upd_ctx, csg_id,
->  				group->state == PANTHOR_CS_GROUP_SUSPENDED ?
->  				CSG_STATE_RESUME : CSG_STATE_START,
-> @@ -2365,7 +2515,7 @@ tick_ctx_apply(struct panthor_scheduler *sched, struct panthor_sched_tick_ctx *c
->  
->  		/* Update priorities on already running groups. */
->  		list_for_each_entry(group, &ctx->groups[prio], run_node) {
-> -			tick_ctx_reschedule_group(sched, &upd_ctx, group, new_csg_prio--);
-> +			tick_ctx_reschedule_group(sched, ctx, &upd_ctx, group, new_csg_prio--);
->  		}
->  	}
->  
-> @@ -2457,6 +2607,15 @@ tick_ctx_apply(struct panthor_scheduler *sched, struct panthor_sched_tick_ctx *c
->  
->  	sched->used_csg_slot_count = ctx->group_count;
->  	sched->might_have_idle_groups = ctx->idle_group_count > 0;
-> +
-> +	if (ctx->protm_group) {
-> +		ret = panthor_fw_protm_enter(ptdev);
-> +		if (ret) {
-> +			panthor_device_schedule_reset(ptdev);
-> +			ctx->csg_upd_failed_mask = U32_MAX;
-
-It's weird to flag it as all CSGs update failed. Should we instead
-have
-
-			/* If we failed to enter PROTM, consider the group who
-			 * requested it as failed.
-			 */
-			ctx->csg_upd_failed_mask |= BIT(ctx->protm_group->csg_id);
-
-> +		}
-> +		sched->protm.protected_mode = true;
-
-I'd move that to a tick_ctx_service_protm_req() helper that has the
-panthor_fw_protm_enter() inlined, because again, it doesn't make
-sense to have this defined in panthor_fw.c if the only user lives
-in panthor_sched.c
-
-> +	}
->  }
->  
->  static u64
-> @@ -2490,7 +2649,7 @@ static void tick_work(struct work_struct *work)
->  	u64 resched_target = sched->resched_target;
->  	u64 remaining_jiffies = 0, resched_delay;
->  	u64 now = get_jiffies_64();
-> -	int prio, ret, cookie;
-> +	int prio, protm_prio, ret, cookie;
->  	bool full_tick;
->  
->  	if (!drm_dev_enter(&ptdev->base, &cookie))
-> @@ -2564,14 +2723,49 @@ static void tick_work(struct work_struct *work)
->  		}
->  	}
->  
-> +	/* Check if the highest priority group want to switch to protected mode */
-> +	for (protm_prio = PANTHOR_CSG_PRIORITY_COUNT - 1; protm_prio >= 0; protm_prio--) {
-> +		struct panthor_group *group;
-> +
-> +		group = list_first_entry_or_null(&ctx.groups[protm_prio],
-> +						 struct panthor_group,
-> +						 run_node);
-> +		if (group) {
-> +			ctx.protm_group = group;
-> +			break;
-> +		}
-
-Should this be
-
-		if (group) {
-			if (group->protm_pending_queues)
-				ctx.protm_group = group;
-
-			break;
-		}
-
-?
-
-> +	}
-> +
->  	/* If we have free CSG slots left, pick idle groups */
-> -	for (prio = PANTHOR_CSG_PRIORITY_COUNT - 1;
-> -	     prio >= 0 && !tick_ctx_is_full(sched, &ctx);
-> -	     prio--) {
-
-How about we keep it a single indentation level and skip higher prios if
-PROTM is requested:
-
-		/* Pick only idle groups with equal or lower priority than the
-		 * group triggering protected mode. Do not bother picking
-		 * unscheduled idle groups.
-		 */
-		if (ctx.protm_group && prio < protm_prio)
-			continue;
-
-This saves us an indentation level and limits the code duplication.
-
-> -		/* Check the old_group queue first to avoid reprogramming the slots */
-> -		tick_ctx_pick_groups_from_list(sched, &ctx, &ctx.old_groups[prio], false, true);
-> -		tick_ctx_pick_groups_from_list(sched, &ctx, &sched->groups.idle[prio],
-> -					       false, false);
-> +	if (ctx.protm_group) {
-> +		/* Pick only idle groups with equal or lower priority than the
-> +		 * group triggering protected mode. Do not bother picking
-> +		 * unscheduled idle groups.
-> +		 */
-> +		for (prio = protm_prio;
-> +		     prio >= 0 && !tick_ctx_is_full(sched, &ctx);
-> +		     prio--)
-> +			tick_ctx_pick_groups_from_list(sched, &ctx,
-> +						       &ctx.old_groups[prio],
-> +						       false, true);
-> +	} else {
-> +		/* No switch to protected, just pick any idle group according
-> +		 * to priority
-> +		 */
-> +		for (prio = PANTHOR_CSG_PRIORITY_COUNT - 1;
-> +		     prio >= 0 && !tick_ctx_is_full(sched, &ctx);
-> +		     prio--) {
-> +			/* Check the old_group queue first to avoid
-> +			 * reprogramming the slots
-> +			 */
-> +			tick_ctx_pick_groups_from_list(sched, &ctx,
-> +						       &ctx.old_groups[prio],
-> +						       false, true);
-> +			tick_ctx_pick_groups_from_list(sched, &ctx,
-> +						       &sched->groups.idle[prio],
-> +						       false, false);
-> +		}
-> +
->  	}
->  
->  	tick_ctx_apply(sched, &ctx);
-> @@ -2993,6 +3187,8 @@ void panthor_sched_pre_reset(struct panthor_device *ptdev)
->  	cancel_work_sync(&sched->sync_upd_work);
->  	cancel_delayed_work_sync(&sched->tick_work);
->  
-> +	handle_protm_fault(ptdev);
-
-I actually wonder if this should be part of the panthor_sched_suspend()
-logic. That is, we would automatically flag all non-protm groups as
-suspended if the GPU was in PROTM mode at the time the hang happened.
-
-> +
->  	panthor_sched_suspend(ptdev);
->  
->  	/* Stop all groups that might still accept jobs, so we don't get passed
-
-Regards,
-
-Boris
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
