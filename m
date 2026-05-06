@@ -2,185 +2,353 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wMqLDO1fBGqiHQIAu9opvQ
+	id IH+mHvRfBGqiHQIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:26:37 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:26:44 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED7FA532368
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:26:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1C76953236F
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:26:44 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8DF3C3F91B
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 11:26:35 +0000 (UTC)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
-	by lists.linaro.org (Postfix) with ESMTPS id 024013F72F
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  6 May 2026 09:02:24 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3219E4043A
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 11:26:43 +0000 (UTC)
+Received: from bali.collaboradmins.com (bali.collaboradmins.com [148.251.105.195])
+	by lists.linaro.org (Postfix) with ESMTPS id 54DA33F7E9
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  6 May 2026 09:15:03 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=h1GbVy5Q;
-	dmarc=pass (policy=none) header.from=gmail.com;
-	spf=pass (lists.linaro.org: domain of asml.silence@gmail.com designates 209.85.128.45 as permitted sender) smtp.mailfrom=asml.silence@gmail.com
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-48e56c1bf5dso887965e9.3
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 06 May 2026 02:02:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1778058143; x=1778662943; darn=lists.linaro.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=mmaZWXsqMxYY1SXzoardDG6u5dyIRaJ/iULJJHwbN+E=;
-        b=h1GbVy5QfLPRh6SeMd0FA2vMmg0uYkeQ9INGK5feJPGQRQ0izqp1c6S7SPMvSBjgr1
-         NhMhOXKYPfCsdclW1u3QTUxvq8biC5tqc0mpxDhnab7T9o3Pp22QmstPHO6SD1lptwrN
-         rydB76qoSkFvIvPcLxIVVeIt4xAGSeviwHoXbE350Te1rSZd6YN8IpAh9WL2JvDwzX0H
-         kzm2P5jLJVoQx1vNitmg5dQfSI8FBsALqXroVVAj9hGUoiDMokWTXZjx59BOKqRLcqA/
-         eYmNQ16AuhIjXjPT9qq/JQiBFslyLqEixm465XC5guH7rTTg7f8TGF+M2Dvr5JjONYbv
-         016w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778058143; x=1778662943;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=mmaZWXsqMxYY1SXzoardDG6u5dyIRaJ/iULJJHwbN+E=;
-        b=ojZzqS9TesKPh9CETKSTzRCWytyPNuVxtf+xpbGnXualszYMpSLwNZoY7tpsX/KJAY
-         nAKue6VwZjLEHEQVXAbUZsRBnnaFOttk5z666g9fWGPxLJF5wBtFZmONPU0whS5733+X
-         Co105ehkNckbtll+KOp5bWO/9VdphbDQoifkRyvNmkKpQPM+6TlTzWwJyBwGyMQo3Yd/
-         fci1y81JPtbfTIPBNFSFni2PjGiy2cKdl+TbvR756NR/vJAb1J6St4htRRmH4hXMP2im
-         lF2GhP5zT0hrZ//Xa13IteAp1JpReAuI0gtSkIKNW9dtVCl18TAHQwf8srHAm7vYrmLB
-         fUTA==
-X-Forwarded-Encrypted: i=1; AFNElJ86Iek3yixBb47mlFDko06x7HNiF4ZkY+R5xeSv7jGxV2GW7YW8//X9BuEpEW7/T7x8S/d2AgMtZjsEdqY4@lists.linaro.org
-X-Gm-Message-State: AOJu0Ywo/uV/PLNc5humwGg94HTrCCQ2NAKPR3QH8yoez8QjhJr//vit
-	393pq1GExGYSixPcrPUoMjDsXeUDYENslni2X8HDWQG7Crc728TjTPL7
-X-Gm-Gg: AeBDieuQFPh0dVxMD84TJsradSfn7lH8cjOo9PfqlOvP5qPaHeeOD0wxFw6RrHpgLqi
-	2ZMwO0wa14+KW5gyYI4cv1UkWkqpG4E2zXaRLyOWw1WtmfWKp9NY4zEytJGU4abnQ9+iDutIg3v
-	x+p5pqXm0zISG1+d8b93mq8yEwlKJmTpI4COXUt5pNjlFCJ+9gxEZDWnilVp3F5/Ir63qAv1GHD
-	5m+QIU5MiEWnMNAI34BWkfwyF0/0IWMZgTg1c9AkXovchQtRXQpAZJywT/Pis4OE5A8EZ/0sQMH
-	j/a0U+xal95pVT/vTRosNUvpt71v4KZP2+eGsmLNvUlC7i2GtTjRpj7WE3Zph3Hj7mDOhU0AuYN
-	vOjNnkc8Emzhfbr1WjpjPo2hITYdZcRQEADKfP63ZxIlMI1JzM/yYCnxxHOlDqDTEeyiTxb3mTX
-	iksSbNE0UdDR5OuXZt/J+37FHsx8BkYBSt+tTB4idTC2R/Z7mpWP4IZAu3kr41XM1RH5V6tW3ho
-	dhbQIvVPptVLhcqvn5qyR3HX+Sh1YChkobARYdOxA==
-X-Received: by 2002:a05:600c:2e0c:b0:489:1c2d:211e with SMTP id 5b1f17b1804b1-48e51e0c833mr25734095e9.5.1778058142476;
-        Wed, 06 May 2026 02:02:22 -0700 (PDT)
-Received: from [10.109.92.22] ([86.33.71.194])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48e52f5c1cfsm21365215e9.0.2026.05.06.02.02.20
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 06 May 2026 02:02:21 -0700 (PDT)
-Message-ID: <6873d617-c904-45f3-bad9-e1ae39cfecd2@gmail.com>
-Date: Wed, 6 May 2026 10:02:11 +0100
+	dkim=pass header.d=collabora.com header.s=mail header.b=DVsaldBt;
+	dmarc=pass (policy=none) header.from=collabora.com;
+	spf=pass (lists.linaro.org: domain of boris.brezillon@collabora.com designates 148.251.105.195 as permitted sender) smtp.mailfrom=boris.brezillon@collabora.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+	s=mail; t=1778058901;
+	bh=06C2qHH59OhXzqVMBdMq/suIja8tImr+yasYlUa5fI8=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=DVsaldBtO6Cm41DSMAvyFjU2Qn9rmDgR+Tv/wv7rF8hnNrvb5wffdwNG3nrbHUNBl
+	 2IW12heqWSfFUGLOoFx3+nq+LcBcolYjNeUKURcdBfh0XBCSG9nTNnpBwmORWeNpCQ
+	 pGAVT2ViRzhK4qj8NQopsGR8QcMwbXWDfbXliWKoxOdNJnMi7ythH4QYOMf/sZVV7q
+	 MLWscdAGpmjrrZIuvwG0dAwFi2SGU1hXIopcX5Et59FVo/IHPLRMt6VAyRZkbSa/fN
+	 Fwiqcscz2IhFU5YVzMqMpOFe0nGE1zPxHWp9mdjWJfFGgdCupCp8Y3NL3F3urgynhG
+	 DCAhfAb/K9/aQ==
+Received: from fedora (unknown [100.64.0.11])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: bbrezillon)
+	by bali.collaboradmins.com (Postfix) with ESMTPSA id CD44617E1525;
+	Wed,  6 May 2026 11:15:00 +0200 (CEST)
+Date: Wed, 6 May 2026 11:14:56 +0200
+From: Boris Brezillon <boris.brezillon@collabora.com>
+To: Ketil Johnsen <ketil.johnsen@arm.com>
+Message-ID: <20260506111456.70721b13@fedora>
+In-Reply-To: <20260505140516.1372388-9-ketil.johnsen@arm.com>
+References: <20260505140516.1372388-1-ketil.johnsen@arm.com>
+	<20260505140516.1372388-9-ketil.johnsen@arm.com>
+Organization: Collabora
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Ming Lei <tom.leiming@gmail.com>
-References: <cover.1777475843.git.asml.silence@gmail.com>
- <afi7c-VUJWOLlC1m@fedora>
-Content-Language: en-US
-From: Pavel Begunkov <asml.silence@gmail.com>
-In-Reply-To: <afi7c-VUJWOLlC1m@fedora>
 X-Spamd-Bar: ---
-X-MailFrom: asml.silence@gmail.com
+X-MailFrom: boris.brezillon@collabora.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 6UNT3QBPZIETVLSXFKJQARKME46IJGHK
-X-Message-ID-Hash: 6UNT3QBPZIETVLSXFKJQARKME46IJGHK
+Message-ID-Hash: 3RTPH2RTM7OCBKXELQQZYTBTRKQ5S5ET
+X-Message-ID-Hash: 3RTPH2RTM7OCBKXELQQZYTBTRKQ5S5ET
 X-Mailman-Approved-At: Wed, 13 May 2026 11:22:19 +0000
-CC: Jens Axboe <axboe@kernel.dk>, Keith Busch <kbusch@kernel.org>, Christoph Hellwig <hch@lst.de>, Sagi Grimberg <sagi@grimberg.me>, Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Andrew Morton <akpm@linux-foundation.org>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, linux-nvme@lists.infradead.org, linux-fsdevel@vger.kernel.org, io-uring@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Nitesh Shetty <nj.shetty@samsung.com>, Kanchan Joshi <joshi.k@samsung.com>, Anuj Gupta <anuj20.g@samsung.com>, Tushar Gohad <tushar.gohad@intel.com>, William Power <william.power@intel.com>, Phil Cayton <phil.cayton@intel.com>, Jason Gunthorpe <jgg@nvidia.com>
+CC: David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Steven Price <steven.price@arm.com>, Liviu Dudau <liviu.dudau@arm.com>, Daniel Almeida <daniel.almeida@collabora.com>, Alice Ryhl <aliceryhl@google.com>, Matthias Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-arm-kernel@lists.infradead.org, l
+ inux-mediatek@lists.infradead.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3 00/10] Add dmabuf read/write via io_uring
+Subject: [Linaro-mm-sig] Re: [PATCH 8/8] drm/panthor: Expose protected rendering features
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6UNT3QBPZIETVLSXFKJQARKME46IJGHK/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3RTPH2RTM7OCBKXELQQZYTBTRKQ5S5ET/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: ED7FA532368
+X-Rspamd-Queue-Id: 1C76953236F
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [2.09 / 15.00];
+X-Spamd-Result: default: False [3.59 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	DATE_IN_PAST(1.00)[170];
+	R_DKIM_REJECT(1.00)[collabora.com:s=mail];
+	MID_RHS_NOT_FQDN(0.50)[];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[collabora.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_TO(0.00)[gmail.com];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCPT_COUNT_TWELVE(0.00)[25];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	FROM_NEQ_ENVFROM(0.00)[asmlsilence@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
+	RCPT_COUNT_TWELVE(0.00)[27];
+	MIME_TRACE(0.00)[0:+];
+	HAS_ORG_HEADER(0.00)[];
+	ARC_NA(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.088];
+	NEURAL_HAM(-0.00)[-0.587];
+	FROM_NEQ_ENVFROM(0.00)[boris.brezillon@collabora.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de,lwn.net,linuxfoundation.org,linaro.org,collabora.com,arm.com,google.com,amd.com,lists.freedesktop.org,vger.kernel.org,lists.linaro.org,lists.infradead.org];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
+	DKIM_TRACE(0.00)[collabora.com:-];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[arm.com:email,lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
 X-Rspamd-Action: no action
 
-Hey Ming,
+On Tue,  5 May 2026 16:05:14 +0200
+Ketil Johnsen <ketil.johnsen@arm.com> wrote:
 
-On 5/4/26 16:29, Ming Lei wrote:
-> On Wed, Apr 29, 2026 at 04:25:46PM +0100, Pavel Begunkov wrote:
->> The patch set allows to register a dmabuf to an io_uring instance for
->> a specified file and use it with io_uring read / write requests. The
->> infrastructure is not tied to io_uring and there could be more users
->> in the future. A similar idea was attempted some years ago by Keith [1],
->> from where I borrowed a good number of changes, and later was brough up
->> by Tushar and Vishal from Intel.
->>
->> It's an opt-in feature for files, and they need to implement a new
->> file operation to use it. Only NVMe block devices are supported in this
->> series. The user API is built on top of io_uring's "registered buffers",
->> where a dmabuf is registered in a special way, but after it can be used
->> as any other "registered buffer" with IORING_OP_{READ,WRITE}_FIXED
->> requests. It's created via a new file operation and the resulted map is
->> then passed through the I/O stack in a new iterator type. There is some
->> additional infrastructure to bind it all, which also counts requests
->> using a dmabuf map and managing lifetimes, which is used to implement
->> map invalidation.
->>
->> It was tested for GPU <-> NVMe transfers. Also, as it maintains a
->> long-term dma mapping, it helps with the IOMMU cost. The numbers
->> below are for udmabuf reads previously run by Anuj for different
->> IOMMU modes:
+> Add query for protected rendering capability.
+> Add flag to group creation to specify need for protected rendering.
+> Bump panthor version number.
 > 
-> Plain registered buffer is long-live too, which raises question: does this
-> framework need to take it into account from beginning?
+> Signed-off-by: Ketil Johnsen <ketil.johnsen@arm.com>
+> ---
+>  drivers/gpu/drm/panthor/panthor_drv.c   | 21 +++++++++++-
+>  drivers/gpu/drm/panthor/panthor_sched.c | 21 +++++++-----
+>  include/uapi/drm/panthor_drm.h          | 45 +++++++++++++++++++++++--
+>  3 files changed, 76 insertions(+), 11 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/panthor/panthor_drv.c b/drivers/gpu/drm/panthor/panthor_drv.c
+> index 73fc983dc9b44..817df17f31f15 100644
+> --- a/drivers/gpu/drm/panthor/panthor_drv.c
+> +++ b/drivers/gpu/drm/panthor/panthor_drv.c
+> @@ -177,6 +177,7 @@ panthor_get_uobj_array(const struct drm_panthor_obj_array *in, u32 min_stride,
+>  		 PANTHOR_UOBJ_DECL(struct drm_panthor_csif_info, pad), \
+>  		 PANTHOR_UOBJ_DECL(struct drm_panthor_timestamp_info, current_timestamp), \
+>  		 PANTHOR_UOBJ_DECL(struct drm_panthor_group_priorities_info, pad), \
+> +		 PANTHOR_UOBJ_DECL(struct drm_panthor_protected_info, features), \
+>  		 PANTHOR_UOBJ_DECL(struct drm_panthor_sync_op, timeline_value), \
+>  		 PANTHOR_UOBJ_DECL(struct drm_panthor_queue_submit, syncs), \
+>  		 PANTHOR_UOBJ_DECL(struct drm_panthor_queue_create, ringbuf_size), \
+> @@ -928,12 +929,20 @@ static void panthor_query_group_priorities_info(struct drm_file *file,
+>  	}
+>  }
+>  
+> +static void panthor_query_protected_info(struct panthor_device *ptdev,
+> +					 struct drm_panthor_protected_info *arg)
+> +{
+> +	arg->features =
+> +		ptdev->protm.heap ? DRM_PANTHOR_PROTECTED_FEATURE_BASIC : 0;
+> +}
+> +
+>  static int panthor_ioctl_dev_query(struct drm_device *ddev, void *data, struct drm_file *file)
+>  {
+>  	struct panthor_device *ptdev = container_of(ddev, struct panthor_device, base);
+>  	struct drm_panthor_dev_query *args = data;
+>  	struct drm_panthor_timestamp_info timestamp_info;
+>  	struct drm_panthor_group_priorities_info priorities_info;
+> +	struct drm_panthor_protected_info protected_info;
+>  	int ret;
+>  
+>  	if (!args->pointer) {
+> @@ -954,6 +963,10 @@ static int panthor_ioctl_dev_query(struct drm_device *ddev, void *data, struct d
+>  			args->size = sizeof(priorities_info);
+>  			return 0;
+>  
+> +		case DRM_PANTHOR_DEV_QUERY_PROTECTED_INFO:
+> +			args->size = sizeof(protected_info);
+> +			return 0;
+> +
+>  		default:
+>  			return -EINVAL;
+>  		}
+> @@ -984,6 +997,11 @@ static int panthor_ioctl_dev_query(struct drm_device *ddev, void *data, struct d
+>  		panthor_query_group_priorities_info(file, &priorities_info);
+>  		return PANTHOR_UOBJ_SET(args->pointer, args->size, priorities_info);
+>  
+> +	case DRM_PANTHOR_DEV_QUERY_PROTECTED_INFO:
+> +		panthor_query_protected_info(ptdev, &protected_info);
+> +		return PANTHOR_UOBJ_SET(args->pointer, args->size,
+> +					protected_info);
+> +
+>  	default:
+>  		return -EINVAL;
+>  	}
+> @@ -1779,6 +1797,7 @@ static void panthor_debugfs_init(struct drm_minor *minor)
+>   *       - adds DRM_IOCTL_PANTHOR_BO_QUERY_INFO ioctl
+>   *       - adds drm_panthor_gpu_info::selected_coherency
+>   * - 1.8 - extends DEV_QUERY_TIMESTAMP_INFO with flags
+> + * - 1.9 - adds DEV_QUERY_PROTECTED_INFO query
 
-Not sure I follow, mind expanding on what should be accounted?
-Are you suggesting that we might want to use normal registered
-buffers in a similar way? I.e. giving the driver an ability to
-pre-register them?
+It's adding more than just DEV_QUERY_PROTECTED_INFO (it also adds a new
+flags field to group_create and a flag that tells that the group intends
+to use protected mode).
 
-> BTW, inspired by this approach, I adds similar feature to ublk via UBLK_IO_F_SHMEM_ZC
-> which can maintain long-term vfio dma mapping over registered user-place aligned buffer.
+>   */
+>  static const struct drm_driver panthor_drm_driver = {
+>  	.driver_features = DRIVER_RENDER | DRIVER_GEM | DRIVER_SYNCOBJ |
+> @@ -1792,7 +1811,7 @@ static const struct drm_driver panthor_drm_driver = {
+>  	.name = "panthor",
+>  	.desc = "Panthor DRM driver",
+>  	.major = 1,
+> -	.minor = 8,
+> +	.minor = 9,
+>  
+>  	.gem_prime_import_sg_table = panthor_gem_prime_import_sg_table,
+>  	.gem_prime_import = panthor_gem_prime_import,
+> diff --git a/drivers/gpu/drm/panthor/panthor_sched.c b/drivers/gpu/drm/panthor/panthor_sched.c
+> index acb04250c7def..0e8a1059de589 100644
+> --- a/drivers/gpu/drm/panthor/panthor_sched.c
+> +++ b/drivers/gpu/drm/panthor/panthor_sched.c
+> @@ -3868,6 +3868,7 @@ static void add_group_kbo_sizes(struct panthor_device *ptdev,
+>  }
+>  
+>  #define MAX_GROUPS_PER_POOL		128
+> +#define GROUP_CREATE_FLAGS DRM_PANTHOR_GROUP_CREATE_PROTECTED
+>  
+>  int panthor_group_create(struct panthor_file *pfile,
+>  			 const struct drm_panthor_group_create *group_args,
+> @@ -3882,10 +3883,10 @@ int panthor_group_create(struct panthor_file *pfile,
+>  	u32 gid, i, suspend_size;
+>  	int ret;
+>  
+> -	if (group_args->pad)
+> +	if (group_args->priority >= PANTHOR_CSG_PRIORITY_COUNT)
+>  		return -EINVAL;
+>  
+> -	if (group_args->priority >= PANTHOR_CSG_PRIORITY_COUNT)
+> +	if (group_args->flags & ~GROUP_CREATE_FLAGS)
+>  		return -EINVAL;
+>  
+>  	if ((group_args->compute_core_mask & ~ptdev->gpu_info.shader_present) ||
+> @@ -3937,12 +3938,16 @@ int panthor_group_create(struct panthor_file *pfile,
+>  		goto err_put_group;
+>  	}
+>  
+> -	suspend_size = csg_iface->control->protm_suspend_size;
+> -	group->protm_suspend_buf = panthor_fw_alloc_protm_suspend_buf_mem(ptdev, suspend_size);
+> -	if (IS_ERR(group->protm_suspend_buf)) {
+> -		ret = PTR_ERR(group->protm_suspend_buf);
+> -		group->protm_suspend_buf = NULL;
+> -		goto err_put_group;
+> +	if (group_args->flags & DRM_PANTHOR_GROUP_CREATE_PROTECTED) {
+> +		suspend_size = csg_iface->control->protm_suspend_size;
+> +		group->protm_suspend_buf =
+> +			panthor_fw_alloc_protm_suspend_buf_mem(ptdev,
+> +							       suspend_size);
+> +		if (IS_ERR(group->protm_suspend_buf)) {
+> +			ret = PTR_ERR(group->protm_suspend_buf);
+> +			group->protm_suspend_buf = NULL;
+> +			goto err_put_group;
+> +		}
+>  	}
+>  
+>  	group->syncobjs = panthor_kernel_bo_create(ptdev, group->vm,
+> diff --git a/include/uapi/drm/panthor_drm.h b/include/uapi/drm/panthor_drm.h
+> index 0e455d91e77d4..914110003bcd1 100644
+> --- a/include/uapi/drm/panthor_drm.h
+> +++ b/include/uapi/drm/panthor_drm.h
+> @@ -253,6 +253,11 @@ enum drm_panthor_dev_query_type {
+>  	 * @DRM_PANTHOR_DEV_QUERY_GROUP_PRIORITIES_INFO: Query allowed group priorities information.
+>  	 */
+>  	DRM_PANTHOR_DEV_QUERY_GROUP_PRIORITIES_INFO,
+> +
+> +	/**
+> +	 * @DRM_PANTHOR_DEV_QUERY_PROTECTED_INFO: Query supported protected rendering information.
+> +	 */
+> +	DRM_PANTHOR_DEV_QUERY_PROTECTED_INFO,
+>  };
+>  
+>  /**
+> @@ -504,6 +509,28 @@ struct drm_panthor_group_priorities_info {
+>  	__u8 pad[3];
+>  };
+>  
+> +/**
+> + * enum drm_panthor_protected_feature_flags - Supported protected rendering features
 
-Interesting, just too a glance, and it looks like what David Wei
-was thinking to add to fuse, but IIUC he gave up exactly because the
-client will need to cooperate and that could be troublesome.
+Protected rendering is a bit vague, especially since it's usually
+referred as protected memory/content in graphics APIs. Maybe we should
+have a short paragraph explaining what we mean by that (access of
+protected memory from the GPU).
 
-Should we try to push everything under the same interface instead of
-keeping a ublk specific one? Again to the point that it requires
-a cooperative client, but if it's something more generic, the user
-might just try to use it as a general optimisation. In the same way
-it'll be helpful to fuse, and as a bonus you wouldn't need tree look
-ups (but mandates clients using registered buffers as a downside).
+> + *
+> + * Place new types at the end, don't re-order, don't remove or replace.
+> + */
+> +enum drm_panthor_protected_feature_flags {
+> +	/** @DRM_PANTHOR_PROTECTED_FEATURE_BASIC: Protected rendering available */
+> +	DRM_PANTHOR_PROTECTED_FEATURE_BASIC = 1 << 0,
 
-It'd need to shaped to somehow work better with host memory as I
-assume you want to be able to map it into server in common case.
-Switch case'ing if it's a udmabuf is not the greatest approach,
-but maybe we can figure out something else.
-  
--- 
-Pavel Begunkov
+I'm not a huge fan of this _BASIC specifier, since it doesn't
+tell much about the actual implementation, and what the UMD
+has to do to access protected memory from the GPU. Given the
+feature/CS-instruction is named _PROTM, I'd go for
+
+	/**
+	 * @DRM_PANTHOR_PROTECTED_FEATURE_PROTM: Protected memory access
+	 * based on PROTM CS instructions
+	 *
+	 * This is currently the only option to access protected
+	 * memory from the GPU. Other modes or advanced features might
+	 * be added at some point.
+	 */
+	DRM_PANTHOR_PROTECTED_FEATURE_PROTM = 1 << 0,
+> +};
+> +
+> +/**
+> + * struct drm_panthor_protected_info - protected support information
+> + *
+> + * Structure grouping all queryable information relating to the allowed group priorities.
+> + */
+> +struct drm_panthor_protected_info {
+> +	/**
+> +	 * @features: Combination of enum drm_panthor_protected_feature_flags flags.
+> +	 */
+> +	__u32 features;
+> +};
+> +
+>  /**
+>   * struct drm_panthor_dev_query - Arguments passed to DRM_PANTHOR_IOCTL_DEV_QUERY
+>   */
+> @@ -843,6 +870,18 @@ enum drm_panthor_group_priority {
+>  	PANTHOR_GROUP_PRIORITY_REALTIME,
+>  };
+>  
+> +/**
+> + * enum drm_panthor_group_create_flags - Group create flags
+> + */
+> +enum drm_panthor_group_create_flags {
+
+s/drm_panthor_group_create_flags/drm_panthor_group_feature_flags/
+
+> +	/**
+> +	 * @DRM_PANTHOR_GROUP_CREATE_PROTECTED: Support protected mode
+> +	 *
+> +	 * Enable protected rendering work to be executed on this group.
+> +	 */
+> +	DRM_PANTHOR_GROUP_CREATE_PROTECTED = 1 << 0,
+
+I'd go directly DRM_PANTHOR_GROUP_FEATURE_PROTM, since this is the
+instruction the group will use to enter protected mode. If we ever have
+multiple ways to do protected rendering, I guess it would materialize
+as a different flag, allowing the KMD to know exactly the way
+protected rendering is going to be done.
+
+> +};
+> +
+>  /**
+>   * struct drm_panthor_group_create - Arguments passed to DRM_IOCTL_PANTHOR_GROUP_CREATE
+>   */
+> @@ -877,8 +916,10 @@ struct drm_panthor_group_create {
+>  	/** @priority: Group priority (see enum drm_panthor_group_priority). */
+>  	__u8 priority;
+>  
+> -	/** @pad: Padding field, MBZ. */
+> -	__u32 pad;
+> +	/**
+> +	 * @flags: Flags. Must be a combination of drm_panthor_group_create_flags flags.
+> +	 */
+> +	__u32 flags;
+>  
+>  	/**
+>  	 * @compute_core_mask: Mask encoding cores that can be used for compute jobs.
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
