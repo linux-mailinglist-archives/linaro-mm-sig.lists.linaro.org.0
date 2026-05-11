@@ -2,69 +2,134 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id oLFbFu6ZAWpxfwEAu9opvQ
+	id aPSIFe2OAWpyeAEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 11 May 2026 10:57:18 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 11 May 2026 10:10:21 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id D0BCF50A731
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 11 May 2026 10:57:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CC47C509DC6
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 11 May 2026 10:10:20 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4D1143F77C
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 11 May 2026 08:57:16 +0000 (UTC)
-Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com [136.143.188.112])
-	by lists.linaro.org (Postfix) with ESMTPS id 10DB53EC66
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 11 May 2026 08:57:05 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 2579B3F7F1
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 11 May 2026 08:01:51 +0000 (UTC)
+Received: from PH0PR06CU001.outbound.protection.outlook.com (mail-westus3azon11011029.outbound.protection.outlook.com [40.107.208.29])
+	by lists.linaro.org (Postfix) with ESMTPS id ED7CB3F743
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 11 May 2026 08:01:06 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=collabora.com header.s=zohomail header.b=YCSMJhEt;
-	arc=pass ("zohomail.com:s=zohoarc:i=1");
-	spf=pass (lists.linaro.org: domain of dmitry.osipenko@collabora.com designates 136.143.188.112 as permitted sender) smtp.mailfrom=dmitry.osipenko@collabora.com;
-	dmarc=pass (policy=none) header.from=collabora.com
-ARC-Seal: i=1; a=rsa-sha256; t=1778447473; cv=none;
-	d=zohomail.com; s=zohoarc;
-	b=m3hSG6VFA+VMKYC8uPHLLw+wZYxxe9fYN8ypjfVbDkigy4DKmO12uvbuxZ3FA8D9y/0lm5vQ5OwZGGw1ObfkaViBdz4nbuhTQz1UErSc1BYMDopo+8iqO1y/SUo8M0FGHNvX8HsXT+WCTOpcqw8B6Tdofyd0OQF2VKyfjR2A0uQ=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc;
-	t=1778447473; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
-	bh=dC+SQBvHA00jKA55ndpglBB83kxP2d4e2FYSPidsICs=;
-	b=kkSx1L5UJJ8bV7RIPevje+2oDORYVMfNuawEG5Afp4WyPIIOSuyYG3WIqfa+KTecYPxOpSgT+8wsL5YPULdy7JMqCtvnH5M3AykccFeLitMf7V+SmxgF8eqlEp9S3B2vGBWgh5MeJfNzvTAl4XBe3FZu47FgNLWmp1ScgpsyOiY=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=collabora.com;
-	spf=pass  smtp.mailfrom=dmitry.osipenko@collabora.com;
-	dmarc=pass header.from=<dmitry.osipenko@collabora.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1778447473;
-	s=zohomail; d=collabora.com; i=dmitry.osipenko@collabora.com;
-	h=Message-ID:Date:Date:MIME-Version:Subject:Subject:To:To:Cc:Cc:References:From:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
-	bh=dC+SQBvHA00jKA55ndpglBB83kxP2d4e2FYSPidsICs=;
-	b=YCSMJhEtdE86ILIB75QrvWALkfFwT7oSr+tZzZkTC8HGMiTMuOoDVMOfWxkzDc+l
-	nrxJLX92/a4dI86I+cXxe1KfyKnDXJfBep7BXqWhPA/rHIU2kUe6aTdHE4GlDhrYauL
-	YhQVdOa4/Wpwx1RYBH8K31mtabAXxEntI2AY4jaE=
-Received: by mx.zohomail.com with SMTPS id 1778447470381353.01025610308295;
-	Sun, 10 May 2026 14:11:10 -0700 (PDT)
-Message-ID: <e1741cf2-3416-4464-bcae-741f0c87448b@collabora.com>
-Date: Mon, 11 May 2026 00:11:03 +0300
-MIME-Version: 1.0
+	dkim=pass header.d=amd.com header.s=selector1 header.b="jrQ0/JCz";
+	arc=pass ("microsoft.com:s=arcselector10001:i=1");
+	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.107.208.29 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
+	dmarc=pass (policy=quarantine) header.from=amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=oXgP1t9/dp+0E6dnYz30AJDn6z+wAhu0qcPHMQfr187we7VT6WL08Puk8je7j0W2QzmetV2QmYcH6FwSNf4uReE5vFLwQvei8Bd0sMqHijfXwaupd0fm3dEv0fndTCWyWmFyqxuz4lv9UzL2i9SCS2OCz24lzbB75C2tI7ZrYX1VdtUzjvrPdVVLBVPKjLhrvy63iwy2w0o10mvKw3bzjW/EPfpfz4azsOLHiyGXcz1yhi5NfGVoVzyOcdZ5+d7xviehwBfh38UKhPtYFkkd7hv+PGNgPZHJem1Zim5qZ2+Wh/QkH2nxnhqZNFq48b5w48tckdAKEuQdSPLtyc4lhA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=5rppOxq2Mtt32OGnFm3KicpVEIjX0RT4JcTooZuqStU=;
+ b=AWPD3G0ivDho9TRsft6kknfCktV3Sthj0Ieo4omKYwKnRsdgFupEvzYACZW6haGPhaKmLlzZ1zwtjTGLCQJQqZiOBfdHMkZAxrmAalXYut34GML/A0R0hz2iR6zTCgosgt8dzTlh5xcyvPJqcgCmtjyIBFQFG10DnWFrjYTsoylsGv+1NGlxEP1uYF+1r5aCtGeWKVy93AUkdi8xNO3vREOdeP237D0xWv/vJGE7Oe3noxEn5iegUCZvIrdjyew7sO6CztKSyDdzeWfD9bh2xaR2jrnXidivmRManz5WOabbn9NpCfQerigitTDXlbPJ93MMGakIMd1+DSEfYMF1Wg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=5rppOxq2Mtt32OGnFm3KicpVEIjX0RT4JcTooZuqStU=;
+ b=jrQ0/JCzl5sGK60rRSTAcfl8KU6SFL30oCe2nh7OQj4NWedPvKaGQcTqNbCW51URd7pnSDgEXYD0VXO92/HO9pMorSRCblz/5qPBExNg9QNndF4cc7tSYuSG5dPcriaofk6xhBJlsokZvTY+ROsXKS6dWJUAhi999pSygNe/C+U=
+Received: from PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
+ by CH1PPFC908D89D1.namprd12.prod.outlook.com (2603:10b6:61f:fc00::623) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.21; Mon, 11 May
+ 2026 07:39:55 +0000
+Received: from PH7PR12MB5685.namprd12.prod.outlook.com
+ ([fe80::ce69:cfae:774d:a65c]) by PH7PR12MB5685.namprd12.prod.outlook.com
+ ([fe80::ce69:cfae:774d:a65c%5]) with mapi id 15.20.9891.020; Mon, 11 May 2026
+ 07:39:55 +0000
+Message-ID: <14b62cee-c46e-4fb9-91ab-aa09c0962834@amd.com>
+Date: Mon, 11 May 2026 09:39:38 +0200
 User-Agent: Mozilla Thunderbird
-To: Deepanshu Kartikey <kartikey406@gmail.com>, airlied@redhat.com,
- kraxel@redhat.com, gurchetansingh@chromium.org, olvaffe@gmail.com,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de,
- simona@ffwll.ch, sumit.semwal@linaro.org, christian.koenig@amd.com
-References: <20260510053025.100224-1-kartikey406@gmail.com>
+To: Ziyi Guo <guoziyi114@gmail.com>, maciej.falkowski@linux.intel.com,
+ karol.wachowski@linux.intel.com, jacek.lawrynowicz@linux.intel.com
+References: <20260508162856.1131843-1-n7l8m4@u.northwestern.edu>
 Content-Language: en-US
-From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
-In-Reply-To: <20260510053025.100224-1-kartikey406@gmail.com>
-X-ZohoMailClient: External
-X-Spamd-Bar: -----
-Message-ID-Hash: KNAXHLUAFKWOCE6GOMXC4ZY4DGEYFPEM
-X-Message-ID-Hash: KNAXHLUAFKWOCE6GOMXC4ZY4DGEYFPEM
-X-MailFrom: dmitry.osipenko@collabora.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: dri-devel@lists.freedesktop.org, virtualization@lists.linux.dev, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, syzbot+72bd3dd3a5d5f39a0271@syzkaller.appspotmail.com, stable@vger.kernel.org
+From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+In-Reply-To: <20260508162856.1131843-1-n7l8m4@u.northwestern.edu>
+X-ClientProxiedBy: FR4P281CA0146.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:b8::10) To PH7PR12MB5685.namprd12.prod.outlook.com
+ (2603:10b6:510:13c::22)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|CH1PPFC908D89D1:EE_
+X-MS-Office365-Filtering-Correlation-Id: 461da6a1-cb05-4d14-387a-08deaf307e7e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|1800799024|366016|7416014|376014|22082099003|56012099003|18002099003|3023799003;
+X-Microsoft-Antispam-Message-Info: 
+	q4qc898hULFURlJWVLR6QExGlQ57AuxgkWSx7tVsNUQoNqewOzc+yOk6jYye8qp3RysX8GuXyO4QlPO5fV2VkPnYYt6vQtXQyeiBK/jWMGJLKDhFgbmCPHBewG+n2uTIzEqBXRPiGy3bbb3B9nxLWy71xH+FpB/nV6pWTMTiebqEcOIfET2LhuqBYlsVqvPtYrOAlejyejWhaHvgI7rstq+TeuxlkooILVTEvt4/tHIyXiOhZVx5gr7qrPstRge6t89kNosV+xVCFg0qss1GM3NVSS0/TeM3Cxrtv9VegrzP+YuMDinOqSC4geeDsSRCElmcAEiSNjdvNTJTp66Gpuvu6Y5x9q+HFFxNrcwwZ0tkIqKGIN4X5FDPpeOgn2qTCraEuKM9j+tW4eU0qZJkEnf9OxUabmmZrhaHLnGXOYWjwcM/ojExOUMKWxYemBt+bVQpkoUGJxjJXOyL+ZIzZwvm9/dAUMI/SCcnosZLQzPYOZu4GDotgBc2OOeNstq9T+Fw2qvNJdMX3NaT1PZWzCFUMYHg15HFP/9yHsksKIbTQmNa2sGLR+WR3alNSUNRmFAeCszM356544YsVmkfS7tS53fv+rJ3zSjZldAGXnNldY8+ZjbTf4RtLCpz6nYsuK0d/KSPAqU0q4oitSUH2u9qjwcNh34RUqBIHAuQ+ljVT/2QRJilIw/Nfj99LLqm
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB5685.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(7416014)(376014)(22082099003)(56012099003)(18002099003)(3023799003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?ZlNzSFZCV3Z3bDUrR3d1cVRqd2dsSDZNdTg4YzM0UkRIZ25aSFRlVm9yalNX?=
+ =?utf-8?B?S0VFcEpoZm95L2NmU3FWWmdzMlVhZUtOTENKbkhLWG5VZ2VFVXUzdzBSWEVE?=
+ =?utf-8?B?VHBoc1p6NVJaUzFkWkZwWS9OeUpyaitNZmtVSjdvb0dUUVJYTkJyMURDSzFF?=
+ =?utf-8?B?UEhPcmJYczMvOVBoS0dYeU43Wk5TamRVV3pXZ0xYcEdIMGNjeFVjdFd3QlVX?=
+ =?utf-8?B?WThHSGNEaGg2MWJvc2tiQWh0UEpYQlB0WGluVWFhbFlORUxPS3IybFdmaWZk?=
+ =?utf-8?B?OUlrLzhkVk1PQWVzbGRpaWVySmYxY1lJWis4TW1OODZBNmtFVndVUzFTUko0?=
+ =?utf-8?B?OEkzbTdHK3NzWlRKMkFNTW51bUxNajNJTWQ1bFEwYXgxVDBZSlBIUmF1K05t?=
+ =?utf-8?B?QUl1VWt2VEhkOUxUa0xUMjJ4VlJDeThIZWZ1Z3F0djB1UXkxVmI2N041MGtW?=
+ =?utf-8?B?ZnpENWc2UWRMZDMwS3AvNldsWUx2VWUrYW1SVXpZYjNhZGZMUjl2THBaN1Y4?=
+ =?utf-8?B?T1FubGtsZnZ3T1dnWXBPcUkxVjRKZ0ZFZzluTmdYcENBRW1jVlM1UzIrb3Vm?=
+ =?utf-8?B?MUFiZ01FVGNYZmYvVTk4ak1mVENyU0lEUXJ5bE1xL0hmZjluUjd2cEdOMm05?=
+ =?utf-8?B?Rlk2UWtZRVVZZnZYR0o1TWI4a3p4ZTgycndHNmUyYXdqWEE5RkZqbzNEam5l?=
+ =?utf-8?B?aTJzSmtXZTNGS3VmckFmZ0pxQUZzMDNGeFBpNmYydVNJUzBYb2xjYWUrUEl1?=
+ =?utf-8?B?QUJqaG14QUhqeVg5SFUxM05jQlhsWEZKc09vVW1CTCs2ZU5PaDZDYUpLM0RF?=
+ =?utf-8?B?N2pGRmVmNFQrMDFXazJaN3ZIUXVaRFlJOWxKd0E4QUtGbW8vQlozcGcrNXRl?=
+ =?utf-8?B?RC81YXBPbUhVeWIzT1FFL0FjRnNMZGllYjh4VWRTaFF5TE83RDZnRlJrRkpS?=
+ =?utf-8?B?Y08reHNHQUovZWYzamd2WEdLeUdUSWNPTTIzd0ZIMjB0bm85YzRTZEtxMWZ2?=
+ =?utf-8?B?QlAxZkNheGp2dURWVnFKbU5BZzJTeEE0RUhmZEpQUExNMUdCN2Mya0RaSHBs?=
+ =?utf-8?B?YVJOR3ljR1hJeUVyU0JBSW52RHZNdDdkTGczSk42TUdza2cxU282VjVYYlY1?=
+ =?utf-8?B?a2UyU0ZYQ3JkanZ4TnhRbVM0MXVVT2xOcTRVeWlQYmtJUHBsTUJCQVNKSURx?=
+ =?utf-8?B?ODM1TTZwWURRa3dpM0dncHdFazFDMWVpcDZ6MFFGQzhMbEh4MWdEVUM0bzVM?=
+ =?utf-8?B?OXltZVRFMXZtdW9PZUpkaG42cFJDbGhkQlRTdVhSZEo0a04rV3lpYW9JdUY4?=
+ =?utf-8?B?MkRDTGZ1Q3dFVDFka05Fd3grTHgzN3dOYktDdklwZ0ZReDlBbGtuNTVJK29x?=
+ =?utf-8?B?d0twYlE5MVZrbVFwMmJQWVJaa2trMTU1eXVLQjY2bHNJVU1zL2lPbXU2TUln?=
+ =?utf-8?B?WG9iYlpiUk80YmxCcndMa29VZXo0YzF3bitZM2lzRGNFK0hKYy9OZGFuN3ZC?=
+ =?utf-8?B?TXhidUwrU2JNTUY3SC96MmJWWjhTRWVvZmdROEtYWVFiVVduKzYxQXkrVnRK?=
+ =?utf-8?B?bHhXeWovR0w3NW9LM0dXNjhmaStHaHhoWHJmODhuL0E2MU5MYmNCMHNjZmF3?=
+ =?utf-8?B?RUQ0RnFvU3hIZm5sSWlxa01RbjlUWDNSb1NZOWhUbXBqbjI1Zm1ZWGxReWRH?=
+ =?utf-8?B?SDlMeE15NWFqaTNJdUdzQWIxSGE3U2xwMDV3ZE1IVXBlVzBGM1JFRTZrZmNz?=
+ =?utf-8?B?RjdQZUJ0SWFjdFpKRHVIUlV3Zi9FaFBVZ0d2eE1JYm0zUDlQTEpDaUYvR3NO?=
+ =?utf-8?B?Q3NYZVFDZ2FPdFZDbGcwRnF2Q0dCUGY1eXQrMzhUdFVOMUI0aFl6bXlKUm9C?=
+ =?utf-8?B?Y1NMdUtJWXdBSmlFT1VabkFYc0dIQXZiNFY1eDdGRUxwSVpYc1cyWHFhOHMy?=
+ =?utf-8?B?dk94M3VOaTduN0ExUEdReXZLekxEaTcyMHVZWTdyQzh3ODBpR0hCYnNsTGR4?=
+ =?utf-8?B?ajhBS3Z6dmJ0ZHBRdSthUGxnVUIzNER6ZnVvbmI4Uml6R1U5Y2FJY09ySDVn?=
+ =?utf-8?B?K3ovRUt4SVd6cVUvdzJzVHhYMU84akFYYXU2Zk01Y1hwTDNFRjNiZmVncXRw?=
+ =?utf-8?B?dFM3WXZPOEtjTkJsWWMvMnhQQURIcEdHN3JpcVp1Q1pPRmJ4dmhZc1BscjJB?=
+ =?utf-8?B?MllmRWdqT2w1U0hOU3JJM1RObTdWRzlycUxHWUg4amNvN0pBUUhLbGVIekJh?=
+ =?utf-8?B?cHpTQ3BLaTY0c3AwVGdBcU9FMVVQN1hLd1Y2dC9ETHJMbk00enBkSy9sZldu?=
+ =?utf-8?Q?slCDbNlaeeIiPOtf/8?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 461da6a1-cb05-4d14-387a-08deaf307e7e
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5685.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 May 2026 07:39:55.1472
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: StY69bLq8/BeOO9fJAQlXc5zHDFn/bzzJyQtYYdzu9cGd4qmeGN0lzFu0Vk4Cf6j
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH1PPFC908D89D1
+X-Spamd-Bar: /
+Message-ID-Hash: JJ6QDTTBGNTB5DXRTNYA56HPLLRUACNC
+X-Message-ID-Hash: JJ6QDTTBGNTB5DXRTNYA56HPLLRUACNC
+X-MailFrom: Christian.Koenig@amd.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: ogabbay@kernel.org, sumit.semwal@linaro.org, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Ziyi Guo <n7l8m4@u.northwestern.edu>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] drm/virtio: check virtio_gpu_array_lock_resv() return in cursor update
+Subject: [Linaro-mm-sig] Re: [PATCH] accel/ivpu: Reject PRIME export of userptr BOs
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KNAXHLUAFKWOCE6GOMXC4ZY4DGEYFPEM/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JJ6QDTTBGNTB5DXRTNYA56HPLLRUACNC/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -73,113 +138,163 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: D0BCF50A731
+X-Rspamd-Queue-Id: CC47C509DC6
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [3.09 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[collabora.com:s=zohomail];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:zohomail.com:reject}];
-	R_SPF_ALLOW(-0.20)[+mx];
+X-Spamd-Result: default: False [6.79 / 15.00];
+	SEM_URIBL(3.50)[northwestern.edu:email];
+	DMARC_POLICY_QUARANTINE(1.50)[amd.com : SPF not aligned (relaxed),quarantine];
+	R_DKIM_REJECT(1.00)[amd.com:s=selector1];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
 	MAILLIST(-0.20)[mailman];
-	DMARC_POLICY_SOFTFAIL(0.10)[collabora.com : SPF not aligned (relaxed),none];
+	BAD_REP_POLICIES(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[18];
 	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com,linux.intel.com];
+	GREYLIST(0.00)[pass,body];
+	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_THREE(0.00)[3];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com,redhat.com,chromium.org,linux.intel.com,kernel.org,suse.de,ffwll.ch,linaro.org,amd.com];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[collabora.com:-];
-	NEURAL_HAM(-0.00)[-0.322];
-	FROM_NEQ_ENVFROM(0.00)[dmitry.osipenko@collabora.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
+	NEURAL_HAM(-0.00)[-0.899];
+	FROM_NEQ_ENVFROM(0.00)[christian.koenig@amd.com,linaro-mm-sig-bounces@lists.linaro.org];
+	DKIM_TRACE(0.00)[amd.com:-];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	R_SPF_ALLOW(0.00)[+mx:c];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,72bd3dd3a5d5f39a0271];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[collabora.com:mid,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,appspotmail.com:email]
-X-Rspamd-Action: no action
+	DBL_BLOCKED_OPENRESOLVER(0.00)[amd.com:mid,lists.linaro.org:helo,lists.linaro.org:rdns]
+X-Rspamd-Action: add header
+X-Spam: Yes
 
-Hello,
+Hi Zivi,
 
-On 5/10/26 08:30, Deepanshu Kartikey wrote:
-> virtio_gpu_cursor_plane_update() calls virtio_gpu_array_lock_resv()
-> but ignores its return value. The function can fail in two ways:
+On 5/8/26 18:28, Ziyi Guo wrote:
+>   Userptr BOs wrap pinned user pages in a private dma-buf solely for
+>   internal use by the NPU driver. Allowing userspace to re-export such a
+>   BO via DRM_IOCTL_PRIME_HANDLE_TO_FD would expose those pages to other
+>   drivers through an interface that was never intended to be shared.
 > 
->   - dma_resv_lock_interruptible() returns -ERESTARTSYS when a signal
->     is delivered while waiting for the reservation lock.
->   - dma_resv_reserve_fences() returns -ENOMEM if it fails to allocate
->     a fence slot; in this case lock_resv unlocks before returning.
+>   Override the driver's prime_handle_to_fd callback to detect dma-bufs
+>   backed by ivpu_gem_userptr_dmabuf_ops and reject the export with
+>   -EINVAL.
 > 
-> In both cases the resv lock is not held on return. The cursor path
-> proceeds to queue a fenced transfer command. The queue path then
-> walks the object array and calls dma_resv_add_fence() on the cursor
-> BO's reservation. dma_resv_add_fence() requires the resv lock to be
-> held; with lockdep enabled the missing lock trips
-> dma_resv_assert_held():
-> 
->   WARNING: drivers/dma-buf/dma-resv.c:296 at dma_resv_add_fence+0x71e/0x840
->   Call Trace:
->    virtio_gpu_array_add_fence+0xcd/0x140
->    virtio_gpu_queue_ctrl_sgs
->    virtio_gpu_queue_fenced_ctrl_buffer+0x578/0xfb0
->    virtio_gpu_cursor_plane_update+0x411/0xbc0
->    drm_atomic_helper_commit_planes+0x497/0xf10
->    ...
->    drm_mode_cursor_ioctl+0xd4/0x110
->    drm_ioctl+0x5e6/0xc60
->    __x64_sys_ioctl+0x18e/0x210
-> 
-> Beyond the WARN, mutating the dma_resv fence list without the lock
-> races with concurrent readers/writers and can corrupt the list.
-> 
-> Check the return value of virtio_gpu_array_lock_resv(). On failure,
-> drop the references taken by virtio_gpu_array_add_obj() with
-> virtio_gpu_array_put_free() (which does not unlock, matching the
-> not-locked state) and return without queueing the command. A
-> skipped cursor frame is harmless; the WARN and the underlying race
-> are not.
-> 
-> The bug was reported by syzbot, triggered via fault injection
-> (fail_nth) on the DRM_IOCTL_MODE_CURSOR path, which forces the
-> -ENOMEM branch in dma_resv_reserve_fences().
-> 
-> Reported-by: syzbot+72bd3dd3a5d5f39a0271@syzkaller.appspotmail.com
-> Closes: https://syzkaller.appspot.com/bug?extid=72bd3dd3a5d5f39a0271
-> Fixes: 5cfd31c5b3a3 ("drm/virtio: fix virtio_gpu_cursor_plane_update().")
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Deepanshu Kartikey <kartikey406@gmail.com>
+> Signed-off-by: Ziyi Guo <n7l8m4@u.northwestern.edu>
+
+first of all thanks a lot for pointing that out! The patch which orginally added that somehow slipped through the cracks.
+
+Then @Karol and @Jacek, using DMA-buf like that is a pretty big NO-GO from the DMA-buf side!
+
+Using page which you don't own (especially file system backend ones) in a DMA-buf is absolutely *NOT* something you can do.
+
+I hope that it is not the case here, but if you also allow to mmap() them then you have create a massive security problem which can lead to random file system corruptions.
+
+Regards,
+Christian.
+
 > ---
->  drivers/gpu/drm/virtio/virtgpu_plane.c | 5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
+>  drivers/accel/ivpu/ivpu_drv.c         |  1 +
+>  drivers/accel/ivpu/ivpu_gem.c         | 28 +++++++++++++++++++++++++++
+>  drivers/accel/ivpu/ivpu_gem.h         |  3 +++
+>  drivers/accel/ivpu/ivpu_gem_userptr.c |  5 +++++
+>  4 files changed, 37 insertions(+)
 > 
-> diff --git a/drivers/gpu/drm/virtio/virtgpu_plane.c b/drivers/gpu/drm/virtio/virtgpu_plane.c
-> index a126d1b25f46..ca379b08b9ec 100644
-> --- a/drivers/gpu/drm/virtio/virtgpu_plane.c
-> +++ b/drivers/gpu/drm/virtio/virtgpu_plane.c
-> @@ -459,7 +459,10 @@ static void virtio_gpu_cursor_plane_update(struct drm_plane *plane,
->  		if (!objs)
->  			return;
->  		virtio_gpu_array_add_obj(objs, vgfb->base.obj[0]);
-> -		virtio_gpu_array_lock_resv(objs);
-> +		if (virtio_gpu_array_lock_resv(objs)) {
-> +			virtio_gpu_array_put_free(objs);
-> +			return;
-> +		}
->  		virtio_gpu_cmd_transfer_to_host_2d
->  			(vgdev, 0,
->  			 plane->state->crtc_w,
+> diff --git a/drivers/accel/ivpu/ivpu_drv.c b/drivers/accel/ivpu/ivpu_drv.c
+> index 2801378e3e19..086d4c769b33 100644
+> --- a/drivers/accel/ivpu/ivpu_drv.c
+> +++ b/drivers/accel/ivpu/ivpu_drv.c
+> @@ -545,6 +545,7 @@ static const struct drm_driver driver = {
+> 
+>         .gem_create_object = ivpu_gem_create_object,
+>         .gem_prime_import = ivpu_gem_prime_import,
+> +       .prime_handle_to_fd = ivpu_gem_prime_handle_to_fd,
+> 
+>         .ioctls = ivpu_drm_ioctls,
+>         .num_ioctls = ARRAY_SIZE(ivpu_drm_ioctls),
+> diff --git a/drivers/accel/ivpu/ivpu_gem.c b/drivers/accel/ivpu/ivpu_gem.c
+> index 4f2005a8d496..82079f372b39 100644
+> --- a/drivers/accel/ivpu/ivpu_gem.c
+> +++ b/drivers/accel/ivpu/ivpu_gem.c
+> @@ -12,6 +12,7 @@
+>  #include <drm/drm_cache.h>
+>  #include <drm/drm_debugfs.h>
+>  #include <drm/drm_file.h>
+> +#include <drm/drm_prime.h>
+>  #include <drm/drm_utils.h>
+> 
+>  #include "ivpu_drv.h"
+> @@ -249,6 +250,33 @@ struct drm_gem_object *ivpu_gem_prime_import(struct drm_device *dev,
+>         return ERR_PTR(ret);
+>  }
+> 
+> +int ivpu_gem_prime_handle_to_fd(struct drm_device *dev, struct drm_file *file_priv,
+> +                               u32 handle, u32 flags, int *prime_fd)
+> +{
+> +       struct ivpu_device *vdev = to_ivpu_device(dev);
+> +       struct dma_buf *dmabuf;
+> +       int fd;
+> +
+> +       dmabuf = drm_gem_prime_handle_to_dmabuf(dev, file_priv, handle, flags);
+> +       if (IS_ERR(dmabuf))
+> +               return PTR_ERR(dmabuf);
+> +
+> +       if (ivpu_gem_is_userptr_dma_buf(dmabuf)) {
+> +               ivpu_dbg(vdev, IOCTL, "Exporting userptr BO is not allowed\n");
+> +               dma_buf_put(dmabuf);
+> +               return -EINVAL;
+> +       }
+> +
+> +       fd = dma_buf_fd(dmabuf, flags);
+> +       if (fd < 0) {
+> +               dma_buf_put(dmabuf);
+> +               return fd;
+> +       }
+> +
+> +       *prime_fd = fd;
+> +       return 0;
+> +}
+> +
+>  static struct ivpu_bo *ivpu_bo_alloc(struct ivpu_device *vdev, u64 size, u32 flags)
+>  {
+>         struct drm_gem_shmem_object *shmem;
+> diff --git a/drivers/accel/ivpu/ivpu_gem.h b/drivers/accel/ivpu/ivpu_gem.h
+> index 0c3350f22b55..bfd15ce02354 100644
+> --- a/drivers/accel/ivpu/ivpu_gem.h
+> +++ b/drivers/accel/ivpu/ivpu_gem.h
+> @@ -29,6 +29,9 @@ void ivpu_bo_unbind_all_bos_from_context(struct ivpu_device *vdev, struct ivpu_m
+> 
+>  struct drm_gem_object *ivpu_gem_create_object(struct drm_device *dev, size_t size);
+>  struct drm_gem_object *ivpu_gem_prime_import(struct drm_device *dev, struct dma_buf *dma_buf);
+> +int ivpu_gem_prime_handle_to_fd(struct drm_device *dev, struct drm_file *file_priv,
+> +                               u32 handle, u32 flags, int *prime_fd);
+> +bool ivpu_gem_is_userptr_dma_buf(struct dma_buf *dma_buf);
+>  struct ivpu_bo *ivpu_bo_create(struct ivpu_device *vdev, struct ivpu_mmu_context *ctx,
+>                                struct ivpu_addr_range *range, u64 size, u32 flags);
+>  struct ivpu_bo *ivpu_bo_create_runtime(struct ivpu_device *vdev, u64 addr, u64 size, u32 flags);
+> diff --git a/drivers/accel/ivpu/ivpu_gem_userptr.c b/drivers/accel/ivpu/ivpu_gem_userptr.c
+> index 7cbf3a4cdc73..45eabea5961e 100644
+> --- a/drivers/accel/ivpu/ivpu_gem_userptr.c
+> +++ b/drivers/accel/ivpu/ivpu_gem_userptr.c
+> @@ -61,6 +61,11 @@ static const struct dma_buf_ops ivpu_gem_userptr_dmabuf_ops = {
+>         .release = ivpu_gem_userptr_dmabuf_release,
+>  };
+> 
+> +bool ivpu_gem_is_userptr_dma_buf(struct dma_buf *dma_buf)
+> +{
+> +       return dma_buf->ops == &ivpu_gem_userptr_dmabuf_ops;
+> +}
+> +
+>  static struct dma_buf *
+>  ivpu_create_userptr_dmabuf(struct ivpu_device *vdev, void __user *user_ptr,
+>                            size_t size, uint32_t flags)
+> --
+> 2.34.1
+> 
 
-Thanks for the patch. Atomic update shouldn't fail due to non-critical
-errors like on a signal interrupt. Could you please move this code that
-may fail in update() to .prepare/cleanup_fb() callbacks?
-
--- 
-Best regards,
-Dmitry
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
