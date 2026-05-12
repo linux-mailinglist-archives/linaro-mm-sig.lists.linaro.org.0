@@ -2,28 +2,28 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id SLTOAghBA2ro2AEAu9opvQ
+	id QGz7FhJBA2ro2AEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 12 May 2026 17:02:32 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 12 May 2026 17:02:42 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8A3955232D8
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 12 May 2026 17:02:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0A5565232DA
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 12 May 2026 17:02:31 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 760E83F79E
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 12 May 2026 15:02:24 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 19698402BB
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 12 May 2026 15:02:31 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7B07A3F77F
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 12 May 2026 15:01:40 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 390683F79E
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 12 May 2026 15:01:49 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: Jamestoah113@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Tue, 12 May 2026 15:01:40 -0000
-Message-ID: <177859810050.3150527.13545530768810876602@lists.linaro.org>
+Date: Tue, 12 May 2026 15:01:49 -0000
+Message-ID: <177859810923.3151741.14817520453318754660@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: LEQX52VYBP7TURICSVXRRXBI226MSFCR
-X-Message-ID-Hash: LEQX52VYBP7TURICSVXRRXBI226MSFCR
+Message-ID-Hash: JWM7GFBOMXC43AXYUSRE3OLSKP7MHHI2
+X-Message-ID-Hash: JWM7GFBOMXC43AXYUSRE3OLSKP7MHHI2
 X-MailFrom: Jamestoah113@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
@@ -31,7 +31,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Obtain BCSP certifications without an exam in California
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LEQX52VYBP7TURICSVXRRXBI226MSFCR/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JWM7GFBOMXC43AXYUSRE3OLSKP7MHHI2/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -39,33 +39,33 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Transfer-Encoding: base64
-X-Rspamd-Queue-Id: 8A3955232D8
+X-Rspamd-Queue-Id: 0A5565232DA
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [0.69 / 15.00];
 	MID_RHS_MATCH_TO(1.00)[];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx];
-	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
+	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[Jamestoah113@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
-	ARC_NA(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RSPAMD_URIBL_FAIL(0.00)[safetycertificationsonline.blogspot.com:query timed out];
 	RCPT_COUNT_ONE(0.00)[1];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	ASN_FAIL(0.00)[118.186.210.44.asn.rspamd.com:query timed out];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	FROM_NO_DN(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_NONE(0.00)[];
+	ARC_NA(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
+	FROM_NEQ_ENVFROM(0.00)[Jamestoah113@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_NONE(0.00)[];
+	R_DKIM_NA(0.00)[];
 	NEURAL_HAM(-0.00)[-0.993];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	R_DKIM_NA(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	FREEMAIL_FROM(0.00)[gmail.com]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[t.me:url,linaro.org:email,.com:url,tiktok.com:url,neboshigc03.wixsite.com:url,isc2certified.blogspot.com:url,safetycertificationsonline.blogspot.com:url,generalhealthandsafety.blogspot.com:url]
 X-Rspamd-Action: no action
 
 KGNlcnRpZml0YXNhcEBnbWFpbC5jb20pIENlcnRpZmllZCBTYWZldHkgUHJvZmVzc2lvbmFsISAj
