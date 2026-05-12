@@ -2,142 +2,217 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wN25KnrkAmpEyQEAu9opvQ
+	id oOB/J9LuAmqUywEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 12 May 2026 10:27:38 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 12 May 2026 11:11:46 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3162F51CAE8
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 12 May 2026 10:27:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2979151D543
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 12 May 2026 11:11:46 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id BBAED4017B
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 12 May 2026 08:27:36 +0000 (UTC)
-Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 49E9C40178
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 12 May 2026 08:27:30 +0000 (UTC)
-Content-Type: text/plain; charset="utf-8"
+	by lists.linaro.org (Postfix) with ESMTP id 2D678402C8
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 12 May 2026 09:11:45 +0000 (UTC)
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+	by lists.linaro.org (Postfix) with ESMTPS id 225F33F7EC
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 12 May 2026 09:11:36 +0000 (UTC)
+Authentication-Results: lists.linaro.org;
+	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=PWHZXjeI;
+	spf=pass (lists.linaro.org: domain of aesteve@redhat.com designates 170.10.133.124 as permitted sender) smtp.mailfrom=aesteve@redhat.com;
+	dmarc=pass (policy=quarantine) header.from=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1778577095;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=p80uB9ppx8DS0thaGwc0VH0L36R/21WsbTghYE9KDbw=;
+	b=PWHZXjeIrSy+VsffKsMKeLjOC3+O1hMqczZMEHI3xV7U2mDBv55yFhaytySeHU9aIoKVEN
+	WY5rd8KpaGkNsJy7CB0fH/XRZzX7GVM+y4MMdkyOYIFwv4oM94ihSGdUsdjbXV6kPtNXbA
+	SrlVIiwKWZdxavxnvlw88cTfuc1L2pA=
+Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-540-EieOxPp9O_ajxHZeof5XwA-1; Tue,
+ 12 May 2026 05:11:32 -0400
+X-MC-Unique: EieOxPp9O_ajxHZeof5XwA-1
+X-Mimecast-MFC-AGG-ID: EieOxPp9O_ajxHZeof5XwA_1778577088
+Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 228A618005B4;
+	Tue, 12 May 2026 09:11:27 +0000 (UTC)
+Received: from [192.168.1.153] (headnet01.pony-001.prod.iad2.dc.redhat.com [10.2.32.101])
+	by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 09A6130001BB;
+	Tue, 12 May 2026 09:11:17 +0000 (UTC)
+From: Albert Esteve <aesteve@redhat.com>
+Date: Tue, 12 May 2026 11:10:42 +0200
+Message-Id: <20260512-v2_20230123_tjmercier_google_com-v1-0-6326701c3691@redhat.com>
 MIME-Version: 1.0
-From: cold.puma.etfk@hidingmail.net
-To: linaro-mm-sig@lists.linaro.org
-Date: Tue, 12 May 2026 08:27:30 -0000
-Message-ID: <177857445029.2686944.851046746875072922@lists.linaro.org>
-User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: OI7IUM26PD7UXV7HJHS7ESFTPXJPVMBK
-X-Message-ID-Hash: OI7IUM26PD7UXV7HJHS7ESFTPXJPVMBK
-X-MailFrom: cold.puma.etfk@hidingmail.net
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x2NQQqDMBAAvyJ7bmCTqEivhT7Aa5HQxk3cUk3Zi
+ BTEvzd4m7nM7JBJmDJcqx2ENs6cliL6UoGfnkskxWNxMGhabLBTm3GFLWpj3fqeSTyTuJhS/JD
+ zaVahroMPL902FqFkvkKBf+fiAf39BsNx/AFCOWAcdwAAAA==
+X-Change-ID: 20260508-v2_20230123_tjmercier_google_com-f44fcfb16530
+To: Tejun Heo <tj@kernel.org>, Johannes Weiner <hannes@cmpxchg.org>,
+ =?utf-8?q?Michal_Koutn=C3=BD?= <mkoutny@suse.com>,
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+ Sumit Semwal <sumit.semwal@linaro.org>,
+ =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ Michal Hocko <mhocko@kernel.org>, Roman Gushchin <roman.gushchin@linux.dev>,
+ Shakeel Butt <shakeel.butt@linux.dev>, Muchun Song <muchun.song@linux.dev>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ Benjamin Gaignard <benjamin.gaignard@collabora.com>,
+ Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>,
+ "T.J. Mercier" <tjmercier@google.com>,
+ Christian Brauner <brauner@kernel.org>, Paul Moore <paul@paul-moore.com>,
+ James Morris <jmorris@namei.org>, "Serge E. Hallyn" <serge@hallyn.com>,
+ Stephen Smalley <stephen.smalley.work@gmail.com>,
+ Ondrej Mosnacek <omosnace@redhat.com>, Shuah Khan <shuah@kernel.org>
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1778577077; l=4167;
+ i=aesteve@redhat.com; s=20260303; h=from:subject:message-id;
+ bh=J/qTQA7WOSp0NDpJTrrE9CeifCSS0KYK7Fhqb5IuZRE=;
+ b=w9BOSU+QzmBOQFJx39er3JufOMU+NTrwANFwrY1GjbF+ilD6YeDqgSMvjLwB7Lz3uKINM9vQE
+ qrkVFKK2zfBDqr0ZUk82SaBAThNIU7vg1o9c6Q1zxh0DX4Y13wK5MeR
+X-Developer-Key: i=aesteve@redhat.com; a=ed25519;
+ pk=YSFz6sOHd2L45+Fr8DIvHTi6lSIjhLZ5T+rkxspJt1s=
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
+X-Mimecast-MFC-PROC-ID: 6JvAYe5gtLB1GIN4ivMPeHqLP7j7UhUsjtugBnCqY6c_1778577088
+X-Mimecast-Originator: redhat.com
+X-Spamd-Bar: ----
+Message-ID-Hash: GJX5JSRHHCUBZOBGPN74VPW2YNTBPZU3
+X-Message-ID-Hash: GJX5JSRHHCUBZOBGPN74VPW2YNTBPZU3
+X-MailFrom: aesteve@redhat.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
+CC: cgroups@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-mm@kvack.org, linux-security-module@vger.kernel.org, selinux@vger.kernel.org, linux-kselftest@vger.kernel.org, Albert Esteve <aesteve@redhat.com>, mripard@kernel.org, echanude@redhat.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Mastering the Quirky Fun of Drive Mad
+Subject: [Linaro-mm-sig] [PATCH RFC 0/5] memcg: dma-buf per-cgroup accounting via pid_fd
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OI7IUM26PD7UXV7HJHS7ESFTPXJPVMBK/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GJX5JSRHHCUBZOBGPN74VPW2YNTBPZU3/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Transfer-Encoding: base64
-X-Rspamd-Queue-Id: 3162F51CAE8
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Queue-Id: 2979151D543
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [7.59 / 15.00];
-	SPAM_FLAG(5.00)[];
-	DMARC_POLICY_REJECT(2.00)[hidingmail.net : SPF not aligned (relaxed), No valid DKIM,reject];
-	MID_RHS_MATCH_TO(1.00)[];
-	R_SPF_ALLOW(-0.20)[+mx];
+X-Spamd-Result: default: False [3.49 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[redhat.com : SPF not aligned (relaxed),quarantine];
+	SUSPICIOUS_RECIPS(1.50)[];
+	R_DKIM_REJECT(1.00)[redhat.com:s=mimecast20190719];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	GREYLIST(0.00)[pass,meta];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	FREEMAIL_TO(0.00)[kernel.org,cmpxchg.org,suse.com,lwn.net,linuxfoundation.org,linaro.org,amd.com,linux.dev,linux-foundation.org,collabora.com,arm.com,google.com,paul-moore.com,namei.org,hallyn.com,gmail.com,redhat.com];
 	ARC_NA(0.00)[];
-	RCPT_COUNT_ONE(0.00)[1];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_NO_DN(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_NEQ_ENVFROM(0.00)[cold.puma.etfk@hidingmail.net,linaro-mm-sig-bounces@lists.linaro.org];
+	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[36];
 	MIME_TRACE(0.00)[0:+];
-	TO_DN_NONE(0.00)[];
-	R_DKIM_NA(0.00)[];
-	NEURAL_HAM(-0.00)[-0.972];
+	DKIM_TRACE(0.00)[redhat.com:-];
+	MISSING_XM_UA(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[aesteve@redhat.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.387];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[drivemadfree.com:url]
-X-Rspamd-Action: add header
-X-Spam: Yes
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email]
+X-Rspamd-Action: no action
 
-RXZlciBzdHVtYmxlZCB1cG9uIGEgZ2FtZSB0aGF0LCBkZXNwaXRlIGl0cyBzaW1wbGUgcHJlbWlz
-ZSwgY29tcGxldGVseSBob29rcyB5b3Ugd2l0aCBpdHMgcHVyZSwgdW5hZHVsdGVyYXRlZCBmdW4/
-IFRoYXTigJlzIGV4YWN0bHkgdGhlIGV4cGVyaWVuY2UgbWFueSBwbGF5ZXJzIGZpbmQgd2l0aCBE
-cml2ZSBNYWQuIFRoaXMgY2hhcm1pbmdseSBhZGRpY3RpdmUgYnJvd3NlciBnYW1lIG9mZmVycyBh
-IGRlbGlnaHRmdWwgYmxlbmQgb2YgcGh5c2ljcy1iYXNlZCBjaGFsbGVuZ2VzIGFuZCBzdXJwcmlz
-aW5nbHkgZGVlcCB2ZWhpY2xlIGN1c3RvbWl6YXRpb24sIG1ha2luZyBpdCBhIHBlcmZlY3QgcXVp
-Y2sgcGljay11cC1hbmQtcGxheSBmb3IgYSBmZXcgbWludXRlcyBvciBhbiBob3VyLiBJZiB5b3Xi
-gJlyZSBsb29raW5nIHRvIGRpdmUgaW50byBzb21lIGxpZ2h0aGVhcnRlZCwgeWV0IGVuZ2FnaW5n
-LCBnYW1pbmcsIHRoZW4gbG9vayBubyBmdXJ0aGVyIHRoYW4gbGVhcm5pbmcgaG93IHRvIHBsYXkg
-YW5kIHRydWx5IGV4cGVyaWVuY2UgRHJpdmUgTWFkLg0KV2hhdCBpcyBEcml2ZSBNYWQ/IFRoZSBC
-YXNpY3Mgb2YgQm91bmNpbmcgYW5kIEJ1aWxkaW5nIGh0dHBzOi8vZHJpdmVtYWRmcmVlLmNvbQ0K
-QXQgaXRzIGNvcmUsIERyaXZlIE1hZCBpcyBhIHBoeXNpY3MtYmFzZWQgZHJpdmluZyBnYW1lIHdo
-ZXJlIHlvdXIgcHJpbWFyeSBnb2FsIGlzIHRvIG5hdmlnYXRlIGEgdmVoaWNsZSB0aHJvdWdoIGlu
-Y3JlYXNpbmdseSBvdXRsYW5kaXNoIGNvdXJzZXMuIFRoZSBjb250cm9scyBhcmUgZGVsaWdodGZ1
-bGx5IHN0cmFpZ2h0Zm9yd2FyZDogdHlwaWNhbGx5IGp1c3QgYWNjZWxlcmF0b3IsIGJyYWtlLCBh
-bmQgb2Z0ZW4gYSB3YXkgdG8gdGlsdCB5b3VyIHZlaGljbGUgZm9yd2FyZCBvciBiYWNrd2FyZC4g
-V2hhdCBtYWtlcyBpdCBpbnRlcmVzdGluZywgaG93ZXZlciwgaXMgdGhlIGVtcGhhc2lzIG9uIGJ1
-aWxkaW5nLiBCZWZvcmUgZWFjaCBsZXZlbCwgeW914oCZcmUgcHJlc2VudGVkIHdpdGggYSBiYXNp
-YyBjaGFzc2lzIGFuZCBhIGxpbWl0ZWQgYnVkZ2V0IHRvIGFkZCB2YXJpb3VzIGNvbXBvbmVudHM6
-IHdoZWVscyBvZiBkaWZmZXJlbnQgc2l6ZXMgYW5kIGdyaXBzLCBlbmdpbmVzIHdpdGggdmFyeWlu
-ZyBwb3dlciwgYW5kIGV2ZW4gc3RydWN0dXJhbCBlbGVtZW50cyB0byBoZWxwIHlvdSBzdXJ2aXZl
-IGEgY3Jhc2ggb3IgdHdvLiBUaGUgbWFnaWMgbGllcyBpbiBleHBlcmltZW50aW5nIHdpdGggdGhl
-c2UgcGFydHMgdG8gY3JlYXRlIHRoZSBtb3N0IGVmZmVjdGl2ZSAob3IgaGlsYXJpb3VzbHkgaW5l
-ZmZlY3RpdmUpIGNvbnRyYXB0aW9uIHRvIHRhY2tsZSB0aGUgdXBjb21pbmcgb2JzdGFjbGVzLiBZ
-b3UgY2FuIGZpbmQgdGhpcyBnZW0gYXQgRHJpdmUgTWFkLg0KPkZyb20gTm92aWNlIHRvIE1hZCBE
-cml2ZXI6IEdhbWVwbGF5IGFuZCBQcm9ncmVzc2lvbg0KVGhlIGpvdXJuZXkgaW4gRHJpdmUgTWFk
-IHN0YXJ0cyBzaW1wbHkuIEVhcmx5IGxldmVscyBpbnRyb2R1Y2UgeW91IHRvIGJhc2ljIGluY2xp
-bmVzLCBnYXBzLCBhbmQgZmxhdCBzdXJmYWNlcywgYWxsb3dpbmcgeW91IHRvIGdldCBhIGZlZWwg
-Zm9yIHRoZSBwaHlzaWNzIGFuZCBob3cgZGlmZmVyZW50IHZlaGljbGUgYnVpbGRzIHJlc3BvbmQu
-IEFzIHlvdSBwcm9ncmVzcywgdGhlIGNoYWxsZW5nZXMgZXNjYWxhdGUgZHJhbWF0aWNhbGx5LiBZ
-b3XigJlsbCBlbmNvdW50ZXIgbWFzc2l2ZSByYW1wcywgcHJlY2FyaW91cyBicmlkZ2VzLCBleHBs
-b3NpdmUgYmFycmVscywgYW5kIGV2ZW4gc2VjdGlvbnMgdGhhdCByZXF1aXJlIGNhcmVmdWwgYmFs
-YW5jaW5nIG9uIGEgc2luZ2xlIHdoZWVsLiBFYWNoIHN1Y2Nlc3NmdWwgY29tcGxldGlvbiBvZiBh
-IGxldmVsIGVhcm5zIHlvdSBtb3JlIGluLWdhbWUgY3VycmVuY3ksIHdoaWNoIHlvdSBjYW4gdGhl
-biB1c2UgdG8gdW5sb2NrIG5ldyB2ZWhpY2xlIHBhcnRzLCBleHBhbmRpbmcgeW91ciBjcmVhdGl2
-ZSBwb3NzaWJpbGl0aWVzLiBUaGUgc2F0aXNmYWN0aW9uIG9mIGZpbmFsbHkgb3ZlcmNvbWluZyBh
-IHBhcnRpY3VsYXJseSB0cmlja3kgbGV2ZWwgd2l0aCBhIGN1c3RvbS1idWlsdCBtb25zdGVyIHRy
-dWNrIG9yIGEgemlwcHksIGxpZ2h0d2VpZ2h0IGR1bmUgYnVnZ3kgaXMgdHJ1bHkgcmV3YXJkaW5n
-Lg0KVGlwcyBmb3IgVGFtaW5nIHRoZSBUcmFja3M6IFlvdXIgR3VpZGUgdG8gU3VjY2Vzcw0KV2hp
-bGUgRHJpdmUgTWFkIGlzIGVhc3kgdG8gcGljayB1cCwgbWFzdGVyaW5nIGl0IHJlcXVpcmVzIGEg
-Yml0IG9mIHN0cmF0ZWd5LiBIZXJlIGFyZSBhIGZldyBmcmllbmRseSB0aXBzIHRvIGhlbHAgeW91
-IG9uIHlvdXIgd2F5Og0K4oCiCUV4cGVyaW1lbnQgd2l0aCBXaGVlbHM6IERvbid0IHVuZGVyZXN0
-aW1hdGUgdGhlIHBvd2VyIG9mIGRpZmZlcmVudCB3aGVlbCB0eXBlcy4gTGFyZ2VyIHdoZWVscyBv
-ZmZlciBiZXR0ZXIgY2xlYXJhbmNlIGFuZCBhYnNvcmIgaW1wYWN0cywgd2hpbGUgc21hbGxlciB3
-aGVlbHMgY2FuIGJlIG5pbWJsZS4gRXhwZXJpbWVudCB3aXRoIGNvbWJpbmF0aW9ucyENCuKAoglC
-YWxhbmNlIGlzIEtleTogRXNwZWNpYWxseSBpbiBsYXRlciBsZXZlbHMsIG1haW50YWluaW5nIGJh
-bGFuY2UgaXMgY3J1Y2lhbC4gVXNlIHlvdXIgdGlsdCBjb250cm9scyB3aXNlbHkgdG8gcHJldmVu
-dCB5b3VyIHZlaGljbGUgZnJvbSBmbGlwcGluZyBvdmVyLCBlc3BlY2lhbGx5IG9uIHN0ZWVwIGFz
-Y2VudHMgb3IgZGVzY2VudHMuDQrigKIJQnVkZ2V0IFdpc2VseTogV2hpbGUgaXQncyB0ZW1wdGlu
-ZyB0byBzcGx1cmdlIG9uIHRoZSBtb3N0IHBvd2VyZnVsIGVuZ2luZSwgc29tZXRpbWVzIGEgbW9y
-ZSBiYWxhbmNlZCBidWlsZCB3aXRoIGdvb2Qgd2hlZWxzIGFuZCBhIHN0dXJkeSBmcmFtZSBpcyBt
-b3JlIGVmZmVjdGl2ZSB0aGFuIGEgdG9wLWhlYXZ5IHNwZWVkIGRlbW9uLg0K4oCiCUxlYXJuIGZy
-b20gQ3Jhc2hlczogRXZlcnkgZ2xvcmlvdXMgZXhwbG9zaW9uIG9yIGNvbWljYWwgZmxpcCBpcyBh
-IGxlYXJuaW5nIG9wcG9ydHVuaXR5LiBQYXkgYXR0ZW50aW9uIHRvIHdoYXQgY2F1c2VkIHRoZSBm
-YWlsdXJlIGFuZCBhZGp1c3QgeW91ciB2ZWhpY2xlIG9yIGRyaXZpbmcgc3R5bGUgYWNjb3JkaW5n
-bHkuDQrigKIJU29tZXRpbWVzIExlc3MgaXMgTW9yZTogRG9u4oCZdCBmZWVsIG9ibGlnYXRlZCB0
-byB1c2UgZXZlcnkgY29tcG9uZW50IHlvdSBjYW4uIEEgc2ltcGxlciwgbW9yZSBmb2N1c2VkIGRl
-c2lnbiBjYW4gc29tZXRpbWVzIGJlIG1vcmUgcm9idXN0IGFuZCBlZmZlY3RpdmUgdGhhbiBhbiBv
-dmVyLWVuZ2luZWVyZWQgYmVoZW1vdGguDQpDb25jbHVzaW9uOiBFbWJyYWNlIHRoZSBNYWRuZXNz
-DQpEcml2ZSBNYWQgaXMgbW9yZSB0aGFuIGp1c3QgYSBzaW1wbGUgYnJvd3NlciBnYW1lOyBpdCdz
-IGEgdGVzdGFtZW50IHRvIHRoZSBqb3kgb2YgY3JlYXRpdmUgcHJvYmxlbS1zb2x2aW5nIGFuZCB0
-aGUgc2hlZXIgZnVuIG9mIHBoeXNpY3MtYmFzZWQgY2hhb3MuIFdoZXRoZXIgeW91J3JlIGEgc2Vh
-c29uZWQgZ2FtZXIgbG9va2luZyBmb3IgYSByZWZyZXNoaW5nIGJyZWFrIG9yIHNvbWVvbmUgbmV3
-IHRvIHRoZSB3b3JsZCBvZiBkaWdpdGFsIGVudGVydGFpbm1lbnQsIGl0cyBhcHByb2FjaGFibGUg
-bmF0dXJlIGFuZCBlbmdhZ2luZyBnYW1lcGxheSBtYWtlIGl0IGEgZmFudGFzdGljIGNob2ljZS4g
-U28sIG5leHQgdGltZSB5b3UgaGF2ZSBhIGZldyBtaW51dGVzIHRvIHNwYXJlLCB3aHkgbm90IGhv
-cCBpbnRvIHRoZSBkcml2ZXIncyBzZWF0LCBidWlsZCB5b3VyIGRyZWFtIG1hY2hpbmUsIGFuZCBz
-ZWUganVzdCBob3cgZmFyIHlvdSBjYW4gZHJpdmUgeW91cnNlbGYgbWFkPw0KX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5n
-IGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNl
-bmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
+This RFC builds on T.J. Mercier's earlier series [1] which added
+a memory.stat counter for exported dma-bufs and a binder-backed
+mechanism to transfer charges between cgroups.
+
+The first commit is taken almost verbatim from TJ's series:
+it introduces MEMCG_DMABUF as a dedicated per-cgroup stat, so that
+the total exported dma-buf footprint is visible both system-wide
+(via the root cgroup) and per-application (via per-process cgroups).
+This avoids the overhead of DMABUF_SYSFS_STATS and integrates
+naturally into the existing cgroup memory hierarchy.
+
+The rest of the series departs from TJ's approach. While the first
+commit introduces the memcg stat infrastructure for dmabufs, the
+export-time charging it introduces in dma_buf_export() is then
+superseded: we charge at dma_heap_ioctl_allocate() time, using a
+new charge_pid_fd field in struct dma_heap_allocation_data. The
+allocator opens a pidfd for its client (e.g., from binder's
+sender_pid), passes it to the ioctl, and the kernel charges the
+buffer directly to the client's cgroup at allocation time, so no
+transfer step is needed.
+
+This decouples the accounting path from binder entirely:
+any allocator that knows its client's PID can use the pid_fd
+mechanism regardless of the IPC transport in use.
+
+The cross-cgroup charging capability requires access control.
+Patches #3 and #4 add a generic LSM hook (security_dma_heap_alloc)
+and an SELinux implementation based on a new dma_heap object class
+with a charge_to permission, so policy authors can express which
+domains are allowed to charge memory to another domain's cgroup.
+
+Last patch adds some tests to verify the new charge_pid_fd field.
+
+We are sending it as an RFC to spark broader discussion. It may or
+may not be the right path forward, and we welcome feedback on the
+trade-offs.
+
+Collision note: Eric Chanudet's series [2] adds __GFP_ACCOUNT to
+system_heap page allocations as an opt-in module parameter. That
+approach charges pages to the allocator's own kmem, which overlaps with
+MEMCG_DMABUF. This series explicitly removes __GFP_ACCOUNT from system
+heap allocations and routes all accounting through the MEMCG_DMABUF
+path to avoid double-counting.
+
+[1] https://lore.kernel.org/cgroups/20230109213809.418135-1-tjmercier@google.com/
+[2] https://lore.kernel.org/r/20260113-dmabuf-heap-system-memcg-v2-0-e85722cc2f24@redhat.com
+
+Signed-off-by: Albert Esteve <aesteve@redhat.com>
+---
+Albert Esteve (4):
+      dma-heap: charge dma-buf memory via explicit memcg
+      security: dma-heap: Add dma_heap_alloc LSM hook
+      selinux: Restrict cross-cgroup dma-heap charging
+      selftests/dmabuf-heaps: Add dma-buf memcg accounting tests
+
+T.J. Mercier (1):
+      memcg: Track exported dma-buffers
+
+ Documentation/admin-guide/cgroup-v2.rst            |   5 +
+ drivers/dma-buf/dma-buf.c                          |   7 +
+ drivers/dma-buf/dma-heap.c                         |  54 +++++-
+ drivers/dma-buf/heaps/system_heap.c                |   2 -
+ include/linux/dma-buf.h                            |   4 +
+ include/linux/lsm_hook_defs.h                      |   1 +
+ include/linux/memcontrol.h                         |  37 ++++
+ include/linux/security.h                           |   7 +
+ include/uapi/linux/dma-heap.h                      |   6 +
+ mm/memcontrol.c                                    |  19 ++
+ security/security.c                                |  16 ++
+ security/selinux/hooks.c                           |   7 +
+ security/selinux/include/classmap.h                |   1 +
+ tools/testing/selftests/cgroup/Makefile            |   2 +-
+ tools/testing/selftests/cgroup/test_memcontrol.c   | 143 +++++++++++++-
+ tools/testing/selftests/dmabuf-heaps/config        |   1 +
+ tools/testing/selftests/dmabuf-heaps/dmabuf-heap.c | 126 ++++++++++++-
+ tools/testing/selftests/dmabuf-heaps/vmtest.sh     | 205 +++++++++++++++++++++
+ 18 files changed, 633 insertions(+), 10 deletions(-)
+---
+base-commit: 74fe02ce122a6103f207d29fafc8b3a53de6abaf
+change-id: 20260508-v2_20230123_tjmercier_google_com-f44fcfb16530
+
+Best regards,
+-- 
+Albert Esteve <aesteve@redhat.com>
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
