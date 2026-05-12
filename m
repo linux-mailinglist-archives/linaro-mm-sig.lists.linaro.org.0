@@ -2,221 +2,274 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id SIqAJSxhBGq6HgIAu9opvQ
+	id uNzaAxbKAmrmwgEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:31:56 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 12 May 2026 08:35:02 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2CCF253251C
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:31:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7A17F51B172
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 12 May 2026 08:35:00 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2C822404C6
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 11:31:55 +0000 (UTC)
-Received: from SN4PR2101CU001.outbound.protection.outlook.com (mail-southcentralusazon11012052.outbound.protection.outlook.com [40.93.195.52])
-	by lists.linaro.org (Postfix) with ESMTPS id A10DD3F949
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 12 May 2026 05:50:15 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D75C9401AE
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 12 May 2026 06:34:59 +0000 (UTC)
+Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com [136.143.188.112])
+	by lists.linaro.org (Postfix) with ESMTPS id DDED23F7EC
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 12 May 2026 06:34:32 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=amd.com header.s=selector1 header.b=LmuKFtFA;
-	arc=pass ("microsoft.com:s=arcselector10001:i=1");
-	spf=pass (lists.linaro.org: domain of Alexey.Kardashevskiy@amd.com designates 40.93.195.52 as permitted sender) smtp.mailfrom=Alexey.Kardashevskiy@amd.com;
-	dmarc=pass (policy=quarantine) header.from=amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=n2KyEKDXYWyHQCHSTZkTT9lHZkIMDr5iFjPq2aXeAL4RXGHcFIWGXTguDV8q1P0bY3Sf8NC5eq2NFwOiI/n+1XOlpFh117RZH1IMzQpPhIVXCsEuHiWp7+vPjXDCsm/lExjSYZIt6pJcng24MmivXLdq1/c8b+k93U6Q6rF6Ie7YY7lIID2Llg0CEt4kEND7IzqUGw6EtEu3+EwpmsDKgVfODvSnrrExDcpHK3OOBuXWMQNbRTsomXo5ndpMAgAv5BU5wAhl8w5vWM5iQIIkSV9KQSG6TSt1AVu/gw+3lA/8Y49J74i1JVXpZTU+lLlTUi+5HdMVdFtYpioJ0dwAnQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=XsjROagNmhoz/nHaTg8RwHfPpFTQtf9U+c4cylqsH10=;
- b=SGmf2qk2YLBy9zt4gAFjJcw3Tqu2vFCdwaQtngs+5docsNWaIsCwyVYnEJi6Op9oyqRkIO9SwYD13mKJUKOLNRXlfiAghFSS13xeOvL0u55lCe9C+cl4fIaY8gEsHsODgnCEaWMzyBS00kB8CawRW7/MkvmKlZnGtHvJ1tghWRy+B+OAbYexh5zy9J7zRNnoHv936OtOROQdmVx06xKuY4E6LTL7PhGqI4fCIcVFQ1U7DMZq5liWfhnIpB880+pMBLYnFBDWBtoBJ6VrMhYcQ0tV1peUC5pDePtoj4P9LlEiPoXbogJoxOpH9QpZsKz1b4zkqjrj3lxEFptWPThJ5Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=XsjROagNmhoz/nHaTg8RwHfPpFTQtf9U+c4cylqsH10=;
- b=LmuKFtFAAbtDRYW+y+wy+iDuP0OLjxb0xHYLwPllPA8u8/BXVrqvqzm2Lf29lF4AJ2fCUrzbEQo6sttFptNrhsKPrF1Q0ZW/baHvnizwv1HUq2Q2W7XxO8uPtSOzQaCFnH2K/41GHVMGSbP+fOgii8B1jqGSxVaAl4bFf9DHSCI=
-Received: from CH3PR12MB9194.namprd12.prod.outlook.com (2603:10b6:610:19f::7)
- by DS0PR12MB9399.namprd12.prod.outlook.com (2603:10b6:8:1b8::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.11; Tue, 12 May
- 2026 05:50:07 +0000
-Received: from CH3PR12MB9194.namprd12.prod.outlook.com
- ([fe80::1e6b:ca8b:7715:6fee]) by CH3PR12MB9194.namprd12.prod.outlook.com
- ([fe80::1e6b:ca8b:7715:6fee%6]) with mapi id 15.20.9891.021; Tue, 12 May 2026
- 05:50:07 +0000
-Message-ID: <651ddf59-68e2-482e-a7ba-c238a626e1ba@amd.com>
-Date: Tue, 12 May 2026 15:49:51 +1000
-User-Agent: Mozilla Thunderbird Beta
-To: Jason Gunthorpe <jgg@nvidia.com>
-References: <20250107142719.179636-1-yilun.xu@linux.intel.com>
- <20250107142719.179636-5-yilun.xu@linux.intel.com>
- <c0b160f8-2930-4158-9e50-b4cc4209e2ca@amd.com> <afs/Jamxnj6GGFfM@nvidia.com>
- <3128deea-95a3-4c36-902b-37f280913f2b@amd.com>
- <c166f41e-d983-4a22-95d1-c485a82d1d06@amd.com>
- <20260511235617.GG1116784@nvidia.com>
-From: Alexey Kardashevskiy <aik@amd.com>
-Content-Language: en-US
-In-Reply-To: <20260511235617.GG1116784@nvidia.com>
-X-ClientProxiedBy: SY5P282CA0032.AUSP282.PROD.OUTLOOK.COM
- (2603:10c6:10:206::11) To CH3PR12MB9194.namprd12.prod.outlook.com
- (2603:10b6:610:19f::7)
+	dkim=pass header.d=collabora.com header.s=zohomail header.b=d9GM4msm;
+	arc=pass ("zohomail.com:s=zohoarc:i=1");
+	spf=pass (lists.linaro.org: domain of dmitry.osipenko@collabora.com designates 136.143.188.112 as permitted sender) smtp.mailfrom=dmitry.osipenko@collabora.com;
+	dmarc=pass (policy=none) header.from=collabora.com
+ARC-Seal: i=1; a=rsa-sha256; t=1778567665; cv=none;
+	d=zohomail.com; s=zohoarc;
+	b=J+xalX0YrxiGPQOt+x0j3jnAQqIE3zEm51KRO0nMvQ5sFoHypHYRjxj4yx1qWmVBP5IEFdwk0ENo+0v6S9bV4AbRRU5nCG1onLxbV2ExcfxNCh7ne0Xivu2AKon5NS5bWxYgcm+50eppp/vxpjF0ecxRKr7xOjHoPuSUdYUxXLY=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc;
+	t=1778567665; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+	bh=SJ0Qn/UqArX6ZR0ki2ximJ/UxGOhcRuv97GesmuE/Yc=;
+	b=kW6U92gxkAwOpeXbna7SB3qzgMbaP3D5+NNcMsaFqrgYrdjTwv/sipblnoZtG54+SmOfM2JNrhzurYq5BLehn2fL8gyEE0tjma9bku68EqsPIwoe4vrjIHornbFf6UXSFeZlwfU4M9KInaKxohHNHGs43Q71nQuViw2RImEy+vM=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=collabora.com;
+	spf=pass  smtp.mailfrom=dmitry.osipenko@collabora.com;
+	dmarc=pass header.from=<dmitry.osipenko@collabora.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1778567665;
+	s=zohomail; d=collabora.com; i=dmitry.osipenko@collabora.com;
+	h=Message-ID:Date:Date:MIME-Version:Subject:Subject:To:To:Cc:Cc:References:From:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
+	bh=SJ0Qn/UqArX6ZR0ki2ximJ/UxGOhcRuv97GesmuE/Yc=;
+	b=d9GM4msm40O6Tm0ru7Tu8C1wi5h0KHZskTlvajd8XEI4wAdkipemFSzEO7b1JQxb
+	pN1ZMqh/tlT60Ys0FUHFkTSY8SrFobqYhoJQcxOur16uPlDhsTe4f4j44wXOewM1J/A
+	ckC+nC0AGVY8VzZgkYdOzkc+dObKcvGrFFGHEG4Q=
+Received: by mx.zohomail.com with SMTPS id 1778567662549708.0536854865072;
+	Mon, 11 May 2026 23:34:22 -0700 (PDT)
+Message-ID: <d1bc8d7d-3a4f-4ede-8266-81cc66bf11b5@collabora.com>
+Date: Tue, 12 May 2026 09:34:15 +0300
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PR12MB9194:EE_|DS0PR12MB9399:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0601bc2a-f33f-4d3b-cbcb-08deafea51e4
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|366016|376014|7416014|1800799024|22082099003|18002099003|11063799003|56012099003;
-X-Microsoft-Antispam-Message-Info: 
-	CWcuea6dcL5I1WGgrAOfMpG5Te4KXC8RSruq9HAYpv4vJErp6gMOcGad7viTOz0L1pJz8MBHooZ+220rW3hBl22gcpYxP5jxePCfsN8XiTSUiNtvncO0fL1h/s9hhdrC8529ELBZvgUfjwvQBfaJnb/AsDdrR1JbEk3FKFs16jyPsxC39ZtDusKF1PZ9oDFMI59I7VZbyP4luftvcoTUdoV75ZCnoJpb0j+y+5YOBYtxnLQ7Ppe4vD9VPm8B92Cp3LwVk0K5Lcd4Tzq33tQkrHGKGH2JJhzLANlO4ZLyEdEUynVa1tlsLgBd77JJegZCmg18zg3E4dbcnZvU/TbTGE3c2Xo+mnO7x5gs1coU64zIikkVfLXDukmHgcvhRTQj8Bm58YlgHncPihvqQuhdz4LqChW+k2AcKmUMCesJkjjD2w+Zcfx2RMwAhcmlJFbPlNsOZSHSkLBhP+vnQBR0EzvL/QvM/ELHPsj3C3RWtxUjGs7fqwCWtdSb59RawslFbd0aykwYMRHz5en8MGq9pn2eU8BFTSg7biNN0PnGcxiDPjIt8TnnBCiHmXpW3jAL4vXScAnjw97vAU/SZppnKuecKKPzBkwo4dkT7K7ztp8kyrVl2vUGueTZPs6AJbONs4Hywv0EYC5Ik0FEmSFe6Qz+D4WRTH5IaLdXim2RbcI6iSsBSZ2G43vpet4MNl54
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH3PR12MB9194.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(7416014)(1800799024)(22082099003)(18002099003)(11063799003)(56012099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?YXNYV0JVeWdidTIwMzBVaERjVVRNTFF4S0JFSlM0aWIvTk8vUklUOGwxckZS?=
- =?utf-8?B?YnRreWdTQXJjVDViajJaMVV4V0lsQ2djc3hvVlVxRWJoUnJXdjdBekxvSVNi?=
- =?utf-8?B?VnpxMDltNzVsMitURitPNWFlNGJWOElFaUgwQ1hBMk5TVHQyeVdWWTNWeG9V?=
- =?utf-8?B?VUM3WGVuUVphaU41bzNDbERuR2dNMGpkR2EvaVhpSlhEOVNPKzdBN3J3YSs0?=
- =?utf-8?B?UDFWMlhvQW5Sa01UeDRjV1ZiS1UyU2VSU2Vzdit5NEVxNExVTERMSVAya2JR?=
- =?utf-8?B?Q283WkpKdHJIeGNMM041dkRkY0RHaGpzYWlwS0NpbldPUnZmdlIvNFg2QzBJ?=
- =?utf-8?B?cjdkSk5pOGVNMUI4K25ZMHlyYUFnZ3N4MGp5OEl6aFQxbFpqa1l1dnByeFVF?=
- =?utf-8?B?RGZjNzVhcTE0dVF6SFNTRi95NVFMampxbE51NWRyd3hjWk5wakRqOWZrbnM1?=
- =?utf-8?B?R0pQd094U1MxbDJYR0xvVG9zR28wMUxqRW9NVTZBNkVHTHJkZmlZQS9PaEtL?=
- =?utf-8?B?b3Q4S0JaVmZlb3o4RHFTWTI4b2xzQXh0bWxyOFlKYzRmZFlMbHlYVFM1QU5u?=
- =?utf-8?B?TkszbitpMGh6bzdOV0crVEJLU0ZiZDN6UFZuVFAwcFVyeTBtR2dFWlAvUi9M?=
- =?utf-8?B?c25sZWx6bDBabTRBb1dwZXh1K1U3QmU3NHpDZzNEQWhoSS8vU3cxZFZWOGRR?=
- =?utf-8?B?SnJRWnZmS1Zwc1kxR2RCa1JaYlF6cmNaYzg3MldJY09lV0h4MEhEU2tGTndV?=
- =?utf-8?B?U3hScnVWZG9lQWNQWTBJY2d3U3pNc2thZ1RSTWtTQ1dESzBOZU1Day93bUha?=
- =?utf-8?B?ZFI1RVd2SmFKOE00NkJMMDc3TlhrcVBoLzBEWmdTdTdkVGQ4N1IwbHRQYis4?=
- =?utf-8?B?YWo0Tk0rSE13MTR1RWl6RityUk1wc3lFRW9oMktsSmY1VU01S2dFL01tQXFX?=
- =?utf-8?B?M0FvQ2pmeEdxVkF1L2grWlR2MHJHenVJVFA0akNqS3hSYitTdFRzQkNRY0pN?=
- =?utf-8?B?WGx1TEx4M0Q2LzJZbVZjaUNOQkMvSk5KcVNXR0hQYWg2UFBnaXVMd0ZSMWF1?=
- =?utf-8?B?N0I1YkxFdE5sQysvQWNhVjVmN3hkVnNlcm1OMWMvcmpYbGJpSWtHbzdVOGRG?=
- =?utf-8?B?aHp5Tmp5QzNuTE5WVmw3M2t3b0xFTjVMc1J6dVZETVdaK2hxdzhlY1V2QzQx?=
- =?utf-8?B?c0RpdGU2dXl0dkN4aDhLV2hER3ZMcVBONzZ0U2dMZDlJQTBvSGdaSm8zZFZY?=
- =?utf-8?B?YUlNVWsyY3BTS21sakdoQ0dQUXVycFdzbi83dHpMTEJ4ZjJtYjJWM1cwTXlY?=
- =?utf-8?B?N0ZTLzZuZkRaY3ZXRGplZEh6WW9BbFhqcEZ6OS9KQ2sva1ZkWlhsdTlQWHhG?=
- =?utf-8?B?MlQ4WWl1dEZNUnR4L0RUZGgwNklaSTR1Q1BjVnhPUWszRUxNOGk1TWhSYjBa?=
- =?utf-8?B?TWQ3eElHS04ySGxXM1lOcUtRQ0pSZmVFbUo1cFBxNnA1VUpGL3pOMmo3LzJa?=
- =?utf-8?B?UFlzMjE5em9HS2ZPdVY2VUJiYjV0UGZEOTRteFRFY3lxS0x6b00rdWpnTkZ1?=
- =?utf-8?B?UFo3UUJuOTRlMWd3M01kbndueFd1VHpIZ1VXdm9LMWJGNlJad1JlbHJoejZG?=
- =?utf-8?B?K044UFpFQkhjb0dGZHE4bU5uZEQ1bnV0NDdsTm85TEtsQ0Y4aEhTbVpRVHpt?=
- =?utf-8?B?cGpJVnR2TjliVTdHT3E5TlNLaHNwdlFtSlNjdFBzUVM4QVYyYVpYVXlDc284?=
- =?utf-8?B?R0FvbEdwWjgrMXdGa0NyZ2lqZWlVc0VuUFloWnNkcWxlQzlSeHFHK1BrYUxT?=
- =?utf-8?B?N1BkRnJPWTE5NlFnM1Z3b2lBb3RKcVVtUWRnR0lFemxyNW1rM2tRV0R5dURj?=
- =?utf-8?B?Yk55blhnQXBVcTJ2M0drOVNMaWl4ZnU0Sll0L1Z2ek4wNDZ2Mmx1eXFVT3NK?=
- =?utf-8?B?aDVxZEFkL2U1WUhDZ0xEaHdSU3dNU0xZZ2VkK1I1dmpoa3V0Z2p3YW9KbzJZ?=
- =?utf-8?B?U1ErZDczd2UzUE53V0JWalg3V3FILyt5YktnbDRVclFWeEhoZUpTbHB5RllY?=
- =?utf-8?B?YjRRTUFQY0V1OE5KTnZUVUo3bW1qL2dwVkN5eFQydlo1TE9MUCtoR0dPaVpJ?=
- =?utf-8?B?SUZsVWcyckVwa2dZRHVFOWRSYktoa1Qzbm9EM0FYS0xjNzFiUWdCN2FjaTli?=
- =?utf-8?B?KzlxNzdKR080NzlPRHJDS2dSSkFXRVRaSHlTRUNHcU0rUGhTaWlGUjdKeUYv?=
- =?utf-8?B?Q3JXSmxjbkJqNjJGREdmb2JWVUVKTXFFaTk0M0drcUZhS1I4bE9YenBSa0tk?=
- =?utf-8?B?SFNVU2pGeFZNU1g3Skg1dHVDSU84U3lFeE0rdEMzNUVTYTlPamE2UT09?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0601bc2a-f33f-4d3b-cbcb-08deafea51e4
-X-MS-Exchange-CrossTenant-AuthSource: CH3PR12MB9194.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 May 2026 05:50:06.8718
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: +ElqT7MWuHOavtLHI7JYNcsB3Qjg/dxMT8Og1bmQ/L65To5IjL8zBUlM5PkfJAlBC9XdNvxujJ9rAZhqkt7LQw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB9399
-X-Spamd-Bar: ----
-X-MailFrom: Alexey.Kardashevskiy@amd.com
+User-Agent: Mozilla Thunderbird
+To: Deepanshu Kartikey <kartikey406@gmail.com>, airlied@redhat.com,
+ kraxel@redhat.com, gurchetansingh@chromium.org, olvaffe@gmail.com,
+ maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de,
+ simona@ffwll.ch, sumit.semwal@linaro.org, christian.koenig@amd.com
+References: <20260512020718.108044-1-kartikey406@gmail.com>
+Content-Language: en-US
+From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
+In-Reply-To: <20260512020718.108044-1-kartikey406@gmail.com>
+X-ZohoMailClient: External
+X-Spamd-Bar: -----
+Message-ID-Hash: HIM565H65FD5KL6W4XSSL3UALAV44F4J
+X-Message-ID-Hash: HIM565H65FD5KL6W4XSSL3UALAV44F4J
+X-MailFrom: dmitry.osipenko@collabora.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: TC36HIQD6ZGSVRAI3GMAMZ2A63XBVDOA
-X-Message-ID-Hash: TC36HIQD6ZGSVRAI3GMAMZ2A63XBVDOA
-X-Mailman-Approved-At: Wed, 13 May 2026 11:25:11 +0000
-CC: Xu Yilun <yilun.xu@linux.intel.com>, kvm@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, sumit.semwal@linaro.org, christian.koenig@amd.com, pbonzini@redhat.com, seanjc@google.com, alex.williamson@redhat.com, vivek.kasireddy@intel.com, dan.j.williams@intel.com, yilun.xu@intel.com, linux-coco@lists.linux.dev, linux-kernel@vger.kernel.org, lukas@wunner.de, yan.y.zhao@intel.com, daniel.vetter@ffwll.ch, leon@kernel.org, baolu.lu@linux.intel.com, zhenzhong.duan@intel.com, tao1.su@intel.com
+CC: dri-devel@lists.freedesktop.org, virtualization@lists.linux.dev, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, syzbot+72bd3dd3a5d5f39a0271@syzkaller.appspotmail.com, stable@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [RFC PATCH 04/12] vfio/pci: Allow MMIO regions to be exported through dma-buf
+Subject: [Linaro-mm-sig] Re: [PATCH v2] drm/virtio: move cursor resv lock acquisition to prepare_fb
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TC36HIQD6ZGSVRAI3GMAMZ2A63XBVDOA/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HIM565H65FD5KL6W4XSSL3UALAV44F4J/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 2CCF253251C
+X-Rspamd-Queue-Id: 7A17F51B172
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [3.99 / 15.00];
-	DMARC_POLICY_QUARANTINE(1.50)[amd.com : SPF not aligned (relaxed),quarantine];
-	DATE_IN_PAST(1.00)[29];
-	R_DKIM_REJECT(1.00)[amd.com:s=selector1];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
+X-Spamd-Result: default: False [3.09 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	R_DKIM_REJECT(1.00)[collabora.com:s=zohomail];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:zohomail.com:reject}];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+	DMARC_POLICY_SOFTFAIL(0.10)[collabora.com : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[23];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[18];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_THREE(0.00)[3];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com,redhat.com,chromium.org,linux.intel.com,kernel.org,suse.de,ffwll.ch,linaro.org,amd.com];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[collabora.com:-];
+	NEURAL_HAM(-0.00)[-0.562];
+	FROM_NEQ_ENVFROM(0.00)[dmitry.osipenko@collabora.com,linaro-mm-sig-bounces@lists.linaro.org];
 	TO_DN_SOME(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[aik@amd.com,linaro-mm-sig-bounces@lists.linaro.org];
-	DKIM_TRACE(0.00)[amd.com:-];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	NEURAL_SPAM(0.00)[0.653];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[amd.com:mid,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
+	TAGGED_RCPT(0.00)[linaro-mm-sig,72bd3dd3a5d5f39a0271];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[collabora.com:mid,appspotmail.com:email,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
 X-Rspamd-Action: no action
 
-
-On 12/5/26 09:56, Jason Gunthorpe wrote:
-> On Tue, May 12, 2026 at 09:42:01AM +1000, Alexey Kardashevskiy wrote:
+On 5/12/26 05:07, Deepanshu Kartikey wrote:
+> virtio_gpu_cursor_plane_update() allocates a virtio_gpu_object_array,
+> locks its dma_resv, and queues a fenced transfer to the host. The
+> lock acquisition can fail in two ways:
 > 
->>> true but either way dmabuf slicing will be directed by QEMU's msix-table
->>> emulation MR and this slicing needs to match the TDISP report so I'll
->>> have to teach QEMU these reports, right?
->>
->> Or TDISP devices are going to align MSIX BARs to 4K, and QEMU will
->> do the same and it should "just work", and if it does not - the host
->> won't crash. Can this work? Thanks,
+>   - dma_resv_lock_interruptible() returns -EINTR when a signal is
+>     delivered while waiting for the reservation lock.
+>   - dma_resv_reserve_fences() returns -ENOMEM if it fails to allocate
+>     a fence slot; in this case lock_resv unlocks before returning.
 > 
-> Host crashing stuff is a different issue, I think the plan was to
-> revoke the entire MMIO space from userspace and remove it from the
-> kernel mapping. Entire because we don't want to parse the TDISP report
-> to figure out something more narrow.
+> The return value was ignored, so the cursor path could proceed with
+> the resv lock not held. The queue path then walks the object array
+> and calls dma_resv_add_fence(), which requires the lock; with lockdep
+> enabled this trips dma_resv_assert_held():
 > 
-> Therefore there is no way the host can crash.
-
-Ah ok.
-
-> When qemu constructs the VM memory map it already has a scheme to
-> insert a hole for a SW emulated page for MSI. That will keep working
-> exactly as it is.
->
-> When the VM validates the MMIO the hole has to fall within a T=0 space
-> of the TDISP report or the VM will reject it.
+>   WARNING: drivers/dma-buf/dma-resv.c:296 at dma_resv_add_fence+0x71e/0x840
+>   Call Trace:
+>    virtio_gpu_array_add_fence
+>    virtio_gpu_queue_ctrl_sgs
+>    virtio_gpu_queue_fenced_ctrl_buffer
+>    virtio_gpu_cursor_plane_update
+>    drm_atomic_helper_commit_planes
+>    drm_atomic_helper_commit_tail
+>    commit_tail
+>    drm_atomic_helper_commit
+>    drm_atomic_commit
+>    drm_atomic_helper_update_plane
+>    __setplane_atomic
+>    drm_mode_cursor_universal
+>    drm_mode_cursor_common
+>    drm_mode_cursor_ioctl
+>    drm_ioctl
+>    __x64_sys_ioctl
 > 
-> This means devices need to have a T=0 hole around their MSI-X/etc
-> suitable for a 64K page size OS.
-
-Since we are ditching mappings, the entire MSIX-containing 64K block will be ioctl()ed instead of directly accessed from QEMU via mmap (which is slower the VM direct access but still)?
-
-> This is already the case, if a device mixes MSIx with other things
-> qemu will work but it becomes horribly slow and a little broken.
-
-Really only when MSIX is not system page size aligned but yeah, I had enough of that with PPC. Thanks,
-
+> Beyond the WARN, mutating the dma_resv fence list without the lock
+> races with concurrent readers/writers and can corrupt the list.
 > 
-> Jason
+> The DRM atomic helpers do not allow .atomic_update to fail: by the
+> time it runs, the commit has been signed off to userspace and there
+> is no clean rollback path. Move the fallible work -- objs allocation,
+> dma_resv locking, and fence slot reservation -- into
+> virtio_gpu_plane_prepare_fb, which is the designated callback for
+> resource acquisition and may return errors that the framework
+> handles by rolling back the commit. Stash the prepared object array
+> on virtio_gpu_plane_state so the update step can consume it.
+> 
+> Make virtio_gpu_plane_cleanup_fb release the objs if the commit was
+> rolled back before update ran (i.e., objs not consumed). The queue
+> path already unlocks the resv after attaching the fence (vq.c:411)
+> and frees the array via put_free_delayed after host completion
+> (vq.c:271), so the update step only needs to clear vgplane_st->objs
+> to transfer ownership.
+> 
+> Simplify virtio_gpu_cursor_plane_update to a no-fail queue submission
+> that hands the prepared, locked objs to the queue path.
+> 
+> The bug was reported by syzbot, triggered via fault injection
+> (fail_nth) on the DRM_IOCTL_MODE_CURSOR path, which forces the
+> -ENOMEM branch in dma_resv_reserve_fences().
+> 
+> Reported-by: syzbot+72bd3dd3a5d5f39a0271@syzkaller.appspotmail.com
+> Closes: https://syzkaller.appspot.com/bug?extid=72bd3dd3a5d5f39a0271
+> Fixes: 5cfd31c5b3a3 ("drm/virtio: fix virtio_gpu_cursor_plane_update().")
+> Cc: stable@vger.kernel.org
+> Link: https://lore.kernel.org/all/20260510053025.100224-1-kartikey406@gmail.com/T/ [v1]
+> Signed-off-by: Deepanshu Kartikey <kartikey406@gmail.com>
+> ---
+> v2: Move resv lock acquisition from .atomic_update (which must not
+>     fail) to .prepare_fb (which may), per maintainer review of v1.
+>     The previous approach of silently skipping the cursor update on
+>     lock failure violated the atomic-commit contract with userspace.
+> ---
+>  drivers/gpu/drm/virtio/virtgpu_drv.h   |  1 +
+>  drivers/gpu/drm/virtio/virtgpu_plane.c | 38 ++++++++++++++++++++------
+>  2 files changed, 30 insertions(+), 9 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/virtio/virtgpu_drv.h b/drivers/gpu/drm/virtio/virtgpu_drv.h
+> index f17660a71a3e..e51f959dce46 100644
+> --- a/drivers/gpu/drm/virtio/virtgpu_drv.h
+> +++ b/drivers/gpu/drm/virtio/virtgpu_drv.h
+> @@ -198,6 +198,7 @@ struct virtio_gpu_framebuffer {
+>  struct virtio_gpu_plane_state {
+>  	struct drm_plane_state base;
+>  	struct virtio_gpu_fence *fence;
+> +	struct virtio_gpu_object_array *objs;
+>  };
+>  #define to_virtio_gpu_plane_state(x) \
+>  	container_of(x, struct virtio_gpu_plane_state, base)
+> diff --git a/drivers/gpu/drm/virtio/virtgpu_plane.c b/drivers/gpu/drm/virtio/virtgpu_plane.c
+> index a126d1b25f46..b0511ace89e6 100644
+> --- a/drivers/gpu/drm/virtio/virtgpu_plane.c
+> +++ b/drivers/gpu/drm/virtio/virtgpu_plane.c
+> @@ -381,6 +381,23 @@ static int virtio_gpu_plane_prepare_fb(struct drm_plane *plane,
+>  			goto err_fence;
+>  	}
+>  
+> +	if (plane->type == DRM_PLANE_TYPE_CURSOR && bo->dumb) {
+> +		struct virtio_gpu_object_array *objs;
+> +
+> +		objs = virtio_gpu_array_alloc(1);
+> +		if (!objs) {
+> +			ret = -ENOMEM;
+> +			goto err_fence;
+> +		}
+> +		virtio_gpu_array_add_obj(objs, vgfb->base.obj[0]);
+> +		ret = virtio_gpu_array_lock_resv(objs);
+> +		if (ret) {
+> +			virtio_gpu_array_put_free(objs);
+> +			goto err_fence;
+> +		}
+> +		vgplane_st->objs = objs;
+> +	}
+> +
+>  	return 0;
+>  
+>  err_fence:
+> @@ -417,6 +434,12 @@ static void virtio_gpu_plane_cleanup_fb(struct drm_plane *plane,
+>  		vgplane_st->fence = NULL;
+>  	}
+>  
+> +	if (vgplane_st->objs) {
+> +		virtio_gpu_array_unlock_resv(vgplane_st->objs);
+> +		virtio_gpu_array_put_free(vgplane_st->objs);
+> +		vgplane_st->objs = NULL;
+> +	}
+> +
+>  	obj = state->fb->obj[0];
+>  	if (drm_gem_is_imported(obj))
+>  		virtio_gpu_cleanup_imported_obj(obj);
+> @@ -452,21 +475,18 @@ static void virtio_gpu_cursor_plane_update(struct drm_plane *plane,
+>  	}
+>  
+>  	if (bo && bo->dumb && (plane->state->fb != old_state->fb)) {
+> -		/* new cursor -- update & wait */
+> -		struct virtio_gpu_object_array *objs;
+> -
+> -		objs = virtio_gpu_array_alloc(1);
+> -		if (!objs)
+> -			return;
+> -		virtio_gpu_array_add_obj(objs, vgfb->base.obj[0]);
+> -		virtio_gpu_array_lock_resv(objs);
+> +		/* objs and fence were prepared in virtio_gpu_plane_prepare_fb;
+> +		 * the resv is already locked. The queue path takes ownership
+> +		 * of objs and unlocks the resv after attaching the fence.
+> +		 */
+>  		virtio_gpu_cmd_transfer_to_host_2d
+>  			(vgdev, 0,
+>  			 plane->state->crtc_w,
+>  			 plane->state->crtc_h,
+> -			 0, 0, objs, vgplane_st->fence);
+> +			 0, 0, vgplane_st->objs, vgplane_st->fence);
+>  		virtio_gpu_notify(vgdev);
+>  		dma_fence_wait(&vgplane_st->fence->f, true);
+> +		vgplane_st->objs = NULL;
+>  	}
+>  
+>  	if (plane->state->fb != old_state->fb) {
+
+I'm getting lockup with this patch applied and now see that
+virtio_gpu_resource_flush() also locks BO.
+
+Easiest option might be to add uninterruptible variant of
+virtio_gpu_array_lock_resv(). Could you please try it for v3?
 
 -- 
-Alexey
-
+Best regards,
+Dmitry
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
