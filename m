@@ -2,90 +2,91 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id CO4PDjZhBGq6HgIAu9opvQ
+	id +PAyB0FhBGq6HgIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:32:06 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:32:17 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 753BB53252A
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:32:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E0B03532542
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 13:32:16 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 77DD73F7F1
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 11:32:04 +0000 (UTC)
-Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
-	by lists.linaro.org (Postfix) with ESMTPS id E5DAE3F84B
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 12 May 2026 09:30:31 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D956F3F7BA
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 11:32:15 +0000 (UTC)
+Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com [209.85.218.45])
+	by lists.linaro.org (Postfix) with ESMTPS id 386893F949
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 12 May 2026 09:30:39 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=prfavn7j;
-	spf=pass (lists.linaro.org: domain of asml.silence@gmail.com designates 209.85.218.46 as permitted sender) smtp.mailfrom=asml.silence@gmail.com;
+	dkim=pass header.d=gmail.com header.s=20251104 header.b="AGK8/kea";
+	spf=pass (lists.linaro.org: domain of asml.silence@gmail.com designates 209.85.218.45 as permitted sender) smtp.mailfrom=asml.silence@gmail.com;
 	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-ej1-f46.google.com with SMTP id a640c23a62f3a-b8f97c626aaso48074866b.2
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 12 May 2026 02:30:31 -0700 (PDT)
+Received: by mail-ej1-f45.google.com with SMTP id a640c23a62f3a-bcd0111ea98so337358566b.1
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 12 May 2026 02:30:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1778578231; x=1779183031; darn=lists.linaro.org;
+        d=gmail.com; s=20251104; t=1778578238; x=1779183038; darn=lists.linaro.org;
         h=content-transfer-encoding:in-reply-to:from:content-language
          :references:cc:to:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=VGZAkcM+ym8AsbVGOAJ6+xeqYSrWcyKvdgdcKQ4eIYE=;
-        b=prfavn7jVVdp6I1jGOGPOxHOBd47qIYqDgQaFolwNBg8CJQhPu8VTHBrxMTFpjio1u
-         0d2yoRkgthHm8+B1vhjC8JLxKU3fi5gQnCTCgfBPmhy+T04ZKYiMosTlZcS8JeusTODe
-         sZuCtmOpSCIHD8XxtRcKQco9hYlsOhfU8XY/dnZjXKdkoXM1ED7pfuTHlJsUCg7lRNlT
-         AmD/dumWdqQaEjqq3gyVMhflO7+Ki/Y3co/ID2xQbguXszeE71fqcUHREq1Q0FmwFAr8
-         4zRG3tcFzChHekE6AaL61uRSvvoGtMdBzC8Qp3kEMczEUmDXssRay/V1Zu2/JW5ySW+g
-         j2Nw==
+        bh=1i6gK0r7rGWa5W/9WTpQ/H0vww/+AQmB17cNctDGbjU=;
+        b=AGK8/keaTzn3uD+6u0vbJ5xCxrLDYMfN488ZbUS/R/k6hq5TCUddhI07h2fHClRvQ4
+         TQceWTG7AtU0ZHIOHQNMY8zz8dKjKgObMPX0DfqFtML81DqG7q41fqMKewbQeXlQUCqI
+         P8SwQdYvGHhKFBeMKw4TFM+FsnD4qmQug/C6stXrdFxeymrEQcIoRL6mb0JyAo8xtA7U
+         dVBUFBVESYmM6wLVtsDfwB1OZZ7QbXVg83p6P+H5Svk+9kH0ZrDQUehnUncck2vVT8Ys
+         vsPLdCMk5ZfGUi3+rhGNmBxObQmRx7WQGp3L2qyep0DUg0MRGMIAnMzXk4wA9r6xYTML
+         8xbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778578231; x=1779183031;
+        d=1e100.net; s=20251104; t=1778578238; x=1779183038;
         h=content-transfer-encoding:in-reply-to:from:content-language
          :references:cc:to:subject:user-agent:mime-version:date:message-id
          :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=VGZAkcM+ym8AsbVGOAJ6+xeqYSrWcyKvdgdcKQ4eIYE=;
-        b=hO9/Seu8ZqHsJS85RE1i4eCDWCaxWARZZRN3i10ktBs1g4fM69dT04/FniqBg7DcCp
-         0Xb9ZsaKA5VcieiWCJSRz4w9CNqzRvxz7gx7JRqLyeyyq1s5hRL+Gydvzdjdx/+6t8x7
-         C494cH13y43sGLkECOZTjKIEQonssKlpqFzOo1IWQvt/zMrfdYUCV0JGiSE9RKZv73x6
-         HqAjyRIomv9gs8Xe1AS3wb3TFxF69/zOaWheAyiZ8lRXMs90u2LnRb8Niy8g+7rYoqP4
-         lb+luWIThhAiQqbLZgwPfVCWsxHA1WkQiAtBm0MwjmVke3DA+5Q/s90UNiAplWy2PsX+
-         jAlg==
-X-Forwarded-Encrypted: i=1; AFNElJ8Gt2Ii044qrP4BrC99eAgaY3X7dDZglC1rgXpzvXU8usRe8VV+gHjBGzdFa+PGuCB1ebKVnUlixADVAzFb@lists.linaro.org
-X-Gm-Message-State: AOJu0YwoA7oHqzKxeT2rfIPkKM++YjlxuhFuOlpDAeHmOGchr5XG7RPR
-	qgwe4fgG0Om663ZeHflX0k8YLj8MZDTi07AS5DEKszxXJHGwmZakTs98
-X-Gm-Gg: Acq92OGtgUGnbelBwro58Q28uW9XrFCCFPe2bkZ/02VRBnCiT4d7JwnBgR1zOsaB9Op
-	MdoIk69zVe6J46lqIzM2m0rLZIa9Y1st2flc/Z2jUvYLHV2xxgZSIgbPVAywoPBtActiFJLq9g9
-	NA+Yt+dDswvSekHbmPjXUNk7uXcKXOYy9kK2O8bClKcj7yD8nFF8/i1B/qE5FAE9gyTJv4KS/ga
-	P5viLAXA9gHl7YbeGfwK6MOWVcDZbyEAHcCFYxkZ/4g8PZhi8LZZcR/7lvFQGLzhBLD0/wQ/C9P
-	qlfg5u2Aq7cHDt0mBqRRDzunBe1wbcOLAGCmOmu3kBxghhenRNZfN34iBPM4TfAjlyl1pGrQjvh
-	KGN+a1Hdn/3FZIxKNZtKW2wRtAtw5JK1PkSPXLQ3DRVmyfXo5zv0DhTdVlC4MqnVXQpYctJfmWL
-	ARC5MfuMviW6B/X9wQelHQBa8aGf22e14DKdna5lkQp1dMdBKJwPuulDZFgxIbywLMaaH7rCYWX
-	Xw9nukXIyhEAmVClnDqHSv2+h9jtnJ13eChMrI5VGYCEVzVaw==
-X-Received: by 2002:a17:906:99c3:b0:bc4:f3ef:e43c with SMTP id a640c23a62f3a-bcaad52246cmr973369766b.45.1778578230560;
-        Tue, 12 May 2026 02:30:30 -0700 (PDT)
+        bh=1i6gK0r7rGWa5W/9WTpQ/H0vww/+AQmB17cNctDGbjU=;
+        b=l+Uxr84FkVmD6F2LcbtMLnzWva4moRly6IPgm/IgMsPPaXQWJS9M3RqEJfQ/N+NUTR
+         bkGiQULcj/TBuK3V3DybwHNbSml7R7ZOsReZJ9XWZq98oUIxJJfzroJNA68xK8hd/nxr
+         xct+h5lJRNjVKAhWnHGHSn2GXNAcUK5QAJRcIv0vV4hcG+QJ7ozwf11883+3GQRJ3AJR
+         lVgu1NTuI5rrlgDDjBb14OJ3qYXPUv1z/s2XGOKktgahqA6P3/8ciBEWQ/+2emkji7Qk
+         UlhiszWjS8A2x/u9tMmzJ7EFKzl9gzDAaFi91gm/h74OHxBDiXVChABXNO7jp2Mimz0C
+         YOuQ==
+X-Forwarded-Encrypted: i=1; AFNElJ/0l7fwYy0w2goqk5LH/oskbCRGTQykvmrZ7ZRG/ERvnJ+4F/rLuFUp643Tm8EtXNXOMhit63p7OZWjt39Z@lists.linaro.org
+X-Gm-Message-State: AOJu0Yx0GRnG8xK7HhNYGdoBuWM9ziXsHH5/+dMKCtr/+B57qSuCCjAD
+	yZ+4HKXNH0/N1F3/FpUa2h8zPV4pvnmYxi4Toipyn787nIs7g9T710ZT
+X-Gm-Gg: Acq92OGzbQaMpTdVi/K+f0MZZBr4ou5eZ+qiqaBE1QWHxh5lOXGs+p2wXZaY/N2v97N
+	gF8erYniR+V//zvWSpKFfSIYkp34JWDa3tcEvRHsuHheOvR0lRcURSJdwQ6VW4vm06f5cbckJ4V
+	50WuDOm+z8A3cyvdTu9A8gYG98mIlc31rrjvjf75i7zNNqkvdZuFoqKjAKYe+Ah5hW0iexZQJis
+	2x8dJgnBL4Bzxa97zecLkbDl410/6eOoKC70AbUxKZMx9E+Rq2BRmkkj+Ics8RMi0/rVRqEN0uV
+	ypwgKOTU1jcGWxlrKXy1E52TTf+JbDV+Fj9aJnEkkLNAZlpwP6/ejTT1v+U3MIa1erwaIvi1IJd
+	8fL1+PbJ1zR1mj9Na0W1rY7C7WjKDu0FyYApYPJlMYwFkpHt/E6ZcMdy05Lgc6+d4HfLixaSQgh
+	4FPDG2HsxCXJJprjsPUZOx/1aLxjRMjyOnSZcRgkQcKU3vcAvAVFt+g0uNlyYjpAFwA8xuivN62
+	7yZ5mnBtz5flcN3zibljyFYIdqBZjYpwuNpYre9p2ffNCL7mw==
+X-Received: by 2002:a17:907:97d0:b0:bc2:1dab:3ea0 with SMTP id a640c23a62f3a-bd28de036d4mr114881866b.8.1778578237873;
+        Tue, 12 May 2026 02:30:37 -0700 (PDT)
 Received: from ?IPV6:2620:10d:c096:325::372? ([2620:10d:c092:600::1:8c90])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-bcfb7b17d1fsm303492866b.41.2026.05.12.02.30.29
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-bcfb7b17d1fsm303492866b.41.2026.05.12.02.30.36
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 12 May 2026 02:30:30 -0700 (PDT)
-Message-ID: <a4748a29-8aa1-44c1-a1e4-b82f4f191d4a@gmail.com>
-Date: Tue, 12 May 2026 10:30:27 +0100
+        Tue, 12 May 2026 02:30:37 -0700 (PDT)
+Message-ID: <24cc68b2-c432-4623-92eb-b56b76850c35@gmail.com>
+Date: Tue, 12 May 2026 10:30:34 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Christoph Hellwig <hch@lst.de>
+To: Ming Lei <tom.leiming@gmail.com>
 References: <cover.1777475843.git.asml.silence@gmail.com>
- <20260512070045.GA32030@lst.de>
+ <afi7c-VUJWOLlC1m@fedora> <6873d617-c904-45f3-bad9-e1ae39cfecd2@gmail.com>
+ <afxgc4hizusnAA26@fedora>
 Content-Language: en-US
 From: Pavel Begunkov <asml.silence@gmail.com>
-In-Reply-To: <20260512070045.GA32030@lst.de>
-X-Spamd-Bar: ---
+In-Reply-To: <afxgc4hizusnAA26@fedora>
+X-Spamd-Bar: -
 X-MailFrom: asml.silence@gmail.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: EOPYQZPINK4UWRZVZLTSSG3WG5AJFJEY
-X-Message-ID-Hash: EOPYQZPINK4UWRZVZLTSSG3WG5AJFJEY
+Message-ID-Hash: JFJSXGSWYJENAH2C4ZTRYEADYCVPNAYJ
+X-Message-ID-Hash: JFJSXGSWYJENAH2C4ZTRYEADYCVPNAYJ
 X-Mailman-Approved-At: Wed, 13 May 2026 11:25:11 +0000
-CC: Jens Axboe <axboe@kernel.dk>, Keith Busch <kbusch@kernel.org>, Sagi Grimberg <sagi@grimberg.me>, Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Andrew Morton <akpm@linux-foundation.org>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, linux-nvme@lists.infradead.org, linux-fsdevel@vger.kernel.org, io-uring@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Nitesh Shetty <nj.shetty@samsung.com>, Kanchan Joshi <joshi.k@samsung.com>, Anuj Gupta <anuj20.g@samsung.com>, Tushar Gohad <tushar.gohad@intel.com>, William Power <william.power@intel.com>, Phil Cayton <phil.cayton@intel.com>, Jason Gunthorpe <jgg@nvidia.com>
+CC: Jens Axboe <axboe@kernel.dk>, Keith Busch <kbusch@kernel.org>, Christoph Hellwig <hch@lst.de>, Sagi Grimberg <sagi@grimberg.me>, Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Andrew Morton <akpm@linux-foundation.org>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, linux-nvme@lists.infradead.org, linux-fsdevel@vger.kernel.org, io-uring@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Nitesh Shetty <nj.shetty@samsung.com>, Kanchan Joshi <joshi.k@samsung.com>, Anuj Gupta <anuj20.g@samsung.com>, Tushar Gohad <tushar.gohad@intel.com>, William Power <william.power@intel.com>, Phil Cayton <phil.cayton@intel.com>, Jason Gunthorpe <jgg@nvidia.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH v3 00/10] Add dmabuf read/write via io_uring
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EOPYQZPINK4UWRZVZLTSSG3WG5AJFJEY/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JFJSXGSWYJENAH2C4ZTRYEADYCVPNAYJ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -94,30 +95,32 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"; format="flowed"
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 753BB53252A
+X-Rspamd-Queue-Id: E0B03532542
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [1.59 / 15.00];
-	DATE_IN_PAST(1.00)[26];
+X-Spamd-Result: default: False [3.09 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	R_DKIM_REJECT(1.00)[gmail.com:s=20251104];
-	MAILLIST(-0.20)[mailman];
+	DATE_IN_PAST(1.00)[26];
 	R_SPF_ALLOW(-0.20)[+mx:c];
-	MIME_GOOD(-0.10)[text/plain];
+	MAILLIST(-0.20)[mailman];
 	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed),none];
+	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
 	RCVD_COUNT_THREE(0.00)[4];
+	FREEMAIL_TO(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
 	FREEMAIL_FROM(0.00)[gmail.com];
-	RCPT_COUNT_TWELVE(0.00)[24];
+	RCPT_COUNT_TWELVE(0.00)[25];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:-];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.083];
+	NEURAL_HAM(-0.00)[-0.763];
 	FROM_NEQ_ENVFROM(0.00)[asmlsilence@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:-];
+	TO_DN_SOME(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
@@ -125,19 +128,36 @@ X-Spamd-Result: default: False [1.59 / 15.00];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
 X-Rspamd-Action: no action
 
-On 5/12/26 08:00, Christoph Hellwig wrote:
-> What tree is this against?  I can't apply it against the usual
-> candidates, even accounting for the time lag in getting to it.
+On 5/7/26 10:50, Ming Lei wrote:
+...
+>>> BTW, inspired by this approach, I adds similar feature to ublk via UBLK_IO_F_SHMEM_ZC
+>>> which can maintain long-term vfio dma mapping over registered user-place aligned buffer.
+>>
+>> Interesting, just too a glance, and it looks like what David Wei
+>> was thinking to add to fuse, but IIUC he gave up exactly because the
+>> client will need to cooperate and that could be troublesome.
+> 
+> Here the cooperation is minimized, maybe one shmem/hugetlb path, or memfd,
+> and it is one optimization and opt-in, and fallback to normal path
+> if application doesn't cooperate.
 
-It should've been a Jens' for-next
+My point is that with widely enough adopted interface the user will be
+able to opportunistically use it without knowledge about the file, i.e.
+not knowing whether it's ublk or something else. But as you mentioned
+below, it'd be cooperative interface in either case.
+>> Should we try to push everything under the same interface instead of
+>> keeping a ublk specific one? Again to the point that it requires
+> 
+> If generic interface can be figured out, it shouldn't be a big deal for
+> ublk to switch to it, and the usage is simple actually.
 
-> Can you provide a git tree?
+Sure, you'd just need to maintain both as there is a mismatch between
+interfaces.
 
-git: https://github.com/isilence/linux.git rw-dmabuf-v4
-url: https://github.com/isilence/linux/tree/rw-dmabuf-v4
-
-It's a wip branch, for now it's just v3 + 2 fixes.
-
+> So far, ublk supports both FS and nvme block device.
+> 
+> And cooperation can't be avoided for this usage no matter if generic or
+> driver specific implementation is taken, for both fuse & ublk.
 -- 
 Pavel Begunkov
 
