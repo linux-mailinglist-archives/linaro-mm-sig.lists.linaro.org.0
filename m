@@ -2,136 +2,285 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wH0cMgFABGoqFgIAu9opvQ
+	id sErGFhNNBGrhGwIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 11:10:25 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 12:06:11 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 37DA35304DE
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 11:10:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C49C45311B6
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 12:06:10 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 44DF040305
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 09:10:24 +0000 (UTC)
-Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com [136.143.188.112])
-	by lists.linaro.org (Postfix) with ESMTPS id D3AEC3F77A
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 13 May 2026 09:10:16 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B89FC402BB
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 10:06:09 +0000 (UTC)
+Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
+	by lists.linaro.org (Postfix) with ESMTPS id 1B5B33F75E
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 13 May 2026 10:06:02 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=collabora.com header.s=zohomail header.b=Jf8V2eOO;
-	arc=pass ("zohomail.com:s=zohoarc:i=1");
-	spf=pass (lists.linaro.org: domain of dmitry.osipenko@collabora.com designates 136.143.188.112 as permitted sender) smtp.mailfrom=dmitry.osipenko@collabora.com;
-	dmarc=pass (policy=none) header.from=collabora.com
-ARC-Seal: i=1; a=rsa-sha256; t=1778663410; cv=none;
-	d=zohomail.com; s=zohoarc;
-	b=fKPVwADO8NoII5QZA/9nW44lDanjOSOPhHM423Zx+9+6zesDGOnMff+bl6Rvh35UgZazW4f6pUAJvbXAvKHqhZZYFdnmRXBF06iR1kPcV68F6IKn45f8ugIZ8e4PJ7XblV87S1FasZpuW7NarX5/YHkLXMUQ3iWeg5UVpuMhmHg=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc;
-	t=1778663410; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
-	bh=J+PeEpwgMGG+eT1L4WzFjaLfRNxviLWx3M2E/85kEME=;
-	b=LWW9GtphE/fmKFD55IBBhxIMs4RggAQDNovGJ63G4XWnycQHO5zTbncfVhvn8bBHggKZZUhjQBOziPDbusIDx0usWV5F4GoxPV1yeIwUdB2LfIsVfiVpUaDZZ/xiaJLbZ2XE1NyxxM9w+i2ohLfDSfrQe3cfbQ6JjUt4B1rCsRQ=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=collabora.com;
-	spf=pass  smtp.mailfrom=dmitry.osipenko@collabora.com;
-	dmarc=pass header.from=<dmitry.osipenko@collabora.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1778663410;
-	s=zohomail; d=collabora.com; i=dmitry.osipenko@collabora.com;
-	h=Message-ID:Date:Date:MIME-Version:Subject:Subject:To:To:Cc:Cc:References:From:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
-	bh=J+PeEpwgMGG+eT1L4WzFjaLfRNxviLWx3M2E/85kEME=;
-	b=Jf8V2eOOgD0CHQN4V+0lESC/eA0s1LNDholC2vph3WSKS4d0gSXu+TJW0UbFGg89
-	A/7jUvEcwwmIPXG2OJJQZoQi/h3CGidnrHf3CfQCPBsxoautZJNHcFBo8FbSwEEvaZW
-	E4WUHbJwdUDYlCgS0OJ9jhB9OvEW+ZhL6xqB/ifM=
-Received: by mx.zohomail.com with SMTPS id 177866340828668.99618190513445;
-	Wed, 13 May 2026 02:10:08 -0700 (PDT)
-Message-ID: <65da2ce9-a2ab-4800-a73e-1a26082d0605@collabora.com>
-Date: Wed, 13 May 2026 12:10:02 +0300
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=iu2p6R0i;
+	spf=pass (lists.linaro.org: domain of david.laight.linux@gmail.com designates 209.85.218.53 as permitted sender) smtp.mailfrom=david.laight.linux@gmail.com;
+	dmarc=pass (policy=none) header.from=gmail.com
+Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-bce57c132b2so526602066b.0
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 13 May 2026 03:06:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1778666761; x=1779271561; darn=lists.linaro.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:subject:cc:to:from:date:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Y8agHE2UtR+0v8hUNRpGN3/NHmgQczj9TZKmKbKc+JU=;
+        b=iu2p6R0in8l64NAtUQ50l/MI7P6mmwLf3Sz842Oc7V4rCEOC6dvlnDFLkr3tZkStta
+         vZzZMHhm48zMvEgcxdI8pHPr5FWiK3A0lmcUFw1C2wB9lk6Wizx1LTRcAcuM0LsSUbeo
+         QqxeIMvypTS53tmIwJjF1pzHII7hHi0+Deco9bEEzjzcmsl/yuMzTWKymlp2CPnL7JcZ
+         qzY5DPBapgEI704ftFTC/apQCimHiWzKf2zBKA+zSUUHXYwFgIPp09WanDMWyhrgaReT
+         b7pKkncm3+MinNMVYRTY8cyW89g6zrSzYUbrLCB5D7vbdKrmGZI2I/Pichd7FREfGxMs
+         QeWQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1778666761; x=1779271561;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=Y8agHE2UtR+0v8hUNRpGN3/NHmgQczj9TZKmKbKc+JU=;
+        b=IVm7qwCgC1HMXc6sG6Im0N574coWEJFNHgX1y2fkZYlZkVt0c0ihrp+xE781b2Ua6S
+         LgKthYm2voksXFHWMclZhNZ+l6GNC75M5u8rVpUzKGqTk50QN6b0Oe+uPzkUZPVmfwA8
+         FZpwmBqDf3trvOkV0dlDAjFoPw0PQThGJEUVMttWKJX3U1eyljzhJf+vIy5SuqDks31n
+         3w7v7uhkMfwYEvpPvsWbqog91kXDHj31zeJNJCd54XfA+lZ+jwv43VK/baqaf1lO9re8
+         TLY4uHUhwSIkvJqIITOjV3rHeIQnxHf+9ZdtwMoxRYTcxghiKzTZUz/853SIKjmifwIs
+         2YOQ==
+X-Forwarded-Encrypted: i=1; AFNElJ9II2SX6t0lDue4YKjOAVq65RWwoAVRXzjdQ2rDPhvax28hnUiWhiR9nxRY4eaRq4vY/khz57LoPyk/0Q9Q@lists.linaro.org
+X-Gm-Message-State: AOJu0Yy5Mhb0YfSL9VdsgTVPT0wi9UwMoDVrIdoQJzQYkUBARvTF77FL
+	QI27EXdlpOSh0Oio+z+eeg4GDi12tj+jciw94FEPkyhMzJd+WCvPPV/v
+X-Gm-Gg: Acq92OHpxWcnDgl/yvW95Z/Ix0zED2lUBkp11Ol+R+Tl7LF5tsXmOJY1/JY+xwCjt1j
+	kfAJSU1TtgZNPcxr4Tq5AxRaB00t/0ayCxGGa0Nwlu2fikXPktBDZ2dxlSeHQ+dTYORH/86HVWI
+	c9qdgeZn2vWbCMfVsvxRgBnyNTYd2tNRNCknpO/C8nkYrhpINcJYl9hlNT/7qG9jVAq/q2E5QpY
+	GaCzPviXweFuMXlpdqIWHfT63OIvYXLCVjIXXdTgaKwSfjMKwix9Jr7X1We3/qSUa1FGlUmHqU1
+	jvAvBmM6swqjQ3HRE/ZT3AgMUwKhdr8+eJi5EpkVqxmdbw6Zubc4lEf0dKCsmcRZyR6mp/qv2KJ
+	r9ntQlb6JPQvdAnhR6hcvEkYBKbyBChaOFSVS3ea+eOScEPfuNgddZVNKcBzY/EgC8BOjL0gS60
+	PxFr4JT+zq1+TXgGuJvnHf5WCr0Kr2CK/K1HA/je7VccExaa4rnx8DNZkw7Ci5
+X-Received: by 2002:a17:907:9493:b0:bc5:2352:555c with SMTP id a640c23a62f3a-bd3add39c4bmr174356866b.14.1778666759127;
+        Wed, 13 May 2026 03:05:59 -0700 (PDT)
+Received: from pumpkin (82-69-66-36.dsl.in-addr.zen.co.uk. [82.69.66.36])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-bd2dba8fd22sm216615666b.16.2026.05.13.03.05.58
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 13 May 2026 03:05:58 -0700 (PDT)
+Date: Wed, 13 May 2026 11:05:57 +0100
+From: David Laight <david.laight.linux@gmail.com>
+To: Pavel Begunkov <asml.silence@gmail.com>
+Message-ID: <20260513110557.705bdeed@pumpkin>
+In-Reply-To: <20a233d2f35274817aa643cc0fe113707eb47e72.1777475843.git.asml.silence@gmail.com>
+References: <cover.1777475843.git.asml.silence@gmail.com>
+	<20a233d2f35274817aa643cc0fe113707eb47e72.1777475843.git.asml.silence@gmail.com>
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; arm-unknown-linux-gnueabihf)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Deepanshu Kartikey <kartikey406@gmail.com>
-References: <20260512020718.108044-1-kartikey406@gmail.com>
- <d1bc8d7d-3a4f-4ede-8266-81cc66bf11b5@collabora.com>
- <CADhLXY7N0eLpA30eV4Rb=F4vzCf9XYtDjMpxBSJtGeMWNi6Cwg@mail.gmail.com>
-Content-Language: en-US
-From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
-In-Reply-To: <CADhLXY7N0eLpA30eV4Rb=F4vzCf9XYtDjMpxBSJtGeMWNi6Cwg@mail.gmail.com>
-X-ZohoMailClient: External
-X-Spamd-Bar: ----
-Message-ID-Hash: 4WHIFSKGGI5Y5DAWZAT23R7MMCYPJYCN
-X-Message-ID-Hash: 4WHIFSKGGI5Y5DAWZAT23R7MMCYPJYCN
-X-MailFrom: dmitry.osipenko@collabora.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: airlied@redhat.com, kraxel@redhat.com, gurchetansingh@chromium.org, olvaffe@gmail.com, maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de, simona@ffwll.ch, sumit.semwal@linaro.org, christian.koenig@amd.com, dri-devel@lists.freedesktop.org, virtualization@lists.linux.dev, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, syzbot+72bd3dd3a5d5f39a0271@syzkaller.appspotmail.com, stable@vger.kernel.org
+X-Spamd-Bar: ---
+Message-ID-Hash: PY466FSILFUUAMB656MXLLWWH3ICTOJP
+X-Message-ID-Hash: PY466FSILFUUAMB656MXLLWWH3ICTOJP
+X-MailFrom: david.laight.linux@gmail.com
+X-Mailman-Rule-Hits: member-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
+CC: Jens Axboe <axboe@kernel.dk>, Keith Busch <kbusch@kernel.org>, Christoph Hellwig <hch@lst.de>, Sagi Grimberg <sagi@grimberg.me>, Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Andrew Morton <akpm@linux-foundation.org>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, linux-nvme@lists.infradead.org, linux-fsdevel@vger.kernel.org, io-uring@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Nitesh Shetty <nj.shetty@samsung.com>, Kanchan Joshi <joshi.k@samsung.com>, Anuj Gupta <anuj20.g@samsung.com>, Tushar Gohad <tushar.gohad@intel.com>, William Power <william.power@intel.com>, Phil Cayton <phil.cayton@intel.com>, Jason Gunthorpe <jgg@nvidia.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2] drm/virtio: move cursor resv lock acquisition to prepare_fb
+Subject: [Linaro-mm-sig] Re: [PATCH v3 02/10] iov_iter: add iterator type for dmabuf maps
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4WHIFSKGGI5Y5DAWZAT23R7MMCYPJYCN/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PY466FSILFUUAMB656MXLLWWH3ICTOJP/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-X-Rspamd-Queue-Id: 37DA35304DE
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Queue-Id: C49C45311B6
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [3.19 / 15.00];
+X-Spamd-Result: default: False [2.59 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[collabora.com:s=zohomail];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:zohomail.com:reject}];
-	R_SPF_ALLOW(-0.20)[+mx];
+	R_DKIM_REJECT(1.00)[gmail.com:s=20251104];
+	MID_RHS_NOT_FQDN(0.50)[];
 	MAILLIST(-0.20)[mailman];
-	DMARC_POLICY_SOFTFAIL(0.10)[collabora.com : SPF not aligned (relaxed),none];
+	R_SPF_ALLOW(-0.20)[+mx];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[gmail.com];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCPT_COUNT_TWELVE(0.00)[25];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_THREE(0.00)[3];
-	RCPT_COUNT_TWELVE(0.00)[18];
-	FREEMAIL_TO(0.00)[gmail.com];
+	DKIM_TRACE(0.00)[gmail.com:-];
+	NEURAL_HAM(-0.00)[-0.711];
+	FROM_NEQ_ENVFROM(0.00)[davidlaightlinux@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[redhat.com,chromium.org,gmail.com,linux.intel.com,kernel.org,suse.de,ffwll.ch,linaro.org,amd.com,lists.freedesktop.org,lists.linux.dev,vger.kernel.org,lists.linaro.org,syzkaller.appspotmail.com];
-	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-0.327];
-	FROM_NEQ_ENVFROM(0.00)[dmitry.osipenko@collabora.com,linaro-mm-sig-bounces@lists.linaro.org];
 	TO_DN_SOME(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,72bd3dd3a5d5f39a0271];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DKIM_TRACE(0.00)[collabora.com:-];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,collabora.com:email,collabora.com:mid]
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email]
 X-Rspamd-Action: no action
 
-T24gNS8xMy8yNiAwNDo1NSwgRGVlcGFuc2h1IEthcnRpa2V5IHdyb3RlOg0KPiBPbiBUdWUsIE1h
-eSAxMiwgMjAyNiBhdCAxMjowNOKAr1BNIERtaXRyeSBPc2lwZW5rbw0KPiA8ZG1pdHJ5Lm9zaXBl
-bmtvQGNvbGxhYm9yYS5jb20+IHdyb3RlOg0KPj4NCj4+IEknbSBnZXR0aW5nIGxvY2t1cCB3aXRo
-IHRoaXMgcGF0Y2ggYXBwbGllZCBhbmQgbm93IHNlZSB0aGF0DQo+PiB2aXJ0aW9fZ3B1X3Jlc291
-cmNlX2ZsdXNoKCkgYWxzbyBsb2NrcyBCTy4NCj4+DQo+PiBFYXNpZXN0IG9wdGlvbiBtaWdodCBi
-ZSB0byBhZGQgdW5pbnRlcnJ1cHRpYmxlIHZhcmlhbnQgb2YNCj4+IHZpcnRpb19ncHVfYXJyYXlf
-bG9ja19yZXN2KCkuIENvdWxkIHlvdSBwbGVhc2UgdHJ5IGl0IGZvciB2Mz8NCj4+DQo+PiAtLQ0K
-Pj4gQmVzdCByZWdhcmRzLA0KPj4gRG1pdHJ5DQo+IA0KPiBIaSBEbWl0cnksDQo+IA0KPiBUaGFu
-a3MgZm9yIHRlc3RpbmcgYW5kIGNhdGNoaW5nIHRoZSBsb2NrdXAuIEJlZm9yZSBJIHNlbmQgdjMs
-IHdhbnQNCj4gdG8gY29uZmlybSB0aGUgYXBwcm9hY2g6DQo+IA0KPiAgIDEuIFJldmVydCB2Midz
-IHByZXBhcmVfZmIgLyBjbGVhbnVwX2ZiIC8gcGxhbmVfc3RhdGUgY2hhbmdlczsNCj4gICAgICBr
-ZWVwIHRoZSBsb2NrIGFjcXVpc2l0aW9uIGluc2lkZSBjdXJzb3JfcGxhbmVfdXBkYXRlIGxpa2UN
-Cj4gICAgICB0aGUgb3JpZ2luYWwgY29kZS4NCj4gDQo+ICAgMi4gQWRkIHZpcnRpb19ncHVfYXJy
-YXlfbG9ja19yZXN2X3VuaW50ZXJydXB0aWJsZSgpIGluDQo+ICAgICAgdmlydGdwdV9nZW0uYywg
-bWlycm9yaW5nIHRoZSBleGlzdGluZyBoZWxwZXIgYnV0IHVzaW5nDQo+ICAgICAgZG1hX3Jlc3Zf
-bG9jaygpIGluc3RlYWQgb2YgZG1hX3Jlc3ZfbG9ja19pbnRlcnJ1cHRpYmxlKCkgb24NCj4gICAg
-ICB0aGUgbmVudHM9PTEgcGF0aC4gRGVjbGFyZSBpdCBpbiB2aXJ0Z3B1X2Rydi5oLg0KPiANCj4g
-ICAzLiBJbiBjdXJzb3JfcGxhbmVfdXBkYXRlLCBjYWxsIHRoZSBuZXcgaGVscGVyIGFuZCBjaGVj
-ayBpdHMNCj4gICAgICByZXR1cm4uIFRoZSBzaWduYWwgcGF0aCBpcyBjbG9zZWQ7IC1FTk9NRU0g
-ZnJvbQ0KPiAgICAgIGRtYV9yZXN2X3Jlc2VydmVfZmVuY2VzKCkgcmVtYWlucyBhbmQgaXMgaGFu
-ZGxlZCBieSBmcmVlaW5nDQo+ICAgICAgb2JqcyBhbmQgc2tpcHBpbmcgdGhlIGN1cnNvciB1cGRh
-dGUgZm9yIHRoYXQgZnJhbWUuDQo+IA0KPiBBIHNraXBwZWQgY3Vyc29yIGZyYW1lIG9uIEVOT01F
-TSBpcyB0aGUgcmVtYWluaW5nIGZhaWx1cmUgbW9kZSBpbg0KPiAuYXRvbWljX3VwZGF0ZTsgdGhp
-cyBhdm9pZHMgdGhlIGxvY2t1cCB3aXRoIHZpcnRpb19ncHVfcmVzb3VyY2VfZmx1c2goKQ0KPiB0
-aGF0IHYyJ3MgYnJvYWRlciBsb2NrIHNjb3BlIGNhdXNlZC4NCj4gDQo+IERvZXMgdGhhdCBtYXRj
-aCB3aGF0IHlvdSBoYWQgaW4gbWluZD8NCg0KU291bmRzIGdvb2QuIFRoZSB2aXJ0aW9fZ3B1X3Jl
-c291cmNlX2ZsdXNoKCkgYWxzbyBzaG91bGQgYmUgdXBkYXRlZCB0bw0KdXNlIHVuaW50ZXJydXB0
-aWJsZSgpIHZhcmlhbnQuDQoNCi0tIA0KQmVzdCByZWdhcmRzLA0KRG1pdHJ5DQpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxp
-bmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUg
-c2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+On Wed, 29 Apr 2026 16:25:48 +0100
+Pavel Begunkov <asml.silence@gmail.com> wrote:
+
+> Introduce a new iterator type for dmabuf maps. The map in an opaque
+> object with internals and format specific to the subsystem / driver, and
+> only it can use that subsystem / driver for issuing IO. The task of the
+> middle layers is to pass the map / iterator further down, maybe doing
+> basic splitting and length checking. The iterator can only be used by
+> operations of the file the associated map was created for.
+> 
+> Suggested-by: Keith Busch <kbusch@kernel.org>
+> Signed-off-by: Pavel Begunkov <asml.silence@gmail.com>
+> ---
+>  include/linux/uio.h | 11 +++++++++++
+>  lib/iov_iter.c      | 29 +++++++++++++++++++++++------
+>  2 files changed, 34 insertions(+), 6 deletions(-)
+> 
+> diff --git a/include/linux/uio.h b/include/linux/uio.h
+> index a9bc5b3067e3..75051aed70de 100644
+> --- a/include/linux/uio.h
+> +++ b/include/linux/uio.h
+> @@ -12,6 +12,7 @@
+>  
+>  struct page;
+>  struct folio_queue;
+> +struct io_dmabuf_map;
+>  
+>  typedef unsigned int __bitwise iov_iter_extraction_t;
+>  
+> @@ -29,6 +30,7 @@ enum iter_type {
+>  	ITER_FOLIOQ,
+>  	ITER_XARRAY,
+>  	ITER_DISCARD,
+> +	ITER_DMABUF_MAP,
+>  };
+>  
+>  #define ITER_SOURCE	1	// == WRITE
+> @@ -71,6 +73,7 @@ struct iov_iter {
+>  				const struct folio_queue *folioq;
+>  				struct xarray *xarray;
+>  				void __user *ubuf;
+> +				struct io_dmabuf_map *dmabuf_map;
+>  			};
+>  			size_t count;
+>  		};
+> @@ -155,6 +158,11 @@ static inline bool iov_iter_is_xarray(const struct iov_iter *i)
+>  	return iov_iter_type(i) == ITER_XARRAY;
+>  }
+>  
+> +static inline bool iov_iter_is_dmabuf_map(const struct iov_iter *i)
+> +{
+> +	return iov_iter_type(i) == ITER_DMABUF_MAP;
+> +}
+> +
+>  static inline unsigned char iov_iter_rw(const struct iov_iter *i)
+>  {
+>  	return i->data_source ? WRITE : READ;
+> @@ -300,6 +308,9 @@ void iov_iter_folio_queue(struct iov_iter *i, unsigned int direction,
+>  			  unsigned int first_slot, unsigned int offset, size_t count);
+>  void iov_iter_xarray(struct iov_iter *i, unsigned int direction, struct xarray *xarray,
+>  		     loff_t start, size_t count);
+> +void iov_iter_dmabuf_map(struct iov_iter *i, unsigned int direction,
+> +			struct io_dmabuf_map *map,
+> +			loff_t off, size_t count);
+>  ssize_t iov_iter_get_pages2(struct iov_iter *i, struct page **pages,
+>  			size_t maxsize, unsigned maxpages, size_t *start);
+>  ssize_t iov_iter_get_pages_alloc2(struct iov_iter *i, struct page ***pages,
+> diff --git a/lib/iov_iter.c b/lib/iov_iter.c
+> index 243662af1af7..e2253684b991 100644
+> --- a/lib/iov_iter.c
+> +++ b/lib/iov_iter.c
+> @@ -575,7 +575,8 @@ void iov_iter_advance(struct iov_iter *i, size_t size)
+>  {
+>  	if (unlikely(i->count < size))
+>  		size = i->count;
+> -	if (likely(iter_is_ubuf(i)) || unlikely(iov_iter_is_xarray(i))) {
+> +	if (likely(iter_is_ubuf(i)) || unlikely(iov_iter_is_xarray(i)) ||
+> +	    unlikely(iov_iter_is_dmabuf_map(i))) {
+
+
+Doesn't the extra check add more code to all the non-ubuf cases?
+This could be fixed by either making iter_type a bitmask (with one bit set)
+or writing an iter_is_one_of(i, ITER_xxx, ITER_yyy) define that uses
+'(1 << i->iter_type) & ((1 << ITER_xxx) | ...)'
+(look at the the nolibc printf code for an example).
+
+>  		i->iov_offset += size;
+>  		i->count -= size;
+>  	} else if (likely(iter_is_iovec(i) || iov_iter_is_kvec(i))) {
+> @@ -631,7 +632,8 @@ void iov_iter_revert(struct iov_iter *i, size_t unroll)
+>  		return;
+>  	}
+>  	unroll -= i->iov_offset;
+> -	if (iov_iter_is_xarray(i) || iter_is_ubuf(i)) {
+> +	if (iov_iter_is_xarray(i) || iter_is_ubuf(i) ||
+
+iter_is_ubuf() should have been first here.
+
+-- David
+
+> +	    iov_iter_is_dmabuf_map(i)) {
+>  		BUG(); /* We should never go beyond the start of the specified
+>  			* range since we might then be straying into pages that
+>  			* aren't pinned.
+> @@ -775,6 +777,20 @@ void iov_iter_xarray(struct iov_iter *i, unsigned int direction,
+>  }
+>  EXPORT_SYMBOL(iov_iter_xarray);
+>  
+> +void iov_iter_dmabuf_map(struct iov_iter *i, unsigned int direction,
+> +			 struct io_dmabuf_map *map,
+> +			 loff_t off, size_t count)
+> +{
+> +	WARN_ON(direction & ~(READ | WRITE));
+> +	*i = (struct iov_iter){
+> +		.iter_type = ITER_DMABUF_MAP,
+> +		.data_source = direction,
+> +		.dmabuf_map = map,
+> +		.count = count,
+> +		.iov_offset = off,
+> +	};
+> +}
+> +
+>  /**
+>   * iov_iter_discard - Initialise an I/O iterator that discards data
+>   * @i: The iterator to initialise.
+> @@ -841,7 +857,7 @@ static unsigned long iov_iter_alignment_bvec(const struct iov_iter *i)
+>  
+>  unsigned long iov_iter_alignment(const struct iov_iter *i)
+>  {
+> -	if (likely(iter_is_ubuf(i))) {
+> +	if (likely(iter_is_ubuf(i)) || iov_iter_is_dmabuf_map(i)) {
+>  		size_t size = i->count;
+>  		if (size)
+>  			return ((unsigned long)i->ubuf + i->iov_offset) | size;
+> @@ -872,7 +888,7 @@ unsigned long iov_iter_gap_alignment(const struct iov_iter *i)
+>  	size_t size = i->count;
+>  	unsigned k;
+>  
+> -	if (iter_is_ubuf(i))
+> +	if (iter_is_ubuf(i) || iov_iter_is_dmabuf_map(i))
+>  		return 0;
+>  
+>  	if (WARN_ON(!iter_is_iovec(i)))
+> @@ -1469,11 +1485,12 @@ EXPORT_SYMBOL_GPL(import_ubuf);
+>  void iov_iter_restore(struct iov_iter *i, struct iov_iter_state *state)
+>  {
+>  	if (WARN_ON_ONCE(!iov_iter_is_bvec(i) && !iter_is_iovec(i) &&
+> -			 !iter_is_ubuf(i)) && !iov_iter_is_kvec(i))
+> +			 !iter_is_ubuf(i) && !iov_iter_is_kvec(i) &&
+> +			 !iov_iter_is_dmabuf_map(i)))
+>  		return;
+>  	i->iov_offset = state->iov_offset;
+>  	i->count = state->count;
+> -	if (iter_is_ubuf(i))
+> +	if (iter_is_ubuf(i) || iov_iter_is_dmabuf_map(i))
+>  		return;
+>  	/*
+>  	 * For the *vec iters, nr_segs + iov is constant - if we increment
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
