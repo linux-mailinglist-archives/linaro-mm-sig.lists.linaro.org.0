@@ -2,67 +2,107 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mHloIRmuBGoSNAIAu9opvQ
+	id yBhLEKjCBGqiNgIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 19:00:09 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 20:27:52 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 204CB537985
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 19:00:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9FE6B538F13
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 20:27:51 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 23DE83F7F1
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 17:00:08 +0000 (UTC)
-Received: from bali.collaboradmins.com (bali.collaboradmins.com [148.251.105.195])
-	by lists.linaro.org (Postfix) with ESMTPS id 07339401F8
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 13 May 2026 16:59:05 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 8DDEC401C1
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 18:27:50 +0000 (UTC)
+Received: from fout-b5-smtp.messagingengine.com (fout-b5-smtp.messagingengine.com [202.12.124.148])
+	by lists.linaro.org (Postfix) with ESMTPS id 938013F820
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 13 May 2026 18:27:40 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=collabora.com header.s=mail header.b=F13wnAN7;
-	spf=pass (lists.linaro.org: domain of boris.brezillon@collabora.com designates 148.251.105.195 as permitted sender) smtp.mailfrom=boris.brezillon@collabora.com;
-	dmarc=pass (policy=none) header.from=collabora.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1778691544;
-	bh=5JKcUdxXHvhQCI1LQwFg7UllUAKuTCGb8JFxelc+z4Y=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=F13wnAN72bQ34z/ls0txawzH+G/Wb1Djs5EMfFi96/xIi2XYvKgjKVjqVs7zRkJZR
-	 Xl7gPyTiTxPZGEizMPugx6u55UuG+WJYh6bruOivIVD3nZ6IxELerzqOEzhgUohHFM
-	 7HoZiAFmx5ZGsJf2gaWVAuztoqRBm5SN2vLHjKIszAtK2K5u1zfprTuOeCT3oGr63a
-	 MTAYgspn5KCCTqfHgB/Z2EHaq6rW6Kn92cn+7F0MmwA6+zwVymQOyAkxASWpRb9rm1
-	 74k+ngppkOIwj44+XXi0ifUWYoh1ij13sxaVOPh/iYxs2fJcXEZ1fTTtroF1Zj4YiL
-	 Ivj90abjzz8Vw==
-Received: from [192.168.1.38] (unknown [100.64.0.11])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: bbrezillon)
-	by bali.collaboradmins.com (Postfix) with ESMTPSA id 8631317E38C6;
-	Wed, 13 May 2026 18:59:03 +0200 (CEST)
-From: Boris Brezillon <boris.brezillon@collabora.com>
-Date: Wed, 13 May 2026 18:58:54 +0200
+	dkim=pass header.d=shazbot.org header.s=fm2 header.b="ugb+w/Mo";
+	dkim=pass header.d=messagingengine.com header.s=fm3 header.b="n 2G7CcI";
+	spf=pass (lists.linaro.org: domain of alex@shazbot.org designates 202.12.124.148 as permitted sender) smtp.mailfrom=alex@shazbot.org;
+	dmarc=pass (policy=none) header.from=shazbot.org
+Received: from phl-compute-01.internal (phl-compute-01.internal [10.202.2.41])
+	by mailfout.stl.internal (Postfix) with ESMTP id 6D3E81D000F8;
+	Wed, 13 May 2026 14:27:39 -0400 (EDT)
+Received: from phl-frontend-04 ([10.202.2.163])
+  by phl-compute-01.internal (MEProxy); Wed, 13 May 2026 14:27:40 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=shazbot.org; h=
+	cc:cc:content-transfer-encoding:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm2; t=1778696859;
+	 x=1778783259; bh=GbnJfjRBStiaKRZLT02VZB1354Hvx0h1gpT2X0Kvpt8=; b=
+	ugb+w/MoCK+Cq76KPvoo+wISMQpprZXQdAk3i/dgnuTYPy3OkQxSs2xFN6MRw/2M
+	fDw9YGXrGE8B01bJVgCgLHzhFpTS9QOlHoYqM1QXCwm5Ze24EjpAfIyORs0VLEP4
+	mAHdBht7lRSDkgaBknw9fbXkWGZtyTihrXg3zxxJ6wcAkA9WtgD8rL4RHsztZCem
+	Rsxp0gY2tcehmxqWfqGaEuHH8QEHjlwpdWYUb28t+YnVjVjYCnoQuau211sb/ygZ
+	I95d/csNuJeEVJXsyrlmmxuRwmuye0dKesPtXphaf5+z0313rMwrNSpg8geNRX14
+	IdFuFN4voLZy26kzty7deA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:feedback-id:feedback-id
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1778696859; x=
+	1778783259; bh=GbnJfjRBStiaKRZLT02VZB1354Hvx0h1gpT2X0Kvpt8=; b=n
+	2G7CcIS5liB/toFj6ghq8YrTIMXPZsGeuHApr+SOQDFQ+h80ntmkyU1vu11TQNLn
+	6wo9Q8HJEQ7Xzj7yJhmuAlljUcYGbn1ZezzqASVdULb7eLOe6oeVILfbZ9MADbUo
+	EnidDJ5bsv5WM7nS3HZhDa718Y3QOKKrbnwxZ8vxkEXdP7EUYNtpJz+eZ1JGeviv
+	XrO56AcRztohEmu280ftsqZfsYn3MafnOxfO9OJ0xrtZmznCXEXL2LV75UZmcvhr
+	WOm87c/YFr2Pz+hejCT1jQ5DAP1BiDOyaEsM9kbjr7ehmOjDogiVLb/CMZGADjxj
+	vfKEqakOKsuLjRz9Whymw==
+X-ME-Sender: <xms:msIEal5CeibmOq0PCnIL7PBxOf49fDLoRWOFLCziKHN4tUjlg4e91g>
+    <xme:msIEahSgyT-T0RaMchXzdGGmG9Nnviw6xPgZRT_fMv-Z-_FvnqINtRkrOnrtwe2r8
+    Gg_stuv7xKsBNCtzPXLcvmlz-zgn1uIgMhjfiXvzmIhvDUAhkT-sA>
+X-ME-Received: <xmr:msIEaofZhrS0KQe9p0LVgEjp526ztDG3_O4dGSYXPnrqfZYiGdNhbLpPN64>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgdduvdehfeejucetufdoteggodetrf
+    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
+    rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
+    gurhepfffhvfevuffkjghfofggtgfgsehtjeertdertddvnecuhfhrohhmpeetlhgvgicu
+    hghilhhlihgrmhhsohhnuceorghlvgigsehshhgriigsohhtrdhorhhgqeenucggtffrrg
+    htthgvrhhnpedvkeefjeekvdduhfduhfetkedugfduieettedvueekvdehtedvkefgudeg
+    veeuueenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpe
+    grlhgvgiesshhhrgiisghothdrohhrghdpnhgspghrtghpthhtohepvddtpdhmohguvgep
+    shhmthhpohhuthdprhgtphhtthhopehmrghtthgvvhesmhgvthgrrdgtohhmpdhrtghpth
+    htoheplhgvohhnsehkvghrnhgvlhdrohhrghdprhgtphhtthhopehjghhgsehnvhhiughi
+    rgdrtghomhdprhgtphhtthhopegrmhgrshhtrhhosehfsgdrtghomhdprhgtphhtthhope
+    gthhhrihhsthhirghnrdhkohgvnhhighesrghmugdrtghomhdprhgtphhtthhopehmnhhg
+    higruggrmhesrghmrgiiohhnrdguvgdprhgtphhtthhopegumhgrthhlrggtkhesghhooh
+    hglhgvrdgtohhmpdhrtghpthhtohepsghjohhrnheskhgvrhhnvghlrdhorhhgpdhrtghp
+    thhtohepshhumhhithdrshgvmhifrghlsehlihhnrghrohdrohhrgh
+X-ME-Proxy: <xmx:msIEahR_qV9UuC2kZahvYM7vpuJVR17VDHGmXFC5xtuw5qvCJ9mP1w>
+    <xmx:msIEahM1kYu8s--pXaSCxNbdlLG627KP8nKF3hwZrIMOKTzPH27PNg>
+    <xmx:msIEakVfFRSlf7afEpvKFjWU9Ww9TuD8S5Dnnyz94-O7VniPJ7ybwg>
+    <xmx:msIEahacB-lTAHRQfaLsechQRlclOtlcemlNYlBo-ddzPeUvY2P0vA>
+    <xmx:m8IEagDolmbmx2QFR4KKx1ySonJwF1ARYPlv-gqKIIpCvhBQ7hOrbT3j>
+Feedback-ID: i03f14258:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
+ 13 May 2026 14:27:37 -0400 (EDT)
+Date: Wed, 13 May 2026 12:27:34 -0600
+From: Alex Williamson <alex@shazbot.org>
+To: Matt Evans <mattev@meta.com>
+Message-ID: <20260513122734.44ce8a68@shazbot.org>
+In-Reply-To: <4af0c788-22cc-4fb1-9276-ab35439fb7c8@meta.com>
+References: <20260416131815.2729131-1-mattev@meta.com>
+	<20260416131815.2729131-10-mattev@meta.com>
+	<20260424183153.GJ3444440@nvidia.com>
+	<20260426105215.GA440345@unreal>
+	<20260427083644.4ee174cd@shazbot.org>
+	<25a4fc45-1b4d-426b-954a-60bf21e9040f@meta.com>
+	<20260511140957.25eb5d9d@shazbot.org>
+	<4af0c788-22cc-4fb1-9276-ab35439fb7c8@meta.com>
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.51; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Message-Id: <20260513-panthor-guard-refactor-v1-6-f2d8c15a97ce@collabora.com>
-References: <20260513-panthor-guard-refactor-v1-0-f2d8c15a97ce@collabora.com>
-In-Reply-To: <20260513-panthor-guard-refactor-v1-0-f2d8c15a97ce@collabora.com>
-To: Steven Price <steven.price@arm.com>, Liviu Dudau <liviu.dudau@arm.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1778691539; l=4385;
- i=boris.brezillon@collabora.com; s=20260429; h=from:subject:message-id;
- bh=5JKcUdxXHvhQCI1LQwFg7UllUAKuTCGb8JFxelc+z4Y=;
- b=/j4GD7bj6f01mPZjfZbWJzs8fGUcCv15qaDHQz1LMWFkC6+dttkTiBgbsj9qf1GPiwcmVgTz9
- Xsw0wzKTQlNCxJmFMZSmwdxR1WYZ9+kVEd4XWlnUgAspldj2fY9BP+W
-X-Developer-Key: i=boris.brezillon@collabora.com; a=ed25519;
- pk=eN+ORdOgQY7d5U+0kA8h5bf67XdD8bhKbjD/TCHexSY=
 X-Spamd-Bar: ---
-Message-ID-Hash: WZPOPSE7NKH7NR7HCVSLUVB53JSRP55B
-X-Message-ID-Hash: WZPOPSE7NKH7NR7HCVSLUVB53JSRP55B
-X-MailFrom: boris.brezillon@collabora.com
+Message-ID-Hash: QRMYALHW67Y5AXJCEYFCAUO2B6FKOH5N
+X-Message-ID-Hash: QRMYALHW67Y5AXJCEYFCAUO2B6FKOH5N
+X-MailFrom: alex@shazbot.org
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
-CC: Sumit Semwal <sumit.semwal@linaro.org>, =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, Boris Brezillon <boris.brezillon@collabora.com>
+CC: Leon Romanovsky <leon@kernel.org>, Jason Gunthorpe <jgg@nvidia.com>, Alex Mastro <amastro@fb.com>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Mahmoud Adam <mngyadam@amazon.de>, David Matlack <dmatlack@google.com>, =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Kevin Tian <kevin.tian@intel.com>, Ankit Agrawal <ankita@nvidia.com>, Pranjal Shrivastava <praan@google.com>, Alistair Popple <apopple@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org, alex@shazbot.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 6/6] drm/panthor: Add a new guard for our custom resume_and_get() PM helper
+Subject: [Linaro-mm-sig] Re: [PATCH 9/9] vfio/pci: Add mmap() attributes to DMABUF feature
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WZPOPSE7NKH7NR7HCVSLUVB53JSRP55B/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QRMYALHW67Y5AXJCEYFCAUO2B6FKOH5N/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -71,150 +111,99 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 204CB537985
+X-Rspamd-Queue-Id: 9FE6B538F13
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [0.59 / 15.00];
-	R_DKIM_REJECT(1.00)[collabora.com:s=mail];
+	R_DKIM_REJECT(1.00)[shazbot.org:s=fm2,messagingengine.com:s=fm3];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx:c];
-	DMARC_POLICY_SOFTFAIL(0.10)[collabora.com : SPF not aligned (relaxed),none];
+	R_SPF_ALLOW(-0.20)[+mx];
+	DMARC_POLICY_SOFTFAIL(0.10)[shazbot.org : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	ARC_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_THREE(0.00)[3];
-	RCPT_COUNT_TWELVE(0.00)[14];
-	FREEMAIL_CC(0.00)[linaro.org,amd.com,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,collabora.com];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[20];
+	DKIM_TRACE(0.00)[shazbot.org:-,messagingengine.com:-];
+	NEURAL_SPAM(0.00)[0.584];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.109];
-	FROM_NEQ_ENVFROM(0.00)[boris.brezillon@collabora.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[collabora.com:-];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[alex@shazbot.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[collabora.com:email,collabora.com:mid,lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[shazbot.org:mid,meta.com:email,linaro.org:email]
 X-Rspamd-Action: no action
 
-Overload the already existing pm_runtime_active_auto_try_enabled guard
-with our custom guard that force the state to suspened (and thus clear
-the runtime_error) in case the resume fails.
+On Tue, 12 May 2026 18:51:40 +0100
+Matt Evans <mattev@meta.com> wrote:
+> On 11/05/2026 21:09, Alex Williamson wrote:
+> > I think the question of how we actually expand an arbitrary grab bag of
+> > "ATTRS" is the central question in whether we should implement the
+> > interface.   
+> 
+> > If we follow the direction I suggested for TPH, maybe this
+> > is just a VFIO_DEVICE_FEATURE_DMA_BUF_WC, where it supports only PROBE
+> > and SET, with SET taking only the dma-buf fd to implement the one-way
+> > promotion from UC -> WC.
+> > 
+> > If we support a generic SET ATTRS feature, we really need to map out how
+> > flag bits are indicated as supported and how a user untangles failures
+> > from trying to set various attributes.  If we end up with a feature
+> > indicating each ATTR is available, we might as well have just
+> > implemented a feature for each attribute.  Thanks,  
+> 
+> Agreed, that's key.  Alhough, the aim of this patch is for attrs to be a 
+> memory type enum rather than a bag of possibly-concurrent and 
+> possibly-conflicting boolean flags.  Maybe 'memory attributes' would be 
+> a better feature name.
+> 
+> I'm not sure about the feature-per-attribute.  Say we do a 
+> VFIO_DEVICE_FEATURE_DMA_BUF_WC and then later support a second, 
+> VFIO_DEVICE_FEATURE_DMA_BUF_UC_WEAK (like, say, Arm Device-nGRE).  Then 
+> we have to specify that these two VFIO feature types actually 
+> interact/override somehow.  I doubt we'll end up with a dozen but it's a 
+> bit tiresome having a few features that interact.
+> 
+> At least if it's a single DMA_BUF_MEMATTR feature taking an enum, we 
+> just encode the N different (mutually-exclusive!) valid states and done. 
+>   I don't feel having a new feature for each keeps things simpler.
+> 
+> Discovery of support for a specific future attribute is OK with a single 
+> ATTR too; we can take an enum attribute argument to a GET and -ENOTSUPP 
+> for any we don't like.
+> 
+> (We could also add orthogonal DMABUF flags (can't think of a good 
+> example...) but I'd suggest _those_ as semantically-grouped different 
+> features, with the same issues of specifying conflicting cases versus 
+> existing features.)
 
-Once done, we can replace the existing places where manual
-panthor_device_resume_and_get()+pm_runtime_put_autosuspend() were
-done by guards.
+I think the GET behavior you're proposing is a bit counter-intuitive, if
+not abusive of the interface, but I do agree that if the feature is
+SET'ing a single value and not a group of independent flags, that we
+can probably rely more on a try-and-fail model rather than advertising
+each supported value as a separate feature.
 
-Signed-off-by: Boris Brezillon <boris.brezillon@collabora.com>
----
- drivers/gpu/drm/panthor/panthor_device.h | 10 +++++++---
- drivers/gpu/drm/panthor/panthor_drv.c    |  4 ++--
- drivers/gpu/drm/panthor/panthor_sched.c  | 11 ++++-------
- 3 files changed, 13 insertions(+), 12 deletions(-)
+For example, the user has some list of compatible attributes ordered
+from most to least desirable, they try each in order until one works,
+or none work and they decide whether that's ok.
 
-diff --git a/drivers/gpu/drm/panthor/panthor_device.h b/drivers/gpu/drm/panthor/panthor_device.h
-index 1aaf06df875b..51527d2e2f77 100644
---- a/drivers/gpu/drm/panthor/panthor_device.h
-+++ b/drivers/gpu/drm/panthor/panthor_device.h
-@@ -407,9 +407,10 @@ int panthor_device_mmap_io(struct panthor_device *ptdev,
- int panthor_device_resume(struct device *dev);
- int panthor_device_suspend(struct device *dev);
- 
--static inline int panthor_device_resume_and_get(struct panthor_device *ptdev)
-+static inline int panthor_device_resume_and_get(struct device *dev)
- {
--	int ret = pm_runtime_resume_and_get(ptdev->base.dev);
-+	struct panthor_device *ptdev = dev_get_drvdata(dev);
-+	int ret = pm_runtime_resume_and_get(dev);
- 
- 	/* If the resume failed, we need to clear the runtime_error, which
- 	 * can done by forcing the RPM state to suspended. If multiple
-@@ -424,11 +425,14 @@ static inline int panthor_device_resume_and_get(struct panthor_device *ptdev)
- 	 * something we can live with.
- 	 */
- 	if (ret && atomic_cmpxchg(&ptdev->pm.recovery_needed, 1, 0) == 1)
--		pm_runtime_set_suspended(ptdev->base.dev);
-+		pm_runtime_set_suspended(dev);
- 
- 	return ret;
- }
- 
-+DEFINE_GUARD_COND(pm_runtime_active_auto, _try_enabled_or_suspend,
-+		  panthor_device_resume_and_get(_T), _RET == 0)
-+
- enum drm_panthor_exception_type {
- 	DRM_PANTHOR_EXCEPTION_OK = 0x00,
- 	DRM_PANTHOR_EXCEPTION_TERMINATED = 0x04,
-diff --git a/drivers/gpu/drm/panthor/panthor_drv.c b/drivers/gpu/drm/panthor/panthor_drv.c
-index 789ddc0ff7ef..f2d60ff00896 100644
---- a/drivers/gpu/drm/panthor/panthor_drv.c
-+++ b/drivers/gpu/drm/panthor/panthor_drv.c
-@@ -824,7 +824,8 @@ static int panthor_query_timestamp_info(struct panthor_device *ptdev,
- 		(flags & DRM_PANTHOR_TIMESTAMP_DURATION) ||
- 		(timestamp_types >= 2);
- 
--	ret = panthor_device_resume_and_get(ptdev);
-+	ACQUIRE(pm_runtime_active_auto_try_enabled_or_suspend, pm_guard)(ptdev->base.dev);
-+	ret = ACQUIRE_ERR(pm_runtime_active_auto_try_enabled_or_suspend, &pm_guard);
- 	if (ret)
- 		return ret;
- 
-@@ -894,7 +895,6 @@ static int panthor_query_timestamp_info(struct panthor_device *ptdev,
- 		arg->cpu_timestamp_nsec = 0;
- 	}
- 
--	pm_runtime_put(ptdev->base.dev);
- 	return 0;
- }
- 
-diff --git a/drivers/gpu/drm/panthor/panthor_sched.c b/drivers/gpu/drm/panthor/panthor_sched.c
-index 9aa9941d2309..9afa38e87fc9 100644
---- a/drivers/gpu/drm/panthor/panthor_sched.c
-+++ b/drivers/gpu/drm/panthor/panthor_sched.c
-@@ -2630,13 +2630,12 @@ static void tick_work(struct work_struct *work)
- 	if (ACQUIRE_ERR(drm_dev_access, &dev_guard))
- 		return;
- 
--	ret = panthor_device_resume_and_get(ptdev);
-+	ACQUIRE(pm_runtime_active_auto_try_enabled_or_suspend, pm_guard)(ptdev->base.dev);
-+	ret = ACQUIRE_ERR(pm_runtime_active_auto_try_enabled_or_suspend, &pm_guard);
- 	if (drm_WARN_ON(&ptdev->base, ret))
- 		return;
- 
- 	tick(sched);
--	pm_runtime_mark_last_busy(ptdev->base.dev);
--	pm_runtime_put_autosuspend(ptdev->base.dev);
- }
- 
- static int panthor_queue_eval_syncwait(struct panthor_group *group, u8 queue_idx)
-@@ -3359,7 +3358,8 @@ queue_run_job(struct drm_sched_job *sched_job)
- 		return dma_fence_get(job->done_fence);
- 	}
- 
--	ret = panthor_device_resume_and_get(ptdev);
-+	ACQUIRE(pm_runtime_active_auto_try_enabled_or_suspend, pm_guard)(ptdev->base.dev);
-+	ret = ACQUIRE_ERR(pm_runtime_active_auto_try_enabled_or_suspend, &pm_guard);
- 	if (drm_WARN_ON(&ptdev->base, ret))
- 		return ERR_PTR(ret);
- 
-@@ -3367,9 +3367,6 @@ queue_run_job(struct drm_sched_job *sched_job)
- 		done_fence = queue_run_job_locked(job);
- 	}
- 
--	pm_runtime_mark_last_busy(ptdev->base.dev);
--	pm_runtime_put_autosuspend(ptdev->base.dev);
--
- 	return done_fence;
- }
- 
+For GET, if we implement it, I think it should report the current
+attribute, mirroring SET.  We could almost get away without implementing
+it, but I do worry about the case of nvgrace-gpu, where it might be
+interesting for the user to see that the default attribute could be WB
+rather than UC.
 
--- 
-2.54.0
+Where does the user derive the enum value?  Are we defining our own or
+is it a system header defined enum?  I'm curious if/how we're going to
+handle architecture specific attributes.  Thanks,
 
+Alex
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
