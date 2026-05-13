@@ -2,67 +2,67 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id CNzXAhGuBGoSNAIAu9opvQ
+	id mHloIRmuBGoSNAIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 19:00:01 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 19:00:09 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B4DD537976
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 19:00:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 204CB537985
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 19:00:09 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A1B1440305
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 16:59:59 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 23DE83F7F1
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 May 2026 17:00:08 +0000 (UTC)
 Received: from bali.collaboradmins.com (bali.collaboradmins.com [148.251.105.195])
-	by lists.linaro.org (Postfix) with ESMTPS id 5227A402BB
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 13 May 2026 16:59:04 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 07339401F8
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 13 May 2026 16:59:05 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=collabora.com header.s=mail header.b=GEH+1cg1;
+	dkim=pass header.d=collabora.com header.s=mail header.b=F13wnAN7;
 	spf=pass (lists.linaro.org: domain of boris.brezillon@collabora.com designates 148.251.105.195 as permitted sender) smtp.mailfrom=boris.brezillon@collabora.com;
 	dmarc=pass (policy=none) header.from=collabora.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1778691543;
-	bh=Lvz1a1n/wWJFbYaXmSb0nQujNWIYvHlSpP6TrVQhgHU=;
+	s=mail; t=1778691544;
+	bh=5JKcUdxXHvhQCI1LQwFg7UllUAKuTCGb8JFxelc+z4Y=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=GEH+1cg1lXYeDuYFMBEqHswXo8BWKzphI3QhubCrctdvY1MozD3PMvo08qlH9H7Ys
-	 lgEOx3qam60zaa855cyGzUOYyYgUhLFP2R3JHQn1bppE7337IWwfnrxN2FiZAgSGYx
-	 XnPYREovuE8x5NvQjD6uUDlJF2M+QF/WKEKOlViul6R+p0rO990NVrr82bGujriTz7
-	 INTNMspRfP9LGyVL3EqwijB40HrjEULovRUJTD2dLUcVrmuTiYlH3tkqQRL2l8bRiQ
-	 7CagwmKYCFpLc1g12CMTRgGfVxSAbYlu0uNB3tVfAeV/z/7HIr2IeopzI6FCemeLV/
-	 /Qe3a00QEvBcg==
+	b=F13wnAN72bQ34z/ls0txawzH+G/Wb1Djs5EMfFi96/xIi2XYvKgjKVjqVs7zRkJZR
+	 Xl7gPyTiTxPZGEizMPugx6u55UuG+WJYh6bruOivIVD3nZ6IxELerzqOEzhgUohHFM
+	 7HoZiAFmx5ZGsJf2gaWVAuztoqRBm5SN2vLHjKIszAtK2K5u1zfprTuOeCT3oGr63a
+	 MTAYgspn5KCCTqfHgB/Z2EHaq6rW6Kn92cn+7F0MmwA6+zwVymQOyAkxASWpRb9rm1
+	 74k+ngppkOIwj44+XXi0ifUWYoh1ij13sxaVOPh/iYxs2fJcXEZ1fTTtroF1Zj4YiL
+	 Ivj90abjzz8Vw==
 Received: from [192.168.1.38] (unknown [100.64.0.11])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
 	(No client certificate requested)
 	(Authenticated sender: bbrezillon)
-	by bali.collaboradmins.com (Postfix) with ESMTPSA id D437F17E38BA;
-	Wed, 13 May 2026 18:59:02 +0200 (CEST)
+	by bali.collaboradmins.com (Postfix) with ESMTPSA id 8631317E38C6;
+	Wed, 13 May 2026 18:59:03 +0200 (CEST)
 From: Boris Brezillon <boris.brezillon@collabora.com>
-Date: Wed, 13 May 2026 18:58:53 +0200
+Date: Wed, 13 May 2026 18:58:54 +0200
 MIME-Version: 1.0
-Message-Id: <20260513-panthor-guard-refactor-v1-5-f2d8c15a97ce@collabora.com>
+Message-Id: <20260513-panthor-guard-refactor-v1-6-f2d8c15a97ce@collabora.com>
 References: <20260513-panthor-guard-refactor-v1-0-f2d8c15a97ce@collabora.com>
 In-Reply-To: <20260513-panthor-guard-refactor-v1-0-f2d8c15a97ce@collabora.com>
 To: Steven Price <steven.price@arm.com>, Liviu Dudau <liviu.dudau@arm.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1778691539; l=15018;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1778691539; l=4385;
  i=boris.brezillon@collabora.com; s=20260429; h=from:subject:message-id;
- bh=Lvz1a1n/wWJFbYaXmSb0nQujNWIYvHlSpP6TrVQhgHU=;
- b=Ndg8PtyNHjA3lsDCp73Ufmw7Rpjzf6eDxJAvTN4qw6WggCsEi793DwK7BXL31M7Xs/A4a5i6D
- LrCIjamsiSkB5qsDnwPsmyua1de6mdZx5Nm3KAPXoBhPLfmYRJq/WzW
+ bh=5JKcUdxXHvhQCI1LQwFg7UllUAKuTCGb8JFxelc+z4Y=;
+ b=/j4GD7bj6f01mPZjfZbWJzs8fGUcCv15qaDHQz1LMWFkC6+dttkTiBgbsj9qf1GPiwcmVgTz9
+ Xsw0wzKTQlNCxJmFMZSmwdxR1WYZ9+kVEd4XWlnUgAspldj2fY9BP+W
 X-Developer-Key: i=boris.brezillon@collabora.com; a=ed25519;
  pk=eN+ORdOgQY7d5U+0kA8h5bf67XdD8bhKbjD/TCHexSY=
 X-Spamd-Bar: ---
-Message-ID-Hash: PSBKQRBHTUVAZY5E2PXDSCSCXFHEM6RS
-X-Message-ID-Hash: PSBKQRBHTUVAZY5E2PXDSCSCXFHEM6RS
+Message-ID-Hash: WZPOPSE7NKH7NR7HCVSLUVB53JSRP55B
+X-Message-ID-Hash: WZPOPSE7NKH7NR7HCVSLUVB53JSRP55B
 X-MailFrom: boris.brezillon@collabora.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 CC: Sumit Semwal <sumit.semwal@linaro.org>, =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, Boris Brezillon <boris.brezillon@collabora.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 5/6] drm/panthor: Use the drm_dev_access guard
+Subject: [Linaro-mm-sig] [PATCH 6/6] drm/panthor: Add a new guard for our custom resume_and_get() PM helper
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PSBKQRBHTUVAZY5E2PXDSCSCXFHEM6RS/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WZPOPSE7NKH7NR7HCVSLUVB53JSRP55B/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -71,7 +71,7 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 8B4DD537976
+X-Rspamd-Queue-Id: 204CB537985
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [0.59 / 15.00];
 	R_DKIM_REJECT(1.00)[collabora.com:s=mail];
@@ -90,7 +90,7 @@ X-Spamd-Result: default: False [0.59 / 15.00];
 	FREEMAIL_CC(0.00)[linaro.org,amd.com,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,collabora.com];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.235];
+	NEURAL_HAM(-0.00)[-0.109];
 	FROM_NEQ_ENVFROM(0.00)[boris.brezillon@collabora.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[collabora.com:-];
@@ -98,466 +98,119 @@ X-Spamd-Result: default: False [0.59 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[collabora.com:email,collabora.com:mid,reset.work:url,lists.linaro.org:helo,lists.linaro.org:rdns,tick_work.work:url,linaro.org:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[collabora.com:email,collabora.com:mid,lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
 X-Rspamd-Action: no action
 
-It simplifies the code in a few places, allowing direct returns instead
-of gotos. It also helps identifying the sections under the dev_access
-guard when scoped_cond_guard() is used.
+Overload the already existing pm_runtime_active_auto_try_enabled guard
+with our custom guard that force the state to suspened (and thus clear
+the runtime_error) in case the resume fails.
+
+Once done, we can replace the existing places where manual
+panthor_device_resume_and_get()+pm_runtime_put_autosuspend() were
+done by guards.
 
 Signed-off-by: Boris Brezillon <boris.brezillon@collabora.com>
 ---
- drivers/gpu/drm/panthor/panthor_device.c | 127 ++++++++++++++-----------------
- drivers/gpu/drm/panthor/panthor_drv.c    |  58 ++++++--------
- drivers/gpu/drm/panthor/panthor_mmu.c    |  29 +++----
- drivers/gpu/drm/panthor/panthor_sched.c  |  10 +--
- 4 files changed, 95 insertions(+), 129 deletions(-)
+ drivers/gpu/drm/panthor/panthor_device.h | 10 +++++++---
+ drivers/gpu/drm/panthor/panthor_drv.c    |  4 ++--
+ drivers/gpu/drm/panthor/panthor_sched.c  | 11 ++++-------
+ 3 files changed, 13 insertions(+), 12 deletions(-)
 
-diff --git a/drivers/gpu/drm/panthor/panthor_device.c b/drivers/gpu/drm/panthor/panthor_device.c
-index cb9cd8d0448b..988a9a34f753 100644
---- a/drivers/gpu/drm/panthor/panthor_device.c
-+++ b/drivers/gpu/drm/panthor/panthor_device.c
-@@ -123,7 +123,7 @@ static void panthor_device_reset_cleanup(struct drm_device *ddev, void *data)
- static void panthor_device_reset_work(struct work_struct *work)
+diff --git a/drivers/gpu/drm/panthor/panthor_device.h b/drivers/gpu/drm/panthor/panthor_device.h
+index 1aaf06df875b..51527d2e2f77 100644
+--- a/drivers/gpu/drm/panthor/panthor_device.h
++++ b/drivers/gpu/drm/panthor/panthor_device.h
+@@ -407,9 +407,10 @@ int panthor_device_mmap_io(struct panthor_device *ptdev,
+ int panthor_device_resume(struct device *dev);
+ int panthor_device_suspend(struct device *dev);
+ 
+-static inline int panthor_device_resume_and_get(struct panthor_device *ptdev)
++static inline int panthor_device_resume_and_get(struct device *dev)
  {
- 	struct panthor_device *ptdev = container_of(work, struct panthor_device, reset.work);
--	int ret = 0, cookie;
-+	int ret = 0;
+-	int ret = pm_runtime_resume_and_get(ptdev->base.dev);
++	struct panthor_device *ptdev = dev_get_drvdata(dev);
++	int ret = pm_runtime_resume_and_get(dev);
  
- 	/* If the device is entering suspend, we don't reset. A slow reset will
- 	 * be forced at resume time instead.
-@@ -131,19 +131,17 @@ static void panthor_device_reset_work(struct work_struct *work)
- 	if (atomic_read(&ptdev->pm.state) != PANTHOR_DEVICE_PM_STATE_ACTIVE)
- 		return;
+ 	/* If the resume failed, we need to clear the runtime_error, which
+ 	 * can done by forcing the RPM state to suspended. If multiple
+@@ -424,11 +425,14 @@ static inline int panthor_device_resume_and_get(struct panthor_device *ptdev)
+ 	 * something we can live with.
+ 	 */
+ 	if (ret && atomic_cmpxchg(&ptdev->pm.recovery_needed, 1, 0) == 1)
+-		pm_runtime_set_suspended(ptdev->base.dev);
++		pm_runtime_set_suspended(dev);
  
--	if (!drm_dev_enter(&ptdev->base, &cookie))
--		return;
--
--	panthor_sched_pre_reset(ptdev);
--	panthor_fw_pre_reset(ptdev, true);
--	panthor_mmu_pre_reset(ptdev);
--	panthor_hw_soft_reset(ptdev);
--	panthor_hw_l2_power_on(ptdev);
--	panthor_mmu_post_reset(ptdev);
--	ret = panthor_fw_post_reset(ptdev);
--	atomic_set(&ptdev->reset.pending, 0);
--	panthor_sched_post_reset(ptdev, ret != 0);
--	drm_dev_exit(cookie);
-+	scoped_cond_guard(drm_dev_access, return, &ptdev->base) {
-+		panthor_sched_pre_reset(ptdev);
-+		panthor_fw_pre_reset(ptdev, true);
-+		panthor_mmu_pre_reset(ptdev);
-+		panthor_hw_soft_reset(ptdev);
-+		panthor_hw_l2_power_on(ptdev);
-+		panthor_mmu_post_reset(ptdev);
-+		ret = panthor_fw_post_reset(ptdev);
-+		atomic_set(&ptdev->reset.pending, 0);
-+		panthor_sched_post_reset(ptdev, ret != 0);
-+	}
- 
- 	if (ret) {
- 		panthor_device_unplug(ptdev);
-@@ -394,38 +392,31 @@ static vm_fault_t panthor_mmio_vm_fault(struct vm_fault *vmf)
- 	u64 offset = (u64)vma->vm_pgoff << PAGE_SHIFT;
- 	unsigned long pfn;
- 	pgprot_t pgprot;
--	vm_fault_t ret;
- 	bool active;
--	int cookie;
- 
--	if (!drm_dev_enter(&ptdev->base, &cookie))
-+	ACQUIRE(drm_dev_access, dev_guard)(&ptdev->base);
-+	if (ACQUIRE_ERR(drm_dev_access, &dev_guard))
- 		return VM_FAULT_SIGBUS;
- 
--	scoped_guard(mutex, &ptdev->pm.mmio_lock) {
--		active = atomic_read(&ptdev->pm.state) == PANTHOR_DEVICE_PM_STATE_ACTIVE;
-+	guard(mutex)(&ptdev->pm.mmio_lock);
-+	active = atomic_read(&ptdev->pm.state) == PANTHOR_DEVICE_PM_STATE_ACTIVE;
- 
--		switch (offset) {
--		case DRM_PANTHOR_USER_FLUSH_ID_MMIO_OFFSET:
--			if (active)
--				pfn = __phys_to_pfn(ptdev->phys_addr + CSF_GPU_LATEST_FLUSH_ID);
--			else
--				pfn = page_to_pfn(ptdev->pm.dummy_latest_flush);
-+	switch (offset) {
-+	case DRM_PANTHOR_USER_FLUSH_ID_MMIO_OFFSET:
-+		if (active)
-+			pfn = __phys_to_pfn(ptdev->phys_addr + CSF_GPU_LATEST_FLUSH_ID);
-+		else
-+			pfn = page_to_pfn(ptdev->pm.dummy_latest_flush);
- 
--			pgprot = vma->vm_page_prot;
--			if (active)
--				pgprot = pgprot_noncached(pgprot);
-+		pgprot = vma->vm_page_prot;
-+		if (active)
-+			pgprot = pgprot_noncached(pgprot);
- 
--			ret = vmf_insert_pfn_prot(vma, vmf->address, pfn, pgprot);
--			break;
-+		return vmf_insert_pfn_prot(vma, vmf->address, pfn, pgprot);
- 
--		default:
--			ret = VM_FAULT_SIGBUS;
--			break;
--		}
-+	default:
-+		return VM_FAULT_SIGBUS;
- 	}
--
--	drm_dev_exit(cookie);
--	return ret;
+ 	return ret;
  }
  
- static const struct vm_operations_struct panthor_mmio_vm_ops = {
-@@ -482,7 +473,7 @@ static int panthor_device_resume_hw_components(struct panthor_device *ptdev)
- int panthor_device_resume(struct device *dev)
- {
- 	struct panthor_device *ptdev = dev_get_drvdata(dev);
--	int ret, cookie;
-+	int ret;
- 
- 	if (atomic_read(&ptdev->pm.state) != PANTHOR_DEVICE_PM_STATE_SUSPENDED)
- 		return -EINVAL;
-@@ -503,28 +494,27 @@ int panthor_device_resume(struct device *dev)
- 
- 	panthor_devfreq_resume(ptdev);
- 
--	if (panthor_device_is_initialized(ptdev) &&
--	    drm_dev_enter(&ptdev->base, &cookie)) {
--		/* If there was a reset pending at the time we suspended the
--		 * device, we force a slow reset.
--		 */
--		if (atomic_read(&ptdev->reset.pending)) {
--			ptdev->reset.fast = false;
--			atomic_set(&ptdev->reset.pending, 0);
--		}
-+	if (panthor_device_is_initialized(ptdev)) {
-+		scoped_cond_guard(drm_dev_access, ret = 0, &ptdev->base) {
-+			/* If there was a reset pending at the time we suspended the
-+			 * device, we force a slow reset.
-+			 */
-+			if (atomic_read(&ptdev->reset.pending)) {
-+				ptdev->reset.fast = false;
-+				atomic_set(&ptdev->reset.pending, 0);
-+			}
- 
--		ret = panthor_device_resume_hw_components(ptdev);
--		if (ret && ptdev->reset.fast) {
--			drm_err(&ptdev->base, "Fast reset failed, trying a slow reset");
--			ptdev->reset.fast = false;
- 			ret = panthor_device_resume_hw_components(ptdev);
-+			if (ret && ptdev->reset.fast) {
-+				drm_err(&ptdev->base, "Fast reset failed, trying a slow reset");
-+				ptdev->reset.fast = false;
-+				ret = panthor_device_resume_hw_components(ptdev);
-+			}
++DEFINE_GUARD_COND(pm_runtime_active_auto, _try_enabled_or_suspend,
++		  panthor_device_resume_and_get(_T), _RET == 0)
 +
-+			if (!ret)
-+				panthor_sched_resume(ptdev);
- 		}
- 
--		if (!ret)
--			panthor_sched_resume(ptdev);
--
--		drm_dev_exit(cookie);
--
- 		if (ret)
- 			goto err_suspend_devfreq;
- 	}
-@@ -559,7 +549,6 @@ int panthor_device_resume(struct device *dev)
- int panthor_device_suspend(struct device *dev)
- {
- 	struct panthor_device *ptdev = dev_get_drvdata(dev);
--	int cookie;
- 
- 	if (atomic_read(&ptdev->pm.state) != PANTHOR_DEVICE_PM_STATE_ACTIVE)
- 		return -EINVAL;
-@@ -577,19 +566,19 @@ int panthor_device_suspend(struct device *dev)
- 				    DRM_PANTHOR_USER_MMIO_OFFSET, 0, 1);
- 	}
- 
--	if (panthor_device_is_initialized(ptdev) &&
--	    drm_dev_enter(&ptdev->base, &cookie)) {
--		cancel_work_sync(&ptdev->reset.work);
-+	if (panthor_device_is_initialized(ptdev)) {
-+		scoped_guard(drm_dev_access, &ptdev->base) {
-+			cancel_work_sync(&ptdev->reset.work);
- 
--		/* We prepare everything as if we were resetting the GPU.
--		 * The end of the reset will happen in the resume path though.
--		 */
--		panthor_sched_suspend(ptdev);
--		panthor_fw_suspend(ptdev);
--		panthor_mmu_suspend(ptdev);
--		panthor_gpu_suspend(ptdev);
--		panthor_pwr_suspend(ptdev);
--		drm_dev_exit(cookie);
-+			/* We prepare everything as if we were resetting the GPU.
-+			 * The end of the reset will happen in the resume path though.
-+			 */
-+			panthor_sched_suspend(ptdev);
-+			panthor_fw_suspend(ptdev);
-+			panthor_mmu_suspend(ptdev);
-+			panthor_gpu_suspend(ptdev);
-+			panthor_pwr_suspend(ptdev);
-+		}
- 	}
- 
- 	panthor_devfreq_suspend(ptdev);
+ enum drm_panthor_exception_type {
+ 	DRM_PANTHOR_EXCEPTION_OK = 0x00,
+ 	DRM_PANTHOR_EXCEPTION_TERMINATED = 0x04,
 diff --git a/drivers/gpu/drm/panthor/panthor_drv.c b/drivers/gpu/drm/panthor/panthor_drv.c
-index e8dc4096c1d2..789ddc0ff7ef 100644
+index 789ddc0ff7ef..f2d60ff00896 100644
 --- a/drivers/gpu/drm/panthor/panthor_drv.c
 +++ b/drivers/gpu/drm/panthor/panthor_drv.c
-@@ -997,9 +997,10 @@ static int panthor_ioctl_vm_create(struct drm_device *ddev, void *data,
- 	struct panthor_device *ptdev = container_of(ddev, struct panthor_device, base);
- 	struct panthor_file *pfile = file->driver_priv;
- 	struct drm_panthor_vm_create *args = data;
--	int cookie, ret;
-+	int ret;
+@@ -824,7 +824,8 @@ static int panthor_query_timestamp_info(struct panthor_device *ptdev,
+ 		(flags & DRM_PANTHOR_TIMESTAMP_DURATION) ||
+ 		(timestamp_types >= 2);
  
--	if (!drm_dev_enter(ddev, &cookie))
-+	ACQUIRE(drm_dev_access, dev_guard)(ddev);
-+	if (ACQUIRE_ERR(drm_dev_access, &dev_guard))
- 		return -ENODEV;
- 
- 	ret = panthor_vm_pool_create_vm(ptdev, pfile->vms,  args);
-@@ -1008,7 +1009,6 @@ static int panthor_ioctl_vm_create(struct drm_device *ddev, void *data,
- 		ret = 0;
- 	}
- 
--	drm_dev_exit(cookie);
- 	return ret;
- }
- 
-@@ -1033,38 +1033,30 @@ static int panthor_ioctl_bo_create(struct drm_device *ddev, void *data,
- 	struct panthor_file *pfile = file->driver_priv;
- 	struct drm_panthor_bo_create *args = data;
- 	struct panthor_vm *vm = NULL;
--	int cookie, ret;
-+	int ret;
- 
--	if (!drm_dev_enter(ddev, &cookie))
-+	ACQUIRE(drm_dev_access, dev_guard)(ddev);
-+	if (ACQUIRE_ERR(drm_dev_access, &dev_guard))
- 		return -ENODEV;
- 
- 	if (!args->size || args->pad ||
--	    (args->flags & ~PANTHOR_BO_FLAGS)) {
--		ret = -EINVAL;
--		goto out_dev_exit;
--	}
-+	    (args->flags & ~PANTHOR_BO_FLAGS))
-+		return -EINVAL;
- 
- 	if ((args->flags & DRM_PANTHOR_BO_NO_MMAP) &&
--	    (args->flags & DRM_PANTHOR_BO_WB_MMAP)) {
--		ret = -EINVAL;
--		goto out_dev_exit;
--	}
-+	    (args->flags & DRM_PANTHOR_BO_WB_MMAP))
-+		return -EINVAL;
- 
- 	if (args->exclusive_vm_id) {
- 		vm = panthor_vm_pool_get_vm(pfile->vms, args->exclusive_vm_id);
--		if (!vm) {
--			ret = -EINVAL;
--			goto out_dev_exit;
--		}
-+		if (!vm)
-+			return -EINVAL;
- 	}
- 
- 	ret = panthor_gem_create_with_handle(file, ddev, vm, &args->size,
- 					     args->flags, &args->handle);
- 
- 	panthor_vm_put(vm);
--
--out_dev_exit:
--	drm_dev_exit(cookie);
- 	return ret;
- }
- 
-@@ -1107,17 +1099,18 @@ static int panthor_ioctl_group_submit(struct drm_device *ddev, void *data,
- 	struct drm_panthor_group_submit *args = data;
- 	struct drm_panthor_queue_submit *jobs_args;
- 	struct panthor_submit_ctx ctx;
--	int ret = 0, cookie;
-+	int ret = 0;
- 
- 	if (args->pad)
- 		return -EINVAL;
- 
--	if (!drm_dev_enter(ddev, &cookie))
-+	ACQUIRE(drm_dev_access, dev_guard)(ddev);
-+	if (ACQUIRE_ERR(drm_dev_access, &dev_guard))
- 		return -ENODEV;
- 
- 	ret = PANTHOR_UOBJ_GET_ARRAY(jobs_args, &args->queue_submits);
+-	ret = panthor_device_resume_and_get(ptdev);
++	ACQUIRE(pm_runtime_active_auto_try_enabled_or_suspend, pm_guard)(ptdev->base.dev);
++	ret = ACQUIRE_ERR(pm_runtime_active_auto_try_enabled_or_suspend, &pm_guard);
  	if (ret)
--		goto out_dev_exit;
-+		return ret;
+ 		return ret;
  
- 	ret = panthor_submit_ctx_init(&ctx, file, args->queue_submits.count);
- 	if (ret)
-@@ -1201,8 +1194,6 @@ static int panthor_ioctl_group_submit(struct drm_device *ddev, void *data,
- out_free_jobs_args:
- 	kvfree(jobs_args);
- 
--out_dev_exit:
--	drm_dev_exit(cookie);
- 	return ret;
- }
- 
-@@ -1438,18 +1429,15 @@ static int panthor_ioctl_vm_bind(struct drm_device *ddev, void *data,
- 				 struct drm_file *file)
- {
- 	struct drm_panthor_vm_bind *args = data;
--	int cookie, ret;
- 
--	if (!drm_dev_enter(ddev, &cookie))
-+	ACQUIRE(drm_dev_access, dev_guard)(ddev);
-+	if (ACQUIRE_ERR(drm_dev_access, &dev_guard))
- 		return -ENODEV;
- 
- 	if (args->flags & DRM_PANTHOR_VM_BIND_ASYNC)
--		ret = panthor_ioctl_vm_bind_async(ddev, args, file);
--	else
--		ret = panthor_ioctl_vm_bind_sync(ddev, args, file);
-+		return panthor_ioctl_vm_bind_async(ddev, args, file);
- 
--	drm_dev_exit(cookie);
--	return ret;
-+	return panthor_ioctl_vm_bind_sync(ddev, args, file);
- }
- 
- static int panthor_ioctl_vm_get_state(struct drm_device *ddev, void *data,
-@@ -1671,9 +1659,10 @@ static int panthor_mmap(struct file *filp, struct vm_area_struct *vma)
- 	struct panthor_device *ptdev = pfile->ptdev;
- 	u64 offset = (u64)vma->vm_pgoff << PAGE_SHIFT;
- 	u64 user_mmio_offset;
--	int ret, cookie;
-+	int ret;
- 
--	if (!drm_dev_enter(file->minor->dev, &cookie))
-+	ACQUIRE(drm_dev_access, dev_guard)(file->minor->dev);
-+	if (ACQUIRE_ERR(drm_dev_access, &dev_guard))
- 		return -ENODEV;
- 
- 	/* Adjust the user MMIO offset to match the offset used kernel side.
-@@ -1691,7 +1680,6 @@ static int panthor_mmap(struct file *filp, struct vm_area_struct *vma)
- 		ret = drm_gem_mmap(filp, vma);
+@@ -894,7 +895,6 @@ static int panthor_query_timestamp_info(struct panthor_device *ptdev,
+ 		arg->cpu_timestamp_nsec = 0;
  	}
  
--	drm_dev_exit(cookie);
- 	return ret;
+-	pm_runtime_put(ptdev->base.dev);
+ 	return 0;
  }
  
-diff --git a/drivers/gpu/drm/panthor/panthor_mmu.c b/drivers/gpu/drm/panthor/panthor_mmu.c
-index ab9a77e6a145..ff3beb9147e8 100644
---- a/drivers/gpu/drm/panthor/panthor_mmu.c
-+++ b/drivers/gpu/drm/panthor/panthor_mmu.c
-@@ -788,13 +788,13 @@ static int panthor_vm_active_locked(struct panthor_vm *vm)
- int panthor_vm_active(struct panthor_vm *vm)
- {
- 	struct panthor_device *ptdev = vm->ptdev;
--	int ret = 0, cookie;
- 
--	if (!drm_dev_enter(&ptdev->base, &cookie))
-+	ACQUIRE(drm_dev_access, dev_guard)(&ptdev->base);
-+	if (ACQUIRE_ERR(drm_dev_access, &dev_guard))
- 		return -ENODEV;
- 
- 	if (refcount_inc_not_zero(&vm->as.active_cnt))
--		goto out_dev_exit;
-+		return 0;
- 
- 	/* As soon as active is called, we place the VM at the end of the VM LRU.
- 	 * If something fails after that, the only downside is that this VM that
-@@ -809,14 +809,10 @@ int panthor_vm_active(struct panthor_vm *vm)
- 	/* Make sure we don't race with lock/unlock_region() calls
- 	 * happening around VM bind operations.
- 	 */
--	scoped_guard(mutex, &vm->op_lock) {
--		guard(mutex)(&ptdev->mmu->as.slots_lock);
--		ret = panthor_vm_active_locked(vm);
--	}
-+	guard(mutex)(&vm->op_lock);
-+	guard(mutex)(&ptdev->mmu->as.slots_lock);
- 
--out_dev_exit:
--	drm_dev_exit(cookie);
--	return ret;
-+	return panthor_vm_active_locked(vm);
- }
- 
- /**
-@@ -902,16 +898,15 @@ static size_t get_pgsize(u64 addr, size_t size, size_t *count)
- static void panthor_vm_declare_unusable(struct panthor_vm *vm)
- {
- 	struct panthor_device *ptdev = vm->ptdev;
--	int cookie;
- 
- 	if (vm->unusable)
- 		return;
- 
- 	vm->unusable = true;
- 	guard(mutex)(&ptdev->mmu->as.slots_lock);
--	if (vm->as.id >= 0 && drm_dev_enter(&ptdev->base, &cookie)) {
--		panthor_mmu_as_disable(ptdev, vm->as.id, false);
--		drm_dev_exit(cookie);
-+	if (vm->as.id >= 0) {
-+		scoped_guard(drm_dev_access, &ptdev->base)
-+			panthor_mmu_as_disable(ptdev, vm->as.id, false);
- 	}
- }
- 
-@@ -1983,12 +1978,8 @@ static void panthor_vm_free(struct drm_gpuvm *gpuvm)
- 	scoped_guard(mutex, &vm->op_lock) {
- 		guard(mutex)(&ptdev->mmu->as.slots_lock);
- 		if (vm->as.id >= 0) {
--			int cookie;
--
--			if (drm_dev_enter(&ptdev->base, &cookie)) {
-+			scoped_guard(drm_dev_access, &ptdev->base)
- 				panthor_mmu_as_disable(ptdev, vm->as.id, false);
--				drm_dev_exit(cookie);
--			}
- 
- 			ptdev->mmu->as.slots[vm->as.id].vm = NULL;
- 			clear_bit(vm->as.id, &ptdev->mmu->as.alloc_mask);
 diff --git a/drivers/gpu/drm/panthor/panthor_sched.c b/drivers/gpu/drm/panthor/panthor_sched.c
-index d8cadd393fbe..9aa9941d2309 100644
+index 9aa9941d2309..9afa38e87fc9 100644
 --- a/drivers/gpu/drm/panthor/panthor_sched.c
 +++ b/drivers/gpu/drm/panthor/panthor_sched.c
-@@ -2624,21 +2624,19 @@ static void tick_work(struct work_struct *work)
- 	struct panthor_scheduler *sched = container_of(work, struct panthor_scheduler,
- 						      tick_work.work);
- 	struct panthor_device *ptdev = sched->ptdev;
--	int ret, cookie;
-+	int ret;
- 
--	if (!drm_dev_enter(&ptdev->base, &cookie))
-+	ACQUIRE(drm_dev_access, dev_guard)(&ptdev->base);
-+	if (ACQUIRE_ERR(drm_dev_access, &dev_guard))
+@@ -2630,13 +2630,12 @@ static void tick_work(struct work_struct *work)
+ 	if (ACQUIRE_ERR(drm_dev_access, &dev_guard))
  		return;
  
- 	ret = panthor_device_resume_and_get(ptdev);
+-	ret = panthor_device_resume_and_get(ptdev);
++	ACQUIRE(pm_runtime_active_auto_try_enabled_or_suspend, pm_guard)(ptdev->base.dev);
++	ret = ACQUIRE_ERR(pm_runtime_active_auto_try_enabled_or_suspend, &pm_guard);
  	if (drm_WARN_ON(&ptdev->base, ret))
--		goto out_dev_exit;
-+		return;
+ 		return;
  
  	tick(sched);
- 	pm_runtime_mark_last_busy(ptdev->base.dev);
- 	pm_runtime_put_autosuspend(ptdev->base.dev);
--
--out_dev_exit:
--	drm_dev_exit(cookie);
+-	pm_runtime_mark_last_busy(ptdev->base.dev);
+-	pm_runtime_put_autosuspend(ptdev->base.dev);
  }
  
  static int panthor_queue_eval_syncwait(struct panthor_group *group, u8 queue_idx)
+@@ -3359,7 +3358,8 @@ queue_run_job(struct drm_sched_job *sched_job)
+ 		return dma_fence_get(job->done_fence);
+ 	}
+ 
+-	ret = panthor_device_resume_and_get(ptdev);
++	ACQUIRE(pm_runtime_active_auto_try_enabled_or_suspend, pm_guard)(ptdev->base.dev);
++	ret = ACQUIRE_ERR(pm_runtime_active_auto_try_enabled_or_suspend, &pm_guard);
+ 	if (drm_WARN_ON(&ptdev->base, ret))
+ 		return ERR_PTR(ret);
+ 
+@@ -3367,9 +3367,6 @@ queue_run_job(struct drm_sched_job *sched_job)
+ 		done_fence = queue_run_job_locked(job);
+ 	}
+ 
+-	pm_runtime_mark_last_busy(ptdev->base.dev);
+-	pm_runtime_put_autosuspend(ptdev->base.dev);
+-
+ 	return done_fence;
+ }
+ 
 
 -- 
 2.54.0
