@@ -2,21 +2,21 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id kHYuJcxNBmqUiQIAu9opvQ
+	id oGlEBzBPBmoaigIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 15 May 2026 00:33:48 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 15 May 2026 00:39:44 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2A78D547819
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 15 May 2026 00:33:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A904B547897
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 15 May 2026 00:39:43 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id D82663F962
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 14 May 2026 22:33:46 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 6EE834046A
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 14 May 2026 22:39:42 +0000 (UTC)
 Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
-	by lists.linaro.org (Postfix) with ESMTPS id 430853F7F5
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 14 May 2026 22:33:36 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 1F8F63F6BD
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 14 May 2026 22:39:31 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=igalia.com header.s=20170329 header.b=Q74I3hWg;
+	dkim=pass header.d=igalia.com header.s=20170329 header.b=Zpu10FYE;
 	spf=pass (lists.linaro.org: domain of mcanal@igalia.com designates 213.97.179.56 as permitted sender) smtp.mailfrom=mcanal@igalia.com;
 	dmarc=pass (policy=none) header.from=igalia.com
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
@@ -25,18 +25,18 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
 	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
 	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
 	List-Post:List-Owner:List-Archive;
-	bh=Q/1w/pAVW95WK9YzKUDjOYOarf1ClcHbhkmttHS7cpI=; b=Q74I3hWgxU5dixScBrrPgkqq5D
-	ZFpH+H4hr6Vxlx3uZ9X/J3ZoALWoIyYHNrZctonFOV96uJsrQbiL/tWc/UZGr8a6ojlnfgJbsEC0Q
-	pMLDa2sdFoJJ7Pgqka2883X2p2dP8/3F/dDPVq+Yg7AH2ZVY6hj/53gt6RtP6ooxQgosUW5damw00
-	BA3ALuD0c7WpVn77vBua2NQf4S7rTNK5SsXbiH7ajaQurXYL7YafOXN2vhcG6k5VUNN8VL+yUGCIj
-	amI6cVgoI3W3C3poS7ZKx1/oKXIwvT5jATb+B9u/JkcmDt3ECARJIOFU1/OKZ/QBeFi9De/xwP9P6
-	dcGK34Hg==;
-Received: from gwsc.sc.usp.br ([143.107.225.16] helo=[172.24.27.208])
+	bh=Q/1w/pAVW95WK9YzKUDjOYOarf1ClcHbhkmttHS7cpI=; b=Zpu10FYEqHcf5dK5mAXU7fBhK7
+	em6Ejvzaoyy8BTFnqAZIe0SI0dBEUhv4zrzj2VodLouEMeSd00khUXNEMPmi8NgUka83jpK6tSnSk
+	wmsJN1XR94bx32Pvk2iO48yv+1G9WzwnrHU1VDsjCAnCGnjqn36M9zRDM/Ps28DYlUMfhQNP6uUck
+	GMB4YDpGa7tv4bRmDrOhVrtDqg8qtGFl7ATRwo9N0ShIBkgy7iOlsE+Voz5B0oCbRbQZV6LrSJ0t/
+	JFStnW0/Q7SrcF1vjt75mYYxwI0VXvjb0PHzMu02y3cVZmm6jbhZWR9KAD3OZu5iqp2fgKYm8STUt
+	3gyNqxvg==;
+Received: from [187.43.221.194] (helo=[172.20.10.2])
 	by fanzine2.igalia.com with esmtpsa
 	(Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim)
-	id 1wNecK-000GVR-R5; Fri, 15 May 2026 00:33:21 +0200
-Message-ID: <983fdc40-cce2-4476-bce7-180855e63212@igalia.com>
-Date: Thu, 14 May 2026 19:33:13 -0300
+	id 1wNei7-000GaP-BI; Fri, 15 May 2026 00:39:19 +0200
+Message-ID: <3c616d25-381e-43a7-af71-73bf0b9ee063@igalia.com>
+Date: Thu, 14 May 2026 19:39:10 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: =?UTF-8?Q?Ma=C3=ADra_Canal?= <mcanal@igalia.com>
@@ -75,8 +75,8 @@ Autocrypt: addr=mcanal@igalia.com; keydata=
  raV3P8t/6cmtawVjurhnCDuURyhUrjpRhgFp+lW8OGr6pepHol/WFIOQEg==
 In-Reply-To: <d4267251-e113-42ae-b756-ea1ab63f9f7e@igalia.com>
 X-Spamd-Bar: ---
-Message-ID-Hash: C2FDQO5RYDNL6OWZHFKN42LWWNMRQ6Q7
-X-Message-ID-Hash: C2FDQO5RYDNL6OWZHFKN42LWWNMRQ6Q7
+Message-ID-Hash: A3HZPOGVX3ZPVA73EAQVO5YCFLMX57VR
+X-Message-ID-Hash: A3HZPOGVX3ZPVA73EAQVO5YCFLMX57VR
 X-MailFrom: mcanal@igalia.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
@@ -85,7 +85,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH v2] dma-fence: Clarify external lock use case in dma_fence_init() docs
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/C2FDQO5RYDNL6OWZHFKN42LWWNMRQ6Q7/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/A3HZPOGVX3ZPVA73EAQVO5YCFLMX57VR/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -94,7 +94,7 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="utf-8"; format="flowed"
 Content-Transfer-Encoding: base64
-X-Rspamd-Queue-Id: 2A78D547819
+X-Rspamd-Queue-Id: A904B547897
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [2.19 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
@@ -116,14 +116,14 @@ X-Spamd-Result: default: False [2.19 / 15.00];
 	DKIM_TRACE(0.00)[igalia.com:-];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-0.739];
+	NEURAL_HAM(-0.00)[-0.738];
 	FROM_NEQ_ENVFROM(0.00)[mcanal@igalia.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCPT_COUNT_SEVEN(0.00)[9];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[igalia.com:email,igalia.com:mid,linaro.org:email]
 X-Rspamd-Action: no action
 
 K2NjIENocmlzdGlhbidzIEFNRCBlLW1haWwNCg0KT24gNS80LzI2IDExOjQ3LCBNYcOtcmEgQ2Fu
