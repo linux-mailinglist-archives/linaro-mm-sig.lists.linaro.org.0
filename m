@@ -2,202 +2,196 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 40AQI+TiBmoGowIAu9opvQ
+	id kHYuJcxNBmqUiQIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 15 May 2026 11:09:56 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 15 May 2026 00:33:48 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 14CD154C0FF
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 15 May 2026 11:09:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2A78D547819
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 15 May 2026 00:33:48 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0CD51404E0
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 15 May 2026 09:03:26 +0000 (UTC)
-Received: from mail-qv1-f54.google.com (mail-qv1-f54.google.com [209.85.219.54])
-	by lists.linaro.org (Postfix) with ESMTPS id A3C743F7F5
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 14 May 2026 20:44:11 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D82663F962
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 14 May 2026 22:33:46 +0000 (UTC)
+Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
+	by lists.linaro.org (Postfix) with ESMTPS id 430853F7F5
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 14 May 2026 22:33:36 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=paul-moore.com header.s=google header.b=Yw+4v5or;
-	spf=pass (lists.linaro.org: domain of paul@paul-moore.com designates 209.85.219.54 as permitted sender) smtp.mailfrom=paul@paul-moore.com;
-	dmarc=pass (policy=none) header.from=paul-moore.com
-Received: by mail-qv1-f54.google.com with SMTP id 6a1803df08f44-8b5de17382cso61437336d6.1
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 14 May 2026 13:44:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=paul-moore.com; s=google; t=1778791451; x=1779396251; darn=lists.linaro.org;
-        h=in-reply-to:references:subject:cc:to:from:content-transfer-encoding
-         :mime-version:message-id:date:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=iIn517qMFa/72Ee/XGTDeeK9Cq6VJiGDpV2GCDJOS7E=;
-        b=Yw+4v5orjfcAVIA9SZyp5eF/c4Bcsy5UelkKuFo0A91l5n3nzKgP+EpZDEunq+ACp0
-         cd0NLlaAaXSEB11IK/vC+m2N7ISvFLxCj1iSnA2zdEztVYlkUMhLZRJhaFs9L7dQiQzj
-         ZkL7df+GoI0hZPQ8GTd94XuRVL6amVmnO8N1iOeKKRHYeQfgo1Dq4eLZTgtdFu4UTMMy
-         j2J4mvaR21wDN8yYu8J+GDwQ8gO/raYaWMwd0XWgblQ6x0U6pprvRkJPvG5SxE8FUrli
-         KfsxTVOUmKA6Qay2cUrEoGdcnelUGc60O0jlwl7Yeory1HmGWjVWXbBfHoWPDRMhBtbg
-         cSNg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778791451; x=1779396251;
-        h=in-reply-to:references:subject:cc:to:from:content-transfer-encoding
-         :mime-version:message-id:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=iIn517qMFa/72Ee/XGTDeeK9Cq6VJiGDpV2GCDJOS7E=;
-        b=gj3SA4zBwwIHTWMVDqdp62QIOkH2mR8q3Igd9Ej0q2Eo6OtMroVt/CalX4G8ki/U5y
-         oZR2jlKet9Xlwt/oju5AZFBYMoecsL9zEjruZn5381vlxvO8iri4ytFN0PmARwcpoDpi
-         Hh3bbvxeg0cn0TxJ9zB9V2jn5yNVopW2S1/JCSspcb3yIDL/hyDob7OKNLxBermldqxI
-         sKJse+DSKVcRm2h04UX5wTo/uzOndrID42tIti85+yC6eBK+vDOLnQ2GTmK0bJyjT13G
-         D2pYkAtKJigfT3vMd0CdDWI+D4aBVfkazMrk4KGfiF0eWhEiVdkuBw9OrLm6KBPAk47F
-         j4bg==
-X-Forwarded-Encrypted: i=1; AFNElJ8JVdekTHXjFLS7mmVcMRdQWBI8X5KYPXRte5sECsT63Qk3feXs4Roh0eo0Zs9CDHpywTQT0b/PJlo7k3cK@lists.linaro.org
-X-Gm-Message-State: AOJu0YxD75FoyQI7AgqwgyFs/T5TZsSy+EN+k6Q4JV1IkimtlpNZxVNR
-	d4sAUg4FV4QxXBHbXC2Ge4CL/SjCZyCIfwGVwNKAi3k7/i9Ebcfhq+OfrwDaP2Gt/Q==
-X-Gm-Gg: Acq92OH0KoE8isC6gVUV3rmBTHsfEMa1TC2MwRMy1tkh8tir/Stc3GPbCu9jT5TAq1E
-	BzOqt2mulFlAXDJq7J+iKg2YcmtcDFUn+K1bIsWYcrKARH+6/qfu3MOX1y6Yqzn20p6ay+tZNfo
-	EIiWvIEMVssSMQZfqmA1ZzdGNhA2LC5U/hnd5iTwI3smOuUgIrEucIJ/ZYOoyF5bEDTZFYcEPjP
-	w13KRpAcIFdiDgnCXaJzDinwbJGv7Xz4V2FasQ9XBPhmJ5HdbZxbzOieBAcDHcdkVnT47LF9vIr
-	5hq0JASpB5IQHHa5S0dy3GBfMMRKk315jNpKdpNYpcyjkG3OgYaQO18r+UAHGHFPiiHPwsBIYSb
-	aM6e+FOcB4RlfU5VoCf5Hlr8MWvGLgbmBRw34fOFUqfzIoliiAVaz/MDMlcAd6kjXWAWCgKQ9NN
-	STHsUHkjgizStFHZ+GM+rZj23FlKaN1GEEeMPwVyUq2RAX2b3B1z8j9jBXtaODsMYSBcH68OGt9
-	DzULA8=
-X-Received: by 2002:ad4:5e88:0:b0:8ac:b70c:8a9b with SMTP id 6a1803df08f44-8ca0f70f697mr20146116d6.44.1778791451056;
-        Thu, 14 May 2026 13:44:11 -0700 (PDT)
-Received: from localhost (pool-71-126-255-178.bstnma.fios.verizon.net. [71.126.255.178])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-8c90c358539sm32474826d6.41.2026.05.14.13.44.10
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 14 May 2026 13:44:10 -0700 (PDT)
-Date: Thu, 14 May 2026 16:44:09 -0400
-Message-ID: <16093a0278a6d7d1a0a8bc055c228bed@paul-moore.com>
-MIME-Version: 1.0 
-X-Mailer: pstg-pwork:20260514_1634/pstg-lib:20260514_1359/pstg-pwork:20260514_1634
-From: Paul Moore <paul@paul-moore.com>
-To: Albert Esteve <aesteve@redhat.com>, Tejun Heo <tj@kernel.org>, Johannes Weiner <hannes@cmpxchg.org>, =?utf-8?q?Michal_Koutn=C3=BD?= <mkoutny@suse.com>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, Sumit Semwal <sumit.semwal@linaro.org>, =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Michal Hocko <mhocko@kernel.org>, Roman Gushchin <roman.gushchin@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>, Muchun Song <muchun.song@linux.dev>, Andrew Morton <akpm@linux-foundation.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Christian Brauner <brauner@kernel.org>, James Morris <jmorris@namei.org>, "Serge E. Hallyn" <serge@hallyn.com>, Stephen Smalley <stephen.smalley.work@gmail.com>, Ondrej Mosnacek <omosnace@redhat.com>, Shuah Khan <shuah@kernel.org>
-References: <20260512-v2_20230123_tjmercier_google_com-v1-4-6326701c3691@redhat.com>
-In-Reply-To: <20260512-v2_20230123_tjmercier_google_com-v1-4-6326701c3691@redhat.com>
+	dkim=pass header.d=igalia.com header.s=20170329 header.b=Q74I3hWg;
+	spf=pass (lists.linaro.org: domain of mcanal@igalia.com designates 213.97.179.56 as permitted sender) smtp.mailfrom=mcanal@igalia.com;
+	dmarc=pass (policy=none) header.from=igalia.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
+	s=20170329; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:References:
+	Cc:To:From:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=Q/1w/pAVW95WK9YzKUDjOYOarf1ClcHbhkmttHS7cpI=; b=Q74I3hWgxU5dixScBrrPgkqq5D
+	ZFpH+H4hr6Vxlx3uZ9X/J3ZoALWoIyYHNrZctonFOV96uJsrQbiL/tWc/UZGr8a6ojlnfgJbsEC0Q
+	pMLDa2sdFoJJ7Pgqka2883X2p2dP8/3F/dDPVq+Yg7AH2ZVY6hj/53gt6RtP6ooxQgosUW5damw00
+	BA3ALuD0c7WpVn77vBua2NQf4S7rTNK5SsXbiH7ajaQurXYL7YafOXN2vhcG6k5VUNN8VL+yUGCIj
+	amI6cVgoI3W3C3poS7ZKx1/oKXIwvT5jATb+B9u/JkcmDt3ECARJIOFU1/OKZ/QBeFi9De/xwP9P6
+	dcGK34Hg==;
+Received: from gwsc.sc.usp.br ([143.107.225.16] helo=[172.24.27.208])
+	by fanzine2.igalia.com with esmtpsa
+	(Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim)
+	id 1wNecK-000GVR-R5; Fri, 15 May 2026 00:33:21 +0200
+Message-ID: <983fdc40-cce2-4476-bce7-180855e63212@igalia.com>
+Date: Thu, 14 May 2026 19:33:13 -0300
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+From: =?UTF-8?Q?Ma=C3=ADra_Canal?= <mcanal@igalia.com>
+To: phasta@kernel.org, =?UTF-8?Q?Christian_K=C3=B6nig?=
+ <ckoenig.leichtzumerken@gmail.com>, Sumit Semwal <sumit.semwal@linaro.org>,
+ Boris Brezillon <boris.brezillon@collabora.com>,
+ Tvrtko Ursulin <tvrtko.ursulin@igalia.com>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+References: <20260419134943.54833-2-mcanal@igalia.com>
+ <6389c57fd1453b545709c15c5fa74aa76a3d9afa.camel@mailbox.org>
+ <d4267251-e113-42ae-b756-ea1ab63f9f7e@igalia.com>
+Content-Language: en-US
+Autocrypt: addr=mcanal@igalia.com; keydata=
+ xsBNBGcCwywBCADgTji02Sv9zjHo26LXKdCaumcSWglfnJ93rwOCNkHfPIBll85LL9G0J7H8
+ /PmEL9y0LPo9/B3fhIpbD8VhSy9Sqz8qVl1oeqSe/rh3M+GceZbFUPpMSk5pNY9wr5raZ63d
+ gJc1cs8XBhuj1EzeE8qbP6JAmsL+NMEmtkkNPfjhX14yqzHDVSqmAFEsh4Vmw6oaTMXvwQ40
+ SkFjtl3sr20y07cJMDe++tFet2fsfKqQNxwiGBZJsjEMO2T+mW7DuV2pKHr9aifWjABY5EPw
+ G7qbrh+hXgfT+njAVg5+BcLz7w9Ju/7iwDMiIY1hx64Ogrpwykj9bXav35GKobicCAwHABEB
+ AAHNIE1hw61yYSBDYW5hbCA8bWNhbmFsQGlnYWxpYS5jb20+wsCRBBMBCAA7FiEE+ORdfQEW
+ dwcppnfRP/MOinaI+qoFAmcCwywCGwMFCwkIBwICIgIGFQoJCAsCBBYCAwECHgcCF4AACgkQ
+ P/MOinaI+qoUBQgAqz2gzUP7K3EBI24+a5FwFlruQGtim85GAJZXToBtzsfGLLVUSCL3aF/5
+ O335Bh6ViSBgxmowIwVJlS/e+L95CkTGzIIMHgyUZfNefR2L3aZA6cgc9z8cfow62Wu8eXnq
+ GM/+WWvrFQb/dBKKuohfBlpThqDWXxhozazCcJYYHradIuOM8zyMtCLDYwPW7Vqmewa+w994
+ 7Lo4CgOhUXVI2jJSBq3sgHEPxiUBOGxvOt1YBg7H9C37BeZYZxFmU8vh7fbOsvhx7Aqu5xV7
+ FG+1ZMfDkv+PixCuGtR5yPPaqU2XdjDC/9mlRWWQTPzg74RLEw5sz/tIHQPPm6ROCACFls7A
+ TQRnAsMsAQgAxTU8dnqzK6vgODTCW2A6SAzcvKztxae4YjRwN1SuGhJR2isJgQHoOH6oCItW
+ Xc1CGAWnci6doh1DJvbbB7uvkQlbeNxeIz0OzHSiB+pb1ssuT31Hz6QZFbX4q+crregPIhr+
+ 0xeDi6Mtu+paYprI7USGFFjDUvJUf36kK0yuF2XUOBlF0beCQ7Jhc+UoI9Akmvl4sHUrZJzX
+ LMeajARnSBXTcig6h6/NFVkr1mi1uuZfIRNCkxCE8QRYebZLSWxBVr3h7dtOUkq2CzL2kRCK
+ T2rKkmYrvBJTqSvfK3Ba7QrDg3szEe+fENpL3gHtH6h/XQF92EOulm5S5o0I+ceREwARAQAB
+ wsB2BBgBCAAgFiEE+ORdfQEWdwcppnfRP/MOinaI+qoFAmcCwywCGwwACgkQP/MOinaI+qpI
+ zQf+NAcNDBXWHGA3lgvYvOU31+ik9bb30xZ7IqK9MIi6TpZqL7cxNwZ+FAK2GbUWhy+/gPkX
+ it2gCAJsjo/QEKJi7Zh8IgHN+jfim942QZOkU+p/YEcvqBvXa0zqW0sYfyAxkrf/OZfTnNNE
+ Tr+uBKNaQGO2vkn5AX5l8zMl9LCH3/Ieaboni35qEhoD/aM0Kpf93PhCvJGbD4n1DnRhrxm1
+ uEdQ6HUjWghEjC+Jh9xUvJco2tUTepw4OwuPxOvtuPTUa1kgixYyG1Jck/67reJzMigeuYFt
+ raV3P8t/6cmtawVjurhnCDuURyhUrjpRhgFp+lW8OGr6pepHol/WFIOQEg==
+In-Reply-To: <d4267251-e113-42ae-b756-ea1ab63f9f7e@igalia.com>
 X-Spamd-Bar: ---
-X-MailFrom: paul@paul-moore.com
+Message-ID-Hash: C2FDQO5RYDNL6OWZHFKN42LWWNMRQ6Q7
+X-Message-ID-Hash: C2FDQO5RYDNL6OWZHFKN42LWWNMRQ6Q7
+X-MailFrom: mcanal@igalia.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: APF25P4ZOAJSP2XMUY4VYQEP524RSK5P
-X-Message-ID-Hash: APF25P4ZOAJSP2XMUY4VYQEP524RSK5P
-X-Mailman-Approved-At: Fri, 15 May 2026 09:02:17 +0000
-CC: cgroups@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-mm@kvack.org, linux-security-module@vger.kernel.org, selinux@vger.kernel.org, linux-kselftest@vger.kernel.org, Albert Esteve <aesteve@redhat.com>, mripard@kernel.org, echanude@redhat.com
+CC: dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kernel-dev@igalia.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH RFC 4/5] selinux: Restrict cross-cgroup dma-heap charging
+Subject: [Linaro-mm-sig] Re: [PATCH v2] dma-fence: Clarify external lock use case in dma_fence_init() docs
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/APF25P4ZOAJSP2XMUY4VYQEP524RSK5P/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/C2FDQO5RYDNL6OWZHFKN42LWWNMRQ6Q7/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 14CD154C0FF
+Content-Type: text/plain; charset="utf-8"; format="flowed"
+Content-Transfer-Encoding: base64
+X-Rspamd-Queue-Id: 2A78D547819
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [2.09 / 15.00];
+X-Spamd-Result: default: False [2.19 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[paul-moore.com:s=google];
+	R_DKIM_REJECT(1.00)[igalia.com:s=20170329];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+	R_SPF_ALLOW(-0.20)[+mx];
+	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[paul-moore.com : SPF not aligned (relaxed),none];
+	DMARC_POLICY_SOFTFAIL(0.10)[igalia.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FREEMAIL_TO(0.00)[redhat.com,kernel.org,cmpxchg.org,suse.com,lwn.net,linuxfoundation.org,linaro.org,amd.com,linux.dev,linux-foundation.org,collabora.com,arm.com,google.com,namei.org,hallyn.com,gmail.com];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
+	RCVD_COUNT_THREE(0.00)[3];
+	FREEMAIL_TO(0.00)[kernel.org,gmail.com,linaro.org,collabora.com,igalia.com,amd.com];
 	MIME_TRACE(0.00)[0:+];
 	ARC_NA(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[36];
-	NEURAL_HAM(-0.00)[-0.996];
-	FROM_NEQ_ENVFROM(0.00)[paul@paul-moore.com,linaro-mm-sig-bounces@lists.linaro.org];
+	TO_DN_SOME(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[paul-moore.com:-];
+	DKIM_TRACE(0.00)[igalia.com:-];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
+	NEURAL_HAM(-0.00)[-0.739];
+	FROM_NEQ_ENVFROM(0.00)[mcanal@igalia.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[9];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	TO_DN_SOME(0.00)[]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email]
 X-Rspamd-Action: no action
 
-On May 12, 2026 Albert Esteve <aesteve@redhat.com> wrote:
-> 
-> The security_dma_heap_alloc() hook allows security modules
-> to control which processes may charge dma-buf allocations
-> to another process's cgroup via the charge_pid_fd field of
-> DMA_HEAP_IOCTL_ALLOC. Without a policy implementation, the
-> hook is a no-op and the restriction is not enforced.
-> 
-> On SELinux-managed systems any domain with access to a
-> dma-heap device node can therefore exhaust another cgroup's
-> memory budget without restriction.
-> 
-> Implement selinux_dma_heap_alloc() using avc_has_perm() with
-> a new dma_heap object class and a charge_to permission. Policy
-> authors can then grant cross-cgroup charging selectively,
-> for example:
-> 
->   allow allocator_app_t client_app_t:dma_heap charge_to;
-> 
-> Signed-off-by: Albert Esteve <aesteve@redhat.com>
-> ---
->  security/selinux/hooks.c            | 7 +++++++
->  security/selinux/include/classmap.h | 1 +
->  2 files changed, 8 insertions(+)
-> 
-> diff --git a/security/selinux/hooks.c b/security/selinux/hooks.c
-> index 0f704380a8c81..ea1f410b9f619 100644
-> --- a/security/selinux/hooks.c
-> +++ b/security/selinux/hooks.c
-> @@ -2189,6 +2189,12 @@ static int selinux_capable(const struct cred *cred, struct user_namespace *ns,
->  	return cred_has_capability(cred, cap, opts, ns == &init_user_ns);
->  }
->  
-> +static int selinux_dma_heap_alloc(const struct cred *from, const struct cred *to)
-> +{
-> +	return avc_has_perm(cred_sid(from), cred_sid(to),
-> +			    SECCLASS_DMA_HEAP, DMA_HEAP__CHARGE_TO, NULL);
-> +}
-> +
->  static int selinux_quotactl(int cmds, int type, int id, const struct super_block *sb)
->  {
->  	const struct cred *cred = current_cred();
-> @@ -7541,6 +7547,7 @@ static struct security_hook_list selinux_hooks[] __ro_after_init = {
->  	LSM_HOOK_INIT(capget, selinux_capget),
->  	LSM_HOOK_INIT(capset, selinux_capset),
->  	LSM_HOOK_INIT(capable, selinux_capable),
-> +	LSM_HOOK_INIT(dma_heap_alloc, selinux_dma_heap_alloc),
->  	LSM_HOOK_INIT(quotactl, selinux_quotactl),
->  	LSM_HOOK_INIT(quota_on, selinux_quota_on),
->  	LSM_HOOK_INIT(syslog, selinux_syslog),
-> diff --git a/security/selinux/include/classmap.h b/security/selinux/include/classmap.h
-> index 90cb61b164256..d232f7808f6b8 100644
-> --- a/security/selinux/include/classmap.h
-> +++ b/security/selinux/include/classmap.h
-> @@ -181,6 +181,7 @@ const struct security_class_mapping secclass_map[] = {
->  	{ "user_namespace", { "create", NULL } },
->  	{ "memfd_file",
->  	  { COMMON_FILE_PERMS, "execute_no_trans", "entrypoint", NULL } },
-> +	{ "dma_heap", { "charge_to", NULL } },
->  	/* last one */ { NULL, {} }
->  };
-
-While we have seen some one-off patches to add specific resource/cgroups
-controls in the past, much like this one, we've yet to see a patchset
-that provides a more comprehensive set of resource/cgroup access controls
-for SELinux.
-
-I'm not opposed to a patch like this, but I would like to see it as part
-of a larger effort to introduce access controls across all of the
-existing cgroup control points where it makes sense.  In other words,
-let's see a design for cgroup access controls so that we can ensure we
-have something that is meaningful and makes sense from a policy
-developer's perspective.
-
---
-paul-moore.com
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+K2NjIENocmlzdGlhbidzIEFNRCBlLW1haWwNCg0KT24gNS80LzI2IDExOjQ3LCBNYcOtcmEgQ2Fu
+YWwgd3JvdGU6DQo+IEhpIENocmlzdGlhbiwNCj4gDQo+IFdoZW4gcG9zc2libGUsIGNvdWxkIHlv
+dSB0YWtlIGEgbG9vayBhdCB0aGlzIHBhdGNoPyBJZiB5b3UgYXJlIG9rYXkgd2l0aA0KPiBpdCwg
+SSBjYW4gYXBwbHkgaXQgdG8gZHJtLW1pc2MtbmV4dC4NCg0KR2VudGxlIHBpbmcuDQoNCkJlc3Qg
+cmVnYXJkcywNCi0gTWHDrXJhDQoNCj4gDQo+IEJlc3QgcmVnYXJkcywNCj4gLSBNYcOtcmENCj4g
+DQo+IE9uIDIwLzA0LzI2IDA2OjE4LCBQaGlsaXBwIFN0YW5uZXIgd3JvdGU6DQo+PiBPbiBTdW4s
+IDIwMjYtMDQtMTkgYXQgMTA6NDggLTAzMDAsIE1hw61yYSBDYW5hbCB3cm90ZToNCj4+PiBUaGUg
+a2VybmVsZG9jIGNvbW1lbnQgb24gZG1hX2ZlbmNlX2luaXQoKSBhbmQgZG1hX2ZlbmNlX2luaXQ2
+NCgpIA0KPj4+IGRlc2NyaWJlDQo+Pj4gdGhlIGxlZ2FjeSByZWFzb24gdG8gcGFzcyBhbiBleHRl
+cm5hbCBsb2NrIGFzIGEgbmVlZCB0byBwcmV2ZW50IG11bHRpcGxlDQo+Pj4gZmVuY2VzICJmcm9t
+IHNpZ25hbGluZyBvdXQgb2Ygb3JkZXIiLiBIb3dldmVyLCB0aGlzIHdvcmRpbmcgaXMgYSBiaXQN
+Cj4+PiBtaXNsZWFkaW5nOiBhIHNoYXJlZCBzcGlubG9jayBkb2VzIG5vdCAoYW5kIGNhbm5vdCkg
+cHJldmVudCB0aGUgc2lnbmFsZXINCj4+PiBmcm9tIHNpZ25hbGluZyBvdXQgb2Ygb3JkZXIuIFNp
+Z25hbGluZyBvcmRlciBpcyB0aGUgZHJpdmVyJ3MgDQo+Pj4gcmVzcG9uc2liaWxpdHkNCj4+PiBy
+ZWdhcmRsZXNzIG9mIHdoZXRoZXIgdGhlIGxvY2sgaXMgc2hhcmVkIG9yIHBlci1mZW5jZS4NCj4+
+Pg0KPj4+IFdoYXQgYSBzaGFyZWQgbG9jayBhY3R1YWxseSBwcm92aWRlcyBpcyBzZXJpYWxpemF0
+aW9uIG9mIHNpZ25hbGluZyBhbmQNCj4+PiBvYnNlcnZhdGlvbiBhY3Jvc3MgZmVuY2VzIGluIGEg
+Z2l2ZW4gY29udGV4dCwgc28gdGhhdCBvYnNlcnZlcnMgbmV2ZXINCj4+PiBzZWUgYSBsYXRlciBm
+ZW5jZSBzaWduYWxlZCB3aGlsZSBhbiBlYXJsaWVyIG9uZSBpcyBub3QuDQo+Pj4NCj4+PiBSZXdv
+cmQgYm90aCBjb21tZW50cyB0byBkZXNjcmliZSB0aGlzIG1vcmUgYWNjdXJhdGVseS4NCj4+Pg0K
+Pj4+IFNpZ25lZC1vZmYtYnk6IE1hw61yYSBDYW5hbCA8bWNhbmFsQGlnYWxpYS5jb20+DQo+Pg0K
+Pj4gUmV2aWV3ZWQtYnk6IFBoaWxpcHAgU3Rhbm5lciA8cGhhc3RhQGtlcm5lbC5vcmc+DQo+Pg0K
+Pj4+DQo+Pj4gLS0tDQo+Pj4NCj4+PiB2MSAtPiB2MjogaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcv
+ZHJpLWRldmVsLzIwMjYwNDExMTg1NzU2LjE4ODcxMTktNC0gDQo+Pj4gbWNhbmFsQGlnYWxpYS5j
+b20vDQo+Pj4NCj4+PiAtIEJlIG1vcmUgZXhwbGljaXQgYWJvdXQgbm90IGFsbG93aW5nIG5ldyB1
+c2VycyB0byB1c2UgYW4gZXh0ZXJuYWwgbG9jay4NCj4+PiAtIERlLWR1cGxpY2F0ZSB0aGUgZXhw
+bGFuYXRpb24gaW4gZG1hX2ZlbmNlX2luaXQ2NCgpIGJ5IHBvaW50aW5nIHRvIHRoZQ0KPj4+IMKg
+wqAgZG1hX2ZlbmNlX2luaXQoKSBkb2N1bWVudGF0aW9uLg0KPj4+IC0tLQ0KPj4+IMKgwqBkcml2
+ZXJzL2RtYS1idWYvZG1hLWZlbmNlLmMgfCAxMyArKysrKysrLS0tLS0tDQo+Pj4gwqDCoDEgZmls
+ZSBjaGFuZ2VkLCA3IGluc2VydGlvbnMoKyksIDYgZGVsZXRpb25zKC0pDQo+Pj4NCj4+PiBkaWZm
+IC0tZ2l0IGEvZHJpdmVycy9kbWEtYnVmL2RtYS1mZW5jZS5jIGIvZHJpdmVycy9kbWEtYnVmL2Rt
+YS1mZW5jZS5jDQo+Pj4gaW5kZXggMWMxZWFlY2FmMWIwLi42M2IzNDliYTlhMzQgMTAwNjQ0DQo+
+Pj4gLS0tIGEvZHJpdmVycy9kbWEtYnVmL2RtYS1mZW5jZS5jDQo+Pj4gKysrIGIvZHJpdmVycy9k
+bWEtYnVmL2RtYS1mZW5jZS5jDQo+Pj4gQEAgLTExMDIsOSArMTEwMiwxMSBAQCBfX2RtYV9mZW5j
+ZV9pbml0KHN0cnVjdCBkbWFfZmVuY2UgKmZlbmNlLCANCj4+PiBjb25zdCBzdHJ1Y3QgZG1hX2Zl
+bmNlX29wcyAqb3BzLA0KPj4+IMKgwqAgKiBjb250ZXh0IGFuZCBzZXFubyBhcmUgdXNlZCBmb3Ig
+ZWFzeSBjb21wYXJpc29uIGJldHdlZW4gZmVuY2VzLCANCj4+PiBhbGxvd2luZw0KPj4+IMKgwqAg
+KiB0byBjaGVjayB3aGljaCBmZW5jZSBpcyBsYXRlciBieSBzaW1wbHkgdXNpbmcgZG1hX2ZlbmNl
+X2xhdGVyKCkuDQo+Pj4gwqDCoCAqDQo+Pj4gLSAqIEl0IGlzIHN0cm9uZ2x5IGRpc2NvdXJhZ2Vk
+IHRvIHByb3ZpZGUgYW4gZXh0ZXJuYWwgbG9jayBiZWNhdXNlIA0KPj4+IHRoaXMgY291cGxlcw0K
+Pj4+IC0gKiBsb2NrIGFuZCBmZW5jZSBsaWZlIHRpbWUuIFRoaXMgaXMgb25seSBhbGxvd2VkIGZv
+ciBsZWdhY3kgdXNlIA0KPj4+IGNhc2VzIHdoZW4NCj4+PiAtICogbXVsdGlwbGUgZmVuY2VzIG5l
+ZWQgdG8gYmUgcHJldmVudGVkIGZyb20gc2lnbmFsaW5nIG91dCBvZiBvcmRlci4NCj4+PiArICog
+RXh0ZXJuYWwgbG9ja3MgYXJlIGEgcmVsaWMgZnJvbSBsZWdhY3kgdXNlIGNhc2VzIHRoYXQgbmVl
+ZGVkIGEgDQo+Pj4gc2hhcmVkIGxvY2sNCj4+PiArICogdG8gc2VyaWFsaXplIHNpZ25hbGluZyBh
+bmQgb2JzZXJ2YXRpb24gb2YgZmVuY2VzIHdpdGhpbiBhIA0KPj4+IGNvbnRleHQsIHNvIHRoYXQN
+Cj4+PiArICogb2JzZXJ2ZXJzIG5ldmVyIHNlZSBhIGxhdGVyIGZlbmNlIHNpZ25hbGVkIHdoaWxl
+IGFuIGVhcmxpZXIgb25lIA0KPj4+IGlzbid0LiBOZXcNCj4+PiArICogdXNlcnMgTVVTVCBOT1Qg
+dXNlIGV4dGVybmFsIGxvY2tzLCBhcyB0aGV5IGZvcmNlIHRoZSBpc3N1ZXIgdG8gDQo+Pj4gb3V0
+bGl2ZSBhbGwNCj4+PiArICogZmVuY2VzIHRoYXQgcmVmZXJlbmNlIHRoZSBsb2NrLg0KPj4+IMKg
+wqAgKi8NCj4+PiDCoMKgdm9pZA0KPj4+IMKgwqBkbWFfZmVuY2VfaW5pdChzdHJ1Y3QgZG1hX2Zl
+bmNlICpmZW5jZSwgY29uc3Qgc3RydWN0IGRtYV9mZW5jZV9vcHMgDQo+Pj4gKm9wcywNCj4+PiBA
+QCAtMTEyOSw5ICsxMTMxLDggQEAgRVhQT1JUX1NZTUJPTChkbWFfZmVuY2VfaW5pdCk7DQo+Pj4g
+wqDCoCAqIENvbnRleHQgYW5kIHNlcW5vIGFyZSB1c2VkIGZvciBlYXN5IGNvbXBhcmlzb24gYmV0
+d2VlbiBmZW5jZXMsIA0KPj4+IGFsbG93aW5nDQo+Pj4gwqDCoCAqIHRvIGNoZWNrIHdoaWNoIGZl
+bmNlIGlzIGxhdGVyIGJ5IHNpbXBseSB1c2luZyBkbWFfZmVuY2VfbGF0ZXIoKS4NCj4+PiDCoMKg
+ICoNCj4+PiAtICogSXQgaXMgc3Ryb25nbHkgZGlzY291cmFnZWQgdG8gcHJvdmlkZSBhbiBleHRl
+cm5hbCBsb2NrIGJlY2F1c2UgDQo+Pj4gdGhpcyBjb3VwbGVzDQo+Pj4gLSAqIGxvY2sgYW5kIGZl
+bmNlIGxpZmUgdGltZS4gVGhpcyBpcyBvbmx5IGFsbG93ZWQgZm9yIGxlZ2FjeSB1c2UgDQo+Pj4g
+Y2FzZXMgd2hlbg0KPj4+IC0gKiBtdWx0aXBsZSBmZW5jZXMgbmVlZCB0byBiZSBwcmV2ZW50ZWQg
+ZnJvbSBzaWduYWxpbmcgb3V0IG9mIG9yZGVyLg0KPj4+ICsgKiBOZXcgdXNlcnMgTVVTVCBOT1Qg
+dXNlIGV4dGVybmFsIGxvY2tzLiBDaGVjayB0aGUgZG9jdW1lbnRhdGlvbiBpbg0KPj4+ICsgKiBk
+bWFfZmVuY2VfaW5pdCgpIHRvIHVuZGVyc3RhbmQgdGhlIG1vdGl2ZXMgYmVoaW5kIHRoZSBsZWdh
+Y3kgdXNlIA0KPj4+IGNhc2VzLg0KPj4+IMKgwqAgKi8NCj4+PiDCoMKgdm9pZA0KPj4+IMKgwqBk
+bWFfZmVuY2VfaW5pdDY0KHN0cnVjdCBkbWFfZmVuY2UgKmZlbmNlLCBjb25zdCBzdHJ1Y3QgDQo+
+Pj4gZG1hX2ZlbmNlX29wcyAqb3BzLA0KPj4NCj4gDQoNCl9fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxp
+bmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWls
+IHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
