@@ -2,155 +2,137 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MKdtJOXnB2reOAMAu9opvQ
+	id gAgkOrAeCGqRaAMAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 16 May 2026 05:43:33 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 16 May 2026 09:37:20 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1F80555A093
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 16 May 2026 05:43:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6F94855A9EA
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 16 May 2026 09:37:20 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7B475404BB
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 16 May 2026 03:43:31 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.14])
-	by lists.linaro.org (Postfix) with ESMTPS id 9E38240144
-	for <linaro-mm-sig@lists.linaro.org>; Sat, 16 May 2026 03:43:18 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 69DF340492
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 16 May 2026 07:37:19 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+	by lists.linaro.org (Postfix) with ESMTPS id 1430A3F909
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 16 May 2026 07:37:09 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=FocGsEqu;
-	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 192.198.163.14 as permitted sender) smtp.mailfrom=lkp@intel.com;
-	dmarc=pass (policy=none) header.from=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1778902999; x=1810438999;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=ID9tdn2gYJjBbnWVxJgcOf7EQejKZETrIpsg4qqVtHY=;
-  b=FocGsEqucluF9DZUzeu+jx+wX09b6hGCsNxQDwr/FU7v0iuTXfE27Lcr
-   iOhMHSzXlz6v2rpuA4zjGDmM5dWVgy7yEtskAJOcK79ueb4aFtgeX4bXB
-   01Qqe9KxU3S5zLkc8IJhxFayOzvrJt5vA6Eti2CDtKC+zkIYkoac8lwIV
-   uxbznXfjWKFMdTiIIcTeiyjldyvHQYhWdlX8AIxkwQN50tccIbqeLL/Yz
-   7RBnEN5S7EHECb5hOAlS0TdudomM9yejQg3aRIGbmMt7MuoTUZ261znMa
-   ubHSZYdGW0rE4jdsjELR6lVFlLKeQXP4VCK9tU47MvEPWih7HqMEcQe4S
-   g==;
-X-CSE-ConnectionGUID: 3zwKSbFXT2SOzmnMeACqBg==
-X-CSE-MsgGUID: O/vr9ZrDQsiEeqxlYRN+lQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11787"; a="79886299"
-X-IronPort-AV: E=Sophos;i="6.23,237,1770624000";
-   d="scan'208";a="79886299"
-Received: from orviesa001.jf.intel.com ([10.64.159.141])
-  by fmvoesa108.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 May 2026 20:43:18 -0700
-X-CSE-ConnectionGUID: s5Ygh37dSiCMUGCwRldduA==
-X-CSE-MsgGUID: 3wjoSGchQBmh5FEgL/7rQQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.23,237,1770624000";
-   d="scan'208";a="276974691"
-Received: from lkp-server01.sh.intel.com (HELO d94e5e629b2d) ([10.239.97.150])
-  by orviesa001.jf.intel.com with ESMTP; 15 May 2026 20:43:14 -0700
-Received: from kbuild by d94e5e629b2d with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1wO5vj-000000000RJ-1Wna;
-	Sat, 16 May 2026 03:43:11 +0000
-Date: Sat, 16 May 2026 11:43:03 +0800
-From: kernel test robot <lkp@intel.com>
-To: Lizhi Hou <lizhi.hou@amd.com>, ogabbay@kernel.org,
-	quic_jhugo@quicinc.com, mario.limonciello@amd.com,
-	karol.wachowski@linux.intel.com
-Message-ID: <202605161116.6FTLJOlI-lkp@intel.com>
-References: <20260515155332.743097-1-lizhi.hou@amd.com>
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=nNpNtXRG;
+	spf=pass (lists.linaro.org: domain of baohua@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=baohua@kernel.org;
+	dmarc=pass (policy=quarantine) header.from=kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by tor.source.kernel.org (Postfix) with ESMTP id A4E3A601E3
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 16 May 2026 07:37:08 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5BCB6C2BCFB
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 16 May 2026 07:37:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1778917028;
+	bh=P3vqgwHwD6iLuiEKYHBc9rKUdaJI1VWv+dxZinDZG8M=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+	b=nNpNtXRGUw0mf4NnH+yNpsGfoHEeYyd5NHflVOhmZkdo7mVPuYo0Sn7ejcQkpbAdL
+	 Xq4AnHBYR4AGZl8TBwgKc4eBK1jQKV2THXCREwHOk3eNmL2yNugi07+KM4ItzVAMO6
+	 lSPY0Q0dGzv7nMdKXX7wA4HJVc7hGOOjnXN54jcMnyKjaImX35rvGB1CMn7FnXzrEH
+	 ttD1bT9CLBvfDdqqOFFKIZxJh2yhLap9F2AzPm/qZYxfkQWJm8kzSDn2H87s6wQ+fJ
+	 uJXowVoELz8Hq3RAcg3eCdTqAUK/EgUtAJVUnrzr3fZqJNnt9hF+hAPgi/sObhd4Kf
+	 /5dvJQcCOdrpg==
+Received: by mail-qv1-f52.google.com with SMTP id 6a1803df08f44-8acb856a674so11630486d6.0
+        for <linaro-mm-sig@lists.linaro.org>; Sat, 16 May 2026 00:37:08 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AFNElJ9aFHUC+kGCZ/C4mRHaH8R2UkXLcYziQe8NH9xSwtLnafhJw9Q0HDvpVr5HYNk5dKXbhy5OzqZTogHzV+YZ@lists.linaro.org
+X-Gm-Message-State: AOJu0YxV+3jWzPZ8Zhv3laIFcnj2wUlGeZDoVjIxwSBDcWjvUOIzCh1A
+	IQCYiQ7UGDTrURSfOp64D4aPlc7mg7y55SWBwLei4xPkHkWzOrQXpBThn7/HxH8l08reN4Hx0Zj
+	ebaNHHb+0iVnlHgRyjMMmvIYpgI8R59U=
+X-Received: by 2002:a05:6214:29ce:b0:8b3:ff3f:5d61 with SMTP id
+ 6a1803df08f44-8c8fda1ccbbmr178745586d6.22.1778917027156; Sat, 16 May 2026
+ 00:37:07 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20260515155332.743097-1-lizhi.hou@amd.com>
-X-Spamd-Bar: -----
-Message-ID-Hash: YHULLWUMCVQSQ2RJFMHU6W533V3IPKGC
-X-Message-ID-Hash: YHULLWUMCVQSQ2RJFMHU6W533V3IPKGC
-X-MailFrom: lkp@intel.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev, Lizhi Hou <lizhi.hou@amd.com>, linux-kernel@vger.kernel.org, linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org, christian.koenig@amd.com, simona@ffwll.ch, max.zhen@amd.com, sonal.santan@amd.com
+References: <20260512-v2_20230123_tjmercier_google_com-v1-0-6326701c3691@redhat.com>
+ <20260512-v2_20230123_tjmercier_google_com-v1-2-6326701c3691@redhat.com>
+In-Reply-To: <20260512-v2_20230123_tjmercier_google_com-v1-2-6326701c3691@redhat.com>
+From: Barry Song <baohua@kernel.org>
+Date: Sat, 16 May 2026 15:36:56 +0800
+X-Gmail-Original-Message-ID: <CAGsJ_4xfznffbjOaNKwnN6oZk_H6pqOzYqd1zx4Q9XrocdzV8A@mail.gmail.com>
+X-Gm-Features: AVHnY4L9M-s1Neba6WebvB2EkXnslTMMIykTYPVPE3skCvVx5rzQK6ntLSW6W0w
+Message-ID: <CAGsJ_4xfznffbjOaNKwnN6oZk_H6pqOzYqd1zx4Q9XrocdzV8A@mail.gmail.com>
+To: Albert Esteve <aesteve@redhat.com>
+X-Spamd-Bar: ---
+Message-ID-Hash: ZSC7GUXNV3JYVUJZVZHUQTTKAEAYHH6O
+X-Message-ID-Hash: ZSC7GUXNV3JYVUJZVZHUQTTKAEAYHH6O
+X-MailFrom: baohua@kernel.org
+X-Mailman-Rule-Hits: member-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
+CC: Tejun Heo <tj@kernel.org>, Johannes Weiner <hannes@cmpxchg.org>, =?UTF-8?Q?Michal_Koutn=C3=BD?= <mkoutny@suse.com>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Michal Hocko <mhocko@kernel.org>, Roman Gushchin <roman.gushchin@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>, Muchun Song <muchun.song@linux.dev>, Andrew Morton <akpm@linux-foundation.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Christian Brauner <brauner@kernel.org>, Paul Moore <paul@paul-moore.com>, James Morris <jmorris@namei.org>, "Serge E. Hallyn" <serge@hallyn.com>, Stephen Smalley <stephen.smalley.work@gmail.com>, Ondrej Mosnacek <omosnace@redhat.com>, Shuah Khan <shuah@kernel.org>, cgroups@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel
+ .org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-mm@kvack.org, linux-security-module@vger.kernel.org, selinux@vger.kernel.org, linux-kselftest@vger.kernel.org, mripard@kernel.org, echanude@redhat.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH V1] accel/amdxdna: Remove mmap and export support for ubuf
+Subject: [Linaro-mm-sig] Re: [PATCH RFC 2/5] dma-heap: charge dma-buf memory via explicit memcg
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YHULLWUMCVQSQ2RJFMHU6W533V3IPKGC/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZSC7GUXNV3JYVUJZVZHUQTTKAEAYHH6O/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 1F80555A093
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+X-Rspamd-Queue-Id: 6F94855A9EA
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [1.59 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
-	R_DKIM_REJECT(1.00)[intel.com:s=Intel];
-	MAILLIST(-0.20)[mailman];
+X-Spamd-Result: default: False [3.59 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
+	R_DKIM_REJECT(1.00)[kernel.org:s=k20201202];
 	R_SPF_ALLOW(-0.20)[+mx];
-	DMARC_POLICY_SOFTFAIL(0.10)[intel.com : SPF not aligned (relaxed),none];
+	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
+	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
 	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FREEMAIL_CC(0.00)[kernel.org,cmpxchg.org,suse.com,lwn.net,linuxfoundation.org,linaro.org,amd.com,linux.dev,linux-foundation.org,collabora.com,arm.com,google.com,paul-moore.com,namei.org,hallyn.com,gmail.com,redhat.com,vger.kernel.org,vger.kernel,lists.freedesktop.org,lists.linaro.org,kvack.org];
+	RCPT_COUNT_TWELVE(0.00)[36];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[kernel.org:-];
+	NEURAL_SPAM(0.00)[0.623];
 	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
-	FROM_NEQ_ENVFROM(0.00)[lkp@intel.com,linaro-mm-sig-bounces@lists.linaro.org];
-	DKIM_TRACE(0.00)[intel.com:-];
-	NEURAL_HAM(-0.00)[-0.023];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	FROM_NEQ_ENVFROM(0.00)[baohua@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:email,intel.com:mid,git-scm.com:url,gitlab.freedesktop.org:url,01.org:url,lists.linaro.org:helo,lists.linaro.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
 X-Rspamd-Action: no action
 
-Hi Lizhi,
-
-kernel test robot noticed the following build warnings:
-
-[auto build test WARNING on drm-misc/drm-misc-next]
-[also build test WARNING on linus/master v7.1-rc3 next-20260508]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
-
-url:    https://github.com/intel-lab-lkp/linux/commits/Lizhi-Hou/accel-amdxdna-Remove-mmap-and-export-support-for-ubuf/20260516-000523
-base:   https://gitlab.freedesktop.org/drm/misc/kernel.git drm-misc-next
-patch link:    https://lore.kernel.org/r/20260515155332.743097-1-lizhi.hou%40amd.com
-patch subject: [PATCH V1] accel/amdxdna: Remove mmap and export support for ubuf
-config: x86_64-randconfig-002-20260516 (https://download.01.org/0day-ci/archive/20260516/202605161116.6FTLJOlI-lkp@intel.com/config)
-compiler: clang version 20.1.8 (https://github.com/llvm/llvm-project 87f0227cb60147a26a1eeb4fb06e3b505e9c7261)
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20260516/202605161116.6FTLJOlI-lkp@intel.com/reproduce)
-
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202605161116.6FTLJOlI-lkp@intel.com/
-
-All warnings (new ones prefixed by >>):
-
->> drivers/accel/amdxdna/amdxdna_ubuf.c:86:42: warning: unused variable 'amdxdna_ubuf_vm_ops' [-Wunused-const-variable]
-      86 | static const struct vm_operations_struct amdxdna_ubuf_vm_ops = {
-         |                                          ^~~~~~~~~~~~~~~~~~~
-   1 warning generated.
-
-
-vim +/amdxdna_ubuf_vm_ops +86 drivers/accel/amdxdna/amdxdna_ubuf.c
-
-bd72d4acda1069 Lizhi Hou 2025-07-16  85  
-bd72d4acda1069 Lizhi Hou 2025-07-16 @86  static const struct vm_operations_struct amdxdna_ubuf_vm_ops = {
-bd72d4acda1069 Lizhi Hou 2025-07-16  87  	.fault = amdxdna_ubuf_vm_fault,
-bd72d4acda1069 Lizhi Hou 2025-07-16  88  };
-bd72d4acda1069 Lizhi Hou 2025-07-16  89  
-
---
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gVHVlLCBNYXkgMTIsIDIwMjYgYXQgNToxOOKAr1BNIEFsYmVydCBFc3RldmUgPGFlc3RldmVA
+cmVkaGF0LmNvbT4gd3JvdGU6DQo+DQo+IE9uIGVtYmVkZGVkIHBsYXRmb3JtcyBhIGNlbnRyYWwg
+cHJvY2VzcyBvZnRlbiBhbGxvY2F0ZXMgZG1hLWJ1Zg0KPiBtZW1vcnkgb24gYmVoYWxmIG9mIGNs
+aWVudCBhcHBsaWNhdGlvbnMuIFdpdGhvdXQgYSB3YXkgdG8NCj4gYXR0cmlidXRlIHRoZSBjaGFy
+Z2UgdG8gdGhlIHJlcXVlc3RpbmcgY2xpZW50J3MgY2dyb3VwLCB0aGUNCj4gY29zdCBsYW5kcyBv
+biB0aGUgYWxsb2NhdG9yLCBtYWtpbmcgcGVyLWNncm91cCBtZW1vcnkgbGltaXRzDQo+IGluZWZm
+ZWN0aXZlIGZvciB0aGUgYWN0dWFsIGNvbnN1bWVycy4NCj4NCj4gQWRkIGNoYXJnZV9waWRfZmQg
+dG8gc3RydWN0IGRtYV9oZWFwX2FsbG9jYXRpb25fZGF0YS4gV2hlbiBzZXQgdG8NCj4gYSB2YWxp
+ZCBwaWRmZCwgRE1BX0hFQVBfSU9DVExfQUxMT0MgcmVzb2x2ZXMgdGhlIHRhcmdldCB0YXNrJ3MN
+Cj4gbWVtY2cgYW5kIGNoYXJnZXMgdGhlIGJ1ZmZlciB0aGVyZSB2aWEgbWVtX2Nncm91cF9jaGFy
+Z2VfZG1hYnVmKCkNCj4gaW5zaWRlIGRtYV9oZWFwX2J1ZmZlcl9hbGxvYygpLiBXaXRob3V0IGNo
+YXJnZV9waWRfZmQsIGFuZCB3aXRoDQo+IHRoZSBtZW1fYWNjb3VudGluZyBtb2R1bGUgcGFyYW1l
+dGVyIGVuYWJsZWQsIHRoZSBidWZmZXIgaXMgY2hhcmdlZA0KPiB0byB0aGUgYWxsb2NhdG9yJ3Mg
+b3duIGNncm91cC4NCj4NCj4gQWRkaXRpb25hbGx5LCBjb21taXQgM2MyMjdiZTkwNjU5ICgiZG1h
+LWJ1Zjogc3lzdGVtX2hlYXA6IGFjY291bnQgZm9yDQo+IHN5c3RlbSBoZWFwIGFsbG9jYXRpb24g
+aW4gbWVtY2ciKSBhZGRzIF9fR0ZQX0FDQ09VTlQgdG8gc3lzdGVtLWhlYXANCj4gcGFnZSBhbGxv
+Y2F0aW9ucy4gS2VlcGluZyBfX0dGUF9BQ0NPVU5UIHdvdWxkIGNoYXJnZSB0aGUgc2FtZSBwYWdl
+cw0KPiB0d2ljZSAob25jZSB0byBrbWVtLCBvbmNlIHRvIE1FTUNHX0RNQUJVRiksIHRodXMgcmVt
+b3ZlIGl0IGFuZCByb3V0ZQ0KPiBhbGwgYWNjb3VudGluZyB0aHJvdWdoIGEgc2luZ2xlIE1FTUNH
+X0RNQUJVRiBwYXRoLg0KPg0KWy4uLl0NCg0KPiAtICAgICAgICAgICAgICAgaWYgKG1lbV9hY2Nv
+dW50aW5nKQ0KPiAtICAgICAgICAgICAgICAgICAgICAgICBmbGFncyB8PSBfX0dGUF9BQ0NPVU5U
+Ow0KDQpIaSBBbGJlcnQsDQoNCndvdWxkIGl0IGJlIGJldHRlciB0byBtb3ZlIHRoaXMgYW5kIGl0
+cyBkZXNjcmlwdGlvbiB0byBwYXRjaCAxPyBJdA0KbG9va3MgbGlrZSBwYXRjaCAxIGFscmVhZHkg
+aW50cm9kdWNlcyB0aGUgZG91YmxlIGFjY291bnRpbmcgY2hhbmdlcywNCmFuZCBwYXRjaCAyIGlz
+IG1haW5seSBqdXN0IHN1cHBvcnRpbmcgcmVtb3RlIGNoYXJnaW5nLg0KDQpBbHNvLCBtZW1fYWNj
+b3VudGluZyBpcyBvbmx5IHVzZWQgYnkgc3lzdGVtX2hlYXAuYzsgaGFzIHRoaXMgcGF0Y2hzZXQN
+CmFsc28gZWxpbWluYXRlZCBpdHMgbmVlZD8NCg0KVGhhbmtzDQpCYXJyeQ0KX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5n
+IGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNl
+bmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
