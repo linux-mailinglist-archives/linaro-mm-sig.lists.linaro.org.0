@@ -2,70 +2,70 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 6JiiDgFQCGoMjAMAu9opvQ
+	id SHZzBQ1QCGqDjAMAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 16 May 2026 13:07:45 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 16 May 2026 13:07:57 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0EC5B55B4F3
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 16 May 2026 13:07:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C2D3255B502
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 16 May 2026 13:07:56 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 1E7DF405D4
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 16 May 2026 11:07:44 +0000 (UTC)
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
-	by lists.linaro.org (Postfix) with ESMTPS id 85EA2404C6
-	for <linaro-mm-sig@lists.linaro.org>; Sat, 16 May 2026 11:06:50 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id CD414404F4
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 16 May 2026 11:07:55 +0000 (UTC)
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+	by lists.linaro.org (Postfix) with ESMTPS id DE6434044F
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 16 May 2026 11:06:51 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=bjHwnIsl;
-	spf=pass (lists.linaro.org: domain of ju.orth@gmail.com designates 209.85.128.49 as permitted sender) smtp.mailfrom=ju.orth@gmail.com;
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=VTLkqFUp;
+	spf=pass (lists.linaro.org: domain of ju.orth@gmail.com designates 209.85.128.46 as permitted sender) smtp.mailfrom=ju.orth@gmail.com;
 	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-488b0046078so5482825e9.1
-        for <linaro-mm-sig@lists.linaro.org>; Sat, 16 May 2026 04:06:50 -0700 (PDT)
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-488b8bc6bc9so3182695e9.3
+        for <linaro-mm-sig@lists.linaro.org>; Sat, 16 May 2026 04:06:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1778929609; x=1779534409; darn=lists.linaro.org;
+        d=gmail.com; s=20251104; t=1778929611; x=1779534411; darn=lists.linaro.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=3zYhR3PGwQ+MjR6b0xjhfz0ypo71/qwlvJbXPw+XJwc=;
-        b=bjHwnIslsIdUXgi9nOzf0ZYD/jNVnRiCdeSFhDp7tbFlZNbl+6seD5GBSf87I0RX6l
-         wLMjdPVJlY/oKFTrFhtiZJtZmfTgk23bLm+BjPs+lCcx7+WNkdAcH5sZTh8n1C4AgdBR
-         9qnw41uzEwJ8ej/D+zZQkEysXQ05X91xkPS52+bywqV8IlSkfGMGDdZPJGI4+48i/blk
-         +h0Zf/605Z1G4IKrQpaphhyfwlYG0K/Z08Lil+802mjhT46pq99rfX8Ok0YtQO2sCO9L
-         Tg+hDSq8OSuTJ+oGWtpKgkNRTptRmbQXRH3rOon1FUDogmcLMgThH1g1osoqBAGIIWbm
-         fx2A==
+        bh=W2kX0D85vKgrMTrfAaShnpioKYHS8IrhnFr9X3CmECA=;
+        b=VTLkqFUpEy6dzDc/hklZvxc+gJRUvP3RDcta2W2PhWlvCuPDJEtP3mqBt+Sj/ts7C3
+         r2xtr0DSJPLFbHGFrwLqPfHSR1kN2k3tCijPBalVydXobpI2FNkpxvIPiGEL5UBqNa4L
+         eJvDnyFs0U+GWd/HKGF0abjEOEGNY9KWMyL0E/jwMGkLJ3JP+K1s71MEOM334c4nmZGU
+         PTEHck7a2/3N3Czb1U9GekdfjinVWr2VIp4fNJGP029rmyXK95+jvfzxhRTwpSmJXvyK
+         Zix2DuaFwA1bU3acz/PhBjE2bz8f1h3aZL4CE0i0ZhkwAPd48c6Jtqjy+EPkfOGCeP7v
+         QHtw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778929609; x=1779534409;
+        d=1e100.net; s=20251104; t=1778929611; x=1779534411;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=3zYhR3PGwQ+MjR6b0xjhfz0ypo71/qwlvJbXPw+XJwc=;
-        b=W2OlIKkTRh+AT9Dw2JXvyFN25HUj6MAPvV0FhRcG1ZYOvGpMZxNxt2y9MLBuT9sQ8p
-         AdY7KlwOQPwO/X07gEcvZaAFt0h7l+z5AT1A0klpRndnoAJhmI4B76U9zCgSkdS8dbba
-         5nmKcDgHivaFoJW9WcV2b0VqbGmnwkVt822HiM/cjDf/5dIfUWx7UNazTncnvuyf58SG
-         zErEKZ1+dYy6GZ2GBw+k1ry52afZ8Mgh+B/21GrBdutPS7nc4LwZpCLhMPD6uFenQwLV
-         Xad+3BuId9xDOcFilSNMgo1D10Ayl2E9+XQoQkrfGxgFgALFZ2gs1oVhr5WoNcL1m2os
-         He6g==
-X-Forwarded-Encrypted: i=1; AFNElJ82GYUnGxVAwdnmExrZVcosIPfCgWa256tsARpC5/NWXDSNDRMaYiCKmab8MLSn5PwcCvDG7DgQxqCmkutc@lists.linaro.org
-X-Gm-Message-State: AOJu0YxCYBKb9OO3Vr2CRj8He3JLv7usyKAAuiiSVR0mpvxZsaoC4s1w
-	sbLIZVDMxcRwI0VD3LNQOEismMF/TZDzyTF3sfkV2DavXVOBAyBqj6Fz
-X-Gm-Gg: Acq92OGTWpzsWiCuJcqO1Cpp5RS20ROleEu4w9aycIkZPLINhmmachQa+uFkFIJ7e+n
-	j+LXlCAVA17eqWfQcFLdHUKhd0qpE3DctLM/I6vdLbXAp64+MEdqPT/B6yRFPIq/4KQjOw/cYDS
-	x3i8+t69eRtTuEbp0mZgiiU7RaraU0JbcJst1LlJCCpYxWhr3m8JEZn5/fVRIdyHl+dSLGDwWZe
-	tR+49jjsUwecLo7qM3thZA3bhoz6A5De3ydJLiLnkEwUuhv50AzLh4Gc4T+0WlKhO6v4FH9eIY2
-	8IRnexdRnFBTPP1MrTXu51bdvDInApOFiD+9JfToBcItG/wCyIFJLZlVrCtLDj4RjYMT0oo8cth
-	iairiptoHO3ef5ymvA3cyybcpS336hSGthy0xQd4A/N4FTz9hMPGRb13wasitcwK2VLs0IM8fgR
-	gMXmq7+pge8CJZ2iVHbWZ2G9cseGb4SIlTyNSxCe2FENTT24YUWmI5k2N/4LB6iISF7M/cBkNID
-	CMRuww=
-X-Received: by 2002:a05:600c:4e47:b0:488:a977:8de with SMTP id 5b1f17b1804b1-48fe61ed3b3mr113720245e9.16.1778929609523;
-        Sat, 16 May 2026 04:06:49 -0700 (PDT)
+        bh=W2kX0D85vKgrMTrfAaShnpioKYHS8IrhnFr9X3CmECA=;
+        b=kfae8D033+wTDScdHxbc3JuyL1sioj9d3GBdaD2A2zPSE40PLt3lp7legY38NrkQug
+         RHo0ZsAw+8V/Yinfq6UIMpXTMHoDoKs5ool4ZHln+Ku93aJjLgSKTIZioEUEz9o69/7N
+         eKUv9lCSNqqAPjzRr/45Mms9O5lLPidHtw7ICE639bSXiaZFE73yas+CVoD8YNTPAo8B
+         OPhY8doqF9xFzsB/clrcM71xCEhoz2epdvLJjvSxcOP6vSsDVZi3Z5Mqski9mLI1zyPb
+         EzfsKofrrd6yVjOyRXN1U0t1EPrVaWUu0upX+Ql6R3dC/F64deAxEK/kKX4AU1KLIzH+
+         bO/Q==
+X-Forwarded-Encrypted: i=1; AFNElJ8Gwn8/aWoClf2poKwOFQWyj6F4xRE2U9anXd/cfGWLSBgqbTHujDuA3kWbVBjZe+HWdO+vncDhy4xrl7eT@lists.linaro.org
+X-Gm-Message-State: AOJu0YxeFgv8Zngo7VVSmdOx3zR+a2R10ubKxJhwPMzycmZRR85zm4E7
+	YdpMQZj0Kg/QvKbNMtFiIPQFO3XliP1qLvkTxvnzWjlUDFf/rmZX+Qve
+X-Gm-Gg: Acq92OHAroDyka6XaOFRfgONVPmYfIpTC+8YZWJOausKVbeVgr4WPi+UTHWQSL3tntD
+	UaEptVoi+opfDmKLLlsPMWFSpzZZkrbP5HBgaPCqQv70oY37Qu+8WD/lDRegvKT2Rot/QrARSce
+	Scc7zKZqMsKx2jzU+WxtmyzK9lFNc+6EH77tkFa1roXWZoVg6JR4S4fHVrqzZyzxqXZSZI4orRN
+	kcGFC7T2aCcn33cK+xhq7rrVVkhqT6inw5WVs6l+gaGVtTMoVArJDLwJc4rby+xuLJugqeVFl0f
+	DFoHXXIBH4l0DxmB/F8HHTj517GBAjkoAhy1QBaqTJOEBhkgFp3fEwZzXiBMsAlkyi6pj3gwS5Q
+	OL46OD7WhtfKKynlnDpLn8mSwChvT+WB9bE3n0TtJJItdsIVL9+D3/D0aejWPUkZBPBmCkoL9F7
+	uNsfP49nWO2cO6WnMYDbJgiZXRKC9NFoFVaR7U45QY8NLWOXOKZ//Tzkaf7MbsbWNQkYT3urGuX
+	ECPA3ZpBu2r9dVYUQ==
+X-Received: by 2002:a05:600c:1512:b0:48f:e26a:1744 with SMTP id 5b1f17b1804b1-48fe60ecd67mr61949075e9.9.1778929610832;
+        Sat, 16 May 2026 04:06:50 -0700 (PDT)
 Received: from [10.13.0.20] (ip87-106-117-14.pbiaas.com. [87.106.117.14])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48feb00e5easm36399545e9.13.2026.05.16.04.06.48
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48feb00e5easm36399545e9.13.2026.05.16.04.06.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 16 May 2026 04:06:49 -0700 (PDT)
+        Sat, 16 May 2026 04:06:50 -0700 (PDT)
 From: Julian Orth <ju.orth@gmail.com>
-Date: Sat, 16 May 2026 13:06:07 +0200
+Date: Sat, 16 May 2026 13:06:08 +0200
 MIME-Version: 1.0
-Message-Id: <20260516-jorth-syncobj-v1-4-88ede9d98a81@gmail.com>
+Message-Id: <20260516-jorth-syncobj-v1-5-88ede9d98a81@gmail.com>
 References: <20260516-jorth-syncobj-v1-0-88ede9d98a81@gmail.com>
 In-Reply-To: <20260516-jorth-syncobj-v1-0-88ede9d98a81@gmail.com>
 To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
@@ -77,25 +77,25 @@ To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
  Arnd Bergmann <arnd@arndb.de>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1778929602; l=3158;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1778929602; l=3982;
  i=ju.orth@gmail.com; s=20251120; h=from:subject:message-id;
- bh=E8KFRmAvFwSHl3US+f+37kFcs+Zh1TZlm/HDUacqWIY=;
- b=bWpzKA+XEX3J2UNOYwj8QCncPGUIt1EclXXwvNyI/mmaQH21mYNpvhjIrkkFE7rAGXoJvJuvr
- uSj76PriSooBBU33M65Bq/uYq41w4a4tjHiYN/O/IE29Xyc6bLuV1Yr
+ bh=Mb8lX2KhvsBJbZLZbGjpbAUq1f7hQxcuF5oQ0+pOVFk=;
+ b=BeGkMWuyeX/aZRp2H0hfoW2AxnZOC2lzk8MPd8PsvJlWTvAKosg1c1JQKJEBD/6j1xtsYYLN2
+ hnZSkrLB1TOAJz2SwH4GedXgfD0gdUZ4ygDmsn2lzPUAFQlwflz007b
 X-Developer-Key: i=ju.orth@gmail.com; a=ed25519;
  pk=uM2SS4lelkuIoYHc7v9N9bgBZ3hS632zJS2xjRJLPLI=
-X-Spamd-Bar: ----
-Message-ID-Hash: QRDE4JS75NT7HXTMNLEAUAV35GQYBDCD
-X-Message-ID-Hash: QRDE4JS75NT7HXTMNLEAUAV35GQYBDCD
+X-Spamd-Bar: ---
+Message-ID-Hash: 5ASFONDI6XLA766FXB6X53DR62OL3FCB
+X-Message-ID-Hash: 5ASFONDI6XLA766FXB6X53DR62OL3FCB
 X-MailFrom: ju.orth@gmail.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org, wayland-devel@lists.freedesktop.org, ju.orth@gmail.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 04/12] drm/syncobj: add drm_syncobj_register_eventfd
+Subject: [Linaro-mm-sig] [PATCH 05/12] drm/syncobj: have transfer functions accept drm_syncobj directly
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QRDE4JS75NT7HXTMNLEAUAV35GQYBDCD/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5ASFONDI6XLA766FXB6X53DR62OL3FCB/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -104,7 +104,7 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 0EC5B55B4F3
+X-Rspamd-Queue-Id: C2D3255B502
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [2.09 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
@@ -133,104 +133,141 @@ X-Spamd-Result: default: False [2.09 / 15.00];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_SPAM(0.00)[0.034];
+	NEURAL_SPAM(0.00)[0.041];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
 X-Rspamd-Action: no action
 
-This makes the logic from drm_syncobj_eventfd_ioctl available to callers
-that already have a drm_syncobj.
+This removes the implicit flags check from drm_syncobj_find_fence. The
+check is moved to the only caller drm_syncobj_transfer_ioctl.
 
 Signed-off-by: Julian Orth <ju.orth@gmail.com>
 ---
- drivers/gpu/drm/drm_syncobj.c | 37 ++++++++++++++++++++++++++++++-------
- include/drm/drm_syncobj.h     |  2 ++
- 2 files changed, 32 insertions(+), 7 deletions(-)
+ drivers/gpu/drm/drm_syncobj.c | 62 ++++++++++++++++++++++++-------------------
+ 1 file changed, 35 insertions(+), 27 deletions(-)
 
 diff --git a/drivers/gpu/drm/drm_syncobj.c b/drivers/gpu/drm/drm_syncobj.c
-index 648afd1f4fdd..3e8fb7e0cace 100644
+index 3e8fb7e0cace..a746e787882d 100644
 --- a/drivers/gpu/drm/drm_syncobj.c
 +++ b/drivers/gpu/drm/drm_syncobj.c
-@@ -1502,8 +1502,6 @@ drm_syncobj_eventfd_ioctl(struct drm_device *dev, void *data,
+@@ -955,29 +955,23 @@ drm_syncobj_fd_to_handle_ioctl(struct drm_device *dev, void *data,
+ 					&args->handle);
+ }
+ 
+-static int drm_syncobj_transfer_to_timeline(struct drm_file *file_private,
+-					    struct drm_syncobj_transfer *args)
++static int drm_syncobj_transfer_to_timeline(struct drm_syncobj *src, u64 src_point,
++					    struct drm_syncobj *dst, u64 dst_point,
++					    u32 flags)
  {
- 	struct drm_syncobj_eventfd *args = data;
- 	struct drm_syncobj *syncobj;
--	struct eventfd_ctx *ev_fd_ctx;
--	struct syncobj_eventfd_entry *entry;
+-	struct drm_syncobj *timeline_syncobj = NULL;
+ 	struct dma_fence *fence, *tmp;
+ 	struct dma_fence_chain *chain;
+ 	int ret;
+ 
+-	timeline_syncobj = drm_syncobj_find(file_private, args->dst_handle);
+-	if (!timeline_syncobj) {
+-		return -ENOENT;
+-	}
+-	ret = drm_syncobj_find_fence(file_private, args->src_handle,
+-				     args->src_point, args->flags,
+-				     &tmp);
++	ret = drm_syncobj_fence_lookup(src, src_point, flags, &tmp);
+ 	if (ret)
+-		goto err_put_timeline;
++		goto out;
+ 
+ 	fence = dma_fence_unwrap_merge(tmp);
+ 	dma_fence_put(tmp);
+ 	if (!fence) {
+ 		ret = -ENOMEM;
+-		goto err_put_timeline;
++		goto out;
+ 	}
+ 
+ 	chain = dma_fence_chain_alloc();
+@@ -986,34 +980,27 @@ static int drm_syncobj_transfer_to_timeline(struct drm_file *file_private,
+ 		goto err_free_fence;
+ 	}
+ 
+-	drm_syncobj_add_point(timeline_syncobj, chain, fence, args->dst_point);
++	drm_syncobj_add_point(dst, chain, fence, dst_point);
+ err_free_fence:
+ 	dma_fence_put(fence);
+-err_put_timeline:
+-	drm_syncobj_put(timeline_syncobj);
++out:
+ 
+ 	return ret;
+ }
+ 
+ static int
+-drm_syncobj_transfer_to_binary(struct drm_file *file_private,
+-			       struct drm_syncobj_transfer *args)
++drm_syncobj_transfer_to_binary(struct drm_syncobj *src, u64 src_point,
++			       struct drm_syncobj *dst, u32 flags)
+ {
+-	struct drm_syncobj *binary_syncobj = NULL;
+ 	struct dma_fence *fence;
+ 	int ret;
+ 
+-	binary_syncobj = drm_syncobj_find(file_private, args->dst_handle);
+-	if (!binary_syncobj)
+-		return -ENOENT;
+-	ret = drm_syncobj_find_fence(file_private, args->src_handle,
+-				     args->src_point, args->flags, &fence);
++	ret = drm_syncobj_fence_lookup(src, src_point, flags, &fence);
+ 	if (ret)
+ 		goto err;
+-	drm_syncobj_replace_fence(binary_syncobj, fence);
++	drm_syncobj_replace_fence(dst, fence);
+ 	dma_fence_put(fence);
+ err:
+-	drm_syncobj_put(binary_syncobj);
+ 
+ 	return ret;
+ }
+@@ -1022,18 +1009,39 @@ drm_syncobj_transfer_ioctl(struct drm_device *dev, void *data,
+ 			   struct drm_file *file_private)
+ {
+ 	struct drm_syncobj_transfer *args = data;
++	struct drm_syncobj *src, *dst;
  	int ret;
  
  	if (!drm_core_check_feature(dev, DRIVER_SYNCOBJ_TIMELINE))
-@@ -1519,7 +1517,33 @@ drm_syncobj_eventfd_ioctl(struct drm_device *dev, void *data,
- 	if (!syncobj)
- 		return -ENOENT;
+ 		return -EOPNOTSUPP;
  
--	ev_fd_ctx = eventfd_ctx_fdget(args->fd);
-+	ret = drm_syncobj_register_eventfd(syncobj, args->fd, args->point, args->flags);
++	if (args->flags & ~DRM_SYNCOBJ_WAIT_FLAGS_WAIT_FOR_SUBMIT)
++		return -EINVAL;
 +
-+	drm_syncobj_put(syncobj);
-+
-+	return ret;
-+}
-+
-+/**
-+ * drm_syncobj_register_eventfd - register an eventfd for a syncobj
-+ * @syncobj: sync object to add the eventfd to
-+ * @ev_fd: eventfd file descriptor to signal
-+ * @point: timeline point to wait for
-+ * @flags: DRM_SYNCOBJ_WAIT_FLAGS_WAIT_AVAILABLE or 0
-+ *
-+ * Registers an eventfd that will be signaled when the point is
-+ * signaled or available.
-+ *
-+ * Returns 0 on success or a negative error value on failure.
-+ */
-+int drm_syncobj_register_eventfd(struct drm_syncobj *syncobj,
-+				 int ev_fd, u64 point, u32 flags)
-+{
-+	struct eventfd_ctx *ev_fd_ctx;
-+	struct syncobj_eventfd_entry *entry;
-+	int ret;
-+
-+	ev_fd_ctx = eventfd_ctx_fdget(ev_fd);
- 	if (IS_ERR(ev_fd_ctx)) {
- 		ret = PTR_ERR(ev_fd_ctx);
- 		goto err_fdget;
-@@ -1532,20 +1556,19 @@ drm_syncobj_eventfd_ioctl(struct drm_device *dev, void *data,
- 	}
- 	entry->syncobj = syncobj;
- 	entry->ev_fd_ctx = ev_fd_ctx;
--	entry->point = args->point;
--	entry->flags = args->flags;
-+	entry->point = point;
-+	entry->flags = flags;
+ 	if (args->pad)
+ 		return -EINVAL;
  
- 	drm_syncobj_add_eventfd(syncobj, entry);
--	drm_syncobj_put(syncobj);
++	src = drm_syncobj_find(file_private, args->src_handle);
++	if (!src)
++		return -ENOENT;
++
++	dst = drm_syncobj_find(file_private, args->dst_handle);
++	if (!dst) {
++		ret = -ENOENT;
++		goto err_dst;
++	}
++
+ 	if (args->dst_point)
+-		ret = drm_syncobj_transfer_to_timeline(file_private, args);
++		ret = drm_syncobj_transfer_to_timeline(src, args->src_point,
++						       dst, args->dst_point,
++						       args->flags);
+ 	else
+-		ret = drm_syncobj_transfer_to_binary(file_private, args);
++		ret = drm_syncobj_transfer_to_binary(src, args->src_point,
++						     dst, args->flags);
++
++	drm_syncobj_put(dst);
++err_dst:
++	drm_syncobj_put(src);
  
- 	return 0;
- 
- err_kzalloc:
- 	eventfd_ctx_put(ev_fd_ctx);
- err_fdget:
--	drm_syncobj_put(syncobj);
  	return ret;
  }
-+EXPORT_SYMBOL(drm_syncobj_register_eventfd);
- 
- int
- drm_syncobj_reset_ioctl(struct drm_device *dev, void *data,
-diff --git a/include/drm/drm_syncobj.h b/include/drm/drm_syncobj.h
-index 7677fd995be0..85e7ca7f7896 100644
---- a/include/drm/drm_syncobj.h
-+++ b/include/drm/drm_syncobj.h
-@@ -134,6 +134,8 @@ signed long drm_syncobj_array_wait_timeout(struct drm_syncobj **syncobjs,
- 					   uint32_t count, uint32_t flags,
- 					   signed long timeout, uint32_t *idx,
- 					   ktime_t *deadline);
-+int drm_syncobj_register_eventfd(struct drm_syncobj *syncobj,
-+				 int ev_fd, u64 point, u32 flags);
- void drm_syncobj_free(struct kref *kref);
- int drm_syncobj_create(struct drm_syncobj **out_syncobj, uint32_t flags,
- 		       struct dma_fence *fence);
 
 -- 
 2.54.0
