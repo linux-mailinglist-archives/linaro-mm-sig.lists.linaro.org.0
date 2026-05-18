@@ -2,35 +2,35 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id CE5IAi4aC2reDQUAu9opvQ
+	id oHvULU8aC2reDQUAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 15:54:54 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 15:55:27 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id BB03A56E1A2
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 15:54:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5340756E1C5
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 15:55:27 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id D0B3F40705
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 13:54:52 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 6A06B4051A
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 13:55:26 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 43C9C4051A
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 18 May 2026 13:54:45 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C80D5404C7
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 18 May 2026 13:55:17 +0000 (UTC)
 MIME-Version: 1.0
 From: namudigumoraka29@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Mon, 18 May 2026 13:54:45 -0000
-Message-ID: <177911248527.2890698.21372277849302228@lists.linaro.org>
+Date: Mon, 18 May 2026 13:55:17 -0000
+Message-ID: <177911251781.2892020.7106477872613227083@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: QLZ5A5VGL6RGRBABDCBGOJFCVQ3P2V4N
-X-Message-ID-Hash: QLZ5A5VGL6RGRBABDCBGOJFCVQ3P2V4N
+Message-ID-Hash: PWKY772RR6EDIGJPUNZT2WHSWMTHAO6A
+X-Message-ID-Hash: PWKY772RR6EDIGJPUNZT2WHSWMTHAO6A
 X-MailFrom: namudigumoraka29@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [][][]+971568044699 [][][] Mtp Kit For Sale In Muscat ( Pfizer ) Mtp Kit Available In Muscat, Where Can I Buy Mtp Kit In Muscat
+Subject: [Linaro-mm-sig] [][][]+971568044699 [][][] Mtp Kit For Sale In Dubai ( Pfizer ) Mtp Kit Available In Dubai, Where Can I Buy Mtp Kit In Dubai
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QLZ5A5VGL6RGRBABDCBGOJFCVQ3P2V4N/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PWKY772RR6EDIGJPUNZT2WHSWMTHAO6A/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -62,12 +62,12 @@ X-Spamd-Result: default: False [0.59 / 15.00];
 	R_DKIM_NA(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:mid,lists.linaro.org:helo]
-X-Rspamd-Queue-Id: BB03A56E1A2
+X-Rspamd-Queue-Id: 5340756E1C5
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-[][][]+971568044699 [][][] Mtp Kit For Sale In Muscat ( Pfizer ) Mtp Kit Available In Muscat, Where Can I Buy Mtp Kit In MuscatKuwait +971568044699 Abortion Tablets Available In Qatar +971568044699 Abortion Pills For Sale In Kuwait City +971568044699 Abortion Pills For Sale In Al Asimah +971568044699 Abortion Pills For Sale In Al Ahmadi +971568044699 Abortion Pills For Sale In Hawalli +971568044699 Abortion Pills For Sale In Al Farwaniyah +971568044699 Abortion Pills For Sale In Al Jahra +971568044699 Abortion Pills For Sale In Salmiya +971568044699 Abortion Pills For Sale In Sabah as Salim +971568044699 Abortion Pills For Sale In Mangaf +971568044699 Abortion Pills For Sale In Fintas +971568044699 Abortion Pills For Sale In Dubai +971568044699 Abortion Pills For Sale In Abu Dhabi +971568044699 Abortion Pills For Sale In Sharjah +971568044699 Abortion Pills For Sale In Al Ain +971568044699 Abortion Pills For Sale In Ajman +971568044699 Abortion Pills For Sale In Fujairaih +9715680446
- 99 Abortion Pills For Sale In Ras Al Khaimah +971568044699 Abortion Pills For Sale In Doha +971568044699 Abortion Pills For Sale In Qatar +971568044699 Abortion Pills For Sale In Muscat +971568044699 Abortion Pills For Sale In Oman
+[][][]+971568044699 [][][] Mtp Kit For Sale In Dubai ( Pfizer ) Mtp Kit Available In Dubai, Where Can I Buy Mtp Kit In DubaiKuwait +971568044699 Abortion Tablets Available In Qatar +971568044699 Abortion Pills For Sale In Kuwait City +971568044699 Abortion Pills For Sale In Al Asimah +971568044699 Abortion Pills For Sale In Al Ahmadi +971568044699 Abortion Pills For Sale In Hawalli +971568044699 Abortion Pills For Sale In Al Farwaniyah +971568044699 Abortion Pills For Sale In Al Jahra +971568044699 Abortion Pills For Sale In Salmiya +971568044699 Abortion Pills For Sale In Sabah as Salim +971568044699 Abortion Pills For Sale In Mangaf +971568044699 Abortion Pills For Sale In Fintas +971568044699 Abortion Pills For Sale In Dubai +971568044699 Abortion Pills For Sale In Abu Dhabi +971568044699 Abortion Pills For Sale In Sharjah +971568044699 Abortion Pills For Sale In Al Ain +971568044699 Abortion Pills For Sale In Ajman +971568044699 Abortion Pills For Sale In Fujairaih +971568044699 
+ Abortion Pills For Sale In Ras Al Khaimah +971568044699 Abortion Pills For Sale In Doha +971568044699 Abortion Pills For Sale In Qatar +971568044699 Abortion Pills For Sale In Muscat +971568044699 Abortion Pills For Sale In Oman
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
