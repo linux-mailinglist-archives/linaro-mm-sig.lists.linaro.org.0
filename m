@@ -2,224 +2,755 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sNCHAQkAC2oH/QQAu9opvQ
+	id 4IBRDNYAC2oH/QQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 14:03:21 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 14:06:46 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7DE5E56C2CF
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 14:03:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 995F656C3DB
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 14:06:45 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0E13B406B3
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 12:03:19 +0000 (UTC)
-Received: from mail-yx1-f54.google.com (mail-yx1-f54.google.com [74.125.224.54])
-	by lists.linaro.org (Postfix) with ESMTPS id EF18940475
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 18 May 2026 12:03:07 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 8D532406B1
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 12:06:44 +0000 (UTC)
+Received: from MW6PR02CU001.outbound.protection.outlook.com (mail-westus2azon11012000.outbound.protection.outlook.com [52.101.48.0])
+	by lists.linaro.org (Postfix) with ESMTPS id C960D4051A
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 18 May 2026 12:06:29 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=E6sfvAN3;
-	arc=pass ("google.com:s=arc-20240605:i=1");
-	spf=pass (lists.linaro.org: domain of ju.orth@gmail.com designates 74.125.224.54 as permitted sender) smtp.mailfrom=ju.orth@gmail.com;
-	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-yx1-f54.google.com with SMTP id 956f58d0204a3-65c3ea2ebf7so2495897d50.0
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 18 May 2026 05:03:07 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779105787; cv=none;
-        d=google.com; s=arc-20240605;
-        b=Vyi9JNX1J8zWJpGIE+3hOpEHtFVaWBgY74H+zJBKG9M5hHZ2LkFyYMl2wM4i/BQYO+
-         ZcG8rwJsN6Yz8Jd8rIuQZhquMIrH3ksXraktdpyGklg9cxe+2Scohd7yHJSRC20Vxre+
-         Vu73c0JqPApCdrDo5XVEHUcoARffDCDTq59hrTWaOU9LkGBA9JwIZoLVcNst2riPcU8n
-         NzRdjHu18SLb/K8QLDZT0aj0vW8bpd5PLoWj5iGxe38NS6HnhhVkPKUnxgr5l7D+Ihg+
-         SYMRYtqFkLYDAusekWDE0pUmyuuwbAIDtqTV2/5ifmLjaiLyfa5oR5+DU1uaLk00p+M8
-         rrUw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=nQfhxPsXqrqiZeeyVw9wkJXgorhextrPmIU5IhGc6HM=;
-        fh=IVF+TxSJHBTRcz82hr4qd1tKhwirxLFPcb3P5HoNFZI=;
-        b=OeTsst9H2KbiCKuY+n+diuUUHmWY7I+1Ivo7QgvwJPZXNTci5lpNYVFVzwsAlV690q
-         GSoHrTzksBQPYutTuxb3Oy8z8MXDCIuvMaVY/HvOsgjX4jtCEh4jDd7McPvd8eljhPKx
-         OEcRrcp0tip70B4U0lcI5P80DvzmUuQwY4wlhECS+OeEh6SbAJzLT/Fq7HpTCc9OJgIC
-         6V5mzrWYyTEn7n2NfsFoFLok7EauV2d5VHRaWopRefwOaOSKTgEDZrI75i6PoPVi6WnR
-         k9mlTXNBf/k6FwfSvEMnz5DxQnifp6B5oO3a8U67oiVKgIzJrNvo1zB5dS2CUbuedEqA
-         HHZg==;
-        darn=lists.linaro.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779105787; x=1779710587; darn=lists.linaro.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=nQfhxPsXqrqiZeeyVw9wkJXgorhextrPmIU5IhGc6HM=;
-        b=E6sfvAN3lKLgC5YQpuO83JviYl0Fbx9fEfGrwOmpBfeO636jNuzsAZpm7eFWY3TfKA
-         xPfF5lwS6/eKDE4Kt8/W7MT9W8lP7KfG5lYQKmQRtRx2lOdHtEGCclBwJje3OUhdalSc
-         FA6g+9g5nK9Au0h3W5GbGUvgLv7gMsLhqs/MNGm2dQIeR2IjaVUG4QVl2qStMyceeywv
-         2WI34dP91yDpg0QUBT2rqu3VNtx6K5cC3GZTdKijZbVCLdeDoViO2eBi/LCXvu+wOtTn
-         +qJTPTQm3SFzpJkvRYzJC8oH3FKeD54qXedsss8ofGUUUFUWIYntwpLkbEIq865hyc1P
-         spdw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779105787; x=1779710587;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=nQfhxPsXqrqiZeeyVw9wkJXgorhextrPmIU5IhGc6HM=;
-        b=SvN6A6qhIs47odapSIrXbu5jMoF7fX4ELBqlo4QgZ4VhRt1T5Fz72yhOt/bW+DwJMI
-         tbOP7xRcNSW20Wf5jq4pw/DCP2GBNAJ9HmKNVGuAIfz25lusITLk5SY2Vx0QjI2MtnYB
-         o/edOX+hu+BgxuHz+HIgMXHyyRNwt639gGpmTAUtpLsWDgVo08yeoSad3khoPANByxqv
-         7xHt3XzAmYPS53ralDb3ILhvaFUMZPaPw4ms+ujWGKPJLwZ50bFLrSuS3ncyuGdZVMVU
-         TAo6bMB+iWsOWmx0W295Cg+X01kTCNnibvpd2IfoXefS/c1QdNh59dsF13V4PyxZ1Gdj
-         b6YQ==
-X-Forwarded-Encrypted: i=1; AFNElJ/0GXtLyk2+H1Yna++hn3xqkeIU9VvzvgpWQ2W3t3QEE0ycupt956SX87cgExV359EEUi+tbskFRPzS2Kgg@lists.linaro.org
-X-Gm-Message-State: AOJu0YzQ5b25SfQmNrBW0n4Jzl5ZP2gTDAUHyOhYL+dmb+zt9nUzDSHK
-	MXH2Olld+7nO7P9gOSvHBVVPzmGMX6tooBZyxZocJG9ueGKxj2CUdBNnhXnzKdRST57twR/mSb6
-	SJH9KFxq8sSI1L6o64w0A6BEWmlgXRfM=
-X-Gm-Gg: Acq92OE9ECiFmXyx0AAfSR16JKVig4uzVw/6orWf34EecLMyj2BkiYEpFMe72FThb0r
-	3aMTMJrxxvKXR6jLaGqIoTpR6sUgTofEwhLwWTHXZVTYU6DTagnIIVzqLFk/3mxMy/kynT5TDoe
-	oahoV6oKvyO1/FCiY5PjxiFaCoPD2gY5W+kEE0A+U1o4+5XHLv6rC/CaMtAVndIzdp+PWhxcmh7
-	GKM0HQuHAo1ij2nI/P+qnjIesiVCJHpl4Nzuxc55CsuPpZ9VZ9xNePRrkRVkan3H/cUXJ0oFrMB
-	gpjVzW2z2iFitVFx2Z7loaOgCm3e/EZLOTp4MW0EWZukN+dv
-X-Received: by 2002:a05:690e:d4c:b0:64e:d622:9d1a with SMTP id
- 956f58d0204a3-65e22663ef0mr13926928d50.4.1779105787361; Mon, 18 May 2026
- 05:03:07 -0700 (PDT)
+	dkim=pass header.d=amd.com header.s=selector1 header.b=wYV0vUgd;
+	arc=pass ("microsoft.com:s=arcselector10001:i=1");
+	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 52.101.48.0 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
+	dmarc=pass (policy=quarantine) header.from=amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=P0JPh85cypjVSs/HbfsNuHGHY68JWF0KkYwNG109n154mRjComVuXSxuVUWZlNPlIQ+DLYLr/rO/kicmMWpKLoHNU1hs8x7OQbUHT1SMvyInIjRO6vwzrzdOerTG96vTqXx3d+iA3Yy52vKAJtf8OWY497eMRQhk/2tOaH4Spq5s/HiRloNJbJftO8hwUXUv/97OSb8g9KkLCgwKcKz1f2OKo453a0ZJXIW3lTeRv3ETWXozxR2o0KJqhBRE+Vglmq2kO93ZXGLn/Yg/Ks7SHv/daOPh8bavkVDAh1L7cdPPPMtwN9TZ/tGa0Dh0bDQujYeOPjGJ+xt9p3KhmI8SKA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ASI6c8leuYmDiVqrKryFZ8HPJQqUU/5+I7X5J72JEjQ=;
+ b=UDAnHfEoIoXiEUD+qE9Gejmr/fS3gzoYq2fN+TTViN6SfU8qvfmZ52/b27rsRO6neYAVBP3288V2q9eKgexh3BfWfPm7gT7m0jJT7ygQLXQbEc1lI88xk7voO2Hvq4HgryeEnI7Yb4yppkZAytTdOIDCiZuEOZtvJHF3EJXZyRGF9JqKHUAmfGhhPDOy5Oq01K4+QxE4u8qIHEOuZ/T9Ww60MRZPMkekYBJLhhsVzQA6RsH0mtjKnmmRvA0PKul9bkvMd2XMSr5cB5sbvKCdngKtCyZphxebU8TtruZYhlhgQBlXgwuAPQZ57ahBZNHmiFlKNgr0KuFk624xgcpvDA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ASI6c8leuYmDiVqrKryFZ8HPJQqUU/5+I7X5J72JEjQ=;
+ b=wYV0vUgdn0brPH+0w9TdsBun97aENBSIcq80uT5MJI/zscxrHVb1gJ+3q+bg4JUoppN19asaddSrUkxymTYkDesmXmQVdSUCin0EfQy1bU6DhSBrGKZA4rC5eiPJPc7VuXs9cY6TtJMqWeSOEa6h7iA6jSDKGgTwkAd02OshSqs=
+Received: from PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
+ by LVUPR12MB999160.namprd12.prod.outlook.com (2603:10b6:408:3a4::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.15; Mon, 18 May
+ 2026 12:06:25 +0000
+Received: from PH7PR12MB5685.namprd12.prod.outlook.com
+ ([fe80::ce69:cfae:774d:a65c]) by PH7PR12MB5685.namprd12.prod.outlook.com
+ ([fe80::ce69:cfae:774d:a65c%5]) with mapi id 15.21.0025.022; Mon, 18 May 2026
+ 12:06:25 +0000
+Message-ID: <8602a990-e557-45e3-8b3a-f9e6aaa00e0d@amd.com>
+Date: Mon, 18 May 2026 14:06:18 +0200
+User-Agent: Mozilla Thunderbird
+To: Julian Orth <ju.orth@gmail.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Sumit Semwal <sumit.semwal@linaro.org>, Jonathan Corbet <corbet@lwn.net>,
+ Shuah Khan <skhan@linuxfoundation.org>, Arnd Bergmann <arnd@arndb.de>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+References: <20260516-jorth-syncobj-v1-0-88ede9d98a81@gmail.com>
+ <20260516-jorth-syncobj-v1-12-88ede9d98a81@gmail.com>
+Content-Language: en-US
+From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+In-Reply-To: <20260516-jorth-syncobj-v1-12-88ede9d98a81@gmail.com>
+X-ClientProxiedBy: FR2P281CA0101.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:9c::7) To PH7PR12MB5685.namprd12.prod.outlook.com
+ (2603:10b6:510:13c::22)
 MIME-Version: 1.0
-References: <20260516-jorth-syncobj-v1-0-88ede9d98a81@gmail.com> <c6c91de9-a34b-4b50-a3c1-d42bf7631f8e@amd.com>
-In-Reply-To: <c6c91de9-a34b-4b50-a3c1-d42bf7631f8e@amd.com>
-From: Julian Orth <ju.orth@gmail.com>
-Date: Mon, 18 May 2026 14:02:56 +0200
-X-Gm-Features: AVHnY4KJe2qI5pXNXCOzwBarOTRKtwJTNVIpdIJzUsAV6Iz4wL27sHKB6tNYDng
-Message-ID: <CAHijbEUzWZC4GAMU6YGV42gOYkrQaMZZPiwS4Erb4H1J-fh_8Q@mail.gmail.com>
-To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-X-Spamd-Bar: ----
-Message-ID-Hash: 4WP5QN7VEO3DIGDS6YKO5UACOIJ3N242
-X-Message-ID-Hash: 4WP5QN7VEO3DIGDS6YKO5UACOIJ3N242
-X-MailFrom: ju.orth@gmail.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, Arnd Bergmann <arnd@arndb.de>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org, wayland-devel@lists.freedesktop.org
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|LVUPR12MB999160:EE_
+X-MS-Office365-Filtering-Correlation-Id: 460be9ec-f18e-4246-68f1-08deb4d5e27b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|376014|7416014|1800799024|366016|4143699003|3023799003|11063799003|56012099003|18002099003|22082099003|921020;
+X-Microsoft-Antispam-Message-Info: 
+	oSQcW+7BITq+NYaNdWClcKBnFBX+sTj/keH6guagmFGnLsWpgvuBEacRTFYrln5wsAIMwBPjDL9B9Tm0unT5aLWOMjzzKeKR2esOtOEvBH7n/Q9MmyLcaYq8xkH2T9AK9mei1u9cE/PYFqgr6L8QvsP4IRZ5Nkrv30GlaLn3AVkic2n405z8ACb9+29Ut9KgiNQmf/YMy+T/jZdRc6EzJiqwWW2acp1UHMwhHKuxOiHYVc1CBoYec0pQXr2NMTIMmGBNrOrhFrYz8DMBNA1UlBwpYMGnwHTai0vWG90w78QKJeR806nfrMX2wYrsZrJ9Mn3R1ZXts+S3x9rOzKuwLcoRHFOoj1N9Hi4IbM1PSWuoSnGNBc5D6d7C0ru6F4K7agrPJPF27dt4zmFMMmtQiCIxIXWDCSAIIOzDIfv0edY2nHsA5gYTEcx6PZAOg7FJTfIlYAA0dKNEuhtnynjSYlu0LePzRc/xcusQ7uZAdMvJrcl2rvt4+2Px6rUNMGFfiOkVbW3J9kFfrB0iVuIGLFBa62NTG8Xi7wd+8SwmwT6WllIppy/i3Cjru9ZGB22UjmcJOpUH35q4OwJ7gc8Cma4bP9PQTddLKcKnWhT3WJ/OpY/1ODzo8iCLnrCgw4SpPCYkLd/23UlEciX7xuyFt/rDssUSuRWZuUuSj6FGZjrElvS34H6xJctUDYZ/RWhOxIONwmk+XqaJf2d87knvyr6tOV/GBGE9SOfzgVXaiLA=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB5685.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(1800799024)(366016)(4143699003)(3023799003)(11063799003)(56012099003)(18002099003)(22082099003)(921020);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?WXZoZFpiRzUzQ3BEL2FqVFQxYlRMdk9BZnE1a1pqMjBia0FzYWhLZlVPOEJQ?=
+ =?utf-8?B?WWkvbVEweXNzR1NTWEdHYlFqVEUxTXNobUNzR1ZISDJ2UzN0OXMzYjNBRnBs?=
+ =?utf-8?B?ZkN4Q2ZFWUZ2dE9TZktXeHJPVjZoVXZLZktkOGpyTmFiTGU2ZFRzeXFuWXNW?=
+ =?utf-8?B?V2UzdU4vQkZXWlljNG92Wm1CUnpzbFhwWU9ETXdnWFlCYTYxS1RobjVURFlv?=
+ =?utf-8?B?cDBpTVhFTUp2UkZzdGtzeituRzFBbG5iVXR2cGR4eUsxaGpOOExuaGdQWVVX?=
+ =?utf-8?B?d09JRTlaZmNnYnBFa2lPQ042UFkyS2Q4QmNXUy9GY2ZiZWY0KzlXcUhsRXFM?=
+ =?utf-8?B?RlNWcTN6OGh2T2JvNDlUQ3MzTmFhdit2emZGUFZyRjd3NDJGNWhualEwY0ZD?=
+ =?utf-8?B?WXoxTWgvUEg4UnR6dE83c0dvaFhISnh5U1FrcUFraUdOUWJiTjRNKzlHcGJp?=
+ =?utf-8?B?aTRyZ1lNZkJlenF2U3NOT2x3bE4rejdUZlU0VGIyQ0h3NTBQaVZRUFhiMFZl?=
+ =?utf-8?B?VWJmeU54bUt4SzMvTVgzNkx2VW56b1pET0c2alFzeE0yaklTY2grRmlEOHY5?=
+ =?utf-8?B?ZmVyWGg0QTN6cEN5WG53RjU3aTh6VTN6cEdGb2lpS0puZ3pEa0o5Sm93QWxP?=
+ =?utf-8?B?eGNpb3UrdGlMVkp3K0RFM0ZUOFJtcnB6aXBtNHE1UXE5QXROUTJBM29ma3FZ?=
+ =?utf-8?B?MzhwR0wxMlRxbXRLZkJ3R1A1QTFIblFRdENzckwrMmZUanBIRG1RV25oL2pM?=
+ =?utf-8?B?TWNJQm4zUWdXNW9LQmJqNmU1MXFhQzJtcGJiVnI1YUVvMDFCZTIyZVkvaHV0?=
+ =?utf-8?B?Q0ZSZjExbEROelpaVjJuU2xpeisrUkdhSHc5M1psQ0xIRnlldVhMc2N1U3pU?=
+ =?utf-8?B?M2dXV2RNK0hlZ01zS0tDQnpPZklSUFVrU0pVQjFaS1JBOVdzUFBkTnF6TTN4?=
+ =?utf-8?B?N2xFclQ4Skg3cUlCb1ppcGJ4Mm5rc1ozNGg4YVV4enZXNDZXY2VCbWs3Qmdx?=
+ =?utf-8?B?UDkzZ3FrZlhvSHVsaFp1ZXkyUHJJOUJxaWlJM2Q0WUhYK3pBZ2g5ODBmdEd6?=
+ =?utf-8?B?NnBrN0NwdzBjcnVoc2pZd0g3R0FsQTVlTTBmQlg4a0M3UFR4Y0xwNE93QUU2?=
+ =?utf-8?B?dWFuSmIwL0pwUC9iSTFBUjR5SjBlYnYya3FIWEQyYm9qamZkT24vTDJvYnh5?=
+ =?utf-8?B?c2p4a05GSFRGOGRvYXhFV21XcHVQbWQ3VFk2VlQrWE1rSExGbDZXeVBTOGV0?=
+ =?utf-8?B?aHlKOWxBN3ZTVk03NjJyRjBLaUFTOGhhS3crNThpYksyN0Q2aThrb01tREJQ?=
+ =?utf-8?B?OUtMQ1hhenA5ckFNOVdVN0VmZE1kUFVTcTEyaUVQSHVSV01DYW4rNFltVjhY?=
+ =?utf-8?B?WFFDdDNWOUdNVUsvTll1VStCeUk3NFFrZjVsM0dMZU5uVE42dGp5V2NTN25a?=
+ =?utf-8?B?UnZlcythODV1UGljOGhPbWFQR3FGMkZ4cnlvUHROZDQyYnJFQjI4Y21DMHJj?=
+ =?utf-8?B?eDVBMHlPYk5mbG5pcjhkZTZFQVBOeS94bDdhN1JPUi9RYW5wWXRFWTJoMjhn?=
+ =?utf-8?B?Y1F5SE5XUHRzUU9iQk1sSE9wTzQxYTl6NDBJYS9xK2FHQmlxVlJGRW40T3NF?=
+ =?utf-8?B?WldTVU4xdGpYZnJBb3cza3MxNWZiU0ltSXFRcURtQVlVaFFNRndDRW1URXpC?=
+ =?utf-8?B?MURuZ3lPS0NWa1pvTlpzR3FVYTdTblpKbjhvQjN4dWtsSDFwQjMyMmNhTGJQ?=
+ =?utf-8?B?V1BscFQrY1VqT3NlZjh1RHhtenJPZHJhalZpWTJ0ckhRa053RDBxUDB0R0Uz?=
+ =?utf-8?B?SmdBRzlmWE43RHhRdEpOb2hqRGpSMmVxalN5TlExUTMwdnluZTJsQkdGcmJs?=
+ =?utf-8?B?TjIvL2xITjY1SVJ3eHo1R3g5OHkxNld2NGgvRVhqMTc0UFluck9xYTJjbGtx?=
+ =?utf-8?B?TjdOdkpuQUcvRHErelBkeHJSaW1QNzNRTGk5OEtZakZhdy84MDNyeXowZWtD?=
+ =?utf-8?B?dGZ0SEFLc0dFUHl0amtubkhEc3pOMDhSTTUybjdQaUVKTk9hS043R0NUcm1w?=
+ =?utf-8?B?MkRDNW12dkRiOFF4c2lMZVU4STZxUitEdXp6YWFhU1NCZzhRZGJ0bXpPUjVS?=
+ =?utf-8?B?SU11RkViQy91NS85ckJ3d0pYc1BtYnNzODlBWnppb3RXREdLYnZyUXVHaXN0?=
+ =?utf-8?B?eUpzeDMwVzZuUEhnMHdKQ0dhdW1SaVhGMHpIUVZKb2g5OE1NMS9qM2NJc1dw?=
+ =?utf-8?B?VnZvY0FIdlpTdkJmZUtlckhaMHluazZidnBvNzRqTFhmYlZBUTM2WWVkNHdr?=
+ =?utf-8?Q?m2phzgSnZi/gJB/rFu?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 460be9ec-f18e-4246-68f1-08deb4d5e27b
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5685.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 May 2026 12:06:25.5584
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: NefEDun5CFGzhyhYycrzVGitWuZ44HZVCaPslCqBHF2mbdwRmJJDouqGItOSQJbz
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LVUPR12MB999160
+X-Spamd-Bar: -----
+Message-ID-Hash: BQXYG6W4CT3U7JPTF3XC5J4GTU2BCFBH
+X-Message-ID-Hash: BQXYG6W4CT3U7JPTF3XC5J4GTU2BCFBH
+X-MailFrom: Christian.Koenig@amd.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org, wayland-devel@lists.freedesktop.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 00/12] misc/syncobj: add /dev/syncobj device
+Subject: [Linaro-mm-sig] Re: [PATCH 12/12] misc/syncobj: add new device
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4WP5QN7VEO3DIGDS6YKO5UACOIJ3N242/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/BQXYG6W4CT3U7JPTF3XC5J4GTU2BCFBH/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-X-Rspamd-Queue-Id: 7DE5E56C2CF
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Queue-Id: 995F656C3DB
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [1.69 / 15.00];
-	R_DKIM_REJECT(1.00)[gmail.com:s=20251104];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:google.com:reject}];
+X-Spamd-Result: default: False [4.49 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[amd.com : SPF not aligned (relaxed),quarantine];
+	SUSPICIOUS_RECIPS(1.50)[];
+	R_DKIM_REJECT(1.00)[amd.com:s=selector1];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed),none];
-	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[17];
-	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_THREE(0.00)[4];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:-];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[juorth@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FREEMAIL_CC(0.00)[linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,linaro.org,lwn.net,linuxfoundation.org,arndb.de,lists.freedesktop.org,vger.kernel.org,lists.linaro.org];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	NEURAL_SPAM(0.00)[0.187];
-	MISSING_XM_UA(0.00)[];
+	GREYLIST(0.00)[pass,meta];
+	RCPT_COUNT_TWELVE(0.00)[17];
+	FREEMAIL_TO(0.00)[gmail.com,linux.intel.com,kernel.org,suse.de,ffwll.ch,linaro.org,lwn.net,linuxfoundation.org,arndb.de];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	DKIM_TRACE(0.00)[amd.com:-];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[]
+	NEURAL_HAM(-0.00)[-0.829];
+	FROM_NEQ_ENVFROM(0.00)[christian.koenig@amd.com,linaro-mm-sig-bounces@lists.linaro.org];
+	TO_DN_SOME(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[shuttle.de:email,amd.com:mid,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns]
 X-Rspamd-Action: no action
 
-T24gTW9uLCBNYXkgMTgsIDIwMjYgYXQgMTo1OOKAr1BNIENocmlzdGlhbiBLw7ZuaWcNCjxjaHJp
-c3RpYW4ua29lbmlnQGFtZC5jb20+IHdyb3RlOg0KPg0KPiBPbiA1LzE2LzI2IDEzOjA2LCBKdWxp
-YW4gT3J0aCB3cm90ZToNCj4gPiBUaGlzIHNlcmllcyBhZGRzIGEgbmV3IGRldmljZSAvZGV2L3N5
-bmNvYmogdGhhdCBjYW4gYmUgdXNlZCB0byBjcmVhdGUNCj4gPiBhbmQgbWFuaXB1bGF0ZSBEUk0g
-c3luY29ianMuIFByZXZpb3VzbHksIHRoZXNlIG9wZXJhdGlvbnMgcmVxdWlyZWQgdGhlDQo+ID4g
-dXNlIG9mIGEgRFJNIGRldmljZSBhbmQgdGhlIGRldmljZSBuZWVkZWQgdG8gc3VwcG9ydCB0aGUg
-RFJJVkVSX1NZTkNPQkoNCj4gPiBhbmQgRFJJVkVSX1NZTkNPQkpfVElNRUxJTkUgZmVhdHVyZXMu
-DQo+ID4NCj4gPiBUaGVyZSBhcmUgc2V2ZXJhbCBpc3N1ZXMgd2l0aCB0aGUgZXhpc3RpbmcgQVBJ
-Og0KPiA+DQo+ID4gLSBTeW5jb2JqcyBhcmUgdGhlIG9ubHkgZXhwbGljaXQgc3luYyBtZWNoYW5p
-c20gYXZhaWxhYmxlIG9uIHdheWxhbmQuDQo+ID4gICBNb3N0IGNvbXBvc2l0b3JzIGRvIG5vdCB1
-c2UgR1BVIHdhaXRzLiBJbnN0ZWFkLCB0aGV5IHVzZSB0aGUNCj4gPiAgIERSTV9JT0NUTF9TWU5D
-T0JKX0VWRU5URkQgaW9jdGwgdG8gcGVyZm9ybSBhIENQVSB3YWl0LiBCZWluZyB0aWVkIHRvDQo+
-ID4gICBEUk0gZGV2aWNlcyBtZWFucyB0aGF0IGNvbXBvc2l0b3JzIGNhbm5vdCBjb25zaXN0ZW50
-bHkgb2ZmZXIgdGhpcw0KPiA+ICAgZmVhdHVyZSBldmVuIHRob3VnaCBubyBkZXZpY2Utc3BlY2lm
-aWMgbG9naWMgaXMgaW52b2x2ZWQuDQo+DQo+IFdlbGwgdGhlIGRybV9zeW5jb2JqIGlzIGEgY29u
-dGFpbmVyIGZvciBkZXZpY2Ugc3BlY2lmaWMgZG1hIGZlbmNlcy4NCg0KTm90IG5lY2Vzc2FyaWx5
-LiBUaGUgRFJNX0lPQ1RMX1NZTkNPQkpfVElNRUxJTkVfU0lHTkFMIGlvY3RsIGF0dGFjaGVzDQpz
-b21lIGtpbmQgb2YgZHVtbXkgZmVuY2UgdGhhdCBpcyBhbHJlYWR5IHNpZ25hbGVkLiBJIGRvbid0
-IGJlbGlldmUNCnRoaXMgaXMgZGV2aWNlIHNwZWNpZmljLiBUaGF0IGlzIGFsc28gdGhlIHBhdGgg
-dGhhdCBsbHZtcGlwZSB3b3VsZA0KdXNlLg0KDQo+DQo+IFdoYXQgY291bGQgYmUgcG9zc2libGUg
-aW5zdGVhZCBpcyB0byBwYXNzIGFuIGV2ZW50ZmQgaW50byBXYXlsYW5kLCBidXQgdGhhdCBpcyBz
-b21ldGhpbmcgdXNlcnNwYWNlIG5lZWRzIHRvIGRlY2lkZS4NCj4NCj4gPiAtIGxsdm1waXBlIGN1
-cnJlbnRseSBjYW5ub3Qgb2ZmZXIgc3luY29iaiBpbnRlcm9wIGJlY2F1c2UgaXQgZG9lcyBub3QN
-Cj4gPiAgIGhhdmUgYWNjZXNzIHRvIGEgRFJNIGRldmljZS4gVGhpcyBtZWFucyB0aGF0IGFwcGxp
-Y2F0aW9ucyB1c2luZw0KPiA+ICAgbGx2bXBpcGUgY2Fubm90IHByZXNlbnQgaW1hZ2VzIGJlZm9y
-ZSB0aGV5IGhhdmUgZmluaXNoZWQgcmVuZGVyaW5nLA0KPiA+ICAgZGVzcGl0ZSBsbHZtcGlwZSB1
-c2luZyB0aHJlYWRlZCByZW5kZXJpbmcuDQo+DQo+IFllYWgsIGJ1dCB0aGF0IGlzIGNvbXBsZXRl
-bHkgaW50ZW50aW9uYWwuIFlvdSAqQ0FOJ1QqIHVzZSBhIGRtYV9mZW5jZSBhcyBjb21wbGV0aW9u
-IGV2ZW50IGZvciBsbHZtcGlwZSByZW5kZXJpbmcuIFNlZSB0aGUga2VybmVsIGRvY3VtZW50YXRp
-b24gb24gdGhhdC4NCj4NCj4gV2hhdCBjb3VsZCBiZSBwb3NzaWJsZSBpcyB0byB1c2UgdGhlIGRy
-bV9zeW5jb2JqcyBmdW5jdGlvbmFsaXR5IHRvIHdhaXQgYmVmb3JlIHNpZ25hbCwgYnV0IHRoYXQg
-aGFzIGRpZmZlcmVudCBzZW1hbnRpY3MuDQo+DQo+IFJlZ2FyZHMsDQo+IENocmlzdGlhbi4NCj4N
-Cj4gPiAtIENsaWVudHMgdGhhdCBkbyBub3QgdXNlIHRoZSBWdWxrYW4gV1NJIG5lZWQgdG8gbWFu
-dWFsbHkgcHJvYmUgL2Rldi9kcmkNCj4gPiAgIGZvciBkZXZpY2VzIHRoYXQgc3VwcG9ydCB0aGUg
-c3luY29iaiBpb2N0bHMgaW4gb3JkZXIgdG8gdXNlIHRoZQ0KPiA+ICAgd2F5bGFuZCBzeW5jb2Jq
-IHByb3RvY29sLg0KPiA+IC0gU2ltaWxhcmx5LCBjbGllbnRzIHRoYXQgd2FudCB0byB1c2Ugc2Ny
-ZWVuIGNhcHR1cmUgaGF2ZSBubyBlcXVpdmFsZW50DQo+ID4gICB0byB0aGUgV1NJIGFuZCBhcmUg
-dGhlcmVmb3JlIGZvcmNlZCBpbnRvIHRoYXQgcGF0aC4NCj4gPiAtIEhhdmluZyB0byBrZWVwIGEg
-RFJNIGRldmljZSBvcGVuIGhhcyBwb3RlbnRpYWxseSBuZWdhdGl2ZSBpbnRlcmFjdGlvbnMNCj4g
-PiAgIHdpdGggR1BVIGhvdHBsdWcuDQo+ID4gLSBIYXZpbmcgdG8gdHJhbnNsYXRlIGJldHdlZW4g
-c3luY29iaiBGRHMgYW5kIGhhbmRsZXMgaXMgdHJvdWJsZXNvbWUgaW4NCj4gPiAgIHRoZSBjb21w
-b3NpdG9yIHVzZWNhc2Ugc2luY2Ugc3luY29ianMgY29tZSBhbmQgZ28gZnJlcXVlbnRseSBhbmQg
-bmVlZA0KPiA+ICAgdG8gYmUgY2xlYW5lZCB1cCB3aGVuIGNsaWVudHMgZGlzY29ubmVjdC4NCj4g
-Pg0KPiA+IC9kZXYvc3luY29iaiBzb2x2ZXMgdGhlc2UgaXNzdWVzIGJ5IHByb3ZpZGluZyBhbGwg
-c3luY29iaiBpb2N0bHMgdW5kZXIgYQ0KPiA+IGNvbnNpc3RlbnQgcGF0aCB0aGF0IGlzIG5vdCB0
-aWVkIHRvIGFueSBEUk0gZGV2aWNlLiBJdCBhbHNvIG9wZXJhdGVzDQo+ID4gZGlyZWN0bHkgb24g
-ZmlsZSBkZXNjcmlwdG9ycyBpbnN0ZWFkIG9mIHN5bmNvYmogaGFuZGxlcy4NCj4gPg0KPiA+IFRo
-ZSBzZXJpZXMgc3RhcnRzIHdpdGggYSBudW1iZXIgb2Ygc21hbGwgcmVmYWN0b3JpbmdzIGluIGRy
-bV9zeW5jb2JqLmMNCj4gPiB0byBtYWtlIGl0cyBmdW5jdGlvbmFsaXR5IGF2YWlsYWJsZSBvdXRz
-aWRlIG9mIHRoZSBmaWxlIGFuZCB3aXRob3V0IHRoZQ0KPiA+IG5lZWQgZm9yIGRybV9maWxlL2hh
-bmRsZSBwYWlycy4NCj4gPg0KPiA+IFRoZSBsYXN0IGNvbW1pdCBhZGRzIHRoZSAvZGV2L3N5bmNv
-YmogbW9kdWxlLiBJJ3ZlIGFkZGVkIGl0IGFzIGEgbWlzYw0KPiA+IGRldmljZSBidXQgbWF5YmUg
-dGhpcyBzaG91bGQgaW5zdGVhZCBsaXZlIHNvbWV3aGVyZSB1bmRlciBncHUvZHJtLg0KPiA+DQo+
-ID4gQW4gYXBwbGljYXRpb24gdXNpbmcgdGhlIG5ldyBpbnRlcmZhY2UgY2FuIGJlIGZvdW5kIGF0
-IFsxXS4NCj4gPg0KPiA+IFsxXTogaHR0cHM6Ly9naXRodWIuY29tL21haGtvaC9qYXkvcHVsbC85
-NDcNCj4gPg0KPiA+IC0tLQ0KPiA+IEp1bGlhbiBPcnRoICgxMik6DQo+ID4gICAgICAgZHJtL3N5
-bmNvYmo6IGFkZCBkcm1fc3luY29ial9mcm9tX2ZkDQo+ID4gICAgICAgZHJtL3N5bmNvYmo6IGFk
-ZCBkcm1fc3luY29ial9mZW5jZV9sb29rdXANCj4gPiAgICAgICBkcm0vc3luY29iajogbWFrZSBk
-cm1fc3luY29ial9hcnJheV93YWl0X3RpbWVvdXQgcHVibGljDQo+ID4gICAgICAgZHJtL3N5bmNv
-Ymo6IGFkZCBkcm1fc3luY29ial9yZWdpc3Rlcl9ldmVudGZkDQo+ID4gICAgICAgZHJtL3N5bmNv
-Ymo6IGhhdmUgdHJhbnNmZXIgZnVuY3Rpb25zIGFjY2VwdCBkcm1fc3luY29iaiBkaXJlY3RseQ0K
-PiA+ICAgICAgIGRybS9zeW5jb2JqOiBhZGQgZHJtX3N5bmNvYmpfdHJhbnNmZXINCj4gPiAgICAg
-ICBkcm0vc3luY29iajogYWRkIGRybV9zeW5jb2JqX3RpbWVsaW5lX3NpZ25hbA0KPiA+ICAgICAg
-IGRybS9zeW5jb2JqOiBhZGQgZHJtX3N5bmNvYmpfcXVlcnkNCj4gPiAgICAgICBkcm0vc3luY29i
-ajogZml4IHJlc291cmNlIGxlYWsgaW4gZHJtX3N5bmNvYmpfaW1wb3J0X3N5bmNfZmlsZV9mZW5j
-ZQ0KPiA+ICAgICAgIGRybS9zeW5jb2JqOiBhZGQgZHJtX3N5bmNvYmpfaW1wb3J0X3N5bmNfZmls
-ZQ0KPiA+ICAgICAgIGRybS9zeW5jb2JqOiBhZGQgZHJtX3N5bmNvYmpfZXhwb3J0X3N5bmNfZmls
-ZQ0KPiA+ICAgICAgIG1pc2Mvc3luY29iajogYWRkIG5ldyBkZXZpY2UNCj4gPg0KPiA+ICBEb2N1
-bWVudGF0aW9uL3VzZXJzcGFjZS1hcGkvaW9jdGwvaW9jdGwtbnVtYmVyLnJzdCB8ICAgMSArDQo+
-ID4gIGRyaXZlcnMvZ3B1L2RybS9kcm1fc3luY29iai5jICAgICAgICAgICAgICAgICAgICAgIHwg
-Mzc0ICsrKysrKysrKysrKysrLS0tLS0NCj4gPiAgZHJpdmVycy9taXNjL0tjb25maWcgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgfCAgMTAgKw0KPiA+ICBkcml2ZXJzL21pc2MvTWFrZWZp
-bGUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgMSArDQo+ID4gIGRyaXZlcnMvbWlz
-Yy9zeW5jb2JqLmMgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgNDA0ICsrKysrKysrKysr
-KysrKysrKysrKw0KPiA+ICBpbmNsdWRlL2RybS9kcm1fc3luY29iai5oICAgICAgICAgICAgICAg
-ICAgICAgICAgICB8ICAyMSArKw0KPiA+ICBpbmNsdWRlL3VhcGkvbGludXgvc3luY29iai5oICAg
-ICAgICAgICAgICAgICAgICAgICB8ICA3NSArKysrDQo+ID4gIDcgZmlsZXMgY2hhbmdlZCwgNzk1
-IGluc2VydGlvbnMoKyksIDkxIGRlbGV0aW9ucygtKQ0KPiA+IC0tLQ0KPiA+IGJhc2UtY29tbWl0
-OiA2OTE2ZDU3MDNkZGY5YTM4ZjFmNmMyY2M3OTMzODFhMjRlZTkxNGM2DQo+ID4gY2hhbmdlLWlk
-OiAyMDI2MDUxNi1qb3J0aC1zeW5jb2JqLWQ0ZDM3NGM4YzYxYg0KPiA+DQo+ID4gQmVzdCByZWdh
-cmRzLA0KPiA+IC0tDQo+ID4gSnVsaWFuIE9ydGggPGp1Lm9ydGhAZ21haWwuY29tPg0KPiA+DQo+
-DQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8t
-bW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8g
-dW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxp
-bmFyby5vcmcK
+On 5/16/26 13:06, Julian Orth wrote:
+> This device makes the DRM_IOCTL_SYNCOBJ_* ioctls available via a
+> dedicated device. This allows applications to use syncobjs without
+> having to open device nodes in /dev/dri, on systems that don't have any
+> such nodes, or on systems whose devices don't support the
+> DRIVER_SYNCOBJ_TIMELINE feature.
+> 
+> Wayland uses syncobjs as its buffer synchronization mechanism. Most
+> compositors use the DRM_IOCTL_SYNCOBJ_EVENTFD ioctl to perform a pure
+> CPU wait for syncobj point. DRM devices are not involved in this process
+> except insofar that a DRM device needs to be used to access the ioctl.
+> 
+> Similarly, a software-rendered client might perform rendering on a
+> dedicated thread and use the wayland syncobj protocol to submit frames
+> before they finish rendering. Again, this does not involve DRM devices
+> except insofar ... as above.
+
+That use case is invalid.
+
+Usually drm_syncobj can only be filled with dma_fence objects and it is impossible to create one of those for software rendering.
+
+What could be used is the drm_syncobj wait before signal functionality, but that usually requires special handling on the Wayland/Compositor side which as far as I can see doesn't make sense here either.
+
+So the justification to use this for software rendering is very weak. Either I'm missing something or that is not going to fly at all.
+
+Regards,
+Christian.
+
+> 
+> As an added benefit, this device removes the need to translate between
+> file descriptors and handles.
+> 
+> Signed-off-by: Julian Orth <ju.orth@gmail.com>
+> ---
+>  Documentation/userspace-api/ioctl/ioctl-number.rst |   1 +
+>  drivers/misc/Kconfig                               |  10 +
+>  drivers/misc/Makefile                              |   1 +
+>  drivers/misc/syncobj.c                             | 404 +++++++++++++++++++++
+>  include/uapi/linux/syncobj.h                       |  75 ++++
+>  5 files changed, 491 insertions(+)
+> 
+> diff --git a/Documentation/userspace-api/ioctl/ioctl-number.rst b/Documentation/userspace-api/ioctl/ioctl-number.rst
+> index 331223761fff..5e140ae5735e 100644
+> --- a/Documentation/userspace-api/ioctl/ioctl-number.rst
+> +++ b/Documentation/userspace-api/ioctl/ioctl-number.rst
+> @@ -395,6 +395,7 @@ Code  Seq#    Include File                                             Comments
+>                                                                         <mailto:michael.klein@puffin.lb.shuttle.de>
+>  0xCC  00-0F  drivers/misc/ibmvmc.h                                     pseries VMC driver
+>  0xCD  01     linux/reiserfs_fs.h                                       Dead since 6.13
+> +0xCD  00-0F  uapi/linux/syncobj.h
+>  0xCE  01-02  uapi/linux/cxl_mem.h                                      Compute Express Link Memory Devices
+>  0xCF  02     fs/smb/client/cifs_ioctl.h
+>  0xDD  00-3F                                                            ZFCP device driver see drivers/s390/scsi/
+> diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+> index 00683bf06258..c1e7749bd356 100644
+> --- a/drivers/misc/Kconfig
+> +++ b/drivers/misc/Kconfig
+> @@ -644,6 +644,16 @@ config MCHP_LAN966X_PCI
+>  	    - lan966x-miim (MDIO_MSCC_MIIM)
+>  	    - lan966x-switch (LAN966X_SWITCH)
+>  
+> +config SYNCOBJ_DEV
+> +	tristate "DRM syncobj device (/dev/syncobj)"
+> +	depends on DRM
+> +	help
+> +	  Creates a /dev/syncobj device node that provides DRM synchronization
+> +	  objects (syncobjs) without requiring a DRM device.
+> +
+> +	  To compile this driver as a module, choose M here: the module
+> +	  will be called syncobj.
+> +
+>  source "drivers/misc/c2port/Kconfig"
+>  source "drivers/misc/eeprom/Kconfig"
+>  source "drivers/misc/cb710/Kconfig"
+> diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
+> index b32a2597d246..9e5deb1d0d76 100644
+> --- a/drivers/misc/Makefile
+> +++ b/drivers/misc/Makefile
+> @@ -75,3 +75,4 @@ obj-$(CONFIG_MCHP_LAN966X_PCI)	+= lan966x-pci.o
+>  obj-y				+= keba/
+>  obj-y				+= amd-sbi/
+>  obj-$(CONFIG_MISC_RP1)		+= rp1/
+> +obj-$(CONFIG_SYNCOBJ_DEV)	+= syncobj.o
+> diff --git a/drivers/misc/syncobj.c b/drivers/misc/syncobj.c
+> new file mode 100644
+> index 000000000000..11ef46ddfeef
+> --- /dev/null
+> +++ b/drivers/misc/syncobj.c
+> @@ -0,0 +1,404 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/*
+> + * syncobj.c - Standalone device for syncobj manipulation.
+> + *
+> + * Copyright (C) 2026 Julian Orth <ju.orth@gmail.com>
+> + */
+> +
+> +#include <linux/fdtable.h>
+> +#include <linux/miscdevice.h>
+> +#include <linux/module.h>
+> +#include <linux/uaccess.h>
+> +#include <drm/drm_syncobj.h>
+> +#include <drm/drm_utils.h>
+> +#include <uapi/drm/drm.h>
+> +#include <uapi/linux/syncobj.h>
+> +
+> +static int syncobj_array_find(void __user *user_fds, u32 count,
+> +			      struct drm_syncobj ***syncobjs_out)
+> +{
+> +	u32 i;
+> +	s32 *fds;
+> +	struct drm_syncobj **syncobjs;
+> +	int ret;
+> +
+> +	fds = kmalloc_array(count, sizeof(*fds), GFP_KERNEL);
+> +	if (!fds)
+> +		return -ENOMEM;
+> +
+> +	if (copy_from_user(fds, user_fds, sizeof(s32) * count)) {
+> +		ret = -EFAULT;
+> +		goto err_free_fds;
+> +	}
+> +
+> +	syncobjs = kmalloc_array(count, sizeof(*syncobjs), GFP_KERNEL);
+> +	if (!syncobjs) {
+> +		ret = -ENOMEM;
+> +		goto err_free_fds;
+> +	}
+> +
+> +	for (i = 0; i < count; i++) {
+> +		syncobjs[i] = drm_syncobj_from_fd(fds[i]);
+> +		if (!syncobjs[i]) {
+> +			ret = -EBADF;
+> +			goto err_put_syncobjs;
+> +		}
+> +	}
+> +
+> +	kfree(fds);
+> +	*syncobjs_out = syncobjs;
+> +	return 0;
+> +
+> +err_put_syncobjs:
+> +	while (i-- > 0)
+> +		drm_syncobj_put(syncobjs[i]);
+> +	kfree(syncobjs);
+> +err_free_fds:
+> +	kfree(fds);
+> +	return ret;
+> +}
+> +
+> +static void syncobj_array_free(struct drm_syncobj **syncobjs, u32 count)
+> +{
+> +	u32 i;
+> +
+> +	for (i = 0; i < count; i++)
+> +		drm_syncobj_put(syncobjs[i]);
+> +	kfree(syncobjs);
+> +}
+> +
+> +static int syncobj_ioctl_create(void __user *argp)
+> +{
+> +	struct syncobj_create_args args;
+> +	struct drm_syncobj *syncobj;
+> +	int fd, ret;
+> +
+> +	if (copy_from_user(&args, argp, sizeof(args)))
+> +		return -EFAULT;
+> +
+> +	if (args.flags & ~SYNCOBJ_CREATE_SIGNALED)
+> +		return -EINVAL;
+> +
+> +	static_assert(SYNCOBJ_CREATE_SIGNALED == DRM_SYNCOBJ_CREATE_SIGNALED);
+> +
+> +	ret = drm_syncobj_create(&syncobj, args.flags, NULL);
+> +	if (ret)
+> +		return ret;
+> +
+> +	ret = drm_syncobj_get_fd(syncobj, &fd);
+> +	drm_syncobj_put(syncobj);
+> +	if (ret)
+> +		return ret;
+> +
+> +	args.fd = fd;
+> +	if (copy_to_user(argp, &args, sizeof(args))) {
+> +		close_fd(fd);
+> +		return -EFAULT;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int syncobj_ioctl_wait(void __user *argp)
+> +{
+> +	struct syncobj_wait_args args;
+> +	struct drm_syncobj **syncobjs;
+> +	signed long timeout;
+> +	u32 first = ~0;
+> +	ktime_t t, *tp = NULL;
+> +	int ret;
+> +
+> +	if (copy_from_user(&args, argp, sizeof(args)))
+> +		return -EFAULT;
+> +
+> +	if (args.flags & ~(SYNCOBJ_WAIT_FLAGS_WAIT_ALL |
+> +			   SYNCOBJ_WAIT_FLAGS_WAIT_FOR_SUBMIT |
+> +			   SYNCOBJ_WAIT_FLAGS_WAIT_AVAILABLE |
+> +			   SYNCOBJ_WAIT_FLAGS_WAIT_DEADLINE))
+> +		return -EINVAL;
+> +
+> +	static_assert(SYNCOBJ_WAIT_FLAGS_WAIT_ALL        == DRM_SYNCOBJ_WAIT_FLAGS_WAIT_ALL);
+> +	static_assert(SYNCOBJ_WAIT_FLAGS_WAIT_FOR_SUBMIT == DRM_SYNCOBJ_WAIT_FLAGS_WAIT_FOR_SUBMIT);
+> +	static_assert(SYNCOBJ_WAIT_FLAGS_WAIT_AVAILABLE  == DRM_SYNCOBJ_WAIT_FLAGS_WAIT_AVAILABLE);
+> +	static_assert(SYNCOBJ_WAIT_FLAGS_WAIT_DEADLINE   == DRM_SYNCOBJ_WAIT_FLAGS_WAIT_DEADLINE);
+> +
+> +	if (args.pad)
+> +		return -EINVAL;
+> +
+> +	if (args.count == 0)
+> +		return 0;
+> +
+> +	ret = syncobj_array_find(u64_to_user_ptr(args.fds),
+> +				 args.count, &syncobjs);
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	if (args.flags & SYNCOBJ_WAIT_FLAGS_WAIT_DEADLINE) {
+> +		t = ns_to_ktime(args.deadline_nsec);
+> +		tp = &t;
+> +	}
+> +
+> +	timeout = drm_timeout_abs_to_jiffies(args.timeout_nsec);
+> +	timeout = drm_syncobj_array_wait_timeout(syncobjs,
+> +						 u64_to_user_ptr(args.points),
+> +						 args.count,
+> +						 args.flags,
+> +						 timeout, &first, tp);
+> +
+> +	syncobj_array_free(syncobjs, args.count);
+> +
+> +	if (timeout < 0)
+> +		return timeout;
+> +
+> +	args.first_signaled = first;
+> +	if (copy_to_user(argp, &args, sizeof(args)))
+> +		return -EFAULT;
+> +
+> +	return 0;
+> +}
+> +
+> +static int syncobj_ioctl_reset(void __user *argp)
+> +{
+> +	struct syncobj_array_args args;
+> +	struct drm_syncobj **syncobjs;
+> +	u32 i;
+> +	int ret;
+> +
+> +	if (copy_from_user(&args, argp, sizeof(args)))
+> +		return -EFAULT;
+> +
+> +	if (args.flags)
+> +		return -EINVAL;
+> +
+> +	if (args.points)
+> +		return -EINVAL;
+> +
+> +	if (args.count == 0)
+> +		return -EINVAL;
+> +
+> +	ret = syncobj_array_find(u64_to_user_ptr(args.fds),
+> +				 args.count, &syncobjs);
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	for (i = 0; i < args.count; i++)
+> +		drm_syncobj_replace_fence(syncobjs[i], NULL);
+> +
+> +	syncobj_array_free(syncobjs, args.count);
+> +	return 0;
+> +}
+> +
+> +static int syncobj_ioctl_signal(void __user *argp)
+> +{
+> +	struct syncobj_array_args args;
+> +	struct drm_syncobj **syncobjs;
+> +	int ret;
+> +
+> +	if (copy_from_user(&args, argp, sizeof(args)))
+> +		return -EFAULT;
+> +
+> +	if (args.flags)
+> +		return -EINVAL;
+> +
+> +	if (args.count == 0)
+> +		return -EINVAL;
+> +
+> +	ret = syncobj_array_find(u64_to_user_ptr(args.fds),
+> +				 args.count, &syncobjs);
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	ret = drm_syncobj_timeline_signal(syncobjs, args.points, args.count);
+> +
+> +	syncobj_array_free(syncobjs, args.count);
+> +	return ret;
+> +}
+> +
+> +static int syncobj_ioctl_query(void __user *argp)
+> +{
+> +	struct syncobj_array_args args;
+> +	struct drm_syncobj **syncobjs;
+> +	int ret;
+> +
+> +	if (copy_from_user(&args, argp, sizeof(args)))
+> +		return -EFAULT;
+> +
+> +	if (args.flags & ~SYNCOBJ_QUERY_FLAGS_LAST_SUBMITTED)
+> +		return -EINVAL;
+> +
+> +	static_assert(SYNCOBJ_QUERY_FLAGS_LAST_SUBMITTED == DRM_SYNCOBJ_QUERY_FLAGS_LAST_SUBMITTED);
+> +
+> +	if (args.count == 0)
+> +		return -EINVAL;
+> +
+> +	ret = syncobj_array_find(u64_to_user_ptr(args.fds),
+> +				 args.count, &syncobjs);
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	ret = drm_syncobj_query(syncobjs, args.points, args.count, args.flags);
+> +
+> +	syncobj_array_free(syncobjs, args.count);
+> +	return ret;
+> +}
+> +
+> +static int syncobj_ioctl_transfer(void __user *argp)
+> +{
+> +	struct syncobj_transfer_args args;
+> +	struct drm_syncobj *src, *dst;
+> +	int ret;
+> +
+> +	if (copy_from_user(&args, argp, sizeof(args)))
+> +		return -EFAULT;
+> +
+> +	if (args.pad)
+> +		return -EINVAL;
+> +
+> +	if (args.flags & ~SYNCOBJ_WAIT_FLAGS_WAIT_FOR_SUBMIT)
+> +		return -EINVAL;
+> +
+> +	static_assert(SYNCOBJ_WAIT_FLAGS_WAIT_FOR_SUBMIT == DRM_SYNCOBJ_WAIT_FLAGS_WAIT_FOR_SUBMIT);
+> +
+> +	src = drm_syncobj_from_fd(args.src_fd);
+> +	if (!src)
+> +		return -EBADF;
+> +
+> +	dst = drm_syncobj_from_fd(args.dst_fd);
+> +	if (!dst) {
+> +		drm_syncobj_put(src);
+> +		return -EBADF;
+> +	}
+> +
+> +	ret = drm_syncobj_transfer(src, args.src_point,
+> +				   dst, args.dst_point, args.flags);
+> +
+> +	drm_syncobj_put(dst);
+> +	drm_syncobj_put(src);
+> +
+> +	return ret;
+> +}
+> +
+> +static int syncobj_ioctl_eventfd(void __user *argp)
+> +{
+> +	struct syncobj_eventfd_args args;
+> +	struct drm_syncobj *syncobj;
+> +	int ret;
+> +
+> +	if (copy_from_user(&args, argp, sizeof(args)))
+> +		return -EFAULT;
+> +
+> +	if (args.flags & ~SYNCOBJ_WAIT_FLAGS_WAIT_AVAILABLE)
+> +		return -EINVAL;
+> +
+> +	static_assert(SYNCOBJ_WAIT_FLAGS_WAIT_AVAILABLE == DRM_SYNCOBJ_WAIT_FLAGS_WAIT_AVAILABLE);
+> +
+> +	if (args.pad)
+> +		return -EINVAL;
+> +
+> +	syncobj = drm_syncobj_from_fd(args.syncobj_fd);
+> +	if (!syncobj)
+> +		return -EBADF;
+> +
+> +	ret = drm_syncobj_register_eventfd(syncobj, args.eventfd,
+> +					   args.point, args.flags);
+> +
+> +	drm_syncobj_put(syncobj);
+> +
+> +	return ret;
+> +}
+> +
+> +static int syncobj_ioctl_export_sync_file(void __user *argp)
+> +{
+> +	struct syncobj_sync_file_args args;
+> +	struct drm_syncobj *syncobj;
+> +	int ret;
+> +
+> +	if (copy_from_user(&args, argp, sizeof(args)))
+> +		return -EFAULT;
+> +
+> +	syncobj = drm_syncobj_from_fd(args.syncobj_fd);
+> +	if (!syncobj)
+> +		return -EBADF;
+> +
+> +	ret = drm_syncobj_export_sync_file(syncobj, args.point,
+> +					   &args.sync_file_fd);
+> +	drm_syncobj_put(syncobj);
+> +	if (ret)
+> +		return ret;
+> +
+> +	if (copy_to_user(argp, &args, sizeof(args))) {
+> +		close_fd(args.sync_file_fd);
+> +		return -EFAULT;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int syncobj_ioctl_import_sync_file(void __user *argp)
+> +{
+> +	struct syncobj_sync_file_args args;
+> +	struct drm_syncobj *syncobj;
+> +	int ret;
+> +
+> +	if (copy_from_user(&args, argp, sizeof(args)))
+> +		return -EFAULT;
+> +
+> +	syncobj = drm_syncobj_from_fd(args.syncobj_fd);
+> +	if (!syncobj)
+> +		return -EBADF;
+> +
+> +	ret = drm_syncobj_import_sync_file(syncobj, args.sync_file_fd,
+> +					   args.point);
+> +
+> +	drm_syncobj_put(syncobj);
+> +
+> +	return ret;
+> +}
+> +
+> +static long syncobj_dev_ioctl(struct file *file, unsigned int cmd,
+> +			      unsigned long arg)
+> +{
+> +	void __user *argp = (void __user *)arg;
+> +
+> +	switch (cmd) {
+> +	case SYNCOBJ_IOC_CREATE:
+> +		return syncobj_ioctl_create(argp);
+> +	case SYNCOBJ_IOC_WAIT:
+> +		return syncobj_ioctl_wait(argp);
+> +	case SYNCOBJ_IOC_RESET:
+> +		return syncobj_ioctl_reset(argp);
+> +	case SYNCOBJ_IOC_SIGNAL:
+> +		return syncobj_ioctl_signal(argp);
+> +	case SYNCOBJ_IOC_QUERY:
+> +		return syncobj_ioctl_query(argp);
+> +	case SYNCOBJ_IOC_TRANSFER:
+> +		return syncobj_ioctl_transfer(argp);
+> +	case SYNCOBJ_IOC_EVENTFD:
+> +		return syncobj_ioctl_eventfd(argp);
+> +	case SYNCOBJ_IOC_EXPORT_SYNC_FILE:
+> +		return syncobj_ioctl_export_sync_file(argp);
+> +	case SYNCOBJ_IOC_IMPORT_SYNC_FILE:
+> +		return syncobj_ioctl_import_sync_file(argp);
+> +	default:
+> +		return -ENOIOCTLCMD;
+> +	}
+> +}
+> +
+> +static const struct file_operations syncobj_dev_fops = {
+> +	.owner		= THIS_MODULE,
+> +	.unlocked_ioctl	= syncobj_dev_ioctl,
+> +	.compat_ioctl	= compat_ptr_ioctl,
+> +};
+> +
+> +static struct miscdevice syncobj_misc = {
+> +	.minor	= MISC_DYNAMIC_MINOR,
+> +	.name	= "syncobj",
+> +	.fops	= &syncobj_dev_fops,
+> +	.mode	= 0666,
+> +};
+> +
+> +module_misc_device(syncobj_misc);
+> +
+> +MODULE_AUTHOR("Julian Orth");
+> +MODULE_DESCRIPTION("DRM syncobj device");
+> +MODULE_LICENSE("GPL");
+> diff --git a/include/uapi/linux/syncobj.h b/include/uapi/linux/syncobj.h
+> new file mode 100644
+> index 000000000000..c4068fbd5773
+> --- /dev/null
+> +++ b/include/uapi/linux/syncobj.h
+> @@ -0,0 +1,75 @@
+> +/* SPDX-License-Identifier: GPL-2.0-only WITH Linux-syscall-note */
+> +#ifndef _UAPI_LINUX_SYNCOBJ_H_
+> +#define _UAPI_LINUX_SYNCOBJ_H_
+> +
+> +#include <linux/ioctl.h>
+> +#include <linux/types.h>
+> +
+> +#define SYNCOBJ_CREATE_SIGNALED			(1 << 0)
+> +
+> +#define SYNCOBJ_WAIT_FLAGS_WAIT_ALL		(1 << 0)
+> +#define SYNCOBJ_WAIT_FLAGS_WAIT_FOR_SUBMIT	(1 << 1)
+> +#define SYNCOBJ_WAIT_FLAGS_WAIT_AVAILABLE	(1 << 2)
+> +#define SYNCOBJ_WAIT_FLAGS_WAIT_DEADLINE	(1 << 3)
+> +
+> +#define SYNCOBJ_QUERY_FLAGS_LAST_SUBMITTED	(1 << 0)
+> +
+> +struct syncobj_create_args {
+> +	__s32 fd;
+> +	__u32 flags;
+> +};
+> +
+> +struct syncobj_wait_args {
+> +	__u64 fds;
+> +	__u64 points;
+> +	__s64 timeout_nsec;
+> +	__u32 count;
+> +	__u32 flags;
+> +	__u32 first_signaled;
+> +	__u32 pad;
+> +	__u64 deadline_nsec;
+> +};
+> +
+> +struct syncobj_array_args {
+> +	__u64 fds;
+> +	__u64 points;
+> +	__u32 count;
+> +	__u32 flags;
+> +};
+> +
+> +struct syncobj_transfer_args {
+> +	__s32 src_fd;
+> +	__s32 dst_fd;
+> +	__u64 src_point;
+> +	__u64 dst_point;
+> +	__u32 flags;
+> +	__u32 pad;
+> +};
+> +
+> +struct syncobj_eventfd_args {
+> +	__s32 syncobj_fd;
+> +	__s32 eventfd;
+> +	__u64 point;
+> +	__u32 flags;
+> +	__u32 pad;
+> +};
+> +
+> +struct syncobj_sync_file_args {
+> +	__s32 syncobj_fd;
+> +	__s32 sync_file_fd;
+> +	__u64 point;
+> +};
+> +
+> +#define SYNCOBJ_IOC_BASE		0xCD
+> +
+> +#define SYNCOBJ_IOC_CREATE		_IOWR(SYNCOBJ_IOC_BASE, 0, struct syncobj_create_args)
+> +#define SYNCOBJ_IOC_WAIT		_IOWR(SYNCOBJ_IOC_BASE, 1, struct syncobj_wait_args)
+> +#define SYNCOBJ_IOC_RESET		_IOW(SYNCOBJ_IOC_BASE,  2, struct syncobj_array_args)
+> +#define SYNCOBJ_IOC_SIGNAL		_IOW(SYNCOBJ_IOC_BASE,  3, struct syncobj_array_args)
+> +#define SYNCOBJ_IOC_QUERY		_IOW(SYNCOBJ_IOC_BASE,  4, struct syncobj_array_args)
+> +#define SYNCOBJ_IOC_TRANSFER		_IOW(SYNCOBJ_IOC_BASE,  5, struct syncobj_transfer_args)
+> +#define SYNCOBJ_IOC_EVENTFD		_IOW(SYNCOBJ_IOC_BASE,  6, struct syncobj_eventfd_args)
+> +#define SYNCOBJ_IOC_EXPORT_SYNC_FILE	_IOWR(SYNCOBJ_IOC_BASE, 7, struct syncobj_sync_file_args)
+> +#define SYNCOBJ_IOC_IMPORT_SYNC_FILE	_IOW(SYNCOBJ_IOC_BASE,  8, struct syncobj_sync_file_args)
+> +
+> +#endif /* _UAPI_LINUX_SYNCOBJ_H_ */
+> 
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
