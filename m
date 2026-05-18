@@ -2,27 +2,27 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id kJ73M6MdC2o2DgUAu9opvQ
+	id CBJiKawdC2o2DgUAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 16:09:39 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 16:09:48 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7623A56E645
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 16:09:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8021356E65D
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 16:09:47 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 06A6440963
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 14:09:38 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 1C9664096F
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 14:09:47 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C76FB3F91A
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 18 May 2026 14:09:27 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id CB6693F9BA
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 18 May 2026 14:09:28 +0000 (UTC)
 MIME-Version: 1.0
 From: namudigumoraka29@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Mon, 18 May 2026 14:09:27 -0000
-Message-ID: <177911336781.2912880.10480288187571329585@lists.linaro.org>
+Date: Mon, 18 May 2026 14:09:28 -0000
+Message-ID: <177911336883.2912880.8152784069983124582@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: WA2QLQTYZUTQADREJXOTP64MDYZNN67L
-X-Message-ID-Hash: WA2QLQTYZUTQADREJXOTP64MDYZNN67L
+Message-ID-Hash: CD5QRM6ABRXQ2WB652EYVDKHV4YVVXN7
+X-Message-ID-Hash: CD5QRM6ABRXQ2WB652EYVDKHV4YVVXN7
 X-MailFrom: namudigumoraka29@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
@@ -30,7 +30,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Cytotec Pills For Sale In Abu Dhabi [][][]<>+971568547782[][][]<>( Pfizer ) Cytotec Medicine Available In Abu Dhabi, Cytotec Tablets In Abu Dhabi
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WA2QLQTYZUTQADREJXOTP64MDYZNN67L/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CD5QRM6ABRXQ2WB652EYVDKHV4YVVXN7/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -62,7 +62,7 @@ X-Spamd-Result: default: False [0.59 / 15.00];
 	R_DKIM_NA(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:mid,lists.linaro.org:helo,linaro.org:email]
-X-Rspamd-Queue-Id: 7623A56E645
+X-Rspamd-Queue-Id: 8021356E65D
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
