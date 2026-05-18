@@ -2,35 +2,35 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id QE8PEWAWC2o5/wQAu9opvQ
+	id 8EjsG2sWC2o5/wQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 15:38:40 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 15:38:51 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id DCB4056DC5D
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 15:38:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3C5D656DC65
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 15:38:51 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E8424406C8
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 13:38:38 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 51C4940965
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 13:38:50 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0F8724051A
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 18 May 2026 13:38:31 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 65D9F4051A
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 18 May 2026 13:38:43 +0000 (UTC)
 MIME-Version: 1.0
 From: namudigumoraka29@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Mon, 18 May 2026 13:38:31 -0000
-Message-ID: <177911151106.2865074.15817348357062493082@lists.linaro.org>
+Date: Mon, 18 May 2026 13:38:43 -0000
+Message-ID: <177911152341.2864046.14997173633331090810@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: XUBFF67UWN2QBSEAK2WHVPT7XSIDXHN7
-X-Message-ID-Hash: XUBFF67UWN2QBSEAK2WHVPT7XSIDXHN7
+Message-ID-Hash: B6XFS5TFF6O3CJ5F3NRPAN4O42VFYTTH
+X-Message-ID-Hash: B6XFS5TFF6O3CJ5F3NRPAN4O42VFYTTH
 X-MailFrom: namudigumoraka29@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [][][]+971568044699 [][][] Abortion Pills For Sale In Bahrain, Mifepristone And Misoprostol Pills Available In Bahrain
+Subject: [Linaro-mm-sig] [][][]+971568044699 [][][] Abortion Pills For Sale In Oman, Mifepristone And Misoprostol Pills Available In Oman
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XUBFF67UWN2QBSEAK2WHVPT7XSIDXHN7/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/B6XFS5TFF6O3CJ5F3NRPAN4O42VFYTTH/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -61,11 +61,11 @@ X-Spamd-Result: default: False [0.59 / 15.00];
 	R_DKIM_NA(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[]
-X-Rspamd-Queue-Id: DCB4056DC5D
+X-Rspamd-Queue-Id: 3C5D656DC65
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-[][][]+971568044699 [][][] Abortion Pills For Sale In Bahrain, Mifepristone And Misoprostol Pills Available In Bahrain
+[][][]+971568044699 [][][] Abortion Pills For Sale In Oman, Mifepristone And Misoprostol Pills Available In Oman
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
