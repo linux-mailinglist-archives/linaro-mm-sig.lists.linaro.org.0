@@ -2,150 +2,179 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id aEYKGnLqCmqR9QQAu9opvQ
+	id YOzzD5rsCmo89gQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 12:31:14 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 12:40:26 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 04B6156AC02
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 12:31:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CE11256AD6A
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 12:40:25 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0A535406B2
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 10:31:13 +0000 (UTC)
-Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
-	by lists.linaro.org (Postfix) with ESMTPS id 7F22940475
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 18 May 2026 10:30:58 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id CFFCB406C8
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 10:40:24 +0000 (UTC)
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+	by lists.linaro.org (Postfix) with ESMTPS id C2CF140475
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 18 May 2026 10:40:13 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=Pyl22kC0;
-	spf=pass (lists.linaro.org: domain of asml.silence@gmail.com designates 209.85.218.44 as permitted sender) smtp.mailfrom=asml.silence@gmail.com;
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=rZDHTdgJ;
+	spf=pass (lists.linaro.org: domain of david.laight.linux@gmail.com designates 209.85.128.46 as permitted sender) smtp.mailfrom=david.laight.linux@gmail.com;
 	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-bd373f83042so437343666b.1
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 18 May 2026 03:30:58 -0700 (PDT)
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-48909558b3aso22780795e9.0
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 18 May 2026 03:40:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779100257; x=1779705057; darn=lists.linaro.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=hx27Zr2PfQkgYP6DocpvbcVC/5/Kjswu2b3jiJPzVQY=;
-        b=Pyl22kC07a5sxG3PvlNEU/y4IpBPWH++u3cYF3rwbtpX9E+cvQW1/FNN2LBgLHNiT1
-         WDgecyWFPo/2hkW6KlicrgJ+/F/D4nCW6Ndays6EUiKZHJI5xAc8mfV8I0yExvh8P1Uc
-         6hH97zpLQ4vtpuYvROIkmYxnNCSztAdgYmho/kJSXDYbgHnQopvtd/mblLe+a/1DjIpc
-         So5U7HCuZ1O3+UP6ZIlm84zhxg/J2ntfE6ojfPFVody9sk7ra+8Nj+MKB7CEZU7c0eZ1
-         yljYZycDs/ulg+AtzTOXR5L/LN+QyocfZ5tbBlSzQFh+N0hAVS3PpF+yHrabKOBfg1iY
-         XyDA==
+        d=gmail.com; s=20251104; t=1779100813; x=1779705613; darn=lists.linaro.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:subject:cc:to:from:date:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=KBUJm1g4jrVLHLARnQ410xCyIfZ2+knqUA7xvFczZVo=;
+        b=rZDHTdgJb+l2jMs/mWa0Ytq6eAeTkPARLbhkjUOyj0rGpD6q8IF+Xmhr0iANHpHjI3
+         aFXRywjGHZr3QwqIz/P26srW6EUI32yMG4qIPIm4e3XkChd5SDhHzZ30eCiXQNeutNEz
+         MTJVWr07i4gXnjyEOk1MFRlJ2IV6VeGNzNW1Wpm9nGebhhOXOSKWbTcP0HyQsgTY/8qg
+         7Gp9cUzAqjCH5wHJL6yhM537Ap9iMHwDSynAwJ9I36ZXlf7URGNpN/xGGg5jzXaIE3xS
+         7ARPaoD+vDvywOBuO4ZsM9KWvtG0YdCmGu6rFggGGR/k0TdZ/UmlAqdFwnIzxiN8n2Z4
+         OS7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779100257; x=1779705057;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=hx27Zr2PfQkgYP6DocpvbcVC/5/Kjswu2b3jiJPzVQY=;
-        b=Cya4elf0H0AU5nyMXiMIig92Uf0eXy8ZtR8J10Ga/FgUU6Qr+gRS3Dj7a1DOSr0mpR
-         l44+cIkoajvqkp41t02IoB8JzD/e1rDB/zuXMpl0Q3Al3gvSPfCTQtV9weFzVnXQYEH0
-         PNGEESd7pfct03c08nqZJRKdOmG/Fbx7m+Kc5b/yF881B09ZMCD3QKHR6uGeOCcoHbQj
-         ErjKSMoG4GSSWiPykh0exRZc0/fti1B7UhB+wZuY46k2RCRmOwdzcx3n5dxhH6C6tC5u
-         GBOXaMOT3KDjQfhl0lnBy/cr35gpo03imFIST2KETaO1F1FzuYcjJp+G6G6F31fcM9rF
-         tiyw==
-X-Forwarded-Encrypted: i=1; AFNElJ/fSFA+U5XJth5UO5UNsH1jC1IrwXon27ROs92bt/CXjxfZXkIzcrSAH/GTMFNZo02to39/6NOOmbYO9FyF@lists.linaro.org
-X-Gm-Message-State: AOJu0YzCu1yzh5443aGIOGUc9v/eSTSL8qTg1NUbx653ktss3tY6+lQN
-	NOaouiqlJLhsjFL17LVyJV6SznaJyU80WnQmdG5cVRH/tXK70rLeDKRT
-X-Gm-Gg: Acq92OFzH56ZS380HWUYOqxV/DfOt/LaGex6UjJe32eak4OMKiKFDcfVqIwZz/qf0Em
-	Irdgc5DZ2rItjUY0bO5Sl1T0bsx4cd0JKRAXvHX96puOOE0TS4kaMV0ztjz8NZbkS04b6dyXCfB
-	Z2AyOSp2isslS/V884vseVwFzx+rrVKJRdbL7yVaQ2cgT0ybRoMhfZnuonIEWRHtLKxZw3zPX+H
-	qr1KuDgLFNdLATdY6Nq6d+uGzRTSBgc1CLgBWeZqLDcoYBvF8y8PmWMQminBSbua4Z7rMa9CIXw
-	jT2DYMjYED9EKls8F7G6kkLM/86NcteVFFeyu1gbincPFJQxzHi+pyazmOD19riKxojwYS7tN/D
-	qUotC2mvTUO0c9K1ppYVGW52JB6zf8A4DxrTlmuZSoDuu+v6Ezblm6pr+akGPVJRN9FVTpxeCVs
-	BHhfc4URy/xMnDOu9hPiV2iCRmA8HFahRfhruri+oVfxJmFjsWxbYRO/QAxiO8cvqz3Iti6dQQa
-	2nV8ye8URolaccmCbzpN0bwMQhLj0tuE+mG8U7/otXFgEpf/ffPYe8qrRU=
-X-Received: by 2002:a17:907:1c0d:b0:bd2:bd3:1ef8 with SMTP id a640c23a62f3a-bd517a99797mr714341866b.35.1779100257041;
-        Mon, 18 May 2026 03:30:57 -0700 (PDT)
-Received: from ?IPV6:2620:10d:c096:325:77fd:1068:74c8:af87? ([2620:10d:c092:600::1:ec20])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-bd4f4e4d54dsm542055466b.47.2026.05.18.03.30.55
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 18 May 2026 03:30:56 -0700 (PDT)
-Message-ID: <574f42cf-0d72-437a-8eba-fd970011e206@gmail.com>
-Date: Mon, 18 May 2026 11:30:54 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Anuj Gupta/Anuj Gupta <anuj20.g@samsung.com>,
- Christoph Hellwig <hch@lst.de>
+        d=1e100.net; s=20251104; t=1779100813; x=1779705613;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=KBUJm1g4jrVLHLARnQ410xCyIfZ2+knqUA7xvFczZVo=;
+        b=Cigr44W/l7g6p4nwVBvOh5oHHHMTljdIMGuMTVCwzlG1tfz/m90ckMhSwpf2vuaj8B
+         D6abGPYO3YZl4vdEZ4Mt4tTwjU7MbR0Hxqo/DF4ahTH294ZDuikdAmtikdAHXXDpuczO
+         deV23ORgbmioG/nzoP8I28CEoEdjDEw0/oYH4MzaondMO1nrHAyJnnod1la/xqqF5/Qb
+         1SdjyuZUTYtIHjrqFPGRhGXA965Cf1fKSl+4glQN8FvkL3ZHsn0RoiiSo/sySCyV0MZ9
+         EVdDqB6wCvsl1hX6etC6tJBle08GnZgX4uCbDNEGactsJC4ASUtbzPrpK404EHNyr3qr
+         j33g==
+X-Forwarded-Encrypted: i=1; AFNElJ/60uuxb6zBz6xR694UXWTbAS8OovRWqGLJ5U239RGMfRGVvdglkcBeWoih7yg2V2TNgg8vVfcBnn81Y0n0@lists.linaro.org
+X-Gm-Message-State: AOJu0YyHKRt7+ThTuGdYVg4mmkd2HUGy8wU/goUqAVPNGBgh28ppaqjQ
+	dxkHlMraHnZWcs0hRSC/KNFvl0uHCXOLDPaPp0puekWn0Ueuw07BLi1z
+X-Gm-Gg: Acq92OFwSh8OWBlc0TiFTA4TWzVW+7LHpiVaH9GO2JxIbBlkO78IAoSVvrx9Cw9FW11
+	OytIzG9ST6kUI5tIdq2BnIH/cqswgjwHjihsEkt7Ss5AEO5bdBhczWiXpvTy4u7QjWh6iMEu8ww
+	peQL40PiQXKmIS/Bo+zDMltt54hXC3tpZbQCavE7igOqLvDuAnUuJS5iwK3WRNSDgv89bQcYzSo
+	uXnZ1e26GyJN6IiLqntwxzkoW6JeY8PmRehDiO14ZixHh2krVMFfLzhyL6MMpsDwRg7YMWeSECL
+	UuJ5nMyn15wRLX9TOEb7mpte9AMZr8Q2InF5yZzNuO5Ddx8qNioHcFpl7h+sL4Sg04Ni6NWV0rr
+	keCJDiaUBR9Ur9Oee1DLSMitrwO5cjThX+1K1ykbbjg/7OlkbFlSOiv9cbdX8sfQzQ9NW+UTvby
+	vnafb5exBQnR3Aj7AObjmhKxzMR85T6rVOXU4HgC1y/yjETb885P8vip++ANmkLC+lo2NxlhVF4
+	LUFs7dIMNlqrA==
+X-Received: by 2002:a05:600c:4fc9:b0:489:1c1f:35df with SMTP id 5b1f17b1804b1-48fe60e58ecmr202920365e9.10.1779100812550;
+        Mon, 18 May 2026 03:40:12 -0700 (PDT)
+Received: from pumpkin (82-69-66-36.dsl.in-addr.zen.co.uk. [82.69.66.36])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48fe4c90b27sm255713955e9.8.2026.05.18.03.40.11
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 18 May 2026 03:40:12 -0700 (PDT)
+Date: Mon, 18 May 2026 11:40:10 +0100
+From: David Laight <david.laight.linux@gmail.com>
+To: Pavel Begunkov <asml.silence@gmail.com>
+Message-ID: <20260518114010.6e1f7391@pumpkin>
+In-Reply-To: <4b2f74e9-3225-47f6-85fe-911720030e35@gmail.com>
 References: <cover.1777475843.git.asml.silence@gmail.com>
- <5cecb1157ab784f9f303a91449fdf11b03aa6002.1777475843.git.asml.silence@gmail.com>
- <20260513083817.GC6461@lst.de>
- <CGME20260518092930epcas5p30d3b49f26efa5969ddcdb15351a886f3@epcas5p3.samsung.com>
- <50ed7240-d8d3-4816-bcc9-ce8adbbbf841@gmail.com>
- <f9e04625-50c6-4fa9-8b12-76496e29f10c@samsung.com>
-Content-Language: en-US
-From: Pavel Begunkov <asml.silence@gmail.com>
-In-Reply-To: <f9e04625-50c6-4fa9-8b12-76496e29f10c@samsung.com>
+	<20a233d2f35274817aa643cc0fe113707eb47e72.1777475843.git.asml.silence@gmail.com>
+	<20260513110557.705bdeed@pumpkin>
+	<20260513142909.03ae6c2b@pumpkin>
+	<4b2f74e9-3225-47f6-85fe-911720030e35@gmail.com>
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; arm-unknown-linux-gnueabihf)
+MIME-Version: 1.0
 X-Spamd-Bar: ---
-Message-ID-Hash: 4EVML3ZXDHDTF74TRWCYL3YOWCPWQFOO
-X-Message-ID-Hash: 4EVML3ZXDHDTF74TRWCYL3YOWCPWQFOO
-X-MailFrom: asml.silence@gmail.com
+Message-ID-Hash: TRSIT4ZMKWXEDFVJCNAF5H357Z4A2JPR
+X-Message-ID-Hash: TRSIT4ZMKWXEDFVJCNAF5H357Z4A2JPR
+X-MailFrom: david.laight.linux@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
-CC: Jens Axboe <axboe@kernel.dk>, Keith Busch <kbusch@kernel.org>, Sagi Grimberg <sagi@grimberg.me>, Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Andrew Morton <akpm@linux-foundation.org>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, linux-nvme@lists.infradead.org, linux-fsdevel@vger.kernel.org, io-uring@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Nitesh Shetty <nj.shetty@samsung.com>, Kanchan Joshi <joshi.k@samsung.com>, Jason Gunthorpe <jgg@nvidia.com>
+CC: Jens Axboe <axboe@kernel.dk>, Keith Busch <kbusch@kernel.org>, Christoph Hellwig <hch@lst.de>, Sagi Grimberg <sagi@grimberg.me>, Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Andrew Morton <akpm@linux-foundation.org>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, linux-nvme@lists.infradead.org, linux-fsdevel@vger.kernel.org, io-uring@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Nitesh Shetty <nj.shetty@samsung.com>, Kanchan Joshi <joshi.k@samsung.com>, Anuj Gupta <anuj20.g@samsung.com>, Tushar Gohad <tushar.gohad@intel.com>, William Power <william.power@intel.com>, Phil Cayton <phil.cayton@intel.com>, Jason Gunthorpe <jgg@nvidia.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3 07/10] nvme-pci: implement dma_token backed requests
+Subject: [Linaro-mm-sig] Re: [PATCH v3 02/10] iov_iter: add iterator type for dmabuf maps
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4EVML3ZXDHDTF74TRWCYL3YOWCPWQFOO/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TRSIT4ZMKWXEDFVJCNAF5H357Z4A2JPR/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 04B6156AC02
+X-Rspamd-Queue-Id: CE11256AD6A
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.59 / 15.00];
+X-Spamd-Result: default: False [2.59 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	R_DKIM_REJECT(1.00)[gmail.com:s=20251104];
+	MID_RHS_NOT_FQDN(0.50)[];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx:c];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed),none];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	ARC_NA(0.00)[];
 	FREEMAIL_FROM(0.00)[gmail.com];
-	RCPT_COUNT_TWELVE(0.00)[21];
+	RCVD_COUNT_THREE(0.00)[4];
+	ARC_NA(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[25];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[asmlsilence@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[gmail.com:-];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	FROM_NEQ_ENVFROM(0.00)[davidlaightlinux@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	NEURAL_SPAM(0.00)[0.006];
+	NEURAL_SPAM(0.00)[0.434];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email]
 X-Rspamd-Action: no action
 
-On 5/18/26 11:18, Anuj Gupta/Anuj Gupta wrote:
-> On 5/18/2026 2:59 PM, Pavel Begunkov wrote:
->>> FYI, I really want SGL support before this get merged, but ignoring that
->>> for now:
->>
->> I was hoping to let Samsung guys to send a follow up they already have,
->> but I'll ask them to have about taking it into this patch set.
-> 
-> I had done patches on top of v3 adding SGL support and PRP list reuse
-> optimization for the dmabuf path.
-> Branch: https://github.com/SamsungDS/linux/commits/rw-dmabuf-v3-nvme-opt/
-> 
-> Also pasting the SGL patch here for quick reference:
+On Mon, 18 May 2026 10:24:35 +0100
+Pavel Begunkov <asml.silence@gmail.com> wrote:
 
-Thanks Anuj!
+> On 5/13/26 14:29, David Laight wrote:
+> > On Wed, 13 May 2026 11:05:57 +0100
+> > David Laight <david.laight.linux@gmail.com> wrote:
+> > 
+> > ...  
+> >>> @@ -575,7 +575,8 @@ void iov_iter_advance(struct iov_iter *i, size_t size)
+> >>>   {
+> >>>   	if (unlikely(i->count < size))
+> >>>   		size = i->count;
+> >>> -	if (likely(iter_is_ubuf(i)) || unlikely(iov_iter_is_xarray(i))) {
+> >>> +	if (likely(iter_is_ubuf(i)) || unlikely(iov_iter_is_xarray(i)) ||
+> >>> +	    unlikely(iov_iter_is_dmabuf_map(i))) {  
+> >>
+> >>
+> >> Doesn't the extra check add more code to all the non-ubuf cases?
+...
+> >> or writing an iter_is_one_of(i, ITER_xxx, ITER_yyy) define that uses
+> >> '(1 << i->iter_type) & ((1 << ITER_xxx) | ...)'  
+> > 
+> > This seems to DTRT:
+> > 
+> > #define _ITER_IS_ONE_OF(iter, t1, t2, t3, t4, t5, t6, t7, t8, ...) \
+> >      ((1u << (iter)->iter_type) & ((1u << ITER_##t1) | (1u << ITER_##t2) | \
+> >          (1u << ITER_##t3) | (1u << ITER_##t4) | (1u << ITER_##t5) | \
+> >          (1u << ITER_##t6) | (1u << ITER_##t7) | (1u << ITER_##t8)))
+> > #define ITER_IS_ONE_OF(iter, t, ...) \
+> >      _ITER_IS_ONE_OF(iter, t, ## __VA_ARGS__, t, t, t, t, t, t, t)  
+> 
+> We definitely don't want that, using them directly would've been
+> much cleaner.
+> 
+> if (get_type_mask(i) & (TYPE1 | TYPE2)) ...
 
--- 
-Pavel Begunkov
+You need to shift all the TYPEn as well.
+The above condition would become:
+	if (likely(ITER_IS_ONE_OF(i, UBUF, XARRAY, DMABUF_MAP))) {
+which reads reasonable well.
+Without the token pasting it becomes:
+	if (likely(ITER_IS_ONE_OF(i, ITER_UBUF, ITER_XARRAY, ITER_DMABUF_MAP))) {
+and the line starts getting long.
+Although that version probably needs a check that the mask is constant.
+
+-- David
+
+
+> 
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
