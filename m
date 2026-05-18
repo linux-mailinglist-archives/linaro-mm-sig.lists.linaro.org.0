@@ -2,35 +2,35 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 2P04AJIVC2o5/wQAu9opvQ
+	id OAXMFJ8VC2o5/wQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 15:35:14 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 15:35:27 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 97B4456DB76
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 15:35:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 082FF56DB7E
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 15:35:26 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2FEB54051A
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 13:35:12 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 213264095E
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 13:35:26 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id F06B4406B1
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 18 May 2026 13:35:04 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 2E4EE4051A
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 18 May 2026 13:35:20 +0000 (UTC)
 MIME-Version: 1.0
 From: namudigumoraka29@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Mon, 18 May 2026 13:35:04 -0000
-Message-ID: <177911130498.2859773.15268630024440661114@lists.linaro.org>
+Date: Mon, 18 May 2026 13:35:20 -0000
+Message-ID: <177911132018.2861862.9687540703257537056@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: FTXGMEPWR7H6TDP4LYX3QMNR3DMDGP7R
-X-Message-ID-Hash: FTXGMEPWR7H6TDP4LYX3QMNR3DMDGP7R
+Message-ID-Hash: DJZKLNOSDWG3SQ2VDRNA5BL7K6YYWOTD
+X-Message-ID-Hash: DJZKLNOSDWG3SQ2VDRNA5BL7K6YYWOTD
 X-MailFrom: namudigumoraka29@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [][][]+971568044699 [][][]Abortion Pills For Sale In Al Rayyan, Mifepristone And Misoprostol Pills Available In Al Rayyan
+Subject: [Linaro-mm-sig] [][][]+971568044699 [][][] Abortion Pills For Sale In Al Wakrah, Mifepristone And Misoprostol Pills Available In Al Wakrah
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FTXGMEPWR7H6TDP4LYX3QMNR3DMDGP7R/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DJZKLNOSDWG3SQ2VDRNA5BL7K6YYWOTD/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -53,7 +53,7 @@ X-Spamd-Result: default: False [0.59 / 15.00];
 	ARC_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:mid,lists.linaro.org:helo];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:mid,lists.linaro.org:helo,linaro.org:email];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	RCPT_COUNT_ONE(0.00)[1];
 	TO_DN_NONE(0.00)[];
@@ -65,11 +65,11 @@ X-Spamd-Result: default: False [0.59 / 15.00];
 	R_DKIM_NA(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RBL_SENDERSCORE_REPUT_BLOCKED(0.00)[44.210.186.118:from]
-X-Rspamd-Queue-Id: 97B4456DB76
+X-Rspamd-Queue-Id: 082FF56DB7E
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-[][][]+971568044699 [][][]Abortion Pills For Sale In Al Rayyan, Mifepristone And Misoprostol Pills Available In Al Rayyan
+[][][]+971568044699 [][][] Abortion Pills For Sale In Al Wakrah, Mifepristone And Misoprostol Pills Available In Al Wakrah
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
