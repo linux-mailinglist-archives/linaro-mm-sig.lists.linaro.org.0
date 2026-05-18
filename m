@@ -2,27 +2,27 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id oKOrEN8VC2o5/wQAu9opvQ
+	id KIrNFvoVC2o5/wQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 15:36:31 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 15:36:58 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id E4FDE56DBCE
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 15:36:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E6B7D56DBDD
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 15:36:57 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E406A4095D
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 13:36:29 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id DD6F3406EE
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 13:36:56 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C12B8406B1
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 18 May 2026 13:36:22 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7DCFC406C8
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 18 May 2026 13:36:49 +0000 (UTC)
 MIME-Version: 1.0
 From: namudigumoraka29@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Mon, 18 May 2026 13:36:22 -0000
-Message-ID: <177911138279.2861862.12585490677620214937@lists.linaro.org>
+Date: Mon, 18 May 2026 13:36:49 -0000
+Message-ID: <177911140951.2864046.11846356030478441720@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: CTFRG75K5TYYWZSQCLEBSYPT2GITJUIL
-X-Message-ID-Hash: CTFRG75K5TYYWZSQCLEBSYPT2GITJUIL
+Message-ID-Hash: WZEN2ODIPV5K7L2A5KPUOZBD54CLNAYS
+X-Message-ID-Hash: WZEN2ODIPV5K7L2A5KPUOZBD54CLNAYS
 X-MailFrom: namudigumoraka29@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
@@ -30,7 +30,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] [][][]+971568044699 [][][] Abortion Pills For Sale In Mesaieed, Mifepristone And Misoprostol Pills Available In Mesaieed
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CTFRG75K5TYYWZSQCLEBSYPT2GITJUIL/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WZEN2ODIPV5K7L2A5KPUOZBD54CLNAYS/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -61,15 +61,12 @@ X-Spamd-Result: default: False [0.59 / 15.00];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	R_DKIM_NA(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	RBL_SENDERSCORE_REPUT_BLOCKED(0.00)[44.210.186.118:from];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:mid,lists.linaro.org:helo,linaro.org:email]
-X-Rspamd-Queue-Id: E4FDE56DBCE
+	RBL_SENDERSCORE_REPUT_BLOCKED(0.00)[44.210.186.118:from]
+X-Rspamd-Queue-Id: E6B7D56DBDD
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-+971568044699 Abortion Tablets Available In Qatar +971568044699 Abortion Pills For Sale In Kuwait City +971568044699 Abortion Pills For Sale In Al Asimah +971568044699 Abortion Pills For Sale In Al Ahmadi +971568044699 Abortion Pills For Sale In Hawalli +971568044699 Abortion Pills For Sale In Al Farwaniyah +971568044699 Abortion Pills For Sale In Al Jahra +971568044699 Abortion Pills For Sale In Salmiya +971568044699 Abortion Pills For Sale In Sabah as Salim +971568044699 Abortion Pills For Sale In Mangaf +971568044699 Abortion Pills For Sale In Fintas +971568044699 Abortion Pills For Sale In Dubai +971568044699 Abortion Pills For Sale In Abu Dhabi +971568044699 Abortion Pills For Sale In Sharjah +971568044699 Abortion Pills For Sale In Al Ain +971568044699 Abortion Pills For Sale In Ajman +971568044699 Abortion Pills For Sale In Fujairaih +971568044699 Abortion Pills For Sale In Ras Al Khaimah +971568044699 Abortion Pills For Sale In Doha +971568044699 Abortion Pills For Sale In Qa
- tar +971568044699 Abortion Pills For Sale In Muscat +971568044699 Abortion Pills For Sale In Oman +971568044699 Abortion Pills In Kuwait +971568044699 Abortion Pills In Kuwait City +971568044699 Abortion Pills In Al Asimah +971568044699 Abortion Pills In Al Ahmadi +971568044699 Abortion Pills In Hawalli +971568044699 Abortion Pills In Al Farwaniyah +971568044699 Abortion Pills In and Al Jahra +971568044699 Abortion Pills In Salmiya +971568044699 Abortion Pills In Sabah as Salim +971568044699 Abortion Pills In Mangaf +971568044699 Abortion Pills In Fintas +971568044699 Abortion Pills In Dubai +971568044699 Abortion Pills In Abu Dhabi +971568044699 Abortion Pills In Sharjah +971568044699 Abortion Pills In Al Ain +971568044699 Abortion Pills In Ajman +971568044699 Abortion Pills In Fujairaih +971568044699 Abortion Pills In Ras Al Khaimah +971568044699 Abortion Pills In Doha +971568044699 Abortion Pills In Qatar +971568044699 Abortion Pills In Muscat +971568044699 Abortion Pills In Oman
-  +971568044699 Mifepristone And Misoprostol Medicine Available In Kuwait +971568044699 Mifepristone And Misoprostol Medicine Available In Kuwait City +971568044699 Mifepristone And Misoprostol Medicine Available In Al Asimah +971568044699 Mifepristone And Misoprostol Medicine Available In Al Ahmadi +971568044699 Mifepristone And Misoprostol Medicine Available In Hawalli +971568044699 Mifepristone And Misoprostol Medicine Available In Al Farwaniyah +971568044699 Mifepristone And Misoprostol Medicine Available In Al Jahra +971568044699 Mifepristone And Misoprostol Medicine Available In Salmiya +971568044699 Mifepristone And Misoprostol Medicine Available In Sabah as Salim +971568044699 Mifepristone And Misoprostol Medicine Available In Mangaf +971568044699 Mifepristone And Misoprostol Medicine Available In Fintas +971568044699 Mifepristone And Misoprostol Medicine Available In Dubai
+[][][]+971568044699 [][][] Abortion Pills For Sale In Mesaieed, Mifepristone And Misoprostol Pills Available In Mesaieed
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
