@@ -2,147 +2,171 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id CMA1AmbdCmpV8wQAu9opvQ
+	id yBesLYPmCmqJ9AQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 11:35:34 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 12:14:27 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 97D9C569D3B
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 11:35:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4400056A803
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 12:14:27 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7F523406B2
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 09:35:32 +0000 (UTC)
-Received: from bali.collaboradmins.com (bali.collaboradmins.com [148.251.105.195])
-	by lists.linaro.org (Postfix) with ESMTPS id 88AED40475
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 18 May 2026 09:35:21 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 2368A406B3
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 10:14:26 +0000 (UTC)
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+	by lists.linaro.org (Postfix) with ESMTPS id 9D2BA40475
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 18 May 2026 10:14:13 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=collabora.com header.s=mail header.b="lcssmPM/";
-	spf=pass (lists.linaro.org: domain of boris.brezillon@collabora.com designates 148.251.105.195 as permitted sender) smtp.mailfrom=boris.brezillon@collabora.com;
-	dmarc=pass (policy=none) header.from=collabora.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1779096920;
-	bh=oDlIKsmjIzcjVIcTrJ/yYYgluBpXPLUOjcadrFJxADQ=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=lcssmPM/5L8HhycTKzgHC8rkX9MHCs18A4XmTep9/XIOg98BFdjczvXpa4h9RjSkl
-	 wGYfsvSeNm7CCSbJ5PyPAlC313kWX87ESBpU1Bkuq67ezhxbUYwzJyz9BqMcUuGImB
-	 tuuWU1hrGElbNoyclhwqNWyQDQyYoSkDpGgo6ssifkzODeSGjh27dOzN9snUsc0hBT
-	 BwB5+oheoesjdKjjBw3KCSPgSzMbZif8bJNlvgyxeHZLLP7rpwcLwjJw6nvenLeFl1
-	 Ib1LNhZutAw2M5l/RPGNrzPCLV9Nh7K+u0RjAfZwZVdBZGAsZxRP7JJLMtLqV5ZebS
-	 6IqC8KtYDHxRA==
-Received: from fedora (unknown [100.64.0.11])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: bbrezillon)
-	by bali.collaboradmins.com (Postfix) with ESMTPSA id EB35E17E0443;
-	Mon, 18 May 2026 11:35:19 +0200 (CEST)
-Date: Mon, 18 May 2026 11:35:15 +0200
-From: Boris Brezillon <boris.brezillon@collabora.com>
-To: Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>,
- linux-kernel@vger.kernel.org
-Message-ID: <20260518113515.794442f3@fedora>
-In-Reply-To: <a872ef35-6d5b-41fd-9242-bb44902fb237@amd.com>
-References: <20260513-panthor-guard-refactor-v1-0-f2d8c15a97ce@collabora.com>
-	<20260513-panthor-guard-refactor-v1-3-f2d8c15a97ce@collabora.com>
-	<CAPaKu7TULU6_-8eoygq0svBTbnX-vFvF3sH5hDzyi9kDP-9enQ@mail.gmail.com>
-	<20260518102813.50555650@fedora>
-	<a872ef35-6d5b-41fd-9242-bb44902fb237@amd.com>
-Organization: Collabora
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-redhat-linux-gnu)
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=miowvMXi;
+	spf=pass (lists.linaro.org: domain of asml.silence@gmail.com designates 209.85.128.49 as permitted sender) smtp.mailfrom=asml.silence@gmail.com;
+	dmarc=pass (policy=none) header.from=gmail.com
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-488a8ca4aadso20029485e9.3
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 18 May 2026 03:14:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1779099252; x=1779704052; darn=lists.linaro.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=HqBDj90Kc3B5RL3RITDRmt05U20tIBaa43CY99Xd9RQ=;
+        b=miowvMXiv8Gev6dGiCS/Iby5RCo0CQ3Tryx2XKJxMwaP5HINHTlfihjQYgZTotZxdd
+         V+6RDrEZMZQwzIJpb9btKDJvx/GfYszuCMQJt/xU71k671L7ewsCYAsjQTMDWeaUHh7M
+         a4Xd7rv+/9jf+PFKiVkxeZ8K/06c/h9cdIkf7t9BGGeHfpKaOzWWfOd0Qzw18BcAvAJ0
+         vR2YkA4srUojuBAY5euzXHR4mFMFybYWk0DKbKb9HgKeCRwi/wNJjCKCmAa77Uc87MtJ
+         O1VDsSEw5c2wzHVvVj0KoXkrJa3iBMui8zBQrg1JEtBBvZa+k/WT6ZI9QppSF7ni756Z
+         mWGw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1779099252; x=1779704052;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=HqBDj90Kc3B5RL3RITDRmt05U20tIBaa43CY99Xd9RQ=;
+        b=PbhcWQqiFEjXojfqI4tBQ122Wg42Nl2l2hS//vQvwtBsRYZhQUJj7qNpm/f3JC6Zz4
+         dBADWHHvssHLg10gc2THajmKB1weeu578vTggQXaKtl34P1neDyTFZlhg6yKitW50iXU
+         9uEiSq/4tVcIvz2AgNjmQUI+SlRiu6ss0/oSxkZ903B54NU8QvgMMdu2xJ9+ys/1FaYb
+         VUKxG7V1oon7eACSKnYsaqnnTDCFcIl2lj2SfOf4oq00QCtRNSGaNFOSfCNDIO1aOHik
+         GHLsUycEEQdyM4pLUiPJMgRNsSm0dWKpTJI7noBLF+N/zRk5xy3PBcEgSCm4MS3L9y8j
+         tdqw==
+X-Forwarded-Encrypted: i=1; AFNElJ+UtopEZsnxPSSwD7OTOKAKou+1SB0obsX68+2Dvh/z2SL0K0rna6vj6+5+WW11+IuPr2d5KXa8xyZjOakM@lists.linaro.org
+X-Gm-Message-State: AOJu0Yy+9fHrO/LYDJatRua5YnyzjQwWB+6u11Y312JDSmCHHemXbNrE
+	Mtswy76Qu7hcoqOGG/rsNOhNdBDsmLOQj1f6QnBg9gYVzgmtnPQiosp8
+X-Gm-Gg: Acq92OF7N2Eadcaz1w3QrN47Pyp6zFOXobSX7mkrtOYnODiOVTKLr2oMbkJu7v6cttr
+	9WM/WvMLsdqghb+I8w9cA78SNCUF4pLKbPDefKhLHjvPzyXfOmkCW5sADZSYHV6W2DUdyw289tp
+	lPhP81OcP8azb+nQKKrBxGNM1JvO4MZ5H59P5jl1lBKTehaNX9fvHB87dtmH/XS1CXDrarypKEZ
+	yizFhfM5BuH+xa7ax6DjQK1qEQQzY7AqjDvtUbUd6XnCgH7EC0+kA1SEHFbrO2T0NbbY6B9Exte
+	bnjf7QxkT45nxb9JrKa9kkW8c9Gjm0Nd1yYutJetKaDrdNy8/waiQ1YYo5Tdnff0FQ1ZSslbwgZ
+	IamcNHwA9Yp8hEs8sHMYSu0uM/m5OpZNBSxv3kctbA03cNmd+8HFy2SNbB/p/gtoVm5+47rbvg5
+	q8wE00+iwiJ6IagMtBpMda0uc0XiDHm8KhyNnyNE3NLnxheXbgj6wWTgJegMJm9vV8DZ2sryc4F
+	mvqF7dgXSKPi7+BqMWPJuEYHXyKKh8Kflpt+ZgjTz8eNSpyxzdc0jexreg=
+X-Received: by 2002:a05:600c:3b12:b0:488:b14f:b8ed with SMTP id 5b1f17b1804b1-48fe59ab80emr218398395e9.0.1779099252361;
+        Mon, 18 May 2026 03:14:12 -0700 (PDT)
+Received: from ?IPV6:2620:10d:c096:325:77fd:1068:74c8:af87? ([2620:10d:c092:600::1:6e9b])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-45da0fe0f72sm38877974f8f.25.2026.05.18.03.14.11
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 18 May 2026 03:14:11 -0700 (PDT)
+Message-ID: <ebf41920-5852-428f-b98a-e0f44c8f3315@gmail.com>
+Date: Mon, 18 May 2026 11:14:09 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+To: Christoph Hellwig <hch@lst.de>
+References: <cover.1777475843.git.asml.silence@gmail.com>
+ <c61e6d928f86f4cb253ae350272e6039faefd3a6.1777475843.git.asml.silence@gmail.com>
+ <20260513082431.GA6461@lst.de>
+Content-Language: en-US
+From: Pavel Begunkov <asml.silence@gmail.com>
+In-Reply-To: <20260513082431.GA6461@lst.de>
 X-Spamd-Bar: ---
-Message-ID-Hash: IU6XZYTI7XZQIRUYVHI5CUMCAQZMI6WA
-X-Message-ID-Hash: IU6XZYTI7XZQIRUYVHI5CUMCAQZMI6WA
-X-MailFrom: boris.brezillon@collabora.com
+Message-ID-Hash: Q67FS3K6VDMMWPZETXHV7JZ7Q7OQBMLH
+X-Message-ID-Hash: Q67FS3K6VDMMWPZETXHV7JZ7Q7OQBMLH
+X-MailFrom: asml.silence@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
-CC: Chia-I Wu <olvaffe@gmail.com>, Steven Price <steven.price@arm.com>, Liviu Dudau <liviu.dudau@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+CC: Jens Axboe <axboe@kernel.dk>, Keith Busch <kbusch@kernel.org>, Sagi Grimberg <sagi@grimberg.me>, Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Andrew Morton <akpm@linux-foundation.org>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, linux-nvme@lists.infradead.org, linux-fsdevel@vger.kernel.org, io-uring@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Nitesh Shetty <nj.shetty@samsung.com>, Kanchan Joshi <joshi.k@samsung.com>, Anuj Gupta <anuj20.g@samsung.com>, Tushar Gohad <tushar.gohad@intel.com>, William Power <william.power@intel.com>, Phil Cayton <phil.cayton@intel.com>, Jason Gunthorpe <jgg@nvidia.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 3/6] drm: Define a conditional guard for drm_dev_{enter,exit}()
+Subject: [Linaro-mm-sig] Re: [PATCH v3 05/10] lib: add dmabuf token infrastructure
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/IU6XZYTI7XZQIRUYVHI5CUMCAQZMI6WA/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/Q67FS3K6VDMMWPZETXHV7JZ7Q7OQBMLH/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-X-Rspamd-Queue-Id: 97D9C569D3B
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Queue-Id: 4400056A803
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [1.19 / 15.00];
-	R_DKIM_REJECT(1.00)[collabora.com:s=mail];
-	MID_RHS_NOT_FQDN(0.50)[];
+X-Spamd-Result: default: False [0.59 / 15.00];
+	R_DKIM_REJECT(1.00)[gmail.com:s=20251104];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx];
-	DMARC_POLICY_SOFTFAIL(0.10)[collabora.com : SPF not aligned (relaxed),none];
-	MIME_BASE64_TEXT(0.10)[];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	ARC_NA(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
-	HAS_ORG_HEADER(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[14];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FREEMAIL_CC(0.00)[gmail.com,arm.com,linaro.org,linux.intel.com,kernel.org,suse.de,ffwll.ch,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
-	DKIM_TRACE(0.00)[collabora.com:-];
-	NEURAL_HAM(-0.00)[-0.968];
-	FROM_NEQ_ENVFROM(0.00)[boris.brezillon@collabora.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
+	ARC_NA(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCPT_COUNT_TWELVE(0.00)[24];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-0.484];
+	FROM_NEQ_ENVFROM(0.00)[asmlsilence@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:-];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[collabora.com:email,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,amd.com:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email]
 X-Rspamd-Action: no action
 
-T24gTW9uLCAxOCBNYXkgMjAyNiAxMToxNjo1NSArMDIwMA0KQ2hyaXN0aWFuIEvDtm5pZyA8Y2hy
-aXN0aWFuLmtvZW5pZ0BhbWQuY29tPiB3cm90ZToNCg0KPiBPbiA1LzE4LzI2IDEwOjI4LCBCb3Jp
-cyBCcmV6aWxsb24gd3JvdGU6DQo+ID4gT24gVGh1LCAxNCBNYXkgMjAyNiAxMTozNDo1MiAtMDcw
-MA0KPiA+IENoaWEtSSBXdSA8b2x2YWZmZUBnbWFpbC5jb20+IHdyb3RlOg0KPiA+ICAgDQo+ID4+
-IE9uIFdlZCwgTWF5IDEzLCAyMDI2IGF0IDEwOjI04oCvQU0gQm9yaXMgQnJlemlsbG9uDQo+ID4+
-IDxib3Jpcy5icmV6aWxsb25AY29sbGFib3JhLmNvbT4gd3JvdGU6ICANCj4gPj4+DQo+ID4+PiBE
-ZWZpbmUgYSBjb25kaXRpb25hbCBkcm1fZGV2X2FjY2VzcyBndWFyZCB0byBhdXRvbWF0ZSB0aGUN
-Cj4gPj4+IGRybV9kZXZfe2VudGVyLGV4aXR9KCkgc2VxdWVuY2UuDQo+ID4+Pg0KPiA+Pj4gU2ln
-bmVkLW9mZi1ieTogQm9yaXMgQnJlemlsbG9uIDxib3Jpcy5icmV6aWxsb25AY29sbGFib3JhLmNv
-bT4NCj4gPj4+IC0tLQ0KPiA+Pj4gIGluY2x1ZGUvZHJtL2RybV9kcnYuaCB8IDkgKysrKysrKysr
-DQo+ID4+PiAgMSBmaWxlIGNoYW5nZWQsIDkgaW5zZXJ0aW9ucygrKQ0KPiA+Pj4NCj4gPj4+IGRp
-ZmYgLS1naXQgYS9pbmNsdWRlL2RybS9kcm1fZHJ2LmggYi9pbmNsdWRlL2RybS9kcm1fZHJ2LmgN
-Cj4gPj4+IGluZGV4IDQyZmMwODVmOTg2ZC4uNzlkMTk1OGY5M2U0IDEwMDY0NA0KPiA+Pj4gLS0t
-IGEvaW5jbHVkZS9kcm0vZHJtX2Rydi5oDQo+ID4+PiArKysgYi9pbmNsdWRlL2RybS9kcm1fZHJ2
-LmgNCj4gPj4+IEBAIC00OTAsNiArNDkwLDE1IEBAIHZvaWQgZHJtX2Rldl91bnBsdWcoc3RydWN0
-IGRybV9kZXZpY2UgKmRldik7DQo+ID4+PiAgaW50IGRybV9kZXZfd2VkZ2VkX2V2ZW50KHN0cnVj
-dCBkcm1fZGV2aWNlICpkZXYsIHVuc2lnbmVkIGxvbmcgbWV0aG9kLA0KPiA+Pj4gICAgICAgICAg
-ICAgICAgICAgICAgICAgIHN0cnVjdCBkcm1fd2VkZ2VfdGFza19pbmZvICppbmZvKTsNCj4gPj4+
-DQo+ID4+PiArLyoNCj4gPj4+ICsgKiBPbmx5IHRoZSBjb25kaXRpb25hbCBkcm1fZGV2X2FjY2Vz
-cyBndWFyZCBpcyB2YWxpZC4gVGhlIGRybV9kZXYgb25lIGlzDQo+ID4+PiArICogaGVyZSBzbyB3
-ZSBjYW4gZXh0ZW5kIGl0IHdpdGggYSBjb25kaXRpb25hbCB2YXJpYW50Lg0KPiA+Pj4gKyAqLw0K
-PiA+Pj4gK0RFRklORV9MT0NLX0dVQVJEXzEoZHJtX2Rldiwgc3RydWN0IGRybV9kZXZpY2UsDQo+
-ID4+PiArICAgICAgICAgICAgICAgICAgIHsgV0FSTl9PTigiVXNlIGNvbmQgZ3VhcmRzIik7IF9U
-LT5pZHggPSAtMTsgfSwNCj4gPj4+ICsgICAgICAgICAgICAgICAgICAgZHJtX2Rldl9leGl0KF9U
-LT5pZHgpLCBpbnQgaWR4KTsgICAgDQo+ID4+IElmIHRoaXMgaXMgZXZlciBtaXMtdXNlZCwgZHJt
-X2Rldl9leGl0KC0xKSBzZWVtcyB0byBjYXVzZSBPT0IgYWNjZXNzLg0KPiA+PiBJcyBCVUcgbW9y
-ZSBhcHByb3ByaWF0ZSB0aGFuIFdBUk5fT04/ICANCj4gPiANCj4gPiBJIGFjdHVhbGx5IGhhZA0K
-PiA+IA0KPiA+IAkJCWlmIChfVC0+aWR4ID49IDApIGRybV9kZXZfZXhpdChfVC0+aWR4KSwNCj4g
-PiANCj4gPiBhdCBzb21lIHBvaW50LCBhbmQgSSBkaXRjaGVkIGl0IHRoaW5raW5nIHRoZSBXQVJO
-X09OX09OQ0UoKQ0KPiA+IGluIHNyY3VfcmVhZF91bmxvY2soKSB3b3VsZCBjb3ZlciBmb3IgdGhh
-dC4gSSBjYW4gYWRkIGl0IGJhY2ssIG9mDQo+ID4gY291cnNlLg0KPiA+IA0KPiA+IEknZCBiZSBm
-aW5lIHdpdGggYSBCVUdfT04oKSB0b28sIGJ1dCBldmVyeSB0aW1lIEkgdHJpZWQgdG8gYWRkIG9u
-ZSBJJ3ZlDQo+ID4gYmVlbiBlbmNvdXJhZ2VkIHRvIGhhbmRsZSB0aGUgdW5leHBlY3RlZCBjYXNl
-IGluc3RlYWQuDQo+ID4gDQo+ID4gSWRlYWxseSwgd2Ugd291bGQgaGF2ZSBhIERFRklORV9MT0NL
-X0dVQVJEX0NPTkQoKSB2YXJpYW50IHRoYXQsIGluc3RlYWQNCj4gPiBvZiBleHBhbmRpbmcgYSBu
-b24tY29uZGl0aW9uYWwgb25lLCB3b3VsZCBkZWZpbmUgdGhlIHdob2xlIHRoaW5nIHNvDQo+ID4g
-dGhhdCB0aGUgbm9uLWNvbmRpdGlvbmFsIHZhcmlhbnQgaXMgbmV2ZXIgZXhwb3NlZC4gIA0KPiAN
-Cj4gV291bGQgaXQgYmUgcG9zc2libGUgdG8gdXNlIEJVSUxEX0JVRygpIGhlcmU/DQoNCkFoLCBu
-aWNlISBJIHdhcyBzZWFyY2hpbmcgZm9yIHRoaXMga2luZCBvZiBjb21waWxlLXRpbWUgYXNzZXJ0
-IHRoYXQNCndvdWxkIHRyaWdnZXIgaWYgdGhlIGNvZGUgaXMgdXNlZCwgYW5kIEJVSUxEX0JVRygp
-IGluZGVlZCBkb2VzIHdoYXQgd2UNCndhbnQuIFRoYW5rcyBmb3IgdGhlIHRpcC4NCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFp
-bGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmli
-ZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+On 5/13/26 09:24, Christoph Hellwig wrote:
+> Naming and placement:
+> 
+> This is about dma-buf based I/O.  So I'd expect it to be named dma-buf-io
+> and no io-dmabuf, and live in drivers/dma-buf and not the unrelated lib/.
+> But I'd like to hear from the dma-buf maintainers about that.
+
+Looking at what Ming is saying, it'd make more sense to keep some of the
+parts like iterator and the file op more flexible and not automatically
+imply dma-buf even if it's the main and for now the only medium. I.e.
+ublk/fuse can use a similar interface for mapping buffers to the server
+even without dma mappings.
+
+I don't know how the API should look like, maybe passing memfd, and dma-buf
+supports mmap, but I think it's better to call the op something like
+"register_buffer" instead and keep all it in lib/ for the same reasons.
+
+> Config option:  as this unconditionally when DMA_SHARED_BUFFER is enabled,
+> why does it need a separate config option?
+
+More clearly marking relevant code, easier to make optional if needed,
+and gives some introspection via /proc/config.
+
+> Interface:  io_dmabuf_token_create / ->create_dmabuf_token filling
+> in a structure allocated by the caller feels odd.
+
+It's minimising pointer chasing. "token" is mainly used by io_uring in
+the hot path, and io_uring just keeps it as a part of a larger struct.
+For the same reasons "map" is allocated by the driver.
+
+I can add an extra parameter to io_dmabuf_token_create() for how
+many extra bytes to allocate for the caller's use, if that makes
+things any better for you, but it was easier to just pass an
+already allocated struct.
+
+   My gut feeling
+> would be to move most of io_dmabuf_token_create into a helper called
+> by ->create_dmabuf_token so that the token is allocated in the
+> driver data structure and returned from create_dmabuf_token.
+
+-- 
+Pavel Begunkov
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
