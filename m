@@ -2,35 +2,35 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id SHgAJiwjC2pJDwUAu9opvQ
+	id kA4LC1IjC2oxDwUAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 16:33:16 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 16:33:54 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4AE7256EDFE
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 16:33:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BFDA756EE2D
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 16:33:53 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 46CBD40962
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 14:33:15 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id CEBA73F91A
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 May 2026 14:33:52 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 853763F756
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 18 May 2026 14:33:07 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 2458C3F91A
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 18 May 2026 14:33:46 +0000 (UTC)
 MIME-Version: 1.0
 From: namudigumoraka29@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Mon, 18 May 2026 14:33:07 -0000
-Message-ID: <177911478754.2948620.15860368378667423674@lists.linaro.org>
+Date: Mon, 18 May 2026 14:33:46 -0000
+Message-ID: <177911482614.2947921.6188060623013160175@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: XZUPBYS53JER7XV2LVYBNFYEFOOVCWJQ
-X-Message-ID-Hash: XZUPBYS53JER7XV2LVYBNFYEFOOVCWJQ
+Message-ID-Hash: DCIPQCNRYIXPNQJPSJGDMUSJXYWI3Q3J
+X-Message-ID-Hash: DCIPQCNRYIXPNQJPSJGDMUSJXYWI3Q3J
 X-MailFrom: namudigumoraka29@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Cytotec Pills For Sale In Kuwait[][][]<>+971568547782[][][]<> ( Pfizer ) Cytotec Medicine Available In Kuwait, Cytotec Tablets In Kuwait
+Subject: [Linaro-mm-sig] Cytotec Pills For Sale In Al Nahda[][][]<>+971568547782[][][]<>, ( Pfizer ) Cytotec Medicine Available In Al Nahda, Cytotec Tablets In Al Nahda
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XZUPBYS53JER7XV2LVYBNFYEFOOVCWJQ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DCIPQCNRYIXPNQJPSJGDMUSJXYWI3Q3J/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -61,13 +61,13 @@ X-Spamd-Result: default: False [0.59 / 15.00];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	R_DKIM_NA(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:mid,lists.linaro.org:helo]
-X-Rspamd-Queue-Id: 4AE7256EDFE
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:mid,lists.linaro.org:helo,linaro.org:email]
+X-Rspamd-Queue-Id: BFDA756EE2D
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Cytotec Pills For Sale In Kuwait[][][]<>+971568547782[][][]<> ( Pfizer ) Cytotec Medicine Available In Kuwait, Cytotec Tablets In KuwaitMtp Kit For Sale In Al Ain [][][][][][]<>+971568547782[][][][][][]<>( Pfizer ) Mtp Kit Available In Al Ain, Where Can I Buy Mtp Kit In Al AinKuwait +971568547782 Abortion Tablets Available In Qatar +971568547782 Abortion Pills For Sale In Kuwait City +971568547782 Abortion Pills For Sale In Al Asimah +971568547782 Abortion Pills For Sale In Al Ahmadi +971568547782 Abortion Pills For Sale In Hawalli +971568547782 Abortion Pills For Sale In Al Farwaniyah +971568547782 Abortion Pills For Sale In Al Jahra +971568547782 Abortion Pills For Sale In Salmiya +971568547782 Abortion Pills For Sale In Sabah as Salim +971568547782 Abortion Pills For Sale In Mangaf +971568547782 Abortion Pills For Sale In Fintas +971568547782 Abortion Pills For Sale In Dubai +971568547782 Abortion Pills For Sale In Abu Dhabi +971568547782 Abortion Pills For Sale In Sharjah +971568
- 547782 Abortion Pills For Sale In Al Ain +971568547782 Abortion Pills For Sale In Ajman +971568547782 Abortion Pills For Sale In Fujairaih +971568547782 Abortion Pills For Sale In Ras Al Khaimah +971568547782 Abortion Pills For Sale In Doha +971568547782 Abortion Pills For Sale In Qatar +971568547782 Abortion Pills For Sale In Muscat +971568547782 Abortion Pills For Sale In Oman
+Cytotec Pills For Sale In Al Nahda[][][]<>+971568547782[][][]<>, ( Pfizer ) Cytotec Medicine Available In Al Nahda, Cytotec Tablets In Al NahdaMtp Kit For Sale In Al Ain [][][][][][]<>+971568547782[][][][][][]<>( Pfizer ) Mtp Kit Available In Al Ain, Where Can I Buy Mtp Kit In Al AinKuwait +971568547782 Abortion Tablets Available In Qatar +971568547782 Abortion Pills For Sale In Kuwait City +971568547782 Abortion Pills For Sale In Al Asimah +971568547782 Abortion Pills For Sale In Al Ahmadi +971568547782 Abortion Pills For Sale In Hawalli +971568547782 Abortion Pills For Sale In Al Farwaniyah +971568547782 Abortion Pills For Sale In Al Jahra +971568547782 Abortion Pills For Sale In Salmiya +971568547782 Abortion Pills For Sale In Sabah as Salim +971568547782 Abortion Pills For Sale In Mangaf +971568547782 Abortion Pills For Sale In Fintas +971568547782 Abortion Pills For Sale In Dubai +971568547782 Abortion Pills For Sale In Abu Dhabi +971568547782 Abortion Pills For Sale In Sharjah 
+ +971568547782 Abortion Pills For Sale In Al Ain +971568547782 Abortion Pills For Sale In Ajman +971568547782 Abortion Pills For Sale In Fujairaih +971568547782 Abortion Pills For Sale In Ras Al Khaimah +971568547782 Abortion Pills For Sale In Doha +971568547782 Abortion Pills For Sale In Qatar +971568547782 Abortion Pills For Sale In Muscat +971568547782 Abortion Pills For Sale In Oman
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
