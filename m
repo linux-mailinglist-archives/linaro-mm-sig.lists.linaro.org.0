@@ -2,149 +2,140 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id AKFkGJC7C2q3LgUAu9opvQ
+	id wAWJODpBDGq4bwUAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 May 2026 03:23:28 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 May 2026 12:53:46 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id E0F3857604A
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 May 2026 03:23:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 86BF757CEC1
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 May 2026 12:53:46 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DCDC840960
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 May 2026 01:23:26 +0000 (UTC)
-Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 6A88D406A2
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 19 May 2026 01:23:19 +0000 (UTC)
-Content-Type: text/plain; charset="utf-8"
+	by lists.linaro.org (Postfix) with ESMTP id 787E7406F4
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 May 2026 10:53:45 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+	by lists.linaro.org (Postfix) with ESMTPS id E74B94069A
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 19 May 2026 06:24:39 +0000 (UTC)
+Authentication-Results: lists.linaro.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=CD2v9CJp;
+	spf=pass (lists.linaro.org: domain of jszhang@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=jszhang@kernel.org;
+	dmarc=pass (policy=quarantine) header.from=kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by sea.source.kernel.org (Postfix) with ESMTP id 3944943D36;
+	Tue, 19 May 2026 06:24:39 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5A715C2BCB3;
+	Tue, 19 May 2026 06:24:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1779171879;
+	bh=VcUrD//oUZnQvql1wMIPcTSBy0GWQBFqjz1wAD1jEJo=;
+	h=From:To:Cc:Subject:Date:From;
+	b=CD2v9CJpTSarRp+GoMDt5TQdmsvn+jquUX8iP5O+RihoGx+qCzcVuYeeJEdNTZ3ty
+	 W+0yvOKHtcYgzFZOJv/qT6OmNCusoneHcxOQyLx2ZAuLLNws9c3iynitrTAmIgNOwg
+	 9i3rg7NUvdpiYmjXwTW33wFCPl74rCpt4xQEn2XaImN/pq14BeHagYSGR+RXjkO1Fc
+	 IsO+8z0gfRUBD+oUYUX55L2+lcMwEal6SgQVY5XtKzEKNn1loAYz/I5NJHC9LehnBi
+	 9NIdBlFvQEeQsVYEO3PB/ahPg43sJp/Q+a1+uLfSRmFUMAcBZ484IW9qG9uD4T2nOX
+	 x1LZ4WKSgxkNg==
+From: Jisheng Zhang <jszhang@kernel.org>
+To: Sumit Semwal <sumit.semwal@linaro.org>,
+	Benjamin Gaignard <benjamin.gaignard@collabora.com>,
+	Brian Starkey <Brian.Starkey@arm.com>,
+	John Stultz <jstultz@google.com>,
+	"T . J . Mercier" <tjmercier@google.com>,
+	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
+Date: Tue, 19 May 2026 14:05:32 +0800
+Message-ID: <20260519060532.13221-1-jszhang@kernel.org>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-From: sarahcolter@wshu.net
-To: linaro-mm-sig@lists.linaro.org
-Date: Tue, 19 May 2026 01:23:19 -0000
-Message-ID: <177915379943.3786980.11813658215119277090@lists.linaro.org>
-User-Agent: HyperKitty on http://lists-ec2.96boards.org/
-Message-ID-Hash: 5LXDYRRCOCFV6XOYOHAXQL4JSZXOIYOE
-X-Message-ID-Hash: 5LXDYRRCOCFV6XOYOHAXQL4JSZXOIYOE
-X-MailFrom: sarahcolter@wshu.net
-X-Mailman-Rule-Hits: member-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
+X-Spamd-Bar: --
+X-MailFrom: jszhang@kernel.org
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+Message-ID-Hash: AB6CGQARCPKFHDLAQWFM7AMJZGZ7XAHO
+X-Message-ID-Hash: AB6CGQARCPKFHDLAQWFM7AMJZGZ7XAHO
+X-Mailman-Approved-At: Tue, 19 May 2026 10:50:28 +0000
+CC: linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] A Guide to Mastering Slope
+Subject: [Linaro-mm-sig] [PATCH] dma-buf: system_heap: Use LIST_HEAD() to initialize on stack list head
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5LXDYRRCOCFV6XOYOHAXQL4JSZXOIYOE/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AB6CGQARCPKFHDLAQWFM7AMJZGZ7XAHO/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Transfer-Encoding: base64
-X-Spamd-Result: default: False [2.59 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[wshu.net : SPF not aligned (strict), No valid DKIM,reject];
-	MID_RHS_MATCH_TO(1.00)[];
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [2.99 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
+	R_DKIM_REJECT(1.00)[kernel.org:s=k20201202];
+	MID_CONTAINS_FROM(1.00)[];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx];
-	MIME_BASE64_TEXT(0.10)[];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_ONE(0.00)[1];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo];
+	ARC_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_NO_DN(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	TO_DN_SOME(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	R_DKIM_NA(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[10];
+	RCVD_COUNT_THREE(0.00)[4];
+	FROM_NEQ_ENVFROM(0.00)[jszhang@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_NEQ_ENVFROM(0.00)[sarahcolter@wshu.net,linaro-mm-sig-bounces@lists.linaro.org];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,slopegame-online.com:url];
-	TO_DN_NONE(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	ARC_NA(0.00)[]
-X-Rspamd-Queue-Id: E0F3857604A
+	DKIM_TRACE(0.00)[kernel.org:-]
+X-Rspamd-Queue-Id: 86BF757CEC1
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-SGF2ZSB5b3UgZXZlciBmZWx0IHRoZSBleGhpbGFyYXRpbmcgcnVzaCBvZiBzcGVlZCwgdGhlIGZv
-Y3VzIGRlbWFuZGVkIGJ5IHByZWNpc2lvbiwgYW5kIHRoZSB1dHRlciBzYXRpc2ZhY3Rpb24gb2Yg
-b3ZlcmNvbWluZyBhIHNlZW1pbmdseSBpbXBvc3NpYmxlIGNoYWxsZW5nZT8gSWYgc28sIHRoZW4g
-eW91IG1pZ2h0IGp1c3QgYmUgcmVhZHkgdG8gdGFja2xlIFNsb3BlLiBUaGlzIGRlY2VwdGl2ZWx5
-IHNpbXBsZSBvbmxpbmUgZ2FtZSBoYXMgY2FwdGl2YXRlZCBwbGF5ZXJzIHdpdGggaXRzIGFkZGlj
-dGl2ZSBnYW1lcGxheSBhbmQgZW5kbGVzcyBwb3RlbnRpYWwgZm9yIGltcHJvdmVtZW50LiBJdCdz
-IGEgcGVyZmVjdCBsaXR0bGUgZXNjYXBlIGZvciBhIHF1aWNrIGJyZWFrIG9yIGEgZGVkaWNhdGVk
-IHByYWN0aWNlIHNlc3Npb24uIExldCdzIGRpdmUgaW50byBob3cgdG8gcGxheSBhbmQsIG1vcmUg
-aW1wb3J0YW50bHksIGhvdyB0byBleHBlcmllbmNlIHRoZSB0aHJpbGwgb2YgU2xvcGUuDQoNCklu
-dHJvZHVjdGlvbjogV2hhdCBpcyBTbG9wZT8NCg0KQXQgaXRzIGNvcmUsIFNsb3BlIGlzIGEgcm9s
-bGluZyBiYWxsIGdhbWUuIFlvdSBjb250cm9sIGEgYmFsbCB0aGF04oCZcyBjb25zdGFudGx5IG1v
-dmluZyBkb3duaGlsbCwgbmF2aWdhdGluZyBhIHByb2NlZHVyYWxseSBnZW5lcmF0ZWQgbGFuZHNj
-YXBlIG9mIGludGVyY29ubmVjdGVkIHBsYXRmb3Jtcy4gU291bmRzIHN0cmFpZ2h0Zm9yd2FyZCwg
-cmlnaHQ/IERvbuKAmXQgYmUgZm9vbGVkISBUaGUgcGxhdGZvcm1zIG5hcnJvdywgdGhlIHNwZWVk
-IGluY3JlYXNlcyByZWxlbnRsZXNzbHksIGFuZCB0aGUgZ2FwcyBiZXR3ZWVuIHBsYXRmb3JtcyB3
-aWRlbiBhcyB5b3UgcHJvZ3Jlc3MuIE9uZSB3cm9uZyBtb3ZlIGFuZCB5b3XigJlyZSBwbHVtbWV0
-aW5nIGludG8gdGhlIGFieXNzLg0KaHR0cHM6Ly9zbG9wZWdhbWUtb25saW5lLmNvbQ0KVGhlIGJy
-aWxsaWFuY2Ugb2YgU2xvcGUgbGllcyBpbiBpdHMgYWNjZXNzaWJpbGl0eSBhbmQgaXRzIGxlYXJu
-aW5nIGN1cnZlLiBJdCdzIGluY3JlZGlibHkgZWFzeSB0byBwaWNrIHVwIGFuZCBwbGF5LCB5ZXQg
-ZmllbmRpc2hseSBkaWZmaWN1bHQgdG8gbWFzdGVyLiBZb3UgZG9uJ3QgbmVlZCBjb21wbGljYXRl
-ZCBjb250cm9sbGVycyBvciBleHRlbnNpdmUgdHV0b3JpYWxzLiBKdXN0IGEga2V5Ym9hcmQsIGEg
-c3RlYWR5IGhhbmQsIGFuZCBhIGRldGVybWluZWQgc3Bpcml0LiBJdCdzIGEgcGVyZmVjdCBleGFt
-cGxlIG9mIGEgc2ltcGxlIGNvbmNlcHQgZXhlY3V0ZWQgYnJpbGxpYW50bHkuDQoNCkdhbWVwbGF5
-OiBOYXZpZ2F0aW5nIHRoZSBQZXJpbG91cyBQYXRoDQoNClRoZSBjb250cm9scyBhcmUgYXMgbWlu
-aW1hbCBhcyB0aGUgYWVzdGhldGljOiB0aGUgbGVmdCBhbmQgcmlnaHQgYXJyb3cga2V5cyBhcmUg
-YWxsIHlvdSBuZWVkIHRvIGd1aWRlIHlvdXIgYmFsbC4gVXNlIHRoZSBsZWZ0IGFycm93IGtleSB0
-byBzdGVlciB0aGUgYmFsbCBsZWZ0LCBhbmQgdGhlIHJpZ2h0IGFycm93IGtleSB0byBzdGVlciBp
-dCByaWdodC4gVGhhdCdzIGl0ISBCdXQgbWFzdGVyaW5nIHRob3NlIHR3byBrZXlzIGlzIHRoZSBr
-ZXkgdG8gc3Vydml2YWwuDQoNCllvdXIgb2JqZWN0aXZlIGlzIHRvIHN0YXkgb24gdGhlIHBsYXRm
-b3JtcyBmb3IgYXMgbG9uZyBhcyBwb3NzaWJsZS4gQXMgeW91IHJvbGwgZnVydGhlciBkb3duIHRo
-ZSBzbG9wZSwgeW91ciBzcGVlZCBpbmNyZWFzZXMsIGFuZCB0aGUgZW52aXJvbm1lbnQgYmVjb21l
-cyBpbmNyZWFzaW5nbHkgY2hhbGxlbmdpbmcuIFJlZCBibG9ja3MgYXBwZWFyLCBhY3RpbmcgYXMg
-b2JzdGFjbGVzIHRoYXQgaW5zdGFudGx5IGVuZCB5b3VyIHJ1biBpZiB0b3VjaGVkLiBUaGUgcGxh
-dGZvcm1zIHRoZW1zZWx2ZXMgd2lsbCBzdGFydCB0byBzaGlmdCBhbmQgbW92ZSwgYWRkaW5nIGFu
-b3RoZXIgbGF5ZXIgb2YgY29tcGxleGl0eSB0byB0aGUgZ2FtZS4NCg0KVGhlIGdhbWUgZW5kcyB3
-aGVuIHlvdXIgYmFsbCBmYWxscyBvZmYgdGhlIHBsYXRmb3JtLiBZb3VyIHNjb3JlIGlzIGRldGVy
-bWluZWQgYnkgdGhlIGRpc3RhbmNlIHlvdSB0cmF2ZWxsZWQgYmVmb3JlIHlvdXIgZGVtaXNlLiBU
-aGUgaGlnaGVyIHRoZSBzY29yZSwgdGhlIGJldHRlciEgVGhlIGdvYWwgaXMgdG8gY29uc3RhbnRs
-eSBpbXByb3ZlIHlvdXIgc2NvcmUsIHB1c2hpbmcgeW91cnNlbGYgdG8gc2VlIGp1c3QgaG93IGZh
-ciB5b3UgY2FuIGdvLg0KDQpUaXBzIGFuZCBUcmlja3MgZm9yIENvbnF1ZXJpbmcgdGhlIFNsb3Bl
-DQoNCldoaWxlIHRoZSBjb250cm9scyBhcmUgc2ltcGxlLCBtYXN0ZXJpbmcgU2xvcGUgcmVxdWly
-ZXMgcHJhY3RpY2UgYW5kIGEgZ29vZCB1bmRlcnN0YW5kaW5nIG9mIHRoZSBnYW1lJ3MgbWVjaGFu
-aWNzLiBIZXJlIGFyZSBhIGZldyB0aXBzIHRvIGhlbHAgeW91IGltcHJvdmUgeW91ciBnYW1lOg0K
-DQpTbW9vdGggTW92ZW1lbnRzIEFyZSBLZXk6IEF2b2lkIGplcmt5LCBwYW5pY2tlZCBtb3ZlbWVu
-dHMuIFNtYWxsLCBjb250cm9sbGVkIGFkanVzdG1lbnRzIGFyZSBmYXIgbW9yZSBlZmZlY3RpdmUg
-dGhhbiBsYXJnZSwgc3dlZXBpbmcgb25lcy4gVGhpbmsgbGVzcyBhYm91dCByZWFjdGluZyBhbmQg
-bW9yZSBhYm91dCBhbnRpY2lwYXRpbmcuDQpMb29rIEFoZWFkOiBUcnkgdG8gZm9jdXMgYSBsaXR0
-bGUgZnVydGhlciBkb3duIHRoZSBzbG9wZS4gQW50aWNpcGF0aW5nIHRoZSBuZXh0IHR1cm4gb3Ig
-Z2FwIHdpbGwgZ2l2ZSB5b3UgbW9yZSB0aW1lIHRvIHJlYWN0IGFuZCBhZGp1c3QgeW91ciB0cmFq
-ZWN0b3J5LiBUaGlzIGlzIGVhc2llciBzYWlkIHRoYW4gZG9uZSB3aGVuIHRoZSBzcGVlZCBpcyBo
-aWdoLCBidXQgaXQncyBhIGNydWNpYWwgc2tpbGwgdG8gZGV2ZWxvcC4NCkVtYnJhY2UgdGhlIE1v
-bWVudHVtOiBVbmRlcnN0YW5kIGhvdyB5b3VyIGJhbGwncyBtb21lbnR1bSBhZmZlY3RzIGl0cyBt
-b3ZlbWVudC4gTGVhcm4gaG93IHRvIHVzZSB0aGUgc2xpZ2h0IGN1cnZlIG9mIHRoZSBwbGF0Zm9y
-bXMgdG8geW91ciBhZHZhbnRhZ2UsIGVzcGVjaWFsbHkgd2hlbiBhcHByb2FjaGluZyB0aWdodCB0
-dXJucy4NCkRvbid0IEZlYXIgdGhlIEVkZ2VzOiBTb21ldGltZXMsIHRoZSBzYWZlc3Qgcm91dGUg
-aXMgdG8gcmlkZSBhbG9uZyB0aGUgZWRnZSBvZiB0aGUgcGxhdGZvcm0uIFRoaXMgYWxsb3dzIHlv
-dSB0byBtYWtlIHNtYWxsIGNvcnJlY3Rpb25zIGFuZCBhdm9pZCBwb3RlbnRpYWwgb2JzdGFjbGVz
-IGluIHRoZSBjZW50ZXIuDQpQcmFjdGljZSwgUHJhY3RpY2UsIFByYWN0aWNlOiBUaGVyZSdzIG5v
-IHN1YnN0aXR1dGUgZm9yIHByYWN0aWNlLiBUaGUgbW9yZSB5b3UgcGxheSwgdGhlIGJldHRlciB5
-b3UnbGwgYmVjb21lIGF0IGFudGljaXBhdGluZyB0aGUgY2hhbGxlbmdlcyBhbmQgcmVhY3Rpbmcg
-YWNjb3JkaW5nbHkuIERvbid0IGdldCBkaXNjb3VyYWdlZCBieSBlYXJseSBmYWlsdXJlcy4gRXZl
-cnlvbmUgc3RhcnRzIHNvbWV3aGVyZS4gWW91IGNhbiB2aXNpdCBTbG9wZSB0byBiZWdpbiBwcmFj
-dGljaW5nIQ0KTGVhcm4gZnJvbSBZb3VyIE1pc3Rha2VzOiBBbmFseXplIHlvdXIgZmFpbHVyZXMu
-IFdoYXQgY2F1c2VkIHlvdSB0byBmYWxsIG9mZiB0aGUgcGxhdGZvcm0/IFdlcmUgeW91IHRvbyBz
-bG93IHRvIHJlYWN0PyBEaWQgeW91IG1pc2p1ZGdlIHRoZSB0dXJuPyBVbmRlcnN0YW5kaW5nIHlv
-dXIgbWlzdGFrZXMgd2lsbCBoZWxwIHlvdSBhdm9pZCB0aGVtIGluIHRoZSBmdXR1cmUuDQpDb25j
-bHVzaW9uOiBUaGUgRW5kdXJpbmcgQXBwZWFsIG9mIGFuIEVuZGxlc3MgR2FtZQ0KDQpTbG9wZSBp
-c24ndCBhYm91dCBjb21wbGljYXRlZCBzdG9yeWxpbmVzLCBzdHVubmluZyBncmFwaGljcywgb3Ig
-aW50cmljYXRlIGNvbnRyb2xzLiBJdCdzIGFib3V0IHRoZSBwdXJlLCB1bmFkdWx0ZXJhdGVkIGNo
-YWxsZW5nZSBvZiBwdXNoaW5nIHlvdXIgc2tpbGxzIHRvIHRoZSBsaW1pdC4gSXQncyBhYm91dCB0
-aGUgc2F0aXNmYWN0aW9uIG9mIG1hc3RlcmluZyBhIHNlZW1pbmdseSBpbXBvc3NpYmxlIHRhc2su
-IEl0J3MgYWJvdXQgdGhlIGFkZGljdGl2ZSBsb29wIG9mIHBsYXlpbmcsIGZhaWxpbmcsIGxlYXJu
-aW5nLCBhbmQgaW1wcm92aW5nLiBBbmQgaXRzIGFjY2Vzc2libGUgbmF0dXJlIG1lYW5zIGFueW9u
-ZSBjYW4ganVtcCBpbiBhbmQgZXhwZXJpZW5jZSB0aGF0IHRocmlsbC4gU28sIGdvIGFoZWFkLCBn
-aXZlIGl0IGEgdHJ5LiBZb3UgbWlnaHQganVzdCBmaW5kIHlvdXJzZWxmIGhvb2tlZCBvbiB0aGUg
-ZW5kbGVzcyBkZWNsaW5lLiBUaGUgc2ltcGxlIGNvbnRyb2xzIGFuZCBjaGFsbGVuZ2luZyBnYW1l
-cGxheSBtYWtlIGl0IGEgc3RyYW5nZWx5IGFkZGljdGl2ZSBleHBlcmllbmNlLiBJdCdzIGEgdGVz
-dGFtZW50IHRvIHRoZSBpZGVhIHRoYXQgc29tZXRpbWVzLCB0aGUgc2ltcGxlc3QgZ2FtZXMgYXJl
-IHRoZSBtb3N0IGVuZ2FnaW5nLg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0Bs
-aXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1t
-LXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
+Use LIST_HEAD to initialize on stack list head. No intentional
+functional impact.
+
+Change generated with below coccinelle script:
+
+@@
+identifier name;
+@@
+- struct list_head name;
++ LIST_HEAD(name);
+... when != name
+- INIT_LIST_HEAD(&name);
+
+Signed-off-by: Jisheng Zhang <jszhang@kernel.org>
+---
+ drivers/dma-buf/heaps/system_heap.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/drivers/dma-buf/heaps/system_heap.c b/drivers/dma-buf/heaps/system_heap.c
+index 03c2b87cb111..6f8b7138ff56 100644
+--- a/drivers/dma-buf/heaps/system_heap.c
++++ b/drivers/dma-buf/heaps/system_heap.c
+@@ -409,7 +409,7 @@ static struct dma_buf *system_heap_allocate(struct dma_heap *heap,
+ 	struct dma_buf *dmabuf;
+ 	struct sg_table *table;
+ 	struct scatterlist *sg;
+-	struct list_head pages;
++	LIST_HEAD(pages);
+ 	struct page *page, *tmp_page;
+ 	int i, ret = -ENOMEM;
+ 
+@@ -423,7 +423,6 @@ static struct dma_buf *system_heap_allocate(struct dma_heap *heap,
+ 	buffer->len = len;
+ 	buffer->cc_shared = cc_shared;
+ 
+-	INIT_LIST_HEAD(&pages);
+ 	i = 0;
+ 	while (size_remaining > 0) {
+ 		/*
+-- 
+2.53.0
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
