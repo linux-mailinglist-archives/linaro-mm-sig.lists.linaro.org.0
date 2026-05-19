@@ -2,242 +2,294 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gIhAFuATDGoZVQUAu9opvQ
+	id OJTtDg0XDGoZVQUAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 May 2026 09:40:16 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 May 2026 09:53:49 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD99A579408
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 May 2026 09:40:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B06AA57976D
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 May 2026 09:53:48 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 21FB74096B
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 May 2026 07:40:14 +0000 (UTC)
-Received: from bali.collaboradmins.com (bali.collaboradmins.com [148.251.105.195])
-	by lists.linaro.org (Postfix) with ESMTPS id 57817406A1
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 19 May 2026 07:40:04 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 38FCA40964
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 May 2026 07:53:47 +0000 (UTC)
+Received: from SN4PR2101CU001.outbound.protection.outlook.com (mail-southcentralusazon11012016.outbound.protection.outlook.com [40.93.195.16])
+	by lists.linaro.org (Postfix) with ESMTPS id BA74A406A1
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 19 May 2026 07:53:37 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=collabora.com header.s=mail header.b=b+ErxVrl;
-	spf=pass (lists.linaro.org: domain of boris.brezillon@collabora.com designates 148.251.105.195 as permitted sender) smtp.mailfrom=boris.brezillon@collabora.com;
-	dmarc=pass (policy=none) header.from=collabora.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1779176402;
-	bh=NO+vmHISBoRKaTEO5YEriWd2N0PVf7URQEW8l+FSoO8=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=b+ErxVrlXKCkecAO2bHYWT0FIsQ8wkngnlnLu47VjLJ6VokhnGkDbm7/VpjxQrlrA
-	 HXvWuPEPLeBCE+Ax773X/jQPMd0I6LduOzKwcZ6w+RSMoolZQ3Aig7grTGPWB13KEa
-	 KmhggnjGaaLgCRMkaF+59OxtYi7OxX1JZh9fNZ1xsaEoBlohsIE1OTyDL68CWgePtL
-	 6bQANazMuJoc1FLZy+POcxeFfDUVI3w3qH+EkPitqDCpOrLJlfLrHypH49lr4OMN5N
-	 WQs13+tY7qL4rpsCc8EI0nTs2oq/6G2VcDQ+oxWIndbicyXemIrDQsRy1iqQxY0+7R
-	 Pze5fS6GT+gZw==
-Received: from fedora (unknown [100.64.0.11])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: bbrezillon)
-	by bali.collaboradmins.com (Postfix) with ESMTPSA id 4242817E05E5;
-	Tue, 19 May 2026 09:40:01 +0200 (CEST)
-Date: Tue, 19 May 2026 09:39:55 +0200
-From: Boris Brezillon <boris.brezillon@collabora.com>
-To: Chia-I Wu <olvaffe@gmail.com>
-Message-ID: <20260519093955.448ff899@fedora>
-In-Reply-To: <CAPaKu7R9ET767qc3eppBUfG2RAeyrg7E-gE0turgp-u_FU4+Vg@mail.gmail.com>
-References: <20260505140516.1372388-1-ketil.johnsen@arm.com>
-	<20260505140516.1372388-5-ketil.johnsen@arm.com>
-	<20260505181523.49a3d85c@fedora>
-	<afxVIuVVPisBQ9p_@e129842.arm.com>
-	<20260507135356.5428d50d@fedora>
-	<agMvb_jeRsO7tSS-@e142607>
-	<20260512161111.0cb7000e@fedora>
-	<agNJasayW8VCHTiU@e142607>
-	<CAPaKu7QC7FdjL6m_OSb+E5aYKs6bmT-9DAHc5PC=XctCmRph2Q@mail.gmail.com>
-	<20260518091650.5a7a4f4a@fedora>
-	<CAPaKu7R9ET767qc3eppBUfG2RAeyrg7E-gE0turgp-u_FU4+Vg@mail.gmail.com>
-Organization: Collabora
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-redhat-linux-gnu)
+	dkim=pass header.d=amd.com header.s=selector1 header.b=aXBYR2TS;
+	arc=reject ("signature check failed: fail, {[1] = sig:microsoft.com:reject}");
+	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.93.195.16 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
+	dmarc=pass (policy=quarantine) header.from=amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=C47NOUgzALBfz0G8PfzauSOb/yWfHD4bI+kRvS4ogba7hwJF2nibpnz/PRctzgr4ZyoXdeHsPS9Yg4q2K9CQlP6tXyziWcxQOoxcUP4Q1n9GUESoiXHUSyxy+hPVgRS8yGe3oYWpxiWD3s8b3F8xLzkz5pqxuTLGSYveIBDZ/LONtlt0MvU/JjBM7rPmy3XGExY+W2jteKch//adhrwhGa0KS2ufiQycm70lWnIujBMlrHDijYStO5P1dHgg1GHR9tDuYwfSVcCMZvu9ptvrkosVxCl2np7DfIYGmhnuDiTH+dFqTH+OOq/dXmvu89MmJXRyTtHHLOB1d5HHsx9reg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=QcTGYPJyddA/87hdIBe9DbOLClP63BESwxE1z6U6qqM=;
+ b=NFAVMv826SgnPgqwrkZqcIvU9fcSqYXwvzGfm4GkfdiDFUbxNWbTYvNRahfUluh4MfdTe2nC/Et5ECAUZBQeYbfE0/ZRXwTgp+t5/bdFPi7oH0aOXwHUgIDb7hQ9sJ6YqHdbw1/VIqG0+ZAtr8+F7b9cooTmpELjR4Ld/OZuaIYu+5jvkvaq6DmhEqpI7PNAaWPKNq56+IghnWo9c+jOHxc14BxxzeGMFXbH88UkqcuYevRNOxUip1VH4uZZWM8PDFG7W97Vyz0ww+MjZCM/fo6MN2VDGFajql6ZWnSYlQ4VhP/cdVanEb1RW6vU5ukPolPGZQQycucl9m+dDQvKhA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=QcTGYPJyddA/87hdIBe9DbOLClP63BESwxE1z6U6qqM=;
+ b=aXBYR2TS1RROtj2D0au1VJy5cKdeYY7yPq6ta49MvxDFoW2isVh7OPtvZKALEonjsit7IWW4jxToy5DeUwb/lqwwo2+fGTRe8zxqa33eje/356qXv+1EibXyWJAk1x7mzvKCmK2849V/zDvqa7ebl+DvHWvzQRcdEQndVuk6yEc=
+Received: from PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
+ by SJ0PR12MB7067.namprd12.prod.outlook.com (2603:10b6:a03:4ae::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.14; Tue, 19 May
+ 2026 07:53:29 +0000
+Received: from PH7PR12MB5685.namprd12.prod.outlook.com
+ ([fe80::ce69:cfae:774d:a65c]) by PH7PR12MB5685.namprd12.prod.outlook.com
+ ([fe80::ce69:cfae:774d:a65c%5]) with mapi id 15.21.0025.022; Tue, 19 May 2026
+ 07:53:29 +0000
+Message-ID: <9cc79977-9a42-40eb-bfa7-460881c1e10f@amd.com>
+Date: Tue, 19 May 2026 09:53:19 +0200
+User-Agent: Mozilla Thunderbird
+To: Albert Esteve <aesteve@redhat.com>
+References: <20260512-v2_20230123_tjmercier_google_com-v1-0-6326701c3691@redhat.com>
+ <20260512-v2_20230123_tjmercier_google_com-v1-2-6326701c3691@redhat.com>
+ <8ef38815-6ae9-4359-86d4-042554357639@amd.com>
+ <CABdmKX2uwZ12kYJYPJGfWxuMBOJS=64b1GRj72tfB5D=NKM22w@mail.gmail.com>
+ <CADSE00Jq_uvNgvxgPze0mEdUd+hF4-DPZkHy0KroWHZzygf4WA@mail.gmail.com>
+ <CABdmKX3DhejYBis9htLDnzPrG7vuF3R3URLVNEbnyd61SSsx=g@mail.gmail.com>
+ <CAGsJ_4zyecY6E-=Tm4_couT7uoM9LMcFdTMUPkZAjj4zUKE-dQ@mail.gmail.com>
+ <cb84c2ee-9de1-4565-b2e0-60984721228f@amd.com>
+ <CADSE00Lc42s2bzXzV5D7t1Enf56u4BVj-yXLp3Yxhm0=qMPvuw@mail.gmail.com>
+Content-Language: en-US
+From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+In-Reply-To: <CADSE00Lc42s2bzXzV5D7t1Enf56u4BVj-yXLp3Yxhm0=qMPvuw@mail.gmail.com>
+X-ClientProxiedBy: FR4P281CA0309.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:f6::6) To PH7PR12MB5685.namprd12.prod.outlook.com
+ (2603:10b6:510:13c::22)
 MIME-Version: 1.0
-X-Spamd-Bar: ---
-Message-ID-Hash: 3NN7CHLXNZ4HCXNFGKFYUHGBXRS3JCD3
-X-Message-ID-Hash: 3NN7CHLXNZ4HCXNFGKFYUHGBXRS3JCD3
-X-MailFrom: boris.brezillon@collabora.com
-X-Mailman-Rule-Hits: member-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
-CC: Liviu Dudau <liviu.dudau@arm.com>, Marcin =?UTF-8?B?xZpsdXNhcno=?= <marcin.slusarz@arm.com>, Ketil Johnsen <ketil.johnsen@arm.com>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Steven Price <steven.price@arm.com>, Daniel Almeida <daniel.almeida@collabora.com>, Alice Ryhl <aliceryhl@google.com>, Matthias Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, lin
- ux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, Florent Tomasin <florent.tomasin@arm.com>, nd@arm.com
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|SJ0PR12MB7067:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2afa463c-406f-4c66-c463-08deb57bb6d1
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|1800799024|376014|7416014|366016|3023799003|56012099003|22082099003|18002099003|4143699003|11063799003;
+X-Microsoft-Antispam-Message-Info: 
+	IOe1jomYCeJ1l4P9ZTKYM8vM7bZTWJKmIBdDvTmJLW+TGJjEjFIa40HVPgcohH8GT9HsxsAZcBBJaThIElUM8C4nkRnhUtwOLmicloq55YiUWm6sQ73ro94k/3I5YnzW/MN53WRjp9pX87aJHqgZqfZ84mKHJmgMAhg7Swoo7OXq0Wud/leHc7ROMaUKt5VkH5+QwPmBVvXAWG9BC+ldN0MwHooR9yeQ8K/gIXZnZc/q9xK7BPWTUrMjuRbbwNcTQeKaTx/UgOP7cNNoWXD5+l6skntTbDUajGVfAjLPIFSw3GMp9F2K6MkgVbvv7FrQWbUZ0cUznVmRqEUwLI1PlDbHRFMfbOUX0avg/h2x9U2pWdZlMVTmjnxnSzMeySdXe0g+XvyZccNfccZ70zIAgj10jvZy9eVJFefw+hhcBzBrZBgN67oZ1bP15x0mzubl1tWAz0u/BDDp9c1r0bJgD33Cz0/E33eDmf7l/BLLJubHphtWo8SExM5Mk1nQAfpT3kl4YpczlY/Ri3pdjVFx0dz/sxecehDAZwk2bXMJEqJhZccGbRpJaKwU47xJtwiaMHTaxG/yiDBtL4DMCgVO8+gGRQKBgMeeyRIbXKhKdlBK90cBZPyRJfgyxjnSzL9osDXUg7qfwMBF7DLdy0cZGElalh7TQO9qcO0sKgyPRIx21EQhGd0sZd8yY3gvx8rn+4HjhuA2M2Pc84iiArDTgg==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB5685.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(7416014)(366016)(3023799003)(56012099003)(22082099003)(18002099003)(4143699003)(11063799003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?N0ZoaHhlbjhCYWF4RUxJWDV6dGY3VVRXSStXc1NzY1ZXdVI2L2NBSlIwZVRJ?=
+ =?utf-8?B?NlJ1bVRoNWlzVkxiUkJVZ0xxa3BXa1ZvS1hTTUM1WEtobmhSa04vQ1F5VzM5?=
+ =?utf-8?B?VU02MzRCc21BSGkyY3dWc1dBUjRqdjlNZGUrRFJQMEZwV211Y2ltN0RsL3Yy?=
+ =?utf-8?B?U2tQa21JQ1BWbjNxejdRKzEySm84dDk0N0h4TXk1ZHR6Y3pkK3JVcjN6RHhE?=
+ =?utf-8?B?MFFaVkJUVmgxWDQvV2F0emFHTGVRVmp2VmlmY2ZtNDRaclpoV3VnTkVzRFBr?=
+ =?utf-8?B?REhBRkZZK1Rrc2FsSDc0VkJhS3JGWjdqS1lRYlBtdEVKR0RtV3ZJNUU4b1dX?=
+ =?utf-8?B?bWQyRVgzcGJlR0lEMHl1b05IUzZ4bTNCVmxBQWFlVzlwYTZKRTdVS1ZzZEJo?=
+ =?utf-8?B?eWxvaWs1dEtwKytIRmRISFR4SnhhbGdQSVRwNHRBUmlWbmFhVnhkbmdaN0RH?=
+ =?utf-8?B?NklUNjlRMnFRM0xTb0ptcU9IY01iSWltVHVLMEduMmdubkd0aUMvN2NkeUtE?=
+ =?utf-8?B?ZFZzSCtqRDlmdVFxTk00ZnAvR2xBYlBxM21hUUN6UDlUT2E3UkUzamtFTkEr?=
+ =?utf-8?B?enZoeEg0UlJHdU5MR050cm9odTlNQkNwdGtzNnZDU3RISmsyZ0pITWpWa2V4?=
+ =?utf-8?B?d1N5R2NoTXhvb25uemRCRkNwWCs5M0plUkhhdVU0aEhxQy9YU1JYc1ZPYjJh?=
+ =?utf-8?B?Rk41Y0JLN2ZSTU93RFFrOGhQb3d0R2dVKy9PZko3enk5aU1wTFVaN0QrVkJ3?=
+ =?utf-8?B?TnRuNWdSejU4V0JSWjBnbGpBZGkrUTk4WWFWak5sTnpMbmdzTTlOWWRjZnpO?=
+ =?utf-8?B?TzhIdTcwSUpOL1gyMFFlTGpIV3FGdndGTTZJTHJzd2trcHhneWRZbFBLaHpp?=
+ =?utf-8?B?ZlU1dkpmSFc4VGZiMHg4OUtNemtTbzgyWHZ6RzdjRG9MTHJiRlZMWFRGbDhi?=
+ =?utf-8?B?VUdpODc1MDRUbFhUMHBob2Q2QWRDTytRTEE5bHVEeENpVkQrTFFrK282SGhX?=
+ =?utf-8?B?R0VQTHl0S2J4YVYrdjUzSnd5MFNKOWxsa1FucUl4aDhxY1ZmMFJWVFZQeVdz?=
+ =?utf-8?B?ZzloVkFBZWtIY29NYWxJM21ZVnlSMG9vM0hOcFlKeFJrZk1uSnE1elkzYm1O?=
+ =?utf-8?B?Y2I4VWtFeTFEeWFxMitrY3FZRnFMbGJlMTdmWnB6SzRrMHFPY3hqUHFsSkhj?=
+ =?utf-8?B?aUltYzZSUFgzdUNzcVJIa1NvUFlJSldHM3RYUUpZU2FYNGtHK2RGcWRmeGF4?=
+ =?utf-8?B?RUsvdE9jQ2JzdHBnWUpvb3gwTVlJakNKSDhkSldVek1GSGUvYnVaaTROOHov?=
+ =?utf-8?B?UElOSGpHYWRyaUxkN0NBYWNaM09FZGhvQVVBR2N5L0RBU3crUHh3bDFxN1M5?=
+ =?utf-8?B?NDdqU2hBT3JYNkpvMEVDRzVQVmlZNC8rMC9RNlcrQzd0cWNBOXhKMnZBMDVj?=
+ =?utf-8?B?NkFwaEl3SEhMNTlPQUJCVXF0NkJKODZ1UnNtWG1sYys0UWhwR1VlSVlsQ2dH?=
+ =?utf-8?B?b1NsdGtIS2czR1NHTmowRGI4MjdldHIzb0R6RThtVmhXRU9CSXlMSlRWdVhu?=
+ =?utf-8?B?eW5UZVF3RXY4V0lzNU5xM29yenIxYXpoUG9PWjgySU5XeHh1bGYyZy9HNzVh?=
+ =?utf-8?B?WW1zSng3cEgyL2ljMzI1SDJuc3dXNU1zWlU4Tm1RdEY2RlVaaEMzc0tsSHZN?=
+ =?utf-8?B?dlA1VE9qbG1hSzNFeTNxV3NmS01neTJyY3FzbWpNelpTak9QVzZ5VEp1VEp1?=
+ =?utf-8?B?eVpDSWNoYXlFcUJHclA0V0tSVmtnR1BuMHZyUXBkVzgwSFBRT0IwY1RZNXMw?=
+ =?utf-8?B?Mm5Ka0FVSEV1cHVhZU5hbzNYQUYzaU9heHFaejNaVTFwd2M2cnhjdDg2b0xo?=
+ =?utf-8?B?dysrZHZtbXljSmVPQ2FGWTFNSEtJcUx3L3g3Rlp4Vm9nazRtR0puVFRWVFRy?=
+ =?utf-8?B?LzBsVVhBcUd1OU1pNGg5Yk5RbmtJZ2NjSkJyVVg0bTBpRTQ5SXpiaEdzT2RE?=
+ =?utf-8?B?dXNwWUtGRndiMThmVlR3bzc4RGJEb2gvV1hBK05xQ3RLNkpSenNad1MwZDBx?=
+ =?utf-8?B?c25haU9hK0lqcGVOU3cvaHdkeXRMYzhwajJWTzhtZnRLMWxTSW80YWhacDFm?=
+ =?utf-8?B?d09LZEw0a00vM2Nyak9rSUVoc2tvN0sxRzk3MkVSYVpkNTE0UVhOMmtDUllS?=
+ =?utf-8?B?RTN3RlN4dmNIcFN3eHFyUnFPbVNUZ0h5SUV0M2twMmFvQ2d3TkFjazJKUzdP?=
+ =?utf-8?B?MzZhdnppQnE5KzJ1U3d2TnRmdFBXWWJOZzRmSE1zOVh1bUQ3RWp5Mkp4dFNh?=
+ =?utf-8?Q?GEFllYyeNyi5uR292C?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2afa463c-406f-4c66-c463-08deb57bb6d1
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5685.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 May 2026 07:53:28.9599
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: lHKflGocT50PZGGGXfuV9j2328lwMnecTmWPNTA9XZje1JVfcupepggejSGFNoqF
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB7067
+X-Spamd-Bar: --
+Message-ID-Hash: 3RXLOFZZPIEGZPSMUB3FVYIQV24HX7UA
+X-Message-ID-Hash: 3RXLOFZZPIEGZPSMUB3FVYIQV24HX7UA
+X-MailFrom: Christian.Koenig@amd.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Barry Song <baohua@kernel.org>, "T.J. Mercier" <tjmercier@google.com>, Tejun Heo <tj@kernel.org>, Johannes Weiner <hannes@cmpxchg.org>, =?UTF-8?Q?Michal_Koutn=C3=BD?= <mkoutny@suse.com>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, Sumit Semwal <sumit.semwal@linaro.org>, Michal Hocko <mhocko@kernel.org>, Roman Gushchin <roman.gushchin@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>, Muchun Song <muchun.song@linux.dev>, Andrew Morton <akpm@linux-foundation.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, Christian Brauner <brauner@kernel.org>, Paul Moore <paul@paul-moore.com>, James Morris <jmorris@namei.org>, "Serge E. Hallyn" <serge@hallyn.com>, Stephen Smalley <stephen.smalley.work@gmail.com>, Ondrej Mosnacek <omosnace@redhat.com>, Shuah Khan <shuah@kernel.org>, cgroups@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel
+ .org, dri- <devel@lists.freedesktop.org>, linaro-mm-sig@lists.linaro.org, linux-mm@kvack.org, linux-security-module@vger.kernel.org, selinux@vger.kernel.org, linux-kselftest@vger.kernel.org, mripard@kernel.org, echanude@redhat.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 4/8] drm/panthor: Add support for protected memory allocation in panthor
+Subject: [Linaro-mm-sig] Re: [PATCH RFC 2/5] dma-heap: charge dma-buf memory via explicit memcg
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3NN7CHLXNZ4HCXNFGKFYUHGBXRS3JCD3/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3RXLOFZZPIEGZPSMUB3FVYIQV24HX7UA/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-X-Spamd-Result: default: False [2.69 / 15.00];
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [4.49 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[amd.com : SPF not aligned (relaxed),quarantine];
 	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[collabora.com:s=mail];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+mx];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
+	R_DKIM_REJECT(1.00)[amd.com:s=selector1];
 	MAILLIST(-0.20)[mailman];
-	DMARC_POLICY_SOFTFAIL(0.10)[collabora.com : SPF not aligned (relaxed),none];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	ARC_NA(0.00)[];
-	HAS_ORG_HEADER(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
-	RCPT_COUNT_TWELVE(0.00)[31];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FREEMAIL_CC(0.00)[arm.com,gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de,lwn.net,linuxfoundation.org,linaro.org,collabora.com,google.com,amd.com,lists.freedesktop.org,vger.kernel.org,lists.linaro.org,lists.infradead.org];
-	DKIM_TRACE(0.00)[collabora.com:-];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[boris.brezillon@collabora.com,linaro-mm-sig-bounces@lists.linaro.org];
+	RCPT_COUNT_TWELVE(0.00)[36];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	GREYLIST(0.00)[pass,meta];
+	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[kernel.org,google.com,cmpxchg.org,suse.com,lwn.net,linuxfoundation.org,linaro.org,linux.dev,linux-foundation.org,collabora.com,arm.com,paul-moore.com,namei.org,hallyn.com,gmail.com,redhat.com,vger.kernel.org,vger.kernel,lists.freedesktop.org,lists.linaro.org,kvack.org];
+	DKIM_TRACE(0.00)[amd.com:-];
+	MID_RHS_MATCH_FROM(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[christian.koenig@amd.com,linaro-mm-sig-bounces@lists.linaro.org];
 	TO_DN_SOME(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[arm.com:email,collabora.com:email,linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo]
-X-Rspamd-Queue-Id: BD99A579408
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,amd.com:mid,linaro.org:email]
+X-Rspamd-Queue-Id: B06AA57976D
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-T24gTW9uLCAxOCBNYXkgMjAyNiAxNzozNjo0MCAtMDcwMA0KQ2hpYS1JIFd1IDxvbHZhZmZlQGdt
-YWlsLmNvbT4gd3JvdGU6DQoNCj4gT24gTW9uLCBNYXkgMTgsIDIwMjYgYXQgMTI6MTbigK9BTSBC
-b3JpcyBCcmV6aWxsb24NCj4gPGJvcmlzLmJyZXppbGxvbkBjb2xsYWJvcmEuY29tPiB3cm90ZToN
-Cj4gPg0KPiA+IE9uIFdlZCwgMTMgTWF5IDIwMjYgMTI6MzE6MzIgLTA3MDANCj4gPiBDaGlhLUkg
-V3UgPG9sdmFmZmVAZ21haWwuY29tPiB3cm90ZToNCj4gPiAgDQo+ID4gPiBPbiBUdWUsIE1heSAx
-MiwgMjAyNiBhdCA4OjM54oCvQU0gTGl2aXUgRHVkYXUgPGxpdml1LmR1ZGF1QGFybS5jb20+IHdy
-b3RlOiAgDQo+ID4gPiA+DQo+ID4gPiA+IE9uIFR1ZSwgTWF5IDEyLCAyMDI2IGF0IDA0OjExOjEx
-UE0gKzAyMDAsIEJvcmlzIEJyZXppbGxvbiB3cm90ZTogIA0KPiA+ID4gPiA+IE9uIFR1ZSwgMTIg
-TWF5IDIwMjYgMTQ6NDc6MjcgKzAxMDANCj4gPiA+ID4gPiBMaXZpdSBEdWRhdSA8bGl2aXUuZHVk
-YXVAYXJtLmNvbT4gd3JvdGU6DQo+ID4gPiA+ID4gIA0KPiA+ID4gPiA+ID4gT24gVGh1LCBNYXkg
-MDcsIDIwMjYgYXQgMDE6NTM6NTZQTSArMDIwMCwgQm9yaXMgQnJlemlsbG9uIHdyb3RlOiAgDQo+
-ID4gPiA+ID4gPiA+IE9uIFRodSwgNyBNYXkgMjAyNiAxMTowMjoyNiArMDIwMA0KPiA+ID4gPiA+
-ID4gPiBNYXJjaW4gxZpsdXNhcnogPG1hcmNpbi5zbHVzYXJ6QGFybS5jb20+IHdyb3RlOg0KPiA+
-ID4gPiA+ID4gPiAgDQo+ID4gPiA+ID4gPiA+ID4gT24gVHVlLCBNYXkgMDUsIDIwMjYgYXQgMDY6
-MTU6MjNQTSArMDIwMCwgQm9yaXMgQnJlemlsbG9uIHdyb3RlOiAgDQo+ID4gPiA+ID4gPiA+ID4g
-PiA+IEBAIC0yNzcsOSArMjg2LDIxIEBAIGludCBwYW50aG9yX2RldmljZV9pbml0KHN0cnVjdCBw
-YW50aG9yX2RldmljZSAqcHRkZXYpDQo+ID4gPiA+ID4gPiA+ID4gPiA+ICAgICAgICAgICAgICAg
-ICAgICAgcmV0dXJuIHJldDsNCj4gPiA+ID4gPiA+ID4gPiA+ID4gICAgIH0NCj4gPiA+ID4gPiA+
-ID4gPiA+ID4NCj4gPiA+ID4gPiA+ID4gPiA+ID4gKyAgIC8qIElmIGEgcHJvdGVjdGVkIGhlYXAg
-bmFtZSBpcyBzcGVjaWZpZWQgYnV0IG5vdCBmb3VuZCwgZGVmZXIgdGhlIHByb2JlIHVudGlsIGNy
-ZWF0ZWQgKi8NCj4gPiA+ID4gPiA+ID4gPiA+ID4gKyAgIGlmIChwcm90ZWN0ZWRfaGVhcF9uYW1l
-ICYmIHN0cmxlbihwcm90ZWN0ZWRfaGVhcF9uYW1lKSkgeyAgDQo+ID4gPiA+ID4gPiA+ID4gPg0K
-PiA+ID4gPiA+ID4gPiA+ID4gRG8gd2UgcmVhbGx5IG5lZWQgdGhpcyBzdHJsZW4oKSA+IDA/IFdv
-bid0IGRtYV9oZWFwX2ZpbmQoKSBmYWlsIGlzIHRoZQ0KPiA+ID4gPiA+ID4gPiA+ID4gbmFtZSBp
-cyAiIiBhbHJlYWR5PyAgDQo+ID4gPiA+ID4gPiA+ID4NCj4gPiA+ID4gPiA+ID4gPiBJZiBkbWFf
-aGVhcF9maW5kKCkgd2lsbCBmYWlsLCB0aGVuIHRoZSB3aG9sZSBwcm9iZSB3aXRoIGZhaWwgdG9v
-Lg0KPiA+ID4gPiA+ID4gPiA+IFRoaXMgY2hlY2sgcHJldmVudHMgdGhhdC4gIA0KPiA+ID4gPiA+
-ID4gPg0KPiA+ID4gPiA+ID4gPiBZZWFoLCB0aGF0J3MgYWxzbyBhIHF1ZXN0aW9uYWJsZSBkZXNp
-Z24gY2hvaWNlLiBJIG1lYW4sIHdlIGNhbg0KPiA+ID4gPiA+ID4gPiBjdXJyZW50bHkgcHJvYmUg
-YW5kIGJvb3QgdGhlIEZXIGV2ZW4gdGhvdWdoIHdlIG5ldmVyIHNldHVwIHRoZQ0KPiA+ID4gPiA+
-ID4gPiBwcm90ZWN0ZWQgRlcgc2VjdGlvbnMsIHNvIHdoeSBzaG91bGQgd2UgZGVmZXIgdGhlIHBy
-b2JlIGhlcmU/IENhbid0IHdlDQo+ID4gPiA+ID4gPiA+IGp1c3QgcmV0cnkgdGhlIG5leHQgdGlt
-ZSBhIGdyb3VwIHdpdGggdGhlIHByb3RlY3RlZCBiaXQgaXMgY3JlYXRlZCBhbmQNCj4gPiA+ID4g
-PiA+ID4gZmFpbCBpZiB3ZSBjYW4gZmluZCBhIHByb3RlY3RlZCBoZWFwPyAgDQo+ID4gPiA+ID4g
-Pg0KPiA+ID4gPiA+ID4gVGhlIHByb2JsZW0gd2UgaGF2ZSB3aXRoIHRoZSBjdXJyZW50IGZpcm13
-YXJlIGlzIHRoYXQgaXQgZG9lcyBhIG51bWJlciBvZiBzZXR1cCBzdGVwcyBhdCAiYm9vdCINCj4g
-PiA+ID4gPiA+IHRpbWUgb25seS4gT25lIG9mIHRoZSBzdGVwcyBpcyBwcmVwYXJpbmcgaXRzIGlu
-dGVybmFsIHN0cnVjdHVyZXMgZm9yIHdoZW4gaXQgZW50ZXJzIHByb3RlY3RlZA0KPiA+ID4gPiA+
-ID4gbW9kZSBhbmQgaXQgc3RvcmVzIHRoZW0gaW4gdGhlIGJ1ZmZlciBwYXNzZWQgaW4gYXQgZmly
-bXdhcmUgbG9hZGluZy4gV2UgY2Fubm90IGxhdGVyIHJ1biB0aGUNCj4gPiA+ID4gPiA+IHByb2Nl
-c3Mgd2hlbiB3ZSBoYXZlIGEgZ3JvdXAgd2l0aCBwcm90ZWN0ZWQgbW9kZSBzZXQuICANCj4gPiA+
-ID4gPg0KPiA+ID4gPiA+IE5vLCBidXQgd2UgY2FuIGZvcmNlIGEgZnVsbC9zbG93IHJlc2V0IGFu
-ZCBoYXZlIHRoYXQgdGhpbmcNCj4gPiA+ID4gPiByZS1pbml0aWFsaXplZCwgY2FuJ3Qgd2U/IEkg
-bWVhbiwgdGhhdCdzIGJhc2ljYWxseSB3aGF0IHdlIGRvIHdoZW4gYQ0KPiA+ID4gPiA+IGZhc3Qg
-cmVzZXQgZmFpbHM6IHdlIHJlLWluaXRpYWxpemUgYWxsIHRoZSBzZWN0aW9ucyBhbmQgcmVzZXQg
-YWdhaW4sIGF0DQo+ID4gPiA+ID4gd2hpY2ggcG9pbnQgdGhlIEZXIHNob3VsZCBzdGFydCBmcm9t
-IGEgZnJlc2ggc3RhdGUsIGFuZCBiZSBhYmxlIHRvDQo+ID4gPiA+ID4gcHJvcGVybHkgaW5pdGlh
-bGl6ZSB0aGUgcHJvdGVjdGVkLXJlbGF0ZWQgc3R1ZmYgaWYgcHJvdGVjdGVkIHNlY3Rpb25zDQo+
-ID4gPiA+ID4gYXJlIHBvcHVsYXRlZC4gQW0gSSBtaXNzaW5nIHNvbWV0aGluZz8gIA0KPiA+ID4g
-Pg0KPiA+ID4gPiBSaWdodCwgd2UgY2FuIGRvIHRoYXQuIEZvciBzb21lIHJlYXNvbiBJIGtlZXAg
-YXNzb2NpYXRpbmcgdGhlIHJlc2V0IHdpdGggdGhlDQo+ID4gPiA+IGVycm9yIGhhbmRsaW5nIGFu
-ZCBub3Qgd2l0aCAibm9ybWFsIiBvcGVyYXRpb25zLiAgDQo+ID4gPiBJIGtpbmQgb2YgaG9wZSB3
-ZSBlbmQgdXAgd2l0aCBlaXRoZXINCj4gPiA+DQo+ID4gPiAgLSBwYW50aG9yIGtub3dzIHRoZSBl
-eGFjdCBoZWFwIHRvIHVzZSBhbmQgZmFpbHMgd2l0aCBFUFJPQkVfREVGRVIgaWYNCj4gPiA+IHRo
-ZSBoZWFwIGlzIG1pc3NpbmcsIG9yDQo+ID4gPiAgLSBwYW50aG9yIGdldHMgYSBkbWEtYnVmIGZy
-b20gdXNlcnNwYWNlIGFuZCBkb2VzIHRoZSBmdWxsIHJlc2V0DQo+ID4gPiAgICAtIHVzZXJzcGFj
-ZSBhbHNvIG5lZWRzIHRvIHByb3ZpZGUgYSBkbWEtYnVmIGZvciBlYWNoIHByb3RlY3RlZA0KPiA+
-ID4gZ3JvdXAgZm9yIHRoZSBzdXNwZW5kIGJ1ZmZlcg0KPiA+ID4NCj4gPiA+IHRoYW4gc29tZXRo
-aW5nIGluLWJldHdlZW4uIFRoZSBsYXR0ZXIgaXMgbW9yZSBhZC1ob2MgYW5kIGJhc2ljYWxseQ0K
-PiA+ID4ga2lja3MgdGhlIGlzc3VlIHRvIHRoZSB1c2Vyc3BhY2UuICANCj4gPg0KPiA+IEluZGVl
-ZCwgdGhlIHNlY29uZCBvcHRpb24gaXMgbW9yZSBhZC1ob2MsIGJ1dCB3aGVuIHlvdSB0aGluayBh
-Ym91dCBpdCwNCj4gPiB1c2Vyc3BhY2UgaGFzIHRvIGhhdmUgdGhpcyBrbm93bGVkZ2UsIGJlY2F1
-c2UgaXQgbmVlZHMgdG8ga25vdyB0aGUNCj4gPiBkbWEtaGVhcCB0byB1c2UgZm9yIGJ1ZmZlciBh
-bGxvY2F0aW9uIHRoYXQgY3Jvc3MgYSBkZXZpY2UgYm91bmRhcnkNCj4gPiBhbnl3YXkuIFRoaW5r
-IGFib3V0IGZyYW1lcyBwcm9kdWNlZCBieSBhIHZpZGVvIGRlY29kZXIsIGFuZCBjb21wb3NpdGVk
-DQo+ID4gYnkgdGhlIEdQVSBpbnRvIGEgcHJvdGVjdGVkIHNjYW5vdXQgYnVmZmVyIHRoYXQncyBw
-YXNzZWQgdG8gdGhlIEtNUw0KPiA+IGRldmljZS4gV2h5IHdvdWxkIHRoZSBHUFUgZHJpdmVyIGJl
-IHNvdXJjZSBvZiB0cnV0aCB3aGVuIGl0IGNvbWVzIHRvDQo+ID4gY2hvb3NpbmcgdGhlIGhlYXAg
-dG8gdXNlIHRvIGFsbG9jYXRlIHByb3RlY3RlZCBidWZmZXJzIGZvciB0aGUgdmlkZW8NCj4gPiBk
-ZWNvZGVyIG9yIHRob3NlIHVzZWQgZm9yIHRoZSBkaXNwbGF5PyAgDQo+IEkgZG9uJ3QgdGhpbmsg
-dGhlIEdQVSBkcml2ZXIgaXMgZXZlciB0aGUgc291cmNlIG9mIHRydXRoLiBJZiB0aGUNCj4gc3lz
-dGVtIGludGVncmF0b3Igd2FudHMgdG8gc3BlY2lmeSB0aGUgc291cmNlIG9mIHRydXRoIChTb1Qp
-IGZyb20NCj4ga2VybmVsIHNwYWNlLCB0aGV5IHNob3VsZCB1c2UgdGhlIGRldmljZSB0cmVlIChv
-ciBtb2R1bGUgcGFyYW1zIC8NCj4gY29uZmlnIG9wdGlvbnMpLiBJZiB0aGV5IHdhbnQgdG8gc3Bl
-Y2lmeSB0aGUgU29UIGluIHVzZXJzcGFjZSwgdGhlbiB3ZQ0KPiBkb24ndCByZWFsbHkgY2FyZSBo
-b3cgaXQgaXMgZG9uZSBvdGhlciB0aGFuIHByb3ZpZGluZyBhbiBpb2N0bC4NCj4gUGFudGhvciBp
-cyBhbHdheXMgb24gdGhlIHJlY2VpdmluZyBlbmQuDQoNCk9rYXksIHdlJ3JlIG9uIHRoZSBzYW1l
-IHBhZ2UgdGhlbi4NCg0KPiANCj4gSWYgd2UgZG9uJ3Qgd2FudCB0byBkZWxheSB0aGlzIGZ1bmN0
-aW9uYWxpdHksIGJ1dCBpdCB0YWtlcyB0aW1lIHRvDQo+IGNvbnZlcmdlIG9uIFNvVCwgbWF5YmUg
-YSBzb2x1dGlvbiB0aGF0IGlzIG5vdCBhIGxvbmctdGVybSBwcm9taXNlIGNhbg0KPiB3b3JrPyBP
-ZiB0aGUgb3B0aW9ucyBvbiB0aGUgdGFibGUgKGR0LCBtb2R1bGUgcGFyYW1zLCBrY29uZmlnIG9w
-dGlvbnMsDQo+IGlvY3RscyksIGEga2NvbmZpZyBvcHRpb24sIHBvdGVudGlhbGx5IG1hcmtlZCBh
-cyBleHBlcmltZW50YWwsIHNlZW1zDQo+IGxpa2UgYSBnb29kIGNhbmRpZGF0ZS4NCg0KSWYgUGFu
-dGhvciBpcyBvbmx5IGEgY29uc3VtZXIsIEkgYWN0dWFsbHkgdGhpbmsgaXQnZCBiZSBlYXNpZXIg
-dG8ganVzdA0KbGV0IHVzZXJzcGFjZSBwYXNzIHRoZSBwcm90ZWN0ZWQgRlcgc2VjdGlvbiBhcyBh
-biBpbXBvcnRlZCBidWZmZXINCnRocm91Z2ggYW4gaW9jdGwgZm9yIG5vdy4gSXQgbWVhbnMgd2Ug
-ZG9uJ3QgbmVlZCBhbnkgb2YgdGhlDQptb2RpZmljYXRpb25zIHRvIHRoZSBkbWFfaGVhcCBBUEkg
-aW4gdGhpcyBzZXJpZXMsIGFuZCB1c2Vyc3BhY2UgaXMgZnJlZQ0KdG8gY2hvb3NlIGl0cyBTb1Qg
-KGVmdXNlLCBEVCwgLi4uKSBhbmQgcGFzcyB0aGUgaW5mbyBiYWNrIHRvIG1lc2EvR0JNDQpzb21l
-aG93IChlbnZ2YXIsIGRyaWNvbmYsIC4uLikuIFRoZSBvbmx5IHRoaW5nIHdlIG5lZWQgdG8gZW5z
-dXJlIGlzIGlmDQpsYXp5IHByb3RlY3RlZCBGVyBzZWN0aW9uIGFsbG9jYXRpb24gaXMgZ29pbmcg
-dG8gd29yaywgYnV0IGdpdmVuIHRoZQ0KY3VycmVudCBjb2RlIHB1cmVseSBhbmQgc2ltcGx5IGln
-bm9yZXMgdGhvc2Ugc2VjdGlvbnMsIGFuZCB0aGUgRlcgaXMNCnN0aWxsIGFibGUgdG8gYm9vdCBh
-bmQgYWN0IHByb3Blcmx5IChhdCBsZWFzdCBvbiB2MTAtdjEzKSwgSSdtIHByZXR0eQ0KY29uZmlk
-ZW50IHRoaXMgaXMgb2theSwgdW5sZXNzIHRoZXJlJ3Mgc29tZSB0cmljayB0aGUgTUNVIGNhbiBk
-byB0bw0KZGV0ZWN0IHRoYXQgdGhlIHByb3RlY3RlZCBzZWN0aW9uIGlzbid0IG1hcHBlZCAod2hp
-Y2ggSSBkb3VidCwgYmVjYXVzZQ0KdGhlIE1DVSBkb2Vzbid0IGtub3cgaXQgbGl2ZXMgYmVoaW5k
-IGFuIE1NVSkuDQoNCk9mIGNvdXJzZSwgb25jZSB3ZSBoYXZlIGEgY29uc2Vuc3VzIG9uIGhvdyB0
-byBkZXNjcmliZSB0aGlzIGluIHRoZSBEVCwNCndlIGNhbiBzd2l0Y2ggUGFudGhvciBvdmVyIHRv
-ICJwcm90ZWN0ZWQgZG1hX2hlYXAgc2VsZWN0aW9uIHRocm91Z2ggRFQiLA0KYW5kIHJlZmxlY3Qg
-dGhhdCB0aHJvdWdoIHRoZSBpb2N0bCB0aGF0IGV4cG9zZXMgd2hldGhlciBwcm90ZWN0ZWQNCnN1
-cHBvcnQgaXMgcmVhZHkgb3Igbm90ICh3b3VsZCBiZSBhIERFVl9RVUVSWSksIHN1Y2ggdGhhdCB1
-c2Vyc3BhY2UgY2FuDQpza2lwIHRoaXMgIlBST1RNIGluaXRpYWxpemF0aW9uIiBzdGVwLg0KDQpX
-ZSdyZSB0YWxraW5nIGFib3V0IGFuIGV4dHJhIGlvY3RsIHRvIHNldCB0aG9zZSBidWZmZXJzLCBh
-bmQgYQ0KREVWX1FVRVJZIHRvIHF1ZXJ5IHRoZSBzdGF0ZSAocmVhZHkgb3Igbm90KSwgdGhlIHNp
-emUgb2YgdGhlIGdsb2JhbA0KcHJvdGVjdGVkIGJ1ZmZlciAocHJvdGVjdGVkIEZXIHNlY3Rpb24p
-IGFuZCB0aGUgc2l6ZSBvZiB0aGUgcHJvdGVjdGVkDQpzdXNwZW5kIGJ1ZmZlci4gVGhlIHByb3Rl
-Y3RlZCBzdXNwZW5kIGJ1ZmZlciB3b3VsZCBiZSBhbGxvY2F0ZWQgYW5kDQpwYXNzZWQgYXQgZ3Jv
-dXAgY3JlYXRpb24gdGltZSAoZXh0cmEgYXJnIHBhc3NlZCB0byB0aGUgZXhpc3RpbmcNCkdST1VQ
-X0NSRUFURSBpb2N0bCkuIFNvLCBvdmVyYWxsLCBJIGRvbid0IGNvbnNpZGVyIGl0IGEgaHVnZSBs
-aWFiaWxpdHkNCmluIHRlcm0gb2YgbWFpbnRlbmFuY2UgY29zdC4NCg0KPiANCj4gPiAgDQo+ID4g
-Pg0KPiA+ID4gRm9yIHRoZSBmb3JtZXIsIGV4cHJlc3NpbmcgdGhlIHJlbGF0aW9uIGluIERUIHNl
-ZW1zIHRvIGJlIHRoZSBiZXN0LA0KPiA+ID4gYnV0IG9ubHkgaWYgcG9zc2libGUgOi0pLiBPdGhl
-cndpc2UsIGEga2NvbmZpZyBvcHRpb24gKGluc3RlYWQgb2YNCj4gPiA+IG1vZHVsZSBwYXJhbSkg
-c2hvdWxkIGJlIGVhc2llciB0byB3b3JrIHdpdGguDQo+ID4gPg0KPiA+ID4gTG9va2luZyBhdCB0
-aGUgdXNlcnNwYWNlIGltcGxlbWVudGF0aW9uLCBjYW4gd2UgYWxzbyBoYXZlIGFuIHBhbnRob3IN
-Cj4gPiA+IGlvY3RsIHRvIHJldHVybiB0aGUgaGVhcCB0byB1c2Vyc3BhY2U/ICANCj4gPg0KPiA+
-IFllcywgaXQncyBzb21ldGhpbmcgd2UgY2FuIGFkZCwgYnV0IGFnYWluLCBJJ20gcXVlc3Rpb25p
-bmcgdGhlDQo+ID4gdXNlZnVsbmVzcyBvZiB0aGlzOiBob3cgY2FuIHdlIGVuc3VyZSB0aGUgaGVh
-cCB1c2VkIGJ5IHBhbnRob3IgdG8NCj4gPiBhbGxvY2F0ZSBpdHMgcHJvdGVjdGVkIEZXIGJ1ZmZl
-cnMgaXMgc3VpdGFibGUgZm9yIHNjYW5vdXQgYnVmZmVycw0KPiA+IChidWZmZXJzIHRoYXQgY2Fu
-IGJlIHVzZWQgYnkgZGlzcGxheSBkcml2ZXJzKS4gVGhlcmUgbmVlZHMgdG8gYmUgYSBnbHVlDQo+
-ID4gbGVhdmluZyBpbiB1c2Vyc2xhbmQgYW5kIHRha2luZyB0aGUgZGVjaXNpb24sIGFuZCBJJ20g
-bm90IHRvbyBzdXJlDQo+ID4gdHJ1c3RpbmcgYW55IG9mIHRoZSBjb21wb25lbnQgaW4gdGhlIGNo
-YWluICh2ZGVjLCBncHUsIGRpc3BsYXkpIGlzIHRoZQ0KPiA+IHJpZ2h0IHRoaW5nIHRvIGRvLiAg
-DQo+IFRoZSBoZWFwIHJldHVybmVkIGJ5IHBhbnRob3IgaXMgb25seSBmb3IgcGFuZnJvc3QvcGFu
-dmsuIEl0IHNheXMNCj4gbm90aGluZyBhYm91dCBjb21wYXRpYmlsaXR5IHdpdGggb3RoZXIgY29t
-cG9uZW50cyBvbiB0aGUgc3lzdGVtLg0KDQpPa2F5LCBpZiBpdCdzIHVzZWQgb25seSBmb3IgaW50
-ZXJuYWwgYnVmZmVycywgSSBndWVzcyB0aGF0J3MgZmluZS4NCl9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0t
-IGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVt
-YWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+On 5/18/26 14:06, Albert Esteve wrote:
+>>>>> udmabufs are already
+>>>>> memcg-charged, so adding a separate MEMCG_DMABUF would double count.
+>>>>> Are there any other exporters you had in mind that would benefit from
+>>>>> this approach?
+>>
+>> Well apart from DMA-buf memfd_create() is one of the things which as broken our neck in the past a couple of times.
+>>
+>> But thinking more about it what if instead of making this DMA-buf heaps specific what if we have a general cgroups function which allows to change accounting of a buffer referenced by a file descriptor to a different process?
+>>
+>> That would cover not only the DMA-buf heaps use case, but also all other DMA-buf with dmem and whatever we come up in the future as well.
+> 
+> I removed a draft adding an ioctl for charge transfer from the series
+> before sending because I wanted to focus on the charge_pid_fd approach
+> and keep things simple, deferring the recharge path to a follow-up
+> depending on feedback.
+> 
+> The main difference between my removed draft and what you're
+> describing, iiuc, is scope and layer: my draft was an explicit ioctl
+> on the dma-buf fd that the consumer calls to claim the charge (see
+> below), while you seem to be suggesting a more general kernel-internal
+> function that could work across buffer types and cgroup controllers,
+> so not necessarily userspace-initiated? A kernel-internal function
+> will need a way to identify the target process, which sounds similar
+> to the binder-backed approach from TJ [1]. For everything else, the
+> receiver still needs to declare itself, which the ioctl accomplishes.
+> 
+> ```
+> # When an app imports a daemon-allocated buffer, it can transfer the
+> charge to itself:
+> int buf_fd = receive_dmabuf_from_daemon();
+> ioctl(buf_fd, DMA_BUF_IOCTL_XFER_CHARGE); /* charge now attributed to
+> apps's cgroup */
+
+Well that thinking goes into the right direction, but the requirements are still not completely covered as far as I can see.
+
+Let me explain below a bit more.
+
+> 
+> [1] https://lore.kernel.org/cgroups/20230109213809.418135-1-tjmercier@google.com/
+> 
+>>
+>> The only drawback I can see is that DMA-buf heap allocations would be temporarily accounted to the memory allocation daemon, but I don't think that this would be a problem.
+> 
+> The main reasons we moved away from TJ's transfer-based approach
+> toward `charge_pid_fd` are: avoid the transient charge window on the
+> daemon's cgroup; and to decouple from Binder, allowing any allocator
+> to use it.
+
+Yeah those concerns are completely correct.
+
+The application should not volunteering says 'Charge that buffer to me.', but rather that the daemon says force charge that buffer to this application and tell me when the application is over its limit.
+
+> 
+> Technically, both approaches could coexist, though. Of the three
+> scenarios TJ described:
+> - Scenario 2 is directly addressed by charge_pid_fd approach without
+> any transient charge on the daemon at the cost of one extra field in
+> the heap ioctl uAPI struct.
+
+Yeah extending the uAPI to pass in the pid on allocation time is not much of a problem, but you also need to modify the whole stack above it and that is a bit more trickier.
+
+> - Scenario 3 can be handled by the charge transfer function without
+> changes to SurfaceFlinger. The app or dequeueBuffer claims the charge
+> for itself or the app, respectively (depending on whether we include a
+> pid_fd field in the transfer ioctl). It also covers non-heap
+> exporters. The con in both variants is the transient charge window on
+> the daemon.
+
+It should be trivial for the deamon to charge the buffer to an application before handing it out.
+
+> Both approaches shift the responsibility for correct charging
+> attribution to userspace: first, 'charge_pid_fd` on the allocator's
+> side, and the transfer charge on the consumer's side.
+
+Yeah that's why I said it would be better if we do that without any uAPI change, but with all the uAPI we have to transfer file descriptors (dup(), fork(), passing FDs over sockets etc...) it could be really tricky to implement that.
+
+> Deciding on one, the other or both depends on how much we value
+> avoiding transient attribution, and how much we need a non-heap
+> generic solution. With the XFER_CHARGE we can cover both. Thus, the
+> `charge_pid_fd` approach in this RFC can be seen as a
+> performance/strictness optimisation, eliminating transient charges to
+> the daemon at the cost of a permanent uAPI addition to the heap ioctl
+> struct, but not strictly required for correctness.
+
+Well all we need is a uAPI which says charge this buffer (file descriptor) to that cgroup (pidfd).
+
+With this at hand we should be able to handle all use cases at the same time.
+
+> On the other hand,
+> if we agree on the end goal of migrating other exporters to use
+> dma-buf heaps
+
+That won't work. DMA-buf heaps is actually only a rather small and Anroid specific use case.
+
+We have tons of other interfaces to allocate DMA-bufs which need to stay around because of HW restrictions and we do need a solution for them as well.
+
+Regards,
+Christian.
+
+>, and scenario 3 is addressed by adding the app's pid_fd
+> to SurfaceFlinger, then `charge_pid_fd` alone is a coherent/sufficient
+> approach despite the uAPI change.
+> 
+>>
+>> Regards,
+>> Christian.
+>>
+>>>
+>>> Thanks
+>>> Barry
+>>
+> 
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
