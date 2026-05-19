@@ -2,140 +2,93 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mLTrDcAdDGpJWQUAu9opvQ
+	id EMykKfwdDGqXWgUAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 May 2026 10:22:24 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 May 2026 10:23:24 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id C5538579E7A
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 May 2026 10:22:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3518E579ECD
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 May 2026 10:23:24 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B5365406C8
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 May 2026 08:22:21 +0000 (UTC)
-Received: from MW6PR02CU001.outbound.protection.outlook.com (mail-westus2azon11012040.outbound.protection.outlook.com [52.101.48.40])
-	by lists.linaro.org (Postfix) with ESMTPS id DB8F740501
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 19 May 2026 08:22:11 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 4001040964
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 May 2026 08:23:23 +0000 (UTC)
+Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com [209.85.216.46])
+	by lists.linaro.org (Postfix) with ESMTPS id 46D4F40501
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 19 May 2026 08:23:13 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=amd.com header.s=selector1 header.b=En9+xbes;
-	arc=reject ("signature check failed: fail, {[1] = sig:microsoft.com:reject}");
-	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 52.101.48.40 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
-	dmarc=pass (policy=quarantine) header.from=amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=W9Vpc6YXcRyu+c2nKAdx7T9Kt55UFOaYXjMLsBnCmyEvL7lcYu/vZaZofvlJZQIucNalDhZAULPSRJ5apgpauXW6KzGNcJidkudnoo7aeqO2CkgOfg7bhCU+vR9TPxOOcvNhjPer0HsCughAN3R20x4kv3NYycl89gDzlCgQ60/trJlPIUbdyKtFdSc2gPDI1UMzdwzMkS7Rprwru5k7d4w8eAe3FZOEIfyVT62xfOr4AH5/GKhzaRsCY6BPGRl4WMbS0Q6WbYd7VB820f1pf7nwJMW9BsAxLkxMhLtwxDDDc179+bIEChHL9s+dlfVJXu9bKORYf7r7Qjhs2XuRqg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=NKh+7P0HDQ0PfuWo+GKupzSirfilj/v6ccO+J+nfnsA=;
- b=VPvTiIl3ubzudDifD32s0+HiTGMxWDWLaLuexmzPvNuOoGPORXNG02Igj/932IJ/GkI2ToTLU8+GTT8BBi4H2HHugu2h0ZhQSwSREv9gu2EpGMqnzb6T70Cb7hvCgYf1/MtXMRQnYHuYWi7lxXae+JkNRqL0pnp14Z8EvBgDVEDp0j8Oir/iPYy6Ds3fQDD5DpI0GVjw3fhjEqDSSzc2RQtZnW/7Wybvnxyy1GKgz9m6TUdrhGej8irX0sU44UWVcD1+JdhzWdhLbf6gy2DVVptVYfPbcEpIbTEoy8jgrcalG+0kp8D/146QcvKs8xHODzMw17BN9x+DNKp7ue6Bsg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=NKh+7P0HDQ0PfuWo+GKupzSirfilj/v6ccO+J+nfnsA=;
- b=En9+xbesejnE2BiE3I/ax+I77UELq3QcRXbQ8hyBYt9VMdQLxal/KFI4dRKzrf+P1Z23Q6UOIkT9s2Eho/wlbDKbsGaYmyjBt/aKpfDoo/ETQUypf8Mb+OhargQTCs68A7AwsA0nh7bep4jCKhMpj/RwE2BZBDVeYnh4tSRA10U=
-Received: from PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
- by BY5PR12MB4195.namprd12.prod.outlook.com (2603:10b6:a03:200::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.23; Tue, 19 May
- 2026 08:22:09 +0000
-Received: from PH7PR12MB5685.namprd12.prod.outlook.com
- ([fe80::ce69:cfae:774d:a65c]) by PH7PR12MB5685.namprd12.prod.outlook.com
- ([fe80::ce69:cfae:774d:a65c%5]) with mapi id 15.21.0025.022; Tue, 19 May 2026
- 08:22:09 +0000
-Message-ID: <7e7d3966-313f-4d73-96ff-facb667b8836@amd.com>
-Date: Tue, 19 May 2026 10:22:02 +0200
-User-Agent: Mozilla Thunderbird
-To: Julian Orth <ju.orth@gmail.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Sumit Semwal <sumit.semwal@linaro.org>, Jonathan Corbet <corbet@lwn.net>,
- Shuah Khan <skhan@linuxfoundation.org>, Arnd Bergmann <arnd@arndb.de>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-References: <20260516-jorth-syncobj-v1-0-88ede9d98a81@gmail.com>
- <20260516-jorth-syncobj-v1-9-88ede9d98a81@gmail.com>
-Content-Language: en-US
-From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-In-Reply-To: <20260516-jorth-syncobj-v1-9-88ede9d98a81@gmail.com>
-X-ClientProxiedBy: BN1PR10CA0012.namprd10.prod.outlook.com
- (2603:10b6:408:e0::17) To PH7PR12MB5685.namprd12.prod.outlook.com
- (2603:10b6:510:13c::22)
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=CYb0jfd6;
+	spf=pass (lists.linaro.org: domain of kartikey406@gmail.com designates 209.85.216.46 as permitted sender) smtp.mailfrom=kartikey406@gmail.com;
+	dmarc=pass (policy=none) header.from=gmail.com
+Received: by mail-pj1-f46.google.com with SMTP id 98e67ed59e1d1-368f25ff4c4so1559484a91.2
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 19 May 2026 01:23:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1779178992; x=1779783792; darn=lists.linaro.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Cw+HXkNbB/u5QBrnahLqduKfToHyIm0xf5S3V5dfPlI=;
+        b=CYb0jfd6whlbbs4RHXVDHhV2VqkKj/3KsUd8WH1N0NCys3cB/FWF+MeoFOP8i9LWBt
+         6crXEHuOAsLEG4V/Cq3GxIjhhvHE4MfD/ZCHRqqlcotv0a3pTiaCM1fiZfw2h7r4RIW2
+         39QPqVqy/98/oy9PU95z4Eevgc9x0I+b2sZJEw7wp84QeSgV5Jp82D8KxGsMAyxjT4K3
+         QqUyPKj4nVD8XOZG3dX9AtAPglVA+lXvAXCXDQeac1ZElzvPITYuOjGdkCM0lh/eA8G5
+         82mgzR9lQjHwzcVotQshp9Fe4MPWLreRcj09pbOKD7U9rDFsn7I2m57BNLJTqDC2k/De
+         kr/g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1779178992; x=1779783792;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Cw+HXkNbB/u5QBrnahLqduKfToHyIm0xf5S3V5dfPlI=;
+        b=aLtSibNPyYms5x//vXGuG6lUg89NhRzzdQnS2Jx2BR7oQXUTTo92blIxGKLxcMNv2x
+         z2ZphwKOD3Uj0hYAYlReccI3hWDVE+K2+BCGPwYbTS7Xa91WbYt3GheU9dAr0uXpnBIi
+         DrUp51s4bPe0t/sUxLukqC6yxnqiVLpLrsunQfOcNCAPgXUpGp2Wu4e5ZAUJZT/mCeb9
+         zlqMiG6p/AgACkM1zW4prUtxFVB6S5jbr97XXMGma+VIFCU75677Kp9I/X1YsRoNXcS0
+         OcA5qJZmDmxrYdf3hBI2dDltSukc2xSEYL4IQRXuZDEpXVt7Q2KuG7r081mvFQkurXcV
+         7kNA==
+X-Forwarded-Encrypted: i=1; AFNElJ8/LM7Zo+YeVpETxeA7Q0Zckjw2gjQhUZgIaxNnxnafkxUr75yRwvKmK3b3zFgshqFXZp5nvagvlKLBY4qN@lists.linaro.org
+X-Gm-Message-State: AOJu0Yye4537z1AxeS+YReygS5uz8ynbvrhcQFNybQwCyb/VSYVfD/r+
+	Ud1u2GZREi0xOhmjppADOia56FBM4S3lVvOUHZskRQxeF/AgJIGCVQ4r
+X-Gm-Gg: Acq92OFp0JhfGKPMBjA5l8PjCVqt6b4pCQCVGb7MgK9F2MbUshTfMVuCIsnNdD7AsO3
+	FCGh5LYCP+gcWav4GCLDkvbEAywGp4oWF8v0WVKl3n1ERjk2xIbm5r3mpKkt9hyqUW40WWrPFtF
+	kHzE4Jqg6NYOTsI4fBq5vhrL1QH0aO0my0UUSZ1jZNpxCtLuCgKZK7Ky5Sqr5KrFtmyfSN/ew3k
+	9J+Wz5JGcuXAushsZRO4Z+GQiR52sDLomzI0TmljDvHD4IC4ErUqzrG+QlcFs44vSPIKZKQ9JJB
+	6xySiimMFQaAR8gxO/QexJr/DK0VsSkxBDY4RzV6A+Hx8RZ3JTCiTNpXG7f+IYoVld7QKjlyaiZ
+	5I5Cl9KddiiROnXugZdtRRPQeHPFaE8HxRW2+K8hXpce8totSGLv6Y14OiirXT1Qd1jowa/b8uF
+	KIsuCNQrUArMsjWET+dXCd9Aa4pAswIPbkib0bfwCfD5nhzUumATeyVijVDD/vEk9Mw92XE3bi1
+	qSytPfHIhX39iU=
+X-Received: by 2002:a17:90b:4b8c:b0:359:87a8:e65c with SMTP id 98e67ed59e1d1-36951b8280dmr18284305a91.17.1779178992328;
+        Tue, 19 May 2026 01:23:12 -0700 (PDT)
+Received: from deepanshu-kernel-hacker.. ([2405:201:682f:383f:d693:97f:df7:b062])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3695126feabsm13019156a91.6.2026.05.19.01.23.05
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 19 May 2026 01:23:11 -0700 (PDT)
+From: Deepanshu Kartikey <kartikey406@gmail.com>
+To: airlied@redhat.com,
+	kraxel@redhat.com,
+	dmitry.osipenko@collabora.com,
+	gurchetansingh@chromium.org,
+	olvaffe@gmail.com,
+	maarten.lankhorst@linux.intel.com,
+	mripard@kernel.org,
+	tzimmermann@suse.de,
+	simona@ffwll.ch,
+	sumit.semwal@linaro.org,
+	christian.koenig@amd.com
+Date: Tue, 19 May 2026 13:52:47 +0530
+Message-ID: <20260519082247.34470-1-kartikey406@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|BY5PR12MB4195:EE_
-X-MS-Office365-Filtering-Correlation-Id: d2935b3e-f06b-487a-3cb5-08deb57fb83d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|7416014|376014|1800799024|366016|921020|4143699003|11063799005|56012099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: 
-	DgRYlf4Ri0aqLZXDhkeGAQgsyq3g8ub8qCvn35vL9RIdrJgAtVxuw2CBvnTBprS/p0fV1yPphi0Uo5bOArD1xYveYJ00rb1XqEeWKLahNxN/ZuFYATEzlK6Gri7SsQE9oUJ8tFpF1OOCwk4yY+z8eT16epqSlAK+0YjOd47B0IVswcoHf2gdRLgfigj3qOUUCUvZju3O22WGQUq1057wOaBJFyS7Ajb6xZt+5JJbB25fneitZI7cISHHQUvrS+45V9fV9KBvit1KjRhUTnlIIRdaJQze0G/yXZ97aBifvv6nWXe5cB15KFB0kqg+hH9+nG1K0sAQN/9vAkKmo8jOzgK6+LoNTdD/ZmpXbD0uzFKp2SaEgL51d0o2ghWAnbcAJsaOehMx64VqFRjJtieESeXpKvf5X4ErRxSTo1QNW5om8FWt0rHej+PHdkR1BxOtIFoB7nMSbIY9p2pZyKCufh1gneOR+nTY5CZh/TK8Z4jUqYDb0GCsEOaKBov2dV529ptHPqmPdAq4EO03dpvvjpi1k09R5uX0JO9Ittx2V1vIG+uaSxW8v2kXGbJGE9VZjM/bZ1mWXYdZykGNUzxY3DF2GWdziAYI+JhVDqjeotEH7c3F5o+qg5DKLAowpOdMYvV0cndHrOGdIRYwth1/+poewv1dOtPxpIdnvZRfzjijE7kemtjbdi3+E6cjqMzuwFL7cfpv957XyNnqo8RbHAMKLvPVOdDpGm+HcXvC/lM=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB5685.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(376014)(1800799024)(366016)(921020)(4143699003)(11063799005)(56012099003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?VWE3STZDUTUxWmV6dC84V3BDTksrMHdiVlZKcHNIZFhWZDM1K2hVMzh4c0ts?=
- =?utf-8?B?cGE5TGVYYXhOT2hZVmZSenoySWVlNmR2akxPMENQQ0JXalRyeGY1MXpydmVG?=
- =?utf-8?B?UEx6NTc5cUoxS1BmTnpxUjhMb3FBZm5ia25mWWwxemg0Q0hkUCtQY0E1SHhH?=
- =?utf-8?B?eTEwamlBNE9YNEt3Q2RKMjhCNE5CaFpGb1JQTXMxeDVHMzlWeFZYV2NuU2J6?=
- =?utf-8?B?QStramtzNTEyNzMwZ2hSejJuSU9MeFJuMGw5T1VZNHV5TXN1RWVFaU5hYnVw?=
- =?utf-8?B?VkY5UVpZRWNoK1N1WFpZeW90T1IvQTVQMzk1UmJ6K2RDbUlNM3Z3VFJOUUM1?=
- =?utf-8?B?Wlg0ekhXNXJCWlNOZ3phVThZZm1pdW5IZEdwdXhRZ3B5blNkemNBVGhIOGdT?=
- =?utf-8?B?RWlxUEpqaWpoL1ZtSjY4RXJjNDZnYVNuTzFpdklETkFONERJdmxCQ0F1eUxo?=
- =?utf-8?B?ZWdpTzFxZXFVTkNUb25PVDRGbThyR0FDbUlQVHN2ZXJlRVcxVWtOS0pyZCt6?=
- =?utf-8?B?NlQrOTM3N25hQmZsTVBBL09wSVlCdnB0WWk0MUZ6WnZFTG92V0IrQjF2WXlG?=
- =?utf-8?B?S3VmUzJDT1JPVUh0VGt2aHE3QmJIRSsvRm1ONTN4OFlkaldmeC9aWS9pOHdJ?=
- =?utf-8?B?Z0JDTkEzMDRpQkh1ai9tekk4emJqN0s3TzlOalhBSytORUxzSFpSMnp1bzN1?=
- =?utf-8?B?cHpTZDU1ekZKZG0xVmxGTWpNTU9SRFNuR2owSkNpOXNEYVNXK0trcXhMZXVw?=
- =?utf-8?B?bTZOZjFrRisycW1MQlU1R1FxVW9mVHZmT3Y2aVZxeXpTWVc2SXRXVWJ2bjdQ?=
- =?utf-8?B?am5ub1l3WnVOT0tEYW82UENUMi9LRWhRVVVaZkxNUjNUZ3lPT0ZGT1lFVXlR?=
- =?utf-8?B?Ykd2Tml1czlPUWZTcDFPM0dudm1EbjFnc0JQTE56TkdxWWE4T0lNbTBVaklp?=
- =?utf-8?B?a2N2bnBJRnVvenFWRThIN1V6c1M1M2Y1RjZZQnpRdFNHTDhNbGN5dThtUjdM?=
- =?utf-8?B?cXdwTGorelc3b0N0NjhmQVRYNjZaS2s1dURseEhBcURRRUVFUG14WkVRSGpl?=
- =?utf-8?B?VCtkajZZV2pyWGRZS3BHZzJaUWtsa2VNRzlaOU43VTZyanhmdHMvTHpqWGNr?=
- =?utf-8?B?YkpuKzEzV2tSK0JuZ1RranNaUHZBSkxaRHlIMmJra3dEbm1KMUdkVE9LcW9P?=
- =?utf-8?B?L0NxMngySE9VWjNyTkpEM0Ywc1dML2t3OXVDV2tKSVpTM1RPVVM0UVl6RSs0?=
- =?utf-8?B?WEppc0pCOXg2UWVLNTJyYWRUTWpsYVF0TDRGOThhRllUYlFRMHpZRnJsWDlB?=
- =?utf-8?B?VCtJOFlvUDhENEJFbVZ2RXJDS0tndXFiOUJYQThiQlhVSjBiNXhraG44dHJ1?=
- =?utf-8?B?Nlh2T0doZ2dFUDEwNzBJRk5nbmFiVmZwd3NmcW9PcktVR2hLTXU1U01keThR?=
- =?utf-8?B?dWJiTjhkN3JOZ2UzNC9MT1E3Q1NhRVhxbVJ5YTZRMmtkakR3SkgyaHprdEZT?=
- =?utf-8?B?emo4d0pZQVFtZFBhWHR2UG9BVnhWV2JvL0prcldZc0YzVG5wUnVLK1Ird0FM?=
- =?utf-8?B?b3NFRS85UGNQWHVRWlFOM2hIbUZmUVpUbkF3U0dBNmx3dGpXcjZaRTFkZG5w?=
- =?utf-8?B?ZEhOSHpFbVI5emhnU2p2WnRhR0FrYTQ5dXpLd1NYRGo4c3duajhxQmJtN2dn?=
- =?utf-8?B?S1ZBMmxuZFlIamxWS25PckxyV21KTE5tZW5zd2ZhZ0xkaHlueGNVMHhQM1BB?=
- =?utf-8?B?Z1pSaG1vVWRPTHBSUjg3eWVkeWhxUTY0b1Jsb3daSlRtVVh4SWxXNTY3aU0w?=
- =?utf-8?B?ejV4cDFpMmY0Wk9UdXV2K2lSTkk2U2NYUVJEQkpSTXQ0SU5qcG5NUE5EQjI0?=
- =?utf-8?B?U0VucXRvSHZhMU1lZE9URjZxQmdzWnZvUE5QVEF2RFFqU3ZBMytVTHV3RFRK?=
- =?utf-8?B?b1dGTG56ajFOV2RxRmpVciswaSs3RWwwTTExcnRqdDVvY25ndkRuT01FalNT?=
- =?utf-8?B?djBkaVhoWGhXVjdiQURNbURlN1lWTUJ3aWNyYW9STnhlRGo0MklZRkx4REJ2?=
- =?utf-8?B?VFMxU05Ld1hsYStVR3dObFVFR2ZZemNiWjdSN014Vzk2dXQ1ZXQzSDZ4aGdh?=
- =?utf-8?B?T2prdmZBVFBlMlg4ZTFZdjY2cm5Kd2U0Zjk2VkNDNWhhR3RlWm51SmVxS1Ju?=
- =?utf-8?B?NEZhZXJCVWZsM0xkck91MEdpQmFSeGdxcjhFdm9ydVg2UFh6WERzOHcvK2ZM?=
- =?utf-8?B?VkZ0OHR0eWU1eWZrWWg4cURRT1pGaEg1a3kyQXhNTXpYWUVtVG9qQTdKRVFm?=
- =?utf-8?Q?7DkKfxcS+VeV2i9C1E?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d2935b3e-f06b-487a-3cb5-08deb57fb83d
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5685.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 May 2026 08:22:09.1971
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Nn+CKF/xwVmCbrZwuxfYM3eEaUf+SXo6WYHgV+BiGBeZ/PGWImh7CK0isijEdkwB
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB4195
-X-Spamd-Bar: ---
-Message-ID-Hash: 6PFWDV6WSQEAKYFJ3LHVW75GLYFA5IPL
-X-Message-ID-Hash: 6PFWDV6WSQEAKYFJ3LHVW75GLYFA5IPL
-X-MailFrom: Christian.Koenig@amd.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org, wayland-devel@lists.freedesktop.org
+X-Spamd-Bar: --
+Message-ID-Hash: KBWHRVJRD3SZ3JVO36JDXXZQW4LO4CAN
+X-Message-ID-Hash: KBWHRVJRD3SZ3JVO36JDXXZQW4LO4CAN
+X-MailFrom: kartikey406@gmail.com
+X-Mailman-Rule-Hits: member-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
+CC: dri-devel@lists.freedesktop.org, virtualization@lists.linux.dev, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Deepanshu Kartikey <kartikey406@gmail.com>, syzbot+72bd3dd3a5d5f39a0271@syzkaller.appspotmail.com, stable@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 09/12] drm/syncobj: fix resource leak in drm_syncobj_import_sync_file_fence
+Subject: [Linaro-mm-sig] [PATCH v4] drm/virtio: use uninterruptible resv lock for plane updates
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6PFWDV6WSQEAKYFJ3LHVW75GLYFA5IPL/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KBWHRVJRD3SZ3JVO36JDXXZQW4LO4CAN/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -144,101 +97,196 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [4.49 / 15.00];
-	DMARC_POLICY_QUARANTINE(1.50)[amd.com : SPF not aligned (relaxed),quarantine];
+X-Spamd-Result: default: False [3.09 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
-	R_DKIM_REJECT(1.00)[amd.com:s=selector1];
+	R_DKIM_REJECT(1.00)[gmail.com:s=20251104];
+	MID_CONTAINS_FROM(1.00)[];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[17];
-	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_TO(0.00)[gmail.com,linux.intel.com,kernel.org,suse.de,ffwll.ch,linaro.org,lwn.net,linuxfoundation.org,arndb.de];
-	GREYLIST(0.00)[pass,meta];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	FREEMAIL_TO(0.00)[redhat.com,collabora.com,chromium.org,gmail.com,linux.intel.com,kernel.org,suse.de,ffwll.ch,linaro.org,amd.com];
+	ARC_NA(0.00)[];
+	FREEMAIL_CC(0.00)[lists.freedesktop.org,lists.linux.dev,vger.kernel.org,lists.linaro.org,gmail.com,syzkaller.appspotmail.com];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[amd.com:-];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[christian.koenig@amd.com,linaro-mm-sig-bounces@lists.linaro.org];
+	RCPT_COUNT_TWELVE(0.00)[19];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	TAGGED_RCPT(0.00)[linaro-mm-sig,72bd3dd3a5d5f39a0271];
+	FROM_NEQ_ENVFROM(0.00)[kartikey406@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo,amd.com:mid]
-X-Rspamd-Queue-Id: C5538579E7A
+	DKIM_TRACE(0.00)[gmail.com:-];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo,appspotmail.com:email,syzkaller.appspot.com:url]
+X-Rspamd-Queue-Id: 3518E579ECD
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On 5/16/26 13:06, Julian Orth wrote:
-> Previously, if dma_fence_chain_alloc() failed, the syncobj and fence
-> would be leaked.
+virtio_gpu_cursor_plane_update() and virtio_gpu_resource_flush() lock
+the framebuffer BO's dma_resv via virtio_gpu_array_lock_resv() and
+ignore its return value. The function can fail with -EINTR from
+dma_resv_lock_interruptible() (signal during lock wait) or with
+-ENOMEM from dma_resv_reserve_fences() (fence slot allocation),
+leaving the resv lock not held. The queue path then walks the object
+array and calls dma_resv_add_fence(), which requires the lock held;
+with lockdep enabled this trips dma_resv_assert_held():
 
-Since it is a bug fix that patch should be send out separately from the patch set.
+  WARNING: drivers/dma-buf/dma-resv.c:296 at dma_resv_add_fence+0x71e/0x840
+  Call Trace:
+   virtio_gpu_array_add_fence
+   virtio_gpu_queue_ctrl_sgs
+   virtio_gpu_queue_fenced_ctrl_buffer
+   virtio_gpu_cursor_plane_update
+   drm_atomic_helper_commit_planes
+   drm_atomic_helper_commit_tail
+   commit_tail
+   drm_atomic_helper_commit
+   drm_atomic_commit
+   drm_atomic_helper_update_plane
+   __setplane_atomic
+   drm_mode_cursor_universal
+   drm_mode_cursor_common
+   drm_mode_cursor_ioctl
+   drm_ioctl
+   __x64_sys_ioctl
 
-> 
-> Signed-off-by: Julian Orth <ju.orth@gmail.com>
-> ---
->  drivers/gpu/drm/drm_syncobj.c | 17 +++++++++++------
->  1 file changed, 11 insertions(+), 6 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/drm_syncobj.c b/drivers/gpu/drm/drm_syncobj.c
-> index 9b7ecc2978f5..1da96e23dfc0 100644
-> --- a/drivers/gpu/drm/drm_syncobj.c
-> +++ b/drivers/gpu/drm/drm_syncobj.c
-> @@ -767,30 +767,35 @@ static int drm_syncobj_import_sync_file_fence(struct drm_file *file_private,
->  {
->  	struct dma_fence *fence = sync_file_get_fence(fd);
->  	struct drm_syncobj *syncobj;
-> +	int ret = 0;
+Beyond the WARN, mutating the dma_resv fence list without the lock
+races with concurrent readers/writers and can corrupt the list.
 
-Please don't initialize local return variables, initialize them when you know that the function is successful.
+Both call sites run inside the .atomic_update plane callback, which
+DRM atomic helpers do not allow to fail (by the time it runs, the
+commit has been signed off to userspace and there is no clean
+rollback path). Moving the lock acquisition to .prepare_fb was
+rejected because the broader lock scope deadlocks against other BO
+locking paths in the same atomic commit.
 
-Regards,
-Christian.
+Introduce virtio_gpu_lock_one_resv_uninterruptible() that uses
+dma_resv_lock() instead of dma_resv_lock_interruptible(). This
+eliminates the -EINTR failure mode -- the realistic syzbot trigger
+-- without extending the lock hold across the commit. The helper
+locks a single BO and rejects nents > 1 with -EINVAL; both fix
+sites lock exactly one BO.
 
->  
->  	if (!fence)
->  		return -EINVAL;
->  
->  	syncobj = drm_syncobj_find(file_private, handle);
->  	if (!syncobj) {
-> -		dma_fence_put(fence);
-> -		return -ENOENT;
-> +		ret = -ENOENT;
-> +		goto err_syncobj;
->  	}
->  
->  	if (point) {
->  		struct dma_fence_chain *chain = dma_fence_chain_alloc();
->  
-> -		if (!chain)
-> -			return -ENOMEM;
-> +		if (!chain) {
-> +			ret = -ENOMEM;
-> +			goto err;
-> +		}
->  
->  		drm_syncobj_add_point(syncobj, chain, fence, point);
->  	} else {
->  		drm_syncobj_replace_fence(syncobj, fence);
->  	}
->  
-> -	dma_fence_put(fence);
-> +err:
->  	drm_syncobj_put(syncobj);
-> -	return 0;
-> +err_syncobj:
-> +	dma_fence_put(fence);
-> +	return ret;
->  }
->  
->  static int drm_syncobj_export_sync_file(struct drm_file *file_private,
-> 
+Use it from virtio_gpu_cursor_plane_update() and
+virtio_gpu_resource_flush(); check the return value to handle the
+remaining -ENOMEM case from dma_resv_reserve_fences() by freeing
+the objs and skipping the plane update for that frame. The
+framebuffer BOs touched here are not shared with other contexts
+and lock contention is expected to be brief, so the loss of
+signal-interruptibility is acceptable.
+
+Other callers of virtio_gpu_array_lock_resv() (the ioctl paths)
+continue to use the interruptible variant.
+
+The bug was reported by syzbot, triggered via fault injection
+(fail_nth) on the DRM_IOCTL_MODE_CURSOR path, which forces the
+-ENOMEM branch in dma_resv_reserve_fences().
+
+Reported-by: syzbot+72bd3dd3a5d5f39a0271@syzkaller.appspotmail.com
+Closes: https://syzkaller.appspot.com/bug?extid=72bd3dd3a5d5f39a0271
+Fixes: 5cfd31c5b3a3 ("drm/virtio: fix virtio_gpu_cursor_plane_update().")
+Cc: stable@vger.kernel.org
+Signed-off-by: Deepanshu Kartikey <kartikey406@gmail.com>
+---
+v4: Rename the helper to virtio_gpu_lock_one_resv_uninterruptible()
+    and reject objs->nents > 1 with -EINVAL. The v3 helper's
+    multi-object branch used drm_gem_lock_reservations(), which is
+    interruptible, contradicting the "uninterruptible" name; both
+    fix sites lock a single BO so the multi-object path is dropped.
+    (Dmitry Osipenko)
+v3: Drop the prepare_fb/cleanup_fb approach from v2 (it deadlocked
+    against virtio_gpu_resource_flush(), which also locks the BO in
+    the same atomic commit). Instead add an uninterruptible variant
+    of the resv lock helper and use it in both
+    virtio_gpu_cursor_plane_update() and virtio_gpu_resource_flush().
+    (Dmitry Osipenko)
+v2: Move resv lock acquisition from .atomic_update (which must not
+    fail) to .prepare_fb (which may), per maintainer review of v1.
+    The v1 approach of silently skipping the cursor update on lock
+    failure violated the atomic-commit contract with userspace.
+---
+ drivers/gpu/drm/virtio/virtgpu_drv.h   |  1 +
+ drivers/gpu/drm/virtio/virtgpu_gem.c   | 17 +++++++++++++++++
+ drivers/gpu/drm/virtio/virtgpu_plane.c | 10 ++++++++--
+ 3 files changed, 26 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/virtio/virtgpu_drv.h b/drivers/gpu/drm/virtio/virtgpu_drv.h
+index f17660a71a3e..2f3531950aa4 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_drv.h
++++ b/drivers/gpu/drm/virtio/virtgpu_drv.h
+@@ -317,6 +317,7 @@ virtio_gpu_array_from_handles(struct drm_file *drm_file, u32 *handles, u32 nents
+ void virtio_gpu_array_add_obj(struct virtio_gpu_object_array *objs,
+ 			      struct drm_gem_object *obj);
+ int virtio_gpu_array_lock_resv(struct virtio_gpu_object_array *objs);
++int virtio_gpu_lock_one_resv_uninterruptible(struct virtio_gpu_object_array *objs);
+ void virtio_gpu_array_unlock_resv(struct virtio_gpu_object_array *objs);
+ void virtio_gpu_array_add_fence(struct virtio_gpu_object_array *objs,
+ 				struct dma_fence *fence);
+diff --git a/drivers/gpu/drm/virtio/virtgpu_gem.c b/drivers/gpu/drm/virtio/virtgpu_gem.c
+index f22dc5c21cd4..435d37d36034 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_gem.c
++++ b/drivers/gpu/drm/virtio/virtgpu_gem.c
+@@ -238,6 +238,23 @@ int virtio_gpu_array_lock_resv(struct virtio_gpu_object_array *objs)
+ 	return ret;
+ }
+ 
++int virtio_gpu_lock_one_resv_uninterruptible(struct virtio_gpu_object_array *objs)
++{
++	int ret;
++
++	if (objs->nents != 1)
++		return -EINVAL;
++
++	dma_resv_lock(objs->objs[0]->resv, NULL);
++
++	ret = dma_resv_reserve_fences(objs->objs[0]->resv, 1);
++	if (ret) {
++		virtio_gpu_array_unlock_resv(objs);
++		return ret;
++	}
++	return 0;
++}
++
+ void virtio_gpu_array_unlock_resv(struct virtio_gpu_object_array *objs)
+ {
+ 	if (objs->nents == 1) {
+diff --git a/drivers/gpu/drm/virtio/virtgpu_plane.c b/drivers/gpu/drm/virtio/virtgpu_plane.c
+index a126d1b25f46..652352424744 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_plane.c
++++ b/drivers/gpu/drm/virtio/virtgpu_plane.c
+@@ -215,7 +215,10 @@ static void virtio_gpu_resource_flush(struct drm_plane *plane,
+ 		if (!objs)
+ 			return;
+ 		virtio_gpu_array_add_obj(objs, vgfb->base.obj[0]);
+-		virtio_gpu_array_lock_resv(objs);
++		if (virtio_gpu_lock_one_resv_uninterruptible(objs)) {
++			virtio_gpu_array_put_free(objs);
++			return;
++		}
+ 		virtio_gpu_cmd_resource_flush(vgdev, bo->hw_res_handle, x, y,
+ 					      width, height, objs,
+ 					      vgplane_st->fence);
+@@ -459,7 +462,10 @@ static void virtio_gpu_cursor_plane_update(struct drm_plane *plane,
+ 		if (!objs)
+ 			return;
+ 		virtio_gpu_array_add_obj(objs, vgfb->base.obj[0]);
+-		virtio_gpu_array_lock_resv(objs);
++		if (virtio_gpu_lock_one_resv_uninterruptible(objs)) {
++			virtio_gpu_array_put_free(objs);
++			return;
++		}
+ 		virtio_gpu_cmd_transfer_to_host_2d
+ 			(vgdev, 0,
+ 			 plane->state->crtc_w,
+-- 
+2.43.0
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
