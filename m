@@ -2,442 +2,251 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MMELAypBDGq4bwUAu9opvQ
+	id aIqYOGYGDGodUAUAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 May 2026 12:53:30 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 May 2026 08:42:46 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8392457CE9B
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 May 2026 12:53:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 58A7957842E
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 May 2026 08:42:46 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 98686406F3
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 May 2026 10:53:28 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id A0ECC4096A
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 19 May 2026 06:15:57 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id EB31440961
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 May 2026 06:42:44 +0000 (UTC)
+Received: from DM5PR21CU001.outbound.protection.outlook.com (mail-centralusazon11011050.outbound.protection.outlook.com [52.101.62.50])
+	by lists.linaro.org (Postfix) with ESMTPS id C210340501
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 19 May 2026 06:42:34 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=JVYMBi4e;
-	spf=pass (lists.linaro.org: domain of devnull+ekansh.gupta.oss.qualcomm.com@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=devnull+ekansh.gupta.oss.qualcomm.com@kernel.org;
-	dmarc=pass (policy=quarantine) header.from=kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id 66F20445BF;
-	Tue, 19 May 2026 06:15:56 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 47D4EC2BD01;
-	Tue, 19 May 2026 06:15:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1779171356;
-	bh=VogAFtpediecZpP5TM2uZbRcL0kuXBfdro2v4LUoJkk=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=JVYMBi4e5knehOiV81O7cwQseHAQVHd+8s2BqVc/aix1i3/H+O+BSZoRmk3LdV8ie
-	 tcMaX8rldTCDyNXRLyaCQ4QPHlQ8ca3n6w/FTZeJdzl2LnHOkT41jHijZ0kpoDI36g
-	 9lLoZM9Lq2YU4+YzgwhWOFCA9lDb9I0EWtP5I40b/d8ijR/urpQxlQpMG7pJg2+/U3
-	 AUgQIrK5jGhMvvkVVwz2QgvvIQF76zCn0jyaU65hJ7QVWZgfqAwkSojIa5oIJDhzvi
-	 9vSRRbbd5HcgIPEkcUh7Ib9cE1f+2GqPbz9VfbFAkyji8pRucSVbXX5dcsbWKAeGJg
-	 NRjMky5HYjSXQ==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 40B63CD4F54;
-	Tue, 19 May 2026 06:15:56 +0000 (UTC)
-From: Ekansh Gupta via B4 Relay <devnull+ekansh.gupta.oss.qualcomm.com@kernel.org>
-Date: Tue, 19 May 2026 11:46:05 +0530
+	dkim=pass header.d=amd.com header.s=selector1 header.b=0UV1oA1N;
+	arc=reject ("signature check failed: fail, {[1] = sig:microsoft.com:reject}");
+	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 52.101.62.50 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
+	dmarc=pass (policy=quarantine) header.from=amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=CEzAVXahcLJlgeVhCt4JIybVAaK5a0h2MOMPnUZdUZilWEX6VmES84tF7tYxKTpnQf3+MWfBAhXe9gMfnoMk67PmcYBgFhRhogyoz7xQnnObpVB5zdWOfUTVzjai5EQVNXqrj5RrOG6EmvgjurPLD0n6JV02Qy7LXaOFirODXL5viNCTpTZkeIIU7lwXSQPuVKUtF/pik08BTejMBFy3M7TmaqA+u7WTB9tYkYuGkWLQWMC6A4udwM1oMq4y0ob/jY2LPgx5oHc4QJjD6pETtgd6b4mcCkRJnRH+AJU6c+TMMSRLVfBLjjJQM16jv5WQRRp2MO8awFEmwk7HzdXNMQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=e7sY/foZAH43jstdkkGZNaT7YS+iuWy02Cy+I+1W2FY=;
+ b=m+bQka9EVBJG5uEwVOK3/hJ0W2lMHNtvJa6cTZX3K8Oi9DGk7xPEIloYauIyvCPiGaH4PVDv2ABZo4AeQRg7M2DD4HpYz2dzET4f4wr/oyh+l278n1/BZm4690QIwMSsVdEqAWW0RJEqygB2NTTnsFjCc1ZELChtLP+w4vWIbPilhfhcv2/6NISxsu+rRxw/PPnW6rcjpcTdvps3D0nulqWOo6tYCVBk2K2gsqqtZK3zCrX4Ouks525my9rls9zEl0Heyf2CAwy7dpPd32R9E3drSZxZSjqxUkDlLnW1CKBrb20vweVM7Btp6KRHcgjmArG5wG9owaPWYBkiMLR0ng==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=e7sY/foZAH43jstdkkGZNaT7YS+iuWy02Cy+I+1W2FY=;
+ b=0UV1oA1Nkeo+bgYZ7qWRIFOvevl5b8/2YMcvnENR8nwhIr2RPS6wB+qV4f6UeeLInL3Kt6aWKYEbaFtzDiWxI+VvEQ2w2LFpLdkjY4f0fgmeQYyQlu/LaaDJ+C4m8wCPhlD3ZkDLS42II2kDQACtgP234w9Crb9mTOMsaELPDA0=
+Received: from PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
+ by LV9PR12MB9806.namprd12.prod.outlook.com (2603:10b6:408:2ea::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.24; Tue, 19 May
+ 2026 06:42:32 +0000
+Received: from PH7PR12MB5685.namprd12.prod.outlook.com
+ ([fe80::ce69:cfae:774d:a65c]) by PH7PR12MB5685.namprd12.prod.outlook.com
+ ([fe80::ce69:cfae:774d:a65c%5]) with mapi id 15.21.0025.022; Tue, 19 May 2026
+ 06:42:32 +0000
+Message-ID: <a83bfea0-7d3a-40cb-a437-5be09d59660b@amd.com>
+Date: Tue, 19 May 2026 08:42:27 +0200
+User-Agent: Mozilla Thunderbird
+To: Lizhi Hou <lizhi.hou@amd.com>, ogabbay@kernel.org,
+ quic_jhugo@quicinc.com, mario.limonciello@amd.com,
+ karol.wachowski@linux.intel.com
+References: <20260518155706.937461-1-lizhi.hou@amd.com>
+Content-Language: en-US
+From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+In-Reply-To: <20260518155706.937461-1-lizhi.hou@amd.com>
+X-ClientProxiedBy: FRYP281CA0004.DEUP281.PROD.OUTLOOK.COM (2603:10a6:d10::14)
+ To PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
 MIME-Version: 1.0
-Message-Id: <20260519-qda-series-v1-15-b2d984c297f8@oss.qualcomm.com>
-References: <20260519-qda-series-v1-0-b2d984c297f8@oss.qualcomm.com>
-In-Reply-To: <20260519-qda-series-v1-0-b2d984c297f8@oss.qualcomm.com>
-To: Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
- Shuah Khan <skhan@linuxfoundation.org>, Joerg Roedel <joro@8bytes.org>,
- Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Sumit Semwal <sumit.semwal@linaro.org>,
- =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1779171352; l=11684;
- i=ekansh.gupta@oss.qualcomm.com; s=20260223; h=from:subject:message-id;
- bh=/fQu1UAz3gyMqR3NFZpJX4rpM/wwR7jVltKg2M1B+DU=;
- b=72Y34omiJ0pH6eH3TjgrzGhfH0pIU59j8J/43VANXh+n8/tZffL9Y1uIHokwT5VZoT6IjXqws
- XpdsbbgKvkoDGQjDTS6MiWkzLPEsSABcWvS6//F1VQ4hTleSHoj3T3L
-X-Developer-Key: i=ekansh.gupta@oss.qualcomm.com; a=ed25519;
- pk=n0SepARizye+pYjhjg1RA5J+Nq4+IJbyRcBybU+/ERQ=
-X-Endpoint-Received: by B4 Relay for ekansh.gupta@oss.qualcomm.com/20260223
- with auth_id=647
-X-Original-From: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
-X-Spamd-Bar: ----
-X-MailFrom: devnull+ekansh.gupta.oss.qualcomm.com@kernel.org
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: CBAABDSIK7P3GHKNKUNSYSFQYVHGXMDY
-X-Message-ID-Hash: CBAABDSIK7P3GHKNKUNSYSFQYVHGXMDY
-X-Mailman-Approved-At: Tue, 19 May 2026 10:50:28 +0000
-CC: Bharath Kumar <quic_bkumar@quicinc.com>, Chenna Kesava Raju <quic_chennak@quicinc.com>, srini@kernel.org, dmitry.baryshkov@oss.qualcomm.com, andersson@kernel.org, konradybcio@kernel.org, robin.clark@oss.qualcomm.com, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-arm-msm@vger.kernel.org, iommu@lists.linux.dev, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|LV9PR12MB9806:EE_
+X-MS-Office365-Filtering-Correlation-Id: 99f05abe-9ab0-4395-a7f7-08deb571cdcf
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|366016|1800799024|376014|18002099003|22082099003|56012099003|11063799003;
+X-Microsoft-Antispam-Message-Info: 
+	hGQ9YPaWuMehKah0MV/sN9iyp2hd46/r56ymbDYzmC9MGzuznc6CmJmimO7RLRnbBRUDgYtvF1AooqLzmNC8B5RGp68ZiUIFGcXONSQcTiceVWKrTdfFNbtuPbmOJUvOsHJgiuHVQYbymRRbNClf34sLe5KXFZU+d3LvF2R8FdqM75deqQbNgcj2DGPK3Z45JKi6zDv8XqBsE64DrQ/4RyznCxn/Lf0V6RpYSBIiMBahvo1Nrz37t3cZcXzkdAxma8QBBpP7oD2RDosX4rq+4G9E777AY4drGJG97H7U+6ooiQHdWMETDEXrFqeG3gj3euCKuthHiD+E2u5+vKu2mdbB1qMdm9QrNqCIE6NMlNjCoKWtBmLZGuhlcFnRv6B5BHcX18TqX9V6gdL0nFe6vWWP5O56cOS73AjGE/Yex9prjgLKnrwYqBvteCek7/2yJKM8A+bp0miFO8r5sO7FCm0F5zGQNnxMF4ylsEfP+/qyGMryhqKpcLpAP3xVn3uXrUUX6KcBEmbBNHujuGHJhMYotYjJfhYARPtCg/xU2O/S19PRp0NsIFSfu51MvXadR9t26Gl2gACVTV7N0USCC8hl1apgI/YgkRvR4RsolZIKb5MXOZNf/VaTsNbUaAcrwdk7HxWU3+eg4fAkAcUp2+p5nRfv+XEPpNSyfnrmik0wDkCwQ64sJoynJ0Uk9+c6
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB5685.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(18002099003)(22082099003)(56012099003)(11063799003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?a2ZKZjRXa1RuVEZFRmkrcFZ1TGJoTkVicVF3OW9HdlVxZ2NRTkJQZlRHaFFP?=
+ =?utf-8?B?MEJtZzZJbTRma1did3Vnc1Bwc3RiZlNkK2daRU9FTk84cVloOVBpT1pTR3Ru?=
+ =?utf-8?B?R1FkTTRtTWRoWFJRQ0dlekVRU2ZzanFUbkJabkxlL0xmcWoweG1iUDlxa29r?=
+ =?utf-8?B?SnRLWmJkdDN6VnhtTXdZYVNocGZORnFRUGdDU2trekl4ckNVUkdncm15ODJt?=
+ =?utf-8?B?eXUvRmpEMGpzR2g0ZmRpSmp1Wm1kS3dkU1ZabDVSb1pYc3M1ZEpyTWJZL1F3?=
+ =?utf-8?B?T3VMbktpZHJCNXJIMlZHenVRNzVmYnlPcmh0TUVVMXI4OVJhU2pMUFdYRktu?=
+ =?utf-8?B?T3VzekRTb3FYR3RXaUR4bnRxVlZUQ0UyUXFqTHpiS2sxRUdOMmpuSGFIRndj?=
+ =?utf-8?B?czRCQ0JwWXhreExRZTZEK2RCNllMZTZLRU5VYzRjYXFwSEFHd01PVlNFa2M3?=
+ =?utf-8?B?N2hmVXZ2OUYyblQ1d2U1T3h0WGlvUUExK201N0w0WnZkUnRjNWhIM3dHRkRE?=
+ =?utf-8?B?OURoTjJhdzBGVFprRDlzREhVeWtpeUJuVXJVTndxMkpvQ2xJMTNsUFRUeGsz?=
+ =?utf-8?B?ZS9nUHl5RldnaGJXU1VQWHJQL1FiZ3p1YU9pZEFRaG9INUpPanJzcyt6MlIw?=
+ =?utf-8?B?ZUVxLy9rNXQyUVZzMEZDN0JXQWR6Q1o2U0kwbmUwRzkrVjRMUjcyZkNoamhi?=
+ =?utf-8?B?NVY5ZC9ZdTh3dXExVEJ1LytJZmRaZkdwK2F3NHkxNk5WbER2ZStNcVZBT0c0?=
+ =?utf-8?B?UkNhcE9GMUh2djg3bHVBRzQyM2tsdGNMME5uNDNFbkZBUWlNRFFueVJMb3Jm?=
+ =?utf-8?B?VElMRmpBNWV1MTA3L2kxVDJldW0xVVpaaTFyUHFvK05wWVY1V2dzZGhWNStu?=
+ =?utf-8?B?QjhYbGQxWXB4cHFhS2txYW5iY2Nnd0k4cldwaEpWYWh5bzlTUjlmMWdMcFpl?=
+ =?utf-8?B?L2JOYzFheVVIelFLWG9wcEM2R2tEWmp5b25FRGNCYS9zaFBSS3dFcUlvU2tw?=
+ =?utf-8?B?Wm82R3JXTkhaNkZFN1MxWDQvSDU4UnRiQ095Q29MWnhyTGdEWWtwS2plc1NW?=
+ =?utf-8?B?Vzc4UXVwdE1kMEc2aWpkeTRYVThaZU1BRnVqRUhIdm1XcXhLbStVekVza0xo?=
+ =?utf-8?B?R1NhY0lkUDJIRmE5cWx2N3dZOU1kY0FVSmVpK2FvTEsyMkVlN3FxUkI1VWVI?=
+ =?utf-8?B?enhiT3NnajlON1Y2MzYyQUZ4N091dUx6ek9zb09XTEs4TjNua3RMbWJnMDc0?=
+ =?utf-8?B?TFlHSGRrUVpRVkQ4WnBhR1RqdGxSTk5CNlFSa3VtcE9FMG1Nam1lMUs0eUgy?=
+ =?utf-8?B?eWg2VTdndjhZRzJCTjZPUUo4bGZ0aFdnNUswVi9McmZXQzNNU3FQd0szV2kx?=
+ =?utf-8?B?N3YrOUs0L1FrT1ZMVTArRWpIQk1Bb0s0WnRFTkY2TkNnN1ZOWDRvZEtBejJB?=
+ =?utf-8?B?RzcyOGtJS0lpaGgxNllTQ3M1NDZVaW5lV0J5UkxPUU0yRmRrdkV0V0J4eVNI?=
+ =?utf-8?B?SzZva0drbWZjUzRGODI1SGhIR0xnQTZ2NjU2cXBQOVA0cEo0WmJTZTZqTWxn?=
+ =?utf-8?B?b1pEMDY3NDdSWTVud1lDWnEzUEJycHlRbGxzWldGaUJLWWNiVThjakU3cXh6?=
+ =?utf-8?B?V2hoZUJuOEJ0UW1XQSs5aVVsWVlsOUNyVFFjSFRLWkJYeXBaTzFSaFB6VkpP?=
+ =?utf-8?B?NnZaWmU1dU5XOWhwVUVWQ2NDZEE4RGx1ZnBxVjVUUW0xZ1dkb2RzdnFQZXRx?=
+ =?utf-8?B?UkZycER0TkkrN1FuNUkvMXI2L3MrR3RhNUR6emFPSnNNV0gzUk1XS2F4dndX?=
+ =?utf-8?B?QklncEJkNWtWMFZaVjBCelFjNFkvYXlYY1FNZjlDcHhQc3RCU2dXcW1LaEd4?=
+ =?utf-8?B?dEgrUVJjTjMwME43WkEvMHE0UTVjZ1JlK2F5Q3hQY0dVV3FudWtTYXNCZE5I?=
+ =?utf-8?B?U3hnTWFGdVQvYWF3aFpvWTkrV1VKTmZiSXc0QjRPbXFyejlZZTE1MXFXemNF?=
+ =?utf-8?B?cmJlSTlta3p6RllIRmpwZVlPUVhLa3FnMkEzWWhUQ25OU0NNcElpeDdJUWhF?=
+ =?utf-8?B?TkpYUDZwMDR6TXFCVllEZ2xBdGtrNUhoUXpiUVZXYVVObjI3SFIwWXFBa2kv?=
+ =?utf-8?B?QVF2RTBUQU1Rc0JXVUlLVmtvcEpuQWRKenhtTmtBOEJSTkFSN3lUaTI2bUpw?=
+ =?utf-8?B?SERuei9jYVpic1kza1hTS0tRK0hETTRGT1ZTNmJCUUxEQTdTZklWdmVTVXQw?=
+ =?utf-8?B?Q0pUczU3ZklTZmV1SUlmZEdsVGdZYUd1VlZCeGQ4dXFSd240UFBzU0VWb2R3?=
+ =?utf-8?Q?w0frpwGxunKdcPun7P?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 99f05abe-9ab0-4395-a7f7-08deb571cdcf
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5685.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 May 2026 06:42:32.4264
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: dFjhA/EeCyvAb0Kl6BpDuKRbKYHo7AMTfXNOM+nvj6jl3lAJNuxVECzyXLTrc5r6
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV9PR12MB9806
+X-Spamd-Bar: ---
+Message-ID-Hash: OTKHVCP4AM5ONQMJJXVV63R4ZESWVKWU
+X-Message-ID-Hash: OTKHVCP4AM5ONQMJJXVV63R4ZESWVKWU
+X-MailFrom: Christian.Koenig@amd.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: linux-kernel@vger.kernel.org, linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org, simona@ffwll.ch, max.zhen@amd.com, sonal.santan@amd.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Reply-To: ekansh.gupta@oss.qualcomm.com
-Subject: [Linaro-mm-sig] [PATCH 15/15] accel/qda: Add remote memory unmap from DSP address space
+Subject: [Linaro-mm-sig] Re: [PATCH V2] accel/amdxdna: Remove mmap and export support for ubuf
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CBAABDSIK7P3GHKNKUNSYSFQYVHGXMDY/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OTKHVCP4AM5ONQMJJXVV63R4ZESWVKWU/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [1.99 / 15.00];
-	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
-	R_DKIM_REJECT(1.00)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+X-Spamd-Result: default: False [3.09 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[amd.com : SPF not aligned (relaxed),quarantine];
+	R_DKIM_REJECT(1.00)[amd.com:s=selector1];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MAILLIST(-0.20)[mailman];
+	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de,ekansh.gupta.oss.qualcomm.com];
-	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_TO(0.00)[kernel.org,lwn.net,linuxfoundation.org,8bytes.org,arm.com,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[28];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	HAS_REPLYTO(0.00)[ekansh.gupta@oss.qualcomm.com];
-	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:-];
-	RCVD_COUNT_FIVE(0.00)[5];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[amd.com:mid,amd.com:email,linaro.org:email];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	FROM_NEQ_ENVFROM(0.00)[christian.koenig@amd.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[oss.qualcomm.com:mid,oss.qualcomm.com:replyto,linaro.org:email,qualcomm.com:email,lists.linaro.org:rdns,lists.linaro.org:helo]
-X-Rspamd-Queue-Id: 8392457CE9B
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[amd.com:-]
+X-Rspamd-Queue-Id: 58A7957842E
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-From: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
-
-Implement DRM_IOCTL_QDA_REMOTE_MUNMAP (command 0x06), which unmaps
-a previously mapped memory region from the DSP's virtual address space.
-Two unmap modes mirror the two map modes:
-
-QDA_MUNMAP_REQUEST_LEGACY (FASTRPC_RMID_INIT_MUNMAP)
-  Legacy single-argument unmap: sends a fastrpc_munmap_req_msg
-  containing the session ID, the DSP virtual address (vaddrout from
-  the original map response), and the region size.
-
-QDA_MUNMAP_REQUEST_ATTR (FASTRPC_RMID_INIT_MEM_UNMAP)
-  Attribute-based unmap: sends a fastrpc_mem_unmap_req_msg which
-  additionally carries the original DMA-BUF fd and virtual address,
-  matching the fd-based MEM_MAP path.
-
-DRM_QDA_REMOTE_MUNMAP is assigned command number 0x06, filling the
-slot that was previously reserved for this purpose.
-
-Assisted-by: Claude:claude-4-6-sonnet
-Signed-off-by: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
----
- drivers/accel/qda/qda_drv.c     |  1 +
- drivers/accel/qda/qda_fastrpc.c | 84 +++++++++++++++++++++++++++++++++++++++++
- drivers/accel/qda/qda_fastrpc.h | 34 +++++++++++++++++
- drivers/accel/qda/qda_ioctl.c   | 28 ++++++++++++++
- drivers/accel/qda/qda_ioctl.h   |  1 +
- include/uapi/drm/qda_accel.h    | 36 +++++++++++++++++-
- 6 files changed, 183 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/accel/qda/qda_drv.c b/drivers/accel/qda/qda_drv.c
-index 3640e4a41605..41cc207447b4 100644
---- a/drivers/accel/qda/qda_drv.c
-+++ b/drivers/accel/qda/qda_drv.c
-@@ -68,6 +68,7 @@ static const struct drm_ioctl_desc qda_ioctls[] = {
- 	DRM_IOCTL_DEF_DRV(QDA_GEM_MMAP_OFFSET, qda_ioctl_gem_mmap_offset, 0),
- 	DRM_IOCTL_DEF_DRV(QDA_REMOTE_SESSION_CREATE, qda_ioctl_init_create, 0),
- 	DRM_IOCTL_DEF_DRV(QDA_REMOTE_MAP, qda_ioctl_mmap, 0),
-+	DRM_IOCTL_DEF_DRV(QDA_REMOTE_MUNMAP, qda_ioctl_munmap, 0),
- 	DRM_IOCTL_DEF_DRV(QDA_REMOTE_INVOKE, qda_ioctl_invoke, 0),
- };
- 
-diff --git a/drivers/accel/qda/qda_fastrpc.c b/drivers/accel/qda/qda_fastrpc.c
-index cab3a560ceb5..0513beede428 100644
---- a/drivers/accel/qda/qda_fastrpc.c
-+++ b/drivers/accel/qda/qda_fastrpc.c
-@@ -887,6 +887,84 @@ static int fastrpc_prepare_args_mem_map_attr(struct fastrpc_invoke_context *ctx,
- 	return err;
- }
- 
-+static int fastrpc_prepare_args_munmap(struct fastrpc_invoke_context *ctx, char __user *argp)
-+{
-+	struct drm_qda_fastrpc_invoke_args *args;
-+	struct fastrpc_munmap_req_msg *req_msg;
-+	struct drm_qda_mem_unmap uargs;
-+	void *req;
-+	int err;
-+
-+	memcpy(&uargs, argp, sizeof(uargs));
-+
-+	args = kzalloc_obj(*args);
-+	if (!args)
-+		return -ENOMEM;
-+
-+	req = kzalloc_obj(*req_msg);
-+	if (!req) {
-+		err = -ENOMEM;
-+		goto err_free_args;
-+	}
-+	req_msg = (struct fastrpc_munmap_req_msg *)req;
-+
-+	req_msg->remote_session_id = ctx->remote_session_id;
-+	req_msg->size  = uargs.size;
-+	req_msg->vaddr = uargs.vaddrout;
-+
-+	setup_single_arg(args, req_msg, sizeof(*req_msg));
-+	ctx->sc = FASTRPC_SCALARS(FASTRPC_RMID_INIT_MUNMAP, 1, 0);
-+	ctx->args = args;
-+	ctx->req = req;
-+	ctx->handle = FASTRPC_INIT_HANDLE;
-+
-+	return 0;
-+
-+err_free_args:
-+	kfree(args);
-+	return err;
-+}
-+
-+static int fastrpc_prepare_args_mem_unmap_attr(struct fastrpc_invoke_context *ctx,
-+					       char __user *argp)
-+{
-+	struct drm_qda_fastrpc_invoke_args *args;
-+	struct fastrpc_mem_unmap_req_msg *req_msg;
-+	struct drm_qda_mem_unmap uargs;
-+	void *req;
-+	int err;
-+
-+	memcpy(&uargs, argp, sizeof(uargs));
-+
-+	args = kzalloc_obj(*args);
-+	if (!args)
-+		return -ENOMEM;
-+
-+	req = kzalloc_obj(*req_msg);
-+	if (!req) {
-+		err = -ENOMEM;
-+		goto err_free_args;
-+	}
-+	req_msg = (struct fastrpc_mem_unmap_req_msg *)req;
-+
-+	req_msg->remote_session_id = ctx->remote_session_id;
-+	req_msg->fd      = uargs.fd;		/* DMA-BUF fd forwarded to DSP */
-+	req_msg->vaddrin = uargs.vaddr;
-+	req_msg->len     = uargs.size;
-+
-+	setup_single_arg(args, req_msg, sizeof(*req_msg));
-+	ctx->sc = FASTRPC_SCALARS(FASTRPC_RMID_INIT_MEM_UNMAP, 1, 0);
-+	ctx->args = args;
-+	ctx->req = req;
-+	ctx->handle = FASTRPC_INIT_HANDLE;
-+
-+	return 0;
-+
-+err_free_args:
-+	kfree(args);
-+	return err;
-+}
-+
- static int fastrpc_prepare_args_invoke(struct fastrpc_invoke_context *ctx, char __user *argp)
- {
- 	struct drm_qda_invoke_args invoke_args;
-@@ -945,6 +1023,12 @@ int qda_fastrpc_prepare_args(struct fastrpc_invoke_context *ctx, char __user *ar
- 	case FASTRPC_RMID_INIT_MEM_MAP:
- 		err = fastrpc_prepare_args_mem_map_attr(ctx, argp);
- 		break;
-+	case FASTRPC_RMID_INIT_MUNMAP:
-+		err = fastrpc_prepare_args_munmap(ctx, argp);
-+		break;
-+	case FASTRPC_RMID_INIT_MEM_UNMAP:
-+		err = fastrpc_prepare_args_mem_unmap_attr(ctx, argp);
-+		break;
- 	case FASTRPC_RMID_INVOKE_DYNAMIC:
- 		err = fastrpc_prepare_args_invoke(ctx, argp);
- 		break;
-diff --git a/drivers/accel/qda/qda_fastrpc.h b/drivers/accel/qda/qda_fastrpc.h
-index 71812eaf9a54..030e9b954f7a 100644
---- a/drivers/accel/qda/qda_fastrpc.h
-+++ b/drivers/accel/qda/qda_fastrpc.h
-@@ -275,9 +275,11 @@ struct fastrpc_invoke_context {
- /* Remote Method ID table - identifies initialization and control operations */
- #define FASTRPC_RMID_INIT_RELEASE	1	/* Release DSP process */
- #define FASTRPC_RMID_INIT_MMAP		4	/* Map memory region to DSP */
-+#define FASTRPC_RMID_INIT_MUNMAP	5	/* Unmap DSP memory region */
- #define FASTRPC_RMID_INIT_CREATE	6	/* Create DSP process */
- #define FASTRPC_RMID_INIT_CREATE_ATTR	7	/* Create DSP process with attributes */
- #define FASTRPC_RMID_INIT_MEM_MAP	10	/* Map DMA buffer with attributes to DSP */
-+#define FASTRPC_RMID_INIT_MEM_UNMAP	11	/* Unmap DMA buffer from DSP */
- #define FASTRPC_RMID_INVOKE_DYNAMIC	0xFFFFFFFF	/* Dynamic method invocation */
- 
- /* Common handle for initialization operations */
-@@ -345,6 +347,38 @@ struct fastrpc_map_rsp_msg {
- 	u64 vaddrout;
- };
- 
-+/**
-+ * struct fastrpc_mem_unmap_req_msg - Memory unmap request message with attributes
-+ *
-+ * This message structure is sent to the DSP to request unmapping
-+ * of a previously mapped memory region (ATTR request).
-+ */
-+struct fastrpc_mem_unmap_req_msg {
-+	/** @remote_session_id: Client identifier for the session */
-+	s32 remote_session_id;
-+	/** @fd: DMA-BUF file descriptor of the buffer to unmap */
-+	s32 fd;
-+	/** @vaddrin: DSP virtual address of the mapped region to unmap */
-+	u64 vaddrin;
-+	/** @len: Size of the region to unmap in bytes */
-+	u64 len;
-+};
-+
-+/**
-+ * struct fastrpc_munmap_req_msg - Legacy memory unmap request message
-+ *
-+ * This message structure is sent to the DSP to request unmapping
-+ * of a previously mapped memory region.
-+ */
-+struct fastrpc_munmap_req_msg {
-+	/** @remote_session_id: Client identifier for the session */
-+	s32 remote_session_id;
-+	/** @vaddr: DSP virtual address of the mapped region to unmap */
-+	u64 vaddr;
-+	/** @size: Size of the region to unmap in bytes */
-+	u64 size;
-+};
-+
- void qda_fastrpc_context_free(struct kref *ref);
- struct fastrpc_invoke_context *qda_fastrpc_context_alloc(void);
- int qda_fastrpc_prepare_args(struct fastrpc_invoke_context *ctx, char __user *argp);
-diff --git a/drivers/accel/qda/qda_ioctl.c b/drivers/accel/qda/qda_ioctl.c
-index 283eb7535c45..aeba6190182e 100644
---- a/drivers/accel/qda/qda_ioctl.c
-+++ b/drivers/accel/qda/qda_ioctl.c
-@@ -254,6 +254,34 @@ int qda_ioctl_mmap(struct drm_device *dev, void *data, struct drm_file *file_pri
- 	}
- }
- 
-+/**
-+ * qda_ioctl_munmap() - Unmap memory from DSP address space
-+ * @dev: DRM device structure
-+ * @data: User-space data (struct drm_qda_mem_unmap)
-+ * @file_priv: DRM file private data
-+ *
-+ * Return: 0 on success, negative error code on failure
-+ */
-+int qda_ioctl_munmap(struct drm_device *dev, void *data, struct drm_file *file_priv)
-+{
-+	struct drm_qda_mem_unmap *unmap_req;
-+
-+	if (!data)
-+		return -EINVAL;
-+
-+	unmap_req = (struct drm_qda_mem_unmap *)data;
-+
-+	switch (unmap_req->request) {
-+	case QDA_MUNMAP_REQUEST_LEGACY:
-+		return fastrpc_invoke(FASTRPC_RMID_INIT_MUNMAP, dev, data, file_priv);
-+	case QDA_MUNMAP_REQUEST_ATTR:
-+		return fastrpc_invoke(FASTRPC_RMID_INIT_MEM_UNMAP, dev, data, file_priv);
-+	default:
-+		drm_err(dev, "Invalid munmap request type: %u\n", unmap_req->request);
-+		return -EINVAL;
-+	}
-+}
-+
- /**
-  * qda_ioctl_invoke() - Perform a dynamic FastRPC method invocation
-  * @dev: DRM device structure
-diff --git a/drivers/accel/qda/qda_ioctl.h b/drivers/accel/qda/qda_ioctl.h
-index 457ceccede08..e14a39050d09 100644
---- a/drivers/accel/qda/qda_ioctl.h
-+++ b/drivers/accel/qda/qda_ioctl.h
-@@ -14,5 +14,6 @@ int qda_ioctl_gem_create(struct drm_device *dev, void *data, struct drm_file *fi
- int qda_ioctl_gem_mmap_offset(struct drm_device *dev, void *data, struct drm_file *file_priv);
- int qda_ioctl_invoke(struct drm_device *dev, void *data, struct drm_file *file_priv);
- int qda_ioctl_mmap(struct drm_device *dev, void *data, struct drm_file *file_priv);
-+int qda_ioctl_munmap(struct drm_device *dev, void *data, struct drm_file *file_priv);
- 
- #endif /* __QDA_IOCTL_H__ */
-diff --git a/include/uapi/drm/qda_accel.h b/include/uapi/drm/qda_accel.h
-index 173f59abd361..e3b5c9a963bf 100644
---- a/include/uapi/drm/qda_accel.h
-+++ b/include/uapi/drm/qda_accel.h
-@@ -21,9 +21,10 @@ extern "C" {
- #define DRM_QDA_QUERY		0x00
- #define DRM_QDA_GEM_CREATE		0x01
- #define DRM_QDA_GEM_MMAP_OFFSET	0x02
--/* Command number 0x03 reserved for INIT_ATTACH; 0x06 reserved for MUNMAP */
-+/* Command number 0x03 reserved for INIT_ATTACH */
- #define DRM_QDA_REMOTE_SESSION_CREATE		0x04
- #define DRM_QDA_REMOTE_MAP			0x05
-+#define DRM_QDA_REMOTE_MUNMAP			0x06
- #define DRM_QDA_REMOTE_INVOKE			0x07
- 
- /*
-@@ -44,6 +45,8 @@ extern "C" {
- 		 struct drm_qda_init_create)
- #define DRM_IOCTL_QDA_REMOTE_MAP	DRM_IOWR(DRM_COMMAND_BASE + DRM_QDA_REMOTE_MAP, \
- 					  struct drm_qda_mem_map)
-+#define DRM_IOCTL_QDA_REMOTE_MUNMAP	DRM_IOWR(DRM_COMMAND_BASE + DRM_QDA_REMOTE_MUNMAP, \
-+					  struct drm_qda_mem_unmap)
- #define DRM_IOCTL_QDA_REMOTE_INVOKE	DRM_IOWR(DRM_COMMAND_BASE + DRM_QDA_REMOTE_INVOKE, \
- 					  struct drm_qda_invoke_args)
- 
-@@ -51,6 +54,10 @@ extern "C" {
- #define QDA_MAP_REQUEST_LEGACY    1  /* Legacy MMAP operation */
- #define QDA_MAP_REQUEST_ATTR      2  /* Handle-based MEM_MAP operation with attributes */
- 
-+/* Request type definitions for qda_mem_unmap */
-+#define QDA_MUNMAP_REQUEST_LEGACY    1  /* Legacy MUNMAP operation */
-+#define QDA_MUNMAP_REQUEST_ATTR      2  /* Handle-based MEM_UNMAP operation */
-+
- /**
-  * struct drm_qda_query - Device information query structure
-  * @dsp_name: Name of DSP (e.g., "adsp", "cdsp", "cdsp1", "gdsp0", "gdsp1")
-@@ -188,6 +195,33 @@ struct drm_qda_mem_map {
- 	__u64 vaddrout;
- };
- 
-+/**
-+ * struct drm_qda_mem_unmap - Memory unmapping request structure
-+ * @request: Request type (QDA_MUNMAP_REQUEST_LEGACY or QDA_MUNMAP_REQUEST_ATTR)
-+ * @fd: DMA-BUF file descriptor (used for ATTR request)
-+ * @vaddr: Virtual address (used for ATTR request)
-+ * @vaddrout: DSP virtual address (used for LEGACY request)
-+ * @size: Size of the memory region to unmap in bytes
-+ *
-+ * This structure is used to request unmapping of a previously mapped
-+ * memory region from the DSP's virtual address space.
-+ *
-+ * For QDA_MUNMAP_REQUEST_LEGACY (value 1):
-+ *   - Uses fields: vaddrout, size
-+ *   - Legacy MUNMAP operation for backward compatibility
-+ *
-+ * For QDA_MUNMAP_REQUEST_ATTR (value 2):
-+ *   - Uses fields: fd, vaddr, size
-+ *   - Handle-based MEM_UNMAP operation
-+ */
-+struct drm_qda_mem_unmap {
-+	__u32 request;
-+	__s32 fd;
-+	__u64 vaddr;
-+	__u64 vaddrout;
-+	__u64 size;
-+};
-+
- #if defined(__cplusplus)
- }
- #endif
-
--- 
-2.34.1
-
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gNS8xOC8yNiAxNzo1NywgTGl6aGkgSG91IHdyb3RlOg0KPiBVYnVmIHBhZ2VzIHNob3VsZCBu
+b3QgYmUgbW1hcGVkIG9yIGV4cG9ydGVkLiBSZW1vdmUgdGhlIHVidWYgbW1hcCBjYWxsYmFjaw0K
+PiBhbmQgcmV0dXJuIC1FT1BOT1RTVVBQIHdoZW4gZXhwb3J0aW5nIHVidWYgb2JqZWN0cy4NCj4g
+DQo+IHVidWYgdm1hcCBpcyBhbHNvIHJlbW92ZWQgZm9yIHRoZXJlIGlzIG5vdCBhIHJlYWwgdXNl
+IGNhc2UgeWV0Lg0KPiANCj4gRml4ZXM6IGJkNzJkNGFjZGExMCAoImFjY2VsL2FtZHhkbmE6IFN1
+cHBvcnQgdXNlciBzcGFjZSBhbGxvY2F0ZWQgYnVmZmVyIikNCj4gQ2M6IENocmlzdGlhbiBLb2Vu
+aWcgPGNocmlzdGlhbi5rb2VuaWdAYW1kLmNvbT4NCj4gU2lnbmVkLW9mZi1ieTogTGl6aGkgSG91
+IDxsaXpoaS5ob3VAYW1kLmNvbT4NCg0KUmV2aWV3ZWQtYnk6IENocmlzdGlhbiBLw7ZuaWcgPGNo
+cmlzdGlhbi5rb2VuaWdAYW1kLmNvbT4NCg0KPiAtLS0NCj4gdjI6DQo+ICAgUmVtb3ZlIGRlYWQg
+Y29kZSBhbWR4ZG5hX3VidWZfdm1fb3BzIHN0cnVjdHVyZSBhbmQgYW1keGRuYV91YnVmX3ZtX2Zh
+dWx0DQo+ICAgZnVuY3Rpb24uDQo+ICAgUmVuYW1lIE5vbi1leHBvcnRhYmxlIGJ1ZmZlciBmbGFn
+IGZyb20gJ3ByaScgdG8gJ3ByaXZhdGVfYnVmZmVyJw0KPiANCj4gIGRyaXZlcnMvYWNjZWwvYW1k
+eGRuYS9hbWR4ZG5hX2dlbS5jICB8ICA5ICsrKystDQo+ICBkcml2ZXJzL2FjY2VsL2FtZHhkbmEv
+YW1keGRuYV9nZW0uaCAgfCAgMiArKw0KPiAgZHJpdmVycy9hY2NlbC9hbWR4ZG5hL2FtZHhkbmFf
+dWJ1Zi5jIHwgNTAgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KPiAgMyBmaWxlcyBjaGFu
+Z2VkLCAxMCBpbnNlcnRpb25zKCspLCA1MSBkZWxldGlvbnMoLSkNCj4gDQo+IGRpZmYgLS1naXQg
+YS9kcml2ZXJzL2FjY2VsL2FtZHhkbmEvYW1keGRuYV9nZW0uYyBiL2RyaXZlcnMvYWNjZWwvYW1k
+eGRuYS9hbWR4ZG5hX2dlbS5jDQo+IGluZGV4IDMxOWQyMDY0ZmFmYS4uNmI5YjU1NmRlNTU1IDEw
+MDY0NA0KPiAtLS0gYS9kcml2ZXJzL2FjY2VsL2FtZHhkbmEvYW1keGRuYV9nZW0uYw0KPiArKysg
+Yi9kcml2ZXJzL2FjY2VsL2FtZHhkbmEvYW1keGRuYV9nZW0uYw0KPiBAQCAtNDkyLDYgKzQ5Miw5
+IEBAIHN0YXRpYyBzdHJ1Y3QgZG1hX2J1ZiAqYW1keGRuYV9nZW1fcHJpbWVfZXhwb3J0KHN0cnVj
+dCBkcm1fZ2VtX29iamVjdCAqZ29iaiwgaW50DQo+ICAJc3RydWN0IGFtZHhkbmFfZ2VtX29iaiAq
+YWJvID0gdG9feGRuYV9vYmooZ29iaik7DQo+ICAJREVGSU5FX0RNQV9CVUZfRVhQT1JUX0lORk8o
+ZXhwX2luZm8pOw0KPiAgDQo+ICsJaWYgKGFiby0+cHJpdmF0ZV9idWZmZXIpDQo+ICsJCXJldHVy
+biBFUlJfUFRSKC1FT1BOT1RTVVBQKTsNCj4gKw0KPiAgCWlmIChhYm8tPmRtYV9idWYpIHsNCj4g
+IAkJZ2V0X2RtYV9idWYoYWJvLT5kbWFfYnVmKTsNCj4gIAkJcmV0dXJuIGFiby0+ZG1hX2J1ZjsN
+Cj4gQEAgLTcxNiw2ICs3MTksNyBAQCBhbWR4ZG5hX2dlbV9jcmVhdGVfdWJ1Zl9vYmplY3Qoc3Ry
+dWN0IGRybV9kZXZpY2UgKmRldiwgc3RydWN0IGFtZHhkbmFfZHJtX2NyZWF0ZQ0KPiAgew0KPiAg
+CXN0cnVjdCBhbWR4ZG5hX2RldiAqeGRuYSA9IHRvX3hkbmFfZGV2KGRldik7DQo+ICAJc3RydWN0
+IGFtZHhkbmFfZHJtX3ZhX3RibCB2YV90Ymw7DQo+ICsJc3RydWN0IGFtZHhkbmFfZ2VtX29iaiAq
+YWJvOw0KPiAgCXN0cnVjdCBkcm1fZ2VtX29iamVjdCAqZ29iajsNCj4gIAlzdHJ1Y3QgZG1hX2J1
+ZiAqZG1hX2J1ZjsNCj4gIA0KPiBAQCAtNzQyLDcgKzc0NiwxMCBAQCBhbWR4ZG5hX2dlbV9jcmVh
+dGVfdWJ1Zl9vYmplY3Qoc3RydWN0IGRybV9kZXZpY2UgKmRldiwgc3RydWN0IGFtZHhkbmFfZHJt
+X2NyZWF0ZQ0KPiAgDQo+ICAJZG1hX2J1Zl9wdXQoZG1hX2J1Zik7DQo+ICANCj4gLQlyZXR1cm4g
+dG9feGRuYV9vYmooZ29iaik7DQo+ICsJYWJvID0gdG9feGRuYV9vYmooZ29iaik7DQo+ICsJYWJv
+LT5wcml2YXRlX2J1ZmZlciA9IHRydWU7DQo+ICsNCj4gKwlyZXR1cm4gYWJvOw0KPiAgfQ0KPiAg
+DQo+ICBzdGF0aWMgc3RydWN0IGFtZHhkbmFfZ2VtX29iaiAqDQo+IGRpZmYgLS1naXQgYS9kcml2
+ZXJzL2FjY2VsL2FtZHhkbmEvYW1keGRuYV9nZW0uaCBiL2RyaXZlcnMvYWNjZWwvYW1keGRuYS9h
+bWR4ZG5hX2dlbS5oDQo+IGluZGV4IDRmYzQ4YTExODlkMi4uOTU3MzA1Y2NiNDg1IDEwMDY0NA0K
+PiAtLS0gYS9kcml2ZXJzL2FjY2VsL2FtZHhkbmEvYW1keGRuYV9nZW0uaA0KPiArKysgYi9kcml2
+ZXJzL2FjY2VsL2FtZHhkbmEvYW1keGRuYV9nZW0uaA0KPiBAQCAtNTQsNiArNTQsOCBAQCBzdHJ1
+Y3QgYW1keGRuYV9nZW1fb2JqIHsNCj4gIA0KPiAgCS8qIFRydWUsIGlmIEJPIGlzIG1hbmFnZWQg
+YnkgWFJULCBub3QgYXBwbGljYXRpb24gKi8NCj4gIAlib29sCQkJCWludGVybmFsOw0KPiArCS8q
+IFRydWUsIGlmIEJPIGlzIG5vdCBleHBvcnRhYmxlICovDQo+ICsJYm9vbAkJCQlwcml2YXRlX2J1
+ZmZlcjsNCj4gIH07DQo+ICANCj4gICNkZWZpbmUgdG9fZ29iaihvYmopICAgICgmKG9iaiktPmJh
+c2UuYmFzZSkNCj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvYWNjZWwvYW1keGRuYS9hbWR4ZG5hX3Vi
+dWYuYyBiL2RyaXZlcnMvYWNjZWwvYW1keGRuYS9hbWR4ZG5hX3VidWYuYw0KPiBpbmRleCAzNzY5
+MjEwYzU1Y2MuLmJiNjBmYjgwNDY3ZSAxMDA2NDQNCj4gLS0tIGEvZHJpdmVycy9hY2NlbC9hbWR4
+ZG5hL2FtZHhkbmFfdWJ1Zi5jDQo+ICsrKyBiL2RyaXZlcnMvYWNjZWwvYW1keGRuYS9hbWR4ZG5h
+X3VidWYuYw0KPiBAQCAtNjksNjAgKzY5LDEwIEBAIHN0YXRpYyB2b2lkIGFtZHhkbmFfdWJ1Zl9y
+ZWxlYXNlKHN0cnVjdCBkbWFfYnVmICpkYnVmKQ0KPiAgCWtmcmVlKHVidWYpOw0KPiAgfQ0KPiAg
+DQo+IC1zdGF0aWMgdm1fZmF1bHRfdCBhbWR4ZG5hX3VidWZfdm1fZmF1bHQoc3RydWN0IHZtX2Zh
+dWx0ICp2bWYpDQo+IC17DQo+IC0Jc3RydWN0IHZtX2FyZWFfc3RydWN0ICp2bWEgPSB2bWYtPnZt
+YTsNCj4gLQlzdHJ1Y3QgYW1keGRuYV91YnVmX3ByaXYgKnVidWY7DQo+IC0JdW5zaWduZWQgbG9u
+ZyBwZm47DQo+IC0JcGdvZmZfdCBwZ29mZjsNCj4gLQ0KPiAtCXVidWYgPSB2bWEtPnZtX3ByaXZh
+dGVfZGF0YTsNCj4gLQlwZ29mZiA9ICh2bWYtPmFkZHJlc3MgLSB2bWEtPnZtX3N0YXJ0KSA+PiBQ
+QUdFX1NISUZUOw0KPiAtDQo+IC0JcGZuID0gcGFnZV90b19wZm4odWJ1Zi0+cGFnZXNbcGdvZmZd
+KTsNCj4gLQlyZXR1cm4gdm1mX2luc2VydF9wZm4odm1hLCB2bWYtPmFkZHJlc3MsIHBmbik7DQo+
+IC19DQo+IC0NCj4gLXN0YXRpYyBjb25zdCBzdHJ1Y3Qgdm1fb3BlcmF0aW9uc19zdHJ1Y3QgYW1k
+eGRuYV91YnVmX3ZtX29wcyA9IHsNCj4gLQkuZmF1bHQgPSBhbWR4ZG5hX3VidWZfdm1fZmF1bHQs
+DQo+IC19Ow0KPiAtDQo+IC1zdGF0aWMgaW50IGFtZHhkbmFfdWJ1Zl9tbWFwKHN0cnVjdCBkbWFf
+YnVmICpkYnVmLCBzdHJ1Y3Qgdm1fYXJlYV9zdHJ1Y3QgKnZtYSkNCj4gLXsNCj4gLQlzdHJ1Y3Qg
+YW1keGRuYV91YnVmX3ByaXYgKnVidWYgPSBkYnVmLT5wcml2Ow0KPiAtDQo+IC0Jdm1hLT52bV9v
+cHMgPSAmYW1keGRuYV91YnVmX3ZtX29wczsNCj4gLQl2bWEtPnZtX3ByaXZhdGVfZGF0YSA9IHVi
+dWY7DQo+IC0Jdm1fZmxhZ3Nfc2V0KHZtYSwgVk1fUEZOTUFQIHwgVk1fRE9OVEVYUEFORCB8IFZN
+X0RPTlREVU1QKTsNCj4gLQ0KPiAtCXJldHVybiAwOw0KPiAtfQ0KPiAtDQo+IC1zdGF0aWMgaW50
+IGFtZHhkbmFfdWJ1Zl92bWFwKHN0cnVjdCBkbWFfYnVmICpkYnVmLCBzdHJ1Y3QgaW9zeXNfbWFw
+ICptYXApDQo+IC17DQo+IC0Jc3RydWN0IGFtZHhkbmFfdWJ1Zl9wcml2ICp1YnVmID0gZGJ1Zi0+
+cHJpdjsNCj4gLQl2b2lkICprdmE7DQo+IC0NCj4gLQlrdmEgPSB2bWFwKHVidWYtPnBhZ2VzLCB1
+YnVmLT5ucl9wYWdlcywgVk1fTUFQLCBQQUdFX0tFUk5FTCk7DQo+IC0JaWYgKCFrdmEpDQo+IC0J
+CXJldHVybiAtRUlOVkFMOw0KPiAtDQo+IC0JaW9zeXNfbWFwX3NldF92YWRkcihtYXAsIGt2YSk7
+DQo+IC0JcmV0dXJuIDA7DQo+IC19DQo+IC0NCj4gLXN0YXRpYyB2b2lkIGFtZHhkbmFfdWJ1Zl92
+dW5tYXAoc3RydWN0IGRtYV9idWYgKmRidWYsIHN0cnVjdCBpb3N5c19tYXAgKm1hcCkNCj4gLXsN
+Cj4gLQl2dW5tYXAobWFwLT52YWRkcik7DQo+IC19DQo+IC0NCj4gIHN0YXRpYyBjb25zdCBzdHJ1
+Y3QgZG1hX2J1Zl9vcHMgYW1keGRuYV91YnVmX2RtYWJ1Zl9vcHMgPSB7DQo+ICAJLm1hcF9kbWFf
+YnVmID0gYW1keGRuYV91YnVmX21hcCwNCj4gIAkudW5tYXBfZG1hX2J1ZiA9IGFtZHhkbmFfdWJ1
+Zl91bm1hcCwNCj4gIAkucmVsZWFzZSA9IGFtZHhkbmFfdWJ1Zl9yZWxlYXNlLA0KPiAtCS5tbWFw
+ID0gYW1keGRuYV91YnVmX21tYXAsDQo+IC0JLnZtYXAgPSBhbWR4ZG5hX3VidWZfdm1hcCwNCj4g
+LQkudnVubWFwID0gYW1keGRuYV91YnVmX3Z1bm1hcCwNCj4gIH07DQo+ICANCj4gIHN0YXRpYyBp
+bnQgcmVhZG9ubHlfdmFfZW50cnkoc3RydWN0IGFtZHhkbmFfZHJtX3ZhX2VudHJ5ICp2YV9lbnQp
+DQoNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFy
+by1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpU
+byB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMu
+bGluYXJvLm9yZwo=
