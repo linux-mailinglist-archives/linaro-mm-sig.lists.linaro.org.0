@@ -2,293 +2,184 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id OJTtDg0XDGoZVQUAu9opvQ
+	id 2GDjFYMXDGrrVwUAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 May 2026 09:53:49 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 May 2026 09:55:47 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id B06AA57976D
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 May 2026 09:53:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D3A2B5797EE
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 May 2026 09:55:46 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 38FCA40964
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 May 2026 07:53:47 +0000 (UTC)
-Received: from SN4PR2101CU001.outbound.protection.outlook.com (mail-southcentralusazon11012016.outbound.protection.outlook.com [40.93.195.16])
-	by lists.linaro.org (Postfix) with ESMTPS id BA74A406A1
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 19 May 2026 07:53:37 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D7A3D40965
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 May 2026 07:55:45 +0000 (UTC)
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+	by lists.linaro.org (Postfix) with ESMTPS id 59EBB405CA
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 19 May 2026 07:55:36 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=amd.com header.s=selector1 header.b=aXBYR2TS;
-	arc=reject ("signature check failed: fail, {[1] = sig:microsoft.com:reject}");
-	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.93.195.16 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
-	dmarc=pass (policy=quarantine) header.from=amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=C47NOUgzALBfz0G8PfzauSOb/yWfHD4bI+kRvS4ogba7hwJF2nibpnz/PRctzgr4ZyoXdeHsPS9Yg4q2K9CQlP6tXyziWcxQOoxcUP4Q1n9GUESoiXHUSyxy+hPVgRS8yGe3oYWpxiWD3s8b3F8xLzkz5pqxuTLGSYveIBDZ/LONtlt0MvU/JjBM7rPmy3XGExY+W2jteKch//adhrwhGa0KS2ufiQycm70lWnIujBMlrHDijYStO5P1dHgg1GHR9tDuYwfSVcCMZvu9ptvrkosVxCl2np7DfIYGmhnuDiTH+dFqTH+OOq/dXmvu89MmJXRyTtHHLOB1d5HHsx9reg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=QcTGYPJyddA/87hdIBe9DbOLClP63BESwxE1z6U6qqM=;
- b=NFAVMv826SgnPgqwrkZqcIvU9fcSqYXwvzGfm4GkfdiDFUbxNWbTYvNRahfUluh4MfdTe2nC/Et5ECAUZBQeYbfE0/ZRXwTgp+t5/bdFPi7oH0aOXwHUgIDb7hQ9sJ6YqHdbw1/VIqG0+ZAtr8+F7b9cooTmpELjR4Ld/OZuaIYu+5jvkvaq6DmhEqpI7PNAaWPKNq56+IghnWo9c+jOHxc14BxxzeGMFXbH88UkqcuYevRNOxUip1VH4uZZWM8PDFG7W97Vyz0ww+MjZCM/fo6MN2VDGFajql6ZWnSYlQ4VhP/cdVanEb1RW6vU5ukPolPGZQQycucl9m+dDQvKhA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QcTGYPJyddA/87hdIBe9DbOLClP63BESwxE1z6U6qqM=;
- b=aXBYR2TS1RROtj2D0au1VJy5cKdeYY7yPq6ta49MvxDFoW2isVh7OPtvZKALEonjsit7IWW4jxToy5DeUwb/lqwwo2+fGTRe8zxqa33eje/356qXv+1EibXyWJAk1x7mzvKCmK2849V/zDvqa7ebl+DvHWvzQRcdEQndVuk6yEc=
-Received: from PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
- by SJ0PR12MB7067.namprd12.prod.outlook.com (2603:10b6:a03:4ae::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.14; Tue, 19 May
- 2026 07:53:29 +0000
-Received: from PH7PR12MB5685.namprd12.prod.outlook.com
- ([fe80::ce69:cfae:774d:a65c]) by PH7PR12MB5685.namprd12.prod.outlook.com
- ([fe80::ce69:cfae:774d:a65c%5]) with mapi id 15.21.0025.022; Tue, 19 May 2026
- 07:53:29 +0000
-Message-ID: <9cc79977-9a42-40eb-bfa7-460881c1e10f@amd.com>
-Date: Tue, 19 May 2026 09:53:19 +0200
-User-Agent: Mozilla Thunderbird
-To: Albert Esteve <aesteve@redhat.com>
-References: <20260512-v2_20230123_tjmercier_google_com-v1-0-6326701c3691@redhat.com>
- <20260512-v2_20230123_tjmercier_google_com-v1-2-6326701c3691@redhat.com>
- <8ef38815-6ae9-4359-86d4-042554357639@amd.com>
- <CABdmKX2uwZ12kYJYPJGfWxuMBOJS=64b1GRj72tfB5D=NKM22w@mail.gmail.com>
- <CADSE00Jq_uvNgvxgPze0mEdUd+hF4-DPZkHy0KroWHZzygf4WA@mail.gmail.com>
- <CABdmKX3DhejYBis9htLDnzPrG7vuF3R3URLVNEbnyd61SSsx=g@mail.gmail.com>
- <CAGsJ_4zyecY6E-=Tm4_couT7uoM9LMcFdTMUPkZAjj4zUKE-dQ@mail.gmail.com>
- <cb84c2ee-9de1-4565-b2e0-60984721228f@amd.com>
- <CADSE00Lc42s2bzXzV5D7t1Enf56u4BVj-yXLp3Yxhm0=qMPvuw@mail.gmail.com>
-Content-Language: en-US
-From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-In-Reply-To: <CADSE00Lc42s2bzXzV5D7t1Enf56u4BVj-yXLp3Yxhm0=qMPvuw@mail.gmail.com>
-X-ClientProxiedBy: FR4P281CA0309.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:f6::6) To PH7PR12MB5685.namprd12.prod.outlook.com
- (2603:10b6:510:13c::22)
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=ACSyBHPi;
+	spf=pass (lists.linaro.org: domain of asml.silence@gmail.com designates 209.85.128.41 as permitted sender) smtp.mailfrom=asml.silence@gmail.com;
+	dmarc=pass (policy=none) header.from=gmail.com
+Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-48e82c23840so24892325e9.3
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 19 May 2026 00:55:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1779177335; x=1779782135; darn=lists.linaro.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=a/lqih5w8kOsHKdyaSXO9SGORGhwE1abTlQDwvsKNOc=;
+        b=ACSyBHPi7aOO8sk2Z2HdTEOka6mTO5qQaJuLK2avAQIhKel3loBsYkeNU/Xt7v9Di5
+         U/Ee/POERABnTrb648UAHBHqfTK/Lz74H1gqTeLK/+U0wXhyzQd1w2OOzPSONlEDaaE+
+         XAQRYRYu6xOyWcvtZ606oNmvqisPjkJ0l//wDZEoCqTnRoz0NLKH+HXEj4nmTXqAhZhd
+         7/z5WfUBTx7PUMswOX3H/s/DBy99gKyxN0IgbFEq0DW1J+rIsNaUHg7wdaAzTWfUzuJ/
+         DH7ZU7p7eTbZAne7RmWZk1sHLc9NuA1h+GdCbm2YKlGq+ACSVLlVneFjKTe1K40bApBl
+         Bo2g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1779177335; x=1779782135;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=a/lqih5w8kOsHKdyaSXO9SGORGhwE1abTlQDwvsKNOc=;
+        b=dBKuoHGGc+yRTHyvkBAspn/ejdeEdktbcJbVBWfx5Ew0N2hTEak1Sn9WxqiMRCHTR8
+         1L8X/+FL+nWqhVMGN/YWFH3Zm1nVuPLYWQVWsDDAo0MihTiFWiW52VBLJb/Fb93ac98G
+         OT9fdRviCc9FQwQALcCShVIubKIazqihV68seIKNnJHlkH+7hXVviMpEyBTxrjLJpcGe
+         xCcB82OXN6bkdxQQGr5H69ZfwUVG3s2Tvi+7c5uyXK4RyOGx7DtBUyUOD5749+O4As/d
+         Krng6fSEQ/br0YnKdxL8PUbHpb29BWSq7OtGVT+8M9BUjsypyvtAZIiXRDx0z63S6KTS
+         FqWA==
+X-Forwarded-Encrypted: i=1; AFNElJ+7FYE6bh8KrYfaqr8liV96ZkxzxyHza7wn2AFxlJ3DHNEJG7vsYOtsWYUTF1Fw/dE1WSdN4ADofad2kLZ9@lists.linaro.org
+X-Gm-Message-State: AOJu0Yx9rR5FpZP0BRkCeylgRz2uYyhyoyk7J7NubQ98vwUjATIF7aTu
+	vpLA0yoEpY5WbSwYB6wgJ/OruQIGEYqAjOoQJPIe7tRzPrWa562eWW+g
+X-Gm-Gg: Acq92OEzBcyJqsHvFp4WjpAMbbYlYss1Tqn3MTcG/cOelw9t5OekhBN7cjPpxIjLvWe
+	XG8ydLbiI8AbD8ti6L7g3dpWSyb7qDSgVhwaqlwo3/ZieOcdLZaxoMnB0AovWtYrnyrBwjFyuTI
+	2JF4yxbo6tt2ArAjOikCjQTwgT6WR1zVcAuw3t1GzJjlHlLzkOinijX85p2MoQ9/Usx91LeABqL
+	3ds3KYieUomUES5mgihLM7Vj48fuQxhIiU1BSLnyPxV9c2lIIj+SiVZJccZPAxcWolz8y8/wEis
+	1b1zfpihA7RE2aSkuyuPkzWO8zWhyXrSo5g0ICLIcoLADMR7Jr8DApASK1EMO7Y61qLhQlw1AHz
+	YwC/fYta+9gll9fzbMI97ElQKpX/NQ6HYfYDt7T0aAldEo2JoIVItN56pX46j1uN3Jke0VkoS9B
+	/8zzHCpC8LHFBffurH9C5aKFQiaxVOXOFbCkjv6P/5Z4nWadezNT1dzDlJB4fH+xB1kVmFTUfdd
+	Mztbv0C7CJXLdOlkkkAf02ADMizjAfb6SbR5xVgeh4rJEhWamISU2psjI2FGNbeU40becTj/8WF
+	AA==
+X-Received: by 2002:a05:600c:470e:b0:489:201c:dc46 with SMTP id 5b1f17b1804b1-48fe60ea590mr265981195e9.12.1779177335066;
+        Tue, 19 May 2026 00:55:35 -0700 (PDT)
+Received: from ?IPV6:2a01:4b00:bd21:4f00:7cc6:d3ca:494:116c? ([2a01:4b00:bd21:4f00:7cc6:d3ca:494:116c])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48fe4c88e5asm329088665e9.6.2026.05.19.00.55.34
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 19 May 2026 00:55:34 -0700 (PDT)
+Message-ID: <9933142a-4ce2-4219-9574-73da30edd74e@gmail.com>
+Date: Tue, 19 May 2026 08:55:32 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|SJ0PR12MB7067:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2afa463c-406f-4c66-c463-08deb57bb6d1
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|376014|7416014|366016|3023799003|56012099003|22082099003|18002099003|4143699003|11063799003;
-X-Microsoft-Antispam-Message-Info: 
-	IOe1jomYCeJ1l4P9ZTKYM8vM7bZTWJKmIBdDvTmJLW+TGJjEjFIa40HVPgcohH8GT9HsxsAZcBBJaThIElUM8C4nkRnhUtwOLmicloq55YiUWm6sQ73ro94k/3I5YnzW/MN53WRjp9pX87aJHqgZqfZ84mKHJmgMAhg7Swoo7OXq0Wud/leHc7ROMaUKt5VkH5+QwPmBVvXAWG9BC+ldN0MwHooR9yeQ8K/gIXZnZc/q9xK7BPWTUrMjuRbbwNcTQeKaTx/UgOP7cNNoWXD5+l6skntTbDUajGVfAjLPIFSw3GMp9F2K6MkgVbvv7FrQWbUZ0cUznVmRqEUwLI1PlDbHRFMfbOUX0avg/h2x9U2pWdZlMVTmjnxnSzMeySdXe0g+XvyZccNfccZ70zIAgj10jvZy9eVJFefw+hhcBzBrZBgN67oZ1bP15x0mzubl1tWAz0u/BDDp9c1r0bJgD33Cz0/E33eDmf7l/BLLJubHphtWo8SExM5Mk1nQAfpT3kl4YpczlY/Ri3pdjVFx0dz/sxecehDAZwk2bXMJEqJhZccGbRpJaKwU47xJtwiaMHTaxG/yiDBtL4DMCgVO8+gGRQKBgMeeyRIbXKhKdlBK90cBZPyRJfgyxjnSzL9osDXUg7qfwMBF7DLdy0cZGElalh7TQO9qcO0sKgyPRIx21EQhGd0sZd8yY3gvx8rn+4HjhuA2M2Pc84iiArDTgg==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB5685.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(7416014)(366016)(3023799003)(56012099003)(22082099003)(18002099003)(4143699003)(11063799003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?N0ZoaHhlbjhCYWF4RUxJWDV6dGY3VVRXSStXc1NzY1ZXdVI2L2NBSlIwZVRJ?=
- =?utf-8?B?NlJ1bVRoNWlzVkxiUkJVZ0xxa3BXa1ZvS1hTTUM1WEtobmhSa04vQ1F5VzM5?=
- =?utf-8?B?VU02MzRCc21BSGkyY3dWc1dBUjRqdjlNZGUrRFJQMEZwV211Y2ltN0RsL3Yy?=
- =?utf-8?B?U2tQa21JQ1BWbjNxejdRKzEySm84dDk0N0h4TXk1ZHR6Y3pkK3JVcjN6RHhE?=
- =?utf-8?B?MFFaVkJUVmgxWDQvV2F0emFHTGVRVmp2VmlmY2ZtNDRaclpoV3VnTkVzRFBr?=
- =?utf-8?B?REhBRkZZK1Rrc2FsSDc0VkJhS3JGWjdqS1lRYlBtdEVKR0RtV3ZJNUU4b1dX?=
- =?utf-8?B?bWQyRVgzcGJlR0lEMHl1b05IUzZ4bTNCVmxBQWFlVzlwYTZKRTdVS1ZzZEJo?=
- =?utf-8?B?eWxvaWs1dEtwKytIRmRISFR4SnhhbGdQSVRwNHRBUmlWbmFhVnhkbmdaN0RH?=
- =?utf-8?B?NklUNjlRMnFRM0xTb0ptcU9IY01iSWltVHVLMEduMmdubkd0aUMvN2NkeUtE?=
- =?utf-8?B?ZFZzSCtqRDlmdVFxTk00ZnAvR2xBYlBxM21hUUN6UDlUT2E3UkUzamtFTkEr?=
- =?utf-8?B?enZoeEg0UlJHdU5MR050cm9odTlNQkNwdGtzNnZDU3RISmsyZ0pITWpWa2V4?=
- =?utf-8?B?d1N5R2NoTXhvb25uemRCRkNwWCs5M0plUkhhdVU0aEhxQy9YU1JYc1ZPYjJh?=
- =?utf-8?B?Rk41Y0JLN2ZSTU93RFFrOGhQb3d0R2dVKy9PZko3enk5aU1wTFVaN0QrVkJ3?=
- =?utf-8?B?TnRuNWdSejU4V0JSWjBnbGpBZGkrUTk4WWFWak5sTnpMbmdzTTlOWWRjZnpO?=
- =?utf-8?B?TzhIdTcwSUpOL1gyMFFlTGpIV3FGdndGTTZJTHJzd2trcHhneWRZbFBLaHpp?=
- =?utf-8?B?ZlU1dkpmSFc4VGZiMHg4OUtNemtTbzgyWHZ6RzdjRG9MTHJiRlZMWFRGbDhi?=
- =?utf-8?B?VUdpODc1MDRUbFhUMHBob2Q2QWRDTytRTEE5bHVEeENpVkQrTFFrK282SGhX?=
- =?utf-8?B?R0VQTHl0S2J4YVYrdjUzSnd5MFNKOWxsa1FucUl4aDhxY1ZmMFJWVFZQeVdz?=
- =?utf-8?B?ZzloVkFBZWtIY29NYWxJM21ZVnlSMG9vM0hOcFlKeFJrZk1uSnE1elkzYm1O?=
- =?utf-8?B?Y2I4VWtFeTFEeWFxMitrY3FZRnFMbGJlMTdmWnB6SzRrMHFPY3hqUHFsSkhj?=
- =?utf-8?B?aUltYzZSUFgzdUNzcVJIa1NvUFlJSldHM3RYUUpZU2FYNGtHK2RGcWRmeGF4?=
- =?utf-8?B?RUsvdE9jQ2JzdHBnWUpvb3gwTVlJakNKSDhkSldVek1GSGUvYnVaaTROOHov?=
- =?utf-8?B?UElOSGpHYWRyaUxkN0NBYWNaM09FZGhvQVVBR2N5L0RBU3crUHh3bDFxN1M5?=
- =?utf-8?B?NDdqU2hBT3JYNkpvMEVDRzVQVmlZNC8rMC9RNlcrQzd0cWNBOXhKMnZBMDVj?=
- =?utf-8?B?NkFwaEl3SEhMNTlPQUJCVXF0NkJKODZ1UnNtWG1sYys0UWhwR1VlSVlsQ2dH?=
- =?utf-8?B?b1NsdGtIS2czR1NHTmowRGI4MjdldHIzb0R6RThtVmhXRU9CSXlMSlRWdVhu?=
- =?utf-8?B?eW5UZVF3RXY4V0lzNU5xM29yenIxYXpoUG9PWjgySU5XeHh1bGYyZy9HNzVh?=
- =?utf-8?B?WW1zSng3cEgyL2ljMzI1SDJuc3dXNU1zWlU4Tm1RdEY2RlVaaEMzc0tsSHZN?=
- =?utf-8?B?dlA1VE9qbG1hSzNFeTNxV3NmS01neTJyY3FzbWpNelpTak9QVzZ5VEp1VEp1?=
- =?utf-8?B?eVpDSWNoYXlFcUJHclA0V0tSVmtnR1BuMHZyUXBkVzgwSFBRT0IwY1RZNXMw?=
- =?utf-8?B?Mm5Ka0FVSEV1cHVhZU5hbzNYQUYzaU9heHFaejNaVTFwd2M2cnhjdDg2b0xo?=
- =?utf-8?B?dysrZHZtbXljSmVPQ2FGWTFNSEtJcUx3L3g3Rlp4Vm9nazRtR0puVFRWVFRy?=
- =?utf-8?B?LzBsVVhBcUd1OU1pNGg5Yk5RbmtJZ2NjSkJyVVg0bTBpRTQ5SXpiaEdzT2RE?=
- =?utf-8?B?dXNwWUtGRndiMThmVlR3bzc4RGJEb2gvV1hBK05xQ3RLNkpSenNad1MwZDBx?=
- =?utf-8?B?c25haU9hK0lqcGVOU3cvaHdkeXRMYzhwajJWTzhtZnRLMWxTSW80YWhacDFm?=
- =?utf-8?B?d09LZEw0a00vM2Nyak9rSUVoc2tvN0sxRzk3MkVSYVpkNTE0UVhOMmtDUllS?=
- =?utf-8?B?RTN3RlN4dmNIcFN3eHFyUnFPbVNUZ0h5SUV0M2twMmFvQ2d3TkFjazJKUzdP?=
- =?utf-8?B?MzZhdnppQnE5KzJ1U3d2TnRmdFBXWWJOZzRmSE1zOVh1bUQ3RWp5Mkp4dFNh?=
- =?utf-8?Q?GEFllYyeNyi5uR292C?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2afa463c-406f-4c66-c463-08deb57bb6d1
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5685.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 May 2026 07:53:28.9599
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: lHKflGocT50PZGGGXfuV9j2328lwMnecTmWPNTA9XZje1JVfcupepggejSGFNoqF
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB7067
-X-Spamd-Bar: --
-Message-ID-Hash: 3RXLOFZZPIEGZPSMUB3FVYIQV24HX7UA
-X-Message-ID-Hash: 3RXLOFZZPIEGZPSMUB3FVYIQV24HX7UA
-X-MailFrom: Christian.Koenig@amd.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Barry Song <baohua@kernel.org>, "T.J. Mercier" <tjmercier@google.com>, Tejun Heo <tj@kernel.org>, Johannes Weiner <hannes@cmpxchg.org>, =?UTF-8?Q?Michal_Koutn=C3=BD?= <mkoutny@suse.com>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, Sumit Semwal <sumit.semwal@linaro.org>, Michal Hocko <mhocko@kernel.org>, Roman Gushchin <roman.gushchin@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>, Muchun Song <muchun.song@linux.dev>, Andrew Morton <akpm@linux-foundation.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, Christian Brauner <brauner@kernel.org>, Paul Moore <paul@paul-moore.com>, James Morris <jmorris@namei.org>, "Serge E. Hallyn" <serge@hallyn.com>, Stephen Smalley <stephen.smalley.work@gmail.com>, Ondrej Mosnacek <omosnace@redhat.com>, Shuah Khan <shuah@kernel.org>, cgroups@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel
- .org, dri- <devel@lists.freedesktop.org>, linaro-mm-sig@lists.linaro.org, linux-mm@kvack.org, linux-security-module@vger.kernel.org, selinux@vger.kernel.org, linux-kselftest@vger.kernel.org, mripard@kernel.org, echanude@redhat.com
+User-Agent: Mozilla Thunderbird
+To: Christoph Hellwig <hch@lst.de>
+References: <cover.1777475843.git.asml.silence@gmail.com>
+ <c61e6d928f86f4cb253ae350272e6039faefd3a6.1777475843.git.asml.silence@gmail.com>
+ <20260513082431.GA6461@lst.de>
+ <ebf41920-5852-428f-b98a-e0f44c8f3315@gmail.com>
+ <20260518125326.GA5754@lst.de>
+ <ea47051e-697f-4017-a514-be6ef7c110e9@gmail.com>
+ <20260519065653.GB8173@lst.de>
+Content-Language: en-US
+From: Pavel Begunkov <asml.silence@gmail.com>
+In-Reply-To: <20260519065653.GB8173@lst.de>
+X-Spamd-Bar: ---
+Message-ID-Hash: RRS3LIBPR7FQKKT3ZHF6JHY6IP4FCOLY
+X-Message-ID-Hash: RRS3LIBPR7FQKKT3ZHF6JHY6IP4FCOLY
+X-MailFrom: asml.silence@gmail.com
+X-Mailman-Rule-Hits: member-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
+CC: Jens Axboe <axboe@kernel.dk>, Keith Busch <kbusch@kernel.org>, Sagi Grimberg <sagi@grimberg.me>, Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Andrew Morton <akpm@linux-foundation.org>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, linux-nvme@lists.infradead.org, linux-fsdevel@vger.kernel.org, io-uring@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Nitesh Shetty <nj.shetty@samsung.com>, Kanchan Joshi <joshi.k@samsung.com>, Anuj Gupta <anuj20.g@samsung.com>, Tushar Gohad <tushar.gohad@intel.com>, William Power <william.power@intel.com>, Phil Cayton <phil.cayton@intel.com>, Jason Gunthorpe <jgg@nvidia.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH RFC 2/5] dma-heap: charge dma-buf memory via explicit memcg
+Subject: [Linaro-mm-sig] Re: [PATCH v3 05/10] lib: add dmabuf token infrastructure
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3RXLOFZZPIEGZPSMUB3FVYIQV24HX7UA/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RRS3LIBPR7FQKKT3ZHF6JHY6IP4FCOLY/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [4.49 / 15.00];
-	DMARC_POLICY_QUARANTINE(1.50)[amd.com : SPF not aligned (relaxed),quarantine];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
-	R_DKIM_REJECT(1.00)[amd.com:s=selector1];
+X-Spamd-Result: default: False [0.59 / 15.00];
+	R_DKIM_REJECT(1.00)[gmail.com:s=20251104];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx];
+	R_SPF_ALLOW(-0.20)[+mx:c];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[36];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	GREYLIST(0.00)[pass,meta];
 	MIME_TRACE(0.00)[0:+];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[kernel.org,google.com,cmpxchg.org,suse.com,lwn.net,linuxfoundation.org,linaro.org,linux.dev,linux-foundation.org,collabora.com,arm.com,paul-moore.com,namei.org,hallyn.com,gmail.com,redhat.com,vger.kernel.org,vger.kernel,lists.freedesktop.org,lists.linaro.org,kvack.org];
-	DKIM_TRACE(0.00)[amd.com:-];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[christian.koenig@amd.com,linaro-mm-sig-bounces@lists.linaro.org];
-	TO_DN_SOME(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	ARC_NA(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCPT_COUNT_TWELVE(0.00)[24];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[asmlsilence@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:-];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,amd.com:mid,linaro.org:email]
-X-Rspamd-Queue-Id: B06AA57976D
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo]
+X-Rspamd-Queue-Id: D3A2B5797EE
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On 5/18/26 14:06, Albert Esteve wrote:
->>>>> udmabufs are already
->>>>> memcg-charged, so adding a separate MEMCG_DMABUF would double count.
->>>>> Are there any other exporters you had in mind that would benefit from
->>>>> this approach?
+On 5/19/26 07:56, Christoph Hellwig wrote:
+> On Mon, May 18, 2026 at 03:23:53PM +0100, Pavel Begunkov wrote:
+>> To be fair, it's not that dma-buf specific. This lib/ code only
+>> does some resv locking, fence waiting and queuing fences,
+> 
+> But all the dma resv/fence stuff is pretty tied into the dma-buf
+> ecosystem.  I don't think it would really apply to something not
+> doing DMA at all.
+
+The point is that those can be separated to reuse the rest.
+  >> otherwise
+>> all the attaching is done by the driver behind callbacks. Switching
+>> it to some memfd could be pretty simple. But The main thing it'd
+>> need to share is iterator handling like forwarding in the block
+>> layer, and it should be fine as it's already passed as a completely
+>> opaque object with no knowledge about pages / dma / etc. for the
+>> middle layers.
+> 
+> But none of that really sits in the current lib/ code anyway?
+
+It's about naming. E.g. passing a DMABUF_ITER that doesn't have a
+dma-buf would be confusing, and then it'll need renaming at all
+layers to support the use case.
+
+>>> lib/ is most certainly the wrong place for something that absolutely
+>>> is not library functionality but directly interacts with a few
+>>> subsystems.
 >>
->> Well apart from DMA-buf memfd_create() is one of the things which as broken our neck in the past a couple of times.
+>> It only interacts with dma-buf, and even for dma-buf attachments
+>> are created by the driver. Block, nvme, io_uring are users, either
+>> using the helpers or implementing callbacks.
 >>
->> But thinking more about it what if instead of making this DMA-buf heaps specific what if we have a general cgroups function which allows to change accounting of a buffer referenced by a file descriptor to a different process?
->>
->> That would cover not only the DMA-buf heaps use case, but also all other DMA-buf with dmem and whatever we come up in the future as well.
+>> Ok. Let's assume for the argument's sake it's not dma-buf
+>> specific, if not lib/, where would you put it? I was also
+>> assuming that dma-buf being under drivers/ is rather a relic
+>> of the past rather than the desired location, hmm?
 > 
-> I removed a draft adding an ioctl for charge transfer from the series
-> before sending because I wanted to focus on the charge_pid_fd approach
-> and keep things simple, deferring the recharge path to a follow-up
-> depending on feedback.
-> 
-> The main difference between my removed draft and what you're
-> describing, iiuc, is scope and layer: my draft was an explicit ioctl
-> on the dma-buf fd that the consumer calls to claim the charge (see
-> below), while you seem to be suggesting a more general kernel-internal
-> function that could work across buffer types and cgroup controllers,
-> so not necessarily userspace-initiated? A kernel-internal function
-> will need a way to identify the target process, which sounds similar
-> to the binder-backed approach from TJ [1]. For everything else, the
-> receiver still needs to declare itself, which the ioctl accomplishes.
-> 
-> ```
-> # When an app imports a daemon-allocated buffer, it can transfer the
-> charge to itself:
-> int buf_fd = receive_dmabuf_from_daemon();
-> ioctl(buf_fd, DMA_BUF_IOCTL_XFER_CHARGE); /* charge now attributed to
-> apps's cgroup */
+> drivers/dma-buf is a pretty natural place for it, I could not thing
 
-Well that thinking goes into the right direction, but the requirements are still not completely covered as far as I can see.
+_If_ there is no dma mappings, drivers/dma-buf would definitely
+be an awkward spot. Just trying to understand your criteria for
+placement, let's say of a generic buffer registration code assuming
+there is no dma-buf involved at all. Again, just a hypothetical.
 
-Let me explain below a bit more.
+> where else you'd place dma-buffers.  I'm not sure how hmm has anything
+> to do with it.
 
-> 
-> [1] https://lore.kernel.org/cgroups/20230109213809.418135-1-tjmercier@google.com/
-> 
->>
->> The only drawback I can see is that DMA-buf heap allocations would be temporarily accounted to the memory allocation daemon, but I don't think that this would be a problem.
-> 
-> The main reasons we moved away from TJ's transfer-based approach
-> toward `charge_pid_fd` are: avoid the transient charge window on the
-> daemon's cgroup; and to decouple from Binder, allowing any allocator
-> to use it.
+Looks there is some confusion. It's was meant as an interjection
+with an open question, I didn't mention the HMM subsystem.
 
-Yeah those concerns are completely correct.
-
-The application should not volunteering says 'Charge that buffer to me.', but rather that the daemon says force charge that buffer to this application and tell me when the application is over its limit.
-
-> 
-> Technically, both approaches could coexist, though. Of the three
-> scenarios TJ described:
-> - Scenario 2 is directly addressed by charge_pid_fd approach without
-> any transient charge on the daemon at the cost of one extra field in
-> the heap ioctl uAPI struct.
-
-Yeah extending the uAPI to pass in the pid on allocation time is not much of a problem, but you also need to modify the whole stack above it and that is a bit more trickier.
-
-> - Scenario 3 can be handled by the charge transfer function without
-> changes to SurfaceFlinger. The app or dequeueBuffer claims the charge
-> for itself or the app, respectively (depending on whether we include a
-> pid_fd field in the transfer ioctl). It also covers non-heap
-> exporters. The con in both variants is the transient charge window on
-> the daemon.
-
-It should be trivial for the deamon to charge the buffer to an application before handing it out.
-
-> Both approaches shift the responsibility for correct charging
-> attribution to userspace: first, 'charge_pid_fd` on the allocator's
-> side, and the transfer charge on the consumer's side.
-
-Yeah that's why I said it would be better if we do that without any uAPI change, but with all the uAPI we have to transfer file descriptors (dup(), fork(), passing FDs over sockets etc...) it could be really tricky to implement that.
-
-> Deciding on one, the other or both depends on how much we value
-> avoiding transient attribution, and how much we need a non-heap
-> generic solution. With the XFER_CHARGE we can cover both. Thus, the
-> `charge_pid_fd` approach in this RFC can be seen as a
-> performance/strictness optimisation, eliminating transient charges to
-> the daemon at the cost of a permanent uAPI addition to the heap ioctl
-> struct, but not strictly required for correctness.
-
-Well all we need is a uAPI which says charge this buffer (file descriptor) to that cgroup (pidfd).
-
-With this at hand we should be able to handle all use cases at the same time.
-
-> On the other hand,
-> if we agree on the end goal of migrating other exporters to use
-> dma-buf heaps
-
-That won't work. DMA-buf heaps is actually only a rather small and Anroid specific use case.
-
-We have tons of other interfaces to allocate DMA-bufs which need to stay around because of HW restrictions and we do need a solution for them as well.
-
-Regards,
-Christian.
-
->, and scenario 3 is addressed by adding the app's pid_fd
-> to SurfaceFlinger, then `charge_pid_fd` alone is a coherent/sufficient
-> approach despite the uAPI change.
-> 
->>
->> Regards,
->> Christian.
->>
->>>
->>> Thanks
->>> Barry
->>
-> 
+-- 
+Pavel Begunkov
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
