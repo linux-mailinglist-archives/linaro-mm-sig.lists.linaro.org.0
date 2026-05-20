@@ -2,129 +2,69 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id EGNBMmzFDWql3AUAu9opvQ
+	id AOU0LIjNDWr53QUAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 May 2026 16:30:04 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 May 2026 17:04:40 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 41F3C58FA4D
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 May 2026 16:30:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 38EE1590739
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 May 2026 17:04:40 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 1A4B140987
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 May 2026 14:30:03 +0000 (UTC)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	by lists.linaro.org (Postfix) with ESMTPS id 39C5040971
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 20 May 2026 14:29:53 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 27F514097C
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 May 2026 15:04:39 +0000 (UTC)
+Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com [136.143.188.112])
+	by lists.linaro.org (Postfix) with ESMTPS id 95A5240976
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 20 May 2026 15:04:29 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=qualcomm.com header.s=qcppdkim1 header.b="eZmVQFG/";
-	dkim=pass header.d=oss.qualcomm.com header.s=google header.b=frNNU4nZ;
-	spf=pass (lists.linaro.org: domain of dmitry.baryshkov@oss.qualcomm.com designates 205.220.180.131 as permitted sender) smtp.mailfrom=dmitry.baryshkov@oss.qualcomm.com;
-	dmarc=pass (policy=reject) header.from=qualcomm.com
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 64K9nXYv446929
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 20 May 2026 14:29:52 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=pxOt6IK/i3ibZ79BpGFSHKfb
-	P+cfEih0yG4dCpDnkIo=; b=eZmVQFG/A3xV3qUS4A0vUqI9P0C7ARkGzo0UX+4z
-	ttYkvelNRt8/3mtaxRtZiGQMTYFTeZa0qD+e+bbTtQHPMtb1q4FYEuaA+E6SpUun
-	Rx865+RpRmohzVR612Om1+ptNWx/pRYRS3zumRhYDpLpUS8x9iJiLkusgJmgrPR1
-	9tIDn/ZN/vkOXo416xZlg4nJ6VktEK112DGJ6p3UWQ3vbesOi1ZExRo3Nsy/p4H2
-	WHiuTbU8kIvFlttlPUhPEDnlSV37cheZyCntY42NL/EsMEsbGpG+KF0imZCp9Peq
-	hCYYKSLFaSysZA8ODrnuxfkbMTqKpPyj8oz87joZg74c8g==
-Received: from mail-vk1-f199.google.com (mail-vk1-f199.google.com [209.85.221.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4e9anrh16b-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 20 May 2026 14:29:52 +0000 (GMT)
-Received: by mail-vk1-f199.google.com with SMTP id 71dfb90a1353d-575242b4308so12813701e0c.1
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 20 May 2026 07:29:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1779287392; x=1779892192; darn=lists.linaro.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=pxOt6IK/i3ibZ79BpGFSHKfbP+cfEih0yG4dCpDnkIo=;
-        b=frNNU4nZ7IxCSYuDHUsLa9T5j5xV+uM+ymeT2ug92NSTgRjORqt/KapoXV8c1MGmnW
-         14hkcFIJZwOnkctaxMzc5Z+sL1wGr5UFi2psWlmx36n63DZ1wb5R+/PgNW66B5SCN0Yf
-         7lkTuI9u6mX2+5QFfNvh4RAVGqNWiabtCEfJSZ0rjjII5GerMRVB/797mS9LWqzwJWiH
-         qCz7Aeb6jucjuds6lFj4Zf3nH8tAAGx90QAfhU3BEXFbtlbB37sFbhBp9pmBDnjIAeuM
-         plqx2jG9qEbG4bQUzti/m1P9KUglqz7xyv1cMo07xOfG/MUI5Vmp+lDyFMDTRSb9rvvK
-         mMdQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779287392; x=1779892192;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=pxOt6IK/i3ibZ79BpGFSHKfbP+cfEih0yG4dCpDnkIo=;
-        b=ZRBhZ2oMmT9RISBpqcuQ/uNyVtzfGGoBqyjNYJYvqXLB8bbGOth8289abIW1BhHRE2
-         SE98DIuC/w+c0eQsr44RZvQxKcR0OZg/QduvlrvXAWqJEJOxm1vLAWIAyTTDiGU6Ci9m
-         MO/M0+cu59ONhAFEmG+jhWm1icPUaK0xGIQDqShxXKUzc1MKukJbxQ+U6Z+GM519Syui
-         wbJ+6dwiKGxv6ORQx/GgVioZxy46AIjIdOn+4o08prvMyHGPWTGpBh3gCVyu4OrmPZ5n
-         NBWIBUKfbSEUUuPbiwi35PtEEXBMbo3UtY6+w9pDGXMU8kz6TxoxBzP/XeipiQjO9GZC
-         T1OQ==
-X-Forwarded-Encrypted: i=1; AFNElJ+DAPeWClSsBYiU8aUt0+lAj1cYPbEmpLDTMcEVlb/MqeIbH8NKgavE3W3dCbnkpBseM99nZYeUKPLiGc2D@lists.linaro.org
-X-Gm-Message-State: AOJu0YxjPk+NSHuSv35UGxm7xQ1UEIkQ23SZZrW2UiNWHJDiJN8tI/A3
-	Wj0ceF2QhwUGt1DoRo9ApiQAL2EpBb0K3Vof4uwk+bsPiVpDGHk09wnC25NmJdOAZ2ymjqDtw1N
-	47ii64MBzd5PbgYQ1Q4zW5Ekt08328yV+5SkEqLCLhiA9uNibrXaSKjenCBhLFMgEljwFkA==
-X-Gm-Gg: Acq92OGN6l1k30valtpBcM2S8lp5DWvWdGVWDusfPH1sso5fmm0M768+U0VnZ2pbTqp
-	/8P3ZUYPV2qaX++sPg5nDJdog3Ay7EaJWorVppAqeBTwM4QoMNiC0dzyqBkzBGT6N+vPXXqm0aR
-	8bNlGqOEQEYLnrVBEVAgnjdVofC3GEoMfOtuo6LK/c6zC+g8+wF/JOyQhCJPmMvcdbxkQV4DPv6
-	uCF685pMELvPS9PBakYuMqWtDTP8v/g4FJN1G6Q8/oW5Nykhhgn35Gs8OuNKY62JcidoON9lXgE
-	foay/dItRUZPeUvHLbH0QYwXacKHn0yAz2YPejF2sczloeCYsZ8cCKkXPJnQ6+Pu9mHpvjO4PyW
-	UyEiN/wfnCUHFnXqqYiJO5aD2B14aiFeYySIkfxCy1zLLZ7LA7xh2e+gMYkhbqQGLs7JQNaxpqa
-	DXwsnQVS5+6owM5nBA7lkc5wULOo8AmaYaY+I=
-X-Received: by 2002:a05:6122:910:b0:56e:e9cf:7134 with SMTP id 71dfb90a1353d-5760be33374mr13875392e0c.3.1779287391901;
-        Wed, 20 May 2026 07:29:51 -0700 (PDT)
-X-Received: by 2002:a05:6122:910:b0:56e:e9cf:7134 with SMTP id 71dfb90a1353d-5760be33374mr13875318e0c.3.1779287391196;
-        Wed, 20 May 2026 07:29:51 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5a9164cf0a5sm4942878e87.75.2026.05.20.07.29.49
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 20 May 2026 07:29:50 -0700 (PDT)
-Date: Wed, 20 May 2026 17:29:48 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: ekansh.gupta@oss.qualcomm.com
-Message-ID: <m4zo2nkxtl5yeyo7riuata6r5saflmdgqf37cz2g2ezrwhk53m@mnad6bb7n3ik>
-References: <20260519-qda-series-v1-0-b2d984c297f8@oss.qualcomm.com>
- <20260519-qda-series-v1-8-b2d984c297f8@oss.qualcomm.com>
+	dkim=pass header.d=collabora.com header.s=zohomail header.b=dFcv12YC;
+	arc=pass ("zohomail.com:s=zohoarc:i=1");
+	spf=pass (lists.linaro.org: domain of dmitry.osipenko@collabora.com designates 136.143.188.112 as permitted sender) smtp.mailfrom=dmitry.osipenko@collabora.com;
+	dmarc=pass (policy=none) header.from=collabora.com
+ARC-Seal: i=1; a=rsa-sha256; t=1779289462; cv=none;
+	d=zohomail.com; s=zohoarc;
+	b=H4H9wEPzL9F9DtuKYxJuHWRJCQZJ+AAQw8eTXUTgsdbgqWtPrLXuthO8YzeD7hBaiEIkya9PIMfxVfyKL4Wb03QL8904gzYW8epPtVniRJVqom0HlZ117Rmj+V7oOxuZc+FYgW5GzSJKQFfOXBLA1dktMobMc/9jIOUCO/7nSuU=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc;
+	t=1779289462; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+	bh=aAAzUd7Ncpn7EM5gP2WjySDMAYuUVcl4Vo7wSz2utqs=;
+	b=QNgx0gDg6ZY+o9niXoiW2GvJ7eGduzuJno2L/zBG95jaT8yIPmFS3Aj0cMu0y39yN9IgdGC+yLEgCmKrr+1ncQS58oFau0e6SxvOIMOO1IiSIvG3Ls4Z42sRcoXNC3q3eRrzWbjtLbhSEqS09p0hl4je0el9gC5P1AEixMT52Zg=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=collabora.com;
+	spf=pass  smtp.mailfrom=dmitry.osipenko@collabora.com;
+	dmarc=pass header.from=<dmitry.osipenko@collabora.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1779289462;
+	s=zohomail; d=collabora.com; i=dmitry.osipenko@collabora.com;
+	h=Message-ID:Date:Date:MIME-Version:Subject:Subject:To:To:Cc:Cc:References:From:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
+	bh=aAAzUd7Ncpn7EM5gP2WjySDMAYuUVcl4Vo7wSz2utqs=;
+	b=dFcv12YC0WznA1JT+JNTOS5TAFX6vTuko9xjGSV+lXFs0GA2SxRRu7hj3KVE9qqj
+	GuGFs78IcujNEp8CelYiL56dllabikrYRboVcEnFZ2WYppQlVWzO1NjQyrDDugJU2GG
+	b+Dep1367e1TNtswNSddn/u0Fn08057sudkdzdTM=
+Received: by mx.zohomail.com with SMTPS id 1779289460798445.48512037796513;
+	Wed, 20 May 2026 08:04:20 -0700 (PDT)
+Message-ID: <43ecdd2f-5faf-432a-a814-77190b3ef239@collabora.com>
+Date: Wed, 20 May 2026 18:04:14 +0300
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20260519-qda-series-v1-8-b2d984c297f8@oss.qualcomm.com>
-X-Proofpoint-GUID: nqtIEYMGUn4csCSHkUg2z-bLxxfzbUZc
-X-Proofpoint-ORIG-GUID: nqtIEYMGUn4csCSHkUg2z-bLxxfzbUZc
-X-Authority-Analysis: v=2.4 cv=UuJT8ewB c=1 sm=1 tr=0 ts=6a0dc560 cx=c_pps
- a=+D9SDfe9YZWTjADjLiQY5g==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
- a=NGcC8JguVDcA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=EUspDBNiAAAA:8
- a=KrLRuONc4nWYnVYYFb0A:9 a=CjuIK1q_8ugA:10 a=vmgOmaN-Xu0dpDh8OwbV:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTIwMDE0MSBTYWx0ZWRfX0VdmBhb+BOZC
- jCxqN+j0qGTB0/t6ZXgOclgl9f29ZZoJFzIZqlUI+AmE8n4d1rVOuVsyKK6JDiBGesRYzVHG/Vx
- E3NBqfxRlF9BY4MLhKvRmi4yYlMwpEYzaoAUK3/INZzAlb3V/uiB5muL6doe/kjpS8BbG2+57CF
- hcKZIeaWSIasjBGsgjfaZW7gFqx8mIxujulhxXzQevpuKNlsx+4Dt9ZKURkt3AcoCpHznCiqgVG
- SjsD9Mu41T2kpK5w6Fq1QQRH4ymsXyBQLnUD+2GvYm8vRhc1NqjEC2vuf6HbaJzoyY4KvowrqK6
- u1gAM5Hv1b4s497t9AUEi6P/INO6Jn57mxG63ChkZNRZcJlih1jZEwrdRFOO0oMHZTBsnuXqiPE
- W0pykn2YFzBHjPj+WwGt11HVOOit+yGXVF/JaOKtx6ZwHbEx/rwOhew9+3a4y1vcMRY+vT7mWMy
- VOw5DXBIJZACbh56ZRg==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-05-20_02,2026-05-18_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 clxscore=1015 lowpriorityscore=0 impostorscore=0
- priorityscore=1501 suspectscore=0 spamscore=0 malwarescore=0 bulkscore=0
- phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2605130000
- definitions=main-2605200141
-X-Spamd-Bar: ---
-Message-ID-Hash: UM7X6RACVLMEAWA2MOMGCBZR26375NXJ
-X-Message-ID-Hash: UM7X6RACVLMEAWA2MOMGCBZR26375NXJ
-X-MailFrom: dmitry.baryshkov@oss.qualcomm.com
-X-Mailman-Rule-Hits: member-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
-CC: Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Bharath Kumar <quic_bkumar@quicinc.com>, Chenna Kesava Raju <quic_chennak@quicinc.com>, srini@kernel.org, andersson@kernel.org, konradybcio@kernel.org, robin.clark@oss.qualcomm.com, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-arm-msm@vger.kernel.org, iommu@lists.linux.dev, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+User-Agent: Mozilla Thunderbird
+To: Deepanshu Kartikey <kartikey406@gmail.com>, airlied@redhat.com,
+ kraxel@redhat.com, gurchetansingh@chromium.org, olvaffe@gmail.com,
+ maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de,
+ simona@ffwll.ch, sumit.semwal@linaro.org, christian.koenig@amd.com
+References: <20260519082247.34470-1-kartikey406@gmail.com>
+Content-Language: en-US
+From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
+In-Reply-To: <20260519082247.34470-1-kartikey406@gmail.com>
+X-ZohoMailClient: External
+X-Spamd-Bar: -----
+Message-ID-Hash: HJWRHOW4O6WQAX7XBUFG23KJXCS5I6MW
+X-Message-ID-Hash: HJWRHOW4O6WQAX7XBUFG23KJXCS5I6MW
+X-MailFrom: dmitry.osipenko@collabora.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: dri-devel@lists.freedesktop.org, virtualization@lists.linux.dev, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, syzbot+72bd3dd3a5d5f39a0271@syzkaller.appspotmail.com, stable@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 08/15] accel/qda: Add QUERY IOCTL and QDA UAPI header
+Subject: [Linaro-mm-sig] Re: [PATCH v4] drm/virtio: use uninterruptible resv lock for plane updates
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UM7X6RACVLMEAWA2MOMGCBZR26375NXJ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HJWRHOW4O6WQAX7XBUFG23KJXCS5I6MW/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -133,232 +73,198 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [2.99 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[qualcomm.com : SPF not aligned (relaxed),reject];
-	R_DKIM_REJECT(1.00)[qualcomm.com:s=qcppdkim1,oss.qualcomm.com:s=google];
-	MID_RHS_NOT_FQDN(0.50)[];
+X-Spamd-Result: default: False [3.09 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	R_DKIM_REJECT(1.00)[collabora.com:s=zohomail];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:zohomail.com:reject}];
 	R_SPF_ALLOW(-0.20)[+mx];
 	MAILLIST(-0.20)[mailman];
+	DMARC_POLICY_SOFTFAIL(0.10)[collabora.com : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[kernel.org,lwn.net,linuxfoundation.org,8bytes.org,arm.com,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,quicinc.com,oss.qualcomm.com,vger.kernel.org,lists.freedesktop.org,lists.linux.dev,lists.linaro.org];
-	RCPT_COUNT_TWELVE(0.00)[27];
-	ARC_NA(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[18];
 	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	DKIM_TRACE(0.00)[qualcomm.com:-,oss.qualcomm.com:-];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	FROM_NEQ_ENVFROM(0.00)[dmitry.baryshkov@oss.qualcomm.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	NEURAL_HAM(-0.00)[-0.054];
+	RCVD_COUNT_THREE(0.00)[3];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,qualcomm.com:email,linaro.org:email]
-X-Rspamd-Queue-Id: 41F3C58FA4D
+	FREEMAIL_TO(0.00)[gmail.com,redhat.com,chromium.org,linux.intel.com,kernel.org,suse.de,ffwll.ch,linaro.org,amd.com];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[collabora.com:-];
+	NEURAL_HAM(-0.00)[-1.000];
+	FROM_NEQ_ENVFROM(0.00)[dmitry.osipenko@collabora.com,linaro-mm-sig-bounces@lists.linaro.org];
+	TO_DN_SOME(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	TAGGED_RCPT(0.00)[linaro-mm-sig,72bd3dd3a5d5f39a0271];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[appspotmail.com:email,collabora.com:mid,syzkaller.appspot.com:url]
+X-Rspamd-Queue-Id: 38EE1590739
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Tue, May 19, 2026 at 11:45:58AM +0530, Ekansh Gupta via B4 Relay wrote:
-> From: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
+On 5/19/26 11:22, Deepanshu Kartikey wrote:
+> virtio_gpu_cursor_plane_update() and virtio_gpu_resource_flush() lock
+> the framebuffer BO's dma_resv via virtio_gpu_array_lock_resv() and
+> ignore its return value. The function can fail with -EINTR from
+> dma_resv_lock_interruptible() (signal during lock wait) or with
+> -ENOMEM from dma_resv_reserve_fences() (fence slot allocation),
+> leaving the resv lock not held. The queue path then walks the object
+> array and calls dma_resv_add_fence(), which requires the lock held;
+> with lockdep enabled this trips dma_resv_assert_held():
 > 
-> Introduce the DRM_IOCTL_QDA_QUERY IOCTL, which allows user-space to
-> identify which DSP domain a given /dev/accel/accel* node represents
-> (e.g. "cdsp", "adsp").
+>   WARNING: drivers/dma-buf/dma-resv.c:296 at dma_resv_add_fence+0x71e/0x840
+>   Call Trace:
+>    virtio_gpu_array_add_fence
+>    virtio_gpu_queue_ctrl_sgs
+>    virtio_gpu_queue_fenced_ctrl_buffer
+>    virtio_gpu_cursor_plane_update
+>    drm_atomic_helper_commit_planes
+>    drm_atomic_helper_commit_tail
+>    commit_tail
+>    drm_atomic_helper_commit
+>    drm_atomic_commit
+>    drm_atomic_helper_update_plane
+>    __setplane_atomic
+>    drm_mode_cursor_universal
+>    drm_mode_cursor_common
+>    drm_mode_cursor_ioctl
+>    drm_ioctl
+>    __x64_sys_ioctl
 > 
-> include/uapi/drm/qda_accel.h
->   Defines the QDA IOCTL command numbers and the associated data
->   structures. The header follows the standard DRM UAPI conventions:
->   __u8/__u32 types, a C++ extern "C" guard, and GPL-2.0-only WITH
->   Linux-syscall-note licensing.
+> Beyond the WARN, mutating the dma_resv fence list without the lock
+> races with concurrent readers/writers and can corrupt the list.
 > 
-> drivers/accel/qda/qda_ioctl.c / qda_ioctl.h
->   Implements qda_ioctl_query(), which copies the DSP domain name
->   stored in qda_dev.dsp_name into the user-supplied drm_qda_query
->   buffer using strscpy().
+> Both call sites run inside the .atomic_update plane callback, which
+> DRM atomic helpers do not allow to fail (by the time it runs, the
+> commit has been signed off to userspace and there is no clean
+> rollback path). Moving the lock acquisition to .prepare_fb was
+> rejected because the broader lock scope deadlocks against other BO
+> locking paths in the same atomic commit.
 > 
-> drivers/accel/qda/qda_drv.c
->   Registers the qda_ioctls[] table with the drm_driver so that the
->   DRM core dispatches DRM_IOCTL_QDA_QUERY to qda_ioctl_query().
+> Introduce virtio_gpu_lock_one_resv_uninterruptible() that uses
+> dma_resv_lock() instead of dma_resv_lock_interruptible(). This
+> eliminates the -EINTR failure mode -- the realistic syzbot trigger
+> -- without extending the lock hold across the commit. The helper
+> locks a single BO and rejects nents > 1 with -EINVAL; both fix
+> sites lock exactly one BO.
 > 
-> Assisted-by: Claude:claude-4-6-sonnet
-> Signed-off-by: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
+> Use it from virtio_gpu_cursor_plane_update() and
+> virtio_gpu_resource_flush(); check the return value to handle the
+> remaining -ENOMEM case from dma_resv_reserve_fences() by freeing
+> the objs and skipping the plane update for that frame. The
+> framebuffer BOs touched here are not shared with other contexts
+> and lock contention is expected to be brief, so the loss of
+> signal-interruptibility is acceptable.
+> 
+> Other callers of virtio_gpu_array_lock_resv() (the ioctl paths)
+> continue to use the interruptible variant.
+> 
+> The bug was reported by syzbot, triggered via fault injection
+> (fail_nth) on the DRM_IOCTL_MODE_CURSOR path, which forces the
+> -ENOMEM branch in dma_resv_reserve_fences().
+> 
+> Reported-by: syzbot+72bd3dd3a5d5f39a0271@syzkaller.appspotmail.com
+> Closes: https://syzkaller.appspot.com/bug?extid=72bd3dd3a5d5f39a0271
+> Fixes: 5cfd31c5b3a3 ("drm/virtio: fix virtio_gpu_cursor_plane_update().")
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Deepanshu Kartikey <kartikey406@gmail.com>
 > ---
->  drivers/accel/qda/Makefile    |  1 +
->  drivers/accel/qda/qda_drv.c   |  8 +++++++
->  drivers/accel/qda/qda_ioctl.c | 26 +++++++++++++++++++++++
->  drivers/accel/qda/qda_ioctl.h | 13 ++++++++++++
->  include/uapi/drm/qda_accel.h  | 49 +++++++++++++++++++++++++++++++++++++++++++
->  5 files changed, 97 insertions(+)
+> v4: Rename the helper to virtio_gpu_lock_one_resv_uninterruptible()
+>     and reject objs->nents > 1 with -EINVAL. The v3 helper's
+>     multi-object branch used drm_gem_lock_reservations(), which is
+>     interruptible, contradicting the "uninterruptible" name; both
+>     fix sites lock a single BO so the multi-object path is dropped.
+>     (Dmitry Osipenko)
+> v3: Drop the prepare_fb/cleanup_fb approach from v2 (it deadlocked
+>     against virtio_gpu_resource_flush(), which also locks the BO in
+>     the same atomic commit). Instead add an uninterruptible variant
+>     of the resv lock helper and use it in both
+>     virtio_gpu_cursor_plane_update() and virtio_gpu_resource_flush().
+>     (Dmitry Osipenko)
+> v2: Move resv lock acquisition from .atomic_update (which must not
+>     fail) to .prepare_fb (which may), per maintainer review of v1.
+>     The v1 approach of silently skipping the cursor update on lock
+>     failure violated the atomic-commit contract with userspace.
+> ---
+>  drivers/gpu/drm/virtio/virtgpu_drv.h   |  1 +
+>  drivers/gpu/drm/virtio/virtgpu_gem.c   | 17 +++++++++++++++++
+>  drivers/gpu/drm/virtio/virtgpu_plane.c | 10 ++++++++--
+>  3 files changed, 26 insertions(+), 2 deletions(-)
 > 
-> diff --git a/drivers/accel/qda/Makefile b/drivers/accel/qda/Makefile
-> index 701fad5ffb50..b658dad35fee 100644
-> --- a/drivers/accel/qda/Makefile
-> +++ b/drivers/accel/qda/Makefile
-> @@ -8,6 +8,7 @@ obj-$(CONFIG_DRM_ACCEL_QDA)	:= qda.o
->  qda-y := \
->  	qda_cb.o \
->  	qda_drv.o \
-> +	qda_ioctl.o \
->  	qda_memory_manager.o \
->  	qda_rpmsg.o
+> diff --git a/drivers/gpu/drm/virtio/virtgpu_drv.h b/drivers/gpu/drm/virtio/virtgpu_drv.h
+> index f17660a71a3e..2f3531950aa4 100644
+> --- a/drivers/gpu/drm/virtio/virtgpu_drv.h
+> +++ b/drivers/gpu/drm/virtio/virtgpu_drv.h
+> @@ -317,6 +317,7 @@ virtio_gpu_array_from_handles(struct drm_file *drm_file, u32 *handles, u32 nents
+>  void virtio_gpu_array_add_obj(struct virtio_gpu_object_array *objs,
+>  			      struct drm_gem_object *obj);
+>  int virtio_gpu_array_lock_resv(struct virtio_gpu_object_array *objs);
+> +int virtio_gpu_lock_one_resv_uninterruptible(struct virtio_gpu_object_array *objs);
+>  void virtio_gpu_array_unlock_resv(struct virtio_gpu_object_array *objs);
+>  void virtio_gpu_array_add_fence(struct virtio_gpu_object_array *objs,
+>  				struct dma_fence *fence);
+> diff --git a/drivers/gpu/drm/virtio/virtgpu_gem.c b/drivers/gpu/drm/virtio/virtgpu_gem.c
+> index f22dc5c21cd4..435d37d36034 100644
+> --- a/drivers/gpu/drm/virtio/virtgpu_gem.c
+> +++ b/drivers/gpu/drm/virtio/virtgpu_gem.c
+> @@ -238,6 +238,23 @@ int virtio_gpu_array_lock_resv(struct virtio_gpu_object_array *objs)
+>  	return ret;
+>  }
 >  
-> diff --git a/drivers/accel/qda/qda_drv.c b/drivers/accel/qda/qda_drv.c
-> index 0ad5d9873d7e..becd831d10be 100644
-> --- a/drivers/accel/qda/qda_drv.c
-> +++ b/drivers/accel/qda/qda_drv.c
-> @@ -8,8 +8,10 @@
->  #include <drm/drm_gem.h>
->  #include <drm/drm_ioctl.h>
->  #include <drm/drm_print.h>
-> +#include <drm/qda_accel.h>
->  
->  #include "qda_drv.h"
-> +#include "qda_ioctl.h"
->  #include "qda_rpmsg.h"
->  
->  static int qda_open(struct drm_device *dev, struct drm_file *file)
-> @@ -36,11 +38,17 @@ static void qda_postclose(struct drm_device *dev, struct drm_file *file)
->  
->  DEFINE_DRM_ACCEL_FOPS(qda_accel_fops);
->  
-> +static const struct drm_ioctl_desc qda_ioctls[] = {
-> +	DRM_IOCTL_DEF_DRV(QDA_QUERY, qda_ioctl_query, 0),
-> +};
-> +
->  static const struct drm_driver qda_drm_driver = {
->  	.driver_features = DRIVER_COMPUTE_ACCEL,
->  	.fops = &qda_accel_fops,
->  	.open = qda_open,
->  	.postclose = qda_postclose,
-> +	.ioctls = qda_ioctls,
-> +	.num_ioctls = ARRAY_SIZE(qda_ioctls),
->  	.name = QDA_DRIVER_NAME,
->  	.desc = "Qualcomm DSP Accelerator Driver",
->  };
-> diff --git a/drivers/accel/qda/qda_ioctl.c b/drivers/accel/qda/qda_ioctl.c
-> new file mode 100644
-> index 000000000000..761d3567c33f
-> --- /dev/null
-> +++ b/drivers/accel/qda/qda_ioctl.c
-> @@ -0,0 +1,26 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +// Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-> +#include <drm/drm_ioctl.h>
-> +#include <drm/qda_accel.h>
-> +#include "qda_drv.h"
-> +#include "qda_ioctl.h"
-> +
-> +/**
-> + * qda_ioctl_query() - Query DSP device information
-> + * @dev: DRM device structure
-> + * @data: User-space data (struct drm_qda_query)
-> + * @file_priv: DRM file private data
-> + *
-> + * Return: 0 on success, negative error code on failure
-> + */
-> +int qda_ioctl_query(struct drm_device *dev, void *data, struct drm_file *file_priv)
+> +int virtio_gpu_lock_one_resv_uninterruptible(struct virtio_gpu_object_array *objs)
 > +{
-> +	struct drm_qda_query *args = data;
-> +	struct qda_dev *qdev;
+> +	int ret;
 > +
-> +	qdev = qda_dev_from_drm(dev);
+> +	if (objs->nents != 1)
+> +		return -EINVAL;
 > +
-> +	strscpy(args->dsp_name, qdev->dsp_name, sizeof(args->dsp_name));
+> +	dma_resv_lock(objs->objs[0]->resv, NULL);
 > +
+> +	ret = dma_resv_reserve_fences(objs->objs[0]->resv, 1);
+> +	if (ret) {
+> +		virtio_gpu_array_unlock_resv(objs);
+> +		return ret;
+> +	}
 > +	return 0;
 > +}
-> diff --git a/drivers/accel/qda/qda_ioctl.h b/drivers/accel/qda/qda_ioctl.h
-> new file mode 100644
-> index 000000000000..b8fd536a111f
-> --- /dev/null
-> +++ b/drivers/accel/qda/qda_ioctl.h
-> @@ -0,0 +1,13 @@
-> +/* SPDX-License-Identifier: GPL-2.0-only */
-> +/*
-> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-> + */
 > +
-> +#ifndef __QDA_IOCTL_H__
-> +#define __QDA_IOCTL_H__
-> +
-> +#include "qda_drv.h"
-> +
-> +int qda_ioctl_query(struct drm_device *dev, void *data, struct drm_file *file_priv);
-> +
-> +#endif /* __QDA_IOCTL_H__ */
-> diff --git a/include/uapi/drm/qda_accel.h b/include/uapi/drm/qda_accel.h
-> new file mode 100644
-> index 000000000000..1971a4263065
-> --- /dev/null
-> +++ b/include/uapi/drm/qda_accel.h
-> @@ -0,0 +1,49 @@
-> +/* SPDX-License-Identifier: GPL-2.0-only WITH Linux-syscall-note */
-> +/*
-> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-> + */
-> +
-> +#ifndef __QDA_ACCEL_H__
-> +#define __QDA_ACCEL_H__
-> +
-> +#include "drm.h"
-> +
-> +#if defined(__cplusplus)
-> +extern "C" {
-> +#endif
-> +
-> +/*
-> + * QDA IOCTL command numbers
-> + *
-> + * These define the command numbers for QDA-specific IOCTLs.
-> + * They are used with DRM_COMMAND_BASE to create the full IOCTL numbers.
-> + */
-> +#define DRM_QDA_QUERY		0x00
-> +
-> +/*
-> + * QDA IOCTL definitions
-> + *
-> + * These macros define the actual IOCTL numbers used by userspace applications.
-> + * They combine the command numbers with DRM_COMMAND_BASE and specify the
-> + * data structure and direction (read/write) for each IOCTL.
-> + */
-> +#define DRM_IOCTL_QDA_QUERY		DRM_IOR(DRM_COMMAND_BASE + DRM_QDA_QUERY, \
-> +					 struct drm_qda_query)
-> +
-> +/**
-> + * struct drm_qda_query - Device information query structure
-> + * @dsp_name: Name of DSP (e.g., "adsp", "cdsp", "cdsp1", "gdsp0", "gdsp1")
-> + *
-> + * This structure is used with DRM_IOCTL_QDA_QUERY to query device type,
-> + * allowing userspace to identify which DSP a device node represents. The
-> + * kernel provides the DSP name directly as a null-terminated string.
-> + */
-> +struct drm_qda_query {
-> +	__u8 dsp_name[16];
+>  void virtio_gpu_array_unlock_resv(struct virtio_gpu_object_array *objs)
+>  {
+>  	if (objs->nents == 1) {
+> diff --git a/drivers/gpu/drm/virtio/virtgpu_plane.c b/drivers/gpu/drm/virtio/virtgpu_plane.c
+> index a126d1b25f46..652352424744 100644
+> --- a/drivers/gpu/drm/virtio/virtgpu_plane.c
+> +++ b/drivers/gpu/drm/virtio/virtgpu_plane.c
+> @@ -215,7 +215,10 @@ static void virtio_gpu_resource_flush(struct drm_plane *plane,
+>  		if (!objs)
+>  			return;
+>  		virtio_gpu_array_add_obj(objs, vgfb->base.obj[0]);
+> -		virtio_gpu_array_lock_resv(objs);
+> +		if (virtio_gpu_lock_one_resv_uninterruptible(objs)) {
+> +			virtio_gpu_array_put_free(objs);
+> +			return;
+> +		}
+>  		virtio_gpu_cmd_resource_flush(vgdev, bo->hw_res_handle, x, y,
+>  					      width, height, objs,
+>  					      vgplane_st->fence);
+> @@ -459,7 +462,10 @@ static void virtio_gpu_cursor_plane_update(struct drm_plane *plane,
+>  		if (!objs)
+>  			return;
+>  		virtio_gpu_array_add_obj(objs, vgfb->base.obj[0]);
+> -		virtio_gpu_array_lock_resv(objs);
+> +		if (virtio_gpu_lock_one_resv_uninterruptible(objs)) {
+> +			virtio_gpu_array_put_free(objs);
+> +			return;
+> +		}
+>  		virtio_gpu_cmd_transfer_to_host_2d
+>  			(vgdev, 0,
+>  			 plane->state->crtc_w,
 
-Are you sure that you want to query only the name? No extra options, no
-attributes, no hardware capabilities?
-
-> +};
-> +
-> +#if defined(__cplusplus)
-> +}
-> +#endif
-> +
-> +#endif /* __QDA_ACCEL_H__ */
-> 
-> -- 
-> 2.34.1
-> 
-> 
+Applied to misc-next, thanks
 
 -- 
-With best wishes
+Best regards,
 Dmitry
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
