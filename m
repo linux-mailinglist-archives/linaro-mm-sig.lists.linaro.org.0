@@ -2,274 +2,168 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WFsjKc7QDWr53QUAu9opvQ
+	id yKK2JMbSDWpP3gUAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 May 2026 17:18:38 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 May 2026 17:27:02 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4193F590ADD
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 May 2026 17:18:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2D83C590CB4
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 May 2026 17:27:02 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id BA1264097D
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 May 2026 15:18:36 +0000 (UTC)
-Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com [136.143.188.112])
-	by lists.linaro.org (Postfix) with ESMTPS id 9B08940982
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 20 May 2026 15:18:17 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 2ED864097E
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 May 2026 15:27:01 +0000 (UTC)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by lists.linaro.org (Postfix) with ESMTP id 684AB40976
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 20 May 2026 15:26:50 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=collabora.com header.s=zohomail header.b=hWyY5U2U;
-	arc=pass ("zohomail.com:s=zohoarc:i=1");
-	spf=pass (lists.linaro.org: domain of dmitry.osipenko@collabora.com designates 136.143.188.112 as permitted sender) smtp.mailfrom=dmitry.osipenko@collabora.com;
-	dmarc=pass (policy=none) header.from=collabora.com
-ARC-Seal: i=1; a=rsa-sha256; t=1779290292; cv=none;
-	d=zohomail.com; s=zohoarc;
-	b=DPRjwcSgU9NAVK3t6ludoB8Fls1PIsK60Ck1S6Ap3ODgBnm5sGrRIMXN40JKZBXPvLcYec7RJ4obTnn6CLzBWHyAvaHn0C11trK7PSCpgkKWOTG9ntSWfdxCbRjaUcr4FDiBHzyGzjN6JdFBFmOS+qUX/4QtUsrn465rk41SAyQ=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc;
-	t=1779290292; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
-	bh=1x0FyOWivNSIA+YkZsdTIQiJF2Ucpta4cBeqHywF/cU=;
-	b=cKykkgi12BHITTf3cmtblCq9A1PtSiPBmGC7d6qJKKQ18zKc053waEwbsO0h3sBaiJ99hcj1oFt1BVBMl6bx9T6bj6mZVkUEhR31j3muX/EsqzbfNtBB8DN8rpgUbJse7ri8a4uZ4ipdLzPkodtTUgyb/KvkOMzYrbQdqXVUCJI=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=collabora.com;
-	spf=pass  smtp.mailfrom=dmitry.osipenko@collabora.com;
-	dmarc=pass header.from=<dmitry.osipenko@collabora.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1779290292;
-	s=zohomail; d=collabora.com; i=dmitry.osipenko@collabora.com;
-	h=Message-ID:Date:Date:MIME-Version:Subject:Subject:From:From:To:To:Cc:Cc:References:In-Reply-To:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
-	bh=1x0FyOWivNSIA+YkZsdTIQiJF2Ucpta4cBeqHywF/cU=;
-	b=hWyY5U2U9APDrOH/pIPFEvRW1dBjtgOXeO+Sg1GfhhWD8+ox0YEyaMGKIoWdiCuu
-	tTGicufnczt0iKCBwUgMmZW2AhJ1Y9QyK+R2CN6dwzO/sTi+FN4SDqFmcEy/xVhbZk1
-	hqTfPl5B56mtrSyS68pfcWFgc4TKBk1dYzeUL50Y=
-Received: by mx.zohomail.com with SMTPS id 1779290290871362.15164197070646;
-	Wed, 20 May 2026 08:18:10 -0700 (PDT)
-Message-ID: <ca7407f6-217b-4b78-9a98-e3c28756e565@collabora.com>
-Date: Wed, 20 May 2026 18:18:05 +0300
+	dkim=pass header.d=arm.com header.s=foss header.b=quuL0OnN;
+	spf=pass (lists.linaro.org: domain of steven.price@arm.com designates 217.140.110.172 as permitted sender) smtp.mailfrom=steven.price@arm.com;
+	dmarc=pass (policy=none) header.from=arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B668416A3;
+	Wed, 20 May 2026 08:26:44 -0700 (PDT)
+Received: from [10.57.33.178] (unknown [10.57.33.178])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9B9BF3F632;
+	Wed, 20 May 2026 08:26:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1779290809; bh=7n6+w/JNJIy9JBoZEpq6DMA9zKTx48lQeLJC8YLMxp4=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=quuL0OnNg2zLJ2BDZ1cDhvpe34hP8cBpi4dNiIS7uWI9QJj/QpjNuoupzxo27MkGx
+	 7LeMTtSADUfabpkVQChWMdtc+4mKpoJRgcnVPE6zou0KA1WiuebrMJEOWWZYcDDf6+
+	 kwMaqTeo6QGyfMGTBU6A0OGpW+xw8UfHYagH5+v8=
+Message-ID: <6923c228-b81e-4d02-b59c-a21b2212318e@arm.com>
+Date: Wed, 20 May 2026 16:26:42 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
-To: Deepanshu Kartikey <kartikey406@gmail.com>, airlied@redhat.com,
- kraxel@redhat.com, gurchetansingh@chromium.org, olvaffe@gmail.com,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de,
- simona@ffwll.ch, sumit.semwal@linaro.org, christian.koenig@amd.com
-References: <20260519082247.34470-1-kartikey406@gmail.com>
- <43ecdd2f-5faf-432a-a814-77190b3ef239@collabora.com>
-Content-Language: en-US
-In-Reply-To: <43ecdd2f-5faf-432a-a814-77190b3ef239@collabora.com>
-X-ZohoMailClient: External
-X-Spamd-Bar: -----
-Message-ID-Hash: PSCBCFABBU2CABC3BQ3ZTW6EKL4GKH35
-X-Message-ID-Hash: PSCBCFABBU2CABC3BQ3ZTW6EKL4GKH35
-X-MailFrom: dmitry.osipenko@collabora.com
+To: Boris Brezillon <boris.brezillon@collabora.com>,
+ Chia-I Wu <olvaffe@gmail.com>
+References: <20260513-panthor-guard-refactor-v1-0-f2d8c15a97ce@collabora.com>
+ <20260513-panthor-guard-refactor-v1-1-f2d8c15a97ce@collabora.com>
+ <5ab2d07c-74a4-4a2c-b145-6ed7b0060944@arm.com>
+ <CAPaKu7S9WMbJERrWa=bj5qyQg72no9MPex6S1MY6t8nXoMbB-Q@mail.gmail.com>
+ <20260518104356.71827224@fedora>
+From: Steven Price <steven.price@arm.com>
+Content-Language: en-GB
+In-Reply-To: <20260518104356.71827224@fedora>
+X-Spamd-Bar: ---
+Message-ID-Hash: X3SC6JTYFE3XMSZQSWY6YQ567XSFTL4U
+X-Message-ID-Hash: X3SC6JTYFE3XMSZQSWY6YQ567XSFTL4U
+X-MailFrom: steven.price@arm.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: dri-devel@lists.freedesktop.org, virtualization@lists.linux.dev, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, syzbot+72bd3dd3a5d5f39a0271@syzkaller.appspotmail.com, stable@vger.kernel.org
+CC: Liviu Dudau <liviu.dudau@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v4] drm/virtio: use uninterruptible resv lock for plane updates
+Subject: [Linaro-mm-sig] Re: [PATCH 1/6] drm/panthor: Driver-wide xxx_[un]lock -> [scoped_]guard replacement
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PSCBCFABBU2CABC3BQ3ZTW6EKL4GKH35/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/X3SC6JTYFE3XMSZQSWY6YQ567XSFTL4U/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [3.09 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[collabora.com:s=zohomail];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:zohomail.com:reject}];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+X-Spamd-Result: default: False [0.69 / 15.00];
+	R_DKIM_REJECT(1.00)[arm.com:s=foss];
 	MAILLIST(-0.20)[mailman];
-	DMARC_POLICY_SOFTFAIL(0.10)[collabora.com : SPF not aligned (relaxed),none];
+	R_SPF_ALLOW(-0.20)[+mx];
+	DMARC_POLICY_SOFTFAIL(0.10)[arm.com : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
+	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[18];
 	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_THREE(0.00)[3];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com,redhat.com,chromium.org,linux.intel.com,kernel.org,suse.de,ffwll.ch,linaro.org,amd.com];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[collabora.com:-];
-	NEURAL_HAM(-0.00)[-1.000];
-	FROM_NEQ_ENVFROM(0.00)[dmitry.osipenko@collabora.com,linaro-mm-sig-bounces@lists.linaro.org];
-	TO_DN_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,72bd3dd3a5d5f39a0271];
+	FREEMAIL_TO(0.00)[collabora.com,gmail.com];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	FREEMAIL_CC(0.00)[arm.com,linaro.org,amd.com,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,collabora.com:mid,syzkaller.appspot.com:url,linaro.org:email]
-X-Rspamd-Queue-Id: 4193F590ADD
+	RCPT_COUNT_TWELVE(0.00)[14];
+	NEURAL_HAM(-0.00)[-1.000];
+	FROM_NEQ_ENVFROM(0.00)[steven.price@arm.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[arm.com:-];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	TO_DN_SOME(0.00)[]
+X-Rspamd-Queue-Id: 2D83C590CB4
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On 5/20/26 18:04, Dmitry Osipenko wrote:
-> On 5/19/26 11:22, Deepanshu Kartikey wrote:
->> virtio_gpu_cursor_plane_update() and virtio_gpu_resource_flush() lock
->> the framebuffer BO's dma_resv via virtio_gpu_array_lock_resv() and
->> ignore its return value. The function can fail with -EINTR from
->> dma_resv_lock_interruptible() (signal during lock wait) or with
->> -ENOMEM from dma_resv_reserve_fences() (fence slot allocation),
->> leaving the resv lock not held. The queue path then walks the object
->> array and calls dma_resv_add_fence(), which requires the lock held;
->> with lockdep enabled this trips dma_resv_assert_held():
->>
->>   WARNING: drivers/dma-buf/dma-resv.c:296 at dma_resv_add_fence+0x71e/0x840
->>   Call Trace:
->>    virtio_gpu_array_add_fence
->>    virtio_gpu_queue_ctrl_sgs
->>    virtio_gpu_queue_fenced_ctrl_buffer
->>    virtio_gpu_cursor_plane_update
->>    drm_atomic_helper_commit_planes
->>    drm_atomic_helper_commit_tail
->>    commit_tail
->>    drm_atomic_helper_commit
->>    drm_atomic_commit
->>    drm_atomic_helper_update_plane
->>    __setplane_atomic
->>    drm_mode_cursor_universal
->>    drm_mode_cursor_common
->>    drm_mode_cursor_ioctl
->>    drm_ioctl
->>    __x64_sys_ioctl
->>
->> Beyond the WARN, mutating the dma_resv fence list without the lock
->> races with concurrent readers/writers and can corrupt the list.
->>
->> Both call sites run inside the .atomic_update plane callback, which
->> DRM atomic helpers do not allow to fail (by the time it runs, the
->> commit has been signed off to userspace and there is no clean
->> rollback path). Moving the lock acquisition to .prepare_fb was
->> rejected because the broader lock scope deadlocks against other BO
->> locking paths in the same atomic commit.
->>
->> Introduce virtio_gpu_lock_one_resv_uninterruptible() that uses
->> dma_resv_lock() instead of dma_resv_lock_interruptible(). This
->> eliminates the -EINTR failure mode -- the realistic syzbot trigger
->> -- without extending the lock hold across the commit. The helper
->> locks a single BO and rejects nents > 1 with -EINVAL; both fix
->> sites lock exactly one BO.
->>
->> Use it from virtio_gpu_cursor_plane_update() and
->> virtio_gpu_resource_flush(); check the return value to handle the
->> remaining -ENOMEM case from dma_resv_reserve_fences() by freeing
->> the objs and skipping the plane update for that frame. The
->> framebuffer BOs touched here are not shared with other contexts
->> and lock contention is expected to be brief, so the loss of
->> signal-interruptibility is acceptable.
->>
->> Other callers of virtio_gpu_array_lock_resv() (the ioctl paths)
->> continue to use the interruptible variant.
->>
->> The bug was reported by syzbot, triggered via fault injection
->> (fail_nth) on the DRM_IOCTL_MODE_CURSOR path, which forces the
->> -ENOMEM branch in dma_resv_reserve_fences().
->>
->> Reported-by: syzbot+72bd3dd3a5d5f39a0271@syzkaller.appspotmail.com
->> Closes: https://syzkaller.appspot.com/bug?extid=72bd3dd3a5d5f39a0271
->> Fixes: 5cfd31c5b3a3 ("drm/virtio: fix virtio_gpu_cursor_plane_update().")
->> Cc: stable@vger.kernel.org
->> Signed-off-by: Deepanshu Kartikey <kartikey406@gmail.com>
->> ---
->> v4: Rename the helper to virtio_gpu_lock_one_resv_uninterruptible()
->>     and reject objs->nents > 1 with -EINVAL. The v3 helper's
->>     multi-object branch used drm_gem_lock_reservations(), which is
->>     interruptible, contradicting the "uninterruptible" name; both
->>     fix sites lock a single BO so the multi-object path is dropped.
->>     (Dmitry Osipenko)
->> v3: Drop the prepare_fb/cleanup_fb approach from v2 (it deadlocked
->>     against virtio_gpu_resource_flush(), which also locks the BO in
->>     the same atomic commit). Instead add an uninterruptible variant
->>     of the resv lock helper and use it in both
->>     virtio_gpu_cursor_plane_update() and virtio_gpu_resource_flush().
->>     (Dmitry Osipenko)
->> v2: Move resv lock acquisition from .atomic_update (which must not
->>     fail) to .prepare_fb (which may), per maintainer review of v1.
->>     The v1 approach of silently skipping the cursor update on lock
->>     failure violated the atomic-commit contract with userspace.
->> ---
->>  drivers/gpu/drm/virtio/virtgpu_drv.h   |  1 +
->>  drivers/gpu/drm/virtio/virtgpu_gem.c   | 17 +++++++++++++++++
->>  drivers/gpu/drm/virtio/virtgpu_plane.c | 10 ++++++++--
->>  3 files changed, 26 insertions(+), 2 deletions(-)
->>
->> diff --git a/drivers/gpu/drm/virtio/virtgpu_drv.h b/drivers/gpu/drm/virtio/virtgpu_drv.h
->> index f17660a71a3e..2f3531950aa4 100644
->> --- a/drivers/gpu/drm/virtio/virtgpu_drv.h
->> +++ b/drivers/gpu/drm/virtio/virtgpu_drv.h
->> @@ -317,6 +317,7 @@ virtio_gpu_array_from_handles(struct drm_file *drm_file, u32 *handles, u32 nents
->>  void virtio_gpu_array_add_obj(struct virtio_gpu_object_array *objs,
->>  			      struct drm_gem_object *obj);
->>  int virtio_gpu_array_lock_resv(struct virtio_gpu_object_array *objs);
->> +int virtio_gpu_lock_one_resv_uninterruptible(struct virtio_gpu_object_array *objs);
->>  void virtio_gpu_array_unlock_resv(struct virtio_gpu_object_array *objs);
->>  void virtio_gpu_array_add_fence(struct virtio_gpu_object_array *objs,
->>  				struct dma_fence *fence);
->> diff --git a/drivers/gpu/drm/virtio/virtgpu_gem.c b/drivers/gpu/drm/virtio/virtgpu_gem.c
->> index f22dc5c21cd4..435d37d36034 100644
->> --- a/drivers/gpu/drm/virtio/virtgpu_gem.c
->> +++ b/drivers/gpu/drm/virtio/virtgpu_gem.c
->> @@ -238,6 +238,23 @@ int virtio_gpu_array_lock_resv(struct virtio_gpu_object_array *objs)
->>  	return ret;
->>  }
->>  
->> +int virtio_gpu_lock_one_resv_uninterruptible(struct virtio_gpu_object_array *objs)
->> +{
->> +	int ret;
->> +
->> +	if (objs->nents != 1)
->> +		return -EINVAL;
->> +
->> +	dma_resv_lock(objs->objs[0]->resv, NULL);
->> +
->> +	ret = dma_resv_reserve_fences(objs->objs[0]->resv, 1);
->> +	if (ret) {
->> +		virtio_gpu_array_unlock_resv(objs);
->> +		return ret;
->> +	}
->> +	return 0;
->> +}
->> +
->>  void virtio_gpu_array_unlock_resv(struct virtio_gpu_object_array *objs)
->>  {
->>  	if (objs->nents == 1) {
->> diff --git a/drivers/gpu/drm/virtio/virtgpu_plane.c b/drivers/gpu/drm/virtio/virtgpu_plane.c
->> index a126d1b25f46..652352424744 100644
->> --- a/drivers/gpu/drm/virtio/virtgpu_plane.c
->> +++ b/drivers/gpu/drm/virtio/virtgpu_plane.c
->> @@ -215,7 +215,10 @@ static void virtio_gpu_resource_flush(struct drm_plane *plane,
->>  		if (!objs)
->>  			return;
->>  		virtio_gpu_array_add_obj(objs, vgfb->base.obj[0]);
->> -		virtio_gpu_array_lock_resv(objs);
->> +		if (virtio_gpu_lock_one_resv_uninterruptible(objs)) {
->> +			virtio_gpu_array_put_free(objs);
->> +			return;
->> +		}
->>  		virtio_gpu_cmd_resource_flush(vgdev, bo->hw_res_handle, x, y,
->>  					      width, height, objs,
->>  					      vgplane_st->fence);
->> @@ -459,7 +462,10 @@ static void virtio_gpu_cursor_plane_update(struct drm_plane *plane,
->>  		if (!objs)
->>  			return;
->>  		virtio_gpu_array_add_obj(objs, vgfb->base.obj[0]);
->> -		virtio_gpu_array_lock_resv(objs);
->> +		if (virtio_gpu_lock_one_resv_uninterruptible(objs)) {
->> +			virtio_gpu_array_put_free(objs);
->> +			return;
->> +		}
->>  		virtio_gpu_cmd_transfer_to_host_2d
->>  			(vgdev, 0,
->>  			 plane->state->crtc_w,
-> 
-> Applied to misc-next, thanks
-
-Realized patche should go to -fixes, applied to misc-fixes too
-
--- 
-Best regards,
-Dmitry
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gMTgvMDUvMjAyNiAwOTo0MywgQm9yaXMgQnJlemlsbG9uIHdyb3RlOg0KPiBPbiBUaHUsIDE0
+IE1heSAyMDI2IDEwOjA5OjEwIC0wNzAwDQo+IENoaWEtSSBXdSA8b2x2YWZmZUBnbWFpbC5jb20+
+IHdyb3RlOg0KPiANCj4+IE9uIFRodSwgTWF5IDE0LCAyMDI2IGF0IDY6MjTigK9BTSBTdGV2ZW4g
+UHJpY2UgPHN0ZXZlbi5wcmljZUBhcm0uY29tPiB3cm90ZToNCj4+Pg0KPj4+IE9uIDEzLzA1LzIw
+MjYgMTc6NTgsIEJvcmlzIEJyZXppbGxvbiB3cm90ZTogIA0KPj4+PiBSaWdodCBub3cgcGFudGhv
+ciBpcyBtaXhlZCBiYWcgb2YgbWFudWFsIGxvY2tzIGFuZCBndWFyZHMuIExldCdzDQo+Pj4+IG1h
+a2UgdGhhdCBtb3JlIGNvbnNpdGVudCBhbmQgdGh1cyBlbmNvdXJhZ2UgbmV3IHN1Ym1pc3Npb25z
+IHRvIGdvDQo+Pj4+IGZvciBndWFyZHMuICANCj4+Pg0KPj4+IEknbSBmaW5lIHdpdGggZW5jb3Vy
+YWdpbmcgZ3VhcmRzIGZvciBmdXR1cmUgY29kZSAtIGJ1dCBJJ20gYSBsaXR0bGUgd2FyeQ0KPj4+
+IG9mIGEgYmlnIGNoYW5nZSBsaWtlIHRoaXMgLSBpdCdzIGhhcmQgdG8gcmV2aWV3IGl0IGFuZCBj
+aGVjayB0aGF0DQo+Pj4gZXZlcnl0aGluZyB3b3JrcyB0aGUgc2FtZS4gQW5kIGl0J3MgYSBsaXR0
+bGUgZHViaW91cyB0aGF0IHRoZSBtZWNoYW5pY2FsDQo+Pj4gcmVmYWN0b3JpbmcgcHJvZHVjZXMg
+bW9yZSByZWFkYWJsZSBjb2RlIGluIHNvbWUgY2FzZXMuICANCj4+IEkgYWdyZWUgd2l0aCBTdGV2
+ZW4gaW4gZ2VuZXJhbCwgYWx0aG91Z2ggSSBhbSBpbiBmYXZvciBvZiBsYW5kaW5nIG5vdw0KPj4g
+dGhhdCB5b3UndmUgZ29uZSB0aHJvdWdoIHRoZSB0cm91YmxlLg0KPiANCj4gSG9uZXN0bHksIEkg
+YWdyZWUgd2l0aCB5b3UuIFRoZSBvbmx5IHJlYXNvbiBJIHdlbnQgZm9yIGl0IGlzDQo+IGJlY2F1
+c2UgdGhlIG1peCB3ZSBoYXZlIHJpZ2h0IG5vdyBpcyBwcmV0dHkgY29uZnVzaW5nLiBUaGlzIGhh
+cyB0byBkbw0KPiB3aXRoIHRoZSBmYWN0IHRoZSBzY29wZXMgYXJlIG9mdGVuIGxvb3NlbHkgZGVm
+aW5lZCB1bmxlc3MgeW91IHVzZWQNCj4gc2NvcGVkX2d1YXJkKCksIHNvIGl0J3MgcHJldHR5IGVh
+c3kgdG8gbWVzcyB1cCB0aGUgbG9jay91bmxvY2sNCj4gb3JkZXJpbmcuIEZvciBpbnN0YW5jZSwN
+Cj4gDQo+IAltdXRleF9sb2NrKGxvY2thKTsNCj4gCWd1YXJkKGxvY2tiKTsNCj4gCW11dGV4X3Vu
+bG9jayhsb2NrYSk7DQo+IA0KPiAJLi4uDQo+IA0KPiBvbmNlIGV4cGFuZGVkLCB0dXJucyBpbnRv
+IGluY29uc2lzdGVudCBsb2NrZWQgc2VjdGlvbnMsIHdoZXJlIHRoZSBpbm5lcg0KPiBsb2NrIChs
+b2NrYikgaXMgcmVsZWFzZWQgYWZ0ZXIgdGhlIG91dGVyIG9uZSAobG9ja2EpLg0KDQpJIHRoaW5r
+IHRoYXQncyBhIGdvb2QgYXJndW1lbnQgZm9yIGdldHRpbmcgYWxsIHRoZSBndWFyZCBmb3JtcyBh
+dmFpbGFibGUNCmJlZm9yZSB0YWNrbGluZyB0aGUgY29udmVyc2lvbi4gTW9zdGx5IEkgZmVlbCBs
+aWtlIGl0IHdvdWxkIGJlIGJlbmVmaXQNCmZyb20gYmVpbmcgc3BsaXQgdXAgaW50byBtdWx0aXBs
+ZSBwYXRjaGVzIChtYXliZSBvbmUgcGVyIGZpbGU/KSBzbyB0aGF0DQp0aGVyZSBhcmUgc21hbGxl
+ciB1bml0cyB0byByZXZpZXcuDQoNCj4+DQo+PiBJIGFsc28gaGF2ZSBtaXhlZCBmZWVsaW5ncyBh
+Ym91dCBzb21lIG9mIHRoZSBub24tc2NvcGVkIGd1YXJkcy4gVGhlaXINCj4+IHNjb3BlcyBhcmUg
+ZXh0ZW5kZWQgc2xpZ2h0bHkgdGhhbiBiZWZvcmUsIHN1cHBvc2VkbHkgdG8gYXZvaWQgYWRkaW5n
+DQo+PiBhbm90aGVyIGxldmVsIG9mIGluZGVudGF0aW9uLiBCdXQgb3RoZXIgdGhhbiBzbGlnaHRs
+eSBzbG93ZXIsDQo+IA0KPiBJIHRyaWVkIHRvIHVzZWQgc2NvcGVkX2d1YXJkKClzIGV2ZXJ5IHdo
+ZXJlIHRoZSBleHRyYSBub24tZ3VhcmRlZA0KPiBzZWN0aW9uIGNvdWxkIGJlIENQVSBoZWF2eSAo
+dGhlIG9ubHkgYml0cyBsZWZ0IGFyZSBzb21lIHZlcnkgc2ltcGxlDQo+IGJpdC9hcml0aG1ldGlj
+IG9wcywgYW5kIGEgY291cGxlIHF1ZXVlX3dvcmsoKSBJSVJDKS4NCj4gDQo+PiBpdCBhbHNvDQo+
+PiBiZWNvbWVzIGxlc3MgY2xlYXIgd2hhdCBleGFjdGx5IGRvIHRoZSBndWFyZHMgcHJvdGVjdC4N
+Cj4gDQo+IEkga25vdywgYW5kIEkgaGF2ZSBwcmV0dHkgbXVjaCB0aGUgc2FtZSBmZWVsaW5nLCBi
+dXQgd2UndmUgY3Jvc3NlZCB0aGF0DQo+IGJyaWRnZSB3aGVuIHdlIHN0YXJ0ZWQgYWNjZXB0aW5n
+IG5vbi1zY29wZWQgZ3VhcmQoKXMsIHVuZm9ydHVuYXRlbHkuDQoNClRoZSBwcm9ibGVtIHdpdGgg
+c2NvcGVkIGd1YXJkcyBpcyB0aGUgZXh0cmEgbGV2ZWwgb2YgaW5kZW50YXRpb24uDQpQZXJzb25h
+bGx5IEkgZmluZCBhIG1peHR1cmUgb2YgYWxsIHRocmVlIGlzIGFwcHJvcHJpYXRlIGRlcGVuZGlu
+ZyBvbiB0aGUNCmNhc2UuDQoNCkUuZy4NCg0KaW50IHNtYWxsX3NpbXBsZV9mdW5jdGlvbigpIHsN
+CglpZiAoc2ltcGxlX2NvbmRpdGlvbikNCgkJcmV0dXJuIGVhcmx5Ow0KDQoJZ3VhcmQobG9jayk7
+DQoNCglpZiAoY29uZGl0aW9uX3RoYXRfbmVlZHNfbG9jaykNCgkJcmV0dXJuIGVhcmx5Ow0KCS8q
+IG1vcmUgd29yayAqLw0KCXJldHVybiBsYXRlOw0KfQ0KDQpIZXJlIGl0J3MgZWFzeSB0byByZWFz
+b24gYmVjYXVzZSB0aGUgbG9jayBpcyBqdXN0IGhlbGQgZm9yIHRoZSBkdXJhdGlvbg0Kb2YgdGhl
+IGZ1bmN0aW9uIGFmdGVyIHRoZSBpbml0aWFsIGVhcmx5LW91dCBjb25kaXRpb24gaXMgY2hlY2tl
+ZC4NCg0KaW50IHNob3J0X2xvY2soKSB7DQoJLyogYnVuY2ggb2Ygd29yayAqLw0KDQoJc2NvcGVk
+X2d1YXJkKGxvY2spIHsNCgkJdG1wID0gcmVhZF92YWx1ZSgpOw0KCQlpZiAodG1wID09IDQyKQ0K
+CQkJcmV0dXJuIC1FU09MT05HQU5EVEhBTktTRk9SQUxMVEhFRklTSDsNCgkJdG1wKys7DQoJCXdy
+aXRlX3ZhbHVlKHRtcCk7DQoJfQ0KDQoJLyogbW9yZSB3b3JrICovDQp9DQoNCkhlcmUgdGhlcmUn
+cyBhIHNtYWxsIHNlY3Rpb24gb2YgY29kZSB3aGljaCBpcyB3b3JraW5nIG9uIHRoZSBsb2NrLCBz
+byBpdA0KbWFrZXMgc2Vuc2UgdG8gaW5kZW50IGl0IHRvIHNob3cgdGhlIGJvdW5kYXJpZXMgb2Yg
+aXQuIFRoZSBvdGhlciBuaWNlDQp0aGluZyBpcyB0aGF0IHRoZSBlcnJvciByZXR1cm4gaGFuZGxl
+cyB0aGUgbG9ja3MgZm9yIHVzLg0KDQppbnQgb2xkX2Zhc2hpb25lZCgpIHsNCglpZiAobG9ja19y
+ZXF1aXJlZCkNCgkJbXV0ZXhfbG9jayhsb2NrKTsNCg0KCS8qIHNvbWUgd29yayAqLw0KDQoJaWYg
+KGxvY2tfcmVxdWlyZWQpDQoJCW11dGV4X3VubG9jayhsb2NrKTsNCn0NCg0KR2VuZXJhbGx5IGEg
+cGF0dGVybiB0byBiZSBhdm9pZGVkIGlmIHBvc3NpYmxlLCBidXQgSU1ITyB0aGlzIGlzIG11Y2gN
+CmJldHRlciB0aGFuIHRoZSBlcXVpdmFsZW50IG9mOg0KDQppbnQgZG9kZ3lfZnVuY3Rpb24oKSB7
+DQoJLyogc29tZSB3b3JrICovDQp9DQoNCmludCBvdXRlcl9mdW5jdGlvbigpIHsNCglpZiAobG9j
+a19yZXF1aXJlZCkgew0KCQlzY29wZWRfZ3VhcmQobG9jaykNCgkJCWRvZGd5X2Z1bmN0aW9uKCk7
+DQoJfSBlbHNlIHsNCgkJZG9kZ3lfZnVuY3Rpb24oKTsNCgl9DQp9DQoNCndoaWNoIHJlcXVpcmVz
+IGJyZWFraW5nIG91dCB0aGUgd29yayBpbnRvIGFuIGV4dHJhIGZ1bmN0aW9uIGFuZA0KZHVwbGlj
+YXRpbmcgdGhlIGNhbGwgKG9yIHdvcnNlIGR1cGxpY2F0aW5nIHRoZSBmdW5jdGlvbiBib2R5KS4N
+Cg0KT25lIHRoaW5nIEkgZG8gYWdyZWUgaXMgdGhhdCBtaXhpbmcgYW5kIG1hdGNoaW5nIHdpdGhp
+biB0aGUgc2FtZQ0KZnVuY3Rpb24gaXMgYSByZWNpcGUgZm9yIGNvbmZ1c2lvbiBhbmQgbWlzdGFr
+ZXMuDQoNClRoYW5rcywNClN0ZXZlDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2ln
+QGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8t
+bW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
