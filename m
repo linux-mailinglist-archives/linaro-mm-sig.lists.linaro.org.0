@@ -2,601 +2,293 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4HjnD7jCDWqV3AUAu9opvQ
+	id aFlvGv/CDWr32wUAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 May 2026 16:18:32 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 May 2026 16:19:43 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id B078D58F714
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 May 2026 16:18:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D791C58F764
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 May 2026 16:19:42 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9DC7840982
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 May 2026 14:18:30 +0000 (UTC)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	by lists.linaro.org (Postfix) with ESMTPS id 0B9B33F96B
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 20 May 2026 14:18:19 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D413B40983
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 May 2026 14:19:41 +0000 (UTC)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	by lists.linaro.org (Postfix) with ESMTPS id 8655640964
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 20 May 2026 14:19:31 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=qualcomm.com header.s=qcppdkim1 header.b="P/FSlRFT";
-	dkim=pass header.d=oss.qualcomm.com header.s=google header.b=OKDCev5L;
-	spf=pass (lists.linaro.org: domain of dmitry.baryshkov@oss.qualcomm.com designates 205.220.180.131 as permitted sender) smtp.mailfrom=dmitry.baryshkov@oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.s=qcppdkim1 header.b=ALUpjjFB;
+	dkim=pass header.d=oss.qualcomm.com header.s=google header.b=O2kTVmJv;
+	spf=pass (lists.linaro.org: domain of dmitry.baryshkov@oss.qualcomm.com designates 205.220.168.131 as permitted sender) smtp.mailfrom=dmitry.baryshkov@oss.qualcomm.com;
 	dmarc=pass (policy=reject) header.from=qualcomm.com
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 64K9nRL4446688
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 20 May 2026 14:18:18 GMT
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 64KDXvAR1798612
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 20 May 2026 14:19:30 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=WP9MtY8PpeA3BVDLSTnY8xx4
-	g/DgRi3AAF8a/7DvDg8=; b=P/FSlRFTvTcvcco2O49bbM7wxYzHWNpQXafrBC2o
-	pDyNRu9ZxvU2tFZ5AfztKPniYbHwgBrPuQV/c8RUG9jCAtghiap8rKbSAE2X1x7l
-	3QDTDwvJCrb9dMRjZ3sEhE9ZboGcdg/9gRgOqSlU0X97tRGl+h+DMHyDWU3zm5oD
-	K7ZWulABgfRWQFp5Xrel+5yCLU4etfSq9AcHSRmghysjRymq0y0Xi54Aco1wsc/Z
-	AgM+Dbpaa0ukxZ87dwqQjkqcZgu6eDk95/cRyLuqyzGEx4ew8flbmULd4nNCBS15
-	i7ii056JUDEsBo9A6FhuaS/hvnLptPrJuhO+AK66Pv3zZw==
-Received: from mail-ot1-f72.google.com (mail-ot1-f72.google.com [209.85.210.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4e9anrgymj-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	jjNnASAt5iqKMaT3xE7uUJEpw63hfaVPY06gYhwCG3U=; b=ALUpjjFBst8BY3aC
+	gOVk9qIAjwkF0BFDiaZNf9nqmOMsjJs6YBOZjvUYoyjzKJES5I7Bp9/7wErcw+ka
+	PTYeKXlYY4eWoga3fIvf3iTh2CJeSoj/e5gh3qPEzZ755lLiqL2uld+bypupgzR/
+	5Jklc/hboMwP9hjsGRxAom9Y8z1w8hi0tF3293ei998qkwD7ZZ+QAh4orsZdepl5
+	ztd1OxFWfW4p2FRevkhHwf6Bukfbko9l9a5ae13G1ug/Ycoh7ime1IE9ldm4XOe9
+	xwxCl0VV+4rZ9WFmR3xSyBuuhTqD4MkHKBSeVhD9ncwVBi+n8mdgyxlm8jox0fPh
+	zhtsoQ==
+Received: from mail-oa1-f72.google.com (mail-oa1-f72.google.com [209.85.160.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4e9dxu059t-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 20 May 2026 14:18:18 +0000 (GMT)
-Received: by mail-ot1-f72.google.com with SMTP id 46e09a7af769-7dce437f1a1so14313952a34.3
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 20 May 2026 07:18:18 -0700 (PDT)
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 20 May 2026 14:19:30 +0000 (GMT)
+Received: by mail-oa1-f72.google.com with SMTP id 586e51a60fabf-438a47daaf2so4481941fac.1
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 20 May 2026 07:19:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1779286698; x=1779891498; darn=lists.linaro.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=WP9MtY8PpeA3BVDLSTnY8xx4g/DgRi3AAF8a/7DvDg8=;
-        b=OKDCev5LB3gVf/S82RtSigG1fVeuXcTyK9eg5ZYOCwS5cUiCpdS8T18XNbfntvz52q
-         uDPdVg4F1QZFuD6YFhOWyS5hYsFp1N1zFwbftZyQSI5eoY8riy1xc08C446VQOyo+lwB
-         Zbp9EeG251ThhSgIGr/fChlJPnB0c5/I3pUDTPKmzU3YBrylsTUTg1BpuPL02mt+h++o
-         m7XLOgX5Ubph+iqqqAIQiclG3PMEOg6kXX18Wb9BcviS4iekd9vz+v5+Ioe9MLSf4nnz
-         zHQeYrh1qxpd38ZEXXCdglUq2GLWhMUDpumytmaCvlt0XvviqxhIw3LlitV3JdV/71Cl
-         NlFA==
+        d=oss.qualcomm.com; s=google; t=1779286769; x=1779891569; darn=lists.linaro.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=jjNnASAt5iqKMaT3xE7uUJEpw63hfaVPY06gYhwCG3U=;
+        b=O2kTVmJvnV76dNpew03dYZi+5TLob0WIOYy8cvugbtv5N0VVf745BjImtJtL55xYXe
+         AXcEhWUC1DLU8jdHD1dsfl1IV/4Nyj5XB2J6jjn12gj4OF0FPv9ZQw+sFFAvV4wGzIb/
+         ANUa/tvyy3Zl8hAES1DEhPRGNCl9SNr+9pSOP+ncVRol1s4wlrI5qKIE4sC2M4drQnwM
+         mCuIQXcnfMG2rc+v91FferFiqCT1VsXp9qVrbqXWz/aZSdPj5ZEm5mshMQp9Q7ARVhXB
+         aUgpv02MixL4ibqdyvasNrdUWsd5v516Lv985XECBNIViiyg/KFbb+X9Lab4FK7MGAhR
+         nLHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779286698; x=1779891498;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=WP9MtY8PpeA3BVDLSTnY8xx4g/DgRi3AAF8a/7DvDg8=;
-        b=gczoo8d6cnHOYFwYwAcK/zlgINu59L93PLgdhRvI4jA2wkY1ICs+1rnfhhwf7iKykn
-         nfecdabk/4Aol0rQLs9qutAHsGmumnymcAAJNZwDbHB7LCC94utNez8bYPYAP9h3K96I
-         gw/7Xp8146xu61vFhAPAvbLTSWu9UGePvfXBBheHq1SmuCuqwO/RE8/QWjRp1wtWexjv
-         QWjkYkf2EZgVfJLjrOc8qM4epusRtsIgg7I7OVhfA1ABbUoHVKYfJGgiupM1GAm+iXrO
-         mO3EI6swPGEt8FxI73Fdro6lsAR7zqbCPObBsKJ8fELrp4glP6LH1Vv4GX/3cTFuw5Sk
-         nTfg==
-X-Forwarded-Encrypted: i=1; AFNElJ9F32KvykZkF/QbwwlWdW7u7kYfmNOZrrHpoPhDd+x3GH0TE9TNKqK/YoZj0AwojMkdZCV4BTId83SX7PQg@lists.linaro.org
-X-Gm-Message-State: AOJu0YzeTfb7pUxLFGp2GaUVuZJUcuiS2H9pS2o6qxVSprJUOduj0b2j
-	gz5ZylKUaSmrWcs3ujJ5eiY/yovGhqHcnc2CeRKHrr6/4XBnnKgFa0B6yic/4aZMKSgVm3QXoMa
-	OYheFabmoOttG5FPX9wpSmzwqv3g7rr/WfOIOmjXnMiOHcF2lcF+EripSYlRWfGHHAbujpw==
-X-Gm-Gg: Acq92OHut0oodzsnWJCKkwUaa5rG8IfGTsmgXWK7HU/xsxAFF8zCUTDKQY1rW9EVb/j
-	q6/EMN3iuX/0AH+uo9PfzgK+hMk0aio6YJ+sUYJ9piFaiKvk0yVDxI2eNbB+sQuRAey92iRopnh
-	M2WBqKrPQbAV08z8GKc3QU9wLiWnBUrZ75jTn4o7mZXqT5R7q+JcNiX1oinpnQxcJT+vYiyNuFl
-	KIUM1bxK3XDhBHiMAq+8q0KH1ZiBwXOWaW1MnVNs00A2BHlz90zo3MsiTIZJctn02aOTzjqnTB8
-	55vNkf1fM9rgYI2RpeXKyHf+wAlHfJYXr1S78K31pqPMFWmJWDkASINCIGuJdzNT19fOyeUYtJ6
-	G/7b/5pQaBuoR7zUoOx65WUVff5J4iXxgkvFnnlWPRIGMafQSWUyvjLe0krxqVizh25Fio6IoDk
-	Tf2AfwFugE0ZC0xx+h/4V9tGoYN7rNguD9MNo=
-X-Received: by 2002:a05:6830:4394:b0:7dc:de56:d75a with SMTP id 46e09a7af769-7e4ea04ccbemr17929217a34.4.1779286697748;
-        Wed, 20 May 2026 07:18:17 -0700 (PDT)
-X-Received: by 2002:a05:6830:4394:b0:7dc:de56:d75a with SMTP id 46e09a7af769-7e4ea04ccbemr17929163a34.4.1779286697219;
-        Wed, 20 May 2026 07:18:17 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1779286769; x=1779891569;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=jjNnASAt5iqKMaT3xE7uUJEpw63hfaVPY06gYhwCG3U=;
+        b=RH18w0Q3rdlGBtvGFvEQitcQgzwxQVVLGPRs4IN0Zt52+omhFRXEZvcE2cTvw0BAr5
+         lCgm6vCtoba8gsJEEDX5Ug8QE3z7ZDZ0HKRg6JNVMTA6iw3nW+EYEcpT6st2v4zDtYU5
+         n1ypYY/fPa/dEFNCKFaV8FWtT0UDhtknzl519oCo7jlwj4m28evJnA32P5weEuRAiHsU
+         jDENV0WOPuDvIFQdkTPFxNcMPszntGn99tZTGHN3xkPpIrrgWx6pmmBbf+flV+V2629v
+         OZ3yWjLPBee4U8VmvhAhlyHNp3lNBGWwrE2i5caqoj7yZ+rYDxLeZoSxmjeJVt/Vxb8t
+         modw==
+X-Forwarded-Encrypted: i=1; AFNElJ8QKxfk2t4waxJxPwGmA3MWrStuMmLR8cRCulZNfbdj5WiJGE0u2or9TVvPUu1xFZsZb4DM0Erpmt3XCBl+@lists.linaro.org
+X-Gm-Message-State: AOJu0YwvYoG7ithREoL72k/NyQSsqH/22KD3a4N84uXPa7zMT42Go6ht
+	PWlZe4UZtxpupm5iTD6/+yk8poKxxGgeJCy4skxBMWvl5kRMCYH7zlwKwQ52YdAT1tz93NKNKPF
+	E8H0R7oRAsmAA7/q5CL65LCaQ+aVHHOqt9uuBbHEcv2EQFCsdz0G079+QN+VCZfSOo4fiJw==
+X-Gm-Gg: Acq92OEroavr/RdmN6PkWUhfZUSjwh//0Vo+a/Smuz2otCFzunJlVPQFb1Ar76B2PoU
+	r+eMJ/ruc/ktSta6/QVH39e+0w0j9fj8yp083XTjxRRpf3bwtoOKeUiGyi8gLQMRarD1sNtzNBa
+	RnWX156iZYaQAIkgzvMzlWab30O03knL4lsz4BDzERy1VILKVEQE4vosFRVkXw/hOwW+HbneUWK
+	Xkc2lDDxrJ9dFQDGfOD0KhpZ2Q4O14Rdapimt/cESM5vv8Y/CBYzllVO0K2yoEpknuFUWD3gtKw
+	UzR4H8+0nd5vF2IKTSDy7WVyg9KIqBlvBE6ZhdFyb8CMqx84eYvRIJgfTUaNnIRr9SFsSPSzYwh
+	xwi+Pj36FHiv0liCme8GAc5hRUu4KLuDIolKeMuncj2nm6O2s9gTf6BOp3CrGcAQt8G2YI62Cen
+	66DCUBn2e9EZs6vx8+obG+mF8kUdPJod2aTeM=
+X-Received: by 2002:a05:6820:4b8c:b0:699:90a5:106b with SMTP id 006d021491bc7-69c942f73a1mr14792734eaf.24.1779286769460;
+        Wed, 20 May 2026 07:19:29 -0700 (PDT)
+X-Received: by 2002:a05:6820:4b8c:b0:699:90a5:106b with SMTP id 006d021491bc7-69c942f73a1mr14792713eaf.24.1779286768912;
+        Wed, 20 May 2026 07:19:28 -0700 (PDT)
 Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5a9164cf803sm5080846e87.76.2026.05.20.07.18.15
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5a9164bc462sm4990268e87.45.2026.05.20.07.19.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 20 May 2026 07:18:16 -0700 (PDT)
-Date: Wed, 20 May 2026 17:18:14 +0300
+        Wed, 20 May 2026 07:19:27 -0700 (PDT)
+Date: Wed, 20 May 2026 17:19:26 +0300
 From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 To: ekansh.gupta@oss.qualcomm.com
-Message-ID: <wbrrredwk2id5ntjlvxhk66uxxa6elwbqg2sj2jmrydz7ss4qz@hsvwcj4iocsu>
+Message-ID: <gnlpw4ijwtjv43nhcv5iirhjnuc7dntx5vucdrhnxeyznyxa5x@t65o5owldu5s>
 References: <20260519-qda-series-v1-0-b2d984c297f8@oss.qualcomm.com>
- <20260519-qda-series-v1-3-b2d984c297f8@oss.qualcomm.com>
+ <20260519-qda-series-v1-4-b2d984c297f8@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260519-qda-series-v1-3-b2d984c297f8@oss.qualcomm.com>
-X-Proofpoint-GUID: R4gwVU4Ma3VUWsuGwLOdVCTtnRoQJOER
-X-Proofpoint-ORIG-GUID: R4gwVU4Ma3VUWsuGwLOdVCTtnRoQJOER
-X-Authority-Analysis: v=2.4 cv=UuJT8ewB c=1 sm=1 tr=0 ts=6a0dc2aa cx=c_pps
- a=+3WqYijBVYhDct2f5Fivkw==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+In-Reply-To: <20260519-qda-series-v1-4-b2d984c297f8@oss.qualcomm.com>
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTIwMDEzOSBTYWx0ZWRfX7Sfhtow6B6QU
+ N95zGjvZ2IxHhuu6gZ6jWaWYMHWzIGmF+DyPAhr+ZG7whPsrMyJp8RC7wschgaUvhOHk7WJ+x8I
+ dubaR5nSMztFq0Djb+GUc+lyL8LtpwRbAXIX+DGfp7iiJ2mG9k+A5tzObzGZkBmWaXu2QSeOgrS
+ 1gw5y2H0DUK6EtmyROR9s8JY0qR+mK1VkqSKw2vdB/+vQsniFrqjF9iUKrOS4zxFyd0O3XW0+wv
+ hZo0ztz+Y7BYlZscwJXmtzEVAW/eqPgbkQpddr/Q+DR2dV7lAMAK8j5d3hE+PL1rKBUYs8up3gM
+ 4kWJa5UlZ3cQde9WvCaEyoBgr9l/tE26Hsf6KqQZghlGsqyiq8Yk+5oQ1pF21cdctEZsaK3U2m/
+ 731MrrYyGff6cXHPrXkeV/Ph88Wqhk247baQipBuH0OpG/eaQLfCmKHj/WIXsYelkWNadPkW/3A
+ aVuPIWhUkO5Iij70ODg==
+X-Authority-Analysis: v=2.4 cv=Zckt8MVA c=1 sm=1 tr=0 ts=6a0dc2f2 cx=c_pps
+ a=Z3eh007fzM5o9awBa1HkYQ==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
  a=NGcC8JguVDcA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=EUspDBNiAAAA:8
- a=KxzzkAsT-b1q7BVvj_IA:9 a=CjuIK1q_8ugA:10 a=eYe2g0i6gJ5uXG_o6N4q:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTIwMDEzOSBTYWx0ZWRfX9P+UcWwif0Z9
- N3WRmPTInm5ATmfp0YeGjwaf+TtMf9aIuxV9pXNfG5NGdrfMrBdnCYz3Jbr+4aegoUdSfML6t3H
- YQ/DhfcuG663PvMlNYjPGHp30H+sSJ7BOFfi05XkTI2ScQE2qoRvEnTJdtCUR9q/fFZXG93HiLj
- LUxNMWaE1+XmOGzFhXitSxyp2mj7z6rqizWaB1LpL29hW/vTS6qhhnoOxbAi2dVcQnPeGaWCIy/
- ME2CfvDRSOPM+2bdebjkuDrsQLckS0LHUYa0Y4cxnWWIjmWWic8ovxcl7zyQcw4Bc5mhIVm3gQ2
- K9toVnpGJ2ZwqwdjhDQECTTYPLTfYrKYoQOOSR3w2ddnHNXH1YHTdMnUSSZlpbyoR6UYmrfUX1S
- h8elhHrEMSev19zglt62ehSqzGgUqRP1G8yC/u8wzF2VbZCAUvvIOEJi2iBZlWc1JD6F+9dv1VF
- vllDhrjQOcWXBQm1u2g==
+ a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=EUspDBNiAAAA:8
+ a=cV-vn9ENGD0yosCfWX4A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=eBU8X_Hb5SQ8N-bgNfv4:22
+X-Proofpoint-GUID: CXFlt9JWLO97YcM6iIQXlxisWaeVZwYk
+X-Proofpoint-ORIG-GUID: CXFlt9JWLO97YcM6iIQXlxisWaeVZwYk
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-05-20_02,2026-05-18_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 clxscore=1015 lowpriorityscore=0 impostorscore=0
- priorityscore=1501 suspectscore=0 spamscore=0 malwarescore=0 bulkscore=0
- phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2605130000
- definitions=main-2605200139
+ suspectscore=0 adultscore=0 priorityscore=1501 malwarescore=0 clxscore=1015
+ phishscore=0 bulkscore=0 lowpriorityscore=0 impostorscore=0 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2605130000 definitions=main-2605200139
 X-Spamd-Bar: ---
-Message-ID-Hash: 7EBOQSPALXEZCRDNVSG4STQ5GFOACM2X
-X-Message-ID-Hash: 7EBOQSPALXEZCRDNVSG4STQ5GFOACM2X
+Message-ID-Hash: ZZVDR6DM6MUIFLC5ANHHE7U2UCMJLLHK
+X-Message-ID-Hash: ZZVDR6DM6MUIFLC5ANHHE7U2UCMJLLHK
 X-MailFrom: dmitry.baryshkov@oss.qualcomm.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 CC: Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Bharath Kumar <quic_bkumar@quicinc.com>, Chenna Kesava Raju <quic_chennak@quicinc.com>, srini@kernel.org, andersson@kernel.org, konradybcio@kernel.org, robin.clark@oss.qualcomm.com, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-arm-msm@vger.kernel.org, iommu@lists.linux.dev, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 03/15] accel/qda: Add initial QDA DRM accelerator driver
+Subject: [Linaro-mm-sig] Re: [PATCH 04/15] accel/qda: Add compute bus for QDA context banks
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7EBOQSPALXEZCRDNVSG4STQ5GFOACM2X/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZZVDR6DM6MUIFLC5ANHHE7U2UCMJLLHK/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [2.99 / 15.00];
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+X-Spamd-Result: default: False [3.09 / 15.00];
 	DMARC_POLICY_REJECT(2.00)[qualcomm.com : SPF not aligned (relaxed),reject];
 	R_DKIM_REJECT(1.00)[qualcomm.com:s=qcppdkim1,oss.qualcomm.com:s=google];
 	MID_RHS_NOT_FQDN(0.50)[];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx];
 	MIME_GOOD(-0.10)[text/plain];
+	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[27];
-	ARC_NA(0.00)[];
-	FREEMAIL_CC(0.00)[kernel.org,lwn.net,linuxfoundation.org,8bytes.org,arm.com,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,quicinc.com,oss.qualcomm.com,vger.kernel.org,lists.freedesktop.org,lists.linux.dev,lists.linaro.org];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[27];
+	FREEMAIL_CC(0.00)[kernel.org,lwn.net,linuxfoundation.org,8bytes.org,arm.com,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,quicinc.com,oss.qualcomm.com,vger.kernel.org,lists.freedesktop.org,lists.linux.dev,lists.linaro.org];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	DKIM_TRACE(0.00)[qualcomm.com:-,oss.qualcomm.com:-];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MISSING_XM_UA(0.00)[];
 	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[6];
 	FROM_NEQ_ENVFROM(0.00)[dmitry.baryshkov@oss.qualcomm.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
-	NEURAL_SPAM(0.00)[0.033];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.998];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[qualcomm.com:email,linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo]
-X-Rspamd-Queue-Id: B078D58F714
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,qualcomm.com:email,linaro.org:email]
+X-Rspamd-Queue-Id: D791C58F764
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Tue, May 19, 2026 at 11:45:53AM +0530, Ekansh Gupta via B4 Relay wrote:
-> From: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
-> 
-> Add the foundational driver files for the Qualcomm DSP Accelerator
-> (QDA), a DRM accel driver for Qualcomm DSPs. The driver integrates
-> with the DRM accel subsystem (drivers/accel/) and provides:
-> 
->   - A standard /dev/accel/accel* character device node via DRM.
->   - GEM-based buffer management with DMA-BUF import/export (PRIME).
->   - IOMMU context bank management for per-session memory isolation.
->   - Standard DRM IOCTLs for device management and job submission.
-> 
-> qda_drv.c / qda_drv.h: Core DRM driver registration. Defines the
-> drm_driver ops table, per-file private state (qda_file_priv), and the
-> main device structure (qda_dev) which embeds drm_device.
-> 
-> qda_rpmsg.c / qda_rpmsg.h: RPMsg transport layer. Registers an
-> rpmsg_driver matching the "qcom,fastrpc" compatible string. On probe
-> it allocates a qda_dev, reads the DSP domain name from the "label" DT
-> property, and registers the DRM device.
-> 
-> Assisted-by: Claude:claude-4-6-sonnet
-> Signed-off-by: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
-> ---
->  drivers/accel/Kconfig         |  1 +
->  drivers/accel/Makefile        |  1 +
->  drivers/accel/qda/Kconfig     | 30 +++++++++++++
->  drivers/accel/qda/Makefile    | 10 +++++
->  drivers/accel/qda/qda_drv.c   | 97 ++++++++++++++++++++++++++++++++++++++++++
->  drivers/accel/qda/qda_drv.h   | 62 +++++++++++++++++++++++++++
->  drivers/accel/qda/qda_rpmsg.c | 99 +++++++++++++++++++++++++++++++++++++++++++
->  drivers/accel/qda/qda_rpmsg.h | 13 ++++++
->  8 files changed, 313 insertions(+)
-> 
-> diff --git a/drivers/accel/Kconfig b/drivers/accel/Kconfig
-> index bdf48ccafcf2..74ac0f71bc9d 100644
-> --- a/drivers/accel/Kconfig
-> +++ b/drivers/accel/Kconfig
-> @@ -29,6 +29,7 @@ source "drivers/accel/ethosu/Kconfig"
->  source "drivers/accel/habanalabs/Kconfig"
->  source "drivers/accel/ivpu/Kconfig"
->  source "drivers/accel/qaic/Kconfig"
-> +source "drivers/accel/qda/Kconfig"
->  source "drivers/accel/rocket/Kconfig"
->  
->  endif
-> diff --git a/drivers/accel/Makefile b/drivers/accel/Makefile
-> index 1d3a7251b950..58c08dd5f389 100644
-> --- a/drivers/accel/Makefile
-> +++ b/drivers/accel/Makefile
-> @@ -5,4 +5,5 @@ obj-$(CONFIG_DRM_ACCEL_ARM_ETHOSU)	+= ethosu/
->  obj-$(CONFIG_DRM_ACCEL_HABANALABS)	+= habanalabs/
->  obj-$(CONFIG_DRM_ACCEL_IVPU)		+= ivpu/
->  obj-$(CONFIG_DRM_ACCEL_QAIC)		+= qaic/
-> +obj-$(CONFIG_DRM_ACCEL_QDA)		+= qda/
->  obj-$(CONFIG_DRM_ACCEL_ROCKET)		+= rocket/
-> \ No newline at end of file
-> diff --git a/drivers/accel/qda/Kconfig b/drivers/accel/qda/Kconfig
-> new file mode 100644
-> index 000000000000..484d21ff1b55
-> --- /dev/null
-> +++ b/drivers/accel/qda/Kconfig
-> @@ -0,0 +1,30 @@
-> +# SPDX-License-Identifier: GPL-2.0-only
-> +#
-> +# Qualcomm DSP accelerator driver
-> +#
-> +
-> +config DRM_ACCEL_QDA
-> +	tristate "Qualcomm DSP accelerator"
-> +	depends on DRM_ACCEL
-> +	depends on ARCH_QCOM || COMPILE_TEST
-> +	depends on RPMSG
-> +	help
-> +	  Enables the DRM-based accelerator driver for Qualcomm's Hexagon DSPs.
-> +	  This driver provides a standardized interface for offloading computational
-> +	  tasks to the DSP, including audio processing, sensor offload, computer
-> +	  vision, and AI inference workloads.
-> +
-> +	  The driver supports all DSP domains (ADSP, CDSP, SDSP, GDSP) and
-> +	  implements the FastRPC protocol for communication between the application
-> +	  processor and DSP. It integrates with the Linux kernel's Compute
-> +	  Accelerators subsystem (drivers/accel/) and provides a modern alternative
-> +	  to the legacy FastRPC driver found in drivers/misc/.
-> +
-> +	  Key features include DMA-BUF interoperability for seamless buffer sharing
-
-Key features of what? Consider distro maintainers reading your help text
-in order to identify whether to enable it or not.
-
-> +	  with other multimedia subsystems, IOMMU-based memory isolation, and
-> +	  standard DRM IOCTLs for device management and job submission.
-> +
-> +	  If unsure, say N.
-> +
-> +	  To compile this driver as a module, choose M here: the
-> +	  module will be called qda.
-> diff --git a/drivers/accel/qda/Makefile b/drivers/accel/qda/Makefile
-> new file mode 100644
-> index 000000000000..dbe809067a8b
-> --- /dev/null
-> +++ b/drivers/accel/qda/Makefile
-> @@ -0,0 +1,10 @@
-> +# SPDX-License-Identifier: GPL-2.0-only
-> +#
-> +# Makefile for Qualcomm DSP accelerator driver
-> +#
-> +
-> +obj-$(CONFIG_DRM_ACCEL_QDA)	:= qda.o
-> +
-> +qda-y := \
-> +	qda_drv.o \
-> +	qda_rpmsg.o
-> diff --git a/drivers/accel/qda/qda_drv.c b/drivers/accel/qda/qda_drv.c
-> new file mode 100644
-> index 000000000000..1c1bab68d445
-> --- /dev/null
-> +++ b/drivers/accel/qda/qda_drv.c
-> @@ -0,0 +1,97 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +// Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-> +#include <linux/module.h>
-> +#include <linux/slab.h>
-> +#include <drm/drm_accel.h>
-> +#include <drm/drm_drv.h>
-> +#include <drm/drm_file.h>
-> +#include <drm/drm_gem.h>
-> +#include <drm/drm_ioctl.h>
-> +#include <drm/drm_print.h>
-> +
-> +#include "qda_drv.h"
-> +#include "qda_rpmsg.h"
-> +
-> +static int qda_open(struct drm_device *dev, struct drm_file *file)
-> +{
-> +	struct qda_file_priv *qda_file_priv;
-> +
-> +	qda_file_priv = kzalloc_obj(*qda_file_priv);
-> +	if (!qda_file_priv)
-> +		return -ENOMEM;
-> +
-> +	qda_file_priv->qda_dev = qda_dev_from_drm(dev);
-> +	file->driver_priv = qda_file_priv;
-> +
-> +	return 0;
-> +}
-> +
-> +static void qda_postclose(struct drm_device *dev, struct drm_file *file)
-> +{
-> +	struct qda_file_priv *qda_file_priv = file->driver_priv;
-> +
-> +	kfree(qda_file_priv);
-> +	file->driver_priv = NULL;
-> +}
-> +
-> +DEFINE_DRM_ACCEL_FOPS(qda_accel_fops);
-> +
-> +static const struct drm_driver qda_drm_driver = {
-> +	.driver_features = DRIVER_COMPUTE_ACCEL,
-> +	.fops = &qda_accel_fops,
-> +	.open = qda_open,
-> +	.postclose = qda_postclose,
-> +	.name = QDA_DRIVER_NAME,
-> +	.desc = "Qualcomm DSP Accelerator Driver",
-> +};
-> +
-> +struct qda_dev *qda_alloc_device(struct device *dev)
-> +{
-> +	struct qda_dev *qdev;
-> +
-> +	qdev = devm_drm_dev_alloc(dev, &qda_drm_driver, struct qda_dev, drm_dev);
-> +	if (IS_ERR(qdev))
-> +		return ERR_CAST(qdev);
-> +
-> +	return qdev;
-> +}
-> +
-> +void qda_unregister_device(struct qda_dev *qdev)
-> +{
-> +	drm_dev_unregister(&qdev->drm_dev);
-> +}
-> +
-> +int qda_register_device(struct qda_dev *qdev)
-> +{
-> +	int ret;
-> +
-> +	ret = drm_dev_register(&qdev->drm_dev, 0);
-> +	if (ret)
-> +		drm_err(&qdev->drm_dev, "Failed to register DRM device: %d\n", ret);
-> +
-> +	return ret;
-> +}
-> +
-> +static int __init qda_core_init(void)
-> +{
-> +	int ret;
-> +
-> +	ret = qda_rpmsg_register();
-> +	if (ret)
-> +		return ret;
-> +
-> +	pr_info("qda: QDA driver initialization complete\n");
-> +	return 0;
-> +}
-> +
-> +static void __exit qda_core_exit(void)
-> +{
-> +	qda_rpmsg_unregister();
-> +}
-> +
-> +module_init(qda_core_init);
-> +module_exit(qda_core_exit);
-> +
-> +MODULE_AUTHOR("Qualcomm AI Infra Team");
-> +MODULE_DESCRIPTION("Qualcomm DSP Accelerator Driver");
-> +MODULE_LICENSE("GPL");
-> diff --git a/drivers/accel/qda/qda_drv.h b/drivers/accel/qda/qda_drv.h
-> new file mode 100644
-> index 000000000000..7ba2ef19a411
-> --- /dev/null
-> +++ b/drivers/accel/qda/qda_drv.h
-> @@ -0,0 +1,62 @@
-> +/* SPDX-License-Identifier: GPL-2.0-only */
-> +/*
-> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-> + */
-> +
-> +#ifndef __QDA_DRV_H__
-> +#define __QDA_DRV_H__
-> +
-> +#include <linux/device.h>
-> +#include <linux/rpmsg.h>
-> +#include <linux/types.h>
-> +#include <drm/drm_device.h>
-> +#include <drm/drm_drv.h>
-> +#include <drm/drm_file.h>
-> +
-> +/* Driver identification */
-> +#define QDA_DRIVER_NAME "qda"
-> +
-> +/**
-> + * struct qda_file_priv - Per-process private data for DRM file
-> + */
-> +struct qda_file_priv {
-> +	/** @qda_dev: Back-pointer to device structure */
-> +	struct qda_dev *qda_dev;
-> +};
-> +
-> +/**
-> + * struct qda_dev - Main device structure for QDA driver
-> + *
-> + * The DRM device is embedded as the first member so that container_of()
-> + * can recover the qda_dev from any drm_device pointer.
-> + */
-> +struct qda_dev {
-> +	/** @drm_dev: Embedded DRM device; recover via qda_dev_from_drm() */
-> +	struct drm_device drm_dev;
-> +	/** @rpdev: RPMsg device for communication with the remote processor */
-> +	struct rpmsg_device *rpdev;
-> +	/** @dev: Underlying Linux device */
-> +	struct device *dev;
-> +	/** @dsp_name: Name of the DSP domain (e.g. "cdsp", "adsp") */
-> +	const char *dsp_name;
-> +};
-> +
-> +/**
-> + * qda_dev_from_drm - Recover qda_dev from an embedded drm_device pointer
-> + * @dev: Pointer to the embedded drm_device
-> + *
-> + * Return: Pointer to the enclosing qda_dev.
-> + */
-> +static inline struct qda_dev *qda_dev_from_drm(struct drm_device *dev)
-> +{
-> +	return container_of(dev, struct qda_dev, drm_dev);
-> +}
-> +
-> +/* Device allocation (uses devm_drm_dev_alloc internally) */
-> +struct qda_dev *qda_alloc_device(struct device *dev);
-> +
-> +/* Core device lifecycle */
-> +int qda_register_device(struct qda_dev *qdev);
-> +void qda_unregister_device(struct qda_dev *qdev);
-> +
-> +#endif /* __QDA_DRV_H__ */
-> diff --git a/drivers/accel/qda/qda_rpmsg.c b/drivers/accel/qda/qda_rpmsg.c
-> new file mode 100644
-> index 000000000000..6eaf1b145f8a
-> --- /dev/null
-> +++ b/drivers/accel/qda/qda_rpmsg.c
-> @@ -0,0 +1,99 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +// Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-> +#include <linux/module.h>
-> +#include <linux/of.h>
-> +#include <linux/rpmsg.h>
-> +#include <drm/drm_print.h>
-> +
-> +#include "qda_drv.h"
-> +#include "qda_rpmsg.h"
-> +
-> +static struct qda_dev *alloc_and_init_qdev(struct rpmsg_device *rpdev)
-
-Use the prefix uniformly.
-
-> +{
-> +	struct qda_dev *qdev;
-> +
-> +	qdev = qda_alloc_device(&rpdev->dev);
-> +	if (IS_ERR(qdev))
-> +		return qdev;
-> +
-> +	qdev->dev = &rpdev->dev;
-> +	qdev->rpdev = rpdev;
-> +	dev_set_drvdata(&rpdev->dev, qdev);
-> +
-> +	return qdev;
-> +}
-> +
-> +static int qda_rpmsg_cb(struct rpmsg_device *rpdev, void *data, int len,
-> +			void *priv, u32 src)
-> +{
-> +	/* Placeholder: responses will be dispatched here */
-> +	return 0;
-> +}
-> +
-> +static void qda_rpmsg_remove(struct rpmsg_device *rpdev)
-> +{
-> +	struct qda_dev *qdev = dev_get_drvdata(&rpdev->dev);
-> +
-> +	drm_dev_unplug(&qdev->drm_dev);
-> +	qdev->rpdev = NULL;
-> +	qda_unregister_device(qdev);
-> +	dev_info(qdev->dev, "RPMsg device removed\n");
-
-Drop the spamming. And useless (where it is useless) drm_dbg() / dev_dbg() spamming too.
-
-> +}
-> +
-> +static int qda_rpmsg_probe(struct rpmsg_device *rpdev)
-> +{
-> +	struct qda_dev *qdev;
-> +	const char *label;
-> +	int ret;
-> +
-> +	dev_dbg(&rpdev->dev, "QDA RPMsg probe starting\n");
-> +
-> +	qdev = alloc_and_init_qdev(rpdev);
-> +	if (IS_ERR(qdev))
-> +		return PTR_ERR(qdev);
-> +
-> +	ret = of_property_read_string(rpdev->dev.of_node, "label", &label);
-> +	if (ret) {
-> +		dev_err(qdev->dev, "Missing 'label' property in DT node: %d\n", ret);
-> +		return ret;
-> +	}
-> +	qdev->dsp_name = label;
-
-Why not just of_property_read_string(...., &qdev->dsp_name)?
-
-> +
-> +	ret = qda_register_device(qdev);
-
-return qda_register_device();
-
-> +	if (ret)
-> +		return ret;
-> +
-> +	drm_info(&qdev->drm_dev, "QDA RPMsg probe complete for %s\n", qdev->dsp_name);
-> +	return 0;
-> +}
-> +
-> +static const struct of_device_id qda_rpmsg_id_table[] = {
-> +	{ .compatible = "qcom,fastrpc" },
-> +	{},
-> +};
-> +MODULE_DEVICE_TABLE(of, qda_rpmsg_id_table);
-> +
-> +static struct rpmsg_driver qda_rpmsg_driver = {
-> +	.probe = qda_rpmsg_probe,
-> +	.remove = qda_rpmsg_remove,
-> +	.callback = qda_rpmsg_cb,
-> +	.drv = {
-> +		.name = "qcom,fastrpc",
-> +		.of_match_table = qda_rpmsg_id_table,
-> +	},
-> +};
-> +
-> +int qda_rpmsg_register(void)
-> +{
-> +	int ret = register_rpmsg_driver(&qda_rpmsg_driver);
-> +
-> +	if (ret)
-> +		pr_err("qda: Failed to register RPMsg driver: %d\n", ret);
-> +
-> +	return ret;
-> +}
-> +
-> +void qda_rpmsg_unregister(void)
-> +{
-> +	unregister_rpmsg_driver(&qda_rpmsg_driver);
-> +}
-
-Just use module_rpmsg_driver(), drop all the wrappers and module_init()
-/ exit().
-
-> diff --git a/drivers/accel/qda/qda_rpmsg.h b/drivers/accel/qda/qda_rpmsg.h
-> new file mode 100644
-> index 000000000000..5229d834b34b
-> --- /dev/null
-> +++ b/drivers/accel/qda/qda_rpmsg.h
-> @@ -0,0 +1,13 @@
-> +/* SPDX-License-Identifier: GPL-2.0-only */
-> +/*
-> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-> + */
-> +
-> +#ifndef __QDA_RPMSG_H__
-> +#define __QDA_RPMSG_H__
-> +
-> +/* RPMsg transport layer registration */
-> +int qda_rpmsg_register(void);
-> +void qda_rpmsg_unregister(void);
-> +
-> +#endif /* __QDA_RPMSG_H__ */
-> 
-> -- 
-> 2.34.1
-> 
-> 
-
--- 
-With best wishes
-Dmitry
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gVHVlLCBNYXkgMTksIDIwMjYgYXQgMTE6NDU6NTRBTSArMDUzMCwgRWthbnNoIEd1cHRhIHZp
+YSBCNCBSZWxheSB3cm90ZToNCj4gRnJvbTogRWthbnNoIEd1cHRhIDxla2Fuc2guZ3VwdGFAb3Nz
+LnF1YWxjb21tLmNvbT4NCj4gDQo+IEludHJvZHVjZSBhIGN1c3RvbSB2aXJ0dWFsIGJ1cyAocWRh
+LWNvbXB1dGUtY2IpIGZvciBtYW5hZ2luZyBJT01NVQ0KPiBjb250ZXh0IGJhbmsgKENCKSBkZXZp
+Y2VzIHVzZWQgYnkgdGhlIFFEQSBkcml2ZXIuDQo+IA0KPiBJT01NVSBjb250ZXh0IGJhbmtzIGFy
+ZSBzeW50aGV0aWMgY29uc3RydWN0cyDigJQgdGhleSBhcmUgbm90IHJlYWwNCj4gcGxhdGZvcm0g
+ZGV2aWNlcyBhbmQgZG8gbm90IGFwcGVhciBhcyBjaGlsZHJlbiBvZiBhIHBsYXRmb3JtIGJ1cyBu
+b2RlDQo+IGluIHRoZSBkZXZpY2UgdHJlZS4gVXNpbmcgYSBwbGF0Zm9ybSBkcml2ZXIgdG8gcmVw
+cmVzZW50IHRoZW0gd2FzDQo+IHRoZXJlZm9yZSBpbmNvcnJlY3QgYW5kIGludHJvZHVjZWQgYSBw
+cm9iZS1vcmRlcmluZyByYWNlOiBkZXZpY2Ugbm9kZXMNCj4gd2VyZSBjcmVhdGVkIGJlZm9yZSB0
+aGUgUlBNc2cgY2hhbm5lbCByZXNvdXJjZXMgd2VyZSBmdWxseSBpbml0aWFsaXplZCwNCj4gYW5k
+IGJlY2F1c2UgcHJvYmUgcnVucyBhc3luY2hyb25vdXNseSwgdXNlci1zcGFjZSBjb3VsZCBvcGVu
+IGEgQ0INCj4gZGV2aWNlIGFuZCBhdHRlbXB0IHRvIHN0YXJ0IGEgc2Vzc2lvbiBiZWZvcmUgdGhl
+IHVuZGVybHlpbmcgdHJhbnNwb3J0DQo+IHdhcyByZWFkeS4NCj4gDQo+IFRoZSBxZGEtY29tcHV0
+ZS1jYiBidXMgc29sdmVzIHRoaXMgYnkgYWxsb3dpbmcgdGhlIG1haW4gUURBIGRyaXZlciB0bw0K
+PiBjcmVhdGUgQ0IgZGV2aWNlcyBleHBsaWNpdGx5IGFuZCB1bmRlciBpdHMgb3duIGNvbnRyb2ws
+IG1ha2luZyB0aGVpcg0KPiBsaWZldGltZSBzdHJpY3RseSBzdWJvcmRpbmF0ZSB0byB0aGUgcGFy
+ZW50IHFkYV9kZXYuIFRoZSBidXMgcHJvdmlkZXMNCj4gYSBkbWFfY29uZmlndXJlIGNhbGxiYWNr
+IHRoYXQgY2FsbHMgb2ZfZG1hX2NvbmZpZ3VyZSgpIHNvIHRoYXQgZWFjaCBDQg0KPiBkZXZpY2Ug
+Z2V0cyBpdHMgb3duIElPTU1VIGRvbWFpbiBkZXJpdmVkIGZyb20gaXRzIGRldmljZS10cmVlIG5v
+ZGUsDQo+IGVuYWJsaW5nIHBlci1zZXNzaW9uIG1lbW9yeSBpc29sYXRpb24uDQo+IA0KPiBUaGUg
+YnVzIHR5cGUgYW5kIHRoZSBDQiBkZXZpY2UgY29uc3RydWN0b3IgKGNyZWF0ZV9xZGFfY2JfZGV2
+aWNlKSBhcmUNCj4gZXhwb3J0ZWQgZm9yIHVzZSBieSB0aGUgUURBIG1lbW9yeSBtYW5hZ2VyLg0K
+PiANCj4gQSBoaWRkZW4gS2NvbmZpZyBzeW1ib2wgKERSTV9BQ0NFTF9RREFfQ09NUFVURV9CVVMp
+IGlzIGludHJvZHVjZWQgYW5kDQo+IGF1dG9tYXRpY2FsbHkgc2VsZWN0ZWQgYnkgRFJNX0FDQ0VM
+X1FEQSBzbyB0aGF0IHRoZSBidXMgaW5pdGlhbGlzYXRpb24NCj4gcnVucyB2aWEgcG9zdGNvcmVf
+aW5pdGNhbGwgYmVmb3JlIGFueSBRREEgZGV2aWNlIHByb2Jlcy4NCj4gDQo+IEFzc2lzdGVkLWJ5
+OiBDbGF1ZGU6Y2xhdWRlLTQtNi1zb25uZXQNCj4gU2lnbmVkLW9mZi1ieTogRWthbnNoIEd1cHRh
+IDxla2Fuc2guZ3VwdGFAb3NzLnF1YWxjb21tLmNvbT4NCj4gLS0tDQo+ICBkcml2ZXJzL2FjY2Vs
+L01ha2VmaWxlICAgICAgICAgICAgICB8ICAxICsNCj4gIGRyaXZlcnMvYWNjZWwvcWRhL0tjb25m
+aWcgICAgICAgICAgIHwgIDQgKysrDQo+ICBkcml2ZXJzL2FjY2VsL3FkYS9NYWtlZmlsZSAgICAg
+ICAgICB8ICAyICsrDQo+ICBkcml2ZXJzL2FjY2VsL3FkYS9xZGFfY29tcHV0ZV9idXMuYyB8IDY4
+ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysNCj4gIGluY2x1ZGUvbGludXgv
+cWRhX2NvbXB1dGVfYnVzLmggICAgIHwgMzIgKysrKysrKysrKysrKysrKysNCj4gIDUgZmlsZXMg
+Y2hhbmdlZCwgMTA3IGluc2VydGlvbnMoKykNCj4gDQo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2Fj
+Y2VsL01ha2VmaWxlIGIvZHJpdmVycy9hY2NlbC9NYWtlZmlsZQ0KPiBpbmRleCA1OGMwOGRkNWYz
+ODkuLjllZDg0M2NkMjkzZiAxMDA2NDQNCj4gLS0tIGEvZHJpdmVycy9hY2NlbC9NYWtlZmlsZQ0K
+PiArKysgYi9kcml2ZXJzL2FjY2VsL01ha2VmaWxlDQo+IEBAIC02LDQgKzYsNSBAQCBvYmotJChD
+T05GSUdfRFJNX0FDQ0VMX0hBQkFOQUxBQlMpCSs9IGhhYmFuYWxhYnMvDQo+ICBvYmotJChDT05G
+SUdfRFJNX0FDQ0VMX0lWUFUpCQkrPSBpdnB1Lw0KPiAgb2JqLSQoQ09ORklHX0RSTV9BQ0NFTF9R
+QUlDKQkJKz0gcWFpYy8NCj4gIG9iai0kKENPTkZJR19EUk1fQUNDRUxfUURBKQkJKz0gcWRhLw0K
+PiArb2JqLSQoQ09ORklHX0RSTV9BQ0NFTF9RREFfQ09NUFVURV9CVVMpICs9IHFkYS8NCg0KVWdo
+LiBUaGUgcHJldmlvdXMgbGluZSBzaG91bGQgYmUgZW5vdWdoIChidXQgZG9uJ3QgdHJ1c3QgbWUp
+Lg0KDQo+ICBvYmotJChDT05GSUdfRFJNX0FDQ0VMX1JPQ0tFVCkJCSs9IHJvY2tldC8NCj4gXCBO
+byBuZXdsaW5lIGF0IGVuZCBvZiBmaWxlDQo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2FjY2VsL3Fk
+YS9LY29uZmlnIGIvZHJpdmVycy9hY2NlbC9xZGEvS2NvbmZpZw0KPiBpbmRleCA0ODRkMjFmZjFi
+NTUuLjJhNjFhNGRkYTA1NCAxMDA2NDQNCj4gLS0tIGEvZHJpdmVycy9hY2NlbC9xZGEvS2NvbmZp
+Zw0KPiArKysgYi9kcml2ZXJzL2FjY2VsL3FkYS9LY29uZmlnDQo+IEBAIC0zLDExICszLDE1IEBA
+DQo+ICAjIFF1YWxjb21tIERTUCBhY2NlbGVyYXRvciBkcml2ZXINCj4gICMNCj4gIA0KPiArY29u
+ZmlnIERSTV9BQ0NFTF9RREFfQ09NUFVURV9CVVMNCj4gKwlib29sDQo+ICsNCj4gIGNvbmZpZyBE
+Uk1fQUNDRUxfUURBDQo+ICAJdHJpc3RhdGUgIlF1YWxjb21tIERTUCBhY2NlbGVyYXRvciINCj4g
+IAlkZXBlbmRzIG9uIERSTV9BQ0NFTA0KPiAgCWRlcGVuZHMgb24gQVJDSF9RQ09NIHx8IENPTVBJ
+TEVfVEVTVA0KPiAgCWRlcGVuZHMgb24gUlBNU0cNCj4gKwlzZWxlY3QgRFJNX0FDQ0VMX1FEQV9D
+T01QVVRFX0JVUw0KPiAgCWhlbHANCj4gIAkgIEVuYWJsZXMgdGhlIERSTS1iYXNlZCBhY2NlbGVy
+YXRvciBkcml2ZXIgZm9yIFF1YWxjb21tJ3MgSGV4YWdvbiBEU1BzLg0KPiAgCSAgVGhpcyBkcml2
+ZXIgcHJvdmlkZXMgYSBzdGFuZGFyZGl6ZWQgaW50ZXJmYWNlIGZvciBvZmZsb2FkaW5nIGNvbXB1
+dGF0aW9uYWwNCj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvYWNjZWwvcWRhL01ha2VmaWxlIGIvZHJp
+dmVycy9hY2NlbC9xZGEvTWFrZWZpbGUNCj4gaW5kZXggZGJlODA5MDY3YThiLi40MjQxNzZmNjUy
+YTUgMTAwNjQ0DQo+IC0tLSBhL2RyaXZlcnMvYWNjZWwvcWRhL01ha2VmaWxlDQo+ICsrKyBiL2Ry
+aXZlcnMvYWNjZWwvcWRhL01ha2VmaWxlDQo+IEBAIC04LDMgKzgsNSBAQCBvYmotJChDT05GSUdf
+RFJNX0FDQ0VMX1FEQSkJOj0gcWRhLm8NCj4gIHFkYS15IDo9IFwNCj4gIAlxZGFfZHJ2Lm8gXA0K
+PiAgCXFkYV9ycG1zZy5vDQo+ICsNCj4gK29iai0kKENPTkZJR19EUk1fQUNDRUxfUURBX0NPTVBV
+VEVfQlVTKSArPSBxZGFfY29tcHV0ZV9idXMubw0KPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9hY2Nl
+bC9xZGEvcWRhX2NvbXB1dGVfYnVzLmMgYi9kcml2ZXJzL2FjY2VsL3FkYS9xZGFfY29tcHV0ZV9i
+dXMuYw0KPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiBpbmRleCAwMDAwMDAwMDAwMDAuLmM1OWQ5
+NzdlOTI0ZA0KPiAtLS0gL2Rldi9udWxsDQo+ICsrKyBiL2RyaXZlcnMvYWNjZWwvcWRhL3FkYV9j
+b21wdXRlX2J1cy5jDQo+IEBAIC0wLDAgKzEsNjggQEANCj4gKy8vIFNQRFgtTGljZW5zZS1JZGVu
+dGlmaWVyOiBHUEwtMi4wLW9ubHkNCj4gKy8vIENvcHlyaWdodCAoYykgUXVhbGNvbW0gVGVjaG5v
+bG9naWVzLCBJbmMuIGFuZC9vciBpdHMgc3Vic2lkaWFyaWVzLg0KPiArI2luY2x1ZGUgPGxpbnV4
+L2RldmljZS5oPg0KPiArI2luY2x1ZGUgPGxpbnV4L2luaXQuaD4NCj4gKyNpbmNsdWRlIDxsaW51
+eC9vZi5oPg0KPiArI2luY2x1ZGUgPGxpbnV4L29mX2RldmljZS5oPg0KPiArI2luY2x1ZGUgPGxp
+bnV4L3FkYV9jb21wdXRlX2J1cy5oPg0KPiArI2luY2x1ZGUgPGxpbnV4L3NsYWIuaD4NCj4gKw0K
+PiArc3RhdGljIGludCBxZGFfY2JfYnVzX2RtYV9jb25maWd1cmUoc3RydWN0IGRldmljZSAqZGV2
+KQ0KPiArew0KPiArCXJldHVybiBvZl9kbWFfY29uZmlndXJlKGRldiwgZGV2LT5vZl9ub2RlLCB0
+cnVlKTsNCj4gK30NCj4gKw0KPiArY29uc3Qgc3RydWN0IGJ1c190eXBlIHFkYV9jYl9idXNfdHlw
+ZSA9IHsNCj4gKwkubmFtZSA9ICJxZGEtY29tcHV0ZS1jYiIsDQo+ICsJLmRtYV9jb25maWd1cmUg
+PSBxZGFfY2JfYnVzX2RtYV9jb25maWd1cmUsDQo+ICt9Ow0KPiArRVhQT1JUX1NZTUJPTF9HUEwo
+cWRhX2NiX2J1c190eXBlKTsNCj4gKw0KPiArc3RhdGljIHZvaWQgcmVsZWFzZV9xZGFfY2JfZGV2
+aWNlKHN0cnVjdCBkZXZpY2UgKmRldikNCj4gK3sNCj4gKwlvZl9ub2RlX3B1dChkZXYtPm9mX25v
+ZGUpOw0KPiArCWtmcmVlKGRldik7DQo+ICt9DQo+ICsNCj4gK3N0cnVjdCBkZXZpY2UgKmNyZWF0
+ZV9xZGFfY2JfZGV2aWNlKHN0cnVjdCBkZXZpY2UgKnBhcmVudF9kZXZpY2UsIGNvbnN0IGNoYXIg
+Km5hbWUsDQo+ICsJCQkJICAgIHU2NCBkbWFfbWFzaywgc3RydWN0IGRldmljZV9ub2RlICpvZl9u
+b2RlKQ0KPiArew0KPiArCXN0cnVjdCBkZXZpY2UgKmRldjsNCj4gKwlpbnQgcmV0Ow0KPiArDQo+
+ICsJZGV2ID0ga3phbGxvY19vYmooKmRldik7DQo+ICsJaWYgKCFkZXYpDQo+ICsJCXJldHVybiBF
+UlJfUFRSKC1FTk9NRU0pOw0KPiArDQo+ICsJZGV2LT5yZWxlYXNlID0gcmVsZWFzZV9xZGFfY2Jf
+ZGV2aWNlOw0KPiArCWRldi0+YnVzID0gJnFkYV9jYl9idXNfdHlwZTsNCj4gKwlkZXYtPnBhcmVu
+dCA9IHBhcmVudF9kZXZpY2U7DQo+ICsJZGV2LT5jb2hlcmVudF9kbWFfbWFzayA9IGRtYV9tYXNr
+Ow0KPiArCWRldi0+ZG1hX21hc2sgPSAmZGV2LT5jb2hlcmVudF9kbWFfbWFzazsNCj4gKwlkZXYt
+Pm9mX25vZGUgPSBvZl9ub2RlX2dldChvZl9ub2RlKTsNCj4gKw0KPiArCWRldl9zZXRfbmFtZShk
+ZXYsICIlcyIsIG5hbWUpOw0KPiArDQo+ICsJcmV0ID0gZGV2aWNlX3JlZ2lzdGVyKGRldik7DQo+
+ICsJaWYgKHJldCkgew0KPiArCQlwdXRfZGV2aWNlKGRldik7DQo+ICsJCXJldHVybiBFUlJfUFRS
+KHJldCk7DQo+ICsJfQ0KPiArDQo+ICsJcmV0dXJuIGRldjsNCj4gK30NCj4gK0VYUE9SVF9TWU1C
+T0xfR1BMKGNyZWF0ZV9xZGFfY2JfZGV2aWNlKTsNCj4gKw0KPiArc3RhdGljIGludCBfX2luaXQg
+cWRhX2NiX2J1c19pbml0KHZvaWQpDQo+ICt7DQo+ICsJaW50IGVycjsNCj4gKw0KPiArCWVyciA9
+IGJ1c19yZWdpc3RlcigmcWRhX2NiX2J1c190eXBlKTsNCj4gKwlpZiAoZXJyIDwgMCkgew0KPiAr
+CQlwcl9lcnIoInFkYS1jb21wdXRlLWNiIGJ1cyByZWdpc3RyYXRpb24gZmFpbGVkOiAlZFxuIiwg
+ZXJyKTsNCj4gKwkJcmV0dXJuIGVycjsNCj4gKwl9DQo+ICsJcmV0dXJuIDA7DQo+ICt9DQo+ICsN
+Cj4gK3Bvc3Rjb3JlX2luaXRjYWxsKHFkYV9jYl9idXNfaW5pdCk7DQo+IGRpZmYgLS1naXQgYS9p
+bmNsdWRlL2xpbnV4L3FkYV9jb21wdXRlX2J1cy5oIGIvaW5jbHVkZS9saW51eC9xZGFfY29tcHV0
+ZV9idXMuaA0KPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiBpbmRleCAwMDAwMDAwMDAwMDAuLjkw
+YmYyNDhjNzI4NQ0KPiAtLS0gL2Rldi9udWxsDQo+ICsrKyBiL2luY2x1ZGUvbGludXgvcWRhX2Nv
+bXB1dGVfYnVzLmgNCj4gQEAgLTAsMCArMSwzMiBAQA0KPiArLyogU1BEWC1MaWNlbnNlLUlkZW50
+aWZpZXI6IEdQTC0yLjAtb25seSAqLw0KPiArLyoNCj4gKyAqIENvcHlyaWdodCAoYykgUXVhbGNv
+bW0gVGVjaG5vbG9naWVzLCBJbmMuIGFuZC9vciBpdHMgc3Vic2lkaWFyaWVzLg0KPiArICovDQo+
+ICsNCj4gKyNpZm5kZWYgX19RREFfQ09NUFVURV9CVVNfSF9fDQo+ICsjZGVmaW5lIF9fUURBX0NP
+TVBVVEVfQlVTX0hfXw0KPiArDQo+ICsjaW5jbHVkZSA8bGludXgvZGV2aWNlLmg+DQo+ICsNCj4g
+Ky8qDQo+ICsgKiBDdXN0b20gYnVzIHR5cGUgZm9yIFFEQSBjb21wdXRlIGNvbnRleHQgYmFuayAo
+Q0IpIGRldmljZXMNCj4gKyAqDQo+ICsgKiBUaGlzIGJ1cyB0eXBlIGlzIHVzZWQgZm9yIG1hbnVh
+bGx5IGNyZWF0ZWQgQ0IgZGV2aWNlcyB0aGF0IHJlcHJlc2VudA0KPiArICogSU9NTVUgY29udGV4
+dCBiYW5rcy4gVGhlIGN1c3RvbSBidXMgYWxsb3dzIHByb3BlciBJT01NVSBjb25maWd1cmF0aW9u
+DQo+ICsgKiBhbmQgZGV2aWNlIG1hbmFnZW1lbnQgZm9yIHRoZXNlIHZpcnR1YWwgZGV2aWNlcy4N
+Cj4gKyAqLw0KPiArI2lmZGVmIENPTkZJR19EUk1fQUNDRUxfUURBX0NPTVBVVEVfQlVTDQo+ICtl
+eHRlcm4gY29uc3Qgc3RydWN0IGJ1c190eXBlIHFkYV9jYl9idXNfdHlwZTsNCj4gKw0KPiArc3Ry
+dWN0IGRldmljZSAqY3JlYXRlX3FkYV9jYl9kZXZpY2Uoc3RydWN0IGRldmljZSAqcGFyZW50X2Rl
+dmljZSwgY29uc3QgY2hhciAqbmFtZSwNCj4gKwkJCQkgICAgdTY0IGRtYV9tYXNrLCBzdHJ1Y3Qg
+ZGV2aWNlX25vZGUgKm9mX25vZGUpOw0KPiArI2Vsc2UNCj4gK3N0YXRpYyBpbmxpbmUgc3RydWN0
+IGRldmljZSAqY3JlYXRlX3FkYV9jYl9kZXZpY2Uoc3RydWN0IGRldmljZSAqcGFyZW50X2Rldmlj
+ZSwNCj4gKwkJCQkJCSAgY29uc3QgY2hhciAqbmFtZSwgdTY0IGRtYV9tYXNrLA0KPiArCQkJCQkJ
+ICBzdHJ1Y3QgZGV2aWNlX25vZGUgKm9mX25vZGUpDQo+ICt7DQo+ICsJcmV0dXJuIEVSUl9QVFIo
+LUVOT0RFVik7DQo+ICt9DQo+ICsjZW5kaWYNCj4gKw0KPiArI2VuZGlmIC8qIF9fUURBX0NPTVBV
+VEVfQlVTX0hfXyAqLw0KPiANCj4gLS0gDQo+IDIuMzQuMQ0KPiANCj4gDQoNCi0tIA0KV2l0aCBi
+ZXN0IHdpc2hlcw0KRG1pdHJ5DQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxp
+c3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0t
+c2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
