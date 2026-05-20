@@ -2,281 +2,274 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id UC9rFcTQDWr53QUAu9opvQ
+	id WFsjKc7QDWr53QUAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 May 2026 17:18:28 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 May 2026 17:18:38 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id CBB11590ACB
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 May 2026 17:18:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4193F590ADD
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 May 2026 17:18:37 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id CBD424097B
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 May 2026 15:18:26 +0000 (UTC)
-Received: from mail-lj1-f178.google.com (mail-lj1-f178.google.com [209.85.208.178])
-	by lists.linaro.org (Postfix) with ESMTPS id 0AEAD40982
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 20 May 2026 15:17:53 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id BA1264097D
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 May 2026 15:18:36 +0000 (UTC)
+Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com [136.143.188.112])
+	by lists.linaro.org (Postfix) with ESMTPS id 9B08940982
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 20 May 2026 15:18:17 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=YPzgvh4u;
-	spf=pass (lists.linaro.org: domain of mikhail.v.gavrilov@gmail.com designates 209.85.208.178 as permitted sender) smtp.mailfrom=mikhail.v.gavrilov@gmail.com;
-	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-lj1-f178.google.com with SMTP id 38308e7fff4ca-393d6025f99so56636551fa.0
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 20 May 2026 08:17:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779290272; x=1779895072; darn=lists.linaro.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=K81Nh8nBOwZaTCEqstpBUGuFaakdxNh2S8dsFKzzkkM=;
-        b=YPzgvh4urXPdZqzitoTsIAeo+MDcNrjk45ndyawzIbWixxudrhVgmfhEf7RIjOnWrP
-         LB51Puf0jo53Qq3egFjH9+Wih4zuLLhowCB1RgcqI90Y6hStoSZzR/AlV6y10N9AfB72
-         ejBJUJLaDiilfcL/1ViSRBIeKZsim77GdV/7Y7PJr5AsB54cDfZ5XaOoyXYAT43HF+ey
-         RMp4ovgmvsDI7avS0lIXpRS1MrsQrsUfCGWk0fkkj53nsc03rovtb1IcaDUj78peYjxo
-         SJvq6LzJi2NZyJXZK3srpAQzh/acCbk459R0kttc6b75D/BVfOn5z0SDSV1Yf1JXUei6
-         iNOQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779290272; x=1779895072;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=K81Nh8nBOwZaTCEqstpBUGuFaakdxNh2S8dsFKzzkkM=;
-        b=XXOi8YvT4j7009t7VKem7z7Fj7rjXK1ln5KCTvWUph8cF5+UbHnHlUIbKViq44DVC2
-         JZHOk4BOhAzircO1ksh2T4MiP4O7B8iL86jvYkTWZ7PeWI0Po22YGs7UpbDZyda/dt7P
-         pDB824rxG1NiMQzgPo1o1VPRCacyolo7VfYee/46KZREprMEhsJOzPc3v5Vykq6I0xTs
-         c9MRupTNGkuzN2TGB0jkjlBPVUgDOnx4JzAZtxLCX0+pbUopjDQpcgCQAo33IvzT0Bxs
-         U3DsXQKzEoIKN5bjp7gYENvGpB9wzo8EIFG+Vlk+UB6mnEBDNszVSTu1X9NiCBs6NYmy
-         EMFQ==
-X-Forwarded-Encrypted: i=1; AFNElJ/RpRU7T+7MVMGi6wOF826MeIz+OqrESfsv8p65WRxFwHxsT0Z3BT5YR68vBxhZf2WHDZfCrNng5OMvSAQR@lists.linaro.org
-X-Gm-Message-State: AOJu0YwTKn2yHtgsm6nNVOvGvdg2mP7r34Mf1oKgyS+QRqruX7euUVdM
-	npCCOkmDdqnrZGnEjiAD99Ms/nkOEYMpJU30ShqFicUhNHdXBBL+Lftz
-X-Gm-Gg: Acq92OF9OG+FFpbJyLh7s3ZTvrQnv1timydF7+8qZJofThXRnaDGSwCSsWdo9h+misb
-	w8bElOWxdnYsZ4ZNUeJn+M2Y+zsVl1mMEXeMQNw0K1SA49U2QHszUBcn+kkv18fldUTNsNA5hsp
-	q9HH8l7jpsL5ShaFYuvHJQu+xRQkWEnsXQO+sHbG7pAyE9UQUMaqifDWQblqLBRb8eh/MFlMoVJ
-	Fw+DpE53goc0/EvpPUvy1DSbvFIsCLwoH89W0MjFpDOr+mvSUHKvGbzBQvuAg+4LLM3wZBM52UE
-	x0gaaoAfj3NtfqJfWGg2KzFWBnoyTEzZZxkMnWhXb7gymoyy79wbGtsS4RiWSUZUWNzRiH2wCL4
-	p9WmrFLd3wwT8zCL19OTnaS8n04yoY4YeMkNK6OLESVA/dI2e6lA3aYXBpYgQEgbtZQDG53HHZ0
-	/D2RP9lew7nAeu8MwgHApFohUUs5nVO0U7whYDZ/EKnDI=
-X-Received: by 2002:ac2:4e01:0:b0:5a4:b02:66b1 with SMTP id 2adb3069b0e04-5aa0de8aa10mr6131035e87.9.1779290271462;
-        Wed, 20 May 2026 08:17:51 -0700 (PDT)
-Received: from localhost ([188.234.148.119])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5a90f10c8b2sm5022470e87.17.2026.05.20.08.17.50
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 20 May 2026 08:17:50 -0700 (PDT)
-From: Mikhail Gavrilov <mikhail.v.gavrilov@gmail.com>
-To: amd-gfx@lists.freedesktop.org,
-	dri-devel@lists.freedesktop.org,
-	linux-kernel@vger.kernel.org
-Date: Wed, 20 May 2026 20:17:40 +0500
-Message-ID: <20260520151741.50575-3-mikhail.v.gavrilov@gmail.com>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260520151741.50575-1-mikhail.v.gavrilov@gmail.com>
-References: <20260429143743.50743-1-mikhail.v.gavrilov@gmail.com>
- <20260520151741.50575-1-mikhail.v.gavrilov@gmail.com>
+	dkim=pass header.d=collabora.com header.s=zohomail header.b=hWyY5U2U;
+	arc=pass ("zohomail.com:s=zohoarc:i=1");
+	spf=pass (lists.linaro.org: domain of dmitry.osipenko@collabora.com designates 136.143.188.112 as permitted sender) smtp.mailfrom=dmitry.osipenko@collabora.com;
+	dmarc=pass (policy=none) header.from=collabora.com
+ARC-Seal: i=1; a=rsa-sha256; t=1779290292; cv=none;
+	d=zohomail.com; s=zohoarc;
+	b=DPRjwcSgU9NAVK3t6ludoB8Fls1PIsK60Ck1S6Ap3ODgBnm5sGrRIMXN40JKZBXPvLcYec7RJ4obTnn6CLzBWHyAvaHn0C11trK7PSCpgkKWOTG9ntSWfdxCbRjaUcr4FDiBHzyGzjN6JdFBFmOS+qUX/4QtUsrn465rk41SAyQ=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc;
+	t=1779290292; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+	bh=1x0FyOWivNSIA+YkZsdTIQiJF2Ucpta4cBeqHywF/cU=;
+	b=cKykkgi12BHITTf3cmtblCq9A1PtSiPBmGC7d6qJKKQ18zKc053waEwbsO0h3sBaiJ99hcj1oFt1BVBMl6bx9T6bj6mZVkUEhR31j3muX/EsqzbfNtBB8DN8rpgUbJse7ri8a4uZ4ipdLzPkodtTUgyb/KvkOMzYrbQdqXVUCJI=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=collabora.com;
+	spf=pass  smtp.mailfrom=dmitry.osipenko@collabora.com;
+	dmarc=pass header.from=<dmitry.osipenko@collabora.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1779290292;
+	s=zohomail; d=collabora.com; i=dmitry.osipenko@collabora.com;
+	h=Message-ID:Date:Date:MIME-Version:Subject:Subject:From:From:To:To:Cc:Cc:References:In-Reply-To:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
+	bh=1x0FyOWivNSIA+YkZsdTIQiJF2Ucpta4cBeqHywF/cU=;
+	b=hWyY5U2U9APDrOH/pIPFEvRW1dBjtgOXeO+Sg1GfhhWD8+ox0YEyaMGKIoWdiCuu
+	tTGicufnczt0iKCBwUgMmZW2AhJ1Y9QyK+R2CN6dwzO/sTi+FN4SDqFmcEy/xVhbZk1
+	hqTfPl5B56mtrSyS68pfcWFgc4TKBk1dYzeUL50Y=
+Received: by mx.zohomail.com with SMTPS id 1779290290871362.15164197070646;
+	Wed, 20 May 2026 08:18:10 -0700 (PDT)
+Message-ID: <ca7407f6-217b-4b78-9a98-e3c28756e565@collabora.com>
+Date: Wed, 20 May 2026 18:18:05 +0300
 MIME-Version: 1.0
-X-Spamd-Bar: ---
-Message-ID-Hash: SI7EULEEKTQBGEDCWEN6BNJ5SIVINWKU
-X-Message-ID-Hash: SI7EULEEKTQBGEDCWEN6BNJ5SIVINWKU
-X-MailFrom: mikhail.v.gavrilov@gmail.com
-X-Mailman-Rule-Hits: member-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
-CC: Alex Deucher <alexander.deucher@amd.com>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>, Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Mikhail Gavrilov <mikhail.v.gavrilov@gmail.com>
+User-Agent: Mozilla Thunderbird
+From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
+To: Deepanshu Kartikey <kartikey406@gmail.com>, airlied@redhat.com,
+ kraxel@redhat.com, gurchetansingh@chromium.org, olvaffe@gmail.com,
+ maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de,
+ simona@ffwll.ch, sumit.semwal@linaro.org, christian.koenig@amd.com
+References: <20260519082247.34470-1-kartikey406@gmail.com>
+ <43ecdd2f-5faf-432a-a814-77190b3ef239@collabora.com>
+Content-Language: en-US
+In-Reply-To: <43ecdd2f-5faf-432a-a814-77190b3ef239@collabora.com>
+X-ZohoMailClient: External
+X-Spamd-Bar: -----
+Message-ID-Hash: PSCBCFABBU2CABC3BQ3ZTW6EKL4GKH35
+X-Message-ID-Hash: PSCBCFABBU2CABC3BQ3ZTW6EKL4GKH35
+X-MailFrom: dmitry.osipenko@collabora.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: dri-devel@lists.freedesktop.org, virtualization@lists.linux.dev, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, syzbot+72bd3dd3a5d5f39a0271@syzkaller.appspotmail.com, stable@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v3 2/2] drm/amdgpu: fix recursive ww_mutex acquire in amdgpu_devcoredump_format
+Subject: [Linaro-mm-sig] Re: [PATCH v4] drm/virtio: use uninterruptible resv lock for plane updates
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SI7EULEEKTQBGEDCWEN6BNJ5SIVINWKU/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PSCBCFABBU2CABC3BQ3ZTW6EKL4GKH35/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-X-Spamd-Result: default: False [2.19 / 15.00];
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [3.09 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[gmail.com:s=20251104];
+	R_DKIM_REJECT(1.00)[collabora.com:s=zohomail];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:zohomail.com:reject}];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
-	MIME_BASE64_TEXT(0.10)[];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed),none];
+	DMARC_POLICY_SOFTFAIL(0.10)[collabora.com : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[18];
 	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_THREE(0.00)[4];
-	RCPT_COUNT_TWELVE(0.00)[12];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	ARC_NA(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[amd.com,gmail.com,ffwll.ch,linaro.org,vger.kernel.org,lists.linaro.org];
-	DKIM_TRACE(0.00)[gmail.com:-];
-	NEURAL_HAM(-0.00)[-1.000];
-	FROM_NEQ_ENVFROM(0.00)[mikhailvgavrilov@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FREEMAIL_TO(0.00)[gmail.com,redhat.com,chromium.org,linux.intel.com,kernel.org,suse.de,ffwll.ch,linaro.org,amd.com];
 	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[collabora.com:-];
+	NEURAL_HAM(-0.00)[-1.000];
+	FROM_NEQ_ENVFROM(0.00)[dmitry.osipenko@collabora.com,linaro-mm-sig-bounces@lists.linaro.org];
 	TO_DN_SOME(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,linaro.org:email,amd.com:email]
-X-Rspamd-Queue-Id: CBB11590ACB
+	TAGGED_RCPT(0.00)[linaro-mm-sig,72bd3dd3a5d5f39a0271];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,collabora.com:mid,syzkaller.appspot.com:url,linaro.org:email]
+X-Rspamd-Queue-Id: 4193F590ADD
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-V2hlbiBkdW1waW5nIElCIGNvbnRlbnRzIGZyb20gYSBodW5nIGpvYiwgYW1kZ3B1X2RldmNvcmVk
-dW1wX2Zvcm1hdCgpDQphY3F1aXJlZCB0aGUgVk0gcm9vdCBQRCdzIHJlc2VydmF0aW9uIHZpYSBh
-bWRncHVfdm1fbG9ja19ieV9wYXNpZCgpIGFuZA0KdGhlbiwgZm9yIGVhY2ggSUIsIGNhbGxlZCBh
-bWRncHVfYm9fcmVzZXJ2ZSgpIG9uIHRoZSBCTyBiYWNraW5nIHRoZSBJQi4NCkJvdGggcmVzZXJ2
-YXRpb25zIGFyZSByZXNlcnZhdGlvbl93d19jbGFzc19tdXRleCBvYmplY3RzIGFuZCBuZWl0aGVy
-DQp1c2VkIGEgd3dfYWNxdWlyZV9jdHgsIHdoaWNoIHRyaXBzIGxvY2tkZXA6DQoNCiAgV0FSTklO
-RzogcG9zc2libGUgcmVjdXJzaXZlIGxvY2tpbmcgZGV0ZWN0ZWQNCiAgLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0NCiAga3dvcmtlci91MTI4OjAgaXMgdHJ5aW5n
-IHRvIGFjcXVpcmUgbG9jazoNCiAgZmZmZjg4ODM4YjE2ZTFmMCAocmVzZXJ2YXRpb25fd3dfY2xh
-c3NfbXV0ZXgpeysuKy59LXs0OjR9LA0KICAgIGF0OiBhbWRncHVfZGV2Y29yZWR1bXBfZm9ybWF0
-KzB4MTU5NC8weDIzZjAgW2FtZGdwdV0NCg0KICBidXQgdGFzayBpcyBhbHJlYWR5IGhvbGRpbmcg
-bG9jazoNCiAgZmZmZjg4ODJmODI2ODFmMCAocmVzZXJ2YXRpb25fd3dfY2xhc3NfbXV0ZXgpeysu
-Ky59LXs0OjR9LA0KICAgIGF0OiBhbWRncHVfZGV2Y29yZWR1bXBfZm9ybWF0KzB4MTU5NC8weDIz
-ZjAgW2FtZGdwdV0NCg0KICAgUG9zc2libGUgdW5zYWZlIGxvY2tpbmcgc2NlbmFyaW86DQogICAg
-ICAgICBDUFUwDQogICAgICAgICAtLS0tDQogICAgbG9jayhyZXNlcnZhdGlvbl93d19jbGFzc19t
-dXRleCk7DQogICAgbG9jayhyZXNlcnZhdGlvbl93d19jbGFzc19tdXRleCk7DQoNCiAgICoqKiBE
-RUFETE9DSyAqKioNCiAgIE1heSBiZSBkdWUgdG8gbWlzc2luZyBsb2NrIG5lc3Rpbmcgbm90YXRp
-b24NCg0KICBXb3JrcXVldWU6IGV2ZW50c191bmJvdW5kIGFtZGdwdV9kZXZjb3JlZHVtcF9kZWZl
-cnJlZF93b3JrIFthbWRncHVdDQogIENhbGwgVHJhY2U6DQogICBfX3d3X211dGV4X2xvY2suY29u
-c3Rwcm9wLjANCiAgIHd3X211dGV4X2xvY2sNCiAgIGFtZGdwdV9ib19yZXNlcnZlDQogICBhbWRn
-cHVfZGV2Y29yZWR1bXBfZm9ybWF0KzB4MTU5NCBbYW1kZ3B1XQ0KICAgYW1kZ3B1X2RldmNvcmVk
-dW1wX2RlZmVycmVkX3dvcmsrMHhlYSBbYW1kZ3B1XQ0KDQpUaGUgdHdvIHJlc2VydmF0aW9ucyBh
-cmUgb24gZGlmZmVyZW50IEJPcyBpbiB0aGUgY2FwdHVyZWQgdHJhY2UsIHNvIHRoZQ0Kc3BsYXQg
-aXMgYSBsb2NrZGVwLWNvcnJlY3RuZXNzIHdhcm5pbmcsIG5vdCBhbiBvYnNlcnZlZCBkZWFkbG9j
-ay4gSXQNCmJlY29tZXMgYSByZWFsIHNlbGYtZGVhZGxvY2sgd2hlbmV2ZXIgdGhlIElCIEJPIHNo
-YXJlcyBpdHMgZG1hX3Jlc3Ygd2l0aA0KdGhlIHJvb3QgUEQgKHRoZSBhbHdheXMtdmFsaWQgY2Fz
-ZSwgc2VlIGFtZGdwdV92bV9pc19ib19hbHdheXNfdmFsaWQoKSk6DQphbWRncHVfYm9fcmVzZXJ2
-ZShhYm8pIHJlLWFjcXVpcmVzIHRoZSBzYW1lIHd3X211dGV4IHdpdGhvdXQgYSB0aWNrZXQNCmFu
-ZCBibG9ja3MgZm9yZXZlci4NCg0KV2l0aCBhbWRncHUuZ3B1X3JlY292ZXJ5PTAgdGhlIHRpbWVv
-dXQgaGFuZGxlciByZWZpcmVzIGV2ZXJ5IH4yIHMgYW5kDQplYWNoIGludm9jYXRpb24gcHJvZHVj
-ZXMgdGhpcyBzcGxhdCwgZHJvd25pbmcgdGhlIGtlcm5lbCByaW5nIGJ1ZmZlci4NCg0KTm93IHRo
-YXQgYW1kZ3B1X3ZtX2xvY2tfYnlfcGFzaWQoKSB0YWtlcyBhIGRybV9leGVjIGNvbnRleHQsIGxv
-Y2sgdGhlDQpyb290IFBEIGFuZCBldmVyeSBJQiBCTyB0b2dldGhlciBpbiBhIHNpbmdsZSBkcm1f
-ZXhlYyB0aWNrZXQuDQpEUk1fRVhFQ19JR05PUkVfRFVQTElDQVRFUyBoYW5kbGVzIElCIEJPcyB0
-aGF0IHNoYXJlIGEgZG1hX3Jlc3YgKGUuZy4NCmFsd2F5cy12YWxpZCBCT3MsIG9yIHR3byBJQnMg
-YmFja2VkIGJ5IHRoZSBzYW1lIEJPKS4gRXZlcnkgbG9jayBpcyBub3cNCmEgdG9wLWxldmVsIGFj
-cXVpcmUgdW5kZXIgb25lIHd3X2FjcXVpcmVfY3R4LCBzbyB0aGUgcmVjdXJzaXZlIHd3X211dGV4
-DQpjb25kaXRpb24gaXMgZ29uZSwgYW5kIHRoZSBwZXItSUIgYW1kZ3B1X2JvX3Jlc2VydmUoKS9h
-bWRncHVfYm9fdW5yZWYoKQ0KZGFuY2UgLS0gaW5jbHVkaW5nIGEgQk8gcmVmY291bnQgbGVhayBv
-biB0aGUgYW1kZ3B1X2JvX3Jlc2VydmUoKSBmYWlsdXJlDQpwYXRoIC0tIGlzIHJlbW92ZWQuDQoN
-ClJlcHJvZHVjZXIgKH4xNTAgTG9DIGxpYmRybV9hbWRncHUpOiBzdWJtaXQgYSBzaW5nbGUgR0ZY
-IElCIGNvbnRhaW5pbmcNClBBQ0tFVDNfSU5ESVJFQ1RfQlVGRkVSIGNoYWluZWQgYXQgR1BVIFZB
-IDAgYW5kIHdhaXQgZm9yIHRoZSBmZW5jZS4gVGhlDQpURFIgZmlyZXMgd2l0aGluIH4xMCBzIGFu
-ZCB0aGUgZGVmZXJyZWQgY29yZWR1bXAgd29ya2VyIHByb2R1Y2VzIHRoZQ0Kc3BsYXQgYWJvdmUg
-b24gZXZlcnkgaW52b2NhdGlvbjsgd2l0aCB0aGlzIGNoYW5nZSBhcHBsaWVkIHRoZSBzcGxhdCBp
-cw0KZ29uZS4NCg0KRml4ZXM6IDdiMTVmYzJkMWYxYSAoImRybS9hbWRncHU6IGR1bXAgam9iIGli
-cyBpbiB0aGUgZGV2Y29yZWR1bXAiKQ0KU3VnZ2VzdGVkLWJ5OiBDaHJpc3RpYW4gS8O2bmlnIDxj
-aHJpc3RpYW4ua29lbmlnQGFtZC5jb20+DQpTaWduZWQtb2ZmLWJ5OiBNaWtoYWlsIEdhdnJpbG92
-IDxtaWtoYWlsLnYuZ2F2cmlsb3ZAZ21haWwuY29tPg0KLS0tDQogLi4uL2dwdS9kcm0vYW1kL2Ft
-ZGdwdS9hbWRncHVfZGV2X2NvcmVkdW1wLmMgIHwgMTAzICsrKysrKysrKysrKy0tLS0tLQ0KIDEg
-ZmlsZSBjaGFuZ2VkLCA3MSBpbnNlcnRpb25zKCspLCAzMiBkZWxldGlvbnMoLSkNCg0KZGlmZiAt
-LWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9hbWQvYW1kZ3B1L2FtZGdwdV9kZXZfY29yZWR1bXAuYyBi
-L2RyaXZlcnMvZ3B1L2RybS9hbWQvYW1kZ3B1L2FtZGdwdV9kZXZfY29yZWR1bXAuYw0KaW5kZXgg
-ZDM4NmJjNzc1ZDAzLi5hOWQ4ZTAzZmFkODMgMTAwNjQ0DQotLS0gYS9kcml2ZXJzL2dwdS9kcm0v
-YW1kL2FtZGdwdS9hbWRncHVfZGV2X2NvcmVkdW1wLmMNCisrKyBiL2RyaXZlcnMvZ3B1L2RybS9h
-bWQvYW1kZ3B1L2FtZGdwdV9kZXZfY29yZWR1bXAuYw0KQEAgLTI0LDYgKzI0LDcgQEANCiANCiAj
-aW5jbHVkZSA8Z2VuZXJhdGVkL3V0c3JlbGVhc2UuaD4NCiAjaW5jbHVkZSA8bGludXgvZGV2Y29y
-ZWR1bXAuaD4NCisjaW5jbHVkZSA8ZHJtL2RybV9leGVjLmg+DQogI2luY2x1ZGUgImFtZGdwdV9k
-ZXZfY29yZWR1bXAuaCINCiAjaW5jbHVkZSAiYXRvbS5oIg0KIA0KQEAgLTIxNCwxMyArMjE1LDkg
-QEAgYW1kZ3B1X2RldmNvcmVkdW1wX2Zvcm1hdChjaGFyICpidWZmZXIsIHNpemVfdCBjb3VudCwg
-c3RydWN0IGFtZGdwdV9jb3JlZHVtcF9pbmYNCiAJc3RydWN0IGRybV9wcmludGVyIHA7DQogCXN0
-cnVjdCBkcm1fcHJpbnRfaXRlcmF0b3IgaXRlcjsNCiAJc3RydWN0IGFtZGdwdV92bV9mYXVsdF9p
-bmZvICpmYXVsdF9pbmZvOw0KLQlzdHJ1Y3QgYW1kZ3B1X2JvX3ZhX21hcHBpbmcgKm1hcHBpbmc7
-DQogCXN0cnVjdCBhbWRncHVfaXBfYmxvY2sgKmlwX2Jsb2NrOw0KIAlzdHJ1Y3QgYW1kZ3B1X3Jl
-c19jdXJzb3IgY3Vyc29yOw0KLQlzdHJ1Y3QgYW1kZ3B1X2JvICphYm8sICpyb290Ow0KLQl1aW50
-NjRfdCB2YV9zdGFydCwgb2Zmc2V0Ow0KIAlzdHJ1Y3QgYW1kZ3B1X3JpbmcgKnJpbmc7DQotCXN0
-cnVjdCBhbWRncHVfdm0gKnZtOw0KIAl1MzIgKmliX2NvbnRlbnQ7DQogCXVpbnQ4X3QgKmtwdHI7
-DQogCWludCB2ZXIsIGksIGosIHI7DQpAQCAtMzQzLDQzICszNDAsODQgQEAgYW1kZ3B1X2RldmNv
-cmVkdW1wX2Zvcm1hdChjaGFyICpidWZmZXIsIHNpemVfdCBjb3VudCwgc3RydWN0IGFtZGdwdV9j
-b3JlZHVtcF9pbmYNCiAJCWRybV9wcmludGYoJnAsICJWUkFNIGlzIGxvc3QgZHVlIHRvIEdQVSBy
-ZXNldCFcbiIpOw0KIA0KIAlpZiAoY29yZWR1bXAtPm51bV9pYnMpIHsNCi0JCS8qIERvbid0IHRy
-eSB0byBsb29rdXAgdGhlIFZNIG9yIG1hcCB0aGUgQk9zIHdoZW4gY2FsY3VsYXRpbmcgdGhlDQot
-CQkgKiBzaXplIHJlcXVpcmVkIHRvIHN0b3JlIHRoZSBkZXZjb3JlZHVtcC4NCisJCXN0cnVjdCBh
-bWRncHVfYm9fdmFfbWFwcGluZyAqbWFwcGluZzsNCisJCXN0cnVjdCBhbWRncHVfYm8gKnJvb3Qs
-ICphYm87DQorCQlzdHJ1Y3QgZHJtX2V4ZWMgZXhlYzsNCisJCXN0cnVjdCBhbWRncHVfdm0gKnZt
-Ow0KKwkJdTY0IHZhX3N0YXJ0LCBvZmZzZXQ7DQorCQlib29sIGxvY2tlZCA9IGZhbHNlOw0KKw0K
-KwkJLyoNCisJCSAqIExvY2sgdGhlIFZNIHJvb3QgUEQgYW5kIGV2ZXJ5IElCIEJPIHRvZ2V0aGVy
-IGluIGEgc2luZ2xlDQorCQkgKiBkcm1fZXhlYyB0aWNrZXQuIFJlc2VydmluZyB0aGUgSUIgQk9z
-IG9uZSBieSBvbmUgd2hpbGUgdGhlDQorCQkgKiByb290IFBEIGlzIGhlbGQgd291bGQgYmUgYSBy
-ZWN1cnNpdmUgcmVzZXJ2YXRpb25fd3dfY2xhc3NfbXV0ZXgNCisJCSAqIGFjcXVpcmUgd2l0aG91
-dCBhIHd3X2FjcXVpcmVfY3R4LCB3aGljaCB0cmlwcyBsb2NrZGVwIGFuZA0KKwkJICogc2VsZi1k
-ZWFkbG9ja3MgZm9yIElCIEJPcyB0aGF0IHNoYXJlIHRoZWlyIGRtYV9yZXN2IHdpdGggdGhlDQor
-CQkgKiByb290IFBEIChhbHdheXMtdmFsaWQgQk9zKS4NCisJCSAqDQorCQkgKiBTa2lwIGxvY2tp
-bmcgZW50aXJlbHkgb24gdGhlIHNpemluZyBwYXNzOiBpdCBkb2VzIG5vdCB3cml0ZQ0KKwkJICog
-SUIgY29udGVudCwgc28gdGhlIHNpemUgZXN0aW1hdGUgZG9lc24ndCBkZXBlbmQgb24gd2hldGhl
-cg0KKwkJICogdGhlIEJPcyBhcmUgcmVhY2hhYmxlLg0KIAkJICovDQotCQlpZiAoc2l6aW5nX3Bh
-c3MpDQotCQkJdm0gPSBOVUxMOw0KLQkJZWxzZQ0KLQkJCXZtID0gYW1kZ3B1X3ZtX2xvY2tfYnlf
-cGFzaWQoYWRldiwgJnJvb3QsIGNvcmVkdW1wLT5wYXNpZCk7DQorCQlpZiAoIXNpemluZ19wYXNz
-KSB7DQorCQkJZHJtX2V4ZWNfaW5pdCgmZXhlYywgRFJNX0VYRUNfSUdOT1JFX0RVUExJQ0FURVMs
-DQorCQkJCSAgICAgIDEgKyBjb3JlZHVtcC0+bnVtX2licyk7DQorCQkJZHJtX2V4ZWNfdW50aWxf
-YWxsX2xvY2tlZCgmZXhlYykgew0KKwkJCQl2bSA9IGFtZGdwdV92bV9sb2NrX2J5X3Bhc2lkKGFk
-ZXYsICZyb290LA0KKwkJCQkJCQkgICAgIGNvcmVkdW1wLT5wYXNpZCwgJmV4ZWMpOw0KKwkJCQlk
-cm1fZXhlY19yZXRyeV9vbl9jb250ZW50aW9uKCZleGVjKTsNCisJCQkJaWYgKCF2bSkNCisJCQkJ
-CWJyZWFrOw0KKw0KKwkJCQlmb3IgKGludCBpID0gMDsgaSA8IGNvcmVkdW1wLT5udW1faWJzOyBp
-KyspIHsNCisJCQkJCXU2NCBwZm47DQorDQorCQkJCQl2YV9zdGFydCA9IGNvcmVkdW1wLT5pYnNb
-aV0uZ3B1X2FkZHIgJg0KKwkJCQkJCSAgIEFNREdQVV9HTUNfSE9MRV9NQVNLOw0KKwkJCQkJcGZu
-ID0gdmFfc3RhcnQgLyBBTURHUFVfR1BVX1BBR0VfU0laRTsNCisJCQkJCW1hcHBpbmcgPSBhbWRn
-cHVfdm1fYm9fbG9va3VwX21hcHBpbmcodm0sIHBmbik7DQorCQkJCQlpZiAoIW1hcHBpbmcpDQor
-CQkJCQkJY29udGludWU7DQorDQorCQkJCQlhYm8gPSBtYXBwaW5nLT5ib192YS0+YmFzZS5ibzsN
-CisJCQkJCXIgPSBkcm1fZXhlY19sb2NrX29iaigmZXhlYywgJmFiby0+dGJvLmJhc2UpOw0KKwkJ
-CQkJZHJtX2V4ZWNfcmV0cnlfb25fY29udGVudGlvbigmZXhlYyk7DQorCQkJCQlpZiAocikNCisJ
-CQkJCQlicmVhazsNCisJCQkJfQ0KKwkJCQlpZiAocikNCisJCQkJCWJyZWFrOw0KKwkJCX0NCisJ
-CQlpZiAodm0gJiYgIXIpDQorCQkJCWxvY2tlZCA9IHRydWU7DQorCQkJZWxzZQ0KKwkJCQlkcm1f
-ZXhlY19maW5pKCZleGVjKTsNCisJCX0NCisNCisJCWZvciAoaW50IGkgPSAwOyBpIDwgY29yZWR1
-bXAtPm51bV9pYnM7IGkrKykgew0KKwkJCWJvb2wgZW1pdF9jb250ZW50ID0gc2l6aW5nX3Bhc3M7
-DQogDQotCQlmb3IgKGludCBpID0gMDsgaSA8IGNvcmVkdW1wLT5udW1faWJzICYmIChzaXppbmdf
-cGFzcyB8fCB2bSk7IGkrKykgew0KIAkJCWliX2NvbnRlbnQgPSBrdm1hbGxvY19hcnJheShjb3Jl
-ZHVtcC0+aWJzW2ldLmliX3NpemVfZHcsIDQsDQogCQkJCQkJICAgIEdGUF9LRVJORUwpOw0KIAkJ
-CWlmICghaWJfY29udGVudCkNCiAJCQkJY29udGludWU7DQogDQotCQkJLyogdm09TlVMTCBjYW4g
-b25seSBoYXBwZW4gd2hlbiAnc2l6aW5nX3Bhc3MnIGlzIHRydWUuIFNraXAgdG8gdGhlDQotCQkJ
-ICogZHJtX3ByaW50ZigpIGNhbGxzIChpYl9jb250ZW50IGRvZXNuJ3QgbmVlZCB0byBiZSBpbml0
-aWFsaXplZA0KLQkJCSAqIGFzIGl0cyBjb250ZW50IHdvbid0IGJlIHdyaXR0ZW4gYW55d2hlcmUp
-Lg0KLQkJCSAqLw0KLQkJCWlmICghdm0pDQorCQkJaWYgKCFsb2NrZWQpDQogCQkJCWdvdG8gb3V0
-cHV0X2liX2NvbnRlbnQ7DQogDQogCQkJdmFfc3RhcnQgPSBjb3JlZHVtcC0+aWJzW2ldLmdwdV9h
-ZGRyICYgQU1ER1BVX0dNQ19IT0xFX01BU0s7DQogCQkJbWFwcGluZyA9IGFtZGdwdV92bV9ib19s
-b29rdXBfbWFwcGluZyh2bSwgdmFfc3RhcnQgLyBBTURHUFVfR1BVX1BBR0VfU0laRSk7DQogCQkJ
-aWYgKCFtYXBwaW5nKQ0KLQkJCQlnb3RvIGZyZWVfaWJfY29udGVudDsNCisJCQkJZ290byBvdXRw
-dXRfaWJfY29udGVudDsNCiANCi0JCQlvZmZzZXQgPSB2YV9zdGFydCAtIChtYXBwaW5nLT5zdGFy
-dCAqIEFNREdQVV9HUFVfUEFHRV9TSVpFKTsNCi0JCQlhYm8gPSBhbWRncHVfYm9fcmVmKG1hcHBp
-bmctPmJvX3ZhLT5iYXNlLmJvKTsNCi0JCQlyID0gYW1kZ3B1X2JvX3Jlc2VydmUoYWJvLCBmYWxz
-ZSk7DQotCQkJaWYgKHIpDQotCQkJCWdvdG8gZnJlZV9pYl9jb250ZW50Ow0KKwkJCWFibyA9IG1h
-cHBpbmctPmJvX3ZhLT5iYXNlLmJvOw0KKwkJCW9mZnNldCA9IHZhX3N0YXJ0IC0gbWFwcGluZy0+
-c3RhcnQgKiBBTURHUFVfR1BVX1BBR0VfU0laRTsNCiANCiAJCQlpZiAoYWJvLT5mbGFncyAmIEFN
-REdQVV9HRU1fQ1JFQVRFX05PX0NQVV9BQ0NFU1MpIHsNCiAJCQkJb2ZmID0gMDsNCiANCiAJCQkJ
-aWYgKGFiby0+dGJvLnJlc291cmNlLT5tZW1fdHlwZSAhPSBUVE1fUExfVlJBTSkNCi0JCQkJCWdv
-dG8gdW5yZXNlcnZlX2FibzsNCisJCQkJCWdvdG8gb3V0cHV0X2liX2NvbnRlbnQ7DQogDQogCQkJ
-CWFtZGdwdV9yZXNfZmlyc3QoYWJvLT50Ym8ucmVzb3VyY2UsIG9mZnNldCwNCiAJCQkJCQkgY29y
-ZWR1bXAtPmlic1tpXS5pYl9zaXplX2R3ICogNCwNCkBAIC0zOTEsMTIgKzQyOSwxMyBAQCBhbWRn
-cHVfZGV2Y29yZWR1bXBfZm9ybWF0KGNoYXIgKmJ1ZmZlciwgc2l6ZV90IGNvdW50LCBzdHJ1Y3Qg
-YW1kZ3B1X2NvcmVkdW1wX2luZg0KIAkJCQkJb2ZmICs9IGN1cnNvci5zaXplOw0KIAkJCQkJYW1k
-Z3B1X3Jlc19uZXh0KCZjdXJzb3IsIGN1cnNvci5zaXplKTsNCiAJCQkJfQ0KKwkJCQllbWl0X2Nv
-bnRlbnQgPSB0cnVlOw0KIAkJCX0gZWxzZSB7DQogCQkJCXIgPSB0dG1fYm9fa21hcCgmYWJvLT50
-Ym8sIDAsDQogCQkJCQkJUEZOX1VQKGFiby0+dGJvLmJhc2Uuc2l6ZSksDQogCQkJCQkJJmFiby0+
-a21hcCk7DQogCQkJCWlmIChyKQ0KLQkJCQkJZ290byB1bnJlc2VydmVfYWJvOw0KKwkJCQkJZ290
-byBvdXRwdXRfaWJfY29udGVudDsNCiANCiAJCQkJa3B0ciA9IGFtZGdwdV9ib19rcHRyKGFibyk7
-DQogCQkJCWtwdHIgKz0gb2Zmc2V0Ow0KQEAgLTQwNCwyMSArNDQzLDIxIEBAIGFtZGdwdV9kZXZj
-b3JlZHVtcF9mb3JtYXQoY2hhciAqYnVmZmVyLCBzaXplX3QgY291bnQsIHN0cnVjdCBhbWRncHVf
-Y29yZWR1bXBfaW5mDQogCQkJCSAgICAgICBjb3JlZHVtcC0+aWJzW2ldLmliX3NpemVfZHcgKiA0
-KTsNCiANCiAJCQkJYW1kZ3B1X2JvX2t1bm1hcChhYm8pOw0KKwkJCQllbWl0X2NvbnRlbnQgPSB0
-cnVlOw0KIAkJCX0NCiANCiBvdXRwdXRfaWJfY29udGVudDoNCiAJCQlkcm1fcHJpbnRmKCZwLCAi
-XG5JQiAjJWQgMHglbGx4ICVkIGR3XG4iLA0KIAkJCQkgICBpLCBjb3JlZHVtcC0+aWJzW2ldLmdw
-dV9hZGRyLCBjb3JlZHVtcC0+aWJzW2ldLmliX3NpemVfZHcpOw0KLQkJCWZvciAoaW50IGogPSAw
-OyBqIDwgY29yZWR1bXAtPmlic1tpXS5pYl9zaXplX2R3OyBqKyspDQotCQkJCWRybV9wcmludGYo
-JnAsICIweCUwOHhcbiIsIGliX2NvbnRlbnRbal0pOw0KLXVucmVzZXJ2ZV9hYm86DQotCQkJaWYg
-KHZtKQ0KLQkJCQlhbWRncHVfYm9fdW5yZXNlcnZlKGFibyk7DQotZnJlZV9pYl9jb250ZW50Og0K
-KwkJCWlmIChlbWl0X2NvbnRlbnQpIHsNCisJCQkJZm9yIChpbnQgaiA9IDA7IGogPCBjb3JlZHVt
-cC0+aWJzW2ldLmliX3NpemVfZHc7IGorKykNCisJCQkJCWRybV9wcmludGYoJnAsICIweCUwOHhc
-biIsIGliX2NvbnRlbnRbal0pOw0KKwkJCX0NCiAJCQlrdmZyZWUoaWJfY29udGVudCk7DQogCQl9
-DQotCQlpZiAodm0pIHsNCi0JCQlhbWRncHVfYm9fdW5yZXNlcnZlKHJvb3QpOw0KKw0KKwkJaWYg
-KGxvY2tlZCkgew0KKwkJCWRybV9leGVjX2ZpbmkoJmV4ZWMpOw0KIAkJCWFtZGdwdV9ib191bnJl
-Zigmcm9vdCk7DQogCQl9DQogCX0NCi0tIA0KMi41NC4wDQoNCl9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0t
-IGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVt
-YWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+On 5/20/26 18:04, Dmitry Osipenko wrote:
+> On 5/19/26 11:22, Deepanshu Kartikey wrote:
+>> virtio_gpu_cursor_plane_update() and virtio_gpu_resource_flush() lock
+>> the framebuffer BO's dma_resv via virtio_gpu_array_lock_resv() and
+>> ignore its return value. The function can fail with -EINTR from
+>> dma_resv_lock_interruptible() (signal during lock wait) or with
+>> -ENOMEM from dma_resv_reserve_fences() (fence slot allocation),
+>> leaving the resv lock not held. The queue path then walks the object
+>> array and calls dma_resv_add_fence(), which requires the lock held;
+>> with lockdep enabled this trips dma_resv_assert_held():
+>>
+>>   WARNING: drivers/dma-buf/dma-resv.c:296 at dma_resv_add_fence+0x71e/0x840
+>>   Call Trace:
+>>    virtio_gpu_array_add_fence
+>>    virtio_gpu_queue_ctrl_sgs
+>>    virtio_gpu_queue_fenced_ctrl_buffer
+>>    virtio_gpu_cursor_plane_update
+>>    drm_atomic_helper_commit_planes
+>>    drm_atomic_helper_commit_tail
+>>    commit_tail
+>>    drm_atomic_helper_commit
+>>    drm_atomic_commit
+>>    drm_atomic_helper_update_plane
+>>    __setplane_atomic
+>>    drm_mode_cursor_universal
+>>    drm_mode_cursor_common
+>>    drm_mode_cursor_ioctl
+>>    drm_ioctl
+>>    __x64_sys_ioctl
+>>
+>> Beyond the WARN, mutating the dma_resv fence list without the lock
+>> races with concurrent readers/writers and can corrupt the list.
+>>
+>> Both call sites run inside the .atomic_update plane callback, which
+>> DRM atomic helpers do not allow to fail (by the time it runs, the
+>> commit has been signed off to userspace and there is no clean
+>> rollback path). Moving the lock acquisition to .prepare_fb was
+>> rejected because the broader lock scope deadlocks against other BO
+>> locking paths in the same atomic commit.
+>>
+>> Introduce virtio_gpu_lock_one_resv_uninterruptible() that uses
+>> dma_resv_lock() instead of dma_resv_lock_interruptible(). This
+>> eliminates the -EINTR failure mode -- the realistic syzbot trigger
+>> -- without extending the lock hold across the commit. The helper
+>> locks a single BO and rejects nents > 1 with -EINVAL; both fix
+>> sites lock exactly one BO.
+>>
+>> Use it from virtio_gpu_cursor_plane_update() and
+>> virtio_gpu_resource_flush(); check the return value to handle the
+>> remaining -ENOMEM case from dma_resv_reserve_fences() by freeing
+>> the objs and skipping the plane update for that frame. The
+>> framebuffer BOs touched here are not shared with other contexts
+>> and lock contention is expected to be brief, so the loss of
+>> signal-interruptibility is acceptable.
+>>
+>> Other callers of virtio_gpu_array_lock_resv() (the ioctl paths)
+>> continue to use the interruptible variant.
+>>
+>> The bug was reported by syzbot, triggered via fault injection
+>> (fail_nth) on the DRM_IOCTL_MODE_CURSOR path, which forces the
+>> -ENOMEM branch in dma_resv_reserve_fences().
+>>
+>> Reported-by: syzbot+72bd3dd3a5d5f39a0271@syzkaller.appspotmail.com
+>> Closes: https://syzkaller.appspot.com/bug?extid=72bd3dd3a5d5f39a0271
+>> Fixes: 5cfd31c5b3a3 ("drm/virtio: fix virtio_gpu_cursor_plane_update().")
+>> Cc: stable@vger.kernel.org
+>> Signed-off-by: Deepanshu Kartikey <kartikey406@gmail.com>
+>> ---
+>> v4: Rename the helper to virtio_gpu_lock_one_resv_uninterruptible()
+>>     and reject objs->nents > 1 with -EINVAL. The v3 helper's
+>>     multi-object branch used drm_gem_lock_reservations(), which is
+>>     interruptible, contradicting the "uninterruptible" name; both
+>>     fix sites lock a single BO so the multi-object path is dropped.
+>>     (Dmitry Osipenko)
+>> v3: Drop the prepare_fb/cleanup_fb approach from v2 (it deadlocked
+>>     against virtio_gpu_resource_flush(), which also locks the BO in
+>>     the same atomic commit). Instead add an uninterruptible variant
+>>     of the resv lock helper and use it in both
+>>     virtio_gpu_cursor_plane_update() and virtio_gpu_resource_flush().
+>>     (Dmitry Osipenko)
+>> v2: Move resv lock acquisition from .atomic_update (which must not
+>>     fail) to .prepare_fb (which may), per maintainer review of v1.
+>>     The v1 approach of silently skipping the cursor update on lock
+>>     failure violated the atomic-commit contract with userspace.
+>> ---
+>>  drivers/gpu/drm/virtio/virtgpu_drv.h   |  1 +
+>>  drivers/gpu/drm/virtio/virtgpu_gem.c   | 17 +++++++++++++++++
+>>  drivers/gpu/drm/virtio/virtgpu_plane.c | 10 ++++++++--
+>>  3 files changed, 26 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/drivers/gpu/drm/virtio/virtgpu_drv.h b/drivers/gpu/drm/virtio/virtgpu_drv.h
+>> index f17660a71a3e..2f3531950aa4 100644
+>> --- a/drivers/gpu/drm/virtio/virtgpu_drv.h
+>> +++ b/drivers/gpu/drm/virtio/virtgpu_drv.h
+>> @@ -317,6 +317,7 @@ virtio_gpu_array_from_handles(struct drm_file *drm_file, u32 *handles, u32 nents
+>>  void virtio_gpu_array_add_obj(struct virtio_gpu_object_array *objs,
+>>  			      struct drm_gem_object *obj);
+>>  int virtio_gpu_array_lock_resv(struct virtio_gpu_object_array *objs);
+>> +int virtio_gpu_lock_one_resv_uninterruptible(struct virtio_gpu_object_array *objs);
+>>  void virtio_gpu_array_unlock_resv(struct virtio_gpu_object_array *objs);
+>>  void virtio_gpu_array_add_fence(struct virtio_gpu_object_array *objs,
+>>  				struct dma_fence *fence);
+>> diff --git a/drivers/gpu/drm/virtio/virtgpu_gem.c b/drivers/gpu/drm/virtio/virtgpu_gem.c
+>> index f22dc5c21cd4..435d37d36034 100644
+>> --- a/drivers/gpu/drm/virtio/virtgpu_gem.c
+>> +++ b/drivers/gpu/drm/virtio/virtgpu_gem.c
+>> @@ -238,6 +238,23 @@ int virtio_gpu_array_lock_resv(struct virtio_gpu_object_array *objs)
+>>  	return ret;
+>>  }
+>>  
+>> +int virtio_gpu_lock_one_resv_uninterruptible(struct virtio_gpu_object_array *objs)
+>> +{
+>> +	int ret;
+>> +
+>> +	if (objs->nents != 1)
+>> +		return -EINVAL;
+>> +
+>> +	dma_resv_lock(objs->objs[0]->resv, NULL);
+>> +
+>> +	ret = dma_resv_reserve_fences(objs->objs[0]->resv, 1);
+>> +	if (ret) {
+>> +		virtio_gpu_array_unlock_resv(objs);
+>> +		return ret;
+>> +	}
+>> +	return 0;
+>> +}
+>> +
+>>  void virtio_gpu_array_unlock_resv(struct virtio_gpu_object_array *objs)
+>>  {
+>>  	if (objs->nents == 1) {
+>> diff --git a/drivers/gpu/drm/virtio/virtgpu_plane.c b/drivers/gpu/drm/virtio/virtgpu_plane.c
+>> index a126d1b25f46..652352424744 100644
+>> --- a/drivers/gpu/drm/virtio/virtgpu_plane.c
+>> +++ b/drivers/gpu/drm/virtio/virtgpu_plane.c
+>> @@ -215,7 +215,10 @@ static void virtio_gpu_resource_flush(struct drm_plane *plane,
+>>  		if (!objs)
+>>  			return;
+>>  		virtio_gpu_array_add_obj(objs, vgfb->base.obj[0]);
+>> -		virtio_gpu_array_lock_resv(objs);
+>> +		if (virtio_gpu_lock_one_resv_uninterruptible(objs)) {
+>> +			virtio_gpu_array_put_free(objs);
+>> +			return;
+>> +		}
+>>  		virtio_gpu_cmd_resource_flush(vgdev, bo->hw_res_handle, x, y,
+>>  					      width, height, objs,
+>>  					      vgplane_st->fence);
+>> @@ -459,7 +462,10 @@ static void virtio_gpu_cursor_plane_update(struct drm_plane *plane,
+>>  		if (!objs)
+>>  			return;
+>>  		virtio_gpu_array_add_obj(objs, vgfb->base.obj[0]);
+>> -		virtio_gpu_array_lock_resv(objs);
+>> +		if (virtio_gpu_lock_one_resv_uninterruptible(objs)) {
+>> +			virtio_gpu_array_put_free(objs);
+>> +			return;
+>> +		}
+>>  		virtio_gpu_cmd_transfer_to_host_2d
+>>  			(vgdev, 0,
+>>  			 plane->state->crtc_w,
+> 
+> Applied to misc-next, thanks
+
+Realized patche should go to -fixes, applied to misc-fixes too
+
+-- 
+Best regards,
+Dmitry
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
