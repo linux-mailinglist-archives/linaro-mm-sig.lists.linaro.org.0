@@ -2,163 +2,277 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id iJJpJsZrDWrgxAUAu9opvQ
+	id uBdpAxtsDWrgxAUAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 May 2026 10:07:34 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 May 2026 10:08:59 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 28FBF589662
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 May 2026 10:07:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 867EF5896C9
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 May 2026 10:08:57 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E3174405CA
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 May 2026 08:07:32 +0000 (UTC)
-Received: from mail-ot1-f48.google.com (mail-ot1-f48.google.com [209.85.210.48])
-	by lists.linaro.org (Postfix) with ESMTPS id AE6E83F77C
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 20 May 2026 08:07:21 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 0B36B40964
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 May 2026 08:08:57 +0000 (UTC)
+Received: from SA9PR02CU001.outbound.protection.outlook.com (mail-southcentralusazon11013054.outbound.protection.outlook.com [40.93.196.54])
+	by lists.linaro.org (Postfix) with ESMTPS id 37CD63F77C
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 20 May 2026 08:08:42 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=ftSMCzSy;
-	arc=pass ("google.com:s=arc-20240605:i=1");
-	spf=pass (lists.linaro.org: domain of mikhail.v.gavrilov@gmail.com designates 209.85.210.48 as permitted sender) smtp.mailfrom=mikhail.v.gavrilov@gmail.com;
-	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-ot1-f48.google.com with SMTP id 46e09a7af769-7de7dc85b74so4511499a34.2
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 20 May 2026 01:07:21 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779264441; cv=none;
-        d=google.com; s=arc-20240605;
-        b=Jkk6kzakMINq5+fdFWnniMts7IFgaltj2l4aKY+EoAIR0AB22tBwg3rBRNRg5RTZFQ
-         Kjwv8NB9UdvCvICyYBBcbxE9LUtUOZl5Gd+lm84rUw4Fsf7KmhlERbFhxzPpG9/cUOOY
-         cdQvR0r9GCKNhZi/l9SieRc25vNfSH/c55gKgo6tBZn7ZY7w7zXwF8wBXK5MgpH0thxN
-         TOp8iil/P4yizRv8B2/xUpSi4umeQGeY7HIKMp1hD7zkk3TzPsos0HLuXNSNB+1qo/XR
-         BJkZtlNiPf92OC3Prs3Vx0ywxq/LQKvfCw4sP32r2MqRUPQ5o5bHShmXz25CrG+59CIT
-         tVww==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=Ytey4qORX2TbyVZpIBqgx3oRXsMx32wxQcpaf7l+9+M=;
-        fh=NRi1gyQYsUGxkuBIbEMm1ytJDa+MNh/SZrGPf7dtN2E=;
-        b=fdf2ffAgo4Hh4gClnhZpMLp5aDg3DxzrEVVMAMdFWek0UTNTzyu/sLSTpdLdi9rplD
-         0ElezFW9zuIolBnnDprO/6mVwCR4QIBighddleL1NpzXuwRXOVKn5zd8pTsWGXAg8j7s
-         ew+omphqm3fSd4GknBM69wScgdjCiX7gEGdrwDgigiEUSwLL/N902KOCusF/JEC1UXYi
-         wxmJDLkS23QGhm0Chp8Bkj6aNQ0CAx8Vd3hDrT3ypbs/cfhgQKEkWNIqKwXZMpn58vHf
-         7H3G1rrkzNm18VQgv14Ih2qLDI2Hhy47EP/bOBptOnkz8Aat3pKG8D5/6zWx/oQ0Y5Cf
-         ARKQ==;
-        darn=lists.linaro.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779264441; x=1779869241; darn=lists.linaro.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Ytey4qORX2TbyVZpIBqgx3oRXsMx32wxQcpaf7l+9+M=;
-        b=ftSMCzSy0R+groBYUzqb3tcCXX78ym/d6kvFfTrKseHx7XO4nmQh9WsSmPeHL/gi41
-         nYKpaFFbn+q/RGYst0QIMSohHOqjgdb2Kf4Sd66mJ11RXHPwkEcqb99kCpngtJ/tFHNr
-         ywZIktia2+OBluSx3Woj0htA0K8Y9OWxUug0AGv2Hv1yk5hsAfej7gkw8cfDgoGSFgrL
-         nFoO87QLBmz4QqxO7fAuwbvkJvJDa/RimatHq0PAEKu+dxVkwN3R6JjH1zIgCuOXgjrl
-         Y1wk8GKKVgG9VSooVnhJwl6ZuNdDS4Y02+caMIRDn7QIH6m8LSwBRc6fJqCmq8wbEJ7D
-         dhRw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779264441; x=1779869241;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=Ytey4qORX2TbyVZpIBqgx3oRXsMx32wxQcpaf7l+9+M=;
-        b=RYr5jiTEI+irSf5N850EPYBoi7ueE9t3NNZDxedk15yaoWJ/kZAbqznPE3pRHg5x+M
-         ldSW/Z8GILzuVAfRF5CcZqwTFAKtXl9RG419CLijH+poR8kaghYEitIeOwMdNq+smPzy
-         Zj8VAyNPkR1K0lTwL4P4oK2bAXMhlc6sGAfFB/YPgYEzObMNAru3nrx4mCaEhq7ppdXq
-         lWtjidjvgLOzxjH6buVygisrwAi3ox7LjLRN3nNETfVnDa3+yDH5Ir/RwERZ40MIMbDe
-         emzD98ChyssoqRr1N8qlwdvQe2x5GrFAiPwXoMdKva+0sbPjvghfRl07RoGro8D0HDVH
-         h+rw==
-X-Forwarded-Encrypted: i=1; AFNElJ/+OJj2no67T1Velig1nLMBS1+wuWw73ZMTDyoa3iZ9ILKlO0tjAmxKH1vaOPa6cWVZUi63xLfbPBshhYpd@lists.linaro.org
-X-Gm-Message-State: AOJu0YzNwb+jGThC9FK4bB8OPXAbbVm8IQThdaaC/31yHmFGZvX0NR57
-	SdatDii2w6dnTbG/OY+e1vf2LDFRue0HQ7kRNPK2t848wqpHSHftdp7ilJm1NezMGYDS9HFyvM4
-	sEnc8E6lqad6zDlWXDJhsbQclpEFWJ4g=
-X-Gm-Gg: Acq92OGxENxXir8QAIrKsYFdbwAsLg3y7QXvOXJEOHqHEP5fnUZhng4USLnzXELqJ0a
-	rt5K4Mj+ZK30GAd554WECH48RyMQneZJqqhjFCzFza+AkhQjZ3Ol4UMf0XUSrgxd7uWlcDwWqfh
-	iW0YSNBgVH8bfWN8QvAyGRioBEhAroodoXGSDytoZfzAeAxUn/spR1pjkvhnhVzaHjs6i2A3htV
-	nEQXKHrBepZ3kMjeCgqKKki9UJ9C/pqEW4wksG7rh6bY+txYNHvHiufINtTe3EAzVhe7gcp69pI
-	1dGzUIAQFA==
-X-Received: by 2002:a05:6830:928:b0:7dc:e08d:d9ec with SMTP id
- 46e09a7af769-7e4f2b24e30mr16828017a34.15.1779264440957; Wed, 20 May 2026
- 01:07:20 -0700 (PDT)
+	dkim=pass header.d=amd.com header.s=selector1 header.b=s49wCWXn;
+	arc=reject ("signature check failed: fail, {[1] = sig:microsoft.com:reject}");
+	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.93.196.54 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
+	dmarc=pass (policy=quarantine) header.from=amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=LkF5v82AwC2ZI+4LSSdjfQ6bVYzy5npAqa44zu9OB2sauwTHf36sE2qEoixqSoc52AvKIUYP19Rixo7xU/lUaxNaJm8Amvvi+tzGiq2/a7qR+xCwJj/x30Gai3Sswp/h+EHdop3QU3bNtLZ28XPh/TRoMkllgRN0prPkWthb/dLQm/IUbtDXgqwdcsbjVG7FftUjNemTTfj8VxM1/1Dt8DIZyCQMH6meraOjg0XTiWpK6Q5vvy9+H8At/5JDhFcI6ADV0QaIr5FB4ddc/6F/AWQhrmh9q1/E+j2BaGdDtEt1iDggUkN7lbaGcZKO7Zx0IQM49fEGWr9GJfW3OiLbvQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=5hBKWRv5jWQdOJicL3isVkToHsvYSbC9+TaQJw5Fow8=;
+ b=d9+AlxA2Fmp75ReGFNlf5TF2lEJsiIRZyflguIWdnTfgdHqgAcUktguEKfQhThxt3sJKGXPxu/NcUapA1RtnJBarLbSWw6YHa62fVfhAizCqhHKngDrAY/jTTen013WWlcY1YBT4r+7lVWA6Wkyeq+6kCr9BsGbp4Z8Q7ksBEC9FLgFDraTng6VvRSl/rfLTlnw+HtMUYV/tcrmoT5NZvol+eSx9Ms4jzQHc2EodDtzOCiq2ItFHm+lLRSt5007OLpR91Hd8c4HgyupfGTmxibTr7DjoA9psl8Fk1jTfCuT6vypKq7PkEl2afWbsnovNYI7n8lreG/IrRQEJzEbthA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=5hBKWRv5jWQdOJicL3isVkToHsvYSbC9+TaQJw5Fow8=;
+ b=s49wCWXnOF2uFF5iSN4VnN4Y51oJjbVav7AH6/PUYhtjXb618Nh5P/oFc0aOBjhRwZqseRszyTrJu/StVz0vIH8uuWpGg+DBT31SbFOx53xltR/M5jlqMdFRpM9IoL8srIWtYvxxI8jB5rdRKdRLpPOK8NxDhuF9PfLcNpb7d9U=
+Received: from PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
+ by SN7PR12MB7250.namprd12.prod.outlook.com (2603:10b6:806:2aa::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.16; Wed, 20 May
+ 2026 08:08:35 +0000
+Received: from PH7PR12MB5685.namprd12.prod.outlook.com
+ ([fe80::ce69:cfae:774d:a65c]) by PH7PR12MB5685.namprd12.prod.outlook.com
+ ([fe80::ce69:cfae:774d:a65c%5]) with mapi id 15.21.0025.022; Wed, 20 May 2026
+ 08:08:35 +0000
+Message-ID: <53edf0b5-e733-4b96-87d7-3307275500c0@amd.com>
+Date: Wed, 20 May 2026 10:08:29 +0200
+User-Agent: Mozilla Thunderbird
+To: Xaver Hugl <xaver.hugl@kde.org>
+References: <20260516-jorth-syncobj-v1-0-88ede9d98a81@gmail.com>
+ <c6c91de9-a34b-4b50-a3c1-d42bf7631f8e@amd.com>
+ <CAHijbEUzWZC4GAMU6YGV42gOYkrQaMZZPiwS4Erb4H1J-fh_8Q@mail.gmail.com>
+ <69dcbcc1-da58-4d34-bfb0-5c8d33b75d59@amd.com>
+ <CAHijbEWqc2+kSkk3i_LxB2PQ6XwUetw1UkdUdXJfdv3zgKd1kA@mail.gmail.com>
+ <38551bfe-75e1-4978-b57d-adc43cebc85e@amd.com>
+ <CAHijbEWHp960qvZFoK7+9ppHAqkAR7=UQhtMUccqWzGd_pFPQA@mail.gmail.com>
+ <5ee6d5af-ac48-41d7-a19f-e08a3c5b7d19@amd.com>
+ <CAFZQkGwmeipZnvmBkcE7KhvUSMkSE=fzLBZtiMyhv3mM04Vudg@mail.gmail.com>
+ <dff60378-4e47-4753-8878-feec6e1c2690@amd.com>
+ <CAFZQkGz=UJqaJ_eTwKBy1pAg5xL+PLibh7W1vYf7JD7Jrx-LZQ@mail.gmail.com>
+Content-Language: en-US
+From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+In-Reply-To: <CAFZQkGz=UJqaJ_eTwKBy1pAg5xL+PLibh7W1vYf7JD7Jrx-LZQ@mail.gmail.com>
+X-ClientProxiedBy: FR2P281CA0047.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:92::14) To PH7PR12MB5685.namprd12.prod.outlook.com
+ (2603:10b6:510:13c::22)
 MIME-Version: 1.0
-References: <20260429143743.50743-1-mikhail.v.gavrilov@gmail.com>
- <20260519161541.19994-1-mikhail.v.gavrilov@gmail.com> <45bbcc75-f852-46c2-bcff-8cacb9413376@amd.com>
-In-Reply-To: <45bbcc75-f852-46c2-bcff-8cacb9413376@amd.com>
-From: Mikhail Gavrilov <mikhail.v.gavrilov@gmail.com>
-Date: Wed, 20 May 2026 13:07:09 +0500
-X-Gm-Features: AVHnY4LjCbKcTkLs9-x5er23_LG6HLKFdPJe4uy4QSmttSvQ2RTUpYxe2TP8aBU
-Message-ID: <CABXGCsPRY+jk_ArYMOXqNTw31W95FBgNzqFq0_pvi3paYR=KDQ@mail.gmail.com>
-To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-X-Spamd-Bar: -----
-Message-ID-Hash: 3YH254T6SZRKAVACGIVFZ3O65GMLZ4YF
-X-Message-ID-Hash: 3YH254T6SZRKAVACGIVFZ3O65GMLZ4YF
-X-MailFrom: mikhail.v.gavrilov@gmail.com
-X-Mailman-Rule-Hits: member-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
-CC: amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, Alex Deucher <alexander.deucher@amd.com>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|SN7PR12MB7250:EE_
+X-MS-Office365-Filtering-Correlation-Id: a483ca7e-240c-48a3-96f7-08deb646fdad
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|366016|376014|1800799024|7416014|22082099003|18002099003|56012099003|5023799004|11063799006|4143699003;
+X-Microsoft-Antispam-Message-Info: 
+	jlM1i0cTZqoehDVivXSEqJLoRlGUL6vTk03BFIGFSA8QwAK7HrT3eyytastgRgCsJy7CxaVQCubFAOTvBynvfUllzu4fBRdhwOCWrIq3okEsCA6E40u6SnQ1nzAys/36xDrEME2iSgpZeEXZYwQYGYWWwEsamLpTCLenKXreU0JVTj3qp1vCxAKOFRlEhXgId0b6pGiw7wDBb9pHCAV0kmyYE+6UrUuzt1wHXu6x8m1R1VdnP/V6lad07KswLslhmXRebzdxrbglG8Y3FbOLNdPg8vKpooe9d0KeDy2X9ickPo3zE6Jjwc/0YhaOcaErHkKhejkfYfLEYkvpKUqdgSkLyhCRXHG0vJP4jWOlsLx4jibr0LyfLhn93A/hAkuEP2JINjFmU330Wv4bNqbjhRXs9ytulnayzXmcNwaYW4ekY5QZJ9Tvs+7srz3bLNbNnSxtHYxe9ccKq0WVZJtfgExjgtjOI1sLsFPxGzfAtqSHso8lFDDPkTG3Ksg1kbpVtSqbWgfFZsglk9l3zr/5MXzknLGtK1PsfEYmUF7z43WT7n0/ZIm6jWho1f2YyyJpSp1RLn7UJqS/b0XlrdYQ/4+DQC/mcmFd4I4mcmDoLF+IqqmUAJ1eycAMKukmau4/SEhmnA5Iyd8KEXS9q47kLtYNWrh+CnDSlqjTHagzjSd/5wYiKXDe0YNW/jpjPFNd
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB5685.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(7416014)(22082099003)(18002099003)(56012099003)(5023799004)(11063799006)(4143699003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?ZzFTQVMxZjBLQ25yeGw0MEpHeE05c2t4UGc4Tk9qaEEyTFB3ZUNuUU53c3FX?=
+ =?utf-8?B?ZGJ1TmVzOGF1Rkl3RVRVc0VFR1NnYWpzWWt3dEdzeFNBcHFOY1UrWFlsaFpy?=
+ =?utf-8?B?WkFrV0tKNERETUtXb1RhZzVQaSttaWZaUlA1bWpDY0t3VnRtZW5ha3FqbVBB?=
+ =?utf-8?B?REwwU1VkWDI1RmpqS1VicUZnb3pyUUxPYXgrNGFma2dzeTFtMW5jT3NCdkRZ?=
+ =?utf-8?B?OEp0djAxMkNHMmFPT093ZkNkNjFFdVpWUlZqSStScDNVRy8vTFVBdEllaUlS?=
+ =?utf-8?B?MlBzYkF5dDhkZlo1R0UxWFhqR3puRDNRcXBBNzgwZmhGR3EvZ2ZYcXo1Nlhr?=
+ =?utf-8?B?b2pSb0F3YXNIMlNLWHJlV0FrYlk3TmxDSXFEMkp5RWdNYzgzbWplTlZoM1FG?=
+ =?utf-8?B?aHI4SHd2eUlhN3cvNk05bFloeVlraUg4YmlFcTJlRmdwQWlsSk9YZ1J1Tmh2?=
+ =?utf-8?B?UTVJa21rellPUlVoQTZyRlJBQWdmek82S3UrY3VwSHJ2NzZ1QVl6czJqZmhY?=
+ =?utf-8?B?NDh4blZvVU5QQy9rT2RBYjBvLzV1bGtGN0c1TmFScUp3LzRoYkt4TzcvS2VZ?=
+ =?utf-8?B?S3F6cFFESCs4TlVEYUNEMlo5ZFl0NWFSdGlQOGNuZHl4ZmtYR2VEOEtZd1BJ?=
+ =?utf-8?B?RnViSFpEcDFJQ1Y5Tk1HOXhkbHVjVGdUYXkwRzRtandPakRYa2Nld1JTTVN4?=
+ =?utf-8?B?L0NVNTZsZWFhTjVFZlU3VWJkVXJVOUdDMjdJMlhhS1BxeE5IL0dVeTMyVmJM?=
+ =?utf-8?B?MWNHT0dFSnRSN3NIMW1nR3VqUlRIVCsxbGw2eGhoZmR2RU1DNm44K0ZYN3Bs?=
+ =?utf-8?B?ekNIaVN6WmkyOEM4UFArTDJuQUJhaUtwN1dOK1hlMjhiZXB5Y29HdDFnUHJt?=
+ =?utf-8?B?djIxQnNSZHdzR05KdHZYdG5GWHZPVkpMZTVoRnpJR21mK2R1c2g5b29UMGJJ?=
+ =?utf-8?B?QTRjNGVOR3RsOFN6cXpoZXVQOXJiTSsrOHZScnZqOUdlWUJBL0JvRkNaS2E1?=
+ =?utf-8?B?ZFdVQlRudDE0U1JOMXFCOTZDQXFQTU1OZVpHWmRTQi9zcW96bVk5WndUbVps?=
+ =?utf-8?B?QnV6YXo2TXhtZ3NZS2FKZHNKbStNVUJKUTFzdVRPZlJNSXlhWmVhcEh5b1V2?=
+ =?utf-8?B?dkw0WEkvYWd2U3ZqVTlhbmdxa2JobUozNmVhczFBUThnZVNUZ2hDUG9uNEVE?=
+ =?utf-8?B?NlJRNnRwYy9RK05mLzIxRFhiLzFBWlJoR24xL0xsNGs4MFFaL2M1cXNLbDNH?=
+ =?utf-8?B?NXdIVFRZVW9ndFo3TWxaTU8xcGN1RzdrVGRGc3lNQ3ZtVWV5OUR1UUJiRExP?=
+ =?utf-8?B?bXlJUCtMaVFmME5lTm5rSmRJQTJLMnJ6SjNGRVJYRDhXdElwRzcxRTFoT1Nq?=
+ =?utf-8?B?NDRQOFg5OTBVVmw4My9YZkFtVEsyQ2I2eGpMbHpJS3JUcTc1WnVvMVJNNUZv?=
+ =?utf-8?B?UTdtcUVGUnVzUlhieUZTZkVOOC9sQm9hWnY2ZURtTVZNS1RaQVVnMTc5SnhS?=
+ =?utf-8?B?SVdkdjhEVTl5K1JyWjY0cXNwenVhS29zU3BCR3lSNFBWUk0zaDZYVXltOXJk?=
+ =?utf-8?B?aEIxMDhGV2dESlVJcVJQSm9VNCtUVG8zUE5JRFhQK3RXYlBhVDJDN3dTSk44?=
+ =?utf-8?B?L2ViTzUyRitMQjdVTm9DTFpDaFEwUjJnaVJpUlhtNnE5UkVaNDZSKy9JZDds?=
+ =?utf-8?B?OWpaZ3VEd3hYSzdyMnBKMzdkRlBNeXhja0RmTnF1cFYvdlNMcXh4OE52SU04?=
+ =?utf-8?B?bjdWaHhCMGdNY21rcW5wbjBWTVNtMFc0aGJna0JlZDA3R0VBYm5tb0JXN3Nj?=
+ =?utf-8?B?RkloUmRPeFF6ZjBZU3lpTTFwNjE2RHVwUE0wOXlSV3VMSi9xRmVRT3pXU2tC?=
+ =?utf-8?B?M2dnZzQwNVR0OWpSR1ZpRDUvTEN1OGg1L3lqQVFRVXBCU3pIZWcxYUlqVHpQ?=
+ =?utf-8?B?bFU2ajdzWlo2Nm1NaFJDY1lmQjk0aWQ2YWlTQjNPcVJXaHZsUTZEVFBoZHgz?=
+ =?utf-8?B?YzdkRFJmNzBCMncrcUNzbTJUSVFCd3p5eWErWlFocGQreHM3dHF0RVh5ZXdi?=
+ =?utf-8?B?aG5scWg2emNjVUh2VjVSVUtXM0V5cTNOR2drazhnd1pRaEpKQlErRnNldGta?=
+ =?utf-8?B?ek5yMTlveGV0U004bzIvR2FtWk90Q0NzMEFwc0psd29uVXE3QzR5eGxrU05Q?=
+ =?utf-8?B?ZC9BS1Q3NDBPSEozL25pYkEzb2xmQkNhL1JZVTdHcklzNy9vd3lsL2EwQW56?=
+ =?utf-8?B?U2ViMHZjRkxrcC9YWW1VWGU1YVJGQ3JJUHRWZFFwQkVEMWo0ck1pQmM3a1FS?=
+ =?utf-8?Q?fgsWnUMPb/Uahuk4FN?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a483ca7e-240c-48a3-96f7-08deb646fdad
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5685.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 May 2026 08:08:35.4429
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: UbmXOW76spdaq0TAJiFJDp2MdM8gy5Bjyigf3mi9MQ3QP03IJ1srZgHMB7irmCgB
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB7250
+X-Spamd-Bar: --
+Message-ID-Hash: QHOSYY6RNQSUAM3G4ZB4QCOYSEBJSNQM
+X-Message-ID-Hash: QHOSYY6RNQSUAM3G4ZB4QCOYSEBJSNQM
+X-MailFrom: Christian.Koenig@amd.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Julian Orth <ju.orth@gmail.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, Arnd Bergmann <arnd@arndb.de>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org, wayland-devel@lists.freedesktop.org, =?UTF-8?Q?Michel_D=C3=A4nzer?= <michel.daenzer@mailbox.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2] drm/amdgpu: fix recursive ww_mutex acquire in amdgpu_devcoredump_format
+Subject: [Linaro-mm-sig] Re: [PATCH 00/12] misc/syncobj: add /dev/syncobj device
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3YH254T6SZRKAVACGIVFZ3O65GMLZ4YF/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QHOSYY6RNQSUAM3G4ZB4QCOYSEBJSNQM/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-X-Spamd-Result: default: False [1.69 / 15.00];
-	R_DKIM_REJECT(1.00)[gmail.com:s=20251104];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:google.com:reject}];
-	R_SPF_ALLOW(-0.20)[+mx];
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [4.49 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	DMARC_POLICY_QUARANTINE(1.50)[amd.com : SPF not aligned (relaxed),quarantine];
+	R_DKIM_REJECT(1.00)[amd.com:s=selector1];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed),none];
-	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	GREYLIST(0.00)[pass,meta];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCPT_COUNT_TWELVE(0.00)[19];
 	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:-];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	FROM_NEQ_ENVFROM(0.00)[mikhailvgavrilov@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FREEMAIL_CC(0.00)[lists.freedesktop.org,vger.kernel.org,amd.com,gmail.com,ffwll.ch,linaro.org,lists.linaro.org];
-	RCPT_COUNT_SEVEN(0.00)[11];
+	DKIM_TRACE(0.00)[amd.com:-];
+	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-0.997];
+	FROM_NEQ_ENVFROM(0.00)[christian.koenig@amd.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FREEMAIL_CC(0.00)[gmail.com,linux.intel.com,kernel.org,suse.de,ffwll.ch,linaro.org,lwn.net,linuxfoundation.org,arndb.de,lists.freedesktop.org,vger.kernel.org,lists.linaro.org,mailbox.org];
+	MID_RHS_MATCH_FROM(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[amd.com:email,mail.gmail.com:mid,linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo]
-X-Rspamd-Queue-Id: 28FBF589662
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,linaro.org:email,amd.com:mid]
+X-Rspamd-Queue-Id: 867EF5896C9
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-T24gV2VkLCBNYXkgMjAsIDIwMjYgYXQgMTI6MDjigK9QTSBDaHJpc3RpYW4gS8O2bmlnDQo8Y2hy
-aXN0aWFuLmtvZW5pZ0BhbWQuY29tPiB3cm90ZToNCj4NCj4gVGhhdCB3aG9sZSBpbmZyYXN0cnVj
-dHVyZSBpcyBzdXBlcmZsb3VzLiBZb3UganVzdCBuZWVkIHRvIG1vZGlmeSBhbWRncHVfdm1fbG9j
-a19ieV9wYXNpZCgpIHRvIHRha2UgYSBkcm1fZXhlYyBvYmplY3QgdG8gbG9jayB0aGUgcm9vdCBC
-Ty4NCj4NCg0KQ2hyaXN0aWFuLCBtb2RpZnlpbmcgYW1kZ3B1X3ZtX2xvY2tfYnlfcGFzaWQoKSB0
-byB0YWtlIGEgZHJtX2V4ZWMgdHVybnMNCm91dCB0byBhbHNvIHJlcXVpcmUgY29udmVydGluZyBp
-dHMgb3RoZXIgY2FsbGVyLCBhbWRncHVfdm1faGFuZGxlX2ZhdWx0KCksDQp0byBkcm1fZXhlYyDi
-gJQgbW9zdCBvZiB0aGUgZGlmZiBpcyB0aGF0IGNvbnZlcnNpb24sIG5vdCB0aGUgaGVscGVyIGl0
-c2VsZi4NCg0KSSBjYW46DQogKGEpIGNvbnZlcnQgYm90aCBpbiBhIDItcGF0Y2ggc2VyaWVzICho
-YW5kbGVfZmF1bHQgYmVjb21lcw0KICAgICBkcm1fZXhlY19pbml0ICsgZHJtX2V4ZWNfdW50aWxf
-YWxsX2xvY2tlZCArIGRybV9leGVjX2ZpbmksIH4zMCBsaW5lcyksDQogICAgIG9yDQogKGIpIGtl
-ZXAgdGhlIGxvb3AgaW5zaWRlIGFtZGdwdV92bV9sb2NrX2J5X3Bhc2lkKCkgc28gaGFuZGxlX2Zh
-dWx0IHN0YXlzDQogICAgIGEgb25lLWxpbmVyIOKAlCBidXQgdGhlbiB0aGUgZGV2Y29yZWR1bXAg
-Y2FsbGVyIGNhbid0IGFkZCB0aGUgSUIgQk9zDQogICAgIHRvIHRoZSBzYW1lIHRpY2tldCwgd2hp
-Y2ggaXMgdGhlIHdob2xlIHBvaW50Lg0KDQooYSkgc2VlbXMgdW5hdm9pZGFibGUgaWYgd2Ugd2Fu
-dCBvbmUgaGVscGVyLiBJcyB0aGF0IHdoYXQgeW91IGhhZCBpbiBtaW5kLA0Kb3IgZGlkIHlvdSBp
-bnRlbmQgc29tZXRoaW5nIGxpZ2h0ZXIg4oCUIGUuZy4gYSBzZXBhcmF0ZQ0KYW1kZ3B1X3ZtX2xv
-Y2tfYnlfcGFzaWRfZXhlYygpIGxlYXZpbmcgaGFuZGxlX2ZhdWx0IHVudG91Y2hlZD8NCg0KLS0g
-DQpCZXN0IFJlZ2FyZHMsDQpNaWtlIEdhdnJpbG92Lg0KX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGlu
-YXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwg
-dG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
+On 5/19/26 19:08, Xaver Hugl wrote:
+>>> The part where we get this independent of attached hardware is quite
+>>> important for us though, since we can't just ignore explicit sync once
+>>> the device we previously imported the syncobj into is disconnected.
+>>
+>> Can you elaborate more on this?
+> 
+> In Wayland, the client is allowed to attach dmabuf and syncobj
+> independently, they don't have to be from the same device (and the
+> compositor wouldn't be able to verify the opposite anyways). The
+> compositor will usually import both into the same drm device, but
+> especially with compositors that render on multiple devices, that's
+> not necessarily the case either.
+> 
+> If for example we had a system with one internal GPU and one external
+> GPU, the client renders on the internal GPU and the compositor uses
+> the external one. Now when the user yanks the USB C cable, afaiu
+
+Well I would say the other way around is a pretty common use case.
+
+In other words the compositors uses the internal GPU for composing and displaying the picture. And the client uses the external GPU for fast rendering.
+
+> - the buffers from the client stay valid
+
+Buffers from the hot plugged GPU don't stay valid. Accessing CPU mappings either result in a SIGBUS or are redirected to a dummy page.
+
+DMA operations to hot plugged buffers from other GPUs (or rather more general other devices) are waited on before the underlying resource is removed (e.g. system memory or PCIe address space or whatever is backing that).
+
+But no new DMA operations are usually permitted to start.
+
+> - the syncobj stays valid on the client side
+> - the syncobj becomes invalid on the compositor side
+
+Nope that's not correct. The syncobj itself stays valid even if you completely hot plug the device.
+
+It can just be that the fences inside the syncobj are terminated with an error.
+
+> "invalid" there means either
+> - the acquire point of the client is marked as signaled, before
+> rendering on the client side is completed
+> - the acquire point of the client is never signaled. Since the
+> compositor waits for the acquire point, the Wayland surface is stuck
+> forever
+
+Both of those would be a *massive* violation of documented kernel rules for hot-plugging which could lead to random data corruption and/or deadlocks.
+
+If you see any HW driver showing behavior like that please open up a bug report and ping the relevant maintainers immediately.
+
+When a hotplug happens all operations of the device should return an -ENODEV error, even when exposed to other devices/application through syncobj or syncfile.
+
+One problem is that only syncfile allows for querying such error codes at the moment, we have patches pending to add that to syncobj as well but we lack a compositor with support for that as userspace client.
+
+> Afaik the latter is currently the case. The former wouldn't be much
+> better though, not when it's preventable.
+> 
+> This is admittedly an edge case, but GPU hotunplug is something we try
+> to support as well as possible in Plasma, and all the edge cases cause
+> a lot of problems in combination and are a lot of headaches to handle
+> (or really work around) in the compositor.
+
+Well exactly that design is used in the Tesla 3 infotainment system for example.
+
+So GPU hotplug is actually a pretty common use case.
+
+> Another edge case is when the client asks the compositor to import the
+> syncobj, which can fail when a hotunplug is in process, and ends up
+> disconnecting the client for no fault of either client or compositor.
+
+Well the question here is if the device the compositor is using or the client is using is gone?
+
+If the client device is hot removed the compositor should be perfectly capable to import the syncobj.
+
+If the compositor device is gone then you don't have a device to display anything any more, so generating the next frame doesn't seem to make sense either.
+
+What could be is that you want the compositor to be kept alive even when the display device is gone to switch over to vkms or whatever so that a VNC session or other remote desktop still works.
+
+>>>>> 3. It removes the need to translate between syncobjs fds and handles.
+>>>>
+>>>> That's a pretty big no-go as well. The differentiation between FDs and handles is completely intentional.
+>>> Could you expand on why it's needed? For compositors, the handle is
+>>> just an intermediary thing when translating between file descriptors.
+>>
+>> Well what we could do is to add an IOCTL to directly attach an syncobj file descriptor to an eventfd.
+> That would be nice.
+
+Take a look at drm_syncobj_file_fops and how drm_syncobj_add_eventfd() is used. Adding that functionality shouldn't be more than a typing exercise.
+
+Do I see it right that this would already solve most problems in the compositor side?
+
+Regards,
+Christian.
+
+> 
+> - Xaver
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
