@@ -2,82 +2,76 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 6IvzLkbMDmpoCQYAu9opvQ
+	id kIf/GmTUDmo9CgYAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 21 May 2026 11:11:34 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 21 May 2026 11:46:12 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5AD335A1FF7
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 21 May 2026 11:11:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0718A5A29A9
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 21 May 2026 11:46:11 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 6A24D40986
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 21 May 2026 09:11:33 +0000 (UTC)
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	by lists.linaro.org (Postfix) with ESMTPS id 4C6C74098A
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 21 May 2026 09:11:07 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B589340976
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 21 May 2026 09:46:10 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.16])
+	by lists.linaro.org (Postfix) with ESMTPS id 83DD540446
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 21 May 2026 09:45:59 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=E4my4AYw;
-	spf=pass (lists.linaro.org: domain of aesteve@redhat.com designates 170.10.133.124 as permitted sender) smtp.mailfrom=aesteve@redhat.com;
-	dmarc=pass (policy=quarantine) header.from=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1779354666;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=vjxV//gOyz/n+AtRONHMGYrZm4NAi0bq2+NJ8phfFu8=;
-	b=E4my4AYwfzB6trZvcUJBttX8AVjIRSEUUV0FJ7OR1blfwURBNTsv5V0671xk/tjiiTCBQi
-	DtbgdD1qmmUklneuCm4A3eseHyn2ImZNako9hdUPnXwjxfFHkr63cRPJnUeDQ789T08Asd
-	HJ22U0081d1mPMpCCRUoQHWs7pQzNVU=
-Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-160-qNw0hdrzO3mUsAwMX-eh-w-1; Thu,
- 21 May 2026 05:11:01 -0400
-X-MC-Unique: qNw0hdrzO3mUsAwMX-eh-w-1
-X-Mimecast-MFC-AGG-ID: qNw0hdrzO3mUsAwMX-eh-w_1779354659
-Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 4CD221800343;
-	Thu, 21 May 2026 09:10:59 +0000 (UTC)
-Received: from [192.168.1.153] (headnet01.pony-001.prod.iad2.dc.redhat.com [10.2.32.101])
-	by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 33E7C19560A3;
-	Thu, 21 May 2026 09:10:56 +0000 (UTC)
-From: Albert Esteve <aesteve@redhat.com>
-Date: Thu, 21 May 2026 11:10:15 +0200
+	dkim=pass header.d=intel.com header.s=Intel header.b=DrvUa2kB;
+	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 198.175.65.16 as permitted sender) smtp.mailfrom=lkp@intel.com;
+	dmarc=pass (policy=none) header.from=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1779356760; x=1810892760;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=TCZTrJrBdgiRh4gqQvmMTY8x6g99ouQ5GXQCNVm/HPI=;
+  b=DrvUa2kBdnjfLyVcq1eocXWFs/6BFglNj97tGyow94jr8VsbMwBE3UwJ
+   Adtio4M4UCFdg0At8/U8Nm5P6/uCuBafTN4FTl3KNATu/SyizE9EA6W46
+   um65qyFtTI5jP8pipZCqkmOjNFFBp3kMw1etaXwPEP2DWFEqhI9k4z3M4
+   aUm+Vsgnj6Jpxg8RxNQ3GomqBYm8h/k63U3wmB6mUWfsMPKZ8uJ79L2hw
+   WM30csp5Uy29eP7k+RXUCky4Xpgoe1P6+7loNp7SeAUg/OswvK36CWngD
+   xinkSpT1j0Z2mSfoDIXk/utvM63ux6hAj1I5PCixb7JA+9Y0mFKuBdDtJ
+   A==;
+X-CSE-ConnectionGUID: nLp/67+uTDaY8SMEAYqx2g==
+X-CSE-MsgGUID: +ZMw+qOQRAu4NPjU8m5SzA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11792"; a="80450412"
+X-IronPort-AV: E=Sophos;i="6.23,246,1770624000";
+   d="scan'208";a="80450412"
+Received: from orviesa008.jf.intel.com ([10.64.159.148])
+  by orvoesa108.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 May 2026 02:45:59 -0700
+X-CSE-ConnectionGUID: +rUo7ROgQlyofsz/e5I0oA==
+X-CSE-MsgGUID: /nQHP1Q7QSCozMJLtKgr9g==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.23,246,1770624000";
+   d="scan'208";a="240347284"
+Received: from igk-lkp-server01.igk.intel.com (HELO bdf09bfdbd5f) ([10.211.93.152])
+  by orviesa008.jf.intel.com with ESMTP; 21 May 2026 02:45:55 -0700
+Received: from kbuild by bdf09bfdbd5f with local (Exim 4.98.2)
+	(envelope-from <lkp@intel.com>)
+	id 1wPzyT-00000000Aq7-0tKX;
+	Thu, 21 May 2026 09:45:53 +0000
+Date: Thu, 21 May 2026 11:45:42 +0200
+From: kernel test robot <lkp@intel.com>
+To: Mikhail Gavrilov <mikhail.v.gavrilov@gmail.com>,
+	amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+	linux-kernel@vger.kernel.org
+Message-ID: <202605211112.xlUYDZeM-lkp@intel.com>
+References: <20260520151741.50575-3-mikhail.v.gavrilov@gmail.com>
 MIME-Version: 1.0
-Message-Id: <20260521-dmabuf-limit-access-v1-2-26c01e27365a@redhat.com>
-References: <20260521-dmabuf-limit-access-v1-0-26c01e27365a@redhat.com>
-In-Reply-To: <20260521-dmabuf-limit-access-v1-0-26c01e27365a@redhat.com>
-To: Sumit Semwal <sumit.semwal@linaro.org>,
- =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- Benjamin Gaignard <benjamin.gaignard@collabora.com>,
- Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>,
- "T.J. Mercier" <tjmercier@google.com>, Shuah Khan <shuah@kernel.org>
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1779354648; l=4904;
- i=aesteve@redhat.com; s=20260303; h=from:subject:message-id;
- bh=/ApxYmdq3kHu3thKFegK+YtWMiL83D621EF8tkmYSG4=;
- b=Xw1Be6/9oJc7tUp8Mo1663PiOX1fvKwqDaWX3WJ3OMPYs/gXgAh7yML6JMuLdi5QSXy/RKbdE
- 8UmbeD0gzGDCHTDVwDgZf86kMG0+6oi6wy+eK+Yz6BDr1US2pGcJXSz
-X-Developer-Key: i=aesteve@redhat.com; a=ed25519;
- pk=YSFz6sOHd2L45+Fr8DIvHTi6lSIjhLZ5T+rkxspJt1s=
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
-X-Mimecast-MFC-PROC-ID: o4OdDq28KuD0C6w4eXLOrFyNQdX8K_PrczjJtqdd9pA_1779354659
-X-Mimecast-Originator: redhat.com
-X-Spamd-Bar: ----
-Message-ID-Hash: SGDGX47ZNBXHHO35MZYNFQCF23OJYGBO
-X-Message-ID-Hash: SGDGX47ZNBXHHO35MZYNFQCF23OJYGBO
-X-MailFrom: aesteve@redhat.com
-X-Mailman-Rule-Hits: member-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
-CC: linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org, Albert Esteve <aesteve@redhat.com>, mripard@kernel.org
+Content-Disposition: inline
+In-Reply-To: <20260520151741.50575-3-mikhail.v.gavrilov@gmail.com>
+X-Spamd-Bar: ------
+Message-ID-Hash: XGIILH2LEWHHHHFIITZI4LVVTGJJM24D
+X-Message-ID-Hash: XGIILH2LEWHHHHFIITZI4LVVTGJJM24D
+X-MailFrom: lkp@intel.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: oe-kbuild-all@lists.linux.dev, Alex Deucher <alexander.deucher@amd.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>, Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Mikhail Gavrilov <mikhail.v.gavrilov@gmail.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 2/2] selftests: dma-buf: add DERIVE ioctl tests
+Subject: [Linaro-mm-sig] Re: [PATCH v3 2/2] drm/amdgpu: fix recursive ww_mutex acquire in amdgpu_devcoredump_format
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SGDGX47ZNBXHHO35MZYNFQCF23OJYGBO/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XGIILH2LEWHHHHFIITZI4LVVTGJJM24D/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -86,197 +80,71 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [1.99 / 15.00];
-	DMARC_POLICY_QUARANTINE(1.50)[redhat.com : SPF not aligned (relaxed),quarantine];
-	R_DKIM_REJECT(1.00)[redhat.com:s=mimecast20190719];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+X-Spamd-Result: default: False [3.09 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	R_DKIM_REJECT(1.00)[intel.com:s=Intel];
+	MID_CONTAINS_FROM(1.00)[];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[intel.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	ARC_NA(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	MIME_TRACE(0.00)[0:+];
-	MISSING_XM_UA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[14];
-	TO_DN_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FROM_NEQ_ENVFROM(0.00)[aesteve@redhat.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	NEURAL_HAM(-0.00)[-0.629];
 	RCVD_TLS_LAST(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	DKIM_TRACE(0.00)[redhat.com:-]
-X-Rspamd-Queue-Id: 5AD335A1FF7
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	FREEMAIL_CC(0.00)[lists.linux.dev,amd.com,gmail.com,ffwll.ch,linaro.org,vger.kernel.org,lists.linaro.org];
+	ARC_NA(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com,lists.freedesktop.org,vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[14];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[lkp@intel.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[intel.com:-];
+	NEURAL_HAM(-0.00)[-1.000];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	MISSING_XM_UA(0.00)[];
+	TO_DN_SOME(0.00)[]
+X-Rspamd-Queue-Id: 0718A5A29A9
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-dma-buf now supports aliasing an existing file descriptor with reduced
-access permissions via DMA_BUF_IOCTL_DERIVE ioctl, and enforces that a
-shared writable mapping cannot be created through a read-only file
-descriptor.
+Hi Mikhail,
 
-Add two tests to the dmabuf-heaps selftest to exercise this behaviour.
-The positive test allocates a buffer, derives its file descriptor as
-O_RDONLY through the ioctl, confirms that a read-only shared mapping
-succeeds, and verifies that data written through the original read-write
-file descriptor is visible through the derived one.
+kernel test robot noticed the following build warnings:
 
-The negative test confirms that attempting a DMA_BUF_IOCTL_DERIVE ioctl
-call with RW flags on a read-only file descriptor is rejected with EACCES.
-Same for mmap() escalation attempt.
+[auto build test WARNING on drm-misc/drm-misc-next]
+[also build test WARNING on drm/drm-next drm-i915/for-linux-next drm-i915/for-linux-next-fixes drm-tip/drm-tip next-20260520]
+[cannot apply to linus/master v6.16-rc1]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
-Signed-off-by: Albert Esteve <aesteve@redhat.com>
----
- tools/testing/selftests/dmabuf-heaps/dmabuf-heap.c | 114 ++++++++++++++++++++-
- 1 file changed, 113 insertions(+), 1 deletion(-)
+url:    https://github.com/intel-lab-lkp/linux/commits/Mikhail-Gavrilov/drm-amdgpu-convert-amdgpu_vm_lock_by_pasid-to-drm_exec/20260520-231931
+base:   https://gitlab.freedesktop.org/drm/misc/kernel.git drm-misc-next
+patch link:    https://lore.kernel.org/r/20260520151741.50575-3-mikhail.v.gavrilov%40gmail.com
+patch subject: [PATCH v3 2/2] drm/amdgpu: fix recursive ww_mutex acquire in amdgpu_devcoredump_format
+compiler: clang version 20.1.8 (https://github.com/llvm/llvm-project 87f0227cb60147a26a1eeb4fb06e3b505e9c7261)
+docutils: docutils (Docutils 0.21.2, Python 3.13.5, on linux)
+reproduce: (https://download.01.org/0day-ci/archive/20260521/202605211112.xlUYDZeM-lkp@intel.com/reproduce)
 
-diff --git a/tools/testing/selftests/dmabuf-heaps/dmabuf-heap.c b/tools/testing/selftests/dmabuf-heaps/dmabuf-heap.c
-index fc9694fc4e89e..c3856189200be 100644
---- a/tools/testing/selftests/dmabuf-heaps/dmabuf-heap.c
-+++ b/tools/testing/selftests/dmabuf-heaps/dmabuf-heap.c
-@@ -390,6 +390,116 @@ static void test_alloc_errors(char *heap_name)
- 	close(heap_fd);
- }
- 
-+static int setup_ro_derive(int heap_fd, int *dmabuf_fd, int *ro_fd)
-+{
-+	struct dma_buf_derive params = {
-+		.flags = O_RDONLY | O_CLOEXEC,
-+	};
-+	int ret;
-+
-+	ret = dmabuf_heap_alloc(heap_fd, ONE_MEG, 0, dmabuf_fd);
-+	ksft_test_result(!ret, "Allocate RW buffer\n");
-+	if (ret)
-+		return -1;
-+
-+	ret = ioctl(*dmabuf_fd, DMA_BUF_IOCTL_DERIVE, &params);
-+	ksft_test_result(!ret, "Derive as O_RDONLY %s\n",
-+			 ret < 0 ? strerror(errno) : "OK");
-+	if (ret < 0) {
-+		close(*dmabuf_fd);
-+		*dmabuf_fd = -1;
-+		return -1;
-+	}
-+
-+	*ro_fd = params.fd;
-+	return 0;
-+}
-+
-+static void test_ro_derive(char *heap_name)
-+{
-+	int heap_fd = -1, dmabuf_fd = -1, ro_fd = -1;
-+	void *rw_map = MAP_FAILED, *ro_map = MAP_FAILED;
-+	int ret;
-+
-+	heap_fd = dmabuf_heap_open(heap_name);
-+
-+	ksft_print_msg("Testing read-only derive with mmap:\n");
-+
-+	if (setup_ro_derive(heap_fd, &dmabuf_fd, &ro_fd))
-+		goto out;
-+
-+	rw_map = mmap(NULL, ONE_MEG, PROT_READ | PROT_WRITE, MAP_SHARED,
-+		      dmabuf_fd, 0);
-+	ksft_test_result(rw_map != MAP_FAILED, "RW mmap on RW fd %s\n",
-+			 rw_map == MAP_FAILED ? strerror(errno) : "OK");
-+	if (rw_map == MAP_FAILED)
-+		goto out;
-+
-+	dmabuf_sync(dmabuf_fd, DMA_BUF_SYNC_START);
-+	memset(rw_map, 0xab, ONE_MEG);
-+	dmabuf_sync(dmabuf_fd, DMA_BUF_SYNC_END);
-+
-+	ro_map = mmap(NULL, ONE_MEG, PROT_READ, MAP_SHARED, ro_fd, 0);
-+	ksft_test_result(ro_map != MAP_FAILED, "RO mmap on RO fd %s\n",
-+			 ro_map == MAP_FAILED ? strerror(errno) : "OK");
-+	if (ro_map == MAP_FAILED)
-+		goto out;
-+
-+	dmabuf_sync(ro_fd, DMA_BUF_SYNC_START);
-+	ret = memcmp(rw_map, ro_map, ONE_MEG);
-+	dmabuf_sync(ro_fd, DMA_BUF_SYNC_END);
-+	ksft_test_result(!ret, "Data written via RW fd visible through RO fd\n");
-+
-+out:
-+	if (ro_map != MAP_FAILED)
-+		munmap(ro_map, ONE_MEG);
-+	if (rw_map != MAP_FAILED)
-+		munmap(rw_map, ONE_MEG);
-+	if (ro_fd >= 0)
-+		close(ro_fd);
-+	if (dmabuf_fd >= 0)
-+		close(dmabuf_fd);
-+	close(heap_fd);
-+}
-+
-+static void test_ro_derive_escalation(char *heap_name)
-+{
-+	struct dma_buf_derive params = {
-+		.flags = O_RDWR | O_CLOEXEC,
-+	};
-+	int heap_fd = -1, dmabuf_fd = -1, ro_fd = -1, ret = 0;
-+	void *bad_map;
-+
-+	heap_fd = dmabuf_heap_open(heap_name);
-+
-+	ksft_print_msg("Testing read-only derive with escalation attempt:\n");
-+
-+	if (setup_ro_derive(heap_fd, &dmabuf_fd, &ro_fd))
-+		goto out;
-+
-+	ret = ioctl(ro_fd, DMA_BUF_IOCTL_DERIVE, &params);
-+	ksft_test_result(ret < 0 && errno == EACCES,
-+			 "O_RDWR derive on RO fd correctly rejected (errno=%d)\n",
-+			 errno);
-+	if (!ret)
-+		close(params.fd);
-+
-+	bad_map = mmap(NULL, ONE_MEG, PROT_READ | PROT_WRITE, MAP_SHARED,
-+		       ro_fd, 0);
-+	ksft_test_result(bad_map == MAP_FAILED && errno == EACCES,
-+			 "RW shared mmap on RO fd correctly rejected (errno=%d)\n",
-+			 errno);
-+	if (bad_map != MAP_FAILED)
-+		munmap(bad_map, ONE_MEG);
-+
-+out:
-+	if (ro_fd >= 0)
-+		close(ro_fd);
-+	if (dmabuf_fd >= 0)
-+		close(dmabuf_fd);
-+	close(heap_fd);
-+}
-+
- static int numer_of_heaps(void)
- {
- 	DIR *d = opendir(DEVPATH);
-@@ -420,7 +530,7 @@ int main(void)
- 		return KSFT_SKIP;
- 	}
- 
--	ksft_set_plan(11 * numer_of_heaps());
-+	ksft_set_plan(20 * numer_of_heaps());
- 
- 	while ((dir = readdir(d))) {
- 		if (!strncmp(dir->d_name, ".", 2))
-@@ -435,6 +545,8 @@ int main(void)
- 		test_alloc_zeroed(dir->d_name, ONE_MEG);
- 		test_alloc_compat(dir->d_name);
- 		test_alloc_errors(dir->d_name);
-+		test_ro_derive(dir->d_name);
-+		test_ro_derive_escalation(dir->d_name);
- 	}
- 	closedir(d);
- 
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202605211112.xlUYDZeM-lkp@intel.com/
 
--- 
-2.53.0
+All warnings (new ones prefixed by >>):
 
+   AMD plane color pipeline
+   ------------------------ [docutils]
+>> Documentation/gpu/amdgpu/driver-core:225: ./drivers/gpu/drm/amd/amdgpu/amdgpu_vm.c:2958: WARNING: Inline emphasis start-string without end-string. [docutils]
+   Documentation/gpu/driver-uapi:31: ./include/uapi/drm/xe_drm.h:2538: ERROR: Unexpected section title.
+
+--
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
