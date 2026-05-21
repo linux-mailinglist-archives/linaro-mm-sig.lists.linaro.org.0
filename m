@@ -2,126 +2,137 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KMdlNyrzE2puHwcAu9opvQ
+	id eAKnKfnCDmrXBwYAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 25 May 2026 08:58:50 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 21 May 2026 10:31:53 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7FDAE5C6D51
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 25 May 2026 08:58:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 174D45A111F
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 21 May 2026 10:31:52 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 955E83F821
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 25 May 2026 06:58:49 +0000 (UTC)
-Received: from CO1PR03CU002.outbound.protection.outlook.com (mail-westus2azon11010030.outbound.protection.outlook.com [52.101.46.30])
-	by lists.linaro.org (Postfix) with ESMTPS id 052063F78C
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 20 May 2026 21:44:01 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id ADF4E40983
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 21 May 2026 08:31:51 +0000 (UTC)
+Received: from MW6PR02CU001.outbound.protection.outlook.com (mail-westus2azon11012050.outbound.protection.outlook.com [52.101.48.50])
+	by lists.linaro.org (Postfix) with ESMTPS id 865233F751
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 21 May 2026 08:31:39 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=Nvidia.com header.s=selector2 header.b=gU5KD0mq;
+	dkim=pass header.d=amd.com header.s=selector1 header.b=K3EsxN+x;
 	arc=reject ("signature check failed: fail, {[1] = sig:microsoft.com:reject}");
-	spf=pass (lists.linaro.org: domain of jhubbard@nvidia.com designates 52.101.46.30 as permitted sender) smtp.mailfrom=jhubbard@nvidia.com;
-	dmarc=pass (policy=reject) header.from=nvidia.com
+	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 52.101.48.50 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
+	dmarc=pass (policy=quarantine) header.from=amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=HZ63SkEaPIHwoc+Fm2njBRUah4R4e0EYrlQ4gnBtNpKWn9GNrd+ZMZEW07QmgNykPp1xu1e4X8qyHVRs09J9X30Vv4un4g5+exqM9erVp+44fU0giAGgBJ3c1+iGaen6EYb5bkslmkusy7lNCWV+NWI8toqr9iaUBnC3ouIzl8wp8Ps6qVgWZvDhgTzN4WgVgJ1V0hBOFxK2ete9Kvc9HGoq75UAAffjnAxCZP6RT+oc/juy+FCNpWqgB5FjvuCjmtf/gFkCl79noRcM+sbJEU7O8rs0dj4gN7GlUqtreKzU67pDsVXhMfdz/Qi1b30xA0QmeIZoa5ph1ymUY8WMLA==
+ b=WcIWD7tZKXy1BWcx/rtufbjhWgn1omRRjol9llzKAE3Poz3PPDFaHfUeRKRYUNmUwBKbzfVMEzYewLknsCSsHnFCwXhqUiUFXnf/04tdhqo8qKsXb2e4SPUPBeoomKvDuQ2bp/XL2nMW+JGc/yl+YPVEcVwlSCGwbrvlfKQYolQU2js3s26fPR6/NXcbCPI4NDB0FCdax/8tvjQ9meU24fTxETIqA+Yzlxt0sCh7gBE3G3Q4N/pvByv3v5Y9TwPVAAHY231yk0tlEmMtyr+Cik/qtSg+Xhh5cZHGBMOwTyWD9/76E2v8yJNaHo4cOHVjsY7CWWGzs677IiJ3NTr9ow==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=klVbuwWQc2ZpjoJNgtANE313HxMoS8qEvKoZqw+RXuE=;
- b=Ov/QrcGh7JB2CP74q6bLnG5ov8+AegW4wosqjNYzdcmzpA11jB8NHUoFK/ejBV5bpB9SHQYIpU97dsz5Luvxr3BJlPsJwXvu0gnTwuBSJTj7qqtgMg7k76AvCcPOaJeaRN9ROTk5j/l81m7X2E5hEXWM7fqdiuyxgDvXTXjy0MhzcC0tZOlJF26uDkx7nLS4lVm/kvke24BOs32DOzvM0IpYxe4ejyB7p4BnS5AtcLangIyHh+urSClRRegVjwQE6WYxHRo7MvSmq0bN+4h9Th5TyPm3S3udBlkHbT4ecSw8CdcHK1hHH/MDCR5O6Oo+7q0gAzla3kQqbEs6kjPM6g==
+ bh=bG3K3kw4QnWqFoSztoUoN/Rir0Y60TyhhrQQ576I3YQ=;
+ b=gLrFgxS9mmCx/rA+t6cofDv21iiNjRAEUtkHDlix1UROcesBTBzISXMtS60gR8jN5lBXmVhPmjRCYDbNoKRSiSaM2jYc54y0JeiK29N+QdzChp8uwXRnqJcwSC/9e9J8bgQTzPY6z2v+jl9W4QMOyYRYs30n3/zgW8EOC+QY1O8Rqu+hoqLNzhcnuvRqkr2USNsepwSWxq3vR+9Ab81oX84Gvjj79bfrjUfTjA2PBTCqCb0CJQTta1ebzRI/28+2ydPeKb+VgkQ3SkVluz1Wi7ONwabPym12Nx1qbadEA/bmYkLMUnkG87lx6HDCwbf4NuLKwoBbkn06dqnLscF05A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=klVbuwWQc2ZpjoJNgtANE313HxMoS8qEvKoZqw+RXuE=;
- b=gU5KD0mqW3ppuXB1Z3iY7qtZTRUFXrI5icJ47PIr4GJikfQa4xhoveQQ7IzhP0jnPM7rXCOzw/puq4IYT9tEjOEPwSV50wXgjWjCHvBZDR5u0SayaiBW86R9i0/50BliEJLXz221rtYU+L70sIZsDJAsNFW37MdScRuEcOtGPJexpWsdvcYGREe+ay55PGk00YD9jHOcRLdJL1DaZt1iCYM7/f1BgxL/Vj1xAiaPEIbu6w0v8igV/hGaP2tgJO9jEWaNIBspIGLn2aLse8GqCbEPfJHFs65VaFfvMgoanCn/PEzwkaH1wzISao9wt1gKV7YYJtHgI2RkjU4+9couHg==
-Received: from DM3PR12MB9416.namprd12.prod.outlook.com (2603:10b6:0:4b::8) by
- BY5PR12MB4321.namprd12.prod.outlook.com (2603:10b6:a03:204::15) with
+ bh=bG3K3kw4QnWqFoSztoUoN/Rir0Y60TyhhrQQ576I3YQ=;
+ b=K3EsxN+xakhVLMVaFWMr6u1/K0KVo7LDTEdAQjxwG7OHuQPInhtP1KnhM/KmNzvuxPLy1SEl3gB7V7dKVIedYsLPkgYNZUL+QKD2EEtwCcCAfltzAYjuPzwJaegwI/yCr6qQwGeBjlMPNufrwhBvpHa73f+rOnS7A+rrtfSii/E=
+Received: from PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
+ by PH7PR12MB8039.namprd12.prod.outlook.com (2603:10b6:510:26a::14) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.24; Wed, 20 May
- 2026 21:43:57 +0000
-Received: from DM3PR12MB9416.namprd12.prod.outlook.com
- ([fe80::8cdd:504c:7d2a:59c8]) by DM3PR12MB9416.namprd12.prod.outlook.com
- ([fe80::8cdd:504c:7d2a:59c8%5]) with mapi id 15.20.9913.012; Wed, 20 May 2026
- 21:43:57 +0000
-From: John Hubbard <jhubbard@nvidia.com>
-To: Sumit Semwal <sumit.semwal@linaro.org>,
-	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
-Date: Wed, 20 May 2026 14:43:50 -0700
-Message-ID: <20260520214350.168689-1-jhubbard@nvidia.com>
-X-Mailer: git-send-email 2.54.0
-X-NVConfidentiality: public
-X-ClientProxiedBy: BY1P220CA0019.NAMP220.PROD.OUTLOOK.COM
- (2603:10b6:a03:5c3::15) To DM3PR12MB9416.namprd12.prod.outlook.com
- (2603:10b6:0:4b::8)
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.17; Thu, 21 May
+ 2026 08:31:35 +0000
+Received: from PH7PR12MB5685.namprd12.prod.outlook.com
+ ([fe80::ce69:cfae:774d:a65c]) by PH7PR12MB5685.namprd12.prod.outlook.com
+ ([fe80::ce69:cfae:774d:a65c%5]) with mapi id 15.21.0025.022; Thu, 21 May 2026
+ 08:31:35 +0000
+Message-ID: <cbf4d01a-0103-4ac9-ae6a-754619ed5cb1@amd.com>
+Date: Thu, 21 May 2026 10:31:28 +0200
+User-Agent: Mozilla Thunderbird
+To: Mikhail Gavrilov <mikhail.v.gavrilov@gmail.com>,
+ amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org
+References: <20260429143743.50743-1-mikhail.v.gavrilov@gmail.com>
+ <20260520151741.50575-1-mikhail.v.gavrilov@gmail.com>
+ <20260520151741.50575-2-mikhail.v.gavrilov@gmail.com>
+Content-Language: en-US
+From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+In-Reply-To: <20260520151741.50575-2-mikhail.v.gavrilov@gmail.com>
+X-ClientProxiedBy: MN2PR22CA0002.namprd22.prod.outlook.com
+ (2603:10b6:208:238::7) To PH7PR12MB5685.namprd12.prod.outlook.com
+ (2603:10b6:510:13c::22)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM3PR12MB9416:EE_|BY5PR12MB4321:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3aeddb3e-49ac-4057-10fa-08deb6b8e536
+X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|PH7PR12MB8039:EE_
+X-MS-Office365-Filtering-Correlation-Id: 76ca99a4-39ad-453d-1b78-08deb7135e93
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|366016|376014|11063799006|6133799003|56012099003|18002099003;
+	BCL:0;ARA:13230040|1800799024|366016|376014|22082099003|18002099003|56012099003|4143699003|6133799003|11063799006;
 X-Microsoft-Antispam-Message-Info: 
-	lVOc8LfYI8ti6WB3DHf4nwUkluMH61o/adm/Sp9pKRrvVZOHdFsAUwAY6RbLC68NFM7KcEwohaH4UAUI1zdhf9T9AtaNJ0ne4H6uZtBUOf56QofffZi7sRaQZQjwLOHMejO/+gYovezkAIeQKRCObirLj1v83GytCt31si9D/mUHdsjbPmIwD7LyWvmV5/M4+5JaWkJ4RYNwMe6rWGqN6dxJUPCCVLZjvqgpQs6LopbhlRrHXjo18nPCxu0KK5ILNYTku/88FDEbqTJniAoTWtOUaZJHYo+HTWYNTrPy3IJsSehAF8w9BATLGP5Tqqlv99aTM2HVpt1tA7UxOOv4DQzAj5Xtq29hqU12/QVoEFpT7g8ArXttU25klCe7OgFzyhhA2hw57Kh9b3SKNK/1xc5lXH+k9lr3n/DBqJejU5agH1bzkdwxXUgSBmnSHmgi1okyhnsnr4mMVRLU7sJzUvrKaeMQ0tUzGedC95IG+ajA9vwLa9bYMiK8BREN0a95hkFXFojvDo1y/gkHBT6n6u7K6TbkO3L715IHAETTkPR8siPLcnt+S15PW8nZjn3ayllG5BBd28S6AGLQADjlOMf9Oeuw7eJIQauocnXcOCVsaA9TCxqy1FTcP0KEKA9cXYvhK+4WFBT0Ruagq99XvV1VyPMpIOQd8ZO1u4t/QNFE1l+O2rxIlvRDJdmzPOSp
+	Dmu2nqqUjX+rYlkLrrYTivfH+l1cja0p+Qj0d70i9upQZdPDxB5eISCjeth/ayJuFbgTlVgXRosj7CBqXEZ9twz/UDehz6BBEnxgpQluIYn1ILJ9YsgIRFMFM13cB3xjOUifP8HNTMcTc9nH1KOxX1177flFlhPzBgUvtAPWXkvLaE6JgqiLqv8AcOQGrDy8llYyoyi2htbMrP3ADXli8vCPaMbZcHrFKhLdkzGGoEmk60GlLK7PJyRqbJdZMfafESoI0kapY/rB0vsCW+LqftNLqau9tC4/lnlfiSs0UlrWyVXkaqpjfGpz75Ec5jopnT6/h+fr7ViYm+iNH/uHY6EejRLEN+bkWwrkVoo5DvkfbTDXXQX8l6K54XLty/iWBBnJgIy9zJAHTFtD+GALsksdrkbvWyndzXE2aIacU2JW7146eR5Q/2VW1n3zpV3ZAF9vdjV0e0gCQCIbOlQe6d1L+fZRP4s/1itB6JNW0/JD3WlEue9gtZFQmhA64pJtPf+z6WuWXcNlq/8RTgDhOX4ZYQSNJhkK/bc2k9HCh0PT6mI2TWMJT9jqhNys7XRY6m5bavH4SRprtRudgwYFLL7Yc2KfwXh/UWaWftcK+ki5eRI1tTGMcIDGbRLDMUh7t/qfmDbmd8bEHxhwbSbf9gmLUcXuGnDK4cSHcmafp1/bRgiYXHqAeSWJLnwb95P3
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM3PR12MB9416.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(11063799006)(6133799003)(56012099003)(18002099003);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB5685.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(22082099003)(18002099003)(56012099003)(4143699003)(6133799003)(11063799006);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?0UH3FXkdYDC/xstOTve/TecnZPtJtnq3lyT2tmFpCxLP5SelxPwA68758heg?=
- =?us-ascii?Q?rso9MXSU309aDWuYrzAv+2GlRpnR/3v9bHaoYVJBBg/KIxRDljkNur1SXaPx?=
- =?us-ascii?Q?XMIp4f72LhrSTi+kP6RerVxkAExcletNXYFZmkv4ebO9ASuOLDli2+TBFZ0k?=
- =?us-ascii?Q?wC1LhD9WjLRYSFPP8KZMhbIhUgeyaolkKDJ+1mvCv8S+NdD5CzzxaCDGfjDS?=
- =?us-ascii?Q?OEPbETnFt+YlFKrQpBgwK6x/c2EW/RQBEr5gGh2vO5trz1UcePxGkTZL8j91?=
- =?us-ascii?Q?RhjR+tYWUFeE735Rtk2sZUe3I5xKodZ5ogsK+fiwzC2ph7SauzyzLu2Np9JT?=
- =?us-ascii?Q?RpJQTPWqoCnMnUoGlWHCK+3I40pU3XPSL7k/26UNxrJsXpst7m7fC5SD70mv?=
- =?us-ascii?Q?nSSvJo+CWXGHWlsDpBTBJV7MUmm2wBkJz3q+DAZRpnjT/EzOXo+JPOI4sRmy?=
- =?us-ascii?Q?oYZHH2YjSxsH6wvhfcyaauftCXB+5uAVQUQ98ok/JVJjMUufEqRrfT+mp82W?=
- =?us-ascii?Q?ntoTKcFWSgXbsNSlxI6mQiGCHEYcdhyTjScJWRYjPa84i2CSrKZeYYKiY4+a?=
- =?us-ascii?Q?+PJ8kb3ckubx2bRquN2jGhqi0OQzvAQyB/jd/FhkhFOMAWhIDFFCBSVLlWxP?=
- =?us-ascii?Q?z4N3SvTXoPP5ORIEOen+PSEWEnDGGd6bCH900e1jfD0KVDAjn5cE2cM7NCKP?=
- =?us-ascii?Q?xKjM8ABmI0VvO2ewMx0NJc9/q9Ggni6Kbkz3VcPgnmHeEzI08dAD4sS9mloW?=
- =?us-ascii?Q?3q7ymHLOhVuxvCdjtIHDFB6z8H5KsvvUOnrpy32UCX86tCVd4vYfbClBaaUp?=
- =?us-ascii?Q?HgiRfR/csYY9aqbFjN/gJhLsEuW+fE8g/Zlx0Gz05PFJpQzQAzP9t/usjfk+?=
- =?us-ascii?Q?3bgLxWjPuUyvK1lWZtth8tPOtxIsBh6Ui3F+ZY5UkMoKJL6GWWbgSZWLjLMq?=
- =?us-ascii?Q?6GJd7N+veNBbAaVH5Q8ed+ZWEcL/a0AqGClJ+y2du0AeJk9taA6ID0/BTKJ0?=
- =?us-ascii?Q?noFFZLjmNXs4xCydHFmXu1wQjtq9gyDVf3rNzmaSqmJxuGyNRIpkgjaesKWQ?=
- =?us-ascii?Q?cAY6MoOEbYoqda5OrXZyrsnsP44y0Cini4/wY6lsbhHN3WxI+qN3XYtZ3lAI?=
- =?us-ascii?Q?pgzBOkRubc8Dsy4dmYElFcCydm1lLHJQsrvAXMoAMyfhaFmuALspp0pwJ9ls?=
- =?us-ascii?Q?BukXu6aANh1K/UlC/61zOs1BXuJWc3NP7IPN3wXmHsi2sLd+WuSi93QH7G4r?=
- =?us-ascii?Q?uZho+4NqEcngf/AxCKM8k3hXUN9QhfKlQ5vPqO2uA0qbqN93pTmfRFP1wDkO?=
- =?us-ascii?Q?96HsH1pVRsUj7XHF7frtaB1oiyzxyTXy0+jEmP87TsloyLMBKWSteLq73/bl?=
- =?us-ascii?Q?DaA4BO5+X9lHNof0JCtPAnPFD9sI3HOkQyav6T3xJgVAVIthCaz+XIj9XkuJ?=
- =?us-ascii?Q?B+cBHUTD6vhkZYkCqyzU7AbkpX3JQqcZWrbMztv2kPCa0Uzp2Qt6vNYJn/Ys?=
- =?us-ascii?Q?ABvrJnt+hRttYjVMyLHeljGr3PMV1FJzwarFBJZqzjdjKAuYmue093zkQwwo?=
- =?us-ascii?Q?oijMQte12fvlyT7WdnqstYpiS9vTcxe0I+TuwaMiIar/BhUDwRjXB3Lcgjdi?=
- =?us-ascii?Q?wqMd1N/oxbSTJgZZDJvMF9ZlRtbiGK9m2cSHckHveZ3ZFG2UIeHbv2Ss9dQD?=
- =?us-ascii?Q?+5LgRuyu3/IxspmMuHNy0DEmcNBIaASk91bb+J1RpC/xvwbAFhhpNEvpqbd8?=
- =?us-ascii?Q?b6r7cRAJvg=3D=3D?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3aeddb3e-49ac-4057-10fa-08deb6b8e536
-X-MS-Exchange-CrossTenant-AuthSource: DM3PR12MB9416.namprd12.prod.outlook.com
+	=?utf-8?B?Y2phTW9wTzRNdUhsekRzak1mTUNUMG1FMkZtOFdjQTJqMUN1UnFIYkRFMFQ4?=
+ =?utf-8?B?SUI0UlE1WEN6MUpzaWRjRzZwVFNvRFVaUHBXanhHL3Q5c3NPbUxhUXJKL21P?=
+ =?utf-8?B?bHAyaFZvNmlnWVpHZW1JaDJBVlluL1BwZURBbE5MZ0l0UVZma2Y4VEFGUnpT?=
+ =?utf-8?B?dVpBclAyMmVnNllKSDZBMHhzYlVsSnRockt6UjNWNVZ5dnVzNCt2U0hSWk1o?=
+ =?utf-8?B?MXFMRWErbXFhMEVwTzhBaTdiUlVyV2hDbithOUVTbjAzL0hTQUc1bmlkb3Vs?=
+ =?utf-8?B?RHJuaW1XOHpQZDdqejY4S0trdGRmakZlQ3NLUlFVemlNelk2bTRuVVBHZFIr?=
+ =?utf-8?B?SzhYVzBObjROT3dvc2VwbzJEN29nVnhaeHNCeXMzME91b0thUFdzSTByUzcy?=
+ =?utf-8?B?eXVNcVFFMGt6YnlQSVlFek12bW5JNnRPS2ZCQ2N2MWZVOG9zMVgzam9mMmEr?=
+ =?utf-8?B?RVFnYk5FY1BkT0I0V2JWSUhPUUdqRGwyYVJQbjVlY0dRemlFRlJYS2ZOQlZq?=
+ =?utf-8?B?aUpNU2FScTNrYmpMaHZ6V0g2bTdvWVU5TGNxUDRrdDR6am1xUThZdm1lVUlq?=
+ =?utf-8?B?cEMzZHBkT3VOaHgwbmFBRk1ldHd3dWpCdWF1UDdhNUlqaTVTdXVENVVKWGNY?=
+ =?utf-8?B?ei8rRmlJSE1VSDRDL0VISnNGZGVxaTNGSWZnbm9xSGwzeE8yblNycGhBWTR1?=
+ =?utf-8?B?NUdHVGJ0TDVmdUdzWWU3cTgvTndGRlkvMmpzK3pwQ3FRZml2eFRiclFVVkYv?=
+ =?utf-8?B?RDlHODc4anpOdldXVS8zVTVUd2F1Z0F3aVJzMERFMVI2U0NiUWVhaUV0UTVW?=
+ =?utf-8?B?QnpobDJRNnlLMGU1YXdrb0VjV0lWM2s4QU1xb0crVW9uekRmaHBvTDBpaEJa?=
+ =?utf-8?B?YVZnMDUzZ3JpYS9ESHdDN1AzSE44bDFRcnVWcm1VY3B1dWVXRFNDVFhJZlVH?=
+ =?utf-8?B?aGk0bEJlZ2hBNGNtM3hkYVZkZ3ovVEplRVhvRTgwNlJwNjlza1lzTE1yRjhy?=
+ =?utf-8?B?VUtnUEJ5MVF5RnpnYkgzZC82WEpOTGpJMm9lQUpBMFl1aVk3S3dibllsOVRa?=
+ =?utf-8?B?ZXZpUm43RlRrZHRxL1IwMFJiR3BOaEVMUTRxcU5XWmZSZ25BMW8wL3lBbEMw?=
+ =?utf-8?B?Um1yNjN6RVVSMG9ud1czOWFTeThOcitRUWxpb3lyZTFNQy9NYzlwaUdYbjNi?=
+ =?utf-8?B?RlBCWDM5ZW5CdlUrR1hrVk14dEhkOGs0VStNSk0zT0xLQ0dMMVNBYXlDQmZT?=
+ =?utf-8?B?V1Vwcm5mU1R2VjNMM2dmWWF3ejI4eDgwSFNWV1R6a2hsWWpEeG5pZXdmb0Q5?=
+ =?utf-8?B?TGlpVHVJZmI5YXNnck9MZFJBRHF2TWxvemJGZGJZK0JtT0ZocjlUaFpmZU15?=
+ =?utf-8?B?OVFGelQ1MHpTbjZReXR0Q3R2TG5VL1RteUluOWl4OWk3bGs3WnVCRnRMYUpF?=
+ =?utf-8?B?c3k2LzM2eUJucVdjT04yUWw1MERWeHJmWGlqOU83aWl4UlNISjh6U2w0a0ph?=
+ =?utf-8?B?L004NkN3bDNpNUxKU1VpeHRNRFg2Qlo0SjhVOExIZHlrSmtTMllhbkIraHUx?=
+ =?utf-8?B?WXJOc0ptY3BWRHByRGZGQWE5S2dKdVRVZURodWxxWlhQT2U3TFA1bHRrRlNW?=
+ =?utf-8?B?NVA0QnUvTGt4R0hsK0d2c2d4NjUwb0lZQ2NUazlndC8rNm1jcmlKSmtzbTJi?=
+ =?utf-8?B?VDF2WGE3eTVlYzhpTm1xWUllM0dDV0FkVS92OTdwM1M0K1IrMDAwWi9QVmV3?=
+ =?utf-8?B?U1E5NTlsUkg0N3lIQXBBYkljUGMwajZxTHlqZGdxcUFFS1pMdUR2MGJldWI3?=
+ =?utf-8?B?RnNaMDZ1ZXA5TGFQSk11cmJEK1ZTNzEvUEo1aVdlekJ6dzBmaVlmMWN4akN4?=
+ =?utf-8?B?YXBQSkJXYlAwaSszeitZajVlRTdrbWRqc2tpblZ2Vmk0SHN1UnFtZFFCYk5z?=
+ =?utf-8?B?MnpIVjFscmMxUzJ1a1lrcGtOcDVyYms1bFpTSWdyYVZRaHZkZzBHeUxod3FV?=
+ =?utf-8?B?Um01T1ZTSW9VM3A4dXFhNTl1ZmVNa3VKNktwK0lRTTBMbzNBSThJWVZhc2JR?=
+ =?utf-8?B?MlZOZFJVT21ES2FxdTl4VkUwNzQ0RVhmcTR1VDF5bFN2eUNSeUVydlBMbGNl?=
+ =?utf-8?B?OVZpNFNUb2RiOURvejNadWoyQW1EVHV4TVpneVc1RU5meDhhUEhrRkVrZHZO?=
+ =?utf-8?B?VE5NVXQ5T3ZMazkzU1ZkL0ZkU3pmUGY1dG1pWU91dERLU2x6bnZWTkpMSklo?=
+ =?utf-8?B?bWplRlhFbUV4SlV0b0lSYkZCZzRWWWtFQmJqOGllNkRndmFaSUdWaXdGWXA0?=
+ =?utf-8?Q?kvq+EMt9FhNjqzltup?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 76ca99a4-39ad-453d-1b78-08deb7135e93
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5685.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 May 2026 21:43:57.0788
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 May 2026 08:31:35.4183
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 4v4kgy3M5Ez0ndA7bG8UxDZ75O8ZZcNULtXl8u24fCqFvepiWJ54IL1EaV81BV4Do+v8Zvd2nKjqmYT2bNIfVQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB4321
-X-Spamd-Bar: -
-X-MailFrom: jhubbard@nvidia.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: IM3IZTVJQZ76F6D43KCBHES6BHODTNW5
-X-Message-ID-Hash: IM3IZTVJQZ76F6D43KCBHES6BHODTNW5
-X-Mailman-Approved-At: Mon, 25 May 2026 06:58:25 +0000
-CC: Christian Brauner <brauner@kernel.org>, Jens Axboe <axboe@kernel.dk>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, LKML <linux-kernel@vger.kernel.org>, John Hubbard <jhubbard@nvidia.com>, stable@vger.kernel.org
+X-MS-Exchange-CrossTenant-UserPrincipalName: hnvyqAOaEUtkPLo7e2Y98F+bX7JR/9QPUbflA1cge/OV+L7Osts5xgOOAzpjVnxG
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB8039
+X-Spamd-Bar: ---
+Message-ID-Hash: EWIQ4Y3BOS2SPVW7IAHPXYT4VBANGOWW
+X-Message-ID-Hash: EWIQ4Y3BOS2SPVW7IAHPXYT4VBANGOWW
+X-MailFrom: Christian.Koenig@amd.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Alex Deucher <alexander.deucher@amd.com>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>, Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH] dma-buf: set SB_I_NOEXEC on the pseudo filesystem
+Subject: [Linaro-mm-sig] Re: [PATCH v3 1/2] drm/amdgpu: convert amdgpu_vm_lock_by_pasid() to drm_exec
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/IM3IZTVJQZ76F6D43KCBHES6BHODTNW5/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EWIQ4Y3BOS2SPVW7IAHPXYT4VBANGOWW/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -130,81 +141,234 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [5.49 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[nvidia.com : SPF not aligned (relaxed),reject];
+X-Spamd-Result: default: False [4.49 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[amd.com : SPF not aligned (relaxed),quarantine];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
-	R_DKIM_REJECT(1.00)[Nvidia.com:s=selector2];
-	DATE_IN_PAST(1.00)[105];
-	MID_CONTAINS_FROM(1.00)[];
+	R_DKIM_REJECT(1.00)[amd.com:s=selector1];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	FREEMAIL_TO(0.00)[gmail.com,lists.freedesktop.org,vger.kernel.org];
 	GREYLIST(0.00)[pass,meta];
 	RCVD_COUNT_THREE(0.00)[4];
-	DKIM_TRACE(0.00)[Nvidia.com:-];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jhubbard@nvidia.com,linaro-mm-sig-bounces@lists.linaro.org];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[amd.com:-];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.989];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	RCPT_COUNT_SEVEN(0.00)[10];
+	MID_RHS_MATCH_FROM(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	FROM_NEQ_ENVFROM(0.00)[christian.koenig@amd.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FREEMAIL_CC(0.00)[amd.com,gmail.com,ffwll.ch,linaro.org,vger.kernel.org,lists.linaro.org];
+	RCPT_COUNT_SEVEN(0.00)[11];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo,nvidia.com:mid,nvidia.com:email]
-X-Rspamd-Queue-Id: 7FDAE5C6D51
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,amd.com:mid]
+X-Rspamd-Queue-Id: 174D45A111F
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-The dma-buf pseudo filesystem dispenses S_ANON_INODE inodes via
-alloc_anon_inode() but never sets SB_I_NOEXEC on its superblock.
-Since commit 1e7ab6f67824 ("anon_inode: rework assertions") in 6.17,
-path_noexec() warns on exactly that combination, so an mmap() on any
-dma-buf fd trips the warning:
+On 5/20/26 17:17, Mikhail Gavrilov wrote:
+> amdgpu_vm_lock_by_pasid() looks up a VM by PASID and reserves its root
+> PD with a bare amdgpu_bo_reserve(), returning the still-reserved root to
+> the caller. A caller that then needs to reserve further BOs (for example
+> the devcoredump IB dump) ends up nesting reservation_ww_class_mutex
+> acquires without a ww_acquire_ctx, which lockdep flags as recursive
+> locking.
+> 
+> Convert the helper to take a drm_exec context and lock the root PD via
+> amdgpu_vm_lock_pd() instead. Callers now run it inside a
+> drm_exec_until_all_locked() loop and can lock additional BOs in the same
+> ww ticket, so there is no nested ww_mutex acquire.
+> 
+> The only existing caller, amdgpu_vm_handle_fault(), is updated
+> accordingly. Its is_compute_context path, which previously dropped the
+> root reservation around svm_range_restore_pages() and re-took it, now
+> finalises the drm_exec context and re-initialises a fresh one; behaviour
+> is otherwise unchanged.
+> 
+> No functional change intended for the page-fault path.
+> 
+> Signed-off-by: Mikhail Gavrilov <mikhail.v.gavrilov@gmail.com>
+> ---
+>  drivers/gpu/drm/amd/amdgpu/amdgpu_vm.c | 72 ++++++++++++++++++--------
+>  drivers/gpu/drm/amd/amdgpu/amdgpu_vm.h |  3 +-
+>  2 files changed, 51 insertions(+), 24 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_vm.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_vm.c
+> index 9ba9de16a27a..3a22670b733f 100644
+> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_vm.c
+> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_vm.c
+> @@ -2950,14 +2950,22 @@ int amdgpu_vm_ioctl(struct drm_device *dev, void *data, struct drm_file *filp)
+>  }
+>  
+>  /**
+> - * amdgpu_vm_lock_by_pasid - return an amdgpu_vm and its root bo from a pasid, if possible.
+> + * amdgpu_vm_lock_by_pasid - look up a VM by PASID and lock its root PD
+>   * @adev: amdgpu device pointer
+> - * @root: root BO of the VM
+> + * @root: out: reference to the VM's root BO, dropped by the caller
+>   * @pasid: PASID of the VM
+> - * The caller needs to unreserve and unref the root bo on success.
+> + * @exec: drm_exec context to lock the root PD in
+> + *
+> + * Must be called from within a drm_exec_until_all_locked() loop; the caller
+> + * runs drm_exec_retry_on_contention() afterwards and drops the *root
+> + * reference once the drm_exec context is finalised.
+> + *
+> + * Return: the VM on success, or NULL if the PASID has no VM, the VM is being
+> + * torn down, or locking the root PD failed.
+>   */
+>  struct amdgpu_vm *amdgpu_vm_lock_by_pasid(struct amdgpu_device *adev,
+> -					  struct amdgpu_bo **root, u32 pasid)
+> +					  struct amdgpu_bo **root, u32 pasid,
 
-  WARNING: CPU: 11 PID: 121813 at fs/exec.c:118 path_noexec+0x47/0x50
-   do_mmap+0x2b5/0x680
-   vm_mmap_pgoff+0x129/0x210
-   ksys_mmap_pgoff+0x177/0x240
-   __x64_sys_mmap+0x33/0x70
+I think we can drop the root parameter now, the exec reference should be sufficient.
 
-dma-bufs have no business being executable, which is the invariant
-that the new assertion is enforcing. Set SB_I_NOEXEC on the dmabuf
-superblock.
+> +					  struct drm_exec *exec)
+>  {
+>  	unsigned long irqflags;
+>  	struct amdgpu_vm *vm;
+> @@ -2971,9 +2979,11 @@ struct amdgpu_vm *amdgpu_vm_lock_by_pasid(struct amdgpu_device *adev,
+>  	if (!*root)
+>  		return NULL;
+>  
+> -	r = amdgpu_bo_reserve(*root, true);
+> -	if (r)
+> -		goto error_unref;
+> +	r = amdgpu_vm_lock_pd(vm, exec, 0);
 
-Reproducer on a CONFIG_DEBUG_VFS=y kernel:
+amdgpu_vm_lock_pd() can't be used here since we can't gurantee that the VM pointer wouldn't go away.
 
-  make -C tools/testing/selftests/dmabuf-heaps
-  sudo ./tools/testing/selftests/dmabuf-heaps/dmabuf-heap -t system
+Just do:
 
-The selftest allocates from /dev/dma_heap/system and mmaps the
-returned fd, which trips the warning without this patch.
+r = drm_exec_lock_obj(exec, root->tbo.base);
 
-Fixes: 1e7ab6f67824 ("anon_inode: rework assertions")
-Cc: stable@vger.kernel.org
-Signed-off-by: John Hubbard <jhubbard@nvidia.com>
----
- drivers/dma-buf/dma-buf.c | 1 +
- 1 file changed, 1 insertion(+)
+> +	if (r) {
+> +		amdgpu_bo_unref(root);
+> +		return NULL;
+> +	}
+>  
+>  	/* Double check that the VM still exists */
+>  	xa_lock_irqsave(&adev->vm_manager.pasids, irqflags);
+> @@ -2981,16 +2991,12 @@ struct amdgpu_vm *amdgpu_vm_lock_by_pasid(struct amdgpu_device *adev,
+>  	if (vm && vm->root.bo != *root)
+>  		vm = NULL;
+>  	xa_unlock_irqrestore(&adev->vm_manager.pasids, irqflags);
+> -	if (!vm)
+> -		goto error_unlock;
+> +	if (!vm) {
 
-diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
-index 71f37544a5c6..d86a99d7b8dc 100644
---- a/drivers/dma-buf/dma-buf.c
-+++ b/drivers/dma-buf/dma-buf.c
-@@ -216,6 +216,7 @@ static int dma_buf_fs_init_context(struct fs_context *fc)
- 	if (!ctx)
- 		return -ENOMEM;
- 	ctx->dops = &dma_buf_dentry_ops;
-+	fc->s_iflags |= SB_I_NOEXEC;
- 	return 0;
- }
- 
--- 
-2.54.0
+We should cleanup with drm_exec_unlock_obj() here, same as it was before.
+
+> +		amdgpu_bo_unref(root);
+> +		return NULL;
+> +	}
+>  
+>  	return vm;
+
+We can drop the extra reference on the root BO before returning the VM now since the drm_exec object holds one as well.
+
+Apart from that this looks like a really nice cleanup to me.
+
+Thanks,
+Christian.
+
+> -error_unlock:
+> -	amdgpu_bo_unreserve(*root);
+> -
+> -error_unref:
+> -	amdgpu_bo_unref(root);
+> -	return NULL;
+>  }
+>  
+>  /**
+> @@ -3013,20 +3019,32 @@ bool amdgpu_vm_handle_fault(struct amdgpu_device *adev, u32 pasid,
+>  {
+>  	bool is_compute_context = false;
+>  	struct amdgpu_bo *root;
+> +	struct drm_exec exec;
+>  	uint64_t value, flags;
+>  	struct amdgpu_vm *vm;
+>  	int r;
+>  
+> -	vm = amdgpu_vm_lock_by_pasid(adev, &root, pasid);
+> -	if (!vm)
+> +	drm_exec_init(&exec, 0, 0);
+> +	drm_exec_until_all_locked(&exec) {
+> +		vm = amdgpu_vm_lock_by_pasid(adev, &root, pasid, &exec);
+> +		drm_exec_retry_on_contention(&exec);
+> +		if (!vm)
+> +			break;
+> +	}
+> +	if (!vm) {
+> +		drm_exec_fini(&exec);
+>  		return false;
+> +	}
+>  
+>  	is_compute_context = vm->is_compute_context;
+>  
+>  	if (is_compute_context) {
+> -		/* Unreserve root since svm_range_restore_pages might try to reserve it. */
+> -		/* TODO: rework svm_range_restore_pages so that this isn't necessary. */
+> -		amdgpu_bo_unreserve(root);
+> +		/* Release the root PD lock since svm_range_restore_pages
+> +		 * might try to take it.
+> +		 * TODO: rework svm_range_restore_pages so that this isn't
+> +		 * necessary.
+> +		 */
+> +		drm_exec_fini(&exec);
+>  
+>  		if (!svm_range_restore_pages(adev, pasid, vmid,
+>  					     node_id, addr >> PAGE_SHIFT, ts, write_fault)) {
+> @@ -3036,9 +3054,17 @@ bool amdgpu_vm_handle_fault(struct amdgpu_device *adev, u32 pasid,
+>  		amdgpu_bo_unref(&root);
+>  
+>  		/* Re-acquire the VM lock, could be that the VM was freed in between. */
+> -		vm = amdgpu_vm_lock_by_pasid(adev, &root, pasid);
+> -		if (!vm)
+> +		drm_exec_init(&exec, 0, 0);
+> +		drm_exec_until_all_locked(&exec) {
+> +			vm = amdgpu_vm_lock_by_pasid(adev, &root, pasid, &exec);
+> +			drm_exec_retry_on_contention(&exec);
+> +			if (!vm)
+> +				break;
+> +		}
+> +		if (!vm) {
+> +			drm_exec_fini(&exec);
+>  			return false;
+> +		}
+>  	}
+>  
+>  	addr /= AMDGPU_GPU_PAGE_SIZE;
+> @@ -3076,7 +3102,7 @@ bool amdgpu_vm_handle_fault(struct amdgpu_device *adev, u32 pasid,
+>  	r = amdgpu_vm_update_pdes(adev, vm, true);
+>  
+>  error_unlock:
+> -	amdgpu_bo_unreserve(root);
+> +	drm_exec_fini(&exec);
+>  	if (r < 0)
+>  		dev_err(adev->dev, "Can't handle page fault (%d)\n", r);
+>  
+> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_vm.h b/drivers/gpu/drm/amd/amdgpu/amdgpu_vm.h
+> index d083d7aab75c..af292c2fc521 100644
+> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_vm.h
+> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_vm.h
+> @@ -593,7 +593,8 @@ bool amdgpu_vm_handle_fault(struct amdgpu_device *adev, u32 pasid,
+>  			    bool write_fault);
+>  
+>  struct amdgpu_vm *amdgpu_vm_lock_by_pasid(struct amdgpu_device *adev,
+> -					  struct amdgpu_bo **root, u32 pasid);
+> +					  struct amdgpu_bo **root, u32 pasid,
+> +					  struct drm_exec *exec);
+>  
+>  void amdgpu_vm_set_task_info(struct amdgpu_vm *vm);
+>  
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
