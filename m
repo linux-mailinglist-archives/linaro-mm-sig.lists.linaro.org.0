@@ -2,114 +2,97 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id CJqTJAEzD2qSHgYAu9opvQ
+	id YHYwF9tGD2ptIgYAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 21 May 2026 18:29:53 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 21 May 2026 19:54:35 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 276925A94C6
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 21 May 2026 18:29:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DCC395AAA20
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 21 May 2026 19:54:34 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 54A7640982
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 21 May 2026 16:29:51 +0000 (UTC)
-Received: from SJ2PR03CU001.outbound.protection.outlook.com (mail-westusazon11012036.outbound.protection.outlook.com [52.101.43.36])
-	by lists.linaro.org (Postfix) with ESMTPS id 02F694044C
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 21 May 2026 16:29:41 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 732534098C
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 21 May 2026 17:54:33 +0000 (UTC)
+Received: from mail-qv1-f49.google.com (mail-qv1-f49.google.com [209.85.219.49])
+	by lists.linaro.org (Postfix) with ESMTPS id 55B0B406F3
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 21 May 2026 17:54:22 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=amd.com header.s=selector1 header.b=XWSjjMZm;
-	arc=reject ("signature check failed: fail, {[1] = sig:microsoft.com:reject}");
-	spf=pass (lists.linaro.org: domain of lizhi.hou@amd.com designates 52.101.43.36 as permitted sender) smtp.mailfrom=lizhi.hou@amd.com;
-	dmarc=pass (policy=quarantine) header.from=amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ZUOazbDcADByHiRv1fB+8otwpA66i1Xxxg487h+D3JgDuAqRvw92CHCfAD9M05OPcs7slBFGYIZJ5cCSGa68XQrTtZ6mBRpDo7IBjeXLHdqpvOnanjQo9AxiYU8HQ9aNZeMCPVEkVH9Pok/jDeJdCIQG/4OBy7a2hfOsUFfGxv6sKjYF1xqsoWacKkCHZb1WdxyddL23DdmjNUFtguNppqPt/P0xDBsQYHufzN7ScgQNaY6Ly5ki6iXtm/f+sdVXGvcWPQhcKFtgfVDtJ6ny9y3sXx2Kmurffg+tNX6pOqXo+BVSxpxTwI9M6QHLY6PUPXjg0wbdNd2blSnjBaq2tg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Nit/Cb3JGGhEK3S3CUlDDiurfR5oDkJMjWa32QWAODc=;
- b=Y0h160EDSnxBDXzu5ahZnZ/u9/2qE48t2jnm2iMXd2Mx7P6GFxVkG4vEkL1oTYXnuAQbOwU3Dr6I7G0kSxfWtexMfC/o1IuGa0T3DCwowSjSrIZ/39Svywe1UtqJr/CNYnO0sCdQY2Rvr5b6GfnEYV4mfiAmDNIdW8SVrkBLEJXB66NUoVFXo/fNOsASJdP0ygXKUdNbV0YtTeAfl2Txhk3mds1OMuaj2+7ktKz1B4Qi9TcVlPOVDcYYvgeamYx5I2NdkVDx7RhAHu9SQIcMlRjPs2xPUyZfmP8Rm1S2Ncj9XxLb1b4Y9QKbvtFKJUO5vObkdv1tFcvAHRH6y47esw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=kernel.org smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Nit/Cb3JGGhEK3S3CUlDDiurfR5oDkJMjWa32QWAODc=;
- b=XWSjjMZm02twVd4MwBObgk5vHCIByrACTTrM3sfczAN3n6eC2HLfOuZbKVSC9PUT2gLOgB78t/Z9Lg8rQvvY2rGTQpTwWq2efoX2bJ7lzF5hDhVW0VCRrnal0uvUqjoD7dy+8wklR4Wk00EU36vjOy8v1qdlMjXY7GNB89jqhUY=
-Received: from CY5P221CA0105.NAMP221.PROD.OUTLOOK.COM (2603:10b6:930:9::40) by
- SA3PR12MB9092.namprd12.prod.outlook.com (2603:10b6:806:37f::7) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.48.14; Thu, 21 May 2026 16:29:36 +0000
-Received: from CH1PEPF0000AD7A.namprd04.prod.outlook.com
- (2603:10b6:930:9:cafe::4b) by CY5P221CA0105.outlook.office365.com
- (2603:10b6:930:9::40) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.48.17 via Frontend Transport; Thu, 21
- May 2026 16:29:36 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Received: from satlexmb08.amd.com (165.204.84.17) by
- CH1PEPF0000AD7A.mail.protection.outlook.com (10.167.244.59) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.71.7 via Frontend Transport; Thu, 21 May 2026 16:29:36 +0000
-Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Thu, 21 May
- 2026 11:29:36 -0500
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb09.amd.com
- (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Thu, 21 May
- 2026 09:29:35 -0700
-Received: from xsjlizhih51.xilinx.com (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.41 via Frontend
- Transport; Thu, 21 May 2026 11:29:35 -0500
-From: Lizhi Hou <lizhi.hou@amd.com>
-To: <ogabbay@kernel.org>, <quic_jhugo@quicinc.com>,
-	<mario.limonciello@amd.com>, <karol.wachowski@linux.intel.com>
-Date: Thu, 21 May 2026 09:29:30 -0700
-Message-ID: <20260521162930.1451042-1-lizhi.hou@amd.com>
-X-Mailer: git-send-email 2.34.1
+	dkim=pass header.d=ziepe.ca header.s=google header.b=I2NbpTlz;
+	spf=pass (lists.linaro.org: domain of jgg@ziepe.ca designates 209.85.219.49 as permitted sender) smtp.mailfrom=jgg@ziepe.ca;
+	dmarc=none
+Received: by mail-qv1-f49.google.com with SMTP id 6a1803df08f44-8b701756684so80569506d6.1
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 21 May 2026 10:54:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ziepe.ca; s=google; t=1779386062; x=1779990862; darn=lists.linaro.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=EC6XWlOYSm7qj75HyHmp0T60BsFS50VL7KHJNUynWLU=;
+        b=I2NbpTlzY/yEmNi1yKWrkNxycvGKAvMxcNf6LqN26EcMWCPeaxfIoqioxt4K0lnJKs
+         s/4wQdK+AZlV/govDiwqhRrvkDR9Tc7Pq+HIXn5C7nEeNLFA2GMqkO53xs4hbP18BCJF
+         pa6tYVPXHLqjAAoc/LPgmUy5gs87rbrw7Jp9A9z9CEM3fPeCgTNQgLqCQjqq/Z+cgrWQ
+         nbSYGmREik1iFAWxD9qG8jpCndd3Puzvc7g2Lii37FK7gDC+NCUgzUrlHOGmnNzgBWiX
+         gvD0Ww1WWkDiDPxlS/ADkr+f6nL8kX6Iy5nLmMg6MeAUiBPsTRd3grRqtsBJPTt7H7sm
+         X2gg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1779386062; x=1779990862;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=EC6XWlOYSm7qj75HyHmp0T60BsFS50VL7KHJNUynWLU=;
+        b=qJ6FD1b/0vIE/hh9Yd73VqoS/86Hp0dDfU67TWQVHoAlJVPrxkAzb7VMm8fFAka7K+
+         0/x6Sj7bnArbkPCOlih6uaPmB90GTAwZuxzKSWKxy6d/10xjD+6kCni96Mos0honD+AD
+         8aeZzs/A6ZEeBb1Usmu4xUe3hWEhtJ33yHks8dIPcuZiQFfNYufaA1ws3HPwlOlQkyQD
+         ONo+MAKecAkSkfS581AwQt/NzwS+cXN+9Ek37XqTrNu1+Q6EzKuyjmaFvY2GaNXXk23T
+         W60VZGZprT+tiUI0Rdv9LJoMXuI3y3yHfHaHz525TkOfYi3L2Or/Bu529t1wKjSW3oS2
+         7Gaw==
+X-Forwarded-Encrypted: i=1; AFNElJ/PmJPsDeVsU0nMqj0YnYh0vsKV0rupk2kbaQVTWEfqdniV+hSIRw+vHdzqRwXlRNCCWjKh1QQa/3+0PlE1@lists.linaro.org
+X-Gm-Message-State: AOJu0YxPuuojxUjoV22KooQFw9cDSY9Bu0prqtYMzwFVw9voZXe7mKjs
+	nThMCOZr1zth2BmzIwFKUTORY0/0VOVE5Wm1G8L3haCh+dTj5m5ze6pmeEYlVL5mbfs=
+X-Gm-Gg: Acq92OFdOWRHHI1+bMnqy5SKz2K/l+LZlzTn98JbtlE5VT7Q5gFaIs5oJvHCXEeGStm
+	knSc07e02X3ySh2tBtrrej0K7gTkP3KsrJrcM6HELnBTF6d+V9e6BzdZchyRtxTe0BAnhVmSXm7
+	arSNOgMvngQh4XHqIDcUVRr1AWa8jQ402bSQBdNtdbAQL64KK9fzNJ4jY81G//wmN+X63gqLAzL
+	gMdIpSTjH2mwtc+ScQgmkc2plebEpxUJwqBOdFUsqr2G4ZENnR2Wp0qAY9ZQw+niX4Zf2hhGyT/
+	O/hm3RST/8xNHjzWAubfKQRU2KgEfvDW/jqfsgD+iW4Ezh4YA6B3XuiFn/0wJRTB4jFCtPFZ+6p
+	5J1NvDmFtTGiLx+toTlxVl+YiuJ4TxAkOIZ1j9tKicoNJk0ZDgABCBLI/mRKuqbVf9DsLl7NRpS
+	ND7Vx0Xjn/9U2lv1Yi75mWgnYvNDjhH+dQZ935GmxiRuPiEPA/Yc02q/O3bkdg4jWKc9opT37mR
+	Y/m6g==
+X-Received: by 2002:a05:6214:1c4e:b0:8ca:1e71:c5fb with SMTP id 6a1803df08f44-8cc6e91f389mr49249796d6.7.1779386061667;
+        Thu, 21 May 2026 10:54:21 -0700 (PDT)
+Received: from ziepe.ca (crbknf0213w-47-54-130-67.pppoe-dynamic.high-speed.nl.bellaliant.net. [47.54.130.67])
+        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-8cc768b6fc2sm11374296d6.6.2026.05.21.10.54.20
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 21 May 2026 10:54:21 -0700 (PDT)
+Received: from jgg by wakko with local (Exim 4.97)
+	(envelope-from <jgg@ziepe.ca>)
+	id 1wQ7bA-000000020Ak-1yKK;
+	Thu, 21 May 2026 14:54:20 -0300
+Date: Thu, 21 May 2026 14:54:20 -0300
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: "Aneesh Kumar K.V" <aneesh.kumar@kernel.org>
+Message-ID: <20260521175420.GA7702@ziepe.ca>
+References: <20260325192352.437608-2-jiri@resnulli.us>
+ <yq5atst6ywbl.fsf@kernel.org>
+ <4qdizkkoeke3cvkcf35upa7p7ick6s654eqlrizmi7ozkw5eze@tnpk2e34xgwl>
+ <yq5awly0d504.fsf@kernel.org>
+ <tteiecxfqy4k24wnzvp6ocxnuopyhmqtne2xwh5htwldlbzjnp@o6cbzdlurxld>
+ <20260421121004.GA3611611@ziepe.ca>
+ <yq5aik9jcpzm.fsf@kernel.org>
+ <20260424225514.GE804026@ziepe.ca>
+ <20260426130531.GF804026@ziepe.ca>
+ <yq5azf1s6aic.fsf@kernel.org>
 MIME-Version: 1.0
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD7A:EE_|SA3PR12MB9092:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8c66ebb4-4d49-4fb8-43d7-08deb75625fe
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|36860700016|376014|82310400026|1800799024|56012099003|11063799006|18002099003;
-X-Microsoft-Antispam-Message-Info: 
-	g142OrD0WmPFlzH41DZfRj/LZvsn9x7sARK3KS0E0ThBohqAveB9xAfEjlkJcqKuMcJe3St57pMbo+6Ag+KxVKKfRgt1hYIBP0n8IezxoPic0kUVGj1/4OXOxtPIlS2EKrOcg5Hio2+ch+o5f6gZW6oPB6AJXp0FUm2PI010QGXT32DGeojcMTrsD3sTUNvUiRBP5xju69JBpoa5CVYRfrlHftCshBkAXd2PRea6ShO0R65pQE+HHw+DgPEl9uC01fNyvYwiqZI0PHg0zqTtJ1QVq1GvK2E+yjaN8f2GyHCqAPsuyEmnFDF/HCL/P5MoXj5zxMWYWkm+5fxz4stkFPu4JJ+NYM27MqeG4z8OvKSpG3AP0wZ3nIxXipZ25pM9WfVXVjORdbNiNs+zN+6T1Wwr0agVzyK1l337BKSoHTOVbQ9xdshDi27h1qRvR4a4X6wwT1RRq4t8oniamGAfcvw7tphWKn3syQKpqp5mOhTThkwLUMnaTVXBABlNxRU3v8oEdWcRN1VKhMOQ+p5YdE4Q5JaC6XErAjMdhkj19bXaex5ttDjqxAXwFv71ZAq91YgtdyjzuJPLVQWLimq5UaSY+nnz2UZLfTl+fZ3ao8dVd5qJ1gmIu/g0+8w0i8srCvGeSNvZRUBSscZiTncdyCJy9APxBRgAd514ocWEXaknUfOnFQTGvCnTYihjhAkAL3DT0JY2qIapvtvWjcCOil0ovjZjcPRjgeoBF6slGko=
-X-Forefront-Antispam-Report: 
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(376014)(82310400026)(1800799024)(56012099003)(11063799006)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	SxBgTqJ6h+Jsd2o3Ok+EoipRb9vNnjtI1syscLstZklY9Zqs/oVvmr0L6s98QzwRGtCSJY5TlLoxcpEgyTtGoyDJ4g5F3HC5blK77Srg0sRmp6QOZkW6/HXw0qqz8qmfTMY3/4dxRttvzZEof90ACd+0BihOhonCniO8Kq/HlTlVRaZhm8n6TNEEo2ACMmR/vx93vdApRPfkmKRohScErsYUjrc4IgUF/bUQjwjJnmQEygYgfLF6ha3ZPx7YS2SVuRzIgyzUIi+IiwGoKHiYFsQ1dF75iA+bVhMUVY0Br//MLw8nWL0ivJfNX7uhvNW4SLEfMsp7NeOwUxc/c7z9ZF/7heUQmmHI2KEYP5o3bsNYcmWvHOeOBqFZPafJRHhTU4RbonbtHzYax+AAndKBBZbUhcCWl97eXO1cGYTI58bxA/kTRZ6rGSSVa938jznx
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 May 2026 16:29:36.5134
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8c66ebb4-4d49-4fb8-43d7-08deb75625fe
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	CH1PEPF0000AD7A.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR12MB9092
-X-Spamd-Bar: -
-Message-ID-Hash: BFCPHINJ3SQOXAW4T6B6UZH74JI4SBTI
-X-Message-ID-Hash: BFCPHINJ3SQOXAW4T6B6UZH74JI4SBTI
-X-MailFrom: lizhi.hou@amd.com
-X-Mailman-Rule-Hits: member-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
-CC: Lizhi Hou <lizhi.hou@amd.com>, linux-kernel@vger.kernel.org, linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org, Christian.Koenig@amd.com, simona@ffwll.ch, max.zhen@amd.com, sonal.santan@amd.com
+Content-Disposition: inline
+In-Reply-To: <yq5azf1s6aic.fsf@kernel.org>
+X-Spamd-Bar: ---
+Message-ID-Hash: JKOOZH34ULXCQTNBRIOY4UZJXAM3NJSK
+X-Message-ID-Hash: JKOOZH34ULXCQTNBRIOY4UZJXAM3NJSK
+X-MailFrom: jgg@ziepe.ca
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Jiri Pirko <jiri@resnulli.us>, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, iommu@lists.linux.dev, linux-media@vger.kernel.org, sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, Brian.Starkey@arm.com, jstultz@google.com, tjmercier@google.com, christian.koenig@amd.com, robin.murphy@arm.com, leon@kernel.org, sean.anderson@linux.dev, ptesarik@suse.com, catalin.marinas@arm.com, suzuki.poulose@arm.com, steven.price@arm.com, thomas.lendacky@amd.com, john.allen@amd.com, ashish.kalra@amd.com, suravee.suthikulpanit@amd.com, linux-coco@lists.linux.dev
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH V1] Revert "accel/amdxdna: Support read-only user-pointer BO mappings"
+Subject: [Linaro-mm-sig] Re: [PATCH v5 1/2] dma-mapping: introduce DMA_ATTR_CC_SHARED for shared memory
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/BFCPHINJ3SQOXAW4T6B6UZH74JI4SBTI/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JKOOZH34ULXCQTNBRIOY4UZJXAM3NJSK/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -118,114 +101,143 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [3.99 / 15.00];
-	DMARC_POLICY_QUARANTINE(1.50)[amd.com : SPF not aligned (relaxed),quarantine];
-	R_DKIM_REJECT(1.00)[amd.com:s=selector1];
-	MID_CONTAINS_FROM(1.00)[];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
+X-Spamd-Result: default: False [0.49 / 15.00];
+	R_DKIM_REJECT(1.00)[ziepe.ca:s=google];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	RCVD_COUNT_SEVEN(0.00)[8];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[12];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,linaro.org:email,amd.com:mid,amd.com:email];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[lizhi.hou@amd.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	NEURAL_HAM(-0.00)[-0.995];
 	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[amd.com:-]
-X-Rspamd-Queue-Id: 276925A94C6
+	DMARC_NA(0.00)[ziepe.ca];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	ARC_NA(0.00)[];
+	DKIM_TRACE(0.00)[ziepe.ca:-];
+	RCPT_COUNT_TWELVE(0.00)[24];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[jgg@ziepe.ca,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	NEURAL_HAM(-0.00)[-0.956];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[ziepe.ca:mid,linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo]
+X-Rspamd-Queue-Id: DCC395AAA20
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-This reverts commit f649e63d4a6423eda8eb208638849fd6396aedd7.
+On Thu, May 21, 2026 at 09:05:39PM +0530, Aneesh Kumar K.V wrote:
+> I am wondering whether this is better
+> 
+> static inline dma_addr_t dma_direct_map_phys(struct device *dev,
+> 		phys_addr_t phys, size_t size, enum dma_data_direction dir,
+> 		unsigned long attrs, bool flush)
+> {
+> 	dma_addr_t dma_addr;
+> 
+> 	/*
+> 	 * For a device requiring unencrypted DMA, MMIO memory is treated
+> 	 * as shared.
+> 	 */
+> 	if (force_dma_unencrypted(dev) && (attrs & DMA_ATTR_MMIO))
+> 		attrs |= DMA_ATTR_CC_SHARED;
 
-The read-only feature requires further consideration.
+It is an option, I would be happier if we went and fixed the few
+callers to properly pass the shared. CC did this with the
+pgprot_decrypted() stuff, same reasoning:
 
-Signed-off-by: Lizhi Hou <lizhi.hou@amd.com>
----
- drivers/accel/amdxdna/amdxdna_ubuf.c | 29 ++--------------------------
- 1 file changed, 2 insertions(+), 27 deletions(-)
-
-diff --git a/drivers/accel/amdxdna/amdxdna_ubuf.c b/drivers/accel/amdxdna/amdxdna_ubuf.c
-index 3769210c55cc..4c0647057759 100644
---- a/drivers/accel/amdxdna/amdxdna_ubuf.c
-+++ b/drivers/accel/amdxdna/amdxdna_ubuf.c
-@@ -125,26 +125,6 @@ static const struct dma_buf_ops amdxdna_ubuf_dmabuf_ops = {
- 	.vunmap = amdxdna_ubuf_vunmap,
+diff --git a/block/blk-mq-dma.c b/block/blk-mq-dma.c
+index bfdb9ed7074116..e77f6404caa3db 100644
+--- a/block/blk-mq-dma.c
++++ b/block/blk-mq-dma.c
+@@ -90,7 +90,7 @@ static bool blk_dma_map_direct(struct request *req, struct device *dma_dev,
+ 	unsigned int attrs = 0;
+ 
+ 	if (iter->p2pdma.map == PCI_P2PDMA_MAP_THRU_HOST_BRIDGE)
+-		attrs |= DMA_ATTR_MMIO;
++		attrs |= iter->p2pdma.mem->dma_mapping_flags;
+ 
+ 	iter->addr = dma_map_phys(dma_dev, vec->paddr, vec->len,
+ 			rq_dma_dir(req), attrs);
+@@ -115,7 +115,7 @@ static bool blk_rq_dma_map_iova(struct request *req, struct device *dma_dev,
+ 	iter->len = dma_iova_size(state);
+ 
+ 	if (iter->p2pdma.map == PCI_P2PDMA_MAP_THRU_HOST_BRIDGE)
+-		attrs |= DMA_ATTR_MMIO;
++		attrs |= iter->p2pdma.mem->dma_mapping_flags;
+ 
+ 	do {
+ 		error = dma_iova_link(dma_dev, state, vec->paddr, mapped,
+diff --git a/drivers/dma-buf/dma-buf-mapping.c b/drivers/dma-buf/dma-buf-mapping.c
+index 794acff2546a34..96022fadc48245 100644
+--- a/drivers/dma-buf/dma-buf-mapping.c
++++ b/drivers/dma-buf/dma-buf-mapping.c
+@@ -147,7 +147,7 @@ struct sg_table *dma_buf_phys_vec_to_sgt(struct dma_buf_attachment *attach,
+ 			ret = dma_iova_link(attach->dev, dma->state,
+ 					    phys_vec[i].paddr, 0,
+ 					    phys_vec[i].len, dir,
+-					    DMA_ATTR_MMIO);
++					    provider->dma_mapping_flags);
+ 			if (ret)
+ 				goto err_unmap_dma;
+ 
+@@ -155,7 +155,7 @@ struct sg_table *dma_buf_phys_vec_to_sgt(struct dma_buf_attachment *attach,
+ 		} else {
+ 			addr = dma_map_phys(attach->dev, phys_vec[i].paddr,
+ 					    phys_vec[i].len, dir,
+-					    DMA_ATTR_MMIO);
++					    provider->dma_mapping_flags);
+ 			ret = dma_mapping_error(attach->dev, addr);
+ 			if (ret)
+ 				goto err_unmap_dma;
+diff --git a/drivers/pci/p2pdma.c b/drivers/pci/p2pdma.c
+index 7c898542af8d5e..e4229b4d35c767 100644
+--- a/drivers/pci/p2pdma.c
++++ b/drivers/pci/p2pdma.c
+@@ -282,6 +282,8 @@ int pcim_p2pdma_init(struct pci_dev *pdev)
+ 			continue;
+ 
+ 		p2p->mem[i].owner = &pdev->dev;
++		p2p->mem[i].dma_mapping_flags =
++			DMA_ATTR_MMIO | DMA_ATTR_CC_SHARED;
+ 		p2p->mem[i].bus_offset =
+ 			pci_bus_address(pdev, i) - pci_resource_start(pdev, i);
+ 	}
+diff --git a/include/linux/pci-p2pdma.h b/include/linux/pci-p2pdma.h
+index 873de20a224759..402dc5e5d62b0a 100644
+--- a/include/linux/pci-p2pdma.h
++++ b/include/linux/pci-p2pdma.h
+@@ -21,10 +21,12 @@ struct scatterlist;
+  *
+  * A p2pdma provider is a range of MMIO address space available to the CPU.
+  * @owner: Device to which this provider belongs.
++ * @dma_mapping_flags: DMA attributes to use for host bridge mappings.
+  * @bus_offset: Bus offset for p2p communication.
+  */
+ struct p2pdma_provider {
+ 	struct device *owner;
++	unsigned long dma_mapping_flags;
+ 	u64 bus_offset;
  };
  
--static int readonly_va_entry(struct amdxdna_drm_va_entry *va_ent)
--{
--	struct mm_struct *mm = current->mm;
--	struct vm_area_struct *vma;
--	int ret;
--
--	mmap_read_lock(mm);
--
--	vma = find_vma(mm, va_ent->vaddr);
--	if (!vma ||
--	    vma->vm_start > va_ent->vaddr ||
--	    vma->vm_end - va_ent->vaddr < va_ent->len)
--		ret = -ENOENT;
--	else
--		ret = vma->vm_flags & VM_WRITE ? 0 : 1;
--
--	mmap_read_unlock(mm);
--	return ret;
--}
--
- struct dma_buf *amdxdna_get_ubuf(struct drm_device *dev,
- 				 u32 num_entries, void __user *va_entries)
- {
-@@ -154,7 +134,6 @@ struct dma_buf *amdxdna_get_ubuf(struct drm_device *dev,
- 	struct amdxdna_ubuf_priv *ubuf;
- 	u32 npages, start = 0;
- 	struct dma_buf *dbuf;
--	bool readonly = true;
- 	int i, ret;
- 	DEFINE_DMA_BUF_EXPORT_INFO(exp_info);
- 
-@@ -193,10 +172,6 @@ struct dma_buf *amdxdna_get_ubuf(struct drm_device *dev,
- 			ret = -EINVAL;
- 			goto free_ent;
- 		}
--
--		/* Pin pages as writable as long as not all entries are read-only. */
--		if (readonly && readonly_va_entry(&va_ent[i]) != 1)
--			readonly = false;
- 	}
- 
- 	ubuf->nr_pages = exp_info.size >> PAGE_SHIFT;
-@@ -219,7 +194,7 @@ struct dma_buf *amdxdna_get_ubuf(struct drm_device *dev,
- 		npages = va_ent[i].len >> PAGE_SHIFT;
- 
- 		ret = pin_user_pages_fast(va_ent[i].vaddr, npages,
--					  (readonly ? 0 : FOLL_WRITE) | FOLL_LONGTERM,
-+					  FOLL_WRITE | FOLL_LONGTERM,
- 					  &ubuf->pages[start]);
- 		if (ret >= 0) {
- 			start += ret;
-@@ -236,7 +211,7 @@ struct dma_buf *amdxdna_get_ubuf(struct drm_device *dev,
- 
- 	exp_info.ops = &amdxdna_ubuf_dmabuf_ops;
- 	exp_info.priv = ubuf;
--	exp_info.flags = (readonly ? O_RDONLY : O_RDWR) | O_CLOEXEC;
-+	exp_info.flags = O_RDWR | O_CLOEXEC;
- 
- 	dbuf = dma_buf_export(&exp_info);
- 	if (IS_ERR(dbuf)) {
--- 
-2.34.1
-
+diff --git a/mm/hmm.c b/mm/hmm.c
+index 5955f2f0c83db1..c3f445acddf873 100644
+--- a/mm/hmm.c
++++ b/mm/hmm.c
+@@ -811,7 +811,7 @@ dma_addr_t hmm_dma_map_pfn(struct device *dev, struct hmm_dma_map *map,
+ 	case PCI_P2PDMA_MAP_NONE:
+ 		break;
+ 	case PCI_P2PDMA_MAP_THRU_HOST_BRIDGE:
+-		attrs |= DMA_ATTR_MMIO;
++		attrs |= p2pdma_state->mem->dma_mapping_flags;
+ 		pfns[idx] |= HMM_PFN_P2PDMA;
+ 		break;
+ 	case PCI_P2PDMA_MAP_BUS_ADDR:
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
