@@ -2,175 +2,136 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id uEAWKHPzE2puHwcAu9opvQ
+	id r5uQBYX4EWqLswYAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 25 May 2026 09:00:03 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 23 May 2026 20:57:09 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 021945C6D83
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 25 May 2026 09:00:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 80DF85C060F
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 23 May 2026 20:57:08 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0C9673F821
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 25 May 2026 07:00:02 +0000 (UTC)
-Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
-	by lists.linaro.org (Postfix) with ESMTPS id CADFF3F7FA
-	for <linaro-mm-sig@lists.linaro.org>; Sat, 23 May 2026 18:14:50 +0000 (UTC)
-Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20251104 header.b=qaJcoC4g;
-	spf=pass (lists.linaro.org: domain of devnexen@gmail.com designates 209.85.221.45 as permitted sender) smtp.mailfrom=devnexen@gmail.com;
-	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-449de065cb3so8000525f8f.2
-        for <linaro-mm-sig@lists.linaro.org>; Sat, 23 May 2026 11:14:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779560090; x=1780164890; darn=lists.linaro.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=PKrZA3SQ6hneCPeQUwipbEL8KL38eo+epb8OIzHcMbI=;
-        b=qaJcoC4gHR06HsTLdN0G7UC7uUaGAKbsTf7IhlwYHRugmaIoNbRPw65XRT0hFhVAdo
-         ttchRVCtsDR2Tj35528wtH8ce5hphHB66QR4GNkuGlwudkeMtUyNoNtc+MT7TBrngeq3
-         5jrgAIshPbPIsgsP7Gl67lTtw1KPvCYYO+iygaPvf655Oc6BoFoGsv3PhZzYVt9JOp+2
-         SCXJo90hz8Bb7spinlXmR1l2wfQ7C0Vsf0G7KMOO+hMBNSG4OYU0+V1uZetbipVndrPe
-         fq2cK4IRWcFOYITH8ihMq+d4qLah3MBaRp1ReRoPBBWbXVZr/qLq4xtp7nG6z/SdZzE+
-         wj6Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779560090; x=1780164890;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=PKrZA3SQ6hneCPeQUwipbEL8KL38eo+epb8OIzHcMbI=;
-        b=jngj7ZN4utPzWr3wZA/Yb8MQuLNoKHlQvkbxZr0k6pSKrfuARi85iU7/jHQkYg11Kg
-         MEX+zCl3xvINuw3j6ziCXiRH74St8/FpGeCJJKWNvG5opaD50sex8VDqZG8HuljM5gD5
-         jx0CjD51MNlgTYOinn/3hcow8mQGw0kSYOWemRjfPc8Ctz1xNnvHSaB0i0UIJ53npjIL
-         Wt5CraWHpY8LxUB2dcMpRZxPm10McseD1IlMPfKLxinVYL38qFiF3DvV+WQJtmkw0IQM
-         LB2LHj4N3e4Bt6fYrwDt3ZymMAI4IeqfTltBmoELCAXOX/mrEMmZIuAuWzrRzyyRnvN2
-         C/Uw==
-X-Forwarded-Encrypted: i=1; AFNElJ85mfvYdyPImAchSmLvKGrttsG9JBk1b8j71bxJFJMShgnmsFn/RnNAXwBTzNoKx+Kwfj7yrwsiz3DWEov9@lists.linaro.org
-X-Gm-Message-State: AOJu0YysaCIopZd0WH5M5DDbkjg6kQdLJc6B0EwBnemxeJHGuu10CoXo
-	t0iQPcJZYiqbb0LGM6mqUl5LJcmuK6XH4NWC6tez6/b5COC4zJL2RuLD
-X-Gm-Gg: Acq92OFx6DcUk5nuX4rwrtfo3H2Ol7eOJPuoKyuoix3aty1WpazD2/8Qka/6b3QXtHw
-	S+bL3Fdfz6TIAOKNxQauXkv+1r4a6ovkMVr31xLQSJPBU9D/jDFlhMiqwIzrcnTMMrjJXO0i9Ux
-	HdinA0JQ86fza5cxyGthOv7ZaNo0A2UndIO8ltOOAFMzI/MxKB4GcOg+kehq6eKjr2X5GqWjXIx
-	Pdknf36aqrHZNERc/YBwGLHSfBKxrUUopJBROvrJSSkwEzldT9E8V4VljyRXJo9IGCV+aP7nxLt
-	kr3cYnLvcXAIWgpEphs2veJif6G8ahUvVxIp0tA6kh82I82wrYh5HPUod6JUG52je56+hTF3Xmb
-	oAp1d6QR7zGw7WXzwl+DHssksl3fhnBccK3ibyM39y0kbi6BwkfyIcdbgY5yTSFaC0wo702ofS9
-	ncB87yfhzmCt0aJHpQdSCZ67BinMJt8RKjcXgOi/aLsMJ4zyu73VLGNIiN53QNQk/zYoQYSHvdE
-	4AZsskS6XI=
-X-Received: by 2002:a05:6000:41fa:b0:45a:c0e1:37b with SMTP id ffacd0b85a97d-45eb389fdedmr13444344f8f.32.1779560089580;
-        Sat, 23 May 2026 11:14:49 -0700 (PDT)
-Received: from dohko.chello.ie (188-141-5-72.dynamic.upc.ie. [188.141.5.72])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-45eb6d4850dsm13042447f8f.17.2026.05.23.11.14.48
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 23 May 2026 11:14:49 -0700 (PDT)
-From: David Carlier <devnexen@gmail.com>
-To: Sumit Semwal <sumit.semwal@linaro.org>,
-	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
-Date: Sat, 23 May 2026 19:14:46 +0100
-Message-ID: <20260523181446.69525-1-devnexen@gmail.com>
-X-Mailer: git-send-email 2.53.0
+	by lists.linaro.org (Postfix) with ESMTP id 3A79F404F4
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 23 May 2026 18:57:07 +0000 (UTC)
+Received: from lists.linaro.org (localhost [127.0.0.1])
+	by lists.linaro.org (Postfix) with ESMTP id BA5D0404DF
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 23 May 2026 18:57:00 +0000 (UTC)
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-X-Spamd-Bar: --
-X-MailFrom: devnexen@gmail.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: SJFXUQXITRXICDVXXRSDKGT36AQC4HLX
-X-Message-ID-Hash: SJFXUQXITRXICDVXXRSDKGT36AQC4HLX
-X-Mailman-Approved-At: Mon, 25 May 2026 06:59:53 +0000
-CC: gaoxiang17@xiaomi.com, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, syzbot+7f4987d0afb97dd090cb@syzkaller.appspotmail.com, David Carlier <devnexen@gmail.com>, stable@vger.kernel.org
+From: wernerkatherine77@proton.me
+To: linaro-mm-sig@lists.linaro.org
+Date: Sat, 23 May 2026 18:57:00 -0000
+Message-ID: <177956262075.81459.3626592222928644057@lists.linaro.org>
+User-Agent: HyperKitty on http://lists.linaro.org/
+Message-ID-Hash: PBKWWCJII27MHJWUWDOXVCDTNO6HCVO7
+X-Message-ID-Hash: PBKWWCJII27MHJWUWDOXVCDTNO6HCVO7
+X-MailFrom: wernerkatherine77@proton.me
+X-Mailman-Rule-Hits: member-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH] dma-buf: fix UAF in dma_buf_fd() tracepoint
+Subject: [Linaro-mm-sig] UncertainRouteCanvas
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SJFXUQXITRXICDVXXRSDKGT36AQC4HLX/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PBKWWCJII27MHJWUWDOXVCDTNO6HCVO7/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [4.09 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
-	DATE_IN_PAST(1.00)[36];
-	R_DKIM_REJECT(1.00)[gmail.com:s=20251104];
+Content-Transfer-Encoding: base64
+X-Spamd-Result: default: False [2.09 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[proton.me : SPF not aligned (strict), No valid DKIM,quarantine];
+	MID_RHS_MATCH_TO(1.00)[];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx:c];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed),none];
+	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_CC(0.00)[xiaomi.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,syzkaller.appspotmail.com,gmail.com];
-	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_ONE(0.00)[1];
 	ARC_NA(0.00)[];
-	GREYLIST(0.00)[pass,meta];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:-];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	NEURAL_HAM(-0.00)[-0.933];
-	FROM_NEQ_ENVFROM(0.00)[devnexen@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,7f4987d0afb97dd090cb];
+	FROM_NO_DN(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.878];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo,syzkaller.appspot.com:url]
-X-Rspamd-Queue-Id: 021945C6D83
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_NEQ_ENVFROM(0.00)[wernerkatherine77@proton.me,linaro-mm-sig-bounces@lists.linaro.org];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	TO_DN_NONE(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	R_DKIM_NA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[auslaendische-online-casinos.de:url,lists.linaro.org:rdns,lists.linaro.org:mid,lists.linaro.org:helo]
+X-Rspamd-Queue-Id: 80DF85C060F
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Once FD_ADD() returns, the fd is live in the file descriptor table
-and a thread sharing that table can close() it before DMA_BUF_TRACE()
-runs. The close drops the last reference, __fput() frees the dma_buf,
-and the tracepoint then dereferences dmabuf to take dmabuf->name_lock
--- slab-use-after-free.
-
-Split FD_ADD() back into get_unused_fd_flags() + fd_install() and
-emit the tracepoint between them. While the fdtable slot is reserved
-with a NULL file pointer, a racing close() returns -EBADF without
-entering __fput(), so the dma_buf stays alive across the trace. Same
-approach as commit 2d76319c4cbb ("dma-buf: fix UAF in dma_buf_put()
-tracepoint").
-
-This undoes the FD_ADD() conversion done in commit 34dfce523c90
-("dma: convert dma_buf_fd() to FD_ADD()"); FD_ADD() has no place to
-hook the tracepoint safely.
-
-Reported-by: syzbot+7f4987d0afb97dd090cb@syzkaller.appspotmail.com
-Closes: https://syzkaller.appspot.com/bug?extid=7f4987d0afb97dd090cb
-Fixes: 281a22631423 ("dma-buf: add some tracepoints to debug.")
-Cc: stable@vger.kernel.org # 7.0.x
-Signed-off-by: David Carlier <devnexen@gmail.com>
----
- drivers/dma-buf/dma-buf.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
-index 71f37544a5c6..d504c636dc29 100644
---- a/drivers/dma-buf/dma-buf.c
-+++ b/drivers/dma-buf/dma-buf.c
-@@ -792,9 +792,13 @@ int dma_buf_fd(struct dma_buf *dmabuf, int flags)
- 	if (!dmabuf || !dmabuf->file)
- 		return -EINVAL;
- 
--	fd = FD_ADD(flags, dmabuf->file);
-+	fd = get_unused_fd_flags(flags);
-+	if (fd < 0)
-+		return fd;
-+
- 	DMA_BUF_TRACE(trace_dma_buf_fd, dmabuf, fd);
- 
-+	fd_install(fd, dmabuf->file);
- 	return fd;
- }
- EXPORT_SYMBOL_NS_GPL(dma_buf_fd, "DMA_BUF");
--- 
-2.53.0
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+VGhlcm1hbCBMb2dpYzogV2h5IEdhbWJsaW5nIEVuZGVkIFVwIGF0IHRoZSBIZWFydCBvZiB0aGUg
+R2VybWFuIFJlc29ydCBFY29ub215DQoNClRoZXJtYWwgcmVzb3J0cyBpbiB0aGUgMTh0aCBhbmQg
+MTl0aCBjZW50dXJpZXMgaHR0cDovL2F1c2xhZW5kaXNjaGUtb25saW5lLWNhc2lub3MuZGUvIG5l
+ZWRlZCBhIHdheSB0byBrZWVwIHdlYWx0aHkgdmlzaXRvcnMgZW50ZXJ0YWluZWQgcGFzdCBkaW5u
+ZXIuIENvbmNlcnRzIGhlbHBlZC4gVGhlYXRlciBoZWxwZWQgbW9yZS4gQnV0IG5vdGhpbmcgZXh0
+ZW5kZWQgdGhlIHN0YXkg4oCUIGFuZCB0aGUgc3BlbmRpbmcg4oCUIHF1aXRlIGxpa2UgYSB3ZWxs
+LWFwcG9pbnRlZCByb29tIHdoZXJlIG1vbmV5IGNvdWxkIGNoYW5nZSBoYW5kcyBpbiBhIHNvY2lh
+bGx5IGFjY2VwdGFibGUgc2V0dGluZy4NCkJhZGVuLUJhZGVuIHVuZGVyc3Rvb2QgdGhpcyBiZWZv
+cmUgbW9zdC4NCg0KVGhlIEt1cmhhdXMgYmVjYW1lIGEgbW9kZWwgbm90IGJlY2F1c2UgaXQgd2Fz
+IHVuaXF1ZSBidXQgYmVjYXVzZSBpdCBtYWRlIHRoZSBpbnRlcmRlcGVuZGVuY2UgdmlzaWJsZS4g
+QSBndWVzdCB3aG8gY2FtZSBmb3IgdGhlIHdhdGVycyBzdGF5ZWQgZm9yIHRoZSB0YWJsZXMsIHNw
+ZW50IG9uIHRoZSBob3RlbCwgYm91Z2h0IHRoaW5ncyBpbiB0aGUgc2hvcHMsIGFuZCBsZWZ0IGhh
+dmluZyBmdW5kZWQgYW4gZW50aXJlIGxvY2FsIGVjb25vbXkgZm9yIHNldmVyYWwgZGF5cy4gVGhl
+IGxvZ2ljIHdhcyBjaXJjdWxhciBhbmQgZGVsaWJlcmF0ZWx5IHNvLiBDaXZpYyBwbGFubmVycyBp
+biBzcGEgdG93bnMgYWNyb3NzIHdoYXQgd291bGQgYmVjb21lIEdlcm1hbnkgcmVwbGljYXRlZCBp
+dCwgd2hpY2ggaXMgd2h5IHRoZSBvcmlnaW5zIG9mIGNhc2lub3MgaW4gR2VybWFueSBhcmUgbm90
+IGZvdW5kIGluIGFueSBzaW5nbGUgaW52ZW50aW9uIGJ1dCBpbiBhIGRpc3RyaWJ1dGVkIGV4cGVy
+aW1lbnQgY29uZHVjdGVkIGFjcm9zcyBkb3plbnMgb2Ygc21hbGwgcmVzb3J0IHRvd25zIGNvbXBl
+dGluZyBmb3IgdGhlIHNhbWUgYXJpc3RvY3JhdGljIGNsaWVudGVsZSB0aHJvdWdob3V0IHRoZSAx
+ODAwcy4gQmFkIEhvbWJ1cmcgcmVmaW5lZCB0aGUgcm91bGV0dGUgd2hlZWwuIFdpZXNiYWRlbiBh
+dHRyYWN0ZWQgdGhlIFJ1c3NpYW4gbGl0ZXJhcnkgY3Jvd2QuIEFhY2hlbiBwb3NpdGlvbmVkIGl0
+c2VsZiBmb3IgdGhlIEJlbGdpYW4gYW5kIEZyZW5jaCBtYXJrZXQuIEVhY2ggdG93biBhZGFwdGVk
+IHRoZSBtb2RlbCB0byBpdHMgZ2VvZ3JhcGh5IGFuZCBpdHMgdmlzaXRvcnMsIGFuZCB0aGUgcmVz
+dWx0IHdhcyBhIGNhc2lubyBjdWx0dXJlIGVtYmVkZGVkIGluIHJlZ2lvbmFsIGlkZW50aXR5IHJh
+dGhlciB0aGFuIHNpdHRpbmcgYXBhcnQgZnJvbSBpdC4NClBydXNzaWEncyAxODY4IGJhbiBpbnRl
+cnJ1cHRlZCB0aGF0IHRyYWplY3Rvcnkgc2hhcnBseS4NCg0KVGhlIGRlY2FkZXMgdGhhdCBmb2xs
+b3dlZCBwdXNoZWQgZ2FtYmxpbmcgaW50byBsZWdhbCBhbWJpZ3VpdHkgYWNyb3NzIEdlcm1hbiB0
+ZXJyaXRvcmllcywgYW5kIHRoZSBwb3N0LXdhciByZWNvbnN0cnVjdGlvbiBvZiB0aGUgaW5kdXN0
+cnkgaGFwcGVuZWQgdW5ldmVubHkg4oCUIHNoYXBlZCBtb3JlIGJ5IHdoaWNoIHN0YXRlcyBoYWQg
+c3Vydml2aW5nIHNwYSBpbmZyYXN0cnVjdHVyZSB0aGFuIGJ5IGFueSBjb2hlcmVudCBuYXRpb25h
+bCBwb2xpY3kuIFRoYXQgcGF0Y2h3b3JrIGlzIHN0aWxsIHZpc2libGUgdG9kYXkgaW4gdGhlIGRp
+c3RyaWJ1dGlvbiBvZiBsaWNlbnNlZCBsYW5kLWJhc2VkIGVzdGFibGlzaG1lbnRzLCBjbHVzdGVy
+ZWQgYXJvdW5kIHRoZSBzYW1lIGhpc3RvcmljIHJlc29ydCB0b3ducyB0aGF0IGludmVudGVkIHRo
+ZSBmb3JtYXQgaW4gdGhlIGZpcnN0IHBsYWNlLg0KDQpUaGUgZGlnaXRhbCBlcmEgZm9yY2VkIGEg
+cmVja29uaW5nIHdpdGggdGhpcyBnZW9ncmFwaHkuIE9ubGluZSBwbGF0Zm9ybXMgZG8gbm90IGhh
+dmUgYSBsb2NhdGlvbiBpbiBhbnkgbWVhbmluZ2Z1bCBzZW5zZSwgd2hpY2ggbWFkZSB0aGUgb2xk
+IHN0YXRlLWJ5LXN0YXRlIHJlZ3VsYXRvcnkgbW9kZWwgY29sbGFwc2UgdW5kZXIgaXRzIG93biBp
+bmNvbnNpc3RlbmNpZXMuIFRoZSAyMDIxIEdsw7xja3NzcGllbHN0YWF0c3ZlcnRyYWcgYWRkcmVz
+c2VkIHRoaXMgYnkgY3JlYXRpbmcgYSB1bmlmaWVkIGZlZGVyYWwgZnJhbWV3b3JrIGFuZCwgY3Jp
+dGljYWxseSwgZXN0YWJsaXNoaW5nIHRoZSBjb25kaXRpb25zIHVuZGVyIHdoaWNoIHByb3ZpZGVy
+cyBjb3VsZCBvYnRhaW4gYSBjYXNpbm8gR2VybWFueSBFVSBsaWNlbnNlIOKAlCBhIG1lY2hhbmlz
+bSBicmluZ2luZyBkb21lc3RpYyBsYXcgaW50byBmdW5jdGlvbmFsIGFsaWdubWVudCB3aXRoIHRo
+ZSBpbnRlcm5hbCBtYXJrZXQgcHJpbmNpcGxlcyBCcnVzc2VscyBoYWQgYmVlbiBwcmVzc2luZyBm
+b3IgeWVhcnMuIFRoZSB0cmVhdHkgaW1wb3NlZCBzdHJpY3QgYmVoYXZpb3JhbCBjb25zdHJhaW50
+czogbWFuZGF0b3J5IGRlcG9zaXQgbGltaXRzLCByZWFsLXRpbWUgdHJhbnNhY3Rpb24gbW9uaXRv
+cmluZywgYWR2ZXJ0aXNpbmcgd2F0ZXJzaGVkcywgYW5kIGEgaGFyZCBwcm9oaWJpdGlvbiBvbiBj
+ZXJ0YWluIHByb2R1Y3QgY2F0ZWdvcmllcyB0aGF0IGhhZCBmbG91cmlzaGVkIGluIHRoZSB1bnJl
+Z3VsYXRlZCBvbmxpbmUgc3BhY2UuIEZvciBvcGVyYXRvcnMgYWxyZWFkeSBob2xkaW5nIGxpY2Vu
+c2VzIGluIE1hbHRhIG9yIEdpYnJhbHRhciwgdGhlIEdlcm1hbiBtYXJrZXQgYmVjYW1lIGFjY2Vz
+c2libGUgaW4gdGhlb3J5IGFuZCBleHBlbnNpdmUgaW4gcHJhY3RpY2UuIENvbXBsaWFuY2UgaW5m
+cmFzdHJ1Y3R1cmUsIGxvY2FsIHRheCBvYmxpZ2F0aW9ucywgYW5kIHRoZSBhZG1pbmlzdHJhdGl2
+ZSByZXF1aXJlbWVudHMgb2YgdGhlIG5ldyBmcmFtZXdvcmsgbWFkZSBlbnRyeSBjYWxjdWxhdGlv
+bnMgZGlmZmljdWx0IGZvciBhbnlvbmUgYmVsb3cgYSBjZXJ0YWluIHNjYWxlLg0KQ29uc29saWRh
+dGlvbiBmb2xsb3dlZCwgYXMgaXQgdGVuZHMgdG8uDQoNClRoZSBicm9hZGVyIEV1cm9wZWFuIHBp
+Y3R1cmUgcmVtYWlucyBkZWxpYmVyYXRlbHkgZnJhZ21lbnRlZC4gRnJhbmNlIHJ1bnMgaXRzIG9u
+bGluZSBtYXJrZXQgdGhyb3VnaCBhIHN0YXRlLWJhY2tlZCBtb25vcG9seSBsb2dpYy4gVGhlIE5l
+dGhlcmxhbmRzIGludHJvZHVjZWQgbGljZW5zaW5nIGluIDIwMjEgdW5kZXIgaXRzIG93biBSZW1v
+dGUgR2FtYmxpbmcgQWN0LCB3aXRoIGEgZGlmZmVyZW50IHNldCBvZiBjb25zdW1lciBwcm90ZWN0
+aW9uIHByaW9yaXRpZXMuIFN3ZWRlbiBsaWJlcmFsaXplZCBpbiAyMDE5IGFuZCBoYXMgc3BlbnQg
+dGhlIHllYXJzIHNpbmNlIG1hbmFnaW5nIHRoZSBnYXAgYmV0d2VlbiBwcm9qZWN0ZWQgYW5kIGFj
+dHVhbCBvdXRjb21lcyBpbiBwcm9ibGVtIGdhbWJsaW5nIHJhdGVzLiBHZXJtYW55IHNpdHMgc29t
+ZXdoZXJlIGluIHRoaXMgc3BlY3RydW0g4oCUIG1vcmUgb3BlbiB0aGFuIGl0cyBwcmUtMjAyMSBz
+ZWxmLCBtb3JlIHJlc3RyaWN0aXZlIHRoYW4gdGhlIG9mZnNob3JlIGRlc3RpbmF0aW9ucyBpdHMg
+cmVzaWRlbnRzIGhhZCBiZWVuIHVzaW5nIGZyZWVseSBmb3IgeWVhcnMgYmVmb3JlIHRoZSBsYXcg
+Y2F1Z2h0IHVwLg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5h
+cm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2
+ZUBsaXN0cy5saW5hcm8ub3JnCg==
