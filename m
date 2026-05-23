@@ -2,28 +2,28 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id oEkkKWh5EWrymQYAu9opvQ
+	id w15KJJh5EWpImgYAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 23 May 2026 11:54:48 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 23 May 2026 11:55:36 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 40ED05BE64E
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 23 May 2026 11:54:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1E0FD5BE66F
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 23 May 2026 11:55:35 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C708E3F683
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 23 May 2026 09:54:46 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 8C5D14098D
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 23 May 2026 09:55:34 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 760D03F683
-	for <linaro-mm-sig@lists.linaro.org>; Sat, 23 May 2026 09:54:39 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 8B74C3F683
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 23 May 2026 09:55:28 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: lenarichmond49@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Sat, 23 May 2026 09:54:39 -0000
-Message-ID: <177953007948.3607063.8310581052509975934@lists.linaro.org>
+Date: Sat, 23 May 2026 09:55:28 -0000
+Message-ID: <177953012857.3609696.14125006485750812237@lists.linaro.org>
 User-Agent: HyperKitty on http://lists-ec2.96boards.org/
-Message-ID-Hash: EEL2SM3EPGIRSD6S3M4WLUZA3BEO2LES
-X-Message-ID-Hash: EEL2SM3EPGIRSD6S3M4WLUZA3BEO2LES
+Message-ID-Hash: M3F3CZFGU6TEQ7STFK25IF3E2VG4CUNM
+X-Message-ID-Hash: M3F3CZFGU6TEQ7STFK25IF3E2VG4CUNM
 X-MailFrom: lenarichmond49@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
@@ -31,7 +31,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] How to Hire a Hacker to remove unwanted information & files from all search engines linked on the internet
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EEL2SM3EPGIRSD6S3M4WLUZA3BEO2LES/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/M3F3CZFGU6TEQ7STFK25IF3E2VG4CUNM/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -61,9 +61,9 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	R_DKIM_NA(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.463];
+	NEURAL_HAM(-0.00)[-0.474];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[]
-X-Rspamd-Queue-Id: 40ED05BE64E
+X-Rspamd-Queue-Id: 1E0FD5BE66F
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
