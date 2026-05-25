@@ -2,160 +2,155 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id ANcOEKbzE2puHwcAu9opvQ
+	id qOIiFlb6E2oxIQcAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 25 May 2026 09:00:54 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 25 May 2026 09:29:26 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4A6D75C6DA3
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 25 May 2026 09:00:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E398D5C7255
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 25 May 2026 09:29:25 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5B6913F821
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 25 May 2026 07:00:52 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 375DB3F8E7
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 25 May 2026 06:47:57 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 4E41F4049E
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 25 May 2026 07:29:24 +0000 (UTC)
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+	by lists.linaro.org (Postfix) with ESMTPS id C7FA63F78E
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 25 May 2026 07:29:12 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=RRBlGGd9;
-	spf=pass (lists.linaro.org: domain of devnull+webgeek1234.gmail.com@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=devnull+webgeek1234.gmail.com@kernel.org;
-	dmarc=pass (policy=quarantine) header.from=kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sea.source.kernel.org (Postfix) with ESMTP id 8F9B140279;
-	Mon, 25 May 2026 06:47:56 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 57C58C2BCC7;
-	Mon, 25 May 2026 06:47:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1779691676;
-	bh=rQtWtz9PaBC5kO/YmeSFs1AL2c5xXsa62gy6hOf0BC4=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=RRBlGGd926Pbz+gVLIdJH4aGYLYZwwKI7u8T3BTGNle1QfFTLqka6n4G2dsp7L8mx
-	 hpZsA4p28dw687ygsK42fuR/qdNpFMO44tD9Uiyp4+hk0JDUcK7tToDVkEYlXo1H1Z
-	 RXrruj6o07PvEGWpLeCuJsK4MDUubpcIXQttrQsjcl6+nUSq+YHtM/U4lcXv2sfBax
-	 GLhYtvvvhMTdPL2PuB2fpVDgnohZ1FXbVuP12iuHwSbhLyWXJDSKprrxH7yYfY7RVr
-	 VMRNo9ZtBAdFejzhKSoSUPKTe4GZ1HUM4aO5aD3PSnKS+G9/LTAbgXt1A3ZFerT5LV
-	 nOJ6iNGfTNQ9w==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 44221CD5BCE;
-	Mon, 25 May 2026 06:47:56 +0000 (UTC)
-From: Aaron Kling via B4 Relay <devnull+webgeek1234.gmail.com@kernel.org>
-Date: Mon, 25 May 2026 01:47:45 -0500
+	dkim=pass header.d=gmail.com header.s=20251104 header.b=mP6xCmdt;
+	spf=pass (lists.linaro.org: domain of asml.silence@gmail.com designates 209.85.128.52 as permitted sender) smtp.mailfrom=asml.silence@gmail.com;
+	dmarc=pass (policy=none) header.from=gmail.com
+Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4891e86fabeso117423295e9.1
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 25 May 2026 00:29:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1779694152; x=1780298952; darn=lists.linaro.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=m+/CremarURMLXbq9HZsozt2//0CtuRcgdYp3OMzrIs=;
+        b=mP6xCmdtgYNmbTJ7VkY3vG3IvvgQ8f+MfgUPM6BO/eXF6RY7F295IaWTcUP/l6VMcf
+         YrLcAcIWnJEKbADgfC+KBfxm0RjP3CD2v880BA6qQJfta3gfYXNyZDwy1RL9/7K7oEVD
+         BkQ22F9h8IFIQoaV53YCqzrXcbig+HOmALdotoJND6zLaqguZQ/WMsIsZyIekG7SjWS7
+         I90o1DRxw0TzuF6Ke8LS9aCld7WV5kxaqzA5SBBDHy6NE038xjeGT8TaTAfV5CKXjOqO
+         essHjxbLu45gp7iM49LCBEnfDfC4c3WNNz0+CfgV4o/5How3XQpv2wP+Vd4nJluq8ETV
+         6rMg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1779694152; x=1780298952;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=m+/CremarURMLXbq9HZsozt2//0CtuRcgdYp3OMzrIs=;
+        b=aAraHJHJSoJrMq44CY+vjX3389+zMFuiCsSWWCOpiE8Jsbik88X9lt9ybgWqVwvXKo
+         66LJEmnER3nLv8Z9m+OtaXhsoiharHFlVIrZWz4LXfKXPlTJ0BQZA7Gd5IourTPf/7Ry
+         wlRPzEOgUksu32jorQi8FPDU+X3oemZncuSB6+Jjn2iuu2nAF6Y0cusAjJPD+ur/CGJu
+         txT29E4PQZVcP08UZRfVbMjQ+GFelpndYaQwHTYlx2il/Me3djv21IqnWNJTXpCzT3zP
+         kyeQhrzLUQL5PfzyPWDiy7zNmOis2AjojxstbMSNhkh18l/PW7+muY0CmOi6VfodHQH0
+         N8OA==
+X-Forwarded-Encrypted: i=1; AFNElJ+PW/7hBP4bFzn8k83k24rkb3xgdFauDL/NN3WwKLqnIdceYAdoUAGOKV8zjDOILbIRhXV822txxoJEFhT8@lists.linaro.org
+X-Gm-Message-State: AOJu0Yx7wudCmrCVuPqzvjN/uJ/2fj7Mc1cVADUl5iDkSmoWxTtDfiEE
+	6y/xKoPjdmEWcQR2MITZmg44j4MZUffNEk99YDDkSHenHLpOkhncBrF2
+X-Gm-Gg: Acq92OHTHLwhL/rNQRiqUi+AaxpW6ts7YlE8SwB61U7SB02EEzjd7MT5pXaYNlNnH7t
+	Rr0nf08xroZrX08UBDTOCMRveZKruvNLhN25LLXfjxriWxYJal9myX9C6rCBSGg0x0ZhcOnv3Dp
+	+y9VXEfckISMml5753luAfiRuclByQN2OZ1X293TQMUbpiMUEsbDMjBRfYMVw/y2ANslWvc5f3v
+	ag/CqlHPWlmulU38t9Dn7snhOOKatSVeDzUJtbGQg6/561mj8qigGHyd2hiDJsTy9SOP73t8f9S
+	RsRvyH3dUtnORUcd6wCmt4pKG64REkGQaT3g+cWFhbjqaPz7Is8q9DpyA29+Exduzz4bOP6mwuT
+	gPJhDnAPB4EcuE21r+ADcWGa/i4TqSBlS2tFEEB5vT8144evMTJJh2IFjZFFataiMGiPL44ZDJs
+	dU9r04eotJpE+6gxFkm/kvyqpL/pE7QDuWL5dNeoSW6MxvFDExLBYk8cKT1YF+1vO1e+op7IN5E
+	Vrj0EiP3xOyEFlrV+Yz61cNBmYZFO1oTAIOOqKaJkcYBx8QQ39m4QBnfKDO2CD6GbqbCYfqvq0b
+	LDzr118WZcKRlIab2/cAQmw=
+X-Received: by 2002:a05:600c:c4a1:b0:490:1640:8269 with SMTP id 5b1f17b1804b1-490426d1a16mr227253215e9.18.1779694151663;
+        Mon, 25 May 2026 00:29:11 -0700 (PDT)
+Received: from ?IPV6:2a01:4b00:bd21:4f00:7cc6:d3ca:494:116c? ([2a01:4b00:bd21:4f00:7cc6:d3ca:494:116c])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-490428d4cefsm81771025e9.14.2026.05.25.00.29.10
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 25 May 2026 00:29:10 -0700 (PDT)
+Message-ID: <57ae2e2f-8523-4cba-ad77-920535edd236@gmail.com>
+Date: Mon, 25 May 2026 08:29:08 +0100
 MIME-Version: 1.0
-Message-Id: <20260525-tegra194-qspi-iommu-v2-2-a11c53f804b2@gmail.com>
-References: <20260525-tegra194-qspi-iommu-v2-0-a11c53f804b2@gmail.com>
-In-Reply-To: <20260525-tegra194-qspi-iommu-v2-0-a11c53f804b2@gmail.com>
-To: Thierry Reding <thierry.reding@kernel.org>,
- Jonathan Hunter <jonathanh@nvidia.com>,
- Sowjanya Komatineni <skomatineni@nvidia.com>,
- Laxman Dewangan <ldewangan@nvidia.com>, Mark Brown <broonie@kernel.org>,
- Sumit Semwal <sumit.semwal@linaro.org>,
- =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1779691675; l=1118;
- i=webgeek1234@gmail.com; s=20250217; h=from:subject:message-id;
- bh=KjSbPkVlCYH0lmqUb9TdWBRiwbc5n5A4wUaKdi0Q4ak=;
- b=PBjXCsxlPIs64wXAC3rv9Jl/iDRaXY0pG7TZaawi+0P9HpR2fOtGfRnlvlgqjKFs1D5MLuduh
- dV+Gq/kPkXYA63Uajrq8p3bL7jiD7BePTNcpBzrltxNxMjBOVFAbTfp
-X-Developer-Key: i=webgeek1234@gmail.com; a=ed25519;
- pk=TQwd6q26txw7bkK7B8qtI/kcAohZc7bHHGSD7domdrU=
-X-Endpoint-Received: by B4 Relay for webgeek1234@gmail.com/20250217 with
- auth_id=342
-X-Original-From: Aaron Kling <webgeek1234@gmail.com>
-X-Spamd-Bar: --
-X-MailFrom: devnull+webgeek1234.gmail.com@kernel.org
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: SJ5QTICLQPXGBA6BY4PFFBSYE6MN34EP
-X-Message-ID-Hash: SJ5QTICLQPXGBA6BY4PFFBSYE6MN34EP
-X-Mailman-Approved-At: Mon, 25 May 2026 07:00:23 +0000
-CC: linux-tegra@vger.kernel.org, linux-spi@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, devicetree@vger.kernel.org, Aaron Kling <webgeek1234@gmail.com>
+User-Agent: Mozilla Thunderbird
+To: Christoph Hellwig <hch@lst.de>
+References: <cover.1777475843.git.asml.silence@gmail.com>
+ <646ecd6fde8d9e146cb051efb514deb27ce3883e.1777475843.git.asml.silence@gmail.com>
+ <20260513081929.GD5477@lst.de>
+ <24833f76-2289-4859-86d1-9215b11a1258@gmail.com>
+ <20260520083043.GA18893@lst.de>
+Content-Language: en-US
+From: Pavel Begunkov <asml.silence@gmail.com>
+In-Reply-To: <20260520083043.GA18893@lst.de>
+X-Spamd-Bar: ---
+Message-ID-Hash: HDMST2DYFPOZ5XGLHWHEDQPMKFQAU4N2
+X-Message-ID-Hash: HDMST2DYFPOZ5XGLHWHEDQPMKFQAU4N2
+X-MailFrom: asml.silence@gmail.com
+X-Mailman-Rule-Hits: member-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
+CC: Jens Axboe <axboe@kernel.dk>, Keith Busch <kbusch@kernel.org>, Sagi Grimberg <sagi@grimberg.me>, Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Andrew Morton <akpm@linux-foundation.org>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, linux-nvme@lists.infradead.org, linux-fsdevel@vger.kernel.org, io-uring@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Nitesh Shetty <nj.shetty@samsung.com>, Kanchan Joshi <joshi.k@samsung.com>, Anuj Gupta <anuj20.g@samsung.com>, Tushar Gohad <tushar.gohad@intel.com>, William Power <william.power@intel.com>, Phil Cayton <phil.cayton@intel.com>, Jason Gunthorpe <jgg@nvidia.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Reply-To: webgeek1234@gmail.com
-Subject: [Linaro-mm-sig] [PATCH v2 2/2] arm64: tegra: Enable DMA Support on Tegra194 QSPI
+Subject: [Linaro-mm-sig] Re: [PATCH v3 04/10] block: introduce dma map backed bio type
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SJ5QTICLQPXGBA6BY4PFFBSYE6MN34EP/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HDMST2DYFPOZ5XGLHWHEDQPMKFQAU4N2/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [5.49 / 15.00];
-	FREEMAIL_REPLYTO_NEQ_FROM(2.00)[];
-	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
-	R_DKIM_REJECT(1.00)[kernel.org:s=k20201202];
+X-Spamd-Result: default: False [0.59 / 15.00];
+	R_DKIM_REJECT(1.00)[gmail.com:s=20251104];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+	R_SPF_ALLOW(-0.20)[+mx];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,lists.freedesktop.org,lists.linaro.org,gmail.com];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de,webgeek1234.gmail.com];
-	FREEMAIL_REPLYTO(0.00)[gmail.com];
 	RCVD_TLS_LAST(0.00)[];
-	GREYLIST(0.00)[pass,meta];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[18];
-	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	ARC_NA(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCPT_COUNT_TWELVE(0.00)[24];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:-];
-	HAS_REPLYTO(0.00)[webgeek1234@gmail.com];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,dt];
-	NEURAL_SPAM(0.00)[0.495];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[0.50.90.160:email,lists.linaro.org:rdns,lists.linaro.org:helo,0.49.229.112:email]
-X-Rspamd-Queue-Id: 4A6D75C6DA3
+	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-0.980];
+	FROM_NEQ_ENVFROM(0.00)[asmlsilence@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:-];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo]
+X-Rspamd-Queue-Id: E398D5C7255
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-From: Aaron Kling <webgeek1234@gmail.com>
+On 5/20/26 09:30, Christoph Hellwig wrote:
+> On Mon, May 18, 2026 at 11:29:54AM +0100, Pavel Begunkov wrote:
+>>>>    	BIO_ZONE_WRITE_PLUGGING, /* bio handled through zone write plugging */
+>>>>    	BIO_EMULATES_ZONE_APPEND, /* bio emulates a zone append operation */
+>>>> +	BIO_DMABUF_MAP, /* Using premmaped dma buffers */
+>>>
+>>> Shouldn't this be a REQ_ flag as we should never mix and match bios with
+>>> and without this flag in a single request?
+>>
+>> Do you mean adding both and propagating it from bio to req? submit_bio()
+>> takes a bio, so we still need to set it there before it reaches blk-mq.
+>> And there might be bio-based drivers using it in the future.
+> 
+> I think I forgot to reply to this, so let's do this now.
+> 
+> REQ_ is actually used by both bios and requests, so if you set it in
+> bio->bi_opf it will automatically get propagated to the request, but
+> it can also always be tested on the bio, including by bio-based
+> drivers.
 
-Without dma enabled pio mode is used and flash storage such as the one
-on the p3668 module times out and cannot complete any transfers. In some
-cases, these timeouts cause hangs and cbb faults.
-
-Signed-off-by: Aaron Kling <webgeek1234@gmail.com>
----
- arch/arm64/boot/dts/nvidia/tegra194.dtsi | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/arch/arm64/boot/dts/nvidia/tegra194.dtsi b/arch/arm64/boot/dts/nvidia/tegra194.dtsi
-index 1d659454a6f9fe..e2ddbc6715d5e8 100644
---- a/arch/arm64/boot/dts/nvidia/tegra194.dtsi
-+++ b/arch/arm64/boot/dts/nvidia/tegra194.dtsi
-@@ -923,6 +923,8 @@ spi@3270000 {
- 				 <&bpmp TEGRA194_CLK_QSPI0_PM>;
- 			clock-names = "qspi", "qspi_out";
- 			resets = <&bpmp TEGRA194_RESET_QSPI0>;
-+			dmas = <&gpcdma 5>, <&gpcdma 5>;
-+			dma-names = "rx", "tx";
- 			status = "disabled";
- 		};
- 
-@@ -1013,6 +1015,8 @@ spi@3300000 {
- 				 <&bpmp TEGRA194_CLK_QSPI1_PM>;
- 			clock-names = "qspi", "qspi_out";
- 			resets = <&bpmp TEGRA194_RESET_QSPI1>;
-+			dmas = <&gpcdma 6>, <&gpcdma 6>;
-+			dma-names = "rx", "tx";
- 			status = "disabled";
- 		};
- 
+Ah yes, good point, thanks
 
 -- 
-2.53.0
-
+Pavel Begunkov
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
