@@ -2,45 +2,45 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mGk2DpLzE2puHwcAu9opvQ
+	id ANcOEKbzE2puHwcAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 25 May 2026 09:00:34 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 25 May 2026 09:00:54 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id A3F375C6D92
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 25 May 2026 09:00:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4A6D75C6DA3
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 25 May 2026 09:00:53 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0A42F404F4
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 25 May 2026 07:00:32 +0000 (UTC)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
-	by lists.linaro.org (Postfix) with ESMTPS id 1ED613F821
+	by lists.linaro.org (Postfix) with ESMTP id 5B6913F821
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 25 May 2026 07:00:52 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+	by lists.linaro.org (Postfix) with ESMTPS id 375DB3F8E7
 	for <linaro-mm-sig@lists.linaro.org>; Mon, 25 May 2026 06:47:57 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=HF+datPj;
-	spf=pass (lists.linaro.org: domain of devnull+webgeek1234.gmail.com@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=devnull+webgeek1234.gmail.com@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=RRBlGGd9;
+	spf=pass (lists.linaro.org: domain of devnull+webgeek1234.gmail.com@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=devnull+webgeek1234.gmail.com@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by tor.source.kernel.org (Postfix) with ESMTP id AADEE60202;
+	by sea.source.kernel.org (Postfix) with ESMTP id 8F9B140279;
 	Mon, 25 May 2026 06:47:56 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 4A78CC2BCB3;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 57C58C2BCC7;
 	Mon, 25 May 2026 06:47:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1779691676;
-	bh=8IJtxE6ig879Om2zQsEpoJwAJxcysV9GjhnS8w61yPE=;
+	bh=rQtWtz9PaBC5kO/YmeSFs1AL2c5xXsa62gy6hOf0BC4=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=HF+datPjSxS3b5PgXXMxnBM3jF1xWKk0kHemKUPIm88QAyU9IAWOkfPI9J9R95SZj
-	 s3Zl5r4c81sCZSo2+5U+nW314g55ayDxkiXF3ayYbKCuC95Q+u4eVeCTxbEP7tcqGI
-	 Zvf2ofIZGsg15dBfZy6UG73yczAqk6eSCqj+0C9B0nxTTNJURM0NsuPNDgxHkUtKkW
-	 EKly34hSsZZVV7xJcJAnYyqPgsUa+K1O12dbQvZMZadaWSuNTWRbs6uHZTa33ZP2Z/
-	 Kn5EaXABwXKKbDRs4fI5lKnTpPqFmfiX7Em76/pRm8bisQNyEss4CFj4+ZOTVTwQZ6
-	 BQ2hjHDTAWFrQ==
+	b=RRBlGGd926Pbz+gVLIdJH4aGYLYZwwKI7u8T3BTGNle1QfFTLqka6n4G2dsp7L8mx
+	 hpZsA4p28dw687ygsK42fuR/qdNpFMO44tD9Uiyp4+hk0JDUcK7tToDVkEYlXo1H1Z
+	 RXrruj6o07PvEGWpLeCuJsK4MDUubpcIXQttrQsjcl6+nUSq+YHtM/U4lcXv2sfBax
+	 GLhYtvvvhMTdPL2PuB2fpVDgnohZ1FXbVuP12iuHwSbhLyWXJDSKprrxH7yYfY7RVr
+	 VMRNo9ZtBAdFejzhKSoSUPKTe4GZ1HUM4aO5aD3PSnKS+G9/LTAbgXt1A3ZFerT5LV
+	 nOJ6iNGfTNQ9w==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3696ACD5BBF;
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 44221CD5BCE;
 	Mon, 25 May 2026 06:47:56 +0000 (UTC)
 From: Aaron Kling via B4 Relay <devnull+webgeek1234.gmail.com@kernel.org>
-Date: Mon, 25 May 2026 01:47:44 -0500
+Date: Mon, 25 May 2026 01:47:45 -0500
 MIME-Version: 1.0
-Message-Id: <20260525-tegra194-qspi-iommu-v2-1-a11c53f804b2@gmail.com>
+Message-Id: <20260525-tegra194-qspi-iommu-v2-2-a11c53f804b2@gmail.com>
 References: <20260525-tegra194-qspi-iommu-v2-0-a11c53f804b2@gmail.com>
 In-Reply-To: <20260525-tegra194-qspi-iommu-v2-0-a11c53f804b2@gmail.com>
 To: Thierry Reding <thierry.reding@kernel.org>,
@@ -52,30 +52,30 @@ To: Thierry Reding <thierry.reding@kernel.org>,
  Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
  Conor Dooley <conor+dt@kernel.org>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1779691675; l=4772;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1779691675; l=1118;
  i=webgeek1234@gmail.com; s=20250217; h=from:subject:message-id;
- bh=l7YzDxh5xjjzC7rsRABKlUS2hzABVlzgeHIZyzIWkrM=;
- b=1CpmXZNayhDytsA6U5Qt3+xyw/X7Eb6AGh0QR7nvO2tUVzPwtmzzzjdw398yo30DQVIpDEIyd
- bl3Q0/WH8EFCpg1Oe/n3LOBMq4SK7Mpln8fxiexCXagp6RW6EfEmPtX
+ bh=KjSbPkVlCYH0lmqUb9TdWBRiwbc5n5A4wUaKdi0Q4ak=;
+ b=PBjXCsxlPIs64wXAC3rv9Jl/iDRaXY0pG7TZaawi+0P9HpR2fOtGfRnlvlgqjKFs1D5MLuduh
+ dV+Gq/kPkXYA63Uajrq8p3bL7jiD7BePTNcpBzrltxNxMjBOVFAbTfp
 X-Developer-Key: i=webgeek1234@gmail.com; a=ed25519;
  pk=TQwd6q26txw7bkK7B8qtI/kcAohZc7bHHGSD7domdrU=
 X-Endpoint-Received: by B4 Relay for webgeek1234@gmail.com/20250217 with
  auth_id=342
 X-Original-From: Aaron Kling <webgeek1234@gmail.com>
-X-Spamd-Bar: -
+X-Spamd-Bar: --
 X-MailFrom: devnull+webgeek1234.gmail.com@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: DZQ5UIWHXBEGI3UPFF7SNHINASYCLIDQ
-X-Message-ID-Hash: DZQ5UIWHXBEGI3UPFF7SNHINASYCLIDQ
-X-Mailman-Approved-At: Mon, 25 May 2026 07:00:22 +0000
-CC: linux-tegra@vger.kernel.org, linux-spi@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, devicetree@vger.kernel.org, Thierry Reding <treding@nvidia.com>, Aaron Kling <webgeek1234@gmail.com>
+Message-ID-Hash: SJ5QTICLQPXGBA6BY4PFFBSYE6MN34EP
+X-Message-ID-Hash: SJ5QTICLQPXGBA6BY4PFFBSYE6MN34EP
+X-Mailman-Approved-At: Mon, 25 May 2026 07:00:23 +0000
+CC: linux-tegra@vger.kernel.org, linux-spi@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, devicetree@vger.kernel.org, Aaron Kling <webgeek1234@gmail.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
 Reply-To: webgeek1234@gmail.com
-Subject: [Linaro-mm-sig] [PATCH v2 1/2] spi: tegra210-quad: Allocate DMA memory for DMA engine
+Subject: [Linaro-mm-sig] [PATCH v2 2/2] arm64: tegra: Enable DMA Support on Tegra194 QSPI
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DZQ5UIWHXBEGI3UPFF7SNHINASYCLIDQ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SJ5QTICLQPXGBA6BY4PFFBSYE6MN34EP/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -93,13 +93,13 @@ X-Spamd-Result: default: False [5.49 / 15.00];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,lists.freedesktop.org,lists.linaro.org,nvidia.com,gmail.com];
+	FREEMAIL_CC(0.00)[vger.kernel.org,lists.freedesktop.org,lists.linaro.org,gmail.com];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de,webgeek1234.gmail.com];
 	FREEMAIL_REPLYTO(0.00)[gmail.com];
 	RCVD_TLS_LAST(0.00)[];
 	GREYLIST(0.00)[pass,meta];
 	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[19];
+	RCPT_COUNT_TWELVE(0.00)[18];
 	TO_DN_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
@@ -110,135 +110,48 @@ X-Spamd-Result: default: False [5.49 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig,dt];
-	NEURAL_SPAM(0.00)[0.530];
+	NEURAL_SPAM(0.00)[0.495];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,lists.linaro.org:rdns,lists.linaro.org:helo,linaro.org:email]
-X-Rspamd-Queue-Id: A3F375C6D92
+	DBL_BLOCKED_OPENRESOLVER(0.00)[0.50.90.160:email,lists.linaro.org:rdns,lists.linaro.org:helo,0.49.229.112:email]
+X-Rspamd-Queue-Id: 4A6D75C6DA3
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 From: Aaron Kling <webgeek1234@gmail.com>
 
-When the SPI controllers are running in DMA mode, it is the DMA engine
-that performs the memory accesses rather than the SPI controller. Pass
-the DMA engine's struct device pointer to the DMA API to make sure the
-correct DMA operations are used.
+Without dma enabled pio mode is used and flash storage such as the one
+on the p3668 module times out and cannot complete any transfers. In some
+cases, these timeouts cause hangs and cbb faults.
 
-Suggested-by: Thierry Reding <treding@nvidia.com>
 Signed-off-by: Aaron Kling <webgeek1234@gmail.com>
 ---
- drivers/spi/spi-tegra210-quad.c | 29 ++++++++++++++++++-----------
- 1 file changed, 18 insertions(+), 11 deletions(-)
+ arch/arm64/boot/dts/nvidia/tegra194.dtsi | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/drivers/spi/spi-tegra210-quad.c b/drivers/spi/spi-tegra210-quad.c
-index db28dd556484b2..588a929a97850a 100644
---- a/drivers/spi/spi-tegra210-quad.c
-+++ b/drivers/spi/spi-tegra210-quad.c
-@@ -226,11 +226,13 @@ struct tegra_qspi {
- 	struct completion			xfer_completion;
- 	struct spi_transfer			*curr_xfer;
+diff --git a/arch/arm64/boot/dts/nvidia/tegra194.dtsi b/arch/arm64/boot/dts/nvidia/tegra194.dtsi
+index 1d659454a6f9fe..e2ddbc6715d5e8 100644
+--- a/arch/arm64/boot/dts/nvidia/tegra194.dtsi
++++ b/arch/arm64/boot/dts/nvidia/tegra194.dtsi
+@@ -923,6 +923,8 @@ spi@3270000 {
+ 				 <&bpmp TEGRA194_CLK_QSPI0_PM>;
+ 			clock-names = "qspi", "qspi_out";
+ 			resets = <&bpmp TEGRA194_RESET_QSPI0>;
++			dmas = <&gpcdma 5>, <&gpcdma 5>;
++			dma-names = "rx", "tx";
+ 			status = "disabled";
+ 		};
  
-+	struct device				*rx_dma_dev;
- 	struct dma_chan				*rx_dma_chan;
- 	u32					*rx_dma_buf;
- 	dma_addr_t				rx_dma_phys;
- 	struct dma_async_tx_descriptor		*rx_dma_desc;
+@@ -1013,6 +1015,8 @@ spi@3300000 {
+ 				 <&bpmp TEGRA194_CLK_QSPI1_PM>;
+ 			clock-names = "qspi", "qspi_out";
+ 			resets = <&bpmp TEGRA194_RESET_QSPI1>;
++			dmas = <&gpcdma 6>, <&gpcdma 6>;
++			dma-names = "rx", "tx";
+ 			status = "disabled";
+ 		};
  
-+	struct device				*tx_dma_dev;
- 	struct dma_chan				*tx_dma_chan;
- 	u32					*tx_dma_buf;
- 	dma_addr_t				tx_dma_phys;
-@@ -574,15 +576,15 @@ static int tegra_qspi_dma_map_xfer(struct tegra_qspi *tqspi, struct spi_transfer
- 	len = DIV_ROUND_UP(tqspi->curr_dma_words * tqspi->bytes_per_word, 4) * 4;
- 
- 	if (t->tx_buf) {
--		t->tx_dma = dma_map_single(tqspi->dev, (void *)tx_buf, len, DMA_TO_DEVICE);
--		if (dma_mapping_error(tqspi->dev, t->tx_dma))
-+		t->tx_dma = dma_map_single(tqspi->tx_dma_dev, (void *)tx_buf, len, DMA_TO_DEVICE);
-+		if (dma_mapping_error(tqspi->tx_dma_dev, t->tx_dma))
- 			return -ENOMEM;
- 	}
- 
- 	if (t->rx_buf) {
--		t->rx_dma = dma_map_single(tqspi->dev, (void *)rx_buf, len, DMA_FROM_DEVICE);
--		if (dma_mapping_error(tqspi->dev, t->rx_dma)) {
--			dma_unmap_single(tqspi->dev, t->tx_dma, len, DMA_TO_DEVICE);
-+		t->rx_dma = dma_map_single(tqspi->rx_dma_dev, (void *)rx_buf, len, DMA_FROM_DEVICE);
-+		if (dma_mapping_error(tqspi->rx_dma_dev, t->rx_dma)) {
-+			dma_unmap_single(tqspi->tx_dma_dev, t->tx_dma, len, DMA_TO_DEVICE);
- 			return -ENOMEM;
- 		}
- 	}
-@@ -597,9 +599,9 @@ static void tegra_qspi_dma_unmap_xfer(struct tegra_qspi *tqspi, struct spi_trans
- 	len = DIV_ROUND_UP(tqspi->curr_dma_words * tqspi->bytes_per_word, 4) * 4;
- 
- 	if (t->tx_buf)
--		dma_unmap_single(tqspi->dev, t->tx_dma, len, DMA_TO_DEVICE);
-+		dma_unmap_single(tqspi->tx_dma_dev, t->tx_dma, len, DMA_TO_DEVICE);
- 	if (t->rx_buf)
--		dma_unmap_single(tqspi->dev, t->rx_dma, len, DMA_FROM_DEVICE);
-+		dma_unmap_single(tqspi->rx_dma_dev, t->rx_dma, len, DMA_FROM_DEVICE);
- }
- 
- static int tegra_qspi_start_dma_based_transfer(struct tegra_qspi *tqspi, struct spi_transfer *t)
-@@ -745,7 +747,7 @@ static int tegra_qspi_start_cpu_based_transfer(struct tegra_qspi *qspi, struct s
- static void tegra_qspi_deinit_dma(struct tegra_qspi *tqspi)
- {
- 	if (tqspi->tx_dma_buf) {
--		dma_free_coherent(tqspi->dev, tqspi->dma_buf_size,
-+		dma_free_coherent(tqspi->tx_dma_dev, tqspi->dma_buf_size,
- 				  tqspi->tx_dma_buf, tqspi->tx_dma_phys);
- 		tqspi->tx_dma_buf = NULL;
- 	}
-@@ -756,7 +758,7 @@ static void tegra_qspi_deinit_dma(struct tegra_qspi *tqspi)
- 	}
- 
- 	if (tqspi->rx_dma_buf) {
--		dma_free_coherent(tqspi->dev, tqspi->dma_buf_size,
-+		dma_free_coherent(tqspi->rx_dma_dev, tqspi->dma_buf_size,
- 				  tqspi->rx_dma_buf, tqspi->rx_dma_phys);
- 		tqspi->rx_dma_buf = NULL;
- 	}
-@@ -782,6 +784,7 @@ static int tegra_qspi_init_dma(struct tegra_qspi *tqspi)
- 		}
- 
- 		tqspi->rx_dma_chan = dma_chan;
-+		tqspi->rx_dma_dev = dmaengine_get_dma_device(tqspi->rx_dma_chan);
- 
- 		dma_chan = dma_request_chan(tqspi->dev, "tx");
- 		if (IS_ERR(dma_chan)) {
-@@ -790,15 +793,19 @@ static int tegra_qspi_init_dma(struct tegra_qspi *tqspi)
- 		}
- 
- 		tqspi->tx_dma_chan = dma_chan;
-+		tqspi->tx_dma_dev = dmaengine_get_dma_device(tqspi->tx_dma_chan);
- 	} else {
- 		if (!device_iommu_mapped(tqspi->dev)) {
- 			dev_warn(tqspi->dev,
- 				 "IOMMU not enabled in device-tree, falling back to PIO mode\n");
- 			return 0;
- 		}
-+
-+		tqspi->rx_dma_dev = tqspi->dev;
-+		tqspi->tx_dma_dev = tqspi->dev;
- 	}
- 
--	dma_buf = dma_alloc_coherent(tqspi->dev, tqspi->dma_buf_size, &dma_phys, GFP_KERNEL);
-+	dma_buf = dma_alloc_coherent(tqspi->rx_dma_dev, tqspi->dma_buf_size, &dma_phys, GFP_KERNEL);
- 	if (!dma_buf) {
- 		err = -ENOMEM;
- 		goto err_out;
-@@ -807,7 +814,7 @@ static int tegra_qspi_init_dma(struct tegra_qspi *tqspi)
- 	tqspi->rx_dma_buf = dma_buf;
- 	tqspi->rx_dma_phys = dma_phys;
- 
--	dma_buf = dma_alloc_coherent(tqspi->dev, tqspi->dma_buf_size, &dma_phys, GFP_KERNEL);
-+	dma_buf = dma_alloc_coherent(tqspi->tx_dma_dev, tqspi->dma_buf_size, &dma_phys, GFP_KERNEL);
- 	if (!dma_buf) {
- 		err = -ENOMEM;
- 		goto err_out;
 
 -- 
 2.53.0
