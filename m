@@ -2,111 +2,88 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WDZPO3NmHmoNjAkAu9opvQ
+	id gGZ0MZ+RFWovWgcAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 02 Jun 2026 07:13:23 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 26 May 2026 14:27:11 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C542628750
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 02 Jun 2026 07:13:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4EAA95D5840
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 26 May 2026 14:27:10 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B5FB240985
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  2 Jun 2026 05:13:21 +0000 (UTC)
-Received: from BL2PR02CU003.outbound.protection.outlook.com (mail-eastusazon11011029.outbound.protection.outlook.com [52.101.52.29])
-	by lists.linaro.org (Postfix) with ESMTPS id 5B9363F781
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 26 May 2026 11:10:58 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3CCBE406B4
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 26 May 2026 12:27:09 +0000 (UTC)
+Received: from mail-qk1-f182.google.com (mail-qk1-f182.google.com [209.85.222.182])
+	by lists.linaro.org (Postfix) with ESMTPS id 8FFD03F81E
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 26 May 2026 12:26:58 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=amd.com header.s=selector1 header.b=5JC0cr7n;
-	arc=reject ("signature check failed: fail, {[1] = sig:microsoft.com:reject}");
-	spf=pass (lists.linaro.org: domain of Ankit.Soni@amd.com designates 52.101.52.29 as permitted sender) smtp.mailfrom=Ankit.Soni@amd.com;
-	dmarc=pass (policy=quarantine) header.from=amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=dH9Bz+uA595Qz5H7jO6hqc9odfa5tjWuct0/kSoi5YjvV6rQ7dX7Gx1+tn8/qzT4RJM5GlmXx+XCh/ZTxPHyNAe7ACzWYwHSIdTIYbxxxl3GGlxfFh3yxrOVw8Vt2eDHc9AWvkQudu8dILxSK+icB2/gdb7dE5cIYx80KrcLjis57SAuMC9MjSIK9/Aze0xDsqHg8pzO/fo3rIs+RZYZxwhXa2xC7u1OIKrPYu4MPVUU+miF5aEf+RM/0ZXbojgavdUSDhx6mhwApYtjFzj9hyjOFTnQNGtB0RuExRoHAkmbDAdtSHltV65UHY/LaLCK1y8ODYWPYjcahmJXgpIP1g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=F1CWIZ0zkWf3sFhGIgbqhLQceLgewneqANZycTMMRvc=;
- b=C0Tbpf2RGmrsQh2jVrE1/dj2h8xOElrchhdrEYEBCbXZsytsRrkENoeA0JF67IXveR6wkAbfkah0L9q8zhv1fBpaHuu5qfMEDO4ILG6VXnLbYARQW9bz5SAWbgT+nj85fdnXse5BwYwYz0uJXxPJZDwtVQQptKnwd9nhHHBBdeqAyrpJ44+LBPQGMWC3hj3ZVDc18a3qs9fw4ddPLb7OxxwmeDkkLb7edDlMvtFnC81h/eOZf9/sAtxINxFHUybii6qcM+geRrMD/aiGhEj77Orix0HSqYL9x3BRfsDd8eX4gD7ZMmifoYpjRJHozIFqvOzvMr4ig2ldQ+KsCcoELA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=ziepe.ca smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=F1CWIZ0zkWf3sFhGIgbqhLQceLgewneqANZycTMMRvc=;
- b=5JC0cr7nWIZ9OoiEXPmx2R1UFfgjGE5+NFKCnFxB7V0i7oPnTtSUyFl5PBMczD4gcAmC4vrJ10btaO1vctbspVpLTXGXsSiXS8UnI1/5/oOSkmP8lNBAYIB7O9vGmZP+w0wRYTYW80JLBWMJ0ZNhDK756a6LOAaWi8BmmfHM+VQ=
-Received: from CH0PR04CA0053.namprd04.prod.outlook.com (2603:10b6:610:77::28)
- by IA1PR12MB8406.namprd12.prod.outlook.com (2603:10b6:208:3da::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.12; Tue, 26 May
- 2026 11:10:53 +0000
-Received: from CH1PEPF0000AD74.namprd04.prod.outlook.com
- (2603:10b6:610:77:cafe::3d) by CH0PR04CA0053.outlook.office365.com
- (2603:10b6:610:77::28) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.71.11 via Frontend Transport; Tue, 26
- May 2026 11:10:53 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Received: from satlexmb07.amd.com (165.204.84.17) by
- CH1PEPF0000AD74.mail.protection.outlook.com (10.167.244.52) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.71.7 via Frontend Transport; Tue, 26 May 2026 11:10:53 +0000
-Received: from BLRANKISONI.amd.com (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Tue, 26 May
- 2026 06:10:48 -0500
-From: Ankit Soni <Ankit.Soni@amd.com>
-To: Jason Gunthorpe <jgg@ziepe.ca>, Kevin Tian <kevin.tian@intel.com>
-Date: Tue, 26 May 2026 11:10:34 +0000
-Message-ID: <20260526111034.4079-1-Ankit.Soni@amd.com>
-X-Mailer: git-send-email 2.43.0
+	dkim=pass header.d=ziepe.ca header.s=google header.b=fJFHHKNO;
+	spf=pass (lists.linaro.org: domain of jgg@ziepe.ca designates 209.85.222.182 as permitted sender) smtp.mailfrom=jgg@ziepe.ca;
+	dmarc=none
+Received: by mail-qk1-f182.google.com with SMTP id af79cd13be357-91066394ef8so813609485a.1
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 26 May 2026 05:26:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ziepe.ca; s=google; t=1779798418; x=1780403218; darn=lists.linaro.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=QQVPF5z8tEWy9hSyAGSwHCVBtb21IOuG2HFA7xrSBPI=;
+        b=fJFHHKNOs4yh5VJ2xcaavrSX1jTYcQ0axnEG4DYPZrUtY7qdDWP37dVQDwDS7Sqocu
+         TPESFXlVFZwLPynFQMWhBVWBjubPKvJQd11lhX6lJMedHl+kHhm5+/hGtWJkZ5sX5Hy/
+         EXwRFjpANlAz9lywdNVVsFiJlLRct2yP3brk50N1OQgfDsB/cCpcz90wqAGN3EorbcrP
+         87ATTaegZ5WORk+O/iXHQ+2kN3bJ5tCJ/NtTTz6r5ypduuVbo9BrsH3zTUDn5kiEKBdE
+         I/AKTpzZE1iUrnxQpfau1n0RMEthA+64dELfR1XZggjZd1IKp3QJjnIFlZlsxXyN1ZsZ
+         gbqQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1779798418; x=1780403218;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=QQVPF5z8tEWy9hSyAGSwHCVBtb21IOuG2HFA7xrSBPI=;
+        b=riYHeL2XCjj6GAnyUrMQqkCtojdHasHDS4oh+xkbFwiX5IqHPsfO57GV9WxYPD5CtP
+         ArULT/yE4huBIWS62cqa/TcsjFruu98elB9ixfxMcJ8uQCLuVpJ8l7BPq9yOqepbtzAT
+         2Po50NbTKj17OEVWPi4LzBO8i8e0W7guduoxsWtOV7hU/ruWwWM9d0Qq/FK77L8zdJMO
+         cizYSYlQnx9imghF8JB3XqEKRAwF/Sm8VFVI58jTFfQ4sR7iOYqUECmXfgv5aVocVlHF
+         UvbnDSvdn5eNTjD0X9aNLBGURylkNpCSFIZmeFAAn/iSYNmm8pcrf2ejxXrK27+G0aJG
+         p+Pw==
+X-Forwarded-Encrypted: i=1; AFNElJ8OTjXUJFyK4nwIbOvo9iqTLg7k3w6MsfGsGnyTDWQgs1VG218ICXYC8O0aeWEBwhB68GaE1lndJva2Z3sv@lists.linaro.org
+X-Gm-Message-State: AOJu0YyVSlEimGlMbaupiOnU3dahtpPKCNKw5BmXrgPANBrrdpW9LzYN
+	Iu01I8J8ixdteVI4ack1xbUZ1RbQthqQ1WzsyAESwcIKZGpqfEnyOcyWWxHykIur3JM=
+X-Gm-Gg: Acq92OG7ctBCXrf1VZcuF9mZCfCbMx4SJXOGKSH93cD3z1TxM8jn6JXNjv21INYziHt
+	JM0WyaB8QQi/D7Hw6ZgfSmOE5GqiPN6H7EKjZonE6Y9so7Se3EnimJn1QOkdbaAhdt3hmHq6JqM
+	tHMpV6eSHuoa/X9gUoaYAN+INuc2mx0suYN0rpa1FnUdpsJqZ+SNAmAThHcFrUZIDMtPwAXMZNx
+	3b3gE/vM+te0PAEnTsKTi+AmWv8GX/Y7KoKFUs0zJJmwKmIpTS7denYsJYHZl2txmby4+8rlqhy
+	6GvpzYb0ZlIsTh+9z0G7etyDurqDCpli3ke3tdBnsuGliQ627DWXswXmhGAF4K7cuBsiuy4X8j+
+	gASp96KtgTyicnsXR9AYwz+E+lQoPaSh68kvXKPUyU95ALKD8uengf9iVaFhwAX8vRJU6qT1CWw
+	M5vubKKpoouz9T6omN5t0AUc61T0dXYZWaevlkJq6k0BWnkcJsE04U0NQrdvBmZqpb85yKbPdAj
+	zAKdlyzSxTd+BJV
+X-Received: by 2002:a05:620a:29d5:b0:914:c7b6:e29c with SMTP id af79cd13be357-914c7b6e6a4mr1836526485a.56.1779798418003;
+        Tue, 26 May 2026 05:26:58 -0700 (PDT)
+Received: from ziepe.ca (crbknf0213w-47-54-130-67.pppoe-dynamic.high-speed.nl.bellaliant.net. [47.54.130.67])
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-914f8801390sm215458285a.36.2026.05.26.05.26.57
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 26 May 2026 05:26:57 -0700 (PDT)
+Received: from jgg by wakko with local (Exim 4.97)
+	(envelope-from <jgg@ziepe.ca>)
+	id 1wRqs4-0000000DONN-3pnp;
+	Tue, 26 May 2026 09:26:56 -0300
+Date: Tue, 26 May 2026 09:26:56 -0300
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Ankit Soni <Ankit.Soni@amd.com>
+Message-ID: <20260526122656.GE2487554@ziepe.ca>
+References: <20260526111034.4079-1-Ankit.Soni@amd.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
- (10.181.42.216)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD74:EE_|IA1PR12MB8406:EE_
-X-MS-Office365-Filtering-Correlation-Id: cd42f7c2-285d-4b67-1f7b-08debb1773de
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|82310400026|7416014|36860700016|376014|1800799024|11063799006|6133799003|56012099003|18002099003;
-X-Microsoft-Antispam-Message-Info: 
-	9zaVwTxhzMJeILH8PVK1Swgflw4C47fpUlETzU8w6D12/1I8o6QQHZvnC9Fj915wB6KbTHrosG9MFve0TnWZsec/pnOLS7Xo1oypBV7X8B+trml9pgtZgmoIK7GL7JmkugPbUjmavFPT8YdJDuvItFTKBm5LzRmW/lDeJFFB6FMgP8CdqJWn+xvIjqHaiUHlWTn7qVCEUoVk9FBZs0zpydft35kC+Moq2Q199P6XA031LKWqf7dtFm8/Uj7a2NYHptpDHwl1XBjwKQMR3vMzSM10wR5Ot0q3aleKkYxx/94znSQ1y7Txbi0DmXCWnnzcTbY0crWp/3ewWX3Lxmiix4XxUP8waiU8+7pK8n9KAfz++bljLgEsMvyTzmEFtCsEmOLrW8pnN4khlXIfRHb3bvuF+bX6aLrdYeY7L49xqCmEYqUHVz58vg4y/Zcin2vm00yehNGThr8LHZKP8QwHzKx7fSGTDWZguRysOvcicAaoMCvB9CUHmARusQBc/NBkyBy0MW5qF2G9856ybMGpwe9PWXV0gTqsw3sxlJHikae3rYe6ceQ69rHjPzujBUQQP4Ooq6jAlJCddW2puy7Q4bKVrHXZFl4p78UfS2kVXTa2E+Ed1UYBgViJ8W7ew4VLoyy5rs4OK57GNJh/S6xmPuegV+ieRBuDp0NTcyOrE1h7zFWijYNiJVBRygTVnYNW+CpX5yL8WAjZGSdSTOsy/GDW51HQuqpeYfTQJuY4izc=
-X-Forefront-Antispam-Report: 
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(7416014)(36860700016)(376014)(1800799024)(11063799006)(6133799003)(56012099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	0iA4HrXmxGS0ykZnl5K6iTE53f/w3I3sn+xYvLG8xaSmQfakBE8Nh4hINpL7RnI7ubRWvNBdApTapf7oF+W1UCCDH04TH4uKClaGILL7+vNV4FCjy8dgIys7p3jcwzgPGzo6mloQOV57vfbIV5UgcEIwUES3fEbDZjnomtzg/hIl02dTgW9gzlnAMq9XuW+GoVenR1KCVw76pj8AsQxmabv1Kxn584x6iXvs5UlKrNHaDmvOPUYucgBvi18ZNVxZV3EjXQByLGmPlFk9SCgnZ59oicCm9/koJQm7daIAC2MlDj8R41gVJK/F4bMfvAZvapF8u527Al8Pp6ZkKd6gEu+wOY9AlQubIvJ3R0TxZ6LP7vejt1kRyhv05hXNqUzg+i0JaNpMmiEukcd8ZTuJ+BnIN8dHC3gdf7YvjXhlodZD7eGu5ghb95Q0Ns8oCauk
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 May 2026 11:10:53.5228
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: cd42f7c2-285d-4b67-1f7b-08debb1773de
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	CH1PEPF0000AD74.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB8406
-X-Spamd-Bar: -
-X-MailFrom: Ankit.Soni@amd.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 3EIYMM7IAXE4G6TCEMTB4CDHCQ4Y3OC4
-X-Message-ID-Hash: 3EIYMM7IAXE4G6TCEMTB4CDHCQ4Y3OC4
-X-Mailman-Approved-At: Tue, 02 Jun 2026 05:13:09 +0000
-CC: Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Leon Romanovsky <leon@kernel.org>, Vasant Hegde <vasant.hegde@amd.com>, iommu@lists.linux.dev, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org, linux-kernel@vger.kernel.org, Ankit Soni <Ankit.Soni@amd.com>
+Content-Disposition: inline
+In-Reply-To: <20260526111034.4079-1-Ankit.Soni@amd.com>
+X-Spamd-Bar: ---
+Message-ID-Hash: MSP3OQ5HJQJXDSXCVW33ESJLJ2TQ7XF7
+X-Message-ID-Hash: MSP3OQ5HJQJXDSXCVW33ESJLJ2TQ7XF7
+X-MailFrom: jgg@ziepe.ca
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Kevin Tian <kevin.tian@intel.com>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Leon Romanovsky <leon@kernel.org>, Vasant Hegde <vasant.hegde@amd.com>, iommu@lists.linux.dev, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org, linux-kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH] iommufd: take dma_resv lock before dma_buf_unpin() in release path
+Subject: [Linaro-mm-sig] Re: [PATCH] iommufd: take dma_resv lock before dma_buf_unpin() in release path
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3EIYMM7IAXE4G6TCEMTB4CDHCQ4Y3OC4/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MSP3OQ5HJQJXDSXCVW33ESJLJ2TQ7XF7/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -115,96 +92,55 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [4.99 / 15.00];
-	DMARC_POLICY_QUARANTINE(1.50)[amd.com : SPF not aligned (relaxed),quarantine];
-	R_DKIM_REJECT(1.00)[amd.com:s=selector1];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
-	MID_CONTAINS_FROM(1.00)[];
-	DATE_IN_PAST(1.00)[162];
-	R_SPF_ALLOW(-0.20)[+mx];
+X-Spamd-Result: default: False [0.49 / 15.00];
+	R_DKIM_REJECT(1.00)[ziepe.ca:s=google];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	FROM_HAS_DN(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	GREYLIST(0.00)[pass,meta];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	SUSPICIOUS_AUTH_ORIGIN(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[15];
+	ARC_NA(0.00)[];
+	DKIM_TRACE(0.00)[ziepe.ca:-];
+	DMARC_NA(0.00)[ziepe.ca];
 	MIME_TRACE(0.00)[0:+];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[amd.com:-];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	FROM_NEQ_ENVFROM(0.00)[Ankit.Soni@amd.com,linaro-mm-sig-bounces@lists.linaro.org];
-	TO_DN_SOME(0.00)[];
-	HAS_XOIP(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	NEURAL_HAM(-0.00)[-0.660];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[amd.com:mid,amd.com:email]
-X-Rspamd-Queue-Id: 7C542628750
+	RCPT_COUNT_TWELVE(0.00)[14];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[jgg@ziepe.ca,linaro-mm-sig-bounces@lists.linaro.org];
+	MISSING_XM_UA(0.00)[];
+	NEURAL_HAM(-0.00)[-0.977];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TO_DN_SOME(0.00)[]
+X-Rspamd-Queue-Id: 4EAA95D5840
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-dma_buf_unpin() requires the caller to hold the exporter's dma_resv
-lock:
+On Tue, May 26, 2026 at 11:10:34AM +0000, Ankit Soni wrote:
+> dma_buf_unpin() requires the caller to hold the exporter's dma_resv
+> lock:
+> 
+>   void dma_buf_unpin(struct dma_buf_attachment *attach)
+>   {
+>           ...
+>           dma_resv_assert_held(dmabuf->resv);
+>           ...
+>   }
+> 
+> iopt_release_pages() calls dma_buf_unpin() without taking that lock,
+> so every iommufd_ioas_destroy()/iommufd_ioas_unmap() that releases
+> the last reference on a DMABUF-backed iopt_pages triggers a WARN.
+> This was hit while running tools/testing/selftests/iommu/iommufd:
 
-  void dma_buf_unpin(struct dma_buf_attachment *attach)
-  {
-          ...
-          dma_resv_assert_held(dmabuf->resv);
-          ...
-  }
+Any idea why this is comming up now? Did I run the tests without some
+kind of debug option to turn on that assertion maybe?
 
-iopt_release_pages() calls dma_buf_unpin() without taking that lock,
-so every iommufd_ioas_destroy()/iommufd_ioas_unmap() that releases
-the last reference on a DMABUF-backed iopt_pages triggers a WARN.
-This was hit while running tools/testing/selftests/iommu/iommufd:
-
-  WARNING: drivers/dma-buf/dma-buf.c:1137 at dma_buf_unpin+0x62/0x70
-  RIP: 0010:dma_buf_unpin+0x62/0x70
-  Call Trace:
-   <TASK>
-   dma_buf_unpin+0x62/0x70
-   iopt_release_pages+0xe4/0x190
-   iopt_unmap_iova_range+0x1c7/0x290
-   iopt_unmap_all+0x1a/0x30
-   iommufd_ioas_destroy+0x1d/0x50
-   iommufd_fops_release+0x93/0x150
-   __fput+0xfc/0x2c0
-   __x64_sys_close+0x3d/0x80
-   do_syscall_64+0x65/0x180
-   </TASK>
-
-Take the dma_resv lock around dma_buf_unpin() in iopt_release_pages(),
-matching the iopt_map_dmabuf() convention. dma_buf_detach() acquires the
-reservation lock internally, so it must remain outside the locked region.
-
-Fixes: 8c5f9645c389 ("iommufd: Add dma_buf_pin()")
-Reported-by: Ankit Soni <Ankit.Soni@amd.com>
-Signed-off-by: Ankit Soni <Ankit.Soni@amd.com>
----
- drivers/iommu/iommufd/pages.c | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/drivers/iommu/iommufd/pages.c b/drivers/iommu/iommufd/pages.c
-index 9bdb2945afe1..7b64002e54b9 100644
---- a/drivers/iommu/iommufd/pages.c
-+++ b/drivers/iommu/iommufd/pages.c
-@@ -1663,7 +1663,9 @@ void iopt_release_pages(struct kref *kref)
- 	if (iopt_is_dmabuf(pages) && pages->dmabuf.attach) {
- 		struct dma_buf *dmabuf = pages->dmabuf.attach->dmabuf;
- 
-+		dma_resv_lock(dmabuf->resv, NULL);
- 		dma_buf_unpin(pages->dmabuf.attach);
-+		dma_resv_unlock(dmabuf->resv);
- 		dma_buf_detach(dmabuf, pages->dmabuf.attach);
- 		dma_buf_put(dmabuf);
- 		WARN_ON(!list_empty(&pages->dmabuf.tracker));
--- 
-2.43.0
-
+Jason
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
