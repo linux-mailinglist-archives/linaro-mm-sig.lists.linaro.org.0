@@ -2,180 +2,201 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id QGvDDnpmHmoNjAkAu9opvQ
+	id uMUaNYFmHmoNjAkAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 02 Jun 2026 07:13:30 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 02 Jun 2026 07:13:37 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0F3AA628757
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 02 Jun 2026 07:13:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 797B762875E
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 02 Jun 2026 07:13:37 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 1B5974098B
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  2 Jun 2026 05:13:29 +0000 (UTC)
-Received: from SN4PR0501CU005.outbound.protection.outlook.com (mail-southcentralusazon11011004.outbound.protection.outlook.com [40.93.194.4])
-	by lists.linaro.org (Postfix) with ESMTPS id 18C9D3F781
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 26 May 2026 15:35:04 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 8C3C24098D
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  2 Jun 2026 05:13:36 +0000 (UTC)
+Received: from mail-pg1-f202.google.com (mail-pg1-f202.google.com [209.85.215.202])
+	by lists.linaro.org (Postfix) with ESMTPS id 75A703F4B6
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 26 May 2026 17:33:55 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=amd.com header.s=selector1 header.b="uZpGEHk/";
-	arc=reject ("signature check failed: fail, {[1] = sig:microsoft.com:reject}");
-	spf=pass (lists.linaro.org: domain of Ankit.Soni@amd.com designates 40.93.194.4 as permitted sender) smtp.mailfrom=Ankit.Soni@amd.com;
-	dmarc=pass (policy=quarantine) header.from=amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ctGN3i0Piix8ZFVSaUqdr3+ryAjYc/F2Zi9UQBuX1mIm8WDNzDpvkwAHZR3d5f/yXxDTIGTNCESM/+nvgzxQybrtFFz/DhNDTFKpV5aqY/3iV5FOZ+6078TDcTjGcyDaKaxIEEfySGoOZdaKfvyVS3Zyi690dGbPI+kmZsbqJZqOmsSrnEMLkQLv6b0aVu5Suaeug2dF9P6OTvmv7nxuMUwwyx3AqIg1Ak+/ZjT45vfb/ikQ9zeDwP4oXVKq9JflcPMHQkBHyN7wawsyQT57yOUqZ1NDXNUulY0UM1wZGczpxT/6HoHWOMwJ/gJ1jkffSDj+UlW1I/bKmwg2kjkD4g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=AnXHydEtrFn0CxSbJfJ3KbAEucQsxTrKq+pVMDQJQ1g=;
- b=ZMi5GkKgLCEfUxkFUpYIBXfdUpE4hn5Ynh40//oFsyjx3V/tzA8WS6Kx9Xy1KrmR2k0ne8TYaBIlzVQVsyyXNldXQ1F4n4uUHGjJQ9yMXujpx8PxbJx3Rwz50jn34z8ibw5KXjnR1ZEoOYFcdJA/bIuv131UnosXiBneEFELQ4CHx4n6cjXzXYiweBewhtCZffeZEjlKaFoT0RBFxwc1c/0tKScHs6dJk9+WF7x8fiXENd9hKeXH0uWpw02rGXaFd8bGKfgcgIhcBctut6i0CZKeaAucJx5if166L/33T/L+YwEM3bisG91xBVUoftwHBO0OlA7moP+z5gtrsFXHtw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=ziepe.ca smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=AnXHydEtrFn0CxSbJfJ3KbAEucQsxTrKq+pVMDQJQ1g=;
- b=uZpGEHk/vwIc5H5UAj+LHMeaCmNuGSgd9V+huTAkJO7AwmkmGfM4kjFI63sDA+Cf6MdtfM11f6eGv6mhM2NZdRE4yXz27BxUSu6c3UJfAVF/HlwG15Etg+P2khXgZGCWZV+zX2JrTlhbxmXKD7P3Ed53jm252nBETohAe8jmOcY=
-Received: from SJ0PR03CA0101.namprd03.prod.outlook.com (2603:10b6:a03:333::16)
- by PH7PR12MB6419.namprd12.prod.outlook.com (2603:10b6:510:1fd::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.19; Tue, 26 May
- 2026 15:34:56 +0000
-Received: from MWH0EPF000C6190.namprd02.prod.outlook.com
- (2603:10b6:a03:333:cafe::8) by SJ0PR03CA0101.outlook.office365.com
- (2603:10b6:a03:333::16) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.71.11 via Frontend Transport; Tue, 26
- May 2026 15:34:56 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Received: from satlexmb07.amd.com (165.204.84.17) by
- MWH0EPF000C6190.mail.protection.outlook.com (10.167.249.101) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.71.7 via Frontend Transport; Tue, 26 May 2026 15:34:55 +0000
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Tue, 26 May
- 2026 10:34:54 -0500
-Received: from amd.com (10.180.168.240) by satlexmb07.amd.com (10.181.42.216)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41 via Frontend
- Transport; Tue, 26 May 2026 10:34:51 -0500
-Date: Tue, 26 May 2026 15:34:40 +0000
-From: Ankit Soni <Ankit.Soni@amd.com>
-To: Jason Gunthorpe <jgg@ziepe.ca>
-Message-ID: <uwnw7ybrgdobizf6do3ugrxshqhlzsusi34w3aky5hlp3y7wa2@hxmgp5tbpzzc>
-References: <20260526111034.4079-1-Ankit.Soni@amd.com>
- <20260526122656.GE2487554@ziepe.ca>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20260526122656.GE2487554@ziepe.ca>
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MWH0EPF000C6190:EE_|PH7PR12MB6419:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0eb7a452-7b0f-4ca8-2355-08debb3c56a2
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|36860700016|376014|1800799024|7416014|82310400026|22082099003|18002099003|56012099003|4143699003|11063799006|6133799003;
-X-Microsoft-Antispam-Message-Info: 
-	McqmJ5G9IiLfTeBbwMDI3FLoJndmLMZ305FdTGrHYtvXe104OSbvRaqJp8GbwL4f2wKZFe/2LVQdN5im0HjfquOhmE+Ry+ChWbhHzMsYaXBgjexLJnhaB82tZ0WPUptwvzd/3cAmwjnjQDiZ5vSZH4ZAUCG0YJWBi7lBmliMGhKfq5jPemmpWRVf4JjTSkNDZWEdKbNOSKghTB3s+PWAiSIeSJFnkrpdN03GEq7LCKETwpKPMsfTf+KBTYCTFbHYhO00oSvlwtg/RFRDDGSrzdIaZ+HVnvdXz6qoE8s3Ds0gvCSOJobpXemcijVDPttqjZiosTO1tpT5Tq4RYrOaHVSK5HV1VYViALlRjKwMXJogmQ1PPp28NKl37QlCcJkC0GSlnCvhyigQUOIENXpPFjv0JROadSFoZAyGaDEIjxzgKG+ftRNNpg+XYhvK16zea1BRnf9aTJuzdiY/L9ZPv2J6cyUFr9LyTZkql2azZYOM+T0k+7sxhNvVQ3UqMl9t+yI33PPCCLaC6jnJF/4m7QInZFg1p6WBcPscokradHy+BmCyChqALANJTsuXyrmtI68l2puNmJKZrSsWvhuQS0CFhaDU43OXSFo1DFQDGPvUwVS4EEcoDVzB85J8tjqYcZCmhl6L281OJP0ffjoEJtNaENoruFv9t/qZ6m5jdr2WVQbTpvux9BDyEduGKBYDZJ8wuiMczxWtLd1S4GelpFBMuLI7TCaE8KU8t9KfR90=
-X-Forefront-Antispam-Report: 
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(376014)(1800799024)(7416014)(82310400026)(22082099003)(18002099003)(56012099003)(4143699003)(11063799006)(6133799003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	gUaAX7a+2t3qxZY8F8h2uPMW7g4TspUD0kwe/oYHtUO3pgD9m73ZXNZLfjJF1NURGQIIZFu9gjAN+2HaVzraVtsphmCDLSSqD3FQNeehTHme0AQaxghVGnbhvbeKbmTvFV9tcLWDAChXkuVS+UQ/ZW2Lk+PxBcks7tuwelUV3DM1H6Nya49ON4j0OasED6GhZBUFkoNAEBvk5so/lC2Qtz4dJ6Nr3JXL9hLy0xU7UvcsR6xOahbQfV5/rs9lP/cXQDGHpDirWdrIpVNp7p8DTf1Twotw97sHGewKEa9HNAu0me108lIZVlF0CCVX2sQfBWTCkF6HTadQrJhAnl3+k5fB4/h+y8CmWWBladl2ZWDUq61PLO81uHwYlbC6HyEYaMLC5wt4PXqwT2tdy97SZ6AqMztWN6toJgmhhJSCw8WPSbQIixYSmnBypTmIWqtq
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 May 2026 15:34:55.7751
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0eb7a452-7b0f-4ca8-2355-08debb3c56a2
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	MWH0EPF000C6190.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6419
+	dkim=pass header.d=google.com header.s=20251104 header.b=bYnvR+aP;
+	spf=pass (lists.linaro.org: domain of 3gdkVagUKDeITVEERKSSKPI.GSQPMREVS-QQ-WMKPMWXW.PMREVS.SVK@flex--praan.bounces.google.com designates 209.85.215.202 as permitted sender) smtp.mailfrom=3gdkVagUKDeITVEERKSSKPI.GSQPMREVS-QQ-WMKPMWXW.PMREVS.SVK@flex--praan.bounces.google.com;
+	dmarc=pass (policy=reject) header.from=google.com
+Received: by mail-pg1-f202.google.com with SMTP id 41be03b00d2f7-c82751074c8so15642139a12.0
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 26 May 2026 10:33:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20251104; t=1779816833; x=1780421633; darn=lists.linaro.org;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:from:to:cc:subject:date:message-id:reply-to;
+        bh=hcUFNVo2Sgdj71izYX2y2jUTakglUwC/840c4cOGT0g=;
+        b=bYnvR+aPbrpdCPwQHDAz/1xx+5Imze5nuttx9WHmqUC1suW03v2/oqqzEdicHigFBu
+         G97Jd17wNSyVS/QSPEvK70ICU3STzCQ2Do4DOWDXkqTyBp3iT+aRYWYPk5MOL2pS41Cq
+         PfnOIPNOeSqEUTIm/R9fHkLqKRSLjOWL5qtLqXeuCNSRhekM05/irrljCXSAoUvtejto
+         sImNFBe6HSJWb5Xz7PIqX+AG8XvQMjffe7jr6OcyNWILd+G+X/gwonUKVjb2v/Xf9R3U
+         4EEBGpnuKqWobt3J+uIt0XBLA5XBsfqJrgYWy6fHUbKwd163PunGZA5EQl4pp7ctssBS
+         wevg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1779816833; x=1780421633;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=hcUFNVo2Sgdj71izYX2y2jUTakglUwC/840c4cOGT0g=;
+        b=ZB+MPufCDDetVg/zFQnDcGH6uQEkAYFvpkj/ADNYFJF1BYfLIRPXJ8skwnyiraRZIU
+         fxvGeZC7twfzEaMV39lqhmzJUdIud9TBwU5xbKgv8g/yMbWNtCSKS1ii2y9P0dGfEW49
+         Ot8JwIl1DgfHRxXyY/27SezTIzizIfu3Pk4WTim4mOi+NE7STD0Rpw1JhULdtabPTGTZ
+         Zp6bEUme6F7Gy6e/Gu1HKyDQVi9TOeVJ5rYXRE/B/5iI7Rm7PxUJmWBPncD1ZGAsdiuc
+         sVWUTsN4HUzlVrMV/sa27a+xyGpaqQFOahR+95XuvQYUAdIsDWIBXiEfGL+AWVibZQ2M
+         +3GA==
+X-Forwarded-Encrypted: i=1; AFNElJ9+WuGjHlRjCnLRn70PUuPMSxjxHwz6pcSagPE+S5wL/4ZCF57+QFjrgd5FQTqUoUrjsMxTXnhmxskqSyhj@lists.linaro.org
+X-Gm-Message-State: AOJu0YzbyGjGp2qggW4NvJzF7VwEKcNFgYeD9uoO7YG5sBWZ6+1XqgDd
+	A0G+HS7zL52g/N8BkW8BJHqdnnefMKTWVo/MAZwnyNv+TQGph/4g7tN62ek2dtFw+4xOrsU7gNs
+	wGQ==
+X-Received: from pgbfe22.prod.google.com ([2002:a05:6a02:2896:b0:c82:798f:6276])
+ (user=praan job=prod-delivery.src-stubby-dispatcher) by 2002:a05:6a21:3947:b0:398:d6a9:fc9
+ with SMTP id adf61e73a8af0-3b328cb9cffmr19853341637.5.1779816833191; Tue, 26
+ May 2026 10:33:53 -0700 (PDT)
+Date: Tue, 26 May 2026 17:33:50 +0000
+In-Reply-To: <20260511214243.349487-1-xuehaohu@google.com>
+Mime-Version: 1.0
+References: <20260511214243.349487-1-xuehaohu@google.com>
+X-Mailer: git-send-email 2.54.0.746.g67dd491aae-goog
+Message-ID: <20260526173350.2359263-1-praan@google.com>
+From: Pranjal Shrivastava <praan@google.com>
+To: xuehaohu@google.com
 X-Spamd-Bar: --
-X-MailFrom: Ankit.Soni@amd.com
+X-MailFrom: 3gdkVagUKDeITVEERKSSKPI.GSQPMREVS-QQ-WMKPMWXW.PMREVS.SVK@flex--praan.bounces.google.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: B7MGP2WQ6YW5YGOFZCT7L5RVGMIVA5OF
-X-Message-ID-Hash: B7MGP2WQ6YW5YGOFZCT7L5RVGMIVA5OF
+Message-ID-Hash: BLIHS234RZ5MVWAIIZIULY4WOI7NPG2R
+X-Message-ID-Hash: BLIHS234RZ5MVWAIIZIULY4WOI7NPG2R
 X-Mailman-Approved-At: Tue, 02 Jun 2026 05:13:10 +0000
-CC: Kevin Tian <kevin.tian@intel.com>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Leon Romanovsky <leon@kernel.org>, Vasant Hegde <vasant.hegde@amd.com>, iommu@lists.linux.dev, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org, linux-kernel@vger.kernel.org
+CC: sumit.semwal@linaro.org, christian.koenig@amd.com, kevin.tian@intel.com, ankita@nvidia.com, jgg@ziepe.ca, alex@shazbot.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, jmoroni@google.com, Pranjal Shrivastava <praan@google.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] iommufd: take dma_resv lock before dma_buf_unpin() in release path
+Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf: Fix silent overflow for phys vec to sgt
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/B7MGP2WQ6YW5YGOFZCT7L5RVGMIVA5OF/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/BLIHS234RZ5MVWAIIZIULY4WOI7NPG2R/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [4.49 / 15.00];
-	DMARC_POLICY_QUARANTINE(1.50)[amd.com : SPF not aligned (relaxed),quarantine];
-	DATE_IN_PAST(1.00)[157];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
-	R_DKIM_REJECT(1.00)[amd.com:s=selector1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+X-Spamd-Result: default: False [4.99 / 15.00];
+	DMARC_POLICY_REJECT(2.00)[google.com : SPF not aligned (relaxed),reject];
+	R_DKIM_REJECT(1.00)[google.com:s=20251104];
+	MID_CONTAINS_FROM(1.00)[];
+	DATE_IN_PAST(1.00)[155];
+	MV_CASE(0.50)[];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[14];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
 	GREYLIST(0.00)[pass,meta];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[amd.com:-];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.486];
-	FROM_NEQ_ENVFROM(0.00)[Ankit.Soni@amd.com,linaro-mm-sig-bounces@lists.linaro.org];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[13];
+	RCVD_TLS_LAST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[praan@google.com,linaro-mm-sig-bounces@lists.linaro.org];
 	TO_DN_SOME(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	MISSING_XM_UA(0.00)[];
+	NEURAL_HAM(-0.00)[-0.918];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	RCVD_COUNT_SEVEN(0.00)[7]
-X-Rspamd-Queue-Id: 0F3AA628757
+	DKIM_TRACE(0.00)[google.com:-];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[]
+X-Rspamd-Queue-Id: 797B762875E
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Tue, May 26, 2026 at 09:26:56AM -0300, Jason Gunthorpe wrote:
-> On Tue, May 26, 2026 at 11:10:34AM +0000, Ankit Soni wrote:
-> > dma_buf_unpin() requires the caller to hold the exporter's dma_resv
-> > lock:
-> > 
-> >   void dma_buf_unpin(struct dma_buf_attachment *attach)
-> >   {
-> >           ...
-> >           dma_resv_assert_held(dmabuf->resv);
-> >           ...
-> >   }
-> > 
-> > iopt_release_pages() calls dma_buf_unpin() without taking that lock,
-> > so every iommufd_ioas_destroy()/iommufd_ioas_unmap() that releases
-> > the last reference on a DMABUF-backed iopt_pages triggers a WARN.
-> > This was hit while running tools/testing/selftests/iommu/iommufd:
-> 
-> Any idea why this is comming up now? Did I run the tests without some
-> kind of debug option to turn on that assertion maybe?
-> 
-> Jason
+On Mon, May 11, 2026, David Hu wrote:
+> In case MMIO size is bigger than 4G, and peer2peer
+> dma goes through host bridge, we trigger the code
+> path to assign total linked IVOA, greater than 4G
 
-The assertion is gated by CONFIG_LOCKDEP. My config has it on via
-CONFIG_DEBUG_LOCK_ALLOC=y (LOCK_STAT, PROVE_LOCKING and
-DEBUG_WW_MUTEX_SLOWPATH each select-chain to LOCKDEP as well).
+Nit: s/IVOA/IOVA
 
--Ankit
+> to mapped_len, and leading to a silent overflow
+
+> Fixes: 3aa31a8bb11e ("dma-buf: provide phys_vec to scatter-gather mapping routine")
+> Signed-off-by: David Hu <xuehaohu@google.com>
+> ---
+> drivers/dma-buf/dma-buf-mapping.c | 3 ++-
+> 1 file changed, 2 insertions(+), 1 deletion(-)
+
+> diff --git a/drivers/dma-buf/dma-buf-mapping.c b/drivers/dma-buf/dma-buf-mapping.c
+> index 794acff2546a..658064140357 100644
+> --- a/drivers/dma-buf/dma-buf-mapping.c
+> +++ b/drivers/dma-buf/dma-buf-mapping.c
+> @@ -95,7 +95,8 @@ struct sg_table *dma_buf_phys_vec_to_sgt(struct dma_buf_attachment *attach,
+>  					 size_t nr_ranges, size_t size,
+> 					 enum dma_data_direction dir)
+> {
+> -	unsigned int nents, mapped_len = 0;
+> +	unsigned int nents = 0;
+> +	size_t mapped_len = 0;
+> 	struct dma_buf_dma *dma;
+> 	struct scatterlist *sgl;
+> 	dma_addr_t addr;
+
+Minor nit: Let's follow the reverse xmas tree format?
+This looks correct to me, for this change:
+
+Reviewed-by: Pranjal Shrivastava <praan@google.com>
+
+Apart from this, I see similar issues at other places:
+
+  1. In calc_sg_nents(), nents is accumulated as an unsigned int. [1]
+     If nr_ranges is very large, nents could also overflow, potentially
+     leading to a small allocation in sg_alloc_table() and a subsequent
+     out-of-bounds access in the mapping loop. It might be worth changing
+     nents to size_t there and adding a check against UINT_MAX.
+
+   2. In fill_sg_entry(), the loop variable i is an int [2]. Changing
+     it to unsigned int would be more consistent with the nents type
+     and safer for extremely large mappings.
+
+
+Maybe, we should also fix these? For example:
+
+diff --git a/drivers/dma-buf/dma-buf-mapping.c b/drivers/dma-buf/dma-buf-mapping.c
+index 794acff2546a..ecf07ffca2b9 100644
+--- a/drivers/dma-buf/dma-buf-mapping.c
++++ b/drivers/dma-buf/dma-buf-mapping.c
+@@ -10,7 +10,7 @@ static struct scatterlist *fill_sg_entry(struct scatterlist *sgl, size_t length,
+                                         dma_addr_t addr)
+ {
+        unsigned int len, nents;
+-       int i;
++       unsigned int i;
+
+        nents = DIV_ROUND_UP(length, UINT_MAX);
+        for (i = 0; i < nents; i++) {
+@@ -36,7 +36,7 @@ static unsigned int calc_sg_nents(struct dma_iova_state *state,
+                                  struct phys_vec *phys_vec, size_t nr_ranges,
+                                  size_t size)
+ {
+-       unsigned int nents = 0;
++       size_t nents = 0;
+        size_t i;
+
+        if (!state || !dma_use_iova(state)) {
+@@ -51,6 +51,9 @@ static unsigned int calc_sg_nents(struct dma_iova_state *state,
+                nents = DIV_ROUND_UP(size, UINT_MAX);
+        }
+
++       if (nents > UINT_MAX)
++               return 0;
++
+        return nents;
+ }
+
+Thanks,
+Praan
+
+[1] https://elixir.bootlin.com/linux/v7.1-rc3/source/drivers/dma-buf/dma-buf-mapping.c#L39
+[2] https://elixir.bootlin.com/linux/v7.1-rc3/source/drivers/dma-buf/dma-buf-mapping.c#L13
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
