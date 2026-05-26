@@ -2,72 +2,72 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gCCrDs0QFmojhQcAu9opvQ
+	id wO18EdgQFmojhQcAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 26 May 2026 23:29:49 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 26 May 2026 23:30:00 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id D060E5DCBF6
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 26 May 2026 23:29:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DB57A5DCC0B
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 26 May 2026 23:29:59 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9FAEE401E1
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 26 May 2026 21:29:47 +0000 (UTC)
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-	by lists.linaro.org (Postfix) with ESMTPS id 4C249404F4
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 26 May 2026 21:29:26 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E4204406F4
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 26 May 2026 21:29:58 +0000 (UTC)
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+	by lists.linaro.org (Postfix) with ESMTPS id 398984049C
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 26 May 2026 21:29:31 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=Yyu8yARx;
-	spf=pass (lists.linaro.org: domain of lyude@redhat.com designates 170.10.129.124 as permitted sender) smtp.mailfrom=lyude@redhat.com;
+	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b="JThrtMI/";
+	spf=pass (lists.linaro.org: domain of lyude@redhat.com designates 170.10.133.124 as permitted sender) smtp.mailfrom=lyude@redhat.com;
 	dmarc=pass (policy=quarantine) header.from=redhat.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1779830965;
+	s=mimecast20190719; t=1779830970;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=35xOY5UpjGtZddGUxJfTOaK/u/wc0iWDPCGCXs5Om6w=;
-	b=Yyu8yARxPWjjuFUS/EJHg88nAo6KnrdPEqW41sGYr+vZOndCoPgb0EFvqTsBxgOJodSYCV
-	JcPUnkP+Gti2vAiY7nfcBCnukJscmp2sdPOG38ycUEzXLSx9E1ykOb9TVD8E0YPv80wi7U
-	G70GYKERs6Dy2iRsHOMQ9UXGDmII7Ig=
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
+	bh=dGTPG3QEQJmlnLPRQxC3z6rB8s3h7HSZZcCP8Kz7ue8=;
+	b=JThrtMI/4VF/dCk6p7f/7V25eNf65/xDCjViueLvhVEQ+uj9iNEG3KzXyimwO4AyXS/OFZ
+	805G09DT7KQfqKU8cuoDoBmdjfSUaxAFm8OgeeYQa95tyb2tKTrOjUix+w5uOzUdnmhr3D
+	zFoBbJEdVzbx0CPglQGJhfaKCuLbaGU=
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-587-cEgIZJ2IMoG2W1xSPwgxqA-1; Tue,
- 26 May 2026 17:29:19 -0400
-X-MC-Unique: cEgIZJ2IMoG2W1xSPwgxqA-1
-X-Mimecast-MFC-AGG-ID: cEgIZJ2IMoG2W1xSPwgxqA_1779830956
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-690-LsvWmM20M52MIdIkOVigtg-1; Tue,
+ 26 May 2026 17:29:23 -0400
+X-MC-Unique: LsvWmM20M52MIdIkOVigtg-1
+X-Mimecast-MFC-AGG-ID: LsvWmM20M52MIdIkOVigtg_1779830960
 Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 408E01955F25;
-	Tue, 26 May 2026 21:29:16 +0000 (UTC)
+	by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 3F77C19560B7;
+	Tue, 26 May 2026 21:29:20 +0000 (UTC)
 Received: from GoldenWind.lan (unknown [10.22.64.238])
-	by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id C072E30001BB;
-	Tue, 26 May 2026 21:29:12 +0000 (UTC)
+	by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id 7065130001BE;
+	Tue, 26 May 2026 21:29:16 +0000 (UTC)
 From: Lyude Paul <lyude@redhat.com>
 To: dri-devel@lists.freedesktop.org,
 	rust-for-linux@vger.kernel.org,
 	nouveau@lists.freedesktop.org
-Date: Tue, 26 May 2026 17:28:53 -0400
-Message-ID: <20260526212857.1158294-3-lyude@redhat.com>
+Date: Tue, 26 May 2026 17:28:54 -0400
+Message-ID: <20260526212857.1158294-4-lyude@redhat.com>
 In-Reply-To: <20260526212857.1158294-1-lyude@redhat.com>
 References: <20260526212857.1158294-1-lyude@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: Qz3XTsA7Q6xxlT4mdXwFJiqOFKMRpqxQVp14FaDuvlw_1779830956
+X-Mimecast-MFC-PROC-ID: -JE3rygZdptOQpg9i_qoiH1lFu4s8W_7rLB-aODEIc8_1779830960
 X-Mimecast-Originator: redhat.com
 X-Spamd-Bar: ---
-Message-ID-Hash: 6YWDEQ3YRUYPJVRKXIS2TWPAGFRS3AHY
-X-Message-ID-Hash: 6YWDEQ3YRUYPJVRKXIS2TWPAGFRS3AHY
+Message-ID-Hash: XKTJQT2AFYUEVKIHRWGGMHQHHTYCGDUC
+X-Message-ID-Hash: XKTJQT2AFYUEVKIHRWGGMHQHHTYCGDUC
 X-MailFrom: lyude@redhat.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: Alexandre Courbot <acourbot@nvidia.com>, Gary Guo <gary@garyguo.net>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, driver-core@lists.linux.dev, Miguel Ojeda <ojeda@kernel.org>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Alice Ryhl <aliceryhl@google.com>, Simona Vetter <simona@ffwll.ch>, linux-kernel@vger.kernel.org, Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org, "Rafael J . Wysocki" <rafael@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Maxime Ripard <mripard@kernel.org>, David Airlie <airlied@gmail.com>, Benno Lossin <lossin@kernel.org>, linaro-mm-sig@lists.linaro.org, Danilo Krummrich <dakr@kernel.org>, Mukesh Kumar Chaurasiya <mkchauras@gmail.com>, Asahi Lina <lina+kernel@asahilina.net>, Daniel Almeida <daniel.almeida@collabora.com>, Lyude Paul <lyude@redhat.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v14 2/6] rust: gem: shmem: Fix Default implementation for ObjectConfig
+Subject: [Linaro-mm-sig] [PATCH v14 3/6] rust: drm: gem: s/device::Device/Device/ for shmem.rs
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6YWDEQ3YRUYPJVRKXIS2TWPAGFRS3AHY/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XKTJQT2AFYUEVKIHRWGGMHQHHTYCGDUC/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -99,57 +99,67 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	FROM_NEQ_ENVFROM(0.00)[lyude@redhat.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[redhat.com:-];
-	NEURAL_HAM(-0.00)[-0.846];
+	NEURAL_HAM(-0.00)[-0.855];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	TAGGED_RCPT(0.00)[linaro-mm-sig,kernel];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo]
-X-Rspamd-Queue-Id: D060E5DCBF6
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,linaro.org:email,nvidia.com:email]
+X-Rspamd-Queue-Id: DB57A5DCC0B
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-I completely forgot when coming up with this type that #[derive(Default)]
-only works if all generics mentioned in the type implement Default (and T
-usually doesn't). This being said: We don't use `T` for anything besides
-using it for a reference type, so whether or not it implements `Default`
-shouldn't actually need to matter.
-
-So, fix this by just manually implementing Default instead of deriving it.
+We're about to start explicitly mentioning kernel devices as well in this
+file, so this makes it easier to differentiate the two by allowing us to
+import `device` as `kernel::device`.
 
 Signed-off-by: Lyude Paul <lyude@redhat.com>
+Reviewed-by: Alexandre Courbot <acourbot@nvidia.com>
+
 ---
- rust/kernel/drm/gem/shmem.rs | 11 ++++++++++-
- 1 file changed, 10 insertions(+), 1 deletion(-)
+V11:
+* Fix location of //
+
+ rust/kernel/drm/gem/shmem.rs | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
 diff --git a/rust/kernel/drm/gem/shmem.rs b/rust/kernel/drm/gem/shmem.rs
-index e1b648920d2f6..8b7de136ab1f9 100644
+index 8b7de136ab1f9..116ed0a13eac2 100644
 --- a/rust/kernel/drm/gem/shmem.rs
 +++ b/rust/kernel/drm/gem/shmem.rs
-@@ -39,7 +39,6 @@
- ///
- /// This is used with [`Object::new()`] to control various properties that can only be set when
- /// initially creating a shmem-backed GEM object.
--#[derive(Default)]
- pub struct ObjectConfig<'a, T: DriverObject> {
-     /// Whether to set the write-combine map flag.
-     pub map_wc: bool,
-@@ -50,6 +49,16 @@ pub struct ObjectConfig<'a, T: DriverObject> {
-     pub parent_resv_obj: Option<&'a Object<T>>,
- }
+@@ -12,10 +12,10 @@
+ use crate::{
+     container_of,
+     drm::{
+-        device,
+         driver,
+         gem,
+-        private::Sealed, //
++        private::Sealed,
++        Device, //
+     },
+     error::to_result,
+     prelude::*,
+@@ -115,7 +115,7 @@ fn as_raw_shmem(&self) -> *mut bindings::drm_gem_shmem_object {
+     ///
+     /// Additional config options can be specified using `config`.
+     pub fn new(
+-        dev: &device::Device<T::Driver>,
++        dev: &Device<T::Driver>,
+         size: usize,
+         config: ObjectConfig<'_, T>,
+         args: T::Args,
+@@ -157,9 +157,9 @@ pub fn new(
+     }
  
-+impl<'a, T: DriverObject> Default for ObjectConfig<'a, T> {
-+    #[inline(always)]
-+    fn default() -> Self {
-+        Self {
-+            map_wc: false,
-+            parent_resv_obj: None,
-+        }
-+    }
-+}
-+
- /// A shmem-backed GEM object.
- ///
- /// # Invariants
+     /// Returns the `Device` that owns this GEM object.
+-    pub fn dev(&self) -> &device::Device<T::Driver> {
++    pub fn dev(&self) -> &Device<T::Driver> {
+         // SAFETY: `dev` will have been initialized in `Self::new()` by `drm_gem_shmem_init()`.
+-        unsafe { device::Device::from_raw((*self.as_raw()).dev) }
++        unsafe { Device::from_raw((*self.as_raw()).dev) }
+     }
+ 
+     extern "C" fn free_callback(obj: *mut bindings::drm_gem_object) {
 -- 
 2.54.0
 
