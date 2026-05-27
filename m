@@ -2,89 +2,90 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id XorhHKZ2FmrGmgcAu9opvQ
+	id WEpCDIOvFmokogcAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 27 May 2026 06:44:22 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 27 May 2026 10:46:59 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id E54075DF369
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 27 May 2026 06:44:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A91B45E1495
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 27 May 2026 10:46:58 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7A6D6401C5
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 27 May 2026 04:44:20 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5B179406F3
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 27 May 2026 08:46:57 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 056CE400FD
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 27 May 2026 04:44:13 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 1FF3A404CB
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 27 May 2026 08:46:51 +0000 (UTC)
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-From: christabbati@gmail.com
+From: joeytribuani0@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Wed, 27 May 2026 04:44:13 -0000
-Message-ID: <177985705301.2357696.3038993076970233910@lists.linaro.org>
+Date: Wed, 27 May 2026 08:46:51 -0000
+Message-ID: <177987161112.2624805.13791676434072231330@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: N3VKJJD3JJZ2JDDPQSDBW4LUXLSNIM3R
-X-Message-ID-Hash: N3VKJJD3JJZ2JDDPQSDBW4LUXLSNIM3R
-X-MailFrom: christabbati@gmail.com
+Message-ID-Hash: 7H6ZVUTBDNMONKVRLHIKCOSN56AIBZQB
+X-Message-ID-Hash: 7H6ZVUTBDNMONKVRLHIKCOSN56AIBZQB
+X-MailFrom: joeytribuani0@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] =?utf-8?q?Geometry_Dash_Lite_=E2=80=93_A_Challenging_Rhythm_Game_That_Keeps_Players_Hooked?=
+Subject: [Linaro-mm-sig] Basketball Stars: Rule the Court and Become the MVP
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/N3VKJJD3JJZ2JDDPQSDBW4LUXLSNIM3R/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7H6ZVUTBDNMONKVRLHIKCOSN56AIBZQB/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [5.59 / 15.00];
-	SPAM_FLAG(5.00)[];
+Content-Transfer-Encoding: base64
+X-Spamd-Result: default: False [0.69 / 15.00];
 	MID_RHS_MATCH_TO(1.00)[];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
+	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	GREYLIST(0.00)[pass,meta];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[joeytribuani0@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_ONE(0.00)[1];
 	ARC_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_ONE(0.00)[1];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FROM_NEQ_ENVFROM(0.00)[christabbati@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_NO_DN(0.00)[];
 	FREEMAIL_FROM(0.00)[gmail.com];
-	NEURAL_HAM(-0.00)[-0.986];
 	TO_DN_NONE(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.750];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	R_DKIM_NA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	FROM_NO_DN(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,geometrylite22.io:url,lists.linaro.org:rdns,lists.linaro.org:mid,lists.linaro.org:helo]
-X-Rspamd-Queue-Id: E54075DF369
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:mid,lists.linaro.org:helo]
+X-Rspamd-Queue-Id: A91B45E1495
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Mobile games come and go, but some titles remain popular for years because of their addictive gameplay and unique style. One of those games is Geometry Dash Lite, the free version of the famous rhythm-based platformer developed by RobTop Games. Even with its simple controls and minimalist design, the game continues to attract millions of players worldwide.
-Easy to Play, Difficult to Master
-The gameplay of Geometry Dash Lite is very straightforward. Players control a geometric icon that automatically moves forward through obstacle-filled levels. The main objective is to jump at the correct time to avoid spikes, traps, and dangerous platforms.
-The controls only require a single tap or click, making the game easy for anyone to pick up. However, the real challenge comes from mastering timing and memorizing level patterns. One small mistake sends you back to the beginning, which can be frustrating but also highly motivating.
-Rhythm and Music Create the Experience
-What truly makes Geometry Dash Lite stand out is its connection between gameplay and music. Every level is synchronized with energetic electronic soundtracks that guide the player through obstacles and jumps. The rhythm helps create a fast-paced and immersive experience that feels both exciting and satisfying.
-As the music intensifies, so does the gameplay. Players must stay focused and react quickly to survive increasingly difficult sections.
-Colorful Graphics and Creative Design
-Although the game uses simple geometric visuals, the design is stylish and memorable. Bright neon colors, smooth animations, and creative level layouts give each stage its own personality. Different gameplay mechanics are introduced as players progress, keeping the experience fresh and challenging.
-Why Players Keep Coming Back
-One of the biggest strengths of Geometry Dash Lite is the sense of achievement it provides. Completing a difficult level after dozens of failed attempts feels incredibly rewarding. This balance between frustration and satisfaction is what makes the game so addictive.
-The game is also perfect for short gaming sessions, allowing players to quickly retry levels and improve their skills over time.
-Final Thoughts
-Geometry Dash Lite proves that a game does not need complicated mechanics or realistic graphics to become successful. Its combination of rhythm-based gameplay, challenging obstacles, and energetic music creates an experience that is simple, fun, and highly addictive.
-Whether you are a beginner looking for a fun mobile game or a competitive player seeking a difficult challenge, Geometry Dash Lite offers an exciting adventure that is hard to put down.
-SITE: https://geometrylite22.io
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+QmFza2V0YmFsbCBTdGFycyBpcyB0aGUgcGVyZmVjdCBnYW1lIGZvciBhbnlvbmUgd2hvIGxvdmVz
+IGZhc3QtcGFjZWQgc3RyZWV0IGJhc2tldGJhbGwgYWN0aW9uISBGcm9tIHNtb290aCBkcmliYmxl
+IG1vdmVzIGFuZCBhbmtsZS1icmVha2luZyBjcm9zc292ZXJzIHRvIGNsdXRjaCBzaG90cyBhbmQg
+cG93ZXJmdWwgZHVua3MsIGV2ZXJ5IG1hdGNoIGZlZWxzIGludGVuc2UgYW5kIGNvbXBldGl0aXZl
+Lg0KVGhlIGdhbWXigJlzIGVhc3kgY29udHJvbHMgbWFrZSBpdCBzaW1wbGUgdG8gc3RhcnQgcGxh
+eWluZywgYnV0IG1hc3RlcmluZyB0aGUgdGltaW5nLCBkZWZlbnNlLCBhbmQgc2hvb3RpbmcgbWVj
+aGFuaWNzIHRha2VzIHJlYWwgc2tpbGwuIFdoZXRoZXIgeW914oCZcmUgcGxheWluZyBxdWljayBv
+bmUtb24tb25lIG1hdGNoZXMgb3IgY2xpbWJpbmcgdGhlIHJhbmtlZCBsZWFkZXJib2FyZCwgQmFz
+a2V0YmFsbCBTdGFycyBrZWVwcyBldmVyeSBnYW1lIGV4Y2l0aW5nLg0KT25lIG9mIHRoZSBiZXN0
+IHBhcnRzIGlzIHRoZSBjaGFyYWN0ZXIgY3VzdG9taXphdGlvbi4gWW91IGNhbiB1bmxvY2sgbmV3
+IG91dGZpdHMsIGNvdXJ0cywgYmFza2V0YmFsbHMsIGFuZCB1cGdyYWRlcyB0byBjcmVhdGUgeW91
+ciBvd24gdW5pcXVlIHN0eWxlIG9uIHRoZSBjb3VydC4gUGxheWluZyBhZ2FpbnN0IHJlYWwgb3Bw
+b25lbnRzIG9ubGluZSBhbHNvIGFkZHMgYSBmdW4gY2hhbGxlbmdlIGJlY2F1c2UgZXZlcnkgcGxh
+eWVyIGhhcyBhIGRpZmZlcmVudCBzdHJhdGVneS4NCklmIHlvdSBlbmpveSBiYXNrZXRiYWxsIGdh
+bWVzIHdpdGggYXJjYWRlLXN0eWxlIGdhbWVwbGF5IGFuZCBub25zdG9wIGFjdGlvbiwgQmFza2V0
+YmFsbCBTdGFycyBpcyBkZWZpbml0ZWx5IHdvcnRoIGNoZWNraW5nIG91dC4gU3RlcCBvbnRvIHRo
+ZSBjb3VydCBhbmQgc2hvdyBldmVyeW9uZSB3aG8gdGhlIHJlYWwgTVZQIGlzIQ0KV0VCOiBodHRw
+czovL2Jhc2tldGJhbGxzdGFyczIwMjYuaW8NCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1t
+bS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxp
+bmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
