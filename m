@@ -2,90 +2,449 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WEpCDIOvFmokogcAu9opvQ
+	id uChFDEfGFmqbrwcAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 27 May 2026 10:46:59 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 27 May 2026 12:24:07 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id A91B45E1495
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 27 May 2026 10:46:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 629825E2987
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 27 May 2026 12:24:06 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5B179406F3
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 27 May 2026 08:46:57 +0000 (UTC)
-Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 1FF3A404CB
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 27 May 2026 08:46:51 +0000 (UTC)
-Content-Type: text/plain; charset="utf-8"
+	by lists.linaro.org (Postfix) with ESMTP id 3F2293F61F
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 27 May 2026 10:24:05 +0000 (UTC)
+Received: from mx0b-00082601.pphosted.com (mx0b-00082601.pphosted.com [67.231.153.30])
+	by lists.linaro.org (Postfix) with ESMTPS id 4CA863FDAE
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 27 May 2026 10:23:45 +0000 (UTC)
+Authentication-Results: lists.linaro.org;
+	dkim=pass header.d=meta.com header.s=s2048-2025-q2 header.b=TvqXTS+v;
+	spf=pass (lists.linaro.org: domain of "prvs=3607b585cf=mattev@meta.com" designates 67.231.153.30 as permitted sender) smtp.mailfrom="prvs=3607b585cf=mattev@meta.com";
+	dmarc=pass (policy=reject) header.from=meta.com
+Received: from pps.filterd (m0528006.ppops.net [127.0.0.1])
+	by mx0a-00082601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 64R6Idck2507771;
+	Wed, 27 May 2026 03:23:29 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=meta.com; h=cc
+	:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=s2048-2025-q2; bh=BuInzWm6zlnr40MeLG
+	Xyu48AjR8YXaNjRNA9wv7wh9s=; b=TvqXTS+vDPs+whi8CfXfKby7Bvox8F/qZO
+	oEz0bfZ+PeiBpu1wgSfnrHT+hOhVNUbMFqSd3Xwy1NXQvOWxMecZh3YT8JegzQ01
+	5H2kMisJBBrAit30l8Vj4RGnMjOETK9sXCKsuOsVag7/uYs3QS15ZK22nWbNGDH+
+	fdiZqFoHeEU6ZU2tmShL+9Pwbi/A9Rnt/U0rqAWbKzvgCh+DpZC8JFrTnHWaMn86
+	ODeKylxt9h/KYANsBd5aYikzQsr6AbxixBCKgGbisWN7VPKVc5ZPg0cZVitAG9PH
+	UH+PcuVF7yD7S1VbU/+0ILe3PNLNa5UYi3gFtGrK0wl0qf7MJstA==
+Received: from mail.thefacebook.com ([163.114.134.16])
+	by mx0a-00082601.pphosted.com (PPS) with ESMTPS id 4edpnga485-3
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
+	Wed, 27 May 2026 03:23:28 -0700 (PDT)
+Received: from localhost (2620:10d:c085:108::4) by mail.thefacebook.com
+ (2620:10d:c08b:78::c78f) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.41; Wed, 27 May
+ 2026 10:23:26 +0000
+From: Matt Evans <mattev@meta.com>
+To: Alex Williamson <alex@shazbot.org>, Leon Romanovsky <leon@kernel.org>,
+        Jason Gunthorpe <jgg@nvidia.com>, Alex Mastro <amastro@fb.com>,
+        =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+        Bjorn Helgaas
+	<bhelgaas@google.com>,
+        Logan Gunthorpe <logang@deltatee.com>
+Date: Wed, 27 May 2026 03:23:03 -0700
+Message-ID: <20260527102319.100128-1-mattev@meta.com>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-From: joeytribuani0@gmail.com
-To: linaro-mm-sig@lists.linaro.org
-Date: Wed, 27 May 2026 08:46:51 -0000
-Message-ID: <177987161112.2624805.13791676434072231330@lists.linaro.org>
-User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: 7H6ZVUTBDNMONKVRLHIKCOSN56AIBZQB
-X-Message-ID-Hash: 7H6ZVUTBDNMONKVRLHIKCOSN56AIBZQB
-X-MailFrom: joeytribuani0@gmail.com
+X-Originating-IP: [2620:10d:c085:108::4]
+X-Proofpoint-GUID: pDX_pw9F0mPlau3NKH58yeq_Xy9cVwzx
+X-Authority-Analysis: v=2.4 cv=PME/P/qC c=1 sm=1 tr=0 ts=6a16c621 cx=c_pps
+ a=CB4LiSf2rd0gKozIdrpkBw==:117 a=CB4LiSf2rd0gKozIdrpkBw==:17
+ a=NGcC8JguVDcA:10 a=VkNPw1HP01LnGYTKEx00:22 a=7x6HtfJdh03M6CCDgxCd:22
+ a=kkcUborcUVj0H7zxAXTl:22 a=VwQbUJbxAAAA:8 a=FOH2dFAWAAAA:8 a=VabnemYjAAAA:8
+ a=NEAV23lmAAAA:8 a=h-ECioDzeyvzXXNZi24A:9 a=gKebqoRLp9LExxC7YDUY:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTI3MDEwMCBTYWx0ZWRfX9GH/QGKNIhYF
+ k2y0OfCPd9PjHLger9H36g3A9qaPKmoXqLJS4EIXPcBEJiVebQppGgReFNWjFGZIVH21Nyuz3cv
+ 7KjY1OJjdeY6vvpfyYEBmiuszRSR9bhsv6M71gFLqoPjqo9VqzyXTufRh0VwKB4lCp/RSzDuocT
+ Yk5pPd2TGUIXu9QicQH7tFUiPS1xEanT/Bg1L3EYni8DRXocrbKCEeTqDcGHsaKF2Dvp23ly3S0
+ TlEKPk4Qt7UxriYRPbidPLweC0wKyudnp6LYkm0l88sEG8AUu2cEVWwbQ7i29lj1zb6hujD/4to
+ j66ygBFWps4NJjADdssdUVb4idNEM2deJ+TRtsmB2K3AsQShMwYWfaJjthq7QL8bNT/AGuxTfTu
+ ord+iJ40c5zvNAVPrmCfDnGKh1lJjkX3xon7V1mhYFo6LeFbmZUxRp1yj3Fz94jpB/UiMN7760I
+ tEp89peWJ13UhgvQ+uw==
+X-Proofpoint-ORIG-GUID: pDX_pw9F0mPlau3NKH58yeq_Xy9cVwzx
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-05-27_01,2026-05-26_03,2025-10-01_01
+X-Spamd-Bar: --
+Message-ID-Hash: Z6KKQBVLNR3MYAJ4JI35AHZ6O4CXYK44
+X-Message-ID-Hash: Z6KKQBVLNR3MYAJ4JI35AHZ6O4CXYK44
+X-MailFrom: prvs=3607b585cf=mattev@meta.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
+CC: Mahmoud Adam <mngyadam@amazon.de>, David Matlack <dmatlack@google.com>, =?UTF-8?q?Bj=C3=B6rn=20T=C3=B6pel?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Kevin Tian <kevin.tian@intel.com>, Ankit Agrawal <ankita@nvidia.com>, Pranjal Shrivastava <praan@google.com>, Alistair Popple <apopple@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org, linux-pci@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Basketball Stars: Rule the Court and Become the MVP
+Subject: [Linaro-mm-sig] [PATCH v2 0/9] vfio/pci: Add mmap() for DMABUFs
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7H6ZVUTBDNMONKVRLHIKCOSN56AIBZQB/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/Z6KKQBVLNR3MYAJ4JI35AHZ6O4CXYK44/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Transfer-Encoding: base64
-X-Spamd-Result: default: False [0.69 / 15.00];
-	MID_RHS_MATCH_TO(1.00)[];
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [3.49 / 15.00];
+	DMARC_POLICY_REJECT(2.00)[meta.com : SPF not aligned (relaxed),reject];
+	R_DKIM_REJECT(1.00)[meta.com:s=s2048-2025-q2];
+	MID_CONTAINS_FROM(1.00)[];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx];
-	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[joeytribuani0@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_ONE(0.00)[1];
-	ARC_NA(0.00)[];
+	SUSPICIOUS_AUTH_ORIGIN(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[22];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FROM_NO_DN(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	TO_DN_NONE(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.750];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	R_DKIM_NA(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	ARC_NA(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	DKIM_TRACE(0.00)[meta.com:-];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:mid,lists.linaro.org:helo]
-X-Rspamd-Queue-Id: A91B45E1495
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[mattev@meta.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	HAS_XOIP(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	NEURAL_HAM(-0.00)[-0.991];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,meta.com:mid,lists.linaro.org:rdns,lists.linaro.org:helo]
+X-Rspamd-Queue-Id: 629825E2987
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-QmFza2V0YmFsbCBTdGFycyBpcyB0aGUgcGVyZmVjdCBnYW1lIGZvciBhbnlvbmUgd2hvIGxvdmVz
-IGZhc3QtcGFjZWQgc3RyZWV0IGJhc2tldGJhbGwgYWN0aW9uISBGcm9tIHNtb290aCBkcmliYmxl
-IG1vdmVzIGFuZCBhbmtsZS1icmVha2luZyBjcm9zc292ZXJzIHRvIGNsdXRjaCBzaG90cyBhbmQg
-cG93ZXJmdWwgZHVua3MsIGV2ZXJ5IG1hdGNoIGZlZWxzIGludGVuc2UgYW5kIGNvbXBldGl0aXZl
-Lg0KVGhlIGdhbWXigJlzIGVhc3kgY29udHJvbHMgbWFrZSBpdCBzaW1wbGUgdG8gc3RhcnQgcGxh
-eWluZywgYnV0IG1hc3RlcmluZyB0aGUgdGltaW5nLCBkZWZlbnNlLCBhbmQgc2hvb3RpbmcgbWVj
-aGFuaWNzIHRha2VzIHJlYWwgc2tpbGwuIFdoZXRoZXIgeW914oCZcmUgcGxheWluZyBxdWljayBv
-bmUtb24tb25lIG1hdGNoZXMgb3IgY2xpbWJpbmcgdGhlIHJhbmtlZCBsZWFkZXJib2FyZCwgQmFz
-a2V0YmFsbCBTdGFycyBrZWVwcyBldmVyeSBnYW1lIGV4Y2l0aW5nLg0KT25lIG9mIHRoZSBiZXN0
-IHBhcnRzIGlzIHRoZSBjaGFyYWN0ZXIgY3VzdG9taXphdGlvbi4gWW91IGNhbiB1bmxvY2sgbmV3
-IG91dGZpdHMsIGNvdXJ0cywgYmFza2V0YmFsbHMsIGFuZCB1cGdyYWRlcyB0byBjcmVhdGUgeW91
-ciBvd24gdW5pcXVlIHN0eWxlIG9uIHRoZSBjb3VydC4gUGxheWluZyBhZ2FpbnN0IHJlYWwgb3Bw
-b25lbnRzIG9ubGluZSBhbHNvIGFkZHMgYSBmdW4gY2hhbGxlbmdlIGJlY2F1c2UgZXZlcnkgcGxh
-eWVyIGhhcyBhIGRpZmZlcmVudCBzdHJhdGVneS4NCklmIHlvdSBlbmpveSBiYXNrZXRiYWxsIGdh
-bWVzIHdpdGggYXJjYWRlLXN0eWxlIGdhbWVwbGF5IGFuZCBub25zdG9wIGFjdGlvbiwgQmFza2V0
-YmFsbCBTdGFycyBpcyBkZWZpbml0ZWx5IHdvcnRoIGNoZWNraW5nIG91dC4gU3RlcCBvbnRvIHRo
-ZSBjb3VydCBhbmQgc2hvdyBldmVyeW9uZSB3aG8gdGhlIHJlYWwgTVZQIGlzIQ0KV0VCOiBodHRw
-czovL2Jhc2tldGJhbGxzdGFyczIwMjYuaW8NCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1t
-bS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxp
-bmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+Hi all,
+
+
+This series is based on previous RFCs/discussions:
+
+Tech topic: https://lore.kernel.org/linux-iommu/20250918214425.2677057-1-amastro@fb.com/
+RFCv1:	    https://lore.kernel.org/all/20260226202211.929005-1-mattev@meta.com/
+RFCv2:	    https://lore.kernel.org/kvm/20260312184613.3710705-1-mattev@meta.com/
+
+The background/rationale is covered in more detail in the RFC cover
+letters.  The TL;DR is:
+
+The goal is to enable userspace driver designs that use VFIO to export
+DMABUFs representing subsets of PCI device BARs, and "vend" those
+buffers from a primary process to other subordinate processes by fd.
+These processes then mmap() the buffers and their access to the device
+is isolated to the exported ranges.  This is an improvement on sharing
+the VFIO device fd to subordinate processes, which would allow
+unfettered access.
+
+This is achieved by enabling mmap() of vfio-pci DMABUFs, passed by fd
+to subordinate processes.  Second, a new ioctl()-based revocation
+mechanism is added to allow the primary process to forcibly revoke
+access to previously-shared BAR spans, even if the subordinate
+processes haven't cleanly exited.
+
+(The related topic of safe delegation of iommufd control to the
+subordinate processes is not addressed here, and is follow-up work.)
+
+As well as isolation and revocation, another advantage to accessing a
+BAR through a VMA backed by a DMABUF is that it's straightforward to
+mmap() the buffer with access attributes, such as write-combining.
+
+Feedback from the RFCs requested that, instead of creating
+DMABUF-specific vm_ops and .fault paths, to go the whole way and
+migrate the existing VFIO PCI BAR mmap() to be backed by a DMABUF too,
+resulting in a common vm_ops and fault handler for mmap()s of both the
+VFIO device and explicitly-exported DMABUFs.  This will help future
+iommufd emulation of VFIO Type1 peer-to-peer, making it easier to get
+a DMABUF for a VFIO BAR as a DMA target.
+
+mmap() conversion to use DMABUF underneath has been done for vfio-pci,
+but not sub-drivers:
+
+  nvgrace-gpu's mmap() override path is unchanged; I kept this out of
+  scope for now not least because I don't have a thorough test setup
+  for this system.  I would prefer to help the nvgrace-gpu maintainers
+  enable BAR mmap() DMABUFs themselves.
+
+
+Notes on patches
+================
+
+
+ PCI/P2PDMA: Add CONFIG_PCI_P2PDMA_CORE
+
+   Later in the series, vfio-pci's mmap() is going to depend on
+   pcim_p2pdma_provider() which depended on CONFIG_PCI_P2PDMA, which
+   in turn depended on ZONE_DEVICE (which isn't available on 32-bit
+   and some archs, because they lack MEMORY_HOTPLUG and friends).
+   VFIO does _not_ require actual P2P to be present for basic mmap()
+   functionality, only for the optional CONFIG_DMA_SHARED_BUFFER
+   feature.
+
+   This splits P2PDMA into a CONFIG_PCI_P2PDMA_CORE (which currently
+   contains pcim_p2pdma_provider()) and an optional CONFIG_PCI_P2PDMA
+   (which depends on ZONE_DEVICE etc., and provides P2P
+   functionality).
+
+
+ vfio/pci: Add a helper to look up PFNs for DMABUFs
+ vfio/pci: Add a helper to create a DMABUF for a BAR-map VMA
+
+   The first is for a DMABUF VMA fault handler to determine
+   arbitrary-sized PFNs from ranges in DMABUF.  Secondly, refactor
+   DMABUF export for use by the existing export feature and add a new
+   helper that creates a DMABUF corresponding to a VFIO BAR mmap()
+   request.
+
+
+ vfio/pci: Convert BAR mmap() to use a DMABUF
+
+   The vfio-pci core mmap() creates a DMABUF with the helper, and the
+   vm_ops fault handler uses the other helper to resolve the fault.
+   Because this depends on DMABUF structs/code, CONFIG_VFIO_PCI_CORE
+   needs to depend on CONFIG_DMA_SHARED_BUFFER.  The
+   CONFIG_VFIO_PCI_DMABUF still conditionally enables the export
+   support code.
+
+   NOTE: The user mmap()s a device fd, but the resulting VMA's vm_file
+   becomes that of the DMABUF which takes ownership of the device and
+   puts it on release.  This maintains the existing behaviour of a VMA
+   keeping the VFIO device open.
+
+   BAR zapping then happens via the existing vfio_pci_dma_buf_move()
+   path, which now needs to unmap PTEs in the DMABUF's address_space.
+
+
+ vfio/pci: Provide a user-facing name for BAR mappings
+
+   There was a request for decent debug naming in /proc/<pid>/maps
+   etc.  comparable to the existing VFIO names: since the VMAs are
+   DMABUFs, they have a "dmabuf:" prefix and can't be 100% identical
+   to before.  This is a user-visible change, but this patch at least
+   now gives us extra info on the BDF & BAR being mapped.
+
+
+ vfio/pci: Clean up BAR zap and revocation
+
+   In general (see NOTE!) the vfio_pci_zap_bars() is now obsolete,
+   since it unmaps PTEs in the VFIO device address_space which is now
+   unused.  This consolidates all calls (e.g. around reset) with the
+   neighbouring vfio_pci_dma_buf_move()s into new functions, to
+   revoke-zap/unrevoke.
+
+   !!! NOTE: the nvgrace-gpu driver continues to use its own private
+   vm_ops, fault handler, etc. for its special memregions, and these
+   DO still add PTEs to the VFIO device address_space.  So, a
+   temporary flag, vdev->bar_needs_zap, maintains the old behaviour
+   for this use.  At least this patch's consolidation makes it easy to
+   remove the remaining zap when this need goes away; a FIXME reminds
+   that this can be removed when nvgrace-gpu is converted.
+
+
+ vfio/pci: Support mmap() of a VFIO DMABUF
+
+   Adds mmap() for a DMABUF fd exported from vfio-pci.
+
+   It was a goal to keep the VFIO device fd lifetime behaviour
+   unchanged with respect to the DMABUFs.  An application can close
+   all device fds, and this will revoke/clean up all DMABUFs; no
+   mappings or other access can be performed now.  When enabling
+   mmap() of the DMABUFs, this means access through the VMA is also
+   revoked.  This complicates the fault handler because whilst the
+   DMABUF exists, it has no guarantee that the corresponding VFIO
+   device is still alive.  Adds synchronisation ensuring the vdev is
+   available before vdev->memory_lock is touched; this holds the
+   device registration so that even if the buffer has been cleaned up,
+   vdev hasn't been freed and so the lock can be safely taken.
+
+   (I decided against the alternative of preventing cleanup by holding
+   the VFIO device open if any DMABUFs exist, because it's both a
+   change of behaviour and less clean overall.)
+
+   I've added a chonky comment in place, happy to clarify more if you
+   have ideas.
+
+   This commit makes VFIO_PCI_CORE depend on PCI_P2PDMA_CORE (commit
+   1) to bring in (only) the P2PDMA provider code.
+
+
+ vfio/pci: Permanently revoke a DMABUF on request
+
+   By weight, this is mostly a rename of revoked to an enum, status.
+   There are now 3 states for a buffer, usable and revoked
+   temporary/permanent.  A new VFIO device ioctl is added,
+   VFIO_DEVICE_PCI_DMABUF_REVOKE, which passes a DMABUF (exported from
+   that device) and permanently revokes it.  Thus a userspace driver
+   can guarantee any downstream consumers of a shared fd are prevented
+   from accessing a BAR range, and that range can be reused.
+
+   The code doing revocation in vfio_pci_dma_buf_move() is moved,
+   unchanged, to a common function for use by _move() and the new
+   ioctl path.
+
+   Q:  I can't think of a good reason to temporarily revoke/unrevoke
+   buffers from userspace, so didn't add a 'flags' field to the ioctl
+   struct.  Easy to add if people think it's worthwhile for future
+   use.
+
+
+ vfio/pci: Add mmap() attributes to DMABUF feature
+
+   Adds a new VFIO feature, VFIO_DEVICE_FEATURE_DMA_BUF_MEMATTR.
+   After a DMABUF is exported, this feature ioctl() isused to set a
+   memory attribute that will be used by future mmap()s of the DMABUF
+   fd (i.e. it does nothing for any existing maps).
+
+   The default is UC, and via the feature one can specify CPU access
+   as WC.  The attribute is an enum/scalar rather than
+   bitmap/cumulative.  The attributes follow a "try-fail" model where
+   a client can request an attribute and either succeed or fail with
+   ENOTSUPP if it's unknown; if future attributes are
+   platform-specific then their support can be probed.
+
+   (Since it's just UC/WC for now, there is no reservation or numeric
+   structure to the namespace yet, but we could support
+   system/arch-specific values in future by carving out base +
+   arch-specific + IMPDEF ranges.)
+
+
+Testing
+=======
+
+(The [RFC ONLY] userspace test program, for QEMU edu-plus, has been
+dropped from the series, but can be found in the GitHub branch below.
+It at least illustrates the export, map, revoke, attribute, and close
+semantics interoperate.)
+
+This code has been tested in mapping DMABUFs of single/multiple
+ranges, aliasing mmap()s, aliasing ranges across DMABUFs, vm_pgoff >
+0, revocation, shutdown/cleanup scenarios, and hugepage mappings seem
+to work correctly.  I've lightly tested WC mappings also (by observing
+resulting PTEs as having the correct attributes...).  No regressions
+observed on the VFIO selftests, or on our internal vfio-pci
+applications.
+
+
+End
+===
+
+This is based on VFIO next (e.g. at b9285405c5f6).
+
+These commits are on GitHub for easier browsing, along with
+"[RFC ONLY] selftests: vfio: Add standalone vfio_dmabuf_mmap_test":
+
+https://github.com/metamev/linux/compare/b9285405c5f6...metamev:linux:dev/mev/vfio-dmabuf-mmap-v2
+
+
+Thanks for reading,
+
+
+Matt
+
+
+================================================================================
+Change log:
+
+v2:
+
+ - Rebase on VFIO next, picking up Alex's
+   vfio_pci_dma_buf_move()/vfio_pci_dma_buf_cleanup() fixes, and
+   dropping "vfio/pci: Fix vfio_pci_dma_buf_cleanup() double-put"
+
+ - Added "PCI/P2PDMA: Add CONFIG_PCI_P2PDMA_CORE" so that the
+   newly-added vfio-pci hard dependency on the P2PDMA provider instead
+   pulls in the _CORE variant and not the full-fat CONFIG_PCI_P2PDMA.
+   This means that the core of vfio-pci does not need ZONE_DEVICE, but
+   if it's available then enabling P2PDMA in turn enables DMABUF
+   export.  Fixes basic VFIO operation on 32b or other platforms without
+   ZONE_DEVICE.
+
+ - Fixed comment inaccuracy in vfio_pci_dma_buf_revoke() and cleaned
+   up vdev validity test.
+
+ - vfio_pci_dma_buf_find_pfn(): use PAGE_ALIGN(), better span variable
+   naming, OVF check
+
+ - Made vm_pgoffs use consistent (keeping the resource index at the
+   top and masking where offset is used).  For BAR mmap, use new
+   vma_pgoff_adjust to create the DMABUF with the exact mmap()ed span
+   instead of from the start of the BAR with an invisible portion
+   before the mapping.
+
+ - Added VFIO_DEVICE_FEATURE_DMA_BUF_MEMATTR to set memory attributes,
+   instead of using the export `flags` field.
+
+ - vfio_pci_ioctl_reset: Moved vfio_pci_zap_revoke_bars()
+   (effectively, vfio_pci_dma_buf_move()) back after D0 transition.
+   Note, if a BAR zap is needed, it's done in this function so now
+   happens after this D0 transition with the _move; it was done before
+   it at the time of the memory_lock taking.
+
+ - Minimised vfio_pci_dma_buf_mmap() (removed redundant span check),
+   added READ_ONCE for memattr
+
+ - Misc fixes: comment in DMABUF name generation, removed superfluous
+   READ_ONCE from faulthandler
+
+
+v1:
+https://lore.kernel.org/kvm/20260416131815.2729131-1-mattev@meta.com/
+
+ - Cleanup of the common DMABUF-aware VMA vm_ops fault handler and
+   export code.
+ - Fixed a lot of races, particularly faults racing with DMABUF
+   cleanup (if the VFIO device fds close, for example).
+ - Added nicer human-readable names for VFIO mmap() VMAs
+
+
+RFCv2:  Respin based on the feedback/suggestions:
+https://lore.kernel.org/kvm/20260312184613.3710705-1-mattev@meta.com/
+
+ - Transform the existing VFIO BAR mmap path to also use DMABUFs
+   behind the scenes, and then simply share that code for
+   explicitly-mapped DMABUFs.  Jason wanted to go that direction to
+   enable iommufd VFIO type 1 emulation to pick up a DMABUF for an IO
+   mapping.
+
+ - Revoke buffers using a VFIO device fd ioctl
+
+RFCv1:
+https://lore.kernel.org/all/20260226202211.929005-1-mattev@meta.com/
+
+
+Matt Evans (9):
+  PCI/P2PDMA: Add CONFIG_PCI_P2PDMA_CORE
+  vfio/pci: Add a helper to look up PFNs for DMABUFs
+  vfio/pci: Add a helper to create a DMABUF for a BAR-map VMA
+  vfio/pci: Convert BAR mmap() to use a DMABUF
+  vfio/pci: Provide a user-facing name for BAR mappings
+  vfio/pci: Clean up BAR zap and revocation
+  vfio/pci: Support mmap() of a VFIO DMABUF
+  vfio/pci: Permanently revoke a DMABUF on request
+  vfio/pci: Add mmap() attributes to DMABUF feature
+
+ drivers/pci/Kconfig                 |  10 +-
+ drivers/pci/Makefile                |   2 +-
+ drivers/pci/p2pdma.c                |  16 +
+ drivers/vfio/pci/Kconfig            |   4 +-
+ drivers/vfio/pci/Makefile           |   3 +-
+ drivers/vfio/pci/nvgrace-gpu/main.c |   5 +
+ drivers/vfio/pci/vfio_pci_config.c  |  30 +-
+ drivers/vfio/pci/vfio_pci_core.c    | 225 +++++++++---
+ drivers/vfio/pci/vfio_pci_dmabuf.c  | 548 ++++++++++++++++++++++++----
+ drivers/vfio/pci/vfio_pci_priv.h    |  57 ++-
+ include/linux/pci-p2pdma.h          |  24 +-
+ include/linux/pci.h                 |   2 +-
+ include/linux/vfio_pci_core.h       |   1 +
+ include/uapi/linux/vfio.h           |  57 +++
+ 14 files changed, 815 insertions(+), 169 deletions(-)
+
+-- 
+2.47.3
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
