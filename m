@@ -2,126 +2,96 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MNkvJthmHmoNjAkAu9opvQ
+	id 4EQHGn5yF2o7FggAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 02 Jun 2026 07:15:04 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 28 May 2026 00:38:54 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4304F62878D
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 02 Jun 2026 07:15:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D80835EAB49
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 28 May 2026 00:38:53 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 57DF03F756
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  2 Jun 2026 05:15:03 +0000 (UTC)
-Received: from CH4PR04CU002.outbound.protection.outlook.com (mail-northcentralusazon11013040.outbound.protection.outlook.com [40.107.201.40])
-	by lists.linaro.org (Postfix) with ESMTPS id 8CBC83F743
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 27 May 2026 21:09:56 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id BED65404AE
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 27 May 2026 22:38:52 +0000 (UTC)
+Received: from fout-a7-smtp.messagingengine.com (fout-a7-smtp.messagingengine.com [103.168.172.150])
+	by lists.linaro.org (Postfix) with ESMTPS id 580FC3F6A0
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 27 May 2026 22:38:41 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=Nvidia.com header.s=selector2 header.b=eXJ0cNqk;
-	arc=pass ("microsoft.com:s=arcselector10001:i=1");
-	spf=pass (lists.linaro.org: domain of alwilliamson@nvidia.com designates 40.107.201.40 as permitted sender) smtp.mailfrom=alwilliamson@nvidia.com;
-	dmarc=pass (policy=reject) header.from=nvidia.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=FFkkauKiwYAlIpKqv9iPyPc406EB0SwoOwQL2G8B00h34XSiiDUk/XoCoBsPj70GLal6ThU1PDwrbBbi2oapNFZ5QcKjk9B59PxDhk/jW/ySAIbGCPEr73Ub5YsjAhxsgKleZxjItJDkqNfiCv/xKUKW690QAtgSD5YBD1mkVJOkHEDvmZNDFnR+a69isWskpZnLWtPoN5IECigw0T2xF8bm0Wv0VvYs2aDX5uvpD0PUkvQF2gD3lBEO+C5R4iVqU8N/lr/GEf0Zs2WXsfGBmyhMhKYxnV/NekclCrg2PL5uPKm4Xwwy06UBbB3KgUQVn9RpGV8uvUuS4y34ysmJnw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=eoTRWVZ+V0pDWIoRakcP1mFl6Gh7WDlIs2EvmtAgkk4=;
- b=ZIjukcRb4oksil8W4O0czdIPfW/JPv6kMV3E6mx32lWqEUmZD5k3HfRl163RC6t2t2ynU+T2nH1ixGpgv/puSlhFVnX83F4ShHT0YAJF+aNFKbRkPJKnqf2YOf2sW4L0klAq5qS4srlxBnZse4dIhDhWnwU6oJ5kNaCKIKgTtU+7Lv0pkdgwE8nDEu8/uG+FPq5ttagsSkDmtQGzrwI6OPSoZT3yW05IWuZ+55V+wgLqzvdzgJw49eMAd5zoZwUzg6tKAgxLmJR8KhHto/OuCowikeYHbd77s5Cncr8Owh0IL0qABzCqnT4CueR5OOjDvCIBv7QueUKnE8gzSWn4+g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=eoTRWVZ+V0pDWIoRakcP1mFl6Gh7WDlIs2EvmtAgkk4=;
- b=eXJ0cNqkH7nHkDwDkYmcgJBnUa/HJI3+uuE2wOTfYqRvzhue8eUi4JVyHfFcdCindFMi8LZfdZIbgUA3d4IZraeAGl8TPfRm+9q/hcE/JlKB9JE6TOobbz4v5hMyqxRrHG3Z42yXLtCHa48SyiUAxLShniCUpTc5cG5LzoUnHihXKyCGeh9+yHbg2Cq+hSeA27wZv2r0urrw0CWA/8LC+oGOL0fLys2Iv91ip2CVc6nF4VZB9X7KUlknka3UyPduO288k0rYMsu64wc3lO3SCAey+T7rmiA5jXHiMSfriBMuUwUdbGaTd8eAb3IRoKptP7l6/X7t5OF6s9xz0/38fA==
-Received: from LV3PR12MB9411.namprd12.prod.outlook.com (2603:10b6:408:215::20)
- by MN2PR12MB4424.namprd12.prod.outlook.com (2603:10b6:208:26a::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.12; Wed, 27 May
- 2026 21:09:50 +0000
-Received: from LV3PR12MB9411.namprd12.prod.outlook.com
- ([fe80::98b7:86de:b69:2a15]) by LV3PR12MB9411.namprd12.prod.outlook.com
- ([fe80::98b7:86de:b69:2a15%6]) with mapi id 15.21.0071.011; Wed, 27 May 2026
- 21:09:50 +0000
-Date: Wed, 27 May 2026 15:09:46 -0600
-From: Alex Williamson <alex.williamson@nvidia.com>
+	dkim=pass header.d=shazbot.org header.s=fm2 header.b=hj0Xnh2l;
+	dkim=pass header.d=messagingengine.com header.s=fm3 header.b="h wzCJGs";
+	spf=pass (lists.linaro.org: domain of alex@shazbot.org designates 103.168.172.150 as permitted sender) smtp.mailfrom=alex@shazbot.org;
+	dmarc=pass (policy=none) header.from=shazbot.org
+Received: from phl-compute-02.internal (phl-compute-02.internal [10.202.2.42])
+	by mailfout.phl.internal (Postfix) with ESMTP id 26AA9EC013A;
+	Wed, 27 May 2026 18:38:41 -0400 (EDT)
+Received: from phl-frontend-04 ([10.202.2.163])
+  by phl-compute-02.internal (MEProxy); Wed, 27 May 2026 18:38:41 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=shazbot.org; h=
+	cc:cc:content-transfer-encoding:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm2; t=1779921521;
+	 x=1780007921; bh=8MmDbyDdyfeL+yHv+zdd4HPvUYer2VEbvbP3UaA28IA=; b=
+	hj0Xnh2lXS/+Dchf2E7c73LTAYb+mATBswtmkQX6nFdx6by6DzdYG9Ss2u0Lr0kq
+	oWqH6CtArjzhzcp5ytS/IWg0OvgHqS3MozfdAMcgdrTjEMB4sHcKCq6YYEV8OuNA
+	R6IhFeMyqptMqv/1Y8Ut/M4eOia8XKDBR3YDEeEq8AeotfI3T/fQTwuPunRXU7LL
+	G8fZFIgKpyrjX6Ze7f0tvqMzJuwO64xwJwdzb/EtPixzbBV7x7Ssb7xLhMedpJN5
+	ubvTzye/SVLb47QjrR7kn9aL4O/4u0ECC5W3S1KGcSbTEvBzjca2pB3u04yooxKi
+	JtBg44DkVqWushZlvoan6g==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:feedback-id:feedback-id
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1779921521; x=
+	1780007921; bh=8MmDbyDdyfeL+yHv+zdd4HPvUYer2VEbvbP3UaA28IA=; b=h
+	wzCJGs9I3ndDcL+I7MTrQqe2Olkz/BmWFv1ZVr52SajhpLa3SrcrC8NVf5559l/5
+	3u+/PlU86TI1bBk3AF7Y46jzIdIuOuUXITIgpLOZ/b7dQvCRAPgwedxAInH5ADnL
+	3i/BfCZxWpfw7yAaaVM0fQoVY9tgxbEuc5Xw6qH53DOzepjGUAF5CNSvOusHHQva
+	B5eHqzsIE8KQzDGvsXuTOXHTPEybIP7tbL0jSjJxXO6bCRMw12VJuNz17cW+Y5lK
+	Lp1sZR3aVJ/4eTMSNkWDVtba2eIYrJ4T47zZ3rznqVG6MJoB/aOCjISnPWkyQqc9
+	6087omd2wnNZXCrZj7Jsg==
+X-ME-Sender: <xms:cHIXaqKqW5EJbsPTL_HE4HsIEIIzTESSEIoGfYhWj6W3iSBIQa-i5g>
+    <xme:cHIXat0CUBX0jRLxN8SAeHW10XwYi1avGvNUPwa-zn6zq38TIq_j0aL7Lo00NRQwx
+    -tO3_F6rc5d3dpMvFc3r-_gVWg8GtZfftOGxmlipcGsPjkUOJqGle0>
+X-ME-Received: <xmr:cHIXalYfqNt3WHyeJsv5SEym3HruHkfmbU8IqXwxxjNiXRKGGsqymE89d7o>
+X-ME-Proxy-Cause: dmFkZTGdNJ0uUGeVj1NBRJYBU9K38RfrCWXFG3XsTl9AIKrXguYdj+fE8TS337IWHDmk4w
+    Fw4pZ7j35TAr2g7k5qM5+cHD9E6RMkCpZpL3ZEmxZM9aVfup+gzJ8MrH+cJw1exb19Fawg
+    H7CXFcuv9gqT2u8c9tn4fLEc6vgDbfFDMVLtsfWXGKu6yaB8NKMnaCUkqj2Ds3ldpTPKYs
+    7eh8scgMDK74Fuutv7IhevaZn7Cc/XneKsRgnKBb4N/rS96y7t0sYlhtKo9qiq1ZyUa2t1
+    en/3InleJyTXeIftwyZKJVQHnxfmF5GQCsl1blUOVzzpXpaIdCERGOuHp7jueXVgOOeMss
+    q9358a7YxijCU4Da8hX/2XEvc5B1JDkLHU9gF9qVFpMpNzQ8/yaJqgT4h40Qtxxjytakhn
+    KMbKNNw+9VeqMdrVw5yb/7e1r3WkTGkg6n6hhhk+i3JdU3IPepPSn6rkNvligaaIaJGHNq
+    AcgLTqCiv0wcvcvwYR+h2gf2C8XkqZqxTJuz7InvAA6QcsJv9YOn6lFAJONEj+24/AT/p8
+    jX83mhqW+ws+htPgJpvA44oAgy2mJUWhLkbL/fkfB6sDWbtnd1bVCd0z9ALX887x0HiP4b
+    XLslRQM2Fn0lYQ06gxSrEQiJIhjG7uc6azmhqQVvXtGntg69UmGeMzH/AUxw
+X-ME-Proxy: <xmx:cHIXagXjLthIGvuAlANuJ6ZfQk2OHJqVfyFHeR3PbPFEQfv0u4DBYg>
+    <xmx:cHIXagdnRhOEKIJLhTEarxw4sGjhGfgTBQfD-JAJK8oamHFY4jEPIQ>
+    <xmx:cHIXatM42vPxwXTOCBSe1xt5FtwHNF4emS-VeKJDGMnzAJraB9kI2A>
+    <xmx:cHIXaoIWRA6exdE95Y5I9pQfEKvYYNVuG7GU0JsQFdOCfoUSoMC4aw>
+    <xmx:cXIXaoO4-vhWBctvcH0KGgDRcrsmYHGmK2czPpgelQYBKMYg24I9yUg1>
+Feedback-ID: i03f14258:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
+ 27 May 2026 18:38:38 -0400 (EDT)
+Date: Wed, 27 May 2026 16:38:37 -0600
+From: Alex Williamson <alex@shazbot.org>
 To: Matt Evans <mattev@meta.com>
-Message-ID: <20260527150946.312b3042@nvidia.com>
-In-Reply-To: <20260527102319.100128-2-mattev@meta.com>
+Message-ID: <20260527163837.02be1e7c@shazbot.org>
+In-Reply-To: <20260527102319.100128-3-mattev@meta.com>
 References: <20260527102319.100128-1-mattev@meta.com>
-	<20260527102319.100128-2-mattev@meta.com>
-X-ClientProxiedBy: CY5PR19CA0086.namprd19.prod.outlook.com
- (2603:10b6:930:83::11) To LV3PR12MB9411.namprd12.prod.outlook.com
- (2603:10b6:408:215::20)
+	<20260527102319.100128-3-mattev@meta.com>
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.51; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV3PR12MB9411:EE_|MN2PR12MB4424:EE_
-X-MS-Office365-Filtering-Correlation-Id: 98d33f94-660e-43da-be7c-08debc3449ff
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|7416014|376014|1800799024|366016|11063799006|4143699003|56012099006|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: 
-	/AAOgXq4GqpIpjhNhKS4kLOhWV/zPdiumKL6SUjC0+q8KqIlQ+G67+9U1f4n6aJ6O8v6pY2+3nCq7PR35xRZq5sCCVtozYF3etPIKaTULxNA1DXlSWrMn3ARuESG2NfqKE5n72E8Z6+2IptXSC4zbayR7BkrAGhe7XOCfltJ5YFr846q9qeB/Rps6b1zCuOHIyhSqAyuZ8ZYWHsfAA+mHBh2dUTliprEmnE1iN0TlQ6Cfc6Kj+pMFblRdkE3Qn9s3JpEWnv9/0wKRyFD0e3x2WZwDWBW/0f9BiBPmkZifnHO2Th8uc/c0kaMAPXPd3ijFTO3e3hFlF/1coz65knHpq3MxCyOd4aJOi4c4SKOnDXFjgaP0q3FFkKgXgh2gHrFF1WFIDufskRxvUcCC6FSGwNbsbYdI7dzuwvfwNGlPMnBQ4ZntVv/6wPFYaHI4NrByHCoINHEY5Yysvh6KQpM1PbzGvGGR3qX+BAv9c4M921Hu3WoeJOcU1ad8ugXZ3kjxAaMMzc0pp/NOffuks1KF9KZnwaGH8MR2HvMxIrCLgRS8NQmvn1BuEAFnqFEdc1H19rL27ZsWGI4lCLOmXyBL82km0k4eIr6ODG0nl9tSBLeG27PcV0dNGCaqyDRQkjpzwgwVRheb10Ylyzs+eQ7D95NoQRK9/UYboIDFGv6Qj5dQKiaUzIGZZSc78retOQ3
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LV3PR12MB9411.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(376014)(1800799024)(366016)(11063799006)(4143699003)(56012099006)(18002099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?2b+c6dMzZtq45LlI4MYXqxEDoSGuDPT36YvrBT92Jk44hPmx8i+SX8iU9nj0?=
- =?us-ascii?Q?x6fa3gyfkf/ewr/FI6V3j97XVi9SmtnOdawP2d24ijqqcm5rTSdxdDI3MrYF?=
- =?us-ascii?Q?o9LIvvC6dAtL6oeCz1I8t0/KBJM17PKcvHiEIV3b+iFJEzxg+4AYUPPtdr23?=
- =?us-ascii?Q?5Als5OMcM41nOBHErzl5XGKpD7cgMgGgaxBHB1kdOGQL3LfFe8w/T9TjxAJM?=
- =?us-ascii?Q?0UQb/MRN6PUnUrdyaosVHOAjA7LlkiPAMvZDhSLFGuph6UPfLWLEggc+8hjv?=
- =?us-ascii?Q?f/qUGVNHOVVgIeISpi+fyctsbgmyBi1pytOXCzfbSMF+MKlEtq3+8oWRPjbg?=
- =?us-ascii?Q?yoMlj9YIbyVIil1UdyC2LiOKCqULxtV9WiQm1QE8KzzoAm244pF1LEve80Rf?=
- =?us-ascii?Q?eHw+kJ55OrFJQP24w5ALC/hz54l3cx/FdSf2WZhQsMSEETnGPemx+4ngMdZK?=
- =?us-ascii?Q?ovskXO/N5X4f30BOBidgrwtsTxLbgM1Q9Vck30txWt6O0bVrsQnJuRQEQWPB?=
- =?us-ascii?Q?3JeXtcz9PRo7+Ugb7xPVVSZeqypEoEM8RZEHNr1MW+wXH5CIOXaMBDz8WOC8?=
- =?us-ascii?Q?pBR+6kMVMW5ehUPchZQ7loSpFbRthxNkGQqRxNGWA+EtOzgb0He2deyGrLn1?=
- =?us-ascii?Q?/MWvDb2O28fEF4cVdxx7vfXryVPBAUehkmFh0cxFtTEGsv/uocCYwCx3pE54?=
- =?us-ascii?Q?3dvOKqEeqDDsJadp9Wgaf0dFWOQk0ZlPI7iP+20RFZaPzcbbBheZI8OBTPDA?=
- =?us-ascii?Q?+x9nmyErlARRkg6NlM4HHhg2bSa8GyCvbuQJAL8n5jzAUg8YzT0cvHIaeXm5?=
- =?us-ascii?Q?52YJoqsrJbB4JufJAzw48I5pNGVW+y4sUK1dxNIym3cIgQvhxqG50XBd1zCC?=
- =?us-ascii?Q?m2gKnnmDxRFsOoTCuXzgSswG2Oha+/q262vkQdfczzhY0wywBNyFWDrvNZG/?=
- =?us-ascii?Q?enRtqPBgqh8xz1FEUqctZpYVbkfWjlw79svbxsrouNuZy8avLpcuJxzsHSxb?=
- =?us-ascii?Q?Grcmx7gKdoKGby2snFU1KmOReJYFNnGfRauc9TBc8K7YzWVlUzpgzTaUGvq4?=
- =?us-ascii?Q?U1xfFEACPrddHi4GBZF3H1pIVemPOqpikxFEUuzRA0TtsmkKLSWypGN8ZXiH?=
- =?us-ascii?Q?VgL5PSha7eLLP8aFFzbBzLedNtn7SD5OPQw7TZcprgZZGjdZc4+0pLZhS8UJ?=
- =?us-ascii?Q?sj+0rDlX47RC6st4V93svu/E+32nbsWF6VubBIN2GA/ymX43QD4bvugD/T6R?=
- =?us-ascii?Q?KM64FsQJ4q66QFfO3OaMeCVZz4DYz8F5fyjLDWyARpHNGQqOugxbZNL6g4/a?=
- =?us-ascii?Q?GehxlBu2llqeFNAh2SohLKjxvwNrMY/3LdR4jE4ronKSXkRBkTfj3xCB5wqV?=
- =?us-ascii?Q?XeG5rkE0LoySD9armDalOr6fkRwjzs/FAIp2HrYlj1Yj9VPovDd4Yurj900N?=
- =?us-ascii?Q?sXggFJ4ookEAPvPH+rn9SdHsIBTRZF+yQnLaDONXn4dOv00DqafNFOyWrQEp?=
- =?us-ascii?Q?+KL199BZdZ7Ds2fVSa/DVPHXfSF5huJaXgsibbH8G51kzD40l2D2nLvmr4h0?=
- =?us-ascii?Q?KdvAbPkXhMwIy8bDbMMM3Cw4WDOvTptJYAW4cd+9CF8WQnkZLwOvo223ybl0?=
- =?us-ascii?Q?t/pj+Y6BXIqTAuGBeGkJr9eqefmE72tPmGX/uNDsQe+huVlDJliyZAckrBa3?=
- =?us-ascii?Q?Sd4VLK7a0SY/cxTDBDnAweytNgUbvFcGchQaDpd9wf4Z52o8dWQt5vVfPqNu?=
- =?us-ascii?Q?fKQdO+3+vA=3D=3D?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 98d33f94-660e-43da-be7c-08debc3449ff
-X-MS-Exchange-CrossTenant-AuthSource: LV3PR12MB9411.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 May 2026 21:09:50.0909
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: fK5ja2fYF8muMSZ2NoRrf9OyFozuFh9MoyYRw+hoKVX1WiSGjCQpfwFoG/U+FgvfZ2dsNZNOUs5bJ2xFIiF/Eg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4424
 X-Spamd-Bar: ----
-X-MailFrom: alwilliamson@nvidia.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: CIWYU3R36UBBX6J6WB66CIEOKHQ4PMS4
-X-Message-ID-Hash: CIWYU3R36UBBX6J6WB66CIEOKHQ4PMS4
-X-Mailman-Approved-At: Tue, 02 Jun 2026 05:14:34 +0000
-CC: Leon Romanovsky <leon@kernel.org>, Jason Gunthorpe <jgg@nvidia.com>, Alex Mastro <amastro@fb.com>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Bjorn Helgaas <bhelgaas@google.com>, Logan Gunthorpe <logang@deltatee.com>, Mahmoud Adam <mngyadam@amazon.de>, David Matlack <dmatlack@google.com>, =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Kevin Tian <kevin.tian@intel.com>, Ankit Agrawal <ankita@nvidia.com>, Pranjal Shrivastava <praan@google.com>, Alistair Popple <apopple@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org, linux-pci@vger.kernel.org
+Message-ID-Hash: Q5BVOPTOL6O4SUH3AZEELH7DYI6J6S63
+X-Message-ID-Hash: Q5BVOPTOL6O4SUH3AZEELH7DYI6J6S63
+X-MailFrom: alex@shazbot.org
+X-Mailman-Rule-Hits: member-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
+CC: Leon Romanovsky <leon@kernel.org>, Jason Gunthorpe <jgg@nvidia.com>, Alex Mastro <amastro@fb.com>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Bjorn Helgaas <bhelgaas@google.com>, Logan Gunthorpe <logang@deltatee.com>, Mahmoud Adam <mngyadam@amazon.de>, David Matlack <dmatlack@google.com>, =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Kevin Tian <kevin.tian@intel.com>, Ankit Agrawal <ankita@nvidia.com>, Pranjal Shrivastava <praan@google.com>, Alistair Popple <apopple@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org, linux-pci@vger.kernel.org, alex@shazbot.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 1/9] PCI/P2PDMA: Add CONFIG_PCI_P2PDMA_CORE
+Subject: [Linaro-mm-sig] Re: [PATCH v2 2/9] vfio/pci: Add a helper to look up PFNs for DMABUFs
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CIWYU3R36UBBX6J6WB66CIEOKHQ4PMS4/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/Q5BVOPTOL6O4SUH3AZEELH7DYI6J6S63/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -130,596 +100,268 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [4.49 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[nvidia.com : SPF not aligned (relaxed),reject];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
-	DATE_IN_PAST(1.00)[128];
-	R_DKIM_REJECT(1.00)[Nvidia.com:s=selector2];
+X-Spamd-Result: default: False [0.59 / 15.00];
+	R_DKIM_REJECT(1.00)[shazbot.org:s=fm2,messagingengine.com:s=fm3];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+	R_SPF_ALLOW(-0.20)[+mx];
+	DMARC_POLICY_SOFTFAIL(0.10)[shazbot.org : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	GREYLIST(0.00)[pass,meta];
-	DKIM_TRACE(0.00)[Nvidia.com:-];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.627];
-	FROM_NEQ_ENVFROM(0.00)[alex.williamson@nvidia.com,linaro-mm-sig-bounces@lists.linaro.org];
-	TO_DN_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[23];
+	DKIM_TRACE(0.00)[shazbot.org:-,messagingengine.com:-];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[alex@shazbot.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.996];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	MISSING_XM_UA(0.00)[];
-	FROM_HAS_DN(0.00)[]
-X-Rspamd-Queue-Id: 4304F62878D
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[meta.com:email,shazbot.org:mid,linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo]
+X-Rspamd-Queue-Id: D80835EAB49
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Wed, 27 May 2026 03:23:04 -0700
+On Wed, 27 May 2026 03:23:05 -0700
 Matt Evans <mattev@meta.com> wrote:
 
-> The P2PDMA code currently provides two features under the same
-> CONFIG_PCI_P2PDMA option:
+> Add vfio_pci_dma_buf_find_pfn(), which a VMA fault handler can use to
+> find a PFN.
 > 
->  1.  Locate providers via pcim_p2pdma_provider()
->  2.  Manage actual P2P DMA
+> This supports multi-range DMABUFs, which typically would be used to
+> represent scattered spans but might even represent overlapping or
+> aliasing spans of PFNs.
 > 
-> Other code (such as vfio-pci) depends on 1, without having a hard
-> dependency on 2.
-> 
-> A future commit expands the use of DMABUF in vfio-pci for non-P2P
-> scenarios, relying on pcim_p2pdma_provider() always being present.  If
-> that depended on CONFIG_PCI_P2PDMA, it would make vfio-pci only
-> available if CONFIG_ZONE_DEVICE is present (e.g. 64-bit systems), even
-> when P2P is not needed.
-> 
-> To resolve this, introduce CONFIG_PCI_P2PDMA_CORE which contains the
-> basic provider functionality to make it available even if the
-> CONFIG_PCI_P2PDMA feature is disabled or unavailable due to
-> !CONFIG_ZONE_DEVICE.  Users such as vfio-pci can enable their own P2P
-> features based off the original CONFIG_PCI_P2PDMA (available when
-> CONFIG_ZONE_DEVICE is set).
+> Because this is intended to be used in vfio_pci_core.c, we also need
+> to expose the struct vfio_pci_dma_buf in the vfio_pci_priv.h header.
 > 
 > Signed-off-by: Matt Evans <mattev@meta.com>
 > ---
->  drivers/pci/Kconfig        | 10 +++++-----
->  drivers/pci/Makefile       |  2 +-
->  drivers/pci/p2pdma.c       | 16 ++++++++++++++++
->  include/linux/pci-p2pdma.h | 24 ++++++++++++++----------
->  include/linux/pci.h        |  2 +-
->  5 files changed, 37 insertions(+), 17 deletions(-)
+>  drivers/vfio/pci/vfio_pci_dmabuf.c | 142 ++++++++++++++++++++++++++---
+>  drivers/vfio/pci/vfio_pci_priv.h   |  20 ++++
+>  2 files changed, 149 insertions(+), 13 deletions(-)
 > 
-> diff --git a/drivers/pci/Kconfig b/drivers/pci/Kconfig
-> index 33c88432b728..59d70bc84cc9 100644
-> --- a/drivers/pci/Kconfig
-> +++ b/drivers/pci/Kconfig
-> @@ -206,11 +206,7 @@ config PCIE_TPH
->  config PCI_P2PDMA
->  	bool "PCI peer-to-peer transfer support"
->  	depends on ZONE_DEVICE
-> -	#
-> -	# The need for the scatterlist DMA bus address flag means PCI P2PDMA
-> -	# requires 64bit
-> -	#
-> -	depends on 64BIT
-> +	select PCI_P2PDMA_CORE
->  	select GENERIC_ALLOCATOR
->  	select NEED_SG_DMA_FLAGS
->  	help
-> @@ -226,6 +222,10 @@ config PCI_P2PDMA
+> diff --git a/drivers/vfio/pci/vfio_pci_dmabuf.c b/drivers/vfio/pci/vfio_pci_dmabuf.c
+> index c16f460c01d6..0d132c4ca95f 100644
+> --- a/drivers/vfio/pci/vfio_pci_dmabuf.c
+> +++ b/drivers/vfio/pci/vfio_pci_dmabuf.c
+> @@ -9,19 +9,6 @@
 >  
->  	  If unsure, say N.
+>  MODULE_IMPORT_NS("DMA_BUF");
 >  
-> +config PCI_P2PDMA_CORE
-> +	default n
-> +	bool
-> +
->  config PCI_LABEL
->  	def_bool y if (DMI || ACPI)
->  	select NLS
-> diff --git a/drivers/pci/Makefile b/drivers/pci/Makefile
-> index 41ebc3b9a518..419b646a301d 100644
-> --- a/drivers/pci/Makefile
-> +++ b/drivers/pci/Makefile
-> @@ -30,7 +30,7 @@ obj-$(CONFIG_PCI_SYSCALL)	+= syscall.o
->  obj-$(CONFIG_PCI_STUB)		+= pci-stub.o
->  obj-$(CONFIG_PCI_PF_STUB)	+= pci-pf-stub.o
->  obj-$(CONFIG_PCI_ECAM)		+= ecam.o
-> -obj-$(CONFIG_PCI_P2PDMA)	+= p2pdma.o
-> +obj-$(CONFIG_PCI_P2PDMA_CORE)	+= p2pdma.o
->  obj-$(CONFIG_XEN_PCIDEV_FRONTEND) += xen-pcifront.o
->  obj-$(CONFIG_VGA_ARB)		+= vgaarb.o
->  obj-$(CONFIG_PCI_DOE)		+= doe.o
-> diff --git a/drivers/pci/p2pdma.c b/drivers/pci/p2pdma.c
-> index 7c898542af8d..619d46c652b8 100644
-> --- a/drivers/pci/p2pdma.c
-> +++ b/drivers/pci/p2pdma.c
-> @@ -28,6 +28,14 @@ struct pci_p2pdma {
->  	struct p2pdma_provider mem[PCI_STD_NUM_BARS];
+> -struct vfio_pci_dma_buf {
+> -	struct dma_buf *dmabuf;
+> -	struct vfio_pci_core_device *vdev;
+> -	struct list_head dmabufs_elm;
+> -	size_t size;
+> -	struct phys_vec *phys_vec;
+> -	struct p2pdma_provider *provider;
+> -	u32 nr_ranges;
+> -	struct kref kref;
+> -	struct completion comp;
+> -	u8 revoked : 1;
+> -};
+> -
+>  static int vfio_pci_dma_buf_attach(struct dma_buf *dmabuf,
+>  				   struct dma_buf_attachment *attachment)
+>  {
+> @@ -106,6 +93,135 @@ static const struct dma_buf_ops vfio_pci_dmabuf_ops = {
+>  	.release = vfio_pci_dma_buf_release,
 >  };
 >  
-> +/*
-> + * CONFIG_PCI_P2PDMA_CORE provides just a bare-bones init and
-> + * pcim_p2pdma_provider() interface (used by things like VFIO even if
-> + * full P2PDMA isn't present).  The full P2PDMA feature is under the
-> + * CONFIG_PCI_P2PDMA option.
-> + */
-> +#ifdef CONFIG_PCI_P2PDMA
-> +
->  struct pci_p2pdma_pagemap {
->  	struct dev_pagemap pgmap;
->  	struct p2pdma_provider *mem;
-> @@ -226,6 +234,8 @@ static const struct dev_pagemap_ops p2pdma_pgmap_ops = {
->  	.folio_free = p2pdma_folio_free,
->  };
->  
-> +#endif /* CONFIG_PCI_P2PDMA */
-> +
->  static void pci_p2pdma_release(void *data)
->  {
->  	struct pci_dev *pdev = data;
-> @@ -241,11 +251,13 @@ static void pci_p2pdma_release(void *data)
->  		synchronize_rcu();
->  	xa_destroy(&p2pdma->map_types);
->  
-> +#ifdef CONFIG_PCI_P2PDMA
->  	if (!p2pdma->pool)
->  		return;
->  
->  	gen_pool_destroy(p2pdma->pool);
->  	sysfs_remove_group(&pdev->dev.kobj, &p2pmem_group);
-> +#endif
->  }
->  
->  /**
-> @@ -330,6 +342,8 @@ struct p2pdma_provider *pcim_p2pdma_provider(struct pci_dev *pdev, int bar)
->  }
->  EXPORT_SYMBOL_GPL(pcim_p2pdma_provider);
->  
-> +#ifdef CONFIG_PCI_P2PDMA
-> +
->  static int pci_p2pdma_setup_pool(struct pci_dev *pdev)
->  {
->  	struct pci_p2pdma *p2pdma;
-> @@ -1207,3 +1221,5 @@ ssize_t pci_p2pdma_enable_show(char *page, struct pci_dev *p2p_dev,
->  	return sprintf(page, "%s\n", pci_name(p2p_dev));
->  }
->  EXPORT_SYMBOL_GPL(pci_p2pdma_enable_show);
-> +
-> +#endif
+> +int vfio_pci_dma_buf_find_pfn(struct vfio_pci_dma_buf *vpdmabuf,
 
-This deserves a /* CONFIG_PCI_P2PDMA */ reference like the previous
-long span, though potentially a better solution would be to split the
-core code out to a separate file with shared header.  I asked opus to
-see what this would look like and it generated the patch below
-(unverified, compile tested only).  Bigger diff, harder to follow
-blame, but the shape of the core is much more apparent.  You're welcome
-to take or leave it.  Thanks,
+This private dmabuf object pointer is named priv pretty consistently
+throughout the rest of the file.
+
+> +			      struct vm_area_struct *vma,
+> +			      unsigned long address,
+> +			      unsigned int order,
+> +			      unsigned long *out_pfn)
+> +{
+> +	/*
+> +	 * Given a VMA (start, end, pgoffs) and a fault address,
+> +	 * search the corresponding DMABUF's phys_vec[] to find the
+> +	 * range representing the address's offset into the VMA, and
+> +	 * its PFN.
+> +	 *
+> +	 * The phys_vec[] ranges represent contiguous spans of VAs
+> +	 * upwards from the buffer offset 0; the actual PFNs might be
+> +	 * in any order, overlap/alias, etc.  Calculate an offset of
+> +	 * the desired page given VMA start/pgoff and address, then
+> +	 * search upwards from 0 to find which span contains it.
+> +	 *
+> +	 * On success, a valid PFN for a page sized by 'order' is
+> +	 * returned into out_pfn.
+> +	 *
+> +	 * Failure occurs if:
+> +	 * - The page would cross the edge of the VMA
+> +	 * - The page isn't entirely contained within a range
+> +	 * - We find a range, but the final PFN isn't aligned to the
+> +	 *   requested order.
+> +	 *
+> +	 * (Upon failure, the caller is expected to try again with a
+> +	 * smaller order; the tests above will always succeed for
+> +	 * order=0 as the limit case.)
+> +	 *
+> +	 * It's suboptimal if DMABUFs are created with neigbouring
+> +	 * ranges that are physically contiguous, since hugepages
+> +	 * can't straddle range boundaries.  (The construction of the
+> +	 * ranges vector should merge such ranges.)
+> +	 *
+> +	 * Finally, vma_pgoff_adjust is used for a DMABUF representing
+> +	 * a VFIO BAR mmap, which is created from the start of the
+> +	 * offset region.  It should be zero, or equal vm_pgoff.
+> +	 */
+> +
+> +	const unsigned long pagesize = PAGE_SIZE << order;
+> +	unsigned long vma_off = ((vma->vm_pgoff - vpdmabuf->vma_pgoff_adjust) <<
+> +				 PAGE_SHIFT) & VFIO_PCI_OFFSET_MASK;
+> +	unsigned long rounded_page_addr = ALIGN_DOWN(address, pagesize);
+> +	unsigned long rounded_page_end = rounded_page_addr + pagesize;
+> +	unsigned long page_buf_offset;
+> +	unsigned long range_buf_offset = 0;
+> +	unsigned int i;
+> +
+> +	if (rounded_page_addr < vma->vm_start || rounded_page_end > vma->vm_end) {
+> +		if (order > 0)
+> +			return -EAGAIN;
+> +
+> +		/* A fault address outside of the VMA is absurd. */
+> +		WARN(1, "Fault addr 0x%lx outside VMA 0x%lx-0x%lx\n",
+> +		     address, vma->vm_start, vma->vm_end);
+> +		return -EFAULT;
+> +	}
+> +
+> +	if (vpdmabuf->vma_pgoff_adjust != 0 &&
+> +	    vpdmabuf->vma_pgoff_adjust != (vma->vm_pgoff &
+> +					   (VFIO_PCI_OFFSET_MASK >> PAGE_SHIFT))) {
+> +		WARN(1, "Unexpected vma_pgoff_adjust 0x%lx (vm_pgoff 0x%lx)\n",
+> +		     vpdmabuf->vma_pgoff_adjust, vma->vm_pgoff);
+> +		return -EFAULT;
+> +	}
+
+This appears to be user trigger'able, by causing a vma to be split, and
+also unnecessary as it seems the math works out correctly for the split
+case.
+
+> +
+> +	if (unlikely(check_add_overflow(rounded_page_addr - vma->vm_start,
+> +					vma_off, &page_buf_offset)))
+> +		return -EFAULT;
+> +
+> +	for (i = 0; i < vpdmabuf->nr_ranges; i++) {
+> +		unsigned long page_buf_offset_end;
+> +		size_t range_len = vpdmabuf->phys_vec[i].len;
+> +		phys_addr_t range_start = vpdmabuf->phys_vec[i].paddr;
+> +
+> +		if (unlikely(check_add_overflow(page_buf_offset, pagesize,
+> +						&page_buf_offset_end)))
+> +			return -EFAULT;
+
+Why is this inside the loop, the args are invariant of anything
+modified in the loop.  Thanks,
 
 Alex
 
- drivers/pci/Kconfig        |   12 ++--
- drivers/pci/Makefile       |    1 
- drivers/pci/p2pdma.c       |  115 ++++-----------------------------------
- drivers/pci/p2pdma.h       |   30 ++++++++++
- drivers/pci/p2pdma_core.c  |  119 +++++++++++++++++++++++++++++++++++++++++
- include/linux/pci-p2pdma.h |   24 ++++----
- include/linux/pci.h        |    2 
- 7 files changed, 184 insertions(+), 119 deletions(-)
+> +		/*
+> +		 * If the current range starts after the page's span,
+> +		 * this and any future range won't match.  Bail early.
+> +		 */
+> +		if (page_buf_offset_end <= range_buf_offset)
+> +			break;
+> +
+> +		if (page_buf_offset >= range_buf_offset &&
+> +		    page_buf_offset_end <= range_buf_offset + range_len) {
+> +			/*
+> +			 * The faulting page is wholly contained
+> +			 * within the span represented by the range.
+> +			 * Validate PFN alignment for the order:
+> +			 */
+> +			unsigned long pfn = (range_start + page_buf_offset -
+> +					     range_buf_offset) / PAGE_SIZE;
+> +
+> +			if (IS_ALIGNED(pfn, 1 << order)) {
+> +				*out_pfn = pfn;
+> +				return 0;
+> +			}
+> +			/* Retry with smaller order */
+> +			return -EAGAIN;
+> +		}
+> +		range_buf_offset += range_len;
+> +	}
+> +
+> +	/*
+> +	 * A hugepage straddling a range boundary will fail to match a
+> +	 * range, but the address will (eventually) match when retried
+> +	 * with a smaller page.
+> +	 */
+> +	if (order > 0)
+> +		return -EAGAIN;
+> +
+> +	/*
+> +	 * If we get here, the address fell outside of the span
+> +	 * represented by the (concatenated) ranges.  Setup of a
+> +	 * mapping must ensure that the VMA is <= the total size of
+> +	 * the ranges, so this should never happen.  But, if it does,
+> +	 * force SIGBUS for the access and warn.
+> +	 */
+> +	WARN_ONCE(1, "No range for addr 0x%lx, order %d: VMA 0x%lx-0x%lx pgoff 0x%lx, %u ranges, size 0x%zx\n",
+> +		  address, order, vma->vm_start, vma->vm_end, vma->vm_pgoff,
+> +		  vpdmabuf->nr_ranges, vpdmabuf->size);
+> +
+> +	return -EFAULT;
+> +}
+> +
+>  /*
+>   * This is a temporary "private interconnect" between VFIO DMABUF and iommufd.
+>   * It allows the two co-operating drivers to exchange the physical address of
+> diff --git a/drivers/vfio/pci/vfio_pci_priv.h b/drivers/vfio/pci/vfio_pci_priv.h
+> index fca9d0dfac90..c8f6f959056a 100644
+> --- a/drivers/vfio/pci/vfio_pci_priv.h
+> +++ b/drivers/vfio/pci/vfio_pci_priv.h
+> @@ -23,6 +23,20 @@ struct vfio_pci_ioeventfd {
+>  	bool			test_mem;
+>  };
+>  
+> +struct vfio_pci_dma_buf {
+> +	struct dma_buf *dmabuf;
+> +	struct vfio_pci_core_device *vdev;
+> +	struct list_head dmabufs_elm;
+> +	size_t size;
+> +	struct phys_vec *phys_vec;
+> +	struct p2pdma_provider *provider;
+> +	u32 nr_ranges;
+> +	struct kref kref;
+> +	struct completion comp;
+> +	unsigned long vma_pgoff_adjust;
+> +	u8 revoked : 1;
+> +};
+> +
+>  bool vfio_pci_intx_mask(struct vfio_pci_core_device *vdev);
+>  void vfio_pci_intx_unmask(struct vfio_pci_core_device *vdev);
+>  
+> @@ -114,6 +128,12 @@ static inline bool vfio_pci_is_vga(struct pci_dev *pdev)
+>  	return (pdev->class >> 8) == PCI_CLASS_DISPLAY_VGA;
+>  }
+>  
+> +int vfio_pci_dma_buf_find_pfn(struct vfio_pci_dma_buf *vpdmabuf,
+> +			      struct vm_area_struct *vma,
+> +			      unsigned long address,
+> +			      unsigned int order,
+> +			      unsigned long *out_pfn);
+> +
+>  #ifdef CONFIG_VFIO_PCI_DMABUF
+>  int vfio_pci_core_feature_dma_buf(struct vfio_pci_core_device *vdev, u32 flags,
+>  				  struct vfio_device_feature_dma_buf __user *arg,
 
-diff --git a/drivers/pci/Kconfig b/drivers/pci/Kconfig
-index 33c88432b728..2e5af8c576f5 100644
---- a/drivers/pci/Kconfig
-+++ b/drivers/pci/Kconfig
-@@ -206,11 +206,7 @@ config PCIE_TPH
- config PCI_P2PDMA
- 	bool "PCI peer-to-peer transfer support"
- 	depends on ZONE_DEVICE
--	#
--	# The need for the scatterlist DMA bus address flag means PCI P2PDMA
--	# requires 64bit
--	#
--	depends on 64BIT
-+	select PCI_P2PDMA_CORE
- 	select GENERIC_ALLOCATOR
- 	select NEED_SG_DMA_FLAGS
- 	help
-@@ -226,6 +222,12 @@ config PCI_P2PDMA
- 
- 	  If unsure, say N.
- 
-+# Selected by features that only need the pcim_p2pdma_provider() interface
-+# (e.g. vfio-pci's DMABUF export of BAR ranges) without depending on the
-+# full ZONE_DEVICE-backed allocator that PCI_P2PDMA pulls in.
-+config PCI_P2PDMA_CORE
-+	bool
-+
- config PCI_LABEL
- 	def_bool y if (DMI || ACPI)
- 	select NLS
-diff --git a/drivers/pci/Makefile b/drivers/pci/Makefile
-index 41ebc3b9a518..0b32572d57a1 100644
---- a/drivers/pci/Makefile
-+++ b/drivers/pci/Makefile
-@@ -30,6 +30,7 @@ obj-$(CONFIG_PCI_SYSCALL)	+= syscall.o
- obj-$(CONFIG_PCI_STUB)		+= pci-stub.o
- obj-$(CONFIG_PCI_PF_STUB)	+= pci-pf-stub.o
- obj-$(CONFIG_PCI_ECAM)		+= ecam.o
-+obj-$(CONFIG_PCI_P2PDMA_CORE)	+= p2pdma_core.o
- obj-$(CONFIG_PCI_P2PDMA)	+= p2pdma.o
- obj-$(CONFIG_XEN_PCIDEV_FRONTEND) += xen-pcifront.o
- obj-$(CONFIG_VGA_ARB)		+= vgaarb.o
-diff --git a/drivers/pci/p2pdma.c b/drivers/pci/p2pdma.c
-index 7c898542af8d..158c274fda18 100644
---- a/drivers/pci/p2pdma.c
-+++ b/drivers/pci/p2pdma.c
-@@ -21,12 +21,7 @@
- #include <linux/seq_buf.h>
- #include <linux/xarray.h>
- 
--struct pci_p2pdma {
--	struct gen_pool *pool;
--	bool p2pmem_published;
--	struct xarray map_types;
--	struct p2pdma_provider mem[PCI_STD_NUM_BARS];
--};
-+#include "p2pdma.h"
- 
- struct pci_p2pdma_pagemap {
- 	struct dev_pagemap pgmap;
-@@ -226,110 +221,24 @@ static const struct dev_pagemap_ops p2pdma_pgmap_ops = {
- 	.folio_free = p2pdma_folio_free,
- };
- 
--static void pci_p2pdma_release(void *data)
-+/*
-+ * Tear down the allocator pool side of pci_p2pdma.  Called from the core
-+ * release path (pci_p2pdma_release in p2pdma_core.c) while pdev->p2pdma
-+ * has already been cleared but the structure itself has not yet been
-+ * freed.  Pairs with the rcu_dereference()s in pci_alloc_p2pmem() and
-+ * friends, so that no allocator readers are in flight when we destroy
-+ * the pool.
-+ */
-+void pci_p2pdma_release_pool(struct pci_p2pdma *p2pdma, struct pci_dev *pdev)
- {
--	struct pci_dev *pdev = data;
--	struct pci_p2pdma *p2pdma;
--
--	p2pdma = rcu_dereference_protected(pdev->p2pdma, 1);
--	if (!p2pdma)
--		return;
--
--	/* Flush and disable pci_alloc_p2p_mem() */
--	pdev->p2pdma = NULL;
--	if (p2pdma->pool)
--		synchronize_rcu();
--	xa_destroy(&p2pdma->map_types);
--
- 	if (!p2pdma->pool)
- 		return;
- 
-+	synchronize_rcu();
- 	gen_pool_destroy(p2pdma->pool);
- 	sysfs_remove_group(&pdev->dev.kobj, &p2pmem_group);
- }
- 
--/**
-- * pcim_p2pdma_init - Initialise peer-to-peer DMA providers
-- * @pdev: The PCI device to enable P2PDMA for
-- *
-- * This function initializes the peer-to-peer DMA infrastructure
-- * for a PCI device. It allocates and sets up the necessary data
-- * structures to support P2PDMA operations, including mapping type
-- * tracking.
-- */
--int pcim_p2pdma_init(struct pci_dev *pdev)
--{
--	struct pci_p2pdma *p2p;
--	int i, ret;
--
--	p2p = rcu_dereference_protected(pdev->p2pdma, 1);
--	if (p2p)
--		return 0;
--
--	p2p = devm_kzalloc(&pdev->dev, sizeof(*p2p), GFP_KERNEL);
--	if (!p2p)
--		return -ENOMEM;
--
--	xa_init(&p2p->map_types);
--	/*
--	 * Iterate over all standard PCI BARs and record only those that
--	 * correspond to MMIO regions. Skip non-memory resources (e.g. I/O
--	 * port BARs) since they cannot be used for peer-to-peer (P2P)
--	 * transactions.
--	 */
--	for (i = 0; i < PCI_STD_NUM_BARS; i++) {
--		if (!(pci_resource_flags(pdev, i) & IORESOURCE_MEM))
--			continue;
--
--		p2p->mem[i].owner = &pdev->dev;
--		p2p->mem[i].bus_offset =
--			pci_bus_address(pdev, i) - pci_resource_start(pdev, i);
--	}
--
--	ret = devm_add_action_or_reset(&pdev->dev, pci_p2pdma_release, pdev);
--	if (ret)
--		goto out_p2p;
--
--	rcu_assign_pointer(pdev->p2pdma, p2p);
--	return 0;
--
--out_p2p:
--	devm_kfree(&pdev->dev, p2p);
--	return ret;
--}
--EXPORT_SYMBOL_GPL(pcim_p2pdma_init);
--
--/**
-- * pcim_p2pdma_provider - Get peer-to-peer DMA provider
-- * @pdev: The PCI device to enable P2PDMA for
-- * @bar: BAR index to get provider
-- *
-- * This function gets peer-to-peer DMA provider for a PCI device. The lifetime
-- * of the provider (and of course the MMIO) is bound to the lifetime of the
-- * driver. A driver calling this function must ensure that all references to the
-- * provider, and any DMA mappings created for any MMIO, are all cleaned up
-- * before the driver remove() completes.
-- *
-- * Since P2P is almost always shared with a second driver this means some system
-- * to notify, invalidate and revoke the MMIO's DMA must be in place to use this
-- * function. For example a revoke can be built using DMABUF.
-- */
--struct p2pdma_provider *pcim_p2pdma_provider(struct pci_dev *pdev, int bar)
--{
--	struct pci_p2pdma *p2p;
--
--	if (!(pci_resource_flags(pdev, bar) & IORESOURCE_MEM))
--		return NULL;
--
--	p2p = rcu_dereference_protected(pdev->p2pdma, 1);
--	if (WARN_ON(!p2p))
--		/* Someone forgot to call to pcim_p2pdma_init() before */
--		return NULL;
--
--	return &p2p->mem[bar];
--}
--EXPORT_SYMBOL_GPL(pcim_p2pdma_provider);
--
- static int pci_p2pdma_setup_pool(struct pci_dev *pdev)
- {
- 	struct pci_p2pdma *p2pdma;
-@@ -932,7 +841,7 @@ void *pci_alloc_p2pmem(struct pci_dev *pdev, size_t size)
- 	struct pci_p2pdma *p2pdma;
- 
- 	/*
--	 * Pairs with synchronize_rcu() in pci_p2pdma_release() to
-+	 * Pairs with synchronize_rcu() in pci_p2pdma_release_pool() to
- 	 * ensure pdev->p2pdma is non-NULL for the duration of the
- 	 * read-lock.
- 	 */
-diff --git a/drivers/pci/p2pdma.h b/drivers/pci/p2pdma.h
-new file mode 100644
-index 000000000000..790e1df8b609
---- /dev/null
-+++ b/drivers/pci/p2pdma.h
-@@ -0,0 +1,30 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * PCI Peer-to-Peer DMA internal definitions, shared between p2pdma_core.c
-+ * (always built when CONFIG_PCI_P2PDMA_CORE is set) and p2pdma.c (built
-+ * only when the full CONFIG_PCI_P2PDMA feature is enabled).
-+ */
-+
-+#ifndef DRIVERS_PCI_P2PDMA_H
-+#define DRIVERS_PCI_P2PDMA_H
-+
-+#include <linux/genalloc.h>
-+#include <linux/pci.h>
-+#include <linux/pci-p2pdma.h>
-+#include <linux/xarray.h>
-+
-+struct pci_p2pdma {
-+	struct gen_pool *pool;
-+	bool p2pmem_published;
-+	struct xarray map_types;
-+	struct p2pdma_provider mem[PCI_STD_NUM_BARS];
-+};
-+
-+#ifdef CONFIG_PCI_P2PDMA
-+void pci_p2pdma_release_pool(struct pci_p2pdma *p2pdma, struct pci_dev *pdev);
-+#else
-+static inline void pci_p2pdma_release_pool(struct pci_p2pdma *p2pdma,
-+					   struct pci_dev *pdev) {}
-+#endif
-+
-+#endif /* DRIVERS_PCI_P2PDMA_H */
-diff --git a/drivers/pci/p2pdma_core.c b/drivers/pci/p2pdma_core.c
-new file mode 100644
-index 000000000000..c7622613f03a
---- /dev/null
-+++ b/drivers/pci/p2pdma_core.c
-@@ -0,0 +1,119 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * PCI Peer-to-Peer DMA core: provider infrastructure shared by drivers
-+ * that only need pcim_p2pdma_provider() (e.g. vfio-pci) without depending
-+ * on the full CONFIG_PCI_P2PDMA allocator/pool feature.
-+ *
-+ * Copyright (c) 2016-2018, Logan Gunthorpe
-+ * Copyright (c) 2016-2017, Microsemi Corporation
-+ * Copyright (c) 2017, Christoph Hellwig
-+ * Copyright (c) 2018, Eideticom Inc.
-+ */
-+
-+#define pr_fmt(fmt) "pci-p2pdma: " fmt
-+
-+#include <linux/device.h>
-+#include <linux/pci.h>
-+#include <linux/pci-p2pdma.h>
-+#include <linux/rcupdate.h>
-+#include <linux/slab.h>
-+#include <linux/xarray.h>
-+
-+#include "p2pdma.h"
-+
-+static void pci_p2pdma_release(void *data)
-+{
-+	struct pci_dev *pdev = data;
-+	struct pci_p2pdma *p2pdma;
-+
-+	p2pdma = rcu_dereference_protected(pdev->p2pdma, 1);
-+	if (!p2pdma)
-+		return;
-+
-+	/* Flush and disable pci_alloc_p2p_mem() */
-+	pdev->p2pdma = NULL;
-+	pci_p2pdma_release_pool(p2pdma, pdev);
-+	xa_destroy(&p2pdma->map_types);
-+}
-+
-+/**
-+ * pcim_p2pdma_init - Initialise peer-to-peer DMA providers
-+ * @pdev: The PCI device to enable P2PDMA for
-+ *
-+ * This function initializes the peer-to-peer DMA infrastructure
-+ * for a PCI device. It allocates and sets up the necessary data
-+ * structures to support P2PDMA operations, including mapping type
-+ * tracking.
-+ */
-+int pcim_p2pdma_init(struct pci_dev *pdev)
-+{
-+	struct pci_p2pdma *p2p;
-+	int i, ret;
-+
-+	p2p = rcu_dereference_protected(pdev->p2pdma, 1);
-+	if (p2p)
-+		return 0;
-+
-+	p2p = devm_kzalloc(&pdev->dev, sizeof(*p2p), GFP_KERNEL);
-+	if (!p2p)
-+		return -ENOMEM;
-+
-+	xa_init(&p2p->map_types);
-+	/*
-+	 * Iterate over all standard PCI BARs and record only those that
-+	 * correspond to MMIO regions. Skip non-memory resources (e.g. I/O
-+	 * port BARs) since they cannot be used for peer-to-peer (P2P)
-+	 * transactions.
-+	 */
-+	for (i = 0; i < PCI_STD_NUM_BARS; i++) {
-+		if (!(pci_resource_flags(pdev, i) & IORESOURCE_MEM))
-+			continue;
-+
-+		p2p->mem[i].owner = &pdev->dev;
-+		p2p->mem[i].bus_offset =
-+			pci_bus_address(pdev, i) - pci_resource_start(pdev, i);
-+	}
-+
-+	ret = devm_add_action_or_reset(&pdev->dev, pci_p2pdma_release, pdev);
-+	if (ret)
-+		goto out_p2p;
-+
-+	rcu_assign_pointer(pdev->p2pdma, p2p);
-+	return 0;
-+
-+out_p2p:
-+	devm_kfree(&pdev->dev, p2p);
-+	return ret;
-+}
-+EXPORT_SYMBOL_GPL(pcim_p2pdma_init);
-+
-+/**
-+ * pcim_p2pdma_provider - Get peer-to-peer DMA provider
-+ * @pdev: The PCI device to enable P2PDMA for
-+ * @bar: BAR index to get provider
-+ *
-+ * This function gets peer-to-peer DMA provider for a PCI device. The lifetime
-+ * of the provider (and of course the MMIO) is bound to the lifetime of the
-+ * driver. A driver calling this function must ensure that all references to the
-+ * provider, and any DMA mappings created for any MMIO, are all cleaned up
-+ * before the driver remove() completes.
-+ *
-+ * Since P2P is almost always shared with a second driver this means some system
-+ * to notify, invalidate and revoke the MMIO's DMA must be in place to use this
-+ * function. For example a revoke can be built using DMABUF.
-+ */
-+struct p2pdma_provider *pcim_p2pdma_provider(struct pci_dev *pdev, int bar)
-+{
-+	struct pci_p2pdma *p2p;
-+
-+	if (!(pci_resource_flags(pdev, bar) & IORESOURCE_MEM))
-+		return NULL;
-+
-+	p2p = rcu_dereference_protected(pdev->p2pdma, 1);
-+	if (WARN_ON(!p2p))
-+		/* Someone forgot to call to pcim_p2pdma_init() before */
-+		return NULL;
-+
-+	return &p2p->mem[bar];
-+}
-+EXPORT_SYMBOL_GPL(pcim_p2pdma_provider);
-diff --git a/include/linux/pci-p2pdma.h b/include/linux/pci-p2pdma.h
-index 873de20a2247..4c42a7b2ee85 100644
---- a/include/linux/pci-p2pdma.h
-+++ b/include/linux/pci-p2pdma.h
-@@ -67,9 +67,22 @@ enum pci_p2pdma_map_type {
- 	PCI_P2PDMA_MAP_THRU_HOST_BRIDGE,
- };
- 
--#ifdef CONFIG_PCI_P2PDMA
-+#ifdef CONFIG_PCI_P2PDMA_CORE
- int pcim_p2pdma_init(struct pci_dev *pdev);
- struct p2pdma_provider *pcim_p2pdma_provider(struct pci_dev *pdev, int bar);
-+#else
-+static inline int pcim_p2pdma_init(struct pci_dev *pdev)
-+{
-+	return -EOPNOTSUPP;
-+}
-+static inline struct p2pdma_provider *pcim_p2pdma_provider(struct pci_dev *pdev,
-+							   int bar)
-+{
-+	return NULL;
-+}
-+#endif
-+
-+#ifdef CONFIG_PCI_P2PDMA
- int pci_p2pdma_add_resource(struct pci_dev *pdev, int bar, size_t size,
- 		u64 offset);
- int pci_p2pdma_distance_many(struct pci_dev *provider, struct device **clients,
-@@ -89,15 +102,6 @@ ssize_t pci_p2pdma_enable_show(char *page, struct pci_dev *p2p_dev,
- enum pci_p2pdma_map_type pci_p2pdma_map_type(struct p2pdma_provider *provider,
- 					     struct device *dev);
- #else /* CONFIG_PCI_P2PDMA */
--static inline int pcim_p2pdma_init(struct pci_dev *pdev)
--{
--	return -EOPNOTSUPP;
--}
--static inline struct p2pdma_provider *pcim_p2pdma_provider(struct pci_dev *pdev,
--							   int bar)
--{
--	return NULL;
--}
- static inline int pci_p2pdma_add_resource(struct pci_dev *pdev, int bar,
- 		size_t size, u64 offset)
- {
-diff --git a/include/linux/pci.h b/include/linux/pci.h
-index 2c4454583c11..531aec355686 100644
---- a/include/linux/pci.h
-+++ b/include/linux/pci.h
-@@ -557,7 +557,7 @@ struct pci_dev {
- 	u16		pasid_cap;	/* PASID Capability offset */
- 	u16		pasid_features;
- #endif
--#ifdef CONFIG_PCI_P2PDMA
-+#ifdef CONFIG_PCI_P2PDMA_CORE
- 	struct pci_p2pdma __rcu *p2pdma;
- #endif
- #ifdef CONFIG_PCI_DOE
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
