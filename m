@@ -2,75 +2,73 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id iE6fEclmHmoNjAkAu9opvQ
+	id MNmEA9FmHmoNjAkAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 02 Jun 2026 07:14:49 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 02 Jun 2026 07:14:57 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id E4A6262876D
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 02 Jun 2026 07:14:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B4B95628784
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 02 Jun 2026 07:14:56 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id F1BC740991
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  2 Jun 2026 05:14:47 +0000 (UTC)
-Received: from mail-lj1-f201.google.com (mail-lj1-f201.google.com [209.85.208.201])
-	by lists.linaro.org (Postfix) with ESMTPS id 86AC63FDAE
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 27 May 2026 12:16:26 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 856DC4098E
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  2 Jun 2026 05:14:55 +0000 (UTC)
+Received: from ale.deltatee.com (ale.deltatee.com [204.191.154.188])
+	by lists.linaro.org (Postfix) with ESMTPS id 59B763F732
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 27 May 2026 16:07:34 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=google.com header.s=20251104 header.b=LY9XTkDP;
-	spf=pass (lists.linaro.org: domain of 3mOAWagkKDQ0nyvpr4Buyt11tyr.p1zyv0n41-zz-5vtyv565.yv0n41.14t@flex--aliceryhl.bounces.google.com designates 209.85.208.201 as permitted sender) smtp.mailfrom=3mOAWagkKDQ0nyvpr4Buyt11tyr.p1zyv0n41-zz-5vtyv565.yv0n41.14t@flex--aliceryhl.bounces.google.com;
-	dmarc=pass (policy=reject) header.from=google.com
-Received: by mail-lj1-f201.google.com with SMTP id 38308e7fff4ca-3940824a47dso4614921fa.1
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 27 May 2026 05:16:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1779884185; x=1780488985; darn=lists.linaro.org;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=3GySeGqKvH9w0k+SKK+eNFV995XnhG9D+usTEWb/rPg=;
-        b=LY9XTkDPkEsWLoiTG5DIuqXwnvzlbbbavX6sfdhsZW7tAcz6j9wrNsfoaA8ETGMYjC
-         RcEJ99JvspOxq2nlZaINaejQl0OPPXRpKttNnuQVwN/Cw6kbVnIUiKh9gQ0Dx+C684fW
-         p5HcfjTQH56R5QGRM5310ojrFIG8YHg072AWF9Drym/J9GwRIY/RXmgTSZ642kFmnRhT
-         dVZreXX/NKw+MDeRw4xsNhxLyhg9baSx5InzmbipseRth5LjeSiArbv2SkJSSBKvXNxc
-         9z0Itw7JeJhmV6NcN551amQeoeEBpajPVaUP8YqCTKvwQEjH6Z/rUkeWhagEgKPXx0tb
-         ki5g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779884185; x=1780488985;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=3GySeGqKvH9w0k+SKK+eNFV995XnhG9D+usTEWb/rPg=;
-        b=LUAWHU/QMuTMx/y7sEBYdihn92Nd8968/hJbGIyr3LwSP8rSGBoCulrwha/r1f9Rb9
-         bImv6/YW7OdAOnWtD/t6Hb372U+tsByOMJ8izDqNE/Sq2vEyNde4xFoHOio9APHlHuJv
-         KAllmLWWh3bMnVxAJm3bVeHpLGQ3zuAosEfBC6LLI95LBBsz39yohda0E/mKCL7BQZ+d
-         j6IRFeHb3n9rfdXVXrBz1AILKUVE5O08iZo+euNL5S6qswIONpafl3YqWp9NRcRtgFv0
-         ypCEAi6FYeyZAcUjOJ3vtLcpppBabQvl25effWnIUA/q6DPSbYZZwm5TXyKN/48XG6xP
-         T+Qw==
-X-Forwarded-Encrypted: i=1; AFNElJ/a1UWVU28TBhaCQN8GeK3a8SYXRaCUVKcjjADGfodajh+X+OzgBLpFQWSb1uF/BcOm5Igu7zMW6cASiXDm@lists.linaro.org
-X-Gm-Message-State: AOJu0YxNVocWi46oD7pSrg+W3oRTocraYIc/28s7bzthx4FY4yewTK65
-	ypjDk2ES4qf8tXA6u8qhxDB81ehDmwm+0HBGaznRzZW11/yTp+NkK3fPvsrrvdkGdzZ3kj/SfTJ
-	L7iKOhAl0ohy6yNnG6A==
-X-Received: from ljey13.prod.google.com ([2002:a2e:bb8d:0:b0:393:7fb2:6b5a])
- (user=aliceryhl job=prod-delivery.src-stubby-dispatcher) by
- 2002:a05:651c:907:b0:396:c3c:d27e with SMTP id 38308e7fff4ca-3960c3cd3femr45362351fa.12.1779884184566;
- Wed, 27 May 2026 05:16:24 -0700 (PDT)
-Date: Wed, 27 May 2026 12:16:23 +0000
-In-Reply-To: <20260526212857.1158294-6-lyude@redhat.com>
-Mime-Version: 1.0
-References: <20260526212857.1158294-1-lyude@redhat.com> <20260526212857.1158294-6-lyude@redhat.com>
-Message-ID: <ahbglxo5yePyjE81@google.com>
-From: Alice Ryhl <aliceryhl@google.com>
-To: Lyude Paul <lyude@redhat.com>
+	dkim=pass header.d=deltatee.com header.s=20200525 header.b=hKKQDdIr;
+	spf=pass (lists.linaro.org: domain of logang@deltatee.com designates 204.191.154.188 as permitted sender) smtp.mailfrom=logang@deltatee.com;
+	dmarc=pass (policy=quarantine) header.from=deltatee.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=deltatee.com; s=20200525; h=Subject:In-Reply-To:From:References:Cc:To:
+	MIME-Version:Date:Message-ID:content-disposition;
+	bh=qGgbZA7gj3eEje/Kt3h0lR6kJ8rSI8Qm0mNt/KdiiAg=; b=hKKQDdIrR+jWwnj24G+ln2wtbI
+	dqLuifKrJ1IXNelOU+BQve3+wXU3dNpcHAqIpwfFWbRuzpdMBbEoZEURfIlX3FyOZbDB0V6U2zy0F
+	tGJiCdbanctZEtuWZEc6Ctk4z8ZY/m6I58gtn1PuvZolrRTGKRZm57hzhNjrGR5XyHwNAXbmyhjQc
+	YxQdPm9C0dkk+aNXmXyJi1bGuIT5XS/9RVo5R5qwEiNZf12fPWzrOUCArdpSJYEDRGqxHeVyHTzla
+	fSY3zJeaAzjwNg+t29KhK1Npb/Oa6Yl5CyzWl7nGKurmy3jhZ8GrWFQuMN9hWfvqoM+9p8sc85bSp
+	gztv1aSA==;
+Received: from d142-179-236-232.abhsia.telus.net ([142.179.236.232] helo=[192.168.11.155])
+	by ale.deltatee.com with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.98.2)
+	(envelope-from <logang@deltatee.com>)
+	id 1wSGn0-00000001YTC-0svZ;
+	Wed, 27 May 2026 10:07:26 -0600
+Message-ID: <843e8525-5927-45b5-a3e2-a5ec16234398@deltatee.com>
+Date: Wed, 27 May 2026 10:07:22 -0600
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+To: Matt Evans <mattev@meta.com>, Alex Williamson <alex@shazbot.org>,
+ Leon Romanovsky <leon@kernel.org>, Jason Gunthorpe <jgg@nvidia.com>,
+ Alex Mastro <amastro@fb.com>, =?UTF-8?Q?Christian_K=C3=B6nig?=
+ <christian.koenig@amd.com>, Bjorn Helgaas <bhelgaas@google.com>
+References: <20260527102319.100128-1-mattev@meta.com>
+ <20260527102319.100128-2-mattev@meta.com>
+Content-Language: en-US
+From: Logan Gunthorpe <logang@deltatee.com>
+In-Reply-To: <20260527102319.100128-2-mattev@meta.com>
+X-SA-Exim-Connect-IP: 142.179.236.232
+X-SA-Exim-Rcpt-To: mattev@meta.com, alex@shazbot.org, leon@kernel.org, jgg@nvidia.com, amastro@fb.com, christian.koenig@amd.com, bhelgaas@google.com, mngyadam@amazon.de, dmatlack@google.com, bjorn@kernel.org, sumit.semwal@linaro.org, kevin.tian@intel.com, ankita@nvidia.com, praan@google.com, apopple@nvidia.com, vivek.kasireddy@intel.com, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org, linux-pci@vger.kernel.org
+X-SA-Exim-Mail-From: logang@deltatee.com
+X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-25) on ale.deltatee.com
+X-Spam-Level: 
+X-Spam-Status: No, score=-6.7 required=5.0 tests=ALL_TRUSTED,BAYES_00,
+	MYRULES_FREE autolearn=no autolearn_force=no version=4.0.1
+X-SA-Exim-Version: 4.2.1 (built Sun, 23 Feb 2025 07:57:16 +0000)
+X-SA-Exim-Scanned: Yes (on ale.deltatee.com)
 X-Spamd-Bar: ---
-X-MailFrom: 3mOAWagkKDQ0nyvpr4Buyt11tyr.p1zyv0n41-zz-5vtyv565.yv0n41.14t@flex--aliceryhl.bounces.google.com
+X-MailFrom: logang@deltatee.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: DYIMVFKB32I76BZQOB3WYLAH6YGUH3VP
-X-Message-ID-Hash: DYIMVFKB32I76BZQOB3WYLAH6YGUH3VP
-X-Mailman-Approved-At: Tue, 02 Jun 2026 05:14:33 +0000
-CC: dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org, Alexandre Courbot <acourbot@nvidia.com>, Gary Guo <gary@garyguo.net>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, driver-core@lists.linux.dev, Miguel Ojeda <ojeda@kernel.org>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Simona Vetter <simona@ffwll.ch>, linux-kernel@vger.kernel.org, Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org, "Rafael J . Wysocki" <rafael@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Maxime Ripard <mripard@kernel.org>, David Airlie <airlied@gmail.com>, Benno Lossin <lossin@kernel.org>, linaro-mm-sig@lists.linaro.org, Danilo Krummrich <dakr@kernel.org>, Mukesh Kumar Chaurasiya <mkchauras@gmail.com>, Asahi Lina <lina+kernel@asahilina.net>, Daniel Almeida <daniel.almeida@collabora.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Message-ID-Hash: JY4EBDWTLGC3SSRDMKJBBEY37NKCZPP7
+X-Message-ID-Hash: JY4EBDWTLGC3SSRDMKJBBEY37NKCZPP7
+X-Mailman-Approved-At: Tue, 02 Jun 2026 05:14:34 +0000
+CC: Mahmoud Adam <mngyadam@amazon.de>, David Matlack <dmatlack@google.com>, =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Kevin Tian <kevin.tian@intel.com>, Ankit Agrawal <ankita@nvidia.com>, Pranjal Shrivastava <praan@google.com>, Alistair Popple <apopple@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org, linux-pci@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v14 5/6] rust: drm: gem/shmem: Add DmaResvGuard helper
+Subject: [Linaro-mm-sig] Re: [PATCH v2 1/9] PCI/P2PDMA: Add CONFIG_PCI_P2PDMA_CORE
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DYIMVFKB32I76BZQOB3WYLAH6YGUH3VP/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JY4EBDWTLGC3SSRDMKJBBEY37NKCZPP7/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -79,104 +77,93 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [5.49 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[google.com : SPF not aligned (relaxed),reject];
-	SUSPICIOUS_RECIPS(1.50)[];
-	DATE_IN_PAST(1.00)[136];
-	R_DKIM_REJECT(1.00)[google.com:s=20251104];
-	MV_CASE(0.50)[];
+X-Spamd-Result: default: False [2.99 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[deltatee.com : SPF not aligned (relaxed),quarantine];
+	R_DKIM_REJECT(1.00)[deltatee.com:s=20200525];
+	DATE_IN_PAST(1.00)[133];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	GREYLIST(0.00)[pass,meta];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	ARC_NA(0.00)[];
 	RCVD_COUNT_THREE(0.00)[3];
-	RCPT_COUNT_TWELVE(0.00)[25];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[lists.freedesktop.org,vger.kernel.org,nvidia.com,garyguo.net,amd.com,lists.linux.dev,kernel.org,linux.intel.com,ffwll.ch,linaro.org,suse.de,gmail.com,lists.linaro.org,asahilina.net,collabora.com,linuxfoundation.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[aliceryhl@google.com,linaro-mm-sig-bounces@lists.linaro.org];
+	DKIM_TRACE(0.00)[deltatee.com:-];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[google.com:-];
-	NEURAL_HAM(-0.00)[-0.998];
+	RCPT_COUNT_TWELVE(0.00)[22];
+	NEURAL_HAM(-0.00)[-0.565];
+	FROM_NEQ_ENVFROM(0.00)[logang@deltatee.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,kernel];
-	MISSING_XM_UA(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[]
-X-Rspamd-Queue-Id: E4A6262876D
+	TO_DN_SOME(0.00)[]
+X-Rspamd-Queue-Id: B4B95628784
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Tue, May 26, 2026 at 05:28:56PM -0400, Lyude Paul wrote:
-> Just a temporary holdover to make locking/unlocking the dma_resv lock much
-> easier.
-> 
-> Signed-off-by: Lyude Paul <lyude@redhat.com>
-> Co-authored-by: Alexandre Courbot <acourbot@nvidia.com>
 
-Missing SoB for Alexandre.
 
-> ---
->  rust/kernel/drm/gem/shmem.rs | 31 ++++++++++++++++++++++++++++++-
->  1 file changed, 30 insertions(+), 1 deletion(-)
+On 2026-05-27 04:23, Matt Evans wrote:
+> The P2PDMA code currently provides two features under the same
+> CONFIG_PCI_P2PDMA option:
 > 
-> diff --git a/rust/kernel/drm/gem/shmem.rs b/rust/kernel/drm/gem/shmem.rs
-> index 116ed0a13eac2..1b24cb1129a8b 100644
-> --- a/rust/kernel/drm/gem/shmem.rs
-> +++ b/rust/kernel/drm/gem/shmem.rs
-> @@ -27,7 +27,10 @@
->          Deref,
->          DerefMut, //
->      },
-> -    ptr::NonNull,
-> +    ptr::{
-> +        self,
-> +        NonNull, //
-> +    },
->  };
->  use gem::{
->      BaseObjectPrivate,
-> @@ -233,3 +236,29 @@ impl<T: DriverObject> driver::AllocImpl for Object<T> {
->          dumb_map_offset: None,
->      };
+>  1.  Locate providers via pcim_p2pdma_provider()
+>  2.  Manage actual P2P DMA
+> 
+> Other code (such as vfio-pci) depends on 1, without having a hard
+> dependency on 2.
+> 
+> A future commit expands the use of DMABUF in vfio-pci for non-P2P
+> scenarios, relying on pcim_p2pdma_provider() always being present.  If
+> that depended on CONFIG_PCI_P2PDMA, it would make vfio-pci only
+> available if CONFIG_ZONE_DEVICE is present (e.g. 64-bit systems), even
+> when P2P is not needed.
+> 
+> To resolve this, introduce CONFIG_PCI_P2PDMA_CORE which contains the
+> basic provider functionality to make it available even if the
+> CONFIG_PCI_P2PDMA feature is disabled or unavailable due to
+> !CONFIG_ZONE_DEVICE.  Users such as vfio-pci can enable their own P2P
+> features based off the original CONFIG_PCI_P2PDMA (available when
+> CONFIG_ZONE_DEVICE is set).
+> 
+> Signed-off-by: Matt Evans <mattev@meta.com>
+
+Largely this looks good to me. I have one minor nit below that you can
+apply or not. Either way, feel free to add:
+
+Reviewed-by: Logan Gunthorpe <logang@deltatee.com>
+
+
+>  static void pci_p2pdma_release(void *data)
+>  {
+>  	struct pci_dev *pdev = data;
+> @@ -241,11 +251,13 @@ static void pci_p2pdma_release(void *data)
+>  		synchronize_rcu();
+>  	xa_destroy(&p2pdma->map_types);
+>  
+> +#ifdef CONFIG_PCI_P2PDMA
+>  	if (!p2pdma->pool)
+>  		return;
+>  
+>  	gen_pool_destroy(p2pdma->pool);
+>  	sysfs_remove_group(&pdev->dev.kobj, &p2pmem_group);
+> +#endif
 >  }
-> +
-> +/// Private helper-type for holding the `dma_resv` object for a GEM shmem object.
-> +///
-> +/// When this is dropped, the `dma_resv` lock is dropped as well.
-> +///
-> +// TODO: This should be replace with a WwMutex equivalent once we have such bindings in the kernel.
-> +struct DmaResvGuard<'a, T: DriverObject>(&'a Object<T>);
 
-Is this missing a NotThreadSafe, or is it safe to unlock on a different
-thread than where it was locked?
+I'm personally not a fan of adding #ifdefs inside functions like this.
+This instance is small and easy to understand, but it can quickly become
+a bit of a mess if we start adding more features. I probably would have
+created a pci_p2pdma_release_pool() helper which does the inverse of
+pci_p2pdma_setup_pool(), it would be called in pci_p2pdma_release() and
+an empty implementation would be provided in the case where
+CONFIG_PCI_P2PDMA is not set.
 
-> +impl<'a, T: DriverObject> DmaResvGuard<'a, T> {
-> +    #[inline(always)]
-> +    #[expect(unused)]
-> +    fn new(obj: &'a Object<T>) -> Self {
-> +        // SAFETY: This lock is initialized throughout the lifetime of `object`.
-> +        unsafe { bindings::dma_resv_lock(obj.raw_dma_resv(), ptr::null_mut()) };
-> +
-> +        Self(obj)
-> +    }
-> +}
-> +
-> +impl<'a, T: DriverObject> Drop for DmaResvGuard<'a, T> {
-> +    #[inline(always)]
-> +    fn drop(&mut self) {
-> +        // SAFETY: We are releasing the lock grabbed during the creation of this object.
-> +        unsafe { bindings::dma_resv_unlock(self.0.raw_dma_resv()) };
-> +    }
-> +}
-> -- 
-> 2.54.0
-> 
+Logan
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
