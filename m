@@ -2,74 +2,96 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id UE1sFLiUGGqDlQgAu9opvQ
+	id GEr+EsHMGGpjnggAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 28 May 2026 21:17:12 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 29 May 2026 01:16:17 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id CCE7C5F6F78
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 28 May 2026 21:17:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DFFAA5FB4C0
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 29 May 2026 01:16:16 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4FF1F406F0
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 28 May 2026 19:17:10 +0000 (UTC)
-Received: from mail-qt1-f201.google.com (mail-qt1-f201.google.com [209.85.160.201])
-	by lists.linaro.org (Postfix) with ESMTPS id D90BC3F8F0
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 28 May 2026 19:17:01 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E4D2740512
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 28 May 2026 23:16:15 +0000 (UTC)
+Received: from fhigh-b8-smtp.messagingengine.com (fhigh-b8-smtp.messagingengine.com [202.12.124.159])
+	by lists.linaro.org (Postfix) with ESMTPS id 27E2640699
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 28 May 2026 23:15:59 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=google.com header.s=20251104 header.b="WZD/jqta";
-	spf=pass (lists.linaro.org: domain of 3rZQYaggKDZAHEy1u81E08805y.w86527uB8-66-C2052CDC.527uB8.8B0@flex--xuehaohu.bounces.google.com designates 209.85.160.201 as permitted sender) smtp.mailfrom=3rZQYaggKDZAHEy1u81E08805y.w86527uB8-66-C2052CDC.527uB8.8B0@flex--xuehaohu.bounces.google.com;
-	dmarc=pass (policy=reject) header.from=google.com
-Received: by mail-qt1-f201.google.com with SMTP id d75a77b69052e-515224a8aa0so64276551cf.0
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 28 May 2026 12:17:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1779995821; x=1780600621; darn=lists.linaro.org;
-        h=cc:to:from:subject:message-id:mime-version:date:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=ruTGaXcXn18lBWCvQSOsc+J+nN/WfLLq3tF9jPQMx3w=;
-        b=WZD/jqta6CwXBInp6i4o72JZmZPHpRgUY4yPs3/W2S5WvUe6V+meW+aq2zZf137pck
-         K1oh8OT7A95n69hwbSc/qzkkIXJ0WPIFvEsRl7RBEcgM7VE/jkCPlCRkhXUW2PT9RgYp
-         Ht+UkBVbIU1+7GAO6vSdBFlaZNa3mOoPQNOdkQtSDb6QAGPMkXLRxeWo8EtD+fe19Pkd
-         PmeL6/krzL6XUjfo+t09J2RAe562Q1AX3f6O90SdF0ByEcjum39ODdXI5RB5Th+If+Q+
-         j1jbIy2wErtAAdumli4IyrpvNZqfUvFWM3yMAaSnmGy2NsFUSOOqfeC8qp4jF2xShefJ
-         nYJA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779995821; x=1780600621;
-        h=cc:to:from:subject:message-id:mime-version:date:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=ruTGaXcXn18lBWCvQSOsc+J+nN/WfLLq3tF9jPQMx3w=;
-        b=bxbuSI6u/ASq4KbuBUW2POH1tJrfngWgjm3L4DoeNnWDcU/oh5cyobZhrWEUJVxVSC
-         YOoXiMyg33CSivYsikuaOeTdmgV9vxr13aUbsKnOesfHyaPXxhN2uw3GDCWg+FP7RpjF
-         alCP7l0UT9j5ozwyN9CBRjveBgBgR8rT/yAmNCajSaeTcqb/V8DFOOZSdRlZupVQNk/Q
-         pWQxzkTKLNY4LvgkPlTpFY0t0EocuaKrUtARfaA2aqZuMus5CbANnXkthXsDH1gktFFC
-         nN5HpIdaHXiTYnm5W+cjh/JYnfNZk6p4U0mM2Qtmi+jEneCZVPxGZlpu7C5+n/X63Rtn
-         l9eA==
-X-Forwarded-Encrypted: i=1; AFNElJ+SCAlYt/B7Zi+KoGvEfXHlBI0XKk8lr0RonzzK5c9KP3RHDKJTPIeF8+8LvamuZefdsdHK1acLXaBygoIT@lists.linaro.org
-X-Gm-Message-State: AOJu0Yz+i9rnRtQP9KXozvCVYyoysRERVcDU29a+vo82jZnGUNDYCIql
-	/mNyqRbCeZ1t/U2U1vcppMvBFwgFjHx/67Z9IkB4jqBtreFJ7P0azxh9yBHLm3AYvrB8EHXL65A
-	zG+6VUbgaSBFq
-X-Received: from qtlo20.prod.google.com ([2002:ac8:4294:0:b0:50f:d8f5:705f])
- (user=xuehaohu job=prod-delivery.src-stubby-dispatcher) by
- 2002:a05:622a:4c8c:b0:516:e8aa:271 with SMTP id d75a77b69052e-5172cb95a12mr2327291cf.26.1779995821046;
- Thu, 28 May 2026 12:17:01 -0700 (PDT)
-Date: Thu, 28 May 2026 19:16:58 +0000
-Mime-Version: 1.0
-X-Mailer: git-send-email 2.54.0.929.g9b7fa37559-goog
-Message-ID: <20260528191658.2506362-1-xuehaohu@google.com>
-From: David Hu <xuehaohu@google.com>
-To: Sumit Semwal <sumit.semwal@linaro.org>,
-	"=?UTF-8?q?Christian=20K=C3=B6nig?=" <christian.koenig@amd.com>
-X-Spamd-Bar: --
-Message-ID-Hash: DK5G3LVZWWLSVWNBASGRHIXSXC5OICR7
-X-Message-ID-Hash: DK5G3LVZWWLSVWNBASGRHIXSXC5OICR7
-X-MailFrom: 3rZQYaggKDZAHEy1u81E08805y.w86527uB8-66-C2052CDC.527uB8.8B0@flex--xuehaohu.bounces.google.com
+	dkim=pass header.d=shazbot.org header.s=fm3 header.b=Z4bBBsGn;
+	dkim=pass header.d=messagingengine.com header.s=fm3 header.b="O +b3et0";
+	spf=pass (lists.linaro.org: domain of alex@shazbot.org designates 202.12.124.159 as permitted sender) smtp.mailfrom=alex@shazbot.org;
+	dmarc=pass (policy=none) header.from=shazbot.org
+Received: from phl-compute-05.internal (phl-compute-05.internal [10.202.2.45])
+	by mailfhigh.stl.internal (Postfix) with ESMTP id 01E287A00D7;
+	Thu, 28 May 2026 19:15:57 -0400 (EDT)
+Received: from phl-frontend-04 ([10.202.2.163])
+  by phl-compute-05.internal (MEProxy); Thu, 28 May 2026 19:15:58 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=shazbot.org; h=
+	cc:cc:content-transfer-encoding:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm3; t=1780010157;
+	 x=1780096557; bh=yg66s9O+SRPyi5J7DC3xp85rl9vs67fv0ciXxbOGHHs=; b=
+	Z4bBBsGnBxwPrU6XLDjsZl7M0pJZ2nOdl/k3ZFDB62u+iUhT4iUUGl+ZrMuEO1OZ
+	TfBXJg281joygNxFr7Z1f29DZC5ed3IjBSGY0uvVoY2o7YU7MrsVF6Zqcn9CXV81
+	ze69HhGkadKPvxiVTLGfEUiaVbje8MYOPtHyiUnvvtQmvRB/7tyWiMZoSXf6iGLx
+	Bwlnh4wjRoziUbWYivsVijndyuUvSPfsndvpABXSDM4RIsp6/ooej0m6GBaNp2uT
+	8mIRGeXYXk2akVMy/AkCP7W00I4+utdAZP2WyaedHqx88Po3BZNwyF5qa8tJY7zO
+	G41ljqG1HNnKvvHRQIUa0g==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:feedback-id:feedback-id
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1780010157; x=
+	1780096557; bh=yg66s9O+SRPyi5J7DC3xp85rl9vs67fv0ciXxbOGHHs=; b=O
+	+b3et0UMZTJdVaVlGxlYJW8OzSJTKJq0kPSPG7PMCWcObRcI3KsU+cLrZRvtIC0J
+	V3GYzcvEJuDkpB9z4OJQ1r/M5hTM981X+8WVATZghbXvZ+3OOOfH7ppICDhQces4
+	R5WN0RVM7AKnR8WzN0TTNk14ujqa6E/ZdCZIK9chuBgGYMHudjTynOPiBwlJ/ruo
+	aeMNAi0RP7uV5SlYYGD3zYIvlPeerB5K2FmONrpUTAG2aXyxNosTcmEv0nCyUnyw
+	DHc4BphAzSpDk5yOAEqH0QuHg2tfNZkrOdvHMEXaNPSWu6TPY1mGBoXMiv4SkxVU
+	4piYn/giEOCGw/Y5rmSeA==
+X-ME-Sender: <xms:rcwYasn3PmD58RdH1awJqGILIXWy9Nrgul_-JwT5yI3dI15XOLNQLg>
+    <xme:rcwYavxd5BZolWN0XnJU62gq5WY7c6xRJ4wHfC1Jk3qLhynRu-WL2YWp1YJoaPYCg
+    LbElY2tDvApFf1tzK1PncvtfrIBPftjqg6O2DBJaZGMnnlJAGk7>
+X-ME-Received: <xmr:rcwYajKsuWCCiA_Q4lndhnKzohfYsVNQi8D_Q90c8X4YEm3fAuuBtdkhH58>
+X-ME-Proxy-Cause: dmFkZTGz+mBxqcdcSaiyBeR8rvmck9bXPGtwV5plDToDIpYQf9qQyGC2YiXS4ygunX+Nmn
+    FHaUbaUe6oG6Xhvtslza91zdB0vTV9sYjwwG7ioFYWSqdRy5UFCOtOnKGCpAf8Xiq+C8jl
+    MCfAUKm4YFJheQ6KX/FU7wcXo8/7WG+eGoNGYM3lxed1EA9MZLGde5nABFZKc8PpnDuCjK
+    8yRUcyr9f5WETtyMmyLHKi9h3s72aD9DKLi8sd9HlkiXHGl5zZDwko6aPUCz5E9SWNPjqM
+    9uV7U86V8/u+dy/2CwCe9rkuZW8diOnv7DZhXA6UtTZNR/xZ6iXLlvo9tamquTmQd1rXGb
+    8q6oJcTsyWI5FhxasW/4kAX2T9+wxLn5QN0tWKRY1q8/52tP2OIp00l++it3gArBmXj4pI
+    HPzebf9E20y2ASleLJSu4q/TdTGyfPG8BaErZurnYc1G7hIqgerUKUmFsPdu+GQ9BPq/5c
+    dSFZpMyxi8ygmGK1rKMMOVJfEDBwYnJZKmHtM+15wGEFf9RKnVhgaaV2AYUTAHcIsN3Pxm
+    gSfv35HcuahTRM7Ttj57UkF6B6weNcZC3xhsdnbi8SQfmnDsRMPaMB3C2NTQn4JjLFwXAg
+    vby5p69BsDbSArRCdurZQOR8gkFWw3yHTgblLmu4CDIueKlkEV1VZqxQWgpg
+X-ME-Proxy: <xmx:rcwYaiJOt4vSeOqxNKCYF7P5zRZL9pDlRg-kQNH8QOjGBs491wNyOQ>
+    <xmx:rcwYaiUjX3_qxwxGAJslB43R2G6z4CLFr8wNIdeR07Z_J06cqBmJQQ>
+    <xmx:rcwYaqBGejCZ7F0Qm__qHxUKiqgR50qnYNAUa09MJQqUbZidAlsW7A>
+    <xmx:rcwYalH49KqnlSsvQE7fhYnR85vpAeEhQUVrhcuxgMzsoCSlwXicAA>
+    <xmx:rcwYaiwY7dD-bmzwoVMIi8aW252Fc8QwJ5siw2WbB_WxQph_2dnMcL70>
+Feedback-ID: i03f14258:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
+ 28 May 2026 19:15:55 -0400 (EDT)
+Date: Thu, 28 May 2026 17:14:32 -0600
+From: Alex Williamson <alex@shazbot.org>
+To: Matt Evans <mattev@meta.com>
+Message-ID: <20260528171432.771a1a30@shazbot.org>
+In-Reply-To: <20260527102319.100128-10-mattev@meta.com>
+References: <20260527102319.100128-1-mattev@meta.com>
+	<20260527102319.100128-10-mattev@meta.com>
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.51; x86_64-pc-linux-gnu)
+MIME-Version: 1.0
+X-Spamd-Bar: ----
+Message-ID-Hash: 4T76L5BW45C7BKQDYGCPEK34D2FDQ57X
+X-Message-ID-Hash: 4T76L5BW45C7BKQDYGCPEK34D2FDQ57X
+X-MailFrom: alex@shazbot.org
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
-CC: Nicolin Chen <nicolinc@nvidia.com>, Leon Romanovsky <leon@kernel.org>, Kevin Tian <kevin.tian@intel.com>, Ankit Agrawal <ankita@nvidia.com>, Jason Gunthorpe <jgg@ziepe.ca>, Alex Williamson <alex@shazbot.org>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, jmoroni@google.com, praan@google.com, David Hu <xuehaohu@google.com>, stable@vger.kernel.org, iommu@lists.linux.dev
+CC: Leon Romanovsky <leon@kernel.org>, Jason Gunthorpe <jgg@nvidia.com>, Alex Mastro <amastro@fb.com>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Bjorn Helgaas <bhelgaas@google.com>, Logan Gunthorpe <logang@deltatee.com>, Mahmoud Adam <mngyadam@amazon.de>, David Matlack <dmatlack@google.com>, =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Kevin Tian <kevin.tian@intel.com>, Ankit Agrawal <ankita@nvidia.com>, Pranjal Shrivastava <praan@google.com>, Alistair Popple <apopple@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org, linux-pci@vger.kernel.org, alex@shazbot.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v4] dma-buf: Fix silent overflow for phys vec to sgt
+Subject: [Linaro-mm-sig] Re: [PATCH v2 9/9] vfio/pci: Add mmap() attributes to DMABUF feature
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DK5G3LVZWWLSVWNBASGRHIXSXC5OICR7/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4T76L5BW45C7BKQDYGCPEK34D2FDQ57X/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -78,120 +100,253 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [3.99 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[google.com : SPF not aligned (relaxed),reject];
-	MID_CONTAINS_FROM(1.00)[];
-	R_DKIM_REJECT(1.00)[google.com:s=20251104];
-	MV_CASE(0.50)[];
+X-Spamd-Result: default: False [0.59 / 15.00];
+	R_DKIM_REJECT(1.00)[shazbot.org:s=fm3,messagingengine.com:s=fm3];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx];
+	R_SPF_ALLOW(-0.20)[+mx:c];
+	DMARC_POLICY_SOFTFAIL(0.10)[shazbot.org : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	TO_DN_SOME(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[17];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	RCVD_COUNT_THREE(0.00)[3];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	NEURAL_HAM(-0.00)[-0.999];
-	FROM_NEQ_ENVFROM(0.00)[xuehaohu@google.com,linaro-mm-sig-bounces@lists.linaro.org];
 	RCVD_TLS_LAST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	DKIM_TRACE(0.00)[google.com:-]
-X-Rspamd-Queue-Id: CCE7C5F6F78
+	FROM_HAS_DN(0.00)[];
+	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[23];
+	DKIM_TRACE(0.00)[shazbot.org:-,messagingengine.com:-];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[alex@shazbot.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.996];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,linaro.org:email,shazbot.org:mid,meta.com:email]
+X-Rspamd-Queue-Id: DFFAA5FB4C0
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-In case MMIO size is bigger than 4G and peer2peer DMA goes
-through host bridge, we trigger a code path that assigns the
-total linked IOVA (which is greater than 4G) to mapped_len.
+On Wed, 27 May 2026 03:23:12 -0700
+Matt Evans <mattev@meta.com> wrote:
 
-Previously, `mapped_len` was declared as 32-bit `unsigned int`.
-When accumulating `size_t` lengths, this leads to a silent wrap-around.
-This truncation causes truncated lengths to be passed to functions
-like `fill_sg_entry()`.
+> A new VFIO feature, VFIO_DEVICE_FEATURE_DMA_BUF_MEMATTR, is added to
+> set (and get) CPU-facing memory type attributes for a DMABUF exported
+> from vfio-pci.  These are used for subsequent mmap()s of the buffer.
+> 
+> There are two attributes supported:
+>  - The default, VFIO_DEVICE_FEATURE_DMA_BUF_MEMATTR_UC
+>  - VFIO_DEVICE_FEATURE_DMA_BUF_MEMATTR_WC, which results in WC
+>    PTEs for the DMABUF's BAR region.
+> 
+> Signed-off-by: Matt Evans <mattev@meta.com>
+> ---
+>  drivers/vfio/pci/vfio_pci_core.c   |  2 +
+>  drivers/vfio/pci/vfio_pci_dmabuf.c | 70 +++++++++++++++++++++++++++++-
+>  drivers/vfio/pci/vfio_pci_priv.h   | 12 +++++
+>  include/uapi/linux/vfio.h          | 27 ++++++++++++
+>  4 files changed, 110 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/vfio/pci/vfio_pci_core.c b/drivers/vfio/pci/vfio_pci_core.c
+> index 5184b3cac160..e256a925e7ce 100644
+> --- a/drivers/vfio/pci/vfio_pci_core.c
+> +++ b/drivers/vfio/pci/vfio_pci_core.c
+> @@ -1590,6 +1590,8 @@ int vfio_pci_core_ioctl_feature(struct vfio_device *device, u32 flags,
+>  		return vfio_pci_core_feature_token(vdev, flags, arg, argsz);
+>  	case VFIO_DEVICE_FEATURE_DMA_BUF:
+>  		return vfio_pci_core_feature_dma_buf(vdev, flags, arg, argsz);
+> +	case VFIO_DEVICE_FEATURE_DMA_BUF_MEMATTR:
+> +		return vfio_pci_core_feature_dma_buf_memattr(vdev, flags, arg, argsz);
+>  	default:
+>  		return -ENOTTY;
+>  	}
+> diff --git a/drivers/vfio/pci/vfio_pci_dmabuf.c b/drivers/vfio/pci/vfio_pci_dmabuf.c
+> index 3fa14760898f..db8b95ddbe18 100644
+> --- a/drivers/vfio/pci/vfio_pci_dmabuf.c
+> +++ b/drivers/vfio/pci/vfio_pci_dmabuf.c
+> @@ -42,7 +42,10 @@ static int vfio_pci_dma_buf_mmap(struct dma_buf *dmabuf, struct vm_area_struct *
+>  	 * contained within the DMABUF size before calling this.
+>  	 */
+>  
+> -	vma->vm_page_prot = pgprot_noncached(vma->vm_page_prot);
+> +	if (READ_ONCE(priv->memattr) == VFIO_DEVICE_FEATURE_DMA_BUF_MEMATTR_WC)
+> +		vma->vm_page_prot = pgprot_writecombine(vma->vm_page_prot);
+> +	else
+> +		vma->vm_page_prot = pgprot_noncached(vma->vm_page_prot);
+>  	vma->vm_page_prot = pgprot_decrypted(vma->vm_page_prot);
+>  
+>  	/* See comments in vfio_pci_core_mmap() re VM_ALLOW_ANY_UNCACHED. */
+> @@ -464,6 +467,7 @@ int vfio_pci_core_feature_dma_buf(struct vfio_pci_core_device *vdev, u32 flags,
+>  	priv->vdev = vdev;
+>  	priv->nr_ranges = get_dma_buf.nr_ranges;
+>  	priv->size = length;
+> +	priv->memattr = VFIO_DEVICE_FEATURE_DMA_BUF_MEMATTR_NC;
+>  	ret = vdev->pci_ops->get_dmabuf_phys(vdev, &priv->provider,
+>  					     get_dma_buf.region_index,
+>  					     priv->phys_vec, dma_ranges,
+> @@ -731,4 +735,68 @@ int vfio_pci_dma_buf_revoke(struct vfio_pci_core_device *vdev, int dmabuf_fd)
+>  
+>  	return ret;
+>  }
+> +
+> +int vfio_pci_core_feature_dma_buf_memattr(
+> +	struct vfio_pci_core_device *vdev, u32 flags,
+> +	struct vfio_device_feature_dma_buf_memattr __user *arg,
+> +	size_t argsz)
+> +{
+> +	struct vfio_device_feature_dma_buf_memattr db_attr;
+> +	struct vfio_pci_dma_buf *priv;
+> +	struct dma_buf *dmabuf;
+> +	int ret;
+> +
+> +	if (!vdev->pci_ops || !vdev->pci_ops->get_dmabuf_phys)
+> +		return -EOPNOTSUPP;
+> +
+> +	ret = vfio_check_feature(flags, argsz,
+> +				 VFIO_DEVICE_FEATURE_GET |
+> +				 VFIO_DEVICE_FEATURE_SET,
+> +				 sizeof(db_attr));
 
-Fix this by changing `mapped_len` to `size_t` (64-bit). While
-at it, fix similar potential overflow issues in `calc_sg_nents`
-by using `size_t` for `nents` and checking against `UINT_MAX`
-and using `unsigned int` for the loop iterator in `fill_sg_entry`
-to match.
+I don't see why this needs to support GET.  Are we solving a userspace
+problem that doesn't exist?
 
-Fixes: 3aa31a8bb11e ("dma-buf: provide phys_vec to scatter-gather mapping routine")
-Cc: stable@vger.kernel.org
-Cc: iommu@lists.linux.dev
-Reviewed-by: Pranjal Shrivastava <praan@google.com>
-Signed-off-by: David Hu <xuehaohu@google.com>
----
-Changes in v4:
- - Added WARN_ON_ONCE() to the nents overflow check to prevent silent
-   failures (Claude Bot).
+> +	if (ret != 1)
+> +		return ret;
+> +
+> +	if (copy_from_user(&db_attr, arg, sizeof(db_attr)))
+> +		return -EFAULT;
+> +
+> +	dmabuf = dma_buf_get(db_attr.dmabuf_fd);
+> +	if (IS_ERR(dmabuf))
+> +		return PTR_ERR(dmabuf);
+> +
+> +	/* Verify DMABUF: see comments in vfio_pci_dma_buf_revoke() */
+> +	priv = dmabuf->priv;
+> +	if (dmabuf->ops != &vfio_pci_dmabuf_ops || priv->vdev != vdev) {
+> +		ret = -ENODEV;
+> +		goto out_put_buf;
+> +	}
+> +
+> +	ret = 0;
+> +	scoped_guard(rwsem_write, &vdev->memory_lock) {
 
-Changes in v3:
- - Removed leftover sentence fragment from the commit message.
- - Kept `nents = 0` initialization (previously stated as removed in the
-   v2 changelog) as it is strictly required for the `+=` accumulation
-   loop in `calc_sg_nents()`.
+Why?  This doesn't serialize against mmap.  Just use a WRITE_ONCE() to
+match the READ_ONCE() on mmap?
 
-Changes in v2:
- - Fixed 'IVOA' -> 'IOVA' typo and expanded commit message (Claude Bot).
- - Added Reverse Xmas tree formatting (Pranjal).
- - Folded in extra bounds checking for calc_sg_nents() (Pranjal).
- - Folded in type consistency fix for fill_sg_entry() (Pranjal).
+> +		uint32_t old_attr = priv->memattr;
+> +
+> +		if (flags & VFIO_DEVICE_FEATURE_SET) {
+> +			switch(db_attr.memattr) {
+> +			case VFIO_DEVICE_FEATURE_DMA_BUF_MEMATTR_NC:
+> +			case VFIO_DEVICE_FEATURE_DMA_BUF_MEMATTR_WC:
+> +				priv->memattr = db_attr.memattr;
+> +				break;
+> +
+> +			default:
+> +				ret = -ENOTSUPP;
 
- drivers/dma-buf/dma-buf-mapping.c | 10 +++++++---
- 1 file changed, 7 insertions(+), 3 deletions(-)
+-EINVAL
 
-diff --git a/drivers/dma-buf/dma-buf-mapping.c b/drivers/dma-buf/dma-buf-mapping.c
-index 794acff2546a..1aabc0ee70bb 100644
---- a/drivers/dma-buf/dma-buf-mapping.c
-+++ b/drivers/dma-buf/dma-buf-mapping.c
-@@ -10,7 +10,7 @@ static struct scatterlist *fill_sg_entry(struct scatterlist *sgl, size_t length,
- 					 dma_addr_t addr)
- {
- 	unsigned int len, nents;
--	int i;
-+	unsigned int i;
- 
- 	nents = DIV_ROUND_UP(length, UINT_MAX);
- 	for (i = 0; i < nents; i++) {
-@@ -36,7 +36,7 @@ static unsigned int calc_sg_nents(struct dma_iova_state *state,
- 				  struct phys_vec *phys_vec, size_t nr_ranges,
- 				  size_t size)
- {
--	unsigned int nents = 0;
-+	size_t nents = 0;
- 	size_t i;
- 
- 	if (!state || !dma_use_iova(state)) {
-@@ -51,6 +51,9 @@ static unsigned int calc_sg_nents(struct dma_iova_state *state,
- 		nents = DIV_ROUND_UP(size, UINT_MAX);
- 	}
- 
-+	if (WARN_ON_ONCE(nents > UINT_MAX))
-+		return 0;
-+
- 	return nents;
- }
- 
-@@ -95,9 +98,10 @@ struct sg_table *dma_buf_phys_vec_to_sgt(struct dma_buf_attachment *attach,
- 					 size_t nr_ranges, size_t size,
- 					 enum dma_data_direction dir)
- {
--	unsigned int nents, mapped_len = 0;
- 	struct dma_buf_dma *dma;
- 	struct scatterlist *sgl;
-+	size_t mapped_len = 0;
-+	unsigned int nents;
- 	dma_addr_t addr;
- 	size_t i;
- 	int ret;
--- 
-2.54.0.929.g9b7fa37559-goog
+> +			}
+> +		}
+> +		db_attr.memattr = old_attr;
+> +	}
+> +
+> +	if (!ret && (flags & VFIO_DEVICE_FEATURE_GET)) {
+> +		if (copy_to_user(arg, &db_attr, sizeof(db_attr)))
+> +			ret = -EFAULT;
+> +	}
+> +
+> + out_put_buf:
+> +	dma_buf_put(dmabuf);
+> +
+> +	return ret;
+> +
+> +}
+>  #endif /* CONFIG_VFIO_PCI_DMABUF */
+> diff --git a/drivers/vfio/pci/vfio_pci_priv.h b/drivers/vfio/pci/vfio_pci_priv.h
+> index a1e0f4fcb1dc..8067be45beb0 100644
+> --- a/drivers/vfio/pci/vfio_pci_priv.h
+> +++ b/drivers/vfio/pci/vfio_pci_priv.h
+> @@ -41,6 +41,7 @@ struct vfio_pci_dma_buf {
+>  	struct kref kref;
+>  	struct completion comp;
+>  	unsigned long vma_pgoff_adjust;
+> +	u32 memattr;
+>  	enum vfio_pci_dma_buf_status status;
+>  };
+>  
+> @@ -154,6 +155,10 @@ void vfio_pci_dma_buf_move(struct vfio_pci_core_device *vdev, bool revoked);
+>  int vfio_pci_core_feature_dma_buf(struct vfio_pci_core_device *vdev, u32 flags,
+>  				  struct vfio_device_feature_dma_buf __user *arg,
+>  				  size_t argsz);
+> +int vfio_pci_core_feature_dma_buf_memattr(
+> +	struct vfio_pci_core_device *vdev, u32 flags,
+> +	struct vfio_device_feature_dma_buf_memattr __user *arg,
+> +	size_t argsz);
+>  int vfio_pci_dma_buf_revoke(struct vfio_pci_core_device *vdev, int dmabuf_fd);
+>  #else
+>  static inline int
+> @@ -163,6 +168,13 @@ vfio_pci_core_feature_dma_buf(struct vfio_pci_core_device *vdev, u32 flags,
+>  {
+>  	return -ENOTTY;
+>  }
+> +static inline int vfio_pci_core_feature_dma_buf_memattr(
+> +	struct vfio_pci_core_device *vdev, u32 flags,
+> +	struct vfio_device_feature_dma_buf_memattr __user *arg,
+> +	size_t argsz)
+> +{
+> +	return -ENODEV;
+
+-ENOTTY
+
+Thanks,
+Alex
+
+> +}
+>  static inline int vfio_pci_dma_buf_revoke(struct vfio_pci_core_device *vdev,
+>  					  int dmabuf_fd)
+>  {
+> diff --git a/include/uapi/linux/vfio.h b/include/uapi/linux/vfio.h
+> index 02366e9f8e16..9b0b68f8a1ef 100644
+> --- a/include/uapi/linux/vfio.h
+> +++ b/include/uapi/linux/vfio.h
+> @@ -1564,6 +1564,33 @@ struct vfio_device_feature_dma_buf {
+>   */
+>  #define VFIO_DEVICE_FEATURE_MIG_PRECOPY_INFOv2  12
+>  
+> +/**
+> + * Given a dma_buf fd previously created by
+> + * VFIO_DEVICE_FEATURE_DMA_BUF, GET or SET the memory attribute that
+> + * will be used by future mmap()s of that fd.  SETting a new attribute
+> + * does not affect existing VMAs.
+> + *
+> + * The default, if no previous SET has been performed, is NC.
+> + *
+> + * Return: 0 on success, -1 and errno is set on failure:
+> + *
+> + *  ENOTSUPP: The given memattr is not supported.
+> + *  EBADF, EINVAL: dmabuf_fd is not a DMABUF fd.
+> + *  ENODEV: The dmabuf_fd does not match this VFIO device.
+> + */
+> +#define VFIO_DEVICE_FEATURE_DMA_BUF_MEMATTR 13
+> +
+> +/* Valid memory attributes for the memattr field */
+> +enum vfio_device_dma_buf_memattr {
+> +	VFIO_DEVICE_FEATURE_DMA_BUF_MEMATTR_NC = 0, /* pgprot_noncached */
+> +	VFIO_DEVICE_FEATURE_DMA_BUF_MEMATTR_WC = 1, /* pgprot_writecombine */
+> +};
+> +
+> +struct vfio_device_feature_dma_buf_memattr {
+> +	__s32	dmabuf_fd;
+> +	__u32	memattr;
+> +};
+> +
+>  /* -------- API for Type1 VFIO IOMMU -------- */
+>  
+>  /**
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
