@@ -2,190 +2,161 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KAICC0EyGWqDsggAu9opvQ
+	id cNEyMTA1GWqdswgAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 29 May 2026 08:29:21 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 29 May 2026 08:41:52 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id ADA865FDECA
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 29 May 2026 08:29:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 47BE35FE10C
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 29 May 2026 08:41:52 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 1D60B40977
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 29 May 2026 06:29:19 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 05ED040971
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 29 May 2026 06:41:51 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id AC8093FDAE
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 29 May 2026 06:29:11 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D63C540146
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 29 May 2026 06:41:44 +0000 (UTC)
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-From: reasonable.rabbit.epoq@hidingmail.net
+From: kaywilson@wshu.net
 To: linaro-mm-sig@lists.linaro.org
-Date: Fri, 29 May 2026 06:29:11 -0000
-Message-ID: <178003615170.1309045.957323971735149920@lists.linaro.org>
+Date: Fri, 29 May 2026 06:41:44 -0000
+Message-ID: <178003690487.1321337.10791269227308057263@lists.linaro.org>
 User-Agent: HyperKitty on http://lists-ec2.96boards.org/
-Message-ID-Hash: YBT453H25535TO62OHY3IRMUN67YP5CZ
-X-Message-ID-Hash: YBT453H25535TO62OHY3IRMUN67YP5CZ
-X-MailFrom: reasonable.rabbit.epoq@hidingmail.net
+Message-ID-Hash: ZC3GAPPB6EBX2TOFHKH3B2MJBBGFZA3M
+X-Message-ID-Hash: ZC3GAPPB6EBX2TOFHKH3B2MJBBGFZA3M
+X-MailFrom: kaywilson@wshu.net
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Terrifying Escape Challenges Inside Granny Horror Survival Adventure
+Subject: [Linaro-mm-sig] A Guide to Slither io and the Joy of Simple Gaming
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YBT453H25535TO62OHY3IRMUN67YP5CZ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZC3GAPPB6EBX2TOFHKH3B2MJBBGFZA3M/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [7.49 / 15.00];
-	SPAM_FLAG(5.00)[];
-	DMARC_POLICY_REJECT(2.00)[hidingmail.net : SPF not aligned (relaxed), No valid DKIM,reject];
+Content-Transfer-Encoding: base64
+X-Spamd-Result: default: False [2.59 / 15.00];
+	DMARC_POLICY_REJECT(2.00)[wshu.net : SPF not aligned (strict), No valid DKIM,reject];
 	MID_RHS_MATCH_TO(1.00)[];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx];
 	MIME_GOOD(-0.10)[text/plain];
+	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_ONE(0.00)[1];
-	GREYLIST(0.00)[pass,meta];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ARC_NA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	NEURAL_HAM(-0.00)[-0.551];
+	RCPT_COUNT_ONE(0.00)[1];
 	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_NEQ_ENVFROM(0.00)[reasonable.rabbit.epoq@hidingmail.net,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_NO_DN(0.00)[];
-	TO_DN_NONE(0.00)[];
-	R_DKIM_NA(0.00)[];
-	NEURAL_HAM(-0.00)[-0.247];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	ARC_NA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_NEQ_ENVFROM(0.00)[kaywilson@wshu.net,linaro-mm-sig-bounces@lists.linaro.org];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	TO_DN_NONE(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	R_DKIM_NA(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:mid,lists.linaro.org:helo]
-X-Rspamd-Queue-Id: ADA865FDECA
-X-Rspamd-Action: add header
+X-Rspamd-Queue-Id: 47BE35FE10C
+X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spam: Yes
 
-Introduction to Granny Horror Gameplay
-
-Granny is one of the most popular horror games in the mobile gaming world. The game creates a tense atmosphere filled with darkness, fear, and unpredictable danger. Players wake up inside an old house and must find a way to escape before time runs out. Every sound can attract danger, and every room may hide useful tools or deadly traps.   https://grannyfree.io/
-
-The simple gameplay mechanics make Granny easy to understand, but the increasing tension keeps players engaged for hours. Horror fans enjoy the thrilling experience because every match feels different. Random item locations and unpredictable enemy movement create excitement in every playthrough.
-
-The game combines stealth mechanics, puzzle-solving, and survival elements into a complete horror adventure. Players must stay quiet, move carefully, and think strategically to survive inside the terrifying house.
-
-Dark Atmosphere and Immersive Horror Experience
-Creepy Environment and Sound Design
-
-One of the strongest features of Granny is the frightening atmosphere. The old house contains dark hallways, broken furniture, hidden basements, and mysterious locked doors. Every area creates tension and uncertainty.
-
-The sound effects increase the horror experience dramatically. Footsteps, creaking floors, and sudden noises make every movement feel dangerous. Silence becomes just as terrifying as loud sounds because players never know where danger may appear next.
-
-The visual design also supports the horror theme. Dim lighting and shadow-filled rooms create suspense throughout the game. Even simple exploration becomes stressful because danger may appear at any moment.
-
-Fear Created Through Constant Pressure
-
-Granny creates fear through pressure instead of excessive action. Players cannot fight freely or move carelessly. One wrong decision may lead to immediate failure. This constant danger keeps players focused and emotionally involved.
-
-The limited time system adds more intensity. Players usually have only a few days to escape the house. Each failed attempt increases tension and forces players to learn from mistakes.
-
-The combination of stealth and survival mechanics creates memorable horror moments that many players continue discussing online.
-
-Survival Mechanics That Keep Players Engaged
-Stealth Gameplay and Smart Movement
-
-Stealth is the core mechanic of Granny. Running loudly or dropping objects may attract danger instantly. Players must crouch, hide under beds, and move slowly to avoid detection.
-
-Different areas of the house require careful observation. Some floors create noise, while certain doors open slowly and loudly. Understanding the environment becomes essential for survival.
-
-The game rewards patience and strategic thinking. Quick reactions help during emergencies, but long-term success depends on planning and observation.
-
-Puzzle Solving and Exploration
-
-Granny includes many puzzles that require exploration and logical thinking. Players must search for keys, tools, batteries, and hidden objects throughout the house.
-
-Many items have multiple purposes. A hammer may remove wooden barriers, while a key may unlock important escape routes. Players need to remember item locations and manage resources efficiently.
-
-The puzzles remain simple enough for beginners but challenging enough to maintain excitement. Exploration becomes rewarding because every discovered item may help progress toward freedom.
-
-Different Escape Routes and Replay Value
-Multiple Ways to Escape
-
-One reason behind the popularity of Granny is the variety of escape methods. Players can unlock doors, repair vehicles, or discover secret routes hidden inside the house.
-
-Different strategies create different experiences. Some players focus on quick escapes, while others explore every room carefully. This flexibility keeps the gameplay fresh over multiple sessions.
-
-The hidden secrets encourage replayability. Many players return to discover alternative endings and hidden features that they missed during earlier attempts.
-
-Difficulty Levels for All Players
-
-Granny includes several difficulty settings that make the game accessible for different skill levels. Beginners can choose easier modes with fewer dangers, while experienced players can select harder difficulties for more intense gameplay.
-
-Harder modes increase enemy speed, reduce available resources, and create additional challenges. These options allow players to customize the horror experience according to personal preference.
-
-This adjustable difficulty system helps Granny appeal to both casual gamers and hardcore horror fans.
-
-Why Granny Became Popular Worldwide
-Simple Controls and Accessible Gameplay
-
-Granny became successful partly because of its simple controls. Mobile players can easily learn movement, interaction, and hiding mechanics without complicated tutorials.
-
-The accessibility allows players from many age groups to enjoy the game. Quick learning combined with intense horror creates an experience that remains entertaining from the first session.
-
-The lightweight design also helps the game run smoothly on many devices, increasing global popularity.
-
-Viral Content and Streaming Success
-
-Many content creators helped Granny gain worldwide attention. Horror reactions, escape challenges, and gameplay videos became extremely popular on streaming platforms and social media.
-
-The unpredictable gameplay creates entertaining reactions that viewers enjoy watching. Every scream, failed escape, or close encounter becomes exciting content for audiences.
-
-Online communities continue sharing strategies, secrets, and challenge ideas related to Granny. This active fanbase helps maintain interest in the game years after release.
-
-Advanced Tips for Better Survival
-Learn Sound Management Techniques
-
-Sound management is extremely important in Granny. Players should avoid throwing objects unnecessarily and close doors carefully whenever possible.
-
-Listening carefully also provides valuable information. Enemy movement sounds may reveal safe paths or dangerous locations nearby.
-
-Headphones improve the overall experience because directional sound helps players understand threats more accurately.
-
-Memorize Important Locations
-
-Successful players often memorize room layouts and item spawn locations. Fast navigation becomes critical during dangerous situations.
-
-Important escape tools usually appear in random positions, but understanding the general map structure helps players search more efficiently.
-
-Practice improves confidence and reduces panic during stressful moments.
-
-Horror Elements That Make Granny Unique
-Psychological Fear Instead of Constant Action
-
-Unlike many action-heavy horror games, Granny focuses on psychological tension. Silence, uncertainty, and limited visibility create fear naturally.
-
-Players spend much of the game anticipating danger instead of constantly fighting enemies. This slower pacing creates stronger emotional impact.
-
-The feeling of helplessness increases immersion and makes every successful escape feel rewarding.
-
-Minimalist Design With Strong Impact
-
-Granny proves that simple design can still create powerful horror experiences. The game does not rely on advanced graphics or complex mechanics.
-
-Instead, strong atmosphere, effective sound design, and intelligent pacing create memorable gameplay. This minimalist approach allows the horror elements to remain the main focus.
-
-Many modern indie horror games use similar techniques inspired by the success of Granny.
-
-Conclusion
-
-Granny continues to attract horror fans because of intense survival gameplay, frightening atmosphere, and engaging escape mechanics. The combination of stealth, puzzles, and psychological horror creates a unique experience that remains entertaining even after multiple playthroughs.
-
-Simple controls, multiple difficulty settings, and different escape routes make the game accessible for many players around the world. Whether players enjoy exploration, suspense, or strategic survival, Granny delivers a thrilling horror adventure filled with tension and excitement.
-
-For anyone searching for a memorable horror game with challenging survival mechanics, Granny remains an excellent choice in the horror gaming genre.
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+SW4gYSB3b3JsZCBmaWxsZWQgd2l0aCBoeXBlci1yZWFsaXN0aWMgZ3JhcGhpY3MgYW5kIGNvbXBs
+ZXggbmFycmF0aXZlcywgc29tZXRpbWVzIHRoZSBtb3N0IGNhcHRpdmF0aW5nIGV4cGVyaWVuY2Vz
+IGFyZSB0aGUgc2ltcGxlc3QuIEVudGVyIFNsaXRoZXIgaW8sIGEgZ2FtZSB0aGF0IHRha2VzIHRo
+ZSBjbGFzc2ljICJzbmFrZSIgY29uY2VwdCBhbmQgaW5qZWN0cyBpdCB3aXRoIGEgaGVhbHRoeSBk
+b3NlIG9mIG9ubGluZSBtdWx0aXBsYXllciBtYXloZW0uIElmIHlvdSd2ZSBldmVyIGZvdW5kIHlv
+dXJzZWxmIGRyYXduIHRvIHRoZSBhZGRpY3RpdmUgbmF0dXJlIG9mIGdyb3dpbmcgYSBkaWdpdGFs
+IGNyZWF0dXJlLCBvciB0aGUgdGhyaWxsIG9mIG91dHNtYXJ0aW5nIHlvdXIgb3Bwb25lbnRzIGlu
+IGEgbG93LXN0YWtlcywgaGlnaC1mdW4gZW52aXJvbm1lbnQsIHRoZW4gcmVhZCBvbi4gVGhpcyBh
+cnRpY2xlIHdpbGwgZ3VpZGUgeW91IHRocm91Z2ggdGhlIGJhc2ljcyBvZiBTbGl0aGVyIGlvIGFu
+ZCBvZmZlciBzb21lIGluc2lnaHRzIGludG8gaG93IHRvIG1hc3RlciBpdHMgY2hhcm1pbmdseSBz
+dHJhaWdodGZvcndhcmQgZ2FtZXBsYXkuDQoNCldoYXQgaXMgU2xpdGhlciBpbz8gQSBKb3VybmV5
+IGludG8gdGhlIFdvcmxkIG9mIEdsb3dpbmcgU2VycGVudHMNClNsaXRoZXIgaW8gaXMgYW4gb25s
+aW5lIG11bHRpcGxheWVyIGFyY2FkZSBnYW1lIHdoZXJlIHlvdSBjb250cm9sIGEgdmlicmFudCwg
+Z2xvd2luZyBzbmFrZS4gWW91ciBvYmplY3RpdmUgaXMgZGVjZXB0aXZlbHkgc2ltcGxlOiBncm93
+IHlvdXIgc25ha2UgYnkgY29uc3VtaW5nIGdsb3dpbmcgcGVsbGV0cyBzY2F0dGVyZWQgYWNyb3Nz
+IHRoZSBtYXAsIHdoaWxlIGF2b2lkaW5nIGNvbGxpc2lvbnMgd2l0aCBvdGhlciBwbGF5ZXJzLiBU
+aGUgdHdpc3Q/IFVubGlrZSB0cmFkaXRpb25hbCBzbmFrZSBnYW1lcywgdG91Y2hpbmcgYW5vdGhl
+ciBzbmFrZSdzIGJvZHkgKG5vdCBqdXN0IGl0cyBoZWFkKSBtZWFucyBpbnN0YW50IGRlbWlzZS4g
+VGhpcyBjb3JlIG1lY2hhbmljIGNyZWF0ZXMgYSBkeW5hbWljIGFuZCBzdXJwcmlzaW5nbHkgc3Ry
+YXRlZ2ljIGVudmlyb25tZW50IHdoZXJlIGV2ZW4gdGhlIHNtYWxsZXN0IHNuYWtlIGNhbiB0YWtl
+IGRvd24gdGhlIGxhcmdlc3QsIGdpdmVuIHRoZSByaWdodCB0aW1pbmcgYW5kIHRhY3RpY2FsIHBv
+c2l0aW9uaW5nLiBUaGUgZ2FtZSdzIGFjY2Vzc2liaWxpdHksIHdpdGggaXRzIGJyb3dzZXItYmFz
+ZWQgcGxheSBhbmQgaW50dWl0aXZlIGNvbnRyb2xzLCBtYWtlcyBpdCBhIHBlcmZlY3QgcGljay11
+cC1hbmQtcGxheSBleHBlcmllbmNlIGZvciBhbnlvbmUgbG9va2luZyB0byB1bndpbmQgYW5kIGhh
+dmUgYSBsaXR0bGUgY29tcGV0aXRpdmUgZnVuLiANClRoZSBEYW5jZSBvZiB0aGUgU2VycGVudDog
+VW5kZXJzdGFuZGluZyBTbGl0aGVyIGlvIEdhbWVwbGF5DQpHZXR0aW5nIHN0YXJ0ZWQgaW4gU2xp
+dGhlciBpbyBpcyByZW1hcmthYmx5IGVhc3kuIFVwb24gbG9hZGluZyB0aGUgZ2FtZSwgeW91J2xs
+IGJlIHByb21wdGVkIHRvIGVudGVyIGEgbmlja25hbWUuIE9uY2UgeW91J3JlIGluLCB5b3UnbGwg
+ZmluZCB5b3Vyc2VsZiBhcyBhIHNtYWxsLCBicmlnaHRseSBjb2xvcmVkIHNuYWtlIG9uIGEgdmFz
+dCwgZGFyayBhcmVuYSBmaWxsZWQgd2l0aCBnbG93aW5nIGZvb2QuDQpodHRwczovL3NsaXRoZXJp
+by5vbmwNCk1vdmVtZW50OiBZb3VyIHNuYWtlIGZvbGxvd3MgeW91ciBtb3VzZSBjdXJzb3IuIFNp
+bXBseSBtb3ZlIHlvdXIgbW91c2UgdG8gZ3VpZGUgeW91ciBzbmFrZSBpbiB0aGUgZGVzaXJlZCBk
+aXJlY3Rpb24uIFRoZXJlIGFyZSBubyAidXAsIGRvd24sIGxlZnQsIHJpZ2h0IiBrZXlzIOKAkyBp
+dCdzIGFsbCBhYm91dCBzbW9vdGgsIGNvbnRpbnVvdXMgbW92ZW1lbnQuDQpCb29zdGluZzogVGhp
+cyBpcyB3aGVyZSB0aGUgc3RyYXRlZ2ljIGVsZW1lbnQgdHJ1bHkgc2hpbmVzLiBCeSBob2xkaW5n
+IGRvd24gdGhlIGxlZnQgbW91c2UgYnV0dG9uIChvciBzcGFjZWJhciksIHlvdXIgc25ha2Ugd2ls
+bCBhY2NlbGVyYXRlIHJhcGlkbHkuIFdoaWxlIGJvb3N0aW5nIGFsbG93cyB5b3UgdG8gcXVpY2ts
+eSBncmFiIGZvb2Qgb3Igb3V0bWFuZXV2ZXIgb3Bwb25lbnRzLCBpdCBjb21lcyBhdCBhIGNvc3Q6
+IHlvdXIgc25ha2Ugd2lsbCBzaHJpbmsgc2xpZ2h0bHkgYXMgaXQgY29uc3VtZXMgYSBwb3J0aW9u
+IG9mIGl0cyBvd24gbWFzcyB0byBmdWVsIHRoZSBib29zdC4gTWFzdGVyaW5nIHdoZW4gYW5kIHdo
+ZXJlIHRvIGJvb3N0IGlzIGNydWNpYWwgZm9yIHN1cnZpdmFsIGFuZCBncm93dGguDQpFYXRpbmc6
+IFRoZSBwcmltYXJ5IHdheSB0byBncm93IHlvdXIgc25ha2UgaXMgYnkgY29uc3VtaW5nIHRoZSBj
+b2xvcmZ1bCBwZWxsZXRzIHNjYXR0ZXJlZCBhY3Jvc3MgdGhlIG1hcC4gVGhlc2UgcGVsbGV0cyBh
+cHBlYXIgbmF0dXJhbGx5IGFuZCBhbHNvIGRyb3AgZnJvbSBkZWNlYXNlZCBzbmFrZXMuIExhcmdl
+ciBzbmFrZXMgbGVhdmUgYmVoaW5kIG1vcmUgZm9vZCwgY3JlYXRpbmcgb3Bwb3J0dW5pdGllcyBm
+b3Igc21hbGxlciBzbmFrZXMgdG8gcXVpY2tseSBidWxrIHVwLg0KRWxpbWluYXRpbmcgT3Bwb25l
+bnRzOiBUaGUgbW9zdCBzYXRpc2Z5aW5nIChhbmQgb2Z0ZW4gZnJ1c3RyYXRpbmcpIHBhcnQgb2Yg
+U2xpdGhlciBpbyBpcyB0YWtpbmcgZG93biBvdGhlciBwbGF5ZXJzLiBUbyBkbyB0aGlzLCB5b3Ug
+bmVlZCB0byB0cmljayBhbm90aGVyIHNuYWtlIGludG8gY29sbGlkaW5nIHdpdGggeW91ciBib2R5
+LiBUaGVyZSBhcmUgdmFyaW91cyB0YWN0aWNzLCBzdWNoIGFzIGNpcmNsaW5nIGFuIG9wcG9uZW50
+LCBjdXR0aW5nIHRoZW0gb2ZmLCBvciB1c2luZyBhIHdlbGwtdGltZWQgYm9vc3QgdG8gZ2V0IGlu
+IGZyb250IG9mIHRoZWlyIGhlYWQuIFdoZW4gYSBzbmFrZSBkaWVzLCBpdCBleHBsb2RlcyBpbnRv
+IGEgYnVyc3Qgb2YgaGlnaGx5IG51dHJpdGlvdXMgcGVsbGV0cywgcmVhZHkgZm9yIGNvbnN1bXB0
+aW9uLg0KVGlwcyBmb3IgU2VycGVudCBTdXByZW1hY3k6IE1hc3RlcmluZyB0aGUgQXJlbmENCldo
+aWxlIHRoZSBnYW1lcGxheSBpcyBzaW1wbGUsIGJlY29taW5nIGEgdHJ1bHkgbWFzc2l2ZSBzbmFr
+ZSByZXF1aXJlcyBhIGJsZW5kIG9mIHBhdGllbmNlLCBvYnNlcnZhdGlvbiwgYW5kIGNsZXZlciB0
+YWN0aWNzLg0KDQpQYXRpZW5jZSBpcyBhIFZpcnR1ZTogRG9uJ3QgcnVzaCBpbnRvIGV2ZXJ5IGVu
+Z2FnZW1lbnQuIEFzIGEgc21hbGwgc25ha2UsIHlvdXIgcHJpbWFyeSBnb2FsIGlzIHRvIGdyb3cu
+IEZvY3VzIG9uIGNvbnN1bWluZyBsb29zZSBwZWxsZXRzIGFuZCBhdm9pZGluZyBsYXJnZXIgcGxh
+eWVycy4NClRoZSBBcnQgb2YgdGhlIEJvb3N0OiBVc2UgeW91ciBib29zdCB3aXNlbHkuIEl0J3Mg
+ZXhjZWxsZW50IGZvciBlc2NhcGluZyBkYW5nZXJvdXMgc2l0dWF0aW9ucyBvciBxdWlja2x5IGdy
+YWJiaW5nIGEgY2x1c3RlciBvZiBmb29kLCBidXQgb3Zlci1ib29zdGluZyB3aWxsIHNocmluayB5
+b3UgdW5uZWNlc3NhcmlseS4gTGVhcm4gdG8gYW50aWNpcGF0ZSB3aGVyZSBmb29kIHdpbGwgYmUg
+YW5kIHVzZSBzaG9ydCBidXJzdHMgdG8gZ2V0IHRoZXJlIGVmZmljaWVudGx5Lg0KQ2lyY2xlIG9m
+IExpZmUgKGFuZCBEZWF0aCk6IE9uY2UgeW91J3ZlIGdyb3duIHRvIGEgcmVzcGVjdGFibGUgc2l6
+ZSwgeW91IGNhbiBzdGFydCB0byAiY2lyY2xlIiBzbWFsbGVyIHNuYWtlcy4gQnkgZ3JhZHVhbGx5
+IGVuY2xvc2luZyB0aGVtLCB5b3UgZm9yY2UgdGhlbSBpbnRvIGEgc21hbGxlciBhbmQgc21hbGxl
+ciBzcGFjZSB1bnRpbCB0aGV5IGluZXZpdGFibHkgY29sbGlkZSB3aXRoIHlvdXIgYm9keS4NCkVt
+YnJhY2UgdGhlIEVkZ2U6IFRoZSBlZGdlcyBvZiB0aGUgbWFwIGNhbiBiZSBzdXJwcmlzaW5nbHkg
+c2FmZSwgYXMgZmV3ZXIgcGxheWVycyB0ZW5kIHRvIGNvbmdyZWdhdGUgdGhlcmUuIEl04oCZcyBh
+IGdvb2QgcGxhY2UgdG8gZ3JvdyBpbiByZWxhdGl2ZSBwZWFjZSBkdXJpbmcgdGhlIGVhcmx5IHN0
+YWdlcyBvZiB5b3VyIGdhbWUuDQpDYXBpdGFsaXplIG9uIENoYW9zOiBXaGVuIGEgbGFyZ2Ugc25h
+a2UgZGllcywgaXQgY3JlYXRlcyBhIGZlZWRpbmcgZnJlbnp5LiBXaGlsZSBpdCdzIHRlbXB0aW5n
+IHRvIGRpdmUgaW4gaW1tZWRpYXRlbHksIG9ic2VydmUgdGhlIHNpdHVhdGlvbi4gT2Z0ZW4sIG90
+aGVyIHBsYXllcnMgd2lsbCBjb2xsaWRlIGluIHRoZWlyIGVhZ2VybmVzcywgbGVhdmluZyBldmVu
+IG1vcmUgZm9vZCBmb3IgYSBwYXRpZW50IG9ic2VydmVyLg0KRG9uJ3QgQmUgQWZyYWlkIHRvIERp
+ZTogU2VyaW91c2x5ISBFYWNoIGRlYXRoIGlzIGEgbGVhcm5pbmcgb3Bwb3J0dW5pdHkuIFBheSBh
+dHRlbnRpb24gdG8gaG93IHlvdSB3ZXJlIGVsaW1pbmF0ZWQgYW5kIHRyeSB0byBhdm9pZCBtYWtp
+bmcgdGhlIHNhbWUgbWlzdGFrZSB0d2ljZS4gVGhlIGJlYXV0eSBvZiBTbGl0aGVyIGlvIGlzIHRo
+YXQgeW91IGNhbiByZXN0YXJ0IGluc3RhbnRseSBhbmQganVtcCBiYWNrIGludG8gdGhlIGFjdGlv
+bi4NClRoZSBFbmRsZXNzIERhbmNlOiBXaHkgU2xpdGhlciBpbyBSZW1haW5zIFJlbGV2YW50DQpT
+bGl0aGVyIGlvLCBhdmFpbGFibGUgdG8gcGxheSBhdCBTbGl0aGVyIGlvLCBpcyBtb3JlIHRoYW4g
+anVzdCBhIGNhc3VhbCBnYW1lOyBpdCdzIGEgdGVzdGFtZW50IHRvIHRoZSBwb3dlciBvZiBzaW1w
+bGUgeWV0IGVuZ2FnaW5nIG1lY2hhbmljcy4gSXRzIGxvdyBiYXJyaWVyIHRvIGVudHJ5LCBjb21i
+aW5lZCB3aXRoIHN1cnByaXNpbmdseSBkZWVwIHN0cmF0ZWdpYyBwb3NzaWJpbGl0aWVzLCBtYWtl
+cyBpdCBhIHRpbWVsZXNzIGNsYXNzaWMuIFdoZXRoZXIgeW91J3JlIGxvb2tpbmcgZm9yIGEgcXVp
+Y2sgYnJlYWssIGEgY29tcGV0aXRpdmUgb3V0bGV0LCBvciBqdXN0IGEgY2hhbmNlIHRvIHVud2lu
+ZCwgZW1icmFjaW5nIHlvdXIgaW5uZXIgc2VycGVudCBpbiB0aGUgdmlicmFudCB3b3JsZCBvZiBT
+bGl0aGVyIGlvIGlzIGFuIGV4cGVyaWVuY2Ugd2VsbCB3b3J0aCB0cnlpbmcuIEdvIGZvcnRoLCBj
+b25zdW1lLCBhbmQgZG9taW5hdGUgdGhlIGxlYWRlcmJvYXJkIQ0KX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3Qg
+LS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4g
+ZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
