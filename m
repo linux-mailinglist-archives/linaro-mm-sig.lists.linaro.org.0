@@ -2,96 +2,35 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id GKnNG9HMGGpjnggAu9opvQ
+	id KAICC0EyGWqDsggAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 29 May 2026 01:16:33 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 29 May 2026 08:29:21 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 11F4D5FB4D5
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 29 May 2026 01:16:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ADA865FDECA
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 29 May 2026 08:29:20 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 1FEC640962
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 28 May 2026 23:16:32 +0000 (UTC)
-Received: from fhigh-b8-smtp.messagingengine.com (fhigh-b8-smtp.messagingengine.com [202.12.124.159])
-	by lists.linaro.org (Postfix) with ESMTPS id 5F40640705
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 28 May 2026 23:16:04 +0000 (UTC)
-Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=shazbot.org header.s=fm3 header.b=ULExHR24;
-	dkim=pass header.d=messagingengine.com header.s=fm3 header.b="c LW9CrQ";
-	spf=pass (lists.linaro.org: domain of alex@shazbot.org designates 202.12.124.159 as permitted sender) smtp.mailfrom=alex@shazbot.org;
-	dmarc=pass (policy=none) header.from=shazbot.org
-Received: from phl-compute-02.internal (phl-compute-02.internal [10.202.2.42])
-	by mailfhigh.stl.internal (Postfix) with ESMTP id 898077A00C3;
-	Thu, 28 May 2026 19:16:03 -0400 (EDT)
-Received: from phl-frontend-04 ([10.202.2.163])
-  by phl-compute-02.internal (MEProxy); Thu, 28 May 2026 19:16:04 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=shazbot.org; h=
-	cc:cc:content-transfer-encoding:content-type:content-type:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to; s=fm3; t=1780010163;
-	 x=1780096563; bh=0avyLy7kwCyKk2DtNAHb/3Ps4004TQje4fLolyCctqA=; b=
-	ULExHR24Uo1+eLcaXpEDEhSYKPGYJtI8zstS7G16DaKn8FGyDJTZ61uCwc5Gcg2X
-	9Sgs0nXVfuvdfxwaQ0L/pbFcUcXlfi3er7tDaLT/S2B0TXdzW7PJSm4ybyBMyPf4
-	qo23trcTtxkr4LRDgZy8nU746isteTf/qXBWxA31nZ7QSoxM4f7Vs9Tn6Mx9wiM+
-	By32cs8v1q2O0to3F4uawFk4gwQjwuiXfmuMXpfxLWUOlBKhU8VaCO22QLQ7xZDh
-	9pm5AsfBrn2PbUwvw+kbq4LDk8xYg88ajwNMhq2TZGKidXBFJ2rHYqGbB7OuWFat
-	QozxoWiTW30CewrlBx2UUg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:feedback-id:feedback-id
-	:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1780010163; x=
-	1780096563; bh=0avyLy7kwCyKk2DtNAHb/3Ps4004TQje4fLolyCctqA=; b=c
-	LW9CrQf9/xOwg5gssJRLoXEHIjTueQaI0GztV1k+SVFTKWB9XQ9XFKu7H5blA6+k
-	kZwJPliM2c4xOfWzeQMYsmDMEJwRXyq7Y1oMZTYidttnSNmy7rbWqI8Dh2XOXLVg
-	y67SlhoVrBkvEdIacTehh0PleO6pC+FMuSz/48cRzsdRzM7b+nUULnPIUnUY6czv
-	H5fDr6ATMoI+AxJwHiEvvNh2GFJO8UfrpclmCAdA1wchf4sNAZV5zvqo+ohBMnkm
-	qyxQSAV1C1y3gtiyPMMn8MCtmf27RNjAPDxw4xLOTxo1lbxeobtbstlaHd9BMGtw
-	fOxZCLaG8hW0+UMLyPCig==
-X-ME-Sender: <xms:s8wYahSSaf2xeyubfDiIAlafa-7UQ46TixbSlebSuGlv7MfDIWM0hg>
-    <xme:s8wYamf6Q85qDuOsdZwm5618zk1U3THmL7KKezUlOVnn6tW9eYnztwWRZ0Gh5qUXe
-    qD7f4Dj9dMnbqv6oDADi1YUutt6PkNjEsBSEEgP3ekHte8KmGw->
-X-ME-Received: <xmr:s8wYahiBJquXovM2MwTwsz7Y_dqpabVTYUca3qUDpQqVM9KGlMb5_-GSPjk>
-X-ME-Proxy-Cause: dmFkZTGz+mBxqcdcSaiyBeR8rvmck9bXPGtwV5plDToDIpYQf9qQyGC2YiXS4ygunX+Nmn
-    FHaUbaUe6oG6Xhvtslza91zdB0vTV9sYjwwG7ioFYWSqdRy5UFCOtOnKGCpAf8Xiq+C8jl
-    MCfAUKm4YFJheQ6KX/FU7wcXo8/7WG+eGoNGYM3lxed1EA9MZLGde5nABFZKc8PpnDuCjK
-    8yRUcyr9f5WETtyMmyLHKi9h3s72aD9DKLi8sd9HlkiXHGl5zZDwko6aPUCz5E9SWNPjqM
-    9uV7U86V8/u+dy/2CwCe9rkuZW8diOnv7DZhXA6UtTZNR/xZ6iXLlvo9tamquTmQd1rXm3
-    hLIZ2crgdGf7YUYn4LgNjw9HiZQ/kEEew/rhFzIGPQcp3QwRpxeOzhxu/1bsyG+CMVo3JH
-    UrE+g+ZoV8w53c7YPtoxgpDU+onZIBfoFyn2oW68Gb6W19Z9k9Q2Gkmz06DTOGltE3+RvQ
-    TJPJ90kOZpKuQ3gX5m3WMp9TMiDnLBWvtPLM/nvERk2egL/DG5R8K8C8X46Y5PpblRtXrE
-    eo2a/UQtpJa1HmsibdXVeOHfJIgyIckxgXjUEE7Hxt/vaP0TnqaPzH1xi3ORBo9bTm+1ll
-    +j0Y/o0/YUT/u8j56GF62gcKj9hp2MMI41t3WhD/oCeZZaZKWfJKcwy43Thw
-X-ME-Proxy: <xmx:s8wYap_OqhccregYVSDsebss7xlkgbvw3L7RjA0iIZS5CuWXzeAjaQ>
-    <xmx:s8wYapkTri4R7s3GsmDvg4oBK4xixSYdYxjFB0pD-bDNO0k8Hg4gfg>
-    <xmx:s8wYav3eoXaNKuWuxcXTGbOD3rtU1L4QTnSLCdeIMRRwPtyVIelwfQ>
-    <xmx:s8wYamSSR7dVo2_OWpSko4wtYCokmfhH1X8U0WAcGvOPIl-CQnqGVw>
-    <xmx:s8wYalUL8Y5V767RSNIpfjQe_txv8YCWusHL1qnVKE1f-9kTOPZqgZ64>
-Feedback-ID: i03f14258:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 28 May 2026 19:16:01 -0400 (EDT)
-Date: Thu, 28 May 2026 17:15:44 -0600
-From: Alex Williamson <alex@shazbot.org>
-To: Matt Evans <mattev@meta.com>
-Message-ID: <20260528171544.3d8db4a2@shazbot.org>
-In-Reply-To: <20260527102319.100128-5-mattev@meta.com>
-References: <20260527102319.100128-1-mattev@meta.com>
-	<20260527102319.100128-5-mattev@meta.com>
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.51; x86_64-pc-linux-gnu)
+	by lists.linaro.org (Postfix) with ESMTP id 1D60B40977
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 29 May 2026 06:29:19 +0000 (UTC)
+Received: from lists.linaro.org (localhost [127.0.0.1])
+	by lists.linaro.org (Postfix) with ESMTP id AC8093FDAE
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 29 May 2026 06:29:11 +0000 (UTC)
 MIME-Version: 1.0
-X-Spamd-Bar: ----
-Message-ID-Hash: OTYYJ5ZJR7KO42YOD2OSDIUROSYRSA3U
-X-Message-ID-Hash: OTYYJ5ZJR7KO42YOD2OSDIUROSYRSA3U
-X-MailFrom: alex@shazbot.org
+From: reasonable.rabbit.epoq@hidingmail.net
+To: linaro-mm-sig@lists.linaro.org
+Date: Fri, 29 May 2026 06:29:11 -0000
+Message-ID: <178003615170.1309045.957323971735149920@lists.linaro.org>
+User-Agent: HyperKitty on http://lists-ec2.96boards.org/
+Message-ID-Hash: YBT453H25535TO62OHY3IRMUN67YP5CZ
+X-Message-ID-Hash: YBT453H25535TO62OHY3IRMUN67YP5CZ
+X-MailFrom: reasonable.rabbit.epoq@hidingmail.net
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
-CC: Leon Romanovsky <leon@kernel.org>, Jason Gunthorpe <jgg@nvidia.com>, Alex Mastro <amastro@fb.com>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Bjorn Helgaas <bhelgaas@google.com>, Logan Gunthorpe <logang@deltatee.com>, Mahmoud Adam <mngyadam@amazon.de>, David Matlack <dmatlack@google.com>, =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Kevin Tian <kevin.tian@intel.com>, Ankit Agrawal <ankita@nvidia.com>, Pranjal Shrivastava <praan@google.com>, Alistair Popple <apopple@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org, linux-pci@vger.kernel.org, alex@shazbot.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 4/9] vfio/pci: Convert BAR mmap() to use a DMABUF
+Subject: [Linaro-mm-sig] Terrifying Escape Challenges Inside Granny Horror Survival Adventure
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OTYYJ5ZJR7KO42YOD2OSDIUROSYRSA3U/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YBT453H25535TO62OHY3IRMUN67YP5CZ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -100,331 +39,153 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [0.59 / 15.00];
-	R_DKIM_REJECT(1.00)[shazbot.org:s=fm3,messagingengine.com:s=fm3];
+X-Spamd-Result: default: False [7.49 / 15.00];
+	SPAM_FLAG(5.00)[];
+	DMARC_POLICY_REJECT(2.00)[hidingmail.net : SPF not aligned (relaxed), No valid DKIM,reject];
+	MID_RHS_MATCH_TO(1.00)[];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx:c];
-	DMARC_POLICY_SOFTFAIL(0.10)[shazbot.org : SPF not aligned (relaxed),none];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_ONE(0.00)[1];
+	GREYLIST(0.00)[pass,meta];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	DKIM_TRACE(0.00)[shazbot.org:-,messagingengine.com:-];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FROM_NEQ_ENVFROM(0.00)[alex@shazbot.org,linaro-mm-sig-bounces@lists.linaro.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.996];
+	ARC_NA(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_NEQ_ENVFROM(0.00)[reasonable.rabbit.epoq@hidingmail.net,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_NO_DN(0.00)[];
+	TO_DN_NONE(0.00)[];
+	R_DKIM_NA(0.00)[];
+	NEURAL_HAM(-0.00)[-0.247];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,linaro.org:email,shazbot.org:mid,meta.com:email]
-X-Rspamd-Queue-Id: 11F4D5FB4D5
-X-Rspamd-Action: no action
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:mid,lists.linaro.org:helo]
+X-Rspamd-Queue-Id: ADA865FDECA
+X-Rspamd-Action: add header
 X-Rspamd-Server: lfdr
+X-Spam: Yes
 
-On Wed, 27 May 2026 03:23:07 -0700
-Matt Evans <mattev@meta.com> wrote:
+Introduction to Granny Horror Gameplay
 
-> Convert the VFIO device fd fops->mmap to create a DMABUF representing
-> the BAR mapping, and make the VMA fault handler look up PFNs from the
-> corresponding DMABUF.  This supports future code mmap()ing BAR
-> DMABUFs, and iommufd work to support Type1 P2P.
-> 
-> First, vfio_pci_core_mmap() uses the new
-> vfio_pci_core_mmap_prep_dmabuf() helper to export a DMABUF
-> representing a single BAR range.  Then, the vfio_pci_mmap_huge_fault()
-> callback is updated to understand revoked buffers, and uses the new
-> vfio_pci_dma_buf_find_pfn() helper to determine the PFN for a given
-> fault address.
-> 
-> Now that the VFIO DMABUFs can be mmap()ed, vfio_pci_dma_buf_move()
-> zaps PTEs (used on the revocation and cleanup paths).
-> 
-> CONFIG_VFIO_PCI_CORE now unconditionally depends on
-> CONFIG_DMA_SHARED_BUFFER and CONFIG_PCI_P2PDMA_CORE.  The
-> CONFIG_VFIO_PCI_DMABUF feature conditionally includes support for
-> VFIO_DEVICE_FEATURE_DMA_BUF, depending on the availability of
-> CONFIG_PCI_P2PDMA.
-> 
-> Signed-off-by: Matt Evans <mattev@meta.com>
-> ---
->  drivers/vfio/pci/Kconfig           |  4 +-
->  drivers/vfio/pci/Makefile          |  3 +-
->  drivers/vfio/pci/vfio_pci_core.c   | 79 +++++++++++++++++++-----------
->  drivers/vfio/pci/vfio_pci_dmabuf.c | 12 +++++
->  drivers/vfio/pci/vfio_pci_priv.h   | 11 +----
->  5 files changed, 68 insertions(+), 41 deletions(-)
-> 
-> diff --git a/drivers/vfio/pci/Kconfig b/drivers/vfio/pci/Kconfig
-> index 296bf01e185e..9197343a7301 100644
-> --- a/drivers/vfio/pci/Kconfig
-> +++ b/drivers/vfio/pci/Kconfig
-> @@ -6,6 +6,8 @@ config VFIO_PCI_CORE
->  	tristate
->  	select VFIO_VIRQFD
->  	select IRQ_BYPASS_MANAGER
-> +	select PCI_P2PDMA_CORE
-> +	select DMA_SHARED_BUFFER
->  
->  config VFIO_PCI_INTX
->  	def_bool y if !S390
-> @@ -56,7 +58,7 @@ config VFIO_PCI_ZDEV_KVM
->  	  To enable s390x KVM vfio-pci extensions, say Y.
->  
->  config VFIO_PCI_DMABUF
-> -	def_bool y if VFIO_PCI_CORE && PCI_P2PDMA && DMA_SHARED_BUFFER
-> +	def_bool y if PCI_P2PDMA
+Granny is one of the most popular horror games in the mobile gaming world. The game creates a tense atmosphere filled with darkness, fear, and unpredictable danger. Players wake up inside an old house and must find a way to escape before time runs out. Every sound can attract danger, and every room may hide useful tools or deadly traps.   https://grannyfree.io/
 
-This largely only breaks consistency, but should VFIO_PCI_CORE become a
-'depends on' rather than dropped entirely?
+The simple gameplay mechanics make Granny easy to understand, but the increasing tension keeps players engaged for hours. Horror fans enjoy the thrilling experience because every match feels different. Random item locations and unpredictable enemy movement create excitement in every playthrough.
 
->  
->  source "drivers/vfio/pci/mlx5/Kconfig"
->  
-> diff --git a/drivers/vfio/pci/Makefile b/drivers/vfio/pci/Makefile
-> index 6138f1bf241d..881452ea89be 100644
-> --- a/drivers/vfio/pci/Makefile
-> +++ b/drivers/vfio/pci/Makefile
-> @@ -1,8 +1,7 @@
->  # SPDX-License-Identifier: GPL-2.0-only
->  
-> -vfio-pci-core-y := vfio_pci_core.o vfio_pci_intrs.o vfio_pci_rdwr.o vfio_pci_config.o
-> +vfio-pci-core-y := vfio_pci_core.o vfio_pci_intrs.o vfio_pci_rdwr.o vfio_pci_config.o vfio_pci_dmabuf.o
->  vfio-pci-core-$(CONFIG_VFIO_PCI_ZDEV_KVM) += vfio_pci_zdev.o
-> -vfio-pci-core-$(CONFIG_VFIO_PCI_DMABUF) += vfio_pci_dmabuf.o
->  obj-$(CONFIG_VFIO_PCI_CORE) += vfio-pci-core.o
->  
->  vfio-pci-y := vfio_pci.o
-> diff --git a/drivers/vfio/pci/vfio_pci_core.c b/drivers/vfio/pci/vfio_pci_core.c
-> index 041243a84d81..c5f934905ce0 100644
-> --- a/drivers/vfio/pci/vfio_pci_core.c
-> +++ b/drivers/vfio/pci/vfio_pci_core.c
-> @@ -1683,18 +1683,6 @@ void vfio_pci_memory_unlock_and_restore(struct vfio_pci_core_device *vdev, u16 c
->  	up_write(&vdev->memory_lock);
->  }
->  
-> -static unsigned long vma_to_pfn(struct vm_area_struct *vma)
-> -{
-> -	struct vfio_pci_core_device *vdev = vma->vm_private_data;
-> -	int index = vma->vm_pgoff >> (VFIO_PCI_OFFSET_SHIFT - PAGE_SHIFT);
-> -	u64 pgoff;
-> -
-> -	pgoff = vma->vm_pgoff &
-> -		((1U << (VFIO_PCI_OFFSET_SHIFT - PAGE_SHIFT)) - 1);
-> -
-> -	return (pci_resource_start(vdev->pdev, index) >> PAGE_SHIFT) + pgoff;
-> -}
-> -
->  vm_fault_t vfio_pci_vmf_insert_pfn(struct vfio_pci_core_device *vdev,
->  				   struct vm_fault *vmf,
->  				   unsigned long pfn,
-> @@ -1722,23 +1710,42 @@ static vm_fault_t vfio_pci_mmap_huge_fault(struct vm_fault *vmf,
->  					   unsigned int order)
->  {
->  	struct vm_area_struct *vma = vmf->vma;
-> -	struct vfio_pci_core_device *vdev = vma->vm_private_data;
-> -	unsigned long addr = vmf->address & ~((PAGE_SIZE << order) - 1);
-> -	unsigned long pgoff = (addr - vma->vm_start) >> PAGE_SHIFT;
-> -	unsigned long pfn = vma_to_pfn(vma) + pgoff;
-> -	vm_fault_t ret = VM_FAULT_FALLBACK;
-> -
-> -	if (is_aligned_for_order(vma, addr, pfn, order)) {
-> -		scoped_guard(rwsem_read, &vdev->memory_lock)
-> -			ret = vfio_pci_vmf_insert_pfn(vdev, vmf, pfn, order);
-> -	}
-> +	struct vfio_pci_dma_buf *priv = vma->vm_private_data;
-> +	struct vfio_pci_core_device *vdev;
-> +	unsigned long pfn = 0;
-> +	vm_fault_t ret = VM_FAULT_SIGBUS;
->  
-> -	dev_dbg_ratelimited(&vdev->pdev->dev,
-> -			   "%s(,order = %d) BAR %ld page offset 0x%lx: 0x%x\n",
-> -			    __func__, order,
-> -			    vma->vm_pgoff >>
-> -				(VFIO_PCI_OFFSET_SHIFT - PAGE_SHIFT),
-> -			    pgoff, (unsigned int)ret);
-> +	/*
-> +	 * We can rely on the existence of both a DMABUF (priv) and
-> +	 * the VFIO device it was exported from (vdev).  This fault's
-> +	 * VMA was established using vfio_pci_core_mmap_prep_dmabuf()
-> +	 * which transfers ownership of the VFIO device fd to the
-> +	 * DMABUF, and so the VFIO device is held open because the
-> +	 * VMA's vm_file (DMABUF) is open.
-> +	 *
-> +	 * Since vfio_pci_dma_buf_cleanup() cannot have happened,
-> +	 * vdev must be valid; we can take memory_lock.
-> +	 */
-> +	vdev = READ_ONCE(priv->vdev);
+The game combines stealth mechanics, puzzle-solving, and survival elements into a complete horror adventure. Players must stay quiet, move carefully, and think strategically to survive inside the terrifying house.
 
-The above comment argues that vdev is stable, so why do we need to
-access it with READ_ONCE()?
+Dark Atmosphere and Immersive Horror Experience
+Creepy Environment and Sound Design
 
-> +
-> +	scoped_guard(rwsem_read, &vdev->memory_lock) {
-> +		if (!priv->revoked) {
-> +			int pres = vfio_pci_dma_buf_find_pfn(priv, vma,
-> +							     vmf->address,
-> +							     order, &pfn);
-> +
-> +			if (pres == 0)
-> +				ret = vfio_pci_vmf_insert_pfn(vdev, vmf,
-> +							      pfn, order);
-> +			else if (pres == -EAGAIN)
-> +				ret = VM_FAULT_FALLBACK;
-> +		}
-> +
-> +		dev_dbg_ratelimited(&vdev->pdev->dev,
-> +				    "%s(order = %d) PFN 0x%lx, VA 0x%lx, pgoff 0x%lx: 0x%x\n",
-> +				    __func__, order, pfn, vmf->address,
-> +				    vma->vm_pgoff, (unsigned int)ret);
+One of the strongest features of Granny is the frightening atmosphere. The old house contains dark hallways, broken furniture, hidden basements, and mysterious locked doors. Every area creates tension and uncertainty.
 
-Looks like this should still be outside the scope of the memory_lock.
-Thanks,
+The sound effects increase the horror experience dramatically. Footsteps, creaking floors, and sudden noises make every movement feel dangerous. Silence becomes just as terrifying as loud sounds because players never know where danger may appear next.
 
-Alex
+The visual design also supports the horror theme. Dim lighting and shadow-filled rooms create suspense throughout the game. Even simple exploration becomes stressful because danger may appear at any moment.
 
-> +	}
->  
->  	return ret;
->  }
-> @@ -1763,6 +1770,7 @@ int vfio_pci_core_mmap(struct vfio_device *core_vdev, struct vm_area_struct *vma
->  	unsigned int index;
->  	u64 phys_len, req_len, pgoff, req_start;
->  	void __iomem *bar_io;
-> +	int ret;
->  
->  	index = vma->vm_pgoff >> (VFIO_PCI_OFFSET_SHIFT - PAGE_SHIFT);
->  
-> @@ -1802,7 +1810,20 @@ int vfio_pci_core_mmap(struct vfio_device *core_vdev, struct vm_area_struct *vma
->  	if (IS_ERR(bar_io))
->  		return PTR_ERR(bar_io);
->  
-> -	vma->vm_private_data = vdev;
-> +	/*
-> +	 * Create a DMABUF with a single range corresponding to this
-> +	 * mapping, and wire it into vma->vm_private_data.  The VMA's
-> +	 * vm_file becomes that of the DMABUF, and the DMABUF takes
-> +	 * ownership of the VFIO device file (put upon DMABUF
-> +	 * release).  This maintains the behaviour of a live VMA
-> +	 * mapping holding the VFIO device file open.
-> +	 */
-> +	ret = vfio_pci_core_mmap_prep_dmabuf(vdev, vma,
-> +					     pci_resource_start(pdev, index),
-> +					     req_len, index);
-> +	if (ret)
-> +		return ret;
-> +
->  	vma->vm_page_prot = pgprot_noncached(vma->vm_page_prot);
->  	vma->vm_page_prot = pgprot_decrypted(vma->vm_page_prot);
->  
-> diff --git a/drivers/vfio/pci/vfio_pci_dmabuf.c b/drivers/vfio/pci/vfio_pci_dmabuf.c
-> index 782408c08a5e..f7797f58d44b 100644
-> --- a/drivers/vfio/pci/vfio_pci_dmabuf.c
-> +++ b/drivers/vfio/pci/vfio_pci_dmabuf.c
-> @@ -9,6 +9,7 @@
->  
->  MODULE_IMPORT_NS("DMA_BUF");
->  
-> +#ifdef CONFIG_VFIO_PCI_DMABUF
->  static int vfio_pci_dma_buf_attach(struct dma_buf *dmabuf,
->  				   struct dma_buf_attachment *attachment)
->  {
-> @@ -25,6 +26,7 @@ static int vfio_pci_dma_buf_attach(struct dma_buf *dmabuf,
->  
->  	return 0;
->  }
-> +#endif /* CONFIG_VFIO_PCI_DMABUF */
->  
->  static void vfio_pci_dma_buf_done(struct kref *kref)
->  {
-> @@ -89,7 +91,9 @@ static void vfio_pci_dma_buf_release(struct dma_buf *dmabuf)
->  }
->  
->  static const struct dma_buf_ops vfio_pci_dmabuf_ops = {
-> +#ifdef CONFIG_VFIO_PCI_DMABUF
->  	.attach = vfio_pci_dma_buf_attach,
-> +#endif
->  	.map_dma_buf = vfio_pci_dma_buf_map,
->  	.unmap_dma_buf = vfio_pci_dma_buf_unmap,
->  	.release = vfio_pci_dma_buf_release,
-> @@ -263,6 +267,7 @@ static int vfio_pci_dmabuf_export(struct vfio_pci_core_device *vdev,
->  	return 0;
->  }
->  
-> +#ifdef CONFIG_VFIO_PCI_DMABUF
->  /*
->   * This is a temporary "private interconnect" between VFIO DMABUF and iommufd.
->   * It allows the two co-operating drivers to exchange the physical address of
-> @@ -461,6 +466,7 @@ int vfio_pci_core_feature_dma_buf(struct vfio_pci_core_device *vdev, u32 flags,
->  	kfree(dma_ranges);
->  	return ret;
->  }
-> +#endif /* CONFIG_VFIO_PCI_DMABUF */
->  
->  int vfio_pci_core_mmap_prep_dmabuf(struct vfio_pci_core_device *vdev,
->  				   struct vm_area_struct *vma,
-> @@ -535,6 +541,10 @@ void vfio_pci_dma_buf_move(struct vfio_pci_core_device *vdev, bool revoked)
->  	struct vfio_pci_dma_buf *tmp;
->  
->  	lockdep_assert_held_write(&vdev->memory_lock);
-> +	/*
-> +	 * Holding memory_lock ensures a racing VMA fault observes
-> +	 * priv->revoked properly.
-> +	 */
->  
->  	list_for_each_entry_safe(priv, tmp, &vdev->dmabufs, dmabufs_elm) {
->  		if (!get_file_active(&priv->dmabuf->file))
-> @@ -552,6 +562,8 @@ void vfio_pci_dma_buf_move(struct vfio_pci_core_device *vdev, bool revoked)
->  			if (revoked) {
->  				kref_put(&priv->kref, vfio_pci_dma_buf_done);
->  				wait_for_completion(&priv->comp);
-> +				unmap_mapping_range(priv->dmabuf->file->f_mapping,
-> +						    0, priv->size, 1);
->  				/*
->  				 * Re-arm the registered kref reference and the
->  				 * completion so the post-revoke state matches the
-> diff --git a/drivers/vfio/pci/vfio_pci_priv.h b/drivers/vfio/pci/vfio_pci_priv.h
-> index 06dc0fd3e230..d38e1b98b2e9 100644
-> --- a/drivers/vfio/pci/vfio_pci_priv.h
-> +++ b/drivers/vfio/pci/vfio_pci_priv.h
-> @@ -138,13 +138,13 @@ int vfio_pci_core_mmap_prep_dmabuf(struct vfio_pci_core_device *vdev,
->  				   struct vm_area_struct *vma,
->  				   u64 phys_start, u64 req_len,
->  				   unsigned int res_index);
-> +void vfio_pci_dma_buf_cleanup(struct vfio_pci_core_device *vdev);
-> +void vfio_pci_dma_buf_move(struct vfio_pci_core_device *vdev, bool revoked);
->  
->  #ifdef CONFIG_VFIO_PCI_DMABUF
->  int vfio_pci_core_feature_dma_buf(struct vfio_pci_core_device *vdev, u32 flags,
->  				  struct vfio_device_feature_dma_buf __user *arg,
->  				  size_t argsz);
-> -void vfio_pci_dma_buf_cleanup(struct vfio_pci_core_device *vdev);
-> -void vfio_pci_dma_buf_move(struct vfio_pci_core_device *vdev, bool revoked);
->  #else
->  static inline int
->  vfio_pci_core_feature_dma_buf(struct vfio_pci_core_device *vdev, u32 flags,
-> @@ -153,13 +153,6 @@ vfio_pci_core_feature_dma_buf(struct vfio_pci_core_device *vdev, u32 flags,
->  {
->  	return -ENOTTY;
->  }
-> -static inline void vfio_pci_dma_buf_cleanup(struct vfio_pci_core_device *vdev)
-> -{
-> -}
-> -static inline void vfio_pci_dma_buf_move(struct vfio_pci_core_device *vdev,
-> -					 bool revoked)
-> -{
-> -}
->  #endif
->  
->  #endif
+Fear Created Through Constant Pressure
 
+Granny creates fear through pressure instead of excessive action. Players cannot fight freely or move carelessly. One wrong decision may lead to immediate failure. This constant danger keeps players focused and emotionally involved.
+
+The limited time system adds more intensity. Players usually have only a few days to escape the house. Each failed attempt increases tension and forces players to learn from mistakes.
+
+The combination of stealth and survival mechanics creates memorable horror moments that many players continue discussing online.
+
+Survival Mechanics That Keep Players Engaged
+Stealth Gameplay and Smart Movement
+
+Stealth is the core mechanic of Granny. Running loudly or dropping objects may attract danger instantly. Players must crouch, hide under beds, and move slowly to avoid detection.
+
+Different areas of the house require careful observation. Some floors create noise, while certain doors open slowly and loudly. Understanding the environment becomes essential for survival.
+
+The game rewards patience and strategic thinking. Quick reactions help during emergencies, but long-term success depends on planning and observation.
+
+Puzzle Solving and Exploration
+
+Granny includes many puzzles that require exploration and logical thinking. Players must search for keys, tools, batteries, and hidden objects throughout the house.
+
+Many items have multiple purposes. A hammer may remove wooden barriers, while a key may unlock important escape routes. Players need to remember item locations and manage resources efficiently.
+
+The puzzles remain simple enough for beginners but challenging enough to maintain excitement. Exploration becomes rewarding because every discovered item may help progress toward freedom.
+
+Different Escape Routes and Replay Value
+Multiple Ways to Escape
+
+One reason behind the popularity of Granny is the variety of escape methods. Players can unlock doors, repair vehicles, or discover secret routes hidden inside the house.
+
+Different strategies create different experiences. Some players focus on quick escapes, while others explore every room carefully. This flexibility keeps the gameplay fresh over multiple sessions.
+
+The hidden secrets encourage replayability. Many players return to discover alternative endings and hidden features that they missed during earlier attempts.
+
+Difficulty Levels for All Players
+
+Granny includes several difficulty settings that make the game accessible for different skill levels. Beginners can choose easier modes with fewer dangers, while experienced players can select harder difficulties for more intense gameplay.
+
+Harder modes increase enemy speed, reduce available resources, and create additional challenges. These options allow players to customize the horror experience according to personal preference.
+
+This adjustable difficulty system helps Granny appeal to both casual gamers and hardcore horror fans.
+
+Why Granny Became Popular Worldwide
+Simple Controls and Accessible Gameplay
+
+Granny became successful partly because of its simple controls. Mobile players can easily learn movement, interaction, and hiding mechanics without complicated tutorials.
+
+The accessibility allows players from many age groups to enjoy the game. Quick learning combined with intense horror creates an experience that remains entertaining from the first session.
+
+The lightweight design also helps the game run smoothly on many devices, increasing global popularity.
+
+Viral Content and Streaming Success
+
+Many content creators helped Granny gain worldwide attention. Horror reactions, escape challenges, and gameplay videos became extremely popular on streaming platforms and social media.
+
+The unpredictable gameplay creates entertaining reactions that viewers enjoy watching. Every scream, failed escape, or close encounter becomes exciting content for audiences.
+
+Online communities continue sharing strategies, secrets, and challenge ideas related to Granny. This active fanbase helps maintain interest in the game years after release.
+
+Advanced Tips for Better Survival
+Learn Sound Management Techniques
+
+Sound management is extremely important in Granny. Players should avoid throwing objects unnecessarily and close doors carefully whenever possible.
+
+Listening carefully also provides valuable information. Enemy movement sounds may reveal safe paths or dangerous locations nearby.
+
+Headphones improve the overall experience because directional sound helps players understand threats more accurately.
+
+Memorize Important Locations
+
+Successful players often memorize room layouts and item spawn locations. Fast navigation becomes critical during dangerous situations.
+
+Important escape tools usually appear in random positions, but understanding the general map structure helps players search more efficiently.
+
+Practice improves confidence and reduces panic during stressful moments.
+
+Horror Elements That Make Granny Unique
+Psychological Fear Instead of Constant Action
+
+Unlike many action-heavy horror games, Granny focuses on psychological tension. Silence, uncertainty, and limited visibility create fear naturally.
+
+Players spend much of the game anticipating danger instead of constantly fighting enemies. This slower pacing creates stronger emotional impact.
+
+The feeling of helplessness increases immersion and makes every successful escape feel rewarding.
+
+Minimalist Design With Strong Impact
+
+Granny proves that simple design can still create powerful horror experiences. The game does not rely on advanced graphics or complex mechanics.
+
+Instead, strong atmosphere, effective sound design, and intelligent pacing create memorable gameplay. This minimalist approach allows the horror elements to remain the main focus.
+
+Many modern indie horror games use similar techniques inspired by the success of Granny.
+
+Conclusion
+
+Granny continues to attract horror fans because of intense survival gameplay, frightening atmosphere, and engaging escape mechanics. The combination of stealth, puzzles, and psychological horror creates a unique experience that remains entertaining even after multiple playthroughs.
+
+Simple controls, multiple difficulty settings, and different escape routes make the game accessible for many players around the world. Whether players enjoy exploration, suspense, or strategic survival, Granny delivers a thrilling horror adventure filled with tension and excitement.
+
+For anyone searching for a memorable horror game with challenging survival mechanics, Granny remains an excellent choice in the horror gaming genre.
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
