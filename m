@@ -2,158 +2,368 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 2HvoCW9nHmoNjAkAu9opvQ
+	id iFj3CXhnHmoNjAkAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 02 Jun 2026 07:17:35 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 02 Jun 2026 07:17:44 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id B50A46287D8
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 02 Jun 2026 07:17:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B36286287DF
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 02 Jun 2026 07:17:43 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C264040984
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  2 Jun 2026 05:17:33 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 4CA3940952
-	for <linaro-mm-sig@lists.linaro.org>; Sat, 30 May 2026 14:37:39 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C680D4098F
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  2 Jun 2026 05:17:42 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+	by lists.linaro.org (Postfix) with ESMTPS id 932CF40962
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 30 May 2026 15:08:55 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=P695W+rQ;
-	spf=pass (lists.linaro.org: domain of phasta@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=phasta@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=NtS4TnJU;
+	spf=pass (lists.linaro.org: domain of boqun@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=boqun@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	by sea.source.kernel.org (Postfix) with ESMTP id BAE684437D;
-	Sat, 30 May 2026 14:37:38 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 850C31F00893;
-	Sat, 30 May 2026 14:37:30 +0000 (UTC)
+	by tor.source.kernel.org (Postfix) with ESMTP id F398960121;
+	Sat, 30 May 2026 15:08:54 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 86EFA1F00898;
+	Sat, 30 May 2026 15:08:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1780151858;
-	bh=Oh702E20bwx/p0BX78CbvBoV0ZkW0mSKteIxLUaDpYc=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=P695W+rQUAycRVtKTMK8ZUb4SRqjKHX3MUQPaWLoXKoi1Fh4ArSVZjLAgERV3InZ6
-	 azFgBj9tuRdq+8LLH7SCkgIYl6jT59xVULdW8b5zOFVNr1ql+RMvRTRCm50Z6KChcN
-	 LpL/sHozZlMg1O7Ds+qQ+9Io9DBC+ahhBanec3c+RZgUauwgBNQFkO3fo4Cagx41Rm
-	 Uk8vp2pTDBqdgelT1YnZDLBWC7xVa99KDyu8Uj82J234Gn0mFp/R7hQynU1DK3bPlX
-	 PXfqWdFRo6ef4p0Qv3tXENq/y6iZrogTLXOBuAgOW2py0oh9wchFqhFHCMsEErcqhl
-	 nuAKWfPFkUkkw==
-From: Philipp Stanner <phasta@kernel.org>
-To: Miguel Ojeda <ojeda@kernel.org>,
-	Boqun Feng <boqun@kernel.org>,
-	Gary Guo <gary@garyguo.net>,
-	=?UTF-8?q?Bj=C3=B6rn=20Roy=20Baron?= <bjorn3_gh@protonmail.com>,
-	Benno Lossin <lossin@kernel.org>,
-	Andreas Hindborg <a.hindborg@kernel.org>,
-	Alice Ryhl <aliceryhl@google.com>,
-	Trevor Gross <tmgross@umich.edu>,
-	Danilo Krummrich <dakr@kernel.org>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
-	Philipp Stanner <phasta@kernel.org>,
-	"Paul E. McKenney" <paulmck@kernel.org>,
-	Frederic Weisbecker <frederic@kernel.org>,
-	Neeraj Upadhyay <neeraj.upadhyay@kernel.org>,
-	Joel Fernandes <joelagnelf@nvidia.com>,
-	Josh Triplett <josh@joshtriplett.org>,
-	Uladzislau Rezki <urezki@gmail.com>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
-	Lai Jiangshan <jiangshanlai@gmail.com>,
-	Zqiang <qiang.zhang@linux.dev>,
-	Daniel Almeida <daniel.almeida@collabora.com>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Igor Korotin <igor.korotin@linux.dev>,
-	Lorenzo Stoakes <ljs@kernel.org>,
-	Alexandre Courbot <acourbot@nvidia.com>,
-	FUJITA Tomonori <fujita.tomonori@gmail.com>,
-	Krishna Ketan Rai <prafulrai522@gmail.com>,
-	Shankari Anand <shankari.ak0208@gmail.com>,
-	manos@pitsidianak.is,
-	Boris Brezillon <boris.brezillon@collabora.com>
-Date: Sat, 30 May 2026 16:35:13 +0200
-Message-ID: <20260530143541.229628-7-phasta@kernel.org>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260530143541.229628-2-phasta@kernel.org>
+	s=k20260515; t=1780153734;
+	bh=Iw0FhbtvjuV1urcZGjkx/qt7+8pTDgXeuj/fbCEH8Z8=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=NtS4TnJUEx6ZBROs3IAYPPCv502M1JnfN+ZrT1IVXgXQBIT1MebRwxZ7OG+kK9q3l
+	 whB86kXoIGtoH56GI+7fMrLY6PpiUbm3qBJ/6Fu6qdCXGE6fq5mSmehxcPUCozo1lp
+	 HX68MFFGke0ealMF4PiFG/3dYrPqhcymN8rD6CX2iO2IHqUwQMrjIYsfhzhy25CYq2
+	 UmjxB1YKYrptHEfUXhxRGxSZFaJjbTgXIA1tA2moG1Ah0KoB2wefl+m1mOZ19p1fM6
+	 tRjj4J+1UL6AJ9GSYrKilHZY+7C6WGjlsahqoF/Ia4LKCqkk7MjZJlsHdn4cicz+jx
+	 mMv8j6twHzsvQ==
+Received: from phl-compute-06.internal (phl-compute-06.internal [10.202.2.46])
+	by mailfauth.phl.internal (Postfix) with ESMTP id 9E94EF40084;
+	Sat, 30 May 2026 11:08:52 -0400 (EDT)
+Received: from phl-frontend-04 ([10.202.2.163])
+  by phl-compute-06.internal (MEProxy); Sat, 30 May 2026 11:08:52 -0400
+X-ME-Sender: <xms:hP0aarPnZ7pO4nV8lbLWTk3kGQb64n7UaQk2gvHB6b4Y8BoICFQvMg>
+    <xme:hP0aaiuj0Snqh-vSrhA6u5S0ex0twv7DHuTTMmEOnUzTWXAdtsxHjXiuiv6-17fqb
+    oWgYzlZ4WY3PZ1ufErk7bZVH42e8LPM_nW19Na8g-alhIeF6HERCA>
+X-ME-Received: <xmr:hP0aap3loKQEj0kGc-01-PYXV6TRGxzwj7Iyzh0YyBJDw84mGyXTXV2UFyy16jrWUVEqxtPBOBngEUnv2j-X0Aj32AvnqT9T>
+X-ME-Proxy-Cause: dmFkZTGQOkMpaaZDC0BephxAIuGa+jUd9e2JeV56FDIbuJEAWrj+VoXDzFdKUU1lXoKRsW
+    eA93QvoUnLxh6FA5WO25QYu1EOQlA3G3Zi6hzUOFeKjtFdHUG2UbiVP5zvd5SbILAs5gnm
+    9tAHe3/r5AVsTwU1g3J/RqUIL1wuE2GPUnVUXYf0jdwNh3Ndnb1cRmGWTnjwk3JYi1huuy
+    fRaUt7vQS3ZvhWWMg4bQm372n0OcODf7UBrL3xqg8ateiBTPkCe8aTtchAFZKoHLaS5n1a
+    DJ+bPhozh7nEqV0LXPj0f0wDx8XxYux8+3KzRoPNUZQclpSIe966E7Vt5Mq+wkwaaF5CQO
+    iVX5Tc6DtyBDaCoELDj/LFgplQomGJ4soFWpGvTkdhdpS87/OG/KCLHTKnPE5CVBu1EG/S
+    CqWxyZh04AcncdY5ojIoZc6vD6rW+0yFUpsySbge+xtl3gNr69hgM4G1Y98wagmA4ugxkx
+    22O4D/yNZ9QnxweYMY03dtgmhgMOYJeYyu6z71hbyK888RHhEtknh7iejtvD5FfqPvjbua
+    Yiu4KtUWy4BpGZB5E2iOJ11TvGp624vG7dGx7a0+NatE/I7KUIi/fN7hc+bJCp2ArZofJb
+    wf+6GSB0QxOoHsdtLs3F6N1LjAGcJPsSdwvmYcxbH0ruTBjpUqtaRn8+aC2A
+X-ME-Proxy: <xmx:hP0aaoUs7UzN6maBl3NTD0UNHNFNzPaJclYo3I7zVaE4kYadV66WaA>
+    <xmx:hP0aanvVAb8_M9iHndCV1hXvfLnogF-KT1oqqN_hgbeOsxFCS8Kn7Q>
+    <xmx:hP0aaryr0cW5k6xeXI-1d5oIQzCxU3MzOEWxf5tPyT23NqFLLmcZxQ>
+    <xmx:hP0aamn1cuq7ShwlzqJv7jRGGA08folHN9bONN45s16r2dQKh1nL4w>
+    <xmx:hP0aapZ9cnRQ1GXiwc75dcux2jnLGaUjRG-nrintqMzf42SJTTVX7BTl>
+Feedback-ID: i8dbe485b:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sat,
+ 30 May 2026 11:08:51 -0400 (EDT)
+Date: Sat, 30 May 2026 08:08:50 -0700
+From: Boqun Feng <boqun@kernel.org>
+To: Philipp Stanner <phasta@kernel.org>
+Message-ID: <ahr9gtzQLSbPeBx_@tardis.local>
 References: <20260530143541.229628-2-phasta@kernel.org>
+ <20260530143541.229628-4-phasta@kernel.org>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20260530143541.229628-4-phasta@kernel.org>
 X-Spamd-Bar: ---
-X-MailFrom: phasta@kernel.org
+X-MailFrom: boqun@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: TRYASLEWNSDQQ5SHAEV5QBXUUQYXBCAD
-X-Message-ID-Hash: TRYASLEWNSDQQ5SHAEV5QBXUUQYXBCAD
+Message-ID-Hash: PEYJNKVGM7TYOEQEYBQ5ICZXE6KKFCTO
+X-Message-ID-Hash: PEYJNKVGM7TYOEQEYBQ5ICZXE6KKFCTO
 X-Mailman-Approved-At: Tue, 02 Jun 2026 05:16:48 +0000
-CC: linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, rcu@vger.kernel.org
+CC: Miguel Ojeda <ojeda@kernel.org>, Gary Guo <gary@garyguo.net>, =?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>, Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, Danilo Krummrich <dakr@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, "Paul E. McKenney" <paulmck@kernel.org>, Frederic Weisbecker <frederic@kernel.org>, Neeraj Upadhyay <neeraj.upadhyay@kernel.org>, Joel Fernandes <joelagnelf@nvidia.com>, Josh Triplett <josh@joshtriplett.org>, Uladzislau Rezki <urezki@gmail.com>, Steven Rostedt <rostedt@goodmis.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Lai Jiangshan <jiangshanlai@gmail.com>, Zqiang <qiang.zhang@linux.dev>, Daniel Almeida <daniel.almeida@collabora.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Igor Korotin <igor.korotin@linux.dev>, Lorenzo Stoakes <ljs@kernel.org>, Alexandr
+ e Courbot <acourbot@nvidia.com>, FUJITA Tomonori <fujita.tomonori@gmail.com>, Krishna Ketan Rai <prafulrai522@gmail.com>, Shankari Anand <shankari.ak0208@gmail.com>, manos@pitsidianak.is, Boris Brezillon <boris.brezillon@collabora.com>, linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, rcu@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 4/4] MAINTAINERS: Add entry for Rust dma-buf
+Subject: [Linaro-mm-sig] Re: [PATCH 2/4] rust: rcu: add RcuBox type
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TRYASLEWNSDQQ5SHAEV5QBXUUQYXBCAD/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PEYJNKVGM7TYOEQEYBQ5ICZXE6KKFCTO/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-X-Spamd-Result: default: False [5.59 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [4.49 / 15.00];
 	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
-	MID_CONTAINS_FROM(1.00)[];
+	SUSPICIOUS_RECIPS(1.50)[];
 	R_DKIM_REJECT(1.00)[kernel.org:s=k20260515];
 	DATE_IN_PAST(1.00)[62];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
+	FREEMAIL_CC(0.00)[kernel.org,garyguo.net,protonmail.com,google.com,umich.edu,linaro.org,amd.com,nvidia.com,joshtriplett.org,gmail.com,goodmis.org,efficios.com,linux.dev,collabora.com,linuxfoundation.org,pitsidianak.is,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[38];
-	FREEMAIL_TO(0.00)[kernel.org,garyguo.net,protonmail.com,google.com,umich.edu,linaro.org,amd.com,nvidia.com,joshtriplett.org,gmail.com,goodmis.org,efficios.com,linux.dev,collabora.com,linuxfoundation.org,pitsidianak.is];
-	RCVD_TLS_LAST(0.00)[];
-	ARC_NA(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	MIME_TRACE(0.00)[0:+];
 	GREYLIST(0.00)[pass,meta];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	ARC_NA(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[37];
+	MIME_TRACE(0.00)[0:+];
 	DKIM_TRACE(0.00)[kernel.org:-];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	FROM_NEQ_ENVFROM(0.00)[phasta@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,tardis.local:mid];
 	TO_DN_SOME(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	NEURAL_SPAM(0.00)[0.701];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[boqun@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[amd.com:email,lists.linaro.org:rdns,lists.linaro.org:helo]
-X-Rspamd-Queue-Id: B50A46287D8
+	NEURAL_HAM(-0.00)[-0.812];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	RCVD_COUNT_SEVEN(0.00)[7]
+X-Rspamd-Queue-Id: B36286287DF
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-UnVzdCBkb2VzIG5vdyBoYXZlIGFic3RyYWN0aW9ucyBmb3IgZG1hX2ZlbmNlLiBUaGVzZSBhYnN0
-cmFjdGlvbnMgYXJlDQpxdWl0ZSBjb21wbGljYXRlZCBhbmQgcmVxdWlyZSBleHBlcnRpc2Ugd2l0
-aCBib3RoIHRoZSBDIGFuZCB0aGUgUnVzdA0Kc2lkZS4gVGhlcmVmb3JlLCB1c2luZyB0aGUgZXhp
-c3RpbmcgZW50cnkgYWxzbyBmb3IgbWFpbnRlbmFuY2Ugb2YgdGhlDQpSdXN0IGNvZGUgYXBwZWFy
-cyByZWFzb25hYmxlLg0KDQpQaGlsaXBwIHZvbHVudGVlcnMgdG8gaGVscCBtYWludGFpbiB0aGUg
-ZG1hX2ZlbmNlIGFic3RyYWN0aW9ucy4gQWRkIGENCmNvcnJlc3BvbmRpbmcgTUFJTlRBSU5FUlMg
-ZW50cnkuDQoNClNpZ25lZC1vZmYtYnk6IFBoaWxpcHAgU3Rhbm5lciA8cGhhc3RhQGtlcm5lbC5v
-cmc+DQotLS0NCkp1c3QgYXMgYSBzdWdnZXN0aW9uLCBJIGRvbid0IHdhbnQgdG8gZm9yY2UgbXlz
-ZWxmIGluIGhlcmUuIFdvdWxkIGFsc28NCmJlIHBlcmZlY3RseSBoYXBweSB3aXRoIG90aGVyIGFw
-cHJvYWNoZXM7IHRoZXJlIGFyZSBjZXJ0YWlubHkgYSBmZXcNCnBlb3BsZSB3aG8gY291bGQgbWFp
-bnRhaW4gb3IgY28tbWFpbnRhaW4gaXQuDQotLS0NCiBNQUlOVEFJTkVSUyB8IDIgKysNCiAxIGZp
-bGUgY2hhbmdlZCwgMiBpbnNlcnRpb25zKCspDQoNCmRpZmYgLS1naXQgYS9NQUlOVEFJTkVSUyBi
-L01BSU5UQUlORVJTDQppbmRleCAyZThkMTYwYmFiYzIuLjMxZmM1OTVkNWM2YiAxMDA2NDQNCi0t
-LSBhL01BSU5UQUlORVJTDQorKysgYi9NQUlOVEFJTkVSUw0KQEAgLTc1MjEsNiArNzUyMSw3IEBA
-IEY6CWZzL2RsbS8NCiBETUEgQlVGRkVSIFNIQVJJTkcgRlJBTUVXT1JLDQogTToJU3VtaXQgU2Vt
-d2FsIDxzdW1pdC5zZW13YWxAbGluYXJvLm9yZz4NCiBNOglDaHJpc3RpYW4gS8O2bmlnIDxjaHJp
-c3RpYW4ua29lbmlnQGFtZC5jb20+DQorTToJUGhpbGlwcCBTdGFubmVyIDxwaGFzdGFAa2VybmVs
-Lm9yZz4NCiBMOglsaW51eC1tZWRpYUB2Z2VyLmtlcm5lbC5vcmcNCiBMOglkcmktZGV2ZWxAbGlz
-dHMuZnJlZWRlc2t0b3Aub3JnDQogTDoJbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnICht
-b2RlcmF0ZWQgZm9yIG5vbi1zdWJzY3JpYmVycykNCkBAIC03NTI5LDYgKzc1MzAsNyBAQCBUOgln
-aXQgaHR0cHM6Ly9naXRsYWIuZnJlZWRlc2t0b3Aub3JnL2RybS9taXNjL2tlcm5lbC5naXQNCiBG
-OglEb2N1bWVudGF0aW9uL2RyaXZlci1hcGkvZG1hLWJ1Zi5yc3QNCiBGOglEb2N1bWVudGF0aW9u
-L3VzZXJzcGFjZS1hcGkvZG1hLWJ1Zi1hbGxvYy1leGNoYW5nZS5yc3QNCiBGOglkcml2ZXJzL2Rt
-YS1idWYvDQorRjoJcnVzdC9rZXJuZWwvZG1hX2J1Zi8NCiBGOglpbmNsdWRlL2xpbnV4LypmZW5j
-ZS5oDQogRjoJaW5jbHVkZS9saW51eC9kbWEtYnVmLmgNCiBGOglpbmNsdWRlL2xpbnV4L2RtYS1i
-dWYvDQotLSANCjIuNTQuMA0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxp
-c3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0t
-c2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+On Sat, May 30, 2026 at 04:35:10PM +0200, Philipp Stanner wrote:
+> From: Alice Ryhl <aliceryhl@google.com>
+> 
+> This adds an RcuBox container, which is like KBox except that the value
+> is freed with kfree_rcu.
+> 
+> To allow containers to rely on the rcu properties of RcuBox, an
+> extension of ForeignOwnable is added.
+> 
+> Signed-off-by: Alice Ryhl <aliceryhl@google.com>
+> ---
+
+I have the following on top of Alice's patch. @Alice, @Danilo, thoughts?
+
+Then we can have:
+
+type RcuKBox<T> = RcuBox<T, Kmalloc>;
+type RcuVBox<T> = RcuBox<T, Vmalloc>;
+
+and Philipp can use the `RcuKBox` in this patchset. We also need to impl
+InPlaceInit for RcuBox, but that can be added later.
+
+Regards,
+Boqun
+
+------------->8
+Subject: [PATCH] rust: rcu: Make RcuBox generic over Allocator
+
+To support RCU-protected vmalloc allocation, we need to make `RcuBox`
+generic over `Allocator`. Currently this works since all `Allocator`s
+are either kmalloc() or vmalloc(), and kvfree_call_rcu() works with both
+allocations.
+
+While we are at it, add some basic test cases.
+
+Signed-off-by: Boqun Feng <boqun@kernel.org>
+---
+ rust/kernel/sync/rcu/rcu_box.rs | 96 +++++++++++++++++++++++----------
+ 1 file changed, 67 insertions(+), 29 deletions(-)
+
+diff --git a/rust/kernel/sync/rcu/rcu_box.rs b/rust/kernel/sync/rcu/rcu_box.rs
+index 2508fdb609ec..5c344d82c0d9 100644
+--- a/rust/kernel/sync/rcu/rcu_box.rs
++++ b/rust/kernel/sync/rcu/rcu_box.rs
+@@ -4,47 +4,59 @@
+ 
+ //! Provides the `RcuBox` type for Rust allocations that live for a grace period.
+ 
+-use core::{ops::Deref, ptr::NonNull};
++use core::{
++    marker::PhantomData,
++    ops::Deref,
++    ptr::NonNull, //
++};
+ 
+ use kernel::{
+-    alloc::{self, AllocError},
++    alloc::{
++        self,
++        AllocError,
++        Allocator, //
++    },
+     bindings,
+     ffi::c_void,
+     prelude::*,
+-    sync::rcu::{ForeignOwnableRcu, Guard},
+     types::ForeignOwnable,
+ };
+ 
++use super::{
++    ForeignOwnableRcu,
++    Guard, //
++};
++
+ /// A box that is freed with rcu.
+ ///
+ /// The value must be `Send`, as rcu may drop it on another thread.
+ ///
+ /// # Invariants
+ ///
+-/// * The pointer is valid and references a pinned `RcuBoxInner<T>` allocated with `kmalloc`.
++/// * The pointer is valid and references a pinned `RcuBoxInner<T>` allocated with `A`.
+ /// * This `RcuBox` holds exclusive permissions to rcu free the allocation.
+-pub struct RcuBox<T: Send>(NonNull<RcuBoxInner<T>>);
++pub struct RcuBox<T: Send, A: Allocator>(NonNull<RcuBoxInner<T>>, PhantomData<A>);
+ 
+ struct RcuBoxInner<T> {
+     value: T,
+     rcu_head: bindings::callback_head,
+ }
+ 
+-// Note that `T: Sync` is required since when moving an `RcuBox<T>`, the previous owner may still
+-// access `&T` for one grace period.
++// Note that `T: Sync` is required since when moving an `RcuBox<T, A>`, the previous owner may
++// still access `&T` for one grace period.
+ //
+-// SAFETY: Ownership of the `RcuBox<T>` allows for `&T` and dropping the `T`, so `T: Send + Sync`
+-// implies `RcuBox<T>: Send`.
+-unsafe impl<T: Send + Sync> Send for RcuBox<T> {}
++// SAFETY: Ownership of the `RcuBox<T, A>` allows for `&T` and dropping the `T`, so `T: Send +
++// Sync` implies `RcuBox<T, A>: Send`.
++unsafe impl<T: Send + Sync, A: Allocator> Send for RcuBox<T, A> {}
+ 
+-// SAFETY: `&RcuBox<T>` allows for no operations other than those permitted by `&T`, so `T: Sync`
+-// implies `RcuBox<T>: Sync`.
+-unsafe impl<T: Send + Sync> Sync for RcuBox<T> {}
++// SAFETY: `&RcuBox<T, A>` allows for no operations other than those permitted by `&T`, so `T:
++// Sync` implies `RcuBox<T, A>: Sync`.
++unsafe impl<T: Send + Sync, A: Allocator> Sync for RcuBox<T, A> {}
+ 
+-impl<T: Send> RcuBox<T> {
++impl<T: Send, A: Allocator> RcuBox<T, A> {
+     /// Create a new `RcuBox`.
+     pub fn new(x: T, flags: alloc::Flags) -> Result<Self, AllocError> {
+-        let b = KBox::new(
++        let b = Box::<_, A>::new(
+             RcuBoxInner {
+                 value: x,
+                 rcu_head: Default::default(),
+@@ -53,9 +65,9 @@ pub fn new(x: T, flags: alloc::Flags) -> Result<Self, AllocError> {
+         )?;
+ 
+         // INVARIANT:
+-        // * The pointer contains a valid `RcuBoxInner` allocated with `kmalloc`.
++        // * The pointer contains a valid `RcuBoxInner` allocated with `A`.
+         // * We just allocated it, so we own free permissions.
+-        Ok(RcuBox(NonNull::from(KBox::leak(b))))
++        Ok(RcuBox(NonNull::from(Box::leak(b)), PhantomData))
+     }
+ 
+     /// Access the value for a grace period.
+@@ -66,7 +78,7 @@ pub fn with_rcu<'rcu>(&self, _read_guard: &'rcu Guard) -> &'rcu T {
+     }
+ }
+ 
+-impl<T: Send> Deref for RcuBox<T> {
++impl<T: Send, A: Allocator> Deref for RcuBox<T, A> {
+     type Target = T;
+     fn deref(&self) -> &T {
+         // SAFETY: While the `RcuBox<T>` exists, the value remains valid.
+@@ -75,10 +87,10 @@ fn deref(&self) -> &T {
+ }
+ 
+ // SAFETY:
+-// * The `RcuBoxInner<T>` was allocated with `kmalloc`.
++// * The `RcuBoxInner<T>` was allocated with `A`.
+ // * `NonNull::as_ptr` returns a non-null pointer.
+-unsafe impl<T: Send + 'static> ForeignOwnable for RcuBox<T> {
+-    const FOREIGN_ALIGN: usize = <KBox<RcuBoxInner<T>> as ForeignOwnable>::FOREIGN_ALIGN;
++unsafe impl<T: Send + 'static, A: Allocator> ForeignOwnable for RcuBox<T, A> {
++    const FOREIGN_ALIGN: usize = <Box<RcuBoxInner<T>, A> as ForeignOwnable>::FOREIGN_ALIGN;
+ 
+     type Borrowed<'a> = &'a T;
+     type BorrowedMut<'a> = &'a T;
+@@ -88,9 +100,9 @@ fn into_foreign(self) -> *mut c_void {
+     }
+ 
+     unsafe fn from_foreign(ptr: *mut c_void) -> Self {
+-        // INVARIANT: Pointer returned by `into_foreign` carries same invariants as `RcuBox<T>`.
++        // INVARIANT: Pointer returned by `into_foreign, A` carries same invariants as `RcuBox<T>`.
+         // SAFETY: `into_foreign` never returns a null pointer.
+-        Self(unsafe { NonNull::new_unchecked(ptr.cast()) })
++        Self(unsafe { NonNull::new_unchecked(ptr.cast()) }, PhantomData)
+     }
+ 
+     unsafe fn borrow<'a>(ptr: *mut c_void) -> &'a T {
+@@ -104,7 +116,7 @@ unsafe fn borrow_mut<'a>(ptr: *mut c_void) -> &'a T {
+     }
+ }
+ 
+-impl<T: Send + 'static> ForeignOwnableRcu for RcuBox<T> {
++impl<T: Send + 'static, A: Allocator> ForeignOwnableRcu for RcuBox<T, A> {
+     type RcuBorrowed<'a> = &'a T;
+ 
+     unsafe fn rcu_borrow<'a>(ptr: *mut c_void) -> &'a T {
+@@ -114,7 +126,7 @@ unsafe fn rcu_borrow<'a>(ptr: *mut c_void) -> &'a T {
+     }
+ }
+ 
+-impl<T: Send> Drop for RcuBox<T> {
++impl<T: Send, A: Allocator> Drop for RcuBox<T, A> {
+     fn drop(&mut self) {
+         // SAFETY: The `rcu_head` field is in-bounds of a valid allocation.
+         let rcu_head = unsafe { &raw mut (*self.0.as_ptr()).rcu_head };
+@@ -122,9 +134,11 @@ fn drop(&mut self) {
+             // SAFETY: `rcu_head` is the `rcu_head` field of `RcuBoxInner<T>`. All users will be
+             // gone in an rcu grace period. This is the destructor, so we may pass ownership of the
+             // allocation.
+-            unsafe { bindings::call_rcu(rcu_head, Some(drop_rcu_box::<T>)) };
++            unsafe { bindings::call_rcu(rcu_head, Some(drop_rcu_box::<T, A>)) };
+         } else {
+             // SAFETY: All users will be gone in an rcu grace period.
++            // TODO: We are luckily since `kvfree_call_rcu()` works on both kmalloc and vmalloc,
++            // maybe a new `Allocator` method is needed.
+             unsafe { bindings::kvfree_call_rcu(rcu_head, self.0.as_ptr().cast()) };
+         }
+     }
+@@ -135,11 +149,35 @@ fn drop(&mut self) {
+ /// # Safety
+ ///
+ /// `head` references the `rcu_head` field of an `RcuBoxInner<T>` that has no references to it.
+-/// Ownership of the `KBox<RcuBoxInner<T>>` must be passed.
+-unsafe extern "C" fn drop_rcu_box<T>(head: *mut bindings::callback_head) {
++/// Ownership of the `Box<RcuBoxInner<T>, A>` must be passed.
++unsafe extern "C" fn drop_rcu_box<T, A: Allocator>(head: *mut bindings::callback_head) {
+     // SAFETY: Caller provides a pointer to the `rcu_head` field of a `RcuBoxInner<T>`.
+     let box_inner = unsafe { crate::container_of!(head, RcuBoxInner<T>, rcu_head) };
+ 
+     // SAFETY: Caller ensures exclusive access and passed ownership.
+-    drop(unsafe { KBox::from_raw(box_inner) });
++    drop(unsafe { Box::<_, A>::from_raw(box_inner) });
++}
++
++#[kunit_tests(rust_rcu_box)]
++mod tests {
++    use super::*;
++
++    #[test]
++    fn rcu_box_basic() -> Result {
++        let rb = RcuBox::<_, alloc::allocator::Kmalloc>::new(42i32, alloc::flags::GFP_KERNEL)?;
++
++        assert_eq!(*rb, 42);
++        assert_eq!(*rb.with_rcu(&Guard::new()), 42);
++
++        drop(rb);
++
++        let rb = RcuBox::<_, alloc::allocator::Vmalloc>::new(42i32, alloc::flags::GFP_KERNEL)?;
++
++        assert_eq!(*rb, 42);
++        assert_eq!(*rb.with_rcu(&Guard::new()), 42);
++
++        drop(rb);
++
++        Ok(())
++    }
+ }
+-- 
+2.50.1 (Apple Git-155)
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
