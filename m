@@ -2,60 +2,60 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id aKziCIpnHmoNjAkAu9opvQ
+	id WMyQLJtnHmoNjAkAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 02 Jun 2026 07:18:02 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 02 Jun 2026 07:18:19 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id AE8C46287EE
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 02 Jun 2026 07:18:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CAD9D6287F5
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 02 Jun 2026 07:18:13 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B9E2140990
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  2 Jun 2026 05:18:00 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 48D303F960
-	for <linaro-mm-sig@lists.linaro.org>; Sat, 30 May 2026 15:20:35 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D75FC409A6
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  2 Jun 2026 05:18:12 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+	by lists.linaro.org (Postfix) with ESMTPS id 2740D40962
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 30 May 2026 15:27:47 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=Lk8OFmb5;
-	spf=pass (lists.linaro.org: domain of dakr@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=dakr@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=PlqV5rtU;
+	spf=pass (lists.linaro.org: domain of dakr@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=dakr@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	by sea.source.kernel.org (Postfix) with ESMTP id 84119437F5;
-	Sat, 30 May 2026 15:20:34 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9C3031F00893;
-	Sat, 30 May 2026 15:20:27 +0000 (UTC)
+	by tor.source.kernel.org (Postfix) with ESMTP id B8661600BB;
+	Sat, 30 May 2026 15:27:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B76381F00893;
+	Sat, 30 May 2026 15:27:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1780154434;
-	bh=+sc/8gqjxXPGiBvIvfD3IGHEnbbWMn6slfVxYS4NsDE=;
-	h=Date:Cc:To:From:Subject:References:In-Reply-To;
-	b=Lk8OFmb5QUw2CRzhJufG32U11EnGHWNH/C0HzWLKA/jvmjZe838mBvYadKLJtFXqq
-	 zzRhj8RUIYR2wS3J4i7sBa1XwPe9fU+s9n1vBm99BUrZHxYKr+eRl9Lf6AFHMr6RgV
-	 5+MaCL9TOxBtcku2/J9XgRMSe1HS6ZKH8izhS0cTidUhU9sPdh1WsGsboOq/q7ltCB
-	 RJ58HZLV7thBtBRayXAdRhT86s/05Y3/fIgh0Hm6aW+oukCbXscB6mrbzGaqZGPkDq
-	 mA4KdB2jzkHRm/cT6yR/NCRW3tuOm1eywlxCE62osPNM4t+SK2MGoinEALteGeYNOp
-	 5ith0jBQvczLw==
+	s=k20260515; t=1780154866;
+	bh=JzNwHAlWijeIAaG15DTA2o5Tf9s2L7yI5CPXH7a+wi8=;
+	h=Date:Subject:Cc:To:From:References:In-Reply-To;
+	b=PlqV5rtUI6f9pzKL6aAEp+ROgJjj+sh4ZJqNOuJh2RWXEY75/QdgcavEFArDBDdzG
+	 qDYr/VmZeRxgIm73QBDrlOHUB1FPPYLqiGCWSNxb7QJD2N6mCTBHEYLNwHHxy0h104
+	 UFlAdxA4Oi9LEUnoyuYzscH0IG27O//ciYKe5QMuK/Uyl/KnPP+Qpq57Y2OiGHJP1Y
+	 /0NL7Ho0IumfW86Ai2o2W2pBosUBtA6n3EAQQAMThS3PYsniiPVQKVxlr2s3jMg5L7
+	 y+LTcjdHivWP2c9vLPNp2/hniUFMFmg86acan+82wKvuxWpsJYdRiJR/kgKa9FbCOw
+	 RFql/BO+U+O+g==
 Mime-Version: 1.0
-Date: Sat, 30 May 2026 17:20:26 +0200
-Message-Id: <DIW42TO5HY6H.2RLL8V8H48A5A@kernel.org>
-To: "Philipp Stanner" <phasta@kernel.org>
+Date: Sat, 30 May 2026 17:27:38 +0200
+Message-Id: <DIW48C65445Y.1VVD8AEDB35UM@kernel.org>
+To: "Boqun Feng" <boqun@kernel.org>
 From: "Danilo Krummrich" <dakr@kernel.org>
 References: <20260530143541.229628-2-phasta@kernel.org>
- <20260530143541.229628-7-phasta@kernel.org>
-In-Reply-To: <20260530143541.229628-7-phasta@kernel.org>
-X-Spamd-Bar: ---
+ <20260530143541.229628-4-phasta@kernel.org> <ahr9gtzQLSbPeBx_@tardis.local>
+In-Reply-To: <ahr9gtzQLSbPeBx_@tardis.local>
+X-Spamd-Bar: -
 X-MailFrom: dakr@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: ZOXCMKW4MAO5PEA36GTJ2SIUGM33VV6U
-X-Message-ID-Hash: ZOXCMKW4MAO5PEA36GTJ2SIUGM33VV6U
+Message-ID-Hash: QE3IQNOVAX6RE3IKICIQBDEADK3OX5IJ
+X-Message-ID-Hash: QE3IQNOVAX6RE3IKICIQBDEADK3OX5IJ
 X-Mailman-Approved-At: Tue, 02 Jun 2026 05:16:48 +0000
-CC: Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun@kernel.org>, Gary Guo <gary@garyguo.net>, =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, Sumit Semwal <sumit.semwal@linaro.org>, =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, "Paul E. McKenney" <paulmck@kernel.org>, Frederic Weisbecker <frederic@kernel.org>, Neeraj Upadhyay <neeraj.upadhyay@kernel.org>, Joel Fernandes <joelagnelf@nvidia.com>, Josh Triplett <josh@joshtriplett.org>, Uladzislau Rezki <urezki@gmail.com>, Steven Rostedt <rostedt@goodmis.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Lai Jiangshan <jiangshanlai@gmail.com>, Zqiang <qiang.zhang@linux.dev>, Daniel Almeida <daniel.almeida@collabora.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Igor Korotin <igor.korotin@linux.dev>, Lorenzo Stoakes <ljs@kernel.org>, Alexandre Courbot
-  <acourbot@nvidia.com>, FUJITA Tomonori <fujita.tomonori@gmail.com>, Krishna Ketan Rai <prafulrai522@gmail.com>, Shankari Anand <shankari.ak0208@gmail.com>, manos@pitsidianak.is, Boris Brezillon <boris.brezillon@collabora.com>, linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, rcu@vger.kernel.org
+CC: Philipp Stanner <phasta@kernel.org>, Miguel Ojeda <ojeda@kernel.org>, Gary Guo <gary@garyguo.net>, =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, Sumit Semwal <sumit.semwal@linaro.org>, =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, "Paul E. McKenney" <paulmck@kernel.org>, Frederic Weisbecker <frederic@kernel.org>, Neeraj Upadhyay <neeraj.upadhyay@kernel.org>, Joel Fernandes <joelagnelf@nvidia.com>, Josh Triplett <josh@joshtriplett.org>, Uladzislau Rezki <urezki@gmail.com>, Steven Rostedt <rostedt@goodmis.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Lai Jiangshan <jiangshanlai@gmail.com>, Zqiang <qiang.zhang@linux.dev>, Daniel Almeida <daniel.almeida@collabora.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Igor Korotin <igor.korotin@linux.dev>, Lorenzo Stoakes <ljs@kernel.org>, Alexandre C
+ ourbot <acourbot@nvidia.com>, FUJITA Tomonori <fujita.tomonori@gmail.com>, Krishna Ketan Rai <prafulrai522@gmail.com>, Shankari Anand <shankari.ak0208@gmail.com>, manos@pitsidianak.is, Boris Brezillon <boris.brezillon@collabora.com>, linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, rcu@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 4/4] MAINTAINERS: Add entry for Rust dma-buf
+Subject: [Linaro-mm-sig] Re: [PATCH 2/4] rust: rcu: add RcuBox type
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZOXCMKW4MAO5PEA36GTJ2SIUGM33VV6U/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QE3IQNOVAX6RE3IKICIQBDEADK3OX5IJ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -85,7 +85,7 @@ X-Spamd-Result: default: False [4.99 / 15.00];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-0.963];
+	NEURAL_HAM(-0.00)[-0.999];
 	FROM_NEQ_ENVFROM(0.00)[dakr@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:-];
@@ -94,22 +94,23 @@ X-Spamd-Result: default: False [4.99 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TO_DN_SOME(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:rdns,lists.linaro.org:helo]
-X-Rspamd-Queue-Id: AE8C46287EE
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo]
+X-Rspamd-Queue-Id: CAD9D6287F5
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Sat May 30, 2026 at 4:35 PM CEST, Philipp Stanner wrote:
-> @@ -7529,6 +7530,7 @@ T:	git https://gitlab.freedesktop.org/drm/misc/kernel.git
->  F:	Documentation/driver-api/dma-buf.rst
->  F:	Documentation/userspace-api/dma-buf-alloc-exchange.rst
->  F:	drivers/dma-buf/
-> +F:	rust/kernel/dma_buf/
+On Sat May 30, 2026 at 5:08 PM CEST, Boqun Feng wrote:
+> type RcuKBox<T> = RcuBox<T, Kmalloc>;
+> type RcuVBox<T> = RcuBox<T, Vmalloc>;
 
-Please also add rust/helpers/dma_fence.c.
+type RcuKVBox<T> = RcuBox<T, KVmalloc>;
 
-Given that dma-buf goes through drm-misc, we should probably also add those file
-to the drm-rust entry.
+> To support RCU-protected vmalloc allocation, we need to make `RcuBox`
+> generic over `Allocator`. Currently this works since all `Allocator`s
+> are either kmalloc() or vmalloc(), and kvfree_call_rcu() works with both
+> allocations.
+
+I think we can add Allocator::free_call_rcu().
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
