@@ -2,368 +2,217 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id iFj3CXhnHmoNjAkAu9opvQ
+	id WHKaGIFnHmoNjAkAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 02 Jun 2026 07:17:44 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 02 Jun 2026 07:17:53 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id B36286287DF
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 02 Jun 2026 07:17:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D57786287E6
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 02 Jun 2026 07:17:52 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C680D4098F
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  2 Jun 2026 05:17:42 +0000 (UTC)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
-	by lists.linaro.org (Postfix) with ESMTPS id 932CF40962
-	for <linaro-mm-sig@lists.linaro.org>; Sat, 30 May 2026 15:08:55 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E2C4F4099D
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  2 Jun 2026 05:17:51 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+	by lists.linaro.org (Postfix) with ESMTPS id C4F3540962
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 30 May 2026 15:16:19 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20260515 header.b=NtS4TnJU;
-	spf=pass (lists.linaro.org: domain of boqun@kernel.org designates 172.105.4.254 as permitted sender) smtp.mailfrom=boqun@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20260515 header.b=ivG9I9Wb;
+	spf=pass (lists.linaro.org: domain of dakr@kernel.org designates 172.234.252.31 as permitted sender) smtp.mailfrom=dakr@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	by tor.source.kernel.org (Postfix) with ESMTP id F398960121;
-	Sat, 30 May 2026 15:08:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 86EFA1F00898;
-	Sat, 30 May 2026 15:08:53 +0000 (UTC)
+	by sea.source.kernel.org (Postfix) with ESMTP id E4BC3435A1;
+	Sat, 30 May 2026 15:16:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 111F01F00893;
+	Sat, 30 May 2026 15:16:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1780153734;
-	bh=Iw0FhbtvjuV1urcZGjkx/qt7+8pTDgXeuj/fbCEH8Z8=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=NtS4TnJUEx6ZBROs3IAYPPCv502M1JnfN+ZrT1IVXgXQBIT1MebRwxZ7OG+kK9q3l
-	 whB86kXoIGtoH56GI+7fMrLY6PpiUbm3qBJ/6Fu6qdCXGE6fq5mSmehxcPUCozo1lp
-	 HX68MFFGke0ealMF4PiFG/3dYrPqhcymN8rD6CX2iO2IHqUwQMrjIYsfhzhy25CYq2
-	 UmjxB1YKYrptHEfUXhxRGxSZFaJjbTgXIA1tA2moG1Ah0KoB2wefl+m1mOZ19p1fM6
-	 tRjj4J+1UL6AJ9GSYrKilHZY+7C6WGjlsahqoF/Ia4LKCqkk7MjZJlsHdn4cicz+jx
-	 mMv8j6twHzsvQ==
-Received: from phl-compute-06.internal (phl-compute-06.internal [10.202.2.46])
-	by mailfauth.phl.internal (Postfix) with ESMTP id 9E94EF40084;
-	Sat, 30 May 2026 11:08:52 -0400 (EDT)
-Received: from phl-frontend-04 ([10.202.2.163])
-  by phl-compute-06.internal (MEProxy); Sat, 30 May 2026 11:08:52 -0400
-X-ME-Sender: <xms:hP0aarPnZ7pO4nV8lbLWTk3kGQb64n7UaQk2gvHB6b4Y8BoICFQvMg>
-    <xme:hP0aaiuj0Snqh-vSrhA6u5S0ex0twv7DHuTTMmEOnUzTWXAdtsxHjXiuiv6-17fqb
-    oWgYzlZ4WY3PZ1ufErk7bZVH42e8LPM_nW19Na8g-alhIeF6HERCA>
-X-ME-Received: <xmr:hP0aap3loKQEj0kGc-01-PYXV6TRGxzwj7Iyzh0YyBJDw84mGyXTXV2UFyy16jrWUVEqxtPBOBngEUnv2j-X0Aj32AvnqT9T>
-X-ME-Proxy-Cause: dmFkZTGQOkMpaaZDC0BephxAIuGa+jUd9e2JeV56FDIbuJEAWrj+VoXDzFdKUU1lXoKRsW
-    eA93QvoUnLxh6FA5WO25QYu1EOQlA3G3Zi6hzUOFeKjtFdHUG2UbiVP5zvd5SbILAs5gnm
-    9tAHe3/r5AVsTwU1g3J/RqUIL1wuE2GPUnVUXYf0jdwNh3Ndnb1cRmGWTnjwk3JYi1huuy
-    fRaUt7vQS3ZvhWWMg4bQm372n0OcODf7UBrL3xqg8ateiBTPkCe8aTtchAFZKoHLaS5n1a
-    DJ+bPhozh7nEqV0LXPj0f0wDx8XxYux8+3KzRoPNUZQclpSIe966E7Vt5Mq+wkwaaF5CQO
-    iVX5Tc6DtyBDaCoELDj/LFgplQomGJ4soFWpGvTkdhdpS87/OG/KCLHTKnPE5CVBu1EG/S
-    CqWxyZh04AcncdY5ojIoZc6vD6rW+0yFUpsySbge+xtl3gNr69hgM4G1Y98wagmA4ugxkx
-    22O4D/yNZ9QnxweYMY03dtgmhgMOYJeYyu6z71hbyK888RHhEtknh7iejtvD5FfqPvjbua
-    Yiu4KtUWy4BpGZB5E2iOJ11TvGp624vG7dGx7a0+NatE/I7KUIi/fN7hc+bJCp2ArZofJb
-    wf+6GSB0QxOoHsdtLs3F6N1LjAGcJPsSdwvmYcxbH0ruTBjpUqtaRn8+aC2A
-X-ME-Proxy: <xmx:hP0aaoUs7UzN6maBl3NTD0UNHNFNzPaJclYo3I7zVaE4kYadV66WaA>
-    <xmx:hP0aanvVAb8_M9iHndCV1hXvfLnogF-KT1oqqN_hgbeOsxFCS8Kn7Q>
-    <xmx:hP0aaryr0cW5k6xeXI-1d5oIQzCxU3MzOEWxf5tPyT23NqFLLmcZxQ>
-    <xmx:hP0aamn1cuq7ShwlzqJv7jRGGA08folHN9bONN45s16r2dQKh1nL4w>
-    <xmx:hP0aapZ9cnRQ1GXiwc75dcux2jnLGaUjRG-nrintqMzf42SJTTVX7BTl>
-Feedback-ID: i8dbe485b:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sat,
- 30 May 2026 11:08:51 -0400 (EDT)
-Date: Sat, 30 May 2026 08:08:50 -0700
-From: Boqun Feng <boqun@kernel.org>
-To: Philipp Stanner <phasta@kernel.org>
-Message-ID: <ahr9gtzQLSbPeBx_@tardis.local>
+	s=k20260515; t=1780154178;
+	bh=B3IwrE3HK9xQ/GsYTmA9pt7vQYdzp5OkBKwI6mjM0Ks=;
+	h=Date:Subject:Cc:To:From:References:In-Reply-To;
+	b=ivG9I9Wb1Fhio7A/1AlExKrVKTjWm24EHtORlfbrP5Dc4c4bL4JMnbjqDTqUA/GFw
+	 2hr7JqaFVsRU72p3y/y0tKVuwPBZ1YqwRmNSTlIn/26d96dkH+Sy9RJ+UCy/TQRG9P
+	 FS/IoYmNxEQQnhqdfMEDa4BW6n5TRSFdF/H1ZXEdoBqvT/ZQ3PzfF4VnO2xdJercPK
+	 sX1uqzRFCchLdr9KtyGJY5K3Dppkt48lqnyW+qgP4Rh0Y1laLZMrIkSkM2Du8o+XGS
+	 mj3MkD12yXLxdzx/mmh7lN93ATCHzyYUyKnkzOqiOKnwCuMuEfsUjYPJRG5tWljvVg
+	 Twtc4kpXUkYDA==
+Mime-Version: 1.0
+Date: Sat, 30 May 2026 17:16:10 +0200
+Message-Id: <DIW3ZK5NLKU3.1QYMQB0ISHFBG@kernel.org>
+To: "Philipp Stanner" <phasta@kernel.org>
+From: "Danilo Krummrich" <dakr@kernel.org>
 References: <20260530143541.229628-2-phasta@kernel.org>
- <20260530143541.229628-4-phasta@kernel.org>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20260530143541.229628-4-phasta@kernel.org>
+ <20260530143541.229628-5-phasta@kernel.org>
+In-Reply-To: <20260530143541.229628-5-phasta@kernel.org>
 X-Spamd-Bar: ---
-X-MailFrom: boqun@kernel.org
+X-MailFrom: dakr@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: PEYJNKVGM7TYOEQEYBQ5ICZXE6KKFCTO
-X-Message-ID-Hash: PEYJNKVGM7TYOEQEYBQ5ICZXE6KKFCTO
+Message-ID-Hash: XEE5KIYCPJR7COHEHV76BRP47DLS7ZCS
+X-Message-ID-Hash: XEE5KIYCPJR7COHEHV76BRP47DLS7ZCS
 X-Mailman-Approved-At: Tue, 02 Jun 2026 05:16:48 +0000
-CC: Miguel Ojeda <ojeda@kernel.org>, Gary Guo <gary@garyguo.net>, =?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>, Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, Danilo Krummrich <dakr@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, "Paul E. McKenney" <paulmck@kernel.org>, Frederic Weisbecker <frederic@kernel.org>, Neeraj Upadhyay <neeraj.upadhyay@kernel.org>, Joel Fernandes <joelagnelf@nvidia.com>, Josh Triplett <josh@joshtriplett.org>, Uladzislau Rezki <urezki@gmail.com>, Steven Rostedt <rostedt@goodmis.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Lai Jiangshan <jiangshanlai@gmail.com>, Zqiang <qiang.zhang@linux.dev>, Daniel Almeida <daniel.almeida@collabora.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Igor Korotin <igor.korotin@linux.dev>, Lorenzo Stoakes <ljs@kernel.org>, Alexandr
- e Courbot <acourbot@nvidia.com>, FUJITA Tomonori <fujita.tomonori@gmail.com>, Krishna Ketan Rai <prafulrai522@gmail.com>, Shankari Anand <shankari.ak0208@gmail.com>, manos@pitsidianak.is, Boris Brezillon <boris.brezillon@collabora.com>, linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, rcu@vger.kernel.org
+CC: Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun@kernel.org>, Gary Guo <gary@garyguo.net>, =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, Sumit Semwal <sumit.semwal@linaro.org>, =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, "Paul E. McKenney" <paulmck@kernel.org>, Frederic Weisbecker <frederic@kernel.org>, Neeraj Upadhyay <neeraj.upadhyay@kernel.org>, Joel Fernandes <joelagnelf@nvidia.com>, Josh Triplett <josh@joshtriplett.org>, Uladzislau Rezki <urezki@gmail.com>, Steven Rostedt <rostedt@goodmis.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Lai Jiangshan <jiangshanlai@gmail.com>, Zqiang <qiang.zhang@linux.dev>, Daniel Almeida <daniel.almeida@collabora.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Igor Korotin <igor.korotin@linux.dev>, Lorenzo Stoakes <ljs@kernel.org>, Alexandre Courbot
+  <acourbot@nvidia.com>, FUJITA Tomonori <fujita.tomonori@gmail.com>, Krishna Ketan Rai <prafulrai522@gmail.com>, Shankari Anand <shankari.ak0208@gmail.com>, manos@pitsidianak.is, Boris Brezillon <boris.brezillon@collabora.com>, linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, rcu@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 2/4] rust: rcu: add RcuBox type
+Subject: [Linaro-mm-sig] Re: [PATCH 3/4] rust: Add dma_fence abstractions
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PEYJNKVGM7TYOEQEYBQ5ICZXE6KKFCTO/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XEE5KIYCPJR7COHEHV76BRP47DLS7ZCS/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [4.49 / 15.00];
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+X-Spamd-Result: default: False [5.09 / 15.00];
 	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
 	SUSPICIOUS_RECIPS(1.50)[];
 	R_DKIM_REJECT(1.00)[kernel.org:s=k20260515];
 	DATE_IN_PAST(1.00)[62];
-	MAILLIST(-0.20)[mailman];
+	MV_CASE(0.50)[];
 	R_SPF_ALLOW(-0.20)[+mx:c];
+	MAILLIST(-0.20)[mailman];
+	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[kernel.org,garyguo.net,protonmail.com,google.com,umich.edu,linaro.org,amd.com,nvidia.com,joshtriplett.org,gmail.com,goodmis.org,efficios.com,linux.dev,collabora.com,linuxfoundation.org,pitsidianak.is,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	GREYLIST(0.00)[pass,meta];
-	ARC_NA(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[37];
-	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[kernel.org:-];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,tardis.local:mid];
-	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[boqun@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
+	GREYLIST(0.00)[pass,meta];
+	RCPT_COUNT_TWELVE(0.00)[37];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	FREEMAIL_CC(0.00)[kernel.org,garyguo.net,protonmail.com,google.com,umich.edu,linaro.org,amd.com,nvidia.com,joshtriplett.org,gmail.com,goodmis.org,efficios.com,linux.dev,collabora.com,linuxfoundation.org,pitsidianak.is,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.812];
+	TO_DN_SOME(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[dakr@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:-];
+	NEURAL_HAM(-0.00)[-0.968];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	MISSING_XM_UA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	RCVD_COUNT_SEVEN(0.00)[7]
-X-Rspamd-Queue-Id: B36286287DF
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:rdns,lists.linaro.org:helo,linaro.org:email]
+X-Rspamd-Queue-Id: D57786287E6
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Sat, May 30, 2026 at 04:35:10PM +0200, Philipp Stanner wrote:
-> From: Alice Ryhl <aliceryhl@google.com>
-> 
-> This adds an RcuBox container, which is like KBox except that the value
-> is freed with kfree_rcu.
-> 
-> To allow containers to rely on the rcu properties of RcuBox, an
-> extension of ForeignOwnable is added.
-> 
-> Signed-off-by: Alice Ryhl <aliceryhl@google.com>
-> ---
-
-I have the following on top of Alice's patch. @Alice, @Danilo, thoughts?
-
-Then we can have:
-
-type RcuKBox<T> = RcuBox<T, Kmalloc>;
-type RcuVBox<T> = RcuBox<T, Vmalloc>;
-
-and Philipp can use the `RcuKBox` in this patchset. We also need to impl
-InPlaceInit for RcuBox, but that can be added later.
-
-Regards,
-Boqun
-
-------------->8
-Subject: [PATCH] rust: rcu: Make RcuBox generic over Allocator
-
-To support RCU-protected vmalloc allocation, we need to make `RcuBox`
-generic over `Allocator`. Currently this works since all `Allocator`s
-are either kmalloc() or vmalloc(), and kvfree_call_rcu() works with both
-allocations.
-
-While we are at it, add some basic test cases.
-
-Signed-off-by: Boqun Feng <boqun@kernel.org>
----
- rust/kernel/sync/rcu/rcu_box.rs | 96 +++++++++++++++++++++++----------
- 1 file changed, 67 insertions(+), 29 deletions(-)
-
-diff --git a/rust/kernel/sync/rcu/rcu_box.rs b/rust/kernel/sync/rcu/rcu_box.rs
-index 2508fdb609ec..5c344d82c0d9 100644
---- a/rust/kernel/sync/rcu/rcu_box.rs
-+++ b/rust/kernel/sync/rcu/rcu_box.rs
-@@ -4,47 +4,59 @@
- 
- //! Provides the `RcuBox` type for Rust allocations that live for a grace period.
- 
--use core::{ops::Deref, ptr::NonNull};
-+use core::{
-+    marker::PhantomData,
-+    ops::Deref,
-+    ptr::NonNull, //
-+};
- 
- use kernel::{
--    alloc::{self, AllocError},
-+    alloc::{
-+        self,
-+        AllocError,
-+        Allocator, //
-+    },
-     bindings,
-     ffi::c_void,
-     prelude::*,
--    sync::rcu::{ForeignOwnableRcu, Guard},
-     types::ForeignOwnable,
- };
- 
-+use super::{
-+    ForeignOwnableRcu,
-+    Guard, //
-+};
-+
- /// A box that is freed with rcu.
- ///
- /// The value must be `Send`, as rcu may drop it on another thread.
- ///
- /// # Invariants
- ///
--/// * The pointer is valid and references a pinned `RcuBoxInner<T>` allocated with `kmalloc`.
-+/// * The pointer is valid and references a pinned `RcuBoxInner<T>` allocated with `A`.
- /// * This `RcuBox` holds exclusive permissions to rcu free the allocation.
--pub struct RcuBox<T: Send>(NonNull<RcuBoxInner<T>>);
-+pub struct RcuBox<T: Send, A: Allocator>(NonNull<RcuBoxInner<T>>, PhantomData<A>);
- 
- struct RcuBoxInner<T> {
-     value: T,
-     rcu_head: bindings::callback_head,
- }
- 
--// Note that `T: Sync` is required since when moving an `RcuBox<T>`, the previous owner may still
--// access `&T` for one grace period.
-+// Note that `T: Sync` is required since when moving an `RcuBox<T, A>`, the previous owner may
-+// still access `&T` for one grace period.
- //
--// SAFETY: Ownership of the `RcuBox<T>` allows for `&T` and dropping the `T`, so `T: Send + Sync`
--// implies `RcuBox<T>: Send`.
--unsafe impl<T: Send + Sync> Send for RcuBox<T> {}
-+// SAFETY: Ownership of the `RcuBox<T, A>` allows for `&T` and dropping the `T`, so `T: Send +
-+// Sync` implies `RcuBox<T, A>: Send`.
-+unsafe impl<T: Send + Sync, A: Allocator> Send for RcuBox<T, A> {}
- 
--// SAFETY: `&RcuBox<T>` allows for no operations other than those permitted by `&T`, so `T: Sync`
--// implies `RcuBox<T>: Sync`.
--unsafe impl<T: Send + Sync> Sync for RcuBox<T> {}
-+// SAFETY: `&RcuBox<T, A>` allows for no operations other than those permitted by `&T`, so `T:
-+// Sync` implies `RcuBox<T, A>: Sync`.
-+unsafe impl<T: Send + Sync, A: Allocator> Sync for RcuBox<T, A> {}
- 
--impl<T: Send> RcuBox<T> {
-+impl<T: Send, A: Allocator> RcuBox<T, A> {
-     /// Create a new `RcuBox`.
-     pub fn new(x: T, flags: alloc::Flags) -> Result<Self, AllocError> {
--        let b = KBox::new(
-+        let b = Box::<_, A>::new(
-             RcuBoxInner {
-                 value: x,
-                 rcu_head: Default::default(),
-@@ -53,9 +65,9 @@ pub fn new(x: T, flags: alloc::Flags) -> Result<Self, AllocError> {
-         )?;
- 
-         // INVARIANT:
--        // * The pointer contains a valid `RcuBoxInner` allocated with `kmalloc`.
-+        // * The pointer contains a valid `RcuBoxInner` allocated with `A`.
-         // * We just allocated it, so we own free permissions.
--        Ok(RcuBox(NonNull::from(KBox::leak(b))))
-+        Ok(RcuBox(NonNull::from(Box::leak(b)), PhantomData))
-     }
- 
-     /// Access the value for a grace period.
-@@ -66,7 +78,7 @@ pub fn with_rcu<'rcu>(&self, _read_guard: &'rcu Guard) -> &'rcu T {
-     }
- }
- 
--impl<T: Send> Deref for RcuBox<T> {
-+impl<T: Send, A: Allocator> Deref for RcuBox<T, A> {
-     type Target = T;
-     fn deref(&self) -> &T {
-         // SAFETY: While the `RcuBox<T>` exists, the value remains valid.
-@@ -75,10 +87,10 @@ fn deref(&self) -> &T {
- }
- 
- // SAFETY:
--// * The `RcuBoxInner<T>` was allocated with `kmalloc`.
-+// * The `RcuBoxInner<T>` was allocated with `A`.
- // * `NonNull::as_ptr` returns a non-null pointer.
--unsafe impl<T: Send + 'static> ForeignOwnable for RcuBox<T> {
--    const FOREIGN_ALIGN: usize = <KBox<RcuBoxInner<T>> as ForeignOwnable>::FOREIGN_ALIGN;
-+unsafe impl<T: Send + 'static, A: Allocator> ForeignOwnable for RcuBox<T, A> {
-+    const FOREIGN_ALIGN: usize = <Box<RcuBoxInner<T>, A> as ForeignOwnable>::FOREIGN_ALIGN;
- 
-     type Borrowed<'a> = &'a T;
-     type BorrowedMut<'a> = &'a T;
-@@ -88,9 +100,9 @@ fn into_foreign(self) -> *mut c_void {
-     }
- 
-     unsafe fn from_foreign(ptr: *mut c_void) -> Self {
--        // INVARIANT: Pointer returned by `into_foreign` carries same invariants as `RcuBox<T>`.
-+        // INVARIANT: Pointer returned by `into_foreign, A` carries same invariants as `RcuBox<T>`.
-         // SAFETY: `into_foreign` never returns a null pointer.
--        Self(unsafe { NonNull::new_unchecked(ptr.cast()) })
-+        Self(unsafe { NonNull::new_unchecked(ptr.cast()) }, PhantomData)
-     }
- 
-     unsafe fn borrow<'a>(ptr: *mut c_void) -> &'a T {
-@@ -104,7 +116,7 @@ unsafe fn borrow_mut<'a>(ptr: *mut c_void) -> &'a T {
-     }
- }
- 
--impl<T: Send + 'static> ForeignOwnableRcu for RcuBox<T> {
-+impl<T: Send + 'static, A: Allocator> ForeignOwnableRcu for RcuBox<T, A> {
-     type RcuBorrowed<'a> = &'a T;
- 
-     unsafe fn rcu_borrow<'a>(ptr: *mut c_void) -> &'a T {
-@@ -114,7 +126,7 @@ unsafe fn rcu_borrow<'a>(ptr: *mut c_void) -> &'a T {
-     }
- }
- 
--impl<T: Send> Drop for RcuBox<T> {
-+impl<T: Send, A: Allocator> Drop for RcuBox<T, A> {
-     fn drop(&mut self) {
-         // SAFETY: The `rcu_head` field is in-bounds of a valid allocation.
-         let rcu_head = unsafe { &raw mut (*self.0.as_ptr()).rcu_head };
-@@ -122,9 +134,11 @@ fn drop(&mut self) {
-             // SAFETY: `rcu_head` is the `rcu_head` field of `RcuBoxInner<T>`. All users will be
-             // gone in an rcu grace period. This is the destructor, so we may pass ownership of the
-             // allocation.
--            unsafe { bindings::call_rcu(rcu_head, Some(drop_rcu_box::<T>)) };
-+            unsafe { bindings::call_rcu(rcu_head, Some(drop_rcu_box::<T, A>)) };
-         } else {
-             // SAFETY: All users will be gone in an rcu grace period.
-+            // TODO: We are luckily since `kvfree_call_rcu()` works on both kmalloc and vmalloc,
-+            // maybe a new `Allocator` method is needed.
-             unsafe { bindings::kvfree_call_rcu(rcu_head, self.0.as_ptr().cast()) };
-         }
-     }
-@@ -135,11 +149,35 @@ fn drop(&mut self) {
- /// # Safety
- ///
- /// `head` references the `rcu_head` field of an `RcuBoxInner<T>` that has no references to it.
--/// Ownership of the `KBox<RcuBoxInner<T>>` must be passed.
--unsafe extern "C" fn drop_rcu_box<T>(head: *mut bindings::callback_head) {
-+/// Ownership of the `Box<RcuBoxInner<T>, A>` must be passed.
-+unsafe extern "C" fn drop_rcu_box<T, A: Allocator>(head: *mut bindings::callback_head) {
-     // SAFETY: Caller provides a pointer to the `rcu_head` field of a `RcuBoxInner<T>`.
-     let box_inner = unsafe { crate::container_of!(head, RcuBoxInner<T>, rcu_head) };
- 
-     // SAFETY: Caller ensures exclusive access and passed ownership.
--    drop(unsafe { KBox::from_raw(box_inner) });
-+    drop(unsafe { Box::<_, A>::from_raw(box_inner) });
-+}
-+
-+#[kunit_tests(rust_rcu_box)]
-+mod tests {
-+    use super::*;
-+
-+    #[test]
-+    fn rcu_box_basic() -> Result {
-+        let rb = RcuBox::<_, alloc::allocator::Kmalloc>::new(42i32, alloc::flags::GFP_KERNEL)?;
-+
-+        assert_eq!(*rb, 42);
-+        assert_eq!(*rb.with_rcu(&Guard::new()), 42);
-+
-+        drop(rb);
-+
-+        let rb = RcuBox::<_, alloc::allocator::Vmalloc>::new(42i32, alloc::flags::GFP_KERNEL)?;
-+
-+        assert_eq!(*rb, 42);
-+        assert_eq!(*rb.with_rcu(&Guard::new()), 42);
-+
-+        drop(rb);
-+
-+        Ok(())
-+    }
- }
--- 
-2.50.1 (Apple Git-155)
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+KE5vdCBhIGZ1bGwgcmV2aWV3LCBidXQgYSBmZXcgZHJpdmUtYnkgY29tbWVudHMuKQ0KDQpPbiBT
+YXQgTWF5IDMwLCAyMDI2IGF0IDQ6MzUgUE0gQ0VTVCwgUGhpbGlwcCBTdGFubmVyIHdyb3RlOg0K
+PiArI1thbGxvdyh1bnVzZWRfdW5zYWZlKV0NCg0KV2hhdCBpcyB0aGlzIG5lZWRlZCBmb3I/DQoN
+Cj4gK2ltcGw8RjogU2VuZCArIFN5bmMgKyBEcml2ZXJGZW5jZUFsbG93ZWREYXRhLCBDOiBTZW5k
+ICsgU3luYz4gRmVuY2VDdHg8RiwgQz4gew0KDQo8c25pcD4NCg0KPiAraW1wbDxGOiBTZW5kICsg
+U3luYywgQzogU2VuZCArIFN5bmM+IFBpbm5lZERyb3AgZm9yIEZlbmNlQ3R4PEYsIEM+IHsNCj4g
+KyAgICBmbiBkcm9wKHNlbGY6IFBpbjwmbXV0IFNlbGY+KSB7DQo+ICsgICAgICAgIC8vIFNBRkVU
+WTogYHJjdV9iYXJyaWVyKClgIGlzIGFsd2F5cyBzYWZlIHRvIGJlIGNhbGxlZC4NCj4gKyAgICAg
+ICAgdW5zYWZlIHsgYmluZGluZ3M6OnJjdV9iYXJyaWVyKCkgfTsNCg0KV2Ugc2hvdWxkIHByb2Jh
+Ymx5IGFkZCBhIHNhZmUgZnVuY3Rpb24gZm9yIHRoaXMuDQoNCj4gK2ltcGw8VDogRmVuY2VDYj4g
+RmVuY2VDYlJlZ2lzdHJhdGlvbjxUPiB7DQo+ICsgICAgLy8vIFJlZ2lzdGVyIGEgY2FsbGJhY2sg
+b24gYSBmZW5jZS4NCj4gKyAgICAvLy8NCj4gKyAgICAvLy8gT24gc3VjY2VzcyB0aGUgY2FsbGJh
+Y2sgaXMgcGlubmVkIGluIHBsYWNlIGFuZCB3aWxsIGZpcmUgd2hlbiB0aGUgZmVuY2UNCj4gKyAg
+ICAvLy8gc2lnbmFscy4gT24gYEFscmVhZHlTaWduYWxlZGAgdGhlIGNhbGxiYWNrIGlzIHJldHVy
+bmVkIHRvIHRoZSBjYWxsZXIgc28NCj4gKyAgICAvLy8gdGhhdCBvd25lZCByZXNvdXJjZXMgY2Fu
+IGJlIHJlY2xhaW1lZC4NCj4gKyAgICBwdWIgZm4gbmV3PCdhPihmZW5jZTogJidhIEZlbmNlLCBj
+YWxsYmFjazogVCkgLT4gaW1wbCBQaW5Jbml0PFNlbGYsIENhbGxiYWNrRXJyb3I8VD4+ICsgJ2EN
+Cj4gKyAgICB3aGVyZQ0KPiArICAgICAgICBUOiAnYSwNCj4gKyAgICB7DQo+ICsgICAgICAgIC8v
+IFVzZXMgYHBpbl9pbml0X2Zyb21fY2xvc3VyZWAgaW5zdGVhZCBvZiBgdHJ5X3Bpbl9pbml0IWAg
+c28gdGhhdCBvbg0KPiArICAgICAgICAvLyBgLUVOT0VOVGAgKGFscmVhZHkgc2lnbmFsZWQpIHRo
+ZSBjYWxsYmFjayBjYW4gYmUgcmVhZCBiYWNrIGZyb20gdGhlDQo+ICsgICAgICAgIC8vIHBhcnRp
+YWxseS1pbml0aWFsaXplZCBzbG90IGFuZCByZXR1cm5lZCB0aHJvdWdoIHRoZSBlcnJvci4NCg0K
+U2VlbXMgYSBiaXQgb2RkIHRoYXQgdGhpcyBuZWVkcyBwaW5faW5pdF9mcm9tX2Nsb3N1cmUoKS4g
+WW91IGNhbiBzdGlsbCB1c2UNCnRyeV9waW5faW5pdCEoKSB3aXRoICZ0aGlzIGluIFNlbGYgYW4g
+YSBfOiBpbml0aWFsaXplciBhdCB0aGUgZW5kIGluIHRoZSB3b3JzdA0KY2FzZS4gQnV0IHRoZSBm
+ZW5jZSBhbmQgY2FsbGJhY2sgZmllbGRzIHNob3VsZCBiZSBmaW5lIHRvIGluaXRpYWxpemUgIm5v
+cm1hbGx5Ij8NCg0KPiArICAgICAgICAvLw0KPiArICAgICAgICAvLyBTQUZFVFk6IGBwaW5faW5p
+dF9mcm9tX2Nsb3N1cmVgIHJlcXVpcmVzOg0KPiArICAgICAgICAvLyAtIE9uIGBPaygoKSlgOiB0
+aGUgc2xvdCBpcyBmdWxseSBpbml0aWFsaXplZCBhbmQgdmFsaWQgZm9yIGBEcm9wYC4NCj4gKyAg
+ICAgICAgLy8gLSBPbiBgRXJyKF8pYDogdGhlIHNsb3QgaXMgY2xlYW4sIGkuZS46IG5vIHBhcnRp
+YWxseS1pbml0aWFsaXplZCBmaWVsZHMNCj4gKyAgICAgICAgLy8gICByZW1haW4sIGFuZCB0aGUg
+c2xvdCBjYW4gYmUgZGVhbGxvY2F0ZWQgd2l0aG91dCBkcm9wcGluZy4NCj4gKyAgICAgICAgLy8N
+Cj4gKyAgICAgICAgLy8gV2UgdXBob2xkIHRoaXMgYXMgZm9sbG93czoNCj4gKyAgICAgICAgLy8g
+LSBPbiBzdWNjZXNzOiBhbGwgdGhyZWUgZmllbGRzIGFyZSBpbml0aWFsaXplZC4gT2soKCkpIGlz
+IHJldHVybmVkLg0KPiArICAgICAgICAvLyAtIE9uIEVOT0VOVCAoYWxyZWFkeSBzaWduYWxlZCk6
+IGBjYWxsYmFja2AgYW5kIGBmZW5jZWAgYXJlIHJlYWQgYmFjaw0KPiArICAgICAgICAvLyAgIGZy
+b20gdGhlIHNsb3QgdmlhIGBwdHI6OnJlYWRgLCBsZWF2aW5nIHRoZSBzbG90IGNsZWFuLiBgY2Jg
+IHdhcw0KPiArICAgICAgICAvLyAgIGluaXRpYWxpemVkIGJ5IGBkbWFfZmVuY2VfYWRkX2NhbGxi
+YWNrYCAoaXQgY2FsbHMNCj4gKyAgICAgICAgLy8gICBgSU5JVF9MSVNUX0hFQUQoJmNiLT5ub2Rl
+KWAgZXZlbiBvbiBlcnJvciksIGJ1dCBgY2JgIGlzDQo+ICsgICAgICAgIC8vICAgYE9wYXF1ZTxk
+bWFfZmVuY2VfY2I+YCB3aGljaCBoYXMgbm8gYERyb3BgLCBzbyBub3QgZHJvcHBpbmcgaXQgaXMN
+Cj4gKyAgICAgICAgLy8gICBmaW5lLiBUaGUgY2FsbGJhY2sgaXMgcmV0dXJuZWQgdGhyb3VnaCBg
+QWxyZWFkeVNpZ25hbGVkKFQpYC4NCj4gKyAgICAgICAgLy8gLSBPbiBvdGhlciBlcnJvcnM6IHNh
+bWUgY2xlYW51cCBhcyBFTk9FTlQsIGVycm9yIHJldHVybmVkIGFzDQo+ICsgICAgICAgIC8vICAg
+YE90aGVyKGUpYC4NCj4gKyAgICAgICAgdW5zYWZlIHsNCj4gKyAgICAgICAgICAgIHBpbl9pbml0
+X2Zyb21fY2xvc3VyZShtb3ZlIHxzbG90OiAqbXV0IFNlbGZ8IHsNCj4gKyAgICAgICAgICAgICAg
+ICBsZXQgc2xvdF9jYWxsYmFjayA9ICZyYXcgbXV0ICgqc2xvdCkuY2FsbGJhY2s7DQo+ICsgICAg
+ICAgICAgICAgICAgbGV0IHNsb3RfZmVuY2UgPSAmcmF3IG11dCAoKnNsb3QpLmZlbmNlOw0KPiAr
+ICAgICAgICAgICAgICAgIGxldCBzbG90X2NiID0gJnJhdyBtdXQgKCpzbG90KS5jYjsNCj4gKw0K
+PiArICAgICAgICAgICAgICAgIC8vIFdyaXRlIGNhbGxiYWNrIGFuZCBmZW5jZSBmaXJzdCDigJQg
+bXVzdCBiZSB2aXNpYmxlIGJlZm9yZQ0KPiArICAgICAgICAgICAgICAgIC8vIGRtYV9mZW5jZV9h
+ZGRfY2FsbGJhY2sgbWFrZXMgdGhlIHJlZ2lzdHJhdGlvbiBsaXZlLg0KPiArICAgICAgICAgICAg
+ICAgIGNvcmU6OnB0cjo6d3JpdGUoc2xvdF9jYWxsYmFjaywgY2FsbGJhY2spOw0KPiArICAgICAg
+ICAgICAgICAgIGNvcmU6OnB0cjo6d3JpdGUoc2xvdF9mZW5jZSwgQVJlZjo6ZnJvbShmZW5jZSkp
+Ow0KPiArDQo+ICsgICAgICAgICAgICAgICAgbGV0IHJldCA9IHRvX3Jlc3VsdChiaW5kaW5nczo6
+ZG1hX2ZlbmNlX2FkZF9jYWxsYmFjaygNCj4gKyAgICAgICAgICAgICAgICAgICAgZmVuY2UuaW5u
+ZXIuZ2V0KCksDQo+ICsgICAgICAgICAgICAgICAgICAgIE9wYXF1ZTo6Y2FzdF9pbnRvKHNsb3Rf
+Y2IpLA0KPiArICAgICAgICAgICAgICAgICAgICBTb21lKFNlbGY6OmRtYV9mZW5jZV9jYWxsYmFj
+ayksDQo+ICsgICAgICAgICAgICAgICAgKSk7DQo+ICsNCj4gKyAgICAgICAgICAgICAgICBtYXRj
+aCByZXQgew0KPiArICAgICAgICAgICAgICAgICAgICBPaygoKSkgPT4gT2soKCkpLA0KPiArICAg
+ICAgICAgICAgICAgICAgICBFcnIoZSkgPT4gew0KPiArICAgICAgICAgICAgICAgICAgICAgICAg
+Ly8gUmVhZCBiYWNrIHdoYXQgd2Ugd3JvdGUgdG8gbGVhdmUgdGhlIHNsb3QgY2xlYW4uDQo+ICsg
+ICAgICAgICAgICAgICAgICAgICAgICBsZXQgY2JfYmFjayA9IGNvcmU6OnB0cjo6cmVhZChzbG90
+X2NhbGxiYWNrKTsNCj4gKyAgICAgICAgICAgICAgICAgICAgICAgIGxldCBfZmVuY2VfYmFjayA9
+IGNvcmU6OnB0cjo6cmVhZChzbG90X2ZlbmNlKTsNCg0KV2hhdCdzIHRoZSBwdXJwb3NlIG9mIF9m
+ZW5jZV9iYWNrPw0KDQo+ICsNCj4gKyAgICAgICAgICAgICAgICAgICAgICAgIGlmIGUudG9fZXJy
+bm8oKSA9PSBFTk9FTlQudG9fZXJybm8oKSB7DQo+ICsgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgRXJyKENhbGxiYWNrRXJyb3I6OkFscmVhZHlTaWduYWxlZChjYl9iYWNrKSkNCj4gKyAgICAg
+ICAgICAgICAgICAgICAgICAgIH0gZWxzZSB7DQo+ICsgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgRXJyKENhbGxiYWNrRXJyb3I6Ok90aGVyKGUpKQ0KPiArICAgICAgICAgICAgICAgICAgICAg
+ICAgfQ0KPiArICAgICAgICAgICAgICAgICAgICB9DQo+ICsgICAgICAgICAgICAgICAgfQ0KPiAr
+ICAgICAgICAgICAgfSkNCj4gKyAgICAgICAgfQ0KPiArICAgIH0NCj4gKyAgICAvLy8gU2lnbmFs
+IHRoZSBmZW5jZS4gVGhpcyB3aWxsIGludm9rZSBhbGwgcmVnaXN0ZXJlZCBjYWxsYmFja3MuDQo+
+ICsgICAgcHViIGZuIHNpZ25hbChzZWxmLCByZXM6IFJlc3VsdCkgew0KPiArICAgICAgICBsZXQg
+ZmVuY2UgPSBzZWxmLmFzX3JhdygpOw0KPiArICAgICAgICBsZXQgbXV0IGZlbmNlX2ZsYWdzOiB1
+c2l6ZSA9IDA7DQo+ICsgICAgICAgIGxldCBmbGFnX3B0ciA9ICZyYXcgbXV0IGZlbmNlX2ZsYWdz
+Ow0KPiArDQo+ICsgICAgICAgIC8vIFNBRkVUWTogT25jZSBhIGBEcml2ZXJGZW5jZWAgaXMgaW5p
+dGlhbGl6ZWQsIHRoZSBpbm5lciBgZmVuY2VgIGlzDQo+ICsgICAgICAgIC8vIHZhbGlkIGFuZCBp
+bml0aWFsaXplZC4gSXQgaXMgdmFsaWQgdW50aWwgdGhlIHJlZmNvdW50IGRyb3BzDQo+ICsgICAg
+ICAgIC8vIHRvIDAsIHdoaWNoIGNhbiBlYXJsaWVzdCBoYXBwZW4gb25jZSB0aGUgYERyaXZlckZl
+bmNlYCBoYXMgYmVlbiBkcm9wcGVkLg0KPiArICAgICAgICB1bnNhZmUgew0KPiArICAgICAgICAg
+ICAgYmluZGluZ3M6OmRtYV9mZW5jZV9sb2NrX2lycXNhdmUoZmVuY2UsIGZsYWdfcHRyKTsNCj4g
+KyAgICAgICAgICAgIGlmICFiaW5kaW5nczo6ZG1hX2ZlbmNlX2lzX3NpZ25hbGVkX2xvY2tlZChm
+ZW5jZSkgew0KPiArICAgICAgICAgICAgICAgIGlmIGxldCBFcnIoZXJyKSA9IHJlcyB7DQo+ICsg
+ICAgICAgICAgICAgICAgICAgIGJpbmRpbmdzOjpkbWFfZmVuY2Vfc2V0X2Vycm9yKGZlbmNlLCBl
+cnIudG9fZXJybm8oKSk7DQo+ICsgICAgICAgICAgICAgICAgfQ0KPiArICAgICAgICAgICAgICAg
+IGJpbmRpbmdzOjpkbWFfZmVuY2Vfc2lnbmFsX2xvY2tlZChmZW5jZSk7DQo+ICsgICAgICAgICAg
+ICB9DQo+ICsgICAgICAgICAgICBiaW5kaW5nczo6ZG1hX2ZlbmNlX3VubG9ja19pcnFyZXN0b3Jl
+KGZlbmNlLCBmbGFnX3B0cik7DQo+ICsgICAgICAgIH0NCg0KUGxlYXNlIHVzZSBhIHNpbmdsZSB1
+bnNhZmUgYmxvY2sgcGVyIHVuc2FmZSBmdW5jdGlvbiBjYWxsLCBoZXJlIGFuZCBpbiBhIGZldw0K
+b3RoZXIgcGxhY2VzLg0KDQo+ICsgICAgfQ0KPiArfQ0KPiArDQo+ICsvLyBTQUZFVFk6IEZlbmNl
+cyBhcmUgbGl0ZXJhbGx5IGRlc2lnbmVkIHRvIGJlIHNoYXJlZCBiZXR3ZWVuIHRocmVhZHMuDQo+
+ICt1bnNhZmUgaW1wbDxGOiBTZW5kICsgU3luYywgQzogU2VuZCArIFN5bmM+IFNlbmQgZm9yIERy
+aXZlckZlbmNlPEYsIEM+IHt9DQo+ICsNCj4gK2ltcGw8RjogU2VuZCArIFN5bmMsIEM6IFNlbmQg
+KyBTeW5jPiBEZXJlZiBmb3IgRHJpdmVyRmVuY2U8RiwgQz4gew0KPiArICAgIHR5cGUgVGFyZ2V0
+ID0gRjsNCj4gKw0KPiArICAgIGZuIGRlcmVmKCZzZWxmKSAtPiAmU2VsZjo6VGFyZ2V0IHsNCj4g
+KyAgICAgICAgLy8gU0FGRVRZOiBUaGFua3MgdG8gcmVmY291bnRpbmcsIGBkYXRhYCBpcyBhbHdh
+eXMgdmFsaWQgYXMgbG9uZyBhcyBgc2VsZmAgaXMuDQo+ICsgICAgICAgIGxldCBkYXRhID0gdW5z
+YWZlIHsgJipzZWxmLmRhdGEuYXNfcHRyKCkgfTsNCj4gKw0KPiArICAgICAgICAmZGF0YS5kYXRh
+DQo+ICsgICAgfQ0KPiArfQ0KPiArDQo+ICsvLy8gQSBib3Jyb3dlZCBbYERyaXZlckZlbmNlYF0u
+IEFsbCB5b3UgY2FuIGRvIHdpdGggaXQgaXMgYWNjZXNzIHlvdXIgdXNlciBkYXRhDQo+ICsvLy8g
+YW5kIG9idGFpbiBhIFtgRmVuY2VgXS4NCj4gK3B1YiBzdHJ1Y3QgRHJpdmVyRmVuY2VCb3Jyb3c8
+RjogU2VuZCArIFN5bmMsIEM6IFNlbmQgKyBTeW5jPiB7DQoNClRoaXMgbWlzc2VzIHRoZSBsaWZl
+dGltZSBib3VuZCwgd2hpY2ggaXMgdGhlIHB1cnBvc2Ugb2YgdGhpcyBzdHJ1Y3QuDQoNCj4gKyAg
+ICAvLy8gVGhlIGFjdHVhbCBjb250ZW50IG9mIHRoZSBmZW5jZS4gTGl2ZXMgaW4gYSByYXcgcG9p
+bnRlciBzbyB0aGF0IGl0cw0KPiArICAgIC8vLyBtZW1vcnkgY2FuIGJlIG1hbmFnZWQgaW5kZXBl
+bmRlbnRseS4gVmFsaWQgdW50aWwgYm90aCB0aGUgW2BEcml2ZXJGZW5jZWBdDQo+ICsgICAgLy8v
+IGFuZCBhbGwgYXNzb2NpYXRlZCBbYEZlbmNlYF1zIGhhdmUgZGlzYXBwZWFyZWQuDQo+ICsgICAg
+ZGF0YTogTm9uTnVsbDxEcml2ZXJGZW5jZURhdGE8RiwgQz4+LA0KDQpXaHkgbm90IHVzZSBNYW51
+YWxseURyb3A8RHJpdmVyRmVuY2U+PyBUaGlzIHdheSB5b3Ugd291bGQgb25seSBuZWVkIGEgRGVy
+ZWYgaW1wbA0KdG8gJidhIERyaXZlckZlbmNlLg0KDQpUaGlzIHdheSB5b3UgYmFzaWNhbGx5IHJl
+aW1wbGVtZW50IHRoZSBEcml2ZXJGZW5jZSB0eXBlIGp1c3Qgd2l0aG91dCB0aGUNCmRlc3RydWN0
+b3IuDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5h
+cm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcK
+VG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3Rz
+LmxpbmFyby5vcmcK
