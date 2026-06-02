@@ -2,590 +2,154 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id jdI0NasMH2oMegAAu9opvQ
+	id SiLKNcQSH2pEfAAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 02 Jun 2026 19:02:35 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 02 Jun 2026 19:28:36 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id D8B306307BD
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 02 Jun 2026 19:02:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5FBDA630B40
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 02 Jun 2026 19:28:36 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=meta.com header.s=s2048-2025-q2 header.b=ViSjkENP;
+	dkim=fail ("body hash did not verify") header.d=redhat.com header.s=mimecast20190719 header.b=dqIyZtfL;
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
-	dmarc=fail reason="SPF not aligned (relaxed)" header.from=meta.com (policy=reject)
+	dmarc=fail reason="SPF not aligned (relaxed)" header.from=redhat.com (policy=quarantine)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id D90BE3F706
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  2 Jun 2026 17:02:33 +0000 (UTC)
-Received: from mx0a-00082601.pphosted.com (mx0a-00082601.pphosted.com [67.231.145.42])
-	by lists.linaro.org (Postfix) with ESMTPS id 6A0B43F706
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  2 Jun 2026 17:02:13 +0000 (UTC)
-Received: from pps.filterd (m0044010.ppops.net [127.0.0.1])
-	by mx0a-00082601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 652EHD8n093948
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 2 Jun 2026 10:02:12 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=meta.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=s2048-2025-q2;
-	 bh=mTYKb0c2954a2IzM1HRVxcz2DRIaoZF0Pm/6896rHzM=; b=ViSjkENPdpm0
-	mTZGkLeQms53yzkIiUkChWZKbueQCaC0CVVr5v3wUjD9JtfJvfAgYgyrOB592R+A
-	/bZE1g4JlV97pWTZtW73p4zAwtGYaJuoHguKhqmMls8WZM5RAWVICbV9o12oHqqH
-	fSCO2Pow6M9ams+YOFrgXkoSXB/PSdHVD74/J1Vnyn1YfMPxiPwyYsNGqP6TDjDi
-	a9PCxB4bp2qpV767oyL4NInphwB1EsRHtlXZ76MT/rtQVjOGW234X8S+JXrEsK5D
-	uLFjUxKkJfTkNQkuwkg53EeakRUNJiGqR92u/jX9UL1s3qYS7lXzZvILIsXcWNgO
-	Yxv8SPYXQA==
-Received: from mail-dl1-f72.google.com (mail-dl1-f72.google.com [74.125.82.72])
-	by mx0a-00082601.pphosted.com (PPS) with ESMTPS id 4ej0t8h7bf-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 02 Jun 2026 10:02:12 -0700 (PDT)
-Received: by mail-dl1-f72.google.com with SMTP id a92af1059eb24-1365060ac82so9718065c88.1
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 02 Jun 2026 10:02:12 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780419731; x=1781024531;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=mTYKb0c2954a2IzM1HRVxcz2DRIaoZF0Pm/6896rHzM=;
-        b=m8OkrsM6jYUJb41RJ/yJWiKG3BiiAZiNN/ua5bh9OgNg3rLamatWG1by/5G5hkCAMI
-         Ndl63MIIgC/7sJh8F5p5k+h4ALlu3aInbP6Djo4kjvK/4gPfSXWb42hgyo6bhMKUc9AO
-         IRKSK2HrQrPewZRzLziLDIUgt3AKwdvfVbbN/BmrhSg7I3mRc0XI1+q7517vQ5v4PK22
-         gvcnql4HbsUMOzHVnYFSAp0piRYJ/XgfWiqC2Q4pCGqr+p3+goHrX2bh4MYPXxngnCw7
-         GvuEflJfiRRycpTYGMFFNnNKHCqddUAEbVTbY8P05gaONYSVxqYkm42boo+RRVICpMpJ
-         3DVw==
-X-Forwarded-Encrypted: i=1; AFNElJ8AgB6hcO22M0I1U6O57K+ZbFJMSVYIHjq2TNol+GKsmllziGeB9oJzwp0WfgLBMrSWC8F4StLXj1hxsxMM@lists.linaro.org
-X-Gm-Message-State: AOJu0YxN7o3rd3AHdJeUXrx+h1HPBpjmoydocN6vHC8ffd/S0lCnCboD
-	bAJwGBBhlzuNqupmFgwNrjbYFpuGxkgrGhukVeYFIDW4orzOc/kpoAvAEVF3J9h3cKNMwZYXWXr
-	grJZeQflE2d9nOPU2gryPBl6VuiNrKNDAYmKIrw/fIfFsdK5dbX0B8WGgyMyWR522BnY=
-X-Gm-Gg: Acq92OH0ECv6VlUREJwcxzkBArDwm3kUmn9jbCG5cJsLb4fyOJnWTLW+3QWdH6tYvns
-	N2XGIh6RN4A7Dw4V9dqPJS/8AkUI/7Uar0+IqeEk3Em+jMW6qVrSWUS7lk3P1DqOwmcCr5QBQyd
-	KsorpHxHCQ0/2N1v0PP96EoWnzzYnfQeSbN+XMRSUI7BmCcnW/b1EGBXLzytpe48SYLnGNjX725
-	8mOGqw4Kk5cAc9XBn8NCrex8OOeVrL3LXewDU7eDQJ8q+Y4/uo6PEGP5EF/MhRhNFvTwWb//YMx
-	ph8mKasf6bQ1Qcu+r3vq9A9FKCAR6sT4F09/2kiZxIIrEWXS1ygAMO4CBJSvSWQXFwAY/Be6Hz3
-	emK9ILQ4ZtMFnGgGVLyXsMlS38vwpnQajz6Q2Gc2F
-X-Received: by 2002:a05:7022:619a:b0:134:d3bc:b4b4 with SMTP id a92af1059eb24-137f589791bmr65312c88.4.1780419730951;
-        Tue, 02 Jun 2026 10:02:10 -0700 (PDT)
-X-Received: by 2002:a05:7022:619a:b0:134:d3bc:b4b4 with SMTP id a92af1059eb24-137f589791bmr65150c88.4.1780419728585;
-        Tue, 02 Jun 2026 10:02:08 -0700 (PDT)
-Received: from [10.0.40.30] ([51.52.155.79])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-137f549bbefsm233306c88.4.2026.06.02.10.02.04
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 02 Jun 2026 10:02:08 -0700 (PDT)
-Message-ID: <cd3361a2-8d85-45f9-b6ee-ffd6cbb48f8f@meta.com>
-Date: Tue, 2 Jun 2026 18:02:02 +0100
+	by lists.linaro.org (Postfix) with ESMTP id 5B6D140992
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  2 Jun 2026 17:28:35 +0000 (UTC)
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+	by lists.linaro.org (Postfix) with ESMTPS id 0E4183F6E1
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  2 Jun 2026 17:28:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1780421304;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=hyCRQp3GrefoVTPCTFK8DAP9FsTwrDk6t14u2kcfyc4=;
+	b=dqIyZtfLjYpL6DboIt7jlQnmR6R6HcgzwGU6KOaJgjsbO4NNupzSOB7uLN1NBnAD3Atge6
+	U+bK/F6eCezekz42bimrTxAS8xx+NArrhErUuyKGzcLC0C5NJ0FoT+3Wdvj9t0mhBZMCJ9
+	jbBZxDm2VV1S98IE9HCzU0omhLoqTm0=
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-396-CBXskntOOLCcOo43wZ7QGg-1; Tue,
+ 02 Jun 2026 13:28:20 -0400
+X-MC-Unique: CBXskntOOLCcOo43wZ7QGg-1
+X-Mimecast-MFC-AGG-ID: CBXskntOOLCcOo43wZ7QGg_1780421297
+Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 51F4919560A7;
+	Tue,  2 Jun 2026 17:28:16 +0000 (UTC)
+Received: from GoldenWind.lan (unknown [10.22.81.216])
+	by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id 26F4819560B0;
+	Tue,  2 Jun 2026 17:28:11 +0000 (UTC)
+From: Lyude Paul <lyude@redhat.com>
+To: dri-devel@lists.freedesktop.org,
+	rust-for-linux@vger.kernel.org,
+	nouveau@lists.freedesktop.org
+Date: Tue,  2 Jun 2026 13:24:59 -0400
+Message-ID: <20260602172807.1051806-1-lyude@redhat.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-GB
-To: Alex Williamson <alex@shazbot.org>
-References: <20260527102319.100128-1-mattev@meta.com>
- <20260527102319.100128-9-mattev@meta.com>
- <20260528171446.544fc486@shazbot.org>
-From: Matt Evans <mattev@meta.com>
-In-Reply-To: <20260528171446.544fc486@shazbot.org>
-X-Proofpoint-GUID: RwI21e7jCYxGpx2s6ZjTmFFd1EeEM1oK
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjAyMDE2NCBTYWx0ZWRfX1ZOGHzpzZuww
- c9zDZYDsRUF6f+bKdx9xC8vKnoqyDlWc2H2YXHaoEbD/VAvs8jbUbeVuIPEoQo6ETkIZhAlm15G
- MwDFEiWIK3htMK0/0kOzRpstOcdLtWHJMJqA+1HnzoVyH4sQRvhXMNzXL6/2TSutMXa29qa8Dc8
- j2ns6G0bwpvlRSoKQ8P6n4l7MMqHwZjmusuA+k4jKloYbi/JfO0UMdbS6QYtIObnxnNJawmb2HN
- JnYlSvKHbvrZB/lZIkcjkxcG+0Od0nwRrpOv9/yH2+HMaKPaejzKtw771MVQtyiNb7bAk5Wl/6W
- xTyKDuV5RnoJYxCByNUPgswPZRJVQ+tU/F7D8eFbRZrVOpqiSWFcewpHXFLvv8w9M7Z95kjmdPR
- 19cQ11lfH8KGx6XwT2rjhpU5MnaQ6S6BWk99FIJUffJuYYtU6K85MfkWqVj0d4rU25M6gmD456Q
- IztV0lhX3SXk08M88Rg==
-X-Authority-Analysis: v=2.4 cv=F8dnsKhN c=1 sm=1 tr=0 ts=6a1f0c94 cx=c_pps
- a=bS7HVuBVfinNPG3f6cIo3Q==:117 a=2UbFsIa4v//lIgRL4kGwwA==:17
- a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=7x6HtfJdh03M6CCDgxCd:22 a=8elwO82fXORLTBIkMd32:22 a=VabnemYjAAAA:8
- a=yuPZ2VO11UlYrN-Tx1EA:9 a=QEXdDO2ut3YA:10 a=vBUdepa8ALXHeOFLBtFW:22
- a=gKebqoRLp9LExxC7YDUY:22
-X-Proofpoint-ORIG-GUID: RwI21e7jCYxGpx2s6ZjTmFFd1EeEM1oK
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-06-02_02,2026-05-28_03,2025-10-01_01
-X-Spamd-Bar: ----
-Message-ID-Hash: 4JV4GDEHG7I4F63Y734OUGB63FEEVWRJ
-X-Message-ID-Hash: 4JV4GDEHG7I4F63Y734OUGB63FEEVWRJ
-X-MailFrom: prvs=461332670b=mattev@meta.com
-X-Mailman-Rule-Hits: member-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
-CC: Leon Romanovsky <leon@kernel.org>, Jason Gunthorpe <jgg@nvidia.com>, Alex Mastro <amastro@fb.com>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Bjorn Helgaas <bhelgaas@google.com>, Logan Gunthorpe <logang@deltatee.com>, Mahmoud Adam <mngyadam@amazon.de>, David Matlack <dmatlack@google.com>, =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Kevin Tian <kevin.tian@intel.com>, Ankit Agrawal <ankita@nvidia.com>, Pranjal Shrivastava <praan@google.com>, Alistair Popple <apopple@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org, linux-pci@vger.kernel.org
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
+X-Mimecast-MFC-PROC-ID: oVshyBU-DPfJ3WUtma36Ah5CVmatgcwVk0CLzHjkYnk_1780421297
+X-Mimecast-Originator: redhat.com
+X-Spamd-Bar: ---
+Message-ID-Hash: 7CPTCBKMDX2WY7NDRBRLRYCTXUBQ24JV
+X-Message-ID-Hash: 7CPTCBKMDX2WY7NDRBRLRYCTXUBQ24JV
+X-MailFrom: lyude@redhat.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Alexandre Courbot <acourbot@nvidia.com>, Gary Guo <gary@garyguo.net>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, driver-core@lists.linux.dev, Miguel Ojeda <ojeda@kernel.org>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Alice Ryhl <aliceryhl@google.com>, Simona Vetter <simona@ffwll.ch>, linux-kernel@vger.kernel.org, Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org, "Rafael J . Wysocki" <rafael@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Maxime Ripard <mripard@kernel.org>, David Airlie <airlied@gmail.com>, Benno Lossin <lossin@kernel.org>, linaro-mm-sig@lists.linaro.org, Danilo Krummrich <dakr@kernel.org>, Mukesh Kumar Chaurasiya <mkchauras@gmail.com>, Asahi Lina <lina+kernel@asahilina.net>, Daniel Almeida <daniel.almeida@collabora.com>, Lyude Paul <lyude@redhat.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 8/9] vfio/pci: Permanently revoke a DMABUF on request
+Subject: [Linaro-mm-sig] [PATCH v16 0/6] Rust bindings for gem shmem
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4JV4GDEHG7I4F63Y734OUGB63FEEVWRJ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7CPTCBKMDX2WY7NDRBRLRYCTXUBQ24JV/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Type: text/plain; charset="us-ascii"; x-default="true"
 Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [2.49 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[meta.com : SPF not aligned (relaxed),reject];
-	R_DKIM_REJECT(1.00)[meta.com:s=s2048-2025-q2];
-	MAILLIST(-0.20)[mailman];
+X-Spamd-Result: default: False [4.49 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	DMARC_POLICY_QUARANTINE(1.50)[redhat.com : SPF not aligned (relaxed),quarantine];
+	MID_CONTAINS_FROM(1.00)[];
+	R_DKIM_REJECT(1.00)[redhat.com:s=mimecast20190719];
 	R_SPF_ALLOW(-0.20)[+mx];
+	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	FORGED_RECIPIENTS(0.00)[m:dri-devel@lists.freedesktop.org,m:rust-for-linux@vger.kernel.org,m:nouveau@lists.freedesktop.org,m:acourbot@nvidia.com,m:gary@garyguo.net,m:christian.koenig@amd.com,m:driver-core@lists.linux.dev,m:ojeda@kernel.org,m:maarten.lankhorst@linux.intel.com,m:aliceryhl@google.com,m:simona@ffwll.ch,m:linux-kernel@vger.kernel.org,m:sumit.semwal@linaro.org,m:linux-media@vger.kernel.org,m:rafael@kernel.org,m:tzimmermann@suse.de,m:mripard@kernel.org,m:airlied@gmail.com,m:lossin@kernel.org,m:linaro-mm-sig@lists.linaro.org,m:dakr@kernel.org,m:mkchauras@gmail.com,m:lina+kernel@asahilina.net,m:daniel.almeida@collabora.com,m:lyude@redhat.com,m:gregkh@linuxfoundation.org,m:lina@asahilina.net,s:lists@lfdr.de];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:alex@shazbot.org,m:leon@kernel.org,m:jgg@nvidia.com,m:amastro@fb.com,m:christian.koenig@amd.com,m:bhelgaas@google.com,m:logang@deltatee.com,m:mngyadam@amazon.de,m:dmatlack@google.com,m:bjorn@kernel.org,m:sumit.semwal@linaro.org,m:kevin.tian@intel.com,m:ankita@nvidia.com,m:praan@google.com,m:apopple@nvidia.com,m:vivek.kasireddy@intel.com,m:linux-kernel@vger.kernel.org,m:linux-media@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,m:kvm@vger.kernel.org,m:linux-pci@vger.kernel.org,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	ARC_NA(0.00)[];
-	FORGED_SENDER(0.00)[mattev@meta.com,linaro-mm-sig-bounces@lists.linaro.org];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	DKIM_TRACE(0.00)[meta.com:-];
+	RCPT_COUNT_TWELVE(0.00)[26];
 	MIME_TRACE(0.00)[0:+];
+	GREYLIST(0.00)[pass,meta];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	FROM_NEQ_ENVFROM(0.00)[mattev@meta.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
+	ARC_NA(0.00)[];
+	FORGED_SENDER(0.00)[lyude@redhat.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[meta.com:mid,meta.com:from_mime,meta.com:email,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp]
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[redhat.com:-];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[lyude@redhat.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[nvidia.com,garyguo.net,amd.com,lists.linux.dev,kernel.org,linux.intel.com,google.com,ffwll.ch,vger.kernel.org,linaro.org,suse.de,gmail.com,lists.linaro.org,asahilina.net,collabora.com,redhat.com,linuxfoundation.org];
+	ALIAS_RESOLVED(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig,kernel];
+	TO_DN_SOME(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[patchwork.freedesktop.org:url,linaro.org:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: D8B306307BD
+X-Rspamd-Queue-Id: 5FBDA630B40
 
-Hi Alex,
+Most of this patch series has already been pushed upstream, this is just
+the second half of the patch series that has not been pushed yet + some
+additional changes which were required to implement changes requested by
+the mailing list. This patch series is originally from Asahi, previously
+posted by Daniel Almeida.
 
-On 29/05/2026 00:14, Alex Williamson wrote:
-> 
-> On Wed, 27 May 2026 03:23:11 -0700
-> Matt Evans <mattev@meta.com> wrote:
-> 
->> Expand the VFIO DMABUF revocation state to three states:
->> Not revoked, temporarily revoked, and permanently revoked.
->>
->> The first two are for existing transient revocation, e.g. across a
->> function reset, and the DMABUF is put into the last in response to a
->> new ioctl(VFIO_DEVICE_PCI_DMABUF_REVOKE) request.
-> 
-> The DMABUF is created via a VFIO_DEVICE_FEATURE ioctl and you next
-> patch is setting attributes via another VFIO_DEVICE_FEATURE, why would
-> the REVOKE operation not also be a VFIO_DEVICE_FEATURE?
+The previous version of the patch series can be found here:
 
-I was possibly reading too much into VFIO features tending to have 
-GET/SET semantics (accessor-like) rather than DO_THING.  But sure, a 
-revocation SETs a new buffer state so it makes sense.
+	https://patchwork.freedesktop.org/series/164580/
 
-I've converted the revoke operation to a SET on a new 
-VFIO_DEVICE_FEATURE_DMA_BUF_REVOKE, and looks more nicely contained.
+Branch with patches applied available here:
 
->> This VFIO device fd ioctl() passes a DMABUF by fd and requests that
->> the DMABUF is permanently revoked.  On success, it's guaranteed that
->> the buffer can never be imported/attached/mmap()ed in future, that
->> dynamic imports have been cleanly detached, and that all mappings have
->> been made inaccessible/PTEs zapped.
->>
->> This is useful for lifecycle management, to reclaim VFIO PCI BAR
->> ranges previously delegated to a subordinate client process: The
->> driver process can ensure that the loaned resources are revoked when
->> the client is deemed "done", and exported ranges can be safely re-used
->> elsewhere.
->>
->> Refactor the revocation code out of vfio_pci_dma_buf_move() to a
->> function common to move and the new ioctl path.
->>
->> Signed-off-by: Matt Evans <mattev@meta.com>
->> ---
->>   drivers/vfio/pci/vfio_pci_core.c   |  21 ++++-
->>   drivers/vfio/pci/vfio_pci_dmabuf.c | 146 +++++++++++++++++++++--------
->>   drivers/vfio/pci/vfio_pci_priv.h   |  14 ++-
->>   include/uapi/linux/vfio.h          |  30 ++++++
->>   4 files changed, 170 insertions(+), 41 deletions(-)
->>
->> diff --git a/drivers/vfio/pci/vfio_pci_core.c b/drivers/vfio/pci/vfio_pci_core.c
->> index 41e049fa9a8a..5184b3cac160 100644
->> --- a/drivers/vfio/pci/vfio_pci_core.c
->> +++ b/drivers/vfio/pci/vfio_pci_core.c
->> @@ -1500,6 +1500,21 @@ static int vfio_pci_ioctl_ioeventfd(struct vfio_pci_core_device *vdev,
->>   				  ioeventfd.fd);
->>   }
->>   
->> +static int vfio_pci_ioctl_dmabuf_revoke(struct vfio_pci_core_device *vdev,
->> +					struct vfio_pci_dmabuf_revoke __user *arg)
->> +{
->> +	unsigned long minsz = offsetofend(struct vfio_pci_dmabuf_revoke, dmabuf_fd);
->> +	struct vfio_pci_dmabuf_revoke revoke;
->> +
->> +	if (copy_from_user(&revoke, arg, minsz))
->> +		return -EFAULT;
->> +
->> +	if (revoke.argsz < minsz)
->> +		return -EINVAL;
->> +
->> +	return vfio_pci_dma_buf_revoke(vdev, revoke.dmabuf_fd);
->> +}
->> +
->>   long vfio_pci_core_ioctl(struct vfio_device *core_vdev, unsigned int cmd,
->>   			 unsigned long arg)
->>   {
->> @@ -1522,6 +1537,8 @@ long vfio_pci_core_ioctl(struct vfio_device *core_vdev, unsigned int cmd,
->>   		return vfio_pci_ioctl_reset(vdev, uarg);
->>   	case VFIO_DEVICE_SET_IRQS:
->>   		return vfio_pci_ioctl_set_irqs(vdev, uarg);
->> +	case VFIO_DEVICE_PCI_DMABUF_REVOKE:
->> +		return vfio_pci_ioctl_dmabuf_revoke(vdev, uarg);
->>   	default:
->>   		return -ENOTTY;
->>   	}
->> @@ -1792,7 +1809,7 @@ static vm_fault_t vfio_pci_mmap_huge_fault(struct vm_fault *vmf,
->>   	dma_resv_lock(priv->dmabuf->resv, NULL);
->>   	vdev = READ_ONCE(priv->vdev);
->>   
->> -	if (priv->revoked || !vdev) {
->> +	if (priv->status != VFIO_PCI_DMABUF_OK || !vdev) {
->>   		pr_debug_ratelimited("%s VA 0x%lx, pgoff 0x%lx: DMABUF revoked/cleaned up\n",
->>   				     __func__, vmf->address, vma->vm_pgoff);
->>   		dma_resv_unlock(priv->dmabuf->resv);
->> @@ -1815,7 +1832,7 @@ static vm_fault_t vfio_pci_mmap_huge_fault(struct vm_fault *vmf,
->>   
->>   	scoped_guard(rwsem_read, &vdev->memory_lock) {
->>   		/* Revocation status must be re-read, under memory_lock */
->> -		if (!priv->revoked) {
->> +		if (priv->status == VFIO_PCI_DMABUF_OK) {
->>   			int pres = vfio_pci_dma_buf_find_pfn(priv, vma,
->>   							     vmf->address,
->>   							     order, &pfn);
->> diff --git a/drivers/vfio/pci/vfio_pci_dmabuf.c b/drivers/vfio/pci/vfio_pci_dmabuf.c
->> index 4b3b15655f1d..3fa14760898f 100644
->> --- a/drivers/vfio/pci/vfio_pci_dmabuf.c
->> +++ b/drivers/vfio/pci/vfio_pci_dmabuf.c
->> @@ -19,7 +19,7 @@ static int vfio_pci_dma_buf_attach(struct dma_buf *dmabuf,
->>   	if (!attachment->peer2peer)
->>   		return -EOPNOTSUPP;
->>   
->> -	if (priv->revoked)
->> +	if (priv->status != VFIO_PCI_DMABUF_OK)
->>   		return -ENODEV;
->>   
->>   	if (!dma_buf_attach_revocable(attachment))
->> @@ -32,7 +32,7 @@ static int vfio_pci_dma_buf_mmap(struct dma_buf *dmabuf, struct vm_area_struct *
->>   {
->>   	struct vfio_pci_dma_buf *priv = dmabuf->priv;
->>   
->> -	if (priv->revoked)
->> +	if (priv->status != VFIO_PCI_DMABUF_OK)
->>   		return -ENODEV;
->>   	if ((vma->vm_flags & VM_SHARED) == 0)
->>   		return -EINVAL;
->> @@ -72,7 +72,7 @@ vfio_pci_dma_buf_map(struct dma_buf_attachment *attachment,
->>   
->>   	dma_resv_assert_held(priv->dmabuf->resv);
->>   
->> -	if (priv->revoked)
->> +	if (priv->status != VFIO_PCI_DMABUF_OK)
->>   		return ERR_PTR(-ENODEV);
->>   
->>   	ret = dma_buf_phys_vec_to_sgt(attachment, priv->provider,
->> @@ -287,7 +287,8 @@ static int vfio_pci_dmabuf_export(struct vfio_pci_core_device *vdev,
->>   	INIT_LIST_HEAD(&priv->dmabufs_elm);
->>   	down_write(&vdev->memory_lock);
->>   	dma_resv_lock(priv->dmabuf->resv, NULL);
->> -	priv->revoked = !__vfio_pci_memory_enabled(vdev);
->> +	priv->status = __vfio_pci_memory_enabled(vdev) ? VFIO_PCI_DMABUF_OK :
->> +		VFIO_PCI_DMABUF_TEMP_REVOKED;
->>   	list_add_tail(&priv->dmabufs_elm, &vdev->dmabufs);
->>   	dma_resv_unlock(priv->dmabuf->resv);
->>   	up_write(&vdev->memory_lock);
->> @@ -318,7 +319,7 @@ int vfio_pci_dma_buf_iommufd_map(struct dma_buf_attachment *attachment,
->>   		return -EOPNOTSUPP;
->>   
->>   	priv = attachment->dmabuf->priv;
->> -	if (priv->revoked)
->> +	if (priv->status != VFIO_PCI_DMABUF_OK)
->>   		return -ENODEV;
->>   
->>   	/* More than one range to iommufd will require proper DMABUF support */
->> @@ -585,6 +586,63 @@ int vfio_pci_core_mmap_prep_dmabuf(struct vfio_pci_core_device *vdev,
->>   	return ret;
->>   }
->>   
->> +static void __vfio_pci_dma_buf_revoke(struct vfio_pci_dma_buf *priv, bool revoked,
->> +				      bool permanently)
-> 
-> If the underscore prefix is mean to imply the lock semantics, that's
-> explicit with the annotation below and can be dropped.
-> 
-> The double bool args are not very intuitive to use and the [false,
-> true] combination is rather invalid.  Why not an enum:
-> 
-> enum vfio_pci_dma_buf_revoke_action {
-> 	VFIO_PCI_DMABUF_REVOKE_RESTORE,
-> 	VFIO_PCI_DMABUF_REVOKE_TEMPORARY,
-> 	VFIO_PCI_DMABUF_REVOKE_PERMANENT,
-> };
+	https://gitlab.freedesktop.org/lyudess/linux/-/commits/rust/gem-shmem
 
-That's a fair comment.  I've reframed this helper as setting the 
-revocation state, and callers pass in one of the existing enum 
-vfio_pci_dma_buf_status values which neatens it up a lot.  (See '^^^' 
-below.)
+This patch series applies on top of drm-rust-next
 
->> +{
->> +	bool was_revoked;
->> +
->> +	lockdep_assert_held_write(&priv->vdev->memory_lock);
->> +
->> +	if ((priv->status == VFIO_PCI_DMABUF_PERM_REVOKED) ||
->> +	    (priv->status == VFIO_PCI_DMABUF_OK && !revoked) ||
->> +	    (priv->status == VFIO_PCI_DMABUF_TEMP_REVOKED && revoked && !permanently)) {
->> +		return;
->> +	}
->> +
->> +	dma_resv_lock(priv->dmabuf->resv, NULL);
->> +	was_revoked = priv->status != VFIO_PCI_DMABUF_OK;
->> +
->> +	if (revoked)
->> +		priv->status = permanently ? VFIO_PCI_DMABUF_PERM_REVOKED :
->> +			VFIO_PCI_DMABUF_TEMP_REVOKED;
->> +
->> +	/*
->> +	 * If TEMP_REVOKED is being upgraded to PERM_REVOKED, the
->> +	 * buffer is already gone.  Don't wait on it again.
->> +	 */
->> +	if (was_revoked && revoked) {
->> +		dma_resv_unlock(priv->dmabuf->resv);
->> +		return;
->> +	}
->> +
->> +	dma_buf_invalidate_mappings(priv->dmabuf);
->> +	dma_resv_wait_timeout(priv->dmabuf->resv,
->> +			      DMA_RESV_USAGE_BOOKKEEP, false,
->> +			      MAX_SCHEDULE_TIMEOUT);
->> +	dma_resv_unlock(priv->dmabuf->resv);
->> +	if (revoked) {
->> +		kref_put(&priv->kref, vfio_pci_dma_buf_done);
->> +		wait_for_completion(&priv->comp);
->> +		unmap_mapping_range(priv->dmabuf->file->f_mapping,
->> +				    0, priv->size, 1);
->> +		/*
->> +		 * Re-arm the registered kref reference and the
->> +		 * completion so the post-revoke state matches the
->> +		 * post-creation state.  An un-revoke followed by a
->> +		 * new mapping needs the kref to be non-zero before
->> +		 * kref_get(), and vfio_pci_dma_buf_cleanup()
->> +		 * delegates its drain back through this revoke
->> +		 * path on a possibly-already-revoked dma-buf.
->> +		 */
->> +		kref_init(&priv->kref);
->> +		reinit_completion(&priv->comp);
->> +	} else {
->> +		dma_resv_lock(priv->dmabuf->resv, NULL);
->> +		priv->status = VFIO_PCI_DMABUF_OK;
->> +		dma_resv_unlock(priv->dmabuf->resv);
->> +	}
->> +}
->> +
->>   void vfio_pci_dma_buf_move(struct vfio_pci_core_device *vdev, bool revoked)
->>   {
->>   	struct vfio_pci_dma_buf *priv;
->> @@ -593,44 +651,13 @@ void vfio_pci_dma_buf_move(struct vfio_pci_core_device *vdev, bool revoked)
->>   	lockdep_assert_held_write(&vdev->memory_lock);
->>   	/*
->>   	 * Holding memory_lock ensures a racing VMA fault observes
->> -	 * priv->revoked properly.
->> +	 * priv->status properly.
->>   	 */
->>   
->>   	list_for_each_entry_safe(priv, tmp, &vdev->dmabufs, dmabufs_elm) {
->>   		if (!get_file_active(&priv->dmabuf->file))
->>   			continue;
->> -
->> -		if (priv->revoked != revoked) {
->> -			dma_resv_lock(priv->dmabuf->resv, NULL);
->> -			if (revoked)
->> -				priv->revoked = true;
->> -			dma_buf_invalidate_mappings(priv->dmabuf);
->> -			dma_resv_wait_timeout(priv->dmabuf->resv,
->> -					      DMA_RESV_USAGE_BOOKKEEP, false,
->> -					      MAX_SCHEDULE_TIMEOUT);
->> -			dma_resv_unlock(priv->dmabuf->resv);
->> -			if (revoked) {
->> -				kref_put(&priv->kref, vfio_pci_dma_buf_done);
->> -				wait_for_completion(&priv->comp);
->> -				unmap_mapping_range(priv->dmabuf->file->f_mapping,
->> -						    0, priv->size, 1);
->> -				/*
->> -				 * Re-arm the registered kref reference and the
->> -				 * completion so the post-revoke state matches the
->> -				 * post-creation state.  An un-revoke followed by a
->> -				 * new mapping needs the kref to be non-zero before
->> -				 * kref_get(), and vfio_pci_dma_buf_cleanup()
->> -				 * delegates its drain back through this revoke
->> -				 * path on a possibly-already-revoked dma-buf.
->> -				 */
->> -				kref_init(&priv->kref);
->> -				reinit_completion(&priv->comp);
->> -			} else {
->> -				dma_resv_lock(priv->dmabuf->resv, NULL);
->> -				priv->revoked = false;
->> -				dma_resv_unlock(priv->dmabuf->resv);
->> -			}
->> -		}
->> +		__vfio_pci_dma_buf_revoke(priv, revoked, false);
->>   		fput(priv->dmabuf->file);
->>   	}
->>   }
->> @@ -662,3 +689,46 @@ void vfio_pci_dma_buf_cleanup(struct vfio_pci_core_device *vdev)
->>   	}
->>   	up_write(&vdev->memory_lock);
->>   }
->> +
->> +#ifdef CONFIG_VFIO_PCI_DMABUF
->> +int vfio_pci_dma_buf_revoke(struct vfio_pci_core_device *vdev, int dmabuf_fd)
->> +{
->> +	struct vfio_pci_dma_buf *priv;
->> +	struct dma_buf *dmabuf;
->> +	int ret = 0;
->> +
->> +	dmabuf = dma_buf_get(dmabuf_fd);
->> +	if (IS_ERR(dmabuf))
->> +		return PTR_ERR(dmabuf);
->> +
->> +	priv = dmabuf->priv;
->> +	/*
->> +	 * Sanity-check the DMABUF is really a vfio_pci_dma_buf _and_
->> +	 * relates to the VFIO device it was provided with.
->> +	 *
->> +	 * If the DMABUF relates to this vdev then priv->vdev is
->> +	 * stable because this open fd prevents cleanup.
->> +	 *
->> +	 * If it relates to a different vdev, reading priv->vdev might
->> +	 * race with a concurrent cleanup on that device.  But if so,
->> +	 * it points to a non-matching vdev or NULL and is unusable
->> +	 * either way.
->> +	 */
->> +	if (dmabuf->ops != &vfio_pci_dmabuf_ops || priv->vdev != vdev) {
->> +		ret = -ENODEV;
->> +		goto out_put_buf;
->> +	}
->> +
->> +	scoped_guard(rwsem_write, &vdev->memory_lock) {
->> +		if (priv->status == VFIO_PCI_DMABUF_PERM_REVOKED)
->> +			ret = -EBADFD;
->> +		else
->> +			__vfio_pci_dma_buf_revoke(priv, true, true);
->> +	}
->> +
->> + out_put_buf:
->> +	dma_buf_put(dmabuf);
->> +
->> +	return ret;
->> +}
->> +#endif /* CONFIG_VFIO_PCI_DMABUF */
->> diff --git a/drivers/vfio/pci/vfio_pci_priv.h b/drivers/vfio/pci/vfio_pci_priv.h
->> index db2e2aeae88f..a1e0f4fcb1dc 100644
->> --- a/drivers/vfio/pci/vfio_pci_priv.h
->> +++ b/drivers/vfio/pci/vfio_pci_priv.h
->> @@ -23,6 +23,12 @@ struct vfio_pci_ioeventfd {
->>   	bool			test_mem;
->>   };
->>   
->> +enum vfio_pci_dma_buf_status {
->> +	VFIO_PCI_DMABUF_OK = 0,
->> +	VFIO_PCI_DMABUF_TEMP_REVOKED = 1,
->> +	VFIO_PCI_DMABUF_PERM_REVOKED = 2,
->> +};
+Patch-series wide changes since V15:
+* Fix some major rebasing errors I somehow didn't notice :(
+* Drop the dependency on LazyInit, use the trick that Alice suggested
+  instead.
+* Fix dependency ordering so that Tyr can get the vmap stuff first
+  without the other bits.
 
-^^^ Here ^^^
+Lyude Paul (6):
+  rust: drm: gem/shmem: Add DmaResvGuard helper
+  rust: drm: gem: Add vmap functions to shmem bindings
+  rust: sync: Add SetOnce::reset()
+  rust: gem: shmem: Fix Default implementation for ObjectConfig
+  rust: faux: Allow retrieving a bound Device
+  rust: drm: gem: Introduce shmem::Object::sg_table()
 
->> +
->>   struct vfio_pci_dma_buf {
->>   	struct dma_buf *dmabuf;
->>   	struct vfio_pci_core_device *vdev;
->> @@ -35,7 +41,7 @@ struct vfio_pci_dma_buf {
->>   	struct kref kref;
->>   	struct completion comp;
->>   	unsigned long vma_pgoff_adjust;
->> -	u8 revoked : 1;
->> +	enum vfio_pci_dma_buf_status status;
->>   };
->>   
->>   extern const struct vm_operations_struct vfio_pci_mmap_ops;
->> @@ -148,6 +154,7 @@ void vfio_pci_dma_buf_move(struct vfio_pci_core_device *vdev, bool revoked);
->>   int vfio_pci_core_feature_dma_buf(struct vfio_pci_core_device *vdev, u32 flags,
->>   				  struct vfio_device_feature_dma_buf __user *arg,
->>   				  size_t argsz);
->> +int vfio_pci_dma_buf_revoke(struct vfio_pci_core_device *vdev, int dmabuf_fd);
->>   #else
->>   static inline int
->>   vfio_pci_core_feature_dma_buf(struct vfio_pci_core_device *vdev, u32 flags,
->> @@ -156,6 +163,11 @@ vfio_pci_core_feature_dma_buf(struct vfio_pci_core_device *vdev, u32 flags,
->>   {
->>   	return -ENOTTY;
->>   }
->> +static inline int vfio_pci_dma_buf_revoke(struct vfio_pci_core_device *vdev,
->> +					  int dmabuf_fd)
->> +{
->> +	return -ENODEV;
->> +}
->>   #endif
->>   
->>   #endif
->> diff --git a/include/uapi/linux/vfio.h b/include/uapi/linux/vfio.h
->> index 5de618a3a5ee..02366e9f8e16 100644
->> --- a/include/uapi/linux/vfio.h
->> +++ b/include/uapi/linux/vfio.h
->> @@ -1321,6 +1321,36 @@ struct vfio_precopy_info {
->>   
->>   #define VFIO_MIG_GET_PRECOPY_INFO _IO(VFIO_TYPE, VFIO_BASE + 21)
->>   
->> +/**
->> + * VFIO_DEVICE_PCI_DMABUF_REVOKE - _IO(VFIO_TYPE, VFIO_BASE + 22)
->> + *
->> + * This ioctl is used on the device FD, and requests that access to
->> + * the buffer corresponding to the DMABUF FD parameter is immediately
->> + * and permanently revoked.  On successful return, the buffer is not
->> + * accessible through any mmap() or dma-buf import.  The request fails
->> + * if the buffer is pinned; otherwise, the exporter marks the buffer
->> + * as inaccessible and uses the move_notify callback to inform
->> + * importers of the change.  The buffer is permanently disabled, and
->> + * VFIO refuses all map, mmap, attach, etc. requests.
->> + *
->> + * Returns:
->> + *
->> + * Return: 0 on success, -1 and errno set on failure:
->> + *
->> + *  ENODEV if the associated dmabuf FD no longer exists/is closed,
-> 
-> These actually seem to map to EBADF/EINVAL.  Thanks,
-
-OK, these go away when moving to use a VFIO feature for revocation.
+ rust/kernel/drm/gem/shmem.rs | 507 ++++++++++++++++++++++++++++++++++-
+ rust/kernel/faux.rs          |   7 +-
+ rust/kernel/sync/set_once.rs |  60 ++++-
+ 3 files changed, 552 insertions(+), 22 deletions(-)
 
 
-Thanks,
-
-
-Matt
-
-
-> 
-> Alex
-> 
->> + *         or is not a DMABUF created for this device.
->> + *  EINVAL if the dmabuf_fd parameter isn't a DMABUF.
->> + *  EBADF if the dmabuf_fd parameter isn't a valid file number.
->> + *  EBADFD if the buffer has already been revoked.
->> + *
->> + */
->> +struct vfio_pci_dmabuf_revoke {
->> +	__u32 argsz;
->> +	__s32 dmabuf_fd;
->> +};
->> +
->> +#define VFIO_DEVICE_PCI_DMABUF_REVOKE _IO(VFIO_TYPE, VFIO_BASE + 22)
->> +
->>   /*
->>    * Upon VFIO_DEVICE_FEATURE_SET, allow the device to be moved into a low power
->>    * state with the platform-based power management.  Device use of lower power
-> 
+base-commit: b78dab829760aee9b83f5cf15550a0fe36c6f4b0
+-- 
+2.54.0
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
