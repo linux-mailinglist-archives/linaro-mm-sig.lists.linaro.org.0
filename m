@@ -2,69 +2,72 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id E3NYNBmGIGq54gAAu9opvQ
+	id qfoYIgiGIGqp4gAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 03 Jun 2026 21:52:57 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 03 Jun 2026 21:52:40 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6809C63AFE8
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 03 Jun 2026 21:52:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F2CEE63AFB4
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 03 Jun 2026 21:52:39 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=redhat.com header.s=mimecast20190719 header.b=eQqL2O3Z;
+	dkim=fail ("body hash did not verify") header.d=redhat.com header.s=mimecast20190719 header.b=bo4OS5gt;
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
 	dmarc=fail reason="SPF not aligned (relaxed)" header.from=redhat.com (policy=quarantine)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 872A9409BA
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  3 Jun 2026 19:52:56 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 0F3CB409C1
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  3 Jun 2026 19:52:39 +0000 (UTC)
 Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	by lists.linaro.org (Postfix) with ESMTPS id 4742D409BD
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  3 Jun 2026 19:52:35 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id D46FB3EC66
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  3 Jun 2026 19:52:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1780516354;
+	s=mimecast20190719; t=1780516348;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=vC0884TFGI8xcRTHrhisOj99/ctfzN8aXTcnfaQWb7c=;
-	b=eQqL2O3Zp+pLIJ5I8hstGfJynUITggGLkS2X4thMDoAKwp8S5oyg12NEzhMwF7b9BOYQJ8
-	u0F4sFgb/GnxU8nPWDJz3L9UUkAz1sNceLLskKRSanTZohyaL+gWeM5VUQIi8AcODVx+cY
-	nVSZZz3xV0JaeDTQA8zPVuKBkD+flTE=
-Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=olsmC37uFpzY+y9wtmCt1x1gIahVEJ6Wl0D8b/LZIzs=;
+	b=bo4OS5gtXl/55XwAM/rFrIYr1s/5IpCj06Irb2F9CFQiu3wtlZ8QSmGNHo8m02gmWKvDY+
+	c123qtLuciPwq3cV72U6J5pU9iDD4A3lj8XlJut6QH1UUoqpHRdAdIHxXrQgh0XA+aM41j
+	/iD59qDc5GEoTV6YSqpEpYnAPuJ7Ex8=
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-448-GFspQ-wiNgKsCPGLsbKKkw-1; Wed,
- 03 Jun 2026 15:52:21 -0400
-X-MC-Unique: GFspQ-wiNgKsCPGLsbKKkw-1
-X-Mimecast-MFC-AGG-ID: GFspQ-wiNgKsCPGLsbKKkw_1780516338
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-56-7TCLGpkIP7OuSlDk4Z0O4A-1; Wed,
+ 03 Jun 2026 15:52:25 -0400
+X-MC-Unique: 7TCLGpkIP7OuSlDk4Z0O4A-1
+X-Mimecast-MFC-AGG-ID: 7TCLGpkIP7OuSlDk4Z0O4A_1780516342
 Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id C2A5719560AA;
-	Wed,  3 Jun 2026 19:52:17 +0000 (UTC)
+	by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id B027718004D4;
+	Wed,  3 Jun 2026 19:52:21 +0000 (UTC)
 Received: from GoldenWind.lan (unknown [10.22.81.203])
-	by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id 2697E180049F;
-	Wed,  3 Jun 2026 19:52:13 +0000 (UTC)
+	by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id 2A2601800351;
+	Wed,  3 Jun 2026 19:52:17 +0000 (UTC)
 From: Lyude Paul <lyude@redhat.com>
 To: dri-devel@lists.freedesktop.org,
 	rust-for-linux@vger.kernel.org,
 	nouveau@lists.freedesktop.org
-Date: Wed,  3 Jun 2026 15:42:29 -0400
-Message-ID: <20260603195210.693856-1-lyude@redhat.com>
+Date: Wed,  3 Jun 2026 15:42:30 -0400
+Message-ID: <20260603195210.693856-2-lyude@redhat.com>
+In-Reply-To: <20260603195210.693856-1-lyude@redhat.com>
+References: <20260603195210.693856-1-lyude@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
-X-Mimecast-MFC-PROC-ID: wfZwosfaf-nfhc1tdb8UBkeZDyJhcx3kXCvoJImYapU_1780516338
+X-Mimecast-MFC-PROC-ID: oIE8et8TjndHzJWj6pwGEflegJBo2fRRY8a9oF_Z8iU_1780516342
 X-Mimecast-Originator: redhat.com
 X-Spamd-Bar: ---
-Message-ID-Hash: IGWOU6WBZFDJ5HHTDYE6XGIW2Y5DL6ZV
-X-Message-ID-Hash: IGWOU6WBZFDJ5HHTDYE6XGIW2Y5DL6ZV
+Message-ID-Hash: GNB62ZT2K44UAEH5AI7ANOE2QUH3BZOB
+X-Message-ID-Hash: GNB62ZT2K44UAEH5AI7ANOE2QUH3BZOB
 X-MailFrom: lyude@redhat.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: Alexandre Courbot <acourbot@nvidia.com>, Gary Guo <gary@garyguo.net>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, driver-core@lists.linux.dev, Miguel Ojeda <ojeda@kernel.org>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Alice Ryhl <aliceryhl@google.com>, Simona Vetter <simona@ffwll.ch>, linux-kernel@vger.kernel.org, Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org, "Rafael J . Wysocki" <rafael@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Maxime Ripard <mripard@kernel.org>, David Airlie <airlied@gmail.com>, Benno Lossin <lossin@kernel.org>, linaro-mm-sig@lists.linaro.org, Danilo Krummrich <dakr@kernel.org>, Mukesh Kumar Chaurasiya <mkchauras@gmail.com>, Asahi Lina <lina+kernel@asahilina.net>, Daniel Almeida <daniel.almeida@collabora.com>, Lyude Paul <lyude@redhat.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v17 0/6] Rust bindings for gem shmem
+Subject: [Linaro-mm-sig] [PATCH v17 1/6] rust: drm: gem: shmem: Fix Default implementation for ObjectConfig
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/IGWOU6WBZFDJ5HHTDYE6XGIW2Y5DL6ZV/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GNB62ZT2K44UAEH5AI7ANOE2QUH3BZOB/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -79,7 +82,7 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	DMARC_POLICY_QUARANTINE(1.50)[redhat.com : SPF not aligned (relaxed),quarantine];
 	MID_CONTAINS_FROM(1.00)[];
 	R_DKIM_REJECT(1.00)[redhat.com:s=mimecast20190719];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
@@ -90,8 +93,8 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	MIME_TRACE(0.00)[0:+];
 	GREYLIST(0.00)[pass,meta];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER(0.00)[lyude@redhat.com,linaro-mm-sig-bounces@lists.linaro.org];
 	ARC_NA(0.00)[];
+	FORGED_SENDER(0.00)[lyude@redhat.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	DKIM_TRACE(0.00)[redhat.com:-];
@@ -106,53 +109,57 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	MISSING_XM_UA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[gitlab.freedesktop.org:url,linaro.org:email,patchwork.freedesktop.org:url]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 6809C63AFE8
+X-Rspamd-Queue-Id: F2CEE63AFB4
 
-Most of this patch series has already been pushed upstream, this is just
-the second half of the patch series that has not been pushed yet + some
-additional changes which were required to implement changes requested by
-the mailing list. This patch series is originally from Asahi, previously
-posted by Daniel Almeida.
+I completely forgot when coming up with this type that #[derive(Default)]
+only works if all generics mentioned in the type implement Default (and T
+usually doesn't). This being said: We don't use `T` for anything besides
+using it for a reference type, so whether or not it implements `Default`
+shouldn't actually need to matter.
 
-The previous version of the patch series can be found here:
+So, fix this by just manually implementing Default instead of deriving it.
 
-	https://patchwork.freedesktop.org/series/164580/
+Signed-off-by: Lyude Paul <lyude@redhat.com>
 
-Branch with patches applied available here:
+---
+V17:
+* Rebase
+* Fix format of commit message subject
 
-	https://gitlab.freedesktop.org/lyudess/linux/-/commits/rust/gem-shmem
+ rust/kernel/drm/gem/shmem.rs | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
 
-This patch series applies on top of drm-rust-next
-
-Patch-series wide changes since V15:
-* Fix some major rebasing errors I somehow didn't notice :(
-* Drop the dependency on LazyInit, use the trick that Alice suggested
-  instead.
-* Fix dependency ordering so that Tyr can get the vmap stuff first
-  without the other bits.
-Patch-series wide changes since V16:
-* Fix ordering one more time (SetOnce::reset() doesn't need to come
-  before adding vmap functions)
-* Rebase against the latest DeviceContext changes from me that got
-  pushed.
-
-Lyude Paul (6):
-  rust: drm: gem: shmem: Fix Default implementation for ObjectConfig
-  rust: drm: gem: shmem: Add DmaResvGuard helper
-  rust: drm: gem: shmem: Add vmap functions
-  rust: faux: Allow retrieving a bound Device
-  rust: sync: Add SetOnce::reset()
-  rust: drm: gem: Introduce shmem::Object::sg_table()
-
- rust/kernel/drm/gem/shmem.rs | 518 ++++++++++++++++++++++++++++++++++-
- rust/kernel/faux.rs          |   7 +-
- rust/kernel/sync/set_once.rs |  60 +++-
- 3 files changed, 563 insertions(+), 22 deletions(-)
-
-
-base-commit: 723bd79ca9e492cc91850094a2892bde0345c51a
+diff --git a/rust/kernel/drm/gem/shmem.rs b/rust/kernel/drm/gem/shmem.rs
+index 34af402899a0e..084b798ce795b 100644
+--- a/rust/kernel/drm/gem/shmem.rs
++++ b/rust/kernel/drm/gem/shmem.rs
+@@ -42,7 +42,6 @@
+ ///
+ /// This is used with [`Object::new()`] to control various properties that can only be set when
+ /// initially creating a shmem-backed GEM object.
+-#[derive(Default)]
+ pub struct ObjectConfig<'a, T: DriverObject, C: DeviceContext = Registered> {
+     /// Whether to set the write-combine map flag.
+     pub map_wc: bool,
+@@ -53,6 +52,16 @@ pub struct ObjectConfig<'a, T: DriverObject, C: DeviceContext = Registered> {
+     pub parent_resv_obj: Option<&'a Object<T, C>>,
+ }
+ 
++impl<'a, T: DriverObject, C: DeviceContext> Default for ObjectConfig<'a, T, C> {
++    #[inline(always)]
++    fn default() -> Self {
++        Self {
++            map_wc: false,
++            parent_resv_obj: None,
++        }
++    }
++}
++
+ /// A shmem-backed GEM object.
+ ///
+ /// # Invariants
 -- 
 2.54.0
 
