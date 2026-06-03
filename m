@@ -2,72 +2,72 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id DKqjCC6GIGq84gAAu9opvQ
+	id ore/CDeGIGrA4gAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 03 Jun 2026 21:53:18 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 03 Jun 2026 21:53:27 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id B2C4163AFF6
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 03 Jun 2026 21:53:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B140963B001
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 03 Jun 2026 21:53:26 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=redhat.com header.s=mimecast20190719 header.b=UMJFJnqZ;
+	dkim=fail ("body hash did not verify") header.d=redhat.com header.s=mimecast20190719 header.b=J8gY8aFC;
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
 	dmarc=fail reason="SPF not aligned (relaxed)" header.from=redhat.com (policy=quarantine)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id D1AF5409BD
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  3 Jun 2026 19:53:16 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C5FBE409B8
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  3 Jun 2026 19:53:25 +0000 (UTC)
 Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	by lists.linaro.org (Postfix) with ESMTPS id CB00E40A1B
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  3 Jun 2026 19:52:39 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id D8E4240A0D
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  3 Jun 2026 19:52:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1780516359;
+	s=mimecast20190719; t=1780516363;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=cF/fCKGGsVn6l967F1Qq9M9WKaqTKMJ/A9UZOUtdnUs=;
-	b=UMJFJnqZ2jlgxsbV6CZMUR+c8Vd39hWnPDFJ6EMMG+5KjKZ9sUYRQjY30BzbSNvcnKO3Mc
-	H4SfMaCB0dMTEFbuCMtIP0qxTMuiJzTe1xJ4M3FW53CbolnvaPo0c2BziAHZJz9ojwkXaf
-	JZJ3Je+lyxqj94CQ2Z71YW8JBqc4Rt0=
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+	bh=ji3R873SgQHyxfzMQgkhE7LmK1MPE9r7ND0eG5Mf4OM=;
+	b=J8gY8aFCj/45fJwyFIznEzl/LRxC5+EzYOJX1d/Dpb1Mlw5KswefX6MBD5RdMudNncgMTy
+	ScGIfcVYkXf6LSz+A14FVgIsuulXIzIfPXmveCDnFW5Mtu/HWy5F6r/KjtBXUfpTcHwNy4
+	WUvqVLpHAA5sUWRQPxXXtYD6xHFlLLY=
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-602-JWznmNClPk6VDIrlAHBT7w-1; Wed,
- 03 Jun 2026 15:52:36 -0400
-X-MC-Unique: JWznmNClPk6VDIrlAHBT7w-1
-X-Mimecast-MFC-AGG-ID: JWznmNClPk6VDIrlAHBT7w_1780516353
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-488-ThXfEKrpPjuaMtoOn4dIWA-1; Wed,
+ 03 Jun 2026 15:52:39 -0400
+X-MC-Unique: ThXfEKrpPjuaMtoOn4dIWA-1
+X-Mimecast-MFC-AGG-ID: ThXfEKrpPjuaMtoOn4dIWA_1780516356
 Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id B735B18004D8;
-	Wed,  3 Jun 2026 19:52:32 +0000 (UTC)
+	by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 146EF1800370;
+	Wed,  3 Jun 2026 19:52:36 +0000 (UTC)
 Received: from GoldenWind.lan (unknown [10.22.81.203])
-	by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id 64930180049F;
-	Wed,  3 Jun 2026 19:52:29 +0000 (UTC)
+	by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id E7CF61800591;
+	Wed,  3 Jun 2026 19:52:32 +0000 (UTC)
 From: Lyude Paul <lyude@redhat.com>
 To: dri-devel@lists.freedesktop.org,
 	rust-for-linux@vger.kernel.org,
 	nouveau@lists.freedesktop.org
-Date: Wed,  3 Jun 2026 15:42:33 -0400
-Message-ID: <20260603195210.693856-5-lyude@redhat.com>
+Date: Wed,  3 Jun 2026 15:42:34 -0400
+Message-ID: <20260603195210.693856-6-lyude@redhat.com>
 In-Reply-To: <20260603195210.693856-1-lyude@redhat.com>
 References: <20260603195210.693856-1-lyude@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
-X-Mimecast-MFC-PROC-ID: q2eMFw1JLQjKw7wok-7O7kiztDNkbtM3qigUXYKZwNE_1780516353
+X-Mimecast-MFC-PROC-ID: Qfe0haTjZ-kYXbktzl8da2BBneql1x6HgWv7baRXMnw_1780516356
 X-Mimecast-Originator: redhat.com
 X-Spamd-Bar: ---
-Message-ID-Hash: YTBD3VDELXTHEYP55XGF3LEJ4ULLX2OH
-X-Message-ID-Hash: YTBD3VDELXTHEYP55XGF3LEJ4ULLX2OH
+Message-ID-Hash: SP42BAR5FHWH4AYAZYJU5YASPVL5ZGXW
+X-Message-ID-Hash: SP42BAR5FHWH4AYAZYJU5YASPVL5ZGXW
 X-MailFrom: lyude@redhat.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: Alexandre Courbot <acourbot@nvidia.com>, Gary Guo <gary@garyguo.net>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, driver-core@lists.linux.dev, Miguel Ojeda <ojeda@kernel.org>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Alice Ryhl <aliceryhl@google.com>, Simona Vetter <simona@ffwll.ch>, linux-kernel@vger.kernel.org, Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org, "Rafael J . Wysocki" <rafael@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Maxime Ripard <mripard@kernel.org>, David Airlie <airlied@gmail.com>, Benno Lossin <lossin@kernel.org>, linaro-mm-sig@lists.linaro.org, Danilo Krummrich <dakr@kernel.org>, Mukesh Kumar Chaurasiya <mkchauras@gmail.com>, Asahi Lina <lina+kernel@asahilina.net>, Daniel Almeida <daniel.almeida@collabora.com>, Lyude Paul <lyude@redhat.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v17 4/6] rust: faux: Allow retrieving a bound Device
+Subject: [Linaro-mm-sig] [PATCH v17 5/6] rust: sync: Add SetOnce::reset()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YTBD3VDELXTHEYP55XGF3LEJ4ULLX2OH/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SP42BAR5FHWH4AYAZYJU5YASPVL5ZGXW/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -111,44 +111,100 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: B2C4163AFF6
+X-Rspamd-Queue-Id: B140963B001
 
-When writing up some rust code that used faux devices for unit testing, I
-noticed that we never actually added the Bound device context to
-faux::Registration's AsRef<device::Device> implementation. This being said:
-the Registration object itself is proof that a driver is bound to the
-device - so this should be safe.
+This function simply drops the contents of the SetOnce, given a mutable
+reference - since that proves we have exclusive access to the SetOnce.
+Additionally, update the invariants for SetOnce to make it clear as to why
+this is safe.
 
 Signed-off-by: Lyude Paul <lyude@redhat.com>
 ---
- rust/kernel/faux.rs | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+ rust/kernel/sync/set_once.rs | 60 +++++++++++++++++++++++++++++++-----
+ 1 file changed, 52 insertions(+), 8 deletions(-)
 
-diff --git a/rust/kernel/faux.rs b/rust/kernel/faux.rs
-index 43b4974f48cd2..e0856b2964a2c 100644
---- a/rust/kernel/faux.rs
-+++ b/rust/kernel/faux.rs
-@@ -25,7 +25,8 @@
+diff --git a/rust/kernel/sync/set_once.rs b/rust/kernel/sync/set_once.rs
+index 139cef05e935f..d6e4fc2695673 100644
+--- a/rust/kernel/sync/set_once.rs
++++ b/rust/kernel/sync/set_once.rs
+@@ -15,7 +15,7 @@
  ///
  /// # Invariants
  ///
--/// `self.0` always holds a valid pointer to an initialized and registered [`struct faux_device`].
-+/// - `self.0` always holds a valid pointer to an initialized and registered [`struct faux_device`].
-+/// - This object is proof that the object described by this `Registration` is bound to a device.
- ///
- /// [`struct faux_device`]: srctree/include/linux/device/faux.h
- pub struct Registration(NonNull<bindings::faux_device>);
-@@ -59,8 +60,8 @@ fn as_raw(&self) -> *mut bindings::faux_device {
+-/// - `init` may only increase in value.
++/// - `init` may only increase in value, unless modified through a mutable reference.
+ /// - `init` may only assume values in the range `0..=2`.
+ /// - `init == 0` if and only if `value` is uninitialized.
+ /// - `init == 1` if and only if there is exactly one thread with exclusive
+@@ -110,17 +110,61 @@ pub fn copy(&self) -> Option<T>
+     {
+         self.as_ref().copied()
+     }
++
++    /// # Safety
++    ///
++    /// If this function returns `true`, `self` must be freed or `init` must be reset to `0`.
++    unsafe fn drop_val(&mut self) -> bool {
++        if *self.init.get_mut() != 2 {
++            return false;
++        }
++
++        let value = self.value.get_mut();
++        // SAFETY: Via our type invariants, `init` == 2 means `value` is initialized.
++        unsafe { value.assume_init_drop() };
++
++        true
++    }
++
++    /// Unset the [`SetOnce`].
++    ///
++    /// After this function is called, the [`SetOnce`] is empty and uninitialized. This function is
++    /// mainly intended for usage in destructors.
++    ///
++    /// Returns `true` if `self` was previously initialized.
++    ///
++    /// # Example
++    ///
++    /// ```
++    /// # use kernel::sync::SetOnce;
++    /// let mut value = SetOnce::new();
++    /// assert_eq!(value.populate(67), true);
++    ///
++    /// assert_eq!(value.reset(), true);
++    /// assert!(value.as_ref().is_none());
++    /// assert_eq!(value.reset(), false);
++    ///
++    /// assert_eq!(value.populate(69), true);
++    /// ```
++    pub fn reset(&mut self) -> bool {
++        // SAFETY: We write `0` to init below if this returns true.
++        let dropped = unsafe { self.drop_val() };
++        if dropped {
++            // INVARIANT:
++            // - We set `init` back to 0 through a mutable reference.
++            // - We dropped `value` above.
++            *self.init.get_mut() = 0;
++        }
++
++        dropped
++    }
+ }
+ 
+ impl<T> Drop for SetOnce<T> {
++    #[inline(always)]
+     fn drop(&mut self) {
+-        if *self.init.get_mut() == 2 {
+-            let value = self.value.get_mut();
+-            // SAFETY: By the type invariants of `Self`, `self.init == 2` means that `self.value`
+-            // contains a valid value. We have exclusive access, as we hold a `mut` reference to
+-            // `self`.
+-            unsafe { value.assume_init_drop() };
+-        }
++        // SAFETY: We are dropping this value.
++        unsafe { self.drop_val() };
      }
  }
  
--impl AsRef<device::Device> for Registration {
--    fn as_ref(&self) -> &device::Device {
-+impl AsRef<device::Device<device::Bound>> for Registration {
-+    fn as_ref(&self) -> &device::Device<device::Bound> {
-         // SAFETY: The underlying `device` in `faux_device` is guaranteed by the C API to be
-         // a valid initialized `device`.
-         unsafe { device::Device::from_raw(addr_of_mut!((*self.as_raw()).dev)) }
 -- 
 2.54.0
 
