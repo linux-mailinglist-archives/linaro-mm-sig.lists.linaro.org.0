@@ -2,39 +2,126 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id g86wEc3fIGr28gAAu9opvQ
+	id 783gDK7oIGp09QAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 04 Jun 2026 04:15:41 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 04 Jun 2026 04:53:34 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id BE29D63C6CE
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 04 Jun 2026 04:15:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AB03B63C97D
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 04 Jun 2026 04:53:33 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=none;
+	dkim=fail ("body hash did not verify") header.d=Nvidia.com header.s=selector2 header.b=b2KjSmQO;
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
-	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=hidingmail.net (policy=reject)
+	dmarc=fail reason="SPF not aligned (relaxed)" header.from=nvidia.com (policy=reject);
+	arc=reject ("signature check failed: fail, {[1] = sig:microsoft.com:reject}")
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A3E28409FC
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  4 Jun 2026 02:15:39 +0000 (UTC)
-Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id D05D540168
-	for <linaro-mm-sig@lists.linaro.org>; Thu,  4 Jun 2026 02:15:32 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9B418409EE
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  4 Jun 2026 02:53:32 +0000 (UTC)
+Received: from PH8PR06CU001.outbound.protection.outlook.com (mail-westus3azon11012013.outbound.protection.outlook.com [40.107.209.13])
+	by lists.linaro.org (Postfix) with ESMTPS id C82133F74C
+	for <linaro-mm-sig@lists.linaro.org>; Thu,  4 Jun 2026 02:53:21 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=oR0EAFNrDZQF77/t/yAY3zGrCFS6IIdO4Z0Wm/KT3HDxDKEHEdxUAunHK1gr5n9trTNpovNwQKytPMSpQftJjNOHgcdFPnPLN/jh2fx3426c0mKKsBQYiz1cNVgvK8Vvyo/5LvYiWXKzKjjZpLFDIrkWMNxXkb0cC2hQlwTqJlNR7wbV7omSrOP/ufMrWyJBD00JwBL0w2z2sG9DNsC7p9+Mxtej2NNTIMoDBxNUCSpmmMeIn7E9HY9HHx0rDRAeaKk9tHowqyE+ddl2j2e5MM+a03ltsMCD0oQJYxPIPe2slwO+CzG01TDHtpCI3eb9lLCJh3OuzUJKbrx4gEow3Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=D7iwQjJul7D/mo+oVjmvN8jhb35E/8AJYgImMf54Jg0=;
+ b=frtyjL77mv1n3KBkWCdrIBqUyqMM15WzucdfV4Uk40q0SAw0v4c4dUOZysjiQnPakUQlNsH7PiTqji693BAa17xWwzT6gVCYNXFDKDtOZJRuKSf7a/RhYAQT6tZC2nQFFBbvRLqJJhzOUHUVcbjutlyq3Mft+Lofq25sAJAr00DvrY5S7VRsc7wXzJF5g87Hd7Js1nN1/BbZ7oP0yi9g/ALx2F0IsbUI43gy5xQvT/evaoXD3CGWs5mSMoViAagOXv5QDCZCP+0U9UtoUUUrhs7nT76pS63K0dxeRsQBLM6dZyldEljEZLoJ0xIysc7FlBfnenb5rEIQjYM53Hx1eA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=D7iwQjJul7D/mo+oVjmvN8jhb35E/8AJYgImMf54Jg0=;
+ b=b2KjSmQOIuGy+AGFdhACtmAAt5vEL3St4PAFr1x9d3mZUinkW0InI9KsqE8bC1xENmDR6NLL7qPiXU9l7l1oEDO6L7U6lKUwXru4mmGSp4UyILFDbAh12ApwrTLxpKlqjYc5+Tq27hE8OIN65Jxgqawk9cpBMia4H/jkl6ABuT/5uF1clvkdnvtgU71FW/biLZFoTujcUj3vXPJZbQpju7yplMPNOK9zSXQJGFrutPiRr68l/R3vOMIwlELbjfe+LDt6ipU+zfZygdVrnU+wKeS3BMugIw1B6D0zMfyHy30EonZXlXgs3L7DLNt9LA/Wmyjpvm8qeGj11VWJF6Z7UA==
+Received: from DM3PR12MB9416.namprd12.prod.outlook.com (2603:10b6:0:4b::8) by
+ LV2PR12MB999072.namprd12.prod.outlook.com (2603:10b6:408:354::22) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.7; Thu, 4 Jun 2026
+ 02:53:18 +0000
+Received: from DM3PR12MB9416.namprd12.prod.outlook.com
+ ([fe80::8cdd:504c:7d2a:59c8]) by DM3PR12MB9416.namprd12.prod.outlook.com
+ ([fe80::8cdd:504c:7d2a:59c8%5]) with mapi id 15.21.0092.006; Thu, 4 Jun 2026
+ 02:53:18 +0000
+From: John Hubbard <jhubbard@nvidia.com>
+To: Alexander Viro <viro@zeniv.linux.org.uk>,
+	Christian Brauner <brauner@kernel.org>,
+	Jan Kara <jack@suse.cz>
+Date: Wed,  3 Jun 2026 19:53:13 -0700
+Message-ID: <20260604025315.245910-1-jhubbard@nvidia.com>
+X-Mailer: git-send-email 2.54.0
+X-NVConfidentiality: public
+X-ClientProxiedBy: BY3PR05CA0022.namprd05.prod.outlook.com
+ (2603:10b6:a03:254::27) To DM3PR12MB9416.namprd12.prod.outlook.com
+ (2603:10b6:0:4b::8)
 MIME-Version: 1.0
-From: disastrous.heron.yxfs@hidingmail.net
-To: linaro-mm-sig@lists.linaro.org
-Date: Thu, 04 Jun 2026 02:15:32 -0000
-Message-ID: <178053933285.2004361.18210000506752295928@lists.linaro.org>
-User-Agent: HyperKitty on http://lists-ec2.96boards.org/
-Message-ID-Hash: FKLP26W5CU2UKLWDZTQ7MYQE27BLOVCG
-X-Message-ID-Hash: FKLP26W5CU2UKLWDZTQ7MYQE27BLOVCG
-X-MailFrom: disastrous.heron.yxfs@hidingmail.net
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM3PR12MB9416:EE_|LV2PR12MB999072:EE_
+X-MS-Office365-Filtering-Correlation-Id: 21f0b36f-c797-4de1-2322-08dec1e46e46
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|7416014|376014|1800799024|366016|11063799006|56012099006|5023799004|18002099003|6133799003;
+X-Microsoft-Antispam-Message-Info: 
+	udmKxmgAJ8vhgt7aSyDaByNxIia/g5xDQbvEUT1gS33rjuhYRCXbVQ29YLu8P7GozkQ7GIxijWCrllgY175PjeKiYfin6vwSd7Txh2iHhDBWbV0uRbiMhqiSnweMwX12C8n7K5gXokZHp6v9gCZnPyC+unKnseh4paN8sJqBW+7AA5MiCP2HLIADNe3VD6GzNrJFBZHVr7JaZ0kjI1z4CcHW2nv8bf64N4bh1+5gMSyajabrrQ3MZ8tT6Ip4/Pl1sZBFweo7i13qHvjAM0RgnBaSpE1jE5VLSDIJld7Z1DfsJ9U7ZBQ6itEp/s09ml0uemnysItJhvixJ/b60rX55mpVg2PC/tQYjpRSZlrURdigyTeuqF0V4zQmR9icnki4g0EwQXmBtLpXFp0PhSlEFgcL6QzmHJ3NDMFIzEVhnemT00wCgjScE2elFAZh79/tw2WI1XKQ846dZVEVWtJnC5+lAnhw5mA8DIISzpOaRiPNWEkOe6L9+nW3pD6tEjtVioz9E6/kOCp+3N8dCfrCYFuFEpbjZswMPRHbWbqCqS66hi3fFPCawHjDcvdKSQc9C8BZsUXoyJZZM1/19XDfqnwkSdhOvCyjJF1sv1xoER/b9xY3FgWFmBhZ2XRjmXeQW/gxaacDhlBUfD88Kf3+Jlq2u8vV+Vmy4lZtOPRGa7441/d0NpMX7AY2Id8QUlBF
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM3PR12MB9416.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(376014)(1800799024)(366016)(11063799006)(56012099006)(5023799004)(18002099003)(6133799003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?wKClCMaHdIy+ubf2vEBOSr2FHcgDOcBUqLz19nw0m1ZvyNZoXfzgupY5Do2g?=
+ =?us-ascii?Q?8FWhnxMZBorNODZ1vW6sKIH92mOowRNqPlNzqzEBdMtGL5VL75p6L9Mn2ppL?=
+ =?us-ascii?Q?BvjxTTuwtDcI55Lo18Lbmo1Jz3r9rWkQihAQVm+GIX5heDYdtaa6JFo5HXUe?=
+ =?us-ascii?Q?SQj+rLxJ4ow66xDsKrySZH6/0wNOFB/dLgC/qqf6+xWuB0Rp+9E1pHtsX9Rt?=
+ =?us-ascii?Q?32QWb7fCXhM0ks+/saA6eHXd8J7Jhz744rU7GECZ7fh3G7EhhFlUfaLi1XlV?=
+ =?us-ascii?Q?N78s1nIyLGPdnzF0Ct7yxMCgo6AmS5XCeI71YTqm/Vvfgs+/M7RxScwYVSqG?=
+ =?us-ascii?Q?MKAVfkP7Oq/H9c1SAU5JLTS/kgDygFyqYdj+DpkkKWBvfAHSUciX2ZxSxLIG?=
+ =?us-ascii?Q?RSbkRr6wC8DpOtlJPuWQmupd7wEI/sdtX2QqQ5yRp1uU8LzhbgGjmKop/XW3?=
+ =?us-ascii?Q?D2pBNq3UQePwchI0BIa2JU1tepVz7qEpOs007NziCMUM1Vd+LgeKPtOUXH5W?=
+ =?us-ascii?Q?9Mm5H+IIASkPc6vYLUOfkZje4sN8or5oiVME/Hf610yo8m+s6gCIS1ng2LAY?=
+ =?us-ascii?Q?mg8mcbBI772P0AShJz7I5RIgBGiyEMnW+iulE5ku36UQqqDk1G1hOGwRdwL9?=
+ =?us-ascii?Q?Hgz5zVXMUKNeeNf1RwJUpnYqps5+WjTH095tTIuUDL/WmKyq18bu6h5iQJIs?=
+ =?us-ascii?Q?4k3O0AOZli1zxb5RAd7nk+HahVL0rY4ioYwZ+b/A0YY8G935+UAYO4XQ3GbT?=
+ =?us-ascii?Q?/tNPVW1Nhvbm+1VzvAdMkwxx+Ywp0e0MplIYbQNmrRdr6K4AsRx16YwTRRuN?=
+ =?us-ascii?Q?xrSlcFpxpy6fu3JTpDoAf1Or/v9qaO82xLA/WS4VDjAf8V29thZtFWoO/5Ug?=
+ =?us-ascii?Q?JZ1MmLUWm44YumVwgvLhNjdZ2IqzaQN8jaLLlAFVJZFqtt2RGtHMRzPJ4WHp?=
+ =?us-ascii?Q?hi3zswQRzTLoGOHWbyOdsaDH72VlnW42CrMYw9cenFi92zxDZVjYwA5R2Dyn?=
+ =?us-ascii?Q?Hh5ZnaFqHiwe4XVGkmy2cInrt5F+sLFKcqQFqKBdwPxoSef7T1Uo5hu7lqgV?=
+ =?us-ascii?Q?NXKDJnd6o2i7EYMcorCoNkTeMGrNHhC9wqiidzGIaANOm4JB1cOm9iC8B4ZE?=
+ =?us-ascii?Q?ZY/QKF+GAuKCaggdrvSCrnOkByUmGlxorucR3gVxsQMdKyfRXNql4fWEHVUA?=
+ =?us-ascii?Q?Vm/d3LMmI82VKDlLXv5UlRxN0Bz07GB67E8kNqZ/4xjSOydLb2xo+CbaM6mF?=
+ =?us-ascii?Q?n81dhi4kf7T9AvU2sZqa5vWYCMkGPULtLe5sR6nLpCkIwYfaXlVZ3G8omIiN?=
+ =?us-ascii?Q?43srmd8LQ4IYO/35t2vUeOk9QF84mJWIJjovu7p0oVjDzZ/4wNSjG5NkJQvp?=
+ =?us-ascii?Q?aFfuh88cQRJ0BwFj0HcJBXyCu6bx0x+aUZaU359OxWt2KphFluvAH7elo5iJ?=
+ =?us-ascii?Q?dYYb0HZYLDPW1MsfEREGVGsyjPLutqBoZajGoD/Be+6Hk/RehbmE6zHTDL2Z?=
+ =?us-ascii?Q?EX4+X/hDH8Lh3STDuLaNs81VVu+P+D2/AW/3IIr7lZlVXnMbXC916ycNSAdU?=
+ =?us-ascii?Q?zrp8qTIskF9jZiGdQk/OyIDxTPiJbx+v8gLXdK0I/aZktvq7/pu9YMGkE57/?=
+ =?us-ascii?Q?kaSnn20LlRritE5pVT1Mg3J6jF2oU3b5PjSbkg5XDVTEKEtAb22+3n1dqi4m?=
+ =?us-ascii?Q?Tg2/LITyqs5WHfpkmbIQS0BnOVpZSHjN66slxUs/WjyjwwURR0wf/cUZUR4u?=
+ =?us-ascii?Q?hHWBDEqVsg=3D=3D?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 21f0b36f-c797-4de1-2322-08dec1e46e46
+X-MS-Exchange-CrossTenant-AuthSource: DM3PR12MB9416.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jun 2026 02:53:18.1716
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: K10zNyVT9yI7I1nfKySKWlUxINtMl3mqiabKBR6pMRKhQp303N0EJh+wnC5Jk8jZzFAh+ZOmRmV3Xt8NquTEsA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV2PR12MB999072
+X-Spamd-Bar: ---
+Message-ID-Hash: 7SBMTU6ROE3SSWKKE6FBK2SCZ5HDRY5X
+X-Message-ID-Hash: 7SBMTU6ROE3SSWKKE6FBK2SCZ5HDRY5X
+X-MailFrom: jhubbard@nvidia.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
+CC: Christoph Hellwig <hch@infradead.org>, Kees Cook <kees@kernel.org>, Cong Wang <xiyou.wangcong@gmail.com>, Chia-Lin Kao <acelan.kao@canonical.com>, Benjamin LaHaise <bcrl@kvack.org>, Andrew Morton <akpm@linux-foundation.org>, Mike Rapoport <rppt@kernel.org>, Paolo Bonzini <pbonzini@redhat.com>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Jens Axboe <axboe@kernel.dk>, linux-fsdevel@vger.kernel.org, linux-aio@kvack.org, linux-mm@kvack.org, kvm@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, LKML <linux-kernel@vger.kernel.org>, John Hubbard <jhubbard@nvidia.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Wordle Unlimited Guide for Endless Word Puzzle Fun
+Subject: [Linaro-mm-sig] [PATCH v3 0/2] libfs: set SB_I_NOEXEC and SB_I_NODEV in init_pseudo()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FKLP26W5CU2UKLWDZTQ7MYQE27BLOVCG/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7SBMTU6ROE3SSWKKE6FBK2SCZ5HDRY5X/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -43,112 +130,96 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Action: add header
-X-Spamd-Result: default: False [12.79 / 15.00];
-	ABUSE_SURBL(5.00)[hidingmail.net:from_mime];
-	SPAM_FLAG(5.00)[];
-	DMARC_POLICY_REJECT(2.00)[hidingmail.net : SPF not aligned (relaxed), No valid DKIM,reject];
-	MID_RHS_MATCH_TO(1.00)[];
+X-Rspamd-Action: no action
+X-Spamd-Result: default: False [5.99 / 15.00];
+	DMARC_POLICY_REJECT(2.00)[nvidia.com : SPF not aligned (relaxed),reject];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
+	MID_CONTAINS_FROM(1.00)[];
+	R_DKIM_REJECT(1.00)[Nvidia.com:s=selector2];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
-	BAD_REP_POLICIES(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_ONE(0.00)[1];
-	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER(0.00)[disastrous.heron.yxfs@hidingmail.net,linaro-mm-sig-bounces@lists.linaro.org];
-	FORGED_RECIPIENTS(0.00)[m:linaro-mm-sig@lists.linaro.org,s:lists@lfdr.de];
-	ARC_NA(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	GREYLIST(0.00)[pass,meta];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	TO_DN_NONE(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_NEQ_ENVFROM(0.00)[disastrous.heron.yxfs@hidingmail.net,linaro-mm-sig-bounces@lists.linaro.org];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FREEMAIL_CC(0.00)[infradead.org,kernel.org,gmail.com,canonical.com,kvack.org,linux-foundation.org,redhat.com,linaro.org,amd.com,kernel.dk,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,nvidia.com];
+	FORGED_RECIPIENTS(0.00)[m:viro@zeniv.linux.org.uk,m:brauner@kernel.org,m:jack@suse.cz,m:hch@infradead.org,m:kees@kernel.org,m:xiyou.wangcong@gmail.com,m:acelan.kao@canonical.com,m:bcrl@kvack.org,m:akpm@linux-foundation.org,m:rppt@kernel.org,m:pbonzini@redhat.com,m:sumit.semwal@linaro.org,m:christian.koenig@amd.com,m:axboe@kernel.dk,m:linux-fsdevel@vger.kernel.org,m:linux-aio@kvack.org,m:linux-mm@kvack.org,m:kvm@vger.kernel.org,m:linux-media@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,m:linux-kernel@vger.kernel.org,m:jhubbard@nvidia.com,m:xiyouwangcong@gmail.com,s:lists@lfdr.de];
 	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	FROM_NO_DN(0.00)[];
-	R_DKIM_NA(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[jhubbard@nvidia.com,linaro-mm-sig-bounces@lists.linaro.org];
+	RCPT_COUNT_TWELVE(0.00)[23];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_THREE(0.00)[4];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	FROM_NEQ_ENVFROM(0.00)[jhubbard@nvidia.com,linaro-mm-sig-bounces@lists.linaro.org];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	R_SPF_ALLOW(0.00)[+mx];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[wordleunlimitedgame.org:url,hidingmail.net:from_mime]
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	DKIM_TRACE(0.00)[Nvidia.com:-];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_HAS_DN(0.00)[]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: BE29D63C6CE
-X-Spam: Yes
+X-Rspamd-Queue-Id: AB03B63C97D
 
-Introduction to Wordle Unlimited Experience
+This began as a one-line dma-buf fix for a path_noexec() warning added
+by commit 1e7ab6f67824 ("anon_inode: rework assertions"). Christoph
+pointed out that the fix belongs higher up: a pseudo filesystem has no
+reason not to set SB_I_NOEXEC by default. This series does that.
 
-Wordle Unlimited is a modern word puzzle game designed for players who enjoy continuous vocabulary challenges without daily limits. Unlike traditional word guessing games that restrict attempts to once per day, this version allows unlimited gameplay sessions. This creates an environment where learning, practice, and entertainment can happen at any time. https://wordleunlimitedgame.org/
+  * Patch 1 sets both flags in init_pseudo(), so every pseudo
+    filesystem gets them. This is the only patch that changes a flag,
+    and the only one with Fixes:/Cc: stable.
 
-The game has become popular among language learners, puzzle fans, and casual gamers because it combines simple rules with strategic thinking. Players must guess a hidden word within a set number of attempts, using feedback from each guess to improve accuracy. The unlimited format removes waiting time and allows repeated practice, making it suitable for skill development and relaxation.
+  * Patch 2 drops the assignments that are now redundant in the callers
+    that set them by hand.
 
-What Wordle Unlimited Means in Modern Gaming
+Most callers already set one or both flags. I audited every
+init_pseudo() caller. Here is what patch 1 actually changes for each.
+The only visible effect is on dma-buf, where SB_I_NOEXEC silences the
+warning. SB_I_NODEV is never consulted on these SB_NOUSER mounts, and
+none of the callers that gain SB_I_NOEXEC are executed from.
 
-Wordle Unlimited refers to an expanded version of the original word guessing concept where users can play repeatedly without restriction. Each round generates a new hidden word, giving continuous opportunities to test vocabulary knowledge.
+  caller                       had        patch 1 adds
+  ---------------------------  --------   --------------
+  fs/anon_inodes.c             both       nothing new
+  mm/secretmem.c               both       nothing new
+  virt/kvm/guest_memfd.c       both       nothing new
+  fs/nsfs.c                    both       nothing new
+  fs/pidfs.c                   both       nothing new
+  fs/aio.c                     NOEXEC     NODEV
+  drivers/dma-buf/dma-buf.c    neither    NOEXEC + NODEV
+  net/socket.c                 neither    NOEXEC + NODEV
+  fs/pipe.c                    neither    NOEXEC + NODEV
+  kernel/resource.c            neither    NOEXEC + NODEV
+  fs/erofs/super.c             neither    NOEXEC + NODEV
+  fs/btrfs/tests/...           neither    NOEXEC + NODEV
+  drivers/vfio/vfio_main.c     neither    NOEXEC + NODEV
+  drivers/gpu/drm/drm_drv.c    neither    NOEXEC + NODEV
+  drivers/dax/super.c          neither    NOEXEC + NODEV
+  block/bdev.c                 neither    NOEXEC + NODEV
 
-This format is especially useful for users who want to improve language skills. Instead of waiting for a daily puzzle, players can engage in multiple rounds in one sitting. The structure remains consistent, which helps build familiarity and confidence over time.
+John Hubbard (2):
+  libfs: set SB_I_NOEXEC and SB_I_NODEV by default in init_pseudo()
+  libfs: drop redundant SB_I_NOEXEC/SB_I_NODEV in init_pseudo() callers
 
-The game typically uses a grid system where each attempt reveals color coded feedback. Correct letters in correct positions, correct letters in wrong positions, and incorrect letters are all highlighted differently to guide future guesses.
+ fs/aio.c               | 1 -
+ fs/anon_inodes.c       | 2 --
+ fs/libfs.c             | 1 +
+ fs/nsfs.c              | 1 -
+ fs/pidfs.c             | 2 --
+ mm/secretmem.c         | 2 --
+ virt/kvm/guest_memfd.c | 2 --
+ 7 files changed, 1 insertion(+), 10 deletions(-)
 
-How to Play Wordle Unlimited Step by Step
 
-Playing Wordle Unlimited is straightforward and accessible for all skill levels. The objective is to identify the hidden word within a limited number of guesses.
+base-commit: ba3e43a9e601636f5edb54e259a74f96ca3b8fd8
+-- 
+2.54.0
 
-First, the player enters a starting word. This word is usually chosen to include common vowels and consonants to maximize information. After submission, the game provides feedback on each letter.
-
-Next, the player analyzes the feedback and adjusts the next guess accordingly. Letters that are correct and correctly placed should be kept in the same position. Letters that are correct but misplaced should be repositioned in the next attempt. Letters that are not part of the word should be avoided.
-
-This process continues until the correct word is discovered or attempts are exhausted. After each round, a new word is available immediately, allowing continuous play.
-
-Key Features That Define Wordle Unlimited
-
-Wordle Unlimited includes several features that make it appealing to a wide audience. One major feature is unlimited gameplay, which removes daily restrictions and supports continuous learning.
-
-Another important feature is instant feedback after each guess. This feedback system helps players improve logic and vocabulary skills quickly. It also encourages strategic thinking rather than random guessing.
-
-The game also maintains a simple interface, making it easy to understand for beginners. There are no complex controls or instructions, which allows users to focus entirely on word solving.
-
-Additionally, the game supports replayability. Each new round offers a different word challenge, which keeps the experience fresh and engaging over long periods.
-
-Effective Strategies for Better Results
-
-Success in Wordle Unlimited often depends on strategy rather than luck. One effective approach is starting with words that include multiple vowels and common consonants. This helps identify useful letters early in the game.
-
-Another strategy is pattern recognition. After receiving feedback, players should focus on common English word structures. Recognizing prefixes, suffixes, and common letter combinations can significantly improve guessing accuracy.
-
-It is also helpful to avoid repeating incorrect letters. Keeping track of eliminated letters reduces unnecessary guesses and increases efficiency.
-
-Advanced players often use logical elimination methods. By narrowing down possibilities step by step, they can solve puzzles in fewer attempts and improve overall performance.
-
-Benefits of Playing Wordle Unlimited Regularly
-
-Wordle Unlimited offers several cognitive and educational benefits. One major benefit is vocabulary improvement. Regular exposure to new words helps expand language knowledge over time.
-
-The game also enhances problem solving skills. Each round requires analysis, deduction, and logical thinking. These mental exercises contribute to sharper cognitive abilities.
-
-Another benefit is stress relief. The simple and repetitive structure of the game provides a relaxing experience that can help reduce mental fatigue.
-
-In addition, unlimited access allows flexible practice schedules. Players can engage for a few minutes or extended sessions depending on personal preference, making it suitable for different lifestyles.
-
-Why Wordle Unlimited Has Become So Popular
-
-The popularity of Wordle Unlimited comes from its balance of simplicity and challenge. It is easy to learn but difficult to master, which keeps users engaged.
-
-Social sharing also plays a role in its growth. Many players enjoy comparing results and discussing strategies with others, creating a sense of community around the game.
-
-The unlimited format is another key factor. Unlike limited daily puzzles, this version allows continuous engagement, which appeals to users who enjoy long gaming sessions.
-
-Its accessibility across devices also contributes to popularity. Players can enjoy the game on computers, tablets, or mobile devices without complicated setup processes.
-
-Conclusion on Wordle Unlimited Value
-
-Wordle Unlimited stands out as an engaging and educational word puzzle experience that combines entertainment with cognitive development. Its unlimited format allows continuous learning and practice, making it suitable for both beginners and advanced players.
-
-With simple rules, strategic depth, and instant feedback, the game provides a balanced experience that supports vocabulary growth and logical thinking. Whether used for relaxation or skill improvement, Wordle Unlimited remains a strong choice for anyone interested in word based challenges.
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
