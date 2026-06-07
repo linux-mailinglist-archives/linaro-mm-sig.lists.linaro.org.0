@@ -2,260 +2,249 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id sehfKvNJKWorTwMAu9opvQ
+	id HkjrOCVKKWpPTwMAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Jun 2026 13:26:43 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Jun 2026 13:27:33 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 432CA668C62
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Jun 2026 13:26:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5FCD8668C8A
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Jun 2026 13:27:33 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=gmail.com header.s=20251104 header.b=gyQNxVZ9;
+	dkim=fail ("body hash did not verify") header.d=Nvidia.com header.s=selector2 header.b=E8edBwXz;
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
-	dmarc=fail reason="SPF not aligned (relaxed)" header.from=gmail.com (policy=none)
+	dmarc=fail reason="SPF not aligned (relaxed)" header.from=nvidia.com (policy=reject);
+	arc=reject ("signature check failed: fail, {[1] = sig:microsoft.com:reject}")
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5BD8840A43
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Jun 2026 11:26:42 +0000 (UTC)
-Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
-	by lists.linaro.org (Postfix) with ESMTPS id DC1413F7E5
-	for <linaro-mm-sig@lists.linaro.org>; Fri,  5 Jun 2026 18:44:03 +0000 (UTC)
-Received: by mail-pl1-f174.google.com with SMTP id d9443c01a7336-2c0c2d8b95bso15932845ad.1
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 05 Jun 2026 11:44:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1780685043; x=1781289843; darn=lists.linaro.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=VmToUT+A6qp8UgJ/VhXar74M6fIQJS1C/pR1f1V3ExQ=;
-        b=gyQNxVZ9XndE5iICLp0tu8jYslpVdZ1au1bv73+Qpr4Vhh0Dh+1Tv6J+9JYZhmYqKZ
-         EQDeCiFKnTESYF0CYAU1tusG2xqalFGK8RbK+nu6ZJhh+et7cTgtHGdMeVN1XfH4Pd0X
-         SbCG0ILzSYCwdGkTFxiTLkT26ZdvFdnYuoOskKR6BbMTrT0LdSc5OZ+dXzoEP7U7KW5v
-         RsstC6vDhsU1VwwbrkqIw19Qcli0cfwyt+SCkrGS1xuD7SShb1NIKPN4wPfdDM7Mtd51
-         /YSK2sYHtUKSNm4XRHbAGo83bCRpsgX/gShMO/AonyN5Eb/VFTMzJpi2sKOmOkRgdWHO
-         Dflg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780685043; x=1781289843;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=VmToUT+A6qp8UgJ/VhXar74M6fIQJS1C/pR1f1V3ExQ=;
-        b=FSEigg92xhglJV9G1D0LwpMk5arJhAJGs/bsAoUFfpC2dQHVlM4+qx4OxYCPMwdlwQ
-         9nmTEg9zCAf+erlnVGd9WcJbIcXH7wXoEICfw1gL2UhWHPMLCMITlt6w+QIZdJneW4XN
-         nxzSck81C1XXl98FtrqtWqlOly5kRrPSFdoEx85jDgDBt3t1+n7HYvxWvs2nJMwWj+6w
-         A7Dg0TY3MEw/Z/79PVTYKFEe7FIUZBWH3Z3q884tLM9AhlhPAS7tlbLgCiIXMo6upwvv
-         Xx/J2SXv/y+GKqZyN1nSky2NKoD2CyzJpg8Zj7le/vyVUwj7YXRO889m1CW78GyBjnCx
-         aL4w==
-X-Forwarded-Encrypted: i=1; AFNElJ+2DbzLsMoSr62AQz1Koq8IMwDtBRR1GgNrntXMkvru1QgNKXoIIDcT4yP+JMmA2APHmWiRlrJsNYF1RDYl@lists.linaro.org
-X-Gm-Message-State: AOJu0Yw33mO7q4tkunVMFB6j/FQxVeED20fyWLAhlD7kdAPEXjowlslb
-	5084pMV38JfL5tNKU3RWDzlk2rVtmdeuQHIepMHeifl5Ti32+alyl6in
-X-Gm-Gg: Acq92OGT+pFezuEfkGj4rSnCDgMx+qlt96BQn0EuXJSjKMA79CTmUxQ/ciR+69mEbL7
-	sXIfQ13axWkf4OntI5NZuqmaJCf+rWhVI7Zq1aEuPebozJjVwltvDBL2AUcxFCv+zPrlyUz3EvY
-	WoE6wi7oCMC05D1juhLgmQokEtSqG51ohGLeJA2sorn++PlW7UfXcpv/e0799y/gicyrPOPRzMP
-	v1MSLy9xlJcMAQz8YFyIcLRo1EW+fPxrVDFTfCGPbg+1tw/uV9o1CihZMKBaFWVsvd3vIaU+jbe
-	cADl8NEx5e/uEKOzxYevyy+GvpGkw8xlPWAoO00twBZ23zZUnGr9koQvb1/5GJ2Wl7vKDYoM+z9
-	vuOORJcRtpzo/Y2xje6m5lXB7WhpQFhoVAvQjCteBSfDL5Z+3o5NEqxBuy3+tX+0/UUKZQRLamW
-	gzuRL3Z3ovGut4u+kGM29cSdNFIy3bsIgmNegMLgUdqnSj5hvlKoOLxqI=
-X-Received: by 2002:a17:903:18c:b0:2c0:e5ee:f56c with SMTP id d9443c01a7336-2c1e881fefemr54368775ad.20.1780685042865;
-        Fri, 05 Jun 2026 11:44:02 -0700 (PDT)
-Received: from devvm29614.prn0.facebook.com ([2a03:2880:ff:58::])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2c1663981basm96908105ad.67.2026.06.05.11.44.02
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 05 Jun 2026 11:44:02 -0700 (PDT)
-Date: Fri, 5 Jun 2026 11:44:00 -0700
-From: Bobby Eshleman <bobbyeshleman@gmail.com>
-To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
-Message-ID: <aiMY8CpckM8Jav0g@devvm29614.prn0.facebook.com>
-References: <20260603-tcpdm-large-niovs-v1-0-f37a4ac6726c@meta.com>
- <20260603-tcpdm-large-niovs-v1-2-f37a4ac6726c@meta.com>
- <bdce2488-fe77-4f36-9ed6-dd2c785fa7c1@amd.com>
+	by lists.linaro.org (Postfix) with ESMTP id 7305640A70
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Jun 2026 11:27:32 +0000 (UTC)
+Received: from BN1PR04CU002.outbound.protection.outlook.com (mail-eastus2azon11010011.outbound.protection.outlook.com [52.101.56.11])
+	by lists.linaro.org (Postfix) with ESMTPS id EE4494010F
+	for <linaro-mm-sig@lists.linaro.org>; Sun,  7 Jun 2026 02:08:03 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=jN2C1gLxWaUAvueW5BsjFVE0+ViUWfesGnWr9lx6n7xoysZG0B8uK0NLHxVeASMzuQ9oYUssdmT5LUn7NS9BAdmnjKdnexBAIlqPCnMszrkqsHADcisUAcIWKMWtamURcXOHlaVMje7wS5BmyEYJHfEuCHbdrUoZCbxI+HQ8WceMKnpePQwK5CGebst2zpsPROgGWpCl2VxeeA4rTZC5sodcAsEp+IbeqcqbLnbyygKh6RXKHTbksHCUJ0R1em6mKhlYP+fiVS1Z/It7O6aJmZSbddEGBVQ0yM6tTNhaSxCfs3wcDT0iCoQK/mG7zCO6QggUj8xbhVsZkjhtVsZWjQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Cgia69ft9TVk0pwbC09ySYu2gYb0KEnOYVnNofwaJYQ=;
+ b=M6iZovi603Sz2HvpuIJ7BY5AlA118VTOsRUjjvm5gxuirQTT7JdQeneXmQ069Fu/VT6NMprvYm+jk1sGJD36rTviHt+VVfPLNJ5+NwMohQ1JOYBUXm/0cw0Mw1vO2iKnlGYLnjRKJG/sW225G7LHOgh2CEXlnrRcUZRt9wV39Vw5UQxBcaT6d2g7hkDkU/+NcsNDhytvBRyK0C4jkR+Y1MVGXiihaA+Vua5k/tOxKdQkYo4wdiovYN/ViblOiMcD6/Ioo+FB6sepfE671cnbKJ8Ij0E4icp4OJ3z1T3Bw6q/8VIc1brwMM+HbTQjsGPDaX3bM06fhKYOVbb8JQq2Ww==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Cgia69ft9TVk0pwbC09ySYu2gYb0KEnOYVnNofwaJYQ=;
+ b=E8edBwXzMXrcANhVv6bVeHpgPHW8bFihcPJuG6yjzfsubyZfEiphRUnjgTYiQd42G/JP2GpfQ5nJhG1gASoVbLfaAg2+AO3/FPBMqvFGX6xWujFOULNXUTWMb9V9eYPLhAamYhPlz0SPqCYrREj5LPHh37MQhKWy8lP1dOEo/0PAtk+z1A3VIzM6+3FbXoHJlTUBJdgMnN1iyOLAaHjFSwtAcAVHopPNwjAwNKvMCJEazmQez7t0492BFBphLwqTgVqIGXAK648RCnXrwU/zPgFgKUui/LYYN2pJcgTS6swOFaQB6ISD8Ytv0gV8TtuI3y9tP+lbh3aZG/wYNvjVDQ==
+Received: from CH2PR12MB3990.namprd12.prod.outlook.com (2603:10b6:610:28::18)
+ by CH3PR12MB8533.namprd12.prod.outlook.com (2603:10b6:610:159::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.11; Sun, 7 Jun 2026
+ 02:07:57 +0000
+Received: from CH2PR12MB3990.namprd12.prod.outlook.com
+ ([fe80::7de1:4fe5:8ead:5989]) by CH2PR12MB3990.namprd12.prod.outlook.com
+ ([fe80::7de1:4fe5:8ead:5989%4]) with mapi id 15.21.0092.010; Sun, 7 Jun 2026
+ 02:07:57 +0000
+Date: Sun, 07 Jun 2026 11:07:53 +0900
+Message-Id: <DJ2G8D0N6EK7.2PDDSC28O8K4P@nvidia.com>
+To: "Lyude Paul" <lyude@redhat.com>, "Miguel Ojeda" <ojeda@kernel.org>
+From: "Alexandre Courbot" <acourbot@nvidia.com>
+References: <20260604192740.659240-1-lyude@redhat.com>
+In-Reply-To: <20260604192740.659240-1-lyude@redhat.com>
+X-ClientProxiedBy: OSTPR01CA0003.jpnprd01.prod.outlook.com
+ (2603:1096:604:220::13) To CH2PR12MB3990.namprd12.prod.outlook.com
+ (2603:10b6:610:28::18)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <bdce2488-fe77-4f36-9ed6-dd2c785fa7c1@amd.com>
-X-Spamd-Bar: ----
-X-MailFrom: bobbyeshleman@gmail.com
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH2PR12MB3990:EE_|CH3PR12MB8533:EE_
+X-MS-Office365-Filtering-Correlation-Id: fce2cb8d-f22c-4699-b16a-08dec439979f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|366016|7416014|376014|1800799024|10070799003|11063799006|56012099006|6133799003|18002099003|22082099003|3023799007;
+X-Microsoft-Antispam-Message-Info: 
+	6aqiNRSld8iewhgbPwg4iRgxt/D/AH7/429zXC2ouBXOK8sdeGyAIQzMifO8oqP7JODDH50AYqb7Yv67zpQqOWFM2mitaOKbmR/zj1vnF1U1cOOqkvEGC0jwW70/2Fg8XyybcfoTsLsVVmgkr8HqMd/LYEQQ2Efm1VFBdRCEOoQoARsS5vCmlsO+aGS6+92cal8y/UidQspYGLvq2ZltiKvjE+dMS0N8ZMs5MfcE+7vryE0gQ4Mub7mIZDfam8qz+k3G4RHEtZOURVecIcl5gH8USlXvDdzZwkDIJtIaloeATO0zkb6sjIg9zR3rYZ1A5fYhz9fAT+wzaYQdVHyVDzJ7B5Qkl+5gU7/thHa3wMlGVy8eEtMS2tbYhJfHy4NSnzN/i882d2EfYPZIYhrLr83jZ+DX6WreOq4fjK8AHHfmD3XKpF1LMfcY9Dnk7OIKZfmeLXPgh9HhGnUB3ifHPOIRa/+XW5V6RMQDV8dZ8v9W2UPDZJ1WH1J3GVj6zNk0pcqcr904a1zpB3ELzGOnmrcqD1WVNHudfRsfFa2ilAneraAgV7QBn9kEG1XZQDgjQDLqD4toeOswvqonov19Qm1B5N+iKnFHO4Syl7BxQxVH0SAUTrOQhwbj8oN1IRDSMX3f21z6Wn6ChSyuUVPI7Ud9LaP++s3T7iEqbYDESgKQj27eL/kqX4E1vk3M/E1K
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH2PR12MB3990.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(7416014)(376014)(1800799024)(10070799003)(11063799006)(56012099006)(6133799003)(18002099003)(22082099003)(3023799007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?OFFLdUFsTkkwRFg2VUJ1dHRoWXVicnJJQUFUSmNJMHpQQTJaV1hMT0NpT2dB?=
+ =?utf-8?B?cVdJWG9Lemx0TUg1WFBsaldZTytRNGNxSEFHWUdmN09hU3M1U3ZYbC9sMFJL?=
+ =?utf-8?B?U1NHdEJGam01dzFwOGNnUlRCT0dDN1F1ZkVtSHNLZ0lMR3hMWCtiUU1BaENT?=
+ =?utf-8?B?NmlaRjlON2lJMmJSQXQ1aXBZZHVsOTJyVDhKekNiTUtiT1Z6aDhzMjNKbW9h?=
+ =?utf-8?B?dkg2R0hOeDMxTHVsZ3ExcGlEdWI4SXN4ZnQvc2djOCt3MmdxUXRqSjhlVkFt?=
+ =?utf-8?B?VFlhdzhlZHh0bFk1MzJSZTlXNmkvQ2VGQzFyVktiNlRxM0x2N1RlYjVFTkxi?=
+ =?utf-8?B?ZHR0UE1wOHZXWEpJR2pUWk1ocFJtYWJkTTNsN0VyYmJacWJLUG52WTF3eHJC?=
+ =?utf-8?B?S1FHS2NCWEsvSGVZc0kzdmtxT1VBTGZjb2ZLcGxQQVYyMlhtdjFsMzNsaUZ0?=
+ =?utf-8?B?S0lkRGRUendvcmY3SUhqZHVPY0JGQVp1WFc1U0h4cVloRVRGNkdyVDlpT1B3?=
+ =?utf-8?B?Q0hvQW1tSEYxS2MzNzNPZWkzaGJOd1kxTEw1ZnVkVlNpalhSY3BadWNhVUti?=
+ =?utf-8?B?UlZZWm40Zk9MNVpDMTZsQ2lhemdVRk1oaE1sS3dEOVNnNnBvYXVRV2ptbWtW?=
+ =?utf-8?B?dDViK1lnVmppcWlIVlJmc1VQZXBIRjQxWmhuMlhXZFRLcW1qcFBmREVkWklY?=
+ =?utf-8?B?K09kVFFQY011MGk4N3RBTkJSS21qV2VjNS9tbjNzM2hXeUdUVUcwelRWcHh0?=
+ =?utf-8?B?d3N0QzJ4Vmk0WndUVGlsZEZQZVE0cG9sUStiQ0Qyb2drNHlrM3Q2Wko3NGg1?=
+ =?utf-8?B?anBjWncxeFlqb21VMnk2QkM1WTd3dmFUdSs5NEI5NlVFTUVQdGJzYVBzQmZx?=
+ =?utf-8?B?VGtYNDBMc3FQS0paZlJuYTZQQlB0dXdHdG1TUWJHdjJvQ05pSnZxUjhpYTFq?=
+ =?utf-8?B?dEZjTThjRkJxRUxUT3BVVWIvRGhqTmg3VzdkSlF6SDhyZGgvM1dBNm5RVmo1?=
+ =?utf-8?B?Y3pNbzhPUm9LMmZseTFyUEVuazRSanhQb0xZQ0xQeGJvZmRzNXdFUDZTUWI4?=
+ =?utf-8?B?Vm5CYVJOT2xwd1hLVm54K0hDbUxJbkNBM0k2QkErZFJPQldLeEtwd1JmVWVK?=
+ =?utf-8?B?Ukp0NHJFQ2g3QXNuSTZaelN3WXFhc3V3ajlBMG9Yalo4M2ZSd3k0QW1IVDk4?=
+ =?utf-8?B?empCTFVCdHRwQW9yZWNjMUZmVVNMWWlpZU4rMWN1ZVRsbUh4K2NDR25mV2hy?=
+ =?utf-8?B?aUtySStCdFhJV01uN1c5dUk1dm9kZjNBcytpbkNpNDJXSWxBSW50UGxCdTJn?=
+ =?utf-8?B?cVg3VXowYmlMWTE1OVd0UWh5bHYySTRvblE4T01kTnBUcGdLV2QrbjNIYU41?=
+ =?utf-8?B?dmtYRjRaMFMyTnl0Q3l6M3dCNVd2OUlOUDRjaHlOcEVPdmM5MHE2QzBOd1NZ?=
+ =?utf-8?B?cWwxTUY2aW4vaWNaZU50MnJSbFpmU3VYVDNKQU13eTV6YmJ2cWZCa2RpVUIx?=
+ =?utf-8?B?SVBDNGR1Y0pwaU1ld0RGeWhWdVNrRHpjMjZXRE9HMTlOYjVZYjNlb09UWmlh?=
+ =?utf-8?B?Mm04MHlaeFpodTRiaTdXUGRVYm96dC95VWtJNkVTZEw2UFFjNWRIaWNXZXVq?=
+ =?utf-8?B?WHV4MkIxVUUvRUlQSE9aeGZtWUMrQ3NxVjQvUURFZlpHb1ZLbVAyOUZ5czhH?=
+ =?utf-8?B?RkJvQ01VdFFkWHJkamFOSnFDQm1lczdvbVNVZUtEZ0VnczJockZxdkRyVXVQ?=
+ =?utf-8?B?ZTNKZ3BGTTlJRVo2YzZFZDVwdUk1dmRzd1ZMZm14OVAzZU4vekJIcG92ay9E?=
+ =?utf-8?B?UitkZUpKY2tmYUMzZFR2Szc5eFJGV3lZTzVUdG5uNXpyMDhUdllGQ04xcmVs?=
+ =?utf-8?B?SitIY1p3dWtDbndlMjM0K2NzSjhhS0VIeEpBM3R3b2lGL3loSVNDeHE2WnhK?=
+ =?utf-8?B?b1RPVHVSdFpLbC9mc1MrcWxsNUZTeTdaemVXT0FGOUVDSEVDMm11RmYyQzNl?=
+ =?utf-8?B?QjhLQ1piOG1tTVFzaS8zZTlrMWx3bVZjODF6OXpUZHdJY3dERjNaLzBkdUFo?=
+ =?utf-8?B?MHdQK3lZeHAvRXlxZ1NYOTZaQ1d3MkpOVmJWVEFhWGNua3hya3gyemFtRXU4?=
+ =?utf-8?B?VUxjOS9HRkwybWVGNmpPRzNucnEvNGpZdXBUU09KcktaYmErd001cCtNcDdz?=
+ =?utf-8?B?MFM3OWZMcnVrZ3pxazFaL21lakNUVEN1eGZmb0xOV0JDS002U3hBRm5XZHBO?=
+ =?utf-8?B?Yy9kRVZrbURuQzIyVG13V0lMQllUcVlta3VKMmZLMWJDdEQzWWxPMno1WVJV?=
+ =?utf-8?B?T2lHOXIvRTlFTkYzeFdjYnBRdnRmTlZJWFhhVkl6Sm0vQXYxTm10aUV0ZUdu?=
+ =?utf-8?Q?26XN1+lXeG1SIPYK1cmul35+f0DKE+oagNKnPtyh1WbLh?=
+X-MS-Exchange-AntiSpam-MessageData-1: EcLDATRyfpF9pg==
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: fce2cb8d-f22c-4699-b16a-08dec439979f
+X-MS-Exchange-CrossTenant-AuthSource: CH2PR12MB3990.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Jun 2026 02:07:57.1786
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: oBiL9rYz4bv7xOEC7Hy4pY9AiuXtn937OSLLuimBno6En/xZPcrhkKqjB7bOg78FejFSeaRGoktBT+hZJqRUyg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB8533
+X-Spamd-Bar: -----
+X-MailFrom: acourbot@nvidia.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: FWLH2TE5HYABILHESIINEKZ35HV3ZIBE
-X-Message-ID-Hash: FWLH2TE5HYABILHESIINEKZ35HV3ZIBE
-X-Mailman-Approved-At: Wed, 10 Jun 2026 11:24:34 +0000
-CC: Donald Hunter <donald.hunter@gmail.com>, Jakub Kicinski <kuba@kernel.org>, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, Andrew Lunn <andrew+netdev@lunn.ch>, Gerd Hoffmann <kraxel@redhat.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, Sumit Semwal <sumit.semwal@linaro.org>, Shuah Khan <shuah@kernel.org>, netdev@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-kselftest@vger.kernel.org, sdf@fomichev.me, razor@blackwall.org, daniel@iogearbox.net, almasrymina@google.com, matttbe@kernel.org, skhawaja@google.com, dw@davidwei.uk, Bobby Eshleman <bobbyeshleman@meta.com>
+Message-ID-Hash: XV2IDFNSE2STAFCDCRVAMW5Q32LR77SE
+X-Message-ID-Hash: XV2IDFNSE2STAFCDCRVAMW5Q32LR77SE
+X-Mailman-Approved-At: Wed, 10 Jun 2026 11:27:21 +0000
+CC: dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org, Gary Guo <gary@garyguo.net>, =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, driver-core@lists.linux.dev, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Alice Ryhl <aliceryhl@google.com>, Simona Vetter <simona@ffwll.ch>, linux-kernel@vger.kernel.org, Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org, "Rafael J . Wysocki" <rafael@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Maxime Ripard <mripard@kernel.org>, David Airlie <airlied@gmail.com>, Benno Lossin <lossin@kernel.org>, linaro-mm-sig@lists.linaro.org, Danilo Krummrich <dakr@kernel.org>, Mukesh Kumar Chaurasiya <mkchauras@gmail.com>, Asahi Lina <lina+kernel@asahilina.net>, Daniel Almeida <daniel.almeida@collabora.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH net-next 2/4] udmabuf: emit one sg entry per pinned folio
+Subject: [Linaro-mm-sig] Re: [PATCH v18 0/4] Rust bindings for gem shmem
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FWLH2TE5HYABILHESIINEKZ35HV3ZIBE/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XV2IDFNSE2STAFCDCRVAMW5Q32LR77SE/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [3.09 / 15.00];
+X-Spamd-Result: default: False [5.99 / 15.00];
+	DMARC_POLICY_REJECT(2.00)[nvidia.com : SPF not aligned (relaxed),reject];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DATE_IN_PAST(1.00)[112];
-	R_DKIM_REJECT(1.00)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
+	R_DKIM_REJECT(1.00)[Nvidia.com:s=selector2];
+	DATE_IN_PAST(1.00)[81];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:christian.koenig@amd.com,m:donald.hunter@gmail.com,m:kuba@kernel.org,m:davem@davemloft.net,m:edumazet@google.com,m:pabeni@redhat.com,m:horms@kernel.org,m:andrew+netdev@lunn.ch,m:kraxel@redhat.com,m:vivek.kasireddy@intel.com,m:sumit.semwal@linaro.org,m:shuah@kernel.org,m:netdev@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linux-media@vger.kernel.org,m:linaro-mm-sig@lists.linaro.org,m:linux-kselftest@vger.kernel.org,m:sdf@fomichev.me,m:razor@blackwall.org,m:daniel@iogearbox.net,m:almasrymina@google.com,m:matttbe@kernel.org,m:skhawaja@google.com,m:dw@davidwei.uk,m:bobbyeshleman@meta.com,m:donaldhunter@gmail.com,m:andrew@lunn.ch,s:lists@lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
-	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[26];
+	FORGED_RECIPIENTS(0.00)[m:lyude@redhat.com,m:ojeda@kernel.org,m:dri-devel@lists.freedesktop.org,m:rust-for-linux@vger.kernel.org,m:nouveau@lists.freedesktop.org,m:gary@garyguo.net,m:christian.koenig@amd.com,m:driver-core@lists.linux.dev,m:maarten.lankhorst@linux.intel.com,m:aliceryhl@google.com,m:simona@ffwll.ch,m:linux-kernel@vger.kernel.org,m:sumit.semwal@linaro.org,m:linux-media@vger.kernel.org,m:rafael@kernel.org,m:tzimmermann@suse.de,m:mripard@kernel.org,m:airlied@gmail.com,m:lossin@kernel.org,m:linaro-mm-sig@lists.linaro.org,m:dakr@kernel.org,m:mkchauras@gmail.com,m:lina+kernel@asahilina.net,m:daniel.almeida@collabora.com,m:gregkh@linuxfoundation.org,m:lina@asahilina.net,s:lists@lfdr.de];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	GREYLIST(0.00)[pass,meta];
+	FORGED_SENDER(0.00)[acourbot@nvidia.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FORGED_SENDER(0.00)[bobbyeshleman@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[25];
+	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[bobbyeshleman@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FREEMAIL_CC(0.00)[gmail.com,kernel.org,davemloft.net,google.com,redhat.com,lunn.ch,intel.com,linaro.org,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,fomichev.me,blackwall.org,iogearbox.net,davidwei.uk,meta.com];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,netdev];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FREEMAIL_CC(0.00)[lists.freedesktop.org,vger.kernel.org,garyguo.net,amd.com,lists.linux.dev,linux.intel.com,google.com,ffwll.ch,linaro.org,kernel.org,suse.de,gmail.com,lists.linaro.org,asahilina.net,collabora.com,linuxfoundation.org];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig,kernel];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[acourbot@nvidia.com,linaro-mm-sig-bounces@lists.linaro.org];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DKIM_TRACE(0.00)[gmail.com:-];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp,meta.com:email]
+	TO_DN_SOME(0.00)[];
+	DKIM_TRACE(0.00)[Nvidia.com:-];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,nvidia.com:mid,nvidia.com:from_mime,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp,gitlab.freedesktop.org:url]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 432CA668C62
+X-Rspamd-Queue-Id: 5FCD8668C8A
 
-On Fri, Jun 05, 2026 at 11:30:07AM +0200, Christian K=F6nig wrote:
-> On 6/4/26 02:42, Bobby Eshleman wrote:
-> > From: Bobby Eshleman <bobbyeshleman@meta.com>
-> >=20
-> > get_sg_table() emitted one PAGE_SIZE sg entry per page even when the
-> > underlying folio was larger.
-> >=20
-> > Instead, walk folios[] and emit one sg entry per folio. When folios
-> > represent large pages (as is for MFD_HUGETLB), each sg entry is a large
-> > page. Normal PAGE_SIZE sg tables are unchanged.
-> >=20
-> > Required by net/core/devmem to support rx-buf-size > PAGE_SIZE with
-> > udmabuf.
->=20
-> That doesn't explain why this is required.
+On Fri Jun 5, 2026 at 4:24 AM JST, Lyude Paul wrote:
+> Most of this patch series has already been pushed upstream, this is just
+> the second half of the patch series that has not been pushed yet + some
+> additional changes which were required to implement changes requested by
+> the mailing list. This patch series is originally from Asahi, previously
+> posted by Daniel Almeida.
+>
+> The previous version of the patch series can be found here:
+>
+> 	https://patchwork.freedesktop.org/series/164580/
+>
+> Branch with patches applied available here:
+>
+> 	https://gitlab.freedesktop.org/lyudess/linux/-/commits/rust/gem-shmem
+>
+> This patch series applies on top of drm-rust-next
+>
+> Patch-series wide changes since V15:
+> * Fix some major rebasing errors I somehow didn't notice :(
+> * Drop the dependency on LazyInit, use the trick that Alice suggested
+>   instead.
+> * Fix dependency ordering so that Tyr can get the vmap stuff first
+>   without the other bits.
+> Patch-series wide changes since V16:
+> * Fix ordering one more time (SetOnce::reset() doesn't need to come
+>   before adding vmap functions)
+> * Rebase against the latest DeviceContext changes from me that got
+>   pushed.
+>
 
-Sure, can definitely add. Devmem currently requires dmabuf sg entries to
-be length and size aligned when it allocates niovs for NIC page pools.
-Though udmabuf is not violating any dmabuf contract by emitting
-PAGE_SIZE entries and the above restriction is probably more a
-shortfalling of devmem, by emitting a single entry per folio this patch
-allows udmabuf to be used by devmem for large pages.
+Not a problem of this series, but when trying to build it I initially
+got these warnings/errors:
 
->=20
-> Please note that accessing the pages/folio of an sg-table returned by DMA=
--buf is illegal and strictly forbidden!
->=20
-> Regards,
-> Christian.
+CLIPPY L rust/kernel.o
+warning: gendwarfksyms: symbol_print_versions: no information for symbol _RNvMs1_NtNtCsjYlAz7NZ3Sw_4core3mem12maybe_uninitINtB5_11MaybeUninitINtNtCsbuTvttuFvbr_6kernel6devres6DevresINtNtNtNtB18_3drm3gem5shmem10SGTableMapNtNtB1K_5tests11KunitObjectNtNtB1O_6device6UninitEEE16assume_init_dropB18_
+...
+.vmlinux.export.c:8577:500: warning: null character ignored [-Wnull-character]
+ 8577 |   ...<U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000>...
+      |      ^
+.vmlinux.export.c:8577:501: warning: null character ignored [-Wnull-character]
+ 8577 |   ...<U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000>...
+      |      ^
+.vmlinux.export.c:8577:502: warning: null character ignored [-Wnull-character]
+ 8577 |   ...<U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000>...
+      |      ^
+.vmlinux.export.c:8577:503: warning: null character ignored [-Wnull-character]
+ 8577 |   ...<U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000><U+0000>...
+      |      ^
+...
+.vmlinux.export.c:24529:2: error: embedding a #include directive within macro arguments is not supported
+ 24529 | #include <linux/module.h>
+       |  ^
+.vmlinux.export.c:8577:1: note: expansion of macro 'KSYMTAB_FUNC' requested here
+ 8577 | KSYMTAB_FUNC(_RINvXsi_NtNtCsbuTvttuFvbr_6kernel4sync3arcINtB6_9UniqueArcINtNtNtCsjYlAz7NZ3Sw_4core3mem12maybe_uninit11MaybeUninitIN...
+      | ^
+.vmlinux.export.c:8577:1: error: unterminated function-like macro invocation
+ 8577 | KSYMTAB_FUNC(_RINvXsi_NtNtCsbuTvttuFvbr_6kernel4sync3arcINtB6_9UniqueArcINtNtNtCsjYlAz7NZ3Sw_4core3mem12maybe_uninit11MaybeUninitIN...
+      | ^
+../include/linux/export-internal.h:62:9: note: macro 'KSYMTAB_FUNC' defined here
+   62 | #define KSYMTAB_FUNC(name, ns)  __KSYMTAB(name, KSYM_FUNC(name), ns)
+      |         ^
 
-It seems both devmem and io_uring zcrx at least introspect through to
-the sg-table to build NIC page pools (not accessing the memory itself,
-however). Is there a better way?
+This is fixed by [1]. Maybe we should merge that one patch separately
+and before the rest? I seem to be seeing these long symbol problems more
+often recently.
 
-Best,
-Bobby
-
->=20
-> > Signed-off-by: Bobby Eshleman <bobbyeshleman@meta.com>
-> > ---
-> >  drivers/dma-buf/udmabuf.c | 47 +++++++++++++++++++++++++++++++++++++++=
-+++-----
-> >  1 file changed, 42 insertions(+), 5 deletions(-)
-> >=20
-> > diff --git a/drivers/dma-buf/udmabuf.c b/drivers/dma-buf/udmabuf.c
-> > index 94b8ecb892bb..f28dd3788ada 100644
-> > --- a/drivers/dma-buf/udmabuf.c
-> > +++ b/drivers/dma-buf/udmabuf.c
-> > @@ -141,26 +141,63 @@ static void vunmap_udmabuf(struct dma_buf *buf, s=
-truct iosys_map *map)
-> >         vm_unmap_ram(map->vaddr, ubuf->pagecount);
-> >  }
-> >=20
-> > +/* Return the number of contiguous pages backed by the folio at @i.
-> > + * A udmabuf may map only part of a folio, or reference the same folio
-> > + * in multiple non-contiguous runs, so folio_nr_pages() can't be used.
-> > + */
-> > +static pgoff_t udmabuf_folio_nr_pages(struct udmabuf *ubuf, pgoff_t i)
-> > +{
-> > +       struct folio *f =3D ubuf->folios[i];
-> > +       pgoff_t j;
-> > +
-> > +       for (j =3D 1; i + j < ubuf->pagecount; j++) {
-> > +               if (ubuf->folios[i + j] !=3D f)
-> > +                       break;
-> > +               /* Same folio, but not a sequential offset within it. */
-> > +               if (ubuf->offsets[i + j] !=3D ubuf->offsets[i] + j * PA=
-GE_SIZE)
-> > +                       break;
-> > +       }
-> > +       return j;
-> > +}
-> > +
-> > +/* Count the contiguous folio runs in @ubuf, one sg entry per run. */
-> > +static unsigned int udmabuf_sg_nents(struct udmabuf *ubuf)
-> > +{
-> > +       unsigned int nents =3D 0;
-> > +       pgoff_t i;
-> > +
-> > +       for (i =3D 0; i < ubuf->pagecount; i +=3D udmabuf_folio_nr_page=
-s(ubuf, i))
-> > +               nents++;
-> > +       return nents;
-> > +}
-> > +
-> >  static struct sg_table *get_sg_table(struct device *dev, struct dma_bu=
-f *buf,
-> >                                      enum dma_data_direction direction)
-> >  {
-> >         struct udmabuf *ubuf =3D buf->priv;
-> > -       struct sg_table *sg;
-> >         struct scatterlist *sgl;
-> > -       unsigned int i =3D 0;
-> > +       struct sg_table *sg;
-> > +       pgoff_t i, run;
-> > +       unsigned int nents;
-> >         int ret;
-> >=20
-> > +       nents =3D udmabuf_sg_nents(ubuf);
-> > +
-> >         sg =3D kzalloc_obj(*sg);
-> >         if (!sg)
-> >                 return ERR_PTR(-ENOMEM);
-> >=20
-> > -       ret =3D sg_alloc_table(sg, ubuf->pagecount, GFP_KERNEL);
-> > +       ret =3D sg_alloc_table(sg, nents, GFP_KERNEL);
-> >         if (ret < 0)
-> >                 goto err_alloc;
-> >=20
-> > -       for_each_sg(sg->sgl, sgl, ubuf->pagecount, i)
-> > -               sg_set_folio(sgl, ubuf->folios[i], PAGE_SIZE,
-> > +       sgl =3D sg->sgl;
-> > +       for (i =3D 0; i < ubuf->pagecount; i +=3D run) {
-> > +               run =3D udmabuf_folio_nr_pages(ubuf, i);
-> > +               sg_set_folio(sgl, ubuf->folios[i], run << PAGE_SHIFT,
-> >                              ubuf->offsets[i]);
-> > +               sgl =3D sg_next(sgl);
-> > +       }
-> >=20
-> >         ret =3D dma_map_sgtable(dev, sg, direction, 0);
-> >         if (ret < 0)
-> >=20
-> > --
-> > 2.53.0-Meta
-> >=20
->=20
+[1] https://lore.kernel.org/all/20260605-nova-exports-v4-1-e948c287407c@nvidia.com/
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
