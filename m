@@ -2,40 +2,42 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 32IuNvraJmqUlwIAu9opvQ
+	id tnyXHxLbJmqalwIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 08 Jun 2026 17:08:42 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 08 Jun 2026 17:09:06 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4561B657D58
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 08 Jun 2026 17:08:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EDB10657D66
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 08 Jun 2026 17:09:05 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
 	dkim=none;
 	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=gmail.com (policy=none);
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org"
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4B7D840A03
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  8 Jun 2026 15:08:41 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 0E77840A0E
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  8 Jun 2026 15:09:05 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7D61D40990
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  8 Jun 2026 15:08:35 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B5023409E3
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  8 Jun 2026 15:08:58 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: jamestoah113@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Mon, 08 Jun 2026 15:08:35 -0000
-Message-ID: <178093131549.28971.7049744618957014753@lists.linaro.org>
+Date: Mon, 08 Jun 2026 15:08:58 -0000
+Message-ID: <178093133873.26174.9374543743697273354@lists.linaro.org>
+In-Reply-To: <a51e97bd-39dc-492f-bd7d-f137423277df@amd.com>
+References: <a51e97bd-39dc-492f-bd7d-f137423277df@amd.com>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: AJV5EUUYM7HZYGWTU6MV527GIS3P6EWF
-X-Message-ID-Hash: AJV5EUUYM7HZYGWTU6MV527GIS3P6EWF
+Message-ID-Hash: MYX5CJIHPNZQRRZXDQMAPAEEJIZWNVX4
+X-Message-ID-Hash: MYX5CJIHPNZQRRZXDQMAPAEEJIZWNVX4
 X-MailFrom: jamestoah113@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Buy/Get/Order Verified NEBOSH Certificates Online in South Korea
+Subject: [Linaro-mm-sig] Re: [PATCH net-next 2/4] udmabuf: emit one sg entry per pinned folio
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AJV5EUUYM7HZYGWTU6MV527GIS3P6EWF/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MYX5CJIHPNZQRRZXDQMAPAEEJIZWNVX4/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -46,36 +48,36 @@ Content-Transfer-Encoding: base64
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [0.69 / 15.00];
 	MID_RHS_MATCH_TO(1.00)[];
-	R_SPF_ALLOW(-0.20)[+mx];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+mx:c];
+	MIME_GOOD(-0.10)[text/plain];
 	MIME_BASE64_TEXT(0.10)[];
 	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
-	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	RCVD_TLS_LAST(0.00)[];
 	FORGED_RECIPIENTS(0.00)[m:linaro-mm-sig@lists.linaro.org,s:lists@lfdr.de];
 	FORGED_SENDER(0.00)[jamestoah113@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_NEQ_ENVFROM(0.00)[jamestoah113@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	ARC_NA(0.00)[];
 	FREEMAIL_FROM(0.00)[gmail.com];
-	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
-	RCPT_COUNT_ONE(0.00)[1];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TO_DN_NONE(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_ONE(0.00)[1];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	TO_DN_NONE(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_NEQ_ENVFROM(0.00)[jamestoah113@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	R_DKIM_NA(0.00)[];
 	FROM_NO_DN(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[.com:url,t.me:url,lists.linaro.org:mid,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp,linaro.org:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[.com:url,t.me:url,linaro.org:email,lists.linaro.org:mid,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp,neboshigc03.wixsite.com:url]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 4561B657D58
+X-Rspamd-Queue-Id: EDB10657D66
 
 KGNlcnRpZml0YXNhcEBnbWFpbC5jb20pIE5vIEV4YW06IFdoZW4geW91IGJ1eSBhIGdlbnVpbmUg
 TkVCT1NIIENlcnRpZmljYXRpb24sIHRoZXJlIHdpbGwgYmUgbm8gbmVlZCB0byB0YWtlIHRoZSBl
