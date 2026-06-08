@@ -2,539 +2,303 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id WkFjIKxKKWq4TwMAu9opvQ
+	id wk4SBMfKJmp1kgIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Jun 2026 13:29:48 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 08 Jun 2026 15:59:35 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id EE96F668CEC
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Jun 2026 13:29:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6BEBD656DE3
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 08 Jun 2026 15:59:34 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=gmail.com header.s=20251104 header.b=muvccjn0;
+	dkim=fail ("body hash did not verify") header.d=amd.com header.s=selector1 header.b=ylwqYdsA;
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
-	dmarc=fail reason="SPF not aligned (relaxed)" header.from=gmail.com (policy=none);
-	arc=reject ("signature check failed: fail, {[1] = sig:google.com:reject}")
+	dmarc=fail reason="SPF not aligned (relaxed)" header.from=amd.com (policy=quarantine);
+	arc=reject ("signature check failed: fail, {[1] = sig:microsoft.com:reject}")
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E778540A43
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Jun 2026 11:29:46 +0000 (UTC)
-Received: from mail-ot1-f52.google.com (mail-ot1-f52.google.com [209.85.210.52])
-	by lists.linaro.org (Postfix) with ESMTPS id 5E0B84098D
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  8 Jun 2026 13:55:48 +0000 (UTC)
-Received: by mail-ot1-f52.google.com with SMTP id 46e09a7af769-7e6cdd78fe6so2247607a34.2
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 08 Jun 2026 06:55:48 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780926948; cv=none;
-        d=google.com; s=arc-20240605;
-        b=D3vHKZSjGw3isr4X4dw4+wHNOUIygWf/iYrBsMgU6XdlXvZ90TvzeqeA+flGxIAUKt
-         JWUIz98f90Z6LYR0e+OARev3wLE3JiOoFdHk1F77+vriRSiEALF7qaHBHx0B0zBAOhwY
-         h4ofKxEjdS+G9Fs3acbq1Rma0SZvZRYi9qjG83vb85mOptC4EPxBYOV5t+D//2QtHoXg
-         L8JvwVgMhJtiAZREX4Fx9wUrfg9r7N9FruJYnH5Mt98wpQzgCUhoB+3M4YUsvuIj5Mr8
-         ydkTULUpM2cpxtvrMVOLLqMvhMRkxQeELzlr4zOvv/orq/fWQoJ15x/BGVcLW8BTD6b4
-         JOYA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=kUL9dbW3zc3Xi3+/vcg9ikmrLca85ynlSpRuCnmgz6k=;
-        fh=zFgzJjtFsCDORA5QEY4YdUdvY41MB7CHhIzcEVovGYI=;
-        b=F2/0jyeXhjXhDK5xoS5+Fg9OQhM8Gu4EuFECeUKxv9+uh+BWpPv87syTVmJ5JHXc1S
-         gxJOD6xxwRtn+heyldmUY/tW+LnSyXBX+OrgKEVnrYzJPTLDZxeBVh82qr2oImYc8zL7
-         MIKKGaxeR7fEw7sewnh7HYtymNKT2xxbba/BGwp6i73vkYfWrLr4v5lgoJb9A1rAQ1Iu
-         3i2swTTv8ktxUOvn3glSIi/gILmLFAQU0Y+QlPqqsx3XDoO57yhtcGKO4VEMs5CxoBiR
-         euqkFVxP1FrjYX7CtJD8JTU1wjyC7Pza9ELz8c7xapyzFlRA1rEP/BQ521cpHTfwG7Td
-         TLMQ==;
-        darn=lists.linaro.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1780926948; x=1781531748; darn=lists.linaro.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=kUL9dbW3zc3Xi3+/vcg9ikmrLca85ynlSpRuCnmgz6k=;
-        b=muvccjn095+5hJy9P6rCkAtertiF73ZoKY+q1HfnwmpbiENaCgOGBliOwlS6ocqRaX
-         HwoVYw7fT79XxHWPVaS0eTZZTXGdciADlNRt4bikxfPjRR84VcFEnIgNnMV6r41hBvcQ
-         IZ8ij/z1BYz1v3mO9yd+LZwAdyt9d5U9AYWXnDyW5oecRosVVmXvKnN10nMi2v4pmCVs
-         N6NoOOscrsq5laHyN1K8QzQ9+QRxA3x5+1ryeeOQpnqNGx8hzJy+Y1sBXo2EZwXn0gj9
-         ISW5/d7pkNslAW7Sid3N4aJR2UBUMWfWS4PEAHkahp1Vae5RDfHePUeBc887M1YpXlkz
-         HLsA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780926948; x=1781531748;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=kUL9dbW3zc3Xi3+/vcg9ikmrLca85ynlSpRuCnmgz6k=;
-        b=lbs1VTIEFY48JVfaxi3ZgJdTSam8CuexeQYz18afJL0tH1DlMP1y/4VYZjY2n1coPN
-         CaxWmq3lIpTNAtZ+sPTvzeZ+D6Eu7jSL+V7FlPTYz7mKs5i7g+mF2rKzG+ftt5Rdav13
-         NKFVvqOevppMycAZWb78I9YiKQnqiL6/Otd3Hy9rJZLmSEzuyDC9bCVb47bJEAmkHGac
-         TYs5gCBjEV6LDR8jeMfeXjSgcNqEu8QE/52brk2XVYIq2LBTQXE9xVcn8CTFA4t88PGf
-         RBzlozd5yDYdZLvAgu5x4zRJuEfRIQZslZwPkL0pfoNoxCyhtkcGsXv9ECv3qVzrUUdl
-         qWyw==
-X-Forwarded-Encrypted: i=1; AFNElJ8CrHjAhIeTKRcpvNkno9jhl85DbVp/ZoH+TMPb3cJmiV9JCc+LsBV4St0b1APNuUlYhtMdGp5wXpLmYAU4@lists.linaro.org
-X-Gm-Message-State: AOJu0YzF16vgNB6MTmThf9RKOAnTzmvuVQ1takFi7IStzurJ+v9Aaxgg
-	3J6aJafBr7nqm9XFqtZqVEg4TEzDy/EU+YbRsNDaQNN9wWwDyS2/vZEYuxwTau3NpGV6NkTWR0j
-	LACmYS4xiv5It0p0w7M7H4uw2RyNuy3E=
-X-Gm-Gg: Acq92OHz9Ot7qGoFNn8EJJ0L4kIC7ah4oHi+JoFuKYbURxXX0rqfk0qogLRH5Y+pJRV
-	amsbgdNXH71RGpYSxsZCVKpTiEHJF2zMFM7OToZWnx1rnPbkgYLxv81oxv9rYrzSyL1SW8kFYl2
-	jbK2UXQ7TMmN86c0bEwr28EB1pMTF6YBEpGCq/VghFD+8s1dmUROJINFLKlxHrPvROhARhs+xEo
-	ptYN/w+P0Q5rLEobeCSAI3UFKWA+msFbt/2ED8J5WyweLCaVQRONW3VYmogwZ27GO3od20g2PYd
-	Xju0h6EU6ThrQFCW2A==
-X-Received: by 2002:a05:6830:6a96:b0:7d7:fb03:f6ba with SMTP id
- 46e09a7af769-7e70ca51cc9mr9845013a34.21.1780926947408; Mon, 08 Jun 2026
- 06:55:47 -0700 (PDT)
-MIME-Version: 1.0
+	by lists.linaro.org (Postfix) with ESMTP id 60206409AC
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  8 Jun 2026 13:59:33 +0000 (UTC)
+Received: from BL0PR03CU003.outbound.protection.outlook.com (mail-eastusazon11012058.outbound.protection.outlook.com [52.101.53.58])
+	by lists.linaro.org (Postfix) with ESMTPS id 46C8940990
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  8 Jun 2026 13:59:23 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ep+UUQAuaqq2VCW4LUTEZ+jlyWORGDnKrROma4RaV4qy7i+cMHky/CeqbqjhCmn43I8GLNe8uqSI7YQGUN0TwTm4UZYxLOiVb28IaGH3VTIduLirc/hUFQ/ehLV70NaJAT0661iA2g3/fjJGa5GIqPL2j+SL6RB+i+SBF1aW9gfjxAznxstelX9Z26uLgTQEObQnFPPbf5MWS42nNnHqzdPCS+2R3ffsojGsq48PJMzj25Ge0BbCPX9FAIlIaUQU3RNXAkxrHEU/UE1ySqotVSpl+P/IMP0d+qQI+hV+qvOdcjrS8ti96Alo/eEPmJVUzB5HZJoK8T83lo/V0xP0Tg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=f9NUUiuF5j2bb81QIuz36SJ/RBj8+AGOvNYmi59zTw4=;
+ b=PimhVdxJfJWGuZBqADoZ5LF+j8AB0QSlfICt5SzoEqD35p7gPP1/O3VJvP6dwsfThg9aN3o1QMZy8PEsTa1tb4/vY0QzJll8w3QnAoyBaDUGeqGgxkeRjpbUy5s5hjkutJ3UYmzoRSnsK+KMaCTcBEM8MSVAsLxKffL/4MtfMlRPb9OwQxcIf2O0eel1u9ya9B/5H5bWqhRFw6AK/dYim5PxB2Ovl31nSa4Of823hQF/1AyS/99sDMcp6eXMJpCavOcl3JsOxhPluh83gNPvJ3M7+xB4TyAdtWwz879N/SkccSZPjd5KnbpDWOCCS6v8JrbaR1dTEJxC0KG7GFjMPQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=f9NUUiuF5j2bb81QIuz36SJ/RBj8+AGOvNYmi59zTw4=;
+ b=ylwqYdsAmJIkEdwueIDzqIm7KF39CcdQoCe5lfrfJqRUvOXBIun2zwXdkZsMazoJ7a2bbqYHSi6+wu23kOnGValkjok7dd0tyha/C2+Ai23zsuSQRqmKR1adf/OUxis7YqERT76Qr4VuXTxOn7kK+KskrYzgM/OglCYX6wIhNVw=
+Received: from PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
+ by SJ0PR12MB6878.namprd12.prod.outlook.com (2603:10b6:a03:483::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.13; Mon, 8 Jun 2026
+ 13:59:17 +0000
+Received: from PH7PR12MB5685.namprd12.prod.outlook.com
+ ([fe80::ce69:cfae:774d:a65c]) by PH7PR12MB5685.namprd12.prod.outlook.com
+ ([fe80::ce69:cfae:774d:a65c%5]) with mapi id 15.21.0092.006; Mon, 8 Jun 2026
+ 13:59:17 +0000
+Message-ID: <a51e97bd-39dc-492f-bd7d-f137423277df@amd.com>
+Date: Mon, 8 Jun 2026 15:59:04 +0200
+User-Agent: Mozilla Thunderbird
+To: Bobby Eshleman <bobbyeshleman@gmail.com>
 References: <20260603-tcpdm-large-niovs-v1-0-f37a4ac6726c@meta.com>
- <20260603-tcpdm-large-niovs-v1-2-f37a4ac6726c@meta.com> <bdce2488-fe77-4f36-9ed6-dd2c785fa7c1@amd.com>
- <aiMY8CpckM8Jav0g@devvm29614.prn0.facebook.com> <0c86f5d3-b5e9-4cac-aa9d-30c5c8ecca66@amd.com>
-In-Reply-To: <0c86f5d3-b5e9-4cac-aa9d-30c5c8ecca66@amd.com>
-From: Bobby Eshleman <bobbyeshleman@gmail.com>
-Date: Mon, 8 Jun 2026 06:55:36 -0700
-X-Gm-Features: AVVi8CfreY7W3cGrHvbSozZ57SJwnE9qM8Mfsdb2X2IWGStP7CJ3YP7SRhnUHfU
-Message-ID: <CAKB00G3opAoAYswsq2uz0Q6jgku8u4NthKOzCbSumZ0qK7QxcQ@mail.gmail.com>
-To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+ <20260603-tcpdm-large-niovs-v1-2-f37a4ac6726c@meta.com>
+ <bdce2488-fe77-4f36-9ed6-dd2c785fa7c1@amd.com>
+ <aiMY8CpckM8Jav0g@devvm29614.prn0.facebook.com>
+ <0c86f5d3-b5e9-4cac-aa9d-30c5c8ecca66@amd.com>
+ <CAKB00G3opAoAYswsq2uz0Q6jgku8u4NthKOzCbSumZ0qK7QxcQ@mail.gmail.com>
+Content-Language: en-US
+From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+In-Reply-To: <CAKB00G3opAoAYswsq2uz0Q6jgku8u4NthKOzCbSumZ0qK7QxcQ@mail.gmail.com>
+X-ClientProxiedBy: BLAPR03CA0145.namprd03.prod.outlook.com
+ (2603:10b6:208:32e::30) To PH7PR12MB5685.namprd12.prod.outlook.com
+ (2603:10b6:510:13c::22)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|SJ0PR12MB6878:EE_
+X-MS-Office365-Filtering-Correlation-Id: b38fb79d-df85-40fa-3e40-08dec566214a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|1800799024|366016|7416014|376014|10063799003|22082099003|18002099003|6133799003|4143699003|11063799006|56012099006;
+X-Microsoft-Antispam-Message-Info: 
+	sowkkH5VJNgpxW0cbgb7TBleErXgSgCN+YosuSKXQZi2tW5oYouxuvGqXxqCg+tfv3Md81Nvob6w1CQrlbOIQmUxp8QiQrF9+yET3ehts3DjCLXe4nSur/YAJy6UJMhFWBoZLfVu2UZTAildwfjEhNPNOzNj0UADq4KqImVVzjLV3xHO5XqQovwEQr36nGlHw+TVSpyRGyMAaNUXCRvXGhl2pdZCvd+sm0kHJNlYfnAbbrX53/qVXhLU9mxWj+HNJmM1yfndtAV/eLstiTMYl786U2WuGWLsP5xe2Y4rOhRgRf4Vfuk1kZ5ED+PQBtt3tZq876JhI6lafz5a1wIr40sOBIsF+23w3cjRAwJHpayBSaDNp6DFrXwKk9AB83YLUx+tfUsSZ6ta1Hn8/RiLUA28i6kuIYhfjeXo5NaXAceRZ8BVfOJdCr/T9aoUdPzqzz79Bzcd57PC0G57Df//dACXThWXVHKKlYkLj2TNem43YPTnD6of9ehD6MCOs3gVSL/r1HETjjZwLwXuqK+BqPlPRu2UqrZ7R/3LYXUlbRnqi5aYFCztE0eH/UhX5JxLMlrulrdXf9Ojuxvv/y7VwsOR+D/jdjcYy4a0sRJUQhIYJVuB31aXOpP/3j4DymtGCSPx/ZzbhSgdxW2EDeJirb1b9OsKlaB83KAhn+IcHkQZSgs78Syiqa20FYJJ3Rpa
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB5685.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(7416014)(376014)(10063799003)(22082099003)(18002099003)(6133799003)(4143699003)(11063799006)(56012099006);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?MDNLRGZCMThncjlIbHkrQjRldXFoMFpENVRyU1NkdjgzaSt0L3RtMXlMdU5W?=
+ =?utf-8?B?SWdsL0NkYk9Hb1VNZWpQenFHdEJpR0ZwUHN0MGg0Tml5Q0dESi9JVkVteW9v?=
+ =?utf-8?B?OTFPZ2I5VXkrdHNpQXdiaUQzOTlaOVNZS2FERWw5eDRQUzJLVVp1dy9CaHhJ?=
+ =?utf-8?B?UTVFSWRRWWhxYUVWY0dGQndDTVJTaktTb3pyUmFqVTlORGFoaEo4S1lERnF4?=
+ =?utf-8?B?L084OCtNeTdqSW43N2gzZXF1VDdUbEtJNUhkY0NCWEFwbENPNitleW9OQUdU?=
+ =?utf-8?B?N1o0VmhpWW5BU0RIQ1ZrbktmYkNNWWZhWmwzVFRVRzFjYnhIOHlPdDRQaUE0?=
+ =?utf-8?B?aEN1R3EwQlloaDIwQzE0MHdiczhsODFOMmYyVmpSMXNrM0pZdm5oT3crSVlU?=
+ =?utf-8?B?U2tWY0RmbkdQYmFRczhPaHVxRmE1UysvSUNPZEZyU3B4YzZpejJON1ppM1RG?=
+ =?utf-8?B?TUYyV1pTejFUSlBld0t0aXdWSjcybldPTnBEb3l2QXE0aEdFazdPVDA5dmd5?=
+ =?utf-8?B?bXFLcndLOU9maXpTWkFGS216MEhJc3ZSdG90ejhSU2U4WmVSdUs3M21oMzRo?=
+ =?utf-8?B?Q1ErZG83WlFadUNQYXIwUmx0Z0RjSTBDZnIwYUdEdncrRzcxdDhaVFFrVlRR?=
+ =?utf-8?B?elhJQUc5U09BUTNvcUt3disrSWFTQU54R0liYmxSdGpEM0tKeE1FSWVwR1hH?=
+ =?utf-8?B?ai8zUml1YS9rOWoyeExxbUFWREx2ckZHbEdMTmZwZ3NudnZOMlZIeFFwSkhh?=
+ =?utf-8?B?OE9FNlE3MStYSHdWblk2dy84Q3FtQlorOFJ0aGVaZitSekNzbkl3VmE0SEdr?=
+ =?utf-8?B?L2R4VHhEKzIvYmRyVFFzZnNmUHZkWERtL2ZTcE8rOVcyRGlpQTRya0h5ZUcr?=
+ =?utf-8?B?akRFODhud1I2OUF2bGx4ZHgwVFhERTNmeU4vSGMwYU9Da2xtMmpJeEJPWkNG?=
+ =?utf-8?B?VmFBZEhjaGRObWJWcVZ4S3IrcVBPbERsT2ZldVR0bFNiS1pRQm8wUlpFbHhj?=
+ =?utf-8?B?OHRDbXdETElCQ1I3bjhXaFVmbnhmbHU5dzFBa0N3ckR5dVNYOTNDdmpkcHNh?=
+ =?utf-8?B?QUtJditLc284QVBRRjkxU2k2SVcvalh4d2MzZENTdVd4WHQxYnV5ckVMd1BZ?=
+ =?utf-8?B?V3RxSFdZT3NhRGVrNno5RkR3NnAzU3FWQTlCVC9TdS9VWEk2eGxjVmRaOXBw?=
+ =?utf-8?B?QmJiWkd5ZlhkL2I4bmgvd045Y3JmSkhYUGF1U0ZDT0VibDlKU1IrK2tTVFZo?=
+ =?utf-8?B?aVdqZXZhck9wSTNHTlU3Kzd2OUE2RDNlN2xhYXpEWUdESExRK2FpK3RqNHND?=
+ =?utf-8?B?Vi9XRHc5MURzdzNoR09xdW1mTDlBWnBja0RUczRVN2JoaDFKUkxqT2gvWkVs?=
+ =?utf-8?B?eHVxZEYrL05CbVVicG5reklIVzhlZWE0UDBsOUJhT2dZMHZUOXpOOU0rU2V5?=
+ =?utf-8?B?RURWNCtGbWprUkpHSWVIeHhiREpobHlVeTA4UkQxYmEvWk5PaTZ6c25TeXhT?=
+ =?utf-8?B?a01YKzlWNG5xR2h0SXBBVkhtVWhYZ3lyQWU1YkU5WmY3T1FLeEVxQ0V4ejNt?=
+ =?utf-8?B?QXA3dnJ2c0s3Y3ltRmJhbERGeE1zWkM3Vm5YbFYzRkducmN6OWlub2EvalRO?=
+ =?utf-8?B?by81c2dZUEJhaHZOb2Y3WlA4Q1EyeFRhbUdUOWlsdkk1VzVkVG8xS0tObloz?=
+ =?utf-8?B?NG1weDlMZytnZHdNaDFqTEU0c3kzMTZmdDVsWGZpMzdlam12Z3llczQzNXAw?=
+ =?utf-8?B?a0V3T2NaMWE3WWVWSmZKdkM1TU0wYncyYTJIaFhaUE9nN2lGZXlvWmtGWUt1?=
+ =?utf-8?B?NU9iRlgrUytrVWI3NmxRckQvTVJHNGpMTllzZWV3Rmd2ZlJEKzFSY3Q5TVY3?=
+ =?utf-8?B?UHhJQXkzakFPZENvU0svSE53OG5nYnhGVE52eTRkU2FYdnVPOVlQbUh4UnBh?=
+ =?utf-8?B?ODFxUmw3MGJpYXlGT1l3ZXQ5TjlMK3lxNWZWTEx6ZzY0WUE2VFordnczZHha?=
+ =?utf-8?B?dU5qbTVaVGNjUFJOWGpGWldHK0RSL1dEb0VINFY4ZEpSZkxuOTBSQzArQkR4?=
+ =?utf-8?B?WkhQZGNOZW54VHBWMXAvb2tybW9kcG51NnpLOWxxL0xYeWw2dXpMamV3TmxB?=
+ =?utf-8?B?TUl5K2g1SGRBcnhMNXExWG4vblhWbFBKRHpMTzdXSlh6OHZpOElPalIralRO?=
+ =?utf-8?B?WXk3Y05ZZzVOYkYvMEMxMFY2Q3ZidzA1aVN6dlN1UUxkdjVjaUl2dXBDUGpD?=
+ =?utf-8?B?bTdHMy92VEh1V2l4MEdvYnAzOThwOE8xN0wwKzJKZVVrNU9kMEMvb2VuUlkr?=
+ =?utf-8?Q?PdsqcNFJ0NuxrrF4q5?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b38fb79d-df85-40fa-3e40-08dec566214a
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5685.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jun 2026 13:59:17.2139
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: LayaBdD/cYOWVZImWkl8CxH4yZCvqOtvYxYU4HMkb9l2Xtpo9PMeB7WUm8lajznT
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB6878
 X-Spamd-Bar: -----
-X-MailFrom: bobbyeshleman@gmail.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: S7ZQWQP2DXXIXVI5V7DO4Q5EYZSVKYPV
-X-Message-ID-Hash: S7ZQWQP2DXXIXVI5V7DO4Q5EYZSVKYPV
-X-Mailman-Approved-At: Wed, 10 Jun 2026 11:27:22 +0000
+Message-ID-Hash: 7GN6SRSI3AC54R5ETVO5MRMAVRIFANUS
+X-Message-ID-Hash: 7GN6SRSI3AC54R5ETVO5MRMAVRIFANUS
+X-MailFrom: Christian.Koenig@amd.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: Donald Hunter <donald.hunter@gmail.com>, Jakub Kicinski <kuba@kernel.org>, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, Andrew Lunn <andrew+netdev@lunn.ch>, Gerd Hoffmann <kraxel@redhat.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, Sumit Semwal <sumit.semwal@linaro.org>, Shuah Khan <shuah@kernel.org>, netdev@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-kselftest@vger.kernel.org, sdf@fomichev.me, razor@blackwall.org, daniel@iogearbox.net, almasrymina@google.com, matttbe@kernel.org, skhawaja@google.com, dw@davidwei.uk, Bobby Eshleman <bobbyeshleman@meta.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH net-next 2/4] udmabuf: emit one sg entry per pinned folio
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/S7ZQWQP2DXXIXVI5V7DO4Q5EYZSVKYPV/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7GN6SRSI3AC54R5ETVO5MRMAVRIFANUS/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============7498672852591821804=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [4.09 / 15.00];
+X-Spamd-Result: default: False [4.59 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[amd.com : SPF not aligned (relaxed),quarantine];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:google.com:reject}];
-	DATE_IN_PAST(1.00)[45];
-	R_DKIM_REJECT(1.00)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
+	R_DKIM_REJECT(1.00)[amd.com:s=selector1];
 	MAILLIST(-0.20)[mailman];
-	MIME_GOOD(-0.10)[multipart/mixed,multipart/alternative,text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed),none];
+	R_SPF_ALLOW(-0.20)[+mx];
+	MIME_GOOD(-0.10)[text/plain];
+	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:bobbyeshleman@gmail.com,m:donald.hunter@gmail.com,m:kuba@kernel.org,m:davem@davemloft.net,m:edumazet@google.com,m:pabeni@redhat.com,m:horms@kernel.org,m:andrew+netdev@lunn.ch,m:kraxel@redhat.com,m:vivek.kasireddy@intel.com,m:sumit.semwal@linaro.org,m:shuah@kernel.org,m:netdev@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linux-media@vger.kernel.org,m:linaro-mm-sig@lists.linaro.org,m:linux-kselftest@vger.kernel.org,m:sdf@fomichev.me,m:razor@blackwall.org,m:daniel@iogearbox.net,m:almasrymina@google.com,m:matttbe@kernel.org,m:skhawaja@google.com,m:dw@davidwei.uk,m:bobbyeshleman@meta.com,m:donaldhunter@gmail.com,m:andrew@lunn.ch,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:christian.koenig@amd.com,m:donald.hunter@gmail.com,m:kuba@kernel.org,m:davem@davemloft.net,m:edumazet@google.com,m:pabeni@redhat.com,m:horms@kernel.org,m:andrew+netdev@lunn.ch,m:kraxel@redhat.com,m:vivek.kasireddy@intel.com,m:sumit.semwal@linaro.org,m:shuah@kernel.org,m:netdev@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linux-media@vger.kernel.org,m:linaro-mm-sig@lists.linaro.org,m:linux-kselftest@vger.kernel.org,m:sdf@fomichev.me,m:razor@blackwall.org,m:daniel@iogearbox.net,m:almasrymina@google.com,m:matttbe@kernel.org,m:skhawaja@google.com,m:dw@davidwei.uk,m:bobbyeshleman@meta.com,m:donaldhunter@gmail.com,m:andrew@lunn.ch,s:lists@lfdr.de];
-	RCVD_COUNT_THREE(0.00)[3];
-	FORGED_SENDER(0.00)[bobbyeshleman@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	RCVD_COUNT_THREE(0.00)[4];
 	GREYLIST(0.00)[pass,meta];
+	FORGED_SENDER(0.00)[christian.koenig@amd.com,linaro-mm-sig-bounces@lists.linaro.org];
 	RCPT_COUNT_TWELVE(0.00)[26];
+	FREEMAIL_TO(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+,1:+,2:+,3:~,4:+];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	FROM_HAS_DN(0.00)[];
 	FREEMAIL_CC(0.00)[gmail.com,kernel.org,davemloft.net,google.com,redhat.com,lunn.ch,intel.com,linaro.org,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,fomichev.me,blackwall.org,iogearbox.net,davidwei.uk,meta.com];
-	DKIM_TRACE(0.00)[gmail.com:-];
 	ALIAS_RESOLVED(0.00)[];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[bobbyeshleman@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_NEQ_ENVFROM(0.00)[christian.koenig@amd.com,linaro-mm-sig-bounces@lists.linaro.org];
 	TO_DN_SOME(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,netdev];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp,linaro.org:email,mail.gmail.com:mid,meta.com:email]
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	TAGGED_RCPT(0.00)[linaro-mm-sig,netdev];
+	DKIM_TRACE(0.00)[amd.com:-];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[meta.com:email,amd.com:email,amd.com:mid,amd.com:from_mime,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: EE96F668CEC
+X-Rspamd-Queue-Id: 6BEBD656DE3
 
---===============7498672852591821804==
-Content-Type: multipart/alternative; boundary="000000000000123d790653be5ef3"
-
---000000000000123d790653be5ef3
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Sun, Jun 7, 2026 at 11:42=E2=80=AFPM Christian K=C3=B6nig <christian.koe=
-nig@amd.com>
-wrote:
-
-> On 6/5/26 20:44, Bobby Eshleman wrote:
-> > On Fri, Jun 05, 2026 at 11:30:07AM +0200, Christian K=C3=B6nig wrote:
-> >> On 6/4/26 02:42, Bobby Eshleman wrote:
-> >>> From: Bobby Eshleman <bobbyeshleman@meta.com>
-> >>>
-> >>> get_sg_table() emitted one PAGE_SIZE sg entry per page even when the
-> >>> underlying folio was larger.
-> >>>
-> >>> Instead, walk folios[] and emit one sg entry per folio. When folios
-> >>> represent large pages (as is for MFD_HUGETLB), each sg entry is a lar=
-ge
-> >>> page. Normal PAGE_SIZE sg tables are unchanged.
-> >>>
-> >>> Required by net/core/devmem to support rx-buf-size > PAGE_SIZE with
-> >>> udmabuf.
-> >>
-> >> That doesn't explain why this is required.
-> >
-> > Sure, can definitely add. Devmem currently requires dmabuf sg entries t=
-o
-> > be length and size aligned when it allocates niovs for NIC page pools.
-> > Though udmabuf is not violating any dmabuf contract by emitting
-> > PAGE_SIZE entries and the above restriction is probably more a
-> > shortfalling of devmem, by emitting a single entry per folio this patch
-> > allows udmabuf to be used by devmem for large pages.
-> >
-> >>
-> >> Please note that accessing the pages/folio of an sg-table returned by
-> DMA-buf is illegal and strictly forbidden!
-> >>
-> >> Regards,
-> >> Christian.
-> >
-> > It seems both devmem and io_uring zcrx at least introspect through to
-> > the sg-table to build NIC page pools (not accessing the memory itself,
-> > however). Is there a better way?
->
-> That's an absolute NO-GO! We need to stop that immediately.
->
-> Touching the underlying struct page of an DMA-buf exported sg-table is
-> strictly forbidden.
->
-> We even have code to wrap the sg_table and hide the struct pages on debug
-> builds to catch those issues, see function dma_buf_wrap_sg_table().
->
-> My last status is that the NIC page pools are build directly from the DMA
-> addresses exposed by the sg_table.
->
-> Was there any change I'm not aware of?
->
-> Regards,
-> Christian.
-
-
-Oh no change, your mental model is still current.
-They just go through each sg and use sg_dma_address() on each.
-
-Best,
-Bobby
-
-
-> >
-> > Best,
-> > Bobby
-> >
-> >>
-> >>> Signed-off-by: Bobby Eshleman <bobbyeshleman@meta.com>
-> >>> ---
-> >>>  drivers/dma-buf/udmabuf.c | 47
-> ++++++++++++++++++++++++++++++++++++++++++-----
-> >>>  1 file changed, 42 insertions(+), 5 deletions(-)
-> >>>
-> >>> diff --git a/drivers/dma-buf/udmabuf.c b/drivers/dma-buf/udmabuf.c
-> >>> index 94b8ecb892bb..f28dd3788ada 100644
-> >>> --- a/drivers/dma-buf/udmabuf.c
-> >>> +++ b/drivers/dma-buf/udmabuf.c
-> >>> @@ -141,26 +141,63 @@ static void vunmap_udmabuf(struct dma_buf *buf,
-> struct iosys_map *map)
-> >>>         vm_unmap_ram(map->vaddr, ubuf->pagecount);
-> >>>  }
-> >>>
-> >>> +/* Return the number of contiguous pages backed by the folio at @i.
-> >>> + * A udmabuf may map only part of a folio, or reference the same fol=
-io
-> >>> + * in multiple non-contiguous runs, so folio_nr_pages() can't be use=
-d.
-> >>> + */
-> >>> +static pgoff_t udmabuf_folio_nr_pages(struct udmabuf *ubuf, pgoff_t =
-i)
-> >>> +{
-> >>> +       struct folio *f =3D ubuf->folios[i];
-> >>> +       pgoff_t j;
-> >>> +
-> >>> +       for (j =3D 1; i + j < ubuf->pagecount; j++) {
-> >>> +               if (ubuf->folios[i + j] !=3D f)
-> >>> +                       break;
-> >>> +               /* Same folio, but not a sequential offset within it.
-> */
-> >>> +               if (ubuf->offsets[i + j] !=3D ubuf->offsets[i] + j *
-> PAGE_SIZE)
-> >>> +                       break;
-> >>> +       }
-> >>> +       return j;
-> >>> +}
-> >>> +
-> >>> +/* Count the contiguous folio runs in @ubuf, one sg entry per run. *=
-/
-> >>> +static unsigned int udmabuf_sg_nents(struct udmabuf *ubuf)
-> >>> +{
-> >>> +       unsigned int nents =3D 0;
-> >>> +       pgoff_t i;
-> >>> +
-> >>> +       for (i =3D 0; i < ubuf->pagecount; i +=3D
-> udmabuf_folio_nr_pages(ubuf, i))
-> >>> +               nents++;
-> >>> +       return nents;
-> >>> +}
-> >>> +
-> >>>  static struct sg_table *get_sg_table(struct device *dev, struct
-> dma_buf *buf,
-> >>>                                      enum dma_data_direction directio=
-n)
-> >>>  {
-> >>>         struct udmabuf *ubuf =3D buf->priv;
-> >>> -       struct sg_table *sg;
-> >>>         struct scatterlist *sgl;
-> >>> -       unsigned int i =3D 0;
-> >>> +       struct sg_table *sg;
-> >>> +       pgoff_t i, run;
-> >>> +       unsigned int nents;
-> >>>         int ret;
-> >>>
-> >>> +       nents =3D udmabuf_sg_nents(ubuf);
-> >>> +
-> >>>         sg =3D kzalloc_obj(*sg);
-> >>>         if (!sg)
-> >>>                 return ERR_PTR(-ENOMEM);
-> >>>
-> >>> -       ret =3D sg_alloc_table(sg, ubuf->pagecount, GFP_KERNEL);
-> >>> +       ret =3D sg_alloc_table(sg, nents, GFP_KERNEL);
-> >>>         if (ret < 0)
-> >>>                 goto err_alloc;
-> >>>
-> >>> -       for_each_sg(sg->sgl, sgl, ubuf->pagecount, i)
-> >>> -               sg_set_folio(sgl, ubuf->folios[i], PAGE_SIZE,
-> >>> +       sgl =3D sg->sgl;
-> >>> +       for (i =3D 0; i < ubuf->pagecount; i +=3D run) {
-> >>> +               run =3D udmabuf_folio_nr_pages(ubuf, i);
-> >>> +               sg_set_folio(sgl, ubuf->folios[i], run << PAGE_SHIFT,
-> >>>                              ubuf->offsets[i]);
-> >>> +               sgl =3D sg_next(sgl);
-> >>> +       }
-> >>>
-> >>>         ret =3D dma_map_sgtable(dev, sg, direction, 0);
-> >>>         if (ret < 0)
-> >>>
-> >>> --
-> >>> 2.53.0-Meta
-> >>>
-> >>
->
->
-
---000000000000123d790653be5ef3
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" =
-class=3D"gmail_attr">On Sun, Jun 7, 2026 at 11:42=E2=80=AFPM Christian K=C3=
-=B6nig &lt;<a href=3D"mailto:christian.koenig@amd.com">christian.koenig@amd=
-.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"mar=
-gin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1=
-ex" dir=3D"auto">On 6/5/26 20:44, Bobby Eshleman wrote:<br>
-&gt; On Fri, Jun 05, 2026 at 11:30:07AM +0200, Christian K=C3=B6nig wrote:<=
-br>
-&gt;&gt; On 6/4/26 02:42, Bobby Eshleman wrote:<br>
-&gt;&gt;&gt; From: Bobby Eshleman &lt;<a href=3D"mailto:bobbyeshleman@meta.=
-com" target=3D"_blank">bobbyeshleman@meta.com</a>&gt;<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; get_sg_table() emitted one PAGE_SIZE sg entry per page even wh=
-en the<br>
-&gt;&gt;&gt; underlying folio was larger.<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; Instead, walk folios[] and emit one sg entry per folio. When f=
-olios<br>
-&gt;&gt;&gt; represent large pages (as is for MFD_HUGETLB), each sg entry i=
-s a large<br>
-&gt;&gt;&gt; page. Normal PAGE_SIZE sg tables are unchanged.<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; Required by net/core/devmem to support rx-buf-size &gt; PAGE_S=
-IZE with<br>
-&gt;&gt;&gt; udmabuf.<br>
-&gt;&gt;<br>
-&gt;&gt; That doesn&#39;t explain why this is required.<br>
-&gt; <br>
-&gt; Sure, can definitely add. Devmem currently requires dmabuf sg entries =
-to<br>
-&gt; be length and size aligned when it allocates niovs for NIC page pools.=
-<br>
-&gt; Though udmabuf is not violating any dmabuf contract by emitting<br>
-&gt; PAGE_SIZE entries and the above restriction is probably more a<br>
-&gt; shortfalling of devmem, by emitting a single entry per folio this patc=
-h<br>
-&gt; allows udmabuf to be used by devmem for large pages.<br>
-&gt; <br>
-&gt;&gt;<br>
-&gt;&gt; Please note that accessing the pages/folio of an sg-table returned=
- by DMA-buf is illegal and strictly forbidden!<br>
-&gt;&gt;<br>
-&gt;&gt; Regards,<br>
-&gt;&gt; Christian.<br>
-&gt; <br>
-&gt; It seems both devmem and io_uring zcrx at least introspect through to<=
-br>
-&gt; the sg-table to build NIC page pools (not accessing the memory itself,=
-<br>
-&gt; however). Is there a better way?<br>
-<br>
-That&#39;s an absolute NO-GO! We need to stop that immediately.<br>
-<br>
-Touching the underlying struct page of an DMA-buf exported sg-table is stri=
-ctly forbidden.<br>
-<br>
-We even have code to wrap the sg_table and hide the struct pages on debug b=
-uilds to catch those issues, see function dma_buf_wrap_sg_table().<br>
-<br>
-My last status is that the NIC page pools are build directly from the DMA a=
-ddresses exposed by the sg_table.<br>
-<br>
-Was there any change I&#39;m not aware of?<br>
-<br>
-Regards,<br>
-Christian.</blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">Oh no =
-change, your mental model is still current.</div><div dir=3D"auto">They jus=
-t go through each sg and use sg_dma_address() on each.</div><div dir=3D"aut=
-o"><br></div><div dir=3D"auto">Best,</div><div dir=3D"auto">Bobby</div><div=
- dir=3D"auto"><br></div><blockquote class=3D"gmail_quote" style=3D"margin:0=
-px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><=
-br>
-&gt; <br>
-&gt; Best,<br>
-&gt; Bobby<br>
-&gt; <br>
-&gt;&gt;<br>
-&gt;&gt;&gt; Signed-off-by: Bobby Eshleman &lt;<a href=3D"mailto:bobbyeshle=
-man@meta.com" target=3D"_blank">bobbyeshleman@meta.com</a>&gt;<br>
-&gt;&gt;&gt; ---<br>
-&gt;&gt;&gt;=C2=A0 drivers/dma-buf/udmabuf.c | 47 +++++++++++++++++++++++++=
-+++++++++++++++++-----<br>
-&gt;&gt;&gt;=C2=A0 1 file changed, 42 insertions(+), 5 deletions(-)<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; diff --git a/drivers/dma-buf/udmabuf.c b/drivers/dma-buf/udmab=
-uf.c<br>
-&gt;&gt;&gt; index 94b8ecb892bb..f28dd3788ada 100644<br>
-&gt;&gt;&gt; --- a/drivers/dma-buf/udmabuf.c<br>
-&gt;&gt;&gt; +++ b/drivers/dma-buf/udmabuf.c<br>
-&gt;&gt;&gt; @@ -141,26 +141,63 @@ static void vunmap_udmabuf(struct dma_bu=
-f *buf, struct iosys_map *map)<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0vm_unmap_ram(map-&gt;vaddr, u=
-buf-&gt;pagecount);<br>
-&gt;&gt;&gt;=C2=A0 }<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; +/* Return the number of contiguous pages backed by the folio =
-at @i.<br>
-&gt;&gt;&gt; + * A udmabuf may map only part of a folio, or reference the s=
-ame folio<br>
-&gt;&gt;&gt; + * in multiple non-contiguous runs, so folio_nr_pages() can&#=
-39;t be used.<br>
-&gt;&gt;&gt; + */<br>
-&gt;&gt;&gt; +static pgoff_t udmabuf_folio_nr_pages(struct udmabuf *ubuf, p=
-goff_t i)<br>
-&gt;&gt;&gt; +{<br>
-&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0struct folio *f =3D ubuf-&gt;folio=
-s[i];<br>
-&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0pgoff_t j;<br>
-&gt;&gt;&gt; +<br>
-&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0for (j =3D 1; i + j &lt; ubuf-&gt;=
-pagecount; j++) {<br>
-&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (ub=
-uf-&gt;folios[i + j] !=3D f)<br>
-&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0break;<br>
-&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0/* Sam=
-e folio, but not a sequential offset within it. */<br>
-&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (ub=
-uf-&gt;offsets[i + j] !=3D ubuf-&gt;offsets[i] + j * PAGE_SIZE)<br>
-&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0break;<br>
-&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0return j;<br>
-&gt;&gt;&gt; +}<br>
-&gt;&gt;&gt; +<br>
-&gt;&gt;&gt; +/* Count the contiguous folio runs in @ubuf, one sg entry per=
- run. */<br>
-&gt;&gt;&gt; +static unsigned int udmabuf_sg_nents(struct udmabuf *ubuf)<br=
->
-&gt;&gt;&gt; +{<br>
-&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0unsigned int nents =3D 0;<br>
-&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0pgoff_t i;<br>
-&gt;&gt;&gt; +<br>
-&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0for (i =3D 0; i &lt; ubuf-&gt;page=
-count; i +=3D udmabuf_folio_nr_pages(ubuf, i))<br>
-&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0nents+=
-+;<br>
-&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0return nents;<br>
-&gt;&gt;&gt; +}<br>
-&gt;&gt;&gt; +<br>
-&gt;&gt;&gt;=C2=A0 static struct sg_table *get_sg_table(struct device *dev,=
- struct dma_buf *buf,<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 enum =
-dma_data_direction direction)<br>
-&gt;&gt;&gt;=C2=A0 {<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0struct udmabuf *ubuf =3D buf-=
-&gt;priv;<br>
-&gt;&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0struct sg_table *sg;<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0struct scatterlist *sgl;<br>
-&gt;&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0unsigned int i =3D 0;<br>
-&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0struct sg_table *sg;<br>
-&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0pgoff_t i, run;<br>
-&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0unsigned int nents;<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0int ret;<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0nents =3D udmabuf_sg_nents(ubuf);<=
-br>
-&gt;&gt;&gt; +<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0sg =3D kzalloc_obj(*sg);<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (!sg)<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0r=
-eturn ERR_PTR(-ENOMEM);<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0ret =3D sg_alloc_table(sg, ubuf-&g=
-t;pagecount, GFP_KERNEL);<br>
-&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0ret =3D sg_alloc_table(sg, nents, =
-GFP_KERNEL);<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (ret &lt; 0)<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0g=
-oto err_alloc;<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0for_each_sg(sg-&gt;sgl, sgl, ubuf-=
-&gt;pagecount, i)<br>
-&gt;&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0sg_set=
-_folio(sgl, ubuf-&gt;folios[i], PAGE_SIZE,<br>
-&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0sgl =3D sg-&gt;sgl;<br>
-&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0for (i =3D 0; i &lt; ubuf-&gt;page=
-count; i +=3D run) {<br>
-&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0run =
-=3D udmabuf_folio_nr_pages(ubuf, i);<br>
-&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0sg_set=
-_folio(sgl, ubuf-&gt;folios[i], run &lt;&lt; PAGE_SHIFT,<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ubuf-&gt;offsets[i]);<br>
-&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0sgl =
-=3D sg_next(sgl);<br>
-&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0ret =3D dma_map_sgtable(dev, =
-sg, direction, 0);<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (ret &lt; 0)<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; --<br>
-&gt;&gt;&gt; 2.53.0-Meta<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;<br>
-<br>
-</blockquote></div></div>
-
---000000000000123d790653be5ef3--
-
---===============7498672852591821804==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============7498672852591821804==--
+T24gNi84LzI2IDE1OjU1LCBCb2JieSBFc2hsZW1hbiB3cm90ZToNCj4gDQo+IE9uIFN1biwgSnVu
+IDcsIDIwMjYgYXQgMTE6NDLigK9QTSBDaHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmln
+QGFtZC5jb20gPG1haWx0bzpjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+PiB3cm90ZToNCj4gDQo+
+ICAgICBPbiA2LzUvMjYgMjA6NDQsIEJvYmJ5IEVzaGxlbWFuIHdyb3RlOg0KPiAgICAgPiBPbiBG
+cmksIEp1biAwNSwgMjAyNiBhdCAxMTozMDowN0FNICswMjAwLCBDaHJpc3RpYW4gS8O2bmlnIHdy
+b3RlOg0KPiAgICAgPj4gT24gNi80LzI2IDAyOjQyLCBCb2JieSBFc2hsZW1hbiB3cm90ZToNCj4g
+ICAgID4+PiBGcm9tOiBCb2JieSBFc2hsZW1hbiA8Ym9iYnllc2hsZW1hbkBtZXRhLmNvbSA8bWFp
+bHRvOmJvYmJ5ZXNobGVtYW5AbWV0YS5jb20+Pg0KPiAgICAgPj4+DQo+ICAgICA+Pj4gZ2V0X3Nn
+X3RhYmxlKCkgZW1pdHRlZCBvbmUgUEFHRV9TSVpFIHNnIGVudHJ5IHBlciBwYWdlIGV2ZW4gd2hl
+biB0aGUNCj4gICAgID4+PiB1bmRlcmx5aW5nIGZvbGlvIHdhcyBsYXJnZXIuDQo+ICAgICA+Pj4N
+Cj4gICAgID4+PiBJbnN0ZWFkLCB3YWxrIGZvbGlvc1tdIGFuZCBlbWl0IG9uZSBzZyBlbnRyeSBw
+ZXIgZm9saW8uIFdoZW4gZm9saW9zDQo+ICAgICA+Pj4gcmVwcmVzZW50IGxhcmdlIHBhZ2VzIChh
+cyBpcyBmb3IgTUZEX0hVR0VUTEIpLCBlYWNoIHNnIGVudHJ5IGlzIGEgbGFyZ2UNCj4gICAgID4+
+PiBwYWdlLiBOb3JtYWwgUEFHRV9TSVpFIHNnIHRhYmxlcyBhcmUgdW5jaGFuZ2VkLg0KPiAgICAg
+Pj4+DQo+ICAgICA+Pj4gUmVxdWlyZWQgYnkgbmV0L2NvcmUvZGV2bWVtIHRvIHN1cHBvcnQgcngt
+YnVmLXNpemUgPiBQQUdFX1NJWkUgd2l0aA0KPiAgICAgPj4+IHVkbWFidWYuDQo+ICAgICA+Pg0K
+PiAgICAgPj4gVGhhdCBkb2Vzbid0IGV4cGxhaW4gd2h5IHRoaXMgaXMgcmVxdWlyZWQuDQo+ICAg
+ICA+DQo+ICAgICA+IFN1cmUsIGNhbiBkZWZpbml0ZWx5IGFkZC4gRGV2bWVtIGN1cnJlbnRseSBy
+ZXF1aXJlcyBkbWFidWYgc2cgZW50cmllcyB0bw0KPiAgICAgPiBiZSBsZW5ndGggYW5kIHNpemUg
+YWxpZ25lZCB3aGVuIGl0IGFsbG9jYXRlcyBuaW92cyBmb3IgTklDIHBhZ2UgcG9vbHMuDQo+ICAg
+ICA+IFRob3VnaCB1ZG1hYnVmIGlzIG5vdCB2aW9sYXRpbmcgYW55IGRtYWJ1ZiBjb250cmFjdCBi
+eSBlbWl0dGluZw0KPiAgICAgPiBQQUdFX1NJWkUgZW50cmllcyBhbmQgdGhlIGFib3ZlIHJlc3Ry
+aWN0aW9uIGlzIHByb2JhYmx5IG1vcmUgYQ0KPiAgICAgPiBzaG9ydGZhbGxpbmcgb2YgZGV2bWVt
+LCBieSBlbWl0dGluZyBhIHNpbmdsZSBlbnRyeSBwZXIgZm9saW8gdGhpcyBwYXRjaA0KPiAgICAg
+PiBhbGxvd3MgdWRtYWJ1ZiB0byBiZSB1c2VkIGJ5IGRldm1lbSBmb3IgbGFyZ2UgcGFnZXMuDQo+
+ICAgICA+DQo+ICAgICA+Pg0KPiAgICAgPj4gUGxlYXNlIG5vdGUgdGhhdCBhY2Nlc3NpbmcgdGhl
+IHBhZ2VzL2ZvbGlvIG9mIGFuIHNnLXRhYmxlIHJldHVybmVkIGJ5IERNQS1idWYgaXMgaWxsZWdh
+bCBhbmQgc3RyaWN0bHkgZm9yYmlkZGVuIQ0KPiAgICAgPj4NCj4gICAgID4+IFJlZ2FyZHMsDQo+
+ICAgICA+PiBDaHJpc3RpYW4uDQo+ICAgICA+DQo+ICAgICA+IEl0IHNlZW1zIGJvdGggZGV2bWVt
+IGFuZCBpb191cmluZyB6Y3J4IGF0IGxlYXN0IGludHJvc3BlY3QgdGhyb3VnaCB0bw0KPiAgICAg
+PiB0aGUgc2ctdGFibGUgdG8gYnVpbGQgTklDIHBhZ2UgcG9vbHMgKG5vdCBhY2Nlc3NpbmcgdGhl
+IG1lbW9yeSBpdHNlbGYsDQo+ICAgICA+IGhvd2V2ZXIpLiBJcyB0aGVyZSBhIGJldHRlciB3YXk/
+DQo+IA0KPiAgICAgVGhhdCdzIGFuIGFic29sdXRlIE5PLUdPISBXZSBuZWVkIHRvIHN0b3AgdGhh
+dCBpbW1lZGlhdGVseS4NCj4gDQo+ICAgICBUb3VjaGluZyB0aGUgdW5kZXJseWluZyBzdHJ1Y3Qg
+cGFnZSBvZiBhbiBETUEtYnVmIGV4cG9ydGVkIHNnLXRhYmxlIGlzIHN0cmljdGx5IGZvcmJpZGRl
+bi4NCj4gDQo+ICAgICBXZSBldmVuIGhhdmUgY29kZSB0byB3cmFwIHRoZSBzZ190YWJsZSBhbmQg
+aGlkZSB0aGUgc3RydWN0IHBhZ2VzIG9uIGRlYnVnIGJ1aWxkcyB0byBjYXRjaCB0aG9zZSBpc3N1
+ZXMsIHNlZSBmdW5jdGlvbiBkbWFfYnVmX3dyYXBfc2dfdGFibGUoKS4NCj4gDQo+ICAgICBNeSBs
+YXN0IHN0YXR1cyBpcyB0aGF0IHRoZSBOSUMgcGFnZSBwb29scyBhcmUgYnVpbGQgZGlyZWN0bHkg
+ZnJvbSB0aGUgRE1BIGFkZHJlc3NlcyBleHBvc2VkIGJ5IHRoZSBzZ190YWJsZS4NCj4gDQo+ICAg
+ICBXYXMgdGhlcmUgYW55IGNoYW5nZSBJJ20gbm90IGF3YXJlIG9mPw0KPiANCj4gICAgIFJlZ2Fy
+ZHMsDQo+ICAgICBDaHJpc3RpYW4uDQo+IA0KPiANCj4gT2ggbm8gY2hhbmdlLCB5b3VyIG1lbnRh
+bCBtb2RlbCBpcyBzdGlsbCBjdXJyZW50Lg0KPiBUaGV5IGp1c3QgZ28gdGhyb3VnaCBlYWNoIHNn
+IGFuZCB1c2Ugc2dfZG1hX2FkZHJlc3MoKSBvbiBlYWNoLg0KDQpBaCwgdGhhbmtzISBUaGF0IHdh
+cyBhIG5lYXIgaGVhcnQgYXR0YWNrIDpEDQoNClllYWggdGhhdCBpcyBwZXJmZWN0bHkgY29ycmVj
+dCwgcXVlc3Rpb24gaXMgZG8geW91IHRoZW4gc3RpbGwgcmVhbGx5IG5lZWQgdGhpcyB1ZG1hYnVm
+IGNoYW5nZT8gSSBtZWFuIHRoZSBETUEgQVBJIHVzdWFsbHkgbWVyZ2VzIHRvZ2V0aGVyIGNvbnRp
+Z3VvdXMgRE1BIGFkZHJlc3Nlcy4NCg0KUmVnYXJkcywNCkNocmlzdGlhbi4NCg0KPiANCj4gQmVz
+dCwNCj4gQm9iYnkNCj4gDQo+IA0KPiAgICAgPg0KPiAgICAgPiBCZXN0LA0KPiAgICAgPiBCb2Ji
+eQ0KPiAgICAgPg0KPiAgICAgPj4NCj4gICAgID4+PiBTaWduZWQtb2ZmLWJ5OiBCb2JieSBFc2hs
+ZW1hbiA8Ym9iYnllc2hsZW1hbkBtZXRhLmNvbSA8bWFpbHRvOmJvYmJ5ZXNobGVtYW5AbWV0YS5j
+b20+Pg0KPiAgICAgPj4+IC0tLQ0KPiAgICAgPj4+wqAgZHJpdmVycy9kbWEtYnVmL3VkbWFidWYu
+YyB8IDQ3ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKy0tLS0tDQo+
+ICAgICA+Pj7CoCAxIGZpbGUgY2hhbmdlZCwgNDIgaW5zZXJ0aW9ucygrKSwgNSBkZWxldGlvbnMo
+LSkNCj4gICAgID4+Pg0KPiAgICAgPj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2RtYS1idWYvdWRt
+YWJ1Zi5jIGIvZHJpdmVycy9kbWEtYnVmL3VkbWFidWYuYw0KPiAgICAgPj4+IGluZGV4IDk0Yjhl
+Y2I4OTJiYi4uZjI4ZGQzNzg4YWRhIDEwMDY0NA0KPiAgICAgPj4+IC0tLSBhL2RyaXZlcnMvZG1h
+LWJ1Zi91ZG1hYnVmLmMNCj4gICAgID4+PiArKysgYi9kcml2ZXJzL2RtYS1idWYvdWRtYWJ1Zi5j
+DQo+ICAgICA+Pj4gQEAgLTE0MSwyNiArMTQxLDYzIEBAIHN0YXRpYyB2b2lkIHZ1bm1hcF91ZG1h
+YnVmKHN0cnVjdCBkbWFfYnVmICpidWYsIHN0cnVjdCBpb3N5c19tYXAgKm1hcCkNCj4gICAgID4+
+PsKgIMKgIMKgIMKgIMKgdm1fdW5tYXBfcmFtKG1hcC0+dmFkZHIsIHVidWYtPnBhZ2Vjb3VudCk7
+DQo+ICAgICA+Pj7CoCB9DQo+ICAgICA+Pj4NCj4gICAgID4+PiArLyogUmV0dXJuIHRoZSBudW1i
+ZXIgb2YgY29udGlndW91cyBwYWdlcyBiYWNrZWQgYnkgdGhlIGZvbGlvIGF0IEBpLg0KPiAgICAg
+Pj4+ICsgKiBBIHVkbWFidWYgbWF5IG1hcCBvbmx5IHBhcnQgb2YgYSBmb2xpbywgb3IgcmVmZXJl
+bmNlIHRoZSBzYW1lIGZvbGlvDQo+ICAgICA+Pj4gKyAqIGluIG11bHRpcGxlIG5vbi1jb250aWd1
+b3VzIHJ1bnMsIHNvIGZvbGlvX25yX3BhZ2VzKCkgY2FuJ3QgYmUgdXNlZC4NCj4gICAgID4+PiAr
+ICovDQo+ICAgICA+Pj4gK3N0YXRpYyBwZ29mZl90IHVkbWFidWZfZm9saW9fbnJfcGFnZXMoc3Ry
+dWN0IHVkbWFidWYgKnVidWYsIHBnb2ZmX3QgaSkNCj4gICAgID4+PiArew0KPiAgICAgPj4+ICvC
+oCDCoCDCoCDCoHN0cnVjdCBmb2xpbyAqZiA9IHVidWYtPmZvbGlvc1tpXTsNCj4gICAgID4+PiAr
+wqAgwqAgwqAgwqBwZ29mZl90IGo7DQo+ICAgICA+Pj4gKw0KPiAgICAgPj4+ICvCoCDCoCDCoCDC
+oGZvciAoaiA9IDE7IGkgKyBqIDwgdWJ1Zi0+cGFnZWNvdW50OyBqKyspIHsNCj4gICAgID4+PiAr
+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqBpZiAodWJ1Zi0+Zm9saW9zW2kgKyBqXSAhPSBmKQ0KPiAg
+ICAgPj4+ICvCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoGJyZWFrOw0KPiAgICAg
+Pj4+ICvCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoC8qIFNhbWUgZm9saW8sIGJ1dCBub3QgYSBzZXF1
+ZW50aWFsIG9mZnNldCB3aXRoaW4gaXQuICovDQo+ICAgICA+Pj4gK8KgIMKgIMKgIMKgIMKgIMKg
+IMKgIMKgaWYgKHVidWYtPm9mZnNldHNbaSArIGpdICE9IHVidWYtPm9mZnNldHNbaV0gKyBqICog
+UEFHRV9TSVpFKQ0KPiAgICAgPj4+ICvCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
+oGJyZWFrOw0KPiAgICAgPj4+ICvCoCDCoCDCoCDCoH0NCj4gICAgID4+PiArwqAgwqAgwqAgwqBy
+ZXR1cm4gajsNCj4gICAgID4+PiArfQ0KPiAgICAgPj4+ICsNCj4gICAgID4+PiArLyogQ291bnQg
+dGhlIGNvbnRpZ3VvdXMgZm9saW8gcnVucyBpbiBAdWJ1Ziwgb25lIHNnIGVudHJ5IHBlciBydW4u
+ICovDQo+ICAgICA+Pj4gK3N0YXRpYyB1bnNpZ25lZCBpbnQgdWRtYWJ1Zl9zZ19uZW50cyhzdHJ1
+Y3QgdWRtYWJ1ZiAqdWJ1ZikNCj4gICAgID4+PiArew0KPiAgICAgPj4+ICvCoCDCoCDCoCDCoHVu
+c2lnbmVkIGludCBuZW50cyA9IDA7DQo+ICAgICA+Pj4gK8KgIMKgIMKgIMKgcGdvZmZfdCBpOw0K
+PiAgICAgPj4+ICsNCj4gICAgID4+PiArwqAgwqAgwqAgwqBmb3IgKGkgPSAwOyBpIDwgdWJ1Zi0+
+cGFnZWNvdW50OyBpICs9IHVkbWFidWZfZm9saW9fbnJfcGFnZXModWJ1ZiwgaSkpDQo+ICAgICA+
+Pj4gK8KgIMKgIMKgIMKgIMKgIMKgIMKgIMKgbmVudHMrKzsNCj4gICAgID4+PiArwqAgwqAgwqAg
+wqByZXR1cm4gbmVudHM7DQo+ICAgICA+Pj4gK30NCj4gICAgID4+PiArDQo+ICAgICA+Pj7CoCBz
+dGF0aWMgc3RydWN0IHNnX3RhYmxlICpnZXRfc2dfdGFibGUoc3RydWN0IGRldmljZSAqZGV2LCBz
+dHJ1Y3QgZG1hX2J1ZiAqYnVmLA0KPiAgICAgPj4+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAg
+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgZW51bSBkbWFfZGF0YV9kaXJlY3Rpb24gZGly
+ZWN0aW9uKQ0KPiAgICAgPj4+wqAgew0KPiAgICAgPj4+wqAgwqAgwqAgwqAgwqBzdHJ1Y3QgdWRt
+YWJ1ZiAqdWJ1ZiA9IGJ1Zi0+cHJpdjsNCj4gICAgID4+PiAtwqAgwqAgwqAgwqBzdHJ1Y3Qgc2df
+dGFibGUgKnNnOw0KPiAgICAgPj4+wqAgwqAgwqAgwqAgwqBzdHJ1Y3Qgc2NhdHRlcmxpc3QgKnNn
+bDsNCj4gICAgID4+PiAtwqAgwqAgwqAgwqB1bnNpZ25lZCBpbnQgaSA9IDA7DQo+ICAgICA+Pj4g
+K8KgIMKgIMKgIMKgc3RydWN0IHNnX3RhYmxlICpzZzsNCj4gICAgID4+PiArwqAgwqAgwqAgwqBw
+Z29mZl90IGksIHJ1bjsNCj4gICAgID4+PiArwqAgwqAgwqAgwqB1bnNpZ25lZCBpbnQgbmVudHM7
+DQo+ICAgICA+Pj7CoCDCoCDCoCDCoCDCoGludCByZXQ7DQo+ICAgICA+Pj4NCj4gICAgID4+PiAr
+wqAgwqAgwqAgwqBuZW50cyA9IHVkbWFidWZfc2dfbmVudHModWJ1Zik7DQo+ICAgICA+Pj4gKw0K
+PiAgICAgPj4+wqAgwqAgwqAgwqAgwqBzZyA9IGt6YWxsb2Nfb2JqKCpzZyk7DQo+ICAgICA+Pj7C
+oCDCoCDCoCDCoCDCoGlmICghc2cpDQo+ICAgICA+Pj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
+oHJldHVybiBFUlJfUFRSKC1FTk9NRU0pOw0KPiAgICAgPj4+DQo+ICAgICA+Pj4gLcKgIMKgIMKg
+IMKgcmV0ID0gc2dfYWxsb2NfdGFibGUoc2csIHVidWYtPnBhZ2Vjb3VudCwgR0ZQX0tFUk5FTCk7
+DQo+ICAgICA+Pj4gK8KgIMKgIMKgIMKgcmV0ID0gc2dfYWxsb2NfdGFibGUoc2csIG5lbnRzLCBH
+RlBfS0VSTkVMKTsNCj4gICAgID4+PsKgIMKgIMKgIMKgIMKgaWYgKHJldCA8IDApDQo+ICAgICA+
+Pj7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoGdvdG8gZXJyX2FsbG9jOw0KPiAgICAgPj4+DQo+
+ICAgICA+Pj4gLcKgIMKgIMKgIMKgZm9yX2VhY2hfc2coc2ctPnNnbCwgc2dsLCB1YnVmLT5wYWdl
+Y291bnQsIGkpDQo+ICAgICA+Pj4gLcKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgc2dfc2V0X2ZvbGlv
+KHNnbCwgdWJ1Zi0+Zm9saW9zW2ldLCBQQUdFX1NJWkUsDQo+ICAgICA+Pj4gK8KgIMKgIMKgIMKg
+c2dsID0gc2ctPnNnbDsNCj4gICAgID4+PiArwqAgwqAgwqAgwqBmb3IgKGkgPSAwOyBpIDwgdWJ1
+Zi0+cGFnZWNvdW50OyBpICs9IHJ1bikgew0KPiAgICAgPj4+ICvCoCDCoCDCoCDCoCDCoCDCoCDC
+oCDCoHJ1biA9IHVkbWFidWZfZm9saW9fbnJfcGFnZXModWJ1ZiwgaSk7DQo+ICAgICA+Pj4gK8Kg
+IMKgIMKgIMKgIMKgIMKgIMKgIMKgc2dfc2V0X2ZvbGlvKHNnbCwgdWJ1Zi0+Zm9saW9zW2ldLCBy
+dW4gPDwgUEFHRV9TSElGVCwNCj4gICAgID4+PsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
+IMKgIMKgIMKgIMKgIMKgIHVidWYtPm9mZnNldHNbaV0pOw0KPiAgICAgPj4+ICvCoCDCoCDCoCDC
+oCDCoCDCoCDCoCDCoHNnbCA9IHNnX25leHQoc2dsKTsNCj4gICAgID4+PiArwqAgwqAgwqAgwqB9
+DQo+ICAgICA+Pj4NCj4gICAgID4+PsKgIMKgIMKgIMKgIMKgcmV0ID0gZG1hX21hcF9zZ3RhYmxl
+KGRldiwgc2csIGRpcmVjdGlvbiwgMCk7DQo+ICAgICA+Pj7CoCDCoCDCoCDCoCDCoGlmIChyZXQg
+PCAwKQ0KPiAgICAgPj4+DQo+ICAgICA+Pj4gLS0NCj4gICAgID4+PiAyLjUzLjAtTWV0YQ0KPiAg
+ICAgPj4+DQo+ICAgICA+Pg0KPiANCg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNp
+Z0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJv
+LW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
