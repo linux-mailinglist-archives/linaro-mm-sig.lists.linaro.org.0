@@ -2,74 +2,88 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id octMLGcbJ2r8rwIAu9opvQ
+	id tyVSJcRbJ2pjvAIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 08 Jun 2026 21:43:35 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 09 Jun 2026 02:18:12 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3713965A1FA
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 08 Jun 2026 21:43:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1DF3965B4D9
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 09 Jun 2026 02:18:12 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=google.com header.s=20251104 header.b=KdHDp5w7;
+	dkim=fail ("body hash did not verify") header.d=ziepe.ca header.s=google header.b="gX6Ud/8+";
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
-	dmarc=fail reason="SPF not aligned (relaxed)" header.from=google.com (policy=reject)
+	dmarc=none
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4C15540A1E
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  8 Jun 2026 19:43:34 +0000 (UTC)
-Received: from mail-qt1-f201.google.com (mail-qt1-f201.google.com [209.85.160.201])
-	by lists.linaro.org (Postfix) with ESMTPS id AACEA40983
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  8 Jun 2026 19:43:24 +0000 (UTC)
-Received: by mail-qt1-f201.google.com with SMTP id d75a77b69052e-5176d5d7222so91039831cf.0
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 08 Jun 2026 12:43:24 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id 0A5BD401B6
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  9 Jun 2026 00:18:11 +0000 (UTC)
+Received: from mail-qt1-f180.google.com (mail-qt1-f180.google.com [209.85.160.180])
+	by lists.linaro.org (Postfix) with ESMTPS id 45E1F3F7B8
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  9 Jun 2026 00:18:01 +0000 (UTC)
+Received: by mail-qt1-f180.google.com with SMTP id d75a77b69052e-5177ad0cc67so39585461cf.0
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 08 Jun 2026 17:18:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1780947804; x=1781552604; darn=lists.linaro.org;
-        h=cc:to:from:subject:message-id:mime-version:date:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=v1WPgK4XhrSsWKxtc0VlcZjNH1lHogrTgrVmSMDXRnU=;
-        b=KdHDp5w7jnG5K5Mw24P7u6EPn7hEpN2pNZMGh5qmtQRBuXxObnaEn1Bg5ffHJFhGvt
-         nCDxCIPh1fh9mFeqRr9wcky9EDcNT56oM8QVWt3Pd/uo4dkY/qSNP8nr6PdwmYWGMSQB
-         +QKKqFgpXqnChx4LWwRA+jWDH0PSxYSP9G1ew/obtKCE9qmSkjK5kyfRsMo8X3V8E63p
-         jO3FEpHDJkMQh3fBLghdvdw3RXUPrmY6fPW/7PT73538VocgtDPA+daXbQmFM32WaroR
-         RJKCQSq22dGVbk4IjqroFapjCNUwQeUQYyzcf7mh7z65j8h2tNwCODkSTL8pVW8RzNdm
-         GJ9g==
+        d=ziepe.ca; s=google; t=1780964281; x=1781569081; darn=lists.linaro.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=MJrcrd97RrpK34MMckrW+u7pfPo1y7Snw62FaBcwTvE=;
+        b=gX6Ud/8+tvmaM287OvUz88FVA24g+q4mdffUHps62IFOTLJJZobZ+46KU7n3hfbY3G
+         R96XQG0AxtCDybXU6qgHjcsk5jrlIFrkklIHHVW9pSRNTCZjJQ3baFoiz9jFxwFhD4HR
+         gb2DLDgzi0GMhf+t+QpVJHykZVu+8tZGIuiM8wpxZZ6/p5G11twaiEng0bG0T3nMuAPU
+         d1nbG5Yd1hZz4Gsw4lbXgUTiFAZrDTCfoTDi4/8eP0YBR4qOoo/HR8bMXc4FE4nE/leO
+         lpJI9eO21lgrxFtQ7Lxbxn2J6vzTqXipCvcX2iOUpug4TaliRkPd/X+xYeuosIeNP69x
+         B7+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780947804; x=1781552604;
-        h=cc:to:from:subject:message-id:mime-version:date:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=v1WPgK4XhrSsWKxtc0VlcZjNH1lHogrTgrVmSMDXRnU=;
-        b=YV4kUe1kzeZLmurlXRnFV0KO1PKhL4d/6VFdwvzXFnKLEXzXTQ0NQxMktCsHRHnOA7
-         892p2txIN/ACjd/Y7HfXZtL4/YINZ99uVTOE2JrT7JTTT3lgPUvza7Kq1jqWlKmdRlZP
-         wJg00AxHDf2fhuNMV3iigBuJG7SfE47Ny97GCcR4YMNm127eCZWqRn5vWreVseFL04AT
-         xKn+hZ3nYAVjAiFv1fYxn+wZsddt1+jFsk9LPDiUv1VlTBB5rD94FRkHV6zxN3SG++WJ
-         BMCXG71lWB6Yv1/eWWwilo7xrAcmtXYaFGZ57z3OAq7pgvmDXtQuqvPuCJdY9Crs3GeI
-         2cGg==
-X-Forwarded-Encrypted: i=1; AFNElJ9yzGIhIHbPQ2C9IJM04/iKdmb2oyiIde7k/GzZR69YhFEAHr6V4phMpzdeiCC7dHVZK1ZCO5CUyUSI7Kz5@lists.linaro.org
-X-Gm-Message-State: AOJu0YyvXmAZem/HcNV9XWtTq7gQc1VuQIkUYbAKPldmbUTP4Xw9LCbH
-	0X8+aEZV0DMRBlt3RGr610PW5hsnCpNUVDOW7DWD5yhymZcNJE+Ea/YBY+2wzz+hK0iQ5LcG029
-	7ZMBuB61lEbub
-X-Received: from qtss4-n2.prod.google.com ([2002:a05:622a:a9c4:20b0:517:85d0:ad3a])
- (user=xuehaohu job=prod-delivery.src-stubby-dispatcher) by
- 2002:ac8:5cd1:0:b0:516:df62:bde3 with SMTP id d75a77b69052e-51795c47f23mr242075611cf.54.1780947803937;
- Mon, 08 Jun 2026 12:43:23 -0700 (PDT)
-Date: Mon,  8 Jun 2026 19:43:21 +0000
-Mime-Version: 1.0
-X-Mailer: git-send-email 2.54.0.1064.gd145956f57-goog
-Message-ID: <20260608194321.150838-1-xuehaohu@google.com>
-From: David Hu <xuehaohu@google.com>
-To: Sumit Semwal <sumit.semwal@linaro.org>,
-	"=?UTF-8?q?Christian=20K=C3=B6nig?=" <christian.koenig@amd.com>
-X-Spamd-Bar: --
-Message-ID-Hash: ENBYGFQ6SOFMYLRN5V4BSDBCDSJV542G
-X-Message-ID-Hash: ENBYGFQ6SOFMYLRN5V4BSDBCDSJV542G
-X-MailFrom: 3WxsnaggKDYY74orkyr4qyyqvo.mywvsxk1y-ww-2sqvs232.vsxk1y.y1q@flex--xuehaohu.bounces.google.com
-X-Mailman-Rule-Hits: member-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
-CC: Jason Gunthorpe <jgg@ziepe.ca>, Nicolin Chen <nicolinc@nvidia.com>, Leon Romanovsky <leon@kernel.org>, Kevin Tian <kevin.tian@intel.com>, Ankit Agrawal <ankita@nvidia.com>, Alex Williamson <alex@shazbot.org>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, iommu@lists.linux.dev, jmoroni@google.com, praan@google.com, David Hu <xuehaohu@google.com>, stable@vger.kernel.org
+        d=1e100.net; s=20251104; t=1780964281; x=1781569081;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=MJrcrd97RrpK34MMckrW+u7pfPo1y7Snw62FaBcwTvE=;
+        b=ZPEsH8orCBQolVpeB8/63twryRfUu5Imz/whR3q69QaBlXOoZFtc73PvqDNHlD6lXJ
+         zH/zDYk5JC/QICU0dnm+aWDXh++xbh/0hZ2jMLiaY3NsM0GeWzGubsU7ap+tsqUecg3R
+         +QrSAFHzz7G/WgUXF6M+fDsybiq8UgH7onIjOapjD0aWD4D6KN0b8kbpfrIzlS6jL7JH
+         9UvAKirx7O4gUMKcQfFvr0ggwX6m5XFiS9NozlDzZlrqSM28xQOmsAYRTwNzqjaDRYZQ
+         NEZMz+Ci0En+wQdQ+CZhIVHFnWPoPdLJ8j2+gKB8mwWf6/Xl/LgSaMHsa+JVKxy6sPK8
+         m0gg==
+X-Forwarded-Encrypted: i=1; AFNElJ8nKj2mRmrIKamuB/4UGGaOy/Nlb2fwO2fA9CeLPA4wiRc/pOO+s+KaKYmrsiAEclMiCJ5B0pqBnkAhLDPJ@lists.linaro.org
+X-Gm-Message-State: AOJu0YxHB2g1b4VUELBSIiY4zby7w+rAVECAUhStTEoZmHof7SWBInzv
+	WgXaaVqoB3ZJi37FS8xkSfmKkGdjvvA2nm4bd0dtIwW5Op9dTYoS8eVsZIrVdNjwwX0=
+X-Gm-Gg: Acq92OEuL21U10cSOF3lWWITGdUggx8eLqnitT9wuKNy5EUSpGGU/yoGmxaDsMofOGU
+	HsEIpYDhIPo3iJt6c3CtCyyd0Yrzx3Cda6pi3Anjzgg5+TUKiY4R36hG95XaTZSmoYuY0gU5sxP
+	o+Zhg5Lz/weyQr3lVe9SPT1zu6X/mDtQKyQGtoBTSHhkJk526VjSq0WAWPXIJ32xfQ29glYZWG0
+	IeF5eeuRvFw0RVOfvO324t6L7bVqX22jXatZ1RhrGb0irnU9GE4PBgVp3/eh/WEl+ZgpMFMc0ax
+	a53uvxgl+RZygJyI3kZuKDkni+Pp4IQovc9MUHcm8/K0z6ob4B0Fdz2ppF8vPqUq7jm58xo8aDo
+	e6jbV9+IUEy3Cfc4Qx3hsEJL4gqha7yzenAktiWuyq0cEZvYWJZQ7Jk2KSqOyw8WxbgTc4hcBOb
+	y2qZPrWpPPVDmlvm+xjwAc6XoX3/FfvBEgxS0vpeLxcq4DrRaRI4glMpWfDM7E2r+tixbsme+kU
+	puPbnHVGCIfezUrfVsebRczq8w=
+X-Received: by 2002:a05:622a:1b15:b0:517:8f31:df0a with SMTP id d75a77b69052e-51795a08705mr257391641cf.8.1780964280672;
+        Mon, 08 Jun 2026 17:18:00 -0700 (PDT)
+Received: from ziepe.ca (crbknf0213w-47-54-130-67.pppoe-dynamic.high-speed.nl.bellaliant.net. [47.54.130.67])
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-51775c4d7absm165652141cf.11.2026.06.08.17.17.59
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 08 Jun 2026 17:17:59 -0700 (PDT)
+Received: from jgg by wakko with local (Exim 4.97)
+	(envelope-from <jgg@ziepe.ca>)
+	id 1wWkAI-00000000rFN-46mU;
+	Mon, 08 Jun 2026 21:17:58 -0300
+Date: Mon, 8 Jun 2026 21:17:58 -0300
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Ankit Soni <Ankit.Soni@amd.com>
+Message-ID: <20260609001758.GG2764304@ziepe.ca>
+References: <20260526111034.4079-1-Ankit.Soni@amd.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20260526111034.4079-1-Ankit.Soni@amd.com>
+X-Spamd-Bar: ---
+Message-ID-Hash: 2SSGGHIEW4W7FKYOB6OMQR6U27LVPED5
+X-Message-ID-Hash: 2SSGGHIEW4W7FKYOB6OMQR6U27LVPED5
+X-MailFrom: jgg@ziepe.ca
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Kevin Tian <kevin.tian@intel.com>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Leon Romanovsky <leon@kernel.org>, Vasant Hegde <vasant.hegde@amd.com>, iommu@lists.linux.dev, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org, linux-kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v6] dma-buf: Fix silent overflow for phys vec to sgt
+Subject: [Linaro-mm-sig] Re: [PATCH] iommufd: take dma_resv lock before dma_buf_unpin() in release path
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ENBYGFQ6SOFMYLRN5V4BSDBCDSJV542G/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2SSGGHIEW4W7FKYOB6OMQR6U27LVPED5/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -79,149 +93,57 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [3.99 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[google.com : SPF not aligned (relaxed),reject];
-	R_DKIM_REJECT(1.00)[google.com:s=20251104];
-	MID_CONTAINS_FROM(1.00)[];
-	MV_CASE(0.50)[];
-	R_SPF_ALLOW(-0.20)[+mx];
+X-Spamd-Result: default: False [0.49 / 15.00];
+	R_DKIM_REJECT(1.00)[ziepe.ca:s=google];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	ARC_NA(0.00)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	DMARC_NA(0.00)[ziepe.ca];
+	FORGED_RECIPIENTS(0.00)[m:Ankit.Soni@amd.com,m:kevin.tian@intel.com,m:joro@8bytes.org,m:will@kernel.org,m:robin.murphy@arm.com,m:sumit.semwal@linaro.org,m:christian.koenig@amd.com,m:leon@kernel.org,m:vasant.hegde@amd.com,m:iommu@lists.linux.dev,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,m:linux-media@vger.kernel.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[14];
+	DKIM_TRACE(0.00)[ziepe.ca:-];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS(0.00)[m:sumit.semwal@linaro.org,m:christian.koenig@amd.com,m:jgg@ziepe.ca,m:nicolinc@nvidia.com,m:leon@kernel.org,m:kevin.tian@intel.com,m:ankita@nvidia.com,m:alex@shazbot.org,m:linux-media@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,m:linux-kernel@vger.kernel.org,m:iommu@lists.linux.dev,m:jmoroni@google.com,m:praan@google.com,m:xuehaohu@google.com,m:stable@vger.kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[xuehaohu@google.com,linaro-mm-sig-bounces@lists.linaro.org];
-	RCPT_COUNT_TWELVE(0.00)[17];
+	FORGED_SENDER(0.00)[jgg@ziepe.ca,linaro-mm-sig-bounces@lists.linaro.org];
 	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[xuehaohu@google.com,linaro-mm-sig-bounces@lists.linaro.org];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[jgg@ziepe.ca,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[google.com:-];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	MISSING_XM_UA(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.dev:email,intel.com:email,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[amd.com:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 3713965A1FA
+X-Rspamd-Queue-Id: 1DF3965B4D9
 
-In case MMIO size is bigger than 4G and peer2peer DMA goes
-through host bridge, we trigger a code path that assigns the
-total linked IOVA (which is greater than 4G) to mapped_len.
+On Tue, May 26, 2026 at 11:10:34AM +0000, Ankit Soni wrote:
 
-Previously, `mapped_len` was declared as 32-bit `unsigned int`.
-When accumulating `size_t` lengths, this leads to a silent wrap-around.
-This truncation causes truncated lengths to be passed to functions
-like `fill_sg_entry()`.
+> Take the dma_resv lock around dma_buf_unpin() in iopt_release_pages(),
+> matching the iopt_map_dmabuf() convention. dma_buf_detach() acquires the
+> reservation lock internally, so it must remain outside the locked region.
+> 
+> Fixes: 8c5f9645c389 ("iommufd: Add dma_buf_pin()")
+> Reported-by: Ankit Soni <Ankit.Soni@amd.com>
+> Signed-off-by: Ankit Soni <Ankit.Soni@amd.com>
+> ---
+>  drivers/iommu/iommufd/pages.c | 2 ++
+>  1 file changed, 2 insertions(+)
 
-Fix this by changing `mapped_len` to `size_t` (64-bit). While
-at it, fix similar potential overflow issues in `calc_sg_nents`
-by using `check_add_overflow()` for `nents` and using
-`unsigned int` for the loop iterator in `fill_sg_entry` to match.
+Applied to for-next
 
-Fixes: 3aa31a8bb11e ("dma-buf: provide phys_vec to scatter-gather mapping routine")
-Cc: stable@vger.kernel.org
-Cc: iommu@lists.linux.dev
-Reviewed-by: Pranjal Shrivastava <praan@google.com>
-Reviewed-by: Kevin Tian <kevin.tian@intel.com>
-Signed-off-by: David Hu <xuehaohu@google.com>
----
-Changes in v6:
- - Used `check_add_overflow()` in `calc_sg_nents()` for safer
-   accumulation (Leon).
- - Dropped explicit `!nents` check and added a comment noting that
-   `sg_alloc_table` handles `nents == 0` (Leon).
- - Collected Reviewed-by from Kevin Tian.
-
-Changes in v5:
- - Removed WARN_ON_ONCE from calc_sg_nents() to avoid log noise (Jason).
- - Added explicit check for `!nents` in dma_buf_phys_vec_to_sgt() to
-   cleanly return -EINVAL on overflow (Jason).
-
-Changes in v4:
- - Added WARN_ON_ONCE() to the nents overflow check to prevent silent
-   failures (Claude Bot).
-
-Changes in v3:
- - Removed leftover sentence fragment from the commit message.
- - Kept `nents = 0` initialization (previously stated as removed in the
-   v2 changelog) as it is strictly required for the `+=` accumulation
-   loop in `calc_sg_nents()`.
-
-Changes in v2:
- - Fixed 'IVOA' -> 'IOVA' typo and expanded commit message (Claude Bot).
- - Added Reverse Xmas tree formatting (Pranjal).
- - Folded in extra bounds checking for calc_sg_nents() (Pranjal).
- - Folded in type consistency fix for fill_sg_entry() (Pranjal).
- - Collected Reviewed-by from Pranjal Shrivastava.
-
- drivers/dma-buf/dma-buf-mapping.c | 15 +++++++++++----
- 1 file changed, 11 insertions(+), 4 deletions(-)
-
-diff --git a/drivers/dma-buf/dma-buf-mapping.c b/drivers/dma-buf/dma-buf-mapping.c
-index 794acff2546a..67a8ff52fb8f 100644
---- a/drivers/dma-buf/dma-buf-mapping.c
-+++ b/drivers/dma-buf/dma-buf-mapping.c
-@@ -5,12 +5,13 @@
-  */
- #include <linux/dma-buf-mapping.h>
- #include <linux/dma-resv.h>
-+#include <linux/overflow.h>
- 
- static struct scatterlist *fill_sg_entry(struct scatterlist *sgl, size_t length,
- 					 dma_addr_t addr)
- {
- 	unsigned int len, nents;
--	int i;
-+	unsigned int i;
- 
- 	nents = DIV_ROUND_UP(length, UINT_MAX);
- 	for (i = 0; i < nents; i++) {
-@@ -40,8 +41,11 @@ static unsigned int calc_sg_nents(struct dma_iova_state *state,
- 	size_t i;
- 
- 	if (!state || !dma_use_iova(state)) {
--		for (i = 0; i < nr_ranges; i++)
--			nents += DIV_ROUND_UP(phys_vec[i].len, UINT_MAX);
-+		for (i = 0; i < nr_ranges; i++) {
-+			unsigned int added = DIV_ROUND_UP(phys_vec[i].len, UINT_MAX);
-+			if (check_add_overflow(nents, added, &nents))
-+				return 0;
-+		}
- 	} else {
- 		/*
- 		 * In IOVA case, there is only one SG entry which spans
-@@ -95,9 +99,10 @@ struct sg_table *dma_buf_phys_vec_to_sgt(struct dma_buf_attachment *attach,
- 					 size_t nr_ranges, size_t size,
- 					 enum dma_data_direction dir)
- {
--	unsigned int nents, mapped_len = 0;
- 	struct dma_buf_dma *dma;
- 	struct scatterlist *sgl;
-+	size_t mapped_len = 0;
-+	unsigned int nents;
- 	dma_addr_t addr;
- 	size_t i;
- 	int ret;
-@@ -133,6 +138,8 @@ struct sg_table *dma_buf_phys_vec_to_sgt(struct dma_buf_attachment *attach,
- 	}
- 
- 	nents = calc_sg_nents(dma->state, phys_vec, nr_ranges, size);
-+
-+	/* sg_alloc_table will cleanly fail and return -EINVAL if nents == 0 */
- 	ret = sg_alloc_table(&dma->sgt, nents, GFP_KERNEL | __GFP_ZERO);
- 	if (ret)
- 		goto err_free_state;
--- 
-2.54.0.1064.gd145956f57-goog
-
+Thanks,
+Jason
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
