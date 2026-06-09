@@ -2,81 +2,83 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id UkE8CNFKKWrQTwMAu9opvQ
+	id LfDaHN1KKWrYTwMAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Jun 2026 13:30:25 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Jun 2026 13:30:37 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id A6147668CFE
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Jun 2026 13:30:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 25CE3668D06
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Jun 2026 13:30:37 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=uniontech.com header.s=onoh2408 header.b=jcwUw8hE;
+	dkim=fail ("body hash did not verify") header.d=uniontech.com header.s=onoh2408 header.b=hrsS21lO;
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
 	dmarc=fail reason="SPF not aligned (relaxed)" header.from=uniontech.com (policy=none)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C56D640A51
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Jun 2026 11:30:23 +0000 (UTC)
-Received: from smtpbgau1.qq.com (smtpbgau1.qq.com [54.206.16.166])
-	by lists.linaro.org (Postfix) with ESMTPS id 04F123F74C
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  9 Jun 2026 09:35:20 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 32CF040A43
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Jun 2026 11:30:36 +0000 (UTC)
+Received: from smtpbguseast1.qq.com (smtpbguseast1.qq.com [54.204.34.129])
+	by lists.linaro.org (Postfix) with ESMTPS id 191A13F74C
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  9 Jun 2026 09:35:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=uniontech.com;
-	s=onoh2408; t=1780997688;
-	bh=FjDzXjUTCA7PwSwSBXMojIa1RoXXpb1tpWd5EIt2Ab4=;
+	s=onoh2408; t=1780997695;
+	bh=F/ATENqeutHEFBLWCq5KxclWHjONItFaJGr0IzvOtgs=;
 	h=From:To:Subject:Date:Message-Id:MIME-Version;
-	b=jcwUw8hEitQ+FishR+C+7uZGrcGsiqJjj8Rl86HK9RwRfTT1zcCNe9MABWF/gr04I
-	 dDnQ5TLePayFMb9Afv8jIMgyCDa2UkaL8SRT5FKxn5L2hFVN4C0p8xTJNHGRSIvHda
-	 ffPxjDfRskRXS2nnseDIHl3HrGaaa8AP5Sgussr4=
-X-QQ-mid: esmtpsz17t1780997669tdd1d19f3
-X-QQ-Originating-IP: C6dundOe4PtpDR286kbXAMfUPpshvmFDRxoPxnzgjVo=
+	b=hrsS21lOqN3i5+rw4GQJYsou/okEHaw8A3dvbW4xnGA8vjIFP26VfdlkkRIqrOuM0
+	 Y0p0jG7oAkgAI8i1lHHCZ2gAguOMejMXAKJM0u4AQwwprNTBPxn45ALc8r5/BTyeWN
+	 VPSaAt+GkDFqKEjNwRqHBb6XXSx3HlVQTNo9odGo=
+X-QQ-mid: esmtpsz17t1780997677tad01d33d
+X-QQ-Originating-IP: pIjK55WJPXl+Qs4jtZPT67LZr4pec0GM+rpziWhGDf4=
 Received: from localhost.localdomain ( [124.126.19.250])
 	by bizesmtp.qq.com (ESMTP) with
-	id ; Tue, 09 Jun 2026 17:34:19 +0800 (CST)
+	id ; Tue, 09 Jun 2026 17:34:31 +0800 (CST)
 X-QQ-SSF: 0000000000000000000000000000000
 X-QQ-GoodBg: 1
-X-BIZMAIL-ID: 13231379526503889838
+X-BIZMAIL-ID: 3266297912186802098
 EX-QQ-RecipientCnt: 11
 From: ZhaoJinming <zhaojinming@uniontech.com>
 To: Tomeu Vizoso <tomeu@tomeuvizoso.net>,
 	Oded Gabbay <ogabbay@kernel.org>
-Date: Tue,  9 Jun 2026 17:33:45 +0800
-Message-Id: <20260609093346.380396-1-zhaojinming@uniontech.com>
+Date: Tue,  9 Jun 2026 17:33:46 +0800
+Message-Id: <20260609093346.380396-2-zhaojinming@uniontech.com>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20260608103845.6F4AB1F00893@smtp.kernel.org>
+In-Reply-To: <20260609093346.380396-1-zhaojinming@uniontech.com>
 References: <20260608103845.6F4AB1F00893@smtp.kernel.org>
+ <20260609093346.380396-1-zhaojinming@uniontech.com>
 MIME-Version: 1.0
 X-QQ-SENDSIZE: 520
 Feedback-ID: esmtpsz:uniontech.com:qybglogicsvrsz:qybglogicsvrsz4b-0
-X-QQ-XMAILINFO: MZ9X7MyfBLbly0P1lyM1Fzp8f5GsQImat8BBywc8CBR7YgJW0mZoiOtD
-	NlcWKK6CbM+XJ+3fGmoQQRlSY3Ou1SmcP4eA+E74PbJippCNb1N+JEyY5IcDm/pHbW9EOBi
-	3T+sjPwN0CRbAbtmMvU0LN2kUEx0rSEWlNfjK7wOkKvcbkc/VY2m75+hM23H9WoHzCW4Tfd
-	/++LvIESssrskD0JxgLL+SOuiq6sifTScQsHHv10wnsBD0mABAHrI3TtsxOn0ZPFy8vekdq
-	Bjh9FPhooFcQhG9/7Ltn8lLfB3vygXiDO6x4NjijO19LL49GRK37XM5DH6aHUN08bSfiXqy
-	JSz3sBTswgG3vz0F7XT40xQZ+KCBlqrJZitstaVuzxQac/xnUnobVcuMItoiKyUKln535lH
-	WmGoNKFuVaeBBQ/RchCvhTTG4lyZgXLA1lmrfDUniZf/7uIbQ0ZGIOJ85IiQ0OMttvASl6K
-	EO6hFzMK+zh/hq8rIvCaam9jPQR7sDoUmOAa2+76iYYCTXgJ83IWPY62VDGA1W2B9xyhb5B
-	boYMuIX6dqt6nCsHRdfXHeCU+7MX8yMMkfMLuKeRLdxbAZSkB5L3tvRRs7tCDLa8XLqI+Tb
-	vvwczA3SDW4bCVx7XnhwkmRyLr4eKquu8q0bbJdrwn4DAyO0TOVs181DDOyDKJPSesY3Qvp
-	4iy+axEWmIwNphQcYtqQRH99h5o9etJ0C7sVDfo1eMsFuQzLj42+Bt02tk9FOPDgYV3qJSW
-	GoFYwwF4XUgkw7Q3YENrPwXZrf/dgWO/hqHdELtlBdcH3fs/0R58bsT2aZVAeNg3E9ArtPN
-	o508ayNnnKKRIoOI/C5ZPwUHa3+kfVCKFKz+77ajnT4uq8mSgitQEfGQ0H+vHMYZetsa+U0
-	aRf1u8zB/wZX3fFMuQww1YF/TpqnVa2pkVjximjgdahe5/Io5DtGXtUEzHGd5AGg70zZFbP
-	xhIu+GhESTSNW3YeTFSmZLPQHfzsp3iFWVBj3ZDl3FYhlfxNhhwBhZGwJsKDyc4i/G3mjjN
-	q28qBmnp2v9fMAkfol8fBez9OpZrr1gkt4XYO2cQ==
+X-QQ-XMAILINFO: MaCc72GaN9m8qf291dVW5l5v6BjRZqqJqqnaoaqCSiXKnKE16TR8K2Lk
+	cXCgpcdJ7ZJhdiFpGeECCRCl1gmn7Ihe6dfWjHTelziGAvHKk4S5SABhIo2Kn+Xl1o/CeQ5
+	fUfmdwsANFcFqKHexaANoj9tDk82BzE+j6o+o3H4kkG9bl3YCddoVepHNFEDsbUmSViBIOy
+	xiRoLoTDuAWz86rBtBD0XBiB4FjNTOGkNlsjG1idvR0BXScYFYF9BuWm1BcyWdFz6px3TJQ
+	RhW05gxxPg1JBk7xGKJqKZq0Lvdq93kQ9Hufxp62PMWDHqSmVDRbWYK7NexmlQQBhKqqJ9l
+	B9aYGTxvc431MPp8hfBdw15DtPVQSnxt+apmlW51o7AoUEGt9CWD2BqV5/1YzRvoekvJr37
+	Ommy87BbXWVel2uoSKfXXJ19hXXywIUYp/WAkeasoCSQ88iJ+iEq9JnqEM3FIX+6+Zkl6+I
+	6psOiqGO8PRdgnXK0uCixr8y6ehzrwCAGIUyJSkbVGYNJpBLOXW2rOgX0ZI9Qklua9W0v3j
+	daSI5HWW6/OEe4a9LggxOFJAGWEgoYJC9prbPqAt5o3wn6XHggo4nwAQfRo4KZnRX+rs7Hp
+	4+Eis0yzdigDf6/NTfGF98p4XEQ34gIUyuZctJuSXBslKlp9x6D2VgMbmyWgHxCQJFVnqNP
+	urnsp+146OFRhGTYodqZIGmi+3rzBc6k6b36+Rk86pyZ2aWDI2H1J/t5QG5A0koO+jmXytW
+	/49XXnYJMixmHMYjTViuSMPXw4o2XnT0gdjRwpIJtjE8KA4E6W0mfIZSw4mCgveErMKnmQL
+	MH8KasKfckWy4ziaIthfa1lzcR37QsIeJBUTAKvwhvqDmyVZBW+/gkcMubEBvnUmf42+kSh
+	vs09A0Wq1qwl+j/idZIO8xj/FraDKPNQz3tcY5/417iKhOnrdawmAdJlLz95bxTKsZvD98W
+	dEjNkNNGl+ttw3qYIBfM3BUX4myvXM9OByxktke0ffJ8TC/078Y0S+kvMw/TPRPefLNJVZQ
+	iGFQH/cib7D98XQQVzBMXVwgfZcD4x8A43rk6tdIPg6VVCHiz3/EkxvB5FSg6dHcc7BRh40
+	g==
 X-QQ-XMRINFO: OD9hHCdaPRBwH5bRRRw8tsiH4UAatJqXfg==
 X-QQ-RECHKSPAM: 0
 X-Spamd-Bar: --
 X-MailFrom: zhaojinming@uniontech.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: YLH5M7CI7QX2TYNB474JUXQY4UPYYMHJ
-X-Message-ID-Hash: YLH5M7CI7QX2TYNB474JUXQY4UPYYMHJ
+Message-ID-Hash: LA5EGRYEQ3KWBN6F4O3FSMZJPAVX4RMH
+X-Message-ID-Hash: LA5EGRYEQ3KWBN6F4O3FSMZJPAVX4RMH
 X-Mailman-Approved-At: Wed, 10 Jun 2026 11:29:02 +0000
 CC: Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Jeff Hugo <jeff.hugo@oss.qualcomm.com>, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, ZhaoJinming <zhaojinming@uniontech.com>, stable@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v3 1/2] accel/rocket: Fix error path handling in rocket_job_run()
+Subject: [Linaro-mm-sig] [PATCH v3 2/2] accel/rocket: Fix iommu_group leak and unsafe IRQ register access
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YLH5M7CI7QX2TYNB474JUXQY4UPYYMHJ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LA5EGRYEQ3KWBN6F4O3FSMZJPAVX4RMH/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -90,15 +92,15 @@ X-Spamd-Result: default: False [2.59 / 15.00];
 	DATE_IN_PAST(1.00)[25];
 	MID_CONTAINS_FROM(1.00)[];
 	R_DKIM_REJECT(1.00)[uniontech.com:s=onoh2408];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[uniontech.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:tomeu@tomeuvizoso.net,m:ogabbay@kernel.org,m:sumit.semwal@linaro.org,m:christian.koenig@amd.com,m:jeff.hugo@oss.qualcomm.com,m:dri-devel@lists.freedesktop.org,m:linux-kernel@vger.kernel.org,m:linux-media@vger.kernel.org,m:linaro-mm-sig@lists.linaro.org,m:zhaojinming@uniontech.com,m:stable@vger.kernel.org,s:lists@lfdr.de];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_COUNT_THREE(0.00)[3];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:tomeu@tomeuvizoso.net,m:ogabbay@kernel.org,m:sumit.semwal@linaro.org,m:christian.koenig@amd.com,m:jeff.hugo@oss.qualcomm.com,m:dri-devel@lists.freedesktop.org,m:linux-kernel@vger.kernel.org,m:linux-media@vger.kernel.org,m:linaro-mm-sig@lists.linaro.org,m:zhaojinming@uniontech.com,m:stable@vger.kernel.org,s:lists@lfdr.de];
 	TO_DN_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
@@ -117,64 +119,82 @@ X-Spamd-Result: default: False [2.59 / 15.00];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp,linaro.org:email,uniontech.com:email,uniontech.com:mid,uniontech.com:from_mime]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: A6147668CFE
+X-Rspamd-Queue-Id: 25CE3668D06
 
-In rocket_job_run(), after taking an extra fence reference for
-job->done_fence via dma_fence_get(), the error paths have three bugs:
+Two bugs in the IRQ handling path:
 
-- The dma_fence reference held by job->done_fence is never released,
-  causing a reference leak.
-- pm_runtime_get_sync() increments the usage counter even on failure,
-  but the error path does not decrement it, leaking the runtime PM
-  reference and preventing the NPU from suspending.
-- A valid but unsignaled fence is returned to the DRM scheduler,
-  which triggers WARN("Fence ... released with pending signals!")
-  when the scheduler drops its reference.
+1) iommu_group reference leak in rocket_job_handle_irq():
+   iommu_group_get() increments the reference count but the returned
+   pointer is passed directly to iommu_detach_group() which does not
+   consume it. Since this runs on every completed job, the reference
+   count accumulates and prevents the group from being freed. Use
+   core->iommu_group instead, consistent with rocket_reset().
 
-Fix by replacing pm_runtime_get_sync() with pm_runtime_resume_and_get()
-which auto-balances the usage counter on failure, releasing both fence
-references on error, and returning ERR_PTR(ret) instead of the
-unsignaled fence.
+2) Unsafe hardware register access in shared IRQ handler:
+   rocket_job_irq_handler() is registered with IRQF_SHARED but accesses
+   hardware registers without checking runtime PM status. If another
+   device on the same IRQ line triggers an interrupt while the NPU is
+   suspended, register reads return 0xffffffff, spuriously triggering
+   WARN_ON macros and falsely returning IRQ_WAKE_THREAD.
+
+   Replace with pm_runtime_get_if_active(), which atomically checks the
+   device status under spinlock and increments the usage count to keep
+   the device active during register access. Balance the extra reference:
+   - If the interrupt is not for this device (raw_status does not match
+     DPU_0/DPU_1), put in the hardirq handler before returning IRQ_NONE.
+   - If the interrupt is for this device, the thread handler puts after
+     completing register writes.
 
 Cc: stable@vger.kernel.org
 Fixes: 0810d5ad88a1 ("accel/rocket: Add job submission IOCTL")
 Signed-off-by: ZhaoJinming <zhaojinming@uniontech.com>
 ---
- drivers/accel/rocket/rocket_job.c | 19 ++++++++++++++-----
- 1 file changed, 14 insertions(+), 5 deletions(-)
+ drivers/accel/rocket/rocket_job.c | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/accel/rocket/rocket_job.c b/drivers/accel/rocket/rocket_job.c
-index ac51bff39833..e8a073e22ac2 100644
+index e8a073e22ac2..30c677952b64 100644
 --- a/drivers/accel/rocket/rocket_job.c
 +++ b/drivers/accel/rocket/rocket_job.c
-@@ -310,13 +310,22 @@ static struct dma_fence *rocket_job_run(struct drm_sched_job *sched_job)
- 		dma_fence_put(job->done_fence);
- 	job->done_fence = dma_fence_get(fence);
+@@ -349,7 +349,7 @@ static void rocket_job_handle_irq(struct rocket_core *core)
+ 				return;
+ 			}
  
--	ret = pm_runtime_get_sync(core->dev);
--	if (ret < 0)
--		return fence;
-+	ret = pm_runtime_resume_and_get(core->dev);
-+	if (ret < 0) {
-+		dma_fence_put(job->done_fence);
-+		job->done_fence = NULL;
-+		dma_fence_put(fence);
-+		return ERR_PTR(ret);
-+	}
+-			iommu_detach_group(NULL, iommu_group_get(core->dev));
++			iommu_detach_group(NULL, core->iommu_group);
+ 			dma_fence_signal(core->in_flight_job->done_fence);
+ 			pm_runtime_put_autosuspend(core->dev);
+ 			core->in_flight_job = NULL;
+@@ -421,6 +421,7 @@ static irqreturn_t rocket_job_irq_handler_thread(int irq, void *data)
+ 	struct rocket_core *core = data;
  
- 	ret = iommu_attach_group(job->domain->domain, core->iommu_group);
--	if (ret < 0)
--		return fence;
-+	if (ret < 0) {
+ 	rocket_job_handle_irq(core);
++	pm_runtime_put(core->dev);
+ 
+ 	return IRQ_HANDLED;
+ }
+@@ -428,14 +429,20 @@ static irqreturn_t rocket_job_irq_handler_thread(int irq, void *data)
+ static irqreturn_t rocket_job_irq_handler(int irq, void *data)
+ {
+ 	struct rocket_core *core = data;
++
++	if (!pm_runtime_get_if_active(core->dev))
++		return IRQ_NONE;
++
+ 	u32 raw_status = rocket_pc_readl(core, INTERRUPT_RAW_STATUS);
+ 
+ 	WARN_ON(raw_status & PC_INTERRUPT_RAW_STATUS_DMA_READ_ERROR);
+ 	WARN_ON(raw_status & PC_INTERRUPT_RAW_STATUS_DMA_WRITE_ERROR);
+ 
+ 	if (!(raw_status & PC_INTERRUPT_RAW_STATUS_DPU_0 ||
+-	      raw_status & PC_INTERRUPT_RAW_STATUS_DPU_1))
++	      raw_status & PC_INTERRUPT_RAW_STATUS_DPU_1)) {
 +		pm_runtime_put(core->dev);
-+		dma_fence_put(job->done_fence);
-+		job->done_fence = NULL;
-+		dma_fence_put(fence);
-+		return ERR_PTR(ret);
+ 		return IRQ_NONE;
 +	}
  
- 	scoped_guard(mutex, &core->job_lock) {
- 		core->in_flight_job = job;
+ 	rocket_pc_writel(core, INTERRUPT_MASK, 0x0);
+ 
 -- 
 2.20.1
 
