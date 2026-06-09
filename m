@@ -2,101 +2,81 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id Zlm8N8ZKKWrHTwMAu9opvQ
+	id UkE8CNFKKWrQTwMAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Jun 2026 13:30:14 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Jun 2026 13:30:25 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6B35B668CF6
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Jun 2026 13:30:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A6147668CFE
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Jun 2026 13:30:24 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=suse.cz header.s=susede2_rsa header.b="Vx/BEscr";
-	dkim=fail ("body hash did not verify") header.d=suse.cz header.s=susede2_ed25519 header.b=spO2gcbj;
-	dkim=fail ("body hash did not verify") header.d=suse.cz header.s=susede2_rsa header.b="Vx/BEscr";
-	dkim=fail ("body hash did not verify") header.d=suse.cz header.s=susede2_ed25519 header.b=spO2gcbj;
+	dkim=fail ("body hash did not verify") header.d=uniontech.com header.s=onoh2408 header.b=jcwUw8hE;
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
-	dmarc=none
+	dmarc=fail reason="SPF not aligned (relaxed)" header.from=uniontech.com (policy=none)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8B7C140988
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Jun 2026 11:30:13 +0000 (UTC)
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
-	by lists.linaro.org (Postfix) with ESMTPS id 5ABD03F827
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  9 Jun 2026 08:46:51 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by smtp-out1.suse.de (Postfix) with ESMTPS id 4801C6A8A5;
-	Tue,  9 Jun 2026 08:46:50 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-	t=1780994810; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=GSQxH6p+aBDmmgKYN3VNQI6BF8H04zVBQYzVTpTNZQo=;
-	b=Vx/BEscri+0r67xy3avOveRmQ30LzU24dPEtk4qjekhhW9jO6kGIOJyQmLwDG7x25ePCR2
-	Xlaz8xVatdyRqM5Tfoywojl7q8hfbYvbK/V4xCBXi2oum35WHUs+sUA73IFM2FQGMlMDS9
-	CBNOerN+mnmdoXzGGnP0+SurjemtxMQ=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-	s=susede2_ed25519; t=1780994810;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=GSQxH6p+aBDmmgKYN3VNQI6BF8H04zVBQYzVTpTNZQo=;
-	b=spO2gcbj47UyJGxrqj93wVAFhcKrlTrh9cZYY+iwZ3P7HvrM5hIZjhXqrvAaHZxWZhA2vd
-	J365xzS9oAiV3PAA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-	t=1780994810; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=GSQxH6p+aBDmmgKYN3VNQI6BF8H04zVBQYzVTpTNZQo=;
-	b=Vx/BEscri+0r67xy3avOveRmQ30LzU24dPEtk4qjekhhW9jO6kGIOJyQmLwDG7x25ePCR2
-	Xlaz8xVatdyRqM5Tfoywojl7q8hfbYvbK/V4xCBXi2oum35WHUs+sUA73IFM2FQGMlMDS9
-	CBNOerN+mnmdoXzGGnP0+SurjemtxMQ=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-	s=susede2_ed25519; t=1780994810;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=GSQxH6p+aBDmmgKYN3VNQI6BF8H04zVBQYzVTpTNZQo=;
-	b=spO2gcbj47UyJGxrqj93wVAFhcKrlTrh9cZYY+iwZ3P7HvrM5hIZjhXqrvAaHZxWZhA2vd
-	J365xzS9oAiV3PAA==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 373B9779A7;
-	Tue,  9 Jun 2026 08:46:50 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
-	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id aXV3DfrSJ2oadgAAD6G6ig
-	(envelope-from <jack@suse.cz>); Tue, 09 Jun 2026 08:46:50 +0000
-Received: by quack3.suse.cz (Postfix, from userid 1000)
-	id E0D69A0A90; Tue, 09 Jun 2026 10:46:49 +0200 (CEST)
-Date: Tue, 9 Jun 2026 10:46:49 +0200
-From: Jan Kara <jack@suse.cz>
-To: John Hubbard <jhubbard@nvidia.com>
-Message-ID: <md6vxgeg4h2cs2p7jfgjy6ybgiysbl7fprulimdcxhhiwsv3le@5zgf6mbprh4w>
-References: <20260604025315.245910-1-jhubbard@nvidia.com>
- <20260604025315.245910-3-jhubbard@nvidia.com>
+	by lists.linaro.org (Postfix) with ESMTP id C56D640A51
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Jun 2026 11:30:23 +0000 (UTC)
+Received: from smtpbgau1.qq.com (smtpbgau1.qq.com [54.206.16.166])
+	by lists.linaro.org (Postfix) with ESMTPS id 04F123F74C
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  9 Jun 2026 09:35:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=uniontech.com;
+	s=onoh2408; t=1780997688;
+	bh=FjDzXjUTCA7PwSwSBXMojIa1RoXXpb1tpWd5EIt2Ab4=;
+	h=From:To:Subject:Date:Message-Id:MIME-Version;
+	b=jcwUw8hEitQ+FishR+C+7uZGrcGsiqJjj8Rl86HK9RwRfTT1zcCNe9MABWF/gr04I
+	 dDnQ5TLePayFMb9Afv8jIMgyCDa2UkaL8SRT5FKxn5L2hFVN4C0p8xTJNHGRSIvHda
+	 ffPxjDfRskRXS2nnseDIHl3HrGaaa8AP5Sgussr4=
+X-QQ-mid: esmtpsz17t1780997669tdd1d19f3
+X-QQ-Originating-IP: C6dundOe4PtpDR286kbXAMfUPpshvmFDRxoPxnzgjVo=
+Received: from localhost.localdomain ( [124.126.19.250])
+	by bizesmtp.qq.com (ESMTP) with
+	id ; Tue, 09 Jun 2026 17:34:19 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 1
+X-BIZMAIL-ID: 13231379526503889838
+EX-QQ-RecipientCnt: 11
+From: ZhaoJinming <zhaojinming@uniontech.com>
+To: Tomeu Vizoso <tomeu@tomeuvizoso.net>,
+	Oded Gabbay <ogabbay@kernel.org>
+Date: Tue,  9 Jun 2026 17:33:45 +0800
+Message-Id: <20260609093346.380396-1-zhaojinming@uniontech.com>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20260608103845.6F4AB1F00893@smtp.kernel.org>
+References: <20260608103845.6F4AB1F00893@smtp.kernel.org>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20260604025315.245910-3-jhubbard@nvidia.com>
-X-Spam-Flag: NO
-X-Spam-Level: 
-X-Spam-Score: -2.51
-X-Spamd-Bar: ---
-X-MailFrom: jack@suse.cz
+X-QQ-SENDSIZE: 520
+Feedback-ID: esmtpsz:uniontech.com:qybglogicsvrsz:qybglogicsvrsz4b-0
+X-QQ-XMAILINFO: MZ9X7MyfBLbly0P1lyM1Fzp8f5GsQImat8BBywc8CBR7YgJW0mZoiOtD
+	NlcWKK6CbM+XJ+3fGmoQQRlSY3Ou1SmcP4eA+E74PbJippCNb1N+JEyY5IcDm/pHbW9EOBi
+	3T+sjPwN0CRbAbtmMvU0LN2kUEx0rSEWlNfjK7wOkKvcbkc/VY2m75+hM23H9WoHzCW4Tfd
+	/++LvIESssrskD0JxgLL+SOuiq6sifTScQsHHv10wnsBD0mABAHrI3TtsxOn0ZPFy8vekdq
+	Bjh9FPhooFcQhG9/7Ltn8lLfB3vygXiDO6x4NjijO19LL49GRK37XM5DH6aHUN08bSfiXqy
+	JSz3sBTswgG3vz0F7XT40xQZ+KCBlqrJZitstaVuzxQac/xnUnobVcuMItoiKyUKln535lH
+	WmGoNKFuVaeBBQ/RchCvhTTG4lyZgXLA1lmrfDUniZf/7uIbQ0ZGIOJ85IiQ0OMttvASl6K
+	EO6hFzMK+zh/hq8rIvCaam9jPQR7sDoUmOAa2+76iYYCTXgJ83IWPY62VDGA1W2B9xyhb5B
+	boYMuIX6dqt6nCsHRdfXHeCU+7MX8yMMkfMLuKeRLdxbAZSkB5L3tvRRs7tCDLa8XLqI+Tb
+	vvwczA3SDW4bCVx7XnhwkmRyLr4eKquu8q0bbJdrwn4DAyO0TOVs181DDOyDKJPSesY3Qvp
+	4iy+axEWmIwNphQcYtqQRH99h5o9etJ0C7sVDfo1eMsFuQzLj42+Bt02tk9FOPDgYV3qJSW
+	GoFYwwF4XUgkw7Q3YENrPwXZrf/dgWO/hqHdELtlBdcH3fs/0R58bsT2aZVAeNg3E9ArtPN
+	o508ayNnnKKRIoOI/C5ZPwUHa3+kfVCKFKz+77ajnT4uq8mSgitQEfGQ0H+vHMYZetsa+U0
+	aRf1u8zB/wZX3fFMuQww1YF/TpqnVa2pkVjximjgdahe5/Io5DtGXtUEzHGd5AGg70zZFbP
+	xhIu+GhESTSNW3YeTFSmZLPQHfzsp3iFWVBj3ZDl3FYhlfxNhhwBhZGwJsKDyc4i/G3mjjN
+	q28qBmnp2v9fMAkfol8fBez9OpZrr1gkt4XYO2cQ==
+X-QQ-XMRINFO: OD9hHCdaPRBwH5bRRRw8tsiH4UAatJqXfg==
+X-QQ-RECHKSPAM: 0
+X-Spamd-Bar: --
+X-MailFrom: zhaojinming@uniontech.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: XVZGU26WJTVHQAV2VFB57FACW3IUM7GO
-X-Message-ID-Hash: XVZGU26WJTVHQAV2VFB57FACW3IUM7GO
+Message-ID-Hash: YLH5M7CI7QX2TYNB474JUXQY4UPYYMHJ
+X-Message-ID-Hash: YLH5M7CI7QX2TYNB474JUXQY4UPYYMHJ
 X-Mailman-Approved-At: Wed, 10 Jun 2026 11:29:02 +0000
-CC: Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>, Christoph Hellwig <hch@infradead.org>, Kees Cook <kees@kernel.org>, Cong Wang <xiyou.wangcong@gmail.com>, Chia-Lin Kao <acelan.kao@canonical.com>, Benjamin LaHaise <bcrl@kvack.org>, Andrew Morton <akpm@linux-foundation.org>, Mike Rapoport <rppt@kernel.org>, Paolo Bonzini <pbonzini@redhat.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Jens Axboe <axboe@kernel.dk>, linux-fsdevel@vger.kernel.org, linux-aio@kvack.org, linux-mm@kvack.org, kvm@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, LKML <linux-kernel@vger.kernel.org>
+CC: Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Jeff Hugo <jeff.hugo@oss.qualcomm.com>, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, ZhaoJinming <zhaojinming@uniontech.com>, stable@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3 2/2] libfs: drop redundant SB_I_NOEXEC/SB_I_NODEV in init_pseudo() callers
+Subject: [Linaro-mm-sig] [PATCH v3 1/2] accel/rocket: Fix error path handling in rocket_job_run()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XVZGU26WJTVHQAV2VFB57FACW3IUM7GO/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YLH5M7CI7QX2TYNB474JUXQY4UPYYMHJ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -106,146 +86,98 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [3.49 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
-	DATE_IN_PAST(1.00)[26];
-	MID_RHS_NOT_FQDN(0.50)[];
+X-Spamd-Result: default: False [2.59 / 15.00];
+	DATE_IN_PAST(1.00)[25];
+	MID_CONTAINS_FROM(1.00)[];
+	R_DKIM_REJECT(1.00)[uniontech.com:s=onoh2408];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[uniontech.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:jhubbard@nvidia.com,m:viro@zeniv.linux.org.uk,m:brauner@kernel.org,m:jack@suse.cz,m:hch@infradead.org,m:kees@kernel.org,m:xiyou.wangcong@gmail.com,m:acelan.kao@canonical.com,m:bcrl@kvack.org,m:akpm@linux-foundation.org,m:rppt@kernel.org,m:pbonzini@redhat.com,m:sumit.semwal@linaro.org,m:christian.koenig@amd.com,m:axboe@kernel.dk,m:linux-fsdevel@vger.kernel.org,m:linux-aio@kvack.org,m:linux-mm@kvack.org,m:kvm@vger.kernel.org,m:linux-media@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,m:linux-kernel@vger.kernel.org,m:xiyouwangcong@gmail.com,s:lists@lfdr.de];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	DMARC_NA(0.00)[suse.cz];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER(0.00)[jack@suse.cz,linaro-mm-sig-bounces@lists.linaro.org];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_CC(0.00)[zeniv.linux.org.uk,kernel.org,suse.cz,infradead.org,gmail.com,canonical.com,kvack.org,linux-foundation.org,redhat.com,linaro.org,amd.com,kernel.dk,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
-	DKIM_TRACE(0.00)[suse.cz:-];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	FROM_NEQ_ENVFROM(0.00)[jack@suse.cz,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:tomeu@tomeuvizoso.net,m:ogabbay@kernel.org,m:sumit.semwal@linaro.org,m:christian.koenig@amd.com,m:jeff.hugo@oss.qualcomm.com,m:dri-devel@lists.freedesktop.org,m:linux-kernel@vger.kernel.org,m:linux-media@vger.kernel.org,m:linaro-mm-sig@lists.linaro.org,m:zhaojinming@uniontech.com,m:stable@vger.kernel.org,s:lists@lfdr.de];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[3];
 	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[zhaojinming@uniontech.com,linaro-mm-sig-bounces@lists.linaro.org];
+	ARC_NA(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[uniontech.com:-];
 	ALIAS_RESOLVED(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[zhaojinming@uniontech.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[11];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp,linaro.org:email,suse.cz:from_mime,suse.cz:email,suse.com:email,nvidia.com:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp,linaro.org:email,uniontech.com:email,uniontech.com:mid,uniontech.com:from_mime]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 6B35B668CF6
+X-Rspamd-Queue-Id: A6147668CFE
 
-On Wed 03-06-26 19:53:15, John Hubbard wrote:
-> init_pseudo() now sets SB_I_NOEXEC and SB_I_NODEV by default, so the
-> per-caller assignments are redundant. Drop them.
-> 
-> Signed-off-by: John Hubbard <jhubbard@nvidia.com>
+In rocket_job_run(), after taking an extra fence reference for
+job->done_fence via dma_fence_get(), the error paths have three bugs:
 
-Looks good. Feel free to add:
+- The dma_fence reference held by job->done_fence is never released,
+  causing a reference leak.
+- pm_runtime_get_sync() increments the usage counter even on failure,
+  but the error path does not decrement it, leaking the runtime PM
+  reference and preventing the NPU from suspending.
+- A valid but unsignaled fence is returned to the DRM scheduler,
+  which triggers WARN("Fence ... released with pending signals!")
+  when the scheduler drops its reference.
 
-Reviewed-by: Jan Kara <jack@suse.cz>
+Fix by replacing pm_runtime_get_sync() with pm_runtime_resume_and_get()
+which auto-balances the usage counter on failure, releasing both fence
+references on error, and returning ERR_PTR(ret) instead of the
+unsignaled fence.
 
-								Honza
+Cc: stable@vger.kernel.org
+Fixes: 0810d5ad88a1 ("accel/rocket: Add job submission IOCTL")
+Signed-off-by: ZhaoJinming <zhaojinming@uniontech.com>
+---
+ drivers/accel/rocket/rocket_job.c | 19 ++++++++++++++-----
+ 1 file changed, 14 insertions(+), 5 deletions(-)
 
-> ---
->  fs/aio.c               | 1 -
->  fs/anon_inodes.c       | 2 --
->  fs/nsfs.c              | 1 -
->  fs/pidfs.c             | 2 --
->  mm/secretmem.c         | 2 --
->  virt/kvm/guest_memfd.c | 2 --
->  6 files changed, 10 deletions(-)
-> 
-> diff --git a/fs/aio.c b/fs/aio.c
-> index 722476560848..f57fa21a2503 100644
-> --- a/fs/aio.c
-> +++ b/fs/aio.c
-> @@ -318,7 +318,6 @@ static int aio_init_fs_context(struct fs_context *fc)
->  	pfc = init_pseudo(fc, AIO_RING_MAGIC);
->  	if (!pfc)
->  		return -ENOMEM;
-> -	fc->s_iflags |= SB_I_NOEXEC;
->  	pfc->ops = &aio_super_operations;
->  	return 0;
->  }
-> diff --git a/fs/anon_inodes.c b/fs/anon_inodes.c
-> index b8381c7fb636..a7b9b948e33d 100644
-> --- a/fs/anon_inodes.c
-> +++ b/fs/anon_inodes.c
-> @@ -86,8 +86,6 @@ static int anon_inodefs_init_fs_context(struct fs_context *fc)
->  	struct pseudo_fs_context *ctx = init_pseudo(fc, ANON_INODE_FS_MAGIC);
->  	if (!ctx)
->  		return -ENOMEM;
-> -	fc->s_iflags |= SB_I_NOEXEC;
-> -	fc->s_iflags |= SB_I_NODEV;
->  	ctx->dops = &anon_inodefs_dentry_operations;
->  	return 0;
->  }
-> diff --git a/fs/nsfs.c b/fs/nsfs.c
-> index 160018c4fb36..c3b6ae76594a 100644
-> --- a/fs/nsfs.c
-> +++ b/fs/nsfs.c
-> @@ -664,7 +664,6 @@ static int nsfs_init_fs_context(struct fs_context *fc)
->  	struct pseudo_fs_context *ctx = init_pseudo(fc, NSFS_MAGIC);
->  	if (!ctx)
->  		return -ENOMEM;
-> -	fc->s_iflags |= SB_I_NOEXEC | SB_I_NODEV;
->  	ctx->s_d_flags |= DCACHE_DONTCACHE;
->  	ctx->ops = &nsfs_ops;
->  	ctx->eops = &nsfs_export_operations;
-> diff --git a/fs/pidfs.c b/fs/pidfs.c
-> index 1cce4f34a051..c363416766f1 100644
-> --- a/fs/pidfs.c
-> +++ b/fs/pidfs.c
-> @@ -1115,8 +1115,6 @@ static int pidfs_init_fs_context(struct fs_context *fc)
->  	if (!ctx)
->  		return -ENOMEM;
->  
-> -	fc->s_iflags |= SB_I_NOEXEC;
-> -	fc->s_iflags |= SB_I_NODEV;
->  	ctx->s_d_flags |= DCACHE_DONTCACHE;
->  	ctx->ops = &pidfs_sops;
->  	ctx->eops = &pidfs_export_operations;
-> diff --git a/mm/secretmem.c b/mm/secretmem.c
-> index 5f57ac4720d3..4877c262cb1f 100644
-> --- a/mm/secretmem.c
-> +++ b/mm/secretmem.c
-> @@ -245,8 +245,6 @@ static int secretmem_init_fs_context(struct fs_context *fc)
->  	if (!ctx)
->  		return -ENOMEM;
->  
-> -	fc->s_iflags |= SB_I_NOEXEC;
-> -	fc->s_iflags |= SB_I_NODEV;
->  	return 0;
->  }
->  
-> diff --git a/virt/kvm/guest_memfd.c b/virt/kvm/guest_memfd.c
-> index 69c9d6d546b2..80f201035d77 100644
-> --- a/virt/kvm/guest_memfd.c
-> +++ b/virt/kvm/guest_memfd.c
-> @@ -973,8 +973,6 @@ static int kvm_gmem_init_fs_context(struct fs_context *fc)
->  	if (!init_pseudo(fc, GUEST_MEMFD_MAGIC))
->  		return -ENOMEM;
->  
-> -	fc->s_iflags |= SB_I_NOEXEC;
-> -	fc->s_iflags |= SB_I_NODEV;
->  	ctx = fc->fs_private;
->  	ctx->ops = &kvm_gmem_super_operations;
->  
-> -- 
-> 2.54.0
-> 
+diff --git a/drivers/accel/rocket/rocket_job.c b/drivers/accel/rocket/rocket_job.c
+index ac51bff39833..e8a073e22ac2 100644
+--- a/drivers/accel/rocket/rocket_job.c
++++ b/drivers/accel/rocket/rocket_job.c
+@@ -310,13 +310,22 @@ static struct dma_fence *rocket_job_run(struct drm_sched_job *sched_job)
+ 		dma_fence_put(job->done_fence);
+ 	job->done_fence = dma_fence_get(fence);
+ 
+-	ret = pm_runtime_get_sync(core->dev);
+-	if (ret < 0)
+-		return fence;
++	ret = pm_runtime_resume_and_get(core->dev);
++	if (ret < 0) {
++		dma_fence_put(job->done_fence);
++		job->done_fence = NULL;
++		dma_fence_put(fence);
++		return ERR_PTR(ret);
++	}
+ 
+ 	ret = iommu_attach_group(job->domain->domain, core->iommu_group);
+-	if (ret < 0)
+-		return fence;
++	if (ret < 0) {
++		pm_runtime_put(core->dev);
++		dma_fence_put(job->done_fence);
++		job->done_fence = NULL;
++		dma_fence_put(fence);
++		return ERR_PTR(ret);
++	}
+ 
+ 	scoped_guard(mutex, &core->job_lock) {
+ 		core->in_flight_job = job;
 -- 
-Jan Kara <jack@suse.com>
-SUSE Labs, CR
+2.20.1
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
