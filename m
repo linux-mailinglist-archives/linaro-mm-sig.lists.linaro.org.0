@@ -2,65 +2,81 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id Hr6tH/xKKWr0TwMAu9opvQ
+	id pOFBEhRLKWoDUAMAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Jun 2026 13:31:08 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Jun 2026 13:31:32 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1376F668D23
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Jun 2026 13:31:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CF740668D2B
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Jun 2026 13:31:31 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=collabora.com header.s=zohomail header.b=kZOwsiH2;
+	dkim=fail ("body hash did not verify") header.d=uniontech.com header.s=onoh2408 header.b=im191+tY;
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
-	dmarc=fail reason="SPF not aligned (relaxed)" header.from=collabora.com (policy=none);
-	arc=reject ("signature check failed: fail, {[1] = sig:zohomail.com:reject}")
+	dmarc=fail reason="SPF not aligned (relaxed)" header.from=uniontech.com (policy=none)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 28C6740A49
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Jun 2026 11:31:07 +0000 (UTC)
-Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com [136.143.188.112])
-	by lists.linaro.org (Postfix) with ESMTPS id E0EBB40A0D
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 10 Jun 2026 00:20:20 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1781050811; cv=none;
-	d=zohomail.com; s=zohoarc;
-	b=Md6nNVHOEmyf92T+nDS9CJqqPti1DRSk4EGTpu6C0HNPBqi7DA1DYIbBx6XVRwZKGYg+7FAMp+zRe7yCffEmmdzShm8ChVUIErNYfWJ2C0Z5rs+Jr8hsTWIn9J8BQuxRZb4sbMgl4VDNNe+Fp/YF9+TLnLcWHr/2HsETWIA/0Fs=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc;
-	t=1781050811; h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
-	bh=O9fNTHv6wbBG42jHa8mAw6pvJNsDpQ9M5O3qhn0l1Vo=;
-	b=CtLCFoN/HUmgdMdaKxivguNvewtVOqnOf/GU04aTbIVSPmsAiqq9UfL62Sh1qJdTXzHGhlCky8R8LX2pYa39GqhrE6Q5y6NWBjh3JAboYzSpnuOv/I0JcGJ2wxwR6L9BGZsTO/owZFYHVWFWX4701w6nqoN2HlVw+vD+Fu7sY3Q=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=collabora.com;
-	spf=pass  smtp.mailfrom=deborah.brouwer@collabora.com;
-	dmarc=pass header.from=<deborah.brouwer@collabora.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1781050811;
-	s=zohomail; d=collabora.com; i=deborah.brouwer@collabora.com;
-	h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:References:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
-	bh=O9fNTHv6wbBG42jHa8mAw6pvJNsDpQ9M5O3qhn0l1Vo=;
-	b=kZOwsiH29/dAC81lSN65kYEuoTOcxiFWnRZI3eUfAzUyKksZvENO4jOoeUKfRUoY
-	DRrLnkZ+tvZiLYP+qTTiiMl8pibUI+SDHnj/H9Qez+JfTBfn21bbtaEiqZZVW628ZQS
-	t+lDFRobsq/ZdrPqaZCGglTpHn7wVk4iLg/THklE=
-Received: by mx.zohomail.com with SMTPS id 1781050810087120.3536602556942;
-	Tue, 9 Jun 2026 17:20:10 -0700 (PDT)
-Date: Tue, 9 Jun 2026 17:20:09 -0700
-From: Deborah Brouwer <deborah.brouwer@collabora.com>
-To: Lyude Paul <lyude@redhat.com>
-Message-ID: <aiituaFg3i4Qpb-a@um790>
-References: <20260608183057.2001376-1-lyude@redhat.com>
+	by lists.linaro.org (Postfix) with ESMTP id E64E140A25
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Jun 2026 11:31:30 +0000 (UTC)
+Received: from smtpbgsg1.qq.com (smtpbgsg1.qq.com [54.254.200.92])
+	by lists.linaro.org (Postfix) with ESMTPS id 7708340450
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 10 Jun 2026 03:04:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=uniontech.com;
+	s=onoh2408; t=1781060636;
+	bh=FjDzXjUTCA7PwSwSBXMojIa1RoXXpb1tpWd5EIt2Ab4=;
+	h=From:To:Subject:Date:Message-Id:MIME-Version;
+	b=im191+tYgUA5nWAtnwvKYxgm8AgZKHXXTOKbRZQCSzQK3xsLaX/Au3Jh26Mje35i8
+	 BtfmmFeXqmYpjRu1+v1tbKikd0PWRqyvgFdU0awZql4GOTL3cYATpROeD9kI6IcrEc
+	 hJvj6cGaSR4MPAa6G09YXa7uT1BiCBdSYHXtIuHI=
+X-QQ-mid: esmtpgz13t1781060616t4cb5f45a
+X-QQ-Originating-IP: HqAmerhJ3hI49ZXtNeNqKA5HqnwfQOOj3mTqxE9tZT8=
+Received: from localhost.localdomain ( [1.202.39.170])
+	by bizesmtp.qq.com (ESMTP) with
+	id ; Wed, 10 Jun 2026 11:03:26 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 1
+X-BIZMAIL-ID: 4178767575033228324
+EX-QQ-RecipientCnt: 11
+From: ZhaoJinming <zhaojinming@uniontech.com>
+To: Tomeu Vizoso <tomeu@tomeuvizoso.net>,
+	Oded Gabbay <ogabbay@kernel.org>
+Date: Wed, 10 Jun 2026 11:03:21 +0800
+Message-Id: <20260610030322.2802744-1-zhaojinming@uniontech.com>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20260609094756.8DDFD1F00893@smtp.kernel.org>
+References: <20260609094756.8DDFD1F00893@smtp.kernel.org>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20260608183057.2001376-1-lyude@redhat.com>
-X-Spamd-Bar: ----
-X-MailFrom: deborah.brouwer@collabora.com
+X-QQ-SENDSIZE: 520
+Feedback-ID: esmtpgz:uniontech.com:qybglogicsvrsz:qybglogicsvrsz4b-0
+X-QQ-XMAILINFO: MsqSUSn/kyQPQjiCyz75oXbJQh/snsUlhVklJHo5k/puxzxr+lGaXlpP
+	d7wIdvzla2afja9/GAK5MOnJLSQC3GWUuV875W+WvKCuRxn/MhMhv//K6dk326kjfmmatcd
+	n9EzdSSt8DaFNBzPfpKXfJJPgzhWjOerlFbvcwXKjZOUS+yV4K2bbLa06SynTDBZDMQXYjQ
+	3UryfK5MdBKEoW0d9+cXYuxBBZxbWC1q6LoVq2wbUhuMdUKB4wpafcYy2dQAc34ZO/yVO3J
+	zf0/tfx7oFn9mz/qIYPpoTziteZgKtwqKVs3a5BGScHZXHV9BiOQpthpfOvGEVt1LvGRnLb
+	FsSgctwpgsNaEJEHKivpVtzZdCvOOvnMh5QPAiekxuZo9YmixLVJxTfJxBRpvYYMw+v377g
+	Dx5++ZKyTNWhqqxvQ3ZRvBcrrV0VIsg2ftKqaMZxAFF/OSu8tY9+WuWQrbE8LXdrGDtwaF5
+	oHHAiavnj7jV/niSNIA2gNMKzfnuUf6r8+7dFxINigafhBO64DKugwMFDl/4kuF73FYPAxx
+	lo0Csmg+j1Ra2gy6KrBLKNIUVJAQf3KAZi9qffO+JYg6HAkISeTUGBScQetn0vsRv9UHG0s
+	KPh80l6e2zKJp4HAijt63Uh3cIwVCgiRTtzbT1LLXVbPsExzqJzNSPctt6GLWUg/A54/5Px
+	g6q5v1V+myd79uqhmen7HR6NMODclm1auvUuLu8S6PRJLgc/m8mP1LSnqc0GKXsTRNCxNVT
+	ddETzoskDY0xXoWOrr+aH/UOcyhvxWTYoiFxbUIEUptacGR5leeNB9sfRUhpwUG0VTXH4yg
+	ciCoeLK5P4wA6WUIYd19aaGyfzUCuxHU2khnILY2viSArgNVQ+HYg44wC0wisxRnwDew3cg
+	mS7KRpS2qY6Td/lZbwyw+yn0zY4PwzHa4P/JeQsU4Ojui2aSK99m2UODpmUU6zK35Iyx7mC
+	DlpMIFfgpMeCnh92Q5+89siCKMKkDQc/l6vBssUuGIaowWU80gIgunNNK0dY0mJ8ectemjT
+	efJhH2LJ4ELNX4Th6bOTHX7ruKfaM=
+X-QQ-XMRINFO: MSVp+SPm3vtSI1QTLgDHQqIV1w2oNKDqfg==
+X-QQ-RECHKSPAM: 0
+X-Spamd-Bar: --
+X-MailFrom: zhaojinming@uniontech.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: GZNLXTKZSSTMQZ6EXCMOWDJGLPF353LQ
-X-Message-ID-Hash: GZNLXTKZSSTMQZ6EXCMOWDJGLPF353LQ
+Message-ID-Hash: T5IIRUBBS2XLDAZXERKHUPFFLD4L3TCJ
+X-Message-ID-Hash: T5IIRUBBS2XLDAZXERKHUPFFLD4L3TCJ
 X-Mailman-Approved-At: Wed, 10 Jun 2026 11:29:03 +0000
-CC: dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org, Alexandre Courbot <acourbot@nvidia.com>, Gary Guo <gary@garyguo.net>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, driver-core@lists.linux.dev, Miguel Ojeda <ojeda@kernel.org>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Alice Ryhl <aliceryhl@google.com>, Simona Vetter <simona@ffwll.ch>, linux-kernel@vger.kernel.org, Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org, "Rafael J . Wysocki" <rafael@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Maxime Ripard <mripard@kernel.org>, David Airlie <airlied@gmail.com>, Benno Lossin <lossin@kernel.org>, linaro-mm-sig@lists.linaro.org, Danilo Krummrich <dakr@kernel.org>, Mukesh Kumar Chaurasiya <mkchauras@gmail.com>, Asahi Lina <lina+kernel@asahilina.net>, Daniel Almeida <daniel.almeida@collabora.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+CC: Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Jeff Hugo <jeff.hugo@oss.qualcomm.com>, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, ZhaoJinming <zhaojinming@uniontech.com>, stable@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v19 0/4] Rust bindings for gem shmem
+Subject: [Linaro-mm-sig] [PATCH v4 1/2] accel/rocket: Fix error path handling in rocket_job_run()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GZNLXTKZSSTMQZ6EXCMOWDJGLPF353LQ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/T5IIRUBBS2XLDAZXERKHUPFFLD4L3TCJ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -70,93 +86,96 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [3.59 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[collabora.com:s=zohomail];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:zohomail.com:reject}];
-	MID_RHS_NOT_FQDN(0.50)[];
+X-Spamd-Result: default: False [1.59 / 15.00];
+	R_DKIM_REJECT(1.00)[uniontech.com:s=onoh2408];
+	MID_CONTAINS_FROM(1.00)[];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx:c];
+	DMARC_POLICY_SOFTFAIL(0.10)[uniontech.com : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[collabora.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:tomeu@tomeuvizoso.net,m:ogabbay@kernel.org,m:sumit.semwal@linaro.org,m:christian.koenig@amd.com,m:jeff.hugo@oss.qualcomm.com,m:dri-devel@lists.freedesktop.org,m:linux-kernel@vger.kernel.org,m:linux-media@vger.kernel.org,m:linaro-mm-sig@lists.linaro.org,m:zhaojinming@uniontech.com,m:stable@vger.kernel.org,s:lists@lfdr.de];
+	FROM_HAS_DN(0.00)[];
+	ARC_NA(0.00)[];
+	FORGED_SENDER(0.00)[zhaojinming@uniontech.com,linaro-mm-sig-bounces@lists.linaro.org];
+	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_THREE(0.00)[3];
-	FORGED_RECIPIENTS(0.00)[m:lyude@redhat.com,m:dri-devel@lists.freedesktop.org,m:rust-for-linux@vger.kernel.org,m:nouveau@lists.freedesktop.org,m:acourbot@nvidia.com,m:gary@garyguo.net,m:christian.koenig@amd.com,m:driver-core@lists.linux.dev,m:ojeda@kernel.org,m:maarten.lankhorst@linux.intel.com,m:aliceryhl@google.com,m:simona@ffwll.ch,m:linux-kernel@vger.kernel.org,m:sumit.semwal@linaro.org,m:linux-media@vger.kernel.org,m:rafael@kernel.org,m:tzimmermann@suse.de,m:mripard@kernel.org,m:airlied@gmail.com,m:lossin@kernel.org,m:linaro-mm-sig@lists.linaro.org,m:dakr@kernel.org,m:mkchauras@gmail.com,m:lina+kernel@asahilina.net,m:daniel.almeida@collabora.com,m:gregkh@linuxfoundation.org,m:lina@asahilina.net,s:lists@lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[26];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[deborah.brouwer@collabora.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[lists.freedesktop.org,vger.kernel.org,nvidia.com,garyguo.net,amd.com,lists.linux.dev,kernel.org,linux.intel.com,google.com,ffwll.ch,linaro.org,suse.de,gmail.com,lists.linaro.org,asahilina.net,collabora.com,linuxfoundation.org];
-	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[deborah.brouwer@collabora.com,linaro-mm-sig-bounces@lists.linaro.org];
-	TO_DN_SOME(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,kernel];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DKIM_TRACE(0.00)[collabora.com:-];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	DKIM_TRACE(0.00)[uniontech.com:-];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp,patchwork.freedesktop.org:url,collabora.com:from_mime,collabora.com:email,gitlab.freedesktop.org:url,linaro.org:email,um790:mid]
+	ALIAS_RESOLVED(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[zhaojinming@uniontech.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp,linaro.org:email,uniontech.com:email,uniontech.com:mid,uniontech.com:from_mime]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 1376F668D23
+X-Rspamd-Queue-Id: CF740668D2B
 
-On Mon, Jun 08, 2026 at 02:29:00PM -0400, Lyude Paul wrote:
-> Most of this patch series has already been pushed upstream, this is just
-> the second half of the patch series that has not been pushed yet + some
-> additional changes which were required to implement changes requested by
-> the mailing list. This patch series is originally from Asahi, previously
-> posted by Daniel Almeida.
-> 
-> The previous version of the patch series can be found here:
-> 
-> 	https://patchwork.freedesktop.org/series/164580/
-> 
-> Branch with patches applied available here:
-> 
-> 	https://gitlab.freedesktop.org/lyudess/linux/-/commits/rust/gem-shmem
-> 
-> This patch series applies on top of drm-rust-next
-> 
-> Patch-series wide changes since V15:
-> * Fix some major rebasing errors I somehow didn't notice :(
-> * Drop the dependency on LazyInit, use the trick that Alice suggested
->   instead.
-> * Fix dependency ordering so that Tyr can get the vmap stuff first
->   without the other bits.
-> Patch-series wide changes since V16:
-> * Fix ordering one more time (SetOnce::reset() doesn't need to come
->   before adding vmap functions)
-> * Rebase against the latest DeviceContext changes from me that got
->   pushed.
-> 
-> Lyude Paul (4):
->   rust: drm: gem: shmem: Add DmaResvGuard helper
->   rust: drm: gem: shmem: Add vmap functions
->   rust: faux: Allow retrieving a bound Device
->   rust: drm: gem: Introduce shmem::Object::sg_table()
-> 
->  rust/kernel/drm/gem/shmem.rs | 524 ++++++++++++++++++++++++++++++++++-
->  rust/kernel/faux.rs          |  16 +-
->  2 files changed, 524 insertions(+), 16 deletions(-)
-> 
-> 
-> base-commit: fea3a2dd7d3fc1936211ced5f84420e610435730
-> -- 
-> 2.54.0
-> 
-Thanks, it's working nicely with Tyr. To make this work with [1] I did
-have to make a few changes to the KunitDriver and tests, but that
-is a separate issue.
+In rocket_job_run(), after taking an extra fence reference for
+job->done_fence via dma_fence_get(), the error paths have three bugs:
 
-[1] [PATCH v2 0/7] rust: drm: Higher-Ranked Lifetime private data
-https://lore.kernel.org/rust-for-linux/20260603011711.2077361-1-dakr@kernel.org/
+- The dma_fence reference held by job->done_fence is never released,
+  causing a reference leak.
+- pm_runtime_get_sync() increments the usage counter even on failure,
+  but the error path does not decrement it, leaking the runtime PM
+  reference and preventing the NPU from suspending.
+- A valid but unsignaled fence is returned to the DRM scheduler,
+  which triggers WARN("Fence ... released with pending signals!")
+  when the scheduler drops its reference.
 
-Tested-by: Deborah Brouwer <deborah.brouwer@collabora.com>
+Fix by replacing pm_runtime_get_sync() with pm_runtime_resume_and_get()
+which auto-balances the usage counter on failure, releasing both fence
+references on error, and returning ERR_PTR(ret) instead of the
+unsignaled fence.
+
+Cc: stable@vger.kernel.org
+Fixes: 0810d5ad88a1 ("accel/rocket: Add job submission IOCTL")
+Signed-off-by: ZhaoJinming <zhaojinming@uniontech.com>
+---
+ drivers/accel/rocket/rocket_job.c | 19 ++++++++++++++-----
+ 1 file changed, 14 insertions(+), 5 deletions(-)
+
+diff --git a/drivers/accel/rocket/rocket_job.c b/drivers/accel/rocket/rocket_job.c
+index ac51bff39833..e8a073e22ac2 100644
+--- a/drivers/accel/rocket/rocket_job.c
++++ b/drivers/accel/rocket/rocket_job.c
+@@ -310,13 +310,22 @@ static struct dma_fence *rocket_job_run(struct drm_sched_job *sched_job)
+ 		dma_fence_put(job->done_fence);
+ 	job->done_fence = dma_fence_get(fence);
+ 
+-	ret = pm_runtime_get_sync(core->dev);
+-	if (ret < 0)
+-		return fence;
++	ret = pm_runtime_resume_and_get(core->dev);
++	if (ret < 0) {
++		dma_fence_put(job->done_fence);
++		job->done_fence = NULL;
++		dma_fence_put(fence);
++		return ERR_PTR(ret);
++	}
+ 
+ 	ret = iommu_attach_group(job->domain->domain, core->iommu_group);
+-	if (ret < 0)
+-		return fence;
++	if (ret < 0) {
++		pm_runtime_put(core->dev);
++		dma_fence_put(job->done_fence);
++		job->done_fence = NULL;
++		dma_fence_put(fence);
++		return ERR_PTR(ret);
++	}
+ 
+ 	scoped_guard(mutex, &core->job_lock) {
+ 		core->in_flight_job = job;
+-- 
+2.20.1
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
