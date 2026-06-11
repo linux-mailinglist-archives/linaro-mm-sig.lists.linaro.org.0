@@ -2,93 +2,57 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id UjBJJ8XfKmpOygMAu9opvQ
+	id SeUfLmTdKmqByQMAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Jun 2026 18:18:13 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Jun 2026 18:08:04 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 18AC6673637
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Jun 2026 18:18:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3773F673502
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Jun 2026 18:08:04 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=gmail.com header.s=20251104 header.b=cWoAGB1I;
+	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=L1Zrk0QZ;
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
-	dmarc=fail reason="SPF not aligned (relaxed)" header.from=gmail.com (policy=none)
+	dmarc=fail reason="SPF not aligned (relaxed)" header.from=kernel.org (policy=quarantine)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 347C540A37
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Jun 2026 16:18:12 +0000 (UTC)
-Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com [209.85.215.175])
-	by lists.linaro.org (Postfix) with ESMTPS id 2EDA640A51
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 11 Jun 2026 16:17:21 +0000 (UTC)
-Received: by mail-pg1-f175.google.com with SMTP id 41be03b00d2f7-c857fba35cfso4091579a12.1
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 11 Jun 2026 09:17:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1781194640; x=1781799440; darn=lists.linaro.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Yj5Chnos4zVE+LHfOdXd/pBqHjH9b6HHf2TeuBkMLx4=;
-        b=cWoAGB1IN4x0oVbiJF1tzslvBh19LLT6I2Mdfa3j4n1zd6n0OFp+UIJp8Nc/GKV+g8
-         INRKuiQ9+8Z8Cd6mMurstffbuFk9Wt8a2poOpkmqv95mdHa+i/AP9KSoKo+X40f43gH3
-         VLYlx7qFIIBAVL6H6sCus4OVNejZykqXkNs0Fb1wTkJ3siohKm+0IFSGWUYIL04stmFQ
-         BPBO2pgGTGj1e9vyIaWNZIJTAZD5SG8arluie9GVNSv9iMY1ZLzjnvpd7b+D0Jy2dCf6
-         sQXLWwJV3ObiutRkl1xnzUicdjw1Xd6DM+gSoNhUPc/D+5XMKR4///HdB748ahO/P/MW
-         BoFA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781194640; x=1781799440;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=Yj5Chnos4zVE+LHfOdXd/pBqHjH9b6HHf2TeuBkMLx4=;
-        b=ELjgHoFSsfPoIY8Jf8hFRZ8mWKHI02CJNY5QEqgxK1RIwVGQs/pC9wo23Uyiwl1+ii
-         mljog9TLWS23z1yCYu3eg1IRmNxAX5jpYuuiXXtLUW7+BQWjatRF0SqsVdVHaXmtQ3Vm
-         n43LImm35TJdRmobPwN3dH1u06oX37U7mOUGuaMy+qGcYI/MXkWfOrCk5HaLpVMXlKsf
-         Jp0BrgMaAVcUUPjzobMpqbWB+7bFvBV+D3hL9vuxHaFDq+4zU661mYF77xCyVoJp0/7v
-         7qa6yeW3DU/c762+y9w4j6QlKIXMDwilTJKTxA28bMiG2TWz/OCmcTFDnQuVEoGW0fzY
-         CPnQ==
-X-Forwarded-Encrypted: i=1; AFNElJ8rXNylJfzxtTCdMENagE8GLA23lC+JwkNKv1l4CEzzAlz6gqN1PuoAiI0zOaS8VhSJru8R6Io7gs0poS5I@lists.linaro.org
-X-Gm-Message-State: AOJu0YzwTCKbUSHLojGRGvDpsPtsAkl/ZgYFaSdcJ9h1eMDbmqeOib5Z
-	S2uGA9jlYA27IBb+ffmJnWOzU0jLtYjkAzDGZEuWRDhsQ34bFU3V7wTg
-X-Gm-Gg: Acq92OGQN/IG9aCNr7PipMrJHG7MMFkrMJZhjqdWmQUKKfFGlnWegv5EPhXmYQH5oV8
-	AlAC05Q1+1wQpzAyAdA5uQQd1ah2Nr3ZsPS5/nO74PXIHz0+rAx1ICPgRQPV2JXug+k71tL6sbp
-	ihh8qulgmRQBIc8VXXaCOmNoQgla1UK82g7BziJOOnC2VxukUB/ihxCgG+6E2JjgicKNOqOuaul
-	TyzF4u7VvweA0pURnJMn7kH4S1hq5PCWeTXIIR9zF8Ty3ZZv0Y0FhKLVG4gRhV6L14FXBmchYyH
-	Odru+Qz/FgVMs+F5vUey4K7d/bg4wEkO8MJs/tNtg/C8qCrzbyCnAyWsZnnQzeIrNJRoTvI7EV+
-	TAxmQZmj/TD5ic4JDooRbAwoypL4h0z8T6124j4Y19msi9D9UHU2SOiML2h9NlSWqcoJuFwRgj4
-	S7gzv5kHlG6pn+nPv1a6U=
-X-Received: by 2002:a05:6a20:9398:b0:3b4:8300:7019 with SMTP id adf61e73a8af0-3b5e31ec82dmr3951773637.18.1781194640238;
-        Thu, 11 Jun 2026 09:17:20 -0700 (PDT)
-Received: from localhost ([2a03:2880:ff:52::])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-c86585b5356sm2137006a12.14.2026.06.11.09.17.19
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 11 Jun 2026 09:17:19 -0700 (PDT)
-From: Bobby Eshleman <bobbyeshleman@gmail.com>
-Date: Thu, 11 Jun 2026 08:28:45 -0700
+	by lists.linaro.org (Postfix) with ESMTP id 2BA3E40A36
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Jun 2026 16:08:03 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+	by lists.linaro.org (Postfix) with ESMTPS id 7506F409A7
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 11 Jun 2026 16:07:51 +0000 (UTC)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	by sea.source.kernel.org (Postfix) with ESMTP id D664F43BB0;
+	Thu, 11 Jun 2026 16:07:50 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8CF171F00893;
+	Thu, 11 Jun 2026 16:07:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1781194070;
+	bh=FODH1d2l25lpiGGcZpHtnCfAB0Q222ShRwNYwgMpF+k=;
+	h=Date:From:To:Cc:Subject:In-Reply-To;
+	b=L1Zrk0QZ1qX3eyuxtjnJdk+dWBBpC6QlshmDTeGDOZMyFLXoqJUbE2RSKRBDRYkbY
+	 /qUnN60oDtV/Ce52c7YIEPF30crxHl42JGpvfyBXXuHT4s73n4ZWNWH9mE/Z8TRjLr
+	 jqGXi5/G14a1yz6EkkXphC9k27eSfDUWt8DbpMsoLil03Pi93j6u6+nXmVO3ENLfnW
+	 DrpMfPn2Yb/ONriLS4mG3Tt3vy8eYx6l6NzfDudag11h5zPdYcx7L894Fj3nUH1C+f
+	 6B8TX9W/Z7KCsSsF0K7Vfu72e73b3UL7odrbFuf9CUZ5nOU4uy7w3splGfECMWL7ha
+	 UVtWB4nj5j2wQ==
+Date: Thu, 11 Jun 2026 11:07:49 -0500
+From: Bjorn Helgaas <helgaas@kernel.org>
+To: Matt Evans <matt@ozlabs.org>
+Message-ID: <20260611160749.GA469670@bhelgaas>
 MIME-Version: 1.0
-Message-Id: <20260611-tcpdm-large-niovs-v2-4-ee2bf15e7523@meta.com>
-References: <20260611-tcpdm-large-niovs-v2-0-ee2bf15e7523@meta.com>
-In-Reply-To: <20260611-tcpdm-large-niovs-v2-0-ee2bf15e7523@meta.com>
-To: Donald Hunter <donald.hunter@gmail.com>,
- Jakub Kicinski <kuba@kernel.org>, "David S. Miller" <davem@davemloft.net>,
- Eric Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>,
- Simon Horman <horms@kernel.org>, Andrew Lunn <andrew+netdev@lunn.ch>,
- Gerd Hoffmann <kraxel@redhat.com>,
- Vivek Kasireddy <vivek.kasireddy@intel.com>,
- Sumit Semwal <sumit.semwal@linaro.org>,
- =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- Shuah Khan <shuah@kernel.org>
-X-Mailer: b4 0.14.3
-X-Spamd-Bar: ----
-Message-ID-Hash: UPYWHO7UXYPI7A6JBMVGLYJBWPSTRXQJ
-X-Message-ID-Hash: UPYWHO7UXYPI7A6JBMVGLYJBWPSTRXQJ
-X-MailFrom: bobbyeshleman@gmail.com
+Content-Disposition: inline
+In-Reply-To: <20260610154327.37758-2-matt@ozlabs.org>
+X-Spamd-Bar: ------
+Message-ID-Hash: SQTYI6TDW7PQNZHG3WGHFXU7LWHEONNI
+X-Message-ID-Hash: SQTYI6TDW7PQNZHG3WGHFXU7LWHEONNI
+X-MailFrom: helgaas@kernel.org
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
-CC: netdev@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-kselftest@vger.kernel.org, sdf@fomichev.me, razor@blackwall.org, daniel@iogearbox.net, almasrymina@google.com, matttbe@kernel.org, skhawaja@google.com, dw@davidwei.uk, Bobby Eshleman <bobbyeshleman@meta.com>
+CC: Alex Williamson <alex@shazbot.org>, Leon Romanovsky <leon@kernel.org>, Jason Gunthorpe <jgg@nvidia.com>, Alex Mastro <amastro@fb.com>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Bjorn Helgaas <bhelgaas@google.com>, Logan Gunthorpe <logang@deltatee.com>, Mahmoud Adam <mngyadam@amazon.de>, David Matlack <dmatlack@google.com>, =?utf-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Kevin Tian <kevin.tian@intel.com>, Ankit Agrawal <ankita@nvidia.com>, Pranjal Shrivastava <praan@google.com>, Alistair Popple <apopple@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org, linux-pci@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH net-next v2 4/4] selftests/net: devmem.py: add check_rx_large_niov
+Subject: [Linaro-mm-sig] Re: [PATCH v3 1/9] PCI/P2PDMA: Add CONFIG_PCI_P2PDMA_CORE
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UPYWHO7UXYPI7A6JBMVGLYJBWPSTRXQJ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SQTYI6TDW7PQNZHG3WGHFXU7LWHEONNI/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -98,226 +62,121 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [2.09 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[gmail.com:s=20251104];
+X-Spamd-Result: default: False [2.49 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
+	R_DKIM_REJECT(1.00)[kernel.org:s=k20260515];
+	MID_RHS_NOT_FQDN(0.50)[];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_TO(0.00)[gmail.com,kernel.org,davemloft.net,google.com,redhat.com,lunn.ch,intel.com,linaro.org,amd.com];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:donald.hunter@gmail.com,m:kuba@kernel.org,m:davem@davemloft.net,m:edumazet@google.com,m:pabeni@redhat.com,m:horms@kernel.org,m:andrew+netdev@lunn.ch,m:kraxel@redhat.com,m:vivek.kasireddy@intel.com,m:sumit.semwal@linaro.org,m:christian.koenig@amd.com,m:shuah@kernel.org,m:netdev@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linux-media@vger.kernel.org,m:linaro-mm-sig@lists.linaro.org,m:linux-kselftest@vger.kernel.org,m:sdf@fomichev.me,m:razor@blackwall.org,m:daniel@iogearbox.net,m:almasrymina@google.com,m:matttbe@kernel.org,m:skhawaja@google.com,m:dw@davidwei.uk,m:bobbyeshleman@meta.com,m:donaldhunter@gmail.com,m:andrew@lunn.ch,s:lists@lfdr.de];
-	ARC_NA(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FORGED_SENDER(0.00)[bobbyeshleman@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
-	RCPT_COUNT_TWELVE(0.00)[26];
-	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	ARC_NA(0.00)[];
+	FORGED_SENDER(0.00)[helgaas@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
+	RCPT_COUNT_TWELVE(0.00)[23];
+	FORGED_RECIPIENTS(0.00)[m:matt@ozlabs.org,m:alex@shazbot.org,m:leon@kernel.org,m:jgg@nvidia.com,m:amastro@fb.com,m:christian.koenig@amd.com,m:bhelgaas@google.com,m:logang@deltatee.com,m:mngyadam@amazon.de,m:dmatlack@google.com,m:bjorn@kernel.org,m:sumit.semwal@linaro.org,m:kevin.tian@intel.com,m:ankita@nvidia.com,m:praan@google.com,m:apopple@nvidia.com,m:vivek.kasireddy@intel.com,m:linux-kernel@vger.kernel.org,m:linux-media@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,m:kvm@vger.kernel.org,m:linux-pci@vger.kernel.org,s:lists@lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[lists@lfdr.de];
+	DKIM_TRACE(0.00)[kernel.org:-];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[bobbyeshleman@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_NEQ_ENVFROM(0.00)[helgaas@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:-];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,netdev];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	MISSING_XM_UA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp,bhelgaas:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 18AC6673637
+X-Rspamd-Queue-Id: 3773F673502
 
-From: Bobby Eshleman <bobbyeshleman@meta.com>
+On Wed, Jun 10, 2026 at 04:43:15PM +0100, Matt Evans wrote:
+> The P2PDMA code currently provides two features under the same
+> CONFIG_PCI_P2PDMA option:
+> 
+>  1.  Locate providers via pcim_p2pdma_provider()
+>  2.  Manage actual P2P DMA
+> 
+> Some drivers (such as vfio-pci) depend on 1, without having a hard
+> dependency on 2.
+> 
+> A future commit expands the use of DMABUF in vfio-pci for non-P2P
+> scenarios, relying on pcim_p2pdma_provider() always being present.  If
+> that depended on CONFIG_PCI_P2PDMA, it would make vfio-pci only
+> available if CONFIG_ZONE_DEVICE is present (e.g. 64-bit systems), even
+> when P2P is not needed.
+> 
+> To resolve this, introduce CONFIG_PCI_P2PDMA_CORE and refactor the
+> basic provider functionality into a new p2pdma_core.c file.  This is
+> available even if the CONFIG_PCI_P2PDMA feature is disabled (or
+> unavailable due to !CONFIG_ZONE_DEVICE).  Then, drivers can enable any
+> additional P2P features with the original CONFIG_PCI_P2PDMA (available
+> when CONFIG_ZONE_DEVICE is set).
+> 
+> Signed-off-by: Matt Evans <matt@ozlabs.org>
 
-Add a new devmem test case for binding the dmabuf with rx-buf-size=16K.
-The test sweeps RX payload sizes straddling the niov boundary to cover
-the sub-niov, exact-niov, and multi-niov RX paths.
+I thought this was going to be just a code move and new Kconfig
+option, but it involves a little more than that, e.g., adding
+pci_p2pdma_release_pool() and tweaking the RCU synchronization.
 
-Signed-off-by: Bobby Eshleman <bobbyeshleman@meta.com>
----
- tools/testing/selftests/drivers/net/hw/devmem.py   | 12 ++++-
- .../testing/selftests/drivers/net/hw/devmem_lib.py | 58 +++++++++++++++++++++-
- .../testing/selftests/drivers/net/hw/nk_devmem.py  | 11 +++-
- 3 files changed, 75 insertions(+), 6 deletions(-)
+If possible, it would be nice to do that refactoring in a smaller
+preliminary patch so it's easier to review/bisect/etc and make this
+one a pure code move.
 
-diff --git a/tools/testing/selftests/drivers/net/hw/devmem.py b/tools/testing/selftests/drivers/net/hw/devmem.py
-index 031cf9905f65..47b54e18e7a6 100755
---- a/tools/testing/selftests/drivers/net/hw/devmem.py
-+++ b/tools/testing/selftests/drivers/net/hw/devmem.py
-@@ -2,7 +2,8 @@
- # SPDX-License-Identifier: GPL-2.0
- 
- from os import path
--from devmem_lib import setup_test, run_rx, run_tx, run_tx_chunks, run_rx_hds
-+from devmem_lib import (setup_test, run_rx, run_tx, run_tx_chunks, run_rx_hds,
-+                        run_rx_large_niov)
- from lib.py import ksft_run, ksft_exit, ksft_disruptive
- from lib.py import NetDrvEpEnv
- 
-@@ -30,11 +31,18 @@ def check_rx_hds(cfg) -> None:
-     run_rx_hds(cfg)
- 
- 
-+@ksft_disruptive
-+def check_rx_large_niov(cfg) -> None:
-+    """Run the devmem RX test with rx-buf-size = 16 KiB."""
-+    run_rx_large_niov(cfg)
-+
-+
- def main() -> None:
-     """Run the devmem test cases."""
-     with NetDrvEpEnv(__file__) as cfg:
-         setup_test(cfg, path.abspath(path.dirname(__file__) + "/ncdevmem"))
--        ksft_run([check_rx, check_tx, check_tx_chunks, check_rx_hds],
-+        ksft_run([check_rx, check_tx, check_tx_chunks, check_rx_hds,
-+                  check_rx_large_niov],
-                  args=(cfg,))
-     ksft_exit()
- 
-diff --git a/tools/testing/selftests/drivers/net/hw/devmem_lib.py b/tools/testing/selftests/drivers/net/hw/devmem_lib.py
-index 0921ff03eb81..d2f00a876767 100644
---- a/tools/testing/selftests/drivers/net/hw/devmem_lib.py
-+++ b/tools/testing/selftests/drivers/net/hw/devmem_lib.py
-@@ -8,7 +8,7 @@ from lib.py import (bkg, cmd, defer, ethtool, rand_port, wait_port_listen,
-                     NetdevFamily)
- 
- 
--def require_devmem(cfg):
-+def require_devmem(cfg, rx_buf_size=0):
-     """Probe ncdevmem on cfg.ifname and SKIP the test if devmem isn't supported."""
-     if not hasattr(cfg, "devmem_probed"):
-         probe_command = f"{cfg.bin_local} -f {cfg.ifname}"
-@@ -18,6 +18,19 @@ def require_devmem(cfg):
-     if not cfg.devmem_supported:
-         raise KsftSkipEx("Test requires devmem support")
- 
-+    if rx_buf_size > 0:
-+        if not hasattr(cfg, "devmem_rx_buf_size_probed"):
-+            cfg.devmem_rx_buf_size_probed = {}
-+
-+        if rx_buf_size not in cfg.devmem_rx_buf_size_probed:
-+            probe_command = f"{cfg.bin_local} -f {cfg.ifname} -b {rx_buf_size}"
-+            cfg.devmem_rx_buf_size_probed[rx_buf_size] = \
-+                cmd(probe_command, fail=False, shell=True).ret == 0
-+
-+        if not cfg.devmem_rx_buf_size_probed[rx_buf_size]:
-+            raise KsftSkipEx(
-+                f"Test requires devmem rx-buf-size={rx_buf_size} support")
-+
- 
- def configure_nic(cfg):
-     """Channels, rings, RSS, queue lease for netkit devmem."""
-@@ -76,7 +89,8 @@ def set_flow_rule(cfg, port):
-     return int(re.search(r'ID (\d+)', output).group(1))
- 
- 
--def ncdevmem_rx(cfg, port, verify=True, fail_on_linear=False, flow_steer=False):
-+def ncdevmem_rx(cfg, port, verify=True, fail_on_linear=False, flow_steer=False,
-+                rx_buf_size=0):
-     """Build the ncdevmem RX listener command."""
-     if hasattr(cfg, 'netns'):
-         flow_rule_id = set_flow_rule(cfg, port)
-@@ -96,6 +110,8 @@ def ncdevmem_rx(cfg, port, verify=True, fail_on_linear=False, flow_steer=False):
-         extras.append("-v 7")
-     if fail_on_linear:
-         extras.append("-L")
-+    if rx_buf_size > 0:
-+        extras.append(f"-b {rx_buf_size}")
- 
-     parts = [cfg.bin_local, "-l", f"-f {ifname}", f"-s {addr}",
-              f"-p {port}", *extras]
-@@ -202,6 +218,44 @@ def run_tx_chunks(cfg):
-     ksft_eq(socat.stdout.strip(), "hello\nworld")
- 
- 
-+def _restore_nr_hugepages(hp_file, nr_hugepages):
-+    with open(hp_file, 'w', encoding='utf-8') as f:
-+        f.write(str(nr_hugepages))
-+
-+
-+def run_rx_large_niov(cfg):
-+    """Run the devmem RX test with a large niov (rx-buf-size > PAGE_SIZE).
-+
-+    Sweep payload sizes that straddle the niov boundary: below, equal to,
-+    and above rx_buf_size, to exercise sub-niov, exact-niov, and multi-niov
-+    RX paths.
-+    """
-+    hp_file = "/proc/sys/vm/nr_hugepages"
-+    with open(hp_file, 'r+', encoding='utf-8') as f:
-+        nr_hugepages = int(f.read().strip())
-+        if nr_hugepages < 64:
-+            f.seek(0)
-+            f.write("64")
-+            defer(_restore_nr_hugepages, hp_file, nr_hugepages)
-+    require_devmem(cfg, rx_buf_size=16384)
-+    configure_nic(cfg)
-+    netns = getattr(cfg, "netns", None)
-+
-+    for size in [1024, 4096, 8192, 16384, 32768, 65536]:
-+        port = rand_port()
-+        socat = socat_send(cfg, port)
-+        listen_cmd = ncdevmem_rx(cfg, port,
-+                                 flow_steer=not netns,
-+                                 rx_buf_size=16384)
-+        data_pipe = (f"yes $(echo -e \x01\x02\x03\x04\x05\x06) | "
-+                     f"head -c {size} | {socat}")
-+        with bkg(listen_cmd, exit_wait=True, ns=netns) as ncdevmem:
-+            wait_port_listen(port, proto="tcp", ns=netns)
-+            cmd(data_pipe, host=cfg.remote, shell=True)
-+        ksft_eq(ncdevmem.ret, 0,
-+                f"large-niov failed for payload size {size}")
-+
-+
- def run_rx_hds(cfg):
-     """Run the HDS test by running devmem RX across a segment size sweep."""
-     require_devmem(cfg)
-diff --git a/tools/testing/selftests/drivers/net/hw/nk_devmem.py b/tools/testing/selftests/drivers/net/hw/nk_devmem.py
-index 300ed2a70ab4..7f1867e4ff32 100755
---- a/tools/testing/selftests/drivers/net/hw/nk_devmem.py
-+++ b/tools/testing/selftests/drivers/net/hw/nk_devmem.py
-@@ -3,7 +3,8 @@
- """Test devmem TCP with netkit."""
- 
- import os
--from devmem_lib import setup_test, run_rx, run_tx, run_tx_chunks, run_rx_hds
-+from devmem_lib import (setup_test, run_rx, run_tx, run_tx_chunks, run_rx_hds,
-+                        run_rx_large_niov)
- from lib.py import ksft_run, ksft_exit, ksft_disruptive
- from lib.py import NetDrvContEnv
- 
-@@ -31,6 +32,12 @@ def check_nk_rx_hds(cfg) -> None:
-     run_rx_hds(cfg)
- 
- 
-+@ksft_disruptive
-+def check_nk_rx_large_niov(cfg) -> None:
-+    """Run the devmem RX large-niov test through netkit."""
-+    run_rx_large_niov(cfg)
-+
-+
- def main() -> None:
-     """Run the netkit devmem test cases."""
-     with NetDrvContEnv(__file__, rxqueues=2, primary_rx_redirect=True) as cfg:
-@@ -38,7 +45,7 @@ def main() -> None:
-                    os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                 "ncdevmem"))
-         ksft_run([check_nk_rx, check_nk_tx, check_nk_tx_chunks,
--                  check_nk_rx_hds], args=(cfg,))
-+                  check_nk_rx_hds, check_nk_rx_large_niov], args=(cfg,))
-     ksft_exit()
- 
- 
+I guess CONFIG_PCI_P2PDMA_CORE selects just part 1 ("Locate providers
+via pcim_p2pdma_provider()"), right?
 
--- 
-2.53.0-Meta
+> +++ b/drivers/pci/p2pdma.h
+> @@ -0,0 +1,29 @@
+> +/* SPDX-License-Identifier: GPL-2.0 */
+> +/*
+> + * PCI Peer 2 Peer DMA support.
+> + */
+> +
+> +#ifndef _PCI_P2PDMA_H
+> +#define _PCI_P2PDMA_H
+> +
+> +#include <linux/genalloc.h>
+> +#include <linux/pci-p2pdma.h>
+> +#include <linux/xarray.h>
+> +
+> +struct pci_p2pdma {
+> +	struct gen_pool *pool;
+> +	bool p2pmem_published;
+> +	struct xarray map_types;
+> +	struct p2pdma_provider mem[PCI_STD_NUM_BARS];
+> +};
+> +
+> +#ifdef CONFIG_PCI_P2PDMA
+> +void pci_p2pdma_release_pool(struct pci_dev *pdev, struct pci_p2pdma *p2pdma);
+> +#else
+> +static inline void pci_p2pdma_release_pool(struct pci_dev *pdev, struct pci_p2pdma *p2pdma)
 
+Wrap to fit in 80 columns like the rest of drivers/pci/
+
+> +{
+> +}
+> +#endif
+> +
+> +#endif
+> +
+
+Spurious blank line at end.
+
+> +++ b/drivers/pci/p2pdma_core.c
+> @@ -0,0 +1,118 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * PCI Peer 2 Peer DMA support core, providing a bare-bones
+
+In this English text, I think I would spell out "Peer to Peer" instead
+of relying on the "2" homophone.  Same in p2pdma.h.
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
