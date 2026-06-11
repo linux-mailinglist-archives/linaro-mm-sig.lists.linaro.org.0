@@ -2,65 +2,61 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id hpcEIh7qKmpfzQMAu9opvQ
+	id TvW8KHFePWoR2AgAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Jun 2026 19:02:22 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Jun 2026 18:59:29 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id B989F673D12
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Jun 2026 19:02:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6E7BE6C7A1C
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Jun 2026 18:59:29 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=collabora.com header.s=zohomail header.b=XNcIsfeV;
+	dkim=fail ("body hash did not verify") header.d=ozlabs.org header.s=201707 header.b=Os9kV2Gx;
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
-	dmarc=fail reason="SPF not aligned (relaxed)" header.from=collabora.com (policy=none);
-	arc=reject ("signature check failed: fail, {[1] = sig:zohomail.com:reject}")
+	dmarc=fail reason="SPF not aligned (relaxed)" header.from=ozlabs.org (policy=none)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B54C140A39
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Jun 2026 17:02:14 +0000 (UTC)
-Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com [136.143.188.112])
-	by lists.linaro.org (Postfix) with ESMTPS id 2312C409A7
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 11 Jun 2026 17:01:33 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1781197283; cv=none;
-	d=zohomail.com; s=zohoarc;
-	b=JEa515L5eioPTrrthXNlAnWUVojm6OHfMSyG/7d7rU8toMzLV2Y39VxoMnK6t7pnecWjFs1TMSbsxGPxJi3nG0Dev3pBLxRLJVL8skJeufgcgOt+YXv3HJvYWbF+272NFRgle2mpGhtUcdPm7kfDoP00E17RJdSOoVIqlRQImrw=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc;
-	t=1781197283; h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
-	bh=2fJfyqbH35YYbgEIjIgvDNDQswgvPgvQ2KhSG/JJtTQ=;
-	b=Qo6AfqUY6p6bT18Ox+zyLXn7fpRtnJCx5UPqhZlK5blt9syZ8qxoN4CVNyL5jNPk4IVKbLUCWr1ehosZDClBG8zXdt47zUwlWFSxpUVwNuV5ypnKw0H/+fJWEm42T/FvCwe2P+8bKOhBhzMcR5hdnTw40aACmBJJxK2qraMUxrQ=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=collabora.com;
-	spf=pass  smtp.mailfrom=deborah.brouwer@collabora.com;
-	dmarc=pass header.from=<deborah.brouwer@collabora.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1781197283;
-	s=zohomail; d=collabora.com; i=deborah.brouwer@collabora.com;
-	h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:References:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
-	bh=2fJfyqbH35YYbgEIjIgvDNDQswgvPgvQ2KhSG/JJtTQ=;
-	b=XNcIsfeVt5XfcVZDmUv/90Wn9Ua7M7fiX+C/2lWJsFw80uYQ8qUYBG5FxNxD6yWd
-	ax7P0IuJzICtxZ6TLYU1mmlL8BxnF5/U1DPBXP661iW0c8pedAf0j4KhLUcLStinTis
-	izD5QLqlU0HLmIObeqrR9NRoknIABMnuDQo/jtbg=
-Received: by mx.zohomail.com with SMTPS id 1781197281571203.9158288337478;
-	Thu, 11 Jun 2026 10:01:21 -0700 (PDT)
-Date: Thu, 11 Jun 2026 10:01:20 -0700
-From: Deborah Brouwer <deborah.brouwer@collabora.com>
-To: Lyude Paul <lyude@redhat.com>
-Message-ID: <airp4AHxiJKWn5tr@um790>
-References: <20260610162433.923550-1-lyude@redhat.com>
- <20260610162433.923550-3-lyude@redhat.com>
+	by lists.linaro.org (Postfix) with ESMTP id 860B841250
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Jun 2026 16:59:28 +0000 (UTC)
+Received: from mail.ozlabs.org (gandalf.ozlabs.org [150.107.74.76])
+	by lists.linaro.org (Postfix) with ESMTPS id E93373F76E
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 11 Jun 2026 17:44:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ozlabs.org;
+	s=201707; t=1781199888;
+	bh=bgyx4tuoR1VujLGJebtgmRpeK21Ky1z7/2zTZbfFLxY=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=Os9kV2GxCX6cgBB+jfIbx4Jk5aYyWKQ5X/ZXH+VDun8JRkKYtFv/ieIvA9GjW9BEP
+	 oCbiUOIm0Juecvy1as3nTJYV673czVuKakUU/AnOzg1YsHLcYDcCT6wfnXjOb4o5EF
+	 gGsD9u+TtAD6sXt5Fps0rxVzebnry3bpHhfB/x6aKrUvYTzMNZCxodqLKN4BSGZnoy
+	 7qlwpEUgQ//8IfsVc+0INo/af9xSHJs4pcUtFr/egZjryoz4iw5WPTWSpoUclLkJ9x
+	 MLyh0LmyKHrhyNGTv+5AcdgmuuA1QN8TdwwUbruNIB224zwt1Y0N8Pmt5FJFGTti/K
+	 pXV0X5964ySzw==
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(Client did not present a certificate)
+	by mail.ozlabs.org (Postfix) with ESMTPSA id 4gbqlp6VBVz4wJk;
+	Fri, 12 Jun 2026 03:44:38 +1000 (AEST)
+Message-ID: <d38fc0ed-4e89-4eeb-b32d-06afba3157f6@ozlabs.org>
+Date: Thu, 11 Jun 2026 18:44:35 +0100
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20260610162433.923550-3-lyude@redhat.com>
+User-Agent: Mozilla Thunderbird
+Content-Language: en-GB
+To: Bjorn Helgaas <helgaas@kernel.org>
+References: <20260611160749.GA469670@bhelgaas>
+From: Matt Evans <matt@ozlabs.org>
+In-Reply-To: <20260611160749.GA469670@bhelgaas>
 X-Spamd-Bar: ----
-Message-ID-Hash: TZNR6FWJG53JF6MMLIKG6IJUT5J4LLLZ
-X-Message-ID-Hash: TZNR6FWJG53JF6MMLIKG6IJUT5J4LLLZ
-X-MailFrom: deborah.brouwer@collabora.com
-X-Mailman-Rule-Hits: member-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
-CC: dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org, Alexandre Courbot <acourbot@nvidia.com>, Gary Guo <gary@garyguo.net>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, driver-core@lists.linux.dev, Miguel Ojeda <ojeda@kernel.org>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Alice Ryhl <aliceryhl@google.com>, Simona Vetter <simona@ffwll.ch>, linux-kernel@vger.kernel.org, Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org, "Rafael J . Wysocki" <rafael@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Maxime Ripard <mripard@kernel.org>, David Airlie <airlied@gmail.com>, Benno Lossin <lossin@kernel.org>, linaro-mm-sig@lists.linaro.org, Danilo Krummrich <dakr@kernel.org>, Mukesh Kumar Chaurasiya <mkchauras@gmail.com>, Asahi Lina <lina+kernel@asahilina.net>, Daniel Almeida <daniel.almeida@collabora.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+X-MailFrom: matt@ozlabs.org
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+Message-ID-Hash: EZ3UX2BONONG7CWKDUNEDSZHHXGD6ZFI
+X-Message-ID-Hash: EZ3UX2BONONG7CWKDUNEDSZHHXGD6ZFI
+X-Mailman-Approved-At: Thu, 25 Jun 2026 16:59:02 +0000
+CC: Alex Williamson <alex@shazbot.org>, Leon Romanovsky <leon@kernel.org>, Jason Gunthorpe <jgg@nvidia.com>, Alex Mastro <amastro@fb.com>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Bjorn Helgaas <bhelgaas@google.com>, Logan Gunthorpe <logang@deltatee.com>, Mahmoud Adam <mngyadam@amazon.de>, David Matlack <dmatlack@google.com>, =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Kevin Tian <kevin.tian@intel.com>, Ankit Agrawal <ankita@nvidia.com>, Pranjal Shrivastava <praan@google.com>, Alistair Popple <apopple@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org, linux-pci@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v20 2/4] rust: drm: gem: shmem: Add vmap functions
+Subject: [Linaro-mm-sig] Re: [PATCH v3 1/9] PCI/P2PDMA: Add CONFIG_PCI_P2PDMA_CORE
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TZNR6FWJG53JF6MMLIKG6IJUT5J4LLLZ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EZ3UX2BONONG7CWKDUNEDSZHHXGD6ZFI/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -70,498 +66,150 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [3.59 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[collabora.com:s=zohomail];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:zohomail.com:reject}];
-	MID_RHS_NOT_FQDN(0.50)[];
+X-Spamd-Result: default: False [1.59 / 15.00];
+	DATE_IN_PAST(1.00)[335];
+	R_DKIM_REJECT(1.00)[ozlabs.org:s=201707];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx];
+	DMARC_POLICY_SOFTFAIL(0.10)[ozlabs.org : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[collabora.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER(0.00)[deborah.brouwer@collabora.com,linaro-mm-sig-bounces@lists.linaro.org];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[26];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:helgaas@kernel.org,m:alex@shazbot.org,m:leon@kernel.org,m:jgg@nvidia.com,m:amastro@fb.com,m:christian.koenig@amd.com,m:bhelgaas@google.com,m:logang@deltatee.com,m:mngyadam@amazon.de,m:dmatlack@google.com,m:bjorn@kernel.org,m:sumit.semwal@linaro.org,m:kevin.tian@intel.com,m:ankita@nvidia.com,m:praan@google.com,m:apopple@nvidia.com,m:vivek.kasireddy@intel.com,m:linux-kernel@vger.kernel.org,m:linux-media@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,m:kvm@vger.kernel.org,m:linux-pci@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[matt@ozlabs.org,linaro-mm-sig-bounces@lists.linaro.org];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[23];
 	RCVD_COUNT_THREE(0.00)[3];
+	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:lyude@redhat.com,m:dri-devel@lists.freedesktop.org,m:rust-for-linux@vger.kernel.org,m:nouveau@lists.freedesktop.org,m:acourbot@nvidia.com,m:gary@garyguo.net,m:christian.koenig@amd.com,m:driver-core@lists.linux.dev,m:ojeda@kernel.org,m:maarten.lankhorst@linux.intel.com,m:aliceryhl@google.com,m:simona@ffwll.ch,m:linux-kernel@vger.kernel.org,m:sumit.semwal@linaro.org,m:linux-media@vger.kernel.org,m:rafael@kernel.org,m:tzimmermann@suse.de,m:mripard@kernel.org,m:airlied@gmail.com,m:lossin@kernel.org,m:linaro-mm-sig@lists.linaro.org,m:dakr@kernel.org,m:mkchauras@gmail.com,m:lina+kernel@asahilina.net,m:daniel.almeida@collabora.com,m:gregkh@linuxfoundation.org,m:lina@asahilina.net,s:lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[lists.freedesktop.org,vger.kernel.org,nvidia.com,garyguo.net,amd.com,lists.linux.dev,kernel.org,linux.intel.com,google.com,ffwll.ch,linaro.org,suse.de,gmail.com,lists.linaro.org,asahilina.net,collabora.com,linuxfoundation.org];
-	DKIM_TRACE(0.00)[collabora.com:-];
-	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[deborah.brouwer@collabora.com,linaro-mm-sig-bounces@lists.linaro.org];
-	TO_DN_SOME(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,kernel];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RSPAMD_EMAILBL_FAIL(0.00)[linaro-mm-sig.lists.linaro.org:query timed out];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,nvidia.com:email,um790:mid]
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[matt@ozlabs.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[ozlabs.org:-];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp,ozlabs.org:email,ozlabs.org:mid,ozlabs.org:from_mime]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: B989F673D12
+X-Rspamd-Queue-Id: 6E7BE6C7A1C
 
-On Wed, Jun 10, 2026 at 12:21:29PM -0400, Lyude Paul wrote:
-> One of the more obvious use cases for gem shmem objects is the ability to
-> create mappings into their contents. So, let's hook this up in our rust
-> bindings.
-> 
-> Signed-off-by: Lyude Paul <lyude@redhat.com>
-> Reviewed-by: Alexandre Courbot <acourbot@nvidia.com>
-> 
-> ---
-> V7:
-> * Switch over to the new iosys map bindings that use the Io trait
-> V8:
-> * Get rid of iosys_map bindings for now, only support non-iomem types
-> * s/as_shmem()/as_raw_shmem()
-> V9:
-> * Get rid of some outdated comments I missed
-> * Add missing SIZE check to raw_vmap()
-> * Add a proper unit test that ensures that we actually validate SIZE at
->   compile-time.
->   Turns out it takes only 34 lines to make a boilerplate DRM driver for a
->   kunit test :)
-> * Add unit tests
-> * Add some missing #[inline]s
-> V10:
-> * Correct issue with iomem error path
->   We previously called raw_vunmap() if we got an iomem allocation, but
->   raw_vunmap() was written such that it assumed all allocations were sysmem
->   allocations. Fix this by just making raw_vunmap() accept a iosys_map.
-> V11:
-> * Use Alexandre's clever solution to remove the macros we were using for
->   maintaining two different VMap types.
-> * Change the order of items in Object<T> to ensure that sgt_res is always
->   dropped before obj.
-> * Fix typo in Object.raw_vmap()
-> * s/raw_vmap()/make_vmap()/
->   Deduplicate code a bit more as well by using more generics here
-> V15:
-> * Add these patches back
-> * We only have one VMap type now!
-> * Use ObjectConfig::default() in unit tests since we unbroke it.
-> V16:
-> * Fix huge rebase error I made and did not notice that squashed 1.5 patches
->   together that were definitely not supposed to be squashed
-> * Update old commit message
-> V17:
-> * Rebase
-> * Fix format of commit message title
-> V19:
-> * Drop outdated safety comment
-> * Move impl_vmap_io_capable! definition to right before it gets used
-> * Add missing `` in rustdoc for VMap type
-> * Add a bunch of missing `` in make_vmap()
-> * Remove one outdated safety comment about reading vaddr_iomem
-> * Add some missing periods in safety comments in make_vmap().
-> * Use read_volatile/write_volatile() instead of read()/write() to prevent
->   compiler reordering.
-> * Remove impl argument from impl_vmap_io_capable!()
-> * Check .owner() and .maxsize() in compile_time_vmap_sizes()
-> * Use more varied pattern in vmap_io()
-> V20:
-> * Add missing Send/Sync implementations for VMap
-> * Use #[inline] not #[inline(always)]
-> * Add missing invariant comment to VMap instantiation
-> * Make sure that kunit test doesn't fail on big endian
-> 
->  rust/kernel/drm/gem/shmem.rs | 337 ++++++++++++++++++++++++++++++++++-
->  1 file changed, 336 insertions(+), 1 deletion(-)
-> 
-> diff --git a/rust/kernel/drm/gem/shmem.rs b/rust/kernel/drm/gem/shmem.rs
-> index 090c5d869fdb7..68a1ce3330b11 100644
-> --- a/rust/kernel/drm/gem/shmem.rs
-> +++ b/rust/kernel/drm/gem/shmem.rs
-> @@ -20,6 +20,11 @@
->          Registered, //
->      },
->      error::to_result,
-> +    io::{
-> +        Io,
-> +        IoCapable,
-> +        IoKnownSize, //
-> +    },
->      prelude::*,
->      sync::aref::ARef,
->      types::{
-> @@ -28,7 +33,9 @@
->      },
->  };
->  use core::{
-> +    ffi::c_void,
->      marker::PhantomData,
-> +    mem::MaybeUninit, //
->      ops::{
->          Deref,
->          DerefMut, //
-> @@ -39,6 +46,7 @@
->      },
->  };
->  use gem::{
-> +    BaseObject,
->      BaseObjectPrivate,
->      DriverObject,
->      IntoGEMObject, //
-> @@ -200,6 +208,79 @@ extern "C" fn free_callback(obj: *mut bindings::drm_gem_object) {
->          // SAFETY: We're recovering the Kbox<> we created in gem_create_object()
->          let _ = unsafe { KBox::from_raw(this) };
->      }
-> +
-> +    /// Attempt to create a vmap from the gem object, and confirm the size of said vmap.
-> +    fn make_vmap<'a, R, const SIZE: usize>(&'a self) -> Result<VMap<T, R, C, SIZE>>
-> +    where
-> +        R: Deref<Target = Self> + From<&'a Self>,
-> +    {
-> +        // INVARIANT: We check here that the gem object is at least as large as `SIZE`.
-> +        if self.size() < SIZE {
-> +            return Err(ENOSPC);
-> +        }
-> +
-> +        let mut map: MaybeUninit<bindings::iosys_map> = MaybeUninit::uninit();
-> +        let guard = DmaResvGuard::new(self);
-> +
-> +        // SAFETY: `drm_gem_shmem_vmap()` can be called with the DMA reservation lock held.
-> +        to_result(unsafe {
-> +            bindings::drm_gem_shmem_vmap_locked(self.as_raw_shmem(), map.as_mut_ptr())
-> +        })?;
-> +
-> +        // Drop the guard explicitly here, since we may need to call `raw_vunmap()` (which
-> +        // re-acquires the lock).
-> +        drop(guard);
-> +
-> +        // SAFETY: The call to `drm_gem_shmem_vmap_locked()` succeeded above, so we are guaranteed
-> +        // that map is properly initialized.
-> +        let map = unsafe { map.assume_init() };
-> +
-> +        // XXX: We don't currently support iomem allocations
-> +        if map.is_iomem {
-> +            // SAFETY: The vmap operation above succeeded, guaranteeing that `map` points to a valid
-> +            // memory mapping.
-> +            unsafe { self.raw_vunmap(map) };
-> +
-> +            Err(ENOTSUPP)
-> +        } else {
-> +            Ok(VMap {
-> +                // INVARIANT: `addr` remains valid for as long as `owner` does, which extends to the
-> +                // lifetime of `VMap` itself.
-> +                // SAFETY: We checked that this is not an iomem allocation, making it safe to read
-> +                // vaddr.
-> +                addr: unsafe { map.__bindgen_anon_1.vaddr },
-> +                owner: self.into(),
-> +            })
-> +        }
-> +    }
-> +
-> +    /// Unmap a vmap from the gem object.
-> +    ///
-> +    /// # Safety
-> +    ///
-> +    /// - The caller promises that `map` is a valid vmap on this gem object.
-> +    /// - The caller promises that the memory pointed to by map will no longer be accesed through
-> +    ///   this instance.
-> +    unsafe fn raw_vunmap(&self, mut map: bindings::iosys_map) {
-> +        let _guard = DmaResvGuard::new(self);
-> +
-> +        // SAFETY:
-> +        // - This function is safe to call with the DMA reservation lock held.
-> +        // - The caller promises that `map` is a valid vmap on this gem object.
-> +        unsafe { bindings::drm_gem_shmem_vunmap_locked(self.as_raw_shmem(), &mut map) };
-> +    }
-> +
-> +    /// Creates and returns a virtual kernel memory mapping for this object.
-> +    #[inline]
-> +    pub fn vmap<const SIZE: usize>(&self) -> Result<VMapRef<'_, T, C, SIZE>> {
-> +        self.make_vmap()
-> +    }
-> +
-> +    /// Creates and returns an owned reference to a virtual kernel memory mapping for this object.
-> +    #[inline]
-> +    pub fn owned_vmap<const SIZE: usize>(&self) -> Result<VMapOwned<T, C, SIZE>> {
-> +        self.make_vmap()
-> +    }
->  }
->  
->  impl<T: DriverObject, C: DeviceContext> Deref for Object<T, C> {
-> @@ -263,7 +344,6 @@ struct DmaResvGuard<'a, T: DriverObject, C: DeviceContext = Registered>(
->  
->  impl<'a, T: DriverObject, C: DeviceContext> DmaResvGuard<'a, T, C> {
->      #[inline]
-> -    #[expect(unused)]
->      fn new(obj: &'a Object<T, C>) -> Self {
->          // SAFETY: This lock is initialized throughout the lifetime of `object`.
->          unsafe { bindings::dma_resv_lock(obj.raw_dma_resv(), ptr::null_mut()) };
-> @@ -279,3 +359,258 @@ fn drop(&mut self) {
->          unsafe { bindings::dma_resv_unlock(self.0.raw_dma_resv()) };
->      }
->  }
-> +
-> +/// A reference to a virtual mapping for an shmem-based GEM object in kernel address space.
-> +///
-> +/// # Invariants
-> +///
-> +/// - The size of `owner` is >= SIZE.
-> +/// - The memory pointed to by `addr` remains valid at least until this object is dropped.
-> +pub struct VMap<D, R, C = Registered, const SIZE: usize = 0>
-> +where
-> +    D: DriverObject,
-> +    C: DeviceContext,
-> +    R: Deref<Target = Object<D, C>>,
-> +{
-> +    addr: *mut c_void,
-> +    owner: R,
-> +}
-> +
-> +/// An alias type for a reference to a shmem-based GEM object's VMap.
-> +pub type VMapRef<'a, D, C, const SIZE: usize = 0> = VMap<D, &'a Object<D, C>, C, SIZE>;
-> +
-> +/// An alias type for an owned reference to a shmem-based GEM object's VMap.
-> +pub type VMapOwned<D, C, const SIZE: usize = 0> = VMap<D, ARef<Object<D, C>>, C, SIZE>;
-> +
-> +impl<D, R, C, const SIZE: usize> VMap<D, R, C, SIZE>
-> +where
-> +    D: DriverObject,
-> +    C: DeviceContext,
-> +    R: Deref<Target = Object<D, C>>,
-> +{
-> +    /// Borrows a reference to the object that owns this virtual mapping.
-> +    #[inline]
-> +    pub fn owner(&self) -> &Object<D, C> {
-> +        &self.owner
-> +    }
-> +}
-> +
-> +impl<D, R, C, const SIZE: usize> Drop for VMap<D, R, C, SIZE>
-> +where
-> +    D: DriverObject,
-> +    C: DeviceContext,
-> +    R: Deref<Target = Object<D, C>>,
-> +{
-> +    #[inline]
-> +    fn drop(&mut self) {
-> +        // SAFETY:
-> +        // - Our existence is proof that this map was previously created using self.owner.
-> +        // - Since we are in Drop, we are guaranteed that no one will access the memory
-> +        //   through this mapping after calling this.
-> +        unsafe {
-> +            self.owner.raw_vunmap(bindings::iosys_map {
-> +                is_iomem: false,
-> +                __bindgen_anon_1: bindings::iosys_map__bindgen_ty_1 { vaddr: self.addr },
-> +            })
-> +        };
-> +    }
-> +}
-> +
-> +// SAFETY: VMaps are safe to send across threads.
-> +unsafe impl<D, R, C, const SIZE: usize> Send for VMap<D, R, C, SIZE>
-> +where
-> +    D: DriverObject,
-> +    C: DeviceContext,
-> +    R: Deref<Target = Object<D, C>>,
-> +{
-> +}
-> +
-> +// SAFETY: VMaps are safe to access from multiple threads.
-> +unsafe impl<D, R, C, const SIZE: usize> Sync for VMap<D, R, C, SIZE>
-> +where
-> +    D: DriverObject,
-> +    C: DeviceContext,
-> +    R: Deref<Target = Object<D, C>>,
-> +{
-> +}
-> +
-> +impl<D, R, C, const SIZE: usize> Io for VMap<D, R, C, SIZE>
-> +where
-> +    D: DriverObject,
-> +    C: DeviceContext,
-> +    R: Deref<Target = Object<D, C>>,
-> +{
-> +    #[inline]
-> +    fn addr(&self) -> usize {
-> +        self.addr as usize
-> +    }
-> +
-> +    #[inline]
-> +    fn maxsize(&self) -> usize {
-> +        self.owner.size()
-> +    }
-> +}
-> +
-> +impl<D, R, C, const SIZE: usize> IoKnownSize for VMap<D, R, C, SIZE>
-> +where
-> +    D: DriverObject,
-> +    C: DeviceContext,
-> +    R: Deref<Target = Object<D, C>>,
-> +{
-> +    const MIN_SIZE: usize = SIZE;
-> +}
-> +
-> +macro_rules! impl_vmap_io_capable {
-> +    ($ty:ty) => {
-> +        impl<D, R, C, const SIZE: usize> IoCapable<$ty> for VMap<D, R, C, SIZE>
-> +        where
-> +            D: DriverObject,
-> +            C: DeviceContext,
-> +            R: Deref<Target = Object<D, C>>,
-> +        {
-> +            #[inline]
-> +            unsafe fn io_read(&self, address: usize) -> $ty {
-> +                let ptr = address as *mut $ty;
-> +
-> +                // SAFETY: The safety contract of `io_read` guarantees that address is a valid
-> +                // address within the bounds of `Self` of at least the size of $ty, and is properly
-> +                // aligned.
-> +                unsafe { ptr::read_volatile(ptr) }
-> +            }
-> +
-> +            #[inline]
-> +            unsafe fn io_write(&self, value: $ty, address: usize) {
-> +                let ptr = address as *mut $ty;
-> +
-> +                // SAFETY: The safety contract of `io_write` guarantees that address is a valid
-> +                // address within the bounds of `Self` of at least the size of $ty, and is properly
-> +                // aligned.
-> +                unsafe { ptr::write_volatile(ptr, value) }
-> +            }
-> +        }
-> +    };
-> +}
-> +
-> +impl_vmap_io_capable!(u8);
-> +impl_vmap_io_capable!(u16);
-> +impl_vmap_io_capable!(u32);
-> +#[cfg(CONFIG_64BIT)]
-> +impl_vmap_io_capable!(u64);
-> +
-> +#[kunit_tests(rust_drm_gem_shmem)]
-> +mod tests {
-> +    use super::*;
-> +    use crate::{
-> +        drm::{
-> +            self,
-> +            UnregisteredDevice, //
-> +        },
-> +        faux,
-> +        page::PAGE_SIZE, //
-> +    };
-> +
-> +    // The bare minimum needed to create a fake drm driver for kunit
-> +
-> +    #[pin_data]
-> +    struct KunitData {}
-> +    struct KunitDriver;
-> +    struct KunitFile;
-> +    #[pin_data]
-> +    struct KunitObject {}
-> +
-> +    const INFO: drm::DriverInfo = drm::DriverInfo {
-> +        major: 0,
-> +        minor: 0,
-> +        patchlevel: 0,
-> +        name: c"kunit",
-> +        desc: c"Kunit",
-> +    };
-> +
-> +    impl drm::file::DriverFile for KunitFile {
-> +        type Driver = KunitDriver;
-> +
-> +        fn open(_dev: &drm::Device<KunitDriver>) -> Result<Pin<KBox<Self>>> {
-> +            Ok(KBox::new(Self, GFP_KERNEL)?.into())
-> +        }
-> +    }
-> +
-> +    impl gem::DriverObject for KunitObject {
-> +        type Driver = KunitDriver;
-> +        type Args = ();
-> +
-> +        fn new<C: DeviceContext>(
-> +            _dev: &drm::Device<KunitDriver, C>,
-> +            _size: usize,
-> +            _args: Self::Args,
-> +        ) -> impl PinInit<Self, Error> {
-> +            try_pin_init!(KunitObject {})
-> +        }
-> +    }
-> +
-> +    #[vtable]
-> +    impl drm::Driver for KunitDriver {
-> +        type Data = KunitData;
-> +        type File = KunitFile;
-> +        type Object<Ctx: DeviceContext> = Object<KunitObject, Ctx>;
-> +
-> +        const INFO: drm::DriverInfo = INFO;
-> +        const IOCTLS: &'static [drm::ioctl::DrmIoctlDescriptor] = &[];
-> +    }
-> +
-> +    fn create_drm_dev() -> Result<(faux::Registration, UnregisteredDevice<KunitDriver>)> {
-> +        // Create a faux DRM device so we can test gem object creation.
-> +        let data = try_pin_init!(KunitData {});
-> +        let dev = faux::Registration::new(c"Kunit", None)?;
-> +        let drm = UnregisteredDevice::new(dev.as_ref(), data)?;
-> +
-> +        Ok((dev, drm))
-> +    }
-> +
-> +    #[test]
-> +    fn compile_time_vmap_sizes() -> Result {
-> +        let (_dev, drm) = create_drm_dev()?;
-> +
-> +        let obj = Object::<KunitObject, _>::new(&drm, PAGE_SIZE, ObjectConfig::default(), ())?;
-> +
-> +        // Try creating a normal vmap
-> +        obj.vmap::<PAGE_SIZE>()?;
-> +
-> +        // Try creating a vmap that's smaller then the size we specified
-> +        let vmap = obj.vmap::<{ PAGE_SIZE - 100 }>()?;
-> +
-> +        // Verify the owner matches
-> +        assert!(ptr::eq(vmap.owner(), obj.deref()));
-> +
-> +        // Verify the max size matches the actual object size
-> +        assert_eq!(vmap.maxsize(), PAGE_SIZE);
-> +
-> +        // Make sure creating a vmap that's too large fails
-> +        assert!(obj.vmap::<{ PAGE_SIZE + 200 }>().is_err());
-> +
-> +        Ok(())
-> +    }
-> +
-> +    #[test]
-> +    fn vmap_io() -> Result {
-> +        let (_dev, drm) = create_drm_dev()?;
-> +
-> +        let obj = Object::<KunitObject, _>::new(&drm, PAGE_SIZE, ObjectConfig::default(), ())?;
-> +
-> +        let vmap = obj.vmap::<PAGE_SIZE>()?;
-> +
-> +        vmap.write8(0xDE, 0x0);
-> +        assert_eq!(vmap.read8(0x0), 0xDE);
-> +        vmap.write32(0xFEDCBA98, 0x20);
-> +
-> +        assert_eq!(vmap.read32(0x20), 0xFEDCBA98);
-> +
-> +        // Ensure the ordering in memory is correct
-> +        let offsets = (0x20..0x23).into_iter();
+Hi Bjorn,
 
-Hi Lyude, i've got a clippy error here that "into_iter()" is redundant
-because it converts a Range<usize> into a Range<usize>.
-
-> +        let expected = 0xFEDCBA98_u32.to_ne_bytes().into_iter();
-> +        for (offset, expected) in offsets.zip(expected) {
-> +            assert_eq!(vmap.read8(offset), expected);
-> +        }
-> +
-> +        Ok(())
-> +    }
-> +}
-> -- 
-> 2.54.0
+On 11/06/2026 17:07, Bjorn Helgaas wrote:
+> On Wed, Jun 10, 2026 at 04:43:15PM +0100, Matt Evans wrote:
+>> The P2PDMA code currently provides two features under the same
+>> CONFIG_PCI_P2PDMA option:
+>>
+>>  1.  Locate providers via pcim_p2pdma_provider()
+>>  2.  Manage actual P2P DMA
+>>
+>> Some drivers (such as vfio-pci) depend on 1, without having a hard
+>> dependency on 2.
+>>
+>> A future commit expands the use of DMABUF in vfio-pci for non-P2P
+>> scenarios, relying on pcim_p2pdma_provider() always being present.  If
+>> that depended on CONFIG_PCI_P2PDMA, it would make vfio-pci only
+>> available if CONFIG_ZONE_DEVICE is present (e.g. 64-bit systems), even
+>> when P2P is not needed.
+>>
+>> To resolve this, introduce CONFIG_PCI_P2PDMA_CORE and refactor the
+>> basic provider functionality into a new p2pdma_core.c file.  This is
+>> available even if the CONFIG_PCI_P2PDMA feature is disabled (or
+>> unavailable due to !CONFIG_ZONE_DEVICE).  Then, drivers can enable any
+>> additional P2P features with the original CONFIG_PCI_P2PDMA (available
+>> when CONFIG_ZONE_DEVICE is set).
+>>
+>> Signed-off-by: Matt Evans <matt@ozlabs.org>
 > 
+> I thought this was going to be just a code move and new Kconfig
+> option, but it involves a little more than that, e.g., adding
+> pci_p2pdma_release_pool() and tweaking the RCU synchronization.
+> 
+> If possible, it would be nice to do that refactoring in a smaller
+> preliminary patch so it's easier to review/bisect/etc and make this
+> one a pure code move.
+
+pci_p2pdma_release_pool() is really part of the split, not a functional
+change, i.e. factoring the (P2P-only) pool handling out from the rest of
+the pci_p2pdma_release() actions still needed for the _CORE case.
+
+I guess .._release() could be split in place in a small patch, and then
+moved alongside the rest in a second.
+
+> I guess CONFIG_PCI_P2PDMA_CORE selects just part 1 ("Locate providers
+> via pcim_p2pdma_provider()"), right?
+
+Yes, I can reword that last paragraph of the commit message to make this
+clearer.
+
+>> +++ b/drivers/pci/p2pdma.h
+>> @@ -0,0 +1,29 @@
+>> +/* SPDX-License-Identifier: GPL-2.0 */
+>> +/*
+>> + * PCI Peer 2 Peer DMA support.
+>> + */
+>> +
+>> +#ifndef _PCI_P2PDMA_H
+>> +#define _PCI_P2PDMA_H
+>> +
+>> +#include <linux/genalloc.h>
+>> +#include <linux/pci-p2pdma.h>
+>> +#include <linux/xarray.h>
+>> +
+>> +struct pci_p2pdma {
+>> +	struct gen_pool *pool;
+>> +	bool p2pmem_published;
+>> +	struct xarray map_types;
+>> +	struct p2pdma_provider mem[PCI_STD_NUM_BARS];
+>> +};
+>> +
+>> +#ifdef CONFIG_PCI_P2PDMA
+>> +void pci_p2pdma_release_pool(struct pci_dev *pdev, struct pci_p2pdma *p2pdma);
+>> +#else
+>> +static inline void pci_p2pdma_release_pool(struct pci_dev *pdev, struct pci_p2pdma *p2pdma)
+> 
+> Wrap to fit in 80 columns like the rest of drivers/pci/
+
+Fixed.
+
+>> +{
+>> +}
+>> +#endif
+>> +
+>> +#endif
+>> +
+> 
+> Spurious blank line at end.
+
+Doh, fixed.
+
+>> +++ b/drivers/pci/p2pdma_core.c
+>> @@ -0,0 +1,118 @@
+>> +// SPDX-License-Identifier: GPL-2.0
+>> +/*
+>> + * PCI Peer 2 Peer DMA support core, providing a bare-bones
+> 
+> In this English text, I think I would spell out "Peer to Peer" instead
+> of relying on the "2" homophone.  Same in p2pdma.h.
+
+I would've preferred that too, it isn't correct; I was seeking to keep
+the blurb here (and in p2pdma.h) as close to the original p2pdma.c as
+possible.  I'll correct it in the new files (hyphenated "peer-to-peer"
+in PCI-SIG language).
+
+
+Thanks,
+
+
+Matt
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
