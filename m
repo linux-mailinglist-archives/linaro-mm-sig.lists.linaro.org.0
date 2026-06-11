@@ -2,74 +2,74 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 9T5UGvqWKmpntAMAu9opvQ
+	id Hg3oMZyXKmqttAMAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Jun 2026 13:07:38 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Jun 2026 13:10:20 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id E196667127B
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Jun 2026 13:07:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5B5506712DF
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Jun 2026 13:10:20 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=google.com header.s=20251104 header.b=dBpdFWQ7;
+	dkim=fail ("body hash did not verify") header.d=google.com header.s=20251104 header.b=VZsCgzCf;
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
 	dmarc=fail reason="SPF not aligned (relaxed)" header.from=google.com (policy=reject)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id D28B640A36
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Jun 2026 11:07:36 +0000 (UTC)
-Received: from mail-ej1-f73.google.com (mail-ej1-f73.google.com [209.85.218.73])
-	by lists.linaro.org (Postfix) with ESMTPS id EA0B64051A
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 11 Jun 2026 11:07:23 +0000 (UTC)
-Received: by mail-ej1-f73.google.com with SMTP id a640c23a62f3a-bf5ea9d13f9so521557766b.0
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 11 Jun 2026 04:07:23 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id 6955940A39
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Jun 2026 11:10:19 +0000 (UTC)
+Received: from mail-wm1-f74.google.com (mail-wm1-f74.google.com [209.85.128.74])
+	by lists.linaro.org (Postfix) with ESMTPS id EA848404D2
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 11 Jun 2026 11:10:06 +0000 (UTC)
+Received: by mail-wm1-f74.google.com with SMTP id 5b1f17b1804b1-490b8adf8b8so70162675e9.0
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 11 Jun 2026 04:10:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1781176043; x=1781780843; darn=lists.linaro.org;
+        d=google.com; s=20251104; t=1781176206; x=1781781006; darn=lists.linaro.org;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=SLWe+2FcDOwhw41u/Q69O94pEc+gWeJDYXa+4qvlFG8=;
-        b=dBpdFWQ7Z37mGWe9suxL4i6QHcNYon26Drm/Eqyzx3nrQbCJMZyTjAD6pWdk8VDmo5
-         GA86UKPyWMHLE16Q9Fd0rx55+HsnQzZPtvjYexj7u2nr1vZMZYmiE4P/udVH1CY3YQBE
-         kucmIaCa/fQl3kkjIR+eN8l7fmhUxYZbCNt2g/9a++Tty5HhFYDtkvnI5U97et366iZj
-         BReubZxcVBSa8ecgDHTsy08RqeSBvpK8vJEUnJMRZKFfQhip4K9liUE2dIf1A8lHH/EP
-         CocejxaM7vInUEBdF370jgIk9laaTOxo8iZw4lNxfm3AKDktl8wAmOfZZv3tpxv+WvfK
-         Nl3A==
+        bh=YpGjHsDNrecPmydKZbz+npt4P/d2PQgzeW5pneBmX4A=;
+        b=VZsCgzCfULdOdW5uizQVTqMiqr0X6ad5gScYZHhn0KgHpnkS/LDQejXBCo2L/44xmS
+         tqrBXff0StaYIJ/UD/1xfrLmuLghjLD79hShTUl8Wkk3eCO45n4vMhmmJPyS1qXFGBvH
+         WEBQrVNHE9pBlCYNsThAarZVrfUTGwHYysuUF+fw2TzYgCaJFpHJsRefcinjI7g0rXY5
+         b4coiJgfRmc1h9ftQgMgKJo7f8nGwKVFHu7GRh6Kk+m9P7dhinOMg8LjQ4unvN0Rclae
+         +X8iI7G2V+5bMG7xGHWkbLEk7/jDMiAYXO3iLBjnFq4uoXsCmc9KzRsCvHZIIYtck96z
+         79qQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781176043; x=1781780843;
+        d=1e100.net; s=20251104; t=1781176206; x=1781781006;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=SLWe+2FcDOwhw41u/Q69O94pEc+gWeJDYXa+4qvlFG8=;
-        b=tT6eXDiHMYSh/uhHglqS04tDjDHy0NMj+FYPix1f8wwkj52XYPbZHW141PU/EGLzey
-         UruJ9y+XGsnON6VTeQrnyTwuNVAS6HTFCjLVygFZL5bZjnkzeJwcAnBSejMb9QMhGI/Z
-         l2NAmAkq3DX+KYoUaljc4BCzJEbSvhrYjn5AwSfLTeGnKvdA3w+vuVZaQrXyKrredGbz
-         OjGpsJW5rhYqoAHnI95a3QmOYzv6Sy4VG08iaK39sI4HM5/LCcR//qBghcUdwrTC6f08
-         czi7UM8ocSWluliZo+Jf+eECjIV9q9mu+Cd/oy+sJzKDmmkDGw6J1qvlhcKrCYJM5L1E
-         gCXQ==
-X-Forwarded-Encrypted: i=1; AFNElJ+QtErBU2QcezYLYIc1Ex0CBEBf+kHM+hG1jRtHq68umgMWl7FGAn6x6EzAnS7AffmO/MH7gTlW3YJqARpX@lists.linaro.org
-X-Gm-Message-State: AOJu0YwJJxHfS6tylOEi+M+wJzNtRGpXuPD16x5EyW8dd+Uu+ndHJMPC
-	E47QiR8e0uBWuzx5VHIz0utEBVULkI0qDtYflL6PNVRWe5NTT9qLewrzrB/Rxg4+oEqzppOP78/
-	gUbRt3CO8jZPu3clPZw==
-X-Received: from ejad6.prod.google.com ([2002:a17:906:406:b0:bf1:4fcd:aef0])
+        bh=YpGjHsDNrecPmydKZbz+npt4P/d2PQgzeW5pneBmX4A=;
+        b=sx4gZ2TpxHNPRKyjC81AbyZNX+KbShWuvGJL7D3lKlyi/1qqdU1miBD+d+9rAgEoua
+         /zGTz7Cs3JexSEbjwmFOPp13uJXq1WDfurBIFvNeqyGqjO/iMpOUD7yvv/5vm8KqucdQ
+         9tVpyw/i4OB2Ncio/Pr0+QYZ35yLBdMaYKXHez8M67U4Zcg0dqP93kETzwA35a8CbCst
+         tcUSiQ/skQSw2xkJh/sokILhjXa9pW1TOBUVupk2ryzFw4v/ixWNwAQt1R5OaDu3SeJM
+         Y71GrvdQLTMSFbzhE+yjs6PLqChvnn6gficFpUIAlJW4khlHeUqCbeSurIrfPSQBo6B4
+         3kSA==
+X-Forwarded-Encrypted: i=1; AFNElJ8iDewquoOyG1kosvlD7o9TgcZ7C0RZ6ONyd0p7dtLT8bVVpfK0D82T7VJiYM7wGdIWlY56r62bBB2Q3hps@lists.linaro.org
+X-Gm-Message-State: AOJu0Yy6OEmPJGm4gbcANg+meL85Z6HPd1myg1MG6xpSZPBrd/+9s6xL
+	3TukjVzzwbCkn8mRX4oHlVcTTlTooaT5rnqX1W71RuKUOV+ZSrlktxeX0osamIHzeEQbzsuu5bd
+	BSVHrHeZShpFTzTe6kA==
+X-Received: from wmqe21.prod.google.com ([2002:a05:600c:4e55:b0:490:b058:c623])
  (user=aliceryhl job=prod-delivery.src-stubby-dispatcher) by
- 2002:a17:907:72cc:b0:bdb:4cf3:7035 with SMTP id a640c23a62f3a-bfc85745bd1mr113064466b.4.1781176042458;
- Thu, 11 Jun 2026 04:07:22 -0700 (PDT)
-Date: Thu, 11 Jun 2026 11:07:21 +0000
-In-Reply-To: <20260610162433.923550-2-lyude@redhat.com>
+ 2002:a7b:ca59:0:b0:490:9782:3eb8 with SMTP id 5b1f17b1804b1-490e561ee97mr20621955e9.25.1781176205567;
+ Thu, 11 Jun 2026 04:10:05 -0700 (PDT)
+Date: Thu, 11 Jun 2026 11:10:04 +0000
+In-Reply-To: <20260610162433.923550-3-lyude@redhat.com>
 Mime-Version: 1.0
-References: <20260610162433.923550-1-lyude@redhat.com> <20260610162433.923550-2-lyude@redhat.com>
-Message-ID: <aiqW6WcagiyiOAKZ@google.com>
+References: <20260610162433.923550-1-lyude@redhat.com> <20260610162433.923550-3-lyude@redhat.com>
+Message-ID: <aiqXjAPQCQ7POxWS@google.com>
 From: Alice Ryhl <aliceryhl@google.com>
 To: Lyude Paul <lyude@redhat.com>
 X-Spamd-Bar: ---
-Message-ID-Hash: HFC4LLU3A7WG2XU4SXY3OQOBEIZ54BDR
-X-Message-ID-Hash: HFC4LLU3A7WG2XU4SXY3OQOBEIZ54BDR
-X-MailFrom: 36pYqagkKDRs1C935IP8C7FF7C5.3FDC9E1IF-DD-J97C9JKJ.C9E1IF.FI7@flex--aliceryhl.bounces.google.com
+Message-ID-Hash: 676PVBCTOLAYPV6WZNGEWB2ATKE3F3TF
+X-Message-ID-Hash: 676PVBCTOLAYPV6WZNGEWB2ATKE3F3TF
+X-MailFrom: 3jZcqagkKDb4epmgiv2lpksskpi.gsqpmrevs-qq-wmkpmwxw.pmrevs.svk@flex--aliceryhl.bounces.google.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 CC: dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org, nouveau@lists.freedesktop.org, Alexandre Courbot <acourbot@nvidia.com>, Gary Guo <gary@garyguo.net>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, driver-core@lists.linux.dev, Miguel Ojeda <ojeda@kernel.org>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Simona Vetter <simona@ffwll.ch>, linux-kernel@vger.kernel.org, Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org, "Rafael J . Wysocki" <rafael@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Maxime Ripard <mripard@kernel.org>, David Airlie <airlied@gmail.com>, Benno Lossin <lossin@kernel.org>, linaro-mm-sig@lists.linaro.org, Danilo Krummrich <dakr@kernel.org>, Mukesh Kumar Chaurasiya <mkchauras@gmail.com>, Asahi Lina <lina+kernel@asahilina.net>, Daniel Almeida <daniel.almeida@collabora.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v20 1/4] rust: drm: gem: shmem: Add DmaResvGuard helper
+Subject: [Linaro-mm-sig] Re: [PATCH v20 2/4] rust: drm: gem: shmem: Add vmap functions
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HFC4LLU3A7WG2XU4SXY3OQOBEIZ54BDR/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/676PVBCTOLAYPV6WZNGEWB2ATKE3F3TF/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -84,7 +84,7 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	R_DKIM_REJECT(1.00)[google.com:s=20251104];
 	MV_CASE(0.50)[];
-	R_SPF_ALLOW(-0.20)[+mx];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
@@ -112,17 +112,17 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	MID_RHS_MATCH_FROM(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	TAGGED_RCPT(0.00)[linaro-mm-sig,kernel];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp,linaro.org:email,nvidia.com:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: E196667127B
+X-Rspamd-Queue-Id: 5B5506712DF
 
-On Wed, Jun 10, 2026 at 12:21:28PM -0400, Lyude Paul wrote:
-> Just a temporary holdover to make locking/unlocking the dma_resv lock much
-> easier.
+On Wed, Jun 10, 2026 at 12:21:29PM -0400, Lyude Paul wrote:
+> One of the more obvious use cases for gem shmem objects is the ability to
+> create mappings into their contents. So, let's hook this up in our rust
+> bindings.
 > 
 > Signed-off-by: Lyude Paul <lyude@redhat.com>
-> Co-authored-by: Alexandre Courbot <acourbot@nvidia.com>
-> Signed-off-by: Alexandre Courbot <acourbot@nvidia.com>
+> Reviewed-by: Alexandre Courbot <acourbot@nvidia.com>
 
 Reviewed-by: Alice Ryhl <aliceryhl@google.com>
 _______________________________________________
