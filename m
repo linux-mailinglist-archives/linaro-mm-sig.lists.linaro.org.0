@@ -2,85 +2,85 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id jIzuMIkAK2od1AMAu9opvQ
+	id RUfcMv8aK2oQ2wMAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Jun 2026 20:38:01 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Jun 2026 22:30:55 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4792C6747DB
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Jun 2026 20:38:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3AFD56752B7
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Jun 2026 22:30:55 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=google.com header.s=20251104 header.b=Y66pKvyJ;
+	dkim=fail ("body hash did not verify") header.d=google.com header.s=20251104 header.b=vhQRpzxR;
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
 	dmarc=fail reason="SPF not aligned (relaxed)" header.from=google.com (policy=reject)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3998340A3E
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Jun 2026 18:38:00 +0000 (UTC)
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
-	by lists.linaro.org (Postfix) with ESMTPS id CDDDC3F76E
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 11 Jun 2026 18:37:48 +0000 (UTC)
-Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-2bf2d865383so14725ad.1
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 11 Jun 2026 11:37:48 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id 2B36A40A06
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Jun 2026 20:30:54 +0000 (UTC)
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+	by lists.linaro.org (Postfix) with ESMTPS id 116F43F6B6
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 11 Jun 2026 20:30:42 +0000 (UTC)
+Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-2bf22c18ad3so29905ad.0
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 11 Jun 2026 13:30:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1781203068; x=1781807868; darn=lists.linaro.org;
+        d=google.com; s=20251104; t=1781209841; x=1781814641; darn=lists.linaro.org;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=/TFfh87PJEUZx1rJ8R/E1mrJDSDu5E1AnG3uHnDgisU=;
-        b=Y66pKvyJXOTnx1QlK6KpNQOnuTPBN28H2IaNMM0s2HWz2q9HhSvMG0b8qKHi3xLMT/
-         Fi8i6n1Mrt9J9w/B7VLs7qccv0yq2sS8w06dT4pc8Vl6fPlL8XZTysDn2fi6cUok2yDc
-         bFQhoIAssUB43hOF4IKjbkncSQyk5MqM7IJUO3ujtX/cqzn8lSuMV4EVyFLCsA8zaTV+
-         k5Z799FwxhdIKV/eZo67GXZdcyyl19oeagC5nPZ4BprzSL2oZoZ8fJSts7jOy5byC6Vn
-         xORght/aYxcyfbYSzZI4YuedpacSxGH7oz7uXcFL7jMaMj04q3sXe3c6fayg9avO2pNV
-         AyRA==
+        bh=O89fLhwmUexwr334yt/hIAtfe9wNMTELN1E0wgrm87U=;
+        b=vhQRpzxRzqW+nl4sNrNHVfBnQWj4jsgDw6OR3ZsZsDxD4ukit2MGRNdt9REn2BFa9/
+         jF+pYWUgqoNGiQP9lOa5xFUtOhsBNVc/y8StVFmpriAI5gl35hQWSuEOeudL+1WHtJ5f
+         YbwJe8Jwi6pbf24k04B7CeSJtZInOKOMWuQ/G9ALakZliCaJNmOLG5ipVvS8a9qan5qj
+         Iqw6cZxRCvEM0SSIaXu0K0J4Gn2oVP5UvCgnWqNP5DTnWtxX8IaiJrAKDYXq0ZueESth
+         DfIntp8PqBNZoApAEurCOReflZ1N6lljgqvWyPQSWzKkIQaddNk3xPPT0XX2jFNbXUmZ
+         t7HA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781203068; x=1781807868;
+        d=1e100.net; s=20251104; t=1781209841; x=1781814641;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=/TFfh87PJEUZx1rJ8R/E1mrJDSDu5E1AnG3uHnDgisU=;
-        b=IprBAHLCcLAMZ/hVRAIFA4rsLrQkc5S2dDDztHxE1I95kWVCcn/AHs4xKSaamqZfTi
-         R07kgWgLrBZR8J+MIm7GmheUmRdfD2cn4wiuZHFxQVBDjUr4K3AlXRS4c9PrjSfqRP/N
-         KcFJa7RpLFRzsqZuyjfdfIadaVED/pYtQWqSKHoLkGN/AnMl7XTADFU/ox/PpQgaLdbU
-         3Nbl8lJyQTnaTvs+vCVJPh+Vj1bK8Nc527zmr56RGta871bk5g5OwCKP6Mag+IpBoRNx
-         KkLUBec8T8Lrt2SNJ2hR7ajkZTc8hmr6pK/tFHLBAkSns6PINEfLO8AhYfi8GUwPsEkU
-         ZviQ==
-X-Forwarded-Encrypted: i=1; AFNElJ+3RRVfEvJH7zHEaVlSNfgGmEa7nR7ZYQXY2NTCzDtwT8CdKnRcGjlXjenh8neQRSq38MKLWlNvSa3iy82O@lists.linaro.org
-X-Gm-Message-State: AOJu0Yy39IqumfTmxXUhHBlrvJMi1vT54UmXLNEwWeQ/fXsRu6XFzFiM
-	qxFrsUqqptOoIvU1kJFJOz67kbOcO8PqqTJRhRsi19tRARMVKgHU1uioWy4DhEywBg==
-X-Gm-Gg: Acq92OEiElrXOtnib5QN3Li8SirG+Xu8GXl7Pa8n9moNedpToMN/hqKZ7bSv8b9YKxl
-	fsyYlHwUmQeLa6p4VKFLyYS/IgXrzUO5LyR0Rp7JqLPBRcdFQYF53897OtZmRsdmFsSmix6pl6n
-	1hDJbbK+09cgbCnVpbKDc+TPexQ4orpMvlWEjTw0jHP9aRhP6oDNzNygrxg5P1HQMuwG6V6De7X
-	QSFhrMbmdFyqgaaDNP01xrWVOHh/36XI+jxvRXnPLJ/uC/0iYSLH/vwpJnMEy32kv3jD4njt///
-	qkD+1ToUBlhVzbT9QXCu74N8VRfGq86qrmPxPmJdDCg7vQnp8LV1b16B7/ccrJj9J+uKU1/vwqj
-	fAUsG+eTYeHyGn/WHLXOldyTRtJre8UtmTyJEPxHBwAGwwnHyAwovYWCzbZgQp62yayVLydq5mu
-	xDhOXbchdaVyr7yCcKse7vF0tJbFosurD9ZJGpRntOLruzqb2efvHUmUt+yqjv
-X-Received: by 2002:a17:902:ce02:b0:2bf:b01:2b4c with SMTP id d9443c01a7336-2c3e3f69092mr255655ad.9.1781203067344;
-        Thu, 11 Jun 2026 11:37:47 -0700 (PDT)
+        bh=O89fLhwmUexwr334yt/hIAtfe9wNMTELN1E0wgrm87U=;
+        b=YWJ4zxmnCKM14OjaUy8r8PoJJXAJbiFfkFXNxSRrH0R2SszMlTqNcmkh1Qa81imYVD
+         oRL4xtiSgrJ84ucr07n/FELc12Lq5nmVswNps9dKK4BicrKrlnbonXsqne0VDlz1dI56
+         ZlQWuV9B4hohI1e4aD5n3x1Z/B7q0nwjR0IHjnvvfjRp9YEajBBXxsMetVb6EEiiFjM5
+         RglmVj318NhmPSsK3DhSud8pkA3oS0Yzt+SY6jno6h1WRwMLuvLc/z3s/7tt38gJ/PK/
+         cGU/Oho2xtZ8gX/sSRq+8Tj2i9zWfDXaR95+pfclExwalvpuigx2Qm7eT5BYPMU2jGrV
+         fDOg==
+X-Forwarded-Encrypted: i=1; AFNElJ+5VYSJwBo2O9LffHx8iYSg7Dt9V4rV7pcIY1eBPSY9V5RtQhzquWbF4h4iFZG7EH5WWFsOcF8dDEEp2v3M@lists.linaro.org
+X-Gm-Message-State: AOJu0Yyy1dhlnJM2vPZKwgc7mS8ZcGf206P36siOgngUmo9jJc8O0jYq
+	SQpSkhgrX0sw94VylRPNvXXFRLDAvkZ8Kds1B5JGqZPaM7YfpFLoRcCWg/Ul6Ekv1w==
+X-Gm-Gg: Acq92OFoxBwpIFdoSMugO0Ue43F9TyY42J8GrMGOMji+fymen7xmV2So82UifLxIukk
+	1drIseWFX01cAXlDmi0FpnI2Qw7sD0H20kVIxhyoSxZOuxI9ECImzWUaBk4NQb1vxTJQmSTPkxy
+	wtNxw3vlbBuTGHYAG/+uL6tnxi64S6Eqt93PORN8LJP/lp3ESrbsv2aaYIjj2Qd/bl8Wza5ASDB
+	UbLVJ6xSANPZ2KGu0OUAYwFSNpkS/x3GWxKvm0j89/Jn03hCu2D9ky73xoc4THEp4ILKIAMnSK3
+	h58BUL+TRfcd1wjtBwzHx1VAhwsXfJ1UBx1ETN5ngGN9R4RHkK54dr7atyYC+c49FjYPCkW8Ian
+	ETmarzogzlYVWjf4NPf7802iYcWSxlRKqeVmqOxjjb6BE0dV56mMnyaZIJRCupla9HcpECQA46q
+	U5wwmUSImk8sw8CBkVhLbjjN9r6LQozWfAzrTaqrygL5wTzIkdqKpf3y6hY34p
+X-Received: by 2002:a17:902:ef47:b0:2b4:641a:6b7c with SMTP id d9443c01a7336-2c405c8b1bcmr130535ad.13.1781209840425;
+        Thu, 11 Jun 2026 13:30:40 -0700 (PDT)
 Received: from google.com (199.255.142.34.bc.googleusercontent.com. [34.142.255.199])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-c865880c00dsm2085451a12.24.2026.06.11.11.37.42
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2c16609df6esm311256825ad.48.2026.06.11.13.30.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 11 Jun 2026 11:37:46 -0700 (PDT)
-Date: Thu, 11 Jun 2026 18:37:39 +0000
+        Thu, 11 Jun 2026 13:30:39 -0700 (PDT)
+Date: Thu, 11 Jun 2026 20:30:32 +0000
 From: Pranjal Shrivastava <praan@google.com>
 To: Matt Evans <matt@ozlabs.org>
-Message-ID: <aisAc1HRn2Wa4F9p@google.com>
+Message-ID: <aisa6H-a-176MXhC@google.com>
 References: <20260610154327.37758-1-matt@ozlabs.org>
- <20260610154327.37758-2-matt@ozlabs.org>
+ <20260610154327.37758-3-matt@ozlabs.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260610154327.37758-2-matt@ozlabs.org>
+In-Reply-To: <20260610154327.37758-3-matt@ozlabs.org>
 X-Spamd-Bar: ----
-Message-ID-Hash: MNMYB3VGK6T24XEN3VUMSU2MIX25HGGE
-X-Message-ID-Hash: MNMYB3VGK6T24XEN3VUMSU2MIX25HGGE
+Message-ID-Hash: U5QERKEIZAZ4EW46JPOU5NHMFAGHTAMI
+X-Message-ID-Hash: U5QERKEIZAZ4EW46JPOU5NHMFAGHTAMI
 X-MailFrom: praan@google.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 CC: Alex Williamson <alex@shazbot.org>, Leon Romanovsky <leon@kernel.org>, Jason Gunthorpe <jgg@nvidia.com>, Alex Mastro <amastro@fb.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Bjorn Helgaas <bhelgaas@google.com>, Logan Gunthorpe <logang@deltatee.com>, Mahmoud Adam <mngyadam@amazon.de>, David Matlack <dmatlack@google.com>, =?iso-8859-1?Q?Bj=F6rn_T=F6pel?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Kevin Tian <kevin.tian@intel.com>, Ankit Agrawal <ankita@nvidia.com>, Alistair Popple <apopple@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org, linux-pci@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3 1/9] PCI/P2PDMA: Add CONFIG_PCI_P2PDMA_CORE
+Subject: [Linaro-mm-sig] Re: [PATCH v3 2/9] vfio/pci: Add a helper to look up PFNs for DMABUFs
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MNMYB3VGK6T24XEN3VUMSU2MIX25HGGE/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/U5QERKEIZAZ4EW46JPOU5NHMFAGHTAMI/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -120,84 +120,217 @@ X-Spamd-Result: default: False [2.49 / 15.00];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[ozlabs.org:email,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,ozlabs.org:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 4792C6747DB
+X-Rspamd-Queue-Id: 3AFD56752B7
 
-On Wed, Jun 10, 2026 at 04:43:15PM +0100, Matt Evans wrote:
-> The P2PDMA code currently provides two features under the same
-> CONFIG_PCI_P2PDMA option:
+On Wed, Jun 10, 2026 at 04:43:16PM +0100, Matt Evans wrote:
+> Add vfio_pci_dma_buf_find_pfn(), which a VMA fault handler can use to
+> find a PFN.
 > 
->  1.  Locate providers via pcim_p2pdma_provider()
->  2.  Manage actual P2P DMA
+> This supports multi-range DMABUFs, which typically would be used to
+> represent scattered spans but might even represent overlapping or
+> aliasing spans of PFNs.
 > 
-> Some drivers (such as vfio-pci) depend on 1, without having a hard
-> dependency on 2.
-> 
-> A future commit expands the use of DMABUF in vfio-pci for non-P2P
-> scenarios, relying on pcim_p2pdma_provider() always being present.  If
-> that depended on CONFIG_PCI_P2PDMA, it would make vfio-pci only
-> available if CONFIG_ZONE_DEVICE is present (e.g. 64-bit systems), even
-> when P2P is not needed.
-> 
-> To resolve this, introduce CONFIG_PCI_P2PDMA_CORE and refactor the
-> basic provider functionality into a new p2pdma_core.c file.  This is
-> available even if the CONFIG_PCI_P2PDMA feature is disabled (or
-> unavailable due to !CONFIG_ZONE_DEVICE).  Then, drivers can enable any
-> additional P2P features with the original CONFIG_PCI_P2PDMA (available
-> when CONFIG_ZONE_DEVICE is set).
+> Because this is intended to be used in vfio_pci_core.c, we also need
+> to expose the struct vfio_pci_dma_buf in the vfio_pci_priv.h header.
 > 
 > Signed-off-by: Matt Evans <matt@ozlabs.org>
 > ---
->  MAINTAINERS                |   2 +-
->  drivers/pci/Kconfig        |  10 ++--
->  drivers/pci/Makefile       |   1 +
->  drivers/pci/p2pdma.c       | 109 ++--------------------------------
->  drivers/pci/p2pdma.h       |  29 +++++++++
->  drivers/pci/p2pdma_core.c  | 118 +++++++++++++++++++++++++++++++++++++
->  include/linux/pci-p2pdma.h |  24 ++++----
->  include/linux/pci.h        |   2 +-
->  8 files changed, 174 insertions(+), 121 deletions(-)
->  create mode 100644 drivers/pci/p2pdma.h
->  create mode 100644 drivers/pci/p2pdma_core.c
+>  drivers/vfio/pci/vfio_pci_dmabuf.c | 137 ++++++++++++++++++++++++++---
+>  drivers/vfio/pci/vfio_pci_priv.h   |  20 +++++
+>  2 files changed, 144 insertions(+), 13 deletions(-)
 > 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index c2c6d79275c6..b21523b3bd8b 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -20617,7 +20617,7 @@ B:	https://bugzilla.kernel.org
->  C:	irc://irc.oftc.net/linux-pci
->  T:	git git://git.kernel.org/pub/scm/linux/kernel/git/pci/pci.git
->  F:	Documentation/driver-api/pci/p2pdma.rst
-> -F:	drivers/pci/p2pdma.c
-> +F:	drivers/pci/p2pdma*
->  F:	include/linux/pci-p2pdma.h
+> diff --git a/drivers/vfio/pci/vfio_pci_dmabuf.c b/drivers/vfio/pci/vfio_pci_dmabuf.c
+> index c16f460c01d6..9e5e865f6fb6 100644
+> --- a/drivers/vfio/pci/vfio_pci_dmabuf.c
+> +++ b/drivers/vfio/pci/vfio_pci_dmabuf.c
+> @@ -9,19 +9,6 @@
 >  
->  PCI POWER CONTROL
-> diff --git a/drivers/pci/Kconfig b/drivers/pci/Kconfig
-> index 33c88432b728..59d70bc84cc9 100644
-> --- a/drivers/pci/Kconfig
-> +++ b/drivers/pci/Kconfig
-> @@ -206,11 +206,7 @@ config PCIE_TPH
->  config PCI_P2PDMA
->  	bool "PCI peer-to-peer transfer support"
->  	depends on ZONE_DEVICE
-> -	#
-> -	# The need for the scatterlist DMA bus address flag means PCI P2PDMA
-> -	# requires 64bit
-> -	#
-> -	depends on 64BIT
-> +	select PCI_P2PDMA_CORE
->  	select GENERIC_ALLOCATOR
->  	select NEED_SG_DMA_FLAGS
->  	help
+>  MODULE_IMPORT_NS("DMA_BUF");
+>  
+> -struct vfio_pci_dma_buf {
+> -	struct dma_buf *dmabuf;
+> -	struct vfio_pci_core_device *vdev;
+> -	struct list_head dmabufs_elm;
+> -	size_t size;
+> -	struct phys_vec *phys_vec;
+> -	struct p2pdma_provider *provider;
+> -	u32 nr_ranges;
+> -	struct kref kref;
+> -	struct completion comp;
+> -	u8 revoked : 1;
+> -};
+> -
+>  static int vfio_pci_dma_buf_attach(struct dma_buf *dmabuf,
+>  				   struct dma_buf_attachment *attachment)
+>  {
+> @@ -106,6 +93,130 @@ static const struct dma_buf_ops vfio_pci_dmabuf_ops = {
+>  	.release = vfio_pci_dma_buf_release,
+>  };
+>  
+> +int vfio_pci_dma_buf_find_pfn(struct vfio_pci_dma_buf *priv,
+> +			      struct vm_area_struct *vma,
+> +			      unsigned long address,
 
-Nit: Did we drop depends on 64BIT intentionally here? I guess the full
-PCI_P2PDMA stack still selects NEED_SG_DMA_FLAGS? IIRC, NEED_SG_DMA_FLAGS
-doesn't select 64BIT?
+Nit: s/address/fault_addr ?
 
-With the nit (and Bjorn's comments addressed)
-Reviewed-by: Pranjal Shrivastava <praan@google.com>
+> +			      unsigned int order,
+> +			      unsigned long *out_pfn)
+> +{
+> +	/*
+> +	 * Given a VMA (start, end, pgoffs) and a fault address,
+> +	 * search the corresponding DMABUF's phys_vec[] to find the
+> +	 * range representing the address's offset into the VMA, and
+> +	 * its PFN.
+> +	 *
+> +	 * The phys_vec[] ranges represent contiguous spans of VAs
+> +	 * upwards from the buffer offset 0; the actual PFNs might be
+> +	 * in any order, overlap/alias, etc.  Calculate an offset of
+> +	 * the desired page given VMA start/pgoff and address, then
+> +	 * search upwards from 0 to find which span contains it.
+> +	 *
+> +	 * On success, a valid PFN for a page sized by 'order' is
+> +	 * returned into out_pfn.
+> +	 *
+> +	 * Failure occurs if:
+> +	 * - The page would cross the edge of the VMA
+> +	 * - The page isn't entirely contained within a range
+> +	 * - We find a range, but the final PFN isn't aligned to the
+> +	 *   requested order.
+> +	 *
+> +	 * (Upon failure, the caller is expected to try again with a
+> +	 * smaller order; the tests above will always succeed for
+> +	 * order=0 as the limit case.)
+> +	 *
+> +	 * It's suboptimal if DMABUFs are created with neigbouring
+> +	 * ranges that are physically contiguous, since hugepages
+> +	 * can't straddle range boundaries.  (The construction of the
+> +	 * ranges vector should merge such ranges.)
+> +	 *
+> +	 * Finally, vma_pgoff_adjust is used for a DMABUF representing
+> +	 * a VFIO BAR mmap, which is created from the start of the
+> +	 * offset region.
+> +	 */
+> +
+> +	const unsigned long pagesize = PAGE_SIZE << order;
+> +	unsigned long vma_off = ((vma->vm_pgoff - priv->vma_pgoff_adjust) <<
+> +				 PAGE_SHIFT) & VFIO_PCI_OFFSET_MASK;
+> +	unsigned long rounded_page_addr = ALIGN_DOWN(address, pagesize);
+> +	unsigned long rounded_page_end = rounded_page_addr + pagesize;
+> +	unsigned long page_buf_offset;
+> +	unsigned long page_buf_offset_end;
+> +	unsigned long range_buf_offset = 0;
+> +	unsigned int i;
+> +
+> +	if (rounded_page_addr < vma->vm_start || rounded_page_end > vma->vm_end) {
+> +		if (order > 0)
+> +			return -EAGAIN;
+> +
+> +		/* A fault address outside of the VMA is absurd. */
+> +		WARN(1, "Fault addr 0x%lx outside VMA 0x%lx-0x%lx\n",
+> +		     address, vma->vm_start, vma->vm_end);
+
+This could flood dmesg if triggered repeatedly by userspace :( 
+Since a fault outside the VMA is an invalid access that already results
+in a SIGBUS, we could probably avoid the WARN here?
+Perhaps pr_warn_ratelimited() should suffice?
+
+> +		return -EFAULT;
+> +	}
+> +
+> +	/*
+> +	 * page_buff_offset[_end] is the span of DMABUF offsets
+> +	 * corresponding to the faulting page:
+> +	 */
+> +	if (unlikely(check_add_overflow(rounded_page_addr - vma->vm_start,
+> +					vma_off, &page_buf_offset) ||
+> +		     check_add_overflow(page_buf_offset, pagesize,
+> +					&page_buf_offset_end)))
+> +		return -EFAULT;
+> +
+> +	for (i = 0; i < priv->nr_ranges; i++) {
+> +		size_t range_len = priv->phys_vec[i].len;
+> +		phys_addr_t range_start = priv->phys_vec[i].paddr;
+> +
+> +		/*
+> +		 * If the current range starts after the page's span,
+> +		 * this and any future range won't match.  Bail early.
+> +		 */
+> +		if (page_buf_offset_end <= range_buf_offset)
+> +			break;
+> +
+> +		if (page_buf_offset >= range_buf_offset &&
+> +		    page_buf_offset_end <= range_buf_offset + range_len) {
+> +			/*
+> +			 * The faulting page is wholly contained
+> +			 * within the span represented by the range.
+> +			 * Validate PFN alignment for the order:
+> +			 */
+> +			unsigned long pfn = (range_start + page_buf_offset -
+> +					     range_buf_offset) / PAGE_SIZE;
+
+Minor nit: I'm aware that decent compilers convert pow(2) divides to >> 
+However, we seem to be using `>> PAGE_SHIFT` across vfio-pci. E.g.:
+
+return (pci_resource_start(vdev->pdev, index) >> PAGE_SHIFT) + pgoff;
+unsigned long pgoff = (addr - vma->vm_start) >> PAGE_SHIFT;
+
+Let's consider using the same pattern?
+
+> +
+> +			if (IS_ALIGNED(pfn, 1 << order)) {
+> +				*out_pfn = pfn;
+> +				return 0;
+> +			}
+> +			/* Retry with smaller order */
+> +			return -EAGAIN;
+> +		}
+> +		range_buf_offset += range_len;
+> +	}
+> +
+> +	/*
+> +	 * A hugepage straddling a range boundary will fail to match a
+> +	 * range, but the address will (eventually) match when retried
+> +	 * with a smaller page.
+> +	 */
+> +	if (order > 0)
+> +		return -EAGAIN;
+> +
+> +	/*
+> +	 * If we get here, the address fell outside of the span
+> +	 * represented by the (concatenated) ranges.  Setup of a
+
+Nit: double space before "Setup" and "But" below.
+
+> +	 * mapping must ensure that the VMA is <= the total size of
+> +	 * the ranges, so this should never happen.  But, if it does,
+> +	 * force SIGBUS for the access and warn.
+> +	 */
+> +	WARN_ONCE(1, "No range for addr 0x%lx, order %d: VMA 0x%lx-0x%lx pgoff 0x%lx, %u ranges, size 0x%zx\n",
+> +		  address, order, vma->vm_start, vma->vm_end, vma->vm_pgoff,
+> +		  priv->nr_ranges, priv->size);
+> +
+> +	return -EFAULT;
+
+The fall-through logic at the end feels a bit redundant.
+
+If we've exhausted the phys_vec list without finding a match, returning
+-EAGAIN for order > 0 seems like the correct fallback behavior.
+
+However, the subsequent WARN_ONCE for the order == 0 seems unnecessary?
+An out-of-bounds access is an error that should simply return -EFAULT 
+(converting to SIGBUS) without polluting the kernel log with stackdumps?
+Can we instead convert this to a pr_warn or something? Something like:
+
+	ret = order ? -EAGAIN : -EFAULT;
+
+	if (ret == -EFAULT)
+		pr_warn_ratelimited("No range for addr 0x%lx...\n", address);
+
+	return ret;
+
+(with appropriate comments)
 
 Thanks,
 Praan
