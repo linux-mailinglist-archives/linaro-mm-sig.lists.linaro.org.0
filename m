@@ -2,85 +2,64 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id ua3GC24SLGqEKwQAu9opvQ
+	id uQByA3pePWoS2AgAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 12 Jun 2026 16:06:38 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Jun 2026 18:59:38 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id A8E5F67A0E2
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 12 Jun 2026 16:06:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 961AE6C7A21
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Jun 2026 18:59:37 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=google.com header.s=20251104 header.b=v8wOgO8e;
+	dkim=fail ("body hash did not verify") header.d=ozlabs.org header.s=201707 header.b=EOwLg45D;
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
-	dmarc=fail reason="SPF not aligned (relaxed)" header.from=google.com (policy=reject)
+	dmarc=fail reason="SPF not aligned (relaxed)" header.from=ozlabs.org (policy=none)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C2FAF40A68
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 12 Jun 2026 14:06:36 +0000 (UTC)
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
-	by lists.linaro.org (Postfix) with ESMTPS id A743D3FDAE
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 12 Jun 2026 14:06:24 +0000 (UTC)
-Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-2bf22c18ad3so119915ad.0
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 12 Jun 2026 07:06:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1781273184; x=1781877984; darn=lists.linaro.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=7gWNes2hHFmdqgzisSBTrBhiO7t0Lprwi8AqbjigE24=;
-        b=v8wOgO8eJ2XU4EqbFD488PwQ+iAnSEeLkCxnbLBNlFOzqmE0t0Mo0n9rUNV8kKpt7O
-         QWng02xje68nIvAFA9QR4y6pu3no8AoAFtK7FvekJLgPdhGXP5orOj41uIuo2bfv56VI
-         x4ZnY/cEpgomV99zrK7cJ9hAvAaNiigC+59pa/x4aKDwN/XRsu6sAL3F9TIQlzB0//2e
-         /sKLuYlmXBnZlpEb8NQr23OV8zO1VCWWKDYvoMjP6YiKbRgzUF7GT2qooVZUu7n07NZs
-         jbI2LhQIedSlbmgYFIQrN3n4bSaScqWIoq9LBc9qxGSSuqZEBWlK2svvsE7QNh5M14L4
-         R5Kg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781273184; x=1781877984;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=7gWNes2hHFmdqgzisSBTrBhiO7t0Lprwi8AqbjigE24=;
-        b=aH46znscPpB7nV4GqUvO8XmxiiQd74JSEfE6z1cvFBYv4Z3qeo0Qldb16HABtmu9E4
-         QZaas8ZnXmnvMyxQyTVtevD0X+JQJb0XAvW+DyzvxKJ+0ZbbATJ2fITBVnEf6xeb1A+S
-         LMNskSTMgQq0cnXVfsHj85/jW/oI8nH8BAn/whvibnJ7sef3HW2fhBza/cPE1kkPfZX7
-         1YVp+rWRlwwl/avaKDGMUGsTAYjXk7Njqu8elwk785Z33/35DUSPGxmWlqs6qU2h4o06
-         TSE+14tuXAWSZubfyTlSfNJCxkeNCOoVKljCP76HQA5uOERV/kmhA1zmduxSZNxv0T42
-         dfJw==
-X-Forwarded-Encrypted: i=1; AFNElJ8zsGjxbak6sCAIhLTKC8KIz5hMHa9OY3QJXyhMSfzeDtAgdsAGbHJcNX79MWO2QvUkm/ZJT+j96DQC2tU8@lists.linaro.org
-X-Gm-Message-State: AOJu0YwSiBya5Ryc2RoiQukVNGLSPltVbGgba3d2ck0SLk7RER0fpo0o
-	wrpo0vLE7AzVRMx8GJJNPt2XXShpk7qsZ6mMPI5OB7qV8hqDKTvpmudvtcGOOrDgmA==
-X-Gm-Gg: Acq92OGPdLrMreNsX6+1MZjZE9b0949/5Iy4MYAL2h+5xwxXoUO5GGKqzYnZOgJU2WS
-	wqEMzDXySjBkL9OdYGjgSeC1uX8IYQFoDHAIn1l8hU16lQyDSI4Go9xl+aYQ22vI4eGas0DEpRY
-	wcZ+RGl/Sl0ENffwLiKtZWBHOU1I96hwkSf9cN7CsUBRA9vGkUjk5pZ4PKzCQmRhAB+uJ3w80PU
-	G6gSwpZvPgS9dAL5uUozkO3dhUnGAf/kmWYgo+lf1x9205zaBxcVO92sUjxwg4d6Mx+oota1aeo
-	Ao4m1ToHMpmwB8AvINVg3Ie4U75oLIq61UZl/4P0LrGKe6e0KL/OGwBDUvzu4PvwOL0YCykmAUu
-	8DS+5A+Tw85dFwy6Szx+r0SXtHMBtfHEDAnPhDOxX6qIpdfIxvTkbwdUUrVzzAvlmvzUx29SQ0T
-	PJRuccVXFhwo1hM8L6DSo5ALe5B0oqVvIVUlpOFjjgeGjQdiFzWDPFan3KsHwnY3GqXu0czng=
-X-Received: by 2002:a17:903:46c6:b0:2bd:6dad:3df9 with SMTP id d9443c01a7336-2c405f85829mr1700165ad.23.1781273183096;
-        Fri, 12 Jun 2026 07:06:23 -0700 (PDT)
-Received: from google.com (199.255.142.34.bc.googleusercontent.com. [34.142.255.199])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-37a25ecd5dcsm2325236a91.9.2026.06.12.07.06.18
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 12 Jun 2026 07:06:22 -0700 (PDT)
-Date: Fri, 12 Jun 2026 14:06:14 +0000
-From: Pranjal Shrivastava <praan@google.com>
-To: Matt Evans <matt@ozlabs.org>
-Message-ID: <aiwSVk4n9mCQEln2@google.com>
-References: <20260610154327.37758-1-matt@ozlabs.org>
- <20260610154327.37758-6-matt@ozlabs.org>
+	by lists.linaro.org (Postfix) with ESMTP id ADA82434CD
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Jun 2026 16:59:36 +0000 (UTC)
+Received: from mail.ozlabs.org (gandalf.ozlabs.org [150.107.74.76])
+	by lists.linaro.org (Postfix) with ESMTPS id DD0193F91B
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 12 Jun 2026 14:32:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ozlabs.org;
+	s=201707; t=1781274721;
+	bh=oYg/1sibtgFfC9/h6xF284nz/nnSd5DreUIEPAixkoI=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=EOwLg45DKjx6iDaghDYk9kK4wwjCVOjCkcg4exJJahYAnqK8izc/mcAILa15V1Lw+
+	 WZvY5lJJPBAuzY0sfq6YxCSuit092SWgMIATHqOj8MQvDZYd9grb5T+2Y4kgT27Xqq
+	 4WTUNvtPu/f8LO0RtR4DSWesenP11MoRP5ideV8DmBKUmPJid3QS6nttKavPg4/3jW
+	 nhJ0zA+9NVczIGTE9zDZ0/wp+ntipstalerasNPLL8tfLvg2Rx46Oad+JjtpviFiif
+	 6JmXWN7efNklF145UDNG7QB9DrJCcpGL+9n6y1jSIMMz9cgSmLZF0Sgm4vVDj8p+QG
+	 CSy5Imknap0HA==
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(Client did not present a certificate)
+	by mail.ozlabs.org (Postfix) with ESMTPSA id 4gcMQx0gWPz58ld;
+	Sat, 13 Jun 2026 00:31:52 +1000 (AEST)
+Message-ID: <0dfadf98-a904-4e6a-b078-5caf27bc7922@ozlabs.org>
+Date: Fri, 12 Jun 2026 15:31:49 +0100
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20260610154327.37758-6-matt@ozlabs.org>
+User-Agent: Mozilla Thunderbird
+Content-Language: en-GB
+To: "Tian, Kevin" <kevin.tian@intel.com>,
+ Pranjal Shrivastava <praan@google.com>, Robin Murphy <robin.murphy@arm.com>
+References: <20260610154327.37758-1-matt@ozlabs.org>
+ <20260610154327.37758-2-matt@ozlabs.org> <aisAc1HRn2Wa4F9p@google.com>
+ <DM6PR11MB36904ED2E1D2C646644F67668C182@DM6PR11MB3690.namprd11.prod.outlook.com>
+From: Matt Evans <matt@ozlabs.org>
+In-Reply-To: <DM6PR11MB36904ED2E1D2C646644F67668C182@DM6PR11MB3690.namprd11.prod.outlook.com>
 X-Spamd-Bar: ---
-Message-ID-Hash: TDS4CMSBHB7W2NSZOX535LW4WJMNKOFN
-X-Message-ID-Hash: TDS4CMSBHB7W2NSZOX535LW4WJMNKOFN
-X-MailFrom: praan@google.com
-X-Mailman-Rule-Hits: member-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
-CC: Alex Williamson <alex@shazbot.org>, Leon Romanovsky <leon@kernel.org>, Jason Gunthorpe <jgg@nvidia.com>, Alex Mastro <amastro@fb.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Bjorn Helgaas <bhelgaas@google.com>, Logan Gunthorpe <logang@deltatee.com>, Mahmoud Adam <mngyadam@amazon.de>, David Matlack <dmatlack@google.com>, =?iso-8859-1?Q?Bj=F6rn_T=F6pel?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Kevin Tian <kevin.tian@intel.com>, Ankit Agrawal <ankita@nvidia.com>, Alistair Popple <apopple@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org, linux-pci@vger.kernel.org
+X-MailFrom: matt@ozlabs.org
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+Message-ID-Hash: 3C3CTCPGZF66BAZER2N5KTXWSH3UJ7LE
+X-Message-ID-Hash: 3C3CTCPGZF66BAZER2N5KTXWSH3UJ7LE
+X-Mailman-Approved-At: Thu, 25 Jun 2026 16:59:02 +0000
+CC: Alex Williamson <alex@shazbot.org>, Leon Romanovsky <leon@kernel.org>, Jason Gunthorpe <jgg@nvidia.com>, Alex Mastro <amastro@fb.com>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Bjorn Helgaas <bhelgaas@google.com>, Logan Gunthorpe <logang@deltatee.com>, Mahmoud Adam <mngyadam@amazon.de>, David Matlack <dmatlack@google.com>, =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Ankit Agrawal <ankita@nvidia.com>, Alistair Popple <apopple@nvidia.com>, "Kasireddy, Vivek" <vivek.kasireddy@intel.com>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "kvm@vger.kernel.org" <kvm@vger.kernel.org>, "linux-pci@vger.kernel.org" <linux-pci@vger.kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3 5/9] vfio/pci: Provide a user-facing name for BAR mappings
+Subject: [Linaro-mm-sig] Re: [PATCH v3 1/9] PCI/P2PDMA: Add CONFIG_PCI_P2PDMA_CORE
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TDS4CMSBHB7W2NSZOX535LW4WJMNKOFN/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3C3CTCPGZF66BAZER2N5KTXWSH3UJ7LE/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -90,145 +69,97 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [2.49 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[google.com : SPF not aligned (relaxed),reject];
-	R_DKIM_REJECT(1.00)[google.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+mx];
+X-Spamd-Result: default: False [1.59 / 15.00];
+	R_DKIM_REJECT(1.00)[ozlabs.org:s=201707];
+	DATE_IN_PAST(1.00)[314];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[ozlabs.org : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER(0.00)[praan@google.com,linaro-mm-sig-bounces@lists.linaro.org];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_RECIPIENTS(0.00)[m:matt@ozlabs.org,m:alex@shazbot.org,m:leon@kernel.org,m:jgg@nvidia.com,m:amastro@fb.com,m:christian.koenig@amd.com,m:bhelgaas@google.com,m:logang@deltatee.com,m:mngyadam@amazon.de,m:dmatlack@google.com,m:bjorn@kernel.org,m:sumit.semwal@linaro.org,m:kevin.tian@intel.com,m:ankita@nvidia.com,m:apopple@nvidia.com,m:vivek.kasireddy@intel.com,m:linux-kernel@vger.kernel.org,m:linux-media@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,m:kvm@vger.kernel.org,m:linux-pci@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:kevin.tian@intel.com,m:praan@google.com,m:robin.murphy@arm.com,m:alex@shazbot.org,m:leon@kernel.org,m:jgg@nvidia.com,m:amastro@fb.com,m:christian.koenig@amd.com,m:bhelgaas@google.com,m:logang@deltatee.com,m:mngyadam@amazon.de,m:dmatlack@google.com,m:bjorn@kernel.org,m:sumit.semwal@linaro.org,m:ankita@nvidia.com,m:apopple@nvidia.com,m:vivek.kasireddy@intel.com,m:linux-kernel@vger.kernel.org,m:linux-media@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,m:kvm@vger.kernel.org,m:linux-pci@vger.kernel.org,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[3];
+	FORGED_SENDER(0.00)[matt@ozlabs.org,linaro-mm-sig-bounces@lists.linaro.org];
 	FORWARDED(0.00)[lists@lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[23];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
 	ARC_NA(0.00)[];
-	DKIM_TRACE(0.00)[google.com:-];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[praan@google.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	DKIM_TRACE(0.00)[ozlabs.org:-];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[matt@ozlabs.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp,ozlabs.org:mid,ozlabs.org:from_mime]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: A8E5F67A0E2
+X-Rspamd-Queue-Id: 961AE6C7A21
 
-On Wed, Jun 10, 2026 at 04:43:19PM +0100, Matt Evans wrote:
-> Since converting BAR mmap()s to using DMABUFs, we lose the original
-> device path in /proc/<pid>/maps, lsof, etc.  Generate a debug-oriented
-> synthetic 'filename' based on the cdev, plus BDF, plus resource index.
+Hi Kevin, Pranjal, (+Robin, hi!)
+
+On 12/06/2026 04:39, Tian, Kevin wrote:
+>> From: Pranjal Shrivastava <praan@google.com>
+>> Sent: Friday, June 12, 2026 2:38 AM
+>>
+>> On Wed, Jun 10, 2026 at 04:43:15PM +0100, Matt Evans wrote:
+>>> --- a/drivers/pci/Kconfig
+>>> +++ b/drivers/pci/Kconfig
+>>> @@ -206,11 +206,7 @@ config PCIE_TPH
+>>>  config PCI_P2PDMA
+>>>  	bool "PCI peer-to-peer transfer support"
+>>>  	depends on ZONE_DEVICE
+>>> -	#
+>>> -	# The need for the scatterlist DMA bus address flag means PCI
+>> P2PDMA
+>>> -	# requires 64bit
+>>> -	#
+>>> -	depends on 64BIT
+>>> +	select PCI_P2PDMA_CORE
+>>>  	select GENERIC_ALLOCATOR
+>>>  	select NEED_SG_DMA_FLAGS
+>>>  	help
+>>
+>> Nit: Did we drop depends on 64BIT intentionally here? I guess the full
+>> PCI_P2PDMA stack still selects NEED_SG_DMA_FLAGS? IIRC,
+>> NEED_SG_DMA_FLAGS doesn't select 64BIT?
 > 
-> This applies only to BAR mappings via the VFIO device fd, as
-> explicitly-exported DMABUFs are named by userspace via the
-> DMA_BUF_SET_NAME ioctl.
+> seems that comment is stale. According to the commit msg:
 > 
-> Signed-off-by: Matt Evans <matt@ozlabs.org>
-> ---
->  drivers/vfio/pci/vfio_pci_dmabuf.c | 27 +++++++++++++++++++++++++--
->  1 file changed, 25 insertions(+), 2 deletions(-)
+> " it would make vfio-pci only available if CONFIG_ZONE_DEVICE is
+> present (e.g. 64-bit systems), "
 > 
-> diff --git a/drivers/vfio/pci/vfio_pci_dmabuf.c b/drivers/vfio/pci/vfio_pci_dmabuf.c
-> index 2fd3629789bf..8f7f1b909b94 100644
-> --- a/drivers/vfio/pci/vfio_pci_dmabuf.c
-> +++ b/drivers/vfio/pci/vfio_pci_dmabuf.c
-> @@ -4,6 +4,7 @@
->  #include <linux/dma-buf-mapping.h>
->  #include <linux/pci-p2pdma.h>
->  #include <linux/dma-resv.h>
-> +#include <uapi/linux/dma-buf.h>
->  
->  #include "vfio_pci_priv.h"
->  
-> @@ -470,6 +471,7 @@ int vfio_pci_core_mmap_prep_dmabuf(struct vfio_pci_core_device *vdev,
->  {
->  	struct vfio_pci_dma_buf *priv;
->  	unsigned long vma_pgoff = vma->vm_pgoff & (VFIO_PCI_OFFSET_MASK >> PAGE_SHIFT);
-> +	char *bufname;
->  	int ret;
->  
->  	priv = kzalloc_obj(*priv);
-> @@ -482,6 +484,20 @@ int vfio_pci_core_mmap_prep_dmabuf(struct vfio_pci_core_device *vdev,
->  		goto err_free_priv;
->  	}
->  
-> +	bufname = kzalloc(DMA_BUF_NAME_LEN, GFP_KERNEL);
-> +	if (!bufname) {
-> +		ret = -ENOMEM;
-> +		goto err_free_phys;
-> +	}
-> +
-> +	/*
-> +	 * Maximum size of the friendly debug name is
-> +	 * vfio1234567890:ffff:ff:3f.7/5 = 30, which fits within
-> +	 * DMA_BUF_NAME_LEN.
-> +	 */
-> +	snprintf(bufname, DMA_BUF_NAME_LEN, "%s:%s/%x",
-> +		 dev_name(&vdev->vdev.device), pci_name(vdev->pdev), res_index);
-> +
+> so it sounds a redundant dependency hence is removed.
 
-Nit: Could we instead use:
+This was intentional.  In practice there is still a dependency on 64BIT
+for PCI_P2PDMA, but it is because of ZONE_DEVICE (and mem hotplug).  The
+key need is PCI_P2PDMA_CORE is available on !64BIT for VFIO, but I
+didn't see a requirement from PCI_P2PDMA itself (as opposed to its
+dependencies).  If I've missed one, I can put it back...
 
-	bufname = kasprintf(GFP_KERNEL, "%s:%s/%x",
-	                    dev_name(&vdev->vdev.device), pci_name(vdev->pdev), res_index);
-	if (!bufname)
-	    ret = -ENOMEM;
-	    [...]
+But NEED_SG_DMA_FLAGS doesn't smell quite right; I see from comments in
 
->  	/*
->  	 * The DMABUF begins from the mmap()'s BAR offset, i.e. the
->  	 * start of the VMA corresponds to byte 0 of the DMABUF and
-> @@ -500,7 +516,7 @@ int vfio_pci_core_mmap_prep_dmabuf(struct vfio_pci_core_device *vdev,
->  	priv->provider = pcim_p2pdma_provider(vdev->pdev, res_index);
->  	if (!priv->provider) {
->  		ret = -EINVAL;
-> -		goto err_free_phys;
-> +		goto err_free_name;
->  	}
->  
->  	priv->phys_vec[0].paddr = phys_start + ((u64)vma_pgoff << PAGE_SHIFT);
-> @@ -508,7 +524,7 @@ int vfio_pci_core_mmap_prep_dmabuf(struct vfio_pci_core_device *vdev,
->  
->  	ret = vfio_pci_dmabuf_export(vdev, priv, O_CLOEXEC | O_RDWR);
->  	if (ret)
-> -		goto err_free_phys;
-> +		goto err_free_name;
->  
->  	/*
->  	 * Ownership of the DMABUF file transfers to the VMA so that
-> @@ -523,8 +539,15 @@ int vfio_pci_core_mmap_prep_dmabuf(struct vfio_pci_core_device *vdev,
->  	vma->vm_file = priv->dmabuf->file;
->  	vma->vm_private_data = priv;
->  
-> +	spin_lock(&priv->dmabuf->name_lock);
-> +	kfree(priv->dmabuf->name);
-> +	priv->dmabuf->name = bufname;
-> +	spin_unlock(&priv->dmabuf->name_lock);
-> +
->  	return 0;
->  
-> +err_free_name:
-> +	kfree(bufname);
->  err_free_phys:
->  	kfree(priv->phys_vec);
->  err_free_priv:
+  af2880ec44021 ("scatterlist: add dedicated config for DMA flags")
 
-Apart from that,
+that it assumes 64BIT, but it seems to be missing a "depends on 64BIT".
 
-Reviewed-by: Pranjal Shrivastava <praan@google.com>
+Robin -- should that depend on 64BIT?
 
-Thanks,
-Praan
+
+Cheers,
+
+
+Matt
+
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
