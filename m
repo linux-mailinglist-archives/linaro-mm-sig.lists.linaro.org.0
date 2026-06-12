@@ -2,69 +2,69 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id RDjlJr0zLGpZNgQAu9opvQ
+	id UCetN8ozLGpcNgQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 12 Jun 2026 18:28:45 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 12 Jun 2026 18:28:58 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3131D67AEC3
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 12 Jun 2026 18:28:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 62A1867AECF
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 12 Jun 2026 18:28:58 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=gmail.com header.s=20251104 header.b=I+SmgUzF;
+	dkim=fail ("body hash did not verify") header.d=gmail.com header.s=20251104 header.b="bh/88k0C";
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
 	dmarc=fail reason="SPF not aligned (relaxed)" header.from=gmail.com (policy=none)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 55E3240977
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 12 Jun 2026 16:28:44 +0000 (UTC)
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
-	by lists.linaro.org (Postfix) with ESMTPS id 8C2EF40977
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 12 Jun 2026 16:28:14 +0000 (UTC)
-Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-2c0c3546924so7955575ad.3
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 12 Jun 2026 09:28:14 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id 79CDD3F97D
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 12 Jun 2026 16:28:57 +0000 (UTC)
+Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
+	by lists.linaro.org (Postfix) with ESMTPS id A504E40A68
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 12 Jun 2026 16:28:15 +0000 (UTC)
+Received: by mail-pf1-f170.google.com with SMTP id d2e1a72fcca58-842338c18e0so894202b3a.1
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 12 Jun 2026 09:28:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1781281694; x=1781886494; darn=lists.linaro.org;
+        d=gmail.com; s=20251104; t=1781281695; x=1781886495; darn=lists.linaro.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=jAxTBIOEmfhpqt503+PoPJMs1ii7LUEnvcbZDbUBB0A=;
-        b=I+SmgUzFgjEUg21YKYHZpv0/xE3MpOc+HFDU4Ug2ouHRAFT20crnQAzI8LDMtBodqm
-         RhPPdcfvUV/tQVPedeHOy1/8czu7WYudWbTgZ/vHTQGmoFkpMw31alJIfeji0JG0BjmD
-         /WX9p3OtH2dybtNRnyoVOh02b0vINW4lx8mHDnfrgTESHwVNbLiC1JpLehUf/933yLJg
-         XzltY3D5KLw3vgFQqLDnmX96TUWsh2GhvayYEDBS6s3v+w3atzgAyUQRADDub9gmnZPu
-         tkj/IGmjWaoj1nfNjd0om2qveHjfIUizheGO346wM0nb1XWaRmKeza3SOUIxU7sGSoKY
-         DKwA==
+        bh=k3hx3iEvB3FQYubpdUTwVhz53gJdWPirEdfCXBfHIMU=;
+        b=bh/88k0Cg91hHfDI+Pw9e59v2wC94y/FJK/7Ov6/PAUZ+FHAb5CL9YHxh1j1xH7/Q6
+         jNbojr+iB2Wa9vWxhw4D027Qf6djrXkxdlX2n+WnXbUZUUrVohhEEEwrRXUf7/Vf7n8Q
+         OYQUGHE3SS5eRGdu0xt1+ftKHQ2gCUkHmwtoGUkbCrQ74jlazlsE02dvINx4oivcV3QL
+         AbwXCg49EocC/fU+mPXlUB7t1CFM3wiIG8ZEs64mMwpuBu3XWbFOSb0VhAJJuFvm7haZ
+         8JlLcM+Tj9gSWa64/p6oUjmrzG/eBGOaA4sMYg5Kmn+hBwR9CaeCvsSVS5Dk0VxC9hBF
+         aQtg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781281694; x=1781886494;
+        d=1e100.net; s=20251104; t=1781281695; x=1781886495;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=jAxTBIOEmfhpqt503+PoPJMs1ii7LUEnvcbZDbUBB0A=;
-        b=W96CvLByMrs+OIQ/Mla1swCyoKJ5uForDlEZnoUkQlCdMY/Krq+IMXJajWoLRPS4Jl
-         hDM+6tEu7G7H7E3xUiEdkX6Etc/X1Jk+ehgNgfqkM+awOF19VB4xE/aEaJq+Pu7EGFsy
-         olHUc2DuUENjYfEumcTqTd0Ulp/yd2I43KZCNBqR0qWG98SJ3aRz3hTzAGkc9Q0Bm6an
-         GCX2o1MTRTBsGaQzXiOXvCTIIjknEqfDCje9d1T5ZXMjlrtp2C+w2mAHzTKqAS/cxNxJ
-         hveRUrMeuJk9nDFE/1WxOIbTh6QV6Ggx7rWs8BBmJr17uE76RnIoz2bagaQTeKMUcSIT
-         a4Nw==
-X-Forwarded-Encrypted: i=1; AFNElJ+i+L8vOgPvrxJEgrK/G1irm6NTIaDOdZ2Y8kmgC67QaQDNkgnDVze4C6pPcF7Eobyh5QyO+dafkJpWzNXU@lists.linaro.org
-X-Gm-Message-State: AOJu0Yz5iimCfQJ2FhGNYFipJyr3M8g2gpvNZdIJuNxtnd+JVClWAOzU
-	KI1mPwZ5MUjFTfuePD3ffath7fjV3i/DYLOWG+wEAR9P62a7fq9XYZzP
-X-Gm-Gg: Acq92OEXERSxKVPmOl/LaJB7IhmzyR8tlBah2WY9WoSzy6E/fuusdb2N5KCp/621OfU
-	welyHrmahiBzNYp1zZ5jnJD+Rm8W3YJ6hZAbX7XAu0kAdj5p2x+y99nOmCUWIB18zPhLQnSoS35
-	Qv9OdMvSp3COd9wwRN72LDFqvRNq7i/FGlXnFjKoumdUqHNYU+cGEL0rnlM/cTT13RyWGC0aqE+
-	vF/ZBQo7JnQ1ybCjSLlx8IPZIKaO0M8YdtI2/TAgt20JkoDIjqsiVnkfYlpvNyHiazkXzfbPwCA
-	0rB/ilk7xCEyRq/JTEuYV9fE3/1IMI7AxcioQccp1NzSke+VOssyIBt5ItVnsXk5Ok7cT/MSd30
-	oLHD7W5Xmn/1Do1mbaYrjrQMgGhz82w2dSnb0jGCjlbBiml+T8dGCyicrObbSRK1I1r5EjsdS1O
-	vteO5R6Djs/cvpBdeYU/xVTDB3WywpQg==
-X-Received: by 2002:a17:903:1acb:b0:2c2:7e17:39f6 with SMTP id d9443c01a7336-2c6642c3dd5mr3387595ad.36.1781281693627;
-        Fri, 12 Jun 2026 09:28:13 -0700 (PDT)
-Received: from localhost ([2a03:2880:ff:73::])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2c42f2e586bsm26830975ad.12.2026.06.12.09.28.13
+        bh=k3hx3iEvB3FQYubpdUTwVhz53gJdWPirEdfCXBfHIMU=;
+        b=jdxlrD2MY/WzsxZVhvqKuO986ikthWou2c8FT8k1OQ4euDXJsW6TCOnFuwIsS8r7VG
+         3/Hw8VUp4Zc/ba7pIozuLGS1lWx24bKzq85LrkHM/sB50UjbcsZx9XTRuI8EZsm7EOh1
+         YDdK1cHm3Zpf8N8uTpFyEd8DBDWOLvYg+KTnDrMAw3ckQPztI9RNnVszuWhRdrA9UAcD
+         NZM2ZtDCevz8LioMbgJ3UPY9AiQ6W44Ji8imqmqd03IUDICcFOEAeAaA1tU3KbaTTd7v
+         GCaESHiEPNalUyTZl5x5uGHK2XWJq6IHOfWn31+RQsLg9TkB3oJ9UpzpxlLQUFXmRDwq
+         F4hQ==
+X-Forwarded-Encrypted: i=1; AFNElJ+VWynqwY0MjtNVOjdmUZk2ErReTOOuka+w/3oW4vFHEW7lZYy3rCVr6FgK2x6PyLwfEodMbbZmu9Nv1bfU@lists.linaro.org
+X-Gm-Message-State: AOJu0Yxh4i59ow++Y+BsyBIrDcKjNXLRkXVjy2Eeg5XuYUrWJ6DF4UI2
+	CE7aYvtvum7tmpLWEzcPrzR3MZsfztEBvkK0iQhOKbB1QexhKy/3tZAJ
+X-Gm-Gg: Acq92OFd3Xu5pbgd15aOnyI0ScasgfqiqX9TYuTYWzGH1PHM3vFOLVRtNHg4iW+87pU
+	2cN0r6AP7ttxz8ZXm72MEaFNQbK4igUJdszfx69C14Vsb1hfYgpG1pL3EC5GLDKLldO4n+t7j20
+	5s+1P1sx+fA/lY+l83Lxamn5yNNhiy22HBmCKoJlPURKa+A30PYbQ2HnFCBWIGMdlGV8kf+ZVLM
+	m9lcYUwm+mtSQo0uKqBkqLFUsJcwOE/aRPOOniTkq3ZR3NzwIH8fTFNH04AAGMLpPAtg1ts23kv
+	uoGSnMKAmXzM/MtJaEK/c3pfdrreKG7WHSlDRPsEPqBtSQAgoOrl2JvotW7qJMz/YLVE8cN65vm
+	tVnHQdIXWb6oL8TYFiB14YsdtfKEz5uS6wa4acvKR82me8NK+y8Lm1qheYDQkaeL2IuucbYGlPr
+	5bVSLhsbElnZXppmylz5M=
+X-Received: by 2002:a05:6a00:a220:b0:842:48ae:1d6c with SMTP id d2e1a72fcca58-844e1a28ea1mr391873b3a.24.1781281694728;
+        Fri, 12 Jun 2026 09:28:14 -0700 (PDT)
+Received: from localhost ([2a03:2880:ff:52::])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8434b03fd0bsm2690221b3a.50.2026.06.12.09.28.14
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 12 Jun 2026 09:28:13 -0700 (PDT)
+        Fri, 12 Jun 2026 09:28:14 -0700 (PDT)
 From: Bobby Eshleman <bobbyeshleman@gmail.com>
-Date: Fri, 12 Jun 2026 09:25:58 -0700
+Date: Fri, 12 Jun 2026 09:25:59 -0700
 MIME-Version: 1.0
-Message-Id: <20260612-tcpdm-large-niovs-v3-2-a3b693e76fcb@meta.com>
+Message-Id: <20260612-tcpdm-large-niovs-v3-3-a3b693e76fcb@meta.com>
 References: <20260612-tcpdm-large-niovs-v3-0-a3b693e76fcb@meta.com>
 In-Reply-To: <20260612-tcpdm-large-niovs-v3-0-a3b693e76fcb@meta.com>
 To: Donald Hunter <donald.hunter@gmail.com>,
@@ -78,17 +78,17 @@ To: Donald Hunter <donald.hunter@gmail.com>,
  Shuah Khan <shuah@kernel.org>
 X-Mailer: b4 0.14.3
 X-Spamd-Bar: ----
-Message-ID-Hash: FOA6UKVPL645XW7ZJGUIH45KJ2OPARNH
-X-Message-ID-Hash: FOA6UKVPL645XW7ZJGUIH45KJ2OPARNH
+Message-ID-Hash: ANWAKQ7FVUKFJRWTU6KXA2SVEQE7RWJJ
+X-Message-ID-Hash: ANWAKQ7FVUKFJRWTU6KXA2SVEQE7RWJJ
 X-MailFrom: bobbyeshleman@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 CC: netdev@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-kselftest@vger.kernel.org, sdf@fomichev.me, razor@blackwall.org, daniel@iogearbox.net, almasrymina@google.com, matttbe@kernel.org, skhawaja@google.com, dw@davidwei.uk, Bobby Eshleman <bobbyeshleman@meta.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH net-next v3 2/4] udmabuf: emit one sg entry per pinned folio
+Subject: [Linaro-mm-sig] [PATCH net-next v3 3/4] selftests/net: ncdevmem: add -b option to set rx-buf-size on bind
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FOA6UKVPL645XW7ZJGUIH45KJ2OPARNH/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ANWAKQ7FVUKFJRWTU6KXA2SVEQE7RWJJ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -130,110 +130,153 @@ X-Spamd-Result: default: False [2.09 / 15.00];
 	TAGGED_RCPT(0.00)[linaro-mm-sig,netdev];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,meta.com:mid,meta.com:email,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[meta.com:mid,meta.com:email,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp,linaro.org:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 3131D67AEC3
+X-Rspamd-Queue-Id: 62A1867AECF
 
 From: Bobby Eshleman <bobbyeshleman@meta.com>
 
-get_sg_table() emitted one PAGE_SIZE sg entry per page even when the
-underlying folio was larger.
+Add -b <bytes> to request a non-default niov size via
+NETDEV_A_DMABUF_RX_BUF_SIZE. When the value exceeds PAGE_SIZE,
+udmabuf_alloc() switches to an MFD_HUGETLB-backed memfd so each 2 MB
+hugepage produces one naturally-aligned sg entry.
 
-Instead, walk folios[] and emit one sg entry per folio. When folios
-represent large pages (as is for MFD_HUGETLB), each sg entry is a large
-page. Normal PAGE_SIZE sg tables are unchanged.
+Reject values > 2 MB up front: MFD_HUGETLB + udmabuf can only guarantee
+2 MB per sg entry (one hugepage), so a larger rx_buf_size would fail the
+per-sg length/alignment check.
 
-This is helpful for importers like net/core/devmem that expect dmabuf sg
-entries to be size and length aligned. Prior to this patch udmabuf
-handed over one PAGE_SIZE sg entry per page, so devmem only saw
-PAGE_SIZE chunks regardless of the underlying folio size.
-
-dma_map_sgtable() does not always merge contiguous pages for us, so we
-do this internally before exporting.
+Add CONFIG_HUGETLBFS=y to drivers/net/hw/config so the new path is
+reachable in the CI kernels built for these tests.
 
 Signed-off-by: Bobby Eshleman <bobbyeshleman@meta.com>
 ---
- drivers/dma-buf/udmabuf.c | 52 ++++++++++++++++++++++++++++++++++++++++++-----
- 1 file changed, 47 insertions(+), 5 deletions(-)
+ tools/testing/selftests/drivers/net/hw/config     |  1 +
+ tools/testing/selftests/drivers/net/hw/ncdevmem.c | 36 +++++++++++++++++++++--
+ 2 files changed, 34 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/dma-buf/udmabuf.c b/drivers/dma-buf/udmabuf.c
-index 94b8ecb892bb..9b751dd98b12 100644
---- a/drivers/dma-buf/udmabuf.c
-+++ b/drivers/dma-buf/udmabuf.c
-@@ -141,26 +141,68 @@ static void vunmap_udmabuf(struct dma_buf *buf, struct iosys_map *map)
- 	vm_unmap_ram(map->vaddr, ubuf->pagecount);
- }
+diff --git a/tools/testing/selftests/drivers/net/hw/config b/tools/testing/selftests/drivers/net/hw/config
+index cd20024218cd..ed8642b68094 100644
+--- a/tools/testing/selftests/drivers/net/hw/config
++++ b/tools/testing/selftests/drivers/net/hw/config
+@@ -3,6 +3,7 @@ CONFIG_FAIL_FUNCTION=y
+ CONFIG_FAULT_INJECTION=y
+ CONFIG_FAULT_INJECTION_DEBUG_FS=y
+ CONFIG_FUNCTION_ERROR_INJECTION=y
++CONFIG_HUGETLBFS=y
+ CONFIG_INET6_ESP=y
+ CONFIG_INET6_ESP_OFFLOAD=y
+ CONFIG_INET_ESP=y
+diff --git a/tools/testing/selftests/drivers/net/hw/ncdevmem.c b/tools/testing/selftests/drivers/net/hw/ncdevmem.c
+index d96e8a3b5a65..a16e55af51ee 100644
+--- a/tools/testing/selftests/drivers/net/hw/ncdevmem.c
++++ b/tools/testing/selftests/drivers/net/hw/ncdevmem.c
+@@ -40,6 +40,7 @@
  
-+/* Return the number of contiguous pages backed by the folio at @i.
-+ * A udmabuf may map only part of a folio, or reference the same folio
-+ * in multiple non-contiguous runs, so folio_nr_pages() can't be used.
-+ */
-+static pgoff_t udmabuf_folio_nr_pages(struct udmabuf *ubuf, pgoff_t i)
-+{
-+	struct folio *f = ubuf->folios[i];
-+	pgoff_t j;
-+
-+	for (j = 1; i + j < ubuf->pagecount; j++) {
-+		if (ubuf->folios[i + j] != f)
-+			break;
-+		/* Same folio, but not a sequential offset within it. */
-+		if (ubuf->offsets[i + j] != ubuf->offsets[i] + j * PAGE_SIZE)
-+			break;
-+	}
-+	return j;
-+}
-+
-+/* Count the contiguous folio runs in @ubuf, one sg entry per run.
-+ *
-+ * Coalescing folios into a single sg entry up front lets importers actually
-+ * see large chunks. We can't rely on dma_map_sgtable() to do this for us as
-+ * the dma_map_direct() path preserves the input scatterlist lengths verbatim.
-+ */
-+static unsigned int udmabuf_sg_nents(struct udmabuf *ubuf)
-+{
-+	unsigned int nents = 0;
-+	pgoff_t i;
-+
-+	for (i = 0; i < ubuf->pagecount; i += udmabuf_folio_nr_pages(ubuf, i))
-+		nents++;
-+	return nents;
-+}
-+
- static struct sg_table *get_sg_table(struct device *dev, struct dma_buf *buf,
- 				     enum dma_data_direction direction)
+ #include <linux/uio.h>
+ #include <stdarg.h>
++#include <stdint.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <unistd.h>
+@@ -61,6 +62,7 @@
+ #include <sys/time.h>
+ 
+ #include <linux/memfd.h>
++#include <sys/param.h>
+ #include <linux/dma-buf.h>
+ #include <linux/errqueue.h>
+ #include <linux/udmabuf.h>
+@@ -79,6 +81,7 @@
+ #define PAGE_SHIFT 12
+ #define TEST_PREFIX "ncdevmem"
+ #define NUM_PAGES 16000
++#define MB(x) ((x) << 20)
+ 
+ #ifndef MSG_SOCK_DEVMEM
+ #define MSG_SOCK_DEVMEM 0x2000000
+@@ -100,6 +103,7 @@ static unsigned int dmabuf_id;
+ static uint32_t tx_dmabuf_id;
+ static int waittime_ms = 500;
+ static bool fail_on_linear;
++static uint32_t rx_buf_size;
+ 
+ /* System state loaded by current_config_load() */
+ #define MAX_FLOWS	8
+@@ -142,6 +146,7 @@ static struct memory_buffer *udmabuf_alloc(size_t size)
  {
- 	struct udmabuf *ubuf = buf->priv;
--	struct sg_table *sg;
- 	struct scatterlist *sgl;
--	unsigned int i = 0;
-+	struct sg_table *sg;
-+	pgoff_t i, run;
-+	unsigned int nents;
+ 	struct udmabuf_create create;
+ 	struct memory_buffer *ctx;
++	unsigned int memfd_flags;
  	int ret;
  
-+	nents = udmabuf_sg_nents(ubuf);
+ 	ctx = malloc(sizeof(*ctx));
+@@ -156,9 +161,14 @@ static struct memory_buffer *udmabuf_alloc(size_t size)
+ 		goto err_free_ctx;
+ 	}
+ 
+-	ctx->memfd = memfd_create("udmabuf-test", MFD_ALLOW_SEALING);
++	memfd_flags = MFD_ALLOW_SEALING;
++	if (rx_buf_size > getpagesize())
++		memfd_flags |= MFD_HUGETLB | MFD_HUGE_2MB;
 +
- 	sg = kzalloc_obj(*sg);
- 	if (!sg)
- 		return ERR_PTR(-ENOMEM);
++	ctx->memfd = memfd_create("udmabuf-test", memfd_flags);
+ 	if (ctx->memfd < 0) {
+-		pr_err("[skip,no-memfd]");
++		pr_err("[skip,no-memfd%s]",
++		       (memfd_flags & MFD_HUGETLB) ? " (need hugepages)" : "");
+ 		goto err_close_dev;
+ 	}
  
--	ret = sg_alloc_table(sg, ubuf->pagecount, GFP_KERNEL);
-+	ret = sg_alloc_table(sg, nents, GFP_KERNEL);
- 	if (ret < 0)
- 		goto err_alloc;
+@@ -168,6 +178,11 @@ static struct memory_buffer *udmabuf_alloc(size_t size)
+ 		goto err_close_memfd;
+ 	}
  
--	for_each_sg(sg->sgl, sgl, ubuf->pagecount, i)
--		sg_set_folio(sgl, ubuf->folios[i], PAGE_SIZE,
-+	sgl = sg->sgl;
-+	for (i = 0; i < ubuf->pagecount; i += run) {
-+		run = udmabuf_folio_nr_pages(ubuf, i);
-+		sg_set_folio(sgl, ubuf->folios[i], run << PAGE_SHIFT,
- 			     ubuf->offsets[i]);
-+		sgl = sg_next(sgl);
++	if (memfd_flags & MFD_HUGETLB) {
++		size = roundup(size, MB(2));
++		ctx->size = size;
 +	}
++
+ 	ret = ftruncate(ctx->memfd, size);
+ 	if (ret == -1) {
+ 		pr_err("[FAIL,memfd-truncate]");
+@@ -699,6 +714,8 @@ static int bind_rx_queue(unsigned int ifindex, unsigned int dmabuf_fd,
+ 	netdev_bind_rx_req_set_ifindex(req, ifindex);
+ 	netdev_bind_rx_req_set_fd(req, dmabuf_fd);
+ 	__netdev_bind_rx_req_set_queues(req, queues, n_queue_index);
++	if (rx_buf_size)
++		netdev_bind_rx_req_set_rx_buf_size(req, rx_buf_size);
  
- 	ret = dma_map_sgtable(dev, sg, direction, 0);
- 	if (ret < 0)
+ 	rsp = netdev_bind_rx(*ys, req);
+ 	if (!rsp) {
+@@ -1411,7 +1428,7 @@ int main(int argc, char *argv[])
+ 	int is_server = 0, opt;
+ 	int ret, err = 1;
+ 
+-	while ((opt = getopt(argc, argv, "Lls:c:p:v:q:t:f:z:n")) != -1) {
++	while ((opt = getopt(argc, argv, "Lls:c:p:v:q:t:f:z:nb:")) != -1) {
+ 		switch (opt) {
+ 		case 'L':
+ 			fail_on_linear = true;
+@@ -1446,6 +1463,19 @@ int main(int argc, char *argv[])
+ 		case 'n':
+ 			skip_config = 1;
+ 			break;
++		case 'b': {
++			unsigned long val;
++
++			errno = 0;
++			val = strtoul(optarg, NULL, 0);
++			if ((val == ULONG_MAX && errno == ERANGE) ||
++			    val > UINT32_MAX) {
++				pr_err("invalid rx_buf_size: %s", optarg);
++				return 1;
++			}
++			rx_buf_size = val;
++			break;
++		}
+ 		case '?':
+ 			fprintf(stderr, "unknown option: %c\n", optopt);
+ 			break;
 
 -- 
 2.53.0-Meta
