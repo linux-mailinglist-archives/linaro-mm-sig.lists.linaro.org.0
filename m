@@ -2,86 +2,62 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id Rev/FxkjLGo8MAQAu9opvQ
+	id 5Q5lAYpePWoY2AgAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 12 Jun 2026 17:17:45 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Jun 2026 18:59:54 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id D245C67A787
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 12 Jun 2026 17:17:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C4F6A6C7A29
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Jun 2026 18:59:53 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=google.com header.s=20251104 header.b=hKAJzunt;
+	dkim=fail ("body hash did not verify") header.d=ozlabs.org header.s=201707 header.b=S9vZR5sU;
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
-	dmarc=fail reason="SPF not aligned (relaxed)" header.from=google.com (policy=reject)
+	dmarc=fail reason="SPF not aligned (relaxed)" header.from=ozlabs.org (policy=none)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DD61540A75
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 12 Jun 2026 15:17:43 +0000 (UTC)
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
-	by lists.linaro.org (Postfix) with ESMTPS id 827C63F97D
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 12 Jun 2026 15:17:31 +0000 (UTC)
-Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-2bf2911f93cso89405ad.1
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 12 Jun 2026 08:17:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1781277450; x=1781882250; darn=lists.linaro.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=TlOQuFqEcpnxb6HFkKMVShmOdVTUgHEmVlFieGLUVKw=;
-        b=hKAJzunteRUbCNyKPgOVSK7PH4raWPi2SoVe5xJoHw90avLAJu5HvPIdoRFUZbe4X+
-         1NVRo4Rjmx6ZCupz26BFp1QTIDfAeLVZO+vceguPHfD0BhSaq7YADMvi/2aR76FRYhev
-         0V7G88Gz342H4NEMYfS0jeGoG2HkwobV/SfRtt0IAd9UYVSMjwcBCVv2LT7L5wGNs53W
-         a4kW05CjbKyZinjEYRz0T1nxUfjA1FmNqRqNzfTy19Wam+lfyt2OHSaX1QjyZ06BjfSs
-         ljgy6dxlvYyJQfcYAe5/iSYd9tPU94s3/o30g4kdPd5ewfIwMOTpOw2V7rRwfXXgPjPI
-         ZN2g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781277450; x=1781882250;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=TlOQuFqEcpnxb6HFkKMVShmOdVTUgHEmVlFieGLUVKw=;
-        b=KZfmYStwzjQioF7054yIHm2qLWwfaQfx7VfCd8dMD42OkgRApoC9NkOE1k+NiBplZS
-         A2eUaNWqxRAbGYDX+URS2tamKTJjUk8nasRaexQmrpfgzXLJzL871Cf3Ptag/71d19Sd
-         NGZcbdF8v/d5DyEpXoWhsViqH8lI64EP5ho18rbZCs7Iakf3gAcQBolhgxfo7UfCwr3M
-         PlEGoC9NK4frbcQgBNsFwXpZUYmTpvlhZp0ynd9NDULbStdd22BFm0jdQMf9fRqUrv4t
-         46E9CKgjJvodFawgVEfowkh1jmHMX7zatHwkfOKyCiJT6K/CtA2q2mdSQzkFdVxyrSPp
-         jIEg==
-X-Forwarded-Encrypted: i=1; AFNElJ/IOUGuxuJiSyWthL96A28HSZnf3+gDy/tRKlqDnOjLuV1J8NOrsJeFccxnsZlA5PerlVMrhD8Ys5QIVKiG@lists.linaro.org
-X-Gm-Message-State: AOJu0Yx9iXOCwt1hUnlqhEILFQO+IISssWYTl0wy/okRHnR60cm1d1pW
-	M9Z0L1vELdzGFuDiys7XAVcLG7wClgKx01Ln0804Ua6PTV0ZFTQbhefpEXtEBBWQIg==
-X-Gm-Gg: Acq92OH2ql1mI77w0gK/p8wxwm+rd8UkIdyoGMeg5tny8NhP/JY6qlYQGHBLDOxbmM6
-	yjxlF/YzNUfv597U8YlMRRmQLUmJTnJPyjxxX70DX6LGWhVkOzkP2O2l2PKcBKGrdsPxD8MFzCq
-	KZn9Fc8Hu/luVHJzqruq37HyD1BsZpAQIS50natij0VsEoeQER5vQowNP3hrY6Nud0mUIGiE1b7
-	B2VCP49oM3Kmf5KLezKJlb9wdFIw8cN9Y6h0z4hmXG6j+V5XzLpoh+CqFDQ3MCX6jakqbly/ncj
-	yaT/z7byeIwZ/GVDZCgmz+44WJoKcnD1IXWExQJJkzTmz7GqBMZdTOTohDNtePapevoHKMiXrU4
-	flHX/Ubq3XDwL/t87KrB1YlEBuogBkbgzhXGvl7K91I6/4Acn+DvlKjTOTVi6+SG79an35v7zGz
-	XWP5x/QDM0/WPlJZ123DRwuO+e2wrXwzVzz8Q7giSX2lBlEUl5eNkg3vP8vhisI2CZEFHjZkc=
-X-Received: by 2002:a17:902:e805:b0:2b2:70ba:305c with SMTP id d9443c01a7336-2c3e1160718mr2635095ad.8.1781277450033;
-        Fri, 12 Jun 2026 08:17:30 -0700 (PDT)
-Received: from google.com (199.255.142.34.bc.googleusercontent.com. [34.142.255.199])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2c4328a4c14sm22623545ad.43.2026.06.12.08.17.24
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 12 Jun 2026 08:17:29 -0700 (PDT)
-Date: Fri, 12 Jun 2026 15:17:21 +0000
-From: Pranjal Shrivastava <praan@google.com>
-To: Matt Evans <matt@ozlabs.org>
-Message-ID: <aiwjAbFVhPkkj-6U@google.com>
-References: <20260610154327.37758-1-matt@ozlabs.org>
- <DM6PR11MB3690A65EA9D8A9B77AF93E198C182@DM6PR11MB3690.namprd11.prod.outlook.com>
- <9812ae0f-8f22-4d62-a706-4c7232a5656b@ozlabs.org>
+	by lists.linaro.org (Postfix) with ESMTP id E55B543C6D
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Jun 2026 16:59:52 +0000 (UTC)
+Received: from mail.ozlabs.org (gandalf.ozlabs.org [150.107.74.76])
+	by lists.linaro.org (Postfix) with ESMTPS id 4C23E3FDAE
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 12 Jun 2026 15:22:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ozlabs.org;
+	s=201707; t=1781277742;
+	bh=Od++dpGQk45pUkopK+ZR30rQE6eOhAjb1TsY2NEMy5g=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=S9vZR5sUkuLB9FEC8KRRIoqeN59IfE/XLJ4wsiGT0ob84ltCuLVL/5VCR4GkxjsA9
+	 AZ7Qm3ed8W07n6LTQnUawPb2WBDh9qruLj1R9yvNjUnyHicBso/Eg6sOgX8jLjcDoF
+	 WaJ/2LSRwLtX9QEr7TCt/MWGNql4/2d9kzUZ4gjqxnN4SeV7O5sxCjYEXosWCSzM/J
+	 YvAXTaQxZwv7nGq9F+aHO9KeJDtNG+jAGdVUpkSWkW0bZFa7REtQaWrKTUyOEukesu
+	 UesARyHOzLEiT7mbIYtKp4Cga+XLMzOPNpBmprhVOqR4SPs/DGci1Qup6z3iA9i6Qs
+	 Su+eg8UsvZAPA==
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519)
+	(Client did not present a certificate)
+	by mail.ozlabs.org (Postfix) with ESMTPSA id 4gcNY35cPWz4xGp;
+	Sat, 13 Jun 2026 01:22:14 +1000 (AEST)
+Message-ID: <42cf4ad9-f094-4f94-88e6-6d2cb6eb6437@ozlabs.org>
+Date: Fri, 12 Jun 2026 16:22:12 +0100
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <9812ae0f-8f22-4d62-a706-4c7232a5656b@ozlabs.org>
+User-Agent: Mozilla Thunderbird
+Content-Language: en-GB
+To: Pranjal Shrivastava <praan@google.com>
+References: <20260610154327.37758-1-matt@ozlabs.org>
+ <20260610154327.37758-5-matt@ozlabs.org> <aiviYEi17tewEQg0@google.com>
+From: Matt Evans <matt@ozlabs.org>
+In-Reply-To: <aiviYEi17tewEQg0@google.com>
 X-Spamd-Bar: ---
-Message-ID-Hash: VTAM57PCY3FHWQSNVU3M5G4II7V43S4F
-X-Message-ID-Hash: VTAM57PCY3FHWQSNVU3M5G4II7V43S4F
-X-MailFrom: praan@google.com
-X-Mailman-Rule-Hits: member-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
-CC: "Tian, Kevin" <kevin.tian@intel.com>, Alex Williamson <alex@shazbot.org>, Leon Romanovsky <leon@kernel.org>, Jason Gunthorpe <jgg@nvidia.com>, Alex Mastro <amastro@fb.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Bjorn Helgaas <bhelgaas@google.com>, Logan Gunthorpe <logang@deltatee.com>, Mahmoud Adam <mngyadam@amazon.de>, David Matlack <dmatlack@google.com>, =?iso-8859-1?Q?Bj=F6rn_T=F6pel?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Ankit Agrawal <ankita@nvidia.com>, Alistair Popple <apopple@nvidia.com>, "Kasireddy, Vivek" <vivek.kasireddy@intel.com>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "kvm@vger.kernel.org" <kvm@vger.kernel.org>, "linux-pci@vger.kernel.org" <linux-pci@vger.kernel.org>
+X-MailFrom: matt@ozlabs.org
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+Message-ID-Hash: 6IGYXTIAGWGRD4YACD3H74IWPGOLGBCT
+X-Message-ID-Hash: 6IGYXTIAGWGRD4YACD3H74IWPGOLGBCT
+X-Mailman-Approved-At: Thu, 25 Jun 2026 16:59:03 +0000
+CC: Alex Williamson <alex@shazbot.org>, Leon Romanovsky <leon@kernel.org>, Jason Gunthorpe <jgg@nvidia.com>, Alex Mastro <amastro@fb.com>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Bjorn Helgaas <bhelgaas@google.com>, Logan Gunthorpe <logang@deltatee.com>, Mahmoud Adam <mngyadam@amazon.de>, David Matlack <dmatlack@google.com>, =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Kevin Tian <kevin.tian@intel.com>, Ankit Agrawal <ankita@nvidia.com>, Alistair Popple <apopple@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org, linux-pci@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3 0/9] vfio/pci: Add mmap() for DMABUFs
+Subject: [Linaro-mm-sig] Re: [PATCH v3 4/9] vfio/pci: Convert BAR mmap() to use a DMABUF
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VTAM57PCY3FHWQSNVU3M5G4II7V43S4F/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6IGYXTIAGWGRD4YACD3H74IWPGOLGBCT/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -91,101 +67,140 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [2.49 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[google.com : SPF not aligned (relaxed),reject];
-	R_DKIM_REJECT(1.00)[google.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+mx];
+X-Spamd-Result: default: False [1.59 / 15.00];
+	DATE_IN_PAST(1.00)[313];
+	R_DKIM_REJECT(1.00)[ozlabs.org:s=201707];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
+	DMARC_POLICY_SOFTFAIL(0.10)[ozlabs.org : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER(0.00)[praan@google.com,linaro-mm-sig-bounces@lists.linaro.org];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[22];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_RECIPIENTS(0.00)[m:matt@ozlabs.org,m:kevin.tian@intel.com,m:alex@shazbot.org,m:leon@kernel.org,m:jgg@nvidia.com,m:amastro@fb.com,m:christian.koenig@amd.com,m:bhelgaas@google.com,m:logang@deltatee.com,m:mngyadam@amazon.de,m:dmatlack@google.com,m:bjorn@kernel.org,m:sumit.semwal@linaro.org,m:ankita@nvidia.com,m:apopple@nvidia.com,m:vivek.kasireddy@intel.com,m:linux-kernel@vger.kernel.org,m:linux-media@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,m:kvm@vger.kernel.org,m:linux-pci@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:praan@google.com,m:alex@shazbot.org,m:leon@kernel.org,m:jgg@nvidia.com,m:amastro@fb.com,m:christian.koenig@amd.com,m:bhelgaas@google.com,m:logang@deltatee.com,m:mngyadam@amazon.de,m:dmatlack@google.com,m:bjorn@kernel.org,m:sumit.semwal@linaro.org,m:kevin.tian@intel.com,m:ankita@nvidia.com,m:apopple@nvidia.com,m:vivek.kasireddy@intel.com,m:linux-kernel@vger.kernel.org,m:linux-media@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,m:kvm@vger.kernel.org,m:linux-pci@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[matt@ozlabs.org,linaro-mm-sig-bounces@lists.linaro.org];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[22];
+	RCVD_COUNT_THREE(0.00)[3];
+	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	DKIM_TRACE(0.00)[google.com:-];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[ozlabs.org:email];
-	FROM_NEQ_ENVFROM(0.00)[praan@google.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[matt@ozlabs.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[ozlabs.org:-];
 	MID_RHS_MATCH_FROM(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	ARC_NA(0.00)[]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[ozlabs.org:email,ozlabs.org:mid,ozlabs.org:from_mime,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: D245C67A787
+X-Rspamd-Queue-Id: C4F6A6C7A29
 
-On Fri, Jun 12, 2026 at 04:11:50PM +0100, Matt Evans wrote:
-> Hi Kevin,
-> 
-> On 12/06/2026 09:27, Tian, Kevin wrote:
-> >> From: Matt Evans <matt@ozlabs.org>
-> >> Sent: Wednesday, June 10, 2026 11:43 PM
-> >>
-> > [...]
-> >>
-> >>  vfio/pci: Support mmap() of a VFIO DMABUF
-> >>
-> >>    Adds mmap() for a DMABUF fd exported from vfio-pci.
-> >>
-> >>    It was a goal to keep the VFIO device fd lifetime behaviour
-> >>    unchanged with respect to the DMABUFs.  An application can close
-> >>    all device fds, and this will revoke/clean up all DMABUFs; no
-> >>    mappings or other access can be performed now.  When enabling
-> >>    mmap() of the DMABUFs, this means access through the VMA is also
-> >>    revoked.  This complicates the fault handler because whilst the
-> >>    DMABUF exists, it has no guarantee that the corresponding VFIO
-> >>    device is still alive.  Adds synchronisation ensuring the vdev is
-> >>    available before vdev->memory_lock is touched; this holds the
-> >>    device registration so that even if the buffer has been cleaned up,
-> >>    vdev hasn't been freed and so the lock can be safely taken.
-> >>
-> >>    This commit makes VFIO_PCI_CORE depend on PCI_P2PDMA_CORE
-> >> (commit
-> >>    1) to bring in (only) the P2PDMA provider code.
-> > 
-> > the last sentence is stale as the dependency is now added in patch4.
-> 
-> Right, will fix.
-> 
-> >>
-> >> End
-> >> ===
-> >>
-> >> This is based on VFIO next (e.g. at b9285405c5f6).
-> >>
-> > 
-> > Sashiko failed to apply this series. Is there dependent work in vfio-next?
-> > 
-> > otherwise getting a Sashiko review is helpful here.
-> 
-> It _did_ depend on (at least the context of) some fixes in vfio-next.
-> Looks like it'll rebase on master now those are merged.  I should've
-> re-checked this for v3, oops. :|
-> 
-> (FWIW, I had Robot Claude Opus 4.8 to review several times up to v3.
-> But I agree, Sashiko would be interesting too.  Can it be manually
-> triggered with branch guidance?)
+Hi Pranjal,
 
-I guess relevant steps to run locally are here:
-https://github.com/sashiko-dev/sashiko/blob/main/README.md
+On 12/06/2026 11:41, Pranjal Shrivastava wrote:
+> On Wed, Jun 10, 2026 at 04:43:18PM +0100, Matt Evans wrote:
+>> Convert the VFIO device fd fops->mmap to create a DMABUF representing
+>> the BAR mapping, and make the VMA fault handler look up PFNs from the
+>> corresponding DMABUF.  This supports future code mmap()ing BAR
+>> DMABUFs, and iommufd work to support Type1 P2P.
+>>
+>> First, vfio_pci_core_mmap() uses the new
+>> vfio_pci_core_mmap_prep_dmabuf() helper to export a DMABUF
+>> representing a single BAR range.  Then, the vfio_pci_mmap_huge_fault()
+>> callback is updated to understand revoked buffers, and uses the new
+>> vfio_pci_dma_buf_find_pfn() helper to determine the PFN for a given
+>> fault address.
+>>
+>> Now that the VFIO DMABUFs can be mmap()ed, vfio_pci_dma_buf_move()
+>> zaps PTEs (used on the revocation and cleanup paths).
+>>
+>> CONFIG_VFIO_PCI_CORE now unconditionally depends on
+>> CONFIG_DMA_SHARED_BUFFER and CONFIG_PCI_P2PDMA_CORE.  The
+>> CONFIG_VFIO_PCI_DMABUF feature conditionally includes support for
+>> VFIO_DEVICE_FEATURE_DMA_BUF, depending on the availability of
+>> CONFIG_PCI_P2PDMA.
+>>
+>> Signed-off-by: Matt Evans <matt@ozlabs.org>
+>> ---
+>>  drivers/vfio/pci/Kconfig           |  5 +-
+>>  drivers/vfio/pci/Makefile          |  3 +-
+>>  drivers/vfio/pci/vfio_pci_core.c   | 75 +++++++++++++++++++-----------
+>>  drivers/vfio/pci/vfio_pci_dmabuf.c | 12 +++++
+>>  drivers/vfio/pci/vfio_pci_priv.h   | 11 +----
+>>  5 files changed, 67 insertions(+), 39 deletions(-)
+>>
+>> diff --git a/drivers/vfio/pci/Kconfig b/drivers/vfio/pci/Kconfig
+>> index 296bf01e185e..67a2ae1fbc04 100644
+>> --- a/drivers/vfio/pci/Kconfig
+>> +++ b/drivers/vfio/pci/Kconfig
+>> @@ -6,6 +6,8 @@ config VFIO_PCI_CORE
+>>  	tristate
+>>  	select VFIO_VIRQFD
+>>  	select IRQ_BYPASS_MANAGER
+>> +	select PCI_P2PDMA_CORE
+>> +	select DMA_SHARED_BUFFER
+>>  
+>>  config VFIO_PCI_INTX
+>>  	def_bool y if !S390
+>> @@ -56,7 +58,8 @@ config VFIO_PCI_ZDEV_KVM
+>>  	  To enable s390x KVM vfio-pci extensions, say Y.
+>>  
+>>  config VFIO_PCI_DMABUF
+>> -	def_bool y if VFIO_PCI_CORE && PCI_P2PDMA && DMA_SHARED_BUFFER
+>> +	def_bool y if PCI_P2PDMA
+>> +	depends on VFIO_PCI_CORE
+>>  
+>>  source "drivers/vfio/pci/mlx5/Kconfig"
+>>  
+> [...]  
+>>  int vfio_pci_core_mmap_prep_dmabuf(struct vfio_pci_core_device *vdev,
+>>  				   struct vm_area_struct *vma,
+>> @@ -532,6 +538,10 @@ void vfio_pci_dma_buf_move(struct vfio_pci_core_device *vdev, bool revoked)
+>>  	struct vfio_pci_dma_buf *tmp;
+>>  
+>>  	lockdep_assert_held_write(&vdev->memory_lock);
+>> +	/*
+>> +	 * Holding memory_lock ensures a racing VMA fault observes
+>> +	 * priv->revoked properly.
+>> +	 */
+> 
+> Nit: This comment should appear before the lockdep_assert_held_write()
+> Also, it is slightly verbose.. (not against it though).
 
-Additionally, we can try providing a base-commit (which points to a
-public commit). 
+Right, I'll move it.  Agree it's wordy but if anyone changes that I want
+them to "think faulthandler".
 
-Thanks,
-Praan
+>>  	list_for_each_entry_safe(priv, tmp, &vdev->dmabufs, dmabufs_elm) {
+>>  		if (!get_file_active(&priv->dmabuf->file))
+>> @@ -549,6 +559,8 @@ void vfio_pci_dma_buf_move(struct vfio_pci_core_device *vdev, bool revoked)
+>>  			if (revoked) {
+>>  				kref_put(&priv->kref, vfio_pci_dma_buf_done);
+>>  				wait_for_completion(&priv->comp);
+>> +				unmap_mapping_range(priv->dmabuf->file->f_mapping,
+>> +						    0, priv->size, 1);
+> 
+> Have we run this series with lockdep enabled?
+> I guess it'd be nice to check with lockdep once..
+
+I've (generally) always run testing of this series with lockdep.  (No
+issues (anymore).)
+
+> Apart from these, 
+> 
+> Reviewed-by: Pranjal Shrivastava <praan@google.com>
+
+
+Thanks!
+
+
+Matt
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
