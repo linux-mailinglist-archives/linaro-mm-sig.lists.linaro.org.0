@@ -2,136 +2,85 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id LDplB8VXLGqrPgQAu9opvQ
+	id G2+XMXxgLGqRQAQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 12 Jun 2026 21:02:29 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 12 Jun 2026 21:39:40 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8227267BE71
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 12 Jun 2026 21:02:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 312FB67C193
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 12 Jun 2026 21:39:40 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=garyguo.net header.s=selector1 header.b=z3RDyBfM;
+	dkim=fail ("body hash did not verify") header.d=google.com header.s=20251104 header.b=SdOxErIr;
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
-	dmarc=fail reason="SPF not aligned (relaxed)" header.from=garyguo.net (policy=none);
-	arc=reject ("signature check failed: fail, {[1] = sig:microsoft.com:reject}")
+	dmarc=fail reason="SPF not aligned (relaxed)" header.from=google.com (policy=reject)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 955F73F8E8
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 12 Jun 2026 19:02:27 +0000 (UTC)
-Received: from CWXP265CU008.outbound.protection.outlook.com (mail-ukwestazon11020089.outbound.protection.outlook.com [52.101.195.89])
-	by lists.linaro.org (Postfix) with ESMTPS id 9C24D3F8E8
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 12 Jun 2026 19:02:13 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=JVjDnzWnqF0BQcrpnNF5Ljz7XJKThfiH1SoWtCz8Gyh3YUTT8kD+YHlC6PL+wCFdbu85rtiGd9G6CUpGJh03rtnTckhl1CxkO4byo81qZyEOiEBsmvKgJMO71U6YvYxCxCI1lG47H1sycM6ww4quJO67B0r30d9rkr3IZtVewVSJeWYHun5TcOQz6UD1QAm/dz9Zr9Nt9d6M9Yzfo1yt0mu5/uyk4itJ30itkD9ethRe1ex//jdqu6VhY01MLmWk2lwI9WXXVPy90TIFe9H33FyI+Nk/6xqY41DgV1Hi+iTH8DbzifXAA0wUoSjLoPi/0x54cFMylnSbeoFOlmJ1HA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wcn3UYHRGu4nlSzcnBGx2fAF5QPrS5x4bKyVjaflA1I=;
- b=lOieEOrg7jRh0fkezqetriHufIqcxN/yfdlSmMuGmNhH2h+ievwHFPZTOJJt7WMuA/Rlf4OiR5Ec2Vq1D9ow65YxdPYfLlORasqW3xZGi8+xWlTtyTtLEojD6CItkZtou6DnVTKW+1XsTfzqDRl+2Cfhh4lRm4OqR1iuoc0duOfyjlwZXcX06hxaO8Gmb+l57FXMz2Pp6m7z75nNM7NpshELimo04S1Pc0kk9NbUhnvBLFLU7QD9e3fB0hsEoT1ERPZwRNdGL4n49Du9MLL6WpKs4Gmo4tSOE7QwUc2duCGtCaHKvu1ryPiQccHVmcRw+rxlAbpGujCCdzDeLa7hLw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=garyguo.net; dmarc=pass action=none header.from=garyguo.net;
- dkim=pass header.d=garyguo.net; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=garyguo.net;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wcn3UYHRGu4nlSzcnBGx2fAF5QPrS5x4bKyVjaflA1I=;
- b=z3RDyBfMFo4d7XaSItzyddi99VSNTrw7KNTDSDPKTehdeei/Sa7/rC4QudNahVJTA1lr371ZOOhpHoDRylICETFbtcK8UrZ3r9MsGjVNYGDjGd37Ur3SKgFPO52QIgvPMjNVgn0yICvmxzDjx/ZDSEelFkYip4m8Ty48ze4lWkI=
-Received: from CW1P265MB8877.GBRP265.PROD.OUTLOOK.COM (2603:10a6:400:27c::13)
- by LO2P265MB2832.GBRP265.PROD.OUTLOOK.COM (2603:10a6:600:178::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.15; Fri, 12 Jun
- 2026 19:02:11 +0000
-Received: from CW1P265MB8877.GBRP265.PROD.OUTLOOK.COM
- ([fe80::6c9e:93c8:10db:e995]) by CW1P265MB8877.GBRP265.PROD.OUTLOOK.COM
- ([fe80::6c9e:93c8:10db:e995%6]) with mapi id 15.21.0113.011; Fri, 12 Jun 2026
- 19:02:11 +0000
-Date: Fri, 12 Jun 2026 20:02:10 +0100
-Message-Id: <DJ7AXOH0W92V.1L1869KO4C1H9@garyguo.net>
-From: "Gary Guo" <gary@garyguo.net>
-To: "Lyude Paul" <lyude@redhat.com>, <dri-devel@lists.freedesktop.org>,
- <rust-for-linux@vger.kernel.org>, <nouveau@lists.freedesktop.org>
-X-Mailer: aerc 0.21.0
-References: <20260610162433.923550-1-lyude@redhat.com>
- <20260610162433.923550-4-lyude@redhat.com>
-In-Reply-To: <20260610162433.923550-4-lyude@redhat.com>
-X-ClientProxiedBy: LO4P123CA0272.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:195::7) To CW1P265MB8877.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:400:27c::13)
+	by lists.linaro.org (Postfix) with ESMTP id 3D0FA40A6A
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 12 Jun 2026 19:39:39 +0000 (UTC)
+Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
+	by lists.linaro.org (Postfix) with ESMTPS id 617793F7FF
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 12 Jun 2026 19:39:27 +0000 (UTC)
+Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-2c0b1a48855so17855ad.0
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 12 Jun 2026 12:39:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20251104; t=1781293166; x=1781897966; darn=lists.linaro.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=a7hmvmA/ZOPAMkxJPFMHlsykhA7hRG+rHWgxmIiSF5c=;
+        b=SdOxErIrQDz2EctfEMDMxkTn7cGCfj9q1We1mHCyyxxRWKPTJpFqwiQhH/QKYwyO5L
+         j0CikkGEJYwkSrPbxeLjHHpnQ9AWstIUF6xmGAWUfNNG2oNRFjpOOo5Gvp2Io3bg1AES
+         FmaDqOMYws/XPsX+8P64j7z84kTPBPXNL/e/Hm/b9vJTyGSFT8xWycueOxmZmMvKPTEI
+         eYZv5ol6FCQGkuhJADx6YnJCNby9o08//rcs87cXEp2lJQ9W41PVQEVdYovaMaRWUGPz
+         d+0LqcipK/7aPnkcvizXj1mFWev+aXRF1xZzVqbMEPXyX1fh0Uf9yHTNPvYWVW1ipTDb
+         BVrw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1781293166; x=1781897966;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=a7hmvmA/ZOPAMkxJPFMHlsykhA7hRG+rHWgxmIiSF5c=;
+        b=ZWVZWu6UTwJnyZ7p2OAno12uSU5i37unNVLLuHbR56sTvh0LeHfk/9ybjY2fYlCqA0
+         tJWuVSLod2Liy6Hi9gvW6AKbCQ6Qwuvm9Lo0bAtM3UC4gotASRi8KZ3VoRYsJiUy9pNh
+         +WWUp7kaj3n92akoX1rP6sC6iXk3NXGhva6DFKJKSpiSEPa2Bk4Z88i3lBIrDHT7k+77
+         YNt7D84Ml9qnjU+dajrWOEhYaXViM0cauwi38oKRrPak33uSC1Jm055hfNUzogE5Mqm6
+         xiEFbyBGSLbNKrSBdf75jkp6ZrqQePEIadABU6SnmhD9bZUr3s8UatQ+k/cUCGHy7SvY
+         fAUA==
+X-Forwarded-Encrypted: i=1; AFNElJ+9ukGMsNGLYGVvpioC7FPDXW6nkqEyzaXvSqxeLQWk1Uoc1qcqEZEKyyUa57dU9JffZipXsA4MDnwKDtdX@lists.linaro.org
+X-Gm-Message-State: AOJu0YzX7Rq4v4bANiQ/bKuELq1N7WIZU3V0Dvypgb9WuGbV15lc6SMe
+	HCYSbll6E96MNA0+jfKpFWUFqJZw1mlj0oIkVWN6jcIDZg4J15JxXQ504utvDpeDXw==
+X-Gm-Gg: Acq92OFOsi0i0h0v2dzwE2w2wo5+j0798F7rjXbDGhGPixZVlENx0/2JrvRz685WFxn
+	UXOwVzQp2VWggxRHOyfGjzEbAEPStoo8MxkoCIHhJ4vjRpQSUnnZc1RljhRihbT2xIWh+VpXMiJ
+	22BTxnm6b9CO8ucYjx7R+VLI+ZoG8xS4E4deMDDbuMYBDq3ZgV2tbHMQD1qF1v6dg/jorlQr24Q
+	ybSDccWl76YikgjKHfvA5yZza1vy9lf5S8hjbdhf8mKEn/I7hwW5Z1O95qjXKwMIO8dDvH3hotp
+	0OSgSon05/M1ngXlvTHLDyBdDMrdVlgYIXr5N5o7TSZ789B9klsCLRZ9sVpAPq495sgOdeCZ4VN
+	J7sffPezzb3DJkBY7Ew+z+xz43GboKcm1N5GQkQ5wTd6nb+sXhW6TWNT+6rLkAwbVP/AnBVyO1s
+	slG+pA9iSwg0e4k0MkTATuFBqJ6zS62erObtbzpenmHzhcOcFCO84RDlG/bSbq
+X-Received: by 2002:a17:903:2d0:b0:2c1:ee6e:be1d with SMTP id d9443c01a7336-2c665ec6cc3mr4015ad.27.1781293165632;
+        Fri, 12 Jun 2026 12:39:25 -0700 (PDT)
+Received: from google.com (199.255.142.34.bc.googleusercontent.com. [34.142.255.199])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-37a25ecd66fsm3628185a91.12.2026.06.12.12.39.20
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 12 Jun 2026 12:39:24 -0700 (PDT)
+Date: Fri, 12 Jun 2026 19:39:17 +0000
+From: Pranjal Shrivastava <praan@google.com>
+To: Matt Evans <matt@ozlabs.org>
+Message-ID: <aixgZQiBQKgS7yIM@google.com>
+References: <20260610154327.37758-1-matt@ozlabs.org>
+ <20260610154327.37758-7-matt@ozlabs.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CW1P265MB8877:EE_|LO2P265MB2832:EE_
-X-MS-Office365-Filtering-Correlation-Id: 80dd0634-cffd-42a8-4c9f-08dec8b51b92
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|10070799003|23010399003|7416014|376014|366016|18002099003|22082099003|4143699003|6133799003|56012099006;
-X-Microsoft-Antispam-Message-Info: 
-	R4PRSHqsaMe93FQDj/h3mGT6Uy/O85IwDJWokijxQSuoBC/WjU6x2+ffBHkTByDKD0ctIGE9NVxBeNoiQBJsJ/UhTw5qaASWN8KAkXAOGTvAusvh2tx/l7CN+mGr3OHFHp3FWf9l7qRhm1fJ/ekVGyMvYAvfrbg9l9wDC4/uJvy5KYnX3pZZM1RGJXonvlvZlfWOew1mD++fUEtkUuEAZEgoADWpRDxdNzT6m26awk8Z0JEFK+buU20ojKsOhNiwQZsuYyJSabGRn+ZOOMuOV/KIdBazQyL6zHI38UJJfuij6vQtYWwyEDpDgq9E/zY9xwJjrML2GAugQhrozBdcw1Nt4ExvuptQDILxzSQNX73UtrjY0G3TaRx+SYWtF9pKViinGRHB7PK+ey0DETtEQaH50Ij4yNxC4DcOrL55xJI3dby6rr9Tk4TV7iwYHaTCoDjJmtwhF9eCVjVJH+QoGKSmPzxHCta9xkqJe0fksw0UKjqgqSaQdj+1Tbl/9RYP8Dq7gmSljUIVH3QKm9TFdLTTKJ+e40JwKHs6mOYAQZsw+3HS3b4x84NtUxG6uM1Rak7IH08sMt87uxGyV62Dgs6yF70QoJZlvtRu0cwuXbPCO6Q03vn8ylsOl2JRrPAPR3jbrlpNNXeGY2rFJwMWuqrQWI6R7wHCmiUoYPcBLR9ZymcOpwc8KlIrAxUp8hEN
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CW1P265MB8877.GBRP265.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(10070799003)(23010399003)(7416014)(376014)(366016)(18002099003)(22082099003)(4143699003)(6133799003)(56012099006);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?MHAyMUh3OXNHaCtTdGNFS0NkcEw3SS9mYmRjampXY3pxd1JETDJSYkpGRkwv?=
- =?utf-8?B?VVIzQm5zWGYxT1VTVmIyUlduaHQ2dXdqS1RHYkdwYkRGN00vdFBrd3VQbXpT?=
- =?utf-8?B?NkVCUnloeFBiZGtNK0ZpUEMxNmYwNFdxelg2dllUcFpjcnBWbExaSFhXSG9X?=
- =?utf-8?B?eHJTRFhQMm9YMVUwcmZLVUZPY0cxcDA2a0lRSVhNem1ydVJMWTR4VXVWWTVH?=
- =?utf-8?B?QWE2WTNYK3czdm94RDVFekxnNDBtaDlJanByOGNnWVVqQi9lVFcreXYybFpm?=
- =?utf-8?B?aUlRQUI5aDUwajJPWlYvNUgwS0FNeTE4YnFhVzlLbUhBUGx4MkxaSFk3bkFo?=
- =?utf-8?B?eGdjSzk3Tmo5aWVGSlZDdlUrclY4V2JkcUVJQmN3aGFwaEJ1eGlnVkcyTG5L?=
- =?utf-8?B?SkhnbGN1dUd6cEpLSVMrSW5NTXphTHkyMDZLMld4ZjY5elhaTllvTjZwaWRj?=
- =?utf-8?B?MElKQzRaQ1JjN1FCVWlZTzdLRmY1aHI5dVVKNklFTHp4c0tTUlRjNmtuMVdQ?=
- =?utf-8?B?NHVCaG50R3NyT09KNVl4RDJDZE5sRitVS3ZQbmVrMnY3R0ZSVTVmV09kK3d6?=
- =?utf-8?B?cWlVMC9qNTVsQ0NDY09EYUkyMzRhUmFXNSt2aHgzQXMybndWbWR6ajk0elY2?=
- =?utf-8?B?SS8rc0FYN245cExoVFFsUEZiaHN5b1pBR05mQ01iSUNRWDJneTYydStLSWwz?=
- =?utf-8?B?SktoeWV3NHdYeXJrWW1mcTBlVXczYWthd3RCeUpjbjROSXFRSlBqeFh1eDZQ?=
- =?utf-8?B?bGlIanAwdGdxK0JqZmx1dWRyNUdaNXBEWEc1L0h0MjhBOVpVNEZBcTJVSTBs?=
- =?utf-8?B?aUxjajE2L3BoTEVIVnJjK2p3YlVseENUdzAvRGxwYUk5WlNiY3JnMy9rT2Fp?=
- =?utf-8?B?RExoLzE4SzdyaGxZTGtsOTNkMWZ1cFNNVWcvdktKa3Z2OE81T0NDN2Izdm1P?=
- =?utf-8?B?UnBHdUk3dksrSlJuNEMzbVJaTzVDTWxCZjQ5SHBGNFlvTDVOM2l0TXZRT3pi?=
- =?utf-8?B?U05mUmVQOStab0FoNkxLRzdyYWtNVVMraE5BenhkRXRsZGVMLzJxMWdUYWF6?=
- =?utf-8?B?dURVeXovMVpmckxBUUJaRXBGdWtodVYvRU9SL1BxVGZIKzhDUkptMk9qNjY1?=
- =?utf-8?B?VG1rMGpQYXE5b0NXSkFmMHFVb3o0RjVQa29pM0p1eHBEYmdKNkRFTURKRlhF?=
- =?utf-8?B?UVFqcWt4TTlHbHAvYm54Z2V1K0o4QXRxclhRQTR1OWVzc1NsNFZYOC9tMEh5?=
- =?utf-8?B?L0RNTEMzNUlOUFNBTmR6RkhENmI3QndzSTYrOTdjbHRhdnVQeTZtTU01VXpo?=
- =?utf-8?B?T24zdkNJR2ptS1JyYjJKVnNzNS92Njk0Sm1qZHAybHJOQndKZ3ZKa2Q0L21W?=
- =?utf-8?B?WER3WXhlSWk1UG1hSEVnRUJEdHFhb3NoODhOV3VzUVZNdWlFNmVsbENXZUk4?=
- =?utf-8?B?NU5hNUorN05teHZidTZ5WG95V2wzOTNNQ3lGTzRyemFkdURuTkQ0NWVMSG42?=
- =?utf-8?B?eE5JeVJEQzBQRUc0QVg0NmhBak5iVnpheVRKeDNZZlZ5UU1La254V2grQmZM?=
- =?utf-8?B?RWRuMUh6YmVGUHArUE8wOXRmb2U3NWhFVWNNeE43SW1xM2RRNGhIait5VDlM?=
- =?utf-8?B?WHNOY0l5NXRscE8rR3MvYnVwanNzQWJjQmZpRzE1dzJhZ0tpN0lFbGIvK2Rq?=
- =?utf-8?B?NnVxT2czZjJiNS83UGlRQ05sUGVyVzhpNFVYbEF6VS8zbnJpL0MwV3BnQnVT?=
- =?utf-8?B?d2JqVjc1S0VpVXNsdThDZHZRT0NpblJtZTdXb3dubHdTWDFCNHZmQ2k0TXMv?=
- =?utf-8?B?V1NsdXk5UE52bm1uZWdUUUliNVFGaXVVUEZWblNoWHdiMzU4cUZuOXBmalZw?=
- =?utf-8?B?b2YvTDRWRXFET3J0Yjd5Wm1kcFpoZlphM3JvaFkxZTFCVURpZFNRekkzbS9t?=
- =?utf-8?B?ZnhkM1FzcXlwdUYyVFhsMC9mN1VjZGlPVlBFcXNES21mSmdWVmdlaHA0UjNv?=
- =?utf-8?B?Wi9oM1hkdWxoVTlnNXJkRHRvQ3dlMTgwSUJ5dWtMYlZiNnJGdUF4Q0xnOEdm?=
- =?utf-8?B?NGFSVzdqcUFCYjF3dzFEMXpsOG9YcFRPVUg3YkQ3OE9heUVlckdSamJHcmUr?=
- =?utf-8?B?d3FKNmVYTmcxb29YVG1xeGdKaTZwQ3cxNDA5Uy9udmV4V1pldnN3RkJ5M0xD?=
- =?utf-8?B?YURnS2pLZ1lZeWVqMUEvaWgxdWdUZW5NSmZzcU1TMktSbzVaQmN1U1EwMm1x?=
- =?utf-8?B?Qjg4c1c3dEtZYkpMTDFQdUk0dlYweGhBWWFBZXdZaEhEN1pjTnZPVzVJeHNG?=
- =?utf-8?B?MW4zWUtSMTZYZ294STdFT3lmRWRqRHE5aFJkRERxRUhnbk9kVUI3dz09?=
-X-OriginatorOrg: garyguo.net
-X-MS-Exchange-CrossTenant-Network-Message-Id: 80dd0634-cffd-42a8-4c9f-08dec8b51b92
-X-MS-Exchange-CrossTenant-AuthSource: CW1P265MB8877.GBRP265.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Jun 2026 19:02:11.1092
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: bbc898ad-b10f-4e10-8552-d9377b823d45
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: gek+W2Q864mccp/niugAYqaP6ha03ewIQCyKfpAsG7IwyAbBoFzQOdt/RL6LPXP+QVX0/BaiVErIxAbC4RVPHw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LO2P265MB2832
+Content-Disposition: inline
+In-Reply-To: <20260610154327.37758-7-matt@ozlabs.org>
 X-Spamd-Bar: ----
-Message-ID-Hash: GLF7DFXJUSTTSBA64TVCLKFVV4VN7XAQ
-X-Message-ID-Hash: GLF7DFXJUSTTSBA64TVCLKFVV4VN7XAQ
-X-MailFrom: gary@garyguo.net
+Message-ID-Hash: CPK5F4U3VIMRRJHITTI7R6L57I7RWPNI
+X-Message-ID-Hash: CPK5F4U3VIMRRJHITTI7R6L57I7RWPNI
+X-MailFrom: praan@google.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
-CC: Alexandre Courbot <acourbot@nvidia.com>, Gary Guo <gary@garyguo.net>, =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, driver-core@lists.linux.dev, Miguel Ojeda <ojeda@kernel.org>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Alice Ryhl <aliceryhl@google.com>, Simona Vetter <simona@ffwll.ch>, linux-kernel@vger.kernel.org, Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org, "Rafael J . Wysocki" <rafael@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Maxime Ripard <mripard@kernel.org>, David Airlie <airlied@gmail.com>, Benno Lossin <lossin@kernel.org>, linaro-mm-sig@lists.linaro.org, Danilo Krummrich <dakr@kernel.org>, Mukesh Kumar Chaurasiya <mkchauras@gmail.com>, Asahi Lina <lina+kernel@asahilina.net>, Daniel Almeida <daniel.almeida@collabora.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+CC: Alex Williamson <alex@shazbot.org>, Leon Romanovsky <leon@kernel.org>, Jason Gunthorpe <jgg@nvidia.com>, Alex Mastro <amastro@fb.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Bjorn Helgaas <bhelgaas@google.com>, Logan Gunthorpe <logang@deltatee.com>, Mahmoud Adam <mngyadam@amazon.de>, David Matlack <dmatlack@google.com>, =?iso-8859-1?Q?Bj=F6rn_T=F6pel?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Kevin Tian <kevin.tian@intel.com>, Ankit Agrawal <ankita@nvidia.com>, Alistair Popple <apopple@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org, linux-pci@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v20 3/4] rust: faux: Allow retrieving a bound Device
+Subject: [Linaro-mm-sig] Re: [PATCH v3 6/9] vfio/pci: Clean up BAR zap and revocation
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GLF7DFXJUSTTSBA64TVCLKFVV4VN7XAQ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CPK5F4U3VIMRRJHITTI7R6L57I7RWPNI/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -141,107 +90,264 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [3.09 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
-	R_DKIM_REJECT(1.00)[garyguo.net:s=selector1];
-	MAILLIST(-0.20)[mailman];
+X-Spamd-Result: default: False [2.49 / 15.00];
+	DMARC_POLICY_REJECT(2.00)[google.com : SPF not aligned (relaxed),reject];
+	R_DKIM_REJECT(1.00)[google.com:s=20251104];
 	R_SPF_ALLOW(-0.20)[+mx];
-	DMARC_POLICY_SOFTFAIL(0.10)[garyguo.net : SPF not aligned (relaxed),none];
+	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	FORGED_SENDER(0.00)[praan@google.com,linaro-mm-sig-bounces@lists.linaro.org];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER(0.00)[gary@garyguo.net,linaro-mm-sig-bounces@lists.linaro.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[26];
-	FORGED_RECIPIENTS(0.00)[m:lyude@redhat.com,m:dri-devel@lists.freedesktop.org,m:rust-for-linux@vger.kernel.org,m:nouveau@lists.freedesktop.org,m:acourbot@nvidia.com,m:gary@garyguo.net,m:christian.koenig@amd.com,m:driver-core@lists.linux.dev,m:ojeda@kernel.org,m:maarten.lankhorst@linux.intel.com,m:aliceryhl@google.com,m:simona@ffwll.ch,m:linux-kernel@vger.kernel.org,m:sumit.semwal@linaro.org,m:linux-media@vger.kernel.org,m:rafael@kernel.org,m:tzimmermann@suse.de,m:mripard@kernel.org,m:airlied@gmail.com,m:lossin@kernel.org,m:linaro-mm-sig@lists.linaro.org,m:dakr@kernel.org,m:mkchauras@gmail.com,m:lina+kernel@asahilina.net,m:daniel.almeida@collabora.com,m:gregkh@linuxfoundation.org,m:lina@asahilina.net,s:lists@lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[22];
 	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS(0.00)[m:matt@ozlabs.org,m:alex@shazbot.org,m:leon@kernel.org,m:jgg@nvidia.com,m:amastro@fb.com,m:christian.koenig@amd.com,m:bhelgaas@google.com,m:logang@deltatee.com,m:mngyadam@amazon.de,m:dmatlack@google.com,m:bjorn@kernel.org,m:sumit.semwal@linaro.org,m:kevin.tian@intel.com,m:ankita@nvidia.com,m:apopple@nvidia.com,m:vivek.kasireddy@intel.com,m:linux-kernel@vger.kernel.org,m:linux-media@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,m:kvm@vger.kernel.org,m:linux-pci@vger.kernel.org,s:lists@lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[nvidia.com,garyguo.net,amd.com,lists.linux.dev,kernel.org,linux.intel.com,google.com,ffwll.ch,vger.kernel.org,linaro.org,suse.de,gmail.com,lists.linaro.org,asahilina.net,collabora.com,linuxfoundation.org];
-	DKIM_TRACE(0.00)[garyguo.net:-];
-	ALIAS_RESOLVED(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[gary@garyguo.net,linaro-mm-sig-bounces@lists.linaro.org];
-	TO_DN_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,kernel];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ARC_NA(0.00)[];
+	DKIM_TRACE(0.00)[google.com:-];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,garyguo.net:mid,garyguo.net:from_mime,nvidia.com:email,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp]
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[praan@google.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[ozlabs.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 8227267BE71
+X-Rspamd-Queue-Id: 312FB67C193
 
-On Wed Jun 10, 2026 at 5:21 PM BST, Lyude Paul wrote:
-> When writing up some rust code that used faux devices for unit testing, I
-> noticed that we never actually added the Bound device context to
-> faux::Registration's AsRef<device::Device> implementation. This being said:
-> the Registration object itself is proof that a driver is bound to the
-> device - so this should be safe.
->
-> Signed-off-by: Lyude Paul <lyude@redhat.com>
-> Reviewed-by: Alexandre Courbot <acourbot@nvidia.com>
->
+On Wed, Jun 10, 2026 at 04:43:20PM +0100, Matt Evans wrote:
+> Previously, vfio_pci_zap_bars() (and the wrapper
+> vfio_pci_zap_and_down_write_memory_lock()) calls were paired with
+> calls to vfio_pci_dma_buf_move().
+> 
+> This commit replaces them with a unified new function,
+> vfio_pci_zap_revoke_bars() containing both the vfio_pci_dma_buf_move()
+> and the unmap_mapping_range(), making it harder for callers to omit
+> one.  It adds a wrapper, vfio_pci_lock_zap_revoke_bars(), which takes
+> the write memory_lock before zapping, and adds a new
+> vfio_pci_unrevoke_bars() for the re-enable path.
+> 
+> As of "vfio/pci: Convert BAR mmap() to use a DMABUF", the
+> unmap_mapping_range() to zap is no longer performed for vfio-pci since
+> the DMABUFs used for BAR mappings already zap PTEs when the
+> vfio_pci_dma_buf_move() occurs.
+> 
+> However, it must be assumed that VFIO drivers which override the .mmap
+> op could create mappings _not_ backed by DMABUFs.  So, the zap is
+> still performed on revoke if .mmap is overridden, using a new
+> zap_bars_on_revoke flag.  A driver can explicitly opt out; the flag is
+> cleared by the hisi_acc_vfio_pci driver, since its .mmap just wraps
+> vfio_pci_core_mmap() and so still uses DMABUFs.
+> 
+> Signed-off-by: Matt Evans <matt@ozlabs.org>
 > ---
-> V18:
-> - Add notes from Danilo to safety comment.
->
->  rust/kernel/faux.rs | 16 +++++++++++-----
->  1 file changed, 11 insertions(+), 5 deletions(-)
->
-> diff --git a/rust/kernel/faux.rs b/rust/kernel/faux.rs
-> index 43b4974f48cd2..20ab638885354 100644
-> --- a/rust/kernel/faux.rs
-> +++ b/rust/kernel/faux.rs
-> @@ -25,7 +25,8 @@
->  ///
->  /// # Invariants
->  ///
-> -/// `self.0` always holds a valid pointer to an initialized and registered [`struct faux_device`].
-> +/// - `self.0` always holds a valid pointer to an initialized and registered [`struct faux_device`].
-> +/// - This object is proof that the object described by this `Registration` is bound to a device.
+>  .../vfio/pci/hisilicon/hisi_acc_vfio_pci.c    |  8 +++
+>  drivers/vfio/pci/vfio_pci_config.c            | 30 ++++----
+>  drivers/vfio/pci/vfio_pci_core.c              | 70 +++++++++++++------
+>  drivers/vfio/pci/vfio_pci_priv.h              |  3 +-
+>  include/linux/vfio_pci_core.h                 |  1 +
+>  5 files changed, 73 insertions(+), 39 deletions(-)
+> 
+> diff --git a/drivers/vfio/pci/hisilicon/hisi_acc_vfio_pci.c b/drivers/vfio/pci/hisilicon/hisi_acc_vfio_pci.c
+> index 86362ec424a5..51990f6d66d5 100644
+> --- a/drivers/vfio/pci/hisilicon/hisi_acc_vfio_pci.c
+> +++ b/drivers/vfio/pci/hisilicon/hisi_acc_vfio_pci.c
+> @@ -1692,6 +1692,14 @@ static int hisi_acc_vfio_pci_probe(struct pci_dev *pdev, const struct pci_device
+>  	if (ret)
+>  		goto out_put_vdev;
+>  
+> +	/*
+> +	 * hisi_acc_vfio_pci_mmap() calls down to
+> +	 * vfio_pci_core_mmap(), so BAR mappings are still
+> +	 * DMABUF-backed.  They don't require a zap on revoke, so opt
+> +	 * out:
+> +	 */
+> +	hisi_acc_vdev->core_device.zap_bars_on_revoke = false;
+> +
 
-Sashiko mentioned that this added invariant is not justified in `// INVARIANT:`
-comments. However, I think instead of adding additional justifcation there, the
-safety comment below is sufficient and this doesn't need to be additional
-invariant.
+This seems to be happening after we vfio_pci_core_register_device, which
+could be slightly problematic if another device in the same group races 
+to trigger a hot reset before we can set this to false. Could we 
+initialize this flag before registration instead?
 
-Just dropping this hunk should be okay I think.
-
->  ///
->  /// [`struct faux_device`]: srctree/include/linux/device/faux.h
->  pub struct Registration(NonNull<bindings::faux_device>);
-> @@ -59,10 +60,15 @@ fn as_raw(&self) -> *mut bindings::faux_device {
->      }
+>  	hisi_acc_vfio_debug_init(hisi_acc_vdev);
+>  	return 0;
+>  
+> diff --git a/drivers/vfio/pci/vfio_pci_config.c b/drivers/vfio/pci/vfio_pci_config.c
+> index a10ed733f0e3..8bfab0da481c 100644
+> --- a/drivers/vfio/pci/vfio_pci_config.c
+> +++ b/drivers/vfio/pci/vfio_pci_config.c
+> @@ -590,12 +590,10 @@ static int vfio_basic_config_write(struct vfio_pci_core_device *vdev, int pos,
+>  		virt_mem = !!(le16_to_cpu(*virt_cmd) & PCI_COMMAND_MEMORY);
+>  		new_mem = !!(new_cmd & PCI_COMMAND_MEMORY);
+>  
+> -		if (!new_mem) {
+> -			vfio_pci_zap_and_down_write_memory_lock(vdev);
+> -			vfio_pci_dma_buf_move(vdev, true);
+> -		} else {
+> +		if (!new_mem)
+> +			vfio_pci_lock_zap_revoke_bars(vdev);
+> +		else
+>  			down_write(&vdev->memory_lock);
+> -		}
+>  
+>  		/*
+>  		 * If the user is writing mem/io enable (new_mem/io) and we
+> @@ -631,7 +629,7 @@ static int vfio_basic_config_write(struct vfio_pci_core_device *vdev, int pos,
+>  		*virt_cmd |= cpu_to_le16(new_cmd & mask);
+>  
+>  		if (__vfio_pci_memory_enabled(vdev))
+> -			vfio_pci_dma_buf_move(vdev, false);
+> +			vfio_pci_unrevoke_bars(vdev);
+>  		up_write(&vdev->memory_lock);
+>  	}
+>  
+> @@ -712,16 +710,14 @@ static int __init init_pci_cap_basic_perm(struct perm_bits *perm)
+>  static void vfio_lock_and_set_power_state(struct vfio_pci_core_device *vdev,
+>  					  pci_power_t state)
+>  {
+> -	if (state >= PCI_D3hot) {
+> -		vfio_pci_zap_and_down_write_memory_lock(vdev);
+> -		vfio_pci_dma_buf_move(vdev, true);
+> -	} else {
+> +	if (state >= PCI_D3hot)
+> +		vfio_pci_lock_zap_revoke_bars(vdev);
+> +	else
+>  		down_write(&vdev->memory_lock);
+> -	}
+>  
+>  	vfio_pci_set_power_state(vdev, state);
+>  	if (__vfio_pci_memory_enabled(vdev))
+> -		vfio_pci_dma_buf_move(vdev, false);
+> +		vfio_pci_unrevoke_bars(vdev);
+>  	up_write(&vdev->memory_lock);
 >  }
 >  
-> -impl AsRef<device::Device> for Registration {
-> -    fn as_ref(&self) -> &device::Device {
-> -        // SAFETY: The underlying `device` in `faux_device` is guaranteed by the C API to be
-> -        // a valid initialized `device`.
-> +impl AsRef<device::Device<device::Bound>> for Registration {
-> +    fn as_ref(&self) -> &device::Device<device::Bound> {
-> +        // SAFETY:
-> +        // - The underlying `device` in `faux_device` is guaranteed by the C API to be a valid
-> +        //   initialized `device`.
-> +        // - faux_match() always returns 1, and probe runs synchronously (PROBE_FORCE_SYNCHRONOUS).
+> @@ -908,11 +904,10 @@ static int vfio_exp_config_write(struct vfio_pci_core_device *vdev, int pos,
+>  						 &cap);
+>  
+>  		if (!ret && (cap & PCI_EXP_DEVCAP_FLR)) {
+> -			vfio_pci_zap_and_down_write_memory_lock(vdev);
+> -			vfio_pci_dma_buf_move(vdev, true);
+> +			vfio_pci_lock_zap_revoke_bars(vdev);
+>  			pci_try_reset_function(vdev->pdev);
+>  			if (__vfio_pci_memory_enabled(vdev))
+> -				vfio_pci_dma_buf_move(vdev, false);
+> +				vfio_pci_unrevoke_bars(vdev);
+>  			up_write(&vdev->memory_lock);
+>  		}
+>  	}
+> @@ -993,11 +988,10 @@ static int vfio_af_config_write(struct vfio_pci_core_device *vdev, int pos,
+>  						&cap);
+>  
+>  		if (!ret && (cap & PCI_AF_CAP_FLR) && (cap & PCI_AF_CAP_TP)) {
+> -			vfio_pci_zap_and_down_write_memory_lock(vdev);
+> -			vfio_pci_dma_buf_move(vdev, true);
+> +			vfio_pci_lock_zap_revoke_bars(vdev);
+>  			pci_try_reset_function(vdev->pdev);
+>  			if (__vfio_pci_memory_enabled(vdev))
+> -				vfio_pci_dma_buf_move(vdev, false);
+> +				vfio_pci_unrevoke_bars(vdev);
+>  			up_write(&vdev->memory_lock);
+>  		}
+>  	}
+> diff --git a/drivers/vfio/pci/vfio_pci_core.c b/drivers/vfio/pci/vfio_pci_core.c
+> index f9636d8f9e2a..5ea0bd4e7876 100644
+> --- a/drivers/vfio/pci/vfio_pci_core.c
+> +++ b/drivers/vfio/pci/vfio_pci_core.c
+> @@ -319,8 +319,7 @@ static int vfio_pci_runtime_pm_entry(struct vfio_pci_core_device *vdev,
+>  	 * The vdev power related flags are protected with 'memory_lock'
+>  	 * semaphore.
+>  	 */
+> -	vfio_pci_zap_and_down_write_memory_lock(vdev);
+> -	vfio_pci_dma_buf_move(vdev, true);
+> +	vfio_pci_lock_zap_revoke_bars(vdev);
+>  
+>  	if (vdev->pm_runtime_engaged) {
+>  		up_write(&vdev->memory_lock);
+> @@ -406,7 +405,7 @@ static void vfio_pci_runtime_pm_exit(struct vfio_pci_core_device *vdev)
+>  	down_write(&vdev->memory_lock);
+>  	__vfio_pci_runtime_pm_exit(vdev);
+>  	if (__vfio_pci_memory_enabled(vdev))
+> -		vfio_pci_dma_buf_move(vdev, false);
+> +		vfio_pci_unrevoke_bars(vdev);
+>  	up_write(&vdev->memory_lock);
+>  }
+>  
+> @@ -1256,6 +1255,8 @@ static int vfio_pci_ioctl_set_irqs(struct vfio_pci_core_device *vdev,
+>  	return ret;
+>  }
+>  
+> +static void vfio_pci_zap_revoke_bars(struct vfio_pci_core_device *vdev);
+> +
+>  static int vfio_pci_ioctl_reset(struct vfio_pci_core_device *vdev,
+>  				void __user *arg)
+>  {
+> @@ -1264,7 +1265,7 @@ static int vfio_pci_ioctl_reset(struct vfio_pci_core_device *vdev,
+>  	if (!vdev->reset_works)
+>  		return -EINVAL;
+>  
+> -	vfio_pci_zap_and_down_write_memory_lock(vdev);
+> +	down_write(&vdev->memory_lock);
+>  
+>  	/*
+>  	 * This function can be invoked while the power state is non-D0. If
+> @@ -1277,10 +1278,11 @@ static int vfio_pci_ioctl_reset(struct vfio_pci_core_device *vdev,
+>  	 */
+>  	vfio_pci_set_power_state(vdev, PCI_D0);
+>  
+> -	vfio_pci_dma_buf_move(vdev, true);
+> +	vfio_pci_zap_revoke_bars(vdev);
 
-Please quote all code with backticks.
+I'm wondering if this change in behavior is correct?
+BEFORE this patch the sequence was:
 
-Best,
-Gary
+1. zap vma mappings
+2. Enter D0
 
-> +        // - suppress_bind_attrs = true on faux_driver prevents userspace-triggered unbind via sysfs
-> +        // - mem::forget(Registration) is not a problem; if the Registration is leaked, the faux
-> +        //   device stays bound forever.
->          unsafe { device::Device::from_raw(addr_of_mut!((*self.as_raw()).dev)) }
->      }
+After this patch the sequence becomes
+
+1. Take the lock
+2. Enter D0
+3. zap vma mappings
+
+My worry is if user-space accesses a BAR *during* the transition to D0,
+it could crash since the mappings still exist during the transition?
+
+The old code is immune to it because it removed user-mappings first.
+
+Following the discussion from v1 regarding the ordering of 
+vfio_pci_dma_buf_move() and the D0 transition.. while it makes sense to
+perform the DMABUF revocation/move after the hardware is in D0.. I'm not
+too confident about moving zap after D0 :/ 
+
+I mean, sure, the user would just see all Fs on a read and writes will
+be dropped silently until we are in D0.. but the behaviour before this
+change was that the user access will fault and hang on the memory_lock 
+instead which ensures that the user observes a consistent dev state..
+
+> +
+>  	ret = pci_try_reset_function(vdev->pdev);
+>  	if (__vfio_pci_memory_enabled(vdev))
+> -		vfio_pci_dma_buf_move(vdev, false);
+> +		vfio_pci_unrevoke_bars(vdev);
+>  	up_write(&vdev->memory_lock);
+>  
+>  	return ret;
+> @@ -1648,20 +1650,37 @@ ssize_t vfio_pci_core_write(struct vfio_device *core_vdev, const char __user *bu
 >  }
 
-
+Thanks,
+Praan
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
