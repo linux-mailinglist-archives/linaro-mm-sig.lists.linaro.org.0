@@ -2,85 +2,85 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 0noQMnniK2oUHAQAu9opvQ
+	id ua3GC24SLGqEKwQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 12 Jun 2026 12:42:01 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 12 Jun 2026 16:06:38 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 301E9678BF6
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 12 Jun 2026 12:42:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A8E5F67A0E2
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 12 Jun 2026 16:06:37 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=google.com header.s=20251104 header.b=XLc3EXSI;
+	dkim=fail ("body hash did not verify") header.d=google.com header.s=20251104 header.b=v8wOgO8e;
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
 	dmarc=fail reason="SPF not aligned (relaxed)" header.from=google.com (policy=reject)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2708B40A4C
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 12 Jun 2026 10:42:00 +0000 (UTC)
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
-	by lists.linaro.org (Postfix) with ESMTPS id BE6053F91B
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 12 Jun 2026 10:41:46 +0000 (UTC)
-Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-2bf22c18ad3so98065ad.0
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 12 Jun 2026 03:41:46 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id C2FAF40A68
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 12 Jun 2026 14:06:36 +0000 (UTC)
+Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
+	by lists.linaro.org (Postfix) with ESMTPS id A743D3FDAE
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 12 Jun 2026 14:06:24 +0000 (UTC)
+Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-2bf22c18ad3so119915ad.0
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 12 Jun 2026 07:06:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1781260906; x=1781865706; darn=lists.linaro.org;
+        d=google.com; s=20251104; t=1781273184; x=1781877984; darn=lists.linaro.org;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=kyKpUSmzhXA86dwYd5qyCKe1OI2XqC/1Gh0xGOzaDhE=;
-        b=XLc3EXSItuBxGSD4sY1A3tXGxwNwLcdzZanhgLHTV1RPWej/v40SDKzyrNsp/tGOWp
-         AbvWOFeP9GqrnwSCrMRNWj0Ls9GYkRriLOe02HMRnMdViBRgqQxurXH3Q+rkD4ab30EH
-         ++1BLMgDvfLJY2OUf4mqC+m6Qt1NUaD486ZYd+dAptX9X33E2CyifkwsySWN2S9DueVd
-         33vmhueG9R0QeUO6fJnPnAT5NmxBUooh/qt0ryfUeKlYDm983s8YM2/zgJ19XeN6c4Nc
-         zHP4PtRivyIiy6EkQPlj11UGxv9pGxNUZQR4OqLR6zy8lirJui950sk9TyfsGfk8sPW9
-         WFrQ==
+        bh=7gWNes2hHFmdqgzisSBTrBhiO7t0Lprwi8AqbjigE24=;
+        b=v8wOgO8eJ2XU4EqbFD488PwQ+iAnSEeLkCxnbLBNlFOzqmE0t0Mo0n9rUNV8kKpt7O
+         QWng02xje68nIvAFA9QR4y6pu3no8AoAFtK7FvekJLgPdhGXP5orOj41uIuo2bfv56VI
+         x4ZnY/cEpgomV99zrK7cJ9hAvAaNiigC+59pa/x4aKDwN/XRsu6sAL3F9TIQlzB0//2e
+         /sKLuYlmXBnZlpEb8NQr23OV8zO1VCWWKDYvoMjP6YiKbRgzUF7GT2qooVZUu7n07NZs
+         jbI2LhQIedSlbmgYFIQrN3n4bSaScqWIoq9LBc9qxGSSuqZEBWlK2svvsE7QNh5M14L4
+         R5Kg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781260906; x=1781865706;
+        d=1e100.net; s=20251104; t=1781273184; x=1781877984;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=kyKpUSmzhXA86dwYd5qyCKe1OI2XqC/1Gh0xGOzaDhE=;
-        b=qlFkG/6SoTuvelkBiDbTxMEbVEcVYxJ7CAQsE8+lu5lDpjisCrS7JlqJZ6sNbYE0nU
-         bvzzrwGZPzXQ7GQTLaELrB9cms/Fk/RL8MWQ9c/hpl8xVqzqMBEfWuNoxR0rVZyvtbXQ
-         mR0MQTFeD/eaaYYY4AIweSODgA277OB9u3W9+Cl44zEw+jmFFepiu7j2ebf5Tg5mbC9z
-         9MENYhEn61eO2+OlMZ8Lfnv9xJ44+HaT623A2ZQoxGkaZGwXpAwNQz5rCDQDCgDbr2AE
-         tJwfp0WRj5Yj7nwnyh58SZ8QRXvuK/doUt92QMTJAutTaihHeuSO+5tnItUiRgnqixeo
-         AjOw==
-X-Forwarded-Encrypted: i=1; AFNElJ+PAd/MKmKpa6ahEE5S8LPrdxllzQbfrY9UIBlRzB+MFEI6065XUP7p7P3rpPmaYzFM/w93vj4E2BX7N/7z@lists.linaro.org
-X-Gm-Message-State: AOJu0Yw0GoF+47oxsFHvhg9pBnxPeUCLiEwgCfqCvVy5PBJ7bGg/xp1o
-	zvbf6VcBsAALHXiGEHS0+DTP2Hwziyg/7z/pdCWFMGw+yuPATm9AiqqZf8gNDEoyTQ==
-X-Gm-Gg: Acq92OFk2vm1PbkzfPNWol37VVpMDxHNoU04ex9+bbc1gAQ6VMuJMBXeQlte/qv36w+
-	N1U8MfaE6+0qIpSsQ/SCtqXX2FawcJGx9JpMMcG8asxx76rfI/kqMRk8isvzSTWs/ofNDiPO7DP
-	Qo5MejWUeduz6VrVOVEOQ3NWu3yuaQyUGElWad7jGwLBLVUeZAO3N9T3kEcu/oPtQO5OAl3KFQc
-	aoEPu6G2E13DTXZbOIKPG68RUN0xzn6i0gFk6+2WJ/L6Lt55uDa7A/OSfMJxpMU0m409bhlLEx5
-	81yIBFAYgYd+XlnnSf2YD6jTTskshoyn0wO6jF+XnzMyjIV6/xHoCy+k3IZSnoIR/pp3PCPzjO+
-	TmC40zpsv0dEMXoc51T8gFMu77+l/CllIqjyGTfXV83T0xcBg/D+D1PWAfCUoREXXGmQNWNK9Iv
-	oil6nlREdcRhuGCVx4ZHSN0GlJPCjmdFmj8wNPgp91iow17i+XhVFvsie8yXTH
-X-Received: by 2002:a17:902:da81:b0:2c0:c14c:bf37 with SMTP id d9443c01a7336-2c3e1919896mr2258415ad.16.1781260905357;
-        Fri, 12 Jun 2026 03:41:45 -0700 (PDT)
+        bh=7gWNes2hHFmdqgzisSBTrBhiO7t0Lprwi8AqbjigE24=;
+        b=aH46znscPpB7nV4GqUvO8XmxiiQd74JSEfE6z1cvFBYv4Z3qeo0Qldb16HABtmu9E4
+         QZaas8ZnXmnvMyxQyTVtevD0X+JQJb0XAvW+DyzvxKJ+0ZbbATJ2fITBVnEf6xeb1A+S
+         LMNskSTMgQq0cnXVfsHj85/jW/oI8nH8BAn/whvibnJ7sef3HW2fhBza/cPE1kkPfZX7
+         1YVp+rWRlwwl/avaKDGMUGsTAYjXk7Njqu8elwk785Z33/35DUSPGxmWlqs6qU2h4o06
+         TSE+14tuXAWSZubfyTlSfNJCxkeNCOoVKljCP76HQA5uOERV/kmhA1zmduxSZNxv0T42
+         dfJw==
+X-Forwarded-Encrypted: i=1; AFNElJ8zsGjxbak6sCAIhLTKC8KIz5hMHa9OY3QJXyhMSfzeDtAgdsAGbHJcNX79MWO2QvUkm/ZJT+j96DQC2tU8@lists.linaro.org
+X-Gm-Message-State: AOJu0YwSiBya5Ryc2RoiQukVNGLSPltVbGgba3d2ck0SLk7RER0fpo0o
+	wrpo0vLE7AzVRMx8GJJNPt2XXShpk7qsZ6mMPI5OB7qV8hqDKTvpmudvtcGOOrDgmA==
+X-Gm-Gg: Acq92OGPdLrMreNsX6+1MZjZE9b0949/5Iy4MYAL2h+5xwxXoUO5GGKqzYnZOgJU2WS
+	wqEMzDXySjBkL9OdYGjgSeC1uX8IYQFoDHAIn1l8hU16lQyDSI4Go9xl+aYQ22vI4eGas0DEpRY
+	wcZ+RGl/Sl0ENffwLiKtZWBHOU1I96hwkSf9cN7CsUBRA9vGkUjk5pZ4PKzCQmRhAB+uJ3w80PU
+	G6gSwpZvPgS9dAL5uUozkO3dhUnGAf/kmWYgo+lf1x9205zaBxcVO92sUjxwg4d6Mx+oota1aeo
+	Ao4m1ToHMpmwB8AvINVg3Ie4U75oLIq61UZl/4P0LrGKe6e0KL/OGwBDUvzu4PvwOL0YCykmAUu
+	8DS+5A+Tw85dFwy6Szx+r0SXtHMBtfHEDAnPhDOxX6qIpdfIxvTkbwdUUrVzzAvlmvzUx29SQ0T
+	PJRuccVXFhwo1hM8L6DSo5ALe5B0oqVvIVUlpOFjjgeGjQdiFzWDPFan3KsHwnY3GqXu0czng=
+X-Received: by 2002:a17:903:46c6:b0:2bd:6dad:3df9 with SMTP id d9443c01a7336-2c405f85829mr1700165ad.23.1781273183096;
+        Fri, 12 Jun 2026 07:06:23 -0700 (PDT)
 Received: from google.com (199.255.142.34.bc.googleusercontent.com. [34.142.255.199])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2c4327acae2sm15759755ad.52.2026.06.12.03.41.40
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-37a25ecd5dcsm2325236a91.9.2026.06.12.07.06.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 12 Jun 2026 03:41:44 -0700 (PDT)
-Date: Fri, 12 Jun 2026 10:41:36 +0000
+        Fri, 12 Jun 2026 07:06:22 -0700 (PDT)
+Date: Fri, 12 Jun 2026 14:06:14 +0000
 From: Pranjal Shrivastava <praan@google.com>
 To: Matt Evans <matt@ozlabs.org>
-Message-ID: <aiviYEi17tewEQg0@google.com>
+Message-ID: <aiwSVk4n9mCQEln2@google.com>
 References: <20260610154327.37758-1-matt@ozlabs.org>
- <20260610154327.37758-5-matt@ozlabs.org>
+ <20260610154327.37758-6-matt@ozlabs.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260610154327.37758-5-matt@ozlabs.org>
-X-Spamd-Bar: ----
-Message-ID-Hash: P4I5ZMBXVUS5SLHEH3ZV3WVVRML446NB
-X-Message-ID-Hash: P4I5ZMBXVUS5SLHEH3ZV3WVVRML446NB
+In-Reply-To: <20260610154327.37758-6-matt@ozlabs.org>
+X-Spamd-Bar: ---
+Message-ID-Hash: TDS4CMSBHB7W2NSZOX535LW4WJMNKOFN
+X-Message-ID-Hash: TDS4CMSBHB7W2NSZOX535LW4WJMNKOFN
 X-MailFrom: praan@google.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 CC: Alex Williamson <alex@shazbot.org>, Leon Romanovsky <leon@kernel.org>, Jason Gunthorpe <jgg@nvidia.com>, Alex Mastro <amastro@fb.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Bjorn Helgaas <bhelgaas@google.com>, Logan Gunthorpe <logang@deltatee.com>, Mahmoud Adam <mngyadam@amazon.de>, David Matlack <dmatlack@google.com>, =?iso-8859-1?Q?Bj=F6rn_T=F6pel?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Kevin Tian <kevin.tian@intel.com>, Ankit Agrawal <ankita@nvidia.com>, Alistair Popple <apopple@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org, linux-pci@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3 4/9] vfio/pci: Convert BAR mmap() to use a DMABUF
+Subject: [Linaro-mm-sig] Re: [PATCH v3 5/9] vfio/pci: Provide a user-facing name for BAR mappings
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/P4I5ZMBXVUS5SLHEH3ZV3WVVRML446NB/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TDS4CMSBHB7W2NSZOX535LW4WJMNKOFN/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -120,93 +120,110 @@ X-Spamd-Result: default: False [2.49 / 15.00];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,ozlabs.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 301E9678BF6
+X-Rspamd-Queue-Id: A8E5F67A0E2
 
-On Wed, Jun 10, 2026 at 04:43:18PM +0100, Matt Evans wrote:
-> Convert the VFIO device fd fops->mmap to create a DMABUF representing
-> the BAR mapping, and make the VMA fault handler look up PFNs from the
-> corresponding DMABUF.  This supports future code mmap()ing BAR
-> DMABUFs, and iommufd work to support Type1 P2P.
+On Wed, Jun 10, 2026 at 04:43:19PM +0100, Matt Evans wrote:
+> Since converting BAR mmap()s to using DMABUFs, we lose the original
+> device path in /proc/<pid>/maps, lsof, etc.  Generate a debug-oriented
+> synthetic 'filename' based on the cdev, plus BDF, plus resource index.
 > 
-> First, vfio_pci_core_mmap() uses the new
-> vfio_pci_core_mmap_prep_dmabuf() helper to export a DMABUF
-> representing a single BAR range.  Then, the vfio_pci_mmap_huge_fault()
-> callback is updated to understand revoked buffers, and uses the new
-> vfio_pci_dma_buf_find_pfn() helper to determine the PFN for a given
-> fault address.
-> 
-> Now that the VFIO DMABUFs can be mmap()ed, vfio_pci_dma_buf_move()
-> zaps PTEs (used on the revocation and cleanup paths).
-> 
-> CONFIG_VFIO_PCI_CORE now unconditionally depends on
-> CONFIG_DMA_SHARED_BUFFER and CONFIG_PCI_P2PDMA_CORE.  The
-> CONFIG_VFIO_PCI_DMABUF feature conditionally includes support for
-> VFIO_DEVICE_FEATURE_DMA_BUF, depending on the availability of
-> CONFIG_PCI_P2PDMA.
+> This applies only to BAR mappings via the VFIO device fd, as
+> explicitly-exported DMABUFs are named by userspace via the
+> DMA_BUF_SET_NAME ioctl.
 > 
 > Signed-off-by: Matt Evans <matt@ozlabs.org>
 > ---
->  drivers/vfio/pci/Kconfig           |  5 +-
->  drivers/vfio/pci/Makefile          |  3 +-
->  drivers/vfio/pci/vfio_pci_core.c   | 75 +++++++++++++++++++-----------
->  drivers/vfio/pci/vfio_pci_dmabuf.c | 12 +++++
->  drivers/vfio/pci/vfio_pci_priv.h   | 11 +----
->  5 files changed, 67 insertions(+), 39 deletions(-)
+>  drivers/vfio/pci/vfio_pci_dmabuf.c | 27 +++++++++++++++++++++++++--
+>  1 file changed, 25 insertions(+), 2 deletions(-)
 > 
-> diff --git a/drivers/vfio/pci/Kconfig b/drivers/vfio/pci/Kconfig
-> index 296bf01e185e..67a2ae1fbc04 100644
-> --- a/drivers/vfio/pci/Kconfig
-> +++ b/drivers/vfio/pci/Kconfig
-> @@ -6,6 +6,8 @@ config VFIO_PCI_CORE
->  	tristate
->  	select VFIO_VIRQFD
->  	select IRQ_BYPASS_MANAGER
-> +	select PCI_P2PDMA_CORE
-> +	select DMA_SHARED_BUFFER
+> diff --git a/drivers/vfio/pci/vfio_pci_dmabuf.c b/drivers/vfio/pci/vfio_pci_dmabuf.c
+> index 2fd3629789bf..8f7f1b909b94 100644
+> --- a/drivers/vfio/pci/vfio_pci_dmabuf.c
+> +++ b/drivers/vfio/pci/vfio_pci_dmabuf.c
+> @@ -4,6 +4,7 @@
+>  #include <linux/dma-buf-mapping.h>
+>  #include <linux/pci-p2pdma.h>
+>  #include <linux/dma-resv.h>
+> +#include <uapi/linux/dma-buf.h>
 >  
->  config VFIO_PCI_INTX
->  	def_bool y if !S390
-> @@ -56,7 +58,8 @@ config VFIO_PCI_ZDEV_KVM
->  	  To enable s390x KVM vfio-pci extensions, say Y.
+>  #include "vfio_pci_priv.h"
 >  
->  config VFIO_PCI_DMABUF
-> -	def_bool y if VFIO_PCI_CORE && PCI_P2PDMA && DMA_SHARED_BUFFER
-> +	def_bool y if PCI_P2PDMA
-> +	depends on VFIO_PCI_CORE
+> @@ -470,6 +471,7 @@ int vfio_pci_core_mmap_prep_dmabuf(struct vfio_pci_core_device *vdev,
+>  {
+>  	struct vfio_pci_dma_buf *priv;
+>  	unsigned long vma_pgoff = vma->vm_pgoff & (VFIO_PCI_OFFSET_MASK >> PAGE_SHIFT);
+> +	char *bufname;
+>  	int ret;
 >  
->  source "drivers/vfio/pci/mlx5/Kconfig"
+>  	priv = kzalloc_obj(*priv);
+> @@ -482,6 +484,20 @@ int vfio_pci_core_mmap_prep_dmabuf(struct vfio_pci_core_device *vdev,
+>  		goto err_free_priv;
+>  	}
 >  
-[...]  
->  int vfio_pci_core_mmap_prep_dmabuf(struct vfio_pci_core_device *vdev,
->  				   struct vm_area_struct *vma,
-> @@ -532,6 +538,10 @@ void vfio_pci_dma_buf_move(struct vfio_pci_core_device *vdev, bool revoked)
->  	struct vfio_pci_dma_buf *tmp;
->  
->  	lockdep_assert_held_write(&vdev->memory_lock);
+> +	bufname = kzalloc(DMA_BUF_NAME_LEN, GFP_KERNEL);
+> +	if (!bufname) {
+> +		ret = -ENOMEM;
+> +		goto err_free_phys;
+> +	}
+> +
 > +	/*
-> +	 * Holding memory_lock ensures a racing VMA fault observes
-> +	 * priv->revoked properly.
+> +	 * Maximum size of the friendly debug name is
+> +	 * vfio1234567890:ffff:ff:3f.7/5 = 30, which fits within
+> +	 * DMA_BUF_NAME_LEN.
 > +	 */
+> +	snprintf(bufname, DMA_BUF_NAME_LEN, "%s:%s/%x",
+> +		 dev_name(&vdev->vdev.device), pci_name(vdev->pdev), res_index);
+> +
 
-Nit: This comment should appear before the lockdep_assert_held_write()
-Also, it is slightly verbose.. (not against it though).
+Nit: Could we instead use:
 
+	bufname = kasprintf(GFP_KERNEL, "%s:%s/%x",
+	                    dev_name(&vdev->vdev.device), pci_name(vdev->pdev), res_index);
+	if (!bufname)
+	    ret = -ENOMEM;
+	    [...]
+
+>  	/*
+>  	 * The DMABUF begins from the mmap()'s BAR offset, i.e. the
+>  	 * start of the VMA corresponds to byte 0 of the DMABUF and
+> @@ -500,7 +516,7 @@ int vfio_pci_core_mmap_prep_dmabuf(struct vfio_pci_core_device *vdev,
+>  	priv->provider = pcim_p2pdma_provider(vdev->pdev, res_index);
+>  	if (!priv->provider) {
+>  		ret = -EINVAL;
+> -		goto err_free_phys;
+> +		goto err_free_name;
+>  	}
 >  
->  	list_for_each_entry_safe(priv, tmp, &vdev->dmabufs, dmabufs_elm) {
->  		if (!get_file_active(&priv->dmabuf->file))
-> @@ -549,6 +559,8 @@ void vfio_pci_dma_buf_move(struct vfio_pci_core_device *vdev, bool revoked)
->  			if (revoked) {
->  				kref_put(&priv->kref, vfio_pci_dma_buf_done);
->  				wait_for_completion(&priv->comp);
-> +				unmap_mapping_range(priv->dmabuf->file->f_mapping,
-> +						    0, priv->size, 1);
+>  	priv->phys_vec[0].paddr = phys_start + ((u64)vma_pgoff << PAGE_SHIFT);
+> @@ -508,7 +524,7 @@ int vfio_pci_core_mmap_prep_dmabuf(struct vfio_pci_core_device *vdev,
+>  
+>  	ret = vfio_pci_dmabuf_export(vdev, priv, O_CLOEXEC | O_RDWR);
+>  	if (ret)
+> -		goto err_free_phys;
+> +		goto err_free_name;
+>  
+>  	/*
+>  	 * Ownership of the DMABUF file transfers to the VMA so that
+> @@ -523,8 +539,15 @@ int vfio_pci_core_mmap_prep_dmabuf(struct vfio_pci_core_device *vdev,
+>  	vma->vm_file = priv->dmabuf->file;
+>  	vma->vm_private_data = priv;
+>  
+> +	spin_lock(&priv->dmabuf->name_lock);
+> +	kfree(priv->dmabuf->name);
+> +	priv->dmabuf->name = bufname;
+> +	spin_unlock(&priv->dmabuf->name_lock);
+> +
+>  	return 0;
+>  
+> +err_free_name:
+> +	kfree(bufname);
+>  err_free_phys:
+>  	kfree(priv->phys_vec);
+>  err_free_priv:
 
-Have we run this series with lockdep enabled?
-I guess it'd be nice to check with lockdep once..
-
-Apart from these, 
+Apart from that,
 
 Reviewed-by: Pranjal Shrivastava <praan@google.com>
 
