@@ -2,40 +2,40 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 5WbhMxZ8LmpRxgQAu9opvQ
+	id FAXXMDd8LmptxgQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 14 Jun 2026 12:01:58 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 14 Jun 2026 12:02:31 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3BD23680CE8
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 14 Jun 2026 12:01:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 37AC6680CED
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 14 Jun 2026 12:02:31 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
 	dkim=none;
 	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=gmail.com (policy=none);
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org"
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 44E6340A68
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 14 Jun 2026 10:01:57 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 4BEF340A52
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 14 Jun 2026 10:02:30 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A02854097C
-	for <linaro-mm-sig@lists.linaro.org>; Sun, 14 Jun 2026 10:01:50 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 888A94097C
+	for <linaro-mm-sig@lists.linaro.org>; Sun, 14 Jun 2026 10:02:21 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: "Flora King" <floraking02@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Sun, 14 Jun 2026 10:01:50 -0000
-Message-ID: <178143131065.4153863.5129434639930504550@lists.linaro.org>
+Date: Sun, 14 Jun 2026 10:02:21 -0000
+Message-ID: <178143134155.4153863.7264362931112490429@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: 2ABIT44WOWASZLATM2PZA67PM7ZD3N7K
-X-Message-ID-Hash: 2ABIT44WOWASZLATM2PZA67PM7ZD3N7K
+Message-ID-Hash: B3HUKSR5BGGBFFWOQKQTTIDSAKX74VKS
+X-Message-ID-Hash: B3HUKSR5BGGBFFWOQKQTTIDSAKX74VKS
 X-MailFrom: floraking02@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Technicians Recovery Top 4 Best Cryp-tocurrency Recovery Specialist Legitimate Best Cry-pto Recovery Specialist
+Subject: [Linaro-mm-sig] Best Cr-ypto Recovery Company Top 1 Best Company Well Known For Scammed Crypt-ocurrency Recovery 2026 Elite Recovery Team
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2ABIT44WOWASZLATM2PZA67PM7ZD3N7K/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/B3HUKSR5BGGBFFWOQKQTTIDSAKX74VKS/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -75,9 +75,9 @@ X-Spamd-Result: default: False [5.69 / 15.00];
 	ALIAS_RESOLVED(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[chainxhacksolution.com:url,lists.linaro.org:mid,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp,linaro.org:email,chainx.co.site:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[chainxhacksolution.com:url,linaro.org:email,chainx.co.site:email,lists.linaro.org:mid,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 3BD23680CE8
+X-Rspamd-Queue-Id: 37AC6680CED
 
 QXMgY3J5cHRvY3VycmVuY2llcyBjb250aW51ZSB0byByZXNoYXBlIGZpbmFuY2UgaW4gMjAyNiwg
 dGhlIHJpc2sgb2Ygc2NhbXMsIGhhY2tzLCBhbmQgbG9zdCBhY2Nlc3MgY3JlZGVudGlhbHMgcG9z
