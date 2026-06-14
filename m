@@ -2,40 +2,40 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id +FRKLvN6LmpyxQQAu9opvQ
+	id W9s6DSN7LmqQxQQAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 14 Jun 2026 11:57:07 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 14 Jun 2026 11:57:55 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2D4A3680CC6
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 14 Jun 2026 11:57:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A31D2680CCC
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 14 Jun 2026 11:57:54 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
 	dkim=none;
 	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=gmail.com (policy=none);
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org"
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4170540A16
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 14 Jun 2026 09:57:06 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B486840A52
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 14 Jun 2026 09:57:53 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 28405405D3
-	for <linaro-mm-sig@lists.linaro.org>; Sun, 14 Jun 2026 09:56:59 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7DFC3409B0
+	for <linaro-mm-sig@lists.linaro.org>; Sun, 14 Jun 2026 09:57:47 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: "Flora King" <floraking02@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Sun, 14 Jun 2026 09:56:59 -0000
-Message-ID: <178143101916.4147852.15163159008415470191@lists.linaro.org>
+Date: Sun, 14 Jun 2026 09:57:47 -0000
+Message-ID: <178143106751.4148213.18137764110539026476@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: 4HLC2AUPCT3E46I25PIJE2Y7I2SFG3AL
-X-Message-ID-Hash: 4HLC2AUPCT3E46I25PIJE2Y7I2SFG3AL
+Message-ID-Hash: RILBLBMQHVCZFZ4AHTYFMKXNV65VMJSS
+X-Message-ID-Hash: RILBLBMQHVCZFZ4AHTYFMKXNV65VMJSS
 X-MailFrom: floraking02@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Best Crypt-ocurrency Recovery Expert
+Subject: [Linaro-mm-sig] TOP SPECIALIZED GLOBAL CRYP-TO SCAM RECOVERY AGENCY TOP 9 BEST CRYPT-OCURRENCY RECOVERY AGENCY TOP BEST 1 CRY-PTO RECOVERY AGENCY
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4HLC2AUPCT3E46I25PIJE2Y7I2SFG3AL/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RILBLBMQHVCZFZ4AHTYFMKXNV65VMJSS/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -75,9 +75,9 @@ X-Spamd-Result: default: False [5.69 / 15.00];
 	ALIAS_RESOLVED(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,chainx.co.site:email,lists.linaro.org:mid,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[chainx.co.site:email,linaro.org:email,lists.linaro.org:mid,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 2D4A3680CC6
+X-Rspamd-Queue-Id: A31D2680CCC
 
 QXMgY3J5cHRvY3VycmVuY2llcyBjb250aW51ZSB0byByZXNoYXBlIGZpbmFuY2UgaW4gMjAyNiwg
 dGhlIHJpc2sgb2Ygc2NhbXMsIGhhY2tzLCBhbmQgbG9zdCBhY2Nlc3MgY3JlZGVudGlhbHMgcG9z
