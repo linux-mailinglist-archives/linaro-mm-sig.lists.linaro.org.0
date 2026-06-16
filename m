@@ -2,32 +2,32 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 7qtvBebMMGrtXQUAu9opvQ
+	id 2ooXFObMMGruXQUAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
 	for <lists+linaro-mm-sig@lfdr.de>; Tue, 16 Jun 2026 06:11:18 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id D53DC68BCC8
+	by mail.lfdr.de (Postfix) with ESMTPS id DB4E368BCC9
 	for <lists+linaro-mm-sig@lfdr.de>; Tue, 16 Jun 2026 06:11:17 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
 	dkim=none;
 	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=gmail.com (policy=none);
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org"
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A905040A23
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 16 Jun 2026 04:03:10 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5EF7740A14
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 16 Jun 2026 04:04:39 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9C80C40170
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 16 Jun 2026 04:03:04 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 89A2240150
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 16 Jun 2026 04:04:29 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: klyianfriyasnia@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Tue, 16 Jun 2026 04:03:04 -0000
-Message-ID: <178158258464.2308317.1279582011553576457@lists.linaro.org>
+Date: Tue, 16 Jun 2026 04:04:29 -0000
+Message-ID: <178158266956.2310602.15347824680084485455@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: D63ROTB2I2VR25AOYLLKMV6EHVIBDUOA
-X-Message-ID-Hash: D63ROTB2I2VR25AOYLLKMV6EHVIBDUOA
+Message-ID-Hash: CUH2DN2S3243XI6IM3KNCQUWZRPV3PL6
+X-Message-ID-Hash: CUH2DN2S3243XI6IM3KNCQUWZRPV3PL6
 X-MailFrom: klyianfriyasnia@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
@@ -35,7 +35,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Best Tours in New York for World Cup fans 2026: Ultimate NYC World Cup Experience Guide - What Most Fans Miss
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/D63ROTB2I2VR25AOYLLKMV6EHVIBDUOA/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CUH2DN2S3243XI6IM3KNCQUWZRPV3PL6/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -74,7 +74,7 @@ X-Spamd-Result: default: False [0.69 / 15.00];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	RCPT_COUNT_ONE(0.00)[1]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: D53DC68BCC8
+X-Rspamd-Queue-Id: DB4E368BCC9
 
 TW9zdCBmYW5zIHRyeSB0byDigJxmaWd1cmUgdGhpbmdzIG91dOKAnSBkdXJpbmcgdGhlIFdvcmxk
 IEN1cC4gVGhhdOKAmXMgZXhhY3RseSB3aHkgdGhleSBmYWxsIGJlaGluZC4gQmVjYXVzZSBpbiBh
