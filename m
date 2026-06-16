@@ -2,274 +2,129 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id XxYUOCdfPWpT2AgAu9opvQ
+	id 84reH+6RMWr5mwUAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Jun 2026 19:02:31 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 16 Jun 2026 20:11:58 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6EECB6C7A98
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Jun 2026 19:02:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 52ABE693E10
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 16 Jun 2026 20:11:56 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=ozlabs.org header.s=201707 header.b=THUOroZs;
-	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
-	dmarc=fail reason="SPF not aligned (relaxed)" header.from=ozlabs.org (policy=none)
+	dkim=none;
+	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=gmail.com (policy=none);
+	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org"
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 84A5F4413E
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Jun 2026 17:02:30 +0000 (UTC)
-Received: from mail.ozlabs.org (gandalf.ozlabs.org [150.107.74.76])
-	by lists.linaro.org (Postfix) with ESMTPS id F0147401CE
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 16 Jun 2026 15:45:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ozlabs.org;
-	s=201707; t=1781624757;
-	bh=j3l8PvO0raZl8FCiGfg/zxw+3QiENISLFXyCDIfAXL8=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=THUOroZs0WczfHibO0A/qrPSHwa5YNdoYCeWJF2d/1CIECVXjkloXj7wLH3RAMrqd
-	 5fczYcVAY5/pQy+4+jgY4kuVXiUvzSAMPKLcKb1C5w9H+cAzmY47/8bx3acg6k87j4
-	 fWhZfAaafjgGWk3F2SAREOE3MsU3h3u2Wvysz2/iIQH1R8GKJhsXoFXbYm69HVXkRB
-	 VhWj40L7/ojitg33igOa1igkbg9cSGVkGEkTixJmeB6SmBl5O2ZB/E1wXD9LyDkEa8
-	 Kom/JzqnfzG5JdI7rGl9KPo/I/8vsIBaPI94iumvlLCPSeuLfYBHIH6aGkgJFoTfle
-	 LbV6upvypwVdw==
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(Client did not present a certificate)
-	by mail.ozlabs.org (Postfix) with ESMTPSA id 4gfrtN6g3Dz4w1b;
-	Wed, 17 Jun 2026 01:45:48 +1000 (AEST)
-Message-ID: <e94aa97f-1aba-408e-8d3a-19f60b057b34@ozlabs.org>
-Date: Tue, 16 Jun 2026 16:45:45 +0100
+	by lists.linaro.org (Postfix) with ESMTP id F040D40A90
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 16 Jun 2026 18:11:54 +0000 (UTC)
+Received: from lists.linaro.org (localhost [127.0.0.1])
+	by lists.linaro.org (Postfix) with ESMTP id 3D71640A79
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 16 Jun 2026 18:11:48 +0000 (UTC)
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-GB
-To: Pranjal Shrivastava <praan@google.com>
-References: <20260610154327.37758-1-matt@ozlabs.org>
- <20260610154327.37758-8-matt@ozlabs.org> <aixtd_7gDhf2kisJ@google.com>
-From: Matt Evans <matt@ozlabs.org>
-In-Reply-To: <aixtd_7gDhf2kisJ@google.com>
-X-Spamd-Bar: ---
-X-MailFrom: matt@ozlabs.org
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: FVETDRWUQV6VN63KMN5A4XW63TFSMHUX
-X-Message-ID-Hash: FVETDRWUQV6VN63KMN5A4XW63TFSMHUX
-X-Mailman-Approved-At: Thu, 25 Jun 2026 17:01:20 +0000
-CC: Alex Williamson <alex@shazbot.org>, Leon Romanovsky <leon@kernel.org>, Jason Gunthorpe <jgg@nvidia.com>, Alex Mastro <amastro@fb.com>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Bjorn Helgaas <bhelgaas@google.com>, Logan Gunthorpe <logang@deltatee.com>, Mahmoud Adam <mngyadam@amazon.de>, David Matlack <dmatlack@google.com>, =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Kevin Tian <kevin.tian@intel.com>, Ankit Agrawal <ankita@nvidia.com>, Alistair Popple <apopple@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org, linux-pci@vger.kernel.org
+From: keepmealive78@gmail.com
+To: linaro-mm-sig@lists.linaro.org
+Date: Tue, 16 Jun 2026 18:11:48 -0000
+Message-ID: <178163350824.3403922.7628221074191673158@lists.linaro.org>
+User-Agent: HyperKitty on http://lists.linaro.org/
+Message-ID-Hash: HR44PH23P7XBE44LPYSBCCHFV4QDKSWE
+X-Message-ID-Hash: HR44PH23P7XBE44LPYSBCCHFV4QDKSWE
+X-MailFrom: keepmealive78@gmail.com
+X-Mailman-Rule-Hits: member-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3 7/9] vfio/pci: Support mmap() of a VFIO DMABUF
+Subject: [Linaro-mm-sig] =?utf-8?b?6LSt5Lmw55yf5YGH5oqk54Wn77yI5b6u5L+h77yaU2NvdHRib3dlcnM0NO+8iei0reS5sOmpvumptuaJp+eFp++8jOeUs+ivt+aKpOeFp++8jA==?=
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FVETDRWUQV6VN63KMN5A4XW63TFSMHUX/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HR44PH23P7XBE44LPYSBCCHFV4QDKSWE/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [1.59 / 15.00];
-	DATE_IN_PAST(1.00)[217];
-	R_DKIM_REJECT(1.00)[ozlabs.org:s=201707];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+X-Spamd-Result: default: False [0.69 / 15.00];
+	MID_RHS_MATCH_TO(1.00)[];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MAILLIST(-0.20)[mailman];
-	DMARC_POLICY_SOFTFAIL(0.10)[ozlabs.org : SPF not aligned (relaxed),none];
+	MIME_BASE64_TEXT(0.10)[];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:praan@google.com,m:alex@shazbot.org,m:leon@kernel.org,m:jgg@nvidia.com,m:amastro@fb.com,m:christian.koenig@amd.com,m:bhelgaas@google.com,m:logang@deltatee.com,m:mngyadam@amazon.de,m:dmatlack@google.com,m:bjorn@kernel.org,m:sumit.semwal@linaro.org,m:kevin.tian@intel.com,m:ankita@nvidia.com,m:apopple@nvidia.com,m:vivek.kasireddy@intel.com,m:linux-kernel@vger.kernel.org,m:linux-media@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,m:kvm@vger.kernel.org,m:linux-pci@vger.kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[matt@ozlabs.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FORGED_RECIPIENTS(0.00)[m:linaro-mm-sig@lists.linaro.org,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[keepmealive78@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_NEQ_ENVFROM(0.00)[keepmealive78@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	RCVD_COUNT_THREE(0.00)[3];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_ONE(0.00)[1];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TO_DN_NONE(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[matt@ozlabs.org,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[ozlabs.org:-];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	RCVD_COUNT_TWO(0.00)[2];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	R_DKIM_NA(0.00)[];
+	FROM_NO_DN(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[ozlabs.org:mid,ozlabs.org:from_mime,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp,linaro.org:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,buyrealcurrency.com:url,globaltraveldocs.com:url]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 6EECB6C7A98
+X-Rspamd-Queue-Id: 52ABE693E10
 
-Hi Praan,
-
-On 12/06/2026 21:35, Pranjal Shrivastava wrote:
-> On Wed, Jun 10, 2026 at 04:43:21PM +0100, Matt Evans wrote:
-> 
-> Hi Matt,
-> 
-> [...]
-> 
->> +	 *
->> +	 * With the goal of taking vdev->memory_lock in a world where
->> +	 * vdev might not still exist:
->> +	 *
->> +	 * 1. Take the resv lock on the DMABUF:
->> +	 *  - If racing cleanup got in first, the buffer is revoked;
->> +	 *    stop/exit if so.
->> +	 *  - If we got in first, the buffer is not revoked so vdev is
->> +	 *    non-NULL, accessible, and cleanup _has not yet put the
->> +	 *    VFIO device registration_.  So, the device refcount must
->> +	 *    be >0.
->> +	 *
->> +	 * 2. Take vfio_device registration (refcount guaranteed >0
->> +	 *    hereafter).
->> +	 *
->> +	 * 3. Unlock the DMABUF's resv lock:
->> +	 *  - A racing cleanup can now complete.
->> +	 *  - But, the device refcount >0, meaning the vfio_device
->> +	 *    (and vfio_pcie_core device vdev) have not yet been
->> +	 *    freed.  vdev is accessible, even if the DMABUF has been
->> +	 *    revoked or cleanup has happened, because
->> +	 *    vfio_unregister_group_dev() can't complete.
->> +	 *
->> +	 * 4. Take the vdev->memory_lock
->> +	 *  - Either the DMABUF is usable, or has been cleaned up.
->> +	 *    Whichever, it can no longer change under us.
->> +	 *  - Test the DMABUF revocation status again: if it was
->> +	 *    revoked between 1 and 4 return a SIGBUS. Otherwise,
->> +	 *    return a PFN.
->> +	 *  - It's not necessary to also take the resv lock, because
->> +	 *    the status/vdev can't change while memory_lock is held.
->> +	 *
->> +	 * 5. Unlock, done.
->>  	 */
->> +
->> +	dma_resv_lock(priv->dmabuf->resv, NULL);
->> +
->> +	if (priv->revoked) {
->> +		pr_debug_ratelimited("%s VA 0x%lx, pgoff 0x%lx: DMABUF revoked/cleaned up\n",
->> +				     __func__, vmf->address, vma->vm_pgoff);
->> +		dma_resv_unlock(priv->dmabuf->resv);
->> +		return VM_FAULT_SIGBUS;
->> +	}
->> +
->> +	/* If the buffer isn't revoked, vdev is valid */
->>  	vdev = priv->vdev;
->>  
->> +	if (!vfio_device_try_get_registration(&vdev->vdev)) {
->> +		/*
->> +		 * If vdev != NULL (above), the registration should
->> +		 * already be >0 and so this try_get should never
->> +		 * fail.
->> +		 */
->> +		dev_warn(&vdev->pdev->dev, "%s: Unexpected registration failure\n",
->> +			 __func__);
->> +		dma_resv_unlock(priv->dmabuf->resv);
->> +		return VM_FAULT_SIGBUS;
->> +	}
->> +	dma_resv_unlock(priv->dmabuf->resv);
->> +
-> 
-> 
->>  	scoped_guard(rwsem_read, &vdev->memory_lock) {
->> +		/* Revocation status must be re-read, under memory_lock */
->>  		if (!priv->revoked) {
->>  			int pres = vfio_pci_dma_buf_find_pfn(priv, vma,
->>  							     vmf->address,
-> 
-> Wait, I noticed that the is_aligned_for_order() check from mainline was 
-> removed here. Was that intentional? 
-> 
-> For hugepage faults (order > 0), we must ensure the PFN and address are
-> properly aligned before calling vfio_pci_vmf_insert_pfn().
-> 
-> In the current upstream code, we have:
->   if (is_aligned_for_order(vma, addr, pfn, order))
-> 
-> Should we restore that check here?
-
-The alignment check is done within the helper
-vfio_pci_dma_buf_find_pfn(), which returns -EAGAIN if order > 0 and a
-search result isn't usable due to alignment.  That leads to
-VM_FAULT_FALLBACK here, ensuring vfio_pci_vmf_insert_pfn() isn't called
-with anything weird.
-
->> @@ -1766,6 +1827,7 @@ static vm_fault_t vfio_pci_mmap_huge_fault(struct vm_fault *vmf,
->>  			    __func__, order, pfn, vmf->address,
->>  			    vma->vm_pgoff, (unsigned int)ret);
->>  
->> +	vfio_device_put_registration(&vdev->vdev);
->>  	return ret;
->>  }
->>  
->> @@ -1774,7 +1836,7 @@ static vm_fault_t vfio_pci_mmap_page_fault(struct vm_fault *vmf)
->>  	return vfio_pci_mmap_huge_fault(vmf, 0);
->>  }
->>  
->> -static const struct vm_operations_struct vfio_pci_mmap_ops = {
->> +const struct vm_operations_struct vfio_pci_mmap_ops = {
->>  	.fault = vfio_pci_mmap_page_fault,
-> 
-> Nit: Instead of making this global, should we add a helper? E.g.:
-> 
-> void vfio_pci_set_vma_ops(struct vm_area_struct *vma)
-> {
->      vma->vm_ops = &vfio_pci_mmap_ops;
-> }
-
-I'll give it a go, it would be nice to keep that encapsulated.
-
-Thanks,
-
-
-Matt
-
-
-> [...]
-> 
->> +
->> +static int vfio_pci_dma_buf_mmap(struct dma_buf *dmabuf, struct vm_area_struct *vma)
->> +{
->> +	struct vfio_pci_dma_buf *priv = dmabuf->priv;
->> +
->> +	/*
->> +	 * If we observe that the buffer is revoked now then refuse
->> +	 * the mmap().  This is a belt-and-braces early failure to
->> +	 * ease debugging a revoked buffer being used.  Userspace
->> +	 * might also race an mmap() against an explicit revocation,
->> +	 * or an action doing a temporary revoke; race scenarios are
->> +	 * still safe because the fault handler ultimately prevents
->> +	 * access to a revoked buffer if it isn't caught here.
->> +	 */
->> +	if (READ_ONCE(priv->revoked))
->> +		return -ENODEV;
->> +	if ((vma->vm_flags & VM_SHARED) == 0)
->> +		return -EINVAL;
->> +
->> +	/*
->> +	 * dma_buf_mmap_internal() has asserted that the VMA is
->> +	 * contained within the DMABUF size before calling this.
->> +	 */
->> +
->> +	vma->vm_page_prot = pgprot_noncached(vma->vm_page_prot);
->> +	vma->vm_page_prot = pgprot_decrypted(vma->vm_page_prot);
->> +
->> +	/* See comments in vfio_pci_core_mmap() re VM_ALLOW_ANY_UNCACHED. */
->> +	vm_flags_set(vma, VM_ALLOW_ANY_UNCACHED | VM_IO | VM_PFNMAP |
->> +		     VM_DONTEXPAND | VM_DONTDUMP);
->> +	vma->vm_private_data = priv;
->> +	vma->vm_ops = &vfio_pci_mmap_ops;
->> +
->> +	return 0;
->> +}
->>  #endif /* CONFIG_VFIO_PCI_DMABUF */
->>  
-> 
-> Thanks,
-> Praan
-> 
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+6LSt5Lmw55yf5YGH5oqk54Wn77yI5b6u5L+h77yaU2NvdHRib3dlcnM0NO+8iei0reS5sOmpvump
+tuaJp+eFp++8jOeUs+ivt+aKpOeFp++8jOi0reS5sOecn+ato+eahOiLseWbveaKpOeFp++8jOWc
+qOe6v+i0reS5sOaWsOWKoOWdoeaKpOeFp++8jOi0reS5sOaXpeacrOaKpOeFp++8jOi0reS5sOa+
+s+Wkp+WIqeS6muaKpOeFp++8jOi0reS5sOazsOWbveaKpOeFp++8jOi0reS5sOmYv+iBlOmFi+aK
+pOeFp++8jOi0reS5sOWKoOaLv+Wkp+aKpOeFp++8jOi0reS5sOi2iuWNl+aKpOeFp++8jCAoV2hh
+dHNBcHAgOiArNDkgMTU3NSAzNzU2OTc0KSDotK3kubDpqazmnaXopb/kuprmiqTnhafvvIzlh7rl
+lK7lgYfmiqTnhafvvIzlnKjlk6rph4zlnKjnur/otK3kubDnvo7lm73miqTnhafvvIzmiJHlpoLk
+vZXojrflvpfmiqTnhafvvIjlvq7kv6HvvJpTY290dGJvd2VyczQ077yJ6LSt5Lmw6aaZ5riv5oqk
+54Wn55qE5YGH5omr5o+P5Lu277yM5Zyo57q/6LSt5Lmw5oqk54Wn77yM5b+r6YCf5LuO5a626YeM
+5Zyo57q/6LSt5Lmw5oqk54Wn77yM5oiR5Y+v5Lul5Zyo57q/5Yqe55CG576O5Zu95oqk54Wn5ZCX
+77yM6LSt5Lmw5oqk54Wn6ZyA6KaB5aSa6ZW/5pe26Ze077yM576O5Zu95oqk54Wn5aSa5bCR6ZKx
+77yM5aaC5L2V6I635b6X5oqk54Wn77yM6I635b6X576O5Zu95oqk54Wn77yM5Zyo5ZOq6YeM5Y+v
+5Lul6I635b6X5oiR6ZmE6L+R55qE5oqk54Wn77yM6LSt5Lmw55yf5q2j55qE55Sf54mp54m55b6B
+5oqk54Wn77yM56uL5Y2z55Sz6K+35oqk54Wn77yM6LSt5Lmw5aSW5Lqk5oqk54Wn77yM5Zyo5Lit
+5Zu96LSt5Lmw576O5Zu95oqk54Wn77yM5Zyo57q/6LSt5Lmw576O5Zu95oqk54Wn77yM77yI5b6u
+5L+h77yaU2NvdHRib3dlcnM0NO+8ieWcqOe6v+i0reS5sOiKrOWFsOaKpOeFp++8jOWcqOe6v+i0
+reS5sOW+t+WbveaKpOeFp++8jOi0reS5sOaWsOWcqOe6v+i0reS5sOaWsOilv+WFsOaKpOeFp+OA
+geWcqOe6v+i0reS5sOeIseWwlOWFsOaKpOeFp+OAgeWcqOe6v+i0reS5sOS4uem6puaKpOeFp+OA
+geWcqOe6v+i0reS5sOiRoeiQhOeJmeaKpOeFp+OAgeWcqOe6v+i0reS5sOiRoeiQhOeJmeaKpOeF
+p+OAgeWcqOe6v+i0reS5sOWNouajruWgoeaKpOeFp+OAgeWcqOe6v+i0reS5sOWcn+iAs+WFtuaK
+pOeFp+OAgeWcqOe6v+i0reS5sOiNt+WFsOaKpOeFp+OAgeWcqOe6v+i0reS5sOaMquWogeaKpOeF
+p+OAgeWcqOe6v+i0reS5sOazouWFsOaKpOeFp+OAgeWcqOe6v+i0reS5sOW4jOiFiuaKpOeFp+OA
+geWcqOe6v+i0reS5sOWMiOeJmeWIqeaKpOeFp+OAgeWcqOe6v+i0reS5sOilv+ePreeJmeaKpOeF
+p+OAgeWcqOe6v+i0reS5sOaZuuWIqeaKpOeFp+OAgeWcqOe6v+i0reS5sOWFi+e9l+WcsOS6muaK
+pOeFp+OAgeWcqOe6v+i0reS5sOWTpeaWr+i+vum7juWKoOaKpOeFpyAoV2hhdHNBcHAgOiArNDkg
+MTU3NSAzNzU2OTc0KQ0KDQpodHRwczovL2J1eXJlYWxjdXJyZW5jeS5jb20vcHJvZHVjdC/liqDm
+i7/lpKflsYXnlZnorrjlj68vDQpodHRwczovL2J1eXJlYWxjdXJyZW5jeS5jb20vcHJvZHVjdC/n
+vZHkuIrlh7rllK7lgYfnvo7lm73miqTnhacvDQpodHRwczovL2J1eXJlYWxjdXJyZW5jeS5jb20v
+cHJvZHVjdC/otK3kubDnvo7lm73pqb7pqbbmiafnhacvDQpodHRwczovL2J1eXJlYWxjdXJyZW5j
+eS5jb20vcHJvZHVjdC/otK3kubDmraPlrpfnvo7lm73nu7/ljaEvDQpodHRwczovL2J1eXJlYWxj
+dXJyZW5jeS5jb20vcHJvZHVjdC/nvZHkuIrlh7rllK7lgYfnvo7lm73miqTnhacvDQpodHRwczov
+L2J1eXJlYWxjdXJyZW5jeS5jb20vcHJvZHVjdC/otK3kubDkuK3lm73miqTnhacvDQpodHRwczov
+L2J1eXJlYWxjdXJyZW5jeS5jb20vcHJvZHVjdC/lnKjnur/otK3kubDmiqTnhacvDQpodHRwczov
+L2J1eXJlYWxjdXJyZW5jeS5jb20vcHJvZHVjdC/otK3kubDmraPniYjpn6nlm73miqTnhacvDQpo
+dHRwczovL2J1eXJlYWxjdXJyZW5jeS5jb20vcHJvZHVjdC/lpoLkvZXotK3kubDmraPniYjnvo7l
+m73miqTnhactMjAyNi8NCmh0dHBzOi8vYnV5cmVhbGN1cnJlbmN5LmNvbS9wcm9kdWN0L+WcqOe6
+v+i0reS5sOaKpOeFpy8NCmh0dHBzOi8vYnV5cmVhbGN1cnJlbmN5LmNvbS9wcm9kdWN0L+i0reS5
+sOato+eJiOS4reWbveaKpOeFpy8NCmh0dHBzOi8vYnV5cmVhbGN1cnJlbmN5LmNvbS9wcm9kdWN0
+L+i0reS5sOecn+ato+eahOWKoOaLv+Wkp+aKpOeFpy8NCmh0dHBzOi8vYnV5cmVhbGN1cnJlbmN5
+LmNvbS9wcm9kdWN0L+i0reS5sOiLseWbveWOn+eJiOaKpOeFpy8NCmh0dHBzOi8vYnV5cmVhbGN1
+cnJlbmN5LmNvbS9wcm9kdWN0L+WmguS9leWcqOWutuWQiOazleiOt+WPluato+eJiOW+t+WbveaK
+pOeFpy8NCmh0dHBzOi8vYnV5cmVhbGN1cnJlbmN5LmNvbS9wcm9kdWN0L+i0reS5sOS4reWbveaK
+pOeFpy8NCmh0dHBzOi8vYnV5cmVhbGN1cnJlbmN5LmNvbS9wcm9kdWN0L+e9keS4iuWHuuWUruWB
+h+e+juWbveaKpOeFpy8NCmh0dHBzOi8vZ2xvYmFsdHJhdmVsZG9jcy5jb20vcHJvZHVjdC/lnKjn
+ur/otK3kubDnnJ/lgYfmiqTnhacvDQpodHRwczovL3J1c2hteW5ld3Bhc3Nwb3J0LmNvbS9wcm9k
+dWN0L+i0reS5sOWKoOaLv+Wkp+WxheeVmeiuuOWPry8NCmh0dHBzOi8vYnV5cmVhbGN1cnJlbmN5
+LmNvbS9wcm9kdWN0L+WKoOaLv+Wkp+WxheeVmeiuuOWPry8NCg0K6YKu566x77yaYXV0aGVudGlj
+bm90ZXM1QGdtYWlsLmNvbQ0K5b6u5L+h77yaU2NvdHRib3dlcnM0NA0KX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxp
+c3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQg
+YW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
