@@ -2,171 +2,159 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 26OjOWoXMWoCbgUAu9opvQ
+	id 55YaOu4bMWr2bgUAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 16 Jun 2026 11:29:14 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 16 Jun 2026 11:48:30 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4C60A68D8A3
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 16 Jun 2026 11:29:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 617B268DAFA
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 16 Jun 2026 11:48:30 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=intel.com header.s=Intel header.b=RGNIhyJe;
+	dkim=fail ("body hash did not verify") header.d=intel.com header.s=Intel header.b=QLQeqWN3;
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
 	dmarc=fail reason="SPF not aligned (relaxed)" header.from=intel.com (policy=none);
 	arc=reject ("signature check failed: fail, {[1] = sig:microsoft.com:reject}")
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5DA3E40A6B
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 16 Jun 2026 09:29:13 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
-	by lists.linaro.org (Postfix) with ESMTPS id CAC90402CF
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 16 Jun 2026 09:29:01 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 4AA4240A52
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 16 Jun 2026 09:48:29 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.18])
+	by lists.linaro.org (Postfix) with ESMTPS id 3276F402CF
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 16 Jun 2026 09:48:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1781602142; x=1813138142;
+  t=1781603299; x=1813139299;
   h=from:to:cc:subject:date:message-id:references:
    in-reply-to:content-transfer-encoding:mime-version;
-  bh=pdx3BbQIYdibySzKarXaQfpDJIsxtrKkeBKJ6wtbFHo=;
-  b=RGNIhyJeNL4xst7cbMq+A4ztSPt6DoshpsQZpXb0fdftU4jzFleNPrtv
-   Ti7dVnl390lnzVTOdONg0vk+3cJ7UK30+6grmDrR+Nag3wuKeGU0v8F4c
-   iZHC4ZOUmbfec4dM8+wB0gqWElBKSxsWoAthQuScen7RzsUmddNnD762H
-   H+f7RdPqNIYgHzkZ2X8iZCyp7bFrF+cYvtjr7KtoLFyU0JHVEUet8icCN
-   r7vZpAPv6gVU6oCOsaMaaqqEFxeaR9gp5ths51QAdELEpTlXg+/zV4ywN
-   PLbykEheQYhTzDtFMkBUaqYlPx8eyLLUuLss4PqVZTsDx7SzBhO9qG/gj
-   w==;
-X-CSE-ConnectionGUID: fdhte3TBTqK/5bU8+fMQzw==
-X-CSE-MsgGUID: JYtqqnlVQQWwVlQZQbi+CQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11818"; a="82261550"
+  bh=S8+6+13CRuHgOpz59PQ7Qun4r+Vairlky0FUQzQZl6I=;
+  b=QLQeqWN3rhhrH1P/U/6M/6DC4Gj/bI836hb9FXV2GH0HULid1BXniz/u
+   S6mKHIwcn8j8kvCYz6yQpEiiSHpoGFug2SJoLZ+itTs3kI8GlFzZYw2Ph
+   f9kfRnBnlQ5ujK0N8d0mN0uNmLavxUs84U5m9uO6CVEM9TYHjCMU9CEH4
+   pEmoSwAEv2FNRMVNG2NIjiT6KcaORFJ+sBARQIunmBHZyMSQjg/tGgujy
+   Ra9kPFv0Vm83p+Zk/R+wPH8ZsLx3DbcxAl4/YC59rcH2LPxix6uHXBHOs
+   ONPzwkbebbq33nwwPep3QtQpFUdl7XdE1qH9CN6HMi5JjluHCe/V8/bdU
+   Q==;
+X-CSE-ConnectionGUID: 1I/0vUt6TcOnn8/f3iFaww==
+X-CSE-MsgGUID: nAdF6f43Qr2NRAEEu7uN7g==
+X-IronPort-AV: E=McAfee;i="6800,10657,11818"; a="82426660"
 X-IronPort-AV: E=Sophos;i="6.24,208,1774335600";
-   d="scan'208";a="82261550"
-Received: from fmviesa009.fm.intel.com ([10.60.135.149])
-  by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Jun 2026 02:29:00 -0700
-X-CSE-ConnectionGUID: 1ewsTyhPTwS1fXL8rovrUg==
-X-CSE-MsgGUID: jSIG2K/qTwqfR17itQ+IUA==
+   d="scan'208";a="82426660"
+Received: from orviesa004.jf.intel.com ([10.64.159.144])
+  by orvoesa110.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Jun 2026 02:48:18 -0700
+X-CSE-ConnectionGUID: pdir8RGJSC+llBtMPnikRQ==
+X-CSE-MsgGUID: ZFHMg0xUQAmjgiTO6JohLQ==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.24,208,1774335600";
-   d="scan'208";a="241338312"
-Received: from orsmsx901.amr.corp.intel.com ([10.22.229.23])
-  by fmviesa009.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Jun 2026 02:29:00 -0700
-Received: from ORSMSX902.amr.corp.intel.com (10.22.229.24) by
- ORSMSX901.amr.corp.intel.com (10.22.229.23) with Microsoft SMTP Server
+   d="scan'208";a="252031368"
+Received: from fmsmsx903.amr.corp.intel.com ([10.18.126.92])
+  by orviesa004.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Jun 2026 02:48:18 -0700
+Received: from FMSMSX902.amr.corp.intel.com (10.18.126.91) by
+ fmsmsx903.amr.corp.intel.com (10.18.126.92) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.37; Tue, 16 Jun 2026 02:28:59 -0700
-Received: from ORSEDG901.ED.cps.intel.com (10.7.248.11) by
- ORSMSX902.amr.corp.intel.com (10.22.229.24) with Microsoft SMTP Server
+ 15.2.2562.37; Tue, 16 Jun 2026 02:48:17 -0700
+Received: from fmsedg903.ED.cps.intel.com (10.1.192.145) by
+ FMSMSX902.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.37 via Frontend Transport; Tue, 16 Jun 2026 02:28:59 -0700
-Received: from PH8PR06CU001.outbound.protection.outlook.com (40.107.209.53) by
- edgegateway.intel.com (134.134.137.111) with Microsoft SMTP Server
+ 15.2.2562.37 via Frontend Transport; Tue, 16 Jun 2026 02:48:17 -0700
+Received: from CH4PR04CU002.outbound.protection.outlook.com (40.107.201.9) by
+ edgegateway.intel.com (192.55.55.83) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.37; Tue, 16 Jun 2026 02:28:59 -0700
+ 15.2.2562.37; Tue, 16 Jun 2026 02:48:17 -0700
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=JOh9k5iSh23zXZ6UQqFKlscKykL0gNkxM9vtIGJTqnGcoCzCe0Kn3h9CNoSH16Nku3huigK29sBJsjXpAecF+UOpStbNQq4LDb44mSJ1kbFdYVlQ+/qsNLQD4SLzwpNMxm3MwL854CVItzXzEPOck/4MlBFAfthG92eXOGWIWyXvpBywA8CXAKg7bLwItYFcnIBgyiWbgnKaUMPOkaDUr8mzLSGcS9vBMqfd1WcXNsfaTAsUTKTzdPZ7uL/DRPEcZX/woptnQcdd7DY+esv8Km4TffiEOQCgv+TS2I+0Fk4bziaxJSgCC1JwBRLRCkv1ZA3bJSACtMlbrJT3kYQntw==
+ b=W2V8IrRJyPw2ynsGTNpHC+oPgz74ZkCHdJQCvDpaqvZOq5fu3jEYxNEft6mfRQCNasJ/WEDgEy6PcUHMBwTLJz5A8p2u0C2J0K4/CNYaD0mKVHNqH+u6e1y0kj1smrEVsV+n2Gvfgal48hOxZBzVE35x16og1HlHcF+M9osVlMKe9IJyPKUFb/goIxHT5mhY83/bMt6fahyYaG29nk0S0/mgtD+1MYs+KcySdjI1s4i8w8bBtoWWHUj+Ki7qG9p6D7Pq6WgRqmu26mF1uLH/v8QhyijMmqjQRcUA6Oja1vWQDhzicrMjISWwr3eoaSwJeMPEvO9eYUxGc3JgE5JOQQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=pdx3BbQIYdibySzKarXaQfpDJIsxtrKkeBKJ6wtbFHo=;
- b=NgtQHx5ewp40luHJ/k+lzvDIF8/Rg9gBH62j/jTA2gDkyP2b/oH95GDNzM96pKNmYX6ajFIsLlsUgQ54kuAmMKWFLg8ObUzoyqM9xJmci8tqtHcCMmO9cma2XQojv3p7XEOdi7aKaq+OJyBudNWz94MPYnREnoTxIY4u7JcjhYUcUvlKj8jAfBpYAPKfj2D89Vsz24/tbjfg9hnmumFcwtIyhIywQCgk5OXjjRaf/mFHxblHMRaRDXBeeIvz7/gsGGWMcwp8D7AW3e03c96R5s9XvQG0gAAoZJNg9MfW4zGiuJFsbEbQvvHgcBHvn7CZsg/EmiSB1HlAK4Eme6caUg==
+ bh=abPYk6hrSq4dKOLfRdKwntD8kDy/fuJZ416UyRO3lOQ=;
+ b=XPBrc6MtRxwPOmfm9fZzgme6pWDfEOxW4VBlobWaZ4Oy2V0LsW51M/XfDHcmllLKW0NtY0CmjwYKSpe/0V4nUBkroLYxzXfHH6DO7jLV0cyZEFS69jhzodhoNhoNZD2qZFN7Kp/Jvaxw1RGhXv0vD9KHT0R8Fs13LOHe1s7q7/4zFVAOpByVy+TLOtIN3xPVK0dIX162DZtyvEJPb21PBlIdM1XUXWRBCfyO6L/SIIsokz/67eyg6G+ht2i0+Z5DgBfGpY1Ojwv5AN8AFpmeF8nrIK58x+uIuiYR4cRdWWG8K7ng7oME42oWE+F125chtzLmDe0YUp9Wf9OtJXerLQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
  dkim=pass header.d=intel.com; arc=none
 Received: from DM6PR11MB3690.namprd11.prod.outlook.com (2603:10b6:5:13d::32)
- by SA2PR11MB4859.namprd11.prod.outlook.com (2603:10b6:806:f8::7) with
+ by PH7PR11MB6652.namprd11.prod.outlook.com (2603:10b6:510:1aa::21) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.18; Tue, 16 Jun
- 2026 09:28:52 +0000
+ 2026 09:48:14 +0000
 Received: from DM6PR11MB3690.namprd11.prod.outlook.com
  ([fe80::7db8:f6b3:30f8:ee4b]) by DM6PR11MB3690.namprd11.prod.outlook.com
  ([fe80::7db8:f6b3:30f8:ee4b%4]) with mapi id 15.21.0113.015; Tue, 16 Jun 2026
- 09:28:52 +0000
+ 09:48:14 +0000
 From: "Tian, Kevin" <kevin.tian@intel.com>
-To: Matt Evans <matt@ozlabs.org>
-Thread-Topic: [PATCH v3 2/9] vfio/pci: Add a helper to look up PFNs for
- DMABUFs
-Thread-Index: AQHc+PAQRqml0ikcREqACcjq+Arri7Y6mQ/wgAVXxwCAAQHA8A==
-Date: Tue, 16 Jun 2026 09:28:51 +0000
-Message-ID: <DM6PR11MB36903B0203CFFF97197676138CE52@DM6PR11MB3690.namprd11.prod.outlook.com>
+To: Pranjal Shrivastava <praan@google.com>, Matt Evans <matt@ozlabs.org>
+Thread-Topic: [PATCH v3 6/9] vfio/pci: Clean up BAR zap and revocation
+Thread-Index: AQHc+PAbYETvhcTyrUu/DN8Pu72QKLY7VG+AgAWiCfA=
+Date: Tue, 16 Jun 2026 09:48:14 +0000
+Message-ID: <DM6PR11MB3690489DB5FA611413BF60558CE52@DM6PR11MB3690.namprd11.prod.outlook.com>
 References: <20260610154327.37758-1-matt@ozlabs.org>
- <20260610154327.37758-3-matt@ozlabs.org>
- <DM6PR11MB369091A6F1E32054A95AB6788C182@DM6PR11MB3690.namprd11.prod.outlook.com>
- <4d75b948-3b74-4970-97f2-72e54f9c9694@ozlabs.org>
-In-Reply-To: <4d75b948-3b74-4970-97f2-72e54f9c9694@ozlabs.org>
+ <20260610154327.37758-7-matt@ozlabs.org> <aixgZQiBQKgS7yIM@google.com>
+In-Reply-To: <aixgZQiBQKgS7yIM@google.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: DM6PR11MB3690:EE_|SA2PR11MB4859:EE_
-x-ms-office365-filtering-correlation-id: 5e36c4c9-6625-4d7a-7dbc-08decb89adce
+x-ms-traffictypediagnostic: DM6PR11MB3690:EE_|PH7PR11MB6652:EE_
+x-ms-office365-filtering-correlation-id: 0b756e2c-e4d3-4945-4b5a-08decb8c62a5
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;ARA:13230040|366016|1800799024|376014|7416014|23010399003|22082099003|18002099003|10063799003|38070700021|4143699003|11063799006|56012099006;
-x-microsoft-antispam-message-info: WKG0sX9Q62dV144qXL6tQsJSiiNAycVAKCWKwwVSy/X3rsaNZx6o0LwFtAjOEdk1mEby2pQSCehNV0KYx0jSM4d47s6NvQgTqSBGDjlFKFEtb/IVmwJyUNNW19LpxBumG2fvN2ghzcVaZ4Yu1dR5bBbw4IFuqG+UJwREcscFDOERtdsRu8X+lZZ3LAoXKgsRftO5ON4OE/WYSSRLAtDtIw4CRS6jgjNfJF8psh4nICiZFAjYhTStDt7NzXEoLQbNR9vWYLQm4C6z8ZE5B/b2UoeN+fdTuouoITbaTJI0uDjGpRbVtjKhtTGFWcyxEoi4KBp2nwvbf/nYm7wVfuJubxVylXGquNl/YPYe4Hpmf7LF+aZtDrJtIjC+1qgS7BteOJThTLhIHm4GwLlgV2yyQ54WuhGs5zHCYtyLf2zJmm8LaWe/92tnxHe5hh5ezlB7qt5962m6qRpk5I6X/9yOfIGynXaqwOvW4u7WiCksneP47zM+/Pw9WkyRgt9yQeeDwRgjjA5laXFXHFiqpO4QPxi+qnmNw7oou1iPYb56cEmhhWiDrc4hazBiCbbG2v6VsGT0VO0tY0IxPU3vjETgrvW+5DC4JqL/4q6/R9eTf7LvykqC0gZyR98Hl6BAP6sR3jDkPqk/B15x3TegmjDidmONCtt6i6jG2ThTPW38FmQ42f2P5iomZ65hBrK9NSC7YmphRC2Xo/dfu/RN9xt/ze86hYmc4SFtDqBfD95MNJrObgnBDcXrQJSH88ggdzmq
-x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB3690.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(7416014)(23010399003)(22082099003)(18002099003)(10063799003)(38070700021)(4143699003)(11063799006)(56012099006);DIR:OUT;SFP:1101;
+x-microsoft-antispam: BCL:0;ARA:13230040|23010399003|7416014|376014|366016|1800799024|56012099006|5023799004|11063799006|4143699003|6133799003|38070700021|18002099003|22082099003;
+x-microsoft-antispam-message-info: h7nKpIpHfrGZ7ayPPXQ5MjcbmwYqDwtswSVzvVSqNu/tnPp20sjnVaVdPaFID91DPRsQ1GXJ28m2XK+TE+OsiDG71p+LmsgKiYVbo22EQSthf0GHkham+5FCSail3q+jwTC9FOAAjoiFop3j6tvoMKEMAeoXgPvkB11CYWwkC4IMbrh1LIopsH4gOMpLG3IT0VvZyV1eV1Q2wI02pUwowd93zMumIIpR7QURVww8P/QO3yCuI5yPYiO4NovVY34ZLJuEBf3MGWh1nio3mlZWK/Sdh0WFpAxyBkl8CBhEYKLD1qmou9mjrbiscU8F7xd7GmDhmh5I5WwzewFER4AytyrmaSsxuqIYzNotcpbSMAspCsGLF6YuyuU5Im5pRkkY7amBly8rGra3OdaBn5gK4/0T95ZIVhGdDKQ0ZBscVey+ypZ41HSl4r6SyRh4HHy1866DMfZIVkrWAPSG0Kj6wSmpVFKM6VFahOIHdqm/31tGpU+hucVGZBlTk2SDTdhvlGOmi/gpwK+sIWc1uESN/1v9CCh3hM5hiCNqkXH20j6Uz6qmzTARm/Ctqlj2lnq++7EonitiRpZ//1NFZcIhg39OA5ySwlFt+zDD7lQVEyJ5to2swh6Oh/pwck5D3fEUrjFtmc+u0U+clgO6ZZB2qSXVLK0ksDArKTWKeqK0Rz00ORtyav/ULmMrQiNIOzL20R1PIDFAC4JlsYZX5M/LdP5hQFIjQz/ebSm9Z54u0wEUwi8lRK7KBte2sOK/5C3n
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB3690.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(7416014)(376014)(366016)(1800799024)(56012099006)(5023799004)(11063799006)(4143699003)(6133799003)(38070700021)(18002099003)(22082099003);DIR:OUT;SFP:1101;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?U0pCSDh0SHJiS0gxR0w3ajVHZUVlK3VPSHZTYkVuM01pemZMbURpczJVZDJF?=
- =?utf-8?B?TnYwTWx2b3R1T3piRlNiUVZJRGtydUUrSzZRaFlwVDVxeloxTDM5aDNLaEJM?=
- =?utf-8?B?MGxmTFpFRU9yTG9ZSUZJR0wrdUFEVWsyTm8zZE5Qelduc0czQmtpZU13blU2?=
- =?utf-8?B?WUpLY1VUVkZvdHo1eFZQUUxsRjBqY0ZjY2hsZ1ZQVHY1MG1GTkUzYjJxWEs1?=
- =?utf-8?B?Z0hjUk80ZEJ5Nlo5bTY4UmNydk1pem1tRmhrTXBMbU05YkFzZlo1SXJ2WnBu?=
- =?utf-8?B?Z0dDMkZXMW5TSWdtVlAyd2YzY3FldUlhclQxR0k1MWZ0L0tiNzFqYUVqSUky?=
- =?utf-8?B?NFRjb2NUUUVLTXRSbTV2ckNKZnVHK2hZOHFIeXU4TTBlbVNYY3JlZjk4Tm9u?=
- =?utf-8?B?U0ZLcUJ5ZkdXbkZsd0pWNWVaMmtWdlB1dUNoV2xKUW90d3lqMUdMcDVDeVdZ?=
- =?utf-8?B?L2pJUWs5K2R0UGNSREZ3YnVrVUU0N1RYOVI5N0FrR1RBMTVzSU9idmlyZnVX?=
- =?utf-8?B?TVVucm9ISnRQcWRQa1FjREh4V2c2Nk9zcXlSM3ZXUlh1N0NuUEx2NWxoaEE1?=
- =?utf-8?B?cmdOMTZGQ3V6RU1hV0hmTjVqekJabUFJTDgvbWhGTEtXbnJCV3RpQlEzVmJv?=
- =?utf-8?B?MEJmNk53ZCtxWk5ML28wZnc0akNSM2ZrTUxKM29HLzNUUlQzMlBOcXFPV1dz?=
- =?utf-8?B?TUx5a0JaSjg0UXdCNWF0SEVUSGhEaDJzR2EvS3F3WFFyV2V4dmNVUVZXbzN4?=
- =?utf-8?B?TkRSTmRtZWFGNkJOYllYbVQ5K3dmQU5HTTh1R2VrRDlaY1VUVjlpNEZ6Ym9Q?=
- =?utf-8?B?bTFYWHpha3hRSmFEYXRtWG1QWXBkRVpkNDBIaUxKSXRYS2JhQnNjUGdHUnlw?=
- =?utf-8?B?NTk3bUp0cDRmUDUwRTl2VHZNdDhINHdOVEVONmV3T1NnRGlXdnZuU0ljV2R0?=
- =?utf-8?B?RkxnT0VLTmlaYVBGQWoyaDlBSFBtK2tvNWpCYnVWL1pPWFhwUWRPQ0VsTGR6?=
- =?utf-8?B?UTFtYTFUUXRPdVhiSDJ4eS9MeVVZUkRFdWxnVTB1aVltd3hCeGZTOTlGbURP?=
- =?utf-8?B?Sll3dnNoNjVGd0dGWlZFR2g2OUlKelA2a1YvTTlBa3B0ekg0ZkEybzBVd1Nt?=
- =?utf-8?B?SGhsNGVHZHFUczlEc3Nna2xsMjVLSGxHeXB0S25nZjlrbk9UZExKb1Z5UmdS?=
- =?utf-8?B?M21MZEFKQlY4MlhocG1KZVFMVlM2eUZBUTBkK2dVdWFiY1o4aUVTbndpeVpC?=
- =?utf-8?B?SXFHaEFnVmo4a2tGL3ZaT0w0RWlkWC9WVDA3R3U3clRhVWRsdlA5d2g3bTFz?=
- =?utf-8?B?WU40T0JGRVAwNXQ4R2xjOGZOQXdVNEh5K1JsZUxlSzZRd0xEZkRuNlRQUUNp?=
- =?utf-8?B?dkNhNUprWWxaMEY3RkJHTlBYYTBNT0NyMEVIZXRsSHNmems0OFp5NldrREQ2?=
- =?utf-8?B?bDVJOTV2dFhscU5ydzFPOXJZWXViVVpydVI3MVY2ZW9PMkhJb0M2UitmcFZ0?=
- =?utf-8?B?Mk1tanF6OFBaK1RId3g4YlZCRHB0eXNpMHlSeGhBanZlbHVYMEM4OWViYlpB?=
- =?utf-8?B?dGVsWUlGZXJyTzNOdkVqRlZPdThVUXZWYjJnQjIwNTQ4NkJCdCt6NjhwOFVx?=
- =?utf-8?B?WkRyTUFtM3YrMXAvLzBXVUtLR05TdjZVL2k1SS8zdDZNakcwNlVDWklXVnJL?=
- =?utf-8?B?M0ZnOE4vL0lGeCthcTN0VWpDZnduT2xXYTBBUkNVdHA5NkFWWldkN2dnK1VW?=
- =?utf-8?B?QmdoQUc2MGZVWDVHb0lYTUhtVUpsNkVsQkZTTFdhMTRzRVM3YVowWUtDN1VP?=
- =?utf-8?B?UDhpTk83Ly93aTVsSDBvTVdTaTUvR0FocE1XdjhEY2k0MkVDbTBBMTFKQWY2?=
- =?utf-8?B?eG44VjFMZ2swUVBvemdRZjZ2TTV4bEswQzM2eUV2dis0SVI5NjZHTDdMeDc0?=
- =?utf-8?B?ZzM4ejkrU280SFZ6amJwNGhFZ0piNkpjbk5YdXVwdVFaLzNsbzJ2L1k1TW9V?=
- =?utf-8?B?blI2NktjM2Y4OEx2c1FoakJUV3QxS3RKR05Zb1cwNE16MEJrcC80elExcHZD?=
- =?utf-8?B?aEdGdGtScmlPS2hzR1VGY3JDVlhVOG12NzNHSERpQVlUNW1DYTh5NzlDSWlH?=
- =?utf-8?B?ZGxxdDZoSVdIWDRyQTRxV2ZuZS9zeXViVGVxaXBTY2JxM010UUhxT0UzTTZL?=
- =?utf-8?B?SVRqckhDMGVaRTArNWFWYkRpV0VpR2JOaXppSVhCS2FZejNuYmF6bkdEODJv?=
- =?utf-8?B?MTlEdzhiaG40d2NUT0QraU1IR1U2VkM5Q3JsVmcvbTZrWVJOTG1ISWhwRVNk?=
- =?utf-8?Q?oJrgxoOvGIfpH6sA+k?=
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?bRUygWBZ+Lv/yMNtDIFtTtLUWIYJWlDZ8tuoz0HCiXKIPe9vnF5MKQe+wg?=
+ =?iso-8859-1?Q?VZzzeCv4HeM4DgggCY9aAW/L1Wj3TbtLi7rPQWsVhU2ngVR9XfH2a33JHV?=
+ =?iso-8859-1?Q?VXPWq8tdx8cIpsJdopy87wcA5+XjIgG/z3k/mOHTmRZVo9tyghzGlXzzk9?=
+ =?iso-8859-1?Q?uHvbV6NvdV2+IoshwDlV8ctUO3tgUi4wcvBxALZF0xIi3fyNlv1GzMZ8m+?=
+ =?iso-8859-1?Q?Rl8mjmfdRuKBVqL/IRBL8zq8RE71ujcPU03t/FPWDHIQTiChJcNJNitchd?=
+ =?iso-8859-1?Q?C6W+4HTOKO2AVO17hrHKFAfC4iyIX9fFWYM3MzCwSIrP32aC8BTBEcRK/L?=
+ =?iso-8859-1?Q?N1v9dEVmQYs06cSTu60rDaERZUoqZy3tKCUy35Q+vkizv/I8siXRd+2zHF?=
+ =?iso-8859-1?Q?+IyIaenNseeZuChCZhXTsmG5Xm8AeA7zXK1tGhkFblUENBeOCFLp56u41c?=
+ =?iso-8859-1?Q?uUq3zTMySc4saCIArqB/HXZeuwflp1sjUj8RPsb+w8u64L+HSaPA/4FP6g?=
+ =?iso-8859-1?Q?3l6wnbGqJGE9/AW1XG6VHRQA9xYUMr4UvzTIFHqZg9vdCLRfv6uf73ACVG?=
+ =?iso-8859-1?Q?C6ekv1pICygq6B2L45mxzToiRnTug2fTrp1IamYVNZbj4vW0B102UzzLo6?=
+ =?iso-8859-1?Q?haVA8kMB0m3j65SjVNzrI6xSs97YO2mzghsIO7INg3k7uQxTlxMutOJ8bd?=
+ =?iso-8859-1?Q?bnPAwt4lcYDs9endeoc2cRsSCn4nSSYbv/9f/3PjBSk2TCGiJLEktnmpt9?=
+ =?iso-8859-1?Q?ggAsmQQYm/a3UWNipqbeN+CDVSyiYatCDU8ln8xXQgmfwrKPXAC0Ozlurk?=
+ =?iso-8859-1?Q?BauZKypAjeXzjuDCz+8Q2krHz32T99V+Xh2Ge7Ll/r/NvwcMbrKQdrlbZk?=
+ =?iso-8859-1?Q?RVMw1v0Xonr434l6ACOl1G661H3EQFHwzSAfhbSX4MlXHuW3uiYIC28FSL?=
+ =?iso-8859-1?Q?vGFRP363zR/a58tPyy/B8NvR4zkmR8BQhkftkD2K4FwScYGZIsKJAK7YvG?=
+ =?iso-8859-1?Q?8K1A7VVDfTsHhV55xY1CU4lnXyNQbLyKBys6iyIKbVymKCXKroBXJJK1g2?=
+ =?iso-8859-1?Q?PE6GCB00qKuIQczFh4JI43WVmOo2toMJ0zme4TtMQ3KdBRHMEzR1bikncm?=
+ =?iso-8859-1?Q?5cpnslXgvbjwkUPsba6f0Zhn7WO9U0jDvLDLV7eMSOVuGRrhfrrrNfrMr3?=
+ =?iso-8859-1?Q?eJmcnTrhYcfXR/+tRxdhS6p9gXf6X2avCWbXYwJhYHkBYRUxXSk/AiWP57?=
+ =?iso-8859-1?Q?n8eczcbzO5IGct4WAuIZY2Qc2TlFqmZ9h7gnJuJHWwIrMPl/JlerLblpZD?=
+ =?iso-8859-1?Q?1wPYwzekPdI0zjN6w0ImEhf7/52VgYoHTk54AAG4g1pgQaI3rBWflvROWZ?=
+ =?iso-8859-1?Q?FrBAh2AM8mxMsN01BjSlP1u6w4f+IdQ6mT95YqK/E4dsuJ0BqQlDXGvpPy?=
+ =?iso-8859-1?Q?5mRNmFhU3pD7YYZ1lIplBU8wf08s+AXS1SWdHT+ssqbg3xSPnyk687CzyS?=
+ =?iso-8859-1?Q?JCjKtvthJirMqiEmxYUOMSG7wy1OJ7sgCl75MWW0R+WVUdxjHuJDIpSH5g?=
+ =?iso-8859-1?Q?xPBn2UjPSRJ81ze7vABELU4+OEKkRI/RQi2U5HDNT+czNB9eLpPUyXp9A2?=
+ =?iso-8859-1?Q?MMnhy1PgN4YkPW3wvXlhCHvtB6Xbc5vHoKfTFgOnkOXtnJhCLnlokv6nLd?=
+ =?iso-8859-1?Q?ZQKZeDGqSynyw0kT0rg3CH9UhnyKpgO199t1kgdLtV1fZLfqAuyKNSCypb?=
+ =?iso-8859-1?Q?0yK7sZxCul5vCzi3o0wLzp/CknHTW+C1Wnc+B9I2w3Mu3F?=
 MIME-Version: 1.0
-X-Exchange-RoutingPolicyChecked: kkQCT5lesgFXOvcAqoTvV2oN9SWbkUgDiIBpkvA2aY7OF1wvXM8cFaMpswuegHbjGw735gOH60Q1Rl/vo3O3/HLMA3sJAP0xlhwfhAre1Ytx6xjp/WArqQiz64ify2WnhCbfxWoGXdlG6MLwoTZvrhC8pMKKFcdB/X4cIPO4KkHlrwREniiLuUFWfmqyUmsILuGGx4sdQZvN4KNH/3P1R+7FlPwrG/n0408UkRKE6QQbp1LRQcxz9scQXxScawtVXX2dr41O8pBdm2R96GEJv9yyGIYfGUsHCfof/SwLCVB5z7vXKgiKHFOOYj+4fNzTzZ7RdoT8wBeXAGFcQzKleA==
+X-Exchange-RoutingPolicyChecked: H8+QHx1yc8AKgysVyBhD34Ke5A2Qy8IBF4gGtdSpnbuaPa/KTzJgq0R+3A3iPMXaIj1y/mqu4aOX50vtc1HdIqcC2TRpiwbo5Oy1Tc/AY+jnouvzm6cxF3np3XkaN1cTq5LLE+yAc11MGXSiBGp8p/rxUjjMBn80gdNYzZPf5F+jMIUwWOcK++MPgSwKqMSM/m5pAb0dGZUuw4VIIdaeXENijBeHeRjcH3Fh50ts6Axe2LjW2U9HnzoEttacYoJMVqQNyL9INVrDfxhTB0M8FOZCOQkONIogYd1pwLRq8SJjDgqhAzjUfjLgzb0dN/pEKz3Yc5DNO+8Jf3+UESQW7g==
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: DM6PR11MB3690.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5e36c4c9-6625-4d7a-7dbc-08decb89adce
-X-MS-Exchange-CrossTenant-originalarrivaltime: 16 Jun 2026 09:28:51.9821
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0b756e2c-e4d3-4945-4b5a-08decb8c62a5
+X-MS-Exchange-CrossTenant-originalarrivaltime: 16 Jun 2026 09:48:14.3936
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: IROMyF0gRB8ir4CWC1ByBD5/oIGo5nBMzAW9fAcqObr5r1njGdkHcwgR/iETXhf8dpBqq4mVhxh2D/M4uD+2OA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA2PR11MB4859
+X-MS-Exchange-CrossTenant-userprincipalname: ZcKfp1K6cB9Y9JdoRLABeFsmit5tH4CmssCSt0eh4naDBUg0KSJs72M2Gq3z0OoPIus6CWNAKEchmSFE/1UDwA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR11MB6652
 X-OriginatorOrg: intel.com
-X-Spamd-Bar: ------
-Message-ID-Hash: YH6QHWXSW4J2AEA5TJOKBZKEFEPH7AA6
-X-Message-ID-Hash: YH6QHWXSW4J2AEA5TJOKBZKEFEPH7AA6
+X-Spamd-Bar: -------
+Message-ID-Hash: DHN3UO74UQ2LYQ4XQRPCHA6B5Q2KLC2B
+X-Message-ID-Hash: DHN3UO74UQ2LYQ4XQRPCHA6B5Q2KLC2B
 X-MailFrom: kevin.tian@intel.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
-CC: Alex Williamson <alex@shazbot.org>, Leon Romanovsky <leon@kernel.org>, Jason Gunthorpe <jgg@nvidia.com>, Alex Mastro <amastro@fb.com>, =?utf-8?B?Q2hyaXN0aWFuIEvDtm5pZw==?= <christian.koenig@amd.com>, Bjorn Helgaas <bhelgaas@google.com>, Logan Gunthorpe <logang@deltatee.com>, Mahmoud Adam <mngyadam@amazon.de>, David Matlack <dmatlack@google.com>, =?utf-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Ankit Agrawal <ankita@nvidia.com>, Pranjal Shrivastava <praan@google.com>, Alistair Popple <apopple@nvidia.com>, "Kasireddy, Vivek" <vivek.kasireddy@intel.com>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "kvm@vger.kernel.org" <kvm@vger.kernel.org>, "linux-pci@vger.kernel.org" <linux-pci@vger.kernel.org>
+CC: Alex Williamson <alex@shazbot.org>, Leon Romanovsky <leon@kernel.org>, Jason Gunthorpe <jgg@nvidia.com>, Alex Mastro <amastro@fb.com>, =?iso-8859-1?Q?Christian_K=F6nig?= <christian.koenig@amd.com>, Bjorn Helgaas <bhelgaas@google.com>, Logan Gunthorpe <logang@deltatee.com>, Mahmoud Adam <mngyadam@amazon.de>, David Matlack <dmatlack@google.com>, =?iso-8859-1?Q?Bj=F6rn_T=F6pel?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Ankit Agrawal <ankita@nvidia.com>, Alistair Popple <apopple@nvidia.com>, "Kasireddy, Vivek" <vivek.kasireddy@intel.com>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "kvm@vger.kernel.org" <kvm@vger.kernel.org>, "linux-pci@vger.kernel.org" <linux-pci@vger.kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3 2/9] vfio/pci: Add a helper to look up PFNs for DMABUFs
+Subject: [Linaro-mm-sig] Re: [PATCH v3 6/9] vfio/pci: Clean up BAR zap and revocation
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YH6QHWXSW4J2AEA5TJOKBZKEFEPH7AA6/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DHN3UO74UQ2LYQ4XQRPCHA6B5Q2KLC2B/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -179,20 +167,20 @@ X-Rspamd-Action: no action
 X-Spamd-Result: default: False [1.59 / 15.00];
 	R_DKIM_REJECT(1.00)[intel.com:s=Intel];
 	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[intel.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:matt@ozlabs.org,m:alex@shazbot.org,m:leon@kernel.org,m:jgg@nvidia.com,m:amastro@fb.com,m:christian.koenig@amd.com,m:bhelgaas@google.com,m:logang@deltatee.com,m:mngyadam@amazon.de,m:dmatlack@google.com,m:bjorn@kernel.org,m:sumit.semwal@linaro.org,m:ankita@nvidia.com,m:praan@google.com,m:apopple@nvidia.com,m:vivek.kasireddy@intel.com,m:linux-kernel@vger.kernel.org,m:linux-media@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,m:kvm@vger.kernel.org,m:linux-pci@vger.kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[kevin.tian@intel.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:praan@google.com,m:matt@ozlabs.org,m:alex@shazbot.org,m:leon@kernel.org,m:jgg@nvidia.com,m:amastro@fb.com,m:christian.koenig@amd.com,m:bhelgaas@google.com,m:logang@deltatee.com,m:mngyadam@amazon.de,m:dmatlack@google.com,m:bjorn@kernel.org,m:sumit.semwal@linaro.org,m:ankita@nvidia.com,m:apopple@nvidia.com,m:vivek.kasireddy@intel.com,m:linux-kernel@vger.kernel.org,m:linux-media@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,m:kvm@vger.kernel.org,m:linux-pci@vger.kernel.org,s:lists@lfdr.de];
 	TO_DN_EQ_ADDR_SOME(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[kevin.tian@intel.com,linaro-mm-sig-bounces@lists.linaro.org];
 	RCPT_COUNT_TWELVE(0.00)[22];
 	MIME_TRACE(0.00)[0:+];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[ozlabs.org:email,DM6PR11MB3690.namprd11.prod.outlook.com:mid,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp,linaro.org:email,intel.com:from_mime];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:from_mime,DM6PR11MB3690.namprd11.prod.outlook.com:mid,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
@@ -207,119 +195,74 @@ X-Spamd-Result: default: False [1.59 / 15.00];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	RCVD_COUNT_SEVEN(0.00)[9]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 4C60A68D8A3
+X-Rspamd-Queue-Id: 617B268DAFA
 
-> From: Matt Evans <matt@ozlabs.org>
-> Sent: Tuesday, June 16, 2026 2:04 AM
+> From: Pranjal Shrivastava <praan@google.com>
+> Sent: Saturday, June 13, 2026 3:39 AM
 > 
-> On 12/06/2026 09:42, Tian, Kevin wrote:
-> >> From: Matt Evans <matt@ozlabs.org>
-> >> Sent: Wednesday, June 10, 2026 11:43 PM
-> >>
-> >> +int vfio_pci_dma_buf_find_pfn(struct vfio_pci_dma_buf *priv,
-> >> +			      struct vm_area_struct *vma,
-> >> +			      unsigned long address,
-> >> +			      unsigned int order,
-> >> +			      unsigned long *out_pfn)
-> >> +{
-> >> +	/*
-> >> +	 * Given a VMA (start, end, pgoffs) and a fault address,
-> >> +	 * search the corresponding DMABUF's phys_vec[] to find the
-> >> +	 * range representing the address's offset into the VMA, and
-> >> +	 * its PFN.
-> >> +	 *
-> >> +	 * The phys_vec[] ranges represent contiguous spans of VAs
-> >> +	 * upwards from the buffer offset 0; the actual PFNs might be
-> >> +	 * in any order, overlap/alias, etc.  Calculate an offset of
-> >> +	 * the desired page given VMA start/pgoff and address, then
-> >> +	 * search upwards from 0 to find which span contains it.
-> >> +	 *
-> >> +	 * On success, a valid PFN for a page sized by 'order' is
-> >> +	 * returned into out_pfn.
-> >> +	 *
-> >> +	 * Failure occurs if:
-> >> +	 * - The page would cross the edge of the VMA
-> >> +	 * - The page isn't entirely contained within a range
-> >> +	 * - We find a range, but the final PFN isn't aligned to the
-> >> +	 *   requested order.
-> >> +	 *
-> >> +	 * (Upon failure, the caller is expected to try again with a
-> >> +	 * smaller order; the tests above will always succeed for
-> >> +	 * order=0 as the limit case.)
-> >> +	 *
-> >> +	 * It's suboptimal if DMABUFs are created with neigbouring
+> On Wed, Jun 10, 2026 at 04:43:20PM +0100, Matt Evans wrote:
+> > @@ -1264,7 +1265,7 @@ static int vfio_pci_ioctl_reset(struct
+> vfio_pci_core_device *vdev,
+> >  	if (!vdev->reset_works)
+> >  		return -EINVAL;
 > >
-> > s/neigbouring/neighboring/
-> 
-> Ah, not a typo. :)  That is en_GB and AFAIK is permitted.
-
-I guess you meant 'neighbouring' and 'neighboring' are both valid.
-
-but here lacking a 'h' should be a typo? :)
-
-> >> +	 */
-> >> +
-> >> +	const unsigned long pagesize = PAGE_SIZE << order;
-> >> +	unsigned long vma_off = ((vma->vm_pgoff - priv->vma_pgoff_adjust)
-> >> <<
-> >> +				 PAGE_SHIFT) & VFIO_PCI_OFFSET_MASK;
-> >> +	unsigned long rounded_page_addr = ALIGN_DOWN(address,
-> >> pagesize);
-> >> +	unsigned long rounded_page_end = rounded_page_addr + pagesize;
-> >> +	unsigned long page_buf_offset;
-> >> +	unsigned long page_buf_offset_end;
+> > -	vfio_pci_zap_and_down_write_memory_lock(vdev);
+> > +	down_write(&vdev->memory_lock);
 > >
-> > what about "fault_offset[_end]"? page_buf is a bit confusing.
-> 
-> I went round several times with these names, thanks for the input.  Just
-> tried it out and your suggestion is clearer.
-> 
-> >> +	unsigned long range_buf_offset = 0;
+> >  	/*
+> >  	 * This function can be invoked while the power state is non-D0. If
+> > @@ -1277,10 +1278,11 @@ static int vfio_pci_ioctl_reset(struct
+> vfio_pci_core_device *vdev,
+> >  	 */
+> >  	vfio_pci_set_power_state(vdev, PCI_D0);
 > >
-> > could this be called 'range_start' then the 'range_start' in latter loop
-> > is renamed to 'phys_start'?
-> >
-> > Not strong... just feel such naming helps me understand the logic easier
+> > -	vfio_pci_dma_buf_move(vdev, true);
+> > +	vfio_pci_zap_revoke_bars(vdev);
 > 
-> Anything that helps helps, thanks.  I ended up renaming this to
-> range_start_offset (as offset is IMHO important).
+> I'm wondering if this change in behavior is correct?
+> BEFORE this patch the sequence was:
 > 
-> I'm a fan of diagrams but this is too large to include in a comment.
-> But for posterity on the list, and using the new names, an illustration
-> of a DMABUF with 3 ranges in phys_vec, where a mapping's
-> faulting page offset lies in range [1]:
+> 1. zap vma mappings
+> 2. Enter D0
 > 
->                                fault_addr--+
->                                            v                   VMA
->                     +-----------------+----------+-----------------+
->                     |                 | Faulting |                 |
->                     |                 | (hg)page |                 |
->                     |                 |          |                 |
->  |---- vma_off ---->+-----------------+----------+-----------------+
->  |                                    .          .
->  |                                    .          .
->  |--------- fault_offset ------------>.          .             DMABUF
->  +-------------------------+---------------------------+--------------+
->  | phys_vec[0]             | phys_vec[1]         .     | phys_vec[2]  |
->  |    .paddr               |          .          .     |              |
->  |    .len                 |          .          .     |              |
->  +-------------------------+---------------------------+--------------+
->  0                         :          .          .     :              L
->  |-- range_start_offset -->:          .          .  -->: range_len
->                            :          .          .     :
->                            V          .          .     :
->                            +----------+----------+-----+
->                            |.paddr    | PFN      |     |
->                            |          |          |     |
->                            |          |          |     |
->                            +----------+----------+-----+
->                                       P
+> After this patch the sequence becomes
 > 
->  P = paddr + (fault_offset - range_start_offset)
->  L = sum(phys_vec[0...2].len)
+> 1. Take the lock
+> 2. Enter D0
+> 3. zap vma mappings
+> 
+> My worry is if user-space accesses a BAR *during* the transition to D0,
+> it could crash since the mappings still exist during the transition?
+
+not 'crash' as you also noted later with all Fs on read and dropped writes.
+
+> 
+> The old code is immune to it because it removed user-mappings first.
+> 
+> Following the discussion from v1 regarding the ordering of
+> vfio_pci_dma_buf_move() and the D0 transition.. while it makes sense to
+> perform the DMABUF revocation/move after the hardware is in D0.. I'm not
+> too confident about moving zap after D0 :/
+
+probably add a comment to remind that ordering requirement for dma
+
+> 
+> I mean, sure, the user would just see all Fs on a read and writes will
+> be dropped silently until we are in D0.. but the behaviour before this
+> change was that the user access will fault and hang on the memory_lock
+> instead which ensures that the user observes a consistent dev state..
 > 
 
-yes, much clearer now.
+I see this more consistent from another angle.
+
+Old code only removes/blocks cpu access but not for device. DMAs
+are allowed to this device while it's transitioning between D0/D3.
+
+New code at least make this part consistent - both cpu/p2p are allowed
+in the transition window.
+
+Ideally a sane userspace shouldn't rely on the content read back when
+it has initiated a reset in parallel. So this behavior change sounds ok?
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
