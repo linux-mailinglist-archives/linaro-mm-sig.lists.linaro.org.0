@@ -2,32 +2,32 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id kM1JFlJDMWqkfgUAu9opvQ
+	id 1qkSIV5DMWqpfgUAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 16 Jun 2026 14:36:34 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 16 Jun 2026 14:36:46 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id DFB6368F654
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 16 Jun 2026 14:36:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 50F0468F669
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 16 Jun 2026 14:36:46 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
 	dkim=none;
 	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=gmail.com (policy=none);
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org"
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 049FC40A37
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 16 Jun 2026 12:36:33 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 68D3140A4F
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 16 Jun 2026 12:36:45 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2DBD1401BA
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 16 Jun 2026 12:36:27 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 4C70B40A4F
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 16 Jun 2026 12:36:39 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: "Fate Elena" <fateelena2@gmail.com>
 To: linaro-mm-sig@lists.linaro.org
-Date: Tue, 16 Jun 2026 12:36:27 -0000
-Message-ID: <178161338718.2921284.4834839589392924566@lists.linaro.org>
+Date: Tue, 16 Jun 2026 12:36:39 -0000
+Message-ID: <178161339931.2921284.15224495173416622875@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: 5DUNGZ7SBRXZILUTVZU5PWQAM5XLY34W
-X-Message-ID-Hash: 5DUNGZ7SBRXZILUTVZU5PWQAM5XLY34W
+Message-ID-Hash: RUQ3G6PEZKFJTFYFGV5MWPUCDEEOFJOB
+X-Message-ID-Hash: RUQ3G6PEZKFJTFYFGV5MWPUCDEEOFJOB
 X-MailFrom: fateelena2@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
@@ -35,7 +35,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] THE BEST AND LEGITIMATE HACKER IN THE WORLD // GEO COORDINATES RECOVERY HACKER
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5DUNGZ7SBRXZILUTVZU5PWQAM5XLY34W/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RUQ3G6PEZKFJTFYFGV5MWPUCDEEOFJOB/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -75,9 +75,9 @@ X-Spamd-Result: default: False [5.69 / 15.00];
 	ALIAS_RESOLVED(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:mid,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp,geovcoordinateshac.wixsite.com:url]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,geovcoordinateshac.wixsite.com:url,lists.linaro.org:mid,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: DFB6368F654
+X-Rspamd-Queue-Id: 50F0468F669
 
 VEhFIEJFU1QgQU5EIExFR0lUSU1BVEUgSEFDS0VSIElOIFRIRSBXT1JMRCAvLyBHRU8gQ09PUkRJ
 TkFURVMgUkVDT1ZFUlkgSEFDS0VSDQpEbyB5b3Ugd2FudCB0byBoaXJlIGEgaGFja2VyIHRvIHNv
