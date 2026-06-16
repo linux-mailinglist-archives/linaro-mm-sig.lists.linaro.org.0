@@ -2,91 +2,62 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id pkh6NUBEMWrefgUAu9opvQ
+	id XxYUOCdfPWpT2AgAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 16 Jun 2026 14:40:32 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Jun 2026 19:02:31 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6AF2168F700
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 16 Jun 2026 14:40:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6EECB6C7A98
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Jun 2026 19:02:31 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=ziepe.ca header.s=google header.b=gGFzhFOf;
+	dkim=fail ("body hash did not verify") header.d=ozlabs.org header.s=201707 header.b=THUOroZs;
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
-	dmarc=none
+	dmarc=fail reason="SPF not aligned (relaxed)" header.from=ozlabs.org (policy=none)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 81B9540A72
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 16 Jun 2026 12:40:31 +0000 (UTC)
-Received: from mail-qt1-f181.google.com (mail-qt1-f181.google.com [209.85.160.181])
-	by lists.linaro.org (Postfix) with ESMTPS id 32683401BA
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 16 Jun 2026 12:40:21 +0000 (UTC)
-Received: by mail-qt1-f181.google.com with SMTP id d75a77b69052e-517b1f2c6adso43738791cf.2
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 16 Jun 2026 05:40:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ziepe.ca; s=google; t=1781613621; x=1782218421; darn=lists.linaro.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=tPbjX8dfzPLu8onhnfm0DNzfCkJoWXqGLy1Lxvc2NUs=;
-        b=gGFzhFOfUlLaMrSv6cjJS3y8tq1zfYjaGFW2vmbOqo9de47Hl0ZJU3gp3hk3c2zTmp
-         41Nzr/wWrEVaS7v3/CIVCPphsweKfHogkRHe25ALGvu0xsgRrw5m2EaJupBJhudoazIW
-         4H1kVyBCrt3YSntYsnBhwnneI3d7i9pRLcIE1m7yTTrAYAJQqEXateEHgEQaabKxYkgA
-         WuorD5QAiH/vVv8pjPPrGYzDvighWBj+xhp7upn8lOls1gAqLQLAmyds0DMrZ2boNcsh
-         29rxO/JN4B6pG0aq8B0So14Sgt6BehHE28SR3XXhJMlgv6Z4voNONfd3kjR16YIq0zF1
-         sxUw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781613621; x=1782218421;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=tPbjX8dfzPLu8onhnfm0DNzfCkJoWXqGLy1Lxvc2NUs=;
-        b=iGSQlAUVk/z2FH54ujFqg8NlEyuvcKjdcVVH6HUWK8czMTTNxYxsTqgQvRsW72kAUI
-         PMS6j7ODM1uFBJ71Cn9tsrSb9stcAVT2JYsz6YRlcdZk6McwpzYBuzFMWK5gtdTxROwY
-         e7cAfDE3vk6E91R9aDpAe5JgjfSwTtFnXLt364P/cgQ2eBaVqWg3RQT18CGxZ9dBYkln
-         uXqZ2mUU8sH4wR+TKUHjiYyNNmRPi3nsJAdXsWkgt4SjVNFyfbQONV2Pgvwjn3WtwSZV
-         bm9IKO+ZJ7sUdHT08xPwpamdfLyjbRVtg2tcWGsBprlDWqb1rb3fd++aej7iYfHTj9WL
-         f08g==
-X-Forwarded-Encrypted: i=1; AFNElJ9Ct7p/+5mZP/K2ZACeDe814PKV2siGRCfAxNObmIiIA64WHirCOSszBRARkNtk2Ql44whOBbUTJTNWFpWy@lists.linaro.org
-X-Gm-Message-State: AOJu0YwB1n7cofEr1tbK79409iLqlPW9jf+xLnnhKeiF3XjXxRTjYyKM
-	j08BifALvPYamyXio2+RsAL0qkk0sqJTTr6KgkzJClB/d7WBHpRb3aD0bZS9qiolf9Y=
-X-Gm-Gg: Acq92OGi6CnLs1dIEPdf8iM3J32V4aAEo+NnvYnA2TzcQ0+4vwdWTtTNU/N4f+GZaWT
-	Zx0B6PiSPd5Lk+NDzkZWwfewbB6h2+USh6SwUVlACd2x1ZzOBq1vx3/12wbqcS39r5zsMf5Zv9U
-	VYo55ig2mJM9GtyCd3mMDYvX08O5kG0c3aLmStEmTyxxnjIxMsmrC5Ta+sAh7xNDuQDnI5cIVt5
-	0FgCMAIeS7iExKh+7iXfyNqUKZfboztqXRv1uDt8gS3RHB4USnz4z6NszHseGdOEEh4YyqK1FVA
-	3DDRcatphDmGKpUnVs3FXdTnySJN5F04Ox/G/0ZCMARnuENhxxtD9zbQ1O+Bty8ZG4lF5BJ/xU9
-	7Kxm6eF08z+oBEatn+rrl7HsA+yrZN/v7uyB/7sjdDJTR4oszJC3YUpbCSnC3W1D0mii8kHiuhY
-	zxXhO9nW4wOWJlhUKSOPC6NVgYJcpTRZkEflz7ECDYqJEqStqAQp5sfYCmQjJ0dI/y3ofC30pki
-	Rzlfw==
-X-Received: by 2002:a05:622a:2282:b0:517:6804:1fb3 with SMTP id d75a77b69052e-517fe230d82mr282972431cf.18.1781613620607;
-        Tue, 16 Jun 2026 05:40:20 -0700 (PDT)
-Received: from ziepe.ca (crbknf0213w-47-54-130-67.pppoe-dynamic.high-speed.nl.bellaliant.net. [47.54.130.67])
-        by smtp.gmail.com with ESMTPSA id d75a77b69052e-517fb61d948sm133785221cf.1.2026.06.16.05.40.19
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 16 Jun 2026 05:40:19 -0700 (PDT)
-Received: from jgg by wakko with local (Exim 4.97)
-	(envelope-from <jgg@ziepe.ca>)
-	id 1wZT5X-0000000Fzb5-0uZr;
-	Tue, 16 Jun 2026 09:40:19 -0300
-Date: Tue, 16 Jun 2026 09:40:19 -0300
-From: Jason Gunthorpe <jgg@ziepe.ca>
-To: "Kasireddy, Vivek" <vivek.kasireddy@intel.com>
-Message-ID: <20260616124019.GA3577091@ziepe.ca>
-References: <20260611-tcpdm-large-niovs-v2-0-ee2bf15e7523@meta.com>
- <20260611-tcpdm-large-niovs-v2-2-ee2bf15e7523@meta.com>
- <IA0PR11MB71852246277F773AC41DAAA3F8E52@IA0PR11MB7185.namprd11.prod.outlook.com>
+	by lists.linaro.org (Postfix) with ESMTP id 84A5F4413E
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Jun 2026 17:02:30 +0000 (UTC)
+Received: from mail.ozlabs.org (gandalf.ozlabs.org [150.107.74.76])
+	by lists.linaro.org (Postfix) with ESMTPS id F0147401CE
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 16 Jun 2026 15:45:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ozlabs.org;
+	s=201707; t=1781624757;
+	bh=j3l8PvO0raZl8FCiGfg/zxw+3QiENISLFXyCDIfAXL8=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=THUOroZs0WczfHibO0A/qrPSHwa5YNdoYCeWJF2d/1CIECVXjkloXj7wLH3RAMrqd
+	 5fczYcVAY5/pQy+4+jgY4kuVXiUvzSAMPKLcKb1C5w9H+cAzmY47/8bx3acg6k87j4
+	 fWhZfAaafjgGWk3F2SAREOE3MsU3h3u2Wvysz2/iIQH1R8GKJhsXoFXbYm69HVXkRB
+	 VhWj40L7/ojitg33igOa1igkbg9cSGVkGEkTixJmeB6SmBl5O2ZB/E1wXD9LyDkEa8
+	 Kom/JzqnfzG5JdI7rGl9KPo/I/8vsIBaPI94iumvlLCPSeuLfYBHIH6aGkgJFoTfle
+	 LbV6upvypwVdw==
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(Client did not present a certificate)
+	by mail.ozlabs.org (Postfix) with ESMTPSA id 4gfrtN6g3Dz4w1b;
+	Wed, 17 Jun 2026 01:45:48 +1000 (AEST)
+Message-ID: <e94aa97f-1aba-408e-8d3a-19f60b057b34@ozlabs.org>
+Date: Tue, 16 Jun 2026 16:45:45 +0100
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <IA0PR11MB71852246277F773AC41DAAA3F8E52@IA0PR11MB7185.namprd11.prod.outlook.com>
+User-Agent: Mozilla Thunderbird
+Content-Language: en-GB
+To: Pranjal Shrivastava <praan@google.com>
+References: <20260610154327.37758-1-matt@ozlabs.org>
+ <20260610154327.37758-8-matt@ozlabs.org> <aixtd_7gDhf2kisJ@google.com>
+From: Matt Evans <matt@ozlabs.org>
+In-Reply-To: <aixtd_7gDhf2kisJ@google.com>
 X-Spamd-Bar: ---
-Message-ID-Hash: 3C3GOOSQGBMD3E2D7DVZTOJWR3RMKSBR
-X-Message-ID-Hash: 3C3GOOSQGBMD3E2D7DVZTOJWR3RMKSBR
-X-MailFrom: jgg@ziepe.ca
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Bobby Eshleman <bobbyeshleman@gmail.com>, Donald Hunter <donald.hunter@gmail.com>, Jakub Kicinski <kuba@kernel.org>, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, Andrew Lunn <andrew+netdev@lunn.ch>, Gerd Hoffmann <kraxel@redhat.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Shuah Khan <shuah@kernel.org>, "netdev@vger.kernel.org" <netdev@vger.kernel.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "linux-kselftest@vger.kernel.org" <linux-kselftest@vger.kernel.org>, "sdf@fomichev.me" <sdf@fomichev.me>, "razor@blackwall.org" <razor@blackwall.org>, "daniel@iogearbox.net" <daniel@iogearbox.net>, "almasrymina@google.com
- " <almasrymina@google.com>, "matttbe@kernel.org" <matttbe@kernel.org>, "skhawaja@google.com" <skhawaja@google.com>, "dw@davidwei.uk" <dw@davidwei.uk>, Bobby Eshleman <bobbyeshleman@meta.com>
+X-MailFrom: matt@ozlabs.org
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+Message-ID-Hash: FVETDRWUQV6VN63KMN5A4XW63TFSMHUX
+X-Message-ID-Hash: FVETDRWUQV6VN63KMN5A4XW63TFSMHUX
+X-Mailman-Approved-At: Thu, 25 Jun 2026 17:01:20 +0000
+CC: Alex Williamson <alex@shazbot.org>, Leon Romanovsky <leon@kernel.org>, Jason Gunthorpe <jgg@nvidia.com>, Alex Mastro <amastro@fb.com>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Bjorn Helgaas <bhelgaas@google.com>, Logan Gunthorpe <logang@deltatee.com>, Mahmoud Adam <mngyadam@amazon.de>, David Matlack <dmatlack@google.com>, =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Kevin Tian <kevin.tian@intel.com>, Ankit Agrawal <ankita@nvidia.com>, Alistair Popple <apopple@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org, linux-pci@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH net-next v2 2/4] udmabuf: emit one sg entry per pinned folio
+Subject: [Linaro-mm-sig] Re: [PATCH v3 7/9] vfio/pci: Support mmap() of a VFIO DMABUF
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3C3GOOSQGBMD3E2D7DVZTOJWR3RMKSBR/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FVETDRWUQV6VN63KMN5A4XW63TFSMHUX/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -96,55 +67,209 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [1.99 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[ziepe.ca:s=google];
-	MAILLIST(-0.20)[mailman];
+X-Spamd-Result: default: False [1.59 / 15.00];
+	DATE_IN_PAST(1.00)[217];
+	R_DKIM_REJECT(1.00)[ozlabs.org:s=201707];
 	R_SPF_ALLOW(-0.20)[+mx:c];
+	MAILLIST(-0.20)[mailman];
+	DMARC_POLICY_SOFTFAIL(0.10)[ozlabs.org : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	DMARC_NA(0.00)[ziepe.ca];
-	FORGED_RECIPIENTS(0.00)[m:vivek.kasireddy@intel.com,m:bobbyeshleman@gmail.com,m:donald.hunter@gmail.com,m:kuba@kernel.org,m:davem@davemloft.net,m:edumazet@google.com,m:pabeni@redhat.com,m:horms@kernel.org,m:andrew+netdev@lunn.ch,m:kraxel@redhat.com,m:sumit.semwal@linaro.org,m:christian.koenig@amd.com,m:shuah@kernel.org,m:netdev@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linux-media@vger.kernel.org,m:linaro-mm-sig@lists.linaro.org,m:linux-kselftest@vger.kernel.org,m:sdf@fomichev.me,m:razor@blackwall.org,m:daniel@iogearbox.net,m:almasrymina@google.com,m:matttbe@kernel.org,m:skhawaja@google.com,m:dw@davidwei.uk,m:bobbyeshleman@meta.com,m:donaldhunter@gmail.com,m:andrew@lunn.ch,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[jgg@ziepe.ca,linaro-mm-sig-bounces@lists.linaro.org];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:praan@google.com,m:alex@shazbot.org,m:leon@kernel.org,m:jgg@nvidia.com,m:amastro@fb.com,m:christian.koenig@amd.com,m:bhelgaas@google.com,m:logang@deltatee.com,m:mngyadam@amazon.de,m:dmatlack@google.com,m:bjorn@kernel.org,m:sumit.semwal@linaro.org,m:kevin.tian@intel.com,m:ankita@nvidia.com,m:apopple@nvidia.com,m:vivek.kasireddy@intel.com,m:linux-kernel@vger.kernel.org,m:linux-media@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,m:kvm@vger.kernel.org,m:linux-pci@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[matt@ozlabs.org,linaro-mm-sig-bounces@lists.linaro.org];
 	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[27];
-	FREEMAIL_CC(0.00)[gmail.com,kernel.org,davemloft.net,google.com,redhat.com,lunn.ch,linaro.org,amd.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,fomichev.me,blackwall.org,iogearbox.net,davidwei.uk,meta.com];
+	RCPT_COUNT_TWELVE(0.00)[22];
+	RCVD_COUNT_THREE(0.00)[3];
 	MIME_TRACE(0.00)[0:+];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	DKIM_TRACE(0.00)[ziepe.ca:-];
-	MISSING_XM_UA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	ALIAS_RESOLVED(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jgg@ziepe.ca,linaro-mm-sig-bounces@lists.linaro.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,netdev];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[ziepe.ca:mid,ziepe.ca:from_mime,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp]
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[matt@ozlabs.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[ozlabs.org:-];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[ozlabs.org:mid,ozlabs.org:from_mime,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp,linaro.org:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 6AF2168F700
+X-Rspamd-Queue-Id: 6EECB6C7A98
 
-On Tue, Jun 16, 2026 at 06:04:03AM +0000, Kasireddy, Vivek wrote:
+Hi Praan,
 
-> > This is helpful for importers like net/core/devmem that expect dmabuf sg
-> IMO, udmabuf needs to detect whether importers can handle segments that
-> are > PAGE_SIZE and set the entries appropriately. Please look into how the
-> GPU drivers and other dmabuf exporters/importers handle this situation, so
-> that we can adopt best practices to address this issue.
+On 12/06/2026 21:35, Pranjal Shrivastava wrote:
+> On Wed, Jun 10, 2026 at 04:43:21PM +0100, Matt Evans wrote:
+> 
+> Hi Matt,
+> 
+> [...]
+> 
+>> +	 *
+>> +	 * With the goal of taking vdev->memory_lock in a world where
+>> +	 * vdev might not still exist:
+>> +	 *
+>> +	 * 1. Take the resv lock on the DMABUF:
+>> +	 *  - If racing cleanup got in first, the buffer is revoked;
+>> +	 *    stop/exit if so.
+>> +	 *  - If we got in first, the buffer is not revoked so vdev is
+>> +	 *    non-NULL, accessible, and cleanup _has not yet put the
+>> +	 *    VFIO device registration_.  So, the device refcount must
+>> +	 *    be >0.
+>> +	 *
+>> +	 * 2. Take vfio_device registration (refcount guaranteed >0
+>> +	 *    hereafter).
+>> +	 *
+>> +	 * 3. Unlock the DMABUF's resv lock:
+>> +	 *  - A racing cleanup can now complete.
+>> +	 *  - But, the device refcount >0, meaning the vfio_device
+>> +	 *    (and vfio_pcie_core device vdev) have not yet been
+>> +	 *    freed.  vdev is accessible, even if the DMABUF has been
+>> +	 *    revoked or cleanup has happened, because
+>> +	 *    vfio_unregister_group_dev() can't complete.
+>> +	 *
+>> +	 * 4. Take the vdev->memory_lock
+>> +	 *  - Either the DMABUF is usable, or has been cleaned up.
+>> +	 *    Whichever, it can no longer change under us.
+>> +	 *  - Test the DMABUF revocation status again: if it was
+>> +	 *    revoked between 1 and 4 return a SIGBUS. Otherwise,
+>> +	 *    return a PFN.
+>> +	 *  - It's not necessary to also take the resv lock, because
+>> +	 *    the status/vdev can't change while memory_lock is held.
+>> +	 *
+>> +	 * 5. Unlock, done.
+>>  	 */
+>> +
+>> +	dma_resv_lock(priv->dmabuf->resv, NULL);
+>> +
+>> +	if (priv->revoked) {
+>> +		pr_debug_ratelimited("%s VA 0x%lx, pgoff 0x%lx: DMABUF revoked/cleaned up\n",
+>> +				     __func__, vmf->address, vma->vm_pgoff);
+>> +		dma_resv_unlock(priv->dmabuf->resv);
+>> +		return VM_FAULT_SIGBUS;
+>> +	}
+>> +
+>> +	/* If the buffer isn't revoked, vdev is valid */
+>>  	vdev = priv->vdev;
+>>  
+>> +	if (!vfio_device_try_get_registration(&vdev->vdev)) {
+>> +		/*
+>> +		 * If vdev != NULL (above), the registration should
+>> +		 * already be >0 and so this try_get should never
+>> +		 * fail.
+>> +		 */
+>> +		dev_warn(&vdev->pdev->dev, "%s: Unexpected registration failure\n",
+>> +			 __func__);
+>> +		dma_resv_unlock(priv->dmabuf->resv);
+>> +		return VM_FAULT_SIGBUS;
+>> +	}
+>> +	dma_resv_unlock(priv->dmabuf->resv);
+>> +
+> 
+> 
+>>  	scoped_guard(rwsem_read, &vdev->memory_lock) {
+>> +		/* Revocation status must be re-read, under memory_lock */
+>>  		if (!priv->revoked) {
+>>  			int pres = vfio_pci_dma_buf_find_pfn(priv, vma,
+>>  							     vmf->address,
+> 
+> Wait, I noticed that the is_aligned_for_order() check from mainline was 
+> removed here. Was that intentional? 
+> 
+> For hugepage faults (order > 0), we must ensure the PFN and address are
+> properly aligned before calling vfio_pci_vmf_insert_pfn().
+> 
+> In the current upstream code, we have:
+>   if (is_aligned_for_order(vma, addr, pfn, order))
+> 
+> Should we restore that check here?
 
-Importers have to handle arbitary scatterlists, devmem is just broken
-if it can't handle the output of sg_alloc_table_from_pages().
+The alignment check is done within the helper
+vfio_pci_dma_buf_find_pfn(), which returns -EAGAIN if order > 0 and a
+search result isn't usable due to alignment.  That leads to
+VM_FAULT_FALLBACK here, ensuring vfio_pci_vmf_insert_pfn() isn't called
+with anything weird.
 
-Jason
+>> @@ -1766,6 +1827,7 @@ static vm_fault_t vfio_pci_mmap_huge_fault(struct vm_fault *vmf,
+>>  			    __func__, order, pfn, vmf->address,
+>>  			    vma->vm_pgoff, (unsigned int)ret);
+>>  
+>> +	vfio_device_put_registration(&vdev->vdev);
+>>  	return ret;
+>>  }
+>>  
+>> @@ -1774,7 +1836,7 @@ static vm_fault_t vfio_pci_mmap_page_fault(struct vm_fault *vmf)
+>>  	return vfio_pci_mmap_huge_fault(vmf, 0);
+>>  }
+>>  
+>> -static const struct vm_operations_struct vfio_pci_mmap_ops = {
+>> +const struct vm_operations_struct vfio_pci_mmap_ops = {
+>>  	.fault = vfio_pci_mmap_page_fault,
+> 
+> Nit: Instead of making this global, should we add a helper? E.g.:
+> 
+> void vfio_pci_set_vma_ops(struct vm_area_struct *vma)
+> {
+>      vma->vm_ops = &vfio_pci_mmap_ops;
+> }
+
+I'll give it a go, it would be nice to keep that encapsulated.
+
+Thanks,
+
+
+Matt
+
+
+> [...]
+> 
+>> +
+>> +static int vfio_pci_dma_buf_mmap(struct dma_buf *dmabuf, struct vm_area_struct *vma)
+>> +{
+>> +	struct vfio_pci_dma_buf *priv = dmabuf->priv;
+>> +
+>> +	/*
+>> +	 * If we observe that the buffer is revoked now then refuse
+>> +	 * the mmap().  This is a belt-and-braces early failure to
+>> +	 * ease debugging a revoked buffer being used.  Userspace
+>> +	 * might also race an mmap() against an explicit revocation,
+>> +	 * or an action doing a temporary revoke; race scenarios are
+>> +	 * still safe because the fault handler ultimately prevents
+>> +	 * access to a revoked buffer if it isn't caught here.
+>> +	 */
+>> +	if (READ_ONCE(priv->revoked))
+>> +		return -ENODEV;
+>> +	if ((vma->vm_flags & VM_SHARED) == 0)
+>> +		return -EINVAL;
+>> +
+>> +	/*
+>> +	 * dma_buf_mmap_internal() has asserted that the VMA is
+>> +	 * contained within the DMABUF size before calling this.
+>> +	 */
+>> +
+>> +	vma->vm_page_prot = pgprot_noncached(vma->vm_page_prot);
+>> +	vma->vm_page_prot = pgprot_decrypted(vma->vm_page_prot);
+>> +
+>> +	/* See comments in vfio_pci_core_mmap() re VM_ALLOW_ANY_UNCACHED. */
+>> +	vm_flags_set(vma, VM_ALLOW_ANY_UNCACHED | VM_IO | VM_PFNMAP |
+>> +		     VM_DONTEXPAND | VM_DONTDUMP);
+>> +	vma->vm_private_data = priv;
+>> +	vma->vm_ops = &vfio_pci_mmap_ops;
+>> +
+>> +	return 0;
+>> +}
+>>  #endif /* CONFIG_VFIO_PCI_DMABUF */
+>>  
+> 
+> Thanks,
+> Praan
+> 
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
