@@ -2,42 +2,43 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id eokSKwmCMmqA1AUAu9opvQ
+	id riTGNxqCMmqI1AUAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 Jun 2026 13:16:25 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 Jun 2026 13:16:42 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4CC7E698E6E
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 Jun 2026 13:16:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8C264698E7B
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 Jun 2026 13:16:36 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
 	dkim=none;
 	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=gmail.com (policy=none);
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org"
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 61A7040A52
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 Jun 2026 11:16:24 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9E79540A89
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 Jun 2026 11:16:35 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4507D40A68
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 17 Jun 2026 11:16:11 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5A31B40A8A
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 17 Jun 2026 11:16:16 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: chenshentu92@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Wed, 17 Jun 2026 11:16:11 -0000
-Message-ID: <178169497128.593334.8007830262548945859@lists.linaro.org>
+Date: Wed, 17 Jun 2026 11:16:16 -0000
+Message-ID: <178169497636.594047.4318242790582308917@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: F6YT6TADV4XU7BJEZTYPNZC4WX3NQUFB
-X-Message-ID-Hash: F6YT6TADV4XU7BJEZTYPNZC4WX3NQUFB
+Message-ID-Hash: LNYDMLC5I2YAQPON7B5W522NFXCWSKNR
+X-Message-ID-Hash: LNYDMLC5I2YAQPON7B5W522NFXCWSKNR
 X-MailFrom: chenshentu92@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] =?utf-8?q?Buy_real_and_fake_passport_online=2C_Buy_ID_cards_online=2C_=28WhatsApp_=3A_+49_1575_3756974=29_Buy_driving_license=2C_Buy_drivers_license_online=2C_Buy_passport_online=2C_Buy_green_card=2C_residence_permit=2C_IELT=2C_work_permit=2C_citizenship=2C_buy_Canadian_resident_permits=2C_apply_for_Canadian_citizenship_certificates=2C_buy_Canadian_ID_cards=2C_buy_novelty_ID_cards=2C_buy_authentic_identity_documents=2E_https=3A//buyrealcurrency=2Ecom/_https=3A//buyrealcurrency=2Ecom/_https=3A//buyrealcurrency=2Ecom/product/=E5=8A=A0=E6=8B=BF=E5=A4=A7=E5=B1=85=E7=95=99=E8=AE=B8=E5=8F=AF/_https=3A//rushmynewpassport=2Ecom/product/buy-canadian-resident-permits/_=28WhatsApp_=3A_+49_1575_3756974=29_WeChat_ID_=3A_Scottbowers44_=28Email=3A_authenticnotes5=40gmail=2Ecom=29_https=3A//counterfeitdocsforsale=2Ecom/_Buy_fake_US_dollars_=28USD=29=2C_buy_fake_Chinese_yuan_=28CNY=29=2C_buy_fake_RMB/RMB=2C_buy_fake_Canadian_dollars_=28CAD=29=2C_buy_fake_Australian_dollars_=2
- 8AUD=29_Buy_fake_British_pounds_=28GBP=29=2C_buy_fake_Euros_=28EUR=29=2C_buy_fake_Hong_Kong_dollars_=28=24HK=29=2E_buy_fake_US_dollars/Australian_dollars/Canadian_dollars/CNY/Euros/CNY=2C_buy_fake_Euro_banknotes=2C_buy_fake_Australian_dollars=2C_buy_fake_Canadian_dollars=2C_buy_fake_US_dollars=2C_buy_fake_RMB_online=2C_buy_fake_RMB_https=3A//globaltraveldocs=2Ecom/_https=3A//rushmynewpassport=2Ecom/_We_offer_all_types_of_visas=2C_travel_documents=2C_and_passports_at_the_best_prices_and_with_exceptional_quality=2E_We_handle_passports_for_small_countries=2C_multinational_passports=2C_entry_and_exit_assistance_for_Southeast_Asia=2C_passport_activation=2C_expedited_naturalization=2C_and_second_identity_planning=2C_giving_you_an_alternative=2E_=28WhatsApp_=3A_+49_1575_3756974_=29_Email=3A_authenticnotes5=40gmail=2Ecom_https=3A//rushmynewpassport=2Ecom/_Buy_passports_online_=28Email=3A_authenticnotes5=40gmail=2Ecom=29_buy_USA_passports=2C_buy_Chinese_passports=2C_buy_Hong_Kong_passports=2
- C_buy_Taiwan_passports=2C_buy_diplomatic_passports=2C_Buy_China_travel_documents_People=27s_Republic_of_China_=28PRC=29_https=3A//rushmynewpassport=2Ecom/_https=3A//buyrealcurrency=2Ecom/product/buy-real-and-fake-passport/_https=3A//rushmynewpassport=2Ecom/buy-real-usa-passport-online/_=28WhatsApp_=3A_+49_1575_3756974_=29?=
+Subject: [Linaro-mm-sig] =?utf-8?b?5Zyo57q/6LSt5Lmw55yf5YGH5oqk54Wn44CB5Zyo57q/6LSt5Lmw6Lqr5Lu96K+B77yI5b6u5L+h77yaU2NvdHRib3dlcnM0NO+8ieOAgei0reS5sOmpvueFp+OAgee7v+WNoeOAgeWxheeVmeiuuOWPr+OAgembheaAneaIkOe7qeOAgeW3peS9nOiuuOWPr+OAgeWFrOawkei6q+S7veOAgeWcqOe6v+i0reS5sOetvuivgeOAgei0reS5sOWKoOaLv+Wkp+WxheeVmeiuuOWPryDvvIjlvq7kv6HvvJpTY290dGJvd2VyczQ077yJIGh0dHBzOi8vYnV5cmVhbGN1cnJlbmN5LmNvbS9wcm9kdWN0L+WKoOaLv+Wkp+WxheeVmeiuuOWPry8gaHR0cHM6Ly9idXlyZWFsY3VycmVuY3kuY29tL3Byb2R1Y3Qv572R5LiK5Ye65ZSu5YGH576O5Zu95oqk54WnLyBodHRwczovL2J1eXJlYWxjdXJyZW5jeS5jb20vcHJvZHVjdC/otK3kubDnvo7lm73pqb7pqbbmiafnhacvIGh0dHBzOi8vYnV5cmVhbGN1cnJlbmN5LmNvbS9wcm9kdWN0L+i0reS5sOato+Wul+e+juWbvee7v+WNoS8g5Zyo57q/6LSt5Lmw5oqk54Wn77yI5b6u5L+h77yaU2NvdHRib3dlcnM0NO+8ie+8jOi0reS5sOWQiOazlee+juWbveaKpOeFp++8jOi0reS5sOS4reWbveaKpOeFp++8jOi0reS5sOa+s+Wkp+WIqeS6muaKpOeFp++8jOi0reS5sOmprOadpeilv+S6muaKpOeFp++8jOWcqOe6v+i0reS5sOe+juWbveaKpOeFp++8jCDvvIhXaGF0c0FwcO+8mis0OSAxNTc1IDM3NTY5NzQgKe+8jOi0reS5sOWKoOaLv+Wkp+aKpOe
+ Fp++8jOi0reS5sOmmmea4r+aKpOeFp++8jOi0reS5sOWPsOa5vuaKpOeFp++8jOi0reS5sOWkluS6pOaKpOeFp++8jOi0reS5sOWQiOazleeUn+eJqeivhuWIq+aKpOeFp++8jOi0reS5sOe+juWbveaKpOeFp++8jOi0reS5sOa+s+Wkp+WIqeS6muaKpOeFp++8jOi0reS5sOWcqOaUv+W6nOaVsOaNruW6k+S4reazqOWGjOeahOaKpOeFp++8jOi0reS5sOS4reWNjuS6uuawkeWFseWSjOWbveaXheihjOivgeS7tu+8jFdoYXRzQXBw77yaKzQ5IDE1NzUgMzc1Njk3NCBodHRwczovL2J1eXJlYWxjdXJyZW5jeS5jb20vcHJvZHVjdC/nvZHkuIrlh7rllK7lgYfnvo7lm73miqTnhacvIGh0dHBzOi8vYnV5cmVhbGN1cnJlbmN5LmNvbS9wcm9kdWN0L+i0reS5sOS4reWbveaKpOeFpy8g5Zyo57q/6LSt5Lmw6Lqr5Lu96K+B77yM6LSt5Lmw5q2j54mI5Yqg5ou/5aSn6Lqr5Lu96K+B77yI6YKu566x77yaYXV0aGVudGljbm90ZXM1QGdtYWlsLmNvbe+8ie+8jOi0reS5sOWKoOaLv+Wkp+awuOS5heWxheawkei6q+S7ve+8jOi0reS5sOWKoOaLv+Wkp+WxheeVmeiuuOWPr++8jOeUs+ivt+WKoOaLv+Wkp+WFrOawkeivgeS5pu+8jOi0reS5sOWKoOaLv+Wkp+i6q+S7veivge+8jOiOt+WPluaUv+W6nOetvuWPkeeahOi6q+S7veivge+8jOi0reS5sOWIm+aEj+i6q+S7veivge+8jOi0reS5sOecn+Wunui6q+S7veivgeaYjuaWh+S7tuOAgu+8iOW+ruS/oe+8mlNjb3R0Ym93ZXJzNDTvvIkgaHR0cHM6Ly9idXlyZWFsY3VycmVuY3ku
+ Y29tL3Byb2R1Y3Qv5Zyo57q/6LSt5Lmw5oqk54WnLyBodHRwczovL2J1eXJlYWxjdXJyZW5jeS5jb20vcHJvZHVjdC/otK3kubDmraPniYjpn6nlm73miqTnhacvIGh0dHBzOi8vYnV5cmVhbGN1cnJlbmN5LmNvbS9wcm9kdWN0L+WmguS9lei0reS5sOato+eJiOe+juWbveaKpOeFpy0yMDI2LyBodHRwczovL2J1eXJlYWxjdXJyZW5jeS5jb20vcHJvZHVjdC/lnKjnur/otK3kubDmiqTnhacvIGh0dHBzOi8vYnV5cmVhbGN1cnJlbmN5LmNvbS9wcm9kdWN0L+i0reS5sOato+eJiOS4reWbveaKpOeFpy8gaHR0cHM6Ly9idXlyZWFsY3VycmVuY3kuY29tL3Byb2R1Y3Qv6LSt5Lmw55yf5q2j55qE5Yqg5ou/5aSn5oqk54WnLyBodHRwczovL2J1eXJlYWxjdXJyZW5jeS5jb20vcHJvZHVjdC/otK3kubDoi7Hlm73ljp/niYjmiqTnhacvIGh0dHBzOi8vYnV5cmVhbGN1cnJlbmN5LmNvbS9wcm9kdWN0L+WmguS9leWcqOWutuWQiOazleiOt+WPluato+eJiOW+t+WbveaKpOeFpy8gaHR0cHM6Ly9idXlyZWFsY3VycmVuY3kuY29tL3Byb2R1Y3Qv6LSt5Lmw5Lit5Zu95oqk54WnLyBodHRwczovL2J1eXJlYWxjdXJyZW5jeS5jb20vcHJvZHVjdC/nvZHkuIrlh7rllK7lgYfnvo7lm73miqTnhacvIFdoYXRzQXBw77yaKzQ5IDE1NzUgMzc1Njk3NCBodHRwczovL3J1c2hteW5ld3Bhc3Nwb3J0LmNvbS8g6LSt5Lmw5YGH576O5YWD44CB5Lq65rCR5biB77yM6LSt5Lmw5YGH5Lq65rCR5biB77yM77yI5b6u5L+h77yaU2NvdHRib3dlc
+ nM0NO+8iSDlnKjnur/otK3kubBTU0TljJblrabmurbmtrLvvIwgaHR0cHM6Ly9idXlyZWFsY3VycmVuY3kuY29tL+i0reS5sHNzZOWMluWtpuWTgS8gaHR0cHM6Ly9nbG9iYWx0cmF2ZWxkb2NzLmNvbS8gV2hhdHNBcHDvvJorNDkgMTU3NSAzNzU2OTc0?=
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/F6YT6TADV4XU7BJEZTYPNZC4WX3NQUFB/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LNYDMLC5I2YAQPON7B5W522NFXCWSKNR/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -46,79 +47,83 @@ List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Transfer-Encoding: base64
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [4.69 / 15.00];
-	LONG_SUBJ(3.00)[2027];
+X-Spamd-Result: default: False [3.69 / 15.00];
+	LONG_SUBJ(3.00)[1407];
 	MID_RHS_MATCH_TO(1.00)[];
-	SUBJECT_HAS_CURRENCY(1.00)[];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	MIME_BASE64_TEXT(0.10)[];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
 	FORGED_RECIPIENTS(0.00)[m:linaro-mm-sig@lists.linaro.org,s:lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	FORWARDED(0.00)[lists@lfdr.de];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	ARC_NA(0.00)[];
-	FORGED_SENDER(0.00)[chenshentu92@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
-	GREYLIST(0.00)[pass,meta];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_SENDER(0.00)[chenshentu92@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FROM_NO_DN(0.00)[];
 	RCPT_COUNT_ONE(0.00)[1];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	TO_DN_NONE(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
 	FROM_NEQ_ENVFROM(0.00)[chenshentu92@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	TO_DN_NONE(0.00)[];
 	R_DKIM_NA(0.00)[];
-	FROM_NO_DN(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[rushmynewpassport.com:url,linaro.org:email,buyrealcurrency.com:url,lists.linaro.org:mid,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp,counterfeitdocsforsale.com:url]
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:mid,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp,buyrealcurrency.com:url,linaro.org:email,rushmynewpassport.com:url]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 4CC7E698E6E
+X-Rspamd-Queue-Id: 8C264698E7B
 
-QnV5IHJlYWwgYW5kIGZha2UgcGFzc3BvcnQgb25saW5lLCBCdXkgSUQgY2FyZHMgb25saW5lLCAo
-V2hhdHNBcHAgOiArNDkgMTU3NSAzNzU2OTc0KSBCdXkgZHJpdmluZyBsaWNlbnNlLCBCdXkgZHJp
-dmVycyBsaWNlbnNlIG9ubGluZSwgQnV5IHBhc3Nwb3J0IG9ubGluZSwgQnV5IGdyZWVuIGNhcmQs
-IHJlc2lkZW5jZSBwZXJtaXQsIElFTFQsIHdvcmsgcGVybWl0LCBjaXRpemVuc2hpcCwgYnV5IENh
-bmFkaWFuIHJlc2lkZW50IHBlcm1pdHMsIGFwcGx5IGZvciBDYW5hZGlhbiBjaXRpemVuc2hpcCBj
-ZXJ0aWZpY2F0ZXMsIGJ1eSBDYW5hZGlhbiBJRCBjYXJkcywgYnV5IG5vdmVsdHkgSUQgY2FyZHMs
-IGJ1eSBhdXRoZW50aWMgaWRlbnRpdHkgZG9jdW1lbnRzLiBodHRwczovL2J1eXJlYWxjdXJyZW5j
-eS5jb20vDQoNCmh0dHBzOi8vYnV5cmVhbGN1cnJlbmN5LmNvbS8NCmh0dHBzOi8vYnV5cmVhbGN1
-cnJlbmN5LmNvbS9wcm9kdWN0L+WKoOaLv+Wkp+WxheeVmeiuuOWPry8NCmh0dHBzOi8vcnVzaG15
-bmV3cGFzc3BvcnQuY29tL3Byb2R1Y3QvYnV5LWNhbmFkaWFuLXJlc2lkZW50LXBlcm1pdHMvDQoN
-CihXaGF0c0FwcCA6ICs0OSAxNTc1IDM3NTY5NzQpDQpXZUNoYXQgSUQgOiBTY290dGJvd2VyczQ0
-DQooRW1haWw6IGF1dGhlbnRpY25vdGVzNUBnbWFpbC5jb20pIA0KDQpodHRwczovL2NvdW50ZXJm
-ZWl0ZG9jc2ZvcnNhbGUuY29tLyBCdXkgZmFrZSBVUyBkb2xsYXJzIChVU0QpLCBidXkgZmFrZSBD
-aGluZXNlIHl1YW4gKENOWSksIGJ1eSBmYWtlIFJNQi9STUIsIGJ1eSBmYWtlIENhbmFkaWFuIGRv
-bGxhcnMgKENBRCksIGJ1eSBmYWtlIEF1c3RyYWxpYW4gZG9sbGFycyAoQVVEKSAgQnV5IGZha2Ug
-QnJpdGlzaCBwb3VuZHMgKEdCUCksIGJ1eSBmYWtlIEV1cm9zIChFVVIpLCBidXkgZmFrZSBIb25n
-IEtvbmcgZG9sbGFycyAoJEhLKS4gYnV5IGZha2UgVVMgZG9sbGFycy9BdXN0cmFsaWFuIGRvbGxh
-cnMvQ2FuYWRpYW4gZG9sbGFycy9DTlkvRXVyb3MvQ05ZLCBidXkgZmFrZSBFdXJvIGJhbmtub3Rl
-cywgYnV5IGZha2UgQXVzdHJhbGlhbiBkb2xsYXJzLCBidXkgZmFrZSBDYW5hZGlhbiBkb2xsYXJz
-LCBidXkgZmFrZSBVUyBkb2xsYXJzLCBidXkgZmFrZSBSTUIgb25saW5lLCBidXkgZmFrZSBSTUIg
-aHR0cHM6Ly9nbG9iYWx0cmF2ZWxkb2NzLmNvbS8NCg0KaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9y
-dC5jb20vIFdlIG9mZmVyIGFsbCB0eXBlcyBvZiB2aXNhcywgdHJhdmVsIGRvY3VtZW50cywgYW5k
-IHBhc3Nwb3J0cyBhdCB0aGUgYmVzdCBwcmljZXMgYW5kIHdpdGggZXhjZXB0aW9uYWwgcXVhbGl0
-eS4gV2UgaGFuZGxlIHBhc3Nwb3J0cyBmb3Igc21hbGwgY291bnRyaWVzLCBtdWx0aW5hdGlvbmFs
-IHBhc3Nwb3J0cywgZW50cnkgYW5kIGV4aXQgYXNzaXN0YW5jZSBmb3IgU291dGhlYXN0IEFzaWEs
-IHBhc3Nwb3J0IGFjdGl2YXRpb24sIGV4cGVkaXRlZCBuYXR1cmFsaXphdGlvbiwgYW5kIHNlY29u
-ZCBpZGVudGl0eSBwbGFubmluZywgZ2l2aW5nIHlvdSBhbiBhbHRlcm5hdGl2ZS4NCg0KKFdoYXRz
-QXBwIDogKzQ5IDE1NzUgMzc1Njk3NCApDQpFbWFpbDogYXV0aGVudGljbm90ZXM1QGdtYWlsLmNv
-bQ0KDQpodHRwczovL3J1c2hteW5ld3Bhc3Nwb3J0LmNvbS8gQnV5IHBhc3Nwb3J0cyBvbmxpbmUg
-KEVtYWlsOiBhdXRoZW50aWNub3RlczVAZ21haWwuY29tKSBidXkgVVNBIHBhc3Nwb3J0cywgYnV5
-IENoaW5lc2UgcGFzc3BvcnRzLCBidXkgSG9uZyBLb25nIHBhc3Nwb3J0cywgYnV5IFRhaXdhbiBw
-YXNzcG9ydHMsIGJ1eSBkaXBsb21hdGljIHBhc3Nwb3J0cywgQnV5IENoaW5hIHRyYXZlbCBkb2N1
-bWVudHMgUGVvcGxlJ3MgUmVwdWJsaWMgb2YgQ2hpbmEgKFBSQykgaHR0cHM6Ly9ydXNobXluZXdw
-YXNzcG9ydC5jb20vDQoNCmh0dHBzOi8vYnV5cmVhbGN1cnJlbmN5LmNvbS9wcm9kdWN0L2J1eS1y
-ZWFsLWFuZC1mYWtlLXBhc3Nwb3J0Lw0KaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9ydC5jb20vYnV5
-LXJlYWwtdXNhLXBhc3Nwb3J0LW9ubGluZS8NCihXaGF0c0FwcCA6ICs0OSAxNTc1IDM3NTY5NzQg
-KQ0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJv
-LW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRv
-IHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5s
-aW5hcm8ub3JnCg==
+5Zyo57q/6LSt5Lmw55yf5YGH5oqk54Wn44CB5Zyo57q/6LSt5Lmw6Lqr5Lu96K+B77yI5b6u5L+h
+77yaU2NvdHRib3dlcnM0NO+8ieOAgei0reS5sOmpvueFp+OAgee7v+WNoeOAgeWxheeVmeiuuOWP
+r+OAgembheaAneaIkOe7qeOAgeW3peS9nOiuuOWPr+OAgeWFrOawkei6q+S7veOAgeWcqOe6v+i0
+reS5sOetvuivgeOAgei0reS5sOWKoOaLv+Wkp+WxheeVmeiuuOWPryDvvIjlvq7kv6HvvJpTY290
+dGJvd2VyczQ077yJIA0KDQpodHRwczovL2J1eXJlYWxjdXJyZW5jeS5jb20vcHJvZHVjdC/liqDm
+i7/lpKflsYXnlZnorrjlj68vDQpodHRwczovL2J1eXJlYWxjdXJyZW5jeS5jb20vcHJvZHVjdC/n
+vZHkuIrlh7rllK7lgYfnvo7lm73miqTnhacvDQpodHRwczovL2J1eXJlYWxjdXJyZW5jeS5jb20v
+cHJvZHVjdC/otK3kubDnvo7lm73pqb7pqbbmiafnhacvDQpodHRwczovL2J1eXJlYWxjdXJyZW5j
+eS5jb20vcHJvZHVjdC/otK3kubDmraPlrpfnvo7lm73nu7/ljaEvDQoNCuWcqOe6v+i0reS5sOaK
+pOeFp++8iOW+ruS/oe+8mlNjb3R0Ym93ZXJzNDTvvInvvIzotK3kubDlkIjms5Xnvo7lm73miqTn
+hafvvIzotK3kubDkuK3lm73miqTnhafvvIzotK3kubDmvrPlpKfliKnkuprmiqTnhafvvIzotK3k
+ubDpqazmnaXopb/kuprmiqTnhafvvIzlnKjnur/otK3kubDnvo7lm73miqTnhafvvIwg77yIV2hh
+dHNBcHDvvJorNDkgMTU3NSAzNzU2OTc0ICnvvIzotK3kubDliqDmi7/lpKfmiqTnhafvvIzotK3k
+ubDpppnmuK/miqTnhafvvIzotK3kubDlj7Dmub7miqTnhafvvIzotK3kubDlpJbkuqTmiqTnhafv
+vIzotK3kubDlkIjms5XnlJ/nianor4bliKvmiqTnhafvvIzotK3kubDnvo7lm73miqTnhafvvIzo
+tK3kubDmvrPlpKfliKnkuprmiqTnhafvvIzotK3kubDlnKjmlL/lupzmlbDmja7lupPkuK3ms6jl
+hoznmoTmiqTnhafvvIzotK3kubDkuK3ljY7kurrmsJHlhbHlkozlm73ml4XooYzor4Hku7bvvIxX
+aGF0c0FwcO+8mis0OSAxNTc1IDM3NTY5NzQNCg0KDQpodHRwczovL2J1eXJlYWxjdXJyZW5jeS5j
+b20vcHJvZHVjdC/nvZHkuIrlh7rllK7lgYfnvo7lm73miqTnhacvDQpodHRwczovL2J1eXJlYWxj
+dXJyZW5jeS5jb20vcHJvZHVjdC/otK3kubDkuK3lm73miqTnhacvDQoNCuWcqOe6v+i0reS5sOi6
+q+S7veivge+8jOi0reS5sOato+eJiOWKoOaLv+Wkp+i6q+S7veivge+8iOmCrueuse+8mmF1dGhl
+bnRpY25vdGVzNUBnbWFpbC5jb23vvInvvIzotK3kubDliqDmi7/lpKfmsLjkuYXlsYXmsJHouqvk
+u73vvIzotK3kubDliqDmi7/lpKflsYXnlZnorrjlj6/vvIznlLPor7fliqDmi7/lpKflhazmsJHo
+r4HkuabvvIzotK3kubDliqDmi7/lpKfouqvku73or4HvvIzojrflj5bmlL/lupznrb7lj5HnmoTo
+uqvku73or4HvvIzotK3kubDliJvmhI/ouqvku73or4HvvIzotK3kubDnnJ/lrp7ouqvku73or4Hm
+mI7mlofku7bjgILvvIjlvq7kv6HvvJpTY290dGJvd2VyczQ077yJDQoNCmh0dHBzOi8vYnV5cmVh
+bGN1cnJlbmN5LmNvbS9wcm9kdWN0L+WcqOe6v+i0reS5sOaKpOeFpy8NCmh0dHBzOi8vYnV5cmVh
+bGN1cnJlbmN5LmNvbS9wcm9kdWN0L+i0reS5sOato+eJiOmfqeWbveaKpOeFpy8NCmh0dHBzOi8v
+YnV5cmVhbGN1cnJlbmN5LmNvbS9wcm9kdWN0L+WmguS9lei0reS5sOato+eJiOe+juWbveaKpOeF
+py0yMDI2Lw0KaHR0cHM6Ly9idXlyZWFsY3VycmVuY3kuY29tL3Byb2R1Y3Qv5Zyo57q/6LSt5Lmw
+5oqk54WnLw0KaHR0cHM6Ly9idXlyZWFsY3VycmVuY3kuY29tL3Byb2R1Y3Qv6LSt5Lmw5q2j54mI
+5Lit5Zu95oqk54WnLw0KaHR0cHM6Ly9idXlyZWFsY3VycmVuY3kuY29tL3Byb2R1Y3Qv6LSt5Lmw
+55yf5q2j55qE5Yqg5ou/5aSn5oqk54WnLw0KaHR0cHM6Ly9idXlyZWFsY3VycmVuY3kuY29tL3By
+b2R1Y3Qv6LSt5Lmw6Iux5Zu95Y6f54mI5oqk54WnLw0KaHR0cHM6Ly9idXlyZWFsY3VycmVuY3ku
+Y29tL3Byb2R1Y3Qv5aaC5L2V5Zyo5a625ZCI5rOV6I635Y+W5q2j54mI5b635Zu95oqk54WnLw0K
+aHR0cHM6Ly9idXlyZWFsY3VycmVuY3kuY29tL3Byb2R1Y3Qv6LSt5Lmw5Lit5Zu95oqk54WnLw0K
+aHR0cHM6Ly9idXlyZWFsY3VycmVuY3kuY29tL3Byb2R1Y3Qv572R5LiK5Ye65ZSu5YGH576O5Zu9
+5oqk54WnLw0KDQpXaGF0c0FwcO+8mis0OSAxNTc1IDM3NTY5NzQNCmh0dHBzOi8vcnVzaG15bmV3
+cGFzc3BvcnQuY29tLw0KDQrotK3kubDlgYfnvo7lhYPjgIHkurrmsJHluIHvvIzotK3kubDlgYfk
+urrmsJHluIHvvIzvvIjlvq7kv6HvvJpTY290dGJvd2VyczQ077yJIA0KDQrlnKjnur/otK3kubBT
+U0TljJblrabmurbmtrLvvIwgDQpodHRwczovL2J1eXJlYWxjdXJyZW5jeS5jb20v6LSt5Lmwc3Nk
+5YyW5a2m5ZOBLw0KaHR0cHM6Ly9nbG9iYWx0cmF2ZWxkb2NzLmNvbS8NCg0KV2hhdHNBcHDvvJor
+NDkgMTU3NSAzNzU2OTc0DQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3Rz
+LmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2ln
+LWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
