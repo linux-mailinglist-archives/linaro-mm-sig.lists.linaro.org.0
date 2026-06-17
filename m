@@ -2,206 +2,125 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id tYsYFkWCMmqZ1AUAu9opvQ
+	id kAEOI1CCMmqb1AUAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 Jun 2026 13:17:25 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 Jun 2026 13:17:36 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id E338E698EC3
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 Jun 2026 13:17:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 20CCC698ECA
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 Jun 2026 13:17:36 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
 	dkim=none;
 	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=gmail.com (policy=none);
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org"
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0B63540A90
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 Jun 2026 11:17:24 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3F4AE40A90
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 Jun 2026 11:17:35 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2BBAC40AA0
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 17 Jun 2026 11:16:56 +0000 (UTC)
-Content-Type: text/plain; charset="utf-8"
+	by lists.linaro.org (Postfix) with ESMTP id 1CCE940A90
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 17 Jun 2026 11:17:02 +0000 (UTC)
 MIME-Version: 1.0
 From: chenshentu92@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Wed, 17 Jun 2026 11:16:56 -0000
-Message-ID: <178169501617.596311.3996433413036475803@lists.linaro.org>
+Date: Wed, 17 Jun 2026 11:17:02 -0000
+Message-ID: <178169502211.595929.6334725168858731029@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: J7OQSGWIWIZLJWHPOINEMX6YSEBXLY3V
-X-Message-ID-Hash: J7OQSGWIWIZLJWHPOINEMX6YSEBXLY3V
+Message-ID-Hash: X43ULBFQ4ZY5SWJTPLUU7WTZDYONHZQC
+X-Message-ID-Hash: X43ULBFQ4ZY5SWJTPLUU7WTZDYONHZQC
 X-MailFrom: chenshentu92@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] =?utf-8?b?5Zyo57q/6LSt5Lmw55yf5YGH5oqk54Wn44CB5Zyo57q/6LSt5Lmw6Lqr5Lu96K+B77yI5b6u5L+h77yaU2NvdHRib3dlcnM0NO+8ieOAgei0reS5sOmpvueFp+OAgee7v+WNoeOAgeWxheeVmeiuuOWPr+OAgembheaAneaIkOe7qeOAgeW3peS9nOiuuOWPr+OAgeWFrOawkei6q+S7veOAgeWcqOe6v+i0reS5sOetvuivgeOAgei0reS5sOWKoOaLv+Wkp+WxheeVmeiuuOWPryBXaGF0c0FwcO+8mis0OSAxNTc1IDM3NTY5NzQgRW1haWw6IGF1dGhlbnRpY25vdGVzNUBnbWFpbC5jb20g6LSt5Lmw6aaZ5riv5oqk54WnIO+8iOW+ruS/oe+8mlNjb3R0Ym93ZXJzNDTvvIkg6LSt5Lmw5Lit5Zu95oqk54WnIOizvOiyt+mfk+Wci+itt+eFpyDos7zosrfmraPlk4Hml6XmnKzorbfnhacg6LO86LK35q2j5ZOB576O5ZyL6K2354WnIOizvOiyt+WPsOeBo+itt+eFpyDos7zosrfms7DlnIvorbfnhacsIOizvOiyt+ato+WTgeazouiYreitt+eFpywg6LO86LK35q2j5ZOB5r6z5rSy6K2354WnLCDos7zosrfmraPlk4Hoi7HlnIvorbfnhacsIOizvOiyt+ato+WTgeWKoOaLv+Wkp+itt+eFpywg6LO86LK35q2j5ZOB5oyq5aiB6K2354WnLCDlnKjnt5ros7zosrfnnJ/mraPnmoTppqzkvobopb/kup7orbfnhacsIOizvOiyt+ato+WTgeazleWci+itt+eFpywg6LO86LK35q2j5ZOB5o235YWL6K2354WnLCDos7zosrfmraPlk4Hlt7Topb/orbfnhacsIOizvOiyt+ato+WTgeaEm+aymeWwvOS
- 6nuitt+eFpywg6LO86LK355yf5YGH6Lqr5YiG6K2JLCBXaGF0c0FwcO+8mis0OSAxNTc1IDM3NTY5NzQg6LO86LK35Y+w54Gj6Lqr5YiG6K2JLCDos7zosrflj7DngaPpp5XnhacsIOizvOiyt+azsOWci+mnlemnm+Wft+eFpywg6LO86LK35rOw5ZyL6Lqr5YiG6K2JLCDos7zosrfnnJ/lgYfnsL3orYksIOizvOiyt+WBh+e+juWFgywg6LO86LK35YGHQ1lOLCDos7zosrflgYfmvrPluaMsIOizvOiyt+ecn+itt+eFp+aIluWBh+itt+eFpywg6LO86LK355yf5YGH6aeV54WnLCDos7zosrfnnJ/lgYfouqvliIborYkg77yI5b6u5L+h77yaU2NvdHRib3dlcnM0NO+8iSDlnKjnur/otK3kubDmiqTnhacgaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9ydC5jb20vcHJvZHVjdC/lnKjnur/otK3kubDmiqTnhacvIOi0reS5sOecn+WBh+WKoOaLv+Wkp+aKpOeFpyBodHRwczovL3J1c2hteW5ld3Bhc3Nwb3J0LmNvbS9wcm9kdWN0L+i0reS5sOecn+WBh+WKoOaLv+Wkp+aKpOeFpy8g6LSt5Lmw55yf5q2j55qE5Yqg5ou/5aSn5oqk54WnIGh0dHBzOi8vcnVzaG15bmV3cGFzc3BvcnQuY29tL3Byb2R1Y3Qv6LSt5Lmw55yf5q2j55qE5Yqg5ou/5aSn5oqk54WnLyDlnKjnur/otK3kubDmiqTnhacgaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9ydC5jb20vcHJvZHVjdC/lnKjnur/otK3kubDmiqTnhactMi8g5aaC5L2V6LSt5Lmw5q2j54mI576O5Zu95oqk54WnIDIwMjYgaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9ydC5jb20vcHJvZHVjdC/l
- poLkvZXotK3kubDmraPniYjnvo7lm73miqTnhactMjAyNi8g6LSt5Lmw5q2j54mI5Lit5Zu95oqk54WnIGh0dHBzOi8vcnVzaG15bmV3cGFzc3BvcnQuY29tL3Byb2R1Y3Qv6LSt5Lmw5q2j54mI5Lit5Zu95oqk54WnLyDlnKjnur/otK3kubDnnJ/lgYfpqb7nhacgaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9ydC5jb20vcHJvZHVjdC/lnKjnur/otK3kubDnnJ/lgYfpqb7nhacvIOi0reS5sOato+eJiOe+juWbvempvueFpyBodHRwczovL3J1c2hteW5ld3Bhc3Nwb3J0LmNvbS9wcm9kdWN0L+i0reS5sOato+eJiOe+juWbvempvueFpy8g6LSt5Lmw5q2j54mI576O5Zu96am+6am25omn54WnIGh0dHBzOi8vcnVzaG15bmV3cGFzc3BvcnQuY29tL3Byb2R1Y3Qv6LSt5Lmw5q2j54mI576O5Zu96am+6am25omn54WnLyBCdXkgT3JpZ2luYWwgVUsgUGFzc3BvcnRzIDogaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9ydC5jb20vcHJvZHVjdC9idXktb3JpZ2luYWwtdWstcGFzc3BvcnRzLyBCdXkgUmVhbCBDYW5hZGlhbiBQYXNzcG9ydHM6IGh0dHBzOi8vcnVzaG15bmV3cGFzc3BvcnQuY29tL3Byb2R1Y3QvYnV5LXJlYWwtY2FuYWRpYW4tcGFzc3BvcnRzLyBCdXkgUmVhbCBQYXNzcG9ydCBmcm9tIEFzaWFuIENvdW50cnk6IGh0dHBzOi8vcnVzaG15bmV3cGFzc3BvcnQuY29tL3Byb2R1Y3QvYnV5LXJlYWwtcGFzc3BvcnQtZnJvbS1hc2lhbi1jb3VudHJ5LyBIb3cgdG8gQnV5IEF1dGhlbnRpYyBVUyBQYXNzcG9ydCAyMDI2OiBod
- HRwczovL3J1c2hteW5ld3Bhc3Nwb3J0LmNvbS9wcm9kdWN0L2hvdy10by1idXktYXV0aGVudGljLXVzLXBhc3Nwb3J0LTIwMjYvIEhvdyB0byBCdXkgRVUgUGFzc3BvcnQgT25saW5lOiBodHRwczovL3J1c2hteW5ld3Bhc3Nwb3J0LmNvbS9wcm9kdWN0L2hvdy10by1idXktZXUtcGFzc3BvcnQtb25saW5lLyBQdXJjaGFzZSBhdXRoZW50aWMgS29yZWFuIFBhc3Nwb3J0OiBodHRwczovL3J1c2hteW5ld3Bhc3Nwb3J0LmNvbS9wcm9kdWN0L3B1cmNoYXNlLWF1dGhlbnRpYy1rb3JlYW4tcGFzc3BvcnQvIGJ1eSBhdXRoZW50aWMgQ2hpbmVzZSBwYXNzcG9ydDogaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9ydC5jb20vcHJvZHVjdC9idXktYXV0aGVudGljLWNoaW5lc2UtcGFzc3BvcnQvIGJ1eSBhdXRoZW50aWMgdHJhdmVsIHBhc3Nwb3J0czogaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9ydC5jb20vcHJvZHVjdC9idXktYXV0aGVudGljLXRyYXZlbC1wYXNzcG9ydHMvIGJ1eSByZWFsIHVzYSBwYXNzcG9ydCBvbmxpbmUgaHR0cHM6Ly9nbG9iYWx0cmF2ZWxkb2NzLmNvbS9idXktcmVhbC11c2EtcGFzc3BvcnQtb25saW5lLyBCdXkgTmV0aGVybGFuZCBQYXNzcG9ydCBPbmxpbmUgOiBodHRwczovL3J1c2hteW5ld3Bhc3Nwb3J0LmNvbS9wcm9kdWN0L2J1eS1uZXRoZXJsYW5kLXBhc3Nwb3J0LW9ubGluZS8gQnV5IHJlYWwgYW5kIGZha2UgRHJpdmVycyBMaWNlbnNlIE9ubGluZSBodHRwczovL3J1c2hteW5ld3Bhc3Nwb3J0Lm
- NvbS9wcm9kdWN0L2J1eS1yZWFsLWFuZC1mYWtlLWRyaXZlcnMtbGljZW5zZS1vbmxpbmUvIEJ1eSBEcml2ZXJzIExpY2Vuc2Ugb25saW5lIGh0dHBzOi8vcnVzaG15bmV3cGFzc3BvcnQuY29tL3Byb2R1Y3QvYnV5LWRyaXZlcnMtbGljZW5zZS1vbmxpbmUvIEFwcGx5IGZvciBSZWdpc3RlcmVkIEJ1bGdhcmlhbiBkcml2ZXJzIExpY2Vuc2UgaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9ydC5jb20vcHJvZHVjdC9hcHBseS1mb3ItcmVnaXN0ZXJlZC1idWxnYXJpYW4tZHJpdmVycy1saWNlbnNlLyBCdXkgQXVzdHJpYW4gRHJpdmVy4oCZcyBMaWNlbnNlIGh0dHBzOi8vcnVzaG15bmV3cGFzc3BvcnQuY29tL3Byb2R1Y3QvYnV5LWF1c3RyaWFuLWRyaXZlcnMtbGljZW5zZS9jIEJ1eSBBdXRoZW50aWMgVVMgZHJpdmVy4oCZcyBMaWNlbnNlIGh0dHBzOi8vcnVzaG15bmV3cGFzc3BvcnQuY29tL3Byb2R1Y3QvYnV5LWF1dGhlbnRpYy11cy1kcml2ZXJzLWxpY2Vuc2UtMi8gQnV5IEF1dGhlbnRpYyBVUyBkcml2ZXLigJlzIExpY2Vuc2UgaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9ydC5jb20vcHJvZHVjdC9idXktYXV0aGVudGljLXVzLWRyaXZlcnMtbGljZW5zZS8gQnV5IERhbmlzaCBkcml2ZXJzIExpY2Vuc2UgaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9ydC5jb20vcHJvZHVjdC9idXktZGFuaXNoLWRyaXZlcnMtbGljZW5zZS8gQnV5IERyaXZlcuKAmXMgTGljZW5zZSBmcm9tIEFzaWEgaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9
- ydC5jb20vcHJvZHVjdC9idXktZHJpdmVycy1saWNlbnNlLWZyb20tYXNpYS8gQnV5IEdlcm1hbiBEcml2ZXLigJlzIGxpY2Vuc2UgV2l0aG91dCBFeGFtIGh0dHBzOi8vcnVzaG15bmV3cGFzc3BvcnQuY29tL3Byb2R1Y3QvYnV5LWdlcm1hbi1kcml2ZXJzLWxpY2Vuc2Utd2l0aG91dC1leGFtLyBEZXV0c2NoZW4gRsO8aHJlcnNjaGVpbiBvbmxpbmUga2F1ZmVuIGh0dHBzOi8vcnVzaG15bmV3cGFzc3BvcnQuY29tL3Byb2R1Y3QvZGV1dHNjaGVuLWZ1aHJlcnNjaGVpbi1vbmxpbmUta2F1ZmVuLyBFY2h0ZW4gZGV1dHNjaGVuIFBhc3MgdW5kIEbDvGhyZXJzY2hlaW4gaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9ydC5jb20vcHJvZHVjdC9lY2h0ZW4tZGV1dHNjaGVuLXBhc3MtdW5kLWZ1aHJlcnNjaGVpbi1rYXVmZW4vIEJ1eSBIdW5nYXJpYW4gRHJpdmVy4oCZcyBMaWNlbnNlIGh0dHBzOi8vcnVzaG15bmV3cGFzc3BvcnQuY29tL3Byb2R1Y3QvYnV5LWh1bmdhcmlhbi1kcml2ZXJzLWxpY2Vuc2UvIEJ1eSBPcmlnaW5hbCBDYW5hZGlhbiBEcml2ZXLigJlzIExpY2Vuc2UgaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9ydC5jb20vcHJvZHVjdC9idXktb3JpZ2luYWwtY2FuYWRpYW4tZHJpdmVycy1saWNlbnNlLyBCdXkgUG9ydHVndWVzZSBEcml2ZXLigJlzIExpY2Vuc2UgaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9ydC5jb20vcHJvZHVjdC9idXktcG9ydHVndWVzZS1kcml2ZXJzLWxpY2Vuc2UvIEJ1eSByZWdpc3RlcmVkIEl0
- YWxpYW4gZHJpdmVy4oCZcyBMaWNlbnNlIGh0dHBzOi8vcnVzaG15bmV3cGFzc3BvcnQuY29tL3Byb2R1Y3QvYnV5LXJlZ2lzdGVyZWQtaXRhbGlhbi1kcml2ZXJzLWxpY2Vuc2UvIEJ1eSByZWdpc3RlcmVkIFBvbGlzaCBkcml2ZXLigJlzIExpY2Vuc2UgaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9ydC5jb20vcHJvZHVjdC9idXktcmVnaXN0ZXJlZC1wb2xpc2gtZHJpdmVycy1saWNlbnNlLyBCdXkgU3BhbmlzaCBEcml2ZXLigJlzIExpY2Vuc2Ugd2l0aG91dCBFeGFtIGh0dHBzOi8vcnVzaG15bmV3cGFzc3BvcnQuY29tL3Byb2R1Y3QvYnV5LXNwYW5pc2gtZHJpdmVycy1saWNlbnNlLXdpdGhvdXQtZXhhbS8gQnV5IFN3ZWRpc2ggRHJpdmluZyBMaWNlbnNlIHJlZ2lzdGVyZWQgaW4gVHJhbnNwb3J0IHN5c3RlbSBodHRwczovL3J1c2hteW5ld3Bhc3Nwb3J0LmNvbS9wcm9kdWN0L2J1eS1zd2VkaXNoLWRyaXZpbmctbGljZW5zZS1yZWdpc3RlcmVkLWluLXRyYW5zcG9ydC1zeXN0ZW0vIEJ1eSBTd2l0emVybGFuZCBEcml2ZXJzIExpY2Vuc2UgaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9ydC5jb20vcHJvZHVjdC9idXktc3dpdHplcmxhbmQtZHJpdmVycy1saWNlbnNlLyBCdXkgVUsgZHJpdmluZyBMaWNlbnNlIHJlZ2lzdGVyZWQgaW4gRFZMQSBodHRwczovL3J1c2hteW5ld3Bhc3Nwb3J0LmNvbS9wcm9kdWN0L2J1eS11ay1kcml2aW5nLWxpY2Vuc2UtcmVnaXN0ZXJlZC1pbi1kdmxhLyBIb3cgdG8gZ2V0IEJlbGdpYW4gZ
- HJpdmVy4oCZcyBMaWNlbnNlIGluIDMgZGF5cyBodHRwczovL3J1c2hteW5ld3Bhc3Nwb3J0LmNvbS9wcm9kdWN0L2J1eS1yZWFsLWJlbGdpYW4tZHJpdmluZy1saWNlbnNlLyBIb3cgdG8gR2V0IE5ldGhlcmxhbmRzIERyaXZlcnMgTGljZW5zZSBodHRwczovL3J1c2hteW5ld3Bhc3Nwb3J0LmNvbS9wcm9kdWN0L2J1eS1hLW5ldGhlcmxhbmRzLWRyaXZpbmctbGljZW5zZS8gSG93IHRvIGdldCByZWdpc3RlcmVkIEZyZW5jaCBkcml2ZXJzIExpY2Vuc2UgaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9ydC5jb20vcHJvZHVjdC9idXktYS1mcmVuY2gtZHJpdmluZy1saWNlbnNlLyBQdXJjaGFzZSBOb3J3ZWdpYW4gZHJpdmVycyBMaWNlbnNlIHdpdGhvdXQgZXhhbSBodHRwczovL3J1c2hteW5ld3Bhc3Nwb3J0LmNvbS9wcm9kdWN0L2J1eS1ub3J3ZWdpYW4tZHJpdmVycy1saWNlbnNlLyBCdXkgQ2FuYWRpYW4gUmVzaWRlbnQgUGVybWl0cyBodHRwczovL3J1c2hteW5ld3Bhc3Nwb3J0LmNvbS9wcm9kdWN0L2J1eS1jYW5hZGlhbi1yZXNpZGVudC1wZXJtaXRzLyBCdXkgQXV0aGVudGljIEFtZXJpY2FuIEdyZWVuIENhcmQgaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9ydC5jb20vcHJvZHVjdC9idXktYXV0aGVudGljLWFtZXJpY2FuLWdyZWVuLWNhcmQtMi8gS8O2cCB1cHBlaMOlbGxzdGlsbHN0w6VuZCBmw7ZyIFN2ZXJpZ2UgaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9ydC5jb20vcHJvZHVjdC9rb3AtdXBwZWhhbGxzdGlsbHN0YW
- 5kLWZvci1zdmVyaWdlLyDlnKjnur/otK3kubDkuprmtLLlsYXnlZnorrjlj68gaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9ydC5jb20vcHJvZHVjdC/lnKjnur/otK3kubDkuprmtLLlsYXnlZnorrjlj68vIOi0reS5sOWKoOaLv+Wkp+WxheeVmeiuuOWPryBodHRwczovL3J1c2hteW5ld3Bhc3Nwb3J0LmNvbS9wcm9kdWN0L+i0reS5sOWKoOaLv+Wkp+WxheeVmeiuuOWPry0yLyDotK3kubDmraPniYjnvo7lm73nu7/ljaEgaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9ydC5jb20vcHJvZHVjdC/otK3kubDmraPniYjnvo7lm73nu7/ljaEvIFdoYXRzQXBw77yaKzEoNzQwKTI4MC0yMDE5IEVtYWlsOiBhdXRoZW50aWNub3RlczVAZ21haWwuY29t?=
+Subject: [Linaro-mm-sig] Buy fake us dollars (WhatsApp : +49 1575 3756974) Buy Fake Canadian Dollars ( CAD ), Buy fake cad, Buy fake Australian dollars Buy fake euros, Buy fake rmb, Buy fake Chinese yuan rmb Buy fake usd/aud/cad/RMB/euros/CNY/ (WhatsApp : +49 1575 3756974) Buy fake USD $ Buy fake us dollars, Buy Fake Canadian Dollars ( CAD ), Buy fake cad , Buy Prop Money , Buy Fake Euros , Buy fake Australian dollars , Buy Fake Money , Buy Counterfeit Money, Buy fake counterfeit us bills, buy fake Canadian dollars (CAD), Buy 100% undetected counterfeit money, Buy clone cards, Buy Counterfeit US DOLLAR-USD, Buy 100% Undetectable Counterfeit Money. (Email: authenticnotes5@gmail.com) Buy passport online, Buy ID cards online, (WhatsApp : +49 1575 3756974) Buy driving license, Buy drivers license online, Buy green card, residence permit, IELT, work permit, citizenship, buy Canadian resident permits, apply for Canadian citizenship certificates, buy Canadian ID cards, buy novelty ID cards,
+  buy authentic identity documents. https://counterfeitdocsforsale.com/buy-real-usa-passport-online/ https://counterfeitdocsforsale.com/buy-real-canadian-passport-online/ https://counterfeitdocsforsale.com/buy-real-uk-passport-online/ https://counterfeitdocsforsale.com/buy-real-australian-passport-online/ https://counterfeitdocsforsale.com/buy-real-chinese-passport-online/ https://counterfeitdocsforsale.com/product/buy-canadian-resident-permits/ https://buyrealcurrency.com/product/buy-real-and-fake-passport/ https://globaltraveldocs.com/buy-real-uk-passport-online/ https://globaltraveldocs.com/buy-real-usa-passport-online/ https://globaltraveldocs.com/buy-real-canadian-passport-online/ https://globaltraveldocs.com/buy-real-chinese-passport-online/ https://counterfeitdocsforsale.com/ We are specialize in offering a vast array of replicas, including Chinese Yuan RMB, (WhatsApp : +49 1575 3756974) fake US dollars (usd), counterfeit Canadian dollars (CAD), replica Chinese yuan (CNY) and 
+ cloned credit cards, euros, pounds sterling and Australian dollars (aud). Our products are meticulously crafted to be virtually indistinguishable from their genuine counterparts. visit our website https://www.counterfeitdocsforsale.com/buy-undetectable-counterfeit-money/ for a confidential consultation and explore a world of possibilities. For more information: WeChat ID : Scottbowers44 (Email: authenticnotes5@gmail.com) https://www.counterfeitdocsforsale.com/buy-undetectable-counterfeit-money/ https://counterfeitdocsforsale.com/buy-counterfeit-us-dollar-bills-online/ https://counterfeitdocsforsale.com/product/buy-fake-usd-50-bills-for-sale-online-usd-50-bills/ https://counterfeitdocsforsale.com/product/buy-fake-usd-5-banknotes-for-sale-online/ https://counterfeitdocsforsale.com/product/buy-counterfeit-usd-100-bills-for-sale-online/ https://counterfeitdocsforsale.com/product/buy-counterfeit-20-dollar-bills-for-sale-usd-20-bills/ https://counterfeitdocsforsale.com/product/buy-counter
+ feit-10-dollar-bills-for-sale-online-usd-10-bills/ https://counterfeitdocsforsale.com/buy-counterfeit-australian-dollar-bills-online/ https://counterfeitdocsforsale.com/buy-counterfeit-canadian-dollar-bills-online/ https://counterfeitdocsforsale.com/buy-counterfeit-euro-bills-online/ https://counterfeitdocsforsale.com/buy-counterfeit-gbp-pounds-online/ https://rushmynewpassport.com/ (Email: authenticnotes5@gmail.com)
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/J7OQSGWIWIZLJWHPOINEMX6YSEBXLY3V/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/X43ULBFQ4ZY5SWJTPLUU7WTZDYONHZQC/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Transfer-Encoding: base64
-X-Rspamd-Action: add header
-X-Spamd-Result: default: False [8.69 / 15.00];
-	SPAM_FLAG(5.00)[];
-	LONG_SUBJ(3.00)[5318];
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Action: no action
+X-Spamd-Result: default: False [5.59 / 15.00];
+	LONG_SUBJ(3.00)[3405];
+	SUBJECT_HAS_CURRENCY(1.00)[];
 	MID_RHS_MATCH_TO(1.00)[];
-	MAILLIST(-0.20)[mailman];
+	URL_IN_SUBJECT(1.00)[counterfeitdocsforsale.com];
 	R_SPF_ALLOW(-0.20)[+mx:c];
+	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_BASE64_TEXT(0.10)[];
 	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:linaro-mm-sig@lists.linaro.org,s:lists@lfdr.de];
-	GREYLIST(0.00)[pass,meta];
-	FORGED_SENDER(0.00)[chenshentu92@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FREEMAIL_FROM(0.00)[gmail.com];
 	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
+	FREEMAIL_FROM(0.00)[gmail.com];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:linaro-mm-sig@lists.linaro.org,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[chenshentu92@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FORWARDED(0.00)[lists@lfdr.de];
+	GREYLIST(0.00)[pass,meta];
+	ARC_NA(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_ONE(0.00)[1];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	TO_DN_NONE(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
 	FROM_NEQ_ENVFROM(0.00)[chenshentu92@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	RCPT_COUNT_ONE(0.00)[1];
 	R_DKIM_NA(0.00)[];
 	FROM_NO_DN(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:mid,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:mid,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp,rushmynewpassport.com:url,counterfeitdocsforsale.com:url,buyrealcurrency.com:url,linaro.org:email,globaltraveldocs.com:url]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: E338E698EC3
-X-Spam: Yes
+X-Rspamd-Queue-Id: 20CCC698ECA
 
-5Zyo57q/6LSt5Lmw55yf5YGH5oqk54Wn44CB5Zyo57q/6LSt5Lmw6Lqr5Lu96K+B77yI5b6u5L+h
-77yaU2NvdHRib3dlcnM0NO+8ieOAgei0reS5sOmpvueFp+OAgee7v+WNoeOAgeWxheeVmeiuuOWP
-r+OAgembheaAneaIkOe7qeOAgeW3peS9nOiuuOWPr+OAgeWFrOawkei6q+S7veOAgeWcqOe6v+i0
-reS5sOetvuivgeOAgei0reS5sOWKoOaLv+Wkp+WxheeVmeiuuOWPryANCldoYXRzQXBw77yaKzQ5
-IDE1NzUgMzc1Njk3NA0KRW1haWw6IGF1dGhlbnRpY25vdGVzNUBnbWFpbC5jb20NCg0K6LSt5Lmw
-6aaZ5riv5oqk54WnIO+8iOW+ruS/oe+8mlNjb3R0Ym93ZXJzNDTvvIkg6LSt5Lmw5Lit5Zu95oqk
-54WnIOizvOiyt+mfk+Wci+itt+eFpyDos7zosrfmraPlk4Hml6XmnKzorbfnhacg6LO86LK35q2j
-5ZOB576O5ZyL6K2354WnIOizvOiyt+WPsOeBo+itt+eFpyDos7zosrfms7DlnIvorbfnhacsIOiz
-vOiyt+ato+WTgeazouiYreitt+eFpywg6LO86LK35q2j5ZOB5r6z5rSy6K2354WnLCDos7zosrfm
-raPlk4Hoi7HlnIvorbfnhacsIOizvOiyt+ato+WTgeWKoOaLv+Wkp+itt+eFpywg6LO86LK35q2j
-5ZOB5oyq5aiB6K2354WnLCDlnKjnt5ros7zosrfnnJ/mraPnmoTppqzkvobopb/kup7orbfnhacs
-IOizvOiyt+ato+WTgeazleWci+itt+eFpywg6LO86LK35q2j5ZOB5o235YWL6K2354WnLCDos7zo
-srfmraPlk4Hlt7Topb/orbfnhacsIOizvOiyt+ato+WTgeaEm+aymeWwvOS6nuitt+eFpywg6LO8
-6LK355yf5YGH6Lqr5YiG6K2JLCAgV2hhdHNBcHDvvJorNDkgMTU3NSAzNzU2OTc0IOizvOiyt+WP
-sOeBo+i6q+WIhuitiSwg6LO86LK35Y+w54Gj6aeV54WnLCDos7zosrfms7DlnIvpp5Xpp5vln7fn
-hacsIOizvOiyt+azsOWci+i6q+WIhuitiSwg6LO86LK355yf5YGH57C96K2JLCDos7zosrflgYfn
-vo7lhYMsIOizvOiyt+WBh0NZTiwg6LO86LK35YGH5r6z5bmjLCDos7zosrfnnJ/orbfnhafmiJbl
-gYforbfnhacsIOizvOiyt+ecn+WBh+mnleeFpywg6LO86LK355yf5YGH6Lqr5YiG6K2JIO+8iOW+
-ruS/oe+8mlNjb3R0Ym93ZXJzNDTvvIkNCg0KDQrlnKjnur/otK3kubDmiqTnhacgaHR0cHM6Ly9y
-dXNobXluZXdwYXNzcG9ydC5jb20vcHJvZHVjdC/lnKjnur/otK3kubDmiqTnhacvDQrotK3kubDn
-nJ/lgYfliqDmi7/lpKfmiqTnhacgaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9ydC5jb20vcHJvZHVj
-dC/otK3kubDnnJ/lgYfliqDmi7/lpKfmiqTnhacvDQrotK3kubDnnJ/mraPnmoTliqDmi7/lpKfm
-iqTnhacgaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9ydC5jb20vcHJvZHVjdC/otK3kubDnnJ/mraPn
-moTliqDmi7/lpKfmiqTnhacvDQrlnKjnur/otK3kubDmiqTnhacgaHR0cHM6Ly9ydXNobXluZXdw
-YXNzcG9ydC5jb20vcHJvZHVjdC/lnKjnur/otK3kubDmiqTnhactMi8NCuWmguS9lei0reS5sOat
-o+eJiOe+juWbveaKpOeFpyAyMDI2IGh0dHBzOi8vcnVzaG15bmV3cGFzc3BvcnQuY29tL3Byb2R1
-Y3Qv5aaC5L2V6LSt5Lmw5q2j54mI576O5Zu95oqk54WnLTIwMjYvDQrotK3kubDmraPniYjkuK3l
-m73miqTnhacgaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9ydC5jb20vcHJvZHVjdC/otK3kubDmraPn
-iYjkuK3lm73miqTnhacvDQrlnKjnur/otK3kubDnnJ/lgYfpqb7nhacgaHR0cHM6Ly9ydXNobXlu
-ZXdwYXNzcG9ydC5jb20vcHJvZHVjdC/lnKjnur/otK3kubDnnJ/lgYfpqb7nhacvDQrotK3kubDm
-raPniYjnvo7lm73pqb7nhacgaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9ydC5jb20vcHJvZHVjdC/o
-tK3kubDmraPniYjnvo7lm73pqb7nhacvDQrotK3kubDmraPniYjnvo7lm73pqb7pqbbmiafnhacg
-aHR0cHM6Ly9ydXNobXluZXdwYXNzcG9ydC5jb20vcHJvZHVjdC/otK3kubDmraPniYjnvo7lm73p
-qb7pqbbmiafnhacvDQoNCkJ1eSBPcmlnaW5hbCBVSyBQYXNzcG9ydHMgOiBodHRwczovL3J1c2ht
-eW5ld3Bhc3Nwb3J0LmNvbS9wcm9kdWN0L2J1eS1vcmlnaW5hbC11ay1wYXNzcG9ydHMvDQpCdXkg
-UmVhbCBDYW5hZGlhbiBQYXNzcG9ydHM6IGh0dHBzOi8vcnVzaG15bmV3cGFzc3BvcnQuY29tL3By
-b2R1Y3QvYnV5LXJlYWwtY2FuYWRpYW4tcGFzc3BvcnRzLw0KQnV5IFJlYWwgUGFzc3BvcnQgZnJv
-bSBBc2lhbiBDb3VudHJ5OiBodHRwczovL3J1c2hteW5ld3Bhc3Nwb3J0LmNvbS9wcm9kdWN0L2J1
-eS1yZWFsLXBhc3Nwb3J0LWZyb20tYXNpYW4tY291bnRyeS8NCkhvdyB0byBCdXkgQXV0aGVudGlj
-IFVTIFBhc3Nwb3J0IDIwMjY6IGh0dHBzOi8vcnVzaG15bmV3cGFzc3BvcnQuY29tL3Byb2R1Y3Qv
-aG93LXRvLWJ1eS1hdXRoZW50aWMtdXMtcGFzc3BvcnQtMjAyNi8NCkhvdyB0byBCdXkgRVUgUGFz
-c3BvcnQgT25saW5lOiBodHRwczovL3J1c2hteW5ld3Bhc3Nwb3J0LmNvbS9wcm9kdWN0L2hvdy10
-by1idXktZXUtcGFzc3BvcnQtb25saW5lLw0KUHVyY2hhc2UgYXV0aGVudGljIEtvcmVhbiBQYXNz
-cG9ydDogaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9ydC5jb20vcHJvZHVjdC9wdXJjaGFzZS1hdXRo
-ZW50aWMta29yZWFuLXBhc3Nwb3J0Lw0KYnV5IGF1dGhlbnRpYyBDaGluZXNlIHBhc3Nwb3J0OiBo
-dHRwczovL3J1c2hteW5ld3Bhc3Nwb3J0LmNvbS9wcm9kdWN0L2J1eS1hdXRoZW50aWMtY2hpbmVz
-ZS1wYXNzcG9ydC8NCmJ1eSBhdXRoZW50aWMgdHJhdmVsIHBhc3Nwb3J0czogaHR0cHM6Ly9ydXNo
-bXluZXdwYXNzcG9ydC5jb20vcHJvZHVjdC9idXktYXV0aGVudGljLXRyYXZlbC1wYXNzcG9ydHMv
-DQpidXkgcmVhbCB1c2EgcGFzc3BvcnQgb25saW5lIGh0dHBzOi8vZ2xvYmFsdHJhdmVsZG9jcy5j
-b20vYnV5LXJlYWwtdXNhLXBhc3Nwb3J0LW9ubGluZS8NCkJ1eSBOZXRoZXJsYW5kIFBhc3Nwb3J0
-IE9ubGluZSA6IGh0dHBzOi8vcnVzaG15bmV3cGFzc3BvcnQuY29tL3Byb2R1Y3QvYnV5LW5ldGhl
-cmxhbmQtcGFzc3BvcnQtb25saW5lLw0KDQpCdXkgcmVhbCBhbmQgZmFrZSBEcml2ZXJzIExpY2Vu
-c2UgT25saW5lIGh0dHBzOi8vcnVzaG15bmV3cGFzc3BvcnQuY29tL3Byb2R1Y3QvYnV5LXJlYWwt
-YW5kLWZha2UtZHJpdmVycy1saWNlbnNlLW9ubGluZS8NCkJ1eSBEcml2ZXJzIExpY2Vuc2Ugb25s
-aW5lIGh0dHBzOi8vcnVzaG15bmV3cGFzc3BvcnQuY29tL3Byb2R1Y3QvYnV5LWRyaXZlcnMtbGlj
-ZW5zZS1vbmxpbmUvDQpBcHBseSBmb3IgUmVnaXN0ZXJlZCBCdWxnYXJpYW4gZHJpdmVycyBMaWNl
-bnNlIGh0dHBzOi8vcnVzaG15bmV3cGFzc3BvcnQuY29tL3Byb2R1Y3QvYXBwbHktZm9yLXJlZ2lz
-dGVyZWQtYnVsZ2FyaWFuLWRyaXZlcnMtbGljZW5zZS8NCkJ1eSBBdXN0cmlhbiBEcml2ZXLigJlz
-IExpY2Vuc2UgaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9ydC5jb20vcHJvZHVjdC9idXktYXVzdHJp
-YW4tZHJpdmVycy1saWNlbnNlL2MNCkJ1eSBBdXRoZW50aWMgVVMgZHJpdmVy4oCZcyBMaWNlbnNl
-IGh0dHBzOi8vcnVzaG15bmV3cGFzc3BvcnQuY29tL3Byb2R1Y3QvYnV5LWF1dGhlbnRpYy11cy1k
-cml2ZXJzLWxpY2Vuc2UtMi8NCkJ1eSBBdXRoZW50aWMgVVMgZHJpdmVy4oCZcyBMaWNlbnNlIGh0
-dHBzOi8vcnVzaG15bmV3cGFzc3BvcnQuY29tL3Byb2R1Y3QvYnV5LWF1dGhlbnRpYy11cy1kcml2
-ZXJzLWxpY2Vuc2UvDQpCdXkgRGFuaXNoIGRyaXZlcnMgTGljZW5zZSBodHRwczovL3J1c2hteW5l
-d3Bhc3Nwb3J0LmNvbS9wcm9kdWN0L2J1eS1kYW5pc2gtZHJpdmVycy1saWNlbnNlLw0KQnV5IERy
-aXZlcuKAmXMgTGljZW5zZSBmcm9tIEFzaWEgaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9ydC5jb20v
-cHJvZHVjdC9idXktZHJpdmVycy1saWNlbnNlLWZyb20tYXNpYS8NCkJ1eSBHZXJtYW4gRHJpdmVy
-4oCZcyBsaWNlbnNlIFdpdGhvdXQgRXhhbSBodHRwczovL3J1c2hteW5ld3Bhc3Nwb3J0LmNvbS9w
-cm9kdWN0L2J1eS1nZXJtYW4tZHJpdmVycy1saWNlbnNlLXdpdGhvdXQtZXhhbS8NCkRldXRzY2hl
-biBGw7xocmVyc2NoZWluIG9ubGluZSBrYXVmZW4gaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9ydC5j
-b20vcHJvZHVjdC9kZXV0c2NoZW4tZnVocmVyc2NoZWluLW9ubGluZS1rYXVmZW4vDQpFY2h0ZW4g
-ZGV1dHNjaGVuIFBhc3MgdW5kIEbDvGhyZXJzY2hlaW4gaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9y
-dC5jb20vcHJvZHVjdC9lY2h0ZW4tZGV1dHNjaGVuLXBhc3MtdW5kLWZ1aHJlcnNjaGVpbi1rYXVm
-ZW4vDQpCdXkgSHVuZ2FyaWFuIERyaXZlcuKAmXMgTGljZW5zZSBodHRwczovL3J1c2hteW5ld3Bh
-c3Nwb3J0LmNvbS9wcm9kdWN0L2J1eS1odW5nYXJpYW4tZHJpdmVycy1saWNlbnNlLw0KQnV5IE9y
-aWdpbmFsIENhbmFkaWFuIERyaXZlcuKAmXMgTGljZW5zZSBodHRwczovL3J1c2hteW5ld3Bhc3Nw
-b3J0LmNvbS9wcm9kdWN0L2J1eS1vcmlnaW5hbC1jYW5hZGlhbi1kcml2ZXJzLWxpY2Vuc2UvDQpC
-dXkgUG9ydHVndWVzZSBEcml2ZXLigJlzIExpY2Vuc2UgaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9y
-dC5jb20vcHJvZHVjdC9idXktcG9ydHVndWVzZS1kcml2ZXJzLWxpY2Vuc2UvDQpCdXkgcmVnaXN0
-ZXJlZCBJdGFsaWFuIGRyaXZlcuKAmXMgTGljZW5zZSBodHRwczovL3J1c2hteW5ld3Bhc3Nwb3J0
-LmNvbS9wcm9kdWN0L2J1eS1yZWdpc3RlcmVkLWl0YWxpYW4tZHJpdmVycy1saWNlbnNlLw0KQnV5
-IHJlZ2lzdGVyZWQgUG9saXNoIGRyaXZlcuKAmXMgTGljZW5zZSBodHRwczovL3J1c2hteW5ld3Bh
-c3Nwb3J0LmNvbS9wcm9kdWN0L2J1eS1yZWdpc3RlcmVkLXBvbGlzaC1kcml2ZXJzLWxpY2Vuc2Uv
-DQpCdXkgU3BhbmlzaCBEcml2ZXLigJlzIExpY2Vuc2Ugd2l0aG91dCBFeGFtIGh0dHBzOi8vcnVz
-aG15bmV3cGFzc3BvcnQuY29tL3Byb2R1Y3QvYnV5LXNwYW5pc2gtZHJpdmVycy1saWNlbnNlLXdp
-dGhvdXQtZXhhbS8NCkJ1eSBTd2VkaXNoIERyaXZpbmcgTGljZW5zZSByZWdpc3RlcmVkIGluIFRy
-YW5zcG9ydCBzeXN0ZW0gaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9ydC5jb20vcHJvZHVjdC9idXkt
-c3dlZGlzaC1kcml2aW5nLWxpY2Vuc2UtcmVnaXN0ZXJlZC1pbi10cmFuc3BvcnQtc3lzdGVtLw0K
-QnV5IFN3aXR6ZXJsYW5kIERyaXZlcnMgTGljZW5zZSBodHRwczovL3J1c2hteW5ld3Bhc3Nwb3J0
-LmNvbS9wcm9kdWN0L2J1eS1zd2l0emVybGFuZC1kcml2ZXJzLWxpY2Vuc2UvDQpCdXkgVUsgZHJp
-dmluZyBMaWNlbnNlIHJlZ2lzdGVyZWQgaW4gRFZMQSBodHRwczovL3J1c2hteW5ld3Bhc3Nwb3J0
-LmNvbS9wcm9kdWN0L2J1eS11ay1kcml2aW5nLWxpY2Vuc2UtcmVnaXN0ZXJlZC1pbi1kdmxhLw0K
-SG93IHRvIGdldCBCZWxnaWFuIGRyaXZlcuKAmXMgTGljZW5zZSBpbiAzIGRheXMgaHR0cHM6Ly9y
-dXNobXluZXdwYXNzcG9ydC5jb20vcHJvZHVjdC9idXktcmVhbC1iZWxnaWFuLWRyaXZpbmctbGlj
-ZW5zZS8NCkhvdyB0byBHZXQgTmV0aGVybGFuZHMgRHJpdmVycyBMaWNlbnNlIGh0dHBzOi8vcnVz
-aG15bmV3cGFzc3BvcnQuY29tL3Byb2R1Y3QvYnV5LWEtbmV0aGVybGFuZHMtZHJpdmluZy1saWNl
-bnNlLw0KSG93IHRvIGdldCByZWdpc3RlcmVkIEZyZW5jaCBkcml2ZXJzIExpY2Vuc2UgaHR0cHM6
-Ly9ydXNobXluZXdwYXNzcG9ydC5jb20vcHJvZHVjdC9idXktYS1mcmVuY2gtZHJpdmluZy1saWNl
-bnNlLw0KUHVyY2hhc2UgTm9yd2VnaWFuIGRyaXZlcnMgTGljZW5zZSB3aXRob3V0IGV4YW0gaHR0
-cHM6Ly9ydXNobXluZXdwYXNzcG9ydC5jb20vcHJvZHVjdC9idXktbm9yd2VnaWFuLWRyaXZlcnMt
-bGljZW5zZS8NCg0KQnV5IENhbmFkaWFuIFJlc2lkZW50IFBlcm1pdHMgaHR0cHM6Ly9ydXNobXlu
-ZXdwYXNzcG9ydC5jb20vcHJvZHVjdC9idXktY2FuYWRpYW4tcmVzaWRlbnQtcGVybWl0cy8NCkJ1
-eSBBdXRoZW50aWMgQW1lcmljYW4gR3JlZW4gQ2FyZCBodHRwczovL3J1c2hteW5ld3Bhc3Nwb3J0
-LmNvbS9wcm9kdWN0L2J1eS1hdXRoZW50aWMtYW1lcmljYW4tZ3JlZW4tY2FyZC0yLw0KS8O2cCB1
-cHBlaMOlbGxzdGlsbHN0w6VuZCBmw7ZyIFN2ZXJpZ2UgaHR0cHM6Ly9ydXNobXluZXdwYXNzcG9y
-dC5jb20vcHJvZHVjdC9rb3AtdXBwZWhhbGxzdGlsbHN0YW5kLWZvci1zdmVyaWdlLw0K5Zyo57q/
-6LSt5Lmw5Lqa5rSy5bGF55WZ6K645Y+vIGh0dHBzOi8vcnVzaG15bmV3cGFzc3BvcnQuY29tL3By
-b2R1Y3Qv5Zyo57q/6LSt5Lmw5Lqa5rSy5bGF55WZ6K645Y+vLw0K6LSt5Lmw5Yqg5ou/5aSn5bGF
-55WZ6K645Y+vIGh0dHBzOi8vcnVzaG15bmV3cGFzc3BvcnQuY29tL3Byb2R1Y3Qv6LSt5Lmw5Yqg
-5ou/5aSn5bGF55WZ6K645Y+vLTIvDQrotK3kubDmraPniYjnvo7lm73nu7/ljaEgaHR0cHM6Ly9y
-dXNobXluZXdwYXNzcG9ydC5jb20vcHJvZHVjdC/otK3kubDmraPniYjnvo7lm73nu7/ljaEvDQoN
-CldoYXRzQXBw77yaKzEoNzQwKTI4MC0yMDE5DQpFbWFpbDogYXV0aGVudGljbm90ZXM1QGdtYWls
-LmNvbQ0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGlu
-YXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3Jn
-ClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0
-cy5saW5hcm8ub3JnCg==
+Buy fake us dollars (WhatsApp : +49 1575 3756974) Buy Fake Canadian Dollars ( CAD ), Buy fake cad, Buy fake Australian dollars Buy fake euros, Buy fake rmb, Buy fake Chinese yuan rmb
+Buy fake usd/aud/cad/RMB/euros/CNY/ (WhatsApp : +49 1575 3756974)
+Buy fake USD $  Buy fake us dollars, Buy Fake Canadian Dollars ( CAD ), Buy fake cad , Buy Prop Money , Buy Fake Euros , Buy fake Australian dollars , Buy Fake Money , Buy Counterfeit Money, Buy fake counterfeit us bills, buy fake Canadian dollars (CAD), Buy 100% undetected counterfeit money, Buy clone cards, Buy Counterfeit US DOLLAR-USD, Buy 100% Undetectable Counterfeit Money. (Email: authenticnotes5@gmail.com)
+
+Buy passport online, Buy ID cards online, (WhatsApp : +49 1575 3756974) Buy driving license, Buy drivers license online, Buy green card, residence permit, IELT, work permit, citizenship, buy Canadian resident permits, apply for Canadian citizenship certificates, buy Canadian ID cards, buy novelty ID cards, buy authentic identity documents. 
+
+https://counterfeitdocsforsale.com/buy-real-usa-passport-online/
+https://counterfeitdocsforsale.com/buy-real-canadian-passport-online/
+https://counterfeitdocsforsale.com/buy-real-uk-passport-online/
+https://counterfeitdocsforsale.com/buy-real-australian-passport-online/
+https://counterfeitdocsforsale.com/buy-real-chinese-passport-online/
+https://counterfeitdocsforsale.com/product/buy-canadian-resident-permits/
+https://buyrealcurrency.com/product/buy-real-and-fake-passport/
+https://globaltraveldocs.com/buy-real-uk-passport-online/
+https://globaltraveldocs.com/buy-real-usa-passport-online/
+https://globaltraveldocs.com/buy-real-canadian-passport-online/
+https://globaltraveldocs.com/buy-real-chinese-passport-online/
+
+https://counterfeitdocsforsale.com/ We are specialize in offering a vast array of replicas, including Chinese Yuan RMB, (WhatsApp : +49 1575 3756974) fake US dollars (usd), counterfeit Canadian dollars (CAD), replica Chinese yuan (CNY) and cloned credit cards, euros, pounds sterling and Australian dollars (aud).  Our products are meticulously crafted to be virtually indistinguishable from their genuine counterparts. visit our website https://www.counterfeitdocsforsale.com/buy-undetectable-counterfeit-money/ for a confidential consultation and explore a world of possibilities.
+
+For more information:
+WeChat ID : Scottbowers44
+(Email: authenticnotes5@gmail.com)
+
+https://www.counterfeitdocsforsale.com/buy-undetectable-counterfeit-money/
+https://counterfeitdocsforsale.com/buy-counterfeit-us-dollar-bills-online/
+https://counterfeitdocsforsale.com/product/buy-fake-usd-50-bills-for-sale-online-usd-50-bills/
+https://counterfeitdocsforsale.com/product/buy-fake-usd-5-banknotes-for-sale-online/
+https://counterfeitdocsforsale.com/product/buy-counterfeit-usd-100-bills-for-sale-online/
+https://counterfeitdocsforsale.com/product/buy-counterfeit-20-dollar-bills-for-sale-usd-20-bills/
+https://counterfeitdocsforsale.com/product/buy-counterfeit-10-dollar-bills-for-sale-online-usd-10-bills/
+https://counterfeitdocsforsale.com/buy-counterfeit-australian-dollar-bills-online/
+https://counterfeitdocsforsale.com/buy-counterfeit-canadian-dollar-bills-online/
+https://counterfeitdocsforsale.com/buy-counterfeit-euro-bills-online/
+https://counterfeitdocsforsale.com/buy-counterfeit-gbp-pounds-online/
+https://rushmynewpassport.com/
+
+(Email: authenticnotes5@gmail.com)
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
