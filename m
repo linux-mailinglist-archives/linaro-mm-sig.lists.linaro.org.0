@@ -2,32 +2,32 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id OZpXAqeCMmrX1AUAu9opvQ
+	id WUKoHraCMmrd1AUAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 Jun 2026 13:19:03 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 Jun 2026 13:19:18 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 88362698F73
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 Jun 2026 13:19:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EA492698F8F
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 Jun 2026 13:19:17 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
 	dkim=none;
 	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=gmail.com (policy=none);
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org"
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9E1CB40AB0
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 Jun 2026 11:19:01 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 134A440A9D
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 Jun 2026 11:19:17 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3F6F740AA4
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 17 Jun 2026 11:17:54 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5C11840A70
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 17 Jun 2026 11:18:00 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: chenshentu92@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Wed, 17 Jun 2026 11:17:54 -0000
-Message-ID: <178169507425.597237.14656726366323364710@lists.linaro.org>
+Date: Wed, 17 Jun 2026 11:18:00 -0000
+Message-ID: <178169508037.597237.13965271313233885088@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: 2HXQ42J7PY3ZYNMMG44FTVX7RHS6SC6D
-X-Message-ID-Hash: 2HXQ42J7PY3ZYNMMG44FTVX7RHS6SC6D
+Message-ID-Hash: ZZSW3BI23QQQRTPCMZZJEUK3NVXNXTKP
+X-Message-ID-Hash: ZZSW3BI23QQQRTPCMZZJEUK3NVXNXTKP
 X-MailFrom: chenshentu92@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
@@ -37,7 +37,7 @@ Subject: [Linaro-mm-sig] =?utf-8?q?Buy_real_and_fake_passport_online=2C_Buy_ID_c
  8AUD=29_Buy_fake_British_pounds_=28GBP=29=2C_buy_fake_Euros_=28EUR=29=2C_buy_fake_Hong_Kong_dollars_=28=24HK=29=2E_buy_fake_US_dollars/Australian_dollars/Canadian_dollars/CNY/Euros/CNY=2C_buy_fake_Euro_banknotes=2C_buy_fake_Australian_dollars=2C_buy_fake_Canadian_dollars=2C_buy_fake_US_dollars=2C_buy_fake_RMB_online=2C_buy_fake_RMB_https=3A//globaltraveldocs=2Ecom/_https=3A//rushmynewpassport=2Ecom/_We_offer_all_types_of_visas=2C_travel_documents=2C_and_passports_at_the_best_prices_and_with_exceptional_quality=2E_We_handle_passports_for_small_countries=2C_multinational_passports=2C_entry_and_exit_assistance_for_Southeast_Asia=2C_passport_activation=2C_expedited_naturalization=2C_and_second_identity_planning=2C_giving_you_an_alternative=2E_=28WhatsApp_=3A_+49_1575_3756974_=29_Email=3A_authenticnotes5=40gmail=2Ecom_https=3A//rushmynewpassport=2Ecom/_Buy_passports_online_=28Email=3A_authenticnotes5=40gmail=2Ecom=29_buy_USA_passports=2C_buy_Chinese_passports=2C_buy_Hong_Kong_passports=2
  C_buy_Taiwan_passports=2C_buy_diplomatic_passports=2C_Buy_China_travel_documents_People=27s_Republic_of_China_=28PRC=29_https=3A//rushmynewpassport=2Ecom/_https=3A//buyrealcurrency=2Ecom/product/buy-real-and-fake-passport/_https=3A//rushmynewpassport=2Ecom/buy-real-usa-passport-online/_=28WhatsApp_=3A_+49_1575_3756974_=29?=
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2HXQ42J7PY3ZYNMMG44FTVX7RHS6SC6D/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZZSW3BI23QQQRTPCMZZJEUK3NVXNXTKP/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -62,12 +62,12 @@ X-Spamd-Result: default: False [4.69 / 15.00];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RCPT_COUNT_ONE(0.00)[1];
 	ARC_NA(0.00)[];
-	FORGED_SENDER(0.00)[chenshentu92@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	GREYLIST(0.00)[pass,meta];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_ONE(0.00)[1];
+	FORGED_SENDER(0.00)[chenshentu92@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	TO_DN_NONE(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
@@ -78,9 +78,9 @@ X-Spamd-Result: default: False [4.69 / 15.00];
 	R_DKIM_NA(0.00)[];
 	FROM_NO_DN(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[buyrealcurrency.com:url,rushmynewpassport.com:url,lists.linaro.org:mid,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp,linaro.org:email,counterfeitdocsforsale.com:url,globaltraveldocs.com:url]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[buyrealcurrency.com:url,linaro.org:email,lists.linaro.org:mid,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp,rushmynewpassport.com:url,globaltraveldocs.com:url,counterfeitdocsforsale.com:url]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 88362698F73
+X-Rspamd-Queue-Id: EA492698F8F
 
 QnV5IHJlYWwgYW5kIGZha2UgcGFzc3BvcnQgb25saW5lLCBCdXkgSUQgY2FyZHMgb25saW5lLCAo
 V2hhdHNBcHAgOiArNDkgMTU3NSAzNzU2OTc0KSBCdXkgZHJpdmluZyBsaWNlbnNlLCBCdXkgZHJp
