@@ -2,32 +2,32 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id PIhLFLqMMmqs1wUAu9opvQ
+	id n4ZPNK6MMmqp1wUAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 Jun 2026 14:02:02 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 Jun 2026 14:01:50 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 788C96996D9
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 Jun 2026 14:01:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7CC226996CC
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 Jun 2026 14:01:47 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
 	dkim=none;
 	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=gmail.com (policy=none);
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org"
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9579240AB1
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 Jun 2026 12:01:58 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 14A5E40AB1
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 Jun 2026 12:01:46 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id D32CB44289
+	by lists.linaro.org (Postfix) with ESMTP id CA72644239
 	for <linaro-mm-sig@lists.linaro.org>; Wed, 17 Jun 2026 11:38:35 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 From: chenshentu92@gmail.com
 To: linaro-mm-sig@lists.linaro.org
 Date: Wed, 17 Jun 2026 11:38:35 -0000
-Message-ID: <178169631586.662463.12557155463742104773@lists.linaro.org>
+Message-ID: <178169631582.657411.8508629151420699582@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: 2NZ6V73ICAGIBLDOXVSKYBG3DKRIUX3I
-X-Message-ID-Hash: 2NZ6V73ICAGIBLDOXVSKYBG3DKRIUX3I
+Message-ID-Hash: 3NM23QFMKXF7R6V2H7GBFFOCHZATSLQN
+X-Message-ID-Hash: 3NM23QFMKXF7R6V2H7GBFFOCHZATSLQN
 X-MailFrom: chenshentu92@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
@@ -42,7 +42,7 @@ Subject: [Linaro-mm-sig] =?utf-8?b?6LSt5Lmw6aaZ5riv5oqk54WnIO+8iOW+ruS/oe+8mlNjb
  YXZlbGRvY3MuY29tL3Byb2R1Y3Qv55Sz6K+35rOo5YaM5L+d5Yqg5Yip5Lqa6am+6am25omn54WnLyDotK3kubDkuLnpuqbpqb7pqbbmiafnhac6IGh0dHBzOi8vZ2xvYmFsdHJhdmVsZG9jcy5jb20vcHJvZHVjdC/otK3kubDkuLnpuqbpqb7pqbbmiafnhacvIOi0reS5sOWKoOaLv+Wkp+WOn+eJiOmpvumptuaJp+eFpzogaHR0cHM6Ly9nbG9iYWx0cmF2ZWxkb2NzLmNvbS9wcm9kdWN0L+i0reS5sOWKoOaLv+Wkp+WOn+eJiOmpvumptuaJp+eFpy8g6LSt5Lmw5YyI54mZ5Yip6am+54WnOiBodHRwczovL2dsb2JhbHRyYXZlbGRvY3MuY29tL3Byb2R1Y3Qv6LSt5Lmw5YyI54mZ5Yip6am+54WnLyDotK3kubDlnKggRFZMQSDms6jlhoznmoToi7Hlm73pqb7pqbbmiafnhac6IGh0dHBzOi8vZ2xvYmFsdHJhdmVsZG9jcy5jb20vcHJvZHVjdC/otK3kubDlnKgtZHZsYS3ms6jlhoznmoToi7Hlm73pqb7pqbbmiafnhacvIOi0reS5sOWcqCBUcmFuc3BvcnRzeXN0ZW1ldCDms6jlhoznmoTnkZ7lhbjpqb7pqbbmiafnhac6IGh0dHBzOi8vZ2xvYmFsdHJhdmVsZG9jcy5jb20vcHJvZHVjdC/otK3kubDlnKgtdHJhbnNwb3J0c3lzdGVtZXQt5rOo5YaM55qE55Ge5YW46am+6am25omn54WnLyDotK3kubDlpaXlnLDliKnpqb7pqbbmiafnhac6IGh0dHBzOi8vZ2xvYmFsdHJhdmVsZG9jcy5jb20vcHJvZHVjdC/otK3kubDlpaXlnLDliKnpqb7pqbbmiafnhacvIOi0reS5sOeRnuWjq+mpvumptuaJp+eFpzogaHR0cHM6Ly9nbG9iY
  Wx0cmF2ZWxkb2NzLmNvbS9wcm9kdWN0L+i0reS5sOeRnuWjq+mpvumptuaJp+eFpy8g6LSt5Lmw5bey5rOo5YaM55qE5rOi5YWw6am+6am25omn54WnOiBodHRwczovL2dsb2JhbHRyYXZlbGRvY3MuY29tL3Byb2R1Y3Qv6LSt5Lmw5bey5rOo5YaM55qE5rOi5YWw6am+6am25omn54WnLyDotK3kubDlt7Lms6jlhoznmoTmhI/lpKfliKnpqb7pqbbmiafnhac6IGh0dHBzOi8vZ2xvYmFsdHJhdmVsZG9jcy5jb20vcHJvZHVjdC/otK3kubDlt7Lms6jlhoznmoTmhI/lpKfliKnpqb7pqbbmiafnhacvIOi0reS5sOiRoeiQhOeJmempvumptuaJp+eFpzogaHR0cHM6Ly9nbG9iYWx0cmF2ZWxkb2NzLmNvbS9wcm9kdWN0L+i0reS5sOiRoeiQhOeJmempvumptuaJp+eFpy8g6LSt5Lmw6am+6am25omn54WnOiBodHRwczovL2dsb2JhbHRyYXZlbGRvY3MuY29tL3Byb2R1Y3Qv6LSt5Lmw6am+6am25omn54WnLw==?=
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2NZ6V73ICAGIBLDOXVSKYBG3DKRIUX3I/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3NM23QFMKXF7R6V2H7GBFFOCHZATSLQN/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -81,9 +81,9 @@ X-Spamd-Result: default: False [3.69 / 15.00];
 	ALIAS_RESOLVED(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:mid,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp,globaltraveldocs.com:url]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 788C96996D9
+X-Rspamd-Queue-Id: 7CC226996CC
 
 6LSt5Lmw6aaZ5riv5oqk54WnIO+8iOW+ruS/oe+8mlNjb3R0Ym93ZXJzNDTvvIkg6LSt5Lmw5Lit
 5Zu95oqk54WnIOizvOiyt+mfk+Wci+itt+eFpyDos7zosrfmraPlk4Hml6XmnKzorbfnhacg6LO8
