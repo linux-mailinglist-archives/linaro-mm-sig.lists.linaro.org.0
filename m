@@ -2,129 +2,63 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id kknhD9uRMmoV2QUAu9opvQ
+	id AlNoJz5fPWpi2AgAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 Jun 2026 14:23:55 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Jun 2026 19:02:54 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id BFD15699AEB
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 Jun 2026 14:23:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E55FE6C7AA9
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Jun 2026 19:02:53 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=Nvidia.com header.s=selector2 header.b="Cccn41A/";
+	dkim=fail ("body hash did not verify") header.d=ozlabs.org header.s=201707 header.b="JWVm+/54";
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
-	dmarc=fail reason="SPF not aligned (relaxed)" header.from=nvidia.com (policy=reject);
-	arc=reject ("signature check failed: fail, {[1] = sig:microsoft.com:reject}")
+	dmarc=fail reason="SPF not aligned (relaxed)" header.from=ozlabs.org (policy=none)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DD92440AF2
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 Jun 2026 12:23:53 +0000 (UTC)
-Received: from CO1PR03CU002.outbound.protection.outlook.com (mail-westus2azon11010043.outbound.protection.outlook.com [52.101.46.43])
-	by lists.linaro.org (Postfix) with ESMTPS id 08B9140D28
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 17 Jun 2026 12:16:21 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=oBdN7Qz7G9G2MU2A+YuJV6qSAlTQI+estymGzSiY5caV/+U2fgtjhjXgfdVxLXy24mhBrsyd6PhL/gCrs8gQJu4fL//cNifxMywJ/rzpzDZKkTpiwmpxWhC4NROXipYKqk/vVpXiOv5HQf0uBbkGAFkJ7u1JzA78UMg6c1r+4arS7T/gnoaiNi8xIWv17mcdsTYzyrDJucMMOQbtOpLiJr5k4+XQJYITQzFmO71JQDqAu/b7nhtmtAynw1/EzcAKfQrVzdqnqkpBRCxdXMHiyh8HS90jhpKIFl6l9XsHgYdj2rH3mTIy6wksGyHHlocw4NfqdUSl5NSp51T7qD1a+g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2Irs2SQHZxWSQQrtSmYRJePJwmC1IGBLG1D8rkXpbKk=;
- b=Y+693ghSKMK9FRzpGZ+2A6uHOgCJZWawTanjTcApKoFJhQLh5+Ozic6L6/a7UXPkAOpyr9KfAnfB/v6XRpg7RXQPTfyBUh/gN2TUpdmSMp27o9BEVXK9Ps2m5Vtkrin4V+kyLI9RYhd/hm3ViQ+JiM3L/R71zt/368uM97GmzKS1dAlJdFqyT3xIQlIjH2RNCvQ9jXHuPylFRVrWodzadpEOXa346Hk6312SqYyd2RoaTE3FQ0LB2H4Re6jqiHJBhMyG+1PdpnmgOk/wBRchNkBQCVaBap3vAwEBxKxbYGLijlRfQbmHE8UFWV3L5nGCICZlRTTbcwtflQPuTSTl6A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2Irs2SQHZxWSQQrtSmYRJePJwmC1IGBLG1D8rkXpbKk=;
- b=Cccn41A/wmP1LGnAwHtidvNQA3Qv0rSwbM8/+81vswYfIlBcDkj5VlwaY7aMY2z8/klDQ86fd1uvAiKxLnuqmm8afTQWfqctSbOQYyA2PNzEtGd1Kqm+tw0eSSso76oSq8m2oFL3EF3I245BLaooRun1NDauA1mptUqYGLYDbhT3pU9TyZMny9bbt63Wq96q/3mW6KOKVPZXkBB3/rmP1evPb2mj2piVCgjvGfJNvTcX3OMxMqxmgctFblK2PJh4uErMoomm+AERY3Fmgtbi1qKch02q8g8nlyMfvHAGKNTXqbkya+S5ZjJTkUfBN6sowHbgkbR3bnypNFdoEAsi6Q==
-Received: from LV8PR12MB9620.namprd12.prod.outlook.com (2603:10b6:408:2a1::19)
- by MW3PR12MB4476.namprd12.prod.outlook.com (2603:10b6:303:2d::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.14; Wed, 17 Jun
- 2026 12:16:17 +0000
-Received: from LV8PR12MB9620.namprd12.prod.outlook.com
- ([fe80::299d:f5e0:3550:1528]) by LV8PR12MB9620.namprd12.prod.outlook.com
- ([fe80::299d:f5e0:3550:1528%4]) with mapi id 15.21.0113.015; Wed, 17 Jun 2026
- 12:16:17 +0000
-Date: Wed, 17 Jun 2026 09:16:15 -0300
-From: Jason Gunthorpe <jgg@nvidia.com>
-To: "Tian, Kevin" <kevin.tian@intel.com>
-Message-ID: <20260617121615.GC3577711@nvidia.com>
-References: <20260610154327.37758-1-matt@ozlabs.org>
- <20260610154327.37758-7-matt@ozlabs.org>
- <aixgZQiBQKgS7yIM@google.com>
- <DM6PR11MB3690489DB5FA611413BF60558CE52@DM6PR11MB3690.namprd11.prod.outlook.com>
- <ajGbRE3WWJxNxcrg@google.com>
- <BYAPR11MB3687AE280241C9E00B46FCF98CE42@BYAPR11MB3687.namprd11.prod.outlook.com>
-Content-Disposition: inline
-In-Reply-To: <BYAPR11MB3687AE280241C9E00B46FCF98CE42@BYAPR11MB3687.namprd11.prod.outlook.com>
-X-ClientProxiedBy: BLAPR05CA0025.namprd05.prod.outlook.com
- (2603:10b6:208:335::6) To LV8PR12MB9620.namprd12.prod.outlook.com
- (2603:10b6:408:2a1::19)
+	by lists.linaro.org (Postfix) with ESMTP id 0898C44222
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Jun 2026 17:02:53 +0000 (UTC)
+Received: from mail.ozlabs.org (gandalf.ozlabs.org [150.107.74.76])
+	by lists.linaro.org (Postfix) with ESMTPS id B27F5401C7
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 17 Jun 2026 16:08:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ozlabs.org;
+	s=201707; t=1781712506;
+	bh=iNSRT2hb0fXFfhlPPxkBOn9HvsN6dd4fDBIz3jLODfQ=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=JWVm+/54yhfmSb/EXId5UbSd02676OxpqQAJWoCeilX3s2uzdFPO6YG658807iXTw
+	 yi/RcJPJB8JDKlp0HNWcOcS/011pyXYabPAWYkuj8581sTZAM/5hbBV0jQeO7I8CML
+	 9OMqXyvIxA9llD1i89OSEKImhVtuztxCitUsrIfEaQlVJ5iCfLobZPEivoJvYXuPvB
+	 CZeRDfW+5qf8YVGW+HSG/MBgeXclZVCmc9KcZunrynhtxZxViWzA/22WtIO9QmAle0
+	 wLqPxRE592aNX8njZsXzRPJP7criYf7oUJL1Nr3plB3winS2gejmQdUsHYzbqjGsXp
+	 xPJHaMIdAfDpg==
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(Client did not present a certificate)
+	by mail.ozlabs.org (Postfix) with ESMTPSA id 4ggTKs6hrMz4xGp;
+	Thu, 18 Jun 2026 02:08:17 +1000 (AEST)
+Message-ID: <31d1265b-e264-4dc6-a8c3-1b64dc9867a1@ozlabs.org>
+Date: Wed, 17 Jun 2026 17:08:14 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV8PR12MB9620:EE_|MW3PR12MB4476:EE_
-X-MS-Office365-Filtering-Correlation-Id: 012ef4f2-9a82-4193-f7c3-08decc6a3b6b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|23010399003|1800799024|7416014|376014|366016|22082099003|18002099003|4143699003|11063799006|56012099006;
-X-Microsoft-Antispam-Message-Info: 
-	pFm45ExgDSSwDtt+IR3JRa0rR+CtYrGtejn/pR4Jvid6FPt49/Ndf6i6+s7KRRA29IoeRT7cmRsnu11lluyQZpWl3LjX6I9aFVFvyUOBPihaXVbW1xlRV7yUs54Rkwvf3Syi2bcfxyquTa791FKucxCbIZDAxqHuCyYV533B61i+lsST+LVgamVO8rwnXlHeV5xowwPs6hbUfeJx76oDl1nf9j2DZMyNiu4PZl/ckmEf5o6/V+NeGVFTMkHXjOZxk6G4Ic/I7WgwdvkdYlkYdXh4szYcjbD6AIZOZTn7q78Na6cBQ+DIb3lOHD7dSfo9w7GjHKKveAe0K2qYS8AA1k1ZTy7yE7qI7WhjMNynR+dpuprstTfF/Ras2KjRu96+hmORGay6gDqd1kKpE3/LSPY4x42uKEnnE2pqmB8C8UEv12wWKD4rn9PYubuw/xZy7Us48e9SRy0fRgB/48ws5DtdPJZeNv38+WrwnfiFqpl4L9Ir6cof1NxY/XLkP9e+NbFTcD9xvlng+wJ22lcAKYHSBWx/0v+M1/ArNBLUxUzpzG+W8MNHhb3r7MkW+f0ASJQXZaE2Gz3Nit11edEegg1MMm6wQbUjvUOGHD/Ui/RdoF9YcgpMcZ72hItVE2Ebso2ZZaD4UJZONo1bli735QJLS8W5JzN+hzr2OhvV2/YuKspZSUoH2TNj4LaWGgb0
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LV8PR12MB9620.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(7416014)(376014)(366016)(22082099003)(18002099003)(4143699003)(11063799006)(56012099006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?r6TD6D84Fw03ZmNcgRwqmwmP5lMSiYS42bHLyJIGuT1Nr9kirFCCZG1V+Se7?=
- =?us-ascii?Q?LAtqoIz1jI/gvKlQz+W49vw5WaIJdDWPxTma309Akz2dGZZwNcB/ZqLuCsHv?=
- =?us-ascii?Q?2bHhwBBmlPISAziUws9TgUlluTz9NVkfQ+mThZL4PwEcFUzFrDXmbBP1jtcm?=
- =?us-ascii?Q?km0xgWkxeWkzqFlh0Q6sBSp3r4VWn4E8GXnYQfsk/EtHb74I9qELrY7ePqa3?=
- =?us-ascii?Q?KmlE/VTG/IQ6U7oIAD9KbTiuDF8vbWkhCxa9Pq8Bp65J6QXBPh5awpx3UUjI?=
- =?us-ascii?Q?ai7/vIrVKGC49WNUbOvxP/Gq1up5wK8YmpFzNa6LO8mO/7dR1Y6uuJZhvWWs?=
- =?us-ascii?Q?qW5RxuZgv+8kYeHHtySEKJwPnYz4KWODUP0w8pzBJiAp3vNbJJCOE5uuYLNG?=
- =?us-ascii?Q?nk22lm/3URKqQmGYtejRka9drBV2m9yw7GJCYRKmVWcLmFdqH+FqkSsmr91x?=
- =?us-ascii?Q?nPIUxShaXv4AMEDn1pEdpITZD/4E8AWtQFTVC9X0Hz5dGpg+kkWiDE3Gz9Nj?=
- =?us-ascii?Q?BfrMTdFwR6H7VWF36NmgKZsYE9C4LXi+7zVoo9RX/UiWrleDHAQ2olbih8iQ?=
- =?us-ascii?Q?fjkEs9ZezEvRy8SOB5ychc41zUZPuJ/4sPDQVbv8+16OWOAbVBTtZssUt3jm?=
- =?us-ascii?Q?UtIrNOgUXBiTrSvPrCOZ/lkBfkWN4PplN8tw795JnqcWfRvvSldLOIkUphfb?=
- =?us-ascii?Q?amhiVwPOz4GpnRHZUezo4/2SSRu0xopNKBXUgbBOeFw3XBMSPP7qXEkM4hq8?=
- =?us-ascii?Q?8fyUC6xxgg47MhQlC1Qv57kxClipA0gSR0xk68kxOvU0S/gTSxiVWeTK4Xs7?=
- =?us-ascii?Q?PwKbsLXC91H0CfclIlnCJs2nrwheAHxQtmOI2qVsvUJyVIuVabNtK4UlVPxg?=
- =?us-ascii?Q?IptSOIWhOd6qzAJNT35d1wUQKdXCT3hchdkucel5Gg5wXEzflm153n8OLaMH?=
- =?us-ascii?Q?Y1Mszk9D2PpuAE+qUaS8u4hkJ9hROpJnVH2u/wOB6Bg0BNziKHxqXImdcNP4?=
- =?us-ascii?Q?ieYoBOcx5fq835SuEKOMa8NIhpSdB9yaW31aLTG1phQCRDdrWZ4oId0xNTx8?=
- =?us-ascii?Q?k8334aQTr+itNq7PSvOftYS8v92MpnUKT0yRNxp6bJIQLWYfSsnZjeoa6EtW?=
- =?us-ascii?Q?DppIxBIMSVbpJsFo4AAxKZvxMdnVI0fA/t2ygE84FSrQtnsgjqPvqSYXSBbK?=
- =?us-ascii?Q?LMz7LSko6QHmivHsnhLYb5w/80I1vpiOWe9c8sTSeyBhIV8rdoa972Rkd2dZ?=
- =?us-ascii?Q?+EANK8aBhQgHMF+iJ034+izfWxw8nvj+TNnnoJMXLEiyeGDteTQn5E8NwNL4?=
- =?us-ascii?Q?91aK0DZz0DdBKHI7Ie7eG2zcmGf7pJ0+yjhrzToU1o/7a5wMnK1An1wb+Tzn?=
- =?us-ascii?Q?yMjC0+pChhwzE2jiXgRSzMuLO7tD0ZapCc79JsT+k0uanxnzKxWSUgxwCnTd?=
- =?us-ascii?Q?YXF1UOPOiFs4gYViG6iwBY8R8/TRz5zfTUx5wAAVX06RCfwxaUBi3LnnthzX?=
- =?us-ascii?Q?FDOZHZ0UdjMuuDieFLllIpJDPdb3SvWTXkyWs/hwQi8qNoXTlNpXRKKftCBH?=
- =?us-ascii?Q?7kzWlwr0RbXRloNgBU6DM84YLaovpFcyQnYubt5Z7s+mW9e7mihdsEjuGYFU?=
- =?us-ascii?Q?TTJ4lBcRvbvS7O73XLmpN67HG3EAPMEM1AldyW12/gXnbiVQH0pukq1KbEPx?=
- =?us-ascii?Q?+3NySW0Ee+YrlwppHK/ncPWVBGTKiV1L783EQUZkqlA9kE8Y?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 012ef4f2-9a82-4193-f7c3-08decc6a3b6b
-X-MS-Exchange-CrossTenant-AuthSource: LV8PR12MB9620.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2026 12:16:17.0473
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Z9f8BZQk/aK8ABhOfE7tO8ZhLhcdYRIt+XsCuQybshxQ69jXLvg08e20r9+5O1nm
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW3PR12MB4476
-X-Spamd-Bar: -----------
-Message-ID-Hash: Q44Q47LUOWH4BU3AJYRN2MRQOONC5KO7
-X-Message-ID-Hash: Q44Q47LUOWH4BU3AJYRN2MRQOONC5KO7
-X-MailFrom: jgg@nvidia.com
+User-Agent: Mozilla Thunderbird
+Content-Language: en-GB
+To: "Tian, Kevin" <kevin.tian@intel.com>
+References: <20260610154327.37758-1-matt@ozlabs.org>
+ <20260610154327.37758-9-matt@ozlabs.org>
+ <DM6PR11MB3690886693898AD755FB246F8CE52@DM6PR11MB3690.namprd11.prod.outlook.com>
+From: Matt Evans <matt@ozlabs.org>
+In-Reply-To: <DM6PR11MB3690886693898AD755FB246F8CE52@DM6PR11MB3690.namprd11.prod.outlook.com>
+X-Spamd-Bar: ---
+X-MailFrom: matt@ozlabs.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Pranjal Shrivastava <praan@google.com>, Matt Evans <matt@ozlabs.org>, Alex Williamson <alex@shazbot.org>, Leon Romanovsky <leon@kernel.org>, Alex Mastro <amastro@fb.com>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Bjorn Helgaas <bhelgaas@google.com>, Logan Gunthorpe <logang@deltatee.com>, Mahmoud Adam <mngyadam@amazon.de>, David Matlack <dmatlack@google.com>, =?utf-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Ankit Agrawal <ankita@nvidia.com>, Alistair Popple <apopple@nvidia.com>, "Kasireddy, Vivek" <vivek.kasireddy@intel.com>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "kvm@vger.kernel.org" <kvm@vger.kernel.org>, "linux-pci@vger.kernel.org" <linux-pci@vger.kernel.org>
+Message-ID-Hash: KIEQYWSMSI7YBJ5DBBRABCOR6FDDFOUN
+X-Message-ID-Hash: KIEQYWSMSI7YBJ5DBBRABCOR6FDDFOUN
+X-Mailman-Approved-At: Thu, 25 Jun 2026 17:01:21 +0000
+CC: Alex Williamson <alex@shazbot.org>, Leon Romanovsky <leon@kernel.org>, Jason Gunthorpe <jgg@nvidia.com>, Alex Mastro <amastro@fb.com>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Bjorn Helgaas <bhelgaas@google.com>, Logan Gunthorpe <logang@deltatee.com>, Mahmoud Adam <mngyadam@amazon.de>, David Matlack <dmatlack@google.com>, =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Ankit Agrawal <ankita@nvidia.com>, Pranjal Shrivastava <praan@google.com>, Alistair Popple <apopple@nvidia.com>, "Kasireddy, Vivek" <vivek.kasireddy@intel.com>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "kvm@vger.kernel.org" <kvm@vger.kernel.org>, "linux-pci@vger.kernel.org" <linux-pci@vger.kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3 6/9] vfio/pci: Clean up BAR zap and revocation
+Subject: [Linaro-mm-sig] Re: [PATCH v3 8/9] vfio/pci: Permanently revoke a DMABUF on request
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/Q44Q47LUOWH4BU3AJYRN2MRQOONC5KO7/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KIEQYWSMSI7YBJ5DBBRABCOR6FDDFOUN/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -134,71 +68,130 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [3.49 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[nvidia.com : SPF not aligned (relaxed),reject];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
-	R_DKIM_REJECT(1.00)[Nvidia.com:s=selector2];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+X-Spamd-Result: default: False [1.59 / 15.00];
+	R_DKIM_REJECT(1.00)[ozlabs.org:s=201707];
+	DATE_IN_PAST(1.00)[192];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[ozlabs.org : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:kevin.tian@intel.com,m:praan@google.com,m:matt@ozlabs.org,m:alex@shazbot.org,m:leon@kernel.org,m:amastro@fb.com,m:christian.koenig@amd.com,m:bhelgaas@google.com,m:logang@deltatee.com,m:mngyadam@amazon.de,m:dmatlack@google.com,m:bjorn@kernel.org,m:sumit.semwal@linaro.org,m:ankita@nvidia.com,m:apopple@nvidia.com,m:vivek.kasireddy@intel.com,m:linux-kernel@vger.kernel.org,m:linux-media@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,m:kvm@vger.kernel.org,m:linux-pci@vger.kernel.org,s:lists@lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	FORGED_SENDER(0.00)[jgg@nvidia.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FORGED_RECIPIENTS(0.00)[m:kevin.tian@intel.com,m:alex@shazbot.org,m:leon@kernel.org,m:jgg@nvidia.com,m:amastro@fb.com,m:christian.koenig@amd.com,m:bhelgaas@google.com,m:logang@deltatee.com,m:mngyadam@amazon.de,m:dmatlack@google.com,m:bjorn@kernel.org,m:sumit.semwal@linaro.org,m:ankita@nvidia.com,m:praan@google.com,m:apopple@nvidia.com,m:vivek.kasireddy@intel.com,m:linux-kernel@vger.kernel.org,m:linux-media@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,m:kvm@vger.kernel.org,m:linux-pci@vger.kernel.org,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[3];
+	FORGED_SENDER(0.00)[matt@ozlabs.org,linaro-mm-sig-bounces@lists.linaro.org];
 	FORWARDED(0.00)[lists@lfdr.de];
-	DKIM_TRACE(0.00)[Nvidia.com:-];
-	MISSING_XM_UA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[22];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jgg@nvidia.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[ozlabs.org:-];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[matt@ozlabs.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp,nvidia.com:mid,nvidia.com:from_mime]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:email,ozlabs.org:email,ozlabs.org:mid,ozlabs.org:from_mime,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp,linaro.org:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: BFD15699AEB
+X-Rspamd-Queue-Id: E55FE6C7AA9
 
-On Wed, Jun 17, 2026 at 06:22:59AM +0000, Tian, Kevin wrote:
-> > > > I'm wondering if this change in behavior is correct?
-> > > > BEFORE this patch the sequence was:
-> > > >
-> > > > 1. zap vma mappings
-> > > > 2. Enter D0
-> > > >
-> > > > After this patch the sequence becomes
-> > > >
-> > > > 1. Take the lock
-> > > > 2. Enter D0
-> > > > 3. zap vma mappings
-> > > >
-> > > > My worry is if user-space accesses a BAR *during* the transition to D0,
-> > > > it could crash since the mappings still exist during the transition?
-> > >
-> > > not 'crash' as you also noted later with all Fs on read and dropped writes.
-> > 
-> > Ack, "crash" is definitely a strong word, I just meant that the
-> > user-space program isn't expecting to see all Fs today. Since today any
-> > access during reset is faulted, however with this all apps may have to
-> > lookout for all Fs during a read. Could this change cause existing apps
-> > to crash?
+Hi Kevin,
 
-I don't think that order should be changed, you might get an AER on
-access in D0 too..
+On 16/06/2026 10:26, Tian, Kevin wrote:
+>> From: Matt Evans <matt@ozlabs.org>
+>> Sent: Wednesday, June 10, 2026 11:43 PM
+>>
+>> Expand the VFIO DMABUF revocation state to three states:
+>> Not revoked, temporarily revoked, and permanently revoked.
+>>
+>> The first two are for existing transient revocation, e.g. across a
+>> function reset, and the DMABUF is put into the last in response to a
+>> new VFIO feature VFIO_DEVICE_FEATURE_DMA_BUF.
+> 
+> VFIO_DEVICE_FEATURE_DMA_BUF_REVOKE
+> 
+>>
+>> VFIO_DEVICE_FEATURE_DMA_BUF passes a DMABUF by fd and requests that
+>> the DMABUF is permanently revoked.  On success, it's guaranteed that
+> 
+> ditto
 
-The purpose of all this zappery is to only allow access while the
-device is fully operating normally.
+Argh, thanks for catching these.  Fixed.
 
-Jason
+>> the buffer can never be imported/attached/mmap()ed in future, that
+>> dynamic imports have been cleanly detached, and that all mappings have
+>> been made inaccessible/PTEs zapped.
+>>
+>> This is useful for lifecycle management, to reclaim VFIO PCI BAR
+>> ranges previously delegated to a subordinate client process: The
+>> driver process can ensure that the loaned resources are revoked when
+>> the client is deemed "done", and exported ranges can be safely re-used
+>> elsewhere.
+> 
+> probably clarify that re-use by creating a new dmabuf fd as the original
+> one is essentially zombie now.
+
+Reworded this, plus added a note re the change below.
+
+>>
+>> +/* Set the DMABUF's revocation status (OK or temporarily/permanently
+>> revoked) */
+>> +static void vfio_pci_dma_buf_set_status(struct vfio_pci_dma_buf *priv,
+>> +					enum vfio_pci_dma_buf_status
+>> new_status)
+>> +{
+>> +	bool was_revoked;
+>> +
+>> +	lockdep_assert_held_write(&priv->vdev->memory_lock);
+>> +
+>> +	if (priv->status == VFIO_PCI_DMABUF_PERM_REVOKED ||
+>> +	    priv->status == new_status) {
+>> +		return;
+>> +	}
+> 
+> the only interface to request PERM_REVOKED is via the new ioctl.
+> 
+> vfio_pci_core_feature_dma_buf_revoke() returns -EBADFD if
+> it's already in PERM_REVOKED.
+> 
+> so this check shouldn't be reached, suggesting a warning.
+
+Good point, both any change to PERM_REVOKED or a double-set of the same
+state indicate some caller has gone wrong.  Added a warning.
+
+>> +
+>> +	dma_buf_invalidate_mappings(priv->dmabuf);
+>> +	dma_resv_wait_timeout(priv->dmabuf->resv,
+>> +			      DMA_RESV_USAGE_BOOKKEEP, false,
+>> +			      MAX_SCHEDULE_TIMEOUT);
+>> +	dma_resv_unlock(priv->dmabuf->resv);
+> 
+> It's existing code but while at it let's make above conditional to
+> the actual revoke path. for unrevoked it's not required given the
+> previous revoke already cleans up everything.
+
+I noticed this too though I was consciously trying to keep the diff as
+small as possible.  But with this feedback from both you and Praan, I'll
+move this.  It's still pretty readable before/after.
+
+> otherwise,
+> 
+> Reviewed-by: Kevin Tian <kevin.tian@intel.com>
+
+
+Thank you.
+
+
+Matt
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
