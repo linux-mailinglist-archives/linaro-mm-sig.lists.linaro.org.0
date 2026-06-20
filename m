@@ -2,66 +2,64 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id zKP0NaZcNWouuAYAu9opvQ
+	id Mh3GCyLkNmr+FwcAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 19 Jun 2026 17:13:42 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 20 Jun 2026 21:04:02 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 57CBA6A69E5
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 19 Jun 2026 17:13:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A86266A98AE
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 20 Jun 2026 21:04:01 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=ozlabs.org header.s=201707 header.b=lUkthRMa;
+	dkim=fail ("body hash did not verify") header.d=wanadoo.fr header.s=t20230301 header.b=Ew2OekyL;
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
-	dmarc=fail reason="SPF not aligned (relaxed)" header.from=ozlabs.org (policy=none)
+	dmarc=fail reason="SPF not aligned (relaxed)" header.from=wanadoo.fr (policy=quarantine)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4BEFF40AF1
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 19 Jun 2026 15:13:41 +0000 (UTC)
-Received: from mail.ozlabs.org (gandalf.ozlabs.org [150.107.74.76])
-	by lists.linaro.org (Postfix) with ESMTPS id 88CB73F99D
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 19 Jun 2026 15:13:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ozlabs.org;
-	s=201707; t=1781882009;
-	bh=1QsRTYJv/V6JQEsJMUbrHpG1B6cDUyuPuUiING2oFTI=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=lUkthRMaMEeqVhJ8JXxzh47Cl37fr8eNRTUlNw836+uLH/GZEf0zWkG+E4S01Jnfq
-	 YecdbiYTR+EzcalQYxIewQt1Rsv18MbUkpypGzNciItddrdKiD5Vmf6Mngrf7XIuwb
-	 RWJnYDiDJjQPb5igfdeb9udbwasF6bzYEpndpPzgRdMgEM/lnY/XUiM/CmickBaHvc
-	 ZkTrzjMlrxD635nTa02lPJiqeEF7r1F6Q/QKG29qlWIghwNZncR6BAY3zqxshSRce+
-	 Fx3CFwcDsgjHmzVL1h8IEkn+A0/L8espl1qdYSUar5Ma/bBcUv0O1ddWlMpELXpS95
-	 EYWQsk27ya2sQ==
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(Client did not present a certificate)
-	by mail.ozlabs.org (Postfix) with ESMTPSA id 4ghh1X2w4Tz4w1W;
-	Sat, 20 Jun 2026 01:13:20 +1000 (AEST)
-Message-ID: <55ea7422-08d8-4c92-aa59-8ff6f9e9d781@ozlabs.org>
-Date: Fri, 19 Jun 2026 16:13:17 +0100
+	by lists.linaro.org (Postfix) with ESMTP id 3063040AF7
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 20 Jun 2026 19:04:00 +0000 (UTC)
+Received: from smtp.smtpout.orange.fr (smtp-79.smtpout.orange.fr [80.12.242.79])
+	by lists.linaro.org (Postfix) with ESMTPS id 756AB3F91D
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 20 Jun 2026 19:03:50 +0000 (UTC)
+Received: from fedora.home ([IPv6:2a01:cb10:785:b00:8347:f260:7456:7662])
+	by smtp.orange.fr with ESMTPSA
+	id b0yqwzd9alGVGb0yqw9nCW; Sat, 20 Jun 2026 21:03:49 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=wanadoo.fr;
+	s=t20230301; t=1781982229;
+	bh=Tnzf/9MYbLhRoMLq6dvHjdTcKxmYKFVyOTlXu1yZe5k=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version;
+	b=Ew2OekyL8uTsQBxLeGyJ/LlvqL1cjFH8Bow26ldviiQkX9Q/ZNjmn07ByMPeELrTT
+	 UsCIdcryBYHQBcS0LwgFgaNwybqnw9aMrMvW98+GLVP0SbSWqG3csVG/QMiT48Bf8+
+	 E5hJHgcYSufOO9UoOUgB9saZhP3165/TSEOhavNJzRX3o+/cQ4CSH8lOPbAXiXT7de
+	 w8weFMji3UvE4PxqFZsxfZrpKuMuDLboveiAzElEUzH8vuntXjAXDXg/jsRlZxewK5
+	 U3K0/L/g8V29TtU0QLVt3F40H5qaRTvG5mXVt4mkotb3FauiMePD+EkSx/xYQBQxM3
+	 EDzzek7axzvbw==
+X-ME-Helo: fedora.home
+X-ME-Auth: Y2hyaXN0b3BoZS5qYWlsbGV0QHdhbmFkb28uZnI=
+X-ME-Date: Sat, 20 Jun 2026 21:03:49 +0200
+X-ME-IP: 2a01:cb10:785:b00:8347:f260:7456:7662
+From: Christophe JAILLET <christophe.jaillet@wanadoo.fr>
+To: Felix Kuehling <Felix.Kuehling@amd.com>,
+	Alex Deucher <alexander.deucher@amd.com>,
+	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+	David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Xiaogang Chen <xiaogang.chen@amd.com>
+Date: Sat, 20 Jun 2026 21:03:45 +0200
+Message-ID: <44cbc1d12fc00121d40ce793074bc5e1d497c932.1781982199.git.christophe.jaillet@wanadoo.fr>
+X-Mailer: git-send-email 2.54.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-GB
-To: Jason Gunthorpe <jgg@nvidia.com>
-References: <20260610154327.37758-1-matt@ozlabs.org>
- <20260610154327.37758-7-matt@ozlabs.org> <aixgZQiBQKgS7yIM@google.com>
- <DM6PR11MB3690489DB5FA611413BF60558CE52@DM6PR11MB3690.namprd11.prod.outlook.com>
- <ajGbRE3WWJxNxcrg@google.com>
- <BYAPR11MB3687AE280241C9E00B46FCF98CE42@BYAPR11MB3687.namprd11.prod.outlook.com>
- <24f34e59-7c3b-4b56-83bf-cb07e3f369a6@ozlabs.org>
- <20260619133116.GB278945@nvidia.com>
-From: Matt Evans <matt@ozlabs.org>
-In-Reply-To: <20260619133116.GB278945@nvidia.com>
-X-Spamd-Bar: ----
-Message-ID-Hash: C6YSZC6QODIRG2BZ355JZPWDYV44CIET
-X-Message-ID-Hash: C6YSZC6QODIRG2BZ355JZPWDYV44CIET
-X-MailFrom: matt@ozlabs.org
-X-Mailman-Rule-Hits: member-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
-CC: "Tian, Kevin" <kevin.tian@intel.com>, Pranjal Shrivastava <praan@google.com>, Alex Williamson <alex@shazbot.org>, Leon Romanovsky <leon@kernel.org>, Alex Mastro <amastro@fb.com>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Bjorn Helgaas <bhelgaas@google.com>, Logan Gunthorpe <logang@deltatee.com>, Mahmoud Adam <mngyadam@amazon.de>, David Matlack <dmatlack@google.com>, =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Ankit Agrawal <ankita@nvidia.com>, Alistair Popple <apopple@nvidia.com>, "Kasireddy, Vivek" <vivek.kasireddy@intel.com>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "kvm@vger.kernel.org" <kvm@vger.kernel.org>, "linux-pci@vger.kernel.org" <linux-pci@vger.kernel.org>
+X-Spamd-Bar: --
+Message-ID-Hash: BYVYYIRZXUUDV3EVDXJA7MY3LUMVTG4D
+X-Message-ID-Hash: BYVYYIRZXUUDV3EVDXJA7MY3LUMVTG4D
+X-MailFrom: christophe.jaillet@wanadoo.fr
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: linux-kernel@vger.kernel.org, kernel-janitors@vger.kernel.org, Christophe JAILLET <christophe.jaillet@wanadoo.fr>, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3 6/9] vfio/pci: Clean up BAR zap and revocation
+Subject: [Linaro-mm-sig] [PATCH] drm/amdkfd: Fix an error handling path in amdgpu_amdkfd_get_dmabuf_info()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/C6YSZC6QODIRG2BZ355JZPWDYV44CIET/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/BYVYYIRZXUUDV3EVDXJA7MY3LUMVTG4D/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -71,69 +69,71 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [0.59 / 15.00];
-	R_DKIM_REJECT(1.00)[ozlabs.org:s=201707];
+X-Spamd-Result: default: False [2.99 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[wanadoo.fr : SPF not aligned (relaxed),quarantine];
+	MID_CONTAINS_FROM(1.00)[];
+	R_DKIM_REJECT(1.00)[wanadoo.fr:s=t20230301];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx];
-	DMARC_POLICY_SOFTFAIL(0.10)[ozlabs.org : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_COUNT_THREE(0.00)[3];
-	FORGED_RECIPIENTS(0.00)[m:jgg@nvidia.com,m:kevin.tian@intel.com,m:praan@google.com,m:alex@shazbot.org,m:leon@kernel.org,m:amastro@fb.com,m:christian.koenig@amd.com,m:bhelgaas@google.com,m:logang@deltatee.com,m:mngyadam@amazon.de,m:dmatlack@google.com,m:bjorn@kernel.org,m:sumit.semwal@linaro.org,m:ankita@nvidia.com,m:apopple@nvidia.com,m:vivek.kasireddy@intel.com,m:linux-kernel@vger.kernel.org,m:linux-media@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,m:kvm@vger.kernel.org,m:linux-pci@vger.kernel.org,s:lists@lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER(0.00)[matt@ozlabs.org,linaro-mm-sig-bounces@lists.linaro.org];
-	ARC_NA(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:Felix.Kuehling@amd.com,m:alexander.deucher@amd.com,m:christian.koenig@amd.com,m:airlied@gmail.com,m:simona@ffwll.ch,m:sumit.semwal@linaro.org,m:xiaogang.chen@amd.com,m:linux-kernel@vger.kernel.org,m:kernel-janitors@vger.kernel.org,m:christophe.jaillet@wanadoo.fr,m:amd-gfx@lists.freedesktop.org,m:dri-devel@lists.freedesktop.org,m:linux-media@vger.kernel.org,m:linaro-mm-sig@lists.linaro.org,s:lists@lfdr.de];
+	FREEMAIL_TO(0.00)[amd.com,gmail.com,ffwll.ch,linaro.org];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[14];
+	FORGED_SENDER(0.00)[christophe.jaillet@wanadoo.fr,linaro-mm-sig-bounces@lists.linaro.org];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FREEMAIL_CC(0.00)[vger.kernel.org,wanadoo.fr,lists.freedesktop.org,lists.linaro.org];
+	DKIM_TRACE(0.00)[wanadoo.fr:-];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[matt@ozlabs.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_NEQ_ENVFROM(0.00)[christophe.jaillet@wanadoo.fr,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[ozlabs.org:-];
-	MID_RHS_MATCH_FROM(0.00)[];
+	FREEMAIL_FROM(0.00)[wanadoo.fr];
+	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[ozlabs.org:mid,ozlabs.org:from_mime,linaro.org:email]
+	TO_DN_SOME(0.00)[]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 57CBA6A69E5
+X-Rspamd-Queue-Id: A86266A98AE
 
-Hi Jason,
+If the memory allocation fails, the reference on 'dma_buf' still needs to
+be released, as already done in the other error handling path.
 
-On 19/06/2026 14:31, Jason Gunthorpe wrote:
-> On Thu, Jun 18, 2026 at 05:02:58PM +0100, Matt Evans wrote:
-> 
->> My understanding is that the sequences above wake a device that happens
->> to have previously been put into D3, and AFAICT it could only have got
->> there because of a previous vfio_pci_set_power_state().  Seems its only
->> caller is from the emulation of PCI_PM_CTRL using
->> vfio_lock_and_set_power_state(), and this zaps/revokes BAR access before
->> a transition to D3.  Similarly, an attempt to access a BAR via an
->> ioctl/through vfio_pci_core_do_io_rw() fails the D3 check in
->> __vfio_pci_memory_enabled(), and besides will try to take the memory_lock.
-> 
-> I thought the general design was the bars were made inaccessible
-> before going to a low power state, and remain inaccessible while it is
-> in low power?
-> 
-> So the order of D0 doesn't matter. If it is not in D0 then there is no
-> mappings and zap/revoke is a NOP.
-> 
-> If is it in D0 then it doesn't matter because D0 is a nop.
-Yes, that's what I'm getting at. :)  If it's in D3 then BARs are
-inaccessible, so as long as we go into D0 before the DMABUF move, the
-order of the zap relative to the "go to D0" doesn't matter.
+Fixes: f54ce9e8cbd3 ("drm/amdkfd: Let driver decide buffer size at AMDKFD_IOC_GET_DMABUF_INFO ioctl")
+Signed-off-by: Christophe JAILLET <christophe.jaillet@wanadoo.fr>
+---
+Compile tested only
+---
+ drivers/gpu/drm/amd/amdgpu/amdgpu_amdkfd.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-
-M
-
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_amdkfd.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_amdkfd.c
+index c693c508df1a..e1afdad07c43 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_amdkfd.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_amdkfd.c
+@@ -603,8 +603,10 @@ int amdgpu_amdkfd_get_dmabuf_info(struct amdgpu_device *adev, int dma_buf_fd,
+ 		if (*metadata_size <= buffer_size) {
+ 			*metadata_buffer = kzalloc(*metadata_size, GFP_KERNEL);
+ 
+-			if (!*metadata_buffer)
+-				return -ENOMEM;
++			if (!*metadata_buffer) {
++				r = -ENOMEM;
++				goto out_put;
++			}
+ 
+ 			r = amdgpu_bo_get_metadata(bo, *metadata_buffer, *metadata_size,
+ 						   NULL, &metadata_flags);
+-- 
+2.54.0
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
