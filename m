@@ -2,41 +2,39 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 0jVJM+YhOWpInQcAu9opvQ
+	id Y/DxCisiOWpMnQcAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 22 Jun 2026 13:52:06 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 22 Jun 2026 13:53:15 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1A81E6AF399
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 22 Jun 2026 13:52:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A97F76AF39D
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 22 Jun 2026 13:53:14 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
 	dkim=none;
 	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=gmail.com (policy=none);
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org"
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 28DA940A6E
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 22 Jun 2026 11:52:05 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id BF30D40A6E
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 22 Jun 2026 11:53:13 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0648D40976
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 22 Jun 2026 11:52:00 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 72C1B40976
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 22 Jun 2026 11:53:08 +0000 (UTC)
 MIME-Version: 1.0
 From: fashionluxurybazaar1004@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Mon, 22 Jun 2026 11:52:00 -0000
-Message-ID: <178212912002.377921.9210144473573814400@lists.linaro.org>
-In-Reply-To: <178209719759.3907080.8116370235548004901@lists.linaro.org>
-References: <178209719759.3907080.8116370235548004901@lists.linaro.org>
+Date: Mon, 22 Jun 2026 11:53:08 -0000
+Message-ID: <178212918846.380012.14507002196128057694@lists.linaro.org>
 User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: W4UMVVGI47JOAOOWNAFKCDM4ALRKCEWL
-X-Message-ID-Hash: W4UMVVGI47JOAOOWNAFKCDM4ALRKCEWL
+Message-ID-Hash: Y4NLQXJV744IHBVVZDRO7CXSMIKZMMRD
+X-Message-ID-Hash: Y4NLQXJV744IHBVVZDRO7CXSMIKZMMRD
 X-MailFrom: fashionluxurybazaar1004@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] =?utf-8?q?Re=3A_Sprunki_Game_=E2=80=93_A_Musical_Adventure_Where_Each_Player_Can_Create_Their_Own_World?=
+Subject: [Linaro-mm-sig] BOVET RECITAL 16 Triple Time Zone Tourbillon Watch
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/W4UMVVGI47JOAOOWNAFKCDM4ALRKCEWL/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/Y4NLQXJV744IHBVVZDRO7CXSMIKZMMRD/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -74,11 +72,33 @@ X-Spamd-Result: default: False [0.59 / 15.00];
 	R_DKIM_NA(0.00)[];
 	FROM_NO_DN(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:mid,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp,moon-watch.co.uk:url]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[moon-watch.co.uk:url,linaro.org:email,reviewluxurystore.com:url]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 1A81E6AF399
+X-Rspamd-Queue-Id: A97F76AF39D
+
+BOVET RECITAL 16 Triple Time Zone Tourbillon Watch 
+
+
+
+Classic and traditional, the Bovet Recital collection is stunning, and this latest 16-time-zone triple time zone tourbillon watch is truly exceptional. Belonging to the Dimier series, its distinctive feature is the absence of the "ribbon" crown guard at 12 o'clock. Therefore, despite its complex and intricate design, the crown at 3 o'clock retains a very traditional style.
+
+This watch is powered by the "Calibre Rising Star II" mechanical movement, displaying the time in major cities as well as two other cities. The highlight of this timepiece is that it is not merely an elegant timepiece, but a technical masterpiece and exquisite design. Like its watch collection, the brand is unique, producing not only its own movements but also many components such as the case and dial. Due to its superb craftsmanship, other brands seek their assistance.
+
+https://www.chrono-wrist.co.uk/
 
 https://www.moon-watch.co.uk/
+
+https://www.perfectwrist.co/
+
+https://www.reviewluxurystore.com/
+
+Bovet does not follow trends, adhering to its own path and setting the highest standards in the field of design. From top to bottom, the brand upholds a passion for creation, a dedication to quality, and an unyielding pursuit of excellence. The Recital 16 Three Time Zone Tourbillon watch is available in two styles: 18K red gold and 18K white gold. The white gold version is adorned with exquisite decorations, such as mother-of-pearl dials for the second and third time zones, and a bezel set with dazzling baguette-cut diamonds.
+
+This 46mm watch is not a slim design, but this is precisely what gives it a masculine feel and makes it exceptionally comfortable to wear. A round blue sapphire crystal is set in the crown, reminiscent of a classic Cartier piece. Adjusting the time is a pleasure in itself, and the simultaneous movement of the three dials is a feast for the eyes. The function of adjusting all time zones simultaneously is simple yet sophisticated, and it can even synchronize the minute hand.
+
+The Bovet Recital 16 watch strives to combine practicality with exquisite beauty. You might think that having two additional time zone displays is practical enough, but what's even more surprising is that each time zone also features an independent day/night indicator and a reference city indicator, making it a true travel essential. Since the time zones use a 12-hour system, the day/night indicator is equally useful in other aspects. Buttons on the side of the case allow for easy adjustment of the second and third time zone indicators on the dial.
+
+This watch features a 7-day power reserve movement and an open design without a traditional dial, offering a wide field of vision. The hands and markers are coated with luminescent material for excellent legibility, complementing the overall style of the watch. This timepiece will undoubtedly be a collector's item, but the brand positions it as a niche timepiece, designed specifically for consumers who aspire to enter the luxury market.
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
