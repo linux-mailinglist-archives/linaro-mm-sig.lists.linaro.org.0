@@ -2,175 +2,195 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id HqtGBb/GOmp9GggAu9opvQ
+	id tmH9CgfzOmq8MggAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 23 Jun 2026 19:47:43 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 23 Jun 2026 22:56:39 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 842636B9382
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 23 Jun 2026 19:47:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9C5C96BA298
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 23 Jun 2026 22:56:38 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=ozlabs.org header.s=201707 header.b=Kki45cJZ;
+	dkim=fail ("body hash did not verify") header.d=google.com header.s=20251104 header.b=vq3m9ap4;
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
-	dmarc=fail reason="SPF not aligned (relaxed)" header.from=ozlabs.org (policy=none)
+	dmarc=fail reason="SPF not aligned (relaxed)" header.from=google.com (policy=reject)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 96EDC4010F
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 23 Jun 2026 17:47:41 +0000 (UTC)
-Received: from mail.ozlabs.org (gandalf.ozlabs.org [150.107.74.76])
-	by lists.linaro.org (Postfix) with ESMTPS id 085D83F796
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 23 Jun 2026 17:47:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ozlabs.org;
-	s=201707; t=1782236848;
-	bh=YnpLj85EVGFLS082aT9C1I8KDlkyXpsPGbTho/uxSLo=;
-	h=Date:Subject:From:To:Cc:References:In-Reply-To:From;
-	b=Kki45cJZWsx9YAZgIjFlNXBh4gxmehNd4vPdhDGqbXNckYAUWcNK5NrOjxPnNhA0I
-	 QtvyyFV0Eoh8ZNWJ7aIXyTto6helylau76gRUqZWbHqMWu67oqEojo8vwKq+EsHq6N
-	 qCqcCGyNAYXq6mJLW+VOFY+Z41U9sdcsKlCkoZYyHf6ZwhMlYFnVbTEvkDeIp8eWCU
-	 l96EoKWxeFlRbsj1l3UQV2fwAJuTACjiUyG5IG6lkYNHFMY9/TH/nv4V27mR0Ii/oD
-	 g4Jpo55fotZNFVbkMuFlvwAb3414y7QDk/0X40yG4cgrli+myDrMBQmXrhUoGuIT0C
-	 y7iLzj3Cuv5fA==
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(Client did not present a certificate)
-	by mail.ozlabs.org (Postfix) with ESMTPSA id 4glCFN67bcz4wB7;
-	Wed, 24 Jun 2026 03:47:20 +1000 (AEST)
-Message-ID: <feaefa41-9f67-4d4f-a3e0-282dca41f3eb@ozlabs.org>
-Date: Tue, 23 Jun 2026 18:47:14 +0100
+	by lists.linaro.org (Postfix) with ESMTP id 82C4F40A69
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 23 Jun 2026 20:56:37 +0000 (UTC)
+Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
+	by lists.linaro.org (Postfix) with ESMTPS id 240133F6BD
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 23 Jun 2026 20:56:28 +0000 (UTC)
+Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-2c6a4eccab1so4405ad.1
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 23 Jun 2026 13:56:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20251104; t=1782248187; x=1782852987; darn=lists.linaro.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=tDNBIwJuw+D53Ki5EAv9tDfTFhNZX4Fj7K/EJveLoSA=;
+        b=vq3m9ap4+UaiqxVKbhRCafoTMqIv+DAqqQ/JdsC7UdIZPX7Cl0NYMPUmSDKSOHzGvN
+         JtP7HA+uOZlSYSWW4Nlsqz4oaDEYCrzkSNsg7L1WjAVSnRQ6ZX/67OStEF2L3HCFuKIg
+         I+jWXbpzuDuQ42ygScLlfJ88Z52W1b+95V6wX+khobTzkS/JnUAVmuqFe+DlvyPuTC0i
+         ft2zbibxQuvI5zdFbZSzeOnnhW6HsJDr1/LRzBfvftmEKFsTstVl1KX5utHFTLyvwZEv
+         XLgsePoe4sfZ/xxVwkYuin8I02/MfyRPQa1KRmpJU8p8GQY4+0D5slmVZSN5k6yax3Bq
+         5CVw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1782248187; x=1782852987;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=tDNBIwJuw+D53Ki5EAv9tDfTFhNZX4Fj7K/EJveLoSA=;
+        b=PwMeeMQ2Goi53BMiVcCkYsd/EI8YfeAa5FAPhxULXe5dY/7Y0YAGq48N8EC7WWcHyE
+         pNukzrAuMYZMDd86vgjjyyli0jr9eFdazNzp0gmrKPIWuMkNQB/mnIuKoWAwHcMJ6bNL
+         86+EaeL/BiEHPVS3EOSzaJ41LMTKmo9uus61nl5u1+WR4Mj3qPsptOPTlZtjfQFacV+p
+         rmqCo/bW879Qp7q/SL8BtwzE6M3srcH4bcrhp1jEjNtyXCjoNkCsM1H60WNERiautuNj
+         iBmBgaTwNEu2Cd1Qm2dtCDYyBfr1hACkLFtY/AHa/h5arwcdIOFfgUOmlUJ6XM6B7aly
+         hgOQ==
+X-Forwarded-Encrypted: i=1; AHgh+Rq/eiN2mHwwwYhf56Z7XHsdZPkwUTUtF21Zp5KZkdy09ybCPvJ8k6BrUNJPYx4tMUNiQglPLEFanhQI+m7l@lists.linaro.org
+X-Gm-Message-State: AOJu0Yw6hx/d9tTag2ghTP7AosDK7/LoXwOSqgGrvBP95spJpgl4YmJl
+	etszlkxcgplwiLPJWBQMxzB9BBxySTuaJCxPobdc8GTJRdLu2XY2RriCvuTZPkO8Pw==
+X-Gm-Gg: AfdE7cmTEKPsWecir3nIJIQc+tgctgbg6lYgULBP1b6MphMeHBd1+5SdCOj9mFAu5Gr
+	HTFIusdOZYT6m9uqugI3+BHgSU4K2TtIPfkCSsf6R5uHfNkIwTmFMw5mvny4KKgSfuvC14XA87c
+	0fjWYbJfFCCReoNfqWwswTChE6WZO1oPYh4TrSANDiOFf9Lp13vPoA14rb1S/Hc/vssEM2GPoF9
+	iQ5zR29PduTPJH52rl3ngONNTKTvXjoifP4of06TdECgnaDGOX2EjmM6XEvoI6urazVd7lC6RuQ
+	yyfohJbWDG4Y5ykwLVXaUDHcRcmCcDQWQUOuhXuYZE9e7C3BU8671/A19xdYeFxyo6DpTxewxNH
+	Hmi8sB0nn+vwqY2sBHy8IdnYNzNiAZgtOAv9y19+U0PXOMRvlh5g4Dm/i3wVfgyNs+0HK6ZFCWc
+	lgHznv2sG96CGgK9VanD+JCmRe1eQiv0uyXQZ96zhBpSv6Qr8JsQ==
+X-Received: by 2002:a17:902:f689:b0:2bf:3741:5b76 with SMTP id d9443c01a7336-2c7e26b7724mr203255ad.3.1782248140960;
+        Tue, 23 Jun 2026 13:55:40 -0700 (PDT)
+Received: from google.com (199.255.142.34.bc.googleusercontent.com. [34.142.255.199])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-845a40d1b0fsm54433b3a.28.2026.06.23.13.55.36
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 23 Jun 2026 13:55:40 -0700 (PDT)
+Date: Tue, 23 Jun 2026 20:55:32 +0000
+From: Pranjal Shrivastava <praan@google.com>
+To: David Laight <david.laight.linux@gmail.com>
+Message-ID: <ajryxMaT5evDUxaq@google.com>
+References: <20260621222130.1667453-1-xuehaohu@google.com>
+ <20260623015459.1153884-1-xuehaohu@google.com>
+ <20260623094446.4a8fc2ed@pumpkin>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-GB
-From: Matt Evans <matt@ozlabs.org>
-To: Robin Murphy <robin.murphy@arm.com>, "Tian, Kevin"
- <kevin.tian@intel.com>, Pranjal Shrivastava <praan@google.com>
-References: <20260610154327.37758-1-matt@ozlabs.org>
- <20260610154327.37758-2-matt@ozlabs.org> <aisAc1HRn2Wa4F9p@google.com>
- <DM6PR11MB36904ED2E1D2C646644F67668C182@DM6PR11MB3690.namprd11.prod.outlook.com>
- <0dfadf98-a904-4e6a-b078-5caf27bc7922@ozlabs.org>
- <81a9d212-996e-42e1-aabf-b120a13e94c3@arm.com>
- <88a9ebaa-8637-4290-b299-acae0e3065f8@ozlabs.org>
-In-Reply-To: <88a9ebaa-8637-4290-b299-acae0e3065f8@ozlabs.org>
-X-Spamd-Bar: ---
-Message-ID-Hash: 7R7VCXIN46K2TX6H5PNZ5CSGQYVQECN7
-X-Message-ID-Hash: 7R7VCXIN46K2TX6H5PNZ5CSGQYVQECN7
-X-MailFrom: matt@ozlabs.org
+Content-Disposition: inline
+In-Reply-To: <20260623094446.4a8fc2ed@pumpkin>
+X-Spamd-Bar: ----
+Message-ID-Hash: BY6MBNE3Q3IIO47H4C4S3DQDCKFZXDHC
+X-Message-ID-Hash: BY6MBNE3Q3IIO47H4C4S3DQDCKFZXDHC
+X-MailFrom: praan@google.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
-CC: Alex Williamson <alex@shazbot.org>, Leon Romanovsky <leon@kernel.org>, Jason Gunthorpe <jgg@nvidia.com>, Alex Mastro <amastro@fb.com>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Bjorn Helgaas <bhelgaas@google.com>, Logan Gunthorpe <logang@deltatee.com>, Mahmoud Adam <mngyadam@amazon.de>, David Matlack <dmatlack@google.com>, =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Ankit Agrawal <ankita@nvidia.com>, Alistair Popple <apopple@nvidia.com>, "Kasireddy, Vivek" <vivek.kasireddy@intel.com>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "kvm@vger.kernel.org" <kvm@vger.kernel.org>, "linux-pci@vger.kernel.org" <linux-pci@vger.kernel.org>
+CC: David Hu <xuehaohu@google.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Jason Gunthorpe <jgg@ziepe.ca>, Nicolin Chen <nicolinc@nvidia.com>, Leon Romanovsky <leon@kernel.org>, Kevin Tian <kevin.tian@intel.com>, Ankit Agrawal <ankita@nvidia.com>, Alex Williamson <alex@shazbot.org>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, iommu@lists.linux.dev, jmoroni@google.com, kpberry@google.com, chriscli@google.com, sashiko-bot@kernel.org, stable@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3 1/9] PCI/P2PDMA: Add CONFIG_PCI_P2PDMA_CORE
+Subject: [Linaro-mm-sig] Re: [PATCH v2] dma-buf: Split sgl into page-aligned 2G chunks
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7R7VCXIN46K2TX6H5PNZ5CSGQYVQECN7/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/BY6MBNE3Q3IIO47H4C4S3DQDCKFZXDHC/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [0.69 / 15.00];
-	R_DKIM_REJECT(1.00)[ozlabs.org:s=201707];
-	MAILLIST(-0.20)[mailman];
+X-Spamd-Result: default: False [3.99 / 15.00];
+	DMARC_POLICY_REJECT(2.00)[google.com : SPF not aligned (relaxed),reject];
+	SUSPICIOUS_RECIPS(1.50)[];
+	R_DKIM_REJECT(1.00)[google.com:s=20251104];
 	R_SPF_ALLOW(-0.20)[+mx];
+	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_BASE64_TEXT(0.10)[];
-	DMARC_POLICY_SOFTFAIL(0.10)[ozlabs.org : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	FORGED_RECIPIENTS(0.00)[m:robin.murphy@arm.com,m:kevin.tian@intel.com,m:praan@google.com,m:alex@shazbot.org,m:leon@kernel.org,m:jgg@nvidia.com,m:amastro@fb.com,m:christian.koenig@amd.com,m:bhelgaas@google.com,m:logang@deltatee.com,m:mngyadam@amazon.de,m:dmatlack@google.com,m:bjorn@kernel.org,m:sumit.semwal@linaro.org,m:ankita@nvidia.com,m:apopple@nvidia.com,m:vivek.kasireddy@intel.com,m:linux-kernel@vger.kernel.org,m:linux-media@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,m:kvm@vger.kernel.org,m:linux-pci@vger.kernel.org,s:lists@lfdr.de];
-	ARC_NA(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	FORGED_SENDER(0.00)[matt@ozlabs.org,linaro-mm-sig-bounces@lists.linaro.org];
 	MIME_TRACE(0.00)[0:+];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	DKIM_TRACE(0.00)[ozlabs.org:-];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[matt@ozlabs.org,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[20];
+	ARC_NA(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FREEMAIL_TO(0.00)[gmail.com];
+	FORGED_RECIPIENTS(0.00)[m:david.laight.linux@gmail.com,m:xuehaohu@google.com,m:sumit.semwal@linaro.org,m:christian.koenig@amd.com,m:jgg@ziepe.ca,m:nicolinc@nvidia.com,m:leon@kernel.org,m:kevin.tian@intel.com,m:ankita@nvidia.com,m:alex@shazbot.org,m:linux-media@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,m:linux-kernel@vger.kernel.org,m:iommu@lists.linux.dev,m:jmoroni@google.com,m:kpberry@google.com,m:chriscli@google.com,m:sashiko-bot@kernel.org,m:stable@vger.kernel.org,m:davidlaightlinux@gmail.com,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[praan@google.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FORWARDED(0.00)[lists@lfdr.de];
+	DKIM_TRACE(0.00)[google.com:-];
+	MISSING_XM_UA(0.00)[];
 	TO_DN_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[praan@google.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[ozlabs.org:mid,ozlabs.org:from_mime,linaro.org:email]
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[bootlin.com:url,widen.net:url,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 842636B9382
+X-Rspamd-Queue-Id: 9C5C96BA298
 
-SGkgUm9iaW4sIG1lLA0KDQpPbiAyMy8wNi8yMDI2IDE2OjU5LCBNYXR0IEV2YW5zIHdyb3RlOg0K
-PiBIZXlhIFJvYmluLA0KPiANCj4gT24gMjMvMDYvMjAyNiAxNjo0OCwgUm9iaW4gTXVycGh5IHdy
-b3RlOg0KPj4gT24gMTIvMDYvMjAyNiAzOjMxIHBtLCBNYXR0IEV2YW5zIHdyb3RlOg0KPj4+IEhp
-IEtldmluLCBQcmFuamFsLCAoK1JvYmluLCBoaSEpDQo+Pg0KPj4gT2ggaGV5IHRoZXJlISA6KQ0K
-Pj4NCj4+PiBPbiAxMi8wNi8yMDI2IDA0OjM5LCBUaWFuLCBLZXZpbiB3cm90ZToNCj4+Pj4+IEZy
-b206IFByYW5qYWwgU2hyaXZhc3RhdmEgPHByYWFuQGdvb2dsZS5jb20+DQo+Pj4+PiBTZW50OiBG
-cmlkYXksIEp1bmUgMTIsIDIwMjYgMjozOCBBTQ0KPj4+Pj4NCj4+Pj4+IE9uIFdlZCwgSnVuIDEw
-LCAyMDI2IGF0IDA0OjQzOjE1UE0gKzAxMDAsIE1hdHQgRXZhbnMgd3JvdGU6DQo+Pj4+Pj4gLS0t
-IGEvZHJpdmVycy9wY2kvS2NvbmZpZw0KPj4+Pj4+ICsrKyBiL2RyaXZlcnMvcGNpL0tjb25maWcN
-Cj4+Pj4+PiBAQCAtMjA2LDExICsyMDYsNyBAQCBjb25maWcgUENJRV9UUEgNCj4+Pj4+PiDCoCBj
-b25maWcgUENJX1AyUERNQQ0KPj4+Pj4+IMKgwqDCoMKgwqAgYm9vbCAiUENJIHBlZXItdG8tcGVl
-ciB0cmFuc2ZlciBzdXBwb3J0Ig0KPj4+Pj4+IMKgwqDCoMKgwqAgZGVwZW5kcyBvbiBaT05FX0RF
-VklDRQ0KPj4+Pj4+IC3CoMKgwqAgIw0KPj4+Pj4+IC3CoMKgwqAgIyBUaGUgbmVlZCBmb3IgdGhl
-IHNjYXR0ZXJsaXN0IERNQSBidXMgYWRkcmVzcyBmbGFnIG1lYW5zIFBDSQ0KPj4+Pj4gUDJQRE1B
-DQo+Pj4+Pj4gLcKgwqDCoCAjIHJlcXVpcmVzIDY0Yml0DQo+Pj4+Pj4gLcKgwqDCoCAjDQo+Pj4+
-Pj4gLcKgwqDCoCBkZXBlbmRzIG9uIDY0QklUDQo+Pj4+Pj4gK8KgwqDCoCBzZWxlY3QgUENJX1Ay
-UERNQV9DT1JFDQo+Pj4+Pj4gwqDCoMKgwqDCoCBzZWxlY3QgR0VORVJJQ19BTExPQ0FUT1INCj4+
-Pj4+PiDCoMKgwqDCoMKgIHNlbGVjdCBORUVEX1NHX0RNQV9GTEFHUw0KPj4+Pj4+IMKgwqDCoMKg
-wqAgaGVscA0KPj4+Pj4NCj4+Pj4+IE5pdDogRGlkIHdlIGRyb3AgZGVwZW5kcyBvbiA2NEJJVCBp
-bnRlbnRpb25hbGx5IGhlcmU/IEkgZ3Vlc3MgdGhlIGZ1bGwNCj4+Pj4+IFBDSV9QMlBETUEgc3Rh
-Y2sgc3RpbGwgc2VsZWN0cyBORUVEX1NHX0RNQV9GTEFHUz8gSUlSQywNCj4+Pj4+IE5FRURfU0df
-RE1BX0ZMQUdTIGRvZXNuJ3Qgc2VsZWN0IDY0QklUPw0KPj4+Pg0KPj4+PiBzZWVtcyB0aGF0IGNv
-bW1lbnQgaXMgc3RhbGUuIEFjY29yZGluZyB0byB0aGUgY29tbWl0IG1zZzoNCj4+Pj4NCj4+Pj4g
-IiBpdCB3b3VsZCBtYWtlIHZmaW8tcGNpIG9ubHkgYXZhaWxhYmxlIGlmIENPTkZJR19aT05FX0RF
-VklDRSBpcw0KPj4+PiBwcmVzZW50IChlLmcuIDY0LWJpdCBzeXN0ZW1zKSwgIg0KPj4+Pg0KPj4+
-PiBzbyBpdCBzb3VuZHMgYSByZWR1bmRhbnQgZGVwZW5kZW5jeSBoZW5jZSBpcyByZW1vdmVkLg0K
-Pj4+DQo+Pj4gVGhpcyB3YXMgaW50ZW50aW9uYWwuwqAgSW4gcHJhY3RpY2UgdGhlcmUgaXMgc3Rp
-bGwgYSBkZXBlbmRlbmN5IG9uIDY0QklUDQo+Pj4gZm9yIFBDSV9QMlBETUEsIGJ1dCBpdCBpcyBi
-ZWNhdXNlIG9mIFpPTkVfREVWSUNFIChhbmQgbWVtIGhvdHBsdWcpLsKgIFRoZQ0KPj4+IGtleSBu
-ZWVkIGlzIFBDSV9QMlBETUFfQ09SRSBpcyBhdmFpbGFibGUgb24gITY0QklUIGZvciBWRklPLCBi
-dXQgSQ0KPj4+IGRpZG4ndCBzZWUgYSByZXF1aXJlbWVudCBmcm9tIFBDSV9QMlBETUEgaXRzZWxm
-IChhcyBvcHBvc2VkIHRvIGl0cw0KPj4+IGRlcGVuZGVuY2llcykuwqAgSWYgSSd2ZSBtaXNzZWQg
-b25lLCBJIGNhbiBwdXQgaXQgYmFjay4uLg0KPj4+DQo+Pj4gQnV0IE5FRURfU0dfRE1BX0ZMQUdT
-IGRvZXNuJ3Qgc21lbGwgcXVpdGUgcmlnaHQ7IEkgc2VlIGZyb20gY29tbWVudHMgaW4NCj4+Pg0K
-Pj4+IMKgwqAgYWYyODgwZWM0NDAyMSAoInNjYXR0ZXJsaXN0OiBhZGQgZGVkaWNhdGVkIGNvbmZp
-ZyBmb3IgRE1BIGZsYWdzIikNCj4+Pg0KPj4+IHRoYXQgaXQgYXNzdW1lcyA2NEJJVCwgYnV0IGl0
-IHNlZW1zIHRvIGJlIG1pc3NpbmcgYSAiZGVwZW5kcyBvbiA2NEJJVCIuDQo+Pj4NCj4+PiBSb2Jp
-biAtLSBzaG91bGQgdGhhdCBkZXBlbmQgb24gNjRCSVQ/DQo+Pg0KPj4gSW5kZWVkLCBsb29raW5n
-IGF0IHRoZSBoaXN0b3J5IGl0IHNlZW1zIGxpa2UgdGhhdCB3YXMgb3Zlcmxvb2tlZCwgYnV0IGl0
-DQo+PiB3b3JrZWQgb3V0IGF0IHRoZSB0aW1lIHNpbmNlIHRoZSBvbmx5IHNlbGVjdG9yIG9mIE5F
-RURfU0dfRE1BX0ZMQUdTIHdhcw0KPj4gUENJX1AyUERNQSBhcyB5b3Ugc2F5LiBJZiB3ZSdyZSBu
-b3cgZ2VuZXJhbGlzaW5nIHRoZW4gbW92aW5nIHRoZQ0KPj4gZXhwbGljaXQgNjRCSVQgZGVwZW5k
-ZW5jeSB0byBORUVEX1NHX0RNQV9GTEFHUyBpdHNlbGYgc291bmRzIGxpa2UgdGhlDQo+PiByaWdo
-dCB0aGluZyB0byBkby4NCj4gDQo+IENoZWVycyBmb3IgY29uZmlybWluZy4gIEknbGwgc2VuZCBh
-IHBhdGNoIHNlcGFyYXRlIHRvIHRoaXMgc2VyaWVzIChzaW5jZQ0KPiB0aGUgZGVwcyB3b3JrIG91
-dCBPSyBmb3IgUENJX1AyUERNQSBmb3IgdGhlIHJlYXNvbnMgbWVudGlvbmVkKS4NCg0KSSB0aGlu
-ayB3ZSB3ZXJlIHdyb25nLCBORUVEX1NHX0RNQV9GTEFHUyBkb2Vzbid0IF9uZWVkXyA2NEJJVC4N
-Cg0KT3RoZXIgdGhhbiBQMlBETUEsIHRoZSBvdGhlciBjb25zdW1lciBvZiBORUVEX1NHX0RNQV9G
-TEFHUyBpcyBJT01NVV9ETUEsDQphbmQgdHVybnMgb3V0IGlmIG9uZSBidWlsZHMgYW4gaTM4NiBr
-ZXJuZWwgd2l0aCBJTlRFTF9JT01NVSAob3Igc29tZQ0Kb3RoZXIgY29uZmlncywgbGlrZSBYZW4p
-IHRoZW4gTkVFRF9TR19ETUFfRkxBR1MgaXMgZW5hYmxlZCBvbiAzMi1iaXQNCmJ1aWxkcyB0b28u
-DQoNClRoZSBzY2F0dGVybGlzdC5oIGNvbW1lbnRzIGFmMjg4MGVjNDQwMjEgdG91Y2hlZCBhcmUg
-anVzdCBzYXlpbmcgdGhhdA0KX3NpbmNlXyBQMlBETUEgZGVwZW5kcyBvbiA2NEJJVCwgdGhlcmUg
-X2lzXyBjaXJjdW1zdGFudGlhbCBwYWRkaW5nIHNvDQpsZXQncyB1c2UgaXQgZm9yIGZsYWdzLiAg
-SXQgZG9lc24ndCByZXF1aXJlIDY0QklULg0KDQpGb3IgZXhhbXBsZSBzdHJ1Y3Qgc2NhdHRlcmxp
-c3QgaXNuJ3QgcHVzaGVkIG92ZXIgc29tZSBzcGVjaWFsIChlLmcuDQpwb3dlci1vZi10d28pIHNp
-emUgd2hlbiBORUVEX1NHX0RNQV9GTEFHUyBpcyBlbmFibGVkIG9uIDMyLWJpdDsgSSBjYW4ndA0K
-ZmluZCBhIHJlYXNvbiBpdCBzaG91bGQgYmUgcHJldmVudGVkIG9uIDMyLWJpdCBidWlsZHMgKGFu
-ZCBmb3VuZCBjYXNlcw0KYWJvdmUgaW4gd2hpY2ggaXQgaXMgYWxyZWFkeSBlbmFibGVkIGluIHRo
-ZW0pLg0KDQpTbyBJIHdvbid0IGNoYW5nZSB0aGUgTkVFRF9TR19ETUFfRkxBR1MgZGVwZW5kZW5j
-aWVzIGFmdGVyIGFsbC4gIFNvcnJ5DQpmb3IgdGhlIG5vaXNlIC0tIGFzIGV2ZXIgaWYgSSd2ZSBt
-aXNzZWQgc29tZXRoaW5nIGRvIHBsZWFzZSBleHBsYWluLg0KDQooSSdsbCBjb250aW51ZSB3aXRo
-IHJlbW92aW5nIHRoZSBQMlBETUEgZGVwZW5kZW5jeSBvbiA2NEJJVCBiZWNhdXNlIGl0DQpzZWVt
-cyBQMlBETUEncyBkZXBlbmRlbmNpZXMgcmVseSBvbiA2NEJJVCwgdGhvdWdoIFAyUERNQSBpdHNl
-bGYgZG9lc24ndC4pDQoNClRoYW5rcywNCg0KDQpNYXR0DQpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBs
-aW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFp
-bCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+On Tue, Jun 23, 2026 at 09:44:46AM +0100, David Laight wrote:
+
+Hi David,
+
+> On Tue, 23 Jun 2026 01:54:59 +0000
+> David Hu <xuehaohu@google.com> wrote:
+> 
+> > Currently, `fill_sg_entry()` splits the scatterlist using `UINT_MAX`.
+> > This creates a non-page-aligned DMA length (`0xFFFFFFFF`) for the
+> > first entry, resulting in non-page-aligned DMA addresses for all
+> > subsequent entries.
+> 
+> There is a separate issue of whether this code is even needed at all.
+> Where can transfers over 2G (never mind 4G) actually come from.
+> 
+> The read, write and similar system calls limit transfers to INT_MAX
+> (even on 64bit) and a lot of driver code will need fixing it longer
+> lengths are allowed though.
+> io_uring better enforce the same limits.
+> So the transfers can come directly from userspace.
+> 
+> Not only that but you also need a single physically contiguous buffer.
+> Good luck allocating that!
+> 
+> Now maybe there are some peer-to-peer places where the large buffer
+> is device memory, but they will be unusual and probably need
+> special treatment anyway.
+> 
+
+I agree that traditional VFS read/write face the MAX_RW_COUNT limit 
+(~2GB), and io_uring has its limits, but I'm a little confused by the
+push to enforce these limits here in the SGL code?
+
+File I/O seems to be only one side of the picture. In my view, this fix
+is necessary and certainly has a use-case:
+
+For example, the RDMA subsystem has the capability to import dmabufs [1],
+which gives rise to use cases for dmabuf beyond standard file ops 
+(via VFS/io_uring). 
+
+In these scenarios, GPU HBM can be exported as dmabufs. With recent GPUs,
+HBM capacity can be in the order of hundreds of GBs [2]. RDMA can employ
+infrastructure like the vfio-dmabuf-exporter [3] or similar dmabuf 
+exporters to frequently move huge blocks of data via P2PDMA.
+
+If we restrict incoming dmabuf transfers to fit within VFS-centric 
+limits (2GB), we impose unnecessary overhead on the RDMA stack, forcing
+it to manage a significantly higher number of memory registrations. By 
+cleanly splitting these massive contiguous device buffers into 
+page-aligned SGL entries, we directly improve the efficiency of P2P 
+transfers and memory registration.
+
+Since this change doesn't seem to have a negative impact on standard file
+I/O or break existing VFS constraints, I'm curious why we shouldn't 
+support splitting these >4GB P2P transfers? Am I missing something?
+
+Thanks,
+Praan
+
+[1] https://elixir.bootlin.com/linux/v7.1.1/source/drivers/infiniband/core/umem_dmabuf.c#L174 
+[2] https://nvdam.widen.net/s/fdvdqvfvj2/hopper-h200-nvl-product-brief (Table 2-2)
+[3] https://elixir.bootlin.com/linux/v7.1.1/source/drivers/vfio/pci/vfio_pci_dmabuf.c#L297
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
