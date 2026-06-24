@@ -2,65 +2,86 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id yDgPDRfSO2rsdggAu9opvQ
+	id G7vKM9FgPWrZ2AgAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 24 Jun 2026 14:48:23 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Jun 2026 19:09:37 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8D0D36BE42E
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 24 Jun 2026 14:48:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 854FE6C7B65
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Jun 2026 19:09:37 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=ZX54rOT8;
+	dkim=fail ("body hash did not verify") header.d=gmail.com header.s=20251104 header.b="pu5u/V/1";
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
-	dmarc=fail reason="SPF not aligned (relaxed)" header.from=kernel.org (policy=quarantine)
+	dmarc=fail reason="SPF not aligned (relaxed)" header.from=gmail.com (policy=none)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 67150410A2
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 24 Jun 2026 12:48:21 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 174204015A
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 24 Jun 2026 12:48:12 +0000 (UTC)
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	by sea.source.kernel.org (Postfix) with ESMTP id 7245E43BF0;
-	Wed, 24 Jun 2026 12:48:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6C4781F000E9;
-	Wed, 24 Jun 2026 12:48:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1782305291;
-	bh=Ng1Fu3iV0uz9YEcwWiFwkJYNZd8hGnnPbM07z97sbwo=;
-	h=From:To:Cc:Subject:Date;
-	b=ZX54rOT8atVKo9c5J5Q15q+IKKKVwuwOAOGRokO4ofI/WuoKd72gRCTsPOvf5zci2
-	 //oqV9U2MF3u/G3XPHNINLdLiVixEx439C76qRXAYLvHmueaLiMxF4lxxzn6JAKf3+
-	 LvpathzUcS34ylGPqUKEfk9Y4syniWEVl+mxOH4aQle7szgvX1mxc84bXFX+wKu1BA
-	 ltRdCHseUDfQXFwKhEdsJFm80fufqplh1zG53YJuxXLMFKhxICPR0gSzcfcvCw3sAV
-	 WIjhxLATJNoPMqtchCNfn74S/Fy1qR9p9N1phCS2Iw5E3KLnkBfMC6aLNQnWsD9kyH
-	 8HE6pfIPLg2Rg==
-From: Philipp Stanner <phasta@kernel.org>
-To: Matthew Brost <matthew.brost@intel.com>,
-	Danilo Krummrich <dakr@kernel.org>,
-	Philipp Stanner <phasta@kernel.org>,
-	=?UTF-8?q?Christian=20K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	David Airlie <airlied@gmail.com>,
-	Simona Vetter <simona@ffwll.ch>,
-	Sumit Semwal <sumit.semwal@linaro.org>
-Date: Wed, 24 Jun 2026 14:46:52 +0200
-Message-ID: <20260624124651.1414814-2-phasta@kernel.org>
+	by lists.linaro.org (Postfix) with ESMTP id 9BE4344715
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Jun 2026 17:09:36 +0000 (UTC)
+Received: from mail-yw1-f172.google.com (mail-yw1-f172.google.com [209.85.128.172])
+	by lists.linaro.org (Postfix) with ESMTPS id 7FCC940A79
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 24 Jun 2026 12:53:56 +0000 (UTC)
+Received: by mail-yw1-f172.google.com with SMTP id 00721157ae682-80260a90522so13295667b3.0
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 24 Jun 2026 05:53:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1782305636; x=1782910436; darn=lists.linaro.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=M1WZO8vWv2VJGmEwDoBM9gWeu5JjgR3Wcyzn9bhpYvk=;
+        b=pu5u/V/13bHHeYz4UIGv8LCrfGhwzSxBLF4Rw/aD9T0iPAkKirN2nb4Gs/uXnADIsD
+         ApyTBw8SdEjllrHbwWCd0StPsEH1m5XEIr9gigTzBfwI1CoL+BJ32muyEptKVi1OQdhP
+         vfR2SsKzHiU0Ybx7A3LeqHbueU+GPKpoZFNOUGP3J5/fzq3aMG91deRdmyFcyqVWjbqc
+         cWLu8WW3cb/vA7cSOPrnZVdX2hgDIkdm8e2n4Zpt/asXTHmSmBcN3EJJbxkmVzf7W9fp
+         /CaK+h3AW4gmiDNYk5IhoA0P1x8WMcS/hTQEs9LDwCUK8daY4KJrii9CamN+naNTQT9l
+         cg2A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1782305636; x=1782910436;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=M1WZO8vWv2VJGmEwDoBM9gWeu5JjgR3Wcyzn9bhpYvk=;
+        b=FrWZxPcwuJEnXbTmZAd8hNiANR3f9NWJkLMzhjb8drV3gDYAE4oRI4QDMh527jGjt/
+         mZZa7s426HO1I3anlqKB97hZfbL6N+BfjQocZsi4cc5y48YEThFEFBiooxbSfXh01pfb
+         lvsaAqgZVQgWSwtxag4JhfTri7G8LShdzCJ69Xs9ACZnIvgQdf1Fxl6HLcYCPBRxFYEt
+         BDpkOsGK8GL1825V3dmmrXiwWTTmFbnT5gvr5ha+ZOoblh5njkf6wdoM8zv5pv/0/QZ5
+         oaRij/vdfmRKnB0Xktz7Yvt29jgyX/uTDNz9S3RKalegrmWb86oW9QnAkj30SEKkUfpV
+         qr3w==
+X-Forwarded-Encrypted: i=1; AHgh+RrsUpOP+C1haH4Q2xl0zmBnrgXdpzlY93tWT2rUiVF+b6WqdWtfixkAs9Jdh+XEmyktCAvegvCgBfP06lZ2@lists.linaro.org
+X-Gm-Message-State: AOJu0YwO89WbwGieHHL8BYEx7vTHBMzCDqTJhpDE8MpW/UpL5b1YuJ0T
+	hYE49AkAeGru8SH+d4Qxo3gv+k0KmIjLQy/Cco0epvFemVj1rtjzcx8u
+X-Gm-Gg: AfdE7ckLS2HRTq/sjCxNy2oXehvVVuj4IfUdFAwZ9c1Bh5kjPnoLnZRdodUzcWJLObv
+	R9xNm0XAO+NRbyhQoy/viCfP3FCf123f6s1G00+rB/vulUyN0+xUcTWF90L5y72H8fEXF0YqVNz
+	gMZD1ZILaPBbALFWRLm9NxStxazIHTb7tIQAPx5v0Q0Y2uPs4nrH9KeIRMMOYcnXVySIavmaz5a
+	yDwM/5yMOBA5sgw7WzZiniBSBKjpGGj9kxlsDbGkqYZq9gLJkmF2cDLr4ZxgD3Mf01jV5ghjKZ7
+	XiyCbTFIF8Htr87wtmQ1X8pTYMkjbkEOGYwRxSTUZQpXunOVRTJMRaIWqtDmGXwjBa2QhxnzSUg
+	NbYklPnxxgYTmznP8F6u5slezXvC5x7Q7WitS/2Tgstd2x+jPmscX8gK3rtdIjyXYnK9FN11l0A
+	f8zqYOec/qEW2JDDCPFYyx2SqiPw==
+X-Received: by 2002:a05:690c:c4f7:b0:7fd:d8ba:44dd with SMTP id 00721157ae682-806c3a16dc1mr67516207b3.42.1782305635714;
+        Wed, 24 Jun 2026 05:53:55 -0700 (PDT)
+Received: from Dev-Null-MSI ([2a0d:3344:52ac:a808:98a4:4381:be45:536f])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-8025cf69b5asm57476257b3.20.2026.06.24.05.53.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 24 Jun 2026 05:53:55 -0700 (PDT)
+From: Yousef Alhouseen <alhouseenyousef@gmail.com>
+To: Gerd Hoffmann <kraxel@redhat.com>,
+	Vivek Kasireddy <vivek.kasireddy@intel.com>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
+Date: Wed, 24 Jun 2026 14:52:42 +0200
+Message-ID: <20260624125242.11232-1-alhouseenyousef@gmail.com>
 X-Mailer: git-send-email 2.54.0
 MIME-Version: 1.0
-X-Spamd-Bar: -----
-Message-ID-Hash: LIXCMCKT32R5SZYPZIQER6QJX2DTSJ4X
-X-Message-ID-Hash: LIXCMCKT32R5SZYPZIQER6QJX2DTSJ4X
-X-MailFrom: phasta@kernel.org
-X-Mailman-Rule-Hits: member-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
-CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+X-Spamd-Bar: --
+X-MailFrom: alhouseenyousef@gmail.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+Message-ID-Hash: XNY2XNVBWHFVVSULU3AW774KFPDLDZAR
+X-Message-ID-Hash: XNY2XNVBWHFVVSULU3AW774KFPDLDZAR
+X-Mailman-Approved-At: Thu, 25 Jun 2026 17:06:27 +0000
+CC: dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, Yousef Alhouseen <alhouseenyousef@gmail.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH] drm/sched: Protect entity->last_scheduled with spinlock
+Subject: [Linaro-mm-sig] [PATCH] dma-buf: udmabuf: avoid list copy size overflow
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LIXCMCKT32R5SZYPZIQER6QJX2DTSJ4X/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XNY2XNVBWHFVVSULU3AW774KFPDLDZAR/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -70,197 +91,84 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [4.49 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
+X-Spamd-Result: default: False [2.59 / 15.00];
+	DATE_IN_PAST(1.00)[28];
 	MID_CONTAINS_FROM(1.00)[];
-	R_DKIM_REJECT(1.00)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+mx];
+	R_DKIM_REJECT(1.00)[gmail.com:s=20251104];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:kraxel@redhat.com,m:vivek.kasireddy@intel.com,m:sumit.semwal@linaro.org,m:christian.koenig@amd.com,m:dri-devel@lists.freedesktop.org,m:linux-media@vger.kernel.org,m:linaro-mm-sig@lists.linaro.org,m:linux-kernel@vger.kernel.org,m:alhouseenyousef@gmail.com,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_RECIPIENTS(0.00)[m:matthew.brost@intel.com,m:dakr@kernel.org,m:phasta@kernel.org,m:ckoenig.leichtzumerken@gmail.com,m:maarten.lankhorst@linux.intel.com,m:mripard@kernel.org,m:tzimmermann@suse.de,m:airlied@gmail.com,m:simona@ffwll.ch,m:sumit.semwal@linaro.org,m:dri-devel@lists.freedesktop.org,m:linux-kernel@vger.kernel.org,m:linux-media@vger.kernel.org,m:linaro-mm-sig@lists.linaro.org,m:ckoenigleichtzumerken@gmail.com,s:lists@lfdr.de];
-	GREYLIST(0.00)[pass,meta];
-	FORGED_SENDER(0.00)[phasta@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
-	RCPT_COUNT_TWELVE(0.00)[14];
-	FREEMAIL_TO(0.00)[intel.com,kernel.org,gmail.com,linux.intel.com,suse.de,ffwll.ch,linaro.org];
-	MIME_TRACE(0.00)[0:+];
 	ARC_NA(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	DKIM_TRACE(0.00)[kernel.org:-];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[phasta@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	FORGED_SENDER(0.00)[alhouseenyousef@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[lists.freedesktop.org,vger.kernel.org,lists.linaro.org,gmail.com];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:-];
 	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	RCPT_COUNT_SEVEN(0.00)[9];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[alhouseenyousef@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 8D0D36BE42E
+X-Rspamd-Queue-Id: 854FE6C7B65
 
-The entity->last_scheduled field has always been set and read with
-special RCU functions in addition to memory barriers. There is no
-obvious reason for that, since the entity lock is available and taken at all
-places that evaluate the last_scheduled field. The only exception is
-drm_sched_entity_error(), which is not performance critical in any way.
+UDMABUF_CREATE_LIST copies an array whose element count comes from
+userspace. The count is compared against list_limit, but list_limit is a
+signed module parameter while the count is u32.
 
-Improve robustness, readability and maintainability by replacing RCU and
-barriers with the lock.
+If the limit is raised too far or made negative, that comparison no
+longer bounds the count to a range where sizeof(*list) * count fits in
+the u32 temporary used for the copy length. A wrapped copy length lets
+memdup_user() copy fewer entries than udmabuf_create() subsequently
+walks, leading to out-of-bounds reads from the copied list.
 
-As a preparational step, while at it, also guard spsc_queue_pop() with
-the lock, since spsc_queue is deprecated and supposed to be replaced
-with a locked list.
+Take a positive snapshot of the module limit and use memdup_array_user()
+so the multiplication is checked before copying.
 
-Signed-off-by: Philipp Stanner <phasta@kernel.org>
+Signed-off-by: Yousef Alhouseen <alhouseenyousef@gmail.com>
 ---
-Tested with drm_sched unit tests, which all ran fine.
----
- drivers/gpu/drm/scheduler/sched_entity.c | 49 +++++++++++-------------
- include/drm/gpu_scheduler.h              |  9 ++---
- 2 files changed, 26 insertions(+), 32 deletions(-)
+ drivers/dma-buf/udmabuf.c | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/gpu/drm/scheduler/sched_entity.c b/drivers/gpu/drm/scheduler/sched_entity.c
-index c51101ec70c1..95b2c48a604a 100644
---- a/drivers/gpu/drm/scheduler/sched_entity.c
-+++ b/drivers/gpu/drm/scheduler/sched_entity.c
-@@ -135,7 +135,6 @@ int drm_sched_entity_init(struct drm_sched_entity *entity,
- 	entity->num_sched_list = num_sched_list;
- 	entity->sched_list = num_sched_list > 1 ? sched_list : NULL;
- 	entity->rq = &sched_list[0]->rq;
--	RCU_INIT_POINTER(entity->last_scheduled, NULL);
- 	RB_CLEAR_NODE(&entity->rb_tree_node);
- 	init_completion(&entity->entity_idle);
+diff --git a/drivers/dma-buf/udmabuf.c b/drivers/dma-buf/udmabuf.c
+index bced421c0..b4078ec84 100644
+--- a/drivers/dma-buf/udmabuf.c
++++ b/drivers/dma-buf/udmabuf.c
+@@ -469,14 +469,15 @@ static long udmabuf_ioctl_create_list(struct file *filp, unsigned long arg)
+ 	struct udmabuf_create_list head;
+ 	struct udmabuf_create_item *list;
+ 	int ret = -EINVAL;
+-	u32 lsize;
++	int limit;
  
-@@ -201,10 +200,10 @@ int drm_sched_entity_error(struct drm_sched_entity *entity)
- 	struct dma_fence *fence;
- 	int r;
+ 	if (copy_from_user(&head, (void __user *)arg, sizeof(head)))
+ 		return -EFAULT;
+-	if (head.count > list_limit)
++	limit = READ_ONCE(list_limit);
++	if (!head.count || limit <= 0 || head.count > limit)
+ 		return -EINVAL;
+-	lsize = sizeof(struct udmabuf_create_item) * head.count;
+-	list = memdup_user((void __user *)(arg + sizeof(head)), lsize);
++	list = memdup_array_user((void __user *)(arg + sizeof(head)),
++				 head.count, sizeof(*list));
+ 	if (IS_ERR(list))
+ 		return PTR_ERR(list);
  
--	rcu_read_lock();
--	fence = rcu_dereference(entity->last_scheduled);
-+	spin_lock(&entity->lock);
-+	fence = entity->last_scheduled;
- 	r = fence ? fence->error : 0;
--	rcu_read_unlock();
-+	spin_unlock(&entity->lock);
- 
- 	return r;
- }
-@@ -288,8 +287,10 @@ void drm_sched_entity_kill(struct drm_sched_entity *entity)
- 	wait_for_completion(&entity->entity_idle);
- 
- 	/* The entity is guaranteed to not be used by the scheduler */
--	prev = rcu_dereference_check(entity->last_scheduled, true);
-+	spin_lock(&entity->lock);
-+	prev = entity->last_scheduled;
- 	dma_fence_get(prev);
-+	spin_unlock(&entity->lock);
- 	while ((job = drm_sched_entity_queue_pop(entity))) {
- 		struct drm_sched_fence *s_fence = job->s_fence;
- 
-@@ -381,8 +382,8 @@ void drm_sched_entity_fini(struct drm_sched_entity *entity)
- 		entity->dependency = NULL;
- 	}
- 
--	dma_fence_put(rcu_dereference_check(entity->last_scheduled, true));
--	RCU_INIT_POINTER(entity->last_scheduled, NULL);
-+	dma_fence_put(entity->last_scheduled);
-+	WRITE_ONCE(entity->last_scheduled, NULL);
- 	drm_sched_entity_stats_put(entity->stats);
- }
- EXPORT_SYMBOL(drm_sched_entity_fini);
-@@ -523,18 +524,18 @@ struct drm_sched_job *drm_sched_entity_pop_job(struct drm_sched_entity *entity)
- 	if (entity->guilty && atomic_read(entity->guilty))
- 		dma_fence_set_error(&sched_job->s_fence->finished, -ECANCELED);
- 
--	dma_fence_put(rcu_dereference_check(entity->last_scheduled, true));
--	rcu_assign_pointer(entity->last_scheduled,
--			   dma_fence_get(&sched_job->s_fence->finished));
-+	spin_lock(&entity->lock);
-+	dma_fence_put(entity->last_scheduled);
-+	entity->last_scheduled = dma_fence_get(&sched_job->s_fence->finished);
- 
--	/*
--	 * If the queue is empty we allow drm_sched_entity_select_rq() to
--	 * locklessly access ->last_scheduled. This only works if we set the
--	 * pointer before we dequeue and if we a write barrier here.
-+	/* A recent rework required taking the spinlock above. Since spsc_queue
-+	 * is scheduled for removal as per the DRM-TODO-list, we access it here
-+	 * locked already to prepare for that cleanup.
-+	 *
-+	 * TODO: Fully replace spsc_queue with a locked (h)list.
- 	 */
--	smp_wmb();
--
- 	spsc_queue_pop(&entity->job_queue);
-+	spin_unlock(&entity->lock);
- 
- 	drm_sched_rq_pop_entity(entity);
- 
-@@ -561,21 +562,15 @@ void drm_sched_entity_select_rq(struct drm_sched_entity *entity)
- 	if (spsc_queue_count(&entity->job_queue))
- 		return;
- 
--	/*
--	 * Only when the queue is empty are we guaranteed that
--	 * drm_sched_run_job_work() cannot change entity->last_scheduled. To
--	 * enforce ordering we need a read barrier here. See
--	 * drm_sched_entity_pop_job() for the other side.
--	 */
--	smp_rmb();
--
--	fence = rcu_dereference_check(entity->last_scheduled, true);
-+	spin_lock(&entity->lock);
-+	fence = entity->last_scheduled;
- 
- 	/* stay on the same engine if the previous job hasn't finished */
--	if (fence && !dma_fence_is_signaled(fence))
-+	if (fence && !dma_fence_is_signaled(fence)) {
-+		spin_unlock(&entity->lock);
- 		return;
-+	}
- 
--	spin_lock(&entity->lock);
- 	sched = drm_sched_pick_best(entity->sched_list, entity->num_sched_list);
- 	rq = sched ? &sched->rq : NULL;
- 	if (rq != entity->rq) {
-diff --git a/include/drm/gpu_scheduler.h b/include/drm/gpu_scheduler.h
-index d61c19e78182..176ff1f936cd 100644
---- a/include/drm/gpu_scheduler.h
-+++ b/include/drm/gpu_scheduler.h
-@@ -100,7 +100,8 @@ struct drm_sched_entity {
- 	 * @lock:
- 	 *
- 	 * Lock protecting the run-queue (@rq) to which this entity belongs,
--	 * @priority and the list of schedulers (@sched_list, @num_sched_list).
-+	 * @priority, @last_scheduled and the list of schedulers (@sched_list,
-+	 * @num_sched_list).
- 	 */
- 	spinlock_t			lock;
- 
-@@ -202,11 +203,9 @@ struct drm_sched_entity {
- 	/**
- 	 * @last_scheduled:
- 	 *
--	 * Points to the finished fence of the last scheduled job. Only written
--	 * by drm_sched_entity_pop_job(). Can be accessed locklessly from
--	 * drm_sched_job_arm() if the queue is empty.
-+	 * Points to the finished fence of the last scheduled job.
- 	 */
--	struct dma_fence __rcu		*last_scheduled;
-+	struct dma_fence		*last_scheduled;
- 
- 	/**
- 	 * @last_user: last group leader pushing a job into the entity.
-
-base-commit: 60b5fa6edfef867322fce7c8306e5c4b46211be7
 -- 
 2.54.0
 
