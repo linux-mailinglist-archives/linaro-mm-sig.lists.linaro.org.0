@@ -2,185 +2,790 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id xuk/LNtgPWrd2AgAu9opvQ
+	id SBXpCelgPWrf2AgAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Jun 2026 19:09:47 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Jun 2026 19:10:01 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3DCC86C7B6D
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Jun 2026 19:09:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8A2966C7B74
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Jun 2026 19:10:00 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=gmail.com header.s=20251104 header.b=iJPvtrXm;
+	dkim=fail ("body hash did not verify") header.d=intel.com header.s=Intel header.b=LpI03OJk;
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
-	dmarc=fail reason="SPF not aligned (relaxed)" header.from=gmail.com (policy=none);
-	arc=reject ("signature check failed: fail, {[1] = sig:google.com:reject}")
+	dmarc=fail reason="SPF not aligned (relaxed)" header.from=intel.com (policy=none);
+	arc=reject ("signature check failed: fail, {[1] = sig:microsoft.com:reject}")
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 55A5444868
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Jun 2026 17:09:46 +0000 (UTC)
-Received: from mail-yw1-f174.google.com (mail-yw1-f174.google.com [209.85.128.174])
-	by lists.linaro.org (Postfix) with ESMTPS id 58ACA3F6A0
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 24 Jun 2026 21:54:41 +0000 (UTC)
-Received: by mail-yw1-f174.google.com with SMTP id 00721157ae682-7fe723ca5e5so16858507b3.2
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 24 Jun 2026 14:54:41 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782338081; cv=none;
-        d=google.com; s=arc-20260327;
-        b=QzkxNlwHdiRf0WC9Z1T8TXvnWzOWaqhN9Lm2lDwms5uzKk8VjC3r1QjOYDzXXVSXlr
-         hPCTLgXPe8Knrf6oZnN2WX+R79KalJ3AuADgcOeSBi/2vx9vjqJI+GmYjcEJ1T+m6+Cn
-         uZxsqhAjmVtfxTGanluF11Q+6VwL3zcWu/rc1B16SfPab7VrFx8Yhbrwr/TmCKSiwUwN
-         2SfGoSbseCyrstLw5vxKdSiT9LJmCcZ0NiI9RwLQYPUiWY7t8teabvFecMpI9pdAYdz0
-         SWnAi4qI8SSI/GnPsdQDq0Fh9ENXEC+VhlP1mmvn+RScBRNCVOpJSBoZJLUUEamK0FwU
-         5jfA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :mime-version:dkim-signature;
-        bh=Bh8+6SvsunFH7emI3915MXGw0/i4y8PizMc/TEhnjUg=;
-        fh=5i5QLsMsJbVDRLRMphVVZxazNZwPN6aLv+eVAO+8C5E=;
-        b=nCcAcLXszGtATjrstn/vE3jrmxwo5Eg8fOn6NRewVVyadkPQfM4tJGFT/eUF+NHlvF
-         7ohhUpAEU9o+0Rn+lEKEUkHJXj3YKhUTdHdamoJQ4irpL7SclnAzFLmjUsdU3Ptd1MW1
-         q4KtT0hsS/CKuMz7NrGvaxnyldy0QiQOoVRLQWFct/BH9Tdsty1TIH6eB2T6F+fgjR0+
-         H7Yi0h/S1dm8EYi/jU10T+XRSHzvRKkehdyZWsf3URLMAdWfbJj8G5WFpq4oh6GvLYt6
-         SxvseJmLgXl5IZM0RlU2UWl87PzplXu3LDSTqz/JQYCPqzdeOWMk9quNsRNkaQ9FCNgM
-         6PNg==;
-        darn=lists.linaro.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1782338081; x=1782942881; darn=lists.linaro.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=Bh8+6SvsunFH7emI3915MXGw0/i4y8PizMc/TEhnjUg=;
-        b=iJPvtrXmCodxVkPIkA/VAOdfRKA4ndlJAtZa8fUK6gdH0TWbE5pJeX7jC5MYqEBZyO
-         rsG5lZb0yAr+GaQiV2eUlOYKB2yFRs020ANL1R0wUEvPtF+ejqHOOAxg2aYKlo9B1G78
-         c9WCfQSLDPO9hLyASjubfmdZpc9bW222llR3HzMvGaaO9mQUBesXWSoXfnxkaBjWOlk8
-         UE5oGv/z9lLFreTcyzZfRF3vChq8YwTSL+oD7sQvfpIOFlCwCijORuP2W8XUtgFBlf+E
-         s47sbvzLo+PXXiViDdx1X2BMSCIgVCGwKStdRedcXn/FCQ4dqJRJlkppjwUZ6W9wa0ru
-         rNBw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782338081; x=1782942881;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Bh8+6SvsunFH7emI3915MXGw0/i4y8PizMc/TEhnjUg=;
-        b=b1RoI4fGTseWX9cLnm4FgU1lbMu3/36xeukXi8+MpUt+Ew1+Q2rbvtB6kv+dmYmHCn
-         jEWEBOpjG3cLxr/SlctPyrxaMM9jEC+ZlnEcxzNXxEPe5ybB+fjOohTKN7kSIsF58t8S
-         pr2HtUm942vG11oYtIYFlknIvZgqx0XLm0HCPDAwqxbRyaH3UP/2Qcl1ObY1fev6dl7v
-         o/EwqA309IM7loUBKsHVUuvGwEO/MZo9e7Bk3bOEpuOl/QSGHwi6Dp6J+XsWzhOHsZpd
-         TscVVt2ZGe6ykPEqZA1pad3YI/yvAhdqGMAt/UdnG8A9/BstDvdaWYZ+9cwhC/0ebMqx
-         cvSA==
-X-Forwarded-Encrypted: i=1; AHgh+RrRUB5WFeNBAOdt/j7/vTieMBqFbPD8SRbRStYEn2I/uVfhaf2IOWsZdGO71pXD7yoXk+4NbrvUHbKkp/pr@lists.linaro.org
-X-Gm-Message-State: AOJu0YxPOjk4P1SyaUuY71FHdu76J0xhcXeLjgBrvzydEnonqEfXNJnd
-	c3HZuX9McRgNPejyxtpZMIVNcGXl/bOYSZyuZCU9w3D5JAAYJTlexrVFBMtuCN/OdbMZzlNrnQg
-	5bDWSu9GO9ckxMHp5vRP4Gv07XO78S2g=
-X-Gm-Gg: AfdE7ckfRpTR5jCu0RHnL/cFAT1yMZWGx0c7qQl/Rnp3peJO2K8iB1WOY/SyPYfVGoW
-	MV7VEBBaL2QkgupqaqjxRCCZvB3anD9WZt9Of/1npxZV5lmBM0NoU8eOuJXH6Ce3XAm/4xOL2KO
-	93Lb2JmPtFknokLiprSKjCm0MubWoX4PoiNBQ68tz5U/A4QbmpqOBb8CAXr6BhLK/BE0G2Jr+50
-	/0NwUJT0FqHPlgFmGcGVx+Va+rO+3hDCwmw/X4WBTNE1q73mwg2upw5hYHJ+E2hsE0yIIvT
-X-Received: by 2002:a05:690c:7248:b0:7bd:8ce4:92b with SMTP id
- 00721157ae682-80a6a296427mr41307b3.17.1782338073547; Wed, 24 Jun 2026
- 14:54:33 -0700 (PDT)
-Received: from 77377267392 named unknown by gmailapi.google.com with HTTPREST;
- Wed, 24 Jun 2026 14:54:33 -0700
-Received: from 77377267392 named unknown by gmailapi.google.com with HTTPREST;
- Wed, 24 Jun 2026 14:54:33 -0700
+	by lists.linaro.org (Postfix) with ESMTP id A1563447E2
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Jun 2026 17:09:59 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.11])
+	by lists.linaro.org (Postfix) with ESMTPS id 869F7401E8
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 25 Jun 2026 00:39:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1782347962; x=1813883962;
+  h=date:from:to:cc:subject:message-id:references:
+   content-transfer-encoding:in-reply-to:mime-version;
+  bh=+w+Dy1m6aWzVQOu+uaA8apzuoTF7yQud1wetSJm1ryc=;
+  b=LpI03OJk4k1ZYUiv0rYbYP3/PuQDm6b2PcQ3Xx0UZVtoag7w/dmH8AHX
+   Zz5pSceINjt2SjzoOWlJraN+iw0apCtfPJpxEo97H4UDAuMHqZ4zA3qIk
+   Hg/mqeiD9N51R7/JtizFgReBsqNlcd6AdsTvHZQbpok8sn8YKydRYTIVk
+   IzCxxBPF45K1Lji0Ryna1dDgOEpEnwwbfsYWOHZ/x5eQgZ7bkB0IFlyyd
+   8JlSEf82Xd0peNRJrUR2k6dSSaMjGh8Xfaxg2jVxQszK3iJ3fAs2CJCFQ
+   CgpJIr+xYU+NrbsIdhC61xoIVAjVN2sDWXCr6BOoGXxyN3FKMMw6xks3b
+   Q==;
+X-CSE-ConnectionGUID: mmB/KvS4QD6jAQLG7fS/oQ==
+X-CSE-MsgGUID: NdweI94bSciJznhd0fy2Pg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11827"; a="93721404"
+X-IronPort-AV: E=Sophos;i="6.24,223,1774335600";
+   d="scan'208";a="93721404"
+Received: from orviesa007.jf.intel.com ([10.64.159.147])
+  by fmvoesa105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Jun 2026 17:39:20 -0700
+X-CSE-ConnectionGUID: VTcsF6wOQ2KoV/D+RnaC/w==
+X-CSE-MsgGUID: 1KQ39IkEQgq2hmtyqyavbg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.24,223,1774335600";
+   d="scan'208";a="250245496"
+Received: from fmsmsx903.amr.corp.intel.com ([10.18.126.92])
+  by orviesa007.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Jun 2026 17:39:20 -0700
+Received: from FMSMSX901.amr.corp.intel.com (10.18.126.90) by
+ fmsmsx903.amr.corp.intel.com (10.18.126.92) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.37; Wed, 24 Jun 2026 17:39:19 -0700
+Received: from fmsedg902.ED.cps.intel.com (10.1.192.144) by
+ FMSMSX901.amr.corp.intel.com (10.18.126.90) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.37 via Frontend Transport; Wed, 24 Jun 2026 17:39:19 -0700
+Received: from BYAPR05CU005.outbound.protection.outlook.com (52.101.85.20) by
+ edgegateway.intel.com (192.55.55.82) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.37; Wed, 24 Jun 2026 17:39:19 -0700
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=KaVbpzsmUzyNEv9+6kz1emkOJ02Y7KNow0DY25R37K2ED0bQdlG4vCAYFiDQWEupqZUVeQ4OIjiow3kNFwyfjmcWX/UKqIwJw1NBOZ/1KoH0qZvPClrwau26Uu0ZTYCOHWSoGpK2TlEiv8guSy1/vOkOgAsovO6Ic9umiaC+ZUGyciH80e3H4dtXryovtemY6NUA6g8gG8NuI8Y+dSPHInKNqolFuwOFqtjYQ2hZjEJNnlGlCSKaFEsbbrLpkO978aOiU5UiTG50Ogb1+1mkQm6uj25A4V2YCpgVq5LYaWf8H/lvQD0V2ROxl74seH9iK7d1rikIm/pj9ImbmDsPMA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=xvo0ZdeuennVst8tvdfTt7abfAq20xrdloI3Ia85Lyw=;
+ b=HkzVNkSW8Pc14HDMNexiUWe8xNrHsDwUSOBkwICuB979W7/JL11oAYVklGbTkoqcmKFPC+gXFho9DsXB9NFR60wARIh2LCvHC7qT5dPoyT2oc2V5t7OveqI2ZX+MhGdMcD95SUjT7cZfFjXkyhKd0C5VDGy9z58RCUjJ8hjV1poXijXpx48VplnPsn51R1BKJiIi0ZGu/syI9nGW53ysObeBSlgJ3iMn7gxfD6YtHmXELPtQXWHVrq3BlGTkXx+OPo5MUaJ4I8Yn3fLowDTw3ejewV1Su13T0Pq4fe/b4GHXXixXqa/AghcBhB3vkswRbQ74eMkH5PHeP8b6GfAb6A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Received: from PH7PR11MB6522.namprd11.prod.outlook.com (2603:10b6:510:212::12)
+ by DM3PPF9EFFC957B.namprd11.prod.outlook.com (2603:10b6:f:fc00::f40) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.16; Thu, 25 Jun
+ 2026 00:39:12 +0000
+Received: from PH7PR11MB6522.namprd11.prod.outlook.com
+ ([fe80::e0c5:6cd8:6e67:dc0c]) by PH7PR11MB6522.namprd11.prod.outlook.com
+ ([fe80::e0c5:6cd8:6e67:dc0c%4]) with mapi id 15.21.0159.014; Thu, 25 Jun 2026
+ 00:39:12 +0000
+Date: Wed, 24 Jun 2026 17:39:09 -0700
+From: Matthew Brost <matthew.brost@intel.com>
+To: <christian.koenig@amd.com>
+Message-ID: <ajx4rStJiHc6/I2q@gsse-cloud1.jf.intel.com>
+References: <20260624122917.2483-1-christian.koenig@amd.com>
+ <20260624122917.2483-2-christian.koenig@amd.com>
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Disposition: inline
+In-Reply-To: <20260624122917.2483-2-christian.koenig@amd.com>
+X-ClientProxiedBy: SJ0PR03CA0090.namprd03.prod.outlook.com
+ (2603:10b6:a03:331::35) To PH7PR11MB6522.namprd11.prod.outlook.com
+ (2603:10b6:510:212::12)
 MIME-Version: 1.0
-From: Yousef Alhouseen <alhouseenyousef@gmail.com>
-Date: Wed, 24 Jun 2026 14:54:33 -0700
-X-Gm-Features: AVVi8Ce_wcOOGQACiJ7fmfSkprpRmGytkZE_GUVedaUXOaW1g6FuUzDMUNPcyPM
-Message-ID: <CAMuQ4bUb-nH9F3S+-qCAeC1z2NVi2MuzNirJdTNbq66BtCDfQg@mail.gmail.com>
-To: Gerd Hoffmann <kraxel@redhat.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>,
-	Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-X-Spamd-Bar: ----
-X-MailFrom: alhouseenyousef@gmail.com
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7PR11MB6522:EE_|DM3PPF9EFFC957B:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2207ed55-f8fc-4df1-5293-08ded2522cef
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|23010399003|366016|22082099003|18002099003|11063799006|4143699003|6133799003|56012099006;
+X-Microsoft-Antispam-Message-Info: 4fMl0Zu3R78FecJfoTqcf0SdqsiB1uMVuJq78lx5kGSmilsM9lb3LtSxY88f+T3e4YRiANSpvYKLWpAj8w3TV2kvSwUooYkqn1AMXTMSGQtbOqnuSs+6MBHzYgTpg63WHo1rnA4slJ4SndgpmS9p4Xhh5pKyH3WcZXLOm5xDsZeTpiE9gi901+L14m0A7PypmTUl5JJ3JGbPmoaO/UV645PgV7IJOJ/rNssHjPmYDqlhKsvkDJLgMXNWgkSCNJfTYL7GaV5KUWgu+mf850z+p8blNScQTbk3M4mpJ3dwB1dQMJb/OhTT+DtL0u0J2z/D6EU91MIQWF1uOiINgthvLmbef/DTrL32O2pAt6u7BmpMdCUljv0hJVUI7xsiWlck4Exe+W+hBhU3m7dme5gdatv4rTORrE07ZGlHHKSZuFgb7sIA3u6TqCISeSu2D36reUhzRB64fvDV5PT3ytPZj2fVi6YLA3jhziVbabsTQB9BMav7gI7kw3HsJ3stO7DkJu+NXeH570YWH8xfya68JH+sJp3aAzIe5G4s4H5mcuDZZoVQxpPT3DVw1u2qRMYrB50yHA5R+YdDCF5GfUweIjHcp5fCGUl20zZ7vr47EwS70Z8YkdjgsX5dB74ZE7ONdSQQVoO0gLAcdYVx9u+ANYZ+gDu1P/96ILm3ldvo3EQ=
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR11MB6522.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(23010399003)(366016)(22082099003)(18002099003)(11063799006)(4143699003)(6133799003)(56012099006);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?iso-8859-1?Q?tjfatzwj3yQx4TVETLH8aACLvwD41NEhy2Uab3giIJKfsEH7ME1kPAmb6A?=
+ =?iso-8859-1?Q?z20oit0xr+kb04UVy+9JU1/6NHyynitNQIHwT7kB9W+3Gw0hIrNXT/zt4u?=
+ =?iso-8859-1?Q?Tt8Fh+tBPKB6Tqpkx+++uEO+Z/uyQFjJc9y+60JLo7hJOQ16sBPfQC2gmr?=
+ =?iso-8859-1?Q?F03j5TYei9eC9K3bNK5F4lMKi3rmbpO/Gn9lbdZ8ryzbZE+zzSoIFB9G0G?=
+ =?iso-8859-1?Q?/mNc5s3tF6Jj9HPqKBV2A32p8Wf9v0jxDDbL4qY7p7EQh/iwyNvia9Lvw9?=
+ =?iso-8859-1?Q?yV3zc5jV3PVxl3jbOo78rkrU5FlT6EFlMDSmfNpt8J99jrabF/ScWELRsJ?=
+ =?iso-8859-1?Q?9q+Zoe+V7r/dkRnvbxytta2oRpjrHaUFThvVF86g14HxuXcCRQWBK6kRlD?=
+ =?iso-8859-1?Q?BQyRkOKx0oHVRW3vD3FQ1AkS7igXjnH9dNxggxHDoYFZwQZtCIvDAntECd?=
+ =?iso-8859-1?Q?pimhn7kGSLiG88bxh/Jgn9XZhOeYPGZoOlqGq/U9qVaGhnXeGUooJsghFy?=
+ =?iso-8859-1?Q?5rh+oOpvRymKHR7rIc0I1lS83cInzlrf8IM3jKNrJqItrL+8Km4sdhRoMW?=
+ =?iso-8859-1?Q?WJAXZUIowWWhOy9Hk8u1kF3oP878xiJelsovVZINLIHfiyzVyvI0f7uZMU?=
+ =?iso-8859-1?Q?5bG3y062uC1/igbgYkErmBTD+rvH42iDAZR+4AU4XFZ/6Qtcg1LWmxGdw4?=
+ =?iso-8859-1?Q?EXk+qlqryVPFikTJ9LpZcjdjwNnRsQgJdfX+2NJ8zHb4ExDflaoM4aB+gc?=
+ =?iso-8859-1?Q?QwfrHUuG0vn4JQdbM4opPOjzuiiSJoqI6W2PAWW6Aap9teM64mPhP+WuAa?=
+ =?iso-8859-1?Q?pqFYPqYAgVJ/pg3Q8cSTB7VoepVPa+WfQTy0swzTmLYfSHdVoQq/7mbdeY?=
+ =?iso-8859-1?Q?5znPKI5+83Fyzd4s9GNisuROd1oHKJNNYZfhA0RUt6VRl4R+Ixc/Dy6HMl?=
+ =?iso-8859-1?Q?Z6l5pwqOqYQZhe5TcqCvZgfCOeKRVHn7z/lKSy+xmuX5qkY5Ko1AAT8rfi?=
+ =?iso-8859-1?Q?Evg6ONPUVcE28sWmNM4MfpWcXPg/NRmarGbnwc3HPtQQLozjHE7fns+SjZ?=
+ =?iso-8859-1?Q?2dWfhlFR4uPn/d4Vg4PY33H7KeZ4QNyKFBmRZVQuAwj/7vhpsUZxISz1a6?=
+ =?iso-8859-1?Q?L43Y4iOCBfdtcDCdc3GJxHnS2LB7SwvWDVPtFpAzvBYsJT3O50ekpeeF2V?=
+ =?iso-8859-1?Q?s5yqfAEb2Nf0mPdleDendslMm1BV0hOLanaveWlUqqTNoQVpoVc0HdLWl0?=
+ =?iso-8859-1?Q?XPOsmAsM3pBgCwNF9X9pj+r0u4RQPoCi52hNJ8TcIJb25izD27GcMvBxTH?=
+ =?iso-8859-1?Q?RK/w8mH1dAd7uhBF/0anylNAgr3Ub9ZczkNncGj1/yzKst091y0X6k7bvK?=
+ =?iso-8859-1?Q?n9U+sxDbOX95A9z20ziGVC9XrqlFkGA2sI05WmydMUWtH1EdGXf7qJMWcq?=
+ =?iso-8859-1?Q?Pb+yti851w9xvPpM/NJFiF50eVbPZgsasOofA6b1vJV5QvTC3/gHJkhxMH?=
+ =?iso-8859-1?Q?zblKxaTL1zc6IqaKuuMQmJu3tK9BoKnPxc2hC0tFerZJwSQBlTkZeiEosm?=
+ =?iso-8859-1?Q?TbixltYd2QocW3FovMuffSLZDyDS7ZToZS3VgenyyExA4qPxUlN9tM7cyE?=
+ =?iso-8859-1?Q?gVNzZW9lYBWXvwMYxSvL1EnE1+gNW5Df/LynYdK62W6BMYE8SoR5N+av3d?=
+ =?iso-8859-1?Q?/mWHYEvNO3xzGaVfUlbpSvMwGjjVbO2lr8BjYL+Xlmmre0P4lzNae69rlA?=
+ =?iso-8859-1?Q?gy1sG8dmOj1AeGMVWFiSO5MuWAJqp4iyLqfaMtTRmuCa+mkSfM17xrNfMm?=
+ =?iso-8859-1?Q?teGBmh4jO23rP0/WPe5IHw5DuUGXiGw=3D?=
+X-Exchange-RoutingPolicyChecked: hJuKtuTHWGSQ+C9E0mr5ArhEcOt9ZcbywxyLEqeshGEtUrtkJETABRvJgmJmvlZAAQsMNtWMRrMEwWDFmtu7ocXuvwL3zmFZ5qI36DIeARPh1Y5yCZz+PF5Wm7pwhqEn/5Hg18m32yHT1bg2LdXrw003XsOFGg6tVdWvJwex1rQxIL/rD4Et8fdJhiewbAn/M8bSE5SUfYVKxbbjfy8o5kfJp69CGudYCUDkqMVfRu6H4XtPeuGUohU+bsx0R4RcEyXmmRZO3xyTrVpSQAzcMoAS1n+Km/l6ebrlz8cdZrPd8D82+0DUBUYBvyVzDjaCdOFaUpXxAggAnY3m8J5wRA==
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2207ed55-f8fc-4df1-5293-08ded2522cef
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR11MB6522.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jun 2026 00:39:11.8572
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Igxjsh2CCSjR285fmee2D624ls/prGonVgGPGWLGURbLleKYZZaTCpK75KgPcXsT7P95uy4K8SMb/DuAezaoTw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM3PPF9EFFC957B
+X-OriginatorOrg: intel.com
+X-Spamd-Bar: ------
+X-MailFrom: matthew.brost@intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: NUUK2SCCAHADDJCIJY73LH6EIMXU5L72
-X-Message-ID-Hash: NUUK2SCCAHADDJCIJY73LH6EIMXU5L72
+Message-ID-Hash: IDKOUHRHZKQOZKE3UCXQTVOWGMOGJDMS
+X-Message-ID-Hash: IDKOUHRHZKQOZKE3UCXQTVOWGMOGJDMS
 X-Mailman-Approved-At: Thu, 25 Jun 2026 17:06:27 +0000
-CC: dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, Yousef Alhouseen <alhouseenyousef@gmail.com>
+CC: phasta@kernel.org, simona@ffwll.ch, sumit.semwal@linaro.org, tvrtko.ursulin@igalia.com, dakr@kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v2] dma-buf: udmabuf: avoid list copy size overflow
+Subject: [Linaro-mm-sig] Re: [PATCH 01/10] dma-buf: rename dma_fence_enable_sw_signaling
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NUUK2SCCAHADDJCIJY73LH6EIMXU5L72/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/IDKOUHRHZKQOZKE3UCXQTVOWGMOGJDMS/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [1.69 / 15.00];
-	R_DKIM_REJECT(1.00)[gmail.com:s=20251104];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:google.com:reject}];
+X-Spamd-Result: default: False [1.59 / 15.00];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
+	R_DKIM_REJECT(1.00)[intel.com:s=Intel];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+mx:c];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed),none];
-	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[intel.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER(0.00)[alhouseenyousef@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:kraxel@redhat.com,m:vivek.kasireddy@intel.com,m:sumit.semwal@linaro.org,m:christian.koenig@amd.com,m:dri-devel@lists.freedesktop.org,m:linux-media@vger.kernel.org,m:linaro-mm-sig@lists.linaro.org,m:linux-kernel@vger.kernel.org,m:alhouseenyousef@gmail.com,s:lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,intel.com:from_mime,intel.com:email,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp,amd.com:email];
+	FORGED_RECIPIENTS(0.00)[m:christian.koenig@amd.com,m:phasta@kernel.org,m:simona@ffwll.ch,m:sumit.semwal@linaro.org,m:tvrtko.ursulin@igalia.com,m:dakr@kernel.org,m:dri-devel@lists.freedesktop.org,m:linux-media@vger.kernel.org,m:linaro-mm-sig@lists.linaro.org,s:lists@lfdr.de];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FREEMAIL_CC(0.00)[lists.freedesktop.org,vger.kernel.org,lists.linaro.org,gmail.com];
+	DKIM_TRACE(0.00)[intel.com:-];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_SENDER(0.00)[matthew.brost@intel.com,linaro-mm-sig-bounces@lists.linaro.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCVD_COUNT_FIVE(0.00)[5];
-	ALIAS_RESOLVED(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[alhouseenyousef@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
-	DKIM_TRACE(0.00)[gmail.com:-];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
 	MISSING_XM_UA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	TO_DN_NONE(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[matthew.brost@intel.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[9];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp,linaro.org:email]
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	RCVD_COUNT_SEVEN(0.00)[9]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 3DCC86C7B6D
+X-Rspamd-Queue-Id: 8A2966C7B74
 
-VURNQUJVRl9DUkVBVEVfTElTVCBjb3BpZXMgYW4gYXJyYXkgd2hvc2UgZWxlbWVudCBjb3VudCBj
-b21lcyBmcm9tDQp1c2Vyc3BhY2UuIFRoZSBjb3VudCBpcyBib3VuZGVkIGJ5IHRoZSBsaXN0X2xp
-bWl0IG1vZHVsZSBwYXJhbWV0ZXIsIGJ1dA0KdGhhdCBwYXJhbWV0ZXIgZG9lcyBub3QgbmVlZCBu
-ZWdhdGl2ZSB2YWx1ZXMuDQoNCk1ha2UgbGlzdF9saW1pdCB1bnNpZ25lZCBzbyBpdHMgdHlwZSBt
-YXRjaGVzIHRoZSB1MzIgY291bnQgZmllbGQuIEFsc28NCnVzZSBtZW1kdXBfYXJyYXlfdXNlcigp
-IGZvciB0aGUgbGlzdCBjb3B5IHNvIHRoZSBlbGVtZW50LWNvdW50DQptdWx0aXBsaWNhdGlvbiBp
-cyBjaGVja2VkIGJlZm9yZSBhbGxvY2F0aW9uIGFuZCBjb3B5aW5nLg0KDQpTdWdnZXN0ZWQtYnk6
-IENocmlzdGlhbiBLw7ZuaWcgPGNocmlzdGlhbi5rb2VuaWdAYW1kLmNvbT4NClNpZ25lZC1vZmYt
-Ynk6IFlvdXNlZiBBbGhvdXNlZW4gPGFsaG91c2VlbnlvdXNlZkBnbWFpbC5jb20+DQotLS0NCkNo
-YW5nZXMgaW4gdjI6DQotIE1ha2UgbGlzdF9saW1pdCB1bnNpZ25lZCBhcyBzdWdnZXN0ZWQgYnkg
-Q2hyaXN0aWFuLg0KLSBLZWVwIHRoZSBjaGVja2VkIGFycmF5IGNvcHkgYW5kIGRyb3AgdGhlIGxv
-Y2FsIHUzMiBieXRlLWNvdW50IHRlbXBvcmFyeS4NCg0KIGRyaXZlcnMvZG1hLWJ1Zi91ZG1hYnVm
-LmMgfCA3ICsrKy0tLS0NCiAxIGZpbGUgY2hhbmdlZCwgMyBpbnNlcnRpb25zKCspLCA0IGRlbGV0
-aW9ucygtKQ0KDQpkaWZmIC0tZ2l0IGEvZHJpdmVycy9kbWEtYnVmL3VkbWFidWYuYyBiL2RyaXZl
-cnMvZG1hLWJ1Zi91ZG1hYnVmLmMNCmluZGV4IGJjZWQ0MjFjMC4uZTM0YTNiMTM1IDEwMDY0NA0K
-LS0tIGEvZHJpdmVycy9kbWEtYnVmL3VkbWFidWYuYw0KKysrIGIvZHJpdmVycy9kbWEtYnVmL3Vk
-bWFidWYuYw0KQEAgLTIxLDggKzIxLDggQEANCiAjaW5jbHVkZSA8bGludXgvdWRtYWJ1Zi5oPg0K
-ICNpbmNsdWRlIDxsaW51eC92bWFsbG9jLmg+DQoNCi1zdGF0aWMgaW50IGxpc3RfbGltaXQgPSAx
-MDI0Ow0KLW1vZHVsZV9wYXJhbShsaXN0X2xpbWl0LCBpbnQsIDA2NDQpOw0KK3N0YXRpYyB1bnNp
-Z25lZCBpbnQgbGlzdF9saW1pdCA9IDEwMjQ7DQorbW9kdWxlX3BhcmFtKGxpc3RfbGltaXQsIHVp
-bnQsIDA2NDQpOw0KIE1PRFVMRV9QQVJNX0RFU0MobGlzdF9saW1pdCwgInVkbWFidWZfY3JlYXRl
-X2xpc3QtPmNvdW50IGxpbWl0Lg0KRGVmYXVsdCBpcyAxMDI0LiIpOw0KIHN0YXRpYyBpbnQgc2l6
-ZV9saW1pdF9tYiA9IDY0Ow0KIG1vZHVsZV9wYXJhbShzaXplX2xpbWl0X21iLCBpbnQsIDA2NDQp
-Ow0KQEAgLTQ3MSwxMiArNDcxLDExIEBAIHN0YXRpYyBsb25nIHVkbWFidWZfaW9jdGxfY3JlYXRl
-X2xpc3Qoc3RydWN0DQpmaWxlICpmaWxwLCB1bnNpZ25lZCBsb25nIGFyZykNCiAJc3RydWN0IHVk
-bWFidWZfY3JlYXRlX2xpc3QgaGVhZDsNCiAJc3RydWN0IHVkbWFidWZfY3JlYXRlX2l0ZW0gKmxp
-c3Q7DQogCWludCByZXQgPSAtRUlOVkFMOw0KLQl1MzIgbHNpemU7DQoNCiAJaWYgKGNvcHlfZnJv
-bV91c2VyKCZoZWFkLCAodm9pZCBfX3VzZXIgKilhcmcsIHNpemVvZihoZWFkKSkpDQogCQlyZXR1
-cm4gLUVGQVVMVDsNCiAJaWYgKGhlYWQuY291bnQgPiBsaXN0X2xpbWl0KQ0KIAkJcmV0dXJuIC1F
-SU5WQUw7DQotCWxzaXplID0gc2l6ZW9mKHN0cnVjdCB1ZG1hYnVmX2NyZWF0ZV9pdGVtKSAqIGhl
-YWQuY291bnQ7DQotCWxpc3QgPSBtZW1kdXBfdXNlcigodm9pZCBfX3VzZXIgKikoYXJnICsgc2l6
-ZW9mKGhlYWQpKSwgbHNpemUpOw0KKwlsaXN0ID0gbWVtZHVwX2FycmF5X3VzZXIoKHZvaWQgX191
-c2VyICopKGFyZyArIHNpemVvZihoZWFkKSksDQorCQkJCSAgICAgIGhlYWQuY291bnQsIHNpemVv
-ZigqbGlzdCkpOw0KIAlpZiAoSVNfRVJSKGxpc3QpKQ0KIAkJcmV0dXJuIFBUUl9FUlIobGlzdCk7
-DQoNCi0tIA0KMi41NC4wDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3Rz
-LmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2ln
-LWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+On Wed, Jun 24, 2026 at 01:13:25PM +0200, Christian K=F6nig wrote:
+> Dropping the _sw_ part from the names was proposed multiple times now and
+> IIRC people generally agreed with the idea already.
+
+I certainly agree.
+
+Reviewed-by: Matthew Brost <matthew.brost@intel.com>
+
+>=20
+> The function requests a fence to signal and triggers some sort of HW
+> interaction on most backends.
+>=20
+> So this is not really software related at all and the callback is already
+> just named enable_signaling as well.
+>=20
+> Just streamline that and use a consistent name everywhere.
+>=20
+> Assisted-by: Claude Sonet 4
+> Signed-off-by: Christian K=F6nig <christian.koenig@amd.com>
+> ---
+>  drivers/dma-buf/dma-fence.c                   |  8 ++--
+>  drivers/dma-buf/st-dma-fence-chain.c          |  4 +-
+>  drivers/dma-buf/st-dma-fence-unwrap.c         | 42 +++++++++----------
+>  drivers/dma-buf/st-dma-fence.c                | 16 +++----
+>  drivers/dma-buf/st-dma-resv.c                 | 10 ++---
+>  drivers/gpu/drm/i915/i915_active.c            |  2 +-
+>  .../gpu/drm/ttm/tests/ttm_bo_validate_test.c  |  2 +-
+>  drivers/gpu/drm/ttm/ttm_bo.c                  |  2 +-
+>  drivers/gpu/drm/xe/xe_bo.c                    |  2 +-
+>  drivers/gpu/drm/xe/xe_sched_job.c             |  2 +-
+>  drivers/gpu/drm/xe/xe_svm.c                   |  2 +-
+>  drivers/gpu/drm/xe/xe_userptr.c               |  2 +-
+>  drivers/gpu/drm/xe/xe_vm.c                    |  4 +-
+>  include/linux/dma-fence.h                     |  4 +-
+>  14 files changed, 51 insertions(+), 51 deletions(-)
+>=20
+> diff --git a/drivers/dma-buf/dma-fence.c b/drivers/dma-buf/dma-fence.c
+> index c7ea1e75d38a..0ec81a568bbd 100644
+> --- a/drivers/dma-buf/dma-fence.c
+> +++ b/drivers/dma-buf/dma-fence.c
+> @@ -534,7 +534,7 @@ dma_fence_wait_timeout(struct dma_fence *fence, bool =
+intr, signed long timeout)
+> =20
+>  	__dma_fence_might_wait();
+> =20
+> -	dma_fence_enable_sw_signaling(fence);
+> +	dma_fence_enable_signaling(fence);
+> =20
+>  	rcu_read_lock();
+>  	ops =3D rcu_dereference(fence->ops);
+> @@ -656,14 +656,14 @@ static bool __dma_fence_enable_signaling(struct dma=
+_fence *fence)
+>  }
+> =20
+>  /**
+> - * dma_fence_enable_sw_signaling - enable signaling on fence
+> + * dma_fence_enable_signaling - enable signaling on fence
+>   * @fence: the fence to enable
+>   *
+>   * This will request for sw signaling to be enabled, to make the fence
+>   * complete as soon as possible. This calls &dma_fence_ops.enable_signal=
+ing
+>   * internally.
+>   */
+> -void dma_fence_enable_sw_signaling(struct dma_fence *fence)
+> +void dma_fence_enable_signaling(struct dma_fence *fence)
+>  {
+>  	unsigned long flags;
+> =20
+> @@ -671,7 +671,7 @@ void dma_fence_enable_sw_signaling(struct dma_fence *=
+fence)
+>  	__dma_fence_enable_signaling(fence);
+>  	dma_fence_unlock_irqrestore(fence, flags);
+>  }
+> -EXPORT_SYMBOL(dma_fence_enable_sw_signaling);
+> +EXPORT_SYMBOL(dma_fence_enable_signaling);
+> =20
+>  /**
+>   * dma_fence_add_callback - add a callback to be called when the fence
+> diff --git a/drivers/dma-buf/st-dma-fence-chain.c b/drivers/dma-buf/st-dm=
+a-fence-chain.c
+> index a3023d3fedc9..e0d9b69bfa76 100644
+> --- a/drivers/dma-buf/st-dma-fence-chain.c
+> +++ b/drivers/dma-buf/st-dma-fence-chain.c
+> @@ -82,7 +82,7 @@ static void test_sanitycheck(struct kunit *test)
+> =20
+>  	chain =3D mock_chain(NULL, f, 1);
+>  	if (chain)
+> -		dma_fence_enable_sw_signaling(chain);
+> +		dma_fence_enable_signaling(chain);
+>  	else
+>  		KUNIT_FAIL(test, "Failed to create chain");
+> =20
+> @@ -139,7 +139,7 @@ static int fence_chains_init(struct fence_chains *fc,=
+ unsigned int count,
+> =20
+>  		fc->tail =3D fc->chains[i];
+> =20
+> -		dma_fence_enable_sw_signaling(fc->chains[i]);
+> +		dma_fence_enable_signaling(fc->chains[i]);
+>  	}
+> =20
+>  	fc->chain_length =3D i;
+> diff --git a/drivers/dma-buf/st-dma-fence-unwrap.c b/drivers/dma-buf/st-d=
+ma-fence-unwrap.c
+> index 4e7ee25372ba..4d9d313b460c 100644
+> --- a/drivers/dma-buf/st-dma-fence-unwrap.c
+> +++ b/drivers/dma-buf/st-dma-fence-unwrap.c
+> @@ -103,7 +103,7 @@ static void test_sanitycheck(struct kunit *test)
+>  	f =3D mock_fence();
+>  	KUNIT_ASSERT_NOT_NULL(test, f);
+> =20
+> -	dma_fence_enable_sw_signaling(f);
+> +	dma_fence_enable_signaling(f);
+> =20
+>  	array =3D mock_array(1, f);
+>  	KUNIT_ASSERT_NOT_NULL(test, array);
+> @@ -122,7 +122,7 @@ static void test_unwrap_array(struct kunit *test)
+>  	f1 =3D mock_fence();
+>  	KUNIT_ASSERT_NOT_NULL(test, f1);
+> =20
+> -	dma_fence_enable_sw_signaling(f1);
+> +	dma_fence_enable_signaling(f1);
+> =20
+>  	f2 =3D mock_fence();
+>  	if (!f2) {
+> @@ -131,7 +131,7 @@ static void test_unwrap_array(struct kunit *test)
+>  		return;
+>  	}
+> =20
+> -	dma_fence_enable_sw_signaling(f2);
+> +	dma_fence_enable_signaling(f2);
+> =20
+>  	array =3D mock_array(2, f1, f2);
+>  	KUNIT_ASSERT_NOT_NULL(test, array);
+> @@ -160,7 +160,7 @@ static void test_unwrap_chain(struct kunit *test)
+>  	f1 =3D mock_fence();
+>  	KUNIT_ASSERT_NOT_NULL(test, f1);
+> =20
+> -	dma_fence_enable_sw_signaling(f1);
+> +	dma_fence_enable_signaling(f1);
+> =20
+>  	f2 =3D mock_fence();
+>  	if (!f2) {
+> @@ -169,7 +169,7 @@ static void test_unwrap_chain(struct kunit *test)
+>  		return;
+>  	}
+> =20
+> -	dma_fence_enable_sw_signaling(f2);
+> +	dma_fence_enable_signaling(f2);
+> =20
+>  	chain =3D mock_chain(f1, f2);
+>  	KUNIT_ASSERT_NOT_NULL(test, chain);
+> @@ -198,7 +198,7 @@ static void test_unwrap_chain_array(struct kunit *tes=
+t)
+>  	f1 =3D mock_fence();
+>  	KUNIT_ASSERT_NOT_NULL(test, f1);
+> =20
+> -	dma_fence_enable_sw_signaling(f1);
+> +	dma_fence_enable_signaling(f1);
+> =20
+>  	f2 =3D mock_fence();
+>  	if (!f2) {
+> @@ -207,7 +207,7 @@ static void test_unwrap_chain_array(struct kunit *tes=
+t)
+>  		return;
+>  	}
+> =20
+> -	dma_fence_enable_sw_signaling(f2);
+> +	dma_fence_enable_signaling(f2);
+> =20
+>  	array =3D mock_array(2, f1, f2);
+>  	KUNIT_ASSERT_NOT_NULL(test, array);
+> @@ -239,7 +239,7 @@ static void test_unwrap_merge(struct kunit *test)
+>  	f1 =3D mock_fence();
+>  	KUNIT_ASSERT_NOT_NULL(test, f1);
+> =20
+> -	dma_fence_enable_sw_signaling(f1);
+> +	dma_fence_enable_signaling(f1);
+> =20
+>  	f2 =3D mock_fence();
+>  	if (!f2) {
+> @@ -247,7 +247,7 @@ static void test_unwrap_merge(struct kunit *test)
+>  		goto error_put_f1;
+>  	}
+> =20
+> -	dma_fence_enable_sw_signaling(f2);
+> +	dma_fence_enable_signaling(f2);
+> =20
+>  	f3 =3D dma_fence_unwrap_merge(f1, f2);
+>  	if (!f3) {
+> @@ -285,7 +285,7 @@ static void test_unwrap_merge_duplicate(struct kunit =
+*test)
+>  	f1 =3D mock_fence();
+>  	KUNIT_ASSERT_NOT_NULL(test, f1);
+> =20
+> -	dma_fence_enable_sw_signaling(f1);
+> +	dma_fence_enable_signaling(f1);
+> =20
+>  	f2 =3D dma_fence_unwrap_merge(f1, f1);
+>  	if (!f2) {
+> @@ -322,7 +322,7 @@ static void test_unwrap_merge_seqno(struct kunit *tes=
+t)
+>  	f1 =3D __mock_fence(ctx[1], 1);
+>  	KUNIT_ASSERT_NOT_NULL(test, f1);
+> =20
+> -	dma_fence_enable_sw_signaling(f1);
+> +	dma_fence_enable_signaling(f1);
+> =20
+>  	f2 =3D __mock_fence(ctx[1], 2);
+>  	if (!f2) {
+> @@ -330,7 +330,7 @@ static void test_unwrap_merge_seqno(struct kunit *tes=
+t)
+>  		goto error_put_f1;
+>  	}
+> =20
+> -	dma_fence_enable_sw_signaling(f2);
+> +	dma_fence_enable_signaling(f2);
+> =20
+>  	f3 =3D __mock_fence(ctx[0], 1);
+>  	if (!f3) {
+> @@ -338,7 +338,7 @@ static void test_unwrap_merge_seqno(struct kunit *tes=
+t)
+>  		goto error_put_f2;
+>  	}
+> =20
+> -	dma_fence_enable_sw_signaling(f3);
+> +	dma_fence_enable_signaling(f3);
+> =20
+>  	f4 =3D dma_fence_unwrap_merge(f1, f2, f3);
+>  	if (!f4) {
+> @@ -378,7 +378,7 @@ static void test_unwrap_merge_order(struct kunit *tes=
+t)
+>  	f1 =3D mock_fence();
+>  	KUNIT_ASSERT_NOT_NULL(test, f1);
+> =20
+> -	dma_fence_enable_sw_signaling(f1);
+> +	dma_fence_enable_signaling(f1);
+> =20
+>  	f2 =3D mock_fence();
+>  	if (!f2) {
+> @@ -387,7 +387,7 @@ static void test_unwrap_merge_order(struct kunit *tes=
+t)
+>  		return;
+>  	}
+> =20
+> -	dma_fence_enable_sw_signaling(f2);
+> +	dma_fence_enable_signaling(f2);
+> =20
+>  	a1 =3D mock_array(2, f1, f2);
+>  	KUNIT_ASSERT_NOT_NULL(test, a1);
+> @@ -442,7 +442,7 @@ static void test_unwrap_merge_complex(struct kunit *t=
+est)
+>  	f1 =3D mock_fence();
+>  	KUNIT_ASSERT_NOT_NULL(test, f1);
+> =20
+> -	dma_fence_enable_sw_signaling(f1);
+> +	dma_fence_enable_signaling(f1);
+> =20
+>  	f2 =3D mock_fence();
+>  	if (!f2) {
+> @@ -450,7 +450,7 @@ static void test_unwrap_merge_complex(struct kunit *t=
+est)
+>  		goto error_put_f1;
+>  	}
+> =20
+> -	dma_fence_enable_sw_signaling(f2);
+> +	dma_fence_enable_signaling(f2);
+> =20
+>  	f3 =3D dma_fence_unwrap_merge(f1, f2);
+>  	if (!f3) {
+> @@ -510,7 +510,7 @@ static void test_unwrap_merge_complex_seqno(struct ku=
+nit *test)
+>  	f1 =3D __mock_fence(ctx[0], 2);
+>  	KUNIT_ASSERT_NOT_NULL(test, f1);
+> =20
+> -	dma_fence_enable_sw_signaling(f1);
+> +	dma_fence_enable_signaling(f1);
+> =20
+>  	f2 =3D __mock_fence(ctx[1], 1);
+>  	if (!f2) {
+> @@ -518,7 +518,7 @@ static void test_unwrap_merge_complex_seqno(struct ku=
+nit *test)
+>  		goto error_put_f1;
+>  	}
+> =20
+> -	dma_fence_enable_sw_signaling(f2);
+> +	dma_fence_enable_signaling(f2);
+> =20
+>  	f3 =3D __mock_fence(ctx[0], 1);
+>  	if (!f3) {
+> @@ -526,7 +526,7 @@ static void test_unwrap_merge_complex_seqno(struct ku=
+nit *test)
+>  		goto error_put_f2;
+>  	}
+> =20
+> -	dma_fence_enable_sw_signaling(f3);
+> +	dma_fence_enable_signaling(f3);
+> =20
+>  	f4 =3D __mock_fence(ctx[1], 2);
+>  	if (!f4) {
+> @@ -534,7 +534,7 @@ static void test_unwrap_merge_complex_seqno(struct ku=
+nit *test)
+>  		goto error_put_f3;
+>  	}
+> =20
+> -	dma_fence_enable_sw_signaling(f4);
+> +	dma_fence_enable_signaling(f4);
+> =20
+>  	f5 =3D mock_array(2, dma_fence_get(f1), dma_fence_get(f2));
+>  	if (!f5) {
+> diff --git a/drivers/dma-buf/st-dma-fence.c b/drivers/dma-buf/st-dma-fenc=
+e.c
+> index 499272229696..856d0d302a5d 100644
+> --- a/drivers/dma-buf/st-dma-fence.c
+> +++ b/drivers/dma-buf/st-dma-fence.c
+> @@ -42,7 +42,7 @@ static void test_sanitycheck(struct kunit *test)
+>  	f =3D mock_fence();
+>  	KUNIT_ASSERT_NOT_NULL(test, f);
+> =20
+> -	dma_fence_enable_sw_signaling(f);
+> +	dma_fence_enable_signaling(f);
+> =20
+>  	dma_fence_signal(f);
+>  	dma_fence_put(f);
+> @@ -55,7 +55,7 @@ static void test_signaling(struct kunit *test)
+>  	f =3D mock_fence();
+>  	KUNIT_ASSERT_NOT_NULL(test, f);
+> =20
+> -	dma_fence_enable_sw_signaling(f);
+> +	dma_fence_enable_signaling(f);
+> =20
+>  	if (dma_fence_is_signaled(f)) {
+>  		KUNIT_FAIL(test, "Fence unexpectedly signaled on creation");
+> @@ -127,7 +127,7 @@ static void test_late_add_callback(struct kunit *test)
+>  	f =3D mock_fence();
+>  	KUNIT_ASSERT_NOT_NULL(test, f);
+> =20
+> -	dma_fence_enable_sw_signaling(f);
+> +	dma_fence_enable_signaling(f);
+> =20
+>  	dma_fence_signal(f);
+> =20
+> @@ -209,7 +209,7 @@ static void test_status(struct kunit *test)
+>  	f =3D mock_fence();
+>  	KUNIT_ASSERT_NOT_NULL(test, f);
+> =20
+> -	dma_fence_enable_sw_signaling(f);
+> +	dma_fence_enable_signaling(f);
+> =20
+>  	if (dma_fence_get_status(f)) {
+>  		KUNIT_FAIL(test, "Fence unexpectedly has signaled status on creation");
+> @@ -233,7 +233,7 @@ static void test_error(struct kunit *test)
+>  	f =3D mock_fence();
+>  	KUNIT_ASSERT_NOT_NULL(test, f);
+> =20
+> -	dma_fence_enable_sw_signaling(f);
+> +	dma_fence_enable_signaling(f);
+> =20
+>  	dma_fence_set_error(f, -EIO);
+> =20
+> @@ -260,7 +260,7 @@ static void test_wait(struct kunit *test)
+>  	f =3D mock_fence();
+>  	KUNIT_ASSERT_NOT_NULL(test, f);
+> =20
+> -	dma_fence_enable_sw_signaling(f);
+> +	dma_fence_enable_signaling(f);
+> =20
+>  	if (dma_fence_wait_timeout(f, false, 0) !=3D 0) {
+>  		KUNIT_FAIL(test, "Wait reported complete before being signaled");
+> @@ -300,7 +300,7 @@ static void test_wait_timeout(struct kunit *test)
+>  	wt.f =3D mock_fence();
+>  	KUNIT_ASSERT_NOT_NULL(test, wt.f);
+> =20
+> -	dma_fence_enable_sw_signaling(wt.f);
+> +	dma_fence_enable_signaling(wt.f);
+> =20
+>  	if (dma_fence_wait_timeout(wt.f, false, 1) !=3D 0) {
+>  		KUNIT_FAIL(test, "Wait reported complete before being signaled");
+> @@ -379,7 +379,7 @@ static int thread_signal_callback(void *arg)
+>  			break;
+>  		}
+> =20
+> -		dma_fence_enable_sw_signaling(f1);
+> +		dma_fence_enable_signaling(f1);
+> =20
+>  		rcu_assign_pointer(t->fences[t->id], f1);
+>  		smp_wmb();
+> diff --git a/drivers/dma-buf/st-dma-resv.c b/drivers/dma-buf/st-dma-resv.c
+> index 95a4becdb892..0b96136bbd54 100644
+> --- a/drivers/dma-buf/st-dma-resv.c
+> +++ b/drivers/dma-buf/st-dma-resv.c
+> @@ -48,7 +48,7 @@ static void test_sanitycheck(struct kunit *test)
+>  	f =3D alloc_fence();
+>  	KUNIT_ASSERT_NOT_NULL(test, f);
+> =20
+> -	dma_fence_enable_sw_signaling(f);
+> +	dma_fence_enable_signaling(f);
+> =20
+>  	dma_fence_signal(f);
+>  	dma_fence_put(f);
+> @@ -73,7 +73,7 @@ static void test_signaling(struct kunit *test)
+>  	f =3D alloc_fence();
+>  	KUNIT_ASSERT_NOT_NULL(test, f);
+> =20
+> -	dma_fence_enable_sw_signaling(f);
+> +	dma_fence_enable_signaling(f);
+> =20
+>  	dma_resv_init(&resv);
+>  	r =3D dma_resv_lock(&resv, NULL);
+> @@ -117,7 +117,7 @@ static void test_for_each(struct kunit *test)
+>  	f =3D alloc_fence();
+>  	KUNIT_ASSERT_NOT_NULL(test, f);
+> =20
+> -	dma_fence_enable_sw_signaling(f);
+> +	dma_fence_enable_signaling(f);
+> =20
+>  	dma_resv_init(&resv);
+>  	r =3D dma_resv_lock(&resv, NULL);
+> @@ -176,7 +176,7 @@ static void test_for_each_unlocked(struct kunit *test)
+>  	f =3D alloc_fence();
+>  	KUNIT_ASSERT_NOT_NULL(test, f);
+> =20
+> -	dma_fence_enable_sw_signaling(f);
+> +	dma_fence_enable_signaling(f);
+> =20
+>  	dma_resv_init(&resv);
+>  	r =3D dma_resv_lock(&resv, NULL);
+> @@ -246,7 +246,7 @@ static void test_get_fences(struct kunit *test)
+>  	f =3D alloc_fence();
+>  	KUNIT_ASSERT_NOT_NULL(test, f);
+> =20
+> -	dma_fence_enable_sw_signaling(f);
+> +	dma_fence_enable_signaling(f);
+> =20
+>  	dma_resv_init(&resv);
+>  	r =3D dma_resv_lock(&resv, NULL);
+> diff --git a/drivers/gpu/drm/i915/i915_active.c b/drivers/gpu/drm/i915/i9=
+15_active.c
+> index 5cb7a72774a0..e7632c1ff4be 100644
+> --- a/drivers/gpu/drm/i915/i915_active.c
+> +++ b/drivers/gpu/drm/i915/i915_active.c
+> @@ -543,7 +543,7 @@ static void enable_signaling(struct i915_active_fence=
+ *active)
+>  	if (!fence)
+>  		return;
+> =20
+> -	dma_fence_enable_sw_signaling(fence);
+> +	dma_fence_enable_signaling(fence);
+>  	dma_fence_put(fence);
+>  }
+> =20
+> diff --git a/drivers/gpu/drm/ttm/tests/ttm_bo_validate_test.c b/drivers/g=
+pu/drm/ttm/tests/ttm_bo_validate_test.c
+> index 2db221f6fc3a..56ad8ef32584 100644
+> --- a/drivers/gpu/drm/ttm/tests/ttm_bo_validate_test.c
+> +++ b/drivers/gpu/drm/ttm/tests/ttm_bo_validate_test.c
+> @@ -69,7 +69,7 @@ static void dma_resv_kunit_active_fence_init(struct kun=
+it *test,
+>  	struct dma_fence *fence;
+> =20
+>  	fence =3D alloc_mock_fence(test);
+> -	dma_fence_enable_sw_signaling(fence);
+> +	dma_fence_enable_signaling(fence);
+> =20
+>  	dma_resv_lock(resv, NULL);
+>  	dma_resv_reserve_fences(resv, 1);
+> diff --git a/drivers/gpu/drm/ttm/ttm_bo.c b/drivers/gpu/drm/ttm/ttm_bo.c
+> index bcd76f6bb7f0..3980f376e3ba 100644
+> --- a/drivers/gpu/drm/ttm/ttm_bo.c
+> +++ b/drivers/gpu/drm/ttm/ttm_bo.c
+> @@ -224,7 +224,7 @@ static void ttm_bo_flush_all_fences(struct ttm_buffer=
+_object *bo)
+> =20
+>  	dma_resv_iter_begin(&cursor, resv, DMA_RESV_USAGE_BOOKKEEP);
+>  	dma_resv_for_each_fence_unlocked(&cursor, fence)
+> -		dma_fence_enable_sw_signaling(fence);
+> +		dma_fence_enable_signaling(fence);
+>  	dma_resv_iter_end(&cursor);
+>  }
+> =20
+> diff --git a/drivers/gpu/drm/xe/xe_bo.c b/drivers/gpu/drm/xe/xe_bo.c
+> index 4c80bac67622..85e6d9a0f575 100644
+> --- a/drivers/gpu/drm/xe/xe_bo.c
+> +++ b/drivers/gpu/drm/xe/xe_bo.c
+> @@ -670,7 +670,7 @@ static int xe_bo_trigger_rebind(struct xe_device *xe,=
+ struct xe_bo *bo,
+>  		dma_resv_iter_begin(&cursor, bo->ttm.base.resv,
+>  				    DMA_RESV_USAGE_BOOKKEEP);
+>  		dma_resv_for_each_fence_unlocked(&cursor, fence)
+> -			dma_fence_enable_sw_signaling(fence);
+> +			dma_fence_enable_signaling(fence);
+>  		dma_resv_iter_end(&cursor);
+>  	}
+> =20
+> diff --git a/drivers/gpu/drm/xe/xe_sched_job.c b/drivers/gpu/drm/xe/xe_sc=
+hed_job.c
+> index ae5b38b2a884..a4fa00632a30 100644
+> --- a/drivers/gpu/drm/xe/xe_sched_job.c
+> +++ b/drivers/gpu/drm/xe/xe_sched_job.c
+> @@ -214,7 +214,7 @@ void xe_sched_job_set_error(struct xe_sched_job *job,=
+ int error)
+> =20
+>  	trace_xe_sched_job_set_error(job);
+> =20
+> -	dma_fence_enable_sw_signaling(job->fence);
+> +	dma_fence_enable_signaling(job->fence);
+>  	xe_hw_fence_irq_run(job->q->fence_irq);
+>  }
+> =20
+> diff --git a/drivers/gpu/drm/xe/xe_svm.c b/drivers/gpu/drm/xe/xe_svm.c
+> index e1651e70c8f0..dba73786d82a 100644
+> --- a/drivers/gpu/drm/xe/xe_svm.c
+> +++ b/drivers/gpu/drm/xe/xe_svm.c
+> @@ -1090,7 +1090,7 @@ static int xe_drm_pagemap_populate_mm(struct drm_pa=
+gemap *dpagemap,
+>  				dma_resv_wait_timeout(bo->ttm.base.resv, DMA_RESV_USAGE_KERNEL,
+>  						      false, MAX_SCHEDULE_TIMEOUT);
+>  			else if (pre_migrate_fence)
+> -				dma_fence_enable_sw_signaling(pre_migrate_fence);
+> +				dma_fence_enable_signaling(pre_migrate_fence);
+>  		}
+> =20
+>  		drm_pagemap_devmem_init(&bo->devmem_allocation, dev, mm,
+> diff --git a/drivers/gpu/drm/xe/xe_userptr.c b/drivers/gpu/drm/xe/xe_user=
+ptr.c
+> index 6761005c0b90..2e45e42c648f 100644
+> --- a/drivers/gpu/drm/xe/xe_userptr.c
+> +++ b/drivers/gpu/drm/xe/xe_userptr.c
+> @@ -180,7 +180,7 @@ xe_vma_userptr_invalidate_pass1(struct xe_vm *vm, str=
+uct xe_userptr_vma *uvma)
+>  	dma_resv_iter_begin(&cursor, xe_vm_resv(vm),
+>  			    DMA_RESV_USAGE_BOOKKEEP);
+>  	dma_resv_for_each_fence_unlocked(&cursor, fence) {
+> -		dma_fence_enable_sw_signaling(fence);
+> +		dma_fence_enable_signaling(fence);
+>  		if (signaled && !dma_fence_is_signaled(fence))
+>  			signaled =3D false;
+>  	}
+> diff --git a/drivers/gpu/drm/xe/xe_vm.c b/drivers/gpu/drm/xe/xe_vm.c
+> index 080c2fff0e95..73ac031ffb04 100644
+> --- a/drivers/gpu/drm/xe/xe_vm.c
+> +++ b/drivers/gpu/drm/xe/xe_vm.c
+> @@ -256,7 +256,7 @@ int xe_vm_add_compute_exec_queue(struct xe_vm *vm, st=
+ruct xe_exec_queue *q)
+>  	 */
+>  	wait =3D __xe_vm_userptr_needs_repin(vm) || preempt_fences_waiting(vm);
+>  	if (wait)
+> -		dma_fence_enable_sw_signaling(pfence);
+> +		dma_fence_enable_signaling(pfence);
+> =20
+>  	xe_svm_notifier_unlock(vm);
+> =20
+> @@ -287,7 +287,7 @@ void xe_vm_remove_compute_exec_queue(struct xe_vm *vm=
+, struct xe_exec_queue *q)
+>  		--vm->preempt.num_exec_queues;
+>  	}
+>  	if (q->lr.pfence) {
+> -		dma_fence_enable_sw_signaling(q->lr.pfence);
+> +		dma_fence_enable_signaling(q->lr.pfence);
+>  		dma_fence_put(q->lr.pfence);
+>  		q->lr.pfence =3D NULL;
+>  	}
+> diff --git a/include/linux/dma-fence.h b/include/linux/dma-fence.h
+> index b52ab692b22e..158cd609f103 100644
+> --- a/include/linux/dma-fence.h
+> +++ b/include/linux/dma-fence.h
+> @@ -448,7 +448,7 @@ int dma_fence_add_callback(struct dma_fence *fence,
+>  			   dma_fence_func_t func);
+>  bool dma_fence_remove_callback(struct dma_fence *fence,
+>  			       struct dma_fence_cb *cb);
+> -void dma_fence_enable_sw_signaling(struct dma_fence *fence);
+> +void dma_fence_enable_signaling(struct dma_fence *fence);
+> =20
+>  /**
+>   * DOC: Safe external access to driver provided object members
+> @@ -534,7 +534,7 @@ dma_fence_is_signaled_locked(struct dma_fence *fence)
+>   * Returns true if the fence was already signaled, false if not. Since t=
+his
+>   * function doesn't enable signaling, it is not guaranteed to ever return
+>   * true if dma_fence_add_callback(), dma_fence_wait() or
+> - * dma_fence_enable_sw_signaling() haven't been called before.
+> + * dma_fence_enable_signaling() haven't been called before.
+>   *
+>   * It's recommended for seqno fences to call dma_fence_signal when the
+>   * operation is complete, it makes it possible to prevent issues from
+> --=20
+> 2.43.0
+>=20
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
