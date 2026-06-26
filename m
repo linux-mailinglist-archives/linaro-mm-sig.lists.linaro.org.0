@@ -2,39 +2,65 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id cOz3KSFKRmpzNwsAu9opvQ
+	id BdtnNTVuVmp85QAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 02 Jul 2026 13:23:13 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 19:13:25 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 30A426F6A12
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 02 Jul 2026 13:23:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 17D9E7573B6
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 19:13:25 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
 	dkim=none;
-	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=gmail.com (policy=none);
-	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org"
+	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
+	dmarc=none
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4B71640A6A
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  2 Jul 2026 11:23:12 +0000 (UTC)
-Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 1C40440A6A
-	for <linaro-mm-sig@lists.linaro.org>; Thu,  2 Jul 2026 11:23:07 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 0C7C6401D8
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 17:13:24 +0000 (UTC)
+Received: from cstnet.cn (smtp25.cstnet.cn [159.226.251.25])
+	by lists.linaro.org (Postfix) with ESMTPS id F3E8640A8A
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 26 Jun 2026 12:18:34 +0000 (UTC)
+Received: from localhost.localdomain (unknown [117.182.75.66])
+	by APP-05 (Coremail) with SMTP id zQCowACnMwcTbj5qSbNnFQ--.22821S2;
+	Fri, 26 Jun 2026 20:18:29 +0800 (CST)
+From: WenTao Liang <vulab@iscas.ac.cn>
+To: sumit.semwal@linaro.org,
+	christian.koenig@amd.com
+Date: Fri, 26 Jun 2026 20:18:25 +0800
+Message-Id: <20260626121825.35310-1-vulab@iscas.ac.cn>
+X-Mailer: git-send-email 2.39.5 (Apple Git-154)
 MIME-Version: 1.0
-From: make.olise3@gmail.com
-To: linaro-mm-sig@lists.linaro.org
-Date: Thu, 02 Jul 2026 11:23:07 -0000
-Message-ID: <178299138711.1568253.8043810324057554873@lists.linaro.org>
-User-Agent: HyperKitty on http://lists.linaro.org/
-Message-ID-Hash: TCTVC22O7ZGHPVPD2F6FWKIKEWYKOEZD
-X-Message-ID-Hash: TCTVC22O7ZGHPVPD2F6FWKIKEWYKOEZD
-X-MailFrom: make.olise3@gmail.com
-X-Mailman-Rule-Hits: member-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
+X-CM-TRANSID: zQCowACnMwcTbj5qSbNnFQ--.22821S2
+X-Coremail-Antispam: 1UD129KBjvJXoWrKw18XF17GFyUXw45Ary8Grg_yoW8Jryrpa
+	93Kr1UKr98K3WxZayDAF1DtFyFkr4rXry8WF4jka4Sv3s8ZFyUXr4vy3y2qF98Cr97GFZ8
+	J345Cry5WF1rAF7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUkl14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+	1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
+	6F4UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s
+	0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xII
+	jxv20xvE14v26r1Y6r17McIj6I8E87Iv67AKxVW8JVWxJwAm72CE4IkC6x0Yz7v_Jr0_Gr
+	1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7MxkF7I0En4kS14v26r12
+	6r1DMxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI
+	0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y
+	0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxV
+	W8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr0_Cr1l
+	IxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUjMqcUUUUU
+	U==
+X-Originating-IP: [117.182.75.66]
+X-CM-SenderInfo: pyxotu46lvutnvoduhdfq/1tbiDAcKA2o+ThJiEgAAs6
+X-Spamd-Bar: -
+X-MailFrom: vulab@iscas.ac.cn
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+Message-ID-Hash: IE2YQUK24BVQQJWFGT6TOXYFU72GHSW6
+X-Message-ID-Hash: IE2YQUK24BVQQJWFGT6TOXYFU72GHSW6
+X-Mailman-Approved-At: Tue, 14 Jul 2026 17:13:20 +0000
+CC: linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, WenTao Liang <vulab@iscas.ac.cn>, stable@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Wasap(+44 7397 620325)BUY PROP CANADIAN DOLLARS,FAKE CANADAIN MONEY FOR SALE,COUNTERFIET CAD DOOLARS FOR SALE , BUY FAKE EURO BILLS , BUY FAKE USD DOLLARS BILLS, BUY FAKE CANADIAN DOLLARS
+Subject: [Linaro-mm-sig] [PATCH] fix: dma-buf: fence_chains_init: error unwind path leaks   enable_sw_signaling reference
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TCTVC22O7ZGHPVPD2F6FWKIKEWYKOEZD/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/IE2YQUK24BVQQJWFGT6TOXYFU72GHSW6/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -44,79 +70,72 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [2.11 / 15.00];
-	LONG_SUBJ(1.52)[203];
-	MID_RHS_MATCH_TO(1.00)[];
+X-Spamd-Result: default: False [1.49 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
+	DATE_IN_PAST(1.00)[436];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[3];
+	FROM_HAS_DN(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:linaro-mm-sig@lists.linaro.org,s:lists@lfdr.de];
+	DMARC_NA(0.00)[iscas.ac.cn];
+	FORGED_RECIPIENTS(0.00)[m:sumit.semwal@linaro.org,m:christian.koenig@amd.com,m:linux-media@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,m:linux-kernel@vger.kernel.org,m:vulab@iscas.ac.cn,m:stable@vger.kernel.org,s:lists@lfdr.de];
+	SUSPICIOUS_AUTH_ORIGIN(0.00)[];
 	ARC_NA(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FORGED_SENDER(0.00)[makeolise3@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER(0.00)[vulab@iscas.ac.cn,linaro-mm-sig-bounces@lists.linaro.org];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	FROM_NO_DN(0.00)[];
-	RCPT_COUNT_ONE(0.00)[1];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_NEQ_ENVFROM(0.00)[makeolise3@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_NONE(0.00)[];
-	R_DKIM_NA(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	HAS_XOIP(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[vulab@iscas.ac.cn,linaro-mm-sig-bounces@lists.linaro.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[8];
+	R_DKIM_NA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:mid,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,iscas.ac.cn:from_mime,iscas.ac.cn:email,iscas.ac.cn:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 30A426F6A12
+X-Rspamd-Queue-Id: 17D9E7573B6
 
-We offer high quality counterfeit money that looks real for all customers and we treat all customers the same . Our undetectable counterfeit money are use in Banks ,ATM Machines, supermarkets , currency exchange stores . Contact us today for your visit to this website is not by error and we assure you always good deals . Dream chasers for live . Here is your chance to be a millionaire. Order High Quality Counterfeit Euro Bills Online
+dma_fence_enable_sw_signaling acquires an extra reference on each chain
+  fence. The error unwind loop calls dma_fence_put only once per
+  chain/fence without first signaling the fence to trigger the callback
+  that releases the signaling reference. This prevents the chain fence kref
+  from reaching 0, permanently leaking the chain and its contained fence.
 
-FACE TO FACE AVAILABLE NOW FOR EXCHANGE
+Cc: stable@vger.kernel.org
+Fixes: dc2f7e67a28a ("dma-buf: Exercise dma-fence-chain under selftests")
+Signed-off-by: WenTao Liang <vulab@iscas.ac.cn>
+---
+ drivers/dma-buf/st-dma-fence-chain.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-WhatsApp(+44 7397 620325)
+diff --git a/drivers/dma-buf/st-dma-fence-chain.c b/drivers/dma-buf/st-dma-fence-chain.c
+index 821023dd34df..7dc18e294387 100644
+--- a/drivers/dma-buf/st-dma-fence-chain.c
++++ b/drivers/dma-buf/st-dma-fence-chain.c
+@@ -152,7 +152,10 @@ static int fence_chains_init(struct fence_chains *fc, unsigned int count,
  
-{{Telegram @Frink002 }}
+ unwind:
+ 	for (i = 0; i < count; i++) {
+-		dma_fence_put(fc->fences[i]);
++		if (fc->fences[i]) {
++			dma_fence_signal(fc->fences[i]);
++			dma_fence_put(fc->fences[i]);
++		}
+ 		dma_fence_put(fc->chains[i]);
+ 	}
+ 	kvfree(fc->fences);
+-- 
+2.39.5 (Apple Git-154)
 
-BUY CANADIAN DOLLARS ,FAKE CANADAIN MONEY FOR SALE,COUNTERFIET CAD DOOLARS FOR SALE , BUY FAKE EURO BILLS , 
-Buy counterfeit USD notes in Greece
-Buy Fake USD Notes in europe, Get counterfeit euro notes in Greece
-The guidelines on detecting counterfeit currency give a comparison of genuine and falsified security features.
-- Our bills/notes bypass everything, counterfeit pens and machines.
-- Can be used in banks but can be used elsewhere same like normal money
-- We have the best HOLOGRAMS AND DUPLICATING MACHINES
-- UV Verification: YES
-EUR - Euro
-USD - US Dollar
-GBP - British Pound
-AUD - Australian Dollar
-CAD - Canadian Dollar
-
-WhatsApp(+44 7397 620325)
- 
-{{Telegram @Frink002 }}
-
-{{Telegram @Frink002 }}
-
-Email.( Realnotesupply@gmail.com )
-
-Buy 50s -20s and 10s Euro from Italy -Spain, Fake money produced by us is good enough to pass through ATMs and other machines undetected, Buy fake 20s and 50s in Spain, Our bank notes are distributed in several countries like Italy, Germany Portugal, Belgium, Greece and more euros for sale online, fake 10 euro notes, buy fake 20 euros online, buy fake 20 euros, buy counterfeit 20 euro bills, buy fake 20 eurod bills, buy fake 20 euros notes online, buy fake 5o euro bills, buy fake 50 euro notes online, buy fake 50 counterfeit euros, buy counterfeit 50 euros bills, buy fake 10 euros bills online, buy 10 euro bills online, buy fake euro notes online.
-
-BUY DRIVING LICENSE,BUY BOAT LICENSE , BUY GAMBLING LICENSE, BUY PILOT LICENSE Apply for a passport online , Buy Passport Online Apply for Passport Online Fast Passport Services Renew Passport Online Get Passport in 24 Hours EU Passport Application US Passport Renewal Cotact bellow FACE TO FACE DEALS ALSO AVAILABLE TO THOSE WHO ARE SKEPTICAL SO YOU CAN BUY FACE TO FACE AND ALSO GET TO TEST SAMPLES FIRST BEFORE YOU PLACE AN ORDER. CONTACT ME WITH CONFIDENT AND FIND OUT THE MAGIC IN COUNTERFEIT AND DOCUMENTS WORLD 
-
-
-WhatsApp(+44 7397 620325)
- 
-{{Telegram @Frink002 }}) 
-
-Email.( Realnotesupply@gmail.com )
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
