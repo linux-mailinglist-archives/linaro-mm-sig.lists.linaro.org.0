@@ -2,287 +2,179 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id SAZ5AUI2PmobBgkAu9opvQ
+	id VKN4GQhPPmrADAkAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 26 Jun 2026 10:20:18 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 26 Jun 2026 12:06:00 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7A0FD6CB464
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 26 Jun 2026 10:20:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DEB796CBE97
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 26 Jun 2026 12:05:59 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=B3UKCLZU;
+	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=PZs6rUkY;
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
 	dmarc=fail reason="SPF not aligned (relaxed)" header.from=kernel.org (policy=quarantine)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 36DEE4107C
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 26 Jun 2026 08:20:16 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D3C1D41478
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 26 Jun 2026 10:05:58 +0000 (UTC)
 Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
-	by lists.linaro.org (Postfix) with ESMTPS id B29EC3F7BF
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 26 Jun 2026 08:19:57 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 5787B401CE
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 26 Jun 2026 10:05:47 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	by tor.source.kernel.org (Postfix) with ESMTP id 5216C60098;
-	Fri, 26 Jun 2026 08:19:57 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 45BA91F000E9;
-	Fri, 26 Jun 2026 08:19:54 +0000 (UTC)
+	by tor.source.kernel.org (Postfix) with ESMTP id C34BA60122;
+	Fri, 26 Jun 2026 10:05:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B83101F000E9;
+	Fri, 26 Jun 2026 10:05:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1782461997;
-	bh=kEdeUSPXy5rJNpK1fxsrh40FY6vBxzMx9z5QFxqNe4I=;
+	s=k20260515; t=1782468346;
+	bh=XPOnL3YaXcY5m5ZE7tv6kcrdVXllWoBe5sPRf2jXnF4=;
 	h=From:To:Cc:Subject:Date;
-	b=B3UKCLZUFcmhelGJT4krdyefLuhIVINztM/dydshI64zWR90fM//IGuqgXGpjMtlo
-	 bUdE4R8L+eUHrIZKK3YYFx+x2Cl0v4fiRYV5T/bptFEhrgUjbrmMDm/C7VHcfvnTQa
-	 5nNb+L5o3suOIEE40agTxkD1+MsBhfM66WRhEMX/5PtDwDF/9Ux+k9l+imzsrmeWNX
-	 31k9seI8pDvZaRu5tCllI8/8YwSzqfF6VF34G0nezUK2Y/RwWbvYvdh/hQTkdpAdK6
-	 xXU54MED80/zrRnvN0pPYHF1boKeL3BklkZvzNAk2MGDUqs6eqPDOsk8PC3j72Iufu
-	 tCjsOPMUtJm/A==
+	b=PZs6rUkYf9rAESRZeLEJuYSARXc9W6t080JPfO71cLYWXcyEgTuFTkHXIYKclq6gG
+	 euJHYHsWp6jtUC8y3lCHYOjKKbyhia1WduFm6BhN3rQxzTUQIYvkAKMeNnseHV8hl6
+	 bsbCOzZzZgga2sfNdrNj21lttW90LocD4TXyKqy5Y+zx1DOxX/5rmUN8YcbZc9pMW9
+	 sMtuu+LOqvFonMMC2nK+Jsih17DBX4ORaR4DrbrCSkN0qbULQ6sH5MmidGqOBqadZu
+	 p8hOYT6WDeHqrnd3lP3LA4fyeVVf4cfm114K50otfqHf4cGHPOrsNb4iEDgcfutswq
+	 26VioYZkSBhCA==
 From: Philipp Stanner <phasta@kernel.org>
-To: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>,
-	Matthew Brost <matthew.brost@intel.com>,
+To: Sumit Semwal <sumit.semwal@linaro.org>,
+	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+	Boris Brezillon <boris.brezillon@collabora.com>,
+	Tvrtko Ursulin <tvrtko.ursulin@igalia.com>,
+	=?UTF-8?q?Andr=C3=A9=20Draszik?= <andre.draszik@linaro.org>,
 	Danilo Krummrich <dakr@kernel.org>,
-	Philipp Stanner <phasta@kernel.org>,
-	=?UTF-8?q?Christian=20K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	David Airlie <airlied@gmail.com>,
-	Simona Vetter <simona@ffwll.ch>,
-	Sumit Semwal <sumit.semwal@linaro.org>
-Date: Fri, 26 Jun 2026 10:19:43 +0200
-Message-ID: <20260626081942.2122144-2-phasta@kernel.org>
+	Gary Guo <gary@garyguo.net>,
+	"Paul E . McKenney" <paulmck@kernel.org>,
+	Boqun Feng <boqun@kernel.org>
+Date: Fri, 26 Jun 2026 12:04:42 +0200
+Message-ID: <20260626100442.2202221-2-phasta@kernel.org>
 X-Mailer: git-send-email 2.54.0
 MIME-Version: 1.0
-X-Spamd-Bar: -----
-Message-ID-Hash: RFCNRIE2AFGJX4AS3L7BASWJXS3B7NQL
-X-Message-ID-Hash: RFCNRIE2AFGJX4AS3L7BASWJXS3B7NQL
+X-Spamd-Bar: ------
+Message-ID-Hash: 4QTZBXVUPZDRZBKSSPODFVUG6FIVYZ53
+X-Message-ID-Hash: 4QTZBXVUPZDRZBKSSPODFVUG6FIVYZ53
 X-MailFrom: phasta@kernel.org
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
-CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+CC: linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, Philipp Stanner <phasta@kernel.org>, stable@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v2] drm/sched: Protect entity->last_scheduled with spinlock
+Subject: [Linaro-mm-sig] [PATCH] dma-buf: dma-fence: Fix potential NULL pointer dereference
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RFCNRIE2AFGJX4AS3L7BASWJXS3B7NQL/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4QTZBXVUPZDRZBKSSPODFVUG6FIVYZ53/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [4.49 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [3.09 / 15.00];
 	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
 	MID_CONTAINS_FROM(1.00)[];
 	R_DKIM_REJECT(1.00)[kernel.org:s=k20260515];
-	R_SPF_ALLOW(-0.20)[+mx];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+mx];
+	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_RECIPIENTS(0.00)[m:tvrtko.ursulin@igalia.com,m:matthew.brost@intel.com,m:dakr@kernel.org,m:phasta@kernel.org,m:ckoenig.leichtzumerken@gmail.com,m:maarten.lankhorst@linux.intel.com,m:mripard@kernel.org,m:tzimmermann@suse.de,m:airlied@gmail.com,m:simona@ffwll.ch,m:sumit.semwal@linaro.org,m:dri-devel@lists.freedesktop.org,m:linux-kernel@vger.kernel.org,m:linux-media@vger.kernel.org,m:linaro-mm-sig@lists.linaro.org,m:ckoenigleichtzumerken@gmail.com,s:lists@lfdr.de];
-	GREYLIST(0.00)[pass,meta];
-	FORGED_SENDER(0.00)[phasta@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	FREEMAIL_TO(0.00)[igalia.com,intel.com,kernel.org,gmail.com,linux.intel.com,suse.de,ffwll.ch,linaro.org];
-	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	DKIM_TRACE(0.00)[kernel.org:-];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:sumit.semwal@linaro.org,m:christian.koenig@amd.com,m:boris.brezillon@collabora.com,m:tvrtko.ursulin@igalia.com,m:andre.draszik@linaro.org,m:dakr@kernel.org,m:gary@garyguo.net,m:paulmck@kernel.org,m:boqun@kernel.org,m:linux-media@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,m:linux-kernel@vger.kernel.org,m:phasta@kernel.org,m:stable@vger.kernel.org,s:lists@lfdr.de];
+	ARC_NA(0.00)[];
+	FORGED_SENDER(0.00)[phasta@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[15];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[phasta@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:-];
 	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email]
+	TO_DN_SOME(0.00)[]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 7A0FD6CB464
+X-Rspamd-Queue-Id: DEB796CBE97
 
-The entity->last_scheduled field has always been set and read with
-special RCU functions in addition to memory barriers. There is no
-obvious reason for that, since the entity lock is available and taken at
-all places that evaluate the last_scheduled field. The only exception is
-drm_sched_entity_error(), which is not performance critical in any way.
-
-Improve robustness, readability and maintainability by replacing RCU and
-barriers with the lock.
-
-As a preparational step, while at it, also guard spsc_queue_pop() with
-the lock, since spsc_queue is deprecated and supposed to be replaced
-with a locked list.
-
-Signed-off-by: Philipp Stanner <phasta@kernel.org>
----
-Changes since v1:
-  - Add a helper variable to drop the last_scheduled reference without
-    the entity lock being held; just to be more robust.
-  - Write additional comment to detail the WRITE_ONCE().
----
- drivers/gpu/drm/scheduler/sched_entity.c | 58 +++++++++++++-----------
- include/drm/gpu_scheduler.h              |  9 ++--
- 2 files changed, 35 insertions(+), 32 deletions(-)
-
-diff --git a/drivers/gpu/drm/scheduler/sched_entity.c b/drivers/gpu/drm/scheduler/sched_entity.c
-index c51101ec70c1..12fd695c6d46 100644
---- a/drivers/gpu/drm/scheduler/sched_entity.c
-+++ b/drivers/gpu/drm/scheduler/sched_entity.c
-@@ -135,7 +135,6 @@ int drm_sched_entity_init(struct drm_sched_entity *entity,
- 	entity->num_sched_list = num_sched_list;
- 	entity->sched_list = num_sched_list > 1 ? sched_list : NULL;
- 	entity->rq = &sched_list[0]->rq;
--	RCU_INIT_POINTER(entity->last_scheduled, NULL);
- 	RB_CLEAR_NODE(&entity->rb_tree_node);
- 	init_completion(&entity->entity_idle);
- 
-@@ -201,10 +200,10 @@ int drm_sched_entity_error(struct drm_sched_entity *entity)
- 	struct dma_fence *fence;
- 	int r;
- 
--	rcu_read_lock();
--	fence = rcu_dereference(entity->last_scheduled);
-+	spin_lock(&entity->lock);
-+	fence = entity->last_scheduled;
- 	r = fence ? fence->error : 0;
--	rcu_read_unlock();
-+	spin_unlock(&entity->lock);
- 
- 	return r;
- }
-@@ -288,8 +287,10 @@ void drm_sched_entity_kill(struct drm_sched_entity *entity)
- 	wait_for_completion(&entity->entity_idle);
- 
- 	/* The entity is guaranteed to not be used by the scheduler */
--	prev = rcu_dereference_check(entity->last_scheduled, true);
-+	spin_lock(&entity->lock);
-+	prev = entity->last_scheduled;
- 	dma_fence_get(prev);
-+	spin_unlock(&entity->lock);
- 	while ((job = drm_sched_entity_queue_pop(entity))) {
- 		struct drm_sched_fence *s_fence = job->s_fence;
- 
-@@ -381,8 +382,12 @@ void drm_sched_entity_fini(struct drm_sched_entity *entity)
- 		entity->dependency = NULL;
- 	}
- 
--	dma_fence_put(rcu_dereference_check(entity->last_scheduled, true));
--	RCU_INIT_POINTER(entity->last_scheduled, NULL);
-+	dma_fence_put(entity->last_scheduled);
-+	/*
-+	 * Normally all users should be gone now, but since drm_sched has
-+	 * experienced many layering violations in the past, better be safe.
-+	 */
-+	WRITE_ONCE(entity->last_scheduled, NULL);
- 	drm_sched_entity_stats_put(entity->stats);
- }
- EXPORT_SYMBOL(drm_sched_entity_fini);
-@@ -507,6 +512,10 @@ drm_sched_job_dependency(struct drm_sched_job *job,
- 
- struct drm_sched_job *drm_sched_entity_pop_job(struct drm_sched_entity *entity)
- {
-+	/* Helper to avoid dropping the reference while the entity lock is held,
-+	 * just to have some more robustness.
-+	 */
-+	struct dma_fence *prev_last_scheduled;
- 	struct drm_sched_job *sched_job;
- 
- 	sched_job = drm_sched_entity_queue_peek(entity);
-@@ -523,19 +532,20 @@ struct drm_sched_job *drm_sched_entity_pop_job(struct drm_sched_entity *entity)
- 	if (entity->guilty && atomic_read(entity->guilty))
- 		dma_fence_set_error(&sched_job->s_fence->finished, -ECANCELED);
- 
--	dma_fence_put(rcu_dereference_check(entity->last_scheduled, true));
--	rcu_assign_pointer(entity->last_scheduled,
--			   dma_fence_get(&sched_job->s_fence->finished));
-+	spin_lock(&entity->lock);
-+	prev_last_scheduled = entity->last_scheduled;
-+	entity->last_scheduled = dma_fence_get(&sched_job->s_fence->finished);
- 
--	/*
--	 * If the queue is empty we allow drm_sched_entity_select_rq() to
--	 * locklessly access ->last_scheduled. This only works if we set the
--	 * pointer before we dequeue and if we a write barrier here.
-+	/* A recent rework required taking the spinlock above. Since spsc_queue
-+	 * is scheduled for removal as per the DRM-TODO-list, we access it here
-+	 * locked already to prepare for that cleanup.
-+	 *
-+	 * TODO: Fully replace spsc_queue with a locked (h)list.
- 	 */
--	smp_wmb();
--
- 	spsc_queue_pop(&entity->job_queue);
-+	spin_unlock(&entity->lock);
- 
-+	dma_fence_put(prev_last_scheduled);
- 	drm_sched_rq_pop_entity(entity);
- 
- 	/* Jobs and entities might have different lifecycles. Since we're
-@@ -561,21 +571,15 @@ void drm_sched_entity_select_rq(struct drm_sched_entity *entity)
- 	if (spsc_queue_count(&entity->job_queue))
- 		return;
- 
--	/*
--	 * Only when the queue is empty are we guaranteed that
--	 * drm_sched_run_job_work() cannot change entity->last_scheduled. To
--	 * enforce ordering we need a read barrier here. See
--	 * drm_sched_entity_pop_job() for the other side.
--	 */
--	smp_rmb();
--
--	fence = rcu_dereference_check(entity->last_scheduled, true);
-+	spin_lock(&entity->lock);
-+	fence = entity->last_scheduled;
- 
- 	/* stay on the same engine if the previous job hasn't finished */
--	if (fence && !dma_fence_is_signaled(fence))
-+	if (fence && !dma_fence_is_signaled(fence)) {
-+		spin_unlock(&entity->lock);
- 		return;
-+	}
- 
--	spin_lock(&entity->lock);
- 	sched = drm_sched_pick_best(entity->sched_list, entity->num_sched_list);
- 	rq = sched ? &sched->rq : NULL;
- 	if (rq != entity->rq) {
-diff --git a/include/drm/gpu_scheduler.h b/include/drm/gpu_scheduler.h
-index d61c19e78182..176ff1f936cd 100644
---- a/include/drm/gpu_scheduler.h
-+++ b/include/drm/gpu_scheduler.h
-@@ -100,7 +100,8 @@ struct drm_sched_entity {
- 	 * @lock:
- 	 *
- 	 * Lock protecting the run-queue (@rq) to which this entity belongs,
--	 * @priority and the list of schedulers (@sched_list, @num_sched_list).
-+	 * @priority, @last_scheduled and the list of schedulers (@sched_list,
-+	 * @num_sched_list).
- 	 */
- 	spinlock_t			lock;
- 
-@@ -202,11 +203,9 @@ struct drm_sched_entity {
- 	/**
- 	 * @last_scheduled:
- 	 *
--	 * Points to the finished fence of the last scheduled job. Only written
--	 * by drm_sched_entity_pop_job(). Can be accessed locklessly from
--	 * drm_sched_job_arm() if the queue is empty.
-+	 * Points to the finished fence of the last scheduled job.
- 	 */
--	struct dma_fence __rcu		*last_scheduled;
-+	struct dma_fence		*last_scheduled;
- 
- 	/**
- 	 * @last_user: last group leader pushing a job into the entity.
--- 
-2.54.0
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+VGhlIGNvbW1pdCBtZW50aW9uZWQgaW4gdGhlIGZpeGVzIHRhZyBiZWxvdyBpbnRyb2R1Y2VkIGEg
+bWVjaGFuaXNtDQp0aHJvdWdoIHdoaWNoIGZlbmNlIHByb2R1Y2VycyBjYW4gZnVsbHkgZGVjb3Vw
+bGUgZnJvbSBmZW5jZSBjb25zdW1lcnMuDQpUaGlzLCBkZXNpcmFibGUsIG1lY2hhbmlzbSBpcyBi
+YXNlZCBvbiB0aGUgZmVuY2UncyBzaWduYWxlZC1iaXQgYXMgdGhlDQoiZGVjb3VwbGluZyBwb2lu
+dCIuDQoNCkEgc29waGlzdGljYXRlZCBpbnRlcmFjdGlvbiBiZXR3ZWVuIFJDVSBhbmQgYXRvbWlj
+IGluc3RydWN0aW9ucyBhdHRlbXB0cw0KdG8gZW5zdXJlIHRoYXQgZmVuY2UgY29uc3VtZXJzIGNh
+biBzdGlsbCBpbnRlcmFjdCB3aXRoIGZlbmNlIHByb2R1Y2Vycw0KdGhyb3VnaCB0aGUgZG1hX2Zl
+bmNlX29wcywgY2FsbGJhY2sgcG9pbnRlcnMgaW50byB0aGUgcHJvZHVjZXIuDQoNClRoaXMgaXMg
+dGhlIGRlc2lyZWQgYmVoYXZpb3I6IHRvIGNoZWNrIGZvciBkZWNvdXBsaW5nLCB0aGUgc2lnbmFs
+ZWQtYml0DQppcyBmaXJzdCBjaGVja2VkLiBJZiBpdCdzIG5vdCB5ZXQgc2lnbmFsZWQsIFJDVSBl
+bnN1cmVzIHRoYXQgdGhlIG9wcw0KcG9pbnRlciBjYW5ub3QgeWV0IGJlIE5VTEwuDQoNCkhlcmVi
+eSwgZG1hX2ZlbmNlX3NpZ25hbF90aW1lc3RhbXBfbG9ja2VkKCkgZmlyc3Qgc2V0cyB0aGUgc2ln
+bmFsZWQtYml0LA0KYW5kIHRoZW4gc2V0cyB0aGUgb3BzIHBvaW50ZXIgdG8gTlVMTC4gUmVhZGVy
+cyBmaXJzdCBsb2FkIHRoZSBvcHMNCnBvaW50ZXIsIGFuZCB0aGVuIGNoZWNrIHRocm91Z2ggdGhl
+IHNpZ25hbGVkLWJpdCB3aGV0aGVyIHRoZSBwb2ludGVyIGNhbg0KbGVnYWxseSBiZSBhY2Nlc3Nl
+ZC4NCg0KVGhlc2Ugc2V0IGFuZCBsb2FkIG9wZXJhdGlvbnMgY291bGQgb2NjdXIgb3V0IG9mIG9y
+ZGVyIG9uIHdlYWtseSBvcmRlcmVkDQpwbGF0Zm9ybXMuIEhlbmNlLCB3ZSBuZWVkIHRvIGVuZm9y
+Y2Ugc3RyaWN0IG9yZGVyaW5nIGFsbCB0aGUgdGltZS4NCg0KQWRkIHRoZSBhcHByb3ByaWF0ZSBt
+ZW1vcnkgYmFycmllcnMuDQoNCkNjOiBzdGFibGVAdmdlci5rZXJuZWwub3JnDQpGaXhlczogZjRj
+YzNhYjgyNGQ2ICgiZG1hLWJ1ZjogcHJvdGVjdGVkIGZlbmNlIG9wcyBieSBSQ1UgdjgiKQ0KU2ln
+bmVkLW9mZi1ieTogUGhpbGlwcCBTdGFubmVyIDxwaGFzdGFAa2VybmVsLm9yZz4NCi0tLQ0KVGVz
+dGVkIHdpdGggZG1hYnVmIGFuZCBkcm1fc2NoZWQgdW5pdCB0ZXN0cy4NCg0KTWVtb3J5IGJhcnJp
+ZXJzIGFyZSBub3RvcmlvdXNseSBkaWZmaWN1bHQsIHNvIEkgd291bGQgYXBwcmVjaWF0ZSBpZiBz
+b21lDQpvZiB0aGUgbW9yZSBleHBlcmllbmNlZCBmb2xrcyBjYW4gY2hlY2sgdGhpcy4gTm90YWJs
+eSwgSSBhbSBub3Qgc3VyZQ0Kd2hldGhlciB0aGUgc21wX3dtYigpIGlzIG5lY2Vzc2FyeS4NCg0K
+VGhlIGRvY3VtZW50YXRpb24gZm9yIHRlc3RfYW5kX3NldF9iaXQoKSBtYWtlcyB0aGUgbXlzdGVy
+aW91cyBzdGF0ZW1lbnQNCiJUaGlzIGlzIGFuIGF0b21pYyBmdWxseS1vcmRlcmVkIG9wZXJhdGlv
+biAoaW1wbGllZCBmdWxsIG1lbW9yeQ0KYmFycmllcikiLCBidXQgdGhlIGtjc2FuX21iKCkgc2Vl
+bXMgdG8gYmUgc29tZSBzb3J0IG9mIGRlYnVnZ2luZw0KYmFycmllciwgYW5kIGluIGFueSBjYXNl
+IHRoZSBkb2N1IGRvZXNuJ3QgbWFrZSBpdCBvYnZpb3VzIHRvIG1lIHdoZXRoZXINCnRoYXQgImZ1
+bGwgYmFycmllciIgY29tZXMgYmVmb3JlIG9yIGFmdGVyIHRoZSBiaXQgc2V0dGluZyB0YWtlcyBw
+bGFjZS4NCg0KTW9yZW92ZXIsIGluIG15IG9waW5pb24gd2Ugc2hvdWxkIG9yZGVyIGRtYV9mZW5j
+ZV9pc19zaWduYWxlZCgpLCB0b28g4oCTDQpidXQgaWYgd2UgYWdyZWUgdG8gbWVyZ2UgQ2hyaXN0
+aWFuJ3MgbmV3IHNlcmllcyBbMV0gdGhhdCBuZWVkIHNob3VsZA0KZGlzYXBwZWFyLg0KDQoNClsx
+XSBodHRwczovL2xvcmUua2VybmVsLm9yZy9kcmktZGV2ZWwvMjAyNjA2MjQxMjI5MTcuMjQ4My0x
+LWNocmlzdGlhbi5rb2VuaWdAYW1kLmNvbS8gDQotLS0NCiBkcml2ZXJzL2RtYS1idWYvZG1hLWZl
+bmNlLmMgfCAyNCArKysrKysrKysrKysrKysrKysrKysrKysNCiAxIGZpbGUgY2hhbmdlZCwgMjQg
+aW5zZXJ0aW9ucygrKQ0KDQpkaWZmIC0tZ2l0IGEvZHJpdmVycy9kbWEtYnVmL2RtYS1mZW5jZS5j
+IGIvZHJpdmVycy9kbWEtYnVmL2RtYS1mZW5jZS5jDQppbmRleCBjN2VhMWU3NWQzOGEuLjJlODBi
+MDE0OTlkZSAxMDA2NDQNCi0tLSBhL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtZmVuY2UuYw0KKysrIGIv
+ZHJpdmVycy9kbWEtYnVmL2RtYS1mZW5jZS5jDQpAQCAtMzYzLDYgKzM2MywxOCBAQCB2b2lkIGRt
+YV9mZW5jZV9zaWduYWxfdGltZXN0YW1wX2xvY2tlZChzdHJ1Y3QgZG1hX2ZlbmNlICpmZW5jZSwN
+CiAJCQkJICAgICAgJmZlbmNlLT5mbGFncykpKQ0KIAkJcmV0dXJuOw0KIA0KKwkvKg0KKwkgKiBG
+dWxseSBvcmRlciBzZXR0aW5nIG9mIHRoZSBiaXQgYWJvdmUgd2l0aCBzZXR0aW5nIG9mIHRoZSBv
+cHMgcG9pbnRlcg0KKwkgKiB0byBOVUxMIGJlbG93LCBzbyB0aGF0IGFsbCBwYXJ0aWVzIGNhbiB1
+c2UgdGhlIHNpZ25hbGVkIGZsYWcgdG8NCisJICogZGV0ZWN0IHRoYXQgdGhlIGZlbmNlIGRlY291
+cGxlZCBmcm9tIGl0cyBvcHMgaW4gYSBzYWZlIG1hbm5lci4NCisJICoNCisJICogVGhlIGNvdW50
+ZXIgcGFydHMgb2YgdGhpcyBiYXJyaWVyIGFyZSBpbiBkbWFfZmVuY2VfdGltZWxpbmVfbmFtZSgp
+DQorCSAqIGFuZCBkbWFfZmVuY2VfZHJpdmVyX25hbWUoKS4gQWxsIG90aGVyIGZ1dHVyZSBwYXJ0
+aWVzIHRoYXQgcmVseSBvbg0KKwkgKiB0aGUgc2lnbmFsZWQgZmxhZyBmb3IgdmFsaWQgYWNjZXNz
+IHRvIHRoZSBvcHMgcG9pbnRlciB3aWxsIG5lZWQgYQ0KKwkgKiBtZW1vcnkgYmFycmllci4NCisJ
+ICovDQorCXNtcF93bWIoKTsNCisNCiAJdHJhY2VfZG1hX2ZlbmNlX3NpZ25hbGVkKGZlbmNlKTsN
+CiANCiAJLyoNCkBAIC0xMTcwLDYgKzExODIsMTIgQEAgY29uc3QgY2hhciBfX3JjdSAqZG1hX2Zl
+bmNlX2RyaXZlcl9uYW1lKHN0cnVjdCBkbWFfZmVuY2UgKmZlbmNlKQ0KIA0KIAkvKiBSQ1UgcHJv
+dGVjdGlvbiBpcyByZXF1aXJlZCBmb3Igc2FmZSBhY2Nlc3MgdG8gcmV0dXJuZWQgc3RyaW5nICov
+DQogCW9wcyA9IHJjdV9kZXJlZmVyZW5jZShmZW5jZS0+b3BzKTsNCisJLyoNCisJICogRnVsbHkg
+b3JkZXIgdGhlIGRlcmVmZXJlbmNlIGFib3ZlIHdpdGggdGhlIGZsYWcgY2hlY2suIE90aGVyd2lz
+ZSwNCisJICogb3BzIGNvdWxkIGJlIGRlcmVmZXJlbmNlZCBhcyBhIE5VTEwgcG9pbnRlci4gVGhl
+IGJhcnJpZXIncw0KKwkgKiBjb3VudGVycGFydCBpcyBpbiBkbWFfZmVuY2Vfc2lnbmFsX3RpbWVz
+dGFtcF9sb2NrZWQoKS4NCisJICovDQorCXNtcF9ybWIoKTsNCiAJaWYgKCFkbWFfZmVuY2VfdGVz
+dF9zaWduYWxlZF9mbGFnKGZlbmNlKSkNCiAJCXJldHVybiAoY29uc3QgY2hhciBfX3JjdSAqKW9w
+cy0+Z2V0X2RyaXZlcl9uYW1lKGZlbmNlKTsNCiAJZWxzZQ0KQEAgLTEyMDMsNiArMTIyMSwxMiBA
+QCBjb25zdCBjaGFyIF9fcmN1ICpkbWFfZmVuY2VfdGltZWxpbmVfbmFtZShzdHJ1Y3QgZG1hX2Zl
+bmNlICpmZW5jZSkNCiANCiAJLyogUkNVIHByb3RlY3Rpb24gaXMgcmVxdWlyZWQgZm9yIHNhZmUg
+YWNjZXNzIHRvIHJldHVybmVkIHN0cmluZyAqLw0KIAlvcHMgPSByY3VfZGVyZWZlcmVuY2UoZmVu
+Y2UtPm9wcyk7DQorCS8qDQorCSAqIEZ1bGx5IG9yZGVyIHRoZSBkZXJlZmVyZW5jZSBhYm92ZSB3
+aXRoIHRoZSBmbGFnIGNoZWNrLiBPdGhlcndpc2UsDQorCSAqIG9wcyBjb3VsZCBiZSBkZXJlZmVy
+ZW5jZWQgYXMgYSBOVUxMIHBvaW50ZXIuIFRoZSBiYXJyaWVyJ3MNCisJICogY291bnRlcnBhcnQg
+aXMgaW4gZG1hX2ZlbmNlX3NpZ25hbF90aW1lc3RhbXBfbG9ja2VkKCkuDQorCSAqLw0KKwlzbXBf
+cm1iKCk7DQogCWlmICghZG1hX2ZlbmNlX3Rlc3Rfc2lnbmFsZWRfZmxhZyhmZW5jZSkpDQogCQly
+ZXR1cm4gKGNvbnN0IGNoYXIgX19yY3UgKilvcHMtPmdldF9kcml2ZXJfbmFtZShmZW5jZSk7DQog
+CWVsc2UNCg0KYmFzZS1jb21taXQ6IGNkZWIyY2NkOTkzZWQ4NjQ3YWRiYmRhMmMzYjEwM2FhNzE3
+ZmQ2ZjcNCi0tIA0KMi41NC4wDQoNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdA
+bGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1t
+bS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
