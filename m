@@ -2,62 +2,60 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id Ar6pG3VuVmqa5QAAu9opvQ
+	id 7aTeOn5uVmqd5QAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 19:14:29 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 19:14:38 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id EEC437573D9
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 19:14:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8208E7573DE
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 19:14:38 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=collabora.com header.s=mail header.b=Wja8IEen;
+	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=OWDN9wd8;
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
-	dmarc=fail reason="SPF not aligned (relaxed)" header.from=collabora.com (policy=none)
+	dmarc=fail reason="SPF not aligned (relaxed)" header.from=kernel.org (policy=quarantine)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 11DD7401D8
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 17:14:28 +0000 (UTC)
-Received: from bali.collaboradmins.com (bali.collaboradmins.com [148.251.105.195])
-	by lists.linaro.org (Postfix) with ESMTPS id B8C404049D
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 29 Jun 2026 08:41:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1782722476;
-	bh=tmVYMQLt6w66eKgeMnRYtDFyZlz9JTeXyaU4pBlZwO4=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=Wja8IEenS+49sHofjDn58Z2mmMXgQ0UGP4Xy+VAT6HtfYogNC3vjzjVSW6w+ubSFD
-	 X/FOKiHUU8JM5qyFEA8ylxQANgiPQJdBGVld6lxNz652ueAMTtUhexR5HT7HbR9cu0
-	 LeBAAXsXcUC5tAETWzVc6ygHBav2izO7OmwlXYn4DFP2c+xhoMPqttDv2yim2uQOtk
-	 vezEbp6jWQOx4C8aZXuCJxxHWZDaLYT0s/vl9EPzv9AGhffYYo53fyvp4h4a3Y/2L7
-	 B0TKpWTdG/Xh5T5HE4pTbDdod3muymIr1S7Ae/i9QqLOKZYCksQ1RMDLWF6JA6MYvA
-	 a/zHXOWnc8PJQ==
-Received: from fedora-2.home (unknown [100.64.0.11])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: bbrezillon)
-	by bali.collaboradmins.com (Postfix) with ESMTPSA id B45E217E0246;
-	Mon, 29 Jun 2026 10:41:15 +0200 (CEST)
-Date: Mon, 29 Jun 2026 10:41:12 +0200
-From: Boris Brezillon <boris.brezillon@collabora.com>
-To: Philipp Stanner <phasta@kernel.org>
-Message-ID: <20260629104112.72d58bf5@fedora-2.home>
-In-Reply-To: <20260629075636.2513214-2-phasta@kernel.org>
-References: <20260629075636.2513214-2-phasta@kernel.org>
-Organization: Collabora
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-redhat-linux-gnu)
+	by lists.linaro.org (Postfix) with ESMTP id 933F040503
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 17:14:37 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+	by lists.linaro.org (Postfix) with ESMTPS id 9E24D3F798
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 29 Jun 2026 09:10:19 +0000 (UTC)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	by tor.source.kernel.org (Postfix) with ESMTP id 36BCF60008;
+	Mon, 29 Jun 2026 09:10:19 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3EA411F000E9;
+	Mon, 29 Jun 2026 09:10:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1782724218;
+	bh=Q1Xbv92hEzMaNyKYgMGj5PHmAJfN+Jmm5zBL2m0w2uI=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=OWDN9wd8hUApq+Rp12Fk5iWNU/xLkrxU+gycOiiaZJp7Nc19BlGJCmFw7YLfIsVVs
+	 rCA4coVSb8wyI22/OvdiLnb4k/cJzMvx2TzBQzEABVRZxVOFsesU7MKsiEJAGFgabN
+	 M/MLO/QS4HEX2xubnoS+hGNWKCZGy0qeLAFKzVgcA2fwHyp7uBw12bze7r//lvWL5B
+	 uRQNicgp+RrH+kiNBrbDkJqepBnUpfwSej3D9uHqtNYhALqNPL9+/LkHich8BYGl10
+	 AVmjuI7JpYyVX5UliAMCuT/6Yu2/b9oPWVHE673/Gcj9LDwsWeg/mVN3eUrh8UkopN
+	 n83rdn8VLFvgQ==
+Message-ID: <4692ae04-1873-46c8-9e6d-819e4e46f885@kernel.org>
+Date: Mon, 29 Jun 2026 11:10:14 +0200
 MIME-Version: 1.0
-X-Spamd-Bar: ---
-X-MailFrom: boris.brezillon@collabora.com
+User-Agent: Mozilla Thunderbird
+To: Philipp Stanner <phasta@kernel.org>
+References: <20260629075636.2513214-2-phasta@kernel.org>
+From: Danilo Krummrich <dakr@kernel.org>
+Content-Language: en-US
+In-Reply-To: <20260629075636.2513214-2-phasta@kernel.org>
+X-Spamd-Bar: ------
+X-MailFrom: dakr@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: U2IO7RHOHSD3ZKSIASXTYQUXEC73UMOF
-X-Message-ID-Hash: U2IO7RHOHSD3ZKSIASXTYQUXEC73UMOF
+Message-ID-Hash: SJ5THEN5RMT7ZHJEVXUZN5ENY3EPP62C
+X-Message-ID-Hash: SJ5THEN5RMT7ZHJEVXUZN5ENY3EPP62C
 X-Mailman-Approved-At: Tue, 14 Jul 2026 17:13:22 +0000
-CC: Sumit Semwal <sumit.semwal@linaro.org>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Tvrtko Ursulin <tvrtko.ursulin@igalia.com>, =?UTF-8?B?QW5kcsOp?= Draszik <andre.draszik@linaro.org>, Danilo Krummrich <dakr@kernel.org>, Gary Guo <gary@garyguo.net>, "Paul E . McKenney" <paulmck@kernel.org>, Boqun Feng <boqun@kernel.org>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, stable@vger.kernel.org
+CC: Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Boris Brezillon <boris.brezillon@collabora.com>, Tvrtko Ursulin <tvrtko.ursulin@igalia.com>, =?UTF-8?Q?Andr=C3=A9_Draszik?= <andre.draszik@linaro.org>, Gary Guo <gary@garyguo.net>, "Paul E . McKenney" <paulmck@kernel.org>, Boqun Feng <boqun@kernel.org>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, stable@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH v2] dma-buf: dma-fence: Fix potential NULL pointer dereference
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/U2IO7RHOHSD3ZKSIASXTYQUXEC73UMOF/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SJ5THEN5RMT7ZHJEVXUZN5ENY3EPP62C/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -67,43 +65,41 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [1.59 / 15.00];
+X-Spamd-Result: default: False [2.99 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
 	DATE_IN_PAST(1.00)[368];
-	R_DKIM_REJECT(1.00)[collabora.com:s=mail];
+	R_DKIM_REJECT(1.00)[kernel.org:s=k20260515];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[collabora.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	FORGED_RECIPIENTS(0.00)[m:phasta@kernel.org,m:sumit.semwal@linaro.org,m:christian.koenig@amd.com,m:tvrtko.ursulin@igalia.com,m:andre.draszik@linaro.org,m:dakr@kernel.org,m:gary@garyguo.net,m:paulmck@kernel.org,m:boqun@kernel.org,m:linux-media@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,m:linux-kernel@vger.kernel.org,m:stable@vger.kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER(0.00)[boris.brezillon@collabora.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FORWARDED(0.00)[lists@lfdr.de];
-	TO_DN_SOME(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:phasta@kernel.org,m:sumit.semwal@linaro.org,m:christian.koenig@amd.com,m:boris.brezillon@collabora.com,m:tvrtko.ursulin@igalia.com,m:andre.draszik@linaro.org,m:gary@garyguo.net,m:paulmck@kernel.org,m:boqun@kernel.org,m:linux-media@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,m:linux-kernel@vger.kernel.org,m:stable@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[dakr@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
 	ARC_NA(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[14];
+	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	DKIM_TRACE(0.00)[collabora.com:-];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	DKIM_TRACE(0.00)[kernel.org:-];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[boris.brezillon@collabora.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
-	HAS_ORG_HEADER(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[dakr@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:from_smtp,lists.linaro.org:helo,lists.linaro.org:rdns,fedora-2.home:mid,collabora.com:email,collabora.com:from_mime]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:from_smtp,lists.linaro.org:helo,lists.linaro.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: EEC437573D9
+X-Rspamd-Queue-Id: 8208E7573DE
 
-On Mon, 29 Jun 2026 09:56:37 +0200
-Philipp Stanner <phasta@kernel.org> wrote:
-
+On 6/29/26 9:56 AM, Philipp Stanner wrote:
 > The commit mentioned in the fixes tag below introduced a mechanism
 > through which fence producers can fully decouple from fence consumers.
 > This, desirable, mechanism is based on the fence's signaled-bit as the
@@ -133,42 +129,7 @@ Philipp Stanner <phasta@kernel.org> wrote:
 > Cc: stable@vger.kernel.org
 > Fixes: f4cc3ab824d6 ("dma-buf: protected fence ops by RCU v8")
 > Signed-off-by: Philipp Stanner <phasta@kernel.org>
-
-Reviewed-by: Boris Brezillon <boris.brezillon@collabora.com>
-
-> ---
-> Changes since v1:
->   - Use ops pointer instead of memory barriers. (Christian)
->   - Rephrase commit message.
-> ---
->  drivers/dma-buf/dma-fence.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/dma-buf/dma-fence.c b/drivers/dma-buf/dma-fence.c
-> index c7ea1e75d38a..0a025dfdf131 100644
-> --- a/drivers/dma-buf/dma-fence.c
-> +++ b/drivers/dma-buf/dma-fence.c
-> @@ -1170,7 +1170,7 @@ const char __rcu *dma_fence_driver_name(struct dma_fence *fence)
->  
->  	/* RCU protection is required for safe access to returned string */
->  	ops = rcu_dereference(fence->ops);
-> -	if (!dma_fence_test_signaled_flag(fence))
-> +	if (ops)
->  		return (const char __rcu *)ops->get_driver_name(fence);
->  	else
->  		return (const char __rcu *)"detached-driver";
-> @@ -1203,7 +1203,7 @@ const char __rcu *dma_fence_timeline_name(struct dma_fence *fence)
->  
->  	/* RCU protection is required for safe access to returned string */
->  	ops = rcu_dereference(fence->ops);
-> -	if (!dma_fence_test_signaled_flag(fence))
-> +	if (ops)
->  		return (const char __rcu *)ops->get_driver_name(fence);
->  	else
->  		return (const char __rcu *)"signaled-timeline";
-> 
-> base-commit: cdeb2ccd993ed8647adbbda2c3b103aa717fd6f7
-
+Reviewed-by: Danilo Krummrich <dakr@kernel.org>
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
