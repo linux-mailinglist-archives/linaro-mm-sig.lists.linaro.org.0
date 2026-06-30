@@ -2,89 +2,91 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id yB04Nue4Q2oqfwoAu9opvQ
+	id PwzONtq5Q2qHfwoAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 30 Jun 2026 14:39:03 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 30 Jun 2026 14:43:06 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 382726E4419
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 30 Jun 2026 14:39:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6F1816E4508
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 30 Jun 2026 14:43:06 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=ziepe.ca header.s=google header.b=TI+lAhaq;
+	dkim=fail ("body hash did not verify") header.d=ziepe.ca header.s=google header.b=iMcaGlrI;
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
 	dmarc=none
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4603340D28
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 30 Jun 2026 12:39:02 +0000 (UTC)
-Received: from mail-qv1-f52.google.com (mail-qv1-f52.google.com [209.85.219.52])
-	by lists.linaro.org (Postfix) with ESMTPS id 730E8401C7
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 30 Jun 2026 12:38:51 +0000 (UTC)
-Received: by mail-qv1-f52.google.com with SMTP id 6a1803df08f44-8eaa7b5e31eso5094646d6.0
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 30 Jun 2026 05:38:51 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id 86BE440C9F
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 30 Jun 2026 12:43:05 +0000 (UTC)
+Received: from mail-qk1-f169.google.com (mail-qk1-f169.google.com [209.85.222.169])
+	by lists.linaro.org (Postfix) with ESMTPS id 0642640AA9
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 30 Jun 2026 12:42:55 +0000 (UTC)
+Received: by mail-qk1-f169.google.com with SMTP id af79cd13be357-9217d13c276so321067985a.1
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 30 Jun 2026 05:42:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ziepe.ca; s=google; t=1782823131; x=1783427931; darn=lists.linaro.org;
+        d=ziepe.ca; s=google; t=1782823374; x=1783428174; darn=lists.linaro.org;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=usbOUHulcGkq5pslDcl5tYYUADM4pc66+J0xE33qcCE=;
-        b=TI+lAhaqu2BG+Gi8eTncsIqOhwOIV6Y22yintiuEzcQOvmnEJuQC/7SZIAM7TSedWt
-         AtZCIws50vKTeQQWioYHIvhsl8HSGP/TQbc9vqZiMsCaMwQ+y1EU6GRBMAhEt3P6iOL9
-         pqWGcF3mBAhlxSlVVQmzn3a+0qTsJQl2+Y7GLvUn3X4GFSRbyEaos9umzj4ervte3ker
-         ZjGVVlxylIdPInxTlZKYJrzJ9BgHmnZMZMxlPjdlTXAkbO+7HS8A5ep5Oo5vZZz9Toyo
-         BQEwm+tQmC4wWIKRUr04tdoWr4E6FXaCyqyi81NfKGotiB/1TB6qLUHIUKBtEK5+Tdv5
-         44Pw==
+        bh=DQO+LwB4rlmVUEVrQLIA/Kr74YcNiyTBCzOFtX1NQKY=;
+        b=iMcaGlrIvmEPQLVTaG9SPCof6csi9ek6Wmi+lEPVh2/XENNQicUeMTQoZTHJ/9p7y+
+         XXrAfJwrj4Hks+xGq/coRLEo9NBK2ix4Vi4DIEKnezX1+N+9S9+atdFxjji01G4qXi8N
+         lMx5MimIriS2L0jviiGxe0Rx8bezsvJxmMfSzDC+fEe9eTOa35/+mcZfbz8djSrRc3hD
+         xQkanYG1HPXmQ/CEGPNIiDXKJ0YyxD2RL/jrLHemhFSpeNHB7HUBJQX+ybBezc7w15K9
+         zWUP4UIqquPhz710WQqXEOQ+qEXOn8Vzfa5DHVSGZKdHJHO6TsYIkS7f0zemi6LnoblB
+         G66Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1782823131; x=1783427931;
+        d=1e100.net; s=20251104; t=1782823374; x=1783428174;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=usbOUHulcGkq5pslDcl5tYYUADM4pc66+J0xE33qcCE=;
-        b=tK6grDMCUg8Po05jcqBer1m78ZJB5xIfyIFKLd9rHhjLJHUsEEsxDy0pJPDyJoqGEh
-         3q1JgKV/JUUQSGh0RI09Nnvug3Dssa7LJcPvKWAYsVPuifMUyoqWK5EbZRVMpkBA58hl
-         SXwvxCW4mT5RX4k4+Qim+6bUD/jAsLUBf7xlafNmv1XbNOrJzjDg8sHnUMA1lUGvj0y4
-         wvSmkKAyiGf1x3GxkNUYi8HXjhoSQc8d3VeE38OqdztXtu/udlTm+4aKW7fZ2nrzEqpV
-         teyJ0T8kBPwZ5xkW4PLbUno2pxuSSD5j+ZskXlU5l6thhhsuILNHhU8b3ULcx23rrKqi
-         Oa3w==
-X-Forwarded-Encrypted: i=1; AHgh+RpMSqiPR64zLcQpoazH3yGO8oyMXCLQs8qQiaL/wnHRiR/rCnV+uKb5qHt3kPEmQRuwdO7PzC1Y0IVp/sYI@lists.linaro.org
-X-Gm-Message-State: AOJu0YxdrHO5m2ALMruWGA66N5axJ3c7wq4b3A9KRSh5+0Fo5WlXPOjg
-	saL30OnckX9kS5TSjkUTA5wXVQXtDEdNPgO2i2/sKdtdQIlOFD4WEu4L7MJ9z3jUsCA=
-X-Gm-Gg: AfdE7cnRbUP1eUvWb3IopojO4inZPlob0+nWYApafWuy69jnKbWRkmtwLtuYSGMr562
-	DjCYh8BtEjrj0mRYxBnXdE1/SNyBbE45PZtVhsj1kPMpnyvOMDXDVgpu1WiwKjfKppbw+rLGfAP
-	vOKfGGx/KRLZFI90iGbKfjeBt6wmaVeZj3YUeTkqwVSMK6YmxzyMOHm8sx5hDu1x5XGBq7MTEZ6
-	eOZS3IufXb1CwGJzJZzxMxULcFDXpLG1mh6o7Im+Bwi1hwTo3hE1J8e3vpy58OxPBwpkC1Ilgn5
-	KIcpXgpEAs6mpRhfbIwBRaC95PA+3MiCfVoenxo/kdgbra6pQF66q11RVZAdjrZFAD29d6AkfqO
-	jn5Pr37MUwrWfbH2RqGb8dbhDYXQXIuAE2H3luMIe1zRvIFMgdeOXRDsecckkzz9g54ejhd2FXK
-	4TFzac7ZU4oKkhaUbPgmjGJaV5M03IY4Forj3amEz3gCEttsBBqvoJqrdQGm8stDlm3ps=
-X-Received: by 2002:a05:6214:448e:b0:8db:480e:6944 with SMTP id 6a1803df08f44-8f2549e5762mr17241226d6.26.1782823130931;
-        Tue, 30 Jun 2026 05:38:50 -0700 (PDT)
+        bh=DQO+LwB4rlmVUEVrQLIA/Kr74YcNiyTBCzOFtX1NQKY=;
+        b=NsJnikFylBR8gN/Tcsrg6XQBjK8+iAYnecESWSaXEEXEb+f6OKoQ1oaZIEehRkQC8H
+         her4MP2OMxFQXiN+oEUyjo015bTvwcVXhMKThu8JtCE9LIAR0l5yrHJG4VvYAz815+Hu
+         HK5VA0y6XFXa4Z6/YbCTc400OgTM0Y95EjKKDpNxTUjx6OAVb3CYaeWFIMPYlKUSU8q9
+         IBFPf9sV7grx4NlOcamhwZWOn/ZD5u5ny/6Z28iM0R46n+kbmY0lyUngLxJmT7G1kCJj
+         CR/dZe12FQUBMjkyNnNDuNGKZdBLcdjmPhi7ZzNiZBY5vc9hG4ItW1tTyCSZTv0di6Sk
+         fIEQ==
+X-Forwarded-Encrypted: i=1; AFNElJ9EhB7IVdrCpyT5fN2Rzha5IqjLKm4viZyZTQmpSdAZRZ6uUDwBrLGVu4aZdancxKV7uBbp6gTMMH9lrDwU@lists.linaro.org
+X-Gm-Message-State: AOJu0YyJqGUyZyHeaDl4vqEMNfv9q+29HpCvodR1OXl+6vB2xFgUnstg
+	t+mbJfLdZxhMTQIG/c7nekKXrH5bMYjsTxTXIqgI+rmESO6ZKIwKSBIf1lOTwgxbojw=
+X-Gm-Gg: AfdE7ckCR2XyLZbYNGBEMhDUrPJfhdiuIYD6FAsXQzXJDzTYOY8DBc7um5hojBE7ubN
+	FkyHWIiT3px8pieSc3FLrspFEIYZGaiD+tsf0lT45vwf1aNu6NmDNL9cj92iQ0UCwG7SuUU6cAn
+	FeOM2ZM/HgslFS5iUndY59DDPj36tNAu9teIuL6YLBQxs59DnqtkYXlHAGeD+WPBySq9yOG4IsB
+	UcgpsIVhMdUUbeX2YOs8oI6xzEsF6hPVCqSiRSixvtQYALvtK1Rpv1FEjktuIgPDFfi48R6xyoz
+	YqysqH9aO9L0mJd5s2WN1xUnxM4X6KV7oh8K8Dkgqlpg1YWiuZVXsmW4lQJbQ8Jv9+D2HIg4EQi
+	71C1YvpQqIJiOIEIE8qFyaw81Rtys01ElkW7k8gciuabbtzVk5aH6Uti937JVKyF2sUsY4rjubn
+	c9284lzqU9kh2s9sPQFk2Md3QyMlBE3X+ra4JLWa89GkZDRLpeKZ8a4n+kVikdg+BJY+I=
+X-Received: by 2002:a05:620a:8391:b0:92e:4867:95af with SMTP id af79cd13be357-92e62af0f9amr515174185a.73.1782823374078;
+        Tue, 30 Jun 2026 05:42:54 -0700 (PDT)
 Received: from ziepe.ca (crbknf0213w-47-54-130-67.pppoe-dynamic.high-speed.nl.bellaliant.net. [47.54.130.67])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-8f1a7558676sm22067246d6.40.2026.06.30.05.38.50
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-92e6234dc50sm226634685a.39.2026.06.30.05.42.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 30 Jun 2026 05:38:50 -0700 (PDT)
+        Tue, 30 Jun 2026 05:42:53 -0700 (PDT)
 Received: from jgg by wakko with local (Exim 4.97)
 	(envelope-from <jgg@ziepe.ca>)
-	id 1weXjl-00000001qLK-2mow;
-	Tue, 30 Jun 2026 09:38:49 -0300
-Date: Tue, 30 Jun 2026 09:38:49 -0300
+	id 1weXng-00000001qgI-3Vni;
+	Tue, 30 Jun 2026 09:42:52 -0300
+Date: Tue, 30 Jun 2026 09:42:52 -0300
 From: Jason Gunthorpe <jgg@ziepe.ca>
 To: David Laight <david.laight.linux@gmail.com>
-Message-ID: <20260630123849.GC7525@ziepe.ca>
+Message-ID: <20260630124252.GD7525@ziepe.ca>
 References: <20260621222130.1667453-1-xuehaohu@google.com>
  <20260623015459.1153884-1-xuehaohu@google.com>
  <20260623094446.4a8fc2ed@pumpkin>
+ <ajryxMaT5evDUxaq@google.com>
+ <20260623235350.6540eaa2@pumpkin>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260623094446.4a8fc2ed@pumpkin>
+In-Reply-To: <20260623235350.6540eaa2@pumpkin>
 X-Spamd-Bar: ---
-Message-ID-Hash: E2UEI7DF4ZZJT7J2QVMKWG5DGP757G2B
-X-Message-ID-Hash: E2UEI7DF4ZZJT7J2QVMKWG5DGP757G2B
+Message-ID-Hash: JJYXRZO73L2NEJPOS5FGZVTSWG32KBQZ
+X-Message-ID-Hash: JJYXRZO73L2NEJPOS5FGZVTSWG32KBQZ
 X-MailFrom: jgg@ziepe.ca
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: David Hu <xuehaohu@google.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Nicolin Chen <nicolinc@nvidia.com>, Leon Romanovsky <leon@kernel.org>, Kevin Tian <kevin.tian@intel.com>, Ankit Agrawal <ankita@nvidia.com>, Alex Williamson <alex@shazbot.org>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, iommu@lists.linux.dev, jmoroni@google.com, praan@google.com, kpberry@google.com, chriscli@google.com, sashiko-bot@kernel.org, stable@vger.kernel.org
+CC: Pranjal Shrivastava <praan@google.com>, David Hu <xuehaohu@google.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Nicolin Chen <nicolinc@nvidia.com>, Leon Romanovsky <leon@kernel.org>, Kevin Tian <kevin.tian@intel.com>, Ankit Agrawal <ankita@nvidia.com>, Alex Williamson <alex@shazbot.org>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, iommu@lists.linux.dev, jmoroni@google.com, kpberry@google.com, chriscli@google.com, sashiko-bot@kernel.org, stable@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH v2] dma-buf: Split sgl into page-aligned 2G chunks
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/E2UEI7DF4ZZJT7J2QVMKWG5DGP757G2B/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JJYXRZO73L2NEJPOS5FGZVTSWG32KBQZ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -98,13 +100,13 @@ X-Spamd-Result: default: False [1.99 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	R_DKIM_REJECT(1.00)[ziepe.ca:s=google];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	DMARC_NA(0.00)[ziepe.ca];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:david.laight.linux@gmail.com,m:xuehaohu@google.com,m:sumit.semwal@linaro.org,m:christian.koenig@amd.com,m:nicolinc@nvidia.com,m:leon@kernel.org,m:kevin.tian@intel.com,m:ankita@nvidia.com,m:alex@shazbot.org,m:linux-media@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,m:linux-kernel@vger.kernel.org,m:iommu@lists.linux.dev,m:jmoroni@google.com,m:praan@google.com,m:kpberry@google.com,m:chriscli@google.com,m:sashiko-bot@kernel.org,m:stable@vger.kernel.org,m:davidlaightlinux@gmail.com,s:lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:david.laight.linux@gmail.com,m:praan@google.com,m:xuehaohu@google.com,m:sumit.semwal@linaro.org,m:christian.koenig@amd.com,m:nicolinc@nvidia.com,m:leon@kernel.org,m:kevin.tian@intel.com,m:ankita@nvidia.com,m:alex@shazbot.org,m:linux-media@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,m:linux-kernel@vger.kernel.org,m:iommu@lists.linux.dev,m:jmoroni@google.com,m:kpberry@google.com,m:chriscli@google.com,m:sashiko-bot@kernel.org,m:stable@vger.kernel.org,m:davidlaightlinux@gmail.com,s:lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_SENDER(0.00)[jgg@ziepe.ca,linaro-mm-sig-bounces@lists.linaro.org];
 	RCPT_COUNT_TWELVE(0.00)[20];
@@ -126,27 +128,47 @@ X-Spamd-Result: default: False [1.99 / 15.00];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[ziepe.ca:mid,ziepe.ca:from_mime,linaro.org:email,lists.linaro.org:helo,lists.linaro.org:rdns,lists.linaro.org:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 382726E4419
+X-Rspamd-Queue-Id: 6F1816E4508
 
-On Tue, Jun 23, 2026 at 09:44:46AM +0100, David Laight wrote:
-> On Tue, 23 Jun 2026 01:54:59 +0000
-> David Hu <xuehaohu@google.com> wrote:
+On Tue, Jun 23, 2026 at 11:53:50PM +0100, David Laight wrote:
+
+> > If we restrict incoming dmabuf transfers to fit within VFS-centric 
+> > limits (2GB), we impose unnecessary overhead on the RDMA stack, forcing
+> > it to manage a significantly higher number of memory registrations. By 
+> > cleanly splitting these massive contiguous device buffers into 
+> > page-aligned SGL entries, we directly improve the efficiency of P2P 
+> > transfers and memory registration.
 > 
-> > Currently, `fill_sg_entry()` splits the scatterlist using `UINT_MAX`.
-> > This creates a non-page-aligned DMA length (`0xFFFFFFFF`) for the
-> > first entry, resulting in non-page-aligned DMA addresses for all
-> > subsequent entries.
+> But a divide by '4G - PAGE_SIZE' is also non-trivial and (I think affects
+> a lot of io) when the quotient is always 1.
+> Splitting into 2G chunks is a lot cheaper.
+
+Doesn't matter this isn't fast path stuff. It is better to use fewer
+SGL entries, IHMO.
+
+> > Since this change doesn't seem to have a negative impact on standard file
+> > I/O or break existing VFS constraints, I'm curious why we shouldn't 
+> > support splitting these >4GB P2P transfers? Am I missing something?
 > 
-> There is a separate issue of whether this code is even needed at all.
-> Where can transfers over 2G (never mind 4G) actually come from.
+> I was only wondering whether it was needed...
+> It does bring up the question of why the >4GB transfers even need splitting.
+> But that is another question.
 
-This is DMABUF land, you really can alocate DMABUFS of huge amounts of
-physical memory, VFIO does this reliably and trivially for example. It
-wouldn't come from the physical allocator.
+SGL can only store an unsigned int size, so any large physical range
+has to be split down.
 
-So yes, these scenarios need to work in this code.
+rdma now a days has code to process the sgl and restore back the > 4G
+sizes since mode RDMA HW can accept that.
+
+commit 486055f5e09df959ad4e3aa4ee75b5c91ddeec2e
+Author: Michael Margolin <mrgolin@amazon.com>
+Date:   Mon Feb 17 14:16:23 2025 +0000
+
+    RDMA/core: Fix best page size finding when it can cross SG entries
+    
+So whatever this produces needs to be compatible with that to undo it.
 
 Jason
 _______________________________________________
