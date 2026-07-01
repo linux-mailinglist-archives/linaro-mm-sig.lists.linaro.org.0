@@ -2,237 +2,148 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id xoLuELluVmqn5QAAu9opvQ
+	id WOQxJMhuVmqp5QAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 19:15:37 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 19:15:52 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id B220F7573FA
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 19:15:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 26824757404
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 19:15:52 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=amd.com header.s=selector1 header.b=Hp9+9Unj;
+	dkim=fail ("body hash did not verify") header.d=igalia.com header.s=20170329 header.b=CNK8dPCz;
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
-	dmarc=fail reason="SPF not aligned (relaxed)" header.from=amd.com (policy=quarantine);
-	arc=reject ("signature check failed: fail, {[1] = sig:microsoft.com:reject}")
+	dmarc=fail reason="SPF not aligned (relaxed)" header.from=igalia.com (policy=none)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id CF3E040470
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 17:15:35 +0000 (UTC)
-Received: from SJ2PR03CU001.outbound.protection.outlook.com (mail-westusazon11012000.outbound.protection.outlook.com [52.101.43.0])
-	by lists.linaro.org (Postfix) with ESMTPS id 295BC40A52
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 30 Jun 2026 16:04:40 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=B8q+UgXu1+vn2/6pX+yoAyuXnrTEAL9tqmg2Wb6gY1+RHsu4UUFP8PRtDRvndOrHQzYgA18YOTUtr7r5Q/HRym4FC2HzVecHKFfX/a5UQ3NTSOHQhQq1/gxlTiNpfv1Rp5PYPkhNblRnsme74JrIWizcScqxiVol+ZzgnFgv5YJExvS/8j+Rn3gHP5ea+MW/tpTSQuxgIEM+5uAvXhQuC4IDJ/CGnPMD5DmP6CEnYsDB/DJwpjbTWeFa1YPCAx7LuXSiTm7ea44Jo9kXEz99gAjeW9YzN53feCUMEotQ9mg7y2be5RdhHBKm8qio2gsNf+VZpvT5mgnVBD7jJHTKfw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=UJAfV8ugprdkrLND+nsWF7e8BS0VEqFPZlOfFofj8oY=;
- b=sjcpEO5LypC8DFkBtuKauB8DXi2R/o025MJq+KKevs59JsAUlzkqPeKKDIpNKIWwSo7ERAkM/QRjWWDX11hTIU4GBimIATqfFtNAeMIAvlKcjh4rBXgYcmRh7/ZyNpcLABs0cgOJlcRFroSM7Ue0bEXUaA0V6MnEPL6buSpq0rW2zAgDfLyEjG/Qr7n6M2JZqeSARz+CSlB+d1NSRe606lAUq7Hsr8SPq4gFERoDLK/vVig0EQDiI5pUOqfGVwS4uxYvbXwXdsF4glkQlzDkZGPS1s6cX7RLQLKbS2GR2aOkAHfzRKNftcNTNcJS1g1R8u5/n77KHzoopaeTwmmOeg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=linaro.org smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=UJAfV8ugprdkrLND+nsWF7e8BS0VEqFPZlOfFofj8oY=;
- b=Hp9+9Unj47oW4J3gxxs7hJABoRI/dt+RGPzIfpbihDa4SHa3eCbzwI/2LjeGtn2tEqUjxT9QFl1GE0YnRBcjW0xwq0u/WG4RI+pqGPDMW/eC+zUt7r0DLlw/NHrnD9xiK3BWAlwCoJR7Zt97g2sKEecZ2ZHFZM4eD6RofEdXd9o=
-Received: from CH2PR03CA0026.namprd03.prod.outlook.com (2603:10b6:610:59::36)
- by DS4PR12MB9748.namprd12.prod.outlook.com (2603:10b6:8:29e::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.19; Tue, 30 Jun
- 2026 16:04:37 +0000
-Received: from CH3PEPF0000000E.namprd04.prod.outlook.com
- (2603:10b6:610:59:cafe::7) by CH2PR03CA0026.outlook.office365.com
- (2603:10b6:610:59::36) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.159.19 via Frontend Transport; Tue,
- 30 Jun 2026 16:04:37 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Received: from satlexmb07.amd.com (165.204.84.17) by
- CH3PEPF0000000E.mail.protection.outlook.com (10.167.244.42) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.181.6 via Frontend Transport; Tue, 30 Jun 2026 16:04:37 +0000
-Received: from amd-desktop.amd.com (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Tue, 30 Jun
- 2026 11:04:22 -0500
-From: Shahyan Soltani <shahyan.soltani@amd.com>
-To: <christian.koenig@amd.com>, <sumit.semwal@linaro.org>
-Date: Tue, 30 Jun 2026 12:04:01 -0400
-Message-ID: <20260630160401.67544-1-shahyan.soltani@amd.com>
-X-Mailer: git-send-email 2.54.0
+	by lists.linaro.org (Postfix) with ESMTP id 43DC240165
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 17:15:51 +0000 (UTC)
+Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
+	by lists.linaro.org (Postfix) with ESMTPS id 2D08F40AAD
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  1 Jul 2026 08:45:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
+	s=20170329; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+	List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=Vcr9hDLfN5srlwZ5qfiqQl9LSdudUQDmJHBwn+BWzxc=; b=CNK8dPCzUY0KTxowYj9l/wPf5V
+	Xq4Lh9DqMwr/uiu0tjxHrFyffPmPDpMlIQ0woTTCjARljDZaocyLZ/4bfNEMG+92YQ5X7QtBHGt+Z
+	ekSNdDbXziQzudZ8pDOSDjkPJZUY0q5IDh2E+IYHn6NC6DwDs37HFtIvp4Jh9qobyZG6epO1SUSf+
+	Fcku8rZcAme5wPNLexwQHBEiJQ3+C5KstkLiklRE1FKM5ySzcWTSrolioRughWoWWxl7l9QpFObQU
+	ybpv9aBxSgoxOe8hSI5EZir4Ski7mJ6HmdHV18l/FPYq4njK14Xwe5mdPCi+qBiJhHhso+dTLbPU3
+	Ut03HdTg==;
+Received: from [90.240.106.137] (helo=[192.168.0.116])
+	by fanzine2.igalia.com with esmtpsa
+	(Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim)
+	id 1weqYt-007Tf1-I4; Wed, 01 Jul 2026 10:44:51 +0200
+Message-ID: <d30b496e-2971-429d-b49d-4fe6e15a1830@igalia.com>
+Date: Wed, 1 Jul 2026 09:44:50 +0100
 MIME-Version: 1.0
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
- (10.181.42.216)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PEPF0000000E:EE_|DS4PR12MB9748:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8baf8129-eb53-4759-0e99-08ded6c14911
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|36860700016|376014|82310400026|1800799024|23010399003|18002099003|11063799006|56012099006;
-X-Microsoft-Antispam-Message-Info: 
-	HvVezq+rI/yWU5vN6HEDqr3Ke7VIl0P2835bHU+fnywxLCQTicGgyxNZdzkbLmXQ7MEtjf4dHMpjeUWbes/Bv1Ew/Tv1OfReb6JHX459DIEHDXKgosNUA1+wLj8bek7TgNubVn/14y3KLCHvf4SCuCYUY/yoVtZd24E6jhfpR413y6uLzTUwzkYItIqN7TetyfAXPuF9/hFQ2ZtU3Zolcpo+q5vNIwKM8gCmbh6mjfC5hTjYgYljkN4wsMBgQHH7KzMhQ52oDpXvMzg5vi+2c78h6hrbSFWmBBGc6ROpjP5Y32NpJK8hf52IX3GaRC70A3RPJlRJsQKDp9Qr5Ne7W+OzPEKrw1pdugUgoNAfQB6K68XcM+7zYEzBsissZ3w0PBQU9kdgISQTS3am6cC60psv8SwTTHfeBPzkHj3gudnyO4OIiuO3+Z3VfvkmNrXtx3zAllZ1NFwjuo++OOYRzCdBk9O0QU2jKJfhFCzXZG57jO8oVXZIxJ1NA+rTUeEnU5oyl8V75CpmMd238AeF9erh5uXTbqh5XkEkm4MgJVcGkyRXA5OGjL2PT3QoOLmZ2URPT3bTCdc6DBfl/rN35tXsk8KijjiaRhEdeWE8ikpfmC+2tGPAXmYOY/jLO+pZE2QgQR1whKQ3gNnAH4PuqH3MgLb5teyPBua07nk839NvAghW0bo3O3JUdOW2xLYAOLwQn3BBoyUw+SPESS5a6Q==
-X-Forefront-Antispam-Report: 
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(376014)(82310400026)(1800799024)(23010399003)(18002099003)(11063799006)(56012099006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	BP25YUpcvSMYVvF1McUX4dlCoXzXtO3Cmv4za4+hr3s77Os+6gDtyDKdzSIP8ltl/+OnjF8f1iSIouPSa8hgL0yoODTKGpV1d8y24BrKbUYbDUTIRqmGJcRuRw82R+gBb9ikVmZN8gqQORgYmwOEvSvIW2Ph9jXzTjfAcdkKMs00k6Bh8rbHiVn109+uzbWbdn9VcYvpvw9IEuQqkR2OV4oD4JKIKm7jj9I3XV4VjQyEbTgdEvu+Z/lxPXw5jnQJKdub4BA7pa4AJnr92XpeMRnjQCSJAJMg2sQe8b36KwxvnWNX16pzbUI9XlNBwhREGJkx0KHVEXl1YSDxxa4GZU9sOy7HraeINPQkIvhYxRUMydEDu9nImzdOS9WVH3DULsurmBJQiFXi5WAFEo0Z4/Im7E0kSfejX1pa+R0lQMH6aUNl6fJkJi3MO27j+vgw
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jun 2026 16:04:37.5758
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8baf8129-eb53-4759-0e99-08ded6c14911
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	CH3PEPF0000000E.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS4PR12MB9748
+User-Agent: Mozilla Thunderbird
+To: christian.koenig@amd.com, phasta@kernel.org, simona@ffwll.ch,
+ sumit.semwal@linaro.org, dakr@kernel.org
+References: <20260624122917.2483-1-christian.koenig@amd.com>
+ <20260624122917.2483-3-christian.koenig@amd.com>
+Content-Language: en-GB
+From: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>
+In-Reply-To: <20260624122917.2483-3-christian.koenig@amd.com>
 X-Spamd-Bar: ---
-X-MailFrom: Shahyan.Soltani@amd.com
+X-MailFrom: tvrtko.ursulin@igalia.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: FMBWUIEOSSI256LQVHYGAUNDIALX6GIE
-X-Message-ID-Hash: FMBWUIEOSSI256LQVHYGAUNDIALX6GIE
-X-Mailman-Approved-At: Tue, 14 Jul 2026 17:13:24 +0000
-CC: phasta@mailbox.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+Message-ID-Hash: IFIOLMWZBIVYUOEBSKMJGZ7L42E6ZMRW
+X-Message-ID-Hash: IFIOLMWZBIVYUOEBSKMJGZ7L42E6ZMRW
+X-Mailman-Approved-At: Tue, 14 Jul 2026 17:14:39 +0000
+CC: dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH] dma_buf: change unsigned int and int types into size_t
+Subject: [Linaro-mm-sig] Re: [PATCH 02/10] dma-buf: use dma_fence_test_signaled_flag()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FMBWUIEOSSI256LQVHYGAUNDIALX6GIE/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/IFIOLMWZBIVYUOEBSKMJGZ7L42E6ZMRW/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"; format="flowed"
+Content-Transfer-Encoding: base64
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [4.99 / 15.00];
-	DMARC_POLICY_QUARANTINE(1.50)[amd.com : SPF not aligned (relaxed),quarantine];
-	MID_CONTAINS_FROM(1.00)[];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
-	R_DKIM_REJECT(1.00)[amd.com:s=selector1];
-	DATE_IN_PAST(1.00)[337];
+X-Spamd-Result: default: False [1.69 / 15.00];
+	DATE_IN_PAST(1.00)[320];
+	R_DKIM_REJECT(1.00)[igalia.com:s=20170329];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
+	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[igalia.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER(0.00)[shahyan.soltani@amd.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORWARDED(0.00)[lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	GREYLIST(0.00)[pass,meta];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	SUSPICIOUS_AUTH_ORIGIN(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:christian.koenig@amd.com,m:sumit.semwal@linaro.org,m:phasta@mailbox.org,m:linux-media@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[3];
+	FORGED_RECIPIENTS(0.00)[m:christian.koenig@amd.com,m:phasta@kernel.org,m:simona@ffwll.ch,m:sumit.semwal@linaro.org,m:dakr@kernel.org,m:dri-devel@lists.freedesktop.org,m:linux-media@vger.kernel.org,m:linaro-mm-sig@lists.linaro.org,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[tvrtko.ursulin@igalia.com,linaro-mm-sig-bounces@lists.linaro.org];
+	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[6];
-	RCVD_COUNT_FIVE(0.00)[6];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	TO_DN_NONE(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[shahyan.soltani@amd.com,linaro-mm-sig-bounces@lists.linaro.org];
-	DKIM_TRACE(0.00)[amd.com:-];
-	HAS_XOIP(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[tvrtko.ursulin@igalia.com,linaro-mm-sig-bounces@lists.linaro.org];
+	DKIM_TRACE(0.00)[igalia.com:-];
+	RCPT_COUNT_SEVEN(0.00)[8];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,amd.com:from_mime,amd.com:email,amd.com:mid,lists.linaro.org:from_smtp,lists.linaro.org:helo,lists.linaro.org:rdns,mailbox.org:email]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[igalia.com:from_mime,igalia.com:mid,linaro.org:email,amd.com:email,lists.linaro.org:from_smtp,lists.linaro.org:helo,lists.linaro.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: B220F7573FA
+X-Rspamd-Queue-Id: 26824757404
 
-The num_fences, count, i, and j variables in dma_fence_dedup_array() and
-__dma_fence_unwrap_merge() have inconsistent integer types, mixing both
-unsigned int and int.
-
-Use type size_t consistently for these instead, and update the return
-type of dma_fence_dedup_array() accordingly.
-
-Signed-off-by: Shahyan Soltani <shahyan.soltani@amd.com>
-Suggested-by: Philipp Stanner <phasta@mailbox.org>
----
-The rest of the subsystems (dma_resv_reserve_fences, drm_exec, drm_gpuvm,
-xe, nouveau, etc) uses "unsigned int" for num_fences, for example the
-amdgpu caller in amdgpu_userq_fence.c.
-
- drivers/dma-buf/dma-fence-unwrap.c | 8 ++++----
- include/linux/dma-fence-unwrap.h   | 6 ++++--
- 2 files changed, 8 insertions(+), 6 deletions(-)
-
-diff --git a/drivers/dma-buf/dma-fence-unwrap.c b/drivers/dma-buf/dma-fence-unwrap.c
-index 53bb40e70b27..65e87d263c3a 100644
---- a/drivers/dma-buf/dma-fence-unwrap.c
-+++ b/drivers/dma-buf/dma-fence-unwrap.c
-@@ -93,9 +93,9 @@ static int fence_cmp(const void *_a, const void *_b)
-  *
-  * Return: Number of unique fences remaining in the array.
-  */
--int dma_fence_dedup_array(struct dma_fence **fences, int num_fences)
-+size_t dma_fence_dedup_array(struct dma_fence **fences, size_t num_fences)
- {
--	int i, j;
-+	size_t i, j;
- 
- 	sort(fences, num_fences, sizeof(*fences), fence_cmp, NULL);
- 
-@@ -115,14 +115,14 @@ int dma_fence_dedup_array(struct dma_fence **fences, int num_fences)
- EXPORT_SYMBOL_GPL(dma_fence_dedup_array);
- 
- /* Implementation for the dma_fence_merge() marco, don't use directly */
--struct dma_fence *__dma_fence_unwrap_merge(unsigned int num_fences,
-+struct dma_fence *__dma_fence_unwrap_merge(size_t num_fences,
- 					   struct dma_fence **fences,
- 					   struct dma_fence_unwrap *iter)
- {
- 	struct dma_fence *tmp, *unsignaled = NULL, **array;
- 	struct dma_fence_array *result;
- 	ktime_t timestamp;
--	int i, count;
-+	size_t i, count;
- 
- 	count = 0;
- 	timestamp = ns_to_ktime(0);
-diff --git a/include/linux/dma-fence-unwrap.h b/include/linux/dma-fence-unwrap.h
-index 62df222fe0f1..7bfacdf79de2 100644
---- a/include/linux/dma-fence-unwrap.h
-+++ b/include/linux/dma-fence-unwrap.h
-@@ -8,6 +8,8 @@
- #ifndef __LINUX_DMA_FENCE_UNWRAP_H
- #define __LINUX_DMA_FENCE_UNWRAP_H
- 
-+#include <linux/types.h>
-+
- struct dma_fence;
- 
- /**
-@@ -48,11 +50,11 @@ struct dma_fence *dma_fence_unwrap_next(struct dma_fence_unwrap *cursor);
- 	for (fence = dma_fence_unwrap_first(head, cursor); fence;	\
- 	     fence = dma_fence_unwrap_next(cursor))
- 
--struct dma_fence *__dma_fence_unwrap_merge(unsigned int num_fences,
-+struct dma_fence *__dma_fence_unwrap_merge(size_t num_fences,
- 					   struct dma_fence **fences,
- 					   struct dma_fence_unwrap *cursors);
- 
--int dma_fence_dedup_array(struct dma_fence **array, int num_fences);
-+size_t dma_fence_dedup_array(struct dma_fence **array, size_t num_fences);
- 
- /**
-  * dma_fence_unwrap_merge - unwrap and merge fences
--- 
-2.54.0
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+DQpPbiAyNC8wNi8yMDI2IDEyOjEzLCBDaHJpc3RpYW4gS8O2bmlnIHdyb3RlOg0KPiBJbnN0ZWFk
+IG9mIGRtYV9mZW5jZV9pc19zaWduYWxlZF9sb2NrZWQoKSB1c2UNCj4gZG1hX2ZlbmNlX3Rlc3Rf
+c2lnbmFsZWRfZmxhZygpLg0KPiANCj4gVGhlIGV4dHJhIHBvbGxpbmcgY2hlY2sgc2VlbXMgdW5l
+Y2Vzc2FyeSBmb3IgdGhvc2UgdXNlIGNhc2VzLg0KDQpJIGVjaG8gdGhlIGNvbW1lbnQgdGhhdCBi
+ZXR0ZXIgY29tbWl0IG1lc3NhZ2VzIGFyZSBuZWVkZWQgaW4gdGhpcyANCnNlcmllcy4gQWxzbywg
+dGhlIHBhdGNoIGFmZmVjdHMgdHdvIHJlYWxseSBkaWZmZXJlbnQgYXJlYXMgc28gc2hvdWxkIGJl
+IA0Kc3BsaXQgaW4gdHdvLg0KDQo+IA0KPiBTaWduZWQtb2ZmLWJ5OiBDaHJpc3RpYW4gS8O2bmln
+IDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+DQo+IC0tLQ0KPiAgIGRyaXZlcnMvZG1hLWJ1Zi9z
+d19zeW5jLmMgfCAyICstDQo+ICAgaW5jbHVkZS9saW51eC9kbWEtZmVuY2UuaCB8IDIgKy0NCj4g
+ICAyIGZpbGVzIGNoYW5nZWQsIDIgaW5zZXJ0aW9ucygrKSwgMiBkZWxldGlvbnMoLSkNCj4gDQo+
+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2RtYS1idWYvc3dfc3luYy5jIGIvZHJpdmVycy9kbWEtYnVm
+L3N3X3N5bmMuYw0KPiBpbmRleCA4ZGYyMGIwMjE4YTkuLjI0Mzk5MWJjMTUwNiAxMDA2NDQNCj4g
+LS0tIGEvZHJpdmVycy9kbWEtYnVmL3N3X3N5bmMuYw0KPiArKysgYi9kcml2ZXJzL2RtYS1idWYv
+c3dfc3luYy5jDQo+IEBAIC0yNjIsNyArMjYyLDcgQEAgc3RhdGljIHN0cnVjdCBzeW5jX3B0ICpz
+eW5jX3B0X2NyZWF0ZShzdHJ1Y3Qgc3luY190aW1lbGluZSAqb2JqLA0KPiAgIAlJTklUX0xJU1Rf
+SEVBRCgmcHQtPmxpbmspOw0KPiAgIA0KPiAgIAlzcGluX2xvY2tfaXJxKCZvYmotPmxvY2spOw0K
+PiAtCWlmICghZG1hX2ZlbmNlX2lzX3NpZ25hbGVkX2xvY2tlZCgmcHQtPmJhc2UpKSB7DQo+ICsJ
+aWYgKCFkbWFfZmVuY2VfdGVzdF9zaWduYWxlZF9mbGFnKCZwdC0+YmFzZSkpIHsNCj4gICAJCXN0
+cnVjdCByYl9ub2RlICoqcCA9ICZvYmotPnB0X3RyZWUucmJfbm9kZTsNCj4gICAJCXN0cnVjdCBy
+Yl9ub2RlICpwYXJlbnQgPSBOVUxMOw0KPiAgIA0KDQpJIGFtIG5vdCBmYW1pbGlhciB3aXRoIHRo
+ZSBpbXBsZW1lbnRhdGlvbiBidXQgdGhpcyBsb29rcyBzYWZlIHRvIG1lLiBJdCANCmFwcGVhcnMg
+dGhlIHBvaW50IGlzIHRvIGp1c3Qgbm90IGFsbG93IHVzZXJzcGFjZSBpbnNlcnRpbmcgcGFzdCBm
+ZW5jZXMgDQppbnRvIHRoZSBpbnRlcm5hbCB0cmFja2luZyBzdHJ1Y3R1cmVzLg0KDQo+IGRpZmYg
+LS1naXQgYS9pbmNsdWRlL2xpbnV4L2RtYS1mZW5jZS5oIGIvaW5jbHVkZS9saW51eC9kbWEtZmVu
+Y2UuaA0KPiBpbmRleCAxNThjZDYwOWYxMDMuLjgwM2UxMGNhNzZlMyAxMDA2NDQNCj4gLS0tIGEv
+aW5jbHVkZS9saW51eC9kbWEtZmVuY2UuaA0KPiArKysgYi9pbmNsdWRlL2xpbnV4L2RtYS1mZW5j
+ZS5oDQo+IEBAIC02NTgsNyArNjU4LDcgQEAgc3RhdGljIGlubGluZSBzdHJ1Y3QgZG1hX2ZlbmNl
+ICpkbWFfZmVuY2VfbGF0ZXIoc3RydWN0IGRtYV9mZW5jZSAqZjEsDQo+ICAgICovDQo+ICAgc3Rh
+dGljIGlubGluZSBpbnQgZG1hX2ZlbmNlX2dldF9zdGF0dXNfbG9ja2VkKHN0cnVjdCBkbWFfZmVu
+Y2UgKmZlbmNlKQ0KPiAgIHsNCj4gLQlpZiAoZG1hX2ZlbmNlX2lzX3NpZ25hbGVkX2xvY2tlZChm
+ZW5jZSkpDQo+ICsJaWYgKGRtYV9mZW5jZV90ZXN0X3NpZ25hbGVkX2ZsYWcoZmVuY2UpKQ0KPiAg
+IAkJcmV0dXJuIGZlbmNlLT5lcnJvciA/OiAxOw0KPiAgIAllbHNlDQo+ICAgCQlyZXR1cm4gMDsN
+Cg0KVGhpcyBvbmUgaGFzIG1vcmUgY2FsbGVycy4NCg0KMS4gc3luY19mZW5jZSAtIHNob3VsZCBi
+ZSBmaW5lLg0KMi4gYW1kZ3B1IC0gU21hbGxpc2ggZmFsc2UgcG9zaXRpdmUgcmFjZSBvbiByZXNl
+dD8gQnV0IHBvc3NpYmx5IG9rYXkuIA0KWW91ciBjYWxsLg0KMy4gU2VsZnRlc3RzIC0gc2luZ2xl
+IHRocmVhZGVkIHNvIG9rYXkuDQo0LiBOb3V2ZWF1IC0gbG9va3MgbGlrZSBzb21lIHNvcnQgb2Yg
+YSBsYXN0IGdhc3AgY2hlY2sgZm9yIHNpZ25hbGVkIA0Kc3RhdHVzIHdoZW4gd2FpdCBleHBpcmVk
+LiBJdCdzIGEgMTUgc2Vjb25kIHRpbWVvdXQgc28gSSBndWVzcyBmaW5lIGFzIHdlbGwuDQoNClNv
+IGluIHN1bW1hcnksIGNoYW5nZXMgbG9vayBmaW5lIHRvIG1lLiBCdXQgSSB3b3VsZCBzcGxpdCBz
+d19zeW5jIGFuZCANCmdldF9zdGF0dXMgYW5kIGltcHJvdmUgdGhlIGNvbW1pdCBtZXNzYWdlIGZv
+ciBib3RoLg0KDQpSZWdhcmRzLA0KDQpUdnJ0a28NCg0KX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGlu
+YXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwg
+dG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
