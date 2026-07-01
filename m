@@ -2,135 +2,166 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id WqI3BOduVmqw5QAAu9opvQ
+	id PXPcFvNuVmqz5QAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 19:16:23 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 19:16:35 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8BEEE75741B
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 19:16:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E6135757420
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 19:16:34 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=igalia.com header.s=20170329 header.b=dbi780vP;
+	dkim=fail ("body hash did not verify") header.d=igalia.com header.s=20170329 header.b=QIVYRHuO;
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
 	dmarc=fail reason="SPF not aligned (relaxed)" header.from=igalia.com (policy=none)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A267D40977
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 17:16:21 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 04B633F821
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 17:16:34 +0000 (UTC)
 Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
-	by lists.linaro.org (Postfix) with ESMTPS id 57CA740AA9
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  1 Jul 2026 09:34:55 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id BFFD440C2C
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  1 Jul 2026 09:47:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
 	s=20170329; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
 	References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
 	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
 	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
 	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=rkkSHqFyVp2fyO4zhsA5xQzb55y8BJkjvdnC/dmJ7zc=; b=dbi780vPfR0drg5RINie+jGdE8
-	mPUp0ueEEct0j7NBYL3UhDqKkYfe2YaMuIxqwEOxjArdH8Xrp0y7zU87XrjLzuGj/DmzjxtiiHJ4M
-	C/aVrhTiYUY7+lVh6c1S21eH10NRgaVfDDvMC08qcBVzm2KKNgiUSORgS4Lprapx5jrVYQOZwRCOD
-	c4/M7VPv7iD295rCgrQOi7LEj1iKRJmhE0yo5Qdc5MRFlfIXHBasyQFPzpSPkGCUovtKt0JfEIOg+
-	9iGIAj/uPDd3O42m84Joma9507V1pkiT9KPJkMQ3bcLUZzZ3A2onS8RrsCmRURUl37SLn98eXS9kp
-	UzGKhNaQ==;
+	bh=bcuJIHJURN2nRVwMc14bEcKEFn5tgCON28gFcUCQqSQ=; b=QIVYRHuO5eyGWfbHfZ8UPQhTe3
+	e1UlX0EpGFowYIEBa4o2cHjcOdMf1S+kB/c9YID9dDiY/b2u8ZbvpMWQ6N4MLuM5D2V+PUcq0E6qu
+	E31KvA7J9esLGZ2kZCZdiT7mNvQfP9peAA6GiU9pqk3rYilwpz3myiGh0aNOcu90J9bPneLQJxkGm
+	fhBk5s+3cmhnFGYbnpG2T3J3ka6JNwLoRdLkh3ymA+t3bVxTBzMOb82/cOy5WY4Hj7RgMYVczqxfQ
+	bVEPiCTl4DkGhGvn6sIgHjDmnuOjpjHR43UNSQkYIZFdB3Uu+IPTtT9HmWRiLiAPuHkd7p8Z9zyPf
+	ymNihnhQ==;
 Received: from [90.240.106.137] (helo=[192.168.0.116])
 	by fanzine2.igalia.com with esmtpsa
 	(Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim)
-	id 1werLE-007Ufe-6F; Wed, 01 Jul 2026 11:34:48 +0200
-Message-ID: <65d4d6dd-a526-409e-96b7-e9a71ed47f23@igalia.com>
-Date: Wed, 1 Jul 2026 10:34:47 +0100
+	id 1werX3-007UwW-GA; Wed, 01 Jul 2026 11:47:01 +0200
+Message-ID: <c607eb83-7051-46d4-b630-ff44c34d9410@igalia.com>
+Date: Wed, 1 Jul 2026 10:47:00 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: christian.koenig@amd.com, phasta@kernel.org, simona@ffwll.ch,
- sumit.semwal@linaro.org, dakr@kernel.org
-References: <20260624122917.2483-1-christian.koenig@amd.com>
- <20260624122917.2483-6-christian.koenig@amd.com>
+To: Philipp Stanner <phasta@kernel.org>,
+ Matthew Brost <matthew.brost@intel.com>, Danilo Krummrich <dakr@kernel.org>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Sumit Semwal <sumit.semwal@linaro.org>, Marco Pagani
+ <marco.pagani@linux.dev>, Boris Brezillon <boris.brezillon@collabora.com>
+References: <20260701085920.3253248-2-phasta@kernel.org>
+ <20260701085920.3253248-6-phasta@kernel.org>
 Content-Language: en-GB
 From: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>
-In-Reply-To: <20260624122917.2483-6-christian.koenig@amd.com>
+In-Reply-To: <20260701085920.3253248-6-phasta@kernel.org>
 X-Spamd-Bar: ---
 X-MailFrom: tvrtko.ursulin@igalia.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: SY6BDZHC2SI6TLA2B3YXE4JPOTAQBIC4
-X-Message-ID-Hash: SY6BDZHC2SI6TLA2B3YXE4JPOTAQBIC4
+Message-ID-Hash: G6G6SREA3LSNOLYNB4JTATPRQTXUWNLQ
+X-Message-ID-Hash: G6G6SREA3LSNOLYNB4JTATPRQTXUWNLQ
 X-Mailman-Approved-At: Tue, 14 Jul 2026 17:14:40 +0000
-CC: dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 05/10] drm/sched: use dma_fence_test_signaled_flag()
+Subject: [Linaro-mm-sig] Re: [PATCH 4/5] drm/sched: Lock drm_sched_entity_is_idle()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SY6BDZHC2SI6TLA2B3YXE4JPOTAQBIC4/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/G6G6SREA3LSNOLYNB4JTATPRQTXUWNLQ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [1.69 / 15.00];
+X-Spamd-Result: default: False [3.09 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	DATE_IN_PAST(1.00)[319];
 	R_DKIM_REJECT(1.00)[igalia.com:s=20170329];
-	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
-	MIME_BASE64_TEXT(0.10)[];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[igalia.com : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
+	FORGED_RECIPIENTS(0.00)[m:phasta@kernel.org,m:matthew.brost@intel.com,m:dakr@kernel.org,m:ckoenig.leichtzumerken@gmail.com,m:maarten.lankhorst@linux.intel.com,m:mripard@kernel.org,m:tzimmermann@suse.de,m:airlied@gmail.com,m:simona@ffwll.ch,m:sumit.semwal@linaro.org,m:marco.pagani@linux.dev,m:boris.brezillon@collabora.com,m:dri-devel@lists.freedesktop.org,m:linux-kernel@vger.kernel.org,m:linux-media@vger.kernel.org,m:linaro-mm-sig@lists.linaro.org,m:ckoenigleichtzumerken@gmail.com,s:lists@lfdr.de];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	FORGED_RECIPIENTS(0.00)[m:christian.koenig@amd.com,m:phasta@kernel.org,m:simona@ffwll.ch,m:sumit.semwal@linaro.org,m:dakr@kernel.org,m:dri-devel@lists.freedesktop.org,m:linux-media@vger.kernel.org,m:linaro-mm-sig@lists.linaro.org,s:lists@lfdr.de];
+	FREEMAIL_TO(0.00)[kernel.org,intel.com,gmail.com,linux.intel.com,suse.de,ffwll.ch,linaro.org,linux.dev,collabora.com];
 	FORGED_SENDER(0.00)[tvrtko.ursulin@igalia.com,linaro-mm-sig-bounces@lists.linaro.org];
-	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	RCVD_COUNT_THREE(0.00)[3];
 	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TO_DN_NONE(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[tvrtko.ursulin@igalia.com,linaro-mm-sig-bounces@lists.linaro.org];
 	DKIM_TRACE(0.00)[igalia.com:-];
-	RCPT_COUNT_SEVEN(0.00)[8];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[tvrtko.ursulin@igalia.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[amd.com:email,linaro.org:email,igalia.com:from_mime,igalia.com:email,igalia.com:mid,lists.linaro.org:from_smtp,lists.linaro.org:helo,lists.linaro.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:from_smtp,lists.linaro.org:helo,lists.linaro.org:rdns,igalia.com:from_mime,igalia.com:email,igalia.com:mid,linaro.org:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 8BEEE75741B
+X-Rspamd-Queue-Id: E6135757420
 
-DQpPbiAyNC8wNi8yMDI2IDEyOjEzLCBDaHJpc3RpYW4gS8O2bmlnIHdyb3RlOg0KPiBJbnN0ZWFk
-IG9mIGRtYV9mZW5jZV9pc19zaWduYWxlZF9sb2NrZWQoKSB1c2UNCj4gZG1hX2ZlbmNlX3Rlc3Rf
-c2lnbmFsZWRfZmxhZygpLg0KPiANCj4gTm8gZnVuY3Rpb25hbCBkaWZmZXJlbmNlIHRoZSBtb2Nr
-IEhXIGZlbmNlIGhhcyBubyBzaWduYWxlZCBjYWxsYmFjaw0KPiBhbnl3YXkuDQo+IA0KPiBTaWdu
-ZWQtb2ZmLWJ5OiBDaHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+DQo+
-IC0tLQ0KPiAgIGRyaXZlcnMvZ3B1L2RybS9zY2hlZHVsZXIvdGVzdHMvbW9ja19zY2hlZHVsZXIu
-YyB8IDQgKystLQ0KPiAgIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKyksIDIgZGVsZXRp
-b25zKC0pDQo+IA0KPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL3NjaGVkdWxlci90ZXN0
-cy9tb2NrX3NjaGVkdWxlci5jIGIvZHJpdmVycy9ncHUvZHJtL3NjaGVkdWxlci90ZXN0cy9tb2Nr
-X3NjaGVkdWxlci5jDQo+IGluZGV4IDE0NDAzYTc2MjMzNS4uODJkY2UzNDRiZmExIDEwMDY0NA0K
-PiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vc2NoZWR1bGVyL3Rlc3RzL21vY2tfc2NoZWR1bGVyLmMN
-Cj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL3NjaGVkdWxlci90ZXN0cy9tb2NrX3NjaGVkdWxlci5j
-DQo+IEBAIC0yMjQsNyArMjI0LDcgQEAgbW9ja19zY2hlZF90aW1lZG91dF9qb2Ioc3RydWN0IGRy
-bV9zY2hlZF9qb2IgKnNjaGVkX2pvYikNCj4gICAJfQ0KPiAgIA0KPiAgIAlzcGluX2xvY2tfaXJx
-c2F2ZSgmc2NoZWQtPmxvY2ssIGZsYWdzKTsNCj4gLQlpZiAoIWRtYV9mZW5jZV9pc19zaWduYWxl
-ZF9sb2NrZWQoJmpvYi0+aHdfZmVuY2UpKSB7DQo+ICsJaWYgKCFkbWFfZmVuY2VfdGVzdF9zaWdu
-YWxlZF9mbGFnKCZqb2ItPmh3X2ZlbmNlKSkgew0KPiAgIAkJbGlzdF9kZWwoJmpvYi0+bGluayk7
-DQo+ICAgCQlqb2ItPmZsYWdzIHw9IERSTV9NT0NLX1NDSEVEX0pPQl9USU1FRE9VVDsNCj4gICAJ
-CWRtYV9mZW5jZV9zZXRfZXJyb3IoJmpvYi0+aHdfZmVuY2UsIC1FVElNRURPVVQpOw0KPiBAQCAt
-MjU4LDcgKzI1OCw3IEBAIHN0YXRpYyB2b2lkIG1vY2tfc2NoZWRfY2FuY2VsX2pvYihzdHJ1Y3Qg
-ZHJtX3NjaGVkX2pvYiAqc2NoZWRfam9iKQ0KPiAgIAlocnRpbWVyX2NhbmNlbCgmam9iLT50aW1l
-cik7DQo+ICAgDQo+ICAgCXNwaW5fbG9ja19pcnFzYXZlKCZzY2hlZC0+bG9jaywgZmxhZ3MpOw0K
-PiAtCWlmICghZG1hX2ZlbmNlX2lzX3NpZ25hbGVkX2xvY2tlZCgmam9iLT5od19mZW5jZSkpIHsN
-Cj4gKwlpZiAoIWRtYV9mZW5jZV90ZXN0X3NpZ25hbGVkX2ZsYWcoJmpvYi0+aHdfZmVuY2UpKSB7
-DQo+ICAgCQlsaXN0X2RlbCgmam9iLT5saW5rKTsNCj4gICAJCWRtYV9mZW5jZV9zZXRfZXJyb3Io
-JmpvYi0+aHdfZmVuY2UsIC1FQ0FOQ0VMRUQpOw0KPiAgIAkJZG1hX2ZlbmNlX3NpZ25hbF9sb2Nr
-ZWQoJmpvYi0+aHdfZmVuY2UpOw0KDQpSZXZpZXdlZC1ieTogVHZydGtvIFVyc3VsaW4gPHR2cnRr
-by51cnN1bGluQGlnYWxpYS5jb20+DQoNClJlZ2FyZHMsDQoNClR2cnRrbw0KDQpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxp
-bmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUg
-c2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+
+On 01/07/2026 09:59, Philipp Stanner wrote:
+> drm_sched_entity_is_idle() contains a badly documented memory barrier
+> and an invalid lockless access to entity->stopped.
+> 
+> This function is in no way performance critical, so it is safer, more
+> readable and more maintainable to take the spinlock. This also enables
+> future cleanup work where the entity can be fully synchronized via its
+> spinlock.
+> 
+> Add locking to drm_sched_entity_is_idle().
+> 
+> Signed-off-by: Philipp Stanner <phasta@kernel.org>
+> ---
+>   drivers/gpu/drm/scheduler/sched_entity.c | 10 +++++++---
+>   1 file changed, 7 insertions(+), 3 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/scheduler/sched_entity.c b/drivers/gpu/drm/scheduler/sched_entity.c
+> index 0fc1213a0d3f..cb03d6a36578 100644
+> --- a/drivers/gpu/drm/scheduler/sched_entity.c
+> +++ b/drivers/gpu/drm/scheduler/sched_entity.c
+> @@ -178,14 +178,18 @@ EXPORT_SYMBOL(drm_sched_entity_modify_sched);
+>   
+>   static bool drm_sched_entity_is_idle(struct drm_sched_entity *entity)
+>   {
+> -	rmb(); /* for list_empty to work without lock */
+> +	bool idle = false;
+> +
+> +	spin_lock(&entity->lock);
+>   
+>   	if (list_empty(&entity->list) ||
+>   	    spsc_queue_count(&entity->job_queue) == 0 ||
+>   	    entity->stopped)
+> -		return true;
+> +		idle = true;
+>   
+> -	return false;
+> +	spin_unlock(&entity->lock);
+> +
+> +	return idle;
+>   }
+>   
+>   /**
+
+I think this is fine and indeed not performance critical in any way so:
+
+Reviewed-by: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>
+
+Regards,
+
+Tvrtko
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
