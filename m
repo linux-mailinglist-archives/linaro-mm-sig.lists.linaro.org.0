@@ -2,39 +2,39 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id i70rJLVKRWq++AoAu9opvQ
+	id jO27AMFKRWrE+AoAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 01 Jul 2026 19:13:25 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 01 Jul 2026 19:13:37 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1D7816F0390
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 01 Jul 2026 19:13:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6DEBF6F03A3
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 01 Jul 2026 19:13:36 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=ozlabs.org header.s=201707 header.b=oT8FepUG;
+	dkim=fail ("body hash did not verify") header.d=ozlabs.org header.s=201707 header.b=IsvcSkQB;
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
 	dmarc=fail reason="SPF not aligned (relaxed)" header.from=ozlabs.org (policy=none)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 344D440C68
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Jul 2026 17:13:24 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 83AC640D71
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Jul 2026 17:13:35 +0000 (UTC)
 Received: from mail.ozlabs.org (gandalf.ozlabs.org [150.107.74.76])
-	by lists.linaro.org (Postfix) with ESMTPS id A2EA4406EA
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  1 Jul 2026 17:13:03 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id DE2E1406EA
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  1 Jul 2026 17:13:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ozlabs.org;
-	s=201707; t=1782925981;
-	bh=eq0iyaWoEylV7jKfn6Ek2hVP6Y7gMd9mC2uCB/SDPOc=;
+	s=201707; t=1782925986;
+	bh=4xWJwm8T18OeKGBb/rZPmIYYmLN8EHML9V847m096Pg=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=oT8FepUGMBJnPxp0NOoR4lF2D0caxNz8zdExc1BgC4aMKDx3iG3i9z3th/2WLJNN9
-	 TxujEAOM6TFzKPskQM1OEzYye0VqaNrtMHlniSdURa6mHwLaVLKdFs/fw5RKLUz46Y
-	 KiVvpAe/euxd+rbY2QPKyjwHaQPQYynuUJ92wOu5iOHngzS5a+684bRElyFpyqJJZw
-	 yKXgJoFQZPLHSkFWv1Iwb6ktrWhi/eZLmoMo24gcIV6hlE5kJk8JZS0dXzRbVtq/Ha
-	 0ofAJQys0PZPRCvkNHjY2tI8joE2gr/hOPdtwfco+1Q0X/+2h3cCe6b9prpdiwoYTh
-	 Pyr0zovKtN3XQ==
+	b=IsvcSkQBy+WumukFTheuV09mevAeEXbqHZjYzHbgS3DqJJUaBJPWgHTmK71j1BRni
+	 VjvneU4CwOPVNceUsvXcDE69BeKL5A89a+kLw0eK6HAEKKn/syTF4cPe05Vq6MvwDY
+	 WQh4kHsCYitRb+sKMOSrKBbD9DOtWxuCmjnxx8UeA8Ex0z6PZmT+ZE9J7SLU4JZiOX
+	 C7xiQNqVU+xZeNdtdTeinmRG7uMAhKjHkeI4z3twKP3brNKyzJZqWqK26sA5b0YWxe
+	 cXL2ncxCa6YCtCuT61L9iwQfegdyrAOmQQNFJUmRi60JIbw3plLP0rg0hy0Fxqm/Ma
+	 dlHi6aU31UGLQ==
 Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
 	(Client did not present a certificate)
-	by mail.ozlabs.org (Postfix) with ESMTPSA id 4gr66508gJz4wgb;
-	Thu, 02 Jul 2026 03:13:01 +1000 (AEST)
+	by mail.ozlabs.org (Postfix) with ESMTPSA id 4gr6691wcVz58lX;
+	Thu, 02 Jul 2026 03:13:05 +1000 (AEST)
 From: Matt Evans <matt@ozlabs.org>
 To: Alex Williamson <alex@shazbot.org>,
 	Leon Romanovsky <leon@kernel.org>,
@@ -45,24 +45,24 @@ To: Alex Williamson <alex@shazbot.org>,
 	Logan Gunthorpe <logang@deltatee.com>,
 	Kevin Tian <kevin.tian@intel.com>,
 	Pranjal Shrivastava <praan@google.com>
-Date: Wed,  1 Jul 2026 18:12:13 +0100
-Message-ID: <20260701171245.90111-2-matt@ozlabs.org>
+Date: Wed,  1 Jul 2026 18:12:14 +0100
+Message-ID: <20260701171245.90111-3-matt@ozlabs.org>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <20260701171245.90111-1-matt@ozlabs.org>
 References: <20260701171245.90111-1-matt@ozlabs.org>
 MIME-Version: 1.0
 X-Spamd-Bar: --
-Message-ID-Hash: D4X7NVV6PLPZF4AZZRFCTHPJUN3BEXHZ
-X-Message-ID-Hash: D4X7NVV6PLPZF4AZZRFCTHPJUN3BEXHZ
+Message-ID-Hash: JU2MHIN6NOR5ESZWC2J4LVPHEZUMVY3S
+X-Message-ID-Hash: JU2MHIN6NOR5ESZWC2J4LVPHEZUMVY3S
 X-MailFrom: matt@ozlabs.org
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 CC: Mahmoud Adam <mngyadam@amazon.de>, David Matlack <dmatlack@google.com>, =?UTF-8?q?Bj=C3=B6rn=20T=C3=B6pel?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Ankit Agrawal <ankita@nvidia.com>, Alistair Popple <apopple@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org, linux-pci@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v4 01/10] PCI/P2PDMA: Split pool-related cleanup out of pci_p2pdma_release()
+Subject: [Linaro-mm-sig] [PATCH v4 02/10] PCI/P2PDMA: Add CONFIG_PCI_P2PDMA_CORE
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/D4X7NVV6PLPZF4AZZRFCTHPJUN3BEXHZ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JU2MHIN6NOR5ESZWC2J4LVPHEZUMVY3S/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -102,70 +102,446 @@ X-Spamd-Result: default: False [1.59 / 15.00];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	TO_DN_SOME(0.00)[]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 1D7816F0390
+X-Rspamd-Queue-Id: 6DEBF6F03A3
 
-Preparing for a refactor in a subsequent patch, split the pool-related
-release code into a new pci_p2pdma_release_pool() function.
+The P2PDMA code currently provides two features under the same
+CONFIG_PCI_P2PDMA option:
 
-This allows future compile-time selection of a null implementation for
-pci_p2pdma_release_pool(), when p2pdma.c is refactored into core- and
-P2P-related files.
+ 1.  Locate providers via pcim_p2pdma_provider()
+ 2.  Manage actual P2P DMA
+
+Some drivers (such as vfio-pci) depend on (1), without having a hard
+dependency on (2).
+
+A future vfio-pci commit will rely on pcim_p2pdma_provider() always
+being present.  If that depended on CONFIG_PCI_P2PDMA, it would make
+vfio-pci only available if CONFIG_ZONE_DEVICE is present (e.g. 64-bit
+systems), even when P2P is not needed.
+
+To resolve this, introduce CONFIG_PCI_P2PDMA_CORE and refactor the
+basic provider functionality into a new p2pdma_core.c file.  This is
+available even if the CONFIG_PCI_P2PDMA feature is disabled (or
+unavailable due to !CONFIG_ZONE_DEVICE), satisfying (1).
+
+Then, when the original CONFIG_PCI_P2PDMA is set, drivers have access
+to the additional P2P features of (2).  This still depends on
+CONFIG_ZONE_DEVICE.
 
 Signed-off-by: Matt Evans <matt@ozlabs.org>
 ---
- drivers/pci/p2pdma.c | 24 ++++++++++++++----------
- 1 file changed, 14 insertions(+), 10 deletions(-)
+ MAINTAINERS                |   2 +-
+ drivers/pci/Kconfig        |  10 ++--
+ drivers/pci/Makefile       |   1 +
+ drivers/pci/p2pdma.c       | 107 +--------------------------------
+ drivers/pci/p2pdma.h       |  29 +++++++++
+ drivers/pci/p2pdma_core.c  | 118 +++++++++++++++++++++++++++++++++++++
+ include/linux/pci-p2pdma.h |  24 ++++----
+ include/linux/pci.h        |   2 +-
+ 8 files changed, 171 insertions(+), 122 deletions(-)
+ create mode 100644 drivers/pci/p2pdma.h
+ create mode 100644 drivers/pci/p2pdma_core.c
 
+diff --git a/MAINTAINERS b/MAINTAINERS
+index c8d4b913f26c..713861af4484 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -20626,7 +20626,7 @@ B:	https://bugzilla.kernel.org
+ C:	irc://irc.oftc.net/linux-pci
+ T:	git git://git.kernel.org/pub/scm/linux/kernel/git/pci/pci.git
+ F:	Documentation/driver-api/pci/p2pdma.rst
+-F:	drivers/pci/p2pdma.c
++F:	drivers/pci/p2pdma*
+ F:	include/linux/pci-p2pdma.h
+ 
+ PCI POWER CONTROL
+diff --git a/drivers/pci/Kconfig b/drivers/pci/Kconfig
+index 33c88432b728..59d70bc84cc9 100644
+--- a/drivers/pci/Kconfig
++++ b/drivers/pci/Kconfig
+@@ -206,11 +206,7 @@ config PCIE_TPH
+ config PCI_P2PDMA
+ 	bool "PCI peer-to-peer transfer support"
+ 	depends on ZONE_DEVICE
+-	#
+-	# The need for the scatterlist DMA bus address flag means PCI P2PDMA
+-	# requires 64bit
+-	#
+-	depends on 64BIT
++	select PCI_P2PDMA_CORE
+ 	select GENERIC_ALLOCATOR
+ 	select NEED_SG_DMA_FLAGS
+ 	help
+@@ -226,6 +222,10 @@ config PCI_P2PDMA
+ 
+ 	  If unsure, say N.
+ 
++config PCI_P2PDMA_CORE
++	default n
++	bool
++
+ config PCI_LABEL
+ 	def_bool y if (DMI || ACPI)
+ 	select NLS
+diff --git a/drivers/pci/Makefile b/drivers/pci/Makefile
+index 41ebc3b9a518..0b32572d57a1 100644
+--- a/drivers/pci/Makefile
++++ b/drivers/pci/Makefile
+@@ -30,6 +30,7 @@ obj-$(CONFIG_PCI_SYSCALL)	+= syscall.o
+ obj-$(CONFIG_PCI_STUB)		+= pci-stub.o
+ obj-$(CONFIG_PCI_PF_STUB)	+= pci-pf-stub.o
+ obj-$(CONFIG_PCI_ECAM)		+= ecam.o
++obj-$(CONFIG_PCI_P2PDMA_CORE)	+= p2pdma_core.o
+ obj-$(CONFIG_PCI_P2PDMA)	+= p2pdma.o
+ obj-$(CONFIG_XEN_PCIDEV_FRONTEND) += xen-pcifront.o
+ obj-$(CONFIG_VGA_ARB)		+= vgaarb.o
 diff --git a/drivers/pci/p2pdma.c b/drivers/pci/p2pdma.c
-index 7c898542af8d..a5a1baebc34e 100644
+index a5a1baebc34e..50b1a7daf55c 100644
 --- a/drivers/pci/p2pdma.c
 +++ b/drivers/pci/p2pdma.c
-@@ -226,6 +226,17 @@ static const struct dev_pagemap_ops p2pdma_pgmap_ops = {
+@@ -21,12 +21,7 @@
+ #include <linux/seq_buf.h>
+ #include <linux/xarray.h>
+ 
+-struct pci_p2pdma {
+-	struct gen_pool *pool;
+-	bool p2pmem_published;
+-	struct xarray map_types;
+-	struct p2pdma_provider mem[PCI_STD_NUM_BARS];
+-};
++#include "p2pdma.h"
+ 
+ struct pci_p2pdma_pagemap {
+ 	struct dev_pagemap pgmap;
+@@ -226,8 +221,7 @@ static const struct dev_pagemap_ops p2pdma_pgmap_ops = {
  	.folio_free = p2pdma_folio_free,
  };
  
-+static void pci_p2pdma_release_pool(struct pci_dev *pdev,
-+				    struct pci_p2pdma *p2pdma)
-+{
-+	if (!p2pdma->pool)
-+		return;
-+
-+	synchronize_rcu();
-+	gen_pool_destroy(p2pdma->pool);
-+	sysfs_remove_group(&pdev->dev.kobj, &p2pmem_group);
-+}
-+
- static void pci_p2pdma_release(void *data)
+-static void pci_p2pdma_release_pool(struct pci_dev *pdev,
+-				    struct pci_p2pdma *p2pdma)
++void pci_p2pdma_release_pool(struct pci_dev *pdev, struct pci_p2pdma *p2pdma)
  {
- 	struct pci_dev *pdev = data;
-@@ -237,15 +248,8 @@ static void pci_p2pdma_release(void *data)
- 
- 	/* Flush and disable pci_alloc_p2p_mem() */
- 	pdev->p2pdma = NULL;
--	if (p2pdma->pool)
--		synchronize_rcu();
-+	pci_p2pdma_release_pool(pdev, p2pdma);
- 	xa_destroy(&p2pdma->map_types);
--
--	if (!p2pdma->pool)
--		return;
--
--	gen_pool_destroy(p2pdma->pool);
--	sysfs_remove_group(&pdev->dev.kobj, &p2pmem_group);
+ 	if (!p2pdma->pool)
+ 		return;
+@@ -237,103 +231,6 @@ static void pci_p2pdma_release_pool(struct pci_dev *pdev,
+ 	sysfs_remove_group(&pdev->dev.kobj, &p2pmem_group);
  }
  
- /**
-@@ -932,8 +936,8 @@ void *pci_alloc_p2pmem(struct pci_dev *pdev, size_t size)
+-static void pci_p2pdma_release(void *data)
+-{
+-	struct pci_dev *pdev = data;
+-	struct pci_p2pdma *p2pdma;
+-
+-	p2pdma = rcu_dereference_protected(pdev->p2pdma, 1);
+-	if (!p2pdma)
+-		return;
+-
+-	/* Flush and disable pci_alloc_p2p_mem() */
+-	pdev->p2pdma = NULL;
+-	pci_p2pdma_release_pool(pdev, p2pdma);
+-	xa_destroy(&p2pdma->map_types);
+-}
+-
+-/**
+- * pcim_p2pdma_init - Initialise peer-to-peer DMA providers
+- * @pdev: The PCI device to enable P2PDMA for
+- *
+- * This function initializes the peer-to-peer DMA infrastructure
+- * for a PCI device. It allocates and sets up the necessary data
+- * structures to support P2PDMA operations, including mapping type
+- * tracking.
+- */
+-int pcim_p2pdma_init(struct pci_dev *pdev)
+-{
+-	struct pci_p2pdma *p2p;
+-	int i, ret;
+-
+-	p2p = rcu_dereference_protected(pdev->p2pdma, 1);
+-	if (p2p)
+-		return 0;
+-
+-	p2p = devm_kzalloc(&pdev->dev, sizeof(*p2p), GFP_KERNEL);
+-	if (!p2p)
+-		return -ENOMEM;
+-
+-	xa_init(&p2p->map_types);
+-	/*
+-	 * Iterate over all standard PCI BARs and record only those that
+-	 * correspond to MMIO regions. Skip non-memory resources (e.g. I/O
+-	 * port BARs) since they cannot be used for peer-to-peer (P2P)
+-	 * transactions.
+-	 */
+-	for (i = 0; i < PCI_STD_NUM_BARS; i++) {
+-		if (!(pci_resource_flags(pdev, i) & IORESOURCE_MEM))
+-			continue;
+-
+-		p2p->mem[i].owner = &pdev->dev;
+-		p2p->mem[i].bus_offset =
+-			pci_bus_address(pdev, i) - pci_resource_start(pdev, i);
+-	}
+-
+-	ret = devm_add_action_or_reset(&pdev->dev, pci_p2pdma_release, pdev);
+-	if (ret)
+-		goto out_p2p;
+-
+-	rcu_assign_pointer(pdev->p2pdma, p2p);
+-	return 0;
+-
+-out_p2p:
+-	devm_kfree(&pdev->dev, p2p);
+-	return ret;
+-}
+-EXPORT_SYMBOL_GPL(pcim_p2pdma_init);
+-
+-/**
+- * pcim_p2pdma_provider - Get peer-to-peer DMA provider
+- * @pdev: The PCI device to enable P2PDMA for
+- * @bar: BAR index to get provider
+- *
+- * This function gets peer-to-peer DMA provider for a PCI device. The lifetime
+- * of the provider (and of course the MMIO) is bound to the lifetime of the
+- * driver. A driver calling this function must ensure that all references to the
+- * provider, and any DMA mappings created for any MMIO, are all cleaned up
+- * before the driver remove() completes.
+- *
+- * Since P2P is almost always shared with a second driver this means some system
+- * to notify, invalidate and revoke the MMIO's DMA must be in place to use this
+- * function. For example a revoke can be built using DMABUF.
+- */
+-struct p2pdma_provider *pcim_p2pdma_provider(struct pci_dev *pdev, int bar)
+-{
+-	struct pci_p2pdma *p2p;
+-
+-	if (!(pci_resource_flags(pdev, bar) & IORESOURCE_MEM))
+-		return NULL;
+-
+-	p2p = rcu_dereference_protected(pdev->p2pdma, 1);
+-	if (WARN_ON(!p2p))
+-		/* Someone forgot to call to pcim_p2pdma_init() before */
+-		return NULL;
+-
+-	return &p2p->mem[bar];
+-}
+-EXPORT_SYMBOL_GPL(pcim_p2pdma_provider);
+-
+ static int pci_p2pdma_setup_pool(struct pci_dev *pdev)
+ {
  	struct pci_p2pdma *p2pdma;
+diff --git a/drivers/pci/p2pdma.h b/drivers/pci/p2pdma.h
+new file mode 100644
+index 000000000000..946383809981
+--- /dev/null
++++ b/drivers/pci/p2pdma.h
+@@ -0,0 +1,29 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * PCI peer-to-peer DMA support.
++ */
++
++#ifndef _PCI_P2PDMA_H
++#define _PCI_P2PDMA_H
++
++#include <linux/genalloc.h>
++#include <linux/pci-p2pdma.h>
++#include <linux/xarray.h>
++
++struct pci_p2pdma {
++	struct gen_pool *pool;
++	bool p2pmem_published;
++	struct xarray map_types;
++	struct p2pdma_provider mem[PCI_STD_NUM_BARS];
++};
++
++#ifdef CONFIG_PCI_P2PDMA
++void pci_p2pdma_release_pool(struct pci_dev *pdev, struct pci_p2pdma *p2pdma);
++#else
++static inline void pci_p2pdma_release_pool(struct pci_dev *pdev,
++					   struct pci_p2pdma *p2pdma)
++{
++}
++#endif
++
++#endif
+diff --git a/drivers/pci/p2pdma_core.c b/drivers/pci/p2pdma_core.c
+new file mode 100644
+index 000000000000..bb2138bf2bc7
+--- /dev/null
++++ b/drivers/pci/p2pdma_core.c
+@@ -0,0 +1,118 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * PCI peer-to-peer DMA support core, providing a bare-bones
++ * pcim_p2pdma_provider() interface to drivers even if full P2PDMA
++ * isn't present.  The full P2PDMA feature is in p2pdma.c (see
++ * CONFIG_PCI_P2PDMA).
++ *
++ * Copyright (c) 2016-2018, Logan Gunthorpe
++ * Copyright (c) 2016-2017, Microsemi Corporation
++ * Copyright (c) 2017, Christoph Hellwig
++ * Copyright (c) 2018, Eideticom Inc.
++ */
++
++#define pr_fmt(fmt) "pci-p2pdma: " fmt
++#include <linux/ctype.h>
++#include <linux/genalloc.h>
++#include <linux/memremap.h>
++#include <linux/pci-p2pdma.h>
++#include <linux/xarray.h>
++
++#include "p2pdma.h"
++
++static void pci_p2pdma_release(void *data)
++{
++	struct pci_dev *pdev = data;
++	struct pci_p2pdma *p2pdma;
++
++	p2pdma = rcu_dereference_protected(pdev->p2pdma, 1);
++	if (!p2pdma)
++		return;
++
++	/* Flush and disable pci_alloc_p2p_mem() */
++	pdev->p2pdma = NULL;
++	pci_p2pdma_release_pool(pdev, p2pdma);
++	xa_destroy(&p2pdma->map_types);
++}
++
++/**
++ * pcim_p2pdma_init - Initialise peer-to-peer DMA providers
++ * @pdev: The PCI device to enable P2PDMA for
++ *
++ * This function initializes the peer-to-peer DMA infrastructure
++ * for a PCI device. It allocates and sets up the necessary data
++ * structures to support P2PDMA operations, including mapping type
++ * tracking.
++ */
++int pcim_p2pdma_init(struct pci_dev *pdev)
++{
++	struct pci_p2pdma *p2p;
++	int i, ret;
++
++	p2p = rcu_dereference_protected(pdev->p2pdma, 1);
++	if (p2p)
++		return 0;
++
++	p2p = devm_kzalloc(&pdev->dev, sizeof(*p2p), GFP_KERNEL);
++	if (!p2p)
++		return -ENOMEM;
++
++	xa_init(&p2p->map_types);
++	/*
++	 * Iterate over all standard PCI BARs and record only those that
++	 * correspond to MMIO regions. Skip non-memory resources (e.g. I/O
++	 * port BARs) since they cannot be used for peer-to-peer (P2P)
++	 * transactions.
++	 */
++	for (i = 0; i < PCI_STD_NUM_BARS; i++) {
++		if (!(pci_resource_flags(pdev, i) & IORESOURCE_MEM))
++			continue;
++
++		p2p->mem[i].owner = &pdev->dev;
++		p2p->mem[i].bus_offset =
++			pci_bus_address(pdev, i) - pci_resource_start(pdev, i);
++	}
++
++	ret = devm_add_action_or_reset(&pdev->dev, pci_p2pdma_release, pdev);
++	if (ret)
++		goto out_p2p;
++
++	rcu_assign_pointer(pdev->p2pdma, p2p);
++	return 0;
++
++out_p2p:
++	devm_kfree(&pdev->dev, p2p);
++	return ret;
++}
++EXPORT_SYMBOL_GPL(pcim_p2pdma_init);
++
++/**
++ * pcim_p2pdma_provider - Get peer-to-peer DMA provider
++ * @pdev: The PCI device to enable P2PDMA for
++ * @bar: BAR index to get provider
++ *
++ * This function gets peer-to-peer DMA provider for a PCI device. The lifetime
++ * of the provider (and of course the MMIO) is bound to the lifetime of the
++ * driver. A driver calling this function must ensure that all references to the
++ * provider, and any DMA mappings created for any MMIO, are all cleaned up
++ * before the driver remove() completes.
++ *
++ * Since P2P is almost always shared with a second driver this means some system
++ * to notify, invalidate and revoke the MMIO's DMA must be in place to use this
++ * function. For example a revoke can be built using DMABUF.
++ */
++struct p2pdma_provider *pcim_p2pdma_provider(struct pci_dev *pdev, int bar)
++{
++	struct pci_p2pdma *p2p;
++
++	if (!(pci_resource_flags(pdev, bar) & IORESOURCE_MEM))
++		return NULL;
++
++	p2p = rcu_dereference_protected(pdev->p2pdma, 1);
++	if (WARN_ON(!p2p))
++		/* Someone forgot to call to pcim_p2pdma_init() before */
++		return NULL;
++
++	return &p2p->mem[bar];
++}
++EXPORT_SYMBOL_GPL(pcim_p2pdma_provider);
+diff --git a/include/linux/pci-p2pdma.h b/include/linux/pci-p2pdma.h
+index 873de20a2247..4c42a7b2ee85 100644
+--- a/include/linux/pci-p2pdma.h
++++ b/include/linux/pci-p2pdma.h
+@@ -67,9 +67,22 @@ enum pci_p2pdma_map_type {
+ 	PCI_P2PDMA_MAP_THRU_HOST_BRIDGE,
+ };
  
- 	/*
--	 * Pairs with synchronize_rcu() in pci_p2pdma_release() to
--	 * ensure pdev->p2pdma is non-NULL for the duration of the
-+	 * Pairs with synchronize_rcu() in pci_p2pdma_release_pool()
-+	 * to ensure pdev->p2pdma is non-NULL for the duration of the
- 	 * read-lock.
- 	 */
- 	rcu_read_lock();
+-#ifdef CONFIG_PCI_P2PDMA
++#ifdef CONFIG_PCI_P2PDMA_CORE
+ int pcim_p2pdma_init(struct pci_dev *pdev);
+ struct p2pdma_provider *pcim_p2pdma_provider(struct pci_dev *pdev, int bar);
++#else
++static inline int pcim_p2pdma_init(struct pci_dev *pdev)
++{
++	return -EOPNOTSUPP;
++}
++static inline struct p2pdma_provider *pcim_p2pdma_provider(struct pci_dev *pdev,
++							   int bar)
++{
++	return NULL;
++}
++#endif
++
++#ifdef CONFIG_PCI_P2PDMA
+ int pci_p2pdma_add_resource(struct pci_dev *pdev, int bar, size_t size,
+ 		u64 offset);
+ int pci_p2pdma_distance_many(struct pci_dev *provider, struct device **clients,
+@@ -89,15 +102,6 @@ ssize_t pci_p2pdma_enable_show(char *page, struct pci_dev *p2p_dev,
+ enum pci_p2pdma_map_type pci_p2pdma_map_type(struct p2pdma_provider *provider,
+ 					     struct device *dev);
+ #else /* CONFIG_PCI_P2PDMA */
+-static inline int pcim_p2pdma_init(struct pci_dev *pdev)
+-{
+-	return -EOPNOTSUPP;
+-}
+-static inline struct p2pdma_provider *pcim_p2pdma_provider(struct pci_dev *pdev,
+-							   int bar)
+-{
+-	return NULL;
+-}
+ static inline int pci_p2pdma_add_resource(struct pci_dev *pdev, int bar,
+ 		size_t size, u64 offset)
+ {
+diff --git a/include/linux/pci.h b/include/linux/pci.h
+index 2c4454583c11..531aec355686 100644
+--- a/include/linux/pci.h
++++ b/include/linux/pci.h
+@@ -557,7 +557,7 @@ struct pci_dev {
+ 	u16		pasid_cap;	/* PASID Capability offset */
+ 	u16		pasid_features;
+ #endif
+-#ifdef CONFIG_PCI_P2PDMA
++#ifdef CONFIG_PCI_P2PDMA_CORE
+ 	struct pci_p2pdma __rcu *p2pdma;
+ #endif
+ #ifdef CONFIG_PCI_DOE
 -- 
 2.50.1 (Apple Git-155)
 
