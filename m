@@ -2,42 +2,42 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id NseONShvVmrJ5QAAu9opvQ
+	id +uhbEzNvVmrX5QAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 19:17:28 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 19:17:39 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6256C757463
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 19:17:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C972375747E
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 19:17:38 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=gDKGsoSu;
+	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=SNYKF6zx;
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
 	dmarc=fail reason="SPF not aligned (relaxed)" header.from=kernel.org (policy=quarantine)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 78D73409AC
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 17:17:27 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 5F69440C6A
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  1 Jul 2026 16:08:53 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id CEF6940A4C
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 17:17:37 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+	by lists.linaro.org (Postfix) with ESMTPS id EE79D40C68
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  1 Jul 2026 16:08:55 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	by sea.source.kernel.org (Postfix) with ESMTP id B007E429C4;
-	Wed,  1 Jul 2026 16:08:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D934C1F000E9;
-	Wed,  1 Jul 2026 16:08:51 +0000 (UTC)
+	by tor.source.kernel.org (Postfix) with ESMTP id B01D46001D;
+	Wed,  1 Jul 2026 16:08:55 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A3B171F000E9;
+	Wed,  1 Jul 2026 16:08:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1782922132;
-	bh=4svri2kKaEffu19Oke4jQpVS/UKAzGmltv6WEa4/xwk=;
+	s=k20260515; t=1782922135;
+	bh=Bv2mbusdTvV92u03LkLsnqd7ImB7l/m5WEfHrMjrMas=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=gDKGsoSuoX4y4+MxDGlxgvPDvWfjgJkJqbd4Z9YYZpHz8hxnq0PT2TzxefRMxVAa0
-	 LLxc0gfXz+qgZo48WkXD5vaITziU/QoAPNRgdHmevJCl3HtlfFa8V8lnaN8/lPSoPG
-	 p5iKl8CJsukVWbfhFl8WXyUsjdOfJnyUyxwTN8lF7AaXcwOjfoawTFhSMighESuZ5r
-	 YEe/SUMdBjlGtyX5rVRWovUn0rzPNWNqDvBxJdBLtHjc3eCV8Gyyi7+WN47vgNUBTm
-	 7jd0LJecHEfHZckFVTdLIX5rxFoXf27BDwP0eu3Fdmr93ZkcEmdf6rFk/LkbhdGvTl
-	 McmYvWLdY5ukQ==
+	b=SNYKF6zxBSGYmAbusApOFFCWL6uuUs7pq21mB+LUSsno6qF0/nSaTI6zYzlqtNAJr
+	 ZeoEH9Nt1QdK1ka8A8IPKNNTtdogOL5guN4e9X5Iq9XQGF+LfhVtQDo3DE1If4LtHV
+	 dsdyLAQfXp0H++qlkxogtml72/gCJ9hzPymFLFTpF5dVYcgiFKtPNkgdlVn997r71d
+	 A7syKbp0Bz+to+n93Qbjcgsl/GNMlv5wXyQHfyO7pdnzVnTb/EUvzLxLzIo3ygEPIm
+	 iLnFY/gkqNNMpaWrlxkib0XaThC79et+ZcfBJIm8f8M0/ezBxGE9aFACoRniIT0WYc
+	 4ekBB8GISLNSw==
 From: Thierry Reding <thierry.reding@kernel.org>
-Date: Wed, 01 Jul 2026 18:08:15 +0200
+Date: Wed, 01 Jul 2026 18:08:16 +0200
 MIME-Version: 1.0
-Message-Id: <20260701-tegra-vpr-v3-4-d80f7b871bb4@nvidia.com>
+Message-Id: <20260701-tegra-vpr-v3-5-d80f7b871bb4@nvidia.com>
 References: <20260701-tegra-vpr-v3-0-d80f7b871bb4@nvidia.com>
 In-Reply-To: <20260701-tegra-vpr-v3-0-d80f7b871bb4@nvidia.com>
 To: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
@@ -72,35 +72,35 @@ To: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
  Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
  Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2551; i=treding@nvidia.com;
- h=from:subject:message-id; bh=G1LDIXegX2JsIizEgI4OVqdVWI4H2qUqnDjgZImq5XA=;
- b=owEBbQKS/ZANAwAKAd0jrNd/PrOhAcsmYgBqRTuFpaJPLzRyixdVeDrzwyjHz8TdwopYr+lh2
- QtMV/FTH92JAjMEAAEKAB0WIQSI6sMIAUnM98CNyJ/dI6zXfz6zoQUCakU7hQAKCRDdI6zXfz6z
- oYHgD/9DX2Si/rXRk+uCTzgU4FnEHIC0/836XVX0PwE8Ma9Ts3J4Ee1/5z4Bu7fsEBHy4B5nsYJ
- 5HY7goBFPkb8aaQuFHph3Elh5ghlrSLBKMwuM9bif/EjTZCy4cJvzDmW8MoMxwShmrhItxDbn2m
- wDriAvc09QSZbZJXHGas0SwlZbJrBfz/L7SGZpaHlEuK0/18CNrzsihbkF03qYcRhI+bIbyKp6x
- OCCsizV8aNU6Rdv6A76LYBE1opYbwXE3hBvSoEb0rdjK4pwc1M9VrGaANO2WFhSqtp3p329kiCR
- t3M6Tcq9VW6OhNoVWjtbxSYsH4AyO/4GImvYOoBBZmABxd3BYGtDyx9qiSxwTnhIOkowltBwDEC
- r8qcvoNnhp1KLdYBeatZBsgshi++YY+yJDNl7EnvEnHwAsIe0yhIyirKeSf1eTvj/1j3R4XXu5i
- w2FAaNtlofPzZAj/5aiWC8afRClCczkiKN/T527UzBH93xC/VZFX214PjZama7wpFXNU98m3jDG
- wFusLKzUfW0WuCLubnpA/ais9Yz78tToqcJdtGAvP/sN+buHI3vnWH44We1nPHow3pKyFXOxngI
- uPQWSO+yHz2FMkvwy0UDzziwfMQNIiMuzY7FpCKSivOCfIUKmjoYRUW/GLcGJqauaMlNBlwCoMm
- 8wKqeTnYGGDOWRw==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2300; i=treding@nvidia.com;
+ h=from:subject:message-id; bh=DGBpv2lJgXf+7uFQCQC0wiy13z2JKXDNp8H/H8fGu1M=;
+ b=owEBbQKS/ZANAwAKAd0jrNd/PrOhAcsmYgBqRTuFau1YcqnQD2R1zcsMxdp2c/3VaTKjhCkvY
+ IESBd2vNyKJAjMEAAEKAB0WIQSI6sMIAUnM98CNyJ/dI6zXfz6zoQUCakU7hQAKCRDdI6zXfz6z
+ oa0JEACzF7v7uihOjhMHBe5Jyz6Q2xPJdUiI8nSwpJ1qTuDnpYhGEg57sn6hJthxEOVFSqy+9xC
+ aJiUzj9sSDpEZcNC9b3yysvyM+MEsFUldBvNkaD/9DBzJShfzXdfRhDBVdzzd35ov9szxi4Qlby
+ Dybso/w7L4uaO8o+hUivrNLWb2vRu00g+oLjNRJZqiJVsw6MWeWYP5Sovk0XPl7ZJZ6pXCs0uSz
+ vJjSrHTAZ3S5I1Ilr86LUB4r5OVtnoLaswv3mHFoq9o9H70HXdV8g9SYbV1rkpGoyoLKjDpTVUo
+ EtB5qCMFGGDPcSAgHGMImuXAigAOEmwuSA6DwGMY7BWkkY2x79/jvSC18Z3YgCjUNcXV0epfc9k
+ KkcBK2ITzuaGuxkO3SWmm9473jXAb3BijmJFG7JLJpN6pMMIHrFpF0UOn5oOyuofQkZXU9R7++g
+ okGECjKuyIUDcuVu2j+ch22XpYaTR9nmM2QTX6SR1tzQBLUDTjrUFmLdRcChjdPnsJD4MUIHA9c
+ yfkgIsuSY3yYvIEaHlbWbj2A9B+rIdn5ROhfXnqreH1HiNthbMS3E8M5s9aeUgJAz1P8wTNij7E
+ rH8B/EoeVBajcIixSYvzs9WVg64E3OW4ZB0cku6fUKvn07U9vXCs7mO5D6vZ6ARKOfeJncKEntY
+ TtjrxqyrEmq4DDw==
 X-Developer-Key: i=treding@nvidia.com; a=openpgp;
  fpr=88EAC3080149CCF7C08DC89FDD23ACD77F3EB3A1
 X-Spamd-Bar: -------
 X-MailFrom: thierry.reding@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: ZBWLASUN5O2QHO2ZHDJ27KHBBNZCENVK
-X-Message-ID-Hash: ZBWLASUN5O2QHO2ZHDJ27KHBBNZCENVK
-X-Mailman-Approved-At: Tue, 14 Jul 2026 17:14:41 +0000
-CC: Thierry Reding <thierry.reding@gmail.com>, devicetree@vger.kernel.org, linux-tegra@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-s390@vger.kernel.org, linux-mm@kvack.org, iommu@lists.linux.dev, linaro-mm-sig@lists.linaro.org, linux-trace-kernel@vger.kernel.org, Thierry Reding <treding@nvidia.com>, Chun Ng <chunn@nvidia.com>
+Message-ID-Hash: JOFXGU77QLUR56HZO437A2WYP7QJLLBA
+X-Message-ID-Hash: JOFXGU77QLUR56HZO437A2WYP7QJLLBA
+X-Mailman-Approved-At: Tue, 14 Jul 2026 17:14:42 +0000
+CC: Thierry Reding <thierry.reding@gmail.com>, devicetree@vger.kernel.org, linux-tegra@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-s390@vger.kernel.org, linux-mm@kvack.org, iommu@lists.linux.dev, linaro-mm-sig@lists.linaro.org, linux-trace-kernel@vger.kernel.org, Thierry Reding <treding@nvidia.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v3 04/11] arm64/mm: Add set_memory_device() and set_memory_normal()
+Subject: [Linaro-mm-sig] [PATCH v3 05/11] bitmap: Add bitmap_allocate() function
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZBWLASUN5O2QHO2ZHDJ27KHBBNZCENVK/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JOFXGU77QLUR56HZO437A2WYP7QJLLBA/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -121,7 +121,7 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	HAS_LIST_UNSUB(-0.01)[];
 	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_RECIPIENTS(0.00)[m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:thierry.reding@kernel.org,m:jonathanh@nvidia.com,m:airlied@gmail.com,m:simona@ffwll.ch,m:maarten.lankhorst@linux.intel.com,m:mripard@kernel.org,m:tzimmermann@suse.de,m:skomatineni@nvidia.com,m:luca.ceresoli@bootlin.com,m:mperttunen@nvidia.com,m:yury.norov@gmail.com,m:linux@rasmusvillemoes.dk,m:linux@armlinux.org.uk,m:agordeev@linux.ibm.com,m:gerald.schaefer@linux.ibm.com,m:hca@linux.ibm.com,m:gor@linux.ibm.com,m:borntraeger@linux.ibm.com,m:svens@linux.ibm.com,m:akpm@linux-foundation.org,m:david@kernel.org,m:ljs@kernel.org,m:liam@infradead.org,m:vbabka@kernel.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:m.szyprowski@samsung.com,m:robin.murphy@arm.com,m:sumit.semwal@linaro.org,m:benjamin.gaignard@collabora.com,m:Brian.Starkey@arm.com,m:jstultz@google.com,m:tjmercier@google.com,m:christian.koenig@amd.com,m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:c
- atalin.marinas@arm.com,m:will@kernel.org,m:thierry.reding@gmail.com,m:devicetree@vger.kernel.org,m:linux-tegra@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linux-media@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:linux-s390@vger.kernel.org,m:linux-mm@kvack.org,m:iommu@lists.linux.dev,m:linaro-mm-sig@lists.linaro.org,m:linux-trace-kernel@vger.kernel.org,m:treding@nvidia.com,m:chunn@nvidia.com,m:krzk@kernel.org,m:conor@kernel.org,m:yurynorov@gmail.com,s:lists@lfdr.de];
+ atalin.marinas@arm.com,m:will@kernel.org,m:thierry.reding@gmail.com,m:devicetree@vger.kernel.org,m:linux-tegra@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linux-media@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:linux-s390@vger.kernel.org,m:linux-mm@kvack.org,m:iommu@lists.linux.dev,m:linaro-mm-sig@lists.linaro.org,m:linux-trace-kernel@vger.kernel.org,m:treding@nvidia.com,m:krzk@kernel.org,m:conor@kernel.org,m:yurynorov@gmail.com,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	TO_DN_SOME(0.00)[];
@@ -133,7 +133,7 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	GREYLIST(0.00)[pass,meta];
 	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[57];
+	RCPT_COUNT_GT_50(0.00)[56];
 	ALIAS_RESOLVED(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[thierry.reding@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
@@ -144,85 +144,75 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	TAGGED_RCPT(0.00)[linaro-mm-sig,dt];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,nvidia.com:mid,lists.linaro.org:from_smtp,lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.linaro.org:from_smtp,lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email,nvidia.com:email,nvidia.com:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 6256C757463
+X-Rspamd-Queue-Id: C972375747E
 
-From: Chun Ng <chunn@nvidia.com>
+From: Thierry Reding <treding@nvidia.com>
 
-Add helpers to swap PROT_NORMAL and PROT_DEVICE_nGnRnE protection bits
-on a kernel-linear-map range.
+This is similar to bitmap_allocate_region() but allows allocation of
+non-power of two pages/bits.
 
-Signed-off-by: Chun Ng <chunn@nvidia.com>
+While at it, reimplement bitmap_allocate_region() in terms of this new
+helper to remove a sliver of code duplication.
+
 Signed-off-by: Thierry Reding <treding@nvidia.com>
 ---
- arch/arm64/include/asm/set_memory.h |  2 ++
- arch/arm64/mm/pageattr.c            | 16 ++++++++++++++++
- include/linux/set_memory.h          | 11 +++++++++++
- 3 files changed, 29 insertions(+)
+ include/linux/bitmap.h | 25 ++++++++++++++++++++-----
+ 1 file changed, 20 insertions(+), 5 deletions(-)
 
-diff --git a/arch/arm64/include/asm/set_memory.h b/arch/arm64/include/asm/set_memory.h
-index 90f61b17275e..6a7030609789 100644
---- a/arch/arm64/include/asm/set_memory.h
-+++ b/arch/arm64/include/asm/set_memory.h
-@@ -10,6 +10,8 @@ bool can_set_direct_map(void);
- #define can_set_direct_map can_set_direct_map
- 
- int set_memory_valid(unsigned long addr, int numpages, int enable);
-+int set_memory_device(unsigned long addr, int numpages);
-+int set_memory_normal(unsigned long addr, int numpages);
- 
- int set_direct_map_invalid_noflush(struct page *page);
- int set_direct_map_default_noflush(struct page *page);
-diff --git a/arch/arm64/mm/pageattr.c b/arch/arm64/mm/pageattr.c
-index bbe98ac9ad8c..871b59a6c9ea 100644
---- a/arch/arm64/mm/pageattr.c
-+++ b/arch/arm64/mm/pageattr.c
-@@ -251,6 +251,22 @@ int set_memory_valid(unsigned long addr, int numpages, int enable)
- 					__pgprot(PTE_PRESENT_VALID_KERNEL));
+diff --git a/include/linux/bitmap.h b/include/linux/bitmap.h
+index 8854acf77869..fb0aec4b17a1 100644
+--- a/include/linux/bitmap.h
++++ b/include/linux/bitmap.h
+@@ -721,10 +721,10 @@ void bitmap_release_region(unsigned long *bitmap, unsigned int pos, int order)
  }
  
-+int set_memory_device(unsigned long addr, int numpages)
-+{
-+	return __change_memory_common(addr, PAGE_SIZE * numpages,
-+				__pgprot(PROT_DEVICE_nGnRnE),
-+				__pgprot(PROT_NORMAL));
-+}
-+EXPORT_SYMBOL_GPL(set_memory_device);
-+
-+int set_memory_normal(unsigned long addr, int numpages)
-+{
-+	return __change_memory_common(addr, PAGE_SIZE * numpages,
-+				__pgprot(PROT_NORMAL),
-+				__pgprot(PROT_DEVICE_nGnRnE));
-+}
-+EXPORT_SYMBOL_GPL(set_memory_normal);
-+
- int set_direct_map_invalid_noflush(struct page *page)
+ /**
+- * bitmap_allocate_region - allocate bitmap region
++ * bitmap_allocate - allocate bitmap region
+  *	@bitmap: array of unsigned longs corresponding to the bitmap
+  *	@pos: beginning of bit region to allocate
+- *	@order: region size (log base 2 of number of bits) to allocate
++ *	@len: number of bits to allocate
+  *
+  * Allocate (set bits in) a specified region of a bitmap.
+  *
+@@ -732,16 +732,31 @@ void bitmap_release_region(unsigned long *bitmap, unsigned int pos, int order)
+  * free (not all bits were zero).
+  */
+ static __always_inline
+-int bitmap_allocate_region(unsigned long *bitmap, unsigned int pos, int order)
++int bitmap_allocate(unsigned long *bitmap, unsigned int pos, unsigned int len)
  {
- 	pgprot_t clear_mask = __pgprot(PTE_PRESENT_VALID_KERNEL);
-diff --git a/include/linux/set_memory.h b/include/linux/set_memory.h
-index 3030d9245f5a..abcb11378fdb 100644
---- a/include/linux/set_memory.h
-+++ b/include/linux/set_memory.h
-@@ -72,6 +72,17 @@ static inline int clear_mce_nospec(unsigned long pfn)
+-	unsigned int len = BIT(order);
+-
+ 	if (find_next_bit(bitmap, pos + len, pos) < pos + len)
+ 		return -EBUSY;
+ 	bitmap_set(bitmap, pos, len);
+ 	return 0;
  }
- #endif
  
-+#ifndef CONFIG_ARM64
-+static inline int set_memory_device(unsigned long addr, int numpages)
++/**
++ * bitmap_allocate_region - allocate bitmap region
++ *	@bitmap: array of unsigned longs corresponding to the bitmap
++ *	@pos: beginning of bit region to allocate
++ *	@order: region size (log base 2 of number of bits) to allocate
++ *
++ * Allocate (set bits in) a specified region of a bitmap.
++ *
++ * Returns: 0 on success, or %-EBUSY if specified region wasn't
++ * free (not all bits were zero).
++ */
++static __always_inline
++int bitmap_allocate_region(unsigned long *bitmap, unsigned int pos, int order)
 +{
-+	return 0;
++	return bitmap_allocate(bitmap, pos, BIT(order));
 +}
-+static inline int set_memory_normal(unsigned long addr, int numpages)
-+{
-+	return 0;
-+}
-+#endif
 +
- #ifndef CONFIG_ARCH_HAS_MEM_ENCRYPT
- static inline int set_memory_encrypted(unsigned long addr, int numpages)
- {
+ /**
+  * bitmap_find_free_region - find a contiguous aligned mem region
+  *	@bitmap: array of unsigned longs corresponding to the bitmap
 
 -- 
 2.54.0
