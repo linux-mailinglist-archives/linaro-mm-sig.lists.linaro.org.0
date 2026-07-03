@@ -2,38 +2,38 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id Ui7sM49lR2q/XgAAu9opvQ
+	id jxPqNJhlR2rDXgAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 03 Jul 2026 09:32:31 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 03 Jul 2026 09:32:40 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id A08976FF94F
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 03 Jul 2026 09:32:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 94DAC6FF95A
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 03 Jul 2026 09:32:40 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b="KOib/r6I";
+	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=Us+fRwVn;
 	dmarc=fail reason="SPF not aligned (relaxed)" header.from=kernel.org (policy=quarantine);
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org"
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id BA650406AA
-	for <lists+linaro-mm-sig@lfdr.de>; Fri,  3 Jul 2026 07:32:30 +0000 (UTC)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 3FFF240C9E
-	for <linaro-mm-sig@lists.linaro.org>; Fri,  3 Jul 2026 07:32:11 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id BA75B404DD
+	for <lists+linaro-mm-sig@lfdr.de>; Fri,  3 Jul 2026 07:32:39 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+	by lists.linaro.org (Postfix) with ESMTPS id 85BD840EBD
+	for <linaro-mm-sig@lists.linaro.org>; Fri,  3 Jul 2026 07:32:18 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	by sea.source.kernel.org (Postfix) with ESMTP id 9B655409C5;
+	by tor.source.kernel.org (Postfix) with ESMTP id 4825E6001A;
+	Fri,  3 Jul 2026 07:32:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F3CE11F00A3A;
 	Fri,  3 Jul 2026 07:32:10 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0ACFF1F000E9;
-	Fri,  3 Jul 2026 07:32:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783063930;
-	bh=0+6Xx+eCxdL9yQCTyX7ae/7D4+D0am5ePJbYaSONlzI=;
+	s=k20260515; t=1783063938;
+	bh=1zoIAZtdXOviXMtnoJ37cYn19oGrY7Vb57AI0Lnpx5s=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=KOib/r6IXI2SEIEVmzr0KAQ02bmLQfBYMzIDGRDGhxtHj1QNtPP/p7JUqTNf1DUvR
-	 vm+zo4e1PAJhjcP4ALEMAADWshez9KzL6UAaMXntW8Xu4BGPBmOyYiHReCShJtzgYP
-	 8YQXUvM1VRIamQ3AqB02Pqq9T95XuDmfc4+IhtROzyEuQHvb2QHkTVQzkr67R9odsE
-	 H+GS6LiZgIHZiHpTfltoqJ7qzRyl9us7cdofBmPfaIyZbEKCam2j4u8z0xAbABYDm4
-	 0NSEHy7VyuyhbOMC9mrzVmYmDwmsl324AlTYP+CNo7p29pJf3DgbNYgXG/FH1RcwYg
-	 R2xkU+pUg1C/w==
+	b=Us+fRwVn+sSB0I9T5c05P0bkcpFrtgiBb8eXoRKEY5KXCdBCp01+FB+mn9SWA44fR
+	 dLCAn6wbvXF0K7KR4IEdh2rhm6Vgg04RnmLRECxznWQf40BV5dFuoZHPjMml4TBIjO
+	 ObTEoG8hvDSGnnBK8jXXoPKE6CXuWFnfprCF+kOriQHi3dGzBZzcKA/PqwzCeT6Egk
+	 cSjQA/1qyQGe4ACpdhzvmBqPc2Ox14Hp5nA56uErYGEua9brLBHOBK5D5gsSA5+rIM
+	 +prf2rnq+LsGNvVJzSoj0zocq65PJtyzMWeqUyP/dnjTPXycg6BrLdGYRqzFCbbwA/
+	 W/zkEgTP/mpLQ==
 From: Philipp Stanner <phasta@kernel.org>
 To: Miguel Ojeda <ojeda@kernel.org>,
 	Boqun Feng <boqun@kernel.org>,
@@ -60,24 +60,24 @@ To: Miguel Ojeda <ojeda@kernel.org>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	=?UTF-8?q?Onur=20=C3=96zkan?= <work@onurozkan.dev>,
 	Shankari Anand <shankari.ak0208@gmail.com>
-Date: Fri,  3 Jul 2026 09:31:38 +0200
-Message-ID: <20260703073141.3962604-4-phasta@kernel.org>
+Date: Fri,  3 Jul 2026 09:31:39 +0200
+Message-ID: <20260703073141.3962604-5-phasta@kernel.org>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260703073141.3962604-2-phasta@kernel.org>
 References: <20260703073141.3962604-2-phasta@kernel.org>
 MIME-Version: 1.0
 X-Spamd-Bar: -----
-Message-ID-Hash: 6GPWSQ2FNGMEVXZ2EYV3DDRLWELVNXWL
-X-Message-ID-Hash: 6GPWSQ2FNGMEVXZ2EYV3DDRLWELVNXWL
+Message-ID-Hash: 66L3LHLW6J63PDJYNYLZPQYDXUV4RM3W
+X-Message-ID-Hash: 66L3LHLW6J63PDJYNYLZPQYDXUV4RM3W
 X-MailFrom: phasta@kernel.org
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 CC: linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v5 2/5] rust: error: Add ECANCELED error code
+Subject: [Linaro-mm-sig] [PATCH v5 3/5] rust: sync: Add abstraction for rcu_barrier()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6GPWSQ2FNGMEVXZ2EYV3DDRLWELVNXWL/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/66L3LHLW6J63PDJYNYLZPQYDXUV4RM3W/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -121,29 +121,46 @@ X-Spamd-Result: default: False [4.49 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: A08976FF94F
+X-Rspamd-Queue-Id: 94DAC6FF95A
 
-The Rust dma_fence abstractions need the ECANCELED error code.
+rcu_barrier() is a frequently used C function which is always safe to be
+called.
 
-Add ECANCELED error code.
+Add a safe abstraction for rcu_barrier().
 
 Signed-off-by: Philipp Stanner <phasta@kernel.org>
 ---
- rust/kernel/error.rs | 1 +
- 1 file changed, 1 insertion(+)
+ rust/kernel/sync/rcu.rs | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
 
-diff --git a/rust/kernel/error.rs b/rust/kernel/error.rs
-index a56ba6309594..cb666f0d42ee 100644
---- a/rust/kernel/error.rs
-+++ b/rust/kernel/error.rs
-@@ -67,6 +67,7 @@ macro_rules! declare_err {
-     declare_err!(EOVERFLOW, "Value too large for defined data type.");
-     declare_err!(EMSGSIZE, "Message too long.");
-     declare_err!(ETIMEDOUT, "Connection timed out.");
-+    declare_err!(ECANCELED, "Request has been canceled.");
-     declare_err!(ERESTARTSYS, "Restart the system call.");
-     declare_err!(ERESTARTNOINTR, "System call was interrupted by a signal and will be restarted.");
-     declare_err!(ERESTARTNOHAND, "Restart if no handler.");
+diff --git a/rust/kernel/sync/rcu.rs b/rust/kernel/sync/rcu.rs
+index a32bef6e490b..7031ca5d2473 100644
+--- a/rust/kernel/sync/rcu.rs
++++ b/rust/kernel/sync/rcu.rs
+@@ -50,3 +50,23 @@ fn drop(&mut self) {
+ pub fn read_lock() -> Guard {
+     Guard::new()
+ }
++
++/// Wait until all in-flight call_rcu() callbacks complete.
++///
++/// Note that this primitive does not necessarily wait for an RCU grace period
++/// to complete.  For example, if there are no RCU callbacks queued anywhere
++/// in the system, then rcu_barrier() is within its rights to return
++/// immediately, without waiting for anything, much less an RCU grace period.
++/// In fact, rcu_barrier() will normally not result in any RCU grace periods
++/// beyond those that were already destined to be executed.
++///
++/// In kernels built with CONFIG_RCU_LAZY=y, this function also hurries all
++/// pending lazy RCU callbacks.
++///
++/// Note that this is one of the RCU primitives which must not be called in
++/// atomic context.
++#[inline]
++pub fn rcu_barrier() {
++    // SAFETY: `rcu_barrier()` is always safe to be called. It just might wait for a grace period.
++    unsafe { bindings::rcu_barrier() };
++}
 -- 
 2.54.0
 
