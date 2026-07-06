@@ -2,68 +2,68 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id qbOjHM9JS2rMOgEAu9opvQ
+	id vfrSD9hJS2rPOgEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 06 Jul 2026 08:23:11 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 06 Jul 2026 08:23:20 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id F216570CE4B
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 06 Jul 2026 08:23:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E27B270CE59
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 06 Jul 2026 08:23:19 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
 	dkim=none;
 	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=sk.com (policy=none);
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org"
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 1088240A76
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  6 Jul 2026 06:23:10 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 13C6F401F2
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  6 Jul 2026 06:23:19 +0000 (UTC)
 Received: from invmail4.hynix.com (exvmail4.skhynix.com [166.125.252.92])
-	by lists.linaro.org (Postfix) with ESMTP id F13BF40AF2
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  6 Jul 2026 06:19:59 +0000 (UTC)
-X-AuditID: a67dfc5b-c2dff70000001609-62-6a4b48ff0ae4
+	by lists.linaro.org (Postfix) with ESMTP id 1314D40AB8
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  6 Jul 2026 06:20:00 +0000 (UTC)
+X-AuditID: a67dfc5b-c45ff70000001609-7f-6a4b49005c15
 From: Byungchul Park <byungchul@sk.com>
 To: linux-kernel@vger.kernel.org
-Date: Mon,  6 Jul 2026 15:19:06 +0900
-Message-Id: <20260706061928.66713-19-byungchul@sk.com>
+Date: Mon,  6 Jul 2026 15:19:07 +0900
+Message-Id: <20260706061928.66713-20-byungchul@sk.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20260706061928.66713-1-byungchul@sk.com>
 References: <20260706061928.66713-1-byungchul@sk.com>
-X-Brightmail-Tracker: H4sIAAAAAAAAAzWSbUxTZxTH9zz3Ps+97SzedWTe6QeWLnOLBvcSISfLRtiybHczcb7ELNlL
-	XGOvo6wUU4SBGVk3S1aZsIqhDPCluMgKrYBVRKigY5YJC10rRCqC1s0ABoobsgJSZa2b3/75
-	/8755Xw4PKMeJSt5vXG3bDJqDRqqZJWRZXWp+N0N2S/dmHscDjW7KVg91QQCTS4EJe1LLCx1
-	9iCwBysYCAXOM+A+/TWGuy0PKFTevEXhTv1+BDVjtRxEbngJDEWnEEza/6IwczuMYOBWEvRW
-	fkdhbLgTQ3u4g4PgZAzDiL0Cw2+2YxjsJ1dAbdUEhsoTXgxLjlzocY1z0BT5nUDv9SsE2sxh
-	DmYHb2KwdvzDwkDHIQrX3UsErvV/z8HxoSCGaPkqCBwoIzAZrWfgatUUB5cvODA4/64i0NDZ
-	T6HFUsNB6/kSBN9OeCn01/oJDF71IuiyhjFcbG7D0Dz2CwPHnREC4zWHMfSN3uXg3k8+BH33
-	+jD8UR6JC3xzHFhG0mBxPn7EfMufBGZdjRSmbbMkM1OaKylnpZLL96nkPuJGUnvNKCdZuoY5
-	yeHJl04510g/nruNpeHJ1yVP4z4qeWYqOKlucYKRSiODWBq5co5K034/J136YZHdlPKh8jWd
-	bNAXyKYXMz5VZg0dC5JdrVxh74MFakYWWooUvCisF53uavIot/oPPOyp8LwYCi0wiZwsPCOe
-	KhuLzyh5RhhIEffXl7EJ8KSwUWzbG4kDnmeF58TwwtuJWiWki3UD5v+dKaKr5cJDjyLeN8UO
-	40RWC2nitTu/sgmnKBxViPboLP5v4WnxZ2eItSGVAz3WiNR6Y0GOVm9Yvy6ryKgvXLcjN8eD
-	4k9XXxz76CyaCWztRgKPNMtUkPletppoC/KKcrqRyDOaZNXqFzZkq1U6bdEe2ZS73ZRvkPO6
-	0Sqe1axQvRL9QqcWPtPulj+X5V2y6RHFvGKlGW2LebbsbUAk4+i0L6m9B4ptR5xcdlL+VHnq
-	2mKrMdSM+zJcjtRLW4aXv1prXL3wzcHqzQfPmH3L09Vpz46eqNA36Ao/vm9PqgvOp7/lPRMz
-	CL5tn1xce1r9hOOdufE3tu7MtPr36N6sSrbQD2y5CvKU/csOW1Ep3/X+5n0bv9oZ0LB5WdqX
-	1zCmPO2/VgO56nADAAA=
-X-Brightmail-Tracker: H4sIAAAAAAAAAzWSbUhTcRTG+9+X/66jxW0ZXgoxFqkU9gIWB4ooorq9SfQl6IVa7pbTOWMz
-	S0NS18re52KTmppZjtBZpplprUTJMlu5VimpqbBW4tQop0ydNou+HJ7z/M55OB8OQ0pr6QWM
-	Up0qaNRylQyLKXHcWl3MNL8jceULx1LI1Z+Brh43DZ+zGyjwjeRSUPDAhiFgqRVBbtUNGl63
-	51DQdr8cQY8vF8HYhIUEfd00BQFjswhG/J0iMGUjmLY3IzA7jSR0tL0gwfYom4DflVMYBpp+
-	ITD1uTHk92dTMGy9jOCmxyKC/pdbYbDnKQ3T3d8JaB/1IrC6pwhwN5xHEDAnwa2S6uC6+SeG
-	Ccd7EvJNbQhu93WT8Ku/F8Gj5q8I7PdyMHwz1JDgcs+Bj75hDC2mSxgGnQUEDFViKM6x0+B8
-	O4Cg0GJE4PliJ0B35wEGc2EVBXW99SJwDkwS0GU2ElBetQt6rB4KWg0lRPDc4NTDMLDk64hg
-	+UGAqeIpAX5rmWhDKeLH9Fcpvqz6McHrPwQwbyuyIX5i3Ij4kVIdyesNwbbJO0zyZ6tP8qWt
-	XsyP+z5h3j5aTPFvSjj+7oVxgs9zxPB1N7tFuzfuE69TCCplmqBZsf6wOKG9xEkfrxGdapny
-	4yx0Fl9EIQzHxnI17/L+asxGcR0dfnJGh7KLuOorHvoiEjMk64rgLluvUDNgHhvH1eoGg4Bh
-	KHYJ1+vfMmNL2DXcbVcW/S8zgiuvbPibExL0708WEjNayq7mOodfUQYkLkazylCoUp2WLFeq
-	Vi/XJiWkq5WnlsenJFeh4DtZMyfznqAR19ZGxDJINlsCG7YnSml5mjY9uRFxDCkLlURG70iU
-	ShTy9AxBk3JIc0IlaBvRQoaShUm27xUOS9lj8lQhSRCOC5r/lGBCFmShcKHp0n7x4oqD9c9j
-	PU80Ec1Ru0LLIgcDIes2OxRDYerzC78uq8/c41BEH2DIlnMVcXfH9tWc3onqwsszZUdu4Mii
-	obnxnX3Xw+dvTHrojY5JUOgXkae37DxqHcUHfftfdn1KJeNd3kDAoZJ+kG+KNYiv2bZltGSY
-	nkmob8YoWkZpE+SrlpIarfwPjIP3fkoDAAA=
+X-Brightmail-Tracker: H4sIAAAAAAAAAzWSe0xTZxjG/c75zqUNXY71wtElYqoyRwQvweVdsjgSTfZ5YRcvc5l/uGac
+	jCK3tFrAxKyo1aoohXiJLThGpalQgVE3LILpcMOgEMQqNFFui6KNsG4VqAgFC8T/fnmeJ0/e
+	N3l4WvmYWcprMg9K2kx1uoqVY/lwVHk8tXV72jpnZSyYjD9DV74Hw+iICUNJjZOFsLWeA1Pd
+	ZQb6Rk0IQhNWGozuaQzh4hYOpptaEDhv5FPwunaKhVd3gggC9gIElkErB/6/v4DhvlsMdI8N
+	IXjmOYkgfPEA/FLuYmGivYOGXwd6aAj6+xHcaOlF0OQ4ysJz8+80eJ99AI9GAywMd5ZQ8G8t
+	C51trxCUWosRHLPVsODub+Cgqi4Z+uyDGO6byym45GfBeukYBeP2Sg7abE8x2A2rwNruZeAf
+	hyVybFkW9BRewFA93MFAa29X5Ke7JxioN/RzMPJogAJTwyiGy1eestDY1IrBFB5BYLCGGHjg
+	uc9AzQsfBa2WaxietBdy0NFwnYGBfh+TlEJCxnOYVLr+oIjxYZglzitORCbeFiNiNEfozlCA
+	JsddOaRprAyTe+UiuXrqLUWK2uOJ29LDkbK6Q8TliCO2Rj/1dfz38s9SpHSNXtKu3fSDPDV0
+	Jjn7HJf7vLaIMaAB5jSS8aKQKOZX+9nTiJ9l+/Q3MzIrfCT6fOP0DC8Ulouus4ORuJynBW+M
+	WGA/i2eMBcIecfJF4WwPFlaJQ/YgNcMK4ROxKvSSneuPEatqPbNFsohePVk6m1EKG8Ungbt4
+	LmOTidca4+Z4ifinw4fNSFGG5lUipSZTn6HWpCcmpOZlanITfszKqEORsdmPTO67iYIPdjUj
+	gUeqKAUkbUtTMmq9Li+jGYk8rVqoiF29PU2pSFHnHZa0Wfu1h9IlXTP6kMeqaMWGsZwUpfCT
+	+qB0QJKyJe17l+JlSw2oaP4J+lNv4orVRWnmC/+59V/tVqycuLXYrD/aF62gk/Z3Tq0JninM
+	7f7W4vVtWqOM+TiUbH3jWfT/X53jzO6SnTsqbv92UZjOkTmCy1QrSSkpiGejpuqXjYv8dwlt
+	h/duOb/59hF1b1v159kVNveXI438Td36rd3RXamL3AH/zuVGFdalqtfH0Vqd+h2bAKxEaAMA
+	AA==
+X-Brightmail-Tracker: H4sIAAAAAAAAAzWSe0hTcRTH+93XrqvVZRldtOegkh5WkHHKiKKgS6XUHxHUHzny0uabrSyD
+	HnONVlrN0SY1tWW6QpeuaZbJaCjZw0TNMsuWSdMUNWNpY25zbUH/HD7nfL/ny/nj0Li4gYyh
+	5VkneUWWNENCCQlhcqJ6XYjbl7bhpTERtJoL8KXfTUKPyknA1KSWgJJaKwVB0xMBaO23SHj1
+	MZ+AzppqBP1TWgRevwkHTWOIgKC+VQCTvj4BGFQIQo5WBMYuPQ69nc9xsNarMPhtm6FgtMWD
+	wDDgpqB4REXAhKUQwe0hkwBGXuyB8f4mEkKuHxh8/DOGwOKewcDtvIwgaEyHO+V14XXjLwr8
+	7R04FBs6EdwdcOHgGfmGoL71KwLHg3wKBnWPceh2z4X3UxMUvDYUUDDeVYLBTxsF5nwHCV1v
+	RxGUmvQIhj47MFDfq6XAWGonoPHbMwF0jQYw+GLUY1BtT4J+yxABbbpyLHxu2PVoIZiK1Vi4
+	DGNgeNiEgc9SJdhRiTiv5jrBVdU1YJzmXZDirGVWxPmn9YibrFTjnEYXblvGJnDuUt1prrJt
+	jOKmpz5QnOOPmeDelLNcxZVpjCtqX8c13nYJDuw8ItyWymfIc3nF+u0pQpm3ICnnuuDMoK2I
+	vIgGyKuIpllmE2sJHbyKomiKWcX29vrwCEczy9i6a0Nhi5DGme6lbKHlGhER5jOH2MCPG2SE
+	CWYFO2bxYBEWMZvZau8wFWGWWcpW25z/gqLC85pA6T+PmElg+yZeEjokNKNZVShanpWbKZVn
+	JMQr02V5WfIz8cezM+0o/E2Wc4Gip2iye08zYmgkmSOCHXvTxKQ0V5mX2YxYGpdEi1bG7UsT
+	i1KleWd5RfYxxakMXtmMYmlCslC09zCfImZOSE/y6Tyfwyv+qxgdFXMRmVJvGq6k7D+WsEys
+	1QfvL99yILbivn9jh/mXN84ze/7yTZ9kOS3bD/U1FAziM78XqBn54vNNgcINu4QNvvb0J7vX
+	ixXlR+MaX/QULZEld1doxd9L+k6rti7a3bGm4r3f9c4WE1/Wk+t2KY+aT6XEzltrtcc6c3x8
+	yOZN1DnrPZ8khFIm3bgaVyilfwH0aI66SQMAAA==
 X-CFilter-Loop: Reflected
 X-Spamd-Bar: /
-Message-ID-Hash: PCU6OD6HFU5PRPQAS2JAMVL4O6W6T5GA
-X-Message-ID-Hash: PCU6OD6HFU5PRPQAS2JAMVL4O6W6T5GA
+Message-ID-Hash: LUSYYTS54ND36ND6L3V5S3KESLYRSKRK
+X-Message-ID-Hash: LUSYYTS54ND36ND6L3V5S3KESLYRSKRK
 X-MailFrom: byungchul@sk.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
@@ -73,9 +73,9 @@ CC: max.byungchul.park@gmail.com, kernel_team@skhynix.com, torvalds@linux-founda
  @gmail.com, andrii@kernel.org, wangfushuai@baidu.com, linux-doc@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-i2c@vger.kernel.org, linux-arch@vger.kernel.org, linux-modules@vger.kernel.org, rcu@vger.kernel.org, linux-nfs@vger.kernel.org, linux-rt-devel@lists.linux.dev, 2407018371@qq.com, dakr@kernel.org, miguel.ojeda.sandonis@gmail.com, neilb@ownmail.net, bagasdotme@gmail.com, wsa+renesas@sang-engineering.com, dave.hansen@intel.com, geert@linux-m68k.org, ojeda@kernel.org, alex.gaynor@gmail.com, gary@garyguo.net, bjorn3_gh@protonmail.com, lossin@kernel.org, a.hindborg@kernel.org, aliceryhl@google.com, tmgross@umich.edu, rust-for-linux@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v19 18/40] dept: apply timeout consideration to waitqueue wait
+Subject: [Linaro-mm-sig] [PATCH v19 19/40] dept: apply timeout consideration to hashed-waitqueue wait
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PCU6OD6HFU5PRPQAS2JAMVL4O6W6T5GA/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LUSYYTS54ND36ND6L3V5S3KESLYRSKRK/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -119,30 +119,30 @@ X-Spamd-Result: default: False [2.09 / 15.00];
 	TAGGED_RCPT(0.00)[linaro-mm-sig,renesas];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,sk.com:from_mime,sk.com:email,sk.com:mid,lists.linaro.org:from_smtp,lists.linaro.org:helo,lists.linaro.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: F216570CE4B
+X-Rspamd-Queue-Id: E27B270CE59
 
 Now that CONFIG_DEPT_AGGRESSIVE_TIMEOUT_WAIT was introduced, apply the
-consideration to waitqueue wait, assuming an input 'ret' in
-___wait_event() macro is used as a timeout value.
+consideration to hashed-waitqueue wait, assuming an input 'ret' in
+___wait_var_event() macro is used as a timeout value.
 
 Signed-off-by: Byungchul Park <byungchul@sk.com>
 ---
- include/linux/wait.h | 2 +-
+ include/linux/wait_bit.h | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/include/linux/wait.h b/include/linux/wait.h
-index c8f8b44060fb..a9524bc8630b 100644
---- a/include/linux/wait.h
-+++ b/include/linux/wait.h
-@@ -306,7 +306,7 @@ extern void init_wait_entry(struct wait_queue_entry *wq_entry, int flags);
- 	struct wait_queue_entry __wq_entry;					\
- 	long __ret = ret;	/* explicit shadow */				\
- 										\
--	sdt_might_sleep_start(NULL);						\
-+	sdt_might_sleep_start_timeout(NULL, __ret);				\
- 	init_wait_entry(&__wq_entry, exclusive ? WQ_FLAG_EXCLUSIVE : 0);	\
- 	for (;;) {								\
- 		long __int = prepare_to_wait_event(&wq_head, &__wq_entry, state);\
+diff --git a/include/linux/wait_bit.h b/include/linux/wait_bit.h
+index 179a616ad245..9885ac4e1ded 100644
+--- a/include/linux/wait_bit.h
++++ b/include/linux/wait_bit.h
+@@ -258,7 +258,7 @@ extern wait_queue_head_t *__var_waitqueue(void *p);
+ 	struct wait_bit_queue_entry __wbq_entry;			\
+ 	long __ret = ret; /* explicit shadow */				\
+ 									\
+-	sdt_might_sleep_start(NULL);					\
++	sdt_might_sleep_start_timeout(NULL, __ret);			\
+ 	init_wait_var_entry(&__wbq_entry, var,				\
+ 			    exclusive ? WQ_FLAG_EXCLUSIVE : 0);		\
+ 	for (;;) {							\
 -- 
 2.17.1
 
