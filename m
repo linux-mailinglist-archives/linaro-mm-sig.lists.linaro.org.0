@@ -2,67 +2,68 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id FghVLa1JS2rDOgEAu9opvQ
+	id UR8NFsBJS2rIOgEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 06 Jul 2026 08:22:37 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 06 Jul 2026 08:22:56 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 83AA770CE27
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 06 Jul 2026 08:22:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2586070CE3B
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 06 Jul 2026 08:22:56 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
 	dkim=none;
 	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=sk.com (policy=none);
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org"
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A417840A85
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  6 Jul 2026 06:22:36 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3D36440A7A
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  6 Jul 2026 06:22:55 +0000 (UTC)
 Received: from invmail4.hynix.com (exvmail4.skhynix.com [166.125.252.92])
-	by lists.linaro.org (Postfix) with ESMTP id 0E05440A4D
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  6 Jul 2026 06:19:56 +0000 (UTC)
-X-AuditID: a67dfc5b-c2dff70000001609-26-6a4b48ff8903
+	by lists.linaro.org (Postfix) with ESMTP id 152FA40AB0
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  6 Jul 2026 06:19:58 +0000 (UTC)
+X-AuditID: a67dfc5b-c2dff70000001609-44-6a4b48ff61c3
 From: Byungchul Park <byungchul@sk.com>
 To: linux-kernel@vger.kernel.org
-Date: Mon,  6 Jul 2026 15:19:04 +0900
-Message-Id: <20260706061928.66713-17-byungchul@sk.com>
+Date: Mon,  6 Jul 2026 15:19:05 +0900
+Message-Id: <20260706061928.66713-18-byungchul@sk.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20260706061928.66713-1-byungchul@sk.com>
 References: <20260706061928.66713-1-byungchul@sk.com>
-X-Brightmail-Tracker: H4sIAAAAAAAAAzXSa0xTdxgGcP/n8j+HhppjxXnUELRm6jAiEi+vxix880yJQlxM1Bht5Cjt
-	oGhBFOMSjIJOC2HV4g1aKIqVFsqKivWCiEMmmwiRS8FyM6TRoQWxgtiiFojffnmfJ8+nlyVl
-	nfRcVqlOFTVqRaIcSyjJu+CiZeiXTarIvGvLoe14DQX5NiuG8StVDDSVWxBkOr5SMK57woB3
-	7CUD+uMInE0PSfhQ8QXDwONhBPq+fgyDJVoEb+o2QPvIWwRGU2UgzBvC8KJ/OjzVn8VwotiG
-	Ia/ATkHzgJ8Afdk9Av4rdlHwynyZgQG3DkNPfRYN9o46BN6WPgKsWjcJDzqXwiWDC4O24hYN
-	3davNDy/W0ZDX6+ThqY/s2ko85gwnPO4EQyMlJBgfn+BBndrFgFPCn+AG8brCOqzawi45vWQ
-	0NJxD0H16V4C/rZVEfD441sCGro+MFBp15PwuesODW06I4ZntxsYyNSOMWBppkDvP43hVt0o
-	Ayddq8D3KR9DTuMGKPCuAK+lFEdHC6OZOZRgNViR4PusQ0JmbkCOy12McLK6kxEqzeFC8f03
-	hGAv/QML9mEdIxT5XpOCq+0+FjyNjYzwz0UfJfS3XCAEw9O42NAdkvXxYqIyTdQs/3mPJKHV
-	1UkeMEiOXP0/i85AvewZFMTy3Eq+/dkr+rst5ttowphbzDudY+SEQ7j5fGW2O9CRsCT3IozX
-	lmRTE8FMbg9f4KqaNMX9yA9ZzxITlnKr+evn/cTUaBhvqaiZHAoK3Mv9BZN3GbeKfzlYT011
-	LEH8zYsRU57DPzI7qVwkLUTTSpFMqU5LUigTV0YkpKuVRyL2JifZUeDjSn7377yDhpu21iKO
-	RfJgKURvVMloRVpKelIt4llSHiJdtGSTSiaNV6QfFTXJuzWHEsWUWjSPpeSzpVEjh+Nl3H5F
-	qvibKB4QNd9Tgg2am4HOt/voM8lF5aYZMWsVvaEZkYWrI8srUGroqE4W57DjSBUZZaxZ8yls
-	jSE4dtu6X/G6huHW7bM2G1WLgn0hcQt8B9VMT94jh41+bvLss3cnNHdrFx7Thsvo8KG7P+VE
-	zY4x9RgP7tqSXh/lPZXkQDHjf5Gq/H/7bLmLO0b6B6vlVEqCYkU4qUlRfAOQr6NebQMAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAAzWSbUxTZxTHfZ57e3tpKLkWDNeXRG0U3wKTBPSYmaFf9Ilki/GLxqjQzBsp
-	r65VXpYYLbXaCRhobNksCKJUAxWxVZSRIi+ObToyEBGCYMHVIgNXBlRGAbuC8cvJ7/z/5/xz
-	PhyWkj0SrWCV6acEVboiVc5IaMk3X2oj/SQ+eestUzDodWeh3+kSwUtNEw3eKT0NJXetDMyb
-	H4pBb/tJBL/15NLQUVONwOnVI5ieNVOgq/fTMG9oE8PUzCsxGDUI/I42BKZOAwW9HY8psN7X
-	YJis/cjAaOsEAuOQi4HiEQ0NHks+gqtusxhGftkL750NIvAPDGPo+TCGwOL6iMHVdBHBvCkF
-	yirsgXXTOAOz7X9SUGzsQHB9aICCiZFBBPfbXiNw3M5l4G3hAwq6XCHwwuth4HdjHgPvO0sw
-	/FPLQHmuQwSdf4wiKDUbELj7HBi0N+4yYCq10VA/+LMYOkfnMPSbDBiqbV+D0+Km4VlhBQ6c
-	G5i6Fw7mYi0OlHcYjHcaMMxYqsS7KhGZ1l2mSZW9DhPd83mGWK9ZEZn1GRCZqtRSRFcYaFvH
-	PBQ5b88ilc/GGOLzdjPE8aGcJk8reHLzBx8mRe2RpP7qgHj/7sOSnceFVGWmoPriq0RJUnd/
-	H3XymiT75t8XROfQIHsJBbE8F8NX365DC8xwG/je3hlqgcO4Nby9wC26hCQsxXWt5vMtBfSC
-	Ecol8qX9DxeZ5tbz49Y8vMBSbht/68oc/hS6mq+ubVoMCgroNXOli7qMi+VfeX6lC5GkHC2p
-	QmHK9Mw0hTI1NkqdkpSTrsyO+jYjzYYC/2Q5M1f0CE117W1BHIvkwVLYtS9ZJlJkqnPSWhDP
-	UvIwacTG+GSZ9Lgi53tBlZGgOp0qqFvQSpaWh0v3HRQSZdwJxSkhRRBOCqrPLmaDVpxDGY0F
-	E9zj1lUe11/BTvcy8CXs2BSnX5s90fhf2/iWnhB/TXLQE4uhznklxB4x+bQs4/q/MW/UpDmr
-	e09W6OSPS7dubslcNpTXcLr9xVFU9mSGtQ6bsMaWe2jMEr/Wt6Qxf503rlm/I2rEWcJ/V5QQ
-	fSRc2xG/nT92YHno9ju6eomcVicpojdTKrXif+1e7ZpLAwAA
+X-Brightmail-Tracker: H4sIAAAAAAAAAzWSb0xTZxSHfd/73reXhs5r1XjFBLCG6TRjsqE5yZaFD5u5m39CYkwM+6AN
+	3IxCaV1RlC3L6EZdXYR1XVo2XKGIFFTcagvbsEOR0SxByFrQjmkJotXMYTcUWhxSWavxy8mT
+	8zvn+fTjGGWIzeA0uoOSQafWqqicyKPpLS/jd7aXbW61cmA2fQLhiQgLIWMfgdismUDixE8y
+	mIiZEcw9PsGAqWeRgM2IoLPLiGHG/YSCbTJCoeGekUB0wseCK/IEQ8JeDs0nvRSm7NMUHg//
+	zkCDLYCgZXKcgTuWbgZGIy9ANPgdBuenvSwEh6YQ2B0eAj03L8ggbLdiuGI5iZNeCvbzq2Co
+	NUzAVZMDtzoaZbAwmQeLTj2Mf2kjMHt1EsO3TWEKI2cDBNr+CGKI16+BwFd1LIxZ7iCYirsY
+	uHvtKIbTvcMUTje3I2ib/YeBz//yUbj6pw/BRfNNDG0dURY8nSEKv8buY/h6xEkhZG2mMN/u
+	R9Dtn5OBcWYCQW14Czxy32bhXCKECgrEOVM9Ec94f8SiaSRBxc6mTiSaLMlR6z0szseuUbE3
+	7iTiqWPzWOxpHJeJtRevy0Sn55BYOxBlRW/HRrH1l3tYbHkYYwuzi+RvlEhaTZVkeOXN/fLS
+	HyJGdGCGHmnwn2Jr0CD7BUrjBD5f+NsaoM95sP4BTjHl1wtjY/8xKV7BZwveurvJeznH8KNZ
+	wnFXHUkFy/m3BUe3PxlwHOFzBNt5fQoV/FbBH858pswSzrr7nmrSkuvvFxxP9Up+i3Dj399I
+	SinwzWnCwPQwfvawWrjcMUYsSOFES84gpUZXVaHWaPNzS6t1miO5xfoKD0q2zfXxwns/o4eB
+	3f2I55AqXQEF75YpWXVVZXVFPxI4RrVC8eKG7WVKRYm6+kPJoN9nOKSVKvvRGo6oVilejR8u
+	UfLvqw9K5ZJ0QDI8TzGXllGDtm3S7mgq/ibD19jGlp87OmXuu9SVNxBK9zhmXtq0w5n+YMNH
+	OcT9erat4q29hfl7fFnBtcOKzEdyz4VdXUU9OvazrrzRoDyuV3kWlwyFr6+0BfdWL7u83rq0
+	aFui2PJae8A7NzhOtPPyfne5I/PY/f25O4NX1hFt9/Ta45k3pA9UpLJUnbeRMVSq/wd0YKNR
+	aQMAAA==
+X-Brightmail-Tracker: H4sIAAAAAAAAAzWSWUxTYRCF/e/WS7V6U4leV0yNaNwXNOMSt0T9A7HxTWKMWvUqZbcFBIzR
+	glVUMNjYEikoIhRCq0UWFU2V1ICKGkFUQEAwqShhqUuLYbNeNL5Mzsw582UehiXld+nprDo6
+	TtBEqyIVjJSSKtenLvHhkPDl9uKZkKY/BW0dLhre66op8HrSKMix2xgYNd+TQFrZVRqeNaVQ
+	UH/biqDDm4bg17CZBH2Vj4JRQ60EPIOtEjDqEPgctQhMDQYSmusfk2Cr0BHws/Q3Az1PfiAw
+	fnIxkNWto8BtSUeQ3WWWQHfNDujreEiDr/0LAU0DvQgsrt8EuKrPIRg1RcD1/HJx3fSNgeFX
+	r0nIMtYjuPGpnYQf3Z0IKmo/InAUpzDwObOShEbXRHjrdTPw3HiRgb6GHAL6SxnIS3HQ0PCy
+	B0Gu2YCg64ODgNSbdgZMuWUUVHU+kEBDzwgBbSYDAdayndBh6aLgRWY+IZ4rpu5MBXNWKiGW
+	rwQYbz0kYNBSItlciPAv/SUKl5TfJbD+zSiDbddsCA8PGRD2FKaSWJ8ptk963SQ+U34cF77o
+	ZfCQ9x2DHQN5FK7L53HB+SECX361BFdlt0t2bdkj3XBYiFQnCJplGw9Iw+wuHYr9ySRm1RTQ
+	p1EdfQH5sTwXxNdd+k6MaYabzzc3D5Jj2p+bw5dndIkZKUtyjQF8uiWDGjMmc9v43Moa0WBZ
+	ipvHG+/EjEkZt4avaZv9DxnAW0ur/2L8xPHtkdy/eDm3mm91P6UykTQPjStB/urohCiVOnL1
+	Um1EWFK0OnHpoZioMiR+k+XkyOX7yNO4w4k4FikmyGBzcLicViVok6KciGdJhb8scEFIuFx2
+	WJWULGhi9mviIwWtE81gKcVUWfBu4YCcO6qKEyIEIVbQ/HcJ1m/6afRo7bGKAElt3/eD8ftW
+	dU5Lfh3cN+lcoqJAcehB09r7TvuW3m/7VlUb1MlH2ui8Im1R4pGWgbhbJqVu1uJ18RfnLrLO
+	DQ3ca9G6g5Qx2zfcax3va9l+IsKH+rGwst+pb1dOqlzp7d86Jehp+MmzCdbjV2Y5zlft36SU
+	zffY6FA25ZGC0oapViwkNVrVH1dU5FdJAwAA
 X-CFilter-Loop: Reflected
 X-Spamd-Bar: /
-Message-ID-Hash: E6HZD6HJKJJOR2WH73KJFUEXH4GNOIJJ
-X-Message-ID-Hash: E6HZD6HJKJJOR2WH73KJFUEXH4GNOIJJ
+Message-ID-Hash: CJEKEUJVMROQ5XT4L2D4444F4FZUPYXL
+X-Message-ID-Hash: CJEKEUJVMROQ5XT4L2D4444F4FZUPYXL
 X-MailFrom: byungchul@sk.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
@@ -72,9 +73,9 @@ CC: max.byungchul.park@gmail.com, kernel_team@skhynix.com, torvalds@linux-founda
  @gmail.com, andrii@kernel.org, wangfushuai@baidu.com, linux-doc@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-i2c@vger.kernel.org, linux-arch@vger.kernel.org, linux-modules@vger.kernel.org, rcu@vger.kernel.org, linux-nfs@vger.kernel.org, linux-rt-devel@lists.linux.dev, 2407018371@qq.com, dakr@kernel.org, miguel.ojeda.sandonis@gmail.com, neilb@ownmail.net, bagasdotme@gmail.com, wsa+renesas@sang-engineering.com, dave.hansen@intel.com, geert@linux-m68k.org, ojeda@kernel.org, alex.gaynor@gmail.com, gary@garyguo.net, bjorn3_gh@protonmail.com, lossin@kernel.org, a.hindborg@kernel.org, aliceryhl@google.com, tmgross@umich.edu, rust-for-linux@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v19 16/40] dept: apply timeout consideration to wait_for_completion()/complete()
+Subject: [Linaro-mm-sig] [PATCH v19 17/40] dept: apply timeout consideration to swait
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/E6HZD6HJKJJOR2WH73KJFUEXH4GNOIJJ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CJEKEUJVMROQ5XT4L2D4444F4FZUPYXL/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -118,46 +119,30 @@ X-Spamd-Result: default: False [2.09 / 15.00];
 	TAGGED_RCPT(0.00)[linaro-mm-sig,renesas];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sk.com:from_mime,sk.com:email,sk.com:mid,lists.linaro.org:from_smtp,lists.linaro.org:helo,lists.linaro.org:rdns,linaro.org:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 83AA770CE27
+X-Rspamd-Queue-Id: 2586070CE3B
 
 Now that CONFIG_DEPT_AGGRESSIVE_TIMEOUT_WAIT was introduced, apply the
-consideration to wait_for_completion()/complete().
+consideration to swait, assuming an input 'ret' in ___swait_event()
+macro is used as a timeout value.
 
 Signed-off-by: Byungchul Park <byungchul@sk.com>
 ---
- include/linux/completion.h | 4 ++--
- kernel/sched/completion.c  | 2 +-
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ include/linux/swait.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/include/linux/completion.h b/include/linux/completion.h
-index bd2c207481d6..3200b741de28 100644
---- a/include/linux/completion.h
-+++ b/include/linux/completion.h
-@@ -41,9 +41,9 @@ do {							\
-  */
- #define init_completion_map(x, m) init_completion(x)
- 
--static inline void complete_acquire(struct completion *x)
-+static inline void complete_acquire(struct completion *x, long timeout)
- {
--	sdt_might_sleep_start(&x->dmap);
-+	sdt_might_sleep_start_timeout(&x->dmap, timeout);
- }
- 
- static inline void complete_release(struct completion *x)
-diff --git a/kernel/sched/completion.c b/kernel/sched/completion.c
-index 19ee702273c0..5e45a60ff7b3 100644
---- a/kernel/sched/completion.c
-+++ b/kernel/sched/completion.c
-@@ -115,7 +115,7 @@ __wait_for_common(struct completion *x,
- {
- 	might_sleep();
- 
--	complete_acquire(x);
-+	complete_acquire(x, timeout);
- 
- 	raw_spin_lock_irq(&x->wait.lock);
- 	timeout = do_wait_for_common(x, action, timeout, state);
+diff --git a/include/linux/swait.h b/include/linux/swait.h
+index 277ac74f61c3..233acdf55e9b 100644
+--- a/include/linux/swait.h
++++ b/include/linux/swait.h
+@@ -162,7 +162,7 @@ extern void finish_swait(struct swait_queue_head *q, struct swait_queue *wait);
+ 	struct swait_queue __wait;					\
+ 	long __ret = ret;						\
+ 									\
+-	sdt_might_sleep_start(NULL);					\
++	sdt_might_sleep_start_timeout(NULL, __ret);			\
+ 	INIT_LIST_HEAD(&__wait.task_list);				\
+ 	for (;;) {							\
+ 		long __int = prepare_to_swait_event(&wq, &__wait, state);\
 -- 
 2.17.1
 
