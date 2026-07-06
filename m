@@ -2,212 +2,205 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id CINbAVFwVmpP5gAAu9opvQ
+	id 9/RRMFxwVmpT5gAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 19:22:25 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 19:22:36 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id C53D87575C7
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 19:22:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6D44E7575CD
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 19:22:36 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=igalia.com header.s=20170329 header.b=cIeUf+72;
+	dkim=fail ("body hash did not verify") header.d=qualcomm.com header.s=qcppdkim1 header.b=XsySMgQX;
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
-	dmarc=fail reason="SPF not aligned (relaxed)" header.from=igalia.com (policy=none)
+	dmarc=fail reason="SPF not aligned (relaxed)" header.from=qualcomm.com (policy=reject)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C6FE640EBF
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 17:22:23 +0000 (UTC)
-Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
-	by lists.linaro.org (Postfix) with ESMTPS id 1FE61401F6
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  6 Jul 2026 10:59:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
-	s=20170329; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
-	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=ZJoxLXbBFInuBRIgEp6vSOmCAY0GKp91Nz1MsnjS+Ec=; b=cIeUf+72RjbqJ5oE5oxo0NGSFT
-	C5BTemsq66N2D1T6UjUHwhE+g74dchGlAlDqaVZjg66Aqlp9l2KotbodIsJLfgF7Qt0zus8j8QAN2
-	z0sQiSHirOnP1SpRTHavzS091EysJuQI+jgKZShfz+/+eWmIm//0eZLSpMAxC/T0btUxmvT4iFQhf
-	qexggOzHn+/zvVJP19OxSK1RA3PTMYZjl5RYHAmH6sjs2dhAcLrZEmJv8mqV+Ukm4Syn/wui8Gn8W
-	J2BGBl0UP6UE0lWEVnY6YmRpzm2IXurcNQImFN90aOhk42/r55jViLZqR4jrFsKOH2UxnZbIE0TCW
-	ZosmOfOA==;
-Received: from [90.240.106.137] (helo=[192.168.0.116])
-	by fanzine2.igalia.com with esmtpsa
-	(Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim)
-	id 1wgh2e-009hAL-3I; Mon, 06 Jul 2026 12:59:12 +0200
-Message-ID: <441ad8f8-3618-4c53-995a-2b81f283ab16@igalia.com>
-Date: Mon, 6 Jul 2026 11:59:10 +0100
+	by lists.linaro.org (Postfix) with ESMTP id 84A1C40AA7
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 17:22:35 +0000 (UTC)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	by lists.linaro.org (Postfix) with ESMTPS id F231D3F8F1
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  6 Jul 2026 11:41:11 +0000 (UTC)
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 666Ax6ni391044
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 6 Jul 2026 11:41:10 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	JyWL2bmNSCp8kUWSmxLKw8OK4EFDlj3sVJl+0VzDp88=; b=XsySMgQXvfPgt0+a
+	HXtcu1zM2rla/ZW5eTCxaMB6FICW13P1fwym0A/MsfBjDjqUGgXD1EHFUEySuOk2
+	2z6rHOSeFOjg0Nyyc6VHixBwF+xqtTVaCt3ADnTB1IzhmU/aQqOPwenB2//RiLUm
+	B+kOKlkYz6F03GNs7m211bs4Pr22Yuq9DZfFgJDYUjFMnF4mWSST9/zOrRBcEb9q
+	n6vKECdJiMTwf5jgm2LcODgoUDnUe4767AbVeb1xNK1d92+uBCFBvMe85oFat7y7
+	xZR2l3W1G+EwqCXOK7NjSKq0MIxTJb8OcGXxyUAjh0LR+gEqcXBvSvMPiveVOXbl
+	yRJtqA==
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f89kgrhkw-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 06 Jul 2026 11:41:10 +0000 (GMT)
+Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-51c27616421so11503811cf.2
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 06 Jul 2026 04:41:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1783338070; x=1783942870; darn=lists.linaro.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=JyWL2bmNSCp8kUWSmxLKw8OK4EFDlj3sVJl+0VzDp88=;
+        b=BHjKGI9ouWNluofZAGviUBk1/VeWlUMlkK9kqb482Ngx/+Tau0iaC/TnLoH8kFK21H
+         wg/EhIZt/jQ6i3D0uKjCxz6ESUklZYVeG+8cix7QINMid3mSKXP1R+AvP1uMjNtsgkxx
+         Qk2E4aU5XubB0kY5qEyZx6YqaYbrmZVVXPDGfOG7jhLDssXyeQum8EY8Ly8Xhh3M4/2o
+         RU4K+rBUZsPIWne4dFeIEyOkNr1WsKa2L3d1nFLHJfmBDay3H+WhJBY1QGAaCVT8Q7x5
+         dWguB3+nJWGeIO9lcfqtIlG0iLhxoXkVXiFKIRuWXHNKa++oukz00IqT6iUpT/rgf1ni
+         T7Iw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783338070; x=1783942870;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=JyWL2bmNSCp8kUWSmxLKw8OK4EFDlj3sVJl+0VzDp88=;
+        b=eps7OK3geA7Dz9VJfJs5cf4+S8fbQ7oqXaqNlB76QsQkomH9UY79clrezdH9hIYolP
+         wASlWyM5JA3MQAotMjVeNRANCidqjwoGKASS3qfl9vPxzO5s/8502Nh0c1j6XuWoW5DX
+         c4k8DFL/JV3+ghGOLhBZLF56OdbABVMQXCO9IC8pNfEBF/hJxWX0v34RhZundrxRXyEq
+         40CGmLihM/SLqt/fAVpR0VYelMnvuCP4/WEoN22PrMZn++SVIX3R5WG0W3i42YkuGOpL
+         Kvb224b7xgbykMm0ehdIsrwOpI8BEC9QnHeT0Jj7qQ/NSSLhy9YMeZ0Zeew+1apTcX31
+         DRsw==
+X-Forwarded-Encrypted: i=1; AHgh+RoyGXNWphQSSfAuSU14+Kwd2zfVPMJSl1CSAGyOE0X9/DHKsjpwc9AwQ3G1rrdEmI1jUNGYi/8hS64pEg2w@lists.linaro.org
+X-Gm-Message-State: AOJu0YxO5Cie+EE6YykmqL8dmnVXreTzGuGNI75+dOf4xso4JfLsc8iI
+	lwf0bJ0UU+LIj80aiobmgeD9UNKA1A5RsSg3nvg5egsKXNqaMWqbNZ6d3dfdGH/7QnslBDEt0rn
+	pJF26yG/OTr+5Cy0lXGJHmscEuiVFZWlDGM0iOdxTdm1akaya21C9PHpaJIL3t6J72QfQuw==
+X-Gm-Gg: AfdE7ckNJaFA6yw4+XOSMALXXpV2TOMSNP9mOp5gS8VbH9DIRy/vx0vYbP3Io8O07gW
+	iGwyUBLF7FF1WCcmwzdJV8fkEw8QvN0GEPBSFArzUCBrHhZ8hKjA1/CSXqnDshsLYoVLI2DQztJ
+	mx/KrcszjFQv2toUcP3bqY3kF2F7AQ7bYm0Jsr0KYCwVSpO3cyhT8vIK3HFgWMOW3ZvlhFanaGn
+	dFUgudftCOKniJ6lx+A8742H/trsS0gnLF/67o74yiqPqwf51GWt2WnxB/BdF0HcDVXWgei2Utu
+	CxyRy50VfL/1ESMiITOSvrsAiHKh7dbJNiKvGK+jx06LREIv0xUDTn0uqmjsikKUSHdN3IvmLr6
+	jJoUAX4zQlsaEtOnBaLJc82zLfOFUH9Tiidk=
+X-Received: by 2002:a05:622a:208:b0:50e:6311:7380 with SMTP id d75a77b69052e-51c4be99299mr82578301cf.6.1783338069791;
+        Mon, 06 Jul 2026 04:41:09 -0700 (PDT)
+X-Received: by 2002:a05:622a:208:b0:50e:6311:7380 with SMTP id d75a77b69052e-51c4be99299mr82578061cf.6.1783338069294;
+        Mon, 06 Jul 2026 04:41:09 -0700 (PDT)
+Received: from [192.168.120.193] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-69a19cf68f5sm4059006a12.13.2026.07.06.04.41.05
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 06 Jul 2026 04:41:08 -0700 (PDT)
+Message-ID: <4f865aaf-a400-4dc6-acaa-80dc22a36af7@oss.qualcomm.com>
+Date: Mon, 6 Jul 2026 13:41:05 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: phasta@kernel.org, Tvrtko Ursulin <tursulin@ursulin.net>,
- Matthew Brost <matthew.brost@intel.com>, Danilo Krummrich <dakr@kernel.org>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Sumit Semwal <sumit.semwal@linaro.org>, Marco Pagani
- <marco.pagani@linux.dev>, Boris Brezillon <boris.brezillon@collabora.com>
-References: <20260701085920.3253248-2-phasta@kernel.org>
- <20260701085920.3253248-3-phasta@kernel.org>
- <a4091099-1931-4ca2-a81a-9c3321b123a8@ursulin.net>
- <51fbde808bd059510d667d130afae179626303be.camel@mailbox.org>
- <ce33edbb-11dd-4722-bb87-d16155f35a75@igalia.com>
- <0af946b7bef6958f103598083919bbf933423676.camel@mailbox.org>
-Content-Language: en-GB
-From: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>
-In-Reply-To: <0af946b7bef6958f103598083919bbf933423676.camel@mailbox.org>
+To: Aniket Randive <aniket.randive@oss.qualcomm.com>,
+        mukesh.savaliya@oss.qualcomm.com, viken.dadhaniya@oss.qualcomm.com,
+        andi.shyti@kernel.org, sumit.semwal@linaro.org,
+        christian.koenig@amd.com
+References: <20260705135739.4038826-1-aniket.randive@oss.qualcomm.com>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20260705135739.4038826-1-aniket.randive@oss.qualcomm.com>
+X-Proofpoint-GUID: litOA22i254RwZXXwnQtEkyf6hoZBJ1B
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzA2MDExOCBTYWx0ZWRfXxoPGTU43lXam
+ pzsc+p9k55Nid0JM4vXZZKLrk7BoSutr+x8o0BSwNo5oFb/rXst3YepuElMg4ZfULu0abIKvn6G
+ RslKhDedFLH9RLV5LCYtdC8RyuTOIgxMLANxDTBUeNIBvErhak3mwOtAYFIOLaru6l4gHglVhj/
+ W2p+uAfZzPfjZZDbydZM1etJp+pYwMDpKbTal5Kcmljlx5IDR69F8tS2o0xvHWdtilfmsKJ3pvh
+ y9WlbZfCCkq8wge08S2YgFprgGJm97IBiHwdoTGfLAPMhntOnZ7AR1SLEjM018ptOXlQjnWwiux
+ F2dWMRI8H+7+zdTk2IOS7Uy/57wgRL1tO0NI08KyNwkj8zLcxA7O87aGPcBiwaMvDGJShdEO6mG
+ ltumI0gFOYUZZy54YGBkgCfsHTgIYl+UXc1PoQ88Wp6vnYd1sRWCRvd24SjPR09gs4PE+WwxrHm
+ zZT4k0go0MBoPymCZpQ==
+X-Proofpoint-ORIG-GUID: litOA22i254RwZXXwnQtEkyf6hoZBJ1B
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzA2MDExOCBTYWx0ZWRfXweuJY8FLN1Ip
+ mxsNILOpEjuFC+lQC8504PrJ8tOEu0Bw6rvFzX8glHtndRxYNjJoorompO7Vj5HqjMZgewOfeEX
+ tuxwBxqV3b31T6IojS2tPMCBzNEYp5k=
+X-Authority-Analysis: v=2.4 cv=c6Sbhx9l c=1 sm=1 tr=0 ts=6a4b9456 cx=c_pps
+ a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=QdFQMySKPoxOC9Zsaq0A:9 a=QEXdDO2ut3YA:10 a=a_PwQJl-kcHnX1M80qC6:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-06_01,2026-07-06_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 clxscore=1011
+ adultscore=0 priorityscore=1501 lowpriorityscore=0 spamscore=0
+ impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607060118
 X-Spamd-Bar: ---
-X-MailFrom: tvrtko.ursulin@igalia.com
+X-MailFrom: konrad.dybcio@oss.qualcomm.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 4NEEW6JNHRTVNL7TXKRYJFDYL4E5IYFG
-X-Message-ID-Hash: 4NEEW6JNHRTVNL7TXKRYJFDYL4E5IYFG
+Message-ID-Hash: GQIEEAUERDWWPTB34H5G6COIIEYHHFKM
+X-Message-ID-Hash: GQIEEAUERDWWPTB34H5G6COIIEYHHFKM
 X-Mailman-Approved-At: Tue, 14 Jul 2026 17:18:29 +0000
-CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+CC: linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, naresh.maramaina@oss.qualcomm.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 1/5] drm/sched: Protect entity->last_scheduled with spinlock
+Subject: [Linaro-mm-sig] Re: [PATCH v2] i2c: qcom-geni: Add dynamic transfer timeout based on transfer length and frequency
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4NEEW6JNHRTVNL7TXKRYJFDYL4E5IYFG/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GQIEEAUERDWWPTB34H5G6COIIEYHHFKM/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [3.19 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[igalia.com:s=20170329];
-	DATE_IN_PAST(1.00)[198];
-	MAILLIST(-0.20)[mailman];
+X-Spamd-Result: default: False [3.49 / 15.00];
+	DMARC_POLICY_REJECT(2.00)[qualcomm.com : SPF not aligned (relaxed),reject];
+	DATE_IN_PAST(1.00)[197];
+	R_DKIM_REJECT(1.00)[qualcomm.com:s=qcppdkim1];
 	R_SPF_ALLOW(-0.20)[+mx:c];
-	DMARC_POLICY_SOFTFAIL(0.10)[igalia.com : SPF not aligned (relaxed),none];
-	MIME_BASE64_TEXT(0.10)[];
+	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[13];
+	FORWARDED(0.00)[lists@lfdr.de];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:phasta@kernel.org,m:tursulin@ursulin.net,m:matthew.brost@intel.com,m:dakr@kernel.org,m:ckoenig.leichtzumerken@gmail.com,m:maarten.lankhorst@linux.intel.com,m:mripard@kernel.org,m:tzimmermann@suse.de,m:airlied@gmail.com,m:simona@ffwll.ch,m:sumit.semwal@linaro.org,m:marco.pagani@linux.dev,m:boris.brezillon@collabora.com,m:dri-devel@lists.freedesktop.org,m:linux-kernel@vger.kernel.org,m:linux-media@vger.kernel.org,m:linaro-mm-sig@lists.linaro.org,m:ckoenigleichtzumerken@gmail.com,s:lists@lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[17];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER(0.00)[tvrtko.ursulin@igalia.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FORGED_RECIPIENTS(0.00)[m:aniket.randive@oss.qualcomm.com,m:mukesh.savaliya@oss.qualcomm.com,m:viken.dadhaniya@oss.qualcomm.com,m:andi.shyti@kernel.org,m:sumit.semwal@linaro.org,m:christian.koenig@amd.com,m:linux-i2c@vger.kernel.org,m:linux-arm-msm@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-media@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,m:naresh.maramaina@oss.qualcomm.com,s:lists@lfdr.de];
 	ARC_NA(0.00)[];
-	FREEMAIL_TO(0.00)[kernel.org,ursulin.net,intel.com,gmail.com,linux.intel.com,suse.de,ffwll.ch,linaro.org,linux.dev,collabora.com];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[igalia.com:-];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[tvrtko.ursulin@igalia.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	FORGED_SENDER(0.00)[konrad.dybcio@oss.qualcomm.com,linaro-mm-sig-bounces@lists.linaro.org];
+	DKIM_TRACE(0.00)[qualcomm.com:-];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:from_smtp,lists.linaro.org:helo,lists.linaro.org:rdns]
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	FROM_NEQ_ENVFROM(0.00)[konrad.dybcio@oss.qualcomm.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	ALIAS_RESOLVED(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,oss.qualcomm.com:from_mime,oss.qualcomm.com:mid,lists.linaro.org:from_smtp,lists.linaro.org:helo,lists.linaro.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: C53D87575C7
+X-Rspamd-Queue-Id: 6D44E7575CD
 
-DQpPbiAwNi8wNy8yMDI2IDEwOjQyLCBQaGlsaXBwIFN0YW5uZXIgd3JvdGU6DQo+IE9uIE1vbiwg
-MjAyNi0wNy0wNiBhdCAwOTo0NSArMDEwMCwgVHZydGtvIFVyc3VsaW4gd3JvdGU6DQo+PiBPbiAw
-My8wNy8yMDI2IDE1OjQ3LCBQaGlsaXBwIFN0YW5uZXIgd3JvdGU6DQo+Pj4NCj4+Pg0KPj4+IEkg
-dGhpbmsgaXQgY2FuIGRldGFpbCB3aGljaCBmdW5jdGlvbnMgd2lsbCBub3cgYmUgbG9ja2VkOyBi
-dXQNCj4+PiBtZW50aW9uaW5nIHRoZSB1c2VycyB3b3VsZCBiZSBvdmVya2lsbCBhbmQgaXMgdW5j
-b21tb24gZm9yIEFQSSByZXdvcmtzLg0KPj4NCj4+IEhlcmUgSSBkaXNhZ3JlZSBxdWl0ZSBzdHJv
-bmdseS4gR2l2ZW4gdGhlIHBhdGNoIGlzIG1ha2luZyBzdHJvbmcgY2xhaW1zDQo+PiB0aGF0IHRo
-ZSBsb2NrbGVzcyBhY2Nlc3Mgd2FzIGFkZGVkIGZvciBubyBvYnZpb3VzIHJlYXNvbiwgYW5kIHRo
-YXQgd2UNCj4+IGhhdmUgbm93IGVzdGFibGlzaGVkIHRoZSBsb2NrbGVzcyBoZWxwZXIgaXMgaW4g
-ZmFjdCB1c2VkIG9uIHRoZQ0KPj4gc3VibWlzc2lvbiBwYXRocywgaXQgaXMgcmVhbGx5IHJlcXVp
-cmVkIHRoYXQgdGhvc2Ugc3Ryb25nIGNsYWltcyBhcmUNCj4+IGJhY2tlZCBieSBhIGNvbmNyZXRl
-IGFuYWx5c2lzIGluc3RlYWQgb2YganVzdCBzYXlpbmcgIm5vdCBwZXJmb3JtYW5jZQ0KPj4gY3Jp
-dGljYWwgaW4gYW55IHdheSIuDQo+IA0KPiBUaGlzIGlzIGEgc3Ryb25nIGNhc2UgZm9yIHRoZSBy
-ZXZlcnNhbCBvZiB0aGUgYnVyZGVuIG9mIHByb29mLg0KDQpJIGRpZCBub3Qgd2FudCB1cyB0byBk
-aXNjb3Vyc2UgaW50byBzaWRlIHBoaWxvc29waGljYWwgYXJndW1lbnRzIGFib3V0IA0KaG93IGFu
-ZCB3aHkgdGhlIGNvZGUgYmFzZSBnb3QgdG8gd2hlcmUgaXQgaXMuIFRoZSBzdG9yeSBhdCBoYW5k
-IGlzIG11Y2ggDQpzaW1wbGVyIGFuZCBuYXJyb3dlciBzbyBleGN1c2UgbWUgZm9yIHNraXBwaW5n
-IHRoZSBtYWpvcml0eSBvZiB0aGUgYmVsb3cuDQoNClB1dCBpbiBhIGRpZmZlcmVudCB3b3JkaW5n
-LCB3aGF0IEkgd2FzIHRyeWluZyB0byBleHByZXNzIGlzIHRoaXM6IExldHMgDQpub3Qgd3JpdGUg
-YSBwb29yIGNvbW1pdCBtZXNzYWdlIGJlY2F1c2UgdGhlIG9yaWdpbmFsIG9uZSB3YXMgcG9vci4g
-QWthIA0KdHdvIHdyb25ncyBkbyBub3QgbWFrZSBhIHJpZ2h0Lg0KDQpBbHNvLCBJIGFtIG5vdCBw
-dXR0aW5nIGEgYnVyZGVuIG9mIHByb29mIG9uIHlvdSwgaW4gZmFjdCwgSSBvZmZlcmVkIHRvIA0K
-dGVzdCB5b3VyIHNlcmllcy4NCg0KQXMgdG8geW91ciBjbG9zaW5nIHF1ZXN0aW9uIHRvIHdoYXQg
-SSBzdWdnZXN0IGNvbW1pdCBtZXNzYWdlIG5lZWRzIHRvIA0KYWRkLCB0aGF0IGlzIHNpbXBsZSwg
-YW5kIHllcywgdGhlIGZpcnN0IGJ1bGxldCBwb2ludCB5b3UgbGlzdCBpcyB3aGF0IEkgDQpoYXZl
-IGFscmVhZHkgYXNrZWQgZm9yIGluIG9uZSBvZiB0aGUgcHJldmlvdXMgcmVwbGllcy4gU28gc2F5
-IHNvbWV0aGluZyANCmFsb25nIHRoZSBsaW5lcyBvZjoNCg0KIiIiDQpkcm1fc2NoZWRfZW50aXR5
-X2Vycm9yKCksIHdoaWNoIGlzIHNpZ25pZmljYW50bHkgdXNlZCBmcm9tIHZhcmlvdXMgDQpzdGFn
-ZXMgb2YgdGhlIGFtZGdwdSBqb2Igc3VibWl0IHBhdGgsIGVpdGhlciBkaXJlY3RseSBvciB2aWEg
-DQphbWRncHVfdm1fZ2VuZXJhdGlvbigpLCBpcyBjaGFuZ2VkIGZyb20gbG9ja2xlc3MgdG8gdGFr
-aW5nIHRoZSANCmVudGl0eS0+bG9jay4gQXMgcGVyZm9ybWFuY2Ugd2FzIG5vdCBsaXN0ZWQgYXMg
-YSByZWFzb24gdGhlIGxvY2tsZXNzIA0KYXBwcm9hY2ggd2FzIGNob3NlbiBpbiB0aGUgYWJvdmUg
-cmVmZXJlbmNlZCBjb21taXQsIGFsdGhvdWdoIGl0IGlzIA0Kc3VzcGVjdGVkIHRoYXQgbWlnaHQg
-aGF2ZSBiZWVuIHRoZSBtb3RpdmF0aW9uLCBpdCBpcyBub3cgdGhvdWdodCB0aGF0IA0KdGhlIG5l
-dyBsb2NrIGN5Y2xlcyB0byB0aG9zZSBwYXRocyB3aWxsIG5vdCBhZGQgYW55IG1lYXN1cmFibGUg
-b3ZlcmhlYWQuDQoNCkZvciBvdGhlciBkcml2ZXJzIG5vIG5ldyBsb2NrIGN5Y2xlcyBhcmUgYWRk
-ZWQgdG8gdGhlIHN1Ym1pdCBwYXRoLCBnaXZlbiANCmRybV9zY2hlZF9lbnRpdHlfc2VsZWN0X3Jx
-KCkgdmlhIHRoZSBqb2IgYXJtIHBhdGggYWxyZWFkeSBiYWlscyBvdXQgDQplYXJseSBkdWUgYWxs
-IGRyaXZlcnMgYXBhcnQgZnJvbSBBTUQgb25seSBwYXNzaW5nIGEgc2luZ2xlIHNjaGVkdWxlciAN
-Cmxpc3QgdG8gdGhlIGVudGl0eS4NCiIiIg0KDQpCb251cyBwb2ludCBpZiB5b3UgY2FuIHNwZW5k
-IHRoZSB0aW1lIHRvIGNvdW50IGhvdyBtYW55IGV4dHJhIA0KbG9jay11bmxvY2sgY3ljbGVzIGl0
-IGlzIGFkZGluZyBiZXR3ZWVuIGl0J3MgQ1Mgc3VibWl0LCBwcmVwYXJlIGpvYiBhbmQgDQpydW4g
-am9iIGVudHJ5IHBvaW50cy4NCg0KRm9yIG1lLCB0aGF0IGlzIG5vdCB0aGUgYnVyZGVuIG9mIHBy
-b29mIGJ1dCBzb21lIG1pbmltdW0gc3RhbmRhcmQgb2YgYSANCmNvbW1pdCBtZXNzYWdlIHdoaWNo
-IHNob3dzIHNvbWUgZHVlIGRpbGlnZW5jZSB3YXMgZG9uZS4NCg0KUmVnYXJkcywNCg0KVHZydGtv
-DQoNCj4gVGhlIGVudGlyZSBjb2RlIGJhc2Ugb2YgZHJtX3NjaGVkIGhhcyBiZWVuIGRlc2lnbmVk
-IG9uIHRoZSBjb21wdXRlcg0KPiBzY2llbmNlIHByZW1pc2Ugb2YgbG9ja3MgYmVpbmcgZXZpbC4g
-VGhhdCdzIHdoeSBsaXRlcmFsbHkgYWxsDQo+IHN5bmNocm9uaXphdGlvbiBwcmltaXRpdmVzIGV4
-Y2VwdCBmb3IgbG9ja3MgaGF2ZSBiZWVuIHVzZWQgd2hlcmUNCj4gcG9zc2libGUsIGluY2x1ZGlu
-ZyB1bmRlZmluZWQgYmVoYXZpb3IuIFRoZSBkZXNpZ25lcnMgdHJpZWQgYXMgaGFyZCBhcw0KPiB0
-aGV5IGNvdWxkIHRvIGF2b2lkIGxvY2tzLg0KPiANCj4gVGhhdCBpcyBjbGVhcmx5IHByb3ZlbiBi
-eSB0aGUgZmFjdCB0aGF0IGluIGFsbCBvcmlnaW5hbCBkYXRhIHR5cGUNCj4gZGVmaW5pdGlvbnMs
-IHRoZSBvbmx5IGNvbXBvbmVudHMgdGhhdCB3ZXJlIGxvY2tlZCB3ZXJlIGFsd2F5cyBsaXN0cywN
-Cj4gc2luY2UgdGhvc2UgYXJlIHRoZSBzdHJ1Y3R1cmVzIHdoZXJlIHlvdSByZWFsbHkgY2Fubm90
-IGF2b2lkIGEgbG9jayBpbg0KPiBtb3N0IGNhc2VzLg0KPiANCj4gVGhlIGF2ZXJzaW9uIHRvIGxv
-Y2tpbmcgd2FzIHNvIGdyZWF0IHRoYXQgdGhleSBkZXNpZ25lZCBzcHNjX3F1ZXVlLA0KPiB3aGlj
-aCB1c2VzIGF0IGxlYXN0IGFzIG1hbnkgYXMgZXhwZW5zaXZlIGluc3RydWN0aW9ucyBhcyBhIGxv
-Y2sgKyBsaXN0DQo+IHdvdWxkIGhhdmUgbmVlZGVkLCBhbmQgaXRzIGNvcnJlY3RuZXNzIGlzIG5v
-dCBwcm92ZW4sIG5vciBhcmUgaXRzDQo+IGJlaGF2aW9yIGFuZCBydWxlcyBuZWl0aGVyIGRvY3Vt
-ZW50ZWQgb3IgcHJvdmVuLg0KPiANCj4gSXQncyBub3QgdXAgdG8gdGhlIGZhY3Rpb24gd2hvIHdh
-bnRzIHRvIHVzZSBjb3JyZWN0IGxvY2tpbmcgYW5kIHBoYXNlDQo+IG91dCBVQiB0byBwcm92ZSB0
-aGF0IHRoZSBsb2NrbGVzc25lc3MgaXMgYmFkLCBidXQgdG8gd2hvbWV2ZXIgYWRkZWQgdGhlDQo+
-IGxvY2tsZXNzbmVzcyB0byBwcm92ZSB3aHkgaXQgaXMgZ29vZCwgaS5lLiwgbmVjZXNzYXJ5IOKA
-kyB3aGljaCB3YXMgbm90DQo+IGRvbmUgaGVyZSwgbmVpdGhlciBpbiBjb21tZW50cyBub3IgY29t
-bWl0IG1lc3NhZ2UuIFNvIHRoZSByZWFzb25hYmxlDQo+IGFzc3VtcHRpb24gaXMgdGhhdCBpdCdz
-IHNpbXBseSBhIGxlZnRvdmVyIGZyb20gYSBmbGF3ZWQsIGJyb2tlbiBkZXNpZ24uDQo+IA0KPiBB
-bmQgdGhlIGtlcm5lbC13b3JrZmxvdyBpcyB0aGF0IHRoaW5ncyBhcmUgYWx3YXlzIG9uLWxpc3Qg
-Zm9yIGEgd2hpbGUNCj4gYmVmb3JlIGJlaW5nIG1lcmdlZCBpcyB0aGF0IHBhcnRpZXMgd2hvIGRv
-IGhhdmUgY29uY2VybnMgYW5kIHdobyBjYW4NCj4gcG9pbnQgb3V0IHByb2JsZW1zIGhhdmUgdGlt
-ZSB0byBkbyBzby4gV2hpY2ggaXMgb2YgY291cnNlIG9wZW4gdG8geW91Og0KPiBkbyB5b3Ugc2Vl
-IGEgcGVyZm9ybWFuY2UtcmVncmVzc2lvbiBwcm9ibGVtIHdpdGggdGhpcyBwYXRjaCwgYW5kIGlm
-IHNvLA0KPiB3aGVyZT8NCj4gDQo+IEFueXdheXM6DQo+ICAgKiBDb3JyZWN0IG1lIGlmIEknbSB3
-cm9uZywgYnV0IGl0IHdvdWxkIHNlZW0gdGhlIG9ubHkgZHJpdmVyLXVzYWdlDQo+ICAgICB3aGlj
-aCBjb3VsZCBzZWUgYSAqbmV3KiBsb2NrIGluIGl0cyBwYXRoIGlzDQo+ICAgICBkcm1fc2NoZWRf
-ZW50aXR5X2Vycm9yKCksIGZvciB3aGljaCB5b3UgeW91cnNlbGYgYWdyZWUgdGhhdCBpdCdzDQo+
-ICAgICBpcnJlbGV2YW50IHBlcmZvcm1hbmNlLXdpc2UuIFNob3VsZCB3ZSBzdGlsbCBsaXN0IHRo
-ZSB1c2VyJ3Mgb2YgdGhhdA0KPiAgICAgZnVuY3Rpb24/DQo+ICAgKiBUaGUgb3RoZXIgcmVsZXZh
-bnQgdXNlciBwYXRoLCBkcm1fc2NoZWRfam9iX2FybSgpIHZpYQ0KPiAgICAgZHJtX3NjaGVkX2Vu
-dGl0eV9zZWxlY3RfcnEoKSwgbXVzdCBhbHJlYWR5IGJlIGNhbGxlZCB1bmRlciBhIGNvbW1vbg0K
-PiAgICAgZHJpdmVyIGxvY2sgZm9yIGRybV9zY2hlZF9lbnRpdHlfcHVzaF9qb2IoKSwgYW5kIF9z
-ZWxlY3RfcnEoKQ0KPiAgICAgYWxyZWFkeSB0YWtlcyB0aGUgZW50aXR5IGxvY2suIFNvIGFueSBz
-aWduaWZpY2FudCByZWdyZXNzaW9uIGhlcmUgaXMNCj4gICAgIGh5cGVyIHVubGlrZWx5Lg0KPiAg
-ICogVGhlIG9ubHkgb3RoZXIgY29udGVuZGVyIGlzIHRoZSBqb2IgcHVsbCBwYXRoLCB3aGljaCBy
-dW5zIHNlcmlhbGx5LA0KPiAgICAgYnkgMSB3b3JrIGl0ZW0gYXQgb25lIHBvaW50IGluIHRpbWUu
-DQo+ICAgKiBkcm1fc2NoZWRfZW50aXR5X2tpbGwoKSAvIF9maW5pKCkgYXJlIHVzZWQgaW4gdXNl
-ciBjb250ZXh0IHRlYXJkb3duDQo+ICAgICBwYXRoLiBQZXJmb3JtYW5jZSBpcnJlbGV2YW50Lg0K
-PiANCj4gSSBjYW4gb2ZmZXIgdG8gYWRkIHRoZSBsaXN0IGFib3ZlIGZvciB0aGUganVzdGlmaWNh
-dGlvbiBvZiB3aHkgcmVtb3ZpbmcNCj4gdGhlIGhhbGYtdW5kZWZpbmVkIGJlaGF2aW9yIGlzIGdv
-b2QuDQo+IA0KPiBPciB3aGF0IGV4YWN0bHkgd291bGQgeW91IHdhbnQgdG8gc2VlIGRvY3VtZW50
-ZWQ/ICJhbWRncHUgdXNlcw0KPiBkcm1fc2NoZWRfam9iX2FybSgpIGFuZCBub3cgc2VlcyBhIGxv
-Y2stY3JpdGljYWwgc2VjdGlvbiBsb25nZXIgYnkgMw0KPiBpbnN0cnVjdGlvbnMuIGV0bmF2aXYg
-dXNlcyBkcm1fc2NoZWRfam9iX2FybSgpIGFuZCBub3figKYiPw0KPiANCj4gDQo+IA0KPiANCj4g
-UC4NCg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGlu
-YXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3Jn
-ClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0
-cy5saW5hcm8ub3JnCg==
+On 7/5/26 3:57 PM, Aniket Randive wrote:
+> The driver uses a static XFER_TIMEOUT of HZ (1 second) for all transfers
+> regardless of message length or bus frequency, causing unnecessary
+> delays on error paths.
+> 
+> Compute the timeout dynamically from message length and bus frequency
+> with a 10x safety margin over the theoretical wire time and a 300ms
+> floor. For GPI multi-descriptor transfers, use the maximum message
+> length across all queued messages as the per-completion timeout.
+
+What's the reason for a 0.3 s floor?
+
+Why a 10x safety margin specifically?
+
+[...]
+
+> +static unsigned long geni_i2c_xfer_timeout(struct geni_i2c_dev *gi2c, size_t len)
+> +{
+> +	size_t bit_cnt = len * 9;
+> +	size_t bit_usec = (bit_cnt * USEC_PER_SEC) / gi2c->clk_freq_out;
+
+mult_frac()
+
+Konrad
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
