@@ -2,68 +2,68 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id EIu3HTtKS2r3OgEAu9opvQ
+	id LfdEMURKS2r5OgEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 06 Jul 2026 08:24:59 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 06 Jul 2026 08:25:08 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id D9E9270CECD
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 06 Jul 2026 08:24:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3FFAB70CED2
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 06 Jul 2026 08:25:08 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
 	dkim=none;
 	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=sk.com (policy=none);
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org"
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id EC47D40977
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  6 Jul 2026 06:24:57 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5ED8240488
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  6 Jul 2026 06:25:07 +0000 (UTC)
 Received: from invmail4.hynix.com (exvmail4.skhynix.com [166.125.252.92])
-	by lists.linaro.org (Postfix) with ESMTP id 7338140AF7
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  6 Jul 2026 06:20:09 +0000 (UTC)
-X-AuditID: a67dfc5b-c45ff70000001609-94-6a4b4904e0e8
+	by lists.linaro.org (Postfix) with ESMTP id 6FD6040C2C
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  6 Jul 2026 06:20:10 +0000 (UTC)
+X-AuditID: a67dfc5b-c45ff70000001609-b3-6a4b4904ee74
 From: Byungchul Park <byungchul@sk.com>
 To: linux-kernel@vger.kernel.org
-Date: Mon,  6 Jul 2026 15:19:16 +0900
-Message-Id: <20260706061928.66713-29-byungchul@sk.com>
+Date: Mon,  6 Jul 2026 15:19:17 +0900
+Message-Id: <20260706061928.66713-30-byungchul@sk.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20260706061928.66713-1-byungchul@sk.com>
 References: <20260706061928.66713-1-byungchul@sk.com>
-X-Brightmail-Tracker: H4sIAAAAAAAAAzWSa0xTZxjH957znksbupxUE8/cB0yXOcIUp1H3ZJmbmiW+0ywzQzOd21wz
-	jlDGLUVRtjhppIww3LrOQkKpAxwNl8NlFMLFG1YpQyEWYaVUBNRaYQpELRBF7VrMvv2e55//
-	7/ny8LTawyzndWkHJX2aNkXDKrFyKqp8NfPxjuR3/P0bIN94DEbG/Ax4DJ0YZoP5GEobZBae
-	W1s5GJvNRzC/YKXB2B7C8Nzs4sBiQBA650JQ1G+mQW42UPC48QULllt+FoonDRhm7IUIJru2
-	QejmPQqG5h4g8Hf+hKDY4kbwaHIcQbNrFMGA/1UYnJ1hocfyMwvTjSzYrOaw1taEoX28g4OR
-	IjMFY/YAhqumCgqK/loG1uIJCix1Zyh4Yq/hoPf0CIbbVSUchMrSwVV7j4P6qWsM9Ix6GLgf
-	MLMw1p3HQGvOOAdNw10IgoO3KJALAzSc870NAx2lLBQ2tjAwKocYyLHOM3C91h2+5/obQ09J
-	NYZrHXUMVA71U+Do66XBa7qLoG66gt2cQOaNv2Ain5IRWXhqRiRYeZwmRlN4zHUcJpVXH7Dk
-	SoVIfutbTdpLbnIk97yPI2VNh0ju5SmGOKpiyemzkxTx3d+0c9UXyvcTpBRdlqRf88E3yqQG
-	TzedYXvviPfPz3LQ07gCxPOisF6cMxwrQIpFXDj1mI0wK7wler1P6AgvFVaIjhMBpgApeVoY
-	iBYL7SdwJFgi7BVvX7izWMDCm2KXc5qJsErYKFZ1DFMvpdFibWPnokgR3tc/sy3u1cIG8cZM
-	N45IReEPhfhr9XH8svCaeLHKi01IVYZeqUFqXVpWqlaXsj4uKTtNdyTu2/TUJhT+NvvRZ/va
-	0CN3vBMJPNJEqWDz9mQ1o83KzE51IpGnNUtVK2N2JKtVCdrs7yV9+n79oRQp04le57FmmWrd
-	3OEEtZCoPSh9J0kZkv7/lOIVy3NQ/IdtqrP+8jtydb1z/8YDNtm9a3vzRwHf7yOxWy9e0ZR/
-	+cNMi8sTtXvb0MlPiO6hW/53eB7H9O9UJ2YsKf3UFPOV40e5Fs60XnhR+fn09Ut7m9/Ie9d0
-	EkXt7g32rWxXTHyt38eSuuCahn/yW/ImXHuKBpPlmhu+o23xxkRn9BaTBmcmadfG0vpM7X95
-	y2B1aQMAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAAzVSf0yMcRz2/b7f+97bcbw7mXfMsjPlx4QN+wwZjXkxP8bG+Ec3vdN118kd
-	KdNSuSlidXYXTiS6WR3lzq/iVivlZ1NCh5I4kcoZpXV15cr889nzeZ7P8+z548MyiruSKaxa
-	d0DU61RaJZUR2aZl6fPIug2xC566p0KGMQWaWz0SeJNaSaC3J4PAhRI7Bb/1rhQyHOck8Lgp
-	jUD9jWIErb0ZCPoGrAwYy4YJ+E21Uujpfy8FcyqCYVctAkuDiQF3fQUD9lupGH6XDlHorP6F
-	wNzmoZDbkUrAa8tCcL7dKoWOmrXQ3XpfAsMtXzE0/elCYPMMYfBUHkfgt2jgUoEzYLf8pDBQ
-	94KBXHM9gsttLQz86viI4FbtBwSua2kUvmTfZqDRMx5e9XopPDGfpNDdcAHDj1IK+WkuCTQ8
-	70SQZzUhaH/nwpB+pYSCJc9BoOxjuRQaOgcxNFtMGIodG6HV1k7gWXYBDtQNXN2cDNbcdBwY
-	3zCYr9/H0G8rkq4sREKf8TQRipx3sGB86aeC/aIdCQM+ExJ6CtMZwZgdWKu7vIxwzHlIKHzW
-	RQVf72squP7kE+FpAS9czfRhIadunlB2vkW6ZdUu2fJoUatOEPXzV0TJYkrePGLi85Ymuq9u
-	PYp84SdQEMtzi/iBi7/pCKZcGO929zMjOJibzjtPtUtOIBnLcI0hfJbtFBkRJnI7+U8Vn0cN
-	hJvJ11T9kIxgObeEv1b+Fv8LDeGLSytHg4IC/I3BvFFewS3m33sfkWwky0djilCwWpcQp1Jr
-	F4cbNDFJOnVi+J59cQ4UeCdb8mDOPdTTuLYKcSxSjpPDyvWxCokqwZAUV4V4llEGy0NnbYhV
-	yKNVSYdF/b7d+oNa0VCFprJEOVm+focYpeD2qg6IGlGMF/X/VcwGTTmK7NNOexec1eHlxgeR
-	3ycZbe7Nac1o6FhnpmJ/ZUTKmk3e0ERHzoyECnMYjrZRdbWmbaMvBYmmsQaIdqtXsyFzv2pn
-	R357KD2zrUK+fQwf9n18/PGopBVzV01IzkyeTt2m7pA5KS/UUZpiIkTcq9HfbnwSqjzij8gq
-	n1Dn5CKVxBCjWjiH0RtUfwEbdFq1SgMAAA==
+X-Brightmail-Tracker: H4sIAAAAAAAAAzWSXUxTdxjG/Z/zP6eHhpqTQuSIFyxdpgQVZWHmzdwGF8t2lMQtfmwiF9jI
+	iZSVj7QCssWE8rEVUgFxBaWChVpSAQVbRBRJEEd1K50UFIoUG4ShCIhbKESEsMLm3S/P+zy/
+	q5chpcNUKKNIOyWo0uRKGS3G4tnA2p30vriU3eb27eDxTlAwqOnC4JvXYlgx3BKB1nqRgodD
+	eRi8Pi2CxXcGEvQaBE2tGgL0YxM0VE5pMMzV6xBM9XwNs94OCoYWZhBMdP2C4HKdjYZ3zkck
+	VOr7ENSOjZLQan+GoNOSR8PAxEZ47JujYdZ1iQBjXicFrt5pBNWGcgT5pmYaXNPLBHgqyglw
+	lNURUHEjBAyVLwnoNXkwGJwDFDy3VIlg1ZgO9sYXIhgt1WP4/dkgBdOT5TR4H/xMgXW4B8H8
+	4zECmnSTJGjv+DBYx/2Vzqfb4WKNhwbtyjwCe/tzAnQtNynINSxS0NfloKC/sQ+Dw/7Q76y6
+	imHEWSqCR3euUWAechFgc/aSsFCyJTaJb7C1EXxh/wrNN9U0IX7enE/yhWV+KrBl82bHDM0v
+	+Z7QfOeCEfN/1HH8laIlgj/n3MnfrhoV8UZrJl/w2yzF2ywR3+44Jv4sSVAqsgTVri+Oi5N1
+	w7eojKWtp80dRTgX5YUVowCGY6O5yrGn5Hse1V8m1phmt3Fu99v1PJj9gLOdnaSKkZgh2YEw
+	Tld/Fhcjhglij3LNN3etdTD7EVfx6jy9xhJ2D7fqu/K/M4xrbOla5wB/fn25et0vZT/hRuYe
+	4DUnxzYGcJprraL/Bpu5exY3LkMSI9rQgKSKtKxUuUIZHZmck6Y4HXkiPdWK/A9Xf2Y5oR39
+	03eoG7EMkgVKIHZ/ipSSZ6lzUrsRx5CyYMnW8LgUqSRJnvOjoEpPVGUqBXU32sJgWYjk44Xs
+	JCl7Un5K+EEQMgTV+yvBBITmoguGkV83ZRae/+mlRX/yif5NTNDBksGMwJnAnOooW7Hazb92
+	/G367n700t5S95SM7Yj7MDLky5rD43u+ObJam3AiMfntga/MkT2ykQxPeUlMxNH0veq/FuPt
+	puPxOw6HikyvTIl3+8PbPnd1O9qUq7vrvz8Qnn13vPfPI/s2F3mlUZ8GybA6WR4VQarU8n8B
+	isN88mwDAAA=
+X-Brightmail-Tracker: H4sIAAAAAAAAAzWSW0wTeRTG/c/8OzNMrJlUEifwgGlcMRtBjZecROPlQRkvu/FB48YHpdFR
+	Sgtiq9iaGGlrFRF2a7UlUtCK0ChUQaoiYiNCwHvkpqKA0KSiCIgolVAotWj25eR3vvOdL+fh
+	MKSsWhLDKNMPiZp0hVpOsZj9e6UpAW/cnLrYdzMRss3HoavHL4HXhjoMgdFsDIUVbgpCjmoa
+	sqsuSODxGyOG5hvlCHoC2QjGJhwkmGvCGELWJhpGxztpsBkQhL1NCOwtVhI6mh+Q4L5lIOB7
+	5RQFAw3fENh8fgry+w0Yhl25CAr6HDT0NybBUE+tBMLdHwl482MQgcs/RYC/7hSCkF0Fl4o9
+	kXX7VwomXrwkId/WjOCyr5uEb/29CG41vUfgvWqk4IPlNglt/lnQHhim4IntDAVDLYUEfKmk
+	wGn0SqDl+QCCIocVQd87LwGmKxUU2IuqMNT03qOhZWCSgC67lYDyqr+gx9WH4ZmlmIicG3Hd
+	nAOOfBMRKZ8IsF2vJWDcVUavLUXCmPlfLJR57hCCuTVECe6LbiRMBK1IGC01kYLZEmkbBodJ
+	4YTniFD6bJASgoFXlOD94cTC02JeKDkdJISzLxKEmoJueuu6neyqvaJamSlqFq1OZlNy31ZL
+	MoLzdaW1p3EWMsbloCiG55bx3bZLxDRTXDzf0TFOTnM0N5f35PVJchDLkFxbHJ/rysM5iGFm
+	c//wFbcXTXsw9wdv/3yOmmYpt4IPB0rI35lxfHll3S+Oiug3Jot+5cu45Xzn8CNsQawTzShD
+	0cr0zDSFUr08UatK0acrdYl7DqRVocg7uY5Nnr2LRtuS6hHHIPlMKazdlCqTKDK1+rR6xDOk
+	PFo6f8HmVJl0r0J/VNQc2K05rBa19SiWwfI50k07xGQZt19xSFSJYoao+X9KMFExWcjSsLhT
+	FU6tIWdkGT/H599Xzx2x6ra1qupikxrXXI1t31By0KAfowKMacsd57zVGXovvy50/5wOxWgV
+	U41LY5K17c89H7p86z9KvxTWsrrzCa6t233O3u/0gyvsiGfXfyczRxZee5vXui3uYH38w4L9
+	ucf2zaTZx8HtQx5Pu9svx9oUxZI/SY1W8RNXjqH7SgMAAA==
 X-CFilter-Loop: Reflected
 X-Spamd-Bar: /
-Message-ID-Hash: FKQBNA72QG67CNVUTRQ66AZUZ3WHPUHA
-X-Message-ID-Hash: FKQBNA72QG67CNVUTRQ66AZUZ3WHPUHA
+Message-ID-Hash: NQK3IEL2MP642GT4YLNOSWTF7AD7EG3X
+X-Message-ID-Hash: NQK3IEL2MP642GT4YLNOSWTF7AD7EG3X
 X-MailFrom: byungchul@sk.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
@@ -73,9 +73,9 @@ CC: max.byungchul.park@gmail.com, kernel_team@skhynix.com, torvalds@linux-founda
  @gmail.com, andrii@kernel.org, wangfushuai@baidu.com, linux-doc@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-i2c@vger.kernel.org, linux-arch@vger.kernel.org, linux-modules@vger.kernel.org, rcu@vger.kernel.org, linux-nfs@vger.kernel.org, linux-rt-devel@lists.linux.dev, 2407018371@qq.com, dakr@kernel.org, miguel.ojeda.sandonis@gmail.com, neilb@ownmail.net, bagasdotme@gmail.com, wsa+renesas@sang-engineering.com, dave.hansen@intel.com, geert@linux-m68k.org, ojeda@kernel.org, alex.gaynor@gmail.com, gary@garyguo.net, bjorn3_gh@protonmail.com, lossin@kernel.org, a.hindborg@kernel.org, aliceryhl@google.com, tmgross@umich.edu, rust-for-linux@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v19 28/40] dept: assign unique dept_key to each distinct dma fence caller
+Subject: [Linaro-mm-sig] [PATCH v19 29/40] dept: make dept aware of lockdep_set_lock_cmp_fn() annotation
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FKQBNA72QG67CNVUTRQ66AZUZ3WHPUHA/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NQK3IEL2MP642GT4YLNOSWTF7AD7EG3X/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -90,21 +90,21 @@ X-Spamd-Result: default: False [2.09 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	MID_CONTAINS_FROM(1.00)[];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx];
-	DMARC_POLICY_SOFTFAIL(0.10)[sk.com : SPF not aligned (relaxed), No valid DKIM,none];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[sk.com : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORWARDED(0.00)[lists@lfdr.de];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS(0.00)[m:linux-kernel@vger.kernel.org,m:max.byungchul.park@gmail.com,m:kernel_team@skhynix.com,m:torvalds@linux-foundation.org,m:damien.lemoal@opensource.wdc.com,m:linux-ide@vger.kernel.org,m:adilger.kernel@dilger.ca,m:linux-ext4@vger.kernel.org,m:mingo@redhat.com,m:peterz@infradead.org,m:will@kernel.org,m:tglx@linutronix.de,m:rostedt@goodmis.org,m:joel@joelfernandes.org,m:sashal@kernel.org,m:daniel.vetter@ffwll.ch,m:duyuyang@gmail.com,m:johannes.berg@intel.com,m:tj@kernel.org,m:tytso@mit.edu,m:willy@infradead.org,m:david@fromorbit.com,m:amir73il@gmail.com,m:gregkh@linuxfoundation.org,m:kernel-team@lge.com,m:linux-mm@kvack.org,m:akpm@linux-foundation.org,m:mhocko@kernel.org,m:minchan@kernel.org,m:hannes@cmpxchg.org,m:vdavydov.dev@gmail.com,m:sj@kernel.org,m:jglisse@redhat.com,m:dennis@kernel.org,m:cl@linux.com,m:penberg@kernel.org,m:rientjes@google.com,m:vbabka@suse.cz,m:ngupta@vflare.org,m:linux-block@vger.kernel.org,m:josef@toxicpanda.com,m:linux-fsdevel@vger.kern
  el.org,m:jack@suse.cz,m:jlayton@kernel.org,m:dan.j.williams@intel.com,m:hch@infradead.org,m:djwong@ kernel.org,m:dri-devel@lists.freedesktop.org,m:rodrigosiqueiramelo@gmail.com,m:melissa.srw@gmail.com,m:hamohammed.sa@gmail.com,m:harry.yoo@oracle.com,m:chris.p.wilson@intel.com,m:gwan-gyeong.mun@intel.com,m:boqun.feng@gmail.com,m:longman@redhat.com,m:yunseong.kim@ericsson.com,m:ysk@kzalloc.com,m:yeoreum.yun@arm.com,m:netdev@vger.kernel.org,m:matthew.brost@intel.com,m:her0gyugyu@gmail.com,m:corbet@lwn.net,m:catalin.marinas@arm.com,m:bp@alien8.de,m:x86@kernel.org,m:hpa@zytor.com,m:luto@kernel.org,m:sumit.semwal@linaro.org,m:gustavo@padovan.org,m:christian.koenig@amd.com,m:andi.shyti@kernel.org,m:arnd@arndb.de,m:lorenzo.stoakes@oracle.com,m:Liam.Howlett@oracle.com,m:rppt@kernel.org,m:surenb@google.com,m:mcgrof@kernel.org,m:petr.pavlu@suse.com,m:da.gomez@kernel.org,m:samitolvanen@google.com,m:paulmck@kernel.org,m:frederic@kernel.org,m:neeraj.upadhyay@kernel.org,m:joelagnelf@nvidia.com,m:j
  osh@joshtriplett.org,m:urezki@gmail.com,m:mathieu.desnoyers@efficios.com,m:jiangshanlai@gmail.com,m:qiang.zhang@linux.dev,m:juri.lelli@redhat.co,m:vincent.guittot@linaro.org,m:dietmar.eggemann@arm.com,m:bsegall@google.com,m:mgorman@suse.de,m:vschneid@redhat.com,m:chuck.lever@oracle.com,m:neil@brown.name,m:okorniev@redhat.com,s:lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_SENDER(0.00)[byungchul@sk.com,linaro-mm-sig-bounces@lists.linaro.org];
-	RCVD_TLS_LAST(0.00)[];
-	ARC_NA(0.00)[];
 	FREEMAIL_CC(0.00)[gmail.com,skhynix.com,linux-foundation.org,opensource.wdc.com,vger.kernel.org,dilger.ca,redhat.com,infradead.org,kernel.org,linutronix.de,goodmis.org,joelfernandes.org,ffwll.ch,intel.com,mit.edu,fromorbit.com,linuxfoundation.org,lge.com,kvack.org,cmpxchg.org,linux.com,google.com,suse.cz,vflare.org,toxicpanda.com, kernel.org,lists.freedesktop.org,oracle.com,ericsson.com,kzalloc.com,arm.com,lwn.net,alien8.de,zytor.com,linaro.org,padovan.org,amd.com,arndb.de,suse.com,nvidia.com,joshtriplett.org,efficios.com,linux.dev,redhat.co,suse.de,brown.name,talpey.com,huawei.com,amazon.co.uk,linux.alibaba.com,glider.be,linux.intel.com,treblig.org,star-ark.net,valla.it,vivo.com,baidu.com,lists.infradead.org,lists.linaro.org,lists.linux.dev,qq.com,ownmail.net,sang-engineering.com,linux-m68k.org,garyguo.net,protonmail.com,umich.edu];
-	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	TO_DN_NONE(0.00)[];
@@ -119,211 +119,160 @@ X-Spamd-Result: default: False [2.09 / 15.00];
 	TAGGED_RCPT(0.00)[linaro-mm-sig,renesas];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,sk.com:from_mime,sk.com:email,sk.com:mid,lists.linaro.org:from_smtp,lists.linaro.org:helo,lists.linaro.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: D9E9270CECD
+X-Rspamd-Queue-Id: 3FFAB70CED2
 
-dma fence can be used at various points in the code and it's very hard
-to distinguish dma fences between different usages.  Using a single
-dept_key for all the dma fences could trigger false positive reports.
+commit eb1cfd09f788e ("lockdep: Add lock_set_cmp_fn() annotation") has
+been added to address the issue that lockdep was not able to detect a
+true deadlock like the following:
 
-Assign unique dept_key to each distinct dma fence wait to avoid false
-positive reports.
+   https://lore.kernel.org/lkml/20220510232633.GA18445@X58A-UD3R/
+
+The approach is only for lockdep but dept should work being aware of it
+because the new annotation is already used to avoid false positive of
+lockdep in the code.
+
+Make dept aware of the new lockdep annotation.
 
 Signed-off-by: Byungchul Park <byungchul@sk.com>
 ---
- drivers/dma-buf/dma-fence.c | 18 ++++-----
- include/linux/dma-fence.h   | 74 +++++++++++++++++++++++++++++--------
- 2 files changed, 68 insertions(+), 24 deletions(-)
+ include/linux/dept.h     | 10 +++++++++
+ kernel/dependency/dept.c | 48 +++++++++++++++++++++++++++++++++++-----
+ kernel/locking/lockdep.c |  1 +
+ 3 files changed, 53 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/dma-buf/dma-fence.c b/drivers/dma-buf/dma-fence.c
-index b75b7b9c445a..e56044492166 100644
---- a/drivers/dma-buf/dma-fence.c
-+++ b/drivers/dma-buf/dma-fence.c
-@@ -503,7 +503,7 @@ void dma_fence_signal(struct dma_fence *fence)
- EXPORT_SYMBOL(dma_fence_signal);
+diff --git a/include/linux/dept.h b/include/linux/dept.h
+index 827ccc1890d1..f3cc7566ddf2 100644
+--- a/include/linux/dept.h
++++ b/include/linux/dept.h
+@@ -53,6 +53,11 @@ struct dept_map {
+ 	const char			*name;
+ 	struct dept_key			*keys;
  
- /**
-- * dma_fence_wait_timeout - sleep until the fence gets signaled
-+ * __dma_fence_wait_timeout - sleep until the fence gets signaled
-  * or until timeout elapses
-  * @fence: the fence to wait on
-  * @intr: if true, do an interruptible wait
-@@ -521,7 +521,7 @@ EXPORT_SYMBOL(dma_fence_signal);
-  * See also dma_fence_wait() and dma_fence_wait_any_timeout().
-  */
- signed long
--dma_fence_wait_timeout(struct dma_fence *fence, bool intr, signed long timeout)
-+__dma_fence_wait_timeout(struct dma_fence *fence, bool intr, signed long timeout)
++	/*
++	 * keep lockdep map to handle lockdep_set_lock_cmp_fn().
++	 */
++	void				*lockdep_map;
++
+ 	/*
+ 	 * subclass that can be set from user
+ 	 */
+@@ -79,6 +84,7 @@ struct dept_map {
+ {									\
+ 	.name = #n,							\
+ 	.keys = (struct dept_key *)(k),					\
++	.lockdep_map = NULL,						\
+ 	.sub_u = 0,							\
+ 	.map_key = { .classes = { NULL, } },				\
+ 	.wgen = 0U,							\
+@@ -179,6 +185,8 @@ void dept_softirqs_on_ip(unsigned long ip);
+ void dept_hardirqs_on(void);
+ void dept_softirqs_off(void);
+ void dept_hardirqs_off(void);
++
++#define dept_set_lockdep_map(m, lockdep_m) ({ (m)->lockdep_map = lockdep_m; })
+ #else /* !CONFIG_DEPT */
+ struct dept_key { };
+ struct dept_map { };
+@@ -221,5 +229,7 @@ struct dept_ext_wgen { };
+ #define dept_hardirqs_on()				do { } while (0)
+ #define dept_softirqs_off()				do { } while (0)
+ #define dept_hardirqs_off()				do { } while (0)
++
++#define dept_set_lockdep_map(m, lockdep_m)		do { } while (0)
+ #endif
+ #endif /* __LINUX_DEPT_H */
+diff --git a/kernel/dependency/dept.c b/kernel/dependency/dept.c
+index 5bf32633e1fb..048348ea64d2 100644
+--- a/kernel/dependency/dept.c
++++ b/kernel/dependency/dept.c
+@@ -1615,9 +1615,39 @@ static int next_wgen(void)
+ 	return atomic_inc_return(&wgen) ?: atomic_inc_return(&wgen);
+ }
+ 
+-static void add_wait(struct dept_class *c, unsigned long ip,
+-		     const char *w_fn, int sub_l, bool sched_sleep,
+-		     bool timeout)
++/*
++ * XXX: This is a temporary patch needed until lockdep stops tracking
++ * dependency in wrong way.  lockdep has added an annotation to specify
++ * a callback to determin whether the given lock aquisition order is
++ * okay or not in its own way.  Even though dept is already working
++ * correctly with sub class on that issue, it needs to be aware of the
++ * annotation anyway.
++ */
++static bool lockdep_cmp_fn(struct dept_map *prev, struct dept_map *next)
++{
++	/*
++	 * Assumes the cmp_fn thing comes from struct lockdep_map.
++	 */
++	struct lockdep_map *p_lock = (struct lockdep_map *)prev->lockdep_map;
++	struct lockdep_map *n_lock = (struct lockdep_map *)next->lockdep_map;
++	struct lock_class *p_class = p_lock ? p_lock->class_cache[0] : NULL;
++	struct lock_class *n_class = n_lock ? n_lock->class_cache[0] : NULL;
++
++	if (!p_class || !n_class)
++		return false;
++
++	if (p_class != n_class)
++		return false;
++
++	if (!p_class->cmp_fn)
++		return false;
++
++	return p_class->cmp_fn(p_lock, n_lock) < 0;
++}
++
++static void add_wait(struct dept_map *m, struct dept_class *c,
++		unsigned long ip, const char *w_fn, int sub_l,
++		bool sched_sleep, bool timeout)
  {
- 	signed long ret;
+ 	struct dept_task *dt = dept_task();
+ 	struct dept_wait *w;
+@@ -1658,8 +1688,13 @@ static void add_wait(struct dept_class *c, unsigned long ip,
+ 		if (!eh->ecxt)
+ 			continue;
  
-@@ -550,7 +550,7 @@ dma_fence_wait_timeout(struct dma_fence *fence, bool intr, signed long timeout)
+-		if (eh->ecxt->class != c || eh->sub_l == sub_l)
+-			add_dep(eh->ecxt, w);
++		if (eh->ecxt->class == c && eh->sub_l != sub_l)
++			continue;
++
++		if (i == dt->ecxt_held_pos - 1 && lockdep_cmp_fn(eh->map, m))
++			continue;
++
++		add_dep(eh->ecxt, w);
  	}
- 	return ret;
- }
--EXPORT_SYMBOL(dma_fence_wait_timeout);
-+EXPORT_SYMBOL(__dma_fence_wait_timeout);
  
- /**
-  * dma_fence_release - default release function for fences
-@@ -786,7 +786,7 @@ dma_fence_default_wait_cb(struct dma_fence *fence, struct dma_fence_cb *cb)
- }
+ 	wg = next_wgen();
+@@ -2145,6 +2180,7 @@ void dept_map_init(struct dept_map *m, struct dept_key *k, int sub_u,
+ 	m->name = n;
+ 	m->wgen = 0U;
+ 	m->nocheck = !valid_key(k);
++	m->lockdep_map = NULL;
  
- /**
-- * dma_fence_default_wait - default sleep until the fence gets signaled
-+ * __dma_fence_default_wait - default sleep until the fence gets signaled
-  * or until timeout elapses
-  * @fence: the fence to wait on
-  * @intr: if true, do an interruptible wait
-@@ -798,7 +798,7 @@ dma_fence_default_wait_cb(struct dma_fence *fence, struct dma_fence_cb *cb)
-  * functions taking a jiffies timeout.
-  */
- signed long
--dma_fence_default_wait(struct dma_fence *fence, bool intr, signed long timeout)
-+__dma_fence_default_wait(struct dma_fence *fence, bool intr, signed long timeout)
- {
- 	struct default_wait_cb cb;
- 	unsigned long flags;
-@@ -847,7 +847,7 @@ dma_fence_default_wait(struct dma_fence *fence, bool intr, signed long timeout)
- 	spin_unlock_irqrestore(fence->lock, flags);
- 	return ret;
+ 	dept_exit_recursive(flags);
  }
--EXPORT_SYMBOL(dma_fence_default_wait);
-+EXPORT_SYMBOL(__dma_fence_default_wait);
+@@ -2366,7 +2402,7 @@ static void __dept_wait(struct dept_map *m, unsigned long w_f,
+ 		if (!c)
+ 			continue;
  
- static bool
- dma_fence_test_signaled_any(struct dma_fence **fences, uint32_t count,
-@@ -867,7 +867,7 @@ dma_fence_test_signaled_any(struct dma_fence **fences, uint32_t count,
+-		add_wait(c, ip, w_fn, sub_l, sched_sleep, timeout);
++		add_wait(m, c, ip, w_fn, sub_l, sched_sleep, timeout);
+ 	}
  }
  
- /**
-- * dma_fence_wait_any_timeout - sleep until any fence gets signaled
-+ * __dma_fence_wait_any_timeout - sleep until any fence gets signaled
-  * or until timeout elapses
-  * @fences: array of fences to wait on
-  * @count: number of fences to wait on
-@@ -887,7 +887,7 @@ dma_fence_test_signaled_any(struct dma_fence **fences, uint32_t count,
-  * See also dma_fence_wait() and dma_fence_wait_timeout().
-  */
- signed long
--dma_fence_wait_any_timeout(struct dma_fence **fences, uint32_t count,
-+__dma_fence_wait_any_timeout(struct dma_fence **fences, uint32_t count,
- 			   bool intr, signed long timeout, uint32_t *idx)
- {
- 	struct default_wait_cb *cb;
-@@ -955,7 +955,7 @@ dma_fence_wait_any_timeout(struct dma_fence **fences, uint32_t count,
+diff --git a/kernel/locking/lockdep.c b/kernel/locking/lockdep.c
+index 39b9e3e27c0b..c99f91f7a54d 100644
+--- a/kernel/locking/lockdep.c
++++ b/kernel/locking/lockdep.c
+@@ -5035,6 +5035,7 @@ void lockdep_set_lock_cmp_fn(struct lockdep_map *lock, lock_cmp_fn cmp_fn,
+ 		class->print_fn = print_fn;
+ 	}
  
- 	return ret;
++	dept_set_lockdep_map(&lock->dmap, lock);
+ 	lockdep_recursion_finish();
+ 	raw_local_irq_restore(flags);
  }
--EXPORT_SYMBOL(dma_fence_wait_any_timeout);
-+EXPORT_SYMBOL(__dma_fence_wait_any_timeout);
- 
- /**
-  * DOC: deadline hints
-diff --git a/include/linux/dma-fence.h b/include/linux/dma-fence.h
-index d4c92fd35092..3732849a30b7 100644
---- a/include/linux/dma-fence.h
-+++ b/include/linux/dma-fence.h
-@@ -370,8 +370,22 @@ bool dma_fence_check_and_signal_locked(struct dma_fence *fence);
- void dma_fence_signal_locked(struct dma_fence *fence);
- void dma_fence_signal_timestamp(struct dma_fence *fence, ktime_t timestamp);
- void dma_fence_signal_timestamp_locked(struct dma_fence *fence, ktime_t timestamp);
--signed long dma_fence_default_wait(struct dma_fence *fence,
-+signed long __dma_fence_default_wait(struct dma_fence *fence,
- 				   bool intr, signed long timeout);
-+
-+/*
-+ * Associate every caller with its own dept map.
-+ */
-+#define dma_fence_default_wait(f, intr, t)				\
-+({									\
-+	signed long __ret;						\
-+									\
-+	sdt_might_sleep_start_timeout(NULL, t);				\
-+	__ret = __dma_fence_default_wait(f, intr, t);			\
-+	sdt_might_sleep_end();						\
-+	__ret;								\
-+})
-+
- int dma_fence_add_callback(struct dma_fence *fence,
- 			   struct dma_fence_cb *cb,
- 			   dma_fence_func_t func);
-@@ -628,12 +642,37 @@ static inline ktime_t dma_fence_timestamp(struct dma_fence *fence)
- 	return fence->timestamp;
- }
- 
--signed long dma_fence_wait_timeout(struct dma_fence *,
-+signed long __dma_fence_wait_timeout(struct dma_fence *,
- 				   bool intr, signed long timeout);
--signed long dma_fence_wait_any_timeout(struct dma_fence **fences,
-+signed long __dma_fence_wait_any_timeout(struct dma_fence **fences,
- 				       uint32_t count,
- 				       bool intr, signed long timeout,
- 				       uint32_t *idx);
-+/*
-+ * Associate every caller with its own dept map.
-+ */
-+#define dma_fence_wait_timeout(f, intr, t)				\
-+({									\
-+	signed long __ret;						\
-+									\
-+	sdt_might_sleep_start_timeout(NULL, t);				\
-+	__ret = __dma_fence_wait_timeout(f, intr, t);			\
-+	sdt_might_sleep_end();						\
-+	__ret;								\
-+})
-+
-+/*
-+ * Associate every caller with its own dept map.
-+ */
-+#define dma_fence_wait_any_timeout(fpp, count, intr, t, idx)		\
-+({									\
-+	signed long __ret;						\
-+									\
-+	sdt_might_sleep_start_timeout(NULL, t);				\
-+	__ret = __dma_fence_wait_any_timeout(fpp, count, intr, t, idx);	\
-+	sdt_might_sleep_end();						\
-+	__ret;								\
-+})
- 
- /**
-  * dma_fence_wait - sleep until the fence gets signaled
-@@ -649,19 +688,24 @@ signed long dma_fence_wait_any_timeout(struct dma_fence **fences,
-  * fence might be freed before return, resulting in undefined behavior.
-  *
-  * See also dma_fence_wait_timeout() and dma_fence_wait_any_timeout().
-+ *
-+ * Associate every caller with its own dept map.
-  */
--static inline signed long dma_fence_wait(struct dma_fence *fence, bool intr)
--{
--	signed long ret;
--
--	/* Since dma_fence_wait_timeout cannot timeout with
--	 * MAX_SCHEDULE_TIMEOUT, only valid return values are
--	 * -ERESTARTSYS and MAX_SCHEDULE_TIMEOUT.
--	 */
--	ret = dma_fence_wait_timeout(fence, intr, MAX_SCHEDULE_TIMEOUT);
--
--	return ret < 0 ? ret : 0;
--}
-+#define dma_fence_wait(f, intr)						\
-+({									\
-+	signed long __ret;						\
-+									\
-+	sdt_might_sleep_start_timeout(NULL, MAX_SCHEDULE_TIMEOUT);	\
-+	__ret = __dma_fence_wait_timeout(f, intr, MAX_SCHEDULE_TIMEOUT);\
-+	sdt_might_sleep_end();						\
-+									\
-+	/*								\
-+	 * Since dma_fence_wait_timeout cannot timeout with		\
-+	 * MAX_SCHEDULE_TIMEOUT, only valid return values are		\
-+	 * -ERESTARTSYS and MAX_SCHEDULE_TIMEOUT.			\
-+	 */								\
-+	__ret < 0 ? __ret : 0;						\
-+})
- 
- void dma_fence_set_deadline(struct dma_fence *fence, ktime_t deadline);
- 
 -- 
 2.17.1
 
