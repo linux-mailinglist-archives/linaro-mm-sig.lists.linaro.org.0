@@ -2,89 +2,67 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id bJRYBdXOTGpGqAEAu9opvQ
+	id 6lEDG5xwVmpd5gAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 07 Jul 2026 12:03:01 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 19:23:40 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 71A6C71A15B
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 07 Jul 2026 12:03:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 106677575E6
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 19:23:40 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=samsung.com header.s=mail20170921 header.b=RHCrShFX;
-	dmarc=fail reason="SPF not aligned (relaxed)" header.from=samsung.com (policy=none);
-	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org"
+	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=GcnzsePl;
+	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
+	dmarc=fail reason="SPF not aligned (relaxed)" header.from=kernel.org (policy=quarantine)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 75DFE40AB6
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  7 Jul 2026 10:02:59 +0000 (UTC)
-Received: from mailout2.w1.samsung.com (mailout2.w1.samsung.com [210.118.77.12])
-	by lists.linaro.org (Postfix) with ESMTPS id 408523F720
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  7 Jul 2026 10:02:49 +0000 (UTC)
-Received: from eucas1p1.samsung.com (unknown [182.198.249.206])
-	by mailout2.w1.samsung.com (KnoxPortal) with ESMTP id 20260707100248euoutp02c128470cd60985157ba2f1951ac410ba~-_b0ZdUlR0057200572euoutp02G;
-	Tue,  7 Jul 2026 10:02:48 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.w1.samsung.com 20260707100248euoutp02c128470cd60985157ba2f1951ac410ba~-_b0ZdUlR0057200572euoutp02G
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
-	s=mail20170921; t=1783418568;
-	bh=OASSxXJmGaDT/uwBYzqLU/UJt7dS4PW4F+eiwSUGvN0=;
-	h=Date:From:Subject:To:Cc:In-Reply-To:References:From;
-	b=RHCrShFX9Zi8e6102GUrdmlOX/rENJ+/+JuCky5tdn57zI6kqM/nq4spocntdRJKD
-	 cxPgadB2teIqAQFmTL+UKcTizeCAL0ubzPJa+xDu1F3MyMDbRsL1NOEyOPlSjJZo4G
-	 44B/fzM2C25EXEtbRRF8gVk2FDX0DehKHmBzMIF0=
-Received: from eusmtip2.samsung.com (unknown [203.254.199.222]) by
-	eucas1p1.samsung.com (KnoxPortal) with ESMTPA id
-	20260707100247eucas1p1439bac88cad923ef2478e1b2f63f9adc~-_b0IsPTq2255222552eucas1p19;
-	Tue,  7 Jul 2026 10:02:47 +0000 (GMT)
-Received: from [106.210.134.192] (unknown [106.210.134.192]) by
-	eusmtip2.samsung.com (KnoxPortal) with ESMTPA id
-	20260707100245eusmtip202869722a30826a0db562dfb7a375b13~-_bx0DY2s0196401964eusmtip2h;
-	Tue,  7 Jul 2026 10:02:45 +0000 (GMT)
-Message-ID: <3f47aeab-33b1-4966-a5ce-5d6d5261e0e2@samsung.com>
-Date: Tue, 7 Jul 2026 12:02:44 +0200
-MIME-Version: 1.0
-User-Agent: Betterbird (Windows)
-From: Marek Szyprowski <m.szyprowski@samsung.com>
-To: Thierry Reding <thierry.reding@kernel.org>, Rob Herring
-	<robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
-	<conor+dt@kernel.org>, Jonathan Hunter <jonathanh@nvidia.com>, Mikko
-	Perttunen <mperttunen@nvidia.com>, Yury Norov <yury.norov@gmail.com>, Rasmus
-	Villemoes <linux@rasmusvillemoes.dk>, Russell King <linux@armlinux.org.uk>,
-	Alexander Gordeev <agordeev@linux.ibm.com>, Gerald Schaefer
-	<gerald.schaefer@linux.ibm.com>, Heiko Carstens <hca@linux.ibm.com>, Vasily
-	Gorbik <gor@linux.ibm.com>, Christian Borntraeger
-	<borntraeger@linux.ibm.com>, Sven Schnelle <svens@linux.ibm.com>, Andrew
-	Morton <akpm@linux-foundation.org>, David Hildenbrand <david@kernel.org>,
-	Lorenzo Stoakes <ljs@kernel.org>, "Liam R. Howlett" <liam@infradead.org>,
-	Vlastimil Babka <vbabka@kernel.org>, Mike Rapoport <rppt@kernel.org>, Suren
-	Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>, Robin
-	Murphy <robin.murphy@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>,
-	Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey
-	<Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier"
-	<tjmercier@google.com>, =?UTF-8?Q?Christian_K=C3=B6nig?=
-	<christian.koenig@amd.com>, Steven Rostedt <rostedt@goodmis.org>, Masami
-	Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers
-	<mathieu.desnoyers@efficios.com>, Catalin Marinas <catalin.marinas@arm.com>,
-	Will Deacon <will@kernel.org>
-Content-Language: en-US
-In-Reply-To: <20260701-tegra-vpr-v3-6-d80f7b871bb4@nvidia.com>
-X-CMS-MailID: 20260707100247eucas1p1439bac88cad923ef2478e1b2f63f9adc
-X-Msg-Generator: CA
-X-RootMTR: 20260701160902eucas1p1214af933ba0f54b85630a3a4e5a4689c
-X-EPHeader: CA
-X-CMS-RootMailID: 20260701160902eucas1p1214af933ba0f54b85630a3a4e5a4689c
+	by lists.linaro.org (Postfix) with ESMTP id 2548A40470
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 17:23:39 +0000 (UTC)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+	by lists.linaro.org (Postfix) with ESMTPS id 30790402AC
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  7 Jul 2026 11:27:27 +0000 (UTC)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	by tor.source.kernel.org (Postfix) with ESMTP id 86039618B0;
+	Tue,  7 Jul 2026 11:27:26 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C559E1F00A3A;
+	Tue,  7 Jul 2026 11:27:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1783423646;
+	bh=aYNExvVjE68Bssuz6Q0Uk1wNO8ENlyByAV7s1CeJs/c=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=GcnzsePlke2sHPVKXFrpmfWgDPaoaXvAGDCsvjpqbfsyvtLlho3fWpXDj/uKbDk36
+	 29MbpRdO6rfO94xIsXtWVBLVNSFu0PRpK+8Q3N5xgWJ0OkZvieybMvgBUqMhb2gQ4l
+	 Ahv8XDpa/3PWbSrFZzHelbxOI04a8OSapHaj/zeLfsMzVDa3n5HsTdyC0YbOpI139d
+	 fBoWckCalPRK9vcu5ifrE9IuraW6MqY6Q5ge3UN3DrPMz67mVJTxLFQXEVChjUNePg
+	 j6GuAFSVjQX9tNj/p8+7XZT6WNDH+X3gTCGkYbSR/BFOoYlGChu7c6d+b+RUXalLPP
+	 aFzzC3Jb5OcTA==
+Date: Tue, 7 Jul 2026 12:27:13 +0100
+From: Will Deacon <will@kernel.org>
+To: Thierry Reding <thierry.reding@kernel.org>
+Message-ID: <akzikTrmhMsvkNVY@willie-the-truck>
 References: <20260701-tegra-vpr-v3-0-d80f7b871bb4@nvidia.com>
-	<CGME20260701160902eucas1p1214af933ba0f54b85630a3a4e5a4689c@eucas1p1.samsung.com>
-	<20260701-tegra-vpr-v3-6-d80f7b871bb4@nvidia.com>
-X-Spamd-Bar: -------
-Message-ID-Hash: LKVNHQMKOLCPPVA7ZYA6B7FIYECUT2WB
-X-Message-ID-Hash: LKVNHQMKOLCPPVA7ZYA6B7FIYECUT2WB
-X-MailFrom: m.szyprowski@samsung.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: devicetree@vger.kernel.org, linux-tegra@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-s390@vger.kernel.org, linux-mm@kvack.org, iommu@lists.linux.dev, linaro-mm-sig@lists.linaro.org, linux-trace-kernel@vger.kernel.org
+ <20260701-tegra-vpr-v3-4-d80f7b871bb4@nvidia.com>
+ <akYs91INHMXMTI-t@willie-the-truck>
+ <akZkuwktaXFTrASP@orome>
+ <akaSJ5D98w2cHqb6@orome>
+ <akftuw9NyRy36fXA@willie-the-truck>
+ <akuvyu1Pq0ZVMZV0@orome>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <akuvyu1Pq0ZVMZV0@orome>
+X-Spamd-Bar: ------
+X-MailFrom: will@kernel.org
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+Message-ID-Hash: ROUWNPBMXVKG2IDUQHN2NBZ7XQA35IDJ
+X-Message-ID-Hash: ROUWNPBMXVKG2IDUQHN2NBZ7XQA35IDJ
+X-Mailman-Approved-At: Tue, 14 Jul 2026 17:18:31 +0000
+CC: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Jonathan Hunter <jonathanh@nvidia.com>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Sowjanya Komatineni <skomatineni@nvidia.com>, Luca Ceresoli <luca.ceresoli@bootlin.com>, Mikko Perttunen <mperttunen@nvidia.com>, Yury Norov <yury.norov@gmail.com>, Rasmus Villemoes <linux@rasmusvillemoes.dk>, Russell King <linux@armlinux.org.uk>, Alexander Gordeev <agordeev@linux.ibm.com>, Gerald Schaefer <gerald.schaefer@linux.ibm.com>, Heiko Carstens <hca@linux.ibm.com>, Vasily Gorbik <gor@linux.ibm.com>, Christian Borntraeger <borntraeger@linux.ibm.com>, Sven Schnelle <svens@linux.ibm.com>, Andrew Morton <akpm@linux-foundation.org>, David Hildenbrand <david@kernel.org>, Lorenzo Stoakes <ljs@kernel.org>, "Liam R. Howlett" <liam@infrade
+ ad.org>, Vlastimil Babka <vbabka@kernel.org>, Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>, Robin Murphy <robin.murphy@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Steven Rostedt <rostedt@goodmis.org>, Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Catalin Marinas <catalin.marinas@arm.com>, Thierry Reding <thierry.reding@gmail.com>, devicetree@vger.kernel.org, linux-tegra@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-s390@vger.kernel.org, linux-mm@kvack.org, iommu@lists.linux.dev, linaro-mm-sig@lists.linaro.org, linux-trace-kernel@vger.kernel.org,
+  Thierry Reding <treding@nvidia.com>, Chun Ng <chunn@nvidia.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3 06/11] mm/cma: Allow dynamically creating CMA areas
+Subject: [Linaro-mm-sig] Re: [PATCH v3 04/11] arm64/mm: Add set_memory_device() and set_memory_normal()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LKVNHQMKOLCPPVA7ZYA6B7FIYECUT2WB/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ROUWNPBMXVKG2IDUQHN2NBZ7XQA35IDJ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -94,428 +72,136 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [2.10 / 15.00];
+X-Spamd-Result: default: False [4.99 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
 	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[samsung.com:s=mail20170921];
-	R_SPF_ALLOW(-0.20)[+mx];
+	R_DKIM_REJECT(1.00)[kernel.org:s=k20260515];
+	DATE_IN_PAST(1.00)[173];
+	MID_RHS_NOT_FQDN(0.50)[];
 	MAILLIST(-0.20)[mailman];
-	DMARC_POLICY_SOFTFAIL(0.10)[samsung.com : SPF not aligned (relaxed),none];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MIME_GOOD(-0.10)[text/plain];
-	XM_UA_NO_VERSION(0.01)[];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
 	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[46];
+	FORGED_RECIPIENTS(0.00)[m:thierry.reding@kernel.org,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:jonathanh@nvidia.com,m:airlied@gmail.com,m:simona@ffwll.ch,m:maarten.lankhorst@linux.intel.com,m:mripard@kernel.org,m:tzimmermann@suse.de,m:skomatineni@nvidia.com,m:luca.ceresoli@bootlin.com,m:mperttunen@nvidia.com,m:yury.norov@gmail.com,m:linux@rasmusvillemoes.dk,m:linux@armlinux.org.uk,m:agordeev@linux.ibm.com,m:gerald.schaefer@linux.ibm.com,m:hca@linux.ibm.com,m:gor@linux.ibm.com,m:borntraeger@linux.ibm.com,m:svens@linux.ibm.com,m:akpm@linux-foundation.org,m:david@kernel.org,m:ljs@kernel.org,m:liam@infrade ad.org,m:vbabka@kernel.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:robin.murphy@arm.com,m:sumit.semwal@linaro.org,m:benjamin.gaignard@collabora.com,m:Brian.Starkey@arm.com,m:jstultz@google.com,m:tjmercier@google.com,m:christian.koenig@amd.com,m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:catalin.marinas@arm.com,m:t
+ hierry.reding@gmail.com,m:devicetree@vger.kernel.org,m:linux-tegra@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linux-media@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:linux-s390@vger.kernel.org,m:linux-mm@kvack.org,m:iommu@lists.linux.dev,m:linaro-mm-sig@lists.linaro.org,m:linux-trace-kernel@vger.kernel.org,m:treding@nvidia.com,m:chunn@nvidia.com,m:krzk@kernel.org,m:conor@kernel.org,m:yurynorov@gmail.com,m:thierryreding@gmail.com,s:lists@lfdr.de];
+	GREYLIST(0.00)[pass,meta];
 	ARC_NA(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:thierry.reding@kernel.org,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:jonathanh@nvidia.com,m:mperttunen@nvidia.com,m:yury.norov@gmail.com,m:linux@rasmusvillemoes.dk,m:linux@armlinux.org.uk,m:agordeev@linux.ibm.com,m:gerald.schaefer@linux.ibm.com,m:hca@linux.ibm.com,m:gor@linux.ibm.com,m:borntraeger@linux.ibm.com,m:svens@linux.ibm.com,m:akpm@linux-foundation.org,m:david@kernel.org,m:ljs@kernel.org,m:liam@infradead.org,m:vbabka@kernel.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:robin.murphy@arm.com,m:sumit.semwal@linaro.org,m:benjamin.gaignard@collabora.com,m:Brian.Starkey@arm.com,m:jstultz@google.com,m:tjmercier@google.com,m:christian.koenig@amd.com,m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:catalin.marinas@arm.com,m:will@kernel.org,m:devicetree@vger.kernel.org,m:linux-tegra@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linux-media@vger.kernel.org,m:
- linux-arm-kernel@lists.infradead.org,m:linux-s390@vger.kernel.org,m:linux-mm@kvack.org,m:iommu@lists.linux.dev,m:linaro-mm-sig@lists.linaro.org,m:linux-trace-kernel@vger.kernel.org,m:krzk@kernel.org,m:conor@kernel.org,m:yurynorov@gmail.com,s:lists@lfdr.de];
-	FREEMAIL_TO(0.00)[kernel.org,nvidia.com,gmail.com,rasmusvillemoes.dk,armlinux.org.uk,linux.ibm.com,linux-foundation.org,infradead.org,google.com,suse.com,arm.com,linaro.org,collabora.com,amd.com,goodmis.org,efficios.com];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER(0.00)[m.szyprowski@samsung.com,linaro-mm-sig-bounces@lists.linaro.org];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FROM_NEQ_ENVFROM(0.00)[m.szyprowski@samsung.com,linaro-mm-sig-bounces@lists.linaro.org];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER(0.00)[will@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FORWARDED(0.00)[lists@lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[samsung.com:-];
+	DKIM_TRACE(0.00)[kernel.org:-];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[55];
 	ALIAS_RESOLVED(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[will@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FREEMAIL_CC(0.00)[kernel.org,nvidia.com,gmail.com,ffwll.ch,linux.intel.com,suse.de,bootlin.com,rasmusvillemoes.dk,armlinux.org.uk,linux.ibm.com,linux-foundation.org,infrade ad.org,google.com,suse.com,arm.com,linaro.org,collabora.com,amd.com,goodmis.org,efficios.com,vger.kernel.org,lists.freedesktop.org,lists.infradead.org,kvack.org,lists.linux.dev,lists.linaro.org];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig,dt];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,linaro.org:email,lists.linaro.org:from_smtp,lists.linaro.org:helo,lists.linaro.org:rdns]
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,nvidia.com:email,willie-the-truck:mid,lists.linaro.org:from_smtp,lists.linaro.org:helo,lists.linaro.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 71A6C71A15B
+X-Rspamd-Queue-Id: 106677575E6
 
-On 01.07.2026 18:08, Thierry Reding wrote:
-> From: Thierry Reding <treding@nvidia.com>
->
-> There is no technical reason why there should be a limited number of CMA
-> regions, so extract some code into helpers and use them to create extra
-> functions (cma_create() and cma_free()) that allow creating and freeing,
-> respectively, CMA regions dynamically at runtime.
+On Mon, Jul 06, 2026 at 03:49:24PM +0200, Thierry Reding wrote:
+> On Fri, Jul 03, 2026 at 06:13:31PM +0100, Will Deacon wrote:
+> > On Thu, Jul 02, 2026 at 06:41:23PM +0200, Thierry Reding wrote:
+> > > On Thu, Jul 02, 2026 at 03:46:44PM +0200, Thierry Reding wrote:
+> > > > On Thu, Jul 02, 2026 at 10:18:47AM +0100, Will Deacon wrote:
+> > > > > On Wed, Jul 01, 2026 at 06:08:15PM +0200, Thierry Reding wrote:
+> > > > > > From: Chun Ng <chunn@nvidia.com>
+> > > > > > 
+> > > > > > Add helpers to swap PROT_NORMAL and PROT_DEVICE_nGnRnE protection bits
+> > > > > > on a kernel-linear-map range.
+> > > > > 
+> > > > > That sounds like a really terrible idea. Why is this necessary and how
+> > > > > does it interact with things like load_unaligned_zeropad()?
+> > > > 
+> > > > This is necessary because once the memory controller has walled off the
+> > > > new memory region the CPU must not access it under any circumstances or
+> > > > it'll cause the CPU to lock up (I think technically it'll hit an SError
+> > > > but in practice that just means it'll freeze, as far as I can tell).
+> > > > 
+> > > > Probably doesn't interact well at all with load_unaligned_zeropad().
+> > > > 
+> > > > > I think you should unmap the memory from the linear map and memremap()
+> > > > > it instead.
+> > > > 
+> > > > Given that the memory can never be accessed by the CPU after the memory
+> > > > controller locks it down, I don't think we'll even need memremap(). The
+> > > > only thing we really need is the sg_table we hand out via the DMA BUFs
+> > > > so that they can be used by device drivers to program their DMA engines
+> > > > internally.
+> > > > 
+> > > > Looking through some of the architecture code around this, shouldn't we
+> > > > simply be using set_memory_encrypted() and set_memory_decrypted() for
+> > > > this? While they might've been created for slightly other use-cases,
+> > > > they seem to be doing exactly what we want (i.e. remove the page range
+> > > > from the linear mapping and flushing it, or restoring the valid bit and
+> > > > standard permissions, respectively).
+> > > 
+> > > Ah... I guess we can't do it because we're not in a realm world and so
+> > > the early checks in __set_memory_enc_dec() would return early and turn
+> > > it into a no-op.
+> > > 
+> > > How about if I extract a common helper and provide set_memory_p() and
+> > > set_memory_np() in terms of those. Those are available on x86 and
+> > > PowerPC as well, so fairly standard. I suppose at that point we're
+> > > closer to set_memory_valid().
+> > 
+> > Why not just call set_direct_map_invalid_noflush() +
+> > flush_tlb_kernel_range() for each page? We already have APIs for this.
+> 
+> Having a "standard" helper with a fixed and documented purposed seemed
+> like a preferable approach for this particular case. We also may want to
+> make the driver that uses this buildable as a module, in which case we'd
+> need to export these rather low-level APIs. And then there's also the
+> fact that we typically call this on a rather large region of memory
+> (usually something like 512 MiB), so doing it page-by-page is rather
+> suboptimal.
+> 
+> > The big challenge I see with any linear map manipulation, however, is
+> > that it will rely on can_set_direct_map() which likely means you need to
+> > give up some performance and/or security to make this work. Does memory
+> > become inaccesible dynamically at runtime? If not, the best bet would
+> > be to describe it as a carveout in the DT and mark it as "no-map" so
+> > we avoid mapping it in the first place.
+> 
+> VPR exists in two modes: static and resizable. For static VPR we do
+> exactly that: describe it as carveout in DT with no-map and deal with it
+> accordingly in the driver. Resizable VPR is for device that have small
+> amounts of RAM. Content-protected video playback will in the worst case
+> consume around 1.8 GiB of RAM, so we want to be able to reuse for other
+> purposes when VPR is unused on those devices. In that case, the memory
+> is also described as a reserved-memory region in DT, but it is marked as
+> reusable so that it can be managed by CMA.
+> 
+> The resize operation is fairly slow to begin with because we need to
+> stall the GPU and put it into reset before the operation, then take it
+> out of reset and resume it afterwards.
+> 
+> What kind of performance impact do you expect?
 
+You'll need to measure it, but we've seen reports of double-digit
+percentage regressions in performance and power. As I said, the problem
+is that you need to split the linear map to 4k page at runtime to unmap
+the dynamic carveout, but that isn't something that can be done on most
+CPUs. Therefore you end up having to use page-granular mappings for the
+entire thing, similarly to how 'rodata_full' drives can_set_direct_map()
+and the perf/power hit affects everything.
 
-Well, the technical reason for not creating cma regions dynamically at
-runtime is that on some architectures (like 32bit ARM) the early fixup
-for the region is needed to make it functional for DMA.
+It's hard to know what to suggest... I wonder if any of the memory
+hotplug logic could help here?
 
-
-I would add a comment about that in the cma_create() and ensure that its
-future callers explicitly depend on !ARM_32BIT.
-
-
-> The static array of CMA areas cannot be replaced by dynamically created
-> areas because for many of them, allocation must not fail and some cases
-> may need to initialize them before the slab allocator is even available.
-> To account for this, keep these "early" areas in a separate list and
-> track the dynamic areas in a separate list.
->
-> Signed-off-by: Thierry Reding <treding@nvidia.com>
-> ---
-> Changes in v3:
-> - rebase on top of recent linux-next, update kernel/dma/contiguous.c
-> - use kzalloc_obj() instead of kzalloc() with sizeof()
->
-> Changes in v2:
-> - rename fixed number of CMA areas to reflect their main use
-> - account for pages in dynamically allocated regions
-> ---
-> arch/arm/mm/dma-mapping.c | 2 +-
-> arch/s390/mm/init.c | 2 +-
-> include/linux/cma.h | 8 +-
-> kernel/dma/contiguous.c | 2 +-
-> mm/cma.c | 187 +++++++++++++++++++++++++++++++++++++---------
-> mm/cma.h | 5 +-
-> 6 files changed, 165 insertions(+), 41 deletions(-)
->
-> diff --git a/arch/arm/mm/dma-mapping.c b/arch/arm/mm/dma-mapping.c
-> index f9bc53b60f99..934952ab2102 100644
-> --- a/arch/arm/mm/dma-mapping.c
-> +++ b/arch/arm/mm/dma-mapping.c
-> @@ -254,7 +254,7 @@ struct dma_contig_early_reserve {
-> unsigned long size;
-> };
-> -static struct dma_contig_early_reserve dma_mmu_remap[MAX_CMA_AREAS] __initdata;
-> +static struct dma_contig_early_reserve dma_mmu_remap[MAX_EARLY_CMA_AREAS] __initdata;
-> static int dma_mmu_remap_num __initdata;
-> diff --git a/arch/s390/mm/init.c b/arch/s390/mm/init.c
-> index f07168a0d3dd..f8f78f1434ea 100644
-> --- a/arch/s390/mm/init.c
-> +++ b/arch/s390/mm/init.c
-> @@ -241,7 +241,7 @@ static int s390_cma_mem_notifier(struct notifier_block *nb,
-> mem_data.start = arg->start_pfn << PAGE_SHIFT;
-> mem_data.end = mem_data.start + (arg->nr_pages << PAGE_SHIFT);
-> if (action == MEM_GOING_OFFLINE)
-> - rc = cma_for_each_area(s390_cma_check_range, &mem_data);
-> + rc = cma_for_each_early_area(s390_cma_check_range, &mem_data);
-> return notifier_from_errno(rc);
-> }
-> diff --git a/include/linux/cma.h b/include/linux/cma.h
-> index 8555d38a97b1..fb7a4923c3ba 100644
-> --- a/include/linux/cma.h
-> +++ b/include/linux/cma.h
-> @@ -7,7 +7,7 @@
-> #include <linux/numa.h>
-> #ifdef CONFIG_CMA_AREAS
-> -#define MAX_CMA_AREAS CONFIG_CMA_AREAS
-> +#define MAX_EARLY_CMA_AREAS CONFIG_CMA_AREAS
-> #endif
-> #define CMA_MAX_NAME 64
-> @@ -57,8 +57,14 @@ struct page *cma_alloc_frozen_compound(struct cma *cma, unsigned int order);
-> bool cma_release_frozen(struct cma *cma, const struct page *pages,
-> unsigned long count);
-> +extern int cma_for_each_early_area(int (*it)(struct cma *cma, void *data), void *data);
-> extern int cma_for_each_area(int (*it)(struct cma *cma, void *data), void *data);
-> extern bool cma_intersects(struct cma *cma, unsigned long start, unsigned long end);
-> extern void cma_reserve_pages_on_error(struct cma *cma);
-> +
-> +extern struct cma *cma_create(phys_addr_t base, phys_addr_t size,
-> + unsigned int order_per_bit, const char *name);
-> +extern void cma_free(struct cma *cma);
-> +
-> #endif
-> diff --git a/kernel/dma/contiguous.c b/kernel/dma/contiguous.c
-> index f754079a287d..7975551f69b3 100644
-> --- a/kernel/dma/contiguous.c
-> +++ b/kernel/dma/contiguous.c
-> @@ -52,7 +52,7 @@
-> #define CMA_SIZE_MBYTES 0
-> #endif
-> -static struct cma *dma_contiguous_areas[MAX_CMA_AREAS];
-> +static struct cma *dma_contiguous_areas[MAX_EARLY_CMA_AREAS];
-> static unsigned int dma_contiguous_areas_num;
-> static int dma_contiguous_insert_area(struct cma *cma)
-> diff --git a/mm/cma.c b/mm/cma.c
-> index a13ce4999b39..f989e2e98594 100644
-> --- a/mm/cma.c
-> +++ b/mm/cma.c
-> @@ -34,7 +34,12 @@
-> #include "internal.h"
-> #include "cma.h"
-> -struct cma cma_areas[MAX_CMA_AREAS];
-> +static DEFINE_MUTEX(cma_lock);
-> +
-> +struct cma cma_early_areas[MAX_EARLY_CMA_AREAS];
-> +unsigned int cma_early_area_count;
-> +
-> +static LIST_HEAD(cma_areas);
-> unsigned int cma_area_count;
-> phys_addr_t cma_get_base(const struct cma *cma)
-> @@ -198,7 +203,6 @@ static void __init cma_activate_area(struct cma *cma)
-> free_reserved_page(pfn_to_page(pfn));
-> }
-> }
-> - totalcma_pages -= cma->count;
-> cma->available_count = cma->count = 0;
-> pr_err("CMA area %s could not be activated\n", cma->name);
-> }
-> @@ -207,8 +211,8 @@ static int __init cma_init_reserved_areas(void)
-> {
-> int i;
-> - for (i = 0; i < cma_area_count; i++)
-> - cma_activate_area(&cma_areas[i]);
-> + for (i = 0; i < cma_early_area_count; i++)
-> + cma_activate_area(&cma_early_areas[i]);
-> return 0;
-> }
-> @@ -219,41 +223,77 @@ void __init cma_reserve_pages_on_error(struct cma *cma)
-> set_bit(CMA_RESERVE_PAGES_ON_ERROR, &cma->flags);
-> }
-> +static void __init cma_init_area(struct cma *cma, const char *name,
-> + phys_addr_t size, unsigned int order_per_bit)
-> +{
-> + if (name)
-> + strscpy(cma->name, name);
-> + else
-> + snprintf(cma->name, CMA_MAX_NAME, "cma%d\n", cma_area_count);
-> +
-> + cma->available_count = cma->count = size >> PAGE_SHIFT;
-> + cma->order_per_bit = order_per_bit;
-> +
-> + INIT_LIST_HEAD(&cma->node);
-> +}
-> +
-> static int __init cma_new_area(const char *name, phys_addr_t size,
-> unsigned int order_per_bit,
-> struct cma **res_cma)
-> {
-> struct cma *cma;
-> - if (cma_area_count == ARRAY_SIZE(cma_areas)) {
-> + if (cma_early_area_count == ARRAY_SIZE(cma_early_areas)) {
-> pr_err("Not enough slots for CMA reserved regions!\n");
-> return -ENOSPC;
-> }
-> + mutex_lock(&cma_lock);
-> +
-> /*
-> * Each reserved area must be initialised later, when more kernel
-> * subsystems (like slab allocator) are available.
-> */
-> - cma = &cma_areas[cma_area_count];
-> - cma_area_count++;
-> + cma = &cma_early_areas[cma_early_area_count];
-> + cma_early_area_count++;
-> - if (name)
-> - strscpy(cma->name, name);
-> - else
-> - snprintf(cma->name, CMA_MAX_NAME, "cma%d\n", cma_area_count);
-> + cma_init_area(cma, name, size, order_per_bit);
-> - cma->available_count = cma->count = size >> PAGE_SHIFT;
-> - cma->order_per_bit = order_per_bit;
-> - *res_cma = cma;
-> totalcma_pages += cma->count;
-> + *res_cma = cma;
-> +
-> + mutex_unlock(&cma_lock);
-> return 0;
-> }
-> static void __init cma_drop_area(struct cma *cma)
-> {
-> + mutex_lock(&cma_lock);
-> totalcma_pages -= cma->count;
-> - cma_area_count--;
-> + cma_early_area_count--;
-> + mutex_unlock(&cma_lock);
-> +}
-> +
-> +static int __init cma_check_memory(phys_addr_t base, phys_addr_t size)
-> +{
-> + if (!size || !memblock_is_region_reserved(base, size))
-> + return -EINVAL;
-> +
-> + /*
-> + * CMA uses CMA_MIN_ALIGNMENT_BYTES as alignment requirement which
-> + * needs pageblock_order to be initialized. Let's enforce it.
-> + */
-> + if (!pageblock_order) {
-> + pr_err("pageblock_order not yet initialized. Called during early boot?\n");
-> + return -EINVAL;
-> + }
-> +
-> + /* ensure minimal alignment required by mm core */
-> + if (!IS_ALIGNED(base | size, CMA_MIN_ALIGNMENT_BYTES))
-> + return -EINVAL;
-> +
-> + return 0;
-> }
-> /**
-> @@ -276,22 +316,9 @@ int __init cma_init_reserved_mem(phys_addr_t base, phys_addr_t size,
-> struct cma *cma;
-> int ret;
-> - /* Sanity checks */
-> - if (!size || !memblock_is_region_reserved(base, size))
-> - return -EINVAL;
-> -
-> - /*
-> - * CMA uses CMA_MIN_ALIGNMENT_BYTES as alignment requirement which
-> - * needs pageblock_order to be initialized. Let's enforce it.
-> - */
-> - if (!pageblock_order) {
-> - pr_err("pageblock_order not yet initialized. Called during early boot?\n");
-> - return -EINVAL;
-> - }
-> -
-> - /* ensure minimal alignment required by mm core */
-> - if (!IS_ALIGNED(base | size, CMA_MIN_ALIGNMENT_BYTES))
-> - return -EINVAL;
-> + ret = cma_check_memory(base, size);
-> + if (ret < 0)
-> + return ret;
-> ret = cma_new_area(name, size, order_per_bit, &cma);
-> if (ret != 0)
-> @@ -444,7 +471,7 @@ static int __init __cma_declare_contiguous_nid(phys_addr_t *basep,
-> pr_debug("%s(size %pa, base %pa, limit %pa alignment %pa)\n",
-> __func__, &size, &base, &limit, &alignment);
-> - if (cma_area_count == ARRAY_SIZE(cma_areas)) {
-> + if (cma_early_area_count == ARRAY_SIZE(cma_early_areas)) {
-> pr_err("Not enough slots for CMA reserved regions!\n");
-> return -ENOSPC;
-> }
-> @@ -1051,12 +1078,12 @@ bool cma_release_frozen(struct cma *cma, const struct page *pages,
-> return true;
-> }
-> -int cma_for_each_area(int (*it)(struct cma *cma, void *data), void *data)
-> +int cma_for_each_early_area(int (*it)(struct cma *cma, void *data), void *data)
-> {
-> int i;
-> - for (i = 0; i < cma_area_count; i++) {
-> - int ret = it(&cma_areas[i], data);
-> + for (i = 0; i < cma_early_area_count; i++) {
-> + int ret = it(&cma_early_areas[i], data);
-> if (ret)
-> return ret;
-> @@ -1065,6 +1092,25 @@ int cma_for_each_area(int (*it)(struct cma *cma, void *data), void *data)
-> return 0;
-> }
-> +int cma_for_each_area(int (*it)(struct cma *cma, void *data), void *data)
-> +{
-> + struct cma *cma;
-> +
-> + mutex_lock(&cma_lock);
-> +
-> + list_for_each_entry(cma, &cma_areas, node) {
-> + int ret = it(cma, data);
-> +
-> + if (ret) {
-> + mutex_unlock(&cma_lock);
-> + return ret;
-> + }
-> + }
-> +
-> + mutex_unlock(&cma_lock);
-> + return 0;
-> +}
-> +
-> bool cma_intersects(struct cma *cma, unsigned long start, unsigned long end)
-> {
-> int r;
-> @@ -1147,3 +1193,74 @@ void __init *cma_reserve_early(struct cma *cma, unsigned long size)
-> return ret;
-> }
-> +
-> +struct cma *__init cma_create(phys_addr_t base, phys_addr_t size,
-> + unsigned int order_per_bit, const char *name)
-> +{
-> + struct cma *cma;
-> + int ret;
-> +
-> + ret = cma_check_memory(base, size);
-> + if (ret < 0)
-> + return ERR_PTR(ret);
-> +
-> + cma = kzalloc_obj(*cma, GFP_KERNEL);
-> + if (!cma)
-> + return ERR_PTR(-ENOMEM);
-> +
-> + cma_init_area(cma, name, size, order_per_bit);
-> + cma->ranges[0].base_pfn = PFN_DOWN(base);
-> + cma->ranges[0].early_pfn = PFN_DOWN(base);
-> + cma->ranges[0].count = cma->count;
-> + cma->nranges = 1;
-> +
-> + cma_activate_area(cma);
-> +
-> + mutex_lock(&cma_lock);
-> + list_add_tail(&cma->node, &cma_areas);
-> + totalcma_pages += cma->count;
-> + cma_area_count++;
-> + mutex_unlock(&cma_lock);
-> +
-> + return cma;
-> +}
-> +
-> +void cma_free(struct cma *cma)
-> +{
-> + unsigned int i;
-> +
-> + /*
-> + * Safety check to prevent a CMA with active allocations from being
-> + * released.
-> + */
-> + for (i = 0; i < cma->nranges; i++) {
-> + unsigned long nbits = cma_bitmap_maxno(cma, &cma->ranges[i]);
-> +
-> + if (!bitmap_empty(cma->ranges[i].bitmap, nbits)) {
-> + WARN(1, "%s: range %u not empty\n", cma->name, i);
-> + return;
-> + }
-> + }
-> +
-> + /* free reserved pages and the bitmap */
-> + for (i = 0; i < cma->nranges; i++) {
-> + struct cma_memrange *cmr = &cma->ranges[i];
-> + unsigned long end_pfn, pfn;
-> +
-> + end_pfn = cmr->base_pfn + cmr->count;
-> + for (pfn = cmr->base_pfn; pfn < end_pfn; pfn++)
-> + free_reserved_page(pfn_to_page(pfn));
-> +
-> + bitmap_free(cmr->bitmap);
-> + }
-> +
-> + mutex_destroy(&cma->alloc_mutex);
-> +
-> + mutex_lock(&cma_lock);
-> + totalcma_pages -= cma->count;
-> + list_del(&cma->node);
-> + cma_area_count--;
-> + mutex_unlock(&cma_lock);
-> +
-> + kfree(cma);
-> +}
-> diff --git a/mm/cma.h b/mm/cma.h
-> index c70180c36559..ae4db9819e38 100644
-> --- a/mm/cma.h
-> +++ b/mm/cma.h
-> @@ -41,6 +41,7 @@ struct cma {
-> unsigned long available_count;
-> unsigned int order_per_bit; /* Order of pages represented by one bit */
-> spinlock_t lock;
-> + struct list_head node;
-> struct mutex alloc_mutex;
-> #ifdef CONFIG_CMA_DEBUGFS
-> struct hlist_head mem_head;
-> @@ -71,8 +72,8 @@ enum cma_flags {
-> CMA_ACTIVATED,
-> };
-> -extern struct cma cma_areas[MAX_CMA_AREAS];
-> -extern unsigned int cma_area_count;
-> +extern struct cma cma_early_areas[MAX_EARLY_CMA_AREAS];
-> +extern unsigned int cma_early_area_count;
-> static inline unsigned long cma_bitmap_maxno(struct cma *cma,
-> struct cma_memrange *cmr)
->
-Best regards
-
--- 
-Marek Szyprowski, PhD
-Samsung R&D Institute Poland
-
+Will
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
