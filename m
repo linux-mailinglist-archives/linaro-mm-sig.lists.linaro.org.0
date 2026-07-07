@@ -2,201 +2,520 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id avuVAJNwVmpa5gAAu9opvQ
+	id bJRYBdXOTGpGqAEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 19:23:31 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 07 Jul 2026 12:03:01 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8A0E97575E3
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 19:23:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 71A6C71A15B
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 07 Jul 2026 12:03:00 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=igalia.com header.s=20170329 header.b=R6aAGpId;
-	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
-	dmarc=fail reason="SPF not aligned (relaxed)" header.from=igalia.com (policy=none)
+	dkim=fail ("body hash did not verify") header.d=samsung.com header.s=mail20170921 header.b=RHCrShFX;
+	dmarc=fail reason="SPF not aligned (relaxed)" header.from=samsung.com (policy=none);
+	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org"
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A1426401D8
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 17:23:29 +0000 (UTC)
-Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
-	by lists.linaro.org (Postfix) with ESMTPS id 502D23F720
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  7 Jul 2026 09:22:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
-	s=20170329; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
-	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=5FTi8Mcjhkp1s4ZA67gqJXo3xQL1HNlKoGId7XEzJC0=; b=R6aAGpIdsRbOWzvrYHCu5CWmtZ
-	D0q24Ya9J3+WSEUhWooOEvEKpxlMVSa53pcYD5+0a8d+n+SKFoYqrChB/IIWBpb0SGA7aI/H2Nf/3
-	l/Naw8SsdtDGVrz80gOTpFLS0g0YfZcMUW04iyAscahFi1CfHywfBe3NZ0dWaWdx4o/D2qlEbQI6Y
-	Qfwu6sB8qqPFHvN6KlwVVtxX8jbbkw6g3Yc9a1Z4/zUXKtZcjyQljKIhcXssJ6xOKaNb4pcusXg1Z
-	AxgXoQJ9n4gZg8FppVoeM0noW6+VFREVM2p4VkbFmssPc7YqteC/yQnlAiWBQiCxGrp84JybsI0mR
-	uXtxlbqg==;
-Received: from [90.240.106.137] (helo=[192.168.0.116])
-	by fanzine2.igalia.com with esmtpsa
-	(Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim)
-	id 1wh204-00AWD1-1l; Tue, 07 Jul 2026 11:21:56 +0200
-Message-ID: <9e6c5123-f8b2-4a06-9fb0-be84c39ddd77@igalia.com>
-Date: Tue, 7 Jul 2026 10:21:54 +0100
+	by lists.linaro.org (Postfix) with ESMTP id 75DFE40AB6
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  7 Jul 2026 10:02:59 +0000 (UTC)
+Received: from mailout2.w1.samsung.com (mailout2.w1.samsung.com [210.118.77.12])
+	by lists.linaro.org (Postfix) with ESMTPS id 408523F720
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  7 Jul 2026 10:02:49 +0000 (UTC)
+Received: from eucas1p1.samsung.com (unknown [182.198.249.206])
+	by mailout2.w1.samsung.com (KnoxPortal) with ESMTP id 20260707100248euoutp02c128470cd60985157ba2f1951ac410ba~-_b0ZdUlR0057200572euoutp02G;
+	Tue,  7 Jul 2026 10:02:48 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.w1.samsung.com 20260707100248euoutp02c128470cd60985157ba2f1951ac410ba~-_b0ZdUlR0057200572euoutp02G
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+	s=mail20170921; t=1783418568;
+	bh=OASSxXJmGaDT/uwBYzqLU/UJt7dS4PW4F+eiwSUGvN0=;
+	h=Date:From:Subject:To:Cc:In-Reply-To:References:From;
+	b=RHCrShFX9Zi8e6102GUrdmlOX/rENJ+/+JuCky5tdn57zI6kqM/nq4spocntdRJKD
+	 cxPgadB2teIqAQFmTL+UKcTizeCAL0ubzPJa+xDu1F3MyMDbRsL1NOEyOPlSjJZo4G
+	 44B/fzM2C25EXEtbRRF8gVk2FDX0DehKHmBzMIF0=
+Received: from eusmtip2.samsung.com (unknown [203.254.199.222]) by
+	eucas1p1.samsung.com (KnoxPortal) with ESMTPA id
+	20260707100247eucas1p1439bac88cad923ef2478e1b2f63f9adc~-_b0IsPTq2255222552eucas1p19;
+	Tue,  7 Jul 2026 10:02:47 +0000 (GMT)
+Received: from [106.210.134.192] (unknown [106.210.134.192]) by
+	eusmtip2.samsung.com (KnoxPortal) with ESMTPA id
+	20260707100245eusmtip202869722a30826a0db562dfb7a375b13~-_bx0DY2s0196401964eusmtip2h;
+	Tue,  7 Jul 2026 10:02:45 +0000 (GMT)
+Message-ID: <3f47aeab-33b1-4966-a5ce-5d6d5261e0e2@samsung.com>
+Date: Tue, 7 Jul 2026 12:02:44 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: phasta@kernel.org, Tvrtko Ursulin <tursulin@ursulin.net>,
- Matthew Brost <matthew.brost@intel.com>, Danilo Krummrich <dakr@kernel.org>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Sumit Semwal <sumit.semwal@linaro.org>, Marco Pagani
- <marco.pagani@linux.dev>, Boris Brezillon <boris.brezillon@collabora.com>
-References: <20260701085920.3253248-2-phasta@kernel.org>
- <20260701085920.3253248-3-phasta@kernel.org>
- <a4091099-1931-4ca2-a81a-9c3321b123a8@ursulin.net>
- <51fbde808bd059510d667d130afae179626303be.camel@mailbox.org>
- <ce33edbb-11dd-4722-bb87-d16155f35a75@igalia.com>
- <e9e12e30-80c1-4650-9d71-4107517bc956@igalia.com>
-Content-Language: en-GB
-From: Tvrtko Ursulin <tvrtko.ursulin@igalia.com>
-In-Reply-To: <e9e12e30-80c1-4650-9d71-4107517bc956@igalia.com>
-X-Spamd-Bar: ---
-X-MailFrom: tvrtko.ursulin@igalia.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 3ZEGRTKBXR3J4UEFAA5CZYM3573JS532
-X-Message-ID-Hash: 3ZEGRTKBXR3J4UEFAA5CZYM3573JS532
-X-Mailman-Approved-At: Tue, 14 Jul 2026 17:18:30 +0000
-CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+User-Agent: Betterbird (Windows)
+From: Marek Szyprowski <m.szyprowski@samsung.com>
+To: Thierry Reding <thierry.reding@kernel.org>, Rob Herring
+	<robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+	<conor+dt@kernel.org>, Jonathan Hunter <jonathanh@nvidia.com>, Mikko
+	Perttunen <mperttunen@nvidia.com>, Yury Norov <yury.norov@gmail.com>, Rasmus
+	Villemoes <linux@rasmusvillemoes.dk>, Russell King <linux@armlinux.org.uk>,
+	Alexander Gordeev <agordeev@linux.ibm.com>, Gerald Schaefer
+	<gerald.schaefer@linux.ibm.com>, Heiko Carstens <hca@linux.ibm.com>, Vasily
+	Gorbik <gor@linux.ibm.com>, Christian Borntraeger
+	<borntraeger@linux.ibm.com>, Sven Schnelle <svens@linux.ibm.com>, Andrew
+	Morton <akpm@linux-foundation.org>, David Hildenbrand <david@kernel.org>,
+	Lorenzo Stoakes <ljs@kernel.org>, "Liam R. Howlett" <liam@infradead.org>,
+	Vlastimil Babka <vbabka@kernel.org>, Mike Rapoport <rppt@kernel.org>, Suren
+	Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>, Robin
+	Murphy <robin.murphy@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>,
+	Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey
+	<Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier"
+	<tjmercier@google.com>, =?UTF-8?Q?Christian_K=C3=B6nig?=
+	<christian.koenig@amd.com>, Steven Rostedt <rostedt@goodmis.org>, Masami
+	Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers
+	<mathieu.desnoyers@efficios.com>, Catalin Marinas <catalin.marinas@arm.com>,
+	Will Deacon <will@kernel.org>
+Content-Language: en-US
+In-Reply-To: <20260701-tegra-vpr-v3-6-d80f7b871bb4@nvidia.com>
+X-CMS-MailID: 20260707100247eucas1p1439bac88cad923ef2478e1b2f63f9adc
+X-Msg-Generator: CA
+X-RootMTR: 20260701160902eucas1p1214af933ba0f54b85630a3a4e5a4689c
+X-EPHeader: CA
+X-CMS-RootMailID: 20260701160902eucas1p1214af933ba0f54b85630a3a4e5a4689c
+References: <20260701-tegra-vpr-v3-0-d80f7b871bb4@nvidia.com>
+	<CGME20260701160902eucas1p1214af933ba0f54b85630a3a4e5a4689c@eucas1p1.samsung.com>
+	<20260701-tegra-vpr-v3-6-d80f7b871bb4@nvidia.com>
+X-Spamd-Bar: -------
+Message-ID-Hash: LKVNHQMKOLCPPVA7ZYA6B7FIYECUT2WB
+X-Message-ID-Hash: LKVNHQMKOLCPPVA7ZYA6B7FIYECUT2WB
+X-MailFrom: m.szyprowski@samsung.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: devicetree@vger.kernel.org, linux-tegra@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-s390@vger.kernel.org, linux-mm@kvack.org, iommu@lists.linux.dev, linaro-mm-sig@lists.linaro.org, linux-trace-kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 1/5] drm/sched: Protect entity->last_scheduled with spinlock
+Subject: [Linaro-mm-sig] Re: [PATCH v3 06/11] mm/cma: Allow dynamically creating CMA areas
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3ZEGRTKBXR3J4UEFAA5CZYM3573JS532/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LKVNHQMKOLCPPVA7ZYA6B7FIYECUT2WB/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [3.19 / 15.00];
+X-Spamd-Result: default: False [2.10 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[igalia.com:s=20170329];
-	DATE_IN_PAST(1.00)[176];
+	R_DKIM_REJECT(1.00)[samsung.com:s=mail20170921];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx:c];
-	DMARC_POLICY_SOFTFAIL(0.10)[igalia.com : SPF not aligned (relaxed),none];
-	MIME_BASE64_TEXT(0.10)[];
+	DMARC_POLICY_SOFTFAIL(0.10)[samsung.com : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
+	XM_UA_NO_VERSION(0.01)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_RECIPIENTS(0.00)[m:phasta@kernel.org,m:tursulin@ursulin.net,m:matthew.brost@intel.com,m:dakr@kernel.org,m:ckoenig.leichtzumerken@gmail.com,m:maarten.lankhorst@linux.intel.com,m:mripard@kernel.org,m:tzimmermann@suse.de,m:airlied@gmail.com,m:simona@ffwll.ch,m:sumit.semwal@linaro.org,m:marco.pagani@linux.dev,m:boris.brezillon@collabora.com,m:dri-devel@lists.freedesktop.org,m:linux-kernel@vger.kernel.org,m:linux-media@vger.kernel.org,m:linaro-mm-sig@lists.linaro.org,m:ckoenigleichtzumerken@gmail.com,s:lists@lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[17];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER(0.00)[tvrtko.ursulin@igalia.com,linaro-mm-sig-bounces@lists.linaro.org];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[46];
 	ARC_NA(0.00)[];
-	FREEMAIL_TO(0.00)[kernel.org,ursulin.net,intel.com,gmail.com,linux.intel.com,suse.de,ffwll.ch,linaro.org,linux.dev,collabora.com];
+	FORGED_RECIPIENTS(0.00)[m:thierry.reding@kernel.org,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:jonathanh@nvidia.com,m:mperttunen@nvidia.com,m:yury.norov@gmail.com,m:linux@rasmusvillemoes.dk,m:linux@armlinux.org.uk,m:agordeev@linux.ibm.com,m:gerald.schaefer@linux.ibm.com,m:hca@linux.ibm.com,m:gor@linux.ibm.com,m:borntraeger@linux.ibm.com,m:svens@linux.ibm.com,m:akpm@linux-foundation.org,m:david@kernel.org,m:ljs@kernel.org,m:liam@infradead.org,m:vbabka@kernel.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:robin.murphy@arm.com,m:sumit.semwal@linaro.org,m:benjamin.gaignard@collabora.com,m:Brian.Starkey@arm.com,m:jstultz@google.com,m:tjmercier@google.com,m:christian.koenig@amd.com,m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:catalin.marinas@arm.com,m:will@kernel.org,m:devicetree@vger.kernel.org,m:linux-tegra@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linux-media@vger.kernel.org,m:
+ linux-arm-kernel@lists.infradead.org,m:linux-s390@vger.kernel.org,m:linux-mm@kvack.org,m:iommu@lists.linux.dev,m:linaro-mm-sig@lists.linaro.org,m:linux-trace-kernel@vger.kernel.org,m:krzk@kernel.org,m:conor@kernel.org,m:yurynorov@gmail.com,s:lists@lfdr.de];
+	FREEMAIL_TO(0.00)[kernel.org,nvidia.com,gmail.com,rasmusvillemoes.dk,armlinux.org.uk,linux.ibm.com,linux-foundation.org,infradead.org,google.com,suse.com,arm.com,linaro.org,collabora.com,amd.com,goodmis.org,efficios.com];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[m.szyprowski@samsung.com,linaro-mm-sig-bounces@lists.linaro.org];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[igalia.com:-];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[tvrtko.ursulin@igalia.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[m.szyprowski@samsung.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[samsung.com:-];
+	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,igalia.com:from_mime,igalia.com:mid,lists.linaro.org:from_smtp,lists.linaro.org:helo,lists.linaro.org:rdns]
+	TAGGED_RCPT(0.00)[linaro-mm-sig,dt];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,linaro.org:email,lists.linaro.org:from_smtp,lists.linaro.org:helo,lists.linaro.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 8A0E97575E3
+X-Rspamd-Queue-Id: 71A6C71A15B
 
-DQpPbiAwNi8wNy8yMDI2IDE1OjM3LCBUdnJ0a28gVXJzdWxpbiB3cm90ZToNCj4gDQo+IA0KPiBP
-biAwNi8wNy8yMDI2IDA5OjQ1LCBUdnJ0a28gVXJzdWxpbiB3cm90ZToNCj4+DQo+PiBPbiAwMy8w
-Ny8yMDI2IDE1OjQ3LCBQaGlsaXBwIFN0YW5uZXIgd3JvdGU6DQo+Pj4gT24gRnJpLCAyMDI2LTA3
-LTAzIGF0IDEyOjI3ICswMTAwLCBUdnJ0a28gVXJzdWxpbiB3cm90ZToNCj4gDQo+IDg+PA0KPiAN
-Cj4+Pj4gSSBhbSBhbHNvIGhhcHB5IHRvIGdpdmUgaXQgYSBzcGluIG9uIHRoZSBTdGVhbSBEZWNr
-IHRvIHNlZSBpZiBJIGNhbg0KPj4+PiBvYnNlcnZlIGFueXRoaW5nLg0KPj4+DQo+Pj4gQ291bGQg
-YmUgaW50ZXJlc3RpbmcuDQo+Pg0KPj4gT2theSBJJ2xsIHRyeSB0byBkbyBpdCBpbiByZWFzb25h
-YmxlIHRpbWUuIFlvdSBjYW4gZWl0aGVyIHJlc3BpbiBvciANCj4+IHdhaXQgZm9yIGl0LCBJIGRv
-bid0IG1pbmQgZWl0aGVyIHdheS4NCj4gDQo+IE9uIHRoZSB0b3BpYyBvZiBiZW5jaG1hcmtpbmcs
-IEkgZ2F2ZSBpdCBhIHF1aWNrIHNwaW4gYWdhaW5zdCBmb3VyIHVuc3luYyANCj4gaW5zdGFuY2Vz
-IG9mIHZrZ2VhcnMuIFBvaW50IGJlaW5nIHNlZWluZyBpZiBzb21ldGhpbmcgY2FuIGJlIHNob3du
-IG9uIA0KPiBtb3JlIGRhdGFjZW50ZXIgZGVwbG95bWVudHMgd2l0aCBtYW55IGNvcmVzIHN1Ym1p
-dHRpbmcgYW5kIGxhcmdlIA0KPiBhZ2dyZWdhdGUgImZwcyIuDQo+IA0KPiB4IHN0b2NrLmZwcw0K
-PiArIHBoYXN0YS5mcHMNCj4gKy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0rDQo+IHzCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgICvCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgIHwNCj4gfMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqAgK8KgICsrwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfA0KPiB8wqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCArwqAgKyvCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8
-DQo+IHzCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCArwqDCoCAr
-wqAgKysgK8KgIHjCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgIHwNCj4gfMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgICsgKyArwqAgKysgK8KgIHjCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHwNCj4gfMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgICvCoCArKysgKyArKysgK8KgIHjCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHwNCj4g
-fMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgICvCoCArKysgKysrKysgK3gg
-eMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqAgfA0KPiB8wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgK8Kg
-ICsrKyArKysrKysreCB4ICrCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqAgfA0KPiB8wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgICsrwqAgKysrICsrKysrKyt4ICp4Knh4wqDCoMKgIHjCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHwNCj4gfMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoCArK8KgICsrK3grKysrKysreHgqeCoqeMKgwqDCoCB4wqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8DQo+IHzCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqAgKyvCoCArKisqKysrKisrK3h4KngqKiogeCB4eMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfA0KPiB8wqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoCB4wqAgKysrwqAgKyorKisqKyoqKyp4KioqKioqeHh4eHjCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHwNCj4gfMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqAgeMKgIHh4KiorK8KgICoqKyorKioqKisqKioqKioqKnh4eHh4IHjCoMKgwqAg
-eMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHwNCj4gfMKgwqDCoMKgwqDCoMKgIHjC
-oCAreHggeHgqKisrICsqKioqKioqKioqKioqKioqKip4eHh4eHh4IHjCoCB4eMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoCB8DQo+IHzCoMKgwqDCoMKgIHggeHh4Kip4IHgqKioqKioqKioq
-KioqKioqKioqKioqKioqKnh4Knh4eCB4eHh4eMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oCB8DQo+IHx4eMKgwqDCoCB4eHh4eCoqeCoqKioqKioqKioqKioqKioqKioqKioqKioqKioqeCoq
-eCoqeCp4KnjCoMKgIHggeCB4wqAgeMKgwqDCoCB4fA0KPiB8wqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqAgfHxfX19fX19fQV9fX0FfTXxfX19fX19fX3zCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHwNCj4gKy0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0rDQo+
-ICDCoMKgwqAgTsKgwqDCoMKgwqDCoMKgwqDCoMKgIE1pbsKgwqDCoMKgwqDCoMKgwqDCoMKgIE1h
-eMKgwqDCoMKgwqDCoMKgIE1lZGlhbsKgwqDCoMKgwqDCoMKgwqDCoMKgIEF2ZyAgICAgICAgDQo+
-IFN0ZGRldg0KPiB4IDIxOMKgwqDCoMKgwqAgNTQ0Ni45ODTCoMKgwqDCoMKgIDU4NjIuNTc4wqDC
-oMKgwqDCoCA1NjU2LjEyMcKgwqDCoMKgIDU2NDIuOTQyOcKgwqDCoMKgIDc2LjY2NzYxMw0KPiAr
-IDIyN8KgwqDCoMKgwqAgNTUxMC40MzLCoMKgwqDCoMKgIDU3NjIuOTI2wqDCoMKgwqDCoCA1NjIw
-Ljk5OcKgwqDCoMKgIDU2MjAuMzU4NcKgwqDCoMKgIDQ1LjQwNzIzNQ0KPiBEaWZmZXJlbmNlIGF0
-IDk1LjAlIGNvbmZpZGVuY2UNCj4gIMKgwqDCoMKgLTIyLjU4NDQgKy8tIDExLjY1MzQNCj4gIMKg
-wqDCoMKgLTAuNDAwMjI0JSArLy0gMC4yMDY1MTMlDQo+ICDCoMKgwqDCoChTdHVkZW50J3MgdCwg
-cG9vbGVkIHMgPSA2Mi42OTg1KQ0KPiANCj4gTnVtYmVycyBhcmUgYXZlcmFnZSBGUFMgcGVyIHZr
-Z2VhcnMgaW5zdGFuY2UuIFRvdGFsIHJ1biBlYWNoIGlzIGFyb3VuZCANCj4gNDAgc2Vjb25kcy4N
-Cj4gDQo+IE1vcmUgbG9ja2luZyBkb2VzIGFwcGVhciB0byBzaG93IGEgc21hbGwgZGVjcmVhc2Ug
-aW4gdGhyb3VnaHB1dCBhbmQsIA0KPiBjdXJpb3VzbHksIGEgdGlnaHRlciByYW5nZSBiZXR3ZWVu
-IG1pbiBhbmQgbWF4LiBXaGV0aGVyIG9yIG5vdCB0aGF0IGlzIA0KPiB0ZWxsaW5nIHVzIHNvbWV0
-aGluZyBhYm91dCB0aGUgbG9jayBjeWNsZXMgYW5kIGludGVyIGNvcmUgDQo+IHN5bmNocm9uaXNh
-dGlvbiBJIGFtIG5vdCBzdXJlLiBDb3VsZCBiZSBqdXN0IG5vaXNlIGFuZCB0aGF0IG1vcmUgcnVu
-cyANCj4gYXJlIG5lZWRlZC4gSSBjYW4gZG8gdGhhdCB0b21vcnJvdy4NCg0KSSB0aGluayBpdCdz
-IG5vaXNlLiBSZXBlYXRlZCBtdWNoIGxvbmdlciBydW4sIHdpdGggZG91YmxlIHRoZSBjbGllbnRz
-LCANCmFuZCB0aGlzIHRpbWUgcm91bmQgZ290IHRoaXM6DQoNCiAgICAgTiAgICAgICAgICAgTWlu
-ICAgICAgICAgICBNYXggICAgICAgIE1lZGlhbiAgICAgICAgICAgQXZnICAgICAgICBTdGRkZXYN
-CnggOTAwICAgICAgMjQ4My43NTEgICAgICAyNzk2LjMzOSAgICAgIDI2MjAuMTg0ICAgICAyNjIz
-LjM2ODQgICAgIDQ5Ljg1MDY1MQ0KKyA5MDAgICAgICAyNDk2LjkyNiAgICAgIDI3NzMuNjQyICAg
-ICAgMjYzMy4xMTQgICAgIDI2MzIuOTk0OSAgICAgNDguODQ4Njc1DQpEaWZmZXJlbmNlIGF0IDk1
-LjAlIGNvbmZpZGVuY2UNCgk5LjYyNjUgKy8tIDQuNTU5OTENCgkwLjM2Njk1MiUgKy8tIDAuMTcz
-ODE5JQ0KCShTdHVkZW50J3MgdCwgcG9vbGVkIHMgPSA0OS4zNTIyKQ0KDQpTbyBpdCBmbGlwLWZs
-b3BwZWQgY29tcGFyZWQgdG8gdGhlIGxhc3QgcnVuIHdpdGggYSBzaW1pbGFyIHJlbGF0aXZlIA0K
-ZGlmZmVyZW5jZS4NCg0KVGhlcmVmb3JlLCBmb3Igd2hhdCBJIGFtIGNvbmNlcm5lZCwgaXQgaXMg
-b2theSB0byBnbyBhaGVhZCB3aXRoIHRoaXMgDQpzaW1wbGlmaWNhdGlvbi4gQXBhcnQgZnJvbSB0
-aGUgaW1wcm92ZWQgY29tbWl0IG1lc3NhZ2UgSSB0aGluayBDaHJpc3RpYW4gDQpzaG91bGQgc3Rp
-bGwgYWNrIG9uIGJlaGFsZiBvZiBBTUQgdGhvdWdoLg0KDQpSZWdhcmRzLA0KDQpUdnJ0a28NCg0K
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1t
-LXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVu
-c3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5h
-cm8ub3JnCg==
+On 01.07.2026 18:08, Thierry Reding wrote:
+> From: Thierry Reding <treding@nvidia.com>
+>
+> There is no technical reason why there should be a limited number of CMA
+> regions, so extract some code into helpers and use them to create extra
+> functions (cma_create() and cma_free()) that allow creating and freeing,
+> respectively, CMA regions dynamically at runtime.
+
+
+Well, the technical reason for not creating cma regions dynamically at
+runtime is that on some architectures (like 32bit ARM) the early fixup
+for the region is needed to make it functional for DMA.
+
+
+I would add a comment about that in the cma_create() and ensure that its
+future callers explicitly depend on !ARM_32BIT.
+
+
+> The static array of CMA areas cannot be replaced by dynamically created
+> areas because for many of them, allocation must not fail and some cases
+> may need to initialize them before the slab allocator is even available.
+> To account for this, keep these "early" areas in a separate list and
+> track the dynamic areas in a separate list.
+>
+> Signed-off-by: Thierry Reding <treding@nvidia.com>
+> ---
+> Changes in v3:
+> - rebase on top of recent linux-next, update kernel/dma/contiguous.c
+> - use kzalloc_obj() instead of kzalloc() with sizeof()
+>
+> Changes in v2:
+> - rename fixed number of CMA areas to reflect their main use
+> - account for pages in dynamically allocated regions
+> ---
+> arch/arm/mm/dma-mapping.c | 2 +-
+> arch/s390/mm/init.c | 2 +-
+> include/linux/cma.h | 8 +-
+> kernel/dma/contiguous.c | 2 +-
+> mm/cma.c | 187 +++++++++++++++++++++++++++++++++++++---------
+> mm/cma.h | 5 +-
+> 6 files changed, 165 insertions(+), 41 deletions(-)
+>
+> diff --git a/arch/arm/mm/dma-mapping.c b/arch/arm/mm/dma-mapping.c
+> index f9bc53b60f99..934952ab2102 100644
+> --- a/arch/arm/mm/dma-mapping.c
+> +++ b/arch/arm/mm/dma-mapping.c
+> @@ -254,7 +254,7 @@ struct dma_contig_early_reserve {
+> unsigned long size;
+> };
+> -static struct dma_contig_early_reserve dma_mmu_remap[MAX_CMA_AREAS] __initdata;
+> +static struct dma_contig_early_reserve dma_mmu_remap[MAX_EARLY_CMA_AREAS] __initdata;
+> static int dma_mmu_remap_num __initdata;
+> diff --git a/arch/s390/mm/init.c b/arch/s390/mm/init.c
+> index f07168a0d3dd..f8f78f1434ea 100644
+> --- a/arch/s390/mm/init.c
+> +++ b/arch/s390/mm/init.c
+> @@ -241,7 +241,7 @@ static int s390_cma_mem_notifier(struct notifier_block *nb,
+> mem_data.start = arg->start_pfn << PAGE_SHIFT;
+> mem_data.end = mem_data.start + (arg->nr_pages << PAGE_SHIFT);
+> if (action == MEM_GOING_OFFLINE)
+> - rc = cma_for_each_area(s390_cma_check_range, &mem_data);
+> + rc = cma_for_each_early_area(s390_cma_check_range, &mem_data);
+> return notifier_from_errno(rc);
+> }
+> diff --git a/include/linux/cma.h b/include/linux/cma.h
+> index 8555d38a97b1..fb7a4923c3ba 100644
+> --- a/include/linux/cma.h
+> +++ b/include/linux/cma.h
+> @@ -7,7 +7,7 @@
+> #include <linux/numa.h>
+> #ifdef CONFIG_CMA_AREAS
+> -#define MAX_CMA_AREAS CONFIG_CMA_AREAS
+> +#define MAX_EARLY_CMA_AREAS CONFIG_CMA_AREAS
+> #endif
+> #define CMA_MAX_NAME 64
+> @@ -57,8 +57,14 @@ struct page *cma_alloc_frozen_compound(struct cma *cma, unsigned int order);
+> bool cma_release_frozen(struct cma *cma, const struct page *pages,
+> unsigned long count);
+> +extern int cma_for_each_early_area(int (*it)(struct cma *cma, void *data), void *data);
+> extern int cma_for_each_area(int (*it)(struct cma *cma, void *data), void *data);
+> extern bool cma_intersects(struct cma *cma, unsigned long start, unsigned long end);
+> extern void cma_reserve_pages_on_error(struct cma *cma);
+> +
+> +extern struct cma *cma_create(phys_addr_t base, phys_addr_t size,
+> + unsigned int order_per_bit, const char *name);
+> +extern void cma_free(struct cma *cma);
+> +
+> #endif
+> diff --git a/kernel/dma/contiguous.c b/kernel/dma/contiguous.c
+> index f754079a287d..7975551f69b3 100644
+> --- a/kernel/dma/contiguous.c
+> +++ b/kernel/dma/contiguous.c
+> @@ -52,7 +52,7 @@
+> #define CMA_SIZE_MBYTES 0
+> #endif
+> -static struct cma *dma_contiguous_areas[MAX_CMA_AREAS];
+> +static struct cma *dma_contiguous_areas[MAX_EARLY_CMA_AREAS];
+> static unsigned int dma_contiguous_areas_num;
+> static int dma_contiguous_insert_area(struct cma *cma)
+> diff --git a/mm/cma.c b/mm/cma.c
+> index a13ce4999b39..f989e2e98594 100644
+> --- a/mm/cma.c
+> +++ b/mm/cma.c
+> @@ -34,7 +34,12 @@
+> #include "internal.h"
+> #include "cma.h"
+> -struct cma cma_areas[MAX_CMA_AREAS];
+> +static DEFINE_MUTEX(cma_lock);
+> +
+> +struct cma cma_early_areas[MAX_EARLY_CMA_AREAS];
+> +unsigned int cma_early_area_count;
+> +
+> +static LIST_HEAD(cma_areas);
+> unsigned int cma_area_count;
+> phys_addr_t cma_get_base(const struct cma *cma)
+> @@ -198,7 +203,6 @@ static void __init cma_activate_area(struct cma *cma)
+> free_reserved_page(pfn_to_page(pfn));
+> }
+> }
+> - totalcma_pages -= cma->count;
+> cma->available_count = cma->count = 0;
+> pr_err("CMA area %s could not be activated\n", cma->name);
+> }
+> @@ -207,8 +211,8 @@ static int __init cma_init_reserved_areas(void)
+> {
+> int i;
+> - for (i = 0; i < cma_area_count; i++)
+> - cma_activate_area(&cma_areas[i]);
+> + for (i = 0; i < cma_early_area_count; i++)
+> + cma_activate_area(&cma_early_areas[i]);
+> return 0;
+> }
+> @@ -219,41 +223,77 @@ void __init cma_reserve_pages_on_error(struct cma *cma)
+> set_bit(CMA_RESERVE_PAGES_ON_ERROR, &cma->flags);
+> }
+> +static void __init cma_init_area(struct cma *cma, const char *name,
+> + phys_addr_t size, unsigned int order_per_bit)
+> +{
+> + if (name)
+> + strscpy(cma->name, name);
+> + else
+> + snprintf(cma->name, CMA_MAX_NAME, "cma%d\n", cma_area_count);
+> +
+> + cma->available_count = cma->count = size >> PAGE_SHIFT;
+> + cma->order_per_bit = order_per_bit;
+> +
+> + INIT_LIST_HEAD(&cma->node);
+> +}
+> +
+> static int __init cma_new_area(const char *name, phys_addr_t size,
+> unsigned int order_per_bit,
+> struct cma **res_cma)
+> {
+> struct cma *cma;
+> - if (cma_area_count == ARRAY_SIZE(cma_areas)) {
+> + if (cma_early_area_count == ARRAY_SIZE(cma_early_areas)) {
+> pr_err("Not enough slots for CMA reserved regions!\n");
+> return -ENOSPC;
+> }
+> + mutex_lock(&cma_lock);
+> +
+> /*
+> * Each reserved area must be initialised later, when more kernel
+> * subsystems (like slab allocator) are available.
+> */
+> - cma = &cma_areas[cma_area_count];
+> - cma_area_count++;
+> + cma = &cma_early_areas[cma_early_area_count];
+> + cma_early_area_count++;
+> - if (name)
+> - strscpy(cma->name, name);
+> - else
+> - snprintf(cma->name, CMA_MAX_NAME, "cma%d\n", cma_area_count);
+> + cma_init_area(cma, name, size, order_per_bit);
+> - cma->available_count = cma->count = size >> PAGE_SHIFT;
+> - cma->order_per_bit = order_per_bit;
+> - *res_cma = cma;
+> totalcma_pages += cma->count;
+> + *res_cma = cma;
+> +
+> + mutex_unlock(&cma_lock);
+> return 0;
+> }
+> static void __init cma_drop_area(struct cma *cma)
+> {
+> + mutex_lock(&cma_lock);
+> totalcma_pages -= cma->count;
+> - cma_area_count--;
+> + cma_early_area_count--;
+> + mutex_unlock(&cma_lock);
+> +}
+> +
+> +static int __init cma_check_memory(phys_addr_t base, phys_addr_t size)
+> +{
+> + if (!size || !memblock_is_region_reserved(base, size))
+> + return -EINVAL;
+> +
+> + /*
+> + * CMA uses CMA_MIN_ALIGNMENT_BYTES as alignment requirement which
+> + * needs pageblock_order to be initialized. Let's enforce it.
+> + */
+> + if (!pageblock_order) {
+> + pr_err("pageblock_order not yet initialized. Called during early boot?\n");
+> + return -EINVAL;
+> + }
+> +
+> + /* ensure minimal alignment required by mm core */
+> + if (!IS_ALIGNED(base | size, CMA_MIN_ALIGNMENT_BYTES))
+> + return -EINVAL;
+> +
+> + return 0;
+> }
+> /**
+> @@ -276,22 +316,9 @@ int __init cma_init_reserved_mem(phys_addr_t base, phys_addr_t size,
+> struct cma *cma;
+> int ret;
+> - /* Sanity checks */
+> - if (!size || !memblock_is_region_reserved(base, size))
+> - return -EINVAL;
+> -
+> - /*
+> - * CMA uses CMA_MIN_ALIGNMENT_BYTES as alignment requirement which
+> - * needs pageblock_order to be initialized. Let's enforce it.
+> - */
+> - if (!pageblock_order) {
+> - pr_err("pageblock_order not yet initialized. Called during early boot?\n");
+> - return -EINVAL;
+> - }
+> -
+> - /* ensure minimal alignment required by mm core */
+> - if (!IS_ALIGNED(base | size, CMA_MIN_ALIGNMENT_BYTES))
+> - return -EINVAL;
+> + ret = cma_check_memory(base, size);
+> + if (ret < 0)
+> + return ret;
+> ret = cma_new_area(name, size, order_per_bit, &cma);
+> if (ret != 0)
+> @@ -444,7 +471,7 @@ static int __init __cma_declare_contiguous_nid(phys_addr_t *basep,
+> pr_debug("%s(size %pa, base %pa, limit %pa alignment %pa)\n",
+> __func__, &size, &base, &limit, &alignment);
+> - if (cma_area_count == ARRAY_SIZE(cma_areas)) {
+> + if (cma_early_area_count == ARRAY_SIZE(cma_early_areas)) {
+> pr_err("Not enough slots for CMA reserved regions!\n");
+> return -ENOSPC;
+> }
+> @@ -1051,12 +1078,12 @@ bool cma_release_frozen(struct cma *cma, const struct page *pages,
+> return true;
+> }
+> -int cma_for_each_area(int (*it)(struct cma *cma, void *data), void *data)
+> +int cma_for_each_early_area(int (*it)(struct cma *cma, void *data), void *data)
+> {
+> int i;
+> - for (i = 0; i < cma_area_count; i++) {
+> - int ret = it(&cma_areas[i], data);
+> + for (i = 0; i < cma_early_area_count; i++) {
+> + int ret = it(&cma_early_areas[i], data);
+> if (ret)
+> return ret;
+> @@ -1065,6 +1092,25 @@ int cma_for_each_area(int (*it)(struct cma *cma, void *data), void *data)
+> return 0;
+> }
+> +int cma_for_each_area(int (*it)(struct cma *cma, void *data), void *data)
+> +{
+> + struct cma *cma;
+> +
+> + mutex_lock(&cma_lock);
+> +
+> + list_for_each_entry(cma, &cma_areas, node) {
+> + int ret = it(cma, data);
+> +
+> + if (ret) {
+> + mutex_unlock(&cma_lock);
+> + return ret;
+> + }
+> + }
+> +
+> + mutex_unlock(&cma_lock);
+> + return 0;
+> +}
+> +
+> bool cma_intersects(struct cma *cma, unsigned long start, unsigned long end)
+> {
+> int r;
+> @@ -1147,3 +1193,74 @@ void __init *cma_reserve_early(struct cma *cma, unsigned long size)
+> return ret;
+> }
+> +
+> +struct cma *__init cma_create(phys_addr_t base, phys_addr_t size,
+> + unsigned int order_per_bit, const char *name)
+> +{
+> + struct cma *cma;
+> + int ret;
+> +
+> + ret = cma_check_memory(base, size);
+> + if (ret < 0)
+> + return ERR_PTR(ret);
+> +
+> + cma = kzalloc_obj(*cma, GFP_KERNEL);
+> + if (!cma)
+> + return ERR_PTR(-ENOMEM);
+> +
+> + cma_init_area(cma, name, size, order_per_bit);
+> + cma->ranges[0].base_pfn = PFN_DOWN(base);
+> + cma->ranges[0].early_pfn = PFN_DOWN(base);
+> + cma->ranges[0].count = cma->count;
+> + cma->nranges = 1;
+> +
+> + cma_activate_area(cma);
+> +
+> + mutex_lock(&cma_lock);
+> + list_add_tail(&cma->node, &cma_areas);
+> + totalcma_pages += cma->count;
+> + cma_area_count++;
+> + mutex_unlock(&cma_lock);
+> +
+> + return cma;
+> +}
+> +
+> +void cma_free(struct cma *cma)
+> +{
+> + unsigned int i;
+> +
+> + /*
+> + * Safety check to prevent a CMA with active allocations from being
+> + * released.
+> + */
+> + for (i = 0; i < cma->nranges; i++) {
+> + unsigned long nbits = cma_bitmap_maxno(cma, &cma->ranges[i]);
+> +
+> + if (!bitmap_empty(cma->ranges[i].bitmap, nbits)) {
+> + WARN(1, "%s: range %u not empty\n", cma->name, i);
+> + return;
+> + }
+> + }
+> +
+> + /* free reserved pages and the bitmap */
+> + for (i = 0; i < cma->nranges; i++) {
+> + struct cma_memrange *cmr = &cma->ranges[i];
+> + unsigned long end_pfn, pfn;
+> +
+> + end_pfn = cmr->base_pfn + cmr->count;
+> + for (pfn = cmr->base_pfn; pfn < end_pfn; pfn++)
+> + free_reserved_page(pfn_to_page(pfn));
+> +
+> + bitmap_free(cmr->bitmap);
+> + }
+> +
+> + mutex_destroy(&cma->alloc_mutex);
+> +
+> + mutex_lock(&cma_lock);
+> + totalcma_pages -= cma->count;
+> + list_del(&cma->node);
+> + cma_area_count--;
+> + mutex_unlock(&cma_lock);
+> +
+> + kfree(cma);
+> +}
+> diff --git a/mm/cma.h b/mm/cma.h
+> index c70180c36559..ae4db9819e38 100644
+> --- a/mm/cma.h
+> +++ b/mm/cma.h
+> @@ -41,6 +41,7 @@ struct cma {
+> unsigned long available_count;
+> unsigned int order_per_bit; /* Order of pages represented by one bit */
+> spinlock_t lock;
+> + struct list_head node;
+> struct mutex alloc_mutex;
+> #ifdef CONFIG_CMA_DEBUGFS
+> struct hlist_head mem_head;
+> @@ -71,8 +72,8 @@ enum cma_flags {
+> CMA_ACTIVATED,
+> };
+> -extern struct cma cma_areas[MAX_CMA_AREAS];
+> -extern unsigned int cma_area_count;
+> +extern struct cma cma_early_areas[MAX_EARLY_CMA_AREAS];
+> +extern unsigned int cma_early_area_count;
+> static inline unsigned long cma_bitmap_maxno(struct cma *cma,
+> struct cma_memrange *cmr)
+>
+Best regards
+
+-- 
+Marek Szyprowski, PhD
+Samsung R&D Institute Poland
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
