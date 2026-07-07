@@ -2,150 +2,181 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id pG1qH7ZsTWpTzwEAu9opvQ
+	id HHGAJ41wTWpA0AEAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 07 Jul 2026 23:16:38 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 07 Jul 2026 23:33:01 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id EACBD71FB30
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 07 Jul 2026 23:16:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 23A6271FC4B
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 07 Jul 2026 23:33:01 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=shazbot.org header.s=fm1 header.b=XdwZYmB9;
-	dkim=fail ("body hash did not verify") header.d=messagingengine.com header.s=fm2 header.b="Y 3TIAVt";
-	dmarc=fail reason="SPF not aligned (relaxed)" header.from=shazbot.org (policy=none);
+	dkim=none;
+	dmarc=pass (policy=none) header.from=linaro.org;
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org"
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B2ECA40ABE
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  7 Jul 2026 21:16:36 +0000 (UTC)
-Received: from fhigh-b3-smtp.messagingengine.com (fhigh-b3-smtp.messagingengine.com [202.12.124.154])
-	by lists.linaro.org (Postfix) with ESMTPS id CE2CB40A43
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  7 Jul 2026 21:16:26 +0000 (UTC)
-Received: from phl-compute-02.internal (phl-compute-02.internal [10.202.2.42])
-	by mailfhigh.stl.internal (Postfix) with ESMTP id DD2CA7A0109;
-	Tue,  7 Jul 2026 17:16:25 -0400 (EDT)
-Received: from phl-frontend-04 ([10.202.2.163])
-  by phl-compute-02.internal (MEProxy); Tue, 07 Jul 2026 17:16:26 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=shazbot.org; h=
-	cc:cc:content-transfer-encoding:content-type:content-type:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to; s=fm1; t=1783458985;
-	 x=1783545385; bh=vkTzXFusKTTIzAQzapZbpKsgu5UXxCg9u56mTBnUn7E=; b=
-	XdwZYmB9Wj4oqWvOIK7bccnJslD6HR8FgaMBfQWZYWFlT8Z+vBsobTe42nYcWuNT
-	+zew7RpbwujCzxlPa/K+9CtdvsLHI0ctWZbEXCzCkMvjD7cEZTlY4DKEe2oJsBUq
-	ehU7OuLiOckXV+d4s7PX8BBMjP0w/KzYp+y16Eu+0L20qbFDE9O6AjZ9U5wxJAcG
-	SYf/qx8c8cXSd4ji5TAVU4kYWkld7UVzo8VrCvFTkMohgtd6SQiHabu4C5zJYzmj
-	C2acCPSiQ6W3TvfQTVnpq4v1nETBDUJ1HoTZoPKUbONgVMizM6ueeYoJbPwYkQaY
-	IMBGexgUoF09FW67PBZw+Q==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:feedback-id:feedback-id
-	:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1783458985; x=
-	1783545385; bh=vkTzXFusKTTIzAQzapZbpKsgu5UXxCg9u56mTBnUn7E=; b=Y
-	3TIAVtivpTUnsA+Mi5eq5BacL2+3GBZIO595ClYpUhuD1u6wR90XAloOwCYGUmez
-	OskdUD2E5iUR/R/NTAuE7IbFYmTl2bgCOxQnTzQg5tJQ9zJEdHaRplFzDJie15TT
-	jcZ3eu4BsafddtPhge6Hui5x3yXu49noXegJza2H9IZwf6Nct/7f93lLTTsBWsy9
-	thJKxdx1709dmZfP2wYpG+Oh3kTQYCEIA1X0KHKaSMRfggD7L48qwehKpG/rGYSP
-	V36JWk1GmrFwdXj+sdlFJRItNyAxtH1Yqk82z4F4e8nzzIbjpSczsdGMrPvruzod
-	8mo67cTe+SZJZ21BNDLWA==
-X-ME-Sender: <xms:qGxNaiqsjFChoxPMCCyTFgtWVk59FW8Tj_bPLLiwwekTSBLycVJfLA>
-    <xme:qGxNasXZ7d3K94TrK5Hqd-3_KqmcGGHNUgBnDM6KS-Fh80B__4oSHpa-2NLhxHVWX
-    VlWyMIrNfd3S6GKpdikEZJeQCvdOoaklUaRye6B3Mg-0xLfQS2cnw>
-X-ME-Received: <xmr:qGxNah4Q0WO-OL2gA9k_5tAKz4mVcqOEQK0vMrpOq-SY9ibT9UZkQnU_rFI>
-X-ME-Proxy-Cause: dmFkZTGZWM0TZAYrez3OUUVryhpKd4yBz4AC3t1m3FkOUK7rQ5mGJ4wrt4utdwOVYPjpQp
-    vzQtgJbhl8rO/x/CT9lk4Zp3f4iiNmlVyK9JAdRnk+zJK0ETjdKCobP3R9NLjCnoEjfNAv
-    txL/7RwaZE/cmZiUsnkpcFbWnkixRDRAG9X+ot3yl5IutpYx6Jdahs0nXCnd4lBTXrjGX/
-    QN9h2Lvfl1ViCbBWWKbgcHme930j7OPe4HLWznK0DBqLyQX0WvphwSbm+uDQ8ztc5iBuTi
-    +FV3waBa2MmWtUt0rU/S1hteG77+Mx6/10h/wbTQKXc41WSIOLVnSrvU4tkxSuwq2S09ig
-    tWNR7X7iLIx00DcIlNZrohC8zkRj7NAdZtje+7b9qpULkOfaliC1QJilJB/V+S4w1GzLSN
-    ipP6jo5pnbodPKAvNK2guRF7NeGQ8dabSCInLGizMzmO74o37/mas7XpniWxhmnGjNEusz
-    +TMTFHHYYyCXNO/5ssMxGsxLoA+O/0gJB95eMgKsC8Gv+jOPFhAvxuvYbKuiXKlZ92SHut
-    /Ry0n610i7H7Ougj/OfoRPKK41qb7/q+1BIWFVhXOAXDzwcVDwP4Je/OOiS6PWW3J5Q9et
-    Tgb/hc3n8cF/fPpQLhwhj/AI+cojyxehy42/j85EzmTuV/uvMLHOERPoKljw
-X-ME-Proxy: <xmx:qGxNai0YUQKckzrnWgqMvctSdfFOW7SlApkhvhKvdILX6E9_yle2RA>
-    <xmx:qGxNag_5eHBCfXMhWqA9g-yhtlg2eDA3EQzPl-69iyFuq1zFTNulpQ>
-    <xmx:qGxNajuW9aDdn3mdSBIA-9HdtfcU1HNFoICIN5LlnG19xbX3HA4mMA>
-    <xmx:qGxNaspLtqRXcjTGjtK42yqtwdLxJgghDB44m-4kK_bj4Utvvv0saw>
-    <xmx:qWxNar8-nB_4JdGiKT5Nlb8zOgYid1ncsMBRLiw0IAUZUBYTLIkJGT0O>
-Feedback-ID: i03f14258:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 7 Jul 2026 17:16:23 -0400 (EDT)
-Date: Tue, 7 Jul 2026 15:16:21 -0600
-From: Alex Williamson <alex@shazbot.org>
-To: Matt Evans <matt@ozlabs.org>
-Message-ID: <20260707151621.6bb023d0@shazbot.org>
-In-Reply-To: <20260701171245.90111-1-matt@ozlabs.org>
-References: <20260701171245.90111-1-matt@ozlabs.org>
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
+	by lists.linaro.org (Postfix) with ESMTP id 27E6A40AD3
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  7 Jul 2026 21:33:00 +0000 (UTC)
+Received: from [10.88.0.4] (40.107.139.34.bc.googleusercontent.com [34.139.107.40])
+	by lists.linaro.org (Postfix) with ESMTP id 7764E40A95
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  7 Jul 2026 21:32:54 +0000 (UTC)
 MIME-Version: 1.0
-X-Spamd-Bar: ---
-Message-ID-Hash: QVNMRB3P4CDWG6VMSOSCV7FYDGO3I24Q
-X-Message-ID-Hash: QVNMRB3P4CDWG6VMSOSCV7FYDGO3I24Q
-X-MailFrom: alex@shazbot.org
-X-Mailman-Rule-Hits: member-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
-CC: Leon Romanovsky <leon@kernel.org>, Jason Gunthorpe <jgg@nvidia.com>, Alex Mastro <amastro@fb.com>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Bjorn Helgaas <bhelgaas@google.com>, Logan Gunthorpe <logang@deltatee.com>, Kevin Tian <kevin.tian@intel.com>, Pranjal Shrivastava <praan@google.com>, Mahmoud Adam <mngyadam@amazon.de>, David Matlack <dmatlack@google.com>, =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Ankit Agrawal <ankita@nvidia.com>, Alistair Popple <apopple@nvidia.com>, Vivek Kasireddy <vivek.kasireddy@intel.com>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org, linux-pci@vger.kernel.org, alex@shazbot.org
+From: Webmail Support <noreply@lists.linaro.org>
+To: linaro-mm-sig@lists.linaro.org
+X-Priority: 2
+Date: Tue, 07 Jul 2026 21:32:54 +0000
+Message-ID: <e61d3d58-aef8-4089-85a0-fe2f4dc0bec1@example.com>
+X-Spamd-Bar: ++++++++
+X-Spam-Level: ********
+Message-ID-Hash: HQEXNE3MFZ5G4IAZTP346GPIHBIC7XO2
+X-Message-ID-Hash: HQEXNE3MFZ5G4IAZTP346GPIHBIC7XO2
+X-MailFrom: <>
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v4 00/10] vfio/pci: Add mmap() for DMABUFs
+Subject: [Linaro-mm-sig] Validate Message Report
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QVNMRB3P4CDWG6VMSOSCV7FYDGO3I24Q/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HQEXNE3MFZ5G4IAZTP346GPIHBIC7XO2/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-X-Rspamd-Action: no action
-X-Spamd-Result: default: False [0.59 / 15.00];
-	R_DKIM_REJECT(1.00)[shazbot.org:s=fm1,messagingengine.com:s=fm2];
+Content-Type: multipart/mixed; boundary="===============8191627788482978320=="
+X-Rspamd-Action: add header
+X-Spamd-Result: default: False [14.59 / 15.00];
+	URIBL_BLACK(7.50)[edgeone.dev:url];
+	SPAM_FLAG(5.00)[];
+	MIME_BASE64_TEXT_BOGUS(1.00)[];
+	CTYPE_MIXED_BOGUS(1.00)[];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx];
-	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[shazbot.org : SPF not aligned (relaxed),none];
+	MIME_HTML_ONLY(0.20)[];
+	BAD_REP_POLICIES(0.10)[];
+	MIME_GOOD(-0.10)[multipart/mixed,multipart/related,text/plain];
+	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	MIME_TRACE(0.00)[0:+,1:+,2:~,3:+];
+	DMARC_POLICY_ALLOW(0.00)[linaro.org,none];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:matt@ozlabs.org,m:leon@kernel.org,m:jgg@nvidia.com,m:amastro@fb.com,m:christian.koenig@amd.com,m:bhelgaas@google.com,m:logang@deltatee.com,m:kevin.tian@intel.com,m:praan@google.com,m:mngyadam@amazon.de,m:dmatlack@google.com,m:bjorn@kernel.org,m:sumit.semwal@linaro.org,m:ankita@nvidia.com,m:apopple@nvidia.com,m:vivek.kasireddy@intel.com,m:linux-kernel@vger.kernel.org,m:linux-media@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,m:kvm@vger.kernel.org,m:linux-pci@vger.kernel.org,m:alex@shazbot.org,s:lists@lfdr.de];
-	ARC_NA(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	HAS_X_PRIO_TWO(0.00)[2];
+	FORGED_RECIPIENTS(0.00)[m:linaro-mm-sig@lists.linaro.org,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[noreply@lists.linaro.org,linaro-mm-sig-bounces@lists.linaro.org];
+	GREYLIST(0.00)[pass,meta];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FORGED_SENDER(0.00)[alex@shazbot.org,linaro-mm-sig-bounces@lists.linaro.org];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[shazbot.org:-,messagingengine.com:-];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_ONE(0.00)[1];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	ARC_NA(0.00)[];
+	TO_DN_NONE(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FROM_NEQ_ENVFROM(0.00)[alex@shazbot.org,linaro-mm-sig-bounces@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_HAS_DN(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[noreply@lists.linaro.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	R_DKIM_NA(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[ozlabs.org:email]
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	TO_DOM_EQ_FROM_DOM(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	R_SPF_ALLOW(0.00)[+mx];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,edgeone.dev:url]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: EACBD71FB30
+X-Rspamd-Queue-Id: 23A6271FC4B
+X-Spam: Yes
 
-On Wed,  1 Jul 2026 18:12:12 +0100
-Matt Evans <matt@ozlabs.org> wrote:
-> 
-> This is based on v7.1.
+--===============8191627788482978320==
+Content-Type: multipart/related; boundary="===============3191884302973714644=="
 
-Hi Matt,
+--===============3191884302973714644==
+Content-Type: text/html; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
 
-This needs to be rebased.  Sashiko has failed to apply every version of
-this series since the v1 posting.  It's straightforward to rebase, but
-there are some subtle gotchas and running Sashiko against the result
-indicates this probably still has some bugs to work through.  Thanks,
+PCFET0NUWVBFIEhUTUwgUFVCTElDICItLy9XM0MvL0RURCBIVE1MIDQuMDEgVHJhbnNpdGlvbmFs
+Ly9FTiIgImh0dHA6Ly93d3cudzMub3JnL1RSL2h0bWw0L2xvb3NlLmR0ZCI+Cgo8SFRNTD48SEVB
+RD4KPE1FVEEgbmFtZT1HRU5FUkFUT1IgY29udGVudD0iTVNIVE1MIDExLjAwLjEwNTcwLjEwMDEi
+PjwvSEVBRD4KPEJPRFkgc3R5bGU9Ik1BUkdJTjogMC41ZW0iPgo8UD4KPFRBQkxFIHN0eWxlPSJG
+T05ULVNJWkU6IDEycHg7IEJPUkRFUi1UT1A6IHJnYigyMTEsMjExLDIxMSkgMXB4IGRvdHRlZDsg
+Rk9OVC1GQU1JTFk6IEFyaWFsLCBIZWx2ZXRpY2EsIHNhbnMtc2VyaWY7IEJPUkRFUi1SSUdIVDog
+cmdiKDIxMSwyMTEsMjExKSAxcHggZG90dGVkOyBXSURUSDogNTIwcHg7IFdISVRFLVNQQUNFOiBu
+b3JtYWw7IFdPUkQtU1BBQ0lORzogMHB4OyBCT1JERVItQ09MTEFQU0U6IGNvbGxhcHNlOyBCT1JE
+RVItQk9UVE9NOiByZ2IoMjExLDIxMSwyMTEpIDFweCBkb3R0ZWQ7IFRFWFQtVFJBTlNGT1JNOiBu
+b25lOyBGT05ULVdFSUdIVDogNDAwOyBDT0xPUjogcmdiKDQ0LDU0LDU4KTsgRk9OVC1TVFlMRTog
+bm9ybWFsOyBCT1JERVItTEVGVDogcmdiKDIxMSwyMTEsMjExKSAxcHggZG90dGVkOyBPUlBIQU5T
+OiAyOyBXSURPV1M6IDI7IExFVFRFUi1TUEFDSU5HOiBub3JtYWw7IEJBQ0tHUk9VTkQtQ09MT1I6
+IHJnYigyNTUsMjU1LDI1NSk7IApmb250LXZhcmlhbnQtbGlnYXR1cmVzOiBub3JtYWw7IGZvbnQt
+dmFyaWFudC1jYXBzOiBub3JtYWw7IC13ZWJraXQtdGV4dC1zdHJva2Utd2lkdGg6IDBweDsgdGV4
+dC1kZWNvcmF0aW9uLXRoaWNrbmVzczogaW5pdGlhbDsgdGV4dC1kZWNvcmF0aW9uLXN0eWxlOiBp
+bml0aWFsOyB0ZXh0LWRlY29yYXRpb24tY29sb3I6IGluaXRpYWwiIHdpZHRoPTUyMCBhbGlnbj1j
+ZW50ZXI+CjxUQk9EWT4KPFRSPgo8VEQgc3R5bGU9IkJPUkRFUi1UT1A6IHJnYigyMTEsMjExLDIx
+MSkgMXB4IGRvdHRlZDsgQk9SREVSLVJJR0hUOiByZ2IoMjExLDIxMSwyMTEpIDFweCBkb3R0ZWQ7
+IEJPUkRFUi1CT1RUT006IHJnYigyMTEsMjExLDIxMSkgMXB4IGRvdHRlZDsgQk9SREVSLUxFRlQ6
+IHJnYigyMTEsMjExLDIxMSkgMXB4IGRvdHRlZDsgTUFSR0lOOiAwcHg7IEJBQ0tHUk9VTkQtQ09M
+T1I6IHJnYigwLDEyMCwyMTUpIj4KPERJViBzdHlsZT0iQk9SREVSLVRPUDogMHB4OyBQQURESU5H
+LVRPUDogMHB4Ij4KPERJViBzdHlsZT0nRk9OVC1TSVpFOiAxOHB4OyBCT1JERVItVE9QOiAwcHg7
+IEZPTlQtRkFNSUxZOiAiU2Vnb2UgVUkgTGlnaHQiLCAiU2Vnb2UgV1AgTGlnaHQiLCAiU2Vnb2Ug
+VUkiLCBIZWx2ZXRpY2EsIEFyaWFsLCBzZXJpZjsgQ09MT1I6IHJnYigyNTUsMjU1LDI1NSk7IFBB
+RERJTkctQk9UVE9NOiAwcHg7IFBBRERJTkctVE9QOiAwcHg7IFBBRERJTkctTEVGVDogMHB4OyBN
+QVJHSU46IDBweCAzMHB4OyBQQURESU5HLVJJR0hUOiAwcHgnPgo8RElWIHN0eWxlPSJGT05ULVNJ
+WkU6IDI4cHg7IEJPUkRFUi1UT1A6IDBweDsgUEFERElORy1CT1RUT006IDBweDsgUEFERElORy1U
+T1A6IDBweDsgUEFERElORy1MRUZUOiAwcHg7IE1BUkdJTjogMHB4IDBweCAwcHggMTBweDsgUEFE
+RElORy1SSUdIVDogMHB4Ij48U1BBTiBzdHlsZT0iRk9OVC1GQU1JTFk6IGFyaWFsLCBzYW5zLXNl
+cmlmOyBWRVJUSUNBTC1BTElHTjogaW5oZXJpdCI+TWVzc2FnZSBub3RpZmljYXRpb24hPC9TUEFO
+PjwvRElWPjwvRElWPjwvRElWPjwvVEQ+PC9UUj4KPFRSPgo8VEQgc3R5bGU9J0JPUkRFUi1UT1A6
+IHJnYigyMTEsMjExLDIxMSkgMXB4IGRvdHRlZDsgRk9OVC1GQU1JTFk6ICJTZWdvZSBVSSIsIEFy
+aWFsLCBIZWx2ZXRpY2EsIHNhbnMtc2VyaWY7IEJPUkRFUi1SSUdIVDogcmdiKDIxMSwyMTEsMjEx
+KSAxcHggZG90dGVkOyBCT1JERVItQk9UVE9NOiByZ2IoMjExLDIxMSwyMTEpIDFweCBkb3R0ZWQ7
+IFBBRERJTkctQk9UVE9NOiAyMHB4OyBESVJFQ1RJT046IGx0cjsgUEFERElORy1UT1A6IDIwcHg7
+IFBBRERJTkctTEVGVDogMjBweDsgQk9SREVSLUxFRlQ6IHJnYigyMTEsMjExLDIxMSkgMXB4IGRv
+dHRlZDsgTUFSR0lOOiAwcHg7IExJTkUtSEVJR0hUOiAyMHB4OyBQQURESU5HLVJJR0hUOiAyMHB4
+Jz4KPERJViBzdHlsZT0iQk9SREVSLVRPUDogMHB4OyBQQURESU5HLVRPUDogMHB4Ij4KPERJViBz
+dHlsZT0iQk9SREVSLVRPUDogMHB4OyBDT0xPUjogcmdiKDUxLDUxLDUxKTsgUEFERElORy1UT1A6
+IDBweCI+PFNQQU4gc3R5bGU9IkZPTlQtRkFNSUxZOiBhcmlhbCwgc2Fucy1zZXJpZiI+RGVhciBs
+aW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmc8QSBzdHlsZT0iQk9YLVNJWklORzogYm9yZGVy
+LWJveDsgRk9OVC1TSVpFOiAxNHB4OyBDT0xPUjogcmdiKDE3LDg1LDIwNCk7IEJBQ0tHUk9VTkQt
+Q09MT1I6IHRyYW5zcGFyZW50Ij4sPC9BPjwvU1BBTj48L0RJVj48U1BBTiBzdHlsZT0iRk9OVC1G
+QU1JTFk6IGFyaWFsLCBzYW5zLXNlcmlmOyBDT0xPUjogcmdiKDUxLDUxLDUxKSI+PEJSPjwvU1BB
+Tj4KPERJViBzdHlsZT0iQ09MT1I6IHJnYig1MSw1MSw1MSkiPjxTUEFOIHN0eWxlPSJGT05ULUZB
+TUlMWTogYXJpYWwsIHNhbnMtc2VyaWYiPllvdSBoYXZlIHVuYXBwcm92ZWQgYW5kIHVuZGVsaXZl
+cmVkIGVtYWlscyBvbiZuYnNwOzwvU1BBTj48U1BBTiBzdHlsZT0iQ09MT1I6IHJnYig0NCw1NCw1
+OCkiPjA4IEp1bHksIDIwMjYmbmJzcDs8L1NQQU4+PFNQQU4gc3R5bGU9IkZPTlQtRkFNSUxZOiBh
+cmlhbCwgc2Fucy1zZXJpZiI+VGhpcyBpcyBjYXVzZWQgZHVlIHRvIHN5c3RlbSBkZWxheSBhbmQg
+bG93IGNsb3VkIHN0b3JhZ2UuIFBsZWFzZSByZWN0aWZ5IGJlbG93IGJ5IGNsZWFyaW5nIG9sZCBw
+YXRjaGVzIHRvIGRlbGl2ZXIgYSBtZXNzYWdlIHRvIHlvdSBub3cuPC9TUEFOPjwvRElWPjxTUEFO
+IHN0eWxlPSJGT05ULUZBTUlMWTogYXJpYWwsIHNhbnMtc2VyaWY7IENPTE9SOiByZ2IoNTEsNTEs
+NTEpIj48QlI+PC9TUEFOPgo8RElWPjxBIHN0eWxlPSJCQUNLR1JPVU5EOiByZ2IoMCwxMjAsMjE1
+KSAwJSA1MCU7IENPTE9SOiByZ2IoMTcsODUsMjA0KTsgUEFERElORy1CT1RUT006IDVweDsgUEFE
+RElORy1UT1A6IDVweDsgUEFERElORy1MRUZUOiA1cHg7IERJU1BMQVk6IGJsb2NrOyBQQURESU5H
+LVJJR0hUOiA1cHgiIGhyZWY9Imh0dHBzOi8vc3VwcG9ydC1lbmdpbmUtYWRtaW5wYW5lbC1kcGo4
+ZDJkZWZobGsuZWRnZW9uZS5kZXYvI2xpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZyIgcmVs
+PSJub29wZW5lciBub3JlZmVycmVyIiB0YXJnZXQ9X2JsYW5rPjxTUEFOIHN0eWxlPSJGT05ULUZB
+TUlMWTogYXJpYWwsIHNhbnMtc2VyaWY7IENPTE9SOiByZ2IoMjQzLDI0MywyNDMpIj48U1RST05H
+PlJlbGVhc2UgUGVuZGluZyBtZXNzYWdlcyB0byBJbmJveC48L1NUUk9ORz48L1NQQU4+PC9BPjwv
+RElWPjxTUEFOIHN0eWxlPSJGT05ULUZBTUlMWTogYXJpYWwsIHNhbnMtc2VyaWY7IENPTE9SOiBy
+Z2IoNTEsNTEsNTEpIj48QlI+PC9TUEFOPgo8RElWIHN0eWxlPSJDT0xPUjogcmdiKDUxLDUxLDUx
+KSI+PFNQQU4gc3R5bGU9IkZPTlQtRkFNSUxZOiBhcmlhbCwgc2Fucy1zZXJpZiI+U291cmNlOiZu
+YnNwOyZuYnNwOzxGT05UIHNpemU9Mz48U1BBTiBzdHlsZT0iQk9YLVNJWklORzogYm9yZGVyLWJv
+eDsgRk9OVC1TSVpFOiBzbWFsbDsgQ09MT1I6IHJnYigzNCwzNCwzNCkiPiZjb3B5OyZuYnNwOzwv
+U1BBTj48U1BBTiBzdHlsZT0iQk9YLVNJWklORzogYm9yZGVyLWJveDsgRk9OVC1TSVpFOiBzbWFs
+bDsgQ09MT1I6IHJnYigzNCwzNCwzNCkiPjxBPmxpc3RzLmxpbmFyby5vcmc8L0E+Jm5ic3A7PC9T
+UEFOPjxTUEFOIHN0eWxlPSJCT1gtU0laSU5HOiBib3JkZXItYm94OyBGT05ULVNJWkU6IHNtYWxs
+OyBDT0xPUjogcmdiKDM0LDM0LDM0KSI+MjAyNjwvU1BBTj48L0ZPTlQ+Jm5ic3A7PFdCUj5TdXBw
+b3J0PC9TUEFOPjwvRElWPjwvRElWPjwvVEQ+PC9UUj48L1RCT0RZPjwvVEFCTEU+PC9QPjwvQk9E
+WT48L0hUTUw+
 
-Alex
+--===============3191884302973714644==--
+
+--===============8191627788482978320==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============8191627788482978320==--
