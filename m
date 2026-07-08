@@ -2,294 +2,174 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 2eI1OjhxVmqJ5gAAu9opvQ
+	id uzlBMdJQTmqFKgIAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 19:26:16 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 08 Jul 2026 15:29:54 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6A0D675764D
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 19:26:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 495C0726CCE
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 08 Jul 2026 15:29:54 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=jitZrOHB;
-	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
-	dmarc=fail reason="SPF not aligned (relaxed)" header.from=kernel.org (policy=quarantine)
+	dkim=fail ("body hash did not verify") header.d=mailbox.org header.s=mail20150812 header.b=SJ+FOWX4;
+	dmarc=fail reason="SPF not aligned (relaxed)" header.from=mailbox.org (policy=reject);
+	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org"
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7DA93404D4
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 17:26:15 +0000 (UTC)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
-	by lists.linaro.org (Postfix) with ESMTPS id BF2FD404DD
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  8 Jul 2026 12:50:08 +0000 (UTC)
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	by tor.source.kernel.org (Postfix) with ESMTP id 25C1560054;
-	Wed,  8 Jul 2026 12:50:08 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2693F1F000E9;
-	Wed,  8 Jul 2026 12:50:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783515007;
-	bh=IbwF4pMHfyhwOslYT5YnzmrvzgTa5uH5GBgU1nK9uiI=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=jitZrOHBE9XNJumMdXFVv18tUngtPLdb9x2l4MXb1a4a3audPmwI5ES1+E/p39+fH
-	 HMBtTttJu5WKPwMZpzl5XSMW8IWWsdWOQpWuuuOHUvCzW0Upi/fHIEHKy/XatkKhbs
-	 YIrgECVYDaOyOlaeXFov/nDhiba0x7J/yL1Q67FUZOmQNsefjzpkn/aCjEu0dJ6ZK9
-	 nlap2Fjp+x+P5ahqGT40ffudUAfNKdE4tL3hjqRQjY1+Q8v+zswk6N6KyX0QPm3fqz
-	 Jak61XpK3z4GmnyZVFYWCCa1m5lbXTTe07OjSwKUXfEIRonD9IqEaS2TOTSr62FACC
-	 l7BKByWi/ic2A==
-Date: Wed, 8 Jul 2026 14:50:04 +0200
-From: Thierry Reding <thierry.reding@kernel.org>
-To: Will Deacon <will@kernel.org>
-Message-ID: <ak5CXzGStC6ZmtwI@orome>
-References: <20260701-tegra-vpr-v3-0-d80f7b871bb4@nvidia.com>
- <20260701-tegra-vpr-v3-4-d80f7b871bb4@nvidia.com>
- <akYs91INHMXMTI-t@willie-the-truck>
- <akZkuwktaXFTrASP@orome>
- <akaSJ5D98w2cHqb6@orome>
- <akftuw9NyRy36fXA@willie-the-truck>
- <akuvyu1Pq0ZVMZV0@orome>
- <akzikTrmhMsvkNVY@willie-the-truck>
+	by lists.linaro.org (Postfix) with ESMTP id 08B9941189
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  8 Jul 2026 13:29:53 +0000 (UTC)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+	by lists.linaro.org (Postfix) with ESMTPS id 4FA1F40AE4
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  8 Jul 2026 13:29:43 +0000 (UTC)
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA512)
+	(No client certificate requested)
+	by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4gwJq831JYzMlGX;
+	Wed, 08 Jul 2026 15:29:40 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
+	t=1783517380; h=from:from:reply-to:reply-to:subject:subject:date:date:
+	 message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+	 content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=u+QzoStC3POLvanG8ZLxpgomra4Mq3Lf3oEAWOgFql8=;
+	b=SJ+FOWX4vFmAla8qj17/+0Pkuugs68BdDuOZbdI9m4etSGdWRvIHqksjIzlS628SASzyNR
+	KUPuAEN2F+d2nP5dm5oJmToHAx6/rGkovRSSvuvYNJw4KEipQgNs6ypGI36iGA3OT+v0zP
+	ckLJYh2oyXgqaptLNEQ6df75tzywBssmzdoFvUPiqIR80LQnZMii7jWW8fQt2GW5sMbKUQ
+	rz5gVk4GXSyyi3WPj18hBS6neyBkRme4/3JrBS4lnJ1LpMb/A5KTfh1XTz/tIDI5KPpgL3
+	MSR39yvd7shKThIgh60krfYf4m9FbcKLfIFGGL9Y9R/XmzqC2qTe6QCVdPZi3w==
+Message-ID: <099ab4b0fd40c476fcb5fa804800794f11758416.camel@mailbox.org>
+From: Philipp Stanner <phasta@mailbox.org>
+To: Philipp Stanner <phasta@kernel.org>, Miguel Ojeda <ojeda@kernel.org>,
+ Boqun Feng <boqun@kernel.org>, Gary Guo <gary@garyguo.net>,
+ =?ISO-8859-1?Q?Bj=F6rn?= Roy Baron	 <bjorn3_gh@protonmail.com>, Benno
+ Lossin <lossin@kernel.org>, Andreas Hindborg	 <a.hindborg@kernel.org>,
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross	 <tmgross@umich.edu>,
+ Danilo Krummrich <dakr@kernel.org>, Sumit Semwal	
+ <sumit.semwal@linaro.org>, Christian =?ISO-8859-1?Q?K=F6nig?=	
+ <christian.koenig@amd.com>, Daniel Almeida <daniel.almeida@collabora.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Asahi Lina
+ <lina+kernel@asahilina.net>, Burak Emir <bqe@google.com>,  Lorenzo Stoakes	
+ <ljs@kernel.org>, Joel Fernandes <joelagnelf@nvidia.com>, Alexandre Courbot
+	 <acourbot@nvidia.com>, Krishna Ketan Rai <prafulrai522@gmail.com>, Tamir
+ Duberstein <tamird@kernel.org>, Mirko Adzic <adzicmirko97@gmail.com>,
+ Alistair Francis	 <alistair.francis@wdc.com>, Onur =?ISO-8859-1?Q?=D6zkan?=
+ <work@onurozkan.dev>,  Shankari Anand <shankari.ak0208@gmail.com>
+Date: Wed, 08 Jul 2026 15:29:29 +0200
+In-Reply-To: <20260703073141.3962604-6-phasta@kernel.org>
+References: <20260703073141.3962604-2-phasta@kernel.org>
+	 <20260703073141.3962604-6-phasta@kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <akzikTrmhMsvkNVY@willie-the-truck>
-X-Spamd-Bar: --------
-X-MailFrom: thierry.reding@kernel.org
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: E46Z7RMZAAYUKUFHLCWGF6DELTIHJVFS
-X-Message-ID-Hash: E46Z7RMZAAYUKUFHLCWGF6DELTIHJVFS
-X-Mailman-Approved-At: Tue, 14 Jul 2026 17:19:47 +0000
-CC: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Jonathan Hunter <jonathanh@nvidia.com>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Sowjanya Komatineni <skomatineni@nvidia.com>, Luca Ceresoli <luca.ceresoli@bootlin.com>, Mikko Perttunen <mperttunen@nvidia.com>, Yury Norov <yury.norov@gmail.com>, Rasmus Villemoes <linux@rasmusvillemoes.dk>, Russell King <linux@armlinux.org.uk>, Alexander Gordeev <agordeev@linux.ibm.com>, Gerald Schaefer <gerald.schaefer@linux.ibm.com>, Heiko Carstens <hca@linux.ibm.com>, Vasily Gorbik <gor@linux.ibm.com>, Christian Borntraeger <borntraeger@linux.ibm.com>, Sven Schnelle <svens@linux.ibm.com>, Andrew Morton <akpm@linux-foundation.org>, David Hildenbrand <david@kernel.org>, Lorenzo Stoakes <ljs@kernel.org>, "Liam R. Howlett" <liam@infrade
- ad.org>, Vlastimil Babka <vbabka@kernel.org>, Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>, Robin Murphy <robin.murphy@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Steven Rostedt <rostedt@goodmis.org>, Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Catalin Marinas <catalin.marinas@arm.com>, Thierry Reding <thierry.reding@gmail.com>, devicetree@vger.kernel.org, linux-tegra@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-s390@vger.kernel.org, linux-mm@kvack.org, iommu@lists.linux.dev, linaro-mm-sig@lists.linaro.org, linux-trace-kernel@vger.kernel.org, Thi
- erry Reding <treding@nvidia.com>, Chun Ng <chunn@nvidia.com>
+X-MBO-RS-ID: 58600b92efd2db828a6
+X-MBO-RS-META: jonfcbxufdzn7z77mwmxrqxzisg6c981
+X-Spamd-Bar: +
+X-Spam-Level: *
+Message-ID-Hash: 7E24GVFEP7CFHGSX4I3I6HR3MA52UMMG
+X-Message-ID-Hash: 7E24GVFEP7CFHGSX4I3I6HR3MA52UMMG
+X-MailFrom: phasta@mailbox.org
+X-Mailman-Rule-Hits: member-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
+CC: linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3 04/11] arm64/mm: Add set_memory_device() and set_memory_normal()
+Reply-To: phasta@kernel.org
+Subject: [Linaro-mm-sig] Re: [PATCH v5 4/5] rust: Add dma_fence abstractions
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/E46Z7RMZAAYUKUFHLCWGF6DELTIHJVFS/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7E24GVFEP7CFHGSX4I3I6HR3MA52UMMG/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============3403255857884184639=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [2.89 / 15.00];
-	SIGNED_PGP(-2.00)[];
-	DMARC_POLICY_QUARANTINE(1.50)[kernel.org : SPF not aligned (relaxed),quarantine];
+X-Spamd-Result: default: False [4.09 / 15.00];
+	DMARC_POLICY_REJECT(2.00)[mailbox.org : SPF not aligned (relaxed),reject];
 	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[kernel.org:s=k20260515];
-	DATE_IN_PAST(1.00)[148];
-	MID_RHS_NOT_FQDN(0.50)[];
+	R_DKIM_REJECT(1.00)[mailbox.org:s=mail20150812];
 	MAILLIST(-0.20)[mailman];
-	MIME_GOOD(-0.20)[multipart/mixed,multipart/signed,text/plain];
-	R_SPF_ALLOW(-0.20)[+mx:c];
+	R_SPF_ALLOW(-0.20)[+mx];
+	MIME_GOOD(-0.10)[text/plain];
+	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS(0.00)[m:phasta@kernel.org,m:ojeda@kernel.org,m:boqun@kernel.org,m:gary@garyguo.net,m:bjorn3_gh@protonmail.com,m:lossin@kernel.org,m:a.hindborg@kernel.org,m:aliceryhl@google.com,m:tmgross@umich.edu,m:dakr@kernel.org,m:sumit.semwal@linaro.org,m:christian.koenig@amd.com,m:daniel.almeida@collabora.com,m:gregkh@linuxfoundation.org,m:lina+kernel@asahilina.net,m:bqe@google.com,m:ljs@kernel.org,m:joelagnelf@nvidia.com,m:acourbot@nvidia.com,m:prafulrai522@gmail.com,m:tamird@kernel.org,m:adzicmirko97@gmail.com,m:alistair.francis@wdc.com,m:work@onurozkan.dev,m:shankari.ak0208@gmail.com,m:linux-kernel@vger.kernel.org,m:rust-for-linux@vger.kernel.org,m:linux-media@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,m:lina@asahilina.net,m:shankariak0208@gmail.com,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[3];
+	FREEMAIL_TO(0.00)[kernel.org,garyguo.net,protonmail.com,google.com,umich.edu,linaro.org,amd.com,collabora.com,linuxfoundation.org,asahilina.net,nvidia.com,gmail.com,wdc.com,onurozkan.dev];
+	FORGED_SENDER(0.00)[phasta@mailbox.org,linaro-mm-sig-bounces@lists.linaro.org];
 	ARC_NA(0.00)[];
-	FORGED_SENDER(0.00)[thierry.reding@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
 	TO_DN_SOME(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:will@kernel.org,m:robh@kernel.org,m:krzk+dt@kernel.org,m:conor+dt@kernel.org,m:jonathanh@nvidia.com,m:airlied@gmail.com,m:simona@ffwll.ch,m:maarten.lankhorst@linux.intel.com,m:mripard@kernel.org,m:tzimmermann@suse.de,m:skomatineni@nvidia.com,m:luca.ceresoli@bootlin.com,m:mperttunen@nvidia.com,m:yury.norov@gmail.com,m:linux@rasmusvillemoes.dk,m:linux@armlinux.org.uk,m:agordeev@linux.ibm.com,m:gerald.schaefer@linux.ibm.com,m:hca@linux.ibm.com,m:gor@linux.ibm.com,m:borntraeger@linux.ibm.com,m:svens@linux.ibm.com,m:akpm@linux-foundation.org,m:david@kernel.org,m:ljs@kernel.org,m:liam@infrade ad.org,m:vbabka@kernel.org,m:rppt@kernel.org,m:surenb@google.com,m:mhocko@suse.com,m:robin.murphy@arm.com,m:sumit.semwal@linaro.org,m:benjamin.gaignard@collabora.com,m:Brian.Starkey@arm.com,m:jstultz@google.com,m:tjmercier@google.com,m:christian.koenig@amd.com,m:rostedt@goodmis.org,m:mhiramat@kernel.org,m:mathieu.desnoyers@efficios.com,m:catalin.marinas@arm.com,m:thierry.red
- ing@gmail.com,m:devicetree@vger.kernel.org,m:linux-tegra@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linux-media@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:linux-s390@vger.kernel.org,m:linux-mm@kvack.org,m:iommu@lists.linux.dev,m:linaro-mm-sig@lists.linaro.org,m:linux-trace-kernel@vger.kernel.org,m:treding@nvidia.com,m:chunn@nvidia.com,m:krzk@kernel.org,m:conor@kernel.org,m:yurynorov@gmail.com,m:thierryreding@gmail.com,s:lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+,1:+,2:+,3:~,4:+];
+	GREYLIST(0.00)[pass,meta];
+	RCPT_COUNT_TWELVE(0.00)[30];
 	FORWARDED(0.00)[lists@lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:-];
-	RCPT_COUNT_GT_50(0.00)[55];
-	ALIAS_RESOLVED(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	DKIM_TRACE(0.00)[mailbox.org:-];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[thierry.reding@kernel.org,linaro-mm-sig-bounces@lists.linaro.org];
-	FREEMAIL_CC(0.00)[kernel.org,nvidia.com,gmail.com,ffwll.ch,linux.intel.com,suse.de,bootlin.com,rasmusvillemoes.dk,armlinux.org.uk,linux.ibm.com,linux-foundation.org,infrade ad.org,google.com,suse.com,arm.com,linaro.org,collabora.com,amd.com,goodmis.org,efficios.com,vger.kernel.org,lists.freedesktop.org,lists.infradead.org,kvack.org,lists.linux.dev,lists.linaro.org];
+	ALIAS_RESOLVED(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[phasta@mailbox.org,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	HAS_REPLYTO(0.00)[phasta@kernel.org];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig,kernel];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig,dt];
 	MISSING_XM_UA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:from_smtp,lists.linaro.org:helo,lists.linaro.org:rdns,nvidia.com:email]
+	FORGED_SENDER_MAILLIST(0.00)[]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 6A0D675764D
+X-Rspamd-Queue-Id: 495C0726CCE
 
-
---===============3403255857884184639==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="gs6kcdn3aiethnov"
-Content-Disposition: inline
-
-
---gs6kcdn3aiethnov
-Content-Type: text/plain; protected-headers=v1; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH v3 04/11] arm64/mm: Add set_memory_device() and
- set_memory_normal()
-MIME-Version: 1.0
-
-On Tue, Jul 07, 2026 at 12:27:13PM +0100, Will Deacon wrote:
-> On Mon, Jul 06, 2026 at 03:49:24PM +0200, Thierry Reding wrote:
-> > On Fri, Jul 03, 2026 at 06:13:31PM +0100, Will Deacon wrote:
-> > > On Thu, Jul 02, 2026 at 06:41:23PM +0200, Thierry Reding wrote:
-> > > > On Thu, Jul 02, 2026 at 03:46:44PM +0200, Thierry Reding wrote:
-> > > > > On Thu, Jul 02, 2026 at 10:18:47AM +0100, Will Deacon wrote:
-> > > > > > On Wed, Jul 01, 2026 at 06:08:15PM +0200, Thierry Reding wrote:
-> > > > > > > From: Chun Ng <chunn@nvidia.com>
-> > > > > > >=20
-> > > > > > > Add helpers to swap PROT_NORMAL and PROT_DEVICE_nGnRnE protec=
-tion bits
-> > > > > > > on a kernel-linear-map range.
-> > > > > >=20
-> > > > > > That sounds like a really terrible idea. Why is this necessary =
-and how
-> > > > > > does it interact with things like load_unaligned_zeropad()?
-> > > > >=20
-> > > > > This is necessary because once the memory controller has walled o=
-ff the
-> > > > > new memory region the CPU must not access it under any circumstan=
-ces or
-> > > > > it'll cause the CPU to lock up (I think technically it'll hit an =
-SError
-> > > > > but in practice that just means it'll freeze, as far as I can tel=
-l).
-> > > > >=20
-> > > > > Probably doesn't interact well at all with load_unaligned_zeropad=
-().
-> > > > >=20
-> > > > > > I think you should unmap the memory from the linear map and mem=
-remap()
-> > > > > > it instead.
-> > > > >=20
-> > > > > Given that the memory can never be accessed by the CPU after the =
-memory
-> > > > > controller locks it down, I don't think we'll even need memremap(=
-). The
-> > > > > only thing we really need is the sg_table we hand out via the DMA=
- BUFs
-> > > > > so that they can be used by device drivers to program their DMA e=
-ngines
-> > > > > internally.
-> > > > >=20
-> > > > > Looking through some of the architecture code around this, should=
-n't we
-> > > > > simply be using set_memory_encrypted() and set_memory_decrypted()=
- for
-> > > > > this? While they might've been created for slightly other use-cas=
-es,
-> > > > > they seem to be doing exactly what we want (i.e. remove the page =
-range
-> > > > > from the linear mapping and flushing it, or restoring the valid b=
-it and
-> > > > > standard permissions, respectively).
-> > > >=20
-> > > > Ah... I guess we can't do it because we're not in a realm world and=
- so
-> > > > the early checks in __set_memory_enc_dec() would return early and t=
-urn
-> > > > it into a no-op.
-> > > >=20
-> > > > How about if I extract a common helper and provide set_memory_p() a=
-nd
-> > > > set_memory_np() in terms of those. Those are available on x86 and
-> > > > PowerPC as well, so fairly standard. I suppose at that point we're
-> > > > closer to set_memory_valid().
-> > >=20
-> > > Why not just call set_direct_map_invalid_noflush() +
-> > > flush_tlb_kernel_range() for each page? We already have APIs for this.
-> >=20
-> > Having a "standard" helper with a fixed and documented purposed seemed
-> > like a preferable approach for this particular case. We also may want to
-> > make the driver that uses this buildable as a module, in which case we'd
-> > need to export these rather low-level APIs. And then there's also the
-> > fact that we typically call this on a rather large region of memory
-> > (usually something like 512 MiB), so doing it page-by-page is rather
-> > suboptimal.
-> >=20
-> > > The big challenge I see with any linear map manipulation, however, is
-> > > that it will rely on can_set_direct_map() which likely means you need=
- to
-> > > give up some performance and/or security to make this work. Does memo=
-ry
-> > > become inaccesible dynamically at runtime? If not, the best bet would
-> > > be to describe it as a carveout in the DT and mark it as "no-map" so
-> > > we avoid mapping it in the first place.
-> >=20
-> > VPR exists in two modes: static and resizable. For static VPR we do
-> > exactly that: describe it as carveout in DT with no-map and deal with it
-> > accordingly in the driver. Resizable VPR is for device that have small
-> > amounts of RAM. Content-protected video playback will in the worst case
-> > consume around 1.8 GiB of RAM, so we want to be able to reuse for other
-> > purposes when VPR is unused on those devices. In that case, the memory
-> > is also described as a reserved-memory region in DT, but it is marked as
-> > reusable so that it can be managed by CMA.
-> >=20
-> > The resize operation is fairly slow to begin with because we need to
-> > stall the GPU and put it into reset before the operation, then take it
-> > out of reset and resume it afterwards.
-> >=20
-> > What kind of performance impact do you expect?
->=20
-> You'll need to measure it, but we've seen reports of double-digit
-> percentage regressions in performance and power. As I said, the problem
-> is that you need to split the linear map to 4k page at runtime to unmap
-> the dynamic carveout, but that isn't something that can be done on most
-> CPUs. Therefore you end up having to use page-granular mappings for the
-> entire thing, similarly to how 'rodata_full' drives can_set_direct_map()
-> and the perf/power hit affects everything.
->=20
-> It's hard to know what to suggest... I wonder if any of the memory
-> hotplug logic could help here?
-
-I've read up on memory hotplug a bit and it sounds like it could fit
-this really nicely. Given that we only use CMA (along with the extra
-patches to it) to make sure that any buffers are reclaimed for VPR use,
-we should be able to get rid of the CMA usage altogether and replace it
-with online_pages() and offline_pages() instead. Rather than using a
-fixed set of CMA areas like we currently do, each "chunk" in the VPR
-driver could represent a memory block instead (which looks like it will
-be 128 MiB for 4 KiB pages and 512 MiB for 64 KiB pages). We currently
-use 512 MiB as the chunk size, so it should be relatively similar and
-easy to adjust.
-
-One issue that we would absolutely need this memory to be ZONE_MOVABLE
-=66rom the start. Using no-map in DT and then online_pages() probably will
-not work because there's no struct page for the memory. So we're left
-with keeping the memory onlined by default, in which case we'd need some
-way for DT to instruct the memory to be put into ZONE_MOVABLE always.
-
-There's a "hotpluggable" property for "memory" nodes, maybe that can be
-extended to apply to reserved-memory nodes as well?
-
-Thierry
-
---gs6kcdn3aiethnov
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCgAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmpOR3kACgkQ3SOs138+
-s6EbFg/9G04JpY5Cu3AX1K9vtQtrw3D5Gowsl1qT7PXe9AmN9PK2oggEDnsm6JPw
-hyDVKxzpLbktBMB5vNKmr4KGYrIEeW4fs+thwrdNjf5GhX7cTQyL78oHaEVTZAn7
-cpiFfepSy6xW4ZDIpHzj6bUVg06S8VZmLOwKHuDbA4N6PZ95evD1ff3/TQs6Y1E6
-WJhgBPjZbTLh6jiIM1y2hRK3GAChy9nC2g2R1LOySIK9NBCgfKV0p2/hv+vQCLSk
-e5ON2GcP06dR1XChOMnEPkUS4BzptxIzVkM7aRiGPJqxVREXJK4MvRTyjZ+W4FuX
-R/QDhwkxdI8+4pwfVPWB10dEWH5vfIrxU5VwO4Uujp4p14P1/nKkWXTe8S69Qitj
-GU8UxLk76btqwkVS43qOyHXH+yXuQBiaWBVTyo8vQx3zp5i8gq1h1xm04ryI0hWj
-BGqXiOxzDr6lEmXUj6h3gUTP+14whWOW8lTqIL0QTKwC4HDv5KTgfgBME2KkYAwp
-1adJdmJ09vhkKAOK1mKHCJHmhOggmoDpIfH8yYSbHeTe4mZZHq9qKtFjvzA8TtMw
-82H0EfyjYM8eNPNZU1/SfsTnhKpTmnLpDCmmdz6Oe4hWGxZVO16z9VujL/EPa0fa
-mY3dWpM8cSvKCP6jm8jguy5IhhLZkS4ljig1obSEvcH0/Tu1FJk=
-=zFs3
------END PGP SIGNATURE-----
-
---gs6kcdn3aiethnov--
-
---===============3403255857884184639==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============3403255857884184639==--
+T24gRnJpLCAyMDI2LTA3LTAzIGF0IDA5OjMxICswMjAwLCBQaGlsaXBwIFN0YW5uZXIgd3JvdGU6
+DQo+IA0KPiArLy8gTmVjZXNzYXJ5IHRvIGd1YXJhbnRlZSB0aGF0IGBpbm5lcmAgYWx3YXlzIGNv
+bWVzIGZpcnN0IGFuZCBjYW4gYmUgZnJlZWQgYnkgQy4NCj4gKy8vIEFsc28gdXNlZnVsIGZvciB1
+c2luZyBjYXN0cyBpbnN0ZWFkIG9mIGNvbnRhaW5lcl9vZigpLg0KPiArI1tyZXByKEMpXQ0KPiAr
+I1twaW5fZGF0YV0NCj4gK3N0cnVjdCBEcml2ZXJGZW5jZURhdGE8J2EsIFQ6IFNlbmQgKyBTeW5j
+ICsgRmVuY2VDdHhPcHM+IHsNCj4gK8KgwqDCoCAjW3Bpbl0NCj4gK8KgwqDCoCAvLy8gVGhlIGlu
+bmVyIGZlbmNlLg0KPiArwqDCoMKgIC8vIE11c3QgYWx3YXlzIGJlIHRoZSBmaXJzdCBtZW1iZXIg
+c28gdGhhdCB1bnNhZmUgY2FzdGluZyB3b3JrczsgYnV0IGFsc28NCj4gK8KgwqDCoCAvLyBuZWNl
+c3Nhcnkgc28gdGhhdCB0aGUgQyBiYWNrZW5kIGNhbiBmcmVlIHRoZSBhbGxvY2F0aW9uIChjb21p
+bmcgZnJvbSBvdXINCj4gK8KgwqDCoCAvLyBSdXN0IGNvZGUpIHdpdGgga2ZyZWVfcmN1KCkuDQo+
+ICvCoMKgwqAgaW5uZXI6IEZlbmNlLA0KPiArwqDCoMKgIC8vLyBDYWxsYmFjayBoZWFkIGZvciBk
+cm9wcGluZyB0aGlzIGluIGEgZGVmZXJyZWQgbWFubmVyIHRocm91Z2ggUkNVLg0KPiArwqDCoMKg
+IHJjdV9oZWFkOiBiaW5kaW5nczo6Y2FsbGJhY2tfaGVhZCwNCj4gK8KgwqDCoCAvLy8gUmVmZXJl
+bmNlIHRvIGFjY2VzcyB0aGUgRmVuY2VDdHguIFVzZWZ1bCBmb3Igb2J0YWluaW5nIG5hbWUgcGFy
+YW1ldGVycy4NCj4gK8KgwqDCoCBmY3R4OiAmJ2EgRmVuY2VDdHg8VD4sDQo+ICvCoMKgwqAgLy8v
+IFRoZSBBUEkgdXNlcidzIGRhdGEuIFRoaXMgbXVzdCBlaXRoZXIgbm90IG5lZWQgZHJvcCwgb3Ig
+bXVzdCBkZWxheSBpdHMNCj4gK8KgwqDCoCAvLy8gZHJvcCBieSBhIGdyYWNlIHBlcmlvZC4gSXQg
+aXMgZXNzZW50aWFsIHRoYXQgdGhlIGRhdGEgb25seSBwZXJmb3Jtcw0KPiArwqDCoMKgIC8vLyBv
+cGVyYXRpb25zIGxlZ2FsIGluIGF0b21pYyBjb250ZXh0IGluIGl0cyBbYERyb3BgXSBpbXBsZW1l
+bnRhdGlvbi4NCj4gK8KgwqDCoCAjW3Bpbl0NCj4gK8KgwqDCoCBkYXRhOiBUOjpGZW5jZURhdGFU
+eXBlLA0KPiArfQ0KPiArDQo+ICtwdWIgc3RydWN0IERyaXZlckZlbmNlPCdhLCBUOiBTZW5kICsg
+U3luYyArIEZlbmNlQ3R4T3BzPiB7DQo+ICvCoMKgwqAgLy8vIFRoZSBhY3R1YWwgY29udGVudCBv
+ZiB0aGUgZmVuY2UuIExpdmVzIGluIGEgcmF3IHBvaW50ZXIgc28gdGhhdCBpdHMNCj4gK8KgwqDC
+oCAvLy8gbWVtb3J5IGNhbiBiZSBtYW5hZ2VkIGluZGVwZW5kZW50bHkuIFZhbGlkIHVudGlsIGJv
+dGggdGhlIFtgRHJpdmVyRmVuY2VgXQ0KPiArwqDCoMKgIC8vLyBhbmQgYWxsIGFzc29jaWF0ZWQg
+W2BGZW5jZWBdcyBoYXZlIGRpc2FwcGVhcmVkLg0KPiArwqDCoMKgIGRhdGE6IE5vbk51bGw8RHJp
+dmVyRmVuY2VEYXRhPCdhLCBUPj4sDQo+ICt9DQo+ICsNCj4gKy8vLyBBIHByZS1wcmVwYXJlZCBE
+TUEgZmVuY2UsIGNhcnJ5aW5nIHRoZSB1c2VyJ3MgZGF0YSBhbmQgdGhlIG1lbW9yeSBpdCBhbmQg
+dGhlDQo+ICsvLy8gZmVuY2UgcmVzaWRlIGluLiBPbmx5IHVzZWZ1bCBmb3IgY3JlYXRpbmcgYSBb
+YERyaXZlckZlbmNlYF0uIFNwbGl0dGluZw0KPiArLy8vIGFsbG9jYXRpb24gYW5kIGZ1bGwgaW5p
+dGlhbGl6YXRpb24gaXMgbmVjZXNzYXJ5IGJlY2F1c2UgZmVuY2VzIGNhbm5vdCBiZQ0KPiArLy8v
+IGFsbG9jYXRlZCBkeW5hbWljYWxseSBpbiBzb21lIGNpcmN1bXN0YW5jZXMgKGRlYWRsb2NrKS4N
+Cj4gK3B1YiBzdHJ1Y3QgRHJpdmVyRmVuY2VBbGxvY2F0aW9uPCdhLCBUOiBTZW5kICsgU3luYyAr
+IEZlbmNlQ3R4T3BzPiB7DQo+ICvCoMKgwqAgLy8vIFRoZSBtZW1vcnkgZm9yIHRoZSBhY3R1YWwg
+Y29udGVudCBvZiB0aGUgZmVuY2UuDQo+ICvCoMKgwqAgLy8vIEhhbmRlZCBvdmVyIHRvIGEgW2BE
+cml2ZXJGZW5jZWBdLCBvciBkZWFsbG9jYXRlZCBvbmNlIHRoZQ0KPiArwqDCoMKgIC8vLyBbYERy
+aXZlckZlbmNlQWxsb2NhdGlvbmBdIGRyb3BzLg0KPiArwqDCoMKgIGRhdGE6IEtCb3g8RHJpdmVy
+RmVuY2VEYXRhPCdhLCBUPj4sDQo+ICt9DQoNCk9uZSBpc3N1ZSB0aGF0IEknbSBvbmx5IGRpc2Nv
+dmVyaW5nIGp1c3Qgbm93IGlzIHRoYXQgdGhlIHJlcXVlc3Qgb2YNCmRlcml2aW5nIHRoZSBEcml2
+ZXJGZW5jZSdzIGdlbmVyaWMgdGhyb3VnaCB0aGUgRmVuY2VDdHgncyBnZW5lcmljDQpjYXVzZXMg
+aXNzdWVzIGxpa2UgdGhpczoNCg0KDQpzdHJ1Y3QgRHJpdmVyRm9vIHsNCiAgZjogRHJpdmVyRmVu
+Y2U8KCk+LCAvLyBlcnJvcjogbXVzdCBpbXBsZW1lbnQgRmVuY2VDdHhPcHMNCn0NCg0KSU9XLCBh
+bGwgRHJpdmVyRmVuY2U6OmRhdGEgbm93IG11c3QgaW1wbGVtZW50IHRoZSB0cmFpdC4gV2hpY2gg
+aXMNCm9idmlvdXNseSBub3Qgd2hhdCB3ZSB3YW50Lg0KDQpCdXQgSSBjYW5ub3QgZ2V0IGVhc2ls
+eSBnZXQgcmlkIG9mIGl0LiBTZWUgRHJpdmVyRmVuY2VEYXRhLg0KDQpAQm9yaXM6IERvIHlvdSBo
+YXZlIGEgc3VnZ2VzdGlvbj8gT3RoZXJ3aXNlIEknZCB3YW50IHRvIGRlZmF1bHQgYmFjayB0bw0K
+UGhhbnRvbURhdGEsIHdoaWNoIEkgc3RpbGwgYmVsaWV2ZSBpcyBjbGVhbmVyLg0KDQoNClAuDQpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0t
+c2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5z
+dWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFy
+by5vcmcK
