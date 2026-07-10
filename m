@@ -2,305 +2,335 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id AG80I8HmUGq08AIAu9opvQ
+	id BYa4Be5xVmq35gAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 10 Jul 2026 14:34:09 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 19:29:18 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id D98DF73ACF7
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 10 Jul 2026 14:34:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 981607576D9
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 19:29:17 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=amd.com header.s=selector1 header.b=E7PjSRYM;
-	dmarc=fail reason="SPF not aligned (relaxed)" header.from=amd.com (policy=quarantine);
+	dkim=fail ("body hash did not verify") header.d=qualcomm.com header.s=qcppdkim1 header.b=niHyyzJ9;
+	dkim=fail ("body hash did not verify") header.d=oss.qualcomm.com header.s=google header.b=RBC6Dyvz;
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
-	arc=reject ("signature check failed: fail, {[1] = sig:microsoft.com:reject}")
+	dmarc=fail reason="SPF not aligned (relaxed)" header.from=qualcomm.com (policy=reject)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E751340EC3
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 10 Jul 2026 12:34:07 +0000 (UTC)
-Received: from SN4PR2101CU001.outbound.protection.outlook.com (mail-southcentralusazon11012040.outbound.protection.outlook.com [40.93.195.40])
-	by lists.linaro.org (Postfix) with ESMTPS id C7DA840962
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 10 Jul 2026 12:33:57 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=V1mhNoS002StjmPlaGrpNYIlD5qe2RO+5FueH4ZV39+kYYgeJOjZ1iOSofeuiiOw20rgziZOYrBsBCHTCoudZhP6zLbTPVPjUDmWEqwan58oHCBi1WxtkXxGeutDA3BTLULZ+fvGanv5q+qQx6d8ieyK4ZYjIW9p1ZwE+LMzSRCpMNm6qU5Ns/no2TBikMF9LSaV1uHLXe9lh+hODxVlvMJ2EfXXIpU8XJQcnl9oq6UFtYETHdJQjfBKW9P0iVTZm0RJ0ufJ+maT25gSU3wambewB/wJkmRXEPk6fHSAXz5YfsGY2e56NwLlTGEtX5zUP2eSeL9L3kgqNArd1kwy6w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4fJc2XVqGPSsolcEvXw6vulA0PYq460fs5OE7e+JzSg=;
- b=N0+NfiX6h83hT2ofpgKTBSn7fbQTF6y4NhPLtxtSkt4NldUvTcNbFQDG41qfvilP85kWvM+pnD6fYcREXSFFk8WRo0IQSAT8fb1fC5JAQrieXlQCvlKevf+m6nlAQPkBTPSAfgy33A9sjormOXeWaDuZEWWpG4lK7ZOKSZYVg6mylUD1auI+iG2uterUWyvw+5tHnp5BHA+ioO3VTKCJQ0vBXp3FTi/s4BzLpzgrux3EcX9iqTGZOyTQSsaaHKRCMN+TCN8EK58efqijY8Sl4RMf9EdqYJmFQl6XXhlNu/lvPttv8MCoolmEnIjCRy79xczvxcO1JrvffF9lQz8f9g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4fJc2XVqGPSsolcEvXw6vulA0PYq460fs5OE7e+JzSg=;
- b=E7PjSRYMPC2RxuxXUO39HO0+0KzS0UTl+4b0sKAIc9dn1eTlP0ArvqiCAshl0MKG8M/3WvfFzmNIHBhgyoYxhgw+J48+JubjrKDQKxF2vBwYy37H69vWqo0ucHI5a5ItoutDYKfxWqg4qM3Ah+vcwcoBHNT7x8OIYTKZFhZ0iD0=
-Received: from PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
- by PH7PR12MB5807.namprd12.prod.outlook.com (2603:10b6:510:1d3::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.17; Fri, 10 Jul
- 2026 12:33:53 +0000
-Received: from PH7PR12MB5685.namprd12.prod.outlook.com
- ([fe80::ce69:cfae:774d:a65c]) by PH7PR12MB5685.namprd12.prod.outlook.com
- ([fe80::ce69:cfae:774d:a65c%5]) with mapi id 15.21.0181.008; Fri, 10 Jul 2026
- 12:33:53 +0000
-Message-ID: <99679491-8dae-460b-b662-81b130829956@amd.com>
-Date: Fri, 10 Jul 2026 14:33:43 +0200
-User-Agent: Mozilla Thunderbird
-To: Baineng Shou <shoubaineng@gmail.com>,
- Sumit Semwal <sumit.semwal@linaro.org>,
- Benjamin Gaignard <benjamin.gaignard@collabora.com>,
- Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>,
- "T . J . Mercier" <tjmercier@google.com>, Sandeep Patil
- <sspatil@android.com>, "Andrew F . Davis" <afd@ti.com>
-References: <20260703080922.1838362-1-shoubaineng@gmail.com>
- <20260710105740.3080070-1-shoubaineng@gmail.com>
-Content-Language: en-US
-From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-In-Reply-To: <20260710105740.3080070-1-shoubaineng@gmail.com>
-X-ClientProxiedBy: FR4P281CA0271.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:e6::20) To PH7PR12MB5685.namprd12.prod.outlook.com
- (2603:10b6:510:13c::22)
+	by lists.linaro.org (Postfix) with ESMTP id ACDBB40A33
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 17:29:16 +0000 (UTC)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	by lists.linaro.org (Postfix) with ESMTPS id 670FF406AA
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 10 Jul 2026 16:11:08 +0000 (UTC)
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66AEchgF1123506
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 10 Jul 2026 16:11:08 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=9KheAc7I+aBb0Mu9MvhRuCgqeY8ZW+ixLVF
+	g/AQ6n/g=; b=niHyyzJ9n6F4jllZESey+VgnsJ0EmhI0zq+OrGKZ2UwTUmL+iVx
+	MbG+8FhcJ9BGjmfpQNPgJ10f3rax8Yy1oVVmGZexTbWWfEXs2zyGUEx2Xx+XHoGP
+	vec/AL4xZr9vJRXrNgKyhH4BuDWhg85OkpYNKccqNFArk0DywZIIzTLHH2dHMq8V
+	tds6InoIiZLKpgKPjpcXteW619tfxI/VIYu+Ulvhf6wFJQRT+g3quUsI4f+lTE5t
+	RjXLxLhOWy2vXCbv52voip4K4hdIVLhFXTw66snsH86nWSIz3AmsCUDPsnPrwrsV
+	UsOkVzZUIoCF+XKmIP6GrfxsBS4AlrG+hfg==
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fas6n2pyb-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 10 Jul 2026 16:11:07 +0000 (GMT)
+Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-c9d5a5b63c5so1628500a12.1
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 10 Jul 2026 09:11:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1783699867; x=1784304667; darn=lists.linaro.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=9KheAc7I+aBb0Mu9MvhRuCgqeY8ZW+ixLVFg/AQ6n/g=;
+        b=RBC6Dyvzo19C+2vplQ9HwxsATSMiodh/GqUL6wtWctApAZowicuWB9UPDwLtjgECJm
+         C7kC4E2YXOfdACOgC0cpVM02+D7RBrcV7FHBTGh3y6px19iA94KkI7cNiz6clXU6slxh
+         Iua3WV4DMKQkhONL2ts8XrmY7tWbHAlKuFI7N2Ox3TDHpAojtk10bltOuYBJPnNKudSx
+         OY5UG6f/dHUHJ5MPp7lrH2IfWBd89vMW0KbDLs47hTvxiaK8V+/tMvHD+2UCiKAv0m85
+         gnOcL3t6yQdwKLHB5doqj6LF8UKHVfNGnK03swyVHYgScjNUdgJZXRwNZ6qjSQ/6YJRz
+         yKlw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783699867; x=1784304667;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=9KheAc7I+aBb0Mu9MvhRuCgqeY8ZW+ixLVFg/AQ6n/g=;
+        b=YnZBNLHTOKKDdWbeRF4Y/qKOivibdgFO7+urXci94E9MZ1rA2wZOVCeirtE27PwOWp
+         9t5f1v1+CxQGr2VglKy/wFxFIDW9TXbQhQzw1FVPhSYnjgNpR6212EQE7b4Y3mPuAhf3
+         qmtOSn1/OtcZn8M2yZSsXVedWZ2+twh2Ve8AK/E3iCWKaY+qy7DJeky7gko3CsBT6Cc5
+         crElxy2X/Gl7NHzvL/p6aS5fBCNK7AZDaeiSjIh7gGDlL/r1euhaeGRhS1X66QIkyGjj
+         OYXakWBaEfaUVTMLRvL7ij1sWClnX13ODUD8ROkKWOGJh0NOCldBvKaQsaT0q8JCIfms
+         wb+Q==
+X-Forwarded-Encrypted: i=1; AHgh+RotFSxOeVdXc6unr91BaGd2uage+TnZXpjOuz5OEvyX3CxPN41EcSE3HTJ1FOOJfrwkW85ImaNa2SAvcPaI@lists.linaro.org
+X-Gm-Message-State: AOJu0Yx6e52o4uxeEJteNxMjw176qrmU/pueKX+qcqX9WQxy3YZStmoT
+	OigRaB7KyNcMhscyLE2rreJ1+dfHX8DAbUaKOq4roLoIcIJon8Y3DtOxnA9nFcnvKguXji+X6+h
+	+OeeoLt7t0oMJsJ96t0ZDDSk0hZJ9UfBz7jFdQcj3PP3QRvp+/AzSteiQm1lh9of/4jjNzA==
+X-Gm-Gg: AfdE7cnCUuPDBfAdM2/3ixFVRAYaiGlDtU2g6ST9j+WWHJKxV6+A/qql/nSbu6wX3IK
+	IlKsHpowlShssnXyVnj7JnZx7Xe3FUp+UNe6kF1OSopLBl2z+VUbUKWVAs0LTu4dkiTwwZnWHO5
+	pDcPdjaRQiT+pdp4jq8/AJ34JERTUWmKg/0Snh+xjUyHgK2nlmsW71ClWs1EZWNtY9nXQQJlGs7
+	DRM+0mYC1aLZIaTDLx9XaRG/zgU2rlteN/bvBhYOJuXkpEeJdoUzACs08GftsNhxSvP43Ant9fq
+	3ViyIJdane+4Xz3chvVpbu6S9a6ehyMb0CxNCAHEhAuMOrOeHBmOKlqCv8FjUr7FIvVJKJZFGQ/
+	kphYxMr0Tu4uzkTQxQ5jbu8WiDolfpAS0tAOvlvlP5Kt5Uw==
+X-Received: by 2002:a05:6a20:a123:b0:3bf:97e8:a026 with SMTP id adf61e73a8af0-3c0bced45eamr14574931637.25.1783699866557;
+        Fri, 10 Jul 2026 09:11:06 -0700 (PDT)
+X-Received: by 2002:a05:6a20:a123:b0:3bf:97e8:a026 with SMTP id adf61e73a8af0-3c0bced45eamr14574892637.25.1783699866069;
+        Fri, 10 Jul 2026 09:11:06 -0700 (PDT)
+Received: from hu-arandive-hyd.qualcomm.com ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-ca5b3b251eesm5128818a12.31.2026.07.10.09.11.01
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 10 Jul 2026 09:11:05 -0700 (PDT)
+From: Aniket Randive <aniket.randive@oss.qualcomm.com>
+To: mukesh.savaliya@oss.qualcomm.com, viken.dadhaniya@oss.qualcomm.com,
+        andi.shyti@kernel.org, sumit.semwal@linaro.org,
+        christian.koenig@amd.com
+Date: Fri, 10 Jul 2026 21:40:56 +0530
+Message-Id: <20260710161056.1799019-1-aniket.randive@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|PH7PR12MB5807:EE_
-X-MS-Office365-Filtering-Correlation-Id: cda1c5e9-33a2-4a13-828a-08dede7f808d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|366016|7416014|376014|23010399003|1800799024|18002099003|22082099003|4143699003|11063799006|56012099006;
-X-Microsoft-Antispam-Message-Info: 
-	lSpjfg3siqAMVAqRhwSH+QXiGJRX+N4fpvTrJY63SrgV6INrdP9SJqlcTTW0O5bBToIzeBUc8RjKgcyCY16wfoqk5EmHWM6KLpvpfmDH02XLPeU2lHMVwu0ywMqkiJCxxk0L7pJykR94qShFbE74xQy0ktJTpZ/F5AFwGhHNc5paocRWS5Ui5/cmNTz6/j2vpVDqMCNt82KbOB84iSm7K8V8xYUq2wg7CnvziCpH66Irjh6vlZZ8NOAYZDon0QgFlLBC3csPGBowGwUBuFpn4bP505OJBTR+z/qps0QTx47tjgWXVClxTLG61x851QmkM0AYIEwWBXHu7l/sRUuBppJodCgfdLzrrpyzFEbvkfBPln2N7RqHFJ8u4Pqw4EIP6goE5pIc1RNxGxm1NwQqjRYHPsJRYJ3W7cYCDIoY4D0AgH0Mg6b0ow1aSSrICzQSbtc2G7s9XufHUU7SKe6wLoilEhPrl140geTa9wGixKml5MpSegXjCuo0Aj+jlp4+L5dNKRi/pAlde5UDhtYtP1fIFLaIx6W9djfy3BG+FsElBPGj3zuVKjashpnhmnpAwgzmL77TDkDX1gs25rULQQh9ATjYtXYwzCH+MNVNrXcAP+QHxptYQtZUTr3EimVDz+YOK+76Sz5Yiy3i53tGy0bn9vNllfjZYixg9CI8XV4=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB5685.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(7416014)(376014)(23010399003)(1800799024)(18002099003)(22082099003)(4143699003)(11063799006)(56012099006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?cXF4dkk0R0RSemRYejVoZGlqODRNZ2V6MzBIRHYzLzhFSXpkNCtoL1ZoYkow?=
- =?utf-8?B?bXlqSkdYMlhFenFHMTV5Y3hGNENMSXpFN2xNSkZhaXpvb3BGbG1qcUxmV3JV?=
- =?utf-8?B?Slk0NG9FV1dvVmMyNUJFUGlrWWgyLy8xQklZblI4cHJicGpkajhUWUFSY0JH?=
- =?utf-8?B?OHFFZXFsNDZlU0ZYQnZQdXFTWkgvdVlUUmptQURIT2hiVFJDdW9LaUg4eFlE?=
- =?utf-8?B?NTJFTHI4Sno5UGVKTXNPdFhoanoxUlpaK1JvTFZsYU1RdkpseUN2Q1RZYkFz?=
- =?utf-8?B?THJNbVBSQ1V2Y0pQRkxFMTZYTUdqYkRZS1hTYUVkR0JXbWRKREVvcW5tWk5H?=
- =?utf-8?B?bW1KZ1Z3VkVNODdGRnUwNE1adDVmdTh5eWxvNkFYamZ4cnc3Qi9qQ0hNNmNM?=
- =?utf-8?B?c2EyVTVOUlJzcDZpWWxvbjZoTmxWSkpZdTMvZHRsLytHYStVQjB3ekl0T05l?=
- =?utf-8?B?YzRYT21JVHZwYkJob2ttd0lxWlNhTjdhR00yMlphK2hBTHJKMGtyclJUMjdB?=
- =?utf-8?B?N0FOc21oVUFhUFhkalRzdklDYllEQ1Q0MXB0SFZmcWloT3V0WHZ3d1hLU0F0?=
- =?utf-8?B?ZHJJK0ZzZWpuNVBaZGcyU3d0NkYxZ0RxQVdXc2tyYnBmZ0tsRnZVMEtpY3gv?=
- =?utf-8?B?VkRDK0FRd3k5K0tpZnpEYmc1UGRXVjNiZUF3K0JacFhmYkp1Y2dneGxJY3BM?=
- =?utf-8?B?ekNpTVoxVGltOS9EZkZzQktXaW80Q0J4N3FKNzFzWkh6SExKSHF1USsvWGRF?=
- =?utf-8?B?ZzZPMGJ5dXE0Ny9QazkzUFRGZ1ZadE16dHdoVng2NmJRcVRqV25TdU9nV2Uw?=
- =?utf-8?B?cncvUjdEblN0K2ZyaWVFek10NFZpYlN5ZkNTSG5sWkdQSm9oL1prRVIzTHEx?=
- =?utf-8?B?SUFYS1psVWhqYjZ1RUpMOWVQbXNWckkxeUxqRDRTNkg3Y0s3dy8zWW50dFBz?=
- =?utf-8?B?TzBIS1NyZ0xCSmJQZ3BpK05ML29oM1M0UWhYcmxtUWJBRU5BMmdjZm1MbU1u?=
- =?utf-8?B?S01pT2UvQyt1YWlvM1JNUVE0YWp2aEpSSkpnOUhQSVczeU1YdUxDK0RjcnpH?=
- =?utf-8?B?cldCdTE0ZHdtWkVFRXRMeDNDVEZEcW9wWXNLVzVxZTZKZTV2SE81eU96YUFQ?=
- =?utf-8?B?WVdjdzUzelMyVnNNWm04b2NUU1hOM1VjdmdZMjRHai9uVElDZVJrUFdnNWZ2?=
- =?utf-8?B?akNjU3RkMnpNa202Z1RqZ2ZKUlNTNzRaVktndWRQeVg1MFFFQnlwYlA2a21Q?=
- =?utf-8?B?TkcvcVRtOXdNcm5XSDJwaTFYR2ZyUXRmemhsN0Z5ekZOMzNhWDluUkxLNEVv?=
- =?utf-8?B?K2dIY3Bia1Z6eGNGVVJxMVRCMkNnRWR5dG9SZDh6a0JYRWVxTHZyT1BENUFq?=
- =?utf-8?B?SmE4RVFKTmtZaHNpRnJmcGlhR1lsRzJReko0OWtOSzFnQVNXT2Myb0k0c2lt?=
- =?utf-8?B?T29UUEJiZVFKS0FUOS9pbFZYMWZ0U2lWRkNPTit5cVB0N1hXM3FnYllxZ3FH?=
- =?utf-8?B?VXBVekhIbDVBRm9xZy9FbVN0aUlTdzJkTHVDNXpHZG5CRm1na2tyMW9wZ1NS?=
- =?utf-8?B?R1RJcXpNei96aHRYdkQ1dXBLQnlzNm4xZU9hMXNvV3laUjRDbUVvcGFKeEQy?=
- =?utf-8?B?b1BKVnJRNlBFSDRWSlo1b2ZQMTZMTzdpR0VkM25NSVNmWFE1aDliOGxnd0h1?=
- =?utf-8?B?VmNRWjBXWmkveVRsdFRhUUlOc1NFYk10dWlRNWdEYzVlVTJreExYNXo4LzVN?=
- =?utf-8?B?Smp6V1V5dUVHZFVEOTIzbTdyWjRaNkpiVVdENG9oTytaSGJhNFNxSVpJa1pw?=
- =?utf-8?B?M2JCNytDT2tYMnJjeDlpQUxUcGg2TVZWeTUxRCtyWUYzNWc2TjdRUWQ3Y3dP?=
- =?utf-8?B?R0dYd3RPUjMwUG9EMTJ1K21keVYzbFlXbEdqNlNGaEJVaWZnelVYanB4RGg2?=
- =?utf-8?B?MzMzRVN4L2tkSEhJeXJEVWhRSlBScVNIVWFHb3BsSTlNaU1JMldUb3YwNDU2?=
- =?utf-8?B?bFdtd1UranhCM3ErSCtneTNuTXlweitrUUFrNXF0a05aRW5mR3BZMXdEVE84?=
- =?utf-8?B?NlFiUUg4bEpwRCt0VmJGMUkvUklteXRmYWtPWEJEdlZBUVhyWnh1Y2JPMDQ0?=
- =?utf-8?B?T1ZGeUFXdkJrL1hac0hneGhsRUhvY1c2c3JWbnZzakp0NDNSUWEycHFLa0lm?=
- =?utf-8?B?QkdicElYZlY1OFNYcHVOdXRpeUpieno3ZndzUVFYVHA5eFI0MFlnN0tSWUVC?=
- =?utf-8?B?OXJmc1lDYVpNYXhKbE1DZnFkQmp3Snc4TGJtQ2FGbFBpTTVIZmlQYmJLSGpW?=
- =?utf-8?Q?Xaxau7IaGEwN1pxUZe?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: cda1c5e9-33a2-4a13-828a-08dede7f808d
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5685.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jul 2026 12:33:53.6700
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: I1+7sFmQT0YwDru0A1ovKAYpiI8/6/xuGbRRAlM+hu6eQp8VZQPPkz+pKht5hp9h
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB5807
-X-Spamd-Bar: -----
-Message-ID-Hash: SDD2TMRFUWLS5GZVIIF5UINFOWT6GMIA
-X-Message-ID-Hash: SDD2TMRFUWLS5GZVIIF5UINFOWT6GMIA
-X-MailFrom: Christian.Koenig@amd.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: stable@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzEwMDE2MSBTYWx0ZWRfX7PChP+AQkBrR
+ 7AW5G5USzpY4oZ4j6UxjXEUo5LG6Ltg1uE1ixHPevF6AKkNPWgMg25aN2rHCJCKz/88axPsGN5V
+ 0hk1K5thb7l09pQKdK5wR1SEEdjD+vk=
+X-Authority-Analysis: v=2.4 cv=DYgnbPtW c=1 sm=1 tr=0 ts=6a51199b cx=c_pps
+ a=rz3CxIlbcmazkYymdCej/Q==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=EUspDBNiAAAA:8
+ a=z1CpEO-fZNADMcIYu6MA:9 a=bFCP_H2QrGi7Okbo017w:22
+X-Proofpoint-ORIG-GUID: UQOhjQQWdgNCL4i48YpGkr6hi6vElPw2
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzEwMDE2MSBTYWx0ZWRfX4IKlV+LFMfbE
+ tr1IKc/rUdmt6twyqyPq9pP2QuUrVx/YOfvChCmjK5fvPoe3G1JRrxT2Lltf5GXpZYdaiUVUZ0m
+ TCxb6JKRiFOUAArvu3qLgbUaOXVmgpT1MjUsxW/5NpcUBrQ/WEHLLTGMomQXEzawkdAo+1aq6k+
+ 9SfXlVc6s5/DlEUcCjRKBlt3X7V6+yHUj929R3sNgYXrtNo3LI1q18jfZkSY/j+VAb+278kf9PS
+ 31b/PnYUOhVxu5rGao+iJOy4nLQ58QKnANo6HAeR56uYvvYwFFSOic0HK9TWo53ZDi/O/1P7rsc
+ gpCBtTg10sQ6ZmAJgHtZvpx2A2qLJPUkpmu0k2UIhQD+OQa7t8n0l94Bf21qHjCb+o8+q+MnhTo
+ mZnECFSOORnI9jet8mITSvRVDahNO9nh3mE82RBadzR9WyddlMBygpXuW7TvSuYpR2aty1rmzmQ
+ +WGNGAeb1tAEzWrYrNw==
+X-Proofpoint-GUID: UQOhjQQWdgNCL4i48YpGkr6hi6vElPw2
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-10_04,2026-07-10_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 lowpriorityscore=0 adultscore=0 suspectscore=0 bulkscore=0
+ clxscore=1015 phishscore=0 malwarescore=0 spamscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607100161
+X-Spamd-Bar: --
+X-MailFrom: aniket.randive@oss.qualcomm.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+Message-ID-Hash: N3NXO45WOKWBZZ3234QMLLFDAISW3DLJ
+X-Message-ID-Hash: N3NXO45WOKWBZZ3234QMLLFDAISW3DLJ
+X-Mailman-Approved-At: Tue, 14 Jul 2026 17:21:04 +0000
+CC: linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, naresh.maramaina@oss.qualcomm.com, aniket.randive@oss.qualcomm.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2] dma-buf: dma-heap: don't publish fd before copy_to_user() succeeds
+Subject: [Linaro-mm-sig] [PATCH V4] i2c: qcom-geni: Add dynamic transfer timeout based on transfer length and frequency
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SDD2TMRFUWLS5GZVIIF5UINFOWT6GMIA/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/N3NXO45WOKWBZZ3234QMLLFDAISW3DLJ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [3.09 / 15.00];
-	DMARC_POLICY_QUARANTINE(1.50)[amd.com : SPF not aligned (relaxed),quarantine];
-	R_DKIM_REJECT(1.00)[amd.com:s=selector1];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
-	R_SPF_ALLOW(-0.20)[+mx];
+X-Spamd-Result: default: False [4.49 / 15.00];
+	DMARC_POLICY_REJECT(2.00)[qualcomm.com : SPF not aligned (relaxed),reject];
+	R_DKIM_REJECT(1.00)[qualcomm.com:s=qcppdkim1,oss.qualcomm.com:s=google];
+	MID_CONTAINS_FROM(1.00)[];
+	DATE_IN_PAST(1.00)[97];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
-	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:shoubaineng@gmail.com,m:sumit.semwal@linaro.org,m:benjamin.gaignard@collabora.com,m:Brian.Starkey@arm.com,m:jstultz@google.com,m:tjmercier@google.com,m:sspatil@android.com,m:afd@ti.com,m:stable@vger.kernel.org,m:linux-media@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER(0.00)[christian.koenig@amd.com,linaro-mm-sig-bounces@lists.linaro.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	FORGED_SENDER(0.00)[aniket.randive@oss.qualcomm.com,linaro-mm-sig-bounces@lists.linaro.org];
 	RCPT_COUNT_TWELVE(0.00)[13];
-	FREEMAIL_TO(0.00)[gmail.com,linaro.org,collabora.com,arm.com,google.com,android.com,ti.com];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:mukesh.savaliya@oss.qualcomm.com,m:viken.dadhaniya@oss.qualcomm.com,m:andi.shyti@kernel.org,m:sumit.semwal@linaro.org,m:christian.koenig@amd.com,m:linux-i2c@vger.kernel.org,m:linux-arm-msm@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-media@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,m:naresh.maramaina@oss.qualcomm.com,m:aniket.randive@oss.qualcomm.com,s:lists@lfdr.de];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[lists@lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[amd.com:-];
-	TO_DN_SOME(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[christian.koenig@amd.com,linaro-mm-sig-bounces@lists.linaro.org];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linaro-mm-sig];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ARC_NA(0.00)[];
+	GREYLIST(0.00)[pass,meta];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	FROM_NEQ_ENVFROM(0.00)[aniket.randive@oss.qualcomm.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[qualcomm.com:-,oss.qualcomm.com:-];
+	TO_DN_NONE(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:from_smtp,lists.linaro.org:helo,lists.linaro.org:rdns]
+	ALIAS_RESOLVED(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linaro-mm-sig];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[oss.qualcomm.com:from_mime,oss.qualcomm.com:mid,linaro.org:email,qualcomm.com:email,lists.linaro.org:from_smtp,lists.linaro.org:helo,lists.linaro.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: D98DF73ACF7
+X-Rspamd-Queue-Id: 981607576D9
 
-T24gNy8xMC8yNiAxMjo1NywgQmFpbmVuZyBTaG91IHdyb3RlOg0KPiBETUFfSEVBUF9JT0NUTF9B
-TExPQyBhbGxvY2F0ZXMgYSBkbWEtYnVmIGFuZCBpbnN0YWxscyBhbiBmZCBpbnRvIHRoZQ0KPiBj
-YWxsZXIncyBmZCB0YWJsZSB2aWEgZG1hX2J1Zl9mZCgpIC0+IGZkX2luc3RhbGwoKSBiZWZvcmUN
-Cj4gZG1hX2hlYXBfaW9jdGwoKSBjb3BpZXMgdGhlIHJlc3VsdCBiYWNrIHRvIHVzZXJzcGFjZS4g
-IElmIHRoZSB0cmFpbGluZw0KPiBjb3B5X3RvX3VzZXIoKSBmYWlscywgdXNlcnNwYWNlIG5ldmVy
-IGxlYXJucyB0aGUgZmQgbnVtYmVyLCBidXQgdGhlDQo+IGZkIChhbmQgdGhlIHVuZGVybHlpbmcg
-ZG1hLWJ1ZiByZWZlcmVuY2UpIGFyZSBhbHJlYWR5IHZpc2libGUgdG8NCj4gb3RoZXIgdGhyZWFk
-cyBpbiB0aGUgc2FtZSBwcm9jZXNzIGFuZCBhcmUgbGVha2VkIGZvciB0aGUgbGlmZXRpbWUgb2YN
-Cj4gdGhlIHByb2Nlc3MuDQo+IA0KPiBUaGUgb2J2aW91cyAiY2xvc2UgaXQgb24gdGhlIGZhaWx1
-cmUgcGF0aCIgZml4IGlzIHVuc2FmZTogb25jZQ0KPiBmZF9pbnN0YWxsKCkgaGFzIHJ1biwgYW5v
-dGhlciB0aHJlYWQgY2FuIGFscmVhZHkgZHVwKCkgdGhlIGZkLCBzZW5kDQo+IGl0IHZpYSBTQ01f
-UklHSFRTLCBvciBjbG9zZSgpIGl0IGFuZCBsZXQgaXRzIG51bWJlciBiZSByZXVzZWQsIHNvIGEN
-Cj4gc3Vic2VxdWVudCBjbG9zZV9mZCgpIGZyb20gdGhlIGlvY3RsIHBhdGggY2FuIG9wZXJhdGUg
-b24gYW4gdW5yZWxhdGVkDQo+IGZpbGUuICBUaGlzIHdhcyBwb2ludGVkIG91dCBieSBDaHJpc3Rp
-YW4gS8O2bmlnIG9uIHYxIFsxXS4NCg0KSUlSQyBpdCB3YXMgR3JlZyB3aG8gcG9pbnRlZCB0aGF0
-IG91dCBudW1lcm91cyB0aW1lcywgSSdtIGp1c3QgcmVwZWF0aW5nIHdoYXQgSSB3YXMgdG9sZC4N
-Cg0KPiANCj4gUmVzdHJ1Y3R1cmUgdGhlIGFsbG9jYXRpb24gcGF0aCBzbyB0aGF0IGZkX2luc3Rh
-bGwoKSBpcyB0aGUgbGFzdCwNCj4gdW5mYWlsYWJsZSBzdGVwIG9mIGEgc3VjY2Vzc2Z1bCBpb2N0
-bDoNCj4gDQo+ICAgMS4gaGVhcC0+b3BzLT5hbGxvY2F0ZSgpICAgICAgY3JlYXRlcyB0aGUgZG1h
-X2J1Zi4NCj4gICAyLiBnZXRfdW51c2VkX2ZkX2ZsYWdzKCkgICAgICByZXNlcnZlcyBhbiBmZCBu
-dW1iZXIgaW4gdGhlIGNhbGxlcidzDQo+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ZmQgdGFibGUgd2l0aG91dCBwdWJsaXNoaW5nIGl0LCBzbw0KPiAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIG5vIG90aGVyIHRocmVhZCBjYW4gb2JzZXJ2ZSBpdC4NCj4gICAzLiBjb3B5
-X3RvX3VzZXIoKSAgICAgICAgICAgICBkZWxpdmVycyB0aGUgZmQgbnVtYmVyIHRvIHVzZXJzcGFj
-ZTsNCj4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBvbiBmYWlsdXJlIHRoZSBmZCBp
-cyByZXR1cm5lZCB3aXRoDQo+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcHV0X3Vu
-dXNlZF9mZCgpIGFuZCB0aGUgZG1hX2J1Zg0KPiAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHJlZmVyZW5jZSBpcyBkcm9wcGVkIHdpdGgNCj4gICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBkbWFfYnVmX3B1dCgpLCBsZWF2aW5nIG5vIHVzZXItDQo+ICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgdmlzaWJsZSBzdGF0ZSBiZWhpbmQuDQo+ICAgNC4gZmRfaW5zdGFs
-bCgpICAgICAgICAgICAgICAgcHVibGlzaGVzIHRoZSBmZCAtLSBmcm9tIGhlcmUgb24gdGhlDQo+
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaW9jdGwgY2Fubm90IGZhaWwuDQo+IA0K
-PiBUbyBtYWtlIHRoaXMgcG9zc2libGUsIGRtYV9oZWFwX2lvY3RsX2FsbG9jYXRlKCkgaXMgcmVm
-YWN0b3JlZCB0bw0KPiByZXR1cm4gdGhlIHN0cnVjdCBkbWFfYnVmICogZGlyZWN0bHkgKHJldHVy
-bmluZyBFUlJfUFRSIG9uIGZhaWx1cmUpDQo+IHNvIHRoZSBjYWxsZXIgaG9sZHMgdGhlIGRtYWJ1
-ZiByZWZlcmVuY2UgYWNyb3NzIHN0ZXBzIDMgYW5kIDQuDQo+IFRoZSBmZCBpcyB3cml0dGVuIGlu
-dG8gdGhlIGtkYXRhIGJ1ZmZlciBiZWZvcmUgY29weV90b191c2VyKCkgc28NCj4gdGhlIHJlc2Vy
-dmVkIGZkIG51bWJlciByZWFjaGVzIHVzZXJzcGFjZSBhdG9taWNhbGx5IHdpdGggdGhlIGluc3Rh
-bGwuDQo+IA0KPiBUaGUgZmFpbHVyZSBhdCBzdGVwIDMgaXMgZWFzaWx5IHJlYWNoYWJsZSBmcm9t
-IHVzZXJzcGFjZTogcGFzcyBhDQo+IHN0cnVjdCBkbWFfaGVhcF9hbGxvY2F0aW9uX2RhdGEgdGhh
-dCBsaXZlcyBpbiBhIHBhZ2Ugd2hvc2UgcHJvdGVjdGlvbg0KPiBpcyBmbGlwcGVkIHRvIFBST1Rf
-UkVBRCBiZXR3ZWVuIGNvcHlfZnJvbV91c2VyKCkgYW5kIGNvcHlfdG9fdXNlcigpDQo+IChlLmcu
-IHZpYSBtcHJvdGVjdCgpKS4gIEJlZm9yZSB0aGlzIGNoYW5nZSBlYWNoIHN1Y2ggaW9jdGwgbGVh
-a3Mgb25lDQo+IGRtYWJ1ZiBmZDsgYWZ0ZXIgaXQsIHRoZSBmZCB0YWJsZSBpcyB1bmNoYW5nZWQg
-b24gZmFpbHVyZSBhbmQgb25seQ0KPiAvZGV2L2RtYV9oZWFwLzxuYW1lPiByZW1haW5zIG9wZW4u
-DQo+IA0KPiBObyBVQVBJIG9yIGhlYXAtZHJpdmVyIGludGVyZmFjZSBjaGFuZ2UuDQo+IA0KPiBb
-MV0gaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvZHJpLWRldmVsLzE3NWU5OGRlLWY0MTQtNDdkNy04
-MWMxLWMwZmUwYThmN2Y2MkBhbWQuY29tLw0KPiANCj4gRml4ZXM6IGMwMmE4MWZiYTc0ZiAoImRt
-YS1idWY6IEFkZCBkbWEtYnVmIGhlYXBzIGZyYW1ld29yayIpDQo+IENjOiBzdGFibGVAdmdlci5r
-ZXJuZWwub3JnDQo+IFNpZ25lZC1vZmYtYnk6IEJhaW5lbmcgU2hvdSA8c2hvdWJhaW5lbmdAZ21h
-aWwuY29tPg0KDQpQYXRjaCBsb29rcyBzYW5lIHRvIG1lLCBidXQgc29tZWJvZHkgd2l0aCBtb3Jl
-IGJhY2tncm91bmQgaW4gRE1BLWJ1ZiBoZWFwcyBzaG91bGQgcHJvYmFibHkgdGFrZSBhIGxvb2sg
-YXMgd2VsbC4NCg0KQWNrZWQtYnk6IENocmlzdGlhbiBLw7ZuaWcgPGNocmlzdGlhbi5rb2VuaWdA
-YW1kLmNvbT4NCg0KPiAtLS0NCj4gIGRyaXZlcnMvZG1hLWJ1Zi9kbWEtaGVhcC5jIHwgODAgKysr
-KysrKysrKysrKysrKysrKy0tLS0tLS0tLS0tLS0tLS0tLS0NCj4gIDEgZmlsZSBjaGFuZ2VkLCA0
-MCBpbnNlcnRpb25zKCspLCA0MCBkZWxldGlvbnMoLSkNCj4gDQo+IGRpZmYgLS1naXQgYS9kcml2
-ZXJzL2RtYS1idWYvZG1hLWhlYXAuYyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtaGVhcC5jDQo+IGlu
-ZGV4IGE3NmJmM2Y4YjA3MS4uMGE5YmY2MmViMDZjIDEwMDY0NA0KPiAtLS0gYS9kcml2ZXJzL2Rt
-YS1idWYvZG1hLWhlYXAuYw0KPiArKysgYi9kcml2ZXJzL2RtYS1idWYvZG1hLWhlYXAuYw0KPiBA
-QCAtNTUsMzMgKzU1LDYgQEAgTU9EVUxFX1BBUk1fREVTQyhtZW1fYWNjb3VudGluZywNCj4gIAkJ
-ICJFbmFibGUgY2dyb3VwLWJhc2VkIG1lbW9yeSBhY2NvdW50aW5nIGZvciBkbWEtYnVmIGhlYXAg
-YWxsb2NhdGlvbnMgKGRlZmF1bHQ9ZmFsc2UpLiIpOw0KPiAgRVhQT1JUX1NZTUJPTF9OU19HUEwo
-bWVtX2FjY291bnRpbmcsICJETUFfQlVGX0hFQVAiKTsNCj4gIA0KPiAtc3RhdGljIGludCBkbWFf
-aGVhcF9idWZmZXJfYWxsb2Moc3RydWN0IGRtYV9oZWFwICpoZWFwLCBzaXplX3QgbGVuLA0KPiAt
-CQkJCSB1MzIgZmRfZmxhZ3MsDQo+IC0JCQkJIHU2NCBoZWFwX2ZsYWdzKQ0KPiAtew0KPiAtCXN0
-cnVjdCBkbWFfYnVmICpkbWFidWY7DQo+IC0JaW50IGZkOw0KPiAtDQo+IC0JLyoNCj4gLQkgKiBB
-bGxvY2F0aW9ucyBmcm9tIGFsbCBoZWFwcyBoYXZlIHRvIGJlZ2luDQo+IC0JICogYW5kIGVuZCBv
-biBwYWdlIGJvdW5kYXJpZXMuDQo+IC0JICovDQo+IC0JbGVuID0gUEFHRV9BTElHTihsZW4pOw0K
-PiAtCWlmICghbGVuKQ0KPiAtCQlyZXR1cm4gLUVJTlZBTDsNCj4gLQ0KPiAtCWRtYWJ1ZiA9IGhl
-YXAtPm9wcy0+YWxsb2NhdGUoaGVhcCwgbGVuLCBmZF9mbGFncywgaGVhcF9mbGFncyk7DQo+IC0J
-aWYgKElTX0VSUihkbWFidWYpKQ0KPiAtCQlyZXR1cm4gUFRSX0VSUihkbWFidWYpOw0KPiAtDQo+
-IC0JZmQgPSBkbWFfYnVmX2ZkKGRtYWJ1ZiwgZmRfZmxhZ3MpOw0KPiAtCWlmIChmZCA8IDApIHsN
-Cj4gLQkJZG1hX2J1Zl9wdXQoZG1hYnVmKTsNCj4gLQkJLyoganVzdCByZXR1cm4sIGFzIHB1dCB3
-aWxsIGNhbGwgcmVsZWFzZSBhbmQgdGhhdCB3aWxsIGZyZWUgKi8NCj4gLQl9DQo+IC0JcmV0dXJu
-IGZkOw0KPiAtfQ0KPiAtDQo+ICBzdGF0aWMgaW50IGRtYV9oZWFwX29wZW4oc3RydWN0IGlub2Rl
-ICppbm9kZSwgc3RydWN0IGZpbGUgKmZpbGUpDQo+ICB7DQo+ICAJc3RydWN0IGRtYV9oZWFwICpo
-ZWFwOw0KPiBAQCAtOTksMzAgKzcyLDQyIEBAIHN0YXRpYyBpbnQgZG1hX2hlYXBfb3BlbihzdHJ1
-Y3QgaW5vZGUgKmlub2RlLCBzdHJ1Y3QgZmlsZSAqZmlsZSkNCj4gIAlyZXR1cm4gMDsNCj4gIH0N
-Cj4gIA0KPiAtc3RhdGljIGxvbmcgZG1hX2hlYXBfaW9jdGxfYWxsb2NhdGUoc3RydWN0IGZpbGUg
-KmZpbGUsIHZvaWQgKmRhdGEpDQo+ICtzdGF0aWMgc3RydWN0IGRtYV9idWYgKmRtYV9oZWFwX2lv
-Y3RsX2FsbG9jYXRlKHN0cnVjdCBmaWxlICpmaWxlLCB2b2lkICpkYXRhKQ0KPiAgew0KPiAgCXN0
-cnVjdCBkbWFfaGVhcF9hbGxvY2F0aW9uX2RhdGEgKmhlYXBfYWxsb2NhdGlvbiA9IGRhdGE7DQo+
-ICAJc3RydWN0IGRtYV9oZWFwICpoZWFwID0gZmlsZS0+cHJpdmF0ZV9kYXRhOw0KPiArCXN0cnVj
-dCBkbWFfYnVmICpkbWFidWY7DQo+ICAJaW50IGZkOw0KPiArCXNpemVfdCBsZW47DQo+ICANCj4g
-IAlpZiAoaGVhcF9hbGxvY2F0aW9uLT5mZCkNCj4gLQkJcmV0dXJuIC1FSU5WQUw7DQo+ICsJCXJl
-dHVybiBFUlJfUFRSKC1FSU5WQUwpOw0KPiAgDQo+ICAJaWYgKGhlYXBfYWxsb2NhdGlvbi0+ZmRf
-ZmxhZ3MgJiB+RE1BX0hFQVBfVkFMSURfRkRfRkxBR1MpDQo+IC0JCXJldHVybiAtRUlOVkFMOw0K
-PiArCQlyZXR1cm4gRVJSX1BUUigtRUlOVkFMKTsNCj4gIA0KPiAgCWlmIChoZWFwX2FsbG9jYXRp
-b24tPmhlYXBfZmxhZ3MgJiB+RE1BX0hFQVBfVkFMSURfSEVBUF9GTEFHUykNCj4gLQkJcmV0dXJu
-IC1FSU5WQUw7DQo+ICsJCXJldHVybiBFUlJfUFRSKC1FSU5WQUwpOw0KPiArDQo+ICsJbGVuID0g
-UEFHRV9BTElHTihoZWFwX2FsbG9jYXRpb24tPmxlbik7DQo+ICsJaWYgKCFsZW4pDQo+ICsJCXJl
-dHVybiBFUlJfUFRSKC1FSU5WQUwpOw0KPiArDQo+ICsJZG1hYnVmID0gaGVhcC0+b3BzLT5hbGxv
-Y2F0ZShoZWFwLCBsZW4sIGhlYXBfYWxsb2NhdGlvbi0+ZmRfZmxhZ3MsDQo+ICsJCQkJICAgICBo
-ZWFwX2FsbG9jYXRpb24tPmhlYXBfZmxhZ3MpOw0KPiAgDQo+IC0JZmQgPSBkbWFfaGVhcF9idWZm
-ZXJfYWxsb2MoaGVhcCwgaGVhcF9hbGxvY2F0aW9uLT5sZW4sDQo+IC0JCQkJICAgaGVhcF9hbGxv
-Y2F0aW9uLT5mZF9mbGFncywNCj4gLQkJCQkgICBoZWFwX2FsbG9jYXRpb24tPmhlYXBfZmxhZ3Mp
-Ow0KPiAtCWlmIChmZCA8IDApDQo+IC0JCXJldHVybiBmZDsNCj4gKwlpZiAoSVNfRVJSKGRtYWJ1
-ZikpDQo+ICsJCXJldHVybiBkbWFidWY7DQo+ICsNCj4gKwlmZCA9IGdldF91bnVzZWRfZmRfZmxh
-Z3MoaGVhcF9hbGxvY2F0aW9uLT5mZF9mbGFncyk7DQo+ICsJaWYgKGZkIDwgMCkgew0KPiArCQlk
-bWFfYnVmX3B1dChkbWFidWYpOw0KPiArCQlyZXR1cm4gRVJSX1BUUihmZCk7DQo+ICsJfQ0KPiAg
-DQo+ICAJaGVhcF9hbGxvY2F0aW9uLT5mZCA9IGZkOw0KPiAgDQo+IC0JcmV0dXJuIDA7DQo+ICsJ
-cmV0dXJuIGRtYWJ1ZjsNCj4gIH0NCj4gIA0KPiAgc3RhdGljIHVuc2lnbmVkIGludCBkbWFfaGVh
-cF9pb2N0bF9jbWRzW10gPSB7DQo+IEBAIC0xMzgsNiArMTIzLDggQEAgc3RhdGljIGxvbmcgZG1h
-X2hlYXBfaW9jdGwoc3RydWN0IGZpbGUgKmZpbGUsIHVuc2lnbmVkIGludCB1Y21kLA0KPiAgCXVu
-c2lnbmVkIGludCBpbl9zaXplLCBvdXRfc2l6ZSwgZHJ2X3NpemUsIGtzaXplOw0KPiAgCWludCBu
-ciA9IF9JT0NfTlIodWNtZCk7DQo+ICAJaW50IHJldCA9IDA7DQo+ICsJaW50IGZkOw0KPiArCXN0
-cnVjdCBkbWFfYnVmICpkbWFidWY7DQo+ICANCj4gIAlpZiAobnIgPj0gQVJSQVlfU0laRShkbWFf
-aGVhcF9pb2N0bF9jbWRzKSkNCj4gIAkJcmV0dXJuIC1FSU5WQUw7DQo+IEBAIC0xNzQsMTUgKzE2
-MSwyOCBAQCBzdGF0aWMgbG9uZyBkbWFfaGVhcF9pb2N0bChzdHJ1Y3QgZmlsZSAqZmlsZSwgdW5z
-aWduZWQgaW50IHVjbWQsDQo+ICANCj4gIAlzd2l0Y2ggKGtjbWQpIHsNCj4gIAljYXNlIERNQV9I
-RUFQX0lPQ1RMX0FMTE9DOg0KPiAtCQlyZXQgPSBkbWFfaGVhcF9pb2N0bF9hbGxvY2F0ZShmaWxl
-LCBrZGF0YSk7DQo+ICsJCWRtYWJ1ZiA9IGRtYV9oZWFwX2lvY3RsX2FsbG9jYXRlKGZpbGUsIGtk
-YXRhKTsNCj4gKw0KPiArCQlpZiAoSVNfRVJSKGRtYWJ1ZikpIHsNCj4gKwkJCXJldCA9IFBUUl9F
-UlIoZG1hYnVmKTsNCj4gKwkJCWJyZWFrOw0KPiArCQl9DQo+ICsNCj4gKwkJZmQgPSAoKHN0cnVj
-dCBkbWFfaGVhcF9hbGxvY2F0aW9uX2RhdGEgKilrZGF0YSktPmZkOw0KPiArCQlpZiAoY29weV90
-b191c2VyKCh2b2lkIF9fdXNlciAqKWFyZywga2RhdGEsIG91dF9zaXplKSAhPSAwKSB7DQo+ICsJ
-CQlwdXRfdW51c2VkX2ZkKGZkKTsNCj4gKwkJCWRtYV9idWZfcHV0KGRtYWJ1Zik7DQo+ICsJCQly
-ZXQgPSAtRUZBVUxUOw0KPiArCQl9IGVsc2Ugew0KPiArCQkJZmRfaW5zdGFsbChmZCwgZG1hYnVm
-LT5maWxlKTsNCj4gKwkJfQ0KPiArDQo+ICAJCWJyZWFrOw0KPiAgCWRlZmF1bHQ6DQo+ICAJCXJl
-dCA9IC1FTk9UVFk7DQo+ICAJCWdvdG8gZXJyOw0KPiAgCX0NCj4gIA0KPiAtCWlmIChjb3B5X3Rv
-X3VzZXIoKHZvaWQgX191c2VyICopYXJnLCBrZGF0YSwgb3V0X3NpemUpICE9IDApDQo+IC0JCXJl
-dCA9IC1FRkFVTFQ7DQo+ICBlcnI6DQo+ICAJaWYgKGtkYXRhICE9IHN0YWNrX2tkYXRhKQ0KPiAg
-CQlrZnJlZShrZGF0YSk7DQoNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlz
-dHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1z
-aWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+The driver uses a static XFER_TIMEOUT of HZ (1 second) for all transfers
+regardless of message length or bus frequency, causing unnecessary
+delays on error paths.
+
+Compute the timeout dynamically from message length and bus frequency
+with a 10x safety margin over the theoretical wire time. Add a 300ms
+floor to budget for I2C clock stretching, where a slave may hold SCL
+low indefinitely during internal processing. This detects real hangs
+3x faster than the old 1s static timeout.
+
+For GPI multi-descriptor transfers, use the maximum message length across
+all queued messages as the per-completion timeout.
+
+Signed-off-by: Aniket Randive <aniket.randive@oss.qualcomm.com>
+---
+
+Changes in v4:
+ - As per konrad suggestion used mult_frac() for bit_usec to avoid intermediate
+  overflow on 32-bit targets.
+ - Updated the commit message and added a driver comment explaining the
+   rationale for the 0.3-second minimum timeout floor value.
+
+ drivers/i2c/busses/i2c-qcom-geni.c | 46 +++++++++++++++++++++++-------
+ 1 file changed, 36 insertions(+), 10 deletions(-)
+
+diff --git a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-geni.c
+index 96dbf04138be..c5c3adc8ec77 100644
+--- a/drivers/i2c/busses/i2c-qcom-geni.c
++++ b/drivers/i2c/busses/i2c-qcom-geni.c
+@@ -74,9 +74,13 @@ enum geni_i2c_err_code {
+ #define PACKING_BYTES_PW	4
+ 
+ #define ABORT_TIMEOUT		HZ
+-#define XFER_TIMEOUT		HZ
+ #define RST_TIMEOUT		HZ
+ 
++/* 9 bits per byte (8 data + 1 ACK), 10x safety margin */
++#define I2C_TIMEOUT_SAFETY_COEFFICIENT	10
++/* 300ms floor: budget for clock stretching; slave may hold SCL low indefinitely */
++#define I2C_TIMEOUT_MIN_USEC		300000
++
+ struct geni_i2c_desc {
+ 	bool no_dma_support;
+ 	unsigned int tx_fifo_depth;
+@@ -204,6 +208,16 @@ static int geni_i2c_clk_map_idx(struct geni_i2c_dev *gi2c)
+ 	return -EINVAL;
+ }
+ 
++static unsigned long geni_i2c_xfer_timeout(struct geni_i2c_dev *gi2c, size_t len)
++{
++	size_t bit_cnt = len * 9;
++	size_t bit_usec = mult_frac(bit_cnt, USEC_PER_SEC, gi2c->clk_freq_out);
++	size_t xfer_max_usec = (bit_usec * I2C_TIMEOUT_SAFETY_COEFFICIENT) +
++			       I2C_TIMEOUT_MIN_USEC;
++
++	return usecs_to_jiffies(xfer_max_usec);
++}
++
+ static int qcom_geni_i2c_conf(struct geni_se *se, unsigned long freq)
+ {
+ 	struct geni_i2c_dev *gi2c = dev_get_drvdata(se->dev);
+@@ -445,7 +459,7 @@ static int geni_i2c_rx_one_msg(struct geni_i2c_dev *gi2c, struct i2c_msg *msg,
+ 				u32 m_param)
+ {
+ 	dma_addr_t rx_dma = 0;
+-	unsigned long time_left;
++	unsigned long time_left, timeout;
+ 	void *dma_buf;
+ 	struct geni_se *se = &gi2c->se;
+ 	size_t len = msg->len;
+@@ -470,8 +484,9 @@ static int geni_i2c_rx_one_msg(struct geni_i2c_dev *gi2c, struct i2c_msg *msg,
+ 		gi2c->dma_buf = dma_buf;
+ 	}
+ 
++	timeout = geni_i2c_xfer_timeout(gi2c, len);
+ 	cur = gi2c->cur;
+-	time_left = wait_for_completion_timeout(&gi2c->done, XFER_TIMEOUT);
++	time_left = wait_for_completion_timeout(&gi2c->done, timeout);
+ 	if (!time_left)
+ 		geni_i2c_abort_xfer(gi2c);
+ 
+@@ -484,7 +499,7 @@ static int geni_i2c_tx_one_msg(struct geni_i2c_dev *gi2c, struct i2c_msg *msg,
+ 				u32 m_param)
+ {
+ 	dma_addr_t tx_dma = 0;
+-	unsigned long time_left;
++	unsigned long time_left, timeout;
+ 	void *dma_buf;
+ 	struct geni_se *se = &gi2c->se;
+ 	size_t len = msg->len;
+@@ -512,8 +527,9 @@ static int geni_i2c_tx_one_msg(struct geni_i2c_dev *gi2c, struct i2c_msg *msg,
+ 	if (!dma_buf) /* Get FIFO IRQ */
+ 		writel_relaxed(1, se->base + SE_GENI_TX_WATERMARK_REG);
+ 
++	timeout = geni_i2c_xfer_timeout(gi2c, len);
+ 	cur = gi2c->cur;
+-	time_left = wait_for_completion_timeout(&gi2c->done, XFER_TIMEOUT);
++	time_left = wait_for_completion_timeout(&gi2c->done, timeout);
+ 	if (!time_left)
+ 		geni_i2c_abort_xfer(gi2c);
+ 
+@@ -591,7 +607,7 @@ static void geni_i2c_gpi_multi_desc_unmap(struct geni_i2c_dev *gi2c, struct i2c_
+  * geni_i2c_gpi_multi_xfer_timeout_handler() - Handles multi message transfer timeout
+  * @dev: Pointer to the corresponding dev node
+  * @multi_xfer: Pointer to the geni_i2c_gpi_multi_desc_xfer
+- * @transfer_timeout_msecs: Timeout value in milliseconds
++ * @transfer_timeout_msecs: Per-message completion timeout in jiffies
+  * @transfer_comp: Completion object of the transfer
+  *
+  * This function waits for the completion of each processed transfer messages
+@@ -601,7 +617,7 @@ static void geni_i2c_gpi_multi_desc_unmap(struct geni_i2c_dev *gi2c, struct i2c_
+  */
+ static int geni_i2c_gpi_multi_xfer_timeout_handler(struct device *dev,
+ 						   struct geni_i2c_gpi_multi_desc_xfer *multi_xfer,
+-						   u32 transfer_timeout_msecs,
++						   unsigned long timeout_jiffies,
+ 						   struct completion *transfer_comp)
+ {
+ 	int i;
+@@ -612,7 +628,7 @@ static int geni_i2c_gpi_multi_xfer_timeout_handler(struct device *dev,
+ 
+ 		if (multi_xfer->msg_idx_cnt != multi_xfer->irq_cnt) {
+ 			time_left = wait_for_completion_timeout(transfer_comp,
+-								transfer_timeout_msecs);
++								timeout_jiffies);
+ 			if (!time_left) {
+ 				dev_err(dev, "%s: Transfer timeout\n", __func__);
+ 				return -ETIMEDOUT;
+@@ -736,8 +752,16 @@ static int geni_i2c_gpi(struct geni_i2c_dev *gi2c, struct i2c_msg msgs[],
+ 		dma_async_issue_pending(gi2c->tx_c);
+ 
+ 		if ((msg_idx == (gi2c->num_msgs - 1)) || flags & DMA_PREP_INTERRUPT) {
++			unsigned long timeout;
++			size_t max_len = 0;
++			int j;
++
++			for (j = 0; j < gi2c->num_msgs; j++)
++				max_len = max_t(size_t, max_len, msgs[j].len);
++
++			timeout = geni_i2c_xfer_timeout(gi2c, max_len);
+ 			ret = geni_i2c_gpi_multi_xfer_timeout_handler(gi2c->se.dev, gi2c_gpi_xfer,
+-								      XFER_TIMEOUT, &gi2c->done);
++								      timeout, &gi2c->done);
+ 			if (ret) {
+ 				dev_err(gi2c->se.dev,
+ 					"I2C multi write msg transfer timeout: %d\n",
+@@ -851,8 +875,10 @@ static int geni_i2c_gpi_xfer(struct geni_i2c_dev *gi2c, struct i2c_msg msgs[], i
+ 		}
+ 
+ 		if (!gi2c->is_tx_multi_desc_xfer) {
++			unsigned long timeout = geni_i2c_xfer_timeout(gi2c, msgs[i].len);
++
+ 			dma_async_issue_pending(gi2c->tx_c);
+-			time_left = wait_for_completion_timeout(&gi2c->done, XFER_TIMEOUT);
++			time_left = wait_for_completion_timeout(&gi2c->done, timeout);
+ 			if (!time_left) {
+ 				dev_err(gi2c->se.dev, "%s:I2C timeout\n", __func__);
+ 				gi2c->err = -ETIMEDOUT;
+-- 
+2.34.1
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
