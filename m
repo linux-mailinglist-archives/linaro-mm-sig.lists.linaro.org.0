@@ -2,39 +2,41 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id HAysKaw6U2pYZAMAu9opvQ
+	id DWczKWA7U2p9ZAMAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 12 Jul 2026 08:56:44 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 12 Jul 2026 08:59:44 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2E5C9744036
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 12 Jul 2026 08:56:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3307E744056
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 12 Jul 2026 08:59:44 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
 	dkim=none;
 	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=gmail.com (policy=none);
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org"
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id F2E9640AE5
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 12 Jul 2026 06:56:42 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 4707240C2C
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 12 Jul 2026 06:59:43 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2B3FA40A02
-	for <linaro-mm-sig@lists.linaro.org>; Sun, 12 Jul 2026 06:56:38 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5A38A3F70D
+	for <linaro-mm-sig@lists.linaro.org>; Sun, 12 Jul 2026 06:59:37 +0000 (UTC)
 MIME-Version: 1.0
 From: meoowu77@gmail.com
 To: linaro-mm-sig@lists.linaro.org
-Date: Sun, 12 Jul 2026 06:56:38 -0000
-Message-ID: <178383939817.519082.6769813356129607573@lists.linaro.org>
+Date: Sun, 12 Jul 2026 06:59:37 -0000
+Message-ID: <178383957736.521836.16928599723354535818@lists.linaro.org>
+In-Reply-To: <178364746695.1708197.7557505357360662567@lists.linaro.org>
+References: <178364746695.1708197.7557505357360662567@lists.linaro.org>
 User-Agent: HyperKitty on http://lists-ec2.96boards.org/
-Message-ID-Hash: 4B6XKV7LU75Z6M2I66JVEXPCEBJ762D7
-X-Message-ID-Hash: 4B6XKV7LU75Z6M2I66JVEXPCEBJ762D7
+Message-ID-Hash: Z3ETMZPOAH3XIIGW7LITLOAFOL36427N
+X-Message-ID-Hash: Z3ETMZPOAH3XIIGW7LITLOAFOL36427N
 X-MailFrom: meoowu77@gmail.com
 X-Mailman-Rule-Hits: member-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] game
+Subject: [Linaro-mm-sig] Re: Letting Off Steam: A Guide to the Delightful Chaos of Kick the Buddy
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4B6XKV7LU75Z6M2I66JVEXPCEBJ762D7/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/Z3ETMZPOAH3XIIGW7LITLOAFOL36427N/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -46,7 +48,7 @@ Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [0.59 / 15.00];
 	MID_RHS_MATCH_TO(1.00)[];
-	R_SPF_ALLOW(-0.20)[+mx];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), No valid DKIM,none];
@@ -72,11 +74,13 @@ X-Spamd-Result: default: False [0.59 / 15.00];
 	R_DKIM_NA(0.00)[];
 	FROM_NO_DN(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:from_smtp,lists.linaro.org:mid,lists.linaro.org:helo,lists.linaro.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 2E5C9744036
+X-Rspamd-Queue-Id: 3307E744056
 
-What role do bonuses play in your decision?
+<a href="https://southbeach-casino-online.com">South Beach Casino</a>
+[url=https://southbeach-casino-online.com]South Beach Casino[/url]
+[South Beach Casino](https://southbeach-casino-online.com)
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
