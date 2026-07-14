@@ -2,218 +2,308 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 1YQIETdyVmrc5gAAu9opvQ
+	id znX1Bbj3VWplxAAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 19:30:31 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 10:47:52 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id B8C08757735
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 19:30:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 814FD7528F2
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 10:47:51 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=linux.dev header.s=key1 header.b=VhJhjqFa;
+	dkim=fail ("body hash did not verify") header.d=intel.com header.s=Intel header.b=crL7MsU8;
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
-	dmarc=fail reason="SPF not aligned (relaxed)" header.from=linux.dev (policy=none)
+	dmarc=fail reason="SPF not aligned (relaxed)" header.from=intel.com (policy=none);
+	arc=reject ("signature check failed: fail, {[1] = sig:microsoft.com:reject}")
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id D0F5A40165
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 17:30:29 +0000 (UTC)
-Received: from out-189.mta0.migadu.com (out-189.mta0.migadu.com [91.218.175.189])
-	by lists.linaro.org (Postfix) with ESMTPS id 1985940176
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 14 Jul 2026 08:30:48 +0000 (UTC)
-X-Forwarded-Encrypted: i=1; AHgh+RqYg4h+nPU9HlPEMyktP5Qq0IqWLE4mEzyBrYdTIOYayNcx7hWVeRLzghDczvVxJoa56wFxOOVZRx1ytAnu@lists.linaro.org
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1784011123;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=BwXrIUkjii1ll+DVDzD6pSQxEm1jWrnB4GfLjhOhNmE=;
-	b=VhJhjqFanTSqEeOdsH3QkEuhEgjYtP6UxwgkLP/s/90xAnKyMaZg9Yde3T578uWE8ydF6s
-	sAp8fIDwmPegro7ZXUoJr2Td+16ofgBYYoo7s1mcJNwk5Yl6/PBZ+j7qbKZU2CryLsXqJb
-	qgiX+afHzd8IjD+5gD2D6yAi3hFxEtc=
-X-Gm-Message-State: AOJu0YzxXH/TnmhlSIjZlEPfU5/BcDabrFF0t4g0dnUdLPTiZDCjIqan
-	iGSQP4vntf9tQa4HtIjXodZ5hIkQlD43P6r2K6gp96/hlRucnSMb0JR7lsE5KLlc0+cqqdrmt3y
-	/hxKbvG47rHXd8nEpxuqBOUIILbsAmwSlFHvy5uIm
-X-Received: by 2002:ac8:5d56:0:b0:516:ccc0:ee38 with SMTP id
- d75a77b69052e-51d7bcd4bb1mr10963351cf.9.1784011118743; Mon, 13 Jul 2026
- 23:38:38 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id 90ED4405D2
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 08:47:50 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.18])
+	by lists.linaro.org (Postfix) with ESMTPS id E6BA540156
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 14 Jul 2026 08:47:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1784018868; x=1815554868;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=cpKjNmYxhGZ6Cn0gJRrRXoH3oQKU4FWgKgSDSPWBHjQ=;
+  b=crL7MsU8G1mPG7U+wNjzt0Mjauubbaxcxg0bHGjQp25wdrdPPjG/Ju3M
+   x2AhLFXGLIX8pRI5pBwCb8Q/6IX4QWbBbFKKJ83CuYqWmH/ewuFaMqxR1
+   bddQhSTUEXuPj9G2By80r1XBSct5kMPp6idy16BtniaLe0Vg2KFOBVC00
+   XpH+x0wuPicKLcVie3GWkRASrPP9CFHUMvPQVBupsgEETL0rI4MSHQarv
+   0tVXJI5Nksg3yiw2JDHslUEq/MRhHtFJqW1gsg/I36dM3Xp+caA3iw36T
+   bhBtAsVVlBCzWXqS2+sLsTcTP8UlKCXj2aw8mrrW8G+sLKXSq5GYLQOko
+   Q==;
+X-CSE-ConnectionGUID: eA4FMMOjQNCMXdLVPcWseQ==
+X-CSE-MsgGUID: XO64w4ZFSfGPMg37GdJODw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11846"; a="84722269"
+X-IronPort-AV: E=Sophos;i="6.25,163,1779174000";
+   d="scan'208";a="84722269"
+Received: from orviesa004.jf.intel.com ([10.64.159.144])
+  by orvoesa110.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Jul 2026 23:42:42 -0700
+X-CSE-ConnectionGUID: 7u7Lu1snRu6HQyJ1uo6KfQ==
+X-CSE-MsgGUID: RpG/tkWySu+qWKdtSIrO7A==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.25,163,1779174000";
+   d="scan'208";a="259618988"
+Received: from fmsmsx902.amr.corp.intel.com ([10.18.126.91])
+  by orviesa004.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Jul 2026 23:42:42 -0700
+Received: from FMSMSX902.amr.corp.intel.com (10.18.126.91) by
+ fmsmsx902.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.43; Mon, 13 Jul 2026 23:42:41 -0700
+Received: from fmsedg902.ED.cps.intel.com (10.1.192.144) by
+ FMSMSX902.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.43 via Frontend Transport; Mon, 13 Jul 2026 23:42:41 -0700
+Received: from BL0PR03CU003.outbound.protection.outlook.com (52.101.53.51) by
+ edgegateway.intel.com (192.55.55.82) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.43; Mon, 13 Jul 2026 23:42:39 -0700
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=txMPVNEjS3UtOl5pYlXXZZxXar7S/uCSGJGY5guvEzKulOYXMQTXmvQgrCUz7+EopcJhu+l5snzXHBiPn626xbcKbYaJeagZkWlk4fXlvSFi35bQU90k1NTxkR0SJyv0FfbK8Pax6tmpyL2bl2iBu/abKTfJ4zpdKEz/J9myuAyK200OMq+OsNJ3p4S643H6Phh1JOXTT7UjQuG5Ic4bBJDkBPeTpKER8jyocPp9CANWXV795IeBLU+1D5lVHBLYO4xrYTyxVc4dtHYeQWWCtK6G69+Qk21yvezeN1Hnyf6M61sCnxK3WUPqMMfqW4eKlktx2d0CfutWdK14lPGonA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=AJpBifFmRhVb+8K+MlBwmGgSs+nS89W+eHbmJTlI4Ms=;
+ b=fD2TvPi92vU6c9SKGqd2yZd5jFB3JcOQVK7xBBBTyUvqvJU65paTT/uS29nHcg1Ca6o8Ai5TYRD9xlAtNMlQ0rkIVgrQJq42v3t1K5jToNL2xgk9oXTB+eBq4x+99OBhpyBwZoFiAVvBe0fbDi+053wRgkmH7uSsUTrGxV2MYzICs9xx8u0591Xhlll2VhVe85jz+GaI4IRrqV01SJbqDLhp9olwFEZQ4BKgfdbpXIRMI1sph4QWYjDdS9UbASVK5tvB2AVnXN+NEzpi8/MQpvBcDEhEUGj99lmav+svrEHuWpN5FI6p14EPOnQM1HCl5/wWfDW01gJrcrvGJSk8nw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Received: from IA0PR11MB7185.namprd11.prod.outlook.com (2603:10b6:208:432::20)
+ by SJ2PR11MB8514.namprd11.prod.outlook.com (2603:10b6:a03:56b::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.202.18; Tue, 14 Jul
+ 2026 06:42:34 +0000
+Received: from IA0PR11MB7185.namprd11.prod.outlook.com
+ ([fe80::9f37:cb81:5463:300e]) by IA0PR11MB7185.namprd11.prod.outlook.com
+ ([fe80::9f37:cb81:5463:300e%6]) with mapi id 15.21.0202.014; Tue, 14 Jul 2026
+ 06:42:34 +0000
+From: "Kasireddy, Vivek" <vivek.kasireddy@intel.com>
+To: Robert Mader <robert.mader@collabora.com>,
+	=?iso-8859-1?Q?Christian_K=F6nig?= <christian.koenig@amd.com>,
+	"dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>
+Thread-Topic: [RFC PATCH 1/2] dma-buf/udmabuf: Introduce
+ CONFIG_UDMABUF_SIZE_LIMIT_MBYTES
+Thread-Index: AQHdEURszbN0kz91K0iVCEG5jjTK77ZrLNAAgAASX4CAALePoA==
+Date: Tue, 14 Jul 2026 06:42:34 +0000
+Message-ID: <IA0PR11MB71855A08C318B962E0FDB1EBF8F92@IA0PR11MB7185.namprd11.prod.outlook.com>
+References: <20260711144814.8205-1-robert.mader@collabora.com>
+ <6764ca6f-b4d8-4baa-9d27-2ca867ac2d41@amd.com>
+ <8b0d0180-09ef-42c7-b111-db51d5ddacca@collabora.com>
+In-Reply-To: <8b0d0180-09ef-42c7-b111-db51d5ddacca@collabora.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: IA0PR11MB7185:EE_|SJ2PR11MB8514:EE_
+x-ms-office365-filtering-correlation-id: 91d345ad-fe68-48ee-5780-08dee173163c
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;ARA:13230040|376014|366016|1800799024|23010399003|38070700021|18002099003|6133799003|22082099003|56012099006|5023799004|11063799006|4143699003;
+x-microsoft-antispam-message-info: riqAOq0x0uI+cfZHOmGdCfgliq/lIbltglFmzIt3kTvW/c0kem7y2h2xp//ataq3GXiQBGSPAtu8CjWS3QeUrSXYNeEQ4fpBMS62Fu0GEl39BXGpcZ/wIwTGvyzwiKyOWQXXMeKtczebKAF9o5Z0Hue66a7e+yxYMCFtD5TghGcN+c21hhMxzhPxQeqtTTz0qxltRWaI9Mb96Orj4K5dQYQF5aS9h9rDbxgzS9MgjCSIPw8Fkuf190dMYbgwWDWT/yY52s5AnJosmyv7Sk+XI7k8AKuONpb+AIxI2xaBgV2OTuGNDknRcTqgeU9MkM/PqlFBK5fUdd+D2/gzd4diLLu5WNVUUmDiFrdMlWac8/oF98VAU19UR3z+BfARGiLbJIuUj+Dhy96CW/nriNTISiU043EwMSLv6MMhEDUI/baKCK7U3bktAxB6clfbIIc1bgCSiN7nTiVdBT6tzApXnxz+2l+8nqOAJ7BpcsTEb69tvcwyEJeJS3wDPFaSyz+tN3VMkw1Cxpy96Z0ws/AxhkiYsHcL/cmvjG43xUsYBw5r/fY2IA7p6RFK4jjnIc+uHgx/GhN5/wVa5IzF0qKMNaGoC1+cRpVmsbWm9Y7DtJ+SOAp86+6U5Uh+x/tRFMlF5ix9xk8wVfS2bNqGB8Cz1tWBuUtoPstreSsv471+jOAR44ASN2+/B5KGc0wROiKs0asIMXD/3RO4QO7bDjejDA==
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA0PR11MB7185.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(23010399003)(38070700021)(18002099003)(6133799003)(22082099003)(56012099006)(5023799004)(11063799006)(4143699003);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?V2f2MIyZDOixxldOCfW+sSYKTHmcsGPZhRxf9EnAEI1t4IPujgVUBKO3Q3?=
+ =?iso-8859-1?Q?H2id3HJw11ePFmAuPz1O+19WDHxbNbR4ggZa1wHw8C863VYaKfQmA4kouy?=
+ =?iso-8859-1?Q?PzcPUnDT1P5w8WW48pbVOhss5NYX+ZZjCPTrKgVpnwqcgpN6BFrXN0qXiR?=
+ =?iso-8859-1?Q?2xzH2SdJNRs151a2f80KWZtNT0ldV8AUPtlT/2sEwAwhOiI5XMiq+qbDMo?=
+ =?iso-8859-1?Q?eSkst0UwKvBenKxScw2IPByYIfhXnXrbZ5iZIX0V/bCOvTh9AMmac8fnl4?=
+ =?iso-8859-1?Q?AiQu9IllGAVnCEs82cv3h9/68d3kAb2bhtYvXgpB2rxM69tlFN/1gmV9EY?=
+ =?iso-8859-1?Q?QKVunOFfHNrupBTT7nf1/bJEKW7IZcnY6CCYWpcCc/xeZDGC0Gqp9N0z2S?=
+ =?iso-8859-1?Q?wF4xEUVtc+Ur81IJKq/QyRM+klaR8VJ1OEBA4xeuW/Fp4avMrBJL44YwiW?=
+ =?iso-8859-1?Q?G0xWZwD1xEAUgxjUl6C93wCrAQLZ+Y5KKoHK0DNottk9JxiXxdgPx552nT?=
+ =?iso-8859-1?Q?gF/NjtjYuzmgyPuyLSY4WlZMIvWN9JMqP/vnWIglaCRdBSH/CMGgUuyVgl?=
+ =?iso-8859-1?Q?TtmLWuiGVRhdDXF+ZXcwB17uWxuw4S7/78CKOReBYatAzUNp8crMi8gVt7?=
+ =?iso-8859-1?Q?lepCngaN4UZ6SMiT0ogNnZMkCW8JN4kGS/X81IwTYqHwry/wbSKTFjrM4G?=
+ =?iso-8859-1?Q?8ec0ONpkfctSVEYaKsVf8jaoSnoPIe2DBKKPz7fdOQ9GmmOOQyQZhmk8qu?=
+ =?iso-8859-1?Q?EEVIgGUlNcDqDozSPRDzjphHOBF8Noz2M9oAeXFiD4cfFhQi7z9JCkrSc8?=
+ =?iso-8859-1?Q?GfkodL6d+UZJ7pXMhu32lmtQeD17hh7ir5RlvF9t2g0LEUT7r4n5WEfEWj?=
+ =?iso-8859-1?Q?/7i9ouJZX/hqhpcAcCFlO631p9/fTtUzm3Aa53VhrBCCUYJQsgp28DqFaD?=
+ =?iso-8859-1?Q?RWMFoSGv4OAD6PYdlDavACmd1q0+/+43/Mry4mlJ9cZDxI1+Z/YUu7/83H?=
+ =?iso-8859-1?Q?TXuLFANZe2IG6WMYDzK880eI9TlBp9pA/5F7u2Q+4hq/wm/XV/gtDlKSSN?=
+ =?iso-8859-1?Q?gy6bSFakJ9RwsUQJmBtzZOB5Jqcnn7EZxXwfTxcsqfmRdAyEzDPBepUNqy?=
+ =?iso-8859-1?Q?RdYReai9DLXkFQyQlyFmTXkFWGIMP6qSNhmmM0yVjgYBwdcHWdQvbabG0i?=
+ =?iso-8859-1?Q?YEyB0d7HDHTAz6O099ANIu4FoZC28V4pFZ0l71eofJI4leg7iKlaivxtZ3?=
+ =?iso-8859-1?Q?9+TrfqH0KWTdlR83lQU7urUGwaYGfDwwiOkCjQdzjLHOe9ruD+YJ8oR3F7?=
+ =?iso-8859-1?Q?alBPwCW4R/aqPg5SAE6wDW0iU8eJyIZAHpPMpz7t1DyRgesMemr6XlrDtF?=
+ =?iso-8859-1?Q?ASyCCLSaXxe84BX+2zvngSEhKHD0it6Y6irFTJDJeKbtGTZwHYxSrRSlfK?=
+ =?iso-8859-1?Q?Yf9QQS265jBjtXgSnf8RVEnayk11bSc4QpTQeR3rKOdXPTQcuSEsKmPXlA?=
+ =?iso-8859-1?Q?0SXCoyIuK78+dNOpag3JfSgJ6rGrfMaZrDcei6v3K/VRcY+wxyp2P1KAyn?=
+ =?iso-8859-1?Q?xviUhrtifVZufNpk+ijeYQ5AvVpmZ0pyi4REdkujzCIeNqaF/FuzHkNjCo?=
+ =?iso-8859-1?Q?QxbM/ehMob0ZYWakUsyzavqxv6BFo8JETyCqsyX3Jg/QQOengPI2KJinS8?=
+ =?iso-8859-1?Q?7KW1k4qeIktxYwPS36TQip4MWI7rrkqihGBBhdP00Jy4dD1UgSjpC7Z6gm?=
+ =?iso-8859-1?Q?nyRtnkSxPEEJnc2ZfmhBsVV05/f0v5DtMvx+1Me/Ra3DZkRVrKWEkT6sTK?=
+ =?iso-8859-1?Q?XwsI+NjH1g=3D=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
-References: <20250529053513.1592088-1-yilun.xu@linux.intel.com>
- <20250529053513.1592088-11-yilun.xu@linux.intel.com> <20250602133009.GC233377@nvidia.com>
- <CAEvNRgFpJWQ5M5sQhGpQUV3GbBq9N+MQhhaxdxa=D8ky94SCsw@mail.gmail.com>
- <CA+EHjTwd9uku-ZV5y8xcK8VWdOfhcchyW=_fzjpCf5Vk2wQoGQ@mail.gmail.com> <20260713191727.GH674038@nvidia.com>
-In-Reply-To: <20260713191727.GH674038@nvidia.com>
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From: Fuad Tabba <fuad.tabba@linux.dev>
-Date: Tue, 14 Jul 2026 07:38:01 +0100
-X-Gmail-Original-Message-ID: <CA+EHjTxZ0N3Tfnid404B4tkb_E+Z8mODTHTgBPiF6=bwZp7Hjw@mail.gmail.com>
-X-Gm-Features: AUfX_mxAW6jRYwmHaZyFKiL0Q4hnn-XRmxgnYdjCPArDIPvmYwpLrjGWtt2STE0
-Message-ID: <CA+EHjTxZ0N3Tfnid404B4tkb_E+Z8mODTHTgBPiF6=bwZp7Hjw@mail.gmail.com>
-To: Jason Gunthorpe <jgg@nvidia.com>
-X-Migadu-Flow: FLOW_OUT
-X-Spamd-Bar: ---
-X-MailFrom: fuad.tabba@linux.dev
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: VHXMGTD5VRGPSBVU3OT6UTWURLVSS3TB
-X-Message-ID-Hash: VHXMGTD5VRGPSBVU3OT6UTWURLVSS3TB
-X-Mailman-Approved-At: Tue, 14 Jul 2026 17:21:05 +0000
-CC: Ackerley Tng <ackerleytng@google.com>, Xu Yilun <yilun.xu@linux.intel.com>, kvm@vger.kernel.org, sumit.semwal@linaro.org, christian.koenig@amd.com, pbonzini@redhat.com, seanjc@google.com, alex.williamson@redhat.com, dan.j.williams@intel.com, aik@amd.com, linux-coco@lists.linux.dev, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, vivek.kasireddy@intel.com, yilun.xu@intel.com, linux-kernel@vger.kernel.org, lukas@wunner.de, yan.y.zhao@intel.com, daniel.vetter@ffwll.ch, leon@kernel.org, baolu.lu@linux.intel.com, zhenzhong.duan@intel.com, tao1.su@intel.com, linux-pci@vger.kernel.org, zhiw@nvidia.com, simona.vetter@ffwll.ch, shameerali.kolothum.thodi@huawei.com, aneesh.kumar@kernel.org, iommu@lists.linux.dev, kevin.tian@intel.com
+X-Exchange-RoutingPolicyChecked: pxzlsP7zFoQcM885mkxiPlwdCiewNPkq13WDDSijLxA6M63ylZTfId+YHax35G5vQR3A54vsT6ltUO+n7W9b3VqPxa8pQIsm3Gc9YVXVZk/vHOhS6L8V1BbBIDMNF5DdDjjehKK+KFiOk7NMVuunR7m+ajkUtpZ/XbWBl6JjIdcyNgsO61ciPIWbJTHgWzYTpbTdtc1GDAzgh+a+6WhTzDW9LymLMV+UEKUDFLdqLnuvr/jlzy5GYebcrSZyqAsA5hOZ7pjcHNtlXnmRgCtsG4jh93fu65iHLfMKJH+vPEEmJhmRpjVq8i8q6C9JfI+Vp4OYrx9L9MglXekcBAgpxQ==
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: IA0PR11MB7185.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 91d345ad-fe68-48ee-5780-08dee173163c
+X-MS-Exchange-CrossTenant-originalarrivaltime: 14 Jul 2026 06:42:34.3198
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: Ji8TiHxaGXvwcpjgntzPMlxorZo/9HfieE2RVUfvsQq86ATPvZ5QwB8q/Zsp3c9sTli3aV5suFlI+Lr6sQ4i5Pw0RzOl22TdUp+n8U9aCnI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR11MB8514
+X-OriginatorOrg: intel.com
+X-Spamd-Bar: --------
+Message-ID-Hash: SP55GJBPJVG6A4LMPX3ADC2GAZYPXV2O
+X-Message-ID-Hash: SP55GJBPJVG6A4LMPX3ADC2GAZYPXV2O
+X-MailFrom: vivek.kasireddy@intel.com
+X-Mailman-Rule-Hits: member-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
+CC: Sumit Semwal <sumit.semwal@linaro.org>, Gerd Hoffmann <kraxel@redhat.com>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [RFC PATCH 10/30] vfio/pci: Export vfio dma-buf specific info for importers
+Subject: [Linaro-mm-sig] Re: [RFC PATCH 1/2] dma-buf/udmabuf: Introduce CONFIG_UDMABUF_SIZE_LIMIT_MBYTES
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VHXMGTD5VRGPSBVU3OT6UTWURLVSS3TB/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SP55GJBPJVG6A4LMPX3ADC2GAZYPXV2O/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [0.59 / 15.00];
-	R_DKIM_REJECT(1.00)[linux.dev:s=key1];
+X-Spamd-Result: default: False [1.59 / 15.00];
+	R_DKIM_REJECT(1.00)[intel.com:s=Intel];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
 	R_SPF_ALLOW(-0.20)[+mx:c];
 	MAILLIST(-0.20)[mailman];
-	DMARC_POLICY_SOFTFAIL(0.10)[linux.dev : SPF not aligned (relaxed),none];
+	DMARC_POLICY_SOFTFAIL(0.10)[intel.com : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	ARC_NA(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:jgg@nvidia.com,m:ackerleytng@google.com,m:yilun.xu@linux.intel.com,m:kvm@vger.kernel.org,m:sumit.semwal@linaro.org,m:christian.koenig@amd.com,m:pbonzini@redhat.com,m:seanjc@google.com,m:alex.williamson@redhat.com,m:dan.j.williams@intel.com,m:aik@amd.com,m:linux-coco@lists.linux.dev,m:dri-devel@lists.freedesktop.org,m:linux-media@vger.kernel.org,m:linaro-mm-sig@lists.linaro.org,m:vivek.kasireddy@intel.com,m:yilun.xu@intel.com,m:linux-kernel@vger.kernel.org,m:lukas@wunner.de,m:yan.y.zhao@intel.com,m:daniel.vetter@ffwll.ch,m:leon@kernel.org,m:baolu.lu@linux.intel.com,m:zhenzhong.duan@intel.com,m:tao1.su@intel.com,m:linux-pci@vger.kernel.org,m:zhiw@nvidia.com,m:simona.vetter@ffwll.ch,m:shameerali.kolothum.thodi@huawei.com,m:aneesh.kumar@kernel.org,m:iommu@lists.linux.dev,m:kevin.tian@intel.com,s:lists@lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[32];
-	FORGED_SENDER(0.00)[fuad.tabba@linux.dev,linaro-mm-sig-bounces@lists.linaro.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FORWARDED(0.00)[lists@lfdr.de];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:robert.mader@collabora.com,m:christian.koenig@amd.com,m:dri-devel@lists.freedesktop.org,m:sumit.semwal@linaro.org,m:kraxel@redhat.com,m:linux-media@vger.kernel.org,m:linaro-mm-sig@lists.linaro.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[vivek.kasireddy@intel.com,linaro-mm-sig-bounces@lists.linaro.org];
+	MIME_TRACE(0.00)[0:+];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:from_mime,collabora.com:email,linaro.org:email];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_NEQ_ENVFROM(0.00)[fuad.tabba@linux.dev,linaro-mm-sig-bounces@lists.linaro.org];
-	DKIM_TRACE(0.00)[linux.dev:-];
 	ALIAS_RESOLVED(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[vivek.kasireddy@intel.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[intel.com:-];
+	RCPT_COUNT_SEVEN(0.00)[8];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	MISSING_XM_UA(0.00)[];
 	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,nvidia.com:email,linaro.org:email,lists.linaro.org:from_smtp,lists.linaro.org:helo,lists.linaro.org:rdns]
+	RCVD_COUNT_SEVEN(0.00)[9]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: B8C08757735
+X-Rspamd-Queue-Id: 814FD7528F2
 
-On Mon, 13 Jul 2026 at 20:17, Jason Gunthorpe <jgg@nvidia.com> wrote:
->
-> On Mon, Jul 13, 2026 at 08:08:14PM +0100, Fuad Tabba wrote:
-> > On Sun, 12 Jul 2026 at 02:02, Ackerley Tng <ackerleytng@google.com> wrote:
-> > >
-> > > Jason Gunthorpe <jgg@nvidia.com> writes:
-> > >
-> > > > On Thu, May 29, 2025 at 01:34:53PM +0800, Xu Yilun wrote:
-> > > >> Export vfio dma-buf specific info by attaching vfio_dma_buf_data in
-> > > >> struct dma_buf::priv. Provide a helper vfio_dma_buf_get_data() for
-> > > >> importers to fetch these data. Exporters identify VFIO dma-buf by
-> > > >> successfully getting these data.
-> > > >>
-> > > >> VFIO dma-buf supports disabling host access to these exported MMIO
-> > > >> regions when the device is converted to private. Exporters like KVM
-> > > >> need to identify this type of dma-buf to decide if it is good to use.
-> > > >> KVM only allows host unaccessible MMIO regions been mapped in private
-> > > >> roots.
-> > > >>
-> > > >> Export struct kvm * handler attached to the vfio device. This
-> > > >> allows KVM to do another sanity check. MMIO should only be assigned to
-> > > >> a CoCo VM if its owner device is already assigned to the same VM.
-> > > >
-> > > > This doesn't seem right, it should be encapsulated into the standard
-> > > > DMABUF API in some way.
-> > > >
-> > >
-> > > I'd like to propose an alternative. I've been working on guest_memfd and
-> > > new to the world of IO, please help me along! :)
-> > >
-> > > It seems like using dmabufs are used a little awkwardly here. IIUC
-> > > dmabufs were originally meant to expose memory of one device to another
-> > > device, mostly meant to share memory. Dmabufs do expose MMIO too, for
-> > > device to device communications. Without virtualization, userspace MMIO
-> > > would be done by mmap()-ing a VFIO fd and having the userspace program
-> > > write to the userspace addresses.
-> > >
-> > > Before CoCo, device passthrough (MMIO) is mostly handled by mmap()-ing a
-> > > VFIO fd and setting up the userspace address in a KVM memslot for the
-> > > guest.
-> > >
-> > > With CoCo, is the problem we're solving that we want KVM to know what
-> > > pfns to set up in stage 2 page tables, but not via userspace addresses?
-> > >
-> > > guest_memfd already does that for regular host memory, tracks the
-> > > private/shared-ness of the memory, tracks which struct kvm the memory
-> > > belongs to.
-> > >
-> > > guest_memfd functions as KVM's bridge to host memory. KVM already can
-> > > ask guest_memfd for the pfn to map into stage 2 page tables, and already
-> > > asks guest_memfd for the shared/private state of the memory. guest_memfd
-> > > already also blocks the host from faulting guest private memory
-> > > (mmap()-ing is always allowed).
-> > >
-> > >
-> > > Instead of using dmabuf as the intermediary between the MMIO PFNs and
-> > > KVM, why not use guest_memfd?
-> > >
-> > > What if we make guest_memfd accept a VFIO fd, or a dmabuf fd?
+Hi Robert,
+
+> Subject: Re: [RFC PATCH 1/2] dma-buf/udmabuf: Introduce
+> CONFIG_UDMABUF_SIZE_LIMIT_MBYTES
+>=20
+> Hi,
+>=20
+> On 13.07.26 11:12, Christian K=F6nig wrote:
+> > On 7/11/26 16:48, Robert Mader wrote:
+> >> As udmabuf increasingly enjoys popularity - being used in projects
+> like
+> >> libcamera, Gstreamer, Mesa and KWin - users more frequently
+> encounter
+> >> cases where the current default size limit of 64MB is too low.
+> Examples
+> >> include allocating video buffers at a 8K resolution - and even 4K is
+> >> affected when using non-subsampled video formats or high bit
+> depths.
+> >>
+> >> While the limit can already be changed via the kernel command line,
+> >> exposing it as a kernel config makes that easier and more
+> discoverable
+> >> for distros. Thus let's do that.
+> > Well config options are usually only useful if the value can't be
+> changed on runtime through a module parameter, but that is clearly
+> not the case here.
 > >
-> > This is interesting for pKVM too, provided it covers more than MMIO.
+> > On the other hand I do see your problem. I would just vote to disable
+> the limit by default, there is nothing preventing userspace from
+> allocating multiple uDMA-bufs so it doesn't seem to prevent any
+> security issue or similar.
+>=20
+> I fully agree and would prefer that as well. If there is no resistance /
+> concerns from anybody I'll send a corresponding patch at the end of the
+> week.
+AFAIU, the main motivation behind the limits was to ensure that there are
+some kind of guardrails. I am not opposed to their removal but I think it
+would now allow users to pin large arbitrary amounts of memory and I
+feel like there needs to be a way to prevent users from doing that.
+
+Early RFC versions of udmabuf had mlock accounting to address this issue
+but not sure why it was dropped eventually. I am wondering if it makes
+sense to bring that back.
+
+Thanks,
+Vivek
+
+>=20
+> Thanks,
+>=20
+> Robert
+>=20
 > >
-> > We need guest_memfd to be backable by a dmabuf for ordinary guest memory, not
-> > only for device MMIO. There is mobile hardware that doesn't tolerate scattered
-> > private memory (DMA engines that can't gather, IOMMU page-table size
-> > constraints), and a CMA-backed dmabuf heap is the practical way to get
-> > contiguous memory at runtime.
->
-> Why can't guestmemfd allocate directly from CMA? Allocating struct
-> page memory through dmabuf just to put it back in a guestmemfd sounds
-> very ugly to me.
-
-Fair, and I think you're right. If guest_memfd can allocate from CMA directly
-that covers what we need for contiguous guest memory, and it's cleaner than
-routing it through a dmabuf. It also keeps the shared pages struct-page backed
-and GUP-able, which the CMA heap's own mmap doesn't, since it sets VM_PFNMAP.
-So going through a dmabuf for plain guest RAM would have cost us the thing we
-need on the shared side anyway.
-
-Consider the request to be for guest_memfd to be able to give us physically
-contiguous memory. dmabuf was the mechanism I assumed, not the requirement.
-
-
-> > HugeTLB doesn't help, it wants boot-time
-> > reservation. Those pages are struct-page backed, so it's a different problem
-> > from the non-struct-page MMIO case, and the shared parts still need to be
-> > GUP-able.
->
-> Isn't dmabuf pretty allergic to mmaping refcounted struct page backed
-> memory since that wrecks its lifetime model?
-
-Yes, and that's the same point. Agreed.
-
-> > More important for the API shape: conversions have to work on subsets of such a
-> > region, at page granularity. A pKVM guest doesn't know what backs its memory, so
-> > it will issue share/unshare hypercalls over arbitrary ranges of whatever it was
-> > given. If a dmabuf-backed guest_memfd can only be converted as a whole, we can't
-> > use it for memory, and the guest can't be taught to care.
->
-> More reasons not to involve DMABUF since guestmemfd already does all
-> of this...
-
-Also agreed for guest RAM.
-
-Where I do still think a dmabuf is involved is the case where the buffer isn't
-guest_memfd's to allocate: it already belongs to another exporter, and the guest
-needs to see that same buffer. That's structurally what you're already handling
-for device memory rather than a separate guest_memfd-over-dmabuf path, so I
-don't think it argues for backing ordinary guest memory with a dmabuf.
-
-> Jason
+> > Regards,
+> > Christian.
+> >
+> >
+> >> Signed-off-by: Robert Mader <robert.mader@collabora.com>
+> >> ---
+> >>   drivers/dma-buf/Kconfig   | 6 ++++++
+> >>   drivers/dma-buf/udmabuf.c | 4 ++++
+> >>   2 files changed, 10 insertions(+)
+> >>
+> >> diff --git a/drivers/dma-buf/Kconfig b/drivers/dma-buf/Kconfig
+> >> index 7efc0f0d0712..35f0779cdc80 100644
+> >> --- a/drivers/dma-buf/Kconfig
+> >> +++ b/drivers/dma-buf/Kconfig
+> >> @@ -40,6 +40,12 @@ config UDMABUF
+> >>            A driver to let userspace turn memfd regions into dma-bufs.
+> >>            Qemu can use this to create host dmabufs for guest
+> framebuffers.
+> >>
+> >> +config UDMABUF_SIZE_LIMIT_MBYTES
+> >> +       int "Size limit in Mega Bytes"
+> >> +       default 64
+> >> +       help
+> >> +         Maximum size of a udmabuf, in megabytes. Default is 64.
+> >> +
+> >>   config DMABUF_DEBUG
+> >>          bool "DMA-BUF debug checks"
+> >>          depends on DMA_SHARED_BUFFER
+> >> diff --git a/drivers/dma-buf/udmabuf.c b/drivers/dma-buf/udmabuf.c
+> >> index bced421c0d65..a83153326362 100644
+> >> --- a/drivers/dma-buf/udmabuf.c
+> >> +++ b/drivers/dma-buf/udmabuf.c
+> >> @@ -20,7 +20,11 @@ static int list_limit =3D 1024;
+> >>   module_param(list_limit, int, 0644);
+> >>   MODULE_PARM_DESC(list_limit, "udmabuf_create_list->count limit.
+> Default is 1024.");
+> >>
+> >> +#ifdef CONFIG_UDMABUF_SIZE_LIMIT_MBYTES
+> >> +static int size_limit_mb =3D CONFIG_UDMABUF_SIZE_LIMIT_MBYTES;
+> >> +#else
+> >>   static int size_limit_mb =3D 64;
+> >> +#endif
+> >>   module_param(size_limit_mb, int, 0644);
+> >>   MODULE_PARM_DESC(size_limit_mb, "Max size of a dmabuf, in
+> megabytes. Default is 64.");
+> >>
+> >> --
+> >> 2.55.0
+> >>
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
