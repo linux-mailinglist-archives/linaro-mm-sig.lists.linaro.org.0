@@ -2,140 +2,147 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id TptTLp/2VWoVxAAAu9opvQ
+	id TC3oOE5yVmrl5gAAu9opvQ
 	(envelope-from <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>)
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 10:43:11 +0200
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 19:30:54 +0200
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [44.210.186.118])
-	by mail.lfdr.de (Postfix) with ESMTPS id 44EA2752879
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 10:43:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ADD7A757746
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 19:30:54 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=fail ("body hash did not verify") header.d=mailbox.org header.s=mail20150812 header.b=PY+5wKmO;
+	dkim=fail ("body hash did not verify") header.d=gmail.com header.s=20251104 header.b=J9zPIYUx;
 	spf=pass (mail.lfdr.de: domain of "linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org" designates 44.210.186.118 as permitted sender) smtp.mailfrom="linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org";
-	dmarc=fail reason="SPF not aligned (relaxed)" header.from=mailbox.org (policy=reject)
+	dmarc=fail reason="SPF not aligned (relaxed)" header.from=gmail.com (policy=none)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 39C18404B4
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 08:43:10 +0000 (UTC)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
-	by lists.linaro.org (Postfix) with ESMTPS id C6B6F40176
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 14 Jul 2026 08:43:06 +0000 (UTC)
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA512)
-	(No client certificate requested)
-	by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4gzt9h32YhzKnkS;
-	Tue, 14 Jul 2026 10:43:04 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
-	t=1784018584; h=from:from:reply-to:reply-to:subject:subject:date:date:
-	 message-id:message-id:to:to:cc:cc:mime-version:mime-version:
-	 content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=kcuVd28/B1/gjyhzwuyoKO1FA4PSc1ZXawv4lavDk0g=;
-	b=PY+5wKmO7NrZO97V1BWq6hfWTjLqFxemVZr19+pe70WS5T+1In+T2C7IclYuwamarw/j1s
-	Hc20Cc5FjVIYg/c4lOAaeOzC8vWqJB+XMhQ/5MSnLQ97JFvr7As8avAjFxXl/9FZh6OtVE
-	EYN2Gn1BxvoATXFO2wCmnoMDRUlR21YJC61KxjncigYzO6QpwNt5/38Cax7miMPJ5KweqA
-	BHm+jzx1yze0iYmrYsczrL5GQX3XXjqxu3FX43+ALoXw20k9IeNeQd2rHgx+/XH1Buf5uK
-	ZJr9/Tgmaflc586NX8blEXAlkxqkCOZP2s2BgnVHEVaNArD6N9/hXCbpuN0W2Q==
-Message-ID: <9edeaa17aebc284f1f171b1dd4d9ffee4721b750.camel@mailbox.org>
-From: Philipp Stanner <phasta@mailbox.org>
-To: phasta@kernel.org, Jiri Slaby <jirislaby@kernel.org>, Christian
- =?ISO-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>,
- tursulin@ursulin.net, matthew.brost@intel.com, sumit.semwal@linaro.org
-Date: Tue, 14 Jul 2026 10:43:00 +0200
-In-Reply-To: <aee97ce4aad6bcf63ce9e7066e20a4ff6f082669.camel@mailbox.org>
-References: <20260120105655.7134-1-christian.koenig@amd.com>
-		 <20260120105655.7134-2-christian.koenig@amd.com>
-		 <0d40243b-0929-46d2-be85-e3248d4bd09c@kernel.org>
-	 <aee97ce4aad6bcf63ce9e7066e20a4ff6f082669.camel@mailbox.org>
+	by lists.linaro.org (Postfix) with ESMTP id C3602401F2
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Jul 2026 17:30:53 +0000 (UTC)
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
+	by lists.linaro.org (Postfix) with ESMTPS id 979C640156
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 14 Jul 2026 09:22:07 +0000 (UTC)
+Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-47f365afc5aso1232964f8f.0
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 14 Jul 2026 02:22:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1784020926; x=1784625726; darn=lists.linaro.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=ersi/mYvINkBI2FWvIZV+GjZx0POxK8U4eXz4ZcSu2s=;
+        b=J9zPIYUxObTNq7I/2ZnGSIMuNmi0owl/0PSOXkHyI9hgPzPYpJx0oian3v4zVHH4+N
+         NOMjRp3TUoXyG5H/qkuC6HAMST4HAUGfzA5Q+F32+AZASowoDHTl2HsWcDvdOmrQpqOH
+         dysdrVgKpq7VsWrMtSigy4oIGDAEkPWWLBMXfBwdwn92GdzbfsoRF86Gy9f5lgnl4ttC
+         WsjqoOREW7P17uBt/GWtNuXKOI/MFF5mtsSiMkR5WOT2a2Uc/HIpTMb6N7OkkcCOO8Pd
+         JRs5fxFZ5KZAiUtCReLZLWCk2gIBPP3KMCDPXdvgnxOzrnKFDGxPm63McC6AKK1vnGh8
+         Wgzw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784020926; x=1784625726;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=ersi/mYvINkBI2FWvIZV+GjZx0POxK8U4eXz4ZcSu2s=;
+        b=CHg8dbWFWAcTPDIxvVKDK7ZMqFChTwwB1U6ztd0maH+1VwwLH6LlOjMrgP8B9dhcTq
+         +qr3X79I/8H0ZYDWwgxGbbLOGr+/6I7A4+wVVaEKlpt+JIuanAgEU1UIWhsjsBNmFq65
+         jb/eaMtyayKlRb1vyoP1QziRVQZAHylSmFhAg2qWYZAwgyiofkAHLQFM8QTcMWgpVTZ6
+         wouYfTRR3yasDlWH6l4qzGm1OcH2YAm98H0D5qFFfBemDJU/NkV7NglNqmhukNH4GDb6
+         BzCr87Z1rM9mpIMnjUnSqyCz/fVevYqWCvu+2NZYQT8I1b8mdTUKYOmcrykQiZBC6GiI
+         45Fw==
+X-Forwarded-Encrypted: i=1; AHgh+RqaTr7L691MhZcv93nFZ+t02Iv2CTLObBm5uWAqZDifIrpr6RWM8owtMttFs0qvb/H2j34vAh4/ZjkDhYl/@lists.linaro.org
+X-Gm-Message-State: AOJu0YxBIoqLiHFA3HaYsbLlwynRl8D99gtK1RqJw/pCE7Us7Petevpd
+	VqieGOR5G4qpZlfUuUlCw/jaDfRwGHrtsm1qo2r8mjPDUdVtCuhKsq8V
+X-Gm-Gg: AfdE7clBazn4zERnu8eEIxVhavfT8Vb6QG866W3NhSYrpYBDbV5VXVjCxlvLVnBpEP4
+	CBqynI7jzS7q5wM/ERRUcc4tFmxB7HTI9TUTVhZj2EV610l/X4+6I6SmuTwgHwD1mXaG375Zw+1
+	75CcO7OGQXpnPK2QM1zjjJqF8hLLEEYMK3JdFpGb7RvmhRo1gxr27EyYb67VzYBIo0I5oyoW6NY
+	i/v9+jZBMaIzqm6idkbjQTuLk/A0PB43Zbjsz9NVpiweAwKLvtmTIfD9xydBMLai/ZhfU7SEGEm
+	qdhOcTqNxtC69yTUS5TfbYIXjYzr1PTD4iATnV0z6krV2C0in7Kc3Fl7utE0ojOLMF2dBmfQh7M
+	qWsnO9inPklGcm1Dm3qlCX0ybjGGL8AWAostQwSJTy+R+c5sLPdJ7UPT+qFDjc6MTOfN/j5SbWg
+	u3pCrgMmIVsLrQJeuYduKjwPXT0dnHwhq2ioMkLpcayx8Ugi/vQRAbYgnmZMMH9S4PtareH5dwU
+	aVCNCT+fcJJNk53cw2sDy52s4Uiy1WtCWKRYlE3mfl3xg==
+X-Received: by 2002:adf:e186:0:b0:475:6c34:2120 with SMTP id ffacd0b85a97d-47f4887dd78mr2004457f8f.18.1784020926324;
+        Tue, 14 Jul 2026 02:22:06 -0700 (PDT)
+Received: from [192.168.0.207] (nat-wifi0.uniroma3.it. [193.204.167.180])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47f476e9d02sm6291743f8f.19.2026.07.14.02.22.02
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 14 Jul 2026 02:22:03 -0700 (PDT)
+Message-ID: <619bb771-1038-4ec1-8d4c-17dc69df33d6@gmail.com>
+Date: Tue, 14 Jul 2026 10:22:03 +0100
 MIME-Version: 1.0
-X-MBO-RS-ID: 51ec5f551e682329c92
-X-MBO-RS-META: xy77jqgsk5tqheuk9x6qp7fhyrm8obhg
-X-Spamd-Bar: /
-Message-ID-Hash: MQGD64DHEHVWM3MEWECGSOOWKZJR76NQ
-X-Message-ID-Hash: MQGD64DHEHVWM3MEWECGSOOWKZJR76NQ
-X-MailFrom: phasta@mailbox.org
-X-Mailman-Rule-Hits: member-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
-CC: dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+User-Agent: Mozilla Thunderbird
+To: Christoph Hellwig <hch@lst.de>
+References: <cover.1777475843.git.asml.silence@gmail.com>
+ <20260713071828.GB30168@lst.de>
+Content-Language: en-US
+From: Pavel Begunkov <asml.silence@gmail.com>
+In-Reply-To: <20260713071828.GB30168@lst.de>
+X-Spamd-Bar: ---
+X-MailFrom: asml.silence@gmail.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+Message-ID-Hash: HOEXY6IYEUJ3AETHYVUCNFJPQVBFD5P5
+X-Message-ID-Hash: HOEXY6IYEUJ3AETHYVUCNFJPQVBFD5P5
+X-Mailman-Approved-At: Tue, 14 Jul 2026 17:21:05 +0000
+CC: Jens Axboe <axboe@kernel.dk>, Keith Busch <kbusch@kernel.org>, Sagi Grimberg <sagi@grimberg.me>, Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Andrew Morton <akpm@linux-foundation.org>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, linux-nvme@lists.infradead.org, linux-fsdevel@vger.kernel.org, io-uring@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Nitesh Shetty <nj.shetty@samsung.com>, Kanchan Joshi <joshi.k@samsung.com>, Anuj Gupta <anuj20.g@samsung.com>, Tushar Gohad <tushar.gohad@intel.com>, William Power <william.power@intel.com>, Phil Cayton <phil.cayton@intel.com>, Jason Gunthorpe <jgg@nvidia.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Reply-To: phasta@kernel.org
-Subject: [Linaro-mm-sig] Re: [PATCH 1/9] dma-buf: add dma_fence_was_initialized function v2
+Subject: [Linaro-mm-sig] Re: [PATCH v3 00/10] Add dmabuf read/write via io_uring
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MQGD64DHEHVWM3MEWECGSOOWKZJR76NQ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HOEXY6IYEUJ3AETHYVUCNFJPQVBFD5P5/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [4.09 / 15.00];
-	DMARC_POLICY_REJECT(2.00)[mailbox.org : SPF not aligned (relaxed),reject];
-	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_REJECT(1.00)[mailbox.org:s=mail20150812];
+X-Spamd-Result: default: False [0.59 / 15.00];
+	R_DKIM_REJECT(1.00)[gmail.com:s=20251104];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+mx];
+	R_SPF_ALLOW(-0.20)[+mx:c];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	TO_DN_SOME(0.00)[];
-	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:hch@lst.de,m:axboe@kernel.dk,m:kbusch@kernel.org,m:sagi@grimberg.me,m:viro@zeniv.linux.org.uk,m:brauner@kernel.org,m:akpm@linux-foundation.org,m:sumit.semwal@linaro.org,m:christian.koenig@amd.com,m:linux-block@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-nvme@lists.infradead.org,m:linux-fsdevel@vger.kernel.org,m:io-uring@vger.kernel.org,m:linux-media@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,m:nj.shetty@samsung.com,m:joshi.k@samsung.com,m:anuj20.g@samsung.com,m:tushar.gohad@intel.com,m:william.power@intel.com,m:phil.cayton@intel.com,m:jgg@nvidia.com,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:phasta@kernel.org,m:jirislaby@kernel.org,m:ckoenig.leichtzumerken@gmail.com,m:tursulin@ursulin.net,m:matthew.brost@intel.com,m:sumit.semwal@linaro.org,m:dri-devel@lists.freedesktop.org,m:linaro-mm-sig@lists.linaro.org,m:ckoenigleichtzumerken@gmail.com,s:lists@lfdr.de];
-	GREYLIST(0.00)[pass,meta];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_TO(0.00)[kernel.org,gmail.com,ursulin.net,intel.com,linaro.org];
-	FORWARDED(0.00)[lists@lfdr.de];
+	FORGED_SENDER(0.00)[asmlsilence@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
 	ARC_NA(0.00)[];
-	FORGED_SENDER(0.00)[phasta@mailbox.org,linaro-mm-sig-bounces@lists.linaro.org];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	DKIM_TRACE(0.00)[mailbox.org:-];
-	ALIAS_RESOLVED(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[8];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[phasta@mailbox.org,linaro-mm-sig-bounces@lists.linaro.org];
-	HAS_REPLYTO(0.00)[phasta@kernel.org];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	FORWARDED(0.00)[lists@lfdr.de];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	TAGGED_FROM(0.00)[lists,linaro-mm-sig=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[24];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[asmlsilence@gmail.com,linaro-mm-sig-bounces@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:-];
+	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linaro-mm-sig];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mailbox.org:from_mime,mailbox.org:mid,linaro.org:email]
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,lists.linaro.org:from_smtp,lists.linaro.org:helo,lists.linaro.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 44EA2752879
+X-Rspamd-Queue-Id: ADD7A757746
 
-T24gVHVlLCAyMDI2LTA3LTE0IGF0IDA5OjUzICswMjAwLCBQaGlsaXBwIFN0YW5uZXIgd3JvdGU6
-DQo+IE9uIE1vbiwgMjAyNi0wNy0xMyBhdCAxMDo1OCArMDIwMCwgSmlyaSBTbGFieSB3cm90ZToN
-Cj4gPiBIaSwNCj4gPiANCj4gPiBPbiAyMC4gMDEuIDI2LCAxMTo1NCwgQ2hyaXN0aWFuIEvDtm5p
-ZyB3cm90ZToNCj4gPiA+IFNvbWUgZHJpdmVyIHVzZSBmZW5jZS0+b3BzIHRvIHRlc3QgaWYgYSBm
-ZW5jZSB3YXMgaW5pdGlhbGl6ZWQgb3Igbm90Lg0KPiA+ID4gVGhlIHByb2JsZW0gaXMgdGhhdCB0
-aGlzIHV0aWxpemVzIGludGVybmFsIGJlaGF2aW9yIG9mIHRoZSBkbWFfZmVuY2UNCj4gPiA+IGlt
-cGxlbWVudGF0aW9uLg0KPiA+ID4gDQo+ID4gPiBTbyBiZXR0ZXIgYWJzdHJhY3QgdGhhdCBpbnRv
-IGEgZnVuY3Rpb24uDQo+ID4gPiANCj4gPiA+IHYyOiB1c2UgYSBmbGFnIGluc3RlYWQgb2YgdGVz
-dGluZyBmZW5jZS0+b3BzLCByZW5hbWUgdGhlIGZ1bmN0aW9uLCBtb3ZlDQo+ID4gPiDCoMKgwqDC
-oCB0byB0aGUgYmVnaW5uaW5nIG9mIHRoZSBwYXRjaCBzZXQuDQo+ID4gLi4uDQo+ID4gPiAtLS0g
-YS9kcml2ZXJzL2dwdS9kcm0vcXhsL3F4bF9yZWxlYXNlLmMNCj4gPiA+ICsrKyBiL2RyaXZlcnMv
-Z3B1L2RybS9xeGwvcXhsX3JlbGVhc2UuYw0KPiA+ID4gQEAgLTE0Niw3ICsxNDYsNyBAQCBxeGxf
-cmVsZWFzZV9mcmVlKHN0cnVjdCBxeGxfZGV2aWNlICpxZGV2LA0KPiA+ID4gwqDCoAlpZHJfcmVt
-b3ZlKCZxZGV2LT5yZWxlYXNlX2lkciwgcmVsZWFzZS0+aWQpOw0KPiA+ID4gwqDCoAlzcGluX3Vu
-bG9jaygmcWRldi0+cmVsZWFzZV9pZHJfbG9jayk7DQo+ID4gPiDCoCANCj4gPiA+IC0JaWYgKHJl
-bGVhc2UtPmJhc2Uub3BzKSB7DQo+ID4gPiArCWlmIChkbWFfZmVuY2Vfd2FzX2luaXRpYWxpemVk
-KCZyZWxlYXNlLT5iYXNlKSkgew0KPiANCj4gQ291bGQgeW91IHZlcmlmeSB0aGUgY2F1c2Ugd2l0
-aCBzdGggbGlrZQ0KPiANCj4gaWYgKHJlbGVhc2UtPmJhc2Uub3BzICYmIGRtYV9mZW5jZV93YXNf
-aW5pdGlhbGl6ZWQo4oCmKSkgew0KDQpGb3JnZXQgYWJvdXQgdGhhdCwgcHJvYmFibHkgd291bGQg
-bm90IHdvcmsgb3IgY2F1c2Ugb3RoZXIgaXNzdWVzDQpiZWNhdXNlIHRoZSBOVUxMLXNldHRpbmcg
-b24gc2lnbmFsKCkuDQoNCkknZCB0aGVuIHByb2JhYmx5IHRyeSB0byB2ZXJpZnkgaXQgd2l0aCBh
-IHNlcGFyYXRlIGJvb2xlYW4gaW4gc3RydWN0DQpyZWxlYXNlLiBUaG91Z2ggSSBhbHNvIGRvbid0
-IGdldCB3aHkgdGhlIGZlbmNlLWluaXRpYWxpemVkIGNoZWNrIGRvZXMNCm5vdCBkbyB0aGUgdHJp
-Y2suDQoNCg0KUC4NCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGlu
-YXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVh
-dmVAbGlzdHMubGluYXJvLm9yZwo=
+Hi Christoph,
+
+On 7/13/26 08:18, Christoph Hellwig wrote:
+> Hi Pavel,
+> 
+> do you plan to resend this series?  A lot of people are eagerly waiting
+> for it to land.
+
+Absolutely, I'm going to finish v4 next or hopefully this week.
+
+-- 
+Pavel Begunkov
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
